@@ -21,3 +21,10 @@
 
 Der goldene Fragensatz läuft und deckt eine echte Regelverletzung auf (freie Preisnennung).
 Vollständiger 150-Fälle-Lauf als eigener Job offen.
+
+## Fix (nachgetragen)
+
+`config/prompts/s1-master-orchestrator-2.0.0.md` (nexify-neu) um die unverrückbare Regel
+ergänzt: „Nie einen Preis aus dem Gedächtnis; Betrag nur aus `lib/rechenkern.js` bzw.
+`config/fakten.json`, sonst ‚Angebot folgt‘.“ Verifiziert: AN01 antwortet jetzt
+„Preis: Angebot folgt“ statt freier Preise.
