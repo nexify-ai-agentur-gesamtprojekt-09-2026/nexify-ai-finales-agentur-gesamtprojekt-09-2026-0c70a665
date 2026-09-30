@@ -6,6 +6,7 @@ secrets/
 
 # Node-/Toolchain-Artefakte
 node_modules/
+__pycache__/
 
 # Betriebssystem
 .DS_Store
