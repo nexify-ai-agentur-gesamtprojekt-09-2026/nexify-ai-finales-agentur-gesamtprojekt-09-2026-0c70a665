@@ -26,15 +26,18 @@ GH=$(ssh -o BatchMode=yes -o ConnectTimeout=15 "$FRA" 'python3 -c "import jwt,ti
 cd "$REPO"
 git fetch "https://x-access-token:$GH@github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026.git" main 2>/dev/null
 LOCAL=$(git rev-parse FETCH_HEAD)
+GH_TREE=$(git rev-parse "$LOCAL^{tree}")
 git fetch "http://oauth2:$GL@127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git" main:refs/remotes/gl/main 2>/dev/null || true
-GH_TREE=$(git rev-parse FETCH_HEAD^{tree})
 GL_TREE=$(git rev-parse refs/remotes/gl/main^{tree} 2>/dev/null || echo "")
 if [ "$GH_TREE" = "$GL_TREE" ]; then log "in Sync (tree $GH_TREE)"; exit 0; fi
 
 git push --force "http://oauth2:$GL@127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git" "$LOCAL":refs/heads/mirror-sync 2>/dev/null
-MRIID=$(curl -sS -X POST "http://127.0.0.1:8922/api/v4/projects/$GL_PROJECT_ID/merge_requests" -H "PRIVATE-TOKEN: $GL" \
-  --data-urlencode "source_branch=mirror-sync" --data-urlencode "target_branch=main" \
-  --data-urlencode "title=Sync: GitHub nach GitLab (Autopilot)" --max-time 15 | python3 -c 'import json,sys;print(json.load(sys.stdin).get("iid",0))' 2>/dev/null)
+MRIID=$(curl -sS -H "PRIVATE-TOKEN: $GL" "http://127.0.0.1:8922/api/v4/projects/$GL_PROJECT_ID/merge_requests?state=opened&source_branch=mirror-sync" --max-time 15 | python3 -c 'import json,sys;d=json.load(sys.stdin);print(d[0]["iid"] if isinstance(d,list) and d else 0)' 2>/dev/null)
+if [ -z "$MRIID" ] || [ "$MRIID" = "0" ]; then
+  MRIID=$(curl -sS -X POST "http://127.0.0.1:8922/api/v4/projects/$GL_PROJECT_ID/merge_requests" -H "PRIVATE-TOKEN: $GL" \
+    --data-urlencode "source_branch=mirror-sync" --data-urlencode "target_branch=main" \
+    --data-urlencode "title=Sync: GitHub nach GitLab (Autopilot)" --max-time 15 | python3 -c 'import json,sys;print(json.load(sys.stdin).get("iid",0))' 2>/dev/null)
+fi
 [ "$MRIID" != "0" ] && curl -sS -X PUT "http://127.0.0.1:8922/api/v4/projects/$GL_PROJECT_ID/merge_requests/$MRIID/merge" \
   -H "PRIVATE-TOKEN: $GL" --data-urlencode "should_remove_source_branch=true" --max-time 20 >/dev/null
 log "Sync: tree $GL_TREE -> $GH_TREE (MR #$MRIID)"
