@@ -66,16 +66,31 @@ slack:
         "$SLACK_WEBHOOK"
 ```
 
-## Stand 30.09.2026 (nach Autopilot-Lauf)
+## Stand 30.09.2026 (nach Autopilot-Lauf, aktualisiert)
 
 - **Quelle der Wahrheit ist jetzt GitLab CE (Projekt 42).** NeXify/Jeff hat mit
   Konfidenz 0,98 entschieden: `gitlab-als-quelle`. `tools/sync-github-gitlab.sh`
   spiegelt nur noch GitLab -> GitHub; fehlt GitHub-Auth, wird sauber übersprungen.
-- GitHub-Ziel-Repo ist aktuell **nicht** über die bestehende App-Install
-  (135674457) erreichbar und beide PATs liefern 401. Spiegel ist daher ausgesetzt,
-  bis ein frischer PAT/eine erneute App-Install durch den Owner vorliegt.
-- Neue GitHub-Actions (vorbereitet, laufen sobald GitHub-Auth wieder steht):
-  `.github/workflows/issue-triage.yml`, `pr-triage.yml`, `slack-notify.yml`.
+- GitHub-Ziel-Repo wurde neu angelegt (Composio, Owner `nexifyai-dev`) und per
+  App-Install 135674457 befüllt. Mirror GitLab -> GitHub läuft wieder (`Mirror`
+  statt `SKIP` in `sync-gesamt.log`).
+- GitHub-Actions **live und end-to-end verifiziert** (ubuntu-latest, da der
+  selbst gehostete Runner durch die Repo-Neuanlage verwaist ist):
+  - `issue-triage.yml`: Issue #1 → Label `triage` gesetzt, Run `success`.
+  - `pr-triage.yml`: PR #2 → Labels `pr`, `size/xs`, Run `success`.
+  - `ci.yml` (ds-audit): Run `success`.
+  - `slack-notify.yml`: Run `success` (ohne Webhook = no-op).
+- `tools/github_event_inbox.py` versteht zusätzlich signierte GitLab-
+  Issue-/Merge-Request-Webhooks (`/gitlab`, `X-Gitlab-Token`).
+- Webhook-Inbox als Dienst deployt (`nexify-webhook-inbox.service`,
+  172.18.0.1:8787), Secrets in OpenBao `nexify/data/webhooks`. Beide Pfade lokal
+  mit signierter Test-Delivery verifiziert (202 queued, Duplikat 200).
+  Echte GitLab-Zustellung ist durch GitLab-SSRF-Schutz (`Invalid url given`)
+  blockiert und braucht GitLab-Admin; GitHub-Zustellung braucht öffentlichen
+  Eingang (DNS/CF-Freigabe).
+- **Blocker (extern):** `SLACK_WEBHOOK`, Coderabbit-App-Install und GitLab-Admin
+  (SSRF-Freigabe). Slack-Vollintegration bleibt ohne Webhook vorbereitet, nicht
+  aktiv.
 - `tools/github_event_inbox.py` versteht jetzt zusätzlich signierte GitLab-
   Issue-/Merge-Request-Webhooks (`/gitlab`, `X-Gitlab-Token`).
 - Webhook-Inbox als Dienst deployt (`nexify-webhook-inbox.service`,
