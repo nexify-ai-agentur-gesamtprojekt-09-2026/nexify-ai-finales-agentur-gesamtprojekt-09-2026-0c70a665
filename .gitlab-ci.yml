@@ -1,5 +1,5 @@
 # NeXify finale Agentur-Gesamtloesung · GitLab CI · nur lokale Schranken
-stages: [pruefen]
+stages: [pruefen, jeff]
 
 default:
   image: node:22-alpine
@@ -22,3 +22,10 @@ json-konfig:
   script:
     - node -e "const fs=require('fs'),p=require('path');const r=[];(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
     - echo "alle config/*.json gültig"
+
+jeff-gate:
+  stage: jeff
+  image: python:3.12-alpine
+  needs: ["ds-audit", "manifest", "json-konfig"]
+  script:
+    - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
