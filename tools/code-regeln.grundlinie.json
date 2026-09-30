@@ -1,0 +1,130 @@
+{
+ "anfrage-pipeline.js": {
+  "codezeilen": 52,
+  "langeFunktionen": [],
+  "tief": 1,
+  "breiteZeilen": 7
+ },
+ "betriebskennzahlen.js": {
+  "codezeilen": 58,
+  "langeFunktionen": [],
+  "tief": 1,
+  "breiteZeilen": 2
+ },
+ "einstellungen.js": {
+  "codezeilen": 98,
+  "langeFunktionen": [],
+  "tief": 1,
+  "breiteZeilen": 4
+ },
+ "entscheidungen.js": {
+  "codezeilen": 86,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 7
+ },
+ "gedaechtnis.js": {
+  "codezeilen": 99,
+  "langeFunktionen": [],
+  "tief": 3,
+  "breiteZeilen": 5
+ },
+ "ki-muster.js": {
+  "codezeilen": 107,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 5
+ },
+ "langfuse.js": {
+  "codezeilen": 31,
+  "langeFunktionen": [],
+  "tief": 1,
+  "breiteZeilen": 3
+ },
+ "langlauf.js": {
+  "codezeilen": 159,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 4
+ },
+ "lernschleife.js": {
+  "codezeilen": 92,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 0
+ },
+ "modi.js": {
+  "codezeilen": 29,
+  "langeFunktionen": [],
+  "tief": 1,
+  "breiteZeilen": 5
+ },
+ "nachtlauf.js": {
+  "codezeilen": 29,
+  "langeFunktionen": [],
+  "tief": 1,
+  "breiteZeilen": 2
+ },
+ "normpruefung.js": {
+  "codezeilen": 86,
+  "langeFunktionen": [
+   "pruefeLayout:51"
+  ],
+  "tief": 2,
+  "breiteZeilen": 11
+ },
+ "posteingang.js": {
+  "codezeilen": 159,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 4
+ },
+ "prompt-cache.js": {
+  "codezeilen": 68,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 0
+ },
+ "pseo.js": {
+  "codezeilen": 47,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 3
+ },
+ "rag.js": {
+  "codezeilen": 83,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 3
+ },
+ "rechenkern.js": {
+  "codezeilen": 69,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 0
+ },
+ "regelwerk.js": {
+  "codezeilen": 134,
+  "langeFunktionen": [],
+  "tief": 3,
+  "breiteZeilen": 7
+ },
+ "selbstheilung.js": {
+  "codezeilen": 49,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 6
+ },
+ "tagrouter.js": {
+  "codezeilen": 44,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 0
+ },
+ "versand.js": {
+  "codezeilen": 70,
+  "langeFunktionen": [],
+  "tief": 2,
+  "breiteZeilen": 3
+ }
+}

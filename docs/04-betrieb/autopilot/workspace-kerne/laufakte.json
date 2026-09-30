@@ -1,0 +1,584 @@
+{
+  "run_id": "42426a46-0b05-47d6-a174-e1ea2494dfae",
+  "case_identity": {
+    "case_id": "NX-WS-KERNE-2026-09",
+    "project_id": "Shop-Design Gesamt-Konzept",
+    "subject_id": "NeXify Workspace + NeXify Posteingang + lib/langlauf.js + lib/posteingang.js + config/{llm-verbindungen,langlauf,integrationen}.json",
+    "commission_id": "UNVERIFIED",
+    "evidence_cutoff": "2026-09-27T21:22:28.546Z",
+    "input_scope_hash": "sha256:30332e2837012041acdb3f81e689e1796caa55174a3d043d6fb71594a760860c"
+  },
+  "zustand": "PARTIAL_BLOCKED",
+  "modus": "PHASENEMULATION",
+  "lease": null,
+  "versuche": {
+    "agent1": 1,
+    "agent2": 1,
+    "agent3": 1
+  },
+  "vorlaeufer": [
+    {
+      "run_id": "c275bc07-b41e-491c-95f5-48f77404a1a2",
+      "case_id": "NXAI-DESIGN-2026-09",
+      "zustand": "PARTIAL_BLOCKED",
+      "bezug": "GL-02 (KI-Regel) berührt C-01"
+    },
+    {
+      "run_id": "2d046599-19d9-4d46-81ae-6d6f3ded61d3",
+      "case_id": "NX-MYADMIN-V2",
+      "zustand": "PARTIAL_BLOCKED",
+      "bezug": "Rechenkern/Tagrouter dort geprüft, hier ausgeschlossen"
+    }
+  ],
+  "quellen": [
+    {
+      "pfad": "lib/langlauf.js",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:9b011b294bb7737d29b1c45c50c7fb443c16396569e34c4ac852f0c8fdd8d4e7",
+      "zeichen": 11986
+    },
+    {
+      "pfad": "lib/posteingang.js",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:ed1e56fc905a143bb55d40f9a300a120a70472c9c764490a500c5de5a572f634",
+      "zeichen": 8231
+    },
+    {
+      "pfad": "tests/langlauf.test.js",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:4017da1c25293bb841492947683ecab249098c6e63249ef4ba87263314ebeff0",
+      "zeichen": 444
+    },
+    {
+      "pfad": "tests/posteingang.test.js",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:c37fa9222eea6274df0a6d907cf6cf80b9631655b0f2b9e27d9622e4787665e2",
+      "zeichen": 5571
+    },
+    {
+      "pfad": "config/llm-verbindungen.json",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:2ce8566b94a74220cba2ef70864f33f54385e44a5d5e6f9bbc2012f8829af01b",
+      "zeichen": 2060
+    },
+    {
+      "pfad": "config/langlauf.json",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:bd64c2e06dcbe5d8e74dde1527dfda3e021aaf1e0044b2b06d5d3206fa49fa79",
+      "zeichen": 1776
+    },
+    {
+      "pfad": "config/integrationen.json",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:4a879cf3e52e90274e8093600acceb5efb3da7b606e564a62e67d7c6b7043b65",
+      "zeichen": 4984
+    },
+    {
+      "pfad": "docs/03-backend/langlauf-orchestrierung.md",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:8e54c6534c43bb7a0d974f7f43b6d627572e1f66be29ca83d436f154d084792d",
+      "zeichen": 3480
+    },
+    {
+      "pfad": "docs/02-frontend/webui-librechat.md",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:c353afa0109b780650219c7e104097eb8f8a21c46292af9e6c65e59ddf766ac2",
+      "zeichen": 3952
+    },
+    {
+      "pfad": "NeXify Workspace.dc.html",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:bd5edc785f16b4dfea72f6246487891634a9b2b5c5c344d2279163aefd0a8eef",
+      "zeichen": 115423
+    },
+    {
+      "pfad": "NeXify Posteingang.dc.html",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:2918ba4463f7dce75bc6663da91913377ff2bd36ab563e94c7aebfe987787e72",
+      "zeichen": 27207
+    },
+    {
+      "pfad": "AGENT.md",
+      "status": "CURRENT_VERIFIED (Kontext)",
+      "sha256": "sha256:2bcd869e1a93f6cf8d19ed1b1611b5b830cb3a911a1f949ec81ce21d2a33dc63",
+      "zeichen": 8188
+    },
+    {
+      "pfad": "docs/04-betrieb/freigabe-gate-status.md",
+      "status": "CURRENT_VERIFIED (Kontext)",
+      "sha256": "sha256:b59c25f716510a7dd203018859cdfa75aa5af19d70cc5b877da30b45e17f86c0",
+      "zeichen": 2981
+    },
+    {
+      "pfad": "docs/04-betrieb/autopilot/laufakte.json",
+      "status": "CURRENT_VERIFIED (Kontext)",
+      "sha256": "sha256:26aadccdd3091d9103d85d5feaa684aec93e79b778fbe03d7af66e9748bea06c",
+      "zeichen": 4025
+    },
+    {
+      "pfad": "docs/04-betrieb/autopilot/myadmin-v2/laufakte.json",
+      "status": "CURRENT_VERIFIED (Kontext)",
+      "sha256": "sha256:e819829da8fc416b2181bf89b4d9e209955fc83310a963e3b39df7bfec09ac7f",
+      "zeichen": 8351
+    }
+  ],
+  "uebergaben": [
+    {
+      "contract_version": "1.0",
+      "run_id": "42426a46-0b05-47d6-a174-e1ea2494dfae",
+      "case_identity": {
+        "case_id": "NX-WS-KERNE-2026-09",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "NeXify Workspace + NeXify Posteingang + lib/langlauf.js + lib/posteingang.js + config/{llm-verbindungen,langlauf,integrationen}.json",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-27T21:22:28.546Z",
+        "input_scope_hash": "sha256:30332e2837012041acdb3f81e689e1796caa55174a3d043d6fb71594a760860c"
+      },
+      "producer": "agent1",
+      "artifact_type": "technical_report",
+      "artifact_path": "/docs/04-betrieb/autopilot/workspace-kerne/1-gutachten.md",
+      "artifact_sha256": "sha256:d561358210f474e284fab683548ea81490f8f35c978183ff938e74ce9f03a62e",
+      "status": "PARTIAL",
+      "summary": "24 Befunde (WK-01…WK-24), davon 14 reproduziert; 39/39 mitgelieferte Prüffälle grün, keiner deckt die Befunde ab. Live-Verbindungen nicht prüfbar.",
+      "source_artifacts": [],
+      "evidence_refs": [
+        "lib/langlauf.js",
+        "lib/posteingang.js",
+        "tests/langlauf.test.js",
+        "tests/posteingang.test.js",
+        "config/llm-verbindungen.json",
+        "config/langlauf.json",
+        "config/integrationen.json",
+        "docs/03-backend/langlauf-orchestrierung.md",
+        "docs/02-frontend/webui-librechat.md",
+        "NeXify Workspace.dc.html",
+        "NeXify Posteingang.dc.html"
+      ],
+      "finding_ids": [
+        "WK-01",
+        "WK-02",
+        "WK-03",
+        "WK-04",
+        "WK-05",
+        "WK-06",
+        "WK-07",
+        "WK-08",
+        "WK-09",
+        "WK-10",
+        "WK-11",
+        "WK-12",
+        "WK-13",
+        "WK-14",
+        "WK-15",
+        "WK-16",
+        "WK-17",
+        "WK-18",
+        "WK-19",
+        "WK-20",
+        "WK-21",
+        "WK-22",
+        "WK-23",
+        "WK-24"
+      ],
+      "measure_ids": [],
+      "criterion_ids": [],
+      "open_gaps": [
+        "L-01 Live-Health",
+        "L-02 Sicht-/Barrierefreiheitsprüfung",
+        "L-03 Node/Vitest",
+        "L-04 Normvolltexte"
+      ],
+      "limitations": [
+        "Phasenemulation, keine Unabhängigkeit",
+        "Prüffälle im Browser-Sandkasten statt Node",
+        "kein Koordinationslog, keine zweite Sicherungsebene erreichbar"
+      ],
+      "assumptions": [
+        "A-01 Browser- und Node-Ergebnis gleich für I/O-freie Module"
+      ],
+      "blocking_items": [],
+      "created_at": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "contract_version": "1.0",
+      "run_id": "42426a46-0b05-47d6-a174-e1ea2494dfae",
+      "case_identity": {
+        "case_id": "NX-WS-KERNE-2026-09",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "NeXify Workspace + NeXify Posteingang + lib/langlauf.js + lib/posteingang.js + config/{llm-verbindungen,langlauf,integrationen}.json",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-27T21:22:28.546Z",
+        "input_scope_hash": "sha256:30332e2837012041acdb3f81e689e1796caa55174a3d043d6fb71594a760860c"
+      },
+      "producer": "agent2",
+      "artifact_type": "implementation_plan",
+      "artifact_path": "/docs/04-betrieb/autopilot/workspace-kerne/2-umsetzungsplan.md",
+      "artifact_sha256": "sha256:16991c95819b348233bf99fe4cb226fa34e9282c578aa3aecf6ac895d17e65a8",
+      "status": "PARTIAL",
+      "summary": "23 Maßnahmen (M-01…M-23), jede auf einen Befund zurückgeführt, alle 24 Befunde abgedeckt; Test zuerst (M-01). Drei Maßnahmen hängen an Entscheidungen/Zugängen.",
+      "source_artifacts": [
+        {
+          "producer": "agent1",
+          "artifact_type": "technical_report",
+          "sha256": "sha256:d561358210f474e284fab683548ea81490f8f35c978183ff938e74ce9f03a62e"
+        }
+      ],
+      "evidence_refs": [],
+      "finding_ids": [
+        "WK-01",
+        "WK-02",
+        "WK-03",
+        "WK-04",
+        "WK-05",
+        "WK-06",
+        "WK-07",
+        "WK-08",
+        "WK-09",
+        "WK-10",
+        "WK-11",
+        "WK-12",
+        "WK-13",
+        "WK-14",
+        "WK-15",
+        "WK-16",
+        "WK-17",
+        "WK-18",
+        "WK-19",
+        "WK-20",
+        "WK-21",
+        "WK-22",
+        "WK-23",
+        "WK-24"
+      ],
+      "measure_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10",
+        "M-11",
+        "M-12",
+        "M-13",
+        "M-14",
+        "M-15",
+        "M-16",
+        "M-17",
+        "M-18",
+        "M-19",
+        "M-20",
+        "M-21",
+        "M-22",
+        "M-23"
+      ],
+      "criterion_ids": [],
+      "open_gaps": [],
+      "limitations": [
+        "M-02/M-16 an Entscheidung E-A",
+        "M-20/M-21 an Server-/OpenBao-Zugang",
+        "M-22 an Rechtsberatung"
+      ],
+      "assumptions": [
+        "A-02 Aufwandsspannen grob",
+        "A-03 10 % Toleranz Tokenschätzung"
+      ],
+      "blocking_items": [],
+      "created_at": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "contract_version": "1.0",
+      "run_id": "42426a46-0b05-47d6-a174-e1ea2494dfae",
+      "case_identity": {
+        "case_id": "NX-WS-KERNE-2026-09",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "NeXify Workspace + NeXify Posteingang + lib/langlauf.js + lib/posteingang.js + config/{llm-verbindungen,langlauf,integrationen}.json",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-27T21:22:28.546Z",
+        "input_scope_hash": "sha256:30332e2837012041acdb3f81e689e1796caa55174a3d043d6fb71594a760860c"
+      },
+      "producer": "agent3",
+      "artifact_type": "certification_readiness_report",
+      "artifact_path": "/docs/04-betrieb/autopilot/workspace-kerne/3-zertifizierungsreife.md",
+      "artifact_sha256": "sha256:52a1d65c7ebd107a19b2bd3dfb8ab86221af0d3044eea22b5276812a7c0b04b9",
+      "status": "PARTIAL",
+      "summary": "NOT_READY: 5 Major, 5 Minor, 1 Beobachtung, C-10 nicht prüfbar, C-11 Rechtsfrage offen. Kein Zertifikat, keine Live-Freigabe.",
+      "source_artifacts": [
+        {
+          "producer": "agent1",
+          "artifact_type": "technical_report",
+          "sha256": "sha256:d561358210f474e284fab683548ea81490f8f35c978183ff938e74ce9f03a62e"
+        },
+        {
+          "producer": "agent2",
+          "artifact_type": "implementation_plan",
+          "sha256": "sha256:16991c95819b348233bf99fe4cb226fa34e9282c578aa3aecf6ac895d17e65a8"
+        }
+      ],
+      "evidence_refs": [],
+      "finding_ids": [
+        "WK-01",
+        "WK-02",
+        "WK-03",
+        "WK-04",
+        "WK-05",
+        "WK-06",
+        "WK-07",
+        "WK-08",
+        "WK-09",
+        "WK-10",
+        "WK-11",
+        "WK-12",
+        "WK-13",
+        "WK-14",
+        "WK-15",
+        "WK-16",
+        "WK-17",
+        "WK-18",
+        "WK-19",
+        "WK-20",
+        "WK-21",
+        "WK-22",
+        "WK-23",
+        "WK-24"
+      ],
+      "measure_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10",
+        "M-11",
+        "M-12",
+        "M-13",
+        "M-14",
+        "M-15",
+        "M-16",
+        "M-17",
+        "M-18",
+        "M-19",
+        "M-20",
+        "M-21",
+        "M-22",
+        "M-23"
+      ],
+      "criterion_ids": [
+        "C-01",
+        "C-02",
+        "C-03",
+        "C-04",
+        "C-05",
+        "C-06",
+        "C-07",
+        "C-08",
+        "C-09",
+        "C-10",
+        "C-11",
+        "C-12",
+        "C-13"
+      ],
+      "open_gaps": [],
+      "limitations": [
+        "keine unabhängige Prüfinstanz",
+        "kein Schema festgelegt",
+        "Normbezug nur aus Projektregister N-08/N-10"
+      ],
+      "assumptions": [],
+      "blocking_items": [
+        "B-01 kein Health-/Preisnachweis 9router (C-03, C-09)",
+        "B-02 keine Rechtsprüfung Drittland Composio (C-11)",
+        "B-03 keine Unabhängigkeit der Prüfung"
+      ],
+      "created_at": "2026-09-27T21:26:50.273Z"
+    }
+  ],
+  "validierung": [
+    {
+      "producer": "agent1",
+      "identitaet": "exakt",
+      "hash": "stimmt",
+      "rolle": "stimmt",
+      "vorstufen": "registrierte Hashes",
+      "ergebnis": "angenommen (PARTIAL, Einschränkungen benannt)"
+    },
+    {
+      "producer": "agent2",
+      "identitaet": "exakt",
+      "hash": "stimmt",
+      "rolle": "stimmt",
+      "vorstufen": "registrierte Hashes",
+      "ergebnis": "angenommen (PARTIAL, Einschränkungen benannt)"
+    },
+    {
+      "producer": "agent3",
+      "identitaet": "exakt",
+      "hash": "stimmt",
+      "rolle": "stimmt",
+      "vorstufen": "registrierte Hashes",
+      "ergebnis": "angenommen (PARTIAL, Einschränkungen benannt)"
+    }
+  ],
+  "gegenpruefung": {
+    "befunde_ohne_massnahme": [],
+    "befunde_ohne_bewertung": [],
+    "massnahmen_ohne_bewertung": [],
+    "neue_tatsachen_stufe2": [],
+    "neue_tatsachen_stufe3": [],
+    "geplant_als_umgesetzt_gewertet": false,
+    "hashes_konsistent": true
+  },
+  "widersprueche": [
+    {
+      "id": "W-01",
+      "inhalt": "integrationen.json 'vorhanden' ↔ AGENT.md §6 'nicht geprüft' / task_plan 'LightRAG nicht erreichbar'",
+      "eigentuemer": "Pascal/Betrieb",
+      "aufloesung": "datiertes Health-Protokoll je Dienst (M-14, M-21)",
+      "blockiert": "C-09"
+    },
+    {
+      "id": "W-02",
+      "inhalt": "Doku-Garantie 72 h / ein Director ↔ Code",
+      "eigentuemer": "Entwicklung",
+      "aufloesung": "M-07, M-08, M-17",
+      "blockiert": "nein"
+    },
+    {
+      "id": "W-03",
+      "inhalt": "config 'nicht bei schema' ↔ Code wiederholt",
+      "eigentuemer": "Entwicklung",
+      "aufloesung": "M-04",
+      "blockiert": "nein"
+    },
+    {
+      "id": "W-04",
+      "inhalt": "Workspace-Skillliste führt gutachten-autopilot-de als 'veraltet', Skill wird aber genutzt",
+      "eigentuemer": "Pascal",
+      "aufloesung": "Skillstatus festlegen",
+      "blockiert": "nein",
+      "status": "erledigt",
+      "erledigt": "2026-09-28",
+      "nachweis": "NeXify Workspace.dc.html: Status »geprüft«, Gruppe »Prüfung«, Hinweis auf Ablageort der Hilfsdateien"
+    }
+  ],
+  "verlauf": [
+    {
+      "z": "NEW",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "DISCOVERY",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "AGENT1_RUNNING",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "AGENT1_VALIDATION",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "AGENT2_RUNNING",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "AGENT2_VALIDATION",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "AGENT3_RUNNING",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "AGENT3_VALIDATION",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "CROSSCHECK",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "FINALIZING",
+      "t": "2026-09-27T21:26:50.273Z"
+    },
+    {
+      "z": "PARTIAL_BLOCKED",
+      "t": "2026-09-27T21:26:50.273Z"
+    }
+  ],
+  "naechster_schritt": "B-01 beschaffen: Health-Protokoll 9router je Stufe + Preise mit Quelle; Entscheidung E-A (Wortlaut KI-Hinweis). Danach Nachbewertung → CONDITIONALLY_READY möglich.",
+  "umsetzung": {
+    "auftrag": "Chat-Anweisung Pascal 27.09.2026 (lokaler, reversibler Teil)",
+    "artefakt": "/docs/04-betrieb/autopilot/workspace-kerne/4-umsetzungsnachweis.md",
+    "sha256": "sha256:74d50b70eb73cc3e8b8d9ba5e8b2bfe314dfad16b77da805dea6d8eb37ef1815",
+    "abgeschlossen": "2026-09-27T21:41:14.995Z",
+    "tests": {
+      "langlauf": "32/32",
+      "posteingang": "31/31",
+      "rot_vorher": {
+        "langlauf": "20/32",
+        "posteingang": "22/31"
+      }
+    },
+    "umgesetzt": [
+      "M-01",
+      "M-02",
+      "M-03",
+      "M-04",
+      "M-05",
+      "M-06",
+      "M-07 (Kern)",
+      "M-08",
+      "M-09",
+      "M-10",
+      "M-11",
+      "M-12",
+      "M-13",
+      "M-14",
+      "M-15",
+      "M-16",
+      "M-17",
+      "M-18"
+    ],
+    "offen": [
+      "M-07 (DB)",
+      "M-19",
+      "M-20",
+      "M-23"
+    ],
+    "blockiert": [
+      "M-21",
+      "M-22"
+    ],
+    "neue_befunde": [
+      "WK-25",
+      "WK-26",
+      "WK-27"
+    ],
+    "dateien": {
+      "lib/langlauf.js": "sha256:11a697a7f3b2d9fd6ebbb445873726b9c77abaa3a2d3dd0906669ccc0a7b3ce5",
+      "lib/posteingang.js": "sha256:2342255d792e77fdefdded8ef354ddfff8b487c0ffa387db4070c660f28939fe",
+      "tests/posteingang.test.js": "sha256:9b5115d90a91981d79d4d9dbab5f4c1e1150b68a258ca556a83f1afd8d9a251f",
+      "config/integrationen.json": "sha256:b15f757d0f26b3435f2103eff284d56be76f5b38a1cc9bb3bc1d5f195e26566b",
+      "config/langlauf.json": "sha256:706d155fda8c9223cdc702aa51c60f4a3871d312be3ff97c9ff81caa1d5cbee2",
+      "tools/doku-generator.js": "sha256:c4a1956c071e16a22d961a48935ccdb788212bc98d461bf06b5b3ba27187f322",
+      "docs/generiert/dienste.md": "sha256:22ae7cc189cd5172e68efd1c5890e0afaeded4d68ebd809c9ca20275ef746792",
+      "docs/generiert/mcp.md": "sha256:03220dd291d782a5f7ae325ddfc9b3547bfde4e4029a4a43de81e8c1bbc7e397",
+      "docs/generiert/betriebshandbuch-kurz.md": "sha256:d5922cd9b31795578053508fed4b6c55ba6b01d285ed24a4ead9ea11fb9a18d2",
+      "docs/03-backend/langlauf-orchestrierung.md": "sha256:a733fc1cb67306304adacf11ba991a0af84a90f9f1b4461f4898674718d62661",
+      "docs/02-frontend/webui-librechat.md": "sha256:e0b4f3341003d664508458871bf88c4c9eaba55bda881705e9e59d9d5b7f7f2f",
+      "AGENT.md": "sha256:71b6cd88668da00f32d2dc73d19db6da3621af3a775c940097fc63632d00878f",
+      "NeXify Posteingang.dc.html": "sha256:3c5021ee5b2a3799ff1f3017a9e972675aa1780a889e5d6b7a089156ae211bbf",
+      "NeXify Workspace.dc.html": "sha256:664c389b001148a7bc28fa75ced7e14237a183806415faba798b4646fe79d4d3"
+    },
+    "urteil_nach_umsetzung": "NOT_READY (C-03, C-09 an B-01)"
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "$kommentar": "Regelwerk NeXify AI. Umgesetzt in lib/regelwerk.js (38/38 Prüffälle). Jede Aktion läuft vor Ausführung durch pruefe(); unbekannte Aktionen sind gesperrt. Stand 27.09.2026.",
+  "version": "1.0.0",
+  "durchsetzung": {
+    "gateway": "jede schreibende Anfrage an /v1 und jedes MCP-Werkzeug ruft pruefe() vor dem Seiteneffekt",
+    "director": "lib/langlauf.js ruft pruefe() vor starte() jedes Schritts mit Seiteneffekt",
+    "ci": "node tools/regel-pruefung.js → pruefeDateien() über das Repository; Befund = Pipeline rot",
+    "protokoll": "jede Entscheidung als Ereignis regel.entscheidung (Aktion, Akteur, Regeln, Ergebnis) ins ZK-Log; Inhalte nur als Referenz",
+    "ausfall": "Regelwerk nicht erreichbar = gesperrt (fail-closed)",
+    "pipeline": "lib/anfrage-pipeline.js ruft pruefe() vor dem Modellaufruf und vor der Auslieferung"
+  },
+  "regeln": [
+    {
+      "id": "R-00",
+      "quelle": "Architektur",
+      "text": "Nur registrierte Aktionstypen",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-01",
+      "quelle": "AGENT.md §0.1",
+      "text": "Endabnahme nur durch Pascal",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-02",
+      "quelle": "AGENT.md §0.2",
+      "text": "Reboot, Live-DNS, vollständige Firewall-Änderung nur mit Einzelfreigabe ≤ 24 h",
+      "folge": "gesperrt",
+      "wortlaut": "FREIGABE <REBOOT|LIVE-DNS|FIREWALL> <Ziel>. Pascal, TT.MM.JJJJ HH:MM"
+    },
+    {
+      "id": "R-03",
+      "quelle": "AGENT.md §0.3",
+      "text": "Live nur mit Vorschau, Health 60 s, E3, ausgeführtem Rollback, Gutachten, Endabnahme",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-04",
+      "quelle": "AGENT.md §0.4 · GoBD",
+      "text": "Geld nur über Rechenkern, idempotent, Storno als Gegenbuchung",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-05",
+      "quelle": "AGENT.md §0.5 · KI-VO Art. 50 (Register N-08)",
+      "text": "KI-Inhalte gekennzeichnet; Mails mit festem Hinweissatz",
+      "folge": "gesperrt",
+      "kiHinweis": "Diese Nachricht wurde mit KI erstellt.",
+      "kiHinweisStatus": "Vorschlag, Entscheidung E-A offen"
+    },
+    {
+      "id": "R-06",
+      "quelle": "AGENT.md §0.6 · DSGVO",
+      "text": "Verarbeitung in der EU; Personenbezug an Drittland nur mit AVV/SCC",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-07",
+      "quelle": "AGENT.md §0.6",
+      "text": "Keine Geheimnisse in Inhalt, Log, Repo – nur OpenBao-Verweis",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-08",
+      "quelle": "AGENT.md §0.8 · UWG §5",
+      "text": "Keine Zahl ohne Beleg oder Beispiel-Kennzeichnung",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-09",
+      "quelle": "config/langlauf.json sperren",
+      "text": "Preise, Rechte, Rechtstexte nie automatisch",
+      "folge": "mensch"
+    },
+    {
+      "id": "R-10",
+      "quelle": "lib/lernschleife.js",
+      "text": "Lernen nur über Bewertungs-Gate; 100 % nur Pascal",
+      "folge": "gesperrt|mensch"
+    },
+    {
+      "id": "R-11",
+      "quelle": "lib/tagrouter.js",
+      "text": "#stopp hat Vorrang vor allem außer Lesen",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-12",
+      "quelle": "config/llm-verbindungen.json",
+      "text": "Tagesbudget des Agenten",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-13",
+      "quelle": "Server-Bereinigung",
+      "text": "Löschen nur mit geprüfter Sicherung, Inventar, Probelauf und Pascal",
+      "folge": "gesperrt|mensch"
+    },
+    {
+      "id": "R-14",
+      "quelle": "backend-architektur.md §5",
+      "text": "Vorschau-Deploy nur mit grüner, nicht leerer Suite",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-15",
+      "quelle": "Gutachten WK-18",
+      "text": "Dienst »vorhanden« nur mit belegt_am",
+      "folge": "CI rot"
+    },
+    {
+      "id": "R-16",
+      "quelle": "Design Components",
+      "text": "Keine Ausdrücke in Template-Löchern",
+      "folge": "CI rot"
+    },
+    {
+      "id": "R-17",
+      "quelle": "Design-Norm § Raster · DIN EN ISO 9241-112",
+      "text": "Abstände (padding, margin, gap) nur auf dem 4/8-px-Raster",
+      "folge": "CI rot"
+    },
+    {
+      "id": "R-18",
+      "quelle": "DIN 5008 · CLAUDE.md",
+      "text": "Zwischen Zahl und Einheit ein geschütztes Leerzeichen, auch in erzeugtem Text",
+      "folge": "CI rot"
+    },
+    {
+      "id": "R-19",
+      "quelle": "Design Components / JavaScript-Klassen",
+      "text": "Keine doppelt definierten Lebenszyklus-Methoden – die spätere überschreibt still die frühere",
+      "folge": "CI rot"
+    },
+    {
+      "id": "R-20",
+      "quelle": "lib/ki-muster.js belegPruefung · lib/anfrage-pipeline.js",
+      "text": "Belegte Antworten nur ausliefern, wenn die Belegprüfung bestanden ist",
+      "folge": "gesperrt"
+    },
+    {
+      "id": "R-21",
+      "quelle": "Skill computer-use-agenten",
+      "text": "Bildschirmsteuerung nur ohne API, nur in Sandbox (Netz intern, nur lesend, keine Host-Zugänge, ≤ 50 Schritte, Kostengrenze); folgenreiche Aktionen nur nach Freigabe",
+      "folge": "gesperrt|mensch"
+    }
+  ],
+  "anbieter": {
+    "mistral": {
+      "drittland": false,
+      "avvScc": null,
+      "hinweis": "Status vor Nutzung prüfen"
+    },
+    "composio": {
+      "drittland": true,
+      "avvScc": false,
+      "hinweis": "Entscheidung E-B offen"
+    },
+    "resend": {
+      "drittland": true,
+      "avvScc": null,
+      "hinweis": "AVV/SCC-Nachweis beschaffen, sonst nur ohne Personenbezug"
+    }
+  }
+}

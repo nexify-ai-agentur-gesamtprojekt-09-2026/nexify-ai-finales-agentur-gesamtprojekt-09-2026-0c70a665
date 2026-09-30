@@ -1,0 +1,20 @@
+{
+  "description": "NeXify/Jeff — Orakel-Hooks: Aufgaben-Empfang, Einordnung, Review über nx-jeff",
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "node /opt/ai-stack/design_handoff_nexify_gesamtloesung/hooks/jeff-hook.mjs", "timeout": 30 } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "node /opt/ai-stack/design_handoff_nexify_gesamtloesung/hooks/jeff-hook.mjs", "timeout": 30 } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "node /opt/ai-stack/design_handoff_nexify_gesamtloesung/hooks/jeff-hook.mjs", "timeout": 30 } ] }
+    ],
+    "SessionEnd": [
+      { "hooks": [ { "type": "command", "command": "node /opt/ai-stack/design_handoff_nexify_gesamtloesung/hooks/jeff-hook.mjs", "timeout": 30 } ] }
+    ],
+    "TaskCompleted": [
+      { "hooks": [ { "type": "command", "command": "node /opt/ai-stack/design_handoff_nexify_gesamtloesung/hooks/jeff-hook.mjs", "timeout": 30 } ] }
+    ]
+  }
+}

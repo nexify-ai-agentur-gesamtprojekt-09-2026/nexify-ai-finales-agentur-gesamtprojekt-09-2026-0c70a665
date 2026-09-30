@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        bildschirm
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „Fitment-Checker.dc.html“
+  Status:     konform
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Passt das Teil? Fitment-Checker – TEILEKLAR</title>
+<meta name="description" content="Prüfe in Sekunden, ob ein Autoteil zu deinem Fahrzeug passt." />
+<meta property="og:title" content="Passt das Teil? Fitment-Checker – TEILEKLAR" />
+<meta property="og:description" content="Prüfe in Sekunden, ob ein Autoteil zu deinem Fahrzeug passt." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta name="theme-color" content="#242826" />
+<script src="nx-page.js" data-reveal="off" data-max="160"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>button{padding:0;font:inherit;color:inherit}
+  button, input, select, textarea { font: inherit; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #D7FA50; outline-offset: 2px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #242826; color: #FFFFFF; font-family:Geist, sans-serif; }
+  a { color: #D7FA50; }
+  a:hover { color: #D7FA50; }
+  input::placeholder { color: #BCC1BD; }
+</style>
+<style id="nx-mobil">
+  html{-webkit-text-size-adjust:100%} body{overflow-x:hidden}
+  @media (max-width:640px){
+    h1{font-size:clamp(30px,9vw,42px)!important;line-height:1.06!important;letter-spacing:-.03em!important}
+    h2{font-size:clamp(24px,7vw,34px)!important;line-height:1.1!important}
+    [style*="padding:40px"],[style*="padding:48px 40px"],[style*="padding:36px"],[style*="padding:32px"]{padding:20px!important}
+    [style*="padding:56px 0"],[style*="padding:64px 24px"],[style*="padding:72px 0"],[style*="padding:96px 0"]{padding-top:40px!important;padding-bottom:48px!important}
+    [style*="gap:64px"],[style*="gap:48px"],[style*="gap:40px"]{gap:24px!important}
+    [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:repeat(2,"],[style*="grid-template-columns:1.1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],[style*="grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+    table{font-size:13px} pre{font-size:12px!important} img,svg,canvas{max-width:100%}
+    [style*="flex:1 1 520px"],[style*="flex:1 1 460px"],[style*="flex:2 1 460px"],[style*="flex:1 1 440px"],[style*="flex:1 1 420px"],[style*="flex:2 1 420px"],[style*="flex:1 1 400px"],[style*="flex:1 1 380px"],[style*="flex:1 1 360px"]{flex-basis:100%!important}
+    [style*="margin-left:auto"][style*="min-height:44px"]{margin-left:0!important}
+    button,a,input,select,textarea,summary{touch-action:manipulation}
+    input,select,textarea{font-size:16px!important}
+  }
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="NX-Header" marke="shop" nav="werkzeug" active="passung" kontext="Passungs-Prüfung" cta="teile" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+
+
+  
+
+  <main style="flex:1;width:min(1000px,calc(100% - 48px));margin:0 auto;padding:56px 0 40px">
+
+    <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0;color:#BCC1BD">{{ t.kicker }}</p>
+    <h1 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 16px;font-size:clamp(48px,7.2vw,96px);font-weight:700;line-height:1;letter-spacing:-.05em;text-wrap:balance;overflow-wrap:break-word;hyphens:auto">{{ t.h1 }}</h1>
+    <p style="max-width:600px;margin:0 0 40px;font-size:16px;line-height:1.6;color:#FFFFFF;text-wrap:pretty">{{ t.lead }}</p>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+      <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.02em">01</span>
+      <strong style="font-size:14px;font-weight:700;letter-spacing:-.02em;overflow-wrap:break-word;hyphens:auto">{{ t.step1 }}</strong>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:40px">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+        <button onClick="{{ c.pick }}" style="font-family:inherit;padding:12px 12px;border-radius:8px;text-align:left;font-size:14px;font-weight:700;letter-spacing:-.02em;cursor:pointer;transition:border-color .2s ease, background .2s ease;border:1px solid {{ c.border }};background:{{ c.bg }};color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ c.label }}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ hasCategory }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+          <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.02em">02</span>
+          <strong style="font-size:14px;font-weight:700;letter-spacing:-.02em;overflow-wrap:break-word;hyphens:auto">{{ step2Label }}</strong>
+        </div>
+        <div style="padding:20px 24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);box-shadow:0 1px 2px rgba(14,19,21,.05);margin-bottom:16px">
+          <div style="display:grid;gap:8px;margin-bottom:16px">
+            <sc-for list="{{ catPoints }}" as="p" hint-placeholder-count="4">
+              <span style="display:flex;align-items:flex-start;gap:8px;font-size:14px;line-height:1.5;color:#FFFFFF">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D7FA50" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:4px"><path d="m5 12 4.5 4.5L19 7" /></svg>{{ p.text }}
+              </span>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:12px 12px;border-radius:4px;background:rgba(232,135,31,.1)">
+            <span style="flex:0 0 auto;font-size:14px;color:#FFC24A">&#9888;</span>
+            <p style="margin:0;font-size:12px;line-height:1.6;color:#FFC24A"><strong style="font-weight:700;overflow-wrap:break-word;hyphens:auto">{{ t.pitfallLabel }}</strong> {{ catPitfall }}</p>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin:32px 0 20px">
+          <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.02em">03</span>
+          <strong style="font-size:14px;font-weight:700;letter-spacing:-.02em;overflow-wrap:break-word;hyphens:auto">{{ t.step3 }}</strong>
+        </div>
+        <div style="padding:20px 24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);box-shadow:0 1px 2px rgba(14,19,21,.05);margin-bottom:16px">
+          <div style="display:grid;gap:12px;margin-bottom:12px;grid-template-columns:{{ idCols }}">
+            <div>
+              <label style="display:block;margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0;color:#BCC1BD">{{ t.idLabel1 }}</label>
+              <input value="{{ hsn }}" onChange="{{ setHsn }}" aria-label="HSN" placeholder="{{ t.idPlaceholder1 }}" style="width:100%;height:40px;padding:0 12px;border:1px solid #363A38;border-radius:8px;font-family:'Geist Mono',monospace;font-size:14px;background:#303634" />
+            </div>
+            <sc-if value="{{ showTsn }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <label style="display:block;margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0;color:#BCC1BD">TSN</label>
+                <input value="{{ tsn }}" onChange="{{ setTsn }}" placeholder="BGT" style="width:100%;height:40px;padding:0 12px;border:1px solid #363A38;border-radius:8px;font-family:'Geist Mono',monospace;font-size:14px;background:#303634" / aria-label="BGT">
+              </div>
+            </sc-if>
+          </div>
+          <label style="display:block;margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0;color:#BCC1BD">{{ t.vehicleLabel }}</label>
+          <input value="{{ vehicleText }}" onChange="{{ setVehicleText }}" aria-label="{{ t.vehicleLabel }}" placeholder="{{ t.vehiclePlaceholder }}" style="width:100%;height:40px;padding:0 12px;margin-bottom:16px;border:1px solid #363A38;border-radius:8px;font-size:14px;background:#303634" />
+          <button onClick="{{ generate }}" style="font-family:inherit;height:44px;padding:0 20px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.generate }}</button>
+        </div>
+
+        <sc-if value="{{ showSummary }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:24px;border-radius:4px;background:#242826;color:#fff;margin-top:20px">
+            <p style="margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0;color:#D7FA50">{{ t.summaryKicker }}</p>
+            <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 12px;font-size:18px;font-weight:700;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:break-word;hyphens:auto">{{ summaryTitle }}</h2>
+            <p style="margin:0 0 12px;font-size:14px;line-height:1.6;color:#BCC1BD;text-wrap:pretty">{{ t.summaryNote }}</p>
+            <div style="display:grid;gap:8px;margin-bottom:20px">
+              <sc-for list="{{ catPoints }}" as="p" hint-placeholder-count="4">
+                <span style="font-size:14px;line-height:1.5;color:#fff">→ {{ p.text }}</span>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <a href="TEILEKLAR%20Shop.dc.html" style="display:inline-flex;align-items:center;height:42px;padding:0 16px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.ctaAdvisor }}</a>
+              <a href="TEILEKLAR%20Shop.dc.html" style="display:inline-flex;align-items:center;height:42px;padding:0 16px;border-radius:8px;border:1px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.ctaSearch }}</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:64px;padding-top:32px;border-top:1px solid #363A38">
+      <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0;color:#BCC1BD">{{ t.bgKicker }}</p>
+      <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 12px;font-size:clamp(32px,4.2vw,56px);font-weight:700;letter-spacing:-.04em;text-wrap:balance;overflow-wrap:break-word;hyphens:auto">{{ t.bgH2 }}</h2>
+      <p style="margin:0 0 12px;font-size:14px;line-height:1.7;color:#FFFFFF;text-wrap:pretty">{{ t.bgP1 }}</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:#FFFFFF;text-wrap:pretty">{{ t.bgP2 }}</p>
+    </div>
+
+  </main>
+
+  <dc-import name="NX-Footer" market="{{ fMarket }}" lang="{{ fLang }}" on-market="{{ fPickMarket }}" active="passung" hint-size="100%,880px"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const I18N = {
+  de: {
+    kicker: "Interaktives Klarwissen-Tool", h1: "Passt dieses Teil an mein Auto?",
+    lead: "Ein Artikelname allein beweist nie, dass ein Teil passt. Wähle deine Kategorie – die Prüfung zeigt, welche Angaben wirklich entscheiden und wo der häufigste Irrtum liegt.",
+    step1: "Kategorie wählen", step2: "Diese Angaben entscheiden bei", pitfallLabel: "Häufigster Irrtum:",
+    step3: "Dein Fahrzeug (optional, für die Zusammenfassung)",
+    idLabel1: "HSN", idPlaceholder1: "0603", vehicleLabel: "oder: Modell, Motor, Baujahr", vehiclePlaceholder: "z. B. VW Golf VII 1.6 TDI, 2015",
+    generate: "Zusammenfassung erstellen", summaryKicker: "Zusammenfassung", summaryFor: "für", fallbackVehicle: "deinem Fahrzeug",
+    summaryNote: "Das hier ist keine Passungsprüfung – dafür braucht es den Fahrzeugkatalog im Berater. Aber du weißt jetzt, wonach du beim Kauf fragen musst:",
+    ctaAdvisor: "Im Berater klären →", ctaSearch: "Teilesuche öffnen", bgKicker: "Hintergrund",
+    bgH2: "Warum die Schlüsselnummern allein oft nicht reichen",
+    bgP1: "Die Schlüsselnummern aus dem Fahrzeugschein (Feld 2.1 und 2.2) identifizieren die Typvariante beim Kraftfahrtbundesamt – nicht aber jedes Ausstattungsdetail wie Sportfahrwerk, Anhängerkupplung oder ein zwischenzeitlich ausgetauschtes Teil.",
+    bgP2: "Der TEILEKLAR-Berater übernimmt diese Prüfung automatisch, sobald ein Auto hinterlegt ist – dieser Checker zeigt nur, wonach er fragen wird.",
+    toTyreCalc: "Reifenrechner öffnen →", toBattery: "Batterie-Berater öffnen →", footerBack: "Zurück zum Shop →"
+  },
+  nl: {
+    kicker: "Interactief kennistool", h1: "Past dit onderdeel op mijn auto?",
+    lead: "Een artikelnaam alleen bewijst nooit dat een onderdeel past. Kies je categorie – de controle laat zien welke gegevens echt beslissen en waar de meest gemaakte fout zit.",
+    step1: "Categorie kiezen", step2: "Deze gegevens beslissen bij", pitfallLabel: "Meest gemaakte fout:",
+    step3: "Jouw auto (optioneel, voor de samenvatting)",
+    idLabel1: "Kenteken", idPlaceholder1: "12-ABC-3", vehicleLabel: "of: model, motor, bouwjaar", vehiclePlaceholder: "bijv. VW Golf VII 1.6 TDI, 2015",
+    generate: "Samenvatting maken", summaryKicker: "Samenvatting", summaryFor: "voor", fallbackVehicle: "jouw auto",
+    summaryNote: "Dit is geen pasvormcontrole – daarvoor is de voertuigcatalogus bij de adviseur nodig. Maar je weet nu waar je bij de koop naar moet vragen:",
+    ctaAdvisor: "Bij de adviseur uitzoeken →", ctaSearch: "Onderdelen zoeken", bgKicker: "Achtergrond",
+    bgH2: "Waarom het kenteken alleen vaak niet genoeg is",
+    bgP1: "Het kenteken identificeert de typevariant van je auto – maar niet elk uitvoeringsdetail zoals sportonderstel, trekhaak of een onderdeel dat eerder al is vervangen.",
+    bgP2: "De TEILEKLAR-adviseur doet deze controle automatisch zodra er een auto is ingesteld – deze checker laat alleen zien waar hij naar gaat vragen.",
+    toTyreCalc: "Maatrekenaar openen →", toBattery: "Accu-adviseur openen →", footerBack: "Terug naar de shop →"
+  },
+  fr: {
+    kicker: "Outil interactif", h1: "Cette pièce va-t-elle sur ma voiture ?",
+    lead: "Le nom d'un article ne prouve jamais à lui seul qu'une pièce convient. Choisissez votre catégorie – le vérificateur montre quelles informations décident vraiment et où se trouve l'erreur la plus fréquente.",
+    step1: "Choisir la catégorie", step2: "Ces informations décident pour", pitfallLabel: "Erreur la plus fréquente :",
+    step3: "Votre voiture (facultatif, pour le résumé)",
+    idLabel1: "Plaque d'immatriculation", idPlaceholder1: "1-ABC-123", vehicleLabel: "ou : modèle, moteur, année", vehiclePlaceholder: "p. ex. VW Golf VII 1.6 TDI, 2015",
+    generate: "Créer le résumé", summaryKicker: "Résumé", summaryFor: "pour", fallbackVehicle: "votre voiture",
+    summaryNote: "Ceci n'est pas une vérification de compatibilité – elle exige le catalogue véhicules du conseiller. Mais vous savez maintenant quoi demander avant d'acheter :",
+    ctaAdvisor: "Clarifier avec le conseiller →", ctaSearch: "Ouvrir la recherche", bgKicker: "Contexte",
+    bgH2: "Pourquoi la plaque seule ne suffit pas",
+    bgP1: "La plaque identifie la variante de type de votre voiture – mais pas chaque détail d'équipement comme un châssis sport, un attelage ou une pièce déjà remplacée auparavant.",
+    bgP2: "Le conseiller TEILEKLAR effectue cette vérification automatiquement dès qu'une voiture est enregistrée – ce vérificateur montre seulement ce qu'il va demander.",
+    toTyreCalc: "Ouvrir le calculateur de pneus →", toBattery: "Ouvrir le conseiller batterie →", footerBack: "Retour à la boutique →"
+  }
+};
+
+const CATS = [
+  { id: "brakes",
+    label: { de: "Bremsen", nl: "Remmen", fr: "Freins" },
+    points: {
+      de: ["Scheibendurchmesser und -dicke in mm", "Belüftet oder voll – nicht austauschbar", "Vorderachse oder Hinterachse", "Motorcode bei leistungsstarken Varianten"],
+      nl: ["Schijfdiameter en -dikte in mm", "Geventileerd of vol – niet uitwisselbaar", "Vooras of achteras", "Motorcode bij sterkere uitvoeringen"],
+      fr: ["Diamètre et épaisseur du disque en mm", "Ventilé ou plein – non interchangeable", "Essieu avant ou arrière", "Code moteur pour les versions puissantes"]
+    },
+    pitfall: {
+      de: "Ein Bremsscheiben-Satz mit passendem Durchmesser reicht nicht – bei stärkeren Motoren ist oft eine größere Bremsanlage verbaut.",
+      nl: "Een schijvenset met de juiste diameter is niet genoeg – bij sterkere motoren zit vaak een groter remsysteem.",
+      fr: "Un jeu de disques au bon diamètre ne suffit pas – les moteurs plus puissants ont souvent un système de freinage plus grand."
+    } },
+  { id: "battery",
+    label: { de: "Batterie", nl: "Accu", fr: "Batterie" },
+    points: {
+      de: ["Kapazität in Ah und Kälteprüfstrom in A", "Start-Stopp-Ausführung (EFB/AGM) oder konventionell", "Gehäusemaß und Polanordnung", "Halterung passend zum Fahrzeug"],
+      nl: ["Capaciteit in Ah en koudstartstroom in A", "Start-stop-uitvoering (EFB/AGM) of conventioneel", "Behuizingsmaat en polopstelling", "Bevestiging passend bij de auto"],
+      fr: ["Capacité en Ah et courant de démarrage en A", "Version start-stop (EFB/AGM) ou conventionnelle", "Dimensions du boîtier et position des bornes", "Fixation adaptée au véhicule"]
+    },
+    pitfall: {
+      de: "Eine Batterie mit passender Kapazität, aber falscher Technologie (Start-Stopp), kann die Start-Stopp-Funktion deaktivieren oder vorzeitig altern.",
+      nl: "Een accu met de juiste capaciteit maar verkeerde techniek (start-stop) kan de start-stopfunctie uitschakelen of vroegtijdig verouderen.",
+      fr: "Une batterie de bonne capacité mais de mauvaise technologie (start-stop) peut désactiver la fonction start-stop ou vieillir prématurément."
+    } },
+  { id: "lighting",
+    label: { de: "Beleuchtung", nl: "Verlichting", fr: "Éclairage" },
+    points: {
+      de: ["Lampentyp und Sockel, z. B. H7 oder LED-Modul", "Rechts- oder Linksverkehr-Ausführung beim Scheinwerfer", "Blink- und Bremslicht-Kombination", "Steuergerät-Kompatibilität bei Nachrüstung"],
+      nl: ["Lamptype en voet, bijv. H7 of LED-module", "Uitvoering voor rechts- of linksverkeer bij koplampen", "Combinatie van richting- en remlicht", "Compatibiliteit met de regeleenheid bij ombouw"],
+      fr: ["Type de lampe et culot, p. ex. H7 ou module LED", "Version conduite à droite ou à gauche pour les phares", "Combinaison clignotant et feu stop", "Compatibilité du calculateur en cas de conversion"]
+    },
+    pitfall: {
+      de: "Nicht jede LED-Nachrüstung ist für die Serien-Elektronik freigegeben – Fehlermeldungen oder Probleme bei der Hauptuntersuchung sind möglich.",
+      nl: "Niet elke LED-ombouw is vrijgegeven voor de standaardelektronica – foutmeldingen of problemen bij de keuring zijn mogelijk.",
+      fr: "Toute conversion LED n'est pas homologuée pour l'électronique d'origine – messages d'erreur ou problèmes au contrôle technique possibles."
+    } },
+  { id: "filters",
+    label: { de: "Filter", nl: "Filters", fr: "Filtres" },
+    points: {
+      de: ["Filtertyp: Luft, Öl, Innenraum oder Kraftstoff", "Aktivkohle oder Partikelfilter beim Innenraumfilter", "Exakte Maße: Länge × Breite × Höhe", "Einbauposition am Fahrzeug"],
+      nl: ["Filtertype: lucht, olie, interieur of brandstof", "Actieve kool of deeltjesfilter bij het interieurfilter", "Exacte maten: lengte × breedte × hoogte", "Inbouwpositie op de auto"],
+      fr: ["Type de filtre : air, huile, habitacle ou carburant", "Charbon actif ou filtre à particules pour l'habitacle", "Dimensions exactes : longueur × largeur × hauteur", "Position de montage sur le véhicule"]
+    },
+    pitfall: {
+      de: "Zwei Filter mit identischen Außenmaßen können unterschiedliche Dichtflächen haben – ohne OE-Nummer bleibt das Risiko eines Sitzfehlers.",
+      nl: "Twee filters met dezelfde buitenmaten kunnen verschillende afdichtvlakken hebben – zonder OE-nummer blijft er risico op verkeerde pasvorm.",
+      fr: "Deux filtres aux dimensions extérieures identiques peuvent avoir des surfaces d'étanchéité différentes – sans référence OE, le risque de mauvais ajustement reste."
+    } },
+  { id: "suspension",
+    label: { de: "Fahrwerk", nl: "Onderstel", fr: "Suspension" },
+    points: {
+      de: ["Federrate und Bauform: Schraubenfeder oder Luftfederung", "Vorder- oder Hinterachse", "Tieferlegung ja oder nein", "Teilegutachten bei Sportfahrwerken"],
+      nl: ["Veerkarakteristiek en type: schroefveer of luchtvering", "Vooras of achteras", "Verlaging ja of nee", "Keuringsrapport bij sportonderstellen"],
+      fr: ["Raideur et type : ressort hélicoïdal ou suspension pneumatique", "Essieu avant ou arrière", "Rabaissement oui ou non", "Rapport d'homologation pour les châssis sport"]
+    },
+    pitfall: {
+      de: "Ein Fahrwerksteil ohne Teilegutachten kann die Betriebserlaubnis erlöschen lassen – Papiere vor dem Kauf prüfen.",
+      nl: "Een onderstelonderdeel zonder keuringsrapport kan de toelating laten vervallen – papieren vóór de koop controleren.",
+      fr: "Une pièce de suspension sans homologation peut invalider la réception du véhicule – vérifiez les documents avant l'achat."
+    } },
+  { id: "tires",
+    label: { de: "Reifen", nl: "Banden", fr: "Pneus" },
+    points: {
+      de: ["Reifengröße: Breite, Höhe, Zoll", "Lastindex und Geschwindigkeitsindex", "Saison: Sommer, Winter oder Ganzjahr", "Herstellerfreigabe bei bestimmten Modellen"],
+      nl: ["Maat: breedte, hoogte, inch", "Load-index en snelheidsindex", "Seizoen: zomer, winter of allseason", "Fabrieksvrijgave bij bepaalde modellen"],
+      fr: ["Dimension : largeur, hauteur, pouces", "Indice de charge et indice de vitesse", "Saison : été, hiver ou toutes saisons", "Homologation constructeur sur certains modèles"]
+    },
+    pitfall: {
+      de: "Ein Reifen mit passender Größe, aber zu niedrigem Lastindex, ist keine zulässige Ausrüstung – auch wenn er physisch passt.",
+      nl: "Een band met de juiste maat maar een te lage load-index is geen toegestane uitrusting – ook al past hij fysiek.",
+      fr: "Un pneu à la bonne dimension mais avec un indice de charge trop faible n'est pas un équipement autorisé – même s'il rentre physiquement."
+    } }
+];
+
+class Component extends DCLogic {
+  state = { lang: "de", catId: "", hsn: "", tsn: "", vehicleText: "", summaryOn: false };
+
+  componentDidMount() {
+    if (typeof document !== "undefined") document.documentElement.setAttribute("lang", this.state.lang);
+  }
+
+  setLang(code) {
+    this.setState({ lang: code });
+    if (typeof document !== "undefined") document.documentElement.setAttribute("lang", { de: "de-DE", nl: "nl-NL", fr: "fr-BE" }[code] || "de-DE");
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const t = I18N[lang] || I18N.de;
+    const cat = CATS.find((c) => c.id === this.state.catId);
+    const vehicle = this.state.vehicleText.trim()
+      || ((this.state.hsn || this.state.tsn) ? [this.state.hsn, this.state.tsn].filter(Boolean).join(" · ") : t.fallbackVehicle);
+    return {
+      t: t,
+      fLang: lang,
+      fMarket: { de: "de-DE", nl: "nl-NL", fr: "fr-BE" }[lang],
+      fPickMarket: (code, lg) => this.setLang(lg),
+      langs: ["de", "nl", "fr"].map((code) => ({
+        code: code,
+        border: code === lang ? "#D7FA50" : "#363A38",
+        bg: code === lang ? "#D7FA50" : "#2A2E2C",
+        color: code === lang ? "#111312" : "#BCC1BD",
+        pick: () => this.setLang(code)
+      })),
+      cats: CATS.map((c) => ({
+        label: c.label[lang] || c.label.de,
+        border: c.id === this.state.catId ? "#D7FA50" : "#363A38",
+        bg: c.id === this.state.catId ? "rgba(215,250,80,.08)" : "#2A2E2C",
+        pick: () => this.setState({ catId: c.id, summaryOn: false })
+      })),
+      hasCategory: !!cat,
+      step2Label: cat ? t.step2 + " " + (cat.label[lang] || cat.label.de) : "",
+      catPoints: cat ? (cat.points[lang] || cat.points.de).map((x) => ({ text: x })) : [],
+      catPitfall: cat ? (cat.pitfall[lang] || cat.pitfall.de) : "",
+      showTsn: lang === "de",
+      idCols: lang === "de" ? "1fr 1fr" : "1fr",
+      hsn: this.state.hsn,
+      tsn: this.state.tsn,
+      vehicleText: this.state.vehicleText,
+      setHsn: (e) => this.setState({ hsn: e.target.value }),
+      setTsn: (e) => this.setState({ tsn: e.target.value }),
+      setVehicleText: (e) => this.setState({ vehicleText: e.target.value }),
+      generate: () => this.setState({ summaryOn: true }),
+      showSummary: this.state.summaryOn && !!cat,
+      summaryTitle: cat ? (cat.label[lang] || cat.label.de) + " " + t.summaryFor + " " + vehicle : ""
+    };
+  }
+}
+
+</script>
+</body>
+</html>

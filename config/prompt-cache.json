@@ -1,0 +1,51 @@
+{
+  "$kommentar": "Prompt-Caching NeXify AI. Umgesetzt in lib/prompt-cache.js (13/13). Faktoren aus Anbieterangaben laut Skill; vor Einsatz gegen aktuelle Preisliste prüfen (UNVERIFIED). Stand 28.09.2026.",
+  "reihenfolge": [
+    "S1 System (Rolle, Kopf entfernt)",
+    "S2 Regeln",
+    "S3 Skills + Werkzeuge (nach Name sortiert)",
+    "S4 Wissen (mit Versions-Hash; gecacht nur wenn stabil)",
+    "S5 Vorgang/Verlauf (Breakpoint nach letztem abgeschlossenem Zug)",
+    "S6 Eingabe + Datum + Sitzungswerte"
+  ],
+  "breakpointsMax": 4,
+  "cacheSchichten": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "verbotenVorBreakpoint": [
+    "Zeitstempel",
+    "Datumssatz",
+    "UUID",
+    "unausgefüllter Platzhalter",
+    "Sitzungswert"
+  ],
+  "faktoren_UNVERIFIED": {
+    "schreiben5min": 1.25,
+    "schreiben1h": 2,
+    "lesen": 0.1
+  },
+  "wirtschaftlichkeit": {
+    "abAufruf": 2,
+    "beispiel": "3.000-Token-Prefix, 10 Aufrufe: 78,5 % weniger Eingabekosten für diesen Teil"
+  },
+  "ttl": {
+    "standard": "5 min (rollierend)",
+    "lang": "1 h nur wenn Aufrufabstand > 5 min und ≥ 3 Aufrufe je Stunde"
+  },
+  "ueberwachung": {
+    "felder": [
+      "cache_read_input_tokens",
+      "cache_creation_input_tokens",
+      "input_tokens"
+    ],
+    "alarm": "Trefferquote < 60 % bei ≥ 20 Aufrufen → Lernsignal fehler + Karte",
+    "ziel": "OTel-Attribut gen_ai.usage.* je Span"
+  },
+  "abgrenzung": {
+    "antwortCache": "lib/ki-muster.js cacheSchluessel (nur Temperatur 0, nie Personenbezug)",
+    "router": "9router reicht cache_control nur bei Anthropic-Modellen durch; andere Anbieter cachen automatisch ab Mindestlänge – Reihenfolge gilt für alle"
+  },
+  "befund": "Echter S1-Prompt (≈ 1.764 Tokens ohne Kopf) enthält keine variablen Werte – cachefähig."
+}

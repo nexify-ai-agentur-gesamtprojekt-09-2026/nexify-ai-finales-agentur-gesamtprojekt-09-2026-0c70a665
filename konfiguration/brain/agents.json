@@ -1,0 +1,25 @@
+{
+  "$kommentar": "Brain-Konfiguration · Soll · Entwurf 29.09.2026. Werte mit null legt Pascal fest. Geheimnisse nie hier, nur als openbao:-Verweis.",
+  "regelwerk": "docs/generiert/regelverzeichnis.md",
+  "hartsperren": ["reboot", "dns_aendern", "firewall_aendern", "zahlung_ausloesen", "loeschen_ohne_freigabe", "nachricht_an_dritte_ohne_freigabe"],
+  "agenten": {
+    "companion":   { "name": "NeXify AI", "stufe": 1, "aufstieg": 2, "werkzeuge": ["wissen.lesen", "preisliste.lesen", "kalender.slots"], "kennzeichnung": "KI-Antwort", "uebergabe": "pascal", "verboten": ["festpreis", "rechtsberatung"] },
+    "baumeister":  { "name": "Baumeister (one+)", "stufe": 2, "werkzeuge": ["dateien", "git", "browser", "tests"], "rueckfrage": { "fragen": "immer", "ueberwacht": "schreibend", "auto": "nur ausserhalb_grenzen" } },
+    "pruefer":     { "name": "Prüfer", "stufe": 2, "werkzeuge": ["linter", "kontrast", "tests", "screenshot"], "schreibrechte": false },
+    "recherche":   { "name": "Recherche", "stufe": 2, "werkzeuge": ["websuche", "web.lesen", "wissen.lesen"], "belegpflicht": "quelle+datum" },
+    "triage":      { "name": "Triage", "stufe": 0, "aufstieg": 1, "werkzeuge": ["mail.lesen", "tags"], "senden": false },
+    "angebot":     { "name": "Angebots-Agent", "stufe": 1, "werkzeuge": ["preisliste.lesen", "rechenkern.cent", "pdf"], "preise_nur_aus_katalog": true },
+    "wissen":      { "name": "Wissens-Agent", "stufe": 1, "werkzeuge": ["rag"], "fundstellenpflicht": true, "kein_treffer": "weiss ich nicht + uebergabe" },
+    "orchestrator":{ "name": "Orchestrator", "stufe": 2, "werkzeuge": ["queue", "journal"], "limits": { "maxSchritte": 30, "maxMinuten": 20, "maxKostenCent": null } },
+    "waechter":    { "name": "Wächter", "stufe": 0, "gegentest": "pflicht", "zustellbestaetigung": "pflicht" }
+  },
+  "modelle": {
+    "stufe0": { "id": "nexify-lokal",    "quelle": "lokal", "lora": "adapter/aktuell", "ekEinCent": 0, "ekAusCent": 0 },
+    "stufe1": { "id": "nexify-guenstig", "ekEinCent": null, "ekAusCent": null },
+    "stufe2": { "id": "nexify-stark",    "ekEinCent": null, "ekAusCent": null, "ekCacheCent": null },
+    "ersatz": { "stufe1": "stufe2", "stufe2": "stufe1" },
+    "pruefungsrelevant": "stufe2"
+  },
+  "gateway": "https://api.nexifyai.cloud/v1",
+  "router": "9router:20128"
+}

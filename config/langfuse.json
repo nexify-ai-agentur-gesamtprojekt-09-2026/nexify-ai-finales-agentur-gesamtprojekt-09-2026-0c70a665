@@ -1,0 +1,40 @@
+{
+  "$kommentar": "Langfuse NeXify AI · selbst gehostet (MIT-Kern), ersetzt LangSmith. Abbildung in lib/langfuse.js (9/9). Stand 28.09.2026. Versionen UNVERIFIED – vor Installation gegen die offizielle Self-Hosting-Doku prüfen.",
+  "url": "https://langfuse.intern.nexifyai.cloud",
+  "zugang": "Cloudflare Access (nur Pascal/Team)",
+  "region": "eu-central",
+  "geheimnisse": {
+    "publicKey": "openbao:nexify/data/langfuse#public",
+    "secretKey": "openbao:nexify/data/langfuse#secret"
+  },
+  "aufnahme": {
+    "weg": "Worker sendet Traces und Scores gebündelt; flush am Ende jedes Auftrags",
+    "otlp": "/api/public/otel (Alternative über den OTel Collector)",
+    "ingestion": "/api/public/ingestion"
+  },
+  "datenschutz": {
+    "intern": "Mandant nexify: Inhalte bereinigt (maskieren())",
+    "kunden": "nur Metadaten, Nutzer pseudonym",
+    "loeschfristTage": 90,
+    "geheimnisse": "nie – Regel R-07"
+  },
+  "verknuepfung": {
+    "prompts": "Prompt-Register (lib/ki-muster.js) → Langfuse Prompt-Management, Name@Version am Trace",
+    "scores": [
+      "nutzer-feedback (▲/▼ im Workspace)",
+      "belegtreue (lib/ki-muster.js belegPruefung)",
+      "goldener-satz (lib/rag.js goldenerSatz)"
+    ],
+    "lernen": "Score −1 → Lernsignal bewertung (lib/lernschleife.js)",
+    "datasets": "config/fragensatz.json als Langfuse-Dataset »goldener-satz-1.0.0«"
+  },
+  "workspace": {
+    "reiter": "Seitenfeld › Ablauf",
+    "jeAntwort": "Aktion ≋ Ablauf: Schritte, Dauer, Kosten, Fundstellen, Prompt-Version, Bewertung, Link",
+    "librechat": "LibreChat sendet nur Traces per Umgebungsvariablen; NeXify zeigt den Ablauf zusätzlich direkt an der Antwort und verbindet Scores mit Lernschleife und Gate"
+  },
+  "betrieb": {
+    "sicherung": "Postgres täglich, ClickHouse wöchentlich",
+    "ueberwachung": "Health /api/public/health im Außenwächter"
+  }
+}
