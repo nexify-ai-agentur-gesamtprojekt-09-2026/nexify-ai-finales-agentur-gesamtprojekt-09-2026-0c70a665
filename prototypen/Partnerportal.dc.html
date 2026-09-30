@@ -68,7 +68,7 @@
       </a>
       <span style="display:block;width:1px;height:18px;background:#363A38;flex:0 0 auto"></span>
       <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD;white-space:nowrap">Partnerportal</span>
-      <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px;margin-left:auto;max-width:100%;min-width:0">
         <sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ true }}">
           <span style="display:flex;align-items:center;gap:12px">
             <span style="display:grid;place-items:center;width:32px;height:32px;border-radius:4px;background:#303634;color:#D7FA50;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">{{ partnerInitialen }}</span>
