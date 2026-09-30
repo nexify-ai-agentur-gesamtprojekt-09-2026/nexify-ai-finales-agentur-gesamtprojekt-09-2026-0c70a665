@@ -78,6 +78,12 @@ slack:
   `.github/workflows/issue-triage.yml`, `pr-triage.yml`, `slack-notify.yml`.
 - `tools/github_event_inbox.py` versteht jetzt zusätzlich signierte GitLab-
   Issue-/Merge-Request-Webhooks (`/gitlab`, `X-Gitlab-Token`).
+- Webhook-Inbox als Dienst deployt (`nexify-webhook-inbox.service`,
+  172.18.0.1:8787), Secrets in OpenBao `nexify/data/webhooks`. GitLab-Pfad
+  lokal mit signierter Test-Delivery verifiziert (202 queued, Duplikat 200).
+  Echte GitLab-Zustellung ist durch GitLab-SSRF-Schutz (`Invalid url given`)
+  blockiert und braucht GitLab-Admin; GitHub-Zustellung braucht öffentlichen
+  Eingang (DNS/CF-Freigabe).
 - **Blocker (extern):** `SLACK_WEBHOOK`, Coderabbit-App-Install und ein gültiger
   GitHub-PAT/App-Zugang. Slack-Vollintegration bleibt ohne Webhook vorbereitet,
   nicht aktiv.
