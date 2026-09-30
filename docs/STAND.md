@@ -1,6 +1,6 @@
 # Stand der Dokumentation
 
-> Automatisch erzeugt am 2026-09-30T08:00:52.033Z durch tools/docs-aktualisieren.mjs.
+> Automatisch erzeugt am 2026-09-30T08:24:18.300Z durch tools/docs-aktualisieren.mjs.
 
 - Seiten: 79 Dateien im Manifest
 - Design-Tokens: 76 Werte
