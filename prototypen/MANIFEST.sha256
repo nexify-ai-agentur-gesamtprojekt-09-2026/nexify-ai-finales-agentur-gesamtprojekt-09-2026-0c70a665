@@ -18,7 +18,7 @@ d5816e3be074e3410d08d581ad99cd62acb1af27de22059f6ba329642667b684  ./Nachbarschaf
 9a82ba20d5354b811b0a5ede7ef374bc8001aafe45a9c05818348b889b92b546  ./NeXify AI one.dc.html
 e22b297b56d53f3ea8a8fda76026d3e34d85b7601891d9928ce1be73f4a46e06  ./NeXify API.dc.html
 d11d7208ecabfdfeaa77c2ff4b1d42569bbaf3dddfdd2263eec6ad06a60ba3f3  ./NeXify Designsystem.dc.html
-fac2046cec548829dde9c3e54a6ddbe47b7943967d4cd56f86755f88c536911a  ./NeXify Leitstand.dc.html
+3e67b296f12a6ffbaa26a02f6b014af7f577f2aa4b5320f35543da0154de9835  ./NeXify Leitstand.dc.html
 77b92ea2d9ff1edf52fb836b67b92b67062c762819d7cffe4089ff7e0ae2c0ea  ./NeXify Posteingang.dc.html
 a4c1de6188f4a0bcf1f94e1c4f8aae3b78516e7cc597b922a8842a22622a4415  ./NeXify Shop.dc.html
 fa82726b5b0321f147c2bef84343f2fbdeb4b1b3db9dd54e4d0343306ad5f3ed  ./NeXify Systemkarte.dc.html
@@ -34,7 +34,7 @@ b198ce31157a87750695c7d4902cfcbaafd506a57879d8e0f242643d9ecf51ce  ./Partnerporta
 dfee8f44179d90e9eba432356370ddb44d63273ea4c291dbe243730db1a070db  ./Rechtliches.dc.html
 eecf470f714be65e963dd2acb671ebd6a4d669186c9408d25914feef58c7c3ac  ./Reifenrechner.dc.html
 0838415ea742e1a766a63d59bf452639382305b8e992fb129d62a6d30c24f675  ./TEILEKLAR Shop.dc.html
-75c5102f37d29c2cfabcbc1c7d7bad071cf9c1445a85e12ee53e35b2c6888235  ./Visitenkarte-Pascal-Courbois.dc.html
+4439e6304bfdaec11274a1004b2865e48e5aa1639727a53dfb42cfbf44ec7e70  ./Visitenkarte-Pascal-Courbois.dc.html
 d219eb06ba1c7d7e4c308ed13aa7ec63eec9e89fee1596f6acb235d342100a03  ./Werkstatt-Partnerseite.dc.html
 36e260776b4166417602ec2d540cd0713461e048ea3da49d2566ba6678b3c61e  ./assets/brands/brand-10_ate.png
 414a5f07e70c305ae4040ef19945fbf6bb1a8f9730a49be8fe78790b87464189  ./assets/brands/brand-11_trw.svg
@@ -101,6 +101,7 @@ d33f5cd906adedb8e97f3f76150ea87a56205cc000c4aea009dd6c0ada09a69e  ./assets/nexif
 28931f80f915f2e7c807f04d4a7ae472cf21fe57372bf0ae02dfb6f46ea2bcae  ./assets/part-wiper.png
 f8fc0aceb0c6c1bf293efdccabb55beec4034ad08d30657a4f73710d8655b349  ./assets/source-hero.png
 616e071202b8a4cde248f5f9a3a2dcaa8877c29b1e85b34b15570ba3124fda60  ./assets/workshops.json
+a22abb8627f4790005718a2ce1469971b3d8caa0f24f491fe09eb991dbfcfe75  ./config/prompts/s1-master-orchestrator-1.0.0.md
 f52ae9c02fca7ab44c37f3ff363194fdf81caa20ae63e2fe1f518ed21133185e  ./doc-page.js
 b82c6e98ff2f303887c41b1d6ee5fcd61517715097756fd32fdad990ef6cc13c  ./i18n/cloud-v12.de.json
 b06dbb3d5795ff5e13108875697ae39d84e8af51c1e3818417f84af19cb7ed9f  ./i18n/cloud-v12.json
@@ -131,8 +132,11 @@ e94f28693d78224ee0bcb75f3776bed59182e7d58c476998e7a8bbecb3274097  ./lib/rag.js
 a62f424d4ba03fee776837ea3081b20602d8a3dcdeaa2c7e135ec327f66f9c2f  ./lib/selbstheilung.js
 b8782ba653532decb74e426774b3d71146252390ebc674c761e1bdd4d4f86a61  ./lib/tagrouter.js
 eda5c3c0463ac41fae0df6b002e26de2a0b10bc560ab62deeae3e6634211d01d  ./lib/versand.js
+fb7ea628f517a311d8f6cc0db11b9aa2332461e19811c9ecdbf6b3dc37bb9231  ./manifest.webmanifest
 1ac1186e3dbb4876bd500d34e9ad6845fc2d01ebd2e0e3f833be0927dee17b72  ./myADMIN v2.dc.html
 39280e1f528e331b67ff2b2a30fb9ee302549a2f267cba626e109c8183f59474  ./nx-page.js
 16b22b25d736305e05069066c657389f32686fa67f62e447f869d7d5e087ef0d  ./robots.txt
 0863156f306504ba9ab6cccea20e4672e2e1aa65dfe3eddcb8fa44080b910c12  ./sitemap.xml
 8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe  ./support.js
+fc540f897ae035251424faccb412c7fb2f3b73a523536255a6178ef03c60d4dc  ./sw.js
+7b247a19a03a1432541408e669439ba2968b34af4b6358e976f1b695f0f75679  ./vendor/qrcode.min.js
