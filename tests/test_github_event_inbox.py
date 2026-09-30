@@ -96,9 +96,12 @@ class InboxTests(unittest.TestCase):
         self.assertEqual(self.receive("00000000-0000-0000-0000-000000000002",
                                       kind="pull_request")[0], 202)
         for url in ("http://hooks.slack.com/services/a", "https://evil.com/services/a",
-                    "https://hooks.slack.com.evil.com/services/a"):
+                    "https://hooks.slack.com.evil.com/services/a",
+                    "https://hooks.slack.com/services/a/b/c/extra"):
             with self.assertRaises(ValueError):
                 inbox.dispatch_one(self.db, url, lambda *_: None, NOW)
+        self.assertIsNone(inbox.NoRedirect().redirect_request(
+            None, None, 302, "redirect", {}, "https://example.org/"))
 
 
 if __name__ == "__main__":

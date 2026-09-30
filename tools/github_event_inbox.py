@@ -12,7 +12,7 @@ import sqlite3
 import time
 from datetime import datetime, timezone
 from urllib.parse import urlparse
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 MAX_BODY = 256 * 1024
 DELIVERY = re.compile(r"^[a-fA-F0-9-]{36}$")
@@ -94,15 +94,22 @@ def slack_url(value):
     parsed = urlparse(value)
     if (parsed.scheme != "https" or parsed.hostname != "hooks.slack.com"
             or parsed.port not in (None, 443) or parsed.username or parsed.password
-            or parsed.query or parsed.fragment or not parsed.path.startswith("/services/")):
+            or parsed.query or parsed.fragment
+            or not re.fullmatch(r"/services/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+",
+                                parsed.path)):
         raise ValueError("Slack URL must be an HTTPS hooks.slack.com/services/ URL")
     return value
+
+
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, msg, headers, newurl):
+        return None
 
 
 def post_slack(url, text):
     request = Request(slack_url(url), data=json.dumps({"text": text}).encode(),
                       headers={"Content-Type": "application/json"}, method="POST")
-    with urlopen(request, timeout=8) as response:
+    with build_opener(NoRedirect).open(request, timeout=8) as response:
         if response.status != 200 or response.read(32).strip() != b"ok":
             raise RuntimeError("Slack rejected notification")
 
