@@ -1,0 +1,31 @@
+prototypen/Geschaeftsdokumente-Vorlagen.dc.html
+  s_193fe0f8f108a5::t_ea77dd94a1d755 30
+prototypen/Kundenbroschuere.dc.html
+  s_193fe0f8f108a5::t_e4fa020ad42393 26
+prototypen/MANIFEST.sha256
+  s_193fe0f8f108a5::t_8da738b157837e 8,11,30,36-38
+prototypen/Partner-Broschuere.dc.html
+  s_193fe0f8f108a5::t_2dcd76b9e707e8 26
+"prototypen/TEILEKLAR Shop.dc.html"
+  s_193fe0f8f108a5::t_f2516f4c679afd 66
+prototypen/Visitenkarte-Pascal-Courbois.dc.html
+  s_193fe0f8f108a5::t_1df9d92bacca5d 21
+prototypen/Werkstatt-Partnerseite.dc.html
+  s_193fe0f8f108a5::t_1ead0f014b59bd 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "11c50cafd91bc1cf54bdeb9eab5c742fdf942029",
+  "prompts": {},
+  "sessions": {
+    "s_193fe0f8f108a5": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "50fc0527-2be8-44b1-b52c-8e29d7b9f148",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
