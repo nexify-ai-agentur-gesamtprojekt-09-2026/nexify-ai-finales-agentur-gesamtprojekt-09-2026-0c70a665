@@ -1,0 +1,19 @@
+prototypen/Partner-werden.dc.html
+  s_fc1b3a31f40b2f::t_b01576777f2c96 178
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dee640e08790aef3c84a822fc2dd02d939693bf9",
+  "prompts": {},
+  "sessions": {
+    "s_fc1b3a31f40b2f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "553c8b1f-c85e-4cdc-8a83-91561dc590d3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}
