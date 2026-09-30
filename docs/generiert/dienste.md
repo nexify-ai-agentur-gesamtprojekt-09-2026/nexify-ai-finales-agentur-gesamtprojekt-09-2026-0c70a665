@@ -1,6 +1,6 @@
 # Dienste- und Verbindungsverzeichnis
 
-> Automatisch erzeugt am 2026-09-29 aus `config/`. Nicht von Hand ändern – Quelle ändern.
+> Automatisch erzeugt am 2026-09-30 aus `config/`. Nicht von Hand ändern – Quelle ändern.
 
 | Dienst | Schicht | Rolle | Prüfung | Status | Soll | Belegt am |
 |---|---|---|---|---|---|---|
