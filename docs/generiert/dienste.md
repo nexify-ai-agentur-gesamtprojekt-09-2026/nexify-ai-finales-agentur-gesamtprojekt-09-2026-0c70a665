@@ -23,7 +23,7 @@
 | gitlab | Betrieb | Code, CI, Merge Requests, Doku-Pipeline | GET /api/v4/version | betrieb | vorhanden | 2026-09-30 |
 | openbao | Sicherheit | Geheimnisse | GET /v1/sys/health | betrieb | vorhanden | 2026-09-30 |
 | langfuse | undefined | undefined | – | soll | Profil langfuse in deploy/compose.yml, config/langfuse.json | – |
-| github | Betrieb | undefined | GET /installation/repositories | unbelegt | vorhanden | – |
+| github | Betrieb | undefined | GET /installation/repositories | betrieb | vorhanden | 2026-09-30 |
 | slack | Kommunikation | undefined | POST Incoming Webhook | unbelegt | vorhanden | – |
 | coderabbit | Qualitaet | undefined | GitHub-App-Install auf Ziel-Repo | unbelegt | vorhanden | – |
 

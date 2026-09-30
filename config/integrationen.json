@@ -180,11 +180,11 @@
       "zweck": "Code-Ablage, Coderabbit-Review, GitHub-App 3865469 (Installation 135674457)",
       "schicht": "Betrieb",
       "pruefung": "GET /installation/repositories",
-      "status": "unbelegt",
+      "status": "betrieb",
       "soll": "vorhanden",
-      "belegt_am": null,
+      "belegt_am": "2026-09-30",
       "geheimnis": "openbao:nexify/data/github:app_private_key",
-      "hinweis": "Zugang verloren: App-Install 135674457 ohne Ziel-Repo, beide PAT 401 — Owner muss Zugang erneuern"
+      "hinweis": "Repo neu angelegt (Composio, Owner nexifyai-dev), App-Install 135674457 deckt Repo jetzt, Mirror GitLab->GitHub gruen"
     },
     {
       "id": "slack",
