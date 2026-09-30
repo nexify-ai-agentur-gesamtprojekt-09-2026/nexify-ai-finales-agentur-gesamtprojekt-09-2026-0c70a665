@@ -1,0 +1,24 @@
+# NeXify finale Agentur-Gesamtloesung · GitLab CI · nur lokale Schranken
+stages: [pruefen]
+
+default:
+  image: node:22-alpine
+
+ds-audit:
+  stage: pruefen
+  script:
+    - node tools/ds-audit-cli.js
+    - test "$(node tools/ds-audit-cli.js | grep -c '^Fehler\t')" = "0"
+
+manifest:
+  stage: pruefen
+  image: alpine:3.20
+  script:
+    - cd prototypen && sha256sum -c MANIFEST.sha256
+
+json-konfig:
+  stage: pruefen
+  image: node:22-alpine
+  script:
+    - node -e "const fs=require('fs'),p=require('path');const r=[];(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
+    - echo "alle config/*.json gültig"
