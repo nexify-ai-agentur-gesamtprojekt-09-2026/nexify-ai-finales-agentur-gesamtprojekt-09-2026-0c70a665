@@ -1,0 +1,53 @@
+prototypen/Anmeldung.dc.html
+  s_9f8e39a4ffc625::t_a1b6dd8c781977 25
+prototypen/Batterie-Berater.dc.html
+  s_9f8e39a4ffc625::t_88b14f1ce138a3 24
+prototypen/Fitment-Checker.dc.html
+  s_9f8e39a4ffc625::t_6632da71a44051 24
+prototypen/Geschaeftsdokumente-Vorlagen.dc.html
+  s_9f8e39a4ffc625::t_b75e6b71f3f3b8 30
+prototypen/Konto.dc.html
+  s_9f8e39a4ffc625::t_04ec3d9e7ee033 25
+prototypen/Kundenbroschuere.dc.html
+  s_9f8e39a4ffc625::t_c6f335b28a7149 26
+prototypen/Kundenportal.dc.html
+  s_9f8e39a4ffc625::t_8b0e61c67f3858 25
+prototypen/Nachbarschaftskunden-Portal.dc.html
+  s_9f8e39a4ffc625::t_e1e0e143e22687 25
+prototypen/NeXify-AI-Companion.dc.html
+  s_9f8e39a4ffc625::t_90b8b20e5bc19d 24
+prototypen/NeXifyAI-Local-SEO-Muster.dc.html
+  s_9f8e39a4ffc625::t_eb14dd25afa2f2 24
+prototypen/NeXifyAI-Wissenshub-Artikel.dc.html
+  s_9f8e39a4ffc625::t_0c69bf855c7886 24
+prototypen/Partner-Broschuere.dc.html
+  s_9f8e39a4ffc625::t_f212a44cac00dd 26
+prototypen/Partner-werden.dc.html
+  s_9f8e39a4ffc625::t_5b0063287d2b4d 24
+prototypen/Partnerportal.dc.html
+  s_9f8e39a4ffc625::t_f1d6aee2b9abbf 25
+prototypen/Reifenrechner.dc.html
+  s_9f8e39a4ffc625::t_3ed917904e9cb8 24
+"prototypen/TEILEKLAR Shop.dc.html"
+  s_9f8e39a4ffc625::t_d9652e96a9bfa3 17,66
+prototypen/Visitenkarte-Pascal-Courbois.dc.html
+  s_9f8e39a4ffc625::t_11820f8bac2e2a 21
+prototypen/Werkstatt-Partnerseite.dc.html
+  s_9f8e39a4ffc625::t_f1fe9f9baf5895 24,28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "45fffaaf6728bdd073dfd2b4b37bb46f35a07635",
+  "prompts": {},
+  "sessions": {
+    "s_9f8e39a4ffc625": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "8d3df671-af98-421d-b346-0a1589323389",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
