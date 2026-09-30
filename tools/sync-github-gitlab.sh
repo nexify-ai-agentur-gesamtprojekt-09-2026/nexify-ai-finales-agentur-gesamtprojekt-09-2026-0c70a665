@@ -39,5 +39,5 @@ if [ -z "$MRIID" ] || [ "$MRIID" = "0" ]; then
     --data-urlencode "title=Sync: GitHub nach GitLab (Autopilot)" --max-time 15 | python3 -c 'import json,sys;print(json.load(sys.stdin).get("iid",0))' 2>/dev/null)
 fi
 [ "$MRIID" != "0" ] && curl -sS -X PUT "http://127.0.0.1:8922/api/v4/projects/$GL_PROJECT_ID/merge_requests/$MRIID/merge" \
-  -H "PRIVATE-TOKEN: $GL" --data-urlencode "should_remove_source_branch=true" --max-time 20 >/dev/null
+  -H "PRIVATE-TOKEN: $GL" --data-urlencode "should_remove_source_branch=true" --data-urlencode "squash=true" --max-time 20 >/dev/null
 log "Sync: tree $GL_TREE -> $GH_TREE (MR #$MRIID)"
