@@ -1,0 +1,22 @@
+prototypen/sw.js
+  s_670ce9fa2cfdf1::t_c1a2678485976f 2
+  s_670ce9fa2cfdf1::t_1dd96fe1de7861 4-5
+"prototypen/TEILEKLAR Shop.dc.html"
+  s_670ce9fa2cfdf1::t_7ebe64bef09dfc 63-64,267,3026,3032,3038,3044,3050,3056
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ca185dfcb110e575fc00bf4dfa59635faab3d9f5",
+  "prompts": {},
+  "sessions": {
+    "s_670ce9fa2cfdf1": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "acd5eaca-fe32-467d-a2e3-ca81d151cf38",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
