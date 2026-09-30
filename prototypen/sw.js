@@ -1,8 +1,8 @@
 // TEILEKLAR Service Worker — App-Installation und Offline-Grundbetrieb
-const CACHE = 'teileklar-v3';
+const CACHE = 'teileklar-v4';
 const CORE = ['./', './TEILEKLAR%20Shop.dc.html', './support.js', './image-slot.js', './manifest.webmanifest',
-  './assets/hero-fitment.png', './assets/part-brake.png', './assets/part-brake-rear.png', './assets/part-battery.png',
-  './assets/part-oil.png', './assets/part-wiper.png', './assets/part-wiper-rear.png', './assets/icon-192.png', './assets/icon-512.png'];
+  './assets/hero-fitment.jpg', './assets/part-brake.jpg', './assets/part-brake-rear.jpg', './assets/part-battery.jpg',
+  './assets/part-oil.jpg', './assets/part-wiper.jpg', './assets/part-wiper-rear.jpg', './assets/icon-192.png', './assets/icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => Promise.allSettled(CORE.map((u) => c.add(u)))).then(() => self.skipWaiting()));
