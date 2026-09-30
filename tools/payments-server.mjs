@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Revolut-Webhook-Endpoint: HMAC verifizieren -> Order prüfen -> idempotente Gutschrift -> Journal.
 import { createServer } from 'node:http';
-import { readFileSync, appendFileSync, existsSync, mkdirSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { revolutVerifyWebhook } from './revolut.mjs';
@@ -9,15 +9,6 @@ import { revolutVerifyWebhook } from './revolut.mjs';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const PORT = process.env.NX_PAY_PORT || 8909;
 const JOURNAL = join(root, 'docs/generiert/zahlungen-journal.jsonl');
-
-function secret() {
-  for (const l of readFileSync('/etc/nexifyai/revolut-merchant.env', 'utf8').split('\n')) {
-    const x = l.trim();
-    if (x.startsWith('REVOLUT_API_SECRET_KEY=')) return x.split('=', 2)[1].trim().replace(/^["']|["']$/g, '');
-    if (x.startsWith('REVOLUT_SECRET_KEY=')) return x.split('=', 2)[1].trim().replace(/^["']|["']$/g, '');
-  }
-  return '';
-}
 
 createServer((req, res) => {
   if (req.url === '/health') { res.writeHead(200, {'content-type':'application/json'}); return res.end('{"status":"ok","dienst":"payments"}'); }
@@ -27,7 +18,8 @@ createServer((req, res) => {
     req.on('end', async () => {
       const sig = req.headers['revolut-signature'] || '';
       const ts = req.headers['revolut-request-timestamp'] || '';
-      const ok = revolutVerifyWebhook(sig, ts, raw, secret());
+      // Secret wird bereits einmalig beim Modul-Import von revolut.mjs geladen/gecacht (kein Sync-Read pro Request).
+      const ok = revolutVerifyWebhook(sig, ts, raw);
       let status = 401, out = { ok };
       if (ok) {
         try {
