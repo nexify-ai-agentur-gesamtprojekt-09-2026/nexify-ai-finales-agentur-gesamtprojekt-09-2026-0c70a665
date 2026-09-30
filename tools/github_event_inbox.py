@@ -217,18 +217,20 @@ def dispatch_one(db, url, send=post_slack, now=None):
     return "sent"
 
 
-def run_server(path, gh_secret, gl_secret, repository):
+def run_server(path, gh_secret, gl_secret, gh_repository, gl_repository):
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
             if self.path == "/github":
                 secret = gh_secret
                 process = receive
+                repository = gh_repository
             elif self.path == "/gitlab":
                 if not gl_secret:
                     self.send_error(503, "GitLab webhook not configured")
                     return
                 secret = gl_secret
                 process = receive_gitlab
+                repository = gl_repository
             else:
                 self.send_error(404)
                 return
@@ -242,8 +244,9 @@ def run_server(path, gh_secret, gl_secret, repository):
             self.end_headers()
             self.wfile.write(message.encode())
 
-    # Bound to loopback only; a separately approved reverse proxy must provide TLS.
-    ThreadingHTTPServer(("127.0.0.1", 8787), Handler).serve_forever()
+    # Standardmaessig nur loopback; NX_WEBHOOK_BIND setzt die Bind-Adresse.
+    bind = os.environ.get("NX_WEBHOOK_BIND", "127.0.0.1")
+    ThreadingHTTPServer((bind, 8787), Handler).serve_forever()
 
 
 if __name__ == "__main__":
@@ -251,13 +254,14 @@ if __name__ == "__main__":
     parser.add_argument("mode", choices=("serve", "dispatch"))
     parser.add_argument("--db", required=True, help="private persistent SQLite path (not inside repository)")
     args = parser.parse_args()
-    repo = os.environ.get("NX_GITHUB_REPOSITORY", "")
+    gh_repo = os.environ.get("NX_GITHUB_REPOSITORY", "")
+    gl_repo = os.environ.get("NX_GITLAB_REPOSITORY", gh_repo)
     gh_secret = os.environ.get("NX_GITHUB_WEBHOOK_SECRET", "")
     gl_secret = os.environ.get("NX_GITLAB_WEBHOOK_SECRET", "")
-    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) or len(gh_secret) < 32:
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", gh_repo) or len(gh_secret) < 32:
         parser.error("NX_GITHUB_REPOSITORY and a webhook secret of at least 32 characters required")
     if args.mode == "serve":
-        run_server(args.db, gh_secret, gl_secret, repo)
+        run_server(args.db, gh_secret, gl_secret, gh_repo, gl_repo)
     else:
         url = os.environ.get("NX_SLACK_WEBHOOK_URL", "")
         print(dispatch_one(connect(args.db), slack_url(url)))
