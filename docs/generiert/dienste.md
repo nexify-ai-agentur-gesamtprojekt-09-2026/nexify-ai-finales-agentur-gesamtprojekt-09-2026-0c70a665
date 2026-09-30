@@ -20,10 +20,10 @@
 | librechat | Oberfläche | Vorbild der WebUI; kein eigener Betrieb, Muster übernommen | – | Referenz | – | – |
 | myadmin-shell | Oberfläche | Admin-Oberfläche (myADMIN.dc.html) | – | unbelegt | vorhanden | – |
 | monitoring | Betrieb | Uptime, Metriken, Alarme (Wächter + zweite Ebene) | Heartbeat | unbelegt | vorhanden | – |
-| gitlab | Betrieb | Code, CI, Merge Requests, Doku-Pipeline | GET /api/v4/version | unbelegt | vorhanden | – |
-| openbao | Sicherheit | Geheimnisse | GET /v1/sys/health | unbelegt | vorhanden | – |
+| gitlab | Betrieb | Code, CI, Merge Requests, Doku-Pipeline | GET /api/v4/version | betrieb | vorhanden | 2026-09-30 |
+| openbao | Sicherheit | Geheimnisse | GET /v1/sys/health | betrieb | vorhanden | 2026-09-30 |
 | langfuse | undefined | undefined | – | soll | Profil langfuse in deploy/compose.yml, config/langfuse.json | – |
-| github | Betrieb | undefined | GET /installation/repositories | betrieb | vorhanden | 2026-09-30 |
+| github | Betrieb | undefined | GET /installation/repositories | unbelegt | vorhanden | – |
 | slack | Kommunikation | undefined | POST Incoming Webhook | unbelegt | vorhanden | – |
 | coderabbit | Qualitaet | undefined | GitHub-App-Install auf Ziel-Repo | unbelegt | vorhanden | – |
 
