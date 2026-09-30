@@ -5,11 +5,55 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   ds-audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Designsystem-Audit
         run: node tools/ds-audit-cli.js
+
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Manifest prüfen
+        run: cd prototypen && sha256sum -c MANIFEST.sha256
+
+  json-konfig:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Config-JSON validieren
+        run: |
+          node -e "const fs=require('fs'),p=require('path');const r=[];(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
+          echo "alle config/*.json gültig"
+
+  jeff-gate:
+    runs-on: ubuntu-latest
+    needs: [ds-audit, manifest, json-konfig]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Jeff-Gate (optional)
+        env:
+          NX_ORAKEL_ENDPOINT: ${{ secrets.NX_ORAKEL_ENDPOINT }}
+          NX_ORAKEL_KEY: ${{ secrets.NX_ORAKEL_KEY }}
+          NX_ORAKEL_MODEL: ${{ secrets.NX_ORAKEL_MODEL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${NX_ORAKEL_ENDPOINT:-}" ] || [ -z "${NX_ORAKEL_KEY:-}" ]; then
+            echo "Jeff-Gate übersprungen: NX_ORAKEL_ENDPOINT/NX_ORAKEL_KEY nicht gesetzt"
+            exit 0
+          fi
+          python3 tools/jeff-gate.py \
+            --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" \
+            --risiko "niedrig (nur Prüfschranken, nichts deployt)" \
+            --rollback "Commit zurücknehmen"
