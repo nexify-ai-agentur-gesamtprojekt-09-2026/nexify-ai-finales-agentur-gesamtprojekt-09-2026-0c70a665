@@ -19,7 +19,6 @@
   "weiterleitungen": {
     "/start": "/",
     "/index.html": "/",
-    "/login": "/Anmeldung.dc.html",
     "/favicon.ico": "/assets/nexify-ai/nexify-ai-signet.svg",
     "/impressum": "/Rechtliches.dc.html#impressum",
     "/datenschutz": "/Rechtliches.dc.html#datenschutz",
@@ -40,6 +39,27 @@
   "praefixWeiterleitungen": {
     "/standort/": "/local-seo"
   },
+  "$kommentar_nichtVerfuegbareRouten": "Anmeldeprototypen sind erst nach Implementierung echter serverseitiger Authentifizierung verfügbar; auch der beworbene Kurzpfad /login bleibt bis dahin ausdrücklich gesperrt.",
+  "nichtVerfuegbareRouten": [
+    "/login",
+    "/abmelden"
+  ],
+  "$kommentar_nichtOeffentlich": "Bis zur echten Backend-Authentifizierung dürfen geschützte Konten, interne Arbeitsflächen und interne Unterlagen nicht als statische Dateien ausgeliefert werden. nginx antwortet für diese Pfade mit 503 statt Mock-Dashboards oder Scheinsitzungen preiszugeben.",
+  "nichtOeffentlich": [
+    "Affiliate-Portal.dc.html",
+    "Anmeldung.dc.html",
+    "Konto.dc.html",
+    "Kundenportal.dc.html",
+    "Kundenwege.dc.html",
+    "Geschaeftsdokumente-Vorlagen.dc.html",
+    "Nachbarschaftskunden-Portal.dc.html",
+    "NeXify Leitstand.dc.html",
+    "NeXify Posteingang.dc.html",
+    "NeXify Systemkarte.dc.html",
+    "NeXify Workspace.dc.html",
+    "Partnerportal.dc.html",
+    "myADMIN v2.dc.html"
+  ],
   "$kommentar_sitemap": "Nicht in die Sitemap: Seiten mit robots=noindex, Bausteine (NX-*), E-Mail-Vorlagen, interne Vorlagen (data-nx-intern) und Dateien, die bereits über eine Kurz-URL erreichbar sind.",
   "nichtInSitemap": [
     "NX-Header.dc.html",
@@ -48,6 +68,7 @@
     "E-Mail-Marketing-Newsletter.html",
     "E-Mail-Transaktional-Angebot.html",
     "index.html",
+    "503.html",
     "404.html"
   ]
 }

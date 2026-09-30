@@ -1,4 +1,5 @@
 fb6bba341b737eead585bbddc87a4cc0c0a832b18532f2938a21734b450332a6  ./404.html
+d8a1e9e1db3ed961110bd18ef9818858a6f11ec8beac12707c7efbc31e359877  ./503.html
 b4c0f279e9b5b96f3c241c5692c0d1125c996e2dcef3a458accbddd1d253dd06  ./API-Rechtliches.dc.html
 98bf8744414bc86778958a7de4421d73751c80c5708dfd1539c1ea7f9d469e69  ./Affiliate-Portal.dc.html
 b0d817d2245a65593dc87096ffa91672bf043daacc364ff58468f9b4036e4b65  ./Anmeldung.dc.html
@@ -9,20 +10,20 @@ e6a01b4773c84d06c9334fe10bd591ac17c32b4c53a873b56387995f1525a748  ./Fitment-Chec
 16d8f5723d324f618521164713d678d8bd610ce54016811810489c5d2117a527  ./Geschaeftsdokumente-Vorlagen.dc.html
 b5863a3a314dabed83dbae9d76e3f09c0fe763e1b75966aacd78ab6a5e2d2b2b  ./Investoren-PowerPoint.dc.html
 7b4ce7f7c575bccd1b891c7fa403db64c8894492fde1cbef258fbf0b5855e69d  ./Konto.dc.html
-b6801d73531b2d284b7f98059a422b70fa314c721e9c9049e893021d8f9bbd2e  ./Kundenbroschuere.dc.html
-eaf5162a1b2c16b1c55dd2c8c28192af9c878b541ed57c3033542514f921363a  ./Kundenportal.dc.html
+f747b305bea306979515107bc0c96cf4585ca4de392f3b916b794685ac4c5826  ./Kundenbroschuere.dc.html
+ec60638cceec5076492edbe217a0a80b7eff5c0b8feacde7e5918c66ba148e1c  ./Kundenportal.dc.html
 c7267949f8c58f20103ec5351ffaf8b18bd6d3c9d2d926960566b4e9c1d224d1  ./Kundenwege.dc.html
 60c362a5bed636e3703599155d3acd317d7bf55b8617f6eba84725e585d9006b  ./NX-Footer.dc.html
-647dc68e31d045a6c89f79bf0fb977743c43f775e96c8f9039010c16d64f4466  ./NX-Header.dc.html
-450a89b7b1e3e97240201e57b6bc84d8d6aaa39a4659641a3f23ad87a94e225d  ./NX-Intern.dc.html
-1acf9326dd70bc51977226825dbd254d719f224183d0cf08dd8fc78eadbe81fb  ./Nachbarschaftskunden-Portal.dc.html
+87182c6bef9ab9189fecca4e2f1217cfc82bda5b80e1e3ea5d4f92cfc1d8d4a7  ./NX-Header.dc.html
+91be2e331015c0ede1d22ca6099114d1a0293954cf997244d184f63d8fc18366  ./NX-Intern.dc.html
+b03671d7134989b0bc83bef4f616783d4b045d76a34609418e95b40f6fd65bb5  ./Nachbarschaftskunden-Portal.dc.html
 9a82ba20d5354b811b0a5ede7ef374bc8001aafe45a9c05818348b889b92b546  ./NeXify AI one.dc.html
 e22b297b56d53f3ea8a8fda76026d3e34d85b7601891d9928ce1be73f4a46e06  ./NeXify API.dc.html
 57c1de3554f89f1471b2eaf3d0e64271ffd9fe03bf143e39c7449a41975601df  ./NeXify Designsystem.dc.html
 7a7258119319150a83dfb6535c2ac35db55853eb5c2a4497775b63794e5f9301  ./NeXify Leitstand.dc.html
 ccdd17777fa9b0cda62ff045444d420c11a2511d3826bfc05220dda88d8ffca6  ./NeXify Posteingang.dc.html
 a4c1de6188f4a0bcf1f94e1c4f8aae3b78516e7cc597b922a8842a22622a4415  ./NeXify Shop.dc.html
-09e096b1e671555545876d81fafb436b3b8f48ce3bfd09f50ec6de0c2720ae7a  ./NeXify Systemkarte.dc.html
+d26cf261cefd71668c1ec3dfac755102c4f4c4b85f2d335918bd8b372cf95ac0  ./NeXify Systemkarte.dc.html
 8d180501da3659196205be7308bc883ebdffd84f3b5d58b49c742b643bde28d1  ./NeXify Workspace.dc.html
 75d4cbe7a6473e5cc6392e71ec82502d5c5adb90f910dc47c24e7284deb41e78  ./NeXify-AI-Companion.dc.html
 1d3162569fffc991c26dd13045b347ed4e370664f01a9608c2568c62d6867ebb  ./NeXifyAI Cloud v12.dc.html
@@ -30,8 +31,8 @@ a4c1de6188f4a0bcf1f94e1c4f8aae3b78516e7cc597b922a8842a22622a4415  ./NeXify Shop.
 fb08e2264274720481d5d7e781cb5be3b4669727028c98234ddc1b644aa03a90  ./NeXifyAI-Wissenshub-Artikel.dc.html
 37878319850d6307c7f62269eeada958284e398f4ec27ac2eaf9dded73cd0525  ./Partner-Broschuere.dc.html
 73caaf55c60f4f09e21b0c380fbea6bcac452fa7a8013d4baaae3ef7b5291266  ./Partner-PowerPoint Werkstatt.dc.html
-21f40907fd6759d4cefc39e5faa6490c0b38e9291ba9364e05a2609ec1c92439  ./Partner-werden.dc.html
-cda63855a4de8aa275fdf15fdf148f3fc221745d64277fd150a9d132b54f6c77  ./Partnerportal.dc.html
+0555b71ffa329c389a8d1ca0ec84bce9e4aa763f20839b5bccd75323cd73e8a1  ./Partner-werden.dc.html
+4668b175c6e3542762ab860789107e1622292214582edda13dba0dc9304434df  ./Partnerportal.dc.html
 dfee8f44179d90e9eba432356370ddb44d63273ea4c291dbe243730db1a070db  ./Rechtliches.dc.html
 b262d1c4e4abcecdc288849793c2a5417f29919c40971f34ea387cf54b0f4e33  ./Reifenrechner.dc.html
 0838415ea742e1a766a63d59bf452639382305b8e992fb129d62a6d30c24f675  ./TEILEKLAR Shop.dc.html
@@ -138,8 +139,8 @@ eda5c3c0463ac41fae0df6b002e26de2a0b10bc560ab62deeae3e6634211d01d  ./lib/versand.
 fb7ea628f517a311d8f6cc0db11b9aa2332461e19811c9ecdbf6b3dc37bb9231  ./manifest.webmanifest
 d2310f5a83946fb14f82dab0b141d2dc0e12dd7674fee39e36268cc73af121cd  ./myADMIN v2.dc.html
 39280e1f528e331b67ff2b2a30fb9ee302549a2f267cba626e109c8183f59474  ./nx-page.js
-ee8cca8854fa4005bf4ccf115f518b9214bf751e2e1a9d515aa21aa78ad4c07e  ./robots.txt
-d37f6ddbc5e59fcd78338cc1ce530291bd7a1a4a55b992c6ae3361d7e5b8af36  ./sitemap.xml
+f7655bba9deda77250d176f8fa3c960a22faa31bc2b2966ec4feecfc71ebb292  ./robots.txt
+3a4b476d036747662bda98b4e2c94f33632d5f8ebea4cfb5bcec3d175181ff06  ./sitemap.xml
 8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe  ./support.js
 fc540f897ae035251424faccb412c7fb2f3b73a523536255a6178ef03c60d4dc  ./sw.js
 7b247a19a03a1432541408e669439ba2968b34af4b6358e976f1b695f0f75679  ./vendor/qrcode.min.js

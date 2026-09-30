@@ -66,11 +66,36 @@ liefern die Repo-404-Seite mit HTTP 404. Die Sitemap enthält nur indexierbare,
 Änderungen benötigen Serverzugriff und bleiben hinter dem dokumentierten
 Abnahme-Gate (Freigaben E1/E3/E4/E5/E6/E12, Auth-Bypass beheben, Secrets
 bereitstellen). Bis zum Cutover bleibt das alte Live-Docroot unverändert.
-Der `/login`-Pfad führt zur vorhandenen Anmeldeseite, stellt aber keine
-Backend-Authentifizierung bereit. Der in E-Mail-Vorlagen verwendete
-`/abmelden`-Pfad braucht einen serverseitigen, tokenisierten Abmelde-Handler;
-die statische Website darf keine erfolgreiche Abmeldung vortäuschen.
+Die `/login`- und `/abmelden`-Pfade antworten bis zur echten
+Backend-Authentifizierung bzw. zum tokenisierten Abmelde-Handler bewusst mit
+HTTP 503; sie dürfen nicht auf statische Anmeldeprototypen zeigen. Die
+statische Website darf weder Anmeldung noch Abmeldung als erfolgreich
+vortäuschen.
 Gesetzliche Texte unter `/nl/` und `/fr/` werden nicht automatisch übersetzt.
+
+### Portal- und interne Flächen bis zur Auth-Implementierung gesperrt
+
+Partner-, Kunden- und Nachbarschaftsportale starten im Prototyp abgemeldet;
+Anmelde- und Registrierungsfelder sind deaktiviert und als nicht verfügbar
+gekennzeichnet. Die Systemkarte simuliert keine Sitzung mehr über
+`sessionStorage`. Das sind keine Ersatzlösungen für Authentifizierung.
+
+Der generierte nginx-Schnipsel antwortet für die in
+`config/routen.json:nichtOeffentlich` genannten statischen Portal-, Admin-,
+Workspace- und internen Dokumentdateien mit HTTP 503 und `Retry-After`. Die
+entsprechenden Dateien dürfen erst nach Implementierung und Sicherheitsprüfung
+eines serverseitigen Authentifizierungs-/Autorisierungsschutzes wieder
+ausgeliefert werden. `/login` und `/abmelden` nutzen bis zur Implementierung
+ebenfalls 503; nginx liefert dann intern `prototypen/503.html` aus, ohne den
+HTTP-Status zu ändern. Die Fehlerseite ist noindex und nicht direkt abrufbar.
+Nach dem Docroot-Cutover müssen mindestens `/login`, `/abmelden`, die
+Anmeldedatei und alle Dateien aus `nichtOeffentlich` HTTP 503 liefern; danach
+muss nginx mit `nginx -t` geprüft und neu geladen und der Cloudflare-Cache
+geleert werden. Die Regel wirkt nicht auf den aktuell noch alten Live-Docroot.
+Echte Vor- und Nach-Login-E2E-Prüfungen sind blockiert,
+solange Auth-Backend, Testkonten und Rollenmodell fehlen. Die öffentliche
+Kundenbroschüre bleibt über `/kundenbroschuere` erreichbar und ist daher
+bewusst nicht Teil der Sperrliste.
 
 Live-Probe 30.09.2026: Die veröffentlichte Sitemap hat 49 URLs; 13 liefern
 HTTP 200, 36 liefern 404 (Stadt- und Rechtsrouten, darunter de/nl/fr).
@@ -85,3 +110,8 @@ Die aktuelle Repo-Version der betroffenen Seiten lief lokal ohne
 JavaScript-Ausnahmen und ohne fehlende Bilder. Diese Live-Abweichungen werden
 erst durch Docroot-Cutover plus passende CSP-/Asset-Konfiguration behoben;
 `/abmelden` bleibt bis zur Implementierung des Backend-Handlers blockiert.
+
+Ergänzende Live-Probe beim Portal-Auth-Fix: `/` antwortet mit HTTP 200,
+`/login` mit HTTP 404 und `/Kundenportal.dc.html` mit HTTP 200. Die 200-Antwort
+des Portals bestätigt, dass die nachfolgend beschriebenen nginx-Sperren noch
+nicht auf Produktion aktiv sind.

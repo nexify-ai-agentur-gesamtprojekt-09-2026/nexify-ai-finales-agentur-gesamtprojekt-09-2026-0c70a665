@@ -13,9 +13,10 @@ export const DOCROOT = path.join(ROOT, cfg.docroot);
 const enc = f => '/' + f.split('/').map(encodeURIComponent).join('/');
 const dec = p => { try { return decodeURIComponent(p); } catch { return null; } };
 
-// Liefert { status: 200, datei } | { status: 301, ziel } | { status: 404 } für einen URL-Pfad (ohne Query).
+// Liefert { status: 200, datei } | { status: 301, ziel } | { status: 404 | 503 }.
 export function aufloesen(pfad) {
   let p = pfad.length > 1 ? pfad.replace(/\/+$/, '') : pfad;
+  if (cfg.nichtVerfuegbareRouten.includes(p)) return { status: 503 };
   if (cfg.seiten[p]) return { status: 200, datei: cfg.seiten[p] };
   if (cfg.weiterleitungen[p]) return { status: 301, ziel: cfg.weiterleitungen[p] };
   for (const [pre, ziel] of Object.entries(cfg.praefixWeiterleitungen)) if (p.startsWith(pre)) return { status: 301, ziel };
@@ -31,6 +32,7 @@ export function aufloesen(pfad) {
   }
   const rel = dec(p.slice(1));
   if (rel === null || rel.split('/').includes('..')) return { status: 404 };
+  if (cfg.nichtOeffentlich.includes(rel)) return { status: 503, datei: rel };
   const abs = path.join(DOCROOT, rel);
   if (rel && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
     const kurz = Object.entries(cfg.seiten).find(([, f]) => f === rel);
@@ -67,14 +69,27 @@ export function sitemapXml() {
 }
 
 export function robotsTxt() {
-  return `User-agent: *\nAllow: /\nDisallow: /lib/\nSitemap: ${cfg.host}/sitemap.xml\n`;
+  const robotPath = p => '/' + p.split('/').filter(Boolean).map(encodeURIComponent).join('/');
+  const kurzGesperrt = cfg.nichtVerfuegbareRouten.flatMap(r => [r, ...cfg.sprachpraefixe.map(sp => sp + r)]);
+  const gesperrt = [...kurzGesperrt, ...cfg.nichtOeffentlich.map(f => '/' + f)].map(robotPath);
+  return `User-agent: *\nAllow: /\nDisallow: /lib/\n${gesperrt.map(p => `Disallow: ${p}`).join('\n')}\nSitemap: ${cfg.host}/sitemap.xml\n`;
 }
 
 export function nginxConf() {
   const q = s => `"${s.replace(/"/g, '\\"')}"`;
   const z = ['# Erzeugt von tools/routen.mjs aus config/routen.json – nicht von Hand ändern.',
     '# Einbinden im server-Block für www.nexifyai.cloud (root = Docroot prototypen/):  include /etc/nginx/snippets/nexifyai-routen.conf;', ''];
-  z.push('error_page 404 /404.html;', '');
+  z.push('error_page 404 /404.html;', 'error_page 503 =503 /503.html;', 'location = /503.html { internal; add_header Retry-After 3600 always; }', '');
+  for (const route of cfg.nichtVerfuegbareRouten) {
+    z.push(`location = ${route} { add_header Retry-After 3600 always; return 503; }`);
+    z.push(`location = ${route}/ { add_header Retry-After 3600 always; return 503; }`);
+  }
+  for (const sp of cfg.sprachpraefixe) for (const route of cfg.nichtVerfuegbareRouten) {
+    z.push(`location = ${sp}${route} { add_header Retry-After 3600 always; return 503; }`);
+    z.push(`location = ${sp}${route}/ { add_header Retry-After 3600 always; return 503; }`);
+  }
+  for (const datei of cfg.nichtOeffentlich) z.push(`location = ${q('/' + datei)} { add_header Retry-After 3600 always; return 503; }`);
+  z.push('');
   for (const [r, f] of Object.entries(cfg.seiten)) z.push(`location = ${r} { try_files ${q('/' + f)} =404; }`);
   for (const [r, f] of Object.entries(cfg.seiten)) {
     if (r === '/' || r === '/favicon.ico') continue;
@@ -123,6 +138,19 @@ export function pruefen() {
   for (const [r, d] of Object.entries(cfg.seiten)) muss(fs.existsSync(path.join(DOCROOT, d)), `Route ${r}: Datei ${d} fehlt`);
   for (const [r, z] of Object.entries(cfg.weiterleitungen)) { const e = zielPruefen(z); muss(!e, `Weiterleitung ${r}: ${e}`); }
   for (const [r, z] of Object.entries(cfg.praefixWeiterleitungen)) { const e = zielPruefen(z); muss(!e, `Präfix ${r}: ${e}`); }
+  for (const d of cfg.nichtOeffentlich) {
+    muss(fs.existsSync(path.join(DOCROOT, d)), `Geschützte Datei ${d} fehlt`);
+    muss(!Object.values(cfg.seiten).includes(d), `Geschützte Datei ${d} wird über eine öffentliche Kurzroute ausgeliefert`);
+    muss(aufloesen('/' + enc(d).slice(1)).status === 503, `Geschützte Datei ${d} muss bis zur Backend-Authentifizierung 503 liefern`);
+  }
+  for (const r of cfg.nichtVerfuegbareRouten) {
+    muss(aufloesen(r).status === 503, `Nicht verfügbare Route ${r} muss HTTP 503 liefern`);
+    muss(aufloesen(r + '/').status === 503, `Nicht verfügbare Route ${r}/ muss HTTP 503 liefern`);
+    for (const sp of cfg.sprachpraefixe) {
+      muss(aufloesen(sp + r).status === 503, `Nicht verfügbare Route ${sp + r} muss HTTP 503 liefern`);
+      muss(aufloesen(sp + r + '/').status === 503, `Nicht verfügbare Route ${sp + r}/ muss HTTP 503 liefern`);
+    }
+  }
   // Alle Altpfade der Live-Sitemap enden auf 200 (direkt oder nach genau einer Weiterleitung).
   for (const alt of ALT_SITEMAP) {
     const r = aufloesen(alt);
@@ -130,7 +158,8 @@ export function pruefen() {
     else muss(r.status === 200, `Altpfad ${alt} liefert ${r.status}`);
   }
   const login = aufloesen('/login');
-  muss(login.status === 301 && zielPruefen(login.ziel) === null, '/login muss zur vorhandenen Anmeldung führen');
+  muss(login.status === 503, '/login muss bis zur Implementierung echter Backend-Authentifizierung gesperrt bleiben');
+  muss(aufloesen('/abmelden').status === 503, '/abmelden darf ohne tokenisierten Backend-Handler keinen Erfolg vortäuschen');
   const favicon = aufloesen('/favicon.ico');
   muss(favicon.status === 301 && favicon.ziel === '/assets/nexify-ai/nexify-ai-signet.svg', '/favicon.ico muss auf das vorhandene SVG führen');
   // Startseite ist die echte Seite, nicht der Lader.
@@ -141,10 +170,25 @@ export function pruefen() {
   // Sitemap/robots auf dem öffentlichen Host, nur indexierbare Seiten, synchron mit dem Generator.
   const sm = fs.readFileSync(path.join(DOCROOT, 'sitemap.xml'), 'utf8');
   muss(sm === sitemapXml(), 'prototypen/sitemap.xml ist nicht aktuell (node tools/routen.mjs schreiben)');
+  muss(sitemapUrls().includes('/kundenbroschuere'), 'öffentliche Kundenbroschüre muss unter ihrer kanonischen Kurz-URL in der Sitemap stehen');
   const rb = fs.readFileSync(path.join(DOCROOT, 'robots.txt'), 'utf8');
   muss(rb === robotsTxt(), 'prototypen/robots.txt ist nicht aktuell (node tools/routen.mjs schreiben)');
   const ng = path.join(ROOT, 'infra/nginx/nexifyai-routen.conf');
-  muss(fs.existsSync(ng) && fs.readFileSync(ng, 'utf8') === nginxConf(), 'infra/nginx/nexifyai-routen.conf ist nicht aktuell (node tools/routen.mjs schreiben)');
+  const generatedNginx = nginxConf();
+  muss(fs.existsSync(ng) && fs.readFileSync(ng, 'utf8') === generatedNginx, 'infra/nginx/nexifyai-routen.conf ist nicht aktuell (node tools/routen.mjs schreiben)');
+  muss(generatedNginx.includes('error_page 503 =503 /503.html;') && generatedNginx.includes('location = /503.html { internal; add_header Retry-After 3600 always; }'), 'nginx muss die interne, noindex 503-Seite ausliefern');
+  muss(fs.existsSync(path.join(DOCROOT, '503.html')) && /name=["']robots["'][^>]*content=["'][^"']*noindex/.test(fs.readFileSync(path.join(DOCROOT, '503.html'), 'utf8')), '503.html muss vorhanden und noindex sein');
+  const nginxLocations = [...generatedNginx.matchAll(/^location\s+(=|\^~)?\s*("[^"]+"|\S+)/gm)].map(m => `${m[1] || ''} ${m[2].replace(/^"|"$/g, '')}`);
+  muss(new Set(nginxLocations).size === nginxLocations.length, 'nginx-Konfiguration enthält doppelte location-Regeln');
+  for (const r of cfg.nichtVerfuegbareRouten) {
+    muss(generatedNginx.includes(`location = ${r} { add_header Retry-After 3600 always; return 503; }`), `nginx-Konfiguration sperrt ${r} nicht`);
+    muss(generatedNginx.includes(`location = ${r}/ { add_header Retry-After 3600 always; return 503; }`), `nginx-Konfiguration sperrt ${r}/ nicht`);
+    for (const sp of cfg.sprachpraefixe) {
+      muss(generatedNginx.includes(`location = ${sp + r} { add_header Retry-After 3600 always; return 503; }`), `nginx-Konfiguration sperrt ${sp + r} nicht`);
+      muss(generatedNginx.includes(`location = ${sp + r}/ { add_header Retry-After 3600 always; return 503; }`), `nginx-Konfiguration sperrt ${sp + r}/ nicht`);
+    }
+  }
+  for (const d of cfg.nichtOeffentlich) muss(nginxConf().includes(`location = "${'/' + d}" { add_header Retry-After 3600 always; return 503; }`), `nginx-Konfiguration sperrt ${d} nicht`);
   for (const loc of [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1])) {
     muss(loc.startsWith(cfg.host + '/'), `Sitemap-URL ${loc} liegt nicht auf ${cfg.host}`);
     const r = aufloesen(new URL(loc).pathname);
@@ -166,12 +210,15 @@ export function seitenPruefen() {
   const lies = d => fs.readFileSync(path.join(DOCROOT, d), 'utf8');
   for (const d of dateien) {
     const h = lies(d);
+    if (/angemeldet="\{\{\s*true\s*\}\}"|\bloggedIn:\s*true/.test(h) && !cfg.nichtOeffentlich.includes(d)) {
+      f.push(`${d}: statischer Anmeldestatus muss serverseitig geschützt sein`);
+    }
     // Interne Kurz-URLs und lokale Dateien/Assets müssen tatsächlich auflösbar sein.
     for (const m of h.matchAll(/href=["']([^"'{}]+)["']/g)) {
       const raw = m[1].split(/[?#]/)[0];
       if (raw.startsWith('/') && !/^(?:\/\/)/.test(raw)) {
         const r = aufloesen(raw);
-        if (r.status !== 200 && r.status !== 301) f.push(`${d}: interne Route ${raw} liefert ${r.status}`);
+        if (![200, 301, 503].includes(r.status)) f.push(`${d}: interne Route ${raw} liefert ${r.status}`);
       }
     }
     for (const m of h.matchAll(/(?:href|src|from)=["']([^"'#?:{}$]+\.(?:html|js|json|css|svg|png|webp|woff2|ico|jpe?g|gif))(?:[#?][^"']*)?["']/gi)) {
@@ -193,6 +240,26 @@ export function seitenPruefen() {
   if (!newsletter.includes('https://www.nexifyai.cloud/#preise') || !/id=["']preise["']/.test(start)) f.push('Newsletter-CTA muss auf den vorhandenen Rechner #preise zeigen');
   const transaktional = lies('E-Mail-Transaktional-Angebot.html');
   if (!transaktional.includes('https://www.nexifyai.cloud/login')) f.push('Angebots-E-Mail muss die kanonische /login-Route verwenden');
+  for (const d of ['Kundenportal.dc.html', 'Partnerportal.dc.html', 'Nachbarschaftskunden-Portal.dc.html']) {
+    const h = lies(d);
+    if (!/loggedIn:\s*false/.test(h)) f.push(`${d}: muss standardmäßig abgemeldet starten`);
+    if (/doLogin\(e\)\s*\{[^}]*loggedIn:\s*true/.test(h)) f.push(`${d}: Anmelde-Handler darf ohne Backend keine Sitzung freischalten`);
+    if (/angemeldet="\{\{\s*true\s*\}\}"/.test(h)) f.push(`${d}: Header darf nicht als angemeldet erscheinen`);
+    if (!h.includes('keine Zugangsdaten eingeben')) f.push(`${d}: Hinweis auf noch nicht verbundene Authentifizierung fehlt`);
+    if (/data-api-endpoint="auth\//.test(h)) f.push(`${d}: nicht vorhandenes Auth-Backend darf nicht als API-Endpunkt ausgewiesen werden`);
+    const authForms = [...h.matchAll(/<form onSubmit="\{\{ doLogin \}\}"[^>]*>[\s\S]*?<\/form>/g)].map(m => m[0]);
+    if (!authForms.length) f.push(`${d}: keine Auth-Formulare für den Pre-Login-Test gefunden`);
+    for (const form of authForms) {
+      if (/<input\b(?![^>]*\bdisabled\b)[^>]*>/.test(form)) f.push(`${d}: Auth-Eingaben müssen bis zum Backend deaktiviert sein`);
+      if (/<button\b[^>]*type="submit"(?![^>]*\bdisabled\b)[^>]*>/.test(form)) f.push(`${d}: Auth-Submit muss bis zum Backend deaktiviert sein`);
+    }
+  }
+  const systemkarte = lies('NeXify Systemkarte.dc.html');
+  if (/sessionStorage/.test(systemkarte)) f.push('Systemkarte: sessionStorage darf keine interne Anmeldung simulieren');
+  if (/setState\(\{\s*ok:\s*true/.test(systemkarte)) f.push('Systemkarte: kein clientseitiger Login-Schalter zulässig');
+  const kundenbroschuere = lies('Kundenbroschuere.dc.html');
+  if (/angemeldet="\{\{\s*true\s*\}\}"/.test(kundenbroschuere)) f.push('Kundenbroschüre: öffentliche Route darf keinen angemeldeten Nutzer vortäuschen');
+  if (/data-nx-intern/.test(kundenbroschuere)) f.push('Kundenbroschüre: öffentliche Marketingseite darf nicht als intern markiert sein');
   const shop = lies('TEILEKLAR Shop.dc.html');
   const routes = (shop.match(/const ANSICHT = \{([^}]+)\}/) || [])[1] || '';
   for (const id of ['teile', 'fahrzeug', 'garage', 'standorte', 'werkstatt', 'klarwissen']) {

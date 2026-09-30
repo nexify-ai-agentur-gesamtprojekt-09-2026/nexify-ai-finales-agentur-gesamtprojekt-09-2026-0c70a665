@@ -56,7 +56,7 @@
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),radial-gradient(900px 500px at 96% 72%,rgba(167,139,250,.06),transparent 62%),#242826">
-  <dc-import name="NX-Header" marke="cloud" nav="cloud" active="kundenportal" kontext="Kundenportal" cta="keine" angemeldet="{{ true }}" rolle="unternehmen" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+  <dc-import name="NX-Header" marke="cloud" nav="cloud" active="kundenportal" kontext="Kundenportal" cta="keine" angemeldet="{{ loggedIn }}" rolle="unternehmen" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
 
 
   <span id="inhalt" tabindex="-1" aria-hidden="true"></span>
@@ -86,18 +86,19 @@
         </div>
         <div style="padding:48px 40px;background:#242826">
           <p style="margin:0 0 24px;font-size:12px;color:#BCC1BD">Ihre Zugangsdaten haben Sie per E-Mail mit Ihrem ersten Angebot erhalten.</p>
+          <p role="note" style="margin:0 0 16px;padding:12px;border:1px solid #FFC24A;border-radius:8px;color:#FFC24A;font-size:13px;line-height:1.5">Die Anmeldung ist noch nicht mit einem Authentifizierungsdienst verbunden. Dies ist eine Oberflächenvorschau; bitte keine Zugangsdaten eingeben.</p>
           <!-- TODO(BACKEND): POST auth/login (bcrypt/JWT, gemeinsamer Unterbau aller drei Portale) -->
-          <form onSubmit="{{ doLogin }}" data-api-endpoint="auth/login" style="display:grid;gap:16px">
+          <form onSubmit="{{ doLogin }}" style="display:grid;gap:16px">
             <label style="display:block">
               <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">E-Mail</span>
-              <input type="email" placeholder="name@firma.de" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              <input type="email" placeholder="name@firma.de" required="" disabled="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
             </label>
             <label style="display:block">
               <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Passwort</span>
-              <input type="password" placeholder="••••••••" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              <input type="password" placeholder="••••••••" required="" disabled="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
             </label>
-            <button type="submit" style="font-family:Geist,Helvetica,Arial,sans-serif;height:48px;margin-top:4px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Anmelden</button>
-            <a href="#" style="font-size:12px;text-align:center" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Passwort vergessen?</a>
+            <button type="submit" disabled="" style="font-family:Geist,Helvetica,Arial,sans-serif;height:48px;margin-top:4px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:not-allowed" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Anmeldung nicht verfügbar</button>
+            <span style="font-size:12px;text-align:center;color:#BCC1BD">Passwort zurücksetzen ist derzeit nicht verfügbar.</span>
           </form>
         </div>
       </div>
@@ -286,7 +287,7 @@
 class Component extends DCLogic {
   state = {
     dialog: null, dialogText: "", dialogFehler: null, toast: null,
-    loggedIn: true,
+    loggedIn: false,
     view: "uebersicht",
     firmenname: "Mustermann GmbH",
     angebote: [
@@ -301,7 +302,7 @@ class Component extends DCLogic {
   };
 
   setView(v) { return () => this.setState({ view: v }); }
-  doLogin(e) { if (e && e.preventDefault) e.preventDefault(); this.setState({ loggedIn: true }); }
+  doLogin(e) { if (e && e.preventDefault) e.preventDefault(); }
   doLogout() { this.setState({ loggedIn: false }); }
   dokument(titel, nr, zeilen, art) {
     var esc = function (x) { return String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
