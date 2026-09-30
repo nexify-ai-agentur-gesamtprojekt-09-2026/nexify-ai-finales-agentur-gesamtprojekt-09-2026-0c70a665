@@ -27,7 +27,7 @@ cd "$REPO"
 git fetch "https://x-access-token:$GH@github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026.git" main 2>/dev/null
 LOCAL=$(git rev-parse FETCH_HEAD)
 GH_TREE=$(git rev-parse "$LOCAL^{tree}")
-git fetch "http://oauth2:$GL@127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git" main:refs/remotes/gl/main 2>/dev/null || true
+git fetch "http://oauth2:$GL@127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git" +main:refs/remotes/gl/main 2>/dev/null || true
 GL_TREE=$(git rev-parse refs/remotes/gl/main^{tree} 2>/dev/null || echo "")
 if [ "$GH_TREE" = "$GL_TREE" ]; then log "in Sync (tree $GH_TREE)"; exit 0; fi
 
