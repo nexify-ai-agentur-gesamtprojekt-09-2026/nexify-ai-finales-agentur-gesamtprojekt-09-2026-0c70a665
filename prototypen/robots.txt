@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /lib/
-Sitemap: https://vorschau.nexifyai.cloud/sitemap.xml
+Sitemap: https://www.nexifyai.cloud/sitemap.xml

@@ -38,7 +38,7 @@
 </style>
 </helmet>
 <dc-import name="NX-Header" marke="cloud" nav="cloud" active="" kontext="Posteingang" cta="keine" angemeldet="{{ true }}" rolle="intern" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
-<div style="display:flex;flex-direction:column;min-height:calc(100vh - 48px);background:#242826">
+<div id="inhalt" style="display:flex;flex-direction:column;min-height:calc(100vh - 48px);background:#242826">
   <header style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;min-height:64px;padding:8px 16px;border-bottom:1px solid #363A38;background:#1E2220">
     <a href="NeXify Workspace.dc.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 8px;border-radius:8px;color:#FFFFFF;text-decoration:none" style-hover="background:#303634" style-focus="outline:2px solid #D7FA50;outline-offset:2px"><img src="assets/nexify-ai/nexify-ai-signet.svg" alt="" aria-hidden="true" style="display:block;width:20px;height:20px" /><strong style="font-size:16px;font-weight:700;letter-spacing:-.03em">Ne<span style="color:#D7FA50">X</span>ify Posteingang</strong></a>
     <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">mail@nexifyai.cloud · einzige Adresse</span>
@@ -114,7 +114,7 @@
 
   <sc-if value="{{ vDienste }}" hint-placeholder-val="{{ false }}">
     <div style="width:min(1100px,calc(100% - 48px));margin:0 auto;padding:32px 0;display:grid;gap:16px">
-      <p style="margin:0;font-size:15px;line-height:1.6;color:#BCC1BD;max-width:54ch">Alle Dienste hängen an einem Gateway. Die Oberfläche spricht nie direkt mit Fremddiensten. Quelle: <a href="config/integrationen.json">config/integrationen.json</a> · Doku daraus: <a href="docs/generiert/dienste.md">dienste.md</a>, <a href="docs/generiert/mcp.md">mcp.md</a></p>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:#BCC1BD;max-width:54ch">Alle Dienste hängen an einem Gateway. Die Oberfläche spricht nie direkt mit Fremddiensten. Quellen im Repository: config/integrationen.json · docs/generiert/dienste.md · docs/generiert/mcp.md</p>
       <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
         <sc-for list="{{ dienste }}" as="d" hint-placeholder-count="9"><div style="display:grid;gap:8px;align-content:start;padding:20px 20px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><div style="display:flex;align-items:center;gap:8px"><span style="display:block;width:8px;height:8px;border-radius:50%;background:{{ d.dot }}"></span><strong style="flex:1 1 auto;font-size:15px">{{ d.id }}</strong><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">{{ d.schicht }}</span></div><span style="font-size:13px;line-height:1.5;color:#BCC1BD">{{ d.rolle }}</span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:{{ d.dot }}">{{ d.status }}</span></div></sc-for>
       </div>

@@ -70,7 +70,7 @@
   </aside>
   </sc-if>
 
-  <main style="min-width:0;box-sizing:border-box;padding:clamp(24px,4vw,48px)">
+  <main id="inhalt" style="min-width:0;box-sizing:border-box;padding:clamp(24px,4vw,48px)">
     <header style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px">
       <div style="display:flex;align-items:flex-end;gap:16px">
       <button onClick="{{ toggleNav }}" aria-expanded="{{ navAria }}" aria-controls="myadmin-nav" aria-label="{{ navLabel }}" title="{{ navLabel }}" style="flex:0 0 auto;display:grid;place-items:center;width:44px;height:44px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);color:#FFFFFF;font-family:'Geist Mono',monospace;font-size:18px;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ navIcon }}</button>
@@ -720,7 +720,7 @@ const STATUS = ["Neu", "In Arbeit", "Vorschau", "Abnahme", "Live"];
 
 const S = (s) => ({ Entwurf: "#D7FA50", "Oberfläche": "#FFC24A", Druck: "#6FE3CF", Archiv: "#9CA29E", Werkzeug: "#A78BFA" }[s] || "#BCC1BD");
 const BESTAND = [
-  { t: "Agentur-Website", items: [["NeXifyAI Cloud v10", "NeXifyAI Cloud v10.dc.html", "Entwurf"], ["Partner werden", "Partner-werden.dc.html", "Entwurf"], ["Werkstatt-Partnerseite", "Werkstatt-Partnerseite.dc.html", "Entwurf"], ["Local-SEO-Muster", "NeXifyAI-Local-SEO-Muster.dc.html", "Entwurf"], ["Wissenshub-Artikel", "NeXifyAI-Wissenshub-Artikel.dc.html", "Entwurf"]] },
+  { t: "Agentur-Website", items: [["NeXifyAI Cloud v12", "NeXifyAI Cloud v12.dc.html", "Entwurf"], ["Partner werden", "Partner-werden.dc.html", "Entwurf"], ["Werkstatt-Partnerseite", "Werkstatt-Partnerseite.dc.html", "Entwurf"], ["Local-SEO-Muster", "NeXifyAI-Local-SEO-Muster.dc.html", "Entwurf"], ["Wissenshub-Artikel", "NeXifyAI-Wissenshub-Artikel.dc.html", "Entwurf"]] },
   { t: "Portale", items: [["Kundenportal", "Kundenportal.dc.html", "Oberfläche"], ["Partnerportal", "Partnerportal.dc.html", "Oberfläche"], ["Nachbarschaftskunden-Portal", "Nachbarschaftskunden-Portal.dc.html", "Oberfläche"], ["Anmeldung", "Anmeldung.dc.html", "Oberfläche"], ["Konto", "Konto.dc.html", "Oberfläche"], ["NeXify AI Companion", "NeXify-AI-Companion.dc.html", "Oberfläche"]] },
   { t: "TEILEKLAR", items: [["Shop", "TEILEKLAR Shop.dc.html", "Oberfläche"], ["Fitment-Checker", "Fitment-Checker.dc.html", "Oberfläche"], ["Reifenrechner", "Reifenrechner.dc.html", "Oberfläche"], ["Batterie-Berater", "Batterie-Berater.dc.html", "Oberfläche"]] },
   { t: "Druck & Präsentation", items: [["Kundenbroschüre", "Kundenbroschuere.dc.html", "Druck"], ["Partner-Broschüre", "Partner-Broschuere.dc.html", "Druck"], ["Partner-PowerPoint", "Partner-PowerPoint Werkstatt.dc.html", "Druck"], ["Investoren-PowerPoint", "Investoren-PowerPoint.dc.html", "Druck"], ["Geschäftsdokumente", "Geschaeftsdokumente-Vorlagen.dc.html", "Druck"], ["Visitenkarte", "Visitenkarte-Pascal-Courbois.dc.html", "Druck"]] },

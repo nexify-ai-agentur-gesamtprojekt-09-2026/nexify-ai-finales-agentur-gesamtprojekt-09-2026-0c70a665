@@ -1,0 +1,53 @@
+{
+  "$kommentar": "Veröffentlichte Routen der Website (Docroot prototypen/). Quelle für tools/routen.mjs (Sitemap, nginx-Schnipsel, Prüfung) und tools/static-server.mjs. Kurz-URLs übernehmen die bereits live etablierten Pfade von www.nexifyai.cloud; Altpfade des Vorgängerauftritts leiten dauerhaft (301) auf die aktuelle Seite. Stand 30.09.2026.",
+  "host": "https://www.nexifyai.cloud",
+  "docroot": "prototypen",
+  "seiten": {
+    "/": "NeXifyAI Cloud v12.dc.html",
+    "/shop": "TEILEKLAR Shop.dc.html",
+    "/partner-werden": "Partner-werden.dc.html",
+    "/werkstatt-partner": "Werkstatt-Partnerseite.dc.html",
+    "/reifenrechner": "Reifenrechner.dc.html",
+    "/batterie-berater": "Batterie-Berater.dc.html",
+    "/fitment-checker": "Fitment-Checker.dc.html",
+    "/wissenshub": "NeXifyAI-Wissenshub-Artikel.dc.html",
+    "/local-seo": "NeXifyAI-Local-SEO-Muster.dc.html",
+    "/partner-broschuere": "Partner-Broschuere.dc.html",
+    "/kundenbroschuere": "Kundenbroschuere.dc.html",
+    "/visitenkarte": "Visitenkarte-Pascal-Courbois.dc.html"
+  },
+  "weiterleitungen": {
+    "/start": "/",
+    "/index.html": "/",
+    "/login": "/Anmeldung.dc.html",
+    "/favicon.ico": "/assets/nexify-ai/nexify-ai-signet.svg",
+    "/impressum": "/Rechtliches.dc.html#impressum",
+    "/datenschutz": "/Rechtliches.dc.html#datenschutz",
+    "/agb": "/Rechtliches.dc.html#agb",
+    "/avv": "/Rechtliches.dc.html#avv",
+    "/widerruf": "/Rechtliches.dc.html#widerruf",
+    "/cookie": "/Rechtliches.dc.html#cookies",
+    "/ki-hinweise": "/Rechtliches.dc.html#ki-hinweis",
+    "/barrierefreiheit": "/Rechtliches.dc.html#barrierefreiheit",
+    "/security": "/Rechtliches.dc.html",
+    "/standort": "/local-seo"
+  },
+  "$kommentar_praefixe": "Sprachpräfixe /nl und /fr: der Rest des Pfads wird wie ohne Präfix aufgelöst und dauerhaft dorthin geleitet (Sprache wird auf der Seite über die Markt-/Sprachwahl umgeschaltet; Rechtstexte werden nicht automatisch übersetzt, E12). Städteseiten /standort/* ohne aktiven Partner sind laut config/pseo.json unzulässig (Doorway) und leiten auf die Sammelseite.",
+  "sprachpraefixe": [
+    "/nl",
+    "/fr"
+  ],
+  "praefixWeiterleitungen": {
+    "/standort/": "/local-seo"
+  },
+  "$kommentar_sitemap": "Nicht in die Sitemap: Seiten mit robots=noindex, Bausteine (NX-*), E-Mail-Vorlagen, interne Vorlagen (data-nx-intern) und Dateien, die bereits über eine Kurz-URL erreichbar sind.",
+  "nichtInSitemap": [
+    "NX-Header.dc.html",
+    "NX-Footer.dc.html",
+    "NX-Intern.dc.html",
+    "E-Mail-Marketing-Newsletter.html",
+    "E-Mail-Transaktional-Angebot.html",
+    "index.html",
+    "404.html"
+  ]
+}

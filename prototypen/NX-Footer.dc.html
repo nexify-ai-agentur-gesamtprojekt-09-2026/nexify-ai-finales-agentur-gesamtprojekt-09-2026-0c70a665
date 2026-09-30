@@ -154,7 +154,7 @@ const T = {
     demo: "Prototyp-Ansicht: Bestellungen, Zahlungen und Termine sind nicht verbindlich. Produktdaten, Preise und Verfügbarkeiten sind Musterdaten.",
     b2b: "Angebote richten sich ausschließlich an Unternehmen (B2B).",
     colServices: "Leistungen", colParts: "Teile & Werkstatt", colPortals: "Portale", colLegal: "Recht", colContact: "Kontakt",
-    l: { beratung: "Erstgespräch", entwicklung: "Individuelle Entwicklung", fertig: "Fertiglösungen", preise: "Preise & Rechner", prozess: "Prozess", referenzen: "Referenzen", faq: "FAQ", wissen: "Wissenshub", companion: "Companion-Signet",
+    l: { beratung: "Erstgespräch", entwicklung: "Individuelle Entwicklung", fertig: "Fertiglösungen", preise: "Preise & Rechner", prozess: "Prozess", faq: "FAQ", wissen: "Wissenshub", companion: "Companion-Signet",
          alleTeile: "Alle Teile", fahrzeug: "Fahrzeug wählen", werkstatt: "Werkstattpartner", garage: "Meine Garage", standorte: "Standorte", reifen: "Reifenrechner", batterie: "Batterie-Berater", passung: "Passungs-Prüfung",
          api: "NeXify AI API", nxImpressum: "Impressum NeXify AI", nxDatenschutz: "Datenschutz NeXify AI", nxAgb: "AGB NeXify AI", apiRecht: "API-Bedingungen", kundenportal: "Kundenportal", partnerportal: "Partnerportal", gutschein: "Gutschein einlösen", partnerWerden: "Partner werden", landingpage: "Werkstatt-Landingpage",
          impressum: "Impressum", agb: "AGB", datenschutz: "Datenschutz", widerruf: "Widerruf", versand: "Versand & Zahlung", altteile: "Altteile & Batteriepfand", cookies: "Cookie-Einstellungen", barrierefrei: "Barrierefreiheit" }
@@ -168,7 +168,7 @@ const T = {
     demo: "Prototype-weergave: bestellingen, betalingen en afspraken zijn niet bindend. Productgegevens, prijzen en voorraad zijn voorbeeldgegevens.",
     b2b: "Aanbiedingen zijn uitsluitend voor ondernemingen (B2B).",
     colServices: "Diensten", colParts: "Onderdelen & garage", colPortals: "Portalen", colLegal: "Juridisch", colContact: "Contact",
-    l: { beratung: "Kennismakingsgesprek", entwicklung: "Maatwerkontwikkeling", fertig: "Kant-en-klare oplossingen", preise: "Prijzen & calculator", prozess: "Werkwijze", referenzen: "Referenties", faq: "Veelgestelde vragen", wissen: "Kennisbank", companion: "Companion-signet",
+    l: { beratung: "Kennismakingsgesprek", entwicklung: "Maatwerkontwikkeling", fertig: "Kant-en-klare oplossingen", preise: "Prijzen & calculator", prozess: "Werkwijze", faq: "Veelgestelde vragen", wissen: "Kennisbank", companion: "Companion-signet",
          alleTeile: "Alle onderdelen", fahrzeug: "Voertuig kiezen", werkstatt: "Garagepartners", garage: "Mijn garage", standorte: "Locaties", reifen: "Reifencalculator", batterie: "Accu-adviseur", passung: "Pasvormcontrole",
          api: "NeXify AI API", nxImpressum: "Colofon NeXify AI", nxDatenschutz: "Privacy NeXify AI", nxAgb: "Voorwaarden NeXify AI", apiRecht: "API-voorwaarden", kundenportal: "Klantportaal", partnerportal: "Partnerportaal", gutschein: "Tegoedbon inwisselen", partnerWerden: "Partner worden", landingpage: "Garage-landingspagina",
          impressum: "Colofon", agb: "Voorwaarden", datenschutz: "Privacy", widerruf: "Herroeping", versand: "Verzending & betaling", altteile: "Oude onderdelen & accuborg", cookies: "Cookie-instellingen", barrierefrei: "Toegankelijkheid" }
@@ -182,7 +182,7 @@ const T = {
     demo: "Vue prototype : commandes, paiements et rendez-vous ne sont pas contractuels. Données produits, prix et disponibilités sont des exemples.",
     b2b: "Offres réservées aux entreprises (B2B).",
     colServices: "Prestations", colParts: "Pièces & garage", colPortals: "Portails", colLegal: "Mentions légales", colContact: "Contact",
-    l: { beratung: "Premier entretien", entwicklung: "Développement sur mesure", fertig: "Solutions prêtes à l'emploi", preise: "Tarifs & calculateur", prozess: "Déroulé", referenzen: "Références", faq: "Questions fréquentes", wissen: "Base de connaissances", companion: "Signet Companion",
+    l: { beratung: "Premier entretien", entwicklung: "Développement sur mesure", fertig: "Solutions prêtes à l'emploi", preise: "Tarifs & calculateur", prozess: "Déroulé", faq: "Questions fréquentes", wissen: "Base de connaissances", companion: "Signet Companion",
          alleTeile: "Toutes les pièces", fahrzeug: "Choisir le véhicule", werkstatt: "Garages partenaires", garage: "Mon garage", standorte: "Sites", reifen: "Calculateur pneus", batterie: "Conseil batterie", passung: "Vérification compatibilité",
          api: "API NeXify AI", nxImpressum: "Mentions légales NeXify AI", nxDatenschutz: "Confidentialité NeXify AI", nxAgb: "CGV NeXify AI", apiRecht: "Conditions API", kundenportal: "Portail client", partnerportal: "Portail partenaire", gutschein: "Utiliser le bon", partnerWerden: "Devenir partenaire", landingpage: "Page garage",
          impressum: "Mentions légales", agb: "CGV", datenschutz: "Confidentialité", widerruf: "Rétractation", versand: "Livraison & paiement", altteile: "Pièces usagées & consigne batterie", cookies: "Préférences cookies", barrierefrei: "Accessibilité" }
@@ -264,8 +264,7 @@ class Component extends DCLogic {
           link("entwicklung", t.l.entwicklung, CLOUD + "#leistungen"),
           link("fertig", t.l.fertig, CLOUD + "#leistungen"),
           link("preise", t.l.preise, CLOUD + "#preise"),
-          link("prozess", t.l.prozess, CLOUD + "#prozess"),
-          link("referenzen", t.l.referenzen, CLOUD + "#referenzen"),
+          link("prozess", t.l.prozess, CLOUD + "#ablauf"),
           link("faq", t.l.faq, CLOUD + "#faq"),
           link("wissen", t.l.wissen, "NeXifyAI-Wissenshub-Artikel.dc.html"),
           link("companion", t.l.companion, "NeXify-AI-Companion.dc.html"),

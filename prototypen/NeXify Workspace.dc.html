@@ -97,7 +97,7 @@
   </aside>
   </sc-if>
 
-  <main style="position:relative;display:flex;flex-direction:column;flex:1 1 auto;min-width:0;background:#242826">
+  <main id="inhalt" style="position:relative;display:flex;flex-direction:column;flex:1 1 auto;min-width:0;background:#242826">
     <header style="display:flex;align-items:center;gap:8px;min-width:0;min-height:64px;padding:0 24px;overflow:hidden;border-bottom:1px solid #363A38">
       <sc-if value="{{ navClosed }}" hint-placeholder-val="{{ false }}">
         <button onClick="{{ toggleNav }}" aria-label="Seitenleiste öffnen" style="display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:8px;background:transparent;color:#BCC1BD;cursor:pointer" style-hover="background:#303634;color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M9 4v16" /></svg></button>

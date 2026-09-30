@@ -8,14 +8,19 @@ const alle = new Set(await readdir("."));
 const seiten = [...alle].filter((f) => f.endsWith(".dc.html") && !ERSETZT.test(f)).sort();
 const text = Object.fromEntries(await Promise.all(seiten.map(async (f) => [f, await readFile(f, "utf8")])));
 
-// Einsprungziele je Seite: Schlüssel aus const ANSICHT = {…} und const RECHT = […]; sonst id-Attribute
+// Einsprungziele: statische IDs und IDs/Ansichten, die erst vom DC-Runtime erzeugt werden.
 const ziele = {};
 for (const [f, t] of Object.entries(text)) {
   const a = (t.match(/const ANSICHT = \{([^}]*)\}/) || [])[1], r = (t.match(/const RECHT = \[([^\]]*)\]/) || [])[1];
   const s = new Set([...t.matchAll(/\bid="([\w-]+)"/g)].map((m) => m[1]));
   if (a) for (const m of a.matchAll(/(\w+):/g)) s.add(m[1]);
   if (r) for (const m of r.matchAll(/"([\w-]+)"/g)) s.add(m[1]);
-  ziele[f] = { s, einsprung: !!(a || r) };
+  const blockA = (t.match(/const A = \[([\s\S]*?)\n\s*\];/) || [])[1];
+  if (blockA) for (const m of blockA.matchAll(/\[\s*"([\w-]+)"\s*,/g)) s.add(m[1]);
+  for (const m of t.matchAll(/\[\s*([^\]]+)\]\.includes\(h\)/g)) {
+    for (const id of m[1].matchAll(/"([\w-]+)"/g)) s.add(id[1]);
+  }
+  ziele[f] = { s, einsprung: !!(a || r || blockA || s.size) };
 }
 const konst = (t, n) => (t.match(new RegExp("const " + n + ' = "([^"]+)"')) || [])[1];
 const bef = [];

@@ -10,6 +10,11 @@ ds-audit:
     - node tools/ds-audit-cli.js
     - test "$(node tools/ds-audit-cli.js | grep -c '^Fehler\t')" = "0"
 
+routen:
+  stage: pruefen
+  script:
+    - node tools/routen.mjs pruefen
+
 manifest:
   stage: pruefen
   image: alpine:3.20
@@ -26,7 +31,7 @@ json-konfig:
 jeff-gate:
   stage: jeff
   image: python:3.12-alpine
-  needs: ["ds-audit", "manifest", "json-konfig"]
+  needs: ["ds-audit", "manifest", "json-konfig", "routen"]
   script:
     - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
 

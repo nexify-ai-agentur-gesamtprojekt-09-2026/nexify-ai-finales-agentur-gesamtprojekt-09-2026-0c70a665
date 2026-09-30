@@ -49,7 +49,7 @@
     <span style="display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 12px;border:1px solid #363A38;border-radius:999px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD"><span style="display:block;width:8px;height:8px;border-radius:50%;background:{{ kernDot }}"></span>{{ kernLabel }}</span>
   </header>
 
-  <main style="flex:1 1 auto;width:min(1200px,calc(100% - 48px));margin:0 auto;padding:24px 0 48px;display:grid;gap:24px;align-content:start">
+  <main id="inhalt" style="flex:1 1 auto;width:min(1200px,calc(100% - 48px));margin:0 auto;padding:24px 0 48px;display:grid;gap:24px;align-content:start">
 
     <sc-if value="{{ tRegeln }}" hint-placeholder-val="{{ true }}">
       <section data-screen-label="Leitstand – Regelprüfung" style="display:grid;gap:16px">
@@ -306,7 +306,7 @@ const KERNE = [
   ["lib/rechenkern.js", "Preise, Steuer, Guthaben, Journal"], ["lib/tagrouter.js", "#tag → Ablauf, #stopp"], ["lib/langlauf.js", "Läufe über Tage, Lease, Budget"],
   ["lib/posteingang.js", "Eingang, Zuordnung, KI-Hinweis"], ["lib/regelwerk.js", "Regeln als Schranke"], ["lib/lernschleife.js", "Signal → Lernform, Gate, Canary"], ["lib/gedaechtnis.js", "Gedächtnis: Arten, Konflikte, Vergessen"], ["lib/ki-muster.js", "Hybride Suche, Belege, Prompt-Versionen"], ["lib/betriebskennzahlen.js", "DORA, Kosten, Schuldbuch"], ["lib/entscheidungen.js", "Entscheidungs-Postfach"], ["lib/rag.js", "RAG: Sync, Routing, Güte"], ["lib/prompt-cache.js", "Prompt-Caching"], ["lib/normpruefung.js", "Normprüfung gerendert"],
 ];
-const PROJEKT = ["config/integrationen.json", "config/llm-verbindungen.json", "config/langlauf.json", "config/regelwerk.json", "config/lernen.json", "config/mcp-server.json", "NeXify Workspace.dc.html", "NeXify Posteingang.dc.html", "Kundenportal.dc.html", "Partnerportal.dc.html", "Nachbarschaftskunden-Portal.dc.html", "myADMIN v2.dc.html", "NeXify-AI-Companion.dc.html", "NeXifyAI Cloud v10.dc.html", "TEILEKLAR Shop.dc.html", "lib/rechenkern.js", "lib/langlauf.js", "lib/posteingang.js", "lib/lernschleife.js"];
+const PROJEKT = ["config/integrationen.json", "config/llm-verbindungen.json", "config/langlauf.json", "config/regelwerk.json", "config/lernen.json", "config/mcp-server.json", "NeXify Workspace.dc.html", "NeXify Posteingang.dc.html", "Kundenportal.dc.html", "Partnerportal.dc.html", "Nachbarschaftskunden-Portal.dc.html", "myADMIN v2.dc.html", "NeXify-AI-Companion.dc.html", "NeXifyAI Cloud v12.dc.html", "TEILEKLAR Shop.dc.html", "lib/rechenkern.js", "lib/langlauf.js", "lib/posteingang.js", "lib/lernschleife.js"];
 const ABLOESUNG = [
   ["Agentur-Website v1–v9 (Live-Stand)", "web/agentur", "nach Umleitung · Live-DNS nur mit Einzelfreigabe"],
   ["TEILEKLAR-Shop (Live-Stand)", "web/shop", "nach 14 Tagen Parallelbetrieb ohne Befund"],
@@ -328,7 +328,7 @@ const laufAsync = async (faelle) => {
   return { ok: faelle.length - rot.length, n: faelle.length, rot };
 };
 
-const NORM_FLAECHEN = ["NeXify Workspace.dc.html", "NeXify Posteingang.dc.html", "NeXify Leitstand.dc.html", "myADMIN v2.dc.html", "NeXify API.dc.html", "API-Rechtliches.dc.html", "Kundenwege.dc.html", "NeXifyAI Cloud v10.dc.html", "TEILEKLAR Shop.dc.html", "Kundenportal.dc.html", "Partnerportal.dc.html", "Nachbarschaftskunden-Portal.dc.html", "Affiliate-Portal.dc.html", "Konto.dc.html", "Anmeldung.dc.html", "Partner-werden.dc.html", "Werkstatt-Partnerseite.dc.html", "Fitment-Checker.dc.html", "Reifenrechner.dc.html", "Batterie-Berater.dc.html", "NeXify-AI-Companion.dc.html", "Rechtliches.dc.html", "Kundenwege.dc.html", "Affiliate-Portal.dc.html"];
+const NORM_FLAECHEN = ["NeXify Workspace.dc.html", "NeXify Posteingang.dc.html", "NeXify Leitstand.dc.html", "myADMIN v2.dc.html", "NeXify API.dc.html", "API-Rechtliches.dc.html", "Kundenwege.dc.html", "NeXifyAI Cloud v12.dc.html", "TEILEKLAR Shop.dc.html", "Kundenportal.dc.html", "Partnerportal.dc.html", "Nachbarschaftskunden-Portal.dc.html", "Affiliate-Portal.dc.html", "Konto.dc.html", "Anmeldung.dc.html", "Partner-werden.dc.html", "Werkstatt-Partnerseite.dc.html", "Fitment-Checker.dc.html", "Reifenrechner.dc.html", "Batterie-Berater.dc.html", "NeXify-AI-Companion.dc.html", "Rechtliches.dc.html", "Kundenwege.dc.html", "Affiliate-Portal.dc.html"];
 const warte = (ms) => new Promise((r) => setTimeout(r, ms));
 class Component extends DCLogic {
   normFrame = React.createRef();

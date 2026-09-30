@@ -2,6 +2,24 @@
 
 **Stand 29.09.2026 · Paket design_handoff_nexify_gesamtloesung**
 
+## 4. Live-Routen, Sitemap und interne Verweise
+
+Befund: Die Produktions-Startseite `/` lieferte einen Meta-Refresh-Lader, die
+Sitemap zeigte auf die Vorschau-Domain und enthielt nicht indexierbare Seiten;
+mehrere alte Rechts- und Standortpfade endeten mit 404. Weitere reproduzierbare
+Fehler waren tote Anker/Skiplinks, fehlende Deck-Navigation, tote `v10`-Links
+und ein Link auf nicht ausgelieferte Integrationsdateien.
+
+Fix: `config/routen.json` ist die Routenquelle. `node tools/routen.mjs
+schreiben` aktualisiert Sitemap, robots.txt und nginx-Regeln für den
+Produktions-Docroot; `node tools/routen.mjs pruefen` prüft Route-Ziele,
+historische Sitemap-Pfade, Indexierbarkeit und Regressionen. Der Loader ist
+noindex und kanonisiert auf `/`; `/` wird im nginx-Schnipsel direkt auf die
+Startseite gemappt. Das Repo enthält eine 404-Seite. Ungültige Legal- und
+Standortpfade leiten auf belegte bestehende Inhalte, ohne erfundene Stadt- oder
+Rechtstexte. Details zu notwendigen externen Deploy-Schritten und Blockern:
+`docs/ONLINE.md`.
+
 ## 1. `config/design-rules.json` — Farbskala unvollständig
 
 Befund: 15 in den Seiten verwendete Töne wurden von `config/abweichungen.json`
