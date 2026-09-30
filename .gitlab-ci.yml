@@ -29,3 +29,16 @@ jeff-gate:
   needs: ["ds-audit", "manifest", "json-konfig"]
   script:
     - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
+
+slack:
+  stage: jeff
+  image: curlimages/curl:latest
+  needs: ["jeff-gate"]
+  rules:
+    - if: '$SLACK_WEBHOOK != null && $SLACK_WEBHOOK != ""'
+      when: always
+  script:
+    - |
+      curl -sS -X POST -H 'Content-Type: application/json' \
+        --data "{\"text\":\"${CI_PROJECT_PATH} · ${CI_COMMIT_REF_NAME} · ${CI_PIPELINE_STATUS} · ${CI_PIPELINE_URL}\"}" \
+        "$SLACK_WEBHOOK"
