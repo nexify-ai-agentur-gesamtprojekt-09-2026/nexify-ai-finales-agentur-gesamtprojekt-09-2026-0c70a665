@@ -14,8 +14,8 @@
 ## Grenze
 
 - `web` und `app` (Next.js): `cyclonedx-npm` schlägt mit `npm-ls exited with errors`
-  fehl (Peer-/Lockfile-Auflösung). SBOM für diese beiden Frontends ist offen;
-  Dependency-Audit ist dennoch 0.
+  fehl (node_modules `@swc/helpers` invalid). Behoben mit `--ignore-npm-errors`:
+  `web` 51, `app` 51 Komponenten. Dependency-Audit ist 0.
 
 ## Kernaussage
 
