@@ -88,9 +88,14 @@ slack:
   Echte GitLab-Zustellung ist durch GitLab-SSRF-Schutz (`Invalid url given`)
   blockiert und braucht GitLab-Admin; GitHub-Zustellung braucht öffentlichen
   Eingang (DNS/CF-Freigabe).
-- **Blocker (extern):** `SLACK_WEBHOOK`, Coderabbit-App-Install und GitLab-Admin
-  (SSRF-Freigabe). Slack-Vollintegration bleibt ohne Webhook vorbereitet, nicht
-  aktiv.
+- **Slack (DUS-Pfad) aktiv:** `github_event_inbox.py` kann jetzt zusätzlich über
+  Composio-Slack senden (`NX_SLACK_PROVIDER=composio`, `NX_SLACK_CHANNEL`).
+  Outbox→Slack per `nexify-webhook-dispatch.timer` (minütlich) automatisiert und
+  end-to-end verifiziert (Ausgabe `sent`, beide Testeinträge gesendet). Der
+  CI-Pfad (GitHub `SLACK_WEBHOOK_URL` / GitLab `SLACK_WEBHOOK`) braucht weiterhin
+  die Incoming-Webhook-URL des Owners.
+- **Blocker (extern):** Incoming-Webhook für CI, Coderabbit-App-Install und
+  GitLab-Admin (SSRF-Freigabe).
 - `tools/github_event_inbox.py` versteht jetzt zusätzlich signierte GitLab-
   Issue-/Merge-Request-Webhooks (`/gitlab`, `X-Gitlab-Token`).
 - Webhook-Inbox als Dienst deployt (`nexify-webhook-inbox.service`,

@@ -196,7 +196,7 @@
       "soll": "vorhanden",
       "belegt_am": null,
       "geheimnis": "openbao:nexify/data/slack:webhook",
-      "hinweis": "Webhook fehlt — von Pascal in Slack erzeugen und ablegen"
+      "hinweis": "DUS-Pfad via Composio-Slack aktiv; CI braucht weiterhin Incoming-Webhook von Pascal"
     },
     {
       "id": "coderabbit",

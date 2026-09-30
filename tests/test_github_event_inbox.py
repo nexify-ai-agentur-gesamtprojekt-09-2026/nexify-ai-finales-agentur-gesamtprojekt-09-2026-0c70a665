@@ -133,6 +133,18 @@ class InboxTests(unittest.TestCase):
                                     updated="2026-10-01T00:00:00Z")
         self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 400)
 
+    def test_composio_dispatch_skips_webhook_url_validation(self):
+        self.receive("00000000-0000-0000-0000-000000000004")
+        sent = []
+        self.assertEqual(inbox.dispatch_one(
+            self.db, "C0AS1UGT3FA", lambda c, text: sent.append((c, text)), NOW,
+            slack_mode="composio"), "sent")
+        self.assertEqual(sent[0][0], "C0AS1UGT3FA")
+
+    def test_composio_channel_validation(self):
+        with self.assertRaises(ValueError):
+            inbox.post_slack_composio("not-a-channel", "test")
+
 
 if __name__ == "__main__":
     unittest.main()

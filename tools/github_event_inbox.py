@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sqlite3
+import subprocess
 import time
 from datetime import datetime, timezone
 from urllib.parse import urlparse
@@ -19,6 +20,7 @@ DELIVERY = re.compile(r"^[a-fA-F0-9-]{36}$")
 ACTIONS = {"opened", "edited", "reopened", "closed"}
 GITLAB_EVENTS = {"Issue Hook": "issues", "Merge Request Hook": "pull_request"}
 GITLAB_ACTIONS = {"open", "update", "close", "reopen", "merge"}
+SLACK_CHANNEL = re.compile(r"^[A-Z][A-Z0-9]{8,}$")
 
 
 def connect(path):
@@ -172,9 +174,29 @@ def post_slack(url, text):
             raise RuntimeError("Slack rejected notification")
 
 
-def dispatch_one(db, url, send=post_slack, now=None):
+def post_slack_composio(channel, text):
+    """Sendet eine Slack-Nachricht über die aktive Composio-Slack-Verbindung."""
+    if not SLACK_CHANNEL.fullmatch(channel):
+        raise ValueError("Slack channel must be a channel ID like C0AS1UGT3FA")
+    payload = json.dumps({"channel": channel, "text": text})
+    proc = subprocess.run(
+        ["composio", "proxy", "https://slack.com/api/chat.postMessage",
+         "--toolkit", "slack", "-X", "POST", "-d", payload],
+        capture_output=True, text=True, timeout=30,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(proc.stderr.strip() or "composio slack failed")
+    try:
+        if not json.loads(proc.stdout).get("ok"):
+            raise RuntimeError("Slack rejected notification")
+    except (ValueError, AttributeError):
+        raise RuntimeError("unexpected composio output")
+
+
+def dispatch_one(db, url, send=post_slack, now=None, slack_mode="webhook"):
     """Claim one due job; at least once delivery if process dies after sending."""
-    slack_url(url)
+    if slack_mode == "webhook":
+        slack_url(url)
     now = time.time() if now is None else now
     db.execute("BEGIN IMMEDIATE")
     try:
@@ -263,5 +285,14 @@ if __name__ == "__main__":
     if args.mode == "serve":
         run_server(args.db, gh_secret, gl_secret, gh_repo, gl_repo)
     else:
-        url = os.environ.get("NX_SLACK_WEBHOOK_URL", "")
-        print(dispatch_one(connect(args.db), slack_url(url)))
+        provider = os.environ.get("NX_SLACK_PROVIDER", "webhook")
+        if provider == "composio":
+            channel = os.environ.get("NX_SLACK_CHANNEL", "")
+            if not SLACK_CHANNEL.fullmatch(channel):
+                parser.error("NX_SLACK_CHANNEL is required for NX_SLACK_PROVIDER=composio")
+            print(dispatch_one(connect(args.db), channel,
+                               lambda c, text: post_slack_composio(c, text),
+                               slack_mode="composio"))
+        else:
+            url = os.environ.get("NX_SLACK_WEBHOOK_URL", "")
+            print(dispatch_one(connect(args.db), slack_url(url)))
