@@ -1,0 +1,19 @@
+"prototypen/NeXify Workspace.dc.html"
+  s_f5285585907e0d::t_d76f0595697ce1 89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b538d45acc79d008c7c518103ae944b6918cadd2",
+  "prompts": {},
+  "sessions": {
+    "s_f5285585907e0d": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "b0b082ef-b43e-40b3-b025-911713ae51bc",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
