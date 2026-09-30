@@ -1,0 +1,19 @@
+tools/payments-server.mjs
+  s_5ed31fb5700849::t_5460058f84e4e4 4,21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "45a420b66055312dbb89d3e7b43e1d9886483d69",
+  "prompts": {},
+  "sessions": {
+    "s_5ed31fb5700849": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "1b8670b8-f99b-44c0-a912-30f9c0b3b3d4",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
