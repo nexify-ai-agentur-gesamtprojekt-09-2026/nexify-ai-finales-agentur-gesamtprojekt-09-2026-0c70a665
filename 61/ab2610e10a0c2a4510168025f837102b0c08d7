@@ -1,0 +1,51 @@
+config/routen.json
+  s_c41c69e7334dca::t_9f2601ebffe7e7 42-62,71
+prototypen/503.html
+  s_c41c69e7334dca::t_7d4d8ab68ffebc 1-27
+prototypen/Kundenportal.dc.html
+  s_c41c69e7334dca::t_a8d6de04c79057 59,89,91,94,98,100-101,290,305
+prototypen/NX-Header.dc.html
+  s_c41c69e7334dca::t_9c9a8c8e0989f4 103,294
+prototypen/NX-Intern.dc.html
+  s_c41c69e7334dca::t_693d21caf9a2d5 64
+prototypen/Nachbarschaftskunden-Portal.dc.html
+  s_c41c69e7334dca::t_99440b244e6ca5 59,105,113,116,120,122-123,128,131,135,139,143,145,376,390
+"prototypen/NeXify Systemkarte.dc.html"
+  s_c41c69e7334dca::t_b1b3da69bcfa49 23,56
+prototypen/Partner-werden.dc.html
+  s_c41c69e7334dca::t_f36c7623fcb1f5 61
+prototypen/Partnerportal.dc.html
+  s_c41c69e7334dca::t_b908116d676f24 60,107,115,118,122,124-125,130,133,137,141,144,147,473,503
+tools/a11y.mjs
+  s_c41c69e7334dca::t_d0a964ebfd2c0c 5,7,11-19,27-40
+docs/ONLINE.md
+  s_c41c69e7334dca::t_b3389b7b49ac89 69-73,76-99,113-117
+infra/nginx/nexifyai-routen.conf
+  s_c41c69e7334dca::t_43bec51409af77 5-32
+prototypen/Kundenbroschuere.dc.html
+  s_c41c69e7334dca::t_76ec50a1737f0a 27,30
+prototypen/MANIFEST.sha256
+  s_c41c69e7334dca::t_79575070cbfac7 2,13-14,17-19,26,34-35,142-143
+prototypen/robots.txt
+  s_c41c69e7334dca::t_f5784cd926a921 4-22
+prototypen/sitemap.xml
+  s_c41c69e7334dca::t_849576fc38cfc0 8
+tools/routen.mjs
+  s_c41c69e7334dca::t_00e8cb7631938d 16,19,35,72-75,82-92,141-153,161-162,173,177-191,213-215,221,243-262
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "61ab2610e10a0c2a4510168025f837102b0c08d7",
+  "prompts": {},
+  "sessions": {
+    "s_c41c69e7334dca": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "0d851a99-90e5-4398-801e-ac8ba9669786",
+        "model": "unknown"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
