@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import json
+import sqlite3
 import tempfile
 import unittest
 from datetime import datetime, timezone
@@ -17,9 +18,10 @@ URL = "https://hooks.slack.com/services/TEST/TEST/TEST"
 NOW = datetime(2026, 9, 30, tzinfo=timezone.utc).timestamp()
 
 
-def event(delivery, updated="2026-09-30T00:00:00Z", action="opened", kind="issues"):
+def event(delivery, updated="2026-09-30T00:00:00Z", action="opened", kind="issues",
+          repository=REPO):
     raw = json.dumps({
-        "action": action, "repository": {"full_name": REPO},
+        "action": action, "repository": {"full_name": repository},
         "issue" if kind == "issues" else "pull_request":
             {"number": 42, "updated_at": updated, "title": "untrusted @here"},
     }).encode()
@@ -84,6 +86,53 @@ class InboxTests(unittest.TestCase):
         self.assertIn("closed", sent[0])
         self.assertNotIn("@here", sent[0])
 
+    def test_resources_are_isolated_by_repository(self):
+        first, raw = event("00000000-0000-0000-0000-000000000010",
+                           updated="2026-09-30T00:02:00Z")
+        self.assertEqual(inbox.receive(self.db, first, raw, SECRET, REPO, NOW),
+                         (202, "queued"))
+        other_repo = "another-owner/another-repo"
+        second, raw = event("00000000-0000-0000-0000-000000000011",
+                            repository=other_repo)
+        self.assertEqual(inbox.receive(self.db, second, raw, SECRET, other_repo, NOW),
+                         (202, "queued"))
+        self.assertEqual(self.db.execute("SELECT count(*) FROM resources").fetchone()[0], 2)
+        self.assertEqual(self.db.execute("SELECT count(*) FROM outbox").fetchone()[0], 2)
+        sent = []
+        self.assertEqual(
+            inbox.dispatch_one(self.db, URL, lambda _url, text: sent.append(text), NOW),
+            "sent")
+        self.assertEqual(
+            inbox.dispatch_one(self.db, URL, lambda _url, text: sent.append(text), NOW + 1),
+            "sent")
+        self.assertEqual(len(sent), 2)
+
+    def test_legacy_database_migrates_and_preserves_queued_delivery(self):
+        legacy_path = str(Path(self.directory.name) / "legacy.db")
+        legacy = sqlite3.connect(legacy_path)
+        legacy.executescript("""
+            CREATE TABLE resources (
+                kind TEXT NOT NULL, number INTEGER NOT NULL, updated_at TEXT NOT NULL,
+                PRIMARY KEY (kind, number));
+            CREATE TABLE outbox (
+                id TEXT PRIMARY KEY, kind TEXT NOT NULL, number INTEGER NOT NULL,
+                updated_at TEXT NOT NULL, text TEXT NOT NULL,
+                attempts INTEGER NOT NULL DEFAULT 0, due REAL NOT NULL, state TEXT NOT NULL);
+            INSERT INTO resources VALUES
+                ('issues',42,'2026-09-30T00:00:00+00:00');
+            INSERT INTO outbox VALUES
+                ('legacy-delivery','issues',42,'2026-09-30T00:00:00+00:00',
+                 'legacy message',0,1790726400,'pending');
+        """)
+        legacy.close()
+        migrated = inbox.connect(legacy_path)
+        self.addCleanup(migrated.close)
+        self.assertEqual(
+            inbox.dispatch_one(migrated, URL, lambda *_: None, NOW), "sent")
+        self.assertEqual(
+            migrated.execute("SELECT repository,state FROM outbox").fetchone(),
+            ("", "sent"))
+
     def test_slack_failure_retry_rate_limit_and_dead_letter(self):
         self.receive("00000000-0000-0000-0000-000000000001")
         def fail(url, text):
@@ -120,6 +169,10 @@ class InboxTests(unittest.TestCase):
         headers, raw = gitlab_event("00000000-0000-0000-0000-000000000001")
         headers["X-Gitlab-Token"] = "wrong"
         self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 401)
+        self.assertEqual(
+            inbox.receive_gitlab(self.db, *gitlab_event(
+                "00000000-0000-0000-0000-000000000006"), "short", REPO, NOW)[0],
+            401)
         headers, raw = gitlab_event("00000000-0000-0000-0000-000000000001")
         self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 202)
         self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW),
@@ -132,6 +185,14 @@ class InboxTests(unittest.TestCase):
         headers, raw = gitlab_event("00000000-0000-0000-0000-000000000003",
                                     updated="2026-10-01T00:00:00Z")
         self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 400)
+
+    def test_gitlab_event_header_must_match_payload_kind(self):
+        headers, raw = gitlab_event("00000000-0000-0000-0000-000000000005")
+        headers["X-Gitlab-Event"] = "Merge Request Hook"
+        self.assertEqual(
+            inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW),
+            (400, "invalid payload"))
+        self.assertEqual(self.db.execute("SELECT count(*) FROM outbox").fetchone()[0], 0)
 
     def test_composio_dispatch_skips_webhook_url_validation(self):
         self.receive("00000000-0000-0000-0000-000000000004")

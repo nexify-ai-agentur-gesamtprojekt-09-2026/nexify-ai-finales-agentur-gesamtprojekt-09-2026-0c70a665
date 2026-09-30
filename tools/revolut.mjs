@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Revolut Merchant-Integration: Zahlungs-Link (Order) + Webhook-Verifikation (idempotent).
 import { readFileSync } from 'node:fs';
-import { createHmac } from 'node:crypto';
+import { createHmac, timingSafeEqual } from 'node:crypto';
 
 function env() {
   const e = {};
@@ -11,12 +11,12 @@ function env() {
   }
   return e;
 }
-const E = env();
-const BASE = E.REVOLUT_API_BASE || 'https://sandbox-merchant.revolut.com/api';
-const SECRET = E.REVOLUT_API_SECRET_KEY || E.REVOLUT_SECRET_KEY || '';
-
 // Zahlungs-Link erzeugen (Order). Betrag in Cent, idempotent via merchant_order_ext_ref.
 export async function revolutOrder({ amountCent, currency = 'EUR', referenz, beschreibung }) {
+  const E = env();
+  const BASE = E.REVOLUT_API_BASE || 'https://sandbox-merchant.revolut.com/api';
+  const SECRET = E.REVOLUT_API_SECRET_KEY || E.REVOLUT_SECRET_KEY;
+  if (!SECRET) throw new Error('Revolut API-Schlüssel fehlt');
   const body = { amount: amountCent, currency, merchant_order_ext_ref: referenz, description: beschreibung };
   const r = await fetch(`${BASE}/orders`, {
     method: 'POST',
@@ -27,15 +27,15 @@ export async function revolutOrder({ amountCent, currency = 'EUR', referenz, bes
 }
 
 // Webhook-Signatur prüfen: v1=HMAC-SHA256(secret, 'v1.' + timestamp + '.' + rawBody)
-export function revolutVerifyWebhook(signature, timestamp, rawBody, secret = SECRET) {
-  if (!signature || !secret) return false;
-  const sig = String(signature).split(',').find((s) => s.startsWith('v1='));
-  if (!sig) return false;
+export function revolutVerifyWebhook(signature, timestamp, rawBody, secret, now = Date.now()) {
+  if (!signature || !secret || !/^\d+$/.test(String(timestamp)) || Math.abs(now - Number(timestamp)) > 300_000) return false;
   const expected = createHmac('sha256', secret).update(`v1.${timestamp}.${rawBody}`).digest('hex');
-  const given = sig.slice(3);
-  const a = Buffer.from(expected); const b = Buffer.from(given);
-  if (a.length !== b.length) return false;
-  return createHmac('sha256', 'const').update(a).digest().equals(createHmac('sha256', 'const').update(b).digest());
+  const a = Buffer.from(expected, 'hex');
+  return String(signature).split(',').some((part) => {
+    const sig = part.trim();
+    if (!/^v1=[0-9a-f]{64}$/i.test(sig)) return false;
+    return timingSafeEqual(a, Buffer.from(sig.slice(3), 'hex'));
+  });
 }
 
 // Idempotenz-Regel: Gutschrift erst nach GET /orders/{id} state=completed + passender Referenz/Betrag.
@@ -47,7 +47,7 @@ if (cmd === 'verify') {
   const secret = 'test-secret';
   const ts = '1700000000'; const body = '{"type":"ORDER_COMPLETED"}';
   const good = createHmac('sha256', secret).update(`v1.${ts}.${body}`).digest('hex');
-  const ok = revolutVerifyWebhook(`v1=${good}`, ts, body, secret);
-  const bad = revolutVerifyWebhook('v1=deadbeef', ts, body, secret);
-  console.log(JSON.stringify({ ok, bad, regel: REGEL, base: BASE }));
+  const ok = revolutVerifyWebhook(`v1=${good}`, ts, body, secret, Number(ts));
+  const bad = revolutVerifyWebhook('v1=deadbeef', ts, body, secret, Number(ts));
+  console.log(JSON.stringify({ ok, bad, regel: REGEL }));
 }

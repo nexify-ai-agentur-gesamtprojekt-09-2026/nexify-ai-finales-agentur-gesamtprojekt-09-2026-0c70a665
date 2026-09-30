@@ -22,8 +22,23 @@ function runTests(P) {
   eq('100 % weich -> nur kritisch', P.darfAnfragen({ verbraucht: 100, budget: 100, modus: 'weich', kritisch: false }), false);
   eq('100 % weich, kritischer Schlüssel -> läuft', P.darfAnfragen({ verbraucht: 100, budget: 100, modus: 'weich', kritisch: true }), true);
   eq('100 % hart, kritisch -> gesperrt', P.darfAnfragen({ verbraucht: 100, budget: 100, modus: 'hart', kritisch: true }), false);
+  eq('Budget 0 -> Stopp', P.schwelle(0, 0), 'stopp');
   eq('Kreditrahmen überschritten -> gesperrt', P.darfAnfragen({ verbraucht: 10, budget: 100, modus: 'weich', kritisch: true, offen: 1001, kredit: 1000 }), false);
   // Idempotenz
   const L = P.ledger(); L.buche('req-1', 0.5); L.buche('req-1', 0.5); eq('Doppelbuchung verhindert', L.summe(), 0.5);
   return r;
 }
+
+const { test } = require('node:test');
+const { strict: assert } = require('node:assert');
+const { readFileSync } = require('node:fs');
+const { join } = require('node:path');
+const { runInNewContext } = require('node:vm');
+
+test('Preis- und Abrechnungsregeln', () => {
+  const source = readFileSync(join(__dirname, 'nexify-preis.js'), 'utf8');
+  const preis = runInNewContext(source + '\nNexifyPreis;');
+  for (const [name, ok, actual, expected] of runTests(preis)) {
+    assert.equal(ok, true, `${name}: ${actual} statt ${expected}`);
+  }
+});

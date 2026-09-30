@@ -20,6 +20,7 @@ var NexifyPreis = (function () {
     return 'Steuerliche Behandlung vor Rechnungsstellung klären';
   }
   function schwelle(verbraucht, budget) {
+    if (budget <= 0) return 'stopp';
     const q = verbraucht / budget * 100;
     return q >= 100 ? 'stopp' : q >= 80 ? 'warnung80' : q >= 50 ? 'hinweis50' : 'ok';
   }

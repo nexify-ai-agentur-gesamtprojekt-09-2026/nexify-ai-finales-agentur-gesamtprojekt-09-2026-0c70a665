@@ -29,14 +29,40 @@ def connect(path):
     db.executescript("""
         CREATE TABLE IF NOT EXISTS deliveries (id TEXT PRIMARY KEY, received_at REAL NOT NULL);
         CREATE TABLE IF NOT EXISTS resources (
-            kind TEXT NOT NULL, number INTEGER NOT NULL, updated_at TEXT NOT NULL,
-            PRIMARY KEY (kind, number));
+            repository TEXT NOT NULL, kind TEXT NOT NULL, number INTEGER NOT NULL,
+            updated_at TEXT NOT NULL, PRIMARY KEY (repository, kind, number));
         CREATE TABLE IF NOT EXISTS outbox (
-            id TEXT PRIMARY KEY, kind TEXT NOT NULL, number INTEGER NOT NULL,
-            updated_at TEXT NOT NULL, text TEXT NOT NULL,
+            id TEXT PRIMARY KEY, repository TEXT NOT NULL, kind TEXT NOT NULL,
+            number INTEGER NOT NULL, updated_at TEXT NOT NULL, text TEXT NOT NULL,
             attempts INTEGER NOT NULL DEFAULT 0, due REAL NOT NULL, state TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS limits (id INTEGER PRIMARY KEY CHECK(id=1), next_send REAL NOT NULL);
     """)
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        resource_columns = {row[1] for row in db.execute("PRAGMA table_info(resources)")}
+        if "repository" not in resource_columns:
+            db.execute("""CREATE TABLE resources_v2 (
+                repository TEXT NOT NULL, kind TEXT NOT NULL, number INTEGER NOT NULL,
+                updated_at TEXT NOT NULL, PRIMARY KEY (repository, kind, number))""")
+            db.execute("""INSERT INTO resources_v2 (repository,kind,number,updated_at)
+                SELECT '',kind,number,updated_at FROM resources""")
+            db.execute("DROP TABLE resources")
+            db.execute("ALTER TABLE resources_v2 RENAME TO resources")
+        outbox_columns = {row[1] for row in db.execute("PRAGMA table_info(outbox)")}
+        if "repository" not in outbox_columns:
+            db.execute("""CREATE TABLE outbox_v2 (
+                id TEXT PRIMARY KEY, repository TEXT NOT NULL, kind TEXT NOT NULL,
+                number INTEGER NOT NULL, updated_at TEXT NOT NULL, text TEXT NOT NULL,
+                attempts INTEGER NOT NULL DEFAULT 0, due REAL NOT NULL, state TEXT NOT NULL)""")
+            db.execute("""INSERT INTO outbox_v2
+                (id,repository,kind,number,updated_at,text,attempts,due,state)
+                SELECT id,'',kind,number,updated_at,text,attempts,due,state FROM outbox""")
+            db.execute("DROP TABLE outbox")
+            db.execute("ALTER TABLE outbox_v2 RENAME TO outbox")
+        db.execute("COMMIT")
+    except BaseException:
+        db.execute("ROLLBACK")
+        raise
     return db
 
 
@@ -77,16 +103,19 @@ def receive(db, headers, raw, secret, repository, now=None):
             return 200, "duplicate"
         db.execute("INSERT INTO deliveries VALUES (?,?)", (delivery, now))
         previous = db.execute(
-            "SELECT updated_at FROM resources WHERE kind=? AND number=?", (event, number)
+            "SELECT updated_at FROM resources WHERE repository=? AND kind=? AND number=?",
+            (repository, event, number)
         ).fetchone()
         if previous and previous[0] >= timestamp.isoformat():
             db.execute("COMMIT")
             return 200, "stale"
-        db.execute("""INSERT INTO resources VALUES (?,?,?)
-            ON CONFLICT(kind,number) DO UPDATE SET updated_at=excluded.updated_at""",
-                   (event, number, timestamp.isoformat()))
-        db.execute("INSERT INTO outbox (id,kind,number,updated_at,text,due,state) VALUES (?,?,?,?,?,?,'pending')",
-                   (delivery, event, number, timestamp.isoformat(), text, now))
+        db.execute("""INSERT INTO resources VALUES (?,?,?,?)
+            ON CONFLICT(repository,kind,number) DO UPDATE SET updated_at=excluded.updated_at""",
+                   (repository, event, number, timestamp.isoformat()))
+        db.execute("""INSERT INTO outbox
+            (id,repository,kind,number,updated_at,text,due,state)
+            VALUES (?,?,?,?,?,?,?,'pending')""",
+                   (delivery, repository, event, number, timestamp.isoformat(), text, now))
         db.execute("COMMIT")
         return 202, "queued"
     except BaseException:
@@ -98,7 +127,8 @@ def receive_gitlab(db, headers, raw, secret, repository, now=None):
     """Signierter GitLab-Issue/MR-Webhook, gleiche Outbox wie GitHub."""
     now = time.time() if now is None else now
     token = headers.get("X-Gitlab-Token", "")
-    if len(raw) > MAX_BODY or not token or not hmac.compare_digest(token, secret):
+    if (len(secret) < 32 or len(raw) > MAX_BODY or not token
+            or not hmac.compare_digest(token, secret)):
         return 401, "invalid token"
     delivery = headers.get("X-Gitlab-Event-UUID") or headers.get("X-Gitlab-Delivery", "")
     if not DELIVERY.fullmatch(delivery):
@@ -109,7 +139,8 @@ def receive_gitlab(db, headers, raw, secret, repository, now=None):
         return 400, "unsupported event"
     try:
         payload = json.loads(raw)
-        if payload.get("object_kind") not in ("issue", "merge_request"):
+        expected_object_kind = "issue" if event == "Issue Hook" else "merge_request"
+        if payload.get("object_kind") != expected_object_kind:
             raise ValueError()
         obj = payload["object_attributes"]
         action = obj.get("action") or payload.get("action", "")
@@ -133,16 +164,19 @@ def receive_gitlab(db, headers, raw, secret, repository, now=None):
             return 200, "duplicate"
         db.execute("INSERT INTO deliveries VALUES (?,?)", (delivery, now))
         previous = db.execute(
-            "SELECT updated_at FROM resources WHERE kind=? AND number=?", (kind, number)
+            "SELECT updated_at FROM resources WHERE repository=? AND kind=? AND number=?",
+            (repository, kind, number)
         ).fetchone()
         if previous and previous[0] >= timestamp.isoformat():
             db.execute("COMMIT")
             return 200, "stale"
-        db.execute("""INSERT INTO resources VALUES (?,?,?)
-            ON CONFLICT(kind,number) DO UPDATE SET updated_at=excluded.updated_at""",
-                   (kind, number, timestamp.isoformat()))
-        db.execute("INSERT INTO outbox (id,kind,number,updated_at,text,due,state) VALUES (?,?,?,?,?,?,'pending')",
-                   (delivery, kind, number, timestamp.isoformat(), text, now))
+        db.execute("""INSERT INTO resources VALUES (?,?,?,?)
+            ON CONFLICT(repository,kind,number) DO UPDATE SET updated_at=excluded.updated_at""",
+                   (repository, kind, number, timestamp.isoformat()))
+        db.execute("""INSERT INTO outbox
+            (id,repository,kind,number,updated_at,text,due,state)
+            VALUES (?,?,?,?,?,?,?,'pending')""",
+                   (delivery, repository, kind, number, timestamp.isoformat(), text, now))
         db.execute("COMMIT")
         return 202, "queued"
     except BaseException:
@@ -207,16 +241,17 @@ def dispatch_one(db, url, send=post_slack, now=None, slack_mode="webhook"):
         if limit and limit[0] > now:
             db.execute("COMMIT")
             return "rate-limited"
-        row = db.execute("""SELECT id,kind,number,updated_at,text,attempts FROM outbox
+        row = db.execute("""SELECT id,repository,kind,number,updated_at,text,attempts FROM outbox
             WHERE state='pending' AND due<=? ORDER BY due,id LIMIT 1""", (now,)).fetchone()
         if not row:
             db.execute("COMMIT")
             return "empty"
-        ident, kind, number, updated, text, attempts = row
+        ident, repository, kind, number, updated, text, attempts = row
         current = db.execute(
-            "SELECT updated_at FROM resources WHERE kind=? AND number=?", (kind, number)
+            "SELECT updated_at FROM resources WHERE repository=? AND kind=? AND number=?",
+            (repository, kind, number)
         ).fetchone()
-        if current[0] != updated:
+        if current is None or current[0] != updated:
             db.execute("UPDATE outbox SET state='superseded' WHERE id=?", (ident,))
             db.execute("COMMIT")
             return "superseded"
@@ -282,6 +317,8 @@ if __name__ == "__main__":
     gl_secret = os.environ.get("NX_GITLAB_WEBHOOK_SECRET", "")
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", gh_repo) or len(gh_secret) < 32:
         parser.error("NX_GITHUB_REPOSITORY and a webhook secret of at least 32 characters required")
+    if gl_secret and len(gl_secret) < 32:
+        parser.error("NX_GITLAB_WEBHOOK_SECRET must contain at least 32 characters")
     if args.mode == "serve":
         run_server(args.db, gh_secret, gl_secret, gh_repo, gl_repo)
     else:

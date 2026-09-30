@@ -19,8 +19,8 @@ function check(name, cond, detail = '') { ergebnis.push({ name, ok: !!cond, deta
 // revolut HMAC
 const sec = 'test'; const ts = '1700000000'; const body = '{}';
 const sig = 'v1=' + createHmac('sha256', sec).update(`v1.${ts}.${body}`).digest('hex');
-check('revolut.verify.ok', revolutVerifyWebhook(sig, ts, body, sec));
-check('revolut.verify.bad', !revolutVerifyWebhook('v1=deadbeef', ts, body, sec));
+check('revolut.verify.ok', revolutVerifyWebhook(sig, ts, body, sec, Number(ts)));
+check('revolut.verify.bad', !revolutVerifyWebhook('v1=deadbeef', ts, body, sec, Number(ts)));
 
 // abo + rechnung
 const b = aboAnlegen('one', 't@x.de');

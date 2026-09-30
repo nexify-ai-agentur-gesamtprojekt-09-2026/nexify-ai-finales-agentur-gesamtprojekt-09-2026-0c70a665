@@ -10,14 +10,15 @@ export const zuCent = (uc) => Math.round(uc / UC);
 // Preis je Anfrage aus versionierter Preistabelle; modus/satz aus E1 (aufschlag ×(1+s) | marge ÷(1−s))
 export function preis(tabelle, modell, usage, opt = {}) {
   const m = tabelle.modelle[modell]; if (!m) throw new PrepaidFehler("E_MODELL", "Modell nicht freigegeben: " + modell);
-  for (const f of ["ekEinCent", "ekAusCent"]) if (!Number.isInteger(m[f]) || m[f] < 0) throw new PrepaidFehler("E_PREIS_FEHLT", "Einkaufspreis für " + modell + " nicht freigegeben");
-  const tok = (n) => { if (!Number.isInteger(n) || n < 0) throw new PrepaidFehler("E_TOKEN", "Token als ganze Zahl ≥ 0"); return n; };
-  const ein = tok(usage.input || 0), aus = tok(usage.output || 0), cache = tok(usage.cacheLesen || 0);
+  for (const f of ["ekEinCent", "ekAusCent", ...(m.ekCacheCent == null ? [] : ["ekCacheCent"])]) if (!Number.isSafeInteger(m[f]) || m[f] < 0) throw new PrepaidFehler("E_PREIS_FEHLT", "Einkaufspreis für " + modell + " nicht freigegeben");
+  const tok = (n) => { if (!Number.isSafeInteger(n) || n < 0) throw new PrepaidFehler("E_TOKEN", "Token als ganze Zahl ≥ 0"); return n; };
+  const ein = tok(usage.input ?? 0), aus = tok(usage.output ?? 0), cache = tok(usage.cacheLesen ?? 0);
   // EK in Cent je 1 Mio. Token → µc: Token × Cent/1e6 × 1e6 = Token × Cent
   const ekUc = ein * m.ekEinCent + aus * m.ekAusCent + cache * (m.ekCacheCent ?? m.ekEinCent);
   const s = tabelle.satz, modus = tabelle.modus;
   if (!["aufschlag", "marge"].includes(modus) || !(s >= 0 && s < 1)) throw new PrepaidFehler("E_FORMEL", "Preisformel ungültig");
   const vkUc = Math.round(modus === "aufschlag" ? ekUc * (1 + s) : ekUc / (1 - s));
+  if (!Number.isSafeInteger(ekUc) || !Number.isSafeInteger(vkUc)) throw new PrepaidFehler("E_PREIS", "Preis überschreitet sichere Mikrocent-Grenze");
   return { ekUc, vkUc, version: tabelle.version, modell };
 }
 
@@ -29,7 +30,12 @@ const eigen = (k, mandant) => { if (k.mandant !== mandant) throw new PrepaidFehl
 export function reservieren(k, mandant, { id, kostenstelle, schaetzungUc, zeit = 0 }) {
   eigen(k, mandant);
   if (k.sperre) throw new PrepaidFehler("E_GESPERRT", "Konto gesperrt: " + k.sperre);
-  if (k.reservierungen?.[id]) return k;
+  if (!id || !Number.isSafeInteger(schaetzungUc) || schaetzungUc < 0) throw new PrepaidFehler("E_RESERVIERUNG", "Reservierung benötigt ID und nichtnegative ganze Mikrocent");
+  if (k.reservierungen?.[id]) {
+    const r = k.reservierungen[id];
+    if (r.kostenstelle !== kostenstelle || r.uc !== schaetzungUc) throw new PrepaidFehler("E_RESERVIERUNG", "Anfrage-ID bereits anders reserviert");
+    return k;
+  }
   const ks = k.kostenstellen[kostenstelle]; if (!ks) throw new PrepaidFehler("E_KOSTENSTELLE", "Unbekannte Kostenstelle");
   if (ks.budgetCent != null && ks.verbrauchtUc + schaetzungUc > ks.budgetCent * UC) throw new PrepaidFehler("E_BUDGET", "Budget der Kostenstelle erreicht");
   if (verfuegbar(k) < schaetzungUc) throw new PrepaidFehler("E_GUTHABEN", "Guthaben reicht nicht – bitte aufladen");
@@ -44,7 +50,9 @@ export function abrechnen(k, mandant, id, p, zeit) {
   const spaet = !k.reservierungen?.[id] && k.verfallen?.[id];
   const r = k.reservierungen?.[id] || (spaet && { ...k.verfallen[id], uc: 0 });
   if (!r) throw new PrepaidFehler("E_RESERVIERUNG", "Keine Reservierung für " + id);
-  const betrag = spaet ? p.vkUc : Math.min(p.vkUc, r.uc); // mit schaetzung() ist Ist ≤ Reservierung
+  if (!Number.isSafeInteger(p.vkUc) || p.vkUc < 0 || !Number.isSafeInteger(p.ekUc) || p.ekUc < 0) throw new PrepaidFehler("E_PREIS", "Ungültiger Abrechnungsbetrag");
+  if (!spaet && p.vkUc > r.uc) throw new PrepaidFehler("E_OBERGRENZE", "Ist-Kosten übersteigen reservierte Obergrenze");
+  const betrag = p.vkUc;
   const res = { ...k.reservierungen }; delete res[id];
   const verf = { ...(k.verfallen || {}) }; delete verf[id];
   const ks = { ...k.kostenstellen[r.kostenstelle], verbrauchtUc: k.kostenstellen[r.kostenstelle].verbrauchtUc + betrag };
