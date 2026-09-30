@@ -23,6 +23,9 @@
 | gitlab | Betrieb | Code, CI, Merge Requests, Doku-Pipeline | GET /api/v4/version | unbelegt | vorhanden | – |
 | openbao | Sicherheit | Geheimnisse | GET /v1/sys/health | unbelegt | vorhanden | – |
 | langfuse | undefined | undefined | – | soll | Profil langfuse in deploy/compose.yml, config/langfuse.json | – |
+| github | Betrieb | undefined | GET /installation/repositories | betrieb | vorhanden | 2026-09-30 |
+| slack | Kommunikation | undefined | POST Incoming Webhook | unbelegt | vorhanden | – |
+| coderabbit | Qualitaet | undefined | GitHub-App-Install auf Ziel-Repo | unbelegt | vorhanden | – |
 
 Status 'vorhanden' nur mit datiertem Health-Protokoll (belegt_am, ISO-8601 UTC). Bis dahin 'unbelegt'; der Sollzustand steht in 'soll'. Quelle: Gutachten NX-WS-KERNE-2026-09, WK-18.
 

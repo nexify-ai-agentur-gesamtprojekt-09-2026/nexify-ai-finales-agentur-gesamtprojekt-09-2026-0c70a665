@@ -20,6 +20,9 @@
 - **monitoring**: Heartbeat
 - **gitlab**: GET /api/v4/version
 - **openbao**: GET /v1/sys/health
+- **github**: GET /installation/repositories
+- **slack**: POST Incoming Webhook
+- **coderabbit**: GitHub-App-Install auf Ziel-Repo
 
 ## Modelle
 
