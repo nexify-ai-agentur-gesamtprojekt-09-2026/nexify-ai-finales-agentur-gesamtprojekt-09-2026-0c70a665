@@ -1,0 +1,25 @@
+config/routen.json
+  s_5c7bce2745e1a3::t_435f96661af782 2
+tools/routen.mjs
+  s_5c7bce2745e1a3::t_635e385b542685 103-104,106,113-114
+  s_5c7bce2745e1a3::t_c7aa1458ea4c14 109-112
+  s_5c7bce2745e1a3::t_fe439d6564d096 94-97
+infra/nginx/nexifyai-routen.conf
+  s_5c7bce2745e1a3::t_8cc71cfaa0310e 46-56,68-93,96,98,100,102,104,106,108,110,112,114,116-129,133,135,137,139,141,143,145,147,149,151,153-166
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b51867d7bec52b24a95bacf355f9fde9d4f1d754",
+  "prompts": {},
+  "sessions": {
+    "s_5c7bce2745e1a3": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "c523a5e7-16aa-4e02-a53b-476d5a0d79ee",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
