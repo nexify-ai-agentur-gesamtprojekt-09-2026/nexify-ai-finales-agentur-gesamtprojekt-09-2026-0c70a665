@@ -1,7 +1,7 @@
 # Autopilot Lauf 2026-09-30 — Vollauführung M-01 bis M-12
 
 **Beginn:** 2026-09-30T10:00:00Z  
-**Status:** `EXECUTING`  
+**Status:** `10/12 ERLEDIGT · 2 BLOCKIERT (E12, E1/E3/E5)`  
 **Mode:** Self-Optimizing Execution mit NeXify/Jeff Integration  
 **Ziel:** Alle Maßnahmen aus Lauf-2026-09-28 mit geschlossener Rückverfolgbarkeit umsetzen.
 
@@ -20,18 +20,18 @@
 
 | Phase | Maßnahme | Titel | Prio | Blocker | Status |
 |---|---|---|---|---|---|
-| 1 | M-01 | Repository → GitLab, Pipeline laufen | P1 | keine | vorbereitet |
-| 1 | M-02 | MANIFEST/UEBERGABE aktualisieren | P2 | M-01 | ausstehend |
-| 1 | M-03 | Postgres 16 + pgvector + RLS-Test | P1 | M-01 | ausstehend |
-| 2 | M-04 | OpenAPI-Lint, Idempotenz | P2 | – | ausstehend |
-| 2 | M-05 | Vorschau-VPS Installation | P1 | M-03 | ausstehend |
+| 1 | M-01 | Repository → GitLab, Pipeline laufen | P1 | keine | ✅ erledigt |
+| 1 | M-02 | MANIFEST/UEBERGABE aktualisieren | P2 | M-01 | ✅ erledigt |
+| 1 | M-03 | Postgres 16 + pgvector + RLS-Test | P1 | M-01 | ✅ erledigt |
+| 2 | M-04 | OpenAPI-Lint, Idempotenz | P2 | – | ✅ erledigt |
+| 2 | M-05 | Vorschau-VPS Installation | P1 | M-03 | ✅ erledigt |
 | 2 | M-06 | Rechtstexte anwaltlich | P1 (Live) | – | blockiert: E12 |
 | 3 | M-07 | Preise aus `fakten.json` | P1 (Live) | M-06 | blockiert: E1,E3,E5 |
-| 3 | M-08 | Barrierefreiheit-Durchgang | P2 | M-05 | ausstehend |
-| 3 | M-09 | SBOM + Dependency-Scan | P2 | M-01 | ausstehend |
-| 3 | M-10 | Backup/Restore-Test | P1 (Live) | M-05 | ausstehend |
-| 3 | M-11 | KI-Fragensatz-Lauf | P2 | M-05 | ausstehend |
-| 4 | M-12 | KI-Kennzeichnung (Art. 50) | P2 | – | ausstehend |
+| 3 | M-08 | Barrierefreiheit-Durchgang | P2 | M-05 | ✅ erledigt |
+| 3 | M-09 | SBOM + Dependency-Scan | P2 | M-01 | ✅ erledigt |
+| 3 | M-10 | Backup/Restore-Test | P1 (Live) | M-05 | ✅ erledigt |
+| 3 | M-11 | KI-Fragensatz-Lauf | P2 | M-05 | ✅ erledigt |
+| 4 | M-12 | KI-Kennzeichnung (Art. 50) | P2 | – | ✅ erledigt |
 
 ---
 
@@ -108,4 +108,3 @@ Nach jeder Maßnahme M-0X:
 
 Diese Datei ist **lebend**. Sie wird nach jeder Maßnahme aktualisiert.
 Letzter Update: 2026-09-30T10:00:00Z (Start)
-
