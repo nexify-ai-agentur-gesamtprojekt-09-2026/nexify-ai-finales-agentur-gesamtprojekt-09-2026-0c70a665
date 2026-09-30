@@ -91,20 +91,27 @@ export function nginxConf() {
   for (const datei of cfg.nichtOeffentlich) z.push(`location = ${q('/' + datei)} { add_header Retry-After 3600 always; return 503; }`);
   z.push('');
   for (const [r, f] of Object.entries(cfg.seiten)) z.push(`location = ${r} { try_files ${q('/' + f)} =404; }`);
+  for (const [r] of Object.entries(cfg.seiten)) {
+    if (r === '/' || r === '/favicon.ico') continue;
+    z.push(`location = ${r}/ { return 301 ${r}; }`);
+  }
   for (const [r, f] of Object.entries(cfg.seiten)) {
     if (r === '/' || r === '/favicon.ico') continue;
     z.push(`location = ${q('/' + f)} { return 301 ${r}; }`);
   }
   for (const [r, ziel] of Object.entries(cfg.weiterleitungen)) {
-    z.push(`location = ${r} { return 301 ${ziel}; }`);
-    if (r !== '/index.html') z.push(`location = ${r}/ { return 301 ${ziel}; }`);
+    z.push(`location = ${r} { return 301 ${q(ziel)}; }`);
+    if (r !== '/index.html') z.push(`location = ${r}/ { return 301 ${q(ziel)}; }`);
   }
-  for (const [pre, ziel] of Object.entries(cfg.praefixWeiterleitungen)) z.push(`location ^~ ${pre} { return 301 ${ziel}; }`);
+  for (const [pre, ziel] of Object.entries(cfg.praefixWeiterleitungen)) z.push(`location ^~ ${pre} { return 301 ${q(ziel)}; }`);
   for (const sp of cfg.sprachpraefixe) {
     z.push(`location = ${sp} { return 301 /; }`);
-    for (const [r] of Object.entries(cfg.seiten)) if (r !== '/' && r !== '/favicon.ico') z.push(`location = ${sp}${r} { return 301 ${r}; }`);
-    for (const [r, ziel] of Object.entries(cfg.weiterleitungen)) if (r !== '/index.html') z.push(`location = ${sp}${r} { return 301 ${ziel}; }`);
-    for (const [pre, ziel] of Object.entries(cfg.praefixWeiterleitungen)) z.push(`location ^~ ${sp}${pre} { return 301 ${ziel}; }`);
+    for (const [r] of Object.entries(cfg.seiten)) if (r !== '/' && r !== '/favicon.ico') {
+      z.push(`location = ${sp}${r} { return 301 ${r}; }`);
+      z.push(`location = ${sp}${r}/ { return 301 ${r}; }`);
+    }
+    for (const [r, ziel] of Object.entries(cfg.weiterleitungen)) if (r !== '/index.html') z.push(`location = ${sp}${r} { return 301 ${q(ziel)}; }`);
+    for (const [pre, ziel] of Object.entries(cfg.praefixWeiterleitungen)) z.push(`location ^~ ${sp}${pre} { return 301 ${q(ziel)}; }`);
     z.push(`location = ${sp}/ { return 301 /; }`);
   }
   return z.join('\n') + '\n';

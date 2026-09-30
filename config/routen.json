@@ -1,5 +1,5 @@
 {
-  "$kommentar": "Veröffentlichte Routen der Website (Docroot prototypen/). Quelle für tools/routen.mjs (Sitemap, nginx-Schnipsel, Prüfung) und tools/static-server.mjs. Kurz-URLs übernehmen die bereits live etablierten Pfade von www.nexifyai.cloud; Altpfade des Vorgängerauftritts leiten dauerhaft (301) auf die aktuelle Seite. Stand 30.09.2026.",
+  "$kommentar": "Veröffentlichte Routen der Website (Docroot prototypen/). Quelle für tools/routen.mjs (Sitemap, nginx-Schnipsel, Prüfung). Kurz-URLs übernehmen die bereits live etablierten Pfade von www.nexifyai.cloud; Altpfade des Vorgängerauftritts leiten dauerhaft (301) auf die aktuelle Seite. Stand 30.09.2026.",
   "host": "https://www.nexifyai.cloud",
   "docroot": "prototypen",
   "seiten": {
