@@ -17,6 +17,8 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 MAX_BODY = 256 * 1024
 DELIVERY = re.compile(r"^[a-fA-F0-9-]{36}$")
 ACTIONS = {"opened", "edited", "reopened", "closed"}
+GITLAB_EVENTS = {"Issue Hook": "issues", "Merge Request Hook": "pull_request"}
+GITLAB_ACTIONS = {"open", "update", "close", "reopen", "merge"}
 
 
 def connect(path):
@@ -83,6 +85,62 @@ def receive(db, headers, raw, secret, repository, now=None):
                    (event, number, timestamp.isoformat()))
         db.execute("INSERT INTO outbox (id,kind,number,updated_at,text,due,state) VALUES (?,?,?,?,?,?,'pending')",
                    (delivery, event, number, timestamp.isoformat(), text, now))
+        db.execute("COMMIT")
+        return 202, "queued"
+    except BaseException:
+        db.execute("ROLLBACK")
+        raise
+
+
+def receive_gitlab(db, headers, raw, secret, repository, now=None):
+    """Signierter GitLab-Issue/MR-Webhook, gleiche Outbox wie GitHub."""
+    now = time.time() if now is None else now
+    token = headers.get("X-Gitlab-Token", "")
+    if len(raw) > MAX_BODY or not token or not hmac.compare_digest(token, secret):
+        return 401, "invalid token"
+    delivery = headers.get("X-Gitlab-Event-UUID") or headers.get("X-Gitlab-Delivery", "")
+    if not DELIVERY.fullmatch(delivery):
+        return 400, "invalid delivery"
+    event = headers.get("X-Gitlab-Event")
+    kind = GITLAB_EVENTS.get(event)
+    if kind is None:
+        return 400, "unsupported event"
+    try:
+        payload = json.loads(raw)
+        if payload.get("object_kind") not in ("issue", "merge_request"):
+            raise ValueError()
+        obj = payload["object_attributes"]
+        action = obj.get("action") or payload.get("action", "")
+        number = obj["iid"]
+        updated = obj["updated_at"]
+        if (payload["project"]["path_with_namespace"] != repository
+                or action not in GITLAB_ACTIONS or type(number) is not int
+                or not 0 < number < 2**31 or not isinstance(updated, str)):
+            raise ValueError()
+        timestamp = datetime.fromisoformat(updated.replace("Z", "+00:00"))
+        if timestamp.tzinfo is None or timestamp.timestamp() > now + 300:
+            raise ValueError()
+        timestamp = timestamp.astimezone(timezone.utc)
+        text = f"GitLab {repository} {kind} #{number}: {action} (Review erforderlich)"
+    except (ValueError, TypeError, KeyError, AttributeError, OverflowError):
+        return 400, "invalid payload"
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        if db.execute("SELECT 1 FROM deliveries WHERE id=?", (delivery,)).fetchone():
+            db.execute("COMMIT")
+            return 200, "duplicate"
+        db.execute("INSERT INTO deliveries VALUES (?,?)", (delivery, now))
+        previous = db.execute(
+            "SELECT updated_at FROM resources WHERE kind=? AND number=?", (kind, number)
+        ).fetchone()
+        if previous and previous[0] >= timestamp.isoformat():
+            db.execute("COMMIT")
+            return 200, "stale"
+        db.execute("""INSERT INTO resources VALUES (?,?,?)
+            ON CONFLICT(kind,number) DO UPDATE SET updated_at=excluded.updated_at""",
+                   (kind, number, timestamp.isoformat()))
+        db.execute("INSERT INTO outbox (id,kind,number,updated_at,text,due,state) VALUES (?,?,?,?,?,?,'pending')",
+                   (delivery, kind, number, timestamp.isoformat(), text, now))
         db.execute("COMMIT")
         return 202, "queued"
     except BaseException:
@@ -159,10 +217,19 @@ def dispatch_one(db, url, send=post_slack, now=None):
     return "sent"
 
 
-def run_server(path, secret, repository):
+def run_server(path, gh_secret, gl_secret, repository):
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
-            if self.path != "/github":
+            if self.path == "/github":
+                secret = gh_secret
+                process = receive
+            elif self.path == "/gitlab":
+                if not gl_secret:
+                    self.send_error(503, "GitLab webhook not configured")
+                    return
+                secret = gl_secret
+                process = receive_gitlab
+            else:
                 self.send_error(404)
                 return
             length = self.headers.get("Content-Length", "")
@@ -170,7 +237,7 @@ def run_server(path, secret, repository):
                 self.send_error(413)
                 return
             with closing(connect(path)) as db:
-                status, message = receive(db, self.headers, self.rfile.read(int(length)), secret, repository)
+                status, message = process(db, self.headers, self.rfile.read(int(length)), secret, repository)
             self.send_response(status)
             self.end_headers()
             self.wfile.write(message.encode())
@@ -185,11 +252,12 @@ if __name__ == "__main__":
     parser.add_argument("--db", required=True, help="private persistent SQLite path (not inside repository)")
     args = parser.parse_args()
     repo = os.environ.get("NX_GITHUB_REPOSITORY", "")
-    secret = os.environ.get("NX_GITHUB_WEBHOOK_SECRET", "")
-    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) or len(secret) < 32:
+    gh_secret = os.environ.get("NX_GITHUB_WEBHOOK_SECRET", "")
+    gl_secret = os.environ.get("NX_GITLAB_WEBHOOK_SECRET", "")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) or len(gh_secret) < 32:
         parser.error("NX_GITHUB_REPOSITORY and a webhook secret of at least 32 characters required")
     if args.mode == "serve":
-        run_server(args.db, secret, repo)
+        run_server(args.db, gh_secret, gl_secret, repo)
     else:
         url = os.environ.get("NX_SLACK_WEBHOOK_URL", "")
         print(dispatch_one(connect(args.db), slack_url(url)))

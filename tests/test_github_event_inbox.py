@@ -31,6 +31,19 @@ def event(delivery, updated="2026-09-30T00:00:00Z", action="opened", kind="issue
     }, raw)
 
 
+def gitlab_event(delivery, updated="2026-09-30T00:00:00Z", action="open", kind="issues"):
+    raw = json.dumps({
+        "object_kind": "issue" if kind == "issues" else "merge_request",
+        "project": {"path_with_namespace": REPO},
+        "object_attributes": {"iid": 42, "updated_at": updated, "action": action},
+    }).encode()
+    return ({
+        "X-Gitlab-Event": "Issue Hook" if kind == "issues" else "Merge Request Hook",
+        "X-Gitlab-Event-UUID": delivery,
+        "X-Gitlab-Token": SECRET,
+    }, raw)
+
+
 class InboxTests(unittest.TestCase):
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
@@ -102,6 +115,23 @@ class InboxTests(unittest.TestCase):
                 inbox.dispatch_one(self.db, url, lambda *_: None, NOW)
         self.assertIsNone(inbox.NoRedirect().redirect_request(
             None, None, 302, "redirect", {}, "https://example.org/"))
+
+    def test_gitlab_invalid_token_and_queued(self):
+        headers, raw = gitlab_event("00000000-0000-0000-0000-000000000001")
+        headers["X-Gitlab-Token"] = "wrong"
+        self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 401)
+        headers, raw = gitlab_event("00000000-0000-0000-0000-000000000001")
+        self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 202)
+        self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW),
+                         (200, "duplicate"))
+
+    def test_gitlab_rejects_wrong_project_event_future(self):
+        headers, raw = gitlab_event("00000000-0000-0000-0000-000000000002")
+        headers["X-Gitlab-Event"] = "Pipeline Hook"
+        self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 400)
+        headers, raw = gitlab_event("00000000-0000-0000-0000-000000000003",
+                                    updated="2026-10-01T00:00:00Z")
+        self.assertEqual(inbox.receive_gitlab(self.db, headers, raw, SECRET, REPO, NOW)[0], 400)
 
 
 if __name__ == "__main__":

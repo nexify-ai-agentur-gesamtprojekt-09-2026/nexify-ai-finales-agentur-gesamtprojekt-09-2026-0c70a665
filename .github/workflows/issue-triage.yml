@@ -1,0 +1,31 @@
+name: Issue-Triage
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: self-hosted
+    steps:
+      - name: Label setzen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          labels=("triage")
+          case "$TITLE" in
+            *BEFUND*|*Sicherheit*|*security*) labels+=("security") ;;
+            *Fehler*|*Bug*|*bug*) labels+=("bug") ;;
+            *Doku*|*Dokument*|*docs*) labels+=("documentation") ;;
+          esac
+          payload=$(printf '%s\n' "${labels[@]}" | jq -R . | jq -s .)
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/issues/$NUMBER/labels" -d "$payload"

@@ -66,8 +66,18 @@ slack:
         "$SLACK_WEBHOOK"
 ```
 
-## Stand 30.09.2026
+## Stand 30.09.2026 (nach Autopilot-Lauf)
 
-- GitHub-Repo lokal vorbereitet: `main`, Remote gesetzt, 2 Commits, keine Secrets.
-- Blocker: `GITHUB_TOKEN`, `GITLAB_TOKEN`, `SLACK_WEBHOOK` und Coderabbit-App fehlen.
-- Keine GitHub-Actions. CI/CD bleibt GitLab.
+- **Quelle der Wahrheit ist jetzt GitLab CE (Projekt 42).** NeXify/Jeff hat mit
+  Konfidenz 0,98 entschieden: `gitlab-als-quelle`. `tools/sync-github-gitlab.sh`
+  spiegelt nur noch GitLab -> GitHub; fehlt GitHub-Auth, wird sauber übersprungen.
+- GitHub-Ziel-Repo ist aktuell **nicht** über die bestehende App-Install
+  (135674457) erreichbar und beide PATs liefern 401. Spiegel ist daher ausgesetzt,
+  bis ein frischer PAT/eine erneute App-Install durch den Owner vorliegt.
+- Neue GitHub-Actions (vorbereitet, laufen sobald GitHub-Auth wieder steht):
+  `.github/workflows/issue-triage.yml`, `pr-triage.yml`, `slack-notify.yml`.
+- `tools/github_event_inbox.py` versteht jetzt zusätzlich signierte GitLab-
+  Issue-/Merge-Request-Webhooks (`/gitlab`, `X-Gitlab-Token`).
+- **Blocker (extern):** `SLACK_WEBHOOK`, Coderabbit-App-Install und ein gültiger
+  GitHub-PAT/App-Zugang. Slack-Vollintegration bleibt ohne Webhook vorbereitet,
+  nicht aktiv.
