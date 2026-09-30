@@ -22,8 +22,11 @@ jobs:
           ref="${{ github.ref }}"
           text="${{ github.repository }} · ${event} · ${ref}"
           case "$event" in
-            issues|pull_request)
-              text="$text · #${{ github.event.number }} · ${{ github.event.action }}"
+            issues)
+              text="$text · #${{ github.event.issue.number }} · ${{ github.event.action }}"
+              ;;
+            pull_request)
+              text="$text · #${{ github.event.pull_request.number }} · ${{ github.event.action }}"
               ;;
           esac
           curl -fsS -X POST -H 'Content-Type: application/json' \
