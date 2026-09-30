@@ -24,3 +24,10 @@
 
 A11y-Grundschicht ist grün (DS-Audit + 3 von 4 geprüften Seiten ohne axe-Verstoß).
 Ein flaky Kontrast-Befund auf `one` bleibt als Follow-up.
+
+## Nachprüfung (30.09. 10:48 UTC)
+
+3 axe-Läufe auf `NeXify AI one.dc.html` (networkidle): 1 Verstoß / 0 / 0 → **flaky**.
+Statisch ist die einzige `#6FE3CF`-Textstelle auf `#1E2220` (Kontrast ≈ 10,9:1) → korrekt.
+Ursache des Flackerns: dynamisches Rendern/Font-Timing im axe-Lauf, kein echter Farbfehler.
+Kein Fix nötig.
