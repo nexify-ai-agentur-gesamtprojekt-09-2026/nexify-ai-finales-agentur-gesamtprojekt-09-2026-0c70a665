@@ -2,9 +2,12 @@
 // NeXify AI Reviewer (CodeRabbit-Muster): statische Analyse + Slop-Erkennung.
 // Findet Bugs (shellcheck), KI-Schwurbel/Platzhalter, meldet strukturiert, legt in agentmemory ab.
 import { readFileSync, existsSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+const execFileAsync = promisify(execFile);
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const SKRIPT_DIRS = ['/opt/nexifyai/scripts', join(root, 'tools')];
@@ -19,21 +22,26 @@ const SLOP = [
 const findings = [];
 for (const dir of SKRIPT_DIRS) {
   if (!existsSync(dir)) continue;
-  const files = execFileSync('find', [dir, '-maxdepth', '2', '-type', 'f', '(', '-name', '*.sh', '-o', '-name', '*.mjs', ')']).toString().trim().split('\n').filter(Boolean);
-  for (const f of files) {
-    if (f.endsWith('review.mjs')) continue;
+  const files = execFileSync('find', [dir, '-maxdepth', '2', '-type', 'f', '(', '-name', '*.sh', '-o', '-name', '*.mjs', ')']).toString().trim().split('\n').filter(Boolean).filter((f) => !f.endsWith('review.mjs'));
+  // Jede Datei wird unabhängig geprüft (shellcheck-Subprozess + Slop-Scan); parallel
+  // statt sequenziell spart bei vielen Dateien die Summe aller Shellcheck-Prozessstarts.
+  const dateiBefunde = await Promise.all(files.map(async (f) => {
+    const lokal = [];
     // shellcheck nur für bash
     if (f.endsWith('.sh')) {
       try {
-        const sc = execFileSync('shellcheck', ['-S', 'warning', '-f', 'gcc', f], { encoding: 'utf8' }).trim();
-        if (sc) for (const l of sc.split('\n').slice(0, 20)) findings.push({ typ: 'bug', datei: f, meldung: l });
-      } catch (e) { if (e.stdout) for (const l of String(e.stdout).trim().split('\n').slice(0, 20)) findings.push({ typ: 'bug', datei: f, meldung: l }); }
+        const { stdout } = await execFileAsync('shellcheck', ['-S', 'warning', '-f', 'gcc', f], { encoding: 'utf8' });
+        const sc = stdout.trim();
+        if (sc) for (const l of sc.split('\n').slice(0, 20)) lokal.push({ typ: 'bug', datei: f, meldung: l });
+      } catch (e) { if (e.stdout) for (const l of String(e.stdout).trim().split('\n').slice(0, 20)) lokal.push({ typ: 'bug', datei: f, meldung: l }); }
     }
     // Slop-Erkennung (nur erste 8 KB lesen)
     let src = '';
     try { src = readFileSync(f, 'utf8').slice(0, 8192); } catch {}
-    for (const [re, label] of SLOP) if (re.test(src)) findings.push({ typ: 'slop', datei: f, meldung: label });
-  }
+    for (const [re, label] of SLOP) if (re.test(src)) lokal.push({ typ: 'slop', datei: f, meldung: label });
+    return lokal;
+  }));
+  findings.push(...dateiBefunde.flat());
 }
 
 const out = { zeit: new Date().toISOString(), anzahl: findings.length, findings: findings.slice(0, 80) };
