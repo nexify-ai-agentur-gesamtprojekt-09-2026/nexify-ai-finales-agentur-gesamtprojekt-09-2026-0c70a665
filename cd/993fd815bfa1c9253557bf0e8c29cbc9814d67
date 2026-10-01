@@ -1,0 +1,19 @@
+tools/gesundheit.mjs
+  s_d848dca4c184c0::t_12fa14f4ac7c7f 47-49,52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cd993fd815bfa1c9253557bf0e8c29cbc9814d67",
+  "prompts": {},
+  "sessions": {
+    "s_d848dca4c184c0": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "42323c76-98a6-4113-bfdc-ae8c1afea710",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
