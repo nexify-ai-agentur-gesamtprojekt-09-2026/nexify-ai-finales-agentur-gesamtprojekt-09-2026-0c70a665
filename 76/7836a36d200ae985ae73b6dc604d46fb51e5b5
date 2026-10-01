@@ -1,0 +1,19 @@
+tools/jeff-kontext.mjs
+  s_221ed00e02d26f::t_cf86495e837900 5-6,8,21-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "767836a36d200ae985ae73b6dc604d46fb51e5b5",
+  "prompts": {},
+  "sessions": {
+    "s_221ed00e02d26f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "ba72fda8-5495-43d3-b394-dcefb14b8616",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
