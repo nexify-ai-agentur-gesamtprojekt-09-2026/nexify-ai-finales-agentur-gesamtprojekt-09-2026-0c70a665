@@ -73,7 +73,7 @@ Bewegung: 0,25 s für Hover, 0,7 s für Einblendungen, `cubic-bezier(.22,.7,.3,1
 
 ### Bildwelt
 Dunkles Studio, warmes Rim-Light, freigestellte Teile, Lime als Datenlinie. Alle Motive stammen aus einem Hero-Render (`assets/source-hero.png`) und sind mit gleicher Nachbearbeitung geschnitten: leichte Kontrastanhebung, Vignette, im Hero zusätzlich Lime-Glow oben rechts und Dunkelverlauf unten für die überlappende Nachweiskarte.
-Assets: `hero-fitment.png`, `part-brake.png`, `part-brake-rear.png`, `part-battery.png`, `part-oil.png`, `part-wiper.png`, `part-wiper-rear.png`.
+Assets: `hero-fitment.webp`, `part-brake.webp`, `part-brake-rear.webp`, `part-battery.webp`, `part-oil.webp`, `part-wiper.webp`, `part-wiper-rear.webp`.
 Bilder werden als `background-image` eingebunden (kein `src`-Hole), damit während des Aufbaus keine Fehlanfragen entstehen.
 
 ---

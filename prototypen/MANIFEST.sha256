@@ -33,7 +33,7 @@ fa82726b5b0321f147c2bef84343f2fbdeb4b1b3db9dd54e4d0343306ad5f3ed  ./NeXify Syste
 b198ce31157a87750695c7d4902cfcbaafd506a57879d8e0f242643d9ecf51ce  ./Partnerportal.dc.html
 dfee8f44179d90e9eba432356370ddb44d63273ea4c291dbe243730db1a070db  ./Rechtliches.dc.html
 eecf470f714be65e963dd2acb671ebd6a4d669186c9408d25914feef58c7c3ac  ./Reifenrechner.dc.html
-0838415ea742e1a766a63d59bf452639382305b8e992fb129d62a6d30c24f675  ./TEILEKLAR Shop.dc.html
+0d3adbbe3d276763cb645c59f3b5ba7bcb49be3ee33d4b4bbb2bda16478e4dd5  ./TEILEKLAR Shop.dc.html
 4439e6304bfdaec11274a1004b2865e48e5aa1639727a53dfb42cfbf44ec7e70  ./Visitenkarte-Pascal-Courbois.dc.html
 d219eb06ba1c7d7e4c308ed13aa7ec63eec9e89fee1596f6acb235d342100a03  ./Werkstatt-Partnerseite.dc.html
 36e260776b4166417602ec2d540cd0713461e048ea3da49d2566ba6678b3c61e  ./assets/brands/brand-10_ate.png
@@ -71,7 +71,7 @@ e7df8568b44d187d2f0310f781484c2ce7fea108ac67078503a3d7b87a377520  ./assets/brand
 33450316493e57220fbcad0db222f66a9fa59078bc5b8b9c844138482f02569e  ./assets/brands/brand-9_brembo.svg
 1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8  ./assets/fonts/geist-latin.woff2
 b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3  ./assets/fonts/geist-mono-latin.woff2
-5877d126bce1082b2be15ec621586776b73f1876332a6221f20074159c51d6f9  ./assets/hero-fitment.png
+24c503b9c1839351541dc761aadd347a9dda3f5175912c541c345f9cdfb673a6  ./assets/hero-fitment.webp
 8032a8ac0d1a05a211c26add99f5443ed996f6a23e5ed7fdfcbfe7f319a11d51  ./assets/icon-192.png
 e5beddd51dbf151fd5cda39bb70f45fa3f82a4507b5dd81460aafde7420dd557  ./assets/icon-512.png
 db76fe72e30ef707bf72cb2abe84461c5e60a70e3dda05f56a830925b0583885  ./assets/icon-maskable-512.png
@@ -92,13 +92,13 @@ e2f913fd6b63c9e6817ccf8fe2c124c06cc98f8e426b4ad523b719e25156f015  ./assets/nexif
 62bd8ffc6a36dd9904dedb9e30a95fbcba0ac6cca17f387b7d85c2b8864e1455  ./assets/nexify-ai/signalfeld-s4492.png
 d33f5cd906adedb8e97f3f76150ea87a56205cc000c4aea009dd6c0ada09a69e  ./assets/nexify-ai/wordmark-horizontal.png
 7026c982c5aca686a7fffcf80d90893c7386a8f504aca9b118bab9583c2c99bd  ./assets/nexify-ai/wordmark-stacked.png
-155e2210a534c3160abfb28aa0ab1e75cd86e8b4727f5e6739778213cca4fe45  ./assets/part-battery.png
-429f68c3cfee135c0550722f8fd87dbaae97fffd2741ac28cb0be46e3ea29787  ./assets/part-brake-rear.png
-677eb633173d904ce888538cb7f5b6c2a53a0f76dc33be9fed9a678e77e7eaaf  ./assets/part-brake.png
-55c3c6c3977e67123882fc2f1f5e4e3cf258cec017587b8553174ca54e446834  ./assets/part-oil.png
+5fdee07ba14dfea4db3d0f17f7923b391c0e62b79d6c27c238862fd3e187451f  ./assets/part-battery.webp
+8bd992bea787a1e6c720f6949a5f8ff12f2a67aa86900525a82b4271f27fb03d  ./assets/part-brake-rear.webp
+d924e391a2c857eb36555429fedfdba5ca51e104ddfa8bfd8141d0ddd3f34c58  ./assets/part-brake.webp
+40a3eaa217be949f63111cbd12d7c3ca77d13bbea0b93d82ef5d00391e434c5f  ./assets/part-oil.webp
 35137f931147ba818e751fcb3dbd18bcd2232299e4fac5cd6f7a8aa54c1786ca  ./assets/part-placeholder.png
-5b0be2ed4749eb3becebe0914314489319be6cacbc495be6f9c5bc79b2ae5b41  ./assets/part-wiper-rear.png
-28931f80f915f2e7c807f04d4a7ae472cf21fe57372bf0ae02dfb6f46ea2bcae  ./assets/part-wiper.png
+8640fdbf45c951c3ab8b7e9002987fe63b42939b794869b94cdf9d6ad1012461  ./assets/part-wiper-rear.webp
+5f6cf6d023ab9a314e3b791f93d12c031f44676204a6fd572ca7ce800df0f9f8  ./assets/part-wiper.webp
 f8fc0aceb0c6c1bf293efdccabb55beec4034ad08d30657a4f73710d8655b349  ./assets/source-hero.png
 616e071202b8a4cde248f5f9a3a2dcaa8877c29b1e85b34b15570ba3124fda60  ./assets/workshops.json
 a22abb8627f4790005718a2ce1469971b3d8caa0f24f491fe09eb991dbfcfe75  ./config/prompts/s1-master-orchestrator-1.0.0.md
@@ -138,5 +138,5 @@ fb7ea628f517a311d8f6cc0db11b9aa2332461e19811c9ecdbf6b3dc37bb9231  ./manifest.web
 16b22b25d736305e05069066c657389f32686fa67f62e447f869d7d5e087ef0d  ./robots.txt
 0863156f306504ba9ab6cccea20e4672e2e1aa65dfe3eddcb8fa44080b910c12  ./sitemap.xml
 8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe  ./support.js
-fc540f897ae035251424faccb412c7fb2f3b73a523536255a6178ef03c60d4dc  ./sw.js
+0f1100061cef5e60b9cc3aeb55c7241de814c7f41c5a3e91239ca9427f211ef9  ./sw.js
 7b247a19a03a1432541408e669439ba2968b34af4b6358e976f1b695f0f75679  ./vendor/qrcode.min.js

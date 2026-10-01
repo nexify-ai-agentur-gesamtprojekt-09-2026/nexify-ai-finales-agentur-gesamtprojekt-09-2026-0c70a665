@@ -1,6 +1,6 @@
 # MCP-Werkzeuge
 
-> Automatisch erzeugt am 2026-09-30 aus `config/`. Nicht von Hand ändern – Quelle ändern.
+> Automatisch erzeugt am 2026-10-01 aus `config/`. Nicht von Hand ändern – Quelle ändern.
 
 Server: `https://mcp.nexifyai.cloud (streamable HTTP, zustandslos)`
 
