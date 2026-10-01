@@ -1,0 +1,103 @@
+docs/STAND.md
+  s_5fa2ff3ff16183::t_8a3d4baa2cfd80 3
+docs/generiert/betriebshandbuch-kurz.md
+  s_5fa2ff3ff16183::t_ec108c11e78670 3
+docs/generiert/dienste.md
+  s_5fa2ff3ff16183::t_1cae106930d705 3
+docs/generiert/mcp.md
+  s_5fa2ff3ff16183::t_9df11829f4094a 3
+docs/generiert/regelverzeichnis.md
+  s_5fa2ff3ff16183::t_ba7405cc2a2340 3
+prototypen/API-Rechtliches.dc.html
+  s_5fa2ff3ff16183::t_2a33eb8e4c5e08 21-22
+prototypen/Affiliate-Portal.dc.html
+  s_5fa2ff3ff16183::t_323e6e94d35e7a 21-22
+prototypen/Anmeldung.dc.html
+  s_5fa2ff3ff16183::t_c7ae9e76a3b70c 26-27
+prototypen/Batterie-Berater.dc.html
+  s_5fa2ff3ff16183::t_60b9f23db0a4be 25-26
+prototypen/Fitment-Checker.dc.html
+  s_5fa2ff3ff16183::t_32ad0d844df49b 25-26
+prototypen/Geschaeftsdokumente-Vorlagen.dc.html
+  s_5fa2ff3ff16183::t_68bbaff28fd38e 18-19
+prototypen/Investoren-PowerPoint.dc.html
+  s_5fa2ff3ff16183::t_ae7cae33fb51d0 18-19
+prototypen/Konto.dc.html
+  s_5fa2ff3ff16183::t_cd4fb3f9acde30 26-27
+prototypen/Kundenbroschuere.dc.html
+  s_5fa2ff3ff16183::t_3eb537faab72ed 18-19
+prototypen/Kundenportal.dc.html
+  s_5fa2ff3ff16183::t_4feac97a915c75 26-27
+prototypen/Kundenwege.dc.html
+  s_5fa2ff3ff16183::t_d960d7fc36857c 21-22
+prototypen/MANIFEST.sha256
+  s_5fa2ff3ff16183::t_abf0239edcd661 1-4,7-38,136
+prototypen/NX-Footer.dc.html
+  s_5fa2ff3ff16183::t_8933d3e45939de 17-18
+prototypen/NX-Header.dc.html
+  s_5fa2ff3ff16183::t_aad0506f76ca8b 17-18
+prototypen/NX-Intern.dc.html
+  s_5fa2ff3ff16183::t_91c054aece4372 17-18
+prototypen/Nachbarschaftskunden-Portal.dc.html
+  s_5fa2ff3ff16183::t_42afd529f04d6a 26-27
+"prototypen/NeXify AI one.dc.html"
+  s_5fa2ff3ff16183::t_e940100d662a61 25-26
+"prototypen/NeXify API.dc.html"
+  s_5fa2ff3ff16183::t_154654b5ae2a74 25-26
+"prototypen/NeXify Designsystem.dc.html"
+  s_5fa2ff3ff16183::t_0c995cfbfd6194 21-22
+"prototypen/NeXify Leitstand.dc.html"
+  s_5fa2ff3ff16183::t_ae631f8716a4dd 20-21
+"prototypen/NeXify Posteingang.dc.html"
+  s_5fa2ff3ff16183::t_388aada92ef7fe 20-21
+"prototypen/NeXify Shop.dc.html"
+  s_5fa2ff3ff16183::t_e73cce40795450 24-25
+"prototypen/NeXify Systemkarte.dc.html"
+  s_5fa2ff3ff16183::t_a8241580ffc875 14-15
+"prototypen/NeXify Workspace.dc.html"
+  s_5fa2ff3ff16183::t_789f4c0bfa70ad 20-21
+prototypen/NeXify-AI-Companion.dc.html
+  s_5fa2ff3ff16183::t_6f928ed3281174 25-26
+"prototypen/NeXifyAI Cloud v12.dc.html"
+  s_5fa2ff3ff16183::t_75c1b850b7c78a 25-26
+prototypen/NeXifyAI-Local-SEO-Muster.dc.html
+  s_5fa2ff3ff16183::t_22842567f9994a 25-26
+prototypen/NeXifyAI-Wissenshub-Artikel.dc.html
+  s_5fa2ff3ff16183::t_816b282cce6818 25-26
+prototypen/Partner-Broschuere.dc.html
+  s_5fa2ff3ff16183::t_c0d6457a69a777 18-19
+"prototypen/Partner-PowerPoint Werkstatt.dc.html"
+  s_5fa2ff3ff16183::t_bb64217bf638ac 18-19
+prototypen/Partner-werden.dc.html
+  s_5fa2ff3ff16183::t_f86cafb3735561 25-26
+prototypen/Partnerportal.dc.html
+  s_5fa2ff3ff16183::t_dffa20b838b32d 26-27
+prototypen/Rechtliches.dc.html
+  s_5fa2ff3ff16183::t_eeb7f9aee04497 21-22
+prototypen/Reifenrechner.dc.html
+  s_5fa2ff3ff16183::t_b276ce4fbc582f 25-26
+"prototypen/TEILEKLAR Shop.dc.html"
+  s_5fa2ff3ff16183::t_9040255112a0d8 18-19
+prototypen/Visitenkarte-Pascal-Courbois.dc.html
+  s_5fa2ff3ff16183::t_ca7ee5cfc24a90 18-19
+prototypen/Werkstatt-Partnerseite.dc.html
+  s_5fa2ff3ff16183::t_1ee3ac846df5e3 25-26
+"prototypen/myADMIN v2.dc.html"
+  s_5fa2ff3ff16183::t_1b1831759a4f35 20-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4a1f68fa3f028faeec56c730ea4853c44781e832",
+  "prompts": {},
+  "sessions": {
+    "s_5fa2ff3ff16183": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "c7726a86-dae8-42d5-af5c-6a652a929b38",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
