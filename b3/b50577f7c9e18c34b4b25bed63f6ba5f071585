@@ -1,0 +1,21 @@
+tools/vorschau-online.sh
+  s_af35208239d491::t_da5d1a75ba00bc 7,10,12
+tools/vorschau-server.py
+  s_af35208239d491::t_b43160816a8b81 1-140
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b3b50577f7c9e18c34b4b25bed63f6ba5f071585",
+  "prompts": {},
+  "sessions": {
+    "s_af35208239d491": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "7730fe13-0039-4425-940a-44d4f699558a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
