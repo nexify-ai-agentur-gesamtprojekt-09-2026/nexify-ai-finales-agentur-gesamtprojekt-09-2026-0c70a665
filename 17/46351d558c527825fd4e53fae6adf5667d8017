@@ -1,0 +1,36 @@
+docs/01-konzept/design-und-loesungen.md
+  s_15006a5f50666e::t_fae981c38361c2 76
+prototypen/sw.js
+  s_15006a5f50666e::t_618fa0c7768785 2
+  s_15006a5f50666e::t_7ae89e3a1fe5b7 4-5
+docs/STAND.md
+  s_15006a5f50666e::t_80ca0dfc9b938f 3
+docs/generiert/betriebshandbuch-kurz.md
+  s_15006a5f50666e::t_1e02b1dc938b08 3
+docs/generiert/dienste.md
+  s_15006a5f50666e::t_205ec28bf2c51a 3
+docs/generiert/mcp.md
+  s_15006a5f50666e::t_4d1826b6e51657 3
+docs/generiert/regelverzeichnis.md
+  s_15006a5f50666e::t_159107447ec7b7 3
+prototypen/MANIFEST.sha256
+  s_15006a5f50666e::t_d166926573404c 36,74,95-98,100-101,141
+"prototypen/TEILEKLAR Shop.dc.html"
+  s_15006a5f50666e::t_361268bbc24ff3 63-64,267,3026,3032,3038,3044,3050,3056
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1746351d558c527825fd4e53fae6adf5667d8017",
+  "prompts": {},
+  "sessions": {
+    "s_15006a5f50666e": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "5981bb1f-5aa2-4e59-8eaa-4c1db6d631c1",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
