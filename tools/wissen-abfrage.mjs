@@ -17,13 +17,18 @@ async function post(url, headers, body) {
 }
 
 const out = { frage, agentmemory: null, lightrag: null };
-try {
-  const a = await post('http://127.0.0.1:3111/agentmemory/smart-search', {'Content-Type':'application/json'}, { query: frage, limit: 3 });
-  out.agentmemory = (a.results || []).map((r) => (r.content || r.title || '').slice(0,160));
-} catch (e) { out.agentmemory = 'fehler: ' + String(e).slice(0,80); }
-try {
-  const l = await post('http://127.0.0.1:9621/query', {'Content-Type':'application/json','X-API-Key':KEY}, { query: frage, mode:'hybrid' });
+// agentmemory und LightRAG sind unabhängige Dienste -> parallel abfragen statt
+// nacheinander (halbiert die Wartezeit, da jeweils auf den langsameren Dienst gewartet wird).
+const [agentmemoryResult, lightragResult] = await Promise.allSettled([
+  post('http://127.0.0.1:3111/agentmemory/smart-search', {'Content-Type':'application/json'}, { query: frage, limit: 3 }),
+  post('http://127.0.0.1:9621/query', {'Content-Type':'application/json','X-API-Key':KEY}, { query: frage, mode:'hybrid' }),
+]);
+if (agentmemoryResult.status === 'fulfilled') {
+  out.agentmemory = (agentmemoryResult.value.results || []).map((r) => (r.content || r.title || '').slice(0,160));
+} else { out.agentmemory = 'fehler: ' + String(agentmemoryResult.reason).slice(0,80); }
+if (lightragResult.status === 'fulfilled') {
+  const l = lightragResult.value;
   out.lightrag = String(l.response || l.data || l.detail || '').slice(0,600);
-} catch (e) { out.lightrag = 'fehler: ' + String(e).slice(0,80); }
+} else { out.lightrag = 'fehler: ' + String(lightragResult.reason).slice(0,80); }
 
 console.log(JSON.stringify(out, null, 2));
