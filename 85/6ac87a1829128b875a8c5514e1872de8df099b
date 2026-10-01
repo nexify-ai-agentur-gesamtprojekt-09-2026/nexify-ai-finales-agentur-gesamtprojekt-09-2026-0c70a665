@@ -1,0 +1,19 @@
+tools/wissen-abfrage.mjs
+  s_3217d8f5da5ac5::t_5ce737ebf17d81 20-30,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "856ac87a1829128b875a8c5514e1872de8df099b",
+  "prompts": {},
+  "sessions": {
+    "s_3217d8f5da5ac5": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "e85d3405-b697-4502-8da2-5bd0b8880a9e",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
