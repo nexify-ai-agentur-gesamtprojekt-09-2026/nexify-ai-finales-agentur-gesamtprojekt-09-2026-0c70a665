@@ -1,50 +1,70 @@
 #!/usr/bin/env node
 // Kontrolle/Abweichungs-Erkennung: unkontrollierte Dinge + Drift aufdecken.
 import { readFileSync, existsSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 
+const execFileAsync = promisify(execFile);
 const ergebnis = { abweichungen: [], unkontrolliert: [], zeit: new Date().toISOString() };
 
 // 1) Dienste, die nicht per systemd laufen (unkontrolliert)
+// Jeder systemctl-Aufruf startet einen eigenen Prozess; parallel statt sequenziell
+// spart bei 7 Diensten den Großteil der kumulierten Prozessstart-Latenz.
 const services = ['nexify-vorschau','nexify-watcher','nexify-orchestrierung','nexify-payments','nexify-produkt','nexify-lernschleife.timer','nexify-gesundheit.timer'];
-for (const s of services) {
-  try { const st = execFileSync('systemctl', ['is-active', s], { encoding: 'utf8' }).trim(); if (st !== 'active') ergebnis.unkontrolliert.push(`dienst ${s}: ${st}`); }
-  catch { ergebnis.unkontrolliert.push(`dienst ${s}: fehlt`); }
-}
+const diensteBefunde = await Promise.all(services.map(async (s) => {
+  try {
+    const { stdout } = await execFileAsync('systemctl', ['is-active', s], { encoding: 'utf8' });
+    const st = stdout.trim();
+    return st !== 'active' ? `dienst ${s}: ${st}` : null;
+  } catch { return `dienst ${s}: fehlt`; }
+}));
+ergebnis.unkontrolliert.push(...diensteBefunde.filter(Boolean));
 
-// 2) Audit-Drift (Designsystem)
-try {
-  const audit = execFileSync('node', ['tools/ds-audit-cli.js'], { encoding: 'utf8' });
-  if (!/0 Fehler/.test(audit)) ergebnis.abweichungen.push('design-audit nicht 0 Fehler');
-} catch { ergebnis.abweichungen.push('design-audit fehlgeschlagen'); }
-
-// 3) Manifest-Integrität
-try {
-  execFileSync('bash', ['-c', 'cd prototypen && sha256sum -c MANIFEST.sha256 --quiet'], { encoding: 'utf8' });
-} catch { ergebnis.abweichungen.push('Manifest-Mismatch'); }
-
-// 4) NeXify/Orakel erreichbar
-try {
-  const h = execFileSync('nx-jeff', ['health'], { encoding: 'utf8' }).trim();
-  if (!h.includes('"verfuegbar": true')) ergebnis.abweichungen.push('Orakel nicht erreichbar');
-} catch { ergebnis.abweichungen.push('Orakel-Aufruf fehlgeschlagen'); }
-
-// 5) Disk-Nutzung (>/85% = Abweichung)
-try {
-  const df = execFileSync('df', ['-P', '/'], { encoding: 'utf8' });
-  const m = df.split('\n')[1].match(/(\d+)%/);
-  if (m && parseInt(m[1]) > 85) ergebnis.abweichungen.push('Disk-Nutzung ' + m[1] + '% > 85%');
-} catch {}
-
-// 6) Backup-Frische (letztes Backup < 2 Tage)
-try {
-  const bak = execFileSync('bash', ['-c', 'ls -t /opt/nexifyai/backup/nexify/nexify-*.tar.gz 2>/dev/null | head -1'], { encoding: 'utf8' }).trim();
-  if (!bak) ergebnis.abweichungen.push('kein Backup vorhanden');
-  else {
-    const alter = execFileSync('bash', ['-c', `echo $(( ($(date +%s) - $(stat -c %Y "${bak}")) / 86400 ))`], { encoding: 'utf8' }).trim();
-    if (parseInt(alter) >= 2) ergebnis.abweichungen.push(`Backup ${alter} Tage alt`);
-  }
-} catch {}
+// 2)-6) Unabhängige Drift-Prüfungen: ebenfalls parallel statt sequenziell,
+// da keine der Prüfungen von den Ergebnissen der anderen abhängt.
+const pruefungen = await Promise.all([
+  // 2) Audit-Drift (Designsystem)
+  (async () => {
+    try {
+      const { stdout } = await execFileAsync('node', ['tools/ds-audit-cli.js'], { encoding: 'utf8' });
+      return /0 Fehler/.test(stdout) ? null : 'design-audit nicht 0 Fehler';
+    } catch { return 'design-audit fehlgeschlagen'; }
+  })(),
+  // 3) Manifest-Integrität
+  (async () => {
+    try {
+      await execFileAsync('bash', ['-c', 'cd prototypen && sha256sum -c MANIFEST.sha256 --quiet'], { encoding: 'utf8' });
+      return null;
+    } catch { return 'Manifest-Mismatch'; }
+  })(),
+  // 4) NeXify/Orakel erreichbar
+  (async () => {
+    try {
+      const { stdout } = await execFileAsync('nx-jeff', ['health'], { encoding: 'utf8' });
+      return stdout.trim().includes('"verfuegbar": true') ? null : 'Orakel nicht erreichbar';
+    } catch { return 'Orakel-Aufruf fehlgeschlagen'; }
+  })(),
+  // 5) Disk-Nutzung (>/85% = Abweichung)
+  (async () => {
+    try {
+      const { stdout } = await execFileAsync('df', ['-P', '/'], { encoding: 'utf8' });
+      const m = stdout.split('\n')[1].match(/(\d+)%/);
+      return (m && parseInt(m[1]) > 85) ? 'Disk-Nutzung ' + m[1] + '% > 85%' : null;
+    } catch { return null; }
+  })(),
+  // 6) Backup-Frische (letztes Backup < 2 Tage)
+  (async () => {
+    try {
+      const { stdout: bakOut } = await execFileAsync('bash', ['-c', 'ls -t /opt/nexifyai/backup/nexify/nexify-*.tar.gz 2>/dev/null | head -1'], { encoding: 'utf8' });
+      const bak = bakOut.trim();
+      if (!bak) return 'kein Backup vorhanden';
+      const { stdout: alterOut } = await execFileAsync('bash', ['-c', `echo $(( ($(date +%s) - $(stat -c %Y "${bak}")) / 86400 ))`], { encoding: 'utf8' });
+      const alter = alterOut.trim();
+      return parseInt(alter) >= 2 ? `Backup ${alter} Tage alt` : null;
+    } catch { return null; }
+  })(),
+]);
+ergebnis.abweichungen.push(...pruefungen.filter(Boolean));
 
 console.log(JSON.stringify(ergebnis, null, 2));
 // Ergebnis ins Brain
