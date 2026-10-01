@@ -1,0 +1,26 @@
+prototypen/sw.js
+  s_4c83d7007d4c9a::t_2b994b25644a0d 2
+  s_4c83d7007d4c9a::t_cde6045d63363a 4-5
+docs/01-konzept/design-und-loesungen.md
+  s_4c83d7007d4c9a::t_8e1b6bed8fec7e 76
+prototypen/MANIFEST.sha256
+  s_4c83d7007d4c9a::t_3362be07372534 36,74,95-98,100-101,141
+"prototypen/TEILEKLAR Shop.dc.html"
+  s_4c83d7007d4c9a::t_d70bef58b1291f 63-64,267,3026,3032,3038,3044,3050,3056
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "346c2a49f6ea54404bc4ec538ffeed0a959ee70c",
+  "prompts": {},
+  "sessions": {
+    "s_4c83d7007d4c9a": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "d38155a4-8817-417c-8edd-e317c8126a3c",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
