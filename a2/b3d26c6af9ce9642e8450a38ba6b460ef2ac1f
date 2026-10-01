@@ -1,0 +1,21 @@
+tools/review.mjs
+  s_54e29772044ee9::t_63c6d377768d08 5-6,10
+  s_54e29772044ee9::t_edd412480e5a2d 25-29,33-36,41-44
+  s_54e29772044ee9::t_e89aae877a51eb 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a2b3d26c6af9ce9642e8450a38ba6b460ef2ac1f",
+  "prompts": {},
+  "sessions": {
+    "s_54e29772044ee9": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a099e445-c514-47cc-87b7-e9653f257b5e",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
