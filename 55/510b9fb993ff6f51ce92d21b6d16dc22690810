@@ -1,0 +1,21 @@
+"prototypen/NeXify Workspace.dc.html"
+  s_d169269e20a412::t_139e4f1c78a187 90
+prototypen/Partner-werden.dc.html
+  s_d169269e20a412::t_c9015e6dc593b1 178
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "55510b9fb993ff6f51ce92d21b6d16dc22690810",
+  "prompts": {},
+  "sessions": {
+    "s_d169269e20a412": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "26fdd34d-53ce-4cc7-94d4-340a9b0bd68e",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
