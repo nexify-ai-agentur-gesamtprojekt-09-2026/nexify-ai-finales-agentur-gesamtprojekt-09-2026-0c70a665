@@ -1,0 +1,20 @@
+tools/kontrolle.mjs
+  s_82fa2e192ba23a::t_d63364834b1c74 4-5,7,11-12,14-21
+  s_82fa2e192ba23a::t_1adcdf1cadfc59 23-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "742da43976b7238507a8f90854f06b45fd516008",
+  "prompts": {},
+  "sessions": {
+    "s_82fa2e192ba23a": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "c96f835d-89fa-4d81-b555-922a240d7d13",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
