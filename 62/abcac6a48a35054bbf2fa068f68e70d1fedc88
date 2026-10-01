@@ -1,0 +1,19 @@
+tools/wissen-speisen.mjs
+  s_e14725f8bc9f79::t_0a10d15e4cf485 31-34,36,38,40,42-49,53-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "62abcac6a48a35054bbf2fa068f68e70d1fedc88",
+  "prompts": {},
+  "sessions": {
+    "s_e14725f8bc9f79": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "95358b3c-c4b8-4513-a0c9-56dad223fa8f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
