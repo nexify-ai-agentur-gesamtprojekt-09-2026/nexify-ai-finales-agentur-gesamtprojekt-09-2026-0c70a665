@@ -44,10 +44,12 @@ const checks = [
   ['cognee', 'http://127.0.0.1:32869/health'],
   ['orchestrierung', 'http://127.0.0.1:8908/health'],
 ];
-for (const [n, u] of checks) {
+// Parallel statt sequenziell: unabhängige Dienste-Checks summierten sich sonst
+// im Fehlerfall auf bis zu 5 * 5s Timeout statt max. 5s insgesamt.
+await Promise.allSettled(checks.map(async ([n, u]) => {
   try { const r = await fetch(u, { signal: AbortSignal.timeout(5000) }); out.services[n] = r.status; }
   catch { out.services[n] = 0; }
-}
+}));
 
 console.log(JSON.stringify(out, null, 2));
 try {
