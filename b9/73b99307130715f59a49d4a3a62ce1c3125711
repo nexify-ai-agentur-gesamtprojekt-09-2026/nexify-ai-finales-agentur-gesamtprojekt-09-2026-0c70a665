@@ -1,0 +1,21 @@
+tools/orchestrierung-server.mjs
+  s_b42c3ea668ccfa::t_e439d199fb5001 5-6,10,18,21-23,25
+tools/produkt-server.mjs
+  s_b42c3ea668ccfa::t_72596743d131ce 4-5,9,16-22,26,31,36,41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b973b99307130715f59a49d4a3a62ce1c3125711",
+  "prompts": {},
+  "sessions": {
+    "s_b42c3ea668ccfa": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "90f4e7d9-c6de-4044-846f-7b90290e6960",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Pascal Courbois <gast@Gasts-MacBook-Pro.local>"
+    }
+  }
+}
