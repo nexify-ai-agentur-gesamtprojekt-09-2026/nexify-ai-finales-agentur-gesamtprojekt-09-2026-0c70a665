@@ -46,12 +46,12 @@ await Promise.all(QUELLEN.map(async (q) => {
     post('http://127.0.0.1:3111/agentmemory/remember', { 'Content-Type':'application/json' }, { content: `${q.desc}: ${text.slice(0,400)}`, concepts: ['wissensschicht', q.source] }),
   ]);
   if (lightragResult.status === 'fulfilled') {
-    const r = lightragResult.value;
+    const r = lightragResult.value ?? {};
     if (r.status === 'success') { neu++; state[q.source] = h; }
     else if (String(r.detail || r.status).includes('already contains')) { state[q.source] = h; skip++; }
     else console.log('LIGHTRAG-FEHLER', q.source, String(r.status || r.detail).slice(0,80));
   } else { console.log('LIGHTRAG-FEHLER', q.source, String(lightragResult.reason).slice(0,80)); }
-  if (agentmemoryResult.status === 'fulfilled' && agentmemoryResult.value.memory?.id) am++;
+  if (agentmemoryResult.status === 'fulfilled' && agentmemoryResult.value?.memory?.id) am++;
 }));
 mkdirSync(dirname(STATE), { recursive: true });
 writeFileSync(STATE, JSON.stringify(state, null, 2));
