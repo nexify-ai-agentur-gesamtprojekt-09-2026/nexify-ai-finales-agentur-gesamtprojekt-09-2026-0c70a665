@@ -8,7 +8,7 @@ set -Eeuo pipefail
 if [[ -n ${PGHOST:-} ]]; then
   SQL_USER=${PGUSER:-postgres}
   SQL_DB=${PGDATABASE:-myadmin}
-  psql() { psql -v ON_ERROR_STOP=1 "$@"; }
+  SQL() { psql -v ON_ERROR_STOP=1 "$@"; }
 else
   ENV_FILE=${MYADMIN_PG_ENV:-/etc/myadmin/pg.env}
   [[ -r $ENV_FILE ]] || { echo "FAIL: $ENV_FILE fehlt"; exit 1; }
@@ -16,14 +16,14 @@ else
   set -a; . "$ENV_FILE"; set +a
   SQL_USER=$MYADMIN_PG_SUPERUSER
   SQL_DB=$MYADMIN_PG_DB
-  psql() { docker exec -i -e PGPASSWORD="$MYADMIN_PG_PASSWORD" myadmin-pg \
+  SQL() { docker exec -i -e PGPASSWORD="$MYADMIN_PG_PASSWORD" myadmin-pg \
     psql -U "$SQL_USER" -d "$SQL_DB" -v ON_ERROR_STOP=1 "$@"; }
 fi
 
-psql -q -f - < infra/db/001_cockpit.sql
+SQL -q -f - < infra/db/001_cockpit.sql
 
 # Seed: je Mandant eine Zeile.
-psql -q -c "
+SQL -q -c "
   delete from myadmin.kennzahl where quelle = 'rls-test';
   insert into myadmin.kennzahl (tenant_id, name, wert, quelle) values
     ('tenant-a', 'test.a', 1, 'rls-test'),
@@ -31,7 +31,7 @@ psql -q -c "
 
 check() { # $1 tenant, $2 erwartete Anzahl
   local got
-  got=$(psql -tA -c "
+  got=$(SQL -tA -c "
     set role myadmin_app;
     select set_config('myadmin.tenant', '$1', false);
     select count(*) from myadmin.kennzahl;")
@@ -47,9 +47,9 @@ check tenant-a 1
 check tenant-b 1
 
 # Ohne gesetzten Mandanten darf nichts sichtbar sein.
-none=$(psql -tA -c "set role myadmin_app; reset myadmin.tenant; select count(*) from myadmin.kennzahl;" | tail -1)
+none=$(SQL -tA -c "set role myadmin_app; reset myadmin.tenant; select count(*) from myadmin.kennzahl;" | tail -1)
 [[ $none == 0 ]] || { echo "FAIL: ohne Mandant sichtbar: $none"; exit 1; }
 echo "  ok   ohne Mandantenkontext 0 Zeilen"
 
-psql -q -c "delete from myadmin.kennzahl where quelle = 'rls-test';"
+SQL -q -c "delete from myadmin.kennzahl where quelle = 'rls-test';"
 echo "rls-test: OK"
