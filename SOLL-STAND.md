@@ -44,9 +44,17 @@ Tokens der Harness-Web-UI werden pro Start neu erzeugt und stehen im Journal:
 
 1. Subdomain `nex2fly.nexifyai.cloud`: A-Record `nex2fly` → 179.198.195.91 (DNS only) fehlt. Cloudflare-Zugaenge in Composio antworten mit `Invalid format for Authorization header`; kein Token auf dem Server, Tunnel-Token erlaubt keine DNS-Anlage.
 2. Modell-Nachweis im Desktop: `dsh_model_call` = 0. Testnachricht des Nutzers offen.
-3. Cookie-Haertung: Harness setzt Session-Cookies ohne `Secure`. Traefik erzwingt HTTPS-Redirect, aber ein Response-Header-Rewrite fehlt.
-4. Plugin-Auswahl: siehe Abschnitt 6, Installation noch nicht erfolgt.
+3. Cookie-Haertung: Harness setzt Session-Cookies ohne `Secure` (Hersteller-Doku: der Proxy soll `Secure` ergaenzen). Traefik kann `Set-Cookie`-Attribute nicht nativ umschreiben. Kompensiert durch HSTS (`max-age=31536000`, `forceSTSHeader`) plus HTTPS-Redirect auf allen dsh-Routern; Restrisiko bleibt die erste Klartext-Anfrage vor HSTS-Wirksamkeit.
+4. Plugin `dsh-context` ist im Profil `web` installiert und geladen (siehe Abschnitt 6).
 5. GitLab-Push: kein Token auf dem Host, GitLab nach aussen nur IPv6.
+
+## 5.1 Sicherheitsheader (2026-10-05)
+
+Traefik-Middleware `dsh-sec` haengt an den Routern `nex2fly`, `nex2fly-nip` und `dsh-harness`:
+`Strict-Transport-Security: max-age=31536000`, `X-Content-Type-Options: nosniff`,
+`Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`.
+Kein `includeSubDomains`, weil die nip.io/sslip.io-Hosts Wildcard-DNS-Dienste sind.
+Nachweis: `curl -sk -D - https://179.198.195.91.sslip.io/` zeigt alle vier Header; Port 80 liefert `301 -> https`.
 
 ## 7. Integrationen (Ist)
 
@@ -60,6 +68,7 @@ Tokens der Harness-Web-UI werden pro Start neu erzeugt und stehen im Journal:
 | Automatisierung/Erinnerungen | im Webprofil enthalten | `dsh-schedule`, `dsh-client-ui-schedule`, Tools `schedule_*` |
 | Vision | ueber Modell abgedeckt | Modell deklariert `input: [text, image]` |
 | GitHub-Review-Webhook | verfuegbar, nicht aktiviert | opt-in Overlay des Herstellers |
+| `dsh-context` (Plugin) | installiert, geladen | im Profil `web` aktiv; Web-UI liefert `context/client.js`, Login 200 |
 
 ## 8. CI
 
@@ -101,7 +110,7 @@ Remote ist gesetzt (`http://127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agen
 | `dsh-plugin-radar` (AdamPlatin123) | Oekosystem-Radar | Recherche-Werkzeug | MIT | nicht noetig |
 | `dsh-desktop` (anywhere-labs) | Desktop-Client | Desktop kommt aus dem Enterprise-Paket | MIT | nicht noetig |
 
-Empfehlung: keine Installation ohne Freigabe. Der Nutzen des beauftragten Ziels (Server rechnet, lokal nutzbar) ist bereits ohne Fremdplugin erreicht; jedes Plugin laeuft mit Shell-Rechten desselben Agenten.
+Installiert wurde nur `dsh-context` (Apache-2.0, eine Abhaengigkeit `zod`), weil es dem beauftragten Ziel dient (lange Server-Sessions sichtbar/steuerbar) und keinen Marktplatz oder Netzwerkdienst oeffnet. Die uebrigen Kandidaten bleiben aus: `dsh-market` vergroessert die Angriffsflaeche, Vision/Pocket sind redundant, Agent-Teams waren nicht beauftragt. Jedes Plugin laeuft mit den Shell-Rechten desselben Agenten, deshalb bleibt die Liste bewusst kurz.
 
 ### 6.1 npm-Pruefung der Kandidaten (2026-10-05)
 
