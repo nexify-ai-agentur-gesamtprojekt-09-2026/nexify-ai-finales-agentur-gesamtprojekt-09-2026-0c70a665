@@ -1,0 +1,55 @@
+# CI fuer das DSH-Enterprise-Deployment.
+# Gates folgen dem Agentur-Standard: G0-G5 werden ueber ci/check_release.py
+# gegen ci/requirements.json nachgewiesen. Ohne vollstaendige Releaseakte
+# gibt es keinen Release.
+
+stages:
+  - validate
+  - verify
+  - release
+
+default:
+  image: python:3.12-alpine
+  before_script:
+    - apk add --no-cache bash git curl >/dev/null
+
+validate:static:
+  stage: validate
+  script:
+    - ./ci/stack-check.sh --static
+
+validate:release-gate-not-vacuous:
+  stage: validate
+  script:
+    # Der Validator muss einen unvollstaendigen Nachweis ablehnen. Laeuft er
+    # hier durch, ist das Gate wertlos.
+    - python3 ci/make-evidence.py "$CI_COMMIT_SHA" ci/requirements.json /tmp/evidence.json
+    - |
+      if RELEASE_COMMIT="$CI_COMMIT_SHA" python3 ci/check_release.py ci/requirements.json /tmp/evidence.json; then
+        echo "FEHLER: Validator hat unvollstaendigen Nachweis akzeptiert"; exit 1
+      else
+        echo "ok: Validator lehnt unvollstaendigen Nachweis ab"
+      fi
+
+verify:live:
+  stage: verify
+  rules:
+    - when: manual
+      allow_failure: false
+  variables:
+    STACK_URL: "https://179.198.195.91.nip.io"
+    HARNESS_URL: "https://179.198.195.91.sslip.io"
+  script:
+    - ./ci/stack-check.sh --live
+
+release:gate:
+  stage: release
+  rules:
+    - if: $CI_COMMIT_TAG
+  variables:
+    RELEASE_COMMIT: $CI_COMMIT_SHA
+  script:
+    - test -f release/evidence.json || { echo "FEHLT: release/evidence.json"; exit 1; }
+    - ./ci/stack-check.sh --static
+    - python3 ci/check_release.py ci/requirements.json release/evidence.json
+    - echo "Release-Nachweis akzeptiert fuer $CI_COMMIT_SHA"

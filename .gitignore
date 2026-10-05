@@ -1,0 +1,8 @@
+# Laufzeit- und Geheimnistraeger: niemals committen
+prod/
+*.env
+.env
+release/
+*.tar.gz
+*.sha256
+__pycache__/

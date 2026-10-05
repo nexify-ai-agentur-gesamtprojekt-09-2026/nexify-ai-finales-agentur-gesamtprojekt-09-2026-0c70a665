@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "profile": "agentur",
+  "as_of": "2026-10-03",
+  "origin": "Eigene projektbezogene Anforderungen; keine offiziellen Normenklauseln",
+  "requirements": [
+    {
+      "id": "B01",
+      "gate": "G0",
+      "area": "Geltungsbereich",
+      "requirement": "Rechtsträger, Land, Betreiber, Verantwortlicher, Auftragsverarbeiter, Systemgrenzen und Vertragsumfang dokumentieren.",
+      "acceptance_evidence": "Freigegebene Scope- und Verantwortungsmatrix",
+      "source_ids": [
+        "DSGVO",
+        "ISO-29148"
+      ]
+    },
+    {
+      "id": "B02",
+      "gate": "G0",
+      "area": "Anwendbarkeit",
+      "requirement": "Für jedes Gesetz, jede Zulassung und jede Norm anwendbar/nicht anwendbar/offen mit Begründung entscheiden. Offene Pflichtfragen sperren die betroffene Freigabe.",
+      "acceptance_evidence": "Versioniertes Anwendbarkeitsregister",
+      "source_ids": [
+        "DSGVO",
+        "BFSG",
+        "AI-ACT"
+      ]
+    },
+    {
+      "id": "B03",
+      "gate": "G0",
+      "area": "Anforderungen",
+      "requirement": "Jede Anforderung erhält ID, Priorität, Owner, Quelle, Akzeptanzkriterium und mindestens einen Positiv- und Negativtest.",
+      "acceptance_evidence": "Nachverfolgbare Anforderungs- und Testmatrix",
+      "source_ids": [
+        "ISO-29148"
+      ]
+    },
+    {
+      "id": "B04",
+      "gate": "G0",
+      "area": "Lizenzen",
+      "requirement": "Code, Bilder, Lerninhalte, Schriftarten, Daten, Normenvolltexte und KI-Nutzung getrennt lizenzieren.",
+      "acceptance_evidence": "Lizenzregister und Freigaben",
+      "source_ids": [
+        "ISO-27001"
+      ]
+    },
+    {
+      "id": "B05",
+      "gate": "G1",
+      "area": "Datenschutz",
+      "requirement": "Verarbeitungszwecke, Rechtsgrundlagen, Datenkategorien, Empfänger, Speicherfristen und Betroffenenrechte dokumentieren.",
+      "acceptance_evidence": "Verarbeitungsverzeichnis und Löschkonzept",
+      "source_ids": [
+        "DSGVO",
+        "ULD-VVT"
+      ]
+    },
+    {
+      "id": "B06",
+      "gate": "G1",
+      "area": "Datenflüsse",
+      "requirement": "Unterauftragsverarbeiter, AV-Verträge, Drittlandtransfers und Fernzugriffe erfassen; EU-Hosting allein reicht nicht.",
+      "acceptance_evidence": "Datenflussplan und Transferprüfung",
+      "source_ids": [
+        "DSGVO"
+      ]
+    },
+    {
+      "id": "B07",
+      "gate": "G1",
+      "area": "Folgenabschätzung",
+      "requirement": "DSFA-Erforderlichkeit vor sensibler oder risikoreicher Verarbeitung prüfen; Gesundheitsdaten und Profiling gesondert bewerten.",
+      "acceptance_evidence": "DSFA-Schwellenprüfung und bei Bedarf freigegebene DSFA",
+      "source_ids": [
+        "DSGVO",
+        "ULD-DESIGN"
+      ]
+    },
+    {
+      "id": "B08",
+      "gate": "G1",
+      "area": "Mandantentrennung",
+      "requirement": "Kunden, Fachbereiche und Rechtsträger durch serverseitige Autorisierung und Datenzugriffskontrollen trennen.",
+      "acceptance_evidence": "Automatische Tests mit fremden Objekt- und Mandanten-IDs",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "B09",
+      "gate": "G1",
+      "area": "Zugänge",
+      "requirement": "Privilegierte Konten mit MFA absichern; Einmal-Links zeitlich begrenzen, einmalig verwenden und widerrufbar machen.",
+      "acceptance_evidence": "Auth-, Ablauf-, Wiederverwendungs- und Widerrufstests",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "B10",
+      "gate": "G1",
+      "area": "Barrierefreiheit",
+      "requirement": "WCAG 2.2 AA als Vertragsziel empfehlen; gesetzlichen Prüfmaßstab, öffentliche Trägerschaft und BFSG-Ausnahmen gesondert klären.",
+      "acceptance_evidence": "Scopeentscheidung; manuelle Tastatur-, Screenreader- und Zoomprüfung",
+      "source_ids": [
+        "WCAG22",
+        "ETSI-301549",
+        "BFSG"
+      ]
+    },
+    {
+      "id": "B11",
+      "gate": "G2",
+      "area": "Secrets",
+      "requirement": "Keine Geheimnisse, Produktivdatensätze oder persönlichen Dokumente in Git, CI-Logs, Screenshots oder Testartefakten.",
+      "acceptance_evidence": "Secret-Scan und Prüfung der Artefaktredaktion",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "B12",
+      "gate": "G2",
+      "area": "Dependencies",
+      "requirement": "Lockfiles, SBOM, Lizenzprüfung, Schwachstellenscan und zeitgebundene dokumentierte Ausnahmen vorhalten.",
+      "acceptance_evidence": "SBOM, Scanberichte und Ausnahmeregister",
+      "source_ids": [
+        "ASVS-JSON",
+        "CYCLONEDX"
+      ]
+    },
+    {
+      "id": "B13",
+      "gate": "G2",
+      "area": "Uploads",
+      "requirement": "Größe, Dateityp und Berechtigung serverseitig prüfen; Quarantäne, Malwareprüfung und sichere Downloads vorsehen.",
+      "acceptance_evidence": "Tests für manipulierte Endung, Polyglot, Übergröße und fremde Datei",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "B14",
+      "gate": "G2",
+      "area": "Schnittstellen",
+      "requirement": "Schemas, Authentisierung, Idempotenz, Signaturen, Timeouts, Rate Limits und Wiederholung festlegen.",
+      "acceptance_evidence": "API-Vertrag und Webhook-Replay-/Fehlertests",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "B15",
+      "gate": "G2",
+      "area": "Konfiguration",
+      "requirement": "Entwicklung, Test und Produktion einschließlich Datenbanken, Storage, Mail und Schlüsseln trennen.",
+      "acceptance_evidence": "Umgebungsinventar und Zugriffstest",
+      "source_ids": [
+        "BSI-XML"
+      ]
+    },
+    {
+      "id": "B16",
+      "gate": "G2",
+      "area": "Mail",
+      "requirement": "Transaktionale und werbliche Nachrichten trennen; Zustellung, Bounces, Abmeldung und Einwilligungsnachweis testen.",
+      "acceptance_evidence": "Zustell- und Opt-out-Protokoll mit synthetischen Adressen",
+      "source_ids": [
+        "UWG",
+        "DSK-WERBUNG"
+      ]
+    },
+    {
+      "id": "B17",
+      "gate": "G3",
+      "area": "Tests",
+      "requirement": "Build, Typprüfung, Lint, Unit-, Integrations-, E2E-, Rollen-, Randfall- und Regressionstests bestehen. Keine erfolgreichen Leerläufe.",
+      "acceptance_evidence": "CI-Artefakte am geprüften Commit",
+      "source_ids": [
+        "ISO-25010"
+      ]
+    },
+    {
+      "id": "B18",
+      "gate": "G3",
+      "area": "Oberflächen",
+      "requirement": "Mobile Nutzung, Formulare, Fehlermeldungen, Uploads, Links, Sprache und Statuswechsel auf realen Journeys prüfen.",
+      "acceptance_evidence": "Viewport- und Browsermatrix mit fachlichen Testfällen",
+      "source_ids": [
+        "ISO-9241-210"
+      ]
+    },
+    {
+      "id": "B19",
+      "gate": "G3",
+      "area": "Tracking",
+      "requirement": "Nicht erforderliche Endgerätezugriffe nach einschlägiger Einwilligung; Ablehnen und Widerrufen vollständig testen.",
+      "acceptance_evidence": "Netzwerkprüfung vor Zustimmung, nach Ablehnung und nach Widerruf",
+      "source_ids": [
+        "TDDDG",
+        "DSK-DIGITAL"
+      ]
+    },
+    {
+      "id": "B20",
+      "gate": "G3",
+      "area": "Last",
+      "requirement": "Budget für Antwortzeiten, Fehlerraten und Kapazität am tatsächlichen Nutzungsprofil festlegen und messen.",
+      "acceptance_evidence": "Lastprofil, Messwerte, Schwellen und Kapazitätsplan",
+      "source_ids": [
+        "ISO-25010"
+      ]
+    },
+    {
+      "id": "B21",
+      "gate": "G3",
+      "area": "Sicherheit",
+      "requirement": "ASVS-Anwendbarkeit je Anforderung dokumentieren; automatisierte Scans um manuelle Auth-/Logikprüfungen ergänzen.",
+      "acceptance_evidence": "ASVS-Matrix und unabhängiger Befundbericht",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "B22",
+      "gate": "G4",
+      "area": "Release",
+      "requirement": "Nur identifizierte, getestete Version mit Prüfberichten, Migrationsplan, fachlicher Freigabe und Rollbackplan veröffentlichen.",
+      "acceptance_evidence": "Releaseakte mit Commit, Artefakt-Hash und Freigaben",
+      "source_ids": [
+        "GH-RULESETS"
+      ]
+    },
+    {
+      "id": "B23",
+      "gate": "G4",
+      "area": "Wiederherstellung",
+      "requirement": "Backup und Restore mit synthetischem Referenzdatensatz testen; RPO/RTO fachlich festlegen.",
+      "acceptance_evidence": "Gemessener Restorebericht; keine bloße Backup-Erfolgsmeldung",
+      "source_ids": [
+        "BSI-XML"
+      ]
+    },
+    {
+      "id": "B24",
+      "gate": "G4",
+      "area": "Rechtstexte",
+      "requirement": "Impressum, Datenschutz, Vertrags-/Verbraucherinformationen, Werbung und Zertifikatsaussagen am realen Prozess prüfen.",
+      "acceptance_evidence": "Freigabe der zuständigen Rechts-/Datenschutzrolle",
+      "source_ids": [
+        "DDG",
+        "DSGVO",
+        "UWG"
+      ]
+    },
+    {
+      "id": "B25",
+      "gate": "G5",
+      "area": "Betrieb",
+      "requirement": "Monitoring, Alarmierung, Verantwortliche, Support, Incident-Response, Wiederanlauf und Patchfristen dokumentieren.",
+      "acceptance_evidence": "Runbook und Übungsnachweis",
+      "source_ids": [
+        "ISO-27001"
+      ]
+    },
+    {
+      "id": "B26",
+      "gate": "G5",
+      "area": "Quellenpflege",
+      "requirement": "Regelwerksänderungen versioniert erfassen, Auswirkungen und offene Arbeiten ableiten, Freigaben erneut prüfen.",
+      "acceptance_evidence": "Quellenregister mit Datum, Prüfsumme, Version und Änderungsentscheidung",
+      "source_ids": [
+        "DIN-TICKER"
+      ]
+    },
+    {
+      "id": "B27",
+      "gate": "G1",
+      "area": "KI",
+      "requirement": "KI-Inventar, Anbieter-/Betreiberrolle, Zweck, Datenfluss, Risikoklasse, Transparenz und menschliche Aufsicht definieren.",
+      "acceptance_evidence": "KI-Systemkarte und dokumentierte Einstufung",
+      "source_ids": [
+        "AI-ACT",
+        "AI-COMMISSION",
+        "ISO-42001"
+      ]
+    },
+    {
+      "id": "B28",
+      "gate": "G3",
+      "area": "KI-Qualität",
+      "requirement": "RAG-Quellenzugriff, Prompt-Injection, unzulässige Datenoffenlegung, Halluzinationen und Rollenwechsel testen.",
+      "acceptance_evidence": "Evaluationsdatensatz ohne reale Personendaten; Nachweisgrenzen dokumentiert",
+      "source_ids": [
+        "DSK-RAG",
+        "DSK-KI-TOM"
+      ]
+    },
+    {
+      "id": "B29",
+      "gate": "G4",
+      "area": "Abnahmetrennung",
+      "requirement": "Softwareabnahme, fachliche Abnahme, Datenschutz-/Rechtsprüfung und formale Zertifizierung getrennt führen.",
+      "acceptance_evidence": "Separate nachvollziehbare Entscheidungen",
+      "source_ids": [
+        "ISO-9001"
+      ]
+    },
+    {
+      "id": "B30",
+      "gate": "G5",
+      "area": "Datenlebenszyklus",
+      "requirement": "Berichtigung, Auskunft, Export, Archivierung, Sperre und kontrollierte Löschung einschließlich Backups regeln.",
+      "acceptance_evidence": "Prozess- und Berechtigungsnachweis; keine automatische Löschung ohne festgelegte Befugnis",
+      "source_ids": [
+        "DSGVO"
+      ]
+    },
+    {
+      "id": "B31",
+      "gate": "G2",
+      "area": "Rechnungsfunktionen",
+      "requirement": "Bei Rechnungs-/Buchhaltungsfunktionen GoBD und konkrete E-Rechnungspflichten nach Geschäftsfall, Frist und Ausnahme prüfen; strukturierte Originaldaten erhalten.",
+      "acceptance_evidence": "Anwendbarkeitsentscheidung; XML-Validierung, Korrektur-/Stornoprozess und Archivnachweis",
+      "source_ids": [
+        "BMF-GOBD",
+        "BMF-ERECHNUNG",
+        "KOSIT"
+      ]
+    },
+    {
+      "id": "B32",
+      "gate": "G1",
+      "area": "Cloud-Nachweise",
+      "requirement": "Bei Cloud-Nutzung Anbieterprüfberichte, Prüfzeitraum, Leistungsumfang, Ausnahmen und geteilte Verantwortung prüfen; C5 als ergänzenden Maßstab verwenden.",
+      "acceptance_evidence": "Anbieter-/Vertragsprüfung und zugeordnete eigene Maßnahmen; kein pauschaler C5-Zertifizierungszwang",
+      "source_ids": [
+        "BSI-C5",
+        "ISO-27001"
+      ]
+    },
+    {
+      "id": "A01",
+      "gate": "G0",
+      "area": "Auftrag",
+      "requirement": "Leistungsumfang, Abgrenzung, Verantwortlichkeiten, Abnahmeverfahren, SLAs und Änderungsbudget verbindlich vereinbaren.",
+      "acceptance_evidence": "Freigegebener Vertrag und Scope",
+      "source_ids": [
+        "ISO-29148"
+      ]
+    },
+    {
+      "id": "A02",
+      "gate": "G1",
+      "area": "Kundenisolation",
+      "requirement": "Jeder Kunde erhält getrennte Repositories oder wirksame Zugriffstrennung, getrennte Secrets und geregelten Supportzugang.",
+      "acceptance_evidence": "Cross-Customer-Tests und Zugriffsreview",
+      "source_ids": [
+        "ASVS-JSON"
+      ]
+    },
+    {
+      "id": "A03",
+      "gate": "G1",
+      "area": "Agenturrollen",
+      "requirement": "Vertrieb, Projektleitung, Entwicklung, Review, Betrieb, Datenschutz und Kundenfreigabe mit Stellvertretung definieren.",
+      "acceptance_evidence": "Rollenmatrix und Vier-Augen-Regel für kritische Änderungen",
+      "source_ids": [
+        "ISO-9001"
+      ]
+    },
+    {
+      "id": "A04",
+      "gate": "G1",
+      "area": "Marketing",
+      "requirement": "Kanal, Zielgruppe, Rechtsgrundlage, Tracking, Einwilligung, Widerspruch und Löschfristen je Kampagne klären.",
+      "acceptance_evidence": "Kampagnenakte und Kanaltests",
+      "source_ids": [
+        "UWG",
+        "DSK-WERBUNG"
+      ]
+    },
+    {
+      "id": "A05",
+      "gate": "G2",
+      "area": "Werbeintegrationen",
+      "requirement": "Consentstatus server- und clientseitig durchsetzen; serverseitiges Tracking umgeht Einwilligungsregeln nicht.",
+      "acceptance_evidence": "Tests für Pixel, Conversion-API, Consent Mode und Widerruf",
+      "source_ids": [
+        "TDDDG",
+        "DSK-DIGITAL"
+      ]
+    },
+    {
+      "id": "A06",
+      "gate": "G2",
+      "area": "Automatisierungen",
+      "requirement": "Berechtigung, Budget, Laufzeit, Wiederholung, Idempotenz und Not-Aus je Agent/Workflow festlegen.",
+      "acceptance_evidence": "Policy und Negative-Tests für unzulässige Aktion",
+      "source_ids": [
+        "ISO-42001"
+      ]
+    },
+    {
+      "id": "A07",
+      "gate": "G3",
+      "area": "Text und Design",
+      "requirement": "Urheber-/Markenrechte, belegbare Aussagen, vereinbarte CI und barrierefreie Gestaltung je Kunde prüfen.",
+      "acceptance_evidence": "Inhalts-, Rechte- und Gestaltungsfreigabe",
+      "source_ids": [
+        "UWG",
+        "ISO-9241-210"
+      ]
+    },
+    {
+      "id": "A08",
+      "gate": "G4",
+      "area": "Übergabe",
+      "requirement": "Betriebsdokumentation, Adminzugänge, Schulung, Export und Exit-Verfahren vollständig übergeben.",
+      "acceptance_evidence": "Übergabeprotokoll mit überprüfbarem Zugriff",
+      "source_ids": [
+        "ISO-9001"
+      ]
+    },
+    {
+      "id": "A09",
+      "gate": "G5",
+      "area": "Kosten",
+      "requirement": "Hosting-, API-, Speicher-, Mail-, CI- und KI-Kosten getrennt messen; Limits und Überziehungswarnungen setzen.",
+      "acceptance_evidence": "Kostenbericht und Budgetalarmtest",
+      "source_ids": [
+        "ISO-25010"
+      ]
+    },
+    {
+      "id": "A10",
+      "gate": "G0",
+      "area": "Zusatzrecht",
+      "requirement": "NIS2 bei relevanter Anbieterrolle/Größe, CRA bei Softwareprodukten, DSA bei Vermittler-/Hostingfunktionen prüfen.",
+      "acceptance_evidence": "Begründeter Scopeentscheid; keine pauschale Betroffenheit",
+      "source_ids": [
+        "BSI-NIS2",
+        "CRA",
+        "DSA"
+      ]
+    }
+  ]
+}
