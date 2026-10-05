@@ -102,3 +102,15 @@ Remote ist gesetzt (`http://127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agen
 | `dsh-desktop` (anywhere-labs) | Desktop-Client | Desktop kommt aus dem Enterprise-Paket | MIT | nicht noetig |
 
 Empfehlung: keine Installation ohne Freigabe. Der Nutzen des beauftragten Ziels (Server rechnet, lokal nutzbar) ist bereits ohne Fremdplugin erreicht; jedes Plugin laeuft mit Shell-Rechten desselben Agenten.
+
+### 6.1 npm-Pruefung der Kandidaten (2026-10-05)
+
+| Paket | Version | Lizenz | Veroeffentlicht | Abhaengigkeiten |
+|---|---|---|---|---|
+| dsh-context | 0.64.0 | Apache-2.0 | 2026-10-05 | 1 |
+| dshmarket | 1.66.8 | MIT | 2026-10-01 | 2 |
+| dsh-pocket | 2.10.6 | GPL-2.0 | 2026-09-10 | 2 |
+| @nanmicoder/dsh-agent-teams | 0.1.22 | MIT | 2026-09-29 | 0 |
+| @oh-dsh/vision | nicht im npm-Registry | – | – | – |
+
+Die Installation erfolgt je Profil mit `dsh plugin --profile <name> add <paket>`. Ohne Freigabe bleibt sie aus.
