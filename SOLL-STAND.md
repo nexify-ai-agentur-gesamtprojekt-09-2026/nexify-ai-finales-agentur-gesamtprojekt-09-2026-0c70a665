@@ -50,7 +50,7 @@ Tokens der Harness-Web-UI werden pro Start neu erzeugt und stehen im Journal:
 2. Modell-Nachweis im Desktop: `dsh_model_call` = 0. Testnachricht des Nutzers offen.
 3. Cookie-Haertung: Harness setzt Session-Cookies ohne `Secure` (Hersteller-Doku: der Proxy soll `Secure` ergaenzen). Traefik kann `Set-Cookie`-Attribute nicht nativ umschreiben. Kompensiert durch HSTS (`max-age=31536000`, `forceSTSHeader`) plus HTTPS-Redirect auf allen dsh-Routern; Restrisiko bleibt die erste Klartext-Anfrage vor HSTS-Wirksamkeit.
 4. Plugin `dsh-context` ist im Profil `web` installiert und geladen (siehe Abschnitt 6).
-5. GitLab-Push: kein Token auf dem Host, GitLab nach aussen nur IPv6.
+5. GitLab-Push: erledigt. Projekt-Token (HTTPS) mit `write_repository`, Branch `dsh-enterprise-deployment`, Pipeline gruen.
 
 ## 5.1 Sicherheitsheader (2026-10-05)
 
