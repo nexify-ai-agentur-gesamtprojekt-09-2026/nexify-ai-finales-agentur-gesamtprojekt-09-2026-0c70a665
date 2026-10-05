@@ -94,6 +94,25 @@ erzeugen koennen.
 | Vision | ueber Modell abgedeckt | Modell deklariert `input: [text, image]` |
 | GitHub-Review-Webhook | verfuegbar, nicht aktiviert | opt-in Overlay des Herstellers |
 | `dsh-context` (Plugin) | installiert, geladen | im Profil `web` aktiv; Web-UI liefert `context/client.js`, Login 200 |
+| `dshmarket` (Plugin) | installiert, geladen | im Profil `web` aktiv; Web-UI liefert `dshmarket/client.js` |
+
+## 7.1 myADMIN Cockpit (2026-10-05)
+
+Erster lauffaehiger myADMIN-Teil auf dem projektkonformen Stack, Repo
+`/root/nexify-myadmin`, Branch `myadmin-p0-cockpit`:
+
+| Teil | Nachweis |
+|---|---|
+| Tokens aus `config/design-tokens.json` | 69 CSS-Variablen, `packages/tokens/dist` |
+| Mandantentrennung (RLS) | `infra/db/rls-test.sh` -> A/B-Test OK, ohne Kontext 0 Zeilen |
+| Postgres | Container `myadmin-pg`, 127.0.0.1:5599, App-Rolle ohne BYPASSRLS |
+| Backend | `/myadmin/api/cockpit` liefert Dienste (3002/3085/20128), Systemwerte, Kennzahlen live |
+| UI | `/myadmin/cockpit` server-gerendert, Werte aus den Tokens |
+| Betrieb | systemd `myadmin-cockpit`, Benutzer `myadmin`, `/opt/myadmin/web` |
+| Route | Traefik `myadmin-cockpit` (Host + PathPrefix, Prioritaet 1000) - Harness-Route bleibt 401 |
+| CI | Pipeline #2167 gruen inkl. `myadmin-tokens` und `myadmin-rls` |
+
+Oeffentlich erreichbar ohne DNS-Aenderung: https://179.198.195.91.sslip.io/myadmin/cockpit
 
 ## 8. CI
 
