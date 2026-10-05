@@ -46,6 +46,47 @@ Tokens der Harness-Web-UI werden pro Start neu erzeugt und stehen im Journal:
 2. Modell-Nachweis im Desktop: `dsh_model_call` = 0. Testnachricht des Nutzers offen.
 3. Cookie-Haertung: Harness setzt Session-Cookies ohne `Secure`. Traefik erzwingt HTTPS-Redirect, aber ein Response-Header-Rewrite fehlt.
 4. Plugin-Auswahl: siehe Abschnitt 6, Installation noch nicht erfolgt.
+5. GitLab-Push: kein Token auf dem Host, GitLab nach aussen nur IPv6.
+
+## 7. Integrationen (Ist)
+
+| Integration | Zustand | Nachweis |
+|---|---|---|
+| Enterprise-Plugin-Markt (BISHENG) | aktiv | `/api/v1/dsh/market/capabilities` → `enabled: true`, Public Key vorhanden |
+| Markt-Katalog | leer, bereit | `/api/v1/dsh/market/catalog` → `total: 0` (keine Bundles veroeffentlicht) |
+| Signatur-Schluessel | Ed25519, ausserhalb des Repos | `/etc/dsh-enterprise/market.env` (600), per `env_file` im Gateway-Overlay |
+| Harness-Plugin-Manager | vorhanden | Pakete `dsh-plugin-manager`, `dsh-client-ui-plugin-manager` |
+| MCP-Client (Fremd-Memory) | vorhanden, default aus | `dsh-mcp-client`, `dsh-mcp-resources`; Overlays nur per `--patch` |
+| Automatisierung/Erinnerungen | im Webprofil enthalten | `dsh-schedule`, `dsh-client-ui-schedule`, Tools `schedule_*` |
+| Vision | ueber Modell abgedeckt | Modell deklariert `input: [text, image]` |
+| GitHub-Review-Webhook | verfuegbar, nicht aktiviert | opt-in Overlay des Herstellers |
+
+## 8. CI
+
+Repository `/root/dsh-enterprise` ist ein lokales Git-Repo (Branch `master`).
+
+| Datei | Zweck |
+|---|---|
+| `.gitlab-ci.yml` | Stages validate, verify, release |
+| `ci/stack-check.sh` | `--static` und `--live`, liefert beide `OK` |
+| `ci/check_release.py`, `ci/requirements.json` | Release-Gate des Agentur-Standards (42 Anforderungen, G0–G5) |
+| `ci/make-evidence.py` | erzeugt das Nachweisgeruest mit allen 42 IDs |
+
+Belege: `stack-check --static` → OK (inkl. SHA-256-Pin des Hersteller-Skripts), `stack-check --live` → OK (Gateway 200, Enterprise-API 200, Harness 401 = Auth aktiv, Host-Fence 403), Negativtest → Validator lehnt unvollstaendigen Nachweis ab.
+
+Remote ist gesetzt (`http://127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git`); Push scheitert an fehlender Authentifizierung.
+
+## 9. Skills-Plan
+
+| Arbeitsstrang | Skill | Einsatz |
+|---|---|---|
+| Deployment/Release-Gates | deployment-procedures | Pre-Deployment-Kategorien, Rollback-Denken |
+| Lieferkette, Secrets | security-review | Geheimnis-Hygiene, Fremdcode-Risiko |
+| Nachweispflicht | verification-before-completion | jede Aussage nur mit frischem Kommando-Nachweis |
+| Container/Compose | docker-expert | Overlay-Pflege, Neustart-Risiko |
+| Betrieb/Telemetrie | observability-engineer | Health-, Log- und Alarmfragen |
+| Integrationen | mcp-builder, agent-development | MCP-Server und Harness-Plugins |
+| Versionierung | commit-work | Commit-Inhalt und Nachricht |
 
 ## 6. Plugin-Recherche (Topic `dsh-plugin`, 17.654 Repos, Stand 2026-10-05)
 
