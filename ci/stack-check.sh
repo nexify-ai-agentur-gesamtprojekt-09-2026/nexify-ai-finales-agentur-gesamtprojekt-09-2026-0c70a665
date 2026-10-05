@@ -6,17 +6,28 @@ set -Eeuo pipefail
 MODE=${1:---static}
 FAIL=0
 
+# Hersteller-Skript: Integritaet ueber Hash statt Textsuche. Die Datei enthaelt
+# dokumentierte Standard-Zugangsdaten des Anbieters (CR-Registry, Beispiel-MySQL),
+# die kein Geheimnis dieses Projekts sind.
+INSTALLER=install-dsh-enterprise.sh
+INSTALLER_SHA=2b0594525655a9cdaa19324cd104eea3179f883f214b081e86c302b18a3a7a0a
+
 ok()   { printf '  ok   %s\n' "$1"; }
 bad()  { printf '  FAIL %s\n' "$1"; FAIL=1; }
 
 static_checks() {
   printf '[static] Syntax und Struktur\n'
-  bash -n install-dsh-enterprise.sh && ok 'install-dsh-enterprise.sh (bash -n)' || bad 'install-dsh-enterprise.sh Syntax'
+  bash -n "$INSTALLER" && ok "$INSTALLER (bash -n)" || bad "$INSTALLER Syntax"
   bash -n ci/stack-check.sh && ok 'ci/stack-check.sh (bash -n)' || bad 'ci/stack-check.sh Syntax'
   python3 -m json.tool ci/requirements.json >/dev/null && ok 'ci/requirements.json (JSON)' || bad 'ci/requirements.json unlesbar'
 
+  printf '[static] Hersteller-Skript unveraendert\n'
+  actual=$(sha256sum "$INSTALLER" | cut -d' ' -f1)
+  [[ $actual == "$INSTALLER_SHA" ]] && ok "$INSTALLER SHA-256 unveraendert" || bad "$INSTALLER SHA-256 abweichend ($actual)"
+
   printf '[static] Keine Geheimnisse im Repo\n'
-  if git ls-files -z 2>/dev/null | xargs -0 -r grep -lEi '(sk-[A-Za-z0-9]{16,}|glpat-[A-Za-z0-9_-]{16,}|BEGIN (RSA|OPENSSH) PRIVATE KEY|password\s*[:=]\s*[^"'"'"'[:space:]]{8,})' 2>/dev/null | grep -q .; then
+  if git ls-files -z 2>/dev/null | tr '\0' '\n' | grep -vx "$INSTALLER" \
+       | xargs -r -d '\n' grep -lEi '(sk-[A-Za-z0-9]{16,}|glpat-[A-Za-z0-9_-]{16,}|BEGIN (RSA|OPENSSH) PRIVATE KEY|password\s*[:=]\s*[^"'"'"'[:space:]]{8,})' 2>/dev/null | grep -q .; then
     bad 'moegliche Geheimnisse in versionierten Dateien'
   else
     ok 'keine offensichtlichen Geheimnisse'
@@ -46,11 +57,20 @@ live_checks() {
   [[ $code == 200 ]] && ok "Enterprise API ($code)" || bad "Enterprise API ($code)"
 
   code=$(curl -sk -m 15 -o /dev/null -w '%{http_code}' "$harness/" || true)
-  [[ $code == 200 || $code == 303 ]] && ok "Harness Web-UI ($code)" || bad "Harness Web-UI ($code)"
+  # Ohne Start-Token ist 401 die korrekte Antwort: erreichbar und Auth aktiv.
+  case $code in
+    200|303) ok "Harness Web-UI erreichbar ($code)";;
+    401)     ok 'Harness Web-UI erreichbar, Auth aktiv (401)';;
+    *)       bad "Harness Web-UI ($code)";;
+  esac
 
-  if command -v curl >/dev/null 2>&1; then
-    code=$(curl -sk -m 15 -o /dev/null -w '%{http_code}' -H 'Host: evil.example' "$harness/api/remote.mux" -X POST || true)
+  # Die Host-Fence sitzt am Listener, nicht am Proxy; nur direkt pruefbar.
+  local listener=${HARNESS_LISTENER:-http://127.0.0.1:3085}
+  if curl -s -m 5 -o /dev/null "$listener/" 2>/dev/null || curl -s -m 5 -o /dev/null -w '' "$listener/api/remote.mux" -X POST 2>/dev/null; then
+    code=$(curl -s -m 10 -o /dev/null -w '%{http_code}' -H 'Host: evil.example' -X POST "$listener/api/remote.mux" || true)
     [[ $code == 403 ]] && ok 'Host-Fence weist fremde Hosts ab (403)' || bad "Host-Fence ($code)"
+  else
+    printf '  skip Host-Fence (Listener %s nicht erreichbar)\n' "$listener"
   fi
 }
 
