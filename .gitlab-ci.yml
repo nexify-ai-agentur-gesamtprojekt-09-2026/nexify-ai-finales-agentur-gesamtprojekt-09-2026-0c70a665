@@ -23,10 +23,37 @@ json-konfig:
     - node -e "const fs=require('fs'),p=require('path');const r=[];(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
     - echo "alle config/*.json gültig"
 
+# P0 Fundament: Tokens aus config/design-tokens.json ableiten.
+myadmin-tokens:
+  stage: pruefen
+  image: node:22-alpine
+  script:
+    - node packages/tokens/scripts/build.mjs
+    - test "$(grep -c -- '--nx-' packages/tokens/dist/tokens.css)" -ge 60
+    - test -s packages/tokens/dist/tokens.json
+
+# P0 Fundament: Mandantentrennung per Row-Level-Security, Prüffall A/B.
+myadmin-rls:
+  stage: pruefen
+  image: postgres:15-alpine
+  services:
+    - name: postgres:15-alpine
+      alias: pg
+  variables:
+    POSTGRES_PASSWORD: ci-only
+    POSTGRES_DB: myadmin
+    PGHOST: pg
+    PGUSER: postgres
+    PGPASSWORD: ci-only
+    PGDATABASE: myadmin
+  script:
+    - apk add --no-cache bash >/dev/null
+    - bash infra/db/rls-test.sh
+
 jeff-gate:
   stage: jeff
   image: python:3.12-alpine
-  needs: ["ds-audit", "manifest", "json-konfig"]
+  needs: ["ds-audit", "manifest", "json-konfig", "myadmin-tokens", "myadmin-rls"]
   script:
     - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
 

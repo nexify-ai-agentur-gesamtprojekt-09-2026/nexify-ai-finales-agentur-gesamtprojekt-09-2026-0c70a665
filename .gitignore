@@ -7,6 +7,12 @@ secrets/
 # Node-/Toolchain-Artefakte
 node_modules/
 __pycache__/
+.next/
+out/
+
+# Erzeugte Token-Ausgaben - Quelle ist config/design-tokens.json
+packages/tokens/dist/
+apps/web/app/tokens.generated.css
 
 # Betriebssystem
 .DS_Store

@@ -1,0 +1,23 @@
+@import './tokens.generated.css';
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--nx-color-graphit-800);
+  color: var(--nx-color-text-sekundaer);
+  font-family: var(--nx-font-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--nx-color-marke-lime); }
+
+:focus-visible {
+  outline: var(--nx-focus-ring);
+  outline-offset: var(--nx-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
