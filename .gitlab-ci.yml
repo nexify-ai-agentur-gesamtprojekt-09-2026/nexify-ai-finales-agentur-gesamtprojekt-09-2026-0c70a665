@@ -58,7 +58,7 @@ release:gate:
   variables:
     RELEASE_COMMIT: $CI_COMMIT_SHA
   script:
-    - test -f release/evidence.json || { echo "FEHLT: release/evidence.json"; exit 1; }
+    - 'test -f release/evidence.json || { echo "FEHLT: release/evidence.json"; exit 1; }'
     - ./ci/stack-check.sh --static
     - python3 ci/check_release.py ci/requirements.json release/evidence.json
     - echo "Release-Nachweis akzeptiert fuer $CI_COMMIT_SHA"
