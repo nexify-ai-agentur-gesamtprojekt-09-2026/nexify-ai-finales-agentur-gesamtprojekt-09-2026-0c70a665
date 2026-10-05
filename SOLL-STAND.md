@@ -83,6 +83,19 @@ erzeugen koennen.
 
 ## 7. Integrationen (Ist)
 
+Markt-Nachweis (2026-10-05, Admin-Session):
+
+| Aufruf | Ergebnis |
+|---|---|
+| `GET /dsh/market/admin/context` | 200, `tenant_id: 1` |
+| `GET /dsh/market/admin/plugins` | 200, `total: 0` |
+| `GET /dsh/market/admin/imports` | 200, `[]` (keine Importe) |
+| `GET /dsh/market/catalog` | 200, `total: 0` |
+| `POST /dsh/market/admin/imports/preview` mit Nicht-ZIP | `26201 Invalid offline plugin bundle` (Validierung greift, kein 404/500) |
+
+Der Katalog ist leer, weil noch kein Bundle veroeffentlicht wurde — die
+Verwaltungs- und Validierungsstrecke ist erreichbar und arbeitet.
+
 | Integration | Zustand | Nachweis |
 |---|---|---|
 | Enterprise-Plugin-Markt (BISHENG) | aktiv | `/api/v1/dsh/market/capabilities` → `enabled: true`, Public Key vorhanden |
