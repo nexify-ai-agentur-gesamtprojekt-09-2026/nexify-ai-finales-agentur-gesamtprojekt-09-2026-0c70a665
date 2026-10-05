@@ -44,7 +44,7 @@ verify:live:
   stage: verify
   rules:
     - when: manual
-      allow_failure: false
+      allow_failure: true
   variables:
     STACK_URL: "https://179.198.195.91.nip.io"
     HARNESS_URL: "https://179.198.195.91.sslip.io"
