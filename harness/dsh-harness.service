@@ -1,0 +1,21 @@
+[Unit]
+Description=DeepSeek Harness Web UI (dsh, profile web)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=dsh
+Group=dsh
+EnvironmentFile=/etc/dsh-harness.env
+Environment=DSH_HOME=/srv/dsh/home
+Environment=HOME=/srv/dsh
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+WorkingDirectory=/srv/dsh/workspace
+ExecStart=/opt/dsh/node_modules/.bin/dsh web --host 127.0.0.1 --port 3085 --no-open --trusted-host 179.198.195.91.sslip.io
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+# Maschinenweiter Patch-Layer: gilt fuer jedes dsh-Profil dieses Homes.
+# Modellroute ueber den lokalen 9Router; der Key kommt aus NINEROUTER_KEY.
+- id: agent-default-model
+  config:
+    provider: nexifyai-router
+    model: ollama-local/deepseek-v4.1-flash:cloud
+- id: llm-pi-ai
+  config:
+    providers:
+      nexifyai-router:
+        apiKeyEnv: NINEROUTER_KEY
+        api: openai-completions
+        baseURL: http://127.0.0.1:20128/v1
+        models:
+          - id: ollama-local/deepseek-v4.1-flash:cloud
+            input: [text, image]

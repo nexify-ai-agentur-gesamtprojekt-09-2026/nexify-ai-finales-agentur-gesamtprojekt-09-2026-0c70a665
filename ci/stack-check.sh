@@ -43,6 +43,17 @@ static_checks() {
   else
     printf '[static] Compose uebersprungen (kein prod/ oder docker)\n'
   fi
+
+  if command -v dsh >/dev/null 2>&1 || [[ -n ${DSH_BIN:-} ]]; then
+    printf '[static] Harness-Konfiguration\n'
+    if ./ci/harness-config-check.sh >/dev/null 2>&1; then
+      ok 'Profil web komponiert mit Modellroute'
+    else
+      bad 'Harness-Konfiguration ungueltig'
+    fi
+  else
+    printf '[static] Harness-Konfiguration uebersprungen (kein dsh im PATH)\n'
+  fi
 }
 
 live_checks() {
