@@ -34,8 +34,18 @@ validate:release-gate-not-vacuous:
 validate:harness-config:
   stage: validate
   image: node:22-alpine
+  cache:
+    key: dsh-npm-global
+    paths:
+      - .npm-cache/
+  rules:
+    - changes:
+        - harness/**
+        - ci/harness-config-check.sh
+        - .gitlab-ci.yml
   before_script:
     - apk add --no-cache bash git curl >/dev/null
+    - npm config set cache .npm-cache --global
     - npm install --global @deepseek-ai/dsh@0.2.0-rc.2 >/dev/null
   script:
     - DSH_BIN=dsh ./ci/harness-config-check.sh
