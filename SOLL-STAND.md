@@ -39,6 +39,10 @@ Tokens der Harness-Web-UI werden pro Start neu erzeugt und stehen im Journal:
 - `https://179.198.195.91.sslip.io/?token=...` → HTTP 303 Token-Tausch, danach HTTP 200 GUI, TLS-Pruefung `ssl_verify_result=0` (Let's Encrypt fuer `179.198.195.91.sslip.io`).
 - `gt_dsh_seat`: 2x ASSIGNED. `gt_dsh_session`: 1x ACTIVE (Desktop, Device `BISHENG` 1.0.1).
 - `systemctl is-enabled/is-active dsh-harness` → `enabled` / `active`.
+- Externe Erreichbarkeit aus einem fremden Netz (Abruf ueber r.jina.ai, 2026-10-05):
+  `https://179.198.195.91.nip.io/` → 200 mit echter Login-Seite ("NeX2fly Agentic AI"),
+  `https://179.198.195.91.sslip.io/` → 401 "dsh web authentication required".
+  Damit ist die Kette Internet → Traefik → Dienst belegt, nicht nur Loopback.
 
 ## 5. Offene Punkte
 
