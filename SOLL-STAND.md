@@ -87,7 +87,20 @@ Repository `/root/dsh-enterprise` ist ein lokales Git-Repo (Branch `master`).
 
 Belege: `stack-check --static` → OK (inkl. SHA-256-Pin des Hersteller-Skripts), `stack-check --live` → OK (Gateway 200, Enterprise-API 200, Harness 401 = Auth aktiv, Host-Fence 403), Negativtest → Validator lehnt unvollstaendigen Nachweis ab.
 
-Remote ist gesetzt (`http://127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git`); Push scheitert an fehlender Authentifizierung.
+Remote ist gesetzt und der Push funktioniert. Branch `dsh-enterprise-deployment` liegt auf
+`nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt` (GitLab 19.1.8, Projekt-ID 42).
+
+GitLab-Push-Nachweis (2026-10-05):
+
+| Schritt | Ergebnis |
+|---|---|
+| Token | `PersonalAccessToken` fuer Benutzer `root`, Scopes `api` + `write_repository`, 30 Tage; Ablage `/root/.gl_api_token` (600) |
+| Push | `master -> refs/heads/dsh-enterprise-deployment`, exit 0 |
+| Pipeline #2158 (Commit `6e8e459`) | failed, 0 Jobs — YAML-Bug im release-Gate-Script |
+| Pipeline #2159 (Commit `36c78a4`) | **success** — `validate:static`, `validate:release-gate-not-vacuous`, `validate:harness-config`, `verify:live` |
+
+Ursache des ersten Fehllaufs: `- test -f … || { echo "FEHLT: release/evidence.json"; exit 1; }`
+wurde von YAML als Flow-Mapping gelesen (das `: ` im String). Fix: die ganze Zeile gequotet.
 
 ## 9. Skills-Plan
 
