@@ -76,7 +76,8 @@ Nachweis: `curl -sk -D - https://179.198.195.91.sslip.io/` zeigt alle vier Heade
 
 ## 8. CI
 
-Repository `/root/dsh-enterprise` ist ein lokales Git-Repo (Branch `master`).
+Arbeitskopie `/root/dsh-enterprise`, Branch `dsh-enterprise-deployment`, Remote
+`http://127.0.0.1:8922/nexifyai_group/nexify-ai-finales-agentur-gesamtprojekt.git`.
 
 | Datei | Zweck |
 |---|---|
@@ -98,6 +99,15 @@ GitLab-Push-Nachweis (2026-10-05):
 | Push | `master -> refs/heads/dsh-enterprise-deployment`, exit 0 |
 | Pipeline #2158 (Commit `6e8e459`) | failed, 0 Jobs — YAML-Bug im release-Gate-Script |
 | Pipeline #2159 (Commit `36c78a4`) | **success** — `validate:static`, `validate:release-gate-not-vacuous`, `validate:harness-config`, `verify:live` |
+| Pipeline #2161 (Commit `372d88e`) | **success** — nach Fix: `verify:live` auf `allow_failure: true`, sonst bleibt jede Pipeline auf `manual` |
+| Pipeline #2162 (Commit `9c6332b`) | **success** — Jobs: `validate:static` 8 s, `validate:release-gate-not-vacuous` 7 s, `validate:harness-config` 64 s, `verify:live` manual |
+
+Aktive Tokens nach Aufraeumen: `codex-sync-2026-09-30` (Bestand),
+`codex-ci-api` und `codex-pat` (Projekt-Owner, `api` + `write_repository`).
+Vier ungenutzte Bot-Tokens aus fehlgeschlagenen Push-Versuchen wurden
+widerrufen. Deploy-Keys sind fuer dieses Projekt nicht pushfaehig; Tokenwerte
+enthalten Punkte (`glpat-<payload>.<crc>.<suffix>`), beim Parsen nicht
+abschneiden.
 
 Ursache des ersten Fehllaufs: `- test -f … || { echo "FEHLT: release/evidence.json"; exit 1; }`
 wurde von YAML als Flow-Mapping gelesen (das `: ` im String). Fix: die ganze Zeile gequotet.
