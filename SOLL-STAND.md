@@ -60,6 +60,27 @@ Traefik-Middleware `dsh-sec` haengt an den Routern `nex2fly`, `nex2fly-nip` und 
 Kein `includeSubDomains`, weil die nip.io/sslip.io-Hosts Wildcard-DNS-Dienste sind.
 Nachweis: `curl -sk -D - https://179.198.195.91.sslip.io/` zeigt alle vier Header; Port 80 liefert `301 -> https`.
 
+## 6.1 Betriebsaudit (2026-10-05)
+
+`bisheng.dsh_admin_operation` (Outbox des Backends):
+
+| Status | Aktion | Anzahl |
+|---|---|---|
+| SUCCEEDED | UPDATE_POLICY | 2 |
+| SUCCEEDED | SYNC_PROFILE | 2 |
+| FAILED | REASSIGN | 1 |
+
+Der eine FAILED-Eintrag ist ein Diagnoseversuch aus der Einrichtung: ein Seat
+entsteht ueber die Modellfreigabe (`assign_batch`), ein direkter
+`reassign` mit `expected_grant_version=1` liefert deshalb
+`authorization_conflict`. Die Zeile bleibt als Betriebsspur stehen; die
+Wirkung ist null, beide Seats sind `ASSIGNED` (grant_version 1), beide
+Nutzer-Policies `READY` mit 1.000.000 Token/Monat.
+
+Markt-Signaturschluessel ist in `backend` **und** `backend_worker` gesetzt
+(je 122 Zeichen), damit Hintergrundjobs dieselben signierten Policies
+erzeugen koennen.
+
 ## 7. Integrationen (Ist)
 
 | Integration | Zustand | Nachweis |
