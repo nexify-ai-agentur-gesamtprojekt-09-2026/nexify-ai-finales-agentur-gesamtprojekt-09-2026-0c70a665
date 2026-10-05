@@ -44,15 +44,31 @@ static_checks() {
     printf '[static] Compose uebersprungen (kein prod/ oder docker)\n'
   fi
 
-  if command -v dsh >/dev/null 2>&1 || [[ -n ${DSH_BIN:-} ]]; then
+  local dsh_bin=${DSH_BIN:-}
+  if [[ -z $dsh_bin && -x /opt/dsh/node_modules/.bin/dsh ]]; then
+    dsh_bin=/opt/dsh/node_modules/.bin/dsh
+  fi
+  if [[ -z $dsh_bin ]] && command -v dsh >/dev/null 2>&1; then
+    dsh_bin=$(command -v dsh)
+  fi
+  if [[ -n $dsh_bin ]]; then
     printf '[static] Harness-Konfiguration\n'
-    if ./ci/harness-config-check.sh >/dev/null 2>&1; then
+    if DSH_BIN=$dsh_bin ./ci/harness-config-check.sh >/dev/null 2>&1; then
       ok 'Profil web komponiert mit Modellroute'
     else
       bad 'Harness-Konfiguration ungueltig'
     fi
   else
     printf '[static] Harness-Konfiguration uebersprungen (kein dsh im PATH)\n'
+  fi
+
+  if [[ -f /srv/dsh/home/profiles/web/package.json ]]; then
+    printf '[static] Harness-Plugin dsh-context\n'
+    if grep -q '"dsh-context"' /srv/dsh/home/profiles/web/package.json; then
+      ok 'dsh-context im Profil web registriert'
+    else
+      bad 'dsh-context fehlt im Profil web'
+    fi
   fi
 }
 
@@ -83,6 +99,14 @@ live_checks() {
   else
     printf '  skip Host-Fence (Listener %s nicht erreichbar)\n' "$listener"
   fi
+
+  printf '[live] Sicherheitsheader und TLS-Erzwingung (%s)\n' "$harness"
+  hdr=$(curl -sk -m 15 -D - -o /dev/null "$harness/" | tr -d '\r' || true)
+  grep -qi '^strict-transport-security: max-age=3' <<<"$hdr" && ok 'HSTS gesetzt' || bad 'HSTS fehlt'
+  grep -qi '^x-content-type-options: nosniff' <<<"$hdr" && ok 'X-Content-Type-Options: nosniff' || bad 'nosniff fehlt'
+  grep -qi '^referrer-policy: ' <<<"$hdr" && ok 'Referrer-Policy gesetzt' || bad 'Referrer-Policy fehlt'
+  code=$(curl -s -m 15 -o /dev/null -w '%{http_code}' "http://${harness#https://}/" || true)
+  [[ $code == 301 || $code == 308 ]] && ok "HTTP leitet auf HTTPS um ($code)" || bad "HTTP-Redirect ($code)"
 }
 
 case $MODE in

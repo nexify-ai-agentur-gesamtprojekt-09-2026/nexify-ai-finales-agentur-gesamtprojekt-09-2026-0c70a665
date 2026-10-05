@@ -77,7 +77,7 @@ Repository `/root/dsh-enterprise` ist ein lokales Git-Repo (Branch `master`).
 | Datei | Zweck |
 |---|---|
 | `.gitlab-ci.yml` | Stages validate, verify, release |
-| `ci/stack-check.sh` | `--static` und `--live`, liefert beide `OK` |
+| `ci/stack-check.sh` | `--static` und `--live`, liefert beide `OK`; prueft zusaetzlich HSTS/nosniff/Referrer-Policy, HTTP-zu-HTTPS-Redirect, die Modellroute der Profilkomposition und die Registrierung von `dsh-context` |
 | `ci/check_release.py`, `ci/requirements.json` | Release-Gate des Agentur-Standards (42 Anforderungen, G0–G5) |
 | `ci/make-evidence.py` | erzeugt das Nachweisgeruest mit allen 42 IDs |
 
