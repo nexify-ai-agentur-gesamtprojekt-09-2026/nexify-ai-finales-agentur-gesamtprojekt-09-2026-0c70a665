@@ -13,7 +13,7 @@ Stand 28.09.2026 · baut auf `nexifyai-api-abrechnungskonzept.md` (Fassung 0.9) 
 | API-Vertrag | `api/openapi.yaml` 1.2.0 – `/credit`, `/credit/topups`, `/credit/auto-topup`, `/credit/refund`, `/invoices`, `/prices`, `/estimate`, `/payments/revolut/webhook` | Spectral-Lauf offen |
 
 ## Geldfluss
-1. **Aufladen:** `POST /v1/credit/topups` → `aufladungAnlegen` prüft 50–5.000 € → Worker legt Revolut-Order an (`POST /api/orders`, Betrag in Cent, `merchant_order_ext_ref = NX-<mandant>-<schlüssel>`) → Kunde zahlt im Revolut-Checkout (Revolut Pay oder Karte).
+1. **Aufladen:** `POST /v1/credit/topups` → `aufladungAnlegen` prüft 10–5.000 € (Vorgabe Inhaber 29.09.2026, `config/api-prepaid.json` `aufladung.minCent` = 1000) → Worker legt Revolut-Order an (`POST /api/orders`, Betrag in Cent, `merchant_order_ext_ref = NX-<mandant>-<schlüssel>`) → Kunde zahlt im Revolut-Checkout (Revolut Pay oder Karte).
 2. **Bestätigen:** Revolut sendet Webhook → Gateway prüft `Revolut-Signature` (HMAC-SHA256 über `v1.<Timestamp>.<Körper>`, 5 min Toleranz, mehrere Signaturen bei Schlüsselwechsel), antwortet sofort 200 → Worker ruft die Order ab und verbucht nur bei `state=completed`, gleicher Referenz, gleichem Betrag, EUR (`zahlungVerbuchen`). Doppelte oder ungeordnete Ereignisse wirken nicht doppelt.
 3. **Beleg:** je Gutschrift Anzahlungsrechnung `NX-API-JJJJ-00000`.
 4. **Verbrauch:** je Anfrage `reservieren` (Höchstkosten) → Modell → `abrechnen` (Ist, nie mehr als reserviert, idempotent je Anfrage-ID). Intern in Mikrocent, keine Rundung je Anfrage.
@@ -35,7 +35,7 @@ Jede Tabelle mit `mandant_id`, RLS erzwungen, in `config/mandanten.json` eingetr
 Endpunktpfade, `Revolut-Api-Version`, Ereignisnamen und das Verfahren für gespeicherte Zahlungsmittel (Auto-Aufladung) sind aus dem Stand der Merchant-API übernommen und in `config/api-prepaid.json` als `ungeprueft` markiert. Sandbox zuerst (`sandbox-merchant.revolut.com`), Schlüssel nur aus OpenBao.
 
 ## Offene Entscheidungen (Pascal)
-E1 Formel · E3 Mindestaufladung (Vorschlag 50 €) · E4 Steuer · E5 Verfall/Erstattung · echte EK-Werte je Stufe · Freigabe der Rechtstexte · Prop `preiseFreigegeben` erst danach auf `true`.
+E1 Formel · E4 Steuer · E5 Verfall/Erstattung · echte EK-Werte je Stufe · Freigabe der Rechtstexte · Prop `preiseFreigegeben` erst danach auf `true`. (E3 Mindestaufladung ist entschieden: 10 €, Vorgabe Inhaber 29.09.2026.)
 
 ## Eingebunden in (28.09.2026)
 Website `NeXifyAI Cloud v10` (Weitere Leistungen, Fußzeile, AGB § 4, Datenschutz § 7) · `NX-Footer` (DE/NL/FR) · `Kundenportal` (Bereich „API-Guthaben“) · Tag `#guthaben` im Tag-Router · Dienst `revolut` und Ereignis `zahlung.revolut` in `config/integrationen.json` · Runbooks RB-11–RB-14. Gleichlauf aller Texte prüft `tools/inhaltsabgleich.js` gegen `config/fakten.json`.

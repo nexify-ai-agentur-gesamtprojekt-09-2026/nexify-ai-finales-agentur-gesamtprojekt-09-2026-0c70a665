@@ -1,0 +1,32 @@
+{
+  "$kommentar": "Architektur-Regeln (WHAT/WHY/FIX). Geprueft durch scripts/check-arch.sh (make check-arch). Neue Fehlerkategorie aus dem Review => neue Regel.",
+  "rules": [
+    {
+      "id": "ARCH-001",
+      "description": "Prototypen bleiben unveraendert (Manifest stimmt)",
+      "check": "(cd prototypen && sha256sum -c MANIFEST.sha256 >/dev/null 2>&1)",
+      "expect": "exit 0",
+      "what": "Eine Prototyp-Datei wurde veraendert.",
+      "why": "Prototypen sind Design-Referenz, nicht Produktionscode.",
+      "fix": "Aenderung rueckgaengig machen; Umsetzung im Produktcode, nicht im Prototyp."
+    },
+    {
+      "id": "ARCH-002",
+      "description": "Keine Geheimnisse/Tokens in config oder Quelltext",
+      "check": "! grep -rEn --exclude-dir=.git --exclude-dir=node_modules \"sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----\" config tools packages 2>/dev/null",
+      "expect": "exit 0",
+      "why": "Geheimnisse gehoeren nie ins Repo.",
+      "what": "Ein Geheimnis steht in config/ oder im Quelltext.",
+      "fix": "Wert entfernen und ausserhalb des Repos halten."
+    },
+    {
+      "id": "ARCH-003",
+      "description": "Audit bleibt fehlerfrei (0 Fehler)",
+      "check": "node tools/ds-audit-cli.js >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Der Design-/A11y-/i18n-Audit meldet Fehler.",
+      "why": "Markenqualitaet und Barrierefreiheit sind Abnahmekriterien.",
+      "fix": "Befund beheben; Ausnahme nur mit Begruendung in config/abweichungen.json."
+    }
+  ]
+}

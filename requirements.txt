@@ -1,0 +1,5 @@
+# Abhaengigkeiten dieses Repos.
+#
+# Keine Drittanbieter-Pakete: tools/ und tests/ nutzen die Node- bzw. Python-Standardbibliothek.
+# Reproduzierbarkeit wird ueber die gepinnten CI-Images und die Prototyp-Artefakte gebunden
+# (siehe deps.lock und prototypen/MANIFEST.sha256).

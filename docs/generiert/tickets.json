@@ -250,5 +250,23 @@
     "erstellt": "2026-09-29T22:49:12.589Z",
     "kommentare": [],
     "sprache": "de"
+  },
+  {
+    "id": "tkt-f93a7d455e3d",
+    "kunde": "p.courbois@icloud.com",
+    "frage": "Wie geht das?",
+    "zustand": "offen",
+    "erstellt": "2026-10-05T22:13:33.666Z",
+    "kommentare": [],
+    "sprache": "de"
+  },
+  {
+    "id": "tkt-d9ff704dc271",
+    "kunde": "kunde@example.com",
+    "frage": "Wie funktioniert das?",
+    "zustand": "offen",
+    "erstellt": "2026-10-05T22:13:39.457Z",
+    "kommentare": [],
+    "sprache": "de"
   }
 ]

@@ -1,0 +1,6 @@
+# Gepinnte externe Abhaengigkeiten (Reproduzierbarkeit).
+ci-image-node=node:22-alpine
+ci-image-python=python:3.12-alpine
+ci-image-alpine=alpine:3.20
+prototypen-manifest=prototypen/MANIFEST.sha256 (sha256sum -c)
+python-runtime=3.12

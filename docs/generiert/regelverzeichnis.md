@@ -1,6 +1,6 @@
 # Regelverzeichnis
 
-> Automatisch erzeugt am 2026-09-30 aus `config/`. Nicht von Hand ändern – Quelle ändern.
+> Automatisch erzeugt am 2026-10-07 aus `config/`. Nicht von Hand ändern – Quelle ändern.
 
 Version 1.0.0. Durchsetzung: **gateway**: jede schreibende Anfrage an /v1 und jedes MCP-Werkzeug ruft pruefe() vor dem Seiteneffekt · **director**: lib/langlauf.js ruft pruefe() vor starte() jedes Schritts mit Seiteneffekt · **ci**: node tools/regel-pruefung.js → pruefeDateien() über das Repository; Befund = Pipeline rot · **protokoll**: jede Entscheidung als Ereignis regel.entscheidung (Aktion, Akteur, Regeln, Ergebnis) ins ZK-Log; Inhalte nur als Referenz · **ausfall**: Regelwerk nicht erreichbar = gesperrt (fail-closed) · **pipeline**: lib/anfrage-pipeline.js ruft pruefe() vor dem Modellaufruf und vor der Auslieferung
 

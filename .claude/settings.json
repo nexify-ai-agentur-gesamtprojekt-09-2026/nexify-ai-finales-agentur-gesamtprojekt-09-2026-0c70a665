@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make check)",
+      "Bash(make test)",
+      "Bash(make build)",
+      "Bash(node tools/ds-audit-cli.js)",
+      "Bash(python3 -m unittest:*)",
+      "Bash(node --check:*)",
+      "Read(**)"
+    ],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Read(.env)",
+      "Read(/etc/nexifyai/**)"
+    ]
+  },
+  "$kommentar": "Werkzeug-Geltung: Pruefbefehle frei, Geheimnisse nicht lesen, keine destruktiven Kommandos."
+}

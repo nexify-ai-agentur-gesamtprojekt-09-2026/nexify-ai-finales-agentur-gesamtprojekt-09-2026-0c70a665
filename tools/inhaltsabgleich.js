@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Inhaltsabgleich (CI) · Quellen auflösen, Dateien lesen, lib/inhaltsabgleich.js anwenden · Exit 1 bei Befund
 import { readFile, readdir } from "node:fs/promises";
-import { abgleichen, zusammenfassen } from "../lib/inhaltsabgleich.js";
+// Die Abgleich-Bibliothek liegt in diesem Repo unter prototypen/lib/ (kein Root-lib/).
+import { abgleichen, zusammenfassen } from "../prototypen/lib/inhaltsabgleich.js";
 
 const cfg = JSON.parse(await readFile("config/fakten.json", "utf8"));
 const pfad = (o, p) => p.split(".").reduce((a, k) => (a == null ? a : a[k]), o);
@@ -17,10 +18,17 @@ async function wert(f) {
   if (!f.quelle) return f.wert;
   const [datei, weg] = f.quelle.split("#");
   let v;
-  if (datei === "summe") v = await summe();
-  else if (weg === "FAELLE") v = await zaehle(datei);
-  else if (datei.endsWith(".json")) v = pfad(JSON.parse(await readFile(datei, "utf8")), weg);
-  else if (datei.endsWith(".yaml")) v = ((await readFile(datei, "utf8")).match(new RegExp("^\\s+" + weg + ":\\s*([^\\s#]+)", "m")) || [])[1];
+  // Fehlende Quellen sind ein Befund, kein Absturz (dieses Repo enthaelt nicht alle
+  // Dateien des Herkunfts-Layouts, z. B. api/openapi.yaml).
+  try {
+    if (datei === "summe") v = await summe();
+    else if (weg === "FAELLE") v = await zaehle(datei);
+    else if (datei.endsWith(".json")) v = pfad(JSON.parse(await readFile(datei, "utf8")), weg);
+    else if (datei.endsWith(".yaml")) v = ((await readFile(datei, "utf8")).match(new RegExp("^\\s+" + weg + ":\\s*([^\\s#]+)", "m")) || [])[1];
+  } catch {
+    console.log(`QUELLE-FEHLT ${f.id.padEnd(24)} ${f.quelle}  Quelle nicht lesbar (Datei fehlt)`);
+    return null;
+  }
   if (typeof v === "number" && f.teiler) v = v / f.teiler;
   if (typeof v === "number" && f.faktor) v = Math.round(v * f.faktor);
   return v ?? null;

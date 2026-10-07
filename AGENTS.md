@@ -42,3 +42,80 @@ Keine Abrechnung/Rechnungslauf vor Entscheidung E1/E3/E4. Kein Livegang ohne Fre
 
 ## Kontakt
 Pascal Courbois · mail@nexifyai.cloud (Firmendaten in `docs/09-final/08` bitte bestätigen lassen).
+
+---
+
+## Verification (verbindlich)
+
+- `make check` — Design-/Marken-/A11y-Audit (`node tools/ds-audit-cli.js`), Ziel 0 Fehler/0 Warnungen außer dokumentierter Ausnahmen.
+- `make test` — Audit + Python-Tests (`python3 -m unittest discover -s tests`) + Artefakt-/Config-Integrität.
+- `make build` — Prototypen-Manifest (`sha256sum -c`) + `config/*.json` valide.
+- `make e2e` — vollständige Prüfkette (Audit + Tests + Artefakt-/Config-Integrität).
+- `make check-arch` — Architektur-Regeln (`.harness/arch-rules.json`); `make clean-check` — Sauber-Zustand.
+Vor jeder Abschlussmeldung `make check && make test`.
+
+## Constraints (MUST / MUST NOT)
+
+- MUST: Designwerte nur aus `config/design-tokens.json`; Zahlen mit Preisbezug nur aus `config/fakten.json`/`config/api-prepaid.json`. `# source: AGENTS.md Verbindliche Regeln`
+- MUST NOT: Preise/Rechtstexte ohne Freigabe (Pascal Courbois) ändern; keine Abrechnung/Rechnungslauf vor E1/E3/E4. `# why: Freigabevorbehalt`
+- MUST NOT: Prototypen (`prototypen/*.dc.html`) kopieren — sie sind Referenz, nicht Produktionscode; Manifest bleibt unverändert. `# source: Auftrag`
+- MUST: Barrierefreiheit WCAG 2.2 AA, Ziele ≥44 px, sichtbarer Fokus, Reduced-Motion. `# source: AGENTS.md`
+- MUST: i18n de/nl/fr mit identischem Schlüsselsatz; Preise/Steuer/Recht folgen dem Markt. `# source: AGENTS.md`
+- MUST NOT: erfundene Referenzen, Logos, Zitate oder Messwerte. `# source: Ehrlich bleiben`
+
+## State files
+
+- `PROGRESS.md` — Current State (Commit + Prüfstatus), In Progress, Next Steps, Blockers.
+- `feature_list.json` — Features mit `id`, `behavior`, `verification`, `state`, `evidence`, `layers`.
+- `DECISIONS.md` — Architektur-/Prozessentscheidungen. `config/system-inventar.json` — Systeminventar.
+- `docs/quality-document.md` — Modulnoten; `prototypen/lib/ARCHITECTURE.md` — Modulgrenzen.
+
+## Zustandsmaschine + WIP
+
+- Zustand je Feature: `not_started → active → passing`. Wechsel nur über `make verify-feature F=<id>`; **niemals** `state` direkt auf `passing` setzen.
+- **WIP=1:** höchstens ein Feature `active`. Granularität: ein Feature muss in einer Sitzung abschließbar sein (completable in one session) — sonst aufteilen.
+- `make vcr` zeigt passing/aktivierte Features (Ziel 1.0).
+
+## Definition of Done (drei Schichten)
+
+Fertig ist, was **Laufzeit-Evidenz** hat — nicht was geschrieben oder behauptet ist.
+- Layer 1 (Syntax/Statik): JSON valide, `node --check`, `make check`.
+- Layer 2 (Verhalten): `make test` (Audit + Tests + Integrität).
+- Layer 3 (System/E2E): `make e2e` — **Layer 3 (e2e) is required when changes cross component or domain boundaries** (Tokens, i18n, Config, Prototypen).
+- Reihenfolge: Do not proceed to Layer N+1 if Layer N fails (must pass in order). Laufzeitsignale: Audit 0 Fehler, Manifest unverändert, keine debug artifacts.
+
+## Architecture boundaries
+
+`config/` (Werte/Regeln) → `packages/*` (generiert/abgeleitet) → `apps/*` (Anwendung) → `docs/` (Doku).
+`make check-arch` erzwingt die Grenzen (WHAT/WHY/FIX).
+Promotion-Prinzip: **jede im Review gefundene Fehlerkategorie wird zu einer Regel in `.harness/arch-rules.json`.**
+
+## Observability
+
+- Vor jedem Feature: Sprint-Contract (`templates/sprint-contract.md`).
+- Während der Verifikation: `make session-start` / `make session-end` schreiben JSONL nach `.harness/traces/`.
+- Nach Abschluss: Bewertung gegen `templates/evaluator-rubric.md` — jede Dimension mindestens B.
+
+## Clock-in / Clock-out
+
+- **Clock-in:** `PROGRESS.md` + Lesereihenfolge oben befolgen, `make check` grün bestätigen, dann arbeiten.
+- **Clock-out:** `PROGRESS.md` aktualisieren (Current State + Next Steps), `make clean-check`, dann committen.
+- **Clean-State:** `make clean-check` (Audit, Tests, Manifest, Feature-Liste, PROGRESS, Debug-Reste). Dual-Mode: sofort beim Sitzungsende **plus** periodischer Voll-Sweep gegen Struktur-Drift.
+
+## Commits und Dokumentation
+
+- **Atomicität:** ein logischer Vorgang pro Commit; das Repo ist nach jedem Commit konsistent.
+- **Commit-Nachricht:** das *Warum* erklären (explain why), nicht nur das Was (not just what).
+- **Keine veralteten Docs (no stale documentation):** Doku im *same commit* wie die Änderung aktualisieren.
+- **Kein überstürztes Fertigmelden (do not rush, running low on context):** bei knappem Kontext stoppen, `PROGRESS.md` aktualisieren, sauberen Checkpoint committen.
+
+## Company-Status
+
+- `make company-status` bzw. `node tools/company-status.mjs` erzeugt `docs/COMPANY-STATUS.md` +
+  `evidence/company-status.json`: Harness-Stand aller Company-Repos, Dienstelage der Gesundheitspruefung,
+  offene Blocker (nexi2fyi) und offene Defekte. Reiner Report — die Gates bleiben in den Repos.
+
+## Tools / MCP
+
+- Zugriff auf `node`, `python3`, `bash`; Tool-Geltung in `.claude/settings.json`.
+- `tools/inhaltsabgleich.js` prüft Fakten-Konsistenz, erwartet aber das Herkunfts-Layout (api/, lib/, Prototypen im Root) — in diesem Repo derzeit **nicht lauffähig** (siehe `PROGRESS.md`, offener Punkt).

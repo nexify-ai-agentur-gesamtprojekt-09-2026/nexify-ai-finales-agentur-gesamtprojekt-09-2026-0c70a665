@@ -1,6 +1,6 @@
 # Betriebshandbuch · Kurzfassung
 
-> Automatisch erzeugt am 2026-09-30 aus `config/`. Nicht von Hand ändern – Quelle ändern.
+> Automatisch erzeugt am 2026-10-07 aus `config/`. Nicht von Hand ändern – Quelle ändern.
 
 ## Gesundheitsprüfungen
 

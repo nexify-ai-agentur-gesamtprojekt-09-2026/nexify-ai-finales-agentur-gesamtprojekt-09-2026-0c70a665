@@ -2,9 +2,9 @@
 // Aufruf: node tools/regel-pruefung.js
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { pruefeDateien, FAELLE as RW } from "../lib/regelwerk.js";
+import { pruefeDateien, FAELLE as RW } from "../prototypen/lib/regelwerk.js";
 
-const AUSLASSEN = /^(node_modules|\.git|uploads|versions|screenshots|docs_dev)(\/|$)|\.(png|jpe?g|webp|gif|pdf|woff2?|glb|obj)$/i;
+const AUSLASSEN = /(^|\/)(node_modules|\.git|\.next|dist|build|coverage|uploads|versions|screenshots|docs_dev)(\/|$)|\.(png|jpe?g|webp|gif|pdf|woff2?|glb|obj)$/i;
 const ARCHIV = /^NeXifyAI Cloud( v[3-9])?\.dc\.html$/; // Archiv laut AGENT.md, nicht bearbeiten
 function sammeln(dir = ".", out = {}) {
   for (const n of readdirSync(dir)) {

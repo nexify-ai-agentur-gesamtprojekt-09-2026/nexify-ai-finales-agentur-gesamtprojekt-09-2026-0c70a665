@@ -2,11 +2,11 @@
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
   <cbc:CustomizationID>urn:cen.eu:en16931:2017</cbc:CustomizationID>
   <cbc:ID>RG-JOURNEY</cbc:ID>
-  <cbc:IssueDate>2026-09-29</cbc:IssueDate>
+  <cbc:IssueDate>2026-10-05</cbc:IssueDate>
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
   <cac:AccountingSupplierParty><cac:Party><cac:PartyName><cbc:Name>NeXify</cbc:Name></cac:PartyName></cac:Party></cac:AccountingSupplierParty>
-  <cac:AccountingCustomerParty><cac:Party><cac:PartyName><cbc:Name>k@x.de</cbc:Name></cac:PartyName></cac:Party></cac:AccountingCustomerParty>
-  <cac:InvoiceLine><cbc:ID>1</cbc:ID><cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity><cbc:LineExtensionAmount currencyID="EUR">19.99</cbc:LineExtensionAmount><cac:Item><cbc:Name>NeXify AI one+</cbc:Name></cac:Item></cac:InvoiceLine>
-  <cac:LegalMonetaryTotal><cbc:TaxExclusiveAmount currencyID="EUR">19.99</cbc:TaxExclusiveAmount><cbc:PayableAmount currencyID="EUR">19.99</cbc:PayableAmount></cac:LegalMonetaryTotal>
+  <cac:AccountingCustomerParty><cac:Party><cac:PartyName><cbc:Name>p.courbois@icloud.com</cbc:Name></cac:PartyName></cac:Party></cac:AccountingCustomerParty>
+  <cac:InvoiceLine><cbc:ID>1</cbc:ID><cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity><cbc:LineExtensionAmount currencyID="EUR">9.99</cbc:LineExtensionAmount><cac:Item><cbc:Name>NeXify AI one</cbc:Name></cac:Item></cac:InvoiceLine>
+  <cac:LegalMonetaryTotal><cbc:TaxExclusiveAmount currencyID="EUR">9.99</cbc:TaxExclusiveAmount><cbc:PayableAmount currencyID="EUR">9.99</cbc:PayableAmount></cac:LegalMonetaryTotal>
 </Invoice>

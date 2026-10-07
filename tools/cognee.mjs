@@ -2,7 +2,16 @@
 // Cognee-Integration (dritte RAG-Quelle): Login + add + cognify + search.
 import { execFileSync } from 'node:child_process';
 
-const BASE = 'http://127.0.0.1:32869';
+// Host-Port dynamisch aus Docker lesen (Compose vergibt einen dynamischen Port; 33018 war der letzte beobachtete).
+function cogneePort() {
+  try {
+    const out = execFileSync('docker', ['inspect', 'cognee-x532-cognee-1'], { encoding: 'utf8' });
+    const p = JSON.parse(out)[0]?.NetworkSettings?.Ports?.['8000/tcp'];
+    if (p && p[0]?.HostPort) return p[0].HostPort;
+  } catch {}
+  return '33018';
+}
+const BASE = `http://127.0.0.1:${cogneePort()}`;
 
 function containerEnv(key) {
   const out = execFileSync('docker', ['inspect', 'cognee-x532-cognee-1'], { encoding: 'utf8' });

@@ -112,7 +112,8 @@ export function pruefeDateien(dateien) {
   const befunde = [];
   for (const [pfad, inhalt] of Object.entries(dateien)) {
     const s = String(inhalt || "");
-    if (!/\.example$|^tests\//.test(pfad) && pfad !== "lib/regelwerk.js" && geheimnisIn(s)) befunde.push({ regel: "R-07", pfad, grund: "Geheimnis-Muster" });
+    // Selbst-Ausschluss und Testpfade muessen auch bei vorangestelltem Verzeichnis greifen.
+    if (!/\.example$|(^|\/)tests\//.test(pfad) && !/(^|\/)lib\/regelwerk\.js$/.test(pfad) && geheimnisIn(s)) befunde.push({ regel: "R-07", pfad, grund: "Geheimnis-Muster" });
     if (/\.dc\.html$/.test(pfad) && /(role:\s*"ai"|9router|KI-Antwort)/.test(s) && !/Art\. 50/.test(s)) befunde.push({ regel: "R-05", pfad, grund: "Fläche mit KI-Antworten ohne Art.-50-Hinweis" });
     if (pfad === "config/integrationen.json") {
       try { for (const d of JSON.parse(s).dienste || []) if (d.status === "vorhanden" && !d.belegt_am) befunde.push({ regel: "R-15", pfad, grund: d.id + ": »vorhanden« ohne belegt_am" }); }

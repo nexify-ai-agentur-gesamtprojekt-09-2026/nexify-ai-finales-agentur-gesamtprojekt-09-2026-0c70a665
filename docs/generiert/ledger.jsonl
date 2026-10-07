@@ -47,3 +47,5 @@
 {"id":"buch-daf6936f40e3","referenz":"RG-TEST","betragCent":999,"typ":"einnahme","konto":"guthaben","soll":"guthaben","haben":"kasse","ts":"2026-09-29T23:01:22.508Z"}
 {"id":"buch-62eb5d5f9ee3","referenz":"RG-TEST","betragCent":999,"typ":"einnahme","konto":"guthaben","soll":"guthaben","haben":"kasse","ts":"2026-09-29T23:04:28.850Z"}
 {"id":"buch-72904168805a","referenz":"RG-TEST","betragCent":999,"typ":"einnahme","konto":"guthaben","soll":"guthaben","haben":"kasse","ts":"2026-09-29T23:07:59.414Z"}
+{"id":"buch-b32604031612","referenz":"RG-JOURNEY","betragCent":999,"typ":"einnahme","konto":"guthaben","soll":"guthaben","haben":"kasse","ts":"2026-10-05T22:13:33.571Z"}
+{"id":"buch-bb4300c61e96","referenz":"RG-TEST","betragCent":999,"typ":"einnahme","konto":"guthaben","soll":"guthaben","haben":"kasse","ts":"2026-10-05T22:13:34.229Z"}

@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 const ergebnis = { abweichungen: [], unkontrolliert: [], zeit: new Date().toISOString() };
 
 // 1) Dienste, die nicht per systemd laufen (unkontrolliert)
-const services = ['nexify-vorschau','nexify-watcher','nexify-orchestrierung','nexify-payments','nexify-produkt','nexify-lernschleife.timer','nexify-gesundheit.timer'];
+const services = ['nexify-vorschau','nexify-watcher','nexify-orchestrierung','nexify-payments','nexify-produkt','nexify-gesamt','ainex-studio','nexify-lernschleife.timer','nexify-gesundheit.timer'];
 for (const s of services) {
   try { const st = execFileSync('systemctl', ['is-active', s], { encoding: 'utf8' }).trim(); if (st !== 'active') ergebnis.unkontrolliert.push(`dienst ${s}: ${st}`); }
   catch { ergebnis.unkontrolliert.push(`dienst ${s}: fehlt`); }
