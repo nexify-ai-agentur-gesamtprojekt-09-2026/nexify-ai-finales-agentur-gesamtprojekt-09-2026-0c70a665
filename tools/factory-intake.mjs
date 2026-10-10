@@ -16,15 +16,26 @@
 // Aufruf: GITLAB_TOKEN=... node tools/factory-intake.mjs --label factory-task
 //         GITLAB_TOKEN=... node tools/factory-intake.mjs --issue 5
 import { execFileSync } from 'node:child_process';
-import { writeFileSync, mkdtempSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 const GL = (process.env.GITLAB_URL || 'http://127.0.0.1:8922').replace(/\/$/, '');
-const TOKEN = process.env.GITLAB_TOKEN || '';
 const PROJECT = process.env.GITLAB_PROJECT_ID || '42';
 const ADAPTER = new URL('./factory-adapter.mjs', import.meta.url).pathname;
-if (!TOKEN) { console.error('FEHLER: GITLAB_TOKEN fehlt'); process.exit(2); }
+// Token: aus der Umgebung, sonst aus OpenBao (wie tools/sync-github-gitlab.sh) —
+// damit der Intake als systemd-Dienst ohne Klartext-Secret laufen kann.
+function openbaoToken() {
+  try {
+    const gateway = '/opt/ai-stack/nexify-neu/.dev/openbao/gateway.env';
+    const bao = readFileSync(gateway, 'utf8').split('\n').find((l) => l.startsWith('OPENBAO_TOKEN='))?.split('=').slice(1).join('=').trim();
+    if (!bao) return '';
+    const roh = execFileSync('curl', ['-sS', '-H', `X-Vault-Token: ${bao}`, 'http://127.0.0.1:8200/v1/nexify/data/gitlab', '--max-time', '8'], { encoding: 'utf8' });
+    return JSON.parse(roh)?.data?.data?.token || '';
+  } catch { return ''; }
+}
+const TOKEN = process.env.GITLAB_TOKEN || openbaoToken();
+if (!TOKEN) { console.error('FEHLER: kein GitLab-Token (weder GITLAB_TOKEN noch OpenBao)'); process.exit(2); }
 
 const a = {}; const v = process.argv.slice(2);
 for (let i = 0; i < v.length; i++) if (v[i].startsWith('--')) a[v[i].slice(2)] = v[i + 1];
@@ -62,7 +73,7 @@ async function intake(issue) {
 
   let ergebnis = null, fehler = null;
   try {
-    const out = execFileSync('node', [ADAPTER, ...argv], { encoding: 'utf8', timeout: 900000, env: process.env });
+    const out = execFileSync('node', [ADAPTER, ...argv], { encoding: 'utf8', timeout: 900000, env: { ...process.env, GITLAB_TOKEN: TOKEN } });
     ergebnis = JSON.parse(out.trim().split('\n').slice(out.trim().indexOf('{')).join('\n'));
   } catch (e) { fehler = String(e.stdout || e.message || '').slice(0, 400); }
 
