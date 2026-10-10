@@ -95,7 +95,8 @@ async function main() {
     method: 'POST',
     body: JSON.stringify({
       source_branch: branch, target_branch: base, title: `factory: ${task}`,
-      description: 'Automatisch erstellt durch tools/factory-adapter.mjs (Lean GitLab-Adapter). Nichtdestruktiv: kein Force, keine Ref-Loeschung.',
+      description: 'Automatisch erstellt durch tools/factory-adapter.mjs (Lean GitLab-Adapter). Nichtdestruktiv: kein Force, keine Ref-Loeschung.'
+        + (a.issue ? `\nfactory-issue: ${a.issue}` : ''),
       remove_source_branch: false,
     }),
   });
