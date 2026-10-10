@@ -47,6 +47,15 @@ function cogneeUrl() {
   } catch {}
   return 'http://127.0.0.1:33018/health';
 }
+// Host-Port dynamisch aus Docker lesen (Compose vergibt einen dynamischen Port; 32769 war der letzte beobachtete).
+function difyWebUrl() {
+  try {
+    const out = execFileSync("docker", ["inspect", "dify-dqiq-web-1"], { encoding: "utf8" });
+    const p = JSON.parse(out)[0]?.NetworkSettings?.Ports?.["3000/tcp"];
+    if (p && p[0]?.HostPort) return `http://127.0.0.1:${p[0].HostPort}/`;
+  } catch {}
+  return "http://127.0.0.1:32768/";
+}
 // 2) Services prüfen
 const checks = [
   ['nexify-app', 'http://127.0.0.1:8907/health'],
@@ -92,7 +101,7 @@ const checks = [
   ['blackbox', 'http://127.0.0.1:9115/health'],
   ['prometheus', 'http://127.0.0.1:9190/'],
   ['gitlab', 'http://127.0.0.1:8922/', 302],
-  ['dify-web', 'http://127.0.0.1:32769/'],
+  ['dify-web', difyWebUrl()],
   // Container ohne HTTP-Endpunkt: Liveness ueber docker (docker:<name>).
   ['docker:deploy-db', 'docker:deploy-db-1'],
   ['docker:myadmin-pg', 'docker:myadmin-pg'],
@@ -204,9 +213,15 @@ for (const [n, u, e = 200] of checks) {
   if (String(u).startsWith('ressource:')) { out.services[n] = String(u).endsWith(':ok') ? 200 : 0; continue; }
   // Erwartete 3xx werden ohne Folgen des Redirects geprueft (das Weiterleitungsziel kann
   // unerreichbar sein); 2xx werden normal gefolgt.
-  const optionen = { signal: AbortSignal.timeout(5000), ...(e >= 300 && e < 400 ? { redirect: 'manual' } : {}) };
-  try { const r = await fetch(u, optionen); out.services[n] = r.status; }
-  catch { out.services[n] = 0; }
+  // Lastfest: unter Host-Last (LightRAG-Ingestion) antwortet ein gesunder Dienst erst nach
+  // dem 5s-Fenster. Ein einzelner Timeout ist kein Ausfall -> 3 Versuche, je frisches Signal.
+  let st = 0;
+  for (let v = 0; v < 3; v++) {
+    const optionen = { signal: AbortSignal.timeout(5000), ...(e >= 300 && e < 400 ? { redirect: 'manual' } : {}) };
+    try { st = (await fetch(u, optionen)).status; break; }
+    catch { st = 0; if (v < 2) await new Promise((res) => setTimeout(res, 1500)); }
+  }
+  out.services[n] = st;
 }
 
 // 3) Alarm: Ausfaelle sichtbar machen (Exit-Code + Alarmzeile + Statusdatei).
