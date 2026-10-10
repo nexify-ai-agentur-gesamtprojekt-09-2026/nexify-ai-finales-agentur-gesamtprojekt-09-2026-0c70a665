@@ -35,10 +35,23 @@ GH=$(ssh -o BatchMode=yes -o ConnectTimeout=15 "$FRA" \
   2>/dev/null) || { log "SKIP: GitHub-Auth nicht erzeugbar (mirror ausgesetzt)"; exit 0; }
 [ -n "$GH" ] || { log "SKIP: GitHub-Token leer"; exit 0; }
 
+# Nichtdestruktiver Einweg-Spiegel (Masterprompt §17, TEST-AP007):
+# KEIN --force, KEINE Ref-Loeschung, KEIN Pruning. Nur Fast-Forward.
+# Divergenz wird bewahrt und sichtbar gemacht, nicht ueberschrieben.
 if git ls-remote "https://x-access-token:$GH@github.com/$GH_PATH" main >/dev/null 2>&1; then
-  git push --force "https://x-access-token:$GH@github.com/$GH_PATH" "$GL_SHA":refs/heads/main 2>/dev/null \
-    && log "Mirror: GitLab $GL_TREE -> GitHub" \
-    || log "SKIP: GitHub-Push fehlgeschlagen (Spiegel ausgesetzt)"
+  git fetch "https://x-access-token:$GH@github.com/$GH_PATH" main:refs/remotes/gh/main 2>/dev/null || true
+  GH_SHA=$(git rev-parse --verify --quiet refs/remotes/gh/main || echo "")
+  if [ -n "$GH_SHA" ] && [ "$GH_SHA" = "$GL_SHA" ]; then
+    log "Mirror aktuell: GitHub main=$GH_SHA (keine Aktion)"
+  elif [ -z "$GH_SHA" ] || git merge-base --is-ancestor "$GH_SHA" "$GL_SHA" 2>/dev/null; then
+    # Fast-Forward: genau den geprueften Commit pushen, ohne --force.
+    git push "https://x-access-token:$GH@github.com/$GH_PATH" "$GL_SHA":refs/heads/main 2>/dev/null \
+      && log "Mirror: GitLab $GL_TREE -> GitHub (fast-forward ${GH_SHA:-neu}..$GL_SHA)" \
+      || log "SKIP: GitHub-Push fehlgeschlagen (Spiegel ausgesetzt)"
+  else
+    log "DIVERGENZ: GitHub main=$GH_SHA ist kein Vorfahre von GitLab $GL_SHA; kein Force-Push, beide Staende bleiben erhalten"
+    exit 1
+  fi
 else
   log "SKIP: GitHub-Ziel nicht erreichbar/berechtigt (tree $GL_TREE bleibt Quelle)"
 fi
