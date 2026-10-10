@@ -1,11 +1,10 @@
-# NeXify finale Agentur-Gesamtloesung · GitLab CI · nur lokale Schranken
+# NeXify finale Agentur-Gesamtloesung · GitLab CI
+# Breitere Pflichtgates (Masterprompt §15). Alle Jobs sind hermetisch (nur Repo + Standard-Images).
 stages: [pruefen, jeff]
-
-default:
-  image: node:22-alpine
 
 ds-audit:
   stage: pruefen
+  image: node:22-alpine
   script:
     - node tools/ds-audit-cli.js
     - test "$(node tools/ds-audit-cli.js | grep -c '^Fehler\t')" = "0"
@@ -20,15 +19,47 @@ json-konfig:
   stage: pruefen
   image: node:22-alpine
   script:
-    - node -e "const fs=require('fs'),p=require('path');const r=[];(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
-    - echo "alle config/*.json gültig"
+    - node -e "const fs=require('fs'),p=require('path');(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
+    - echo "alle config/*.json gueltig"
+
+python-tests:
+  stage: pruefen
+  image: python:3.12
+  script:
+    - python3 -m unittest discover -s tests -q
+
+node-syntax:
+  stage: pruefen
+  image: node:22
+  script:
+    - |
+      fail=0
+      for f in tools/*.mjs tools/*.js; do node --check "$f" || fail=1; done
+      exit $fail
+
+arch-regeln:
+  stage: pruefen
+  image: node:22
+  script:
+    - bash scripts/check-arch.sh
+
+secret-muster:
+  stage: pruefen
+  image: alpine:3.20
+  script:
+    - |
+      PAT='sk-[A-Za-z0-9]{40,}|sk-or-v1-[a-f0-9]{64}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36}|glpat-[A-Za-z0-9_-]{20,}'
+      if grep -rInE "$PAT" --include='*.mjs' --include='*.js' --include='*.json' --include='*.md' --include='*.sh' --include='*.yml' --exclude-dir=.git .; then
+        echo "Geheimnis-Muster gefunden"; exit 1
+      fi
+      echo "keine Geheimnis-Muster"
 
 jeff-gate:
   stage: jeff
   image: python:3.12-alpine
-  needs: ["ds-audit", "manifest", "json-konfig"]
+  needs: ["ds-audit", "manifest", "json-konfig", "python-tests", "node-syntax", "arch-regeln", "secret-muster"]
   script:
-    - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
+    - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit, JSON-Konfig, Python-Tests, Node-Syntax, Architektur-Regeln und Geheimnis-Muster gruen" --risiko "niedrig (nur Pruefschranken, nichts deployt)" --rollback "Commit zuruecknehmen"
 
 slack:
   stage: jeff
