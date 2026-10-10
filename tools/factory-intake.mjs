@@ -100,11 +100,29 @@ async function intake(issue) {
   dateien.forEach((d, i) => { const p = join(tmp, `c${i}`); writeFileSync(p, d.content); argv.push('--file', d.file, '--content-file', p); });
   argv.push('--merge');
 
-  let ergebnis = null, fehler = null;
+  let ergebnis = null, fehler = null, out = '';
   try {
-    const out = execFileSync('node', [ADAPTER, ...argv], { encoding: 'utf8', timeout: 900000, env: { ...process.env, GITLAB_TOKEN: TOKEN } });
-    ergebnis = JSON.parse(out.trim().split('\n').slice(out.trim().indexOf('{')).join('\n'));
-  } catch (e) { fehler = String(e.stdout || e.message || '').slice(0, 400); }
+    out = execFileSync('node', [ADAPTER, ...argv], { encoding: 'utf8', timeout: 900000, env: { ...process.env, GITLAB_TOKEN: TOKEN } });
+  } catch (e) { out = String(e.stdout || ''); if (!out) fehler = String(e.message || '').slice(0, 400); }
+  if (out) { try { ergebnis = JSON.parse(out.slice(out.indexOf('{'))); } catch { /* kein JSON */ } }
+
+  // Automatische Korrektur (§15): bei roter Pipeline eine LLM-Korrektur, dann neu pruefen.
+  if (ergebnis && ergebnis.pipeline_status && ergebnis.pipeline_status !== 'success' && ergebnis.mr_iid) {
+    try {
+      execFileSync('node', [new URL('./factory-korrektur.mjs', import.meta.url).pathname, '--mr', String(ergebnis.mr_iid)], { encoding: 'utf8', timeout: 300000, env: { ...process.env, GITLAB_TOKEN: TOKEN } });
+      let pstatus = 'none';
+      for (let i = 0; i < 40; i++) {
+        await new Promise((r) => setTimeout(r, 10000));
+        const m = await api(`/merge_requests/${ergebnis.mr_iid}`);
+        pstatus = (m.head_pipeline || {}).status || 'none';
+        if (!['pending', 'running', 'created', 'none'].includes(pstatus)) break;
+      }
+      ergebnis.pipeline_status = pstatus;
+      if (pstatus === 'success') {
+        try { const m = await api(`/merge_requests/${ergebnis.mr_iid}/merge`, { method: 'PUT' }); ergebnis.merge = m.state; } catch (e2) { ergebnis.merge = 'blockiert: ' + e2.message.slice(0, 100); }
+      }
+    } catch (e) { fehler = 'Korrektur fehlgeschlagen: ' + String(e.message).slice(0, 200); }
+  }
 
   if (ergebnis) {
     const zeile = `Factory-Ergebnis: MR !${ergebnis.mr_iid} (${ergebnis.mr_url})\nPipeline ${ergebnis.pipeline_id} = ${ergebnis.pipeline_status}; Merge = ${ergebnis.merge}; Review = ${ergebnis.review?.entscheidung} (Risiko ${ergebnis.review?.risiko}).`;
