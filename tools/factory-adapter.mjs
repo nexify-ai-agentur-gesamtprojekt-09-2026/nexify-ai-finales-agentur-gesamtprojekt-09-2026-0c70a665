@@ -27,6 +27,7 @@ function args() {
     const k = v[i].slice(2), val = v[i + 1];
     if (k === 'file') a.files.push(val);
     else if (k === 'content-file') a.contentFiles.push(val);
+    else if (val === undefined || val.startsWith('--')) a[k] = true; // Boolean-Flag (z. B. --merge)
     else a[k] = val;
   }
   return a;
