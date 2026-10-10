@@ -10,7 +10,7 @@ function lrKey(){ for(const l of readFileSync('/opt/ai-stack/stack/.env','utf8')
 const KEY = lrKey();
 
 // 1) Beobachtungen lesen
-const mems = await (await fetch(`${MEM}/memories`)).json();
+const mems = await (await fetch(`${MEM}/memories?limit=5000`)).json();
 const memories = (mems.memories || mems) || [];
 if (!Array.isArray(memories)) { console.error('keine memories'); process.exit(1); }
 
