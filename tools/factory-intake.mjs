@@ -16,7 +16,7 @@
 // Aufruf: GITLAB_TOKEN=... node tools/factory-intake.mjs --label factory-task
 //         GITLAB_TOKEN=... node tools/factory-intake.mjs --issue 5
 import { execFileSync } from 'node:child_process';
-import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, openSync, closeSync, unlinkSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -134,7 +134,18 @@ async function intake(issue) {
   return { issue: issue.iid, status: 'fehler' };
 }
 
+// Sperre gegen gleichzeitige Laeufe (Timer + manueller Aufruf). Stale-Lock >30min wird geloest.
+const LOCK = process.env.FACTORY_INTAKE_LOCK || '/run/nexify-factory-intake.lock';
+function sperre() {
+  try { if (Date.now() - statSync(LOCK).mtimeMs > 30 * 60 * 1000) unlinkSync(LOCK); } catch {}
+  let fd;
+  try { fd = openSync(LOCK, 'wx'); } catch { return null; }
+  process.on('exit', () => { try { closeSync(fd); unlinkSync(LOCK); } catch {} });
+  return fd;
+}
+
 async function main() {
+  if (!sperre()) { console.error('Intake laeuft bereits — uebersprungen'); process.exit(0); }
   let issues = [];
   if (a.issue) issues = [await api(`/issues/${a.issue}`)];
   else if (a.label) issues = await api(`/issues?labels=${encodeURIComponent(a.label)}&state=opened&per_page=20`);
@@ -142,6 +153,6 @@ async function main() {
   const res = [];
   for (const it of issues) res.push(await intake(it));
   console.log(JSON.stringify(res, null, 2));
-  process.exit(res.every(r => ['success', 'kein-auftrag', 'bereits-in-arbeit', 'fortgesetzt-gemerged'].includes(r.status)) ? 0 : 1);
+  process.exit(res.every(r => ['success', 'kein-auftrag', 'bereits-in-arbeit', 'fortgesetzt-gemerged', 'resume-merge-blockiert'].includes(r.status)) ? 0 : 1);
 }
 main().catch((e) => { console.error('FEHLER:', e.message); process.exit(1); });
