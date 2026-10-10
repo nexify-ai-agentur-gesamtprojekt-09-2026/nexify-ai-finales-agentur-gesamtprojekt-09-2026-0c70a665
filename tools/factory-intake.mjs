@@ -60,14 +60,43 @@ function bloecke(body) {
   return out;
 }
 
+async function offenesMrFuer(issue) {
+  const mrs = await api('/merge_requests?state=opened&per_page=50');
+  return mrs.find((m) => (m.description || '').includes(`factory-issue: ${issue.iid}`));
+}
+
 async function intake(issue) {
+  // Idempotenz/Resume: laeuft fuer dieses Issue schon ein offenes MR, kein Doppel-Lauf.
+  const vorhanden = await offenesMrFuer(issue);
+  if (vorhanden) {
+    // Resume: Pipeline abwarten; bei gruenem Gate das unterbrochene MR abschliessen.
+    let pstatus = (vorhanden.head_pipeline || {}).status || 'none';
+    for (let i = 0; i < 40 && ['pending', 'running', 'created', 'none'].includes(pstatus); i++) {
+      await new Promise((r) => setTimeout(r, 10000));
+      const m = await api(`/merge_requests/${vorhanden.iid}`);
+      pstatus = (m.head_pipeline || {}).status || 'none';
+    }
+    if (pstatus === 'success') {
+      try {
+        await api(`/merge_requests/${vorhanden.iid}/merge`, { method: 'PUT' });
+        await api(`/issues/${issue.iid}`, { method: 'PUT', body: JSON.stringify({ state_event: 'close' }) });
+        await api(`/issues/${issue.iid}/notes`, { method: 'POST', body: JSON.stringify({ body: `Intake (Resume): unterbrochenen Lauf abgeschlossen — MR !${vorhanden.iid} gemerged (Pipeline success).` }) });
+        return { issue: issue.iid, status: 'fortgesetzt-gemerged', mr: vorhanden.iid };
+      } catch (e) {
+        await api(`/issues/${issue.iid}/notes`, { method: 'POST', body: JSON.stringify({ body: `Intake (Resume): MR !${vorhanden.iid} Pipeline success, Merge blockiert: ${String(e.message).slice(0, 120)}` }) });
+        return { issue: issue.iid, status: 'resume-merge-blockiert', mr: vorhanden.iid };
+      }
+    }
+    await api(`/issues/${issue.iid}/notes`, { method: 'POST', body: JSON.stringify({ body: `Intake: bereits in Bearbeitung — MR !${vorhanden.iid} (${vorhanden.web_url}); Pipeline ${pstatus}; kein neuer Lauf.` }) });
+    return { issue: issue.iid, status: 'bereits-in-arbeit', mr: vorhanden.iid };
+  }
   const dateien = bloecke(issue.description || '');
   if (!dateien.length) {
     await api(`/issues/${issue.iid}/notes`, { method: 'POST', body: JSON.stringify({ body: 'Intake: keine `file:`-Bloecke im Issue-Body gefunden — kein Factory-Lauf.' }) });
     return { issue: issue.iid, status: 'kein-auftrag' };
   }
   const tmp = mkdtempSync(join(tmpdir(), 'factory-intake-'));
-  const argv = ['--task', issue.title];
+  const argv = ['--task', issue.title, '--issue', String(issue.iid)];
   dateien.forEach((d, i) => { const p = join(tmp, `c${i}`); writeFileSync(p, d.content); argv.push('--file', d.file, '--content-file', p); });
   argv.push('--merge');
 
@@ -95,6 +124,6 @@ async function main() {
   const res = [];
   for (const it of issues) res.push(await intake(it));
   console.log(JSON.stringify(res, null, 2));
-  process.exit(res.every(r => ['success', 'kein-auftrag'].includes(r.status)) ? 0 : 1);
+  process.exit(res.every(r => ['success', 'kein-auftrag', 'bereits-in-arbeit', 'fortgesetzt-gemerged'].includes(r.status)) ? 0 : 1);
 }
 main().catch((e) => { console.error('FEHLER:', e.message); process.exit(1); });
