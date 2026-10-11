@@ -1,7 +1,7 @@
 # PROGRESS — NeXify AI Gesamtlösung (Design-Handoff)
 
 ## Current State
-- Last commit: `4af0d5a` (branch `main`).
+- Last commit: `11994bf` (branch `main`).
 - Verification: `make check` (ds-audit) **0 Fehler/0 Warnungen**, `make test` (Audit + 10 Python-Tests + Manifest/Config) **OK**, `make check-arch` OK, `make clean-check` OK.
 - Harness: `make audit` (Ziel 73/73). VCR: `make vcr`.
 
@@ -12,6 +12,7 @@
 - `tools/inhaltsabgleich.js` (Fakten-Konsistenz) erwartet das Herkunfts-Layout (api/openapi.yaml, lib/, Prototypen im Root) und ist in diesem Repo **nicht lauffähig**; der Absturz wurde entschärft (fehlende Quelle = Befund statt Crash). Bewusst **nicht** in `make check` verdrahtet. Vor Reaktivierung: Layout angleichen oder Tool entfernen (mit Freigabe).
 - `config/fakten.json` referenziert teils ältere Prototyp-Namen (z. B. `NeXifyAI Cloud v10.dc.html`; vorhanden ist v12) → 18 DATEI-Befunde. Inhaltsprüfung/Freigabe offen.
 - Behoben: Widerspruch Mindestaufladung — `docs/03-backend/api-prepaid-umsetzung.md` nannte 50 €, die Inhabervorgabe (29.09.2026) ist 10 € (`config/api-prepaid.json`); Doku angeglichen, E3 als entschieden markiert.
+- Behoben (2026-10-11): `nexify-watcher.service` löste einen **selbstauslösenden Endlos-Loop** aus — `tools/watcher.mjs` überwacht `config/`, `prototypen/`, `docs/`, die ausgelöste Pipeline (`docs-aktualisieren.mjs`/`wissen-speisen.mjs`) schreibt in genau diese Bäume → Dauer-Regeneration (~0.9 Orakel-Aufrufe/s, 4h28m CPU, Tree dauerhaft schmutzig). Fix: Self-Write-Guard in `tools/watcher.mjs` (ignoriert `docs/STAND.md`, `docs/generiert/**`, `prototypen/MANIFEST.sha256`); `make check` rc0. Commit `11994bf`.
 
 ## Offene Punkte (bekannt, bewertet)
 - **Netz-Exposition — BEHOBEN (2026-10-05):** 19 veröffentlichte Container-Ports waren über `0.0.0.0`
