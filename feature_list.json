@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "wip": 1,
+  "features": [
+    {
+      "id": "F-001",
+      "behavior": "Design-/Marken-/A11y-Audit ist fehlerfrei (0 Fehler, 0 Warnungen)",
+      "verification": "node tools/ds-audit-cli.js",
+      "state": "passing",
+      "evidence": "ds-audit: 0 Fehler, 0 Warnungen",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/ds-audit-cli.js && python3 -m json.tool config/api-prepaid.json >/dev/null",
+          "repair": "Syntax-/JSON-Fehler beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "node tools/ds-audit-cli.js",
+          "repair": "Befund im Audit beheben; Ausnahmen nur mit Begruendung in config/abweichungen.json."
+        }
+      ]
+    },
+    {
+      "id": "F-002",
+      "behavior": "Prototypen-Artefakte unveraendert (Manifest)",
+      "verification": "cd prototypen && sha256sum -c MANIFEST.sha256",
+      "state": "passing",
+      "evidence": "Manifest OK (alle .dc.html/vendor)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/ds-audit-cli.js && python3 -m json.tool config/api-prepaid.json >/dev/null",
+          "repair": "Syntax-/JSON-Fehler beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "cd prototypen && sha256sum -c MANIFEST.sha256",
+          "repair": "Prototypen nicht editieren; Referenz bleibt Referenz."
+        }
+      ]
+    },
+    {
+      "id": "F-003",
+      "behavior": "config/*.json ist vollstaendig valide",
+      "verification": "node -e config-Scan",
+      "state": "passing",
+      "evidence": "config/*.json gueltig",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/ds-audit-cli.js && python3 -m json.tool config/api-prepaid.json >/dev/null",
+          "repair": "Syntax-/JSON-Fehler beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "node -e \"const fs=require('fs'),p=require('path');(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')\"",
+          "repair": "Ungueltige JSON-Datei in config/ reparieren."
+        }
+      ]
+    },
+    {
+      "id": "F-004",
+      "behavior": "GitHub-Event-Inbox (Python) ist getestet",
+      "verification": "python3 -m unittest discover -s tests",
+      "state": "passing",
+      "evidence": "10 Tests OK",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/ds-audit-cli.js && python3 -m json.tool config/api-prepaid.json >/dev/null",
+          "repair": "Syntax-/JSON-Fehler beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "python3 -m unittest discover -s tests",
+          "repair": "tests/test_github_event_inbox.py bzw. tools/github_event_inbox.py pruefen."
+        }
+      ]
+    }
+  ]
+}
