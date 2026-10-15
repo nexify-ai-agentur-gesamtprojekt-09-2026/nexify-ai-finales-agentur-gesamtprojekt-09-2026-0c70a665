@@ -35,6 +35,7 @@ try {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       content: `Jeff-Gate: ${entscheidung} · "${was}" · Risiko ${j.risiko_0_10 ?? '?'}/10 · reversibel ${j.reversibel_p ?? '?'}`,
+      project: 'ai-stack',
       concepts: ['jeff-gate', 'orakel', 'governance'],
     }),
   });

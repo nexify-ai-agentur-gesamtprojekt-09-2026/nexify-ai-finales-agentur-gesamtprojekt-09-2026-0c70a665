@@ -43,7 +43,7 @@ if (findings.length) {
   try {
     await fetch('http://127.0.0.1:3111/agentmemory/remember', {
       method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ content: `Reviewer: ${findings.length} Befunde (${findings.filter(f => f.typ === 'bug').length} bug, ${findings.filter(f => f.typ === 'slop').length} slop). Top: ${findings.slice(0, 3).map(f => f.datei.split('/').pop() + ':' + f.meldung).join(' | ')}`, concepts: ['reviewer', 'bug', 'slop', 'code-review'] }),
+      body: JSON.stringify({ content: `Reviewer: ${findings.length} Befunde (${findings.filter(f => f.typ === 'bug').length} bug, ${findings.filter(f => f.typ === 'slop').length} slop). Top: ${findings.slice(0, 3).map(f => f.datei.split('/').pop() + ':' + f.meldung).join(' | ')}`, project: 'ai-stack', concepts: ['reviewer', 'bug', 'slop', 'code-review'] }),
     });
   } catch {}
   // Jeff-Security-Triage (neu): Befunde nach Dringlichkeit klassifizieren

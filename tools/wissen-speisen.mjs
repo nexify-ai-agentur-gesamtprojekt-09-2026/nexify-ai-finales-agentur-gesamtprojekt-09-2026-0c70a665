@@ -42,7 +42,7 @@ for (const q of QUELLEN) {
     else console.log('LIGHTRAG-FEHLER', q.source, String(r.status || r.detail).slice(0,80));
   } catch (e) { console.log('LIGHTRAG-FEHLER', q.source, String(e).slice(0,80)); }
   try {
-    const r = await post('http://127.0.0.1:3111/agentmemory/remember', { 'Content-Type':'application/json' }, { content: `${q.desc}: ${text.slice(0,400)}`, concepts: ['wissensschicht', q.source] });
+    const r = await post('http://127.0.0.1:3111/agentmemory/remember', { 'Content-Type':'application/json' }, { content: `${q.desc}: ${text.slice(0,400)}`, project: 'ai-stack', concepts: ['wissensschicht', q.source] });
     if (r.memory?.id) am++;
   } catch {}
 }

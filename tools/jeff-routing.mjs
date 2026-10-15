@@ -18,6 +18,6 @@ console.log(JSON.stringify(out, null, 2));
 try {
   await fetch('http://127.0.0.1:3111/agentmemory/remember', {
     method: 'POST', headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ content: `Jeff-Routing: ${out.modell} · "${aufgabe.slice(0,100)}"`, concepts: ['jeff', 'routing', 'kosten', out.modell] }),
+    body: JSON.stringify({ content: `Jeff-Routing: ${out.modell} · "${aufgabe.slice(0,100)}"`, project: 'ai-stack', concepts: ['jeff', 'routing', 'kosten', out.modell] }),
   });
 } catch {}

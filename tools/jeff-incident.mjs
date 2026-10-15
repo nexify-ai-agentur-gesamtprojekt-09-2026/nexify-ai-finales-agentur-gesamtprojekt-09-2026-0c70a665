@@ -28,6 +28,6 @@ console.log(JSON.stringify(out, null, 2));
 try {
   await fetch('http://127.0.0.1:3111/agentmemory/remember', {
     method: 'POST', headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ content: `Jeff-Incident: ${stufe} (${SLA[stufe]}) · "${meldung.slice(0,120)}"`, concepts: ['jeff', 'incident', 'eskalation', stufe] }),
+    body: JSON.stringify({ content: `Jeff-Incident: ${stufe} (${SLA[stufe]}) · "${meldung.slice(0,120)}"`, project: 'ai-stack', concepts: ['jeff', 'incident', 'eskalation', stufe] }),
   });
 } catch {}
