@@ -8,6 +8,7 @@ secrets/
 node_modules/
 __pycache__/
 .next/
+.turbo/
 out/
 
 # Erzeugte Token-Ausgaben - Quelle ist config/design-tokens.json
@@ -20,3 +21,16 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Harness-Laufzeitsignale
+.harness/traces/traces.jsonl
+.harness/traces/session-*.json
+
+# TypeScript-Inkrementalcache
+*.tsbuildinfo
+
+# Harness-Audit-Ausgabe (Laufzeitsignal, regenerierbar)
+.harness/audit-latest.txt
+
+# Sicherungsdateien vor Umbauten
+*.bak-*

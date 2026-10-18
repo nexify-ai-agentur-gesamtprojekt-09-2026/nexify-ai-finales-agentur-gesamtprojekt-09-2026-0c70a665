@@ -42,3 +42,75 @@ Keine Abrechnung/Rechnungslauf vor Entscheidung E1/E3/E4. Kein Livegang ohne Fre
 
 ## Kontakt
 Pascal Courbois · mail@nexifyai.cloud (Firmendaten in `docs/09-final/08` bitte bestätigen lassen).
+
+## Harness (Betrieb, verbindlich)
+
+### Clock-in
+Vor jeder Codeaenderung: `PROGRESS.md` lesen, dann `make check` ausfuehren, um die gruene
+Basis zu bestaetigen. Genau ein aktives Feature bearbeiten; Scope nicht weiten.
+
+### Verifikation
+- `make check` — Design/SEO/i18n/A11y-Audit (`node tools/ds-audit-cli.js`), muss Exit 0 liefern.
+- `make test` — Selbsttest + Preislogik-Test.
+- `make e2e` — echter Browserlauf gegen die Live-Cockpit-URL (Scanner-Chromium).
+- `make check-arch` — Architektur-Regeln; `make clean-check` — Sauber-Zustand.
+- Repo ist konsistent, wenn `make check` (und `make test`) Exit 0 liefern.
+
+### Zustandsdateien (State)
+- `PROGRESS.md` — Current State, In Progress, Next Steps, Blockers.
+- `DECISIONS.md` — getroffene Entscheidungen mit Begruendung.
+- `feature_list.json` — Feature-Primitive (behavior + verification + state + evidence + layers).
+
+### Feature List Rules (Zustandsmaschine)
+- Zustaende: `not_started` → `active` → `passing`. Kein Ueberspringen.
+- `passing` wird nie von Hand gesetzt — nur ueber `make verify-feature F=<id>`.
+- WIP=1: hoechstens ein Feature darf `active` sein; erst fertigstellen, dann naechstes.
+- Granularitaet: each feature must be completable in one session. If it spans sessions, split it.
+- `evidence`-Feld je Feature nennt Datum und Pruefbefehl.
+
+### Definition of Done (drei Schichten)
+- Layer 1 (Syntax/Statik): `npm run check` bzw. `tsc --noEmit` in `apps/web`.
+- Layer 2 (Laufzeitverhalten): der feature-eigene Pruefbefehl (`make test`).
+- Layer 3 (System/E2E): `make e2e` (echter Browserlauf) bzw. Live-/Deployment-Nachweis.
+- Do not proceed to Layer N+1 if Layer N fails; layers must pass in order.
+- Layer 3 (e2e) is required when changes cross component or domain boundaries.
+- Laufzeitsignale: App erreicht Ready-State (Cockpit 200), Seiteneffekte korrekt
+  (RLS-Trennung, Ledger-Idempotenz), keine Debug-Artefakte bleiben zurueck.
+
+### Architecture Boundaries
+- `apps/web/app` = UI/Routen · `apps/web/lib` = Datenzugriff · `infra/db` = Schema/RLS ·
+  `config` = Tokens/Fakten/Regeln · `tools` = Pruef-/Betriebswerkzeuge.
+- Durchgesetzt: `.harness/arch-rules.json` → `make check-arch` (WHAT/WHY/FIX).
+- Review-to-automation: every new error category caught in code review becomes a rule in
+  `.harness/arch-rules.json`.
+
+### Observability
+- Sprint-Contract vor jedem Feature: `templates/sprint-contract.md`.
+- Laufzeitsignale je Sitzung: `scripts/session-trace.sh` (`make session-start`/`make session-end`).
+- Bewertung nach Abschluss: `templates/evaluator-rubric.md` — jede Dimension mindestens B.
+
+### Clean State
+- Vor dem Abschluss: `make clean-check` (Statik/Audit, Tests, feature_list, PROGRESS.md,
+  keine Debug-Artefakte) gruen. Modulgesundheit in `docs/quality-document.md` (A/B/C/D) pflegen.
+- Dual-Mode-Cleanup: sofort nach jeder Sitzung (Debug-/Temp-Artefakte) + periodischer Sweep
+  (woechentlich) fuer strukturellen Drift.
+
+### Clock-out
+Vor dem Schliessen: `PROGRESS.md` aktualisieren (Current State + Next Steps), `make check`
+und `make clean-check` gruen. Kein Commit ohne Freigabe.
+
+### Commits
+- Atomic: one logical operation per commit; das Repo ist nach jedem Commit konsistent.
+- Write commit messages that explain WHY the change was made, not just what changed.
+
+### Kontext-Knappheit
+Bei knappem Kontext nicht hektisch fertigstellen — stoppen, `PROGRESS.md` aktualisieren
+und einen sauberen Checkpoint hinterlassen (do not rush).
+
+### Constraints (annotiert)
+
+- Tokens: nur Werte aus `config/design-tokens.json` (source: config/design-tokens.json; why: CI-/Token-Drift vermeiden).
+- Zahlen und Preise: nur aus `config/fakten.json`/`config/api-prepaid.json` (source: config/fakten.json; why: keine erfundenen Zahlen/Preise).
+- Geheimnisse nie im Code, sondern aus `/etc/myadmin/web.env` (source: /etc/myadmin/web.env; why: Geheimnisschutz).
+- Mandantentrennung per RLS, Idempotenz auf allen Buchungen (source: infra/db/001_cockpit.sql; why: Datenschutz/Integritaet).
+- Dokumentation wird im selben Commit wie der Code aktualisiert — no stale documentation, keine veralteten Docs (same commit).

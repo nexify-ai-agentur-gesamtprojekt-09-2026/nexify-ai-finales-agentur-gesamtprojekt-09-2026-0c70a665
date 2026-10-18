@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "wip": 1,
+  "features": [
+    {
+      "id": "F-AUDIT",
+      "behavior": "Design/SEO/i18n/A11y-Audit besteht ohne Fehler/Warnungen",
+      "verification": "node tools/ds-audit-cli.js",
+      "state": "passing",
+      "evidence": "0 Fehler, 0 Warnungen (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/ds-audit-cli.js",
+          "repair": "Syntaxfehler in tools/ds-audit-cli.js beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "node tools/ds-audit-cli.js",
+          "repair": "Befund in der genannten Datei beheben; Zahlen/Preise aus config/fakten.json beziehen."
+        }
+      ]
+    },
+    {
+      "id": "F-SELFTEST",
+      "behavior": "Modul-Selbsttest (revolut/abo/support/ledger/rechnung/i18n) besteht",
+      "verification": "node tools/selbsttest.mjs",
+      "state": "passing",
+      "evidence": "selbsttest ok (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/selbsttest.mjs",
+          "repair": "Syntaxfehler in tools/selbsttest.mjs beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "node tools/selbsttest.mjs",
+          "repair": "Fehlgeschlagenes Modul laut Selbsttest-Ausgabe korrigieren."
+        }
+      ]
+    },
+    {
+      "id": "F-PREIS",
+      "behavior": "Preislogik-Tests bestehen",
+      "verification": "node --test tools/nexify-preis.test.js",
+      "state": "passing",
+      "evidence": "node --test pass (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/nexify-preis.test.js",
+          "repair": "Syntaxfehler in tools/nexify-preis.test.js beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "node --test tools/nexify-preis.test.js",
+          "repair": "Preislogik in tools/nexify-preis.js korrigieren."
+        }
+      ]
+    },
+    {
+      "id": "F-RENDER",
+      "behavior": "Render-Smoke aller Prototypen ohne Absturz/Reste",
+      "verification": "cd prototypen && node ../tools/render-smoke.js",
+      "state": "passing",
+      "evidence": "alle .dc.html ok (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/render-smoke.js",
+          "repair": "Syntaxfehler in tools/render-smoke.js beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "cd prototypen && node ../tools/render-smoke.js",
+          "repair": "Betroffene .dc.html pruefen (Absturz/Ersetzungsrest)."
+        }
+      ]
+    },
+    {
+      "id": "F-RLS",
+      "behavior": "Mandantentrennung per RLS (Prueffall A/B) besteht",
+      "verification": "bash infra/db/rls-test.sh",
+      "state": "passing",
+      "evidence": "rls-test OK, A/B je 1 Zeile, ohne Kontext 0 (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "bash -n infra/db/rls-test.sh",
+          "repair": "Shell-Syntaxfehler in infra/db/rls-test.sh beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "bash infra/db/rls-test.sh",
+          "repair": "RLS-Policy/App-Rolle in infra/db/001_cockpit.sql pruefen; Postgres auf 5599."
+        }
+      ]
+    },
+    {
+      "id": "F-COCKPIT",
+      "behavior": "Cockpit rendert live (Next.js, /myadmin) mit Token-Hintergrund",
+      "verification": "bash scripts/e2e.sh",
+      "state": "passing",
+      "evidence": "e2e-cockpit OK, Status 200, keine Console-Fehler (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "(cd apps/web && npx tsc --noEmit)",
+          "repair": "Typfehler in apps/web/app oder lib beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "bash scripts/e2e.sh",
+          "repair": "Cockpit-URL/Rendering pruefen; Scanner-Container erreichbar."
+        }
+      ]
+    },
+    {
+      "id": "F-ICON",
+      "behavior": "App-Icon wird ausgeliefert (kein /favicon.ico-404)",
+      "verification": "curl -fsS http://127.0.0.1:8300/myadmin/icon.svg",
+      "state": "passing",
+      "evidence": "icon.svg 200 image/svg+xml + <link rel=icon> im HTML (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "node --check tools/e2e-cockpit.mjs",
+          "repair": "Syntaxfehler in tools/e2e-cockpit.mjs beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "curl -fsS -o /dev/null http://127.0.0.1:8300/myadmin/icon.svg",
+          "repair": "apps/web/app/icon.svg anlegen und neu bauen/deployen."
+        }
+      ]
+    },
+    {
+      "id": "F-HEALTH",
+      "behavior": "Dauerbetrieb-Probe /myadmin/health prueft die reale DB-Abhaengigkeit und meldet 200/503",
+      "verification": "curl -fsS -o /dev/null -w '%{http_code}' http://127.0.0.1:8300/myadmin/health",
+      "state": "passing",
+      "evidence": "apps/web/app/health/route.ts; live 200 {\"status\":\"ok\",\"db\":true}; Monitor nexify-gesundheit fuehrt myadmin-cockpit (18 Dienste, 0 Ausfaelle) (2026-10-05)",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "(cd apps/web && npx tsc --noEmit)",
+          "repair": "Typfehler in apps/web/app/health/route.ts beheben."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "curl -fsS -o /dev/null -w '%{http_code}' http://127.0.0.1:8300/myadmin/health",
+          "repair": "Health-Route bauen/deployen; myADMIN-Postgres erreichbar pruefen."
+        }
+      ]
+    }
+  ]
+}

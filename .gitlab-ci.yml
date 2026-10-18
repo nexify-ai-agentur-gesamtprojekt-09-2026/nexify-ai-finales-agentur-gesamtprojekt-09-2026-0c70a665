@@ -52,22 +52,31 @@ myadmin-rls:
     # Harte Obergrenze: ein haengender Test darf die Pipeline nicht blockieren.
     - timeout 180 bash infra/db/rls-test.sh
 
+kette:
+  stage: pruefen
+  image: node:22-alpine
+  cache:
+    key: "turbo-$CI_COMMIT_REF_SLUG"
+    paths:
+      - .turbo/
+  script:
+    - npm ci --no-audit --no-fund
+    - npx turbo run check test build
+
 jeff-gate:
   stage: jeff
   image: python:3.12-alpine
-  needs: ["ds-audit", "manifest", "json-konfig", "myadmin-tokens", "myadmin-rls"]
+  needs: ["ds-audit", "manifest", "json-konfig", "myadmin-tokens", "myadmin-rls", "kette"]
   script:
     - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
-
-slack:
-  stage: jeff
-  image: curlimages/curl:latest
-  needs: ["jeff-gate"]
-  rules:
-    - if: '$SLACK_WEBHOOK != null && $SLACK_WEBHOOK != ""'
-      when: always
-  script:
+  after_script:
     - |
-      curl -sS -X POST -H 'Content-Type: application/json' \
-        --data "{\"text\":\"${CI_PROJECT_PATH} · ${CI_COMMIT_REF_NAME} · ${CI_PIPELINE_STATUS} · ${CI_PIPELINE_URL}\"}" \
-        "$SLACK_WEBHOOK"
+      if [ -n "${SLACK_WEBHOOK:-}" ]; then
+        python3 - "$SLACK_WEBHOOK" "$CI_PROJECT_PATH" "$CI_COMMIT_REF_NAME" "$CI_JOB_STATUS" "$CI_PIPELINE_URL" <<'PY'
+      import json, sys, urllib.request
+      hook, project, branch, status, url = sys.argv[1:6]
+      data = json.dumps({"text": f"{project} · {branch} · Gate: {status} · {url}"}).encode()
+      req = urllib.request.Request(hook, data=data, headers={"Content-Type": "application/json"})
+      urllib.request.urlopen(req, timeout=10)
+      PY
+      fi

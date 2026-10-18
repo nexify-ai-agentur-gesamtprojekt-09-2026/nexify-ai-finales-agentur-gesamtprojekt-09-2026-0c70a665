@@ -1,0 +1,32 @@
+{
+  "$kommentar": "Architektur-Regeln (WHAT/WHY/FIX). Geprueft durch scripts/check-arch.sh (make check-arch).",
+  "rules": [
+    {
+      "id": "ARCH-001",
+      "description": "keine offensichtlichen Zugangsgeheimnisse im Quelltext",
+      "check": "! grep -rEn --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=dist --exclude-dir=.git --exclude-dir=__pycache__ \"sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|whsec_[A-Za-z0-9]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----\" apps packages tools config",
+      "expect": "exit 0",
+      "what": "Ein Zugangsgeheimnis steht im Quelltext.",
+      "why": "Geheimnisse gehoeren nie ins Repo (config/.env, /etc/myadmin).",
+      "fix": "Wert ueber Umgebungsvariable/Secret-Datei beziehen."
+    },
+    {
+      "id": "ARCH-002",
+      "description": "Designwerte nur aus Tokens (config/design-tokens.json), kein Hex/RGB in app-Code",
+      "check": "! grep -rEn \"#[0-9a-fA-F]{3,8}\\b|rgb\\(|rgba\\(\" apps/web/app apps/web/lib --include=*.tsx --include=*.ts --include=*.css --exclude=tokens.generated.css --exclude=globals.css",
+      "expect": "exit 0",
+      "what": "Ein Hex-/RGB-Wert steht direkt im App-Code.",
+      "why": "Nur Werte aus config/design-tokens.json; Token-Drift wird sonst unsichtbar.",
+      "fix": "Wert durch CSS-Variable (var(--...)) ersetzen; neue Werte in design-tokens.json eintragen."
+    },
+    {
+      "id": "ARCH-003",
+      "description": "Zahlen/Preise nur aus config/fakten.json bzw. api-prepaid.json",
+      "check": "node tools/ds-audit-cli.js",
+      "expect": "exit 0",
+      "what": "Design-/SEO-/i18n-/A11y-Audit rot (u. a. erfundene Zahlen/Preise).",
+      "why": "Zahlen mit Preisbezug nur aus config/fakten.json/api-prepaid.json.",
+      "fix": "Wert aus der Config beziehen; make check zeigt die Datei."
+    }
+  ]
+}
