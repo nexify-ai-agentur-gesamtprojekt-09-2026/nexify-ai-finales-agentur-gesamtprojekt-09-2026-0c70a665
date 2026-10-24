@@ -44,6 +44,9 @@ const server = createServer(async (request, response) => {
     response.writeHead(200, {
       "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream",
       "Cache-Control": "no-cache",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
     })
     response.end(body)
   } catch {
