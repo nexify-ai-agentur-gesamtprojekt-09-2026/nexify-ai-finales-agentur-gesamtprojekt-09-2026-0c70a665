@@ -18,6 +18,9 @@ function cfEnv() {
 const env = cfEnv();
 const DNS_TOKEN = env.CLOUDFLARE_DNS_API_TOKEN || env.CLOUDFLARE_API_TOKEN;
 const DUS_IP = '179.198.195.91';
+const DISK_MAX_PROZENT = 90;
+const SPEICHER_MIN_PROZENT = 10;
+const LAST_FAKTOR = 2;
 
 async function cf(path, opts = {}) {
   const r = await fetch(CF + path, { headers: { 'Authorization': 'Bearer ' + DNS_TOKEN, 'Content-Type': 'application/json' }, method: opts.method || 'GET', body: opts.body });
