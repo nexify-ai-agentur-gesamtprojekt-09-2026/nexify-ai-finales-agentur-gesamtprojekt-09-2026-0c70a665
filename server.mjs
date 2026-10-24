@@ -10,6 +10,8 @@ const routes = new Map([
   ["/", "apps-index.html"],
   ["/index.html", "apps-index.html"],
   ["/tokens.css", "packages/tokens/tokens.css"],
+  ["/prototypen", "prototypen/index.html"],
+  ["/prototypen/", "prototypen/index.html"],
 ])
 
 const contentTypes = {
@@ -21,6 +23,10 @@ const contentTypes = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".webmanifest": "application/manifest+json; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
+  ".woff2": "font/woff2",
 }
 
 function safePath(urlPath) {
@@ -32,6 +38,11 @@ function safePath(urlPath) {
 
 const server = createServer(async (request, response) => {
   try {
+    if (!['GET', 'HEAD'].includes(request.method || 'GET')) {
+      response.writeHead(405, { Allow: 'GET, HEAD' })
+      response.end('Method not allowed')
+      return
+    }
     const filePath = safePath(request.url || "/")
     if (!filePath) {
       response.writeHead(403)
@@ -41,14 +52,18 @@ const server = createServer(async (request, response) => {
     const fileStats = await stat(filePath)
     if (!fileStats.isFile()) throw new Error("Not a file")
     const body = await readFile(filePath)
-    response.writeHead(200, {
+    const headers = {
       "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream",
       "Cache-Control": "no-cache",
       "X-Content-Type-Options": "nosniff",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
-    })
-    response.end(body)
+      "Content-Security-Policy-Report-Only": "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
+    }
+    if (process.env.NODE_ENV === 'production') headers['Strict-Transport-Security'] = 'max-age=63072000'
+    response.writeHead(200, headers)
+    if (request.method !== 'HEAD') response.end(body)
+    else response.end()
   } catch {
     response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" })
     response.end("Not found")
