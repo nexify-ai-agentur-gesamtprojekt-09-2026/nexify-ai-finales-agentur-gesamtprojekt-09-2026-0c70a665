@@ -27,7 +27,6 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebAPI","name":"NeXify AI API","description":"API-kompatible KI-Schnittstelle mit Prepaid-Abrechnung, Kostenstellen und EU-Hosting (Frankfurt).","documentation":"https://nexifyai.cloud","provider":{"@type":"Organization","name":"NeXify AI","url":"https://nexifyai.cloud"}}</script>
 <meta name="description" content="Alle freigegebenen KI-Modelle über einen Schlüssel. Guthaben per Kartenzahlung aufladen, nur Verbrauch zahlen, Kostenstellen und Monatsnachweis inklusive." />
 <style>@font-face{font-family:Geist;font-style:normal;font-weight:100 900;font-display:swap;src:url(./assets/fonts/geist-latin.woff2) format(woff2)}@font-face{font-family:'Geist Mono';font-style:normal;font-weight:100 900;font-display:swap;src:url(./assets/fonts/geist-mono-latin.woff2) format(woff2)}</style>
-<style>@font-face{font-family:Geist;font-style:normal;font-weight:100 900;font-display:swap;src:url(./assets/fonts/geist-latin.woff2) format(woff2)}@font-face{font-family:'Geist Mono';font-style:normal;font-weight:100 900;font-display:swap;src:url(./assets/fonts/geist-mono-latin.woff2) format(woff2)}</style>
 <style>html,body{margin:0;background:#242826;color:#FFFFFF;font-family:Geist,Helvetica,Arial,sans-serif}button{font:inherit}a{color:#D7FA50}a:hover{color:#FFFFFF}input[type=range]{accent-color:#D7FA50}</style>
 <style id="nx-mobil">
   html{-webkit-text-size-adjust:100%} body{overflow-x:hidden}
@@ -49,16 +48,16 @@
 <dc-import name="NX-Header" marke="cloud" nav="cloud" active="api" kontext="NeXify AI API" cta="keine" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
 <div id="inhalt" tabindex="-1" style="min-height:100vh;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),radial-gradient(900px 500px at 96% 72%,rgba(167,139,250,.06),transparent 62%),#242826;color:#FFFFFF;color-scheme:dark">
   <div style="position:sticky;top:73px;z-index:30;background:rgba(30,34,32,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)"><nav aria-label="API-Bereiche" style="width:min(1120px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:6px 0"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;margin-right:8px">NeXify AI API</span>
-      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.go }}" aria-current="{{ t.cur }}" style="min-height:44px;padding:0 16px;border:1px solid {{ t.rand }};border-radius:10px;background:{{ t.bg }};color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.label }}</button></sc-for>
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.go }}" aria-pressed="{{ t.cur }}" style="min-height:44px;padding:0 16px;border:1px solid {{ t.rand }};border-radius:10px;background:{{ t.bg }};color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.label }}</button></sc-for>
       <a href="Kundenwege.dc.html?weg=reg&amp;rolle=kunde" style="margin-left:auto;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;font-size:14px" style-hover="color:#111312;filter:brightness(1.06)" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Konto anlegen</a></nav></div>
 
   <sc-if value="{{ istStart }}" hint-placeholder-val="{{ true }}">
     <main data-screen-label="API – Produktseite" style="max-width:1120px;margin:0 auto;padding:64px 24px 96px">
       <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">NeXify AI API · Prepaid · EU-Hosting Frankfurt</p>
       <h1 style="margin:0 0 24px;font-size:clamp(40px,6.4vw,88px);font-weight:600;line-height:1;letter-spacing:-.05em;text-wrap:balance;max-width:14ch">Ein Schlüssel. Ein Guthaben. Eine Rechnung.</h1>
-      <p style="margin:0 0 32px;font-size:18px;line-height:1.6;color:#BCC1BD;max-width:58ch;text-wrap:pretty">Nutzen Sie alle freigegebenen KI-Modelle über einen einzigen Schlüssel. Sie laden Guthaben per Kartenzahlung oder Karte auf und zahlen nur, was Ihre Anfragen tatsächlich verbrauchen – ohne Grundgebühr und ohne Mindestumsatz.</p>
+      <p style="margin:0 0 32px;font-size:18px;line-height:1.6;color:#BCC1BD;max-width:58ch;text-wrap:pretty">Nutzen Sie alle freigegebenen KI-Modelle über einen einzigen Schlüssel. Sie laden Guthaben per Kartenzahlung auf und zahlen nur, was Ihre Anfragen tatsächlich verbrauchen – ohne Grundgebühr und ohne Mindestumsatz.</p>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px"><a href="Kundenwege.dc.html?weg=reg&amp;rolle=kunde" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:16px;font-weight:600;text-decoration:none" style-hover="color:#111312;filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Konto kostenlos anlegen</a><button onClick="{{ zuPreisen }}" style="height:52px;padding:0 24px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;font-size:16px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Kosten vorab berechnen</button></div>
-      <ul aria-label="Auf einen Blick" style="display:flex;flex-wrap:wrap;gap:8px 24px;margin:0 0 64px;padding:0;list-style:none;font-family:'Geist Mono',monospace;font-size:13px;color:#BCC1BD"><li>Keine Grundgebühr</li><li>Aufladen ab 50 € per Kartenzahlung oder Karte</li><li>Guthaben verfällt nicht</li><li>Hosting in Frankfurt</li><li>Nur für Unternehmen</li></ul>
+      <ul aria-label="Auf einen Blick" style="display:flex;flex-wrap:wrap;gap:8px 24px;margin:0 0 64px;padding:0;list-style:none;font-family:'Geist Mono',monospace;font-size:13px;color:#BCC1BD"><li>Keine Grundgebühr</li><li>Aufladen ab 50 € per Kartenzahlung</li><li>Guthaben verfällt nicht</li><li>Hosting in Frankfurt</li><li>Nur für Unternehmen</li></ul>
 
       <section aria-label="Ausgangslage" style="max-width:760px;margin:0 0 48px">
         <h2 style="margin:0 0 16px;font-size:32px;font-weight:600;line-height:1.15;letter-spacing:-.04em;text-wrap:balance">Mehrere KI-Modelle heißen bisher: mehrere Verträge, Schlüssel und Rechnungen.</h2>
@@ -162,7 +161,7 @@
   <sc-if value="{{ istKonsole }}" hint-placeholder-val="{{ false }}">
     <main data-screen-label="API – Konsole" style="max-width:1120px;margin:0 auto;padding:48px 24px 96px">
       <sc-if value="{{ meldung }}" hint-placeholder-val="{{ false }}">
-        <div role="status" style="display:flex;gap:12px;margin:0 0 24px;padding:16px;border:1px solid {{ meldungRand }};border-radius:4px;background:#303634"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:{{ meldungRand }}">{{ meldungCode }}</span><span style="font-size:14px;line-height:1.5">{{ meldung }}</span></div>
+        <div role="status" aria-live="polite" style="display:flex;gap:12px;margin:0 0 24px;padding:16px;border:1px solid {{ meldungRand }};border-radius:4px;background:#303634"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:{{ meldungRand }}">{{ meldungCode }}</span><span style="font-size:14px;line-height:1.5">{{ meldung }}</span></div>
       </sc-if>
       <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px">
         <div style="flex:1 1 280px;min-width:0;padding:24px;border:1px solid {{ standRand }};border-radius:8px;background:#2A2E2C">
@@ -171,7 +170,7 @@
           <p style="margin:8px 0 0;font-size:14px;color:#BCC1BD">{{ standText }}</p>
         </div>
         <div style="flex:2 1 420px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)">
-          <p style="margin:0 0 12px;font-size:16px;font-weight:600">Aufladen mit Kartenzahlung oder Karte</p>
+          <p style="margin:0 0 12px;font-size:16px;font-weight:600">Aufladen mit Kartenzahlung</p>
           <div role="radiogroup" aria-label="Betrag" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
             <sc-for list="{{ betraege }}" as="b" hint-placeholder-count="4"><button role="radio" aria-checked="{{ b.an }}" onClick="{{ b.waehlen }}" style="min-height:44px;padding:0 16px;border:1px solid {{ b.rand }};border-radius:4px;background:#242826;color:#FFFFFF;font-family:'Geist Mono',monospace;font-size:14px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ b.label }}</button></sc-for>
           </div>
@@ -322,7 +321,7 @@ class Component extends DCLogic {
       neuSchluessel: s.neuSchluessel,
       tabs, istStart: s.view === "start", istPreise: s.view === "preise", istKonsole: s.view === "konsole",
       zurKonsole: this.go("konsole"), zuPreisen: this.go("preise"),
-      schritte: [{ nr: "01", titel: "Konto anlegen", text: "Unternehmen registrieren. Wir prüfen Ihre USt-IdNr., Sie legen Kostenstellen für Projekte oder Abteilungen an." }, { nr: "02", titel: "Guthaben aufladen", text: "Ab 50 € per Kartenzahlung oder Karte. Gutschrift nach Bestätigung, Rechnung sofort." }, { nr: "03", titel: "Anfragen senden", text: "Schlüssel in Ihre Anwendung eintragen. Abgebucht wird nur, was die Anfrage tatsächlich verbraucht." }],
+      schritte: [{ nr: "01", titel: "Konto anlegen", text: "Unternehmen registrieren. Wir prüfen Ihre USt-IdNr., Sie legen Kostenstellen für Projekte oder Abteilungen an." }, { nr: "02", titel: "Guthaben aufladen", text: "Ab 50 € per Kartenzahlung. Gutschrift nach Bestätigung, Rechnung sofort." }, { nr: "03", titel: "Anfragen senden", text: "Schlüssel in Ihre Anwendung eintragen. Abgebucht wird nur, was die Anfrage tatsächlich verbraucht." }],
       faq: [
         { f: "Verfällt mein Guthaben?", a: "Nein. Es bleibt während der Vertragslaufzeit erhalten und wird bei Vertragsende auf Antrag erstattet." },
         { f: "Was passiert, wenn das Guthaben leer ist?", a: "Neue Anfragen werden abgewiesen, bevor Kosten entstehen. Laufende Anfragen werden fertig abgerechnet. Mit Auto-Aufladung passiert das nicht." },
