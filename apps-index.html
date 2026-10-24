@@ -2,7 +2,9 @@
 <html lang="de">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NeXify — finale Gesamtlösung</title>
 <link rel="stylesheet" href="/tokens.css">
-<style>body{margin:0;background:var(--color-graphit-800);color:var(--color-text-primaer);font-family:var(--font-text);padding:48px} a{color:var(--color-marke-lime)} .mods{display:grid;gap:12px;max-width:640px;margin:32px 0}</style>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--gradient-seitengrund);color:var(--color-text-primaer);font-family:var(--font-text);padding:clamp(24px,6vw,72px)}main{max-width:var(--container);margin:0 auto}header{max-width:760px}p{color:var(--color-text-sekundaer);line-height:1.6} .eyebrow{color:var(--color-marke-lime);font:600 12px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase}h1{font-size:clamp(2rem,5vw,4.5rem);line-height:1.02;letter-spacing:-.04em;margin:16px 0}h2{font-size:1rem;margin:0 0 8px}.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin:40px 0}.mods a{display:block;min-height:44px;padding:20px;border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);background:var(--gradient-karte);color:var(--color-text-primaer);text-decoration:none;box-shadow:var(--shadow-kleine-karte)}.mods a:hover{border-color:var(--color-marke-lime);transform:translateY(-2px)}.mods a:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}.mods span{display:block;color:var(--color-text-tertiaer);font-size:.9rem;margin-top:6px}@media (prefers-reduced-motion:reduce){.mods a{transition:none;transform:none}}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -20,9 +22,9 @@
 <h1>NeXify — finale Gesamtlösung</h1>
 <p>Ein Docker, eine Web-App. LLM läuft über 9router (eigene Schicht).</p>
 <div class="mods">
-  <a href="/seiten/index.html">→ Seiten (Designsystem)</a>
-  <a href="/api/llm/v1/models">→ LLM (9router)</a>
-  <a href="/api/rag">→ RAG (LightRAG)</a>
-  <a href="/api/memory">→ Gedächtnis (agentmemory)</a>
+  <a href="/prototypen/index.html">→ Prototypen und Seiten</a>
+  <a href="/packages/ui/index.html">→ UI-Bausteine</a>
+  <a href="/prototypen/index.html#rag">→ RAG (LightRAG)</a>
+  <a href="/prototypen/index.html#memory">→ Gedächtnis (agentmemory)</a>
 </div>
 </body></html>
