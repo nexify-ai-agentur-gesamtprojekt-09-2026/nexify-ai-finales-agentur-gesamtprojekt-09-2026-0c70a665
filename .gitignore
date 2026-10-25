@@ -14,3 +14,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Lokale Harness-Ausfuehrungsspuren und kooperativer Verifikationslock
+.harness/traces/
+.harness/feature-verification.lock

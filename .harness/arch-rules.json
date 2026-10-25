@@ -27,6 +27,15 @@
       "what": "Der Design-/A11y-/i18n-Audit meldet Fehler.",
       "why": "Markenqualitaet und Barrierefreiheit sind Abnahmekriterien.",
       "fix": "Befund beheben; Ausnahme nur mit Begruendung in config/abweichungen.json."
+    },
+    {
+      "id": "ARCH-004",
+      "description": "Lokaler Monitorselbsttest bleibt fail-closed und ohne Produktionszugriffe",
+      "check": "node --test tests/gesundheit.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Die gemeinsame Monitorauswertung besteht ihre Negativ-/Persistenzproben nicht.",
+      "why": "Ein lokaler Check darf weder echte DNS-Reparaturen ausloesen noch Ausfaelle als Erfolg melden.",
+      "fix": "Monitorkern und isolierte Proben reparieren; keine Pruefung deaktivieren."
     }
   ]
 }

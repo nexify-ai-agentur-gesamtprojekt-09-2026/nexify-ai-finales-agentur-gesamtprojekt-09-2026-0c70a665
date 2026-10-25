@@ -77,6 +77,26 @@
           "repair": "tests/test_github_event_inbox.py bzw. tools/github_event_inbox.py pruefen."
         }
       ]
+    },
+    {
+      "id": "F-005",
+      "behavior": "Neues lokales PostgreSQL-Fundament erzwingt Mandant/Rolle und verweigert fehlenden oder fremden Kontext.",
+      "verification": "bash db/foundation/test.sh onboarding-postgres nx_foundation",
+      "state": "passing",
+      "evidence": "make verify-feature F=F-005: alle 2 Layer bestanden; lokaler technischer Nachweis, keine Produktivabnahme",
+      "layers": [
+        {
+          "label": "Layer 1 (Statik/Baseline)",
+          "cmd": "make check",
+          "repair": "Audit und isolierte lokale Monitortests reparieren, keine Produktionsaktionen ausfuehren."
+        },
+        {
+          "label": "Layer 2 (Datenbankverhalten)",
+          "cmd": "bash db/foundation/test.sh onboarding-postgres nx_foundation",
+          "repair": "Rechte/RLS/Principal-/Mandantbindung korrigieren; nur isolierte neue Testdatenbank verwenden."
+        }
+      ],
+      "verified_at": "2026-10-25T22:51:13.678Z"
     }
   ]
 }

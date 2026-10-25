@@ -1,3 +1,30 @@
+# Aktueller Factory-Auftrag · 25.10.2026
+
+- Nutzer hat die sofortige Umsetzung der Gesamtfertigstellung freigegeben; Ziel bleibt aktiv.
+- Entwicklungsbranch: `factory/foundation-2026-10-25`. Kein Merge oder Commit auf `main`.
+- Nachgewiesen: Audit wieder ESM-kompatibel (0 Fehler/0 Warnungen), Originalblob der geschuetzten Prototyp-Uebersicht restauriert, Manifest unveraendert. Navigation bleibt separat erhalten.
+- Lokale Gesundheitspruefung verwendet denselben Kern wie der Live-Runner, ohne Produktions-DNS/Hostaktionen; zehn Tests inkl. Negativfaellen bestanden. DNS-Diagnose im Live-Runner ist nun ausschliesslich lesend, Befunde statt automatischer Reparatur.
+- Vorschau gehaertet (Loopback, Freigabeliste, kodierte Pfade und Symlinkziele); sieben HTTP-Regressionstests bestanden und unabhaengig geprueft.
+- `make check`, `make test`, `make check-arch`, `make clean-check` bestanden nach den Baseline-Reparaturen; abschliessende Protokolle liegen unter `/workspace/.onboarding/N1-*.log`.
+- F-005 wurde ausschliesslich ueber `make verify-feature F=F-005` nach 36 echten PostgreSQL-Pruefaussagen technisch auf passing gesetzt. Drei Mandanten/DB-Principals, RLS, Kontextwechsel und Rollback bestanden; keine Gateway-/Shared-Pool-/Produktivabnahme und keine Wiederherstellung fehlender historischer Migrationen.
+- Parallel im separaten Affilinet-Repository: Frontend gebaut/lokal geprueft; offizieller Stripe-Adapter, strikte Webhooksignaturen und Backend/Auth-E2E lokal geprueft. Transaktionale Abschluss-/Replayabsicherung, Wallet-/Retentionsgrenzen und Checkout-Identitaet wurden umgesetzt und getrennt geprueft; aktuelle Zahlen im Umsetzungsstand.
+- Gesamtplanung, Auftragszustand und aktuelles vollstaendiges Quelleninventar: `/workspace/.onboarding/FACTORY-*`.
+
+## Next Steps
+
+1. DB-Gegenproben wurden ausgefuehrt und unabhaengig geprueft; als naechsten Schnitt die Gateway-Identitaet und den Shared-Pool-Vertrag festlegen, bevor eine Anbindung als fertig gilt.
+2. Tests, Setup-/Startanweisungen und Wiederaufnahmezustand auf den tatsaechlichen neuen Stand bringen.
+3. Lokale Checkpoints auf Entwicklungsbranches sichern; vorgesehenes Live-Reviewergate und Produktivabnahme nicht vortaeuschen.
+4. Detailvertraege fuer Gateway/Auth/Queue/Brain ausarbeiten und innerhalb freigegebener Grenzen implementieren.
+
+## Offene Voraussetzungen der Gesamtlieferung
+
+B.V.-Identitaet/Vertretung und Vertragszuordnung, kommerzielle/steuerliche Widersprueche, finaler Brain-/Bestandsintegrationsvertrag sowie externe Betreiber-/Reviewerzugriffe sind weiterhin nicht belegt. Keine Preise/Rechtstexte oder produktiven Rechte aus dem lokalen Fortschritt ableiten.
+
+---
+
+## Historischer Stand (vor aktueller Cloud-Einrichtung)
+
 # PROGRESS — NeXify AI Gesamtlösung (Design-Handoff)
 
 ## Current State
@@ -29,3 +56,16 @@
 
 ## Blockers
 - Freigaben des Inhabers (Preise/Recht) stehen aus; keine Änderung an Preisen/Rechtstexten ohne Freigabe.
+
+## Externes Review und Wiederaufnahme
+
+Das aktuelle `tools/jeff-gate.py` wurde ohne externe Aktion geprueft: Exit 3,
+`NX_ORAKEL_ENDPOINT/NX_ORAKEL_KEY fehlt`. Dies ist kein go und keine automatische
+Freigabe. Code kann auf Entwicklungsbranches geprueft/gesichert werden, main
+bleibt vom vorgesehenen Gate abhaengig. Die NeX2Fly-Suite liefert aktuell einen
+Proxy-CONNECT-403; gezielte Domainfreigabe ist im Umgebungsentwurf gespeichert,
+kein Umgehen der Netzrichtlinie und keine bestaetigte Suite-API-Verbindung.
+
+Der Gesamtauftrag bleibt aktiv. Ein gespeicherter Auftrag garantiert keinen
+unbegrenzten Hintergrundlauf; bei Wiederaufnahme zuerst die aktuellen
+`FACTORY-AUFTRAG.json` und `FACTORY-UMSETZUNGSSTAND.md` lesen und fortsetzen.

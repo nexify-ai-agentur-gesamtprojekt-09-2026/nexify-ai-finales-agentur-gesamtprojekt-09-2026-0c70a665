@@ -1,10 +1,13 @@
 #!/usr/bin/env node
-// Gesundheits-/Selbstheilungs-Check: vorschau DNS + Services.
-// Repariert vorschau-A-Record (DUS, DNS-only) automatisch (korrigiert 29.09.2026:
-// alter CNAME->Tunnel f0f2b101 war tot; richtiger Zielzustand = A 179.198.195.91).
+// Gesundheitsdiagnose: vorschau DNS + Services.
+// DNS ist ausschliesslich lesend. Eine Abweichung erfordert die gesonderte
+// konkrete Live-DNS-Freigabe; dieser Monitor fuehrt keine DNS-Reparatur aus.
 import { readFileSync, writeFileSync, statfsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import os from 'node:os';
+import { pruefeDienste, schreibeStatus, ressourcenGrenzen, pruefeVorschauDNS } from './gesundheit-kern.mjs';
+
+const { diskMaxProzent: DISK_MAX_PROZENT, speicherMinProzent: SPEICHER_MIN_PROZENT, lastFaktor: LAST_FAKTOR } = ressourcenGrenzen();
 
 const CF = 'https://api.cloudflare.com/client/v4';
 function cfEnv() {
@@ -15,28 +18,26 @@ function cfEnv() {
   }
   return env;
 }
-const env = cfEnv();
-const DNS_TOKEN = env.CLOUDFLARE_DNS_API_TOKEN || env.CLOUDFLARE_API_TOKEN;
 const DUS_IP = '179.198.195.91';
-
-async function cf(path, opts = {}) {
-  const r = await fetch(CF + path, { headers: { 'Authorization': 'Bearer ' + DNS_TOKEN, 'Content-Type': 'application/json' }, method: opts.method || 'GET', body: opts.body });
-  return r.json();
+async function cfLesen(apiPath) {
+  const env = cfEnv();
+  const token = env.CLOUDFLARE_DNS_API_TOKEN || env.CLOUDFLARE_API_TOKEN;
+  if (!token) throw new Error('DNS-Lesezugriff nicht konfiguriert');
+  const response = await fetch(CF + apiPath, {
+    method: 'GET', headers: { Authorization: 'Bearer ' + token },
+    signal: AbortSignal.timeout(10000),
+  });
+  if (!response.ok) throw new Error('DNS-Lesezugriff fehlgeschlagen');
+  return response.json();
 }
 
-const out = { zeit: new Date().toISOString(), cname: 'ok', services: {}, selbstheilung: [] };
-
-// 1) DNS vorschau prüfen + ggf. reparieren (Soll: A -> DUS_IP, DNS-only)
-const zones = await cf('/zones?name=nexifyai.cloud');
-const zone = (zones.result || [{}])[0].id;
-const recs = await cf(`/zones/${zone}/dns_records?name=vorschau.nexifyai.cloud`);
-const richtig = (recs.result || []).find(x => x.type === 'A' && x.content === DUS_IP);
-if (!richtig) {
-  for (const x of (recs.result || [])) if (x.id) await cf(`/zones/${zone}/dns_records/${x.id}`, { method: 'DELETE' });
-  await cf(`/zones/${zone}/dns_records`, { method: 'POST', body: JSON.stringify({ type: 'A', name: 'vorschau.nexifyai.cloud', content: DUS_IP, proxied: false, ttl: 1 }) });
-  out.cname = 'repariert';
-  out.selbstheilung.push('vorschau A-Record neu gesetzt (DUS, DNS-only)');
-}
+const out = { zeit: new Date().toISOString(), cname: 'unbekannt', services: {}, selbstheilung: [] };
+const dns = await pruefeVorschauDNS({
+  lesen: cfLesen, zoneName: 'nexifyai.cloud',
+  recordName: 'vorschau.nexifyai.cloud', expectedIP: DUS_IP,
+});
+out.cname = dns.cname;
+if (dns.fehler) out.dns_hinweis = 'DNS-Befund pruefen; Aenderung nur nach konkreter Live-DNS-Freigabe.';
 
 // Host-Port dynamisch aus Docker lesen (Compose vergibt einen dynamischen Port; 33018 war der letzte beobachtete).
 function cogneeUrl() {
@@ -135,6 +136,7 @@ const checks = [
   ['docker:deploy-staging-scanner', 'docker:deploy-staging-scanner-1'],
   ['docker:myadmin-shell', 'docker:myadmin-shell'],
 ];
+if (dns.fehler) checks.push(['dns:vorschau', 'diagnose:dns:' + dns.cname]);
 if (process.env.GESUNDHEIT_ERZWINGE_FEHLER) checks.push(['selbsttest-ausfall', 'http://127.0.0.1:1/health']);
 // Anti-Bypass (Master-Direktive §8): stilles Entfernen von Checks wird als Ausfall gewertet.
 const MIN_BASIS_CHECKS = Number(process.env.GESUNDHEIT_MIN_CHECKS || 60);
@@ -174,64 +176,34 @@ try {
 try {
   const fsInfo = statfsSync('/');
   const belegt = 100 - (fsInfo.bavail / fsInfo.blocks) * 100;
+  if (!Number.isFinite(belegt) || belegt < 0 || belegt > 100) throw new Error('Ungueltige Plattenmessung');
   checks.push(['ressource:disk', 'ressource:disk:' + (belegt > DISK_MAX_PROZENT ? 'rot' : 'ok')]);
   out.disk_prozent = Math.round(belegt * 10) / 10;
-} catch { /* statfs nicht verfuegbar */ }
+} catch { checks.push(['ressource:disk', 'ressource:disk:unbekannt']); }
 try {
   const frei = (os.freemem() / os.totalmem()) * 100;
+  if (!Number.isFinite(frei) || frei < 0 || frei > 100) throw new Error('Ungueltige Speichermessung');
   checks.push(['ressource:speicher', 'ressource:speicher:' + (frei < SPEICHER_MIN_PROZENT ? 'rot' : 'ok')]);
   out.speicher_frei_prozent = Math.round(frei * 10) / 10;
-} catch { /* os nicht verfuegbar */ }
+} catch { checks.push(['ressource:speicher', 'ressource:speicher:unbekannt']); }
 try {
   const last = os.loadavg()[0];
   const grenze = os.cpus().length * LAST_FAKTOR;
+  if (!Number.isFinite(last) || last < 0 || !Number.isFinite(grenze) || grenze <= 0) throw new Error('Ungueltige Lastmessung');
   checks.push(['ressource:last', 'ressource:last:' + (last > grenze ? 'rot' : 'ok')]);
   out.last1 = Math.round(last * 100) / 100;
-} catch { /* os nicht verfuegbar */ }
-const erwartet = {};
-for (const [n, u, e = 200] of checks) {
-  erwartet[n] = e;
-  // systemd-basierte Liveness: aktiv -> 200, sonst 0.
-  if (String(u).startsWith('systemd:')) {
-    try { const aktiv = execFileSync('systemctl', ['is-active', String(u).slice(8)], { encoding: 'utf8' }).trim() === 'active'; out.services[n] = aktiv ? 200 : 0; }
-    catch { out.services[n] = 0; }
-    continue;
-  }
-  // Container-Liveness: laufend + (falls vorhanden) Health=healthy.
-  if (String(u).startsWith('docker:')) {
-    try {
-      const info = JSON.parse(execFileSync('docker', ['inspect', String(u).slice(7)], { encoding: 'utf8' }))[0];
-      const laeuft = info?.State?.Running === true;
-      const health = info?.State?.Health?.Status;
-      out.services[n] = laeuft && (!health || health === 'healthy') ? 200 : 0;
-    } catch { out.services[n] = 0; }
-    continue;
-  }
-  if (String(u).startsWith('systemd-fehler:')) { out.services[n] = 0; continue; }
-  if (String(u).startsWith('crashloop:')) { out.services[n] = 0; continue; }
-  // Ressourcenpruefung: die Entscheidung steckt im Praefix (:ok / :rot).
-  if (String(u).startsWith('ressource:')) { out.services[n] = String(u).endsWith(':ok') ? 200 : 0; continue; }
-  // Erwartete 3xx werden ohne Folgen des Redirects geprueft (das Weiterleitungsziel kann
-  // unerreichbar sein); 2xx werden normal gefolgt.
-  // Lastfest: unter Host-Last (LightRAG-Ingestion) antwortet ein gesunder Dienst erst nach
-  // dem 5s-Fenster. Ein einzelner Timeout ist kein Ausfall -> 3 Versuche, je frisches Signal.
-  let st = 0;
-  for (let v = 0; v < 3; v++) {
-    const optionen = { signal: AbortSignal.timeout(5000), ...(e >= 300 && e < 400 ? { redirect: 'manual' } : {}) };
-    try { st = (await fetch(u, optionen)).status; break; }
-    catch { st = 0; if (v < 2) await new Promise((res) => setTimeout(res, 1500)); }
-  }
-  out.services[n] = st;
-}
-
-// 3) Alarm: Ausfaelle sichtbar machen (Exit-Code + Alarmzeile + Statusdatei).
-const ausfaelle = Object.entries(out.services).filter(([n, st]) => st !== (erwartet[n] ?? 200));
-out.ausfaelle = ausfaelle.map(([n, st]) => n + '=' + st);
+} catch { checks.push(['ressource:last', 'ressource:last:unbekannt']); }
+// Lokaler Selbsttest und Live-Runner nutzen denselben Monitorkern.
+const bericht = await pruefeDienste(checks, { minimum: MIN_BASIS_CHECKS });
+out.services = bericht.services;
+out.ausfaelle = bericht.ausfaelle;
+process.exitCode = bericht.exitCode;
 const STATUS_DATEI = process.env.GESUNDHEIT_STATUS || '/var/log/nexify-gesundheit-status.json';
-try { writeFileSync(STATUS_DATEI, JSON.stringify(out, null, 2) + '\n'); } catch {}
+try { schreibeStatus(STATUS_DATEI, out); }
+catch { console.error('ALARM: Statusdatei konnte nicht geschrieben werden'); process.exitCode = 1; }
 console.log(JSON.stringify(out, null, 2));
-if (ausfaelle.length) {
-  for (const [n, st] of ausfaelle) console.error('ALARM: Dienst ' + n + ' nicht erreichbar (Status ' + st + ')');
+if (bericht.ausfaelle.length) {
+  for (const fehler of bericht.ausfaelle) console.error('ALARM: Dienst ' + fehler);
   process.exitCode = 1;
 }
 try {

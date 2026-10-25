@@ -26,6 +26,15 @@ python-tests:
   stage: pruefen
   image: python:3.12
   script:
+    - python3 -m unittest discover -s tests -p "test_github_event_inbox.py" -q
+
+# Preview-Testharness benoetigt Node fuer den echten Server. Das gepruefte
+# Node-Image bringt auch Python3 fuer das Standardbibliothek-Harness mit.
+runtime-tests:
+  stage: pruefen
+  image: node:22-bookworm@sha256:63538dfe497cc29dfafdda25ada09b46db68a3f4cc205abf1f5d6bf0913f3384
+  script:
+    - node --test tests/gesundheit.test.mjs
     - python3 -m unittest discover -s tests -q
 
 node-syntax:
@@ -57,9 +66,9 @@ secret-muster:
 jeff-gate:
   stage: jeff
   image: python:3.12-alpine
-  needs: ["ds-audit", "manifest", "json-konfig", "python-tests", "node-syntax", "arch-regeln", "secret-muster"]
+  needs: ["ds-audit", "manifest", "json-konfig", "python-tests", "runtime-tests", "node-syntax", "arch-regeln", "secret-muster"]
   script:
-    - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit, JSON-Konfig, Python-Tests, Node-Syntax, Architektur-Regeln und Geheimnis-Muster gruen" --risiko "niedrig (nur Pruefschranken, nichts deployt)" --rollback "Commit zuruecknehmen"
+    - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit, JSON-Konfig, Python-Tests, lokale Runtime-/Vorschautests, Node-Syntax, Architektur-Regeln und Geheimnis-Muster gruen" --risiko "niedrig (nur Pruefschranken, nichts deployt)" --rollback "Commit zuruecknehmen"
 
 slack:
   stage: jeff
