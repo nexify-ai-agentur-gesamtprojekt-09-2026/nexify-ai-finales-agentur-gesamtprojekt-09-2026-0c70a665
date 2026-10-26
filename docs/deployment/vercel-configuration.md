@@ -72,3 +72,45 @@ Eine daneben vorhandene Cloudflare-Workers-Integration scheitert separat mit
 `Script name is too long ... cannot be longer than54characters`.
 Sie wurde nicht heimlich gelöscht, umbenannt oder als erfolgreicher Backuphost
 bezeichnet. Ihre tatsächliche Rolle ist vor einer Änderung zuzuordnen.
+
+## Aktualisierung: authentifizierte Einrichtung ausgeführt
+
+CLI65.2.0 ist als `nex2fly-nexifyai-nexify` angemeldet. Das bestehende Projekt
+`prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh` wurde gezielt per CLI verknüpft. Der
+vorherige Python-Preset/Node24 wurde auf Vite/Node22, Repositorywurzel,
+`pnpm --filter @nexify/site build` und `apps/site/dist` geändert und per
+separatem API-GET bestätigt. Dies korrigiert die gemeldete Ausgabeordnerlücke.
+Auch die Paket-Engines bleiben auf Hauptversion22, statt künftig automatisch
+auf eine neue Node-Hauptversion zu wechseln.
+
+`nexifyai.de` wurde dem Vorschauzweig zugeordnet und diese Bindung zurückgelesen.
+Die Hauptdomain `.cloud` und der Produktionszweig `main` wurden nicht umgestellt.
+Vorhandene Deployment-/Forkschutzregeln blieben erhalten. Ein erreichbarer
+fertiger Deploymentstand ist gesondert zu prüfen; eine gespeicherte Einstellung
+allein ist kein Release.
+
+Die beiden neuen Vite-Clerk-Werte sind für Development, Preview und Production
+angelegt. Einzelabrufe bestätigten nur als boolesches Ergebnis, dass die
+öffentlichen Werte dem bekannten Publishable-Key und `false` entsprechen.
+Kein Serversecret wurde ausgelesen oder überschrieben. Bestehende Clerk- und
+Auth0-Einträge bleiben erhalten. Der aktuelle Clerk-CNAME wird weiter als
+NXDOMAIN beantwortet; deshalb bleibt die echte Online-Anmeldung deaktiviert.
+Der React-Code enthält jetzt die verzögert geladene offizielle Clerk-UI, während
+Standalone-/Dateivorschau unabhängig von Buildflags keine Authsitzung startet.
+
+Der Benutzer-Homebereich und die verwaltete Codexkonfiguration sind physisch
+schreibgeschützt. Plugininstallation und globale MCP-Registrierung konnten nicht
+abgeschlossen werden; eine erteilte zusätzliche Pfadfreigabe beseitigt keinen
+Read-only-Mount. Gemäß Einstiegsanleitung wurde stattdessen das offizielle
+Standalone-Skillpaket im Projekt installiert:9Skills, über `skills list`
+bestätigt und in `skills-lock.json` gebunden. Es wurde nicht zugleich ein Plugin
+als installiert behauptet. Globale Slash-Commands und `list_teams` über MCP sind
+hier nicht verfügbar. Die authentifizierten Projektoperationen nutzen den
+bereits funktionierenden offiziellen CLI-Zugang.
+
+Die Token-Such-/Ausgabe-Beispiele der allgemeinen Tokenanleitung wurden nicht
+ausgeführt: Die OAuth-Anmeldung ist vorhanden, und Credentialwerte werden
+weder aus lokalen Dateien entdeckt noch in Logs ausgegeben. Die von der CLI
+angelegte lokale OIDC-Datei ist ignoriert und auf0600beschränkt. Kein Tarif,
+kein kostenpflichtiger Seat, keine neue Datenbank und kein neuer Providerplan
+wurden hinzugebucht.

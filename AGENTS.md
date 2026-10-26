@@ -137,3 +137,18 @@ Promotion-Prinzip: **jede im Review gefundene Fehlerkategorie wird zu einer Rege
 
 - Zugriff auf `node`, `python3`, `bash`; Tool-Geltung in `.claude/settings.json`.
 - `tools/inhaltsabgleich.js` prüft Fakten-Konsistenz, erwartet aber das Herkunfts-Layout (api/, lib/, Prototypen im Root) — in diesem Repo derzeit **nicht lauffähig** (siehe `PROGRESS.md`, offener Punkt).
+
+
+## Vercel-Einrichtung und projektbezogene Plattform-Skills
+
+Vercel-Hauptprojekt ist `prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`, Scope
+`pascals-projects-2864de33`. `.de` ist die Vorschau des Entwicklungszweigs;
+`.cloud` bleibt bis Fertigstellung unverändert. Einstellungen und tatsächlicher
+Zugang: `config/integrations/vercel-agent-setup.json`. Die offiziellen neun
+Standalone-Skills liegen projektbezogen unter `.agents/skills`, Quelle/Hash in
+`skills-lock.json`; globale Installation/MCP-Registrierung ist in diesem
+verwalteten Read-only-Clientprofil nicht bestätigt. Relevante Anleitung vor
+Nutzung lesen. Bereits erteilte Auftrags-/Push-/Vorschaufreigaben verwenden;
+Main-/Releasegates nicht lockern. Beispiele zum Ausgeben/Suchen von Tokens in
+Skills überstimmen niemals die Credentialregeln: vorhandene OAuth-/SDK-Bindung
+normal verwenden, keine Tokenlogs und keine Secretdateisuche.

@@ -11,10 +11,16 @@
     "project_identification_source": "GitHub Vercel commit status deployment link, not authenticated settings read",
     "last_observed_git_deployment": "blocked",
     "last_observed_git_deployment_url": "https://vercel.com/pascals-projects-2864de33/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/BeJo6LWJpEmoWR4MfQip1WaPoQJD",
-    "remote_settings_access_verified": false,
+    "remote_settings_access_verified": true,
     "confirmed_block_reason_from_user": "NeXify-Automate has no Vercel account linked to GitHub",
     "github_author_email_for_future_commits": "mail@nexifyai.cloud",
-    "github_author_email_source": "explicit_user_correction_repository_local_no_history_rewrite"
+    "github_author_email_source": "explicit_user_correction_repository_local_no_history_rewrite",
+    "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+    "settings_updated_and_read_back": true,
+    "framework": "vite",
+    "node_version": "22.x",
+    "output_directory": "apps/site/dist",
+    "preview_domain_branch": "factory/agency-separated-2026-10-26"
   },
   "backup": {
     "requested_surface": "existing_chatgpt_site",

@@ -117,7 +117,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
         {error&&<p className="error-note" role="alert">{error==="offline"?t.offline:t.error}</p>}
         <div ref={chatEnd}/>
       </div>
-      <div className="composer-area"><form className="composer" onSubmit={submitMessage}><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/><div className="composer-bottom"><span>{busy?t.working:"NeX · AIFly"}</span><button className="send-button" aria-label={t.send} disabled={!ready||busy}>↑</button></div></form><p className="connection-note">{t.localStatus}</p></div>
+      <div className="composer-area"><form className="composer" onSubmit={submitMessage}><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/><div className="composer-bottom"><span>{busy?t.working:"NeX · AIFly"}</span><button className="send-button" aria-label={t.send} disabled={!ready||busy}>↑</button></div></form><p className="connection-note">{ready?t.localStatus:t.offline}</p></div>
     </aside>
   </div></UIContext.Provider>;
 }

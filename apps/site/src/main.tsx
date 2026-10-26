@@ -1,3 +1,4 @@
+import {PublicAuthProvider,AuthenticationPanel} from "./Auth";
 import {useEffect,useMemo,useState,type MouseEvent} from "react";
 import {createRoot} from "react-dom/client";
 import Workspace,{useUI} from "../../web/components/Workspace";
@@ -36,7 +37,7 @@ function RouteContent({page}:{page?:PublicPage}){
   const explanation=<><PresenterGuide pageId={page.id} pages={pages} journeys={journeys}/><ExplainerSections modules={modules} pages={pages}/></>;
   if(page.path==='/')return <HomeContent home={page}>{explanation}</HomeContent>;
   const authFallback=['login','signup'].includes(page.id);
-  return <>{authFallback&&<div className="auth-fallback editorial-note" role="status"><strong>{locale==='nl'?'Aanmelden is hier nog niet geactiveerd.':locale==='fr'?'La connexion n’est pas encore activée ici.':'Die Anmeldung ist hier noch nicht aktiviert.'}</strong><p>{locale==='nl'?'Voer geen wachtwoorden in. Neem bij vragen contact met ons op.':locale==='fr'?'Ne saisissez aucun mot de passe. Contactez-nous pour toute question.':'Es werden keine Zugangsdaten angefordert. Nutzen Sie bei Fragen die Kontaktseite.'}</p></div>}<PublicContent page={page} pages={pages}>{explanation}</PublicContent></>;
+  return <>{authFallback&&<AuthenticationPanel mode={page.id==='signup'?'signup':'login'}/>}<PublicContent page={page} pages={pages}>{explanation}</PublicContent></>;
 }
 function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');
@@ -44,4 +45,4 @@ function App(){
   const adapter=useMemo(()=>({pathname:path,Link:BrowserLink}),[path]);
   return <RouterProvider adapter={adapter}><PresenterGuideProvider journeys={journeys} defaultJourneyId={journeys.find(journey=>journey.steps.includes(routeIndex.get(path)?.id||""))?.id}><Workspace pages={pages}><RouteContent page={routeIndex.get(path)}/></Workspace></PresenterGuideProvider></RouterProvider>;
 }
-createRoot(document.getElementById('root')!).render(<App/>);
+createRoot(document.getElementById('root')!).render(<PublicAuthProvider hashMode={hashMode}><App/></PublicAuthProvider>);

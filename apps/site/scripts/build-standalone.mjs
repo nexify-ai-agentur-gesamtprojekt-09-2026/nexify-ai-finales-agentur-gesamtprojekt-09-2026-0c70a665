@@ -5,7 +5,7 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=resolve(root,'dist');
 function ownedPath(url){const path=resolve(dist,url.replace(/^\//,''));const rel=relative(dist,path);if(rel==='..'||rel.startsWith('..'+sep))throw new Error('Artifact escapes dist');return path;}
 const javascript=(await readdir(resolve(dist,'assets'))).filter(name=>name.endsWith('.js'));
-if(javascript.length!==1)throw new Error('Standalone requires one self-contained JavaScript entry');
+if(!javascript.length)throw new Error('Standalone JavaScript entry missing');
 let html=await readFile(resolve(dist,'index.html'),'utf8');
 const entry=/<script\b(?=[^>]*type="module")(?=[^>]*src="([^"]+)")[^>]*><\/script>/;
 const script=entry.exec(html);if(!script)throw new Error('Missing build entry');
