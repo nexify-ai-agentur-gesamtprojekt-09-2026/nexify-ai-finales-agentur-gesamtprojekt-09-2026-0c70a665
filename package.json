@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "node tools/dev.mjs",
-    "dev:web": "pnpm --filter @nexify/web dev",
+    "dev:web": "pnpm --filter @nexify/site dev",
     "dev:gateway": "python3 apps/agent-gateway/server.py --database .local/visitor.sqlite --port 3003 --web-origin http://127.0.0.1:3004",
     "preview:references": "node server.mjs",
-    "build": "pnpm --filter @nexify/web build",
-    "typecheck": "pnpm --filter @nexify/web typecheck",
-    "verify": "make check && make test && make check-arch"
+    "build": "pnpm --filter @nexify/site build",
+    "typecheck": "pnpm --filter @nexify/site typecheck",
+    "verify": "make check && make test && make check-arch",
+    "dev:next-reference": "pnpm --filter @nexify/web dev",
+    "build:next-reference": "pnpm --filter @nexify/web build",
+    "release:site": "python3 tools/site_release.py build --input apps/site/dist --output .local/releases"
   },
   "packageManager": "pnpm@12.15.0",
   "engines": {

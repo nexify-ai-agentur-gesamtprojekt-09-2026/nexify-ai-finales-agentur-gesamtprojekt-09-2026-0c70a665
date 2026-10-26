@@ -1,8 +1,8 @@
 "use client";
-import Link from "next/link";
+import {SiteLink as Link} from "./Router";
 import { createContext, useContext, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import type { PublicPage } from "../lib/catalog";
+import {useSitePathname} from "./Router";
+import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
 
 type Intent = "choose" | "quote" | "booking" | "marketing";
@@ -41,7 +41,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
   const messageInput = useRef<HTMLTextAreaElement>(null);
   const closeButton=useRef<HTMLButtonElement>(null);
   const t = translations[locale];
-  const pathname=usePathname();
+  const pathname=useSitePathname();
   const site=pathname.startsWith("/teileklar")?"teileklar":"nexify";
   const navigation=pages.filter(page=>page.navigationContexts.includes(site));
 
@@ -50,6 +50,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
     const query=window.matchMedia("(max-width: 820px)");
     setMobile(query.matches);if(query.matches)setOpen(false);
     const resized=()=>setMobile(query.matches);query.addEventListener("change",resized);
+    if((window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__){setError("offline");return()=>query.removeEventListener("change",resized);}
     fetch("/api/session",{cache:"no-store"}).then(async response => {
       if(!response.ok)throw new Error("session");
       const session=await response.json(); csrf.current=session.csrf;

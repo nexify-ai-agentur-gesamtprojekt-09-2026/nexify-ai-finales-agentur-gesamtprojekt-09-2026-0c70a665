@@ -72,3 +72,27 @@ jobs:
       - run: pnpm --filter @nexify/web test:auth
       - run: pnpm --filter @nexify/web build
       - run: pnpm --filter @nexify/web typecheck
+
+  react-site:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.4'
+      - run: npm install --global --ignore-scripts pnpm@12.15.0
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm --filter @nexify/site test
+      - run: pnpm --filter @nexify/site typecheck
+      - run: pnpm --filter @nexify/site build
+      - run: python3 tools/site_release.py build --input apps/site/dist --output .local/releases
+      - name: Retain the portable site for the same-release backup
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: react-site-${{ github.sha }}
+          path: .local/releases/
+          if-no-files-found: error
+          retention-days: 14

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "application": "apps/web",
+  "application": "apps/site",
   "provider": "clerk",
   "publishable_key_source": "explicit_user_input",
   "publishable_key_mode": "live",
@@ -16,11 +16,43 @@
   },
   "dns": {
     "source_of_required_records": "Clerk production dashboard Domains for the exact instance",
-    "authoritative_cname_pairs_received": false,
-    "required_cname_pairs": [],
+    "authoritative_cname_pairs_received": true,
+    "required_cname_pairs": [
+      {
+        "type": "CNAME",
+        "name": "accounts",
+        "host": "accounts.nexifyai.de",
+        "target": "accounts.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clerk",
+        "host": "clerk.nexifyai.de",
+        "target": "frontend-api.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clk._domainkey",
+        "host": "clk._domainkey.nexifyai.de",
+        "target": "dkim1.9vt6e46tlcwh.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clk2._domainkey",
+        "host": "clk2._domainkey.nexifyai.de",
+        "target": "dkim2.9vt6e46tlcwh.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clkmail",
+        "host": "clkmail.nexifyai.de",
+        "target": "mail.9vt6e46tlcwh.clerk.services"
+      }
+    ],
     "writes_performed": false,
     "frontend_api_resolution_verified": false,
-    "last_public_resolver_observation": "NXDOMAIN; see docs/deployment/clerk-sources.json"
+    "last_public_resolver_observation": "All five CNAMEs missing; see config/clerk-dns.json",
+    "record_source": "explicit_user_supplied_clerk_records"
   },
   "first_production_user": {
     "created": false,
@@ -37,14 +69,15 @@
   "deployment_status": "local_preparation_not_production_release",
   "open_prerequisites": [
     "bind_new_production_secret_in_server_secret_store",
-    "obtain_exact_dns_records_and_authorized_zone_access",
     "verify_dns_and_clerk_frontend_api",
-    "replace_static_prototype_deployment_with_reviewed_next_app_deployment",
+    "review_and_deploy_portable_react_site_with_separate_production_auth_api_service",
     "provide_production_safe_visitor_gateway_instead_of_loopback_development_proxy",
     "create_and_verify_real_first_user_without_automatic_business_rights",
     "identify_existing_vercel_project_and_confirm_domain_bindings",
     "verify_clerk_primary_and_satellite_configuration_for_two_top_level_domains",
-    "verify_public_key_against_exact_issuer_jwks"
+    "verify_public_key_against_exact_issuer_jwks",
+    "connect_authorized_dns_zone_access_and_apply_five_exact_received_cnames",
+    "integrate_clerk_react_ui_after_exact_instance_and_server_auth_configuration"
   ],
   "preview_web_origin": "https://nexifyai.de",
   "domain_decision": {
@@ -75,5 +108,7 @@
     "rotation_policy": "prefer_verified_issuer_jwks_before_activation",
     "format_check": "valid_rsa_2048_public_key",
     "spki_der_sha256": "684d4cf51e2d47b75abf4f2f97f7ec58c7333beb597f97ced56913f035faaed8"
-  }
+  },
+  "previous_next_implementation": "apps/web",
+  "frontend_auth_migration_status": "react_preview_no_login_widget_next_clerk_reference_retained"
 }

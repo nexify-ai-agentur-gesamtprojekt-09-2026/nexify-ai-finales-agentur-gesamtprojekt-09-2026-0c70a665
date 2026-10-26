@@ -5,8 +5,7 @@ setup:
 	@node --version >/dev/null && python3 --version >/dev/null && echo "setup: node + python3 vorhanden (keine Paketabhaengigkeiten)"
 
 dev:
-	@echo "Kein Dev-Server: statische Produktoberflaeche + Konfiguration. Vorschau: apps-index.html"
-	@echo "Pruefung: make check · Artefakte: make build"
+	pnpm dev
 
 build:
 	@cd prototypen && sha256sum -c MANIFEST.sha256
@@ -58,6 +57,10 @@ automation-check:
 	python3 -m unittest discover -s tests -p test_small_business_integration.py -q
 
 web-build:
+	pnpm --filter @nexify/site typecheck
+	pnpm --filter @nexify/site build
+
+next-reference-build:
 	pnpm --filter @nexify/web typecheck
 	pnpm --filter @nexify/web build
 

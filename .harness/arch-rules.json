@@ -72,6 +72,15 @@
       "what": "Ein Auth-Konfigurations- oder Berechtigungsgrenztest scheitert.",
       "why": "Fehlerhafte Schlüssel dürfen den öffentlichen Fallback nicht beschädigen und verifizierte Identität darf keine Mitgliedschaft erfinden.",
       "fix": "Schlüsselparser und serverseitige Schutzentscheidung korrigieren; keine negativen Authfälle deaktivieren."
+    },
+    {
+      "id": "ARCH-009",
+      "description": "Die portable React-Ausgabe erhält die öffentliche Grenze und ändert ungültige Nutzerwege nicht heimlich.",
+      "check": "node --test apps/site/tests/*.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine öffentliche Daten-/Navigationsgrenze ist verletzt.",
+      "why": "Private Metadaten dürfen nicht im statischen Backup erscheinen; unbekannte oder private Aktionsziele dürfen nicht als andere Nutzerwege ausgegeben werden.",
+      "fix": "Öffentliche Projektion und sichere Navigation korrigieren; ungültige Quellaktionen ablehnen statt still umzuleiten."
     }
   ]
 }

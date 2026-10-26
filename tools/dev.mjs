@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 if (process.argv.includes('--help')) {
-  console.log('pnpm dev: Next.js on loopback 3004 and local visitor gateway on 3003. Stop with Ctrl+C. No external services or calendar slots are configured automatically.');
+  console.log('pnpm dev: React/Vite on loopback 3004 and local visitor gateway on 3003. Stop with Ctrl+C. No external services or calendar slots are configured automatically.');
   process.exit(0);
 }
 mkdirSync(join(root, '.local'), { recursive: true, mode: 0o700 });
@@ -17,7 +17,7 @@ for (const key of ['PATH', 'LANG', 'LC_ALL', 'TMPDIR', 'HTTP_PROXY', 'HTTPS_PROX
 }
 const children = [
   spawn('python3', ['apps/agent-gateway/server.py', '--database', '.local/visitor.sqlite', '--port', '3003', '--web-origin', 'http://127.0.0.1:3004'], { cwd: root, env, stdio: 'inherit' }),
-  spawn('pnpm', ['--filter', '@nexify/web', 'dev'], { cwd: root, env, stdio: 'inherit' }),
+  spawn('pnpm', ['--filter', '@nexify/site', 'dev'], { cwd: root, env, stdio: 'inherit' }),
 ];
 let stopping = false;
 function stop(code = 0) {

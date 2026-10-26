@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "blocked_existing_server_control_not_available",
+  "requested": {
+    "resource": "https://connect.composio.dev/mcp",
+    "issuer": "https://clerk.nexifyai.de",
+    "protected_resource_metadata_url": "https://connect.composio.dev/.well-known/oauth-protected-resource/mcp",
+    "authorization_server_metadata_url": "https://clerk.nexifyai.de/.well-known/oauth-authorization-server",
+    "protected_resource_metadata": {
+      "resource": "https://connect.composio.dev/mcp",
+      "authorization_servers": [
+        "https://clerk.nexifyai.de"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ]
+    }
+  },
+  "observed": {
+    "resource_metadata": {
+      "resource": "https://connect.composio.dev/mcp",
+      "authorization_servers": [
+        "https://connect.composio.dev"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ]
+    },
+    "observation_scope": "public_read_only_no_token_no_tools_call",
+    "clerk_issuer_discovery": "proxy_tunnel_403_not_verified"
+  },
+  "ownership": {
+    "resource_host_control_verified": false,
+    "existing_runtime_source_found": false,
+    "existing_local_documented_resource": "https://mcp.nexifyai.cloud",
+    "install_clerk_on_foreign_resource_without_control": false
+  },
+  "requirements": {
+    "oauth_access_tokens_only": true,
+    "reject_clerk_session_tokens": true,
+    "verify_signature_or_authenticated_introspection_before_trusting_claims": true,
+    "exact_issuer": true,
+    "expiry_required": true,
+    "exact_resource_audience_after_verification": true,
+    "opaque_token_requires_resource_aware_introspection": true,
+    "retain_existing_tools_and_authorization": true,
+    "stateless_fresh_server_and_transport_per_request_or_correct_sdk_sessions": true
+  },
+  "verification": {
+    "desired_metadata_contract": "prepared_not_published",
+    "real_clerk_sign_in_and_tool_call": "blocked_not_run",
+    "missing_expired_wrong_audience_rejection": "blocked_no_owned_runtime",
+    "repeated_concurrent_tool_calls": "blocked_no_owned_runtime"
+  },
+  "credentials": {
+    "reuse_existing_server_configuration": true,
+    "client_side_secret": false,
+    "new_secret_values_created": false
+  },
+  "pending": [
+    "identify_and_access_actual_server_code_or_supported_composio_auth_configuration",
+    "confirm_exact_resource_ownership_and_deployment",
+    "resolve_clerk_dns_and_verify_authorization_server_discovery",
+    "implement_and_test_framework_supported_oauth_verifier_in_actual_runtime",
+    "complete_real_sign_in_tool_call_and_repeated_concurrent_call_tests"
+  ]
+}

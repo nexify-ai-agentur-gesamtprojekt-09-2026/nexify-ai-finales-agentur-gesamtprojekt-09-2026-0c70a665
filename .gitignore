@@ -36,3 +36,8 @@ apps/web/tsconfig.tsbuildinfo
 
 # Explicitly supplied PUBLIC verification material; private keys remain ignored.
 !config/public-keys/clerk-provided.pem
+
+# Portable public React build outputs; source and release tools remain tracked.
+apps/site/dist/
+apps/site/.generated/
+apps/site/standalone.html

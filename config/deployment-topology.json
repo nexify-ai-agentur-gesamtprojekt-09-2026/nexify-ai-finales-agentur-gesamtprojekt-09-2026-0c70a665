@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "requested_frontend": "react_portable_static_bundle",
+  "primary": {
+    "provider": "vercel",
+    "domain": "nexifyai.cloud",
+    "preview_domain": "nexifyai.de",
+    "live_deployment_verified": false
+  },
+  "backup": {
+    "requested_surface": "existing_chatgpt_site",
+    "deployment_api_available": false,
+    "live_sync_verified": false,
+    "status": "portable_release_prepared_host_binding_pending"
+  },
+  "release_policy": {
+    "single_canonical_repository": true,
+    "single_artifact_per_accepted_release": true,
+    "compare_source_commit_and_all_asset_hashes": true,
+    "deploy_backup_from_same_verified_artifact": true,
+    "existing_cloud_site_preserved_until_completion": true,
+    "automatic_dns_failover_enabled": false
+  },
+  "boundaries": {
+    "public_static_site_can_run_without_vercel": true,
+    "api_availability_requires_independent_backend": true,
+    "credentials_and_clerk_oauth_verifiers_server_only": true,
+    "no_private_customer_data_in_static_backup": true,
+    "chatgpt_surface_is_not_assumed_to_be_general_purpose_hosting": true
+  },
+  "next_application": "retained_as_previous_implementation_not_deleted",
+  "open_prerequisites": [
+    "verify_chatgpt_site_deployment_or_update_capability",
+    "connect_vercel_project",
+    "select_independent_backup_host_if_chatgpt_cannot_accept_artifact",
+    "production_api_auth_and_mcp_runtime",
+    "real_remote_same_release_readback_and_failover_test"
+  ]
+}

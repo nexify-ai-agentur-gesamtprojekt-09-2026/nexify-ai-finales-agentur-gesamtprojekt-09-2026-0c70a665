@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "domain": "nexifyai.de",
+  "purpose": "read_only_dns_snapshot_and_exact_user_requested_clerk_targets",
+  "observed_at": "2026-10-26T09:16:48.892388+00:00",
+  "status_semantics": {
+    "exact": "Two successful resolver checks each return exactly the requested owner CNAME target; case/trailing-dot normalized.",
+    "missing": "Two successful resolver checks report NXDOMAIN or NOERROR without owner CNAME.",
+    "wrong": "Both successful resolver checks return owner CNAME data differing from the requested target.",
+    "unknown": "Transport/provider error, truncated DNS result, unexpected RCODE, contradictory result or resolver disagreement."
+  },
+  "network": {
+    "https_get_only": true,
+    "inherited_proxy_and_CA_preserved": true,
+    "runtime_policy_mode": "unrestricted",
+    "runtime_policy_state": "unknown"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "relative_name": "accounts",
+      "fqdn": "accounts.nexifyai.de",
+      "target": "accounts.clerk.services",
+      "target_source": "explicit_user_instruction_relayed_by_root_2026-10-26",
+      "desired_state_verified_in_dashboard": false,
+      "ttl": null,
+      "status": "missing",
+      "resolver_checks": [
+        {
+          "source_id": "google-CNAME-accounts.nexifyai.de",
+          "status": "missing"
+        },
+        {
+          "source_id": "cloudflare-CNAME-accounts.nexifyai.de",
+          "status": "missing"
+        }
+      ],
+      "write_performed": false
+    },
+    {
+      "type": "CNAME",
+      "relative_name": "clerk",
+      "fqdn": "clerk.nexifyai.de",
+      "target": "frontend-api.clerk.services",
+      "target_source": "explicit_user_instruction_relayed_by_root_2026-10-26",
+      "desired_state_verified_in_dashboard": false,
+      "ttl": null,
+      "status": "missing",
+      "resolver_checks": [
+        {
+          "source_id": "google-CNAME-clerk.nexifyai.de",
+          "status": "missing"
+        },
+        {
+          "source_id": "cloudflare-CNAME-clerk.nexifyai.de",
+          "status": "missing"
+        }
+      ],
+      "write_performed": false
+    },
+    {
+      "type": "CNAME",
+      "relative_name": "clk._domainkey",
+      "fqdn": "clk._domainkey.nexifyai.de",
+      "target": "dkim1.9vt6e46tlcwh.clerk.services",
+      "target_source": "explicit_user_instruction_relayed_by_root_2026-10-26",
+      "desired_state_verified_in_dashboard": false,
+      "ttl": null,
+      "status": "missing",
+      "resolver_checks": [
+        {
+          "source_id": "google-CNAME-clk._domainkey.nexifyai.de",
+          "status": "missing"
+        },
+        {
+          "source_id": "cloudflare-CNAME-clk._domainkey.nexifyai.de",
+          "status": "missing"
+        }
+      ],
+      "write_performed": false
+    },
+    {
+      "type": "CNAME",
+      "relative_name": "clk2._domainkey",
+      "fqdn": "clk2._domainkey.nexifyai.de",
+      "target": "dkim2.9vt6e46tlcwh.clerk.services",
+      "target_source": "explicit_user_instruction_relayed_by_root_2026-10-26",
+      "desired_state_verified_in_dashboard": false,
+      "ttl": null,
+      "status": "missing",
+      "resolver_checks": [
+        {
+          "source_id": "google-CNAME-clk2._domainkey.nexifyai.de",
+          "status": "missing"
+        },
+        {
+          "source_id": "cloudflare-CNAME-clk2._domainkey.nexifyai.de",
+          "status": "missing"
+        }
+      ],
+      "write_performed": false
+    },
+    {
+      "type": "CNAME",
+      "relative_name": "clkmail",
+      "fqdn": "clkmail.nexifyai.de",
+      "target": "mail.9vt6e46tlcwh.clerk.services",
+      "target_source": "explicit_user_instruction_relayed_by_root_2026-10-26",
+      "desired_state_verified_in_dashboard": false,
+      "ttl": null,
+      "status": "missing",
+      "resolver_checks": [
+        {
+          "source_id": "google-CNAME-clkmail.nexifyai.de",
+          "status": "missing"
+        },
+        {
+          "source_id": "cloudflare-CNAME-clkmail.nexifyai.de",
+          "status": "missing"
+        }
+      ],
+      "write_performed": false
+    }
+  ],
+  "nameservers": {
+    "observed": [
+      "ns1.dns-parking.com",
+      "ns2.dns-parking.com"
+    ],
+    "agreement": "both_public_resolvers_and_DENIC_RDAP",
+    "direct_authoritative_dns_query_performed": false,
+    "dns_hosting_hint": "dns-parking.com nameservers and SOA dns.hostinger.com; not proof of authenticated dashboard access or registrar identity"
+  },
+  "registration": {
+    "registry_source_url": "https://rdap.denic.de/domain/nexifyai.de",
+    "domain_status": [
+      "active"
+    ],
+    "registrar": null,
+    "registrar_status": "unknown_public_RDAP_entities_empty",
+    "registrar_must_not_be_inferred_from_nameservers": true
+  },
+  "dmarc": {
+    "fqdn": "_dmarc.nexifyai.de",
+    "type": "TXT",
+    "presence": "present",
+    "observed_value": "v=DMARC1; p=none",
+    "policy": "none",
+    "resolver_agreement": true,
+    "normalization": "DNS TXT presentation quotes removed; no policy modification",
+    "desired_user_value": null,
+    "desired_policy_comparison": "not_applicable_no_new_policy_requested",
+    "automatic_change_required": false,
+    "write_performed": false
+  },
+  "execution": {
+    "dns_writes_performed": false,
+    "dashboard_access_verified": false,
+    "secret_used": false,
+    "paid_call_performed": false,
+    "production_deployment_claimed": false
+  },
+  "sources": [
+    {
+      "id": "google-CNAME-accounts.nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=accounts.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.384420+00:00",
+      "name": "accounts.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=accounts.nexifyai.de&type=CNAME",
+      "sha256": "8bb8a826e4104b12be2953658d104675131f7cd523c0a35ec76355a9d27c8c3d",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "accounts.nexifyai.de.",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de.",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ],
+        "Comment": "Response from 162.159.25.42."
+      }
+    },
+    {
+      "id": "cloudflare-CNAME-accounts.nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=accounts.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.385546+00:00",
+      "name": "accounts.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=accounts.nexifyai.de&type=CNAME",
+      "sha256": "9340fab9d2d9306717e338080dae316178e47952ca3644ccf027ff9fcbd750a6",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "accounts.nexifyai.de",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-CNAME-clerk.nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=clerk.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.386804+00:00",
+      "name": "clerk.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=clerk.nexifyai.de&type=CNAME",
+      "sha256": "b95816b7d54db07bae572118d2b6e43f128199a5d29a47f48f4e7a787153f195",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clerk.nexifyai.de.",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de.",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ],
+        "Comment": "Response from 162.159.25.42."
+      }
+    },
+    {
+      "id": "cloudflare-CNAME-clerk.nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=clerk.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.388539+00:00",
+      "name": "clerk.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=clerk.nexifyai.de&type=CNAME",
+      "sha256": "2ecc9f10b62424059e08400e29c8cd3e35dc7fbb2753ff4c6dc2ad0f45fb0d48",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clerk.nexifyai.de",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-CNAME-clk._domainkey.nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=clk._domainkey.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.389197+00:00",
+      "name": "clk._domainkey.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=clk._domainkey.nexifyai.de&type=CNAME",
+      "sha256": "a08c3d9587ebaf3a2d25ba9bd49b53b28cdf38c9a16b0d049c323310d8a211c0",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clk._domainkey.nexifyai.de.",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de.",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ],
+        "Comment": "Response from 162.159.24.201."
+      }
+    },
+    {
+      "id": "cloudflare-CNAME-clk._domainkey.nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=clk._domainkey.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.394016+00:00",
+      "name": "clk._domainkey.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=clk._domainkey.nexifyai.de&type=CNAME",
+      "sha256": "9143092f249fcfedc1b272b1d12cfda05695762f1e678b594ed8e51a4a27fff7",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clk._domainkey.nexifyai.de",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-CNAME-clk2._domainkey.nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=clk2._domainkey.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.396516+00:00",
+      "name": "clk2._domainkey.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=clk2._domainkey.nexifyai.de&type=CNAME",
+      "sha256": "aec3a8ea430b17aa3ebe9478b31628c437abcadcb3d4052c95be7d5ca68c19e3",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clk2._domainkey.nexifyai.de.",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de.",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ],
+        "Comment": "Response from 162.159.24.201."
+      }
+    },
+    {
+      "id": "cloudflare-CNAME-clk2._domainkey.nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=clk2._domainkey.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.404037+00:00",
+      "name": "clk2._domainkey.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=clk2._domainkey.nexifyai.de&type=CNAME",
+      "sha256": "30708b52d1321e5d9743194755a97b3e57e5f63e5d4473d5c831bf15832b0987",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clk2._domainkey.nexifyai.de",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-CNAME-clkmail.nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=clkmail.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.629411+00:00",
+      "name": "clkmail.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=clkmail.nexifyai.de&type=CNAME",
+      "sha256": "1938f6ae87d81c2a0cd0d76f0501cde6a1990d3481b78be0afcc25b4ba9f0d15",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clkmail.nexifyai.de.",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de.",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ],
+        "Comment": "Response from 162.159.25.42."
+      }
+    },
+    {
+      "id": "cloudflare-CNAME-clkmail.nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=clkmail.nexifyai.de&type=CNAME",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.666758+00:00",
+      "name": "clkmail.nexifyai.de",
+      "record_type": "CNAME",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=clkmail.nexifyai.de&type=CNAME",
+      "sha256": "d3b66c43c926a5446622487128e19b2da768951cc894102c30f430c375d16ee9",
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clkmail.nexifyai.de",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-NS-nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=nexifyai.de&type=NS",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.708647+00:00",
+      "name": "nexifyai.de",
+      "record_type": "NS",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=nexifyai.de&type=NS",
+      "sha256": "250ed3329203e5feb094fad82b3dc2a9cb5b7b08ef47bed33aa976123460e4b7",
+      "response": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "nexifyai.de.",
+            "type": 2
+          }
+        ],
+        "Answer": [
+          {
+            "name": "nexifyai.de.",
+            "type": 2,
+            "TTL": 21600,
+            "data": "ns2.dns-parking.com."
+          },
+          {
+            "name": "nexifyai.de.",
+            "type": 2,
+            "TTL": 21600,
+            "data": "ns1.dns-parking.com."
+          }
+        ],
+        "Comment": "Response from 162.159.25.42."
+      }
+    },
+    {
+      "id": "cloudflare-NS-nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=nexifyai.de&type=NS",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.778471+00:00",
+      "name": "nexifyai.de",
+      "record_type": "NS",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=nexifyai.de&type=NS",
+      "sha256": "41f1576351ecb657b1c3490af416d24aec61b38d47176da08580f406f088056f",
+      "response": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "nexifyai.de",
+            "type": 2
+          }
+        ],
+        "Answer": [
+          {
+            "name": "nexifyai.de",
+            "type": 2,
+            "TTL": 86400,
+            "data": "ns1.dns-parking.com."
+          },
+          {
+            "name": "nexifyai.de",
+            "type": 2,
+            "TTL": 86400,
+            "data": "ns2.dns-parking.com."
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-TXT-_dmarc.nexifyai.de",
+      "requested_url": "https://dns.google/resolve?name=_dmarc.nexifyai.de&type=TXT",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.828937+00:00",
+      "name": "_dmarc.nexifyai.de",
+      "record_type": "TXT",
+      "provider": "google",
+      "http_status": 200,
+      "final_url": "https://dns.google/resolve?name=_dmarc.nexifyai.de&type=TXT",
+      "sha256": "2366ed22027078b2850f03a7cb34070ba67e264017fb2b52f555075c1d57e9e1",
+      "response": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "_dmarc.nexifyai.de.",
+            "type": 16
+          }
+        ],
+        "Answer": [
+          {
+            "name": "_dmarc.nexifyai.de.",
+            "type": 16,
+            "TTL": 3600,
+            "data": "v=DMARC1; p=none"
+          }
+        ],
+        "Comment": "Response from 2400:cb00:2049:1::a29f:18c9."
+      }
+    },
+    {
+      "id": "cloudflare-TXT-_dmarc.nexifyai.de",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=_dmarc.nexifyai.de&type=TXT",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.843422+00:00",
+      "name": "_dmarc.nexifyai.de",
+      "record_type": "TXT",
+      "provider": "cloudflare",
+      "http_status": 200,
+      "final_url": "https://cloudflare-dns.com/dns-query?name=_dmarc.nexifyai.de&type=TXT",
+      "sha256": "586add790be2e3f33abbcfc6c9696d9615e81ac7ddb776d7d5d46cda1bb3929d",
+      "response": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "_dmarc.nexifyai.de",
+            "type": 16
+          }
+        ],
+        "Answer": [
+          {
+            "name": "_dmarc.nexifyai.de",
+            "type": 16,
+            "TTL": 3600,
+            "data": "\"v=DMARC1; p=none\""
+          }
+        ]
+      }
+    },
+    {
+      "id": "rdap-denic",
+      "requested_url": "https://rdap.denic.de/domain/nexifyai.de",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.991733+00:00",
+      "kind": "rdap",
+      "http_status": 200,
+      "final_url": "https://rdap.denic.de/domain/nexifyai.de",
+      "sha256": "9a0f39122b8aa3da5e639bab5649abc2c0d4508d54f1a6bea17408ba55c48214",
+      "response_summary": {
+        "ldhName": "nexifyai.de",
+        "status": [
+          "active"
+        ],
+        "nameservers": [
+          {
+            "ldhName": "ns1.dns-parking.com.",
+            "objectClassName": "nameserver"
+          },
+          {
+            "ldhName": "ns2.dns-parking.com.",
+            "objectClassName": "nameserver"
+          }
+        ],
+        "events": [
+          {
+            "eventAction": "last changed",
+            "eventDate": "2026-04-19T09:57:38+02:00"
+          }
+        ],
+        "entities": [],
+        "personal_holder_data_copied": false
+      }
+    },
+    {
+      "id": "iana-rdap-bootstrap",
+      "requested_url": "https://data.iana.org/rdap/dns.json",
+      "request_method": "GET",
+      "observed_at": "2026-10-26T09:15:44.996427+00:00",
+      "kind": "rdap_bootstrap",
+      "http_status": 200,
+      "final_url": "https://data.iana.org/rdap/dns.json",
+      "sha256": "1d731769a3bd29054e2a5a7828cec1b27831c46103b4c70a000d5ffcb6c285e1",
+      "response_summary": {
+        "de_service_entries": [],
+        "does_not_establish_registrar": true
+      }
+    }
+  ]
+}

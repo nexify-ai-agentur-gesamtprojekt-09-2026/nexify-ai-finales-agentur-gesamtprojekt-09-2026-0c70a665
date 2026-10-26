@@ -1,3 +1,28 @@
+# Portable React-Vorschau, DNS und MCP-Abgrenzung · 26.10.2026
+
+Aktiver Hauptfrontendbuild: apps/site React19.3.1/Vite8.3.5; vorhandene UI,
+Texte und Tokens geteilt, Next-/Clerk-Referenz unter apps/web erhalten.
+Vercel-Rootconfig und CI für portablen Reactbuild vorbereitet; keinRemoteDeploy.
+Live lokal3004+VisitorAPI3003; keine öffentlichePortfreigabe/Vercelverbindung.
+ÖffnungsfähigeStandaloneHTML unter /workspace/preview/nexify-preview.html.
+Browsernachweise:35öffentlicheRouten,10privateAnsichtenunverfügbar,
+ChatentwurfbleibtbeimNavigieren, echterEntwurfsPDFdownload,Outboxpendingnichtgesendet,
+Marketingvorlagenichtveröffentlicht,DE/NL/FR,mobil,Standalonebilder+Hashnavigation.
+Siehe .onboarding/react-preview/browser-results.json außerhalbdesRepos.
+React7Tests,Auth6Tests,Python133Tests,Typecheck/Reactbuild/Nextreferenzbuild,
+Designaudit0/0,Architektur,E2EundCleanState bestanden.
+
+93/93Prototypquellenhasheserhalten,24direktreferenziert69expliziterBacklog;
+keinevollständigeInhalts-/Backendabnahme. docs/architecture/0012-preview-coverage.md.
+DNS:alle5benutzerdefiniertenClerkCNAMEsfehlen,keinefalschenZielebeobachtet,
+bestehendesDMARCp=noneerhalten. KeinDNSwrite/Serversecret/Useranlage.
+MCP:ComposioresourcezeigtComposioissuer,keineeigeneKontrolle/Serverquellenvorhanden;
+ClerkSollconfignichtveröffentlicht,keineLiveOAuth-/Tooltestsbehauptet.
+BackupChatGPTDeployschnittstelleweiteroffen;ArchivintegritätistkeineLiveSynchronität.
+F007bleibtaktiv,keineMain-/Produktivfreigabe;AffilinetbleibtseparaterKunde.
+
+---
+
 # Domainklärung · 26.10.2026
 
 Nutzer bestätigt Vercel als Hosting, nexifyai.cloud als spätere Hauptdomain und
