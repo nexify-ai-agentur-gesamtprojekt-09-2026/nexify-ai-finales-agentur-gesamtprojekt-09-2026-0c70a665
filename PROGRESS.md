@@ -1,3 +1,16 @@
+# Live-Vorschau bestätigt · 26.10.2026
+
+https://nexifyai.de ist als Alias des READY-Previewdeployments
+ dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm für409db50durchauthentifizierteAPI+CLIbestätigt.
+VercelAusgabepfadfehlerundAutorblockadesindfürkanonischesProjektbehoben;
+GitHubautorjetztnexifyai-dev,5eigeneCIjobsauchauf409db50grün.
+KeineeigeneMain-/Produktivpromotion,.cloudChatGPTseiteunangetastet.
+ZusätzlicheVercelAppsite(selbesRepo,nurvercel.app)hatteparallelRoot/outputFehler;
+Konfigurationistkonsistentkorrigiert,Read-backvorhanden;keineLöschungoderDomainübernahme.
+ExternCloudflareWorkernamelängeweiterseparatoffen.
+
+---
+
 # Vercel-Projekt eingerichtet, React-Clerk und ENV abgeglichen · 26.10.2026
 
 CLI65.2.0OAuthalsnex2fly-nexifyai-nexifyerfolgreich,Projektprj_Po7jlB7srMP6sxyMvf5zIwzXzNyh

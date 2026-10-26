@@ -2,7 +2,7 @@
   "schema_version": 1,
   "source_guide": "https://vercel.com/get-started.md",
   "source_guide_sha256": "b93281fec6903dc34f324e0a00abbf9817e5d086d2e2601f684354ed4dc2d45f",
-  "observed_at": "2026-10-26T10:45:55.488547+00:00",
+  "observed_at": "2026-10-26T10:56:30.194313+00:00",
   "cli": {
     "version": "65.2.0",
     "authenticated": true,
@@ -43,7 +43,16 @@
     "preview_domain": "nexifyai.de",
     "preview_domain_git_branch": "factory/agency-separated-2026-10-26",
     "preview_domain_verified": true,
-    "cloud_domain_changed": false
+    "cloud_domain_changed": false,
+    "deployment": {
+      "id": "dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm",
+      "source_commit": "409db5021aaf4ceb08e64bb23795c2a4f144c443",
+      "state": "READY",
+      "target": "preview",
+      "url": "https://nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70-94td64msf.vercel.app",
+      "verified_custom_alias": "https://nexifyai.de",
+      "verification": "authenticated deployment API plus CLI inspect; no live Clerk/backend approval"
+    }
   },
   "env": {
     "added": [
@@ -62,5 +71,15 @@
     "server_secret_values_read_or_recorded": false,
     "existing_clerk_secret_metadata_present": true,
     "existing_clerk_secret_pair_live_validated": false
+  },
+  "related_project": {
+    "name": "site",
+    "id": "prj_Zg6iLhwT83ugNaQKnBBKlpN2fz0L",
+    "same_github_repository_verified": true,
+    "custom_business_domains": [],
+    "observed_problem": "nested root and default dist output; duplicate Vercel check failed",
+    "deleted": false,
+    "settings_update_applied": true,
+    "desired_output": "apps/site/dist"
   }
 }

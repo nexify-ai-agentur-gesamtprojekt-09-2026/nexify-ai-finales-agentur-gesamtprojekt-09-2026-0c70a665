@@ -114,3 +114,29 @@ weder aus lokalen Dateien entdeckt noch in Logs ausgegeben. Die von der CLI
 angelegte lokale OIDC-Datei ist ignoriert und auf0600beschränkt. Kein Tarif,
 kein kostenpflichtiger Seat, keine neue Datenbank und kein neuer Providerplan
 wurden hinzugebucht.
+
+## Erste bestätigte Live-Vorschau
+
+Commit `409db5021aaf4ceb08e64bb23795c2a4f144c443` wurde durch Git-Push als
+Preview erfolgreich gebaut. Deployment `dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm` ist
+laut authentifiziertem Deployment-API und CLI-Inspect `READY`; Alias:
+**https://nexifyai.de**. Die neue Autoren-Mail wird von GitHub tatsächlich
+`nexifyai-dev` zugeordnet. Die bisherige Author-Blockade bleibt als historischer
+Befund dokumentiert, gilt aber nicht für diesen erfolgreichen Stand.
+
+Die fünf eigenen CI-Jobs bestanden auch für409db50. Eine zusätzliche, am selben
+Tag angelegte Vercel-App `site` hängt am selben Repository und besitzt nur ihre
+automatische vercel.app-Domain. Deren verschachtelter Root/Standardoutput löste
+die ebenfalls gemeldete `STATIC_BUILD_NO_OUT_DIR`-Meldung aus. Sie wird ohne
+Löschung oder Domainübernahme auf dieselbe konsistente Monorepo-Buildkonfiguration
+gebracht. Das kanonische Projekt und seine `.de`-Zuordnung bleiben führend.
+
+READY belegt die Vorschau-Bereitstellung. Die fehlende externe produktive
+Besucher-API, Clerk-DNS/Liveanmeldung, Presenter-Videos und tatsächliche
+ChatGPT-Backup-Synchronisierung sind damit weiterhin nicht abgenommen.
+
+Die zusätzliche App `site` wurde ebenfalls auf Repositorywurzel, Vite/Node22,
+identischen PNPM-Build und `apps/site/dist` korrigiert. Ihre Git-Verknüpfung,
+Schutzregeln und automatisch zugewiesene Domain blieben erhalten. Es wurden
+keine Geschäftsdomains übertragen und kein Projekt gelöscht. Der nächste
+Git-Push validiert beide Vercel-Projektkonfigurationen gegen denselben Quellstand.
