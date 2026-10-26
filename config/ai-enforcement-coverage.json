@@ -1,0 +1,2765 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-26T15:12:49.915433+00:00",
+  "mode": "audit_shadow_existing_runtime_unchanged",
+  "authority": "current explicit user correction; per-runtime migration only after validated replacement and rollback",
+  "scanner": {
+    "roots": [
+      "api",
+      "apps",
+      "packages",
+      "tools",
+      "scripts",
+      ".github/workflows",
+      "prototypen/lib",
+      "hooks"
+    ],
+    "extensions": [
+      ".cjs",
+      ".js",
+      ".mjs",
+      ".py",
+      ".sh",
+      ".ts",
+      ".tsx",
+      ".yaml",
+      ".yml"
+    ],
+    "marker_pattern": {
+      "provider_host": "\\b(?:openrouter\\.ai|api\\.openai\\.com|api\\.anthropic\\.com|ai-gateway\\.vercel\\.sh|generativelanguage\\.googleapis\\.com|api\\.deepseek\\.com|api\\.mistral\\.ai|api\\.cohere\\.(?:com|ai)|api\\.groq\\.com|api\\.together\\.xyz|api\\.fireworks\\.ai)\\b",
+      "inference_path": "/(?:v\\d+/)?(?:chat/completions|completions|responses|embeddings|generateContent|generate|api/chat)\\b",
+      "sdk_generation": "\\b(?:generateText|streamText|generateObject|streamObject|ToolLoopAgent|createOpenRouter|createOpenAI|createAnthropic|OpenAI|Anthropic|ChatOpenAI|ChatAnthropic|LiteLLM)\\s*\\(",
+      "sdk_client_call": "\\b(?:chat\\s*\\.\\s*completions|responses|messages|embeddings)\\s*\\.\\s*(?:create|stream)\\s*\\(",
+      "sdk_provider_import": "(?:@ai-sdk/(?:openai|anthropic|gateway|google)|@openrouter/ai-sdk-provider|\\b(?:from|import)\\s+(?:openai|anthropic|litellm)\\b)",
+      "external_jeff": "\\bnx-jeff\\b|\\bNX_ORAKEL_ENDPOINT\\b",
+      "model_callback": "\\.\\s*(?:modell|generateContent|generate_content|invoke|ainvoke)\\s*\\(",
+      "ollama_call": "\\bollama\\b|\\b(?:litellm|completion_with_retries)\\s*\\.\\s*(?:completion|acompletion)\\s*\\(",
+      "credentialed_inference_hint": "\\b(?:OPENROUTER_API_KEY|AI_GATEWAY_API_KEY|OPENAI_API_KEY|ANTHROPIC_API_KEY|NINEROUTER_URL)\\b"
+    },
+    "exclusions": [
+      "__pycache__",
+      "__tests__",
+      "assets",
+      "build",
+      "cache",
+      "coverage",
+      "dist",
+      "fixtures",
+      "generated",
+      "node_modules",
+      "public",
+      "reference",
+      "static",
+      "test",
+      "tests",
+      "vendor"
+    ],
+    "normative_scanner": "tools/check_ai_coverage.py constants, not editable registry exclusions",
+    "lexical_scan_source_count": 168,
+    "lexical_scan_bytes": 982247,
+    "lexical_candidates": 30,
+    "read_errors": []
+  },
+  "entries": [
+    {
+      "id": "AI-105e0011bdd1",
+      "path": ".github/workflows/ai-review.yml",
+      "sha256": "7a146a2eacd8655a239e0865d2e0160c6059b3efc68d0e38a62763fd2965b229",
+      "classification": "owned_new_managed_path",
+      "status": "source_enforced",
+      "source_role": "ci_managed_review",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Managed code/CI entrypoint; local mocked/negative contract tests only.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Exact OpenRouter inference URL via approved adapter; workflow itself invokes trusted review client.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "source_enforced",
+        "checks": [
+          "Current central policy and literal deepseek/deepseek-v4.1-flash-1017/high; unsupported substitutions fail closed.",
+          "Final provider request and destination boundaries, no silent fallback; source-level scope only.",
+          "Trusted base checkout, same-repository event restriction, advisory output; no PR-head execution in secret job."
+        ],
+        "gaps": [
+          "No live funded provider invocation or global deployment propagation was performed by this audit.",
+          "Identity, business action authority, funding and full tenant/ledger integration are separate requirements."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Run scoped deployment/provider readback only when specifically authorized and funded; preserve independent business/release gates.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "credentialed_inference_hint",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "id": "AI-a30dc4b2256c",
+      "path": "api/agent-chat.ts",
+      "sha256": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
+      "classification": "owned_current_local_or_public_foundation",
+      "status": "deterministic_no_model",
+      "source_role": "public_deterministic_endpoint",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Real text-guided/local visitor handling; not a generative model.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No model provider call in this code path.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Explicit deterministic/no-live-model status; input/origin/ownership guards have their separate source tests."
+        ],
+        "gaps": [
+          "This interim/local foundation does not satisfy the final required live-AI capability or all customer-suite backend dependencies."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Track live authorized/funded model integration separately; do not relabel deterministic output as live AI.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-8534902061c2",
+      "path": "api/agent-runtime-status.ts",
+      "sha256": "2a17ecb99889eee8d669938e49859282aaba6035d19cd71dd54dad154026639b",
+      "classification": "owned_preview_metadata",
+      "status": "metadata_only_no_inference",
+      "source_role": "preview_metadata_probe",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Branch/project/origin gated preview status; flag-controlled metadata lookup.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Normal SDK getCredits metadata read using server OIDC when explicitly enabled; no model generation.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "metadata_only_no_inference",
+        "checks": [
+          "No API-key override; exact preview project/branch, bounded body/deadline and sanitized boolean output."
+        ],
+        "gaps": [
+          "Credits metadata does not prove model entitlement, funding authorization, user identity or live inference."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep probe limited to metadata; verify inference/funding/tenant readiness separately.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-c6111342fa6d",
+      "path": "apps/agent-gateway/server.py",
+      "sha256": "6b9d7d36e15b558688824a28d2f3cd596c340207d7a0e60cb4bb6f2cd5b92c61",
+      "classification": "owned_current_local_or_public_foundation",
+      "status": "deterministic_no_model",
+      "source_role": "public_deterministic_endpoint",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Real text-guided/local visitor handling; not a generative model.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No model provider call in this code path.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Explicit deterministic/no-live-model status; input/origin/ownership guards have their separate source tests."
+        ],
+        "gaps": [
+          "This interim/local foundation does not satisfy the final required live-AI capability or all customer-suite backend dependencies."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Track live authorized/funded model integration separately; do not relabel deterministic output as live AI.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "inference_path",
+          "line": 366
+        }
+      ]
+    },
+    {
+      "id": "AI-fe644bf69f6f",
+      "path": "apps/site/src/main.tsx",
+      "sha256": "8c2534de574520cdb9baebf6888a8b4ca9e94874027bf07d2d1ee374de8d942a",
+      "classification": "owned_current_frontend_entry",
+      "status": "deterministic_no_model",
+      "source_role": "browser_or_local_preview_entry",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Browser/local preview routing into public API or local visitor foundation.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Same-origin API requests/local service launch; no browser provider key or direct model call identified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Actual entrypoint/source identified; public orientation versus legacy visitor/API routing distinguished."
+        ],
+        "gaps": [
+          "Frontend API path and SDK streaming do not establish live model or complete backend availability."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Maintain actual browser/API behavior evidence and separate future guarded live model integration.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-b4cf0a1319a7",
+      "path": "apps/web/components/Workspace.tsx",
+      "sha256": "a9bbfa009a1c66989387d3aa60672767a26c502e01259b5118869a12f54146d4",
+      "classification": "owned_current_frontend_entry",
+      "status": "deterministic_no_model",
+      "source_role": "browser_or_local_preview_entry",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Browser/local preview routing into public API or local visitor foundation.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Same-origin API requests/local service launch; no browser provider key or direct model call identified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Actual entrypoint/source identified; public orientation versus legacy visitor/API routing distinguished."
+        ],
+        "gaps": [
+          "Frontend API path and SDK streaming do not establish live model or complete backend availability."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Maintain actual browser/API behavior evidence and separate future guarded live model integration.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "inference_path",
+          "line": 108
+        }
+      ]
+    },
+    {
+      "id": "AI-9bb00e5eb771",
+      "path": "hooks/jeff-hook.mjs",
+      "sha256": "aa333c4da2732bedb19f4630d705dd952fc75c386f0cd134db4a9e9623ab6704",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "id": "AI-423260cef50f",
+      "path": "packages/agent-runtime/model-agent.ts",
+      "sha256": "6a542bfd4c9727ba6686baf2841414a3c0dd63ca6841514996a04014657d6435",
+      "classification": "owned_new_managed_path",
+      "status": "source_enforced",
+      "source_role": "managed_inference_adapter",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Managed code/CI entrypoint; local mocked/negative contract tests only.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Exact OpenRouter inference URL via approved adapter; workflow itself invokes trusted review client.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "source_enforced",
+        "checks": [
+          "Current central policy and literal deepseek/deepseek-v4.1-flash-1017/high; unsupported substitutions fail closed.",
+          "Final provider request and destination boundaries, no silent fallback; source-level scope only."
+        ],
+        "gaps": [
+          "No live funded provider invocation or global deployment propagation was performed by this audit.",
+          "Identity, business action authority, funding and full tenant/ledger integration are separate requirements."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Run scoped deployment/provider readback only when specifically authorized and funded; preserve independent business/release gates.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "provider_host",
+          "line": 15
+        },
+        {
+          "marker": "inference_path",
+          "line": 15
+        },
+        {
+          "marker": "sdk_generation",
+          "line": 112
+        },
+        {
+          "marker": "sdk_provider_import",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "id": "AI-b7b74e51dfb4",
+      "path": "packages/agent-runtime/preview-access.ts",
+      "sha256": "2795c56f6ef87fe8455c8ce7afab3963501ea51e57ecaa2f52e87828f1c6a5b8",
+      "classification": "owned_preview_metadata",
+      "status": "metadata_only_no_inference",
+      "source_role": "preview_metadata_probe",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Branch/project/origin gated preview status; flag-controlled metadata lookup.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Normal SDK getCredits metadata read using server OIDC when explicitly enabled; no model generation.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "metadata_only_no_inference",
+        "checks": [
+          "No API-key override; exact preview project/branch, bounded body/deadline and sanitized boolean output."
+        ],
+        "gaps": [
+          "Credits metadata does not prove model entitlement, funding authorization, user identity or live inference."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep probe limited to metadata; verify inference/funding/tenant readiness separately.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "credentialed_inference_hint",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "id": "AI-ac9f3bdd551a",
+      "path": "packages/agent-runtime/public-orientation.ts",
+      "sha256": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
+      "classification": "owned_current_local_or_public_foundation",
+      "status": "deterministic_no_model",
+      "source_role": "public_deterministic_endpoint",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Real text-guided/local visitor handling; not a generative model.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No model provider call in this code path.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Explicit deterministic/no-live-model status; input/origin/ownership guards have their separate source tests."
+        ],
+        "gaps": [
+          "This interim/local foundation does not satisfy the final required live-AI capability or all customer-suite backend dependencies."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Track live authorized/funded model integration separately; do not relabel deterministic output as live AI.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-0a40087d4c11",
+      "path": "prototypen/lib/anfrage-pipeline.js",
+      "sha256": "f65579e73c2f207f48740daef6942a5b615578c310d620ecb37579751a3a7caa",
+      "classification": "owned_preserved_design_reference_not_current_runtime",
+      "status": "external_unverified",
+      "source_role": "original_reference_callback",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Preserved original library/prototype code; no active app import found in this audit.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Injected model callback or knowledge action may invoke an external runtime; callback implementation not proven.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "external_unverified",
+        "checks": [
+          "Original source preserved and callback/dependency boundary inventoried; not modified as a hidden cutover."
+        ],
+        "gaps": [
+          "Callback name/model-shaped data cannot enforce model identity, provider wire or funding.",
+          "Original reference bytes are not a current production runtime contract."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Before adopting this component, document caller/adapter provenance and migrate under an explicit per-runtime contract without changing originals silently.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "model_callback",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "id": "AI-71014330c6b6",
+      "path": "prototypen/lib/ki-muster.js",
+      "sha256": "4d91a7a8b1b9d52872988fde4e17ee37ba8fdd036758f7be4dd6ad07528075d5",
+      "classification": "owned_preserved_design_reference_not_current_runtime",
+      "status": "external_unverified",
+      "source_role": "original_reference_callback",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Preserved original library/prototype code; no active app import found in this audit.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Injected model callback or knowledge action may invoke an external runtime; callback implementation not proven.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "external_unverified",
+        "checks": [
+          "Original source preserved and callback/dependency boundary inventoried; not modified as a hidden cutover."
+        ],
+        "gaps": [
+          "Callback name/model-shaped data cannot enforce model identity, provider wire or funding.",
+          "Original reference bytes are not a current production runtime contract."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Before adopting this component, document caller/adapter provenance and migrate under an explicit per-runtime contract without changing originals silently.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-3f307b17a063",
+      "path": "tools/agent-preview.mjs",
+      "sha256": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b",
+      "classification": "owned_current_frontend_entry",
+      "status": "deterministic_no_model",
+      "source_role": "browser_or_local_preview_entry",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Browser/local preview routing into public API or local visitor foundation.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Same-origin API requests/local service launch; no browser provider key or direct model call identified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Actual entrypoint/source identified; public orientation versus legacy visitor/API routing distinguished."
+        ],
+        "gaps": [
+          "Frontend API path and SDK streaming do not establish live model or complete backend availability."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Maintain actual browser/API behavior evidence and separate future guarded live model integration.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-7169883a0e49",
+      "path": "tools/agent.mjs",
+      "sha256": "7e10d4d978815e5d112f6595efa3b763bd0f5c47c0462abc278123478c945e62",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "AI-0ccf16978ba3",
+      "path": "tools/ai_migration.py",
+      "sha256": "75e3ac289e1b226925ed07925bb986c0d825b4e3c21b77ef29c12105fc04a70e",
+      "classification": "owned_source_candidate",
+      "status": "reviewed_false_positive",
+      "source_role": "guard",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Local guard/decision logic, or GitHub/Slack event handling rather than model inference.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No inference egress; GitHub/Slack business API effects remain separately authorized.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "reviewed_false_positive",
+        "checks": [
+          "Relevant literal/provider/response markers reviewed as source strings or non-LLM API paths, not model calls."
+        ],
+        "gaps": [
+          "A guard passing or an advisory client instruction does not prove complete runtime policy or global security."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep source drift review and separate side-effect authorization; do not interpret lexical registration as semantic proof.",
+      "runtime_deployment_verified": false,
+      "markers": [],
+      "reviewed_source_changes": [
+        {
+          "previous_sha256": "3855d49fd5f743de818a4cda7fc67b23eae168fefcac67b4af53445595fcbb3e",
+          "accepted_sha256": "75e3ac289e1b226925ed07925bb986c0d825b4e3c21b77ef29c12105fc04a70e",
+          "owner": "root",
+          "independent_reviewer": "independent_review",
+          "basis": "Explicit source freeze and read-only review; ai_migration10 tests and context_executor16 tests passed by independent reviewer.",
+          "scope": "safe nonblocking scenario reader or CORE6/capacity-context selection; no runtime cutover"
+        }
+      ]
+    },
+    {
+      "id": "AI-a2fd17ad0419",
+      "path": "tools/auftrag.mjs",
+      "sha256": "66358002e219b6391181d694d87948547b18bba50872481e488d9608e12fae70",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "id": "AI-23cf4542034d",
+      "path": "tools/automation/ai_review.py",
+      "sha256": "cf0405d09ade66a95ecfaa186bb90ec382a3f9a34888bb9385b0cdbb2f000afc",
+      "classification": "owned_new_managed_path",
+      "status": "source_enforced",
+      "source_role": "ci_managed_review",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Managed code/CI entrypoint; local mocked/negative contract tests only.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Exact OpenRouter inference URL via approved adapter; workflow itself invokes trusted review client.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "source_enforced",
+        "checks": [
+          "Current central policy and literal deepseek/deepseek-v4.1-flash-1017/high; unsupported substitutions fail closed.",
+          "Final provider request and destination boundaries, no silent fallback; source-level scope only.",
+          "23 offline automation tests passed after direct settings and final Transport model guards; no arbitrary ID before credential/catalog access."
+        ],
+        "gaps": [
+          "No live funded provider invocation or global deployment propagation was performed by this audit.",
+          "Identity, business action authority, funding and full tenant/ledger integration are separate requirements."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Run scoped deployment/provider readback only when specifically authorized and funded; preserve independent business/release gates.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "provider_host",
+          "line": 23
+        },
+        {
+          "marker": "inference_path",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "AI-4bf01cbc567a",
+      "path": "tools/brain_ingestion.py",
+      "sha256": "ef81297bfc808188960f40d658a0599b483ce6b117bcce41f7174aa2f545ff68",
+      "classification": "owned_source_candidate",
+      "status": "deterministic_no_model",
+      "source_role": "local_context_or_staging",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Bounded local selection, SQLite Markdown staging or keyword/geography staging.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No remote model/index/publish operation implemented in this path.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Source-specific scope/redaction/persistence/measurement boundaries; local data only."
+        ],
+        "gaps": [
+          "Local staging is not externally indexed knowledge, policy activation or runtime acceptance."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep scoped source/readback records; resolve actual server/LightRAG adapter and funding gaps through assigned remediation.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-ee3fd6862503",
+      "path": "tools/chat-arbeit.mjs",
+      "sha256": "4d8f9cc187a43632b157b3b081decaea91831a834ab121aaf2a8adbab798ee45",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "id": "AI-b7dc299b5f31",
+      "path": "tools/chat-auftrag-adapter.mjs",
+      "sha256": "1dae1f68263c2d3680a2fb46167d8f2b13f9958c38ff64fb6a42a4caa98bec22",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "id": "AI-f812136ede00",
+      "path": "tools/check_ai_coverage.py",
+      "sha256": "1c79829ec912132d62fdad6f368f0c8fe900716bf1adff8faef2e5f35c165e8b",
+      "classification": "owned_source_candidate",
+      "status": "reviewed_false_positive",
+      "source_role": "guard",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Local guard/decision logic, or GitHub/Slack event handling rather than model inference.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No inference egress; GitHub/Slack business API effects remain separately authorized.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "reviewed_false_positive",
+        "checks": [
+          "Relevant literal/provider/response markers reviewed as source strings or non-LLM API paths, not model calls."
+        ],
+        "gaps": [
+          "A guard passing or an advisory client instruction does not prove complete runtime policy or global security."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep source drift review and separate side-effect authorization; do not interpret lexical registration as semantic proof.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "inference_path",
+          "line": 30
+        },
+        {
+          "marker": "sdk_provider_import",
+          "line": 33
+        },
+        {
+          "marker": "credentialed_inference_hint",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "id": "AI-955af6e0cdfd",
+      "path": "tools/check_llm_policy.py",
+      "sha256": "1256c667402f6bf3f563bb68234a4f6db814d7627cee264a2e6595bc8569f84f",
+      "classification": "owned_source_candidate",
+      "status": "reviewed_false_positive",
+      "source_role": "guard",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Local guard/decision logic, or GitHub/Slack event handling rather than model inference.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No inference egress; GitHub/Slack business API effects remain separately authorized.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "reviewed_false_positive",
+        "checks": [
+          "Relevant literal/provider/response markers reviewed as source strings or non-LLM API paths, not model calls."
+        ],
+        "gaps": [
+          "A guard passing or an advisory client instruction does not prove complete runtime policy or global security."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep source drift review and separate side-effect authorization; do not interpret lexical registration as semantic proof.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-ff329faca929",
+      "path": "tools/cognee.mjs",
+      "sha256": "c18a40ca4f82184ef771a433989dbc70b152277066b7f45bdb766e30b550ee83",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_brain_adapter",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "LightRAG query/document or Cognee login/add/search and/or oracle; can invoke hidden inference/embedding work.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Remote model/embedding/provider and data-processing contracts are unverified; credential-file/container-env code exists but was not executed."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-373b10e7b772",
+      "path": "tools/context_executor.py",
+      "sha256": "b4fe37c32759e36efec82ffea2b35f4a3a36696545bf86114fa5bc78940e9a55",
+      "classification": "owned_source_candidate",
+      "status": "deterministic_no_model",
+      "source_role": "local_context_or_staging",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Bounded local selection, SQLite Markdown staging or keyword/geography staging.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No remote model/index/publish operation implemented in this path.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Source-specific scope/redaction/persistence/measurement boundaries; local data only."
+        ],
+        "gaps": [
+          "Local staging is not externally indexed knowledge, policy activation or runtime acceptance."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep scoped source/readback records; resolve actual server/LightRAG adapter and funding gaps through assigned remediation.",
+      "runtime_deployment_verified": false,
+      "markers": [],
+      "reviewed_source_changes": [
+        {
+          "previous_sha256": "f4fe7ff2ff8b03a3bed46da433765266e67d6bc0e07a899e4798213c998b5148",
+          "accepted_sha256": "b4fe37c32759e36efec82ffea2b35f4a3a36696545bf86114fa5bc78940e9a55",
+          "owner": "root",
+          "independent_reviewer": "independent_review",
+          "basis": "Explicit source freeze and read-only review; ai_migration10 tests and context_executor16 tests passed by independent reviewer.",
+          "scope": "safe nonblocking scenario reader or CORE6/capacity-context selection; no runtime cutover"
+        }
+      ]
+    },
+    {
+      "id": "AI-8fd9549aa66b",
+      "path": "tools/dev.mjs",
+      "sha256": "0de5e5763646d0ef55d0a48b54376af0e2c2c296f3e1b558410a777140d1def6",
+      "classification": "owned_current_frontend_entry",
+      "status": "deterministic_no_model",
+      "source_role": "browser_or_local_preview_entry",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Browser/local preview routing into public API or local visitor foundation.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Same-origin API requests/local service launch; no browser provider key or direct model call identified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Actual entrypoint/source identified; public orientation versus legacy visitor/API routing distinguished."
+        ],
+        "gaps": [
+          "Frontend API path and SDK streaming do not establish live model or complete backend availability."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Maintain actual browser/API behavior evidence and separate future guarded live model integration.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-ac0395afd28e",
+      "path": "tools/docs-aktualisieren.mjs",
+      "sha256": "b7a3bff4c2039dad4b321973cd0376bdc1cbeb16deb51b2998dcd1308b759022",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "id": "AI-dd7b429dd0e6",
+      "path": "tools/einbringen.mjs",
+      "sha256": "53c78d25f9baae6f85465dd6f09d5748b4e2f329135c13343b46c3cb7a5d3042",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "id": "AI-0b7a9200a334",
+      "path": "tools/gesundheit.mjs",
+      "sha256": "83bad1061d85d87dabac4c5e406696761c0b4ed17b290588397f65de3175bcea",
+      "classification": "owned_source_candidate",
+      "status": "metadata_only_no_inference",
+      "source_role": "health_metadata",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Health runner contains provider/service checks plus separate status/restart/audit side effects; not executed here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Ollama/provider health metadata GETs are not model generation; other legacy operations are outside this classification.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "metadata_only_no_inference",
+        "checks": [
+          "Marker reviewed as health metadata; no generation POST identified."
+        ],
+        "gaps": [
+          "This is not a claim the entire health runner is read-only, fully safe, or all remote service internals are known."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Preserve real health metadata checks; keep operational writes/credentials under their own authorized environment contract.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "ollama_call",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "id": "AI-3aaf53056967",
+      "path": "tools/github_event_inbox.py",
+      "sha256": "0d93d0569474231eeb253aeb6cd21ab9556bc360a04756d3828be47a0fddb665",
+      "classification": "owned_source_candidate",
+      "status": "reviewed_false_positive",
+      "source_role": "non_llm_business_api",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Local guard/decision logic, or GitHub/Slack event handling rather than model inference.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No inference egress; GitHub/Slack business API effects remain separately authorized.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "reviewed_false_positive",
+        "checks": [
+          "Relevant literal/provider/response markers reviewed as source strings or non-LLM API paths, not model calls."
+        ],
+        "gaps": [
+          "A guard passing or an advisory client instruction does not prove complete runtime policy or global security."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep source drift review and separate side-effect authorization; do not interpret lexical registration as semantic proof.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "inference_path",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "id": "AI-d442e10f97e1",
+      "path": "tools/jeff-backup.mjs",
+      "sha256": "d595037352533a4eef90668976f1dc38f929cdd360fea60b94ef1ba5bdbec7a4",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Legacy default verdict/tier labels can look like an oracle result without proof; retained as an explicit migration finding, not endorsed as success."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "id": "AI-0c5695ef43ca",
+      "path": "tools/jeff-gate.mjs",
+      "sha256": "1d3d59b47a71c4c26ab5f280bebaff9a1d186c569529effe1433c7c227d2b22d",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "id": "AI-d67c29045b26",
+      "path": "tools/jeff-gate.py",
+      "sha256": "5a284037370774b8f8fac754c1868bbe8f8ccb14e360237c0e5cc1852b463632",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "POST to NX_ORAKEL_ENDPOINT using NX_ORAKEL_MODEL (legacy Jev default) and its configured key when run.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Legacy arbitrary endpoint/model selection is still present until an explicitly validated per-runtime migration."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "id": "AI-1a24e8a718a6",
+      "path": "tools/jeff-incident.mjs",
+      "sha256": "43e5c0f57889cc5da573acf5769d49a1851918bdc9fabab89a59a5fdf63dbfa4",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Legacy default verdict/tier labels can look like an oracle result without proof; retained as an explicit migration finding, not endorsed as success."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "id": "AI-6992b6be3d9e",
+      "path": "tools/jeff-kontext.mjs",
+      "sha256": "1453bf441d07bad3b4e6382522229ef428c2d113a51dcd9f11e992558e265b3c",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_brain_adapter",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "LightRAG query/document or Cognee login/add/search and/or oracle; can invoke hidden inference/embedding work.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Remote model/embedding/provider and data-processing contracts are unverified; credential-file/container-env code exists but was not executed."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "id": "AI-4c7f8799f066",
+      "path": "tools/jeff-lead.mjs",
+      "sha256": "0faad97836696c41841e0a3faa91a5f0b6bfb11ffb42e862c13fd5d65723d1f8",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Legacy default verdict/tier labels can look like an oracle result without proof; retained as an explicit migration finding, not endorsed as success."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "id": "AI-000d253215ab",
+      "path": "tools/jeff-routing.mjs",
+      "sha256": "caec95407ce233b18ab5a71466c52bfb86936abab8af465717339216a085987a",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Legacy default verdict/tier labels can look like an oracle result without proof; retained as an explicit migration finding, not endorsed as success."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "id": "AI-0cf00831288a",
+      "path": "tools/jeff-triage.mjs",
+      "sha256": "1a362b53eefcb35e0a71745cc0bfb08f9069725ed02150a99629f36c5bdbe5ec",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "id": "AI-964cf95ccd1f",
+      "path": "tools/kontrolle.mjs",
+      "sha256": "fe6c0a9cc01bd02066b8f1afc165c4bc34fed47f02ad8d1fb5788e25c48ec2bf",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "id": "AI-d3c68ceef7f7",
+      "path": "tools/kritiker.mjs",
+      "sha256": "3a9ad4d3d9377cecad5d6883c5c670449133e871170774a692746a1c76e9ea6e",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-e1f0a90c207f",
+      "path": "tools/legacy-oracle-boundary.mjs",
+      "sha256": "42ca36c3803e8ba1922057afe3b3695f8e84843df3d534876503befb5e6e5ae8",
+      "classification": "owned_prepared_not_activated",
+      "status": "declaration_only",
+      "source_role": "opt_in_shadow_guard_candidate",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Prepared opt-in candidate only; not imported by existing legacy callsites.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No provider/subprocess/credential request in the candidate; no production activation.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "declaration_only",
+        "checks": [
+          "5 offline compatibility/candidate tests passed; legacy launchsites restored to prechange source bytes."
+        ],
+        "gaps": [
+          "No approved per-runtime replacement/contract/canary/rollback/cutover; candidate is not an active legacy restriction."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Use migration policy and scoped readiness/rollback evidence before any future opt-in; never globally switch from a model name.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "inference_path",
+          "line": 32
+        },
+        {
+          "marker": "external_jeff",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "id": "AI-cb306dc02119",
+      "path": "tools/legacy_oracle_candidate.py",
+      "sha256": "a17a14dfc40340290e3c32e929a4a1dff6e297762dc004a271170b934399e1fb",
+      "classification": "owned_prepared_not_activated",
+      "status": "declaration_only",
+      "source_role": "opt_in_shadow_guard_candidate",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Prepared opt-in candidate only; not imported by existing legacy callsites.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No provider/subprocess/credential request in the candidate; no production activation.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "declaration_only",
+        "checks": [
+          "5 offline compatibility/candidate tests passed; legacy launchsites restored to prechange source bytes."
+        ],
+        "gaps": [
+          "No approved per-runtime replacement/contract/canary/rollback/cutover; candidate is not an active legacy restriction."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Use migration policy and scoped readiness/rollback evidence before any future opt-in; never globally switch from a model name.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "provider_host",
+          "line": 14
+        },
+        {
+          "marker": "inference_path",
+          "line": 14
+        },
+        {
+          "marker": "external_jeff",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "id": "AI-9bea6351dc67",
+      "path": "tools/lernschleife.mjs",
+      "sha256": "114efd872447f83f862c0bf7e653947a6200776dd14c9bd9ad10161993ed9b3f",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_brain_adapter",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "LightRAG query/document or Cognee login/add/search and/or oracle; can invoke hidden inference/embedding work.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Remote model/embedding/provider and data-processing contracts are unverified; credential-file/container-env code exists but was not executed."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "external_jeff",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "id": "AI-d8c1bcf37173",
+      "path": "tools/orchestrierung-server.mjs",
+      "sha256": "20ace761273e199468460ed92805b63c5df04bd6d55474d7702144ce8f4056d2",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-68cf7a30c913",
+      "path": "tools/produkt-server.mjs",
+      "sha256": "c5d41f0536b5e7b7707dc843dc429aacc679db7d044b3b47e5918350b4fb2ad8",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-dfa7ddf9888b",
+      "path": "tools/project_skills.py",
+      "sha256": "3ede8dab369cd068f89a08afc1e5e477e697304ad2df65081cbee8fdd66ec80b",
+      "classification": "owned_source_candidate",
+      "status": "reviewed_false_positive",
+      "source_role": "guard",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Local guard/decision logic, or GitHub/Slack event handling rather than model inference.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No inference egress; GitHub/Slack business API effects remain separately authorized.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "reviewed_false_positive",
+        "checks": [
+          "Relevant literal/provider/response markers reviewed as source strings or non-LLM API paths, not model calls."
+        ],
+        "gaps": [
+          "A guard passing or an advisory client instruction does not prove complete runtime policy or global security."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep source drift review and separate side-effect authorization; do not interpret lexical registration as semantic proof.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-24e2a5851ebe",
+      "path": "tools/recherche.mjs",
+      "sha256": "20e47dac7646faf86a8f15ae8d341003ce215018e3c95f5604766eb03956d697",
+      "classification": "owned_source_candidate",
+      "status": "metadata_only_no_inference",
+      "source_role": "search_only",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Configured SearXNG search preserved; import does not start a search.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Search GET to the existing operator-configured SearXNG; no LLM or router-key header.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "metadata_only_no_inference",
+        "checks": [
+          "Removed genuinely unused modelle.env read and router-key fallback references without restricting configured search endpoint.",
+          "Fakefetch test verifies search-only behavior and no source-content verification claim."
+        ],
+        "gaps": [
+          "Returned URL schemes are not evidence that page content was read; external search service internals unverified."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Review search data/privacy scope and sources before using results as evidence; no LLM enforcement claim.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-617e2252c9dc",
+      "path": "tools/review.mjs",
+      "sha256": "373a83b4227bbed5f5c8cad410f2a770cf1fd75ae2d7338c234bcdb954a00084",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-91bc28b694bd",
+      "path": "tools/seo_catalog.py",
+      "sha256": "79b68d53a0fae6e8deff0a8053ec1bcf8b2c8da5566b263844d3cc8067bc4dab",
+      "classification": "owned_source_candidate",
+      "status": "deterministic_no_model",
+      "source_role": "local_context_or_staging",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Bounded local selection, SQLite Markdown staging or keyword/geography staging.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No remote model/index/publish operation implemented in this path.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "deterministic_no_model",
+        "checks": [
+          "Source-specific scope/redaction/persistence/measurement boundaries; local data only."
+        ],
+        "gaps": [
+          "Local staging is not externally indexed knowledge, policy activation or runtime acceptance."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep scoped source/readback records; resolve actual server/LightRAG adapter and funding gaps through assigned remediation.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-c4ea37a5938d",
+      "path": "tools/support.mjs",
+      "sha256": "de6f3c56e2ea036df3b9d984d201ce2b89bbf516b0b4c4a10bf45d93cbdd6b66",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_orchestration",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "External nx-jeff subprocess and/or indirect legacy service calls; external implementation unverified.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-6bc4e020acb8",
+      "path": "tools/verify_factory_contract.py",
+      "sha256": "6c547dfea2fb571e1dc488d3d6cab1f244f479f83a3a02d841cbffb9c352004d",
+      "classification": "owned_source_candidate",
+      "status": "reviewed_false_positive",
+      "source_role": "guard",
+      "reviewed_non_inference": true,
+      "execution": {
+        "observation": "Local guard/decision logic, or GitHub/Slack event handling rather than model inference.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "No inference egress; GitHub/Slack business API effects remain separately authorized.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "reviewed_false_positive",
+        "checks": [
+          "Relevant literal/provider/response markers reviewed as source strings or non-LLM API paths, not model calls."
+        ],
+        "gaps": [
+          "A guard passing or an advisory client instruction does not prove complete runtime policy or global security."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep source drift review and separate side-effect authorization; do not interpret lexical registration as semantic proof.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "inference_path",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "id": "AI-200387637fa0",
+      "path": "tools/wissen-abfrage.mjs",
+      "sha256": "734ea32ebbc6e4eeb59c992526cdf17f35746a5b4966155f5df5d4aff1759592",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_brain_adapter",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "LightRAG query/document or Cognee login/add/search and/or oracle; can invoke hidden inference/embedding work.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Remote model/embedding/provider and data-processing contracts are unverified; credential-file/container-env code exists but was not executed."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    },
+    {
+      "id": "AI-a330a3771cdf",
+      "path": "tools/wissen-speisen.mjs",
+      "sha256": "b9c1acb2e2f1824f7eed18ed19c29a4590ec5bc6df8d8d65b45bbed3a4867d50",
+      "classification": "owned_legacy_unmigrated",
+      "status": "unverified_legacy_egress",
+      "source_role": "legacy_brain_adapter",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Existing executable path preserved under audit/shadow migration policy; not launched here.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "LightRAG query/document or Cognee login/add/search and/or oracle; can invoke hidden inference/embedding work.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "unverified_legacy_egress",
+        "checks": [
+          "Observed source path and exact snapshot hash; no runtime execution or cutover in this audit."
+        ],
+        "gaps": [
+          "Existing runtime is not bound end-to-end to the exact managed model, reasoning, tenant, funding and provider wire contract.",
+          "Audit/shadow does not stop this legacy flow and does not certify it as enforced.",
+          "Remote model/embedding/provider and data-processing contracts are unverified; credential-file/container-env code exists but was not executed."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
+      "runtime_deployment_verified": false,
+      "markers": []
+    }
+  ],
+  "instruction_roots": [
+    {
+      "path": "AGENTS.md",
+      "sha256_snapshot": "c8b351c0f14f0fcae06cf682a21258f19077d2e726d6efad82fa98ba6c106d70",
+      "status": "advisory_client_instructions_not_server_enforcement",
+      "owned": true,
+      "host_model_controlled_by_file": false,
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Use as current scoped guidance; server/runtime adapters must independently enforce actual requests."
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256_snapshot": "b524ce54e8197645ad4638e311e1e6d6dc0466794e720a59e53fe1d878255512",
+      "status": "advisory_client_instructions_not_server_enforcement",
+      "owned": true,
+      "host_model_controlled_by_file": false,
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Use as current scoped guidance; server/runtime adapters must independently enforce actual requests."
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "sha256_snapshot": "dd893de38ca2decdc1b21528a82808399bd063be0de197b0e87529020bea4298",
+      "status": "advisory_client_instructions_not_server_enforcement",
+      "owned": true,
+      "host_model_controlled_by_file": false,
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Use as current scoped guidance; server/runtime adapters must independently enforce actual requests."
+    },
+    {
+      "path": ".claude/settings.json",
+      "sha256_snapshot": "ce6ff6e283cfbefa21b0eb667c71b5ad4efa56d76e3fe8bb299b3b0cb6948f66",
+      "status": "advisory_client_instructions_not_server_enforcement",
+      "owned": true,
+      "host_model_controlled_by_file": false,
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Use as current scoped guidance; server/runtime adapters must independently enforce actual requests."
+    }
+  ],
+  "configuration_declarations": [
+    {
+      "path": "config/llm-policy.json",
+      "sha256_snapshot": "5cf781a67f41d55f0942b5edab327ec6a6537c93e610e86e8de4516ccbf1e368",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/automation.json",
+      "sha256_snapshot": "a13ee9eafb66c535a12f2e24d083e9410f1420e67dc239646d36b5ce36b153ce",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/selfservice-policy.json",
+      "sha256_snapshot": "355ccc200852e6e14087aa55a5dc10ed94e42f1a3222d9818086db393bcbf2ab",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/brain/agents.json",
+      "sha256_snapshot": "062336475b7436f2f68307df66efc8008e26bde949d5f0508fbfa9746249d5c5",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/llm-verbindungen.json",
+      "sha256_snapshot": "16e9018b6f7b9feab2c5e2dc05784d960d63130c55482139105a9fa0bd57493b",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/agenten-paket.json",
+      "sha256_snapshot": "3abd36d0f01fe42003c4568aaa2ad1727903f2b120d9c18f3ae65e568fd53865",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/computer-use.json",
+      "sha256_snapshot": "73311da65d80199cd07511242a22195137df833725db8cf52d32aa88c5793c88",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/rag.json",
+      "sha256_snapshot": "12d679974b7bb31accb5ca1105edfb022c5307cf3245b3ff5c2fadcddb7714f1",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    },
+    {
+      "path": "config/ai-migration-policy.json",
+      "sha256_snapshot": "98ba89849bff3585843f3fd603a8d0da9df8c568ee534b90f3ddf5c3a82aeaa0",
+      "status": "declaration_not_global_runtime_proof",
+      "guard_hash_pinned": false,
+      "owner": "D06/D08",
+      "next_action": "Bind declarations to concrete owned runtime and final provider wire; preserve audit/shadow transition for existing flows."
+    }
+  ],
+  "html_and_historical_source_inventory": [
+    {
+      "source_id": "N1:apps/site/index.html",
+      "path": "apps/site/index.html",
+      "sha256_snapshot": "2c4433488c2341ab761c27933f65393b740cbeff8555ebe749ea683fd0a56818",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:apps-index.html",
+      "path": "apps-index.html",
+      "sha256_snapshot": "2d129d1984f9fca886a7794dcff10d808607d93fb50037498fb80279b1348f0e",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:docs/projektseiten/Architektur.dc.html",
+      "path": "docs/projektseiten/Architektur.dc.html",
+      "sha256_snapshot": "ca9882949048a86aaa41fd58012b915bf3f4ff2283150cfb8eff06254866544b",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:docs/projektseiten/NeXify Organisation.dc.html",
+      "path": "docs/projektseiten/NeXify Organisation.dc.html",
+      "sha256_snapshot": "1c72d86aa5a3d5eb2253d7850891ac0bfb89e887e90888fe9c324fbbdbd56d30",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:docs/projektseiten/Start.dc.html",
+      "path": "docs/projektseiten/Start.dc.html",
+      "sha256_snapshot": "b5ea7df8d904e74d08d3c79d9c47f353ba6a9037f26e35ddb2e556e5f038668c",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:docs/projektseiten/Zielverfolgung.dc.html",
+      "path": "docs/projektseiten/Zielverfolgung.dc.html",
+      "sha256_snapshot": "727044a2f2ee9bacede3e549a02459122e514217660208dfdefe07bed24bf8cd",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:packages/ui/index.html",
+      "path": "packages/ui/index.html",
+      "sha256_snapshot": "4bcb62af84b897f92e5f46e62f2e2f979e42deb040d518a354ad1b93cc610503",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:preview-prototypes.html",
+      "path": "preview-prototypes.html",
+      "sha256_snapshot": "3feddca1fb4604aff55ebcc7f4a4af4818b0f0b386bbc21ec1901be8a5a01f06",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/API-Rechtliches.dc.html",
+      "path": "prototypen/API-Rechtliches.dc.html",
+      "sha256_snapshot": "d59c0cedcb3ccfec5f67c9ffa2aa041c9342aba4ae4b54d0476542da2d8f09a6",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Affiliate-Portal.dc.html",
+      "path": "prototypen/Affiliate-Portal.dc.html",
+      "sha256_snapshot": "dd028e84efa4e56fe366a615c775b1fc8ed6cc189c92c0b9c9498b5397c00afa",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Anmeldung.dc.html",
+      "path": "prototypen/Anmeldung.dc.html",
+      "sha256_snapshot": "d86dcc07081a70d46cb4c8c53c2d72c9010e0a72825470d9a4b5ffc3cf1f9fab",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Batterie-Berater.dc.html",
+      "path": "prototypen/Batterie-Berater.dc.html",
+      "sha256_snapshot": "f4bbd8b571c0b78c3ed7b95b19d1f8b159483218bc66af847acfd33ae4916536",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/E-Mail-Marketing-Newsletter.html",
+      "path": "prototypen/E-Mail-Marketing-Newsletter.html",
+      "sha256_snapshot": "93ddd2866a5a8a639f42144ff9c928b9edce6a1f41090664fa52832c1049a625",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/E-Mail-Transaktional-Angebot.html",
+      "path": "prototypen/E-Mail-Transaktional-Angebot.html",
+      "sha256_snapshot": "92feb49b44dd08e2cbe2c1d2ba924086c663d414fd22ad1870f21a7a9829a5d4",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Fitment-Checker.dc.html",
+      "path": "prototypen/Fitment-Checker.dc.html",
+      "sha256_snapshot": "da68fc515b05ae3dc6082748712f3673b24f2e3dde5d36922eeea5b88209ad3d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Geschaeftsdokumente-Vorlagen.dc.html",
+      "path": "prototypen/Geschaeftsdokumente-Vorlagen.dc.html",
+      "sha256_snapshot": "c6349dcb5dcf6086a88709e3e215e9eaac7ad1b00962dda4e726293c15ac11bd",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Investoren-PowerPoint.dc.html",
+      "path": "prototypen/Investoren-PowerPoint.dc.html",
+      "sha256_snapshot": "9fb4ee5cb3eda3e2d63ee18be40daf6dbfc5bf88119933004852b8639338607d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Konto.dc.html",
+      "path": "prototypen/Konto.dc.html",
+      "sha256_snapshot": "a02caf08cb5b295f8bed43ef8af8c80cb36c50cf6f7e05b5ce4cae964b4f450a",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Kundenbroschuere.dc.html",
+      "path": "prototypen/Kundenbroschuere.dc.html",
+      "sha256_snapshot": "411e6c115420107139e1c53bd4c6081157052f8f8fa796f609078fa16496cf76",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Kundenportal.dc.html",
+      "path": "prototypen/Kundenportal.dc.html",
+      "sha256_snapshot": "c969bb0f65ec31673ec0d9183ec65a64056c798c929fa4765592e3cc51754ff0",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Kundenwege.dc.html",
+      "path": "prototypen/Kundenwege.dc.html",
+      "sha256_snapshot": "f558b25c757652a36b64f382216fa2485a434d28bfa11ceff037f1b8f213d82d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NX-Footer.dc.html",
+      "path": "prototypen/NX-Footer.dc.html",
+      "sha256_snapshot": "bbe124d8c25373b54676aa848adb9a60a8a319178bb52c8e87dbb7da35ec98ce",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NX-Header.dc.html",
+      "path": "prototypen/NX-Header.dc.html",
+      "sha256_snapshot": "9f8bb5113ab6d5c6cccd2c447f90b868169901ad3ce56758c54fb84c7cdacf5f",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NX-Intern.dc.html",
+      "path": "prototypen/NX-Intern.dc.html",
+      "sha256_snapshot": "5274d3436c645da45a0a336c25703e6a42ee9de011250a9a3b831777e1de1d38",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Nachbarschaftskunden-Portal.dc.html",
+      "path": "prototypen/Nachbarschaftskunden-Portal.dc.html",
+      "sha256_snapshot": "0e4616b44f074bddd0e8e87fc1a1c33fa69d436baa44490eb68baf38dc4dc18e",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify AI one.dc.html",
+      "path": "prototypen/NeXify AI one.dc.html",
+      "sha256_snapshot": "775ce43b7af15c68b5bd6902e6a14eb7122cea27afd19cc7dbe74eccb8371e24",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify API.dc.html",
+      "path": "prototypen/NeXify API.dc.html",
+      "sha256_snapshot": "9be27bae770d84aba784713265b5af625300ed40f71bb21c65aca5965aaef8b0",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify Designsystem.dc.html",
+      "path": "prototypen/NeXify Designsystem.dc.html",
+      "sha256_snapshot": "4032d566d4150369b15c1b166c19e801f011a60383886a58dad28182c8305cd2",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify Leitstand.dc.html",
+      "path": "prototypen/NeXify Leitstand.dc.html",
+      "sha256_snapshot": "76b9ce05baff49eb287228cb028f5b8d96a2fcf4c08048e83b8871cfd8af789f",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify Posteingang.dc.html",
+      "path": "prototypen/NeXify Posteingang.dc.html",
+      "sha256_snapshot": "d6be44e2fe109558a53289fd0611825e6f51c15beafcf661dc1cf7478e2eabef",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify Shop.dc.html",
+      "path": "prototypen/NeXify Shop.dc.html",
+      "sha256_snapshot": "91ac7a725d71b53e979ad0c835fc3c2136a83c145f77587a9ff3d32df5f9ef6b",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify Systemkarte.dc.html",
+      "path": "prototypen/NeXify Systemkarte.dc.html",
+      "sha256_snapshot": "408ae8db720af34ba61988cf95f1bd8992b4d14e4bd23f73bbbba81b17e249ce",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify Workspace.dc.html",
+      "path": "prototypen/NeXify Workspace.dc.html",
+      "sha256_snapshot": "dd1a03e8ab153c3c160520af3919689c45b7f9c8ac869f2da85eeed2604ac5c5",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXify-AI-Companion.dc.html",
+      "path": "prototypen/NeXify-AI-Companion.dc.html",
+      "sha256_snapshot": "e9bdea1318d6cd1252b7d682ebc845f2f395df22bddd01d28da976e6571f0bb4",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXifyAI Cloud v12.dc.html",
+      "path": "prototypen/NeXifyAI Cloud v12.dc.html",
+      "sha256_snapshot": "4f3befc8dd12803c781bc377d0611c83262bcb40907b01bbefac6784a6671ed5",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXifyAI-Local-SEO-Muster.dc.html",
+      "path": "prototypen/NeXifyAI-Local-SEO-Muster.dc.html",
+      "sha256_snapshot": "8dc9625b333ce5b51e7d7b2c234bbd26d96d10f7d3c0a8a4f4c3ec796318c82d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/NeXifyAI-Wissenshub-Artikel.dc.html",
+      "path": "prototypen/NeXifyAI-Wissenshub-Artikel.dc.html",
+      "sha256_snapshot": "8d6340253ba1fc36d473424ed8fa454b875c4e6cfc8dfbee817799e831a82dd8",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Partner-Broschuere.dc.html",
+      "path": "prototypen/Partner-Broschuere.dc.html",
+      "sha256_snapshot": "c50b0775d1352c700133bae0e77a420e4af30d445c6e4f1b30a0608bbd98326d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Partner-PowerPoint Werkstatt.dc.html",
+      "path": "prototypen/Partner-PowerPoint Werkstatt.dc.html",
+      "sha256_snapshot": "5b7fdc883d65de800eabba0cf09b2ab0caf19d961a29f20d0772a1a45f1a750b",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Partner-werden.dc.html",
+      "path": "prototypen/Partner-werden.dc.html",
+      "sha256_snapshot": "51499e9ce7df7b291d5fdeb08217b51eb23f1a9ce6f6f7b4875f886b1c3db838",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Partnerportal.dc.html",
+      "path": "prototypen/Partnerportal.dc.html",
+      "sha256_snapshot": "53f063f7516ad90d2ccace9dba76298252c3b1e1b210fd2aeec68da983824f02",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Rechtliches.dc.html",
+      "path": "prototypen/Rechtliches.dc.html",
+      "sha256_snapshot": "7011477bfd1224f821b17a91b206dcb8318ce5f92ccdda4176b0950622d00e2f",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Reifenrechner.dc.html",
+      "path": "prototypen/Reifenrechner.dc.html",
+      "sha256_snapshot": "4b1373e7499f8c6264e261a77360f75ebb868b3caeb8d62d3f6cb5268d22d7f5",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/TEILEKLAR Shop.dc.html",
+      "path": "prototypen/TEILEKLAR Shop.dc.html",
+      "sha256_snapshot": "d85bd93200ca2b5f001c55c1d8544479726422276df70166d0ab668ba3e79b26",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Visitenkarte-Pascal-Courbois.dc.html",
+      "path": "prototypen/Visitenkarte-Pascal-Courbois.dc.html",
+      "sha256_snapshot": "919f40ca5d20aa1be58ac3d9446dd16a09a170224e3d91803b6aaec2eaca7225",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/Werkstatt-Partnerseite.dc.html",
+      "path": "prototypen/Werkstatt-Partnerseite.dc.html",
+      "sha256_snapshot": "93b88c07017f2e38af610412c92813abfe974ce8ac0d3ca06b1c51fb0b72fdf9",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/index.html",
+      "path": "prototypen/index.html",
+      "sha256_snapshot": "394ed850d8d3a9658d743bbca657814cbd285e5a1e0e48afe590d376d41e2e48",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N1:prototypen/myADMIN v2.dc.html",
+      "path": "prototypen/myADMIN v2.dc.html",
+      "sha256_snapshot": "cd941dec400a573c114fff448f9c3b251dca7ef7e57165cab7b7f4b4a7b26d7d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:apps-index.html",
+      "path": "reference/handoff-n2/apps-index.html",
+      "sha256_snapshot": "fce207542008ea484d67e814694fa197d2253e4d7a62c24848949d8843d35360",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:docs/projektseiten/Architektur.dc.html",
+      "path": "reference/handoff-n2/docs/projektseiten/Architektur.dc.html",
+      "sha256_snapshot": "ca9882949048a86aaa41fd58012b915bf3f4ff2283150cfb8eff06254866544b",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:docs/projektseiten/NeXify Organisation.dc.html",
+      "path": "reference/handoff-n2/docs/projektseiten/NeXify Organisation.dc.html",
+      "sha256_snapshot": "1c72d86aa5a3d5eb2253d7850891ac0bfb89e887e90888fe9c324fbbdbd56d30",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:docs/projektseiten/Start.dc.html",
+      "path": "reference/handoff-n2/docs/projektseiten/Start.dc.html",
+      "sha256_snapshot": "b5ea7df8d904e74d08d3c79d9c47f353ba6a9037f26e35ddb2e556e5f038668c",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:docs/projektseiten/Zielverfolgung.dc.html",
+      "path": "reference/handoff-n2/docs/projektseiten/Zielverfolgung.dc.html",
+      "sha256_snapshot": "727044a2f2ee9bacede3e549a02459122e514217660208dfdefe07bed24bf8cd",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:packages/ui/index.html",
+      "path": "reference/handoff-n2/packages/ui/index.html",
+      "sha256_snapshot": "4bcb62af84b897f92e5f46e62f2e2f979e42deb040d518a354ad1b93cc610503",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/API-Rechtliches.dc.html",
+      "path": "reference/handoff-n2/prototypen/API-Rechtliches.dc.html",
+      "sha256_snapshot": "04699b0bcf0f3656d1d0c8665fddaf2ad78101c4a3dbb3918ad8c804ace14956",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Affiliate-Portal.dc.html",
+      "path": "reference/handoff-n2/prototypen/Affiliate-Portal.dc.html",
+      "sha256_snapshot": "f01e661bd1e4fff1347f3a0b1d3d34085b5ca5393284e9262ec348f3321d792f",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Anmeldung.dc.html",
+      "path": "reference/handoff-n2/prototypen/Anmeldung.dc.html",
+      "sha256_snapshot": "a6c489560132f77a9e187a862bfbf86c4323faad94c68d3ae4584e21f7c90a7d",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Batterie-Berater.dc.html",
+      "path": "reference/handoff-n2/prototypen/Batterie-Berater.dc.html",
+      "sha256_snapshot": "58135965d88647c88cbd06baaa256912da028e6dc363a93301e2cac7b6885dde",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/E-Mail-Marketing-Newsletter.html",
+      "path": "reference/handoff-n2/prototypen/E-Mail-Marketing-Newsletter.html",
+      "sha256_snapshot": "93ddd2866a5a8a639f42144ff9c928b9edce6a1f41090664fa52832c1049a625",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/E-Mail-Transaktional-Angebot.html",
+      "path": "reference/handoff-n2/prototypen/E-Mail-Transaktional-Angebot.html",
+      "sha256_snapshot": "92feb49b44dd08e2cbe2c1d2ba924086c663d414fd22ad1870f21a7a9829a5d4",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Fitment-Checker.dc.html",
+      "path": "reference/handoff-n2/prototypen/Fitment-Checker.dc.html",
+      "sha256_snapshot": "f68c70713f4500d28322ab33425a46610194cbed515cde4f0aecbd0446bad23b",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Geschaeftsdokumente-Vorlagen.dc.html",
+      "path": "reference/handoff-n2/prototypen/Geschaeftsdokumente-Vorlagen.dc.html",
+      "sha256_snapshot": "b40b3af2e33b5aeefa37b2308f602df6e09464b0c1ece547699ea9aa53325d51",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Investoren-PowerPoint.dc.html",
+      "path": "reference/handoff-n2/prototypen/Investoren-PowerPoint.dc.html",
+      "sha256_snapshot": "bae416056ff0e90a47ec80c4a99619437709633ec460601e349dc121ee30d1a7",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Konto.dc.html",
+      "path": "reference/handoff-n2/prototypen/Konto.dc.html",
+      "sha256_snapshot": "d3e063946e550f43adc7392030507e238c807392a676e6a66406df14e44c8fa7",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Kundenbroschuere.dc.html",
+      "path": "reference/handoff-n2/prototypen/Kundenbroschuere.dc.html",
+      "sha256_snapshot": "b3bd9d0939606951fddbc3367593ea19b13208121aa28a484a89f16e8e793a68",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Kundenportal.dc.html",
+      "path": "reference/handoff-n2/prototypen/Kundenportal.dc.html",
+      "sha256_snapshot": "52bb27db91f7e21823fa142fbe900f55b3ce5a3629374fcd69be4b3016db21dc",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Kundenwege.dc.html",
+      "path": "reference/handoff-n2/prototypen/Kundenwege.dc.html",
+      "sha256_snapshot": "e8ce7267ebcbe177ab0b8ac62f585c881e87ed5d8363a1d27044e53fc3489987",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NX-Footer.dc.html",
+      "path": "reference/handoff-n2/prototypen/NX-Footer.dc.html",
+      "sha256_snapshot": "41c9c40800a4587502e1d5a7e1078e84aa698421a1311b33177b01c0d9ee34c4",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NX-Header.dc.html",
+      "path": "reference/handoff-n2/prototypen/NX-Header.dc.html",
+      "sha256_snapshot": "003f8e3793d0d8675897fbd89262f7f63c36d775b4fd673e66021e3a6c19163a",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NX-Intern.dc.html",
+      "path": "reference/handoff-n2/prototypen/NX-Intern.dc.html",
+      "sha256_snapshot": "2189e7fc319908b426c5e5d4b7a79b676e37242549b412ed9b43c1e0f3b748ff",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Nachbarschaftskunden-Portal.dc.html",
+      "path": "reference/handoff-n2/prototypen/Nachbarschaftskunden-Portal.dc.html",
+      "sha256_snapshot": "81b0a97db67ad2e2866f4f0ed353e8139a1d748303cd0939b25f62a5d7416147",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify AI one.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify AI one.dc.html",
+      "sha256_snapshot": "749a214abc9f5e8899d31eb647f467b10a0a59c9b6882773f57f9a3398e87184",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify API.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify API.dc.html",
+      "sha256_snapshot": "efce0ae42d778190bd2466aee83b8e96e692592b441aa816e8140850e85dc8fb",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify Designsystem.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify Designsystem.dc.html",
+      "sha256_snapshot": "e8c631c1b9c4357151f564af96a280381979fcf03e80b9fc804cfcd61544db7e",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify Leitstand.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify Leitstand.dc.html",
+      "sha256_snapshot": "7c1c58d9d8053fa967bb05aa1f8c6626a128908033208be6901bf83feb8194b4",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify Posteingang.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify Posteingang.dc.html",
+      "sha256_snapshot": "04f098e6a879befcbf68416846ee385ca8d3f243ff5224667f8a2e1849c9c456",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify Shop.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify Shop.dc.html",
+      "sha256_snapshot": "969a162d4ed0360dc1affc62bf721ba15717304170d968660abfc6764d86740c",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify Systemkarte.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify Systemkarte.dc.html",
+      "sha256_snapshot": "440d654276044cb11875b82d1b0e3b398bcc1645a94c4750225464eb9f151152",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify Workspace.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify Workspace.dc.html",
+      "sha256_snapshot": "4ec1be60072da6022871e2c1cf8963ac2638b4766893b4c2e60231d6ee3bc5d4",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXify-AI-Companion.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXify-AI-Companion.dc.html",
+      "sha256_snapshot": "6b9e27a07422f709d0fee3869f47ced0fec5d04b2f5e72bd5a909eacc3faf6a7",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXifyAI Cloud v12.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXifyAI Cloud v12.dc.html",
+      "sha256_snapshot": "856953ed9d3a97830505801f4f69c7d07e64e129dcb914faf38759323cd0446f",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXifyAI-Local-SEO-Muster.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXifyAI-Local-SEO-Muster.dc.html",
+      "sha256_snapshot": "e47b11ef67576d56a1a09378886b8eeba31a6cb205340d61bff867f81b6d39f8",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/NeXifyAI-Wissenshub-Artikel.dc.html",
+      "path": "reference/handoff-n2/prototypen/NeXifyAI-Wissenshub-Artikel.dc.html",
+      "sha256_snapshot": "6fb498be3a871245d5285746e3bb00369553d70437ef7f96a0203b533ba21f30",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Partner-Broschuere.dc.html",
+      "path": "reference/handoff-n2/prototypen/Partner-Broschuere.dc.html",
+      "sha256_snapshot": "6d3d033a703138c75d8e634c93a084cbd3aed018f8c629fbdbbd069beec351c1",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Partner-PowerPoint Werkstatt.dc.html",
+      "path": "reference/handoff-n2/prototypen/Partner-PowerPoint Werkstatt.dc.html",
+      "sha256_snapshot": "60ccba1ba9c5b74e93b7f7e3d7edf627644e7f1afb07657dcf4e32dcca58763f",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Partner-werden.dc.html",
+      "path": "reference/handoff-n2/prototypen/Partner-werden.dc.html",
+      "sha256_snapshot": "40f75e3c8d605eb100497176ebd4edab8dc76e9ce56f058225e1976a3c0b6b33",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Partnerportal.dc.html",
+      "path": "reference/handoff-n2/prototypen/Partnerportal.dc.html",
+      "sha256_snapshot": "8ce280b9937db3ae52f2151d42a3bd32f710864bf681385e0b0a3d986c61d7fd",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Rechtliches.dc.html",
+      "path": "reference/handoff-n2/prototypen/Rechtliches.dc.html",
+      "sha256_snapshot": "2d08928c1bf503aca9ff5c57bc12dd26e68e4ed300ed81389a1fe746a68fa946",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Reifenrechner.dc.html",
+      "path": "reference/handoff-n2/prototypen/Reifenrechner.dc.html",
+      "sha256_snapshot": "2e662f14b8831f9c7688abc3f1e9aa79142902e445b98aa2955cf20099281c19",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/TEILEKLAR Shop.dc.html",
+      "path": "reference/handoff-n2/prototypen/TEILEKLAR Shop.dc.html",
+      "sha256_snapshot": "7b7b31f1cfd64213c2fca2c967fe3bdb2e935cd5d8bc65d6456bd1daeb998480",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Visitenkarte-Pascal-Courbois.dc.html",
+      "path": "reference/handoff-n2/prototypen/Visitenkarte-Pascal-Courbois.dc.html",
+      "sha256_snapshot": "46ac38830022a11eccc1be407580154ed56375d55fbdb76952af23a24368dd67",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/Werkstatt-Partnerseite.dc.html",
+      "path": "reference/handoff-n2/prototypen/Werkstatt-Partnerseite.dc.html",
+      "sha256_snapshot": "0d937eb761d30ed0f646574da06f8bd803bf95adb8bbb8ea655b650b47699700",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/index.html",
+      "path": "reference/handoff-n2/prototypen/index.html",
+      "sha256_snapshot": "394ed850d8d3a9658d743bbca657814cbd285e5a1e0e48afe590d376d41e2e48",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    },
+    {
+      "source_id": "N2:prototypen/myADMIN v2.dc.html",
+      "path": "reference/handoff-n2/prototypen/myADMIN v2.dc.html",
+      "sha256_snapshot": "8b03feb76b04cfac986b84e63ff20353c0080084b59e639ac215f96b808753f0",
+      "status": "reference_or_entry_markup_not_complete_inference_review",
+      "runtime_membership_inferred": false
+    }
+  ],
+  "migration": {
+    "policy_source": "config/ai-migration-policy.json",
+    "default": "audit_shadow_existing_runtime_unchanged",
+    "new_guards_not_wired_into_legacy": true,
+    "existing_jobs_or_Codex_CLI_or_customer_work_stopped_by_this_inventory": false,
+    "legacy_callsite_restore_count": 17,
+    "actual_runtime_cutover_performed": false,
+    "new_managed_adapters_keep_their_own_guards": true
+  },
+  "unavailable_external_systems": [
+    {
+      "system": "ChatGPT host assistant runtime",
+      "status": "outside_repository_control",
+      "owner": "host_operator",
+      "next_action": "Do not claim repository files switch or server-enforce its model; use only actual host-provided capabilities."
+    },
+    {
+      "system": "Existing Codex/Claude CLI and unknown external nx-jeff runtimes",
+      "status": "runtime_identity_provider_contract_and_global_config_not_read",
+      "owner": "D06/D08",
+      "next_action": "Preserve existing work; inventory the actual owned runtime/adapter without reading auth stores, then apply staged migration contract."
+    },
+    {
+      "system": "Four reported servers / LightRAG / Cognee private processing",
+      "status": "no_complete_remote_inventory_or_verified_adapter_contract",
+      "owner": "D06/D08",
+      "next_action": "Maintain owner-bound remediation records; verify each authorized source, tenant, version, provider/funding and exact readback before cutover."
+    }
+  ],
+  "coverage_limits": [
+    "All fixed-root lexical candidates at this snapshot are registered; this is not proof of every possible direct or indirect model call.",
+    "Aliases, dynamically selected subprocesses/endpoints, external libraries, public/generated/vendor code and remote services can evade a finite source heuristic.",
+    "No original customer A1 repository or private ChatGPT/Codex credential store was read.",
+    "Instruction/configuration hashes are documentary snapshots, not guard-pinned runtime enforcement.",
+    "No paid inference, remote agent launch, server migration, model host change or global stop was performed.",
+    "Legacy unverified paths remain available by explicit current user instruction until their reviewed per-runtime cutover; no false enforced label."
+  ],
+  "source_graph": [
+    {
+      "from": "apps/web/components/Workspace.tsx",
+      "to": [
+        "api/agent-chat.ts",
+        "api/agent-runtime-status.ts",
+        "apps/agent-gateway/server.py"
+      ],
+      "status": "endpoint depends on actual deployment/local proxy; no live inference claim"
+    },
+    {
+      "from": "api/agent-chat.ts",
+      "to": [
+        "packages/agent-runtime/public-orientation.ts"
+      ],
+      "status": "deterministic no model"
+    },
+    {
+      "from": "api/agent-runtime-status.ts",
+      "to": [
+        "packages/agent-runtime/preview-access.ts"
+      ],
+      "status": "metadata only"
+    },
+    {
+      "from": ".github/workflows/ai-review.yml",
+      "to": [
+        "tools/automation/ai_review.py"
+      ],
+      "status": "new managed advisory review guard; no paid call executed here"
+    },
+    {
+      "from": "tools/chat-auftrag-adapter.mjs",
+      "to": [
+        "tools/orchestrierung-server.mjs",
+        "tools/auftrag.mjs"
+      ],
+      "status": "existing external/legacy runtime contract unverified"
+    },
+    {
+      "from": "tools/docs-aktualisieren.mjs",
+      "to": [
+        "external nx-jeff"
+      ],
+      "status": "indirect launcher through run(cmd,args), unmigrated"
+    },
+    {
+      "from": "tools/einbringen.mjs",
+      "to": [
+        "tools/docs-aktualisieren.mjs",
+        "tools/wissen-speisen.mjs",
+        "external nx-jeff"
+      ],
+      "status": "indirect orchestration/indexing, unmigrated"
+    }
+  ],
+  "summary": {
+    "registered_owned_sources": 52,
+    "status_counts": {
+      "source_enforced": 3,
+      "deterministic_no_model": 10,
+      "metadata_only_no_inference": 4,
+      "unverified_legacy_egress": 25,
+      "external_unverified": 2,
+      "reviewed_false_positive": 6,
+      "declaration_only": 2
+    },
+    "confirmed_legacy_oracle_launcher_source_files": 15,
+    "remote_runtime_completeness_claimed": false,
+    "all_AI_paths_enforced_claimed": false,
+    "runtime_model_calls_performed": 0,
+    "transition_mode": "audit_shadow"
+  },
+  "last_scoped_review_at": "2026-10-26T15:20:50.647288+00:00",
+  "last_scoped_review_note": "Exactly two approved source SHA updates after independent review; no automatic refresh or legacy/runtime change. New capacity sources were scanned without new AI candidates."
+}

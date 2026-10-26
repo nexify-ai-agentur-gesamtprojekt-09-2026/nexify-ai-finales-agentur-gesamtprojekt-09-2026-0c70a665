@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "status": "official_docs_and_readonly_account_metadata_not_live_inference_proof",
+  "observed_at": "2026-10-26T13:31:32.920049+00:00",
+  "scope": {
+    "user_direction": "Website pre-sales live AI is explicitly requested; managed LLMs use exact DeepSeek1017 high. Self-service no-free-LLM/500-cent/BYOK rules are a separate scope.",
+    "model_policy_changed_by_this_review": false,
+    "secret_values_read_or_output": false,
+    "paid_calls": 0,
+    "keys_created_or_revoked": false,
+    "budget_or_billing_mutations": false,
+    "plan_or_credit_topup_activated": false,
+    "project_deployment_performed": false
+  },
+  "model": {
+    "exact_id": "deepseek/deepseek-v4.1-flash-1017",
+    "reasoning_required": "high",
+    "catalog_context_window": 1048576,
+    "catalog_supported_parameters": [
+      "max_tokens",
+      "temperature",
+      "stop",
+      "tools",
+      "tool_choice",
+      "reasoning",
+      "include_reasoning",
+      "response_format",
+      "structured_outputs"
+    ],
+    "catalog_reasoning_options": [
+      {
+        "type": "toggle"
+      },
+      {
+        "type": "effort",
+        "values": [
+          "none",
+          "low",
+          "high",
+          "max"
+        ]
+      }
+    ],
+    "catalog_regions": [
+      "us"
+    ],
+    "catalog_pricing": {
+      "input": "0.000000075",
+      "output": "0.0000003",
+      "input_cache_read": "0.0000000015",
+      "peak_pricing": {
+        "multiplier": 2,
+        "windows": [
+          {
+            "start_minute_utc": 60,
+            "end_minute_utc": 240,
+            "days_of_week": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "start_minute_utc": 360,
+            "end_minute_utc": 600,
+            "days_of_week": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      },
+      "varies_by_provider": true,
+      "fast": {
+        "input": "0.0000006",
+        "output": "0.0000024",
+        "input_cache_read": "0.000000014"
+      },
+      "regional": {
+        "us": {
+          "input": "0.00000045",
+          "output": "0.0000018",
+          "input_cache_read": "0.000000009"
+        }
+      }
+    },
+    "catalog_only_not_live_verified": true,
+    "eu_processing_claim_supported": false,
+    "base_price_is_not_a_conservative_ceiling": true,
+    "unknowns": [
+      "Free-tier eligibility for this exact model/account is not proven by its catalog presence.",
+      "Current credit balance, funded entitlement and successful inference were not queried.",
+      "Portable AI7 reasoning high and SDK JSON forwarding are statically source-confirmed; actual server acceptance/high execution is not exercised here."
+    ]
+  },
+  "auth_routes": [
+    {
+      "id": "vercel-project-oidc",
+      "additional_model_api_key_required": false,
+      "documented": true,
+      "prerequisites": [
+        "Linked selected Vercel project/team",
+        "Valid current Vercel project OIDC token at runtime or correctly provisioned local development token",
+        "Gateway entitlement/credits appropriate for exact model",
+        "Verified matched budget scope"
+      ],
+      "sdk_behavior": "AI SDK falls back to OIDC when AI_GATEWAY_API_KEY is not set. A configured API key can change the budget scope; do not assume a project budget still covers it.",
+      "token_refresh": "Local tokens are documented as valid12h; env pull refreshes but can write other secrets, so not executed here. Current doc references getVercelOidcToken from @vercel/oidc for request-time refresh.",
+      "budget_scope": [
+        "team",
+        "project"
+      ],
+      "runtime_binding_verified_by_this_review": false
+    },
+    {
+      "id": "gateway-api-key",
+      "additional_model_api_key_required": true,
+      "documented": true,
+      "budget_scope": [
+        "team",
+        "api-key",
+        "user when member-attributed"
+      ],
+      "project_budget_applies": false,
+      "key_value_accessed": false
+    },
+    {
+      "id": "vercel-cli-controlplane",
+      "documented": true,
+      "observed_cli_version": "65.2.0",
+      "existing_login_readonly_budget_list_succeeded": true,
+      "grants_inference_funding_by_itself": false,
+      "creates_runtime_oidc_binding_by_itself": false,
+      "note": "Docs also list personal/app tokens under team budget scope; CLI login is not automatically an application runtime credential."
+    }
+  ],
+  "gateway_budgets": {
+    "documented_type": "soft_cap_not_hard_limit",
+    "check_time": "Before each request; crossing request still completes, so overrun is possible.",
+    "failure_after_exceeded": {
+      "http_status": 402,
+      "type": "quota_for_entity_exceeded"
+    },
+    "unset_budget": "unlimited for that scope",
+    "stacking": "Every applicable scope must pass. OIDC deployment: team+project. API key: team+key+user if member-attributed.",
+    "refresh_periods": [
+      "daily",
+      "weekly",
+      "monthly",
+      "none"
+    ],
+    "minimum_documented_limit_usd": 1,
+    "new_limit_selected_by_this_review": null,
+    "set_commands_not_executed": [
+      "vercel ai-gateway budgets set project <PROJECT> --limit <APPROVED_USD> --refresh-period <PERIOD>",
+      "PUT https://api.vercel.com/ai-gateway/budgets?teamId=<TEAM_ID> with scopeType/projectId/limitAmount/refreshPeriod"
+    ],
+    "read_commands_executed": [
+      "vercel ai-gateway budgets list --json --limit 100",
+      "vercel ai-gateway budgets list --defaults --json"
+    ],
+    "read_api": "GET https://api.vercel.com/ai-gateway/budgets/list?teamId=<TEAM_ID>",
+    "roles": {
+      "view": "Every team role except Contributor",
+      "write_team_or_default": "Owner or AI Gateway Budget Manager",
+      "write_project": "Owner, Budget Manager or project admin",
+      "write_key": "Owner/Member with key-edit permission"
+    },
+    "current_observed": {
+      "status": "metadata_read",
+      "observed_at": "2026-10-26T13:24:40.220772+00:00",
+      "complete": true,
+      "pages": 1,
+      "budgets": [
+        {
+          "scopeType": "team",
+          "limitAmount": 100,
+          "currentSpend": 0.0527785,
+          "refreshPeriod": "monthly",
+          "scope_id_sha256": "3aa12673ae489214f7d9ffa00b20513bc68d375c578d5ea006b3f4c0c0f03728"
+        }
+      ],
+      "observed_not_created_or_raised_by_this_review": true
+    },
+    "current_default_observed": {
+      "status": "metadata_read",
+      "observed_at": "2026-10-26T13:27:19.639360+00:00",
+      "complete": true,
+      "defaults": []
+    },
+    "no_hard_invoice_ceiling_proven": true
+  },
+  "rate_limits": {
+    "free_tier": "Lower variable limit per model; numeric limits not published as stable values.",
+    "paid_tier": "No Gateway-imposed rate limit by default; upstream provider limits still apply, custom limits by arrangement.",
+    "failure_status": 429,
+    "not_a_spend_cap": true,
+    "app_public_visitor_rate_limiter_required": true
+  },
+  "platform_spend_management": {
+    "separate_from_gateway_budget": true,
+    "checks": "Every few minutes; production pause can lag by several minutes.",
+    "pause_scope": "All production projects in the team, with503until resumed; not a targeted model switch.",
+    "gateway_api_key_usage_stopped_by_pause": false,
+    "stored_resource_charges_stopped_by_pause": false,
+    "hard_no_overrun_guarantee": false,
+    "configured_by_this_review": false
+  },
+  "funding": {
+    "catalog_is_auth_or_funding_proof": false,
+    "positive_historical_spend_is_current_balance_proof": false,
+    "current_credit_balance_verified": false,
+    "exact_model_free_tier_verified": false,
+    "auto_topup_status_verified": false,
+    "default_auto_topup_documentation": "Disabled by default; enabling may automatically charge the saved payment method. Not enabled here.",
+    "documented_readonly_check": "Authenticated GET https://ai-gateway.vercel.sh/v1/credits returns remaining balance and lifetime spend; perform using authorized runtime binding, no inference necessary.",
+    "new_purchase_or_plan_activation_done": false
+  },
+  "safe_activation_preconditions": [
+    "Read current remaining credits and exact-model account eligibility through an authorized metadata path, without pretending catalog presence is funding.",
+    "Bind the actual runtime authentication mode and verify its effective budget; API-key fallback must not bypass an expected project budget.",
+    "Select an explicitly approved spend policy; this research does not set or invent one.",
+    "For a hard application admission cap, use durable atomic reservations across instances, bound all input/output/reasoning tokens and steps, cap concurrency/rate and reconcile ambiguous paid outcomes.",
+    "Use conservative server-approved prices including peak/provider/regional/fast modes or refuse unknown pricing; catalog base price alone is insufficient.",
+    "Disable automatic model retries and silent broker/model/credential fallbacks for the managed path as required by the central exact-model policy.",
+    "Keep website pre-sales managed AI distinct from self-service funding gates; never claim live model output before a real admitted provider response."
+  ],
+  "answer": {
+    "api_keyless_gateway_auth_supported": true,
+    "existing_cli_can_read_gateway_budget_metadata": true,
+    "documented_project_budget_controlplane_supported": true,
+    "official_gateway_budget_is_hard_cost_cap": false,
+    "existing_account_current_funding_proven_by_this_review": false,
+    "production_live_route_activated_by_this_review": false
+  },
+  "sources": [
+    {
+      "id": "gateway-oidc",
+      "requested_url": "https://vercel.com/docs/ai-gateway/authentication-and-byok/oidc.md",
+      "final_url": "https://vercel.com/docs/ai-gateway/authentication-and-byok/oidc.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 9134,
+      "sha256": "3bb788afc03d2ee39867b865c1749ab58fdec458ea679a482bbd41e0fdc8b5d0",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-oidc.raw",
+      "retrieved_at": "2026-10-26T13:21:11.447480+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "gateway-api-keys",
+      "requested_url": "https://vercel.com/docs/ai-gateway/authentication-and-byok/api-keys.md",
+      "final_url": "https://vercel.com/docs/ai-gateway/authentication-and-byok/api-keys.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 11167,
+      "sha256": "8d3e67f8bc441b1be34077e144c932e7190104f277a9c9a440f3f97bbcccfda4",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-api-keys.raw",
+      "retrieved_at": "2026-10-26T13:21:11.276077+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "gateway-budgets",
+      "requested_url": "https://vercel.com/docs/ai-gateway/observability-and-spend/budgets.md",
+      "final_url": "https://vercel.com/docs/ai-gateway/observability-and-spend/budgets.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 39129,
+      "sha256": "3e6ab1401f44ebac4e720e75aa3b384c9f6ad81bf65f36f2d823505786c4e9d0",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-budgets.raw",
+      "retrieved_at": "2026-10-26T13:21:11.391728+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "gateway-rate-limits",
+      "requested_url": "https://vercel.com/docs/ai-gateway/rate-limits.md",
+      "final_url": "https://vercel.com/docs/ai-gateway/rate-limits.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 8874,
+      "sha256": "46b6eec546ec034d29c72d5d55a5f42064f5bdeacdaa78bc29e4e46950d998b0",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-rate-limits.raw",
+      "retrieved_at": "2026-10-26T13:21:11.424170+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "gateway-pricing",
+      "requested_url": "https://vercel.com/docs/ai-gateway/pricing.md",
+      "final_url": "https://vercel.com/docs/ai-gateway/pricing.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 11100,
+      "sha256": "dd7bb6047c1c147374ba5ef371b232ab5ac29c697bfc731b1764e38d694cf3dc",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-pricing.raw",
+      "retrieved_at": "2026-10-26T13:21:11.449876+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "vercel-spend-management",
+      "requested_url": "https://vercel.com/docs/pricing/spend-management.md",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "review_status": "open_failed_url"
+    },
+    {
+      "id": "gateway-models",
+      "requested_url": "https://ai-gateway.vercel.sh/v1/models",
+      "final_url": "https://ai-gateway.vercel.sh/v1/models",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 543819,
+      "sha256": "28e21d04fae90b7fdd5fe38d53a2e9c8a15e0b395f4f461e9d8c84b7e5590f82",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-models.raw",
+      "retrieved_at": "2026-10-26T13:21:11.504555+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "vercel-oidc",
+      "requested_url": "https://vercel.com/docs/oidc.md",
+      "final_url": "https://vercel.com/docs/oidc.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 8320,
+      "sha256": "767bc86696ebd64704d7431678299f26c5f9e6f505882ab8c31f98d88b7d773e",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/vercel-oidc.raw",
+      "retrieved_at": "2026-10-26T13:21:11.764803+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "gateway-cli",
+      "requested_url": "https://vercel.com/docs/cli/ai-gateway.md",
+      "final_url": "https://vercel.com/docs/cli/ai-gateway.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 55523,
+      "sha256": "17a5fa2c5f98a3a90504b8fd9a563fbe07d66e1454b14718749bd79a04bd42ef",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-cli.raw",
+      "retrieved_at": "2026-10-26T13:23:50.507865+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "gateway-usage",
+      "requested_url": "https://vercel.com/docs/ai-gateway/observability-and-spend/usage.md",
+      "final_url": "https://vercel.com/docs/ai-gateway/observability-and-spend/usage.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 7381,
+      "sha256": "9794d7dc1f9b90f9b86880fbdcd157268cc05702975a0d613a3f6e47ed2139f0",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/gateway-usage.raw",
+      "retrieved_at": "2026-10-26T13:23:50.492045+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "vercel-budgets-cli",
+      "requested_url": "https://vercel.com/docs/cli/budgets.md",
+      "final_url": "https://vercel.com/docs/cli/budgets.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 9780,
+      "sha256": "c673ea829a32c47a7b1e70542eb1b868398a508d8348008d5299da65693222ef",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/vercel-budgets-cli.raw",
+      "retrieved_at": "2026-10-26T13:23:50.667087+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "vercel-spend-management-correct",
+      "requested_url": "https://vercel.com/docs/pricing/spend-management.md",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "review_status": "open_failed_url"
+    },
+    {
+      "id": "vercel-spend-management-indexed",
+      "requested_url": "https://vercel.com/docs/spend-management.md",
+      "final_url": "https://vercel.com/docs/spend-management.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 15431,
+      "sha256": "06dacdf505642c30bb09791682fb4d5843de7e31ae50086da5e764656149d12e",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/vercel-live-access/vercel-spend-management-indexed.raw",
+      "retrieved_at": "2026-10-26T13:26:58.279795+00:00",
+      "review_status": "relevant_sections_reviewed"
+    },
+    {
+      "id": "ai7-reasoning-guide",
+      "url": "https://ai-sdk.dev/docs/ai-sdk-core/reasoning",
+      "retrieval": "Excerpt extracted from the already retrieved official AI SDK bulk; no new HTTP status claimed.",
+      "parent_source": "/workspace/.onboarding/vercel-research/ai-sdk-docs-index.raw",
+      "parent_sha256": "1fc84145839a569c6c0e81129014a955ead278fa58276c5c53a43279dab49769",
+      "path": "/workspace/.onboarding/vercel-live-access/ai7-reasoning-guide.md",
+      "sha256": "c4e985b8c43aee8c14666196a43620cb2e3e3bbb5756a41ac09c7eeea0d36044",
+      "bytes": 7816,
+      "readback_exact": true,
+      "review_status": "reasoning guide/targeted API contract examined"
+    },
+    {
+      "id": "ai7-streamtext-reference",
+      "url": "https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text",
+      "retrieval": "Excerpt extracted from the already retrieved official AI SDK bulk; no new HTTP status claimed.",
+      "parent_source": "/workspace/.onboarding/vercel-research/ai-sdk-docs-index.raw",
+      "parent_sha256": "1fc84145839a569c6c0e81129014a955ead278fa58276c5c53a43279dab49769",
+      "path": "/workspace/.onboarding/vercel-live-access/ai7-streamtext-reference.md",
+      "sha256": "f52c6643c5017d7bb375a1caf9cd89926500240f933912354544041a2c5b868c",
+      "bytes": 89452,
+      "readback_exact": true,
+      "review_status": "reasoning guide/targeted API contract examined"
+    },
+    {
+      "id": "gateway-installed-js",
+      "retrieval": "Read-only installed package source, no module import or execution.",
+      "package": "@ai-sdk/gateway",
+      "version": "4.0.126",
+      "original_path": "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/node_modules/.pnpm/@ai-sdk+gateway@4.0.126_zod@4.6.7/node_modules/@ai-sdk/gateway/dist/index.js",
+      "path": "/workspace/.onboarding/vercel-live-access/gateway-installed-js.js",
+      "sha256": "b68027695b1bce57543853a7eeb97791b4e64747f15bb1338b4ad75822b0cf7f",
+      "bytes": 130993,
+      "readback_exact": true,
+      "reviewed_symbols": [
+        "GatewayLanguageModel.getArgs",
+        "GatewayLanguageModel.getModelConfigHeaders",
+        "GatewayLanguageModel.doGenerate/doStream",
+        "GatewayFetchMetadata.getCredits",
+        "gatewayCreditsResponseSchema"
+      ]
+    },
+    {
+      "id": "gateway-installed-types",
+      "retrieval": "Read-only installed package source, no module import or execution.",
+      "package": "@ai-sdk/gateway",
+      "version": "4.0.126",
+      "original_path": "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/node_modules/.pnpm/@ai-sdk+gateway@4.0.126_zod@4.6.7/node_modules/@ai-sdk/gateway/dist/index.d.ts",
+      "path": "/workspace/.onboarding/vercel-live-access/gateway-installed-types.ts",
+      "sha256": "8e5585efb23f292304e0cd8e96e1b86617bce74f5c7c8b6760a52b6b0360c056",
+      "bytes": 73426,
+      "readback_exact": true,
+      "reviewed_symbols": [
+        "GatewayLanguageModel.getArgs",
+        "GatewayLanguageModel.getModelConfigHeaders",
+        "GatewayLanguageModel.doGenerate/doStream",
+        "GatewayFetchMetadata.getCredits",
+        "gatewayCreditsResponseSchema"
+      ]
+    }
+  ],
+  "local_metadata_evidence": [
+    {
+      "path": "/workspace/.onboarding/vercel-live-access/current-budget-metadata.json",
+      "sha256": "f3c384803b161e94350fa5c2f9a01f90656cfb795d60093cf52870976420f396",
+      "bytes": 538,
+      "exact_readback": true,
+      "contains": "Sanitized read-only budget metadata, no credential values."
+    },
+    {
+      "path": "/workspace/.onboarding/vercel-live-access/current-default-budget-metadata.json",
+      "sha256": "9d488a8b54d57b9c9418259bb948f354a768ff282fa80e4034e7962c927619a8",
+      "bytes": 222,
+      "exact_readback": true,
+      "contains": "Sanitized read-only budget metadata, no credential values."
+    },
+    {
+      "path": "/workspace/.onboarding/vercel-live-access/current-default-budget-recheck.json",
+      "sha256": "4196d71f5944db1a42ab76fd037e5fbdf8b8a4441810169858ba1c36619e1946",
+      "bytes": 300,
+      "exact_readback": true,
+      "contains": "Sanitized read-only budget metadata, no credential values."
+    }
+  ],
+  "sdk7_gateway_reasoning_contract": {
+    "api": "generateText/streamText/ToolLoopAgent portable reasoning",
+    "setting": {
+      "reasoning": "high"
+    },
+    "provider_options_namespace_required_for_this_setting": null,
+    "official_guide": "https://ai-sdk.dev/docs/ai-sdk-core/reasoning",
+    "sdk_wire": {
+      "package": "@ai-sdk/gateway@4.0.126",
+      "method": "POST",
+      "default_endpoint": "https://ai-gateway.vercel.sh/v4/ai/language-model",
+      "model_id_header": {
+        "ai-language-model-id": "deepseek/deepseek-v4.1-flash-1017",
+        "ai-language-model-specification-version": "4"
+      },
+      "body_field": {
+        "reasoning": "high"
+      },
+      "source_behavior": "getArgs removes abortSignal then serializes remaining V4 call options, including reasoning, as JSON body; no guessed OpenRouter-style providerOptions mapping is needed."
+    },
+    "provider_specific_precedence": "Provider-specific corresponding settings can override portable reasoning; managed route must not accept conflicting untrusted options. Unsupported reasoning can be warned/ignored; require failclosed contract checks.",
+    "static_source_contract_verified": true,
+    "sdk_mock_wire_test_performed_by_this_review": false,
+    "real_gateway_inference_performed": false
+  },
+  "readonly_credits_contract": {
+    "supported_without_model_api_key": true,
+    "credential_requirement": "Valid project OIDC or Gateway API key; Vercel PAT/app token support for model requests does not establish getCredits helper support.",
+    "sdk_call": "await gateway.getCredits()",
+    "http_call": "GET https://ai-gateway.vercel.sh/v1/credits",
+    "sdk_4_0_126_response": {
+      "balance": "decimal string",
+      "totalUsed": "decimal string"
+    },
+    "rest_response": {
+      "balance": "decimal string",
+      "total_used": "decimal string"
+    },
+    "documentation_drift": "Provider text examples sometimes show number or total_used directly; installed schema/type returns string balance/totalUsed. Validate against the pinned package.",
+    "no_inference_required": true,
+    "executed_by_this_review": false,
+    "can_prove": "Remaining team credit balance at observation time and prior usage if authorized request succeeds.",
+    "cannot_prove": "Successful exact-model inference, current model-specific entitlement, valid high interpretation, fixed future prices or hard invoice cap.",
+    "guarded_preview_option": "Owner-authorized nonpublic preview GET may call getCredits with runtime project OIDC and return only bounded funding/capability metadata; deployment identity is not end-user owner authorization.",
+    "entitlement_read_endpoint_confirmed": false
+  },
+  "parent_reported_environment_metadata": {
+    "OPENROUTER_API_KEY_present": false,
+    "AI_GATEWAY_API_KEY_present": false,
+    "source": "Parent agent report of Vercel environment-name metadata; no values accessed by this reviewer.",
+    "independently_queried_by_this_review": false
+  }
+}

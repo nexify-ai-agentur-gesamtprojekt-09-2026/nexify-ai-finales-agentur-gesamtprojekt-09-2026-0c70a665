@@ -4,7 +4,7 @@ import "./WorkspaceRebuild.css";
 import SiteNavigation from "./SiteNavigation";
 import SiteFooter from "./SiteFooter";
 import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceCapabilities";
-import { createContext, useContext, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import {lazy,Suspense, createContext, useContext, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
@@ -14,6 +14,7 @@ type Message = {role:"user"|"assistant"; text?:string; intent?:Intent};
 type Quote = {id:string;title:string;details:string;download_url:string};
 type Slot = {id:string;starts:string;source:string};
 type Booking = {id:string;starts:string;confirmed:boolean};
+const PublicOrientationChat=lazy(()=>import("./PublicOrientationChat"));
 const intents: Intent[] = ["quote", "booking", "marketing"];
 const UIContext=createContext({locale:"de" as Locale,t:translations.de});
 export const useUI=()=>useContext(UIContext);
@@ -29,6 +30,8 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
   const [open,setOpen] = useState(true);
   const [mobile,setMobile]=useState(false);
   const [ready,setReady] = useState(false);
+  const [chatMode,setChatMode]=useState<"workspace"|"orientation">("workspace");
+  const [orientationLoaded,setOrientationLoaded]=useState(false);
   const [capabilities,setCapabilities]=useState<WorkspaceCapabilities|null>(null);
   const [quoteView,setQuoteView]=useState<"details"|"preview">("preview");
   const [messages,setMessages] = useState<Message[]>([]);
@@ -50,6 +53,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
   const pathname=useSitePathname();
   const site=pathname.startsWith("/teileklar")?"teileklar":"nexify";
   const currentPage=pages.find(page=>page.path===pathname);
+  const standalone=typeof window!=="undefined"&&(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
   const canQuote=ready&&capabilities?.quote_pdf===true;
   const canOutbox=ready&&capabilities?.pending_outbox===true;
   const canBook=ready&&capabilities?.booking_request===true;
@@ -70,7 +74,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
       setMessages(session.history.map((entry:{role:"user"|"assistant";body:string}) => entry.role==="user" ? {role:"user",text:entry.body} : {role:"assistant",intent:JSON.parse(entry.body).intent}));
       if(session.workspace?.quotes?.length)setQuote(session.workspace.quotes.at(-1));
       setReady(true);
-    }).catch(() => setError("offline"));
+    }).catch(() => {setError("offline");setOrientationLoaded(true);setChatMode("orientation");});
     return()=>query.removeEventListener("change",resized);
   },[]);
   useEffect(()=>{document.body.classList.toggle("chat-modal-open",mobile&&open);if(mobile&&open)closeButton.current?.focus();return()=>document.body.classList.remove("chat-modal-open");},[mobile,open]);
@@ -78,7 +82,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
   useEffect(() => {document.documentElement.lang=locale;try{localStorage.setItem("nexify-locale",locale);}catch{}},[locale]);
   useEffect(() => {chatEnd.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,intent,quote,booking,marketing]);
   useEffect(() => {
-    const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(intents.includes(selected)){setOpen(true);setIntent(selected);}};
+    const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(intents.includes(selected)){setOpen(true);setIntent(selected);setChatMode("workspace");}};
     window.addEventListener("nexify-action",handler);return()=>window.removeEventListener("nexify-action",handler);
   },[]);
   useEffect(() => {
@@ -118,8 +122,10 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
     <aside id="aifly-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>
       <div className="panel-heading"><span className="aifly-symbol" aria-hidden="true">N</span><div><h2>{t.assistant}</h2><p>{t.subtitle}</p></div><button ref={closeButton} className="icon-button" aria-label={t.close} onClick={closePanel}>×</button></div>
-      <div className="panel-connection" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{ready?(locale==="de"?"Entwurfswerkzeuge verbunden":locale==="nl"?"Concepttools verbonden":"Outils de projet connectés"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":"Aperçu · connexion en attente")}</div>
-      <div className="conversation" aria-label={t.history}>
+      <div className="panel-connection" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Textgeführte Orientierung":locale==="nl"?"Tekstgestuurde oriëntatie":"Guide textuel"):ready?(locale==="de"?"Entwurfswerkzeuge verbunden":locale==="nl"?"Concepttools verbonden":"Outils de projet connectés"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":"Aperçu · connexion en attente")}</div>
+      {!standalone&&currentPage&&<div className="workspace-chat-modes" role="group" aria-label={locale==="de"?"Arbeitsbereich wählen":locale==="nl"?"Werkruimte kiezen":"Choisir un espace"}><button type="button" aria-pressed={chatMode==="orientation"} onClick={()=>{setOrientationLoaded(true);setChatMode("orientation");}}>{locale==="de"?"Orientierung":locale==="nl"?"Oriëntatie":"Orientation"}</button><button type="button" aria-pressed={chatMode==="workspace"} onClick={()=>setChatMode("workspace")}>{locale==="de"?"Entwurfswerkzeuge":locale==="nl"?"Concepttools":"Outils de projet"}</button></div>}
+      {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"Orientierung wird geladen …":locale==="nl"?"Oriëntatie wordt geladen …":"Chargement du guide…"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages}/></Suspense></div>}
+      <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&Boolean(currentPage)}>
         <div className="panel-page-context">{locale==="de"?"Hier bist du":locale==="nl"?"Je bent hier":"Tu es ici"}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>
         <div className="welcome-card"><span className="eyebrow">{site==="teileklar"?"TEILEKLAR":"NEXIFY AI"}</span><p>{t.welcome}</p><div className="action-options">{intents.map(action=><button key={action} className="action-option" disabled={busy} onClick={()=>setIntent(action)}><span><ActionGlyph intent={action}/></span>{t[action]}<span aria-hidden="true">→</span></button>)}</div></div>
         <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?"AIFly":locale==="de"?"Du":locale==="nl"?"U":"Vous"}</span><p>{message.role==="user"?message.text:reply(message.intent)}</p></div>)}</div>
@@ -132,7 +138,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
         {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="offline"?t.offline:t.error}</p>}
         <div ref={chatEnd}/>
       </div>
-      <div className="composer-area"><form className="composer" onSubmit={submitMessage}><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/><div className="composer-bottom"><span>{busy?t.working:"NeX · AIFly"}</span><button className="send-button" aria-label={t.send} disabled={!ready||busy}>↑</button></div></form><p className="connection-note">{ready?t.localStatus:t.offline}</p></div>
+      <div className="composer-area" hidden={chatMode!=="workspace"&&Boolean(currentPage)}><form className="composer" onSubmit={submitMessage}><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/><div className="composer-bottom"><span>{busy?t.working:"NeX · AIFly"}</span><button className="send-button" aria-label={t.send} disabled={!ready||busy}>↑</button></div></form><p className="connection-note">{ready?t.localStatus:t.offline}</p></div>
     </aside>
   </div></UIContext.Provider>;
 }

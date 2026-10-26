@@ -1,0 +1,863 @@
+{
+  "schema_version": 1,
+  "status": "source_research_complete_metrics_and_ingestion_not_executed",
+  "as_of_utc": "2026-10-26T14:07:16.232449+00:00",
+  "scope": {
+    "owned_files": [
+      "docs/research/keyword-local-seo-sources.md",
+      "config/research/keyword-local-seo-sources.json"
+    ],
+    "countries": [
+      "DE",
+      "AT",
+      "CH",
+      "NL",
+      "BE"
+    ],
+    "officially_active_countries": null,
+    "primary_target": {
+      "country": "DE",
+      "share_percent": 90,
+      "kind": "user_business_goal_not_analytics"
+    },
+    "operator_context": "NL; does not prove every candidate country is legally activated",
+    "published_copy": false,
+    "geo_campaign_started": false,
+    "paid_calls": 0,
+    "account_creation": false,
+    "indexing_requested": false
+  },
+  "metrics_access": {
+    "relevant_exposed_authenticated_tools": [],
+    "live_provider_calls": 0,
+    "authorized_google_customer_verified": false,
+    "top10_status": "not_ranked_missing_authorized_comparable_metrics",
+    "main_keywords": [],
+    "secondary_keywords": [],
+    "monthly_volume": null,
+    "missing_is_zero": false,
+    "available_without_account": [
+      "official docs and geo-target reference catalog",
+      "licensed public locality downloads and metadata"
+    ],
+    "not_obtained": [
+      "Google Ads historical keyword metrics",
+      "licensed third-party keyword-volume export",
+      "global exact search counts"
+    ],
+    "access_routes": [
+      "Existing authorized Google Ads customer + eligible Google Cloud API project + appropriate OAuth; verify current access-level/permissible-use/quota requirements without creating spend",
+      "Owner-provided original Keyword Planner export with geography, language, network, months, variant grouping and source metadata",
+      "Separately authorized licensed third-party provider; verify allowed reuse and metrics definition before purchase"
+    ]
+  },
+  "findings": [
+    {
+      "id": "estimated-not-exact",
+      "source_ids": [
+        "google-metrics-type",
+        "google-monthly-type",
+        "google-keyword-help"
+      ],
+      "finding": "Monthly volumes are approximate and rounded; a null monthly_searches is unavailable, not zero. avg_monthly_searches is a twelve-month average, not a specific calendar month."
+    },
+    {
+      "id": "variant-groups",
+      "source_ids": [
+        "google-request-type",
+        "google-historical-guide"
+      ],
+      "finding": "Near-exact deduplication can omit requested inputs; preserve response text + close_variants; never sum variants as disjoint traffic."
+    },
+    {
+      "id": "explicit-targeting",
+      "source_ids": [
+        "google-request-type"
+      ],
+      "finding": "Maximum10000 keywords and10 geo targets per request; empty geography may mean global, unset network defaults Google Search And Partners, unset language includes all keywords."
+    },
+    {
+      "id": "historical-window",
+      "source_ids": [
+        "google-historical-options"
+      ],
+      "finding": "Default past12months; up to past4years may be requested; only available subset may return. Store requested and actual months."
+    },
+    {
+      "id": "access-doc-drift",
+      "source_ids": [
+        "google-access-token",
+        "google-auth"
+      ],
+      "finding": "Developer-token page describes September9,2026 transfer of access levels to Cloud projects and API Center deprecation; OAuth page still says developer token required. Do not create an account or assume a new-manager-token workflow from older guidance."
+    },
+    {
+      "id": "local-page-policy",
+      "source_ids": [
+        "google-spam-policies"
+      ],
+      "finding": "City/regional doorway funnels and scaled low-value pages violate Google policy; imported locality records are not publication authorization."
+    },
+    {
+      "id": "rendering",
+      "source_ids": [
+        "google-js-seo",
+        "vercel-vite",
+        "vercel-vite-nitro"
+      ],
+      "finding": "Google renders JS but recommends server-side/prerendered content. SPA rewrite to index.html solves deep links, not per-URL SEO HTML; Vercel recommends production Multi-Page App and documents Nitro SSR/prerendering."
+    },
+    {
+      "id": "truthful-schema",
+      "source_ids": [
+        "google-structured-data"
+      ],
+      "finding": "Structured data must reflect visible truthful content; passing a syntax test does not guarantee rich results or justify invented local offices."
+    }
+  ],
+  "countries": [
+    {
+      "country": "DE",
+      "market_status": "user_listed_candidate_not_legally_confirmed",
+      "official_source_scope": "Destatis GV-ISys: administrative municipalities / independent municipalities; city list available separately",
+      "source_ids": [
+        "de-destatis-gemeinden",
+        "de-current-gv",
+        "de-gv-xlsx",
+        "de-copyright-actual"
+      ],
+      "license_basis": "Destatis standard-publication reuse terms: commercial/noncommercial, attribution, modifications identified, product exceptions apply; not relabelled DL-DE-BY",
+      "coverage_limit": "Municipalities are not all settlements or districts. XLSX structure/shared strings inspected; municipality-only row extraction and city-status interpretation not implemented.",
+      "access": "public_anonymous_read_verified",
+      "bulk_payload": true,
+      "locality_record_count": null,
+      "city_completeness_certified": false,
+      "publication_enabled": false
+    },
+    {
+      "country": "AT",
+      "market_status": "user_listed_candidate_not_legally_confirmed",
+      "official_source_scope": "Statistik Austria: municipality and Ortschaft register; separate Ortschaft coordinate dataset",
+      "source_ids": [
+        "at-regional",
+        "at-reglisten",
+        "at-terms",
+        "at-ort-metadata"
+      ],
+      "license_basis": "Register: Statistik Austria copyright permission with attribution and change notice. Separate Ortschaft OGD metadata explicitly CC BY4.0. Do not transfer one license to the other.",
+      "coverage_limit": "reglisten.zip ortsliste.csv and gemliste_knz.csv read. Territory2026, file creation22.10.2026. Ortschafts are not identical to municipalities or continuous settlement units.",
+      "access": "public_anonymous_read_verified",
+      "bulk_payload": true,
+      "locality_record_count": null,
+      "city_completeness_certified": false,
+      "publication_enabled": false
+    },
+    {
+      "country": "CH",
+      "market_status": "user_listed_candidate_not_legally_confirmed",
+      "official_source_scope": "swisstopo swissNAMES3D named features for Switzerland and Liechtenstein",
+      "source_ids": [
+        "ch-names-stac",
+        "ch-ogd-terms"
+      ],
+      "license_basis": "STAC literal license=proprietary; linked swisstopo OGD terms explicitly allow commercial use/distribution/adaptation with source attribution. Preserve both facts.",
+      "coverage_limit": "Includes mountains/field names and other nonsettlement objects. Dataset-specific category schema and CH-only filtering required; no bulk names read, no all-cities certificate. Liechtenstein not implicitly activated.",
+      "access": "public_anonymous_read_verified",
+      "bulk_payload": false,
+      "locality_record_count": null,
+      "city_completeness_certified": false,
+      "publication_enabled": false
+    },
+    {
+      "country": "NL",
+      "market_status": "user_listed_candidate_not_legally_confirmed",
+      "official_source_scope": "Kadaster BAG via PDOK woonplaats collection",
+      "source_ids": [
+        "nl-pdok-bag",
+        "nl-bag-landing",
+        "nl-woonplaats",
+        "nl-woonplaats-sample"
+      ],
+      "license_basis": "API landing rel=license Public Domain Mark1.0; not CC0 and not assumed from another dataset.",
+      "coverage_limit": "Woonplaats: municipality-designated named land area; not the municipality and not proof of legal city status. Only one-feature sample read; full pagination/status and identifier validation still required.",
+      "access": "public_anonymous_read_verified",
+      "bulk_payload": false,
+      "locality_record_count": null,
+      "city_completeness_certified": false,
+      "publication_enabled": false
+    },
+    {
+      "country": "BE",
+      "market_status": "user_listed_candidate_not_legally_confirmed",
+      "official_source_scope": "Statbel REFNIS municipality and administrative reference codes; NIS6 and NIS9 separately linked",
+      "source_ids": [
+        "be-geografie",
+        "be-refnis-csv",
+        "be-disclaimer"
+      ],
+      "license_basis": "Official site footer CC BY4.0. Dataset download has no separate license statement observed; retain attribution and check dataset exceptions before ingestion.",
+      "coverage_limit": "REFNIS2025 public CSV includes kingdom/regions/districts/municipalities: cannot treat every row as town. NIS6 submunicipalities and NIS9 statistical sectors are different units, not all inhabited settlements.",
+      "access": "public_anonymous_read_verified",
+      "bulk_payload": true,
+      "locality_record_count": null,
+      "city_completeness_certified": false,
+      "publication_enabled": false
+    }
+  ],
+  "fallback": {
+    "provider": "GeoNames",
+    "official": false,
+    "license": "CC BY4.0",
+    "country_dump_urls": {
+      "DE": "https://download.geonames.org/export/dump/DE.zip",
+      "AT": "https://download.geonames.org/export/dump/AT.zip",
+      "CH": "https://download.geonames.org/export/dump/CH.zip",
+      "NL": "https://download.geonames.org/export/dump/NL.zip",
+      "BE": "https://download.geonames.org/export/dump/BE.zip"
+    },
+    "source_ids": [
+      "geonames-readme",
+      "geonames-license",
+      "geonames-dump-index",
+      "geonames-featurecodes"
+    ],
+    "bulk_country_dumps_downloaded": false,
+    "coverage": "All available GeoNames features per country, explicitly no warranty of completeness; not all real-world cities certified. cities500/1000/5000/15000 are filtered subsets.",
+    "candidate_current_populated_place_codes": [
+      "PPL",
+      "PPLA",
+      "PPLA2",
+      "PPLA3",
+      "PPLA4",
+      "PPLA5",
+      "PPLC",
+      "PPLCD",
+      "PPLF",
+      "PPLG",
+      "PPLL",
+      "PPLR"
+    ],
+    "separate_not_flatten": [
+      "PPLX neighbourhood/section",
+      "PPLS grouped populated places",
+      "ADM administrative areas",
+      "PPLCH former-capital label; current habitation requires review, not automatically excluded"
+    ],
+    "exclude_from_current_settlement_default": [
+      "PPLH",
+      "PPLQ",
+      "PPLW"
+    ],
+    "classification_policy": "Proposed filter only, review per country; classP does not imply statutory city status. Preserve feature_code and origin, never overwrite official identity."
+  },
+  "proposed_pipeline": [
+    {
+      "step": 1,
+      "name": "Freeze product/service candidates and approved markets",
+      "gate": "No legally_active=true inferred from dataset membership or B.V. domicile."
+    },
+    {
+      "step": 2,
+      "name": "Snapshot locality sources with checksum/license/version and declared unit",
+      "gate": "Import into draft catalog only; preserve authority IDs, admin hierarchy, aliases/languages, validity/status, attribution. Verify total/pagination and unit filters before any completeness claim."
+    },
+    {
+      "step": 3,
+      "name": "Prepare unranked seed/secondary terms from actual approved product catalog",
+      "gate": "Separate agency,NeX2fly,TEILEKLAR and workshop intents. City-in-query vs searcher geography are separate dimensions. No invented Top10."
+    },
+    {
+      "step": 4,
+      "name": "Read authorized historical metrics with fixed comparable targeting",
+      "gate": "Explicit country/city geo, language, GOOGLE_SEARCH network, calendar month range; batches with response/input reconciliation, close-variant groups and nulls. No global default; no account or billing creation."
+    },
+    {
+      "step": 5,
+      "name": "Create reviewable top10 plus secondary groups",
+      "gate": "Rank only available comparable data with business fit, intent, overlap, freshness; report monthly estimates separately from average and advertiser competition. No false exactness or city-national sums."
+    },
+    {
+      "step": 6,
+      "name": "Decide local page value and rendering architecture",
+      "gate": "A locality entry does not create a landing page. Require approved actual service area and distinct local user value; no fake local offices, fabricated evidence or duplicate doorway funnels. SSG/prerender public content, preserve existing private auth boundaries."
+    },
+    {
+      "step": 7,
+      "name": "Validate draft before publication",
+      "gate": "Source/claim review, per-URL HTML/title/canonical/hreflang/status/schema, mobile/accessibility, noindex draft and approved-only sitemap; no automatic publication/indexing in research."
+    }
+  ],
+  "sources": [
+    {
+      "id": "google-historical-guide",
+      "requested_url": "https://developers.google.com/google-ads/api/docs/keyword-planning/generate-historical-metrics",
+      "final_url": "https://developers.google.com/google-ads/api/docs/keyword-planning/generate-historical-metrics",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 257759,
+      "sha256": "40bd4fab4b732e4487685fb6660ae22654212099effae716b386589da457c8ba",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-historical-guide.raw",
+      "retrieved_at": "2026-10-26T13:55:03.935751+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-historical-rest",
+      "requested_url": "https://developers.google.com/google-ads/api/rest/reference/rest/v22/customers/generateKeywordHistoricalMetrics",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "google-geotargets",
+      "requested_url": "https://developers.google.com/google-ads/api/data/geotargets",
+      "final_url": "https://developers.google.com/google-ads/api/data/geotargets",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 2690675,
+      "sha256": "51363d1c1785164f9edc1f5ee4c74461a43f0038ea7db005d6e1096da7b4dffe",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-geotargets.raw",
+      "retrieved_at": "2026-10-26T13:55:03.763937+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "google-access",
+      "requested_url": "https://developers.google.com/google-ads/api/docs/get-started/introduction",
+      "final_url": "https://developers.google.com/google-ads/api/docs/get-started/introduction",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 160529,
+      "sha256": "20c9351b191638665151581a1b3e0779be47b46c512c46608a698a2a3ca7e462",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-access.raw",
+      "retrieved_at": "2026-10-26T13:55:03.486355+00:00",
+      "read_scope": "retrieved_not_fully_reviewed"
+    },
+    {
+      "id": "google-planner-access",
+      "requested_url": "https://support.google.com/google-ads/answer/7337243?hl=en",
+      "final_url": "https://support.google.com/google-ads/answer/7337243?hl=en",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 1716971,
+      "sha256": "524a0ae78df8f948c57de290d4907e32171c22f46cda2231d343767230be3994",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-planner-access.raw",
+      "retrieved_at": "2026-10-26T13:55:04.483359+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-spam-policies",
+      "requested_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "final_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 211208,
+      "sha256": "4507af3964304a70408a2b5e863ae7078ebe77857951137520e20a33468bd948",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-spam-policies.raw",
+      "retrieved_at": "2026-10-26T13:55:03.428960+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-js-seo",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 221705,
+      "sha256": "b03e4489d6132c3bd0fe1fddf1253a139a775d898ee25709a4c94701ce4ae074",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-js-seo.raw",
+      "retrieved_at": "2026-10-26T13:55:03.371553+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-structured-data",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 197040,
+      "sha256": "0dab7806672947abe967426046b60dd76abfbf3c4c9ad6d43ea663ca110cb6d2",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-structured-data.raw",
+      "retrieved_at": "2026-10-26T13:55:03.674403+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "geonames-readme",
+      "requested_url": "https://download.geonames.org/export/dump/readme.txt",
+      "final_url": "https://download.geonames.org/export/dump/readme.txt",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 8843,
+      "sha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/geonames-readme.raw",
+      "retrieved_at": "2026-10-26T13:55:04.486322+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "geonames-license",
+      "requested_url": "https://www.geonames.org/export/",
+      "final_url": "https://www.geonames.org/export/",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 31285,
+      "sha256": "77fdbdfee813f0dae6b77b71d55d4be60f35ffd9894ff48ce381755a09bbe372",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/geonames-license.raw",
+      "retrieved_at": "2026-10-26T13:55:04.703077+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "geonames-dump-index",
+      "requested_url": "https://download.geonames.org/export/dump/",
+      "final_url": "https://download.geonames.org/export/dump/",
+      "http_status": 200,
+      "content_type": "text/html;charset=ISO-8859-1",
+      "bytes": 43616,
+      "sha256": "d65650a1a93882dced5b037346937715f82fcd225137fba4e75d2e08e46b7aeb",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/geonames-dump-index.raw",
+      "retrieved_at": "2026-10-26T13:55:05.204189+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "vercel-seo-rendering",
+      "requested_url": "https://vercel.com/docs/rendering.md",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "de-destatis-gemeinden",
+      "requested_url": "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/_inhalt.html",
+      "final_url": "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/_inhalt.html",
+      "http_status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 164556,
+      "sha256": "9ce8cc165d8c63ccbc6cdade0542bb53d95c4684e8562a1f73186b4ea35c953f",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/de-destatis-gemeinden.raw",
+      "retrieved_at": "2026-10-26T13:57:56.065367+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "de-bkg-vg250",
+      "requested_url": "https://gdz.bkg.bund.de/index.php/default/verwaltungsgebiete-1-250-000-ebenen-stand-01-01-vg250-ebenen.html",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "at-regional",
+      "requested_url": "https://www.statistik.at/services/tools/services/regionales/regionale-gliederungen",
+      "final_url": "https://www.statistik.at/services/tools/regionale-internationale-daten/regionale-daten-und-gliederungen/regionale-gliederungen",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 130494,
+      "sha256": "ae404487b61bd493593099ab773a7c64a393e9cc533cab77cc8924c0d2a96e19",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/at-regional.raw",
+      "retrieved_at": "2026-10-26T13:57:57.090066+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "ch-names-stac",
+      "requested_url": "https://data.geo.admin.ch/api/stac/v0.9/collections/ch.swisstopo.swissnames3d",
+      "final_url": "https://data.geo.admin.ch/api/stac/v0.9/collections/ch.swisstopo.swissnames3d",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 1848,
+      "sha256": "bf7b7bad2d23ba35607010071c8e2de55f3a2374cd44a81f65e37c89214046f4",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/ch-names-stac.raw",
+      "retrieved_at": "2026-10-26T13:57:55.102696+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "ch-geodata-terms",
+      "requested_url": "https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "nl-pdok-bag",
+      "requested_url": "https://api.pdok.nl/kadaster/bag/ogc/v2/collections",
+      "final_url": "https://api.pdok.nl/kadaster/bag/ogc/v2/collections",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 19392,
+      "sha256": "9bdc8d383b3405d248bfe7f83b1c9b03724ee0311aab3eb83070d8272154c948",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/nl-pdok-bag.raw",
+      "retrieved_at": "2026-10-26T13:57:54.704376+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "be-geography",
+      "requested_url": "https://statbel.fgov.be/en/about-statbel/methodology/classifications/geography",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "be-ngi-open",
+      "requested_url": "https://data.gov.be/en/datasets/geographical-names",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "google-metrics-type",
+      "requested_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanHistoricalMetrics",
+      "final_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanHistoricalMetrics",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 2685172,
+      "sha256": "f20ab6e18da3d43d4fcd2c325a092436572448c5be51aea0837012bf78057296",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-metrics-type.raw",
+      "retrieved_at": "2026-10-26T14:01:30.499307+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-request-type",
+      "requested_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/GenerateKeywordHistoricalMetricsRequest",
+      "final_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/GenerateKeywordHistoricalMetricsRequest",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 2686091,
+      "sha256": "a9116d157df9a3a018e111b4d16f4cb217d75c121588faf4fb193302081fe09a",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-request-type.raw",
+      "retrieved_at": "2026-10-26T14:01:29.989855+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-monthly-type",
+      "requested_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/MonthlySearchVolume",
+      "final_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/MonthlySearchVolume",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 2682278,
+      "sha256": "9ef8b37e8ddedf8ac3f04e4d64e677743461c1df778e88b8eabf7d0a255128a2",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-monthly-type.raw",
+      "retrieved_at": "2026-10-26T14:01:30.527081+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "ch-ogd-terms",
+      "requested_url": "https://www.swisstopo.admin.ch/ogd-conditions",
+      "final_url": "https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices",
+      "http_status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 261589,
+      "sha256": "bb21a94fda086e5f507b2076ec0169583f035513f1d8cb36923e46890e919f12",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/ch-ogd-terms.raw",
+      "retrieved_at": "2026-10-26T14:01:32.174278+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "nl-woonplaats",
+      "requested_url": "https://api.pdok.nl/kadaster/bag/ogc/v2/collections/woonplaats?f=json",
+      "final_url": "https://api.pdok.nl/kadaster/bag/ogc/v2/collections/woonplaats?f=json",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 3196,
+      "sha256": "539c4d4773120e3036b2e7449f7ca4a2bb718aaf6f98c9c582d27288f8095762",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/nl-woonplaats.raw",
+      "retrieved_at": "2026-10-26T14:01:30.083499+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "nl-bag-landing",
+      "requested_url": "https://api.pdok.nl/kadaster/bag/ogc/v2?f=json",
+      "final_url": "https://api.pdok.nl/kadaster/bag/ogc/v2?f=json",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 4310,
+      "sha256": "51e2c4115fb22d236511dcad01aef7d2e3a51152745edefacf6497dfa2ecb4fe",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/nl-bag-landing.raw",
+      "retrieved_at": "2026-10-26T14:01:30.032746+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "be-geografie",
+      "requested_url": "https://statbel.fgov.be/nl/over-statbel/methodologie/classificaties/geografie",
+      "final_url": "https://statbel.fgov.be/nl/over-statbel/methodologie/classificaties/geografie",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 140925,
+      "sha256": "29f95cffa8623041558d8de0efc2a85c4b6eb2271a1402f712da8171d70b8987",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/be-geografie.raw",
+      "retrieved_at": "2026-10-26T14:01:31.162895+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "geonames-featurecodes",
+      "requested_url": "https://download.geonames.org/export/dump/featureCodes_en.txt",
+      "final_url": "https://download.geonames.org/export/dump/featureCodes_en.txt",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 58642,
+      "sha256": "d44f129c1cffdeabf759c99fe7ea5b84f615c7f3e7366fb76ccf990f408f6af7",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/geonames-featurecodes.raw",
+      "retrieved_at": "2026-10-26T14:01:31.401335+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "vercel-vite",
+      "requested_url": "https://vercel.com/docs/frameworks/frontend/vite.md",
+      "final_url": "https://vercel.com/docs/frameworks/frontend/vite.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 10251,
+      "sha256": "5f28b63df7ca4d4586c04a8c793df875880461b54571500440db30a42f0852da",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/vercel-vite.raw",
+      "retrieved_at": "2026-10-26T14:01:29.560967+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "at-terms",
+      "requested_url": "https://www.statistik.at/ueber-uns/aufgaben-und-grundsaetze/rechtsgrundlagen/impressum",
+      "final_url": "https://www.statistik.at/ueber-uns/aufgaben-und-grundsaetze/rechtsgrundlagen/impressum",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 93416,
+      "sha256": "135cb8f9acaf3801411a5948bbbc7f7440c1a3182bd9b3c297273d688c37e1ba",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/at-terms.raw",
+      "retrieved_at": "2026-10-26T14:01:30.693026+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "de-copyright",
+      "requested_url": "https://www.destatis.de/DE/Service/Impressum/copyright.html",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "de-impressum",
+      "requested_url": "https://www.destatis.de/DE/Service/Impressum/_inhalt.html",
+      "final_url": "https://www.destatis.de/DE/Service/Impressum/_inhalt.html",
+      "http_status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 82654,
+      "sha256": "50ce431f89d33890675023b9e2497a109d378ce6cfa74209bbf4f9cc6bb7b262",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/de-impressum.raw",
+      "retrieved_at": "2026-10-26T14:02:21.356717+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "de-current-gv",
+      "requested_url": "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GVAuszugQ/AuszugGV3QAktuell.html",
+      "final_url": "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GVAuszugQ/AuszugGV3QAktuell.html",
+      "http_status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 67404,
+      "sha256": "a13dc4012ff3aec8d163f722c155f5562e99c4b6dcbb227d740b268d64f5f42a",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/de-current-gv.raw",
+      "retrieved_at": "2026-10-26T14:02:21.513308+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "at-reglisten",
+      "requested_url": "https://www.statistik.at/verzeichnis/reglisten/reglisten.zip",
+      "final_url": "https://www.statistik.at/verzeichnis/reglisten/reglisten.zip",
+      "http_status": 200,
+      "content_type": "application/zip",
+      "bytes": 4645528,
+      "sha256": "f81f0464e883edd3f709a9406706d07e4f8e054ddf6b957894f4b05427e9da82",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/at-reglisten.raw",
+      "retrieved_at": "2026-10-26T14:02:23.947411+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "be-refnis-csv",
+      "requested_url": "https://statbel.fgov.be/sites/default/files/Over_Statbel_FR/Nomenclaturen/REFNIS_2025.csv",
+      "final_url": "https://statbel.fgov.be/sites/default/files/Over_Statbel_FR/Nomenclaturen/REFNIS_2025.csv",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 30044,
+      "sha256": "5e88a229cdbe1356e01ca950802d8eeaa04a1ab5c0dab0ab393c74cdf7c7879d",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/be-refnis-csv.raw",
+      "retrieved_at": "2026-10-26T14:02:20.825698+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "be-open-data",
+      "requested_url": "https://statbel.fgov.be/nl/open-data",
+      "final_url": "https://statbel.fgov.be/nl/open-data",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 155857,
+      "sha256": "f1f444ea653c001b7bade38ea411e467462fd98127fb6ea00060c72be84fc457",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/be-open-data.raw",
+      "retrieved_at": "2026-10-26T14:02:21.079204+00:00",
+      "read_scope": "retrieved_not_fully_reviewed"
+    },
+    {
+      "id": "google-access-token",
+      "requested_url": "https://developers.google.com/google-ads/api/docs/get-started/dev-token",
+      "final_url": "https://developers.google.com/google-ads/api/docs/api-policy/developer-token",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 101980,
+      "sha256": "343243b32cd5a9f49a31d00c2414f341c6dd9e6ddf336b23e5ac21ef1aef53c2",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-access-token.raw",
+      "retrieved_at": "2026-10-26T14:02:20.198655+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-historical-options",
+      "requested_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/HistoricalMetricsOptions",
+      "final_url": "https://developers.google.com/google-ads/api/reference/rpc/v26/HistoricalMetricsOptions",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 2682308,
+      "sha256": "f7459f15b0d712b3bd96086eb8a63ba7955ab22695212c2a7bf705b9473ade7d",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-historical-options.raw",
+      "retrieved_at": "2026-10-26T14:02:20.429843+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "nl-woonplaats-sample",
+      "requested_url": "https://api.pdok.nl/kadaster/bag/ogc/v2/collections/woonplaats/items?f=json&limit=1",
+      "final_url": "https://api.pdok.nl/kadaster/bag/ogc/v2/collections/woonplaats/items?f=json&limit=1",
+      "http_status": 200,
+      "content_type": "application/geo+json",
+      "bytes": 32551,
+      "sha256": "01b1b7bf7cacbd4ae64854ae6b46476477f1cb07b92c5fd152e86ec9797121aa",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/nl-woonplaats-sample.raw",
+      "retrieved_at": "2026-10-26T14:02:19.881203+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "de-copyright-actual",
+      "requested_url": "https://www.destatis.de/DE/Service/Impressum/copyright-allgemein.html",
+      "final_url": "https://www.destatis.de/DE/Service/Impressum/copyright-allgemein.html",
+      "http_status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 71899,
+      "sha256": "b75c7989aac6003acafbc2a05a64f5c7082c8fe497ebcbc2c915956188fea050",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/de-copyright-actual.raw",
+      "retrieved_at": "2026-10-26T14:03:20.847405+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "de-gv-xlsx",
+      "requested_url": "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GVAuszugQ/AuszugGV3QAktuell.xlsx?__blob=publicationFile&v=22",
+      "final_url": "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GVAuszugQ/AuszugGV3QAktuell.xlsx?__blob=publicationFile&v=22",
+      "http_status": 200,
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+      "bytes": 1872608,
+      "sha256": "45e979afe2e4354758e52f7b5b0c2a8167dd9db4a13585cec6acf17211f3b5f3",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/de-gv-xlsx.raw",
+      "retrieved_at": "2026-10-26T14:03:21.038191+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "at-ort-metadata",
+      "requested_url": "https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_ORT_1",
+      "final_url": "https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_ORT_1",
+      "http_status": 200,
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 19730,
+      "sha256": "de38dd0cd31a6927715fb8ec640269fd44a2cd6c460685ff160efb8e47b2bbf5",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/at-ort-metadata.raw",
+      "retrieved_at": "2026-10-26T14:03:20.757689+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "be-disclaimer",
+      "requested_url": "https://statbel.fgov.be/nl/disclaimer",
+      "final_url": "https://statbel.fgov.be/nl/disclaimer",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 133284,
+      "sha256": "b8f28d09456a1c71a98a5f1a57e0d1ffc1b3e24ae5bb64651cc4c4f6538bdfa8",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/be-disclaimer.raw",
+      "retrieved_at": "2026-10-26T14:03:21.471140+00:00",
+      "read_scope": "metadata_or_payload_structure_inspected"
+    },
+    {
+      "id": "vercel-vite-nitro",
+      "requested_url": "https://vercel.com/docs/frameworks/full-stack/vite-with-nitro.md",
+      "final_url": "https://vercel.com/docs/frameworks/full-stack/vite-with-nitro.md",
+      "http_status": 200,
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 22231,
+      "sha256": "c9229f4dc15c36ea980ef258b826decc0adf45093487ac7ea0a3a29f05cbb6ea",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/vercel-vite-nitro.raw",
+      "retrieved_at": "2026-10-26T14:03:19.902881+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-keyword-help",
+      "requested_url": "https://support.google.com/google-ads/answer/3022575?hl=en",
+      "final_url": "https://support.google.com/google-ads/answer/3022575?hl=en",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 1706284,
+      "sha256": "fb8096a28aa009912d71faf93ee769398da64c445ae9654346b0875877dbb8fb",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-keyword-help.raw",
+      "retrieved_at": "2026-10-26T14:03:20.579212+00:00",
+      "read_scope": "relevant_article_body_read"
+    },
+    {
+      "id": "google-auth",
+      "requested_url": "https://developers.google.com/google-ads/api/docs/oauth/overview",
+      "final_url": "https://developers.google.com/google-ads/api/docs/oauth/overview",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 155520,
+      "sha256": "9ab062ea7511e7ca4e2e6aaccbe92c5afd0c04f61eb56191c4ccca45ca661fb6",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/keyword-local-seo/google-auth.raw",
+      "retrieved_at": "2026-10-26T14:03:20.449090+00:00",
+      "read_scope": "relevant_article_body_read"
+    }
+  ],
+  "verification": {
+    "source_hashes_recomputed": true,
+    "raw_evidence_root": "/workspace/.onboarding/keyword-local-seo",
+    "country_database_fully_ingested": false,
+    "keyword_metrics_verified": false,
+    "complete_all_settlements_verified": false,
+    "runtime_seo_acceptance": false
+  }
+}

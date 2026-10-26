@@ -1,3 +1,60 @@
+# Gemeinsame KI-Governance und Kapazitätsplanung · 26.10.2026
+
+Arbeitszweig: `factory/source-faithful-rebuild-2026-10-26`, Basis6bb8b4c.
+Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
+parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.
+Keine aktive Migration, Produktionsbelegung oder globale Modellsperre durchgeführt.
+17 zwischenzeitlich neue Legacy-Einschränkungen vor Veröffentlichung zurückgenommen;
+Altpfade sind ausdrücklich unmigriert/audit, nicht fälschlich abgesichert.
+
+52 KI-bezogene Quellen registriert; aktueller begrenzter Scan168Dateien/30Kandidaten.
+Auditmodus meldet Lücken/Drift, stoppt keine laufende Arbeit. Neue interne
+Modell-/CI-Adapter prüfen exaktDeepSeekV4.1Flash1017/high und finale Requests.
+Hostmodelle von ChatGPT/Codex/Claude werden dadurch nicht umgeschaltet.
+AGENTS/CLAUDE/Copilot weisen auf gemeinsame Regeln und relevante eigene Skills.
+Fünf eigene Skillkopien projektlokal installiert und exakt rückgelesen:
+Delivery1.0.2,Integration1.0.1,übrige1.0.0; keine globale Pluginregistrierung.
+
+Kontextauswahl führt sechs Kernquellen einschließlich Wirkungsprüfung immer mit.
+232Projekt-Markdown-Dateien lokal mit Originalhashen rückgelesen.
+Der Markdown-Stager trennt Herkunft/Mandant/Fassungen/Chunks/Readback;
+FIFO/Hardlink/Secret-/Versions-/Löschungsgegenproben nach Review behoben.
+LightRAG/ca9000MD/vierServer nicht verifiziert oder eingespielt.
+Behebungsqueue tatsächlich15Aufträge:8lokal aktuell geprüft abgeschlossen,
+7externe/Migrationsvoraussetzungen zugewiesen; kein Worker/Scheduler aktiviert.
+
+Offlinekapazitätsplaner rechnet gemessene CPU/RAM/Storage/IO/Netzprofile,
+Lastbereiche und externe Tokenkosten; unbekannte Profile/Raten bleiben unbekannt.
+14Fälle plus unabhängige Gegenrechnung grün. Lokaler Ressourcenprobe beschreibt
+nur diese Codex-Cloudumgebung, keine VPS; Produktionshostinventar weiterhin leer.
+Keine produktive Last, kein Serverlimit oder Loadbalancer geändert.
+
+SEO-Katalog tatsächlich136883GeoNames-Orts-/Ortsteil-Kandidaten(DE/AT/CH/NL/BE)
+in lokaler SQLite aufgenommen, sämtliche Entwürfe/noindex/Abdeckung unbestätigt.
+Kein amtliches Vollständigkeitsversprechen, keine Keywordmessung, keine Ortsseite
+veröffentlicht. Lizenz/Quellhashes: config/research/local-place-import-evidence.json.
+
+AI7/React4-Streamingorientierung im Vercel-Frontend samt realen Browsergegenproben
+und passender Next-Referenz gebaut. Explizit textgeführter Zwischenmodus, noch
+kein Live-LLM-Chat. Internes ToolLoopAgent-Prototyping verwendet echte SDK-Mocks;
+keine Modellkosten ausgelöst. Readonly-Creditsprobe nur für diesen Vercel-
+Previewzweig konfiguriert, Ergebnis nach Deployment rücklesen.
+
+Lokaler Gesamtstand:281Pythonfälle,26SDK- und18Site-Tests grün;
+Site/Standalone/Nextbuilds, API-/App-Typechecks, Audit, E2E und14Architekturregeln
+bestanden. Sauberzustandsprüfung bestanden; neues Vercel-Deployment folgt.
+Browser:36öffentliche/10privateRouten,49Erklärmodule,SDK404Fallback/Streams/
+Negativkontext/Sprachen/Mobilfokus,Offline/Hashrouting; kein Produktionsnachweis.
+Bundle561KB/gzip158KB bleibt Leistungsfinding, keine Normzertifizierung.
+
+Nächster Betriebsanschluss: autorisierte tatsächliche Server-/Brain-Messung und
+Wissensadapter, gebundene Workloadprofile/Lastszenarien, finanzierter und
+authentifizierter Livechat, reale Auth/Suite/Mail/Kalender/Shop/Medienadapter;
+danach einzelne geprüfte Cutovers. Marketing/Mailings/Social erst bei Bereitschaft,
+GEO nach SEO-Grundlage. F-007 bleibt aktiv; .cloud/Affilinet/Main unverändert.
+
+---
+
 # Ausarbeitung des angenommenen Grundentwurfs · 26.10.2026
 
 Der Nutzer akzeptiert den vorherigen Stand ausschließlich als Anfang und

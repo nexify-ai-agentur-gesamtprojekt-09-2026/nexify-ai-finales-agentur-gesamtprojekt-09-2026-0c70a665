@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "status": "architecture_contract_not_runtime_acceptance",
+  "as_of": "2026-10-26T12:52:24.307064+00:00",
+  "packages": [
+    {
+      "id": "ai7",
+      "package": "ai",
+      "version": "7.0.153",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=22"
+      },
+      "peer_dependencies": {
+        "zod": "^3.25.76 || ^4.1.8"
+      },
+      "dependencies": {
+        "@ai-sdk/gateway": "4.0.126",
+        "@ai-sdk/provider": "4.0.34",
+        "@ai-sdk/provider-utils": "5.0.68"
+      },
+      "registry_url": "https://registry.npmjs.org/ai/7.0.153",
+      "observed_at": "2026-10-26T12:52:20.141255+00:00",
+      "registry_sha256": "a48e49afef4cb45f6fdfb2744726fa13afd2cd0cc0005cc753cb5d6ded0e8288",
+      "archive_url": "https://registry.npmjs.org/ai/-/ai-7.0.153.tgz",
+      "archive_sha256": "cec2c5612df4b7b152bf2127a280344931a1b30bed1dc1c77d1a3c2cf0bee956",
+      "archive_integrity_matches_registry": true,
+      "reviewed_package_files": [
+        {
+          "path": "package/README.md",
+          "bytes": 7090,
+          "sha256": "77da003de6d04c7ab5d6745b8aafd985c12e36655bcbb386cb8918a6158143e9"
+        },
+        {
+          "path": "package/LICENSE",
+          "bytes": 552,
+          "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+        },
+        {
+          "path": "package/dist/index.d.ts",
+          "bytes": 453143,
+          "sha256": "859e1f4b416ad544aa394744dec2dcf1f9f5885b4eb613dd6ed71915130c10ac"
+        },
+        {
+          "path": "package/dist/index.js",
+          "bytes": 779640,
+          "sha256": "a6160175fd118d06653622aff898db195e73b617546cbeaa95a6568dc594f6f2"
+        },
+        {
+          "path": "package/dist/test/index.d.ts",
+          "bytes": 18239,
+          "sha256": "5d7b351290bc4bda34ca4c3d271f33d00d3b205e661233fdc422edc50950f366"
+        }
+      ]
+    },
+    {
+      "id": "react4",
+      "package": "@ai-sdk/react",
+      "version": "4.0.157",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=22"
+      },
+      "peer_dependencies": {
+        "react": "^18 || ~19.0.1 || ~19.1.2 || ^19.2.1"
+      },
+      "dependencies": {
+        "ai": "7.0.153",
+        "swr": "^2.4.1",
+        "throttleit": "2.1.0",
+        "@ai-sdk/mcp": "2.0.84",
+        "@ai-sdk/provider": "4.0.34",
+        "@ai-sdk/provider-utils": "5.0.68"
+      },
+      "registry_url": "https://registry.npmjs.org/@ai-sdk/react/4.0.157",
+      "observed_at": "2026-10-26T12:52:21.524044+00:00",
+      "registry_sha256": "eca07d00eea77fcd757391714605be9f855054a5248ee93088f5f66389273d32",
+      "archive_url": "https://registry.npmjs.org/@ai-sdk/react/-/react-4.0.157.tgz",
+      "archive_sha256": "ca63595a26c67270021ca556ba03b9287631f455123e63bf91d4f0f5564a57d1",
+      "archive_integrity_matches_registry": true,
+      "reviewed_package_files": [
+        {
+          "path": "package/README.md",
+          "bytes": 1425,
+          "sha256": "1cefb72df1d49daa78df646ddacad5182af6699522ad322b7233017c689cf83c"
+        },
+        {
+          "path": "package/LICENSE",
+          "bytes": 552,
+          "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+        },
+        {
+          "path": "package/dist/index.d.ts",
+          "bytes": 12254,
+          "sha256": "b67ed9b79235ab8be8de3726c88f91e09e1d5892e91de98fd757fb546077918f"
+        },
+        {
+          "path": "package/dist/index.js",
+          "bytes": 40985,
+          "sha256": "8a44f3f2dd6b499c2f82c169b8c63c81b52bf83f3021c873547a78f5b5e2eff2"
+        }
+      ]
+    },
+    {
+      "id": "openrouter3",
+      "package": "@openrouter/ai-sdk-provider",
+      "version": "3.1.0",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=22"
+      },
+      "peer_dependencies": {
+        "ai": "^7.0.0",
+        "zod": "^3.25.76 || ^4.1.8"
+      },
+      "dependencies": {},
+      "registry_url": "https://registry.npmjs.org/@openrouter/ai-sdk-provider/3.1.0",
+      "observed_at": "2026-10-26T12:52:23.259544+00:00",
+      "registry_sha256": "05f5f0427424072fe62f37435a6ce00f348f5cdd6ebb72070a30ac6a12230779",
+      "archive_url": "https://registry.npmjs.org/@openrouter/ai-sdk-provider/-/ai-sdk-provider-3.1.0.tgz",
+      "archive_sha256": "2db5cfe6bd6d625fbede2e0563a8161f53ac7730b41a5422098d82acaf0bdc3a",
+      "archive_integrity_matches_registry": true,
+      "reviewed_package_files": [
+        {
+          "path": "package/README.md",
+          "bytes": 17384,
+          "sha256": "ff857015079be8245fe0c223f938637b9e8ea1db9f8d163854072f789a8bbd96"
+        },
+        {
+          "path": "package/LICENSE",
+          "bytes": 10713,
+          "sha256": "dc5d6874c25b4d5af22aa7bb9a18422bc86c7516c80056c1788fc120c4121f72"
+        },
+        {
+          "path": "package/dist/index.d.ts",
+          "bytes": 40653,
+          "sha256": "3f4c351176667c84fbcb6ecd37ce6d2e2ef6ea948a8b710dd2618199c2a84fff"
+        },
+        {
+          "path": "package/dist/index.js",
+          "bytes": 210549,
+          "sha256": "6a34db98a9aa74622f20f517b7e28043fe8e9b61b9d2d02d47500b3bbda65645"
+        }
+      ]
+    }
+  ],
+  "official_sources": [
+    {
+      "id": "sdk-chat",
+      "url": "https://ai-sdk.dev/docs/ai-sdk-ui/chatbot",
+      "observed_at": "2026-10-26T12:52:23.265076+00:00",
+      "final_url": "https://ai-sdk.dev/docs/ai-sdk-ui/chatbot",
+      "http_status": 200,
+      "bytes": 39608,
+      "sha256": "92da2609e6996f1d36fd320628b8d72167c6adee08464d98a908cf0cdaebdc5a",
+      "status": "read_official_source"
+    },
+    {
+      "id": "sdk-transport",
+      "url": "https://ai-sdk.dev/docs/ai-sdk-ui/transport",
+      "observed_at": "2026-10-26T12:52:23.265809+00:00",
+      "final_url": "https://ai-sdk.dev/docs/ai-sdk-ui/transport",
+      "http_status": 200,
+      "bytes": 13748,
+      "sha256": "ef81ab8a50f7320423d15051e86745b43ce52d963c76bc1f4567fd932257fbfb",
+      "status": "read_official_source"
+    },
+    {
+      "id": "sdk-agents",
+      "url": "https://ai-sdk.dev/docs/agents/building-agents",
+      "observed_at": "2026-10-26T12:52:23.275525+00:00",
+      "final_url": "https://ai-sdk.dev/docs/agents/building-agents",
+      "http_status": 200,
+      "bytes": 17484,
+      "sha256": "4bfcaad09775ff1c284110f1527e308835e7fdb34eb0e77c26e6541f0d59e209",
+      "status": "read_official_source"
+    },
+    {
+      "id": "sdk-loop",
+      "url": "https://ai-sdk.dev/docs/agents/loop-control",
+      "observed_at": "2026-10-26T12:52:23.277537+00:00",
+      "final_url": "https://ai-sdk.dev/docs/agents/loop-control",
+      "http_status": 200,
+      "bytes": 16115,
+      "sha256": "cf080df0ca2d3b1b381aa80b151ffd9296dfb180ac57554450e12ff143f97a34",
+      "status": "read_official_source"
+    },
+    {
+      "id": "sdk-test",
+      "url": "https://ai-sdk.dev/docs/ai-sdk-core/testing",
+      "observed_at": "2026-10-26T12:52:23.278602+00:00",
+      "final_url": "https://ai-sdk.dev/docs/ai-sdk-core/testing",
+      "http_status": 200,
+      "bytes": 8883,
+      "sha256": "50e308720f941c91cceeb438803a3367b6b572a9b4318a969fc5ed8a65ac4350",
+      "status": "read_official_source"
+    },
+    {
+      "id": "vercel-node",
+      "url": "https://vercel.com/docs/functions/runtimes/node-js",
+      "observed_at": "2026-10-26T12:52:23.550414+00:00",
+      "final_url": "https://vercel.com/docs/functions/runtimes/node-js",
+      "http_status": 200,
+      "bytes": 15427,
+      "sha256": "13dedc19d5755e7adca6f37505932d776ff867b7885814b2d28c64149f2c54d5",
+      "status": "read_official_source"
+    },
+    {
+      "id": "vercel-node-versions",
+      "url": "https://vercel.com/docs/functions/runtimes/node-js/node-js-versions",
+      "observed_at": "2026-10-26T12:52:23.646658+00:00",
+      "final_url": "https://vercel.com/docs/functions/runtimes/node-js/node-js-versions",
+      "http_status": 200,
+      "bytes": 5030,
+      "sha256": "86505920d6b017d09485e508adac39a962b96f5fa1881427e2cefbdd40b26ca2",
+      "status": "read_official_source"
+    },
+    {
+      "id": "vercel-vite",
+      "url": "https://vercel.com/docs/frameworks/frontend/vite",
+      "observed_at": "2026-10-26T12:52:23.653564+00:00",
+      "final_url": "https://vercel.com/docs/frameworks/frontend/vite",
+      "http_status": 200,
+      "bytes": 10251,
+      "sha256": "5f28b63df7ca4d4586c04a8c793df875880461b54571500440db30a42f0852da",
+      "status": "read_official_source"
+    },
+    {
+      "id": "vercel-duration",
+      "url": "https://vercel.com/docs/functions/configuring-functions/duration",
+      "observed_at": "2026-10-26T12:52:23.665147+00:00",
+      "final_url": "https://vercel.com/docs/functions/configuring-functions/duration",
+      "http_status": 200,
+      "bytes": 16118,
+      "sha256": "dcd493605c7de0afdbbf1bf3732733b2f624fbc787ebade652713fb80519d2a7",
+      "status": "read_official_source"
+    }
+  ],
+  "model_catalog_observation": {
+    "url": "https://openrouter.ai/api/v1/models",
+    "http_status": 200,
+    "sha256": "9637bfc0dd9ffc6f06af8bd3ec72904a13251fe2be90dfa375221cf9b4734c32",
+    "observed_at": "2026-10-26T12:52:24.307831+00:00",
+    "exact_id": "deepseek/deepseek-v4.1-flash-1017",
+    "unique_match": true,
+    "supported_parameters": [
+      "frequency_penalty",
+      "include_reasoning",
+      "logit_bias",
+      "logprobs",
+      "max_completion_tokens",
+      "max_tokens",
+      "min_p",
+      "parallel_tool_calls",
+      "presence_penalty",
+      "reasoning",
+      "reasoning_effort",
+      "repetition_penalty",
+      "response_format",
+      "seed",
+      "stop",
+      "structured_outputs",
+      "temperature",
+      "tool_choice",
+      "tools",
+      "top_k",
+      "top_logprobs",
+      "top_p"
+    ],
+    "context_length": 1048576,
+    "pricing_fields": [
+      "prompt",
+      "completion",
+      "input_cache_read",
+      "overrides"
+    ],
+    "price_quote_or_budget_approval": false
+  },
+  "implementation_files_changed_by_this_task": false,
+  "dependencies_installed_by_this_task": false,
+  "paid_provider_requests_by_this_task": 0,
+  "runtime_tests_executed_by_this_task": false,
+  "compatibility": {
+    "frontend": "React19.3.1/Vite8.3.5; @ai-sdk/react4.0.157 peer accepts React19.3.1",
+    "server": "Vercel Node22.x; ai7 requires Node>=22; root package already pins22.x",
+    "next_required": false,
+    "provider_adapter": "@openrouter/ai-sdk-provider3.1.0 peer ai^7.0.0; zod^3.25.76 or^4.1.8",
+    "version_mix_policy": "Pin exact researched versions together and verify lockfile; do not mix AI5/6 stepCountIs/result-helper recipes with AI7 without type/API review."
+  },
+  "api_contract": {
+    "proposed_route": "/api/agent-chat",
+    "source_path": "api/agent-chat.ts",
+    "function_signature": "export default { async fetch(request: Request): Promise<Response> { ... } }",
+    "alternative_signature": "export async function POST(request: Request): Promise<Response> { ... }",
+    "server_location": "Repository root api/ independent of apps/site/dist; dependencies belong in the function owner/root workspace package",
+    "client": "useChat from @ai-sdk/react with stable DefaultChatTransport from ai; explicit api, no production DirectChatTransport agent/key in browser",
+    "agent": "ToolLoopAgent from ai; stopWhen:isStepCount(policy.maxSteps), maxRetries:0; default20steps is not a budget",
+    "ui_response": "await createAgentUIStreamResponse({agent,uiMessages:trustedMessages,abortSignal:request.signal,sendReasoning:false})",
+    "text_response_alternative": "createUIMessageStreamResponse({stream:toUIMessageStream({stream:result.stream,...})})",
+    "deprecated_avoid": [
+      "result.toUIMessageStreamResponse",
+      "result.toUIMessageStream",
+      "older stepCountIs imports assumed valid in AI7"
+    ],
+    "transport_protocol": "AI SDK UI message SSE protocol; raw text/JSON from the existing visitor gateway is not interchangeable",
+    "existing_api_rewrite": "Root SPA rewrite excludes/api and/.well-known; Vite local /api proxy currently points toPython3003 and needs an explicit agent-runtime dev route."
+  },
+  "provider_contract": {
+    "provider": "OpenRouter",
+    "factory": "createOpenRouter({apiKey:serverSecret,compatibility:\"strict\",fetch:serverControlledFetch})",
+    "base_url": "https://openrouter.ai/api/v1",
+    "exact_model": "deepseek/deepseek-v4.1-flash-1017",
+    "reasoning": {
+      "effort": "high"
+    },
+    "reasoning_config_paths": [
+      "model settings reasoning",
+      "model/factory extraBody.reasoning",
+      "trusted call-level providerOptions.openrouter.reasoning"
+    ],
+    "routing": {
+      "allow_fallbacks": false,
+      "require_parameters": true
+    },
+    "no_alternative_models_array": true,
+    "request_wins_risk": "Adapter chat doStream spreads providerOptions.openrouter after generated body; model/messages/provider can be overridden unless application refuses all client overrides. Model/factory extraBody can also override generated values.",
+    "client_controllable_provider_options": false,
+    "wire_assertions": [
+      "exact model id",
+      "reasoning.effort==high",
+      "provider.allow_fallbacks==false",
+      "provider.require_parameters==true",
+      "no models fallback array",
+      "bounded max_tokens",
+      "no untrusted baseURL/headers/providerOptions/extraBody"
+    ],
+    "usage_cost_source": "providerMetadata.openrouter.usage.cost when actually delivered; normalized token usage alone is not currency cost",
+    "missing_cost_policy": "reserved/unresolved pending provider reconciliation; never infer zero or retry automatically",
+    "stream_retries": "streamText streamRetries:number default0; maxRetries default2 must explicitly become0. Do not pass options to unsupported ToolLoopAgent fields.",
+    "paid_request_executed": false
+  },
+  "authorization": {
+    "public_visitor": "Explicitly bounded public-service capability only; production server-owned visitor cookie/session store, CSRF+Origin, ownership and quotas required; not a tenant membership",
+    "private_web": "Separate Clerk session/JWT verification for owned web API plus trusted tenant/site/role mapping; frontend login is not authorisation",
+    "mcp": "Separate OAuth access-token verifier accepts oauth_token and exact MCP resource audience; website session tokens are not MCP access tokens",
+    "supplied_invalid_credentials": "401 before provider; never downgrade to guest",
+    "tenant": "Derive actor/site/tenant and allowed tool set server-side; ignore caller role, balance, tenant and account claims",
+    "message_input": "Bound schema/size/count. Initial public endpoint accepts bounded text only; no client system instructions, provider overrides, tool approvals/results, mediaURL fetch or forged assistant state. Reconstruct owned history server-side.",
+    "byok": "Future authenticated secure upload/reference only, encrypted server vault and server-only decrypt at authorised dispatch; no localStorage/sessionStorage/querystring/model message/build ENV/browser provider key. No BYOK live adapter claimed."
+  },
+  "cost_and_state": {
+    "allow_model_calls_default": false,
+    "free_model_calls_claimed": false,
+    "missing_provider_or_budget_policy": "Fail closed before provider construction/dispatch; UI reports unavailable, not generated response",
+    "test_mode": "Injected MockLanguageModelV4 or fake fetch only, visibly labelled test/demo; never automatic fallback for a failed paid call",
+    "required_preflight": [
+      "actual approved provider/account/model contract",
+      "fresh unique catalog capability and complete fee validation",
+      "bounded prompt+reasoning/output+step/concurrency cost reservation",
+      "valid user/visitor capability and idempotency payload binding",
+      "server budget/credit approval; no implicit NeX2fly free inference"
+    ],
+    "durable_store": "Required server-side managed database/transactional store; no Vercel process memory,/tmp or local visitorSQLite as production source of truth",
+    "state_machine": [
+      "prepared",
+      "reserved",
+      "dispatched",
+      "streaming",
+      "completed",
+      "unresolved",
+      "denied"
+    ],
+    "idempotency_scope": "server owner+site/service context+operation+request key+payload hash; replay must not dispatch a second paid call",
+    "disconnect": "Client abort is not proof of no charge; retain request/provider id and reserve until reconciled. Explicit stream resume requires ownership and durable existing stream, not another model request.",
+    "tools": "Initially none or narrow read-only public catalog tool; every later side effect separately schema/auth/rule/idempotency gated by actual backend state",
+    "billing": "No provider prices, free tier, throughput or hard financial guarantees inferred from SDK; no provider response cost delivered means no zero-cost settlement"
+  },
+  "test_plan": [
+    {
+      "id": "V1",
+      "method": "Instantiate AI7 MockLanguageModelV4 with deterministic doStream and UIstream response; feed actual DefaultChatTransport/useChat; verify parts, completion,error,abort.",
+      "paid_provider_requests": 0
+    },
+    {
+      "id": "V2",
+      "method": "Real ToolLoopAgent with MockLanguageModelV4 sequence tool-call then text; execute harmless bounded local read-only tool exactly once, assert step limit and no business effects. V4 tool input is JSON string and finishReason is object.",
+      "paid_provider_requests": 0
+    },
+    {
+      "id": "V3",
+      "method": "Real OpenRouter3 SDK with explicit fake fetch and dummy key; inspect actual JSONmodel/reasoning/routing/tokenlimit; reject override attempts before dispatch. Fake usage/cost are fixtures, not actual charges.",
+      "paid_provider_requests": 0
+    },
+    {
+      "id": "V4",
+      "method": "No credentials, invalid auth/CSRF/origin, wrongowner, badschema, missingbudget,costoverflow,unsupportedcatalog => provider dispatch count0.",
+      "paid_provider_requests": 0
+    },
+    {
+      "id": "V5",
+      "method": "Concurrent idempotent replay, forged conversation and tool result, DBfailure, disconnect/ambiguous outcome; no double dispatch or false success, durable unresolved receipt.",
+      "paid_provider_requests": 0
+    },
+    {
+      "id": "V6",
+      "method": "Vercel local/build packaging smoke with Node22: root/api retained with Vite dist, POST/SSE contract, bundle contains no secrets, private/auth routes still failclosed; actual deployment acceptance separate.",
+      "paid_provider_requests": 0
+    }
+  ],
+  "implementation_sequence": [
+    "Root owner alone pins root/server ai+provider+zod and apps/site client dependency, updates lock once; no parallel installs.",
+    "Implement platform-neutral Request->Response handler with injected auth/store/budget/model dependencies and default disabled policy.",
+    "Wire root/api/agent-chat.ts and explicit local dev target, retain existing visitor action routes without impersonating a model.",
+    "Run real SDK mock/tool/HTTP-wire and durable negative/concurrency tests before any live provider call.",
+    "Add native streaming UI states and accurate connection/mode disclosure; never execute arbitrary model text.",
+    "Only bind actual model after account/provider/privacy/budget prerequisites are concretely approved and available; no paidcall performed by this research."
+  ],
+  "acceptance": {
+    "architecture_review_complete": true,
+    "live_model_binding_accepted": false,
+    "production_auth_accepted": false,
+    "durable_database_accepted": false,
+    "deployment_accepted": false,
+    "tests_listed_are_plan_not_results": true
+  },
+  "implementation_observation": {
+    "scope": "local_sdk_and_function_implementation_not_live_model_acceptance",
+    "packages_installed_exactly": [
+      "ai@7.0.153",
+      "@ai-sdk/react@4.0.157",
+      "@openrouter/ai-sdk-provider@3.1.0",
+      "zod@4.6.7"
+    ],
+    "public_endpoint": "/api/agent-chat",
+    "public_mode": "public_guided_preview",
+    "public_model_calls": false,
+    "public_persistence": false,
+    "public_write_tools": false,
+    "server_compute_region_configuration": "fra1",
+    "configured_max_duration_seconds": 10,
+    "local_sdk_protocol_and_model_tests_passed": 15,
+    "model_primitives_http_exposed": false,
+    "actual_provider_requests": 0,
+    "function_deployment_live_test": "pending",
+    "durable_paid_runtime": "not_implemented_not_activated"
+  }
+}

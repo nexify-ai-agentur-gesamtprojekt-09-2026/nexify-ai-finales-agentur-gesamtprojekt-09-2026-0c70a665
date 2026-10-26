@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-26T12:33:07.656541+00:00",
+  "recorded_at": "2026-10-26T14:49:51.202069+00:00",
   "checks": [
     "client_navigation_preserves_conversation_draft",
     "guided_website_journey_and_reload_preferences_persist_without_auto_navigation",
@@ -16,7 +16,15 @@
     "mobile_no_horizontal_overflow",
     "mobile_dialog_keyboard_escape_focus_return",
     "keyboard_skip_link_preserves_standalone_product_hash_route",
-    "standalone_inline_assets_hash_routes_offline_actions_disabled"
+    "standalone_inline_assets_hash_routes_offline_actions_disabled",
+    "sdk_guided_preview_works_when_visitor_session_is_404",
+    "sdk_real_ui_sse_public_links_navigate_without_fake_booking_or_provider_actions",
+    "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+    "sdk_real_stream_and_composer_localization_de_nl_fr",
+    "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
+    "sdk_browser_no_external_provider_requests_observed",
+    "fresh_standalone_sdk_disabled_after_mobile_focus_fix",
+    "development_supervisor_stops_all_owned_process_groups"
   ],
   "public_routes": [
     "/",
@@ -57,7 +65,7 @@
     "/teileklar/rechtliches"
   ],
   "passed": true,
-  "scope": "local React and local visitor gateway plus static standalone; no public deployment, real Clerk login, external mail/calendar/model or MCP auth",
+  "scope": "Actual local React browser, visitor gateway, AI7 guided-preview SSE (session404 simulated) and fresh static standalone; no live LLM/provider call, production deployment, real Clerk login, external mail/calendar/payment or MCP authentication.",
   "targeted_supplement_gutter_followup": [
     {
       "width": 1920,
@@ -116,9 +124,94 @@
   ],
   "source_sha256": {
     "apps/web/components/HomeContent.tsx": "eeb1fe649097390680011b7147ab5411249b724ea979b75266c36ac1b32eeb61",
-    "apps/web/components/Workspace.tsx": "eec628fa35cc940ab33e97def2f0d326f7e2f115e01c35426588968e3f7c89ba",
+    "apps/web/components/Workspace.tsx": "a9bbfa009a1c66989387d3aa60672767a26c502e01259b5118869a12f54146d4",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
   },
-  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open"
+  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open",
+  "sdk_browser_observations": {
+    "recorded_at": "2026-10-26T14:48:48.525629+00:00",
+    "checks": [
+      "sdk_guided_preview_works_when_visitor_session_is_404",
+      "sdk_real_ui_sse_public_links_navigate_without_fake_booking_or_provider_actions",
+      "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+      "sdk_real_stream_and_composer_localization_de_nl_fr",
+      "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
+      "sdk_browser_no_external_provider_requests_observed"
+    ],
+    "passed": true,
+    "scope": "actual local browser against real AI7 guided-preview SSE; visitor-session404 simulated; no live model/provider/payment or production acceptance",
+    "gutter_followup": [
+      {
+        "width": 1920,
+        "path": "/produkte/nex2fly",
+        "gutter": {
+          "left": 80,
+          "right": 80
+        },
+        "passed": true
+      },
+      {
+        "width": 1920,
+        "path": "/teileklar/werkstatt",
+        "gutter": {
+          "left": 80,
+          "right": 80
+        },
+        "passed": true
+      },
+      {
+        "width": 1920,
+        "path": "/impressum",
+        "gutter": {
+          "left": 80,
+          "right": 80
+        },
+        "passed": true
+      },
+      {
+        "width": 390,
+        "path": "/produkte/nex2fly",
+        "gutter": {
+          "left": 24,
+          "right": 24
+        },
+        "passed": true
+      },
+      {
+        "width": 390,
+        "path": "/teileklar/werkstatt",
+        "gutter": {
+          "left": 24,
+          "right": 24
+        },
+        "passed": true
+      },
+      {
+        "width": 390,
+        "path": "/impressum",
+        "gutter": {
+          "left": 24,
+          "right": 24
+        },
+        "passed": true
+      }
+    ]
+  },
+  "development_process_cleanup": {
+    "passed": true,
+    "remaining_owned_pids": [],
+    "closed_ports": {
+      "3003": true,
+      "3004": true,
+      "3005": true
+    }
+  },
+  "sdk_source_sha256": {
+    "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
+    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
+    "api/agent-chat.ts": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
+    "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
+    "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
+  }
 }

@@ -90,6 +90,42 @@
       "what": "Ein kritischer Browserbeleg fehlt, ist widersprüchlich oder passt nicht zu den aktuellen Quellen.",
       "why": "Ein Prototypen-Audit erkennt weder abgeschnittene Figuren noch Hashrouter-Fokusfehler oder veraltete CSS-Selektoren im tatsächlichen Reactprodukt. Die Quellenbindung ersetzt keinen Browserlauf.",
       "fix": "Betroffene Browsergegenproben real ausführen, Fehler beheben und geprüfte Belege mit exakt passenden Quellhashes aktualisieren; keine Hashes ohne Laufzeitprüfung erneuern."
+    },
+    {
+      "id": "ARCH-011",
+      "description": "Alle verwalteten LLM-Bindungen verwenden exakt DeepSeek V4.1 Flash 1017 mit Reasoning high.",
+      "check": "python3 tools/check_llm_policy.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_llm_policy.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine aktive Modellbindung, Reasoningstufe oder Ersatzroute widerspricht der aktuellen Nutzerweisung.",
+      "why": "Eine nur im CI hinterlegte Modellregel verhindert keine Drift in Brain, Router oder Suite. Konfiguration ist noch kein Livezugangs-/Kostenbeleg.",
+      "fix": "Gelesene aktuelle Weisung mit der zentralen Policy und allen managed Bindungen abgleichen; exakte1017-Endung/high/keineErsatzroute erhalten und den tatsächlichen Provider-Wire zusätzlich testen."
+    },
+    {
+      "id": "ARCH-012",
+      "description": "KI-Aufrufstellen werden vor Migration beobachtet; eigene Skills bleiben quellengebunden.",
+      "check": "python3 tools/check_ai_coverage.py --audit >/dev/null 2>&1 && python3 tools/project_skills.py verify >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine registrierte Quelle driftet, ein neuer lexikalischer KI-Kandidat ist unregistriert oder ein eigener Skill passt nicht zum Katalog.",
+      "why": "Anleitungsdateien allein erzwingen keine Providergrenze. Der begrenzte Offline-Scan erkennt Quelländerungen, ist jedoch keine umfassende Laufzeit- oder semantische Garantie. Übergangsphase Audit/Shadow: neue Befunde stoppen keine laufenden Modelle oder Kundenaufträge; Cutover getrennt prüfen.",
+      "fix": "Betroffene Quelle und tatsächlichen Adapter unabhängig prüfen, Lücke zuweisen und beheben, Negativtests ausführen; erst danach bewussten Inventarbeleg aktualisieren. Keine automatischen Hash- oder Statusfreigaben."
+    },
+    {
+      "id": "ARCH-013",
+      "description": "Kontext- und Wissensquellen dürfen keine fremden Hardlinks, FIFO-Hänger, Tokenlecks oder ungeprüfte Versionsrückläufe verursachen.",
+      "check": "python3 -m unittest discover -s tests -p test_context_executor.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_brain_ingestion.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_seo_catalog.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine isolierte Dateisystem-, Datenbank- oder Versionsgegenprobe scheitert.",
+      "why": "Erfolgreiches Einlesen allein beweist weder Quellgrenzen, Secretunterdrückung noch den aktuellen Wissensstand.",
+      "fix": "Konkret reproduzierten Lesepfad oder atomaren Versionswechsel korrigieren, historische Belege erhalten und Gegenproben erneut ausführen; keine Remoteindexierung aus lokalem Staging ableiten."
+    },
+    {
+      "id": "ARCH-014",
+      "description": "Offline-Migration erhält bestehende Arbeit; Kapazitätsrechnung respektiert Messgrenzen und unbekannte Gesamtkosten.",
+      "check": "python3 -m unittest discover -s tests -p test_ai_migration.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_capacity_planner.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_resource_probe.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Übergangs-, Eingabelese-, Einheiten- oder Unbekanntheitsgegenprobe scheitert.",
+      "why": "Eine fehlende neue Voraussetzung darf alte Jobs nicht abschalten. Unvermessene Lastbereiche und bekannte Teilsummen sind keine passende Kapazität oder vollständige Kostenobergrenze.",
+      "fix": "Konkreten Offline-Entscheidungspfad oder Berechnungsfehler beheben, Grenzfälle nachstellen und erneut prüfen; weder bestehende Laufzeiten ändern noch aus Auditdaten Produktionsfreigaben ableiten."
     }
   ]
 }

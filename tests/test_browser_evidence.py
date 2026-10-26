@@ -17,7 +17,7 @@ class BrowserEvidenceTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
-        for relative in (*checker.SOURCE_PATHS, checker.EVIDENCE_PATH):
+        for relative in (*checker.SOURCE_PATHS, *checker.SDK_SOURCE_PATHS, checker.EVIDENCE_PATH):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((ROOT / relative).read_bytes())
@@ -50,6 +50,19 @@ class BrowserEvidenceTests(unittest.TestCase):
         with self.assertRaisesRegex(checker.EvidenceError, "exact_source_path_set_required"):
             checker.check_evidence(self.root)
 
+    def test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed(self):
+        source = self.root / checker.SDK_SOURCE_PATHS[0]
+        original = source.read_bytes()
+        source.write_bytes(original + b'\n/* changed */\n')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_sdk_source_sha256'):
+            checker.check_evidence(self.root)
+        source.write_bytes(original)
+        for identifier in checker.SDK_CRITICAL_CHECKS:
+            evidence = copy.deepcopy(self.evidence)
+            evidence['sdk_browser_observations']['checks'].remove(identifier)
+            self.write(evidence)
+            with self.assertRaisesRegex(checker.EvidenceError, 'critical_sdk_browser_check_missing'):
+                checker.check_evidence(self.root)
     def test_missing_critical_check_and_unpassed_recording_are_rejected(self):
         for identifier in checker.CRITICAL_CHECKS:
             with self.subTest(check=identifier):

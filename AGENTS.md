@@ -21,7 +21,7 @@ Bei jeder Aufgabe die Small-Business-Zuordnung prüfen. Für passende Unternehme
 
 REA zusätzlich unter dem Namen `rea-mcp` führen; Wrapper und Installation siehe `config/integrations/rea-mcp.json` und `docs/automation/rea-mcp.md`. Katalog/Annotationen sind Hinweise, keine Rechte. Nur autorisierte Quell-/Zielbereiche analysieren; statische Analyse nicht als Laufzeitbeleg ausgeben. Tool-/Schema-/Evidenzbindung und exaktes Read-back prüfen. Die bestehende VPS-Instanz wird durch die zusätzliche lokale Instanz nicht verändert.
 
-Für CI-Reviews ist das öffentlich verifizierte OpenRouter-Modell `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` vorgesehen. Kein stiller Modellfallback, kein Ausführen von Modelltext/Patches, keine Lockerung der Main-/Jeff-/Produktivgates. `config/automation.json` und `docs/automation/ai-review.md` enthalten die technischen Grenzen. Besucherausgaben zeigen nur tatsächlich erreichte Zustände: Angebotsentwurf, PDF erzeugt, Versand wartet, Termin angefragt, extern bestätigt, Marketingentwurf oder veröffentlicht dürfen nicht vermischt werden.
+Für sämtliche NeXify-managed LLM-Arbeiten (auch Website-Livechat, Agenten, Recherche, Zusammenfassungen und CI-Reviews) ist verbindlich das öffentlich verifizierte OpenRouter-Modell `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` vorgesehen. Kein stiller Modellfallback, kein Ausführen von Modelltext/Patches, keine Lockerung der Main-/Jeff-/Produktivgates. `config/automation.json` und `docs/automation/ai-review.md` enthalten die technischen Grenzen. Besucherausgaben zeigen nur tatsächlich erreichte Zustände: Angebotsentwurf, PDF erzeugt, Versand wartet, Termin angefragt, extern bestätigt, Marketingentwurf oder veröffentlicht dürfen nicht vermischt werden.
 
 ## Lesereihenfolge
 1. `docs/09-final/00-INDEX.md` → `01` Produkt → `11` Designsystem-Definition → `03`/`04` Design und Frontend → `05` Technik → `14` Gesamtsystem/Portale → `06` Brain → `08` Recht → `15` Umsetzungsplan.
@@ -165,3 +165,98 @@ sachliche Wege mit öffentlichen Informationsseiten und getrennten Rechten.
 Erst das Gesamtsystem fertigstellen; Marketing, Mailings und eigene Social-Kanäle
 danach aktivieren. SEO bleibt offen und ist GEO-Grundlage. GEO jetzt nicht
 vorziehen. `config/operating-model.json` hält Reihenfolge und Zuständigkeiten fest.
+
+
+## Vercel-Dokumentations- und Wiederverwendungsregel
+
+Vor neuen Plattform-/Agentenfunktionen die offiziellen Quellen und installierten
+SDK-Typen prüfen, nicht APIs aus Erinnerung erfinden. Wiederverwendbare Grundlage:
+`docs/research/vercel-platform-options.md`, `config/research/vercel-platform-options.json`
+und `docs/architecture/0015-vercel-agent-runtime.md`. Katalogisiert/heruntergeladen
+bedeutet nicht vollständig gelesen. Neue Versionsstände und relevante Grenzen
+mit Quelle, Zeitpunkt, Hash und tatsächlichem Lesestatus festhalten.
+
+Aktuell kompatibel geprüft: ai7.0.153, @ai-sdk/react4.0.157,
+@openrouter/ai-sdk-provider3.1.0, zod4.6.7, Node22. Das öffentliche
+`/api/agent-chat` ist ausdrücklich eine textgeführte Orientierung ohne Modell,
+Sitzung, Speicherung oder Geschäftswirkung. Der interne ToolLoopAgent ist keine
+Finanzierungs-/Auth-/Ledgerfreigabe und darf nicht ungeprüft öffentlich verdrahtet
+werden. SDK-Schrittlimits sind keine Geldbudgets. Modellkennung, Reasoning,
+Retries, Fallbacks, Telemetrie, Region und Datenverarbeitung anhand der tatsächlichen
+Provider-Wire prüfen. Keine EU-, Kostenfreiheits- oder Vollständigkeitsbehauptung
+aus einem Produktnamen ableiten. Tests mit echten SDK-Protokollen und Mockmodell/
+Fakefetch ausführen; bezahlte Aufrufe bleiben konkret autorisiert und finanziert.
+
+
+## Unverlierbare Modellvorgabe · aktuelle Nutzerweisung
+
+Kanonische, maschinenprüfbare Quelle ist `config/llm-policy.json`: exakt
+`deepseek/deepseek-v4.1-flash-1017`, Reasoning `high`. Die Endung **1017** ist
+zwingend. Keine andere DeepSeek-Version, keine andere Modellfamilie, kein
+Reasoning-Downgrade, kein stilles Tier-/Providerfallback. Gilt für sämtliche
+vom Repository kontrollierten NeXify-managed LLM-Aufrufe, einschließlich
+öffentlichem Website-Livechat, Agenten, Recherche, Verdichtung und CI-Review.
+Der finale Providerrequest muss diese Bindung nach allen SDK-Merges einhalten.
+Eine vorhandene Modellkonfiguration bedeutet noch keine Kosten-, Rechte- oder
+Livefreigabe. Die textgeführte Chatvorschau ist ausdrücklich nur ein Zwischenstand
+und erfüllt den geforderten Live-KI-Chat noch nicht. Fremde Hostingmodelle dieser
+ChatGPT-Sitzung werden durch eine Repositorydatei nicht umgeschaltet.
+
+## Kontext, eigene Skills und aktive Lückenbehebung
+
+Vor mehrstufiger Arbeit `python3 tools/project_skills.py verify` ausführen und
+`skills/nexify-governed-delivery/SKILL.md` sowie fachlich passende eigene Skills
+aus `config/project-skills.json` lesen. Diese Quellen gelten auch dann, wenn
+ein Host die lokalen Skillkopien nicht automatisch lädt. Die Quellen ergänzen
+die bestehenden offiziellen Skills, ohne deren Originaldateien zu verändern.
+`python3 tools/context_executor.py --task "<konkrete Aufgabe>"` liefert begrenzte,
+quellengebundene Auswahl; Status `partial` und ausgelassene Quellen beachten.
+Auswahl oder Import ist keine vollständige Verarbeitung aller historischen Daten.
+
+Fehlende Voraussetzungen stoppen nur ihre betroffene Wirkung und erzeugen einen
+konkreten Behebungsauftrag mit Zuständigkeit, nächstem Schritt, Fälligkeit,
+Quellenstand und erneutem Nachweischeck. Sofort innerhalb vorhandener Rechte
+beheben; unabhängige Arbeiten weiterführen. Externe Zugänge oder notwendige
+Entscheidungen als zugewiesene Abhängigkeit verfolgen und bei Fälligkeit
+eskalieren. Keine endlose blinde Wiederholung. Eine Sperre fällt erst nach
+erfolgreicher Prüfung des aktuellen betroffenen Quellenstands, niemals durch
+Zeitablauf, Selbstauskunft eines Modells oder Umschreiben des Freigabestatus.
+Keine Behauptung globaler Enforcement-Abdeckung ohne tatsächliches Inventar
+und Kontrolle aller zugehörigen Laufzeitadapter; ChatGPT-Hostgrenzen benennen.
+
+
+## Stufenweise Migration ohne Unterbrechung · neueste Nutzerpräzisierung
+
+Die finale Ersatzlösung zuerst parallel bauen, danach je Laufzeit kontrolliert
+umstellen. Bestehende Modelle, laufende Codex-/Claude-CLI-Aufträge und getrennte
+Kundenprojekte nicht durch neu eingeführte Governance-Gates abschalten oder
+beschränken. Übergangsmodus ist Inventar/Audit/Shadow; ein negativer
+Migrationscheck verhindert die Umstellung, nicht die unveränderte bisherige
+Arbeit. Bestehende Sicherheits-, Mandanten-, Secret-, Zahlungs- und
+Freigabegrenzen bleiben bestehen. Neue managed Adapter erhalten ihre eigenen
+Modell-/Zugriffs-/Kostenprüfungen von Anfang an.
+
+Vor Cutover pro Runtime/Projekt/Mandant/Version prüfen: Ersatzfunktion und
+Abhängigkeiten tatsächlich bereit, aktive Jobs beendet oder nachweislich sicher
+übergebbar, getestete Rückkehr, Zuständigkeit, Canary, Scope-/Quellbelege und
+atomarer Übergabe-/Leasevertrag. Bei Fehler, Kontextwechsel, Ausfall oder
+fehlender Voraussetzung bleibt die bisherige Route erhalten; kein stilles
+Umschalten auf einen ungeprüften Ersatz. Rückfall verändert keine bereits
+erfolgten Buchungen oder versendet Aktionen doppelt. ChatGPT-/CLI-Hostingmodelle
+werden nicht durch Projektanleitungen ersetzt. Konkreter Übergangsvertrag:
+`config/ai-migration-policy.json`, `docs/architecture/0019-staged-ai-migration.md`.
+
+Die Wirkungsprüfung aus `config/change-impact-policy.json` gilt für jede
+Projektänderung in angemessenem Umfang: aktuelle Nutzer/Jobs, direkte und
+indirekte Abhängigkeiten, Fehler/Timeout/Teilerfolg/Wiederholung/Parallelität,
+Zwischenbetrieb, Übergabe und Rückkehr. Diese Zusammenhänge eigenständig aus
+erreichbaren Quellen ableiten; keine allgemeine Rückfrage zu fachlich klarer
+Routine. Unbelegte relevante Grenzen offen führen und konkret beheben.
+
+Ressourcen- und Kostenplanung ist Teil dieser Wirkungsprüfung: gemessene
+effektive Servergrenzen, reale Arbeitsprofile und erwartete Lastbereiche vor
+Belegung/Umstellung berechnen, Reserven und Abhängigkeiten berücksichtigen.
+`config/capacity-policy.json` und `tools/capacity_planner.py` verwenden. Ein
+lokaler Cloud-Containerbeleg aus `tools/resource_probe.py` beschreibt keine VPS.
+Monitoring ist kein Abrechnungsledger; unbekannte Lasten nicht als Null führen.
+Keine CPU-/RAM-Limits oder laufenden Jobs aus einer Prognose automatisch ändern.

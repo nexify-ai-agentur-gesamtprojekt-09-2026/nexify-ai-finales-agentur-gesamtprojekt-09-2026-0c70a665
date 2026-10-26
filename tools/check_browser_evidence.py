@@ -22,6 +22,18 @@ SOURCE_PATHS = (
     "config/site-map.json",
 )
 EVIDENCE_PATH = "docs/design/detail-browser-evidence.json"
+SDK_SOURCE_PATHS = (
+    "apps/web/components/PublicOrientationChat.tsx",
+    "apps/web/components/PublicOrientationChat.css",
+    "api/agent-chat.ts",
+    "packages/agent-runtime/public-orientation.ts",
+    "tools/agent-preview.mjs",
+)
+SDK_CRITICAL_CHECKS = frozenset((
+    "sdk_guided_preview_works_when_visitor_session_is_404",
+    "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+    "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
+))
 CRITICAL_CHECKS = frozenset((
     "keyboard_skip_link_preserves_standalone_product_hash_route",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -86,6 +98,18 @@ def check_evidence(root):
     checks = evidence.get("checks")
     if not isinstance(checks, list) or any(not isinstance(item, str) for item in checks) or not CRITICAL_CHECKS.issubset(checks):
         raise EvidenceError("critical_browser_check_missing")
+    sdk_hashes = evidence.get("sdk_source_sha256")
+    if not isinstance(sdk_hashes, dict) or set(sdk_hashes) != set(SDK_SOURCE_PATHS):
+        raise EvidenceError("exact_sdk_source_path_set_required")
+    for relative in SDK_SOURCE_PATHS:
+        if hashlib.sha256(_read(root, relative)).hexdigest() != sdk_hashes[relative]:
+            raise EvidenceError("stale_sdk_source_sha256: " + relative)
+    sdk = evidence.get("sdk_browser_observations")
+    if (not isinstance(sdk, dict) or sdk.get("passed") is not True
+            or not isinstance(sdk.get("checks"), list)
+            or any(not isinstance(item, str) for item in sdk["checks"])
+            or not SDK_CRITICAL_CHECKS.issubset(sdk["checks"])):
+        raise EvidenceError("critical_sdk_browser_check_missing")
     mapping = _json(sources["config/site-map.json"])
     try:
         allowlist = mapping["public_allowlist"]
@@ -122,7 +146,8 @@ def check_evidence(root):
                 raise EvidenceError("gutter_below_24px_or_invalid")
         seen.add(key)
     return {"status": "passed", "scope": "stored_browser_evidence_binding_only",
-            "source_count": len(SOURCE_PATHS), "public_route_count": len(routes), "gutter_rows": len(seen)}
+            "source_count": len(SOURCE_PATHS), "sdk_source_count": len(SDK_SOURCE_PATHS),
+            "public_route_count": len(routes), "gutter_rows": len(seen)}
 
 
 def main():
