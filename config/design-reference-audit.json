@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "status": "source_audit_not_design_implementation_or_acceptance",
+  "observed_at": "2026-10-26T11:25:46.604495+00:00",
+  "scope": {
+    "authoritative_target": "Latest user screenshot requirements relayed in the task, not the rejected React interface.",
+    "target_screenshot_binary_available_to_this_review": false,
+    "pixel_comparison_performed": false,
+    "roots": [
+      "prototypen",
+      "reference/handoff-n2/prototypen",
+      "docs/07-abnahme",
+      "config/design-tokens.json"
+    ],
+    "public_chatgpt_platform_source_access": false,
+    "external_link_statuses": {
+      "chatgpt_url": "403 reported in active session; no platform source downloaded",
+      "cloud_url": "404 reported in active session; no remote template extracted"
+    },
+    "application_files_modified": false,
+    "assets_created_or_regenerated": false,
+    "broad_test_suites_run": false
+  },
+  "target_requirements": {
+    "header_logo": "NeXify original branding",
+    "navigation": [
+      "Produkte",
+      "Leistungen",
+      "Ressourcen",
+      "Unternehmen",
+      "Preise"
+    ],
+    "primary_action": "Projekt besprechen",
+    "hero_headline": "Mehr Zeit für Kunden. Weniger Arbeit dazwischen.",
+    "palette": "lime and anthracite/Graphit",
+    "hero_figures": [
+      "Pascal full body",
+      "NeX orb",
+      "AIFly bird"
+    ],
+    "following_section": "product/partner strip"
+  },
+  "findings": [
+    {
+      "id": "SRC-01",
+      "subject": "Header and branding",
+      "available": true,
+      "sources": [
+        "prototypen/NX-Header.dc.html:74",
+        "prototypen/NX-Header.dc.html:77",
+        "prototypen/NX-Header.dc.html:79",
+        "prototypen/NX-Header.dc.html:84"
+      ],
+      "observed": "Original signet, NeXify AI wordmark with lime X, sticky header, container, focus and link styles.",
+      "difference": "Original cloud navigation at line142 is NeXify AI one/Demos/Shop/Preise & Rechner/API; primary action line169 is Erstgespräch starten. The requested five categories and Projekt besprechen are current user choices, not verbatim original menu.",
+      "adaptation": "Rebuild the actual branded header styling in the own component, with current user navigation labels and real route targets; do not run/copy the custom template runtime."
+    },
+    {
+      "id": "SRC-02",
+      "subject": "Hero composition",
+      "available": "partial",
+      "sources": [
+        "prototypen/NeXifyAI Cloud v12.dc.html:87",
+        "prototypen/NeXifyAI Cloud v12.dc.html:90",
+        "prototypen/NeXifyAI Cloud v12.dc.html:93",
+        "prototypen/NeXifyAI Cloud v12.dc.html:107",
+        "docs/07-abnahme/01-v12-ist.jpg",
+        "docs/07-abnahme/01-v12-grafik.jpg"
+      ],
+      "observed": "Historical v12 hero is two-column text plus animated request/agent/answer/calendar flow; original H1 is Routine erledigt ein Agent. Sie entscheiden.",
+      "difference": "No source-faithful three-figure hero or requested H1 in the inspected original Cloud v12.",
+      "adaptation": "Reuse original palette, typography, container and spacing; apply the user-provided new H1 as user text. Do not claim the historical process panel equals the current screenshot composition."
+    },
+    {
+      "id": "SRC-03",
+      "subject": "Pascal and character art",
+      "available": "partial",
+      "sources": [
+        "prototypen/assets/nexify-ai/pascal-courbois-optimiert.png",
+        "prototypen/assets/nexify-ai/pascal-courbois.webp",
+        "prototypen/assets/nexify-ai/pascal-16x9.png",
+        "prototypen/assets/nexify-ai/nexify-ai-signet.svg"
+      ],
+      "observed": "Transparent torso/portrait of Pascal and portrait framing variants; original lime botanical signet.",
+      "missing_in_inspected_roots": [
+        "original full-body Pascal",
+        "NeX orb artwork matching screenshot",
+        "AIFly bird artwork matching screenshot"
+      ],
+      "adaptation": "Use existing portrait only where a portrait is intended. Do not stretch it into full-body art, substitute a generic bird/orb, regenerate characters or call the botanical signet a found screenshot orb."
+    },
+    {
+      "id": "SRC-04",
+      "subject": "Below-hero strip",
+      "available": "partial",
+      "sources": [
+        "prototypen/NeXifyAI Cloud v12.dc.html:112",
+        "prototypen/NeXifyAI Cloud v12.dc.html:894",
+        "prototypen/NeXifyAI Cloud v12.dc.html:897"
+      ],
+      "observed": "Original contains a moving text capability strip and a separate trust statements grid, not a verified partner logo bar.",
+      "adaptation": "Reuse spacing/separators as presentation references; current product/partner identities and marks need their own evidence and rights. Do not promote textual capabilities to confirmed partner relationships."
+    },
+    {
+      "id": "SRC-05",
+      "subject": "Number layouts",
+      "available": true,
+      "sources": [
+        "prototypen/NeXifyAI Cloud v12.dc.html:124",
+        "prototypen/NeXifyAI Cloud v12.dc.html:130",
+        "prototypen/NeXifyAI Cloud v12.dc.html:132",
+        "prototypen/NeXifyAI Cloud v12.dc.html:925"
+      ],
+      "observed": "Before/after bar card with example labels, side calculator and a six-item number ledger.",
+      "adaptation": "The layout can be adapted. Example values must remain marked examples; historical counts and prices are not newly verified facts or authorized marketing claims."
+    },
+    {
+      "id": "SRC-06",
+      "subject": "Misleading source-hero filename",
+      "available": true,
+      "sources": [
+        "prototypen/assets/source-hero.png"
+      ],
+      "observed": "Visually inspected 1717x916 automotive/parts picture.",
+      "adaptation": "TEILEKLAR context only; do not use as NeXify three-presenter hero."
+    },
+    {
+      "id": "SRC-07",
+      "subject": "Historical character CI conflicts",
+      "available": true,
+      "sources": [
+        "docs/01-konzept/NeXifyAI-CI-und-Logo.md"
+      ],
+      "observed": "Historical family uses the same botanical signet in badge shapes; screen lime is governed by newer token source #D7FA50, not old print/character lime #C8F04B.",
+      "adaptation": "Treat badge-family document as historical reference. Latest user screenshot governs requested orb/bird design; original missing art remains a gap, not permission to invent it."
+    }
+  ],
+  "reusable_design_values": {
+    "source": "config/design-tokens.json",
+    "background": "#242826",
+    "deep_surface": "#1B1E1D",
+    "lime": "#D7FA50",
+    "text": "#FFFFFF",
+    "font": "Geist",
+    "mono": "Geist Mono",
+    "container": "min(1280px, 100% - 48px)",
+    "hero_columns": "minmax(0,6fr) minmax(0,6fr)",
+    "hero_gap_px": 48,
+    "hero_padding_top_px": 72,
+    "hero_padding_bottom_px": 64,
+    "h1": "80px / .98 / -.04em; actual v12 CSS 52px <=1040 and 40px <=640; tokens describe a generic 38–52 mobile range",
+    "header_min_height_px": 72,
+    "header_signet_box_px": 34,
+    "header_signet_image_px": 26,
+    "header_wordmark_px": 21,
+    "minimum_interactive_target_px": 44,
+    "motion": "honor prefers-reduced-motion; original state animations are not permission for autoplay media"
+  },
+  "implementation_recommendation": [
+    "Adapt original signet/wordmark and typography; preserve original asset bytes and C2PA metadata.",
+    "Rebuild brand header, hero container, gradients, CTA geometry and footer as own React components; no custom-platform runtime import.",
+    "Use latest user menu/headline as explicit target text; do not describe them as copied from v12.",
+    "Keep three-figure composition blocked on exact original assets; clearly distinguish available torso photo from missing full-body artwork.",
+    "Partner strip needs actual authorized product marks/relationships; no fabricated logos or endorsements.",
+    "Exclude the rejected React styling as a design authority; source comparison does not constitute acceptance."
+  ],
+  "sources": [
+    {
+      "path": "prototypen/NX-Header.dc.html",
+      "bytes": 28857,
+      "sha256": "9f8bb5113ab6d5c6cccd2c447f90b868169901ad3ce56758c54fb84c7cdacf5f",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/NX-Header.dc.html",
+        "sha256": "003f8e3793d0d8675897fbd89262f7f63c36d775b4fd673e66021e3a6c19163a",
+        "byte_identical": false
+      }
+    },
+    {
+      "path": "prototypen/NX-Footer.dc.html",
+      "bytes": 33399,
+      "sha256": "bbe124d8c25373b54676aa848adb9a60a8a319178bb52c8e87dbb7da35ec98ce",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/NX-Footer.dc.html",
+        "sha256": "41c9c40800a4587502e1d5a7e1078e84aa698421a1311b33177b01c0d9ee34c4",
+        "byte_identical": false
+      }
+    },
+    {
+      "path": "prototypen/NeXifyAI Cloud v12.dc.html",
+      "bytes": 134310,
+      "sha256": "4f3befc8dd12803c781bc377d0611c83262bcb40907b01bbefac6784a6671ed5",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/NeXifyAI Cloud v12.dc.html",
+        "sha256": "856953ed9d3a97830505801f4f69c7d07e64e129dcb914faf38759323cd0446f",
+        "byte_identical": false
+      }
+    },
+    {
+      "path": "config/design-tokens.json",
+      "bytes": 4569,
+      "sha256": "76411ab83c18fa071efaaa518da8fb7fb97867c67a016bcfb67f35359a68c480",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/config/design-tokens.json",
+        "sha256": "76411ab83c18fa071efaaa518da8fb7fb97867c67a016bcfb67f35359a68c480",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "docs/09-final/11-designsystem-definition.md",
+      "bytes": 4761,
+      "sha256": "d1924ddcac4ee1d43cec696df3c30a8fdf0959c0183c5bf9a38bbeadfa4c1568",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/docs/09-final/11-designsystem-definition.md",
+        "sha256": "d1924ddcac4ee1d43cec696df3c30a8fdf0959c0183c5bf9a38bbeadfa4c1568",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "docs/01-konzept/NeXifyAI-CI-und-Logo.md",
+      "bytes": 3729,
+      "sha256": "d4008e3e1dbbaa067d4499229f3601d85a7de688824febcf8c2bb578cc48bc92",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/docs/01-konzept/NeXifyAI-CI-und-Logo.md",
+        "sha256": "d4008e3e1dbbaa067d4499229f3601d85a7de688824febcf8c2bb578cc48bc92",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "docs/07-abnahme/01-v12-ist.jpg",
+      "bytes": 43171,
+      "sha256": "503dabcd1296a2a0a5eac93ed7b5d76410ed71a01400e6425038dd4dd272c6b3",
+      "width": 909,
+      "height": 540,
+      "mode": "RGB",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/docs/07-abnahme/01-v12-ist.jpg",
+        "sha256": "503dabcd1296a2a0a5eac93ed7b5d76410ed71a01400e6425038dd4dd272c6b3",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "docs/07-abnahme/01-v12-grafik.jpg",
+      "bytes": 24191,
+      "sha256": "4e225f53a79a99a6d6d6923939ffa9c2d3df089eec26eb9bed90b54bc8889e69",
+      "width": 909,
+      "height": 540,
+      "mode": "RGB",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/docs/07-abnahme/01-v12-grafik.jpg",
+        "sha256": "4e225f53a79a99a6d6d6923939ffa9c2d3df089eec26eb9bed90b54bc8889e69",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/nexify-ai-signet.svg",
+      "bytes": 10483,
+      "sha256": "578e15ac2425d243a03fb79dc521c6516a9313a667a305c6a6a469f1e54cf409",
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/nexify-ai-signet.svg",
+        "sha256": "578e15ac2425d243a03fb79dc521c6516a9313a667a305c6a6a469f1e54cf409",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-16x9.png",
+      "bytes": 1515507,
+      "sha256": "ece1950a3a9224b4bc27b6e0ffc504cf39705f992cf8b2e61e33a78a223b84e9",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        0,
+        0,
+        1600,
+        900
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/pascal-16x9.png",
+        "sha256": "ece1950a3a9224b4bc27b6e0ffc504cf39705f992cf8b2e61e33a78a223b84e9",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-1x1.png",
+      "bytes": 823560,
+      "sha256": "a1ee48d4ed693562adab2ea6314371640f1d99cdb8067750eedf0e9b32843c08",
+      "width": 800,
+      "height": 800,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        0,
+        0,
+        800,
+        800
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/pascal-1x1.png",
+        "sha256": "a1ee48d4ed693562adab2ea6314371640f1d99cdb8067750eedf0e9b32843c08",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-1x1.webp",
+      "bytes": 12702,
+      "sha256": "7f9e5e66209095fb185d63c47036be4332a4fb91eacb56e263ff66ec449739cb",
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "n2_counterpart": null
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-4x5.png",
+      "bytes": 992960,
+      "sha256": "c14a3d4d3414f14bdad1af6e2b79e017c42b6918afb20a3947348b0d73102011",
+      "width": 800,
+      "height": 1000,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        0,
+        0,
+        800,
+        1000
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/pascal-4x5.png",
+        "sha256": "c14a3d4d3414f14bdad1af6e2b79e017c42b6918afb20a3947348b0d73102011",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-4x5.webp",
+      "bytes": 14950,
+      "sha256": "e83fdbd19ff32468a6c4382d9a10893b8bf9e8e9191090f651331f517d2b4352",
+      "width": 800,
+      "height": 1000,
+      "mode": "RGB",
+      "n2_counterpart": null
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-courbois-optimiert.png",
+      "bytes": 549885,
+      "sha256": "4f13861b4a0927a126972e186430ed45b803d9be66fdc271ed9629d063c51240",
+      "width": 760,
+      "height": 1032,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        0,
+        0,
+        760,
+        1032
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/pascal-courbois-optimiert.png",
+        "sha256": "4f13861b4a0927a126972e186430ed45b803d9be66fdc271ed9629d063c51240",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/pascal-courbois.webp",
+      "bytes": 19664,
+      "sha256": "e2f913fd6b63c9e6817ccf8fe2c124c06cc98f8e426b4ad523b719e25156f015",
+      "width": 380,
+      "height": 516,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        0,
+        0,
+        380,
+        516
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/pascal-courbois.webp",
+        "sha256": "e2f913fd6b63c9e6817ccf8fe2c124c06cc98f8e426b4ad523b719e25156f015",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/signalfeld-s4492.png",
+      "bytes": 2642809,
+      "sha256": "62bd8ffc6a36dd9904dedb9e30a95fbcba0ac6cca17f387b7d85c2b8864e1455",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        0,
+        0,
+        1600,
+        900
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/signalfeld-s4492.png",
+        "sha256": "62bd8ffc6a36dd9904dedb9e30a95fbcba0ac6cca17f387b7d85c2b8864e1455",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/wordmark-horizontal.png",
+      "bytes": 16611,
+      "sha256": "d33f5cd906adedb8e97f3f76150ea87a56205cc000c4aea009dd6c0ada09a69e",
+      "width": 574,
+      "height": 40,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        1,
+        1,
+        573,
+        40
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/wordmark-horizontal.png",
+        "sha256": "d33f5cd906adedb8e97f3f76150ea87a56205cc000c4aea009dd6c0ada09a69e",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/nexify-ai/wordmark-stacked.png",
+      "bytes": 19838,
+      "sha256": "7026c982c5aca686a7fffcf80d90893c7386a8f504aca9b118bab9583c2c99bd",
+      "width": 408,
+      "height": 90,
+      "mode": "RGBA",
+      "nontransparent_bbox": [
+        1,
+        2,
+        379,
+        87
+      ],
+      "n2_counterpart": {
+        "path": "reference/handoff-n2/prototypen/assets/nexify-ai/wordmark-stacked.png",
+        "sha256": "7026c982c5aca686a7fffcf80d90893c7386a8f504aca9b118bab9583c2c99bd",
+        "byte_identical": true
+      }
+    },
+    {
+      "path": "prototypen/assets/source-hero.png",
+      "bytes": 1789399,
+      "sha256": "f8fc0aceb0c6c1bf293efdccabb55beec4034ad08d30657a4f73710d8655b349",
+      "width": 1717,
+      "height": 916,
+      "mode": "RGB",
+      "n2_counterpart": null
+    },
+    {
+      "path": "prototypen/assets/fonts/geist-latin.woff2",
+      "bytes": 28356,
+      "sha256": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
+      "n2_counterpart": null
+    },
+    {
+      "path": "prototypen/assets/fonts/geist-mono-latin.woff2",
+      "bytes": 31288,
+      "sha256": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
+      "n2_counterpart": null
+    }
+  ]
+}

@@ -1,0 +1,1133 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-26",
+  "scope": "Agency/TEILEKLAR source-faithful rebuild; technical acceptance mapping, not certification or legal opinion",
+  "source_branch": "factory/source-faithful-rebuild-2026-10-26",
+  "sources": [
+    {
+      "id": "DIN5008",
+      "url": "https://www.din.de/de/suche/62730!search?query=DIN%205008",
+      "authority": "DIN catalogue",
+      "observed_at": "2026-10-26T11:26:23.415177+00:00",
+      "http_status": 200,
+      "final_url": "https://www.din.de/de/suche/62730!search?query=DIN%205008",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 257747,
+      "sha256": "09a3f7127c757c6fd6cbb7b1b0968d736ef5f435d893cb5851e91daef1955b85",
+      "status": "read_public_source"
+    },
+    {
+      "id": "UX210",
+      "url": "https://www.din.de/de/suche/62730!search?query=ISO%209241-210",
+      "authority": "DIN catalogue",
+      "observed_at": "2026-10-26T11:26:23.416034+00:00",
+      "http_status": 200,
+      "final_url": "https://www.din.de/de/suche/62730!search?query=ISO%209241-210",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 272325,
+      "sha256": "e2620aeebb38afa9154be222c352324d06945d443829deba169a66675063313b",
+      "status": "read_public_source"
+    },
+    {
+      "id": "UX11",
+      "url": "https://www.din.de/de/suche/62730!search?query=ISO%209241-11",
+      "authority": "DIN catalogue",
+      "observed_at": "2026-10-26T11:26:23.416729+00:00",
+      "http_status": 200,
+      "final_url": "https://www.din.de/de/suche/62730!search?query=ISO%209241-11",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 274682,
+      "sha256": "5444c9336446b542f60261ad5fcc4371b5f925fed10dca4d56474741dd3fff09",
+      "status": "read_public_source"
+    },
+    {
+      "id": "QMS9001",
+      "url": "https://www.din.de/de/suche/62730!search?query=ISO%209001",
+      "authority": "DIN catalogue",
+      "observed_at": "2026-10-26T11:26:23.417801+00:00",
+      "http_status": 200,
+      "final_url": "https://www.din.de/de/suche/62730!search?query=ISO%209001",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 295504,
+      "sha256": "66ea1027b77fa93fad1045b9241f9cb7e2c218196370cf6da08c9990d8a31c47",
+      "status": "read_public_source"
+    },
+    {
+      "id": "ISMS27001",
+      "url": "https://www.din.de/de/suche/62730!search?query=ISO%2027001",
+      "authority": "DIN catalogue",
+      "observed_at": "2026-10-26T11:26:23.419762+00:00",
+      "http_status": 200,
+      "final_url": "https://www.din.de/de/suche/62730!search?query=ISO%2027001",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 281168,
+      "sha256": "ec5b858a612ce14ca29d2550a970fa67327ecacb3e204dde8658258a20ac0c95",
+      "status": "read_public_source"
+    },
+    {
+      "id": "EN301549",
+      "url": "https://www.din.de/de/suche/62730!search?query=301549",
+      "authority": "DIN catalogue",
+      "observed_at": "2026-10-26T11:26:23.420337+00:00",
+      "http_status": 200,
+      "final_url": "https://www.din.de/de/suche/62730!search?query=301549",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 268992,
+      "sha256": "598bdccf5107bad65fbeec390c2dd954c0003a0f68a22e74a44e2cd49618fc5e",
+      "status": "read_public_source"
+    },
+    {
+      "id": "WCAG22",
+      "url": "https://www.w3.org/TR/2024/REC-WCAG22-20241212/",
+      "authority": "W3C recommendation",
+      "observed_at": "2026-10-26T11:26:26.246214+00:00",
+      "http_status": 200,
+      "final_url": "https://www.w3.org/TR/2024/REC-WCAG22-20241212/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 512457,
+      "sha256": "6e3c5fe397257cae509a2fb4752b73062cf8cbeb92c2cec618989b17e4cf7057",
+      "status": "read_public_source"
+    },
+    {
+      "id": "WAI-EVAL",
+      "url": "https://www.w3.org/WAI/test-evaluate/",
+      "authority": "W3C evaluation guidance",
+      "observed_at": "2026-10-26T11:26:26.380732+00:00",
+      "http_status": 200,
+      "final_url": "https://www.w3.org/WAI/test-evaluate/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 50404,
+      "sha256": "282d08547db3412d24f1b0e9ab292d7c5c1e87f6d59df8e3df71da30c8d1c3e3",
+      "status": "read_public_source"
+    },
+    {
+      "id": "BFSG1",
+      "url": "https://www.gesetze-im-internet.de/bfsg/__1.html",
+      "authority": "German official statute publication",
+      "observed_at": "2026-10-26T11:26:26.514245+00:00",
+      "http_status": 200,
+      "final_url": "https://www.gesetze-im-internet.de/bfsg/__1.html",
+      "content_type": "text/html",
+      "bytes": 10429,
+      "sha256": "5880228e664fa8db72c4a76a4b85f875ad7199245ee02d43395753b5bf1049eb",
+      "status": "read_public_source"
+    },
+    {
+      "id": "BFSG3",
+      "url": "https://www.gesetze-im-internet.de/bfsg/__3.html",
+      "authority": "German official statute publication",
+      "observed_at": "2026-10-26T11:26:26.556012+00:00",
+      "http_status": 200,
+      "final_url": "https://www.gesetze-im-internet.de/bfsg/__3.html",
+      "content_type": "text/html",
+      "bytes": 6649,
+      "sha256": "7111f0b644b9322ecf49967d4d1af0c00079ea2f66f3ee5ce54e08037c950bf8",
+      "status": "read_public_source"
+    },
+    {
+      "id": "BFSG4",
+      "url": "https://www.gesetze-im-internet.de/bfsg/__4.html",
+      "authority": "German official statute publication",
+      "observed_at": "2026-10-26T11:26:26.796815+00:00",
+      "http_status": 200,
+      "final_url": "https://www.gesetze-im-internet.de/bfsg/__4.html",
+      "content_type": "text/html",
+      "bytes": 3979,
+      "sha256": "ac56075850ecc8eebe81c530ef3188adf9d61d409d49a7b7bc444b9a39c2eeb0",
+      "status": "read_public_source"
+    },
+    {
+      "id": "BFSG14",
+      "url": "https://www.gesetze-im-internet.de/bfsg/__14.html",
+      "authority": "German official statute publication",
+      "observed_at": "2026-10-26T11:26:26.990437+00:00",
+      "http_status": 200,
+      "final_url": "https://www.gesetze-im-internet.de/bfsg/__14.html",
+      "content_type": "text/html",
+      "bytes": 6377,
+      "sha256": "e353662ac4f98d7b38d5cc329e4e7c87aaa5ae2567516c0c8d7d6b5bc5b7c0f1",
+      "status": "read_public_source"
+    },
+    {
+      "id": "BFSGV",
+      "url": "https://www.gesetze-im-internet.de/bfsgv/BJNR092800022.html",
+      "authority": "German official ordinance publication",
+      "observed_at": "2026-10-26T11:26:27.129923+00:00",
+      "http_status": 200,
+      "final_url": "https://www.gesetze-im-internet.de/bfsgv/BJNR092800022.html",
+      "content_type": "text/html",
+      "bytes": 54784,
+      "sha256": "b9015f45711fcc73deb8925ac289d6595cd6d0f5b939fae0cefef8239c9b1e6d",
+      "status": "read_public_source"
+    },
+    {
+      "id": "AI50",
+      "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50",
+      "authority": "European Commission AI Act Service Desk",
+      "observed_at": "2026-10-26T11:26:27.267255+00:00",
+      "http_status": 200,
+      "final_url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 89453,
+      "sha256": "df96e69bd031073cf8eae70910a511a309284887643ab119403a0568ef0903e5",
+      "status": "read_public_source"
+    },
+    {
+      "id": "AI113",
+      "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113",
+      "authority": "European Commission AI Act Service Desk",
+      "observed_at": "2026-10-26T11:26:27.619692+00:00",
+      "http_status": 200,
+      "final_url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 83970,
+      "sha256": "917943a077a04fcc90471b32acf7d66259f0f5f150a0d8dc180472faace6e10e",
+      "status": "read_public_source"
+    },
+    {
+      "id": "EDPB-SEC",
+      "url": "https://www.edpb.europa.eu/sme-data-protection-guide/secure-personal-data_en",
+      "authority": "European Data Protection Board",
+      "observed_at": "2026-10-26T11:26:27.984416+00:00",
+      "http_status": 200,
+      "final_url": "https://www.edpb.europa.eu/sme/be-compliant/secure-personal-data_en",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 54920,
+      "sha256": "3c1a9d89e32977d7be22b5af27daff8f3ec5c6242381c9de0f24cd42b462acfc",
+      "status": "read_public_source"
+    },
+    {
+      "id": "GDPR-EURL",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "authority": "EUR-Lex",
+      "observed_at": "2026-10-26T11:26:28.701538+00:00",
+      "http_status": 202,
+      "final_url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "empty_or_challenge_not_verified"
+    },
+    {
+      "id": "AI-EURL",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "authority": "EUR-Lex",
+      "observed_at": "2026-10-26T11:26:28.702880+00:00",
+      "http_status": 202,
+      "final_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "empty_or_challenge_not_verified"
+    },
+    {
+      "id": "EAA-EURL",
+      "url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj/eng",
+      "authority": "EUR-Lex",
+      "observed_at": "2026-10-26T11:26:28.737855+00:00",
+      "http_status": 202,
+      "final_url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj/eng",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "empty_or_challenge_not_verified"
+    },
+    {
+      "id": "HARMONIZED-WAD",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32021D1339",
+      "authority": "EUR-Lex",
+      "observed_at": "2026-10-26T11:26:28.846847+00:00",
+      "http_status": 202,
+      "final_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32021D1339",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "empty_or_challenge_not_verified"
+    },
+    {
+      "id": "ETSI-PDF",
+      "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/03.02.01_60/en_301549v030201p.pdf",
+      "authority": "ETSI",
+      "observed_at": "2026-10-26T11:26:28.891557+00:00",
+      "http_status": 403,
+      "status": "not_accessible_not_verified"
+    },
+    {
+      "id": "ISO-DIRECT",
+      "url": "https://www.iso.org/standard/62085.html",
+      "authority": "ISO",
+      "observed_at": "2026-10-26T11:26:28.997712+00:00",
+      "http_status": 403,
+      "status": "not_accessible_not_verified"
+    },
+    {
+      "id": "REPO",
+      "path": "AGENTS.md",
+      "sha256": "a0292bd63d4ac8d37e7776bddb7fe9e7bc3a0ca48c9501618d76c2583d380b44",
+      "authority": "repository requirement",
+      "status": "read_local_source"
+    },
+    {
+      "id": "MEDIA",
+      "path": "docs/contracts/hero-media.md",
+      "sha256": "d49e1ba83ecfe3981416e72ceef21fb07800e21e088b350343d3235c9043ccd2",
+      "authority": "repository requirement",
+      "status": "read_local_source"
+    },
+    {
+      "id": "BOUNDARY",
+      "path": "config/source-boundaries.json",
+      "sha256": "0b9fb61c0fab2206b1b4ae04110b497d276980d1c0ad590723cf2e8f60f1ea7b",
+      "authority": "repository requirement",
+      "status": "read_local_source"
+    }
+  ],
+  "standards": [
+    {
+      "id": "DIN-DOC",
+      "title": "DIN 5008",
+      "edition_observation": "DIN catalogue marks 2020-03 and correction 1:2020-07 current.",
+      "source_refs": [
+        "DIN5008",
+        "REPO"
+      ],
+      "applicability": "Business correspondence/offers by repository requirement; not a general website visual style law.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Full applicable edition including correction needed before precise layout compliance; qualified document review.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "ISO-HCD",
+      "title": "ISO 9241-210",
+      "edition_observation": "ISO 9241-210:2019; DIN EN edition 2020-03 marked current.",
+      "source_refs": [
+        "UX210"
+      ],
+      "applicability": "Human-centred design process for actual users/tasks/context; project quality target, not aesthetic certification.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Full edition for clause-level conformity; real stakeholder/user evaluation.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "ISO-USABILITY",
+      "title": "ISO 9241-11",
+      "edition_observation": "ISO 9241-11:2018; DIN EN edition 2018-11 marked current.",
+      "source_refs": [
+        "UX11"
+      ],
+      "applicability": "Define and evaluate effectiveness, efficiency and satisfaction in a specified usage context; do not invent acceptance percentages.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Full edition and agreed usage context; real participant study before usability claims.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "ISO-QMS",
+      "title": "ISO 9001",
+      "edition_observation": "DIN catalogue: 2015-11 plus A1:2024-11 current; ISO 9001:2026/DIN edition 2026-11 labelled pre-provided. Edition/transition decision pending, not silently upgraded.",
+      "source_refs": [
+        "QMS9001"
+      ],
+      "applicability": "Optional organisation-wide QMS target unless actual contracts impose it; repository CI alone is not a QMS.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Approved scope, licensed current edition and transition plan; independent certification body only if certification is sought.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "ISO-ISMS",
+      "title": "ISO/IEC 27001",
+      "edition_observation": "ISO/IEC 27001:2022; DIN EN 2024-01 and A1:2024-11 (Amd 1:2024) current in DIN catalogue.",
+      "source_refs": [
+        "ISMS27001"
+      ],
+      "applicability": "Optional scoped ISMS; security engineering and GDPR obligations apply independently.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Risk assessment and justified controls/SoA from applicable full standard; management and operational audit; certification independent if sought.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "WCAG",
+      "title": "WCAG 2.2 level AA",
+      "edition_observation": "W3C Recommendation 2024-12-12 read at dated stable URL.",
+      "source_refs": [
+        "WCAG22",
+        "WAI-EVAL",
+        "REPO"
+      ],
+      "applicability": "Mandatory repository accessibility target for complete public/private flows; automated checks cover only part of it.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Manual keyboard, assistive-technology and complete-process evaluation; no WCAG certificate inferred.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "EN-ICT",
+      "title": "EN 301 549",
+      "edition_observation": "DIN catalogue: EN V3.2.1(2021-03), DIN2022-06 current; prEN301549:2025/DIN2026-05 draft. ETSI full PDF blocked.",
+      "source_refs": [
+        "EN301549",
+        "ETSI-PDF",
+        "HARMONIZED-WAD"
+      ],
+      "applicability": "Assess applicable web, documents, software, support/media requirements; not identical to WCAG2.2 and not automatic BFSG harmonisation proof.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Obtain publicly available official ETSI text through supported access; check current edition and current EU Official Journal references for the actual legal instrument.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "BFSG",
+      "title": "BFSG/BFSGV and European Accessibility Act",
+      "edition_observation": "BFSG scope includes services provided after 2025-06-28. BFSGV text read with amendment 2026-07-10.",
+      "source_refs": [
+        "BFSG1",
+        "BFSG3",
+        "BFSG4",
+        "BFSG14",
+        "BFSGV",
+        "EAA-EURL"
+      ],
+      "applicability": "Conditional legal scope: actual B2C e-commerce/services, markets and provider role; microenterprise service exception cannot be assumed for this B.V.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Qualified legal applicability assessment; confirm relevant harmonised norms and accessibility information obligations; no automatic exemption from business name or size guess.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "GDPR",
+      "title": "GDPR Articles 25 and 32",
+      "edition_observation": "Regulation(EU)2016/679 reference; EUR-Lex body unavailable here. EDPB official security/design guidance read.",
+      "source_refs": [
+        "GDPR-EURL",
+        "EDPB-SEC",
+        "REPO"
+      ],
+      "applicability": "Personal data in visitor chat, identities, bookings, outbox, voices/images: minimisation, safe defaults and risk-appropriate security; determine controller/processor roles.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Read current consolidated legal text in usable official form; documented processing/retention/transfer/incident decisions and operational evidence; assess DPIA necessity, do not assume it.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    },
+    {
+      "id": "AI-TRANSPARENCY",
+      "title": "AI Act Article 50 and application Article 113",
+      "edition_observation": "EU Commission Service Desk article text states consolidated version as at 2026-07-27; Article113 general application 2026-08-02 with specific exceptions. EUR-Lex body unavailable here.",
+      "source_refs": [
+        "AI50",
+        "AI113",
+        "AI-EURL",
+        "MEDIA"
+      ],
+      "applicability": "Classify actual provider/deployer role, interaction and synthetic/deepfake media; accessible notice at relevant first interaction/exposure; not a blanket claim that every website is certified AI-compliant.",
+      "full_normative_text_read": false,
+      "independent_or_licensed_review": "Qualified role/scope review and current official consolidated law; verify provider machine-readable output marking and presenter disclosure rights.",
+      "conformity_or_certification_accepted": false,
+      "public_text_review_scope": "Targeted publicly available requirements/metadata only; no claim of complete clause-by-clause standard review."
+    }
+  ],
+  "requirements": [
+    {
+      "id": "DOC-01",
+      "standard_ids": [
+        "DIN-DOC"
+      ],
+      "requirement": "Approved business document template with sender/recipient, date, subject, readable structure and edition-bound layout.",
+      "source_refs": [
+        "DIN5008",
+        "REPO"
+      ],
+      "implementation_plan": "Replace or extend the minimal PDF draft with an approved versioned template; retain draft status and existing price/legal gates. Do not invent DIN measurements without full text.",
+      "test_plan": "Render short/long DE/NL/FR cases; inspect page breaks, address block, clipping and paper output against the licensed applicable edition.",
+      "existing_evidence_paths": [
+        "apps/agent-gateway/server.py",
+        "tests/test_native_chat.py"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "document_owner_and_qualified_reviewer",
+      "status": "partial_repository_evidence",
+      "gap": "Current make_pdf produces real draft PDF but has no demonstrated DIN5008 template or layout acceptance.",
+      "existing_evidence_presence": {
+        "apps/agent-gateway/server.py": true,
+        "tests/test_native_chat.py": true
+      }
+    },
+    {
+      "id": "DOC-02",
+      "standard_ids": [
+        "DIN-DOC",
+        "EN-ICT",
+        "WCAG"
+      ],
+      "requirement": "PDF download preserves content and accessible reading alternatives.",
+      "source_refs": [
+        "DIN5008",
+        "EN301549",
+        "ETSI-PDF",
+        "HARMONIZED-WAD",
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Provide an HTML/transcript alternative now; plan semantic/tagged PDF and document accessibility evaluation where applicable.",
+      "test_plan": "Validate PDF text/order/language/structure with appropriate tool and manual reader; xref tests alone insufficient.",
+      "existing_evidence_paths": [
+        "apps/agent-gateway/server.py",
+        "tests/test_native_chat.py"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "document_and_accessibility_owner",
+      "status": "partial_repository_evidence",
+      "gap": "PDF byte/xref/draft tests do not establish document accessibility or DIN conformity.",
+      "existing_evidence_presence": {
+        "apps/agent-gateway/server.py": true,
+        "tests/test_native_chat.py": true
+      }
+    },
+    {
+      "id": "UX-01",
+      "standard_ids": [
+        "ISO-HCD",
+        "ISO-USABILITY"
+      ],
+      "requirement": "Define actual users, tasks and usage context before approving design.",
+      "source_refs": [
+        "UX11",
+        "UX210"
+      ],
+      "implementation_plan": "Document agency vs TEILEKLAR roles, public vs authenticated flows, devices, languages and assistive technology contexts without importing Affilinet users.",
+      "test_plan": "Review explicit tasks and expected outcomes with product owner and representative users.",
+      "existing_evidence_paths": [
+        "config/source-boundaries.json",
+        "config/site-map.json"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "product_and_ux_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "config/source-boundaries.json": true,
+        "config/site-map.json": true
+      }
+    },
+    {
+      "id": "UX-02",
+      "standard_ids": [
+        "ISO-HCD"
+      ],
+      "requirement": "Preserve source intent while documenting design changes.",
+      "source_refs": [
+        "UX210"
+      ],
+      "implementation_plan": "Map every page/section/action to preserved source, native target and documented deviations; separate premium visual decisions from normative compliance.",
+      "test_plan": "Compare source and target at agreed desktop/mobile states; record missing interactions and reviewer disposition.",
+      "existing_evidence_paths": [
+        "docs/contracts/prototype-pages.json",
+        "config/preview-coverage.json"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "ux_and_product_owner",
+      "status": "partial_repository_evidence",
+      "gap": "Source inventory is available but 93-source content/interaction acceptance remains incomplete.",
+      "existing_evidence_presence": {
+        "docs/contracts/prototype-pages.json": true,
+        "config/preview-coverage.json": true
+      }
+    },
+    {
+      "id": "UX-03",
+      "standard_ids": [
+        "ISO-USABILITY"
+      ],
+      "requirement": "Usability outcomes require real task evaluation.",
+      "source_refs": [
+        "UX11"
+      ],
+      "implementation_plan": "Agree task completion, effort/time/error and satisfaction measures and thresholds before study; include unsuccessful and interrupted flows.",
+      "test_plan": "Observe representative participants and report sample/context/limitations; do not substitute screenshots or invented percentages.",
+      "existing_evidence_paths": [
+        "docs/quality-document.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "ux_research_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "docs/quality-document.md": true
+      }
+    },
+    {
+      "id": "UX-04",
+      "standard_ids": [
+        "ISO-HCD"
+      ],
+      "requirement": "Iterative design decisions are traceable to findings.",
+      "source_refs": [
+        "UX210"
+      ],
+      "implementation_plan": "Keep issue, proposed change, source relationship, user impact and retest record for each accepted iteration.",
+      "test_plan": "Review one complete finding-to-retest trail and reopen unresolved high-impact findings.",
+      "existing_evidence_paths": [
+        "PROGRESS.md",
+        "feature_list.json"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "ux_and_quality_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "PROGRESS.md": true,
+        "feature_list.json": true
+      }
+    },
+    {
+      "id": "A11Y-01",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Normal text contrast >=4.5:1; large text >=3:1; relevant nontext UI contrast >=3:1, subject to criterion applicability.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Derive colors from approved tokens and verify actual foreground/background states including focus/errors/disabled exceptions.",
+      "test_plan": "Compute contrast for all combinations and manually inspect images, gradients and states; map SC1.4.3/1.4.11.",
+      "existing_evidence_paths": [
+        "config/design-tokens.json",
+        "tools/ds-audit.js"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "frontend_and_accessibility_owner",
+      "status": "partial_repository_evidence",
+      "gap": "Token/heuristic audit is not a complete contrast inventory of rebuilt pages.",
+      "existing_evidence_presence": {
+        "config/design-tokens.json": true,
+        "tools/ds-audit.js": true
+      }
+    },
+    {
+      "id": "A11Y-02",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Keyboard access, meaningful focus order, no keyboard trap; focus visible and not obscured.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Ensure navigation, mobile sidebar/dialog, close controls, forms and Clerk components work without pointer; restore focus after dismiss.",
+      "test_plan": "Manual Tab/ShiftTab/Enter/Space/Escape across full flows; SC2.1.1/2.1.2/2.4.3/2.4.7/2.4.11.",
+      "existing_evidence_paths": [
+        "apps/web/components/Workspace.tsx"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "frontend_and_accessibility_owner",
+      "status": "partial_repository_evidence",
+      "gap": "Existing focus code does not prove rebuilt page or provider-widget keyboard conformance.",
+      "existing_evidence_presence": {
+        "apps/web/components/Workspace.tsx": true
+      }
+    },
+    {
+      "id": "A11Y-03",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Reflow and zoom preserve information and operation.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Support 320 CSS-pixel equivalent width for relevant content and 200% text resize; document legitimate two-dimensional exceptions.",
+      "test_plan": "Manual 400% browser zoom at 1280px and 200% text resize; mobile landscape and virtual keyboard; SC1.4.4/1.4.10.",
+      "existing_evidence_paths": [
+        "apps/web/app/globals.css"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "frontend_and_accessibility_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "apps/web/app/globals.css": true
+      }
+    },
+    {
+      "id": "A11Y-04",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Pointer target rule is accurate and repository target retained.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "WCAG2.2 AA SC2.5.8 uses24x24 CSS pixels or applicable spacing/exceptions; repository deliberately requires >=44px targets. Do not mislabel44px as the universal AA threshold.",
+      "test_plan": "Measure rendered targets and spacing, touch hit areas and exceptions; test drag alternatives if introduced (SC2.5.7).",
+      "existing_evidence_paths": [
+        "AGENTS.md",
+        "config/design-rules.json"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "frontend_and_accessibility_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "AGENTS.md": true,
+        "config/design-rules.json": true
+      }
+    },
+    {
+      "id": "A11Y-05",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Forms and auth provide accessible labels, errors and authentication.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Use programmatic names/instructions, associate errors, preserve entered values, allow password manager/paste and avoid cognition-only barriers; review third-party login.",
+      "test_plan": "Accessibility tree, keyboard and screen reader tests; SC1.3.1/3.3.1/3.3.2/3.3.7/3.3.8/4.1.2.",
+      "existing_evidence_paths": [
+        "apps/site/src/Auth.tsx",
+        "apps/web/components/Workspace.tsx"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "auth_and_accessibility_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "apps/site/src/Auth.tsx": true,
+        "apps/web/components/Workspace.tsx": true
+      }
+    },
+    {
+      "id": "A11Y-06",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Asynchronous statuses are perceivable without false success.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Announce pending/error states appropriately and distinguish draft/requested/pending/confirmed; avoid unnecessarily interruptive announcements.",
+      "test_plan": "Inspect live regions with reader and real failed API responses; SC4.1.3 plus actual business status assertions.",
+      "existing_evidence_paths": [
+        "apps/web/components/Workspace.tsx",
+        "tests/test_native_chat.py"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "frontend_and_api_owner",
+      "status": "partial_repository_evidence",
+      "gap": "Existing status strings/HTTP tests do not establish all screen-reader announcements in rebuilt UI.",
+      "existing_evidence_presence": {
+        "apps/web/components/Workspace.tsx": true,
+        "tests/test_native_chat.py": true
+      }
+    },
+    {
+      "id": "A11Y-07",
+      "standard_ids": [
+        "WCAG",
+        "AI-TRANSPARENCY"
+      ],
+      "requirement": "Media has appropriate captions, descriptions/alternatives and user control.",
+      "source_refs": [
+        "AI-EURL",
+        "AI113",
+        "AI50",
+        "MEDIA",
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "For actual prerecorded media assess captions and audio-description requirements; provide transcript/alternative; no sound autoplay; pause/stop moving content; retain reduced-motion policy.",
+      "test_plan": "Test SC1.2.1/1.2.2/1.2.3/1.2.5/1.4.2/2.2.2 as applicable; verify actual media and muted/no-media/offline states.",
+      "existing_evidence_paths": [
+        "docs/contracts/hero-media.md",
+        "docs/research/presenter-options.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "media_and_accessibility_owner",
+      "status": "not_accepted",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "docs/contracts/hero-media.md": true,
+        "docs/research/presenter-options.md": true
+      }
+    },
+    {
+      "id": "A11Y-08",
+      "standard_ids": [
+        "WCAG"
+      ],
+      "requirement": "Complete pages and complete processes meet all applicable A/AA criteria.",
+      "source_refs": [
+        "REPO",
+        "WAI-EVAL",
+        "WCAG22"
+      ],
+      "implementation_plan": "Create a criterion-by-criterion applicability matrix for all templates/states and full flows; evaluate names/language/landmarks, bypass blocks, headings, help and noninterference as well as listed priorities.",
+      "test_plan": "Automated scan plus manual keyboard/readers on full page and complete process; record each applicable A/AA criterion, exceptions and evidence.",
+      "existing_evidence_paths": [
+        "docs/quality-document.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "independent_accessibility_reviewer",
+      "status": "external_review_required",
+      "gap": "Selected checks and an axe score alone do not constitute WCAG2.2AA conformance.",
+      "existing_evidence_presence": {
+        "docs/quality-document.md": true
+      }
+    },
+    {
+      "id": "LEGAL-A11Y-01",
+      "standard_ids": [
+        "BFSG",
+        "EN-ICT"
+      ],
+      "requirement": "Determine the actual legal and market scope and edition.",
+      "source_refs": [
+        "BFSG1",
+        "BFSG14",
+        "BFSG3",
+        "BFSG4",
+        "BFSGV",
+        "EAA-EURL",
+        "EN301549",
+        "ETSI-PDF",
+        "HARMONIZED-WAD"
+      ],
+      "implementation_plan": "Record B2C electronic-commerce/service status, entity/market role, service dates and any evidenced microenterprise exception; separately check relevant Official Journal harmonisation.",
+      "test_plan": "Qualified reviewer signs scope record and exact applicable standard editions; do not infer EAA presumption from a public-sector WAD reference.",
+      "existing_evidence_paths": [
+        "config/source-boundaries.json"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "legal_and_accessibility_owner",
+      "status": "scope_decision_required",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "config/source-boundaries.json": true
+      }
+    },
+    {
+      "id": "LEGAL-A11Y-02",
+      "standard_ids": [
+        "BFSG",
+        "EN-ICT"
+      ],
+      "requirement": "If in scope, accessible service information, support and commerce/auth flows are included.",
+      "source_refs": [
+        "BFSG1",
+        "BFSG14",
+        "BFSG3",
+        "BFSG4",
+        "BFSGV",
+        "EAA-EURL",
+        "EN301549",
+        "ETSI-PDF",
+        "HARMONIZED-WAD"
+      ],
+      "implementation_plan": "Map BFSG14 and applicable BFSGV12/19 obligations to real product information, help, identification/auth/security/payment steps and downloadable documents.",
+      "test_plan": "Review actual information and support channels plus complete relevant processes; verify omissions before release.",
+      "existing_evidence_paths": [
+        "config/site-map.json",
+        "docs/09-final/08-recht-und-compliance.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "legal_product_and_accessibility_owner",
+      "status": "scope_decision_required",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "config/site-map.json": true,
+        "docs/09-final/08-recht-und-compliance.md": true
+      }
+    },
+    {
+      "id": "QMS-01",
+      "standard_ids": [
+        "ISO-QMS"
+      ],
+      "requirement": "A quality system has a defined scope, responsibilities and controlled evidence.",
+      "source_refs": [
+        "QMS9001"
+      ],
+      "implementation_plan": "Version policies/objectives, process owners, competence and supplier/release responsibilities; resolve2015+Amd2024 versus2026 transition.",
+      "test_plan": "Management review of documented scope and sampled controlled change records; licensed-clause review if conformity sought.",
+      "existing_evidence_paths": [
+        "AGENTS.md",
+        "PROGRESS.md",
+        "feature_list.json",
+        ".github/workflows/ci.yml"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "quality_management_owner",
+      "status": "edition_and_organisation_review_required",
+      "gap": "CI and repository process files are only technical inputs, not an audited QMS.",
+      "existing_evidence_presence": {
+        "AGENTS.md": true,
+        "PROGRESS.md": true,
+        "feature_list.json": true,
+        ".github/workflows/ci.yml": true
+      }
+    },
+    {
+      "id": "QMS-02",
+      "standard_ids": [
+        "ISO-QMS"
+      ],
+      "requirement": "Defects drive corrective action and actual improvement.",
+      "source_refs": [
+        "QMS9001"
+      ],
+      "implementation_plan": "Record incident/complaint/nonconformity, cause, owner, correction, effectiveness review and unresolved risks; maintain audit/management review evidence.",
+      "test_plan": "Sample completed correction cycles and independent internal audit; external certification only through a chosen competent body.",
+      "existing_evidence_paths": [
+        "docs/quality-document.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "quality_management_owner",
+      "status": "external_review_required",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "docs/quality-document.md": true
+      }
+    },
+    {
+      "id": "ISMS-01",
+      "standard_ids": [
+        "ISO-ISMS",
+        "GDPR"
+      ],
+      "requirement": "Risk treatment and security controls match a documented system scope.",
+      "source_refs": [
+        "EDPB-SEC",
+        "GDPR-EURL",
+        "ISMS27001",
+        "REPO"
+      ],
+      "implementation_plan": "Inventory assets/data/roles/vendors/threats; document risk treatment and justified applicable controls/SoA, including cloud/CI/identity boundaries.",
+      "test_plan": "Independent review of scope, risk/controls and operational evidence; full licensed standard before conformity claim.",
+      "existing_evidence_paths": [
+        "config/source-boundaries.json",
+        "config/deployment-topology.json",
+        "docs/contracts/factory-api-auth.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "security_and_management_owner",
+      "status": "scope_decision_required",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "config/source-boundaries.json": true,
+        "config/deployment-topology.json": true,
+        "docs/contracts/factory-api-auth.md": true
+      }
+    },
+    {
+      "id": "ISMS-02",
+      "standard_ids": [
+        "ISO-ISMS",
+        "GDPR"
+      ],
+      "requirement": "Identity isolation, secret handling and production change protections work in deployment.",
+      "source_refs": [
+        "EDPB-SEC",
+        "GDPR-EURL",
+        "ISMS27001",
+        "REPO"
+      ],
+      "implementation_plan": "Preserve failclosed tenant/role checks, least privilege, server-only secrets and reviewed releases; isolate visitor/Clerk/API-key identities.",
+      "test_plan": "Real negative auth/tenant tests in actual deployed architecture, secret leak probes and reviewed config; do not claim shared-poolRLS from principal-onlySQL tests.",
+      "existing_evidence_paths": [
+        "db/foundation/verify.sql",
+        "apps/web/auth/policy.ts",
+        "tests/test_native_chat.py"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "security_backend_and_operations_owner",
+      "status": "partial_repository_evidence",
+      "gap": "Local isolated foundations do not establish production identity/RLS/operational controls.",
+      "existing_evidence_presence": {
+        "db/foundation/verify.sql": true,
+        "apps/web/auth/policy.ts": true,
+        "tests/test_native_chat.py": true
+      }
+    },
+    {
+      "id": "PRIV-01",
+      "standard_ids": [
+        "GDPR"
+      ],
+      "requirement": "Privacy by design/default limits data and exposure.",
+      "source_refs": [
+        "EDPB-SEC",
+        "GDPR-EURL",
+        "REPO"
+      ],
+      "implementation_plan": "Map visitor identity/chat/booking/outbox/media fields, purpose, legal basis and recipients; minimise payloads; default no mic/provider transfer or public private metadata.",
+      "test_plan": "Inspect network/storage and generated bundle; test denied consent and absent session; assess actual necessity and DPIA triggers.",
+      "existing_evidence_paths": [
+        "apps/site/scripts/generate-public-data.mjs",
+        "apps/agent-gateway/server.py"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "privacy_and_product_owner",
+      "status": "partial_repository_evidence",
+      "gap": "Public filtering exists; processing/legal-basis/retention completeness is not accepted.",
+      "existing_evidence_presence": {
+        "apps/site/scripts/generate-public-data.mjs": true,
+        "apps/agent-gateway/server.py": true
+      }
+    },
+    {
+      "id": "PRIV-02",
+      "standard_ids": [
+        "GDPR"
+      ],
+      "requirement": "Risk-appropriate security includes resilience and restore testing.",
+      "source_refs": [
+        "EDPB-SEC",
+        "GDPR-EURL",
+        "REPO"
+      ],
+      "implementation_plan": "Define encryption/access control, backup/restore, incident handling and regular security review suited to actual risks.",
+      "test_plan": "Perform authorised isolated restore/readback and incident exercise; verify productionTLS, access revocation and logs without secrets.",
+      "existing_evidence_paths": [
+        "docs/deployment/react-backup.md",
+        "tools/site_release.py"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "security_and_operations_owner",
+      "status": "not_accepted",
+      "gap": "Static artifact integrity is not a restore test for accounts, conversations, keys or provider services.",
+      "existing_evidence_presence": {
+        "docs/deployment/react-backup.md": true,
+        "tools/site_release.py": true
+      }
+    },
+    {
+      "id": "PRIV-03",
+      "standard_ids": [
+        "GDPR"
+      ],
+      "requirement": "Retention, deletion and processor/transfer contracts are real decisions.",
+      "source_refs": [
+        "EDPB-SEC",
+        "GDPR-EURL",
+        "REPO"
+      ],
+      "implementation_plan": "Define periods and deletion/hold rules for visitor messages/bookings/outbox and media; verify provider region/AVV/SCC/subprocessors where relevant. Do not invent periods.",
+      "test_plan": "Expired/erasure/hold tests, deletion receipts and contract review; include backups and provider copies within agreed policy.",
+      "existing_evidence_paths": [
+        "apps/agent-gateway/server.py",
+        "docs/contracts/hero-media.md"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "privacy_backend_and_legal_owner",
+      "status": "scope_decision_required",
+      "gap": "Visitorexpiry alone does not delete stored personal records; no complete retention job/contract evidence.",
+      "existing_evidence_presence": {
+        "apps/agent-gateway/server.py": true,
+        "docs/contracts/hero-media.md": true
+      }
+    },
+    {
+      "id": "AI-01",
+      "standard_ids": [
+        "AI-TRANSPARENCY"
+      ],
+      "requirement": "Actual AI interaction is disclosed accurately at first relevant interaction.",
+      "source_refs": [
+        "AI-EURL",
+        "AI113",
+        "AI50",
+        "MEDIA"
+      ],
+      "implementation_plan": "Classify structured deterministic assistant versus actual generative/provider system; introduce clear accessible context-specific disclosure when applicable without claiming a model is connected prematurely.",
+      "test_plan": "Inspect first visit and restored session with keyboard/reader; verify actual backend capabilities and provider/deployer role.",
+      "existing_evidence_paths": [
+        "apps/agent-gateway/server.py",
+        "apps/web/lib/i18n.ts"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "ai_product_and_legal_owner",
+      "status": "scope_decision_required",
+      "gap": "No acceptance evidence for the current source-faithful rebuild.",
+      "existing_evidence_presence": {
+        "apps/agent-gateway/server.py": true,
+        "apps/web/lib/i18n.ts": true
+      }
+    },
+    {
+      "id": "AI-02",
+      "standard_ids": [
+        "AI-TRANSPARENCY",
+        "GDPR"
+      ],
+      "requirement": "Synthetic presenter/media transparency and output marking are version-bound.",
+      "source_refs": [
+        "AI-EURL",
+        "AI113",
+        "AI50",
+        "EDPB-SEC",
+        "GDPR-EURL",
+        "MEDIA",
+        "REPO"
+      ],
+      "implementation_plan": "Track rights and synthetic/deepfake classification; accessible disclosure by first exposure; assess provider machine-readable marking duties separately from deployer notice.",
+      "test_plan": "Read actual media metadata/watermark/marking and UI notice against selected version; no media delivered means no successful marking test.",
+      "existing_evidence_paths": [
+        "docs/contracts/hero-media.md",
+        "config/research/presenter-options.json"
+      ],
+      "existing_evidence_is_current_acceptance": false,
+      "owner_role": "media_ai_and_legal_owner",
+      "status": "not_accepted",
+      "gap": "No actual provider-generated media or machine-readable marking validated by this task.",
+      "existing_evidence_presence": {
+        "docs/contracts/hero-media.md": true,
+        "config/research/presenter-options.json": true
+      }
+    }
+  ],
+  "evidence_policy": {
+    "existing_tests_are_not_rerun_evidence": true,
+    "no_paid_full_standard_obtained": true,
+    "no_certification_claim": true,
+    "source_faithful_design_is_separate_from_norm_conformity": true,
+    "blocked_sources_not_treated_as_read": true,
+    "verbatim_norm_text_copied": false,
+    "conformance_claim_requires_complete_scope_and_evidence": true
+  },
+  "release_gate": {
+    "acceptance_rule": "Every applicable requirement needs scope decision, implementation, executed test, inspectable evidence, owner review and resolved blocking findings for the exact release. No implicit pass from file existence.",
+    "required_evidence_fields": [
+      "release_commit_and_artifact_hash",
+      "requirement_id",
+      "applicable_scope_and_edition",
+      "implementation_reference",
+      "test_method_and_inputs",
+      "execution_time_and_environment",
+      "actual_result_and_failures",
+      "evidence_location_and_hash",
+      "reviewer_and_owner",
+      "accepted_exceptions_with_basis"
+    ],
+    "all_requirements_accepted": false,
+    "full_standard_purchase_authorized_or_performed": false,
+    "external_audit_performed": false,
+    "production_change_performed": false
+  },
+  "edition_limitations": "DIN national catalogue statuses observed; international ISO publication/supersession lifecycle not directly verified because ISO access returned403. Confirm exact applicable edition and transition before conformity claims."
+}
