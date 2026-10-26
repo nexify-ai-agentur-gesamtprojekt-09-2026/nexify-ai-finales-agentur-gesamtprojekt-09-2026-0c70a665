@@ -1,4 +1,4 @@
-// NeXify Designsystem 2.0 · Prüfskript (läuft im Browser oder Node). Regeln: config/design-rules.json · Definition: docs/09-final/11-designsystem-definition.md
+// NeXify Designsystem 2.0 · ES-Modul (Browser oder Node). Regeln: config/design-rules.json · Definition: docs/09-final/11-designsystem-definition.md
 
 function auditDateien(dateien, T) {
   const RULES = T.rules;
@@ -50,4 +50,4 @@ function auditDateien(dateien, T) {
 function schluessel(o, p = '') { return Object.keys(o).flatMap(k => (o[k] && typeof o[k] === 'object') ? schluessel(o[k], p + k + '.') : [p + k]); }
 function paritaet(dateiText) { try { const i = dateiText.indexOf('const T = {'); if (i < 0) return null; let d = 0, j = dateiText.indexOf('{', i); const s = j; for (; j < dateiText.length; j++) { const c = dateiText[j]; if (c === '{') d++; else if (c === '}') { d--; if (!d) break; } } const T = (new Function('return ' + dateiText.slice(s, j + 1)))(); const de = new Set(schluessel(T.de)); const out = {}; for (const l of ['nl', 'fr']) { if (!T[l]) { out[l] = ['Sprache fehlt']; continue; } const a = new Set(schluessel(T[l])); out[l] = [...de].filter(k => !a.has(k)).map(k => 'fehlt: ' + k).concat([...a].filter(k => !de.has(k)).map(k => 'überzählig: ' + k)); } return out; } catch (e) { return { fehler: String(e) }; } }
 
-if (typeof module !== "undefined") module.exports = { auditDateien, paritaet };
+export { auditDateien, paritaet };

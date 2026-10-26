@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "regeln": [
+    { "typ": "rag", "agent": "rag-agent", "tools": ["wissen-abfrage"], "skills": ["rag"], "hartsperre": false },
+    { "typ": "doku", "agent": "doku-agent", "tools": ["docs-aktualisieren"], "skills": ["dokumentation"], "hartsperre": false },
+    { "typ": "design", "agent": "design-agent", "tools": ["ds-audit", "build-tokens"], "skills": ["designsystem"], "hartsperre": false },
+    { "typ": "deploy", "agent": "mensch", "tools": [], "skills": [], "hartsperre": true },
+    { "typ": "finanz", "agent": "mensch", "tools": [], "skills": [], "hartsperre": true }
+  ]
+}

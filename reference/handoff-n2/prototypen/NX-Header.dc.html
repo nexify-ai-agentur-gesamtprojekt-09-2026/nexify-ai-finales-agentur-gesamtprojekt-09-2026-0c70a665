@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        bildschirm
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „NX-Header.dc.html“
+  Status:     konform
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>button{padding:0;font:inherit;color:inherit}
+  button, input, select, textarea { font: inherit; }
+  :root { scroll-padding-top: 124px; }
+  @keyframes nxSigIdle { 0%,100% { transform: rotate(-6deg) scale(.95); opacity: .85; } 50% { transform: rotate(6deg) scale(1); opacity: 1; } }
+  @media (max-width: 1100px) { .nxh-status { display: none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+<meta name="description" content="Seite">
+  </helmet>
+
+<div style="position:relative;z-index:50;font-family:Geist,Helvetica,Arial,sans-serif;color:#FFFFFF">
+
+  <a href="{{ skipHref }}" style="position:fixed;top:8px;left:8px;z-index:200;transform:translateY(calc(-100% - 64px));display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:600;text-decoration:none;transition:transform .2s ease" style-focus="transform:none">{{ tSkip }}</a>
+
+  <div style="position:relative;background:linear-gradient(90deg,#1B1E1D 0%,#1E2220 55%,#1B1E1D 100%);border-bottom:1px solid #2F3432">
+    <span aria-hidden="true" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(215,250,80,.6) 28%,rgba(111,227,207,.5) 62%,transparent)"></span>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;width:min(1280px,calc(100% - 48px));margin:0 auto;padding:9px 0">
+
+      <nav aria-label="{{ tPlattform }}" style="display:flex;align-items:center;padding:3px;border-radius:999px;background:#242826;border:1px solid #363A38">
+        <sc-for list="{{ marken }}" as="m" hint-placeholder-count="2">
+          <a href="{{ m.href }}" aria-current="{{ m.current }}" style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:999px;background:{{ m.bg }};color:{{ m.fg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:{{ m.weight }};text-decoration:none;transition:color .2s ease" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+            <span aria-hidden="true" style="display:block;width:7px;height:7px;flex:0 0 auto;border-radius:{{ m.radius }};background:{{ m.dot }}"></span>{{ m.label }}
+          </a>
+        </sc-for>
+      </nav>
+
+      <span class="nxh-status" style="display:inline-flex;align-items:center;gap:8px;font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;white-space:nowrap"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#D7FA50;box-shadow:0 0 0 3px rgba(215,250,80,.18)"></span>Alle Systeme laufen · Daten in Frankfurt</span>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-left:auto">
+        <sc-if value="{{ abgemeldet }}" hint-placeholder-val="{{ true }}"><nav aria-label="{{ tIntern }}" style="display:flex;align-items:center;gap:10px">
+          <span class="nxh-status" style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;white-space:nowrap">{{ tLoginZu }}</span>
+          <div style="display:flex;align-items:center;gap:4px;padding:3px;border-radius:999px;background:#242826;border:1px solid #363A38">
+            <sc-for list="{{ portale }}" as="p" hint-placeholder-count="3">
+              <a href="{{ p.href }}" aria-current="{{ p.current }}" style="display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:999px;background:{{ p.bg }};color:{{ p.fg }};font-family:Geist,sans-serif;font-size:13px;font-weight:500;white-space:nowrap;text-decoration:none;transition:color .2s ease,background .2s ease" style-hover="color:#FFFFFF;background:rgba(215,250,80,.1)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.label }}</a>
+            </sc-for>
+          </div>
+        </nav></sc-if>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="nxh-status" style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;white-space:nowrap">{{ marktLabel }}</span>
+          <div role="group" aria-label="{{ tSprache }}" style="display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:#242826;border:1px solid #363A38">
+            <sc-for list="{{ sprachen }}" as="l" hint-placeholder-count="3">
+              <button onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="min-width:34px;height:30px;padding:0 9px;border:0;border-radius:999px;background:{{ l.bg }};color:{{ l.fg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;cursor:pointer;transition:color .2s ease" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ l.code }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ zeigtHaupt }}" hint-placeholder-val="{{ true }}">
+    <header style="position:sticky;top:0;z-index:40;background:radial-gradient(600px 90px at 12% 0%,rgba(215,250,80,.12),transparent 70%),radial-gradient(500px 90px at 88% 0%,rgba(111,227,207,.08),transparent 70%),rgba(31,34,32,.9);backdrop-filter:blur(18px);border-bottom:1px solid #363A38;box-shadow:0 12px 40px -24px rgba(0,0,0,.8)">
+      <div style="display:flex;align-items:center;gap:20px;width:min(1280px,calc(100% - 48px));min-height:72px;margin:0 auto">
+
+        <a href="{{ markeHref }}" aria-label="{{ markeName }}" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;flex:0 0 auto;text-decoration:none;color:#FFFFFF" style-focus="text-decoration:underline;text-decoration-color:#D7FA50;text-underline-offset:6px">
+          <sc-if value="{{ istCloud }}" hint-placeholder-val="{{ true }}">
+            <span aria-hidden="true" style="display:grid;place-items:center;width:34px;height:34px;flex:0 0 auto"><img src="assets/nexify-ai/nexify-ai-signet.svg" alt="" style="display:block;width:26px;height:26px;filter:drop-shadow(0 0 10px rgba(215,250,80,.55));animation:nxSigIdle 7s ease-in-out infinite" /></span>
+          </sc-if>
+          <sc-if value="{{ istShop }}" hint-placeholder-val="{{ false }}">
+            <span aria-hidden="true" style="display:block;width:18px;height:18px;flex:0 0 auto;border-radius:4px;background:#D7FA50"></span>
+          </sc-if>
+          <span style="font-size:21px;font-weight:700;line-height:1;letter-spacing:-.035em;white-space:nowrap"><sc-if value="{{ istCloud }}" hint-placeholder-val="{{ true }}">Ne<span style="color:#D7FA50">X</span>ify AI</sc-if><sc-if value="{{ istShop }}" hint-placeholder-val="{{ false }}">TEILEKLAR</sc-if></span>
+        </a>
+
+        <sc-if value="{{ kontext }}" hint-placeholder-val="{{ true }}">
+          <span aria-hidden="true" style="display:block;width:1px;height:18px;flex:0 0 auto;background:#363A38"></span>
+          <span style="flex:0 0 auto;font-family:'Geist Mono',monospace;font-size:14px;color:#BCC1BD;white-space:nowrap">{{ kontext }}</span>
+        </sc-if>
+
+        <nav aria-label="{{ tHaupt }}" style="align-items:center;gap:8px;min-width:0;display:{{ navDisplay }}">
+          <sc-for list="{{ navSichtbar }}" as="n" hint-placeholder-count="5">
+            <a href="{{ n.href }}" aria-current="{{ n.current }}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;background:transparent;box-shadow:inset 0 -2px 0 {{ n.bg }};color:{{ n.fg }};font-size:15px;font-weight:{{ n.weight }};text-decoration:none;flex-wrap:wrap;text-align:left;transition:background .2s ease, color .2s ease" style-hover="color:#FFFFFF;background:rgba(215,250,80,.08)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ n.label }}</a>
+          </sc-for>
+        </nav>
+
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto;flex:0 0 auto">
+          <sc-if value="{{ angemeldet }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ kontoHref }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 8px 0 4px;border-radius:8px;text-decoration:none;color:#FFFFFF;transition:background .2s ease" style-hover="background:#303634" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+              <span aria-hidden="true" style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:#303634;color:#D7FA50;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">{{ initialen }}</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD;white-space:nowrap">{{ rolleLabel }}</span>
+            </a>
+            <a href="{{ abmeldenHref }}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;font-size:13px;text-decoration:none;transition:border-color .2s ease" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ tAbmelden }}</a>
+          </sc-if>
+          <sc-if value="{{ abgemeldet }}" hint-placeholder-val="{{ true }}">
+            <a href="Anmeldung.dc.html" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;font-size:14px;font-weight:600;text-decoration:none;flex-wrap:wrap;text-align:left;transition:border-color .2s ease" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ tAnmelden }}</a>
+          </sc-if>
+          <sc-if value="{{ zeigtCta }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ ctaHref }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A,#D7FA50);box-shadow:0 10px 28px -12px rgba(215,250,80,.65);color:#111312;font-size:14px;font-weight:600;text-decoration:none;flex-wrap:wrap;text-align:left" style-hover="box-shadow:0 14px 34px -10px rgba(215,250,80,.85)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+              <span aria-hidden="true" style="display:block;width:7px;height:7px;border-radius:4px;background:#242826"></span>{{ ctaLabel }}
+            </a>
+          </sc-if>
+          <button onClick="{{ toggleMenu }}" aria-label="{{ tHaupt }}" aria-expanded="{{ menuExpanded }}" style="font-family:Geist,Helvetica,Arial,sans-serif;place-items:center;width:44px;height:44px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;cursor:pointer;display:{{ menuBtnDisplay }}" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+        </div>
+      </div>
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <nav aria-label="{{ tHaupt }}" style="border-top:1px solid #363A38;background:#2A2E2C">
+          <div style="display:grid;width:min(1280px,calc(100% - 48px));margin:0 auto;padding:8px 0 16px">
+            <sc-for list="{{ navSichtbar }}" as="n" hint-placeholder-count="5">
+              <a href="{{ n.href }}" aria-current="{{ n.current }}" style="display:flex;align-items:center;min-height:52px;border-bottom:1px solid #363A38;color:{{ n.fg }};font-size:18px;font-weight:500;text-decoration:none" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ n.label }}</a>
+            </sc-for>
+          </div>
+        </nav>
+      </sc-if>
+    </header>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:180},&quot;marke&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cloud&quot;,&quot;shop&quot;],&quot;default&quot;:&quot;cloud&quot;,&quot;tsType&quot;:&quot;\&quot;cloud\&quot;|\&quot;shop\&quot;&quot;,&quot;section&quot;:&quot;Marke&quot;},&quot;variante&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;voll&quot;,&quot;leiste&quot;],&quot;default&quot;:&quot;voll&quot;,&quot;tsType&quot;:&quot;\&quot;voll\&quot;|\&quot;leiste\&quot;&quot;,&quot;section&quot;:&quot;Marke&quot;},&quot;nav&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cloud&quot;,&quot;shop&quot;,&quot;werkzeug&quot;,&quot;portal&quot;,&quot;partner&quot;,&quot;intern&quot;],&quot;default&quot;:&quot;cloud&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;kontext&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;cta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;beratung&quot;,&quot;teile&quot;,&quot;termin&quot;,&quot;partner&quot;,&quot;keine&quot;],&quot;default&quot;:&quot;beratung&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Aktion&quot;},&quot;ctaHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Aktion&quot;},&quot;angemeldet&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Konto&quot;},&quot;rolle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;unternehmen&quot;,&quot;werkstatt&quot;,&quot;autofahrer&quot;,&quot;intern&quot;],&quot;default&quot;:&quot;unternehmen&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Konto&quot;},&quot;initialen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;EM&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Konto&quot;},&quot;market&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;de-DE&quot;,&quot;de-AT&quot;,&quot;de-CH&quot;,&quot;nl-NL&quot;,&quot;nl-BE&quot;,&quot;fr-BE&quot;,&quot;fr-LU&quot;],&quot;default&quot;:&quot;de-DE&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Markt&quot;},&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;de&quot;,&quot;nl&quot;,&quot;fr&quot;],&quot;default&quot;:&quot;de&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Markt&quot;}}">
+// NX-Header – die EINZIGE Header-Definition des Systems. Gegenstück zu NX-Footer.dc.html.
+// Warum zwei Ebenen: Ebene 1 (Graphit) trägt Marke, Markt und Sprache und scrollt weg.
+// Ebene 2 (Papier, sticky) trägt Lockup, Kontext, Hauptnavigation und Konto – links ausgerichtet,
+// weil Nutzer 69 % mehr Zeit auf der linken Bildschirmhälfte verbringen (NN/g, Horizontal Attention).
+const CLOUD = "NeXifyAI Cloud v12.dc.html";
+const SHOP = "TEILEKLAR Shop.dc.html";
+
+const NAV = {
+  cloud: [["nxOne", "NeXify AI one.dc.html"], ["demos", "NeXifyAI Cloud v12.dc.html#demos"], ["shopMuster", "NeXify Shop.dc.html"], ["preise", "NeXifyAI Cloud v12.dc.html#preise"], ["api", "NeXify API.dc.html"]],
+  shop: [["alleTeile", SHOP], ["fahrzeug", SHOP + "#fahrzeug"], ["werkstatt", SHOP + "#werkstatt"], ["garage", SHOP + "#garage"], ["wissen", SHOP + "#klarwissen"]],
+  werkzeug: [["passung", "Fitment-Checker.dc.html"], ["reifen", "Reifenrechner.dc.html"], ["batterie", "Batterie-Berater.dc.html"], ["wissen", SHOP + "#klarwissen"]],
+  portal: [["kundenportal", "Kundenportal.dc.html"], ["partnerportal", "Partnerportal.dc.html"], ["gutschein", "Nachbarschaftskunden-Portal.dc.html"], ["affiliate", "Affiliate-Portal.dc.html"], ["konto", "Konto.dc.html"]],
+  partner: [["partnerWerden", "Partner-werden.dc.html"], ["landingpage", "Werkstatt-Partnerseite.dc.html"], ["partnerportal", "Partnerportal.dc.html"]],
+  intern: [["workspace", "NeXify Workspace.dc.html"], ["posteingang", "NeXify Posteingang.dc.html"], ["leitstand", "NeXify Leitstand.dc.html"], ["myadmin", "myADMIN v2.dc.html"], ["dokumente", "Geschaeftsdokumente-Vorlagen.dc.html"]]
+};
+
+const PORTALE = [["pKunde", "Kundenportal.dc.html", "kundenportal"], ["pPartner", "Partnerportal.dc.html", "partnerportal"], ["pGutschein", "Nachbarschaftskunden-Portal.dc.html", "gutschein"]];
+
+const MAERKTE = {
+  "de-DE": ["Deutschland", "de", "19 % USt."], "de-AT": ["Österreich", "de", "20 % USt."], "de-CH": ["Schweiz", "de", "8,1 % MWST"],
+  "nl-NL": ["Nederland", "nl", "21 % btw"], "nl-BE": ["België", "nl", "21 % btw"],
+  "fr-BE": ["Belgique", "fr", "21 % TVA"], "fr-LU": ["Luxembourg", "fr", "17 % TVA"]
+};
+
+const T = {
+  de: {
+    skip: "Direkt zum Inhalt", plattform: "Marke wählen", intern: "Portale", loginZu: "Anmelden als", sprache: "Sprache",
+    haupt: "Hauptnavigation", anmelden: "Anmelden",
+    l: { nxOne: "NeXify AI one", demos: "Demos", shopMuster: "Shop", pKunde: "Kunde", api: "API", wissenshub: "Wissenshub", affiliate: "Affiliate", workspace: "Workspace", posteingang: "Posteingang", leitstand: "Leitstand", myadmin: "myADMIN", organisation: "Organisation", ziele: "Ziele", dokumente: "Dokumente", abmelden: "Abmelden",  pPartner: "Werkstatt", pGutschein: "Gutschein", leistungen: "Leistungen", fertig: "Fertiglösungen", preise: "Preise & Rechner", prozess: "Prozess", referenzen: "Referenzen",
+      alleTeile: "Alle Teile", fahrzeug: "Fahrzeug wählen", werkstatt: "Werkstattpartner", garage: "Meine Garage", wissen: "Klarwissen",
+      passung: "Passung prüfen", reifen: "Reifenrechner", batterie: "Batterie-Berater",
+      kundenportal: "Kundenportal", partnerportal: "Partnerportal", gutschein: "Gutschein einlösen", konto: "Mein Konto",
+      partnerWerden: "Partner werden", landingpage: "Muster-Partnerseite",
+      start: "Start", architektur: "Architektur", companion: "Companion", anmeldung: "Anmeldung" },
+    rollen: { unternehmen: "Unternehmen", werkstatt: "Werkstatt", autofahrer: "Autofahrer", intern: "Intern" },
+    cta: { beratung: "Erstgespräch starten", teile: "Fahrzeug wählen", termin: "Termin anfragen", partner: "Partner werden" }
+  },
+  nl: {
+    skip: "Direct naar de inhoud", plattform: "Merk kiezen", intern: "Portalen", loginZu: "Aanmelden als", sprache: "Taal",
+    haupt: "Hoofdnavigatie", anmelden: "Aanmelden",
+    l: { nxOne: "NeXify AI one", demos: "Demo's", shopMuster: "Shop", pKunde: "Klant", api: "API", wissenshub: "Kennishub", affiliate: "Affiliate", workspace: "Workspace", posteingang: "Postvak", leitstand: "Controlekamer", myadmin: "myADMIN", organisation: "Organisatie", ziele: "Doelen", dokumente: "Documenten", abmelden: "Afmelden",  pPartner: "Garage", pGutschein: "Tegoedbon", leistungen: "Diensten", fertig: "Kant-en-klare oplossingen", preise: "Prijzen & calculator", prozess: "Werkwijze", referenzen: "Referenties",
+      alleTeile: "Alle onderdelen", fahrzeug: "Voertuig kiezen", werkstatt: "Garagepartners", garage: "Mijn garage", wissen: "Klaarweten",
+      passung: "Pasvorm controleren", reifen: "Reifencalculator", batterie: "Accu-adviseur",
+      kundenportal: "Klantportaal", partnerportal: "Partnerportaal", gutschein: "Tegoedbon inwisselen", konto: "Mijn account",
+      partnerWerden: "Partner worden", landingpage: "Voorbeeldpagina",
+      start: "Start", architektur: "Architectuur", companion: "Companion", anmeldung: "Aanmelden" },
+    rollen: { unternehmen: "Onderneming", werkstatt: "Garage", autofahrer: "Automobilist", intern: "Intern" },
+    cta: { beratung: "Gesprek starten", teile: "Voertuig kiezen", termin: "Afspraak vragen", partner: "Partner worden" }
+  },
+  fr: {
+    skip: "Aller au contenu", plattform: "Choisir la marque", intern: "Portails", loginZu: "Se connecter en tant que", sprache: "Langue",
+    haupt: "Navigation principale", anmelden: "Se connecter",
+    l: { nxOne: "NeXify AI one", demos: "Démos", shopMuster: "Boutique", pKunde: "Client", api: "API", wissenshub: "Base de savoir", affiliate: "Affiliation", workspace: "Workspace", posteingang: "Boîte", leitstand: "Poste de pilotage", myadmin: "myADMIN", organisation: "Organisation", ziele: "Objectifs", dokumente: "Documents", abmelden: "Se déconnecter",  pPartner: "Garage", pGutschein: "Bon", leistungen: "Prestations", fertig: "Solutions prêtes", preise: "Tarifs & calculateur", prozess: "Déroulé", referenzen: "Références",
+      alleTeile: "Toutes les pièces", fahrzeug: "Choisir le véhicule", werkstatt: "Garages partenaires", garage: "Mon garage", wissen: "Savoir clair",
+      passung: "Vérifier la compatibilité", reifen: "Calculateur pneus", batterie: "Conseil batterie",
+      kundenportal: "Portail client", partnerportal: "Portail partenaire", gutschein: "Utiliser le bon", konto: "Mon compte",
+      partnerWerden: "Devenir partenaire", landingpage: "Page exemple",
+      start: "Accueil", architektur: "Architecture", companion: "Companion", anmeldung: "Connexion" },
+    rollen: { unternehmen: "Entreprise", werkstatt: "Garage", autofahrer: "Automobiliste", intern: "Interne" },
+    cta: { beratung: "Démarrer l'entretien", teile: "Choisir le véhicule", termin: "Demander un rendez-vous", partner: "Devenir partenaire" }
+  }
+};
+
+class Component extends DCLogic {
+  state = { eigenerMarkt: null, menu: false };
+
+  componentWillUnmount() { if (this._onResize) window.removeEventListener("resize", this._onResize); }
+
+  componentDidMount() {
+    this._nxMarkt = (e) => { if (e.detail && e.detail.quelle !== "header") this.setState({ eigenerMarkt: e.detail.code }); };
+    window.addEventListener("nx:markt", this._nxMarkt);
+    try { const g = window.localStorage.getItem("nx-market"); if (g && MAERKTE[g]) { this.setState({ eigenerMarkt: g }); document.documentElement.lang = MAERKTE[g][1]; } } catch (e) {}
+    if (typeof window !== "undefined") {
+      this._w = window.innerWidth;
+      this._onResize = () => { const w = window.innerWidth; if (Math.abs(w - (this._w || 0)) > 8) { this._w = w; this.forceUpdate(); } };
+      window.addEventListener("resize", this._onResize);
+      this.forceUpdate();
+    }
+    if (this.props.onMarket || typeof window === "undefined") return;
+    try {
+      const gespeichert = window.localStorage.getItem("nx-market");
+      if (gespeichert && MAERKTE[gespeichert]) this.setState({ eigenerMarkt: gespeichert });
+    } catch (e) { /* Speicher gesperrt – Vorgabe bleibt */ }
+  }
+
+  renderVals() {
+    const self = this;
+    const code = this.state.eigenerMarkt || this.props.market || "de-DE";
+    const m0 = MAERKTE[code] || MAERKTE["de-DE"];
+    const lang = this.state.eigenerMarkt ? m0[1] : (this.props.lang || m0[1]);
+    const t = T[lang] || T.de;
+    const active = this.props.active || "";
+    const marke = this.props.marke || "cloud";
+    const navSatz = this.props.nav || (marke === "shop" ? "shop" : "cloud");
+    const variante = this.props.variante || "voll";
+    const rolle = this.props.rolle || "";
+
+    const waehleSprache = (ziel) => () => {
+      const treffer = Object.keys(MAERKTE).filter((k) => MAERKTE[k][1] === ziel);
+      const neu = treffer.indexOf(code) !== -1 ? code : treffer[0];
+      if (self.props.onMarket) self.props.onMarket(neu, ziel);
+      else {
+        self.setState({ eigenerMarkt: neu });
+        try { window.localStorage.setItem("nx-market", neu); window.dispatchEvent(new CustomEvent("nx:markt", { detail: { code: neu, quelle: "header" } })); document.documentElement.lang = ziel; } catch (e) { /* Speicher gesperrt */ }
+      }
+    };
+
+    const link = (schluessel, href) => {
+      const an = schluessel === active;
+      return { label: t.l[schluessel] || schluessel, href: href, current: an ? "page" : "false",
+        bg: an ? "#D7FA50" : "transparent", fg: an ? "#FFFFFF" : "#FFFFFF", weight: "500" };
+    };
+
+    const istShop = marke === "shop";
+    const ctaSchluessel = this.props.cta || (istShop ? "teile" : "beratung");
+
+    return {
+      tSkip: t.skip, tPlattform: t.plattform, tIntern: t.intern, tSprache: t.sprache, tHaupt: t.haupt, tAnmelden: t.anmelden,
+      skipHref: this.props.inhaltId || "#inhalt",
+
+      marken: [
+        { label: "NeXify AI", href: CLOUD, current: marke === "cloud" ? "page" : "false",
+          bg: marke === "cloud" ? "rgba(215,250,80,.16)" : "transparent",
+          fg: marke === "cloud" ? "#D7FA50" : "#BCC1BD", weight: marke === "cloud" ? "600" : "400",
+          dot: marke === "cloud" ? "#D7FA50" : "#4A4F4C", radius: "99px",
+          glanz: "none" },
+        { label: "TEILEKLAR", href: SHOP, current: istShop ? "page" : "false",
+          bg: istShop ? "rgba(215,250,80,.16)" : "transparent",
+          fg: istShop ? "#D7FA50" : "#BCC1BD", weight: istShop ? "600" : "400",
+          dot: istShop ? "#D7FA50" : "#4A4F4C", radius: "3px",
+          glanz: "none" }
+      ],
+      portale: PORTALE.map(([k, href, akt], i) => {
+        const an = akt === active;
+        return { label: t.l[k], href: href, current: an ? "page" : "false", sep: i === 0 ? "transparent" : "#4A4F4C",
+          bg: an ? "rgba(215,250,80,.1)" : "transparent", fg: an ? "#D7FA50" : "#FFFFFF" };
+      }),
+      tLoginZu: t.loginZu,
+
+      marktLabel: m0[0] + " · " + m0[2],
+      sprachen: ["de", "nl", "fr"].map((c) => {
+        const an = c === lang;
+        return { code: c, pressed: an ? "true" : "false", pick: waehleSprache(c),
+          bg: an ? "rgba(215,250,80,.1)" : "transparent", fg: an ? "#D7FA50" : "#BCC1BD",
+          border: an ? "rgba(215,250,80,.55)" : "#4A4F4C" };
+      }),
+
+      zeigtHaupt: variante === "voll",
+      istCloud: !istShop, istShop: istShop,
+      markeName: istShop ? "TEILEKLAR" : "NeXify AI",
+      markeHref: istShop ? SHOP : CLOUD,
+      kontext: this.props.kontext || "",
+
+      navSichtbar: (NAV[navSatz] || NAV.cloud).map(([k, href]) => link(k, href)),
+      navDisplay: (this._w || 1440) < 1080 ? "none" : "flex",
+      menuBtnDisplay: (this._w || 1440) < 1080 ? "grid" : "none",
+      menuOpen: this.state.menu && (this._w || 1440) < 1080,
+      menuExpanded: this.state.menu ? "true" : "false",
+      toggleMenu: () => this.setState((s) => ({ menu: !s.menu })),
+
+      angemeldet: !!this.props.angemeldet,
+      abgemeldet: !this.props.angemeldet,
+      initialen: this.props.initialen || "EM",
+      rolleLabel: t.rollen[rolle] || t.rollen.unternehmen,
+      tAbmelden: t.l.abmelden, abmeldenHref: this.props.abmeldenHref || "Anmeldung.dc.html?abgemeldet=1",
+      kontoHref: rolle === "intern" ? "myADMIN v2.dc.html" : rolle === "werkstatt" ? "Partnerportal.dc.html" : rolle === "autofahrer" ? "Konto.dc.html" : "Kundenportal.dc.html",
+
+      zeigtCta: this.props.cta !== "keine",
+      ctaLabel: t.cta[ctaSchluessel] || t.cta.beratung,
+      ctaHref: this.props.ctaHref || (istShop ? SHOP + "#fahrzeug" : CLOUD + "#kontakt")
+    };
+  }
+}
+
+</script>
+</body>
+</html>

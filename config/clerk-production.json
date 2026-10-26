@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "application": "apps/site",
+  "provider": "clerk",
+  "publishable_key_source": "explicit_user_input",
+  "publishable_key_mode": "live",
+  "frontend_api_host_from_key": "clerk.nexifyai.de",
+  "production_web_origin": "https://nexifyai.cloud",
+  "hosting_project": null,
+  "hosting_provider": "vercel",
+  "required_server_secret": {
+    "name": "CLERK_SECRET_KEY",
+    "mode": "live",
+    "must_not_be_public_or_committed": true,
+    "secret_binding_verified": false
+  },
+  "dns": {
+    "source_of_required_records": "Clerk production dashboard Domains for the exact instance",
+    "authoritative_cname_pairs_received": true,
+    "required_cname_pairs": [
+      {
+        "type": "CNAME",
+        "name": "accounts",
+        "host": "accounts.nexifyai.de",
+        "target": "accounts.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clerk",
+        "host": "clerk.nexifyai.de",
+        "target": "frontend-api.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clk._domainkey",
+        "host": "clk._domainkey.nexifyai.de",
+        "target": "dkim1.9vt6e46tlcwh.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clk2._domainkey",
+        "host": "clk2._domainkey.nexifyai.de",
+        "target": "dkim2.9vt6e46tlcwh.clerk.services"
+      },
+      {
+        "type": "CNAME",
+        "name": "clkmail",
+        "host": "clkmail.nexifyai.de",
+        "target": "mail.9vt6e46tlcwh.clerk.services"
+      }
+    ],
+    "writes_performed": false,
+    "frontend_api_resolution_verified": false,
+    "last_public_resolver_observation": "All five CNAMEs missing; see config/clerk-dns.json",
+    "record_source": "explicit_user_supplied_clerk_records"
+  },
+  "first_production_user": {
+    "created": false,
+    "requires_real_identity_and_verification": true,
+    "automatic_admin_or_tenant_membership": false
+  },
+  "boundaries": {
+    "clerk_authentication_is_not_business_authorization": true,
+    "site_tenant_role_assignment_requires_server_owned_mapping": true,
+    "anonymous_visitor_cookie_is_not_clerk_identity": true,
+    "different_domains_do_not_implicitly_share_sessions": true,
+    "customer_project_affilinet_integration": false
+  },
+  "deployment_status": "local_preparation_not_production_release",
+  "open_prerequisites": [
+    "bind_new_production_secret_in_server_secret_store",
+    "verify_dns_and_clerk_frontend_api",
+    "review_and_deploy_portable_react_site_with_separate_production_auth_api_service",
+    "provide_production_safe_visitor_gateway_instead_of_loopback_development_proxy",
+    "create_and_verify_real_first_user_without_automatic_business_rights",
+    "identify_existing_vercel_project_and_confirm_domain_bindings",
+    "verify_clerk_primary_and_satellite_configuration_for_two_top_level_domains",
+    "verify_public_key_against_exact_issuer_jwks",
+    "connect_authorized_dns_zone_access_and_apply_five_exact_received_cnames",
+    "integrate_clerk_react_ui_after_exact_instance_and_server_auth_configuration"
+  ],
+  "preview_web_origin": "https://nexifyai.de",
+  "domain_decision": {
+    "source": "explicit_user_clarification",
+    "primary_domain": "nexifyai.cloud",
+    "preview_domain": "nexifyai.de",
+    "spelling_interpretation": "neifyai.cloud interpreted as existing nexifyai.cloud project domain",
+    "keep_current_cloud_site_until_completion": true,
+    "switch_cloud_dns_before_final_acceptance": false,
+    "both_domains_requested": true,
+    "remote_binding_verified": false
+  },
+  "auth": {
+    "authorized_parties": [
+      "https://nexifyai.cloud",
+      "https://nexifyai.de"
+    ],
+    "cross_domain_session_configuration_verified": false,
+    "clerk_primary_or_satellite_topology": "pending_exact_instance_domain_configuration",
+    "automatic_cross_domain_sso": false
+  },
+  "jwt_verification_material": {
+    "source": "explicit_user_input",
+    "public_pem_path": "config/public-keys/clerk-provided.pem",
+    "bound_to_issuer": false,
+    "jwks_url_provided": false,
+    "active_static_jwt_key": false,
+    "rotation_policy": "prefer_verified_issuer_jwks_before_activation",
+    "format_check": "valid_rsa_2048_public_key",
+    "spki_der_sha256": "684d4cf51e2d47b75abf4f2f97f7ec58c7333beb597f97ced56913f035faaed8"
+  },
+  "previous_next_implementation": "apps/web",
+  "frontend_auth_migration_status": "react_preview_no_login_widget_next_clerk_reference_retained"
+}

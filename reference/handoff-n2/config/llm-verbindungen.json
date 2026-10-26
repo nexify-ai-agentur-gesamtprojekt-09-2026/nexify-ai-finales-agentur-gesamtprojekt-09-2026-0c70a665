@@ -1,0 +1,38 @@
+{
+  "$kommentar": "Soll-Konfiguration. Werte in ${...} kommen aus OpenBao, nie aus dieser Datei. Stand 27.09.2026, nicht gegen Live-Systeme geprüft.",
+  "router": {
+    "name": "9router",
+    "basisUrl": "${ROUTER_URL}",
+    "schluessel": "${ROUTER_KEY}",
+    "protokoll": "openai-kompatibel",
+    "streaming": true,
+    "region": "eu-central (Frankfurt)"
+  },
+  "stufen": [
+    { "id": 0, "name": "NeXify lokal",  "modell": "${MODELL_LOKAL}",   "kontextTokens": 32000,  "ausgabeMax": 4000, "zeitlimitSek": 60,  "centJeMioIn": 0,   "centJeMioOut": 0 },
+    { "id": 1, "name": "Günstig",       "modell": "${MODELL_GUENSTIG}", "kontextTokens": 128000, "ausgabeMax": 8000, "zeitlimitSek": 120, "centJeMioIn": "${PREIS_1_IN}", "centJeMioOut": "${PREIS_1_OUT}" },
+    { "id": 2, "name": "Stark",         "modell": "${MODELL_STARK}",    "kontextTokens": 200000, "ausgabeMax": 16000,"zeitlimitSek": 300, "centJeMioIn": "${PREIS_2_IN}", "centJeMioOut": "${PREIS_2_OUT}" }
+  ],
+  "hochstufen": {
+    "wenn": ["Unsicherheit > 0.35", "Schemafehler 2×", "Zeitlimit", "Stufe nicht gesund"],
+    "nie": ["über Tagesbudget des Agenten", "bei #stopp"]
+  },
+  "wiederholung": { "versucheJeSchritt": 3, "basisMs": 1000, "maxMs": 60000, "streuung": 0.2, "wiederholenBei": ["zeit", "netz", "modell"], "nichtBei": ["schema", "recht", "budget"] },
+  "verbindung": {
+    "keepAlive": true,
+    "leerlaufTimeoutSek": 600,
+    "heartbeatSek": 15,
+    "streamAbbruchNachSekOhneToken": 90,
+    "wiederaufnahme": "Schritt neu starten mit gleichem Idempotenz-Schlüssel; bereits gespeicherte Teilergebnisse werden als Kontext mitgegeben"
+  },
+  "kontext": {
+    "schichten": ["S1 System", "S2 Regeln", "S3 Skills", "S4 Wissen (Fundstellen)", "S5 Vorgang (verdichtet)", "S6 Eingabe"],
+    "cacheSchichten": ["S1", "S2", "S3"],
+    "festMaxAnteil": 0.5,
+    "verdichtenAb": 0.7,
+    "verdichtenMit": "Stufe 0",
+    "zusammenfassungMaxTokens": 1500
+  },
+  "gesundheit": { "pfad": "/health", "intervallSek": 30, "ungesundNach": 3 },
+  "kennzeichnung": "Antworten tragen 'KI' (Art. 50 KI-VO)"
+}

@@ -1,12 +1,11 @@
 # NeXify AI Gesamtloesung — ein Befehl pro Repo-Operation (Harness-Standard).
-.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check
+.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build source-boundaries
 
 setup:
 	@node --version >/dev/null && python3 --version >/dev/null && echo "setup: node + python3 vorhanden (keine Paketabhaengigkeiten)"
 
 dev:
-	@echo "Kein Dev-Server: statische Produktoberflaeche + Konfiguration. Vorschau: apps-index.html"
-	@echo "Pruefung: make check · Artefakte: make build"
+	pnpm dev
 
 build:
 	@cd prototypen && sha256sum -c MANIFEST.sha256
@@ -45,6 +44,29 @@ verify-feature:
 
 check-arch:
 	bash scripts/check-arch.sh
+
+# Vollstaendige Quellenbindung benoetigt die im Katalog bezeichneten Checkouts.
+# Kein Provideraufruf und keine Behauptung einer laufenden Factory-API.
+contract-check:
+	python3 tools/verify_factory_contract.py
+	python3 -m unittest discover -s tests -p test_factory_contract.py -q
+
+automation-check:
+	python3 -m unittest discover -s tests -p 'test_automation_*.py' -q
+	python3 -m unittest discover -s tests -p test_legacy_automation.py -q
+	python3 -m unittest discover -s tests -p test_small_business_integration.py -q
+
+web-build:
+	pnpm --filter @nexify/site typecheck
+	pnpm --filter @nexify/site build
+
+next-reference-build:
+	pnpm --filter @nexify/web typecheck
+	pnpm --filter @nexify/web build
+
+source-boundaries:
+	python3 tools/check_source_boundaries.py
+	python3 -m unittest discover -s tests -p test_source_boundaries.py -q
 
 session-start:
 	bash scripts/session-trace.sh session-start

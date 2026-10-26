@@ -1,17 +1,19 @@
 import { createServer } from "node:http"
-import { readFile, stat } from "node:fs/promises"
+import { readFile, realpath, stat } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = path.dirname(fileURLToPath(import.meta.url))
+const realRoot = await realpath(root)
 const port = Number(process.env.PORT || 3000)
+const host = process.env.HOST || "127.0.0.1"
 
 const routes = new Map([
   ["/", "apps-index.html"],
   ["/index.html", "apps-index.html"],
   ["/tokens.css", "packages/tokens/tokens.css"],
-  ["/prototypen", "prototypen/index.html"],
-  ["/prototypen/", "prototypen/index.html"],
+  ["/prototypen/", "preview-prototypes.html"],
+  ["/prototypen/index.html", "preview-prototypes.html"],
 ])
 
 const contentTypes = {
@@ -27,13 +29,37 @@ const contentTypes = {
   ".webmanifest": "application/manifest+json; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
   ".woff2": "font/woff2",
+  ".txt": "text/plain; charset=utf-8",
 }
 
-function safePath(urlPath) {
-  const decoded = decodeURIComponent(urlPath.split("?")[0])
-  const relative = routes.get(decoded) || decoded.replace(/^\//, "")
-  const absolute = path.resolve(root, relative)
-  return absolute.startsWith(root + path.sep) || absolute === root ? absolute : null
+const publicFiles = new Set([
+  "apps-index.html",
+  "preview-prototypes.html",
+  "packages/tokens/tokens.css",
+  "packages/ui/index.html",
+  "packages/ui/components.css",
+])
+
+function publicPath(relative) {
+  const segments = relative.split(path.sep)
+  if (segments.some(segment => segment.startsWith("."))) return false
+  return publicFiles.has(relative) || (
+    segments[0] === "prototypen" &&
+    Object.hasOwn(contentTypes, path.extname(relative).toLowerCase())
+  )
+}
+
+async function safePath(decoded) {
+  if (!decoded.startsWith("/") || decoded.includes("\\") || decoded.includes("\0")) return null
+  if (decoded.split("/").some(segment => segment.startsWith("."))) return null
+  const relative = routes.get(decoded) || decoded.slice(1)
+  if (!publicPath(relative)) return null
+  const actual = await realpath(path.resolve(root, relative))
+  const actualRelative = path.relative(realRoot, actual)
+  // Check the resolved target too: a link inside a public tree must not expose
+  // private repository files or files outside this checkout.
+  if (path.isAbsolute(actualRelative) || !publicPath(actualRelative)) return null
+  return actual
 }
 
 const server = createServer(async (request, response) => {
@@ -43,7 +69,15 @@ const server = createServer(async (request, response) => {
       response.end('Method not allowed')
       return
     }
-    const filePath = safePath(request.url || "/")
+    const requestTarget = request.url || "/"
+    const decoded = decodeURIComponent(requestTarget.split("?")[0])
+    if (decoded === "/prototypen") {
+      const queryAt = requestTarget.indexOf("?")
+      response.writeHead(308, { Location: "/prototypen/" + (queryAt < 0 ? "" : requestTarget.slice(queryAt)) })
+      response.end()
+      return
+    }
+    const filePath = await safePath(decoded)
     if (!filePath) {
       response.writeHead(403)
       response.end("Forbidden")
@@ -70,6 +104,7 @@ const server = createServer(async (request, response) => {
   }
 })
 
-server.listen(port, "0.0.0.0", () => {
-  console.log(`[preview] Static server listening on http://localhost:${port}`)
+server.listen(port, host, () => {
+  const address = server.address()
+  console.log(`[preview] Static server listening on http://localhost:${address.port} (bound to ${address.address})`)
 })

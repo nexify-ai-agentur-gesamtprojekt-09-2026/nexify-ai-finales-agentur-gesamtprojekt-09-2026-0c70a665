@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "authority": "Explicit user correction: Affilinet Aachen is an unrelated paused customer project; reuse components without mixing projects.",
+  "agency_repository": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+  "sources": [
+    {
+      "id": "N1",
+      "classification": "agency_system",
+      "role": "canonical_implementation",
+      "whole_project_import_allowed": false
+    },
+    {
+      "id": "N2",
+      "classification": "historical_reference",
+      "role": "read_only_design_and_documentation_reference",
+      "location": "reference/handoff-n2",
+      "runtime_membership": false,
+      "whole_project_import_allowed": false
+    },
+    {
+      "id": "A1",
+      "repository": "NeXify-AI-by-NeXify-Chat-it-Automat-it/affilinet-portal-aachen-final",
+      "classification": "external_customer_project",
+      "status": "paused",
+      "agency_runtime_membership": false,
+      "agency_delivery_dependency": false,
+      "whole_project_import_allowed": false,
+      "reuse": "selective_reviewed_components_only"
+    }
+  ],
+  "reuse_policy": {
+    "applies_to": "every_source_repository",
+    "default": "reference_and_evaluate_before_adoption",
+    "requires": [
+      "source_repository_commit_and_paths",
+      "specific_component_purpose_and_agency_target_paths",
+      "source_and_license_authority",
+      "documented_adaptation_and_relevant_tests",
+      "no_customer_data_secrets_branding_or_project_configuration"
+    ],
+    "shared_identity_or_business_rules_inferred_from_similar_names": false,
+    "additional_blanket_permission_required_for_authorized_code_reuse": false
+  },
+  "adopted_customer_components": [],
+  "forbidden_agency_paths": ["apps/portal"],
+  "excluded_customer_history_heads": [
+    "56cbd8669c2e1d57bcfe633919aad38684c7f5f9",
+    "c82311a503dc5bae29b03133e22d682268671081",
+    "aa54969307bb1ae34bb982a95c90ce7bbac55008"
+  ]
+}

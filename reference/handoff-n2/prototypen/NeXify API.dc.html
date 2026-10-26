@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        bildschirm
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „NeXify API.dc.html“
+  Status:     konform · Info: DS-C-05×2 DS-I-03×5 DS-I-05×1 · Ausnahmen: DS-C-04 DS-C-01 DS-R-01
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>NeXify AI API – Prepaid, EU-Hosting, eine Rechnung</title>
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="NeXify AI API – Prepaid, EU-Hosting, eine Rechnung" />
+<meta property="og:description" content="Alle freigegebenen KI-Modelle über einen Schlüssel. Guthaben aufladen, nur Verbrauch zahlen, Kostenstellen und Monatsnachweis inklusive." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebAPI","name":"NeXify AI API","description":"API-kompatible KI-Schnittstelle mit Prepaid-Abrechnung, Kostenstellen und EU-Hosting (Frankfurt).","documentation":"https://nexifyai.cloud","provider":{"@type":"Organization","name":"NeXify AI","url":"https://nexifyai.cloud"}}</script>
+<meta name="description" content="Alle freigegebenen KI-Modelle über einen Schlüssel. Guthaben per Kartenzahlung aufladen, nur Verbrauch zahlen, Kostenstellen und Monatsnachweis inklusive." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<style>html,body{margin:0;background:#242826;color:#FFFFFF;font-family:Geist,Helvetica,Arial,sans-serif}button{font:inherit}a{color:#D7FA50}a:hover{color:#FFFFFF}input[type=range]{accent-color:#D7FA50}</style>
+<style id="nx-mobil">
+  html{-webkit-text-size-adjust:100%} body{overflow-x:hidden}
+  @media (max-width:640px){
+    h1{font-size:clamp(30px,9vw,42px)!important;line-height:1.06!important;letter-spacing:-.03em!important}
+    h2{font-size:clamp(24px,7vw,34px)!important;line-height:1.1!important}
+    [style*="padding:40px"],[style*="padding:48px 40px"],[style*="padding:36px"],[style*="padding:32px"]{padding:20px!important}
+    [style*="padding:56px 0"],[style*="padding:64px 24px"],[style*="padding:72px 0"],[style*="padding:96px 0"]{padding-top:40px!important;padding-bottom:48px!important}
+    [style*="gap:64px"],[style*="gap:48px"],[style*="gap:40px"]{gap:24px!important}
+    [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:repeat(2,"],[style*="grid-template-columns:1.1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],[style*="grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+    table{font-size:13px} pre{font-size:12px!important} img,svg,canvas{max-width:100%}
+    [style*="flex:1 1 520px"],[style*="flex:1 1 460px"],[style*="flex:2 1 460px"],[style*="flex:1 1 440px"],[style*="flex:1 1 420px"],[style*="flex:2 1 420px"],[style*="flex:1 1 400px"],[style*="flex:1 1 380px"],[style*="flex:1 1 360px"]{flex-basis:100%!important}
+    [style*="margin-left:auto"][style*="min-height:44px"]{margin-left:0!important}
+    button,a,input,select,textarea,summary{touch-action:manipulation}
+    input,select,textarea{font-size:16px!important}
+  }
+</style>
+</helmet>
+<dc-import name="NX-Header" marke="cloud" nav="cloud" active="api" kontext="NeXify AI API" cta="keine" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+<div id="inhalt" tabindex="-1" style="min-height:100vh;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),radial-gradient(900px 500px at 96% 72%,rgba(167,139,250,.06),transparent 62%),#242826;color:#FFFFFF;color-scheme:dark">
+  <div style="position:sticky;top:73px;z-index:30;background:rgba(30,34,32,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)"><nav aria-label="API-Bereiche" style="width:min(1120px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:6px 0"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;margin-right:8px">NeXify AI API</span>
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.go }}" aria-current="{{ t.cur }}" style="min-height:44px;padding:0 16px;border:1px solid {{ t.rand }};border-radius:10px;background:{{ t.bg }};color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.label }}</button></sc-for>
+      <a href="Kundenwege.dc.html?weg=reg&amp;rolle=kunde" style="margin-left:auto;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;font-size:14px" style-hover="color:#111312;filter:brightness(1.06)" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Konto anlegen</a></nav></div>
+
+  <sc-if value="{{ istStart }}" hint-placeholder-val="{{ true }}">
+    <main data-screen-label="API – Produktseite" style="max-width:1120px;margin:0 auto;padding:64px 24px 96px">
+      <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">NeXify AI API · Prepaid · EU-Hosting Frankfurt</p>
+      <h1 style="margin:0 0 24px;font-size:clamp(40px,6.4vw,88px);font-weight:600;line-height:1;letter-spacing:-.05em;text-wrap:balance;max-width:14ch">Ein Schlüssel. Ein Guthaben. Eine Rechnung.</h1>
+      <p style="margin:0 0 32px;font-size:18px;line-height:1.6;color:#BCC1BD;max-width:58ch;text-wrap:pretty">Nutzen Sie alle freigegebenen KI-Modelle über einen einzigen Schlüssel. Sie laden Guthaben per Kartenzahlung oder Karte auf und zahlen nur, was Ihre Anfragen tatsächlich verbrauchen – ohne Grundgebühr und ohne Mindestumsatz.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px"><a href="Kundenwege.dc.html?weg=reg&amp;rolle=kunde" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:16px;font-weight:600;text-decoration:none" style-hover="color:#111312;filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Konto kostenlos anlegen</a><button onClick="{{ zuPreisen }}" style="height:52px;padding:0 24px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;font-size:16px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Kosten vorab berechnen</button></div>
+      <ul aria-label="Auf einen Blick" style="display:flex;flex-wrap:wrap;gap:8px 24px;margin:0 0 64px;padding:0;list-style:none;font-family:'Geist Mono',monospace;font-size:13px;color:#BCC1BD"><li>Keine Grundgebühr</li><li>Aufladen ab 50 € per Kartenzahlung oder Karte</li><li>Guthaben verfällt nicht</li><li>Hosting in Frankfurt</li><li>Nur für Unternehmen</li></ul>
+
+      <section aria-label="Ausgangslage" style="max-width:760px;margin:0 0 48px">
+        <h2 style="margin:0 0 16px;font-size:32px;font-weight:600;line-height:1.15;letter-spacing:-.04em;text-wrap:balance">Mehrere KI-Modelle heißen bisher: mehrere Verträge, Schlüssel und Rechnungen.</h2>
+        <p style="margin:0;font-size:16px;line-height:1.7;color:#BCC1BD;text-wrap:pretty">Jeder Anbieter hat eigene Preise, eine eigene Abrechnung und eigene Datenschutzfragen. Was eine Abteilung verbraucht hat, zeigt sich erst am Monatsende. Bei der NeXify AI API steht jede Anfrage mit ihren Kosten in Cent im Journal – je Kostenstelle, bevor eine Rechnung entsteht.</p>
+      </section>
+      <h2 style="margin:0 0 16px;font-size:24px;font-weight:600;letter-spacing:-.03em">In drei Schritten startklar</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:64px">
+        <sc-for list="{{ schritte }}" as="s" hint-placeholder-count="3">
+          <div style="padding:24px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)"><p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">{{ s.nr }}</p><strong style="display:block;margin-bottom:8px;font-size:20px;letter-spacing:-.02em">{{ s.titel }}</strong><p style="margin:0;font-size:14px;line-height:1.6;color:#BCC1BD">{{ s.text }}</p></div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-bottom:64px">
+        <div style="flex:1 1 360px;min-width:0">
+          <h2 style="margin:0 0 16px;font-size:32px;font-weight:600;letter-spacing:-.04em">Kosten im Griff, bevor sie entstehen</h2>
+          <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#BCC1BD">Vor jeder Anfrage reservieren wir die Höchstkosten. Reicht das Guthaben oder das Budget der Kostenstelle nicht, weisen wir die Anfrage ab, bevor etwas berechnet wird. Jede Antwort nennt die tatsächlichen Kosten in Cent und ist als KI-erzeugt gekennzeichnet.</p>
+          <ul style="display:grid;gap:8px;margin:0;padding:0 0 0 16px;font-size:14px;line-height:1.6;color:#E3E6E3"><li>Hosting und Verarbeitung in der EU</li><li>Budget je Kostenstelle, harte Grenze bei leerem Guthaben</li><li>Anzahlungsrechnung je Aufladung, Verbrauchsnachweis je Monat</li><li>Restguthaben verfällt nicht und wird bei Vertragsende auf Antrag erstattet</li></ul>
+        </div>
+        <div style="flex:1 1 460px;min-width:0;border-radius:16px;overflow:hidden;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05)"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)" role="tablist" aria-label="Beispielsprache"><sc-for list="{{ codeTabs }}" as="c" hint-placeholder-count="4"><button role="tab" aria-selected="{{ c.an }}" onClick="{{ c.pick }}" style="min-height:44px;padding:0 14px;border:0;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};font-family:'Geist Mono',monospace;font-size:13px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ c.label }}</button></sc-for><button onClick="{{ codeKopieren }}" style="margin-left:auto;min-height:44px;padding:0 12px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#E3E6E3;font-size:13px;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ kopierText }}</button></div><pre aria-label="Beispielaufruf" style="margin:0;padding:20px 22px;overflow:auto;font-family:'Geist Mono',monospace;font-size:13px;line-height:1.7;color:#E3E6E3;min-height:236px">{{ codeText }}</pre></div>
+      </div>
+
+      <section aria-labelledby="api-was" style="margin:0 0 96px"><p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">01 · Was Sie bekommen</p><h2 id="api-was" style="margin:0 0 16px;font-size:clamp(28px,3.6vw,44px);font-weight:700;line-height:1.08;letter-spacing:-.03em;text-wrap:balance;max-width:24ch">Ein Gateway, das Kosten und Rechte im Griff hat.</h2><p style="margin:0 0 32px;font-size:17px;line-height:1.6;color:#BCC1BD;max-width:66ch">Sie sprechen ein API-kompatibles Protokoll. Dahinter entscheidet das Gateway, welches Modell antwortet, prüft Budget und Rechte und schreibt jede Anfrage in ein unveränderliches Journal.</p><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))"><sc-for list="{{ funktionen }}" as="f" hint-placeholder-count="6"><div data-glow="1" style="padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><p style="margin:0 0 10px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">{{ f.nr }} · {{ f.art }}</p><strong style="display:block;margin-bottom:8px;font-size:20px;letter-spacing:-.015em">{{ f.titel }}</strong><p style="margin:0;font-size:14.5px;line-height:1.6;color:#BCC1BD">{{ f.text }}</p></div></sc-for></div></section>
+<section aria-labelledby="api-cli" style="margin:0 0 96px"><div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center"><div style="flex:1 1 360px;min-width:0"><p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">02 · Terminal</p><h2 id="api-cli" style="margin:0 0 16px;font-size:clamp(28px,3.6vw,44px);font-weight:700;line-height:1.08;letter-spacing:-.03em;text-wrap:balance">nexify im Terminal: derselbe Schlüssel, derselbe Kassenstand.</h2><p style="margin:0 0 16px;font-size:17px;line-height:1.6;color:#BCC1BD">Die Kommandozeile <code style="font-family:'Geist Mono',monospace">nexify</code> nutzt Ihr Guthaben. one antwortet, one+ arbeitet in Ihrem Projektordner – vor jeder Dateiänderung fragt es nach.</p><a href="NeXify AI one.dc.html#zugaenge" style="font-weight:600" style-focus="outline:2px solid #D7FA50;outline-offset:3px">Alle Zugänge zu one und one+ →</a></div><div style="flex:1 1 440px;min-width:0;padding:20px 22px;border-radius:16px;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05);font-family:'Geist Mono',monospace;font-size:13px;line-height:1.75;color:#E3E6E3"><span style="color:#9CA29E">$</span> nexify login<br><span style="color:#6FE3CF">✓</span> Angemeldet als kostenstelle <strong>lern-chat</strong><br><span style="color:#9CA29E">$</span> nexify guthaben<br><span style="color:#D7FA50">Restguthaben 184,00 €</span> <span style="color:#9CA29E">· reicht ca. 41 Tage</span><br><span style="color:#9CA29E">$</span> nexify run "Angebot für Firma Berens"<br><span style="color:#FFC24A">?</span> Datei angebot-berens.md anlegen? <span style="color:#9CA29E">[j/n]</span></div></div></section>
+<section aria-labelledby="api-modelle" style="margin:0 0 96px"><p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">03 · Modelle</p><h2 id="api-modelle" style="margin:0 0 16px;font-size:clamp(28px,3.6vw,44px);font-weight:700;line-height:1.08;letter-spacing:-.03em;text-wrap:balance;max-width:22ch">Vier Modell-IDs, eine Regel: die günstigste, die reicht.</h2><p style="margin:0 0 32px;font-size:17px;line-height:1.6;color:#BCC1BD;max-width:66ch">Mit <code style="font-family:'Geist Mono',monospace">nexify-auto</code> beginnt das Gateway auf der günstigsten passenden Stufe und steigt nur auf, wenn das Ergebnis es verlangt. Sie können jede Stufe auch fest wählen.</p><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))"><sc-for list="{{ modelle }}" as="m" hint-placeholder-count="4"><div style="padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);border-color:{{ m.rand }}"><p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:13px;color:{{ m.farbe }}">{{ m.id }}</p><strong style="display:block;margin-bottom:8px;font-size:20px">{{ m.name }}</strong><p style="margin:0 0 14px;font-size:14px;line-height:1.55;color:#BCC1BD">{{ m.text }}</p><p style="margin:0;font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">{{ m.hinweis }}</p></div></sc-for></div></section>
+<section aria-labelledby="api-sicher" style="margin:0 0 96px"><p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">04 · Sicherheit und Recht</p><h2 id="api-sicher" style="margin:0 0 32px;font-size:clamp(28px,3.6vw,44px);font-weight:700;line-height:1.08;letter-spacing:-.03em;text-wrap:balance;max-width:22ch">Was ein Einkauf und ein Datenschutzbeauftragter wissen wollen.</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))"><sc-for list="{{ sicherheit }}" as="x" hint-placeholder-count="8"><div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;padding:18px 20px;border-radius:12px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)"><span aria-hidden="true" style="color:#6FE3CF;font-weight:700">✓</span><span style="font-size:14.5px;line-height:1.55;color:#E3E6E3"><strong style="color:#FFFFFF">{{ x.titel }}</strong><br>{{ x.text }}</span></div></sc-for></div><p style="margin:16px 0 0;font-size:13px;color:#9CA29E">Rechtsgrundlagen und Bedingungen: <a href="API-Rechtliches.dc.html#nutzung">Nutzung</a> · <a href="API-Rechtliches.dc.html#prepaid">Prepaid</a> · <a href="API-Rechtliches.dc.html#datenschutz">Datenschutz und AVV</a>. Anwaltliche Endprüfung vor Live-Betrieb.</p></section>
+<h2 style="margin:0 0 16px;font-size:32px;font-weight:600;letter-spacing:-.04em">Häufige Fragen</h2>
+      <div style="display:grid;gap:8px;margin-bottom:48px">
+        <sc-for list="{{ faq }}" as="q" hint-placeholder-count="5">
+          <details style="padding:16px 20px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)"><summary style="display:flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;cursor:pointer">{{ q.f }}</summary><p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#BCC1BD">{{ q.a }}</p></details>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;margin:0 0 32px;padding:32px;border:1px solid #D7FA50;border-radius:8px;background:#2A2E2C"><div style="min-width:0;flex:1 1 320px"><strong style="display:block;margin-bottom:8px;font-size:24px;letter-spacing:-.03em">Ein Schlüssel für alle Modelle – bezahlt, bevor Sie ihn nutzen.</strong><span style="font-size:15px;line-height:1.6;color:#BCC1BD">Konto anlegen, Guthaben aufladen, Schlüssel eintragen. Ohne Grundgebühr, monatlich kündbar, Restguthaben wird bei Vertragsende erstattet.</span></div><a href="Kundenwege.dc.html?weg=reg&amp;rolle=kunde" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:16px;font-weight:600;text-decoration:none" style-hover="color:#111312;filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Konto kostenlos anlegen</a></div>
+      <p style="margin:0;font-size:14px;color:#BCC1BD">Nur für Unternehmen und öffentliche Einrichtungen. Es gelten die <a href="API-Rechtliches.dc.html#nutzung">API-Nutzungsbedingungen</a>, die <a href="API-Rechtliches.dc.html#prepaid">Prepaid-Bedingungen</a> und die <a href="API-Rechtliches.dc.html#preise">Preisliste</a>.</p>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ istDoku }}" hint-placeholder-val="{{ false }}"><main data-screen-label="API – Dokumentation und Datenblatt" style="max-width:1120px;margin:0 auto;padding:64px 24px 96px">
+  <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Dokumentation · Version v1 · Entwurf zur Freigabe</p><h1 style="margin:0 0 16px;font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1;letter-spacing:-.04em;max-width:16ch;text-wrap:balance">Technisches Datenblatt und Referenz.</h1>
+  <p style="margin:0 0 40px;font-size:17px;line-height:1.6;color:#BCC1BD;max-width:68ch">Alles, was ein Entwicklungsteam für die Anbindung braucht, auf einer Seite. Werte mit „Vorschlag“ sind noch nicht freigegeben und werden vor dem Start festgelegt.</p>
+  <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));margin:0 0 56px"><sc-for list="{{ datenblatt }}" as="d" hint-placeholder-count="8"><div style="padding:16px 18px;border-radius:12px;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05)"><p style="margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:11.5px;color:#9CA29E">{{ d.k }}</p><p style="margin:0;font-size:15px;line-height:1.45;color:#FFFFFF;font-weight:600">{{ d.v }}</p></div></sc-for></div>
+  <h2 style="margin:0 0 16px;font-size:28px;font-weight:700;letter-spacing:-.03em">Endpunkte</h2>
+  <div style="overflow:auto;margin:0 0 48px;border-radius:14px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><table style="width:100%;min-width:640px;border-collapse:collapse;font-size:14px"><thead><tr style="text-align:left;background:rgba(0,0,0,.2)"><th scope="col" style="padding:12px 16px;width:90px">Methode</th><th scope="col" style="padding:12px 16px">Pfad</th><th scope="col" style="padding:12px 16px">Zweck</th><th scope="col" style="padding:12px 16px">Zugriff</th></tr></thead><tbody><sc-for list="{{ endpunkte }}" as="e" hint-placeholder-count="9"><tr style="border-top:1px solid rgba(255,255,255,.07)"><td style="padding:12px 16px;font-family:'Geist Mono',monospace;font-size:12.5px;color:{{ e.farbe }}">{{ e.m }}</td><td style="padding:12px 16px;font-family:'Geist Mono',monospace;font-size:13px">{{ e.p }}</td><td style="padding:12px 16px;color:#BCC1BD">{{ e.z }}</td><td style="padding:12px 16px;color:#9CA29E">{{ e.a }}</td></tr></sc-for></tbody></table></div>
+  <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin:0 0 48px"><div style="flex:1 1 380px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><h2 style="margin:0 0 12px;font-size:22px;letter-spacing:-.02em">Anfrage und Antwort</h2><p style="margin:0 0 12px;font-size:14.5px;line-height:1.6;color:#BCC1BD">Jede Antwort trägt Kennzeichnung und Kosten. Pflichtheader: <code style="font-family:'Geist Mono',monospace">Authorization</code>, <code style="font-family:'Geist Mono',monospace">Idempotency-Key</code> bei allen schreibenden Aufrufen.</p><pre style="margin:0;padding:16px;overflow:auto;border-radius:10px;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05);font-family:'Geist Mono',monospace;font-size:12.5px;line-height:1.65;color:#E3E6E3">{
+  "ki": true,
+  "modell": "nexify-guenstig",
+  "stufe": 1,
+  "kostenCent": 1,
+  "guthabenCent": 18400,
+  "requestId": "req_7f3a…",
+  "antwort": "…"
+}</pre></div><div style="flex:1 1 380px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><h2 style="margin:0 0 12px;font-size:22px;letter-spacing:-.02em">Fehlerformat</h2><p style="margin:0 0 12px;font-size:14.5px;line-height:1.6;color:#BCC1BD">Immer maschinenlesbar mit verständlichem deutschem Text – nie ein Stacktrace.</p><pre style="margin:0;padding:16px;overflow:auto;border-radius:10px;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05);font-family:'Geist Mono',monospace;font-size:12.5px;line-height:1.65;color:#E3E6E3">{
+  "fehler": {
+    "code": "BUDGET_ERSCHOEPFT",
+    "text_de": "Das Monatsbudget der Kostenstelle ist erreicht.",
+    "feld": "kostenstelle"
+  }
+}</pre></div></div>
+  <h2 style="margin:0 0 16px;font-size:28px;font-weight:700;letter-spacing:-.03em">Fehlercodes</h2>
+  <div style="overflow:auto;margin:0 0 48px;border-radius:14px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><table style="width:100%;min-width:600px;border-collapse:collapse;font-size:14px"><thead><tr style="text-align:left;background:rgba(0,0,0,.2)"><th scope="col" style="padding:12px 16px;width:80px">HTTP</th><th scope="col" style="padding:12px 16px">Code</th><th scope="col" style="padding:12px 16px">Bedeutung und Maßnahme</th></tr></thead><tbody><sc-for list="{{ fehlercodes }}" as="f" hint-placeholder-count="7"><tr style="border-top:1px solid rgba(255,255,255,.07)"><td style="padding:12px 16px;font-family:'Geist Mono',monospace;color:{{ f.farbe }}">{{ f.http }}</td><td style="padding:12px 16px;font-family:'Geist Mono',monospace;font-size:13px">{{ f.code }}</td><td style="padding:12px 16px;color:#BCC1BD">{{ f.text }}</td></tr></sc-for></tbody></table></div>
+  <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));margin:0 0 48px"><sc-for list="{{ dokuKarten }}" as="k" hint-placeholder-count="4"><div style="padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">{{ k.kick }}</p><strong style="display:block;margin-bottom:8px;font-size:19px;letter-spacing:-.015em">{{ k.titel }}</strong><p style="margin:0;font-size:14.5px;line-height:1.6;color:#BCC1BD">{{ k.text }}</p></div></sc-for></div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:28px;border-radius:16px;border:1px solid rgba(215,250,80,.45);background:radial-gradient(500px 200px at 100% 0%,rgba(215,250,80,.1),transparent 70%),#2A2E2C;box-shadow:0 0 0 1px rgba(215,250,80,.15),0 20px 50px -24px rgba(215,250,80,.4)"><div style="flex:1 1 320px"><strong style="display:block;font-size:22px;letter-spacing:-.02em;margin-bottom:6px">Fragen zur Anbindung?</strong><span style="font-size:15px;line-height:1.55;color:#BCC1BD">Pascal Courbois beantwortet technische Fragen persönlich – meist am selben Werktag.</span></div><a href="NeXifyAI Cloud v12.dc.html#kontakt" style="display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600" style-hover="color:#111312;filter:brightness(1.06)" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Technisches Gespräch anfragen</a></div>
+</main></sc-if>
+
+  <sc-if value="{{ istPreise }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="API – Preise und Rechner" style="max-width:1120px;margin:0 auto;padding:48px 24px 96px">
+      <h1 style="margin:0 0 8px;font-size:clamp(32px,4.4vw,56px);font-weight:600;letter-spacing:-.04em">Preise</h1>
+      <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#BCC1BD;max-width:62ch">Preis je Anfrage = Einkaufspreis des Modells × {{ formelText }}. Keine Rundung je Anfrage – auf Cent gerundet wird erst je Rechnungsposition. Sinkt der Einkaufspreis, sinkt Ihr Preis mit.</p>
+      <sc-if value="{{ preiseEntwurf }}" hint-placeholder-val="{{ true }}">
+        <p role="note" style="display:inline-block;margin:0 0 24px;padding:8px 12px;border:1px solid #FFC24A;border-radius:4px;font-size:14px;color:#FFC24A">Beispielwerte – die verbindliche Preisliste erscheint nach Freigabe.</p>
+      </sc-if>
+      <div style="overflow:auto;margin-bottom:48px;border:1px solid #363A38;border-radius:8px">
+        <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:14px">
+          <thead><tr style="background:#303634;text-align:left"><th scope="col" style="padding:12px 16px">Modellstufe</th><th scope="col" style="padding:12px 16px">Eingabe je 1 Mio. Token</th><th scope="col" style="padding:12px 16px">Ausgabe je 1 Mio. Token</th><th scope="col" style="padding:12px 16px">Einsatz</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ preisZeilen }}" as="z" hint-placeholder-count="3">
+              <tr style="border-top:1px solid #363A38"><th scope="row" style="padding:12px 16px;text-align:left;font-weight:600">{{ z.name }}</th><td style="padding:12px 16px;font-family:'Geist Mono',monospace">{{ z.ein }}</td><td style="padding:12px 16px;font-family:'Geist Mono',monospace">{{ z.aus }}</td><td style="padding:12px 16px;color:#BCC1BD">{{ z.einsatz }}</td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <h2 style="margin:0 0 16px;font-size:32px;font-weight:600;letter-spacing:-.04em">Kostenrechner</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+        <div style="flex:2 1 420px;min-width:0;display:grid;gap:24px;padding:24px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)">
+          <div role="radiogroup" aria-label="Modellstufe" style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ rModelle }}" as="m" hint-placeholder-count="3"><button role="radio" aria-checked="{{ m.an }}" onClick="{{ m.waehlen }}" style="min-height:44px;padding:0 16px;border:1px solid {{ m.rand }};border-radius:4px;background:#242826;color:#FFFFFF;font-size:14px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ m.name }}</button></sc-for>
+          </div>
+          <sc-for list="{{ regler }}" as="r" hint-placeholder-count="3">
+            <label style="display:grid;gap:8px"><span style="display:flex;justify-content:space-between;gap:16px;font-size:14px"><span>{{ r.label }}</span><span style="font-family:'Geist Mono',monospace">{{ r.anzeige }}</span></span><input type="range" min="{{ r.min }}" max="{{ r.max }}" step="{{ r.step }}" value="{{ r.wert }}" onInput="{{ r.setzen }}" aria-label="{{ r.label }}" style="width:100%" /></label>
+          </sc-for>
+        </div>
+        <div style="flex:1 1 280px;min-width:0;padding:24px;border:1px solid #D7FA50;border-radius:8px;background:#303634">
+          <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Geschätzt je Monat, netto</p>
+          <strong style="display:block;margin-bottom:8px;font-family:'Geist Mono',monospace;font-size:40px;letter-spacing:-.03em">{{ rMonat }}</strong>
+          <p style="margin:0 0 16px;font-size:14px;color:#BCC1BD">{{ rJe }} je Anfrage · Empfohlene Aufladung {{ rAufladung }}</p>
+          <p style="margin:0;font-size:12px;line-height:1.5;color:#BCC1BD">Schätzung ohne Gewähr. Abgerechnet wird der tatsächliche Verbrauch; zzgl. USt nach Sitz (NL 21%, EU-B2B Reverse Charge).</p>
+        </div>
+      </div>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ istKonsole }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="API – Konsole" style="max-width:1120px;margin:0 auto;padding:48px 24px 96px">
+      <sc-if value="{{ meldung }}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display:flex;gap:12px;margin:0 0 24px;padding:16px;border:1px solid {{ meldungRand }};border-radius:4px;background:#303634"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:{{ meldungRand }}">{{ meldungCode }}</span><span style="font-size:14px;line-height:1.5">{{ meldung }}</span></div>
+      </sc-if>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px">
+        <div style="flex:1 1 280px;min-width:0;padding:24px;border:1px solid {{ standRand }};border-radius:8px;background:#2A2E2C">
+          <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Guthaben</p>
+          <strong style="display:block;font-family:'Geist Mono',monospace;font-size:40px;letter-spacing:-.03em">{{ saldo }}</strong>
+          <p style="margin:8px 0 0;font-size:14px;color:#BCC1BD">{{ standText }}</p>
+        </div>
+        <div style="flex:2 1 420px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)">
+          <p style="margin:0 0 12px;font-size:16px;font-weight:600">Aufladen mit Kartenzahlung oder Karte</p>
+          <div role="radiogroup" aria-label="Betrag" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+            <sc-for list="{{ betraege }}" as="b" hint-placeholder-count="4"><button role="radio" aria-checked="{{ b.an }}" onClick="{{ b.waehlen }}" style="min-height:44px;padding:0 16px;border:1px solid {{ b.rand }};border-radius:4px;background:#242826;color:#FFFFFF;font-family:'Geist Mono',monospace;font-size:14px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ b.label }}</button></sc-for>
+          </div>
+          <label style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;font-size:14px;line-height:1.5;cursor:pointer"><input type="checkbox" checked="{{ autoAn }}" onChange="{{ autoUmschalten }}" style="width:20px;height:20px;margin:2px 0 0;accent-color:#D7FA50" /><span>Automatisch nachladen, wenn das Guthaben unter 10,00 € fällt – höchstens zweimal pro Tag, jederzeit abschaltbar.</span></label>
+          <button onClick="{{ aufladen }}" disabled="{{ laedt }}" style="height:48px;padding:0 24px;border:0;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:600;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ aufladenText }}</button>
+          <p style="margin:12px 0 0;font-size:12px;color:#BCC1BD">Die Gutschrift erfolgt, sobald Zahlungsanbieter die Zahlung bestätigt. Sie erhalten je Aufladung eine Anzahlungsrechnung.</p>
+        </div>
+      </div>
+
+      <sc-if value="{{ checkout }}" hint-placeholder-val="{{ false }}">
+        <div role="dialog" aria-modal="true" aria-label="Zahlung" style="position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:24px;background:rgba(0,0,0,.6)">
+          <div style="width:min(420px,100%);padding:32px;border-radius:8px;background:#FFFFFF;color:#191C1F">
+            <p style="margin:0 0 4px;font-size:12px;color:#5C6670">Kartenzahlung · Prototyp, keine echte Zahlung</p>
+            <strong style="display:block;margin-bottom:16px;font-size:24px">{{ checkoutBetrag }} an NeXify AI</strong>
+            <p style="margin:0 0 24px;font-family:'Geist Mono',monospace;font-size:12px;color:#5C6670">Referenz {{ checkoutRef }}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><button onClick="{{ zahlungOk }}" style="height:48px;padding:0 20px;border:0;border-radius:24px;background:#191C1F;color:#FFFFFF;font-size:14px;font-weight:700;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Bezahlen</button><button onClick="{{ zahlungAbgelehnt }}" style="height:48px;padding:0 20px;border:1px solid #C9CED4;border-radius:24px;background:#FFFFFF;color:#191C1F;font-size:14px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Karte abgelehnt simulieren</button><button onClick="{{ zahlungAbbruch }}" style="height:48px;padding:0 20px;border:0;background:transparent;color:#191C1F;font-size:14px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Abbrechen</button></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+        <section aria-label="Kostenstellen und Schlüssel" style="flex:2 1 460px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)">
+          <h2 style="margin:0 0 16px;font-size:20px;letter-spacing:-.02em">Kostenstellen und Schlüssel</h2>
+          <div style="display:grid;gap:8px;margin-bottom:16px">
+            <sc-for list="{{ kostenstellen }}" as="k" hint-placeholder-count="2">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 16px;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05);border-radius:4px">
+                <strong style="flex:1 1 140px;font-size:14px">{{ k.name }}</strong>
+                <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">{{ k.schluessel }}</span>
+                <span style="font-family:'Geist Mono',monospace;font-size:12px">{{ k.verbrauch }} / {{ k.budget }}</span>
+                <button onClick="{{ k.testen }}" style="height:44px;padding:0 12px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;font-size:12px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Testanfrage</button>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:0;font-size:12px;color:#BCC1BD">Der vollständige Schlüssel wird nur einmal beim Anlegen gezeigt; gespeichert wird nur sein Hash.</p>
+        </section>
+        <section aria-label="Belege" style="flex:1 1 300px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8)">
+          <h2 style="margin:0 0 16px;font-size:20px;letter-spacing:-.02em">Belege und Journal</h2>
+          <ol style="display:grid;gap:8px;margin:0;padding:0;list-style:none">
+            <sc-for list="{{ journal }}" as="j" hint-placeholder-count="3">
+              <li style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="color:#BCC1BD">{{ j.text }}</span><span style="font-family:'Geist Mono',monospace;color:{{ j.farbe }}">{{ j.betrag }}</span></li>
+            </sc-for>
+          </ol>
+          <button onClick="{{ kuendigen }}" style="margin-top:24px;height:44px;padding:0 16px;border:1px solid #4A4F4C;border-radius:8px;background:transparent;color:#FFFFFF;font-size:14px;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Vertrag beenden und Rest erstatten</button>
+        </section>
+      </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-top:16px"><section aria-label="Verbrauch der letzten 14 Tage" style="flex:2 1 460px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:16px"><h2 style="margin:0;font-size:20px;letter-spacing:-.02em">Verbrauch der letzten 14 Tage</h2><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">Beispieldaten · netto</span></div><div role="img" aria-label="Säulendiagramm des täglichen Verbrauchs" style="display:grid;grid-template-columns:repeat(14,1fr);gap:6px;align-items:end;height:140px;padding:12px 12px 0;border-radius:12px;background:#1E2220;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05)"><sc-for list="{{ tage }}" as="d" hint-placeholder-count="14"><div title="{{ d.titel }}" style="height:{{ d.h }}%;min-height:4px;border-radius:4px 5px 0 0;background:linear-gradient(180deg,#D7FA50,#78C331);box-shadow:0 0 14px -2px rgba(215,250,80,.5)"></div></sc-for></div><div style="display:flex;justify-content:space-between;margin-top:8px;font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E"><span>vor 14 Tagen</span><span>heute</span></div></section><section aria-label="Neuen Schlüssel anlegen" style="flex:1 1 320px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><h2 style="margin:0 0 12px;font-size:20px;letter-spacing:-.02em">Neuen Schlüssel anlegen</h2><label style="display:grid;gap:6px;font-size:14px;color:#E3E6E3">Kostenstelle<input value="{{ neuName }}" onInput="{{ neuSetzen }}" onChange="{{ neuSetzen }}" placeholder="z. B. kundenservice" style="min-height:44px;padding:0 12px;border:1px solid #4A4F4C;border-radius:10px;background:#1E2220;box-shadow:inset 0 2px 8px rgba(0,0,0,.4);color:#FFFFFF;font-size:15px" style-focus="outline:2px solid #D7FA50;outline-offset:1px"></label><button onClick="{{ neuAnlegen }}" style="margin-top:12px;min-height:48px;padding:0 20px;border:0;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;cursor:pointer" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Schlüssel anlegen</button><sc-if value="{{ neuSchluessel }}" hint-placeholder-val="{{ false }}"><div role="status" style="margin-top:14px;padding:14px;border-radius:10px;border:1px solid rgba(215,250,80,.5);background:rgba(215,250,80,.07)"><p style="margin:0 0 6px;font-size:12.5px;color:#BCC1BD">Nur jetzt sichtbar – bitte sicher speichern:</p><code style="display:block;overflow-wrap:anywhere;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">{{ neuSchluessel }}</code></div></sc-if></section></div>
+    </main>
+  </sc-if>
+
+  <dc-import name="NX-Footer" market="de-DE" lang="de" active="api" hint-size="100%,880px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;preiseFreigegeben&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const EUR = (c) => (c / 100).toLocaleString("de-DE", { style: "currency", currency: "EUR" });
+const EUR4 = (c) => (c / 100).toLocaleString("de-DE", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 4 });
+const UC = 1e6;
+// Beispielwerte (gekennzeichnet) – echte EK-Werte kommen aus config/api-prepaid.json nach Freigabe
+const BEISPIEL = { version: "beispiel", modus: "aufschlag", satz: 0.45, modelle: { "nexify-lokal": { ekEinCent: 0, ekAusCent: 0 }, "nexify-guenstig": { ekEinCent: 20, ekAusCent: 80 }, "nexify-stark": { ekEinCent: 300, ekAusCent: 1500 } } };
+const NAMEN = { "nexify-lokal": ["Lokal", "Eigene Modelle, einfache Routinen"], "nexify-guenstig": ["Günstig", "Zusammenfassen, Klassifizieren, Chat"], "nexify-stark": ["Stark", "Analyse, lange Dokumente, Code"] };
+const CODE = {
+  curl: 'curl https://api.nexifyai.cloud/v1/chat/completions \\\n  -H "Authorization: Bearer nx_live_…" \\\n  -H "Idempotency-Key: $(uuidgen)" \\\n  -H "X-Kostenstelle: lern-chat" \\\n  -d \'{"model": "nexify-auto",\n       "messages": [{"role": "user",\n                    "content": "Fasse den Vertrag zusammen."}]}\'\n\n→ { "ki": true, "stufe": 1, "kostenCent": 1, … }',
+  node: 'import API from "openai";\n\nconst nx = new API({\n  apiKey: process.env.NEXIFY_KEY,\n  baseURL: "https://api.nexifyai.cloud/v1",\n  defaultHeaders: { "X-Kostenstelle": "lern-chat" },\n});\n\nconst r = await nx.chat.completions.create({\n  model: "nexify-auto",\n  messages: [{ role: "user", content: "Fasse den Vertrag zusammen." }],\n});\nconsole.log(r.choices[0].message.content, r.nexify.kostenCent);',
+  python: 'from openai import API\n\nnx = API(api_key=os.environ["NEXIFY_KEY"],\n            base_url="https://api.nexifyai.cloud/v1",\n            default_headers={"X-Kostenstelle": "lern-chat"})\n\nr = nx.chat.completions.create(\n    model="nexify-auto",\n    messages=[{"role": "user", "content": "Fasse den Vertrag zusammen."}],\n)\nprint(r.choices[0].message.content)',
+  cli: '$ export NEXIFY_KEY=nx_live_…\n$ nexify login\n✓ Angemeldet · Kostenstelle lern-chat\n$ nexify guthaben\nRestguthaben 184,00 €  · reicht ca. 41 Tage\n$ nexify frage "Fasse den Vertrag zusammen."\nKI-Antwort · Stufe 1 · 1 Cent\n$ nexify run "Angebot für Firma Berens"\n? Datei angebot-berens.md anlegen? [j/n]'
+};
+const CFG = { minCent: 5000, maxCent: 500000, warnungCent: 1000 };
+
+class Component extends DCLogic {
+  state = { codeTab: "curl", kopiert: false, neuName: "", neuSchluessel: null, view: "start", modell: "nexify-guenstig", anfragen: 20000, ein: 1500, aus: 400, betrag: 10000, auto: false, laedt: false, checkout: null, meldung: null, konto: null, erwartet: null, nr: 1 };
+  async componentDidMount() {
+    this.P = await import("./lib/prepaid.js");
+    const h = location.hash.replace("#", ""); if (["start", "doku", "preise", "konsole"].includes(h)) this.setState({ view: h });
+    this.setState({ konto: { mandant: "m1", saldoUc: 1840 * UC, reserviertUc: 0, sperre: null, kostenstellen: { "lern-chat": { budgetCent: 5000, verbrauchtUc: 1210 * UC }, "pruefungen": { budgetCent: null, verbrauchtUc: 0 } }, journal: [{ id: "a:o0", art: "aufladung", uc: 5000 * UC, zeit: Date.now() - 864e6 }, { id: "v:x", art: "verbrauch", uc: -3160 * UC, kostenstelle: "lern-chat", zeit: Date.now() - 36e5 }] } });
+  }
+  go = (v) => () => { this.setState({ view: v, meldung: null }); history.replaceState(null, "", "#" + v); window.scrollTo(0, 0); };
+  melde(code, text, gut) { this.setState({ meldung: { code, text, gut } }); }
+  aufladen = () => {
+    try {
+      const e = this.P.aufladungAnlegen(this.state.konto, "m1", this.state.betrag, CFG, { schluessel: "t" + Date.now() });
+      this.setState({ checkout: e, erwartet: e, laedt: true, meldung: null });
+    } catch (x) { this.melde(x.code, x.message); }
+  };
+  webhook(state) {
+    const e = this.state.erwartet, order = { id: "o" + this.state.nr, state, amount: e.order.amount, currency: "EUR", merchant_order_ext_ref: e.ref };
+    try {
+      const r = this.P.zahlungVerbuchen(this.state.konto, e, order, Date.now());
+      if (r.neu) { const beleg = "NX-API-2026-" + String(this.state.nr).padStart(5, "0"); this.setState({ konto: r.konto, nr: this.state.nr + 1 }, () => this.melde("ORDER_COMPLETED", "Gutschrift " + EUR(e.order.amount) + " verbucht. Anzahlungsrechnung " + beleg + " ist unter Belegen.", true)); }
+      else this.melde("ORDER_" + state.toUpperCase(), "Zahlung nicht abgeschlossen – kein Guthaben gebucht. Bitte erneut versuchen oder andere Zahlart wählen.");
+    } catch (x) { this.melde(x.code, x.message); }
+    this.setState({ checkout: null, laedt: false });
+  }
+  zahlungOk = () => this.webhook("completed");
+  zahlungAbgelehnt = () => this.webhook("failed");
+  zahlungAbbruch = () => { this.setState({ checkout: null, laedt: false }); this.melde("ORDER_CANCELLED", "Abgebrochen. Es wurde nichts belastet."); };
+  testen = (ks) => () => {
+    const P = this.P, p = P.preis(BEISPIEL, "nexify-stark", { input: 2000, output: 800 }), id = "q" + Date.now();
+    try { let k = P.reservieren(this.state.konto, "m1", { id, kostenstelle: ks, schaetzungUc: p.vkUc * 2 }); k = P.abrechnen(k, "m1", id, p, Date.now()); this.setState({ konto: k }); this.melde("200", "Testanfrage in »" + ks + "«: " + EUR4(p.vkUc / UC) + " abgebucht (Beispielpreis).", true); }
+    catch (x) { this.melde(x.code, x.message); }
+  };
+  kuendigen = () => { try { const r = this.P.rueckzahlung(this.state.konto, "m1", Date.now()); this.setState({ konto: r.konto }); this.melde("202", EUR(r.auszahlungCent) + " werden auf Ihr Konto überwiesen. Die Schlüssel sind gesperrt.", true); } catch (x) { this.melde(x.code, x.message); } };
+
+  renderVals() {
+    const s = this.state, P = this.P, k = s.konto;
+    const tabs = [["start", "Produkt"], ["doku", "Dokumentation"], ["preise", "Preise und Rechner"], ["konsole", "Konsole"]].map(([id, label]) => ({ label, go: this.go(id), cur: s.view === id ? "page" : "false", rand: s.view === id ? "#D7FA50" : "#363A38", bg: s.view === id ? "#303634" : "transparent" }));
+    const vk = (m, art) => P ? EUR4(P.preis(BEISPIEL, m, { [art]: 1e6 }).vkUc / UC) : "…";
+    const preisZeilen = Object.keys(BEISPIEL.modelle).map((m) => ({ name: NAMEN[m][0], einsatz: NAMEN[m][1], ein: vk(m, "input"), aus: vk(m, "output") }));
+    const je = P ? P.preis(BEISPIEL, s.modell, { input: s.ein, output: s.aus }).vkUc : 0;
+    const monatCent = Math.round(je * s.anfragen / UC);
+    const empf = [5000, 10000, 25000, 50000, 100000, 250000, 500000].find((b) => b >= monatCent) || 500000;
+    const reg = (key, label, min, max, step, fmt) => ({ label, min, max, step, wert: s[key], anzeige: fmt(s[key]), setzen: (e) => this.setState({ [key]: Number(e.target.value) }) });
+    const st = P && k ? P.stand(k, CFG) : { restCent: 0, stufe: "ok" };
+    const ks = k ? Object.entries(k.kostenstellen).map(([name, v], i) => ({ name, schluessel: "nx_live_" + ["a8f3", "c21e"][i % 2] + "…", verbrauch: EUR(Math.round(v.verbrauchtUc / UC)), budget: v.budgetCent == null ? "ohne Budget" : EUR(v.budgetCent), testen: this.testen(name) })) : [];
+    const journal = k ? k.journal.slice(-6).reverse().map((b) => ({ text: { aufladung: "Aufladung · Anzahlungsrechnung", verbrauch: "Verbrauch " + (b.kostenstelle || ""), rueckzahlung: "Rückzahlung" }[b.art], betrag: (b.uc > 0 ? "+" : "") + EUR4(b.uc / UC), farbe: b.uc > 0 ? "#D7FA50" : "#FFFFFF" })) : [];
+    const m = s.meldung;
+    return {
+
+      istDoku: s.view === "doku",
+      codeTabs: [["curl", "curl"], ["node", "Node.js"], ["python", "Python"], ["cli", "nexify"]].map(([id, label]) => ({ label, an: s.codeTab === id ? "true" : "false", bg: s.codeTab === id ? "rgba(215,250,80,.14)" : "transparent", fg: s.codeTab === id ? "#D7FA50" : "#E3E6E3", pick: () => this.setState({ codeTab: id, kopiert: false }) })),
+      codeText: CODE[s.codeTab], kopierText: s.kopiert ? "Kopiert ✓" : "Kopieren",
+      codeKopieren: () => { try { navigator.clipboard.writeText(CODE[s.codeTab]); } catch (e) {} this.setState({ kopiert: true }); setTimeout(() => this.setState({ kopiert: false }), 1800); },
+      funktionen: [
+        ["Kompatibel", "API-Protokoll", "Bestehende Bibliotheken und Werkzeuge funktionieren, indem Sie nur die Basis-URL und den Schlüssel ändern."],
+        ["Kosten", "Reservieren vor Ausführen", "Vor jeder Anfrage werden die Höchstkosten reserviert. Reicht Guthaben oder Budget nicht, wird sie abgewiesen, bevor etwas berechnet wird."],
+        ["Steuerung", "Kostenstellen mit Budget", "Ein Schlüssel je Projekt oder Abteilung, mit Monatsbudget und Sperre. Verbrauch getrennt einsehbar."],
+        ["Routing", "Die günstigste Stufe, die reicht", "nexify-auto startet niedrig und steigt bei Unsicherheit oder Schemafehlern auf. Prüfungsrelevante Aufgaben laufen fest auf der starken Stufe."],
+        ["Nachweis", "Journal je Anfrage", "Zeit, Kostenstelle, Modell, Token, Kosten und Anfrage-ID, unveränderlich. Monatsnachweis als PDF und CSV."],
+        ["Kennzeichnung", "KI-Antwort immer markiert", "Jede Antwort trägt ki: true. So erfüllen Sie die Kennzeichnungspflicht nach Art. 50 KI-VO ohne eigene Logik."]
+      ].map(([art, titel, text], i) => ({ nr: "0" + (i + 1), art, titel, text })),
+      modelle: [
+        ["nexify-auto", "Automatisch", "Das Gateway wählt die Stufe je Anfrage und rechnet die tatsächlich genutzte ab.", "Empfohlen für die meisten Fälle", "#D7FA50"],
+        ["nexify-lokal", "Lokal", "Eigene, quantisierte Modelle für einfache Routinen wie Klassifizieren und Sortieren.", "Einkaufspreis 0 – nur Aufschlag entfällt", "#6FE3CF"],
+        ["nexify-guenstig", "Günstig", "Zusammenfassen, Chat, Extrahieren. Schnell und sparsam.", "Preis siehe Tabelle „Preise“", "#E3E6E3"],
+        ["nexify-stark", "Stark", "Analyse, lange Dokumente, Code und alles Prüfungsrelevante.", "Preis siehe Tabelle „Preise“", "#E3E6E3"]
+      ].map(([id, name, text, hinweis, farbe]) => ({ id, name, text, hinweis, farbe, rand: id === "nexify-auto" ? "rgba(215,250,80,.5)" : "rgba(255,255,255,.08)" })),
+      sicherheit: [
+        ["Hosting in Frankfurt", "Gateway, Datenbank und Protokolle in der EU."], ["Auftragsverarbeitung", "AVV nach Art. 28 DSGVO, TOM und öffentliche Liste der Unterauftragsverarbeiter."],
+        ["Mandantentrennung", "Zeilenebenen-Sicherheit in der Datenbank – Rolle A sieht nichts von B."], ["Schlüssel nur als Hash", "Der vollständige Schlüssel wird einmal gezeigt, gespeichert wird nur sein Hash."],
+        ["Kein Training auf Ihren Daten", "Kundendaten fließen nicht in gemeinsames Training. Schalter je Kostenstelle: nur Zähldaten speichern."], ["Unveränderliches Ledger", "Jede Buchung mit Anfrage-ID; doppelte Anfragen werden über den Idempotency-Key erkannt."],
+        ["Hartsperren", "Reboot, DNS, Firewall, Zahlungen und Löschen laufen nie ohne Freigabe – technisch im Gateway erzwungen."], ["Nur für Unternehmen", "Verträge nach § 14 BGB; keine Verbraucher."]
+      ].map(([titel, text]) => ({ titel, text })),
+      datenblatt: [["Basis-URL", "https://api.nexifyai.cloud/v1"], ["Protokoll", "HTTPS, JSON, API-kompatibel"], ["Authentifizierung", "Bearer-Schlüssel nx_live_… je Kostenstelle"], ["Idempotenz", "Header Idempotency-Key, 24 Std. gültig"], ["Streaming", "Server-Sent Events (stream: true)"], ["Modell-IDs", "nexify-auto · -lokal · -guenstig · -stark"], ["Hosting", "Frankfurt, EU"], ["Abrechnung", "Prepaid, Cent-Ledger, Monatsnachweis"], ["Zeitstempel", "ISO 8601, UTC"], ["Version", "v1, Änderungen mit 30 Tagen Vorlauf"], ["Raten-Limit", "Vorschlag: 60 Anfragen/Min je Schlüssel"], ["Support", "mail@nexifyai.cloud · Antwort am Werktag"]].map(([k, v]) => ({ k, v })),
+      endpunkte: [["POST", "/v1/chat/completions", "Chat und Text, API-kompatibel (auch Streaming)", "Schlüssel"], ["POST", "/v1/messages", "Nachrichtenformat für API-kompatible Clients", "Schlüssel"], ["POST", "/v1/embeddings", "Vektoren für Suche und Wissensspeicher", "Schlüssel"], ["POST", "/v1/estimate", "Kosten vorab schätzen, ohne auszuführen", "Schlüssel"], ["GET", "/v1/usage", "Verbrauch je Kostenstelle und Zeitraum", "Schlüssel"], ["GET", "/v1/ledger", "Guthaben, Buchungen, Belege", "Konto"], ["POST", "/v1/topups", "Aufladung anlegen (Zahlungsanbieter Order)", "Konto"], ["POST", "/v1/keys", "Schlüssel je Kostenstelle anlegen oder sperren", "Konto"], ["POST", "/v1/payments/revolut/webhook", "Zahlungsereignisse (signiert, HMAC)", "Zahlungsanbieter"]].map(([m, p, z, a]) => ({ m, p, z, a, farbe: m === "GET" ? "#6FE3CF" : "#D7FA50" })),
+      fehlercodes: [["400", "UNGUELTIGE_EINGABE", "Pflichtfeld fehlt oder hat das falsche Format. Das Feld steht im Fehlerobjekt.", "#FFC24A"], ["401", "SCHLUESSEL_UNGUELTIG", "Schlüssel unbekannt oder gesperrt. Neuen anlegen.", "#FF8A7A"], ["402", "GUTHABEN_LEER", "Das Guthaben reicht nicht. Aufladen oder Auto-Aufladung aktivieren.", "#FF8A7A"], ["403", "BUDGET_ERSCHOEPFT", "Das Monatsbudget der Kostenstelle ist erreicht.", "#FF8A7A"], ["409", "DOPPELTE_ANFRAGE", "Derselbe Idempotency-Key mit anderem Inhalt. Neuen Key verwenden.", "#FFC24A"], ["429", "ZU_VIELE_ANFRAGEN", "Raten-Limit erreicht. Header Retry-After beachten.", "#FFC24A"], ["503", "MODELL_NICHT_ERREICHBAR", "Ersatzstufe wird genutzt; berechnet wird das tatsächlich genutzte Modell.", "#FFC24A"]].map(([http, code, text, farbe]) => ({ http, code, text, farbe })),
+      dokuKarten: [["Authentifizierung", "Ein Schlüssel je Kostenstelle", "Header Authorization: Bearer nx_live_…; Testschlüssel beginnen mit nx_test_ und buchen nichts ab. Rotation jederzeit in der Konsole."], ["Idempotenz", "Doppelte Anfragen kosten nichts", "Wiederholen Sie denselben Aufruf mit demselben Idempotency-Key, erhalten Sie dieselbe Antwort und werden nur einmal belastet."], ["Webhooks", "Signiert und wiederholbar", "Zahlungsereignisse tragen eine HMAC-Signatur (v1 + Zeitstempel + Rohkörper, Toleranz 5 Minuten). Gutschrift erst, wenn die Order abgeschlossen ist und Betrag sowie Referenz stimmen."], ["Versionierung", "Änderungen mit 30 Tagen Vorlauf", "Breaking Changes erscheinen nur unter neuer Version. Preisänderungen kündigen wir 30 Tage vorher an; die datierte Preisliste ist maßgeblich."]].map(([kick, titel, text]) => ({ kick, titel, text })),
+      tage: [22, 30, 41, 35, 12, 8, 46, 58, 52, 64, 71, 60, 22, 47].map((v, i) => ({ h: v, titel: "vor " + (13 - i) + " Tagen: Beispielwert" })),
+      neuName: s.neuName, neuSetzen: (e) => this.setState({ neuName: e.target.value }),
+      neuAnlegen: () => { const n = (s.neuName || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); if (n.length < 3) { this.melde("UNGUELTIGE_EINGABE", "Bitte einen Namen mit mindestens drei Zeichen angeben."); return; } const rnd = Array.from({ length: 24 }, () => "abcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 36)]).join(""); const kk = Object.assign({}, this.state.konto); kk.kostenstellen = Object.assign({}, kk.kostenstellen, { [n]: { budgetCent: null, verbrauchtUc: 0 } }); this.setState({ konto: kk, neuSchluessel: "nx_live_" + rnd, neuName: "" }); this.melde("201", "Kostenstelle »" + n + "« angelegt. Den Schlüssel sehen Sie nur jetzt.", true); },
+      neuSchluessel: s.neuSchluessel,
+      tabs, istStart: s.view === "start", istPreise: s.view === "preise", istKonsole: s.view === "konsole",
+      zurKonsole: this.go("konsole"), zuPreisen: this.go("preise"),
+      schritte: [{ nr: "01", titel: "Konto anlegen", text: "Unternehmen registrieren. Wir prüfen Ihre USt-IdNr., Sie legen Kostenstellen für Projekte oder Abteilungen an." }, { nr: "02", titel: "Guthaben aufladen", text: "Ab 50 € per Kartenzahlung oder Karte. Gutschrift nach Bestätigung, Rechnung sofort." }, { nr: "03", titel: "Anfragen senden", text: "Schlüssel in Ihre Anwendung eintragen. Abgebucht wird nur, was die Anfrage tatsächlich verbraucht." }],
+      faq: [
+        { f: "Verfällt mein Guthaben?", a: "Nein. Es bleibt während der Vertragslaufzeit erhalten und wird bei Vertragsende auf Antrag erstattet." },
+        { f: "Was passiert, wenn das Guthaben leer ist?", a: "Neue Anfragen werden abgewiesen, bevor Kosten entstehen. Laufende Anfragen werden fertig abgerechnet. Mit Auto-Aufladung passiert das nicht." },
+        { f: "Welche Rechnung bekomme ich?", a: "Je Aufladung eine Anzahlungsrechnung, dazu jeden Monat einen Verbrauchsnachweis je Kostenstelle." },
+        { f: "Wo werden meine Daten verarbeitet?", a: "Gateway und Protokolle in Frankfurt. Welche Modellanbieter je Stufe beteiligt sind, steht in der Preisliste und im Auftragsverarbeitungsvertrag." },
+        { f: "Kann ich als Privatperson buchen?", a: "Nein, die API ist nur für Unternehmen und öffentliche Einrichtungen." },
+        { f: "Was kostet eine typische Anfrage?", a: "Das hängt von Modellstufe und Textlänge ab. Der Kostenrechner unter „Preise“ zeigt es vorab je Anfrage und je Monat; jede Antwort der API nennt zusätzlich die tatsächlichen Kosten in Cent." },
+        { f: "Kann ich Kosten je Projekt oder Abteilung begrenzen?", a: "Ja. Jede Kostenstelle hat einen eigenen Schlüssel und optional ein Monatsbudget. Ist es erreicht, werden weitere Anfragen dieser Kostenstelle abgewiesen, bevor Kosten entstehen." },
+      ],
+      formelText: BEISPIEL.modus === "aufschlag" ? "1,45 (45% Aufschlag)" : "1 / 0,55", preiseEntwurf: this.props.preiseFreigegeben !== true, preisZeilen,
+      rModelle: Object.keys(BEISPIEL.modelle).map((id) => ({ name: NAMEN[id][0], an: s.modell === id, rand: s.modell === id ? "#D7FA50" : "#4A4F4C", waehlen: () => this.setState({ modell: id }) })),
+      regler: [reg("anfragen", "Anfragen je Monat", 100, 200000, 100, (v) => v.toLocaleString("de-DE")), reg("ein", "Eingabe-Token je Anfrage", 50, 20000, 50, (v) => v.toLocaleString("de-DE")), reg("aus", "Ausgabe-Token je Anfrage", 20, 4000, 20, (v) => v.toLocaleString("de-DE"))],
+      rMonat: EUR(monatCent), rJe: EUR4(je / UC), rAufladung: EUR(empf),
+      saldo: EUR(st.restCent), standText: k && k.sperre === "rueckzahlung" ? "Konto aufgelöst" : st.stufe === "niedrig" ? "Niedrig – bitte bald aufladen" : st.stufe === "leer" ? "Leer – Anfragen werden abgewiesen" : "Ausreichend", standRand: st.stufe === "ok" ? "#363A38" : "#FFC24A",
+      betraege: [5000, 10000, 25000, 50000].map((b) => ({ label: EUR(b), an: s.betrag === b, rand: s.betrag === b ? "#D7FA50" : "#4A4F4C", waehlen: () => this.setState({ betrag: b }) })),
+      autoAn: s.auto, autoUmschalten: () => this.setState({ auto: !s.auto }), aufladen: this.aufladen, laedt: s.laedt, aufladenText: s.laedt ? "Zahlung läuft …" : EUR(s.betrag) + " aufladen",
+      checkout: !!s.checkout, checkoutBetrag: s.checkout ? EUR(s.checkout.order.amount) : "", checkoutRef: s.checkout ? s.checkout.ref : "",
+      zahlungOk: this.zahlungOk, zahlungAbgelehnt: this.zahlungAbgelehnt, zahlungAbbruch: this.zahlungAbbruch,
+      kostenstellen: ks, journal, kuendigen: this.kuendigen,
+      meldung: m ? m.text : null, meldungCode: m ? m.code : "", meldungRand: m && m.gut ? "#D7FA50" : "#FF8A7A",
+    };
+  }
+}
+</script>
+</body>
+</html>

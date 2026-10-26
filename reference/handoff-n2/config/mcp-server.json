@@ -1,0 +1,27 @@
+{
+  "$kommentar": "MCP-Server NeXify AI. Zielversion der Spezifikation 2026-07-28 (zustandslos, keine Protokoll-Sitzung). Jedes Werkzeug ruft vor dem Seiteneffekt lib/regelwerk.js pruefe(). Werte in ${...} aus OpenBao. Stand 27.09.2026.",
+  "server": {
+    "name": "nexify-mcp",
+    "url": "https://mcp.nexifyai.cloud",
+    "protokollVersion": "2026-07-28",
+    "transport": "streamable-http, zustandslos (keine Mcp-Session-Id)",
+    "auth": { "art": "OAuth 2.1, Issuer-Prüfung", "issuer": "${OIDC_ISSUER}", "clientRegistrierung": "Client ID Metadata Document" },
+    "nichtNutzen": ["roots", "sampling", "logging"],
+    "nichtNutzenGrund": "in 2026-07-28 als veraltet markiert; neue Umsetzungen sollen sie nicht einführen",
+    "ratenbegrenzung": { "lesend": "60/min je Client", "schreibend": "10/min je Client" },
+    "beobachtung": "OTel-Span execute_tool je Aufruf, Regelentscheidung als Ereignis"
+  },
+  "werkzeuge": [
+    { "name": "crm.suche", "annotations": { "readOnlyHint": true }, "rolle": ["pascal", "team"], "eingabe": { "q": "string", "limit": "int ≤ 50" } },
+    { "name": "crm.fall_lesen", "annotations": { "readOnlyHint": true }, "rolle": ["pascal", "team"], "eingabe": { "nr": "string ^(NX|AN|AU|RE|FA)-\\d{4}-\\d{3,5}$" } },
+    { "name": "posteingang.liste", "annotations": { "readOnlyHint": true }, "rolle": ["pascal", "team"], "eingabe": { "ordner": "enum offen|anfrage|support|rechnung|werkstatt|recht|system|spam" } },
+    { "name": "posteingang.zuordnen", "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true }, "rolle": ["pascal", "team"], "regel": "entwurf.anlegen", "eingabe": { "mailId": "string", "kunde": "string", "fall": "string?" } },
+    { "name": "wissen.suche", "annotations": { "readOnlyHint": true }, "rolle": ["pascal", "team", "kunde"], "eingabe": { "q": "string" }, "ausgabe": "Treffer mit Fundstelle und Datum" },
+    { "name": "auftrag.anlegen", "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true }, "rolle": ["pascal", "team"], "regel": "entwurf.anlegen", "hinweis": "legt nur Entwurf an" },
+    { "name": "rechenkern.preis", "annotations": { "readOnlyHint": true }, "rolle": ["pascal", "team", "kunde"], "eingabe": { "leistung": "string", "tage": "number", "land": "ISO-3166" } },
+    { "name": "doku.erzeugen", "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true }, "rolle": ["pascal"], "hinweis": "schlägt Merge Request vor, schreibt nie direkt" },
+    { "name": "lernen.signal", "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true }, "rolle": ["pascal", "team", "system"], "eingabe": { "id": "string", "art": "enum korrektur|bewertung|fehler|vorfall|hinweis", "bereich": "string" } },
+    { "name": "regel.pruefen", "annotations": { "readOnlyHint": true }, "rolle": ["pascal", "team", "system"], "eingabe": { "aktion": "object" }, "ausgabe": "Entscheidung erlaubt|mensch|gesperrt mit Verstößen" }
+  ],
+  "regeln": ["Kein Werkzeug mit destructiveHint: true", "schreibende Werkzeuge erzeugen nur Entwürfe oder Signale", "Werkzeugliste ist je Rolle gefiltert und cachebar (gleich für alle Verbindungen derselben Rolle)"]
+}

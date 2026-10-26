@@ -1,3 +1,168 @@
+# Durchgängige Seitenbegleitung · 26.10.2026
+
+React-Begleitung nun9geführteNutzerwege+47Erklärmoduleauf35öffentlichenSeiten,
+inklusiveShop/Werkstatt;12Kernseitenlinks/rechtsmitunterschiedlichenSprechern.
+Alle9Journeys+NeuladepräferenzimBrowserlokalgeprüft;keineAutonavigation/Mikrofon/
+Tonaufnahme. SessionpräferenzgewährtkeineRechte;10privateAnsichtenbleibenunverfügbar.
+AlleVideoassetspending,0veröffentlichteClips;keineFakePlaybuttons.
+VorhandeneInhalteunverändert,93Originalquellenweitererhalten69Backlogoffen.
+AktuelleinteraktiveDatei /workspace/preview/nexify-preview.html.
+
+YAOTI-Konzeptuseruploadgelesen/gehasht,keineAutoplay-Beispielinstruktionübernommen.
+REA6.8wirklichperSTDIO:229Tools,HomepageGuideSnapshot,DriverMITQuellepartiell
+analysiert;404KBBundle15sTimeoutundöffentlicheREAInspektionverweigertoffengehalten.
+7Lösungsoptionen/8Paketarchiveoffiziellrecherchiert;nativeBegleitungbevorzugt,
+Driver/Joyrideoptional,LiveanbieterkeinZwang. Researchunabhängiggeprüft22Hashes.
+Plan docs/strategy/presenter-implementation-plan.md;Produkt-/Finanzmatrixund
+Wissenszugriffsmatrixergänzt. KeinAllchatsAPI/Chatlogimport/Kundenvermischung.
+
+React12Tests,neuerBuild/Standalone/Nextreferenzbuildgrün;Browsertests35Seiten,
+47Module,9Journeys,PDFentwurf/Outboxpending/Marketingdraft,DE/NL/FR,mobilgrün.
+E2E-/Architektur-/CleanAbschlusslog .onboarding/react-preview/presenters-final-*.
+Quellehashgateconfig/presenter-sources.json11Quellenfixiert;unbekanntevorLesen
+abgewiesen. KeineProduktivabnahme,F007bleibtaktiv. RemoteDeploymentlesenGH403;
+keineautomatischeVercel-/ChatGPTLiveSynchronitätbehaupten.
+
+---
+
+# Portable React-Vorschau, DNS und MCP-Abgrenzung · 26.10.2026
+
+Aktiver Hauptfrontendbuild: apps/site React19.3.1/Vite8.3.5; vorhandene UI,
+Texte und Tokens geteilt, Next-/Clerk-Referenz unter apps/web erhalten.
+Vercel-Rootconfig und CI für portablen Reactbuild vorbereitet; keinRemoteDeploy.
+Live lokal3004+VisitorAPI3003; keine öffentlichePortfreigabe/Vercelverbindung.
+ÖffnungsfähigeStandaloneHTML unter /workspace/preview/nexify-preview.html.
+Browsernachweise:35öffentlicheRouten,10privateAnsichtenunverfügbar,
+ChatentwurfbleibtbeimNavigieren, echterEntwurfsPDFdownload,Outboxpendingnichtgesendet,
+Marketingvorlagenichtveröffentlicht,DE/NL/FR,mobil,Standalonebilder+Hashnavigation.
+Siehe .onboarding/react-preview/browser-results.json außerhalbdesRepos.
+React7Tests,Auth6Tests,Python133Tests,Typecheck/Reactbuild/Nextreferenzbuild,
+Designaudit0/0,Architektur,E2EundCleanState bestanden.
+
+93/93Prototypquellenhasheserhalten,24direktreferenziert69expliziterBacklog;
+keinevollständigeInhalts-/Backendabnahme. docs/architecture/0012-preview-coverage.md.
+DNS:alle5benutzerdefiniertenClerkCNAMEsfehlen,keinefalschenZielebeobachtet,
+bestehendesDMARCp=noneerhalten. KeinDNSwrite/Serversecret/Useranlage.
+MCP:ComposioresourcezeigtComposioissuer,keineeigeneKontrolle/Serverquellenvorhanden;
+ClerkSollconfignichtveröffentlicht,keineLiveOAuth-/Tooltestsbehauptet.
+BackupChatGPTDeployschnittstelleweiteroffen;ArchivintegritätistkeineLiveSynchronität.
+F007bleibtaktiv,keineMain-/Produktivfreigabe;AffilinetbleibtseparaterKunde.
+
+---
+
+# Domainklärung · 26.10.2026
+
+Nutzer bestätigt Vercel als Hosting, nexifyai.cloud als spätere Hauptdomain und
+nexifyai.de als Vorschau. Bestehende ChatGPT-Seite auf.cloud bis Fertigstellung
+bewahren, kein vorzeitiger DNS-Wechsel. Clerk authorizedParties exakt auf beide
+HTTPS-Origins begrenzt. Gelieferter öffentlicher RSA2048-PEM gespeichert/geprüft,
+Issuer/JWKS-Bindung noch offen und nicht als statischerJWTkey aktiviert.
+RemoteDomainbindung, Primary/Satellite, Secret, CNAMEs und LiveAuth bleiben offen.
+
+---
+
+# Clerk-Produktionsvorbereitung · 26.10.2026
+
+Aktiver Zweig: `factory/agency-separated-2026-10-26`. Lokale Implementierung,
+keine Produktionsfreigabe. Geprüft:124Python-,5Auth-Tests,Typecheck/Build,
+Designaudit0Fehler/0Warnungen,Architektur und Clean-State grün; unabhängige
+Auth-Gegenprüfung inklusive fehlerhafterPublicKeys abgeschlossen. Clerk SDK7.9.20, deutsche UI4.24.1, Anmelden und
+Registrieren, geschlossene Schutzschicht ohne automatische Geschäftsrechte.
+45 Routen:35öffentlich/10geschützt. PublicKey lokal ignoriert und im Cloud-Draft10;
+Serversecret nur angefordert, nicht gebunden. Domain/Hosting und genaue Clerk-CNAMEs
+bleiben offen; DNS-SichtungNXDOMAIN für clerk.nexifyai.de. Keine Benutzer-/DNS-/
+Deploymentmutation. Vollständiger Stand: docs/deployment/clerk-setup.md und
+config/clerk-production.json. F007 bleibt aktiv; Affilinet bleibt separates
+pausiertes Kundenprojekt. Frühere Fortschrittsabschnitte sind historische Nachweise.
+
+---
+
+# Korrigierte Projektgrenze · 26.10.2026
+
+- Nutzerklärung: Affilinet Aachen ist ein gesondertes, pausiertes Kundenprojekt. Der frühere Import und die Einordnung als Agenturmodul waren falsch und sind verworfen.
+- Aktueller Entwicklungszweig: `factory/agency-separated-2026-10-26`, von vor dem Kundenimport abgezweigt. Kundenbaum `apps/portal` und bekannte Kunden-Commitköpfe sind ausgeschlossen; acht offene Agenturdateien wurden unverändert erhalten. Der alte Importzweig bleibt ausschließlich lokal gesichert, nicht veröffentlichen oder zurückmergen.
+- Die historische N2-Designreferenz bleibt unter `reference/handoff-n2` getrennt gekennzeichnet. Sie aktiviert keine Anwendung oder alte Pipeline. Original-Kundenrepository unverändert und pausiert.
+- Quellenklassifikation und selektive Wiederverwendung: `config/source-boundaries.json`. Keine Kunden-/Agentur-SSO, Datenmigration oder Produktabhängigkeit ableiten. Kundenprojekttests zählen nicht als Agenturabnahme.
+
+## Next Steps
+
+1. Nur die eigenen Agentur-/TEILEKLAR-/Web-/Gateway-Aufgaben fortführen. Keine Affilinet-Übernahme oder automatische Kundenprojekt-Einrichtung.
+2. Brauchbare Komponenten aus allen autorisierten Quellen gezielt bewerten und mit Quelle/Commit, Zweck, Anpassung und Tests übernehmen.
+3. Offene CI-/Frontend-/Integrationsprüfungen des Agentursystems fortsetzen; technische Erreichbarkeit, Live-Anbindung und Gesamtfertigstellung weiterhin getrennt ausweisen.
+
+---
+
+## Überholter Integrationsplan (durch diese Projektgrenze korrigiert)
+
+# Aktueller Integrationsauftrag · 26.10.2026
+
+F-007 ist aktiv: kanonisches gemeinsames Repository, Next.js/TypeScript-Webshell mit nativer AIFly-Seitenleiste, vollständige DE-/TEILEKLAR-Seitenarchitektur, isolierte REA-Instanz, Small-Business-Bibliothek und GitHub/GitLab-Automatisierung. Der nächste lokale Zwischencommit sichert die geprüfte Implementierung vor dem herkunftsgebundenen Import der anderen beiden Quellstände. Keine Main-/Produktivfreigabe und noch kein gesamthaft fertiges Unternehmen.
+
+- Offizieller OpenRouter-Katalog bestätigt `deepseek/deepseek-v4.1-flash-1017`, reasoning high. Adapter erzwingt Modell-/SHA-/Schema-/Budgetbindung; kein Paidcall ohne echte Credentialbindung, keine Ausführung von Modelltext. Legacy-Merge-vor-Review-CLIs sind hart stillgelegt.
+- Zusätzliche REA6.8.0-Installation unter `.onboarding/rea-mcp`, gewünschter Alias `rea-mcp`:229Tools/6Prompts erfasst. Eigener Rechenkern statisch analysiert und buche-Trace/Evidence-Readback geprüft. Hostregistrierung und VPS-Verbindung getrennt behandeln.
+- Small Business offiziell gepinnt installiert:44Skills/35deklarierteMCPRegistrierungen/216Hashdateien. Lesender Loader und nativeFunktionsmatrix, kein Cowork-/Connector-/Scheduler-Go.
+- Neue IA:44Routen,34öffentlich/10geschützt; NeXify/TEILEKLAR/Portale/Intern getrennt, Deutschland90Prozent als Ziel. NextBuild mit dieser IA bestanden; abschließender neuer Browserlauf nach Import noch ausstehend.
+- Native Besucherverläufe lokal echt geprüft:PDFdraft, idempotente Outbox `pending_provider`, lokale Terminanfrage, Marketingstrukturvorlage. Kein behaupteter Versand, Livekalender oder freier Modellchat.16HTTP-/Storagegegenproben; frühereBrowserprobe mit15altenReferenzrouten ist kein aktueller34Routenbeleg.
+- Aktuelle erforderliche Checkpointprüfung `make check && make test && make clean-check` grün; formale neueGitHubWorkflows mit gepinntemActionlint1.7.7 geprüft. A1-CI getrennt mit76Backendtests/0Skips+4DOM/CIbuild lokal verifiziert und als Importquelle gesichert.
+
+## Next Steps
+
+1. Portalquelle inklusive Historie nach `apps/portal`, zweitenHandoff nach `reference/handoff-n2` übernehmen; Originalrepos und vollständigeBundles bewahren. Quellenverträge auf Monorepopfade umstellen und Herkunftsbelege prüfen.
+2. PNPMWorkspace frisch/frozen installieren und Next-Typecheck/Build + abschließendeBrowserjourneys über34öffentlicheRouten ausführen.
+3. LokaleGitLab-CI-Containerausführung, AI-/MCP-/Mirror-/Legacy-/Skillgegenproben und formalesWorkflowlint abschließen. Jeff-/Produktivgates erhalten, konkreteRemoteGitHubrechte prüfen.
+4. GetrennteBackend-/UI-/Integrationsgegenprüfung abschließen. ExterneProvider, VPS/Composio/Paperclip/Brain/Runway/ElevenLabs-Verbindungen erst nach echtemProtokoll- und Readbacknachweis als verbunden melden.
+
+---
+
+## Vorheriger API/Auth-Checkpoint
+
+# Aktueller Vertragsschnitt · 26.10.2026
+
+- Nutzerentscheidung: API/Auth aus den vollständigen Repository-Prototypen und Seitenbestimmungen ableiten; die frühere Suite-Quellenrückfrage ist erledigt.
+- F-006: vorgeschlagener Vertrag in `docs/contracts/`, 93 HTML-Seiten (47 N1, 46 N2), 63 abgeleitete Capabilities, 97 Pfade/102 Operationen/107 Schemas. Keine aktive API-/Auth-Runtime daraus ableiten.
+- Stimmen exakt gebunden: NeX `Lbm7qDmJUxIxpWx9qhZO`; AIFly und Nutzer beide `feTHtWuEJFLTOWyoreyy`. Runway als Videoquelle, Erstellung fehlender Clips beauftragt; ElevenLabs via Composio für Sprachfunktionen. Drei Skript-/Szenenentwürfe, null Providerjobs.
+- Quellen-/Policyvalidator und 17 Vertragsprüfungen einschließlich unabhängiger Gegenproben; formale OpenAPI-3.1-Prüfung erfolgreich. F-006 nach allen drei Harness-Layern passing; `make check && make test`, E2E/Architektur und Clean-Check erfolgreich. 42 Python- und zehn Node-Tests; formale OpenAPI-Prüfung grün. Details im Vertragsprüfvermerk.
+- Gegenprüfung getrennt von Autoren: Auth/Pool-/Scope-/Gastgrenzen sowie Medien-/Browserpfadnormalisierung geprüft; Findings korrigiert. Prototypen und Manifest unverändert.
+- Noch offene Launchblocker: native Gateway-/Auth-/Shared-Pool-Runtime, öffentlicher Companion-BFF, kontofreier verifizierter Gastretouren-/Widerrufsweg, reale Runway-/ElevenLabs-Toolbindung und Medienassets. Die Anbieter sind in dieser Sitzung weder per Tool noch CLI oder erwarteter Credentialbindung exponiert; die Nutzerangabe zur externen Verfügbarkeit bleibt erhalten.
+
+## Next Steps
+
+1. Den geprüften Zielvertrag in einem eigenen nativen Gateway-/Auth-Inkrement implementieren; Rollen, Session/Issuer und DB-Principal-Bridge mit echten HTTP-/DB-Negativtests verbinden.
+2. Die tatsächliche Runway-/Composio-/ElevenLabs-Anbindung lesen, Bestand abgleichen, dann fehlende Clips im bereits autorisierten Umfang erzeugen; keine pauschale Erstellungsrückfrage wiederholen.
+3. Vor Gastverkauf den dokumentierten kontofreien Retouren-/Widerrufsweg und vor öffentlicher Live-KI den engen BFF-Vertrag liefern.
+4. Gesamtauftrag, Prüfnachweise und Checkpoints unter `/workspace/.onboarding/FACTORY-*` fortschreiben; kein Main-Merge oder Produktiv-Go aus diesem Vertrag ableiten.
+
+---
+
+## Vorheriger Fundament-Checkpoint
+
+# Aktueller Factory-Auftrag · 25.10.2026
+
+- Nutzer hat die sofortige Umsetzung der Gesamtfertigstellung freigegeben; Ziel bleibt aktiv.
+- Entwicklungsbranch: `factory/foundation-2026-10-25`. Kein Merge oder Commit auf `main`.
+- Nachgewiesen: Audit wieder ESM-kompatibel (0 Fehler/0 Warnungen), Originalblob der geschuetzten Prototyp-Uebersicht restauriert, Manifest unveraendert. Navigation bleibt separat erhalten.
+- Lokale Gesundheitspruefung verwendet denselben Kern wie der Live-Runner, ohne Produktions-DNS/Hostaktionen; zehn Tests inkl. Negativfaellen bestanden. DNS-Diagnose im Live-Runner ist nun ausschliesslich lesend, Befunde statt automatischer Reparatur.
+- Vorschau gehaertet (Loopback, Freigabeliste, kodierte Pfade und Symlinkziele); sieben HTTP-Regressionstests bestanden und unabhaengig geprueft.
+- `make check`, `make test`, `make check-arch`, `make clean-check` bestanden nach den Baseline-Reparaturen; abschliessende Protokolle liegen unter `/workspace/.onboarding/N1-*.log`.
+- F-005 wurde ausschliesslich ueber `make verify-feature F=F-005` nach 36 echten PostgreSQL-Pruefaussagen technisch auf passing gesetzt. Drei Mandanten/DB-Principals, RLS, Kontextwechsel und Rollback bestanden; keine Gateway-/Shared-Pool-/Produktivabnahme und keine Wiederherstellung fehlender historischer Migrationen.
+- Parallel im separaten Affilinet-Repository: Frontend gebaut/lokal geprueft; offizieller Stripe-Adapter, strikte Webhooksignaturen und Backend/Auth-E2E lokal geprueft. Transaktionale Abschluss-/Replayabsicherung, Wallet-/Retentionsgrenzen und Checkout-Identitaet wurden umgesetzt und getrennt geprueft; aktuelle Zahlen im Umsetzungsstand.
+- Gesamtplanung, Auftragszustand und aktuelles vollstaendiges Quelleninventar: `/workspace/.onboarding/FACTORY-*`.
+
+## Next Steps
+
+1. DB-Gegenproben wurden ausgefuehrt und unabhaengig geprueft; als naechsten Schnitt die Gateway-Identitaet und den Shared-Pool-Vertrag festlegen, bevor eine Anbindung als fertig gilt.
+2. Tests, Setup-/Startanweisungen und Wiederaufnahmezustand auf den tatsaechlichen neuen Stand bringen.
+3. Lokale Checkpoints auf Entwicklungsbranches sichern; vorgesehenes Live-Reviewergate und Produktivabnahme nicht vortaeuschen.
+4. Detailvertraege fuer Gateway/Auth/Queue/Brain ausarbeiten und innerhalb freigegebener Grenzen implementieren.
+
+## Offene Voraussetzungen der Gesamtlieferung
+
+B.V.-Identitaet/Vertretung und Vertragszuordnung, kommerzielle/steuerliche Widersprueche, finaler Brain-/Bestandsintegrationsvertrag sowie externe Betreiber-/Reviewerzugriffe sind weiterhin nicht belegt. Keine Preise/Rechtstexte oder produktiven Rechte aus dem lokalen Fortschritt ableiten.
+
+---
+
+## Historischer Stand (vor aktueller Cloud-Einrichtung)
+
 # PROGRESS — NeXify AI Gesamtlösung (Design-Handoff)
 
 ## Current State
@@ -29,3 +194,16 @@
 
 ## Blockers
 - Freigaben des Inhabers (Preise/Recht) stehen aus; keine Änderung an Preisen/Rechtstexten ohne Freigabe.
+
+## Externes Review und Wiederaufnahme
+
+Das aktuelle `tools/jeff-gate.py` wurde ohne externe Aktion geprueft: Exit 3,
+`NX_ORAKEL_ENDPOINT/NX_ORAKEL_KEY fehlt`. Dies ist kein go und keine automatische
+Freigabe. Code kann auf Entwicklungsbranches geprueft/gesichert werden, main
+bleibt vom vorgesehenen Gate abhaengig. Die NeX2Fly-Suite liefert aktuell einen
+Proxy-CONNECT-403; gezielte Domainfreigabe ist im Umgebungsentwurf gespeichert,
+kein Umgehen der Netzrichtlinie und keine bestaetigte Suite-API-Verbindung.
+
+Der Gesamtauftrag bleibt aktiv. Ein gespeicherter Auftrag garantiert keinen
+unbegrenzten Hintergrundlauf; bei Wiederaufnahme zuerst die aktuellen
+`FACTORY-AUFTRAG.json` und `FACTORY-UMSETZUNGSSTAND.md` lesen und fortsetzen.

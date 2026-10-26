@@ -27,6 +27,60 @@
       "what": "Der Design-/A11y-/i18n-Audit meldet Fehler.",
       "why": "Markenqualitaet und Barrierefreiheit sind Abnahmekriterien.",
       "fix": "Befund beheben; Ausnahme nur mit Begruendung in config/abweichungen.json."
+    },
+    {
+      "id": "ARCH-004",
+      "description": "Lokaler Monitorselbsttest bleibt fail-closed und ohne Produktionszugriffe",
+      "check": "node --test tests/gesundheit.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Die gemeinsame Monitorauswertung besteht ihre Negativ-/Persistenzproben nicht.",
+      "why": "Ein lokaler Check darf weder echte DNS-Reparaturen ausloesen noch Ausfaelle als Erfolg melden.",
+      "fix": "Monitorkern und isolierte Proben reparieren; keine Pruefung deaktivieren."
+    },
+    {
+      "id": "ARCH-005",
+      "description": "API/Auth-Vertragspruefung erkennt oeffentliche Eskalation, CSRF-/APIkey-Grenzverletzungen und Quellenverlust.",
+      "check": "python3 -m unittest discover -s tests -p test_factory_contract.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Negativpruefungen des API/Auth-Vertrags schlagen fehl.",
+      "why": "Selbstdeklarierte Abdeckung oder ein gueltiges OpenAPI-Schema allein belegt keine sichere Rollen-/Quellenbindung.",
+      "fix": "Vertragsvalidator und Gegenproben korrigieren, keine Zugriffsgrenzen oder Quellenpruefung abschalten."
+    },
+    {
+      "id": "ARCH-006",
+      "description": "Automationsgrenzen bleiben geschlossen: Credentials, Deadlines, Model-/SHA-/Kostenbindung, MCP und verlustfreie Mirror.",
+      "check": "python3 -m unittest discover -s tests -p 'test_automation_*.py' -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Automations-Negativprobe scheitert.",
+      "why": "Prompt/Toolannotation oder Erfolgslabel ersetzt keine nachgewiesene Berechtigung und Commitbindung.",
+      "fix": "Modell-/Credential-/Deadline-/Protokollgrenze korrigieren statt Gates oder Gegenproben abzuschalten."
+    },
+    {
+      "id": "ARCH-007",
+      "description": "Pausierte Kundenprojekte sind keine Agenturmodule; Übernahmen brauchen abgegrenzte Herkunft.",
+      "check": "python3 tools/check_source_boundaries.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_source_boundaries.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Kundenprojektbaum/-historie oder eine unbelegte Vermischung ist im Agenturstand enthalten.",
+      "why": "Gemeinsamer Repozugriff autorisiert Wiederverwendung brauchbarer Komponenten, keine fachliche Projektfusion.",
+      "fix": "Quellen zuordnen und Kundenprojekt getrennt lassen; konkrete Komponenten mit Herkunft und Gegenproben adaptieren."
+    },
+    {
+      "id": "ARCH-008",
+      "description": "Auth-Konfiguration und geschützte Routen bleiben bei fehlerhaften Schlüsseln geschlossen; keine automatischen Geschäftsrechte.",
+      "check": "node --test apps/web/auth/tests/policy.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein Auth-Konfigurations- oder Berechtigungsgrenztest scheitert.",
+      "why": "Fehlerhafte Schlüssel dürfen den öffentlichen Fallback nicht beschädigen und verifizierte Identität darf keine Mitgliedschaft erfinden.",
+      "fix": "Schlüsselparser und serverseitige Schutzentscheidung korrigieren; keine negativen Authfälle deaktivieren."
+    },
+    {
+      "id": "ARCH-009",
+      "description": "Portable React-Daten, Nutzerwege und Presenterquellen bleiben explizit freigegeben und geprüft.",
+      "check": "node --test apps/site/tests/*.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine öffentliche Daten-/Navigationsgrenze ist verletzt.",
+      "why": "Private Daten dürfen nicht ins Backup; unbekannte Aktionsziele oder erfundene Presenterquellen dürfen keine gültige Seitenführung vortäuschen.",
+      "fix": "Öffentliche Projektion, Navigationsziele und versionierte Quellenbindung korrigieren; negative Grenztests erhalten."
     }
   ]
 }

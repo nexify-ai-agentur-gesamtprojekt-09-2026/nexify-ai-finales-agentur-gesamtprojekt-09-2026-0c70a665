@@ -1,0 +1,2259 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-26T09:43:30.410180+00:00",
+  "status": "script_draft_assets_pending_not_generated_media",
+  "locales": [
+    "de",
+    "nl",
+    "fr"
+  ],
+  "default_locale": "de",
+  "speakers": {
+    "pascal": {
+      "role": {
+        "de": "Projektklärung und Vertrauen",
+        "nl": "Projectafstemming en vertrouwen",
+        "fr": "Clarification du projet et confiance"
+      },
+      "representation": "user_requested_person",
+      "authority": "does_not_make_contract_or_role_approvals_by_video",
+      "label": "Pascal"
+    },
+    "nex": {
+      "role": {
+        "de": "Umsetzung und Prozess",
+        "nl": "Uitvoering en proces",
+        "fr": "Mise en œuvre et processus"
+      },
+      "representation": "ai_assistant",
+      "ai_label_required": true,
+      "label": "NeX"
+    },
+    "aifly": {
+      "role": {
+        "de": "Orientierung und Wissen",
+        "nl": "Oriëntatie en kennis",
+        "fr": "Orientation et connaissances"
+      },
+      "representation": "ai_assistant",
+      "ai_label_required": true,
+      "label": "AIFly"
+    }
+  },
+  "media_policy": {
+    "provider_intent": "Runway",
+    "actual_assets_available": false,
+    "autoplay_before_consent": false,
+    "external_requests_before_consent": false,
+    "captions_status": "planned_per_locale",
+    "transcripts_status": "planned_per_locale",
+    "existing_page_sections_must_be_preserved": true,
+    "legal_source_texts_modified": false,
+    "scripts_are_not_runtime_or_delivery_promises": true
+  },
+  "coverage_preservation": {
+    "prototype_catalog": "docs/contracts/prototype-pages.json",
+    "coverage_register": "config/preview-coverage.json",
+    "prototype_source_count": 93,
+    "prototype_sources_removed": 0,
+    "backlog_sources_not_auto_accepted": true
+  },
+  "pages": [
+    {
+      "page_id": "home",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "home-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Ihr Vorhaben zuerst",
+            "nl": "Eerst uw plan",
+            "fr": "Votre projet d’abord"
+          },
+          "body": {
+            "de": "Eine Website, ein Portal und ein automatisierter Ablauf lösen unterschiedliche Aufgaben. Beschreiben Sie zuerst Ihr Ziel und den heutigen Engpass. Über die Leistungsseiten grenzen Sie ein, was zu Ihrem Vorhaben passt; ein möglicher Projektstart beginnt mit geklärtem Umfang.",
+            "nl": "Een website, portaal en geautomatiseerd proces lossen verschillende taken op. Beschrijf eerst uw doel en het huidige knelpunt. Via de diensten bepaalt u wat bij uw plan past; een mogelijke projectstart begint met een duidelijke scope.",
+            "fr": "Un site, un portail et un processus automatisé répondent à des besoins différents. Décrivez votre objectif et le blocage actuel. Les pages de services vous aident à préciser le périmètre avant un éventuel démarrage."
+          },
+          "outcome": {
+            "de": "Passende Leistung auswählen.",
+            "nl": "Kies een passende dienst.",
+            "fr": "Choisissez le service adapté."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "services",
+            "label": {
+              "de": "Leistungen",
+              "nl": "Diensten",
+              "fr": "Prestations"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "home-explain-2",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "So finden Sie Ihren Einstieg",
+            "nl": "Zo vindt u uw startpunt",
+            "fr": "Trouvez votre point de départ"
+          },
+          "body": {
+            "de": "Wenn Sie noch zwischen Website, Automatisierung und Portal abwägen, helfen die Leistungsseiten beim Vergleich. Für ein konkretes Vorhaben führt der nächste Schritt zur Klärung des Umfangs; der Chat kann eine Anfrage vorbereiten.",
+            "nl": "Als u nog twijfelt tussen website, automatisering en portaal, helpen de dienstenpagina’s bij het vergelijken. Voor een concreet plan volgt de scopebepaling; de chat kan een aanvraag voorbereiden.",
+            "fr": "Si vous hésitez entre site, automatisation et portail, comparez les pages de services. Pour un projet concret, précisez ensuite le périmètre ; le chat peut préparer une demande."
+          },
+          "outcome": {
+            "de": "Von der Orientierung zum Projektumfang.",
+            "nl": "Van oriëntatie naar projectscope.",
+            "fr": "De l’orientation au périmètre du projet."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "services",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "services-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Welche Leistung gehört zu welchem Ziel?",
+            "nl": "Welke dienst past bij welk doel?",
+            "fr": "Quel service pour quel objectif ?"
+          },
+          "body": {
+            "de": "Für einen öffentlichen Auftritt beginnen Sie bei Websites. Für wiederkehrende Arbeit sehen Sie sich Agenten und Automatisierung an. Für Anmeldung, Rollen und verbundene Arbeitsabläufe führt der Weg zu Apps und Portalen; anschließend wird der konkrete Umfang geklärt.",
+            "nl": "Voor een publieke presentatie begint u bij websites. Voor terugkerend werk bekijkt u agents en automatisering. Voor aanmelden, rollen en verbonden werkprocessen kiest u apps en portalen; daarna wordt de concrete scope bepaald.",
+            "fr": "Pour une présence publique, commencez par les sites web. Pour le travail récurrent, consultez les agents et l’automatisation. Pour les comptes, rôles et processus reliés, explorez les applications et portails, puis précisez le périmètre."
+          },
+          "outcome": {
+            "de": "Leistungen mit dem Projektumfang verbinden.",
+            "nl": "Verbind diensten met de projectscope.",
+            "fr": "Reliez les services au périmètre du projet."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "services-explain-2",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Was für Ihre Auswahl wichtig ist",
+            "nl": "Wat belangrijk is voor uw keuze",
+            "fr": "Ce qui compte pour votre choix"
+          },
+          "body": {
+            "de": "Beschreiben Sie die Aufgabe und wer mit dem Ergebnis arbeiten soll. Nicht jede Idee braucht dieselben Funktionen. Die nächste Klärung hält fest, was zum Projekt gehört und welche Abhängigkeiten noch offen sind.",
+            "nl": "Beschrijf de taak en wie met het resultaat gaat werken. Niet elk idee heeft dezelfde functies nodig. De volgende afstemming legt vast wat bij het project hoort en welke afhankelijkheden nog openstaan.",
+            "fr": "Décrivez la tâche et les personnes qui utiliseront le résultat. Chaque idée ne demande pas les mêmes fonctions. L’échange suivant précise le contenu du projet et les dépendances ouvertes."
+          },
+          "outcome": {
+            "de": "Die eigene Aufgabe konkret beschreiben.",
+            "nl": "Beschrijf uw taak concreet.",
+            "fr": "Décrivez concrètement votre besoin."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "websites",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "websites-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Vom Seitenziel zum nächsten Schritt",
+            "nl": "Van paginadoel naar volgende stap",
+            "fr": "De l’objectif de page à l’étape suivante"
+          },
+          "body": {
+            "de": "Eine Website braucht verständliche Inhalte und passende Folgeseiten. Klären Sie, wer die Seite nutzt, welche Informationen benötigt werden und wie eine Anfrage beginnt. Gestaltung, Sprachen und Schnittstellen gehören in den Leistungsumfang, bevor verbindliche Zusagen entstehen.",
+            "nl": "Een website heeft begrijpelijke inhoud en passende vervolgpagina’s nodig. Bepaal wie de pagina gebruikt, welke informatie nodig is en hoe een aanvraag begint. Vormgeving, talen en koppelingen horen in de scope vóór bindende afspraken.",
+            "fr": "Un site demande des contenus clairs et des pages suivantes cohérentes. Précisez les utilisateurs, leurs informations utiles et le début d’une demande. Design, langues et intégrations font partie du périmètre avant tout engagement."
+          },
+          "outcome": {
+            "de": "Inhalte und Folgeaktionen konkret eingrenzen.",
+            "nl": "Baken inhoud en vervolgacties concreet af.",
+            "fr": "Précisez les contenus et actions suivantes."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "websites-explain-2",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Inhalte und Verantwortung früh klären",
+            "nl": "Inhoud en verantwoordelijkheid vroeg bepalen",
+            "fr": "Préciser tôt les contenus et responsabilités"
+          },
+          "body": {
+            "de": "Wer liefert Texte und Bilder, wer prüft Aussagen und welche Sprachen werden gebraucht? Diese Fragen gehören vor dem Start zum Projektgespräch. Ein Entwurf ermöglicht die Abstimmung, ersetzt aber keine inhaltliche Freigabe.",
+            "nl": "Wie levert teksten en beelden, wie controleert uitspraken en welke talen zijn nodig? Deze vragen horen vóór de start bij het projectgesprek. Een concept helpt bij afstemming maar vervangt geen inhoudelijke goedkeuring.",
+            "fr": "Qui fournit textes et images, qui vérifie les affirmations et quelles langues faut-il ? Ces questions se traitent avant le démarrage. Un brouillon facilite l’échange sans remplacer la validation des contenus."
+          },
+          "outcome": {
+            "de": "Inhaltsbedarf für eine Anfrage sammeln.",
+            "nl": "Verzamel inhoudelijke behoeften voor een aanvraag.",
+            "fr": "Rassemblez les besoins de contenu pour votre demande."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "automation",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "automation-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Wiederkehrende Arbeit nachvollziehbar planen",
+            "nl": "Terugkerend werk inzichtelijk plannen",
+            "fr": "Planifier le travail récurrent de façon traçable"
+          },
+          "body": {
+            "de": "Beginnen Sie mit einem konkreten Ablauf: Was kommt herein, welche Regeln gelten und wer entscheidet? Agenten und Automatisierung benötigen definierte Datenquellen, Berechtigungen und Freigaben. Eine vorgeschlagene Aktion ist noch keine ausgeführte Buchung oder versandte Nachricht.",
+            "nl": "Begin met één proces: wat komt binnen, welke regels gelden en wie beslist? Agents en automatisering hebben afgebakende bronnen, rechten en goedkeuringen nodig. Een voorgestelde actie is nog geen uitgevoerde boeking of verzonden bericht.",
+            "fr": "Partez d’un processus précis : quelles entrées, quelles règles et quel décideur ? Agents et automatisation exigent des sources, droits et validations définis. Une action proposée n’est pas encore une opération exécutée ni un message envoyé."
+          },
+          "outcome": {
+            "de": "Einen prüfbaren Ablauf als Anfrage vorbereiten.",
+            "nl": "Bereid een toetsbaar proces als aanvraag voor.",
+            "fr": "Préparez une demande de processus vérifiable."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/05-technische-spezifikation.md",
+            "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "automation-explain-2",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Einen Ablauf in überschaubare Schritte zerlegen",
+            "nl": "Een proces in duidelijke stappen verdelen",
+            "fr": "Décomposer un processus en étapes claires"
+          },
+          "body": {
+            "de": "Ordnen Sie Eingang, Verarbeitung, Entscheidung und Ergebnis. Markieren Sie die Stellen, an denen eine Person freigeben muss. So wird aus einer allgemeinen Automationsidee eine nachvollziehbare Projektbeschreibung.",
+            "nl": "Orden invoer, verwerking, beslissing en resultaat. Markeer waar een persoon moet goedkeuren. Zo wordt een algemeen automatiseringsidee een begrijpelijke projectbeschrijving.",
+            "fr": "Distinguez entrée, traitement, décision et résultat. Repérez les étapes qui exigent une validation humaine. Une idée générale d’automatisation devient ainsi une description de projet compréhensible."
+          },
+          "outcome": {
+            "de": "Die wichtigsten Anforderungen vorbereiten.",
+            "nl": "Bereid de belangrijkste eisen voor.",
+            "fr": "Préparez les exigences principales."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "knowledge-start",
+            "label": {
+              "de": "Ein digitales Projekt vorbereiten",
+              "nl": "Een digitaal project voorbereiden",
+              "fr": "Préparer un projet numérique"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/05-technische-spezifikation.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "apps-portals",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "apps-portals-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Oberfläche und Berechtigung zusammen denken",
+            "nl": "Interface en rechten samen ontwerpen",
+            "fr": "Concevoir ensemble interface et autorisations"
+          },
+          "body": {
+            "de": "Ein Portal zeigt unterschiedliche Informationen je nach Aufgabe und Berechtigung. Beschreiben Sie deshalb Nutzerrollen, benötigte Daten und Übergaben an andere Systeme. Eine sichtbare Anmeldung ersetzt keine geprüfte Mandanten- und Zugriffstrennung.",
+            "nl": "Een portaal toont informatie volgens taak en rechten. Beschrijf daarom gebruikersrollen, benodigde gegevens en overdrachten naar andere systemen. Een zichtbaar aanmeldscherm vervangt geen gecontroleerde scheiding van tenants en toegangsrechten.",
+            "fr": "Un portail présente des informations selon la tâche et les droits. Décrivez les rôles, données et échanges avec les autres systèmes. Un écran de connexion ne remplace pas une séparation vérifiée des accès et des espaces clients."
+          },
+          "outcome": {
+            "de": "Rollen und Schnittstellen im Umfang festhalten.",
+            "nl": "Leg rollen en koppelingen vast in de scope.",
+            "fr": "Inscrivez les rôles et intégrations dans le périmètre."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/05-technische-spezifikation.md"
+          ]
+        },
+        {
+          "id": "apps-portals-explain-2",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Übergaben zwischen Menschen und Systemen klären",
+            "nl": "Overdrachten tussen mensen en systemen bepalen",
+            "fr": "Préciser les échanges entre personnes et systèmes"
+          },
+          "body": {
+            "de": "Klären Sie, wer einen Vorgang beginnt, wer ihn bearbeitet und wer das Ergebnis sehen darf. Bereits vorhandene Systeme gehören in diese Beschreibung. Damit lässt sich der Bedarf besprechen, ohne ungeprüfte Integrationen zu versprechen.",
+            "nl": "Bepaal wie een proces begint, wie het behandelt en wie het resultaat mag zien. Neem bestaande systemen mee in die beschrijving. Zo bespreekt u de behoefte zonder ongecontroleerde integraties te beloven.",
+            "fr": "Précisez qui ouvre un dossier, qui le traite et qui peut voir le résultat. Incluez les systèmes existants. Le besoin peut alors être discuté sans promettre des intégrations non vérifiées."
+          },
+          "outcome": {
+            "de": "Die benötigten Übergaben als Anfrage festhalten.",
+            "nl": "Leg de overdrachten vast in een aanvraag.",
+            "fr": "Décrivez les échanges nécessaires dans une demande."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/05-technische-spezifikation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "scope",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "scope-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Was vor einem Projektstart geklärt wird",
+            "nl": "Wat vóór een projectstart duidelijk moet zijn",
+            "fr": "Ce qu’il faut préciser avant de démarrer"
+          },
+          "body": {
+            "de": "Ziel, Inhalte, Zuständigkeiten und Abhängigkeiten bilden die Grundlage einer Anfrage. Halten Sie vorhandene Systeme und offene Entscheidungen fest. Daraus lässt sich ein Angebotsentwurf vorbereiten; Preis, Vertrag und Start werden dadurch nicht automatisch verbindlich.",
+            "nl": "Doel, inhoud, verantwoordelijkheden en afhankelijkheden vormen de basis van een aanvraag. Noteer bestaande systemen en open beslissingen. Daarmee kan een offerteconcept worden voorbereid; prijs, contract en start worden niet automatisch bindend.",
+            "fr": "Objectif, contenus, responsabilités et dépendances fondent la demande. Notez les systèmes existants et les décisions ouvertes. Cela permet de préparer un devis indicatif sans rendre automatiquement le prix, le contrat ou le démarrage contraignants."
+          },
+          "outcome": {
+            "de": "Eine konkrete Projektanfrage beginnen.",
+            "nl": "Begin een concrete projectaanvraag.",
+            "fr": "Commencez une demande de projet précise."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/01-konzept/nexifyai-organisationshandbuch.md"
+          ]
+        },
+        {
+          "id": "scope-explain-2",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Abhängigkeiten gehören zum Umfang",
+            "nl": "Afhankelijkheden horen bij de scope",
+            "fr": "Les dépendances font partie du périmètre"
+          },
+          "body": {
+            "de": "Datenquellen, Zugänge und Freigaben können die Umsetzung beeinflussen. Halten Sie offene Voraussetzungen getrennt von bereits bestätigten Angaben fest. Ein realistischer Entwurf zeigt diese Unterschiede, statt fehlende Voraussetzungen als erledigt zu behandeln.",
+            "nl": "Databronnen, toegang en goedkeuringen kunnen de uitvoering beïnvloeden. Houd open voorwaarden gescheiden van bevestigde informatie. Een realistisch concept toont dat verschil in plaats van ontbrekende voorwaarden als afgerond te behandelen.",
+            "fr": "Sources de données, accès et validations peuvent influer sur la réalisation. Séparez les prérequis ouverts des éléments confirmés. Un brouillon réaliste montre ces différences sans présenter les manques comme résolus."
+          },
+          "outcome": {
+            "de": "Die Projektklärung mit offenen Punkten beginnen.",
+            "nl": "Begin de projectafstemming met de open punten.",
+            "fr": "Commencez l’échange avec les points à clarifier."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/01-konzept/nexifyai-organisationshandbuch.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "solutions",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "solutions-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Agenturleistung oder eigener Produktkontext?",
+            "nl": "Bureaudienst of aparte productomgeving?",
+            "fr": "Service d’agence ou univers produit distinct ?"
+          },
+          "body": {
+            "de": "NeXify-Leistungen, one und API haben unterschiedliche Zwecke. TEILEKLAR gehört zum eigenen Fahrzeug-, Teile- und Werkstattkontext. Nutzen Sie die Produktseiten zur Orientierung; ein Produktziel ist noch kein Nachweis freigeschalteter Funktionen.",
+            "nl": "NeXify-diensten, one en API hebben verschillende doelen. TEILEKLAR heeft een eigen omgeving voor voertuigen, onderdelen en garages. Gebruik de productpagina’s ter oriëntatie; een productdoel bewijst nog geen geactiveerde functies.",
+            "fr": "Les services NeXify, one et l’API ont des finalités distinctes. TEILEKLAR possède son propre contexte automobile, pièces et ateliers. Les pages produits orientent votre choix sans prouver l’activation de toutes les fonctions prévues."
+          },
+          "outcome": {
+            "de": "Den TEILEKLAR-Bereich gezielt kennenlernen.",
+            "nl": "Ontdek gericht de TEILEKLAR-omgeving.",
+            "fr": "Découvrez l’univers TEILEKLAR."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-home",
+            "label": {
+              "de": "TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
+              "nl": "TEILEKLAR: onderdelen, voertuig en vervolgstappen",
+              "fr": "TEILEKLAR : pièces, véhicule et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/01-konzept/gesamtprojektplan.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "pricing",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "pricing-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Umfang vor einer verbindlichen Preisentscheidung",
+            "nl": "Scope vóór een bindende prijsafspraak",
+            "fr": "Le périmètre avant un prix engageant"
+          },
+          "body": {
+            "de": "Welche Inhalte, Abläufe und Anbindungen benötigt werden, beeinflusst den Projektumfang. Klären Sie diese Punkte vor einer verbindlichen Preisentscheidung. Diese Erläuterung ergänzt keine Tarife und ersetzt weder ein geprüftes Angebot noch Vertragsbedingungen.",
+            "nl": "Inhoud, processen en koppelingen bepalen mede de projectscope. Bespreek deze punten vóór een bindende prijsafspraak. Deze toelichting voegt geen tarieven toe en vervangt geen gecontroleerde offerte of voorwaarden.",
+            "fr": "Contenus, processus et intégrations déterminent le périmètre du projet. Précisez-les avant un engagement tarifaire. Cette explication n’ajoute aucun tarif et ne remplace ni une offre vérifiée ni les conditions contractuelles."
+          },
+          "outcome": {
+            "de": "Den gewünschten Umfang beschreiben.",
+            "nl": "Beschrijf de gewenste scope.",
+            "fr": "Décrivez le périmètre souhaité."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/08-recht-und-compliance.md",
+            "docs/01-konzept/nexifyai-organisationshandbuch.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "knowledge",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "knowledge-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Wissen als Vorbereitung für Entscheidungen",
+            "nl": "Kennis als voorbereiding op beslissingen",
+            "fr": "Des repères pour préparer vos décisions"
+          },
+          "body": {
+            "de": "Eine gute Projektanfrage beginnt mit verständlichen Begriffen und offenen Fragen. Nutzen Sie die vorhandene Orientierung, um Ziele, Inhalte und Beteiligte zu ordnen. Fachliche Entscheidungen bleiben an die tatsächlichen Quellen und den konkreten Projektumfang gebunden.",
+            "nl": "Een goede projectaanvraag begint met begrijpelijke begrippen en open vragen. Gebruik de beschikbare uitleg om doelen, inhoud en betrokkenen te ordenen. Inhoudelijke beslissingen blijven verbonden aan de echte bronnen en projectscope.",
+            "fr": "Une bonne demande commence par des termes clairs et des questions ouvertes. Les repères disponibles aident à organiser objectifs, contenus et participants. Les décisions restent liées aux sources réelles et au périmètre concret."
+          },
+          "outcome": {
+            "de": "Ein Projekt strukturiert vorbereiten.",
+            "nl": "Bereid een project gestructureerd voor.",
+            "fr": "Préparez votre projet de manière structurée."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "knowledge-start",
+            "label": {
+              "de": "Ein digitales Projekt vorbereiten",
+              "nl": "Een digitaal project voorbereiden",
+              "fr": "Préparer un projet numérique"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "config/brain/knowledge.json",
+            "docs/01-konzept/nexifyai-organisationshandbuch.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "knowledge-start",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "knowledge-start-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Was Sie für die erste Anfrage sammeln können",
+            "nl": "Wat u voor de eerste aanvraag kunt verzamelen",
+            "fr": "Que préparer pour une première demande ?"
+          },
+          "body": {
+            "de": "Notieren Sie das gewünschte Ergebnis, die heutigen Arbeitsschritte und die benötigten Inhalte. Ergänzen Sie bestehende Systeme und die zuständigen Personen. Zugangsdaten und sensible Unterlagen gehören nicht in eine ungeschützte erste Beschreibung.",
+            "nl": "Noteer het gewenste resultaat, de huidige stappen en benodigde inhoud. Voeg bestaande systemen en verantwoordelijke personen toe. Wachtwoorden en gevoelige documenten horen niet in een onbeschermde eerste beschrijving.",
+            "fr": "Notez le résultat souhaité, les étapes actuelles et les contenus nécessaires. Ajoutez les systèmes existants et les responsables. N’incluez pas de mots de passe ni de documents sensibles dans une première description non protégée."
+          },
+          "outcome": {
+            "de": "Die Vorbereitung in einen Leistungsumfang überführen.",
+            "nl": "Zet de voorbereiding om in een projectscope.",
+            "fr": "Transformez cette préparation en périmètre de travail."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/nexifyai-organisationshandbuch.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "company",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "company-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Persönliche Klärung statt unbelegter Versprechen",
+            "nl": "Persoonlijke afstemming zonder ongefundeerde beloften",
+            "fr": "Un échange clair sans promesses non étayées"
+          },
+          "body": {
+            "de": "Für ein gemeinsames Vorhaben müssen Ziele, Verantwortung und Ansprechpartner klar sein. Der Deutschland-Fokus beschreibt den Zielmarkt und ändert die niederländische Unternehmensidentität nicht. Maßgebliche Anbieterangaben stehen separat bei den Anbieterinformationen.",
+            "nl": "Voor een gezamenlijk project moeten doelen, verantwoordelijkheid en contactpersonen duidelijk zijn. De focus op Duitsland beschrijft de doelmarkt en verandert de Nederlandse bedrijfsidentiteit niet. De relevante bedrijfsgegevens staan apart bij de aanbiedersinformatie.",
+            "fr": "Un projet commun demande des objectifs, responsabilités et interlocuteurs clairs. Le marché allemand visé ne change pas l’identité néerlandaise de l’entreprise. Les informations officielles du prestataire restent accessibles séparément."
+          },
+          "outcome": {
+            "de": "Anbieterinformationen direkt aufrufen.",
+            "nl": "Open direct de aanbiedersinformatie.",
+            "fr": "Consultez directement les informations du prestataire."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "imprint",
+            "label": {
+              "de": "Anbieterinformationen",
+              "nl": "Aanbiederinformatie",
+              "fr": "Informations du prestataire"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "contact",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "contact-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Mit einem klaren Anliegen ins Gespräch",
+            "nl": "Begin het gesprek met een duidelijke vraag",
+            "fr": "Commencez par une demande précise"
+          },
+          "body": {
+            "de": "Beschreiben Sie, was Sie erreichen möchten und welche Systeme bereits vorhanden sind. Sie können eine Projektanfrage, einen Gesprächswunsch oder ein Marketingbriefing vorbereiten. Ein Entwurf ist noch kein versandtes Angebot, und ein Terminwunsch noch keine bestätigte Buchung.",
+            "nl": "Beschrijf wat u wilt bereiken en welke systemen al bestaan. U kunt een projectaanvraag, gespreksverzoek of marketingbrief voorbereiden. Een concept is nog geen verzonden offerte en een afspraakverzoek nog geen bevestigde boeking.",
+            "fr": "Décrivez votre objectif et les systèmes déjà présents. Vous pouvez préparer une demande de projet, de rendez-vous ou un brief marketing. Un brouillon n’est pas une offre envoyée ; une demande de rendez-vous n’est pas une réservation confirmée."
+          },
+          "outcome": {
+            "de": "Vorher den möglichen Leistungsumfang ansehen.",
+            "nl": "Bekijk vooraf de mogelijke projectscope.",
+            "fr": "Consultez d’abord le périmètre possible."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "scope",
+            "label": {
+              "de": "Leistungsumfang und Projektstart",
+              "nl": "Projectomvang en start",
+              "fr": "Périmètre et démarrage"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "one",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "one-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Produktziel und Aktivierung unterscheiden",
+            "nl": "Productdoel en activatie onderscheiden",
+            "fr": "Distinguer objectif produit et activation"
+          },
+          "body": {
+            "de": "one und one+ gehören zum dokumentierten NeXify-Produktbild. Welche Zugänge und Funktionen für Ihren Einsatz benötigt werden, muss konkret geklärt werden. Die Produktbeschreibung aktiviert weder einen Schlüssel noch Guthaben oder einen Tarif.",
+            "nl": "one en one+ horen bij het gedocumenteerde NeXify-productbeeld. Welke toegang en functies uw gebruik vraagt, moet concreet worden vastgesteld. De productbeschrijving activeert geen sleutel, tegoed of tarief.",
+            "fr": "one et one+ font partie de la vision produit documentée de NeXify. Les accès et fonctions nécessaires à votre usage doivent être précisés. La description n’active ni clé, ni crédit, ni tarif."
+          },
+          "outcome": {
+            "de": "Den technischen API-Kontext kennenlernen.",
+            "nl": "Bekijk de technische API-context.",
+            "fr": "Découvrez le contexte technique de l’API."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "api",
+            "label": {
+              "de": "API und technische Zugänge",
+              "nl": "API en technische toegang",
+              "fr": "API et accès techniques"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/01-produkt-und-marke.md",
+            "docs/09-final/05-technische-spezifikation.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "api",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "api-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Technischen Bedarf vor dem Zugang klären",
+            "nl": "Technische behoefte vóór toegang bepalen",
+            "fr": "Préciser le besoin technique avant l’accès"
+          },
+          "body": {
+            "de": "Eine API-Anbindung braucht einen definierten Einsatzzweck, sichere Schlüsselverwaltung und passende Berechtigungen. Beschreiben Sie die beteiligten Systeme und Datenflüsse. Diese Vorschau stellt keinen produktiven Schlüssel aus und bestätigt keine Abrechnungsfreigabe.",
+            "nl": "Een API-koppeling vraagt om een bepaald doel, veilig sleutelbeheer en passende rechten. Beschrijf de betrokken systemen en gegevensstromen. Deze preview geeft geen productiesleutel uit en bevestigt geen facturatievrijgave.",
+            "fr": "Une intégration API exige un usage défini, une gestion sûre des clés et des droits adaptés. Décrivez les systèmes et flux concernés. Cet aperçu ne délivre aucune clé de production et ne valide aucune facturation."
+          },
+          "outcome": {
+            "de": "Den Integrationsbedarf als Anfrage beschreiben.",
+            "nl": "Beschrijf de integratiebehoefte als aanvraag.",
+            "fr": "Décrivez votre besoin d’intégration."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "imprint",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "imprint-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Anbieterangaben gezielt finden",
+            "nl": "Aanbiedersgegevens gericht vinden",
+            "fr": "Trouver les informations du prestataire"
+          },
+          "body": {
+            "de": "Diese Seite dient der Orientierung zu den Anbieterangaben. Die maßgeblichen Angaben und ihr Freigabestand bleiben im dafür vorgesehenen Inhalt. Diese Erklärung ergänzt keine Register-, Steuer- oder Vertretungsangaben und ersetzt den Rechtstext nicht.",
+            "nl": "Deze pagina helpt u de aanbiedersgegevens te vinden. De relevante gegevens en vrijgavestatus blijven in de daarvoor bestemde inhoud. Deze uitleg voegt geen registratie-, belasting- of vertegenwoordigingsgegevens toe en vervangt de juridische tekst niet.",
+            "fr": "Cette page vous oriente vers les informations du prestataire. Les données applicables et leur validation restent dans le contenu prévu. Cette explication n’ajoute aucune information de registre, fiscale ou de représentation et ne remplace pas le texte juridique."
+          },
+          "outcome": {
+            "de": "Bei Rückfragen den Kontaktweg nutzen.",
+            "nl": "Gebruik het contactkanaal voor vragen.",
+            "fr": "Utilisez le contact pour toute question."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "privacy",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "privacy-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Datenverwendung nachvollziehen",
+            "nl": "Gegevensgebruik begrijpen",
+            "fr": "Comprendre l’utilisation des données"
+          },
+          "body": {
+            "de": "Lesen Sie die Datenschutzhinweise für den jeweiligen Dienst und Nutzungskontext. Eine Erklärung im Chat ersetzt diese Informationen nicht. Die gesonderte Einstellungsseite hilft bei der Orientierung zu optionaler Verarbeitung; daraus entsteht keine pauschale Einwilligung.",
+            "nl": "Lees de privacyinformatie voor de betreffende dienst en gebruikscontext. Een chatuitleg vervangt deze informatie niet. De aparte instellingenpagina helpt bij optionele verwerking; dit vormt geen algemene toestemming.",
+            "fr": "Lisez les informations de confidentialité du service et du contexte concernés. Une explication dans le chat ne les remplace pas. La page dédiée aux réglages oriente sur les traitements facultatifs sans constituer un consentement général."
+          },
+          "outcome": {
+            "de": "Cookies und Einstellungen gesondert ansehen.",
+            "nl": "Bekijk cookies en instellingen apart.",
+            "fr": "Consultez les cookies et réglages séparément."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "cookies",
+            "label": {
+              "de": "Cookies und Einstellungen",
+              "nl": "Cookies en instellingen",
+              "fr": "Cookies et paramètres"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "terms",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "terms-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Entwurf und verbindliche Grundlage unterscheiden",
+            "nl": "Concept en bindende grondslag onderscheiden",
+            "fr": "Distinguer brouillon et base contractuelle"
+          },
+          "body": {
+            "de": "Eine Leistungsbeschreibung oder ein Angebotsentwurf ist nicht automatisch eine verbindliche Vereinbarung. Prüfen Sie die vorgesehenen Vertragsgrundlagen und ihren Freigabestand. Diese Orientierung ändert keine Bedingungen und enthält keine zusätzliche Rechtsauskunft.",
+            "nl": "Een dienstbeschrijving of offerteconcept is niet automatisch een bindende overeenkomst. Controleer de bedoelde contractbasis en vrijgavestatus. Deze uitleg wijzigt geen voorwaarden en geeft geen aanvullend juridisch advies.",
+            "fr": "Une description de service ou un devis indicatif ne constitue pas automatiquement un accord. Consultez les bases contractuelles prévues et leur état de validation. Cette orientation ne modifie aucune condition et n’ajoute aucun avis juridique."
+          },
+          "outcome": {
+            "de": "Offene Vertragsfragen persönlich klären.",
+            "nl": "Bespreek open contractvragen persoonlijk.",
+            "fr": "Clarifiez directement les questions contractuelles."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "ai-notice",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "ai-notice-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "KI-Ausgabe und bestätigten Vorgang trennen",
+            "nl": "AI-uitvoer en bevestigde handeling scheiden",
+            "fr": "Distinguer réponse IA et opération confirmée"
+          },
+          "body": {
+            "de": "KI kann bei Orientierung und Entwürfen unterstützen. Ein generierter Text beweist weder Richtigkeit noch eine ausgeführte Handlung. Achten Sie auf den ausgewiesenen Status: Entwurf, Anfrage, Versand und Bestätigung sind unterschiedliche Schritte.",
+            "nl": "AI kan helpen bij oriëntatie en concepten. Een gegenereerde tekst bewijst geen juistheid of uitgevoerde handeling. Let op de aangegeven status: concept, aanvraag, verzending en bevestiging zijn verschillende stappen.",
+            "fr": "L’IA peut aider à s’orienter et à rédiger des brouillons. Un texte généré ne prouve ni son exactitude ni l’exécution d’une action. Distinguez les états : brouillon, demande, envoi et confirmation."
+          },
+          "outcome": {
+            "de": "Bei Unklarheiten Rückfragen stellen.",
+            "nl": "Stel vragen bij onduidelijkheid.",
+            "fr": "Posez vos questions en cas de doute."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "accessibility",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "accessibility-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Hürden bei der Nutzung melden",
+            "nl": "Gebruiksdrempels melden",
+            "fr": "Signaler une difficulté d’accès"
+          },
+          "body": {
+            "de": "Wenn eine Navigation, ein Inhalt oder ein Bedienelement für Sie nicht nutzbar ist, beschreiben Sie die betroffene Seite und die konkrete Hürde. Diese Orientierung ist keine Behauptung einer abgeschlossenen Barrierefreiheitszertifizierung. Die vorhandenen Hinweise bleiben maßgeblich.",
+            "nl": "Kunt u navigatie, inhoud of een bediening niet gebruiken, beschrijf dan de pagina en het concrete probleem. Deze uitleg beweert niet dat een toegankelijkheidscertificering is afgerond. De bestaande informatie blijft bepalend.",
+            "fr": "Si une navigation, un contenu ou une commande vous pose problème, indiquez la page et la difficulté précise. Cette explication n’affirme aucune certification d’accessibilité achevée. Les informations existantes restent la référence."
+          },
+          "outcome": {
+            "de": "Die konkrete Nutzungshürde mitteilen.",
+            "nl": "Meld het concrete gebruiksprobleem.",
+            "fr": "Signalez la difficulté rencontrée."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "cookies",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "cookies-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Optionale Verarbeitung bewusst einordnen",
+            "nl": "Optionele verwerking bewust beoordelen",
+            "fr": "Comprendre les traitements facultatifs"
+          },
+          "body": {
+            "de": "Cookies, externe Medien und Speicherung sind im jeweiligen Nutzungskontext zu betrachten. Lesen Sie die Erläuterungen und nutzen Sie die angebotenen Einstellungen. Ein Seitenwechsel oder dieses Erklärmodul ist keine Zustimmung; verschiedene Domains teilen nicht automatisch Ihre Auswahl.",
+            "nl": "Cookies, externe media en opslag horen bij de betreffende gebruikscontext. Lees de uitleg en gebruik de aangeboden instellingen. Een paginawissel of deze toelichting geeft geen toestemming; verschillende domeinen delen uw keuze niet automatisch.",
+            "fr": "Cookies, médias externes et stockage dépendent du contexte d’usage. Lisez les explications et utilisez les réglages proposés. Changer de page ne vaut pas consentement ; votre choix n’est pas automatiquement partagé entre domaines."
+          },
+          "outcome": {
+            "de": "Die Datenschutzhinweise ergänzend lesen.",
+            "nl": "Lees aanvullend de privacyinformatie.",
+            "fr": "Lisez aussi les informations de confidentialité."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "privacy",
+            "label": {
+              "de": "Datenschutz und Datenverwendung",
+              "nl": "Privacy en gegevensgebruik",
+              "fr": "Confidentialité et utilisation des données"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/regelwerk.json"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "login",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "login-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Anmeldung ist nur der erste Zugangsschritt",
+            "nl": "Aanmelden is slechts de eerste toegangsstap",
+            "fr": "La connexion n’est qu’une première étape"
+          },
+          "body": {
+            "de": "Ein angemeldetes Konto erhält nicht automatisch Zugriff auf alle Bereiche. Dafür müssen die passende Site-, Mandanten- und Rollenberechtigung vorliegen. Nutzen Sie die angezeigte Anmeldung nur, wenn sie verfügbar ist; bei Zugangsfragen bleibt der Kontaktweg erreichbar.",
+            "nl": "Een aangemeld account krijgt niet automatisch toegang tot alle onderdelen. Daarvoor zijn de juiste site-, tenant- en rolrechten nodig. Gebruik de getoonde aanmelding als deze beschikbaar is; voor toegangsproblemen blijft contact mogelijk.",
+            "fr": "Un compte connecté n’accède pas automatiquement à tous les espaces. Des droits adaptés au site, à l’organisation et au rôle restent nécessaires. Utilisez la connexion affichée si elle est disponible ; le contact reste accessible en cas de difficulté."
+          },
+          "outcome": {
+            "de": "Eine Zugangsfrage gezielt klären.",
+            "nl": "Bespreek gericht een toegangsvraag.",
+            "fr": "Clarifiez une question d’accès."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "signup",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "signup-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Ein Konto begründet keine Verwaltungsrechte",
+            "nl": "Een account geeft geen beheerrechten",
+            "fr": "Un compte ne confère aucun droit d’administration"
+          },
+          "body": {
+            "de": "Die Registrierung legt, sofern verfügbar, eine Identität für die Anmeldung an. Sie bestätigt weder ein Projekt noch Partnerstatus oder Administratorrechte. Zusätzliche Zugänge werden getrennt nach Aufgabe und Berechtigung geprüft.",
+            "nl": "Registratie maakt, indien beschikbaar, een identiteit voor aanmelden aan. Dit bevestigt geen project, partnerstatus of beheerrechten. Extra toegang wordt apart op taak en rechten beoordeeld.",
+            "fr": "L’inscription crée une identité de connexion lorsqu’elle est disponible. Elle ne confirme ni projet, ni statut partenaire, ni droits administrateur. Les accès supplémentaires sont vérifiés séparément selon les tâches et autorisations."
+          },
+          "outcome": {
+            "de": "Zur bestehenden Anmeldung wechseln.",
+            "nl": "Ga naar de bestaande aanmelding.",
+            "fr": "Accédez à la connexion existante."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "login",
+            "label": {
+              "de": "Anmelden",
+              "nl": "Aanmelden",
+              "fr": "Connexion"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/deployment/clerk-setup.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-home",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-home-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Fahrzeug, Teil und Werkstatt sinnvoll verbinden",
+            "nl": "Voertuig, onderdeel en garage verbinden",
+            "fr": "Relier véhicule, pièce et atelier"
+          },
+          "body": {
+            "de": "TEILEKLAR führt durch Fahrzeugangaben, Teilesuche und die vorgesehenen Werkstattwege. Beginnen Sie mit dem Fahrzeug und der benötigten Aufgabe. Solange Katalog und Fachabläufe nicht freigegeben angeschlossen sind, bleiben die Ansichten Vorbereitung statt einer Kauf- oder Passungszusage.",
+            "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en de voorziene garageprocessen. Begin met het voertuig en de gewenste taak. Zolang catalogus en processen niet zijn aangesloten en vrijgegeven, blijven de pagina’s voorbereiding zonder koop- of pasvormtoezegging.",
+            "fr": "TEILEKLAR relie les informations du véhicule, la recherche de pièces et les parcours atelier prévus. Commencez par le véhicule et le besoin. Sans catalogue et processus validés, les écrans restent préparatoires, sans promesse d’achat ni de compatibilité."
+          },
+          "outcome": {
+            "de": "Mit Fahrzeug und Passungsanforderung beginnen.",
+            "nl": "Begin met voertuig en pasvormvereisten.",
+            "fr": "Commencez par le véhicule et la compatibilité attendue."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-fitment",
+            "label": {
+              "de": "Fahrzeug und belegte Passung",
+              "nl": "Voertuig en onderbouwde passendheid",
+              "fr": "Véhicule et compatibilité étayée"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "tk-home-explain-2",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Der Werkstattweg ist eine eigene Anfrage",
+            "nl": "Het garagetraject is een aparte aanvraag",
+            "fr": "Le parcours atelier est une demande distincte"
+          },
+          "body": {
+            "de": "Neben der Teileorientierung ist die Zusammenarbeit mit Werkstätten vorgesehen. Eine Anfrage klärt Betrieb, Anliegen und nächste Schritte. Sie ist weder eine bestätigte Partnerschaft noch eine zugesagte Werkstattleistung.",
+            "nl": "Naast onderdelenoriëntatie is samenwerking met garages voorzien. Een aanvraag verduidelijkt bedrijf, vraag en vervolgstappen. Het is geen bevestigd partnerschap of toegezegde garageprestatie.",
+            "fr": "La coopération avec des ateliers est prévue en complément des pièces. Une demande précise établissement, besoin et suite. Elle ne confirme ni partenariat ni prestation atelier."
+          },
+          "outcome": {
+            "de": "Die Partneranfrage kennenlernen.",
+            "nl": "Bekijk de partneraanvraag.",
+            "fr": "Découvrez la demande de partenariat."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-partner",
+            "label": {
+              "de": "Werkstattpartner werden",
+              "nl": "Werkplaatspartner worden",
+              "fr": "Devenir partenaire atelier"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-search",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-search-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Eine Teilesuche mit den richtigen Angaben starten",
+            "nl": "Onderdelen zoeken met de juiste gegevens",
+            "fr": "Chercher une pièce avec les bonnes informations"
+          },
+          "body": {
+            "de": "Fahrzeugdaten und die gesuchte Aufgabe helfen, eine Teileanfrage einzugrenzen. Die aktuelle Suchansicht bereitet diesen Weg vor; sie bestätigt keine echten Treffer oder verfügbaren Bestände. Klären Sie zuerst die Passung, bevor aus einer Auswahl eine Kaufentscheidung wird.",
+            "nl": "Voertuiggegevens en de gewenste taak helpen een onderdelenvraag af te bakenen. De huidige zoekpagina bereidt dit voor en bevestigt geen echte resultaten of voorraad. Controleer eerst de pasvorm vóór een aankoopbeslissing.",
+            "fr": "Les données du véhicule et le besoin aident à préciser la recherche. L’écran actuel prépare ce parcours sans confirmer de résultats réels ni de stock. Clarifiez d’abord la compatibilité avant de décider un achat."
+          },
+          "outcome": {
+            "de": "Die benötigten Fahrzeugangaben einordnen.",
+            "nl": "Bepaal welke voertuiggegevens nodig zijn.",
+            "fr": "Identifiez les données du véhicule nécessaires."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-fitment",
+            "label": {
+              "de": "Fahrzeug und belegte Passung",
+              "nl": "Voertuig en onderbouwde passendheid",
+              "fr": "Véhicule et compatibilité étayée"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-categories",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-categories-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Vom Sortiment zur passenden Kategorie",
+            "nl": "Van assortiment naar passende categorie",
+            "fr": "De l’offre à la catégorie adaptée"
+          },
+          "body": {
+            "de": "Kategorien sollen die Suche nach einem benötigten Teil strukturieren. Diese Übersicht ist noch kein Nachweis eines lieferbaren Sortiments. Die vorgesehene Kategorieansicht erklärt den nächsten Schritt, ohne erfundene Artikel oder Markenverfügbarkeit anzuzeigen.",
+            "nl": "Categorieën moeten het zoeken naar een onderdeel structureren. Dit overzicht bewijst nog geen leverbaar assortiment. De voorziene categoriepagina verduidelijkt de volgende stap zonder verzonnen artikelen of merkbeschikbaarheid.",
+            "fr": "Les catégories structurent la recherche d’une pièce. Cet aperçu ne prouve pas l’existence d’un assortiment livrable. La vue catégorie prévue explique l’étape suivante sans inventer d’articles ni de disponibilité de marques."
+          },
+          "outcome": {
+            "de": "Die vorbereitete Kategorieansicht ansehen.",
+            "nl": "Bekijk de voorbereide categoriepagina.",
+            "fr": "Consultez la vue catégorie préparatoire."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-category",
+            "label": {
+              "de": "Kategorieansicht: in Vorbereitung",
+              "nl": "Categorieweergave: in voorbereiding",
+              "fr": "Vue de catégorie : en préparation"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-category",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-category-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Welche Angaben eine Kategorie braucht",
+            "nl": "Welke gegevens een categorie nodig heeft",
+            "fr": "Les informations utiles à une catégorie"
+          },
+          "body": {
+            "de": "Eine sinnvolle Kategorie führt zu prüfbaren Produktinformationen und zur Fahrzeugzuordnung. Solange der echte Katalog fehlt, bleiben diese Ansichten als Vorbereitung gekennzeichnet. Der Wechsel zur Produktseite ist keine Bestands- oder Preisbestätigung.",
+            "nl": "Een bruikbare categorie leidt naar controleerbare productinformatie en voertuigkoppeling. Zolang de echte catalogus ontbreekt, blijven deze pagina’s als voorbereiding gemarkeerd. De productpagina bevestigt geen voorraad of prijs.",
+            "fr": "Une catégorie utile mène à des informations produit vérifiables et au véhicule concerné. Sans catalogue réel, ces écrans restent signalés comme préparatoires. La page produit ne confirme ni stock ni prix."
+          },
+          "outcome": {
+            "de": "Den Aufbau einer Produktansicht kennenlernen.",
+            "nl": "Bekijk de opbouw van een productpagina.",
+            "fr": "Découvrez la structure d’une fiche produit."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-product",
+            "label": {
+              "de": "Produktdetails: in Vorbereitung",
+              "nl": "Productdetails: in voorbereiding",
+              "fr": "Détails produit : en préparation"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-product",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-product-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Produktinformationen vor einer Auswahl prüfen",
+            "nl": "Productinformatie vóór een keuze controleren",
+            "fr": "Vérifier la fiche produit avant de choisir"
+          },
+          "body": {
+            "de": "Vor einer Teileauswahl müssen Produktangaben und Fahrzeugpassung belegt sein. Diese vorbereitete Ansicht behauptet weder einen echten Artikel noch Preis, Lieferbarkeit oder Freigabe zum Kauf. Gehen Sie bei offenen Angaben zurück zur Fahrzeugklärung.",
+            "nl": "Vóór een onderdelenkeuze moeten productgegevens en voertuigpasvorm onderbouwd zijn. Deze voorbereide pagina beweert geen echt artikel, prijs, leverbaarheid of koopvrijgave. Ga bij ontbrekende gegevens terug naar de voertuigcontrole.",
+            "fr": "Avant de choisir une pièce, ses caractéristiques et sa compatibilité doivent être établies. Cet écran préparatoire ne présente aucun article, prix ou délai comme confirmé et n’autorise pas un achat. Revenez au véhicule si des données manquent."
+          },
+          "outcome": {
+            "de": "Die Fahrzeugpassung zuerst klären.",
+            "nl": "Verduidelijk eerst de voertuigpasvorm.",
+            "fr": "Clarifiez d’abord la compatibilité véhicule."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-fitment",
+            "label": {
+              "de": "Fahrzeug und belegte Passung",
+              "nl": "Voertuig en onderbouwde passendheid",
+              "fr": "Véhicule et compatibilité étayée"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "tk-product-explain-2",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Bei fehlenden Angaben zurück zur Orientierung",
+            "nl": "Bij ontbrekende gegevens terug naar oriëntatie",
+            "fr": "Revenir aux repères si des informations manquent"
+          },
+          "body": {
+            "de": "Fehlen eindeutige Fahrzeug- oder Produktangaben, ist eine weitere Prüfung nötig. Die vorbereitete Suche hilft dabei, den nächsten Informationsbedarf zu verstehen. Eine Seitenansicht allein darf keinen sicheren Einbau oder eine Freigabe suggerieren.",
+            "nl": "Ontbreken duidelijke voertuig- of productgegevens, dan is verdere controle nodig. De voorbereide zoekpagina helpt om de volgende informatiebehoefte te begrijpen. Alleen een pagina mag geen veilige montage of vrijgave suggereren.",
+            "fr": "Si les données véhicule ou produit sont imprécises, une vérification supplémentaire est nécessaire. La recherche préparatoire aide à identifier les informations manquantes. Une simple page ne garantit ni montage sûr ni validation."
+          },
+          "outcome": {
+            "de": "Zur Teilesuche zurückkehren.",
+            "nl": "Ga terug naar onderdelen zoeken.",
+            "fr": "Revenez à la recherche de pièces."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-search",
+            "label": {
+              "de": "Teilesuche: in Vorbereitung",
+              "nl": "Onderdelen zoeken: in voorbereiding",
+              "fr": "Recherche de pièces : en préparation"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-cart",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-cart-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Auswahl und Bestellung sind verschiedene Schritte",
+            "nl": "Selectie en bestelling zijn verschillende stappen",
+            "fr": "La sélection et la commande sont distinctes"
+          },
+          "body": {
+            "de": "Ein Warenkorb soll ausgewählte Positionen vor einer Bestellung zusammenführen. Der aktuelle Stand enthält keine bestätigte Bestellung und löst keine Zahlung aus. Die anschließende Kassenansicht erläutert den noch nicht freigegebenen Bestellschritt.",
+            "nl": "Een winkelwagen moet gekozen artikelen vóór de bestelling samenbrengen. De huidige versie bevat geen bevestigde bestelling en start geen betaling. De volgende kassapagina licht de nog niet vrijgegeven bestelstap toe.",
+            "fr": "Le panier doit réunir les articles choisis avant la commande. L’état actuel ne contient aucune commande confirmée et ne déclenche aucun paiement. L’écran de caisse explique une étape de commande encore non ouverte."
+          },
+          "outcome": {
+            "de": "Den aktuellen Kassenstatus verstehen.",
+            "nl": "Bekijk de huidige kassastatus.",
+            "fr": "Consultez l’état actuel de la caisse."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-checkout",
+            "label": {
+              "de": "Kasse: nicht zum Kauf freigegeben",
+              "nl": "Afrekenen: niet vrijgegeven voor aankoop",
+              "fr": "Paiement : achat non activé"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "tk-cart-explain-2",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Eine Auswahl bleibt überprüfbar",
+            "nl": "Een selectie blijft controleerbaar",
+            "fr": "Une sélection reste à vérifier"
+          },
+          "body": {
+            "de": "Vor einem späteren Kauf müssen ausgewählte Teile und Fahrzeugzuordnung noch einmal zusammen betrachtet werden. Im aktuellen Vorbereitungsstand gibt es keine verbindlichen Warenkorbpositionen. Nutzen Sie die Suche, um den vorgesehenen Auswahlweg zu verstehen.",
+            "nl": "Vóór een latere aankoop moeten onderdelen en voertuigkoppeling opnieuw samen worden bekeken. In de huidige voorbereiding bestaan geen bindende winkelwagenregels. Gebruik de zoekpagina om de voorziene selectie te begrijpen.",
+            "fr": "Avant un futur achat, pièces choisies et véhicule doivent être examinés ensemble. L’état préparatoire actuel ne comporte aucune ligne de panier engageante. La recherche explique le parcours de sélection prévu."
+          },
+          "outcome": {
+            "de": "Den Auswahlweg erneut ansehen.",
+            "nl": "Bekijk het selectietraject opnieuw.",
+            "fr": "Consultez à nouveau le parcours de sélection."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-search",
+            "label": {
+              "de": "Teilesuche: in Vorbereitung",
+              "nl": "Onderdelen zoeken: in voorbereiding",
+              "fr": "Recherche de pièces : en préparation"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-checkout",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-checkout-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Warum hier noch kein Kauf abgeschlossen wird",
+            "nl": "Waarom hier nog geen aankoop wordt afgerond",
+            "fr": "Pourquoi aucun achat n’est encore conclu ici"
+          },
+          "body": {
+            "de": "Für einen echten Kauf müssen Artikel, Preis, Versand und die erforderlichen Verbraucherinformationen verbindlich vorliegen. Dieser Kassenstand ist nicht zum Kauf freigegeben. Eine Erklärung oder Chatantwort ersetzt weder den vorgesehenen Bestellprozess noch dessen rechtliche Voraussetzungen.",
+            "nl": "Voor een echte aankoop moeten artikel, prijs, verzending en vereiste consumenteninformatie vaststaan. Deze kassa is niet vrijgegeven voor aankopen. Een uitleg of chatantwoord vervangt het bestelproces en de juridische voorwaarden niet.",
+            "fr": "Un achat réel exige un article, un prix, une livraison et les informations consommateurs applicables. Cette caisse n’est pas ouverte aux achats. Une explication ou réponse du chat ne remplace ni le processus de commande ni ses conditions légales."
+          },
+          "outcome": {
+            "de": "Die vorgesehenen Kaufinformationen aufrufen.",
+            "nl": "Open de voorziene aankoopinformatie.",
+            "fr": "Consultez les informations d’achat prévues."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-legal",
+            "label": {
+              "de": "TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
+              "nl": "TEILEKLAR: aanbieder, privacy en aankoopvoorwaarden",
+              "fr": "TEILEKLAR : prestataire, confidentialité et conditions d’achat"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "tk-checkout-explain-2",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Rückfragen vor einer Kaufentscheidung klären",
+            "nl": "Vragen vóór een aankoopbeslissing bespreken",
+            "fr": "Clarifier les questions avant une décision d’achat"
+          },
+          "body": {
+            "de": "Offene Angaben zu einem Teil oder zum Ablauf dürfen nicht durch eine Bestätigung ersetzt werden. Dieser Vorbereitungsstand nimmt keine Bestellung an. Für eine konkrete Rückfrage führt ein eigener Kontaktweg aus der Kasse heraus.",
+            "nl": "Open vragen over een onderdeel of proces mogen niet door een bevestiging worden vervangen. Deze voorbereiding neemt geen bestelling aan. Voor een concrete vraag is een apart contactkanaal bereikbaar vanuit de kassa.",
+            "fr": "Une confirmation ne remplace pas des informations manquantes sur une pièce ou le parcours. Cet état préparatoire n’accepte aucune commande. Un contact distinct permet de poser une question depuis la caisse."
+          },
+          "outcome": {
+            "de": "Eine konkrete Rückfrage stellen.",
+            "nl": "Stel een concrete vraag.",
+            "fr": "Posez une question précise."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "contact",
+            "label": {
+              "de": "Kontakt und nächste Schritte",
+              "nl": "Contact en vervolgstappen",
+              "fr": "Contact et prochaines étapes"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-fitment",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-fitment-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Passung braucht nachvollziehbare Fahrzeugdaten",
+            "nl": "Pasvorm vraagt om controleerbare voertuiggegevens",
+            "fr": "La compatibilité exige des données véhicule fiables"
+          },
+          "body": {
+            "de": "Ein ähnlich aussehendes Teil ist noch kein passendes Teil. Für die Zuordnung müssen Fahrzeugangaben und Produktdaten zusammenpassen und belegt werden. Die Vorbereitung unterstützt die Orientierung, gibt aber keine technische Passungszusage oder Einbauanweisung.",
+            "nl": "Een onderdeel dat erop lijkt, is niet vanzelf passend. Voor de koppeling moeten voertuig- en productgegevens overeenkomen en onderbouwd zijn. De voorbereiding helpt bij oriëntatie, maar geeft geen technische pasvormgarantie of montage-instructie.",
+            "fr": "Une pièce ressemblante n’est pas forcément compatible. L’identification exige des données véhicule et produit concordantes et vérifiables. Cette préparation aide à s’orienter sans garantir la compatibilité technique ni fournir une notice de montage."
+          },
+          "outcome": {
+            "de": "Mit geklärten Angaben zur Teilesuche wechseln.",
+            "nl": "Ga met duidelijke gegevens naar onderdelen zoeken.",
+            "fr": "Passez à la recherche avec des données précises."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-search",
+            "label": {
+              "de": "Teilesuche: in Vorbereitung",
+              "nl": "Onderdelen zoeken: in voorbereiding",
+              "fr": "Recherche de pièces : en préparation"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-appointments",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-appointments-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Ein Terminwunsch ist noch keine Reservierung",
+            "nl": "Een afspraakverzoek is nog geen reservering",
+            "fr": "Une demande de rendez-vous n’est pas une réservation"
+          },
+          "body": {
+            "de": "Für eine Werkstattanfrage sind das Anliegen, das Fahrzeug und der gewünschte Zeitraum hilfreich. Die aktuelle Strecke bestätigt keine freien Termine oder tatsächliche Werkstattannahme. Erst eine externe Bestätigung darf als verbindlich bestätigter Termin erscheinen.",
+            "nl": "Voor een garageverzoek zijn het probleem, voertuig en gewenste tijdvak nuttig. Dit traject bevestigt geen vrije afspraken of daadwerkelijke garageacceptatie. Pas een externe bevestiging mag als bevestigde afspraak worden weergegeven.",
+            "fr": "Pour une demande atelier, précisez le besoin, le véhicule et la période souhaitée. Ce parcours ne confirme ni créneau disponible ni acceptation par un atelier. Seule une confirmation externe permet d’afficher un rendez-vous confirmé."
+          },
+          "outcome": {
+            "de": "Den vorgesehenen Werkstattkontext ansehen.",
+            "nl": "Bekijk de voorziene garagecontext.",
+            "fr": "Consultez le contexte atelier prévu."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-workshop",
+            "label": {
+              "de": "Werkstattprofil: freigegebene Daten erforderlich",
+              "nl": "Werkplaatsprofiel: vrijgegeven gegevens nodig",
+              "fr": "Profil atelier : données validées requises"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-vouchers",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-vouchers-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Gutscheininformation und eingelöstes Guthaben trennen",
+            "nl": "Voucherinformatie en besteed tegoed scheiden",
+            "fr": "Distinguer information bon et crédit utilisé"
+          },
+          "body": {
+            "de": "Gutscheine benötigen klare Bedingungen und einen tatsächlich angeschlossenen Einlöseablauf. Diese Seite informiert über den vorgesehenen Bereich, stellt aber keinen gültigen Code aus und bestätigt keine Einlösung. Die zugehörigen Bedingungen bleiben separat zu prüfen.",
+            "nl": "Vouchers vragen om duidelijke voorwaarden en een daadwerkelijk gekoppeld inwisselproces. Deze pagina beschrijft de voorziene omgeving, maar verstrekt geen geldige code en bevestigt geen inwisseling. De bijbehorende voorwaarden moeten apart worden beoordeeld.",
+            "fr": "Les bons nécessitent des conditions claires et un parcours d’utilisation réellement connecté. Cette page présente l’espace prévu sans délivrer de code valide ni confirmer d’utilisation. Les conditions correspondantes restent à vérifier séparément."
+          },
+          "outcome": {
+            "de": "Die zugehörigen rechtlichen Informationen lesen.",
+            "nl": "Lees de bijbehorende juridische informatie.",
+            "fr": "Lisez les informations juridiques correspondantes."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-legal",
+            "label": {
+              "de": "TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
+              "nl": "TEILEKLAR: aanbieder, privacy en aankoopvoorwaarden",
+              "fr": "TEILEKLAR : prestataire, confidentialité et conditions d’achat"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-partner",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-partner-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "title": {
+            "de": "Eine Werkstattpartnerschaft gezielt anfragen",
+            "nl": "Gericht een garagepartnerschap aanvragen",
+            "fr": "Préparer une demande de partenariat atelier"
+          },
+          "body": {
+            "de": "Beschreiben Sie den Betrieb und die Art der gewünschten Zusammenarbeit. Eine Partneranfrage ist noch keine Aufnahme als Werkstattpartner und schaltet keine Abrechnung frei. Welche Profilangaben veröffentlicht werden dürfen, muss vor einer Veröffentlichung geklärt sein.",
+            "nl": "Beschrijf het bedrijf en de gewenste samenwerking. Een partneraanvraag betekent nog geen toelating als garagepartner en activeert geen afrekening. Vóór publicatie moet duidelijk zijn welke profielgegevens mogen worden getoond.",
+            "fr": "Décrivez l’établissement et la collaboration souhaitée. Une demande ne vaut pas admission comme partenaire et n’active aucune facturation. Les données de profil publiables doivent être déterminées avant toute publication."
+          },
+          "outcome": {
+            "de": "Den vorgesehenen Werkstattauftritt kennenlernen.",
+            "nl": "Bekijk de voorziene garagepresentatie.",
+            "fr": "Découvrez la présentation atelier prévue."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-workshop",
+            "label": {
+              "de": "Werkstattprofil: freigegebene Daten erforderlich",
+              "nl": "Werkplaatsprofiel: vrijgegeven gegevens nodig",
+              "fr": "Profil atelier : données validées requises"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "tk-partner-explain-2",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Profil und geschützten Zugang getrennt behandeln",
+            "nl": "Profiel en beschermde toegang apart behandelen",
+            "fr": "Séparer profil et accès protégé"
+          },
+          "body": {
+            "de": "Ein öffentliches Werkstattprofil und ein geschützter Partnerzugang haben unterschiedliche Aufgaben. Veröffentlichung braucht freigegebene Betriebsangaben; private Bearbeitung braucht passende Rechte. Eine Registrierung bestätigt weder das eine noch das andere automatisch.",
+            "nl": "Een openbaar garageprofiel en beschermde partnertoegang hebben verschillende doelen. Publicatie vraagt vrijgegeven bedrijfsgegevens; private bewerking vraagt passende rechten. Registratie bevestigt geen van beide automatisch.",
+            "fr": "Un profil public et un accès partenaire protégé ont des fonctions distinctes. La publication exige des données validées ; la gestion privée exige les droits appropriés. L’inscription ne valide automatiquement ni l’un ni l’autre."
+          },
+          "outcome": {
+            "de": "Den Zugangsstatus und die Anmeldung ansehen.",
+            "nl": "Bekijk toegangsstatus en aanmelding.",
+            "fr": "Consultez l’accès et la connexion."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "login",
+            "label": {
+              "de": "Anmelden",
+              "nl": "Aanmelden",
+              "fr": "Connexion"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-workshop",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-workshop-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Ein Werkstattprofil braucht freigegebene Angaben",
+            "nl": "Een garageprofiel vraagt om vrijgegeven gegevens",
+            "fr": "Un profil atelier exige des données validées"
+          },
+          "body": {
+            "de": "Leistungen, Erreichbarkeit und Terminwege eines Betriebs müssen aus bestätigten Angaben stammen. Das vorbereitete Profil zeigt keine erfundene Werkstatt, Entfernung oder Bewertung. Ein Terminwunsch bleibt eine Anfrage, solange keine reale Bestätigung vorliegt.",
+            "nl": "Diensten, bereikbaarheid en afspraakmogelijkheden van een bedrijf moeten uit bevestigde gegevens komen. Het voorbereide profiel toont geen verzonnen garage, afstand of beoordeling. Een afspraakwens blijft een verzoek tot een echte bevestiging volgt.",
+            "fr": "Les prestations, coordonnées et modalités de rendez-vous doivent provenir de données confirmées. Le profil préparatoire n’invente ni atelier, ni distance, ni avis. Un souhait de rendez-vous reste une demande jusqu’à confirmation réelle."
+          },
+          "outcome": {
+            "de": "Den Ablauf einer Terminanfrage ansehen.",
+            "nl": "Bekijk het proces van een afspraakverzoek.",
+            "fr": "Consultez le parcours de demande de rendez-vous."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-appointments",
+            "label": {
+              "de": "Werkstatttermin anfragen",
+              "nl": "Werkplaatsafspraak aanvragen",
+              "fr": "Demander un rendez-vous atelier"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "tk-workshop-explain-2",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Vom Anliegen zum Terminwunsch",
+            "nl": "Van vraag naar afspraakverzoek",
+            "fr": "Du besoin à la demande de rendez-vous"
+          },
+          "body": {
+            "de": "Beschreiben Sie den Anlass und welche Fahrzeugangaben verfügbar sind. Die Terminseite ordnet den nächsten Anfrageschritt ein. Ein Profil oder erklärter Ablauf bestätigt keine tatsächliche Kapazität eines Betriebs.",
+            "nl": "Beschrijf de aanleiding en welke voertuiggegevens beschikbaar zijn. De afspraakpagina verduidelijkt de volgende aanvraagstap. Een profiel of procesbeschrijving bevestigt geen werkelijke capaciteit van een bedrijf.",
+            "fr": "Décrivez le besoin et les données véhicule disponibles. La page rendez-vous présente l’étape de demande suivante. Un profil ou une explication ne confirme pas la capacité réelle d’un établissement."
+          },
+          "outcome": {
+            "de": "Die Terminanfrage vorbereiten.",
+            "nl": "Bereid het afspraakverzoek voor.",
+            "fr": "Préparez la demande de rendez-vous."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-appointments",
+            "label": {
+              "de": "Werkstatttermin anfragen",
+              "nl": "Werkplaatsafspraak aanvragen",
+              "fr": "Demander un rendez-vous atelier"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-legal",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-legal-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Rechtliche Informationen im Shopkontext finden",
+            "nl": "Juridische informatie in de winkelcontext vinden",
+            "fr": "Trouver les informations juridiques de la boutique"
+          },
+          "body": {
+            "de": "Anbieter-, Datenschutz- und Kaufinformationen gehören zum konkreten Shopkontext. Diese Orientierung ersetzt oder übersetzt keine rechtlichen Bedingungen. Prüfen Sie die vorhandenen Angaben und ihren Freigabestand; ein öffentlicher Seitenaufruf bestätigt keine Kaufbereitschaft des Systems.",
+            "nl": "Aanbieders-, privacy- en aankoopinformatie horen bij de concrete winkelcontext. Deze uitleg vervangt of vertaalt geen juridische voorwaarden. Controleer de bestaande informatie en vrijgavestatus; een openbare pagina bewijst niet dat het systeem klaar is voor aankopen.",
+            "fr": "Les informations du prestataire, de confidentialité et d’achat relèvent du contexte de la boutique. Cette orientation ne remplace ni ne traduit les conditions juridiques. Vérifiez les données et leur validation ; une page publique ne prouve pas que les achats sont ouverts."
+          },
+          "outcome": {
+            "de": "Zu den separaten Anbieterinformationen wechseln.",
+            "nl": "Ga naar de aparte aanbiedersinformatie.",
+            "fr": "Consultez les informations distinctes du prestataire."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "imprint",
+            "label": {
+              "de": "Anbieterinformationen",
+              "nl": "Aanbiederinformatie",
+              "fr": "Informations du prestataire"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    }
+  ]
+}

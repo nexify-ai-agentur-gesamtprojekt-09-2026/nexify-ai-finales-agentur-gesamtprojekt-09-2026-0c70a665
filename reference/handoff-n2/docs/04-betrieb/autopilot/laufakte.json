@@ -1,0 +1,99 @@
+{
+  "run_id": "c275bc07-b41e-491c-95f5-48f77404a1a2",
+  "state": "PARTIAL_BLOCKED",
+  "mode": "PHASENEMULATION",
+  "case_identity": {
+    "case_id": "NXAI-DESIGN-2026-09",
+    "project_id": "Shop-Design Gesamt-Konzept",
+    "subject_id": "NeXifyAI Cloud v10 + Portale + API-Abrechnung (Prototypen)",
+    "commission_id": "UNVERIFIED",
+    "evidence_cutoff": "2026-09-26T22:31:56.672Z",
+    "input_scope_hash": "sha256:26f7c107737292759f649417aeb460360c636945f13340610928b88d8a4b8349"
+  },
+  "lease": null,
+  "handoffs": [
+    {
+      "contract_version": "1.0",
+      "run_id": "c275bc07-b41e-491c-95f5-48f77404a1a2",
+      "case_identity": {
+        "case_id": "NXAI-DESIGN-2026-09",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "NeXifyAI Cloud v10 + Portale + API-Abrechnung (Prototypen)",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-26T22:31:56.672Z",
+        "input_scope_hash": "sha256:26f7c107737292759f649417aeb460360c636945f13340610928b88d8a4b8349"
+      },
+      "producer": "agent1",
+      "artifact_type": "technical_report",
+      "artifact_path": "/docs/04-betrieb/go-live-abschlusstest-2026-09-27.md",
+      "artifact_sha256": "sha256:918c1c74b6b0079c6cf8fbb837f5c69c0d4e315c86f5b0aab542bcdbed73b3a6",
+      "status": "PARTIAL",
+      "source_artifacts": [],
+      "created_at": "2026-09-26T22:31:56.672Z"
+    },
+    {
+      "contract_version": "1.0",
+      "run_id": "c275bc07-b41e-491c-95f5-48f77404a1a2",
+      "case_identity": {
+        "case_id": "NXAI-DESIGN-2026-09",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "NeXifyAI Cloud v10 + Portale + API-Abrechnung (Prototypen)",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-26T22:31:56.672Z",
+        "input_scope_hash": "sha256:26f7c107737292759f649417aeb460360c636945f13340610928b88d8a4b8349"
+      },
+      "producer": "agent2",
+      "artifact_type": "implementation_plan",
+      "artifact_path": "/docs/04-betrieb/go-live-abschlusstest-2026-09-27.md",
+      "artifact_sha256": "sha256:918c1c74b6b0079c6cf8fbb837f5c69c0d4e315c86f5b0aab542bcdbed73b3a6",
+      "status": "PARTIAL",
+      "source_artifacts": [
+        {
+          "producer": "agent1",
+          "sha256": "sha256:918c1c74b6b0079c6cf8fbb837f5c69c0d4e315c86f5b0aab542bcdbed73b3a6"
+        }
+      ],
+      "created_at": "2026-09-26T22:31:56.672Z"
+    },
+    {
+      "contract_version": "1.0",
+      "run_id": "c275bc07-b41e-491c-95f5-48f77404a1a2",
+      "case_identity": {
+        "case_id": "NXAI-DESIGN-2026-09",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "NeXifyAI Cloud v10 + Portale + API-Abrechnung (Prototypen)",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-26T22:31:56.672Z",
+        "input_scope_hash": "sha256:26f7c107737292759f649417aeb460360c636945f13340610928b88d8a4b8349"
+      },
+      "producer": "agent3",
+      "artifact_type": "certification_readiness_report",
+      "artifact_path": "/docs/04-betrieb/autopilot/zertifizierungsreife-2026-09-27.md",
+      "artifact_sha256": "sha256:583f4840a81398a8131e8533c4a010a09ae0be729dc0913106a922d0b5c8c5c8",
+      "status": "PARTIAL",
+      "source_artifacts": [
+        {
+          "producer": "agent1",
+          "sha256": "sha256:918c1c74b6b0079c6cf8fbb837f5c69c0d4e315c86f5b0aab542bcdbed73b3a6"
+        },
+        {
+          "producer": "agent2",
+          "sha256": "sha256:918c1c74b6b0079c6cf8fbb837f5c69c0d4e315c86f5b0aab542bcdbed73b3a6"
+        }
+      ],
+      "created_at": "2026-09-26T22:31:56.672Z"
+    }
+  ],
+  "contradictions": [
+    "W-01 Margenformel",
+    "W-02 Prepaid vs AGB §4 – aufgelöst 28.09.2026 (Trennung Projekt/API, AGB § 4 Verweis)",
+    "W-03 KI-Kennzeichnung"
+  ],
+  "limitations": [
+    "Agent 1 und 2 teilen ein Artefakt (Go-Live-Protokoll enthält Befunde und Plan)",
+    "kein Zugriff auf Produktivsystem",
+    "Normvolltexte nicht lizenziert eingesehen",
+    "orchestrate_state.py nicht verfügbar – Vertrag manuell eingehalten"
+  ],
+  "next_step": "Entscheidung E1 schriftlich"
+}

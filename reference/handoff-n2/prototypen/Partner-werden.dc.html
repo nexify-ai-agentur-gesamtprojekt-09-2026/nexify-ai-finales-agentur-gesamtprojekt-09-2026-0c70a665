@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        bildschirm
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „Partner-werden.dc.html“
+  Status:     konform · Info: DS-C-05×4 DS-I-05×1
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Partner werden – NeXify AI</title>
+<meta name="description" content="Für Agenturen und Freelancer: Web-, Shop- und KI-Umsetzung als White-Label zum festen Tagessatz." />
+<meta property="og:title" content="Partner werden – NeXify AI" />
+<meta property="og:description" content="Für Agenturen und Freelancer: Web-, Shop- und KI-Umsetzung als White-Label zum festen Tagessatz." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta name="theme-color" content="#242826" />
+<script src="nx-page.js" data-reveal="off" data-max="160"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  button, input, select, textarea { font: inherit; }
+  body { margin: 0; background: #242826; color: #FFFFFF; font-family:Geist, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #D7FA50; text-decoration-color: rgba(215,250,80,.4); text-underline-offset: 3px; }
+  a:hover { color: #FFFFFF; text-decoration-color: #D7FA50; }
+  p { text-wrap: pretty; }
+  h1, h2, h3 { text-wrap: balance; }
+  @keyframes nxRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes nxSigIdle { 0%,100% { transform: rotate(-6deg) scale(.95); opacity: .85; } 50% { transform: rotate(6deg) scale(1); opacity: 1; } }
+  a:focus-visible, button:focus-visible { outline: 2px solid #D7FA50; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+<style id="nx-mobil">
+  html{-webkit-text-size-adjust:100%} body{overflow-x:hidden}
+  @media (max-width:640px){
+    h1{font-size:clamp(30px,9vw,42px)!important;line-height:1.06!important;letter-spacing:-.03em!important}
+    h2{font-size:clamp(24px,7vw,34px)!important;line-height:1.1!important}
+    [style*="padding:40px"],[style*="padding:48px 40px"],[style*="padding:36px"],[style*="padding:32px"]{padding:20px!important}
+    [style*="padding:56px 0"],[style*="padding:64px 24px"],[style*="padding:72px 0"],[style*="padding:96px 0"]{padding-top:40px!important;padding-bottom:48px!important}
+    [style*="gap:64px"],[style*="gap:48px"],[style*="gap:40px"]{gap:24px!important}
+    [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:repeat(2,"],[style*="grid-template-columns:1.1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],[style*="grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+    table{font-size:13px} pre{font-size:12px!important} img,svg,canvas{max-width:100%}
+    [style*="flex:1 1 520px"],[style*="flex:1 1 460px"],[style*="flex:2 1 460px"],[style*="flex:1 1 440px"],[style*="flex:1 1 420px"],[style*="flex:2 1 420px"],[style*="flex:1 1 400px"],[style*="flex:1 1 380px"],[style*="flex:1 1 360px"]{flex-basis:100%!important}
+    [style*="margin-left:auto"][style*="min-height:44px"]{margin-left:0!important}
+    button,a,input,select,textarea,summary{touch-action:manipulation}
+    input,select,textarea{font-size:16px!important}
+  }
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),radial-gradient(900px 500px at 96% 72%,rgba(167,139,250,.06),transparent 62%),#242826">
+
+  <dc-import name="NX-Header" marke="cloud" nav="cloud" active="partnerWerden" kontext="Werkstattprogramm" cta="partner" ctaHref="Anmeldung.dc.html" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+
+  <header style="position:relative;border-bottom:1px solid #363A38;background:radial-gradient(900px 520px at 80% 0%, rgba(215,250,80,.16), transparent 62%),radial-gradient(760px 480px at 8% 100%, rgba(215,250,80,.04), transparent 60%),radial-gradient(600px 380px at 50% 0%, rgba(215,250,80,.04), transparent 70%),#242826">
+    <div id="inhalt" tabindex="-1" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;width:min(1080px,calc(100% - 48px));min-height:68px;margin:0 auto">
+      <a href="TEILEKLAR Shop.dc.html" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;text-decoration:none;color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+        <span style="display:block;width:17px;height:17px;border-radius:4px;background:#D7FA50"></span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-.03em">TEILEKLAR</span>
+      </a>
+      <span style="width:1px;height:18px;background:#363A38"></span>
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Partnerprogramm</span>
+      <a href="Partnerportal.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;height:44px;padding:0 16px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);font-size:14px;font-weight:700;text-decoration:none;color:#FFFFFF;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Partner-Login</a>
+    </div>
+  </header>
+
+  <section data-screen-label="Partner werden – Hero" style="position:relative;overflow:hidden;background:#242826;color:#FFFFFF">
+    <div style="position:absolute;inset:0;background:radial-gradient(1000px 560px at 70% 32%, #1B2226 0%, #14191C 40%, #242826 78%)"></div>
+    <div style="position:absolute;top:-12%;right:-6%;width:min(58vw,760px);height:min(58vw,760px);border-radius:50%;background:radial-gradient(circle at 42% 38%, rgba(215,250,80,.16), rgba(215,250,80,.05) 46%, transparent 70%)"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px);background-size:80px 100%"></div>
+    <div style="position:relative;width:min(1080px,calc(100% - 48px));margin:0 auto;padding:80px 0 72px;animation:nxRise .6s cubic-bezier(.22,.7,.3,1) both">
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:0 0 24px;padding:8px 12px;border:1px solid rgba(215,250,80,.28);border-radius:999px;background:rgba(215,250,80,.07);font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">
+        <span style="display:block;width:6px;height:6px;border-radius:999px;background:#D7FA50"></span>Für Kfz-Werkstätten
+      </p>
+      <h1 style="font-family:Geist,Helvetica,Arial,sans-serif;max-width:800px;margin:0;font-size:clamp(48px,7.2vw,96px);font-weight:600;line-height:1;letter-spacing:-.05em;overflow-wrap:break-word;hyphens:auto">Der Kunde bringt das geprüfte Teil.<br /><span style="color:#D7FA50">Sie bekommen den Auftrag.</span></h1>
+      <p style="max-width:600px;margin:24px 0 32px;font-size:18px;line-height:1.6;color:#BCC1BD">Kein Teilerisiko, keine Rückfragen zur Passung, keine Fixkosten. Sie zahlen erst, wenn ein zugeführter Kunde tatsächlich bei Ihnen war.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="TEILEKLAR Shop.dc.html" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:16px;font-weight:700;text-decoration:none" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Werkstatt anmelden</a>
+        <a href="Partnerportal.dc.html" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border:1px solid rgba(255,255,255,.22);border-radius:8px;color:#FFFFFF;font-size:16px;font-weight:700;text-decoration:none" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Nutzen-Rechner öffnen</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="width:min(1080px,calc(100% - 48px));margin:0 auto;padding:64px 0 0;background:#242826;color:#FFFFFF">
+    <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div style="padding:32px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+        <strong style="display:block;font-size:32px;font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">0&nbsp;€</strong>
+        <span style="display:block;margin-top:8px;font-size:14px;line-height:1.55;color:#FFFFFF">Aufnahmegebühr, Grundgebühr und Kosten für Ihre Landingpage.</span>
+      </div>
+      <div style="padding:32px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+        <strong style="display:block;font-size:32px;font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">19,90&nbsp;€</strong>
+        <span style="display:block;margin-top:8px;font-size:14px;line-height:1.55;color:#FFFFFF">zzgl. MwSt. je Monat und tatsächlich wahrgenommenem Neukunden.</span>
+      </div>
+      <div style="padding:32px;border-radius:4px;background:#242826;color:#FFFFFF">
+        <strong style="display:block;font-size:32px;font-weight:600;letter-spacing:-.04em;color:#D7FA50;overflow-wrap:break-word;hyphens:auto">7&nbsp;Tage</strong>
+        <span style="display:block;margin-top:8px;font-size:14px;line-height:1.55;color:#BCC1BD">Widerspruchsfrist des Kunden, bevor eine Position abrechenbar wird.</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="width:min(1080px,calc(100% - 48px));margin:0 auto;padding:80px 0 0;background:#242826;color:#FFFFFF">
+    <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Ablauf</p>
+    <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;max-width:620px;margin:0 0 32px;font-size:clamp(32px,4.2vw,56px);font-weight:600;line-height:1.05;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Vier Schritte, danach läuft es ohne Sie.</h2>
+    <div style="display:grid;gap:0">
+      <div style="display:flex;flex-wrap:wrap;gap:20px;padding:24px 0;border-top:1px solid #363A38">
+        <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">01</span>
+        <div style="flex:1;min-width:240px">
+          <strong style="display:block;margin-bottom:8px;font-size:18px;font-weight:700;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">Profil ausfüllen, Konto erhalten</strong>
+          <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Betrieb, Leistungen, Öffnungszeiten, ein Bild. Daraus entsteht Ihre Landingpage – Sie geben sie frei, bevor sie online geht.</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;padding:24px 0;border-top:1px solid #363A38">
+        <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">02</span>
+        <div style="flex:1;min-width:240px">
+          <strong style="display:block;margin-bottom:8px;font-size:18px;font-weight:700;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">Gutscheine in die Nachbarschaft</strong>
+          <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Sie wählen eine Vorlage, wir drucken und verteilen. Jeder Gutschein trägt einen einmalig einlösbaren Code mit Ablaufdatum.</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;padding:24px 0;border-top:1px solid #363A38">
+        <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">03</span>
+        <div style="flex:1;min-width:240px">
+          <strong style="display:block;margin-bottom:8px;font-size:18px;font-weight:700;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">Termin landet in Ihrem Portal</strong>
+          <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Der Kunde bucht selbst. Sie und er sehen dieselbe Buchung und können unabhängig verlegen oder absagen – jede Änderung geht automatisch an die andere Seite.</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;padding:24px 0;border-top:1px solid #363A38;border-bottom:1px solid #363A38">
+        <span style="display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;border-radius:4px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">04</span>
+        <div style="flex:1;min-width:240px">
+          <strong style="display:block;margin-bottom:8px;font-size:18px;font-weight:700;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">Abrechnung am 20. des Monats</strong>
+          <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Nur wahrgenommene Termine werden berechnet. Zahlbar in 7 Tagen mit 2&nbsp;% Skonto, danach zum vollen Betrag.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="width:min(1080px,calc(100% - 48px));margin:0 auto;padding:80px 0 0;background:#242826;color:#FFFFFF">
+    <div style="display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div>
+        <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Was Sie bekommen</p>
+        <div style="display:grid;gap:16px">
+          <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:6px;height:6px;flex:0 0 auto;margin-top:8px;border-radius:999px;background:#78C331"></span><span style="font-size:14px;line-height:1.6;color:#FFFFFF">Eine eigene, suchmaschinenoptimierte Partnerseite – kostenfrei, solange Sie Partner sind.</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:6px;height:6px;flex:0 0 auto;margin-top:8px;border-radius:999px;background:#78C331"></span><span style="font-size:14px;line-height:1.6;color:#FFFFFF">Aufträge, bei denen Fahrzeug, Prüfergebnis und Teiledaten schon mitgeliefert werden.</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:6px;height:6px;flex:0 0 auto;margin-top:8px;border-radius:999px;background:#78C331"></span><span style="font-size:14px;line-height:1.6;color:#FFFFFF">Ein Portal für Profil, Gutscheine, Termine, Rechnungen und Ihren Nutzen-Rechner.</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:6px;height:6px;flex:0 0 auto;margin-top:8px;border-radius:999px;background:#78C331"></span><span style="font-size:14px;line-height:1.6;color:#FFFFFF">Zugriff auf denselben Leistungskatalog, den auch unsere Direktkunden buchen.</span></div>
+        </div>
+      </div>
+      <div style="padding:32px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+        <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#FFC24A">Ehrlich gesagt</p>
+        <div style="display:grid;gap:12px">
+          <span style="font-size:14px;line-height:1.6;color:#FFC24A">Das Programm startet gerade. Wir versprechen keine Kundenzahlen, die wir noch nicht belegen können.</span>
+          <span style="font-size:14px;line-height:1.6;color:#FFC24A">Mindestlaufzeit je zugeführtem Kunden (Vorschlag: 12&nbsp;Monate) und Mahnwesen sind noch nicht endgültig entschieden – beides steht im Vertrag, bevor Sie unterschreiben.</span>
+          <span style="font-size:14px;line-height:1.6;color:#FFC24A">Sie sind kein Handelsvertreter: keine Exklusivität, keine Abschlussvollmacht, keine Vertriebspflicht.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="width:min(1080px,calc(100% - 48px));margin:0 auto;padding:80px 0 0;background:#242826;color:#FFFFFF">
+    <div style="position:relative;overflow:hidden;display:flex;flex-wrap:wrap;align-items:flex-end;gap:32px;padding:0 40px;border-radius:4px;background:#242826;color:#FFFFFF">
+      <div style="position:absolute;inset:0;background:radial-gradient(700px 340px at 78% 40%, rgba(215,250,80,.16), transparent 70%)"></div>
+      <div style="position:relative;flex:1 1 320px;padding:48px 0">
+        <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Ihr Ansprechpartner</p>
+        <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 12px;font-size:clamp(32px,4.2vw,56px);font-weight:600;line-height:1.05;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Sie sprechen direkt mit Pascal.</h2>
+        <p style="max-width:460px;margin:0 0 24px;font-size:16px;line-height:1.6;color:#BCC1BD">Kein Callcenter, kein Vertriebsteam. Pascal Courbois führt das Erstgespräch, beantwortet Rückfragen und begleitet die Zusammenarbeit persönlich – auf Deutsch oder Niederländisch.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="tel:+491605778084" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;text-decoration:none" style-focus="outline:2px solid #D7FA50;outline-offset:2px">+49 160 577 80 84</a>
+          <a href="mailto:mail@nexifyai.cloud" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border:1px solid rgba(255,255,255,.22);border-radius:8px;color:#FFFFFF;font-size:14px;font-weight:700;text-decoration:none" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">mail@nexifyai.cloud</a>
+        </div>
+      </div>
+      <img src="assets/nexify-ai/pascal-4x5.png" alt="Pascal Courbois, Inhaber von NeXifyAI" style="position:relative;display:block;width:min(280px,60vw);height:auto;align-self:flex-end" />
+    </div>
+  </section>
+
+  <section style="width:min(1080px,calc(100% - 48px));margin:0 auto;padding:80px 0 96px;background:#242826;color:#FFFFFF">
+    <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Häufige Fragen</p>
+    <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;max-width:620px;margin:0 0 32px;font-size:clamp(32px,4.2vw,56px);font-weight:600;line-height:1.05;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Was Werkstätten zuerst fragen.</h2>
+    <div style="display:grid;gap:0;border-top:1px solid #363A38">
+      <div style="padding:24px 0;border-bottom:1px solid #363A38">
+        <strong style="display:block;margin-bottom:8px;font-size:16px;font-weight:700;overflow-wrap:break-word;hyphens:auto">Muss ich Teile über TEILEKLAR beziehen?</strong>
+        <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Nein. Der Kunde bringt sein Teil mit oder lässt es liefern. Ihre eigene Teilebeschaffung bleibt davon unberührt.</span>
+      </div>
+      <div style="padding:24px 0;border-bottom:1px solid #363A38">
+        <strong style="display:block;margin-bottom:8px;font-size:16px;font-weight:700;overflow-wrap:break-word;hyphens:auto">Was passiert, wenn ein Kunde nicht erscheint?</strong>
+        <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Dann wird nichts berechnet. Abrechenbar ist nur ein Termin, den Sie als wahrgenommen markiert haben und dem der Kunde innerhalb von sieben Tagen nicht widersprochen hat.</span>
+      </div>
+      <div style="padding:24px 0;border-bottom:1px solid #363A38">
+        <strong style="display:block;margin-bottom:8px;font-size:16px;font-weight:700;overflow-wrap:break-word;hyphens:auto">Wer haftet für die Reparatur?</strong>
+        <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Sie. Der Werkstattvertrag kommt ausschließlich zwischen Ihnen und dem Kunden zustande – NeXifyAI vermittelt, ist aber nicht Vertragspartner der Reparaturleistung.</span>
+      </div>
+      <div style="padding:24px 0;border-bottom:1px solid #363A38">
+        <strong style="display:block;margin-bottom:8px;font-size:16px;font-weight:700;overflow-wrap:break-word;hyphens:auto">Wie kündige ich?</strong>
+        <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Schriftlich, ohne Begründung. Bereits laufende Positionen aus zugeführten Kunden werden im Partnervertrag geregelt – dieser Punkt ist noch in Abstimmung und wird vor Vertragsschluss festgeschrieben.</span>
+      </div>
+      <div style="padding:24px 0;border-bottom:1px solid #363A38">
+        <strong style="display:block;margin-bottom:8px;font-size:16px;font-weight:700;overflow-wrap:break-word;hyphens:auto">Was passiert mit den Daten meiner Kunden?</strong>
+        <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Sie bleiben Verantwortlicher, NeXifyAI verarbeitet sie als Auftragsverarbeiter nach Art.&nbsp;28&nbsp;DSGVO. Ein AVV gehört zum Partnervertrag. Sie sehen ausschließlich Ihre eigenen Kunden, nie die anderer Partner.</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:40px;padding:32px 32px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+      <div style="flex:1;min-width:240px">
+        <strong style="display:block;margin-bottom:4px;font-size:18px;font-weight:600;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">Unverbindlich anfragen</strong>
+        <span style="font-size:14px;line-height:1.6;color:#FFFFFF">Bis zur Unterschrift ist nichts verbindlich – wir melden uns an die angegebene Adresse.</span>
+      </div>
+      <a href="TEILEKLAR Shop.dc.html" style="display:inline-flex;align-items:center;height:48px;padding:0 24px;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;text-decoration:none" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Werkstatt anmelden</a>
+    </div>
+  </section>
+
+  <dc-import name="NX-Footer" style="margin-top:auto" market="de-DE" lang="de" active="partnerWerden" hint-size="100%,880px"></dc-import>
+
+</div>
+
+</x-dc>
+</body>
+</html>

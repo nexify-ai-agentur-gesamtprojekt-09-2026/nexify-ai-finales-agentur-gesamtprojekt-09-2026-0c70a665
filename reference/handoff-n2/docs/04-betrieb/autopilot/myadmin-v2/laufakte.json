@@ -1,0 +1,282 @@
+{
+  "run_id": "2d046599-19d9-4d46-81ae-6d6f3ded61d3",
+  "case_identity": {
+    "case_id": "NX-MYADMIN-V2",
+    "project_id": "Shop-Design Gesamt-Konzept",
+    "subject_id": "myADMIN v2 + lib/rechenkern.js + lib/tagrouter.js",
+    "commission_id": "UNVERIFIED",
+    "evidence_cutoff": "2026-09-26T23:27:37.182Z",
+    "input_scope_hash": "sha256:7a49f8cb1e9f14a079b8ed69835b3ba149d40d69e5454da68d4534f7d11ad1ef"
+  },
+  "zustand": "PARTIAL_BLOCKED",
+  "modus": "PHASENEMULATION",
+  "quellen": [
+    {
+      "pfad": "myADMIN v2.dc.html",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:1794ccbb94ea6e218e762f7c857d0791d08d3b78efd5aacdcd0a4b6197915310",
+      "zeichen": 78378
+    },
+    {
+      "pfad": "lib/rechenkern.js",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:5229966e66458936ca9cf294d9a0fa5b87818a0f99b8210e8f5711998031688a",
+      "zeichen": 6881
+    },
+    {
+      "pfad": "lib/tagrouter.js",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:ad12260347f44a49a96612b7ea1861e3079488068c937335e7c58efd3b88733f",
+      "zeichen": 4811
+    },
+    {
+      "pfad": "docs/01-konzept/myadmin-gesamtplan.md",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:e3b580b540c3e6dd4c3d67f2eccb3453a7edda323238aa60ae3d6f650fcaf9a8",
+      "zeichen": 10573
+    },
+    {
+      "pfad": "docs/01-konzept/myadmin-umsetzungsplan.md",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:87f057611009d4dd05639678a87beae9f7cdcdd494b6f5fa90c979a4a63072e5",
+      "zeichen": 6455
+    },
+    {
+      "pfad": "docs/04-betrieb/go-live-abschlusstest-2026-09-27.md",
+      "status": "CURRENT_VERIFIED",
+      "sha256": "sha256:918c1c74b6b0079c6cf8fbb837f5c69c0d4e315c86f5b0aab542bcdbed73b3a6",
+      "zeichen": 7921
+    }
+  ],
+  "uebergaben": [
+    {
+      "contract_version": "1.0",
+      "run_id": "2d046599-19d9-4d46-81ae-6d6f3ded61d3",
+      "case_identity": {
+        "case_id": "NX-MYADMIN-V2",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "myADMIN v2 + lib/rechenkern.js + lib/tagrouter.js",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-26T23:27:37.182Z",
+        "input_scope_hash": "sha256:7a49f8cb1e9f14a079b8ed69835b3ba149d40d69e5454da68d4534f7d11ad1ef"
+      },
+      "producer": "agent1",
+      "artifact_type": "technical_report",
+      "artifact_path": "/docs/04-betrieb/autopilot/myadmin-v2/1-gutachten.md",
+      "artifact_sha256": "sha256:8839e0a7f45cff63afc6705bb9aa279297245cc6c506f5951bb2b24eb89cd7be",
+      "status": "PARTIAL",
+      "created_at": "2026-09-26T23:27:37.182Z",
+      "summary": "10 Befunde; Rechenlogik 30/30 bestanden, Oberfläche nach Korrektur visuell ungeprüft, kein Backend.",
+      "source_artifacts": [],
+      "evidence_refs": [
+        "myADMIN v2.dc.html",
+        "lib/rechenkern.js",
+        "lib/tagrouter.js",
+        "docs/01-konzept/myadmin-gesamtplan.md",
+        "docs/01-konzept/myadmin-umsetzungsplan.md",
+        "docs/04-betrieb/go-live-abschlusstest-2026-09-27.md"
+      ],
+      "finding_ids": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "B-05",
+        "B-06",
+        "B-07",
+        "B-08",
+        "B-09",
+        "B-10"
+      ],
+      "measure_ids": [],
+      "criterion_ids": [],
+      "open_gaps": [
+        "Vitest unter Node nicht ausgeführt"
+      ],
+      "limitations": [
+        "Phasenemulation",
+        "keine visuelle Prüfung nach letzter Änderung"
+      ],
+      "assumptions": [],
+      "blocking_items": []
+    },
+    {
+      "contract_version": "1.0",
+      "run_id": "2d046599-19d9-4d46-81ae-6d6f3ded61d3",
+      "case_identity": {
+        "case_id": "NX-MYADMIN-V2",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "myADMIN v2 + lib/rechenkern.js + lib/tagrouter.js",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-26T23:27:37.182Z",
+        "input_scope_hash": "sha256:7a49f8cb1e9f14a079b8ed69835b3ba149d40d69e5454da68d4534f7d11ad1ef"
+      },
+      "producer": "agent2",
+      "artifact_type": "implementation_plan",
+      "artifact_path": "/docs/04-betrieb/autopilot/myadmin-v2/2-umsetzungsplan.md",
+      "artifact_sha256": "sha256:ef522fb0c5935657b0704593e82f0fdf3aabf2f51c23a171bbcd3cb90a0aa36a",
+      "status": "PARTIAL",
+      "created_at": "2026-09-26T23:27:37.182Z",
+      "summary": "7 Maßnahmen, jede auf Befund rückgeführt; 2 blockiert durch Pascal-Entscheidungen.",
+      "source_artifacts": [
+        {
+          "producer": "agent1",
+          "artifact_type": "technical_report",
+          "sha256": "sha256:8839e0a7f45cff63afc6705bb9aa279297245cc6c506f5951bb2b24eb89cd7be"
+        }
+      ],
+      "evidence_refs": [],
+      "finding_ids": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "B-05",
+        "B-06",
+        "B-07",
+        "B-08",
+        "B-09",
+        "B-10"
+      ],
+      "measure_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07"
+      ],
+      "criterion_ids": [],
+      "open_gaps": [],
+      "limitations": [
+        "M-04, M-06 hängen an Pascal"
+      ],
+      "assumptions": [
+        "ROM-Aufwand M-03"
+      ],
+      "blocking_items": []
+    },
+    {
+      "contract_version": "1.0",
+      "run_id": "2d046599-19d9-4d46-81ae-6d6f3ded61d3",
+      "case_identity": {
+        "case_id": "NX-MYADMIN-V2",
+        "project_id": "Shop-Design Gesamt-Konzept",
+        "subject_id": "myADMIN v2 + lib/rechenkern.js + lib/tagrouter.js",
+        "commission_id": "UNVERIFIED",
+        "evidence_cutoff": "2026-09-26T23:27:37.182Z",
+        "input_scope_hash": "sha256:7a49f8cb1e9f14a079b8ed69835b3ba149d40d69e5454da68d4534f7d11ad1ef"
+      },
+      "producer": "agent3",
+      "artifact_type": "certification_readiness_report",
+      "artifact_path": "/docs/04-betrieb/autopilot/myadmin-v2/3-zertifizierungsreife.md",
+      "artifact_sha256": "sha256:7f0a88a9694b8c7166f1f01db23796e2a8fa8aee248f09fc8adfcb968da77433",
+      "status": "PARTIAL",
+      "created_at": "2026-09-26T23:27:37.182Z",
+      "summary": "NOT_READY: 2 Major (Vorschau, Backend), 1 Minor, 1 Beobachtung.",
+      "source_artifacts": [
+        {
+          "producer": "agent1",
+          "artifact_type": "technical_report",
+          "sha256": "sha256:8839e0a7f45cff63afc6705bb9aa279297245cc6c506f5951bb2b24eb89cd7be"
+        },
+        {
+          "producer": "agent2",
+          "artifact_type": "implementation_plan",
+          "sha256": "sha256:ef522fb0c5935657b0704593e82f0fdf3aabf2f51c23a171bbcd3cb90a0aa36a"
+        }
+      ],
+      "evidence_refs": [],
+      "finding_ids": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "B-05",
+        "B-06",
+        "B-07",
+        "B-08",
+        "B-09",
+        "B-10"
+      ],
+      "measure_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07"
+      ],
+      "criterion_ids": [
+        "G1",
+        "G2",
+        "G3a",
+        "G3b",
+        "G4",
+        "G5"
+      ],
+      "open_gaps": [],
+      "limitations": [
+        "keine unabhängige Prüfinstanz"
+      ],
+      "assumptions": [],
+      "blocking_items": [
+        "A-01",
+        "A-02"
+      ]
+    }
+  ],
+  "verlauf": [
+    {
+      "z": "NEW",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "DISCOVERY",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "AGENT1_RUNNING",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "AGENT1_VALIDATION",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "AGENT2_RUNNING",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "AGENT2_VALIDATION",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "AGENT3_RUNNING",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "AGENT3_VALIDATION",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "CROSSCHECK",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "FINALIZING",
+      "t": "2026-09-26T23:27:37.182Z"
+    },
+    {
+      "z": "PARTIAL_BLOCKED",
+      "t": "2026-09-26T23:27:37.182Z"
+    }
+  ],
+  "gegenpruefung": {
+    "verwaiste_befunde": [],
+    "hashes_konsistent": true
+  },
+  "naechster_schritt": "M-01: alle Bereiche von myADMIN v2 ansehen und bestätigen; danach M-06 Entscheidungen."
+}

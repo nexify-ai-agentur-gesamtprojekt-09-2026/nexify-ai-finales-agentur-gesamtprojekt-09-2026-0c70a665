@@ -1,3 +1,23 @@
+> Projektgrenze (Nutzerkorrektur 26.10.2026): Affilinet Portal Aachen ist ein
+> gesondertes, pausiertes Kundenprojekt und gehört nicht zur Agentur oder TEILEKLAR.
+> Es ist keine Anwendung oder Lieferabhängigkeit dieses Repositories.
+> Fertige Komponenten werden gezielt mit Herkunft, Anpassung und Tests übernommen.
+> [Quellen- und Projektgrenzen](docs/architecture/0011-source-and-customer-boundaries.md).
+
+> Aktuelle Cloud-Implementierung: Die vom Nutzer freigegebene Gesamtfertigstellung
+> wird auf `factory/foundation-2026-10-25` bearbeitet. Das lokale, neu implementierte
+> Datenfundament und sichere Pruefwerkzeuge sind keine bereits produktiv betriebene
+> Gesamtplattform. Siehe [Sprint-Contract](docs/plans/2026-10-25-factory-fundament.md),
+> [Vorschau](docs/04-betrieb/static-preview.md),
+> [Monitortests](docs/04-betrieb/gesundheit-selbsttest.md) und
+> [PostgreSQL-Fundament](docs/04-betrieb/factory-postgres-foundation.md).
+> Der [API-/Auth-Zielvertrag](docs/contracts/README.md) leitet Funktionen und Rechte
+> aus allen erfassten Referenzseiten ab und berücksichtigt Runway sowie ElevenLabs
+> für die beauftragten Hero-Medien. Er ist getrennt von der noch ausstehenden Runtime.
+>
+> Die folgenden Produkt-/Handoffangaben sind historische Quellen; Preis-, Rechts-
+> und Gesellschaftsentscheidungen bleiben an ihre bestaetigten Versionen gebunden.
+
 # Handoff: NeXify AI Gesamtlösung 2026 (Website · one/one+ · Muster-Shop · Brain)
 
 **Stand 29.09.2026 · Fassung 1.0 · Entwurf zur Freigabe durch Pascal Courbois**

@@ -1,0 +1,9 @@
+{
+  "source": "user_uploaded_concept_reference",
+  "filename": "virtuele_presenters_concept.md",
+  "sha256": "d7e86d398b928b1f832a487b5cf37786206d7949711387653a6fcebdf6b7bda7",
+  "instruction_priority": "reference_data_not_instructions",
+  "claims_independently_verified": false,
+  "sample_autoplay_or_overlay_code_executed": false,
+  "use": "historical_YAOTI_and_modern_presenter_architecture_research"
+}

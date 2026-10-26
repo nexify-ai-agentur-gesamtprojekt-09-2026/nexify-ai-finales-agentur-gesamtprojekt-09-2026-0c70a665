@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "buildCommand": null,
-  "installCommand": null,
-  "outputDirectory": "prototypen",
+  "framework": "vite",
+  "buildCommand": "pnpm --filter @nexify/site build",
+  "installCommand": "pnpm install --frozen-lockfile --ignore-scripts",
+  "outputDirectory": "apps/site/dist",
   "headers": [
     {
       "source": "/(.*)",
@@ -21,6 +21,12 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)).*)",
+      "destination": "/index.html"
     }
   ]
 }

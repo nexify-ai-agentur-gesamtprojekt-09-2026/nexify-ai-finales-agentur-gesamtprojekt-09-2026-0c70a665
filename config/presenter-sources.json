@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "policy": "exact_reviewed_source_paths_and_bytes; intentional source changes require reviewed inventory refresh",
+  "sources": [
+    {
+      "path": "config/brain/knowledge.json",
+      "sha256": "810f3a9b8b2bda6b32025687c8af1a58ce1b63f889754b097c2149cb01eff4fd"
+    },
+    {
+      "path": "config/regelwerk.json",
+      "sha256": "df83cd819c89726ad98e5a1e7f010ec0d0547517e2a728ab70782bc5328dc851"
+    },
+    {
+      "path": "config/site-map.json",
+      "sha256": "ee64bdac0336c3af5820529a90966c3f8bfd79d89ffeb1f7e55d7f6b0b3812a3"
+    },
+    {
+      "path": "docs/01-konzept/gesamtprojektplan.md",
+      "sha256": "871f6762ccf82de558d09f0b863a55ba8f621a2b2f2eed8b84d277704c4c2d9b"
+    },
+    {
+      "path": "docs/01-konzept/nexifyai-organisationshandbuch.md",
+      "sha256": "e50b8762c3b66aa5b919934d24af44ecabdf0f1936caa2f3f6fa88392f3c1a75"
+    },
+    {
+      "path": "docs/09-final/01-produkt-und-marke.md",
+      "sha256": "d968e03fbce08660758d0833318054d4f8a9255c82686143eabb67fe81a16523"
+    },
+    {
+      "path": "docs/09-final/02-informationsarchitektur-und-journeys.md",
+      "sha256": "2baeb53192a6f98ace40e3fdd72a0625186ad672c02573414a628d4c0b9c5dcb"
+    },
+    {
+      "path": "docs/09-final/05-technische-spezifikation.md",
+      "sha256": "4622859aee95179ee8cef6d0315148b8b062fe7f1939538e16c0eba4baa69c9d"
+    },
+    {
+      "path": "docs/09-final/08-recht-und-compliance.md",
+      "sha256": "afab718386c05dd587e67e5e0caf5a4f403b894aa4166ffb26740181bcec2254"
+    },
+    {
+      "path": "docs/09-final/14-gesamtsystem-und-portale.md",
+      "sha256": "1876597700cf1ac38ce9f69c37a524a327f978104214c95b8255be86cd7f8aa4"
+    },
+    {
+      "path": "docs/deployment/clerk-setup.md",
+      "sha256": "51c09928ea82dd5ba7217d1e0e8d48efa604491da40ca29c1cdfda19e195c7a1"
+    }
+  ]
+}

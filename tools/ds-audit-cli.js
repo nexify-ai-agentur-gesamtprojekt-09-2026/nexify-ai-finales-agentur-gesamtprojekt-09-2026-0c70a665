@@ -1,7 +1,8 @@
 // NeXify Designsystem 2.0 – Kommandozeilen-Prüfung (Node ≥ 18). Aufruf im Projektstamm:  node tools/ds-audit-cli.js
 // Liest alle *.dc.html, wendet config/design-rules.json an und meldet Abweichungen. Exit-Code 1 bei Fehlern (CI-tauglich).
-const fs = require('fs'), path = require('path');
-const { auditDateien, paritaet } = require('./ds-audit.js');
+import fs from 'node:fs';
+import path from 'node:path';
+import { auditDateien, paritaet } from './ds-audit.js';
 const root = process.cwd();
 const rules = JSON.parse(fs.readFileSync(path.join(root, 'config/design-rules.json'), 'utf8'));
 const R = { farbe: { bildschirm: rules.farbe.bildschirm, abgeleitet: rules.farbe.abgeleitet, veraltet: Object.keys(rules.farbe.veraltet_migrieren).concat(['#191C1F']), papier: rules.farbe.papier }, radius: { erlaubt: rules.radius.erlaubt_px.map(x => x + 'px') } };
