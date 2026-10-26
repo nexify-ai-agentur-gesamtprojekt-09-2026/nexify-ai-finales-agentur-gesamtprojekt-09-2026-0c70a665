@@ -6,7 +6,7 @@
   "publishable_key_mode": "live",
   "frontend_api_host_from_key": "clerk.nexifyai.de",
   "production_web_origin": "https://nexifyai.cloud",
-  "hosting_project": null,
+  "hosting_project": "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
   "hosting_provider": "vercel",
   "required_server_secret": {
     "name": "CLERK_SECRET_KEY",
@@ -110,5 +110,7 @@
     "spki_der_sha256": "684d4cf51e2d47b75abf4f2f97f7ec58c7333beb597f97ced56913f035faaed8"
   },
   "previous_next_implementation": "apps/web",
-  "frontend_auth_migration_status": "react_preview_no_login_widget_next_clerk_reference_retained"
+  "frontend_auth_migration_status": "react_preview_no_login_widget_next_clerk_reference_retained",
+  "hosting_project_source": "GitHub Vercel deployment status link",
+  "hosting_project_settings_verified": false
 }

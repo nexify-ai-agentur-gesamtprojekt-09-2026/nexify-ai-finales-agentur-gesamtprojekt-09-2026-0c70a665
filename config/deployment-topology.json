@@ -5,7 +5,16 @@
     "provider": "vercel",
     "domain": "nexifyai.cloud",
     "preview_domain": "nexifyai.de",
-    "live_deployment_verified": false
+    "live_deployment_verified": false,
+    "project_name": "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+    "team_slug": "pascals-projects-2864de33",
+    "project_identification_source": "GitHub Vercel commit status deployment link, not authenticated settings read",
+    "last_observed_git_deployment": "blocked",
+    "last_observed_git_deployment_url": "https://vercel.com/pascals-projects-2864de33/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/BeJo6LWJpEmoWR4MfQip1WaPoQJD",
+    "remote_settings_access_verified": false,
+    "confirmed_block_reason_from_user": "NeXify-Automate has no Vercel account linked to GitHub",
+    "github_author_email_for_future_commits": "mail@nexifyai.cloud",
+    "github_author_email_source": "explicit_user_correction_repository_local_no_history_rewrite"
   },
   "backup": {
     "requested_surface": "existing_chatgpt_site",
