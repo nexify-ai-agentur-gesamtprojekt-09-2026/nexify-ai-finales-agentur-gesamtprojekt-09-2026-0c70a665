@@ -1,3 +1,25 @@
+# Aktueller Integrationsauftrag · 26.10.2026
+
+F-007 ist aktiv: kanonisches gemeinsames Repository, Next.js/TypeScript-Webshell mit nativer AIFly-Seitenleiste, vollständige DE-/TEILEKLAR-Seitenarchitektur, isolierte REA-Instanz, Small-Business-Bibliothek und GitHub/GitLab-Automatisierung. Der nächste lokale Zwischencommit sichert die geprüfte Implementierung vor dem herkunftsgebundenen Import der anderen beiden Quellstände. Keine Main-/Produktivfreigabe und noch kein gesamthaft fertiges Unternehmen.
+
+- Offizieller OpenRouter-Katalog bestätigt `deepseek/deepseek-v4.1-flash-1017`, reasoning high. Adapter erzwingt Modell-/SHA-/Schema-/Budgetbindung; kein Paidcall ohne echte Credentialbindung, keine Ausführung von Modelltext. Legacy-Merge-vor-Review-CLIs sind hart stillgelegt.
+- Zusätzliche REA6.8.0-Installation unter `.onboarding/rea-mcp`, gewünschter Alias `rea-mcp`:229Tools/6Prompts erfasst. Eigener Rechenkern statisch analysiert und buche-Trace/Evidence-Readback geprüft. Hostregistrierung und VPS-Verbindung getrennt behandeln.
+- Small Business offiziell gepinnt installiert:44Skills/35deklarierteMCPRegistrierungen/216Hashdateien. Lesender Loader und nativeFunktionsmatrix, kein Cowork-/Connector-/Scheduler-Go.
+- Neue IA:44Routen,34öffentlich/10geschützt; NeXify/TEILEKLAR/Portale/Intern getrennt, Deutschland90Prozent als Ziel. NextBuild mit dieser IA bestanden; abschließender neuer Browserlauf nach Import noch ausstehend.
+- Native Besucherverläufe lokal echt geprüft:PDFdraft, idempotente Outbox `pending_provider`, lokale Terminanfrage, Marketingstrukturvorlage. Kein behaupteter Versand, Livekalender oder freier Modellchat.16HTTP-/Storagegegenproben; frühereBrowserprobe mit15altenReferenzrouten ist kein aktueller34Routenbeleg.
+- Aktuelle erforderliche Checkpointprüfung `make check && make test && make clean-check` grün; formale neueGitHubWorkflows mit gepinntemActionlint1.7.7 geprüft. A1-CI getrennt mit76Backendtests/0Skips+4DOM/CIbuild lokal verifiziert und als Importquelle gesichert.
+
+## Next Steps
+
+1. Portalquelle inklusive Historie nach `apps/portal`, zweitenHandoff nach `reference/handoff-n2` übernehmen; Originalrepos und vollständigeBundles bewahren. Quellenverträge auf Monorepopfade umstellen und Herkunftsbelege prüfen.
+2. PNPMWorkspace frisch/frozen installieren und Next-Typecheck/Build + abschließendeBrowserjourneys über34öffentlicheRouten ausführen.
+3. LokaleGitLab-CI-Containerausführung, AI-/MCP-/Mirror-/Legacy-/Skillgegenproben und formalesWorkflowlint abschließen. Jeff-/Produktivgates erhalten, konkreteRemoteGitHubrechte prüfen.
+4. GetrennteBackend-/UI-/Integrationsgegenprüfung abschließen. ExterneProvider, VPS/Composio/Paperclip/Brain/Runway/ElevenLabs-Verbindungen erst nach echtemProtokoll- und Readbacknachweis als verbunden melden.
+
+---
+
+## Vorheriger API/Auth-Checkpoint
+
 # Aktueller Vertragsschnitt · 26.10.2026
 
 - Nutzerentscheidung: API/Auth aus den vollständigen Repository-Prototypen und Seitenbestimmungen ableiten; die frühere Suite-Quellenrückfrage ist erledigt.

@@ -5,6 +5,22 @@ Stand 2026-09-29 · Fassung 1.0 · Freigabe der Entscheidungen E1/E3/E4/E5/E6/E1
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 
+## Aktueller Gesamtauftrag und kanonische Quelle · 26.10.2026
+
+Der Nutzer bestimmt `nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` als gemeinsames Repository des Gesamtsystems. Neue Anwendungen, Regeln, Integrationsverträge, REA-Anbindung und Small-Business-Zuordnungen hier führen. Bestehende Quellstände und Herkunft bei der Konsolidierung bewahren; weder Force-Push noch Löschung der Ausgangsrepositories. GitHub ist die kanonische Quelle; eine bestätigte lokale GitLab-Anbindung ist nachgelagerte CI/Spiegelung mit Fast-forward, keine zweite Schreibquelle. Historische Mirror-/Watcher-/Factory-Skripte nicht ungeprüft starten.
+
+Zielaufbau: Next.js/TypeScript für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; bestehendes Portal mit FastAPI/React in eigenem Anwendungskontext erhalten. Die Seitenarchitektur umfasst auch TEILEKLAR, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
+
+Der Nutzer hat Implementierung und Erstellung fehlender Hero-Clips beauftragt. Diese allgemeine Freigabe nicht erneut verlangen. Konkrete Zahlungs-/Versand-/Produktiv-/Rechtsvoraussetzungen bleiben an die einzelne Aktion gebunden. Der getypte API/Auth-Zielvertrag ist kein Nachweis bereits laufender SSO-/Provider-/Produktivfunktionen. Aktuelle Umsetzungsstände und Grenzen: `PROGRESS.md`, `docs/contracts/`, `docs/automation/` und die Architekturentscheidungen.
+
+## Wiederverwendbare Small-Business- und REA-Vorgaben
+
+Bei jeder Aufgabe die Small-Business-Zuordnung prüfen. Für passende Unternehmens-, Vertriebs-, Marketing-, Finanz-, Personal- oder wiederkehrende Automationsarbeit zuerst `python3 tools/automation/small_business.py verify` und anschließend `load smb-router --references` sowie `load <passender-skill> --references` verwenden. Quelle und Nutzungshinweise: `docs/automation/small-business.md`; gepinnte Metadaten: `config/integrations/small-business.json`. Vorhandene Projekt-/Auftragsangaben verwenden; keine unnötige erneute Onboarding- oder allgemeine Freigabefrage. Original-Gates an konkrete folgenreiche Aktionen binden. Installation bedeutet weder Connectoranmeldung noch Scheduler, Brain-Ingestion oder Runtimefreigabe. Keine fremden Beispieldaten als bestätigte B.V.-Fakten übernehmen. Das eigene Designsystem hat Vorrang vor der visuellen Beispielpalette fremder Workflow-Anleitungen.
+
+REA zusätzlich unter dem Namen `rea-mcp` führen; Wrapper und Installation siehe `config/integrations/rea-mcp.json` und `docs/automation/rea-mcp.md`. Katalog/Annotationen sind Hinweise, keine Rechte. Nur autorisierte Quell-/Zielbereiche analysieren; statische Analyse nicht als Laufzeitbeleg ausgeben. Tool-/Schema-/Evidenzbindung und exaktes Read-back prüfen. Die bestehende VPS-Instanz wird durch die zusätzliche lokale Instanz nicht verändert.
+
+Für CI-Reviews ist das öffentlich verifizierte OpenRouter-Modell `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` vorgesehen. Kein stiller Modellfallback, kein Ausführen von Modelltext/Patches, keine Lockerung der Main-/Jeff-/Produktivgates. `config/automation.json` und `docs/automation/ai-review.md` enthalten die technischen Grenzen. Besucherausgaben zeigen nur tatsächlich erreichte Zustände: Angebotsentwurf, PDF erzeugt, Versand wartet, Termin angefragt, extern bestätigt, Marketingentwurf oder veröffentlicht dürfen nicht vermischt werden.
+
 ## Lesereihenfolge
 1. `docs/09-final/00-INDEX.md` → `01` Produkt → `11` Designsystem-Definition → `03`/`04` Design und Frontend → `05` Technik → `14` Gesamtsystem/Portale → `06` Brain → `08` Recht → `15` Umsetzungsplan.
 2. `config/design-tokens.json` (Werte), `config/design-rules.json` (Regeln), `config/fakten.json` und `config/api-prepaid.json` (Zahlen), `config/brain/*.json` (Agenten, Tools, Pipeline, Wissen).

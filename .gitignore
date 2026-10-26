@@ -18,3 +18,18 @@ Thumbs.db
 # Lokale Harness-Ausfuehrungsspuren und kooperativer Verifikationslock
 .harness/traces/
 .harness/feature-verification.lock
+
+.gitlab-ci-local/
+
+.next/
+
+apps/web/node_modules/
+
+apps/web/.next/
+
+apps/web/tsconfig.tsbuildinfo
+
+# Monorepo local state and secrets
+.local/
+.env*
+!.env.example

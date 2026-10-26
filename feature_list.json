@@ -122,6 +122,30 @@
         }
       ],
       "verified_at": "2026-10-26T06:37:03.972Z"
+    },
+    {
+      "id": "F-007",
+      "behavior": "CI-/AI- und MCP-Automatisierung erzwingt gepruefte Credential-/Commitgrenzen, isolierte Tests und geschlossene Legacy-Mergepfade.",
+      "verification": "make automation-check",
+      "state": "active",
+      "evidence": "In Umsetzung; Remote-/Provideraktivierung wird separat nachgewiesen.",
+      "layers": [
+        {
+          "label": "Layer 1 (Statik)",
+          "cmd": "make check",
+          "repair": "Audit/Monitorkern korrigieren."
+        },
+        {
+          "label": "Layer 2 (Automationsgrenzen)",
+          "cmd": "make automation-check",
+          "repair": "Automations-/MCP-/Legacygegenproben korrigieren; keineGateumgehung."
+        },
+        {
+          "label": "Layer 3 (Integration)",
+          "cmd": "make e2e && make check-arch",
+          "repair": "Repositoryintegration korrigieren."
+        }
+      ]
     }
   ]
 }

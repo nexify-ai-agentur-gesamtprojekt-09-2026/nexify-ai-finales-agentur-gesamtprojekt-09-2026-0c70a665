@@ -16,7 +16,7 @@ if [[ "$act" -gt 1 ]]; then echo "clean-state: FAIL mehr als ein aktives Feature
 grep -qiE "next step" PROGRESS.md || { echo "clean-state: FAIL PROGRESS.md ohne Next Steps"; fail=1; }
 # 5) keine Debug-/Temp-Artefakte
 while IFS= read -r f; do [[ -z "$f" ]] && continue; echo "clean-state: unsauber: $f"; fail=1; done < <(
-  find . -path ./.git -prune -o -path ./node_modules -prune -o -type f \( -name '*-tmp.*' -o -name '*.bak' -o -name '*.orig' -o -name '.DS_Store' \) -print 2>/dev/null | sed 's|^\./||'
+  find . -type d \( -name .git -o -name node_modules -o -name .next -o -name __pycache__ \) -prune -o -type f \( -name '*-tmp.*' -o -name '*.bak' -o -name '*.orig' -o -name '.DS_Store' \) -print 2>/dev/null | sed 's|^\./||'
 )
 [[ $fail -eq 0 ]] && echo "clean-state: OK — alle 5 Dimensionen gruen"
 exit $fail

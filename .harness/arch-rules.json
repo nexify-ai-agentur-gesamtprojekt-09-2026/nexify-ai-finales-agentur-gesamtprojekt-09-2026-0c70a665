@@ -45,6 +45,15 @@
       "what": "Negativpruefungen des API/Auth-Vertrags schlagen fehl.",
       "why": "Selbstdeklarierte Abdeckung oder ein gueltiges OpenAPI-Schema allein belegt keine sichere Rollen-/Quellenbindung.",
       "fix": "Vertragsvalidator und Gegenproben korrigieren, keine Zugriffsgrenzen oder Quellenpruefung abschalten."
+    },
+    {
+      "id": "ARCH-006",
+      "description": "Automationsgrenzen bleiben geschlossen: Credentials, Deadlines, Model-/SHA-/Kostenbindung, MCP und verlustfreie Mirror.",
+      "check": "python3 -m unittest discover -s tests -p 'test_automation_*.py' -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Automations-Negativprobe scheitert.",
+      "why": "Prompt/Toolannotation oder Erfolgslabel ersetzt keine nachgewiesene Berechtigung und Commitbindung.",
+      "fix": "Modell-/Credential-/Deadline-/Protokollgrenze korrigieren statt Gates oder Gegenproben abzuschalten."
     }
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "rea-mcp": {
+      "command": "/usr/bin/python3",
+      "args": [
+        "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/automation/rea_stdio_probe.py",
+        "--serve"
+      ]
+    }
+  }
+}
