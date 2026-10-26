@@ -1,3 +1,52 @@
+# Rekonstruktion nach verworfener Vorschau · 26.10.2026
+
+Aktiver Zweig: `factory/source-faithful-rebuild-2026-10-26`. Der vorherige
+Oberflächenstand ist ausdrücklich vom Nutzer verworfen; historische grüne
+Technikprüfungen weiter unten sind keine Designabnahme. Archivzweig und Bundle
+bewahren ihn. Änderungen von `origin/main` bis 07833fb sind integriert.
+
+Die neuere Nutzergrafik ist eine Gestaltungsreferenz ohne vorhandenen Codeexport.
+Neue React-Startseite mit offener Bühne, transparentem Figurenentwurf und
+redaktionellen Folgeabschnitten gebaut. Große leere Videokästen entfernt;
+Erklärtexte, Folgeaktionen und Rundgänge erhalten. Agentenwege sind offline
+anschaubar; Schreibaktionen bleiben an den lokalen Gatewaystatus gebunden.
+Keine vorgetäuschten Versand-/Kalender-/CRM-/Modellzustände.
+
+Neue Unterlagen: Quellenrekonstruktion (93 Original-/Referenz-HTML-Dateien plus
+1 verworfener Implementierungseintrag), Standards-Anforderungsmatrix,
+Gesamtbetriebsmodell und Selfservice-Policy. Das Betriebsmodell ordnet
+12 Abteilungen und 15 Workflowketten zu; es behauptet keinen laufenden
+24/7-Agentenbetrieb. Siehe `docs/operating-model/NEXIFY-GESAMTSYSTEM.md`.
+
+Öffentliche Registrierung als Produktregel korrigiert: 24h Suite, BYOK oder
+bestätigtes 500-Cent-Testguthaben, keine geschenkten LLM-Credits und
+bestandserhaltende Konvertierung. Reguläres Prepaid-Minimum unverändert.
+Privater SQLite-Domainkern mit 13 gezielten Tests; unabhängige Prüfung fand
+zwei Fehler, beide behoben und erneut geprüft. Echte Clerk-/Vault-/Payment-/
+Provideradapter und serverberechnete Payload-/Kostenbindung bleiben offen.
+Kein produktiver Login, keine Zahlung und kein kostenpflichtiger Modellaufruf.
+
+Die .de ist weiterhin dem vorherigen Entwicklungszweig zugeordnet; keine
+neue Designabnahme oder Domainumstellung erfolgt. .cloud unverändert.
+Affilinet Portal Aachen bleibt unangetastetes, separates Kundenprojekt.
+
+Prüf- und Abnahmekriterien: `docs/design/rebuild-acceptance.md`;
+unabhängiges Review: `docs/quality/rebuild-independent-review.md`.
+F007 und bestehende Main-/Releasegates bleiben unverändert.
+
+Aktuelle Nutzerpriorität: erst Gesamtsystem fertigstellen; Marketing/Mailings und
+alle eigenen Social-Kanäle danach aktivieren. Vollständige SEO-Basis bleibt offen;
+GEO erst auf geprüfter SEO-Basis und laufender Vermarktung. Als geordneter Backlog
+in `config/operating-model.json` erfasst, keine aktuelle Kampagnenaktivierung.
+
+Geprüft: 146 Pythonfälle, 16 Site-Contracts, Site-Build/Standalone, Next-Typecheck,
+make check/test/e2e/check-arch/clean-check. Lokaler Browser: 35 öffentliche Routen,
+47 erhaltene Erklärmodule, 10 private Ansichten gesperrt, PDF/Outboxpending/
+Marketingvorlage, DE/NL/FR, mobile Dialogführung und Offlinevorschau.
+Keine gestalterische Nutzerabnahme oder Produktiv-/DIN-/ISO-Zertifizierung.
+
+---
+
 # Live-Vorschau bestätigt · 26.10.2026
 
 https://nexifyai.de ist als Alias des READY-Previewdeployments

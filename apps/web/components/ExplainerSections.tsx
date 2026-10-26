@@ -3,6 +3,7 @@
 import type { Localized, PublicPage } from "../lib/page-types";
 import { SiteLink } from "./Router";
 import { useUI } from "./Workspace";
+import "./PresenterEditorial.css";
 
 export type ExplainerModule = {
   id: string;
@@ -22,9 +23,9 @@ export type ExplainerModule = {
 
 const speakers = { pascal: "Pascal", nex: "NeX", aifly: "AIFly" } as const;
 const labels = {
-  de: { pending: "Videobeitrag in Vorbereitung", ai: "KI-Assistent", outcome: "Ihr nächster Schritt", captions: "Deutsch", collection: "So geht es weiter" },
-  nl: { pending: "Videobijdrage in voorbereiding", ai: "AI-assistent", outcome: "Uw volgende stap", captions: "Nederlands", collection: "Zo gaat u verder" },
-  fr: { pending: "Présentation vidéo en préparation", ai: "Assistant IA", outcome: "Votre prochaine étape", captions: "Français", collection: "La suite de votre parcours" }
+  de: { ai: "KI-Assistent", outcome: "Ihr nächster Schritt", captions: "Deutsch", collection: "So geht es weiter" },
+  nl: { ai: "AI-assistent", outcome: "Uw volgende stap", captions: "Nederlands", collection: "Zo gaat u verder" },
+  fr: { ai: "Assistant IA", outcome: "Votre prochaine étape", captions: "Français", collection: "La suite de votre parcours" }
 };
 
 function ownedMediaPath(value: unknown, extension: "video" | "captions"): value is string {
@@ -39,7 +40,7 @@ function ownedMediaPath(value: unknown, extension: "video" | "captions"): value 
 export default function ExplainerSections({ modules, pages }: { modules: ExplainerModule[]; pages: PublicPage[] }) {
   const { locale } = useUI();
   const text = labels[locale];
-  return <div className="explainer-sections" role="group" aria-label={text.collection}>
+  return <div className="editorial-explainers" role="group" aria-label={text.collection}>
     {modules.map(module => {
       if (!Object.hasOwn(speakers, module.speaker)) return null;
       const speaker = speakers[module.speaker];
@@ -47,24 +48,22 @@ export default function ExplainerSections({ modules, pages }: { modules: Explain
       const playable = module.media.status === "published" && ownedMediaPath(module.media.src, "video") && ownedMediaPath(caption, "captions");
       const next = pages.find(page => page.id === module.next_action.target_id);
       const side = module.media_side === "right" ? "right" : "left";
-      return <section className={`explainer-row media-${side}`} key={module.id}>
-        <div className="explainer-media">
-          {playable ? <figure>
+      return <section className={`editorial-module${playable ? ` has-video media-on-${side}` : ""}`} key={module.id}>
+        {playable && <div className="editorial-module-media">
+          <figure>
             <video controls preload="none" playsInline aria-label={`${speaker}: ${module.title[locale]}`}>
               <source src={module.media.src!} type={module.media.src!.endsWith(".webm") ? "video/webm" : "video/mp4"} />
               <track kind="captions" src={caption!} srcLang={locale} label={text.captions} default />
             </video>
             <figcaption>{speaker}{module.speaker !== "pascal" ? ` · ${text.ai}` : ""}</figcaption>
-          </figure> : <div className="explainer-speaker-card">
-            <span className="eyebrow">{speaker}{module.speaker !== "pascal" ? ` · ${text.ai}` : ""}</span>
-            <p className="explainer-media-status">{text.pending}</p>
-          </div>}
-        </div>
-        <div className="explainer-copy">
+          </figure>
+        </div>}
+        <div className="editorial-module-copy">
+          <span className="editorial-speaker">{speaker}{module.speaker !== "pascal" ? ` · ${text.ai}` : ""}</span>
           <h2>{module.title[locale]}</h2>
           <p>{module.body[locale]}</p>
-          <p className="explainer-outcome"><strong>{text.outcome}: </strong>{module.outcome[locale]}</p>
-          {next && module.next_action.type === "route" ? <SiteLink className="outline-button route-action" href={next.path}>{module.next_action.label[locale]} <span aria-hidden="true">→</span></SiteLink> : null}
+          <p className="editorial-module-outcome"><strong>{text.outcome}: </strong>{module.outcome[locale]}</p>
+          {next && module.next_action.type === "route" ? <SiteLink className="editorial-next-step" href={next.path}>{module.next_action.label[locale]} <span aria-hidden="true">→</span></SiteLink> : null}
         </div>
       </section>;
     })}

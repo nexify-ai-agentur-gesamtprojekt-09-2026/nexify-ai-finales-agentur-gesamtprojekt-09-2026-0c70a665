@@ -338,28 +338,28 @@
       "id": "home",
       "path": "/",
       "title": {
-        "de": "Digitale Lösungen für Ihr Unternehmen",
-        "nl": "Digitale oplossingen voor uw bedrijf",
-        "fr": "Des solutions numériques pour votre entreprise"
+        "de": "Digitale Lösungen für dein Unternehmen",
+        "nl": "Digitale oplossingen voor je bedrijf",
+        "fr": "Des solutions numériques pour ton entreprise"
       },
       "summary": {
-        "de": "Klären Sie zuerst Ihren Bedarf. Danach wählen Sie Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
-        "nl": "Verhelder eerst uw behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
-        "fr": "Précisez d’abord votre besoin. Choisissez ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
+        "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+        "nl": "Verhelder eerst je behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+        "fr": "Précise d’abord ton besoin. Choisis ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Digitale Lösungen für Ihr Unternehmen",
-            "nl": "Digitale oplossingen voor uw bedrijf",
-            "fr": "Des solutions numériques pour votre entreprise"
+            "de": "Digitale Lösungen für dein Unternehmen",
+            "nl": "Digitale oplossingen voor je bedrijf",
+            "fr": "Des solutions numériques pour ton entreprise"
           },
           "body": {
-            "de": "Klären Sie zuerst Ihren Bedarf. Danach wählen Sie Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
-            "nl": "Verhelder eerst uw behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
-            "fr": "Précisez d’abord votre besoin. Choisissez ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
+            "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+            "nl": "Verhelder eerst je behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+            "fr": "Précise d’abord ton besoin. Choisis ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
           },
           "source_refs": [
             "docs/09-final/01-produkt-und-marke.md",
@@ -369,9 +369,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Klären Sie zuerst Ihren Bedarf. Danach wählen Sie Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
-          "nl": "Verhelder eerst uw behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
-          "fr": "Précisez d’abord votre besoin. Choisissez ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
+          "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+          "nl": "Verhelder eerst je behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+          "fr": "Précise d’abord ton besoin. Choisis ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
         },
         "canonical_path": "/",
         "canonical_origin": null,
@@ -2347,9 +2347,9 @@
         "fr": "Connexion"
       },
       "summary": {
-        "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
-        "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
-        "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
+        "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+        "nl": "Veilig aanmelden is voorzien voor de goedgekeurde productieconfiguratie; live-toegang is hier nog niet geverifieerd. Je klantaccount gebruikt alleen toegekende rechten binnen je eigen tenant. Opnieuw aanmelden start geen nieuwe proefperiode van 24 uur.",
+        "fr": "La connexion sécurisée est prévue avec la configuration de production validée ; l’accès en production n’est pas encore vérifié ici. Ton compte client utilise uniquement les droits autorisés dans son propre tenant. Une nouvelle connexion ne démarre pas un nouvel essai de 24 heures."
       },
       "site_context": "nexify",
       "sections": [
@@ -2361,21 +2361,38 @@
             "fr": "Connexion"
           },
           "body": {
-            "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
-            "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
-            "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
+            "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+            "nl": "Veilig aanmelden is voorzien voor de goedgekeurde productieconfiguratie; live-toegang is hier nog niet geverifieerd. Je klantaccount gebruikt alleen toegekende rechten binnen je eigen tenant. Opnieuw aanmelden start geen nieuwe proefperiode van 24 uur.",
+            "fr": "La connexion sécurisée est prévue avec la configuration de production validée ; l’accès en production n’est pas encore vérifié ici. Ton compte client utilise uniquement les droits autorisés dans son propre tenant. Une nouvelle connexion ne démarre pas un nouvel essai de 24 heures."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "konto-behalten",
+          "heading": {
+            "de": "Dein bestehendes Konto bleibt erhalten",
+            "nl": "Je bestaande account blijft behouden",
+            "fr": "Ton compte existant est conservé"
+          },
+          "body": {
+            "de": "Beim Wechsel von der Testphase zu einem ausdrücklich gewählten, freigegebenen kostenpflichtigen Suite-Tarif bleiben Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselreferenzen, Dokumente, Verlauf und Guthabenreferenzen erhalten. Es gibt keine automatische Umwandlung und keine automatische Abbuchung am Testende. Die Suite-Testphase enthält kein geschenktes LLM-Guthaben: LLM-Nutzung setzt validiertes BYOK oder das nach Betriebs- und Preisfreigabe angebotene einmalige 5-EUR-Testguthaben voraus.",
+            "nl": "Bij de overstap van de proefperiode naar een uitdrukkelijk gekozen, goedgekeurd betaald Suite-abonnement blijven account, tenant, werkruimte, instellingen, sleutelreferenties, documenten, geschiedenis en saldoreferenties behouden. Er is geen automatische omzetting of afschrijving aan het einde van de proefperiode. De Suite-proefperiode bevat geen gratis LLM-tegoed: LLM-gebruik vereist gevalideerd BYOK of het eenmalige proefsaldo van 5 EUR dat na operationele en prijsgoedkeuring wordt aangeboden.",
+            "fr": "Lors du passage de l’essai à un abonnement Suite payant explicitement choisi et validé, compte, tenant, espace de travail, paramètres, références des clés, documents, historique et références du solde sont conservés. Aucun passage automatique ni prélèvement automatique n’a lieu à la fin de l’essai. L’essai de la Suite n’offre aucun crédit LLM : l’utilisation des LLM exige une clé BYOK validée ou le crédit d’essai initial unique de 5 EUR proposé après validation opérationnelle et tarifaire."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
-          "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
-          "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
+          "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+          "nl": "Veilig aanmelden is voorzien voor de goedgekeurde productieconfiguratie; live-toegang is hier nog niet geverifieerd. Je klantaccount gebruikt alleen toegekende rechten binnen je eigen tenant. Opnieuw aanmelden start geen nieuwe proefperiode van 24 uur.",
+          "fr": "La connexion sécurisée est prévue avec la configuration de production validée ; l’accès en production n’est pas encore vérifié ici. Ton compte client utilise uniquement les droits autorisés dans son propre tenant. Une nouvelle connexion ne démarre pas un nouvel essai de 24 heures."
         },
         "canonical_path": "/anmelden",
         "canonical_origin": null,
@@ -2404,7 +2421,8 @@
       ],
       "source_refs": [
         "docs/09-final/05-technische-spezifikation.md",
-        "docs/09-final/14-gesamtsystem-und-portale.md"
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "config/selfservice-policy.json"
       ],
       "next_actions": [
         {
@@ -2447,9 +2465,9 @@
         "fr": "Créer un compte"
       },
       "summary": {
-        "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
-        "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
-        "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+        "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+        "nl": "Openbare klantregistratie is voorzien. Na bevestiging van je e-mailadres en activering van je klantwerkruimte kun je de gratis Suite-proefperiode van 24 uur starten. LLM-gebruik wordt apart gefinancierd. Live-registratie is hier nog niet geverifieerd.",
+        "fr": "L’inscription publique des clients est prévue. Après vérification de ton e-mail et activation de ton espace client, tu pourras démarrer les 24 heures d’essai gratuit de la Suite. L’utilisation des LLM est financée séparément. L’inscription en production n’est pas encore vérifiée ici."
       },
       "site_context": "nexify",
       "sections": [
@@ -2461,22 +2479,71 @@
             "fr": "Créer un compte"
           },
           "body": {
-            "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
-            "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
-            "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+            "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+            "nl": "Openbare klantregistratie is voorzien. Na bevestiging van je e-mailadres en activering van je klantwerkruimte kun je de gratis Suite-proefperiode van 24 uur starten. LLM-gebruik wordt apart gefinancierd. Live-registratie is hier nog niet geverifieerd.",
+            "fr": "L’inscription publique des clients est prévue. Après vérification de ton e-mail et activation de ton espace client, tu pourras démarrer les 24 heures d’essai gratuit de la Suite. L’utilisation des LLM est financée séparément. L’inscription en production n’est pas encore vérifiée ici."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
-            "docs/deployment/clerk-setup.md"
+            "docs/deployment/clerk-setup.md",
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "testphase-start",
+          "heading": {
+            "de": "So beginnt deine Testphase",
+            "nl": "Zo begint je proefperiode",
+            "fr": "Comment démarre ton essai"
+          },
+          "body": {
+            "de": "Nach E-Mail-Bestätigung und Aktivierung startest du die Testphase ausdrücklich. Ab diesem Zeitpunkt laufen einmalig 24 Stunden nach Serverzeit. Eine erneute Anmeldung verlängert sie nicht. Dein Kundenkonto erhält ausschließlich Rechte in deinem eigenen Mandanten; interne Verwaltungsrechte sind ausgeschlossen.",
+            "nl": "Na e-mailbevestiging en activering start je de proefperiode uitdrukkelijk. Vanaf dat moment lopen eenmalig 24 uur volgens de serverklok. Opnieuw aanmelden verlengt deze niet. Je klantaccount krijgt alleen rechten binnen je eigen tenant, geen interne beheerrechten.",
+            "fr": "Après vérification de l’e-mail et activation, tu démarres explicitement l’essai. Les 24 heures commencent alors une seule fois selon l’horloge du serveur. Une nouvelle connexion ne les prolonge pas. Ton compte client reçoit uniquement des droits dans son propre tenant, sans droits d’administration interne."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "llm-finanzierung",
+          "heading": {
+            "de": "LLM-Nutzung: eigener Schlüssel oder Testguthaben",
+            "nl": "LLM-gebruik: eigen sleutel of proefsaldo",
+            "fr": "LLM : ta propre clé ou un crédit d’essai"
+          },
+          "body": {
+            "de": "Die kostenlose Suite-Testphase enthält kein geschenktes LLM-Guthaben. Du nutzt entweder deinen eigenen Anbieterschlüssel (BYOK) auf eigene Anbieterrechnung oder einmalig 5 EUR (500 Cent) bezahltes Testguthaben für unsere verwaltete Route. Die verwaltete Route und die Anbieterauswahl werden erst bei Verfügbarkeit freigegeben. In dieser Vorschau ist die LLM-Nutzung noch nicht aktiviert.",
+            "nl": "De gratis Suite-proefperiode bevat geen gratis LLM-tegoed. Je gebruikt je eigen providersleutel (BYOK), voor rekening van je eigen provideraccount, of eenmalig 5 EUR (500 cent) betaald proefsaldo voor onze beheerde route. De beheerde route en de providerkeuze worden pas vrijgegeven zodra ze beschikbaar zijn. In deze preview is LLM-gebruik nog niet geactiveerd.",
+            "fr": "L’essai gratuit de la Suite n’inclut aucun crédit LLM offert. Tu utilises soit ta propre clé fournisseur (BYOK), facturée sur ton compte fournisseur, soit un achat initial unique de 5 EUR (500 centimes) de crédit d’essai pour notre routage géré. Le routage géré et le choix des fournisseurs seront proposés lorsqu’ils seront disponibles. Dans cet aperçu, l’utilisation des LLM n’est pas encore activée."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "bestandserhalt",
+          "heading": {
+            "de": "Nach der Testphase",
+            "nl": "Na de proefperiode",
+            "fr": "Après l’essai"
+          },
+          "body": {
+            "de": "Ohne ausdrücklich gewählten und freigegebenen kostenpflichtigen Suite-Tarif endet die Testberechtigung ohne automatische Abbuchung. Eine Testaufladung ist kein Suite-Abo. Bei einem Wechsel bleiben Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselreferenzen, Dokumente, Verlauf und Guthabenreferenzen erhalten. Gekauftes Guthaben verfällt nicht allein durch das Ende der Testphase; dein Konto und deine Datenrechte bleiben bestehen.",
+            "nl": "Zonder uitdrukkelijk gekozen en goedgekeurd betaald Suite-abonnement eindigt het proefrecht zonder automatische afschrijving. Proefsaldo kopen is geen Suite-abonnement. Bij een overstap blijven account, tenant, werkruimte, instellingen, sleutelreferenties, documenten, geschiedenis en saldoreferenties behouden. Gekocht saldo vervalt niet alleen doordat de proefperiode eindigt; je account en gegevensrechten blijven bestaan.",
+            "fr": "Sans choix explicite d’un abonnement Suite payant validé, le droit d’essai prend fin sans prélèvement automatique. L’achat de crédit d’essai n’est pas un abonnement Suite. En cas de passage à une offre payante, compte, tenant, espace de travail, paramètres, références des clés, documents, historique et références du solde sont conservés. Le crédit acheté n’expire pas du seul fait de la fin de l’essai ; ton compte et tes droits sur tes données sont préservés."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
-          "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
-          "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+          "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+          "nl": "Openbare klantregistratie is voorzien. Na bevestiging van je e-mailadres en activering van je klantwerkruimte kun je de gratis Suite-proefperiode van 24 uur starten. LLM-gebruik wordt apart gefinancierd. Live-registratie is hier nog niet geverifieerd.",
+          "fr": "L’inscription publique des clients est prévue. Après vérification de ton e-mail et activation de ton espace client, tu pourras démarrer les 24 heures d’essai gratuit de la Suite. L’utilisation des LLM est financée séparément. L’inscription en production n’est pas encore vérifiée ici."
         },
         "canonical_path": "/registrieren",
         "canonical_origin": null,
@@ -2506,7 +2573,8 @@
       "source_refs": [
         "docs/09-final/05-technische-spezifikation.md",
         "docs/09-final/14-gesamtsystem-und-portale.md",
-        "docs/deployment/clerk-setup.md"
+        "docs/deployment/clerk-setup.md",
+        "config/selfservice-policy.json"
       ],
       "next_actions": [
         {

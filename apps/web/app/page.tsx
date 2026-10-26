@@ -1,3 +1,3 @@
 import HomeContent from "../components/HomeContent";
 import {publicPages} from "../lib/catalog";
-export default function Home(){return <HomeContent home={publicPages().find(page=>page.path==="/")}/>;}
+export default function Home(){const pages=publicPages();return <HomeContent home={pages.find(page=>page.path==="/")} pages={pages}/>;}

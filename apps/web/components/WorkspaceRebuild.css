@@ -1,0 +1,32 @@
+/* Native workspace: all colours remain bound to the canonical token palette. */
+.workspace-shell { grid-template-columns: minmax(0, 1fr) clamp(340px, 24vw, 440px); }
+.site-header { padding: 18px clamp(24px, 3vw, 56px); gap: 24px; }
+.site-header nav { gap: 20px; font-size: 14px; }
+.account-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 16px; border: 1px solid var(--color-linie-stark); border-radius: var(--radius-pille); font-size: 13px; white-space: nowrap; }
+.header-actions .compact { background: var(--color-marke-lime); color: var(--color-text-auf-lime); border-color: var(--color-marke-lime); font-size: 13px; font-weight: 650; padding: 10px 18px; }
+.aifly-panel { background: var(--color-graphit-900); }
+.panel-heading { padding: 22px 20px; gap: 12px; }
+.panel-heading h2 { font-size: 17px; }
+.panel-heading p { line-height: 1.5; }
+.panel-connection { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; margin: 20px 20px 0; padding: 12px 14px; border: 1px solid var(--color-linie-mittel); border-radius: var(--radius-chip); color: var(--color-text-tertiaer); font-size: 12px; }
+.connection-indicator { width: 7px; height: 7px; border-radius: var(--radius-pille); background: var(--color-text-gedaempft); }
+.connection-indicator.available { background: var(--color-semantik-erfolg); }
+.conversation { padding: 28px 20px; }
+.welcome-card > p { font-size: 27px; line-height: 1.2; margin: 16px 0 28px; }
+.action-options { gap: 10px; }
+.action-option { min-height: 58px; background: transparent; border-color: var(--color-linie-mittel); border-radius: var(--radius-chip); padding: 14px; }
+.action-option:hover { background: var(--color-graphit-700); border-color: var(--color-linie-stark); }
+.action-card { margin-top: 28px; background: var(--color-graphit-800); border: 1px solid var(--color-linie-mittel); padding: 20px; border-radius: var(--radius-karte); }
+.action-card-heading { align-items: start; gap: 12px; }
+.action-card h3 { font-size: 20px; }
+.action-card form { gap: 16px; }
+.result-card { border-left: 2px solid var(--color-marke-lime); border-radius: 0; }
+.composer-area { padding: 16px 20px 20px; }
+.composer { background: var(--color-graphit-800); border-radius: var(--radius-karte); }
+.composer textarea { min-height: 76px; }
+.connection-note { line-height: 1.6; margin-top: 12px; color: var(--color-text-gedaempft); }
+.send-button { min-width: 44px; min-height: 44px; }
+@media (max-width: 1500px) { .account-link { display: none; } }
+@media (max-width: 1200px) { .site-header > nav { display: none; } }
+@media (max-width: 820px) { .workspace-shell { grid-template-columns: minmax(0, 1fr); } .site-header { padding: 16px 20px; gap: 12px; } }
+@media (max-width: 460px) { .site-header { padding: 12px; gap: 8px; } .panel-heading { padding: 18px 16px; } .panel-connection { margin: 16px 16px 0; } .conversation { padding: 24px 16px; } }
