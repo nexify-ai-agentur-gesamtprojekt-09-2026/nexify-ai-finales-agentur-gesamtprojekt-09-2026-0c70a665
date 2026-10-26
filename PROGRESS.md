@@ -1,3 +1,23 @@
+# Aktueller Vertragsschnitt · 26.10.2026
+
+- Nutzerentscheidung: API/Auth aus den vollständigen Repository-Prototypen und Seitenbestimmungen ableiten; die frühere Suite-Quellenrückfrage ist erledigt.
+- F-006: vorgeschlagener Vertrag in `docs/contracts/`, 93 HTML-Seiten (47 N1, 46 N2), 63 abgeleitete Capabilities, 97 Pfade/102 Operationen/107 Schemas. Keine aktive API-/Auth-Runtime daraus ableiten.
+- Stimmen exakt gebunden: NeX `Lbm7qDmJUxIxpWx9qhZO`; AIFly und Nutzer beide `feTHtWuEJFLTOWyoreyy`. Runway als Videoquelle, Erstellung fehlender Clips beauftragt; ElevenLabs via Composio für Sprachfunktionen. Drei Skript-/Szenenentwürfe, null Providerjobs.
+- Quellen-/Policyvalidator und 17 Vertragsprüfungen einschließlich unabhängiger Gegenproben; formale OpenAPI-3.1-Prüfung erfolgreich. F-006 nach allen drei Harness-Layern passing; `make check && make test`, E2E/Architektur und Clean-Check erfolgreich. 42 Python- und zehn Node-Tests; formale OpenAPI-Prüfung grün. Details im Vertragsprüfvermerk.
+- Gegenprüfung getrennt von Autoren: Auth/Pool-/Scope-/Gastgrenzen sowie Medien-/Browserpfadnormalisierung geprüft; Findings korrigiert. Prototypen und Manifest unverändert.
+- Noch offene Launchblocker: native Gateway-/Auth-/Shared-Pool-Runtime, öffentlicher Companion-BFF, kontofreier verifizierter Gastretouren-/Widerrufsweg, reale Runway-/ElevenLabs-Toolbindung und Medienassets. Die Anbieter sind in dieser Sitzung weder per Tool noch CLI oder erwarteter Credentialbindung exponiert; die Nutzerangabe zur externen Verfügbarkeit bleibt erhalten.
+
+## Next Steps
+
+1. Den geprüften Zielvertrag in einem eigenen nativen Gateway-/Auth-Inkrement implementieren; Rollen, Session/Issuer und DB-Principal-Bridge mit echten HTTP-/DB-Negativtests verbinden.
+2. Die tatsächliche Runway-/Composio-/ElevenLabs-Anbindung lesen, Bestand abgleichen, dann fehlende Clips im bereits autorisierten Umfang erzeugen; keine pauschale Erstellungsrückfrage wiederholen.
+3. Vor Gastverkauf den dokumentierten kontofreien Retouren-/Widerrufsweg und vor öffentlicher Live-KI den engen BFF-Vertrag liefern.
+4. Gesamtauftrag, Prüfnachweise und Checkpoints unter `/workspace/.onboarding/FACTORY-*` fortschreiben; kein Main-Merge oder Produktiv-Go aus diesem Vertrag ableiten.
+
+---
+
+## Vorheriger Fundament-Checkpoint
+
 # Aktueller Factory-Auftrag · 25.10.2026
 
 - Nutzer hat die sofortige Umsetzung der Gesamtfertigstellung freigegeben; Ziel bleibt aktiv.

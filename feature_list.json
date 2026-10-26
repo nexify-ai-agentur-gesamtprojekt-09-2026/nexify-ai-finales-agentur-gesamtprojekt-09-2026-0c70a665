@@ -97,6 +97,31 @@
         }
       ],
       "verified_at": "2026-10-25T22:51:13.678Z"
+    },
+    {
+      "id": "F-006",
+      "behavior": "Quellengebundener API/Auth-Zielvertrag deckt alle erfassten Prototypseiten ab und verweigert ungesicherte Vertragsgrenzen.",
+      "verification": "python3 tools/verify_factory_contract.py",
+      "state": "passing",
+      "evidence": "make verify-feature F=F-006: alle 3 Layer bestanden; lokaler technischer Nachweis, keine Produktivabnahme",
+      "layers": [
+        {
+          "label": "Layer 1 (Syntax/Statik)",
+          "cmd": "make check && python3 -m json.tool docs/contracts/factory.openapi.json >/dev/null",
+          "repair": "Syntax und Audit korrigieren."
+        },
+        {
+          "label": "Layer 2 (Vertragsgrenzen/Quellen)",
+          "cmd": "python3 tools/verify_factory_contract.py && python3 -m unittest discover -s tests -p test_factory_contract.py -q",
+          "repair": "Quellenabdeckung, Rechte und negative Vertragsproben korrigieren."
+        },
+        {
+          "label": "Layer 3 (Repository-Integration)",
+          "cmd": "make e2e && make check-arch",
+          "repair": "Integrationspruefungen ohne Lockern der Regeln korrigieren."
+        }
+      ],
+      "verified_at": "2026-10-26T06:37:03.972Z"
     }
   ]
 }

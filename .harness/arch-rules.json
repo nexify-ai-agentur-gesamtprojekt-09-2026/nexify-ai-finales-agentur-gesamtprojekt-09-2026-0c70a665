@@ -36,6 +36,15 @@
       "what": "Die gemeinsame Monitorauswertung besteht ihre Negativ-/Persistenzproben nicht.",
       "why": "Ein lokaler Check darf weder echte DNS-Reparaturen ausloesen noch Ausfaelle als Erfolg melden.",
       "fix": "Monitorkern und isolierte Proben reparieren; keine Pruefung deaktivieren."
+    },
+    {
+      "id": "ARCH-005",
+      "description": "API/Auth-Vertragspruefung erkennt oeffentliche Eskalation, CSRF-/APIkey-Grenzverletzungen und Quellenverlust.",
+      "check": "python3 -m unittest discover -s tests -p test_factory_contract.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Negativpruefungen des API/Auth-Vertrags schlagen fehl.",
+      "why": "Selbstdeklarierte Abdeckung oder ein gueltiges OpenAPI-Schema allein belegt keine sichere Rollen-/Quellenbindung.",
+      "fix": "Vertragsvalidator und Gegenproben korrigieren, keine Zugriffsgrenzen oder Quellenpruefung abschalten."
     }
   ]
 }

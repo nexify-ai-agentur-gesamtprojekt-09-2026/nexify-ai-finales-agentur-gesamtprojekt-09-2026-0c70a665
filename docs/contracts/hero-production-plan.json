@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "state": "draft_not_submitted",
+  "authority": "user_2026-10-26_runway_existing_and_create_missing",
+  "inventory_before_generation": true,
+  "provider_model_selection": "after_actual_tool_schema_and_account_capability_read",
+  "generation_budget_ref": null,
+  "jobs": [
+    {
+      "draft_id": "hero-nex-de-001",
+      "participant_slot": "nex",
+      "page_candidates": ["N1:prototypen/NeXifyAI Cloud v12.dc.html", "N1:prototypen/NeXify AI one.dc.html"],
+      "page_binding_status": "derived_proposal_pending_existing_asset_match",
+      "locale": "de",
+      "voice_id": "Lbm7qDmJUxIxpWx9qhZO",
+      "script_draft": "Ich bin NeX. Zeigen Sie mir, welche Routine Sie entlasten möchten. Gemeinsam machen wir daraus einen klaren Ablauf.",
+      "visual_direction_draft": "Bestehende Runway-Darstellung von NeX bevorzugen. Ruhiger Einstieg, Raum für lesbare Originalüberschrift und Hauptaktion. Vorhandenes NeXify-Signalfeld als gestalterische Referenz; keine fremden Marken, Kundenlogos oder erfundenen Kennzahlen.",
+      "existing_runway_asset_id": null,
+      "generation_condition": "no_matching_usable_existing_asset",
+      "generated_asset_id": null
+    },
+    {
+      "draft_id": "hero-aifly-de-001",
+      "participant_slot": "aifly",
+      "page_candidates": ["N1:prototypen/NeXifyAI Cloud v12.dc.html"],
+      "page_binding_status": "derived_proposal_pending_existing_asset_match",
+      "locale": "de",
+      "voice_id": "feTHtWuEJFLTOWyoreyy",
+      "script_draft": "Ich bin AIFly. Wir verbinden Ihre Werkzeuge zu einem nachvollziehbaren Arbeitsablauf. Sie behalten den Überblick und entscheiden über die wichtigen Schritte.",
+      "visual_direction_draft": "Bestehende AIFly-Darstellung aus Runway verwenden. Kurze Vorstellung mit ruhiger Bewegung; Arbeitsfluss als abstrakte Darstellung ohne echte Kundendaten. Keine neue Person oder unbelegte Avataridentität erfinden.",
+      "existing_runway_asset_id": null,
+      "generation_condition": "no_matching_usable_existing_asset",
+      "generated_asset_id": null
+    },
+    {
+      "draft_id": "hero-user-de-001",
+      "participant_slot": "user",
+      "page_candidates": ["N1:prototypen/NeXifyAI Cloud v12.dc.html", "N1:prototypen/Partner-werden.dc.html"],
+      "page_binding_status": "derived_proposal_pending_existing_asset_match",
+      "locale": "de",
+      "voice_id": "feTHtWuEJFLTOWyoreyy",
+      "script_draft": "Wir beginnen mit Ihrem konkreten Ablauf. Daraus entwickeln wir einen passenden nächsten Schritt und prüfen gemeinsam das Ergebnis.",
+      "visual_direction_draft": "Vorhandenes persönliches Runway-Video bevorzugen. Persönliche Begrüßung in ruhiger Umgebung; keine synthetische Personenansicht aus einem beliebigen Bild ableiten. Falls eine neue persönliche Darstellung erforderlich ist, das tatsächliche autorisierte Eingangsmedium an den Auftrag binden.",
+      "existing_runway_asset_id": null,
+      "generation_condition": "no_matching_usable_existing_asset",
+      "generated_asset_id": null
+    }
+  ],
+  "renditions": {
+    "layout": "responsive_hero_without_forced_crop_of_speaker_or_subtitles",
+    "poster": "derive_from_verified_video_frame",
+    "captions": "time_aligned_to_final_audio",
+    "transcript": "exact_final_spoken_text",
+    "additional_locales": ["nl", "fr"],
+    "locale_state": "not_generated_or_translated",
+    "audio_playback": "user_initiated"
+  },
+  "delivery_checks": [
+    "existing_asset_inventory_and_deduplication",
+    "actual_voice_and_video_capability_authorized_for_account",
+    "source_rights_and_provider_processing_terms_bound",
+    "bounded_job_cost_and_reconciliation_after_unknown_timeout",
+    "download_type_hash_duration_and_audio_video_sync",
+    "tenant_asset_version_exact_readback",
+    "captions_transcript_keyboard_mobile_reduced_motion",
+    "version_bound_visual_review_before_publication"
+  ],
+  "execution": {"provider_jobs_started": 0, "audio_files_generated": 0, "video_files_generated": 0, "published": false}
+}

@@ -1,5 +1,5 @@
 # NeXify AI Gesamtloesung — ein Befehl pro Repo-Operation (Harness-Standard).
-.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check
+.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check
 
 setup:
 	@node --version >/dev/null && python3 --version >/dev/null && echo "setup: node + python3 vorhanden (keine Paketabhaengigkeiten)"
@@ -45,6 +45,12 @@ verify-feature:
 
 check-arch:
 	bash scripts/check-arch.sh
+
+# Vollstaendige Quellenbindung benoetigt die im Katalog bezeichneten Checkouts.
+# Kein Provideraufruf und keine Behauptung einer laufenden Factory-API.
+contract-check:
+	python3 tools/verify_factory_contract.py
+	python3 -m unittest discover -s tests -p test_factory_contract.py -q
 
 session-start:
 	bash scripts/session-trace.sh session-start

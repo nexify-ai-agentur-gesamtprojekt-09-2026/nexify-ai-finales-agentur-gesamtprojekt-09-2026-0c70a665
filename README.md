@@ -5,6 +5,9 @@
 > [Vorschau](docs/04-betrieb/static-preview.md),
 > [Monitortests](docs/04-betrieb/gesundheit-selbsttest.md) und
 > [PostgreSQL-Fundament](docs/04-betrieb/factory-postgres-foundation.md).
+> Der [API-/Auth-Zielvertrag](docs/contracts/README.md) leitet Funktionen und Rechte
+> aus allen erfassten Referenzseiten ab und berücksichtigt Runway sowie ElevenLabs
+> für die beauftragten Hero-Medien. Er ist getrennt von der noch ausstehenden Runtime.
 >
 > Die folgenden Produkt-/Handoffangaben sind historische Quellen; Preis-, Rechts-
 > und Gesellschaftsentscheidungen bleiben an ihre bestaetigten Versionen gebunden.
