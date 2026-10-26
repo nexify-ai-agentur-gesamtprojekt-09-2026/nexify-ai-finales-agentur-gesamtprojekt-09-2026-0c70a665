@@ -21,6 +21,9 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - name: Trust only this checked-out workspace in the job container
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Audit, behavior, integrity and architecture
         run: make check && make test && make check-arch
   postgres-isolation:
@@ -42,7 +45,9 @@ jobs:
       - name: Repeat migration and real principal/tenant counterexamples
         env:
           DATABASE_CONTAINER: ${{ job.services.postgres.id }}
-        run: bash db/foundation/test.sh "$DATABASE_CONTAINER" nx_foundation
+        run: |
+          docker --host=unix:///var/run/docker.sock rename "$DATABASE_CONTAINER" onboarding-postgres
+          bash db/foundation/test.sh onboarding-postgres nx_foundation
   openapi-schema:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
