@@ -73,3 +73,33 @@ Der Build meldet einen 500-KB-Chunkhinweis (Entry 500,42 KB, gzip 138,72 KB).
 Das ist ein offenes Leistungsbudget vor Produktionsabnahme; Warnschwelle wurde
 nicht angehoben. Die HTML-Einzeldatei ist eine Offlinevorschau, kein aktiver
 Ersatz für die noch unverbundenen Serverdienste.
+
+
+## Getrennte Vercel-Vorschau und Remoteprüfungen
+
+Codecommit: `c25abaf37fbb0b4a64dd8927a1f6ee429afbaa56`.
+Vercel-Deployment `dpl_GUcxEAxrDQXxvumoekzpUgLM61dh` wurde über die authentifizierte
+API mit genau diesem Commit und dem Rekonstruktionszweig als READY gelesen:
+https://nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70-56faosckn.vercel.app
+Die bestehende Vorschau-Zugangssperre wurde nicht gelockert. Das ist kein
+Nachweis eines anonymen Live-Logins oder produktiver Backendadapter.
+
+PR: https://github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/35
+Alle fünf eigenen CI-Jobs sind für diesen Codecommit erfolgreich. Zusätzliche
+Gates sind nicht vollständig grün: der begrenzte OpenRouter-Review meldet
+`blocked_not_reviewed / diff_or_metadata_limit_exceeded`, Paperclip meldet Fehler
+(Grund hier nicht authentifiziert nachgewiesen), Cloudflare meldet weiter einen
+Buildfehler. Diese Checks wurden weder gelöscht noch überstimmt.
+
+Ein weiteres vom selben Repository gespeistes Projekt `site-gjp7`
+(`prj_G7YhmvIT4DBKJYFq3daOzqT0aAFg`) scheiterte ebenfalls an
+`STATIC_BUILD_NO_OUT_DIR`: Root apps/site, Output null und Node24. Nach Prüfung
+von Repository und ausschließlicher vercel.app-Domain wurden Repo-Root null,
+Node22.x, Vite, pnpm-Frozen-Installation, Workspace-Build und
+apps/site/dist als Output gesetzt und separat zurückgelesen. Keine Domain,
+Schutzregel, Umgebungsvariable oder Projektzuordnung geändert. Der alte
+fehlgeschlagene Deploymentcheck bleibt ohne erneuten Build fehlgeschlagen.
+
+Read-back der kanonischen Domains bestätigt weiter .de am vorherigen
+Entwicklungszweig; .cloud wurde nicht verändert. Diese neue Vorschau ersetzt
+keine öffentliche Domain und keine Nutzerabnahme.
