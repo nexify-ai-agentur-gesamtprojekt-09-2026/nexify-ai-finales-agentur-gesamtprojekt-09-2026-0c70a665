@@ -279,6 +279,10 @@ def sensitive_assignment(diff):
     # Explicit environment references/names are allowed, never literal values.
     key = r'(?:[_a-z0-9-]*(?:password|passwd|secret|token|api[_-]?key|authorization)[_a-z0-9-]*)'
     assignment = re.compile(r"""(?ix)["']?(""" + key + r""")["']?\s*[:=]\s*(.+)$""")
+    if re.search(r"""(?i)\b[a-z][a-z0-9+.-]*://[^\s/"'<>]*@""", diff):
+        return True
+    if re.search(r"""(?ix)["']?(?:api[_-]?key|password|passwd|client[_-]?secret|auth[_-]?token|access[_-]?token)["']?\s*[:=]\s*$""", diff, re.MULTILINE):
+        return True
     for line in diff.splitlines():
         if not line.startswith(('+', '-', ' ')) or line.startswith(('+++', '---')):
             continue

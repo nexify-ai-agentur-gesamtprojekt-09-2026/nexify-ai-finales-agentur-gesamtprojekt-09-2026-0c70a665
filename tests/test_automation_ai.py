@@ -280,6 +280,17 @@ class AiReviewContracts(unittest.TestCase):
                     with self.assertRaises(ai.ReviewBlocked):
                         ai.repository_diff(self.repo, self.base, self.head, self.config)
 
+    def test_url_userinfo_is_withheld_before_provider_transfer(self):
+        for value in ['+db = "postgres://u:p@host/db"',
+                      '+url = "https://operator:LOCAL_LITERAL@example.invalid/path"']:
+            self.assertTrue(ai.sensitive_assignment(value))
+        self.assertFalse(ai.sensitive_assignment('+url = "https://example.invalid/path"'))
+
+    def test_multiline_json_credential_is_withheld_before_provider_transfer(self):
+        for key in ['api_key', 'client_secret', 'access_token']:
+            self.assertTrue(ai.sensitive_assignment('+"' + key + '":\n+ "LOCAL_LITERAL"'))
+        self.assertFalse(ai.sensitive_assignment('+"description":\n+ "ordinary text"'))
+
     def test_hard_deadline_includes_open_and_cleans_up_alarm(self):
         class SlowOpener:
             def open(self, *args, **kwargs):
