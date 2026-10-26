@@ -75,12 +75,12 @@
     },
     {
       "id": "ARCH-009",
-      "description": "Die portable React-Ausgabe erhält die öffentliche Grenze und ändert ungültige Nutzerwege nicht heimlich.",
+      "description": "Portable React-Daten, Nutzerwege und Presenterquellen bleiben explizit freigegeben und geprüft.",
       "check": "node --test apps/site/tests/*.test.mjs >/dev/null 2>&1",
       "expect": "exit 0",
       "what": "Eine öffentliche Daten-/Navigationsgrenze ist verletzt.",
-      "why": "Private Metadaten dürfen nicht im statischen Backup erscheinen; unbekannte oder private Aktionsziele dürfen nicht als andere Nutzerwege ausgegeben werden.",
-      "fix": "Öffentliche Projektion und sichere Navigation korrigieren; ungültige Quellaktionen ablehnen statt still umzuleiten."
+      "why": "Private Daten dürfen nicht ins Backup; unbekannte Aktionsziele oder erfundene Presenterquellen dürfen keine gültige Seitenführung vortäuschen.",
+      "fix": "Öffentliche Projektion, Navigationsziele und versionierte Quellenbindung korrigieren; negative Grenztests erhalten."
     }
   ]
 }

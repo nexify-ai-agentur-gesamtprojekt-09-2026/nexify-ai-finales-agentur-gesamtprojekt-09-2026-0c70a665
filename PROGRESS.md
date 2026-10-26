@@ -1,3 +1,30 @@
+# Durchgängige Seitenbegleitung · 26.10.2026
+
+React-Begleitung nun9geführteNutzerwege+47Erklärmoduleauf35öffentlichenSeiten,
+inklusiveShop/Werkstatt;12Kernseitenlinks/rechtsmitunterschiedlichenSprechern.
+Alle9Journeys+NeuladepräferenzimBrowserlokalgeprüft;keineAutonavigation/Mikrofon/
+Tonaufnahme. SessionpräferenzgewährtkeineRechte;10privateAnsichtenbleibenunverfügbar.
+AlleVideoassetspending,0veröffentlichteClips;keineFakePlaybuttons.
+VorhandeneInhalteunverändert,93Originalquellenweitererhalten69Backlogoffen.
+AktuelleinteraktiveDatei /workspace/preview/nexify-preview.html.
+
+YAOTI-Konzeptuseruploadgelesen/gehasht,keineAutoplay-Beispielinstruktionübernommen.
+REA6.8wirklichperSTDIO:229Tools,HomepageGuideSnapshot,DriverMITQuellepartiell
+analysiert;404KBBundle15sTimeoutundöffentlicheREAInspektionverweigertoffengehalten.
+7Lösungsoptionen/8Paketarchiveoffiziellrecherchiert;nativeBegleitungbevorzugt,
+Driver/Joyrideoptional,LiveanbieterkeinZwang. Researchunabhängiggeprüft22Hashes.
+Plan docs/strategy/presenter-implementation-plan.md;Produkt-/Finanzmatrixund
+Wissenszugriffsmatrixergänzt. KeinAllchatsAPI/Chatlogimport/Kundenvermischung.
+
+React12Tests,neuerBuild/Standalone/Nextreferenzbuildgrün;Browsertests35Seiten,
+47Module,9Journeys,PDFentwurf/Outboxpending/Marketingdraft,DE/NL/FR,mobilgrün.
+E2E-/Architektur-/CleanAbschlusslog .onboarding/react-preview/presenters-final-*.
+Quellehashgateconfig/presenter-sources.json11Quellenfixiert;unbekanntevorLesen
+abgewiesen. KeineProduktivabnahme,F007bleibtaktiv. RemoteDeploymentlesenGH403;
+keineautomatischeVercel-/ChatGPTLiveSynchronitätbehaupten.
+
+---
+
 # Portable React-Vorschau, DNS und MCP-Abgrenzung · 26.10.2026
 
 Aktiver Hauptfrontendbuild: apps/site React19.3.1/Vite8.3.5; vorhandene UI,

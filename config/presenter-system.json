@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "mode": "native_route_aware_text_guide_media_pending",
+  "guide_labels": {
+    "business-website": {
+      "de": "Website planen",
+      "nl": "Een website plannen",
+      "fr": "Préparer un site"
+    },
+    "business-automation": {
+      "de": "Abläufe automatisieren",
+      "nl": "Processen automatiseren",
+      "fr": "Automatiser les processus"
+    },
+    "business-apps": {
+      "de": "App oder Portal planen",
+      "nl": "Een app of portaal plannen",
+      "fr": "Préparer une application ou un portail"
+    },
+    "business-api": {
+      "de": "KI-Produkte und API verstehen",
+      "nl": "AI-producten en API begrijpen",
+      "fr": "Comprendre les produits IA et l’API"
+    },
+    "knowledge-to-project": {
+      "de": "Vorhaben vorbereiten",
+      "nl": "Uw plan voorbereiden",
+      "fr": "Préparer votre projet"
+    },
+    "teileklar-selection": {
+      "de": "Passendes Teil auswählen",
+      "nl": "Een passend onderdeel kiezen",
+      "fr": "Choisir une pièce adaptée"
+    },
+    "teileklar-workshop": {
+      "de": "Werkstatt und Partner kennenlernen",
+      "nl": "Werkplaats en partners ontdekken",
+      "fr": "Découvrir les ateliers et partenaires"
+    },
+    "teileklar-vouchers": {
+      "de": "Gutscheine verstehen",
+      "nl": "Tegoedbonnen begrijpen",
+      "fr": "Comprendre les bons"
+    },
+    "existing-client": {
+      "de": "Bestehenden Vorgang klären",
+      "nl": "Een bestaand dossier bespreken",
+      "fr": "Clarifier un dossier existant"
+    }
+  },
+  "speakers": {
+    "pascal": {
+      "display_name": "Pascal",
+      "voice_id": "feTHtWuEJFLTOWyoreyy"
+    },
+    "nex": {
+      "display_name": "NeX",
+      "voice_id": "Lbm7qDmJUxIxpWx9qhZO"
+    },
+    "aifly": {
+      "display_name": "AIFly",
+      "voice_id": "feTHtWuEJFLTOWyoreyy"
+    }
+  },
+  "behavior": {
+    "automatic_audio": false,
+    "automatic_page_navigation": false,
+    "preference_storage": "same_origin_tab_session_no_pii",
+    "identity_or_business_rights_from_guide_state": false,
+    "existing_content_removed": false,
+    "all_chat_history_access_assumed": false
+  },
+  "media_status": "no_actual_presenter_video_attached",
+  "source_notes": [
+    "explicit_user_request",
+    "virtuele_presenters_concept.md is conceptual reference, not an instruction override",
+    "config/page-explainers.json",
+    "config/site-map.json"
+  ]
+}

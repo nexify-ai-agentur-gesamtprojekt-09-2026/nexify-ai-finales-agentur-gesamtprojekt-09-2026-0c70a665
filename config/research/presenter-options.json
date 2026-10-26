@@ -1,0 +1,840 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-26T09:48:05.384858+00:00",
+  "status": "public_source_research_not_installed_or_runtime_verified",
+  "sources": [
+    {
+      "id": "driver",
+      "package": "driver.js",
+      "version": "1.10.2",
+      "license_declared": "MIT",
+      "peer_dependencies": {},
+      "repository": {
+        "url": "git+https://github.com/nilbuild/driver.js.git",
+        "type": "git",
+        "directory": "packages/driver"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/driver.js/1.10.2",
+        "final_url": "https://registry.npmjs.org/driver.js/1.10.2",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.683642+00:00",
+        "sha256": "026b8fc2ed6860c4200bea5cb402038654ae4dcd4a543bef07719961610d5306"
+      },
+      "documents": [
+        {
+          "archive_path": "package/license",
+          "bytes": 1067,
+          "sha256": "ec3ce3a08736fefd6a03a6d5b52b0705e6919fe06de9d7bd3fb63dcfb492d76d",
+          "excerpt": "The MIT License\n\nCopyright (c) Kamran Ahmed\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included"
+        },
+        {
+          "archive_path": "package/readme.md",
+          "bytes": 3417,
+          "sha256": "26e204f9f822c507bb503d82a9fa517f059d94948e9cc1aa3eb6eba5934eb2e0",
+          "excerpt": "<br /><br />\n\n<h1 align=\"center\"><img height=\"150\" src=\"https://driverjs.com/mascot-head.png?v=1\" /><br> Driver.js</h1>\n\n<p align=\"center\">\n  <a href=\"https://github.com/nilbuild/driver.js/blob/master/license\">\n    <img src=\"https://img.shields.io/badge/License-MIT-yellow.svg\" />\n  </a>\n  <a href=\"https://www.jsdelivr.com/package/npm/driver.js\">\n    <img src=\"https://data.jsdelivr.com/v1/package/npm/driver.js/badge?style=rounded\" alt=\"jsdelivr hits\" />\n  </a>\n  <a href=\"https://npmjs.org/package/driver.js\">\n    <img src=\"https://img.shields.io/"
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/driver.js/-/driver.js-1.10.2.tgz",
+        "bytes": 45934,
+        "sha256": "e621143a642685b5e22c9273897a121401a34de68b38baf7d0651f03a8e7ee98",
+        "npm_integrity": "sha512-L/EMTriJPAmg+5kIFmrjzt3TI+1NblhHOV/UZkfpgU/uxhSflGheynMBxk5oImDSy6seAEkIl6MzNOc0zdoKtg==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "  <a href=\"https://github.com/nilbuild/driver.js/blob/master/license\">",
+        "    <img src=\"https://img.shields.io/badge/License-MIT-yellow.svg\" />",
+        "- **User friendly**: Everything is controllable by keyboard",
+        "- **MIT Licensed**: free for personal and commercial use",
+        "## License"
+      ]
+    },
+    {
+      "id": "joyride",
+      "package": "react-joyride",
+      "version": "3.2.0",
+      "license_declared": "MIT",
+      "peer_dependencies": {
+        "react": "16.8 - 19",
+        "react-dom": "16.8 - 19"
+      },
+      "repository": {
+        "url": "git+https://github.com/gilbarbara/react-joyride.git",
+        "type": "git"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/react-joyride/3.2.0",
+        "final_url": "https://registry.npmjs.org/react-joyride/3.2.0",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.277440+00:00",
+        "sha256": "9677bd1e7b663114019987bf7ab58d2ed180ea75c2b1213a2b488f00d219cab2"
+      },
+      "documents": [
+        {
+          "archive_path": "package/LICENSE",
+          "bytes": 1069,
+          "sha256": "4ec10a44cdbffaa7f300c15fcfd8bc1577596f109e595318f6fc5ffad1f98219",
+          "excerpt": "MIT License\n\nCopyright (c) 2015, Gil Barbara\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be include"
+        },
+        {
+          "archive_path": "package/README.md",
+          "bytes": 2878,
+          "sha256": "b1037ffd01ac7cd1e2c900555ad995e5de05198b4406041ed0af3bcd59c90f07",
+          "excerpt": "# React Joyride\n\n[![](https://badge.fury.io/js/react-joyride.svg)](https://www.npmjs.com/package/react-joyride) [![CI](https://github.com/gilbarbara/react-joyride/actions/workflows/ci.yml/badge.svg)](https://github.com/gilbarbara/react-joyride/actions/workflows/ci.yml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gilbarbara_react-joyride&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=gilbarbara_react-joyride) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=gilbarbara_rea"
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/react-joyride/-/react-joyride-3.2.0.tgz",
+        "bytes": 169496,
+        "sha256": "c4dfe3ca246f1ddfb8d3c82c988683e98e31ad344e0153c07c2a9c35fa08a54c",
+        "npm_integrity": "sha512-UrA/XWdWElMLNnjZt2eWmPFmpHl1IZ2CeI9XhS+PuEVvfqHMD9U4tavCq1csDAGVoj0YEGfaCDmhZwgNc9yE2g==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "# React Joyride",
+        "[![](https://badge.fury.io/js/react-joyride.svg)](https://www.npmjs.com/package/react-joyride) [![CI](https://github.com/gilbarbara/react-joyride/actions/workflows/ci.yml/badge.svg)](https://github.com/gilbarbara/react-joyride/actions/workflows/ci.yml) [![Quality Gate Status](htt",
+        "[![Joyride example image](https://react-joyride.com/images/react-joyride-v3.gif)](https://react-joyride.com/)",
+        "- ♿ **Accessible:** Focus trapping, keyboard navigation, and ARIA support",
+        "- 🔄 **Broad compatibility:** React 16.8+ through React 19",
+        "- 🖥️ **SSR-safe:** Works with Next.js, Remix, and other server-rendering frameworks",
+        "- [Documentation](https://react-joyride.com/docs/getting-started)",
+        "- [Demos](https://react-joyride.com/demos)",
+        "- [What's new in v3](https://react-joyride.com/docs/new-in-v3)",
+        "- [StackBlitz Playground](https://stackblitz.com/edit/react-joyride)",
+        "npm i react-joyride",
+        "import { Joyride } from 'react-joyride';",
+        "import { useJoyride } from 'react-joyride';",
+        "Enable AI assistants to implement guided tours with React Joyride.",
+        "npx skills add gilbarbara/react-joyride",
+        "Check the [migration guide](https://react-joyride.com/docs/migration) for detailed instructions on upgrading from v2.",
+        "## License"
+      ]
+    },
+    {
+      "id": "shepherd",
+      "package": "shepherd.js",
+      "version": "15.3.0",
+      "license_declared": "AGPL-3.0",
+      "peer_dependencies": {},
+      "repository": {
+        "url": "git+https://github.com/shipshapecode/shepherd.git",
+        "type": "git"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/shepherd.js/15.3.0",
+        "final_url": "https://registry.npmjs.org/shepherd.js/15.3.0",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.482494+00:00",
+        "sha256": "da157712a1da51686b361098b581c79b8e72e54b860fed5872569f1a4689d94b"
+      },
+      "documents": [
+        {
+          "archive_path": "package/LICENSE.md",
+          "bytes": 36948,
+          "sha256": "2bb9764cd950f573f1d003867a95d85d0cf20b214d34a8eee3ff4e858762b942",
+          "excerpt": "# Shepherd.js License\n\nShepherd.js is dual-licensed under **AGPL-3.0** (for open source and non-commercial use) and a **Commercial License** (for commercial use).\n\n---\n 🆓 Free Use - AGPL-3.0 License\nYou may use Shepherd.js **FREE OF CHARGE** under the AGPL-3.0 license if you are:\n ✅ Open Source Projects\n- Your project is open source and licensed under an AGPL-compatible license (GPL, AGPL, etc.)\n- Your complete source code is publicly available\n ✅ Personal & Non-Commercial Use\n- Personal projects, portfolios, and hobby websites\n- Educational pu"
+        },
+        {
+          "archive_path": "package/README.md",
+          "bytes": 6429,
+          "sha256": "bae9b63423fb817267414f07ec349e6be99bad83e05344eb815e51d3faa2dd49",
+          "excerpt": "<p align=\"center\">\n  <img \n    alt=\"Shepherd.js Logo\"\n    src=\"https://i.imgur.com/cowwtSX.png\"/>\n</p>\n  \n\n[![npm version](https://badge.fury.io/js/shepherd.js.svg)](http://badge.fury.io/js/shepherd.js)\n![Download count all time](https://img.shields.io/npm/dt/shepherd.js.svg)\n![npm](https://img.shields.io/npm/dm/shepherd.js.svg)\n[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshipshapecode%2Fshepherd.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%shipshapecode%2Fshepherd?ref=badge_shield)\n![npm bundle s"
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/shepherd.js/-/shepherd.js-15.3.0.tgz",
+        "bytes": 221730,
+        "sha256": "2c330d12cb088cdb1e1e021bd16eee785740d896948a7ea71c862695bdb62b6c",
+        "npm_integrity": "sha512-A9plZQ1qGX1aDLTrX0cbVowdnE0mOc1pjRie7O9c2cQHiDHI1zaxH2fVe65WH/2ch5nbK0JPu+vQecD7WYw5zw==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "Shepherd enables you to guide users through a custom tour or journey within your app or website. Highly customizable with minimal styles, Shepherd allows for powerful customization while being easy to use. Various frameworks supported including React, Ember, Angular, Vue.js, ES M",
+        "#### [React Shepherd Wrapper](packages/react)",
+        "## License",
+        "Shepherd.js is dual-licensed under AGPL-3.0 and a Commercial License.",
+        "- **Free for open source and non-commercial use** under AGPL-3.0",
+        "- **Commercial license required** for commercial products and revenue-generating companies",
+        "See [LICENSE.md](LICENSE.md) for complete details or visit [shepherdjs.dev/pricing](https://shepherdjs.dev/pricing) to purchase a commercial license."
+      ]
+    },
+    {
+      "id": "videojs",
+      "package": "video.js",
+      "version": "10.2.0",
+      "license_declared": "Apache-2.0",
+      "peer_dependencies": {},
+      "repository": {
+        "url": "https://github.com/videojs/video.js",
+        "type": "git",
+        "directory": "packages/video.js"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/video.js/10.2.0",
+        "final_url": "https://registry.npmjs.org/video.js/10.2.0",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.451464+00:00",
+        "sha256": "483284e4ce41dc2e2e22331f3079b8da21b3ea33c16a7e059e4d845b792ceedc"
+      },
+      "documents": [
+        {
+          "archive_path": "package/LICENSE",
+          "bytes": 870,
+          "sha256": "db51e86fd40ab084fa6156f60774995b6b2a1dbcbf2007393131b66001cce6c6",
+          "excerpt": "   Copyright 2025-present Video.js contributors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing pe"
+        },
+        {
+          "archive_path": "package/README.md",
+          "bytes": 4596,
+          "sha256": "ef7720acbb98be1d36355f2b922dad0dff1a0888d912f07190ab076bd4b3c574",
+          "excerpt": "# video.js\n\n[![package-badge]][package]\n\nVideo.js 10 players don't live in this package. Install the package for your framework:\n\n| Building with | Install | Docs |\n| --- | --- | --- |\n| HTML, Web Components, or another framework | `npm install @videojs/html` | [HTML installation][html-install] |\n| Vue or Nuxt | `npm install @videojs/html` | [Vue installation][vue-install] |\n| Svelte or SvelteKit | `npm install @videojs/html` | [Svelte installation][svelte-install] |\n| React | `npm install @videojs/react` | [React installation][react-install] |"
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/video.js/-/video.js-10.2.0.tgz",
+        "bytes": 10135,
+        "sha256": "2418fe5a734bb9b1f0115e102f84d82d51a3e79c41c9c7d517673c50601db710",
+        "npm_integrity": "sha512-YoezDYXY6iDkuhLGnyOz96XBKjwB0cQbPNq5ck1FAf2JcqfLnnwkNQ4ofbwhlpAM55RFp6VDhSvKe5wVcFV11Q==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "| React | `npm install @videojs/react` | [React installation][react-install] |",
+        "npx @videojs/cli agents init --framework react",
+        "Ready to move a v8 player to Video.js 10? Follow the migration guide for [HTML][html-migrate] or [React][react-migrate].",
+        "and `@videojs/react` install, but nothing imports it, so it adds nothing to your bundle.",
+        "  builds add the explanation and the HTML and React equivalents; production builds throw only the code and link.",
+        "- **`video.js/errors`.** The registry behind those codes: one entry per code with an explanation, the HTML and React",
+        "- [Join Discord Server][discord]",
+        "## License",
+        "[Apache-2.0](../../LICENSE)",
+        "[react-install]: https://videojs.org/docs/guides/installation/react",
+        "[react-migrate]: https://videojs.org/docs/framework/react/guides/migrate-from-video-js-8"
+      ]
+    },
+    {
+      "id": "mediachrome",
+      "package": "media-chrome",
+      "version": "4.19.4",
+      "license_declared": "MIT",
+      "peer_dependencies": {},
+      "repository": {
+        "url": "git+https://github.com/muxinc/media-chrome.git",
+        "type": "git"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/media-chrome/4.19.4",
+        "final_url": "https://registry.npmjs.org/media-chrome/4.19.4",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.596651+00:00",
+        "sha256": "e817964e1057be1f5f00f48136a9818443a9aec93f22a14cf811d00a591c6c3f"
+      },
+      "documents": [
+        {
+          "archive_path": "package/LICENSE",
+          "bytes": 1053,
+          "sha256": "13faec6cc4820429b213665a1fff88e1bcfad5a3aff10956f90dea08bf45e808",
+          "excerpt": "Copyright (c) 2020 Mux, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies "
+        },
+        {
+          "archive_path": "package/README.md",
+          "bytes": 6984,
+          "sha256": "bef3c85848e1d1865c78ee57b9e2d4cdfb8fe00b01f0e0d237d3e50e2c2e5b35",
+          "excerpt": "<h1>\n  <a href=\"https://media-chrome.org\" target=\"_blank\">\n    <picture>\n      <source media=\"(prefers-color-scheme: dark)\" srcset=\"docs/public/media-chrome-logo-dark.svg\">\n      <source media=\"(prefers-color-scheme: light)\" srcset=\"docs/public/media-chrome-logo-light.svg\">\n      <img alt=\"Media Chrome Logo\" src=\"docs/public/media-chrome-logo-light.svg\">\n    </picture>\n  </a>\n</h1>\n\n[![NPM Version](https://img.shields.io/npm/v/media-chrome?style=flat-square&color=informational)](https://www.npmjs.com/package/media-chrome) \n[![NPM Downloads](htt"
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/media-chrome/-/media-chrome-4.19.4.tgz",
+        "bytes": 813772,
+        "sha256": "8e5a6d0cdfbc0596d98cf5937626295e7bd099c36e8afeeb0e23e77ed4b9dd92",
+        "npm_integrity": "sha512-QAL48kT03+InLijPzXN1end9fcsl0/l53j1laCfbt/79vF2iZ45dovv4wQMw2q9zOLEiDwWsB718NJPhtZUBDg==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "> The folks behind Media Chrome, Plyr and Vidstack have joined forces to build the latest version of Video.js: one modern, accessible player with the best of all three. It keeps what made Media Chrome great, like HTML-first `media-*` elements styled with plain CSS, and adds React",
+        "- [x] Compatible with any javascript framework (React, Angular, Svelte, etc.)",
+        "## Use with React",
+        "While you technically can use Media Chrome elements directly with React, it can sometimes be a bit clunky to work with Web Components in React, and some things just don't feel idiomatic to the framework (for example: having to use `class=` instead of `className=`, see [React's of",
+        "- Are compatible by default with Javascript frameworks (React, Angular, Svelte)"
+      ]
+    },
+    {
+      "id": "liveavatar",
+      "package": "@heygen/liveavatar-web-sdk",
+      "version": "0.0.19",
+      "license_declared": "MIT",
+      "peer_dependencies": {},
+      "repository": {
+        "url": "git+https://github.com/heygen-com/live-avatar-js-sdk.git",
+        "type": "git"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/@heygen/liveavatar-web-sdk/0.0.19",
+        "final_url": "https://registry.npmjs.org/@heygen/liveavatar-web-sdk/0.0.19",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.851652+00:00",
+        "sha256": "ba28ccb09e866136e010e3179f2a25fef32abd55eba5409f91ce0938fdb96a08"
+      },
+      "documents": [
+        {
+          "archive_path": "package/LICENSE",
+          "bytes": 1064,
+          "sha256": "ab8785831bf04176c5804e86d794bd1e81aa7bc75d92aa83202b518a0a6ab983",
+          "excerpt": "MIT License\n\nCopyright (c) 2025 HeyGen.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in "
+        },
+        {
+          "archive_path": "package/README.md",
+          "bytes": 2477,
+          "sha256": "637bef2c0bdbd5c2fe25473a20efc5f546a58f05d0dc2fb493b1dc52c588017a",
+          "excerpt": "# LiveAvatar Web SDK\n\n## About\n\nThis is offical LiveAvatar supported client-side SDK.\nThis SDK library manages various LiveAvatar sessions, supporting the session initiation,\nsession management, and session cleanup.\n\n## API Documentation\n\nPlease refer to us here https://docs.liveavatar.com\n\n## Installation\n\nInstall the package in your project through package manager.\n\n```bash\nnpm install @heygen/liveavatar-web-sdk\n# or\npnpm install @heygen/liveavatar-web-sdk\n```\n\n## Usage\n\nThis library is meant for development use in various client-side facing "
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/@heygen/liveavatar-web-sdk/-/liveavatar-web-sdk-0.0.19.tgz",
+        "bytes": 1178967,
+        "sha256": "4c2eeb9e8b0c1124d0c047b15d0f28d7254b0254d4154c59d7c507c37eaceebc",
+        "npm_integrity": "sha512-iSO9mD0auLZeJ1ALi0pprB0l6BaBrYexq65R3qsAtNSOHWB+uugldyLtq8P1nvwVnGZrzp7AIRJq2MPIIeKWnA==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "This SDK library manages various LiveAvatar sessions, supporting the session initiation,",
+        "session management, and session cleanup.",
+        "It's tailored to manage LiveAvatar sessions, handling the complexities of starting, stopping and various avatar actions. With just the session token, we help focus on the session complexity so you focus on building something great.",
+        "import { LiveAvatarSession } from \"@heygen/liveavatar-web-sdk\";",
+        "// Make a backend call to grab the sessionToken",
+        "const { sessionToken } = await myBackendCallForSessionToken();",
+        "  // a keep-alive request every minute while the session is connected.",
+        "  // Microphone is on by default. For a text-only session use:",
+        "const session = new LiveAvatarSession(sessionToken, userConfig);",
+        "// Start the session",
+        "await session.start();",
+        "// Close the session",
+        "await session.stop();",
+        "### Session config options",
+        "| `voiceChat`     | `VoiceChatConfig` | `{}`    | Voice chat settings applied on connect. Default turns the microphone on unmuted. Pass `{ defaultMuted: true }` for a text-only session. Also accepts `deviceId` and `mode`. |",
+        "## License",
+        "LiveAvatar Web SDK is licensed under the MIT License.",
+        "Please refer to the LICENSE file for more information."
+      ]
+    },
+    {
+      "id": "did",
+      "package": "@d-id/client-sdk",
+      "version": "3.0.8",
+      "license_declared": "MIT",
+      "peer_dependencies": {},
+      "repository": {
+        "url": "git+https://github.com/de-id/agents-sdk.git",
+        "type": "git"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/@d-id/client-sdk/3.0.8",
+        "final_url": "https://registry.npmjs.org/@d-id/client-sdk/3.0.8",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:04.845460+00:00",
+        "sha256": "56a7b649905699f7675539ec53f8dd1d70ada9e91b907338693960c9b8294e68"
+      },
+      "documents": [
+        {
+          "archive_path": "package/LICENSE",
+          "bytes": 1061,
+          "sha256": "82dfa2bac7dbb009778ca8d8c0bdbcf7270a8a0205413a30b7e2f0f47a7b9307",
+          "excerpt": "MIT License\n\nCopyright (c) 2026 D-ID\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all"
+        },
+        {
+          "archive_path": "package/README.md",
+          "bytes": 5102,
+          "sha256": "17dc93e8e7b1b876aa2cbdddd7c37e6c88d2a606bce0305c3d049fa174d0c481",
+          "excerpt": "# D-ID Client SDK\n\n[![npm version](https://img.shields.io/npm/v/@d-id/client-sdk)](https://www.npmjs.com/package/@d-id/client-sdk)\n[![license](https://img.shields.io/npm/l/@d-id/client-sdk)](https://github.com/de-id/agents-sdk/blob/main/LICENSE)\n[![docs coverage](https://sdk.d-id.com/coverage.svg)](https://sdk.d-id.com/)\n\n![D-ID Agents SDK](https://create-images-results.d-id.com/api_docs/assets/agents_sdk_cover_v2.png)\n\nThe D-ID Agents SDK embeds an agent you built in D-ID Studio or with the Agents API into a web application. Create an `AgentMa"
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/@d-id/client-sdk/-/client-sdk-3.0.8.tgz",
+        "bytes": 521490,
+        "sha256": "0d175309cf81f6100b982d0154723d99272a9ca7e218bcebaafe1e711be3e9ca",
+        "npm_integrity": "sha512-0c5iKIcr5u2SXNIP6neim8SmKUGjAgOWlWrNkFAhreKz7JqwNKnR/ThbeLoj+628PzyvLvQGZZbdRHPD9YNv9w==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "[![license](https://img.shields.io/npm/l/@d-id/client-sdk)](https://github.com/de-id/agents-sdk/blob/main/LICENSE)",
+        "The D-ID Agents SDK embeds an agent you built in D-ID Studio or with the Agents API into a web application. Create an `AgentManager` for the agent, `connect()`, then `chat()` to have the agent answer with its own LLM or `speak()` to have it say exactly what you give it. The SDK o",
+        "- **Node is not a runtime target**, but importing the package on a server is safe: the module graph touches no browser globals at import time, so server-rendered frameworks (Next.js, Remix, SvelteKit, Astro) can evaluate it. Everything past `createAgentManager()` needs a browser."
+      ]
+    },
+    {
+      "id": "elevenlabs",
+      "package": "@elevenlabs/react",
+      "version": "1.19.1",
+      "license_declared": "MIT",
+      "peer_dependencies": {
+        "react": ">=16.8.0"
+      },
+      "repository": {
+        "url": "git+https://github.com/elevenlabs/packages.git",
+        "type": "git",
+        "directory": "packages/react"
+      },
+      "registry": {
+        "url": "https://registry.npmjs.org/@elevenlabs/react/1.19.1",
+        "final_url": "https://registry.npmjs.org/@elevenlabs/react/1.19.1",
+        "http_status": 200,
+        "observed_at": "2026-10-26T09:48:05.142101+00:00",
+        "sha256": "1b789d1196af2d88457e1e121c1a2c227201b6e37c1d0f1f2bc03d03ecfe69af"
+      },
+      "documents": [
+        {
+          "archive_path": "package/README.md",
+          "bytes": 2435,
+          "sha256": "d0d8252809693d53a1c2a34796966c9ca34b49234465ee654377439c8723afd2",
+          "excerpt": "![hero](../../assets/hero.png)\n\n# ElevenAgents React SDK\n\nBuild multimodal agents with the [ElevenAgents platform](https://elevenlabs.io/docs/eleven-agents/overview).\n\nA React library for building voice and text conversations with ElevenAgents. For React Native, use [`@elevenlabs/react-native`](https://www.npmjs.com/package/@elevenlabs/react-native).\n\n![LOGO](https://github.com/elevenlabs/elevenlabs-python/assets/12028621/21267d89-5e82-4e7e-9c81-caf30b237683)\n[![Discord](https://badgen.net/badge/black/ElevenLabs/icon?icon=discord&label)](https:"
+        },
+        {
+          "archive_path": "package/LICENSE",
+          "bytes": 1067,
+          "sha256": "0bfed2a2aa8d106bdb144f55416e193450fbc1e1b3257e3852bc64418069de5a",
+          "excerpt": "MIT License\n\nCopyright (c) 2025 ElevenLabs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included "
+        }
+      ],
+      "archive": {
+        "url": "https://registry.npmjs.org/@elevenlabs/react/-/react-1.19.1.tgz",
+        "bytes": 62645,
+        "sha256": "d3663a17332f03ac7862b84b39afd208df1b69ee8dc902da21a3aeef7e66202f",
+        "npm_integrity": "sha512-wM+An7ii8jRhzY2JjV5IkteW1mw4ceZtQ2NN/bXQFXPOYks/cMdHU4gHNxKFDRzUxxRLmTGmbNtatKvYVXGnMg==",
+        "integrity_matches_registry": true
+      },
+      "readme_selected_lines": [
+        "# ElevenAgents React SDK",
+        "A React library for building voice and text conversations with ElevenAgents. For React Native, use [`@elevenlabs/react-native`](https://www.npmjs.com/package/@elevenlabs/react-native).",
+        "npm install @elevenlabs/react",
+        "} from \"@elevenlabs/react\";",
+        "  const { startSession, endSession } = useConversationControls();",
+        "          startSession({",
+        "      <button onClick={() => endSession()}>End</button>",
+        "For the full API reference including connection types, client tools, conversation overrides, and more, see the [React SDK documentation](https://elevenlabs.io/docs/eleven-agents/libraries/react).",
+        "Remember, if merged, your code will be used as part of a MIT licensed project. By submitting a Pull Request, you are giving your consent for your code to be integrated into this library."
+      ]
+    }
+  ],
+  "options": [
+    {
+      "id": "prerecorded-media",
+      "priority": 0,
+      "role": "Existing Runway clips and approved ElevenLabs audio in native React UI",
+      "packages": [
+        "video.js@10.2.0",
+        "@videojs/react@10.2.0",
+        "media-chrome@4.19.4"
+      ],
+      "sources": [
+        "videojs",
+        "mediachrome",
+        "videojs-react-docs",
+        "videojs_react_registry",
+        "autoplay-mdn",
+        "alpha-apple"
+      ],
+      "recommendation": "Start with native HTML video/audio; evaluate Media Chrome OR Video.js React only for demonstrated control/player needs. Do not stack both players by default.",
+      "license": "Video.js Apache-2.0; Media Chrome MIT; provider assets and voices have separate rights.",
+      "react19": "@videojs/react peer range explicitly includes React 19; Media Chrome README documents React wrappers; no local mount test.",
+      "dependencies": [
+        "asset inventory and hashes",
+        "rights for person image voice and distribution",
+        "poster captions transcript",
+        "browser/device codec tests"
+      ],
+      "fallback": "Poster, text/transcript and existing workspace actions, ordinary nontransparent video if alpha is unsupported.",
+      "status": "recommended_not_implemented_no_provider_assets_read"
+    },
+    {
+      "id": "driver-tour",
+      "priority": 1,
+      "role": "Framework independent highlights and optional guided steps attached to existing page elements",
+      "packages": [
+        "driver.js@1.10.2"
+      ],
+      "sources": [
+        "driver",
+        "driver-docs"
+      ],
+      "license": "MIT verified in published archive; preserve notice.",
+      "react19": "No React peer dependency; imperative instance requires effect cleanup and route/DOM lifecycle integration, not demonstrated runtime compatibility.",
+      "recommendation": "Small first tour candidate if a tour is actually needed; style with NeXify tokens and retain native actions.",
+      "fallback": "Normal page links and accessible text instructions.",
+      "dependencies": [
+        "stable target selectors",
+        "route ready signal",
+        "focus and keyboard checks",
+        "no tour advancing irreversible actions"
+      ],
+      "status": "candidate_not_installed"
+    },
+    {
+      "id": "joyride-tour",
+      "priority": 1,
+      "role": "React controlled multi-step tours with custom tooltip UI",
+      "packages": [
+        "react-joyride@3.2.0"
+      ],
+      "sources": [
+        "joyride",
+        "joyride-docs"
+      ],
+      "license": "MIT verified in archive.",
+      "react19": "Published React and ReactDOM peer ranges 16.8 - 19 explicitly include current React 19; no local runtime test.",
+      "recommendation": "Alternative to Driver.js when controlled React state and custom components justify it; select one tour engine.",
+      "fallback": "Skip/close and direct page navigation.",
+      "dependencies": [
+        "controlled step state across routes",
+        "focus restoration",
+        "SSR/SPA lifecycle checks",
+        "reduced motion"
+      ],
+      "status": "candidate_not_installed"
+    },
+    {
+      "id": "shepherd-tour",
+      "priority": 3,
+      "role": "Rich configurable tour engine; comparison only pending commercial license decision",
+      "packages": [
+        "shepherd.js@15.3.0"
+      ],
+      "sources": [
+        "shepherd"
+      ],
+      "license": "Registry AGPL-3.0; archive LICENSE.md/README states AGPL/commercial dual license and commercial license required for commercial products/revenue-generating companies. Do not treat wrapper licensing as relicensing the core.",
+      "react19": "Framework support is documented, but actual React wrapper/version/peer compatibility not verified.",
+      "recommendation": "Do not adopt by default; permissive alternatives already fit. Resolve actual applicable terms before commercial integration.",
+      "fallback": "Driver.js/Joyride or native text.",
+      "dependencies": [
+        "documented commercial licensing decision"
+      ],
+      "status": "held_for_license_review_not_installed"
+    },
+    {
+      "id": "heygen-liveavatar",
+      "priority": 3,
+      "role": "Optional streamed video presenter after prerecorded baseline",
+      "packages": [
+        "@heygen/liveavatar-web-sdk@0.0.19"
+      ],
+      "sources": [
+        "liveavatar"
+      ],
+      "license": "SDK MIT verified; hosted service, avatar and commercial media rights separate and unverified.",
+      "react19": "Client-side JavaScript SDK, no React peer range; wrap session lifecycle carefully and test in current React.",
+      "recommendation": "Only an explicit bounded live pilot. README default microphone is ON/unmuted; override voiceChat.defaultMuted=true and start only after user choice.",
+      "fallback": "Existing recorded presenter or text; stop sessions on dismissal and expired budget.",
+      "dependencies": [
+        "backend session-token issuer",
+        "provider account entitlement and budget",
+        "no provider API key in browser",
+        "session cleanup",
+        "privacy and region contract",
+        "real Safari WebRTC test"
+      ],
+      "status": "optional_unconnected_no_live_call"
+    },
+    {
+      "id": "did-agent",
+      "priority": 3,
+      "role": "Optional live video agent with own UI and SDK media binding",
+      "packages": [
+        "@d-id/client-sdk@3.0.8"
+      ],
+      "sources": [
+        "did",
+        "did-docs"
+      ],
+      "license": "SDK MIT verified; SaaS, actor/avatar/image rights and usage terms separate and unverified.",
+      "react19": "Browser JavaScript SDK; README says SSR import safe, actual creation/connection needs browser; no local React 19 runtime test.",
+      "recommendation": "Alternative to HeyGen, not a second simultaneous provider. Distinguish provider chat/LLM from speak(text) and approved NeXify action execution.",
+      "fallback": "Owned prerecorded video and native text.",
+      "dependencies": [
+        "actual agent contract and allowed client credential model",
+        "backend/account binding",
+        "privacy and region contract",
+        "explicit microphone choice",
+        "WebRTC/session/reconnect budget"
+      ],
+      "status": "optional_unconnected_no_live_call"
+    },
+    {
+      "id": "elevenlabs-voice",
+      "priority": 2,
+      "role": "Optional native voice/text companion; not a video-avatar renderer",
+      "packages": [
+        "@elevenlabs/react@1.19.1"
+      ],
+      "sources": [
+        "elevenlabs",
+        "elevenlabs-react-docs"
+      ],
+      "license": "SDK MIT verified; account terms, voice rights and audio/output distribution separate and unverified.",
+      "react19": "React peer >=16.8.0 allows current React 19; package/application lifecycle compatibility still requires test.",
+      "recommendation": "Reuse existing Composio/TTS binding for prerecorded assets first. Live conversation SDK is a separate integration, not evidence that Composio offers this session API.",
+      "fallback": "Text and optional approved recorded audio; no microphone required to browse.",
+      "dependencies": [
+        "backend bounded session credential",
+        "existing exact voice ID binding",
+        "microphone permission only on explicit start",
+        "DPA region retention subprocessor checks",
+        "no unguarded client tool business writes"
+      ],
+      "status": "optional_unconnected_no_live_call"
+    }
+  ],
+  "paid_calls": 0,
+  "provider_assets_read": false,
+  "rea_analysis_performed_by_this_research": false,
+  "web_sources": [
+    {
+      "id": "driver-docs",
+      "url": "https://driverjs.com/docs/installation",
+      "observed_at": "2026-10-26T09:48:58.738998+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://driverjs.com/docs/installation",
+      "sha256": "4efd593d107de4a2d16028ec9f6a747686cb21a4c78e3cb816a518869ddd3c24",
+      "bytes": 204734,
+      "excerpt": "Installation - Driver.js driver.js Introduction Installation Basic Usage Configuration API Reference Theming Changelog Examples Tour Basics Interactive Tours Ending a Tour Simple Highlight Popover Styling Feature Hints Checklists Checklist Themes Int",
+      "selected_excerpts": []
+    },
+    {
+      "id": "joyride-docs",
+      "url": "https://react-joyride.com/docs/getting-started",
+      "observed_at": "2026-10-26T09:48:58.739841+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://react-joyride.com/docs/getting-started",
+      "sha256": "3559057561cd2e3309bd02dc3ae2c4b9a2765af03baca561893b655ecd02024d",
+      "bytes": 135981,
+      "excerpt": "Getting Started (Docs) | React Joyride open navigation menu React Joyride Documentation Demos Search Getting Started New in V3 How It Works useJoyride Hook Props Options Styles Floating Options Step Events Custom Components Exports Recipes Accessibil",
+      "selected_excerpts": [
+        "Getting Started (Docs) | React Joyride open navigation menu React Joyride Documentation Demos Search Getting Started New in V3 How It Works useJoyride Hook Props Options Styles Floating Options Step Events Custom Components Exports Recipes Accessibility Migration Getting Started # Cre"
+      ]
+    },
+    {
+      "id": "videojs-react-docs",
+      "url": "https://videojs.org/docs/guides/installation/react",
+      "observed_at": "2026-10-26T09:48:58.740372+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://videojs.org/docs/guides/installation/react",
+      "sha256": "332ea532d538dfabb02bac80ffa11ec377186fa2d8c905448a20bfa56890479c",
+      "bytes": 462676,
+      "excerpt": "React Installation Guide | Video.js Skip to content Video.js video player v10.2.0 Search... Docs Blog Discord GitHub Menu React CSS Guides Components API Getting Started Installation Architecture Customize skins Build your own skin Why Video.js? Brow",
+      "selected_excerpts": [
+        "React Installation Guide | Video.js Skip to content Video.js video player v10.2.0 Search... Docs Blog Discord GitHub Menu React CSS Guides Components API Getting Started Installation Architecture Customize skins Build your own skin Why Video.js? Browser suppor",
+        "cepts Features Skins Presets UI components Accessibility Media sources Playback Autoplay Controls Poster and placeholder Captions and subtitles Keyboard shortcuts and gestures Live streams Quality selector Fullscreen and orientation Picture-in-picture Thumbnail previews AirPlay and Chromecast Playback errors User preferences Background vi"
+      ]
+    },
+    {
+      "id": "mediachrome-react-docs",
+      "url": "https://www.media-chrome.org/docs/en/react",
+      "observed_at": "2026-10-26T09:48:58.745278+00:00",
+      "kind": "official_documentation",
+      "http_status": 404,
+      "status": "not_verified"
+    },
+    {
+      "id": "liveavatar-docs",
+      "url": "https://docs.liveavatar.com/docs/getting-started",
+      "observed_at": "2026-10-26T09:48:58.747174+00:00",
+      "kind": "official_documentation",
+      "http_status": 404,
+      "status": "not_verified"
+    },
+    {
+      "id": "did-docs",
+      "url": "https://docs.d-id.com/reference/agents-sdk-overview",
+      "observed_at": "2026-10-26T09:48:59.198397+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://docs.d-id.com/reference/agents-sdk-overview",
+      "sha256": "0b805f44d39b06206f1815fbea85901a10b73fae134219af746d1db7981c17c8",
+      "bytes": 388143,
+      "excerpt": "Agents SDK Overview For AI agents: the docs index is at https://docs.d-id.com/llms.txt. Append .md to any documentation page URL to get its markdown version. Jump to Content Home Documentation API Reference ↗ Agents SDK ↗ Help Center ↗ Pricing Log In",
+      "selected_excerpts": [
+        "ssives (V4) — Next-generation avatars using LiveKit-based streaming, supporting microphone input and always-on fluent mode. Please note: This SDK is designed for front-end development only. The creation of Agents and Knowledge bases should be handled through the Agents API or directly within the D-ID Studio . 📚 Looking for a specific meth"
+      ]
+    },
+    {
+      "id": "elevenlabs-react-docs",
+      "url": "https://elevenlabs.io/docs/eleven-agents/libraries/react",
+      "observed_at": "2026-10-26T09:48:59.253211+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://elevenlabs.io/docs/eleven-agents/libraries/react",
+      "sha256": "affcb231acfe950d0c48c13705678ec8511d1f435eca8a2b8c2eb03f15b60913",
+      "bytes": 974367,
+      "excerpt": "React SDK | ElevenLabs Documentation For AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a page-level index, or .md for the markdown version of any page. Search / Connect Blog Help Center ",
+      "selected_excerpts": [
+        "React SDK | ElevenLabs Documentation For AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a page-level index, or .md for the markdown version of any page. Search / Connect Blog Help Center API Pricin",
+        "st conversation = useConversation () ; // ... } Note that ElevenAgents requires microphone access for voice conversations. Consider explaining and allowing access in your app’s UI before the conversation starts. // call after explaining to the user why the microphone access is needed await navigator . mediaDevices . getUserMedia ( { audio"
+      ]
+    },
+    {
+      "id": "autoplay-mdn",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay",
+      "observed_at": "2026-10-26T09:48:59.417307+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay",
+      "sha256": "1c78a4e212b58755ec94285327f71e87504664781d571fd017100c1e569e3858",
+      "bytes": 178617,
+      "excerpt": "Autoplay guide for media and Web Audio APIs - Media | MDN Skip to main content Skip to search MDN HTML HTML: Markup language HTML reference Elements Global attributes Attributes See all… HTML guides Responsive images HTML cheatsheet Date & time forma",
+      "selected_excerpts": [
+        "tAutoplayPolicy() have no easy way to determine if autoplay is supported, or to react when it is triggered or not triggered. One approach is to listen for the first instance of the play event, which is fired on the media element when is resumed after being paused and when autoplay occurs. That means that the first time the play event is f",
+        "ute is included, and the playsinline attribute that is required for autoplay in Safari, the video will autoplay but with the audio muted. The user has the option, however, of re-enabling the audio by clicking on the unmute button in the controls. Browser configuration options Browsers may have preferences that control the way autoplay wor",
+        "Autoplay guide for media and Web Audio APIs - Media | MDN Skip to main content Skip to search MDN HTML HTML: Markup language HTML reference Elements Global attributes Attributes See all… HTML guides Responsive images HTML cheatsheet Date & time formats See all"
+      ]
+    },
+    {
+      "id": "alpha-apple",
+      "url": "https://developer.apple.com/videos/play/wwdc2019/506/",
+      "observed_at": "2026-10-26T09:48:59.822617+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://developer.apple.com/videos/play/wwdc2019/506/",
+      "sha256": "1e6a5a9980b78c78d983c722a56bc2229626c7eff2217b018ceaaf8dc7b8721e",
+      "bytes": 141550,
+      "excerpt": "HEVC Video with Alpha - WWDC19 - Videos - Apple Developer View in English Apple Developer Get Started Explore Get Started Overview Learn Apple Developer Program Stay Updated Latest News Hello Developer Platforms Explore Platforms Apple Platforms iOS ",
+      "selected_excerpts": [
+        "HEVC Video with Alpha - WWDC19 - Videos - Apple Developer View in English Apple Developer Get Started Explore Get Started Overview Learn Apple Developer Program Stay Updated Latest News Hello Developer Platforms Explore Platforms Apple Platforms iOS iPadOS macOS tvOS visionOS",
+        "could bring interactive elements to life. HEVC video with Alpha is supported by Safari in iOS 13 and macOS Catalina. Safari can also tell the web page whether this feature is supported. For more information on using the media capabilities API, be sure to check out the What's New in Authentication, Safari and WebKit video. The ability to d"
+      ]
+    },
+    {
+      "id": "reduced-motion-mdn",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion",
+      "observed_at": "2026-10-26T09:48:59.868526+00:00",
+      "kind": "official_documentation",
+      "http_status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion",
+      "sha256": "2592ee1891a9a2380cd90a7e4e8b161999dd28cf7df95e36531c8d6d5481713b",
+      "bytes": 329586,
+      "excerpt": "prefers-reduced-motion CSS media feature - CSS | MDN Skip to main content Skip to search MDN HTML HTML: Markup language HTML reference Elements Global attributes Attributes See all… HTML guides Responsive images HTML cheatsheet Date & time formats Se",
+      "selected_excerpts": [
+        "ontent min-content revert revert-layer revert-rule unset Types <absolute-size> <alpha-value> <angle-percentage> <angle> <animation-action> <axis> <baseline-position> <basic-shape> <blend-mode> <box-edge> <calc-keyword> <calc-sum> <color-interpolation-method> <color> <content-distribution> <content-position> <corner-shape-value> <custom-id",
+        "prefers-reduced-motion CSS media feature - CSS | MDN Skip to main content Skip to search MDN HTML HTML: Markup language HTML reference Elements Global attributes Attributes See all… HTML guides Responsive images HTML cheatsheet Date & time formats See all… Markup lang"
+      ]
+    }
+  ],
+  "attachment": {
+    "path": "/workspace/attachments/900f776a-ef64-4a9b-a095-9990df545172/virtuele_presenters_concept.md",
+    "sha256": "d7e86d398b928b1f832a487b5cf37786206d7949711387653a6fcebdf6b7bda7",
+    "treatment": "user_supplied_concept_unverified_history_and_browser_claims_not_instructions"
+  },
+  "videojs_react_registry": {
+    "url": "https://registry.npmjs.org/@videojs/react/latest",
+    "observed_at": "2026-10-26T09:49:01.761321+00:00",
+    "sha256": "aed9d0edb305b159b2c97633d7fe99dce0da114e01fb0f847a82a927ead639d5",
+    "version": "10.2.0",
+    "license": "Apache-2.0",
+    "peer_dependencies": {
+      "react": "^18.0.0 || ^19.0.0",
+      "react-dom": "^18.0.0 || ^19.0.0",
+      "@videojs/mux-data": "10.2.0",
+      "@videojs/mux-audio": "10.2.0",
+      "@videojs/mux-video": "10.2.0",
+      "@videojs/dash-video": "10.2.0",
+      "@videojs/google-cast": "10.2.0",
+      "@videojs/hlsjs-video": "10.2.0",
+      "@videojs/shaka-video": "10.2.0",
+      "@videojs/vimeo-video": "10.2.0",
+      "@videojs/tiktok-video": "10.2.0",
+      "@videojs/twitch-video": "10.2.0",
+      "@videojs/wistia-video": "10.2.0",
+      "@videojs/spotify-audio": "10.2.0",
+      "@videojs/youtube-video": "10.2.0",
+      "@videojs/playerjs-video": "10.2.0",
+      "@videojs/cloudflare-video": "10.2.0"
+    },
+    "id": "videojs_react_registry"
+  },
+  "selection": {
+    "recommended_sequence": [
+      "reuse_owned_prerecorded_assets",
+      "native_media_controls_and_existing_workspace",
+      "choose_one_guided_tour_library_only_if_needed",
+      "optional_voice_pilot",
+      "optional_live_video_pilot"
+    ],
+    "default_new_saas_provider": null,
+    "installation_performed": false,
+    "measured_latency_or_conversion_claims": false,
+    "prices_quoted": false,
+    "commercial_license_review_is_not_legal_advice": true
+  },
+  "cross_cutting_requirements": {
+    "existing_components": [
+      "apps/web/components/Workspace.tsx",
+      "apps/web/components/Router.tsx",
+      "apps/web/components/NextRouterBridge.tsx",
+      "apps/site/src/main.tsx",
+      "config/site-map.json",
+      "docs/contracts/hero-media.md"
+    ],
+    "native_branding": true,
+    "third_party_dashboard_iframe": false,
+    "page_and_site_context_not_identity_or_tenant_authorization": true,
+    "audio_autoplay": false,
+    "muted_autoplay_is_not_guaranteed_or_required": true,
+    "default_media_load": "poster_then_user_initiated_load",
+    "transparent_video": "Verify actual alpha assets in Safari/iOS and Chromium/Firefox; WebM-alpha alone is not a universal support claim. Apple HEVC-alpha source is historical support evidence, not current-device test.",
+    "accessible_fallback": [
+      "captions",
+      "transcript",
+      "keyboard controls",
+      "pause stop dismiss",
+      "focus restoration",
+      "reduced motion",
+      "usable page without presenter"
+    ],
+    "privacy_review": [
+      "voice image and generated-media rights",
+      "public AI disclosure appropriate to actual output",
+      "processing regions and actual transfer paths",
+      "DPA and SCC where required by R-06",
+      "subprocessors retention deletion",
+      "microphone and transcript minimization",
+      "no customer data or tokens in client bundles/logs"
+    ],
+    "backend": "Any paid session needs a narrowly bounded authenticated or deliberately public BFF, trusted provider account binding, quota, no automatic paid retry on ambiguous outcomes, and verified action results. No new endpoint implemented."
+  },
+  "required_budget_inputs": [
+    "approved total and recurring budget, currency and tax treatment",
+    "recorded clips duration/resolution/languages and required versions",
+    "already licensed provider assets and account allowances",
+    "live concurrent visitors, maximum session duration, explicit renewal limit and idle timeout",
+    "provider billing unit, plan entitlements, realtime vs recorded fees, minimums and cancellation terms from current account offer",
+    "bandwidth/storage requirements and independent backup costs",
+    "human review, accessibility, rights and localization effort"
+  ],
+  "acceptance_plan": [
+    {
+      "stage": "P0 inventory",
+      "result": "Read actual existing Runway/ElevenLabs media through authorized provider, bind participant voice page asset hash and rights; do not infer assets from a portrait."
+    },
+    {
+      "stage": "P1 prerecorded native presenter",
+      "result": "One bounded React presenter shared by existing routes; real captions/transcript/close/pause, no sound autoplay, poster and non-alpha fallback; no new live provider."
+    },
+    {
+      "stage": "P2 optional tour",
+      "result": "Choose Driver OR Joyride after a small focus/reduced-motion/mobile/route cleanup check; retain standard links and actions."
+    },
+    {
+      "stage": "P3 optional live pilot",
+      "result": "Choose one video provider OR voice-only SDK with verified backend, budget and privacy contract; real sessions measured independently, never invented."
+    }
+  ],
+  "rea_boundary": "No REA tool or measurement performed by this research. Any separate REA evidence must identify its owning reviewer and actual target.",
+  "limitations": [
+    "No package installed, no provider account authorized, no paid API request, no microphone capture, no media generated or published.",
+    "Registry/archive license checks cover these named packages, not a complete transitive dependency or service-license review.",
+    "Documentation/peer support is not a benchmark, device/browser runtime proof, legal compliance certificate or accessible-product certification.",
+    "Two attempted documentation URLs returned 404 and remain recorded as unverified; package README is the primary source for those options.",
+    "User attachment history and WebM-alpha generalization are not treated as verified technical facts."
+  ]
+}
