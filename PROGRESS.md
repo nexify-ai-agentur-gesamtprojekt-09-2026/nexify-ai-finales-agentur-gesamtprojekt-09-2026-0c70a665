@@ -1,3 +1,44 @@
+# Ausarbeitung des angenommenen Grundentwurfs · 26.10.2026
+
+Der Nutzer akzeptiert den vorherigen Stand ausschließlich als Anfang und
+beauftragt die weitere Ausarbeitung. Vercel ist ausdrücklich die verbindliche
+Live-Vorschau; ChatGPT-Bilddarstellung/Backupsync blockieren diese nicht.
+
+Umgesetzt: ungecroppte Herofiguren (auch bei2464/2560/3440px), vier direkte
+Bereichseinstiege, native Produktnavigation und geordneter Footer. Acht passende
+Folgeseitentypen mit echten Breadcrumbs, Abschnittsnavigation und Folgeaktionen.
+Eigene NeX2fly-Produktseite, 21 zusätzliche originalbasierte Abschnitte auf sieben
+Leistungs-/Entscheidungsseiten. Jetzt46Routen/36öffentlich/10geschützt und49
+vollständig erhaltene Erklärmodule. Keine veröffentlichten Presenter-Videos.
+
+Agentenbereich: aktuelle öffentliche Seite und tatsächliche Angebotsvorschau/
+Detailansicht; Verfügbarkeit aus streng geprüften Serverflags. Lokaler Gateway
+liefert Capabilityvertrag und bindet Chatkontext vor dem Idempotenzhash an die
+öffentliche Allowlist. Keine Rechte aus Clientkontext, keine Liveproviderbehauptung.
+
+Unabhängige Prüfung fand einen Hashrouter-Skiplinkfehler; korrigiert und per
+Tastatur nachgeprüft. Zentrale Sichtprüfung fand veraltete CSS-Selektoren für
+Folgeseiten-Erklärmodule; korrigiert, Desktop-/Mobilgutter nachgemessen.
+
+Prüfungen:152Pythonfälle,18Site-Contracts, React-/Standalone- und Next-Build,
+Typen, Audit, Architektur und E2E grün. Browser:36öffentlicheRouten mit gesamtem
+Textbestand,10privategesperrt,49Textmodule,PDF/Entwurfsansichten,Pendingoutbox,
+Marketingvorlage,öffentlicherChatkontext,Menü/Footer,DE/NL/FR,Mobil/Offline,
+Sprunglink/Abschnittsfokus und fünf Desktopbreiten. Keine Gesamt-, Produktiv-
+oder Normzertifizierung. Bundle559,62KB/gzip157,15KB bleibt Leistungsfinding.
+
+Quellen: docs/architecture/nex2fly-page-source.md und service-content-source.md.
+Prüfumfang: docs/design/detail-expansion-contract.md; unabhängiger Bericht:
+docs/quality/detail-expansion-review.md. F007 bleibt aktiv; bestehende
+Main-/Releasegates bleiben unverändert. .cloud/Affilinet unverändert.
+
+Nächste Arbeiten: weitere Originalinhalte und fehlende produktive Auth-/Suite-/
+Provider-/Versand-/Kalender-/Medien-/Shopanbindungen mit getrennten Rechten und
+Betriebsnachweisen umsetzen; Performancebudget auflösen. Marketing/Mailings/
+Social erst nach Systemfertigstellung; GEO nach SEO-Grundlage und Vermarktung.
+
+---
+
 # Rekonstruktion nach verworfener Vorschau · 26.10.2026
 
 Aktiver Zweig: `factory/source-faithful-rebuild-2026-10-26`. Der vorherige

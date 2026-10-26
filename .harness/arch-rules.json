@@ -81,6 +81,15 @@
       "what": "Eine öffentliche Daten-/Navigationsgrenze ist verletzt.",
       "why": "Private Daten dürfen nicht ins Backup; unbekannte Aktionsziele oder erfundene Presenterquellen dürfen keine gültige Seitenführung vortäuschen.",
       "fix": "Öffentliche Projektion, Navigationsziele und versionierte Quellenbindung korrigieren; negative Grenztests erhalten."
+    },
+    {
+      "id": "ARCH-010",
+      "description": "Hashnavigation, vollständige Presenteransicht und Layoutgutter bleiben an gespeicherte Browserbelege des aktuellen Quellstands gebunden.",
+      "check": "python3 tools/check_browser_evidence.py >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein kritischer Browserbeleg fehlt, ist widersprüchlich oder passt nicht zu den aktuellen Quellen.",
+      "why": "Ein Prototypen-Audit erkennt weder abgeschnittene Figuren noch Hashrouter-Fokusfehler oder veraltete CSS-Selektoren im tatsächlichen Reactprodukt. Die Quellenbindung ersetzt keinen Browserlauf.",
+      "fix": "Betroffene Browsergegenproben real ausführen, Fehler beheben und geprüfte Belege mit exakt passenden Quellhashes aktualisieren; keine Hashes ohne Laufzeitprüfung erneuern."
     }
   ]
 }

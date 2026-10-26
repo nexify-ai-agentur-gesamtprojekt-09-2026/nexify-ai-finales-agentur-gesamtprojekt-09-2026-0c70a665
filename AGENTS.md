@@ -9,7 +9,7 @@ Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die R
 
 Der Nutzer bestimmt `nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` als gemeinsames Repository des Gesamtsystems. Neue Anwendungen, Regeln, Integrationsverträge, REA-Anbindung und Small-Business-Zuordnungen hier führen. Bestehende Quellstände und Herkunft bei der Konsolidierung bewahren; weder Force-Push noch Löschung der Ausgangsrepositories. GitHub ist die kanonische Quelle; eine bestätigte lokale GitLab-Anbindung ist nachgelagerte CI/Spiegelung mit Fast-forward, keine zweite Schreibquelle. Historische Mirror-/Watcher-/Factory-Skripte nicht ungeprüft starten.
 
-Zielaufbau nach Nutzerpräzisierung: portable React/Vite-/TypeScript-Ausgabe unter `apps/site` für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; die bestehende Next-/Clerk-Ausgabe unter `apps/web` bleibt als Referenz erhalten. Vercel ist Hauptbetrieb, eine synchronisierte ChatGPT-Backupausgabe ist gewünscht, ihre Hosting-/Deploymentfähigkeit hier jedoch nicht belegt. Bestehende `.cloud`-Seite bis Fertigstellung erhalten; eigene Agentur- und TEILEKLAR-Funktionen mit klaren Anwendungskontexten. Affilinet Portal Aachen ist ein gesondertes, pausiertes Kundenprojekt und kein Agenturmodul, keine Lieferabhängigkeit und kein zu migrierender Datenbestand. Die Seitenarchitektur umfasst die eigenen TEILEKLAR-, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
+Zielaufbau nach Nutzerpräzisierung: portable React/Vite-/TypeScript-Ausgabe unter `apps/site` für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; die bestehende Next-/Clerk-Ausgabe unter `apps/web` bleibt als Referenz erhalten. Vercel ist Hauptbetrieb und nach aktueller Nutzerbestätigung die verbindliche Live-Vorschau. Eine ChatGPT-Backupausgabe war zuvor gewünscht; ihre fehlende Deploymentfähigkeit ist kein Blocker des aktuellen Veröffentlichungswegs. Neue Ergebnisse als direkten Vercel-Link liefern, nicht als ChatGPT-Bildausgabe. Bestehende `.cloud`-Seite bis Fertigstellung erhalten; eigene Agentur- und TEILEKLAR-Funktionen mit klaren Anwendungskontexten. Affilinet Portal Aachen ist ein gesondertes, pausiertes Kundenprojekt und kein Agenturmodul, keine Lieferabhängigkeit und kein zu migrierender Datenbestand. Die Seitenarchitektur umfasst die eigenen TEILEKLAR-, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
 
 Quellen vor jeder Wiederverwendung fachlich zuordnen: `config/source-boundaries.json` und `docs/architecture/0011-source-and-customer-boundaries.md`. Fertige Komponenten aus allen autorisierten Repositories gezielt nutzen, mit Quelle/Commit/Dateien, Zweck, Lizenzgrundlage, Anpassung und Tests. Keine pauschalen Projekt-/Historienimporte, keine Übernahme von Kundendaten, Secrets, Branding oder Kundenkonfiguration. Ähnliche Namen oder Funktionen begründen weder gemeinsame Produkte noch SSO oder eine Datenmigration. Der verworfene lokale Zweig `factory/monorepo-autonomy-2026-10-26` enthält den irrtümlichen Kundenimport und darf nicht als Agenturstand gepusht oder zurückgemergt werden.
 
@@ -152,3 +152,16 @@ Nutzung lesen. Bereits erteilte Auftrags-/Push-/Vorschaufreigaben verwenden;
 Main-/Releasegates nicht lockern. Beispiele zum Ausgeben/Suchen von Tokens in
 Skills überstimmen niemals die Credentialregeln: vorhandene OAuth-/SDK-Bindung
 normal verwenden, keine Tokenlogs und keine Secretdateisuche.
+
+
+## Aktuelle Ausarbeitung nach angenommenem Grundentwurf
+
+Die Oberfläche vom 26.10.2026 ist vom Nutzer nur als grober Anfang akzeptiert,
+nicht als final abgenommen. Folgeauftrag: alle Seiten, Inhalte, Nutzerwege und
+Backendabhängigkeiten entsprechend den Quellen ausarbeiten. Figuren in jeder
+Breite vollständig darstellen; `object-fit: cover` ist für die transparente
+Dreier-Bühne unzulässig. NeX2fly, Leistungen und TEILEKLAR bleiben eigene
+sachliche Wege mit öffentlichen Informationsseiten und getrennten Rechten.
+Erst das Gesamtsystem fertigstellen; Marketing, Mailings und eigene Social-Kanäle
+danach aktivieren. SEO bleibt offen und ist GEO-Grundlage. GEO jetzt nicht
+vorziehen. `config/operating-model.json` hält Reihenfolge und Zuständigkeiten fest.

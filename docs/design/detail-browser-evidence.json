@@ -1,0 +1,124 @@
+{
+  "recorded_at": "2026-10-26T12:33:07.656541+00:00",
+  "checks": [
+    "client_navigation_preserves_conversation_draft",
+    "guided_website_journey_and_reload_preferences_persist_without_auto_navigation",
+    "persisted_quote_and_real_draft_pdf_download",
+    "mail_only_pending_provider_not_sent",
+    "marketing_template_persisted_not_published_or_live_llm",
+    "all_36_public_routes_include_shared_panel_guide_and_all_49_text_modules",
+    "all_10_private_route_views_unavailable_no_private_payload",
+    "actual_chat_receipt_contains_only_validated_public_page_context",
+    "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
+    "native_product_menu_and_direct_legal_footer_links",
+    "uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes",
+    "de_nl_fr_content_switching",
+    "mobile_no_horizontal_overflow",
+    "mobile_dialog_keyboard_escape_focus_return",
+    "keyboard_skip_link_preserves_standalone_product_hash_route",
+    "standalone_inline_assets_hash_routes_offline_actions_disabled"
+  ],
+  "public_routes": [
+    "/",
+    "/leistungen",
+    "/leistungen/websites",
+    "/leistungen/agenten-automatisierung",
+    "/leistungen/apps-portale",
+    "/leistungsumfang",
+    "/loesungen",
+    "/preise-ablauf",
+    "/wissen",
+    "/wissen/projekt-vorbereiten",
+    "/unternehmen",
+    "/kontakt",
+    "/produkte/nex2fly",
+    "/produkte/one",
+    "/produkte/api",
+    "/impressum",
+    "/datenschutz",
+    "/vertragsgrundlagen",
+    "/ki-hinweise",
+    "/barrierefreiheit",
+    "/cookies",
+    "/anmelden",
+    "/registrieren",
+    "/teileklar",
+    "/teileklar/suche",
+    "/teileklar/kategorien",
+    "/teileklar/kategorie",
+    "/teileklar/produkt",
+    "/teileklar/warenkorb",
+    "/teileklar/kasse",
+    "/teileklar/fahrzeug-und-passung",
+    "/teileklar/termine",
+    "/teileklar/gutscheine",
+    "/teileklar/partner-werden",
+    "/teileklar/werkstatt",
+    "/teileklar/rechtliches"
+  ],
+  "passed": true,
+  "scope": "local React and local visitor gateway plus static standalone; no public deployment, real Clerk login, external mail/calendar/model or MCP auth",
+  "targeted_supplement_gutter_followup": [
+    {
+      "width": 1920,
+      "path": "/produkte/nex2fly",
+      "gutter": {
+        "left": 80,
+        "right": 80
+      },
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "path": "/teileklar/werkstatt",
+      "gutter": {
+        "left": 80,
+        "right": 80
+      },
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "path": "/impressum",
+      "gutter": {
+        "left": 80,
+        "right": 80
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/produkte/nex2fly",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/teileklar/werkstatt",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/impressum",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "apps/web/components/HomeContent.tsx": "eeb1fe649097390680011b7147ab5411249b724ea979b75266c36ac1b32eeb61",
+    "apps/web/components/Workspace.tsx": "eec628fa35cc940ab33e97def2f0d326f7e2f115e01c35426588968e3f7c89ba",
+    "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
+  },
+  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open"
+}

@@ -11,21 +11,32 @@ const copy={
  fr:{one:"Plus de temps pour tes clients.",two:"Moins de tâches",three:"entre les deux.",intro:"Sites, applications et processus intelligents. Nous relions ce qui fait avancer ton entreprise pour donner une suite concrète à ton idée.",plan:"Parlons de ton projet",appointment:"Demander un rendez-vous",caption:"Échange directement avec NeX Agentic AIFly.",captionStrong:"De la première idée à un projet concret.",stageLabel:"Pascal et les compagnons numériques",stageAlt:"Pascal et deux compagnons numériques, dont AIFly Oracle, sur une scène commune",fallbackTitle:"Ton idée. Notre prochaine étape.",fallbackBody:"En parler. Relier les possibilités. Avancer ensemble.",fallbackNote:"Pascal · NeX Agentic · AIFly Oracle",servicesKicker:"NUMÉRIQUE. CONNECTÉ. POUR TOI.",servicesTitle:"Que souhaites-tu faire avancer ?",servicesBody:"Un site solide. Moins de tâches manuelles. Une application adaptée à tes processus. Nous commençons là où tu souhaites changer quelque chose.",serviceLink:"En savoir plus",eyebrow:"UNE CONVERSATION. DES ÉTAPES CLAIRES.",headline:"Ton projet commence ici.",summary:"Discuter, noter et avancer sans changer constamment de formulaire ou de fenêtre.",quoteTitle:"Un devis adapté à ton projet.",quoteBody:"Discute du périmètre, enregistre un projet de devis et télécharge le PDF.",quoteAction:"Discuter d’un devis",bookingTitle:"Trouver un rendez-vous ensemble.",bookingBody:"Choisis un horaire proposé et enregistre ta demande dans la conversation.",marketingTitle:"Un marketing avec une direction claire.",marketingBody:"Définis l’objectif et le public pour préparer un brief structuré comme prochaine étape.",marketingAction:"Planifier le marketing",sourceLabel:"Tes prochaines possibilités"}
 };
 
-function ServiceMark({kind}:{kind:string}){
- return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">{kind==="websites"?<><rect x="4" y="6" width="24" height="20" rx="3"/><path d="M4 12h24M9 9h.1M13 9h.1M9 17h9M9 21h14"/></>:kind==="automation"?<><circle cx="8" cy="8" r="3"/><circle cx="24" cy="16" r="3"/><circle cx="8" cy="24" r="3"/><path d="M11 8h5v8h5M11 24h5v-8M4 16h8"/></>:<><rect x="4" y="6" width="16" height="20" rx="3"/><rect x="23" y="13" width="6" height="13" rx="2"/><path d="M9 11h6M9 16h6M9 21h3"/></>}</svg>;
-}
+const areaCopy={
+ de:{label:"Produkte und Bereiche",hint:"Wähle deinen Einstieg",services:"Leistungen für dein Vorhaben"},
+ nl:{label:"Producten en onderdelen",hint:"Kies jouw vertrekpunt",services:"Diensten voor jouw plan"},
+ fr:{label:"Produits et domaines",hint:"Choisis ton point de départ",services:"Des services pour ton projet"}
+};
 function PresenterStage({text}:{text:typeof copy.de}){
  const[missing,setMissing]=useState(false);const[loaded,setLoaded]=useState(false);
  return <figure className={"home-presenter-stage"+(loaded&&!missing?" has-presenters":"")} aria-label={text.stageLabel}>
   <div className="home-stage-aura" aria-hidden="true"/>
+  <div className="home-presenter-art">
   {!missing&&<img className="home-presenter-trio" src="/media/presenters/hero-trio.png" alt={text.stageAlt} width="1536" height="1024" fetchPriority="high" onLoad={()=>setLoaded(true)} onError={()=>{setMissing(true);setLoaded(false);}}/>}
   {(!loaded||missing)&&<div className="home-stage-fallback"><span className="home-fallback-symbol" aria-hidden="true">✦</span><h2>{text.fallbackTitle}</h2><p>{text.fallbackBody}</p></div>}
+  </div>
   <figcaption><span className="home-stage-line" aria-hidden="true"/>{text.fallbackNote}</figcaption>
  </figure>;
 }
 export default function HomeContent({home,pages=[],children}:{home?:PublicPage;pages?:PublicPage[];children?:ReactNode}){
- const{locale}=useUI();const t=copy[locale];
+ const{locale}=useUI();const t=copy[locale];const areaText=areaCopy[locale];
  const services=["websites","automation","apps-portals"].flatMap(id=>{const page=pages.find(candidate=>candidate.id===id);return page?[page]:[];});
+ const areas=[
+  {name:"NeX2fly",page:pages.find(page=>page.path==="/produkte/nex2fly")},
+  {name:"AIFly Oracle",page:pages.find(page=>page.id==="solutions")},
+  {name:"TEILEKLAR",page:pages.find(page=>page.id==="tk-home")},
+  {name:"Werkstatt",page:pages.find(page=>page.id==="tk-workshop")}
+ ];
+ const scope=pages.find(page=>page.id==="scope");
  const tasks=[{intent:"quote" as const,title:t.quoteTitle,body:t.quoteBody,action:t.quoteAction},{intent:"booking" as const,title:t.bookingTitle,body:t.bookingBody,action:t.appointment},{intent:"marketing" as const,title:t.marketingTitle,body:t.marketingBody,action:t.marketingAction}];
  return <div className="home-rebuild">
   <section className="home-hero" aria-labelledby="home-headline">
@@ -38,10 +49,14 @@ export default function HomeContent({home,pages=[],children}:{home?:PublicPage;p
    </div>
    <PresenterStage text={t}/>
   </section>
-  <section className="home-services" aria-labelledby="home-services-title"><div className="home-section-heading"><span className="home-kicker">{t.servicesKicker}</span><h2 id="home-services-title">{t.servicesTitle}</h2><p>{t.servicesBody}</p></div>
-   {services.length>0&&<div className="home-service-grid">{services.map(page=><article className="home-service" key={page.id}><div className="home-service-mark"><ServiceMark kind={page.id}/></div><h3>{page.localizedTitle[locale]}</h3><p>{page.localizedSummary[locale]}</p><SiteLink href={page.path} className="home-service-link">{t.serviceLink}<span className="visually-hidden">: {page.localizedTitle[locale]}</span><span aria-hidden="true">→</span></SiteLink></article>)}</div>}
+  <nav className="home-area-nav" aria-label={areaText.label}>
+   <div className="home-area-intro"><span className="home-kicker">{areaText.label}</span><p>{areaText.hint}</p></div>
+   <div className="home-area-links">{areas.map(({name,page})=>page?<SiteLink key={name} href={page.path} className="home-area-link"><span className="home-area-name">{name}</span><span className="home-area-destination">{page.localizedTitle[locale]}</span><span className="home-area-arrow" aria-hidden="true">→</span></SiteLink>:null)}</div>
+  </nav>
+  <section className="home-services" aria-labelledby="home-services-title"><div className="home-section-heading"><span className="home-kicker">{areaText.services}</span><h2 id="home-services-title">{t.servicesTitle}</h2><p>{t.servicesBody}</p></div>
+   {services.length>0&&<div className="home-service-grid">{services.map((page,index)=><article className="home-service" key={page.id}><span className="home-service-index" aria-hidden="true">0{index+1}</span><h3>{page.localizedTitle[locale]}</h3><p>{page.localizedSummary[locale]}</p><SiteLink href={page.path} className="home-service-link">{t.serviceLink}<span className="visually-hidden">: {page.localizedTitle[locale]}</span><span aria-hidden="true">→</span></SiteLink></article>)}</div>}
   </section>
-  <section className="home-next" aria-labelledby="home-next-title"><div className="home-section-heading"><span className="home-kicker">{t.eyebrow}</span><h2 id="home-next-title">{t.headline}</h2><p>{t.summary}</p></div>
+  <section className="home-next" aria-labelledby="home-next-title"><div className="home-section-heading"><span className="home-kicker">{t.eyebrow}</span><h2 id="home-next-title">{scope?.localizedTitle[locale]||t.headline}</h2><p>{scope?.localizedSummary[locale]||t.summary}</p></div>
    <div className="home-task-list">{tasks.map((task,index)=><article className="home-task" key={task.intent}><span className="home-task-index" aria-hidden="true">0{index+1}</span><div><h3>{task.title}</h3><p>{task.body}</p></div><StartAction intent={task.intent}>{task.action}<span aria-hidden="true">→</span></StartAction></article>)}</div>
    {home&&<div className="home-source-content">{home.sections.map(section=><article key={section.id}><h3>{section.heading[locale]}</h3><p>{section.body[locale]}</p></article>)}<nav className="home-source-actions" aria-label={t.sourceLabel}>{home.actions.map((action,index)=>{if(action.type==="chat"&&action.chat_intent)return <StartAction key={index} intent={action.chat_intent}>{action.label[locale]}</StartAction>;const target=pages.find(page=>page.id===action.target_id);return target?<SiteLink key={index} href={target.path}>{action.label[locale]}<span aria-hidden="true">→</span></SiteLink>:null;})}</nav></div>}
   </section>
