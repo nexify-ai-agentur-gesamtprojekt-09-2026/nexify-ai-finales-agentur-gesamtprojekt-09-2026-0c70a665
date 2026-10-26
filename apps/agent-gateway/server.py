@@ -24,6 +24,12 @@ WEB = ROOT / "apps/web"
 AMSTERDAM = ZoneInfo("Europe/Amsterdam")
 
 
+def capabilities():
+    """Implemented local operations, never a connected-provider readiness claim."""
+    return {"quote_pdf": True, "pending_outbox": True, "booking_request": True, "marketing_template": True,
+            "email_delivery": False, "local_planning": True, "external_calendar": False, "model_chat": False}
+
+
 class Rejected(Exception):
     def __init__(self, status, code):
         self.status, self.code = status, code
@@ -104,6 +110,7 @@ def make_pdf(quote):
 class Store:
     def __init__(self, path):
         self.path = str(path)
+        self.page_contexts = {page["path"]: {"page_id": page["id"], "path": page["path"]} for page in public_pages()}
         Path(path).parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         with self.connect() as db:
             db.executescript("""
@@ -152,12 +159,22 @@ class Store:
         if not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key or ""):
             raise Rejected(422, "idempotency_key_required")
         schemas = {"quote": {"title", "details", "locale"}, "booking": {"slot_id", "name", "email", "locale"},
-                   "marketing": {"goal", "audience", "locale"}, "chat": {"message", "locale"}}
+                   "marketing": {"goal", "audience", "locale"}, "chat": {"message", "locale", "page_path"}}
         allowed = {"email", "confirmed"} if operation.startswith("send:") else schemas.get(operation)
         if allowed is None:
             raise Rejected(404, "not_found")
         if set(body) - allowed or body.get("locale", "de") not in {"de", "nl", "fr"}:
             raise Rejected(422, "unexpected_field_or_locale")
+        context = None
+        if operation == "chat" and "page_path" in body:
+            page_path = text(body, "page_path", 240)
+            canonical = page_path.rstrip("/") or "/"
+            # Match a curated public path directly: no URLs, query/fragment,
+            # percent decoding or arbitrary client-provided page metadata.
+            context = self.page_contexts.get(canonical)
+            if context is None or not page_path.startswith("/") or page_path.startswith("//"):
+                raise Rejected(422, "invalid_page_context")
+            body = {**body, "page_path": context["path"]}
         payload_hash = digest(json.dumps(body, sort_keys=True, ensure_ascii=False, separators=(",", ":")))
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
@@ -212,7 +229,7 @@ class Store:
                            "booking": "Wählen Sie einen Terminvorschlag. Die Anfrage wird gespeichert; die persönliche Bestätigung steht anschließend noch aus.",
                            "marketing": "Legen wir Ziel und Zielgruppe fest. Daraus entsteht ein strukturierter Marketing-Entwurf.",
                            "choose": "Womit möchten Sie starten: Angebot besprechen, einen Termin anfragen oder Marketing planen?"}
-                result = {"intent": intent, "message": replies[intent], "mode": "structured_assistant"}
+                result = {"intent": intent, "message": replies[intent], "mode": "structured_assistant", "context": context}
                 db.execute("INSERT INTO messages(owner,role,body) VALUES (?,?,?)", (owner, "user", message))
                 db.execute("INSERT INTO messages(owner,role,body) VALUES (?,?,?)", (owner, "assistant", json.dumps(result)))
             else:
@@ -235,10 +252,11 @@ class Store:
 
 def public_pages():
     site_map = json.loads((ROOT / "config/site-map.json").read_text())
+    allowlist = set(site_map.get("public_allowlist", []))
     return [{"id": page["id"], "path": page["path"], "title": page["title"]["de"],
              "purpose": page["summary"]["de"], "site_context": page["site_context"]}
             for page in site_map["pages"]
-            if page["access"]["visibility"] == "public" and not page["access"]["auth_required"]]
+            if page["id"] in allowlist and page["access"]["visibility"] == "public" and not page["access"]["auth_required"]]
 
 
 def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
@@ -294,7 +312,9 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                     with store.connect() as db:
                         history = [dict(row) for row in db.execute("SELECT role,body FROM messages WHERE owner=? ORDER BY id DESC LIMIT 100", (visitor["id"],))][::-1]
                         quotes = [json.loads(row[0]) for row in db.execute("SELECT payload FROM objects WHERE owner=? AND kind='quote' ORDER BY rowid LIMIT 20", (visitor["id"],))]
-                    return self.respond(200, {"csrf": visitor["csrf"], "history": history, "workspace": {"quotes": quotes}, "capabilities": {"quote_pdf": True, "email_delivery": False, "local_planning": True, "external_calendar": False, "model_chat": False}}, cookie=cookie)
+                    return self.respond(200, {"csrf": visitor["csrf"], "history": history, "workspace": {"quotes": quotes}, "capabilities": capabilities()}, cookie=cookie)
+                if path == "/api/capabilities":
+                    return self.respond(200, {"mode": "local_development", "capabilities": capabilities()})
                 if path == "/api/pages":
                     return self.respond(200, pages)
                 if path == "/api/slots":
