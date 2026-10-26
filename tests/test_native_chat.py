@@ -164,9 +164,16 @@ class NativeChatTests(unittest.TestCase):
         self.assertEqual(self.store.object(gateway.digest(self.cookie.split("=", 1)[1]), result["id"], "marketing")["goal"], "Qualifizierte Anfragen")
 
     def test_duplicate_keys_nonfinite_and_oversized_json_rejected(self):
-        for raw in (b'{"title":"a","title":"b","details":"c"}', b'{"title":"x","details":NaN}', b'{"title":"' + b'a' * 17000 + b'"}'):
+        for raw in (b'{"title":"a","title":"b","details":"c"}', b'{"title":"x","details":NaN}', b'{"title":"' + b'a' * 17000 + b'"}', b'{"title":"\\ud800","details":"invalid unicode"}'):
             with self.subTest(length=len(raw)):
                 self.assertEqual(self.request("POST", "/api/quotes", raw, cookie=self.cookie, csrf=self.csrf)[0], 422)
+
+    def test_unadvertised_action_fields_and_locale_rejected(self):
+        self.assertEqual(self.action("/api/quotes", {"title": "Fixture", "details": "Scope", "owner": "another-visitor"})[0], 422)
+        self.assertEqual(self.action("/api/chat", {"message": "Hallo", "locale": "unknown"})[0], 422)
+
+    def test_non_ascii_csrf_returns_error_without_action(self):
+        self.assertEqual(self.request("POST", "/api/quotes", {"title": "Fixture", "details": "Scope"}, cookie=self.cookie, csrf="é")[0], 403)
 
     def test_private_or_encoded_paths_not_served(self):
         for path in ("/.git/config", "/config/automation.json", "/%2e%2e/.env", "/api/quotes/" + "0" * 32 + "/pdf"):

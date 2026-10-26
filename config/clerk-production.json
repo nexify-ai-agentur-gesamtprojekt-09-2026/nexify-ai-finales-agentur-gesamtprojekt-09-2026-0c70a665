@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "application": "apps/web",
+  "provider": "clerk",
+  "publishable_key_source": "explicit_user_input",
+  "publishable_key_mode": "live",
+  "frontend_api_host_from_key": "clerk.nexifyai.de",
+  "production_web_origin": null,
+  "hosting_project": null,
+  "hosting_provider": null,
+  "required_server_secret": {
+    "name": "CLERK_SECRET_KEY",
+    "mode": "live",
+    "must_not_be_public_or_committed": true,
+    "secret_binding_verified": false
+  },
+  "dns": {
+    "source_of_required_records": "Clerk production dashboard Domains for the exact instance",
+    "authoritative_cname_pairs_received": false,
+    "required_cname_pairs": [],
+    "writes_performed": false,
+    "frontend_api_resolution_verified": false,
+    "last_public_resolver_observation": "NXDOMAIN; see docs/deployment/clerk-sources.json"
+  },
+  "first_production_user": {
+    "created": false,
+    "requires_real_identity_and_verification": true,
+    "automatic_admin_or_tenant_membership": false
+  },
+  "boundaries": {
+    "clerk_authentication_is_not_business_authorization": true,
+    "site_tenant_role_assignment_requires_server_owned_mapping": true,
+    "anonymous_visitor_cookie_is_not_clerk_identity": true,
+    "different_domains_do_not_implicitly_share_sessions": true,
+    "customer_project_affilinet_integration": false
+  },
+  "deployment_status": "local_preparation_not_production_release",
+  "open_prerequisites": [
+    "confirm_web_domain_and_real_hosting_project",
+    "bind_new_production_secret_in_server_secret_store",
+    "obtain_exact_dns_records_and_authorized_zone_access",
+    "verify_dns_and_clerk_frontend_api",
+    "replace_static_prototype_deployment_with_reviewed_next_app_deployment",
+    "provide_production_safe_visitor_gateway_instead_of_loopback_development_proxy",
+    "create_and_verify_real_first_user_without_automatic_business_rights"
+  ]
+}

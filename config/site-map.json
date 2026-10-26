@@ -235,6 +235,7 @@
     "accessibility",
     "cookies",
     "login",
+    "signup",
     "tk-home",
     "tk-search",
     "tk-categories",
@@ -1576,7 +1577,21 @@
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "contact_channels": [
+        {
+          "type": "email",
+          "address": "mail@nexifyai.cloud",
+          "label": {
+            "de": "E-Mail schreiben",
+            "nl": "E-mail schrijven",
+            "fr": "Écrire un e-mail"
+          },
+          "source_refs": [
+            "AGENTS.md"
+          ]
+        }
+      ]
     },
     {
       "id": "one",
@@ -2327,28 +2342,28 @@
       "id": "login",
       "path": "/anmelden",
       "title": {
-        "de": "Kundenbereich: aktueller Stand",
-        "nl": "Klantomgeving: huidige status",
-        "fr": "Espace client : état actuel"
+        "de": "Anmelden",
+        "nl": "Aanmelden",
+        "fr": "Connexion"
       },
       "summary": {
-        "de": "Der gemeinsame Kundenzugang ist noch nicht als integrierte Anmeldung freigegeben. Hier werden keine Zugangsdaten erfragt. Für bestehende Vorgänge nutzen Sie bitte den abgestimmten Kontaktweg.",
-        "nl": "De gezamenlijke klanttoegang is nog niet als geïntegreerde aanmelding vrijgegeven. Hier worden geen inloggegevens gevraagd. Gebruik voor bestaande dossiers het afgesproken contactkanaal.",
-        "fr": "L’accès client commun n’est pas encore validé comme connexion intégrée. Aucun identifiant n’est demandé ici. Pour les dossiers existants, utilisez le contact convenu."
+        "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
+        "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
+        "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Kundenbereich: aktueller Stand",
-            "nl": "Klantomgeving: huidige status",
-            "fr": "Espace client : état actuel"
+            "de": "Anmelden",
+            "nl": "Aanmelden",
+            "fr": "Connexion"
           },
           "body": {
-            "de": "Der gemeinsame Kundenzugang ist noch nicht als integrierte Anmeldung freigegeben. Hier werden keine Zugangsdaten erfragt. Für bestehende Vorgänge nutzen Sie bitte den abgestimmten Kontaktweg.",
-            "nl": "De gezamenlijke klanttoegang is nog niet als geïntegreerde aanmelding vrijgegeven. Hier worden geen inloggegevens gevraagd. Gebruik voor bestaande dossiers het afgesproken contactkanaal.",
-            "fr": "L’accès client commun n’est pas encore validé comme connexion intégrée. Aucun identifiant n’est demandé ici. Pour les dossiers existants, utilisez le contact convenu."
+            "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
+            "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
+            "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -2358,9 +2373,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Der gemeinsame Kundenzugang ist noch nicht als integrierte Anmeldung freigegeben. Hier werden keine Zugangsdaten erfragt. Für bestehende Vorgänge nutzen Sie bitte den abgestimmten Kontaktweg.",
-          "nl": "De gezamenlijke klanttoegang is nog niet als geïntegreerde aanmelding vrijgegeven. Hier worden geen inloggegevens gevraagd. Gebruik voor bestaande dossiers het afgesproken contactkanaal.",
-          "fr": "L’accès client commun n’est pas encore validé comme connexion intégrée. Aucun identifiant n’est demandé ici. Pour les dossiers existants, utilisez le contact convenu."
+          "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
+          "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
+          "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
         },
         "canonical_path": "/anmelden",
         "canonical_origin": null,
@@ -2375,12 +2390,12 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
-      "content_kind": "access_status",
+      "implementation_status": "implemented",
+      "content_kind": "authentication",
       "readiness": {
         "content": "curated_source_based",
         "transactions": "not_enabled",
-        "backend": "not_connected",
+        "backend": "local_clerk_adapter_live_auth_unverified",
         "production_release": "not_claimed"
       },
       "prototype_page_ids": [
@@ -2392,6 +2407,117 @@
         "docs/09-final/14-gesamtsystem-und-portale.md"
       ],
       "next_actions": [
+        {
+          "type": "route",
+          "target_id": "signup",
+          "label": {
+            "de": "Konto erstellen",
+            "nl": "Account aanmaken",
+            "fr": "Créer un compte"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Kontaktmöglichkeiten ansehen",
+            "nl": "Contactmogelijkheden bekijken",
+            "fr": "Voir les possibilités de contact"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "services",
+          "label": {
+            "de": "Zurück zu den Leistungen",
+            "nl": "Terug naar diensten",
+            "fr": "Revenir aux prestations"
+          }
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true
+    },
+    {
+      "id": "signup",
+      "path": "/registrieren",
+      "title": {
+        "de": "Konto erstellen",
+        "nl": "Account aanmaken",
+        "fr": "Créer un compte"
+      },
+      "summary": {
+        "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
+        "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
+        "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+      },
+      "site_context": "nexify",
+      "sections": [
+        {
+          "id": "ueberblick",
+          "heading": {
+            "de": "Konto erstellen",
+            "nl": "Account aanmaken",
+            "fr": "Créer un compte"
+          },
+          "body": {
+            "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
+            "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
+            "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+          },
+          "source_refs": [
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/deployment/clerk-setup.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
+          "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
+          "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+        },
+        "canonical_path": "/registrieren",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "implemented",
+      "content_kind": "authentication",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "local_clerk_adapter_live_auth_unverified",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/Anmeldung.dc.html",
+        "N1:prototypen/Kundenportal.dc.html"
+      ],
+      "source_refs": [
+        "docs/09-final/05-technische-spezifikation.md",
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "docs/deployment/clerk-setup.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "login",
+          "label": {
+            "de": "Anmelden",
+            "nl": "Aanmelden",
+            "fr": "Connexion"
+          }
+        },
         {
           "type": "route",
           "target_id": "contact",

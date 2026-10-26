@@ -1,3 +1,19 @@
+# Clerk-Produktionsvorbereitung · 26.10.2026
+
+Aktiver Zweig: `factory/agency-separated-2026-10-26`. Lokale Implementierung,
+keine Produktionsfreigabe. Geprüft:124Python-,5Auth-Tests,Typecheck/Build,
+Designaudit0Fehler/0Warnungen,Architektur und Clean-State grün; unabhängige
+Auth-Gegenprüfung inklusive fehlerhafterPublicKeys abgeschlossen. Clerk SDK7.9.20, deutsche UI4.24.1, Anmelden und
+Registrieren, geschlossene Schutzschicht ohne automatische Geschäftsrechte.
+45 Routen:35öffentlich/10geschützt. PublicKey lokal ignoriert und im Cloud-Draft10;
+Serversecret nur angefordert, nicht gebunden. Domain/Hosting und genaue Clerk-CNAMEs
+bleiben offen; DNS-SichtungNXDOMAIN für clerk.nexifyai.de. Keine Benutzer-/DNS-/
+Deploymentmutation. Vollständiger Stand: docs/deployment/clerk-setup.md und
+config/clerk-production.json. F007 bleibt aktiv; Affilinet bleibt separates
+pausiertes Kundenprojekt. Frühere Fortschrittsabschnitte sind historische Nachweise.
+
+---
+
 # Korrigierte Projektgrenze · 26.10.2026
 
 - Nutzerklärung: Affilinet Aachen ist ein gesondertes, pausiertes Kundenprojekt. Der frühere Import und die Einordnung als Agenturmodul waren falsch und sind verworfen.

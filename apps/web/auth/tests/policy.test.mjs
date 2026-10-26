@@ -1,0 +1,42 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { canonicalPath, clerkConfiguration, privateDecision, privateRoute } from "../policy.ts";
+const map = JSON.parse(readFileSync(new URL("../../../../config/site-map.json", import.meta.url)));
+const paths = map.pages.filter(page => page.access.auth_required || page.access.visibility !== "public").map(page => page.path);
+const env = { NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_live_bG9jYWwuZXhhbXBsZS5pbnZhbGlkJA==", CLERK_SECRET_KEY: "sk_live_" + "a".repeat(32), NODE_ENV: "production" };
+test("missing, placeholder, mismatched and test production keys cannot initialize auth", () => {
+  for (const value of [{}, { NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }, {...env, CLERK_SECRET_KEY:"REPLACE_ME"}, {...env, CLERK_SECRET_KEY:"sk_test_"+"a".repeat(32)}, {...env, NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.replace("live", "test"), CLERK_SECRET_KEY:env.CLERK_SECRET_KEY.replace("live", "test")}]) assert.equal(clerkConfiguration(value).ready, false);
+  assert.deepEqual(clerkConfiguration(env), {ready:true});
+  assert.equal(clerkConfiguration({...env, NODE_ENV:"development", APP_ENV:"production", NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.replace("live","test"), CLERK_SECRET_KEY:env.CLERK_SECRET_KEY.replace("live","test")}).ready,false);
+});
+test("malformed publishable keys never mount a broken Provider", () => {
+  const invalid = ["pk_live_a", "pk_live_====", "pk_live_bm90LWEtaG9zdA==",
+    ...["host.example", "host.example$$", "https://clerk.example$", "user@host.example$",
+        "host.example/path$", "host..example$", "-host.example$", "host.example:443$",
+        "host.example$\n", "host.\u0000example$"].map(value=>"pk_live_"+btoa(value))];
+  for (const key of invalid) assert.equal(clerkConfiguration({...env, NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:key}).ready,false,key);
+  assert.equal(clerkConfiguration({...env, NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:"pk_live_"+btoa("clerk.example.invalid$")}).ready,true);
+});
+test("all ten protected site routes and descendants stay protected after canonicalization", () => {
+  assert.equal(paths.length,10);
+  for (const path of paths) {
+    for (const candidate of [path, path+"/detail", path.replaceAll("/", "%2F"), path.replaceAll("/", "%252f"), "/public/.."+path]) assert.equal(privateRoute(canonicalPath(candidate), paths),true,candidate);
+  }
+  for (const path of ["/", "/angebote", "/api/chat", "/teileklar", "/portal/kundeneu"]) assert.equal(privateRoute(path, paths),false);
+  for (const path of ["/%", "/\\portal/kunde", "/portal%00/kunde", "/portal%0a/kunde", "//evil.invalid?x"]) assert.equal(canonicalPath(path),null);
+});
+test("verified identity never auto-grants business membership, admin or first-user rights", () => {
+  assert.equal(privateDecision(false,null),"unavailable");
+  assert.equal(privateDecision(false,"subject"),"unavailable");
+  assert.equal(privateDecision(true,null),"sign_in");
+  for (const subject of ["new-first-user", "admin", "customer@company.invalid"]) assert.equal(privateDecision(true,subject),"membership_required");
+});
+test("public visitor API bypasses Clerk and no frontend secret or role promotion is introduced", () => {
+  const proxy=readFileSync(new URL("../../proxy.ts",import.meta.url),"utf8");
+  assert.match(proxy,/if \(!protectedRoute && !authRoute\) return NextResponse.next\(\)/);
+  assert.match(proxy,/status: 503/);assert.match(proxy,/status: 401/);assert.match(proxy,/status: 403/);
+  const layout=readFileSync(new URL("../../app/layout.tsx",import.meta.url),"utf8");
+  assert.doesNotMatch(layout,/CLERK_SECRET_KEY|secretKey=/);
+  assert.doesNotMatch(proxy,/unsafeMetadata|publicMetadata|emailAddress|role\s*:/);
+});

@@ -82,6 +82,16 @@ def validate_site_map(data):
                     'protected site/tenant boundary missing')
             require(page['metadata']['indexability'] == 'noindex,nofollow', 'private page indexable')
         require(page['next_actions'], 'dead-end page')
+        for channel in page.get('contact_channels', []):
+            require(page['id'] == 'contact' and page['id'] in public,
+                    'contact channel outside public contact page')
+            require(channel['type'] == 'email' and isinstance(channel['address'], str)
+                    and re.fullmatch(r'[A-Za-z0-9._+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+',
+                                     channel['address']) is not None,
+                    'unsafe contact email or injected mailto parameters')
+            translated(channel['label'])
+            require(channel['source_refs'] and all((ROOT / ref).is_file()
+                    for ref in channel['source_refs']), 'contact source missing')
         for action in page['next_actions']:
             translated(action['label'])
             require(not any(k in action for k in ('url', 'href', 'redirect', 'redirect_url')), 'untyped redirect')
@@ -169,7 +179,7 @@ class SiteMapContracts(unittest.TestCase):
 
     def test_actual_full_route_graph_is_reachable_and_source_bound(self):
         result = validate_site_map(self.data)
-        self.assertEqual(result, {'routes':44,'public':34,'protected':10})
+        self.assertEqual(result, {'routes':45,'public':35,'protected':10})
 
     def test_internal_route_cannot_enter_public_navigation(self):
         self.data['site_contexts']['nexify']['navigation'].append('internal-admin')
@@ -229,6 +239,19 @@ class SiteMapContracts(unittest.TestCase):
         self.data['pages'][0]['path'] = '/prototypen/NeXifyAI Cloud v12.dc.html'
         with self.assertRaisesRegex(ValueError, 'prototype route'):
             validate_site_map(self.data)
+
+    def test_contact_email_is_source_bound_and_cannot_inject_mailto_fields(self):
+        contact = next(p for p in self.data['pages'] if p['id'] == 'contact')
+        self.assertEqual(contact['contact_channels'][0]['address'], 'mail@nexifyai.cloud')
+        for address in ['mail@nexifyai.cloud?bcc=other@example.test',
+                        'mail@nexifyai.cloud%0d%0aBcc:other@example.test',
+                        'mail@nexifyai.cloud\nBcc:other@example.test']:
+            with self.subTest(address=address):
+                data = deepcopy(self.data)
+                page = next(p for p in data['pages'] if p['id'] == 'contact')
+                page['contact_channels'][0]['address'] = address
+                with self.assertRaisesRegex(ValueError, 'unsafe contact email'):
+                    validate_site_map(data)
 
 
 if __name__ == '__main__':

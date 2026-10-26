@@ -69,5 +69,6 @@ jobs:
           node-version: '22.23.4'
       - run: npm install --global --ignore-scripts pnpm@12.15.0
       - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm --filter @nexify/web test:auth
       - run: pnpm --filter @nexify/web build
       - run: pnpm --filter @nexify/web typecheck

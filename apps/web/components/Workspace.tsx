@@ -23,6 +23,7 @@ export function StartAction({intent,children}:{intent:Intent;children:ReactNode}
 export default function Workspace({children,pages}:{children:ReactNode;pages:PublicPage[]}) {
   const [locale,setLocale] = useState<Locale>("de");
   const [open,setOpen] = useState(true);
+  const [mobile,setMobile]=useState(false);
   const [ready,setReady] = useState(false);
   const [messages,setMessages] = useState<Message[]>([]);
   const [intent,setIntent] = useState<Intent>("choose");
@@ -38,6 +39,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
   const keys = useRef(new Map<string,string>());
   const chatEnd = useRef<HTMLDivElement>(null);
   const messageInput = useRef<HTMLTextAreaElement>(null);
+  const closeButton=useRef<HTMLButtonElement>(null);
   const t = translations[locale];
   const pathname=usePathname();
   const site=pathname.startsWith("/teileklar")?"teileklar":"nexify";
@@ -45,7 +47,9 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
 
   useEffect(() => {
     try { const saved = localStorage.getItem("nexify-locale"); if(saved && saved in translations)setLocale(saved as Locale); } catch {}
-    if (window.matchMedia("(max-width: 820px)").matches) setOpen(false);
+    const query=window.matchMedia("(max-width: 820px)");
+    setMobile(query.matches);if(query.matches)setOpen(false);
+    const resized=()=>setMobile(query.matches);query.addEventListener("change",resized);
     fetch("/api/session",{cache:"no-store"}).then(async response => {
       if(!response.ok)throw new Error("session");
       const session=await response.json(); csrf.current=session.csrf;
@@ -53,7 +57,9 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
       if(session.workspace?.quotes?.length)setQuote(session.workspace.quotes.at(-1));
       setReady(true);
     }).catch(() => setError("offline"));
+    return()=>query.removeEventListener("change",resized);
   },[]);
+  useEffect(()=>{document.body.classList.toggle("chat-modal-open",mobile&&open);if(mobile&&open)closeButton.current?.focus();return()=>document.body.classList.remove("chat-modal-open");},[mobile,open]);
   useEffect(() => {document.documentElement.lang=locale;try{localStorage.setItem("nexify-locale",locale);}catch{}},[locale]);
   useEffect(() => {chatEnd.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,intent,quote,booking,marketing]);
   useEffect(() => {
@@ -77,24 +83,27 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
     try {await action();}catch {setError("error");}finally{active.current=false;setBusy(false);}
   }
   const reply=(selected?:Intent)=>selected==="quote"?t.quoteReply:selected==="booking"?t.bookingReply:selected==="marketing"?t.marketingReply:t.choose;
+  function closePanel(){setOpen(false);requestAnimationFrame(()=>{const target=document.querySelector<HTMLButtonElement>(".reopen-chat")||document.querySelector<HTMLButtonElement>(".header-actions button");target?.focus();});}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form=event.currentTarget; const value=String(new FormData(form).get("message")||"").trim();if(!value)return;
     await act(async()=>{const result=await post("/api/chat",{message:value,locale});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
   }
 
   return <UIContext.Provider value={{locale,t}}><div className={`workspace-shell ${open?"is-open":"is-closed"}`}>
-    <div className="website">
+    <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content">Zum Inhalt</a>
       <header className="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={site==="teileklar"?"TEILEKLAR Startseite":"NeXify AI Startseite"}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>Ein Bereich von NeXify AI</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>NeXify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
         <nav aria-label="Hauptnavigation">{navigation.map(page=><Link key={page.id} href={page.path}>{page.localizedTitle[locale]}</Link>)}</nav>
-        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option></select><button className="outline-button compact" onClick={()=>{setOpen(true);messageInput.current?.focus();}}>{t.open}</button></div>
+        <details className="mobile-navigation"><summary aria-label={t.pages}>☰</summary><nav aria-label={t.pages}>{navigation.map(page=><Link key={page.id} href={page.path}>{page.localizedTitle[locale]}</Link>)}</nav></details>
+        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option></select><button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{setOpen(true);messageInput.current?.focus();}}>{t.open}</button></div>
       </header>
       <main id="page-content">{children}</main>
       <footer className="site-footer"><span>{site==="teileklar"?"TEILEKLAR · NeXify AI":"NeXify AI"} · {t.footer}</span><span className="preview-badge">{t.preview}</span><Link href={site==="teileklar"?"/":"/teileklar"}>{site==="teileklar"?"NeXify AI":"TEILEKLAR"} →</Link><details><summary>{t.pages}</summary><nav aria-label={t.pages}>{pages.filter(page=>page.site_context===site).map(page=><Link key={page.path} href={page.path}>{page.localizedTitle[locale]}</Link>)}</nav></details></footer>
     </div>
     {!open && <button className="reopen-chat" onClick={()=>setOpen(true)} aria-expanded="false" aria-controls="aifly-panel"><span className="aifly-symbol">N</span>{t.open}</button>}
-    <aside id="aifly-panel" className="aifly-panel" aria-label={t.assistant} hidden={!open}>
-      <div className="panel-heading"><span className="aifly-symbol" aria-hidden="true">N</span><div><h2>{t.assistant}</h2><p>{t.subtitle}</p></div><button className="icon-button" aria-label={t.close} onClick={()=>setOpen(false)}>×</button></div>
+    {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
+    <aside id="aifly-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>
+      <div className="panel-heading"><span className="aifly-symbol" aria-hidden="true">N</span><div><h2>{t.assistant}</h2><p>{t.subtitle}</p></div><button ref={closeButton} className="icon-button" aria-label={t.close} onClick={closePanel}>×</button></div>
       <div className="conversation" aria-label={t.history}>
         <div className="welcome-card"><span className="eyebrow">NEXIFY AI</span><p>{t.welcome}</p><div className="action-options">{intents.map(action=><button key={action} className="action-option" disabled={!ready||busy} onClick={()=>setIntent(action)}><span><ActionGlyph intent={action}/></span>{t[action]}<span aria-hidden="true">→</span></button>)}</div></div>
         <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?"AIFly":locale==="de"?"Sie":locale==="nl"?"U":"Vous"}</span><p>{message.role==="user"?message.text:reply(message.intent)}</p></div>)}</div>

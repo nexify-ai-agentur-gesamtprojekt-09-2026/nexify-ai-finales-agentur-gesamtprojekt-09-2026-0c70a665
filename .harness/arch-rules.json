@@ -63,6 +63,15 @@
       "what": "Kundenprojektbaum/-historie oder eine unbelegte Vermischung ist im Agenturstand enthalten.",
       "why": "Gemeinsamer Repozugriff autorisiert Wiederverwendung brauchbarer Komponenten, keine fachliche Projektfusion.",
       "fix": "Quellen zuordnen und Kundenprojekt getrennt lassen; konkrete Komponenten mit Herkunft und Gegenproben adaptieren."
+    },
+    {
+      "id": "ARCH-008",
+      "description": "Auth-Konfiguration und geschützte Routen bleiben bei fehlerhaften Schlüsseln geschlossen; keine automatischen Geschäftsrechte.",
+      "check": "node --test apps/web/auth/tests/policy.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein Auth-Konfigurations- oder Berechtigungsgrenztest scheitert.",
+      "why": "Fehlerhafte Schlüssel dürfen den öffentlichen Fallback nicht beschädigen und verifizierte Identität darf keine Mitgliedschaft erfinden.",
+      "fix": "Schlüsselparser und serverseitige Schutzentscheidung korrigieren; keine negativen Authfälle deaktivieren."
     }
   ]
 }

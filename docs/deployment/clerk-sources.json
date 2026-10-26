@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-26T08:44:07.725428+00:00",
+  "scope": "read-only public documentation, npm metadata and public HTTPS DNS resolvers; no authenticated Clerk requests, account/user creation, paid calls or DNS writes",
+  "network_context": {
+    "runtime_mode": "unrestricted",
+    "runtime_enforcement_state": "unknown",
+    "policy_snapshot": "unrestricted",
+    "inherited_proxy_and_CA_preserved": true
+  },
+  "sources": [
+    {
+      "id": "npm-nextjs",
+      "requested_url": "https://registry.npmjs.org/@clerk/nextjs/latest",
+      "final_url": "https://registry.npmjs.org/@clerk/nextjs/latest",
+      "observed_at": "2026-10-26T08:41:30.956098+00:00",
+      "http_status": 200,
+      "sha256": "066071b874f672de20199a521c9e592eb255cfac6e726245c26f97ed16296990",
+      "bytes": 4094,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [],
+      "metadata": {
+        "name": "@clerk/nextjs",
+        "version": "7.9.20",
+        "peerDependencies": {
+          "next": "^15.2.8 || ^15.3.8 || ^15.4.10 || ^15.5.9 || ^15.6.0-0 || ^16.0.10 || ^16.1.0-0",
+          "react": "^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0",
+          "react-dom": "^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0"
+        },
+        "engines": {
+          "node": ">=20.9.0"
+        },
+        "repository": {
+          "url": "git+https://github.com/clerk/javascript.git",
+          "type": "git",
+          "directory": "packages/nextjs"
+        },
+        "dist_integrity": "sha512-4Pw9P2L5ySAout2rb87ZZSrHEq850bbJ0IuV859h19ToIMzD9+IgIbLwSsKrxHxgmO3qN/iBbckt0hmTrMLVDQ=="
+      }
+    },
+    {
+      "id": "quickstart",
+      "requested_url": "https://clerk.com/docs/nextjs/getting-started/quickstart",
+      "final_url": "https://clerk.com/docs/nextjs/getting-started/quickstart",
+      "observed_at": "2026-10-26T08:41:30.956915+00:00",
+      "http_status": 200,
+      "sha256": "3920bbebe192f09a4c66ba71eac08e1b03297d2423a6893ebc56cae92b829f4c",
+      "bytes": 1125048,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "If you're using Next.js ≤15, name your file middleware.ts instead of proxy.ts . The code itself remains the same; only the filename changes. Create a proxy.ts file. If you're using the /src directory, create proxy.ts in the /src directory. If you're not using the /src directory, create proxy.ts in the root directory. In your proxy.ts file, export the clerkMiddleware() helper: proxy.ts import { clerkMiddleware } from '@clerk/nextjs/server' export default clerkMiddleware () export const config = { matcher : [ // Skip Next.js internals and all static files, unless found in search params '/((?!_next|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gi",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "Name the middleware file by the `next` version in `package.json`: `proxy.ts` on Next.js 16+, `middleware.ts` on 15 and below. The contents are identical; `npx -y clerk@latest init` creates it - `auth()` from `@clerk/nextjs/server` is async. Always `await auth()` - `ClerkProvider` goes inside `<body>`, not wrapping `<html>` - When `next.config` sets `cacheComponents: true` (the `create-next-app` default), `next build` fails on request data read outside `<Suspense>`. Wrap `<Show>` in a Server Component and any Server Component that calls `auth()` or `currentUser()` in `<Suspense>`, as close to the auth-dependent UI as possible - Never expose `C",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "auth()` from `@clerk/nextjs/server` is async. Always `await auth()` - `ClerkProvider` goes inside `<body>`, not wrapping `<html>` - When `next.config` sets `cacheComponents: true` (the `create-next-app` default), `next build` fails on request data read outside `<Suspense>`. Wrap `<Show>` in a Server Component and any Server Component that calls `auth()` or `currentUser()` in `<Suspense>`, as close to the auth-dependent UI as possible - Never expose `CLERK_SECRET_KEY` in client code - Use `@clerk/nextjs`, not `@clerk/clerk-react` - Do not read or print existing environment variable files; ask the user for any missing non-sensitive configuratio",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "ClerkProvider` goes inside `<body>`, not wrapping `<html>` - When `next.config` sets `cacheComponents: true` (the `create-next-app` default), `next build` fails on request data read outside `<Suspense>`. Wrap `<Show>` in a Server Component and any Server Component that calls `auth()` or `currentUser()` in `<Suspense>`, as close to the auth-dependent UI as possible - Never expose `CLERK_SECRET_KEY` in client code - Use `@clerk/nextjs`, not `@clerk/clerk-react` - Do not read or print existing environment variable files; ask the user for any missing non-sensitive configuration Docs: https://clerk.com/docs/cli https://clerk.com/docs/llms.txt ## A",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "Create your first user Visit your app's homepage at http://localhost:3000 ⁠ . Select \"Sign up\" on the page and authenticate to create your first user. Next steps Explore the most relevant next steps for your SDK using the following guides. Prebuilt components Learn how to add Clerk's prebuilt authentication and user-management UI to your app. Build custom flows Learn how to build custom user interfaces entirely from scratch using the Clerk API. Read user data Learn how to use Clerk's helpers to read user data in your app. Customization & localization Learn how to customize and localize Clerk components. More to explore Explore additional Cler",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    },
+    {
+      "id": "middleware",
+      "requested_url": "https://clerk.com/docs/reference/nextjs/clerk-middleware",
+      "final_url": "https://clerk.com/docs/reference/nextjs/clerk-middleware",
+      "observed_at": "2026-10-26T08:41:30.957402+00:00",
+      "http_status": 200,
+      "sha256": "700970bc3799acaea930f8eb30a74567dbf07cfc1e3de322be349d0cacdea268",
+      "bytes": 1230868,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "If you're using Next.js ≤15, name your file middleware.ts instead of proxy.ts . The code itself remains the same; only the filename changes. Create a proxy.ts file at the root of your project, or in your src/ directory if you have one. Note For more information about Middleware in Next.js, see the Next.js documentation ⁠ . proxy.ts import { clerkMiddleware } from '@clerk/nextjs/server' export default clerkMiddleware () export const config = { matcher : [ // Skip Next.js internals and all static files, unless found in search params '/((?!_next|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest))",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "createRouteMatcher ([ '/dashboard/:path*' ]) For non-auth path logic in your Middleware, use the framework's native matching ( config.matcher and req.nextUrl.pathname ). For an example, see Geo blocking . Feedback What did you think of this content? It was helpful It was not helpful I have feedback Last updated on Oct 23, 2026 GitHub Edit on GitHub Product Authentication Multi-tenancy Billing CLI MCP server Agents SDKs React Next.js Expo View all Resources Documentation Changelog Glossary Feature requests Startups Students LLM Leaderboard Company About Careers Blog Contact Brand assets Articles Legal Terms and conditions Privacy policy Websit",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    },
+    {
+      "id": "production",
+      "requested_url": "https://clerk.com/docs/deployments/overview",
+      "final_url": "https://clerk.com/docs/guides/development/deployment/production",
+      "observed_at": "2026-10-26T08:41:30.957967+00:00",
+      "http_status": 200,
+      "sha256": "135ac4f8cbefd137f9bb2256676057ac76aec5db17179b4a0ef5495ddbdc249b",
+      "bytes": 964835,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "DNS records Clerk uses DNS records to provide session management and emails verified from your domain. To see what DNS records you need, navigate to the Domains ⁠ page in the Clerk Dashboard. Note It can take up to 48hrs for DNS records to fully propagate. Tip If you're unable to add a CNAME record for the Frontend API, you can use a proxy instead. See Proxying the Clerk Frontend API for more information. Authentication across subdomains When you set a root domain for your production deployment, Clerk's authentication will work across all subdomains. User sessions will also be shared across the subdomains. Warning By default, the Frontend API",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "Set the DNS record for this subdomain to a \"DNS only\" mode on your host to prevent proxying. Deployment stuck in certificate issuance If your instance is stuck during TLS certificate issuance for longer than a few minutes, this might be caused due to certain CAA DNS records ⁠ set on your primary domain. CAA are DNS records you may set to denote which certificate authorities (CA) are permitted to issue certificates for your domain, as a security measure against certain attacks. When you deploy your application, Clerk attempts to provision certificates using either the LetsEncrypt ⁠ or Google Trust Services ⁠ certificate authorities. Ensure tha",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "Configure authorizedParties for secure request authorization Examples Confirm your iOS app is registered in production Update associated domains Confirm your Android app is registered in production Configure allowlisted redirect URLs Deploy certificates Test on a physical device Troubleshooting DNS records not propagating with Cloudflare Deployment stuck in certificate issuance Incorrect domain Copy as markdown Markdown Copy as markdown Before you begin: You will need to have a domain you own. You will need to be able to add DNS records on your domain. You will need social sign-in (OAuth) credentials for any providers that you would like to u",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "Once you have completed all of the necessary steps, a Deploy certificates button will appear. Selecting this button will deploy your production instance. Test on a physical device Build a release/TestFlight build with production keys and verify behavior. Build a signed release APK or use Play Store internal testing with production keys and verify behavior. Troubleshooting DNS records not propagating with Cloudflare Clerk uses a DNS check to validate this CNAME record. If this subdomain is reverse proxied behind a service that points to generic hostnames, such as Cloudflare, the DNS check will fail. Set the DNS record for this subdomain to a \"",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    },
+    {
+      "id": "environment",
+      "requested_url": "https://clerk.com/docs/guides/development/clerk-environment-variables",
+      "final_url": "https://clerk.com/docs/guides/development/clerk-environment-variables",
+      "observed_at": "2026-10-26T08:41:30.958447+00:00",
+      "http_status": 200,
+      "sha256": "037f91b6529db34deb98b971f287d0f698655956e71c515e66064138de2e0b07",
+      "bytes": 987374,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "Your Clerk app's Publishable Key ⁠ . It will be prefixed with pk_test_ in development instances and pk_live_ in production instances. CLERK_SECRET_KEY Your Clerk app's Secret Key ⁠ . It will be prefixed with sk_test_ in development instances and sk_live_ in production instances. Do not expose this on the frontend with a public environment variable . For Vite-based frameworks, like React Router and Vue, you must prefix environment variables that you want to expose to the client-side with VITE_ . Variable Description VITE_CLERK_PUBLISHABLE_KEY Your Clerk app's Publishable Key ⁠ . It will be prefixed with pk_test_ in development instances and pk",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "Your Clerk app's Secret Key ⁠ . It will be prefixed with sk_test_ in development instances and sk_live_ in production instances. Do not expose this on the frontend with a public environment variable . For Vite-based frameworks, like React Router and Vue, you must prefix environment variables that you want to expose to the client-side with VITE_ . Variable Description VITE_CLERK_PUBLISHABLE_KEY Your Clerk app's Publishable Key ⁠ . It will be prefixed with pk_test_ in development instances and pk_live_ in production instances. API and SDK configuration The following environment variables enable you to configure API and SDK behavior, such as wha",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    },
+    {
+      "id": "domains",
+      "requested_url": "https://clerk.com/docs/guides/dashboard/dns-domains",
+      "observed_at": "2026-10-26T08:41:30.958995+00:00",
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": []
+    },
+    {
+      "id": "users",
+      "requested_url": "https://clerk.com/docs/guides/users/managing",
+      "final_url": "https://clerk.com/docs/guides/users/managing",
+      "observed_at": "2026-10-26T08:41:30.960294+00:00",
+      "http_status": 200,
+      "sha256": "ba3485f48027f10af22a6780bdc86af487128eaf55f72be950af45b6a7ae4295",
+      "bytes": 1292357,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "To create a user in the Clerk Dashboard, navigate to the Users ⁠ page and select Create user . Programmatically To create a user programmatically, you can either make a request directly to Clerk's Backend API or use the createUser() method as shown in the following example. example.js import { createClerkClient } from '@clerk/backend' const clerkClient = createClerkClient ({ secretKey : process . env . CLERK_SECRET_KEY }) async function createUser (request) { // Use the `request.auth` object to access `isAuthenticated` and the user's ID const { isAuthenticated , userId } = request .auth // Protect the route from unauthenticated users if ( ! i",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    },
+    {
+      "id": "dns-google",
+      "requested_url": "https://dns.google/resolve?name=clerk.nexifyai.de&type=CNAME",
+      "final_url": "https://dns.google/resolve?name=clerk.nexifyai.de&type=CNAME",
+      "observed_at": "2026-10-26T08:41:30.961071+00:00",
+      "http_status": 200,
+      "sha256": "55c730e2e96466a6f4b860718a030943e66035fc1d26f04f48cf03ae9010bb2e",
+      "bytes": 298,
+      "request_method": "GET",
+      "kind": "public_dns_observation",
+      "excerpts": [],
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clerk.nexifyai.de.",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de.",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ],
+        "Comment": "Response from 162.159.24.201."
+      }
+    },
+    {
+      "id": "dns-cloudflare",
+      "requested_url": "https://cloudflare-dns.com/dns-query?name=clerk.nexifyai.de&type=CNAME",
+      "final_url": "https://cloudflare-dns.com/dns-query?name=clerk.nexifyai.de&type=CNAME",
+      "observed_at": "2026-10-26T08:41:30.961608+00:00",
+      "http_status": 200,
+      "sha256": "2ecc9f10b62424059e08400e29c8cd3e35dc7fbb2753ff4c6dc2ad0f45fb0d48",
+      "bytes": 254,
+      "request_method": "GET",
+      "kind": "public_dns_observation",
+      "excerpts": [],
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "clerk.nexifyai.de",
+            "type": 5
+          }
+        ],
+        "Authority": [
+          {
+            "name": "nexifyai.de",
+            "type": 6,
+            "TTL": 600,
+            "data": "ns1.dns-parking.com. dns.hostinger.com. 2026102405 10000 2400 604800 600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "auth",
+      "requested_url": "https://clerk.com/docs/reference/nextjs/app-router/auth",
+      "final_url": "https://clerk.com/docs/reference/nextjs/app-router/auth",
+      "http_status": 200,
+      "observed_at": "2026-10-26T08:42:44.531957+00:00",
+      "sha256": "ea362959ef1350d3896359bfc33d69ea2d3ff7fc089683f170166486bdfef678",
+      "bytes": 865634,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "The auth() helper returns the Auth object of the currently active user, as well as the redirectToSignIn() Next.js Icon method. It includes a single method, protect() , which you can use to check if a user is authenticated or authorized to access certain parts of your application or even entire routes. Only available for App Router. Only works on the server-side, such as in Server Components, Route Handlers, and Server Actions. Requires clerkMiddleware() Next.js Icon to be configured. Must be called inside a <Suspense> ⁠ boundary in Server Components when Cache Components is enabled, which is the default for new Next.js apps. Parameters Name o",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "await auth () if ( ! isAuthenticated) return redirectToSignIn () return < h1 >Hello, {userId}</ h1 > } Add a loading.tsx file next to the page. It wraps the page in a <Suspense> ⁠ boundary, which Cache Components requires for pages that read request data, like auth data or route params. New Next.js apps enable Cache Components by default. app /loading.tsx export default function Loading () { return < p >Loading...</ p > } auth() usage Protect pages and routes You can use auth() to check if isAuthenticated is true. If it's false, then there is not an authenticated (signed in) user. See detailed examples in the guide on protecting content from ",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "auth.protect() Example Returns redirectToSignIn() auth() usage Protect pages and routes Check if a user is authorized Verify machine requests Data fetching with getToken() Copy as markdown Markdown Copy as markdown The auth() helper returns the Auth object of the currently active user, as well as the redirectToSignIn() Next.js Icon method. It includes a single method, protect() , which you can use to check if a user is authenticated or authorized to access certain parts of your application or even entire routes. Only available for App Router. Only works on the server-side, such as in Server Components, Route Handlers, and Server Actions. Requ",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    },
+    {
+      "id": "keyless",
+      "requested_url": "https://clerk.com/docs/guides/development/keyless-mode",
+      "http_status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "observed_at": "2026-10-26T08:42:45.320306+00:00",
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": []
+    },
+    {
+      "id": "provider",
+      "requested_url": "https://clerk.com/docs/nextjs/reference/components/clerk-provider",
+      "final_url": "https://clerk.com/docs/nextjs/reference/components/clerk-provider",
+      "http_status": 200,
+      "observed_at": "2026-10-26T08:42:45.724495+00:00",
+      "sha256": "0d54e897d787273c383a99870c5c0c29782421280c3daa589388170db911f900",
+      "bytes": 1053810,
+      "request_method": "GET",
+      "kind": "official_source",
+      "excerpts": [
+        {
+          "exact_normalized_html_text": "The <ClerkProvider> component is required to integrate Clerk into your React application, providing session and user context to Clerk's hooks and components. The recommended approach is to wrap your entire app with <ClerkProvider> at the entry point to make authentication globally accessible. If you only need authentication for specific routes or pieces of your application, render <ClerkProvider> deeper in the component tree. This allows you to implement Clerk's functionality precisely where required without impacting the rest of your app. Example App Router Pages Router app /layout.tsx import React from 'react' import { ClerkProvider } from ",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        },
+        {
+          "exact_normalized_html_text": "publishableKey? Type string Description The Clerk Publishable Key for your instance. When omitted, @clerk/react reads the key from VITE_CLERK_PUBLISHABLE_KEY or CLERK_PUBLISHABLE_KEY . Required by @clerk/electron/react , which creates the Clerk instance for you. Name routerDebug? Type boolean Description If true , the router will log debug information to the console. Name routerPush? Type (to: string, metadata?: { windowNavigate: (to: string | URL) => void; }) => unknown Description A function which takes the destination path as an argument and performs a \"push\" navigation. Name routerReplace? Type (to: string, metadata?: { windowNavigate: (t",
+          "normalization": "HTML text, script/style excluded, whitespace collapsed"
+        }
+      ]
+    }
+  ],
+  "integration_conclusions": {
+    "sdk_version": "7.9.20",
+    "project_versions": {
+      "next": "16.4.3",
+      "react": "19.3.1",
+      "react-dom": "19.3.1"
+    },
+    "peer_range_compatibility": "all three satisfy the official peer ranges; metadata compatibility, not runtime integration evidence",
+    "middleware_filename": "proxy.ts",
+    "auth_helper": "await auth()",
+    "provider_placement": "inside body",
+    "production_key_prefixes": {
+      "publishable": "pk_live_",
+      "secret": "sk_live_"
+    },
+    "user_supplied_public_key_host": "clerk.nexifyai.de",
+    "public_key_does_not_prove": [
+      "dashboard ownership",
+      "paired server secret availability",
+      "application deployed",
+      "TLS ready",
+      "DNS CNAME target values",
+      "tenant or admin rights"
+    ],
+    "production_domain_decision": "unresolved; existing site-map references nexifyai.cloud, supplied key points to clerk.nexifyai.de; no automatic same-root/cross-TLD session assumption",
+    "desired_cname_records": null,
+    "desired_cname_authority": "Clerk Dashboard > selected production instance > Domains; copy exact name/type/target pairs, do not infer",
+    "dns_observation": {
+      "queried_name": "clerk.nexifyai.de",
+      "record_type": "CNAME",
+      "both_resolvers_status": 3,
+      "interpretation": "NXDOMAIN at observation time; not a Clerk Dashboard desired-state response",
+      "desired_target_verified": false
+    },
+    "first_user": "Sign up interactively on the verified deployed app, or selected production instance > Users > Create user; no operation performed",
+    "first_user_privilege_policy": "No automatic admin: application tenant/site membership and roles require separate server-side authorization. Identity alone must not unlock the existing protected routes.",
+    "provider_without_complete_keys": "Project-specific fail-closed integration proposal: render public site without ClerkProvider and keep private routes denied until validated configuration exists; no production keyless claim.",
+    "paid_or_authenticated_requests_executed": false
+  }
+}

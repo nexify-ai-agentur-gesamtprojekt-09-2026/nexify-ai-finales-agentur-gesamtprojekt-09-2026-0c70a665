@@ -46,6 +46,12 @@ def strict_json(raw):
     value = json.loads(raw, object_pairs_hook=unique, parse_constant=constant)
     if not isinstance(value, dict):
         raise ValueError("object required")
+    for key, item in value.items():
+        key.encode("utf-8")
+        if isinstance(item, str):
+            item.encode("utf-8")
+        elif not (item is None or type(item) in {bool, int}):
+            raise ValueError("flat typed input required")
     return value
 
 
@@ -62,10 +68,11 @@ def text(body, key, limit=3000, required=True):
 def make_pdf(quote):
     """Small real PDF, fixed font and bounded text; never embeds markup or JavaScript."""
     import textwrap
-    rows = ["NeXify AI - Angebotsentwurf", "ENTWURF - NICHT VERBINDLICH", "", quote["title"], ""]
+    rows = ["NeXify AI - Angebotsentwurf", "ENTWURF - NICHT VERBINDLICH", "", quote["title"], "", "Leistungsumfang / Ihr Vorhaben"]
     for paragraph in quote["details"].splitlines():
         rows.extend(textwrap.wrap(paragraph, width=88) or [""])
-    rows += ["", "Preise, Steuern, Leistungsumfang und Anbieterangaben: zur Freigabe.",
+    rows += ["", "Nicht enthalten: noch gemeinsam abzugrenzen.", "Zeitrahmen und Abhaengigkeiten: noch nicht vereinbart.",
+             "Preise, Steuern, finaler Umfang und Anbieterangaben: zur Freigabe.",
              "Keine zahlungspflichtige Annahme. Dieser Entwurf ist keine Rechnung.", "Referenz: " + quote["id"]]
     # Quote input is limited to 3000 chars; paginate rather than silently truncate.
     pages = [rows[i:i + 44] for i in range(0, len(rows), 44)]
@@ -144,6 +151,13 @@ class Store:
     def action(self, owner, operation, key, body):
         if not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key or ""):
             raise Rejected(422, "idempotency_key_required")
+        schemas = {"quote": {"title", "details", "locale"}, "booking": {"slot_id", "name", "email", "locale"},
+                   "marketing": {"goal", "audience", "locale"}, "chat": {"message", "locale"}}
+        allowed = {"email", "confirmed"} if operation.startswith("send:") else schemas.get(operation)
+        if allowed is None:
+            raise Rejected(404, "not_found")
+        if set(body) - allowed or body.get("locale", "de") not in {"de", "nl", "fr"}:
+            raise Rejected(422, "unexpected_field_or_locale")
         payload_hash = digest(json.dumps(body, sort_keys=True, ensure_ascii=False, separators=(",", ":")))
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
@@ -232,6 +246,9 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
     allowed_pages = {page["path"] for page in pages}
     class Handler(BaseHTTPRequestHandler):
         server_version = "NeXifyLocal/1"
+        def setup(self):
+            super().setup()
+            self.connection.settimeout(10)
         def log_message(self, *_):
             pass
 
@@ -313,7 +330,8 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                 if self.headers.get("Origin") not in expected:
                     raise Rejected(403, "origin_mismatch")
                 visitor, _ = self.visitor()
-                if not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), visitor["csrf"]):
+                supplied_csrf = self.headers.get("X-CSRF-Token", "")
+                if not supplied_csrf.isascii() or not hmac.compare_digest(supplied_csrf, visitor["csrf"]):
                     raise Rejected(403, "csrf_mismatch")
                 if self.headers.get("Content-Type", "").split(";", 1)[0] != "application/json":
                     raise Rejected(415, "json_required")
@@ -322,7 +340,7 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                     if not 0 < size <= 16384:
                         raise ValueError()
                     body = strict_json(self.rfile.read(size))
-                except (ValueError, UnicodeError):
+                except (ValueError, UnicodeError, RecursionError):
                     raise Rejected(422, "invalid_body") from None
                 path = urlsplit(self.path).path
                 mapping = {"/api/chat": "chat", "/api/quotes": "quote", "/api/bookings": "booking", "/api/marketing": "marketing"}
