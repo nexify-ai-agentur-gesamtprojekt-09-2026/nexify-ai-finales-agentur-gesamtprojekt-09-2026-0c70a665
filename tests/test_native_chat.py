@@ -146,7 +146,8 @@ class NativeChatTests(unittest.TestCase):
         body = {"slot_id": slots[0]["id"], "name": "Fixture", "email": "fixture@example.invalid"}
         one = self.action("/api/bookings", body)
         two = self.action("/api/bookings", body)
-        self.assertEqual(one, two)
+        self.assertEqual(one[0], two[0])
+        self.assertEqual(one[1], two[1])
         with self.store.connect() as db:
             self.assertEqual(db.execute("SELECT count(*) FROM bookings").fetchone()[0], 1)
 

@@ -12,7 +12,7 @@
         "name": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665"
       },
       "head": "7e0913472dc430883b77dc990466f711cacf2714",
-      "html_count": 47,
+      "html_count": 48,
       "documentation_files_read": 218,
       "excluded_directories": [
         ".git",
@@ -41,8 +41,8 @@
     }
   ],
   "coverage": {
-    "html_discovered": 93,
-    "html_catalogued": 93,
+    "html_discovered": 94,
+    "html_catalogued": 94,
     "html_read_to_end": true,
     "javascript_executed": false,
     "source_errors": [],
@@ -85,6 +85,41 @@
     "media"
   ],
   "pages": [
+    {
+      "page_id": "N1:apps/site/index.html",
+      "repository": "N1",
+      "path": "apps/site/index.html",
+      "sha256": "2c4433488c2341ab761c27933f65393b740cbeff8555ebe749ea683fd0a56818",
+      "bytes": 595,
+      "tracked": true,
+      "title": "NeXify AI · Ihr nächster Schritt",
+      "purpose": {
+        "text": "NeXify AI: Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",
+        "status": "observed_meta_description",
+        "source": {"repository": "N1", "path": "apps/site/index.html"}
+      },
+      "observed": {
+        "titles": [{"line": 1, "text": "NeXify AI · Ihr nächster Schritt"}],
+        "meta": [
+          {"line": 1, "name": "description", "content": "NeXify AI: Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly."},
+          {"line": 1, "name": "robots", "content": "noindex,nofollow"}
+        ],
+        "headings": [], "forms": [], "controls": [], "actions": [], "links": [],
+        "resources": [{"tag": "script", "line": 1, "src": {"value": "/src/main.tsx", "kind": "relative"}, "original_relative": "/src/main.tsx", "local_resolution": {"path": "src/main.tsx", "within_repository": true, "exists": false}}],
+        "api_markers": [], "backend_todos": [], "backend_endpoint_conflicts": [], "auth_markup_signals": [], "script_sources": [], "document_references": [],
+        "unresolved_local_references": [{"line": 1, "reference": "/src/main.tsx", "kind": "src"}],
+        "parsed_html_element_count": 10
+      },
+      "derived": {
+        "page_role": "reference_navigation",
+        "domains": ["content", "operations"],
+        "proposed_required_operations": [], "api_proposals": [],
+        "auth_requirement": {"authenticated_proposed": false, "enforcement_verified": false, "source_basis": "page purpose + AGENTS.md + docs/09-final/05 and 14; prototype auth state is not an authorization boundary"},
+        "status": "derived_target_contract_candidates", "confidence": "needs_contract_review"
+      },
+      "runtime_validation": {"executed": false, "backend_connected": false, "visual_or_interaction_tested": false},
+      "limitations": ["Static markup, direct local scripts and heuristic method/event patterns are inventoried; dynamic JavaScript-generated controls, imported module behavior and server authorization need separate runtime/contract verification.", "Cross-reference documentation may contain historical or conflicting statements; it is not approval or proof of current deployment."]
+    },
     {
       "page_id": "N1:apps-index.html",
       "repository": "N1",
@@ -71594,6 +71629,7 @@
         "N2:prototypen/Reifenrechner.dc.html"
       ],
       "reference_navigation": [
+        "N1:apps/site/index.html",
         "N1:apps-index.html",
         "N1:docs/projektseiten/Start.dc.html",
         "N1:preview-prototypes.html",
@@ -71717,6 +71753,7 @@
         "N2:prototypen/TEILEKLAR Shop.dc.html"
       ],
       "content": [
+        "N1:apps/site/index.html",
         "N1:apps-index.html",
         "N1:docs/projektseiten/Start.dc.html",
         "N1:packages/ui/index.html",
@@ -71970,6 +72007,7 @@
         "N2:prototypen/NeXify Posteingang.dc.html"
       ],
       "operations": [
+        "N1:apps/site/index.html",
         "N1:apps-index.html",
         "N1:docs/projektseiten/Architektur.dc.html",
         "N1:docs/projektseiten/NeXify Organisation.dc.html",

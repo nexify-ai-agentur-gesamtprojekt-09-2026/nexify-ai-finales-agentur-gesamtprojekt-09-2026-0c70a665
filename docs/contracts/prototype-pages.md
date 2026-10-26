@@ -1,15 +1,15 @@
 # Vollständiger statischer Seiten- und Funktionskatalog
 
-Stand: 2026-10-26T06:22:28.558416+00:00. Datenquelle: `prototype-pages.json`. Status: abgeleiteter Zielvertrag mit wortgetreuen statischen Quellenbelegen; keine Live- oder Produktabnahme.
+Stand: 2026-10-26T06:22:28.558416+00:00; Nachtrag `apps/site/index.html` am 2026-10-26. Datenquelle: `prototype-pages.json`. Status: abgeleiteter Zielvertrag mit wortgetreuen statischen Quellenbelegen; keine Live- oder Produktabnahme.
 
 ## Umfang
 
 | Repository | HTML vollständig erfasst | Markdown-Dateien gelesen |
 |---|---:|---:|
-| N1 | 47 | 218 |
+| N1 | 48 | 218 |
 | N2 | 46 | 195 |
 
-Insgesamt 93 HTML-Dateien; alle vollständig gelesen und geparst, auch außerhalb von prototypen/. Keine Archivextraktion und keine JavaScript-Ausführung. Vollständige Pfade, SHA256, Titel, Zweck, Formulare, Steuerelemente, Aktionen, Links, Authsignale und direkte lokale Skriptquellen stehen je Seite im JSON. Ressourcen-/Navigationsverweise werden lokal auf Existenz geprüft, ohne externe Seiten aufzurufen.
+Insgesamt 94 HTML-Dateien; alle vollständig gelesen und geparst, auch außerhalb von prototypen/. Keine Archivextraktion und keine JavaScript-Ausführung. Vollständige Pfade, SHA256, Titel, Zweck, Formulare, Steuerelemente, Aktionen, Links, Authsignale und direkte lokale Skriptquellen stehen je Seite im JSON. Ressourcen-/Navigationsverweise werden lokal auf Existenz geprüft, ohne externe Seiten aufzurufen.
 
 `observed` bedeutet hier ausschließlich statisch im Quelltext vorhanden. `derived` enthält vorgeschlagene Domains, Fähigkeiten, API-Pfade/Methoden und Auth-Anforderungen. Formularattribute, noindex, loggedIn-Variablen und clientseitiger SessionStorage beweisen keine serverseitige Autorisierung. HTML-Inputwerte werden nicht ausgegeben; Kontaktziele und sensible URL-Parameter sind redigiert. Ausführbare Scriptkörper werden nicht kopiert.
 
@@ -17,6 +17,7 @@ Insgesamt 93 HTML-Dateien; alle vollständig gelesen und geparst, auch außerhal
 
 | Page-ID | Titel / Bestimmung | Abgeleitete Rolle | Domains | Aktionen / Formulare / API-Marker |
 |---|---|---|---|
+| `N1:apps/site/index.html` | NeXify AI · Ihr nächster Schritt | reference_navigation | content, operations | 0 / 0 / 0 |
 | `N1:apps-index.html` | NeXify — finale Gesamtlösung | reference_navigation | content, operations | 0 / 0 / 0 |
 | `N1:docs/projektseiten/Architektur.dc.html` | Systemarchitektur – NeXify AI | internal_architecture_reference | operations, integrations, administration | 0 / 0 / 0 |
 | `N1:docs/projektseiten/NeXify Organisation.dc.html` | Organisation – NeXify AI | internal_administration | identity, tenants, administration, projects, billing, affiliates, partners, inbox, decisions, integrations, operations, knowledge, learning | 1 / 0 / 0 |
