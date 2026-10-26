@@ -33,3 +33,6 @@ apps/web/tsconfig.tsbuildinfo
 .local/
 .env*
 !.env.example
+
+# Explicitly supplied PUBLIC verification material; private keys remain ignored.
+!config/public-keys/clerk-provided.pem

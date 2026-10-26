@@ -127,3 +127,34 @@ im tatsächlichen Hostingprojekt hinterlegen, niemals im Chat oder Repository.
 Produktionsstatus und offene Voraussetzungen stehen maschinenlesbar in
 `config/clerk-production.json`. Es wurden keine DNS-Einträge geschrieben,
 keine echten Benutzer angelegt und kein Produktionsdeployment ausgeführt.
+
+## Verbindliche Domainaufteilung nach Nutzerklärung
+
+Produktionsziel ist **https://nexifyai.cloud** auf Vercel. Die Schreibweise
+`neifyai.cloud` in der Antwort wird im bestehenden Projektkontext als
+`nexifyai.cloud` verstanden. **https://nexifyai.de** ist die Vorschau-Domain;
+der Nutzer gibt an, sie bereits in Vercel eingebunden zu haben. Diese Remote-
+Zuordnung ist hier noch nicht verifiziert. Die aktuelle ChatGPT-Seite auf `.cloud`
+bleibt bis zur fertigen, abgenommenen NeXify-Version bestehen. Kein vorzeitiger
+DNS-Wechsel und keine automatische Weiterleitung der Vorschau auf die Baustelle.
+
+Beide exakten HTTPS-Origins sind als Clerk `authorizedParties` konfiguriert.
+Dies begrenzt zulässige Token-`azp`-Werte; es registriert keine Domain, beweist
+keine gültige Session und ist kein Ersatz für Rollen/Mandantenmitgliedschaften.
+Keine pauschale Freigabe für `*.vercel.app` oder andere Origins.
+
+Der vorhandene Publishable Key gehört weiterhin zu `clerk.nexifyai.de`.
+Zwei verschiedene Top-Level-Domains benötigen eine bestätigte Clerk-Domain-
+Topologie (gegebenenfalls Primary/Satellite); Cookies werden nicht automatisch
+geteilt. Primary-/Satellite-Flags und weitere Schlüssel werden erst anhand der
+konkreten Instanzkonfiguration gesetzt. Die Domainentscheidung allein klärt
+weder die Clerk-CNAME-Ziele noch das bestehende Vercel-Projekt.
+
+Der gelieferte PEM-Schlüssel ist als `config/public-keys/clerk-provided.pem`
+gesichert und syntaktisch als öffentlicher RSA-2048-Schlüssel geprüft.
+SHA-256 des SPKI-DER: `684d4cf51e2d47b75abf4f2f97f7ec58c7333beb597f97ced56913f035faaed8`.
+Er ist kein Serversecret. Eine konkrete JWKS-URL wurde in der Nachricht nicht
+angegeben. Die Zuordnung zu Issuer/Instanz und aktiven JWKS einschließlich
+Rotation ist noch ungeprüft, daher ist der PEM nicht als statischer `jwtKey`
+aktiviert. Der bestehende SDK-Prüfweg wird nicht durch bloßes JWT-Decodieren
+oder eine unbestätigte Schlüsselkoppelung ersetzt.

@@ -1,3 +1,14 @@
+# Domainklärung · 26.10.2026
+
+Nutzer bestätigt Vercel als Hosting, nexifyai.cloud als spätere Hauptdomain und
+nexifyai.de als Vorschau. Bestehende ChatGPT-Seite auf.cloud bis Fertigstellung
+bewahren, kein vorzeitiger DNS-Wechsel. Clerk authorizedParties exakt auf beide
+HTTPS-Origins begrenzt. Gelieferter öffentlicher RSA2048-PEM gespeichert/geprüft,
+Issuer/JWKS-Bindung noch offen und nicht als statischerJWTkey aktiviert.
+RemoteDomainbindung, Primary/Satellite, Secret, CNAMEs und LiveAuth bleiben offen.
+
+---
+
 # Clerk-Produktionsvorbereitung · 26.10.2026
 
 Aktiver Zweig: `factory/agency-separated-2026-10-26`. Lokale Implementierung,

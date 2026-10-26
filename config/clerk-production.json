@@ -5,9 +5,9 @@
   "publishable_key_source": "explicit_user_input",
   "publishable_key_mode": "live",
   "frontend_api_host_from_key": "clerk.nexifyai.de",
-  "production_web_origin": null,
+  "production_web_origin": "https://nexifyai.cloud",
   "hosting_project": null,
-  "hosting_provider": null,
+  "hosting_provider": "vercel",
   "required_server_secret": {
     "name": "CLERK_SECRET_KEY",
     "mode": "live",
@@ -36,12 +36,44 @@
   },
   "deployment_status": "local_preparation_not_production_release",
   "open_prerequisites": [
-    "confirm_web_domain_and_real_hosting_project",
     "bind_new_production_secret_in_server_secret_store",
     "obtain_exact_dns_records_and_authorized_zone_access",
     "verify_dns_and_clerk_frontend_api",
     "replace_static_prototype_deployment_with_reviewed_next_app_deployment",
     "provide_production_safe_visitor_gateway_instead_of_loopback_development_proxy",
-    "create_and_verify_real_first_user_without_automatic_business_rights"
-  ]
+    "create_and_verify_real_first_user_without_automatic_business_rights",
+    "identify_existing_vercel_project_and_confirm_domain_bindings",
+    "verify_clerk_primary_and_satellite_configuration_for_two_top_level_domains",
+    "verify_public_key_against_exact_issuer_jwks"
+  ],
+  "preview_web_origin": "https://nexifyai.de",
+  "domain_decision": {
+    "source": "explicit_user_clarification",
+    "primary_domain": "nexifyai.cloud",
+    "preview_domain": "nexifyai.de",
+    "spelling_interpretation": "neifyai.cloud interpreted as existing nexifyai.cloud project domain",
+    "keep_current_cloud_site_until_completion": true,
+    "switch_cloud_dns_before_final_acceptance": false,
+    "both_domains_requested": true,
+    "remote_binding_verified": false
+  },
+  "auth": {
+    "authorized_parties": [
+      "https://nexifyai.cloud",
+      "https://nexifyai.de"
+    ],
+    "cross_domain_session_configuration_verified": false,
+    "clerk_primary_or_satellite_topology": "pending_exact_instance_domain_configuration",
+    "automatic_cross_domain_sso": false
+  },
+  "jwt_verification_material": {
+    "source": "explicit_user_input",
+    "public_pem_path": "config/public-keys/clerk-provided.pem",
+    "bound_to_issuer": false,
+    "jwks_url_provided": false,
+    "active_static_jwt_key": false,
+    "rotation_policy": "prefer_verified_issuer_jwks_before_activation",
+    "format_check": "valid_rsa_2048_public_key",
+    "spki_der_sha256": "684d4cf51e2d47b75abf4f2f97f7ec58c7333beb597f97ced56913f035faaed8"
+  }
 }

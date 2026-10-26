@@ -1,4 +1,5 @@
 import test from "node:test";
+import { createPublicKey, createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { canonicalPath, clerkConfiguration, privateDecision, privateRoute } from "../policy.ts";
@@ -39,4 +40,21 @@ test("public visitor API bypasses Clerk and no frontend secret or role promotion
   const layout=readFileSync(new URL("../../app/layout.tsx",import.meta.url),"utf8");
   assert.doesNotMatch(layout,/CLERK_SECRET_KEY|secretKey=/);
   assert.doesNotMatch(proxy,/unsafeMetadata|publicMetadata|emailAddress|role\s*:/);
+});
+
+test("deployment origins are exact and the supplied public key stays inactive until issuer verification", () => {
+  const settings = JSON.parse(readFileSync(new URL("../../../../config/clerk-production.json", import.meta.url)));
+  assert.deepEqual(settings.auth.authorized_parties, ["https://nexifyai.cloud", "https://nexifyai.de"]);
+  assert.equal(settings.domain_decision.switch_cloud_dns_before_final_acceptance, false);
+  assert.equal(settings.auth.automatic_cross_domain_sso, false);
+  const proxy = readFileSync(new URL("../../proxy.ts", import.meta.url), "utf8");
+  assert.match(proxy, /authorizedParties: productionConfig.auth.authorized_parties/);
+  assert.doesNotMatch(proxy, /jwtKey:/);
+  const material = settings.jwt_verification_material;
+  assert.equal(material.active_static_jwt_key, false);
+  assert.equal(material.bound_to_issuer, false);
+  const key = createPublicKey(readFileSync(new URL("../../../../config/public-keys/clerk-provided.pem", import.meta.url)));
+  assert.equal(key.asymmetricKeyType, "rsa");
+  assert.equal(key.asymmetricKeyDetails.modulusLength, 2048);
+  assert.equal(createHash("sha256").update(key.export({type:"spki",format:"der"})).digest("hex"), material.spki_der_sha256);
 });
