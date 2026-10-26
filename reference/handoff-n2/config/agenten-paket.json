@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "stufen": {
+    "one": { "name": "NeXify AI one", "modell": "NeXify flash", "modellIntern": "ds/deepseek-v4-flash-vision-exp", "companion": "NeXify Companion", "preisEurMonat": 9.99 },
+    "onePlus": { "name": "NeXify AI one+", "modell": "NeXify pro", "modellIntern": "ds/deepseek-v4-pro", "companion": "NeXify Companion", "preisEurMonat": 19.99 }
+  },
+  "regel": "Nach aussen nur NeXify flash / NeXify pro; interne Modellnamen nur im Backend. Companion NeXify Companion immer dabei."
+}

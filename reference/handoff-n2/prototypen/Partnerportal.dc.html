@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        bildschirm
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „Partnerportal.dc.html“
+  Status:     konform · Info: DS-C-05×9 DS-I-03×4 DS-I-05×1
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Partnerportal – TEILEKLAR</title>
+<meta name="robots" content="noindex,nofollow" />
+<meta name="description" content="Profil, Gutscheine, Termine und Abrechnung für Werkstatt-Partner." />
+<meta property="og:title" content="Partnerportal – TEILEKLAR" />
+<meta property="og:description" content="Profil, Gutscheine, Termine und Abrechnung für Werkstatt-Partner." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta name="theme-color" content="#242826" />
+<script src="nx-page.js" data-reveal="off" data-max="160"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>button{padding:0;font:inherit;color:inherit}
+  button, input, select, textarea { font: inherit; }
+  body { margin: 0; background: #242826; color: #FFFFFF; font-family:Geist, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #D7FA50; text-decoration-color: rgba(215,250,80,.4); text-underline-offset: 3px; }
+  a:hover { color: #FFFFFF; text-decoration-color: #D7FA50; }
+  @keyframes nxRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes nxSigIdle { 0%,100% { transform: rotate(-6deg) scale(.95); opacity: .85; } 50% { transform: rotate(6deg) scale(1); opacity: 1; } }
+  @keyframes nxDotPulse { 0%, 100% { opacity: .4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.3); } }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #D7FA50; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+<style id="nx-mobil">
+  html{-webkit-text-size-adjust:100%} body{overflow-x:hidden}
+  @media (max-width:640px){
+    h1{font-size:clamp(30px,9vw,42px)!important;line-height:1.06!important;letter-spacing:-.03em!important}
+    h2{font-size:clamp(24px,7vw,34px)!important;line-height:1.1!important}
+    [style*="padding:40px"],[style*="padding:48px 40px"],[style*="padding:36px"],[style*="padding:32px"]{padding:20px!important}
+    [style*="padding:56px 0"],[style*="padding:64px 24px"],[style*="padding:72px 0"],[style*="padding:96px 0"]{padding-top:40px!important;padding-bottom:48px!important}
+    [style*="gap:64px"],[style*="gap:48px"],[style*="gap:40px"]{gap:24px!important}
+    [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:repeat(2,"],[style*="grid-template-columns:1.1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],[style*="grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+    table{font-size:13px} pre{font-size:12px!important} img,svg,canvas{max-width:100%}
+    [style*="flex:1 1 520px"],[style*="flex:1 1 460px"],[style*="flex:2 1 460px"],[style*="flex:1 1 440px"],[style*="flex:1 1 420px"],[style*="flex:2 1 420px"],[style*="flex:1 1 400px"],[style*="flex:1 1 380px"],[style*="flex:1 1 360px"]{flex-basis:100%!important}
+    [style*="margin-left:auto"][style*="min-height:44px"]{margin-left:0!important}
+    button,a,input,select,textarea,summary{touch-action:manipulation}
+    input,select,textarea{font-size:16px!important}
+  }
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),radial-gradient(900px 500px at 96% 72%,rgba(167,139,250,.06),transparent 62%),#242826">
+  <dc-import name="NX-Header" marke="cloud" nav="cloud" active="partnerportal" kontext="Partnerportal" cta="keine" angemeldet="{{ true }}" rolle="werkstatt" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(31,31,28,.88);backdrop-filter:blur(16px);border-bottom:1px solid #363A38">
+    <div id="inhalt" tabindex="-1" style="display:flex;align-items:center;gap:16px;width:min(1280px,calc(100% - 48px));min-height:68px;margin:0 auto">
+      <a href="NeXifyAI Cloud v10.dc.html" aria-label="NeXify AI" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;flex:0 0 auto;text-decoration:none;color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+        <img src="assets/nexify-ai/nexify-ai-signet.svg" alt="" aria-hidden="true" style="display:block;width:20px;height:20px;flex:0 0 auto;animation:nxSigIdle 6s ease-in-out infinite" />
+        <span style="font-size:18px;font-weight:600;line-height:1;letter-spacing:-.05em;white-space:nowrap">Ne<span style="color:#D7FA50">X</span>ify AI</span>
+      </a>
+      <span style="display:block;width:1px;height:18px;background:#363A38;flex:0 0 auto"></span>
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD;white-space:nowrap">Partnerportal</span>
+      <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
+        <sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ true }}">
+          <span style="display:flex;align-items:center;gap:12px">
+            <span style="display:grid;place-items:center;width:32px;height:32px;border-radius:4px;background:#303634;color:#D7FA50;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">{{ partnerInitialen }}</span>
+            <span style="display:none;font-size:14px;font-weight:700"></span>
+          </span>
+          <button onClick="{{ doLogout }}" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;background:transparent;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Abmelden</button>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <!-- AUTH -->
+  <sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Partnerportal – Anmeldung" style="width:min(920px,calc(100% - 48px));margin:64px auto 96px;animation:nxRise .5s cubic-bezier(.22,.7,.3,1) both">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));border:1px solid #363A38;border-radius:4px;overflow:hidden;box-shadow:none">
+        <div style="padding:48px 40px;background:#303634;color:#FFFFFF">
+          <img src="assets/nexify-ai/nexify-ai-signet.svg" alt="" aria-hidden="true" style="display:block;width:36px;height:36px;margin-bottom:20px" />
+          <h1 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 12px;font-size:clamp(48px,7.2vw,96px);font-weight:600;line-height:1;letter-spacing:-.05em;text-wrap:balance;overflow-wrap:break-word;hyphens:auto">Ihr Werkstatt-Partnerkonto</h1>
+          <p style="margin:0 0 32px;font-size:14px;line-height:1.6;color:#BCC1BD;text-wrap:pretty">Kostenfreie Landingpage, geprüfte Nachbarschaftskunden, planbare Termine – ein Konto für Profil, Gutscheine, Termine und Abrechnung.</p>
+          <div style="display:grid;gap:16px">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D7FA50" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:4px"><path d="m5 12 4.5 4.5L19 7" /></svg>
+              <span style="font-size:14px;line-height:1.5;color:#F3F4F2">Kein Teilerisiko, kein Rückfragen-Ping-Pong</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D7FA50" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:4px"><path d="m5 12 4.5 4.5L19 7" /></svg>
+              <span style="font-size:14px;line-height:1.5;color:#F3F4F2">Erfolgsbasiert: 19,90&nbsp;€ nur je zugeführtem Kunden</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D7FA50" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:4px"><path d="m5 12 4.5 4.5L19 7" /></svg>
+              <span style="font-size:14px;line-height:1.5;color:#F3F4F2">Landingpage automatisch aus Ihrem Profil erzeugt</span>
+            </div>
+          </div>
+        </div>
+        <div style="padding:48px 40px;background:#242826">
+          <div style="display:inline-flex;gap:4px;padding:4px;border-radius:4px;background:#303634;margin-bottom:32px">
+            <button onClick="{{ setAuthLogin }}" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:0;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;background:{{ isLogin }};color:{{ isLoginFg }}" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Anmelden</button>
+            <button onClick="{{ setAuthRegister }}" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:0;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;background:{{ isRegisterBg }};color:{{ isRegisterFg }}" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Registrieren</button>
+          </div>
+
+          <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+            <!-- TODO(BACKEND): POST auth/login (bcrypt/JWT, gemeinsamer Unterbau aller drei Portale) -->
+            <form onSubmit="{{ doLogin }}" data-api-endpoint="auth/login" style="display:grid;gap:16px">
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">E-Mail</span>
+                <input type="email" placeholder="werkstatt@beispiel.de" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Passwort</span>
+                <input type="password" placeholder="••••••••" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <button type="submit" style="font-family:Geist,Helvetica,Arial,sans-serif;height:48px;margin-top:4px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Anmelden</button>
+              <a href="#" style="font-size:12px;text-align:center" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Passwort vergessen?</a>
+            </form>
+          </sc-if>
+          <sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}">
+            <!-- TODO(BACKEND): POST auth/register (Partnerkonto, Rolle=partner) -->
+            <form onSubmit="{{ doLogin }}" data-api-endpoint="auth/register" style="display:grid;gap:16px">
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Firmenname</span>
+                <input type="text" placeholder="Autohaus Mustermann" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">E-Mail</span>
+                <input type="email" placeholder="werkstatt@beispiel.de" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Passwort</span>
+                <input type="password" placeholder="••••••••" required="" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <label style="display:flex;align-items:flex-start;gap:12px;font-size:12px;line-height:1.5;color:#FFFFFF">
+                <input type="checkbox" required="" style="margin-top:4px;accent-color:#D7FA50" />
+                <span>Ich bin zur Vertretung meines Betriebs berechtigt und akzeptiere den Partnervertrag.</span>
+              </label>
+              <button type="submit" style="font-family:Geist,Helvetica,Arial,sans-serif;height:48px;margin-top:4px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Konto erstellen</button>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- DASHBOARD -->
+  <sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ false }}">
+    <div style="width:min(1280px,calc(100% - 48px));margin:0 auto;padding:32px 0 96px">
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px">
+        <sc-for list="{{ navTabs }}" as="n" hint-placeholder-count="8">
+          <button onClick="{{ n.open }}" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:1px solid {{ n.border }};border-radius:8px;background:{{ n.bg }};color:{{ n.fg }};font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer;transition:border-color .2s ease" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ n.label }}</button>
+        </sc-for>
+      </div>
+
+      <!-- UEBERSICHT -->
+      <sc-if value="{{ isUebersicht }}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="Partnerportal – Übersicht" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both">
+          <div style="position:relative;overflow:hidden;display:flex;gap:20px;align-items:flex-start;padding:32px 32px;border-radius:4px;background:#242826;margin-bottom:24px;box-shadow:0 2px 8px rgba(11,15,17,.10), 0 54px 90px -30px rgba(11,15,17,.42)">
+            <div style="position:absolute;inset:0;background:radial-gradient(680px 320px at 20% 28%, rgba(215,250,80,.16), transparent 68%)"></div>
+            <div style="position:absolute;inset:0;background-image:linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px);background-size:80px 100%"></div>
+            <span style="position:relative;display:grid;place-items:center;width:48px;height:48px;flex:0 0 auto;border-radius:4px;background:#242826;box-shadow:none">
+              <img src="assets/nexify-ai/nexify-ai-signet.svg" alt="" aria-hidden="true" style="display:block;width:28px;height:28px;animation:nxSigIdle 6s ease-in-out infinite" />
+            </span>
+            <div style="position:relative">
+              <p style="margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">NeXify AI</p>
+              <p style="margin:0;font-size:16px;line-height:1.6;color:#E3E6E3;text-wrap:pretty;max-width:54ch">Willkommen zurück, {{ profilFirma }}. Sie haben {{ offeneTermine }} offene Terminanfrage(n) – Ihre nächste Abrechnung liegt bei {{ naechsteAbrechnungBetrag }}, fällig am {{ naechsteAbrechnungDatum }}.</p>
+            </div>
+          </div>
+
+          <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+            <div style="padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+              <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Aktive Nachbarschaftskunden</p>
+              <strong style="display:block;font-size:32px;font-weight:600;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">{{ aktiveKunden }}</strong>
+            </div>
+            <div style="padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+              <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Offene Terminanfragen</p>
+              <strong style="display:block;font-size:32px;font-weight:600;letter-spacing:-.03em;color:#FFC24A;overflow-wrap:break-word;hyphens:auto">{{ offeneTermine }}</strong>
+            </div>
+            <div style="padding:24px;border:1px solid #D7FA50;border-radius:12px;background:#303634;color:#FFFFFF;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)">
+              <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Nächste Abrechnung</p>
+              <strong style="display:block;font-size:24px;font-weight:600;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">{{ naechsteAbrechnungBetrag }}</strong>
+              <p style="margin:8px 0 0;font-size:12px;color:#BCC1BD">fällig {{ naechsteAbrechnungDatum }}</p>
+            </div>
+            <div style="padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+              <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Gutschein-Bestellungen aktiv</p>
+              <strong style="display:block;font-size:32px;font-weight:600;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">{{ aktiveBestellungen }}</strong>
+            </div>
+          </div>
+
+          <div style="margin-top:32px">
+            <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 16px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Nächste Termine</h2>
+            <div style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)">
+              <sc-for list="{{ appointments }}" as="a" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid #363A38">
+                  <span style="display:block;width:8px;height:8px;flex:0 0 auto;border-radius:4px;background:{{ a.meta.dot }}"></span>
+                  <div style="flex:1;min-width:0">
+                    <strong style="display:block;font-size:14px;font-weight:700;overflow-wrap:break-word;hyphens:auto">{{ a.name }}</strong>
+                    <span style="display:block;font-size:12px;color:#BCC1BD">{{ a.service }} · {{ a.date }} {{ a.time }}</span>
+                  </div>
+                  <span style="flex:0 0 auto;padding:4px 12px;border-radius:4px;background:{{ a.meta.bg }};color:{{ a.meta.color }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;">{{ a.meta.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- TERMINE -->
+      <sc-if value="{{ isTermine }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Termine" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both">
+          <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 8px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Termine</h2>
+          <p style="margin:0 0 24px;font-size:14px;color:#BCC1BD;max-width:620px">Jede Statusänderung wird auch dem Nachbarschaftskunden in seinem eigenen Portal per CI-E-Mail mitgeteilt. „Wahrgenommen" wird erst nach 7 Tagen ohne Widerspruch abrechnungsfest.</p>
+          <div style="display:grid;gap:12px">
+            <sc-for list="{{ appointments }}" as="a" hint-placeholder-count="4">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:20px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+                <span style="display:block;width:8px;height:8px;flex:0 0 auto;border-radius:4px;background:{{ a.meta.dot }}"></span>
+                <div style="flex:1;min-width:180px">
+                  <strong style="display:block;font-size:14px;font-weight:700;overflow-wrap:break-word;hyphens:auto">{{ a.name }}</strong>
+                  <span style="display:block;margin-top:4px;font-size:12px;color:#BCC1BD">{{ a.service }}</span>
+                  <span style="display:block;margin-top:4px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">{{ a.date }} · {{ a.time }}</span>
+                </div>
+                <span style="padding:8px 12px;border-radius:4px;background:{{ a.meta.bg }};color:{{ a.meta.color }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;">{{ a.meta.label }}</span>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-if value="{{ a.showConfirm }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ a.confirm }}" data-api-endpoint="partner/appointments/{id}/status" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:12px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Bestätigen</button>
+                  </sc-if>
+                  <sc-if value="{{ a.showDone }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ a.done }}" data-api-endpoint="partner/appointments/{id}/status" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:12px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Als wahrgenommen markieren</button>
+                  </sc-if>
+                  <sc-if value="{{ a.showCancel }}" hint-placeholder-val="{{ false }}">
+                    <button style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);font-size:12px;font-weight:700;cursor:pointer;color:#FFFFFF" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Verlegen</button>
+                    <button onClick="{{ a.cancel }}" data-api-endpoint="partner/appointments/{id}/status" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);color:#FF8A7A;font-size:12px;font-weight:700;cursor:pointer" style-hover="border-color:#FF8A7A" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Absagen</button>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- GUTSCHEINE -->
+      <sc-if value="{{ isGutscheine }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Gutscheine" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+          <div style="flex:1 1 380px;min-width:0">
+            <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 16px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Gutschein-Bestellungen</h2>
+            <div style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)">
+              <sc-for list="{{ voucherOrders }}" as="o" hint-placeholder-count="2">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:20px 20px;border-bottom:1px solid #363A38">
+                  <div style="flex:1;min-width:200px">
+                    <strong style="display:block;font-size:14px;font-weight:700;overflow-wrap:break-word;hyphens:auto">{{ o.design }}</strong>
+                    <span style="display:block;margin-top:4px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">{{ o.id }} · {{ o.menge }} Stück · bestellt {{ o.datum }}</span>
+                  </div>
+                  <span style="padding:8px 12px;border-radius:4px;background:#303634;color:#FFFFFF;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600">{{ o.status }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="flex:1 1 260px;min-width:0;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);align-self:start;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)">
+            <h3 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 16px;font-size:16px;font-weight:700;overflow-wrap:break-word;hyphens:auto">Neue Bestellung</h3>
+            <!-- TODO(BACKEND): POST partner/vouchers/order – Fulfillment über Print-on-Demand-API + Zahlungsanbieter -->
+            <form onSubmit="{{ addOrder }}" data-api-endpoint="partner/vouchers/orders" style="display:grid;gap:16px">
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Vorlage</span>
+                <select value="{{ newOrderDesign }}" onChange="{{ setNewOrderDesign }}" style="width:100%;height:44px;padding:0 12px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif;background:#2A2E2C">
+                  <option>Bremsen-Check-Gutschein · 10 %</option>
+                  <option>Willkommens-Gutschein · 15 %</option>
+                  <option>Winter-Check-Gutschein · 10 %</option>
+                </select>
+              </label>
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Menge</span>
+                <input type="number" value="{{ newOrderMenge }}" onChange="{{ setNewOrderMenge }}" min="100" step="100" style="width:100%;height:44px;padding:0 12px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <button type="submit" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;margin-top:4px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Bestellung senden</button>
+              <sc-if value="{{ orderFlash }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;font-size:12px;color:#D7FA50">Bestellung eingegangen – Druckstatus erscheint links.</p>
+              </sc-if>
+            </form>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ABRECHNUNG -->
+      <sc-if value="{{ isAbrechnung }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Abrechnung" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both">
+          <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 8px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Abrechnung</h2>
+          <p style="margin:0 0 24px;font-size:14px;color:#BCC1BD;max-width:54ch">19,90&nbsp;€ zzgl. MwSt. je zugeführtem und wahrgenommenem Nachbarschaftskunden/Monat. Rechnungen entstehen automatisch am 20., zahlbar innerhalb von 7 Tagen mit 2&nbsp;% Skonto.</p>
+          <div style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)">
+            <sc-for list="{{ invoices }}" as="i" hint-placeholder-count="3">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:20px 20px;border-bottom:1px solid #363A38">
+                <div style="flex:1;min-width:200px">
+                  <strong style="display:block;font-family:'Geist Mono',monospace;font-size:14px;font-weight:600;overflow-wrap:break-word;hyphens:auto">{{ i.id }}</strong>
+                  <span style="display:block;margin-top:4px;font-size:12px;color:#BCC1BD">{{ i.zeitraum }} · {{ i.kunden }} Kunden</span>
+                </div>
+                <strong style="font-size:16px;font-weight:600;letter-spacing:-.02em;overflow-wrap:break-word;hyphens:auto">{{ i.betrag }}</strong>
+                <span style="font-size:12px;color:#BCC1BD;min-width:110px">fällig {{ i.faellig }}</span>
+                <span style="padding:8px 12px;border-radius:4px;background:{{ i.meta.bg }};color:{{ i.meta.color }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;">{{ i.meta.label }}</span>
+                <button onClick="{{ i.download }}" data-api-endpoint="billing/invoices/{id}/pdf" style="font-family:Geist,Helvetica,Arial,sans-serif;min-height:44px;padding:0 16px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.1);border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;color:#FFFFFF" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">PDF laden</button>
+                <sc-if value="{{ i.canPay }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ i.pay }}" data-api-endpoint="billing/invoices/{id}/pay" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:12px;font-weight:700;cursor:pointer" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Jetzt bezahlen</button>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- PROFIL -->
+      <sc-if value="{{ isProfil }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Profil" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+          <div style="flex:1 1 380px;min-width:0">
+            <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 16px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Profil &amp; Landingpage</h2>
+            <!-- TODO(BACKEND): PUT partner/profile – speist den Partnerseiten-Generator (Kapitel 04.2) -->
+            <form onSubmit="{{ saveProfil }}" data-api-endpoint="partner/profile" style="display:grid;gap:16px;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Firmenname</span>
+                <input type="text" value="{{ profilFirma }}" onChange="{{ setProfilFirma }}" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+              </label>
+              <div style="display:grid;gap:16px;grid-template-columns:2fr 1fr">
+                <label style="display:block">
+                  <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Straße, Nr.</span>
+                  <input type="text" defaultValue="Heidestraße 17" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+                </label>
+                <label style="display:block">
+                  <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">PLZ, Ort</span>
+                  <input type="text" defaultValue="51147 Köln" style="width:100%;height:44px;padding:0 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif" />
+                </label>
+              </div>
+              <label style="display:block">
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Kurzbeschreibung</span>
+                <textarea value="{{ profilKurz }}" onChange="{{ setProfilKurz }}" rows="3" style="width:100%;padding:12px 16px;border:1px solid #363A38;border-radius:8px;font-size:14px;font-family:Geist,sans-serif;resize:vertical"></textarea>
+              </label>
+              <div>
+                <span style="display:block;margin-bottom:8px;font-size:12px;font-weight:700">Leistungen</span>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ leistungenChips }}" as="lc" hint-placeholder-count="5">
+                    <span style="height:32px;display:inline-flex;align-items:center;padding:0 16px;border-radius:4px;background:#303634;color:#FFFFFF;font-family:'Geist Mono',monospace;font-size:12px">{{ lc.t }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <button type="submit" style="font-family:Geist,Helvetica,Arial,sans-serif;height:46px;margin-top:4px;border:0;border-radius:8px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:14px;font-weight:700;cursor:pointer;justify-self:start;padding:0 20px" style-hover="filter:brightness(1.06)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Speichern</button>
+              <sc-if value="{{ savedFlash }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;display:flex;align-items:center;gap:8px;font-size:12px;color:#D7FA50">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7" /></svg>
+                  Gespeichert.
+                </p>
+              </sc-if>
+            </form>
+          </div>
+          <div>
+            <div style="padding:24px;border:2px dashed #363A38;border-radius:4px;text-align:center;margin-bottom:16px">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A1A3A4" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 12px"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-5-5L5 21" /></svg>
+              <p style="margin:0 0 4px;font-size:12px;font-weight:700">Werkstattbild hochladen</p>
+              <p style="margin:0;font-size:12px;color:#BCC1BD">JPG/PNG, mind. 1200×800</p>
+            </div>
+            <a href="Werkstatt-Partnerseite.dc.html" style="font-family:Geist,Helvetica,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 20px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);text-decoration:none;color:#FFFFFF;font-size:14px;font-weight:700;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+              Ihre Landingpage ansehen
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+            </a>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- RECHNER -->
+      <sc-if value="{{ isRechner }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Nutzen-Rechner" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both">
+          <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 8px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Werkstattpartner-Nutzen-Rechner</h2>
+          <p style="margin:0 0 24px;font-size:14px;color:#BCC1BD;max-width:54ch">Was bringt das Programm Ihrem Betrieb, gegengerechnet mit der laufenden 19,90-€-Gebühr? Voreinstellungen sind recherchiert (DAT-Report 2026), jedes Feld ist editierbar.</p>
+          <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+            <div style="display:grid;gap:20px;padding:32px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+              <label style="display:block">
+                <span style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px"><span style="font-size:14px;font-weight:700">Neue Nachbarschaftskunden/Jahr</span><span style="font-family:'Geist Mono',monospace;font-size:14px;font-weight:600">{{ rkKunden }}</span></span>
+                <input type="range" min="0" max="120" step="1" value="{{ rkKunden }}" onChange="{{ setRkKunden }}" style="width:100%;accent-color:#D7FA50" />
+              </label>
+              <label style="display:block">
+                <span style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px"><span style="font-size:14px;font-weight:700">Ø Erstauftrag (Gutschein, €)</span><span style="font-family:'Geist Mono',monospace;font-size:14px;font-weight:600">{{ rkErst }}</span></span>
+                <input type="range" min="50" max="800" step="5" value="{{ rkErst }}" onChange="{{ setRkErst }}" style="width:100%;accent-color:#D7FA50" />
+              </label>
+              <label style="display:block">
+                <span style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px"><span style="font-size:14px;font-weight:700">Ø Folgeauftrag Wartung/Reparatur (€)</span><span style="font-family:'Geist Mono',monospace;font-size:14px;font-weight:600">{{ rkFolge }}</span></span>
+                <input type="range" min="100" max="1200" step="5" value="{{ rkFolge }}" onChange="{{ setRkFolge }}" style="width:100%;accent-color:#D7FA50" />
+              </label>
+              <label style="display:block">
+                <span style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px"><span style="font-size:14px;font-weight:700">Besuchsquote Folgejahr (Arbeiten/Auto)</span><span style="font-family:'Geist Mono',monospace;font-size:14px;font-weight:600">{{ rkQuoteLabel }}</span></span>
+                <input type="range" min="0" max="1.5" step="0.05" value="{{ rkQuote }}" onChange="{{ setRkQuote }}" style="width:100%;accent-color:#D7FA50" />
+              </label>
+            </div>
+            <div style="display:grid;gap:12px;align-content:start">
+              <div style="padding:24px;border-radius:4px;background:#303634;color:#FFFFFF">
+                <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Bruttoumsatz Partner/Jahr</p>
+                <strong style="display:block;font-size:clamp(24px,2.8vw,32px);font-weight:600;line-height:1;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">{{ rkBrutto }}</strong>
+                <p style="margin:12px 0 0;font-size:12px;color:#BCC1BD">Erstaufträge + erwartete Folgeaufträge</p>
+              </div>
+              <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+                <div style="padding:20px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+                  <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">NeXify-Gebühr/Jahr</p>
+                  <strong style="font-size:18px;font-weight:600;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">{{ rkGebuehr }}</strong>
+                </div>
+                <div style="padding:20px;border:1px solid #363A38;border-radius:4px;background:rgba(215,250,80,.1)">
+                  <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">ROI-Faktor</p>
+                  <strong style="font-size:18px;font-weight:600;letter-spacing:-.03em;color:#D7FA50;overflow-wrap:break-word;hyphens:auto">{{ rkRoi }}</strong>
+                </div>
+              </div>
+              <div style="padding:20px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+                <p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Netto-Mehrumsatz Partner</p>
+                <strong style="font-size:18px;font-weight:600;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto">{{ rkNetto }}</strong>
+                <span style="display:block;margin-top:4px;font-size:12px;color:#BCC1BD">vor Material-/Zeitkosten</span>
+              </div>
+            </div>
+          </div>
+          <p style="margin:20px 0 0;font-size:12px;line-height:1.6;color:#BCC1BD;max-width:760px">Kalkulationsbeispiel – zeigt Umsatz, keinen Gewinn. Vor Vertriebsargumentation mit echten Partnerzahlen validieren.</p>
+        </div>
+      </sc-if>
+
+      <!-- LEISTUNGEN -->
+      <sc-if value="{{ isLeistungen }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Leistungen" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both">
+          <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 8px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Leistungen direkt beauftragen</h2>
+          <p style="margin:0 0 12px;font-size:14px;color:#BCC1BD;max-width:54ch">Kein Festpreis im Chat – Einstiegspreise stehen hier transparent, individuelle Kalkulation folgt demselben Beratungsablauf.</p>
+          <a href="NeXifyAI Cloud v10.dc.html" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-bottom:24px;font-size:12px;font-weight:700;color:#D7FA50;text-decoration:none" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Vollständiges Leistungsportfolio auf nexifyai.cloud ansehen →</a>
+          <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+            <sc-for list="{{ crossSell }}" as="c" hint-placeholder-count="8">
+              <div style="display:flex;flex-direction:column;gap:12px;padding:24px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+                <strong style="font-size:14px;font-weight:700;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:break-word;hyphens:auto">{{ c.title }}</strong>
+                <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">{{ c.preis }}</span>
+                <button data-api-endpoint="crosssell/orders" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;margin-top:auto;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);font-size:12px;font-weight:700;cursor:pointer;color:#FFFFFF" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Jetzt beauftragen</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- DOKUMENTE -->
+      <sc-if value="{{ isDokumente }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Partnerportal – Dokumente" style="animation:nxRise .4s cubic-bezier(.22,.7,.3,1) both">
+          <h2 style="font-family:Geist,Helvetica,Arial,sans-serif;margin:0 0 16px;font-size:clamp(32px,4.2vw,56px);font-weight:600;letter-spacing:-.04em;overflow-wrap:break-word;hyphens:auto">Dokumenten-Center</h2>
+          <div style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 48px -32px rgba(0,0,0,.5)">
+            <sc-for list="{{ dokumente }}" as="d" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid #363A38">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#646769" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /></svg>
+                <div style="flex:1;min-width:0">
+                  <strong style="display:block;font-size:14px;font-weight:700;overflow-wrap:break-word;hyphens:auto">{{ d.name }}</strong>
+                  <span style="display:block;margin-top:4px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">{{ d.typ }}</span>
+                </div>
+                <button onClick="{{ d.download }}" data-api-endpoint="documents/{id}" style="font-family:Geist,Helvetica,Arial,sans-serif;height:44px;padding:0 16px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;color:#FFFFFF" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Herunterladen</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </sc-if>
+
+  <dc-import name="NX-Footer" style="margin-top:auto" market="de-DE" lang="de" active="partnerportal" hint-size="100%,880px"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    loggedIn: true,
+    authTab: "login",
+    view: "uebersicht",
+    rkKunden: 30, rkErst: 315, rkFolge: 573, rkQuote: 0.35,
+    profilFirma: "Autohaus Mustermann",
+    profilKurz: "Meisterbetrieb für Bremsen, Ölwechsel, Batterien und Inspektion im Kölner Süden.",
+    savedFlash: false,
+    newOrderDesign: "Bremsen-Check-Gutschein · 10 %",
+    newOrderMenge: 500,
+    orderFlash: false,
+    appointments: [
+      { id: 1, name: "Erika Mustermann", service: "Bremsen vorne + Ölwechsel", date: "09.09.2026", time: "10:00", status: "bestaetigt" },
+      { id: 2, name: "Max Mustermann", service: "Inspektion inkl. Wischerblätter", date: "12.09.2026", time: "14:30", status: "angefragt" },
+      { id: 3, name: "Jonas Mustermann", service: "Batteriewechsel", date: "02.09.2026", time: "09:00", status: "wahrgenommen" },
+      { id: 4, name: "Lea Mustermann", service: "Reifenwechsel", date: "30.08.2026", time: "11:00", status: "storniert" }
+    ],
+    invoices: [
+      { id: "R-2026-09-PB-014", zeitraum: "September 2026 (laufend)", kunden: 3, betrag: "71,04\u00A0€", faellig: "27.09.2026", status: "offen" },
+      { id: "R-2026-08-PB-014", zeitraum: "August 2026", kunden: 4, betrag: "94,72\u00A0€", faellig: "27.08.2026", status: "bezahlt" },
+      { id: "R-2026-07-PB-014", zeitraum: "Juli 2026", kunden: 2, betrag: "47,36\u00A0€", faellig: "27.07.2026", status: "bezahlt" }
+    ],
+    voucherOrders: [
+      { id: "GB-0143", design: "Bremsen-Check-Gutschein · 10 %", menge: 3000, status: "Im Druck", datum: "28.08.2026" },
+      { id: "GB-0098", design: "Willkommens-Gutschein · 15 %", menge: 1500, status: "Versendet", datum: "02.06.2026" }
+    ]
+  };
+
+  eur(n) { return n.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "\u00A0€"; }
+  setView(v) { return () => this.setState({ view: v }); }
+  setAuthTab(t) { return () => this.setState({ authTab: t }); }
+  doLogin(e) { if (e && e.preventDefault) e.preventDefault(); this.setState({ loggedIn: true, view: "uebersicht" }); }
+  doLogout() { this.setState({ loggedIn: false, authTab: "login" }); }
+  saveProfil(e) { if (e && e.preventDefault) e.preventDefault(); this.setState({ savedFlash: true }); }
+  dl(titel, nr, zeilen, art) {
+    var esc = function (x) { return String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
+    var html = '<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><title>' + esc(titel + " " + nr) + '</title><style>body{font-family:Helvetica,Arial,sans-serif;color:#14191C;margin:48px;max-width:720px}h1{font-size:22px;margin:0 0 4px}.k{font:12px monospace;color:#646769}table{width:100%;border-collapse:collapse;margin:24px 0}td{padding:8px 0;border-bottom:1px solid #E2E4E0}.r{text-align:right}.m{margin-top:32px;font-size:12px;color:#646769;line-height:1.6}.w{border:1px solid #8F4E12;color:#8F4E12;display:inline-block;padding:2px 8px;font:12px monospace;margin-bottom:16px}</style></head><body><span class="w">MUSTERDOKUMENT – Prototyp, keine Rechtswirkung</span><h1>' + esc(titel) + '</h1><p class="k">' + esc(nr) + ' · ' + esc(art) + '</p><table>' + zeilen.map(function (z) { return "<tr><td>" + esc(z[0]) + '</td><td class="r">' + esc(z[1]) + "</td></tr>"; }).join("") + '</table><p class="m">NeXify AI · Pascal Courbois · Graaf van Loonstraat 1E, 5921 JA Venlo, NL · KvK 90483944 · USt-IdNr. NL865786276B01 · mail@nexifyai.cloud<br>Angaben vor Live-Betrieb bestätigen. Preise netto zzgl. USt.; bei EU-B2B Reverse Charge (Art. 196 MwStSystRL).</p></body></html>';
+    var url = URL.createObjectURL(new Blob([html], { type: "text/html" })); var a = document.createElement("a"); a.href = url; a.download = String(nr).replace(/[^\w.-]+/g, "_") + ".html"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+  addOrder(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var o = { id: "GB-0" + Math.floor(100 + Math.random() * 800), design: this.state.newOrderDesign, menge: this.state.newOrderMenge, status: "Bestellt", datum: new Date().toLocaleDateString("de-DE") };
+    this.setState({ voucherOrders: [o].concat(this.state.voucherOrders), orderFlash: true });
+  }
+  setApptStatus(id, status) {
+    return () => this.setState({ appointments: this.state.appointments.map(function (a) { return a.id === id ? Object.assign({}, a, { status: status }) : a; }) });
+  }
+  payInvoice(id) {
+    return () => this.setState({ invoices: this.state.invoices.map(function (i) { return i.id === id ? Object.assign({}, i, { status: "bezahlt" }) : i; }) });
+  }
+
+  renderVals() {
+    var s = this.state;
+    var kunden = Math.max(0, s.rkKunden), erst = Math.max(0, s.rkErst), folge = Math.max(0, s.rkFolge), quote = Math.max(0, s.rkQuote);
+    var bruttoProKunde = erst + folge * quote;
+    var bruttoGesamt = bruttoProKunde * kunden;
+    var gebuehrGesamt = 238.8 * kunden;
+    var nettoGesamt = bruttoGesamt - gebuehrGesamt;
+    var roi = gebuehrGesamt > 0 ? bruttoGesamt / gebuehrGesamt : 0;
+
+    var statusMeta = {
+      angefragt: { label: "Angefragt", color: "#FFC24A", bg: "rgba(232,135,31,.08)", dot: "#FFC24A" },
+      bestaetigt: { label: "Bestätigt", color: "#D7FA50", bg: "rgba(215,250,80,.1)", dot: "#D7FA50" },
+      wahrgenommen: { label: "Wahrgenommen", color: "#FFFFFF", bg: "#303634", dot: "#D7FA50" },
+      storniert: { label: "Storniert", color: "#FF8A7A", bg: "#303634", dot: "#FF8A7A" }
+    };
+    var self = this;
+    var appointments = s.appointments.map(function (a) {
+      return Object.assign({}, a, {
+        meta: statusMeta[a.status],
+        showConfirm: a.status === "angefragt",
+        showDone: a.status === "bestaetigt",
+        showCancel: a.status === "angefragt" || a.status === "bestaetigt",
+        confirm: self.setApptStatus(a.id, "bestaetigt"),
+        done: self.setApptStatus(a.id, "wahrgenommen"),
+        cancel: self.setApptStatus(a.id, "storniert")
+      });
+    });
+
+    var offeneTermine = s.appointments.filter(function (a) { return a.status === "angefragt"; }).length;
+    var aktiveKunden = s.appointments.filter(function (a) { return a.status !== "storniert"; }).length;
+    var aktiveBestellungen = s.voucherOrders.filter(function (o) { return o.status !== "Versendet"; }).length;
+    var naechsteAbrechnung = s.invoices.filter(function (i) { return i.status === "offen"; })[0];
+
+    var invoiceStatusMeta = { offen: { label: "Offen", color: "#FFC24A", bg: "rgba(232,135,31,.08)" }, bezahlt: { label: "Bezahlt", color: "#D7FA50", bg: "rgba(215,250,80,.1)" } };
+    var invoices = s.invoices.map(function (i) {
+      return Object.assign({}, i, { meta: invoiceStatusMeta[i.status], canPay: i.status === "offen", pay: self.payInvoice(i.id), download: function () { self.dl("Rechnung Partnerprogramm", i.id, [["Zeitraum", i.zeitraum], ["Nachbarschaftskunden", String(i.kunden)], ["Betrag", i.betrag], ["Fällig", i.faellig], ["Status", i.status]], "Rechnung"); } });
+    });
+
+    var navDefs = [
+      { id: "uebersicht", label: "Übersicht" },
+      { id: "termine", label: "Termine" },
+      { id: "gutscheine", label: "Gutscheine" },
+      { id: "abrechnung", label: "Abrechnung" },
+      { id: "profil", label: "Profil & Landingpage" },
+      { id: "rechner", label: "Nutzen-Rechner" },
+      { id: "leistungen", label: "Leistungen" },
+      { id: "dokumente", label: "Dokumente" }
+    ];
+    var navTabs = navDefs.map(function (n) {
+      var active = n.id === s.view;
+      return { id: n.id, label: n.label, active: active, open: self.setView(n.id), bg: active ? "#D7FA50" : "#2A2E2C", fg: active ? "#111312" : "#FFFFFF", border: active ? "#D7FA50" : "#363A38" };
+    });
+
+    var crossSell = [
+      { title: "Local-SEO (Stadt-/Branchenseiten)", preis: "ab 449\u00A0€ netto + 99\u00A0€/Monat Pflege" },
+      { title: "SEO-Betreuung (laufend)", preis: "ab 449\u00A0€/Monat" },
+      { title: "SEA/Ads-Kampagnenbetreuung", preis: "449\u00A0€ Setup + 15\u00A0% Budget/Monat" },
+      { title: "Marketing-Betreuung", preis: "ab 449\u00A0€/Tag" },
+      { title: "Webdesign / Landingpages", preis: "449\u00A0€ netto, 1 Arbeitstag" },
+      { title: "Onlineshop-Entwicklung", preis: "2.694–3.592\u00A0€ netto, 6–8 Tage" },
+      { title: "App-Design (iOS/Android)", preis: "2.694–3.592\u00A0€ netto, 6–8 Tage" },
+      { title: "Portal-/Software-Entwicklung", preis: "2.694–3.592\u00A0€ netto, 6–8 Tage" }
+    ];
+    var dokumente = [
+      { name: "Partnervereinbarung – Autohaus Mustermann.pdf", typ: "Vertrag" },
+      { name: "Rechnung R-2026-08-PB-014.pdf", typ: "Rechnung" },
+      { name: "Gutschrift G-2026-08-PB-014.pdf", typ: "Gutschrift" },
+      { name: "Kampagnen-Reporting August.pdf", typ: "Reporting" },
+      { name: "NeXify Partnerprogramm – Kurzpräsentation.pdf", typ: "Präsentation" }
+    ];
+    dokumente = dokumente.map(function (d) { return Object.assign({}, d, { download: function () { self.dl(d.typ, d.name.replace(/\.pdf$/, ""), [["Dokument", d.name], ["Art", d.typ]], d.typ); } }); });
+    var leistungenChips = ["Bremsen", "Ölwechsel", "Batterien", "Reifen", "Inspektion"].map(function (t) { return { t: t }; });
+
+    return {
+      loggedIn: s.loggedIn, loggedOut: !s.loggedIn,
+      isLogin: s.authTab === "login", isRegister: s.authTab === "register",
+      isLoginBg: s.authTab === "login" ? "#D7FA50" : "transparent", isLogin_: "",
+      isLoginFg: s.authTab === "login" ? "#111312" : "#BCC1BD",
+      isRegisterBg: s.authTab === "register" ? "#D7FA50" : "transparent",
+      isRegisterFg: s.authTab === "register" ? "#111312" : "#BCC1BD",
+      setAuthLogin: this.setAuthTab("login"), setAuthRegister: this.setAuthTab("register"),
+      doLogin: function (e) { self.doLogin(e); }, doLogout: function () { self.doLogout(); },
+      isUebersicht: s.view === "uebersicht", isTermine: s.view === "termine", isGutscheine: s.view === "gutscheine",
+      isAbrechnung: s.view === "abrechnung", isProfil: s.view === "profil", isRechner: s.view === "rechner",
+      isLeistungen: s.view === "leistungen", isDokumente: s.view === "dokumente",
+      navTabs: navTabs, appointments: appointments, offeneTermine: offeneTermine, aktiveKunden: aktiveKunden, aktiveBestellungen: aktiveBestellungen,
+      invoices: invoices,
+      naechsteAbrechnungBetrag: naechsteAbrechnung ? naechsteAbrechnung.betrag : "–",
+      naechsteAbrechnungDatum: naechsteAbrechnung ? naechsteAbrechnung.faellig : "–",
+      crossSell: crossSell, dokumente: dokumente, leistungenChips: leistungenChips, voucherOrders: s.voucherOrders,
+      rkKunden: s.rkKunden, rkErst: s.rkErst, rkFolge: s.rkFolge, rkQuote: s.rkQuote,
+      setRkKunden: function (e) { self.setState({ rkKunden: parseFloat(e.target.value) || 0 }); },
+      setRkErst: function (e) { self.setState({ rkErst: parseFloat(e.target.value) || 0 }); },
+      setRkFolge: function (e) { self.setState({ rkFolge: parseFloat(e.target.value) || 0 }); },
+      setRkQuote: function (e) { self.setState({ rkQuote: parseFloat(e.target.value) || 0 }); },
+      rkBrutto: this.eur(bruttoGesamt), rkGebuehr: this.eur(gebuehrGesamt), rkNetto: this.eur(nettoGesamt),
+      rkRoi: roi.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "×",
+      rkQuoteLabel: s.rkQuote.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      profilFirma: s.profilFirma, profilKurz: s.profilKurz,
+      setProfilFirma: function (e) { self.setState({ profilFirma: e.target.value, savedFlash: false }); },
+      setProfilKurz: function (e) { self.setState({ profilKurz: e.target.value, savedFlash: false }); },
+      saveProfil: function (e) { self.saveProfil(e); }, savedFlash: s.savedFlash,
+      newOrderDesign: s.newOrderDesign, newOrderMenge: s.newOrderMenge,
+      setNewOrderDesign: function (e) { self.setState({ newOrderDesign: e.target.value }); },
+      setNewOrderMenge: function (e) { self.setState({ newOrderMenge: parseInt(e.target.value, 10) || 0 }); },
+      addOrder: function (e) { self.addOrder(e); }, orderFlash: s.orderFlash,
+      partnerInitialen: "AM"
+    };
+  }
+}
+</script>
+</body>
+</html>

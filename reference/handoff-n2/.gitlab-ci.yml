@@ -1,0 +1,44 @@
+# NeXify finale Agentur-Gesamtloesung · GitLab CI · nur lokale Schranken
+stages: [pruefen, jeff]
+
+default:
+  image: node:22-alpine
+
+ds-audit:
+  stage: pruefen
+  script:
+    - node tools/ds-audit-cli.js
+    - test "$(node tools/ds-audit-cli.js | grep -c '^Fehler\t')" = "0"
+
+manifest:
+  stage: pruefen
+  image: alpine:3.20
+  script:
+    - cd prototypen && sha256sum -c MANIFEST.sha256
+
+json-konfig:
+  stage: pruefen
+  image: node:22-alpine
+  script:
+    - node -e "const fs=require('fs'),p=require('path');const r=[];(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config')"
+    - echo "alle config/*.json gültig"
+
+jeff-gate:
+  stage: jeff
+  image: python:3.12-alpine
+  needs: ["ds-audit", "manifest", "json-konfig"]
+  script:
+    - python3 tools/jeff-gate.py --was "DS-Audit, Manifest-Echtheit und JSON-Konfiguration grün" --risiko "niedrig (nur Prüfschranken, nichts deployt)" --rollback "Commit zurücknehmen"
+
+slack:
+  stage: jeff
+  image: curlimages/curl:latest
+  needs: ["jeff-gate"]
+  rules:
+    - if: '$SLACK_WEBHOOK != null && $SLACK_WEBHOOK != ""'
+      when: always
+  script:
+    - |
+      curl -sS -X POST -H 'Content-Type: application/json' \
+        --data "{\"text\":\"${CI_PROJECT_PATH} · ${CI_COMMIT_REF_NAME} · ${CI_PIPELINE_STATUS} · ${CI_PIPELINE_URL}\"}" \
+        "$SLACK_WEBHOOK"

@@ -1,0 +1,59 @@
+{
+  "contract_version": "1.0",
+  "run_id": "a9666976-c613-40a3-92aa-f1d182032925",
+  "case_identity": {
+    "case_id": "NXAI-GESAMT-2026-09-28",
+    "project_id": "Shop-Design Gesamt-Konzept",
+    "subject_id": "NeXify-Gesamtlösung Paket 28.09.2026 (33 Oberflächen, 24 Kerne, 9 Migrationen, OpenAPI 1.1.0, install.sh, CI)",
+    "commission_id": "UNVERIFIED",
+    "evidence_cutoff": "2026-09-28T19:59:35.873Z",
+    "input_scope_hash": "sha256:766db4a17574eab5da73c50f526f4e37acb10808e8dcff20af0ef01af91f6b16"
+  },
+  "producer": "agent1",
+  "artifact_type": "technical_report",
+  "artifact_path": "/docs/04-betrieb/autopilot/lauf-2026-09-28/01-technisches-gutachten.md",
+  "artifact_sha256": "sha256:f44b255c93834dd754f83f50f151993484b94f63c15ff13d3217c32a7bfb0f99",
+  "status": "PARTIAL",
+  "summary": "349/349 Kernfälle im Browser; nichts außerhalb des Browsers gelaufen (CI, DB, Server); Rechtstexte fehlen; keine Dark Patterns; Barrierefreiheit statisch erfüllt.",
+  "source_artifacts": [],
+  "evidence_refs": [
+    "pruefflauf-2026-09-28.json",
+    "MANIFEST.md",
+    "docs/SOLL-Beschreibung.md#14"
+  ],
+  "finding_ids": [
+    "B-01",
+    "B-02",
+    "B-03",
+    "B-04",
+    "B-05",
+    "B-06",
+    "B-07",
+    "B-08",
+    "B-09",
+    "B-10",
+    "B-11",
+    "B-12",
+    "B-13",
+    "B-14"
+  ],
+  "measure_ids": [],
+  "criterion_ids": [],
+  "open_gaps": [
+    "Node-Lauf",
+    "DB-Lauf",
+    "Serverlauf",
+    "Rechtstexte"
+  ],
+  "limitations": [
+    "Browser-Sandbox",
+    "vitest-Ersatz",
+    "keine Normvolltexte",
+    "kein Systemzugriff"
+  ],
+  "assumptions": [
+    "Arbeitsbereich = aktueller Stand"
+  ],
+  "blocking_items": [],
+  "created_at": "2026-09-28T20:05:17.394Z"
+}

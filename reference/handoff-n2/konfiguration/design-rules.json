@@ -1,0 +1,80 @@
+{
+  "$schema": "NeXify Designsystem – technische Definition",
+  "version": "2.0",
+  "stand": "2026-09-29",
+  "verweise": {
+    "definition": "docs/09-final/11-designsystem-definition.md",
+    "tokens": "config/design-tokens.json",
+    "pruefskript": "tools/ds-audit.js",
+    "bericht": "docs/09-final/12-abweichungsbericht.md",
+    "maschinenbericht": "config/abweichungen.json",
+    "referenzseite": "NeXify Designsystem.dc.html",
+    "referenzimplementierung": "NeXifyAI Cloud v12.dc.html"
+  },
+  "dateiarten": {
+    "bildschirm": "Alle *.dc.html-Seiten und Bausteine im dunklen System (Graphit & Lime)",
+    "papier": "Broschüren, Folien, Geschäftsdokumente, Visitenkarte (Papier-Variante, Definition §7)",
+    "e-mail": "E-Mail-HTML (nur Papier-Variante, tabellenbasiert)",
+    "legacy": "Vorgängerstände, nicht Teil des Systems: NeXifyAI Cloud v10, v11, NX 2026 Website"
+  },
+  "farbe": {
+    "bildschirm": ["#1B1E1D", "#1E2220", "#242826", "#2A2E2C", "#262A28", "#303634", "#292D2B", "#363A38", "#4A4F4C", "#FFFFFF", "#E3E6E3", "#BCC1BD", "#9CA29E", "#111312", "#D7FA50", "#EEFF9A", "#BFE83C", "#78C331", "#6FE3CF", "#FFC24A", "#FF8A7A", "#A78BFA"],
+    "abgeleitet": ["#2C312F", "#2E3331", "#232725", "#252927", "#333937", "#2F3432", "#272B29", "#7F8682", "#8A6A1F", "#5FA626", "#8FD63C", "#B7E03A"],
+    "veraltet_migrieren": { "#3E4240": "#363A38", "#303432": "#303634", "#2E3230": "#303634", "#202422": "#1E2220", "#1A1D1B": "#1E2220 (Fläche) / #111312 (Text)", "#E7E9E4": "#E3E6E3", "#62707D": "#4A4F4C", "#E4FF7A": "#EEFF9A", "#FFA43A": "#FFC24A", "#FF6B57": "#FF8A7A", "#9B8CFF": "#A78BFA" },
+    "papier": ["#14191C", "#0E1315", "#F2F3EF", "#E2E4E0", "#646769", "#A1A3A4", "#B4B5B6", "#C8F04B", "#8AB51C", "#8F4E12", "#4A5C10", "#E5E7E1", "#3D454A", "#F7F8F5", "#E8E9E6", "#3A4045", "#2A3237"]
+  },
+  "radius": { "erlaubt_px": [0, 4, 8, 10, 12, 14, 16, 18, 20], "pille": ">= 999", "kreis": "50%", "zuordnung": { "4": "Mini-Element, Marker", "8": "kleine Steuerung", "10": "Button, Eingabe", "12": "kleine Karte, Chip-Karte", "14": "Grafik-Fenster, Well", "16": "Karte", "18": "Leit-Rahmen (Hero-Szene)", "20": "Leitkarte" } },
+  "schrift": { "text": "Geist", "mono": "Geist Mono", "ausnahme": "Papier: IBM Plex Mono aus der Druckvorlage CD-2026" },
+  "flaechen": {
+    "karte": { "muster": "linear-gradient(180deg,#303634 0%,#262A28 100%) + border rgba(255,255,255,.08) + shadow.karte", "gilt_ab_radius": 12 },
+    "well": { "muster": "#1E2220 + shadow.well" },
+    "primaerbutton": { "muster": "gradient.buttonPrimaer + shadow.buttonPrimaer, Text #111312", "max_je_ansicht": 1 },
+    "seitengrund": { "muster": "gradient.seitengrund", "gilt_fuer": "Vollseiten" }
+  },
+  "bausteine": { "kopf": "NX-Header (voll, kein variante=leiste)", "fuss": "NX-Footer", "ausnahme_fuss": ["Anwendungs-Shells mit fester Höhe: Workspace, myADMIN, Leitstand, Posteingang", "NeXify Designsystem"] },
+  "barrierefreiheit": { "ziel_min_px": 44, "fokus": "2px solid #D7FA50, Abstand 2px (Logo: Unterstreichung)", "kontrast_text_min": 4.5, "reduced_motion": "alle Animationen aus" },
+  "i18n": {
+    "sprachen": ["de", "nl", "fr"],
+    "quellsprache": "de",
+    "maerkte": { "de-DE": "de", "de-AT": "de", "de-CH": "de", "nl-NL": "nl", "nl-BE": "nl", "fr-BE": "fr", "fr-LU": "fr" },
+    "regeln": [
+      "Bausteine NX-Header und NX-Footer tragen alle Texte in de, nl, fr mit identischem Schlüsselsatz (Regel DS-I-04).",
+      "Jede Seite übergibt lang und market explizit an Kopf und Fuß (DS-I-02).",
+      "<html lang> ist gesetzt (DS-I-01).",
+      "Zahlen-, Datums- und Währungsformat folgen der Textsprache der Seite, nicht dem Markt. Solange eine Seite nur Deutsch ist, ist 'de-DE' korrekt; bei Übersetzung zentral über die Sprache (DS-I-03).",
+      "Preise, Steuersatz, Versand und Rechtstexte folgen dem gewählten Markt (Footer-Wahl, gespeichert als localStorage 'nx-market').",
+      "Neue Zeichenketten zuerst in de, dann nl/fr im selben Wörterbuch-Objekt; nie Sprachmix in einem Satz.",
+      "Rechtstexte werden pro Markt vom Recht freigegeben, nicht maschinell übersetzt."
+    ],
+    "lokalisierung": { "de": { "zahl": "1.234,56", "waehrung": "1.234,56 €", "datum": "29.09.2026" }, "nl": { "zahl": "1.234,56", "waehrung": "€ 1.234,56", "datum": "29-09-2026" }, "fr": { "zahl": "1 234,56", "waehrung": "1 234,56 €", "datum": "29/09/2026" } }
+  },
+  "regeln": [
+    { "id": "DS-C-01", "titel": "Farbe nicht im System", "stufe": "Fehler", "gilt": "bildschirm", "soll": "Nur Farben aus farbe.bildschirm und farbe.abgeleitet", "doku": "11 §2" },
+    { "id": "DS-C-02", "titel": "Papierfarbe außerhalb der Papier-Palette", "stufe": "Warnung", "gilt": "papier", "soll": "Nur farbe.papier", "doku": "11 §7" },
+    { "id": "DS-C-03", "titel": "Text auf Lime nicht #111312", "stufe": "Fehler", "gilt": "bildschirm", "soll": "color:#111312 auf Lime", "doku": "11 §2" },
+    { "id": "DS-C-04", "titel": "Veraltete Farbe", "stufe": "Fehler", "gilt": "bildschirm", "soll": "Migration laut farbe.veraltet_migrieren", "doku": "11 §2" },
+    { "id": "DS-C-05", "titel": "Papier-Vorschau im Bildschirm", "stufe": "Info", "gilt": "bildschirm", "soll": "Zulässig für Vorschau-Fenster (E-Mail, Rechnung, Suchergebnis); als Papier-Muster gekennzeichnet", "doku": "11 §7" },
+    { "id": "DS-T-01", "titel": "Schrift außerhalb Geist / Geist Mono", "stufe": "Warnung", "gilt": "bildschirm", "soll": "Nur Geist und Geist Mono", "doku": "11 §3" },
+    { "id": "DS-R-01", "titel": "Radius außerhalb der Skala", "stufe": "Warnung", "gilt": "bildschirm, papier", "soll": "radius.erlaubt_px, Pille, Kreis", "doku": "11 §4" },
+    { "id": "DS-S-01", "titel": "Flache Karte statt Karten-Verlauf", "stufe": "Fehler", "gilt": "bildschirm", "soll": "flaechen.karte", "doku": "11 §5" },
+    { "id": "DS-S-02", "titel": "Flacher Primärbutton", "stufe": "Fehler", "gilt": "bildschirm", "soll": "flaechen.primaerbutton", "doku": "11 §5" },
+    { "id": "DS-B-01", "titel": "Kein gemeinsamer Kopf", "stufe": "Fehler", "gilt": "bildschirm", "soll": "NX-Header", "doku": "11 §6" },
+    { "id": "DS-B-02", "titel": "Kopf ohne Hauptmenü", "stufe": "Fehler", "gilt": "bildschirm", "soll": "kein variante=leiste", "doku": "11 §6" },
+    { "id": "DS-B-03", "titel": "Kein gemeinsamer Fuß", "stufe": "Warnung", "gilt": "bildschirm", "soll": "NX-Footer (Ausnahmen in bausteine.ausnahme_fuss)", "doku": "11 §6" },
+    { "id": "DS-A-01", "titel": "Kein title", "stufe": "Warnung", "gilt": "alle", "soll": "<title> vorhanden", "doku": "11 §8" },
+    { "id": "DS-A-02", "titel": "Bild ohne alt", "stufe": "Fehler", "gilt": "bildschirm", "soll": "alt vorhanden (dekorativ: alt=\"\")", "doku": "11 §8" },
+    { "id": "DS-A-03", "titel": "Fokus unterdrückt", "stufe": "Fehler", "gilt": "bildschirm", "soll": "kein outline:none ohne Ersatz", "doku": "11 §8" },
+    { "id": "DS-A-04", "titel": "Bedienziel unter 44 px", "stufe": "Warnung", "gilt": "bildschirm", "soll": "≥ 44 px", "doku": "11 §8" },
+    { "id": "DS-I-01", "titel": "Kein lang-Attribut", "stufe": "Warnung", "gilt": "bildschirm", "soll": "<html lang>", "doku": "11 §9" },
+    { "id": "DS-I-02", "titel": "lang/market nicht übergeben", "stufe": "Warnung", "gilt": "bildschirm", "soll": "explizit an NX-Header/NX-Footer", "doku": "11 §9" },
+    { "id": "DS-I-03", "titel": "Locale fest auf de-DE", "stufe": "Info", "gilt": "bildschirm", "soll": "Locale = Textsprache der Seite", "doku": "11 §9" },
+    { "id": "DS-I-04", "titel": "Übersetzungsschlüssel nicht deckungsgleich", "stufe": "Fehler", "gilt": "NX-Header, NX-Footer", "soll": "de = nl = fr (Schlüssel)", "doku": "11 §9" },
+    { "id": "DS-I-05", "titel": "Seitentext nur Deutsch", "stufe": "Info", "gilt": "bildschirm", "soll": "nl/fr-Wörterbuch, sobald der Markt bedient wird", "doku": "11 §9" }
+  ],
+  "ausnahmen": [
+    { "datei": "NeXify API.dc.html", "regeln": ["DS-C-01", "DS-C-04", "DS-R-01"], "grund": "Revolut-Checkout-Mock (Fremdmarke, hell, als Prototyp gekennzeichnet)" },
+    { "datei": "Papier-Dateien", "regeln": ["DS-R-01", "DS-T-01", "DS-C-02"], "grund": "Papier-Variante CD-2026" },
+    { "datei": "Workspace, myADMIN, Leitstand, Posteingang", "regeln": ["DS-B-03"], "grund": "Anwendungs-Shell" },
+    { "datei": "NeXify Designsystem", "regeln": ["DS-C-01", "DS-C-02", "DS-B-03"], "grund": "Referenzseite" }
+  ]
+}

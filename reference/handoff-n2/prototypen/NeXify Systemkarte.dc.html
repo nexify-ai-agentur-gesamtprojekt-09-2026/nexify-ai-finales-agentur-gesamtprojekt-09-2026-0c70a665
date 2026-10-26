@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>NeXify Systemkarte · Gesamtsystem</title>
+<meta name="description" content="Übersicht aller Seiten, Portale, Unterlagen und Dokumente der NeXify-AI-Gesamtlösung." />
+<meta name="robots" content="noindex,nofollow" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#242826;color:#FFFFFF;font-family:Geist,Helvetica,Arial,sans-serif}a{color:#D7FA50;text-decoration:none}a:hover{color:#FFFFFF}@media (max-width:640px){h1{font-size:34px!important}}</style>
+</helmet>
+<dc-import name="NX-Header" marke="cloud" nav="cloud" active="" kontext="Systemkarte · intern" cta="keine" angemeldet="{{ ok }}" rolle="intern" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+<div style="min-height:100vh;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),#242826">
+<sc-if value="{{ gesperrt }}" hint-placeholder-val="{{ false }}"><main style="width:min(560px,calc(100% - 48px));margin:0 auto;padding:96px 0 120px">
+  <div role="dialog" aria-labelledby="sk-gate" style="padding:32px;border-radius:20px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85)">
+    <p style="margin:0 0 10px;font-family:'Geist Mono',monospace;font-size:12px;color:#FFC24A">Interner Bereich</p>
+    <h1 id="sk-gate" style="margin:0 0 12px;font-size:32px;letter-spacing:-.03em;line-height:1.08">Die Systemkarte ist nur für das Team.</h1>
+    <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#BCC1BD">Sie zeigt interne Flächen, Prüfstände und Dokumente und ist für Besucher vor der Anmeldung nicht bestimmt. Bitte als Team anmelden.</p>
+    <button onClick="{{ anmelden }}" style="min-height:48px;padding:0 22px;border:0;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;font-size:15px;cursor:pointer" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Als Team anmelden (Prototyp)</button>
+    <p style="margin:16px 0 0;font-size:12.5px;color:#9CA29E">Produktiv: Anmeldung mit Einmallink und zweitem Faktor, Rolle „intern“ (siehe Anmeldung).</p>
+  </div></main></sc-if>
+<sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}"><main style="width:min(1280px,calc(100% - 48px));margin:0 auto;padding:64px 0 96px">
+  <div role="note" style="display:inline-flex;align-items:center;gap:10px;margin:0 0 20px;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,194,74,.55);background:rgba(255,194,74,.08);font-family:'Geist Mono',monospace;font-size:12px;color:#FFC24A"><span aria-hidden="true" style="width:8px;height:8px;border-radius:4px;background:#FFC24A"></span>Nur intern · noindex · <button onClick="{{ abmelden }}" style="border:0;background:transparent;color:#FFFFFF;text-decoration:underline;cursor:pointer;min-height:32px;font-family:inherit;font-size:inherit">abmelden</button></div>
+  <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:14px;color:#D7FA50">Gesamtsystem · Stand 29.09.2026</p>
+  <h1 style="margin:0 0 16px;font-size:56px;line-height:1.02;letter-spacing:-.04em;max-width:18ch;text-wrap:balance">Alles hängt zusammen. Hier ist die Karte.</h1>
+  <p style="margin:0 0 40px;font-size:17px;line-height:1.6;color:#BCC1BD;max-width:70ch">Jede Fläche nutzt denselben Kopf, denselben Fuß, dieselben Tokens und dieselben Zahlen. Der Status zeigt das Ergebnis der Designsystem-Prüfung; Details stehen in <a href="docs/09-final/12-abweichungsbericht.md">Bericht 12</a> und <a href="docs/09-final/13-erweiterte-pruefung.md">13</a>.</p>
+  <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))">
+    <sc-for list="{{ gruppen }}" as="g" hint-placeholder-count="6">
+      <section style="padding:24px;border-radius:16px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+        <p style="margin:0 0 6px;font-family:'Geist Mono',monospace;font-size:12px;color:{{ g.farbe }}">{{ g.art }}</p>
+        <h2 style="margin:0 0 14px;font-size:22px;letter-spacing:-.02em">{{ g.titel }}</h2>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:2px">
+          <sc-for list="{{ g.eintraege }}" as="e" hint-placeholder-count="5"><li><a href="{{ e.href }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 10px;border-radius:10px;color:#E3E6E3" style-hover="background:rgba(255,255,255,.06);color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px"><span>{{ e.name }}</span><span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:#9CA29E">{{ e.hinweis }}</span></a></li></sc-for>
+        </ul>
+      </section>
+    </sc-for>
+  </div>
+</main></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const G = [
+  ['Öffentlich', 'Marke und Produkt', '#D7FA50', [['NeXifyAI Cloud v12', 'Start', 'index'], ['NeXify AI one', 'one und one+', 'index'], ['NeXify API', 'Produkt · Doku · Preise · Konsole', 'index'], ['NeXify Shop', 'Muster-Shop', 'Demo'], ['NeXifyAI-Wissenshub-Artikel', 'Wissenshub', 'index'], ['NeXifyAI-Local-SEO-Muster', 'Stadtseite', 'Vorlage'], ['Rechtliches', 'Impressum bis Cookies', 'index'], ['API-Rechtliches', 'API-Bedingungen', 'index']]],
+  ['Öffentlich', 'TEILEKLAR und Werkstatt', '#D7FA50', [['TEILEKLAR Shop', 'Shop', 'index'], ['Fitment-Checker', 'Passung', 'Werkzeug'], ['Batterie-Berater', 'Batterie', 'Werkzeug'], ['Reifenrechner', 'Reifen', 'Werkzeug'], ['Partner-werden', 'Werkstattprogramm', 'index'], ['Werkstatt-Partnerseite', 'Partnerseite', 'Vorlage']]],
+  ['Konto und Portale', 'Für Kunden und Partner', '#6FE3CF', [['Anmeldung', '10 Bildschirme', 'noindex'], ['Kundenwege', 'Registrierung · Angebot', 'noindex'], ['Kundenportal', 'Angebote · Rechnungen · Abnahme', 'noindex'], ['Konto', 'Autofahrer', 'noindex'], ['Partnerportal', 'Werkstatt', 'noindex'], ['Nachbarschaftskunden-Portal', 'Gutschein · Termine', 'noindex'], ['Affiliate-Portal', 'Provisionen', 'noindex']]],
+  ['Intern', 'Arbeitsplätze', '#FFC24A', [['NeXify Workspace', 'Chats · Agenten', 'noindex'], ['myADMIN v2', 'Cockpit', 'noindex'], ['NeXify Leitstand', 'Betriebszentrale', 'noindex'], ['NeXify Posteingang', 'Anfragen', 'noindex']]],
+  ['Unterlagen', 'Papier-Variante', '#BCC1BD', [['Kundenbroschuere', 'Broschüre', 'Druck'], ['Partner-Broschuere', 'Partner', 'Druck'], ['Partner-PowerPoint Werkstatt', 'Folien', 'Druck'], ['Investoren-PowerPoint', 'Folien', 'Druck'], ['Geschaeftsdokumente-Vorlagen', 'Angebot · Rechnung · Gutschrift', 'Druck'], ['Visitenkarte-Pascal-Courbois', 'Visitenkarte', 'Druck'], ['E-Mail-Transaktional-Angebot.html', 'E-Mail Angebot', 'Mail'], ['E-Mail-Marketing-Newsletter.html', 'E-Mail Newsletter', 'Mail']]],
+  ['System', 'Design, Regeln, Dokumente', '#A78BFA', [['NeXify Designsystem', 'Regelwerk', 'live'], ['docs/09-final/00-INDEX.md', 'Dokumentation 00–15', 'md'], ['AGENTS.md', 'Handoff an Codex', 'md'], ['config/design-tokens.json', 'Tokens', 'json'], ['config/design-rules.json', 'Regeln', 'json'], ['config/system-inventar.json', 'Inventar', 'json']]]
+];
+class Component extends DCLogic {
+  state = { ok: false };
+  componentDidMount() { try { this.setState({ ok: sessionStorage.getItem("nx-intern") === "1" }); } catch (e) {} }
+  renderVals() {
+    return { ok: this.state.ok, gesperrt: !this.state.ok, anmelden: () => { try { sessionStorage.setItem("nx-intern", "1"); } catch (e) {} this.setState({ ok: true }); }, abmelden: () => { try { sessionStorage.removeItem("nx-intern"); } catch (e) {} this.setState({ ok: false }); }, gruppen: G.map(([art, titel, farbe, es]) => ({ art, titel, farbe, eintraege: es.map(([n, hinweis, h2]) => ({ name: n.replace(/\.dc\.html$/, ''), hinweis: h2 === 'index' || h2 === 'noindex' || h2 === 'Demo' || h2 === 'Vorlage' || h2 === 'Werkzeug' || h2 === 'Druck' || h2 === 'Mail' || h2 === 'live' || h2 === 'md' || h2 === 'json' ? hinweis : hinweis, href: /\.(md|json|html)$/.test(n) ? n : n + '.dc.html' })) })) };
+  }
+}
+</script>
+</body>
+</html>

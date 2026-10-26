@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        bildschirm
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „NeXify Shop.dc.html“
+  Status:     konform · Info: DS-C-05×4 DS-I-03×2 DS-I-05×1
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>NeXify Shop – Muster-Shop der Onlineshop-Fertiglösung</title>
+<meta name="description" content="Begehbarer Muster-Shop mit 10 Kategorien, Suche, Kasse und KI-Berater. Demo ohne echte Lieferung. Auf Wunsch unter Ihrer Marke eingerichtet.">
+<meta name="robots" content="noindex,follow">
+<meta property="og:type" content="website"><meta property="og:site_name" content="NeXify AI"><meta property="og:title" content="NeXify Shop – Muster-Shop der Onlineshop-Fertiglösung"><meta property="og:description" content="Begehbarer Muster-Shop mit 10 Kategorien, Suche, Kasse und KI-Berater. Demo ohne echte Lieferung. Auf Wunsch unter Ihrer Marke eingerichtet."><meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#242826">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"NeXify AI","url":"https://nexifyai.cloud","slogan":"Chat it. Automate it.","founder":{"@type":"Person","name":"Pascal Courbois"},"address":{"@type":"PostalAddress","streetAddress":"Graaf van Loonstraat 1E","postalCode":"5921 JA","addressLocality":"Venlo","addressCountry":"NL"},"email":"mail@nexifyai.cloud","vatID":"NL865786276B01","areaServed":["DE","NL","BE","LU"]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#242826;color:#FFFFFF;font-family:Geist,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}a{color:#D7FA50;text-decoration:none}a:hover{color:#FFFFFF}button{font:inherit;color:inherit}
+@keyframes shRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes shLive{0%,100%{box-shadow:0 0 0 0 rgba(215,250,80,.6)}70%{box-shadow:0 0 0 7px rgba(215,250,80,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.sh-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.sh-cats{grid-template-columns:repeat(5,minmax(0,1fr))}.sh-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sh-cat{grid-template-columns:240px minmax(0,1fr)}.sh-prod{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.sh-cart{grid-template-columns:minmax(0,1fr) 360px}
+@media (max-width:1100px){.sh-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.sh-cats{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media (max-width:820px){.sh-cat,.sh-prod,.sh-cart{grid-template-columns:minmax(0,1fr)!important}.sh-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.sh-h1{font-size:38px!important}}
+@media (max-width:520px){.sh-grid,.sh-cats,.sh-2{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-width:640px){main section{padding-top:56px!important;padding-bottom:56px!important}.nx-balken,.nx-ablauf,.nx-szene,.o-szene{grid-template-columns:minmax(0,1fr)!important;gap:6px!important}.nx-kzr{border-left:0!important;padding-left:0!important}.nx-hero{gap:32px!important}}
+@media (max-width:420px){main{overflow-x:hidden}}
+</style>
+<style id="nx-mobil">
+  html{-webkit-text-size-adjust:100%} body{overflow-x:hidden}
+  @media (max-width:640px){
+    h1{font-size:clamp(30px,9vw,42px)!important;line-height:1.06!important;letter-spacing:-.03em!important}
+    h2{font-size:clamp(24px,7vw,34px)!important;line-height:1.1!important}
+    [style*="padding:40px"],[style*="padding:48px 40px"],[style*="padding:36px"],[style*="padding:32px"]{padding:20px!important}
+    [style*="padding:56px 0"],[style*="padding:64px 24px"],[style*="padding:72px 0"],[style*="padding:96px 0"]{padding-top:40px!important;padding-bottom:48px!important}
+    [style*="gap:64px"],[style*="gap:48px"],[style*="gap:40px"]{gap:24px!important}
+    [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:repeat(2,"],[style*="grid-template-columns:1.1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],[style*="grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+    table{font-size:13px} pre{font-size:12px!important} img,svg,canvas{max-width:100%}
+    [style*="flex:1 1 520px"],[style*="flex:1 1 460px"],[style*="flex:2 1 460px"],[style*="flex:1 1 440px"],[style*="flex:1 1 420px"],[style*="flex:2 1 420px"],[style*="flex:1 1 400px"],[style*="flex:1 1 380px"],[style*="flex:1 1 360px"]{flex-basis:100%!important}
+    [style*="margin-left:auto"][style*="min-height:44px"]{margin-left:0!important}
+    button,a,input,select,textarea,summary{touch-action:manipulation}
+    input,select,textarea{font-size:16px!important}
+  }
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(1300px 640px at 88% -6%,rgba(215,250,80,.08),transparent 60%),radial-gradient(1000px 560px at 4% 38%,rgba(111,227,207,.055),transparent 62%),radial-gradient(900px 500px at 96% 72%,rgba(167,139,250,.06),transparent 62%),#242826">
+
+<dc-import name="NX-Header" marke="cloud" nav="cloud" active="shopMuster" kontext="Muster-Shop" cta="beratung" hint-size="100%,124px" market="de-DE" lang="de"></dc-import>
+<div role="note" style="background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-size:13px;font-weight:600;text-align:center;padding:8px 16px;font-family:'Geist Mono',monospace">MUSTER-SHOP · DEMO – keine echte Lieferung, keine Zahlung · Produkte und Marken sind fiktiv</div>
+
+<header style="position:relative;z-index:30;background:linear-gradient(180deg,#2C312F,#262A28);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 12px 30px -20px rgba(0,0,0,.8)">
+  <div style="width:min(1280px,calc(100% - 32px));margin:0 auto;display:flex;align-items:center;gap:16px;min-height:68px;flex-wrap:wrap;padding:8px 0">
+    
+    <button type="button" onClick="{{ zuHome }}" style="background:none;border:0;cursor:pointer;min-height:44px;padding:0 4px;font-weight:600;font-size:16px;color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">NeXify Shop</button>
+    <form role="search" onSubmit="{{ suchen }}" style="flex:1 1 300px;min-width:0;display:flex;gap:8px;position:relative">
+      <label for="sh-q" style="position:absolute;left:-9999px">Im Shop suchen</label>
+      <input id="sh-q" value="{{ q }}" onInput="{{ qSetzen }}" onChange="{{ qSetzen }}" placeholder="Suchen – z. B. Bürostuhl, Kaffee, Akkuschrauber" autocomplete="off" style="flex:1;min-width:0;min-height:44px;padding:0 14px;border:1px solid #4A4F4C;border-radius:8px;background:#2A2E2C;color:#FFFFFF;font-size:15px" style-focus="outline:2px solid #D7FA50;outline-offset:1px">
+      <button type="submit" style="flex:none;min-height:44px;padding:0 16px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;cursor:pointer" style-focus="outline:2px solid #FFFFFF;outline-offset:2px">Suchen</button>
+    </form>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#E3E6E3;min-height:44px;cursor:pointer;flex:none;white-space:nowrap"><input type="checkbox" checked="{{ b2b }}" onChange="{{ b2bUm }}" style="width:18px;height:18px;accent-color:#D7FA50">Geschäftskunde (Netto)</label>
+    <button type="button" onClick="{{ beraterAuf }}" style="min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer" style-hover="background:rgba(215,250,80,.12)" style-focus="outline:2px solid #FFFFFF;outline-offset:2px">Fragen Sie NeXify AI</button>
+    <button type="button" onClick="{{ zuMerk }}" style="min-height:44px;padding:0 12px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Merkliste <span style="font-family:'Geist Mono',monospace;color:#D7FA50">{{ merkAnzahl }}</span></button>
+    <button type="button" onClick="{{ zuWarenkorb }}" style="min-height:44px;padding:0 14px;border-radius:8px;border:0;background:#2A2E2C;border:1px solid #4A4F4C;cursor:pointer;font-weight:600" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Warenkorb <span style="font-family:'Geist Mono',monospace;color:#D7FA50">{{ cartAnzahl }} · {{ cartSumme }}</span></button>
+  </div>
+  <nav aria-label="Kategorien" style="border-top:1px solid #363A38;overflow-x:auto">
+    <div style="width:min(1280px,calc(100% - 32px));margin:0 auto;display:flex;gap:2px">
+      <sc-for list="{{ navKats }}" as="k" hint-placeholder-count="10">
+        <button type="button" onClick="{{ k.oeffnen }}" aria-current="{{ k.current }}" style="flex:none;min-height:44px;padding:0 14px;border:0;background:transparent;cursor:pointer;font-size:14px;font-weight:{{ k.gewicht }};color:{{ k.farbe }};box-shadow:inset 0 -2px 0 {{ k.linie }}" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:-2px">{{ k.name }}</button>
+      </sc-for>
+    </div>
+  </nav>
+</header>
+
+<main id="inhalt" style="flex:1;width:min(1280px,calc(100% - 32px));margin:0 auto;padding:32px 0 72px">
+
+<!-- HOME -->
+<sc-if value="{{ v.home }}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="h-home" style="display:grid;gap:32px;padding:24px 0 48px;grid-template-columns:minmax(0,1fr) minmax(0,.7fr);align-items:center" class="sh-prod">
+  <div>
+    <p style="margin:0 0 12px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Muster-Shop der Onlineshop-Fertiglösung</p>
+    <h1 id="h-home" class="sh-h1" style="margin:0 0 16px;font-size:56px;line-height:1.02;letter-spacing:-.03em;font-weight:700;text-wrap:pretty">Alles für den Betrieb. Ein Shop, der Sie berät.</h1>
+    <p style="margin:0 0 24px;font-size:18px;line-height:1.55;color:#BCC1BD;max-width:54ch">Zehn Kategorien, {{ anzahlArtikel }} Artikel, echte Suche, Warenkorb und Kasse. Fragen Sie den Shop-Berater – er stellt zwei Fragen und legt Ihnen drei passende Artikel hin. Genau dieser Shop lässt sich unter Ihrer Marke einrichten.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <button type="button" onClick="{{ beraterAuf }}" style="min-height:52px;padding:0 22px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A,#D7FA50);color:#111312;font-size:16px;font-weight:600;cursor:pointer" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Berater ausprobieren</button>
+      <a href="NeXifyAI Cloud v12.dc.html#preise" style="display:inline-flex;align-items:center;min-height:52px;padding:0 20px;border-radius:8px;border:1px solid #4A4F4C;color:#FFFFFF;font-weight:500" style-hover="border-color:#D7FA50;color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:3px">Diesen Shop unter meiner Marke</a>
+    </div>
+  </div>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;gap:10px">
+    <sc-for list="{{ vorteile }}" as="x" hint-placeholder-count="4"><li style="display:grid;grid-template-columns:auto 1fr;gap:12px;padding:14px 16px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)"><span style="font-family:'Geist Mono',monospace;color:#D7FA50">{{ x.k }}</span><span style="font-size:14px;line-height:1.5;color:#E3E6E3">{{ x.t }}</span></li></sc-for>
+  </ul>
+</section>
+<h2 style="margin:0 0 16px;font-size:26px;letter-spacing:-.02em">Kategorien</h2>
+<div style="display:grid;gap:12px;margin-bottom:48px" class="sh-cats">
+  <sc-for list="{{ katKacheln }}" as="k" hint-placeholder-count="10">
+    <button type="button" onClick="{{ k.oeffnen }}" style="text-align:left;padding:18px;border-radius:12px;border:1px solid #363A38;background:#2A2E2C;cursor:pointer;display:grid;gap:8px;min-height:130px;align-content:space-between" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+      <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E">{{ k.marke }}</span>
+      <span style="font-size:18px;font-weight:600;letter-spacing:-.01em">{{ k.name }}</span>
+      <span style="font-size:12.5px;color:#BCC1BD;line-height:1.4">{{ k.subs }}</span>
+    </button>
+  </sc-for>
+</div>
+<h2 style="margin:0 0 16px;font-size:26px;letter-spacing:-.02em">Beliebt im Muster-Shop</h2>
+<div style="display:grid;gap:16px" class="sh-grid">
+  <sc-for list="{{ beliebt }}" as="p" hint-placeholder-count="8">
+    <article style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column">
+      <button type="button" onClick="{{ p.oeffnen }}" aria-label="{{ p.name }} ansehen" style="border:0;padding:0;background:transparent;cursor:pointer;text-align:left" style-focus="outline:2px solid #D7FA50;outline-offset:-2px">
+        <div style="aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#2E3331 0 10px,#292D2B 10px 20px);display:grid;place-items:center;border-bottom:1px solid #363A38"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E;text-align:center;padding:8px">Produktfoto · {{ p.sub }}</span></div>
+        <div style="padding:14px 14px 4px"><p style="margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E">{{ p.marke }}</p><p style="margin:0;font-size:15px;font-weight:600;line-height:1.3">{{ p.name }}</p></div>
+      </button>
+      <div style="padding:6px 14px 14px;margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font-family:'Geist Mono',monospace;font-weight:600">{{ p.preis }}</span><button type="button" onClick="{{ p.add }}" style="min-height:44px;padding:0 12px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer" style-hover="background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312" style-focus="outline:2px solid #FFFFFF;outline-offset:2px">In den Korb</button></div>
+    </article>
+  </sc-for>
+</div>
+</sc-if>
+
+<!-- KATEGORIE / SUCHE / MERKLISTE -->
+<sc-if value="{{ v.liste }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Brotkrumen" style="font-size:13px;color:#9CA29E;margin-bottom:8px"><button type="button" onClick="{{ zuHome }}" style="background:none;border:0;cursor:pointer;color:#D7FA50;padding:0;min-height:32px">Start</button> / {{ listeTitel }}</nav>
+<h1 style="margin:0 0 6px;font-size:38px;letter-spacing:-.025em">{{ listeTitel }}</h1>
+<p style="margin:0 0 20px;font-size:14px;color:#9CA29E;font-family:'Geist Mono',monospace">{{ trefferText }}</p>
+<sc-if value="{{ hatSubs }}" hint-placeholder-val="{{ false }}">
+<div role="group" aria-label="Unterkategorien" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+  <sc-for list="{{ subTabs }}" as="s" hint-placeholder-count="4"><button type="button" aria-pressed="{{ s.aktiv }}" onClick="{{ s.waehlen }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:1px solid {{ s.rand }};background:{{ s.bg }};color:{{ s.fg }};font-size:14px;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ s.name }}</button></sc-for>
+</div>
+</sc-if>
+<div style="display:grid;gap:28px;align-items:start" class="sh-cat">
+  <aside aria-label="Filter" style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);padding:18px;display:grid;gap:18px">
+    <div><p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">SORTIERUNG</p>
+      <select aria-label="Sortierung" value="{{ sortierung }}" onChange="{{ sortSetzen }}" style="width:100%;min-height:44px;padding:0 10px;border:1px solid #4A4F4C;border-radius:8px;background:#242826;color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:1px"><option value="rel">Relevanz</option><option value="auf">Preis aufsteigend</option><option value="ab">Preis absteigend</option><option value="az">Name A–Z</option></select></div>
+    <div><p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">MARKE</p>
+      <div style="display:grid;gap:4px"><sc-for list="{{ markenFilter }}" as="m" hint-placeholder-count="2"><label style="display:flex;gap:10px;align-items:center;min-height:44px;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ m.an }}" onChange="{{ m.um }}" style="width:18px;height:18px;accent-color:#D7FA50">{{ m.name }} <span style="color:#9CA29E;font-family:'Geist Mono',monospace;font-size:12px">{{ m.n }}</span></label></sc-for></div></div>
+    <div><p style="margin:0 0 8px;font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">PREIS BIS {{ maxPreisText }}</p>
+      <input type="range" aria-label="Höchstpreis" min="0" max="100" step="5" value="{{ maxRegler }}" onChange="{{ maxSetzen }}" style="width:100%;accent-color:#D7FA50"></div>
+    <label style="display:flex;gap:10px;align-items:center;min-height:44px;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ nurSchnell }}" onChange="{{ schnellUm }}" style="width:18px;height:18px;accent-color:#D7FA50">Lieferung in 1–2 Tagen</label>
+    <button type="button" onClick="{{ filterReset }}" style="min-height:44px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Filter zurücksetzen</button>
+  </aside>
+  <div>
+    <sc-if value="{{ keineTreffer }}" hint-placeholder-val="{{ false }}">
+      <div role="status" style="border:1px dashed #4A4F4C;border-radius:12px;padding:32px;display:grid;gap:12px"><h2 style="margin:0;font-size:22px">Nichts gefunden{{ leerZusatz }}.</h2><p style="margin:0;color:#BCC1BD;font-size:15px;line-height:1.55">Prüfen Sie die Schreibweise oder lockern Sie die Filter. Der Berater sucht auch nach dem Zweck – zum Beispiel „Homeoffice“.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" onClick="{{ filterReset }}" style="min-height:44px;padding:0 16px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;cursor:pointer">Filter zurücksetzen</button><button type="button" onClick="{{ beraterAuf }}" style="min-height:44px;padding:0 16px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer">NeXify AI fragen</button></div></div>
+    </sc-if>
+    <div style="display:grid;gap:16px" class="sh-grid">
+      <sc-for list="{{ produkte }}" as="p" hint-placeholder-count="8">
+        <article style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column">
+          <button type="button" onClick="{{ p.oeffnen }}" aria-label="{{ p.name }} ansehen" style="border:0;padding:0;background:transparent;cursor:pointer;text-align:left" style-focus="outline:2px solid #D7FA50;outline-offset:-2px">
+            <div style="aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#2E3331 0 10px,#292D2B 10px 20px);display:grid;place-items:center;border-bottom:1px solid #363A38"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E;text-align:center;padding:8px">Produktfoto · {{ p.sub }}</span></div>
+            <div style="padding:14px 14px 4px"><p style="margin:0 0 4px;font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E">{{ p.marke }}</p><p style="margin:0 0 6px;font-size:15px;font-weight:600;line-height:1.3">{{ p.name }}</p><p style="margin:0;font-size:12.5px;color:#BCC1BD">{{ p.liefer }}{{ p.grund }}</p></div>
+          </button>
+          <div style="padding:8px 14px 14px;margin-top:auto;display:grid;gap:8px"><span style="font-family:'Geist Mono',monospace;font-weight:600;font-size:16px">{{ p.preis }} <span style="font-weight:400;font-size:11px;color:#9CA29E">{{ p.steuer }}</span></span>
+            <div style="display:flex;gap:8px"><button type="button" onClick="{{ p.add }}" style="flex:1;min-height:44px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer" style-hover="background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312" style-focus="outline:2px solid #FFFFFF;outline-offset:2px">In den Korb</button><button type="button" onClick="{{ p.merken }}" aria-pressed="{{ p.gemerkt }}" aria-label="Merken" style="min-width:44px;min-height:44px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer;color:{{ p.merkFarbe }}" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.merkZeichen }}</button></div></div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- PRODUKT -->
+<sc-if value="{{ v.prod }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Brotkrumen" style="font-size:13px;color:#9CA29E;margin-bottom:16px"><button type="button" onClick="{{ zuHome }}" style="background:none;border:0;cursor:pointer;color:#D7FA50;padding:0;min-height:32px">Start</button> / <button type="button" onClick="{{ pKat }}" style="background:none;border:0;cursor:pointer;color:#D7FA50;padding:0;min-height:32px">{{ p.katName }}</button> / {{ p.subName }}</nav>
+<div style="display:grid;gap:40px;align-items:start" class="sh-prod">
+  <div style="aspect-ratio:1/1;border-radius:14px;border:1px solid #363A38;background:repeating-linear-gradient(135deg,#2E3331 0 12px,#292D2B 12px 24px);display:grid;place-items:center"><span style="font-family:'Geist Mono',monospace;font-size:13px;color:#9CA29E;text-align:center;padding:16px;max-width:28ch;line-height:1.5">Produktfoto {{ p.name }}<br>Bildplatz – hier lädt der Betreiber echte Fotos hoch</span></div>
+  <div style="display:grid;gap:16px">
+    <p style="margin:0;font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">{{ p.marke }} · Art.-Nr. {{ p.nr }}</p>
+    <h1 style="margin:0;font-size:36px;line-height:1.1;letter-spacing:-.025em">{{ p.name }}</h1>
+    <p style="margin:0;font-size:32px;font-family:'Geist Mono',monospace;font-weight:600">{{ p.preis }} <span style="font-size:13px;font-weight:400;color:#9CA29E">{{ p.steuer }}</span></p>
+    <p style="margin:0;font-size:13px;color:#BCC1BD">{{ p.versandText }}</p>
+    <sc-if value="{{ p.hatVar }}" hint-placeholder-val="{{ false }}"><label style="display:grid;gap:6px;font-size:14px">{{ p.varLabel }}<select value="{{ p.variante }}" onChange="{{ varSetzen }}" style="min-height:44px;padding:0 10px;border:1px solid #4A4F4C;border-radius:8px;background:#242826;color:#FFFFFF;max-width:240px" style-focus="outline:2px solid #D7FA50;outline-offset:1px"><sc-for list="{{ p.varOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o }}">{{ o }}</option></sc-for></select></label></sc-if>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <div role="group" aria-label="Menge" style="display:flex;border:1px solid #4A4F4C;border-radius:8px"><button type="button" onClick="{{ mengeMinus }}" aria-label="Weniger" style="width:44px;min-height:48px;border:0;background:transparent;cursor:pointer;font-size:20px" style-focus="outline:2px solid #D7FA50;outline-offset:-2px">−</button><span style="min-width:44px;display:grid;place-items:center;font-family:'Geist Mono',monospace">{{ menge }}</span><button type="button" onClick="{{ mengePlus }}" aria-label="Mehr" style="width:44px;min-height:48px;border:0;background:transparent;cursor:pointer;font-size:20px" style-focus="outline:2px solid #D7FA50;outline-offset:-2px">+</button></div>
+      <button type="button" onClick="{{ p.addMenge }}" style="min-height:48px;padding:0 26px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A,#D7FA50);color:#111312;font-size:16px;font-weight:600;cursor:pointer" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">In den Warenkorb</button>
+      <button type="button" onClick="{{ p.merken }}" style="min-height:48px;padding:0 16px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.merkText }}</button>
+    </div>
+    <p style="margin:0;font-size:14px;display:flex;gap:8px;align-items:center;color:#E3E6E3"><span aria-hidden="true" style="width:8px;height:8px;border-radius:4px;background:#6FE3CF"></span>{{ p.lager }} · Lieferzeit {{ p.lieferZeit }}</p>
+    <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:14px;padding-top:14px;border-top:1px solid #363A38">
+      <sc-for list="{{ p.attribute }}" as="a" hint-placeholder-count="4"><dt style="color:#9CA29E">{{ a.k }}</dt><dd style="margin:0">{{ a.v }}</dd></sc-for>
+    </dl>
+    <div style="padding:14px;background:linear-gradient(180deg,#303634 0%,#292D2B 100%);border:1px solid rgba(255,255,255,.08);border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 24px -16px rgba(0,0,0,.8);font-size:13px;line-height:1.55;color:#BCC1BD"><strong style="color:#FFFFFF">Pflichtangaben:</strong> {{ p.pflicht }}</div>
+    <p style="margin:0;font-size:12px;color:#9CA29E;font-family:'Geist Mono',monospace">Beschreibung und Werte sind Beispieldaten des Muster-Shops.</p>
+  </div>
+</div>
+<h2 style="margin:48px 0 16px;font-size:24px;letter-spacing:-.02em">Passt dazu</h2>
+<div style="display:grid;gap:16px" class="sh-grid">
+  <sc-for list="{{ passtDazu }}" as="p" hint-placeholder-count="4">
+    <article style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);padding:14px;display:grid;gap:8px"><p style="margin:0;font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E">{{ p.marke }}</p><button type="button" onClick="{{ p.oeffnen }}" style="text-align:left;background:none;border:0;padding:0;cursor:pointer;font-size:15px;font-weight:600;line-height:1.3" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.name }}</button><span style="font-family:'Geist Mono',monospace">{{ p.preis }}</span><button type="button" onClick="{{ p.add }}" style="min-height:44px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer">In den Korb</button></article>
+  </sc-for>
+</div>
+</sc-if>
+
+<!-- WARENKORB -->
+<sc-if value="{{ v.cart }}" hint-placeholder-val="{{ false }}">
+<h1 style="margin:0 0 20px;font-size:38px;letter-spacing:-.025em">Warenkorb</h1>
+<sc-if value="{{ cartLeer }}" hint-placeholder-val="{{ false }}"><div role="status" style="border:1px dashed #4A4F4C;border-radius:12px;padding:40px;display:grid;gap:14px;justify-items:start"><h2 style="margin:0;font-size:24px">Ihr Warenkorb ist leer.</h2><p style="margin:0;color:#BCC1BD;line-height:1.55">Stöbern Sie in den Kategorien oder lassen Sie sich vom Berater drei Artikel vorschlagen.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" onClick="{{ zuHome }}" style="min-height:48px;padding:0 20px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;cursor:pointer">Zum Shop</button><button type="button" onClick="{{ beraterAuf }}" style="min-height:48px;padding:0 20px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer">NeXify AI fragen</button></div></div></sc-if>
+<sc-if value="{{ cartVoll }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;gap:28px;align-items:start" class="sh-cart">
+  <ul style="list-style:none;margin:0;padding:0;display:grid;gap:10px">
+    <sc-for list="{{ zeilen }}" as="z" hint-placeholder-count="2">
+      <li style="display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25)">
+        <div style="aspect-ratio:1/1;background:repeating-linear-gradient(135deg,#2E3331 0 8px,#292D2B 8px 16px);border-radius:8px"></div>
+        <div><p style="margin:0 0 2px;font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E">{{ z.marke }}</p><button type="button" onClick="{{ z.oeffnen }}" style="text-align:left;background:none;border:0;padding:0;cursor:pointer;font-size:15px;font-weight:600" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ z.name }}</button><p style="margin:4px 0 0;font-size:12.5px;color:#BCC1BD">{{ z.einzel }} je Stück</p></div>
+        <div style="display:grid;gap:8px;justify-items:end"><span style="font-family:'Geist Mono',monospace;font-weight:600">{{ z.summe }}</span>
+          <div style="display:flex;align-items:center;gap:4px"><button type="button" onClick="{{ z.minus }}" aria-label="Weniger" style="width:36px;min-height:44px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">−</button><span style="min-width:28px;text-align:center;font-family:'Geist Mono',monospace">{{ z.menge }}</span><button type="button" onClick="{{ z.plus }}" aria-label="Mehr" style="width:36px;min-height:44px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">+</button><button type="button" onClick="{{ z.weg }}" style="min-height:44px;padding:0 8px;border:0;background:none;color:#9CA29E;cursor:pointer;text-decoration:underline" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Entfernen</button></div></div>
+      </li>
+    </sc-for>
+  </ul>
+  <aside aria-label="Zusammenfassung" style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);padding:20px;display:grid;gap:12px;position:sticky;top:150px">
+    <h2 style="margin:0;font-size:20px">Zusammenfassung</h2>
+    <form onSubmit="{{ gutscheinEinl }}" style="display:flex;gap:8px"><label for="gs" style="position:absolute;left:-9999px">Gutscheincode</label><input id="gs" value="{{ gutschein }}" onChange="{{ gutscheinSetzen }}" placeholder="Gutscheincode" style="flex:1;min-height:44px;padding:0 12px;border:1px solid #4A4F4C;border-radius:8px;background:#242826;color:#FFFFFF;font-family:'Geist Mono',monospace" style-focus="outline:2px solid #D7FA50;outline-offset:1px"><button type="submit" style="min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50">Einlösen</button></form>
+    <p role="status" style="margin:0;font-size:13px;color:{{ gutscheinFarbe }}">{{ gutscheinMeldung }}</p>
+    <dl style="margin:0;display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px">
+      <dt style="color:#BCC1BD">Zwischensumme</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right">{{ s.zwischen }}</dd>
+      <sc-if value="{{ s.hatRabatt }}" hint-placeholder-val="{{ false }}"><dt style="color:#6FE3CF">Gutschein WILLKOMMEN10</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right;color:#6FE3CF">− {{ s.rabatt }}</dd></sc-if>
+      <dt style="color:#BCC1BD">Versand</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right">{{ s.versand }}</dd>
+      <dt style="font-weight:600;border-top:1px solid #363A38;padding-top:8px">{{ s.totalLabel }}</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right;font-weight:600;font-size:18px;border-top:1px solid #363A38;padding-top:8px">{{ s.total }}</dd>
+      <dt style="font-size:12px;color:#9CA29E">{{ s.ustLabel }}</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right;font-size:12px;color:#9CA29E">{{ s.ust }}</dd>
+    </dl>
+    <p style="margin:0;font-size:12.5px;color:#BCC1BD">{{ s.frei }}</p>
+    <button type="button" onClick="{{ zurKasse }}" style="min-height:52px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A,#D7FA50);color:#111312;font-size:16px;font-weight:600;cursor:pointer" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">Zur Kasse</button>
+  </aside>
+</div>
+</sc-if>
+</sc-if>
+
+<!-- KASSE -->
+<sc-if value="{{ v.kasse }}" hint-placeholder-val="{{ false }}">
+<h1 style="margin:0 0 16px;font-size:38px;letter-spacing:-.025em">Kasse</h1>
+<ol aria-label="Schritte" style="list-style:none;margin:0 0 24px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+  <sc-for list="{{ schritte }}" as="s" hint-placeholder-count="4"><li aria-current="{{ s.current }}" style="padding:10px 12px;border-radius:8px;border:1px solid {{ s.rand }};background:{{ s.bg }};font-size:13px;color:{{ s.fg }}"><span style="font-family:'Geist Mono',monospace">{{ s.nr }}</span> {{ s.name }}</li></sc-for>
+</ol>
+<div style="display:grid;gap:28px;align-items:start" class="sh-cart">
+  <form onSubmit="{{ weiter }}" noValidate="{{ true }}" style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);padding:24px;display:grid;gap:16px">
+    <sc-if value="{{ k1 }}" hint-placeholder-val="{{ true }}">
+      <h2 style="margin:0;font-size:22px">Lieferadresse</h2>
+      <div style="display:grid;gap:14px" class="sh-2">
+        <sc-for list="{{ adrFelder }}" as="f" hint-placeholder-count="6">
+          <div style="display:grid;gap:6px"><label for="{{ f.id }}" style="font-size:14px">{{ f.label }}</label><input id="{{ f.id }}" value="{{ f.wert }}" onChange="{{ f.setzen }}" autocomplete="{{ f.auto }}" aria-invalid="{{ f.ungueltig }}" style="min-height:46px;padding:0 12px;border:1px solid {{ f.rand }};border-radius:8px;background:#242826;color:#FFFFFF;font-size:15px" style-focus="outline:2px solid #D7FA50;outline-offset:1px"><sc-if value="{{ f.fehler }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:13px;color:#FF8A7A">{{ f.fehler }}</p></sc-if></div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ b2b }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:13px;color:#BCC1BD;padding:12px;border:1px solid #363A38;border-radius:8px">Geschäftskunde: Preise netto. Mit gültiger USt-IdNr. eines anderen EU-Landes entfällt die Umsatzsteuer (Reverse Charge) – die Prüfung erfolgt im Betrieb über VIES.</p></sc-if>
+    </sc-if>
+    <sc-if value="{{ k2 }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin:0;font-size:22px">Versandart</h2>
+      <sc-for list="{{ versandOpts }}" as="o" hint-placeholder-count="3"><label style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px;border:1px solid {{ o.rand }};border-radius:10px;cursor:pointer;min-height:56px"><input type="radio" name="versand" checked="{{ o.an }}" onChange="{{ o.waehlen }}" style="width:18px;height:18px;accent-color:#D7FA50"><span><strong style="display:block;font-size:15px">{{ o.name }}</strong><span style="font-size:13px;color:#BCC1BD">{{ o.text }}</span></span><span style="font-family:'Geist Mono',monospace">{{ o.preis }}</span></label></sc-for>
+    </sc-if>
+    <sc-if value="{{ k3 }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin:0;font-size:22px">Zahlung</h2>
+      <sc-for list="{{ zahlOpts }}" as="o" hint-placeholder-count="3"><label style="display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:14px;border:1px solid {{ o.rand }};border-radius:10px;cursor:{{ o.cursor }};opacity:{{ o.opacity }};min-height:56px"><input type="radio" name="zahlung" checked="{{ o.an }}" disabled="{{ o.gesperrt }}" onChange="{{ o.waehlen }}" style="width:18px;height:18px;accent-color:#D7FA50"><span><strong style="display:block;font-size:15px">{{ o.name }}</strong><span style="font-size:13px;color:#BCC1BD">{{ o.text }}</span></span></label></sc-for>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ zahlFehler }}" onChange="{{ zahlFehlerUm }}" style="width:18px;height:18px;accent-color:#FFC24A">Demo: Zahlung ablehnen lassen, um die Fehlermeldung zu sehen</label>
+    </sc-if>
+    <sc-if value="{{ k4 }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin:0;font-size:22px">Prüfen und bestellen</h2>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#E3E6E3">Liefern an: <strong>{{ pruefAdresse }}</strong><br>Versand: <strong>{{ pruefVersand }}</strong> · Zahlung: <strong>{{ pruefZahlung }}</strong></p>
+      <label style="display:flex;gap:12px;align-items:start;font-size:14px;line-height:1.5;cursor:pointer"><input type="checkbox" checked="{{ agb }}" onChange="{{ agbUm }}" style="width:20px;height:20px;margin-top:2px;accent-color:#D7FA50;flex:none"><span>Ich habe die <button type="button" onClick="{{ zuAgb }}" style="background:none;border:0;padding:0;color:#D7FA50;cursor:pointer;text-decoration:underline">AGB</button> und die <button type="button" onClick="{{ zuWiderruf }}" style="background:none;border:0;padding:0;color:#D7FA50;cursor:pointer;text-decoration:underline">Widerrufsbelehrung</button> gelesen und akzeptiere sie.</span></label>
+      <sc-if value="{{ agbFehler }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:-8px 0 0;font-size:13px;color:#FF8A7A">Bitte bestätigen Sie AGB und Widerrufsbelehrung.</p></sc-if>
+      <sc-if value="{{ zahlungAbgelehnt }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;padding:12px;border:1px solid #FF8A7A;border-radius:8px;font-size:14px;color:#FF8A7A">Die Zahlung wurde von der Bank abgelehnt. Es wurde nichts abgebucht. Wählen Sie eine andere Zahlart oder versuchen Sie es erneut.</p></sc-if>
+    </sc-if>
+    <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap">
+      <button type="button" onClick="{{ zurueck }}" style="min-height:48px;padding:0 18px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">Zurück</button>
+      <button type="submit" disabled="{{ bestellt }}" style="min-height:52px;padding:0 24px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A,#D7FA50);color:#111312;font-size:16px;font-weight:600;cursor:pointer;opacity:{{ bestellOpacity }}" style-focus="outline:2px solid #FFFFFF;outline-offset:3px">{{ weiterText }}</button>
+    </div>
+  </form>
+  <aside aria-label="Bestellübersicht" style="background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);padding:20px;display:grid;gap:10px;position:sticky;top:150px">
+    <h2 style="margin:0;font-size:18px">Ihre Bestellung</h2>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13.5px"><sc-for list="{{ zeilen }}" as="z" hint-placeholder-count="2"><li style="display:flex;justify-content:space-between;gap:8px"><span>{{ z.menge }} × {{ z.name }}</span><span style="font-family:'Geist Mono',monospace">{{ z.summe }}</span></li></sc-for></ul>
+    <dl style="margin:0;display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px;border-top:1px solid #363A38;padding-top:10px">
+      <dt style="color:#BCC1BD">Versand</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right">{{ s.versand }}</dd>
+      <dt style="font-weight:600">{{ s.totalLabel }}</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right;font-weight:600">{{ s.total }}</dd>
+      <dt style="font-size:12px;color:#9CA29E">{{ s.ustLabel }}</dt><dd style="margin:0;font-family:'Geist Mono',monospace;text-align:right;font-size:12px;color:#9CA29E">{{ s.ust }}</dd>
+    </dl>
+  </aside>
+</div>
+</sc-if>
+
+<!-- BESTÄTIGUNG -->
+<sc-if value="{{ v.fertig }}" hint-placeholder-val="{{ false }}">
+<section role="status" style="max-width:820px;margin:0 auto;display:grid;gap:20px">
+  <p style="margin:0;font-family:'Geist Mono',monospace;font-size:13px;color:#6FE3CF">BESTELLUNG EINGEGANGEN · {{ bestellNr }} · DEMO</p>
+  <h1 style="margin:0;font-size:40px;letter-spacing:-.025em;line-height:1.05">Danke, {{ vorname }}. Ihre Musterbestellung ist angelegt.</h1>
+  <p style="margin:0;font-size:16px;line-height:1.6;color:#BCC1BD">In einem echten Shop würde jetzt die Bestätigung per E-Mail rausgehen, die Zahlung bestätigt und der Versand vorbereitet. Hier sehen Sie, wie das aussieht – es wird nichts geliefert und nichts abgebucht.</p>
+  <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+    <sc-for list="{{ statusKette }}" as="s" hint-placeholder-count="4"><li style="padding:12px;border-radius:8px;border:1px solid {{ s.rand }};background:{{ s.bg }};font-size:13px;color:{{ s.fg }}"><span style="font-family:'Geist Mono',monospace;display:block;font-size:11px">{{ s.zeit }}</span>{{ s.name }}</li></sc-for>
+  </ol>
+  <div style="border:1px solid #363A38;border-radius:12px;overflow:hidden;background:#F6F7F4;color:#111312">
+    <div style="padding:10px 14px;background:#ECEEEB;border-bottom:1px solid #D8DAD6;font-family:'Geist Mono',monospace;font-size:12px">Betreff: Ihre Bestellung {{ bestellNr }} bei NeXify Shop (Muster)</div>
+    <div style="padding:20px;display:grid;gap:8px;font-size:14px;line-height:1.55"><p style="margin:0">Guten Tag {{ vorname }},</p><p style="margin:0">vielen Dank für Ihre Bestellung. Gesamtbetrag: <strong>{{ s.total }}</strong> ({{ s.ustLabel }} {{ s.ust }}). Voraussichtliche Lieferung: {{ lieferDatum }}.</p><p style="margin:0">Ihr Widerrufsrecht: 14 Tage ab Erhalt der Ware. Die Belehrung und das Muster-Formular stehen dieser E-Mail als Anhang bei.</p><p style="margin:0;font-size:12px;color:#5C6157">NeXify AI · Graaf van Loonstraat 1E, 5921 JA Venlo, NL · KvK 90483944 · USt-IdNr. NL865786276B01 · Muster-Shop, keine echte Lieferung</p></div>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" onClick="{{ neuStart }}" style="min-height:48px;padding:0 20px;border-radius:8px;border:0;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;cursor:pointer">Weiter stöbern</button><a href="NeXifyAI Cloud v12.dc.html#kontakt" style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:8px;border:1px solid #4A4F4C;color:#FFFFFF">Diesen Shop für mein Unternehmen anfragen</a></div>
+</section>
+</sc-if>
+
+<!-- RECHT -->
+<sc-if value="{{ v.recht }}" hint-placeholder-val="{{ false }}">
+<h1 style="margin:0 0 6px;font-size:38px;letter-spacing:-.025em">Rechtliches</h1>
+<p style="margin:0 0 20px;font-size:14px;color:#FFC24A;font-family:'Geist Mono',monospace">Entwurf Fassung 0.9 · Stand 29.09.2026 · anwaltliche Prüfung vor Live-Betrieb erforderlich</p>
+<div role="tablist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px"><sc-for list="{{ rechtTabs }}" as="t" hint-placeholder-count="6"><button type="button" role="tab" aria-selected="{{ t.aktiv }}" onClick="{{ t.waehlen }}" style="min-height:44px;padding:0 14px;border-radius:8px;border:1px solid {{ t.rand }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.name }}</button></sc-for></div>
+<article style="max-width:820px;background:linear-gradient(180deg,#303634 0%,#262A28 100%);border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 28px 56px -32px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.25);padding:28px;display:grid;gap:14px">
+  <h2 style="margin:0;font-size:26px">{{ rechtDoc.titel }}</h2>
+  <sc-for list="{{ rechtDoc.abschnitte }}" as="a" hint-placeholder-count="4"><div><h3 style="margin:0 0 4px;font-size:16px">{{ a.h }}</h3><p style="margin:0;font-size:15px;line-height:1.65;color:#E3E6E3;white-space:pre-line">{{ a.t }}</p></div></sc-for>
+</article>
+</sc-if>
+
+</main>
+
+<footer style="border-top:1px solid #363A38;background:#1B1E1D">
+  <div style="width:min(1280px,calc(100% - 32px));margin:0 auto;padding:28px 0;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;font-size:14px;color:#BCC1BD">
+    <span>NeXify Shop · Muster-Shop der NeXify-AI-Onlineshop-Fertiglösung</span>
+    <nav aria-label="Rechtliches" style="display:flex;flex-wrap:wrap;gap:4px 16px"><sc-for list="{{ rechtTabs }}" as="t" hint-placeholder-count="6"><button type="button" onClick="{{ t.waehlen }}" style="background:none;border:0;cursor:pointer;color:#BCC1BD;min-height:36px;padding:0" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ t.name }}</button></sc-for></nav>
+  </div>
+</footer>
+
+<!-- BERATER -->
+<sc-if value="{{ beraterOffen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="Shop-Berater NeXify AI" style="position:fixed;right:16px;bottom:16px;z-index:60;width:min(400px,calc(100% - 32px));max-height:80vh;overflow:auto;border:1px solid #D7FA50;border-radius:16px;background:#242826;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);animation:shRise .3s ease both">
+  <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #363A38"><img src="assets/nexify-ai/nexify-ai-signet.svg" alt="" style="width:24px;height:24px"><div style="flex:1"><p style="margin:0;font-weight:600">NeXify AI · Shop-Berater</p><p style="margin:0;font-family:'Geist Mono',monospace;font-size:11px;color:#9CA29E">KI-Antwort · nur Katalogwerte</p></div><button type="button" onClick="{{ beraterZu }}" aria-label="Berater schließen" style="width:44px;height:44px;border:0;background:none;cursor:pointer;font-size:20px" style-focus="outline:2px solid #D7FA50;outline-offset:-2px">×</button></div>
+  <div style="padding:16px;display:grid;gap:12px">
+    <sc-if value="{{ bSchritt0 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5">Guten Tag. Wofür suchen Sie etwas?</p><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ bZwecke }}" as="z" hint-placeholder-count="6"><button type="button" onClick="{{ z.waehlen }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ z.name }}</button></sc-for></div></sc-if>
+    <sc-if value="{{ bSchritt1 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:15px;line-height:1.5">{{ bZweckText }} Wie viel möchten Sie ungefähr ausgeben – pro Artikel?</p><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ bBudgets }}" as="z" hint-placeholder-count="3"><button type="button" onClick="{{ z.waehlen }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:1px solid #4A4F4C;background:transparent;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ z.name }}</button></sc-for></div></sc-if>
+    <sc-if value="{{ bSchritt2 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:15px;line-height:1.5">Das passt zu Ihren Angaben. Preise sind Katalogwerte, ich erfinde keine.</p>
+      <sc-for list="{{ bVorschlaege }}" as="p" hint-placeholder-count="3"><div style="border:1px solid #363A38;border-radius:10px;padding:12px;display:grid;gap:6px;background:#2A2E2C"><button type="button" onClick="{{ p.oeffnen }}" style="text-align:left;background:none;border:0;padding:0;cursor:pointer;font-weight:600;font-size:15px" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.name }}</button><p style="margin:0;font-size:13px;color:#BCC1BD;line-height:1.45">{{ p.grund }}</p><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Geist Mono',monospace">{{ p.preis }}</span><button type="button" onClick="{{ p.add }}" style="min-height:44px;padding:0 12px;border-radius:8px;border:1px solid #D7FA50;background:transparent;color:#D7FA50;font-weight:600;cursor:pointer">In den Korb</button></div></div></sc-for>
+      <p style="margin:0;font-size:13px;color:#9CA29E">Reklamation oder Sonderwunsch? Dann übergebe ich an das Shop-Team – Rückruf innerhalb eines Werktags.</p>
+      <button type="button" onClick="{{ bNeu }}" style="min-height:44px;border-radius:8px;border:1px solid #4A4F4C;background:transparent;cursor:pointer">Neu beraten lassen</button></sc-if>
+  </div>
+</div>
+</sc-if>
+
+<div aria-live="polite" role="status" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:70;pointer-events:none">
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}"><div style="padding:12px 18px;border-radius:10px;background:linear-gradient(180deg,#EEFF9A 0%,#D7FA50 55%,#BFE83C 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 34px -12px rgba(215,250,80,.6),0 2px 0 rgba(0,0,0,.25);color:#111312;font-weight:600;font-size:14px;animation:shRise .25s ease both;box-shadow:0 10px 30px rgba(0,0,0,.5)">{{ toast }}</div></sc-if>
+</div>
+</div>
+<dc-import name="NX-Footer" market="de-DE" lang="de" active="shopMuster" hint-size="100%,880px"></dc-import>
+</x-dc><script type="text/x-dc" data-dc-script data-props="{}">
+const CATS = [
+  ['buero', 'Büro & Arbeitsplatz', 'Norden', [
+    ['Schreibtische', 24900, 'Höhenverstellbarer Schreibtisch 160 cm|Steh-Sitz-Tisch Eiche 140 cm|Kompaktschreibtisch 120 cm|Eckschreibtisch 180 cm'],
+    ['Stühle', 18900, 'Ergonomischer Bürostuhl Netz|Chefsessel Leder|Drehhocker Sattel|Besucherstuhl stapelbar'],
+    ['Beleuchtung', 4900, 'LED-Schreibtischlampe dimmbar|Stehleuchte Bogen|Monitor-Lichtleiste|Tageslichtlampe 10.000 Lux'],
+    ['Zubehör', 1900, 'Monitorarm Gasfeder|Fußstütze verstellbar|Kabelkanal-Set|Schreibtischunterlage Filz']]],
+  ['elektronik', 'Elektronik', 'Kabelwerk Nova', [
+    ['Audio', 7900, 'Over-Ear-Kopfhörer kabellos|Bluetooth-Lautsprecher IPX7|Konferenz-Freisprecheinrichtung|Studio-Mikrofon USB'],
+    ['Smart Home', 3900, 'WLAN-Steckdose 2er-Set|Heizkörperthermostat smart|Türsensor Funk|Zigbee-Gateway'],
+    ['Kabel & Adapter', 1290, 'USB-C-Kabel 2 m geflochten|HDMI-Kabel 8K 3 m|Netzwerkkabel Cat 8 10 m|Adapter USB-C auf HDMI'],
+    ['Speicher', 5900, 'SSD extern 1 TB|USB-Stick 128 GB|microSD 256 GB A2|NAS-Festplatte 4 TB']]],
+  ['haushalt', 'Haushalt & Küche', 'Hauskern', [
+    ['Kochen', 3490, 'Gusseisen-Bratpfanne 28 cm|Kochtopfset 5-teilig Edelstahl|Messerset 3-teilig|Induktions-Wok'],
+    ['Aufbewahrung', 1990, 'Vorratsdosen Glas 6er|Brotkasten Bambus|Gewürzregal ausziehbar|Kühlschrank-Organizer'],
+    ['Reinigung', 1490, 'Mikrofasertücher 12er|Dampfreiniger kompakt|Wischmopp-Set|Fugenbürste'],
+    ['Kleingeräte', 5990, 'Wasserkocher 1,7 l|Standmixer 1.200 W|Toaster 4-Scheiben|Handstaubsauger kabellos']]],
+  ['werkzeug', 'Werkzeug & Werkstatt', 'Ferrum', [
+    ['Handwerkzeug', 2490, 'Schraubenzieher-Set 32-teilig|Hammer 500 g Glasfaser|Maulschlüssel-Set metrisch|Japansäge'],
+    ['Elektrowerkzeug', 8900, 'Akkuschrauber 18 V|Winkelschleifer 125 mm|Stichsäge Pendelhub|Exzenterschleifer'],
+    ['Messen', 1890, 'Laser-Entfernungsmesser 40 m|Wasserwaage 60 cm|Digitaler Messschieber|Kreuzlinienlaser'],
+    ['Sicherheit', 1290, 'Schutzbrille klar|Gehörschutz Kapsel|Schnittschutzhandschuhe|Arbeitsschuhe S3']]],
+  ['garten', 'Garten & Balkon', 'Grünzeit', [
+    ['Pflanzen', 1290, 'Lavendel im Topf 3er|Kräuterset Küche|Tomatenpflanze veredelt|Bodendecker Mix'],
+    ['Bewässerung', 2990, 'Tropfschlauch-Set 25 m|Regenfass 300 l|Bewässerungscomputer|Gartenschlauch 20 m'],
+    ['Möbel', 12900, 'Balkon-Klapptisch Akazie|Lounge-Sessel Rattan-Optik|Sonnenschirm 250 cm|Sitzbank mit Stauraum'],
+    ['Saatgut', 390, 'Sonnenblumen Mix|Wildblumenwiese 100 g|Rucola & Salat Set|Gemüse-Starterpaket']]],
+  ['sport', 'Sport & Freizeit', 'Laufform', [
+    ['Fitness', 2990, 'Kurzhantel-Set 2×10 kg|Yogamatte rutschfest|Widerstandsbänder 5er|Sprungseil Kugellager'],
+    ['Outdoor', 6990, 'Trekkingrucksack 40 l|Trinkflasche Edelstahl 1 l|Stirnlampe 400 Lumen|Isomatte selbstaufblasend'],
+    ['Rad-Zubehör', 1990, 'Fahrradhelm verstellbar|Frontlicht USB|Fahrradschloss Bügel|Satteltasche 1,5 l']]],
+  ['textil', 'Bekleidung & Textil', 'Stoffgrund', [
+    ['Arbeitskleidung', 4490, 'Arbeitshose Cordura|Softshelljacke reflektierend|Polo-Shirt Piqué 3er|Fleecejacke'],
+    ['Basics', 1990, 'T-Shirt Bio-Baumwolle 3er|Hoodie Unisex|Socken 5 Paar|Leinenhemd'],
+    ['Accessoires', 1490, 'Wollmütze|Schal Merino|Gürtel Leder|Stoffbeutel 5er']]],
+  ['gesundheit', 'Gesundheit & Pflege', 'Careo', [
+    ['Erste Hilfe', 1990, 'Verbandkasten DIN 13157|Wundversorgungs-Set|Kühlkompressen 4er|Rettungsdecke 5er'],
+    ['Ergonomie', 3490, 'Sitzkeil Kissen|Handgelenkauflage Gel|Nackenkissen Memory|Stehmatte'],
+    ['Hygiene', 690, 'Handdesinfektion 500 ml|Einweghandschuhe 100 Stück|Flächendesinfektion 1 l|Papiertücher 6er']]],
+  ['lebensmittel', 'Lebensmittel & Getränke', 'Röstwerk Elf', [
+    ['Kaffee', 1290, 'Espresso Bohnen 1 kg|Filterkaffee gemahlen 500 g|Kaffee-Probierset 4×250 g|Entkoffeiniert 500 g'],
+    ['Tee', 690, 'Grüner Tee Sencha 100 g|Kräutertee Mix 20 Beutel|Früchtetee Beeren 100 g|Schwarztee Assam 250 g'],
+    ['Snacks', 390, 'Nussmischung 500 g|Haferriegel 12er|Trockenobst Mix 250 g|Salzbrezeln 200 g'],
+    ['Vorrat', 490, 'Nudeln Vollkorn 5×500 g|Olivenöl 1 l|Passata 6×400 g|Reis Basmati 2 kg']]],
+  ['papier', 'Papier & Verpackung', 'Packbar', [
+    ['Kartons', 1290, 'Versandkartons 30er 40×30×20|Umzugskarton stabil 10er|Flaschenkarton 6er|Archivbox A4 10er'],
+    ['Klebeband', 590, 'Paketband 66 m 6er|Malerkrepp 50 m|Gewebeband silber|Doppelseitig 25 m'],
+    ['Etiketten', 890, 'Versandetiketten A5 500|Rundetiketten 1.000|Thermo-Etiketten 100×150|Adressetiketten'],
+    ['Füllmaterial', 1290, 'Luftpolsterfolie 50 m|Packpapier 5 kg|Füllchips 100 l|Kantenschutz 50er']]],
+];
+const PFLICHT = {
+  buero: 'Möbel: Gewichts- und Belastungsangaben stehen in der Montageanleitung. Aufbau durch Käufer.',
+  elektronik: 'Elektro-Altgerät: Rückgabe kostenlos über Sammelstellen und beim Händler nach ElektroG. WEEE-Reg.-Nr. im Betrieb ergänzen. CE-Kennzeichnung liegt bei.',
+  haushalt: 'Lebensmittelkontaktmaterial nach VO (EG) 1935/2004 gekennzeichnet (Glas-/Kochware). Pflegehinweise beachten.',
+  werkzeug: 'Akku-Geräte enthalten Batterien: Rückgabe nach BattG unentgeltlich. Betriebsanleitung und Sicherheitshinweise liegen bei; Schutzausrüstung tragen.',
+  garten: 'Pflanzen: Lieferung saisonabhängig, Pflanzenpass für Gehölze im Betrieb ergänzen. Bewässerungsteile nicht frostfrei lagern.',
+  sport: 'Sportgeräte nach Gebrauchsanleitung verwenden. Helme: Norm EN 1078 im Betrieb belegen.',
+  textil: 'Textilkennzeichnung (VO (EU) 1007/2011): Faserzusammensetzung steht am Produkt. Größentabelle beachten.',
+  gesundheit: 'Kein Arzneimittel. Medizinprodukte tragen CE-Kennzeichnung und Gebrauchsanweisung. Bei Beschwerden Arzt aufsuchen.',
+  lebensmittel: 'Zutaten, Allergene, Nährwerte und Mindesthaltbarkeit nach LMIV auf der Verpackung; Grundpreis je kg/l ausgewiesen.',
+  papier: 'Verpackung nach VerpackG lizenziert (LUCID-Registrierung im Betrieb ergänzen). Recyclinghinweis auf der Verpackung.',
+};
+const LIEFER = ['1–2 Werktage', '2–4 Werktage', '3–5 Werktage'];
+const hash = (s) => { let h = 7; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 100003; return h; };
+const KATALOG = [];
+CATS.forEach(([kid, kname, marke, subs]) => subs.forEach(([sname, base, namen]) => namen.split('|').forEach((name, i) => {
+  const h = hash(kid + sname + name); const cents = Math.max(190, Math.round(base * (0.85 + i * 0.28 + (h % 20) / 100) / 100) * 100 - 10);
+  const grundKg = /1 kg|500 g|250 g|2 kg|100 g|200 g|5×500|6×400|1 l/.test(name);
+  KATALOG.push({ id: kid + '-' + KATALOG.length, kat: kid, katName: kname, sub: sname, name, marke, cents, liefer: LIEFER[h % 3], schnell: h % 3 === 0, nr: 'NX-' + String(10000 + (h % 89999)), bestand: 5 + (h % 60), grund: grundKg ? true : false, var: kid === 'textil' ? ['S', 'M', 'L', 'XL'] : kid === 'buero' && (sname === 'Stühle' || sname === 'Schreibtische') ? ['Schwarz', 'Weiß', 'Eiche'] : null, varLabel: kid === 'textil' ? 'Größe' : 'Farbe' });
+})));
+const BY = Object.fromEntries(KATALOG.map((p) => [p.id, p]));
+const eur = (c) => new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(c / 100);
+const RECHT = {
+  agb: ['AGB', 'Allgemeine Geschäftsbedingungen (Muster-Shop)', [['§ 1 Geltung und Anbieter', 'Diese AGB gelten für Bestellungen im NeXify Shop (Muster-Shop). Anbieter: NeXify AI, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande (KvK 90483944, USt-IdNr. NL865786276B01). Verbraucher ist, wer zu Zwecken bestellt, die überwiegend weder gewerblich noch selbständig sind (§ 13 BGB).'], ['§ 2 Vertragsschluss', 'Die Darstellung der Artikel ist ein unverbindliches Angebot. Mit „Zahlungspflichtig bestellen“ geben Sie ein verbindliches Angebot ab. Den Zugang bestätigen wir per E-Mail; der Vertrag kommt mit Versandbestätigung oder Lieferung zustande.'], ['§ 3 Preise und Versand', 'Alle Preise für Verbraucher sind Gesamtpreise inklusive Umsatzsteuer. Versandkosten (Standard 4,95 €, Express 9,95 €; ab 79 € Warenwert frei) werden vor Abschluss angezeigt. Geschäftskunden sehen Nettopreise.'], ['§ 4 Zahlung', 'Sie zahlen per Karte, Kartenzahlung oder Vorkasse. Kauf auf Rechnung ist nur Geschäftskunden mit geprüfter USt-IdNr. möglich. Zahlungsziel: 14 Tage.'], ['§ 5 Eigentumsvorbehalt und Gewährleistung', 'Die Ware bleibt bis zur vollständigen Zahlung unser Eigentum. Für Verbraucher gilt die gesetzliche Gewährleistung von 24 Monaten; bei Unternehmern 12 Monate.'], ['§ 6 Recht und Streitbeilegung', 'Es gilt niederländisches Recht; zwingende Verbraucherschutzvorschriften Ihres Wohnsitzstaates bleiben unberührt. Wir nehmen an keinem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil, soweit nicht gesetzlich verpflichtet.'], ['Hinweis Muster-Shop', 'Dieser Shop ist eine Demonstration. Es kommen keine Verträge zustande, es wird nichts geliefert oder abgebucht. Die Texte dienen als Vorlage für Kundenshops.']]],
+  widerruf: ['Widerruf', 'Widerrufsbelehrung und Muster-Widerrufsformular', [['Widerrufsrecht', 'Verbraucher können ihre Vertragserklärung innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Die Frist beginnt mit dem Tag, an dem Sie oder ein von Ihnen benannter Dritter die Ware erhalten haben, bei mehreren Artikeln in getrennten Sendungen mit Erhalt der letzten.'], ['Ausübung', 'Schreiben Sie uns eindeutig (Brief oder E-Mail an mail@nexifyai.cloud) oder nutzen Sie das Muster-Formular unten. Zur Wahrung der Frist genügt die rechtzeitige Absendung.'], ['Folgen', 'Wir erstatten alle Zahlungen einschließlich Standardversand binnen 14 Tagen ab Zugang des Widerrufs, mit demselben Zahlungsmittel. Wir können die Rückzahlung verweigern, bis die Ware zurück ist oder Sie den Nachweis der Rücksendung erbracht haben. Sie tragen die unmittelbaren Kosten der Rücksendung.'], ['Ausnahmen', 'Kein Widerrufsrecht besteht u. a. bei versiegelten Hygieneartikeln, deren Siegel nach Lieferung entfernt wurde, bei schnell verderblichen Lebensmitteln und bei nach Kundenwunsch angefertigter Ware.'], ['Muster-Widerrufsformular', 'An NeXify AI, Graaf van Loonstraat 1E, 5921 JA Venlo, mail@nexifyai.cloud: Hiermit widerrufe(n) ich/wir den abgeschlossenen Vertrag über den Kauf der folgenden Waren: ___ · bestellt am ___ / erhalten am ___ · Name: ___ · Anschrift: ___ · Datum, Unterschrift (nur bei Papierform).']]],
+  versand: ['Versand & Zahlung', 'Versand, Lieferzeit und Zahlung', [['Versandkosten', 'Standard (3–5 Werktage): 4,95 €. Express (1–2 Werktage): 9,95 €. Ab 79,00 € Bestellwert versandkostenfrei (Standard). Lieferung in Deutschland; weitere Märkte im Betrieb konfigurierbar (Steuer nach Lieferland, OSS-Verfahren).'], ['Lieferzeit', 'Die Lieferzeit steht bei jedem Artikel. Teillieferungen kündigen wir an. Bei Lieferverzug gelten die gesetzlichen Rechte.'], ['Zahlungsarten', 'Karte, Kartenzahlung, Vorkasse (Bankdaten in der Bestätigung), Rechnung nur für Geschäftskunden. Die Belastung erfolgt bei Versand bzw. nach Bestätigung der Zahlungsdienstleisterin.'], ['Grundpreis', 'Bei Waren, die nach Gewicht oder Volumen verkauft werden, geben wir den Grundpreis je kg oder l an (PAngV).']]],
+  datenschutz: ['Datenschutz', 'Datenschutzerklärung (Muster-Shop)', [['Verantwortliche', 'NeXify AI, Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, NL · mail@nexifyai.cloud. Aufsicht: Autoriteit Persoonsgegevens (Den Haag).'], ['Was wir verarbeiten', 'Bestelldaten (Name, Anschrift, E-Mail, Bestellung) zur Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO); Zahlungsdaten verarbeitet die Zahlungsdienstleisterin selbst. Suchbegriffe und Warenkorb bleiben in Ihrem Browser (Sitzungsspeicher), keine Tracking-Cookies.'], ['Shop-Berater', 'Ihre Eingaben an NeXify AI dienen allein der Produktempfehlung. Antworten sind als KI-Antwort gekennzeichnet (Art. 50 KI-VO). Auf Wunsch übergeben wir an einen Menschen.'], ['Speicherdauer und Rechte', 'Rechnungsdaten bewahren wir gesetzlich zehn Jahre auf, übrige Daten löschen wir nach Vertragsende. Sie haben Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch. Hosting: Frankfurt (EU).']]],
+  impressum: ['Impressum', 'Anbieterkennzeichnung', [['Anbieter', 'NeXify AI · Inhaber Pascal Courbois (Eenmanszaak)\nGraaf van Loonstraat 1E, 5921 JA Venlo, Niederlande'], ['Kontakt', 'E-Mail mail@nexifyai.cloud · Telefon DE +49 160 577 80 84 · Telefon NL +31 6 38 12 71 86'], ['Register', 'KvK 90483944 · USt-IdNr. NL865786276B01'], ['Hinweis', 'Muster-Shop zu Demonstrationszwecken; es werden keine Waren verkauft.']]],
+  barriere: ['Barrierefreiheit', 'Erklärung zur Barrierefreiheit', [['Stand', 'Dieser Muster-Shop orientiert sich an WCAG 2.2 AA und EN 301 549. Geprüft: Tastaturbedienung, sichtbarer Fokus, Kontrast, Beschriftung von Formularfeldern, Zielgrößen ab 44 px.'], ['Bekannte Einschränkungen', 'Produktfotos sind Bildplätze ohne Inhalt. Im Betrieb erhalten alle Bilder Alternativtexte. Eine vollständige Prüfung durch Dritte steht vor Live-Betrieb aus.'], ['Rückmeldung', 'Barrieren melden Sie bitte an mail@nexifyai.cloud – wir antworten innerhalb von 14 Tagen.']]],
+};
+const ZWECKE = [['buero', 'Homeoffice / Büro', 'Für Büro und Homeoffice.'], ['haushalt', 'Küche & Haushalt', 'Für Küche und Haushalt.'], ['werkzeug', 'Werkstatt', 'Für die Werkstatt.'], ['garten', 'Garten & Balkon', 'Für Garten und Balkon.'], ['lebensmittel', 'Kaffee & Vorrat', 'Für Kaffee und Vorrat.'], ['papier', 'Versand & Verpackung', 'Für Versand und Verpackung.']];
+
+class Component extends DCLogic {
+  state = { view: 'home', kat: null, sub: null, q: '', qLive: '', marken: {}, maxP: 100, sort: 'rel', schnell: false, prod: null, menge: 1, variante: null, cart: {}, merk: {}, b2b: false, coupon: '', couponOk: false, couponMsg: '', step: 1, form: { name: '', mail: '', strasse: '', plz: '', ort: '', firma: '' }, fehler: {}, ship: 'std', pay: 'karte', payFail: false, agb: false, agbFehler: false, abgelehnt: false, sendet: false, bestellNr: '', toast: '', recht: 'agb', berater: false, bStep: 0, bZweck: null, bBudget: null, merkAnsicht: false };
+
+  toast(t) { this.setState({ toast: t }); clearTimeout(this._to); this._to = setTimeout(() => this.setState({ toast: '' }), 2000); }
+  go(view, extra) { this.setState(Object.assign({ view, merkAnsicht: false }, extra || {})); if (typeof window !== 'undefined') window.scrollTo(0, 0); }
+  add(id, n) { this.setState((s) => ({ cart: Object.assign({}, s.cart, { [id]: Math.min(20, (s.cart[id] || 0) + (n || 1)) }) })); this.toast('Im Warenkorb: ' + BY[id].name); }
+  setQty(id, n) { this.setState((s) => { const c = Object.assign({}, s.cart); if (n <= 0) delete c[id]; else c[id] = Math.min(20, n); return { cart: c }; }); }
+  brutto(p) { return p.cents; }
+  preis(c) { return this.state.b2b ? Math.round(c / 1.19) : c; }
+  summen() {
+    const s = this.state; let zw = 0; Object.keys(s.cart).forEach((id) => { zw += BY[id].cents * s.cart[id]; });
+    const rabatt = s.couponOk ? Math.round(zw * 0.1) : 0; const netto = zw - rabatt;
+    const versandBrutto = s.ship === 'express' ? 995 : (zw >= 7900 ? 0 : 495); const versand = s.ship === 'abholung' ? 0 : versandBrutto;
+    const total = netto + versand; const ust = Math.round(total - total / 1.19);
+    return { zw, rabatt, versand, total, ust, frei: Math.max(0, 7900 - zw) };
+  }
+  karte(p) {
+    const s = this.state;
+    return { id: p.id, name: p.name, marke: p.marke, sub: p.sub, preis: eur(this.preis(p.cents)), steuer: s.b2b ? 'netto zzgl. 19 % USt.' : 'inkl. 19 % USt.', liefer: 'Lieferung ' + p.liefer, grund: p.grund ? ' · ' + eur(Math.round(p.cents * 2)) + ' je kg' : '', oeffnen: () => this.go('prod', { prod: p.id, menge: 1, variante: p.var ? p.var[0] : null }), add: () => this.add(p.id), merken: () => { this.setState((st) => { const m = Object.assign({}, st.merk); if (m[p.id]) delete m[p.id]; else m[p.id] = true; return { merk: m }; }); }, gemerkt: s.merk[p.id] ? 'true' : 'false', merkZeichen: s.merk[p.id] ? '♥' : '♡', merkFarbe: s.merk[p.id] ? '#D7FA50' : '#E3E6E3' };
+  }
+  liste() {
+    const s = this.state; let l = KATALOG.slice();
+    if (s.merkAnsicht) l = l.filter((p) => s.merk[p.id]);
+    else if (s.qLive) { const t = s.qLive.toLowerCase().split(/\s+/).filter(Boolean); l = l.filter((p) => t.every((w) => (p.name + ' ' + p.marke + ' ' + p.sub + ' ' + p.katName).toLowerCase().includes(w) || (w.length > 4 && (p.name + p.sub).toLowerCase().includes(w.slice(0, -1))))); }
+    else if (s.kat) { l = l.filter((p) => p.kat === s.kat); if (s.sub) l = l.filter((p) => p.sub === s.sub); }
+    return l;
+  }
+  renderVals() {
+    const s = this.state; const v = { home: s.view === 'home', liste: s.view === 'liste', prod: s.view === 'prod', cart: s.view === 'cart', kasse: s.view === 'kasse', fertig: s.view === 'fertig', recht: s.view === 'recht' };
+    const basis = this.liste(); const markenZaehl = {}; basis.forEach((p) => { markenZaehl[p.marke] = (markenZaehl[p.marke] || 0) + 1; });
+    const aktiveMarken = Object.keys(s.marken).filter((m) => s.marken[m]);
+    let l = basis.filter((p) => (!aktiveMarken.length || aktiveMarken.includes(p.marke)) && this.preis(p.cents) <= (s.maxP >= 100 ? 1e9 : s.maxP * 100 * (s.b2b ? 1 : 1) * 3) && (!s.schnell || p.schnell));
+    if (s.sort === 'auf') l.sort((a, b) => a.cents - b.cents); if (s.sort === 'ab') l.sort((a, b) => b.cents - a.cents); if (s.sort === 'az') l.sort((a, b) => a.name.localeCompare(b.name, 'de'));
+    const kat = CATS.find((c) => c[0] === s.kat);
+    const p = s.prod ? BY[s.prod] : null;
+    const sm = this.summen(); const tot = sm.total; const nettoTot = Math.round(tot / 1.19);
+    const zeilen = Object.keys(s.cart).map((id) => { const x = BY[id], n = s.cart[id]; return { name: x.name, marke: x.marke, menge: n, einzel: eur(this.preis(x.cents)), summe: eur(this.preis(x.cents * n)), oeffnen: () => this.go('prod', { prod: id, menge: 1, variante: x.var ? x.var[0] : null }), minus: () => this.setQty(id, n - 1), plus: () => this.setQty(id, n + 1), weg: () => this.setQty(id, 0) }; });
+    const cartAnz = Object.values(s.cart).reduce((a, b) => a + b, 0);
+    const sumV = { zwischen: eur(this.preis(sm.zw)), hatRabatt: sm.rabatt > 0, rabatt: eur(this.preis(sm.rabatt)), versand: sm.versand === 0 ? 'kostenlos' : eur(this.preis(sm.versand)), total: eur(s.b2b ? nettoTot : tot), totalLabel: s.b2b ? 'Gesamt netto' : 'Gesamt inkl. USt.', ust: eur(tot - nettoTot), ustLabel: s.b2b ? 'zzgl. 19 % USt. (' : 'darin 19 % USt.', frei: sm.frei > 0 && s.ship === 'std' ? 'Noch ' + eur(sm.frei) + ' bis zum kostenlosen Versand.' : 'Versand ab 79 € kostenlos.' };
+    if (s.b2b) sumV.ust = eur(tot - nettoTot) + ' = ' + eur(tot) + ' brutto';
+    const felder = [['name', 'Vor- und Nachname', 'name'], ['firma', 'Firma (optional)', 'organization'], ['mail', 'E-Mail', 'email'], ['strasse', 'Straße und Hausnummer', 'street-address'], ['plz', 'Postleitzahl', 'postal-code'], ['ort', 'Ort', 'address-level2']];
+    const stepNames = ['Adresse', 'Versand', 'Zahlung', 'Prüfen'];
+    const rdoc = RECHT[s.recht];
+    const zw = ZWECKE.find((z) => z[0] === s.bZweck);
+    const bVor = s.bZweck && s.bBudget ? KATALOG.filter((x) => x.kat === s.bZweck && x.cents <= s.bBudget).sort((a, b) => b.cents - a.cents).slice(0, 3) : [];
+    const bAuswahl = bVor.length ? bVor : (s.bZweck ? KATALOG.filter((x) => x.kat === s.bZweck).sort((a, b) => a.cents - b.cents).slice(0, 3) : []);
+    const heute = new Date(); const lief = new Date(heute.getTime() + 4 * 864e5);
+    const laden = () => { this.setState({}); };
+    return {
+      v, q: s.q, qSetzen: (e) => this.setState({ q: e.target.value }), suchen: (e) => { e.preventDefault(); this.go('liste', { qLive: s.q.trim(), kat: null, sub: null, marken: {}, maxP: 100 }); },
+      zuHome: () => this.go('home', { kat: null, sub: null, qLive: '', q: '' }), zuWarenkorb: () => this.go('cart'), zuMerk: () => this.go('liste', { merkAnsicht: true, kat: null, sub: null, qLive: '' }),
+      b2b: s.b2b, b2bUm: (e) => this.setState({ b2b: e.target.checked }), merkAnzahl: Object.keys(s.merk).length, cartAnzahl: cartAnz, cartSumme: eur(this.preis(sm.zw)),
+      navKats: CATS.map(([id, name]) => ({ name, current: s.kat === id && s.view === 'liste' ? 'page' : 'false', gewicht: s.kat === id && s.view === 'liste' ? 700 : 500, farbe: s.kat === id && s.view === 'liste' ? '#FFFFFF' : '#BCC1BD', linie: s.kat === id && s.view === 'liste' ? '#D7FA50' : 'transparent', oeffnen: () => this.go('liste', { kat: id, sub: null, qLive: '', q: '', marken: {}, maxP: 100, merkAnsicht: false }) })),
+      anzahlArtikel: KATALOG.length,
+      vorteile: [{ k: '01', t: 'Suche mit Treffern nach Name, Marke und Zweck – probieren Sie „Kaffee“ oder „Schutz“.' }, { k: '02', t: 'Warenkorb, Gutschein (WILLKOMMEN10), Kasse in vier Schritten mit Button-Lösung.' }, { k: '03', t: 'Privat- und Geschäftskunden: der Schalter oben schaltet auf Nettopreise.' }, { k: '04', t: 'Rechtstexte, Bestell-E-Mail und Statuskette liegen als Vorlage bei.' }],
+      katKacheln: CATS.map(([id, name, marke, subs]) => ({ name, marke, subs: subs.map((x) => x[0]).join(' · '), oeffnen: () => this.go('liste', { kat: id, sub: null, qLive: '', q: '', marken: {}, maxP: 100 }) })),
+      beliebt: KATALOG.filter((x, i) => i % 19 === 3).slice(0, 8).map((x) => this.karte(x)),
+      listeTitel: s.merkAnsicht ? 'Merkliste' : s.qLive ? 'Suche: „' + s.qLive + '“' : kat ? kat[1] : 'Alle Artikel',
+      trefferText: l.length + ' Artikel', keineTreffer: l.length === 0, leerZusatz: s.merkAnsicht ? ' – Sie haben noch nichts gemerkt' : s.qLive ? ' zu „' + s.qLive + '“' : '',
+      hatSubs: !!kat && !s.qLive && !s.merkAnsicht,
+      subTabs: kat ? [{ name: 'Alle' }].concat(kat[3].map((x) => ({ name: x[0] }))).map((x) => { const a = (x.name === 'Alle' && !s.sub) || x.name === s.sub; return { name: x.name, aktiv: a ? 'true' : 'false', rand: a ? '#D7FA50' : '#4A4F4C', bg: a ? 'rgba(215,250,80,.12)' : 'transparent', fg: a ? '#D7FA50' : '#E3E6E3', waehlen: () => this.setState({ sub: x.name === 'Alle' ? null : x.name }) }; }) : [],
+      sortierung: s.sort, sortSetzen: (e) => this.setState({ sort: e.target.value }),
+      markenFilter: Object.keys(markenZaehl).map((m) => ({ name: m, n: markenZaehl[m], an: !!s.marken[m], um: () => this.setState((st) => ({ marken: Object.assign({}, st.marken, { [m]: !st.marken[m] }) })) })),
+      maxRegler: s.maxP, maxPreisText: s.maxP >= 100 ? 'alle' : eur(s.maxP * 300), maxSetzen: (e) => this.setState({ maxP: +e.target.value }), nurSchnell: s.schnell, schnellUm: (e) => this.setState({ schnell: e.target.checked }),
+      filterReset: () => this.setState({ marken: {}, maxP: 100, schnell: false, sort: 'rel', sub: null }),
+      produkte: l.map((x) => this.karte(x)),
+      p: p ? Object.assign(this.karte(p), { katName: p.katName, subName: p.sub, nr: p.nr, versandText: 'Versand ab 4,95 € · ab 79 € kostenlos', hatVar: !!p.var, varLabel: p.varLabel, varOpts: p.var || [], variante: s.variante, addMenge: () => { this.add(p.id, s.menge); }, merkText: s.merk[p.id] ? '♥ Gemerkt' : '♡ Merken', lager: p.bestand > 10 ? 'Auf Lager' : 'Nur noch ' + p.bestand + ' auf Lager', lieferZeit: p.liefer, attribute: [{ k: 'Marke', v: p.marke }, { k: 'Kategorie', v: p.katName + ' › ' + p.sub }, { k: 'Artikelnummer', v: p.nr }, { k: 'Versand', v: p.schnell ? 'Express möglich' : 'Standard' }].concat(p.var ? [{ k: p.varLabel, v: s.variante || p.var[0] }] : []), pflicht: PFLICHT[p.kat] }) : {},
+      varSetzen: (e) => this.setState({ variante: e.target.value }), menge: s.menge, mengeMinus: () => this.setState({ menge: Math.max(1, s.menge - 1) }), mengePlus: () => this.setState({ menge: Math.min(20, s.menge + 1) }),
+      pKat: () => p && this.go('liste', { kat: p.kat, sub: p.sub, qLive: '', marken: {}, maxP: 100 }),
+      passtDazu: p ? KATALOG.filter((x) => x.sub === p.sub && x.id !== p.id).concat(KATALOG.filter((x) => x.kat === p.kat && x.sub !== p.sub)).slice(0, 4).map((x) => this.karte(x)) : [],
+      cartLeer: cartAnz === 0, cartVoll: cartAnz > 0, zeilen, s: sumV,
+      gutschein: s.coupon, gutscheinSetzen: (e) => this.setState({ coupon: e.target.value }), gutscheinEinl: (e) => { e.preventDefault(); const ok = s.coupon.trim().toUpperCase() === 'WILLKOMMEN10'; this.setState({ couponOk: ok, couponMsg: ok ? '10 % Rabatt auf die Warenwerte eingelöst.' : 'Dieser Code ist ungültig oder abgelaufen. Tipp für die Demo: WILLKOMMEN10.' }); },
+      gutscheinMeldung: s.couponMsg, gutscheinFarbe: s.couponOk ? '#6FE3CF' : '#FF8A7A', zurKasse: () => this.go('kasse', { step: 1, fehler: {}, abgelehnt: false }),
+      schritte: stepNames.map((n, i) => ({ nr: '0' + (i + 1), name: n, current: s.step === i + 1 ? 'step' : 'false', rand: s.step === i + 1 ? '#D7FA50' : '#363A38', bg: s.step === i + 1 ? 'rgba(215,250,80,.1)' : 'transparent', fg: s.step >= i + 1 ? '#FFFFFF' : '#9CA29E' })),
+      k1: s.step === 1, k2: s.step === 2, k3: s.step === 3, k4: s.step === 4,
+      adrFelder: felder.map(([k, label, auto]) => ({ id: 'a-' + k, label, auto, wert: s.form[k], ungueltig: s.fehler[k] ? 'true' : 'false', rand: s.fehler[k] ? '#FF8A7A' : '#4A4F4C', fehler: s.fehler[k] || '', setzen: (e) => { const val = e.target.value; this.setState((st) => ({ form: Object.assign({}, st.form, { [k]: val }), fehler: Object.assign({}, st.fehler, { [k]: undefined }) })); } })),
+      versandOpts: [['std', 'Standard', '3–5 Werktage', sm.zw >= 7900 ? 'kostenlos' : '4,95 €'], ['express', 'Express', '1–2 Werktage', '9,95 €'], ['abholung', 'Abholung im Muster-Lager', 'Venlo, nach Terminabsprache', 'kostenlos']].map(([id, name, text, preis]) => ({ name, text, preis, an: s.ship === id, rand: s.ship === id ? '#D7FA50' : '#4A4F4C', waehlen: () => this.setState({ ship: id }) })),
+      zahlOpts: [['karte', 'Karte / Kartenzahlung', 'Sofortige Belastung, sichere Zahlungsseite der Zahlungsdienstleisterin.', false], ['vorkasse', 'Vorkasse (Überweisung)', 'Versand nach Zahlungseingang, Bankdaten in der Bestätigung.', false], ['rechnung', 'Rechnung (nur Geschäftskunden)', s.b2b ? 'Zahlungsziel 14 Tage, USt-IdNr. wird geprüft.' : 'Schalten Sie oben auf „Geschäftskunde“, um diese Zahlart zu wählen.', !s.b2b]].map(([id, name, text, gesperrt]) => ({ name, text, gesperrt, an: s.pay === id, rand: s.pay === id ? '#D7FA50' : '#4A4F4C', cursor: gesperrt ? 'not-allowed' : 'pointer', opacity: gesperrt ? .5 : 1, waehlen: () => this.setState({ pay: id }) })),
+      zahlFehler: s.payFail, zahlFehlerUm: (e) => this.setState({ payFail: e.target.checked }),
+      pruefAdresse: [s.form.name, s.form.strasse, s.form.plz + ' ' + s.form.ort].filter(Boolean).join(', '), pruefVersand: { std: 'Standard', express: 'Express', abholung: 'Abholung' }[s.ship], pruefZahlung: { karte: 'Karte / Kartenzahlung', vorkasse: 'Vorkasse', rechnung: 'Rechnung' }[s.pay],
+      agb: s.agb, agbUm: (e) => this.setState({ agb: e.target.checked, agbFehler: false }), agbFehler: s.agbFehler, zuAgb: () => this.go('recht', { recht: 'agb' }), zuWiderruf: () => this.go('recht', { recht: 'widerruf' }), zahlungAbgelehnt: s.abgelehnt,
+      weiterText: s.step < 4 ? 'Weiter' : (s.sendet ? 'Wird übermittelt …' : 'Zahlungspflichtig bestellen'), bestellt: s.sendet, bestellOpacity: s.sendet ? .6 : 1,
+      zurueck: () => (s.step > 1 ? this.setState({ step: s.step - 1, abgelehnt: false }) : this.go('cart')),
+      weiter: (e) => {
+        e.preventDefault();
+        if (s.step === 1) { const f = s.form, er = {}; if (f.name.trim().length < 3 || !f.name.includes(' ')) er.name = 'Bitte Vor- und Nachnamen angeben.'; if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(f.mail)) er.mail = 'Bitte eine gültige E-Mail-Adresse angeben.'; if (f.strasse.trim().length < 5) er.strasse = 'Bitte Straße und Hausnummer angeben.'; if (!/^\d{5}$/.test(f.plz)) er.plz = 'Die Postleitzahl hat fünf Ziffern.'; if (f.ort.trim().length < 2) er.ort = 'Bitte den Ort angeben.'; if (Object.keys(er).length) { this.setState({ fehler: er }); return; } this.setState({ step: 2 }); return; }
+        if (s.step === 2) { this.setState({ step: 3 }); return; }
+        if (s.step === 3) { this.setState({ step: 4, abgelehnt: false }); return; }
+        if (!s.agb) { this.setState({ agbFehler: true }); return; }
+        this.setState({ sendet: true, abgelehnt: false });
+        // TODO(BACKEND): POST /v1/shop/orders (Idempotency-Key), Zahlung via Zahlungsanbieter Merchant API, Webhook bestätigt
+        setTimeout(() => { if (s.payFail && s.pay === 'karte') { this.setState({ sendet: false, abgelehnt: true }); return; } this.go('fertig', { sendet: false, bestellNr: 'NXS-2026-' + String(1000 + Math.floor(Math.random() * 8999)) }); }, 1000);
+      },
+      bestellNr: s.bestellNr, vorname: (s.form.name.split(' ')[0]) || 'vielen Dank', lieferDatum: lief.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long' }),
+      statusKette: [['Eingegangen', 'jetzt', true], ['Zahlung bestätigt', 'in Sekunden', false], ['Versendet', 'nach 1 Werktag', false], ['Zugestellt', 'nach 3–5 Tagen', false]].map(([name, zeit, an]) => ({ name, zeit, rand: an ? '#6FE3CF' : '#363A38', bg: an ? 'rgba(111,227,207,.1)' : 'transparent', fg: an ? '#FFFFFF' : '#9CA29E' })),
+      neuStart: () => { this.setState({ cart: {}, step: 1, agb: false, coupon: '', couponOk: false, couponMsg: '' }); this.go('home'); },
+      rechtTabs: Object.keys(RECHT).map((k) => ({ name: RECHT[k][0], aktiv: s.recht === k && s.view === 'recht' ? 'true' : 'false', rand: s.recht === k && s.view === 'recht' ? '#D7FA50' : '#4A4F4C', bg: s.recht === k && s.view === 'recht' ? 'rgba(215,250,80,.12)' : 'transparent', fg: s.recht === k && s.view === 'recht' ? '#D7FA50' : '#E3E6E3', waehlen: () => this.go('recht', { recht: k }) })),
+      rechtDoc: { titel: rdoc[1], abschnitte: rdoc[2].map(([h, t]) => ({ h, t })) },
+      beraterOffen: s.berater, beraterAuf: () => this.setState({ berater: true }), beraterZu: () => this.setState({ berater: false }),
+      bSchritt0: s.bStep === 0, bSchritt1: s.bStep === 1, bSchritt2: s.bStep === 2, bZweckText: zw ? zw[2] : '',
+      bZwecke: ZWECKE.map(([id, name]) => ({ name, waehlen: () => this.setState({ bZweck: id, bStep: 1 }) })),
+      bBudgets: [['bis 30 €', 3000], ['bis 100 €', 10000], ['egal', 999999]].map(([name, val]) => ({ name, waehlen: () => this.setState({ bBudget: val, bStep: 2 }) })),
+      bVorschlaege: bAuswahl.map((x, i) => ({ name: x.name, preis: eur(this.preis(x.cents)), grund: (i === 0 ? 'Bestes Angebot in Ihrem Budget. ' : i === 1 ? 'Solide Alternative. ' : 'Günstiger Einstieg. ') + x.marke + ', ' + x.sub + ', Lieferung ' + x.liefer + '.', oeffnen: () => { this.setState({ berater: false }); this.go('prod', { prod: x.id, menge: 1, variante: x.var ? x.var[0] : null }); }, add: () => this.add(x.id) })),
+      bNeu: () => this.setState({ bStep: 0, bZweck: null, bBudget: null }), toast: s.toast,
+    };
+  }
+}
+</script>
+</body>
+</html>

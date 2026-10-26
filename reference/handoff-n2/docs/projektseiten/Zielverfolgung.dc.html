@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Zielverfolgung – NeXify AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<style>button{padding:0;font:inherit;color:inherit}body{margin:0;background:#242826;color:#FFFFFF;font-family:Geist,sans-serif}a{color:#D7FA50}a:hover{color:#E4FF7A}</style>
+</helmet>
+<p style="margin:0;padding:12px 24px;background:#1A1D1B;border-bottom:1px solid #3E4240;font-family:'Geist Mono',monospace;font-size:12px;color:#FFC24A">Projektdokumentation – nicht Teil des Produkts. Verschoben am 28.09.2026 nach docs/projektseiten/.</p>
+<div style="width:min(1200px,calc(100% - 40px));margin:0 auto;padding:48px 0 72px;display:grid;gap:32px">
+  <header style="display:grid;gap:12px">
+    <p style="margin:0;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Zielverfolgung · NeXify AI Agenturaufbau</p>
+    <h1 style="margin:0;font-size:clamp(32px,4vw,52px);font-weight:600;line-height:1.05;letter-spacing:-.04em;text-wrap:balance">Ziel: gesteuerte Produktion, Phase für Phase live.</h1>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <span style="display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 16px;border:1px solid #FF6B57;border-radius:999px;font-size:14px;color:#FFB4A8">Gate-Urteil: nicht ausführbar</span>
+      <span style="font-size:14px;color:#BCC1BD">Stand {{ stand }} · Quelle: freigabe-gate-status.md</span>
+    </div>
+  </header>
+
+  <section style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+    <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+      <div style="display:grid;gap:8px;padding:24px;border:1px solid #3E4240;border-radius:12px;background:#2A2E2C">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">{{ k.label }}</span>
+        <strong style="font-size:36px;font-weight:600;letter-spacing:-.03em">{{ k.value }}</strong>
+        <span style="font-size:14px;color:#BCC1BD">{{ k.note }}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="display:grid;gap:12px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px">
+      <h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.02em">Phasen und Gate-Stufen</h2>
+      <span style="font-size:13px;color:#9CA29E">Klick auf eine Phase zeigt den nächsten Schritt</span>
+    </div>
+    <div style="overflow-x:auto;border:1px solid #3E4240;border-radius:12px">
+      <div style="min-width:760px;display:grid">
+        <div style="display:grid;grid-template-columns:2.2fr repeat(6,1fr);gap:8px;padding:12px 16px;background:#2E3230;font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">
+          <span>Phase</span><span>1 Vorschau</span><span>2 Health</span><span>3 E3</span><span>4 Rollback</span><span>5 Gutachten</span><span>Abnahme</span>
+        </div>
+        <sc-for list="{{ phasen }}" as="p" hint-placeholder-count="8">
+          <button onClick="{{ p.pick }}" style="display:grid;grid-template-columns:2.2fr repeat(6,1fr);gap:8px;align-items:center;min-height:52px;padding:8px 16px;border:0;border-top:1px solid #363A38;background:{{ p.bg }};color:#FFFFFF;font-family:Geist,sans-serif;font-size:14px;text-align:left;cursor:pointer" style-hover="background:#303432">
+            <span style="display:flex;gap:12px;align-items:center"><span style="font-family:'Geist Mono',monospace;color:#D7FA50">{{ p.id }}</span><span>{{ p.name }}</span></span>
+            <sc-for list="{{ p.cells }}" as="c" hint-placeholder-count="6"><span style="display:inline-flex;align-items:center;gap:8px;color:{{ c.fg }}"><span style="font-family:'Geist Mono',monospace">{{ c.sym }}</span><span style="font-size:13px">{{ c.t }}</span></span></sc-for>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+    <div style="display:grid;gap:12px;align-content:start;padding:24px;border:1px solid #D7FA50;border-radius:12px;background:#2A2E2C">
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">Ausgewählt · {{ sel.id }}</span>
+      <strong style="font-size:22px;font-weight:600;letter-spacing:-.02em">{{ sel.name }}</strong>
+      <span style="font-size:15px;line-height:1.55;color:#E3E6E3">{{ sel.next }}</span>
+      <span style="font-size:14px;color:#BCC1BD">Wer: {{ sel.who }}</span>
+    </div>
+    <div style="display:grid;gap:12px;align-content:start;padding:24px;border:1px solid #3E4240;border-radius:12px;background:#2A2E2C">
+      <strong style="font-size:18px;font-weight:600">Von Pascal gebraucht</strong>
+      <sc-for list="{{ offen }}" as="o" hint-placeholder-count="5">
+        <label style="display:flex;gap:12px;align-items:flex-start;min-height:44px;font-size:15px;line-height:1.45;cursor:pointer">
+          <input type="checkbox" checked="{{ o.done }}" onChange="{{ o.toggle }}" style="width:20px;height:20px;margin:0px 0 0;accent-color:#D7FA50;flex:0 0 auto" />
+          <span style="color:{{ o.fg }}">{{ o.t }}</span>
+        </label>
+      </sc-for>
+      <span style="font-size:13px;color:#9CA29E">Abhaken wird lokal gespeichert, ersetzt keine Freigabe im Chat.</span>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:12px;padding:20px 24px;border:1px solid #3E4240;border-radius:12px;background:#2A2E2C">
+    <strong style="font-size:16px;font-weight:600">Einzelfreigabe Live-DNS (Wortlaut für den Chat)</strong>
+    <code style="display:block;padding:16px 16px;border-radius:8px;background:#1C1F1E;font-family:'Geist Mono',monospace;font-size:13px;line-height:1.5;color:#D7FA50;white-space:pre-wrap;word-break:break-word">FREIGABE LIVE-DNS vorschau.nexifyai.cloud → Frankfurt, noindex, Zugangsschutz. Pascal, &lt;Datum Uhrzeit&gt;</code>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const S = { ok: { sym: "✓", fg: "#D7FA50" }, fail: { sym: "✗", fg: "#FF8A7A" }, part: { sym: "◐", fg: "#FFC24A" }, open: { sym: "○", fg: "#9CA29E" }, na: { sym: "–", fg: "#6B716D" } };
+const PH = [
+  { id: "P0", name: "Vorschau-Stufe", c: [["fail","fehlt"],["na",""],["na",""],["ok","ja"],["na",""],["open","DNS-Freigabe"]], next: "Einzelfreigabe Live-DNS im Chat, danach Vorschau mit noindex, Zugangsschutz und /health auf Frankfurt anlegen.", who: "Pascal, dann DSH" },
+  { id: "P1", name: "Repo + Rechenkern", c: [["fail",""],["fail",""],["part","R fehlt"],["ok","ja"],["open",""],["open",""]], next: "Rollback-Test ergänzen: Buchung → Storno → Saldo 0. CI mit resource_group.", who: "A04 Umsetzung, A05 Prüfer" },
+  { id: "P2", name: "Auth, Rollen, RLS", c: [["fail",""],["fail",""],["fail","nicht gebaut"],["ok","ja"],["open",""],["open",""]], next: "Sechs Rollen mit RLS, Mandanten-Negativtest.", who: "A04, A05" },
+  { id: "P3", name: "Buchungskern", c: [["fail",""],["fail",""],["fail",""],["ok","ja"],["open",""],["open",""]], next: "Journal, Rechnung, Idempotenz-Test.", who: "A04, A06, A05" },
+  { id: "P4", name: "Director, Agenten", c: [["fail",""],["fail",""],["fail",""],["ok","#stopp"],["open",""],["open",""]], next: "Agenten- und Skill-Register, Tag-Router, #stopp wirkt nachweislich.", who: "A01, A04" },
+  { id: "P5", name: "Portale", c: [["fail",""],["fail",""],["fail",""],["ok","ja"],["open",""],["open",""]], next: "Kunden-, Partner-, Nachbarschaftsportal an Backend.", who: "A04, A07, A08" },
+  { id: "P6", name: "Companion", c: [["fail",""],["fail",""],["fail",""],["ok","ja"],["open",""],["open",""]], next: "Website-Berater zuerst, Kennzeichnung Art. 50 prüfen.", who: "A01, A07" },
+  { id: "P7", name: "Abläufe W01–W15", c: [["fail",""],["fail",""],["fail",""],["ok","ja"],["open",""],["open",""]], next: "n8n-Abläufe, Wächter, Restore-Test ausführen.", who: "A09, A04" }
+];
+const OFFEN = ["Einzelfreigabe Live-DNS Vorschau", "Entscheidungen E1–E5", "LightRAG: eigene Instanz je Kunde", "Tagesbudget 14,50 € bestätigen", "Kanäle für selbstständiges Senden"];
+const KEY = "nx-zielverfolgung-v1";
+class Component extends DCLogic {
+  state = { sel: 0, done: (() => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } })() };
+  toggle(i) { const d = this.state.done.includes(i) ? this.state.done.filter(x => x !== i) : [...this.state.done, i]; localStorage.setItem(KEY, JSON.stringify(d)); this.setState({ done: d }); }
+  renderVals() {
+    const cells = PH.flatMap(p => p.c);
+    const pass = cells.filter(c => c[0] === "ok").length;
+    const p = PH[this.state.sel];
+    return {
+      stand: "27.09.2026",
+      kpis: [
+        { label: "Phasen live", value: "0 / 8", note: "keine Phase besteht Stufe 1" },
+        { label: "Gate-Felder grün", value: pass + " / " + cells.length, note: "vor allem Rollback-Pläne" },
+        { label: "Beste Evidenz", value: "E2+", note: "Rechenkern, Rollback fehlt" },
+        { label: "Offen bei Pascal", value: (OFFEN.length - this.state.done.length) + "", note: "davon 1 Hartsperre" }
+      ],
+      phasen: PH.map((x, i) => ({ id: x.id, name: x.name, bg: i === this.state.sel ? "#2E3230" : "transparent", pick: () => this.setState({ sel: i }), cells: x.c.map(([k, t]) => ({ ...S[k], t })) })),
+      sel: { id: p.id, name: p.name, next: p.next, who: p.who },
+      offen: OFFEN.map((t, i) => { const d = this.state.done.includes(i); return { t, done: d, fg: d ? "#9CA29E" : "#FFFFFF", toggle: () => this.toggle(i) }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

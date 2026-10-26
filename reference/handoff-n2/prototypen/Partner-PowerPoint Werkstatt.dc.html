@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- NX-DS 2.0 · Konformitätsvermerk (Stand 2026-09-29)
+  Art:        papier
+  Definition: docs/09-final/11-designsystem-definition.md   Tokens: config/design-tokens.json
+  Regeln:     config/design-rules.json   Prüfung: tools/ds-audit.js   Bericht: docs/09-final/12-abweichungsbericht.md → „Partner-PowerPoint Werkstatt.dc.html“
+  Status:     konform · Ausnahmen: DS-R-01 DS-T-01
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Werkstatt-Präsentation – TEILEKLAR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0E1315; --paper:#F2F3EF; --tint:#14191C; --lime:#C8F04B; --amber:#E8871F;
+    --grey:#A1A3A4; --line:#1B2226;
+    --type-title:64px; --type-subtitle:40px; --type-body:30px; --type-small:24px;
+    --pad-top:100px; --pad-bottom:80px; --pad-x:100px; --gap-title:44px; --gap-item:26px;
+  }
+  * { box-sizing:border-box; font-family:'Archivo',sans-serif; }
+  .mono { font-family:'IBM Plex Mono',monospace; }
+  .kicker { font-family:'IBM Plex Mono',monospace; font-size:24px; letter-spacing:.18em; text-transform:uppercase; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:999px; background:var(--lime); }
+</style>
+<meta name="description" content="Der Kunde kommt mit einem geprüften Teil. Sie übernehmen den Einbau.">
+  </helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+<section data-label="Titel" style="background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="position:absolute;inset:0;background:radial-gradient(1100px 620px at 72% 20%,rgba(200,240,75,.15),transparent 70%)"></div>
+  <div style="position:relative;display:flex;align-items:center;gap:16px;margin-bottom:56px">
+    <span style="display:block;width:22px;height:22px;border-radius:8px;background:var(--lime)"></span>
+    <span style="font-size:32px;font-weight:800;letter-spacing:-.035em">TEILEKLAR</span>
+    <span class="mono" style="font-size:24px;letter-spacing:.18em;color:var(--lime);margin-left:4px">NA KLAR.</span>
+  </div>
+  <p class="kicker" style="position:relative;margin:0 0 32px;color:var(--lime)">Werkstattpartner</p>
+  <h1 style="position:relative;margin:0 0 32px;font-size:88px;font-weight:900;line-height:1.05;letter-spacing:-.035em;max-width:1500px">Der Kunde kommt mit einem geprüften Teil. Sie übernehmen den Einbau.</h1>
+  <p style="position:relative;margin:0;font-size:var(--type-subtitle);color:#B4B5B6;max-width:1100px">Eine Partnerschaft für Werkstätten, die planbare Aufträge ohne Teilerisiko wollen.</p>
+</section>
+
+<section data-label="Ausgangslage" style="background:var(--paper);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-start;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:#646769">Die Ausgangslage</p>
+  <h2 style="margin:0 0 72px;font-size:var(--type-title);font-weight:800;letter-spacing:-.035em;max-width:1500px">Kundenteile sind für Werkstätten oft ein Risiko, nicht ein Umsatz.</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
+    <div style="padding:48px;border:1px solid #E2E4E0;border-radius:24px;background:#fff">
+      <p class="mono" style="margin:0 0 20px;font-size:24px;color:var(--amber)">Problem 1</p>
+      <p style="margin:0;font-size:var(--type-body);line-height:1.3;font-weight:700">Unklar, ob das Teil überhaupt passt</p>
+    </div>
+    <div style="padding:48px;border:1px solid #E2E4E0;border-radius:24px;background:#fff">
+      <p class="mono" style="margin:0 0 20px;font-size:24px;color:var(--amber)">Problem 2</p>
+      <p style="margin:0;font-size:var(--type-body);line-height:1.3;font-weight:700">Rückfragen und Wartezeit bei der Terminplanung</p>
+    </div>
+    <div style="padding:48px;border:1px solid #E2E4E0;border-radius:24px;background:#fff">
+      <p class="mono" style="margin:0 0 20px;font-size:24px;color:var(--amber)">Problem 3</p>
+      <p style="margin:0;font-size:var(--type-body);line-height:1.3;font-weight:700">Fehlteile blockieren die Hebebühne</p>
+    </div>
+  </div>
+</section>
+
+<section data-label="Loesung" style="background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:flex-start;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:var(--lime)">Was TEILEKLAR liefert</p>
+  <h2 style="margin:0 0 72px;font-size:var(--type-title);font-weight:800;letter-spacing:-.035em;max-width:1500px">Ein Teil mit belegter Passung — und ein Auftrag, der schon alles enthält.</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px">
+    <div style="padding:48px;border-radius:24px;background:rgba(255,255,255,.05)">
+      <p style="margin:0 0 16px;font-size:32px;font-weight:800">Für den Kunden</p>
+      <p style="margin:0;font-size:var(--type-body);line-height:1.5;color:#B4B5B6">Kauft ein Teil, das gegen sein Fahrzeug geprüft ist — Maß, Achse, Ausführung, mit Quelle und Stand.</p>
+    </div>
+    <div style="padding:48px;border-radius:24px;background:var(--lime);color:var(--ink)">
+      <p style="margin:0 0 16px;font-size:32px;font-weight:800">Für Sie</p>
+      <p style="margin:0;font-size:var(--type-body);line-height:1.5">Erhalten Fahrzeug, Prüfergebnis und Teiledaten vorab — keine Überraschung am Hebebühnentag.</p>
+    </div>
+  </div>
+</section>
+
+<section data-label="Ablauf" style="background:var(--paper);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-start;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:#646769">Der Ablauf</p>
+  <h2 style="margin:0 0 80px;font-size:var(--type-title);font-weight:800;letter-spacing:-.035em">Drei Schritte vom Kauf bis zum Termin.</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0">
+    <div style="padding-right:48px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px"><span class="mono" style="width:56px;height:56px;border-radius:16px;background:var(--lime);display:grid;place-items:center;font-size:28px;font-weight:700">01</span><div style="flex:1;height:1px;background:#E2E4E0"></div></div>
+      <p style="margin:0 0 12px;font-size:32px;font-weight:800">Teil klären</p>
+      <p style="margin:0;font-size:var(--type-small);line-height:1.5;color:#646769">Kunde wählt Teil, TEILEKLAR prüft die Passung gegen sein Fahrzeug.</p>
+    </div>
+    <div style="padding:0 56px;border-left:1px solid #E2E4E0">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px"><span class="mono" style="width:56px;height:56px;border-radius:16px;background:#fff;border:1px solid #E2E4E0;display:grid;place-items:center;font-size:28px;font-weight:700">02</span><div style="flex:1;height:1px;background:#E2E4E0"></div></div>
+      <p style="margin:0 0 12px;font-size:32px;font-weight:800">Werkstatt wählen</p>
+      <p style="margin:0;font-size:var(--type-small);line-height:1.5;color:#646769">Kunde findet Ihren Betrieb im Verzeichnis und fragt einen Termin an.</p>
+    </div>
+    <div style="padding-left:48px;border-left:1px solid #E2E4E0">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px"><span class="mono" style="width:56px;height:56px;border-radius:16px;background:#fff;border:1px solid #E2E4E0;display:grid;place-items:center;font-size:28px;font-weight:700">03</span></div>
+      <p style="margin:0 0 12px;font-size:32px;font-weight:800">Auftrag übergeben</p>
+      <p style="margin:0;font-size:var(--type-small);line-height:1.5;color:#646769">Sie erhalten Fahrzeug, Teil und Prüfergebnis vor dem Termin.</p>
+    </div>
+  </div>
+</section>
+
+<section data-label="Reichweite" style="background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:var(--lime)">Reichweite</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:64px;align-items:end">
+    <div>
+      <p style="margin:0;font-size:88px;font-weight:900;letter-spacing:-.045em;line-height:.9">7</p>
+      <p style="margin:20px 0 0;font-size:var(--type-body);color:#B4B5B6">Länder — D · A · CH · NL · BE(2) · LU</p>
+    </div>
+    <div>
+      <p style="margin:0;font-size:88px;font-weight:900;letter-spacing:-.045em;line-height:.9;color:var(--lime)">6.875</p>
+      <p style="margin:20px 0 0;font-size:var(--type-body);color:#B4B5B6">Werkstätten bereits im Verzeichnis erfasst</p>
+    </div>
+    <div>
+      <p style="margin:0;font-size:88px;font-weight:900;letter-spacing:-.045em;line-height:.9">1.104</p>
+      <p style="margin:20px 0 0;font-size:var(--type-body);color:#B4B5B6">Orte, in denen Kunden nach einer Werkstatt suchen</p>
+    </div>
+  </div>
+</section>
+
+<section data-label="Vorteile" style="background:var(--paper);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-start;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:#646769">Ihr Vorteil</p>
+  <h2 style="margin:0 0 72px;font-size:var(--type-title);font-weight:800;letter-spacing:-.035em;max-width:1500px">Planbare Auslastung ohne eigenen Vertriebsaufwand.</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px">
+    <div style="display:flex;gap:32px;align-items:flex-start"><span class="dot" style="margin-top:16px"></span><p style="margin:0;font-size:var(--type-body);line-height:1.5"><b>Kein Teilerisiko</b> — das Teil ist geprüft, bevor es bei Ihnen ankommt.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start"><span class="dot" style="margin-top:16px"></span><p style="margin:0;font-size:var(--type-body);line-height:1.5"><b>Weniger Rückfragen</b> — Fahrzeug und Teiledaten liegen vorab vor.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start"><span class="dot" style="margin-top:16px"></span><p style="margin:0;font-size:var(--type-body);line-height:1.5"><b>Neue Kunden</b> — Sichtbarkeit im TEILEKLAR-Werkstattverzeichnis.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start"><span class="dot" style="margin-top:16px"></span><p style="margin:0;font-size:var(--type-body);line-height:1.5"><b>Kein Warenrisiko</b> — Sie kaufen und lagern keine Teile für den Auftrag.</p></div>
+  </div>
+</section>
+
+<section data-label="Abgrenzung" style="background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:flex-start;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:var(--lime)">Klare Rollen</p>
+  <h2 style="margin:0 0 72px;font-size:var(--type-title);font-weight:800;letter-spacing:-.035em;max-width:1550px">TEILEKLAR verkauft das Teil. Sie bleiben verantwortlich für den Einbau.</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px">
+    <div style="padding:48px;border-radius:24px;border:1px solid var(--line)">
+      <p style="margin:0 0 20px;font-size:32px;font-weight:800;color:var(--lime)">TEILEKLAR</p>
+      <p style="margin:0;font-size:var(--type-small);line-height:1.5;color:#B4B5B6">Prüft die Passung, verkauft das Teil, vermittelt den Termin, liefert die Auftragsdaten.</p>
+    </div>
+    <div style="padding:48px;border-radius:24px;border:1px solid var(--line)">
+      <p style="margin:0 0 20px;font-size:32px;font-weight:800">Ihre Werkstatt</p>
+      <p style="margin:0;font-size:var(--type-small);line-height:1.5;color:#B4B5B6">Führt Einbau, Diagnose und Gewährleistung für die eigene Arbeit wie gewohnt aus.</p>
+    </div>
+  </div>
+</section>
+
+<section data-label="Konditionen" style="background:var(--paper);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-start;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:#646769">Konditionen im Überblick</p>
+  <h2 style="margin:0 0 72px;font-size:var(--type-title);font-weight:800;letter-spacing:-.035em;max-width:1500px">Was die Partnervereinbarung regelt.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid #E2E4E0">
+    <div style="padding:40px 0;border-right:1px solid #E2E4E0;padding-right:40px"><p class="mono" style="margin:0 0 16px;font-size:24px;color:#646769">AUFNAHME</p><p style="margin:0;font-size:30px;font-weight:700">Kostenfrei, ohne Grundgebühr</p></div>
+    <div style="padding:40px 40px;border-right:1px solid #E2E4E0"><p class="mono" style="margin:0 0 16px;font-size:24px;color:#646769">VERGÜTUNG</p><p style="margin:0;font-size:30px;font-weight:700">Vermittlungsgebühr je Auftrag</p></div>
+    <div style="padding:40px 0 40px 40px"><p class="mono" style="margin:0 0 16px;font-size:24px;color:#646769">LAUFZEIT</p><p style="margin:0;font-size:30px;font-weight:700">Monatlich kündbar</p></div>
+  </div>
+  <p style="margin:48px 0 0;font-size:var(--type-small);color:#646769;max-width:1300px">Konkrete Sätze und die vollständige Partnervereinbarung besprechen wir im persönlichen Gespräch.</p>
+</section>
+
+<section data-label="Kontakt" style="background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <p class="kicker" style="margin:0 0 var(--gap-title);color:var(--lime)">Nächster Schritt</p>
+  <h2 style="margin:0 0 64px;font-size:88px;font-weight:900;letter-spacing:-.035em;max-width:1500px">Werden Sie TEILEKLAR-Werkstattpartner.</h2>
+  <div style="display:flex;gap:80px">
+    <div><p class="mono" style="margin:0 0 12px;font-size:24px;color:var(--grey)">E-MAIL</p><p style="margin:0;font-size:32px;font-weight:700">mail@teileklar.shop</p></div>
+    <div><p class="mono" style="margin:0 0 12px;font-size:24px;color:var(--grey)">TELEFON</p><p style="margin:0;font-size:32px;font-weight:700">+31 6 133 188 56</p></div>
+    <div><p class="mono" style="margin:0 0 12px;font-size:24px;color:var(--grey)">WEB</p><p style="margin:0;font-size:32px;font-weight:700">teileklar.shop</p></div>
+  </div>
+</section>
+
+</x-import>
+
+</x-dc>
+</body>
+</html>

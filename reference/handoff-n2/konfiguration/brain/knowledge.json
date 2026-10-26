@@ -1,0 +1,28 @@
+{
+  "$kommentar": "Wissens-Pipeline + Wissenspflege · Soll · Entwurf 29.09.2026",
+  "quellen": [
+    { "id": "leistungen",  "pfad": "docs/01-konzept/", "vertrauen": "hoch", "gueltigBis": null },
+    { "id": "preise",      "pfad": "config/fakten.json", "vertrauen": "hoechste", "aenderung": "nur Pascal" },
+    { "id": "pruefkataloge","pfad": "docs/paket/", "vertrauen": "hoch" },
+    { "id": "rechtstexte", "pfad": "Rechtliches.dc.html", "vertrauen": "hoch", "gueltigBis": "Fassung+12 Monate" },
+    { "id": "runbooks",    "pfad": "docs/04-betrieb/", "vertrauen": "hoch" },
+    { "id": "kundendokumente", "pfad": "mandant/{tenant}/", "vertrauen": "kundenseitig", "getrennt": true, "training": false }
+  ],
+  "pipeline": [
+    { "schritt": "erfassen",    "felder": ["quelle", "version", "datum", "rechte"] },
+    { "schritt": "bereinigen",  "regeln": ["keine_geheimnisse", "pii_filter", "tabellen_erhalten"] },
+    { "schritt": "segmentieren","tokens": [300, 800], "pfad": "ueberschriften" },
+    { "schritt": "anreichern",  "felder": ["titel", "quelle", "gueltigAb", "sprache", "markt", "vertrauen"] },
+    { "schritt": "einbetten",   "modell": null, "version": "pflicht" },
+    { "schritt": "speichern",   "ziel": ["vektor", "volltext"] },
+    { "schritt": "pruefen",     "testfragenJeQuelle": 20, "fundstellenTreffer": 0.9 },
+    { "schritt": "freigeben",   "durch": "mensch bei Preisen und Recht" }
+  ],
+  "antwortregel": { "fundstelle": "pflicht", "kein_treffer": "weiss ich nicht + uebergabe" },
+  "pflege": {
+    "taeglich":    { "uhr": "03:00", "aufgaben": ["neue_quellen", "abgelaufene_sperren", "widersprueche_melden"] },
+    "woechentlich":{ "regressionstest": true, "abfallSchwelle": 2, "rollback": true },
+    "monatlich":   { "lora_vorschlag": true, "nur_freigegebene_daten": true, "uebernahme_wenn": "testguete >= vorher" }
+  },
+  "waechter": { "gegentest": true, "meldung_nur_bei_neu": true, "zustellung_bestaetigt": true, "kette": "bestehende Alarmkette an Pascal" }
+}

@@ -1,0 +1,80 @@
+{
+  "$kommentar": "Gedächtnis NeXify AI. Umgesetzt in lib/gedaechtnis.js (17/17 Prüffälle). Dienste speichern und suchen, der Kern entscheidet. Stand 28.09.2026.",
+  "version": "1.0.0",
+  "arten": {
+    "arbeit": {
+      "dienst": "Postgres laeufe/schritte (lib/langlauf.js)",
+      "lebensdauer": "bis Lauf beendet",
+      "kontextSchicht": "S5"
+    },
+    "episodisch": {
+      "dienst": "Cognee (Graph aus Mails, Chats, Vorgängen) + CRM-Verlauf",
+      "halbwertTage": 30,
+      "kontextSchicht": "S5"
+    },
+    "semantisch": {
+      "dienst": "LightRAG (Vektor + Graph, Fundstellen)",
+      "halbwertTage": 365,
+      "kontextSchicht": "S4"
+    },
+    "prozedural": {
+      "dienst": "AgentMemory (Lessons) + Skill-Verzeichnis + config/regelwerk.json",
+      "halbwertTage": null,
+      "kontextSchicht": "S2/S3"
+    }
+  },
+  "abruf": {
+    "reihenfolge": [
+      "Mandant (Pflicht, hart)",
+      "Kunde/Fall/Bereich/Lauf/Sprache",
+      "Gültigkeit (gueltigBis, ersetzt)",
+      "Einbettungsmodell gleich",
+      "Relevanz",
+      "Zeitgewicht",
+      "Wichtigkeit"
+    ],
+    "gewichte": {
+      "relevanz": 0.6,
+      "zeit": 0.25,
+      "wichtigkeit": 0.15
+    },
+    "mindestRelevanz": 0.1,
+    "rerank": "Soll: Reranker auf die ersten 50 Treffer (Stufe 0), erst mit Fragensatz messen"
+  },
+  "budget": {
+    "anteile": {
+      "arbeit": 0.25,
+      "episodisch": 0.25,
+      "semantisch": 0.35,
+      "prozedural": 0.15
+    },
+    "quelle": "Schichten S4/S5 aus config/llm-verbindungen.json kontext"
+  },
+  "zerlegen": {
+    "zielTokens": 300,
+    "ueberlappungTokens": 40,
+    "kontext": "Dokument · Abschnitt · Stand vor jeden Teil (deterministisch)",
+    "ausbau": "Kontext je Teil zusätzlich von Stufe 0 formulieren lassen (kontextuelles Retrieval), vor Einführung gegen Fragensatz messen; Größen 200/300/500 im Vergleich testen"
+  },
+  "konflikte": {
+    "quellrang": {
+      "pascal": 4,
+      "vertrag": 4,
+      "system": 3,
+      "dokument": 2,
+      "agent": 1
+    },
+    "regel": "neuer Wert ersetzt nur bei gleichem oder höherem Rang und jüngerem Datum; sonst strittig → Karte im Entscheidungs-Postfach + Lernsignal hinweis"
+  },
+  "vergessen": {
+    "personenbezogen": "loeschfristTage je Eintrag Pflicht (Art. 5 Abs. 1 lit. e DSGVO)",
+    "arbeit": "nach Laufende",
+    "ersetzt": "90 Tage Aufbewahrung, dann löschen",
+    "takt": "täglich, Protokoll mit Grund"
+  },
+  "einbettungsModell": {
+    "pflicht": true,
+    "wechsel": "neues Modell = Neuindizierung; Einträge mit altem Modell werden bis dahin ausgeschlossen und gezählt",
+    "aktuell": "paraphrase-multilingual-mpnet-base-v2@st"
+  }
+}

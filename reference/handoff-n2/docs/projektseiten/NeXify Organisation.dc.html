@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Organisation – NeXify AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<style>button{padding:0;font:inherit;color:inherit}html,body{margin:0;background:#242826;color:#FFFFFF;font-family:Geist,Helvetica,Arial,sans-serif}a{color:#D7FA50}a:hover{color:#E4FF7A}</style>
+</helmet>
+<p style="margin:0;padding:12px 24px;background:#1A1D1B;border-bottom:1px solid #3E4240;font-family:'Geist Mono',monospace;font-size:12px;color:#FFC24A">Projektdokumentation – nicht Teil des Produkts. Verschoben am 28.09.2026 nach docs/projektseiten/.</p>
+<div style="min-height:calc(100vh - 48px);background:radial-gradient(1000px 520px at 50% -10%, rgba(215,250,80,.14), transparent 62%),#242826">
+  <header style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;width:min(1240px,calc(100% - 48px));margin:0 auto;padding:24px 0">
+    <span style="display:inline-flex;align-items:center;gap:8px"><img src="../../assets/nexify-ai/nexify-ai-signet.svg" alt="" aria-hidden="true" style="display:block;width:22px;height:22px" /><strong style="font-size:17px;font-weight:700;letter-spacing:-.03em">Ne<span style="color:#D7FA50">X</span>ify AI · Organisation</strong></span>
+    <span style="flex:1 1 auto"></span>
+    <span style="display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border:1px solid #3E4240;border-radius:999px;font-family:'Geist Mono',monospace;font-size:12px;color:#BCC1BD">Fassung 1.0 · 27.09.2026 · Entwurf zur Endabnahme</span>
+    <a href="docs/01-konzept/nexifyai-organisationshandbuch.md" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid #4A4F4C;border-radius:8px;color:#FFFFFF;font-size:14px;font-weight:600;text-decoration:none" style-hover="border-color:#D7FA50">Handbuch öffnen</a>
+  </header>
+
+  <section style="width:min(1240px,calc(100% - 48px));margin:0 auto;padding:clamp(40px,6vw,80px) 0 48px">
+    <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Leitsatz</p>
+    <h1 style="max-width:980px;margin:0;font-size:clamp(36px,5.6vw,72px);font-weight:600;line-height:1.02;letter-spacing:-.05em;text-wrap:balance">Ein Mensch entscheidet. Agenten arbeiten. Jeder Schritt hinterlässt einen Nachweis.</h1>
+    <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));margin-top:48px">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+        <div style="padding:20px 24px;border:1px solid #3E4240;border-radius:16px;background:linear-gradient(180deg,#2E3230,#2A2E2C)">
+          <strong style="display:block;font-size:40px;font-weight:600;letter-spacing:-.04em">{{ st.v }}</strong>
+          <span style="font-size:14px;color:#BCC1BD">{{ st.k }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid #363A38">
+    <div style="width:min(1240px,calc(100% - 48px));margin:0 auto;padding:clamp(56px,7vw,96px) 0">
+      <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Bereiche</p>
+      <h2 style="margin:0 0 32px;font-size:clamp(28px,3.6vw,44px);font-weight:600;letter-spacing:-.04em">Zehn Bereiche, eine entscheidende Stelle.</h2>
+      <div role="tablist" aria-label="Bereich wählen" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+        <sc-for list="{{ depts }}" as="d" hint-placeholder-count="10">
+          <button onClick="{{ d.pick }}" role="tab" aria-selected="{{ d.on }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid {{ d.border }};border-radius:999px;background:{{ d.bg }};color:#FFFFFF;font-family:Geist,sans-serif;font-size:14px;cursor:pointer" style-hover="border-color:#D7FA50" style-focus="outline:2px solid #D7FA50;outline-offset:2px"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#D7FA50">{{ d.id }}</span>{{ d.name }}</button>
+        </sc-for>
+      </div>
+      <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">
+        <div style="display:grid;gap:16px;align-content:start;padding:32px;border:1px solid #D7FA50;border-radius:16px;background:radial-gradient(420px 240px at 100% 0%, rgba(215,250,80,.16), transparent 70%),linear-gradient(180deg,#303432,#2A2E2C)">
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">{{ dept.id }}</span>
+          <strong style="font-size:28px;font-weight:600;letter-spacing:-.03em">{{ dept.name }}</strong>
+          <span style="font-size:16px;line-height:1.6;color:#E3E6E3;text-wrap:pretty">{{ dept.task }}</span>
+        </div>
+        <div style="display:grid;gap:0;padding:8px 24px;border:1px solid #3E4240;border-radius:16px;background:linear-gradient(180deg,#2E3230,#2A2E2C)">
+          <sc-for list="{{ deptRows }}" as="r" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid #363A38">
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">{{ r.k }}</span>
+              <span style="font-size:15px;line-height:1.5;color:#FFFFFF;overflow-wrap:anywhere">{{ r.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid #363A38">
+    <div style="width:min(1240px,calc(100% - 48px));margin:0 auto;padding:clamp(56px,7vw,96px) 0">
+      <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Kundenreise</p>
+      <h2 style="margin:0 0 40px;font-size:clamp(28px,3.6vw,44px);font-weight:600;letter-spacing:-.04em">Von der Anfrage bis zur Weiterentwicklung.</h2>
+      <div style="display:grid;gap:32px 20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))">
+        <sc-for list="{{ journey }}" as="j" hint-placeholder-count="10">
+          <div style="position:relative;display:grid;gap:12px;align-content:start">
+            <span style="position:absolute;top:21px;left:52px;right:0;height:2px;background:linear-gradient(90deg,#D7FA50,rgba(111,227,207,.5) 70%,transparent)"></span>
+            <span style="position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:2px solid {{ j.ring }};background:#242826;font-family:'Geist Mono',monospace;font-size:13px;color:{{ j.ring }}">{{ j.n }}</span>
+            <strong style="font-size:17px;font-weight:600">{{ j.h }}</strong>
+            <span style="font-size:14px;line-height:1.55;color:#BCC1BD;text-wrap:pretty">{{ j.p }}</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;color:{{ j.mfg }}">{{ j.m }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:32px 0 0;font-size:14px;color:#9CA29E">Grün umrandet: Pascal entscheidet an diesem Schritt.</p>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid #363A38">
+    <div style="width:min(1240px,calc(100% - 48px));margin:0 auto;padding:clamp(56px,7vw,96px) 0">
+      <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Umsetzung</p>
+      <h2 style="margin:0 0 32px;font-size:clamp(28px,3.6vw,44px);font-weight:600;letter-spacing:-.04em">Zwölf Arbeitspakete. P0 zuerst.</h2>
+      <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))">
+        <sc-for list="{{ aps }}" as="a" hint-placeholder-count="12">
+          <div style="display:grid;gap:12px;align-content:start;padding:20px 24px;border:1px solid #3E4240;border-radius:12px;background:linear-gradient(180deg,#2E3230,#2A2E2C)">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E">{{ a.id }}</span><span style="padding:4px 8px;border-radius:999px;background:{{ a.pbg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;color:#111312">{{ a.p }}</span></div>
+            <strong style="font-size:17px;font-weight:600;line-height:1.3">{{ a.t }}</strong>
+            <span style="font-size:13px;line-height:1.5;color:#BCC1BD">Nachweis: {{ a.n }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid #363A38">
+    <div style="width:min(1240px,calc(100% - 48px));margin:0 auto;padding:clamp(56px,7vw,96px) 0 72px">
+      <p style="margin:0 0 16px;font-family:'Geist Mono',monospace;font-size:13px;color:#D7FA50">Normen · Stand 27.09.2026</p>
+      <h2 style="margin:0 0 32px;font-size:clamp(28px,3.6vw,44px);font-weight:600;letter-spacing:-.04em">Rahmen, keine Behauptung.</h2>
+      <div style="display:grid;gap:0;border:1px solid #3E4240;border-radius:16px;overflow:hidden">
+        <sc-for list="{{ norms }}" as="nm" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px 24px;padding:16px 24px;border-bottom:1px solid #363A38;background:#2A2E2C">
+            <strong style="font-size:15px;font-weight:600">{{ nm.n }}</strong>
+            <span style="font-size:14px;color:#BCC1BD">{{ nm.w }}</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;color:{{ nm.c }}">{{ nm.s }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:24px 0 0;font-size:14px;line-height:1.6;color:#9CA29E;max-width:54ch">Keine Zertifizierung vorhanden. Alle Fassungen am 27.09.2026 geprüft. Ein integriertes Managementsystem deckt Qualität, Sicherheit und KI gemeinsam ab.</p>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DEPTS = [
+  ["A1", "Leitung & Strategie", "Ziele, Preise, Freigaben, Managementbewertung. Pascal entscheidet, der Council berät.", "Director, KI-Council", "Deckungsbeitrag je Monat", "ISO 9001:2026 Kap. 5, 9.3"],
+  ["A2", "Vertrieb", "Von der Anfrage bis zum unterschriebenen Auftrag. Ehrliche Einschätzung, auch wenn sie nein lautet.", "Eingang, Angebot", "Anfrage→Auftrag, Reaktionszeit", "UWG, BGB §§ 145 ff."],
+  ["A3", "Marketing & Inhalte", "Website, Texte, Kampagnen, Bilder – belegt statt behauptet.", "Texter, Designer, SEO", "qualifizierte Anfragen je Monat", "UWG § 5, KI-VO Art. 50"],
+  ["A4", "Projektleitung", "Auftrag bis Abnahme, Termine, Tagesbericht bis 20:00 Uhr.", "Director, Planer", "Termintreue", "ISO 9001 Kap. 8.1–8.5"],
+  ["A5", "Entwicklung & Design", "Umsetzung von Code und Oberfläche, barrierearm und testgetrieben.", "Umsetzer, Designer", "E3-Quote, Nacharbeit", "ISO 9241-110/-210, WCAG 2.2 AA"],
+  ["A6", "Qualität & Prüfung", "Review, Tests, Freigabe-Gate, Gutachten-Kette. Prüfer ≠ Umsetzer.", "Prüfer, Gate, Gutachten", "Befunde nach Abnahme", "ISO 9001 Kap. 8.6, 8.7, 10"],
+  ["A7", "Betrieb & IT", "Hosting in Frankfurt, Überwachung, Sicherung, Vorfälle.", "Wächter", "Verfügbarkeit, Restore-Test", "ISO/IEC 27001, BSI-Grundschutz"],
+  ["A8", "Kundenservice & Partner", "Kunden, Werkstätten, Nachbarschaftskunden, Affiliates.", "Support Kunde, Support Werkstatt", "Lösungszeit", "DSGVO Art. 12–22"],
+  ["A9", "Finanzen & Buchhaltung", "Rechnung, Mahnung, Journal, Steuern – nur über den Rechenkern.", "Abrechnung", "offene Posten, DSO", "GoBD, UStG, NL-BTW"],
+  ["A10", "Recht, Datenschutz & KI-Governance", "Rechtstexte, AVV, Löschläufe, KI-Register und Aufsicht.", "nur Prüfhilfe", "offene Anfragen = 0", "DSGVO, KI-VO, ISO/IEC 42001"]
+];
+const JOURNEY = [
+  ["K1", "Anfrage", "Formular, Berater oder Mail, sofortige Bestätigung.", "sofort", false],
+  ["K2", "Erstgespräch", "30 Minuten, kostenlos, per Video.", "≤ 2 Werktage", true],
+  ["K3", "Anforderungsprofil", "Langlauf: Sammler, Rechercheur, Analyst, Architekt.", "≤ 2 Werktage", true],
+  ["K4", "Angebot", "Preis aus dem Rechenkern, Tage klar.", "≤ 1 Werktag", true],
+  ["K5", "Auftrag", "Annahme per Klick, AVV dabei.", "sofort", false],
+  ["K6", "Umsetzung", "Tagesbericht bis 20:00, Vorschau-Link.", "täglich", false],
+  ["K7", "Prüfung", "Review, E3-Test, Gate Stufen 1–4.", "vor Abnahme", false],
+  ["K8", "Abnahme", "Gutachten, Abnahmeprotokoll, Restpunkte.", "≤ 5 Werktage", true],
+  ["K9", "Betrieb", "Wächter, Sicherung, Monatsbericht.", "laufend", false],
+  ["K10", "Weiterentwicklung", "Vorschläge mit Kennzahl.", "quartalsweise", true]
+];
+const APS = [
+  ["AP-01", "Vorschau-Stufe einrichten", "Health 60 s", "P0"], ["AP-02", "GitLab-Repo, Kerne und Tests", "CI grün", "P0"], ["AP-03", "Anmeldung, Rollen, RLS", "Negativtest fremde Zeilen", "P0"],
+  ["AP-04", "9router, Stufen 0–2", "Rückfall ausgelöst", "P1"], ["AP-05", "CRM und Kundenportal K1–K8", "E2E Anfrage→Abnahme", "P1"], ["AP-06", "Abrechnung, Rechnung, Mahnung", "Storno als Gegenbuchung", "P1"],
+  ["AP-07", "Partner- und Affiliate-Abläufe", "E2E Termin, Gutschein, Provision", "P2"], ["AP-08", "Wächter, Sicherung, Vorfall", "Wiederherstellung ausgeführt", "P1"], ["AP-09", "KI-Register, Kennzeichnung (Art. 50 gilt)", "Stichprobe je Portal", "P0"],
+  ["AP-10", "Rechtstexte je Land", "Anwaltsfreigabe", "P1"], ["AP-11", "Normenregister vervollständigen", "Status je Zeile geprüft", "P2"], ["AP-12", "Internes Audit, Managementbewertung", "Auditbericht", "P2"]
+];
+const NORMS = [
+  ["ISO 9001:2026", "Qualitätsmanagement", "gültig · 16.09.2026", "#6FE3CF"],
+  ["ISO/IEC 27001:2022 + Amd 1:2024", "Informationssicherheit", "gültig", "#6FE3CF"],
+  ["ISO/IEC 42001:2023", "KI-Management", "gültig · keine Vermutungswirkung KI-VO", "#6FE3CF"],
+  ["ISO 9241-110:2020 · -210:2019", "Gebrauchstauglichkeit", "gültig", "#6FE3CF"],
+  ["WCAG 2.2 AA · EN 301 549", "Barrierefreiheit", "V4.1.1 veröffentlicht · rechtlich V3.2.1", "#FFC24A"],
+  ["KI-VO Art. 50", "Transparenz", "gilt seit 02.08.2026 · Pflicht jetzt", "#FF8A7A"]
+];
+const PBG = { P0: "#FF8A7A", P1: "#D7FA50", P2: "#6FE3CF" };
+class Component extends DCLogic {
+  state = { d: 0 };
+  renderVals() {
+    const cur = DEPTS[this.state.d];
+    return {
+      stats: [["10", "Bereiche"], ["10", "Schritte je Kundenprojekt"], ["12", "Arbeitspakete"], ["6", "offene Entscheidungen"]].map(([v, k]) => ({ v, k })),
+      depts: DEPTS.map((x, i) => ({ id: x[0], name: x[1], on: i === this.state.d ? "true" : "false", border: i === this.state.d ? "#D7FA50" : "#3E4240", bg: i === this.state.d ? "#2E3230" : "transparent", pick: () => this.setState({ d: i }) })),
+      dept: { id: cur[0], name: cur[1], task: cur[2] },
+      deptRows: [["Agenten", cur[3]], ["Kennzahl", cur[4]], ["Rahmen", cur[5]], ["Entscheidet", "Pascal Courbois"]].map(([k, v]) => ({ k, v })),
+      journey: JOURNEY.map(([n, h, p, m, human]) => ({ n, h, p, m, ring: human ? "#D7FA50" : "#6F7571", mfg: human ? "#D7FA50" : "#9CA29E" })),
+      aps: APS.map(([id, t, n, p]) => ({ id, t, n, p, pbg: PBG[p] })),
+      norms: NORMS.map(([n, w, s, c]) => ({ n, w, s, c }))
+    };
+  }
+}
+</script>
+</body>
+</html>

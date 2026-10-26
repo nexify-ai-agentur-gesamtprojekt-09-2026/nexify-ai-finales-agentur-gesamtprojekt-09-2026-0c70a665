@@ -1,0 +1,38 @@
+{
+  "$kommentar": "Bildschirmsteuerung (Computer Use) NeXify AI. Letzte Wahl: nur wenn weder API noch MCP noch stabile Selektoren (dann Playwright) existieren. Durchgesetzt über Regel R-21. Stand 28.09.2026.",
+  "reihenfolge": [
+    "API / MCP",
+    "Playwright mit stabilen Selektoren",
+    "Computer Use in der Sandbox"
+  ],
+  "einsatzfaelle": [
+    "Werkstatt-Warenwirtschaft ohne Schnittstelle (nur lesen: Termine, Bestand)",
+    "Behördenportale ohne API (nur Entwurf, Absenden durch Pascal)"
+  ],
+  "sandbox": {
+    "image": "eigenes: Xvfb + x11vnc + Fluxbox, Nutzer ohne root, no-new-privileges, seccomp",
+    "netz": "Docker internal: true, Freigaben je Ziel-Host einzeln",
+    "dateisystem": "read_only + tmpfs",
+    "zugangsdaten": "nur Einmal-Zugang des Zielsystems aus OpenBao, nie Host-Schlüssel",
+    "grenzen": {
+      "cpu": 2,
+      "speicherGB": 4,
+      "maxSchritte": 50,
+      "maxLaufzeitMin": 20,
+      "maxKostenCentJeLauf": 200
+    },
+    "beobachtung": "VNC nur lesend, nur über Cloudflare Access"
+  },
+  "kontext": "nach 5 Schritten ältere Bildschirmfotos durch Zusammenfassung ersetzen (Kosten, Latenz)",
+  "bedienung": "Tastatur vor Maus; Dropdowns und Rollbalken per Pfeiltasten",
+  "anzeige": "Workspace zeigt »Agent betrachtet den Bildschirm …« während der Denkphase",
+  "modell": "Vision-Modell über 9router; Anbieter außerhalb der EU nur mit AVV/SCC und ohne Personenbezug auf dem Bildschirm (R-06)",
+  "protokoll": "je Schritt Bildschirmfoto-Hash, Aktion, Ergebnis als Langfuse-Span; Bildschirmfotos 7 Tage, dann löschen",
+  "folgenreich": [
+    "löschen",
+    "zahlen",
+    "senden",
+    "bestellen",
+    "unterschreiben"
+  ]
+}
