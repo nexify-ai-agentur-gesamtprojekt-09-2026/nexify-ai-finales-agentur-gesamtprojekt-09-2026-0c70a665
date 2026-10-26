@@ -1,3 +1,9 @@
+> Projektgrenze (Nutzerkorrektur 26.10.2026): Affilinet Portal Aachen ist ein
+> gesondertes, pausiertes Kundenprojekt und gehört nicht zur Agentur oder TEILEKLAR.
+> Es ist keine Anwendung oder Lieferabhängigkeit dieses Repositories.
+> Fertige Komponenten werden gezielt mit Herkunft, Anpassung und Tests übernommen.
+> [Quellen- und Projektgrenzen](docs/architecture/0011-source-and-customer-boundaries.md).
+
 > Aktuelle Cloud-Implementierung: Die vom Nutzer freigegebene Gesamtfertigstellung
 > wird auf `factory/foundation-2026-10-25` bearbeitet. Das lokale, neu implementierte
 > Datenfundament und sichere Pruefwerkzeuge sind keine bereits produktiv betriebene

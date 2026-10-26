@@ -7596,7 +7596,7 @@
   ],
   "native_contract": {
     "path": "docs/contracts/factory.openapi.json",
-    "sha256": "0568ffdb654db63e6fa8e243b031160a638dd0c06da0ef2308d675b39010fd4f",
+    "sha256": "a5a7ac8f95a991eac1dd1cbbaf0a328cd0944fe8a4f71cff8bc4b5b0de5ad410",
     "state": "proposed_target_not_runtime"
   }
 }

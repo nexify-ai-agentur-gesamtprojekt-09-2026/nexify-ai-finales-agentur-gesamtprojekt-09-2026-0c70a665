@@ -1,5 +1,5 @@
 # NeXify AI Gesamtloesung — ein Befehl pro Repo-Operation (Harness-Standard).
-.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build
+.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build source-boundaries
 
 setup:
 	@node --version >/dev/null && python3 --version >/dev/null && echo "setup: node + python3 vorhanden (keine Paketabhaengigkeiten)"
@@ -60,6 +60,10 @@ automation-check:
 web-build:
 	pnpm --filter @nexify/web typecheck
 	pnpm --filter @nexify/web build
+
+source-boundaries:
+	python3 tools/check_source_boundaries.py
+	python3 -m unittest discover -s tests -p test_source_boundaries.py -q
 
 session-start:
 	bash scripts/session-trace.sh session-start

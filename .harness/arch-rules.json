@@ -54,6 +54,15 @@
       "what": "Eine Automations-Negativprobe scheitert.",
       "why": "Prompt/Toolannotation oder Erfolgslabel ersetzt keine nachgewiesene Berechtigung und Commitbindung.",
       "fix": "Modell-/Credential-/Deadline-/Protokollgrenze korrigieren statt Gates oder Gegenproben abzuschalten."
+    },
+    {
+      "id": "ARCH-007",
+      "description": "Pausierte Kundenprojekte sind keine Agenturmodule; Übernahmen brauchen abgegrenzte Herkunft.",
+      "check": "python3 tools/check_source_boundaries.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_source_boundaries.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Kundenprojektbaum/-historie oder eine unbelegte Vermischung ist im Agenturstand enthalten.",
+      "why": "Gemeinsamer Repozugriff autorisiert Wiederverwendung brauchbarer Komponenten, keine fachliche Projektfusion.",
+      "fix": "Quellen zuordnen und Kundenprojekt getrennt lassen; konkrete Komponenten mit Herkunft und Gegenproben adaptieren."
     }
   ]
 }

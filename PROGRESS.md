@@ -1,3 +1,20 @@
+# Korrigierte Projektgrenze · 26.10.2026
+
+- Nutzerklärung: Affilinet Aachen ist ein gesondertes, pausiertes Kundenprojekt. Der frühere Import und die Einordnung als Agenturmodul waren falsch und sind verworfen.
+- Aktueller Entwicklungszweig: `factory/agency-separated-2026-10-26`, von vor dem Kundenimport abgezweigt. Kundenbaum `apps/portal` und bekannte Kunden-Commitköpfe sind ausgeschlossen; acht offene Agenturdateien wurden unverändert erhalten. Der alte Importzweig bleibt ausschließlich lokal gesichert, nicht veröffentlichen oder zurückmergen.
+- Die historische N2-Designreferenz bleibt unter `reference/handoff-n2` getrennt gekennzeichnet. Sie aktiviert keine Anwendung oder alte Pipeline. Original-Kundenrepository unverändert und pausiert.
+- Quellenklassifikation und selektive Wiederverwendung: `config/source-boundaries.json`. Keine Kunden-/Agentur-SSO, Datenmigration oder Produktabhängigkeit ableiten. Kundenprojekttests zählen nicht als Agenturabnahme.
+
+## Next Steps
+
+1. Nur die eigenen Agentur-/TEILEKLAR-/Web-/Gateway-Aufgaben fortführen. Keine Affilinet-Übernahme oder automatische Kundenprojekt-Einrichtung.
+2. Brauchbare Komponenten aus allen autorisierten Quellen gezielt bewerten und mit Quelle/Commit, Zweck, Anpassung und Tests übernehmen.
+3. Offene CI-/Frontend-/Integrationsprüfungen des Agentursystems fortsetzen; technische Erreichbarkeit, Live-Anbindung und Gesamtfertigstellung weiterhin getrennt ausweisen.
+
+---
+
+## Überholter Integrationsplan (durch diese Projektgrenze korrigiert)
+
 # Aktueller Integrationsauftrag · 26.10.2026
 
 F-007 ist aktiv: kanonisches gemeinsames Repository, Next.js/TypeScript-Webshell mit nativer AIFly-Seitenleiste, vollständige DE-/TEILEKLAR-Seitenarchitektur, isolierte REA-Instanz, Small-Business-Bibliothek und GitHub/GitLab-Automatisierung. Der nächste lokale Zwischencommit sichert die geprüfte Implementierung vor dem herkunftsgebundenen Import der anderen beiden Quellstände. Keine Main-/Produktivfreigabe und noch kein gesamthaft fertiges Unternehmen.

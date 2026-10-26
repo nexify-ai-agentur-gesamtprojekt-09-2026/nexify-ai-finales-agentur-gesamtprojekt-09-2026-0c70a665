@@ -20309,11 +20309,6 @@
       "name": "N2",
       "path": "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026",
       "commit": "c2b4b04332073fd1555e601e81a65dba2b052fda"
-    },
-    {
-      "name": "A1",
-      "path": "/workspace/affilinet-portal-aachen-final",
-      "commit": "c82311a503dc5bae29b03133e22d682268671081"
     }
   ],
   "x-global-authorization": {

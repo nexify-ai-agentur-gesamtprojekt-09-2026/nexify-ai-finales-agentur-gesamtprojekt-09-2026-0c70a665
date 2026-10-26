@@ -14,7 +14,7 @@ Diese Dateien sind der neu abgeleitete Zielvertrag. Sie stellen die historisch f
 
 ## Prüfung
 
-`make contract-check` prüft den gebündelten Vertrag, lokale Quellen, aktuelle HTML-Hashes, die Abdeckung der abgeleiteten Seitenfähigkeiten und negative Zugriffsproben. Dafür müssen die drei bezeichneten Checkouts verfügbar sein; der Prüfer meldet fehlende Quellen als Fehler. Abweichende Pfade sind mit `python3 tools/verify_factory_contract.py --repo-n2 PATH --repo-a1 PATH` wählbar. Er überträgt keine Daten und ruft keinen Provider auf.
+`make contract-check` prüft den gebündelten Vertrag, lokale Quellen, aktuelle HTML-Hashes, die Abdeckung der abgeleiteten Seitenfähigkeiten und negative Zugriffsproben. Die historische N2-Referenz wird bevorzugt aus `reference/handoff-n2` im selben Repository gelesen; ein abweichender Referenzpfad ist mit `--repo-n2 PATH` wählbar. Der Referenzbaum zählt dabei als eigener Quellenbestand statt doppelt als N1. Affilinet ist ein gesondertes pausiertes Kundenprojekt und wird weder benötigt noch vom Prüfer eingelesen. Er überträgt keine Daten und ruft keinen Provider auf.
 
 Die Negativtests laufen zusätzlich mit dem normalen `make test` und benötigen nur einen Checkout und temporäre eigene Git-Fixtures. Sie prüfen unter anderem unerwartet öffentliche Operationen, CSRF, API-Schlüssel außerhalb der Inferenzgrenze, fehlende Policies, falsche Quellen, neue ausgelassene HTML-Dateien, Pfadflucht, verwaiste Referenzen und unzutreffende Abdeckungsbehauptungen. `.harness/arch-rules.json`, ARCH-005, erhält diese Fehlerkategorien als Gegenproben.
 

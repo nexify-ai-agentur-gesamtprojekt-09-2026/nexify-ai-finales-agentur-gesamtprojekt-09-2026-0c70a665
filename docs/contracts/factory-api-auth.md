@@ -11,7 +11,7 @@ Dieser Vertrag verbindet die vollständig katalogisierten N1-/N2-Seiten mit tech
 - Führende Quellen: die jeweiligen `AGENTS.md`, `config/regelwerk.json`, `config/brain/*.json`, `config/mandanten.json`, `docs/09-final/02-informationsarchitektur-und-journeys.md`, `05-technische-spezifikation.md`, `14-gesamtsystem-und-portale.md` und `15-umsetzungsplan-codex.md`.
 - `docs/03-backend/auth-und-rollen.md` ist ausdrücklich die **TEILEKLAR**-Spezifikation. Deren Magic-Link-/Partner-MFA-/Cookie-Ansatz ist eine nachvollziehbare Ausgangsbasis, keine automatisch unternehmensweit aktive Auth-Konfiguration.
 - `config/fakten.json` und `config/api-prepaid.json` bleiben Quellen der Zahlen. Widersprüchliche Entwurfs-/Freigabeangaben werden nicht als neue Preise, Steuerregeln, Aufbewahrungsfristen oder Produktionsfreigaben aufgelöst. de/nl/fr aus den aktuellen Vorgaben haben Vorrang vor älteren de-only-/v10-Texten.
-- A1 ist das getrennte Affilinet/Nanobooking-Repository. Dessen tatsächliche `/api/auth/*`-, `/api/2fa/*`- und `/api/users/*`-Routen sind kein Beweis für diese `/v1`-Zielplattform. Gleiche Personennamen, E-Mail-Adressen oder ähnlich bezeichnete Rollen begründen keine SSO-/Tenantmigration.
+- A1 bezeichnet ausschließlich das gesonderte, pausierte Kundenprojekt Affilinet Aachen. Dessen tatsächliche `/api/auth/*`-, `/api/2fa/*`- und `/api/users/*`-Routen sind kein Beweis für diese `/v1`-Zielplattform. Gleiche Personennamen, E-Mail-Adressen oder ähnlich bezeichnete Rollen begründen keine SSO-/Tenantmigration.
 
 Die Operationen tragen `x-source-refs` mit Repository, Pfad und Quellenart sowie `x-page-ids` mit exakt katalogisierten Seiten-IDs. Neue Pfad-/Methoden-/Schemanamen sind **vorgeschlagene technische Ableitungen**. Der Katalog hält insbesondere den beobachteten Partner-Gutschein-Konflikt `partner/vouchers/order` gegenüber `partner/vouchers/orders` fest; der Zielvertrag verwendet einen eigenen normalisierten Gutscheinbestellpfad. `partner/profile` ist im Ziel als PUT modelliert, passend zum beobachteten TODO; ein abweichender bestehender Backendpfad wird dadurch nicht umgeschrieben.
 
@@ -79,18 +79,11 @@ Videoverarbeitung/-erstellung liegt bei Runway; ElevenLabs wird über Composio f
 
 Freigaben/Publikation binden genaue Assetversion und SHA256, Zielseite/-sprache, aktuellen Akteur und Policyrevision. Der öffentliche Player erhält ausschließlich eigene veröffentlichte Rendition-, Poster-, Caption- und Transcriptreferenzen mit Version/Hashes, keine Provider-URLs, Voice-IDs, Account-/Jobsecrets oder private Storage-Links. Reduzierte Bewegung, kontrolliertes Autoplay, Untertitel, Audioalternativen, Mobil und erreichbare Steuerelemente sind Produktabnahme, kein Nebeneffekt eines erfolgreichen Providerjobs.
 
-## 7. A1-Istvertrag und Migrationsgrenze
+## 7. Quellenvergleich ohne Kundenprojektintegration
 
-| Aspekt | N1-/TEILEKLAR-Dokumentationsbasis | A1 beobachteter Quellstand | Ziel-/Migrationspflicht |
-|---|---|---|---|
-| Credentialformat | Magic Link privat; Passwort für Partner/Verwaltung | `/api/auth/register/login`, Passwort/bcrypt; JWT-Paare im JSON | Keine stillschweigende Übernahme oder Passwort-/Kontozusammenführung |
-| Browserstorage | geschützter Cookie vorgeschlagen | `frontend/src/lib/apiClient.js` verwendet LocalStorage | gesonderte Cookie-/CSRF-/XSS-Migration mit Logout-/Recoveryprüfung |
-| JWT/Refresh | TEILEKLAR RS256/opaque-Familienrotation | A1 `config.py`: konfigurierbarer JWT-Algorithmus, standard HS256; standard 60 Minuten/14 Tage; Refresh-JTI-Records | Issuer/Audience, Familienrevoke und Schlüsselrollen einzeln nachweisen, Werte nicht als bereits konvertiert melden |
-| Rollen/Tenant | additive Factoryrollen und PostgreSQL-RLS-Ziel | A1 UserRole plus objekt-/Vendor-/Franchisebezug, MongoDB | explizites IdP-/Subject-/Tenant-/Rollenmapping; kein globaler Superadmin durch Namensgleichheit |
-| MFA | TOTP-Pflicht für bestimmte geschützte Rollen in TEILEKLAR | A1 Login prüft TOTP, wenn `totp_enabled`; separate `/api/2fa/*`-Routen | Pflichtrolle, Bootstrap, Recovery und Widerruf technisch erzwingen und testen |
-| Kontolöschung | Datenrechte und Buchhaltungsbestand wahren | lokaler manueller Retentionshold bei bekannten Finanzreferenzen, transaktionale Nichtfinanz-Anonymisierung | keine globale rechtliche Aufbewahrungs-/Purge-Racefreigabe; weitere Writer und externe Daten getrennt migrieren |
+Affilinet Portal Aachen (historisch A1) ist nach ausdrücklicher Nutzerklarstellung ein gesondertes, pausiertes Kundenprojekt. Es gehört weder zur Agentur noch zu TEILEKLAR. Es wird nicht importiert, aktiviert, in die Agentur-SSO aufgenommen oder als Datenmigrationsquelle behandelt. Seine Backend-/Frontendtests belegen keine Agenturfunktion.
 
-N1-Zielverträge ändern keine A1-Routen. Aktuelle A1-Härtungen und Tests sind lokale Nachweise, keine Factory-SSO-/SQL-/Gatewayabnahme. Die weiteren optionalen Auth-Helfer und alle Fachwriter müssen ihren eigenen zustands-/besitzgebundenen Vertrag erhalten; ein Checkout-Fix beweist keine globale Autorisierung.
+Vorhandene technische Lösungen aus diesem und anderen autorisierten Repositories dürfen gezielt als Komponenten wiederverwendet werden. Eine Übernahme bindet Quelle, Commit, konkrete Dateien, Zweck, Zielpfade, Nutzungsgrundlage, Anpassungen und Tests. Kundendaten, Branding, Secrets, Rollen und projektspezifische Geschäftskonfiguration bleiben getrennt. Der aktuelle API/Auth-Vertrag benötigt keinen Affilinet-Checkout und keine Affilinet-Operation.
 
 ### Offene Authadapter und öffentlicher Companion
 

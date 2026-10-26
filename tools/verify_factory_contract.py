@@ -91,7 +91,8 @@ def validate_catalog(catalog, roots):
     for repo, root in roots.items():
         try:
             output = subprocess.check_output(["git", "-C", str(root), "ls-files", "-z"], stderr=subprocess.DEVNULL)
-            tracked = {p for p in output.decode().split("\0") if Path(p).suffix.lower() in {".html", ".htm"}}
+            tracked = {p for p in output.decode().split("\0") if Path(p).suffix.lower() in {".html", ".htm"}
+                       and not (repo == "N1" and p.startswith("reference/handoff-n2/"))}
             missing = tracked - actual[repo]
             if missing:
                 errors.append(f"Catalog: {repo} omits {len(missing)} tracked HTML pages")
@@ -289,18 +290,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--repo-n2", type=Path)
-    parser.add_argument("--repo-a1", type=Path)
     args = parser.parse_args()
     folder = args.root / "docs/contracts"
     try:
         document = json.loads((folder / "factory.openapi.json").read_text())
         media = json.loads((folder / "hero-media.json").read_text())
         catalog = json.loads((folder / "prototype-pages.json").read_text())
-        roots = {"N1": args.root, "N2": args.repo_n2 or args.root.parent / "nexify-ai-finales-agentur-gesamtprojekt-09-2026"}
-        all_roots = dict(roots, A1=args.repo_a1 or args.root.parent / "affilinet-portal-aachen-final")
+        bundled_reference = args.root / "reference/handoff-n2"
+        roots = {"N1": args.root, "N2": args.repo_n2 or (bundled_reference if bundled_reference.is_dir()
+                 else args.root.parent / "nexify-ai-finales-agentur-gesamtprojekt-09-2026")}
         page_ids = {page["page_id"] for page in catalog.get("pages", [])}
         errors = (validate_document(document, page_ids) + validate_media(media)
-                  + validate_catalog(catalog, roots) + validate_sources(document, all_roots)
+                  + validate_catalog(catalog, roots) + validate_sources(document, roots)
                   + validate_coverage(document, catalog))
     except (OSError, ValueError, TypeError) as exc:
         print(f"Contract input failure: {type(exc).__name__}")
