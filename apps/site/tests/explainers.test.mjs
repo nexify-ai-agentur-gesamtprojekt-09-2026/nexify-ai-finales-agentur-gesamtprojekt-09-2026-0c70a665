@@ -19,7 +19,11 @@ test('private action targets and invented playable pending assets are rejected',
 test('published videos need canonical own-origin video paths and every caption locale',()=>{
   const source=fixture();const media=source.pages[0].modules[0].media;
   Object.assign(media,{status:'published',src:'/media/intro.webm',captions:tr('/media/intro.vtt')});
-  assert.equal(prepareExplainers(source,pages,inventory)[0].modules[0].media.status,'published');
+  assert.throws(()=>prepareExplainers(source,pages,inventory),/verified asset binding/);
+  const routeOnly={home:Object.fromEntries(['de','nl','fr'].map(locale=>[locale,{locale,src:media.src,captionsSrc:media.captions[locale]}]))};
+  assert.throws(()=>prepareExplainers(source,pages,inventory,routeOnly),/verified asset binding/);
+  const checked={home:{orientation:Object.fromEntries(['de','nl','fr'].map(locale=>[locale,{locale,src:media.src,captionsSrc:media.captions[locale]}]))}};
+  assert.equal(prepareExplainers(source,pages,inventory,{},checked)[0].modules[0].media.status,'published');
   for(const src of ['https://external.invalid/video.webm','/media/../private.webm','/media/%2e%2e/video.webm','/media/video.webm?token=secret']){
     media.src=src;assert.throws(()=>prepareExplainers(source,pages,inventory));
   }

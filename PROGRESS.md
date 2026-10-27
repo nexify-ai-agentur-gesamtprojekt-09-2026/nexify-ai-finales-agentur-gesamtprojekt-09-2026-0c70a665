@@ -858,3 +858,35 @@ PR43 wurde anschließend extern am27.10.um18:24:12UTC gemergt: mainad17a459,
 typisierte CI-Auswertung bleibt ein getrenntes lokal geprüftes Delta; nach
 Koordinationsanweisung keine weitere automatische Folge-PR-Schleife. Reale
 Modellinferenz, GitLabprojektbindung und Produktivabnahme bleiben offen.
+
+
+### Seitenvideos: lokaler Modul- und Bedienpfad
+
+Basis14929eb (extern gemergter PR44), eigener lokaler Videozweig. Die bestehende
+Headless-Shell und Tokens bleiben erhalten. Registry bildet36öffentliche Seiten,
+49einzelne Erklärmodule und10getrennte geschützte/interne Routen ab. Geprüfte
+byPage/byModule-Projektionen exportieren weder private Freigaben noch Voice-IDs.
+Modul-/Locale-/Receipt-/Dateihashbindung verhindert generischen Seitenfilm als
+Ersatz für fremde Module. PresenterVideo startet manuell, erhält freie Hero-Bühne,
+Ton/Pause, Untertitel, Transkript und Reduced-Motion/Lifecycle-Pause.
+
+53Node-Tests, Typecheck, Normal-/Standalonebuild, unabhängige Sol-Quellprüfung,
+Browser6Controllerfälle plus36öffentliche Routen bestanden. Medienelementdouble
+ist kein tatsächlicher Film-/Tonnachweis. Frische Gesamt-/Geometriegates werden
+im gleichen Paket quellengebunden aufgezeichnet. Tatsächlich0freigegebene Filme;
+108optionale Seitenintro- und147Modul-Sprachplätze offen. Sieben Filme/21Szenen
+sind Vorproduktion, zwei innere Castingmanifesthashes widersprechen den Bytes.
+Keine Generierung, Providerkosten, Voiceclones oder Server-/Domainänderungen.
+
+Master1.3 technischer Ausschnitt (RQ029/RQ038,TST19/TST24) tatsächlich gelesen,
+188Quellen gezählt, kein Geschäfts-/Privatregister importiert. Finale AIFly-Figur,
+Casting-/Kostenfreigabe, echte Locale-Filme, Rechte und Sicht-/Hörabnahme fehlen;
+geschützte Auslieferung benötigt tatsächliche Auth-/Tenantbelege. REA-Einstieg
+fehlt hier: blocked_not_reviewed. Kein Ersatzscan oder Live-/Gesamtabschluss.
+Matrix, Eingänge und Rückweg: docs/contracts/page-video-coverage.md sowie
+page-video-integration.md; technische Belege evidence/page-videos-2026-10-27.
+
+Vorheriger CI-Abschnitt: PR44/4340547 gewöhnlicher Pushlauf40561206111 alle5Jobs
+grün; danach extern18:37:38UTC nach14929eb gemergt. Kein eigener Mainmerge.
+GitLab-Projekttransport bleibt ungebunden. Actions-Minuten knapp laut datierter
+Anbietermeldung; keine unnötigen Wiederholungsläufe oder bezahlten Runner.

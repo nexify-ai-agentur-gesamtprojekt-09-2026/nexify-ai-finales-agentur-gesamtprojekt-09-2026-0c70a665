@@ -4,6 +4,7 @@ import type { Localized, PublicPage } from "../lib/page-types";
 import { SiteLink } from "./Router";
 import { useUI } from "./Workspace";
 import "./PresenterEditorial.css";
+import PresenterVideo,{isPublicVideo,type PublicVideo} from "./PresenterVideo";
 
 export type ExplainerModule = {
   id: string;
@@ -28,34 +29,23 @@ const labels = {
   fr: { ai: "Assistant IA", outcome: "Votre prochaine étape", captions: "Français", collection: "La suite de votre parcours" }
 };
 
-function ownedMediaPath(value: unknown, extension: "video" | "captions"): value is string {
-  if (typeof value !== "string" || !value.startsWith("/media/") || value.includes("..")) return false;
-  // Canonical own-origin paths only: no percent escapes, backslashes, query,
-  // fragment, whitespace or controls that a browser could normalize elsewhere.
-  return extension === "video"
-    ? /^\/media\/[A-Za-z0-9/_-]+\.(?:mp4|webm)$/.test(value)
-    : /^\/media\/[A-Za-z0-9/_-]+\.vtt$/.test(value);
-}
-
-export default function ExplainerSections({ modules, pages }: { modules: ExplainerModule[]; pages: PublicPage[] }) {
+export default function ExplainerSections({ modules, pages, video, moduleVideos = {} }: { modules: ExplainerModule[]; pages: PublicPage[]; video?:PublicVideo;moduleVideos?:Record<string,Partial<Record<PublicVideo["locale"],PublicVideo>>> }) {
   const { locale } = useUI();
   const text = labels[locale];
   return <div className="editorial-explainers" role="group" aria-label={text.collection}>
+    {isPublicVideo(video,locale)?<section className="editorial-route-film"><PresenterVideo video={video} locale={locale}/></section>:null}
     {modules.map(module => {
       if (!Object.hasOwn(speakers, module.speaker)) return null;
       const speaker = speakers[module.speaker];
-      const caption = module.media.captions?.[locale];
-      const playable = module.media.status === "published" && ownedMediaPath(module.media.src, "video") && ownedMediaPath(caption, "captions");
+      const moduleVideo = moduleVideos[module.id]?.[locale];
+      const playable = isPublicVideo(moduleVideo,locale);
       const next = pages.find(page => page.id === module.next_action.target_id);
       const side = module.media_side === "right" ? "right" : "left";
       return <section className={`editorial-module${playable ? ` has-video media-on-${side}` : ""}`} key={module.id}>
         {playable && <div className="editorial-module-media">
           <figure>
-            <video controls preload="none" playsInline aria-label={`${speaker}: ${module.title[locale]}`}>
-              <source src={module.media.src!} type={module.media.src!.endsWith(".webm") ? "video/webm" : "video/mp4"} />
-              <track kind="captions" src={caption!} srcLang={locale} label={text.captions} default />
-            </video>
-            <figcaption>{speaker}{module.speaker !== "pascal" ? ` · ${text.ai}` : ""}</figcaption>
+            <PresenterVideo video={moduleVideo!} locale={locale}/>
+            <figcaption>{moduleVideo?.title}</figcaption>
           </figure>
         </div>}
         <div className="editorial-module-copy">
