@@ -28,7 +28,7 @@ BROWSER_SOURCES = ('apps/web/components/HomeContent.tsx', 'apps/web/components/W
     'apps/web/components/PublicOrientationChat.tsx', 'apps/web/components/PublicOrientationChat.css',
     'api/agent-chat.ts', 'packages/agent-runtime/public-orientation.ts', 'tools/agent-preview.mjs',
     'docs/design/detail-browser-evidence.json')
-KINDS = {'local_file_sha256', 'project_skills_integrity', 'managed_llm_policy', 'external_readback_required', 'browser_evidence_binding', *LOCAL_REGRESSIONS}
+KINDS = {'local_control_prerequisites', 'local_file_sha256', 'project_skills_integrity', 'managed_llm_policy', 'external_readback_required', 'browser_evidence_binding', *LOCAL_REGRESSIONS}
 STATES = {'blocked', 'in_progress', 'awaiting_external', 'verify', 'resolved'}
 SHA = re.compile(r'^[a-f0-9]{64}$')
 IDENT = re.compile(r'^[A-Za-z0-9_./:-]{1,160}$')
@@ -213,8 +213,11 @@ class RemediationQueue:
             identifier(value)
         require(isinstance(check, dict) and check.get('kind') in KINDS, 'unsupported_check')
         kind = check['kind']
-        fields = {'kind', 'path', 'expected_sha256'} if kind == 'local_file_sha256' else {'kind', 'evidence_requirement'} if kind == 'external_readback_required' else {'kind'}
+        fields = {'kind', 'job_id', 'tenant'} if kind == 'local_control_prerequisites' else {'kind', 'path', 'expected_sha256'} if kind == 'local_file_sha256' else {'kind', 'evidence_requirement'} if kind == 'external_readback_required' else {'kind'}
         require(set(check) == fields, 'unexpected_check_field')
+        if kind == 'local_control_prerequisites':
+            identifier(check['tenant']); identifier(check['job_id'])
+            require(SHA.fullmatch(check['job_id']) is not None, 'invalid_job_id')
         if kind == 'local_file_sha256':
             source_parts(check['path'])
             require(isinstance(check['expected_sha256'], str) and SHA.fullmatch(check['expected_sha256']), 'invalid_expected_hash')
@@ -222,6 +225,8 @@ class RemediationQueue:
             text(check['evidence_requirement'])
         require(isinstance(paths, list) and 1 <= len(paths) <= self.policy['max_source_refs'] and all(isinstance(p, str) for p in paths), 'invalid_source_refs')
         required = [POLICY]
+        if kind == 'local_control_prerequisites':
+            required += ['tools/local_control.py', 'config/local-control.json']
         if kind in LOCAL_REGRESSIONS:
             required += list(LOCAL_REGRESSIONS[kind]) + ['tools/remediation_queue.py']
         if kind == 'browser_evidence_binding':
@@ -326,7 +331,7 @@ class RemediationQueue:
 
     def _native_module(self, name):
         # Only these fixed, source-bound modules may be invoked. Never import a supplied path.
-        require(name in {'project_skills', 'check_llm_policy', 'check_browser_evidence'}, 'unsupported_verifier_module')
+        require(name in {'project_skills', 'check_llm_policy', 'check_browser_evidence', 'local_control'}, 'unsupported_verifier_module')
         # Code always comes from this application's trusted checkout, never a
         # supplied data root. Execute precisely the safe-read bytes, not a path
         # reopened by importlib after its validation.
@@ -342,6 +347,10 @@ class RemediationQueue:
         if kind == 'external_readback_required':
             return {'outcome': 'awaiting_external', 'code': 'actual_authorized_external_adapter_and_readback_required'}
         try:
+            if kind == 'local_control_prerequisites':
+                module = self._native_module('local_control')
+                control = module.LocalControl(root=self.root, tenant=check['tenant'], project='canonical_agency_project', read_only=True)
+                return control.check_prerequisites(check['job_id'])
             if kind == 'browser_evidence_binding':
                 module = self._native_module('check_browser_evidence')
                 def bounded_read(root, path):

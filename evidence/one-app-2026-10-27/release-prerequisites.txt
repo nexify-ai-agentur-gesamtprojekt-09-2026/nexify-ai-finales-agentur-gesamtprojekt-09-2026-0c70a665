@@ -1,0 +1,7 @@
+test_historically_linked_project_requires_verification_not_duplicate_setup (test_release_prerequisites.ReleasePrerequisiteTests.test_historically_linked_project_requires_verification_not_duplicate_setup) ... ok
+test_project_setup_does_not_substitute_for_production_domain_binding (test_release_prerequisites.ReleasePrerequisiteTests.test_project_setup_does_not_substitute_for_production_domain_binding) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK

@@ -1,0 +1,26 @@
+{
+  "registry_version": "0.1.0",
+  "primary_registry": [
+    {
+      "id": "frankfurt",
+      "hostname": "srv1243952.hstgr.cloud",
+      "role": "primary",
+      "registry_verified_at": "2026-09-10T22:14:00+02:00"
+    }
+  ],
+  "secondary_connection": {
+    "id": "nexify-2",
+    "ssh_alias": "nexify-2",
+    "resolved_host": "179.198.195.91",
+    "port": 22,
+    "configured_user": "root",
+    "status": "identity_probe_passed",
+    "observed_hostname": "srv1941843",
+    "observed_uid": 0,
+    "authenticated": true,
+    "writable_verified": false,
+    "checked_at": "2026-10-27T14:06:43.647Z"
+  },
+  "remote_mutation_performed": false,
+  "proof_scope": "server-side registry plus fresh authenticated identity probe; no shell/root write, no permission promotion; server workstream remains separate"
+}

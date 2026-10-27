@@ -1,0 +1,2 @@
+bash scripts/clean-state-check.sh
+clean-state: OK — alle 5 Dimensionen gruen

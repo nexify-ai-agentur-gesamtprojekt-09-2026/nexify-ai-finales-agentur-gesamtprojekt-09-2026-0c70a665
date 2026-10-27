@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": ">=22.23.4 <23.0.0"
   },
   "scripts": {
     "dev": "node scripts/generate-public-data.mjs && vite",
@@ -12,7 +12,7 @@
     "typecheck": "node scripts/generate-public-data.mjs && tsc --noEmit",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
-    "build:standalone": "pnpm build && node scripts/build-standalone.mjs"
+    "build:standalone": "pnpm build --mode standalone && node scripts/build-standalone.mjs"
   },
   "dependencies": {
     "@ai-sdk/react": "4.0.157",

@@ -1,0 +1,45 @@
+======================================================================
+ERROR: test_legacy_managed_reservation_without_snapshot_cannot_dispatch_but_can_cancel (test_selfservice_domain.SelfServiceTests.test_legacy_managed_reservation_without_snapshot_cannot_dispatch_but_can_cancel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 112, in test_legacy_managed_reservation_without_snapshot_cannot_dispatch_but_can_cancel
+    db.execute("UPDATE ss_reservation SET managed_snapshot=NULL WHERE id=?", (row["id"],))
+sqlite3.OperationalError: no such column: managed_snapshot
+
+======================================================================
+FAIL: test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding (test_selfservice_domain.SelfServiceTests.test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding) (field='merchant_account')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 97, in test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding
+    self.blocked("managed_purchase_binding_changed", lambda: changed.select_managed_funding(principal, tenant))
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 84, in blocked
+    with self.assertRaises(domain.DomainError) as raised:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DomainError not raised
+
+======================================================================
+FAIL: test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding (test_selfservice_domain.SelfServiceTests.test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding) (field='route_contract_ref')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 97, in test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding
+    self.blocked("managed_purchase_binding_changed", lambda: changed.select_managed_funding(principal, tenant))
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 84, in blocked
+    with self.assertRaises(domain.DomainError) as raised:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DomainError not raised
+
+======================================================================
+FAIL: test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding (test_selfservice_domain.SelfServiceTests.test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding) (field='terms_ref')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 97, in test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding
+    self.blocked("managed_purchase_binding_changed", lambda: changed.select_managed_funding(principal, tenant))
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 84, in blocked
+    with self.assertRaises(domain.DomainError) as raised:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DomainError not raised
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.166s
+
+FAILED (failures=3, errors=1)

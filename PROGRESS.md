@@ -1,3 +1,205 @@
+# Lokale Shop-HTTP-/UI-Anbindung
+
+Current State: b08a7fc / PaketVersion8 als geprüfter Rückweg erhalten. Bestehender
+HTTP-Server und TEILEKLAR-Shell verbinden nun Suche/Kategorien/Warenkorb und
+persistent gesperrten Checkout-Entwurf. Sechs reale HTTP- und neun reale lokale
+Browser/API/SQLite-Fälle inklusive DE/NL/FR, Cookiegrenzen, verlorener Antwort,
+Readback, Reload und Backendprozess-Neustart bestanden. Nur isolierte Testfixtures;
+normale Laufzeit hat keinen freigegebenen Katalog und keine Testartikel. Sol-Befund
+zur404-Reconciliation behoben;373Tests und Gesamtgates bestanden.
+Metadatenregression verhindert rekursive Register-Selbsthashes.
+Auth7/Shell8/Node31 und Build grün. Neue Designwahl main2a552ed integriert;
+Sourcevergleich bewahrt nur bestehende funktionale A11y-/Sprachkorrekturen.
+Abschließender Quellen-/Commitfreeze wird gebunden.
+DATA-001/ECO-001 aus Parentauszug zugeordnet; conditional-Kaufkonflikt offen.
+Keine echten Artikel-/Preis-/Bestands-/Fitmentdaten, Orders, Zahlungen oder
+Providerfreigaben erfunden. Neue native MCP-Leseevidenz bestätigt nexify-2→
+srv1941843 authentifiziert, writable_verified false; keine Serverreparatur.
+Next Steps: exakten Stand prüfen/sichern, danach bestätigten Medien-Skripttypfehler
+separat korrigieren und unabhängige Seiten-/Portalteile fortsetzen. Keine parallele
+Mediengenerierung; Root koordiniert reale Assets/Casting. Kein Astra.
+Details: docs/contracts/local-shop-http.md.
+
+# Lokale Shop-Warenkorbvorbereitung
+
+Current State: geprüfter und ausgelieferter Quellen-/Medienstand a66a509 bleibt
+als PaketVersion7 erhalten. Neuer begrenzter Warenkorbkern nutzt bestehende
+visitor.Store objects/receipts, keine zweite Datenbank/Queue. Sechzehn synthetische
+Regressionen bestanden, einschließlich Prozessabbruch vor Commit und Restart.
+Keine HTTP-/UI-Anbindung, keine Artikel-/Preis-/Steueraktivierung, kein Checkout,
+keine Zahlung oder Produktionssitzung. Sol-Review fand einen browserbekannten CSRF-Signierschlüssel; durch separaten
+serverinternen Schlüssel korrigiert. Zweiter Befund zum Schlüsselverlust durch
+gebundene Schlüsselgeneration korrigiert; beide separat Sol-nachgeprüft.
+check/test/e2e/check-arch/clean-check mit362Pythonfällen bestanden;
+abschließende Commitbindung folgt. Kein Gesamtshop-/Produktionsabschluss.
+Next Steps: Findings beheben/nachprüfen, Gesamtgates, dann lokale sichere
+Testadapter-/UI-Anbindung; autoritativer Shop-/Tenant-/Katalogstand bleibt nötig.
+Server-/Brainarbeit liegt exklusiv beim getrennten Server-Codex; keine Hook-,
+DNS-, Auth-, Server- oder Domainänderung durch diesen lokalen Schritt.
+Details: docs/contracts/local-shop-cart.md.
+
+# Wiederaufnahme: Quellen- und Medienvertrag
+
+Current State: geprüfte Version6 auf079057f erhalten; laufendes Delta schließt
+zwei unabhängige Reviewbefunde: widersprüchliche Stimmenfreigabe in der
+API-Dokumentation und fehlender CLI-Check der Presenter-Konfiguration. Historische
+Voice-IDs bleiben unbestätigt; keine Generierung, Veröffentlichung oder Kosten.
+Quellenregister im bestehenden acceptance-coverage erweitert, Ansicht generiert
+und Herkunft/Owner/Referenzen mit negativen Tests gesichert. Tatsächliche interne
+Routen sind geplante Ziele ohne verbundenes Backend; kein fertiger Arbeitsplatz.
+Referenzvideo materialisiert und Bild/Alpha/Audiopegel geprüft; kein verlässliches
+Hörurteil, keine Assetabnahme. Kein Astra. check/test/e2e/check-arch/clean-check
+bestanden,346 Pythonfälle. Fokussierter Medienfix separat Sol-geprüft; abschließende
+Registerprüfung noch laufend. Kein vollständiger Produkt- oder Liveabschluss.
+Next Steps: abschließende Sol-Prüfung des exakten Deltas, Master1.2-Originaldateien
+abgleichen und bestätigte Seiten-/Shop-/Portal-/Arbeitsplatzlücken fortsetzen.
+Veröffentlichung beauftragt; tatsächliche Auth-/Tenant-/Provider-/Restoregates
+bleiben erforderlich. Kein Server-/DNS-Cutover und keine neue Zugangseinrichtung.
+
+# Lokale Konsolidierung des aktuellen Main
+
+Current State: eigener Worktree integration/current-main-2026-10-27 integriert
+geprüften Kandidaten2c24073 mit Main2a552ed auf gemeinsamem Vorfahr a19cd503.
+Vier Konflikte quellentreu aufgelöst; Headerkonto-Zugang bleibt route-lokal,
+Auth-/Locale-/Fehlergrenzen und alle bisherigen Backendkorrekturen erhalten.
+337 bestehende plus2 Main-Regressionen,31Nodefälle und gemeinsameBrowserprüfungen
+bestanden. Next Steps: exakten Mergehash unabhängig prüfen. Reale Provider-/Runtime-/Restore-/Accessibilityabnahme weiterhin offen.
+Keine Remoteveröffentlichung oder neue Kosten. Kein Astra eingesetzt.
+Details: docs/contracts/current-main-integration.md.
+
+# Suite-Trialregel lokal korrigiert
+
+Current State: auf245e96e start_trial ohne Funding; bestehende Aktivierungsprüfung
+vor Replay, einmaliger86400Sekundenstart. Keine Credits, Preise, Authrechte oder
+externen Adapter geändert. _funding/reserve/claim_execution quellenidentisch.
+Sieben fokussierte Regressionen plus bestehende Domain-/Restoretests und unabhängige
+Gegenprüfung. MASTER12-TRIAL-01 lokal fortgeschrieben, Gesamtfall weiterhin offen.
+Next Steps: reale Adapter-/Identity-/Tenant-/Release-/Restoreabnahme nachweisen;
+kein Handoff oder lokales Testergebnis aktiviert Produktion.
+Details: docs/contracts/suite-trial-local.md.
+
+# Quellenpräzisierung für PaketVersion4 · lokal
+
+Current State: geprüftes Entscheidungsdelta c09204c wird mit PaketVersion3
+zusammengeführt. Neue Dokumentpräzisierung: Suitebeginn vor Funding ist bereits
+verbindlich beschrieben; keine neue fachliche Nutzerentscheidung nötig.
+D06 korrigiert künftig die technische Abweichung, D02 prüft Kostenumfang.
+In diesem Schritt keine Verhaltens-, Preis-, Auth- oder Provideränderung.
+Bekannte Vercel-Zuordnungen mit Parentberichtstand erhalten; nur fehlende
+Settings und gewünschte endgültige Zuordnung bleiben unbestätigt.
+Next Steps: quellentreuer lokaler Trial-Fix als gesonderter Auftrag; reale
+Adapter-/Tenant-/Release-/Restoreabnahmen bleiben offen.
+
+# Entscheidungskreis nach PaketVersion3 · lokal
+
+Current State: Grundlage c8c865f unverändert als ausgeliefertes PaketVersion3.
+13 offene Abnahmefälle mit Quellen, Ownerbereich, nächster Aktion und präzisem
+Abschlusskriterium im vorhandenen Register ergänzt. MASTER12 enthält einen
+lokal bestätigten Suite-/Funding-Regelkonflikt; keine Geschäftslogik geändert.
+Neue Charakterisierung und synthetischer SQLite-Backup/Restore getestet.
+Kontrast nur auf berechenbaren deckenden Flächen ausgewertet; komplexe Flächen
+und qualifizierte Assistenztechnik bleiben offen.
+Next Steps: Entscheidung zu MASTER12-TRIAL-01 und autoritative externe Belege
+entsprechend docs/contracts/acceptance-decisions.md. Kein Handoff schließt Fälle.
+Keine neue Provider-/Domain-/Runtimeaktion, keine aktualisierte Libraryversion.
+
+# Lokales Abdeckungsdelta · 27.10.2026
+
+Current State: auf Basis0cf8545 generische NL/FR-Beschriftungen und kleine
+Linkflächen korrigiert, Marken erhalten.72 Routen-/Sprachfälle,1724 reale
+Linkaktivierungen,36 mobile Accessibilityfälle und108 Textabstands-/Textgrößen-
+Geometriefälle mit tatsächlich gemessener Textverdopplung bestanden. Der
+unabhängig gefundene Root-Font-Scheinnachweis und echte Resizeüberläufe wurden
+korrigiert; Header/Wörter umbrechbar, Select/N-Symbol schriftrelativ. Öffentliche Installation nur im expliziten
+public-pwa-Build, netzabhängig ohne Cache/Replay;9 lokale Browserchecks bestanden.
+328 Python- und30 Node-Tests; unabhängige kritische UI-/SDK-/PWA-Nachprüfung.
+
+Next Steps: qualifizierte visuelle/Assistenztechnikprüfung MASTER-09 bleibt
+konkret offen. Vier lokale Teilnachweise schließen keine Produktivabnahme;
+12 externe Masterblocker unverändert. Kein Deploy/Auth-/Provider-Enablement.
+Nachweise: docs/contracts/acceptance-coverage.md und public-installation.md.
+
+# Historischer One-Web-App Integrationskandidat · lokal
+
+Current State: neuer isolierter Zweig integration/one-web-app-2026-10-27,
+Controller fd01d53 + PR36-Folgepatch58ea5b3, gemeinsamer Vorfahr6686629.
+Konflikte quellentreu aufgelöst, gemeinsame Workspace-/Auth-/Buildkonfiguration
+und lokaler Backendrollenvertrag integriert. Neue kombinierte Regressionen
+belegen Shell/Navigation/Locale, synthetische Auth, Rollen-/Tenantnegatives,
+Context-Parent-Join, Replay und Crash/Restart. Alle Remotezustände unverändert.
+
+Unabhängige Gegenprüfung fand gecachten Rollenvertrag; Hashprüfung pro Dispatch
+und Widerrufsregression korrigieren dies. Abschließende Nachprüfung am neuen Hash.
+Next Steps: bereinigtes Paket und versionsgebundene Gegenprüfung sichern;
+echte Provider-/Tenant-/Domain-/Restoreabnahme bleibt getrennt offen. Kein
+Produktivabschluss, kein Daemon und keine öffentliche Controllerroute aktiviert.
+Details: docs/contracts/one-web-app-integration.md und evidence/one-app-2026-10-27.
+
+## Historische Teilpaketstände
+
+# PR36 begrenzter lokaler Folgepatch · 27.10.2026
+
+Current State: eigener Zweig integration/pr36-acceptance-2026-10-27 auf
+66866298b3eb4054371b0e2a1e1f618f1bc8ca73, keine Remote-Schreibaktionen.
+PR35 und main nicht zusammengeführt. Standalone-, lazy Auth-, Signout- und
+Locale-Fälle reproduziert/korrigiert; Node-Untergrenze22.23.4 wiederhergestellt.
+24 Node-Tests, sieben synthetische Browserfälle, echter Offlinebuild unter
+Node22.23.4; unabhängiges Review samt behobenem P2-Importgraphbefund.
+Details: docs/contracts/pr36-local-acceptance.md; evidence/pr36-2026-10-27.
+
+Next Steps: getrennten sicheren lokalen Orchestrierungskern auf PR35-Folgeversion
+bauen; vorhandene Queue/Context/Brainbausteine verwenden. PR36-Restbefunde,
+echte Auth-/Tenant-/Domain-/Produktionsabnahme und Bundlegröße bleiben offen.
+Keine Aktivierung, echte Anmeldung, Gebühren, Serveränderungen oder Deployment.
+
+
+# Isolierte Integration · 27.10.2026
+
+Current State: eigener lokaler Checkout `/workspace/nexify-integration`, Zweig
+`integration/consolidated-2026-10-27`, Ausgangscommit
+`a19cd5035d3809dedda94050486026ac0186662e`. Keine Remotes im Clone;
+ursprüngliche Checkouts unverändert. Keine Pushes, Merges oder Deployments.
+
+PR35-Reviewfälle lokal reproduziert und korrigiert: Kauf-/Reservierungsbindung
+an Händler, Route und Bedingungen; atomare Aktualitätsprüfung paralleler
+Keywordimporte. Additive Migration sperrt Altreservierungen ohne Snapshot nur
+für neue Ausführung; Storno und Reconciliation bleiben erhalten.
+WorkflowRecord ergänzt vorhandene Governance/Queue, keine zweite Datenbank:
+10 Aufgaben, Quellenhashes, Owner, Abhängigkeiten, getrennte Evidenzstufen und
+Rollback; neue Prüfregeln ARCH-015 bis ARCH-018. F-007 bleibt einziges aktives
+Feature, keine Änderung auf passing und keine Runtimefreigabe.
+
+Unabhängige Unteragentenprüfung fand zusätzlich einen reproduzierten Race beim
+parallelen Start alter Selfservice-Datenbanken. Separat korrigiert: Schema-Read
+und ALTERs nach executescript unter BEGIN IMMEDIATE; neuer Parallelstarttest
+vorher rot, danach grün. Fachliche Bindungsregeln und SEO-Fix unverändert.
+Die erneute unabhängige Gegenprüfung schloss den P2-Befund; auch acht parallele
+Legacy-Starts bestanden. Beleg: evidence/integration-2026-10-27/independent-review.md.
+Governance, PR36 und Produktionsadapter waren nicht Gegenstand dieses Reviews.
+
+Prüfstatus: make check (0 Fehler/0 Warnungen), make test (291 Pythonfälle),
+make e2e (291 Pythonfälle und Manifest/Config-Integrität) und make check-arch
+bestanden. Belege unter `evidence/integration-2026-10-27/`. E2E ist hier die
+bestehende lokale Repositoryprüfkette, kein externer End-to-End-/Produktionslauf.
+Keine UI-Änderung oder neue Browserprüfung. Kein universeller Fehlerfreiheitsnachweis.
+
+Next Steps: unabhängige Gegenprüfung des lokalen Diffs; Parent-Masterauftrag
+als geprüfte Projektquelle ergänzen. Danach konkreten autorisierten Betriebs-
+anschluss getrennt behandeln. Brain-Ziel/Tenant und WRITE→INDEX→EXACT READ-BACK
+→CONTENT COMPARE fehlen; Mirror-Richtung extern ungeprüft; Small-Business
+verify blockiert mit `Source unavailable: LICENSE` (0 Aktionen, keine bestätigte
+installierte Skillzahl). Produktions-Restore, Liveabläufe und Abnahme offen.
+Keine laufenden Dienste einschließlich Slack und keine externen Kosten verändert.
+
+Zusätzlicher Abnahmescope: PR36 mit 16 gemeldeten offenen Reviews sowie
+Backupfehler nexifyai-dify-sicherung auf srv1941843 um 03:40:36 UTC.
+Beides nur als Parentmeldung dokumentiert, nicht selbst reproduziert.
+Branch-Owner-Abgleich beziehungsweise Backup-/Exit-/Restorebeleg erforderlich;
+keine PR36- oder Serveränderung ausgeführt. Details und Zuständigkeiten:
+`docs/contracts/additional-acceptance-scope.md`.
+
+---
+
 # Gemeinsame KI-Governance und Kapazitätsplanung · 26.10.2026
 
 ## Anmelde-/Abmeldezugang und MCP-Antwortintegrität · 27.10.2026
@@ -194,45 +396,38 @@ Keine gestalterische Nutzerabnahme oder Produktiv-/DIN-/ISO-Zertifizierung.
 
 ---
 
-# Live-Vorschau bestätigt · 26.10.2026
+# Historische Vorschau- und Auth-Einrichtung · 26.10.2026
 
-https://nexifyai.de ist als Alias des READY-Previewdeployments
- dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm für409db50durchauthentifizierteAPI+CLIbestätigt.
-VercelAusgabepfadfehlerundAutorblockadesindfürkanonischesProjektbehoben;
-GitHubautorjetztnexifyai-dev,5eigeneCIjobsauchauf409db50grün.
-KeineeigeneMain-/Produktivpromotion,.cloudChatGPTseiteunangetastet.
-ZusätzlicheVercelAppsite(selbesRepo,nurvercel.app)hatteparallelRoot/outputFehler;
-Konfigurationistkonsistentkorrigiert,Read-backvorhanden;keineLöschungoderDomainübernahme.
-ExternCloudflareWorkernamelängeweiterseparatoffen.
+Der damalige Bericht bestätigte nexifyai.de am READY-Previewdeployment
+`dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm`, Commit `409db50`, über authentifizierte
+API und CLI. Vercel-Ausgabepfad und Autorzuordnung wurden damals korrigiert;
+fünf eigene CI-Jobs waren grün. Keine eigene Main-/Produktivpromotion und keine
+Änderung an der bestehenden .cloud-Seite wurden gemeldet.
 
----
+Das zusätzliche Projekt `site` hatte Root-/Outputfehler. Eine Korrektur mit
+Read-back wurde historisch gemeldet, ohne Löschung oder Domainübernahme. Die
+heutige Zuordnung ist separat in `deployment-parent-report.json` festgehalten;
+diese historischen Aussagen belegen keine aktuellen Projekteinstellungen.
 
-# Vercel-Projekt eingerichtet, React-Clerk und ENV abgeglichen · 26.10.2026
+Die damalige CLI-Einrichtung verwendete Version 65.2.0 und das kanonische Projekt.
+Vite, Node 22.x, Repositoryroot, pnpm-Workspacebuild und apps/site/dist wurden
+historisch als korrigierte Werte berichtet. Die aktuelle Projektantwort liefert
+Root-, Build-, Output- und Produktionsbrancheinstellung jedoch nicht. .de blieb
+an den Entwicklungszweig gebunden, .cloud unverändert. Keine Gateumgehung oder
+Umschreibung früherer Git-Autoren wurde vorgenommen.
 
-CLI65.2.0OAuthalsnex2fly-nexifyai-nexifyerfolgreich,Projektprj_Po7jlB7srMP6sxyMvf5zIwzXzNyh
-gezieltverknüpft. AuthentifizierterRead-backzeigtefalschPython/Node24; aufVite,
-Node22.x,Reporoot,pnpm12workspacebuild,Outputapps/site/distkorrigiertundzurückgelesen.
-Nexifyai.deistverifiziertundandenvorhandenenEntwicklungszweiggebunden; .cloud
-bleibtunangetastet. HauptbranchwurdevomNutzeraußerhalbdieserSitzungviaPR34auf
-ccbe092gemergt;keineeigeneMainpromotion/Jeffgateerfunden.
+Die React-Clerk-UI 6.18.1 wurde mit lazy SDK, explizitem Flag, validiertem Public
+Key und festem Redirect vorbereitet. Datei-/Standalonevorschau bleibt ohne Auth;
+keine automatische Admin-/Tenantfreigabe. Das öffentliche Aktivierungsflag blieb
+false. DNS-/Issuerprüfung und reale Providerabnahme waren nicht abgeschlossen.
+Vorhandene Servercredentials wurden erhalten; Secretwerte wurden nicht gelesen.
 
-Zukunftscommitsnutzennutzerbestätigtemail@nexifyai.cloud;GitHubordneteCommitd1539de
-nexifyai-devzu,vorherigeCommitsschonendunverändertNeXify-Automate. KeinTeamgatebypass.
-EigenefünfRemoteCIjobsnach339af39grün. ZusätzlicheCloudflareWorkersIntegration
-scheitertunverändertanNamelänge,keineheimlicheProvideränderung.
-
-EchteReact-ClerkUI6.18.1jetztwiederhergestellt;lazySDK,explizitesVITEFlag+validPK,
-Datei/Standaloneimmeraus,fixerRedirect/,keineAdmin-/Tenantautofreigabe.
-VITE_CLERK_PUBLISHABLE_KEYundVITE_CLERK_ENABLEDfalsefüralle3Umgebungenhinzugefügt
-undbeideWerteperAPIbooleschverglichen. ClerkDomainnochNXDOMAINdeshalbnichtaktiviert.
-VorhandeneClerkserverSecrets/Auth0/DB/Providerwerteunverändert,keineSecretwertegelesen.
-42ENV-Vertragsnamen/24RemoteNamen/38Metadatensätzegeordnet,nichtalleDiensteVercel.
-
-16SiteTests,133PythonTests,E2E/Architektur/Clean/Browser35public+47Module+Guide/Offlinegrün.
-GlobalePlugininstallationundMCPregistrierungandenphysischschreibgeschützten
-Client/Homebereichenblockiert;offizielle9StandaloneSkillsprojektbezogeninstalliert
-undlistverifiziert,skills-lock.jsonerhalten. CLIbleibtauthentifiziertnutzbar.
-NochkeineVercelDeployReady/LiveLogin/produktiveVisitorAPI/ChatGPTBackupsyncAbnahme.
+Die damaligen Testzahlen (16 Site-, 133 Pythonfälle sowie lokale Browserprüfungen)
+sind historische Teilbelege. Neun offizielle Skillkopien waren nur im damaligen
+Checkout installiert; saubere Checkouts müssen ihre Verfügbarkeit separat prüfen.
+Globale Plugin-/MCP-Installation war im verwalteten Clientprofil blockiert. Keine
+Produktions-, Live-Login-, Visitor-API- oder Backup-Synchronisationsabnahme daraus
+ableiten. Cloudflare-Namensgrenzen blieben ein separater historischer Blocker.
 
 ---
 
@@ -445,3 +640,36 @@ kein Umgehen der Netzrichtlinie und keine bestaetigte Suite-API-Verbindung.
 Der Gesamtauftrag bleibt aktiv. Ein gespeicherter Auftrag garantiert keinen
 unbegrenzten Hintergrundlauf; bei Wiederaufnahme zuerst die aktuellen
 `FACTORY-AUFTRAG.json` und `FACTORY-UMSETZUNGSSTAND.md` lesen und fortsetzen.
+
+## 2026-10-27 — isolierter lokaler Steuerungspfad
+
+Auf Basis b44e448 entstand `integration/local-control-2026-10-27`: unveränderliche
+Auftragsrevisionen, getrennte Start-/Abschlussabhängigkeiten, drei fest registrierte
+lokale Prüffähigkeiten, persistente Ergebnisse/Checkpoints, SQLite-Lease/Fencing,
+begrenzte Wiederaufnahme und explizite lokale Abnahme. Vorhandene RemediationQueue
+ist der einzige Fehlerkanal. Details, Semantik-Diff, Ein-Web-App-Matrix und Rollback:
+`docs/automation/local-control.md`. Tests/Review: `evidence/local-control-2026-10-27`.
+PR35 und PR36 bleiben getrennte Stände; keine Remote-/Providerintegration oder
+Produktionsabnahme, kein Daemon und kein zusätzliches Frontend aktiviert.
+
+### Lesender Deployment-Nachtrag
+Parent-abgeschlossener Abgleich ergänzt: .de66866298, Standardproduktion07833fb3,
+fünf Geschwistera19cd503 mit dreiREADY/zweiERROR(missing dist). Vite/Node22 und
+Deploymentprozess belegt; konfigurierte Root/Build/Output/productionBranch fehlen.
+Details und unbekannte Felder im versionierten Deployment-Parentbericht. Nur
+Dokument-/Evidenzdelta; getesteter Anwendungscode und externe Zustände unverändert.
+
+### Geschlossener lokaler Kreis
+Controllerstatus ergänzt konkrete Followups und persistierte Closed-Loop-Receipts.
+Verwaiste/blockierte/übergebene Jobs schließen nicht; Parent-Join bleibt geprüft.
+Externe Abnahme-/Brain-/Restorekreise bleiben offen mit zuständiger Rolle,
+unbekannter Executorzuweisung, nächstem erlaubten Schritt und Voraussetzungen.
+
+### Begrenzter Abdeckungsabgleich
+Frische lesende GitHubprüfung: PR35 a19cd503 mit zwei, PR36 66866298 mit16
+weiterhin offenen Reviewthreads. Einzelzuordnung und Quellenhashes stehen in
+config/acceptance-coverage.json, lesbar in docs/contracts/acceptance-coverage.md.
+Vier zusätzliche Dokument-/Voraussetzungsfehler lokal korrigiert; keine
+Remote-Threadauflösung. Von18 Masterfällen sind1 lokal begrenzt geprüft,
+5 mit lokalen Prüf-/Scope-Lücken und12 extern blockiert. Kein Gesamtfall ist
+als produktiv abgenommen markiert. Bestehende Queue und Freigabegates unverändert.

@@ -1,0 +1,24 @@
+{
+  "basis": "b08a7fc5ac1a16af379b49077d9cb750a0a25a21",
+  "scope": "local functional shop slice; genuine browser/API/SQLite with isolated synthetic catalog; no real orders/payments/provider acceptance",
+  "gates": {
+    "check": "passed",
+    "test": "373 Python passed",
+    "e2e": "373 Python passed",
+    "architecture": "passed",
+    "clean": "passed",
+    "Node": "31 passed",
+    "TypeScript": "passed",
+    "Vite build": "passed; chunk-size warning retained",
+    "auth_browser": "7 synthetic provider cases passed",
+    "shell_integration": "8 cases passed",
+    "critical_browser": "8 checks passed",
+    "shop_browser": "9 actual local HTTP/SQLite cases passed"
+  },
+  "review": "Separate Sol review fixed SHOP-UI-001; final commit binding pending",
+  "current_design_reference": "main2a552ed / production alias selected by user14:39Z; source comparison recorded",
+  "production_catalog_connected": false,
+  "order_submission_enabled": false,
+  "payment_started": false,
+  "astra_used": false
+}

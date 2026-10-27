@@ -159,5 +159,15 @@
     "existing_asset_ids": [],
     "generation_jobs_executed": 0,
     "note": "Runway als Quelle und Erstellung fehlender Clips; erst reale Assets abgleichen, danach fehlende erstellen. Keine Modell-/Aktionsnamen geraten."
+  },
+  "source_reconciliation": {
+    "status": "blocked_pending_original_source_reconciliation",
+    "confirmed_rejection_source": "https://chatgpt.com/c/6ade6c38-6ad0-83ed-b578-91d19eaafbc0?messageId=6947b47e-f5d5-4a8f-b276-b6684de6fe1b",
+    "confirmed_rejection_date": "2026-10-25",
+    "claimed_newer_mapping_date": "2026-10-26",
+    "claimed_newer_original_locator": null,
+    "historical_ids_are_approved": false,
+    "generation_allowed": false,
+    "note": "Parent-read original rejects prior voices; repository claims a later mapping without an original locator. Preserve references for provenance; neither reuse nor supersession is verified."
   }
 }

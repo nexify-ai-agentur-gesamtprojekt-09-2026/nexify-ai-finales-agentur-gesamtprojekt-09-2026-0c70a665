@@ -1,0 +1,40 @@
+{
+  "base_commit": "245e96e9f468474e41fe4a3a1dc2b5785c2fc3e4",
+  "observed_at": "2026-10-27T06:41:02.231559+00:00",
+  "scope": "local suite-start correction only; no paid model or external provider execution",
+  "source_sha256": {
+    "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
+    "config/selfservice-policy.json": "355ccc200852e6e14087aa55a5dc10ed94e42f1a3222d9818086db393bcbf2ab",
+    "tests/test_selfservice_domain.py": "25470e0621ac30875606e331c58495172d386cac801537d69128f58460b19509",
+    "tests/test_selfservice_decisions.py": "6a04b03f262198fdb06c2be3e0792edb2f60652947c3d39613f1f3dd1c3a0369",
+    "tests/test_suite_trial.py": "c0206e8c0b245945c7e494496e5587183d5c537844b4b874ad87917b8c8fdd58",
+    "config/integration-workflow.json": "4fd574013b73a755fa056959c54e103ca6a0230349fbc7b31948d9fa121b2fb3",
+    "config/acceptance-coverage.json": "78eb2e62892a2d5e1b429399eb292cf6cb1eafe224533d28a2aa4784eaf067c3",
+    "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
+    "docs/contracts/acceptance-decisions.md": "c0a3ab4f7b27dd581b3c4eb62999b71aa47460317ed7f8bba324bd39beaafa15",
+    "docs/contracts/acceptance-coverage.md": "02b1929e07342e513f893c1ce576c06af976de0e7d1db24a2ee6b84603546c2c",
+    ".harness/arch-rules.json": "5893f720d58c582c5956640fc68c986dd09ff6969e9a150709d944ab42b2484b"
+  },
+  "evidence_sha256": {
+    "suite-trial-arch.txt": "dbd2adb777136d1e78141d23b936d4f7e6000a769aecddc8def2cfb02e345485",
+    "suite-trial-check.txt": "043550d6f2efb7ff93c6b13659ea3d7e039c17f62639fbe6a727726684f4b31c",
+    "suite-trial-clean.txt": "c780352ac8f2ac91a8b9ea654618b96f22f15c77a3eea67d96be749dab3d7328",
+    "suite-trial-e2e.txt": "acce2ca0274cb1d338c05e961529d10dbb539674f1fd2e3e2a6e0cdbd8626d80",
+    "suite-trial-focused.txt": "227b4f2ec948ba334be1639a52fd0ce9325d4ecd56a68c4c8acfe3410ca1d87d",
+    "suite-trial-independent-review.md": "d13cc558a151dee6f5fb43b5d7926a284d3679dd1850cfd3955be2960cba81fd",
+    "suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
+    "suite-trial-selfservice.txt": "4fb5d3c279344a22b05b00e5bd31a1fa35e3ef8435a9e49b01792dd051b1b0b5",
+    "suite-trial-tests.txt": "2ef88ac2efad581f07cf5e52572fb73d304b6912ba74ed68ae45ed8d2a502c1e"
+  },
+  "tests": {
+    "python_total": 337,
+    "focused_suite_trial": 7,
+    "existing_selfservice_and_restore": 18,
+    "independent_targeted_total": 25
+  },
+  "local_rule_id": "MASTER-12-TRIAL-01",
+  "local_rule_status": "local_fixed_verified",
+  "master12_real_adapter_acceptance": false,
+  "production_accepted": false,
+  "schema_migration": false
+}

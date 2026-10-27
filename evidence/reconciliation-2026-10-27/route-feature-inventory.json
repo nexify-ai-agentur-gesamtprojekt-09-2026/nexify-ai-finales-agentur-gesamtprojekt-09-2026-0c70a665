@@ -1,0 +1,966 @@
+{
+  "method": "local source inventory, not browser/runtime/provider acceptance",
+  "site_map": "config/site-map.json",
+  "public_allowlist_count": 36,
+  "configured_page_count": 46,
+  "pages": [
+    {
+      "id": "home",
+      "path": "/",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "services",
+      "path": "/leistungen",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "websites",
+      "path": "/leistungen/websites",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "scope",
+      "path": "/leistungsumfang",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "solutions",
+      "path": "/loesungen",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "pricing",
+      "path": "/preise-ablauf",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "knowledge",
+      "path": "/wissen",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "company",
+      "path": "/unternehmen",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "contact",
+      "path": "/kontakt",
+      "implementation_status": "planned",
+      "content_kind": "content",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "one",
+      "path": "/produkte/one",
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "api",
+      "path": "/produkte/api",
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "imprint",
+      "path": "/impressum",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "privacy",
+      "path": "/datenschutz",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "terms",
+      "path": "/vertragsgrundlagen",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "ai-notice",
+      "path": "/ki-hinweise",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "accessibility",
+      "path": "/barrierefreiheit",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "cookies",
+      "path": "/cookies",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "login",
+      "path": "/anmelden",
+      "implementation_status": "implemented",
+      "content_kind": "authentication",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "local_clerk_adapter_live_auth_unverified",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "signup",
+      "path": "/registrieren",
+      "implementation_status": "implemented",
+      "content_kind": "authentication",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "local_clerk_adapter_live_auth_unverified",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-home",
+      "path": "/teileklar",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-search",
+      "path": "/teileklar/suche",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-product",
+      "path": "/teileklar/produkt",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "implementation_status": "planned",
+      "content_kind": "legal_notice",
+      "readiness": {
+        "content": "notice_only_legal_text_release_pending",
+        "transactions": "not_enabled",
+        "backend": "not_required_for_content",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      }
+    },
+    {
+      "id": "customer-portal",
+      "path": "/portal/kunde",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "private",
+        "auth_required": true,
+        "roles": [
+          "customer"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "api-console",
+      "path": "/portal/api",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "private",
+        "auth_required": true,
+        "roles": [
+          "customer",
+          "team",
+          "admin"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "affiliate-portal",
+      "path": "/portal/affiliate",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "private",
+        "auth_required": true,
+        "roles": [
+          "affiliate"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "tk-account",
+      "path": "/teileklar/konto",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "private",
+        "auth_required": true,
+        "roles": [
+          "customer"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "tk-partner-portal",
+      "path": "/teileklar/partnerportal",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "private",
+        "auth_required": true,
+        "roles": [
+          "partner"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "tk-neighbourhood",
+      "path": "/teileklar/nachbarschaft",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "private",
+        "auth_required": true,
+        "roles": [
+          "customer"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "internal-workspace",
+      "path": "/intern/workspace",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "internal",
+        "auth_required": true,
+        "roles": [
+          "team",
+          "admin"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "internal-inbox",
+      "path": "/intern/posteingang",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "internal",
+        "auth_required": true,
+        "roles": [
+          "team",
+          "admin"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "internal-control",
+      "path": "/intern/leitstand",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "internal",
+        "auth_required": true,
+        "roles": [
+          "team",
+          "admin"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    },
+    {
+      "id": "internal-admin",
+      "path": "/intern/verwaltung",
+      "implementation_status": "planned",
+      "content_kind": "protected_target",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "access": {
+        "visibility": "internal",
+        "auth_required": true,
+        "roles": [
+          "admin"
+        ],
+        "site_membership_required": true,
+        "tenant_required": true,
+        "mfa_required_for_writes": true
+      }
+    }
+  ],
+  "historical_internal_routes": [
+    "/workspace",
+    "/posteingang",
+    "/myadmin"
+  ],
+  "current_internal_targets": [
+    "/intern/workspace",
+    "/intern/posteingang",
+    "/intern/leitstand",
+    "/intern/verwaltung"
+  ],
+  "historical_route_mapping_decision": "not resolved by source inventory; no aliases or authorization changed",
+  "private_targets_are_live_portals": false
+}

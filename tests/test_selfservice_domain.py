@@ -6,6 +6,9 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import sqlite3
+import threading
+from unittest import mock
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,6 +88,72 @@ class SelfServiceTests(unittest.TestCase):
             action()
         self.assertEqual(raised.exception.code, code)
 
+    def test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding(self):
+        principal, view, intent = self.managed()
+        tenant = view["tenant_id"]
+        row = self.reserve(principal, tenant, "before-config-change")
+        original = dict(self.binding.data)
+        for field in ("merchant_account", "route_contract_ref", "terms_ref"):
+            with self.subTest(field=field):
+                changed = self.reopen(managed_binding=self.boundary.approved_managed_binding(
+                    **{**original, field: "fixture-replaced"}))
+                self.blocked("managed_purchase_binding_changed", lambda: changed.select_managed_funding(principal, tenant))
+                self.blocked("managed_purchase_binding_changed", lambda: changed.reserve(principal, tenant,
+                    request_key="after-change", maximum_micro_eur=1000, model_id=self.model, price_version="fixture-price-v1"))
+                self.blocked("managed_purchase_binding_changed", lambda: changed.claim_execution(principal, tenant,
+                    row["id"], attempt_ref="changed-route"))
+        reopened = self.reopen()
+        self.assertEqual(reopened.claim_execution(principal, tenant, row["id"], attempt_ref="original-route")["state"], "dispatched")
+        # An already dispatched outcome can still reconcile against its persisted reservation.
+        changed.settle(self.usage(row, 100))
+
+    def test_legacy_managed_reservation_without_snapshot_cannot_dispatch_but_can_cancel(self):
+        principal, view, _ = self.managed()
+        tenant = view["tenant_id"]
+        row = self.reserve(principal, tenant, "legacy-binding")
+        with self.core._db() as db:
+            db.execute("ALTER TABLE ss_reservation DROP COLUMN managed_snapshot")
+        self.blocked("reservation_managed_binding_changed", lambda: self.reopen().claim_execution(
+            principal, tenant, row["id"], attempt_ref="legacy"))
+        self.assertEqual(self.core.cancel_reserved(principal, tenant, row["id"])["state"], "cancelled")
+
+    def test_parallel_legacy_starts_serialize_snapshot_schema_migration(self):
+        principal, view, _ = self.managed()
+        row = self.reserve(principal, view["tenant_id"], "legacy-parallel")
+        with self.core._db() as db:
+            db.execute("ALTER TABLE ss_reservation DROP COLUMN managed_snapshot")
+        readers = threading.Barrier(2)
+        start = threading.Barrier(2)
+        real_connect = sqlite3.connect
+
+        class RacingConnection(sqlite3.Connection):
+            def execute(inner, sql, parameters=()):
+                cursor = super().execute(sql, parameters)
+                if sql == "PRAGMA table_info(ss_reservation)" and not inner.in_transaction:
+                    rows = cursor.fetchall()
+                    readers.wait(timeout=5)
+                    return rows
+                return cursor
+
+        def connect(*args, **kwargs):
+            return real_connect(*args, **kwargs, factory=RacingConnection)
+
+        def reopen(_):
+            start.wait(timeout=5)
+            try:
+                self.reopen()
+                return "started"
+            except sqlite3.OperationalError as exc:
+                return str(exc)
+
+        with mock.patch.object(domain.sqlite3, "connect", side_effect=connect):
+            with ThreadPoolExecutor(max_workers=2) as workers:
+                results = list(workers.map(reopen, range(2)))
+        self.assertEqual(results, ["started", "started"])
+        self.blocked("reservation_managed_binding_changed", lambda: self.reopen().claim_execution(
+            principal, view["tenant_id"], row["id"], attempt_ref="legacy-parallel"))
+        self.assertEqual(self.core.cancel_reserved(principal, view["tenant_id"], row["id"])["state"], "cancelled")
+
     def test_verified_registration_deduplicates_and_never_grants_admin_or_free_credit(self):
         principal, one = self.register()
         two = self.core.register(principal)
@@ -102,13 +171,12 @@ class SelfServiceTests(unittest.TestCase):
         principal, view = self.register()
         self.blocked("opaque_vault_reference_required", lambda: self.key(principal, view, reference="sk-not-a-vault-reference"))
 
-    def test_trial_starts_only_after_activation_funding_and_explicit_start_then_never_resets(self):
+    def test_trial_starts_after_activation_and_explicit_start_without_funding_then_never_resets(self):
         principal, view = self.register(); tenant = view["tenant_id"]
         self.blocked("workspace_activation_required", lambda: self.core.start_trial(principal, tenant))
         self.core.activate_workspace(principal, tenant)
-        self.blocked("explicit_validated_funding_required", lambda: self.core.start_trial(principal, tenant))
-        self.core.bind_byok(principal, tenant, self.key(principal, view))
         started = self.core.start_trial(principal, tenant)
+        self.blocked("explicit_validated_funding_required", lambda: self.reserve(principal, tenant, "unfunded", 0))
         self.assertEqual(started["trial_expires_at"] - started["trial_started_at"], 86400)
         self.clock += 86401
         self.core.bind_byok(principal, tenant, self.key(principal, view, "2"))

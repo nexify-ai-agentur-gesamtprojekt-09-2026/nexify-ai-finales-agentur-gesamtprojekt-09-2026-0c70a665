@@ -1,3 +1,5 @@
+Lokale Integrationspräzisierung: [current-main-integration.md](../contracts/current-main-integration.md). Der sichtbare Headerzugang führt zur route-lokalen Konto-/An-/Abmeldung; er behauptet keinen Sitzungsstatus. Kein globaler SDK-Lifecycle oder Header-UserButton wird im integrierten Kandidaten angeboten.
+
 # Sprint-Contract: sichtbarer Anmelde- und Abmeldeweg
 
 Feature: F-008. Die öffentliche React-Site zeigt bei deaktivierter Authentifizierung

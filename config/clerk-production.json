@@ -70,6 +70,7 @@
   },
   "deployment_status": "local_preparation_not_production_release",
   "open_prerequisites": [
+    "verify_production_domain_binding_to_exact_project_before_release",
     "verify_dns_and_clerk_frontend_api",
     "review_and_deploy_portable_react_site_with_separate_production_auth_api_service",
     "provide_production_safe_visitor_gateway_instead_of_loopback_development_proxy",

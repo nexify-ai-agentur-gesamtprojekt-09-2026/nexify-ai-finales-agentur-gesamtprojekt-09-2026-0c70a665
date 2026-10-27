@@ -1,0 +1,43 @@
+{
+  "source_base": "0cf854505a1f938c9d3fc49110c9a127fd3afca6",
+  "tested_routes": 36,
+  "finding": "Interactive brand and cross-module footer links below canonical44px target",
+  "examples": [
+    {
+      "tag": "A",
+      "class": "brand",
+      "label": "NeXify AI Startseite",
+      "w": 129,
+      "h": 33
+    },
+    {
+      "tag": "A",
+      "class": "brand",
+      "label": "Zur Startseite",
+      "w": 342,
+      "h": 33
+    },
+    {
+      "tag": "A",
+      "class": "",
+      "label": "TEILEKLAR →",
+      "w": 76,
+      "h": 19
+    },
+    {
+      "tag": "A",
+      "class": "brand",
+      "label": "TEILEKLAR Startseite",
+      "w": 122,
+      "h": 33
+    },
+    {
+      "tag": "A",
+      "class": "",
+      "label": "NeXify AI →",
+      "w": 66,
+      "h": 19
+    }
+  ],
+  "closed_by": "WorkspaceRebuild.css min-height/min-width var(--target-min); final browser recheck required"
+}

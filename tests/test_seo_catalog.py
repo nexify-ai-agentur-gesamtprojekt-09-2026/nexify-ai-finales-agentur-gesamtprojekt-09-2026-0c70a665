@@ -130,6 +130,65 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(self.db.execute('SELECT COUNT(*) FROM geo_source').fetchone()[0],2)
         self.assertEqual(self.db.execute('SELECT COUNT(*) FROM city_source').fetchone()[0],2)
 
+    def test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts(self):
+        for same_timestamp in (False, True):
+            with self.subTest(same_timestamp=same_timestamp):
+                self.db.execute('DELETE FROM keyword_measurement'); self.db.commit()
+                old = self.root / 'old.csv'
+                old.write_bytes(self.keywords().read_bytes())
+                newer = self.root / 'new.csv'
+                newer.write_bytes(self.keywords({0: dict(monthly_volume='999',
+                    source_observed_at='2026-10-01T00:00:00Z' if same_timestamp else '2026-10-02T00:00:00Z')}).read_bytes())
+                start = threading.Barrier(2)
+                reads = threading.Barrier(2)
+                newest_committed = threading.Event()
+
+                class RacingConnection(sqlite3.Connection):
+                    def execute(inner, sql, parameters=()):
+                        cursor = super().execute(sql, parameters)
+                        if sql.startswith('SELECT * FROM keyword_measurement WHERE id=') and not inner.in_transaction:
+                            row = cursor.fetchone()
+                            reads.wait(timeout=5)
+                            if threading.current_thread().name.endswith('_0'):
+                                if not newest_committed.wait(timeout=5):
+                                    raise AssertionError('newer writer did not commit')
+                            class SavedCursor:
+                                def fetchone(self): return row
+                            return SavedCursor()
+                        return cursor
+
+                def writer(path):
+                    db = sqlite3.connect(self.db_path, timeout=10, factory=RacingConnection)
+                    db.row_factory = sqlite3.Row
+                    try:
+                        start.wait(timeout=5)
+                        seo.import_keywords(db, path, 'tenant-a', 'project')
+                        return 'accepted'
+                    except ValueError:
+                        return 'rejected'
+                    finally:
+                        db.close()
+                        if path == newer: newest_committed.set()
+
+                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+                    first = pool.submit(writer, old)
+                    second = pool.submit(writer, newer)
+                    outcomes = [first.result(), second.result()]
+                if same_timestamp:
+                    self.assertEqual(sorted(outcomes), ['accepted', 'rejected'])
+                else:
+                    row = self.db.execute("SELECT monthly_volume FROM keyword_measurement WHERE keyword_key='synthetic topic 0'").fetchone()
+                    self.assertEqual(row[0], 999)
+
+    def test_invalid_later_keyword_rolls_back_whole_import_and_releases_lock(self):
+        invalid = self.keywords({1: dict(monthly_volume='invalid')})
+        with self.assertRaises(ValueError):
+            seo.import_keywords(self.db, invalid, 'tenant-a', 'project')
+        self.assertEqual(self.db.execute('SELECT COUNT(*) FROM keyword_measurement').fetchone()[0], 0)
+        self.assertFalse(self.db.in_transaction)
+        seo.import_keywords(self.db, self.keywords(), 'tenant-a', 'project')
+        self.assertEqual(self.db.execute('SELECT COUNT(*) FROM keyword_measurement').fetchone()[0], 10)
+
     def test_keyword_scope_replay_restart_and_credentials_redacted(self):
         p=self.keywords()
         for tenant in ['tenant-a','tenant-b']:

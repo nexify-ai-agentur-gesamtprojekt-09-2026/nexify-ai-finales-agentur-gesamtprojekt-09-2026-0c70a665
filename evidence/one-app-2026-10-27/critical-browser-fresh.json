@@ -1,0 +1,214 @@
+{
+  "recorded_at": "2026-10-27T14:18:50.463Z",
+  "checks": [
+    "account_control_fallback_and_auth_routes_present",
+    "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
+    "native_product_menu_and_direct_legal_footer_links",
+    "uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes",
+    "keyboard_skip_link_preserves_standalone_product_hash_route"
+  ],
+  "public_routes": [
+    "/",
+    "/leistungen",
+    "/leistungen/websites",
+    "/leistungen/agenten-automatisierung",
+    "/leistungen/apps-portale",
+    "/leistungsumfang",
+    "/loesungen",
+    "/preise-ablauf",
+    "/wissen",
+    "/wissen/projekt-vorbereiten",
+    "/unternehmen",
+    "/kontakt",
+    "/produkte/nex2fly",
+    "/produkte/one",
+    "/produkte/api",
+    "/impressum",
+    "/datenschutz",
+    "/vertragsgrundlagen",
+    "/ki-hinweise",
+    "/barrierefreiheit",
+    "/cookies",
+    "/anmelden",
+    "/registrieren",
+    "/teileklar",
+    "/teileklar/suche",
+    "/teileklar/kategorien",
+    "/teileklar/kategorie",
+    "/teileklar/produkt",
+    "/teileklar/warenkorb",
+    "/teileklar/kasse",
+    "/teileklar/fahrzeug-und-passung",
+    "/teileklar/termine",
+    "/teileklar/gutscheine",
+    "/teileklar/partner-werden",
+    "/teileklar/werkstatt",
+    "/teileklar/rechtliches"
+  ],
+  "passed": true,
+  "scope": "Fresh local critical subset only; actual browser and deterministic Web handler SSE with simulated session404; no provider, production or full accessibility acceptance. Public route list is inventory, not an assertion every route was revisited here.",
+  "source_sha256": {
+    "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
+    "apps/site/src/main.tsx": "0fd3f63bae18c176e1163579ca1d4e23e7f8153bb3b18e4ac0bb8ebcde2f26b0",
+    "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
+    "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
+    "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
+    "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
+  },
+  "auxiliary_source_sha256": {
+    "apps/web/components/ShopPanel.tsx": "c3b5e089e420c892791fceb5c26c81387bc37165662c522dad39534c18cd5334",
+    "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
+    "apps/site/src/main.tsx": "0fd3f63bae18c176e1163579ca1d4e23e7f8153bb3b18e4ac0bb8ebcde2f26b0",
+    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
+    "apps/web/components/HomeRebuild.css": "3020ffd4093dfd26f4b788fddbe3b3bc5ee148c5c1861dad6a78df67c858c386",
+    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
+    "apps/site/tests/browser-critical.mjs": "2b198b2fc507135d4d97b740a194ea1d8e6a9880bb7fb115005599077b3b05eb"
+  },
+  "sdk_source_sha256": {
+    "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
+    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
+    "api/agent-chat.ts": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
+    "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
+    "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
+  },
+  "targeted_supplement_gutter_followup": [
+    {
+      "width": 1920,
+      "path": "/produkte/nex2fly",
+      "gutter": {
+        "left": 80,
+        "right": 80
+      },
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "path": "/teileklar/werkstatt",
+      "gutter": {
+        "left": 80,
+        "right": 80
+      },
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "path": "/impressum",
+      "gutter": {
+        "left": 80,
+        "right": 80
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/produkte/nex2fly",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/teileklar/werkstatt",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/impressum",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    }
+  ],
+  "sdk_browser_observations": {
+    "recorded_at": "2026-10-27T14:18:50.463Z",
+    "checks": [
+      "sdk_guided_preview_works_when_visitor_session_is_404",
+      "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+      "sdk_mobile_real_chat_no_overflow_escape_and_focus_return"
+    ],
+    "passed": true,
+    "scope": "Real AI SDK streaming over isolated loopback bridge to exact api/agent-chat.ts; tools/agent-preview.mjs source-bound but not launched; no external provider"
+  },
+  "presenter_measurements": [
+    {
+      "width": 591.84375,
+      "fit": "contain",
+      "left": 46.078125,
+      "right": 637.921875,
+      "parentLeft": 46.078125,
+      "parentRight": 637.921875,
+      "height": 394.5625,
+      "overflow": false
+    },
+    {
+      "width": 385.015625,
+      "fit": "contain",
+      "left": 497.390625,
+      "right": 882.40625,
+      "parentLeft": 497.390625,
+      "parentRight": 882.40625,
+      "height": 256.671875,
+      "overflow": false
+    },
+    {
+      "width": 452.328125,
+      "fit": "contain",
+      "left": 577.28125,
+      "right": 1029.609375,
+      "parentLeft": 577.28125,
+      "parentRight": 1029.609375,
+      "height": 301.546875,
+      "overflow": false
+    },
+    {
+      "width": 503.859375,
+      "fit": "contain",
+      "left": 640.140625,
+      "right": 1144,
+      "parentLeft": 640.140625,
+      "parentRight": 1144,
+      "height": 335.90625,
+      "overflow": false
+    },
+    {
+      "width": 623.078125,
+      "fit": "contain",
+      "left": 776.921875,
+      "right": 1400,
+      "parentLeft": 776.921875,
+      "parentRight": 1400,
+      "height": 415.375,
+      "overflow": false
+    }
+  ],
+  "observed_handler_requests": [
+    {
+      "path": "/api/agent-chat",
+      "status": 200
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 422
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 422
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 200
+    }
+  ],
+  "external_requests": [],
+  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open",
+  "reproduction": "Node22 apps/site/tests/browser-critical.mjs with existing Playwright module/browser paths; requires fresh standalone build"
+}

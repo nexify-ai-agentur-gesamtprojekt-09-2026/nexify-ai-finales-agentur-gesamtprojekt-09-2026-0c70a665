@@ -122,6 +122,12 @@ Lokale Skillquelle und Manifest sind Source of Truth ihrer Version/Hashbindung.
 Aktuelle Fachpolicies bleiben Source of Truth der Regeln. Der Brainstaging-
 Datensatz ist nicht Source of Truth einer schon erfolgten Remoteindexierung.
 
+Maschinenprüfbare Konkretisierung dieses bestehenden Vertrags:
+`docs/contracts/integration-workflow.md`, `config/integration-workflow.json`
+und `tools/verify_workflow_record.py`. Aufgaben führen zusätzlich Tenant/Projekt,
+Abhängigkeiten, Zeit, Quellenhash, getrennte Lieferstufen, Evidenz und Rollback.
+Die Behebungsqueue bleibt bestehen; dieser Record aktiviert keinen Worker.
+
 ## 9. Trigger & Preconditions
 
 Trigger: neuer autorisierter Auftrag, Wiederaufnahme, neue Quelle, erkannter

@@ -187,6 +187,8 @@ def import_keywords(db, path, tenant, project):
         raise ValueError('Missing required keyword CSV columns')
     imported = 0
     with db:
+        # Lock before the first freshness read; validation and the full import commit together.
+        db.execute('BEGIN IMMEDIATE')
         for row in reader:
             keyword = row['keyword'].strip()
             if not keyword:

@@ -1,0 +1,1 @@
+PASS built standalone renders file/hash routes, DE/NL/FR and disabled auth with no external requests

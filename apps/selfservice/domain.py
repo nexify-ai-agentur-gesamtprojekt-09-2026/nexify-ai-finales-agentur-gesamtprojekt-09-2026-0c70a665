@@ -158,10 +158,16 @@ class SelfService:
               CREATE TABLE IF NOT EXISTS ss_key_version(key_id TEXT,version INTEGER,binding_snapshot TEXT NOT NULL,
                 PRIMARY KEY(key_id,version));
             """)
+            # executescript commits implicitly; reserve the writer before schema reads.
+            # Concurrent legacy starts must not both decide to add the same column.
+            db.execute("BEGIN IMMEDIATE")
             columns = {row["name"] for row in db.execute("PRAGMA table_info(ss_reservation)")}
             if "credential_snapshot" not in columns:
                 # Pre-snapshot reservations remain NULL and cannot be dispatched.
                 db.execute("ALTER TABLE ss_reservation ADD COLUMN credential_snapshot TEXT")
+            if "managed_snapshot" not in columns:
+                # Never infer historical execution consent from today's route configuration.
+                db.execute("ALTER TABLE ss_reservation ADD COLUMN managed_snapshot TEXT")
             key_columns = {row["name"] for row in db.execute("PRAGMA table_info(ss_key)")}
             if "binding_version" not in key_columns:
                 db.execute("ALTER TABLE ss_key ADD COLUMN binding_version INTEGER NOT NULL DEFAULT 1")
@@ -337,8 +343,7 @@ class SelfService:
         with self._db() as db:
             db.execute("BEGIN IMMEDIATE")
             account, workspace = self._owned(db, principal, tenant)
-            if db.execute("SELECT 1 FROM ss_topup WHERE account=? AND status='settled'", (account["id"],)).fetchone() is None:
-                raise DomainError("confirmed_trial_purchase_required")
+            self._managed_purchase(db, workspace)
             db.execute("UPDATE ss_workspace SET funding_mode='managed_trial_credit' WHERE id=?", (workspace["id"],))
             return self._view(db, account, db.execute("SELECT * FROM ss_workspace WHERE id=?", (workspace["id"],)).fetchone())
 
@@ -346,16 +351,28 @@ class SelfService:
         with self._db() as db:
             db.execute("BEGIN IMMEDIATE")
             account, workspace = self._owned(db, principal, tenant)
+            if workspace["activated_at"] is None:
+                raise DomainError("workspace_activation_required")
             if account["trial_started"] is not None:
                 return self._view(db, account, workspace)
             if account["paid_plan"] is not None:
                 raise DomainError("trial_not_applicable_to_paid_account")
-            if workspace["activated_at"] is None:
-                raise DomainError("workspace_activation_required")
-            self._funding(db, workspace)
+            # Suite entitlement is independent of funding. reserve/claim_execution
+            # still validate funding before any model reservation or execution.
             now = _integer(self.now())
             db.execute("UPDATE ss_account SET trial_started=?,trial_expires=? WHERE id=?", (now, now + self.duration, account["id"]))
             return self._view(db, db.execute("SELECT * FROM ss_account WHERE id=?", (account["id"],)).fetchone(), workspace)
+
+    def _managed_purchase(self, db, workspace):
+        purchase = db.execute("SELECT * FROM ss_topup WHERE tenant=? AND status='settled'",
+                              (workspace["tenant"],)).fetchone()
+        if purchase is None:
+            raise DomainError("confirmed_trial_purchase_required")
+        if self.managed is None or (purchase["merchant_account"], purchase["route_ref"], purchase["terms_ref"]) != (
+                self.managed["merchant_account"], self.managed["route_contract_ref"], self.managed["terms_ref"]):
+            raise DomainError("managed_purchase_binding_changed")
+        return json.dumps({field: purchase[field] for field in
+                           ("id", "account", "tenant", "merchant_account", "route_ref", "terms_ref")}, sort_keys=True)
 
     def _funding(self, db, workspace, model_id=None):
         if workspace["funding_mode"] == "byok":
@@ -364,6 +381,7 @@ class SelfService:
                 raise DomainError("validated_byok_unavailable_no_platform_fallback")
             return key
         if workspace["funding_mode"] == "managed_trial_credit" and self.managed is not None:
+            self._managed_purchase(db, workspace)
             if model_id is not None and model_id not in self.managed["allowed_models"]:
                 raise DomainError("managed_model_not_approved")
             return None
@@ -397,8 +415,9 @@ class SelfService:
                 if changed != 1:
                     raise DomainError("insufficient_funded_balance")
             identifier = _id()
-            db.execute("INSERT INTO ss_reservation(id,account,tenant,request_key,payload_hash,mode,key_id,price_version,model_id,maximum,credential_snapshot,state) VALUES(?,?,?,?,?,?,?,?,?,?,?,'reserved')",
-                       (identifier, account["id"], tenant, request_key, binding, mode, key["id"] if key else None, price_version, model_id, maximum, self._credential_snapshot(key)))
+            db.execute("INSERT INTO ss_reservation(id,account,tenant,request_key,payload_hash,mode,key_id,price_version,model_id,maximum,credential_snapshot,managed_snapshot,state) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,'reserved')",
+                       (identifier, account["id"], tenant, request_key, binding, mode, key["id"] if key else None, price_version, model_id, maximum, self._credential_snapshot(key),
+                        self._managed_purchase(db, workspace) if mode == "managed_trial_credit" else None))
             return dict(db.execute("SELECT * FROM ss_reservation WHERE id=?", (identifier,)).fetchone())
 
     def claim_execution(self, principal, tenant, reservation_id, *, attempt_ref):
@@ -414,6 +433,8 @@ class SelfService:
             current_key = self._funding(db, workspace, row["model_id"])
             if row["mode"] == "managed_trial_credit" and row["price_version"] not in self.price_versions:
                 raise DomainError("approved_price_version_required")
+            if row["mode"] == "managed_trial_credit" and row["managed_snapshot"] != self._managed_purchase(db, workspace):
+                raise DomainError("reservation_managed_binding_changed")
             # Existing BYOK reservation must never switch credentials underneath it.
             if row["mode"] != workspace["funding_mode"] or row["mode"] == "byok" and row["key_id"] != workspace["current_key"]:
                 raise DomainError("reservation_funding_changed")

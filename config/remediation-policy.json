@@ -22,7 +22,8 @@
     "context_reader_regression",
     "brain_ingestion_regression",
     "seo_atomicity_regression",
-    "browser_evidence_binding"
+    "browser_evidence_binding",
+    "local_control_prerequisites"
   ],
   "boundaries": {
     "local_operator_registry_not_authenticated_customer_api": true,

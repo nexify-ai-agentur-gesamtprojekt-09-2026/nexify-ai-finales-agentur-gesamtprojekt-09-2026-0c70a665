@@ -1,0 +1,31 @@
+======================================================================
+FAIL: test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts (test_seo_catalog.CatalogTests.test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts) (same_timestamp=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_seo_catalog.py", line 181, in test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts
+    self.assertEqual(row[0], 999)
+AssertionError: 0 != 999
+
+======================================================================
+FAIL: test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts (test_seo_catalog.CatalogTests.test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts) (same_timestamp=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_seo_catalog.py", line 178, in test_concurrent_keyword_imports_preserve_newest_observation_and_reject_conflicts
+    self.assertEqual(sorted(outcomes), ['accepted', 'rejected'])
+AssertionError: Lists differ: ['accepted', 'accepted'] != ['accepted', 'rejected']
+
+First differing element 1:
+'accepted'
+'rejected'
+
+- ['accepted', 'accepted']
+?               ^ ---
+
++ ['accepted', 'rejected']
+?               ^^^^
+
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.021s
+
+FAILED (failures=2)
