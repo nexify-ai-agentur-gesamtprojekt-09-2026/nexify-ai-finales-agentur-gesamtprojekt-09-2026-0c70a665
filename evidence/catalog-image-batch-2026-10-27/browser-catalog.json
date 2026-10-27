@@ -72,9 +72,10 @@
   "source_sha256": {
     "apps/agent-gateway/catalog.py": "22d3f7faac91e471a137d8c2427ec0fbc8e9749f8400b4b150c57633259c7cfa",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
-    "apps/web/components/ShopPanel.tsx": "577710a7b395bc63dec079a83a03495964145430ca5a084af75c2337bcf0e3b1",
+    "apps/web/components/PublicExperience.tsx": "5d2d921be94b2a9d7a1e7f85b66535f02c48e02746fc7b5f718a222f2abf9867",
+    "apps/web/components/ShopPanel.tsx": "4aedf98d00a3f77728ab5f2739315147054066fe859a9d221d7a550be4e17aed",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
-    "apps/site/tests/browser-catalog.mjs": "899714d18b1d67464932d719bc1af62146dfbfd15b0ff918398228bcbfab90e7",
+    "apps/site/tests/browser-catalog.mjs": "ae3f49fe9dcb47b0c4fb9079565310428ab1405eaf65b66e687fa94a4858d287",
     "apps/site/tests/fixtures/catalog-server.py": "0fac0208276111c8bef7191707b8cee16ac67cc9f8cda99058bad40d824eb3c3"
   },
   "mode": "read_only",

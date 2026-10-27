@@ -33,6 +33,7 @@ SDK_SOURCE_PATHS = (
     "tools/agent-preview.mjs",
 )
 AUXILIARY_SOURCE_PATHS = (
+    "apps/web/components/PublicExperience.tsx",
     "apps/web/components/ShopPanel.tsx",
     "apps/web/components/ShopPanel.css",
     "apps/site/src/main.tsx",
@@ -173,6 +174,7 @@ def check_evidence(root):
 SHOP_EVIDENCE_PATH = "evidence/shop-http-2026-10-27/browser-shop.json"
 SHOP_SOURCE_PATHS = (
     "apps/agent-gateway/cart.py", "apps/agent-gateway/server.py",
+    "apps/web/components/PublicExperience.tsx",
     "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
     "apps/web/components/Workspace.tsx", "apps/site/src/main.tsx",
     "apps/site/tests/browser-shop.mjs", "apps/site/tests/fixtures/shop-server.py",
@@ -223,6 +225,7 @@ def check_shop_evidence(root):
 CATALOG_EVIDENCE_PATH = "evidence/catalog-image-batch-2026-10-27/browser-catalog.json"
 CATALOG_SOURCE_PATHS = (
     "apps/agent-gateway/catalog.py", "apps/agent-gateway/server.py",
+    "apps/web/components/PublicExperience.tsx",
     "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
     "apps/site/tests/browser-catalog.mjs", "apps/site/tests/fixtures/catalog-server.py",
 )

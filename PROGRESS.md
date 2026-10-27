@@ -967,3 +967,32 @@ Domain-/Auth-/Team-/Firewall-/Billingänderung, kein Productionpromote.
 Next-Hinweisseiten sind keine fertigen Portale. Es fehlen echte Module sowie
 verifizierter Fach-API-/Issuer-/Membership-/Widerrufsvertrag. Belege und Rückweg:
 evidence/next-build-2026-10-27. Normales Branchpreview separat nachweisen.
+
+
+## Gemeinsame öffentliche Next-/Vite-Komposition · 27.10.2026
+
+Auf Basis682d06f verwenden beide Renderer dieselbe geprüfte öffentliche
+Datenprojektion und PublicExperience-Komposition:36Routen,49Erklärmodule,
+Guide/Videozuordnungen und sechs bestehende Shop-Einstiege. Keine neuen Medien,
+Testartikel oder Backendfähigkeiten als produktiv ausgegeben. ShopPanel ist
+jetzt gegen serverseitige Browserzugriffe abgesichert. Next-Titel bleiben pro
+Seite/Sprache eindeutig; die bestehenden Tokens und Komponenten gelten weiter.
+
+Next-PWA wird nur durch einen ausdrücklich gewählten lokalen Build aktiviert;
+Standardbuild liefert kein Manifest/Worker und registriert nichts. Aktivierter
+Testbuild lieferte dieselbe Network-only-Workerquelle wie Vite, Registrierung
+und leeren Cache. Danach deaktivierten Standard wiederhergestellt. Kein
+Produktionswechsel oder Credentialtransfer.
+
+Lokal bestanden:72Next-Routen-/Sprachfälle DE/NL,10geschützte503-Negative,
+Navigation,0Runtimefehler/0externeRequests/0Mutationen;72Vite-Routen-/Sprachfälle
+mit1724Vor/Zurück-Kanten und0Issues;108Resizefälle;13Warenkorb-/HTTP-/SQLite-
+und4Katalogfälle.53Site- und10Next-Nodetests,Default-Next-,Vite- undStandalone-
+Builds sowie487Pythonprüfungen bestanden. Aktuelle Nachweise ersetzen keine
+reale Provider-,Membership-,Portal-,Medien- oder Produktionsabnahme.
+
+Unabhängiges Sol-Vorreview ohne offenes Finding; finale Commitbindung und
+REA-Analyse der neuen Quellen werden nach Quellsicherung separat geliefert.
+Der bestehende REA-Prüfer wurde isoliert integritätsgeprüft geladen,ohne
+persistente MCP-Registrierung; dieser Bootstrap ist keine Zertifizierung.
+Vertrag und Rückweg:docs/contracts/next-public-parity.md.

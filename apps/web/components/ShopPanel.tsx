@@ -23,7 +23,7 @@ export default function ShopPanel({pageId}:{pageId:string}){
  const[query,setQuery]=useState(""),[category,setCategory]=useState(""),[loaded,setLoaded]=useState(false),[unconfigured,setUnconfigured]=useState(false),[error,setError]=useState(false),[busy,setBusy]=useState(false);
  const active=useRef(false),keys=useRef(new Map<string,string>());
  const readOnly=catalog?.mode==='read_only';
- const standalone=location.protocol==='file:'||(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
+ const standalone=typeof window!=="undefined"&&(window.location.protocol==='file:'||(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true);
  useEffect(()=>{
   if(standalone){setLoaded(true);return;}
   const controller=new AbortController();setUnconfigured(false);

@@ -51,10 +51,12 @@ class BrowserEvidenceTests(unittest.TestCase):
             checker.check_evidence(self.root)
 
     def test_stylesheet_drift_cannot_reuse_an_old_browser_pass(self):
-        path = self.root / "apps/web/components/WorkspaceRebuild.css"
-        path.write_bytes(path.read_bytes() + b"\n/* changed layout */\n")
-        with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
-            checker.check_evidence(self.root)
+        for relative in ("apps/web/components/WorkspaceRebuild.css", "apps/web/components/PublicExperience.tsx"):
+            path = self.root / relative
+            original = path.read_bytes(); path.write_bytes(original + b"\n/* changed public composition */\n")
+            with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
+                checker.check_evidence(self.root)
+            path.write_bytes(original)
 
     def test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed(self):
         source = self.root / checker.SDK_SOURCE_PATHS[0]
@@ -115,7 +117,7 @@ class ShopEvidenceTests(unittest.TestCase):
         self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
 
     def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
-        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py'):
+        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx'):
             path = self.root / relative
             original = path.read_bytes(); path.write_bytes(original + b'\n# changed')
             with self.assertRaisesRegex(checker.EvidenceError, 'stale_shop_source_sha256'):
@@ -152,10 +154,11 @@ class CatalogBrowserEvidenceTests(unittest.TestCase):
 
     def test_source_drift_and_effect_promotion_rejected(self):
         self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
-        path = self.root / checker.CATALOG_SOURCE_PATHS[0]
-        before = path.read_bytes(); path.write_bytes(before+b'\n# changed adapter')
-        with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
-        path.write_bytes(before)
+        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx'):
+            path = self.root / relative
+            before = path.read_bytes(); path.write_bytes(before+b'\n/* changed source */')
+            with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
+            path.write_bytes(before)
         evidence_path = self.root / checker.CATALOG_EVIDENCE_PATH
         report = json.loads(evidence_path.read_text()); report['order_started'] = True
         evidence_path.write_text(json.dumps(report))
