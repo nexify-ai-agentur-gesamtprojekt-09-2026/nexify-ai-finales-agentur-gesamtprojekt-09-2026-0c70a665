@@ -1,0 +1,59 @@
+{
+  "observed_at": null,
+  "project": {
+    "id": "prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5",
+    "name": "web",
+    "accountId": "team_XykLTH9F74Q5zOppOg3GqIPR",
+    "framework": "nextjs",
+    "nodeVersion": "24.x",
+    "rootDirectory": "apps/web",
+    "buildCommand": null,
+    "installCommand": null,
+    "outputDirectory": null,
+    "sourceFilesOutsideRootDirectory": true,
+    "updatedAt": 1793131038516,
+    "link": {
+      "type": "github",
+      "repo": "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "repoId": 1397719293,
+      "org": "nexifyai-dev",
+      "productionBranch": "main"
+    }
+  },
+  "failed_snapshot": {
+    "id": "dpl_2e7wTKNXWPRhBEKUrC6YZrsQhEHf",
+    "projectId": "prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5",
+    "readyState": "ERROR",
+    "target": "production",
+    "gitSource": {
+      "prId": null,
+      "ref": "main",
+      "repoId": 1397719293,
+      "sha": "38f6c6549101ba830055817fdd70ccd0e493e3b4",
+      "type": "github"
+    },
+    "projectSettings": {
+      "framework": "vite",
+      "nodeVersion": "24.x",
+      "buildCommand": "pnpm --filter @nexify/site build",
+      "installCommand": "pnpm install --frozen-lockfile --ignore-scripts",
+      "outputDirectory": "apps/site/dist"
+    },
+    "alias": [
+      "web-pascals-projects-2864de33.vercel.app",
+      "web-git-main-pascals-projects-2864de33.vercel.app"
+    ],
+    "errorCode": "STATIC_BUILD_NO_OUT_DIR",
+    "errorMessage": "No Output Directory named \"dist\" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory."
+  },
+  "proposed_project_change": {
+    "nodeVersion": "22.x"
+  },
+  "rollback_project_change": {
+    "nodeVersion": "24.x"
+  },
+  "effect": "Project build settings apply to subsequent deployments;no deployment/promote/domain action included",
+  "reference": "https://vercel.com/docs/builds/configure-a-build",
+  "credentials_copied": false,
+  "saved_at": "2026-10-27T20:45:19.625231+00:00"
+}

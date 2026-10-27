@@ -4,7 +4,9 @@ const config: NextConfig = {
   poweredByHeader: false,
   images: { unoptimized: true },
   async rewrites() {
-    return [{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }];
+    return process.env.NODE_ENV === "development"
+      ? [{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }]
+      : [];
   },
   async headers() {
     return [{ source: "/:path*", headers: [

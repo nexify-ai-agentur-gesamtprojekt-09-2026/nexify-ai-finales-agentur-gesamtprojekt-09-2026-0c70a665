@@ -943,3 +943,27 @@ verifiziert, N0-N5 als Ergänzung gelesen, Master1.3 unverändert.
 Kleinster sicherer nächster Verbindungsschritt: vorhandene native typisierte
 Identity-/Healthreads nutzen; für Appintegration erst realen Handler/Commit,
 Schema und Issuer/Actor→Tenant/Rolle/Widerrufsquelle binden. Keine SSH-Rootbrücke.
+
+
+### Bestehendes Next-Projekt: konkreter Buildfix
+
+web prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5 vollständig gelesen: Repo1397719293,
+Rootapps/web, Frameworknextjs, Build/Install/Outputnull. Global nurNode24→22
+geändert und rückgelesen; Rückweg24 gespeichert, Deploymentliste unverändert.
+Fehlgeschlagener Main38-Build hatte abweichend Vite/@site/Outputapps/site/dist
+übernommen. Neue apps/web/vercel.json bindet Next/@web/.next und sicheren
+frozen-ignore-scripts-Install. Andere Projektroots sind nicht apps/web.
+Next-Entwicklungsproxy bleibt auf development beschränkt; Produktion erhält
+keinen ungültigen localhost3003-Proxy. Keine neue Fach-API dadurch behauptet.
+
+Erster Turbopacklauf scheiterte an externen vorinstallierten node_modules-
+Symlinks. Identische vorhandene Dependencies lokal physisch in diesen Checkout
+kopiert, ohne Installation/Download oder breiteren Turbopackroot. Defaultbuild,
+Webpack und Typecheck danach grün.8Auth/Deploymenttests und13echte lokale
+NextHTTP-Prüfungen bestanden, darunter10geschützteRouten503 ohne Authkonfiguration.
+Separate Sol-Prüfung ohne konkretes Finding; fehlgeschlagener Erstlog erhalten.
+Clerkübernahme bleibt unfreigegeben und wurde nicht gelesen/kopiert. Keine
+Domain-/Auth-/Team-/Firewall-/Billingänderung, kein Productionpromote.
+Next-Hinweisseiten sind keine fertigen Portale. Es fehlen echte Module sowie
+verifizierter Fach-API-/Issuer-/Membership-/Widerrufsvertrag. Belege und Rückweg:
+evidence/next-build-2026-10-27. Normales Branchpreview separat nachweisen.

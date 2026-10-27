@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "8dfb77da075715aa0d5226da73893ee6da1dc76df65b4be641df15007f0bfe46",
+    "PROGRESS.md": "a846c95994c19f787d9f4fb20e861c051a08bfe8aa83c630a78c5397f9259d05",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "a9901f871651e90580ca41273c04c83f23c9dc056cdbd8d1c20f531a99af6efd",
+    "docs/contracts/requirements-reconciliation.md": "320483dff06247220a7ef1cfb15e8a94686c654582c1e2bcf37260d9759cc2bd",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1420,7 +1420,14 @@
     "evidence/gateway-binding-2026-10-27/route-heads.json": "aed560214cc71316b2f880e435756d0f1ee667399920bf614c73768303d16255",
     "evidence/sidecar-race-2026-10-27/report.json": "80e56c6cf65634ce4be7ed3af8517b7be9ce08e75da71a17d3998031e817ede8",
     "evidence/gateway-binding-2026-10-27/findings.json": "681b89e7e9dc0a2e8f0cb9eeaecb0a61f2b756d567ba6f2dd1b7e0a8c8f8aa40",
-    "tests/test_remediation_queue.py": "935bd91f442af2a4e801e825d56ddd745f4a33bd1739d0ec934f89ecd0f1ad11"
+    "tests/test_remediation_queue.py": "935bd91f442af2a4e801e825d56ddd745f4a33bd1739d0ec934f89ecd0f1ad11",
+    "apps/web/vercel.json": "18c06a47cf1b05a145f11dda2a78a8113710e1eb3dab297ff28bcf218e30aaef",
+    "evidence/next-build-2026-10-27/settings-before.json": "e22c3795a0e4aa92666bab947d5ee5f80411d3dfca9e68775234371d4fa48005",
+    "evidence/next-build-2026-10-27/runtime-smoke.json": "d3df7dce8de1890fd50b6b589f950058d57fa3467b05e37a0ecdc992028b48ea",
+    "evidence/next-build-2026-10-27/verification.json": "7e3886b99c00466f692c7b1c3443c2079d9b6f310305a8af95b6c142ad28801b",
+    "apps/web/next.config.ts": "f3c674f64d9c13a0a060afc4b2bed29a28d0863778291de3751f8e2b2a11727b",
+    "evidence/next-build-2026-10-27/settings-change.json": "ecc8de59b0b5a866d6774e4ca1649f4d159a52d3050ae91f7d434eaf8d173f8e",
+    "apps/web/auth/tests/deployment.test.mjs": "4e992b7bec2c34a0846c7729e37683033cd64c2409d1f8e6cb961ba7c77e8156"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2659,12 +2666,16 @@
         "implementation_files": [
           "config/site-map.json",
           "config/one-web-app.json",
-          "apps/site/src/main.tsx"
+          "apps/site/src/main.tsx",
+          "apps/web/vercel.json",
+          "apps/web/next.config.ts",
+          "apps/web/auth/tests/deployment.test.mjs",
+          "evidence/next-build-2026-10-27/verification.json"
         ],
-        "test_evidence": "36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity.",
+        "test_evidence": "36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity. Existing web project exactfullsettings/repositoryroot read:apps/web,nextjs,node24→22 onlyglobalchange,rollback24saved;no production switch. Scoped apps/web/vercel.json prevents inherited Vite build/output.8auth/deploymenttests and13real localNextHTTPchecks,10private503;corrected defaultTurbopack+Webpack+typecheck passed. Independent Sol reviewed. NoClerkcopy/realprovider/portal acceptance.",
         "actual_delivery": "not_verified",
         "full_requirement_accepted": false,
-        "gap": "Actual protected portal templates/data adapters/workplace flows not integrated; static public routes do not prove portal functionality.",
+        "gap": "Actual protected portal templates/data adapters/workplace flows not integrated; static public routes do not prove portal functionality. Existing Next protectedroute remains hint page;typedbusinessAPI/issuer/membership/revocation and legitimate previewaccess stillrequired.",
         "next_step": "Map each original portal to business area/route/role/tenant and test actual module; never expose private routes to meet publication pressure.",
         "completion_criterion": "Each required portal works in its correct route with verified session/tenant, real data path and negative direct-link/API tests.",
         "owner_area": "D06 / D07"

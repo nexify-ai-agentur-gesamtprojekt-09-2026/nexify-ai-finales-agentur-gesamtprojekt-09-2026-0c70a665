@@ -378,10 +378,10 @@ Abschluss: Licensed original workspace modules and download verified; eight actu
 
 Soll (SRC-PORTAL-PLACEMENT, SRC-CHAT-20261025-ONEAPP): Portal templates live in their corresponding business routes within one coherent app.
 Einordnung: derived scoped requirement; original excerpt supplied by parent, not full original transcript
-Dateien/Funktionen: config/site-map.json, config/one-web-app.json, apps/site/src/main.tsx
-Beleg: 36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity.
+Dateien/Funktionen: config/site-map.json, config/one-web-app.json, apps/site/src/main.tsx, apps/web/vercel.json, apps/web/next.config.ts, apps/web/auth/tests/deployment.test.mjs, evidence/next-build-2026-10-27/verification.json
+Beleg: 36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity. Existing web project exactfullsettings/repositoryroot read:apps/web,nextjs,node24→22 onlyglobalchange,rollback24saved;no production switch. Scoped apps/web/vercel.json prevents inherited Vite build/output.8auth/deploymenttests and13real localNextHTTPchecks,10private503;corrected defaultTurbopack+Webpack+typecheck passed. Independent Sol reviewed. NoClerkcopy/realprovider/portal acceptance.
 Auslieferung: not_verified; keine Gesamtanforderung abgenommen.
-Lücke: Actual protected portal templates/data adapters/workplace flows not integrated; static public routes do not prove portal functionality.
+Lücke: Actual protected portal templates/data adapters/workplace flows not integrated; static public routes do not prove portal functionality. Existing Next protectedroute remains hint page;typedbusinessAPI/issuer/membership/revocation and legitimate previewaccess stillrequired.
 Nächster Schritt (D06 / D07): Map each original portal to business area/route/role/tenant and test actual module; never expose private routes to meet publication pressure.
 Abschluss: Each required portal works in its correct route with verified session/tenant, real data path and negative direct-link/API tests.
 
