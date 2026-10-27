@@ -72,7 +72,7 @@ class MCPTests(unittest.TestCase):
                 report = self.run_probe()
                 self.assertEqual(report["status"], "blocked")
                 self.assertEqual(report["blocker"], "invalid_response")
-                self.assertFalse(report["inventory_complete"])
+                self.assertFalse(report["complete"])
                 self.assertNotIn("tools/call", self.calls)
 
     def test_complete_pagination_measurements_and_no_tool_execution(self):

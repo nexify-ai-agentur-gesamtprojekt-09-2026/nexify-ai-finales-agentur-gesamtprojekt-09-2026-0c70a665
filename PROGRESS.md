@@ -1,5 +1,16 @@
 # Gemeinsame KI-Governance und Kapazitätsplanung · 26.10.2026
 
+## Anmelde-/Abmeldezugang und MCP-Antwortintegrität · 27.10.2026
+
+F-007 ist über den vorgeschriebenen dreischichtigen Prüfpfad lokal technisch
+bestanden. MCP-Discovery verweigert doppelte JSON-Schlüssel und `NaN` in JSON/SSE.
+
+F-008 ergänzt in der React-Site einen sprachabhängigen Anmeldezugang und bei
+geladener Clerk-Sitzung den vorhandenen Konto-/Abmeldeknopf. Der deaktivierte
+Zustand bleibt ehrlich und fragt keine Passwörter ab. Die neue Kopfzeile wurde
+lokal auf Desktop/Mobil, 44-Pixel-Zielgröße, DE/NL/FR, Routen, Tastatur und
+Offlineausgabe geprüft. Authentifizierung erteilt weiterhin keine Membership.
+
 Arbeitszweig: `factory/source-faithful-rebuild-2026-10-26`, Basis6bb8b4c.
 Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
 parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.

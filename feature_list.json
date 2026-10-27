@@ -127,8 +127,8 @@
       "id": "F-007",
       "behavior": "CI-/AI- und MCP-Automatisierung erzwingt gepruefte Credential-/Commitgrenzen, isolierte Tests und geschlossene Legacy-Mergepfade.",
       "verification": "make automation-check",
-      "state": "active",
-      "evidence": "In Umsetzung; Remote-/Provideraktivierung wird separat nachgewiesen.",
+      "state": "passing",
+      "evidence": "make verify-feature F=F-007: alle 3 Layer bestanden; lokaler technischer Nachweis, keine Produktivabnahme",
       "layers": [
         {
           "label": "Layer 1 (Statik)",
@@ -145,7 +145,33 @@
           "cmd": "make e2e && make check-arch",
           "repair": "Repositoryintegration korrigieren."
         }
-      ]
+      ],
+      "verified_at": "2026-10-27T11:32:50.204Z"
+    },
+    {
+      "id": "F-008",
+      "behavior": "Die öffentliche React-Site zeigt einen sprachabhängigen Anmeldeweg und nach erfolgreicher Clerk-Sitzung einen Konto-/Abmeldezugang, ohne daraus Mandanten- oder Fachrechte abzuleiten.",
+      "verification": "pnpm --filter @nexify/site test && python3 tools/check_browser_evidence.py",
+      "state": "passing",
+      "evidence": "make verify-feature F=F-008: alle 3 Layer bestanden; lokaler technischer Nachweis, keine Produktivabnahme",
+      "layers": [
+        {
+          "label": "Layer 1 (Typen und Build)",
+          "cmd": "pnpm --filter @nexify/site typecheck && pnpm build",
+          "repair": "Clerk-Komponentenversion, Typen oder React-Integration korrigieren."
+        },
+        {
+          "label": "Layer 2 (Auth- und Browsergrenzen)",
+          "cmd": "pnpm --filter @nexify/site test && python3 tools/check_browser_evidence.py",
+          "repair": "Anmelde-/Abmeldeanzeige, fehlende Rechteableitung oder gespeicherte Browserbelege korrigieren."
+        },
+        {
+          "label": "Layer 3 (Gesamte Integration)",
+          "cmd": "pnpm build:next-reference && make e2e && make check-arch",
+          "repair": "Next-Referenz, Site-Integration oder Architekturgrenzen korrigieren."
+        }
+      ],
+      "verified_at": "2026-10-27T11:34:15.394Z"
     }
   ]
 }
