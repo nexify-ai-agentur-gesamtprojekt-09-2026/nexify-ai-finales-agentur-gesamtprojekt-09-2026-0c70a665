@@ -1,7 +1,7 @@
 /** Read-only probe: can this deployment obtain a Vercel Connect token for PostHog? */
 import { getToken } from '@vercel/connect';
 
-const CONNECTOR = 'posthog/nexify-ai-finales-agency-projekt-09-2026-0c70a665';
+const CONNECTOR = 'posthog/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665';
 const HEADERS = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 
 async function handler(request: Request): Promise<Response> {
