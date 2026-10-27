@@ -1,3 +1,35 @@
+# BigBuy: begrenzte lokale Rohdatenaufbereitung
+
+Current State: 3e92663 enthält den unabhängig geprüften CI-Setupfix, noch nicht
+gepusht. Fremde Remoteaktion: PR40 wurde durch nexifyai-dev am27.10.15:25:02Z
+zusammengeführt; main219f244 hat exakt denselben Gitbaum wie69ed580. Dies ist
+kein von uns ausgeführter Merge und keine Produktionsabnahme. Weitere eigene
+Remotewrites pausieren bis Writerabgleich. Kanonischer Vercel-Preview69ed580:
+dpl_DPsitJWgNzJrTjL5TnbwjxvTFKmT BLOCKED, Git-Autorzugriff fehlt; keine Umgehung.
+
+Current Local Delta: BigBuy ist die vom Nutzer gewählte Quelle. Neuer reiner lokaler
+Batchschritt validiert explizit begrenzte Feedbytes, vorhandene Taxonomieauswahl,
+SKU-/DE-Bindung und EAN-Strings; erstellt faktengebundene Textentwürfe sowie alle
+Bildslots mit separaten Stagehashes. Stockänderung invalidiert keine Text-/Bildstage.
+Keine Queue, kein Provideraufruf, kein Modell, keine Veröffentlichung, keine Löschung,
+kein Verkaufs-/Fitmentversprechen. Quellenpreise werden nicht als Verkaufspreise
+übernommen. Tests sind isolierte synthetische Daten, kein vorhandener Lieferbestand.
+Historische Importercommits4a2cc3a/73f7eb7 und übergebene Produktionspfade fehlen
+in dieser Umgebung; dokumentiert statt als angeschlossenen Adapter behauptet.
+Small-Business-Quellprüfung stoppt mit Source unavailable: LICENSE; kein Skill
+blind geladen. Projekt-Skills fünf Quellen geprüft; Kontextselektor begrenzt gelesen.
+
+Nachweis:9 fokussierte Tests unabhängig durch Sol wiederholt;382 Python-Tests,
+make check/test/e2e/check-arch bestanden. Stagekonfiguration bindet Tenant/Projekt.
+Separat direkt gelesen: Productionalias steht inzwischen auf READY
+dpl_7cJkhVUzjZjxhZzxbtaQwFbeeq1V/main219f244. Kein eigener Promote,
+keine reale Funktions-/Providerabnahme daraus abgeleitet.
+
+Next Steps: Remote-Writer-/CI-Fix-Abgleich; bestehende lokale Steuerung
+erst nach nachgewiesenen Rohdaten-/Rechte-/Taxonomieeingängen anbinden. Bildprozess
+braucht gepinnte lizenzierte Gewichte/Konvertierung/Hashes und Ressourcenbenchmark.
+Draft bleibt unpublizierbar, bis einzelne QA-/Kommerz-/Fitmentgates nachgewiesen sind.
+
 # PR40: exakter Upload und reproduzierter CI-Setupfehler
 
 Current State:69ed580 unverändert auf eigenem Remotezweig

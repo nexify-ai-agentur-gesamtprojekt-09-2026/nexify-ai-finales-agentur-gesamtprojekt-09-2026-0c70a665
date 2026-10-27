@@ -1159,7 +1159,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "2cd47e122aadc9483b395674e1f896c206076b7b17fafb68d602214212b0792b",
+    "PROGRESS.md": "ebe84c6f3a8f4e1ce484e6610266f9a058fc7ed0f6f00a93e5d92a248493d96f",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "5a413b9493a0d18ae0c94ce70b152824be8f3f327c7929f603bc70ff48cc2403",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1216,7 +1216,7 @@
     "docs/contracts/local-shop-http.md": "cf57ddab5e9ca67ce9778721f97017882461c04ddf9661a43f9012a6774bdf46",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "235c7792fafb67f9a4429c6e5a3958b2d4f69008c025331585d1463a5dead05e",
+    "docs/contracts/requirements-reconciliation.md": "f8c5c385a2b6bf4e59531e69a38777b8077639156206ee2c90c05e59d112e89d",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1279,7 +1279,13 @@
     "tools/remediation_queue.py": "26ed67b946ccf4e50863f80e99bb636010d3c1c29712f437194ae34f467c586b",
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
     "tools/verify_factory_contract.py": "b303186e148f1147ab29e99af94f391f26e6c943e872a4a591cd4bb18561d0b4",
-    "tools/verify_requirements_reconciliation.py": "8415c107d4fc17157b1f0469d35ee54761e5e53166c446779c30fe836a234fa9"
+    "tools/verify_requirements_reconciliation.py": "8415c107d4fc17157b1f0469d35ee54761e5e53166c446779c30fe836a234fa9",
+    "tools/bigbuy_batch.py": "0e790b975c018218dcee4d06891475a9bfc3267393bd04e852b5e2360f944647",
+    "tests/test_bigbuy_batch.py": "4d0afc6817a087f2d9d55f9b8a4ff814e8931ec83b4ccacfbf880ad18686c72a",
+    "docs/contracts/bigbuy-batch.md": "21ac93ced78511c403690bb13ed9f7f27f1b9da44208042071a9592687dd9f32",
+    "evidence/bigbuy-batch-2026-10-27/source-contract.json": "4258bb43a18398403b4d10c272fed42ee520a6f7e99149adfd622766c93c5285",
+    "evidence/bigbuy-batch-2026-10-27/remote-observation.json": "cf94cdb6c61cc2d621362a00f3642effd31e94da386cdc75ce53c72ce822ff49",
+    "evidence/bigbuy-batch-2026-10-27/local-verification.json": "5c49a107c05ab28f89ce9a9739bb54c32624f5a43adc81f6c68726b417e13ed6"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -1661,6 +1667,24 @@
         "acquisition": "parent_forwarded_executor_report",
         "original_seen_here": false,
         "scope": "Reported REJECT/6/rolled-back Brain canary and provisional web-route mapping; not independent service/release acceptance; no web-executor server authority."
+      },
+      {
+        "id": "SRC-BIGBUY-CHOICE-20261027",
+        "locator": "trusted parent delegation quoting user BigBuy choice at 2026-10-27T15:18Z",
+        "source_date": "2026-10-27T15:18Z",
+        "role": "user",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "BigBuy selected product source, script image/text batch requested; no real orders, no implied new credentials or unlimited model cost"
+      },
+      {
+        "id": "SRC-BIGBUY-API-SCHEMAS",
+        "locator": "evidence/bigbuy-batch-2026-10-27/source-contract.json",
+        "source_date": null,
+        "role": "provider_primary_documentation",
+        "acquisition": "direct_public_document_read",
+        "original_seen_here": true,
+        "scope": "Selected five GET feed parameters and seven schemas from public doc.json on 2026-10-27; not full API/account/feed acceptance"
       }
     ],
     "requirements": [
@@ -2580,7 +2604,9 @@
           "SRC-MASTER-1.2-REQUIREMENTS",
           "SRC-DATA001-PARENT",
           "SRC-ECO001-PARENT",
-          "SRC-DESIGN-CHOICE-20261027-1439"
+          "SRC-DESIGN-CHOICE-20261027-1439",
+          "SRC-BIGBUY-CHOICE-20261027",
+          "SRC-BIGBUY-API-SCHEMAS"
         ],
         "applicable_requirement": "Complete shop while preserving newer fixes under latest design choice main2a552ed production alias; older a19 choice is historical. A frontend/cart draft is not a fully operational shop.",
         "interpretation": "Paraphrase of directly read compiled Master1.2; not original user transcript.",
@@ -2597,13 +2623,16 @@
           "tests/test_local_shop_http.py",
           "docs/contracts/local-shop-http.md",
           "evidence/shop-http-2026-10-27/browser-shop.json",
-          "evidence/shop-http-2026-10-27/design-reference-comparison.json"
+          "evidence/shop-http-2026-10-27/design-reference-comparison.json",
+          "tools/bigbuy_batch.py",
+          "tests/test_bigbuy_batch.py",
+          "docs/contracts/bigbuy-batch.md"
         ],
-        "test_evidence": "16 Cart plus6 real HTTP tests and9 actual browser/API/SQLite fixture cases (DE/NL/FR, reload, lost response/readback, process restart, tenant/visitor negatives, blocked checkout dedupe). Final commit review and overall gates pending; no provider or production acceptance.",
+        "test_evidence": "16 Cart plus6 real HTTP tests and9 actual browser/API/SQLite fixture cases (DE/NL/FR, reload, lost response/readback, process restart, tenant/visitor negatives, blocked checkout dedupe). 69ed580 final commit review and overall gates passed; no provider or production acceptance. Offline BigBuy draft normalizer has9 focused synthetic regression cases; independently reproduced by Sol;382 Python tests and check/test/e2e/check-arch passed. Exact new commit binding pending.",
         "actual_delivery": "reported_partial_implementation_unverified",
         "full_requirement_accepted": false,
-        "gap": "Local HTTP/UI cart and blocked checkout preparation are wired; real source/licensing/freshness/fitment/prices/tax/stock/shipping/provider/order/returns acceptance absent. Conditional purchase-policy conflict remains unresolved; no actual sale.",
-        "next_step": "Finish final source-bound gates/review, then implement validated DATA/ECO provider adapter only against authorized actual inputs; continue independent page/portal work without claiming shop completion.",
+        "gap": "BigBuy source explicitly chosen; no longer an undecided provider. Authorized actual feed/licensing, reviewed taxonomy, image weights/conversion/license/benchmark/QA, commercial price/tax/shipping/stock freshness/fitment/provider/order/returns acceptance absent. Conditional purchase conflict unresolved. Pure draft normalizer not yet persisted or wired into existing controller; no background removal or live connector claimed.",
+        "next_step": "Independently verify local batch draft, bind existing controller to authorized immutable BigBuy inputs and explicit taxonomy; implement image processing only with pinned commercial model and QA, then commercial approved projection through existing LocalShop seam. No actual order required as a build prerequisite.",
         "completion_criterion": "Actual product/cart/checkout/order/return/funding/tenant flows accepted; no fake stock or paid execution.",
         "owner_area": "Shop / Product / Implementation"
       }
