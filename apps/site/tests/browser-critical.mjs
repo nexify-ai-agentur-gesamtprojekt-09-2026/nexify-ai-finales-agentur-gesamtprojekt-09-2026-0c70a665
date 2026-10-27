@@ -11,7 +11,7 @@ import {createServer} from 'vite';
 import handler from '../../../api/agent-chat.ts';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const repo=new URL('../../../',import.meta.url),root=fileURLToPath(new URL('../',import.meta.url));
-const sourcePaths=['apps/web/components/HomeContent.tsx','apps/web/components/Workspace.tsx','apps/web/components/PublicContentLayout.css','config/site-map.json'];
+const sourcePaths=['apps/site/src/Auth.tsx','apps/site/src/main.tsx','apps/web/app/globals.css','apps/web/components/HomeContent.tsx','apps/web/components/Workspace.tsx','apps/web/components/PublicContentLayout.css','config/site-map.json'];
 const sdkPaths=['apps/web/components/PublicOrientationChat.tsx','apps/web/components/PublicOrientationChat.css','api/agent-chat.ts','packages/agent-runtime/public-orientation.ts','tools/agent-preview.mjs'];
 async function hashes(paths){return Object.fromEntries(await Promise.all(paths.map(async p=>[p,createHash('sha256').update(await readFile(new URL(p,repo))).digest('hex')])));}
 const auxiliaryPaths=['apps/site/src/main.tsx','apps/web/components/WorkspaceRebuild.css','apps/web/components/HomeRebuild.css','packages/tokens/tokens.css','apps/site/tests/browser-critical.mjs'];
@@ -35,6 +35,11 @@ async function check(name,fn,sdk=false){await fn();(sdk?sdkChecks:checks).push(n
 async function navigate(page,path){await page.goto(origin+path);await page.locator('#locale').waitFor();await page.locator('main h1').first().waitFor();}
 try{
  const c=await context(),page=await c.newPage();
+ await check('account_control_fallback_and_auth_routes_present',async()=>{
+  await navigate(page,'/');await page.locator('.site-header .account-control').click();
+  await page.waitForURL('**/anmelden');await page.locator('.auth-fallback').waitFor();
+  await navigate(page,'/registrieren');await page.locator('.auth-fallback').waitFor();
+ });
  await check('nex2fly_product_copy_all_locales_and_section_focus_preserves_route',async()=>{
   await navigate(page,'/produkte/nex2fly');const source=pages.find(p=>p.id==='nex2fly');
   for(const locale of ['de','nl','fr']){

@@ -9,41 +9,82 @@
     {
       "draft_id": "hero-nex-de-001",
       "participant_slot": "nex",
-      "page_candidates": ["N1:prototypen/NeXifyAI Cloud v12.dc.html", "N1:prototypen/NeXify AI one.dc.html"],
+      "page_candidates": [
+        "N1:prototypen/NeXifyAI Cloud v12.dc.html",
+        "N1:prototypen/NeXify AI one.dc.html"
+      ],
       "page_binding_status": "derived_proposal_pending_existing_asset_match",
       "locale": "de",
       "voice_id": "Lbm7qDmJUxIxpWx9qhZO",
-      "script_draft": "Ich bin NeX. Zeigen Sie mir, welche Routine Sie entlasten möchten. Gemeinsam machen wir daraus einen klaren Ablauf.",
+      "script_draft": "Ich bin NeX. Zeigen Sie mir, welcher Ablauf heute Zeit kostet. Ich ordne Schritte, Zugänge und Freigaben. Sie sehen, was vorbereitet ist – und entscheiden, was ausgeführt wird.",
       "visual_direction_draft": "Bestehende Runway-Darstellung von NeX bevorzugen. Ruhiger Einstieg, Raum für lesbare Originalüberschrift und Hauptaktion. Vorhandenes NeXify-Signalfeld als gestalterische Referenz; keine fremden Marken, Kundenlogos oder erfundenen Kennzahlen.",
       "existing_runway_asset_id": null,
       "generation_condition": "no_matching_usable_existing_asset",
-      "generated_asset_id": null
+      "generated_asset_id": null,
+      "script_drafts": {
+        "de": "Ich bin NeX. Zeigen Sie mir, welcher Ablauf heute Zeit kostet. Ich ordne Schritte, Zugänge und Freigaben. Sie sehen, was vorbereitet ist – und entscheiden, was ausgeführt wird.",
+        "nl": "Ik ben NeX. Laat me zien welk proces vandaag tijd kost. Ik orden de stappen, toegangen en goedkeuringen. U ziet wat is voorbereid en beslist wat wordt uitgevoerd.",
+        "fr": "Je suis NeX. Montrez-moi quel processus vous prend du temps aujourd’hui. J’ordonne les étapes, les accès et les validations. Vous voyez ce qui est préparé et décidez de ce qui sera exécuté."
+      },
+      "text_status": "editorial_ready_pending_voice_audition",
+      "target_duration_seconds": {
+        "min": 12,
+        "max": 20
+      },
+      "voice_assignment_status": "provisional_retain_pending_audition"
     },
     {
       "draft_id": "hero-aifly-de-001",
       "participant_slot": "aifly",
-      "page_candidates": ["N1:prototypen/NeXifyAI Cloud v12.dc.html"],
+      "page_candidates": [
+        "N1:prototypen/NeXifyAI Cloud v12.dc.html"
+      ],
       "page_binding_status": "derived_proposal_pending_existing_asset_match",
       "locale": "de",
       "voice_id": "feTHtWuEJFLTOWyoreyy",
-      "script_draft": "Ich bin AIFly. Wir verbinden Ihre Werkzeuge zu einem nachvollziehbaren Arbeitsablauf. Sie behalten den Überblick und entscheiden über die wichtigen Schritte.",
+      "script_draft": "Ich bin AIFly. Ich begleite Sie durch Wissen, Werkzeuge und nächste Schritte. Ich kennzeichne Entwürfe und offene Voraussetzungen klar, damit Sie sicher entscheiden können.",
       "visual_direction_draft": "Bestehende AIFly-Darstellung aus Runway verwenden. Kurze Vorstellung mit ruhiger Bewegung; Arbeitsfluss als abstrakte Darstellung ohne echte Kundendaten. Keine neue Person oder unbelegte Avataridentität erfinden.",
       "existing_runway_asset_id": null,
       "generation_condition": "no_matching_usable_existing_asset",
-      "generated_asset_id": null
+      "generated_asset_id": null,
+      "script_drafts": {
+        "de": "Ich bin AIFly. Ich begleite Sie durch Wissen, Werkzeuge und nächste Schritte. Ich kennzeichne Entwürfe und offene Voraussetzungen klar, damit Sie sicher entscheiden können.",
+        "nl": "Ik ben AIFly. Ik begeleid u door kennis, hulpmiddelen en volgende stappen. Ik markeer concepten en open voorwaarden duidelijk, zodat u weloverwogen kunt beslissen.",
+        "fr": "Je suis AIFly. Je vous guide à travers les connaissances, les outils et les prochaines étapes. Je signale clairement les brouillons et les conditions encore ouvertes afin que vous puissiez décider en connaissance de cause."
+      },
+      "text_status": "editorial_ready_pending_voice_audition",
+      "target_duration_seconds": {
+        "min": 12,
+        "max": 20
+      },
+      "voice_assignment_status": "recast_preferred_from_existing_provider_assets"
     },
     {
       "draft_id": "hero-user-de-001",
       "participant_slot": "user",
-      "page_candidates": ["N1:prototypen/NeXifyAI Cloud v12.dc.html", "N1:prototypen/Partner-werden.dc.html"],
+      "page_candidates": [
+        "N1:prototypen/NeXifyAI Cloud v12.dc.html",
+        "N1:prototypen/Partner-werden.dc.html"
+      ],
       "page_binding_status": "derived_proposal_pending_existing_asset_match",
       "locale": "de",
       "voice_id": "feTHtWuEJFLTOWyoreyy",
-      "script_draft": "Wir beginnen mit Ihrem konkreten Ablauf. Daraus entwickeln wir einen passenden nächsten Schritt und prüfen gemeinsam das Ergebnis.",
+      "script_draft": "Ich bin Pascal Courbois. Wir beginnen mit Ihrem konkreten Ziel und dem heutigen Engpass. Daraus entwickeln wir den nächsten prüfbaren Schritt – klar im Umfang und ohne leere Versprechen.",
       "visual_direction_draft": "Vorhandenes persönliches Runway-Video bevorzugen. Persönliche Begrüßung in ruhiger Umgebung; keine synthetische Personenansicht aus einem beliebigen Bild ableiten. Falls eine neue persönliche Darstellung erforderlich ist, das tatsächliche autorisierte Eingangsmedium an den Auftrag binden.",
       "existing_runway_asset_id": null,
       "generation_condition": "no_matching_usable_existing_asset",
-      "generated_asset_id": null
+      "generated_asset_id": null,
+      "script_drafts": {
+        "de": "Ich bin Pascal Courbois. Wir beginnen mit Ihrem konkreten Ziel und dem heutigen Engpass. Daraus entwickeln wir den nächsten prüfbaren Schritt – klar im Umfang und ohne leere Versprechen.",
+        "nl": "Ik ben Pascal Courbois. We beginnen met uw concrete doel en het knelpunt van vandaag. Daaruit ontwikkelen we de volgende toetsbare stap, met een duidelijke omvang en zonder loze beloften.",
+        "fr": "Je suis Pascal Courbois. Nous partons de votre objectif concret et du blocage actuel. Nous en faisons la prochaine étape vérifiable, avec un périmètre clair et sans promesses creuses."
+      },
+      "text_status": "editorial_ready_pending_voice_audition",
+      "target_duration_seconds": {
+        "min": 12,
+        "max": 20
+      },
+      "voice_assignment_status": "provisional_retain_pending_identity_and_rights_check"
     }
   ],
   "renditions": {
@@ -51,7 +92,10 @@
     "poster": "derive_from_verified_video_frame",
     "captions": "time_aligned_to_final_audio",
     "transcript": "exact_final_spoken_text",
-    "additional_locales": ["nl", "fr"],
+    "additional_locales": [
+      "nl",
+      "fr"
+    ],
     "locale_state": "not_generated_or_translated",
     "audio_playback": "user_initiated"
   },
@@ -65,5 +109,46 @@
     "captions_transcript_keyboard_mobile_reduced_motion",
     "version_bound_visual_review_before_publication"
   ],
-  "execution": {"provider_jobs_started": 0, "audio_files_generated": 0, "video_files_generated": 0, "published": false}
+  "execution": {
+    "provider_jobs_started": 0,
+    "audio_files_generated": 0,
+    "video_files_generated": 0,
+    "published": false
+  },
+  "voice_casting": {
+    "state": "provider_asset_inventory_and_audition_required",
+    "prefer_existing_account_assets": true,
+    "selection_rule": "Each role that can occur in the same journey must remain immediately distinguishable. Reuse only after a blind DE/NL/FR audition confirms identity, pronunciation, rights and role fit.",
+    "known_references": {
+      "Lbm7qDmJUxIxpWx9qhZO": {
+        "current_role": "nex",
+        "decision": "provisional_retain_pending_audition"
+      },
+      "feTHtWuEJFLTOWyoreyy": {
+        "current_roles": [
+          "aifly",
+          "user"
+        ],
+        "decision": "retain_for_pascal_only_if_personal_use_is_verified; prefer_a_distinct_asset_for_aifly"
+      }
+    },
+    "role_profiles": {
+      "nex": "calm, precise and process-oriented; measured pace; native pronunciation per locale; no theatrical sales tone",
+      "aifly": "approachable, alert and explanatory; clearly distinct from Pascal and NeX; no cartoon effect or artificial urgency",
+      "user": "natural founder voice; warm, credible and direct; personal identity use only with verified authorization; no cloning inferred from an image"
+    },
+    "comparison_script": {
+      "de": "Aus einer Idee wird ein klarer Ablauf. Sie sehen, was vorbereitet ist, und entscheiden, was als Nächstes passiert.",
+      "nl": "Van een idee maken we een duidelijk proces. U ziet wat is voorbereid en beslist wat er daarna gebeurt.",
+      "fr": "Nous transformons une idée en processus clair. Vous voyez ce qui est préparé et décidez de la prochaine étape."
+    },
+    "acceptance": [
+      "provider_asset_id_and_account_read_back",
+      "authorized_usage_and_personal_identity_rights_verified",
+      "native_or_approved_pronunciation_in_de_nl_fr",
+      "role_distinction_confirmed_in_blind_comparison",
+      "no_clipping_noise_or_unintended_emotion",
+      "chosen_voice_id_written_back_before_generation"
+    ]
+  }
 }

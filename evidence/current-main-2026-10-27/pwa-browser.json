@@ -1,0 +1,34 @@
+{
+  "scope": "explicit public-pwa local build; network-only; no OS install or production acceptance",
+  "checks": [
+    "real registration and controller",
+    "manifest parsed without browser errors",
+    "synthetic API rejection not cached",
+    "one online POST only",
+    "offline private GET and POST fail without retry",
+    "offline navigation unavailable explicitly; no invented offline data",
+    "reconnect restores shell without POST replay",
+    "CacheStorage remains empty",
+    "owned registration rollback after client closure"
+  ],
+  "manifest": {
+    "id": "/",
+    "name": "NeXify AI",
+    "short_name": "NeXify AI",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "lang": "de",
+    "background_color": "#1B1E1D",
+    "theme_color": "#1B1E1D",
+    "icons": [
+      {
+        "src": "/signet.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      }
+    ]
+  },
+  "passed": true
+}

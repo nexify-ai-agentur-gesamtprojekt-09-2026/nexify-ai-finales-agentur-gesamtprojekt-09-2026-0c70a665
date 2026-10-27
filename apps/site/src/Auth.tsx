@@ -1,5 +1,6 @@
 import {Component,lazy,Suspense,useState,type ReactNode} from "react";
 import {deDE,nlNL,frFR} from "@clerk/localizations";
+import {SiteLink} from "../../web/components/Router";
 import {useUI} from "../../web/components/Workspace";
 import type {Locale} from "../../web/lib/i18n";
 import {AUTH_REDIRECT,publicAuthConfiguration} from "./auth-policy.mjs";
@@ -59,4 +60,12 @@ export function AuthenticationPanel({mode,hashMode=false}:{mode:Mode;hashMode?:b
    <ClerkBoundary publishableKey={configuration.publishableKey!} mode={mode} locale={locale}/>
   </Suspense>
  </AuthErrorBoundary>;
+}
+
+// Public navigation reaches the existing route-local account lifecycle. Loading
+// an identity SDK on every public page must not replace shell state or mint rights.
+export function AccountControl(){
+ const {locale}=useUI();
+ const label={de:"Kundenbereich",nl:"Klantenzone",fr:"Espace client"}[locale];
+ return <SiteLink className="account-control account-link" href="/anmelden">{label}</SiteLink>;
 }

@@ -3,7 +3,7 @@ declare const __PUBLIC_PWA__:boolean;
 void registerPublicInstallation(__PUBLIC_PWA__);
 import "../../../packages/tokens/tokens.css";
 import "../../web/app/globals.css";
-import {AuthenticationPanel} from "./Auth";
+import {AuthenticationPanel,AccountControl} from "./Auth";
 import {useEffect,useMemo,useState,type MouseEvent} from "react";
 import {createRoot} from "react-dom/client";
 import Workspace,{useUI} from "../../web/components/Workspace";
@@ -47,6 +47,6 @@ function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');
   useEffect(()=>{const changed=()=>setPath(routePath(location,hashMode)||'__invalid__');addEventListener('popstate',changed);addEventListener('hashchange',changed);return()=>{removeEventListener('popstate',changed);removeEventListener('hashchange',changed);};},[]);
   const adapter=useMemo(()=>({pathname:path,Link:BrowserLink}),[path]);
-  return <RouterProvider adapter={adapter}><PresenterGuideProvider journeys={journeys} defaultJourneyId={journeys.find(journey=>journey.steps.includes(routeIndex.get(path)?.id||""))?.id}><Workspace pages={pages}><RouteContent page={routeIndex.get(path)}/></Workspace></PresenterGuideProvider></RouterProvider>;
+  return <RouterProvider adapter={adapter}><PresenterGuideProvider journeys={journeys} defaultJourneyId={journeys.find(journey=>journey.steps.includes(routeIndex.get(path)?.id||""))?.id}><Workspace pages={pages} accountControl={<AccountControl/>}><RouteContent page={routeIndex.get(path)}/></Workspace></PresenterGuideProvider></RouterProvider>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);

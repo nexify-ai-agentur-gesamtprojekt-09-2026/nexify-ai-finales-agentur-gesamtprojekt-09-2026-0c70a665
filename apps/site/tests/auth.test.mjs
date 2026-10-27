@@ -27,8 +27,16 @@ test('only public Clerk variables are consumed; forced redirects stay fixed and 
 });
 test('the wrapper retains public media, guide and honest disabled fallback',()=>{
  const source=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');
- for(const marker of ['<PresenterGuide ','<ExplainerSections ','<AuthenticationPanel hashMode={hashMode} mode='])assert.ok(source.includes(marker),marker);
+ for(const marker of ['<PresenterGuide ','<ExplainerSections ','<AuthenticationPanel hashMode={hashMode} mode=','accountControl={<AccountControl/>}'])assert.ok(source.includes(marker),marker);
  const auth=readFileSync(new URL('../src/Auth.tsx',import.meta.url),'utf8');
  assert.match(auth,/auth-fallback editorial-note/);assert.match(auth,/keine automatische Adminrolle/);
  assert.match(source,/routeIndex\.get\(path\)/);
+});
+
+test('header account control reaches route-local lifecycle without global provider',()=>{
+ const auth=readFileSync(new URL('../src/Auth.tsx',import.meta.url),'utf8');
+ const main=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');
+ assert.match(auth,/export function AccountControl/);
+ assert.match(auth,/<SiteLink className="account-control account-link" href="\/anmelden"/);
+ assert.doesNotMatch(main,/<PublicAuthProvider/);
 });

@@ -12,7 +12,7 @@ Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber
 
 **Geprüfte Quellen:** `config/deployment-topology.json`; `config/one-web-app.json`; `evidence/one-app-2026-10-27/deployment-parent-report.json`.
 
-**Lokal möglich/erledigt:** Historische topology nennt apps/site/dist und ältere Preview409db50; jüngerer Parent-Lesebeleg nennt Preview66866298/Production07833fb3, aber Settingsfelder null. Widerspruch/Alter getrennt; keine fehlenden Felder ergänzt.
+**Lokal möglich/erledigt:** Frische autorisierte Lesung: nexifyai.de bleibt Preview66866298, der Standard-Production-Alias zeigt nun auf main2a552ed (PR39), Deployment dpl_4V5wejxZKiij1ZbniFkD5vCwUxLg. Projekt bestätigt Vite/Node22.x; Settingsfelder weiterhin nicht geliefert. Der lokale Integrationskandidat ist davon getrennt. Quelle: takeover-runtime-read.json und current-main-integration.md.
 
 **Kleinste nächste Aktion:** Deploymentowner liefert unveränderten aktuellen Settings-/Alias-Lesebeleg und dokumentiert Zielentscheidung; keine Umschaltung.
 

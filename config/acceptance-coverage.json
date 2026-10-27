@@ -381,9 +381,12 @@
       "source_refs": [
         "evidence/one-app-2026-10-27/deployment-parent-report.json",
         "config/deployment-topology.json",
-        "config/one-web-app.json"
+        "config/one-web-app.json",
+        "docs/contracts/current-main-integration.md",
+        "docs/contracts/current-runtime-gap.md",
+        "evidence/one-app-2026-10-27/takeover-runtime-read.json"
       ],
-      "local_proof": "Aktuelle Parent-Lesung trennt .de66866298, Produktion07833fb3 und Geschwistera19cd503.",
+      "local_proof": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zurückgegeben. Lokale Integration ist kein Deployment.",
       "remaining_gap": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.",
       "owner_role": "Deploymentowner",
       "assigned_executor": null,
@@ -401,7 +404,7 @@
           "config/one-web-app.json",
           "evidence/one-app-2026-10-27/deployment-parent-report.json"
         ],
-        "local_analysis_or_test": "Historische topology nennt apps/site/dist und ältere Preview409db50; jüngerer Parent-Lesebeleg nennt Preview66866298/Production07833fb3, aber Settingsfelder null. Widerspruch/Alter getrennt; keine fehlenden Felder ergänzt.",
+        "local_analysis_or_test": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zurückgegeben. Lokale Integration ist kein Deployment.",
         "smallest_next_action": "Deploymentowner liefert unveränderten aktuellen Settings-/Alias-Lesebeleg und dokumentiert Zielentscheidung; keine Umschaltung.",
         "closure_criterion": "Projekt, Root, Build, Output, Branch, Aliasziel und Zeitpunkt eindeutig gebunden; Ist/Ziel und Rückweg bestätigt, keine Ableitung aus READY allein.",
         "boundary": "current_authoritative_settings_and_domain_decision",
@@ -412,24 +415,19 @@
         "state": "open_not_closed_by_handoff",
         "external_action_attempted": false,
         "known_mapping_evidence": {
-          "source": "evidence/one-app-2026-10-27/deployment-parent-report.json",
-          "received_at": "2026-10-27T05:10:15.483610+00:00",
-          "observed_at": null,
-          "independently_reproduced_here": false,
-          "preview_domain": "nexifyai.de",
+          "source": "evidence/one-app-2026-10-27/takeover-runtime-read.json",
+          "observed_at": "2026-10-27T12:04:32.639Z",
+          "independently_reproduced_here": true,
           "preview_commit": "66866298b3eb4054371b0e2a1e1f618f1bc8ca73",
-          "preview_branch": "factory/agency-separated-2026-10-26",
-          "preview_deployment": "dpl_3KcSgJUsdNbsJjiWvR74Xf95SdFA",
-          "preview_target": null,
-          "production_alias_branch": "main",
-          "production_alias_commit": "07833fb3f8166a3f8534f52bb1c1843c49f40919",
-          "production_deployment": "dpl_XXZBR56U9Nwx9Nj6MDR5GER5v4ZG",
-          "state": "READY for both reported deployments",
-          "not_proven": [
-            "current configured rootDirectory/buildCommand/outputDirectory/productionBranch",
-            "desired final canonical mapping",
-            "acceptance of integrated candidate"
-          ]
+          "production_alias_commit": "2a552ed6319c21332d7c2957d3d757b99c187910",
+          "production_deployment": "dpl_4V5wejxZKiij1ZbniFkD5vCwUxLg",
+          "missing_fields": [
+            "rootDirectory",
+            "buildCommand",
+            "outputDirectory",
+            "productionBranch"
+          ],
+          "desired_final_mapping_verified": false
         }
       }
     },
@@ -1121,14 +1119,14 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "21121e466a256bf80a210e7c3ef4055385da89dc1ba457796a775234816dd610",
+    "PROGRESS.md": "0b0c37d64e23e94cf52f76b7f729f47be94dc205887a66fb699b725bfe4edb7a",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
     "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
     "apps/site/pwa/plugin.mjs": "3c805218638e6923569ce5f61dbdce70c1b67c6a0e45893fa0cf409cad4c0587",
     "apps/site/pwa/worker.js": "2057580e929673c153101f5ef1c0c642735d10797d3acd341706a3a78006a7ac",
     "apps/site/scripts/build-standalone.mjs": "28f0e7b5e68ce94c26b94557cb11c608028cee4b88e2b02e5887f50a4f728359",
-    "apps/site/src/Auth.tsx": "f6af0b53f2d453d81b0b3d19fd952068bc978cbcc5324f2181013162b4a15a5b",
-    "apps/site/src/main.tsx": "970a44a39271a3da64c8468542f00be0a70a2e1a002032bfcc9f9c1608d6aeab",
+    "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
+    "apps/site/src/main.tsx": "e2b5f22a13bb1f142f4e9812d8698d39dee0838d5adc43b4c318d5b40b506d4d",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/tests/browser-accessibility.mjs": "2827709b3ba5c0af65f9cce02dbf75aee9baa485660ac5ce1d8a9ad57e92ad05",
     "apps/site/tests/browser-auth.mjs": "0dabd6d7ae985138e50e8cd4498ec06b9c00d47e77e52c0cb2db9cbcdff0c740",
@@ -1140,7 +1138,7 @@
     "apps/site/tests/public-installation.test.mjs": "d497095dd7482603311073f505933a6e23f129c5f7d9c0d819e24f44510a4c5e",
     "apps/site/tests/standalone.test.mjs": "5b9cf3e97ed5829bea566deceb0b4a2c7b135c03849f0f29d47e23cf5d65b502",
     "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
-    "apps/web/components/Workspace.tsx": "35d46f19f915ee71f615d1eb6dcf45a3daa49711c38ad99bb45888cf1366f959",
+    "apps/web/components/Workspace.tsx": "dfaf02f69ce5cf3b2bc9f2d040fe3222131d44c3aa79c3fd7e555bb74841ffce",
     "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
     "config/ai-migration-policy.json": "98ba89849bff3585843f3fd603a8d0da9df8c568ee534b90f3ddf5c3a82aeaa0",
     "config/capacity-policy.json": "b2624c739f7d3f52200d080eca6572fe54612244b3af7ce08270fb6a4ca5a836",
@@ -1151,6 +1149,8 @@
     "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
     "config/one-web-app.json": "6ebd17405df7428a944c152b565885742f739ae3bebef0f68d77f3553bf44252",
     "config/selfservice-policy.json": "355ccc200852e6e14087aa55a5dc10ed94e42f1a3222d9818086db393bcbf2ab",
+    "docs/contracts/current-main-integration.md": "b3295bd31f5aaec0dd864054f6eeb28f18d70d648cf235f9644ed37d7d2fa11d",
+    "docs/contracts/current-runtime-gap.md": "9ac66db16ac1ee2d40c26d6f03dd50e28cc13c3468b3fd2b43f0d53001770141",
     "docs/contracts/factory-api-auth.md": "3715a38bb226d161db8f1041a3dcdf3dcd4689ef7eb20171b656617c6eee3571",
     "docs/contracts/factory.openapi.json": "a5a7ac8f95a991eac1dd1cbbaf0a328cd0944fe8a4f71cff8bc4b5b0de5ad410",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
@@ -1169,7 +1169,7 @@
     "evidence/one-app-2026-10-27/decision-accessibility.json": "d6526eb5c75001fbf918d983a418c75b1cc70240e9aaa0d7ccf5f438a2f0025e",
     "evidence/one-app-2026-10-27/decision-screenshot-review.json": "9e7b07e8f2c04d819f6fc5784deda9cf03c92419c00b4354ab0bd6a20201a17a",
     "evidence/one-app-2026-10-27/deployment-parent-report.json": "d57157f3ace5eb18c74f7f4b7154aeabbdce598028b35466713d7f7fd9ee4452",
-    "evidence/one-app-2026-10-27/public-route-coverage.json": "c81440e5122c8da2501352db85d40826e36c6faa3a6239a86dfa4c4efdfd9995",
+    "evidence/one-app-2026-10-27/public-route-coverage.json": "fab8fd4488435d15ee005eeb8320bfb38610202ba748270d87e6c8c231a83068",
     "evidence/one-app-2026-10-27/public-surface-contract.txt": "313d261b9852b215cae71d756369d4680b2bc50f72b44b5fba2dd9e083f05d7b",
     "evidence/one-app-2026-10-27/pwa-browser.json": "a34a1d7d27887f0cb8951e282389674cd10c706cf55217fdbcb3e083b843ae7d",
     "evidence/one-app-2026-10-27/release-prerequisites.txt": "b779d0211149c78166d8369afb0b04149b582bd44485e10df23022eb3b981a87",
@@ -1179,6 +1179,7 @@
     "evidence/one-app-2026-10-27/suite-trial-focused.txt": "227b4f2ec948ba334be1639a52fd0ce9325d4ecd56a68c4c8acfe3410ca1d87d",
     "evidence/one-app-2026-10-27/suite-trial-independent-review.md": "d13cc558a151dee6f5fb43b5d7926a284d3679dd1850cfd3955be2960cba81fd",
     "evidence/one-app-2026-10-27/suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
+    "evidence/one-app-2026-10-27/takeover-runtime-read.json": "cf604539a555287d63aca6d77217ab10b578a39a6d54991ac3367444646a6cf0",
     "evidence/one-app-2026-10-27/target-size-before.json": "1abda3087a139559ac17188171fd8e5de03c34f41cd5061c72d3a55a97a218db",
     "evidence/one-app-2026-10-27/text-spacing.json": "19d07462de82ff0f74faf472b48d7cce0837545924dc945d5908fb334e11f885",
     "package.json": "0ecf5786228084c168d842b05c2d2a71def31d00c99c853c04431e04cfbbe6ef",
@@ -1209,5 +1210,13 @@
   "clarification_delta_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
   "clarification_observed_at": "2026-10-27T06:26:46.789884+00:00",
   "suite_trial_delta_base": "245e96e9f468474e41fe4a3a1dc2b5785c2fc3e4",
-  "suite_trial_verified_at": "2026-10-27T06:39:10.515127+00:00"
+  "suite_trial_verified_at": "2026-10-27T06:39:10.515127+00:00",
+  "current_main_integration_sources": {
+    "local_candidate_base": "2c24073a373f02ffe6024ba2bb503cf2e02df9f5",
+    "main": "2a552ed6319c21332d7c2957d3d757b99c187910",
+    "merge_base": "a19cd5035d3809dedda94050486026ac0186662e",
+    "review_model": "gpt-6.1-sol",
+    "astra_used": false,
+    "remote_writes": false
+  }
 }
