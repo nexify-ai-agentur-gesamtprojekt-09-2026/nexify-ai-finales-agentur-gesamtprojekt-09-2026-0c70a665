@@ -1,3 +1,17 @@
+## Aktuelle Quellenabgrenzung nach Originalfund
+
+Direkt vom Parent gelesener Nutzertext25.10. verwirft alte Stimmen einschließlich
+der Nutzerstimme. Der bisherige Vertrag behauptet eine neuere explizite Zuordnung
+vom26.10., enthält aber keinen Originalchat-Locator. Daher ist die folgende
+Castingtabelle nur historische Referenz, keine aktuelle Empfehlung oder Freigabe.
+source_reconciliation in Medienvertrag, Plan und Presenterregister blockiert
+Freigabe/Generierung bis zum Originalabgleich. IDs werden zur Provenienz erhalten;
+keine bestehende Stimme gilt dadurch als geeignet. Kein bezahlter Lauf gestartet.
+Die aktuellen Originalvorgaben verlangen echte Bewegung, sauberen Ton nach
+Nutzeraktivierung, freie Charaktere ohne Bildschirmrahmen, passenden Hintergrund,
+finalen AIFly-Charakter und integrierte Sprach-/zugängliche Ton-/Pausekontrolle.
+Das13Sekunden-Trio-WebM ist nur ein noch zu prüfendes Reviewasset, nicht abgenommen.
+
 # Hero-Videos und ElevenLabs über Composio
 
 Stand 26.10.2026. Dies ist der abgeleitete Integrationsvertrag; keine behauptete aktive Medienpipeline. Die Nutzerergänzung nimmt Hero-Videos mit dem Nutzer und zwei weiteren Beteiligten in den Auftrag auf. Die anschließende Nutzerzuordnung benennt NeX, AIFly und den Nutzer. Assets und konkrete Seitenzuordnung werden weiterhin aus Quellen gebunden. Die drei Slots in `hero-media.json` bewahren diese Zuordnung.
@@ -58,7 +72,7 @@ Seitentexte sind Skriptentwürfe und keine Zusage tatsächlich laufender
 Funktionen. Vor einer endgültigen Auswahl die beiden konkreten Stimmen je
 Sprache anhören, Aussprache und Unterscheidbarkeit prüfen sowie die jeweilige
 Verwendung und Rechte anhand des tatsächlichen Kontobestands bestätigen.
-Die aktuelle Castingentscheidung lautet deshalb: NeX vorläufig behalten,
+Die historische, jetzt ausgesetzte Castingentscheidung lautete: NeX vorläufig behalten,
 Pascal nur nach persönlicher Rechte- und Hörprüfung behalten, AIFly bevorzugt
 aus den vorhandenen Provider-Assets eigenständig neu besetzen. Eine konkrete
 bessere AIFly-ID ist erst nach echtem Asset-Inventar und Hörvergleich belegbar.

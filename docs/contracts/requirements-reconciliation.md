@@ -1,0 +1,470 @@
+# Quellengebundener Soll-Ist-Abgleich
+
+Automatisch abgeleitete Ansicht von config/acceptance-coverage.json; keine zweite Queue oder Originaltranskription.
+Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige Laufzeitabnahme bleibt offen.
+
+## Quellen
+
+- SRC-MASTER-TECH-1.1: parent_compiled_technical_contract; Datum 2026-10-27T04:40:00Z; delegation_technical_extract; parent technical master delta supplied in delegated task. Umfang: technical extract only; no full business register
+- SRC-CHAT-20261025-SERVER: user; Datum 2026-10-25T10:03:00Z; parent_verified_excerpt; https://chatgpt.com/c/6adda61b-5fa4-83ed-9263-f533e7ba63bf?messageId=5778686f-e806-4810-a402-917255d119fb. Umfang: persistent large server and one Hostinger for Brain goal; no host identity or migration authorization
+- SRC-CHAT-20261025-ONEAPP: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=6e4a1e2a-ed98-4613-8a90-bfb5b32702fe. Umfang: one Web App including portals/customer solutions/production gates/workplace, GitHub/Vercel/browser/REA; excerpt only
+- SRC-USER-PUBLISH-20261027: user; Datum 2026-10-27T12:28:00Z; parent_verified_excerpt; parent delegation with trusted transcript_evidence. Umfang: publish existing affected app after required safe gates; no new credentials, costly media, unsafe portals or data migration
+- SRC-LINKED-STANDARDS: project_standard; Datum unbekannt; direct_page_read_manifest; evidence/reconciliation-2026-10-27/linked-standards-reference.json. Umfang: REA16Oct and Design15Oct Pages fully read; hashes only, no raw personal notes copied
+- SRC-REPO-POLICY: versioned_project_policy; Datum 2026-10-26; local_repository_read; docs/operating-model/NEXIFY-GESAMTSYSTEM.md. Umfang: technical operating contracts; not original chat transcript
+- SRC-PRODUCT-NO-LEGACY-BRAIN: user; Datum 2026-10-16; parent_verified_excerpt; https://chatgpt.com/c/6ad1e938-08f0-83ed-b763-25c0273cc018?messageId=f8fcac92-930f-4743-b7d8-ab575220557e. Umfang: Product without AgentMemory/LightRAG; existing agency Brain services not ordered deleted.
+- SRC-ASSISTANT-ARCH-PLAN: assistant; Datum 2026-10-16; parent_verified_excerpt; https://chatgpt.com/c/6ad1e938-08f0-83ed-b763-25c0273cc018?messageId=3cf49f15-a988-5b37-b1ed-93c481633d56. Umfang: FastAPI/Postgres/vector/S3/Temporal proposal; no implementation or user acceptance.
+- SRC-VOICE-REJECTION: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6ade6c38-6ad0-83ed-b578-91d19eaafbc0?messageId=6947b47e-f5d5-4a8f-b276-b6684de6fe1b. Umfang: Existing voices including user voice rejected; understandable actual website/product guidance.
+- SRC-HERO-MOTION: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6ade600f-a9a8-83eb-a46d-4da7b31ee0fa?messageId=c1aeb330-f388-4b86-b1ea-cc41e0992813. Umfang: Actual motion, free hero without screen frame, audible welcome requiring deliberate user activation, language switching.
+- SRC-AIFLY-CHARACTER: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6ade600f-a9a8-83eb-a46d-4da7b31ee0fa?messageId=7f42d96e-1899-47cd-b336-6d7c7af87737. Umfang: Final logically recognizable AIFly character instead of rejected eyes.
+- SRC-PORTAL-PLACEMENT: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adda61b-5fa4-83ed-9263-f533e7ba63bf?messageId=43dd3e0b-1d70-4794-8d5e-a188301f40c9. Umfang: Portal templates in appropriate domains, not all portals on a single page.
+- SRC-ORIGINAL-WORKSPACE: user; Datum 2026-10-14; parent_verified_excerpt; https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=5b5e8e2c-d292-4868-bd38-00f7cba1872f. Umfang: Web plus downloadable local solution, original AionUi dashboard, skills/agents/prompts/MCP libraries with automatic and manual selection; hosting feasibility first.
+- SRC-ITSAPLAN-CORE: user; Datum 2026-10-14; parent_verified_excerpt; https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=659415d5-4516-4c7b-9711-d729d08d37c0. Umfang: itsaplan in own WebUI, eight preconfigured core agents, bookable departments and libraries. Historical prices not adopted.
+- SRC-TOKENS-STRICT: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=d4c77268-a44f-48e1-b0af-050d0dc3afec. Umfang: Use design tokens without hardcoded colors; no promotion of older theme.
+- SRC-CONTENT-FOUR-SERVERS: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=b8abbf8c-0de7-4393-9d6f-fc67b5dbdcd0. Umfang: Complete products/content and properly calculated prices, page-by-page compliance, systemwide knowledge preparation across four servers.
+- SRC-NATIVE-REA-TOOLS: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=36eecef6-5393-4620-9bae-939c0d004807. Umfang: Actual native registered tools, EvidenceIDs and independent APPROVE; no invented rea.* operations.
+- SRC-HERO-FREE-FIGURES: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=3999f1f3-ef74-4625-b84b-7e9ab9a259a5. Umfang: Characters directly in hero without frame.
+- SRC-HERO-CLEAN-AUDIO: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=6072661b-6575-479f-865a-59b4016e0bda. Umfang: Audible clean speech; silent render not final.
+- SRC-HERO-SPEECH-CRITIQUE: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=c3c0f52a-17b5-4863-a32e-90a7d81c11e3. Umfang: Speech unclear and voice thematically unsuitable.
+- SRC-HERO-NO-PLAYER-FRAME: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=a8063632-63cf-46ca-a7e3-05d62130422c. Umfang: Free character presentation without surrounding player interface; accessible controls remain required.
+- SRC-HERO-THREE-FIGURES-STORY: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=657131c3-448a-489a-9edc-97c420c7d36e. Umfang: All three figures and coherent story through all pages from beginning to end.
+- SRC-BLUEPRINT: historical_project_document; Datum 2026-09-03; parent_read_document_summary_only; https://drive.google.com/file/d/1Yeg3lFRdo-52HANVlfB6L5KbpSEiJyKg. Umfang: Die NeXify Blaupause.md;48963bytes; parent read, content not yet supplied here.
+- SRC-DESIGN-HANDOFF: historical_project_document; Datum 2026-09-04; parent_read_document_summary_only; https://drive.google.com/file/d/19JJoWLurUA6IlFsJNHHJxp9y4_Q1Ee2Y. Umfang: Uebergabeauftrag_Claude_Design.md;19248bytes; historical frontend prototype only, not later full backend scope.
+- SRC-PLATFORM-DRAFT: historical_project_document; Datum 2026-09-29; parent_read_document_summary_only; https://drive.google.com/file/d/1SUBrZy13ky6mD8jfgrMGjnhICF23pXY4. Umfang: gesamtkonzept-2026-plattform-shop-one.md;30283bytes; draft for approval.
+- SRC-INTERNAL-SURFACES: historical_project_document; Datum 2026-10-01; parent_read_document_summary_only; https://drive.google.com/file/d/15rB0zcsQMSqeR6VnJucCJSApW2MclSMX. Umfang: 3194bytes; historical /workspace,/posteingang,/myadmin, same-tab return, preserve runtime; old stack not installed by this source.
+- SRC-CHAT-PALETTE-20261025: user; Datum 2026-10-25; parent_verified_excerpt; https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=5905791c-7f44-42a8-99e8-cbe6c3e7c86d. Umfang: product palette: websites, apps/PWA, custom software/interfaces, CRM/ERP/portals, agents/automation, NeX2fly, NeX Agentic AI, AIFly Oracle, NeXify API
+- SRC-CHAT-AGENCY-20261018: user; Datum 2026-10-18; parent_verified_excerpt; https://chatgpt.com/c/6ad4f147-32d4-83eb-b1cd-905b40b3f6cf?messageId=4a09c0b2-716b-4687-942d-81092825ffe4. Umfang: NeX2fly additional selfservice; agency business and pages remain; agency rental follows completion
+- SRC-CALL-CONTINUATION-20261027: user; Datum 2026-10-27; parent_verified_excerpt; parent delegation of current user call; precise call time not supplied. Umfang: Reuse existing headless basis; chosen unfinished a19cd503 preview is visual reference, preserve newer fixes. Build full shop, finish media/portals/workplace. Final domain nexifyai.cloud only after applicable functional/tenant/security gates.
+- SRC-CALL-BRAIN-20261027: user; Datum 2026-10-27; parent_verified_excerpt; parent delegation of current user call; precise call time not supplied. Umfang: Prefer repairing and retaining existing Brain if verifiably functional; no mandatory rebuild. Parent owns separate diagnosis. Server retention after real dependency inventory; user handles payment, no payment or server changes by implementation owner.
+- SRC-MASTER-1.2-REQUIREMENTS: compiled_master_contract; Datum 2026-10-27; direct_library_read_bounded_lines; libfile_6188057b2048819196091cd6ec5d5b08 version2 file_00000000661081f9b5b0ff41d54fcc10 lines1-332. Umfang: Read requirements/status definitions only, lines1-332. Full business register not imported; this compiled contract is not original chat evidence.
+- SRC-SYSTEM-PREVIEW-20261027: runtime_observation; Datum 2026-10-27; parent_browser_observation; https://system.nexifyai.cloud/. Umfang: Parent cloudbrowser13:27/13:28: development-preview public agency/product landing, text guide without Live AI. Origin repo/commit/writer unknown; Vercel known-team404 is no nonexistence proof. Codex CLI authorship is user hypothesis.
+
+## Soll / Ist / Abschluss
+
+### MASTER-01
+
+Soll (SRC-MASTER-TECH-1.1): Shell/Routen: Keine freie Kombination nicht vorhandener Links; keine Produktions-/Providerroute aus dem lokalen Browser abgeleitet.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt, apps/site/tests/browser-coverage.mjs, evidence/one-app-2026-10-27/public-route-coverage.json
+Beleg: 72 direkte Routen-/Sprachprüfungen für36 öffentliche Seiten,1724 reale DOM-Linkaktivierungen mit Back/Forward und gemeinsamer Shell;216 Breitenfälle, Reload und Skiplink; unbekannte/private Wege im Integrationstest.
+Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
+Lücke: Keine freie Kombination nicht vorhandener Links; keine Produktions-/Providerroute aus dem lokalen Browser abgeleitet.
+Nächster Schritt (Frontend QA): Am freigegebenen Zielbuild die realen Providergrenzen separat prüfen.
+Abschluss: exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review
+
+### MASTER-02
+
+Soll (SRC-MASTER-TECH-1.1): Domain/Runtime: Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: evidence/one-app-2026-10-27/deployment-parent-report.json, config/deployment-topology.json, config/one-web-app.json, docs/contracts/current-main-integration.md, docs/contracts/current-runtime-gap.md, evidence/one-app-2026-10-27/takeover-runtime-read.json
+Beleg: Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zurückgegeben. Lokale Integration ist kein Deployment.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.
+Nächster Schritt (Deploymentowner): Ziel-/Ownerbindung lesend ermitteln; keine Aliasänderung.
+Abschluss: Projekt, Root, Build, Output, Branch, Aliasziel und Zeitpunkt eindeutig gebunden; Ist/Ziel und Rückweg bestätigt, keine Ableitung aus READY allein.
+
+### MASTER-03
+
+Soll (SRC-MASTER-TECH-1.1): Session: Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/site/src/Auth.tsx, apps/site/tests/browser-auth.mjs, evidence/one-app-2026-10-27/browser-auth.txt, apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt, tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, config/clerk-production.json, tools/app_backend.py, config/one-web-app.json
+Beleg: Synthetisches Sign-in/out, Fehlergrenzen, lokale Frist und Rollenentzug geprüft.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.
+Nächster Schritt (Identityowner): Exakten autorisierten Issuer und Sessionadapter nachweisen, dann reale Positiv-/Negativfälle.
+Abschluss: Reale Sign-in/out-, Ablauf-/Widerruf- und Mehrtabfälle plus abgewiesener geschützter Serverdirektaufruf am exakten Release bestanden; Testsession zählt nicht.
+
+### MASTER-04
+
+Soll (SRC-MASTER-TECH-1.1): Rollen/Tenants: Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/selfservice/domain.py, tests/test_selfservice_domain.py, evidence/integration-2026-10-27/independent-review.md, tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt, tools/app_backend.py, docs/contracts/factory-api-auth.md, tests/test_selfservice_decisions.py
+Beleg: Lokale Domain-/Queue-Tenantnegatives; gefälschte Browserclaims liefern keine privaten Seiten.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.
+Nächster Schritt (Identity-/Datenowner): Serverseitiges Actor-Tenant-Mapping und ACL-Prüfumgebung belegen.
+Abschluss: Für jede tatsächlich angebotene Fläche positiver erlaubter und negativer fremder Actor/Tenant-Test, DOI-/Einmallink-Replay und Exportisolation am gebundenen Ziel nachgewiesen.
+
+### MASTER-05
+
+Soll (SRC-MASTER-TECH-1.1): Seiteneffekte: Echte externe Schreibausgänge und Reconciliation nicht getestet.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/selfservice/domain.py, tests/test_selfservice_domain.py, evidence/integration-2026-10-27/independent-review.md, tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, tools/local_control.py, config/local-control.json, tests/test_selfservice_decisions.py
+Beleg: Lokale Replay-/Hold-/Unknown-outcome-/Settlement- und Wiederanlauftests; kein doppeltes lokales Ergebnis.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Echte externe Schreibausgänge und Reconciliation nicht getestet.
+Nächster Schritt (Adapter-/Finanzierungsowner): Nur autorisierte Sandboxadapter mit eindeutiger Reconciliation prüfen; keine echten Zahlungen.
+Abschluss: Doppelte Zustellung/Timeout/Restart erzeugt genau eine autoritativ belegte Wirkung, unklarer Ausgang bleibt bis Reconciliation offen; Preise/Buchungsrechte separat bestätigt.
+
+### MASTER-06
+
+Soll (SRC-MASTER-TECH-1.1): Runner: Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, tools/local_control.py, tools/remediation_queue.py, config/local-control.json
+Beleg: Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups geprüft.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.
+Nächster Schritt (Runtimeowner): Autorisierte Runtime-/Leasegrenze bestimmen, vor Cutover verteilte Gegenproben planen.
+Abschluss: Alter Fence wird serverseitig verworfen, kein zweiter Writer; Checkpoint/Resultat nach Restart exakt gelesen, Parent nur nach allen unabhängigen Receipts geschlossen.
+
+### MASTER-07
+
+Soll (SRC-MASTER-TECH-1.1): Sprache: Kein linguistisches oder rechtliches Übersetzungsgutachten; echtes Providerwidget bleibt unverbunden.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/site/src/Auth.tsx, apps/site/tests/browser-auth.mjs, evidence/one-app-2026-10-27/browser-auth.txt, apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt, apps/web/components/HomeContent.tsx, apps/web/components/Workspace.tsx, apps/site/tests/browser-coverage.mjs, evidence/one-app-2026-10-27/public-route-coverage.json
+Beleg: Alle36 öffentlichen Seiten in DE/NL mit Titel, Zusammenfassung und Abschnitten geprüft. Zwei generische deutsche Beschriftungen korrigiert; Marken, Logos und fester Claim erhalten. Bestehende FR-/Authfälle separat getestet.
+Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
+Lücke: Kein linguistisches oder rechtliches Übersetzungsgutachten; echtes Providerwidget bleibt unverbunden.
+Nächster Schritt (Frontend QA / Sprachfreigabe): Fachliche Sprachfreigabe und echte Widgetprüfung nach Providerbereitschaft.
+Abschluss: exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review
+
+### MASTER-08
+
+Soll (SRC-MASTER-TECH-1.1): Tokens: Reale externe Clerk-Widgetzustände sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: config/design-tokens.json, evidence/one-app-2026-10-27/check.txt, apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt, tests/test_public_surface_contract.py, apps/web/components/WorkspaceRebuild.css, evidence/one-app-2026-10-27/public-surface-contract.txt
+Beleg: Eigene aktive CSS/TSX-Oberfläche auf harte Farbwerte geprüft; generierte CSS-/JSON-Tokenwerte unabhängig aus zentraler Quelle rekonstruiert und verglichen; keine eigenen Chart-/Canvaszustände vorhanden. Linkzielgrößen nutzen bestehenden target-min-Token.
+Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
+Lücke: Reale externe Clerk-Widgetzustände sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.
+Nächster Schritt (Designsystemowner): Echtes Widget nach bestätigter Providerkonfiguration gegen Tokens prüfen; keine pauschale Fremdwidgetabdeckung.
+Abschluss: exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review
+
+### MASTER-09
+
+Soll (SRC-MASTER-TECH-1.1): Responsive/Accessibility: Screenreader-Ausgaben, visuelle Inhaltsverluste/Überlagerungen bei Zoom/Textabstand und Kontrast über Bilder/Gradienten sind nicht vollständig geprüft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt, evidence/one-app-2026-10-27/check.txt, apps/site/tests/browser-accessibility.mjs, evidence/one-app-2026-10-27/accessibility-local.json, evidence/one-app-2026-10-27/target-size-before.json, apps/site/tests/browser-text-spacing.mjs, evidence/one-app-2026-10-27/text-spacing.json, evidence/one-app-2026-10-27/resize-review-followup.md, tools/check_text_resize_evidence.py, config/design-rules.json, apps/site/tests/browser-contrast-scope.mjs, evidence/one-app-2026-10-27/decision-accessibility.json, evidence/one-app-2026-10-27/decision-screenshot-review.json
+Beleg: 36mobile Seiten: sichtbare Kontrollnamen,44px-Ziele,Reduced Motion,Overflow und Skiplink; Dialog Tab/Shift-Tab/ESC/Fokusreturn.216 Routen-/Locale-/Breitenfälle sowie108 Geometrieprüfungen mit Textabständen und tatsächlich gemessener Textverdopplung. Root-Font-Scheinnachweis unabhängig erkannt, ersetzt; Header-/Textüberläufe korrigiert. Kleine Marken-/Footer-/Desktoplinks konkret korrigiert.
+Auslieferung: local_remaining; keine Gesamtanforderung abgenommen.
+Lücke: Screenreader-Ausgaben, visuelle Inhaltsverluste/Überlagerungen bei Zoom/Textabstand und Kontrast über Bilder/Gradienten sind nicht vollständig geprüft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.
+Nächster Schritt (Accessibility QA): Qualifizierte manuelle Kriterienprüfung mit tatsächlicher Assistenztechnik durchführen; visuelle Kontrast-/Inhaltsverlustprüfung ergänzen; Orca/NVDA sind in dieser Umgebung nicht verfügbar, Fall bleibt offen.
+Abschluss: Anwendbare Kriterien einzeln mit Zielbrowser/Assistenztechnik/Version und fachlicher Prüferqualifikation belegt; alle bestätigten Befunde nachgeprüft, keine Zertifizierung aus Heuristik.
+
+### MASTER-10
+
+Soll (SRC-MASTER-TECH-1.1): API-/Modulverträge: Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, tools/app_backend.py, config/one-web-app.json, config/local-control.json, docs/contracts/factory.openapi.json
+Beleg: Feste lokale Schemas/Versionen, unbekannte Felder, Rollen und Paginationnegatives geprüft.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.
+Nächster Schritt (Backend-/Adapterowner): Autorisierte typisierte Adapter und aktuelle Zielantworten nachweisen.
+Abschluss: Jede benötigte Operation besitzt Versions-/Schema-/Fehlervertrag und vollständigen realen Antwort-/Paginationbeleg; unbekannte Operation bleibt gesperrt.
+
+### MASTER-11
+
+Soll (SRC-MASTER-TECH-1.1): Offline Builder/Authpanel: Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/site/scripts/build-standalone.mjs, apps/site/tests/standalone.test.mjs, evidence/one-app-2026-10-27/browser-standalone.txt, apps/site/src/Auth.tsx, apps/site/tests/browser-auth.mjs, evidence/one-app-2026-10-27/browser-auth.txt, apps/site/tests/browser-integration.mjs, evidence/one-app-2026-10-27/browser-integration.txt
+Beleg: Realer Einzeldateibuild, Imports/Reexports negativ, file/hash-UI, Auth aus, keine externen Requests im lokalen Test.
+Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
+Lücke: Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers.
+Nächster Schritt (Frontend QA): Prüfungen am späteren Release wiederholen; Providergrenzen gesondert behandeln.
+Abschluss: exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review
+
+### MASTER-12
+
+Soll (SRC-MASTER-TECH-1.1): Reale Adapter: Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/selfservice/domain.py, tests/test_selfservice_domain.py, evidence/integration-2026-10-27/independent-review.md, evidence/one-app-2026-10-27/deployment-parent-report.json, docs/operating-model/NEXIFY-GESAMTSYSTEM.md, config/selfservice-policy.json, config/local-control.json, tests/test_selfservice_decisions.py, docs/contracts/trial-policy-clarification.md, tests/test_suite_trial.py, docs/contracts/suite-trial-local.md, evidence/one-app-2026-10-27/suite-trial-focused.txt, evidence/one-app-2026-10-27/suite-trial-independent-review.md, evidence/one-app-2026-10-27/suite-trial-method-binding.json
+Beleg: Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelität/Expiry/Identity-/Tenant-/Activationnegatives und gültigerFundingübergang lokal geprüft; Funding vor Modellreservierung/Dispatch unverändert.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.
+Nächster Schritt (Jeweiliger Adapterowner): Autorisierte konkrete externe Adapterverträge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.
+Abschluss: Lokale Regel MASTER-12-TRIAL-01 geprüft; Gesamtfall erst nach realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.
+
+### MASTER-13
+
+Soll (SRC-MASTER-TECH-1.1): PWA: Keine tatsächliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: prototypen/sw.js, docs/contracts/one-web-app-integration.md, apps/site/pwa/plugin.mjs, apps/site/pwa/worker.js, apps/site/src/public-installation.mjs, apps/site/tests/public-installation.test.mjs, apps/site/tests/browser-pwa.mjs, evidence/one-app-2026-10-27/pwa-browser.json, docs/contracts/public-installation.md
+Beleg: Installationslücke lokal implementiert: expliziter public-pwa-Modus, Manifest mit Originalsignet und zentralen Tokens, echter netzabhängiger Serviceworker.9Browserprüfungen: Registrierung, Manifest, Cache leer, Offline-GET/POST ohne Antwort, Reconnect ohne Replay, eigener Unregister-Rückweg.4negative/positive Nodefälle. Normale/Standalone-Builds deaktiviert.
+Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
+Lücke: Keine tatsächliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.
+Nächster Schritt (Frontend Engineering / Geräte-QA / Deploymentowner): Expliziten Build auf freigegebenen Zielgeräten installieren/aktualisieren/deinstallieren; privates Offlineverhalten nur nach separatem Produkt-/Datenvertrag.
+Abschluss: exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review
+
+### MASTER-14
+
+Soll (SRC-MASTER-TECH-1.1): Wissen: Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: tools/brain_ingestion.py, tests/test_brain_ingestion.py, tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, config/local-control.json
+Beleg: Lokales Staging/Version/ACL/Redaktion und Chunkhashvorschau; externe Rückführung ausdrücklich false.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.
+Nächster Schritt (Brainowner): Mapping/ACL und autorisierten neutralen Readbackpfad nachweisen; keine Kundendateninjektion.
+Abschluss: Exakte Inhaltsgleichheit und Indexzuordnung am bestätigten Tenant nach Write/Index/Readback, Fremdtenantnegative und Provenienz-/Lifecyclebeleg bestanden; Toolerfolg allein genügt nicht.
+
+### MASTER-15
+
+Soll (SRC-MASTER-TECH-1.1): Build/Deployment: Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: apps/site/scripts/build-standalone.mjs, apps/site/tests/standalone.test.mjs, evidence/one-app-2026-10-27/browser-standalone.txt, evidence/one-app-2026-10-27/build.txt, evidence/one-app-2026-10-27/deployment-parent-report.json, config/one-web-app.json, docs/contracts/one-web-app-integration.md
+Beleg: Normal-/Standalonebuild, Chunks/ESM und bestehende lokale Release-Archivtests geprüft.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.
+Nächster Schritt (Releaseowner): Exakten Kandidaten erst nach Freigabe in autorisierter Runtime prüfen.
+Abschluss: Exakter Release-/Assethash auf bestätigter Runtime, echte Routen/Session/Provider-E2E, Restore/Rückweg und qualifizierte unabhängige Freigabe vollständig belegt.
+
+### MASTER-16
+
+Soll (SRC-MASTER-TECH-1.1): Migration: Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: tests/test_ai_migration.py, tests/test_selfservice_domain.py, config/ai-migration-policy.json, tests/test_selfservice_decisions.py
+Beleg: Offline-CAS-/Übergangsplanung und parallele additive Schema-Starts getestet.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.
+Nächster Schritt (Runtime-/Backupowner): Backup-/Exitbelege lesen und kontrollierten Restore innerhalb gesonderter Rechte durchführen.
+Abschluss: Echtes Backup am Ziel lesbar, Restore und Integrität nachgewiesen, RPO/RTO nur gegen genehmigte Vorgaben bewertet, Jobs/Schreibrechte sicher übergeben und Rückrouting ohne doppelte Wirkung geprüft.
+
+### MASTER-17
+
+Soll (SRC-MASTER-TECH-1.1): Baselinevergleich: Vergleichbare echte Ziel-/Lastmessung und autorisierte quantitative Akzeptanzgrenzen fehlen.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: tests/test_capacity_planner.py, evidence/one-app-2026-10-27/source-binding.json, config/capacity-policy.json, tools/capacity_planner.py
+Beleg: Lokale Prüfmethoden/Versionen und begrenzte Kapazitätsrechnungen dokumentiert.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Vergleichbare echte Ziel-/Lastmessung und autorisierte quantitative Akzeptanzgrenzen fehlen.
+Nächster Schritt (Betriebs-/Performanceowner): Gleiche Ziel-/Zeit-/Lastmethode und genehmigte Grenzen festlegen; keine SLAs erfinden.
+Abschluss: Gleiche Methode/Ziel-/Versions-/Lastbindung vor/nach, vollständige Messdimensionen und genehmigte Grenzwerte; Teilmessung bleibt Teilmessung.
+
+### MASTER-18
+
+Soll (SRC-MASTER-TECH-1.1): Toolrouting: Reale MCP-/SSH-Operationsrechte und Zielantworten nicht integriert; neuere externe Fehler-/Unknown-outcome-Abgleich fehlt.
+Einordnung: master acceptance requirement, not claimed original user wording
+Dateien/Funktionen: tests/test_local_control.py, tests/test_one_app_backend.py, evidence/one-app-2026-10-27/closed-loop.txt, config/local-control.json, tools/local_control.py, tools/context_executor.py
+Beleg: Drei feste lokale Fähigkeiten; Skillhash, Scope/Host, stale/partial-Evidenz und SSH-Fallback negativ geprüft.
+Auslieferung: external_blocked; keine Gesamtanforderung abgenommen.
+Lücke: Reale MCP-/SSH-Operationsrechte und Zielantworten nicht integriert; neuere externe Fehler-/Unknown-outcome-Abgleich fehlt.
+Nächster Schritt (Adapter-/Securityowner): Typisierte Operation und frischen autoritativen Nachweis lesen; keine generische Shellersatzroute.
+Abschluss: Operation wird nur bei passendem aktuellen vollständigen Nachweis gewählt; falsches Ziel/Rechteverlust/Skillfehler/Partial/ungewisser Ausgang blockieren oder reconciliieren belegt; kein stiller Fallback.
+
+### RQ-023
+
+Soll (SRC-MASTER-TECH-1.1, SRC-CHAT-20261025-ONEAPP): One Web App with shared shell/navigation/session/roles/tokens/i18n; tenant-separated agency/selfservice/customer modules.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: config/one-web-app.json, apps/site/src/main.tsx, apps/web/components/Workspace.tsx
+Beleg: v6:339Python31Node and combined browser evidence
+Auslieferung: local_built_and_tested; keine Gesamtanforderung abgenommen.
+Lücke: Private identity/backend and complete portal/workplace runtime not connected.
+Nächster Schritt (D06 / Identity / Release): Bind verified identity and actual module adapters; keep private routes fail-closed.
+Abschluss: Same release proves public/private transitions and authorized tenant negatives; production gates pass.
+
+### RQ-024
+
+Soll (SRC-MASTER-TECH-1.1): Consolidate exact main/PR35/PR36/fix graph and actual domains/runtime/owners.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: docs/contracts/current-main-integration.md, evidence/one-app-2026-10-27/takeover-runtime-read.json
+Beleg: v6 merge079057f; Preview66866298 and Production2a552ed observed separately
+Auslieferung: local_built_and_tested; keine Gesamtanforderung abgenommen.
+Lücke: Target settings/final domain decision and deployed merged candidate not proven.
+Nächster Schritt (D06 / Release): Read exact current root/build/output/branch and apply all release gates.
+Abschluss: Exact approved release hash bound to intended runtime/domain with tested rollback.
+
+### RQ-025
+
+Soll (SRC-MASTER-TECH-1.1): Versioned baseline/test methodology with target, units, workload, limits and provenance.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: config/capacity-policy.json, tests/test_capacity_planner.py
+Beleg: Local negative capacity cases; no invented SLA
+Auslieferung: documented_and_partially_tested; keine Gesamtanforderung abgenommen.
+Lücke: Authoritative target measurements and approved quantitative limits missing.
+Nächster Schritt (Operations / Product): Collect authorized read-only target baseline; approve criteria.
+Abschluss: Comparable before/after measurements on exact target and agreed limits.
+
+### RQ-026
+
+Soll (SRC-MASTER-TECH-1.1): Intent→skill/version/hash→typed operation→tenant/project/exact target→fresh matching evidence.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: tools/local_control.py, config/local-control.json, tools/automation/mcp_probe.py
+Beleg: Local typed operations and strict MCP discovery negatives tested
+Auslieferung: local_built_and_tested; keine Gesamtanforderung abgenommen.
+Lücke: Remote adapters/rights/target evidence remain absent.
+Nächster Schritt (D06 / Adapter Security): Load authorized operation contracts; no generic SSH fallback.
+Abschluss: Fresh complete real operation evidence and all wrong-target/scope/stale/unknown-outcome negatives.
+
+### REC-SERVER-01
+
+Soll (SRC-CHAT-20261025-SERVER): Persistent components on the large persistent server; one Hostinger for the entire Brain.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: config/operating-model.json, config/one-web-app.json
+Beleg: Parent-verified original excerpt only; no host write or migration
+Auslieferung: target_plan_only; keine Gesamtanforderung abgenommen.
+Lücke: Exact host/assets/tenant mapping, inventory, backup/restore and migration approval absent.
+Nächster Schritt (Runtime / Brain / Owner): Resolve target identities and dependencies read-only; no migration.
+Abschluss: Named authoritative hosts/resources with backup/restore/dry-run/rollback and specific migration authorization.
+
+### REC-DESIGN-01
+
+Soll (SRC-LINKED-STANDARDS): Original logo/mark, registered composition and central tokens; promoted design source hashes and941px/mobile/keyboard proof.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: config/design-tokens.json, packages/design-system/README.md, docs/contracts/acceptance-decisions.md
+Beleg: Local token regeneration/browser checks; external headless contract URLs not accessible through available reader
+Auslieferung: partial_local_evidence; keine Gesamtanforderung abgenommen.
+Lücke: Promoted v6 source/lock import and pixel/source conformity not verified; repo design README identifies2.0.
+Nächster Schritt (D04 / D06 / D07): Retrieve authorized original contracts/assets before dependent design promotion; preserve baseline.
+Abschluss: Exact promoted source/lock/asset hashes, applicable visual941px/mobile/keyboard proof and independent review.
+
+### REC-REA-01
+
+Soll (SRC-LINKED-STANDARDS, SRC-NATIVE-REA-TOOLS): Official sources and bounded artifact manifest, then supported REA analysis and independent verification before reuse. Actual native registered tools, EvidenceIDs and independent APPROVE; no fabricated rea.* operations.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: docs/automation/rea-mcp.md, tools/automation/rea_stdio_probe.py, config/integrations/rea-mcp.json
+Beleg: Documented local runtime paths absent; Page mentions6.5, repository wrapper6.8
+Auslieferung: documented_runtime_not_available; keine Gesamtanforderung abgenommen.
+Lücke: Authorized installation/version compatibility and actual applicable analysis evidence missing.
+Nächster Schritt (D06 / D07): Resolve version/source/rights and existing runtime; no silent install or fabricated scan success.
+Abschluss: Bounded source-hash/version/provider/options/file-policy evidence; independently reviewed findings and real integration tests.
+
+### REC-MEDIA-01
+
+Soll (SRC-USER-PUBLISH-20261027, SRC-REPO-POLICY, SRC-VOICE-REJECTION, SRC-HERO-MOTION, SRC-AIFLY-CHARACTER, SRC-HERO-FREE-FIGURES, SRC-HERO-CLEAN-AUDIO, SRC-HERO-SPEECH-CRITIQUE, SRC-HERO-NO-PLAYER-FRAME, SRC-HERO-THREE-FIGURES-STORY): Existing required video/voice assets and scripts must follow original casting, locale, rights and production gates.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: docs/contracts/hero-media.md, docs/contracts/hero-production-plan.json, config/presenter-system.json, docs/contracts/hero-media.json, evidence/reconciliation-2026-10-27/review-asset-inspection.json
+Beleg: Local Library bytes inspected:13.091seconds, VP9+Opus,1664x1248/24fps, actual alpha0..255, audio decoded mean-16.6dB peak-1.3dB. Frames1/7s inspected; auditory judgment unavailable in current model. Original acceptance not established. Source-conflict contract guard and negative regression implemented. Current 20 factory tests include cross-config rejection of presenter approval, generation, voice status, source divergence and audible autoplay. Reference video technical/pixel inspection does not establish auditory quality or user acceptance.
+Auslieferung: local_source_conflict_guard_built_review_asset_not_accepted; keine Gesamtanforderung abgenommen.
+Lücke: Original25Oct rejects old voices/eyes; repository claims newer26Oct explicit voice mapping without original locator. Supersession unresolved. Existing13secondWebM is review-only, no acceptance demonstrated; no final audio/video proof.
+Nächster Schritt (D04 / Media / D02): Resolve alleged26Oct original voice source; materialize review asset through Library routine and inspect actual image/audio; no paid generation or voice cloning.
+Abschluss: Original-matching real motion/free hero/background, deliberate audio activation, distinct approved voices/character and integrated locale control; exact accepted assets/rights/readback and browser proof.
+
+### REC-RELEASE-01
+
+Soll (SRC-USER-PUBLISH-20261027, SRC-CHAT-20261025-ONEAPP, SRC-MASTER-1.2-REQUIREMENTS): Publish existing affected coherent app under current user authorization after scope-specific gates; unrelated Brain services are not a blanket public-page gate.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Dateien/Funktionen: docs/04-betrieb/freigabe-gate-status.md, config/deployment-topology.json
+Beleg: v6 local gates and read-only current deployments; no release performed
+Auslieferung: publication_authorized_gates_open; keine Gesamtanforderung abgenommen.
+Lücke: Affected-scope assessment missing. Exact preview/release readback, measured rollback and actual auth/tenant/provider acceptance are required only where affected; incomplete modules cannot be presented as completed.
+Nächster Schritt (Release / Identity / D07): Assess concrete public/private/module/provider release scope and collect its required evidence. Do not bypass affected security or tenant gates by relabeling scope.
+Abschluss: Exact affected release-scope gates, qualified independent approval and actual authorized target readback; remaining modules stay explicit.
+
+### REC-ARCH-PRODUCT-01
+
+Soll (SRC-PRODUCT-NO-LEGACY-BRAIN, SRC-ASSISTANT-ARCH-PLAN, SRC-CALL-BRAIN-20261027, SRC-CHAT-AGENCY-20261018): Separate product architecture without AgentMemory/LightRAG from retained agency Brain services; data isolation and functional readback remain vendor-independent. Current call prefers retaining a repairable existing Brain; agency and product scopes remain distinct. No mandatory provider migration or duplicate architecture.
+Einordnung: derived scoped requirement; original excerpt supplied by parent, not full original transcript
+Dateien/Funktionen: tools/brain_ingestion.py, config/local-control.json, config/one-web-app.json
+Beleg: Local Brain preview is redacted staging only, no remote write.
+Auslieferung: not_verified; keine Gesamtanforderung abgenommen.
+Lücke: No later original override or accepted product knowledge adapter demonstrated.
+Nächster Schritt (D06 / D07): Scope each knowledge requirement to product vs agency; inspect newer originals before architecture changes; retain existing services.
+Abschluss: Actual scoped knowledge path proves isolation/provenance/readback; selected product provider conforms to applicable original decisions.
+
+### REC-WORKPLACE-01
+
+Soll (SRC-ORIGINAL-WORKSPACE, SRC-ITSAPLAN-CORE, SRC-CHAT-20261025-ONEAPP, SRC-BLUEPRINT, SRC-DESIGN-HANDOFF, SRC-INTERNAL-SURFACES): Original AionUi workplace, own WebUI integration, downloadable local solution, eight core agents and typed libraries with automatic/manual selection.
+Einordnung: derived scoped requirement; original excerpt supplied by parent, not full original transcript
+Dateien/Funktionen: config/one-web-app.json, tools/local_control.py, config/operating-model.json, evidence/reconciliation-2026-10-27/route-feature-inventory.json
+Beleg: Current public Workspace is a public shell, not proven original authenticated AionUi workplace.
+Auslieferung: planned_targets_backend_not_connected; keine Gesamtanforderung abgenommen.
+Lücke: Original source/license/import contract, actual eight-agent execution/library flow and packaged local application not demonstrated. Historical internal routes /workspace,/posteingang,/myadmin are not implemented by the public shell; original module source and actual protected flows missing. Actual current internal targets use /intern/workspace, /intern/posteingang, /intern/leitstand, /intern/verwaltung; historical /workspace,/posteingang,/myadmin mapping unresolved. Config marks targets planned/backend not_connected; this is a local implementation gap plus external identity acceptance, not an implemented workplace.
+Nächster Schritt (D06 / D07): Map original source and existing module interfaces; measure actual feature coverage before implementing; no replacement dashboard or old-price adoption.
+Abschluss: Licensed original workspace modules and download verified; eight actual configured core-agent flows plus libraries/manual/automatic routing tested with tenant negatives.
+
+### REC-PORTALS-01
+
+Soll (SRC-PORTAL-PLACEMENT, SRC-CHAT-20261025-ONEAPP): Portal templates live in their corresponding business routes within one coherent app.
+Einordnung: derived scoped requirement; original excerpt supplied by parent, not full original transcript
+Dateien/Funktionen: config/site-map.json, config/one-web-app.json, apps/site/src/main.tsx
+Beleg: 36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity.
+Auslieferung: not_verified; keine Gesamtanforderung abgenommen.
+Lücke: Actual protected portal templates/data adapters/workplace flows not integrated; static public routes do not prove portal functionality.
+Nächster Schritt (D06 / D07): Map each original portal to business area/route/role/tenant and test actual module; never expose private routes to meet publication pressure.
+Abschluss: Each required portal works in its correct route with verified session/tenant, real data path and negative direct-link/API tests.
+
+### REC-CONTENT-01
+
+Soll (SRC-CONTENT-FOUR-SERVERS, SRC-TOKENS-STRICT): Page-by-page complete content/products with authorized price calculation and central token usage; four-server knowledge inventory is a scoped target.
+Einordnung: derived scoped requirement; original excerpt supplied by parent, not full original transcript
+Dateien/Funktionen: config/fakten.json, config/api-prepaid.json, config/page-explainers.json, config/design-tokens.json
+Beleg: Local content/locale/token checks cover current public catalog, not all original product requirements.
+Auslieferung: not_verified; keine Gesamtanforderung abgenommen.
+Lücke: Complete original product matrix, approved price-source reconciliation and four actual host/data mappings absent.
+Nächster Schritt (D02 / D04 / D06): Build exact product/price/route coverage from originals; preserve newer approved prices and tenant boundaries; read-only server identification first.
+Abschluss: Every required product and price justified by current authority and tests; no invented rates or shared customer knowledge index.
+
+### RQ-027
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Product and agency Brain scopes remain separate; retain a repairable existing Brain under the latest user call.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: config/one-web-app.json, config/operating-model.json
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: No runtime provider/tenant readback in this local workstream.
+Nächster Schritt (Architecture / Parent Brain workstream): Coordinate existing Brain diagnosis with parent; do not rebuild or delete services.
+Abschluss: Scoped actual data-path, tenant and readback evidence; no universal provider dependency.
+
+### RQ-028
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Preserve chosen original visual reference, later corrections and central tokens rather than restore historical themes.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: config/design-tokens.json, apps/web/components/Workspace.tsx
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: Exact original baseline visual/source comparison remains incomplete.
+Nächster Schritt (Design / Implementation): Compare chosen a19 preview against current local candidate without discarding newer fixes.
+Abschluss: Source/version-bound visual comparison and applicable independent review.
+
+### RQ-029
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Three free-standing speaking characters need intelligible scene/story guidance, approved visual/voice/language assets and integrated accessible controls.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: docs/contracts/hero-media.json, docs/contracts/hero-production-plan.json, config/presenter-system.json
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: No approved final recordings; historical voice rejection unresolved; local audio input unsupported.
+Nächster Schritt (Media / Design): Resolve original casting/asset rights, obtain qualified listening comparison, integrate approved assets only.
+Abschluss: Actual accepted motion/audio/locale/story evidence at exact site build.
+
+### RQ-030
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Trace each confirmed requirement through original provenance, implementation, test, package/live target and open acceptance.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: config/acceptance-coverage.json, tools/verify_requirements_reconciliation.py
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: Bounded excerpts and compiled master are not the entire original chat history.
+Nächster Schritt (Implementation / Parent sources): Continue reconciling missing originals and annotate collisions; never silently promote reports.
+Abschluss: Each applicable requirement source-linked and release/remaining gap verifiable.
+
+### RQ-031
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Track lifecycle from concept/configuration through connection/training/result review/startup and agreed operation; evidence may close bounded subjobs.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: tools/local_control.py, tools/remediation_queue.py, tools/app_backend.py
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: Local controller is tested; real authorized runtime/business operation remains unverified.
+Nächster Schritt (Control / Runtime): Bind concrete adapters only after operation/tenant/approval evidence; keep bounded resume.
+Abschluss: Exact job/result/readback/review/parent-join with accountable remaining dependencies.
+
+### RQ-032
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Reconcile dated eight core agents, ten standard MCPs and optional department rentals; rental duration is distinct from Suite-trial and LLM funding.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: config/brain/agents.json, config/fakten.json, apps/selfservice/domain.py
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: Historical scope/prices are not automatically current activated capability or tariff.
+Nächster Schritt (Product / Commercial): Compare source-backed product inventory and current policy without changing unresolved prices.
+Abschluss: Actual feature/capability and tariff provenance, explicit approvals and scoped functional tests.
+
+### RQ-033
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Apply release gates to affected public pages, products, private portals/admin, payments and agency Brain separately.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: docs/04-betrieb/freigabe-gate-status.md, config/one-web-app.json
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: No exact release-scope impact assessment or real acceptance evidence for incomplete modules.
+Nächster Schritt (Release / Security): Record affected dependencies per proposed release; retain actual security/tenant gates without unrelated blanket blockers.
+Abschluss: Scoped gates and real target readback pass; partial publication never claims total completion.
+
+### RQ-034
+
+Soll (SRC-MASTER-1.2-REQUIREMENTS): Complete shop and chosen unfinished preview reference while preserving newer fixes; frontend/demo is not a functioning shop.
+Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
+Dateien/Funktionen: config/site-map.json, docs/contracts/factory.openapi.json
+Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: Shop/checkout/order contracts are target definitions, no complete production shop or accepted route/brand mapping.
+Nächster Schritt (Shop / Product / Implementation): Resolve source-backed shop assortment/route/backend scope and implement the safe local slice with regression.
+Abschluss: Actual product/cart/checkout/order/return/funding/tenant flows accepted; no fake stock or paid execution.

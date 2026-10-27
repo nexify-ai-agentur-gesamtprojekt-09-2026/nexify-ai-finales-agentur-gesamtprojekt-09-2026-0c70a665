@@ -31,7 +31,7 @@
         "min": 12,
         "max": 20
       },
-      "voice_assignment_status": "provisional_retain_pending_audition"
+      "voice_assignment_status": "source_conflict_pending_original_reconciliation"
     },
     {
       "draft_id": "hero-aifly-de-001",
@@ -57,7 +57,7 @@
         "min": 12,
         "max": 20
       },
-      "voice_assignment_status": "recast_preferred_from_existing_provider_assets"
+      "voice_assignment_status": "source_conflict_pending_original_reconciliation"
     },
     {
       "draft_id": "hero-user-de-001",
@@ -84,7 +84,7 @@
         "min": 12,
         "max": 20
       },
-      "voice_assignment_status": "provisional_retain_pending_identity_and_rights_check"
+      "voice_assignment_status": "source_conflict_pending_original_reconciliation"
     }
   ],
   "renditions": {
@@ -122,14 +122,14 @@
     "known_references": {
       "Lbm7qDmJUxIxpWx9qhZO": {
         "current_role": "nex",
-        "decision": "provisional_retain_pending_audition"
+        "decision": "historical_reference_only_not_approved_pending_original_reconciliation"
       },
       "feTHtWuEJFLTOWyoreyy": {
         "current_roles": [
           "aifly",
           "user"
         ],
-        "decision": "retain_for_pascal_only_if_personal_use_is_verified; prefer_a_distinct_asset_for_aifly"
+        "decision": "historical_reference_only_not_approved_pending_original_reconciliation"
       }
     },
     "role_profiles": {
@@ -150,5 +150,15 @@
       "no_clipping_noise_or_unintended_emotion",
       "chosen_voice_id_written_back_before_generation"
     ]
+  },
+  "source_reconciliation": {
+    "status": "blocked_pending_original_source_reconciliation",
+    "confirmed_rejection_source": "https://chatgpt.com/c/6ade6c38-6ad0-83ed-b578-91d19eaafbc0?messageId=6947b47e-f5d5-4a8f-b276-b6684de6fe1b",
+    "confirmed_rejection_date": "2026-10-25",
+    "claimed_newer_mapping_date": "2026-10-26",
+    "claimed_newer_original_locator": null,
+    "historical_ids_are_approved": false,
+    "generation_allowed": false,
+    "note": "Parent-read original rejects prior voices; repository claims a later mapping without an original locator. Preserve references for provenance; neither reuse nor supersession is verified."
   }
 }

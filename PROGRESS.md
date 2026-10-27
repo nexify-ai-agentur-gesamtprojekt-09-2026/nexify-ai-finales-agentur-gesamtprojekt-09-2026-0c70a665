@@ -1,3 +1,21 @@
+# Wiederaufnahme: Quellen- und Medienvertrag
+
+Current State: geprüfte Version6 auf079057f erhalten; laufendes Delta schließt
+zwei unabhängige Reviewbefunde: widersprüchliche Stimmenfreigabe in der
+API-Dokumentation und fehlender CLI-Check der Presenter-Konfiguration. Historische
+Voice-IDs bleiben unbestätigt; keine Generierung, Veröffentlichung oder Kosten.
+Quellenregister im bestehenden acceptance-coverage erweitert, Ansicht generiert
+und Herkunft/Owner/Referenzen mit negativen Tests gesichert. Tatsächliche interne
+Routen sind geplante Ziele ohne verbundenes Backend; kein fertiger Arbeitsplatz.
+Referenzvideo materialisiert und Bild/Alpha/Audiopegel geprüft; kein verlässliches
+Hörurteil, keine Assetabnahme. Kein Astra. check/test/e2e/check-arch/clean-check
+bestanden,346 Pythonfälle. Fokussierter Medienfix separat Sol-geprüft; abschließende
+Registerprüfung noch laufend. Kein vollständiger Produkt- oder Liveabschluss.
+Next Steps: abschließende Sol-Prüfung des exakten Deltas, Master1.2-Originaldateien
+abgleichen und bestätigte Seiten-/Shop-/Portal-/Arbeitsplatzlücken fortsetzen.
+Veröffentlichung beauftragt; tatsächliche Auth-/Tenant-/Provider-/Restoregates
+bleiben erforderlich. Kein Server-/DNS-Cutover und keine neue Zugangseinrichtung.
+
 # Lokale Konsolidierung des aktuellen Main
 
 Current State: eigener Worktree integration/current-main-2026-10-27 integriert

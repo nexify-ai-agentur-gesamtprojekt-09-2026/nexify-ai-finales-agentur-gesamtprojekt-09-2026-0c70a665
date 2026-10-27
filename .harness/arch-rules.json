@@ -225,6 +225,24 @@
       "what": "Suitebeginn wird durch Funding gesperrt oder gewährt unfinanzierte Modellnutzung.",
       "why": "Kostenlose Suitezeit ist kein Modellguthaben; Replay darf keine neue Zeit oder Rechte erzeugen.",
       "fix": "Startbedingungen, exaktes Zeitfenster und Funding-Negatives getrennt erhalten und unabhängig prüfen."
+    },
+    {
+      "id": "ARCH-026",
+      "description": "Historische Stimmenreferenzen umgehen keine Quellenfreigabe über parallele Presenter-Konfiguration.",
+      "check": "python3 -m unittest discover -s tests -p test_factory_contract.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Medienvertrag, Produktionsplan oder Presenter geben unbestätigte Stimmen frei.",
+      "why": "Ein historischer Identifier ist keine aktuelle Nutzerfreigabe oder Hörabnahme.",
+      "fix": "Quellenkonflikt konsistent sperren und negative Cross-Config-Tests erhalten."
+    },
+    {
+      "id": "ARCH-027",
+      "description": "Abgeleitete Quellenansicht bleibt deckungsgleich und Berichte werden nicht zu Originalen oder Abnahme.",
+      "check": "python3 tools/verify_requirements_reconciliation.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_requirements_reconciliation.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Quellenregister verliert Owner, Referenzen oder seine abgeleitete Ansicht.",
+      "why": "Quellenkonsolidierung und lokale Tests beweisen keine vollständige Originalrekonstruktion oder Produktionsabnahme.",
+      "fix": "Bestehendes Register und Ansicht gemeinsam aktualisieren; offene Abnahmen behalten."
     }
   ]
 }

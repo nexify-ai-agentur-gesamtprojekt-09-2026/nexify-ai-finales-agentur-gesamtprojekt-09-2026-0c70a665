@@ -1,0 +1,52 @@
+{
+  "method": "read-only public root HTML retrieval; no browser execution, login, chat or provider calls",
+  "observed_at": "2026-10-27T13:30:16.492991+00:00",
+  "targets": [
+    {
+      "requested_url": "https://system.nexifyai.cloud/",
+      "status": 200,
+      "final_url": "https://system.nexifyai.cloud/",
+      "bytes": 861,
+      "truncated": false,
+      "sha256": "efeb1113037f1883a77111635a5ea1e6fecea9f7531acad773dd3d17c0147f39",
+      "title": [
+        "NeXify AI · Ihr nächster Schritt"
+      ],
+      "asset_paths": [
+        "/assets/index-BY5pWrmg.js",
+        "/assets/index-DUcWEmJb.css",
+        "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+      ],
+      "server": "envoy",
+      "deployment_headers": {}
+    },
+    {
+      "requested_url": "https://nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70-9196hhw4h.vercel.app/",
+      "status": 200,
+      "final_url": "https://vercel.com/login",
+      "bytes": 331179,
+      "truncated": false,
+      "sha256": "231ac3b07e61f900fc4e77abd6a9b8d2cda13cfdae4be5067e0022abd2c4d6da",
+      "title": [
+        "Login – Vercel"
+      ],
+      "asset_paths": [],
+      "server": "envoy",
+      "deployment_headers": {
+        "x-vercel-id": "cle1::92xfq-1793107818055-bda34f7ba9b9",
+        "x-vercel-cache": "HIT"
+      },
+      "result": "protected_deployment_login_redirect; not application content",
+      "redirect_query_retained": false
+    }
+  ],
+  "local_build": {
+    "path": "apps/site/dist/index.html",
+    "sha256": "220fab24170ebcf27b5f31f25df2b5565247e6307b825b24e24b044027e67938",
+    "asset_paths": [
+      "/assets/index-D7C6xxhy.js",
+      "/assets/index-BfTpC8T8.css"
+    ]
+  },
+  "limits": "HTML/asset paths cannot prove identical source commits, authorship, backend, tenant isolation or acceptance. User references retained without reset or redesign."
+}

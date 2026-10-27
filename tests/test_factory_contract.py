@@ -154,6 +154,26 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(contract.validate_media(media), [])
         self.assertEqual(contract.validate_media_plan(media_plan), [])
 
+    def test_presenter_cannot_bypass_media_rejection(self):
+        presenter = json.loads((ROOT / "config/presenter-system.json").read_text())
+        media = json.loads((ROOT / "docs/contracts/hero-media.json").read_text())
+        plan = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
+        self.assertEqual(contract.validate_presenter_contract(presenter, media, plan), [])
+        for kind in ("approved", "generation", "voice", "source", "autoplay"):
+            changed = copy.deepcopy(presenter)
+            if kind == "approved":
+                changed["source_reconciliation"]["historical_ids_are_approved"] = True
+            elif kind == "generation":
+                changed["source_reconciliation"]["generation_allowed"] = True
+            elif kind == "voice":
+                changed["speakers"]["aifly"]["voice_status"] = "approved"
+            elif kind == "source":
+                changed["source_reconciliation"]["confirmed_rejection_source"] = "different"
+            else:
+                changed["behavior"]["automatic_audio"] = True
+            with self.subTest(kind=kind):
+                self.assertTrue(contract.validate_presenter_contract(changed, media, plan))
+
     def test_media_plan_rejects_missing_locale_and_shared_aifly_decision(self):
         plan = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
         del plan["jobs"][0]["script_drafts"]["fr"]
@@ -161,6 +181,15 @@ class SourceTests(unittest.TestCase):
         errors = contract.validate_media_plan(plan)
         self.assertTrue(any("scripts incomplete" in error for error in errors))
         self.assertTrue(any("distinct-voice" in error for error in errors))
+
+    def test_historical_voices_cannot_be_silently_approved_or_generated(self):
+        plan = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
+        for field in ("historical_ids_are_approved", "generation_allowed"):
+            changed = copy.deepcopy(plan)
+            changed["source_reconciliation"][field] = True
+            self.assertTrue(any("original-source conflict" in e for e in contract.validate_media_plan(changed)))
+        del plan["source_reconciliation"]
+        self.assertTrue(any("original-source conflict" in e for e in contract.validate_media_plan(plan)))
 
     def test_real_private_operation_loses_tenant_binding_or_deny_policy(self):
         document = json.loads((ROOT / "docs/contracts/factory.openapi.json").read_text())

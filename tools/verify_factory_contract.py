@@ -271,7 +271,8 @@ def validate_media(media):
     for person in people:
         binding = person.get("voice_binding") or {}
         if binding.get("voice_id") != expected.get(person.get("slot")):
-            errors.append("Media: voice mapping differs from explicit user instruction")
+            errors.append("Media: historical voice reference changed without provenance reconciliation")
+    errors.extend(validate_media_source_reconciliation(media))
     access = media.get("access", {})
     if access.get("default") != "deny" or access.get("provider_credentials_in_browser") is not False:
         errors.append("Media: unsafe provider access")
@@ -283,6 +284,39 @@ def validate_media(media):
         errors.append("Media: ElevenLabs audio source missing")
     if media.get("presentation", {}).get("audible_autoplay") is not False:
         errors.append("Media: audible autoplay enabled")
+    return errors
+
+
+def validate_media_source_reconciliation(media):
+    reconciliation = media.get("source_reconciliation", {})
+    if (reconciliation.get("status") != "blocked_pending_original_source_reconciliation"
+            or reconciliation.get("historical_ids_are_approved") is not False
+            or reconciliation.get("generation_allowed") is not False
+            or not reconciliation.get("confirmed_rejection_source")):
+        return ["Media: original-source conflict must block approval and generation"]
+    return []
+
+
+
+def validate_presenter_contract(presenter, media, plan):
+    """Historical IDs never become approval through a parallel config writer."""
+    errors = validate_media_source_reconciliation(presenter)
+    for other in (media, plan):
+        if presenter.get("source_reconciliation") != other.get("source_reconciliation"):
+            errors.append("Presenter: source reconciliation differs across media contracts")
+    speakers = presenter.get("speakers", {})
+    expected = {"nex": "nex", "aifly": "aifly", "pascal": "user"}
+    bindings = {person.get("slot"): person.get("voice_binding", {}).get("voice_id")
+                for person in media.get("participants", [])}
+    if set(speakers) != set(expected):
+        errors.append("Presenter: missing or unexpected speaker")
+    for name, slot in expected.items():
+        speaker = speakers.get(name, {})
+        if (speaker.get("voice_status") != "historical_reference_only_not_approved"
+                or speaker.get("voice_id") != bindings.get(slot)):
+            errors.append("Presenter: historical reference cannot imply voice approval")
+    if presenter.get("behavior", {}).get("automatic_audio") is not False:
+        errors.append("Presenter: audible autoplay enabled")
     return errors
 
 
@@ -299,6 +333,7 @@ def validate_media_plan(plan):
             or execution.get("published") is not False):
         errors.append("Media plan: provider work claimed without runtime evidence")
 
+    errors.extend(validate_media_source_reconciliation(plan))
     casting = plan.get("voice_casting", {})
     if casting.get("state") != "provider_asset_inventory_and_audition_required":
         errors.append("Media plan: casting inventory gate missing")
@@ -316,8 +351,8 @@ def validate_media_plan(plan):
             errors.append(f"Media plan: {slot} DE/NL/FR hero scripts incomplete")
         if job.get("text_status") != "editorial_ready_pending_voice_audition":
             errors.append(f"Media plan: {slot} text/audition boundary missing")
-    if by_slot.get("aifly", {}).get("voice_assignment_status") != "recast_preferred_from_existing_provider_assets":
-        errors.append("Media plan: AIFly distinct-voice decision missing")
+    if any(job.get("voice_assignment_status") != "source_conflict_pending_original_reconciliation" for job in by_slot.values()):
+        errors.append("Media plan: distinct-voice original-source reconciliation missing")
     return errors
 
 
@@ -332,12 +367,14 @@ def main():
         media = json.loads((folder / "hero-media.json").read_text())
         media_plan = json.loads((folder / "hero-production-plan.json").read_text())
         catalog = json.loads((folder / "prototype-pages.json").read_text())
+        presenter = json.loads((args.root / "config/presenter-system.json").read_text())
         bundled_reference = args.root / "reference/handoff-n2"
         roots = {"N1": args.root, "N2": args.repo_n2 or (bundled_reference if bundled_reference.is_dir()
                  else args.root.parent / "nexify-ai-finales-agentur-gesamtprojekt-09-2026")}
         page_ids = {page["page_id"] for page in catalog.get("pages", [])}
         errors = (validate_document(document, page_ids) + validate_media(media)
                   + validate_media_plan(media_plan)
+                  + validate_presenter_contract(presenter, media, media_plan)
                   + validate_catalog(catalog, roots) + validate_sources(document, roots)
                   + validate_coverage(document, catalog))
     except (OSError, ValueError, TypeError) as exc:
