@@ -1,0 +1,618 @@
+{
+  "schema_version": 1,
+  "id": "WORKFLOW-INTEGRATION-2026-10-27",
+  "controller": "AIFly",
+  "execution_mode": "offline_handoff_not_runtime",
+  "base_commit": "a19cd5035d3809dedda94050486026ac0186662e",
+  "sources": [
+    {
+      "id": "SRC-001",
+      "path": "evidence/integration-2026-10-27/scope.md",
+      "status": "verified_local",
+      "sha256": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-002",
+      "path": "apps/selfservice/domain.py",
+      "status": "verified_local",
+      "sha256": "c790755c311a2d2b13736c3611715d65c29ab8b45392aaf9d398f7349c214407",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-003",
+      "path": "tests/test_selfservice_domain.py",
+      "status": "verified_local",
+      "sha256": "4b0f43c23a0257451c71d5ee5612a1ad9a08573f1566c0b5418b68da0da1038c",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-004",
+      "path": "tools/seo_catalog.py",
+      "status": "verified_local",
+      "sha256": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-005",
+      "path": "tests/test_seo_catalog.py",
+      "status": "verified_local",
+      "sha256": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-006",
+      "path": "tools/verify_workflow_record.py",
+      "status": "verified_local",
+      "sha256": "ea808a4ad857363f3f205c3668ea4f44f0724560bda11366e0588fa046e4980d",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-007",
+      "path": "tests/test_workflow_record.py",
+      "status": "verified_local",
+      "sha256": "1f4ae9fc9be1f30faee2d8ae10b030b63c8786a371effc860c152d06164463dd",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-008",
+      "path": "docs/contracts/integration-workflow.md",
+      "status": "verified_local",
+      "sha256": "f9d59dc607f79af08e114b7ad4435b2020633e5d71a83b17af8a034ae5daefcc",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-009",
+      "path": "docs/workflows/context-to-delivery.md",
+      "status": "verified_local",
+      "sha256": "aba5f1c13ad844f040db349b84859575f0a4353c3d34aeb27619270d3d40b10f",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-010",
+      "path": "config/knowledge-source-access.json",
+      "status": "verified_local",
+      "sha256": "35e4b2e281c7920e73a0c73e63401ba2ac60ae61391a6725e2d24f70cf593994",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-011",
+      "path": "config/source-boundaries.json",
+      "status": "verified_local",
+      "sha256": "0b9fb61c0fab2206b1b4ae04110b497d276980d1c0ad590723cf2e8f60f1ea7b",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-012",
+      "path": "config/integrations/small-business.json",
+      "status": "verified_local",
+      "sha256": "37d00fadd22f0fa0505afa90710649114dc11b5fe55f130994851f6d2429b2a8",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-013",
+      "path": "config/operating-model.json",
+      "status": "verified_local",
+      "sha256": "cf06ea67d0ad29812541528b64724f6da456b1da59532003f5d410d0b7662845",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "MISSING-external-brain-readback",
+      "path": null,
+      "status": "missing",
+      "sha256": null,
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "MISSING-current-mirror-topology",
+      "path": null,
+      "status": "missing",
+      "sha256": null,
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "MISSING-pinned-small-business-source-cache",
+      "path": null,
+      "status": "missing",
+      "sha256": null,
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "MISSING-parent-master-summary",
+      "path": null,
+      "status": "missing",
+      "sha256": null,
+      "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "STEP-PR35-FUNDING-documented",
+      "path": "evidence/integration-2026-10-27/selfservice.txt",
+      "sha256": "f823acdc1faf233bde8b811a235e6dbd2367105036edf1183fb78b0f8a94da19",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-002": "c790755c311a2d2b13736c3611715d65c29ab8b45392aaf9d398f7349c214407",
+        "SRC-003": "4b0f43c23a0257451c71d5ee5612a1ad9a08573f1566c0b5418b68da0da1038c"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-PR35-FUNDING-built",
+      "path": "evidence/integration-2026-10-27/selfservice.txt",
+      "sha256": "f823acdc1faf233bde8b811a235e6dbd2367105036edf1183fb78b0f8a94da19",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-002": "c790755c311a2d2b13736c3611715d65c29ab8b45392aaf9d398f7349c214407",
+        "SRC-003": "4b0f43c23a0257451c71d5ee5612a1ad9a08573f1566c0b5418b68da0da1038c"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "built",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-PR35-FUNDING-locally_tested",
+      "path": "evidence/integration-2026-10-27/selfservice.txt",
+      "sha256": "f823acdc1faf233bde8b811a235e6dbd2367105036edf1183fb78b0f8a94da19",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-002": "c790755c311a2d2b13736c3611715d65c29ab8b45392aaf9d398f7349c214407",
+        "SRC-003": "4b0f43c23a0257451c71d5ee5612a1ad9a08573f1566c0b5418b68da0da1038c"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "locally_tested",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-PR35-SEO-documented",
+      "path": "evidence/integration-2026-10-27/seo.txt",
+      "sha256": "7020a5c074ede774a59c7e2a9131c13746aca6fdc7923ea88dab1d320ac4e659",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-004": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
+        "SRC-005": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-PR35-SEO-built",
+      "path": "evidence/integration-2026-10-27/seo.txt",
+      "sha256": "7020a5c074ede774a59c7e2a9131c13746aca6fdc7923ea88dab1d320ac4e659",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-004": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
+        "SRC-005": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "built",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-PR35-SEO-locally_tested",
+      "path": "evidence/integration-2026-10-27/seo.txt",
+      "sha256": "7020a5c074ede774a59c7e2a9131c13746aca6fdc7923ea88dab1d320ac4e659",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-004": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
+        "SRC-005": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "locally_tested",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-WORKFLOW-documented",
+      "path": "evidence/integration-2026-10-27/workflow.txt",
+      "sha256": "b239cb802c6bc6d9ba4284369dadc72cdfc8201c3596d22e6bb578cf11427b3b",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-006": "ea808a4ad857363f3f205c3668ea4f44f0724560bda11366e0588fa046e4980d",
+        "SRC-007": "1f4ae9fc9be1f30faee2d8ae10b030b63c8786a371effc860c152d06164463dd",
+        "SRC-008": "f9d59dc607f79af08e114b7ad4435b2020633e5d71a83b17af8a034ae5daefcc",
+        "SRC-009": "aba5f1c13ad844f040db349b84859575f0a4353c3d34aeb27619270d3d40b10f"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-WORKFLOW-built",
+      "path": "evidence/integration-2026-10-27/workflow.txt",
+      "sha256": "b239cb802c6bc6d9ba4284369dadc72cdfc8201c3596d22e6bb578cf11427b3b",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-006": "ea808a4ad857363f3f205c3668ea4f44f0724560bda11366e0588fa046e4980d",
+        "SRC-007": "1f4ae9fc9be1f30faee2d8ae10b030b63c8786a371effc860c152d06164463dd",
+        "SRC-008": "f9d59dc607f79af08e114b7ad4435b2020633e5d71a83b17af8a034ae5daefcc",
+        "SRC-009": "aba5f1c13ad844f040db349b84859575f0a4353c3d34aeb27619270d3d40b10f"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "built",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-WORKFLOW-locally_tested",
+      "path": "evidence/integration-2026-10-27/workflow.txt",
+      "sha256": "b239cb802c6bc6d9ba4284369dadc72cdfc8201c3596d22e6bb578cf11427b3b",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-006": "ea808a4ad857363f3f205c3668ea4f44f0724560bda11366e0588fa046e4980d",
+        "SRC-007": "1f4ae9fc9be1f30faee2d8ae10b030b63c8786a371effc860c152d06164463dd",
+        "SRC-008": "f9d59dc607f79af08e114b7ad4435b2020633e5d71a83b17af8a034ae5daefcc",
+        "SRC-009": "aba5f1c13ad844f040db349b84859575f0a4353c3d34aeb27619270d3d40b10f"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "locally_tested",
+      "kind": "local_test"
+    },
+    {
+      "id": "STEP-BRAIN-documented",
+      "path": "evidence/integration-2026-10-27/scope.md",
+      "sha256": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-010": "35e4b2e281c7920e73a0c73e63401ba2ac60ae61391a6725e2d24f70cf593994"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    },
+    {
+      "id": "STEP-MIRROR-documented",
+      "path": "evidence/integration-2026-10-27/scope.md",
+      "sha256": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-011": "0b9fb61c0fab2206b1b4ae04110b497d276980d1c0ad590723cf2e8f60f1ea7b"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    },
+    {
+      "id": "STEP-SMB-documented",
+      "path": "evidence/integration-2026-10-27/scope.md",
+      "sha256": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-012": "37d00fadd22f0fa0505afa90710649114dc11b5fe55f130994851f6d2429b2a8"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    },
+    {
+      "id": "STEP-ACCEPTANCE-documented",
+      "path": "evidence/integration-2026-10-27/scope.md",
+      "sha256": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+        "SRC-013": "cf06ea67d0ad29812541528b64724f6da456b1da59532003f5d410d0b7662845"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    },
+    {
+      "id": "STEP-MASTER-SOURCE-documented",
+      "path": "evidence/integration-2026-10-27/scope.md",
+      "sha256": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074",
+      "observed_at": "2026-10-27T04:09:49.739199+00:00",
+      "source_hashes": {
+        "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "STEP-PR35-FUNDING",
+      "owner": "Codex local integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "delivered_with_gaps",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": true,
+        "locally_tested": true,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-PR35-FUNDING-documented"
+        ],
+        "built": [
+          "STEP-PR35-FUNDING-built"
+        ],
+        "locally_tested": [
+          "STEP-PR35-FUNDING-locally_tested"
+        ]
+      },
+      "next_step": "Independent review of purchase/reservation binding and additive legacy migration before any runtime rollout.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-PR35-SEO",
+      "owner": "Codex local integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "delivered_with_gaps",
+      "source_ids": [
+        "SRC-001",
+        "SRC-004",
+        "SRC-005"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": true,
+        "locally_tested": true,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-PR35-SEO-documented"
+        ],
+        "built": [
+          "STEP-PR35-SEO-built"
+        ],
+        "locally_tested": [
+          "STEP-PR35-SEO-locally_tested"
+        ]
+      },
+      "next_step": "Independent review of writer serialization and rollback; benchmark larger imports before live use.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-WORKFLOW",
+      "owner": "Codex local integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "delivered_with_gaps",
+      "source_ids": [
+        "SRC-001",
+        "SRC-006",
+        "SRC-007",
+        "SRC-008",
+        "SRC-009"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": true,
+        "locally_tested": true,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-WORKFLOW-documented"
+        ],
+        "built": [
+          "STEP-WORKFLOW-built"
+        ],
+        "locally_tested": [
+          "STEP-WORKFLOW-locally_tested"
+        ]
+      },
+      "next_step": "Review the versioned WorkflowRecord with AIFly; no worker activation from offline status.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-BRAIN",
+      "owner": "Project owner / authorized integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-001",
+        "SRC-010"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-BRAIN-documented"
+        ]
+      },
+      "next_step": "Resolve actual authorized project/tenant/target then obtain WRITE → INDEX → EXACT READ-BACK → CONTENT COMPARE evidence.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": "external_brain"
+    },
+    {
+      "id": "STEP-MIRROR",
+      "owner": "Project owner / authorized integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-001",
+        "SRC-011"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-MIRROR-documented"
+        ]
+      },
+      "next_step": "Read actual GitHub/GitLab topology and resolve direction with project owner before any remote write.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-SMB",
+      "owner": "Project owner / authorized integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-001",
+        "SRC-012"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-SMB-documented"
+        ]
+      },
+      "next_step": "Supply pinned authorized source cache including LICENSE; verify hashes and count before loading router.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-ACCEPTANCE",
+      "owner": "Project owner / authorized integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [
+        "STEP-PR35-FUNDING",
+        "STEP-PR35-SEO",
+        "STEP-WORKFLOW",
+        "STEP-BRAIN",
+        "STEP-MIRROR"
+      ],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-001",
+        "SRC-013"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-ACCEPTANCE-documented"
+        ]
+      },
+      "next_step": "Obtain independent review, actual runtime/user-flow/negative/restore evidence and concrete production authorization.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-MASTER-SOURCE",
+      "owner": "Project owner / authorized integration operator",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-001"
+      ],
+      "created_at": "2026-10-27T04:09:49.739199+00:00",
+      "updated_at": "2026-10-27T04:09:49.739199+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-MASTER-SOURCE-documented"
+        ]
+      },
+      "next_step": "Receive the newly authored master project summary from parent and reconcile verified requirements without importing private notes.",
+      "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    }
+  ]
+}

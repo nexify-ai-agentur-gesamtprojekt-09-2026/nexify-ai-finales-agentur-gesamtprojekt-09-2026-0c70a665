@@ -1,3 +1,35 @@
+# Isolierte Integration · 27.10.2026
+
+Current State: eigener lokaler Checkout `/workspace/nexify-integration`, Zweig
+`integration/consolidated-2026-10-27`, Ausgangscommit
+`a19cd5035d3809dedda94050486026ac0186662e`. Keine Remotes im Clone;
+ursprüngliche Checkouts unverändert. Keine Pushes, Merges oder Deployments.
+
+PR35-Reviewfälle lokal reproduziert und korrigiert: Kauf-/Reservierungsbindung
+an Händler, Route und Bedingungen; atomare Aktualitätsprüfung paralleler
+Keywordimporte. Additive Migration sperrt Altreservierungen ohne Snapshot nur
+für neue Ausführung; Storno und Reconciliation bleiben erhalten.
+WorkflowRecord ergänzt vorhandene Governance/Queue, keine zweite Datenbank:
+8 Aufgaben, Quellenhashes, Owner, Abhängigkeiten, getrennte Evidenzstufen und
+Rollback; neue Prüfregeln ARCH-015 bis ARCH-017. F-007 bleibt einziges aktives
+Feature, keine Änderung auf passing und keine Runtimefreigabe.
+
+Prüfstatus: make check (0 Fehler/0 Warnungen), make test (290 Pythonfälle),
+make e2e (290 Pythonfälle und Manifest/Config-Integrität) und make check-arch
+bestanden. Belege unter `evidence/integration-2026-10-27/`. E2E ist hier die
+bestehende lokale Repositoryprüfkette, kein externer End-to-End-/Produktionslauf.
+Keine UI-Änderung oder neue Browserprüfung. Kein universeller Fehlerfreiheitsnachweis.
+
+Next Steps: unabhängige Gegenprüfung des lokalen Diffs; Parent-Masterauftrag
+als geprüfte Projektquelle ergänzen. Danach konkreten autorisierten Betriebs-
+anschluss getrennt behandeln. Brain-Ziel/Tenant und WRITE→INDEX→EXACT READ-BACK
+→CONTENT COMPARE fehlen; Mirror-Richtung extern ungeprüft; Small-Business
+verify blockiert mit `Source unavailable: LICENSE` (0 Aktionen, keine bestätigte
+installierte Skillzahl). Produktions-Restore, Liveabläufe und Abnahme offen.
+Keine laufenden Dienste einschließlich Slack und keine externen Kosten verändert.
+
+---
+
 # Gemeinsame KI-Governance und Kapazitätsplanung · 26.10.2026
 
 Arbeitszweig: `factory/source-faithful-rebuild-2026-10-26`, Basis6bb8b4c.

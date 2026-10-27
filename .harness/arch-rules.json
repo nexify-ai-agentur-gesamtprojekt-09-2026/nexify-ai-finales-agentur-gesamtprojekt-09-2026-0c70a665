@@ -126,6 +126,33 @@
       "what": "Eine Übergangs-, Eingabelese-, Einheiten- oder Unbekanntheitsgegenprobe scheitert.",
       "why": "Eine fehlende neue Voraussetzung darf alte Jobs nicht abschalten. Unvermessene Lastbereiche und bekannte Teilsummen sind keine passende Kapazität oder vollständige Kostenobergrenze.",
       "fix": "Konkreten Offline-Entscheidungspfad oder Berechnungsfehler beheben, Grenzfälle nachstellen und erneut prüfen; weder bestehende Laufzeiten ändern noch aus Auditdaten Produktionsfreigaben ableiten."
+    },
+    {
+      "id": "ARCH-015",
+      "description": "Gekaufte Managed-Guthaben und Reservierungen bleiben an Händler, Route und Bedingungen gebunden.",
+      "check": "python3 -m unittest discover -s tests -p test_selfservice_domain.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine persistierte Finanzierungsbindung kann umgedeutet werden.",
+      "why": "Aktuelle Konfiguration ist keine Zustimmung zur Migration bestehender Käufe oder Aufträge.",
+      "fix": "Kaufbindung und Reservierungssnapshot prüfen; Legacy-Ausführung ohne Beleg sperren, Storno und Reconciliation erhalten."
+    },
+    {
+      "id": "ARCH-016",
+      "description": "Parallele Keywordimporte prüfen Aktualität atomar und rollen Fehler vollständig zurück.",
+      "check": "python3 -m unittest discover -s tests -p test_seo_catalog.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein älterer oder gleichzeitiger widersprüchlicher Import kann neuere Messdaten ersetzen.",
+      "why": "Vor der Schreibtransaktion gelesene Daten sind keine aktuelle Entscheidungsgrundlage.",
+      "fix": "Schreibsperre vor Aktualitätsprüfung erwerben und Parallelitäts-/Rollbacktests erhalten."
+    },
+    {
+      "id": "ARCH-017",
+      "description": "Aufgaben, Quellen und getrennte Evidenzstufen bleiben maschinenprüfbar; Offlineprüfung ist keine Runtimefreigabe.",
+      "check": "python3 tools/verify_workflow_record.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_workflow_record.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Workflowreferenzen, Hashes, Scope oder Abnahmestufen sind widersprüchlich.",
+      "why": "Dokumentation und lokaler Test dürfen keine Verbindung oder Abnahme vortäuschen.",
+      "fix": "Aktuelle Quellen und echte Belege prüfen; fehlende Runtimevoraussetzungen offen führen statt Status freizuschreiben."
     }
   ]
 }
