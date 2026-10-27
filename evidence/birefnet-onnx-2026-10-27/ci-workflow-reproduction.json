@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-27T18:04:47.371126+00:00",
+  "failed_head": "391fce078119a70c337346490c069c2a923aa28a",
+  "ordinary_push_run": 40556299559,
+  "jobs_started": 0,
+  "local_reproduction": "PyYAML ScannerError mapping values are not allowed here, line38 column54",
+  "cause": "colon-space in unquoted run scalar --only-binary=:all:",
+  "fix": "YAML literal block preserves exact pip command as string",
+  "local_parse_after_fix": "passed",
+  "workflow_sha256": "71a3692c99ee5621a2624def2d3b6ab6677451a5781d288d04dd5997b109b49d",
+  "external_blockers": {
+    "canonical_vercel": "existing GitHub author NeXify-Automate not linked to Vercel team; no identity or team change",
+    "cloudflare": "preview script name exceeds54characters; not changed",
+    "paperclip": "automatic review unauthorized by bot configuration; no rights change"
+  },
+  "remote_ci_after_fix": "pending"
+}
