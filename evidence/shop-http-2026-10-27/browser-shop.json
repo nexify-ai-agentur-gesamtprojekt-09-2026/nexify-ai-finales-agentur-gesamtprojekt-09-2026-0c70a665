@@ -329,7 +329,7 @@
     "apps/web/components/ShopPanel.tsx": "577710a7b395bc63dec079a83a03495964145430ca5a084af75c2337bcf0e3b1",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
-    "apps/site/src/main.tsx": "73926e28b6205213533dde7c6a11152f5827566a132d0cc16dd99cc467acc440",
+    "apps/site/src/main.tsx": "a953501d055d109e02331237dfc85c40222e48317f789c19903808bfe54433d9",
     "apps/site/tests/browser-shop.mjs": "7fff41db565df1eb1ab8a8d4ad81e7114f8693d04fe67180ad47167b94403952",
     "apps/site/tests/fixtures/shop-server.py": "fac5b80427ec919bfc2102150e21af0162252e19466cda6239414a104fab9ac6"
   },

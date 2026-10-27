@@ -38,10 +38,16 @@ function BrowserLink({href,onClick,target,download,...props}:SiteLinkProps){
   }
   return <a {...props} href={presented} target={target} download={download} onClick={clicked}/>;
 }
+const descriptions={de:"NeXify AI: Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",nl:"NeXify AI: websites, apps en verbonden processen. Bespreek uw plan direct met NeX Agentic AIFly.",fr:"NeXify AI : sites web, applications et processus connectés. Discutez de votre projet directement avec NeX Agentic AIFly."};
 function RouteContent({page}:{page?:PublicPage}){
   const{locale}=useUI();
   const unavailable={de:['Seite nicht verfügbar','Diese Seite ist in dieser öffentlichen Anwendung nicht freigegeben. Private Daten werden nicht angezeigt.','Zur Startseite'],nl:['Pagina niet beschikbaar','Deze pagina is niet beschikbaar in deze openbare toepassing. Privégegevens worden niet getoond.','Naar de startpagina'],fr:['Page indisponible',"Cette page n’est pas disponible dans cette application publique. Les données privées ne sont pas affichées.",'Vers l’accueil']}[locale];
-  useEffect(()=>{document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:`${unavailable[0]} · NeXify AI`;window.scrollTo(0,0);},[page,locale]);
+  useEffect(()=>{
+    document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:`${unavailable[0]} · NeXify AI`;
+    const meta=document.querySelector('meta[name="description"]');
+    if(meta)meta.setAttribute('content',descriptions[locale]);
+    window.scrollTo(0,0);
+  },[page,locale]);
   if(!page)return <section className="public-page"><span className="eyebrow">NEXIFY AI</span><h1>{unavailable[0]}</h1><p>{unavailable[1]}</p><BrowserLink className="route-action" href="/">{unavailable[2]}</BrowserLink></section>;
   const modules=explainers.find(entry=>entry.page_id===page.id)?.modules||[];
   const video=videos[page.id]?.[locale];
