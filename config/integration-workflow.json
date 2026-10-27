@@ -123,6 +123,14 @@
       "status": "missing",
       "sha256": null,
       "observed_at": "2026-10-27T04:09:49.739199+00:00"
+    },
+    {
+      "id": "SRC-ADDITIONAL-ACCEPTANCE",
+      "path": "docs/contracts/additional-acceptance-scope.md",
+      "status": "verified_local",
+      "sha256": "2ba3809ff0153dba3d2583fbcb9ea30c84c7fef88e14a8c19e08caf2290f9a61",
+      "observed_at": "2026-10-27T04:14:53.491165+00:00",
+      "external_claims": "parent_report_not_independently_verified"
     }
   ],
   "evidence": [
@@ -330,6 +338,32 @@
       "observed_at": "2026-10-27T04:09:49.739199+00:00",
       "source_hashes": {
         "SRC-001": "582a820cd6e64a4e566a34a7d69f50eec0b1fd67c78f04510d4eb8c4826e2074"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    },
+    {
+      "id": "STEP-PR36-REVIEW-documented",
+      "path": "docs/contracts/additional-acceptance-scope.md",
+      "sha256": "2ba3809ff0153dba3d2583fbcb9ea30c84c7fef88e14a8c19e08caf2290f9a61",
+      "observed_at": "2026-10-27T04:14:53.491165+00:00",
+      "source_hashes": {
+        "SRC-ADDITIONAL-ACCEPTANCE": "2ba3809ff0153dba3d2583fbcb9ea30c84c7fef88e14a8c19e08caf2290f9a61"
+      },
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "tenant": null,
+      "stage": "documented",
+      "kind": "local_record"
+    },
+    {
+      "id": "STEP-SRV1941843-BACKUP-documented",
+      "path": "docs/contracts/additional-acceptance-scope.md",
+      "sha256": "2ba3809ff0153dba3d2583fbcb9ea30c84c7fef88e14a8c19e08caf2290f9a61",
+      "observed_at": "2026-10-27T04:14:53.491165+00:00",
+      "source_hashes": {
+        "SRC-ADDITIONAL-ACCEPTANCE": "2ba3809ff0153dba3d2583fbcb9ea30c84c7fef88e14a8c19e08caf2290f9a61"
       },
       "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
       "tenant": null,
@@ -557,7 +591,9 @@
         "STEP-PR35-SEO",
         "STEP-WORKFLOW",
         "STEP-BRAIN",
-        "STEP-MIRROR"
+        "STEP-MIRROR",
+        "STEP-PR36-REVIEW",
+        "STEP-SRV1941843-BACKUP"
       ],
       "status": "blocked",
       "source_ids": [
@@ -612,6 +648,66 @@
       },
       "next_step": "Receive the newly authored master project summary from parent and reconcile verified requirements without importing private notes.",
       "rollback": "Review/revert the isolated local commit; do not mutate existing remote branches or runtime data.",
+      "integration": null
+    },
+    {
+      "id": "STEP-PR36-REVIEW",
+      "owner": "Project owner / PR36 branch owner",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-ADDITIONAL-ACCEPTANCE"
+      ],
+      "created_at": "2026-10-27T04:14:53.491165+00:00",
+      "updated_at": "2026-10-27T04:14:53.491165+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-PR36-REVIEW-documented"
+        ]
+      },
+      "next_step": "Read-only reconcile current PR36 head and 16 reported review cases, identify owner, then separately reproduce findings; no concurrent branch writes.",
+      "rollback": "Keep PR36 branch unchanged; this local record grants no merge or publication.",
+      "integration": null
+    },
+    {
+      "id": "STEP-SRV1941843-BACKUP",
+      "owner": "Authorized operator of srv1941843",
+      "tenant": null,
+      "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+      "dependencies": [],
+      "status": "blocked",
+      "source_ids": [
+        "SRC-ADDITIONAL-ACCEPTANCE"
+      ],
+      "created_at": "2026-10-27T04:14:53.491165+00:00",
+      "updated_at": "2026-10-27T04:14:53.491165+00:00",
+      "due_at": "2026-10-28T04:00:00Z",
+      "stages": {
+        "documented": true,
+        "built": false,
+        "locally_tested": false,
+        "connected": false,
+        "live_tested": false,
+        "accepted": false
+      },
+      "evidence": {
+        "documented": [
+          "STEP-SRV1941843-BACKUP-documented"
+        ]
+      },
+      "next_step": "Read exit log and last successful nexifyai-dify-sicherung backup; prove restore before server migration. No restart or server mutation in this local task.",
+      "rollback": "Preserve existing server runtime; no migration until backup and restore evidence is verified.",
       "integration": null
     }
   ]

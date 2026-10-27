@@ -10,7 +10,7 @@ an Händler, Route und Bedingungen; atomare Aktualitätsprüfung paralleler
 Keywordimporte. Additive Migration sperrt Altreservierungen ohne Snapshot nur
 für neue Ausführung; Storno und Reconciliation bleiben erhalten.
 WorkflowRecord ergänzt vorhandene Governance/Queue, keine zweite Datenbank:
-8 Aufgaben, Quellenhashes, Owner, Abhängigkeiten, getrennte Evidenzstufen und
+10 Aufgaben, Quellenhashes, Owner, Abhängigkeiten, getrennte Evidenzstufen und
 Rollback; neue Prüfregeln ARCH-015 bis ARCH-017. F-007 bleibt einziges aktives
 Feature, keine Änderung auf passing und keine Runtimefreigabe.
 
@@ -27,6 +27,13 @@ anschluss getrennt behandeln. Brain-Ziel/Tenant und WRITE→INDEX→EXACT READ-B
 verify blockiert mit `Source unavailable: LICENSE` (0 Aktionen, keine bestätigte
 installierte Skillzahl). Produktions-Restore, Liveabläufe und Abnahme offen.
 Keine laufenden Dienste einschließlich Slack und keine externen Kosten verändert.
+
+Zusätzlicher Abnahmescope: PR36 mit 16 gemeldeten offenen Reviews sowie
+Backupfehler nexifyai-dify-sicherung auf srv1941843 um 03:40:36 UTC.
+Beides nur als Parentmeldung dokumentiert, nicht selbst reproduziert.
+Branch-Owner-Abgleich beziehungsweise Backup-/Exit-/Restorebeleg erforderlich;
+keine PR36- oder Serveränderung ausgeführt. Details und Zuständigkeiten:
+`docs/contracts/additional-acceptance-scope.md`.
 
 ---
 
