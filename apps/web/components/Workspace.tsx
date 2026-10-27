@@ -25,7 +25,7 @@ export function StartAction({intent,children}:{intent:Intent;children:ReactNode}
   return <button className="primary-button" onClick={() => window.dispatchEvent(new CustomEvent("nexify-action",{detail:intent}))}>{children}</button>;
 }
 
-export default function Workspace({children,pages}:{children:ReactNode;pages:PublicPage[]}) {
+export default function Workspace({children,pages,accountControl}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode}) {
   const [locale,setLocale] = useState<Locale>("de");
   const [open,setOpen] = useState(true);
   const [mobile,setMobile]=useState(false);
@@ -113,7 +113,7 @@ export default function Workspace({children,pages}:{children:ReactNode;pages:Pub
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":"Aller au contenu"}</a>
       <header className="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={site==="teileklar"?"TEILEKLAR Startseite":"NeXify AI Startseite"}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>Ein Bereich von NeXify AI</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>NeXify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
         <SiteNavigation pages={pages} site={site} locale={locale} pathname={pathname}/>
-        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option></select><Link className="account-link" href="/anmelden">{locale==="de"?"Kundenbereich":locale==="nl"?"Klantenzone":"Espace client"}</Link><button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{setOpen(true);messageInput.current?.focus();}}>{t.open}</button></div>
+        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option></select>{accountControl??<Link className="account-link" href="/anmelden">{locale==="de"?"Kundenbereich":locale==="nl"?"Klantenzone":"Espace client"}</Link>}<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{setOpen(true);messageInput.current?.focus();}}>{t.open}</button></div>
       </header>
       <main id="page-content" tabIndex={-1}>{children}</main>
       <SiteFooter pages={pages} site={site} locale={locale}/>
