@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "39ddaddc82a46c929d433c4197bd2f860e963745523df918a7be27ee1431ea77",
+    "PROGRESS.md": "799a44fe68c75b33df3554f3467904fe4e1e8b44805d8fa05df4803d886f820e",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "a676defdf7dcdee6d299afa30b3ab19a59d317ce154583c4ba058d9177a33166",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1382,7 +1382,11 @@
     "config/integrations/birefnet-onnx.json": "eb812904ff5ff2484e9f8cf428a8a3008787f5e9526984c288a35556899e1315",
     "docs/contracts/birefnet-onnx.md": "c9aa67a65ed40df81614aa33383327f17905a7220498c3b8a3e2234990789b12",
     "docs/licenses/birefnet-MIT.txt": "92a7089e0915fc32bc40067560b398f1e6a7a5958abd7d04eda393629a5acefb",
-    "evidence/birefnet-onnx-2026-10-27/catalog-handler-search.md": "389639d7882f1121237e627916d41975321f65a8e89ab4e4ceb49e526d5ec47d"
+    "evidence/birefnet-onnx-2026-10-27/catalog-handler-search.md": "389639d7882f1121237e627916d41975321f65a8e89ab4e4ceb49e526d5ec47d",
+    "tools/reviewed_delivery.py": "eb9fce1f73378e494f7acdcc18d69f7980e01817f07378341dc67963b606fd45",
+    "tests/test_reviewed_delivery.py": "1eb4149ae84bba7271f0c596ecea6c16035dd86d7a4b23baae28a7ef59d4d0f3",
+    "docs/contracts/reviewed-delivery.md": "3fe0dfb12bd1b5d48d39a4b470d0d9b8f8e3549a784046b20bb43e46ff79c343",
+    ".harness/arch-rules.json": "5fb777e79a34840a3dbe8d8ee08647e1db972e267742f877718746942d32e2a0"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2800,6 +2804,23 @@
         "completion_criterion": "Authoritative current policy plus actual positive/negative fitment/order acceptance"
       }
     ],
-    "hash_binding_note": "source_sha256 excludes this register itself; exact register bytes are bound by Git commit and delivery package manifest to avoid a recursive self-hash."
+    "hash_binding_note": "source_sha256 excludes this register itself; exact register bytes are bound by Git commit and delivery package manifest to avoid a recursive self-hash.",
+    "delivery_automation_delta": {
+      "source_role": "user instruction relayed by parent,2026-10-27T17:57Z",
+      "source_reference": "Sentinel_e76dffe75fa081918e1d1da3cbabf564",
+      "original_seen_here": false,
+      "scope": "normal own GitHub branch push and idempotent draft PR; no main merge/promote; GitLab server-local binding not yet established",
+      "owner": "Web implementation owner",
+      "status": "reported_implemented_unverified",
+      "implementation_files": [
+        "tools/reviewed_delivery.py",
+        "tests/test_reviewed_delivery.py",
+        "docs/contracts/reviewed-delivery.md"
+      ],
+      "review_finding": "P2 corrected; separate Sol reviewer independently reproduced blocked/finalfalse/CLIExit2 negatives,21tests passed, no further concrete findings",
+      "live_scope": "Root PR42 creation verified; external merge27897541 of391fce0 at18:04:34UTC. f799bb3 later ordinary push40556996922 all5jobs success but not in42. New followup branch required; no root Mainmerge.",
+      "next_step": "Overall gates and exactcommit readback, then authorized new followup branch push/draft, native idempotency readback and exactheadCI; no duplicatePR42",
+      "gitlab": "server-local per latest user; target/project/transport unbound in this Cloud checkout, no connection/MR/mirror"
+    }
   }
 }

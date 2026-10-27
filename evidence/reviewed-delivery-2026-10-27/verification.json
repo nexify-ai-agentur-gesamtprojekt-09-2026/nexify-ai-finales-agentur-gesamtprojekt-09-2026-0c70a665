@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-27T18:14:26.583389+00:00",
+  "source_sha256": {
+    "tools/reviewed_delivery.py": "eb9fce1f73378e494f7acdcc18d69f7980e01817f07378341dc67963b606fd45",
+    "tests/test_reviewed_delivery.py": "1eb4149ae84bba7271f0c596ecea6c16035dd86d7a4b23baae28a7ef59d4d0f3",
+    "docs/contracts/reviewed-delivery.md": "3fe0dfb12bd1b5d48d39a4b470d0d9b8f8e3549a784046b20bb43e46ff79c343"
+  },
+  "independent_review": {
+    "reviewer": "separate read-only Sol agent /root/review_current_main_sol",
+    "first_finding": "P2: early draft_verified persisted with final remote_main_changed and CLIExit0",
+    "correction": "Success only after final readbacks; catchblocked/finalfalse, preserve confirmed effects",
+    "reproduction_after_fix": "blocked/finalfalse, CLIExit2 for main/branch/pr failure;21tests independently passed",
+    "open_findings": [],
+    "remote_writes_by_reviewer": false
+  },
+  "execution_scope": "fixed repo GitHub own integration branch push and draft only; no merge/force/promote; existing hooks retained",
+  "tested_with_command_doubles": 21,
+  "native_flow_execution": "pending exactcommit preflight; separately verified root native GitHub PR42 is already externally merged",
+  "gitlab": {
+    "location": "server-local per relayed user18:05UTC",
+    "current_remote": "unbound",
+    "mirror_or_mr_performed": false
+  },
+  "limits": [
+    "local evidence bytes/hash/scope validated; reviewer identity and truth remain authorized controller responsibility",
+    "local checkpoint lock is not distributed fencing",
+    "main/otherPR/branch APIs are not globally atomic",
+    "existing PR title/body not automatically edited",
+    "no provider/production acceptance"
+  ]
+}

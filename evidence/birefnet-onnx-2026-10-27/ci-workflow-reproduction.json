@@ -13,13 +13,26 @@
     "cloudflare": "preview script name exceeds54characters; not changed",
     "paperclip": "automatic review unauthorized by bot configuration; no rights change"
   },
-  "remote_ci_after_fix": "pending",
+  "remote_ci_after_fix": {
+    "head": "f799bb388204cfea9bc83101a1fcc56bd8ffe569",
+    "event": "push",
+    "run_id": 40556996922,
+    "conclusion": "success",
+    "jobs": [
+      "repository",
+      "react-site",
+      "next-web",
+      "postgres-isolation",
+      "openapi-schema"
+    ],
+    "readback_at": "2026-10-27T18:10:44.990988+00:00"
+  },
   "second_run": {
     "head": "1451f7a8bae156f4c26371cb0748ea618a33be14",
     "run": 40556591213,
     "other_jobs": "react-site,next-web,postgres-isolation,openapi-schema all success",
     "repository_failure": "setup-python3.12.15 binary from Ubuntu24 hosted cache cannot start in Debianbookworm container: GLIBC_2.38 not found",
     "fix": "same existing Ubuntu24.04 host for setup-python and repository execution; explicit Python3.12.15; pinned Node/actions and all checks retained; obsolete container safe.directory write removed",
-    "native_ci_readback": "pending"
+    "native_ci_readback": "Addressed; subsequent exacthead f799bb3 ordinarypush40556996922 passed all5jobs"
   }
 }

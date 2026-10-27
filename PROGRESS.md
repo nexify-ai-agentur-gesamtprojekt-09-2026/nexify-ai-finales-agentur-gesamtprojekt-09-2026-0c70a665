@@ -830,3 +830,18 @@ Installation, keine echten Produktderivate oder Veröffentlichung ausgeführt.
 Der tatsächliche Kataloghandler wurde in den ausdrücklich geprüften lokalen
 Quellen nicht gefunden; Fortsetzung bleibt unbestätigt. Evidenz und Restschritte:
 `evidence/birefnet-onnx-2026-10-27`. Gesamtshop/Livebetrieb bleiben offen.
+
+### Geprüfte GitHub-Zustellung und Wiederaufnahme
+
+Der feste `tools/reviewed_delivery.py` verbindet vorhandenes git/gh mit
+quellengebundenen lokalen Review-/Gatebelegen, normalem eigenen Branchpush,
+idempotentem Draft und CI-/Remote-Readback. Normale Projekt-/REA-Hooks bleiben
+aktiv. 21 Commanddouble-Fälle prüfen auch unklare Ausgänge und finale Zustands-
+wechsel; ein unabhängiges P2-Finding zu verfrühtem Erfolg wurde korrigiert.
+Reale Rootzustellung: PR42 angelegt, danach extern vom Kontoinhaber mit391fce0
+gemergt (27897541). Root hat nicht gemergt. Die späteren CI-Fixes wurden auf
+f799bb3 im normalen Pushlauf40556996922 in allen5Jobs grün bestätigt; neuer
+Folgebranch erforderlich, weil42 diese Nachträge nicht enthält. GitLab ist
+serverlokal gemeldet, aktuelle Projekt-/Transportbindung bleibt unbestätigt.
+Details und Grenzen: `docs/contracts/reviewed-delivery.md`. Kein Mainpush,
+Forcepush, Promote, Domain-/Server-/Rechtewechsel durch diesen Auftrag.
