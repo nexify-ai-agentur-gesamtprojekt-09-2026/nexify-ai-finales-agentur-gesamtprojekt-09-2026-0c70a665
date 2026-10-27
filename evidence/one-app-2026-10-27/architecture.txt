@@ -1,0 +1,2 @@
+bash scripts/check-arch.sh
+check-arch: alle Regeln eingehalten

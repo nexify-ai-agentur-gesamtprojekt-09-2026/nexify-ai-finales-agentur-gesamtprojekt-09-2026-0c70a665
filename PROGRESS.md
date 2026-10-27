@@ -1,3 +1,35 @@
+# One-Web-App Integrationskandidat · lokal
+
+Current State: neuer isolierter Zweig integration/one-web-app-2026-10-27,
+Controller fd01d53 + PR36-Folgepatch58ea5b3, gemeinsamer Vorfahr6686629.
+Konflikte quellentreu aufgelöst, gemeinsame Workspace-/Auth-/Buildkonfiguration
+und lokaler Backendrollenvertrag integriert. Neue kombinierte Regressionen
+belegen Shell/Navigation/Locale, synthetische Auth, Rollen-/Tenantnegatives,
+Context-Parent-Join, Replay und Crash/Restart. Alle Remotezustände unverändert.
+
+Next Steps: unabhängige Gegenprüfung am exakten Integrationscommit und Paket;
+echte Provider-/Tenant-/Domain-/Restoreabnahme bleibt getrennt offen. Kein
+Produktivabschluss, kein Daemon und keine öffentliche Controllerroute aktiviert.
+Details: docs/contracts/one-web-app-integration.md und evidence/one-app-2026-10-27.
+
+## Historische Teilpaketstände
+
+# PR36 begrenzter lokaler Folgepatch · 27.10.2026
+
+Current State: eigener Zweig integration/pr36-acceptance-2026-10-27 auf
+66866298b3eb4054371b0e2a1e1f618f1bc8ca73, keine Remote-Schreibaktionen.
+PR35 und main nicht zusammengeführt. Standalone-, lazy Auth-, Signout- und
+Locale-Fälle reproduziert/korrigiert; Node-Untergrenze22.23.4 wiederhergestellt.
+24 Node-Tests, sieben synthetische Browserfälle, echter Offlinebuild unter
+Node22.23.4; unabhängiges Review samt behobenem P2-Importgraphbefund.
+Details: docs/contracts/pr36-local-acceptance.md; evidence/pr36-2026-10-27.
+
+Next Steps: getrennten sicheren lokalen Orchestrierungskern auf PR35-Folgeversion
+bauen; vorhandene Queue/Context/Brainbausteine verwenden. PR36-Restbefunde,
+echte Auth-/Tenant-/Domain-/Produktionsabnahme und Bundlegröße bleiben offen.
+Keine Aktivierung, echte Anmeldung, Gebühren, Serveränderungen oder Deployment.
+
+
 # Isolierte Integration · 27.10.2026
 
 Current State: eigener lokaler Checkout `/workspace/nexify-integration`, Zweig

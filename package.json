@@ -19,7 +19,7 @@
   },
   "packageManager": "pnpm@12.15.0",
   "engines": {
-    "node": "22.x"
+    "node": ">=22.23.4 <23.0.0"
   },
   "dependencies": {
     "@ai-sdk/react": "4.0.157",

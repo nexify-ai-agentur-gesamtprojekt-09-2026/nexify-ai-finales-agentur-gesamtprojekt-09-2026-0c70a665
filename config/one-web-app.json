@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "app_root": "apps/site",
+  "entry": "apps/site/src/main.tsx",
+  "shell": "apps/web/components/Workspace.tsx",
+  "output": "apps/site/dist",
+  "deployment_config": "vercel.json",
+  "public_routes": "config/site-map.json",
+  "tokens": "config/design-tokens.json",
+  "locales": ["de", "nl", "fr"],
+  "modules": {
+    "agency": {"public": true, "business_backend": "not_connected"},
+    "selfservice": {"public": true, "business_backend": "apps/selfservice/domain.py"},
+    "customer": {"public": false, "business_backend": "blocked_pending_verified_identity"},
+    "local_control": {"public": false, "business_backend": "tools/app_backend.py"}
+  },
+  "session_contract": {
+    "version": "local-app-session-1",
+    "provider_auth_enabled_by_this_contract": false,
+    "browser_claims_authorize_backend": false,
+    "local_operator_adapter_only": true,
+    "production_identity_adapter": "not_verified",
+    "roles": {
+      "operator": ["probe", "submit", "run-once", "status", "resume", "refresh-review"],
+      "reviewer": ["status", "review"]
+    }
+  },
+  "canonical_production_domain": null,
+  "production_runtime_verified": false
+}

@@ -1,6 +1,6 @@
 import "../../../packages/tokens/tokens.css";
 import "../../web/app/globals.css";
-import {PublicAuthProvider,AuthenticationPanel} from "./Auth";
+import {AuthenticationPanel} from "./Auth";
 import {useEffect,useMemo,useState,type MouseEvent} from "react";
 import {createRoot} from "react-dom/client";
 import Workspace,{useUI} from "../../web/components/Workspace";
@@ -31,13 +31,14 @@ function BrowserLink({href,onClick,target,download,...props}:SiteLinkProps){
 }
 function RouteContent({page}:{page?:PublicPage}){
   const{locale}=useUI();
-  useEffect(()=>{document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:'Seite nicht verfügbar · NeXify AI';window.scrollTo(0,0);},[page,locale]);
-  if(!page)return <section className="public-page"><span className="eyebrow">NEXIFY AI</span><h1>Seite nicht verfügbar</h1><p>Diese Seite ist in dieser öffentlichen Anwendung nicht freigegeben. Private Daten werden nicht angezeigt.</p><a className="route-action" href={hashMode?'#/':'/'}>Zur Startseite</a></section>;
+  const unavailable={de:['Seite nicht verfügbar','Diese Seite ist in dieser öffentlichen Anwendung nicht freigegeben. Private Daten werden nicht angezeigt.','Zur Startseite'],nl:['Pagina niet beschikbaar','Deze pagina is niet beschikbaar in deze openbare toepassing. Privégegevens worden niet getoond.','Naar de startpagina'],fr:['Page indisponible',"Cette page n’est pas disponible dans cette application publique. Les données privées ne sont pas affichées.",'Vers l’accueil']}[locale];
+  useEffect(()=>{document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:`${unavailable[0]} · NeXify AI`;window.scrollTo(0,0);},[page,locale]);
+  if(!page)return <section className="public-page"><span className="eyebrow">NEXIFY AI</span><h1>{unavailable[0]}</h1><p>{unavailable[1]}</p><BrowserLink className="route-action" href="/">{unavailable[2]}</BrowserLink></section>;
   const modules=explainers.find(entry=>entry.page_id===page.id)?.modules||[];
   const explanation=<><PresenterGuide pageId={page.id} pages={pages} journeys={journeys}/><ExplainerSections modules={modules} pages={pages}/></>;
   if(page.path==='/')return <HomeContent home={page} pages={pages}>{explanation}</HomeContent>;
   const authFallback=['login','signup'].includes(page.id);
-  return <>{authFallback&&<AuthenticationPanel mode={page.id==='signup'?'signup':'login'}/>}<PublicContent page={page} pages={pages}>{explanation}</PublicContent></>;
+  return <>{authFallback&&<AuthenticationPanel hashMode={hashMode} mode={page.id==='signup'?'signup':'login'}/>}<PublicContent page={page} pages={pages}>{explanation}</PublicContent></>;
 }
 function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');
@@ -45,4 +46,4 @@ function App(){
   const adapter=useMemo(()=>({pathname:path,Link:BrowserLink}),[path]);
   return <RouterProvider adapter={adapter}><PresenterGuideProvider journeys={journeys} defaultJourneyId={journeys.find(journey=>journey.steps.includes(routeIndex.get(path)?.id||""))?.id}><Workspace pages={pages}><RouteContent page={routeIndex.get(path)}/></Workspace></PresenterGuideProvider></RouterProvider>;
 }
-createRoot(document.getElementById('root')!).render(<PublicAuthProvider hashMode={hashMode}><App/></PublicAuthProvider>);
+createRoot(document.getElementById('root')!).render(<App/>);

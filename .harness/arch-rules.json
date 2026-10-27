@@ -162,6 +162,33 @@
       "what": "Zwei Starts erkennen dieselbe fehlende Spalte und konkurrieren beim ALTER TABLE.",
       "why": "Eine additive Migration ist ohne atomare Schemaentscheidung nicht parallel startfest.",
       "fix": "Nach executescript die Schreibtransaktion vor PRAGMA/ALTER erwerben und den deterministischen Parallelstarttest erhalten."
+    },
+    {
+      "id": "ARCH-019",
+      "description": "Standalone-Ausgabe akzeptiert keine ungebundenen Modulimporte, auch nicht in Unterverzeichnissen.",
+      "check": "node --test apps/site/tests/standalone.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Einzeldatei wurde mit verbleibenden statischen/dynamischen Modulabhängigkeiten freigegeben.",
+      "why": "Dateizählung allein beweist keine vollständige Offlineausgabe.",
+      "fix": "Importsyntax des Entry prüfen, dedicated Bundle erzeugen und Negativfälle erhalten."
+    },
+    {
+      "id": "ARCH-020",
+      "description": "Optionale Auth bleibt deaktiviert ohne explizite Konfiguration und gewährt keine Geschäftsrechte.",
+      "check": "node --test apps/site/tests/auth.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Auth-Konfiguration, Umgebungsgrenze oder lokalisierte UI-Verträge driften.",
+      "why": "Ein öffentlicher Login-Schalter ist keine Tenantfreigabe und ein Ladefehler darf keine öffentliche Anwendung entfernen.",
+      "fix": "Lokalen Auth-Panel-Vertrag reparieren und zusätzlich browser-auth.mjs mit synthetischem SDK prüfen; echte Runtimeabnahme getrennt halten."
+    },
+    {
+      "id": "ARCH-021",
+      "description": "Gemeinsamer Backendvertrag erhält Rollen, Tenantgrenzen, Wiederaufnahme und Parent-Join.",
+      "check": "python3 -m unittest discover -s tests -p test_one_app_backend.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_local_control.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Lokale Session-, Frist-, Graph- oder persistente Ergebnisgrenze driftet.",
+      "why": "Eine gemeinsame Shell verleiht weder Rollenrechte noch Abnahme; dichte Graphen und veraltete Worker dürfen keine neue Wirkung auslösen.",
+      "fix": "Betroffenen lokalen Pfad mit isolierten Negativtests korrigieren und unabhängig nachprüfen; externe Auth nicht aktivieren."
     }
   ]
 }

@@ -1,0 +1,154 @@
+TAP version 13
+# Subtest: auth is disabled by default and only explicit public true plus a valid key enables it
+ok 1 - auth is disabled by default and only explicit public true plus a valid key enables it
+  ---
+  duration_ms: 1.35039
+  type: 'test'
+  ...
+# Subtest: malformed public keys never mount a broken provider
+ok 2 - malformed public keys never mount a broken provider
+  ---
+  duration_ms: 0.296694
+  type: 'test'
+  ...
+# Subtest: only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted
+ok 3 - only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted
+  ---
+  duration_ms: 1.470259
+  type: 'test'
+  ...
+# Subtest: the wrapper retains public media, guide and honest disabled fallback
+ok 4 - the wrapper retains public media, guide and honest disabled fallback
+  ---
+  duration_ms: 0.26064
+  type: 'test'
+  ...
+# Subtest: all public pages must be represented without private or duplicate page entries
+ok 5 - all public pages must be represented without private or duplicate page entries
+  ---
+  duration_ms: 1.267616
+  type: 'test'
+  ...
+# Subtest: private action targets and invented playable pending assets are rejected
+ok 6 - private action targets and invented playable pending assets are rejected
+  ---
+  duration_ms: 0.205778
+  type: 'test'
+  ...
+# Subtest: published videos need canonical own-origin video paths and every caption locale
+ok 7 - published videos need canonical own-origin video paths and every caption locale
+  ---
+  duration_ms: 1.307165
+  type: 'test'
+  ...
+# Subtest: projection preserves all public explainer copy but excludes unrelated configuration
+ok 8 - projection preserves all public explainer copy but excludes unrelated configuration
+  ---
+  duration_ms: 0.640428
+  type: 'test'
+  ...
+# Subtest: invented source references cannot pass the provenance gate
+ok 9 - invented source references cannot pass the provenance gate
+  ---
+  duration_ms: 0.328572
+  type: 'test'
+  ...
+# Subtest: protected fields never cross the public build boundary
+ok 10 - protected fields never cross the public build boundary
+  ---
+  duration_ms: 0.951473
+  type: 'test'
+  ...
+# Subtest: missing explicit authentication false is excluded
+ok 11 - missing explicit authentication false is excluded
+  ---
+  duration_ms: 0.582311
+  type: 'test'
+  ...
+# Subtest: unknown and private action targets fail rather than silently redirect
+ok 12 - unknown and private action targets fail rather than silently redirect
+  ---
+  duration_ms: 0.429202
+  type: 'test'
+  ...
+# Subtest: route redirects and duplicate paths are rejected
+ok 13 - route redirects and duplicate paths are rejected
+  ---
+  duration_ms: 0.214971
+  type: 'test'
+  ...
+# Subtest: contact channels exclude encoded headers and arbitrary schemes
+ok 14 - contact channels exclude encoded headers and arbitrary schemes
+  ---
+  duration_ms: 0.358766
+  type: 'test'
+  ...
+# Subtest: portable route parser accepts normal and file hash navigation without unsafe decoding
+ok 15 - portable route parser accepts normal and file hash navigation without unsafe decoding
+  ---
+  duration_ms: 0.290935
+  type: 'test'
+  ...
+# Subtest: only ordinary same-origin primary clicks are intercepted
+ok 16 - only ordinary same-origin primary clicks are intercepted
+  ---
+  duration_ms: 0.243645
+  type: 'test'
+  ...
+# Subtest: split standalone input fails before publishing an incomplete preview
+ok 17 - split standalone input fails before publishing an incomplete preview
+  ---
+  duration_ms: 135.136799
+  type: 'test'
+  ...
+# Subtest: self contained input retains offline CSP and preview mode
+ok 18 - self contained input retains offline CSP and preview mode
+  ---
+  duration_ms: 132.285406
+  type: 'test'
+  ...
+# Subtest: standalone rejects nested static chunk even with only one top-level JavaScript file
+ok 19 - standalone rejects nested static chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 129.171418
+  type: 'test'
+  ...
+# Subtest: standalone rejects external re-export even with only one top-level JavaScript file
+ok 20 - standalone rejects external re-export even with only one top-level JavaScript file
+  ---
+  duration_ms: 124.619129
+  type: 'test'
+  ...
+# Subtest: standalone rejects dynamic literal chunk even with only one top-level JavaScript file
+ok 21 - standalone rejects dynamic literal chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 126.49776
+  type: 'test'
+  ...
+# Subtest: standalone rejects computed dynamic chunk even with only one top-level JavaScript file
+ok 22 - standalone rejects computed dynamic chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 127.462672
+  type: 'test'
+  ...
+# Subtest: standalone rejects bare module even with only one top-level JavaScript file
+ok 23 - standalone rejects bare module even with only one top-level JavaScript file
+  ---
+  duration_ms: 134.096704
+  type: 'test'
+  ...
+# Subtest: standalone rejects invalid syntax even with only one top-level JavaScript file
+ok 24 - standalone rejects invalid syntax even with only one top-level JavaScript file
+  ---
+  duration_ms: 136.794659
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1133.243746
