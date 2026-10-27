@@ -1,3 +1,21 @@
+# PR40: exakter Upload und reproduzierter CI-Setupfehler
+
+Current State:69ed580 unverändert auf eigenem Remotezweig
+integration/reviewed-one-app-shop-20261027-69ed580, DraftPR40. Main bleibt2a552ed.
+Push-CI40529125816: React/Next/OpenAPI/PostgreSQL grün; Repository scheitert an
+ARCH009/019, weil Vite für den parserbasierten Standalone-Test nicht installiert
+ist. Sauberer lokaler Zweifachnachweis: ohne Abhängigkeiten ERR_MODULE_NOT_FOUND,
+mit den bestehenden gesperrten Abhängigkeiten grün. CI-Repositoryjob installiert
+jetzt dieselben gepinnten Node22.23.4-/pnpm12.15.0-Workspaceabhängigkeiten wie die
+bestehenden Buildjobs; keine Prüfausnahme oder neue Abhängigkeit eingeführt.
+Next Steps: Änderung unabhängig prüfen, normales Fast-forward auf denselben
+Integrationsbranch und CI am neuen exakten SHA prüfen. Vercel-Preview ist wegen
+fehlendem Projektzugriff des Git-Autors NeXify-Automate BLOCKED; keine Identitäts-,
+Mitgliedschafts-, Hosting- oder Abrechnungsänderung zur Umgehung.
+BigBuy ist laut jüngster Nutzerentscheidung die gewählte Produktquelle. Dessen
+inkrementelle Batchintegration folgt nach diesem CI-Schritt mit tatsächlichen
+Taxonomie-/Zugriffsverträgen; keine echte Bestellung als notwendiger Test.
+
 # Lokale Shop-HTTP-/UI-Anbindung
 
 Current State: b08a7fc / PaketVersion8 als geprüfter Rückweg erhalten. Bestehender

@@ -24,6 +24,13 @@ jobs:
           fetch-depth: 0
       - name: Trust only this checked-out workspace in the job container
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.4'
+      - name: Install locked workspace dependencies for module-aware architecture checks
+        run: |
+          npm install --global --ignore-scripts pnpm@12.15.0
+          pnpm install --frozen-lockfile --ignore-scripts
       - name: Audit, behavior, integrity and architecture
         run: make check && make test && make check-arch
   postgres-isolation:
