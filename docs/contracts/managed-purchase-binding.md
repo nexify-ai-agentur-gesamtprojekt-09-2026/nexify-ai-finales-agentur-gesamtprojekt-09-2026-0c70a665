@@ -10,9 +10,11 @@ Händler, Route und Bedingungen. Der Claim vergleicht den Snapshot erneut.
 Die additive Migration belässt ältere Reservierungen ohne Snapshot bei NULL;
 sie dürfen nicht dispatcht, aber ungenutzt storniert werden. Bereits dispatchte
 oder ungeklärte Ausführungen bleiben gegen ihre gespeicherten Daten abrechenbar.
+Schema-Prüfung und additive ALTERs laufen nach executescript unter derselben
+BEGIN-IMMEDIATE-Schreibtransaktion; parallele Legacy-Starts werden serialisiert.
 Kein automatischer Rückbau der Datenbank und kein nachträglich erfundener Consent.
 
 Prüfung: `python3 -m unittest discover -s tests -p test_selfservice_domain.py -q`.
-15 isolierte Tests einschließlich Neustart, drei Konfigurationsänderungen,
+16 isolierte Tests einschließlich Neustart, drei Konfigurationsänderungen,
 Alt-Schema-Migration, Storno, Tenantgrenzen und Reconciliation. Alle Attestationen
 sind Testfixtures, keine Liveadapter oder echten Zahlungen.

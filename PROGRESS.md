@@ -11,11 +11,19 @@ Keywordimporte. Additive Migration sperrt Altreservierungen ohne Snapshot nur
 für neue Ausführung; Storno und Reconciliation bleiben erhalten.
 WorkflowRecord ergänzt vorhandene Governance/Queue, keine zweite Datenbank:
 10 Aufgaben, Quellenhashes, Owner, Abhängigkeiten, getrennte Evidenzstufen und
-Rollback; neue Prüfregeln ARCH-015 bis ARCH-017. F-007 bleibt einziges aktives
+Rollback; neue Prüfregeln ARCH-015 bis ARCH-018. F-007 bleibt einziges aktives
 Feature, keine Änderung auf passing und keine Runtimefreigabe.
 
-Prüfstatus: make check (0 Fehler/0 Warnungen), make test (290 Pythonfälle),
-make e2e (290 Pythonfälle und Manifest/Config-Integrität) und make check-arch
+Unabhängige Unteragentenprüfung fand zusätzlich einen reproduzierten Race beim
+parallelen Start alter Selfservice-Datenbanken. Separat korrigiert: Schema-Read
+und ALTERs nach executescript unter BEGIN IMMEDIATE; neuer Parallelstarttest
+vorher rot, danach grün. Fachliche Bindungsregeln und SEO-Fix unverändert.
+Die erneute unabhängige Gegenprüfung schloss den P2-Befund; auch acht parallele
+Legacy-Starts bestanden. Beleg: evidence/integration-2026-10-27/independent-review.md.
+Governance, PR36 und Produktionsadapter waren nicht Gegenstand dieses Reviews.
+
+Prüfstatus: make check (0 Fehler/0 Warnungen), make test (291 Pythonfälle),
+make e2e (291 Pythonfälle und Manifest/Config-Integrität) und make check-arch
 bestanden. Belege unter `evidence/integration-2026-10-27/`. E2E ist hier die
 bestehende lokale Repositoryprüfkette, kein externer End-to-End-/Produktionslauf.
 Keine UI-Änderung oder neue Browserprüfung. Kein universeller Fehlerfreiheitsnachweis.

@@ -1,0 +1,19 @@
+======================================================================
+FAIL: test_parallel_legacy_starts_serialize_snapshot_schema_migration (test_selfservice_domain.SelfServiceTests.test_parallel_legacy_starts_serialize_snapshot_schema_migration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-integration/tests/test_selfservice_domain.py", line 152, in test_parallel_legacy_starts_serialize_snapshot_schema_migration
+    self.assertEqual(results, ["started", "started"])
+AssertionError: Lists differ: ['started', 'duplicate column name: managed_snapshot'] != ['started', 'started']
+
+First differing element 1:
+'duplicate column name: managed_snapshot'
+'started'
+
+- ['started', 'duplicate column name: managed_snapshot']
++ ['started', 'started']
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.138s
+
+FAILED (failures=1)

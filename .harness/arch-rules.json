@@ -153,6 +153,15 @@
       "what": "Workflowreferenzen, Hashes, Scope oder Abnahmestufen sind widersprüchlich.",
       "why": "Dokumentation und lokaler Test dürfen keine Verbindung oder Abnahme vortäuschen.",
       "fix": "Aktuelle Quellen und echte Belege prüfen; fehlende Runtimevoraussetzungen offen führen statt Status freizuschreiben."
+    },
+    {
+      "id": "ARCH-018",
+      "description": "Parallele Legacy-Starts serialisieren Schema-Prüfung und additive Migration.",
+      "check": "python3 -m unittest discover -s tests -p test_selfservice_domain.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Zwei Starts erkennen dieselbe fehlende Spalte und konkurrieren beim ALTER TABLE.",
+      "why": "Eine additive Migration ist ohne atomare Schemaentscheidung nicht parallel startfest.",
+      "fix": "Nach executescript die Schreibtransaktion vor PRAGMA/ALTER erwerben und den deterministischen Parallelstarttest erhalten."
     }
   ]
 }

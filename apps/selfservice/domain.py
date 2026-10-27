@@ -158,6 +158,9 @@ class SelfService:
               CREATE TABLE IF NOT EXISTS ss_key_version(key_id TEXT,version INTEGER,binding_snapshot TEXT NOT NULL,
                 PRIMARY KEY(key_id,version));
             """)
+            # executescript commits implicitly; reserve the writer before schema reads.
+            # Concurrent legacy starts must not both decide to add the same column.
+            db.execute("BEGIN IMMEDIATE")
             columns = {row["name"] for row in db.execute("PRAGMA table_info(ss_reservation)")}
             if "credential_snapshot" not in columns:
                 # Pre-snapshot reservations remain NULL and cannot be dispatched.

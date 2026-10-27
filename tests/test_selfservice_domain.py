@@ -6,6 +6,9 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import sqlite3
+import threading
+from unittest import mock
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -113,6 +116,43 @@ class SelfServiceTests(unittest.TestCase):
         self.blocked("reservation_managed_binding_changed", lambda: self.reopen().claim_execution(
             principal, tenant, row["id"], attempt_ref="legacy"))
         self.assertEqual(self.core.cancel_reserved(principal, tenant, row["id"])["state"], "cancelled")
+
+    def test_parallel_legacy_starts_serialize_snapshot_schema_migration(self):
+        principal, view, _ = self.managed()
+        row = self.reserve(principal, view["tenant_id"], "legacy-parallel")
+        with self.core._db() as db:
+            db.execute("ALTER TABLE ss_reservation DROP COLUMN managed_snapshot")
+        readers = threading.Barrier(2)
+        start = threading.Barrier(2)
+        real_connect = sqlite3.connect
+
+        class RacingConnection(sqlite3.Connection):
+            def execute(inner, sql, parameters=()):
+                cursor = super().execute(sql, parameters)
+                if sql == "PRAGMA table_info(ss_reservation)" and not inner.in_transaction:
+                    rows = cursor.fetchall()
+                    readers.wait(timeout=5)
+                    return rows
+                return cursor
+
+        def connect(*args, **kwargs):
+            return real_connect(*args, **kwargs, factory=RacingConnection)
+
+        def reopen(_):
+            start.wait(timeout=5)
+            try:
+                self.reopen()
+                return "started"
+            except sqlite3.OperationalError as exc:
+                return str(exc)
+
+        with mock.patch.object(domain.sqlite3, "connect", side_effect=connect):
+            with ThreadPoolExecutor(max_workers=2) as workers:
+                results = list(workers.map(reopen, range(2)))
+        self.assertEqual(results, ["started", "started"])
+        self.blocked("reservation_managed_binding_changed", lambda: self.reopen().claim_execution(
+            principal, view["tenant_id"], row["id"], attempt_ref="legacy-parallel"))
+        self.assertEqual(self.core.cancel_reserved(principal, view["tenant_id"], row["id"])["state"], "cancelled")
 
     def test_verified_registration_deduplicates_and_never_grants_admin_or_free_credit(self):
         principal, one = self.register()
