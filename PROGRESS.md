@@ -30,6 +30,16 @@ Authentisierung, Membership-/Tenant-
 Trennung, Providerverbindungen, wiederholter Health-Lauf, ausgeführter Rollback
 und die Endabnahme mit tatsächlichen Laufzeitnachweisen bestanden sind.
 
+Medienarbeit 27.10.2026: Die vorhandenen Voice-Referenzen sind Rollen und
+Seitentexten zugeordnet. DE/NL/FR-Heroentwürfe, Rollenprofile, ein identischer
+Hörvergleichstext und Abnahmekriterien stehen in
+`docs/contracts/hero-production-plan.json`. NeX bleibt vorläufig auf seiner
+Referenz; Pascals Referenz braucht persönliche Rechte- und Hörprüfung; AIFly
+soll aus den vorhandenen Provider-Assets eine eigene, klar unterscheidbare
+Stimme erhalten. Die aktuelle Toolregistry exponiert weder Runway- noch
+ElevenLabs-Aktionen, deshalb wurden keine Provider-Assets gelesen, keine Jobs
+gestartet und keine Medien veröffentlicht.
+
 Arbeitszweig: `factory/goal-completion-2026-10-27`, Basis `a19cd50`.
 Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
 parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.
