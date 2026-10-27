@@ -488,3 +488,16 @@ ist der einzige Fehlerkanal. Details, Semantik-Diff, Ein-Web-App-Matrix und Roll
 `docs/automation/local-control.md`. Tests/Review: `evidence/local-control-2026-10-27`.
 PR35 und PR36 bleiben getrennte Stände; keine Remote-/Providerintegration oder
 Produktionsabnahme, kein Daemon und kein zusätzliches Frontend aktiviert.
+
+### Lesender Deployment-Nachtrag
+Parent-abgeschlossener Abgleich ergänzt: .de66866298, Standardproduktion07833fb3,
+fünf Geschwistera19cd503 mit dreiREADY/zweiERROR(missing dist). Vite/Node22 und
+Deploymentprozess belegt; konfigurierte Root/Build/Output/productionBranch fehlen.
+Details und unbekannte Felder im versionierten Deployment-Parentbericht. Nur
+Dokument-/Evidenzdelta; getesteter Anwendungscode und externe Zustände unverändert.
+
+### Geschlossener lokaler Kreis
+Controllerstatus ergänzt konkrete Followups und persistierte Closed-Loop-Receipts.
+Verwaiste/blockierte/übergebene Jobs schließen nicht; Parent-Join bleibt geprüft.
+Externe Abnahme-/Brain-/Restorekreise bleiben offen mit zuständiger Rolle,
+unbekannter Executorzuweisung, nächstem erlaubten Schritt und Voraussetzungen.

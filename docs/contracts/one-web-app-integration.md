@@ -121,3 +121,60 @@ Release mit realen Providergrenzen abnehmen, Backup/Restore und Rückrouting bel
 aktive Jobs/Leaseübergabe klären. Erst eine gesondert autorisierte Umstellung darf
 Aliases ändern; anschließend jeden Alias separat mit exaktem Release rücklesen.
 Keine Umschaltung, Projektlöschung oder Einstellung wurde hier vorgenommen.
+
+## Ergänzter lesender Deployment-Abgleich — kein Konfigurationsnachweis
+
+Der Parent hat den Leseabgleich abgeschlossen. Maschinenlesbare, ausdrücklich
+nicht hier unabhängig reproduzierte Quelle:
+`evidence/one-app-2026-10-27/deployment-parent-report.json`.
+Empfangszeit und unbekannte Auslesezeit werden getrennt gespeichert.
+
+| Quelle | Beleg | Grenze |
+| --- | --- | --- |
+| Hauptprojekt | Vite, Node22.x | rootDirectory, konfigurierte buildCommand/outputDirectory und productionBranch fehlen in den Projektantworten; bleiben null |
+| .de-Deploymentlog | pnpm install --frozen-lockfile --ignore-scripts; node scripts/generate-public-data.mjs && tsc --noEmit && vite build; Vite8.3.5; dist/index.html und Assets | beobachteter Prozess, keine bestätigte RootDirectory oder konfigurierte Projekt-Buildvorgabe |
+| nexifyai.de | Preview-Branch auf66866298 | nicht der lokale Integrationscandidate und nicht Standardproduktionsalias |
+| Standardproduktionsalias | main07833fb3 | andere Version als .de; keine gemeinsame Releaseabnahme |
+| site, site-gjp7, web-2kby | READY aufa19cd503 | READY allein beweist keine fachliche Nutzbarkeit oder Entbehrlichkeit anderer Projekte |
+| site-k23m, web | ERROR aufa19cd503, dist fehlt | konkreter Build-/Ausgabeabgleich nötig; keine Grundlage für blinde Löschung oder Aliaswechsel |
+
+Der lokale Quellvertrag nennt weiterhin apps/site und apps/site/dist, weil die
+Repositorykonfiguration dies belegt. Diese Zielvorgabe wird nicht als ausgelesene
+Plattformeinstellung ausgegeben. Vor Cutover müssen pro betroffenem Projekt exakte
+Root-/Build-/Outputwerte und Owner autorisiert ermittelt werden; dann den geplanten
+Kandidaten in isolierter Vorschau prüfen und getrennt von Produktionsalias und .de
+abnehmen. Bis dahin keine Projekteinstellung, Domain, Runtime oder aktive Jobs ändern.
+
+Der aktuell erreichbare lokale Integrationsumfang ist geliefert. Weitergehende
+Livefertigstellung bleibt an die bereits aufgeführten Rechte-/Provider-/Restore-
+Nachweise gebunden. Fehlende Voraussetzungen werden nicht durch Routinefragen an
+den schlafenden Auftraggeber oder durch erfundene erfolgreiche Integration ersetzt.
+
+## Geschlossener Kreis und offene Zuständigkeiten
+
+Die Zusatzweisung „halte den Kreis geschlossen (alle)“ ist im lokalen
+Controllerstatus umgesetzt: Intake-/Lease-/Ergebnis-/Review-/Quellenbelege bleiben
+persistiert, Parent-Join verlangt geprüfte Kinder. `follow_up` weist konkrete
+bekannte Executorlabels oder ausdrücklich null, Koordinator D08, zuständige Rolle,
+Ursache, nächste zulässige Aktion und Voraussetzungen aus. `closed_loop_receipt`
+belegt ausschließlich den lokalen Registerrücklauf; externe Brainrückführung
+bleibt false. Verwaiste, fehlgeschlagene oder blockierte Arbeit bleibt offen.
+
+Offene externe Schleifen werden nicht als erledigt aggregiert:
+- Deployment/Cutover: verantwortliche Rolle autorisierter Deploymentowner,
+  konkreter Executor hier nicht belegt. Nächster Schritt: Root/Build/Output und
+  gewünschte Aliaszuordnung lesend nachweisen. Voraussetzung: genaue Zielidentität
+  und vor einer Mutation gesonderte Rechte-/Abnahmebindung.
+- Identity/Tenant/Brain: verantwortliche Rolle autorisierter Identity-/Brainowner,
+  konkreter Executor nicht belegt. Nächster Schritt: autoritative Actor→Tenant→
+  Project/Workspace-Kette nachweisen. Keine geratenen IDs, Kundendateninjektion
+  oder neue Credentials. Dann erst autorisierte exakte Write/Index/Readbackprüfung.
+- Restore/Produktionsabnahme: verantwortliche Rolle Runtimeowner plus qualifizierter
+  unabhängiger Reviewer, konkrete Zuweisung offen. Nächster Schritt: letzten
+  erfolgreichen Backupstand, Exitprotokoll und kontrollierten Restore belegen;
+  keine Servermutation im hiesigen Scope.
+
+Diese Angaben sind offene Followups, keine neu autorisierten externen Jobs.
+Ungewisse externe Wirkung würde zuerst abgeglichen; hier wurde keine solche
+Wirkung versucht. Die Parentkoordination erhält das Ergebnis; keine Routinefrage
+oder separate Benachrichtigung an den schlafenden Auftraggeber.

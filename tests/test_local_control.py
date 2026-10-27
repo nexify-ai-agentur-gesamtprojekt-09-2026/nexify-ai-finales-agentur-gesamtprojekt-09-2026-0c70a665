@@ -93,6 +93,46 @@ class LocalControlTests(unittest.TestCase):
         with self.assertRaisesRegex(m.rq.QueueError,'job_deadline_expired'):
             self.c.refresh_review(ticket['job_id'],health_id=self.c.probe('source.verify')['id'])
 
+    def test_last_valid_attempt_is_running_not_exhausted_until_lease_expires(self):
+        request=self.submit([self.job(max_attempts=1)])
+        ticket=self.c.claim(request,'worker')
+        follow=self.c.status(request)['jobs'][0]['follow_up']
+        self.assertIsNone(follow['cause'])
+        self.assertEqual(follow['next_action'],'await_current_worker_or_lease_expiry')
+        self.clock+=31
+        follow=self.c.status(request)['jobs'][0]['follow_up']
+        self.assertTrue(follow['orphaned_local_claim'])
+        self.assertEqual(follow['cause'],'attempts_exhausted')
+        self.assertEqual(follow['next_action'],'obtain_explicit_new_revision_no_blind_retry')
+
+    def test_closed_loop_tracks_orphans_review_and_persistent_return(self):
+        request=self.submit();job=self.c.status(request)['jobs'][0]
+        self.assertEqual(job['follow_up']['coordinator_role'],'D08')
+        self.assertIsNone(job['follow_up']['assigned_executor'])
+        self.assertFalse(job['closed_loop_receipt']['closed'])
+        old=self.c.claim(request,'worker');self.clock+=31
+        job=self.reopen().status(request)['jobs'][0]
+        self.assertTrue(job['follow_up']['orphaned_local_claim'])
+        self.assertEqual(job['follow_up']['next_action'],'reclaim_with_fresh_fence')
+        ticket=self.c.claim(request,'successor');self.c.execute(ticket)
+        job=self.c.status(request)['jobs'][0]
+        self.assertFalse(job['closed_loop_receipt']['closed'])
+        self.assertEqual(job['follow_up']['owner_role'],'independent_local_reviewer')
+        self.reviewed(ticket['job_id'])
+        job=self.reopen().status(request)['jobs'][0]
+        self.assertTrue(job['closed_loop_receipt']['closed'])
+        self.assertIsNotNone(job['closed_loop_receipt']['review_evidence_sha256'])
+        self.assertFalse(job['closed_loop_receipt']['external_knowledge_return_verified'])
+
+    def test_expired_and_blocked_work_never_closes_or_loses_followup(self):
+        request=self.submit([self.job(target='other-host')])
+        job=self.c.status(request)['jobs'][0]
+        self.assertIsNotNone(job['gap_id']);self.assertIn('target_host',job['follow_up']['cause'])
+        self.assertFalse(job['closed_loop_receipt']['closed'])
+        self.clock+=601;status=self.reopen().status(request)
+        self.assertNotEqual(status['state'],'verified_complete')
+        self.assertEqual(status['jobs'][0]['follow_up']['next_action'],'obtain_explicit_new_revision_no_blind_retry')
+
     def test_immutable_intake_replay_and_conflicting_revision(self):
         definition=self.definition();first=self.c.submit(definition)
         self.assertTrue(self.reopen().submit(definition)['deduplicated'])

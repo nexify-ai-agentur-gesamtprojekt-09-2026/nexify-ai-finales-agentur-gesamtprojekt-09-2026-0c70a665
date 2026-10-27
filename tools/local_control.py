@@ -343,10 +343,38 @@ class LocalControl:
             rows=db.execute('SELECT j.* FROM control_jobs j JOIN control_requests r ON r.id=j.request_id WHERE r.id=? AND r.tenant=? AND r.project=? ORDER BY j.rowid',(request_id,self.tenant,self.project)).fetchall()
             require(rows,'scoped_request_not_found')
             jobs=[{key:row[key] for key in ('id','local_id','state','attempts','worker','fence','result_hash','checkpoint','blocked_reason','gap_id')} for row in rows]
-            for job in jobs:
+            lease=db.execute('SELECT * FROM control_leases WHERE resource=?',(str(self.root),)).fetchone()
+            for job,row in zip(jobs,rows):
                 require(job['state'] in STATES,'unknown_persisted_state')
                 job['implementation_status']='locally_tested' if job['result_hash'] else 'not_verified'
-            return {'id':request_id,'state':'verified_complete' if all(r['state']=='verified_complete' for r in rows) else 'blocked_not_reviewed' if any(r['state']=='blocked_not_reviewed' for r in rows) else 'in_progress_limited',
+                receipt=db.execute('SELECT * FROM control_reviews WHERE job_id=?',(job['id'],)).fetchone()
+                orphaned=job['state']=='in_progress_limited' and (lease is None or lease['job_id']!=job['id'] or lease['token']!=job['fence'] or lease['expires']<=self.now())
+                definition=json.loads(self._job(db,job['id'])['definition']); spec=json.loads(row['spec'])
+                expired=self.now()>=definition['deadline']
+                cause=job['blocked_reason'] or ('local_lease_expired_or_superseded' if orphaned else None)
+                next_action={
+                    'open_awaiting_verification':'assign_operator_and_claim_after_start_dependencies',
+                    'in_progress_limited':'reclaim_with_fresh_fence' if orphaned else 'await_current_worker_or_lease_expiry',
+                    'review_pending':'assign_separate_reviewer_and_compare_exact_result',
+                    'blocked_not_reviewed':'repair_prerequisite_then_explicitly_resume',
+                    'verified_complete':'retain_receipt_for_parent_join',
+                }[job['state']]
+                if job['state']!='verified_complete' and (expired or job['attempts']>=spec['max_attempts'] and not job['result_hash'] and (job['state']!='in_progress_limited' or orphaned)):
+                    cause='job_deadline_expired' if expired else 'attempts_exhausted'
+                    next_action='obtain_explicit_new_revision_no_blind_retry'
+                reviewer_needed=job['state']=='review_pending'
+                job['follow_up']={'coordinator_role':'D08','owner_role':'independent_local_reviewer' if reviewer_needed or receipt else 'local_control_operator',
+                    'assigned_executor':receipt['reviewer'] if receipt else None if reviewer_needed else job['worker'],
+                    'cause':cause,'next_action':next_action,'orphaned_local_claim':orphaned,
+                    'required_prerequisites':['exact_tenant_project','current_contract_and_source','fresh_operation_evidence','valid_deadline',
+                        'separate_reviewer_and_bound_receipt' if reviewer_needed else 'exclusive_local_lease_for_execution']}
+                job['closed_loop_receipt']={'closed':job['state']=='verified_complete' and receipt is not None,
+                    'result_hash':job['result_hash'],'contract_hash':row['contract_hash'],
+                    'review_evidence_path':receipt['evidence_path'] if receipt else None,
+                    'review_evidence_sha256':receipt['evidence_sha256'] if receipt else None,
+                    'register':'existing_remediation_database/control_jobs+control_reviews+control_events',
+                    'external_knowledge_return_verified':False}
+            return {'id':request_id,'state':'verified_complete' if all(j['closed_loop_receipt']['closed'] for j in jobs) else 'blocked_not_reviewed' if any(r['state']=='blocked_not_reviewed' for r in rows) else 'in_progress_limited',
                     'jobs':jobs,'proof_scope':'local_only','distributed_fencing_verified':False,'production_accepted':False}
 
 

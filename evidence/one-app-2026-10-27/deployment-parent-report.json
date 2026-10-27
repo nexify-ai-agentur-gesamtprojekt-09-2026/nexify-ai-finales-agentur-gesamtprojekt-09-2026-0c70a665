@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "source_type": "parent_reported_read_only_deployment_audit",
+  "received_at": "2026-10-27T05:10:15.483610+00:00",
+  "observed_at": null,
+  "independently_reproduced_here": false,
+  "project": {
+    "framework": "vite",
+    "node": "22.x",
+    "rootDirectory": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "productionBranch": null,
+    "null_reason": "fields not present in reported project responses"
+  },
+  "preview_log": {
+    "domain": "nexifyai.de",
+    "commit": "66866298b3eb4054371b0e2a1e1f618f1bc8ca73",
+    "install_command": "pnpm install --frozen-lockfile --ignore-scripts",
+    "observed_build_command": "node scripts/generate-public-data.mjs && tsc --noEmit && vite build",
+    "vite_version": "8.3.5",
+    "observed_outputs": [
+      "dist/index.html",
+      "assets"
+    ],
+    "configured_project_build_command_proven": false,
+    "absolute_output_root_proven": false
+  },
+  "alias_split": {
+    "nexifyai.de": {
+      "deployment": "dpl_3KcSgJUsdNbsJjiWvR74Xf95SdFA",
+      "branch": "factory/agency-separated-2026-10-26",
+      "commit": "66866298b3eb4054371b0e2a1e1f618f1bc8ca73",
+      "state": "READY",
+      "target": null
+    },
+    "standard_production_alias": {
+      "deployment": "dpl_XXZBR56U9Nwx9Nj6MDR5GER5v4ZG",
+      "branch": "main",
+      "commit": "07833fb3f8166a3f8534f52bb1c1843c49f40919",
+      "state": "READY"
+    }
+  },
+  "siblings": [
+    {
+      "name": "site",
+      "commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "state": "READY",
+      "reported_error": null
+    },
+    {
+      "name": "site-gjp7",
+      "commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "state": "READY",
+      "reported_error": null
+    },
+    {
+      "name": "web-2kby",
+      "commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "state": "READY",
+      "reported_error": null
+    },
+    {
+      "name": "site-k23m",
+      "commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "state": "ERROR",
+      "reported_error": "missing dist"
+    },
+    {
+      "name": "web",
+      "commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "state": "ERROR",
+      "reported_error": "missing dist"
+    }
+  ],
+  "mutation_performed": false,
+  "domain_verification_is_acceptance": false,
+  "cutover_authorized_by_this_record": false
+}

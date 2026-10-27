@@ -78,3 +78,28 @@ Teilnachweis zu Fall 06/18, das getrennte PR36-Paket Teilnachweise zu 03/07/11/1
 diese Teilnachweise setzen keinen Gesamtfall auf bestanden. WP-09/WP-10-Abschluss
 und WP-07/WP-08-Migration/Abnahme bleiben offen. Die hier dokumentierten Planstatus
 sind Dokumentstatus, keine zusätzlichen ausführbaren Jobzustände.
+
+## Geschlossener lokaler Kreis — Zusatzweisung 2026-10-27
+
+`status()` führt pro Teilauftrag `follow_up`: Koordinatorrolle D08, zuständige
+Ausführungs-/Reviewerrolle, konkrete bekannte Executorzuweisung oder null,
+Block-/Verwaisungsursache, nächste zulässige Aktion und benötigte Voraussetzungen.
+Eine Rolle allein wird nicht als konkrete Executorzuweisung ausgegeben. Verwaiste
+Claims bleiben offen, benötigen frische Fencing-Tokens und bewahren Versuchszahlen.
+Frist-/Versuchsüberschreitung verlangt eine neue ausdrückliche Revision, keinen
+blinden Retry. Dies startet weder Worker noch Scheduler.
+
+`closed_loop_receipt` verweist auf Ergebnis-/Vertragshash und tatsächlichen
+persistierten Reviewreceipt im vorhandenen Register. Ein übergebener oder nur
+ausgeführter Auftrag bleibt offen. Aggregation benötigt geschlossene Receipts für
+alle Kinder; die bisherige Parent-Join-Prüfung bleibt bestehen. Ergebnis, Review,
+Quellenbindung und Events liegen bereits in derselben Remediationdatenbank.
+Eine externe Wissensrückführung ist separat ausdrücklich nicht verifiziert.
+Alle bisherigen Reviewerfindings sind mit Reproduktion, Korrektur und Nachprüfung
+in den versionsgebundenen Paketberichten verfolgt, kein bloßes Wegdelegieren.
+
+Unabhängige Nachprüfung des Statusdeltas reproduzierte zusätzlich einen zu früh
+als ausgeschöpft gemeldeten letzten Versuch. Korrigiert: eine noch gültige aktive
+Lease bleibt laufend; erst nach Ablauf ohne Ergebnis ist der letzte Versuch
+erschöpft. Regression prüft beide Zustände. Reviewfinding ist damit nachgeprüft,
+nicht lediglich weitergereicht.
