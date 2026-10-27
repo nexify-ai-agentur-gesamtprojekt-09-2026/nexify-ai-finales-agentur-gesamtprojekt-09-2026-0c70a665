@@ -171,13 +171,12 @@ class SelfServiceTests(unittest.TestCase):
         principal, view = self.register()
         self.blocked("opaque_vault_reference_required", lambda: self.key(principal, view, reference="sk-not-a-vault-reference"))
 
-    def test_trial_starts_only_after_activation_funding_and_explicit_start_then_never_resets(self):
+    def test_trial_starts_after_activation_and_explicit_start_without_funding_then_never_resets(self):
         principal, view = self.register(); tenant = view["tenant_id"]
         self.blocked("workspace_activation_required", lambda: self.core.start_trial(principal, tenant))
         self.core.activate_workspace(principal, tenant)
-        self.blocked("explicit_validated_funding_required", lambda: self.core.start_trial(principal, tenant))
-        self.core.bind_byok(principal, tenant, self.key(principal, view))
         started = self.core.start_trial(principal, tenant)
+        self.blocked("explicit_validated_funding_required", lambda: self.reserve(principal, tenant, "unfunded", 0))
         self.assertEqual(started["trial_expires_at"] - started["trial_started_at"], 86400)
         self.clock += 86401
         self.core.bind_byok(principal, tenant, self.key(principal, view, "2"))

@@ -804,7 +804,7 @@
     {
       "id": "MASTER-12",
       "title": "Reale Adapter",
-      "status": "local_remaining",
+      "status": "external_blocked",
       "full_case_accepted": false,
       "source_refs": [
         "apps/selfservice/domain.py",
@@ -815,18 +815,23 @@
         "config/selfservice-policy.json",
         "config/local-control.json",
         "tests/test_selfservice_decisions.py",
-        "docs/contracts/trial-policy-clarification.md"
+        "docs/contracts/trial-policy-clarification.md",
+        "tests/test_suite_trial.py",
+        "docs/contracts/suite-trial-local.md",
+        "evidence/one-app-2026-10-27/suite-trial-focused.txt",
+        "evidence/one-app-2026-10-27/suite-trial-independent-review.md",
+        "evidence/one-app-2026-10-27/suite-trial-method-binding.json"
       ],
-      "local_proof": "Nur lokale Fixtures und negative Verträge; Legacy-Zahlung/Journey nicht eingebunden.",
-      "remaining_gap": "Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.",
+      "local_proof": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelität/Expiry/Identity-/Tenant-/Activationnegatives und gültigerFundingübergang lokal geprüft; Funding vor Modellreservierung/Dispatch unverändert.",
+      "remaining_gap": "Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.",
       "owner_role": "Jeweiliger Adapterowner",
       "assigned_executor": null,
-      "next_allowed_action": "D06 korrigiert in einem gesonderten lokalen Umsetzungsschritt die bestätigte Abweichung: Suitebeginn gemäß Policy ohne Funding, Kostenfreigabe weiter zwingend vor LLM-Ausführung; D02 prüft unveränderten Kosten-/Leistungsumfang. In diesem Dokumentdelta keine Verhaltensänderung.",
-      "required_prerequisite": "Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.",
+      "next_allowed_action": "Autorisierte konkrete externe Adapterverträge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
+      "required_prerequisite": "Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.",
       "closure_decision": {
-        "review_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
-        "reviewed_at": "2026-10-27T06:26:46.789884+00:00",
-        "missing_input": "Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.",
+        "review_base": "245e96e9f468474e41fe4a3a1dc2b5785c2fc3e4",
+        "reviewed_at": "2026-10-27T06:39:10.515127+00:00",
+        "missing_input": "Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.",
         "owner_area": "D06 Entwicklung, KI und Integrationen / D02 Produkt und Finanzen",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -836,12 +841,17 @@
           "apps/selfservice/domain.py",
           "tests/test_selfservice_domain.py",
           "tests/test_selfservice_decisions.py",
-          "config/local-control.json"
+          "config/local-control.json",
+          "tests/test_suite_trial.py",
+          "docs/contracts/suite-trial-local.md",
+          "evidence/one-app-2026-10-27/suite-trial-focused.txt",
+          "evidence/one-app-2026-10-27/suite-trial-independent-review.md",
+          "evidence/one-app-2026-10-27/suite-trial-method-binding.json"
         ],
-        "local_analysis_or_test": "Neue Charakterisierung: aktivierter unfundierter Workspace kann Trial nicht starten; Fehler explicit_validated_funding_required, Zustand unverändert, kein Hold/LLM-Reservierung. Betriebsmodell§5.1 und policy.starts_when nennen Funding nicht als Suite-Startbedingung. Öffentliche UI-Ansehbarkeit ist keine aktivierte Kunden-Suiteberechtigung. Kein kostenloses LLM-Guthaben daraus abgeleitet.",
-        "smallest_next_action": "D06 korrigiert in einem gesonderten lokalen Umsetzungsschritt die bestätigte Abweichung: Suitebeginn gemäß Policy ohne Funding, Kostenfreigabe weiter zwingend vor LLM-Ausführung; D02 prüft unveränderten Kosten-/Leistungsumfang. In diesem Dokumentdelta keine Verhaltensänderung.",
-        "closure_criterion": "Suitebeginn nach den drei dokumentierten Voraussetzungen ohne Funding geprüft; Modellreservierung ohne gültiges Funding bleibt gesperrt, Replay/Startzeit/Tenantgrenzen erhalten und unabhängig geprüft. Reale Adapterbelege separat erforderlich.",
-        "boundary": "confirmed_local_implementation_deviation_and_external_adapter_acceptance",
+        "local_analysis_or_test": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelität/Expiry/Identity-/Tenant-/Activationnegatives und gültigerFundingübergang lokal geprüft; Funding vor Modellreservierung/Dispatch unverändert.",
+        "smallest_next_action": "Autorisierte konkrete externe Adapterverträge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
+        "closure_criterion": "Lokale Regel MASTER-12-TRIAL-01 geprüft; Gesamtfall erst nach realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.",
+        "boundary": "external_adapter_acceptance_after_verified_local_trial_fix",
         "related_cases_not_start_locks": [
           "MASTER-03",
           "MASTER-04",
@@ -851,7 +861,9 @@
         ],
         "state": "open_not_closed_by_handoff",
         "external_action_attempted": false
-      }
+      },
+      "local_rule_status": "local_fixed_verified",
+      "local_rule_id": "MASTER-12-TRIAL-01"
     },
     {
       "id": "MASTER-13",
@@ -1109,8 +1121,8 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "3fda711f19a6832fc30c2363f90093b8b40aed538e6572da1686db1a17129760",
-    "apps/selfservice/domain.py": "0023a14fc8f142b7be728c0797dee8d0f08f767c1e4a2563d4423eee6a78e485",
+    "PROGRESS.md": "21121e466a256bf80a210e7c3ef4055385da89dc1ba457796a775234816dd610",
+    "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
     "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
     "apps/site/pwa/plugin.mjs": "3c805218638e6923569ce5f61dbdce70c1b67c6a0e45893fa0cf409cad4c0587",
     "apps/site/pwa/worker.js": "2057580e929673c153101f5ef1c0c642735d10797d3acd341706a3a78006a7ac",
@@ -1143,7 +1155,8 @@
     "docs/contracts/factory.openapi.json": "a5a7ac8f95a991eac1dd1cbbaf0a328cd0944fe8a4f71cff8bc4b5b0de5ad410",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/trial-policy-clarification.md": "dae84a4f7a69baef19cc7e850f8ed76564d836c916bceea46f36c26961d69d8b",
+    "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
+    "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
     "evidence/integration-2026-10-27/independent-review.md": "324bd80874ddfe764734532b71ae51fd17d865bd63efa2eebcee5228c5814aa4",
     "evidence/one-app-2026-10-27/accessibility-local.json": "de45d2ff1842ddb711aec063684cd9e80e566c36b100bf34ef66531ebd473500",
@@ -1163,6 +1176,9 @@
     "evidence/one-app-2026-10-27/resize-review-followup.md": "f2840274c864278c2c4fe4315c0bfb259a7b23dc95962c75f2e71546ff28dc67",
     "evidence/one-app-2026-10-27/review-snapshot.json": "79be3605feeee88a98860a50221e5dca0f4d65dc21a5473a5e60effaea9ad70f",
     "evidence/one-app-2026-10-27/source-binding.json": "25f3efd41b40b58ab5e684c387180b68badc2e0c852219a03f02a887ccecdbf0",
+    "evidence/one-app-2026-10-27/suite-trial-focused.txt": "227b4f2ec948ba334be1639a52fd0ce9325d4ecd56a68c4c8acfe3410ca1d87d",
+    "evidence/one-app-2026-10-27/suite-trial-independent-review.md": "d13cc558a151dee6f5fb43b5d7926a284d3679dd1850cfd3955be2960cba81fd",
+    "evidence/one-app-2026-10-27/suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
     "evidence/one-app-2026-10-27/target-size-before.json": "1abda3087a139559ac17188171fd8e5de03c34f41cd5061c72d3a55a97a218db",
     "evidence/one-app-2026-10-27/text-spacing.json": "19d07462de82ff0f74faf472b48d7cce0837545924dc945d5908fb334e11f885",
     "package.json": "0ecf5786228084c168d842b05c2d2a71def31d00c99c853c04431e04cfbbe6ef",
@@ -1175,9 +1191,10 @@
     "tests/test_one_app_backend.py": "72c6571231a073ea4eb3397823620e1f97a1b7f53f8cc4b9304e3e41a722fb9a",
     "tests/test_public_surface_contract.py": "6b69cfde2ad888c001357e15199b50f3d89091ff41218976f5e011b5ccf6d4ef",
     "tests/test_release_prerequisites.py": "328cd20630a1962b3cb7d146cb0a0de91c3b028558dd40c3c258c8af91526e0b",
-    "tests/test_selfservice_decisions.py": "e9ff4fc931032278a37e0d84fb5967fb93494d4461102ee6cf35e8a5e69cb669",
-    "tests/test_selfservice_domain.py": "dcb36a0ae5eb55bfcbd0024c16bb02c740d0365b07235f7e52a74402920b1dbc",
+    "tests/test_selfservice_decisions.py": "6a04b03f262198fdb06c2be3e0792edb2f60652947c3d39613f1f3dd1c3a0369",
+    "tests/test_selfservice_domain.py": "25470e0621ac30875606e331c58495172d386cac801537d69128f58460b19509",
     "tests/test_seo_catalog.py": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97",
+    "tests/test_suite_trial.py": "c0206e8c0b245945c7e494496e5587183d5c537844b4b874ad87917b8c8fdd58",
     "tools/app_backend.py": "90d3e37fdd3508d0149de39b8bcef8c9b990492b11f599122ce1891138747a5a",
     "tools/brain_ingestion.py": "ef81297bfc808188960f40d658a0599b483ce6b117bcce41f7174aa2f545ff68",
     "tools/capacity_planner.py": "77c6a7a8469a6ce025e7c18cf377d165deb801fecd9d3b80c37caa8d7ea10eb8",
@@ -1190,5 +1207,7 @@
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
   "clarification_delta_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
-  "clarification_observed_at": "2026-10-27T06:26:46.789884+00:00"
+  "clarification_observed_at": "2026-10-27T06:26:46.789884+00:00",
+  "suite_trial_delta_base": "245e96e9f468474e41fe4a3a1dc2b5785c2fc3e4",
+  "suite_trial_verified_at": "2026-10-27T06:39:10.515127+00:00"
 }

@@ -1,3 +1,5 @@
+Historische Policypräzisierung auf245e96e; anschließende lokale Korrektur und Nachweise: [suite-trial-local.md](suite-trial-local.md).
+
 # Trial-Policy und bekannte Zielzuordnungen
 
 Dokumentpräzisierung zum geprüften Entscheidungsdelta c09204c. Keine Änderung

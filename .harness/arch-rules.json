@@ -216,6 +216,15 @@
       "what": "Root-Font-Override wurde als tatsächliche Textverdopplung oder überlaufende Texte als geprüft ausgegeben.",
       "why": "Nicht wirksame Testmanipulation darf keine Abnahme vortäuschen.",
       "fix": "Vorher/Nachher gerenderte Schrift assertieren, lokale Inhaltsüberläufe messen und browser-text-spacing.mjs frisch ausführen."
+    },
+    {
+      "id": "ARCH-025",
+      "description": "Suitezeit beginnt ohne Funding; Modellreservierung und Dispatch bleiben fundinggebunden.",
+      "check": "python3 -m unittest discover -s tests -p test_suite_trial.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Suitebeginn wird durch Funding gesperrt oder gewährt unfinanzierte Modellnutzung.",
+      "why": "Kostenlose Suitezeit ist kein Modellguthaben; Replay darf keine neue Zeit oder Rechte erzeugen.",
+      "fix": "Startbedingungen, exaktes Zeitfenster und Funding-Negatives getrennt erhalten und unabhängig prüfen."
     }
   ]
 }

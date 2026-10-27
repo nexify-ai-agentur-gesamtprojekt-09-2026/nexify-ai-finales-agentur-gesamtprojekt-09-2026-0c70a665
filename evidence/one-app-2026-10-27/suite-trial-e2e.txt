@@ -1,0 +1,201 @@
+node tools/ds-audit-cli.js
+
+Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)
+python3 -m unittest discover -s tests -q
+----------------------------------------------------------------------
+Ran 337 tests in 23.905s
+
+OK
+./API-Rechtliches.dc.html: OK
+./Affiliate-Portal.dc.html: OK
+./Anmeldung.dc.html: OK
+./Batterie-Berater.dc.html: OK
+./E-Mail-Marketing-Newsletter.html: OK
+./E-Mail-Transaktional-Angebot.html: OK
+./Fitment-Checker.dc.html: OK
+./Geschaeftsdokumente-Vorlagen.dc.html: OK
+./Investoren-PowerPoint.dc.html: OK
+./Konto.dc.html: OK
+./Kundenbroschuere.dc.html: OK
+./Kundenportal.dc.html: OK
+./Kundenwege.dc.html: OK
+./NX-Footer.dc.html: OK
+./NX-Header.dc.html: OK
+./NX-Intern.dc.html: OK
+./Nachbarschaftskunden-Portal.dc.html: OK
+./NeXify AI one.dc.html: OK
+./NeXify API.dc.html: OK
+./NeXify Designsystem.dc.html: OK
+./NeXify Leitstand.dc.html: OK
+./NeXify Posteingang.dc.html: OK
+./NeXify Shop.dc.html: OK
+./NeXify Systemkarte.dc.html: OK
+./NeXify Workspace.dc.html: OK
+./NeXify-AI-Companion.dc.html: OK
+./NeXifyAI Cloud v12.dc.html: OK
+./NeXifyAI-Local-SEO-Muster.dc.html: OK
+./NeXifyAI-Wissenshub-Artikel.dc.html: OK
+./Partner-Broschuere.dc.html: OK
+./Partner-PowerPoint Werkstatt.dc.html: OK
+./Partner-werden.dc.html: OK
+./Partnerportal.dc.html: OK
+./Rechtliches.dc.html: OK
+./Reifenrechner.dc.html: OK
+./TEILEKLAR Shop.dc.html: OK
+./Visitenkarte-Pascal-Courbois.dc.html: OK
+./Werkstatt-Partnerseite.dc.html: OK
+./assets/brands/brand-10_ate.png: OK
+./assets/brands/brand-11_trw.svg: OK
+./assets/brands/brand-12_continental.svg: OK
+./assets/brands/brand-13_gates.svg: OK
+./assets/brands/brand-14_valeo.png: OK
+./assets/brands/brand-15_hella-v2.svg: OK
+./assets/brands/brand-15_hella.svg: OK
+./assets/brands/brand-16_mahle.png: OK
+./assets/brands/brand-17_denso.png: OK
+./assets/brands/brand-18_elring.svg: OK
+./assets/brands/brand-19_pierburg.svg: OK
+./assets/brands/brand-1_bosch.svg: OK
+./assets/brands/brand-20_zimmermann.png: OK
+./assets/brands/brand-21_textar.svg: OK
+./assets/brands/brand-22_corteco-v2.svg: OK
+./assets/brands/brand-22_corteco.svg: OK
+./assets/brands/brand-23_nissens.svg: OK
+./assets/brands/brand-24_osram-v2.png: OK
+./assets/brands/brand-24_osram.png: OK
+./assets/brands/brand-2_varta.png: OK
+./assets/brands/brand-3_mann-filter-v2.svg: OK
+./assets/brands/brand-3_mann-filter-v3.svg: OK
+./assets/brands/brand-3_mann-filter.svg: OK
+./assets/brands/brand-4_ngk-v3.svg: OK
+./assets/brands/brand-4_ngk-v4.svg: OK
+./assets/brands/brand-4_ngk.svg: OK
+./assets/brands/brand-5_skf.svg: OK
+./assets/brands/brand-6_sachs.svg: OK
+./assets/brands/brand-7_lemfoerder.svg: OK
+./assets/brands/brand-8_febi-bilstein-v2.svg: OK
+./assets/brands/brand-8_febi-bilstein.svg: OK
+./assets/brands/brand-9_brembo-v2.svg: OK
+./assets/brands/brand-9_brembo.svg: OK
+./assets/fonts/geist-latin.woff2: OK
+./assets/fonts/geist-mono-latin.woff2: OK
+./assets/hero-fitment.png: OK
+./assets/icon-192.png: OK
+./assets/icon-512.png: OK
+./assets/icon-maskable-512.png: OK
+./assets/legal/de-AT.json: OK
+./assets/legal/de-CH.json: OK
+./assets/legal/de-DE.json: OK
+./assets/legal/fr-BE.json: OK
+./assets/legal/fr-LU.json: OK
+./assets/legal/index.json: OK
+./assets/legal/nl-BE.json: OK
+./assets/legal/nl-NL.json: OK
+./assets/nexify-ai/nexify-ai-signet.svg: OK
+./assets/nexify-ai/pascal-16x9.png: OK
+./assets/nexify-ai/pascal-1x1.png: OK
+./assets/nexify-ai/pascal-1x1.webp: OK
+./assets/nexify-ai/pascal-4x5.png: OK
+./assets/nexify-ai/pascal-4x5.webp: OK
+./assets/nexify-ai/pascal-courbois-optimiert.png: OK
+./assets/nexify-ai/pascal-courbois.webp: OK
+./assets/nexify-ai/signalfeld-s4492.png: OK
+./assets/nexify-ai/wordmark-horizontal.png: OK
+./assets/nexify-ai/wordmark-stacked.png: OK
+./assets/part-battery.png: OK
+./assets/part-brake-rear.png: OK
+./assets/part-brake.png: OK
+./assets/part-oil.png: OK
+./assets/part-placeholder.png: OK
+./assets/part-wiper-rear.png: OK
+./assets/part-wiper.png: OK
+./assets/source-hero.png: OK
+./assets/workshops.json: OK
+./config/prompts/s1-master-orchestrator-1.0.0.md: OK
+./doc-page.js: OK
+./i18n/affiliate-portal.de.json: OK
+./i18n/anmeldung.de.json: OK
+./i18n/api-rechtliches.de.json: OK
+./i18n/batterie-berater.de.json: OK
+./i18n/cloud-v12.de.json: OK
+./i18n/cloud-v12.json: OK
+./i18n/fitment-checker.de.json: OK
+./i18n/geschaeftsdokumente-vorlagen.de.json: OK
+./i18n/geschaeftsdokumente-vorlagen.json: OK
+./i18n/investoren-powerpoint.de.json: OK
+./i18n/konto.de.json: OK
+./i18n/kundenbroschuere.de.json: OK
+./i18n/kundenbroschuere.json: OK
+./i18n/kundenportal.de.json: OK
+./i18n/kundenportal.json: OK
+./i18n/kundenwege.de.json: OK
+./i18n/myadmin-v2.de.json: OK
+./i18n/nachbarschaftskunden-portal.de.json: OK
+./i18n/nachbarschaftskunden-portal.json: OK
+./i18n/nexify-ai-companion.de.json: OK
+./i18n/nexify-ai-one.de.json: OK
+./i18n/nexify-ai-one.json: OK
+./i18n/nexify-api.de.json: OK
+./i18n/nexify-designsystem.de.json: OK
+./i18n/nexify-designsystem.json: OK
+./i18n/nexify-leitstand.de.json: OK
+./i18n/nexify-posteingang.de.json: OK
+./i18n/nexify-shop.de.json: OK
+./i18n/nexify-systemkarte.de.json: OK
+./i18n/nexify-workspace.de.json: OK
+./i18n/nexify-workspace.json: OK
+./i18n/nexifyai-local-seo-muster.de.json: OK
+./i18n/nexifyai-wissenshub-artikel.de.json: OK
+./i18n/nx-footer.de.json: OK
+./i18n/nx-header.de.json: OK
+./i18n/nx-intern.de.json: OK
+./i18n/partner-broschuere.de.json: OK
+./i18n/partner-powerpoint-werkstatt.de.json: OK
+./i18n/partner-werden.de.json: OK
+./i18n/partnerportal.de.json: OK
+./i18n/partnerportal.json: OK
+./i18n/rechtliches.de.json: OK
+./i18n/reifenrechner.de.json: OK
+./i18n/teileklar-shop.de.json: OK
+./i18n/visitenkarte-pascal-courbois.de.json: OK
+./i18n/visitenkarte-pascal-courbois.json: OK
+./i18n/werkstatt-partnerseite.de.json: OK
+./image-slot.js: OK
+./index.html: OK
+./lib/ARCHITECTURE.md: OK
+./lib/anfrage-pipeline.js: OK
+./lib/betriebskennzahlen.js: OK
+./lib/einstellungen.js: OK
+./lib/entscheidungen.js: OK
+./lib/gedaechtnis.js: OK
+./lib/i18n-boot.js: OK
+./lib/inhaltsabgleich.js: OK
+./lib/ki-muster.js: OK
+./lib/kundenwege.js: OK
+./lib/langfuse.js: OK
+./lib/langlauf.js: OK
+./lib/lernschleife.js: OK
+./lib/modi.js: OK
+./lib/nachtlauf.js: OK
+./lib/normpruefung.js: OK
+./lib/posteingang.js: OK
+./lib/prepaid.js: OK
+./lib/prompt-cache.js: OK
+./lib/pseo.js: OK
+./lib/rag.js: OK
+./lib/rechenkern.js: OK
+./lib/regelwerk.js: OK
+./lib/seiten-i18n.js: OK
+./lib/selbstheilung.js: OK
+./lib/tagrouter.js: OK
+./lib/versand.js: OK
+./manifest.webmanifest: OK
+./myADMIN v2.dc.html: OK
+./nx-page.js: OK
+./robots.txt: OK
+./sitemap.xml: OK
+./support.js: OK
+./sw.js: OK
+./vendor/qrcode.min.js: OK
+config/*.json gueltig
+e2e: vollstaendige Pruefkette (Audit + Tests + Artefakt-/Config-Integritaet) gruen

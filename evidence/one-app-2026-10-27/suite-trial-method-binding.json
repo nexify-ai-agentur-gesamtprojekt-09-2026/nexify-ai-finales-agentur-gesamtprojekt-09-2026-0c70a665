@@ -1,0 +1,12 @@
+{
+  "base": "245e96e9f468474e41fe4a3a1dc2b5785c2fc3e4",
+  "changed_methods": [
+    "start_trial"
+  ],
+  "unchanged_funding_guards": {
+    "_funding": "4aba4efef3e0659b953048fcadc8b77a952d78875a17840374632849bf0adab2",
+    "reserve": "06102deccad02ff6fc17f970a2077caca90df5f75dca17bf10f3fdefcc979ec4",
+    "claim_execution": "033e3bcae10d25eff31c8840b1a5f1a015b6452b71fb9c64c2b1a964aff117a8"
+  },
+  "policy_unchanged": true
+}

@@ -1,6 +1,6 @@
-"""Decision-only characterization using existing synthetic domain fixtures.
+"""Decision regressions using existing synthetic domain fixtures.
 
-This does not change or approve the unresolved Suite/Funding business contract.
+Suite start follows the documented contract; no unfunded model execution.
 """
 import sqlite3
 from pathlib import Path
@@ -15,20 +15,20 @@ class SelfserviceDecisionTests(unittest.TestCase):
         self.fixture.setUp()
         self.addCleanup(self.fixture.tearDown)
 
-    def test_observed_unfunded_trial_conflict_preserves_state_without_model_reservation(self):
-        """Characterization pending business decision, NOT approval of the funding gate."""
+    def test_unfunded_suite_trial_does_not_create_model_reservation_or_credit(self):
+        """A suite grant cannot itself authorize model execution or credit."""
         principal, view = self.fixture.register(); tenant = view["tenant_id"]
         self.fixture.core.activate_workspace(principal, tenant)
+        started = self.fixture.core.start_trial(principal, tenant)
         with sqlite3.connect(self.fixture.database) as db:
             before = list(db.iterdump())
-        self.fixture.blocked("explicit_validated_funding_required", lambda: self.fixture.core.start_trial(principal, tenant))
         # The public/UI trial promise cannot itself authorize model execution.
-        self.fixture.blocked("suite_entitlement_required", lambda: self.fixture.reserve(principal, tenant, "unfunded", 0))
+        self.fixture.blocked("explicit_validated_funding_required", lambda: self.fixture.reserve(principal, tenant, "unfunded", 0))
         with sqlite3.connect(self.fixture.database) as db:
             self.assertEqual(list(db.iterdump()), before)
         observed = self.fixture.core.register(principal)
-        self.assertIsNone(observed["trial_started_at"])
-        self.assertEqual(observed["entitlement"], "not_started")
+        self.assertEqual(observed["trial_started_at"], started["trial_started_at"])
+        self.assertEqual(observed["entitlement"], "trial_active")
         self.assertEqual(observed["wallet"], {"balance_micro_eur": 0, "held_micro_eur": 0})
 
     def test_local_sqlite_backup_restore_preserves_reserved_request_and_tenant_boundary(self):

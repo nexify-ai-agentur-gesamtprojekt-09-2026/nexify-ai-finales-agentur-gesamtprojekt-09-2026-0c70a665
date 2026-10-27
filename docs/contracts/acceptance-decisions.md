@@ -1,8 +1,10 @@
+Aktuelles lokales Delta: [Suite-Trialregel korrigiert und geprüft](suite-trial-local.md). MASTER-12-TRIAL-01 ist lokal erledigt; die reale Adapterabnahme von MASTER-12 bleibt offen. Die folgende Liste bewahrt die vorherige Diagnose mit dieser ausdrücklich vorrangigen Fortschreibung.
+
 # Entscheidungsliste — offene Abnahmegrenzen
 
 Basis c8c865fc700cd2f0049e50efda19cb3a638fe853 / LibraryVersion3. Nur lokale Analyse und synthetische Regression; keine aktuelle externe Lesung, Mutation oder neue fachliche Regel. Rollen benennen Verantwortungsbereiche, keine verifizierte konkrete Personenzuweisung. Alle Fälle bleiben bis zum jeweiligen Nachweis offen.
 
-Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber nicht zwölf rein externe Arbeitsstopps: MASTER-12 enthält zusätzlich eine lokal bestätigte Abweichung von eindeutiger Policy und wird als local_remaining geführt; MASTER-04/10/14/18 benötigen auch konkrete Implementierungs-/Mappingarbeit. MASTER-16 erhielt einen zusätzlichen lokalen Restore-Nachweis. MASTER-09 bleibt lokal/qualifiziert zu prüfen. Abhängige Fälle unten sind Beziehungen, keine pauschalen Startsperren oder ausführbare Queue.
+Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber nicht zwölf rein externe Arbeitsstopps: MASTER-12-TRIAL-01 wurde lokal korrigiert und geprüft; die reale Adapterabnahme bleibt offen; MASTER-04/10/14/18 benötigen auch konkrete Implementierungs-/Mappingarbeit. MASTER-16 erhielt einen zusätzlichen lokalen Restore-Nachweis. MASTER-09 bleibt lokal/qualifiziert zu prüfen. Abhängige Fälle unten sind Beziehungen, keine pauschalen Startsperren oder ausführbare Queue.
 
 ## MASTER-02 — Deployment / Domainentscheidung
 
@@ -104,15 +106,15 @@ Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber
 
 ## MASTER-12 — D06 Entwicklung / D02 Produkt und Finanzen / Adapterowner
 
-**Fehlender Eingang:** Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.
+**Fehlender Eingang:** Reale Identity/Vault/Payment/Modell/Usage-/Reconciliation-Belege; kein zusätzlicher Suite-Grundsatzentscheid nötig.
 
-**Geprüfte Quellen:** `docs/operating-model/NEXIFY-GESAMTSYSTEM.md`; `config/selfservice-policy.json`; `apps/selfservice/domain.py`; `tests/test_selfservice_domain.py`; `tests/test_selfservice_decisions.py`; `config/local-control.json`.
+**Geprüfte Quellen:** `apps/selfservice/domain.py`, `config/selfservice-policy.json`, `tests/test_suite_trial.py`, `tests/test_selfservice_domain.py`, `tests/test_selfservice_decisions.py`, `evidence/one-app-2026-10-27/suite-trial-independent-review.md`.
 
-**Lokal möglich/erledigt:** Neue Charakterisierung: aktivierter unfundierter Workspace kann Trial nicht starten; Fehler explicit_validated_funding_required, Zustand unverändert, kein Hold/LLM-Reservierung. Betriebsmodell§5.1 und policy.starts_when nennen Funding nicht als Suite-Startbedingung. Öffentliche UI-Ansehbarkeit ist keine aktivierte Kunden-Suiteberechtigung. Kein kostenloses LLM-Guthaben daraus abgeleitet.
+**Lokal erledigt:** MASTER-12-TRIAL-01 korrigiert: Suitebeginn ohne Funding, keine Credits; Funding vor Modellreservierung/Dispatch unverändert. Startzeit/Expiry/Replay/Parallelität/Activation/Identity/Tenant und Fundingwechsel geprüft.
 
-**Kleinste nächste Aktion:** D06 korrigiert in einem gesonderten lokalen Umsetzungsschritt die bestätigte Abweichung: Suitebeginn gemäß Policy ohne Funding, Kostenfreigabe weiter zwingend vor LLM-Ausführung; D02 prüft unveränderten Kosten-/Leistungsumfang. In diesem Dokumentdelta keine Verhaltensänderung.
+**Kleinste nächste Aktion:** Autorisierte reale Adapterverträge/Ziele und begrenzte Testrechte nachweisen; keine Providerwirkung aus lokalem Test ableiten.
 
-**Abschlusskriterium:** Suitebeginn nach den drei dokumentierten Voraussetzungen ohne Funding geprüft; Modellreservierung ohne gültiges Funding bleibt gesperrt, Replay/Startzeit/Tenantgrenzen erhalten und unabhängig geprüft. Reale Adapterbelege separat erforderlich.
+**Abschlusskriterium:** Lokale Regel geprüft; Gesamtfall erst mit realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.
 
 **Gesamtzielbezug:** MASTER-03, MASTER-04, MASTER-05, MASTER-10, MASTER-15. Kein Handoff schließt diesen Fall.
 
@@ -188,4 +190,4 @@ Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber
 
 ## Quellenpräzisierung nach Entscheidungsdelta c09204c
 
-[Trial-Policy und bekannte Vercel-Zuordnungen](trial-policy-clarification.md) präzisieren die frühere Entscheidungseinordnung. Keine neue Nutzerentscheidung zum bereits definierten Suitebeginn; keine Änderung am Domaincode.
+[Trial-Policy und bekannte Vercel-Zuordnungen](trial-policy-clarification.md) präzisieren die frühere Entscheidungseinordnung. Die damalige Präzisierung änderte keinen Domaincode. Der anschließend beauftragte lokale Suite-Fix ist nun in suite-trial-local.md nachgewiesen; keine neue Grundsatzentscheidung nötig.

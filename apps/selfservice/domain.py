@@ -351,13 +351,14 @@ class SelfService:
         with self._db() as db:
             db.execute("BEGIN IMMEDIATE")
             account, workspace = self._owned(db, principal, tenant)
+            if workspace["activated_at"] is None:
+                raise DomainError("workspace_activation_required")
             if account["trial_started"] is not None:
                 return self._view(db, account, workspace)
             if account["paid_plan"] is not None:
                 raise DomainError("trial_not_applicable_to_paid_account")
-            if workspace["activated_at"] is None:
-                raise DomainError("workspace_activation_required")
-            self._funding(db, workspace)
+            # Suite entitlement is independent of funding. reserve/claim_execution
+            # still validate funding before any model reservation or execution.
             now = _integer(self.now())
             db.execute("UPDATE ss_account SET trial_started=?,trial_expires=? WHERE id=?", (now, now + self.duration, account["id"]))
             return self._view(db, db.execute("SELECT * FROM ss_account WHERE id=?", (account["id"],)).fetchone(), workspace)

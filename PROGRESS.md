@@ -1,3 +1,14 @@
+# Suite-Trialregel lokal korrigiert
+
+Current State: auf245e96e start_trial ohne Funding; bestehende Aktivierungsprüfung
+vor Replay, einmaliger86400Sekundenstart. Keine Credits, Preise, Authrechte oder
+externen Adapter geändert. _funding/reserve/claim_execution quellenidentisch.
+Sieben fokussierte Regressionen plus bestehende Domain-/Restoretests und unabhängige
+Gegenprüfung. MASTER12-TRIAL-01 lokal fortgeschrieben, Gesamtfall weiterhin offen.
+Next Steps: reale Adapter-/Identity-/Tenant-/Release-/Restoreabnahme nachweisen;
+kein Handoff oder lokales Testergebnis aktiviert Produktion.
+Details: docs/contracts/suite-trial-local.md.
+
 # Quellenpräzisierung für PaketVersion4 · lokal
 
 Current State: geprüftes Entscheidungsdelta c09204c wird mit PaketVersion3
