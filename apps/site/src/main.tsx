@@ -10,6 +10,7 @@ import Workspace,{useUI} from "../../web/components/Workspace";
 import PresenterGuide,{PresenterGuideProvider,type PresenterJourney} from "../../web/components/PresenterGuide";
 import ExplainerSections,{type ExplainerModule} from "../../web/components/ExplainerSections";
 import HomeContent from "../../web/components/HomeContent";
+import type {PublicVideo} from "../../web/components/PresenterVideo";
 import PublicContent from "../../web/components/PublicContent";
 import ShopPanel from "../../web/components/ShopPanel";
 import {RouterProvider,type SiteLinkProps} from "../../web/components/Router";
@@ -20,6 +21,8 @@ import publicData from "../.generated/public-site.json";
 const pages=publicData.pages as PublicPage[];
 const journeys=(publicData as unknown as {journeys?:PresenterJourney[]}).journeys||[];
 const explainers=(publicData as unknown as {explainers?:{page_id:string;modules:ExplainerModule[]}[]}).explainers||[];
+const videos=(publicData as unknown as {videos?:Record<string,Partial<Record<PublicVideo["locale"],PublicVideo>>>}).videos||{};
+const videoModules=(publicData as unknown as {videoModules?:Record<string,Record<string,Partial<Record<PublicVideo["locale"],PublicVideo>>>>}).videoModules||{};
 const hashMode=location.protocol==='file:'||(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
 const routeIndex=new Map(pages.map(page=>[page.path,page]));
 function BrowserLink({href,onClick,target,download,...props}:SiteLinkProps){
@@ -39,8 +42,9 @@ function RouteContent({page}:{page?:PublicPage}){
   useEffect(()=>{document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:`${unavailable[0]} · NeXify AI`;window.scrollTo(0,0);},[page,locale]);
   if(!page)return <section className="public-page"><span className="eyebrow">NEXIFY AI</span><h1>{unavailable[0]}</h1><p>{unavailable[1]}</p><BrowserLink className="route-action" href="/">{unavailable[2]}</BrowserLink></section>;
   const modules=explainers.find(entry=>entry.page_id===page.id)?.modules||[];
-  const explanation=<><PresenterGuide pageId={page.id} pages={pages} journeys={journeys}/><ExplainerSections modules={modules} pages={pages}/></>;
-  if(page.path==='/')return <HomeContent home={page} pages={pages}>{explanation}</HomeContent>;
+  const video=videos[page.id]?.[locale];
+  const explanation=<><PresenterGuide pageId={page.id} pages={pages} journeys={journeys}/><ExplainerSections modules={modules} pages={pages} video={page.path==='/'?undefined:video} moduleVideos={videoModules[page.id]||{}}/></>;
+  if(page.path==='/')return <HomeContent home={page} pages={pages} video={video}>{explanation}</HomeContent>;
   const authFallback=['login','signup'].includes(page.id);
   return <>{authFallback&&<AuthenticationPanel hashMode={hashMode} mode={page.id==='signup'?'signup':'login'}/>}<PublicContent page={page} pages={pages}>{["tk-search","tk-categories","tk-category","tk-product","tk-cart","tk-checkout"].includes(page.id)&&<ShopPanel pageId={page.id}/>} {explanation}</PublicContent></>;
 }

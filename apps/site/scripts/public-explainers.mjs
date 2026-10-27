@@ -6,7 +6,7 @@ function translated(value) {
 function ownAsset(value, extension) {
   return typeof value === 'string' && !value.includes('..') && new RegExp('^/media/[A-Za-z0-9/_-]+\\.(?:' + extension + ')$').test(value);
 }
-export function prepareExplainers(source, pages, sourceInventory) {
+export function prepareExplainers(source, pages, sourceInventory, verifiedVideos = {}, verifiedModules = {}) {
   const ids = new Set(pages.map(page => page.id));
   if (source?.schema_version !== 1 || !Array.isArray(source.pages) || source.pages.length !== ids.size) throw new Error('Explainer coverage incomplete');
   const seen = new Set();
@@ -25,6 +25,7 @@ export function prepareExplainers(source, pages, sourceInventory) {
       if (!media || !['asset_pending', 'published'].includes(media.status)) throw new Error('Invalid explainer media status');
       if (media.status === 'asset_pending' && (media.src !== null || media.captions !== null)) throw new Error('Pending explainer media must not pretend to be available');
       if (media.status === 'published' && (!ownAsset(media.src, 'mp4|webm') || locales.some(locale => !ownAsset(media.captions?.[locale], 'vtt')))) throw new Error('Published explainer requires owned video and all captions');
+      if (media.status === 'published' && locales.some(locale => {const checked=verifiedModules[page.page_id]?.[module.id]?.[locale];return !checked || checked.locale!==locale || checked.src!==media.src || checked.captionsSrc!==media.captions[locale];})) throw new Error('Published explainer has no matching verified asset binding');
       if (!Array.isArray(module.source_refs) || !module.source_refs.length || module.source_refs.some(ref => typeof ref !== 'string' || !sourceInventory?.has(ref) || !/^[a-f0-9]{64}$/.test(sourceInventory.get(ref)))) throw new Error('Explainer provenance missing or not verified');
       return {id: module.id, speaker: module.speaker, title: translated(module.title), body: translated(module.body), outcome: translated(module.outcome), media_side: module.media_side,
         media: {status: media.status, src: media.src, captions: media.captions ? translated(media.captions) : null},
