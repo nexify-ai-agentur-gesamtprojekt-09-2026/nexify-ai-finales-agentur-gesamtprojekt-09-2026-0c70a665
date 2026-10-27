@@ -34,7 +34,7 @@ export default function HomeContent({home,pages=[],children}:{home?:PublicPage;p
   {name:"NeX2fly",page:pages.find(page=>page.path==="/produkte/nex2fly")},
   {name:"AIFly Oracle",page:pages.find(page=>page.id==="solutions")},
   {name:"TEILEKLAR",page:pages.find(page=>page.id==="tk-home")},
-  {name:"Werkstatt",page:pages.find(page=>page.id==="tk-workshop")}
+  {name:locale==="de"?"Werkstatt":locale==="nl"?"Werkplaats":"Atelier",page:pages.find(page=>page.id==="tk-workshop")}
  ];
  const scope=pages.find(page=>page.id==="scope");
  const tasks=[{intent:"quote" as const,title:t.quoteTitle,body:t.quoteBody,action:t.quoteAction},{intent:"booking" as const,title:t.bookingTitle,body:t.bookingBody,action:t.appointment},{intent:"marketing" as const,title:t.marketingTitle,body:t.marketingBody,action:t.marketingAction}];

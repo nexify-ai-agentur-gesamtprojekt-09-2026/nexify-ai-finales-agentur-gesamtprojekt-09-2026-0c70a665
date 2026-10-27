@@ -67,3 +67,9 @@
 @media (max-width: 640px) { .footer-link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; } .structured-footer { gap: 32px; padding-top: 48px; } .footer-bottom { gap: 16px; } .structured-footer .footer-bottom details { width: 100%; margin-left: 0; } }
 
 .website main:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: -2px; }
+
+/* Brand and cross-module links are interactive targets, not inline prose. */
+.brand, .footer-bottom > a { min-height: var(--target-min); min-width: var(--target-min); }
+.footer-bottom > a { display: inline-flex; align-items: center; }
+
+.site-header .main-navigation a { min-width: var(--target-min); justify-content: center; }

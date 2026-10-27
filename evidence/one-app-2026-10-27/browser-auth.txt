@@ -1,7 +1,5 @@
-5:02:06 AM [vite] (client) Re-optimizing dependencies because vite config has changed
-5:02:07 AM [vite] (client) page reload standalone/nexify-preview.html
-5:02:07 AM [vite] (client) page reload standalone/nexify-preview.html
-5:02:07 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:41231/tests/fixtures/clerk.tsx
+5:47:41 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+5:47:43 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:38891/tests/fixtures/clerk.tsx
 
 The above error occurred in one of your React components.
 

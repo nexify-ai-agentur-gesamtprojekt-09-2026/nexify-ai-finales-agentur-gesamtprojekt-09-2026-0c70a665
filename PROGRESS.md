@@ -1,4 +1,18 @@
-# One-Web-App Integrationskandidat · lokal
+# Lokales Abdeckungsdelta · 27.10.2026
+
+Current State: auf Basis0cf8545 generische NL/FR-Beschriftungen und kleine
+Linkflächen korrigiert, Marken erhalten.72 Routen-/Sprachfälle,1724 reale
+Linkaktivierungen,36 mobile Accessibilityfälle und108 Textabstands-/Textgrößen-
+Geometriefälle bestanden. Öffentliche Installation nur im expliziten
+public-pwa-Build, netzabhängig ohne Cache/Replay;9 lokale Browserchecks bestanden.
+325 Python- und30 Node-Tests; unabhängige kritische UI-/SDK-/PWA-Nachprüfung.
+
+Next Steps: qualifizierte visuelle/Assistenztechnikprüfung MASTER-09 bleibt
+konkret offen. Vier lokale Teilnachweise schließen keine Produktivabnahme;
+12 externe Masterblocker unverändert. Kein Deploy/Auth-/Provider-Enablement.
+Nachweise: docs/contracts/acceptance-coverage.md und public-installation.md.
+
+# Historischer One-Web-App Integrationskandidat · lokal
 
 Current State: neuer isolierter Zweig integration/one-web-app-2026-10-27,
 Controller fd01d53 + PR36-Folgepatch58ea5b3, gemeinsamer Vorfahr6686629.

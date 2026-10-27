@@ -1,30 +1,10 @@
 {
-  "recorded_at": "2026-10-26T14:49:51.202069+00:00",
+  "recorded_at": "2026-10-27T05:48:22.200Z",
   "checks": [
-    "client_navigation_preserves_conversation_draft",
-    "guided_website_journey_and_reload_preferences_persist_without_auto_navigation",
-    "persisted_quote_and_real_draft_pdf_download",
-    "mail_only_pending_provider_not_sent",
-    "marketing_template_persisted_not_published_or_live_llm",
-    "all_36_public_routes_include_shared_panel_guide_and_all_49_text_modules",
-    "all_10_private_route_views_unavailable_no_private_payload",
-    "actual_chat_receipt_contains_only_validated_public_page_context",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
     "native_product_menu_and_direct_legal_footer_links",
     "uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes",
-    "de_nl_fr_content_switching",
-    "mobile_no_horizontal_overflow",
-    "mobile_dialog_keyboard_escape_focus_return",
-    "keyboard_skip_link_preserves_standalone_product_hash_route",
-    "standalone_inline_assets_hash_routes_offline_actions_disabled",
-    "sdk_guided_preview_works_when_visitor_session_is_404",
-    "sdk_real_ui_sse_public_links_navigate_without_fake_booking_or_provider_actions",
-    "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
-    "sdk_real_stream_and_composer_localization_de_nl_fr",
-    "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
-    "sdk_browser_no_external_provider_requests_observed",
-    "fresh_standalone_sdk_disabled_after_mobile_focus_fix",
-    "development_supervisor_stops_all_owned_process_groups"
+    "keyboard_skip_link_preserves_standalone_product_hash_route"
   ],
   "public_routes": [
     "/",
@@ -65,7 +45,27 @@
     "/teileklar/rechtliches"
   ],
   "passed": true,
-  "scope": "Actual local React browser, visitor gateway, AI7 guided-preview SSE (session404 simulated) and fresh static standalone; no live LLM/provider call, production deployment, real Clerk login, external mail/calendar/payment or MCP authentication.",
+  "scope": "Fresh local critical subset only; actual browser and deterministic Web handler SSE with simulated session404; no provider, production or full accessibility acceptance. Public route list is inventory, not an assertion every route was revisited here.",
+  "source_sha256": {
+    "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
+    "apps/web/components/Workspace.tsx": "35d46f19f915ee71f615d1eb6dcf45a3daa49711c38ad99bb45888cf1366f959",
+    "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
+  },
+  "auxiliary_source_sha256": {
+    "apps/site/src/main.tsx": "970a44a39271a3da64c8468542f00be0a70a2e1a002032bfcc9f9c1608d6aeab",
+    "apps/web/components/WorkspaceRebuild.css": "66a2e7978ca7ae7f5beffb572c5e37cccaea60df02872af95892277dccc20afd",
+    "apps/web/components/HomeRebuild.css": "3020ffd4093dfd26f4b788fddbe3b3bc5ee148c5c1861dad6a78df67c858c386",
+    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
+    "apps/site/tests/browser-critical.mjs": "c36730b7d4601c187b32756937acb5f195d2f77812fcaf476adb988ed938035c"
+  },
+  "sdk_source_sha256": {
+    "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
+    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
+    "api/agent-chat.ts": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
+    "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
+    "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
+  },
   "targeted_supplement_gutter_followup": [
     {
       "width": 1920,
@@ -122,96 +122,87 @@
       "passed": true
     }
   ],
-  "source_sha256": {
-    "apps/web/components/HomeContent.tsx": "eeb1fe649097390680011b7147ab5411249b724ea979b75266c36ac1b32eeb61",
-    "apps/web/components/Workspace.tsx": "a9bbfa009a1c66989387d3aa60672767a26c502e01259b5118869a12f54146d4",
-    "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
-    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
-  },
-  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open",
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-26T14:48:48.525629+00:00",
+    "recorded_at": "2026-10-27T05:48:22.200Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
-      "sdk_real_ui_sse_public_links_navigate_without_fake_booking_or_provider_actions",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
-      "sdk_real_stream_and_composer_localization_de_nl_fr",
-      "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
-      "sdk_browser_no_external_provider_requests_observed"
+      "sdk_mobile_real_chat_no_overflow_escape_and_focus_return"
     ],
     "passed": true,
-    "scope": "actual local browser against real AI7 guided-preview SSE; visitor-session404 simulated; no live model/provider/payment or production acceptance",
-    "gutter_followup": [
-      {
-        "width": 1920,
-        "path": "/produkte/nex2fly",
-        "gutter": {
-          "left": 80,
-          "right": 80
-        },
-        "passed": true
-      },
-      {
-        "width": 1920,
-        "path": "/teileklar/werkstatt",
-        "gutter": {
-          "left": 80,
-          "right": 80
-        },
-        "passed": true
-      },
-      {
-        "width": 1920,
-        "path": "/impressum",
-        "gutter": {
-          "left": 80,
-          "right": 80
-        },
-        "passed": true
-      },
-      {
-        "width": 390,
-        "path": "/produkte/nex2fly",
-        "gutter": {
-          "left": 24,
-          "right": 24
-        },
-        "passed": true
-      },
-      {
-        "width": 390,
-        "path": "/teileklar/werkstatt",
-        "gutter": {
-          "left": 24,
-          "right": 24
-        },
-        "passed": true
-      },
-      {
-        "width": 390,
-        "path": "/impressum",
-        "gutter": {
-          "left": 24,
-          "right": 24
-        },
-        "passed": true
-      }
-    ]
+    "scope": "Real AI SDK streaming over isolated loopback bridge to exact api/agent-chat.ts; tools/agent-preview.mjs source-bound but not launched; no external provider"
   },
-  "development_process_cleanup": {
-    "passed": true,
-    "remaining_owned_pids": [],
-    "closed_ports": {
-      "3003": true,
-      "3004": true,
-      "3005": true
+  "presenter_measurements": [
+    {
+      "width": 591.84375,
+      "fit": "contain",
+      "left": 46.078125,
+      "right": 637.921875,
+      "parentLeft": 46.078125,
+      "parentRight": 637.921875,
+      "height": 394.5625,
+      "overflow": false
+    },
+    {
+      "width": 385.015625,
+      "fit": "contain",
+      "left": 497.390625,
+      "right": 882.40625,
+      "parentLeft": 497.390625,
+      "parentRight": 882.40625,
+      "height": 256.671875,
+      "overflow": false
+    },
+    {
+      "width": 452.328125,
+      "fit": "contain",
+      "left": 577.28125,
+      "right": 1029.609375,
+      "parentLeft": 577.28125,
+      "parentRight": 1029.609375,
+      "height": 301.546875,
+      "overflow": false
+    },
+    {
+      "width": 503.859375,
+      "fit": "contain",
+      "left": 640.140625,
+      "right": 1144,
+      "parentLeft": 640.140625,
+      "parentRight": 1144,
+      "height": 335.90625,
+      "overflow": false
+    },
+    {
+      "width": 623.078125,
+      "fit": "contain",
+      "left": 776.921875,
+      "right": 1400,
+      "parentLeft": 776.921875,
+      "parentRight": 1400,
+      "height": 415.375,
+      "overflow": false
     }
-  },
-  "sdk_source_sha256": {
-    "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
-    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
-    "api/agent-chat.ts": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
-    "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
-    "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
-  }
+  ],
+  "observed_handler_requests": [
+    {
+      "path": "/api/agent-chat",
+      "status": 200
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 422
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 422
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 200
+    }
+  ],
+  "external_requests": [],
+  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open",
+  "reproduction": "Node22 apps/site/tests/browser-critical.mjs with existing Playwright module/browser paths; requires fresh standalone build"
 }

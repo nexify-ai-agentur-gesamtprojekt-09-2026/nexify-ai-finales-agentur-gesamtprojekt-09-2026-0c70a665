@@ -1,0 +1,2 @@
+5:48:20 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+{"routes":36,"issue_routes":0,"keyboard":"tab-wrap, reverse-tab-wrap, escape, focus-return passed"}

@@ -1,9 +1,10 @@
 Public build data: 36 pages; protected content excluded
+5:47:54 AM [vite] (client) Re-optimizing dependencies because vite config has changed
 PASS public deep links refresh navigation back forward and persistent shared shell
 PASS DE NL content and canonical design tokens survive module and auth transitions
 PASS synthetic sign-in sign-out and failed sign-out preserve shell without granting module roles
 PASS all private direct routes remain unavailable with forged role tenant and signed-in fixture
-5:02:02 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:41313/tests/fixtures/clerk-integration.tsx
+5:48:14 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:36223/tests/fixtures/clerk-integration.tsx
 
 The above error occurred in one of your React components.
 

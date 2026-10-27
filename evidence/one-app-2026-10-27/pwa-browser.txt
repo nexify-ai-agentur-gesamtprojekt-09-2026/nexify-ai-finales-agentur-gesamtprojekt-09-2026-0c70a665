@@ -1,0 +1,1 @@
+{"passed":true,"checks":9,"mutations":1,"scope":"explicit public-pwa local build; network-only; no OS install or production acceptance"}

@@ -1,3 +1,6 @@
+import {registerPublicInstallation} from "./public-installation.mjs";
+declare const __PUBLIC_PWA__:boolean;
+void registerPublicInstallation(__PUBLIC_PWA__);
 import "../../../packages/tokens/tokens.css";
 import "../../web/app/globals.css";
 import {AuthenticationPanel} from "./Auth";

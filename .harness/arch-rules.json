@@ -198,6 +198,15 @@
       "what": "Ein fehlender Domainnachweis wurde entfernt oder ein bereits verbundenes Projekt wird erneut als Setupblocker geführt.",
       "why": "Historische Verknüpfung und aktueller Release-/Domainnachweis haben verschiedene Beweisumfänge.",
       "fix": "Separaten Domain-/Settingsnachweis erhalten und veraltete Setupaufträge präzisieren; keine neuen Verbindungen oder Remote-Freigaben ableiten."
+    },
+    {
+      "id": "ARCH-023",
+      "description": "Öffentliche Oberfläche nutzt zentrale Tokens; PWA bleibt explizit und ohne Offline-Seiteneffekte.",
+      "check": "python3 -m unittest discover -s tests -p test_public_surface_contract.py -q >/dev/null 2>&1 && node --test apps/site/tests/public-installation.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Tokenherkunft oder explizite netzabhängige Installationsgrenze driftet.",
+      "why": "Installation darf keine versteckte Datenhaltung, Authaktivierung oder Schreibwiederholung erzeugen.",
+      "fix": "Zentrale Tokenableitung und expliziten Modus erhalten; browser-coverage/accessibility/pwa nach UIänderungen ausführen."
     }
   ]
 }
