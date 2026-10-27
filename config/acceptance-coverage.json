@@ -1404,7 +1404,7 @@
     "apps/web/components/ExplainerSections.tsx": "172f7cbfa6c0038a8e98f1f3054b17fd1a4764e86313dd0467a0c391ad8b0dbc",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "apps/web/components/PresenterVideo.css": "2f0c719aa78d6d8ffc0f7d57bf57a3553630f34d8729a47b4fcca2638c91e992",
-    "apps/site/scripts/generate-public-data.mjs": "88c7a4645e2b7e09b11ace4b313b8e133b5ec85045ffb77f643ac6cdeae3ffc7",
+    "apps/site/scripts/generate-public-data.mjs": "23e6fcc9fbed0ff1c311fa0703c9daa480277a65d3a8259a11d73da3164ac4f9",
     "apps/site/tests/browser-video-player.mjs": "5186998ac9cfa9137b66de668a08bd6d59380960085462eceadc1d2205852f0e",
     "evidence/page-videos-2026-10-27/page-policy-0.json": "f05492b7f9ffdf44e2361e2fc8614e633de3a6d58820c90c9f12fff7b7ab9699",
     "apps/site/tests/fixtures/presenter-video.html": "e292e3b375e535e8e2e024473c0d1123ef2df8da0488ccb7984f9184ea69afdc",

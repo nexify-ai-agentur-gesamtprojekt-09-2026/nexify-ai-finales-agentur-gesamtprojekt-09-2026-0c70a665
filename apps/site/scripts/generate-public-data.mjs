@@ -82,6 +82,10 @@ export async function generate(){
   await writeFile(resolve(target,"video-coverage.json"),JSON.stringify(checkedVideos.coverage)+"\n");
   await writeFile(resolve(target,"explainer-provenance.json"),JSON.stringify(Object.fromEntries(sourceInventory))+"\n");
   await writeFile(resolve(target,"public-site.json"),JSON.stringify(data)+"\n");
+  const base="https://www.nexifyai.de";
+  const today=new Date().toISOString().slice(0,10);
+  const urls=data.pages.map(page=>page.path).sort().map(path=>`  <url><loc>${base}${path}</loc><lastmod>${today}</lastmod></url>`).join("\n");
+  await writeFile(resolve(root,"apps/web/public/sitemap.xml"),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
   console.log(`Public build data: ${data.pages.length} pages; protected content excluded`);
   return data;
 }
