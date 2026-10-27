@@ -11,8 +11,10 @@ Zustand bleibt ehrlich und fragt keine Passwörter ab. Die neue Kopfzeile wurde
 lokal auf Desktop/Mobil, 44-Pixel-Zielgröße, DE/NL/FR, Routen, Tastatur und
 Offlineausgabe geprüft. Authentifizierung erteilt weiterhin keine Membership.
 
-Der geprüfte Stand liegt auf `factory/goal-completion-2026-10-27`, Commit
-`3f19561`. GitHub-CI-Lauf `40497507088` hat Repository, React-Site, Next-Web,
+Der geprüfte Stand liegt auf
+`factory/goal-completion-gated-2026-10-27`. Der Anwendungsstand aus Commit
+`3f19561` wurde ohne Force-Push auf den wiederhergestellten Main aufgesetzt.
+GitHub-CI-Lauf `40497507088` hat Repository, React-Site, Next-Web,
 OpenAPI und PostgreSQL-Isolation vollständig bestanden. Das kanonische
 Vercel-Projekt meldet für denselben Commit `Deployment has completed`; der
 bekannte Preview-Host antwortet außerhalb der Vercel-Sitzung erwartungsgemäß
@@ -40,7 +42,7 @@ Stimme erhalten. Die aktuelle Toolregistry exponiert weder Runway- noch
 ElevenLabs-Aktionen, deshalb wurden keine Provider-Assets gelesen, keine Jobs
 gestartet und keine Medien veröffentlicht.
 
-Arbeitszweig: `factory/goal-completion-2026-10-27`, Basis `a19cd50`.
+Arbeitszweig: `factory/goal-completion-gated-2026-10-27`, Basis `839c8f2`.
 Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
 parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.
 Keine aktive Migration, Produktionsbelegung oder globale Modellsperre durchgeführt.
@@ -87,7 +89,7 @@ kein Live-LLM-Chat. Internes ToolLoopAgent-Prototyping verwendet echte SDK-Mocks
 keine Modellkosten ausgelöst. Readonly-Creditsprobe nur für diesen Vercel-
 Previewzweig konfiguriert, Ergebnis nach Deployment rücklesen.
 
-Lokaler Gesamtstand:282Pythonfälle,26SDK- und18Site-Tests grün;
+Lokaler Gesamtstand:283Pythonfälle,26SDK- und18Site-Tests grün;
 Site/Standalone/Nextbuilds, API-/App-Typechecks, Audit, E2E und14Architekturregeln
 bestanden. Sauberzustandsprüfung und kanonisches Vercel-Preview bestanden.
 Browser:36öffentliche/10privateRouten,49Erklärmodule,SDK404Fallback/Streams/

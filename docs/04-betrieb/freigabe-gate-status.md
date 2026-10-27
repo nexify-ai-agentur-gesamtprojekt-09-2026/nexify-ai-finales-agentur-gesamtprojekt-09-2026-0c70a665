@@ -4,8 +4,10 @@
 
 **Urteil: Preview technisch bereit, Produktionsfreigabe weiterhin gesperrt.**
 
-Der Stand `3f19561` auf `factory/goal-completion-2026-10-27` hat im GitHub-CI-
-Lauf `40497507088` alle fünf Jobs bestanden. Das kanonische Vercel-Projekt
+Der Anwendungsstand aus `3f19561` ist auf
+`factory/goal-completion-gated-2026-10-27` ohne Force-Push vom
+wiederhergestellten Main abgeleitet. GitHub-CI-Lauf `40497507088` hat für den
+Anwendungsstand alle fünf Jobs bestanden. Das kanonische Vercel-Projekt
 `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` meldet für denselben
 Commit `Deployment has completed`. Der bekannte Preview-Host ist von außen
 zugangsgeschützt und antwortet mit HTTP 302 zu Vercel SSO. Damit sind weder ein
