@@ -1,3 +1,20 @@
+# PR36 begrenzter lokaler Folgepatch · 27.10.2026
+
+Current State: eigener Zweig integration/pr36-acceptance-2026-10-27 auf
+66866298b3eb4054371b0e2a1e1f618f1bc8ca73, keine Remote-Schreibaktionen.
+PR35 und main nicht zusammengeführt. Standalone-, lazy Auth-, Signout- und
+Locale-Fälle reproduziert/korrigiert; Node-Untergrenze22.23.4 wiederhergestellt.
+24 Node-Tests, sieben synthetische Browserfälle, echter Offlinebuild unter
+Node22.23.4; unabhängiges Review samt behobenem P2-Importgraphbefund.
+Details: docs/contracts/pr36-local-acceptance.md; evidence/pr36-2026-10-27.
+
+Next Steps: getrennten sicheren lokalen Orchestrierungskern auf PR35-Folgeversion
+bauen; vorhandene Queue/Context/Brainbausteine verwenden. PR36-Restbefunde,
+echte Auth-/Tenant-/Domain-/Produktionsabnahme und Bundlegröße bleiben offen.
+Keine Aktivierung, echte Anmeldung, Gebühren, Serveränderungen oder Deployment.
+
+---
+
 # Live-Vorschau bestätigt · 26.10.2026
 
 https://nexifyai.de ist als Alias des READY-Previewdeployments

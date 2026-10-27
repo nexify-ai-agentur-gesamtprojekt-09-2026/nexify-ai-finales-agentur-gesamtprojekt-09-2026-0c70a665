@@ -81,6 +81,24 @@
       "what": "Eine öffentliche Daten-/Navigationsgrenze ist verletzt.",
       "why": "Private Daten dürfen nicht ins Backup; unbekannte Aktionsziele oder erfundene Presenterquellen dürfen keine gültige Seitenführung vortäuschen.",
       "fix": "Öffentliche Projektion, Navigationsziele und versionierte Quellenbindung korrigieren; negative Grenztests erhalten."
+    },
+    {
+      "id": "ARCH-010",
+      "description": "Standalone-Ausgabe akzeptiert keine ungebundenen Modulimporte, auch nicht in Unterverzeichnissen.",
+      "check": "node --test apps/site/tests/standalone.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Einzeldatei wurde mit verbleibenden statischen/dynamischen Modulabhängigkeiten freigegeben.",
+      "why": "Dateizählung allein beweist keine vollständige Offlineausgabe.",
+      "fix": "Importsyntax des Entry prüfen, dedicated Bundle erzeugen und Negativfälle erhalten."
+    },
+    {
+      "id": "ARCH-011",
+      "description": "Optionale Auth bleibt deaktiviert ohne explizite Konfiguration und gewährt keine Geschäftsrechte.",
+      "check": "node --test apps/site/tests/auth.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Auth-Konfiguration, Umgebungsgrenze oder lokalisierte UI-Verträge driften.",
+      "why": "Ein öffentlicher Login-Schalter ist keine Tenantfreigabe und ein Ladefehler darf keine öffentliche Anwendung entfernen.",
+      "fix": "Lokalen Auth-Panel-Vertrag reparieren und zusätzlich browser-auth.mjs mit synthetischem SDK prüfen; echte Runtimeabnahme getrennt halten."
     }
   ]
 }
