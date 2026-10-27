@@ -159,6 +159,41 @@ class NativeChatTests(unittest.TestCase):
         self.assertEqual(status, 200); self.assertEqual(len(session["history"]), 2)
         self.assertEqual(session["workspace"]["quotes"][0]["id"], quote["id"])
 
+    def test_session_reload_returns_latest_twenty_quotes_in_chronological_order(self):
+        created = []
+        for index in range(21):
+            status, quote, _ = self.action("/api/quotes", {"title": f"Synthetic quote {index}", "details": "Local reload regression"}, key=f"reload-quote-{index:04}")
+            self.assertEqual(status, 200)
+            created.append(quote)
+        for _ in range(2):
+            status, session, _ = self.request("GET", "/api/session", cookie=self.cookie)
+            self.assertEqual(status, 200)
+            self.assertEqual(session["workspace"]["quotes"], created[-20:])
+        latest = session["workspace"]["quotes"][-1]
+        self.assertEqual(latest, created[-1])
+        self.assertEqual(self.request("GET", latest["download_url"], cookie=self.cookie)[0], 200)
+        _, foreign, headers = self.request("GET", "/api/session")
+        foreign_cookie = headers["Set-Cookie"].split(";", 1)[0]
+        self.assertEqual(foreign["workspace"]["quotes"], [])
+        self.assertEqual(self.request("GET", latest["download_url"], cookie=foreign_cookie)[0], 404)
+        self.assertEqual(self.request("POST", f"/api/quotes/{latest['id']}/send", {"email": "fixture@example.invalid", "confirmed": True}, cookie=foreign_cookie, csrf=foreign["csrf"])[0], 404)
+
+    def test_marketing_drafts_use_requested_locale_and_preserve_facts_and_replay(self):
+        for locale, prefix, audience_prefix in [("de", "Ziel: ", "Zielgruppe: "), ("nl", "Doel: ", "Doelgroep: "), ("fr", "Objectif : ", "Public cible : ")]:
+            with self.subTest(locale=locale):
+                payload = {"locale": locale, "goal": "Synthetic goal", "audience": "Synthetic audience"}
+                status, draft, _ = self.action("/api/marketing", payload, key="locale-marketing-" + locale)
+                self.assertEqual(status, 200)
+                self.assertEqual(draft["draft"][0], prefix + payload["goal"])
+                self.assertEqual(draft["draft"][1], audience_prefix + payload["audience"])
+                self.assertEqual(draft["goal"], payload["goal"])
+                self.assertEqual(draft["audience"], payload["audience"])
+                self.assertFalse(draft["published"])
+                self.assertFalse(draft["model_generated"])
+                self.assertEqual(self.action("/api/marketing", payload, key="locale-marketing-" + locale)[1], draft)
+                self.assertEqual(self.store.object(self.store.visitor(self.cookie.split("=", 1)[1])[0]["id"], draft["id"], "marketing"), draft)
+        self.assertEqual(self.action("/api/marketing", {"locale": "xx", "goal": "Synthetic", "audience": "Synthetic"}, key="invalid-locale-0001")[0], 422)
+
     def test_marketing_is_persistent_draft_without_fake_model_or_publication(self):
         status, result, _ = self.action("/api/marketing", {"goal": "Qualifizierte Anfragen", "audience": "Lokale Werkstätten"})
         self.assertEqual(status, 200); self.assertFalse(result["published"]); self.assertFalse(result["model_generated"])

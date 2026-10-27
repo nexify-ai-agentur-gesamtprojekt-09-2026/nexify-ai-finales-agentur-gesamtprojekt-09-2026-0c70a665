@@ -49,6 +49,8 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-VIDEO-PREPRODUCTION-BYTES: assistant_preproduction_not_user_acceptance; Datum 2026-10-27; library_materialized_and_archive_hash_verified; libfile_4c255bb88af48191a025daecac648997. Umfang: Actual text/caption ZIP, SHA281197b1a8eb4990670ec2de75d6699e58f0d11cd7a235638a5a8404f78b0e3b. Seven film/21 scene plans; no final media/voice approval.
 - SRC-MASTER13-TECHNICAL-VIDEO: consolidated_document_contract_not_runtime_acceptance; Datum 2026-10-27T19:01:56Z; library_materialized_hash_verified_technical_subset_read; libfile_8cfb2b9062688191bbdacfb55d0555ab version1; libfile_ab3f1404d800819187354ddccbe47e03 version3. Umfang: JSON SHA2566ba953fc6154f1a5176b9c680aad46fc11597e1871d230578b5342409d6674fe; MD SHA256c055aec90bdacb614e3ea9b359e4caa318d5129a174981d6ca3f6288e543e5aa. RQ-029/RQ-038,TST-19/TST-24:36public routes,49module-specific videos;10protected separate.188source entries counted, not all imported or independently verified.
 - SRC-VIDEO-MANIFEST-RECONCILED: technical_hash_reconciliation_not_casting_approval; Datum 2026-10-27; existing_archive_bytes_verified_and_library_guarded_replace; libfile_4c255bb88af48191a025daecac648997 version1. Umfang: SHA34cc18cacddb4e5d952dcd6b07b187d700e999b2acd00c5a41a2a4d212b23377;2manifests changed,33payloads byte-identical;33inner/34outer entries correct;casting not approved/audio unheard unchanged;independent Sol archive review
+- SRC-NIGHT-DEADLINE-20261027: user; Datum 2026-10-27T19:46:00Z; parent_verified_excerpt; parent verified USER transcript2026-10-27T19:46Z. Umfang: All existing pages/videos/portals target28.10.06:00Europe/Berlin=05:00UTC; no100percent guarantee or bypass of security/funding/release prerequisites.
+- SRC-REA-ALTERNATIVE-20261027: user_decision_reported_by_parent; Datum 2026-10-27T19:45:00Z; parent_verified_excerpt; parent report of direct user authorization2026-10-27T19:45Z. Umfang: Direct alternative to unavailable REA permitted for the scoped verification;no native REA cloning or fabricated APPROVE.
 
 ## Soll / Ist / Abschluss
 
@@ -318,12 +320,12 @@ Abschluss: Exact promoted source/lock/asset hashes, applicable visual941px/mobil
 
 ### REC-REA-01
 
-Soll (SRC-LINKED-STANDARDS, SRC-NATIVE-REA-TOOLS): Official sources and bounded artifact manifest, then supported REA analysis and independent verification before reuse. Actual native registered tools, EvidenceIDs and independent APPROVE; no fabricated rea.* operations.
-Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
+Soll (SRC-LINKED-STANDARDS, SRC-NATIVE-REA-TOOLS, SRC-REA-ALTERNATIVE-20261027): Official sources and bounded artifact manifest, then supported REA analysis and independent verification before reuse. Actual native registered tools, EvidenceIDs and independent APPROVE; no fabricated rea.* operations.
+Einordnung: scoped requirement derived from cited source; not reconstructed original transcript Newer reported user decision19:45 permits a direct evidence-based alternative;native REA unavailability alone is not a blanket product release blocker.
 Dateien/Funktionen: docs/automation/rea-mcp.md, tools/automation/rea_stdio_probe.py, config/integrations/rea-mcp.json
-Beleg: Documented local runtime paths absent; Page mentions6.5, repository wrapper6.8
+Beleg: Documented local runtime paths absent; Page mentions6.5, repository wrapper6.8 Scoped alternative actually used:current source/byte/schema checks,Node/Python regressions,actual isolated browser/HTTP/SQLite and independent read-only Sol. No native tool/APPROVE claim.
 Auslieferung: documented_runtime_not_available; keine Gesamtanforderung abgenommen.
-Lücke: Authorized installation/version compatibility and actual applicable analysis evidence missing.
+Lücke: Authorized installation/version compatibility and actual applicable analysis evidence missing. Native entry still unavailable, but direct alternative is authorized;real media/identity/runtime/qualified acceptance evidence remains independently required.
 Nächster Schritt (D06 / D07): Resolve version/source/rights and existing runtime; no silent install or fabricated scan success.
 Abschluss: Bounded source-hash/version/provider/options/file-policy evidence; independently reviewed findings and real integration tests.
 
@@ -364,10 +366,10 @@ Abschluss: Actual scoped knowledge path proves isolation/provenance/readback; se
 
 Soll (SRC-ORIGINAL-WORKSPACE, SRC-ITSAPLAN-CORE, SRC-CHAT-20261025-ONEAPP, SRC-BLUEPRINT, SRC-DESIGN-HANDOFF, SRC-INTERNAL-SURFACES): Original AionUi workplace, own WebUI integration, downloadable local solution, eight core agents and typed libraries with automatic/manual selection.
 Einordnung: derived scoped requirement; original excerpt supplied by parent, not full original transcript
-Dateien/Funktionen: config/one-web-app.json, tools/local_control.py, config/operating-model.json, evidence/reconciliation-2026-10-27/route-feature-inventory.json
-Beleg: Current public Workspace is a public shell, not proven original authenticated AionUi workplace.
+Dateien/Funktionen: config/one-web-app.json, tools/local_control.py, config/operating-model.json, evidence/reconciliation-2026-10-27/route-feature-inventory.json, apps/agent-gateway/server.py, tests/test_native_chat.py, evidence/night-release-2026-10-27/local-flow-fixes.json, docs/contracts/night-release-checkpoint.md
+Beleg: Current public Workspace is a public shell, not proven original authenticated AionUi workplace. Night delta:PORTAL-LOCAL-01 fixed newest20chronological session restore after21quotes;foreignPDF/send404 retained. PUBLIC-LOCAL-02 fixes deterministic DE/NL/FR marketing draft.26HTTP/session tests passed after3red failures;separate Sol repeated26without findings.13shop browser/API/SQLite checks repeated. No actual production identity/workplace abnahme.
 Auslieferung: planned_targets_backend_not_connected; keine Gesamtanforderung abgenommen.
-Lücke: Original source/license/import contract, actual eight-agent execution/library flow and packaged local application not demonstrated. Historical internal routes /workspace,/posteingang,/myadmin are not implemented by the public shell; original module source and actual protected flows missing. Actual current internal targets use /intern/workspace, /intern/posteingang, /intern/leitstand, /intern/verwaltung; historical /workspace,/posteingang,/myadmin mapping unresolved. Config marks targets planned/backend not_connected; this is a local implementation gap plus external identity acceptance, not an implemented workplace.
+Lücke: Original source/license/import contract, actual eight-agent execution/library flow and packaged local application not demonstrated. Historical internal routes /workspace,/posteingang,/myadmin are not implemented by the public shell; original module source and actual protected flows missing. Actual current internal targets use /intern/workspace, /intern/posteingang, /intern/leitstand, /intern/verwaltung; historical /workspace,/posteingang,/myadmin mapping unresolved. Config marks targets planned/backend not_connected; this is a local implementation gap plus external identity acceptance, not an implemented workplace. Production server-side identity issuer/subject-tenant-role/revocation and exact business endpoint binding remain unverified;Vite public projection and local gateway are not production portal implementation.
 Nächster Schritt (D06 / D07): Map original source and existing module interfaces; measure actual feature coverage before implementing; no replacement dashboard or old-price adoption.
 Abschluss: Licensed original workspace modules and download verified; eight actual configured core-agent flows plus libraries/manual/automatic routing tested with tenant negatives.
 

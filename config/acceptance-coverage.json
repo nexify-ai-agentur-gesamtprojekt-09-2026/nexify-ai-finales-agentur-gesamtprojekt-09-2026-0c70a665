@@ -1224,9 +1224,9 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "c90ca91e3e4769f4afb0e036120fe5511cf2a75340a6e4f6d14176bc6334fa16",
+    "PROGRESS.md": "268ea7277c337d2395ec144728bf6cad7ec694bea65843565d45cf9d418421c7",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
-    "apps/agent-gateway/server.py": "a676defdf7dcdee6d299afa30b3ab19a59d317ce154583c4ba058d9177a33166",
+    "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
     "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
     "apps/site/pwa/plugin.mjs": "3c805218638e6923569ce5f61dbdce70c1b67c6a0e45893fa0cf409cad4c0587",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "4b896a2bcd8281e8b51f4261eabe6378fb0690b968dd43c55ada225d44a42d97",
+    "docs/contracts/requirements-reconciliation.md": "f327c21b74ab1b628917ec157828ccf455b4b2cf7b8ddcd543dcb030cefc6044",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1312,7 +1312,7 @@
     "evidence/reconciliation-2026-10-27/linked-standards-reference.json": "f20d9e9d8b66d49057c038a17aaea6ce9c8392e92cecbe55ed5594bb0adbaf48",
     "evidence/reconciliation-2026-10-27/review-asset-inspection.json": "11f5c4eee4527585f607fadec7cec4c99cc10b18228a4f6cb7794bcf46056f2e",
     "evidence/reconciliation-2026-10-27/route-feature-inventory.json": "fbea71c96cf69f0db41d5f405a8535629a4cfb1c8fd06c270c7267cb4f8495e4",
-    "evidence/shop-http-2026-10-27/browser-shop.json": "a15dc64139392a219ac362172ee044dac5ae3876c28bb80297342216ddc1013e",
+    "evidence/shop-http-2026-10-27/browser-shop.json": "d61ece71ebf585ecaf0234b62c4507a03297cbf201714d5badc625e8d6d33d1b",
     "evidence/shop-http-2026-10-27/design-reference-comparison.json": "8802df3b29de9560c12633d84692f631cc2344e01043dd879e219bb392300ae7",
     "package.json": "0ecf5786228084c168d842b05c2d2a71def31d00c99c853c04431e04cfbbe6ef",
     "packages/design-system/README.md": "fc465da4a2222b5a863727b28096ba2bf0509f7b34323499d755b6de022f853a",
@@ -1371,7 +1371,7 @@
     "evidence/catalog-image-batch-2026-10-27/actual-source-local-browser.json": "c298df97746dcb19f2d4f024779d6ebaabd9fd446519e6848f628483afda9abe",
     "evidence/catalog-image-batch-2026-10-27/actual-image-quarantine.json": "cdf119d72776f3c29eb15843d74159e9765ccae39fc8001f34b6ca4cd8165d01",
     "evidence/catalog-image-batch-2026-10-27/clean-generator-reproduction.json": "62709c076aa92afa356e54e2298b4f5905f276ba5aefb7c9b4da004a1ded838c",
-    "evidence/catalog-image-batch-2026-10-27/browser-catalog.json": "40d06d1d473a1ab504781c6819d5eabaf2c86f0122427e70aadc10b96163b69e",
+    "evidence/catalog-image-batch-2026-10-27/browser-catalog.json": "d0fc3ee696e2ac2de2b4fce0cacf8bdfa9223c2875b98237247208f9deaec6cc",
     "evidence/catalog-image-batch-2026-10-27/image-runtime-primary-metadata.json": "ef9fbdeaa63e1d92744cc6745ced8a8969d06db71413d928bb2fbb11d88336cf",
     "evidence/catalog-image-batch-2026-10-27/source-and-release-scope.json": "c5cb14b02ba2efb6553f525f60dd88cd790d9acac7fc6c4420d47759f151e791",
     "evidence/catalog-image-batch-2026-10-27/v11-push-ci.json": "c7196be3493a7bd94eb694588d6231e683e7545c547940d40ac23688c199f795",
@@ -1393,7 +1393,7 @@
     "apps/site/scripts/public-explainers.mjs": "1a4ebf0ef76c5ec28630862d0c461cb76ded17db275682946ee2e5a9d30cd2c5",
     "apps/site/scripts/public-video-assets.mjs": "802701213e38f2144990aebe4a9a413f167dace9f26401fb2e684a617b2b766e",
     "evidence/one-app-2026-10-27/critical-browser-fresh.json": "063c19a5b1772c7472663428b1f5531dc3f8ee97682b01db7dea7149f85a5e90",
-    "docs/contracts/page-video-integration.md": "45355eaf98a67c6624d5dcdd8410f359420b971b283397e03596a339f4d13c63",
+    "docs/contracts/page-video-integration.md": "d9ee702e324a6633b0bdc6919502869a7312894f105caadc59e2ac5630685886",
     "apps/web/components/PresenterVideo.tsx": "8aad2b972de21ee0e0d880a9723f0bc539184df6b1ea21e1975a2ccf19509e16",
     "evidence/page-videos-2026-10-27/browser-video.json": "6e0b572ded11d9c91e6bdefb066d3e705dbeb32c445c9a20a1740ecae232be24",
     "evidence/page-videos-2026-10-27/source-policy-scope.json": "4570403b2f8d39c7a32f097fd641269c05d35a0b5e3aa1f33b155e32d1fb0e53",
@@ -1410,10 +1410,13 @@
     "apps/site/tests/fixtures/presenter-video.html": "e292e3b375e535e8e2e024473c0d1123ef2df8da0488ccb7984f9184ea69afdc",
     "apps/site/tests/fixtures/presenter-video.tsx": "711715eb8335d911423d0d87a91b7b96378564e0f3dcb39c3c44f57b0f3ae617",
     "docs/contracts/page-video-coverage.md": "8be35cde4abb4ef3eaac0e85d7d4aeda59ff305a1cbd24092b82d3d8726168fc",
-    "evidence/page-videos-2026-10-27/independent-source-review.json": "d6cbfb1e02549d2da3126a3ed3ec70188af6e52ffb0638d0662c752fb36597e8",
-    "evidence/page-videos-2026-10-27/local-scope.json": "6e794a3d90796b7c84ba02ed2e1904533a97b47f7545a0dc04238fa18c75501f",
+    "evidence/page-videos-2026-10-27/independent-source-review.json": "6aa436b2d63078a6b18c53729d46378a7fde0655b29d7efa4356cceed936cdcf",
+    "evidence/page-videos-2026-10-27/local-scope.json": "7d5508d2431e204b03cdcd3b81583fc565c6c2b7fa204db7657a50c35e218565",
     "evidence/page-videos-2026-10-27/reproduce-manifest-reconciliation.py": "2f2ecc6f8aa030fad45b634dbe2508f5c556753d4ce0f89c789dd52b0128bc73",
-    "evidence/page-videos-2026-10-27/manifest-reconciliation.json": "c87c8883f7e11e173e8475d7769b356bd12e8fdedd2dd2d5b0967849da000ea7"
+    "evidence/page-videos-2026-10-27/manifest-reconciliation.json": "c87c8883f7e11e173e8475d7769b356bd12e8fdedd2dd2d5b0967849da000ea7",
+    "docs/contracts/night-release-checkpoint.md": "e431ad4da94bdf953f5c244e2a613a92b22a9b065053a7eecd54b4b30925ab33",
+    "tests/test_native_chat.py": "10626a4962387489800342bf00300b054bcf0d6141488086c4fd60587a31ad33",
+    "evidence/night-release-2026-10-27/local-flow-fixes.json": "81f1bf918176bd15f39eece7efcaefd30932a9f3bf5644d69b8d65ae5c8c636f"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -1858,6 +1861,24 @@
         "acquisition": "existing_archive_bytes_verified_and_library_guarded_replace",
         "original_seen_here": true,
         "scope": "SHA34cc18cacddb4e5d952dcd6b07b187d700e999b2acd00c5a41a2a4d212b23377;2manifests changed,33payloads byte-identical;33inner/34outer entries correct;casting not approved/audio unheard unchanged;independent Sol archive review"
+      },
+      {
+        "id": "SRC-NIGHT-DEADLINE-20261027",
+        "locator": "parent verified USER transcript2026-10-27T19:46Z",
+        "source_date": "2026-10-27T19:46:00Z",
+        "role": "user",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "All existing pages/videos/portals target28.10.06:00Europe/Berlin=05:00UTC; no100percent guarantee or bypass of security/funding/release prerequisites."
+      },
+      {
+        "id": "SRC-REA-ALTERNATIVE-20261027",
+        "locator": "parent report of direct user authorization2026-10-27T19:45Z",
+        "source_date": "2026-10-27T19:45:00Z",
+        "role": "user_decision_reported_by_parent",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "Direct alternative to unavailable REA permitted for the scoped verification;no native REA cloning or fabricated APPROVE."
       }
     ],
     "requirements": [
@@ -2458,19 +2479,20 @@
         "acceptance_case_id": null,
         "source_ids": [
           "SRC-LINKED-STANDARDS",
-          "SRC-NATIVE-REA-TOOLS"
+          "SRC-NATIVE-REA-TOOLS",
+          "SRC-REA-ALTERNATIVE-20261027"
         ],
         "applicable_requirement": "Official sources and bounded artifact manifest, then supported REA analysis and independent verification before reuse. Actual native registered tools, EvidenceIDs and independent APPROVE; no fabricated rea.* operations.",
-        "interpretation": "scoped requirement derived from cited source; not reconstructed original transcript",
+        "interpretation": "scoped requirement derived from cited source; not reconstructed original transcript Newer reported user decision19:45 permits a direct evidence-based alternative;native REA unavailability alone is not a blanket product release blocker.",
         "implementation_files": [
           "docs/automation/rea-mcp.md",
           "tools/automation/rea_stdio_probe.py",
           "config/integrations/rea-mcp.json"
         ],
-        "test_evidence": "Documented local runtime paths absent; Page mentions6.5, repository wrapper6.8",
+        "test_evidence": "Documented local runtime paths absent; Page mentions6.5, repository wrapper6.8 Scoped alternative actually used:current source/byte/schema checks,Node/Python regressions,actual isolated browser/HTTP/SQLite and independent read-only Sol. No native tool/APPROVE claim.",
         "actual_delivery": "documented_runtime_not_available",
         "full_requirement_accepted": false,
-        "gap": "Authorized installation/version compatibility and actual applicable analysis evidence missing.",
+        "gap": "Authorized installation/version compatibility and actual applicable analysis evidence missing. Native entry still unavailable, but direct alternative is authorized;real media/identity/runtime/qualified acceptance evidence remains independently required.",
         "next_step": "Resolve version/source/rights and existing runtime; no silent install or fabricated scan success.",
         "completion_criterion": "Bounded source-hash/version/provider/options/file-policy evidence; independently reviewed findings and real integration tests.",
         "owner_area": "D06 / D07"
@@ -2595,12 +2617,16 @@
           "config/one-web-app.json",
           "tools/local_control.py",
           "config/operating-model.json",
-          "evidence/reconciliation-2026-10-27/route-feature-inventory.json"
+          "evidence/reconciliation-2026-10-27/route-feature-inventory.json",
+          "apps/agent-gateway/server.py",
+          "tests/test_native_chat.py",
+          "evidence/night-release-2026-10-27/local-flow-fixes.json",
+          "docs/contracts/night-release-checkpoint.md"
         ],
-        "test_evidence": "Current public Workspace is a public shell, not proven original authenticated AionUi workplace.",
+        "test_evidence": "Current public Workspace is a public shell, not proven original authenticated AionUi workplace. Night delta:PORTAL-LOCAL-01 fixed newest20chronological session restore after21quotes;foreignPDF/send404 retained. PUBLIC-LOCAL-02 fixes deterministic DE/NL/FR marketing draft.26HTTP/session tests passed after3red failures;separate Sol repeated26without findings.13shop browser/API/SQLite checks repeated. No actual production identity/workplace abnahme.",
         "actual_delivery": "planned_targets_backend_not_connected",
         "full_requirement_accepted": false,
-        "gap": "Original source/license/import contract, actual eight-agent execution/library flow and packaged local application not demonstrated. Historical internal routes /workspace,/posteingang,/myadmin are not implemented by the public shell; original module source and actual protected flows missing. Actual current internal targets use /intern/workspace, /intern/posteingang, /intern/leitstand, /intern/verwaltung; historical /workspace,/posteingang,/myadmin mapping unresolved. Config marks targets planned/backend not_connected; this is a local implementation gap plus external identity acceptance, not an implemented workplace.",
+        "gap": "Original source/license/import contract, actual eight-agent execution/library flow and packaged local application not demonstrated. Historical internal routes /workspace,/posteingang,/myadmin are not implemented by the public shell; original module source and actual protected flows missing. Actual current internal targets use /intern/workspace, /intern/posteingang, /intern/leitstand, /intern/verwaltung; historical /workspace,/posteingang,/myadmin mapping unresolved. Config marks targets planned/backend not_connected; this is a local implementation gap plus external identity acceptance, not an implemented workplace. Production server-side identity issuer/subject-tenant-role/revocation and exact business endpoint binding remain unverified;Vite public projection and local gateway are not production portal implementation.",
         "next_step": "Map original source and existing module interfaces; measure actual feature coverage before implementing; no replacement dashboard or old-price adoption.",
         "completion_criterion": "Licensed original workspace modules and download verified; eight actual configured core-agent flows plus libraries/manual/automatic routing tested with tenant negatives.",
         "owner_area": "D06 / D07"
@@ -2920,6 +2946,83 @@
         "merge_by_this_workflow": false,
         "core_push_ci": "40558440811 all5jobs success"
       }
+    },
+    "night_release_checkpoint": {
+      "target_at": "2026-10-28T05:00:00Z",
+      "local_target": "2026-10-28T06:00:00+01:00",
+      "source_id": "SRC-NIGHT-DEADLINE-20261027",
+      "owner": "Root web implementation; server/Brain owner separate",
+      "mode": "planned_conditional_windows_not_runtime_scheduler",
+      "whole_system_completion_guaranteed": false,
+      "packages": [
+        {
+          "requirement_ids": [
+            "REC-MEDIA-01",
+            "RQ-029"
+          ],
+          "owner": "Root media integration; authorized media/casting owner supplies assets",
+          "window": "20:00-01:00UTC, production dependent on inputs",
+          "current": "manifest Libraryv1 reconciled;0approved films/49module bindings pending; playback checked",
+          "missing_inputs": [
+            "approved AIFly character",
+            "exact approved casting/sample budget",
+            "actual locale films/captions/transcripts and rights/QA"
+          ],
+          "next": "resolve production inputs before generating; bind only genuine approved bytes",
+          "test": "27focused Node,6controller+36route browser; genuine codec/audio/AT QA remains",
+          "deployment_gate": "exact accepted assets,budgets and actual target readback",
+          "completion": "required per-module/locale genuine films independently accepted, protected media separate"
+        },
+        {
+          "requirement_ids": [
+            "MASTER-01",
+            "REC-CONTENT-01",
+            "RQ-034"
+          ],
+          "owner": "Root web implementation; backend/release owner supplies actual runtime contract",
+          "window": "20:00-23:00UTC local fixes and regression; runtime work conditional",
+          "current": "static routes locally checked;QuoteReload and MarketingLocale bugs reproduced and corrected in working tree",
+          "missing_inputs": [
+            "production gateway route/identity binding",
+            "actual commerce facts and freshness/fitment approvals"
+          ],
+          "next": "finish focused regressions and independent review, then safe exact-head delivery",
+          "test": "local HTTP/SQLite reload/ownership/replay plus locale regressions and browser path",
+          "deployment_gate": "affected business routes end-to-end at actual runtime; no invented buyability",
+          "completion": "exact affected release works with real permitted adapter; no outstanding critical flow error"
+        },
+        {
+          "requirement_ids": [
+            "REC-PORTALS-01",
+            "REC-WORKPLACE-01",
+            "MASTER-03",
+            "MASTER-04"
+          ],
+          "owner": "Root UI; Identity/runtime operator owns binding; independent reviewer checks",
+          "window": "20:00-02:00UTC local preparation; real validation conditional",
+          "current": "local session/role/tenant adapters tested;actual production membership mapping not proven",
+          "missing_inputs": [
+            "exact permitted identity issuer",
+            "server-side subject-to-tenant/project/role and revocation contract",
+            "existing production endpoint/route binding"
+          ],
+          "next": "use confirmed existing adapter only; retain403/401 until actual mapping validated",
+          "test": "permitted role plus wrong role/tenant/expired/revoked session and client-claim negatives",
+          "deployment_gate": "real server-side authorization and safe direct-route/API evidence",
+          "completion": "own resources accessible, all foreign/revoked cases denied;no protection opened"
+        }
+      ],
+      "final_windows": [
+        {
+          "window": "02:00-04:15UTC",
+          "action": "scope-specific release/browser/roles/media/restore/rollback checks only if actual inputs present"
+        },
+        {
+          "window": "04:15-05:00UTC",
+          "action": "conditional final release/readback or precise open-blocker report;no automatic main merge/domain switch"
+        }
+      ],
+      "reachability": "Local defects/evidence and prepared integration are executable now. All real films and protected production flows by05:00UTC are not presently assured because inputs/gates remain unresolved."
     }
   }
 }

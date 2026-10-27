@@ -52,5 +52,7 @@
       "next": "exact release browser/mobile/AT and native REA evidence with actual films",
       "done_when": "qualified scope-specific approval at exact target/version, no handoff-as-completion"
     }
-  ]
+  ],
+  "historical_snapshot_head": "85c8f177567f563187f7c3396ac4cca749425d17",
+  "superseded_scope": "Only2manifest gaps subsequently closed by Libraryversion1;see manifest-reconciliation.json. All actual film/casting/production gaps remain."
 }

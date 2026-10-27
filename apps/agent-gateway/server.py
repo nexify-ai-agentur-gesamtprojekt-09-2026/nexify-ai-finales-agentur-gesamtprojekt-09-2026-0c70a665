@@ -214,12 +214,26 @@ class Store:
             elif operation == "marketing":
                 goal = text(body, "goal", 800)
                 audience = text(body, "audience", 500)
+                templates = {
+                    "de": ["Ziel: ", "Zielgruppe: ",
+                           "Kernbotschaft: Bedarf und konkreten nächsten Schritt klar benennen.",
+                           "Maßnahmen: bestehende Inhalte prüfen, einen passenden Kanal auswählen, einen Entwurf erstellen.",
+                           "Prüfung: Aussagen belegen, Datenschutz und Rechte prüfen, vor Veröffentlichung freigeben.",
+                           "Messung: qualifizierte Anfragen und vereinbarte nächste Schritte erfassen."],
+                    "nl": ["Doel: ", "Doelgroep: ",
+                           "Kernboodschap: benoem de behoefte en de concrete volgende stap duidelijk.",
+                           "Acties: controleer bestaande inhoud, kies een passend kanaal en maak een concept.",
+                           "Controle: onderbouw uitspraken, controleer privacy en rechten en laat goedkeuren vóór publicatie.",
+                           "Meting: leg relevante aanvragen en afgesproken vervolgstappen vast."],
+                    "fr": ["Objectif : ", "Public cible : ",
+                           "Message clé : préciser le besoin et la prochaine étape concrète.",
+                           "Actions : vérifier les contenus existants, choisir un canal adapté et préparer un brouillon.",
+                           "Contrôle : étayer les affirmations, vérifier la confidentialité et les droits, puis faire approuver avant publication.",
+                           "Mesure : suivre les demandes qualifiées et les prochaines étapes convenues."]}
+                lines = templates[body.get("locale", "de")]
                 result = {"id": identifier, "state": "structured_draft", "goal": goal, "audience": audience,
-                          "draft": ["Ziel: " + goal, "Zielgruppe: " + audience,
-                                    "Kernbotschaft: Bedarf und konkreten nächsten Schritt klar benennen.",
-                                    "Maßnahmen: bestehende Inhalte prüfen, einen passenden Kanal auswählen, einen Entwurf erstellen.",
-                                    "Prüfung: Aussagen belegen, Datenschutz und Rechte prüfen, vor Veröffentlichung freigeben.",
-                                    "Messung: qualifizierte Anfragen und vereinbarte nächste Schritte erfassen."], "published": False, "model_generated": False}
+                          "draft": [lines[0] + goal, lines[1] + audience, *lines[2:]],
+                          "published": False, "model_generated": False}
                 db.execute("INSERT INTO objects VALUES (?,?,?,?)", (identifier, owner, "marketing", json.dumps(result)))
             elif operation == "chat":
                 message = text(body, "message", 3000)
@@ -361,7 +375,7 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None)
                     visitor, cookie = self.visitor(create=True)
                     with store.connect() as db:
                         history = [dict(row) for row in db.execute("SELECT role,body FROM messages WHERE owner=? ORDER BY id DESC LIMIT 100", (visitor["id"],))][::-1]
-                        quotes = [json.loads(row[0]) for row in db.execute("SELECT payload FROM objects WHERE owner=? AND kind='quote' ORDER BY rowid LIMIT 20", (visitor["id"],))]
+                        quotes = [json.loads(row[0]) for row in db.execute("SELECT payload FROM objects WHERE owner=? AND kind='quote' ORDER BY rowid DESC LIMIT 20", (visitor["id"],))][::-1]
                     return self.respond(200, {"csrf": visitor["csrf"], "history": history, "workspace": {"quotes": quotes}, "capabilities": capabilities()}, cookie=cookie)
                 if path == "/api/capabilities":
                     return self.respond(200, {"mode": "local_development", "capabilities": capabilities()})

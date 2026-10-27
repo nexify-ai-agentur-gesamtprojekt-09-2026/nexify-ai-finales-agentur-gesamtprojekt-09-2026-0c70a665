@@ -904,3 +904,16 @@ Draft85c8f17,0Reviewthreads/Reviews; keine Remote-Threads eigenmächtig gelöst.
 Nachtziel28.10.05:00UTC: Medienbereitschaft, öffentliche Flows und geschützte
 Portale getrennt prüfen. Fehlende Casting-/Figuren-/Filmbytes und tatsächlicher
 Identity-/Runtime-/Releasevertrag erlauben keine100%-Fertigstellungszusage.
+
+
+### Nachtabschluss: zwei konkrete lokale Flowlücken
+
+PORTAL-LOCAL-01: nach21synthetischen Angeboten liefert die reale lokale Session
+jetzt die jüngsten20chronologisch;neuesterPDF und fremdePDF/Send404 getestet.
+PUBLIC-LOCAL-02: validierteDE/NL/FR-Auswahl bestimmt statische Marketingtexte;
+Nutzerfakten,Replay,Persistenz und published/model_generated:false erhalten.
+Vorher26Tests mit3Rotfehlern,danach26grün;separater Sol wiederholte26ohneFinding.
+13Browser→API→SQLite-Shopfälle nach Serveränderung real erneut bestanden.
+Kein Modellaufruf,Versand,Preisänderung oder neuer produktiver Auth-/APIanschluss.
+Nachtfenster/Inputs/Owner im bestehenden Register und
+docs/contracts/night-release-checkpoint.md;Frist05:00UTC ist Ziel,keineGarantie.
