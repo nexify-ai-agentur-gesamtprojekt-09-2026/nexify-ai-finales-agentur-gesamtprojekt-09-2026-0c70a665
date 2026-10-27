@@ -189,6 +189,15 @@
       "what": "Lokale Session-, Frist-, Graph- oder persistente Ergebnisgrenze driftet.",
       "why": "Eine gemeinsame Shell verleiht weder Rollenrechte noch Abnahme; dichte Graphen und veraltete Worker dürfen keine neue Wirkung auslösen.",
       "fix": "Betroffenen lokalen Pfad mit isolierten Negativtests korrigieren und unabhängig nachprüfen; externe Auth nicht aktivieren."
+    },
+    {
+      "id": "ARCH-022",
+      "description": "Historisches Projektsetup ersetzt keine aktuelle Produktionsdomain- und Settingsprüfung.",
+      "check": "python3 -m unittest discover -s tests -p test_release_prerequisites.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein fehlender Domainnachweis wurde entfernt oder ein bereits verbundenes Projekt wird erneut als Setupblocker geführt.",
+      "why": "Historische Verknüpfung und aktueller Release-/Domainnachweis haben verschiedene Beweisumfänge.",
+      "fix": "Separaten Domain-/Settingsnachweis erhalten und veraltete Setupaufträge präzisieren; keine neuen Verbindungen oder Remote-Freigaben ableiten."
     }
   ]
 }

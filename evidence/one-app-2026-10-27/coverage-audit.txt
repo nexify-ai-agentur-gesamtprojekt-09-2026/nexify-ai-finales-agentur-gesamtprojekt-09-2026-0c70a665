@@ -1,0 +1,5 @@
+PASS:18 distinct remote thread/comment/PR tuples match current read-only snapshot.
+PASS:MASTER-01..18 all present, all full_case_accepted=false.
+PASS:all statuses defined and all source hashes match, including remote snapshot.
+Master distribution:1 locally bounded verified;5 local coverage/scope gaps;12 external blockers.
+No remote thread resolutions or production acceptance.

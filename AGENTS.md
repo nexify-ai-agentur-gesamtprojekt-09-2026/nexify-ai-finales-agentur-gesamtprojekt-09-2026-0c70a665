@@ -145,10 +145,14 @@ Vercel-Hauptprojekt ist `prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`, Scope
 `pascals-projects-2864de33`. `.de` ist die Vorschau des Entwicklungszweigs;
 `.cloud` bleibt bis Fertigstellung unverändert. Einstellungen und tatsächlicher
 Zugang: `config/integrations/vercel-agent-setup.json`. Die offiziellen neun
-Standalone-Skills liegen projektbezogen unter `.agents/skills`, Quelle/Hash in
-`skills-lock.json`; globale Installation/MCP-Registrierung ist in diesem
-verwalteten Read-only-Clientprofil nicht bestätigt. Relevante Anleitung vor
-Nutzung lesen. Bereits erteilte Auftrags-/Push-/Vorschaufreigaben verwenden;
+Standalone-Skills wurden im damaligen Arbeitscheckout unter `.agents/skills`
+installiert; Quelle/Hash stehen in `skills-lock.json`. Diese gitignorierten Kopien
+fehlen in einem sauberen Checkout. Vor Nutzung lokale Verfügbarkeit und passenden
+gepinnten Hash prüfen. Nur vorhandene, verifizierte Anleitung lesen; fehlt sie,
+den betroffenen Skillpfad als unvollständig melden und unabhängige Arbeit über die
+versionierten Projekt-Skills fortsetzen. Keine Installation oder Volllektüre aus
+dem Lockfile behaupten. Globale Installation/MCP-Registrierung ist in diesem
+verwalteten Read-only-Clientprofil nicht bestätigt. Bereits erteilte Auftrags-/Push-/Vorschaufreigaben verwenden;
 Main-/Releasegates nicht lockern. Beispiele zum Ausgeben/Suchen von Tokens in
 Skills überstimmen niemals die Credentialregeln: vorhandene OAuth-/SDK-Bindung
 normal verwenden, keine Tokenlogs und keine Secretdateisuche.

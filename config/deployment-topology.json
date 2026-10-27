@@ -50,9 +50,15 @@
   "next_application": "retained_as_previous_implementation_not_deleted",
   "open_prerequisites": [
     "verify_chatgpt_site_deployment_or_update_capability",
-    "connect_vercel_project",
+    "verify_current_project_root_build_output_and_domain_bindings",
     "select_independent_backup_host_if_chatgpt_cannot_accept_artifact",
     "production_api_auth_and_mcp_runtime",
     "real_remote_same_release_readback_and_failover_test"
-  ]
+  ],
+  "connection_history": {
+    "status": "historically_linked_no_reconnect_requested",
+    "source": "config/integrations/vercel-agent-setup.json",
+    "current_settings_evidence": "evidence/one-app-2026-10-27/deployment-parent-report.json",
+    "current_root_build_output_production_branch_verified": false
+  }
 }

@@ -1,0 +1,731 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T05:25:33.139485+00:00",
+  "implementation_base": "fa55fa1b75c7881f553787d0e7133999104ae75b",
+  "status_vocabulary": {
+    "local_fixed_verified": "lokal behoben und geprüft",
+    "not_reproduced": "nicht reproduziert mit Grund",
+    "local_remaining": "lokal noch behebbar",
+    "external_blocked": "konkret extern blockiert"
+  },
+  "remote_snapshot": "evidence/one-app-2026-10-27/review-snapshot.json",
+  "scope": "18 returned open remote review threads and 18 master cases; snapshot is read-only; coverage register is no execution queue",
+  "review_cases": [
+    {
+      "id": "PR35-4377052878",
+      "thread_id": "PRRT_kwDOU0-A_c6wQJa8",
+      "comment_id": 4377052878,
+      "pr": 35,
+      "title": "Kauf-/Reservierungsbindung",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/selfservice/domain.py",
+        "tests/test_selfservice_domain.py",
+        "evidence/integration-2026-10-27/independent-review.md"
+      ],
+      "regression_or_method": "Persistierter Kaufvertrag und Reservierungssnapshot; Legacy-Start-/Route-/Merchant- und Replaygegenproben.",
+      "change": "6064c70, b44e448",
+      "remaining_limit": "Reale Zahlungs-/Provideradapter bleiben offen.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR35-4379248093",
+      "thread_id": "PRRT_kwDOU0-A_c6wVYq0",
+      "comment_id": 4379248093,
+      "pr": 35,
+      "title": "SEO-Importatomizität",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "tools/seo_catalog.py",
+        "tests/test_seo_catalog.py",
+        "evidence/integration-2026-10-27/independent-review.md"
+      ],
+      "regression_or_method": "BEGIN IMMEDIATE vor Aktualitätsvergleich; Konkurrenz, ältere Messung, Konflikt und Rollback.",
+      "change": "72cdff1",
+      "remaining_limit": "Kein Remoteindexingbeleg.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359032",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuMC",
+      "comment_id": 4382359032,
+      "pr": 36,
+      "title": "Standalone Split-Build",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/scripts/build-standalone.mjs",
+        "apps/site/tests/standalone.test.mjs",
+        "evidence/one-app-2026-10-27/browser-standalone.txt"
+      ],
+      "regression_or_method": "Einzelbundle plus syntaktische Import-/Reexportprüfung, negative verschachtelte Chunks und echter Offlinebrowser.",
+      "change": "58ea5b3, 899c326",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359041",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuMK",
+      "comment_id": 4382359041,
+      "pr": 36,
+      "title": "Node-Untergrenze Site",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "package.json",
+        "apps/site/package.json",
+        "evidence/one-app-2026-10-27/build.txt"
+      ],
+      "regression_or_method": "Engines >=22.23.4 <23.0.0; Build tatsächlich unter22.23.4. Frühere Node22.0 wurde nicht ausgeführt.",
+      "change": "58ea5b3",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359082",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuMf",
+      "comment_id": 4382359082,
+      "pr": 36,
+      "title": "Separate Produktionsdomain-Voraussetzung",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "config/clerk-production.json",
+        "tests/test_release_prerequisites.py",
+        "evidence/one-app-2026-10-27/release-prerequisites.txt"
+      ],
+      "regression_or_method": "Fehlende separate Voraussetzung reproduziert und ergänzt; Regression verhindert Ersatz durch Projektsetup.",
+      "change": "aktuelles Abdeckungsdelta",
+      "remaining_limit": "Tatsächliche Domainbindung extern unbestätigt; Produktionsfreigabe bleibt offen. Regression prüft den Voraussetzungskatalog, keinen Deploymentadapter.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359093",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuMk",
+      "comment_id": 4382359093,
+      "pr": 36,
+      "title": "Veralteter Verbindungsblocker",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "config/deployment-topology.json",
+        "tests/test_release_prerequisites.py",
+        "evidence/one-app-2026-10-27/release-prerequisites.txt"
+      ],
+      "regression_or_method": "connect_vercel_project durch präzisen aktuellen Root/Build/Output/Domain-Nachweis ersetzt; historischer Anschluss erhalten.",
+      "change": "aktuelles Abdeckungsdelta",
+      "remaining_limit": "Keine neue Verbindung und keine verifizierten fehlenden Settings behauptet.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359101",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuMr",
+      "comment_id": 4382359101,
+      "pr": 36,
+      "title": "Unlesbarer historischer Status",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "PROGRESS.md"
+      ],
+      "regression_or_method": "Gemeldete verkettete Deployment-/Authabsätze reproduziert und quellentreu mit normalen Wortabständen neu gefasst; manuelle Lesekontrolle.",
+      "change": "aktuelles Abdeckungsdelta",
+      "remaining_limit": "Historische Fakten ausdrücklich keine heutigen Laufzeitbelege; keine UI-Neugestaltung.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359108",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuMv",
+      "comment_id": 4382359108,
+      "pr": 36,
+      "title": "Node-Untergrenze Root",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "package.json",
+        "apps/site/package.json",
+        "evidence/one-app-2026-10-27/build.txt"
+      ],
+      "regression_or_method": "Root-Engine ebenfalls >=22.23.4 <23.0.0; keine pauschale22.x-Freigabe.",
+      "change": "58ea5b3, 899c326",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359121",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuM3",
+      "comment_id": 4382359121,
+      "pr": 36,
+      "title": "Fehlende lokale Skillkopien",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "AGENTS.md",
+        "skills-lock.json"
+      ],
+      "regression_or_method": "Sauberer Clone ohne .agents/skills bestätigt; Anleitung jetzt bedingt auf lokale Verfügbarkeit und Hashprüfung, fehlende Kopie bleibt Lücke.",
+      "change": "aktuelles Abdeckungsdelta",
+      "remaining_limit": "Keine Installation erfolgt; Lockfile ist kein gelesener Skill.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359133",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuM_",
+      "comment_id": 4382359133,
+      "pr": 36,
+      "title": "Auth auf allen öffentlichen Routen",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/main.tsx",
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt"
+      ],
+      "regression_or_method": "Globale Providerhülle entfernt; Browser prüft null SDK-Ladevorgänge vor Loginroute.",
+      "change": "58ea5b3, 899c326",
+      "remaining_limit": "Provider bleibt standardmäßig deaktiviert.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359144",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuNE",
+      "comment_id": 4382359144,
+      "pr": 36,
+      "title": "Clerk-Locale",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt"
+      ],
+      "regression_or_method": "Localeauswahl deDE/nlNL/frFR aus Workspace; Browser prüft alle drei.",
+      "change": "58ea5b3",
+      "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382359158",
+      "thread_id": "PRRT_kwDOU0-A_c6wcuNP",
+      "comment_id": 4382359158,
+      "pr": 36,
+      "title": "Workspace-Reset bei Suspense",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt"
+      ],
+      "regression_or_method": "Nur Authpanel suspendiert; verzögerter SDK-Import erhält Entwurf und gewählte Sprache.",
+      "change": "58ea5b3, 899c326",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382373019",
+      "thread_id": "PRRT_kwDOU0-A_c6wcwUJ",
+      "comment_id": 4382373019,
+      "pr": 36,
+      "title": "Standalone Split-Build (zweiter Reviewer)",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/scripts/build-standalone.mjs",
+        "apps/site/tests/standalone.test.mjs",
+        "evidence/one-app-2026-10-27/browser-standalone.txt"
+      ],
+      "regression_or_method": "Derselbe Befund, eigene Thread-ID erhalten; gleicher kausaler Fix und Regression.",
+      "change": "58ea5b3, 899c326",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382373095",
+      "thread_id": "PRRT_kwDOU0-A_c6wcwU1",
+      "comment_id": 4382373095,
+      "pr": 36,
+      "title": "Lazy-Importfehler entfernt App",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt"
+      ],
+      "regression_or_method": "Lokale ErrorBoundary; abgebrochener Chunk lässt Navigation, Sprache und öffentliche App intakt.",
+      "change": "58ea5b3",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382373156",
+      "thread_id": "PRRT_kwDOU0-A_c6wcwVd",
+      "comment_id": 4382373156,
+      "pr": 36,
+      "title": "Clerk-Locale (zweiter Reviewer)",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt"
+      ],
+      "regression_or_method": "Doppelter Locale-Befund; derselbe Sprach-/Widget-Browsernachweis.",
+      "change": "58ea5b3",
+      "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382373215",
+      "thread_id": "PRRT_kwDOU0-A_c6wcwWD",
+      "comment_id": 4382373215,
+      "pr": 36,
+      "title": "Fehlender Logout",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt",
+        "apps/site/tests/browser-integration.mjs"
+      ],
+      "regression_or_method": "Signout mit festem lokalem Redirect, Tastatur, Pending-/Fehlerzustand und bewusstem Retry; zustandsfähiges Test-SDK.",
+      "change": "58ea5b3, 899c326",
+      "remaining_limit": "Keine echte Sessionwiderrufs-/Mehrtab-/Providerprüfung.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382376714",
+      "thread_id": "PRRT_kwDOU0-A_c6wcw4E",
+      "comment_id": 4382376714,
+      "pr": 36,
+      "title": "Node-Untergrenze Site (zweiter Reviewer)",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "package.json",
+        "apps/site/package.json",
+        "evidence/one-app-2026-10-27/build.txt"
+      ],
+      "regression_or_method": "Doppelter Befund, eigenständige Zuordnung; dieselbe deklarierte Untergrenze und Buildprobe.",
+      "change": "58ea5b3",
+      "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR36-4382376721",
+      "thread_id": "PRRT_kwDOU0-A_c6wcw4I",
+      "comment_id": 4382376721,
+      "pr": 36,
+      "title": "Clerk-Locale (dritter Reviewer)",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt"
+      ],
+      "regression_or_method": "Doppelter Locale-Befund; derselbe Sprach-/Widget-Browsernachweis.",
+      "change": "58ea5b3",
+      "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    }
+  ],
+  "master_cases": [
+    {
+      "id": "MASTER-01",
+      "title": "Shell/Routen",
+      "status": "local_remaining",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt"
+      ],
+      "local_proof": "Deep Links, Refresh, Vor/Zurück, Fehler-/Privatrouten, gemeinsame Shell und Modulwechsel an ausgewählten Wegen.",
+      "remaining_gap": "Komplette kombinierte Matrix aller öffentlichen Routen und Übergangspaare nicht ausgeführt; Abdeckungslücke, kein zusätzlich bestätigter Produktfehler.",
+      "owner_role": "Frontend QA",
+      "assigned_executor": null,
+      "next_allowed_action": "Gezielt fehlende Routenübergänge im isolierten Browser ergänzen; keine Neugestaltung.",
+      "required_prerequisite": "Komplette kombinierte Matrix aller öffentlichen Routen und Übergangspaare nicht ausgeführt; Abdeckungslücke, kein zusätzlich bestätigter Produktfehler."
+    },
+    {
+      "id": "MASTER-02",
+      "title": "Domain/Runtime",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "evidence/one-app-2026-10-27/deployment-parent-report.json"
+      ],
+      "local_proof": "Aktuelle Parent-Lesung trennt .de66866298, Produktion07833fb3 und Geschwistera19cd503.",
+      "remaining_gap": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.",
+      "owner_role": "Deploymentowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Ziel-/Ownerbindung lesend ermitteln; keine Aliasänderung.",
+      "required_prerequisite": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen."
+    },
+    {
+      "id": "MASTER-03",
+      "title": "Session",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt",
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt",
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt"
+      ],
+      "local_proof": "Synthetisches Sign-in/out, Fehlergrenzen, lokale Frist und Rollenentzug geprüft.",
+      "remaining_gap": "Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.",
+      "owner_role": "Identityowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Exakten autorisierten Issuer und Sessionadapter nachweisen, dann reale Positiv-/Negativfälle.",
+      "required_prerequisite": "Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen."
+    },
+    {
+      "id": "MASTER-04",
+      "title": "Rollen/Tenants",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/selfservice/domain.py",
+        "tests/test_selfservice_domain.py",
+        "evidence/integration-2026-10-27/independent-review.md",
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt",
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt"
+      ],
+      "local_proof": "Lokale Domain-/Queue-Tenantnegatives; gefälschte Browserclaims liefern keine privaten Seiten.",
+      "remaining_gap": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.",
+      "owner_role": "Identity-/Datenowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Serverseitiges Actor-Tenant-Mapping und ACL-Prüfumgebung belegen.",
+      "required_prerequisite": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen."
+    },
+    {
+      "id": "MASTER-05",
+      "title": "Seiteneffekte",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/selfservice/domain.py",
+        "tests/test_selfservice_domain.py",
+        "evidence/integration-2026-10-27/independent-review.md",
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt"
+      ],
+      "local_proof": "Lokale Replay-/Hold-/Unknown-outcome-/Settlement- und Wiederanlauftests; kein doppeltes lokales Ergebnis.",
+      "remaining_gap": "Echte externe Schreibausgänge und Reconciliation nicht getestet.",
+      "owner_role": "Adapter-/Finanzierungsowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Nur autorisierte Sandboxadapter mit eindeutiger Reconciliation prüfen; keine echten Zahlungen.",
+      "required_prerequisite": "Echte externe Schreibausgänge und Reconciliation nicht getestet."
+    },
+    {
+      "id": "MASTER-06",
+      "title": "Runner",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt"
+      ],
+      "local_proof": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups geprüft.",
+      "remaining_gap": "Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.",
+      "owner_role": "Runtimeowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Autorisierte Runtime-/Leasegrenze bestimmen, vor Cutover verteilte Gegenproben planen.",
+      "required_prerequisite": "Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen."
+    },
+    {
+      "id": "MASTER-07",
+      "title": "Sprache",
+      "status": "local_remaining",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt",
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt"
+      ],
+      "local_proof": "DE/NL sowie unterstützte FR-Auth-/Fehlerzustände und ausgewählte Module im Browser geprüft.",
+      "remaining_gap": "Vollständige Inhalts-/Fehlertextprüfung aller öffentlichen Wege fehlt; kein weiterer konkreter Hardcodingfehler im begrenzten Abgleich bestätigt.",
+      "owner_role": "Frontend QA",
+      "assigned_executor": null,
+      "next_allowed_action": "Fehlende Textwege aus der Route-Matrix gezielt prüfen.",
+      "required_prerequisite": "Vollständige Inhalts-/Fehlertextprüfung aller öffentlichen Wege fehlt; kein weiterer konkreter Hardcodingfehler im begrenzten Abgleich bestätigt."
+    },
+    {
+      "id": "MASTER-08",
+      "title": "Tokens",
+      "status": "local_remaining",
+      "full_case_accepted": false,
+      "source_refs": [
+        "config/design-tokens.json",
+        "evidence/one-app-2026-10-27/check.txt",
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt"
+      ],
+      "local_proof": "Zentrales Audit grün; Tokenwerte bleiben bei Modul-/Authwechsel erhalten.",
+      "remaining_gap": "Audit ist Heuristik; vollständige Prüfung aller Widget-/Chartzustände ist nicht belegt.",
+      "owner_role": "Designsystemowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Konkretes Komponenten-/Zustandsinventar gegen zentrale Tokens prüfen.",
+      "required_prerequisite": "Audit ist Heuristik; vollständige Prüfung aller Widget-/Chartzustände ist nicht belegt."
+    },
+    {
+      "id": "MASTER-09",
+      "title": "Responsive/Accessibility",
+      "status": "local_remaining",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt",
+        "evidence/one-app-2026-10-27/check.txt"
+      ],
+      "local_proof": "Mobile Tastatur, Dialog-/Fokuswege und lokale Auditgegenproben geprüft.",
+      "remaining_gap": "Keine vollständige Kriterienprüfung für alle Routen/Viewport-/Assistenztechnikzustände; keine Zertifizierung.",
+      "owner_role": "Accessibility QA",
+      "assigned_executor": null,
+      "next_allowed_action": "Anwendbare Kriterien und fehlende Zustände gezielt prüfen.",
+      "required_prerequisite": "Keine vollständige Kriterienprüfung für alle Routen/Viewport-/Assistenztechnikzustände; keine Zertifizierung."
+    },
+    {
+      "id": "MASTER-10",
+      "title": "API-/Modulverträge",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt",
+        "tools/app_backend.py",
+        "config/one-web-app.json"
+      ],
+      "local_proof": "Feste lokale Schemas/Versionen, unbekannte Felder, Rollen und Paginationnegatives geprüft.",
+      "remaining_gap": "Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.",
+      "owner_role": "Backend-/Adapterowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Autorisierte typisierte Adapter und aktuelle Zielantworten nachweisen.",
+      "required_prerequisite": "Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen."
+    },
+    {
+      "id": "MASTER-11",
+      "title": "Offline Builder/Authpanel",
+      "status": "local_fixed_verified",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/site/scripts/build-standalone.mjs",
+        "apps/site/tests/standalone.test.mjs",
+        "evidence/one-app-2026-10-27/browser-standalone.txt",
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs",
+        "evidence/one-app-2026-10-27/browser-auth.txt",
+        "apps/site/tests/browser-integration.mjs",
+        "evidence/one-app-2026-10-27/browser-integration.txt"
+      ],
+      "local_proof": "Realer Einzeldateibuild, Imports/Reexports negativ, file/hash-UI, Auth aus, keine externen Requests im lokalen Test.",
+      "remaining_gap": "Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers.",
+      "owner_role": "Frontend QA",
+      "assigned_executor": null,
+      "next_allowed_action": "Prüfungen am späteren Release wiederholen; Providergrenzen gesondert behandeln.",
+      "required_prerequisite": "Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers."
+    },
+    {
+      "id": "MASTER-12",
+      "title": "Reale Adapter",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/selfservice/domain.py",
+        "tests/test_selfservice_domain.py",
+        "evidence/integration-2026-10-27/independent-review.md",
+        "evidence/one-app-2026-10-27/deployment-parent-report.json"
+      ],
+      "local_proof": "Nur lokale Fixtures und negative Verträge; Legacy-Zahlung/Journey nicht eingebunden.",
+      "remaining_gap": "Identity/Vault/Payment/Modell/Usage/Reconciliation plus echtes Readback fehlen.",
+      "owner_role": "Jeweiliger Adapterowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Zugriff, Scopes, Ziel und Sandbox/Kostenautorisierung vor jeder Wirkung belegen.",
+      "required_prerequisite": "Identity/Vault/Payment/Modell/Usage/Reconciliation plus echtes Readback fehlen."
+    },
+    {
+      "id": "MASTER-13",
+      "title": "PWA",
+      "status": "local_remaining",
+      "full_case_accepted": false,
+      "source_refs": [
+        "prototypen/sw.js",
+        "docs/contracts/one-web-app-integration.md"
+      ],
+      "local_proof": "Standaloneoffline geprüft; historischer Serviceworker nur Referenz.",
+      "remaining_gap": "Kein belegter aktiver PWA-Lifecycle des Kandidaten; Cacheversion/Reconnect/Mutationsreplay ungetestet. Kein bestätigter neuer Produktfehler.",
+      "owner_role": "Frontend-/Runtimeowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Anwendbarkeit des PWA-Scope bestimmen; danach isolierten Cache-/Netzwechseltest ergänzen.",
+      "required_prerequisite": "Kein belegter aktiver PWA-Lifecycle des Kandidaten; Cacheversion/Reconnect/Mutationsreplay ungetestet. Kein bestätigter neuer Produktfehler."
+    },
+    {
+      "id": "MASTER-14",
+      "title": "Wissen",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "tools/brain_ingestion.py",
+        "tests/test_brain_ingestion.py",
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt"
+      ],
+      "local_proof": "Lokales Staging/Version/ACL/Redaktion und Chunkhashvorschau; externe Rückführung ausdrücklich false.",
+      "remaining_gap": "Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.",
+      "owner_role": "Brainowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Mapping/ACL und autorisierten neutralen Readbackpfad nachweisen; keine Kundendateninjektion.",
+      "required_prerequisite": "Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen."
+    },
+    {
+      "id": "MASTER-15",
+      "title": "Build/Deployment",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "apps/site/scripts/build-standalone.mjs",
+        "apps/site/tests/standalone.test.mjs",
+        "evidence/one-app-2026-10-27/browser-standalone.txt",
+        "evidence/one-app-2026-10-27/build.txt",
+        "evidence/one-app-2026-10-27/deployment-parent-report.json"
+      ],
+      "local_proof": "Normal-/Standalonebuild, Chunks/ESM und bestehende lokale Release-Archivtests geprüft.",
+      "remaining_gap": "Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.",
+      "owner_role": "Releaseowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Exakten Kandidaten erst nach Freigabe in autorisierter Runtime prüfen.",
+      "required_prerequisite": "Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt."
+    },
+    {
+      "id": "MASTER-16",
+      "title": "Migration",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "tests/test_ai_migration.py",
+        "tests/test_selfservice_domain.py"
+      ],
+      "local_proof": "Offline-CAS-/Übergangsplanung und parallele additive Schema-Starts getestet.",
+      "remaining_gap": "Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.",
+      "owner_role": "Runtime-/Backupowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Backup-/Exitbelege lesen und kontrollierten Restore innerhalb gesonderter Rechte durchführen.",
+      "required_prerequisite": "Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen."
+    },
+    {
+      "id": "MASTER-17",
+      "title": "Baselinevergleich",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "tests/test_capacity_planner.py",
+        "evidence/one-app-2026-10-27/source-binding.json"
+      ],
+      "local_proof": "Lokale Prüfmethoden/Versionen und begrenzte Kapazitätsrechnungen dokumentiert.",
+      "remaining_gap": "Vergleichbare echte Ziel-/Lastmessung und autorisierte quantitative Akzeptanzgrenzen fehlen.",
+      "owner_role": "Betriebs-/Performanceowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Gleiche Ziel-/Zeit-/Lastmethode und genehmigte Grenzen festlegen; keine SLAs erfinden.",
+      "required_prerequisite": "Vergleichbare echte Ziel-/Lastmessung und autorisierte quantitative Akzeptanzgrenzen fehlen."
+    },
+    {
+      "id": "MASTER-18",
+      "title": "Toolrouting",
+      "status": "external_blocked",
+      "full_case_accepted": false,
+      "source_refs": [
+        "tests/test_local_control.py",
+        "tests/test_one_app_backend.py",
+        "evidence/one-app-2026-10-27/closed-loop.txt",
+        "config/local-control.json"
+      ],
+      "local_proof": "Drei feste lokale Fähigkeiten; Skillhash, Scope/Host, stale/partial-Evidenz und SSH-Fallback negativ geprüft.",
+      "remaining_gap": "Reale MCP-/SSH-Operationsrechte und Zielantworten nicht integriert; neuere externe Fehler-/Unknown-outcome-Abgleich fehlt.",
+      "owner_role": "Adapter-/Securityowner",
+      "assigned_executor": null,
+      "next_allowed_action": "Typisierte Operation und frischen autoritativen Nachweis lesen; keine generische Shellersatzroute.",
+      "required_prerequisite": "Reale MCP-/SSH-Operationsrechte und Zielantworten nicht integriert; neuere externe Fehler-/Unknown-outcome-Abgleich fehlt."
+    }
+  ],
+  "source_sha256": {
+    "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
+    "PROGRESS.md": "5c9f8fb14407987b576599cd01d7e0cbc20754cec80d41c58868a22a809f3b37",
+    "apps/selfservice/domain.py": "0023a14fc8f142b7be728c0797dee8d0f08f767c1e4a2563d4423eee6a78e485",
+    "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
+    "apps/site/scripts/build-standalone.mjs": "28f0e7b5e68ce94c26b94557cb11c608028cee4b88e2b02e5887f50a4f728359",
+    "apps/site/src/Auth.tsx": "f6af0b53f2d453d81b0b3d19fd952068bc978cbcc5324f2181013162b4a15a5b",
+    "apps/site/src/main.tsx": "afc2208148aed2bd9b8d7683e2ea7b0df84aeed72d84bfa4cf7641b10f9bb223",
+    "apps/site/tests/browser-auth.mjs": "0dabd6d7ae985138e50e8cd4498ec06b9c00d47e77e52c0cb2db9cbcdff0c740",
+    "apps/site/tests/browser-integration.mjs": "df37b80dd1adf86b503379d512a6bd37ddd860657b5bb17ac94a3492341b6d28",
+    "apps/site/tests/standalone.test.mjs": "5b9cf3e97ed5829bea566deceb0b4a2c7b135c03849f0f29d47e23cf5d65b502",
+    "config/clerk-production.json": "828ba5cc15da5535b850757e72500d1a53a28e320d66f544afe688b79341685e",
+    "config/deployment-topology.json": "2c3eea0647623e74330a64be9475d3cfe26e0e2cd4c49c4188a58a6586936d9a",
+    "config/design-tokens.json": "76411ab83c18fa071efaaa518da8fb7fb97867c67a016bcfb67f35359a68c480",
+    "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
+    "config/one-web-app.json": "6ebd17405df7428a944c152b565885742f739ae3bebef0f68d77f3553bf44252",
+    "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
+    "evidence/integration-2026-10-27/independent-review.md": "324bd80874ddfe764734532b71ae51fd17d865bd63efa2eebcee5228c5814aa4",
+    "evidence/one-app-2026-10-27/browser-auth.txt": "46fd84e519100870b5f33f1f49f4f09dd78b44474a5a992f5993ec8043a2f654",
+    "evidence/one-app-2026-10-27/browser-integration.txt": "1a2c1e6a0642564e8df6d11311785298f40a19e1afc08defe3f4c90d10f013d2",
+    "evidence/one-app-2026-10-27/browser-standalone.txt": "1a07e63f04a6530c247798ff20a2482d389a15741e8efa993a7379023c46afb3",
+    "evidence/one-app-2026-10-27/build.txt": "9b6b0e8fdd5b944ecd5e57f747e0750d60db6e059ab4da3c79156171d31ae98a",
+    "evidence/one-app-2026-10-27/check.txt": "5423c23ff4740b0ca02079b81392e0102b6b5599a614d17a71610eac9b99eda2",
+    "evidence/one-app-2026-10-27/closed-loop.txt": "29d90b39c4660686a993db17c8e59d0cca9fe0a70dd00b4db347ee840c86e5d2",
+    "evidence/one-app-2026-10-27/deployment-parent-report.json": "d57157f3ace5eb18c74f7f4b7154aeabbdce598028b35466713d7f7fd9ee4452",
+    "evidence/one-app-2026-10-27/release-prerequisites.txt": "b779d0211149c78166d8369afb0b04149b582bd44485e10df23022eb3b981a87",
+    "evidence/one-app-2026-10-27/review-snapshot.json": "79be3605feeee88a98860a50221e5dca0f4d65dc21a5473a5e60effaea9ad70f",
+    "evidence/one-app-2026-10-27/source-binding.json": "25f3efd41b40b58ab5e684c387180b68badc2e0c852219a03f02a887ccecdbf0",
+    "package.json": "0ecf5786228084c168d842b05c2d2a71def31d00c99c853c04431e04cfbbe6ef",
+    "prototypen/sw.js": "fc540f897ae035251424faccb412c7fb2f3b73a523536255a6178ef03c60d4dc",
+    "skills-lock.json": "6ee354fd704b4b239171d6c4b5c8325ad5820db0635c07f7ffde476b674ac5f8",
+    "tests/test_ai_migration.py": "dbe2653f3d69e8d5e9907173f92b1fcc12c1cbd8ea1db4eb46f63196a011f414",
+    "tests/test_brain_ingestion.py": "c0b88440609ed22e6aec20eb3a7ff687d0676ca356ef9b7829c2d0af15b81194",
+    "tests/test_capacity_planner.py": "660b6271ba509e2fa570b5e903457e5de8802f0f50307466f2b48dc7fa85773d",
+    "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
+    "tests/test_one_app_backend.py": "72c6571231a073ea4eb3397823620e1f97a1b7f53f8cc4b9304e3e41a722fb9a",
+    "tests/test_release_prerequisites.py": "328cd20630a1962b3cb7d146cb0a0de91c3b028558dd40c3c258c8af91526e0b",
+    "tests/test_selfservice_domain.py": "dcb36a0ae5eb55bfcbd0024c16bb02c740d0365b07235f7e52a74402920b1dbc",
+    "tests/test_seo_catalog.py": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97",
+    "tools/app_backend.py": "90d3e37fdd3508d0149de39b8bcef8c9b990492b11f599122ce1891138747a5a",
+    "tools/brain_ingestion.py": "ef81297bfc808188960f40d658a0599b483ce6b117bcce41f7174aa2f545ff68",
+    "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca"
+  },
+  "whole_system_accepted": false
+}

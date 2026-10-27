@@ -226,45 +226,38 @@ Keine gestalterische Nutzerabnahme oder Produktiv-/DIN-/ISO-Zertifizierung.
 
 ---
 
-# Live-Vorschau bestätigt · 26.10.2026
+# Historische Vorschau- und Auth-Einrichtung · 26.10.2026
 
-https://nexifyai.de ist als Alias des READY-Previewdeployments
- dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm für409db50durchauthentifizierteAPI+CLIbestätigt.
-VercelAusgabepfadfehlerundAutorblockadesindfürkanonischesProjektbehoben;
-GitHubautorjetztnexifyai-dev,5eigeneCIjobsauchauf409db50grün.
-KeineeigeneMain-/Produktivpromotion,.cloudChatGPTseiteunangetastet.
-ZusätzlicheVercelAppsite(selbesRepo,nurvercel.app)hatteparallelRoot/outputFehler;
-Konfigurationistkonsistentkorrigiert,Read-backvorhanden;keineLöschungoderDomainübernahme.
-ExternCloudflareWorkernamelängeweiterseparatoffen.
+Der damalige Bericht bestätigte nexifyai.de am READY-Previewdeployment
+`dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm`, Commit `409db50`, über authentifizierte
+API und CLI. Vercel-Ausgabepfad und Autorzuordnung wurden damals korrigiert;
+fünf eigene CI-Jobs waren grün. Keine eigene Main-/Produktivpromotion und keine
+Änderung an der bestehenden .cloud-Seite wurden gemeldet.
 
----
+Das zusätzliche Projekt `site` hatte Root-/Outputfehler. Eine Korrektur mit
+Read-back wurde historisch gemeldet, ohne Löschung oder Domainübernahme. Die
+heutige Zuordnung ist separat in `deployment-parent-report.json` festgehalten;
+diese historischen Aussagen belegen keine aktuellen Projekteinstellungen.
 
-# Vercel-Projekt eingerichtet, React-Clerk und ENV abgeglichen · 26.10.2026
+Die damalige CLI-Einrichtung verwendete Version 65.2.0 und das kanonische Projekt.
+Vite, Node 22.x, Repositoryroot, pnpm-Workspacebuild und apps/site/dist wurden
+historisch als korrigierte Werte berichtet. Die aktuelle Projektantwort liefert
+Root-, Build-, Output- und Produktionsbrancheinstellung jedoch nicht. .de blieb
+an den Entwicklungszweig gebunden, .cloud unverändert. Keine Gateumgehung oder
+Umschreibung früherer Git-Autoren wurde vorgenommen.
 
-CLI65.2.0OAuthalsnex2fly-nexifyai-nexifyerfolgreich,Projektprj_Po7jlB7srMP6sxyMvf5zIwzXzNyh
-gezieltverknüpft. AuthentifizierterRead-backzeigtefalschPython/Node24; aufVite,
-Node22.x,Reporoot,pnpm12workspacebuild,Outputapps/site/distkorrigiertundzurückgelesen.
-Nexifyai.deistverifiziertundandenvorhandenenEntwicklungszweiggebunden; .cloud
-bleibtunangetastet. HauptbranchwurdevomNutzeraußerhalbdieserSitzungviaPR34auf
-ccbe092gemergt;keineeigeneMainpromotion/Jeffgateerfunden.
+Die React-Clerk-UI 6.18.1 wurde mit lazy SDK, explizitem Flag, validiertem Public
+Key und festem Redirect vorbereitet. Datei-/Standalonevorschau bleibt ohne Auth;
+keine automatische Admin-/Tenantfreigabe. Das öffentliche Aktivierungsflag blieb
+false. DNS-/Issuerprüfung und reale Providerabnahme waren nicht abgeschlossen.
+Vorhandene Servercredentials wurden erhalten; Secretwerte wurden nicht gelesen.
 
-Zukunftscommitsnutzennutzerbestätigtemail@nexifyai.cloud;GitHubordneteCommitd1539de
-nexifyai-devzu,vorherigeCommitsschonendunverändertNeXify-Automate. KeinTeamgatebypass.
-EigenefünfRemoteCIjobsnach339af39grün. ZusätzlicheCloudflareWorkersIntegration
-scheitertunverändertanNamelänge,keineheimlicheProvideränderung.
-
-EchteReact-ClerkUI6.18.1jetztwiederhergestellt;lazySDK,explizitesVITEFlag+validPK,
-Datei/Standaloneimmeraus,fixerRedirect/,keineAdmin-/Tenantautofreigabe.
-VITE_CLERK_PUBLISHABLE_KEYundVITE_CLERK_ENABLEDfalsefüralle3Umgebungenhinzugefügt
-undbeideWerteperAPIbooleschverglichen. ClerkDomainnochNXDOMAINdeshalbnichtaktiviert.
-VorhandeneClerkserverSecrets/Auth0/DB/Providerwerteunverändert,keineSecretwertegelesen.
-42ENV-Vertragsnamen/24RemoteNamen/38Metadatensätzegeordnet,nichtalleDiensteVercel.
-
-16SiteTests,133PythonTests,E2E/Architektur/Clean/Browser35public+47Module+Guide/Offlinegrün.
-GlobalePlugininstallationundMCPregistrierungandenphysischschreibgeschützten
-Client/Homebereichenblockiert;offizielle9StandaloneSkillsprojektbezogeninstalliert
-undlistverifiziert,skills-lock.jsonerhalten. CLIbleibtauthentifiziertnutzbar.
-NochkeineVercelDeployReady/LiveLogin/produktiveVisitorAPI/ChatGPTBackupsyncAbnahme.
+Die damaligen Testzahlen (16 Site-, 133 Pythonfälle sowie lokale Browserprüfungen)
+sind historische Teilbelege. Neun offizielle Skillkopien waren nur im damaligen
+Checkout installiert; saubere Checkouts müssen ihre Verfügbarkeit separat prüfen.
+Globale Plugin-/MCP-Installation war im verwalteten Clientprofil blockiert. Keine
+Produktions-, Live-Login-, Visitor-API- oder Backup-Synchronisationsabnahme daraus
+ableiten. Cloudflare-Namensgrenzen blieben ein separater historischer Blocker.
 
 ---
 
@@ -501,3 +494,12 @@ Controllerstatus ergänzt konkrete Followups und persistierte Closed-Loop-Receip
 Verwaiste/blockierte/übergebene Jobs schließen nicht; Parent-Join bleibt geprüft.
 Externe Abnahme-/Brain-/Restorekreise bleiben offen mit zuständiger Rolle,
 unbekannter Executorzuweisung, nächstem erlaubten Schritt und Voraussetzungen.
+
+### Begrenzter Abdeckungsabgleich
+Frische lesende GitHubprüfung: PR35 a19cd503 mit zwei, PR36 66866298 mit16
+weiterhin offenen Reviewthreads. Einzelzuordnung und Quellenhashes stehen in
+config/acceptance-coverage.json, lesbar in docs/contracts/acceptance-coverage.md.
+Vier zusätzliche Dokument-/Voraussetzungsfehler lokal korrigiert; keine
+Remote-Threadauflösung. Von18 Masterfällen sind1 lokal begrenzt geprüft,
+5 mit lokalen Prüf-/Scope-Lücken und12 extern blockiert. Kein Gesamtfall ist
+als produktiv abgenommen markiert. Bestehende Queue und Freigabegates unverändert.
