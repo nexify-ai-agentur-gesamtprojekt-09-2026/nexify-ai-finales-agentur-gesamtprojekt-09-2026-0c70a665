@@ -85,6 +85,35 @@ class SelfServiceTests(unittest.TestCase):
             action()
         self.assertEqual(raised.exception.code, code)
 
+    def test_managed_purchase_and_reservation_cannot_follow_reconfigured_binding(self):
+        principal, view, intent = self.managed()
+        tenant = view["tenant_id"]
+        row = self.reserve(principal, tenant, "before-config-change")
+        original = dict(self.binding.data)
+        for field in ("merchant_account", "route_contract_ref", "terms_ref"):
+            with self.subTest(field=field):
+                changed = self.reopen(managed_binding=self.boundary.approved_managed_binding(
+                    **{**original, field: "fixture-replaced"}))
+                self.blocked("managed_purchase_binding_changed", lambda: changed.select_managed_funding(principal, tenant))
+                self.blocked("managed_purchase_binding_changed", lambda: changed.reserve(principal, tenant,
+                    request_key="after-change", maximum_micro_eur=1000, model_id=self.model, price_version="fixture-price-v1"))
+                self.blocked("managed_purchase_binding_changed", lambda: changed.claim_execution(principal, tenant,
+                    row["id"], attempt_ref="changed-route"))
+        reopened = self.reopen()
+        self.assertEqual(reopened.claim_execution(principal, tenant, row["id"], attempt_ref="original-route")["state"], "dispatched")
+        # An already dispatched outcome can still reconcile against its persisted reservation.
+        changed.settle(self.usage(row, 100))
+
+    def test_legacy_managed_reservation_without_snapshot_cannot_dispatch_but_can_cancel(self):
+        principal, view, _ = self.managed()
+        tenant = view["tenant_id"]
+        row = self.reserve(principal, tenant, "legacy-binding")
+        with self.core._db() as db:
+            db.execute("ALTER TABLE ss_reservation DROP COLUMN managed_snapshot")
+        self.blocked("reservation_managed_binding_changed", lambda: self.reopen().claim_execution(
+            principal, tenant, row["id"], attempt_ref="legacy"))
+        self.assertEqual(self.core.cancel_reserved(principal, tenant, row["id"])["state"], "cancelled")
+
     def test_verified_registration_deduplicates_and_never_grants_admin_or_free_credit(self):
         principal, one = self.register()
         two = self.core.register(principal)
