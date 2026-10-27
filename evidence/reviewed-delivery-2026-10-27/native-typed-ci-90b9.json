@@ -1,0 +1,22 @@
+{
+  "head": "90b9f9436ce1e1177b0b73b05111ce6be3d87251",
+  "status": "passed",
+  "checks": {
+    "repository": "passed",
+    "react-site": "passed",
+    "next-web": "passed",
+    "postgres-isolation": "passed",
+    "openapi-schema": "passed"
+  },
+  "source": "github_actions_push",
+  "event": "push",
+  "workflow": ".github/workflows/ci.yml",
+  "external_checks": {
+    "status": "not_evaluated",
+    "affects_core": false
+  },
+  "workflow_id": 371083871,
+  "run_id": 40558440811,
+  "run_number": 147,
+  "run_attempt": 1
+}

@@ -31,6 +31,13 @@ class CommandsDouble:
         self.ci_unavailable, self.wrong_ci_sha = False, False
         self.optional_duplicates, self.required_duplicates = False, False
         self.after_ci, self.ci_observed = None, False
+        self.workflow = {'id': 7, 'name': 'CI', 'path': '.github/workflows/ci.yml', 'state': 'active'}
+        self.runs, self.jobs = None, None
+        self.run_override, self.attempt_override = None, None
+        self.jobs_total_delta, self.runs_total_delta = 0, 0
+        self.after_jobs_attempt, self.after_jobs_new_run = False, False
+        self.after_jobs_status = None
+        self.jobs_observed = False
         self.short_pages, self.foreign_prs = True, []
         self.actor, self.origin_url = delivery.OWNER, delivery.ORIGIN
         self.head, self.branch = HEAD, BRANCH
@@ -41,6 +48,16 @@ class CommandsDouble:
                 'base': {'ref': 'main', 'repo': {'full_name': delivery.REPO}},
                 'head': {'ref': BRANCH, 'sha': HEAD, 'repo': {'full_name': delivery.REPO}},
                 'user': {'login': delivery.OWNER}}
+
+    def run_row(self, **changes):
+        return {'id': 40558440811, 'workflow_id': 7, 'name': 'CI', 'path': '.github/workflows/ci.yml',
+                'event': 'push', 'head_sha': BASE if self.wrong_ci_sha else HEAD,
+                'head_branch': BRANCH, 'run_number': 147, 'run_attempt': 1,
+                'status': 'completed', 'conclusion': self.ci_status, **changes}
+
+    def job_rows(self, run):
+        return [{'id': 900, 'name': 'ci', 'run_id': run['id'], 'run_attempt': run['run_attempt'],
+                 'head_sha': HEAD, 'status': 'completed', 'conclusion': self.ci_status}]
 
     def reply(self, raw=b'', rc=0, unknown=False):
         return {'returncode': rc, 'stdout': raw if isinstance(raw, bytes) else delivery.canonical(raw), 'unknown': unknown}
@@ -100,22 +117,45 @@ class CommandsDouble:
             return self.reply(rows)
         if path.endswith('/files'):
             return self.reply([{'filename': 'tools/synthetic.py' if self.overlap else 'other-file.py'}])
-        if path.endswith('/check-runs'):
+        if path.endswith('/actions/workflows/ci.yml'):
             if self.ci_unavailable: return self.reply(rc=1)
-            rows = [{'name': 'ci', 'head_sha': BASE if self.wrong_ci_sha else HEAD,
-                     'status': 'completed', 'conclusion': self.ci_status}]
-            if self.optional_duplicates:
-                rows.extend([{'name': 'Paperclip Review', 'head_sha': HEAD, 'status': 'completed', 'conclusion': state}
-                             for state in ['success', 'failure']])
-            if self.required_duplicates:
-                rows.append({'name': 'ci', 'head_sha': HEAD, 'status': 'completed', 'conclusion': 'failure'})
-            self.ci_observed = True
-            if self.after_ci == 'main': self.main = 'c' * 40
-            if self.after_ci == 'branch': self.remote = 'c' * 40
-            if self.after_ci == 'pr_changed' and self.pr is not None: self.pr['number'] = 43
-            return self.reply({'total_count': len(rows), 'check_runs': rows})
+            return self.reply(self.workflow)
+        if path.endswith('/actions/workflows/ci.yml/runs'):
+            assert query.get('event') == ['push'] and query.get('head_sha') == [HEAD]
+            assert query.get('branch') == [BRANCH] and 'status' not in query
+            rows = copy.deepcopy(self.runs) if self.runs is not None else [self.run_row()]
+            if self.jobs_observed and self.after_jobs_new_run:
+                rows.append(self.run_row(id=40558440812, run_number=148, conclusion='failure'))
+            start = (int(query['page'][0]) - 1) * 100
+            return self.reply({'total_count': len(rows) + self.runs_total_delta, 'workflow_runs': rows[start:start + 100]})
+        if '/actions/runs/' in path:
+            run = max(self.runs, key=lambda row: row['run_number']) if self.runs is not None else self.run_row()
+            if path.endswith('/jobs'):
+                assert '/attempts/' + str(run['run_attempt']) + '/jobs' in path
+                rows = copy.deepcopy(self.jobs) if self.jobs is not None else self.job_rows(run)
+                if self.required_duplicates:
+                    rows.append({**rows[0], 'id': 901, 'conclusion': 'failure'})
+                self.jobs_observed = self.ci_observed = True
+                if self.after_ci == 'main': self.main = 'c' * 40
+                if self.after_ci == 'branch': self.remote = 'c' * 40
+                if self.after_ci == 'pr_changed' and self.pr is not None: self.pr['number'] = 43
+                start = (int(query['page'][0]) - 1) * 100
+                return self.reply({'total_count': len(rows) + self.jobs_total_delta, 'jobs': rows[start:start + 100]})
+            if '/attempts/' in path:
+                return self.reply(self.attempt_override if self.attempt_override is not None else run)
+            current = copy.deepcopy(self.run_override) if self.run_override is not None else copy.deepcopy(run)
+            if self.jobs_observed and self.after_jobs_attempt:
+                current['run_attempt'] += 1
+            if self.jobs_observed and self.after_jobs_status is not None:
+                current['status'], current['conclusion'] = self.after_jobs_status
+            return self.reply(current)
+        if path.endswith('/check-runs'):
+            return self.reply({'total_count': 2, 'check_runs': [
+                {'name': 'ci', 'head_sha': HEAD, 'status': 'completed', 'conclusion': state}
+                for state in ['success', 'failure']]})
         if path.endswith('/status'):
-            return self.reply({'sha': HEAD, 'total_count': 0, 'statuses': []})
+            return self.reply({'sha': HEAD, 'total_count': 2, 'statuses': [
+                {'context': 'Paperclip Review', 'state': state} for state in ['success', 'failure']]})
         raise AssertionError('unexpected controlled command')
 
 
@@ -160,7 +200,11 @@ class ReviewedDeliveryTests(unittest.TestCase):
         self.assertEqual(result['state'], 'plan_ready')
         self.assertEqual(result['actions'], ['push_exact_branch', 'create_draft_pr'])
         self.assertEqual(self.commands.writes, [])
-        self.assertEqual(result['ci'], {'head': HEAD, 'status': 'passed', 'checks': {'ci': 'passed'}})
+        self.assertEqual(result['ci']['head'], HEAD)
+        self.assertEqual(result['ci']['status'], 'passed')
+        self.assertEqual(result['ci']['checks'], {'ci': 'passed'})
+        self.assertEqual(result['ci']['run_id'], 40558440811)
+        self.assertEqual(result['ci']['event'], 'push')
         self.assertEqual(result['gitlab'], {'status': 'unbound', 'mirror_performed': False, 'mr_created': False})
 
     def test_normal_push_and_draft_then_exact_restart_has_no_duplicate_writes(self):
@@ -383,6 +427,96 @@ class ReviewedDeliveryTests(unittest.TestCase):
                 self.assertFalse(cli['final_readback_verified'])
                 self.assertTrue(cli['pushed'])
                 self.assertEqual(cli['pr'], 42)
+
+    def ci_snapshot(self):
+        return delivery.Flow(self.root, self.commands).ci(self.request)
+
+    def test_real_shaped_push_jobs_are_independent_of_duplicate_pr_core_checks(self):
+        # Root-observed run IDs are shape fixtures; no live GitHub request occurs.
+        self.request['required_ci'] = ['repository', 'postgres-isolation', 'openapi-schema', 'next-web', 'react-site']
+        run = self.commands.run_row(id=40558440811)
+        self.commands.jobs = [{**self.commands.job_rows(run)[0], 'id': 900 + index, 'name': name}
+                              for index, name in enumerate(self.request['required_ci'])]
+        self.commands.optional_duplicates = True
+        report = self.ci_snapshot()
+        self.assertEqual(report['status'], 'passed')
+        self.assertEqual(report['run_id'], 40558440811)
+        self.assertEqual(report['run_attempt'], 1)
+        self.assertEqual(report['checks'], {name: 'passed' for name in self.request['required_ci']})
+        self.assertEqual(report['external_checks'], {'status': 'not_evaluated', 'affects_core': False})
+        self.assertFalse(any('/check-runs' in arg or '/status?' in arg for argv in self.commands.calls for arg in argv))
+        self.assertTrue(any('/attempts/1/jobs?' in arg for argv in self.commands.calls for arg in argv))
+        self.assertEqual(self.commands.writes, [])
+
+    def test_wrong_workflow_run_sha_event_path_branch_name_or_attempt_never_passes(self):
+        for field, value in [('head_sha', BASE), ('event', 'pull_request'),
+                ('path', '.github/workflows/other.yml'), ('name', 'Other CI'),
+                ('workflow_id', 8), ('head_branch', 'main'), ('id', -1), ('run_attempt', 0)]:
+            with self.subTest(field=field):
+                self.commands = CommandsDouble()
+                self.commands.runs = [self.commands.run_row(**{field: value})]
+                self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+        for field, value in [('name', 'Other CI'), ('path', 'ci.yml'), ('state', 'disabled_manually')]:
+            with self.subTest(workflow_field=field):
+                self.commands = CommandsDouble(); self.commands.workflow[field] = value
+                self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+
+    def test_latest_failed_push_run_and_current_attempt_supersede_earlier_green(self):
+        old = self.commands.run_row(id=40558440000, run_number=146, conclusion='success')
+        latest = self.commands.run_row(id=40558440811, run_number=147, run_attempt=2, conclusion='failure')
+        self.commands.runs = [old, latest]
+        report = self.ci_snapshot()
+        self.assertEqual(report['status'], 'failed')
+        self.assertEqual(report['run_id'], latest['id'])
+        self.assertEqual(report['run_attempt'], 2)
+        self.assertTrue(any('/attempts/2/jobs?' in arg for argv in self.commands.calls for arg in argv))
+        latest.update(status='in_progress', conclusion=None)
+        self.assertEqual(self.ci_snapshot()['status'], 'pending')
+        latest.update(status='completed', conclusion='success')
+        self.commands.jobs = [{**self.commands.job_rows(latest)[0], 'run_attempt': 1}]
+        self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+        self.commands.jobs = None
+        self.commands.attempt_override = {**latest, 'run_attempt': 1}
+        self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+
+    def test_required_jobs_missing_duplicate_skipped_neutral_wrong_binding_never_pass(self):
+        run = self.commands.run_row()
+        base_job = self.commands.job_rows(run)[0]
+        variants = [[], [base_job, {**base_job, 'id': 901}],
+                    [{**base_job, 'conclusion': 'skipped'}], [{**base_job, 'conclusion': 'neutral'}],
+                    [{**base_job, 'head_sha': BASE}], [{**base_job, 'run_id': run['id'] + 1}],
+                    [{**base_job, 'run_attempt': 2}], [{**base_job, 'workflow_name': 'Other'}]]
+        for jobs in variants:
+            with self.subTest(jobs=jobs):
+                self.commands = CommandsDouble(); self.commands.jobs = jobs
+                self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+
+    def test_actions_run_and_jobs_pagination_is_complete_and_bounded(self):
+        self.commands.runs = [self.commands.run_row(id=1000 + n, run_number=n + 1) for n in range(101)]
+        report = self.ci_snapshot()
+        self.assertEqual(report['status'], 'passed')
+        self.assertEqual(report['run_id'], 1100)
+        self.assertTrue(any('page=2' in arg for argv in self.commands.calls for arg in argv))
+        self.commands.runs_total_delta = 1
+        self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+        self.commands = CommandsDouble(); self.commands.jobs_total_delta = 1
+        self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+        self.commands = CommandsDouble()
+        self.commands.runs = [self.commands.run_row(id=1000 + n, run_number=n + 1) for n in range(401)]
+        self.assertEqual(self.ci_snapshot()['status'], 'unavailable')
+        self.assertEqual(self.commands.writes, [])
+
+    def test_ci_rerun_status_change_or_newer_run_after_jobs_cannot_return_passed(self):
+        for kind in ['attempt', 'new_run', 'status']:
+            with self.subTest(kind=kind):
+                self.commands = CommandsDouble()
+                if kind == 'attempt': self.commands.after_jobs_attempt = True
+                if kind == 'new_run': self.commands.after_jobs_new_run = True
+                if kind == 'status': self.commands.after_jobs_status = ('completed', 'failure')
+                report = self.ci_snapshot()
+                self.assertEqual(report['status'], 'unavailable')
+                self.assertIn(report['reason'], ['ci_run_changed_after_jobs', 'ci_latest_run_changed_after_jobs'])
+                self.assertEqual(self.commands.writes, [])
 
     def test_json_duplicate_nonfinite_and_byte_limits(self):
         for raw in (b'{"a":1,"a":2}', b'{"n":NaN}', b'x' * (delivery.MAX_OUTPUT + 1)):

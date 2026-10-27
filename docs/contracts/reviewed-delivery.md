@@ -2,9 +2,13 @@
 
 `tools/reviewed_delivery.py` ist ein kleiner argv-basierter GitHub-Ablauf mit
 lokalem Checkpoint. Standard ist eine lesende Planung; nur `execute=True` bzw.
-`--execute` erlaubt normalen Branch-Push und Draft-PR-Erstellung. Implementierung
-und Tests führen keine echten GitHub-/GitLab-Writes aus. Aktuell nachgewiesene
-Remoteaktionen des Rootauftrags sind davon getrennte Belege.
+`--execute` erlaubt normalen Branch-Push und Draft-PR-Erstellung. Unit-/
+Commanddoubletests führen keine echten GitHub-/GitLab-Writes aus. Der separat
+autorisierte Root-Pilot mit Head 90b9f94 hat über diesen Ablauf tatsächlich
+DraftPR 43 erstellt; exakter Replay ergab 0 Writes. Seine getrennten lokalen
+Readbacks liegen unter `.local/reviewed-delivery-run/execute.json` und
+`replay.json`. Das ist kein Ausführungsbeleg der synthetischen Tests und keine
+pauschale Freigabe weiterer Writes.
 
 Festes Repository:
 `nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`.
@@ -134,16 +138,50 @@ prüft und nimmt am Checkpoint wieder auf.
 
 ## CI und GitLab
 
-CI-Abfrage ist ausschließlich an den exakten Requesthead gebunden: Checkruns
-plus Combined Commit Status. Alle verlangten Kontexte müssen eindeutig und
-abgeschlossen success sein. Doppelte irrelevante optionale Kontexte (etwa
-Paperclip aus push/pull_request) ändern das Coreergebnis nicht. Ein doppelter
-verlangter Kontext bleibt mehrdeutig/unavailable; es wird kein älterer Erfolg
-über einen anderen/neuen Fehler gezogen. Leer, unbekannt, fehlend, skipped, neutral, falscher
-SHA, Teilpagination, Provider-/Authfehler sind `unavailable`; niemals passed.
-Pending und failed bleiben getrennt. Ein erfolgreich erstellter Draft kann
+Core-CI ist ausschließlich ein gewöhnlicher **push**-Run am exakten
+Requesthead und Branch, aus Workflowname `CI`, Pfad `.github/workflows/ci.yml`
+im festen Repository. Gleichnamige Jobs aus push und pull_request in der
+Checkruns-Ansicht sind kein eindeutiger Herkunftsbeleg. Deshalb verwenden
+`ci()` und seine Freigabe weder Checkruns noch Combined Commit Status,
+synthetische PR-Merge-SHAs, Paperclip oder Vercel. Externe Checks sind separat
+als `external_checks:{status:"not_evaluated",affects_core:false}` gekennzeichnet.
+
+Der Ablauf liest zuerst die konkrete Workflowidentity und danach mit
+`event=push`, `head_sha=<exacthead>` und `branch=<ownbranch>` die vollständige
+begrenzte Workflowrunliste. Kein success- oder completed-Filter versteckt neuere
+Fehlschläge. Pfad, Workflowname/-ID, Event, Head, Branch sowie positive Run-ID,
+`run_number` und `run_attempt` werden geprüft; eine unerwartete Filterabweichung
+oder Mehrdeutigkeit bedeutet unavailable. Der höchste `run_number` bestimmt den
+aktuellsten passenden Run; es gibt keinen Fallback auf einen älteren grünen Run.
+Reruns behalten diese Nummer und erhöhen `run_attempt`.
+
+Der gewählte Run wird zusätzlich direkt und über seine konkrete Attempt-API
+rückgelesen. Ausschließlich
+`/actions/runs/<run_id>/attempts/<run_attempt>/jobs` liefert seine Jobs. Jede
+Job-ID muss eindeutig, Run-ID/Attempt und Head müssen exakt gebunden sein;
+optionale Workflow-/Branchfelder müssen bei Anwesenheit ebenfalls passen.
+Alle `required_ci`-Jobnamen müssen eindeutig vorkommen und abgeschlossen success
+sein. Fehlende oder doppelte verlangte Jobs, alte gemischte Attempts, falsche
+SHAs, neutral, skipped, unvollständige Pagination oder APIfehler ergeben kein
+passed. Eine neuere Runfailure dominiert einen früheren Erfolg; eine noch
+laufende gültige Ausführung bleibt pending. Das Gesamtergebnis verlangt sowohl
+den gewählten Run als auch alle verlangten Jobs erfolgreich.
+
+Run- und Joblisten nutzen dieselben Grenzen: 100 Zeilen pro Seite, höchstens 400
+vollständig erfasste Zeilen und unveränderten `total_count`; Teilantworten werden
+nicht als vollständig ausgegeben. Nach dem Lesen der Jobs werden Runstatus,
+Conclusion und Attempt sowie die aktuellste gefilterte Runauswahl erneut geprüft.
+Ein neuer Run, Rerun oder Statuswechsel währenddessen bedeutet unavailable.
+Dies ist ein endlicher Snapshot ohne Polling und ohne globalen GitHub-Lock;
+eine Änderung nach dem letzten Readback kann dadurch nicht ausgeschlossen
+werden. Der Report enthält konkrete Workflow-ID, Run-ID, Runnummer und Attempt.
+
+Ein erfolgreich erstellter Draft kann weiterhin
 `ci.status=unavailable|pending|failed` tragen; das ist keine Mergefreigabe und
-ändert weder Branchprotection noch Anbieterstatus.
+ändert weder Branchprotection noch Anbieterstatus. Das Modell-/ONNX-Paket wurde
+hierdurch nicht installiert: der vorhandene CI-Teststack installiert lediglich
+die explizit hashgepinnten Pillow-/NumPy-Testabhängigkeiten; daraus folgt kein
+nativer ONNX-Inferenzbeleg.
 
 GitLabreport ist ausdrücklich `{status:"unbound",mirror_performed:false,
 mr_created:false}`. Nutzerpräzisierung: GitLab ist serverlokal; eine Cloud-
@@ -166,13 +204,17 @@ python3 -m unittest discover -s tests -p test_reviewed_delivery.py -v
 Nur Pythonstandardbibliothek, vorhandenes git und gh. Wiederverwendet wurde die
 vorhandene geprüfte Directory-FD-Grenze aus `tools/project_skills.py`; vorhandene
 `tools/site_release.py` und `tools/automation/mirror.py` wurden fachlich geprüft,
-aber ihre Archive-/Mirrorwirkungen nicht als PR-Ablauf umgedeutet. 21 gezielte Commanddouble-Tests prüfen positive/negative/restart-Fälle,
-Belegbytes/Scope/Linkgrenzen, erhaltene Hooks und optionale CI-Duplikate; dies
-ist keine echte GitHubzustellung.
+aber ihre Archive-/Mirrorwirkungen nicht als PR-Ablauf umgedeutet. 27 gezielte
+Commanddouble-Tests prüfen positive/negative/restart-Fälle, Belegbytes/Scope/
+Linkgrenzen, erhaltene Hooks, doppelte Push-/PR-Checks, exakte Actions-Run-/
+Attemptbindung, neuere Failure, fehlende/doppelte Jobs, Pagination und Rerunraces.
+Diese Tests sind keine echte GitHubzustellung; der Root-Pilot ist separat belegt.
 
 Technische Primärquellen, am 27.10.2026 gelesen:
 [GitHub Pull Requests](https://docs.github.com/en/rest/pulls/pulls),
-[Check Runs](https://docs.github.com/en/rest/checks/runs),
-[Commit Status](https://docs.github.com/en/rest/commits/statuses).
+[Actions Workflows](https://docs.github.com/en/rest/actions/workflows),
+[Workflow Runs](https://docs.github.com/en/rest/actions/workflow-runs),
+[Attemptjobs](https://docs.github.com/en/rest/actions/workflow-jobs),
+[Runnummer und Attempt](https://docs.github.com/en/actions/reference/workflows-and-actions/variables).
 Lokal gelesen: gh 2.46 `gh api --help` und `git push -h`. Die Implementierung
 verwendet explizite APIversion 2026-03-10 und argv; keine Shellstrings.
