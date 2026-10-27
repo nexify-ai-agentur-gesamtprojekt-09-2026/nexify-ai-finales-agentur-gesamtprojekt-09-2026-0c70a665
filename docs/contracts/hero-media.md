@@ -84,3 +84,13 @@ Vergleichstexte, Rollenprofile und Abnahmekriterien stehen maschinenlesbar in
 Der Nutzer benennt Runway als Quelle der Videos und beauftragt ausdrücklich die Erstellung fehlender Clips. Das ist Teil des Auftrags; eine weitere pauschale Erstellungsfreigabe ist nicht nötig. Der aktuelle Toolbestand enthält auch keine Runway-Operation und `command -v runway` liefert keine CLI. Provider-Asset-IDs, Modellversion, Kontozuordnung und generierte Dateien sind daher noch nicht technisch nachgewiesen. Die einzige Runway-Textfundstelle im Prototypbestand ist eine gleichnamige Reifenmarke und keine Medienintegration.
 
 Ablauf: Runway-Bestand autorisiert lesen → vorhandene Medien an NeX/AIFly/Nutzer und Seiten binden → fehlende Varianten identifizieren → Skript-/Promptfassung und vorhandenes Generierungsbudget binden → nur fehlende Clips erzeugen → ElevenLabs-Audio gemäß exakter Voice-Zuordnung ergänzen → lokale Dateiprüfung, Untertitel, Wiedergabe und Sichtfreigabe → versionierte Veröffentlichung. Für Budget und Modelle gelten die tatsächliche Kontokonfiguration und das geprüfte Provider-Aktionsschema; es werden keine fiktiven Grenzen oder Modell-IDs erfunden. Ohne reale Verbindung werden keine Jobs als gestartet oder geliefert ausgewiesen.
+
+
+## Strikter Skriptvertrag
+
+PR39-4388404318: Vergleichs- und Hero-Skripte erfordern jeweils ein Objekt mit
+exakt de/nl/fr und nichtleeren Stringwerten. Zahlen, Boolesche Werte, null,
+Listen/Objekte als Texte oder fremde Mappingcontainer werden abgewiesen;
+Stringkonvertierung ist kein Nachweis eines Sprechertexts. Diese Typprüfung
+ändert keine Inhalte und ersetzt weder Stimmfreigabe/Hörprobe noch tatsächliche
+Audio-/Videoerzeugung, QA oder Veröffentlichungsabnahme.

@@ -34,6 +34,7 @@ export default function ShopPanel({pageId}:{pageId:string}){
   try{
    const response=await fetch('/api/shop/cart',{cache:'no-store'});
    if(response.status===404){setCart(null);setDraft(null);setError(false);return;}
+   if(response.status===410){const failure=await response.json().catch(()=>null);if(failure?.error!=='cart_expired')throw new Error('cart');keys.current.clear();setCart(null);setDraft(null);setError(false);return;}
    if(!response.ok)throw new Error('cart');
    const current=await response.json();setCart(current);
    const checkout=await fetch('/api/shop/cart/checkout-draft',{cache:'no-store'});
@@ -51,12 +52,12 @@ export default function ShopPanel({pageId}:{pageId:string}){
   if(!keys.current.has(identity))keys.current.set(identity,crypto.randomUUID());
   try{
    const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrf,'Idempotency-Key':keys.current.get(identity)!,...(cart?{'If-Match':cart.version,'X-Cart-Id':cart.id}:{})},body:JSON.stringify(body)});
-   if(!response.ok)throw new Error('mutation');
+   if(!response.ok){const failure=await response.json().catch(()=>null);if(path==='/api/shop/cart'&&response.status===410&&failure?.error==='cart_expired')keys.current.delete(identity);throw new Error('mutation');}
    const result=await response.json();
    if(path.endsWith('/checkout-draft')){
     if(result.state!=='blocked_provider_acceptance'||result.order_submitted!==false||result.payment_started!==false)throw new Error('checkout');
     setDraft(result);
-   }else{setCart(result);setDraft(null);}
+   }else{setCart(result);setDraft(null);if(path==='/api/shop/cart')keys.current.delete(identity);}
   }catch{setError(true);}finally{active.current=false;setBusy(false);}
  }
  const money=(value:number,currency:string)=>{const format=new Intl.NumberFormat(locale,{style:'currency',currency});const digits=format.resolvedOptions().maximumFractionDigits;if(digits===undefined)return t.unknown;return format.format(value/10**digits);};

@@ -1,0 +1,28 @@
+{
+  "directories": [
+    "apps/site/src",
+    "apps/web/components",
+    "apps/web/lib",
+    "packages/tokens"
+  ],
+  "extensions": [
+    ".tsx",
+    ".ts",
+    ".mjs",
+    ".css",
+    ".json"
+  ],
+  "files": [
+    "config/text-resize-sources.json",
+    "apps/site/.generated/public-site.json",
+    "apps/site/index.html",
+    "apps/site/vite.config.ts",
+    "config/site-map.json",
+    "config/design-tokens.json",
+    "pnpm-lock.yaml",
+    "apps/site/tests/browser-text-spacing.mjs",
+    "apps/web/app/globals.css",
+    "apps/web/public/fonts/geist-latin.woff2",
+    "apps/web/public/fonts/geist-mono-latin.woff2"
+  ]
+}

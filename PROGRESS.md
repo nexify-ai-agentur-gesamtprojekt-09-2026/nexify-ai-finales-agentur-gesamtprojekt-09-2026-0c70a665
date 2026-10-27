@@ -1,3 +1,102 @@
+# PR39: strikter Medien-Skriptvertrag
+
+Current State: PaketVersion10/26f9128 in derselbenLibrary gesichert; vorherige
+CI-/BigBuy-/Cart-/Resizekorrekturen bleiben unverändert. Noch offene bestätigte
+PR39-4388404318-Abweichung separat geschlossen: numerischerVergleichstext42
+wurde vorher akzeptiert; jetzt müssenVergleichs-/Hero-Skriptmappings exakt
+DE/NL/FR mitnichtleerenStrings enthalten. UngültigeContainer führenzumFehler,
+keine stillschweigendeStringkonvertierung.22Fokustests grün inklusive96Wert-
+und20Containergegenproben. Kein Stimme-/Skriptinhalt-/Asset-/Preiswechsel,
+keineGenerierung oderFreigabe ausdemValidator abgeleitet.
+
+Nachweis: unabhängigeSolprüfung wiederholte22Vertragstests/CLI ohneFinding.
+387Python-Tests,check/test/e2e/arch/clean grün;UI/Assets unverändert,
+beideBrowser-Evidenzcheckerweitergrün.
+
+Next Steps: exakterCommit-/Hashreadback;
+versionsgesichert dasselbePaket aufVersion11fortschreiben. EchteBigBuy-/Medien-
+undProvider-/Assistenztechnikgates bleibenoffen; keineweitereRemoteauslieferung.
+
+# PR40: lokale Folgekorrekturen und tatsächlicher Deploymentstand
+
+Current State: BigBuy-Vorstufe65a8e8b auf lokalem CI-Fix3e92663 gesichert.
+Remote main219f244 vom27.10.15:25:02Z hat denselben Gitbaum wie geprüfter69ed580;
+Vercel dpl_7cJkhVUzjZjxhZzxbtaQwFbeeq1V ist production READY. Dies waren
+fremde Merge-/Deployaktionen, keine eigene Produktionserlaubnis oder fachliche
+Abnahme. Der alte69Preview-Autorzugriffsblocker wurde nicht durch uns umgangen.
+
+In Progress: bestätigter Cartablauf-/Creation-Keyfehler mit realem Browserlauf
+reproduziert. Erfolgreiche Keys werden nicht für neueCarts recycelt; ungewisse
+Createausgänge behaltenKey und benötigenReadback. AutoritativesGET410/cart_expired
+öffnet nachRücklesung nur den bewusstenNeustart; unbekannteFehler bleiben gesperrt.
+13 lokale Browser/API/SQLite-Fälle bestanden inklusive4neuerExpirykreise.
+Resizeprüfer akzeptierte zuvor36ungebundeneRouten; jetzt UI/CSS, beidegeladene
+Schriften, Tokens, Datensnapshot, Lockfile und Messskript vor/nachgebunden.
+UnabhängigerSolbefund ergänzte Globals/Fonts unddirektesGET410; nachgebessert,
+frische108Messungen/36Routen und25unabhängig ausgeführteFokustests grün. Registerpin nachRenderer warveraltet;
+neuerTest prüft sämtlicheDateipins, abschließenderRefresh nachRendering.
+Keine echte Bestellung, Zahlung, Providerfreischaltung oder externeMutation.
+
+Nachweis:385Python-/31Node-Tests,check/test/e2e/arch/clean,Typecheck,
+Produktions- undStandalonebuild grün.13Shopfälle,108Resizeprüfungen,
+frischerCritical-/SSE-Browserlauf und4echteProduktionsassets ohneTestartikelmarker.
+Alle130bisherigenRegisterpins unabhängig bestätigt; kein offenesCodefinding.
+
+Next Steps: finalerCommit-/Hashreadback durchSol;
+versionsgesichertesPaket. CI-Fix bleibtlokal, nochkeinRemoteCI-Erfolg behauptet.
+BigBuy-Bildmodell/Rohdatenzugriff/Kommerz-/Fitment-/Publikationsgates offen;
+keine Vorstufe wird alsvollständigerShop oderfertigeBildproduktion ausgegeben.
+
+# BigBuy: begrenzte lokale Rohdatenaufbereitung
+
+Current State: 3e92663 enthält den unabhängig geprüften CI-Setupfix, noch nicht
+gepusht. Fremde Remoteaktion: PR40 wurde durch nexifyai-dev am27.10.15:25:02Z
+zusammengeführt; main219f244 hat exakt denselben Gitbaum wie69ed580. Dies ist
+kein von uns ausgeführter Merge und keine Produktionsabnahme. Weitere eigene
+Remotewrites pausieren bis Writerabgleich. Kanonischer Vercel-Preview69ed580:
+dpl_DPsitJWgNzJrTjL5TnbwjxvTFKmT BLOCKED, Git-Autorzugriff fehlt; keine Umgehung.
+
+Current Local Delta: BigBuy ist die vom Nutzer gewählte Quelle. Neuer reiner lokaler
+Batchschritt validiert explizit begrenzte Feedbytes, vorhandene Taxonomieauswahl,
+SKU-/DE-Bindung und EAN-Strings; erstellt faktengebundene Textentwürfe sowie alle
+Bildslots mit separaten Stagehashes. Stockänderung invalidiert keine Text-/Bildstage.
+Keine Queue, kein Provideraufruf, kein Modell, keine Veröffentlichung, keine Löschung,
+kein Verkaufs-/Fitmentversprechen. Quellenpreise werden nicht als Verkaufspreise
+übernommen. Tests sind isolierte synthetische Daten, kein vorhandener Lieferbestand.
+Historische Importercommits4a2cc3a/73f7eb7 und übergebene Produktionspfade fehlen
+in dieser Umgebung; dokumentiert statt als angeschlossenen Adapter behauptet.
+Small-Business-Quellprüfung stoppt mit Source unavailable: LICENSE; kein Skill
+blind geladen. Projekt-Skills fünf Quellen geprüft; Kontextselektor begrenzt gelesen.
+
+Nachweis:9 fokussierte Tests unabhängig durch Sol wiederholt;382 Python-Tests,
+make check/test/e2e/check-arch bestanden. Stagekonfiguration bindet Tenant/Projekt.
+Separat direkt gelesen: Productionalias steht inzwischen auf READY
+dpl_7cJkhVUzjZjxhZzxbtaQwFbeeq1V/main219f244. Kein eigener Promote,
+keine reale Funktions-/Providerabnahme daraus abgeleitet.
+
+Next Steps: Remote-Writer-/CI-Fix-Abgleich; bestehende lokale Steuerung
+erst nach nachgewiesenen Rohdaten-/Rechte-/Taxonomieeingängen anbinden. Bildprozess
+braucht gepinnte lizenzierte Gewichte/Konvertierung/Hashes und Ressourcenbenchmark.
+Draft bleibt unpublizierbar, bis einzelne QA-/Kommerz-/Fitmentgates nachgewiesen sind.
+
+# PR40: exakter Upload und reproduzierter CI-Setupfehler
+
+Current State:69ed580 unverändert auf eigenem Remotezweig
+integration/reviewed-one-app-shop-20261027-69ed580, DraftPR40. Main bleibt2a552ed.
+Push-CI40529125816: React/Next/OpenAPI/PostgreSQL grün; Repository scheitert an
+ARCH009/019, weil Vite für den parserbasierten Standalone-Test nicht installiert
+ist. Sauberer lokaler Zweifachnachweis: ohne Abhängigkeiten ERR_MODULE_NOT_FOUND,
+mit den bestehenden gesperrten Abhängigkeiten grün. CI-Repositoryjob installiert
+jetzt dieselben gepinnten Node22.23.4-/pnpm12.15.0-Workspaceabhängigkeiten wie die
+bestehenden Buildjobs; keine Prüfausnahme oder neue Abhängigkeit eingeführt.
+Next Steps: Änderung unabhängig prüfen, normales Fast-forward auf denselben
+Integrationsbranch und CI am neuen exakten SHA prüfen. Vercel-Preview ist wegen
+fehlendem Projektzugriff des Git-Autors NeXify-Automate BLOCKED; keine Identitäts-,
+Mitgliedschafts-, Hosting- oder Abrechnungsänderung zur Umgehung.
+BigBuy ist laut jüngster Nutzerentscheidung die gewählte Produktquelle. Dessen
+inkrementelle Batchintegration folgt nach diesem CI-Schritt mit tatsächlichen
+Taxonomie-/Zugriffsverträgen; keine echte Bestellung als notwendiger Test.
+
 # Lokale Shop-HTTP-/UI-Anbindung
 
 Current State: b08a7fc / PaketVersion8 als geprüfter Rückweg erhalten. Bestehender

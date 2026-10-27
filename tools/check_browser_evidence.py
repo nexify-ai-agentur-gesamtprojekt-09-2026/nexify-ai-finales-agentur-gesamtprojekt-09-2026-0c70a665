@@ -187,6 +187,10 @@ SHOP_CHECKS = frozenset((
     "foreign visitor cart cookie and client role/tenant claims grant no cart access",
     "unconfigured catalog and failed catalog connection remain distinct with no sample products",
     "mobile keyboard layout retains shared tokens and no horizontal overflow",
+    "expired successful creation key cannot trap a cookie-less cart in permanent 410",
+    "lost creation response preserves key until readback and restores one committed cart",
+    "expired unknown creation requires explicit 410 readback before a fresh creation key",
+    "authoritative expired cart read clears stale UI but requires deliberate new creation",
 ))
 
 
@@ -205,12 +209,12 @@ def check_shop_evidence(root):
         raise EvidenceError("shop_effect_boundaries_required")
     observed = {(row.get("method"), row.get("path"), row.get("status")) for row in evidence.get("requests", [])}
     for method, path, status in (("POST", "/api/shop/cart", 200), ("POST", "/api/shop/cart/items", 200),
-                                ("GET", "/api/shop/cart", 200), ("GET", "/api/shop/cart", 404),
+                                ("GET", "/api/shop/cart", 200), ("GET", "/api/shop/cart", 404), ("GET", "/api/shop/cart", 410),
                                 ("POST", "/api/shop/cart/checkout-draft", 200),
                                 ("GET", "/api/shop/cart/checkout-draft", 200)):
         if (method, path, status) not in observed:
             raise EvidenceError("shop_actual_http_boundary_missing")
-    if evidence.get("persistent_objects") != {"cart": 1, "checkout_draft": 1}:
+    if evidence.get("persistent_objects") != {"cart": 7, "checkout_draft": 1}:
         raise EvidenceError("shop_persistent_duplicate_or_missing")
     return {"scope": "stored_local_fixture_browser_api_sqlite_evidence_only", "checks": len(SHOP_CHECKS)}
 

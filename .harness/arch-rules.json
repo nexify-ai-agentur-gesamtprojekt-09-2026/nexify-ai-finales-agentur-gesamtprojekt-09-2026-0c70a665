@@ -210,12 +210,12 @@
     },
     {
       "id": "ARCH-024",
-      "description": "200%-Textnachweise messen gerenderte Schrift statt nur Root-CSS.",
-      "check": "python3 tools/check_text_resize_evidence.py >/dev/null 2>&1",
+      "description": "200%-Textnachweise messen gerenderte Schrift und binden aktuelle UI-/CSS-/Testquellen.",
+      "check": "python3 tools/check_text_resize_evidence.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_resize_source_binding.py -q >/dev/null 2>&1",
       "expect": "exit 0",
-      "what": "Root-Font-Override wurde als tatsächliche Textverdopplung oder überlaufende Texte als geprüft ausgegeben.",
+      "what": "Root-Override ersetzt Messung oder alte Geometrie wird nach UI-/CSS-/Teständerung wiederverwendet.",
       "why": "Nicht wirksame Testmanipulation darf keine Abnahme vortäuschen.",
-      "fix": "Vorher/Nachher gerenderte Schrift assertieren, lokale Inhaltsüberläufe messen und browser-text-spacing.mjs frisch ausführen."
+      "fix": "Browser frisch ausführen; Vorher/Nachher-Quellhashes und tatsächliche Schriftverdopplung prüfen. Keine Hasherneuerung ohne Browserlauf."
     },
     {
       "id": "ARCH-025",
@@ -228,10 +228,10 @@
     },
     {
       "id": "ARCH-026",
-      "description": "Historische Stimmenreferenzen umgehen keine Quellenfreigabe über parallele Presenter-Konfiguration.",
+      "description": "Historische Stimmenreferenzen umgehen keine Quellenfreigabe über parallele Presenter-Konfiguration. Medien-Skriptmappings benötigen exakte Locale-Strings ohne Typkonvertierung.",
       "check": "python3 -m unittest discover -s tests -p test_factory_contract.py -q >/dev/null 2>&1",
       "expect": "exit 0",
-      "what": "Medienvertrag, Produktionsplan oder Presenter geben unbestätigte Stimmen frei.",
+      "what": "Medienvertrag, Produktionsplan oder Presenter geben unbestätigte Stimmen frei. Nichttextliche Skriptwerte oder ungültige Container dürfen keine Textevidenz ersetzen.",
       "why": "Ein historischer Identifier ist keine aktuelle Nutzerfreigabe oder Hörabnahme.",
       "fix": "Quellenkonflikt konsistent sperren und negative Cross-Config-Tests erhalten."
     },
@@ -240,7 +240,7 @@
       "description": "Abgeleitete Quellenansicht bleibt deckungsgleich; keine rekursive Register-Selbsthashbindung oder Promotion von Berichten zu Originalen/Abnahme.",
       "check": "python3 tools/verify_requirements_reconciliation.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_requirements_reconciliation.py -q >/dev/null 2>&1",
       "expect": "exit 0",
-      "what": "Quellenregister verliert Owner, Referenzen oder seine abgeleitete Ansicht.",
+      "what": "Quellenregister verliert Owner, Referenzen, abgeleitete Ansicht oder aktuelle Datei-Fingerprints.",
       "why": "Quellenkonsolidierung und lokale Tests beweisen keine vollständige Originalrekonstruktion oder Produktionsabnahme.",
       "fix": "Bestehendes Register und Ansicht gemeinsam aktualisieren; offene Abnahmen behalten."
     },
@@ -259,7 +259,7 @@
       "check": "python3 tools/check_browser_evidence.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_local_shop_http.py -q >/dev/null 2>&1",
       "expect": "exit 0",
       "what": "Shop UI/HTTP/Fixture driftet von gebundenen Browserbelegen oder Reconciliation/Target/CSRF scheitert.",
-      "why": "Ein 404 kann bestätigter Leerzustand sein; unbekannte Schreibausgänge dürfen weder blind wiederholt noch dauerhaft als unbestätigt ausgegeben werden.",
+      "why": "Ein 404 kann bestätigter Leerzustand sein; unbekannte Schreibausgänge dürfen weder blind wiederholt noch dauerhaft als unbestätigt ausgegeben werden. Erfolgreiche Create-Keys nach Ablauf nicht wiederverwenden; ungewisse Ergebnisse behalten den Key bis zur Reconciliation.",
       "fix": "Quellengebundenen echten Browser/API/SQLite-Nachweis mit Abbruch/Readback/Restart und negativen HTTP-Prüfungen erneuern; keine Produktionsabnahme daraus ableiten."
     }
   ]
