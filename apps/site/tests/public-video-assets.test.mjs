@@ -82,7 +82,7 @@ test('actual registry covers 46 routes and projects only 36 empty public entries
   assert.ok(Object.values(output.byPage).every(value => Object.keys(value).length === 0));
   assert.deepEqual(output.coverage, {publicPageCount: 36, publishedLocaleCount: 0, pendingLocaleCount: 108,
     fullyVideoCovered: false, publicModuleCount: 49, publishedModuleLocaleCount: 0,
-    pendingModuleLocaleCount: 147, completed: false, unresolvedSourceIntegrityGaps: 2});
+    pendingModuleLocaleCount: 147, completed: false, unresolvedSourceIntegrityGaps: 0});
   const raw = JSON.stringify(output);
   for (const page of sitemap.pages.filter(p => p.access.visibility !== 'public')) {
     assert.equal(raw.includes(page.path), false); assert.equal(Object.hasOwn(output.byPage, page.id), false); assert.equal(Object.hasOwn(output.byModule, page.id), false);

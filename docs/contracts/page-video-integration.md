@@ -44,8 +44,8 @@ benötigen die tatsächlich produzierten Filme.
 Ein Seitenintro schließt keine Modulabnahme. Master1.3 RQ-029/RQ-038 und
 TST-19/TST-24 sind damit technisch zugeordnet, nicht fachlich abgenommen.
 Die sieben Vorproduktionsfilme mit 21 Szenen sind Text-/Untertitelentwürfe, keine
-Medienbytes. Zwei interne Castinghashes stimmen nicht mit dem inneren Manifest
-überein; der äußere Liefermanifest stimmt. Angefragte Hörproben und Stimmen sind
+Medienbytes. Die zwei historischen inneren Castinghash-Abweichungen wurden in Libraryversion1
+ausschließlich durch Manifestkorrektur behoben; alle33Inhaltsdateien sind bytegleich. Angefragte Hörproben und Stimmen sind
 nicht freigegeben. Finaler AIFly-Charakter und geeignete tatsächliche Filmexports
 fehlen. Der bekannte Reviewclip und das abgelehnte Orb-/Augenbild können nicht
 bloß durch neue Statuswerte oder Belegdateien zu finalen Assets werden.

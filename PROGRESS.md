@@ -890,3 +890,17 @@ Vorheriger CI-Abschnitt: PR44/4340547 gewöhnlicher Pushlauf40561206111 alle5Job
 grün; danach extern18:37:38UTC nach14929eb gemergt. Kein eigener Mainmerge.
 GitLab-Projekttransport bleibt ungebunden. Actions-Minuten knapp laut datierter
 Anbietermeldung; keine unnötigen Wiederholungsläufe oder bezahlten Runner.
+
+### Vorproduktionsmanifest technisch abgeglichen
+
+Libraryquelle libfile_4c255bb88af48191a025daecac648997 versionsgeschützt0→1
+korrigiert: SHA34cc18cacddb4e5d952dcd6b07b187d700e999b2acd00c5a41a2a4d212b23377.
+Nur zwei Manifestdateien geändert;33Inhaltsdateien, Sprechertexte, Castingstatus
+und all_audio_unheard bleiben bytegleich. Unabhängiger Sol-Bytevergleich ohne
+Findings;33innere/34äußere Einträge korrekt. Historischer0-Befund bleibt erhalten.
+Die Quellintegritätslücke ist geschlossen, keine Medien-/Stimmenfreigabe erteilt.
+27gezielte Node-Regressionsfälle bestehen. PR45 beim lesenden Nachweis weiter
+Draft85c8f17,0Reviewthreads/Reviews; keine Remote-Threads eigenmächtig gelöst.
+Nachtziel28.10.05:00UTC: Medienbereitschaft, öffentliche Flows und geschützte
+Portale getrennt prüfen. Fehlende Casting-/Figuren-/Filmbytes und tatsächlicher
+Identity-/Runtime-/Releasevertrag erlauben keine100%-Fertigstellungszusage.

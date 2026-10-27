@@ -12,7 +12,8 @@ fehlende Medien werden nicht als fertige Filme bezeichnet.
 
 Das vorhandene Vorproduktionspaket ist Libraryobjekt
 `libfile_4c255bb88af48191a025daecac648997`, Archiv-SHA256
-`281197b1a8eb4990670ec2de75d6699e58f0d11cd7a235638a5a8404f78b0e3b`.
+Version1, Archiv-SHA256
+`34cc18cacddb4e5d952dcd6b07b187d700e999b2acd00c5a41a2a4d212b23377`. Historische Version0 bleibt erhalten.
 Die vom Root bereits materialisierte und gehashte Skriptquelle unter
 `.local/media-coverage/production-plan/nexify-product-video-scripts.de.json`
 bindet7 deutsche Planfilme/21Szenen. Sie enthält keine erzeugten Audio-/Videobytes.
@@ -35,11 +36,15 @@ konkreten Kontextlücken; derselbe Film wird nicht pauschal allen Routen
 zugewiesen. Private/interne Routen besitzen keine öffentlichen Filmzuordnungen.
 Deutschsprachige Skripte beweisen weder Übersetzung noch fertige Sprachfassungen.
 
-Zwei Unterschiede im inneren `script-package-manifest.json` bleiben ausdrücklich
-offen: `ElevenLabs-Voice-Casting.de.md` und `voice-casting-options.de.json`.
-Das äußere Manifest ist ein anderer Prüfstand. Solange diese Quellintegritäts-
-lücken nicht behoben und neu gebunden sind, blockiert der Projektor **jede**
-Assetveröffentlichung aus diesem Register. Ein Statusfeld hebt sie nicht auf.
+Die zwei veralteten inneren Castinghash-/Größenangaben sind in Libraryversion1
+gegen tatsächliche Bytes und bereits korrektes äußeres Liefermanifest abgeglichen.
+Nur Innenmanifest und dessen Außenmanifest-Verweis ändern sich;33Inhaltsdateien
+bleiben bytegleich. Beide Manifestketten sind korrekt (33/34Einträge). Der
+historische Version0-Befund bleibt gespeichert; der Delta-/Reviewbeleg steht in
+`evidence/page-videos-2026-10-27/manifest-reconciliation.json`. Die technische
+Integritätslücke ist geschlossen, Casting/Produktionsfreigaben bleiben offen.
+Der Projektor sperrt weiterhin jede zukünftige Quellintegritätslücke und sämtliche
+Assets ohne passende Belege/Budgets.
 
 Das bestehende `hero-trio.png`, SHA256
 `76969135f5eee86871a7da2ea09829786f9366ce34cd8bdac9432b6e0c4a9bc4`,

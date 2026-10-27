@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-27T19:34:36.447Z",
+  "recorded_at": "2026-10-27T19:51:33.520Z",
   "source_sha256": {
     "apps/web/components/PresenterVideo.tsx": "8aad2b972de21ee0e0d880a9723f0bc539184df6b1ea21e1975a2ccf19509e16",
     "apps/web/components/PresenterVideo.css": "2f0c719aa78d6d8ffc0f7d57bf57a3553630f34d8729a47b4fcca2638c91e992",
@@ -11,7 +11,7 @@
     "apps/site/tests/fixtures/presenter-video.tsx": "711715eb8335d911423d0d87a91b7b96378564e0f3dcb39c3c44f57b0f3ae617",
     "apps/site/tests/browser-video-player.mjs": "5186998ac9cfa9137b66de668a08bd6d59380960085462eceadc1d2205852f0e",
     "apps/site/scripts/public-video-assets.mjs": "802701213e38f2144990aebe4a9a413f167dace9f26401fb2e684a617b2b766e",
-    "config/page-media-registry.json": "3a670b6713617164902782e94b59ec6fbed5ce465b1fc074aa33480b91792038",
+    "config/page-media-registry.json": "bca4a4a7d96cfb5e1230b73caabcc69236c8ccf85274392fa1ec3a655e3aeefd",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
     "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
