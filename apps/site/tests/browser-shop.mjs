@@ -15,7 +15,7 @@ async function hashes(){return Object.fromEntries(await Promise.all(sources.map(
 const before=await hashes();
 const folder=await mkdtemp(join(tmpdir(),'nexify-browser-shop-')),database=join(folder,'visitor.sqlite');
 let backendPort=0,backend;const requests=[],external=[],checks=[];
-const server=await createServer({root,server:{port:0,strictPort:false},plugins:[{name:'isolated-shop-proxy',configureServer(vite){vite.middlewares.use((req,res,next)=>{
+const server=await createServer({root,cacheDir:join(folder,'vite-cache'),server:{port:0,strictPort:false},plugins:[{name:'isolated-shop-proxy',configureServer(vite){vite.middlewares.use((req,res,next)=>{
  if(!(req.url==='/api/session'||req.url.startsWith('/api/shop/')))return next();
  const upstream=httpRequest({host:'127.0.0.1',port:backendPort,path:req.url,method:req.method,headers:{...req.headers,host:`127.0.0.1:${backendPort}`}},reply=>{
   requests.push({path:req.url,method:req.method,status:reply.statusCode});res.writeHead(reply.statusCode,reply.headers);reply.pipe(res);

@@ -1,6 +1,8 @@
 {
+  "runtime_error_capture": true,
+  "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-27T15:53:45.846Z",
+  "observed_at": "2026-10-27T17:08:36.869Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "b9d87c7d3b141a9ddcc6b04ad6eca9c59250e0128620494df7cf5827ebcc2aab",
     "apps/site/index.html": "2c4433488c2341ab761c27933f65393b740cbeff8555ebe749ea683fd0a56818",
@@ -9,7 +11,7 @@
     "apps/site/src/main.tsx": "0fd3f63bae18c176e1163579ca1d4e23e7f8153bb3b18e4ac0bb8ebcde2f26b0",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
-    "apps/site/tests/browser-text-spacing.mjs": "9fa24f483846f9e1f225971c418e4632964934e3be6653d46b516066d6e85801",
+    "apps/site/tests/browser-text-spacing.mjs": "de0e011d6cde9fab72660a9ea70fd43a7eb13ac044dce1da49d0d58bbe3a0aae",
     "apps/site/vite.config.ts": "69cc859d041285a09a9afbbe6e10172a6681783abfa6be921a0bc4709342d31a",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
     "apps/web/components/ExplainerSections.tsx": "79b9bcc46e9be369d551ad60918a3ffc5e2b24653550d6b57b398c024791739d",
@@ -24,7 +26,7 @@
     "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
-    "apps/web/components/ShopPanel.tsx": "03210b812653fc5b06c1c0ae056a0a1a17a97bc88704da0d798d25515b219779",
+    "apps/web/components/ShopPanel.tsx": "577710a7b395bc63dec079a83a03495964145430ca5a084af75c2337bcf0e3b1",
     "apps/web/components/SiteFooter.tsx": "7fc20d094fb4e4f4f4090ece24224a3599dbfd06d1a4e4fc34c1a25aa5932de8",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
     "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
@@ -63,7 +65,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 315,
+        "count": 319,
         "all_doubled": true
       },
       "overflow": false,

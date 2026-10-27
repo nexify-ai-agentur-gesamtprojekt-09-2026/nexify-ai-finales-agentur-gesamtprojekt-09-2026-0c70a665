@@ -1,5 +1,6 @@
 # Abhaengigkeiten dieses Repos.
 #
-# Keine Drittanbieter-Pakete: tools/ und tests/ nutzen die Node- bzw. Python-Standardbibliothek.
+# Standardwerkzeuge nutzen die Node-/Python-Standardbibliothek.
+# Der optionale Bildbatch und seine Tests benötigen requirements-image.txt (Pillow, exakt gepinnt).
 # Reproduzierbarkeit wird ueber die gepinnten CI-Images und die Prototyp-Artefakte gebunden
 # (siehe deps.lock und prototypen/MANIFEST.sha256).

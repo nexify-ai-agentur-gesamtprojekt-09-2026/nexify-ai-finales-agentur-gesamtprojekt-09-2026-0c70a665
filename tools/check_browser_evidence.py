@@ -219,6 +219,45 @@ def check_shop_evidence(root):
     return {"scope": "stored_local_fixture_browser_api_sqlite_evidence_only", "checks": len(SHOP_CHECKS)}
 
 
+
+CATALOG_EVIDENCE_PATH = "evidence/catalog-image-batch-2026-10-27/browser-catalog.json"
+CATALOG_SOURCE_PATHS = (
+    "apps/agent-gateway/catalog.py", "apps/agent-gateway/server.py",
+    "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
+    "apps/site/tests/browser-catalog.mjs", "apps/site/tests/fixtures/catalog-server.py",
+)
+CATALOG_CHECKS = frozenset((
+    "source-bound partial catalog displayed without commerce or image requests",
+    "DE NL FR labels retain explicit German supplier facts",
+    "local filtering and reload remain scoped to partial snapshot",
+    "valid visitor and csrf cannot create cart or checkout from read-only source",
+))
+
+
+def check_catalog_evidence(root):
+    report = json.loads(_read(root, CATALOG_EVIDENCE_PATH))
+    hashes = report.get('source_sha256', {})
+    if set(hashes) != set(CATALOG_SOURCE_PATHS):
+        raise EvidenceError('catalog_exact_source_path_set_required')
+    for relative in CATALOG_SOURCE_PATHS:
+        if hashlib.sha256(_read(root, relative)).hexdigest() != hashes[relative]:
+            raise EvidenceError('stale_catalog_source_sha256: ' + relative)
+    if not CATALOG_CHECKS.issubset(report.get('checks', [])):
+        raise EvidenceError('catalog_critical_browser_check_missing')
+    if (report.get('mode') != 'read_only' or report.get('partial') is not True
+            or report.get('external_requests') != [] or report.get('order_started') is not False
+            or report.get('payment_started') is not False or report.get('image_requests') != 0):
+        raise EvidenceError('catalog_read_only_partial_boundaries_required')
+    if (not isinstance(report.get('catalog_input_sha256'), str)
+            or not re.fullmatch('[a-f0-9]{64}', report['catalog_input_sha256'])):
+        raise EvidenceError('catalog_input_fingerprint_required')
+    observed = {(r.get('method'), r.get('path'), r.get('status')) for r in report.get('requests', [])}
+    if not {('GET','/api/shop/catalog',200),('POST','/api/shop/cart',403),
+            ('POST','/api/shop/cart/checkout-draft',403)}.issubset(observed):
+        raise EvidenceError('catalog_actual_read_and_write_denial_required')
+    return {'scope': 'stored_local_read_only_catalog_browser_evidence_only', 'checks': len(CATALOG_CHECKS)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -226,6 +265,7 @@ def main():
     try:
         result = check_evidence(args.root)
         result["shop"] = check_shop_evidence(args.root)
+        result["catalog"] = check_catalog_evidence(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

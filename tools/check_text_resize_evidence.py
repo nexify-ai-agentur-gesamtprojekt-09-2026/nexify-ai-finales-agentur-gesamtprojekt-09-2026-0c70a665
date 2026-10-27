@@ -48,6 +48,8 @@ def check_bound_resize(root):
     report = json.loads((root / 'evidence/one-app-2026-10-27/text-spacing.json').read_text())
     if report.get('completed') is not True or report.get('source_sha256') != source_hashes(root):
         raise ValueError('missing or stale resize source binding')
+    if report.get('runtime_error_capture') is not True or report.get('runtime_errors') != []:
+        raise ValueError('runtime error capture and clean resize execution required')
     return check_resize(report, paths)
 
 

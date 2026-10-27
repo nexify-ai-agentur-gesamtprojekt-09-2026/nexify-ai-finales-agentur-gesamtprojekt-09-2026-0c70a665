@@ -1,7 +1,9 @@
 // Fresh local critical browser evidence. Real deterministic SDK SSE, no provider.
 // Run under Node22 with PLAYWRIGHT_MODULE and PLAYWRIGHT_BROWSERS_PATH configured.
 import assert from 'node:assert/strict';
-import {readFile,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {readFile,writeFile,mkdtemp,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {createServer as httpServer} from 'node:http';
@@ -27,7 +29,8 @@ const backend=httpServer(async(req,res)=>{try{
  if(response.body)await pipeline(Readable.fromWeb(response.body),res);else res.end();
 }catch{res.writeHead(500);res.end();}});
 await new Promise(resolve=>backend.listen(0,'127.0.0.1',resolve));
-const server=await createServer({root,server:{port:0,strictPort:false,proxy:{'/api/agent-chat':{target:`http://127.0.0.1:${backend.address().port}`,changeOrigin:false}}},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"'}});
+const cache=await mkdtemp(join(tmpdir(),'nexify-critical-cache-'));
+const server=await createServer({root,cacheDir:cache,server:{port:0,strictPort:false,proxy:{'/api/agent-chat':{target:`http://127.0.0.1:${backend.address().port}`,changeOrigin:false}}},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"'}});
 await server.listen();origin=`http://127.0.0.1:${server.httpServer.address().port}`;
 const browser=await chromium.launch({headless:true});const checks=[],sdkChecks=[],gutters=[],presenters=[],external=[];
 async function context(viewport={width:1920,height:1080}){const c=await browser.newContext({viewport,reducedMotion:'reduce'});await c.route('**/*',r=>{const u=new URL(r.request().url());if(![origin,'null'].includes(u.origin)&&u.protocol!=='data:'){external.push(u.origin);return r.abort();}if(u.pathname==='/api/session')return r.fulfill({status:404,json:{error:'synthetic_no_visitor_session'}});if(u.pathname==='/api/agent-runtime-status')return r.fulfill({status:503,json:{error:'synthetic_runtime_not_connected'}});if(u.pathname.startsWith('/api/')&&u.pathname!=='/api/agent-chat')return r.fulfill({status:403,json:{error:'not_authorized_in_test'}});return r.continue();});return c;}
@@ -81,4 +84,4 @@ try{
  const now=new Date().toISOString();const report={recorded_at:now,checks,public_routes:pages.map(p=>p.path),passed:true,scope:'Fresh local critical subset only; actual browser and deterministic Web handler SSE with simulated session404; no provider, production or full accessibility acceptance. Public route list is inventory, not an assertion every route was revisited here.',source_sha256:Object.fromEntries(sourcePaths.map(p=>[p,before[p]])),auxiliary_source_sha256:Object.fromEntries(auxiliaryPaths.map(p=>[p,before[p]])),sdk_source_sha256:Object.fromEntries(sdkPaths.map(p=>[p,before[p]])),targeted_supplement_gutter_followup:gutters,sdk_browser_observations:{recorded_at:now,checks:sdkChecks,passed:true,scope:'Real AI SDK streaming over isolated loopback bridge to exact api/agent-chat.ts; tools/agent-preview.mjs source-bound but not launched; no external provider'},presenter_measurements:presenters,observed_handler_requests:observedRequests,external_requests:external,acceptance:'local_behavior_verified_final_user_and_production_acceptance_open',reproduction:'Node22 apps/site/tests/browser-critical.mjs with existing Playwright module/browser paths; requires fresh standalone build'};
  await writeFile(new URL('evidence/one-app-2026-10-27/critical-browser-fresh.json',repo),JSON.stringify(report,null,2)+'\n');
  await writeFile(new URL('docs/design/detail-browser-evidence.json',repo),JSON.stringify(report,null,2)+'\n');
-}finally{await browser.close();await server.close();await new Promise(resolve=>backend.close(resolve));}
+}finally{await browser.close();await server.close();await new Promise(resolve=>backend.close(resolve));await rm(cache,{recursive:true,force:true});}

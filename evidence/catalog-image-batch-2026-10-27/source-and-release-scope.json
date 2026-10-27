@@ -1,0 +1,80 @@
+{
+  "source_url": "https://teileklar.shop/api/shop/products",
+  "acquisition": "direct bounded public credential-free GET via implemented tools/catalog_snapshot.py",
+  "actual_snapshot": {
+    "bytes": 1600,
+    "freshness_status": "not_verified",
+    "network_attempts": 1,
+    "observed_at": "2026-10-27T16:49:21.910036+00:00",
+    "orders_started": false,
+    "pagination_status": "partial_unverified_continuation",
+    "payments_started": false,
+    "raw_file": "raw-c193606c784b237db3c162342b0b4d97345d368e312f6842f68124e2f5f57ff6.json",
+    "raw_sha256": "c193606c784b237db3c162342b0b4d97345d368e312f6842f68124e2f5f57ff6",
+    "reported_total": 3720,
+    "requested_limit": 2,
+    "returned_rows": 2,
+    "schema_version": 1,
+    "source_url": "https://teileklar.shop/api/shop/products",
+    "supplier_updated_at": null
+  },
+  "whole_feed_read": false,
+  "page_continuation_verified": false,
+  "page_ignored_observation": "Parent independent read: page1/page2 same two IDs, not reproduced here as a full paging protocol",
+  "source_role": "runtime_observation_not_supplier_approval",
+  "raw_product_bytes_in_repository": false,
+  "raw_images_in_repository": false,
+  "own_remote_actions": {
+    "pushed_exact_v11": "8975ba4a07a23c5cc961f735efc3111883b8ddad",
+    "branch": "integration/reviewed-v11-followup-20261027-8975ba4",
+    "draft_pr": "blocked_by_automatic_approval_review_no_pr_created",
+    "later_push_merge_deploy": false
+  },
+  "preview_observation": {
+    "acquisition": "parent_verified_excerpt",
+    "reported_observed_at": "2026-10-27T16:46:00Z",
+    "deployment": "dpl_DoF7daNBgu5JdHbWRndgJzSRTyko",
+    "head": "8975ba4a07a23c5cc961f735efc3111883b8ddad",
+    "state": "BLOCKED",
+    "target": null,
+    "cause": "Git author Vercel project access, no code-build failure inferred"
+  },
+  "pipeline_integration_status": "executed_local_read_only_not_live_app_deployed",
+  "source_labels_do_not_prove": [
+    "BigBuy API account authorization",
+    "supplier licensing",
+    "product-image association",
+    "current stock",
+    "tax/gross/net/shipping/retail approval",
+    "fitment",
+    "complete regular sync"
+  ],
+  "local_runtime": {
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "pillow_license": "MIT-CMU",
+    "model_calls": 0,
+    "paid_calls": 0
+  },
+  "final_read_only_remote_check": {
+    "main": "219f24479bd1b9cbdcf7f0b43e1cec18eecd95d5",
+    "main_tree": "7436e30c6f7915ff666e95ec116e033bfe5f5cb5",
+    "own_remote_branch_head": "8975ba4a07a23c5cc961f735efc3111883b8ddad",
+    "local_new_delta_pushed": false
+  },
+  "final_domain_observation": {
+    "acquisition": "parent_verified_excerpt",
+    "url": "https://nexifyai.cloud/",
+    "reported_http_status": 404,
+    "reported_observed_at": [
+      "2026-10-27T16:32:00Z",
+      "2026-10-27T17:10:00Z"
+    ],
+    "source_related_external_repo": "NeXify-AI-by-NeXify-Chat-it-Automat-it/nexifyai-platform",
+    "source_run": 40541821424,
+    "source_job": 122321923031,
+    "backend_health_in_that_job": "skipped_not_verified",
+    "acceptance": "not_accepted",
+    "scope": "Separate final domain; canonical Vercel READY does not establish this domain or backend health. No DNS/hosting action."
+  }
+}

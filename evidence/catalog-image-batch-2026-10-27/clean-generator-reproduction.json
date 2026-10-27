@@ -1,0 +1,6 @@
+{
+  "base": "8975ba4",
+  "clean_missing_snapshot_reproduced": true,
+  "existing_generator_passed": true,
+  "post_generation_resize_binding_passed": true
+}

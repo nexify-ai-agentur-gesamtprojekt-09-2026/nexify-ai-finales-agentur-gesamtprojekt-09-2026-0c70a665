@@ -1,3 +1,46 @@
+# Vorhandener Katalog und lokaler Produktbild-Batch
+
+Current State: v11/8975ba4 unverändert auf eigenemRemotezweig gesichert.
+Draft-PR-Anlegen wurde automatisch abgelehnt; Root hat die direkteFreigabe
+angefragt. Kein Retry oder alternativerVeröffentlichungsweg. OrdinaryPush-CI
+40542261401: React/Next/OpenAPI/PostgreSQL grün, Repository fehlgeschlagen:
+ignored.generated/public-site.json wurde nicht erzeugt. Fehler im sauberen
+8975-Auszug reproduziert, bestehenderGenerator davor macht denselben gebundenen
+Resizecheck grün. Aktueller CI-Workflow lokal entsprechend korrigiert und
+Pillow12.3.0 für Bildtests per offiziellercp312LinuxWheel-SHA gepinnt.
+V11Preview BLOCKED lautParent16:46Z; Produktionsstand219f244 bleibt getrennt.
+
+In Progress: vorhandeneAPI meldet3720; 20erStichprobe und tatsächlicher2erAbruf
+sind keineVollabnahme. NativeReadOnly-Snapshotanbindung in vorhandenerHeadless-
+Shell: Quellhash/Abrufzeit, strikteEuro-Haupteinheitenprüfung, SKU/EAN, stock0,
+DE-QuellenkennzeichnungauchinNL/FR, immerpartiellePagination. Es gibt keine
+aktuelleSupplier-Freshness-/Kauf-/Passungsfreigabe.13Adapter/HTTPtests grün,
+4synthetische+4tatsächliche2SKU-Browser/HTTP/Datei-Fälle amfinalenCode bestanden.
+Authentifizierte403-Negative haltenCart/Order/Paymentauchdirektserverseitigzu.
+
+ParallelerB-Batch liefert tatsächlicheRGBA-/Weiß-/CIfarb-Derivate für vorhandene
+belegteAlphaoriginale;30isolierteTests inklusiveCrash/Restart/CAS/Link-/Replay-
+Metadatennegatives grün. KeineSegmentierung. Zwei echte1200x1200RGBOriginale
+wurdenprivatbytegleichbehalten und mangelsZuordnung/Lizenz/Farbraum quarantiniert;
+Replaygleich, keine echtenDerivateoderBildanzeige. SolbefundeHardlinkclobber,
+rehashteEffektfreigabe undASnapshot-/Parentlink-/EOFDeadline geschlossen.
+Keine Rohbilder/Katalogexporte imRepo; technischeMetadaten getrennt vonTests.
+
+Nachweis:431Python-/31Node-Tests,check/test/e2e/arch/clean,TS/Produktions-/
+Standalonebuild grün.13Cart-/4synthetische-/4tatsächlicheKatalogfälle und
+108frischeResizechecks samtRuntimefehlererfassung bestanden; injizierter
+Runtimefehler wurdemitExit1abgewiesen. GetrennteViteCaches jeBrowserlauf.
+Sol45Fokustests/A+BFindingsnachprüfung grün; finalerHashreadback folgt.
+FinaleDomainnexifyai.cloud lautParent16:32/17:10ZHTTP404, nichtabgenommen;
+keinDNS-/Hostingwechsel. AnderesRepo/übersprungeneBackendprüfung istseparat.
+
+Next Steps: finalerSolCommit-/Paketreadback; Paket mitgleicherLibraryidentitätversionsgesichert ersetzen. Weitere
+Remoteaktionen wartenaufdiekonkreteFreigabe. Noch benötigt: Fortsetzungs-/Sync-
+undSupplier-/Preis-/Passungsbelege, Bildzuordnung/Rechte, verifiziertesModel-/
+Gewichts-/Konvertierungs-/Lizenz-/Hostpaket fürRGBFreistellung, Audiofreigabe.
+DieCLI-Stufen sind ausführbar, aberkein neuerDaemon/Controllerjob automatisch
+registriert; keine produktiveKunden-/Provider-/Gesamtabnahme daraus abgeleitet.
+
 # PR39: strikter Medien-Skriptvertrag
 
 Current State: PaketVersion10/26f9128 in derselbenLibrary gesichert; vorherige
@@ -772,3 +815,18 @@ Vier zusätzliche Dokument-/Voraussetzungsfehler lokal korrigiert; keine
 Remote-Threadauflösung. Von18 Masterfällen sind1 lokal begrenzt geprüft,
 5 mit lokalen Prüf-/Scope-Lücken und12 extern blockiert. Kein Gesamtfall ist
 als produktiv abgenommen markiert. Bestehende Queue und Freigabegates unverändert.
+
+## 2026-10-27 — fester lokaler BiRefNet-ONNX-Pfad nach v12
+
+Auf Basis `da25e75` ist ein fester General-BiRefNet-Adapter mit tatsächlichem
+CPU-Sessionaufruf, Tensor-/Maskenlogik und Quellen-/Lizenz-/Hash-/Shapeprüfung
+implementiert und an den vorhandenen Batchworker gebunden. Batch v2 erhält
+Originale, Quarantäne, Replay und v1-Rollback. Keine zweite Plattform.
+Die Tests verwenden kontrollierte Graph-/Sessiondoubles, keine echte Inferenz.
+Gepinnte offizielle Quellen und präzise Export-/Runtime-/Ressourcengrenzen:
+`config/integrations/birefnet-onnx.json`, `docs/contracts/birefnet-onnx.md`.
+Native Runtime und geprüfter General-ONNX-Export fehlen; kein Download, keine
+Installation, keine echten Produktderivate oder Veröffentlichung ausgeführt.
+Der tatsächliche Kataloghandler wurde in den ausdrücklich geprüften lokalen
+Quellen nicht gefunden; Fortsetzung bleibt unbestätigt. Evidenz und Restschritte:
+`evidence/birefnet-onnx-2026-10-27`. Gesamtshop/Livebetrieb bleiben offen.

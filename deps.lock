@@ -4,3 +4,4 @@ ci-image-python=python:3.12-alpine
 ci-image-alpine=alpine:3.20
 prototypen-manifest=prototypen/MANIFEST.sha256 (sha256sum -c)
 python-runtime=3.12
+optional-local-image-runtime=Pillow==12.3.0 (requirements-image.txt)
