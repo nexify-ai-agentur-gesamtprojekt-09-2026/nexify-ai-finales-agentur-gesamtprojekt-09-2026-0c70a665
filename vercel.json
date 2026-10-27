@@ -33,7 +33,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)).*)",
+      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)|robots\\.txt$|sitemap\\.xml$).*)",
       "destination": "/index.html"
     }
   ],
