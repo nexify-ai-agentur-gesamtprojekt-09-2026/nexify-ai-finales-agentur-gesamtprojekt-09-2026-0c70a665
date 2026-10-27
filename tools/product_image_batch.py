@@ -1,7 +1,7 @@
-"""Offline, bounded product-image artifacts. No fetch, model, queue or publication.
+"""Offline, bounded product-image artifacts. No fetch, remote model, queue or publication.
 
 Pillow is optional for other repository tools, mandatory for this executable.
-Only approved existing alpha images can produce derivatives in this version.
+Approved alpha images bypass inference; approved opaque images require a fixed local adapter.
 """
 import argparse
 from contextlib import contextmanager
@@ -18,10 +18,15 @@ import time
 import warnings
 import zlib
 
-VERSION = 'product-image-batch/1'
+VERSION = 'product-image-batch/2'
 HEX = re.compile(r'^[0-9a-f]{64}$')
 ID = re.compile(r'^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$')
 COLOR = re.compile(r'^#[0-9a-f]{6}$')
+SEGMENTER_ID = 'birefnet-default-onnx-1024-logits-v1'
+SEGMENTER_FIELDS = {'adapter', 'artifact_root', 'manifest_file', 'manifest_sha256',
+                    'expected_model_sha256', 'max_model_bytes', 'max_session_working_bytes',
+                    'max_tensor_working_bytes', 'max_graph_nodes', 'max_input_pixels',
+                    'max_inference_seconds'}
 MANUAL_REVIEWS = [
     'product_identity_color_label_and_complete_contents',
     'alpha_edges_shadows_holes_and_background_contamination',
@@ -80,6 +85,72 @@ def _pillow():
     return Image, ImageOps, __version__
 
 
+def _segmenter_api():
+    try:
+        if __package__:
+            from . import birefnet_onnx
+        else:
+            import birefnet_onnx
+    except ImportError as exc:
+        raise ImageBatchRejected('segmentation_adapter_unavailable') from exc
+    return birefnet_onnx
+
+
+def _declared_segmenter_binding(config):
+    if config == 'none_verified':
+        return {'adapter': 'none_verified'}
+    api = _segmenter_api()
+    try:
+        return api.binding(config)
+    except api.SegmentationRejected as exc:
+        raise ImageBatchRejected(str(exc)) from exc
+
+
+def _build_segmenter(config):
+    api = _segmenter_api()
+    try:
+        return api.BiRefNetOnnx(config)
+    except api.SegmentationRejected as exc:
+        raise ImageBatchRejected(str(exc)) from exc
+
+
+class _LazySegmenter:
+    """One fixed session per batch, constructed only for approved opaque input."""
+    def __init__(self, config):
+        self.config = config
+        self.instance = None
+        self.constructor_failure = None
+
+    @property
+    def local_model_calls(self):
+        if self.instance is None:
+            return 0
+        value = self.instance.local_model_calls
+        require(type(value) is int and value >= 0, 'segmenter_call_counter_invalid')
+        return value
+
+    def apply(self, rgba):
+        if self.constructor_failure is not None:
+            raise ImageBatchRejected(self.constructor_failure)
+        if self.instance is None:
+            try:
+                self.instance = _build_segmenter(self.config)
+            except ImageBatchRejected as exc:
+                self.constructor_failure = str(exc)
+                raise
+        api = _segmenter_api()
+        try:
+            return self.instance.apply(rgba)
+        except api.SegmentationRejected as exc:
+            raise ImageBatchRejected(str(exc)) from exc
+
+
+def _engine(policy, pillow_version):
+    return {'version': VERSION, 'pillow': pillow_version, 'zlib': zlib.ZLIB_RUNTIME_VERSION,
+            'python': '.'.join(map(str, sys.version_info[:3])),
+            'segmenter': _declared_segmenter_binding(policy['segmenter'])}
+
+
 def validate_policy(policy):
     require(isinstance(policy, dict) and set(policy) == set(LIMITS) | {
         'tenant', 'project', 'ci_colors', 'allowed_ci_colors', 'external_budget_minor',
@@ -91,7 +162,17 @@ def validate_policy(policy):
     require(type(policy['external_budget_minor']) is int and policy['external_budget_minor'] == 0,
             'offline_zero_external_budget_required')
     # No arbitrary command, module, model path or URL may become an adapter.
-    require(policy['segmenter'] == 'none_verified', 'no_verified_segmentation_adapter')
+    segmenter = policy['segmenter']
+    if isinstance(segmenter, dict):
+        require(set(segmenter) == SEGMENTER_FIELDS and segmenter.get('adapter') == SEGMENTER_ID,
+                'no_verified_segmentation_adapter')
+        api = _segmenter_api()
+        try:
+            segmenter = api.validate_config(segmenter)
+        except api.SegmentationRejected as exc:
+            raise ImageBatchRejected(str(exc)) from exc
+    else:
+        require(segmenter == 'none_verified', 'no_verified_segmentation_adapter')
     for name in ('ci_colors', 'allowed_ci_colors'):
         values = policy[name]
         require(isinstance(values, list) and 1 <= len(values) <= 4
@@ -99,7 +180,7 @@ def validate_policy(policy):
                 and len(set(values)) == len(values), 'explicit_ci_color_set_required')
     require(set(policy['ci_colors']) <= set(policy['allowed_ci_colors']), 'ci_color_not_allowed')
     # Color order has no visual meaning, but binding is deterministic.
-    return {**policy, 'ci_colors': sorted(policy['ci_colors']),
+    return {**policy, 'segmenter': segmenter, 'ci_colors': sorted(policy['ci_colors']),
             'allowed_ci_colors': sorted(policy['allowed_ci_colors'])}
 
 
@@ -129,7 +210,7 @@ def _binding_issues(item, original_sha256):
     return reasons
 
 
-def _decode(original, policy):
+def _decode(original, policy, *, allow_opaque=False):
     Image, ImageOps, _ = _pillow()
     try:
         with warnings.catch_warnings():
@@ -158,7 +239,7 @@ def _decode(original, policy):
                 alpha = rgba.getchannel('A')
                 low, high = alpha.getextrema()
                 require(high > 0, 'empty_alpha_foreground')
-                require(low < 255, 'opaque_source_requires_verified_segmentation_adapter')
+                require(allow_opaque or low < 255, 'opaque_source_requires_verified_segmentation_adapter')
                 require(alpha.getbbox() is not None, 'empty_alpha_foreground')
                 metadata['alpha_extrema'] = [low, high]
                 metadata['foreground_bbox'] = list(alpha.getbbox())
@@ -189,7 +270,53 @@ def _png(image, limit):
     return raw
 
 
-def _render(item, policy):
+def _validate_segmenter_metadata(metadata, config, source, output, calls):
+    fields = {'adapter', 'model_sha256', 'manifest_sha256', 'runtime_contract',
+              'input_shape', 'output_shape', 'input_name', 'output_name', 'mask_sha256',
+              'input_rgb_sha256', 'input_alpha_sha256', 'output_alpha_sha256', 'local_model_calls'}
+    require(isinstance(metadata, dict) and set(metadata) == fields, 'segmenter_metadata_invalid')
+    require(metadata['adapter'] == 'birefnet-default-onnx-1024-logits-v1'
+            and metadata['adapter'] == config['adapter']
+            and metadata['model_sha256'] == config['expected_model_sha256']
+            and metadata['manifest_sha256'] == config['manifest_sha256']
+            and metadata['runtime_contract'] == {'numpy': '2.3.5', 'onnx': '1.23.2', 'onnxruntime': '1.31.1'}
+            and isinstance(metadata['input_shape'], list)
+            and all(type(v) is int for v in metadata['input_shape'])
+            and isinstance(metadata['output_shape'], list)
+            and all(type(v) is int for v in metadata['output_shape'])
+            and metadata['input_shape'] == [1, 3, 1024, 1024]
+            and metadata['output_shape'] == [1, 1, 1024, 1024]
+            and metadata['input_name'] == 'input_image' and metadata['output_name'] == 'mask_logits',
+            'segmenter_metadata_binding_mismatch')
+    require(type(metadata['local_model_calls']) is int and metadata['local_model_calls'] == calls == 1,
+            'segmenter_call_counter_invalid')
+    require(all(isinstance(metadata[k], str) and HEX.fullmatch(metadata[k]) for k in (
+        'mask_sha256', 'input_rgb_sha256', 'input_alpha_sha256', 'output_alpha_sha256')),
+        'segmenter_metadata_hash_invalid')
+    # This worker only infers fully opaque sources: multiplication by255 leaves mask bytes unchanged.
+    require(metadata['mask_sha256'] == metadata['output_alpha_sha256'], 'segmenter_mask_binding_mismatch')
+    if source is not None:
+        require(metadata['input_rgb_sha256'] == sha(source.convert('RGB').tobytes())
+                and metadata['input_alpha_sha256'] == sha(source.getchannel('A').tobytes()),
+                'segmenter_pixel_binding_mismatch')
+    if output is not None:
+        require(metadata['output_alpha_sha256'] == sha(output.getchannel('A').tobytes()),
+                'segmenter_pixel_binding_mismatch')
+
+
+def _validate_segmented_pixels(source, output):
+    Image, _, _ = _pillow()
+    from PIL import ImageChops
+    require(isinstance(output, Image.Image) and output.mode == 'RGBA'
+            and output.size == source.size, 'segmenter_output_shape_invalid')
+    require(output.convert('RGB').tobytes() == source.convert('RGB').tobytes(), 'segmenter_rgb_changed')
+    require(ImageChops.subtract(output.getchannel('A'), source.getchannel('A')).getbbox() is None,
+            'segmenter_alpha_increased')
+    low, high = output.getchannel('A').getextrema()
+    require(high > 0 and low < 255, 'segmenter_empty_or_opaque_output')
+
+
+def _render(item, policy, segmenter=None):
     original = item['original']
     artifacts = {'original.bin': original}
     reasons = _binding_issues(item, sha(original))
@@ -197,11 +324,36 @@ def _render(item, policy):
     if isinstance(approval, dict):
         if approval.get('tenant') != policy['tenant'] or approval.get('project') != policy['project']:
             reasons.append('approval_scope_mismatch')
-    metadata = {}
+    metadata, local_calls, segmented = {}, 0, False
     if not reasons:
         try:
-            rgba, metadata = _decode(original, policy)
+            rgba, metadata = _decode(original, policy, allow_opaque=True)
+            source = rgba.copy()
+            metadata['input_rgb_sha256'] = sha(source.convert('RGB').tobytes())
+            metadata['input_alpha_sha256'] = sha(source.getchannel('A').tobytes())
+            if rgba.getchannel('A').getextrema()[0] == 255:
+                require(isinstance(policy['segmenter'], dict) and segmenter is not None,
+                        'opaque_source_requires_verified_segmentation_adapter')
+                require(rgba.width * rgba.height <= policy['segmenter']['max_input_pixels'],
+                        'segmenter_input_pixel_limit')
+                before = segmenter.local_model_calls
+                try:
+                    rgba, segmentation_metadata = segmenter.apply(rgba)
+                except ImageBatchRejected as exc:
+                    local_calls = segmenter.local_model_calls - before
+                    require(type(local_calls) is int and local_calls in (0, 1), 'segmenter_call_counter_invalid')
+                    metadata['segmenter'] = {'status': 'failed', 'reason': str(exc), 'local_model_calls': local_calls}
+                    raise
+                local_calls = segmenter.local_model_calls - before
+                require(type(local_calls) is int and local_calls == 1, 'segmenter_call_counter_invalid')
+                _validate_segmented_pixels(source, rgba)
+                _validate_segmenter_metadata(segmentation_metadata, policy['segmenter'], source, rgba, local_calls)
+                metadata['segmenter'] = segmentation_metadata
+                segmented = True
             Image, _, _ = _pillow()
+            metadata['output_alpha_sha256'] = sha(rgba.getchannel('A').tobytes())
+            metadata['alpha_extrema'] = list(rgba.getchannel('A').getextrema())
+            metadata['foreground_bbox'] = list(rgba.getchannel('A').getbbox())
             limit = policy['max_artifact_bytes']
             artifacts['rgba.png'] = _png(rgba, limit)
             for color in ['#ffffff', *policy['ci_colors']]:
@@ -209,19 +361,23 @@ def _render(item, policy):
                 background = Image.new('RGBA', rgba.size, color)
                 flat = Image.alpha_composite(background, rgba).convert('RGB')
                 artifacts[name] = _png(flat, limit)
-            # Read-back proves encodability and exact foreground samples for alpha derivative.
             with Image.open(io.BytesIO(artifacts['rgba.png'])) as check:
                 require(check.mode == 'RGBA' and check.size == rgba.size
                         and check.tobytes() == rgba.tobytes(), 'rgba_readback_mismatch')
             metadata['rgba_pixels_sha256'] = sha(rgba.tobytes())
         except ImageBatchRejected as exc:
+            if str(exc) == 'segmenter_call_counter_invalid':
+                raise
             reasons.append(str(exc))
             artifacts = {'original.bin': original}
+            if local_calls and not segmented:
+                metadata['segmenter'] = {'status': 'failed', 'reason': str(exc), 'local_model_calls': local_calls}
     return artifacts, {'id': item['id'], 'binding': approval,
                        'status': 'quarantined' if reasons else 'review_required',
                        'blocking_reasons': sorted(set(reasons)), 'qa': metadata,
-                       'segmentation_performed': False, 'generative_changes': False,
-                       'publishable': False, 'manual_review_required': MANUAL_REVIEWS.copy()}
+                       'segmentation_performed': segmented, 'local_model_calls': local_calls,
+                       'generative_changes': False, 'publishable': False,
+                       'manual_review_required': MANUAL_REVIEWS.copy()}
 
 
 def _safe_directory(path, *, create=False):
@@ -323,14 +479,29 @@ def _verify_stage(root, key, policy):
     record = _json(raw)
     require(isinstance(record, dict) and record.get('stage_key') == key
             and raw == canonical(record), 'stage_manifest_invalid')
+    legacy = record.get('schema_version') == 1
     require(set(record) == {'schema_version', 'stage_key', 'input', 'policy', 'engine',
             'id', 'binding', 'status', 'blocking_reasons', 'qa', 'segmentation_performed',
             'generative_changes', 'publishable', 'manual_review_required', 'artifacts'}
-            and type(record['schema_version']) is int and record['schema_version'] == 1,
+            | (set() if legacy else {'local_model_calls'})
+            and type(record['schema_version']) is int and record['schema_version'] in (1, 2),
             'stage_schema_invalid')
-    require(record['publishable'] is False and record['segmentation_performed'] is False
+    require(record['publishable'] is False and type(record['segmentation_performed']) is bool
+            and (not legacy or record['segmentation_performed'] is False)
             and record['generative_changes'] is False
             and record['manual_review_required'] == MANUAL_REVIEWS, 'stage_effect_flags_invalid')
+    engine = record['engine']
+    base_engine = {'version', 'pillow', 'zlib', 'python'}
+    require(isinstance(engine, dict) and set(engine) == base_engine | (set() if legacy else {'segmenter'})
+            and all(isinstance(engine[k], str) and 0 < len(engine[k]) <= 128 for k in base_engine),
+            'stage_engine_invalid')
+    if legacy:
+        require(engine['version'] == 'product-image-batch/1' and policy['segmenter'] == 'none_verified',
+                'legacy_stage_binding_invalid')
+    else:
+        require(engine['segmenter'] == _declared_segmenter_binding(policy['segmenter']), 'stage_engine_binding_mismatch')
+        require(type(record['local_model_calls']) is int and record['local_model_calls'] in (0, 1),
+                'stage_call_counter_invalid')
     source = record['input']
     require(isinstance(source, dict) and set(source) == {'id', 'original_sha256', 'approval'}
             and isinstance(source['id'], str) and ID.fullmatch(source['id'])
@@ -342,6 +513,19 @@ def _verify_stage(root, key, policy):
             and all(isinstance(v, str) and 0 < len(v) <= 128 for v in reasons)
             and reasons == sorted(set(reasons)), 'stage_reasons_invalid')
     require(isinstance(record['qa'], dict), 'stage_qa_invalid')
+    segment = record['qa'].get('segmenter')
+    calls = record.get('local_model_calls', 0)
+    if record['segmentation_performed']:
+        require(not legacy and isinstance(policy['segmenter'], dict) and calls == 1
+                and isinstance(segment, dict) and 'status' not in segment, 'stage_segmentation_invalid')
+    elif segment is not None:
+        require(not legacy and record['status'] == 'quarantined' and isinstance(policy['segmenter'], dict)
+                and isinstance(segment, dict) and set(segment) == {'status', 'reason', 'local_model_calls'}
+                and segment['status'] == 'failed' and segment['reason'] in reasons
+                and type(segment['local_model_calls']) is int and segment['local_model_calls'] == calls,
+                'stage_failed_segmentation_invalid')
+    else:
+        require(calls == 0, 'stage_call_counter_invalid')
     artifacts = record.get('artifacts')
     require(record.get('stage_key') == digest({'input': record.get('input'),
             'policy': record.get('policy'), 'engine': record.get('engine')}), 'stage_key_mismatch')
@@ -360,6 +544,8 @@ def _verify_stage(root, key, policy):
         require(set(qa) == {'input_format', 'input_mode', 'input_size', 'output_size',
                 'exif_orientation_applied', 'derived_metadata', 'pixel_transform',
                 'alpha_extrema', 'foreground_bbox', 'rgba_pixels_sha256'}
+                | (set() if legacy else {'input_rgb_sha256', 'input_alpha_sha256', 'output_alpha_sha256'})
+                | ({'segmenter'} if record['segmentation_performed'] else set())
                 and qa['derived_metadata'] == 'exif_and_icc_removed_declared_srgb'
                 and qa['pixel_transform'] == 'exif_orientation_only_no_resize_or_crop'
                 and isinstance(qa['rgba_pixels_sha256'], str)
@@ -377,7 +563,60 @@ def _verify_stage(root, key, policy):
                 and isinstance(facts['sha256'], str) and HEX.fullmatch(facts['sha256']), 'artifact_record_invalid')
         raw = _read(directory / name, policy['max_artifact_bytes'])
         require(sha(raw) == facts['sha256'] and len(raw) == facts['bytes'], 'artifact_hash_mismatch')
+    if record['segmentation_performed'] and record['status'] == 'quarantined':
+        rgba_source, _ = _decode(_read(directory / 'original.bin', policy['max_input_bytes']),
+                                 policy, allow_opaque=True)
+        _validate_segmenter_metadata(segment, policy['segmenter'], rgba_source, None, calls)
+    if record['status'] == 'review_required':
+        _verify_pixel_readback(directory, record, policy, legacy=legacy)
     return record
+
+
+def _verify_pixel_readback(directory, record, policy, *, legacy):
+    """Replay never infers. Decode only verifies source RGB/alpha and flat artifacts."""
+    original = _read(directory / 'original.bin', policy['max_input_bytes'])
+    segmented = record['segmentation_performed']
+    source, source_metadata = _decode(original, policy, allow_opaque=segmented)
+    Image, _, _ = _pillow()
+    try:
+        with Image.open(io.BytesIO(_read(directory / 'rgba.png', policy['max_artifact_bytes']))) as output:
+            require(output.format == 'PNG' and output.mode == 'RGBA' and output.size == source.size,
+                    'rgba_readback_mismatch')
+            output.load()
+            rgba = output.copy()
+    except ImageBatchRejected:
+        raise
+    except Exception as exc:
+        raise ImageBatchRejected('rgba_readback_mismatch') from exc
+    qa = record['qa']
+    require(qa['rgba_pixels_sha256'] == sha(rgba.tobytes()), 'rgba_pixel_hash_mismatch')
+    require(all(qa.get(k) == source_metadata[k] for k in (
+                'input_format', 'input_mode', 'input_size', 'output_size', 'exif_orientation_applied',
+                'derived_metadata', 'pixel_transform'))
+            and qa['output_size'] == list(rgba.size)
+            and qa['alpha_extrema'] == list(rgba.getchannel('A').getextrema())
+            and qa['foreground_bbox'] == list(rgba.getchannel('A').getbbox()), 'stage_qa_pixel_mismatch')
+    if segmented:
+        require(source.getchannel('A').getextrema() == (255, 255), 'stage_unnecessary_segmentation')
+        _validate_segmented_pixels(source, rgba)
+        _validate_segmenter_metadata(qa['segmenter'], policy['segmenter'], source, rgba, record['local_model_calls'])
+    else:
+        require(rgba.tobytes() == source.tobytes(), 'original_rgba_changed')
+    if not legacy:
+        require(qa['input_rgb_sha256'] == sha(source.convert('RGB').tobytes())
+                and qa['input_alpha_sha256'] == sha(source.getchannel('A').tobytes())
+                and qa['output_alpha_sha256'] == sha(rgba.getchannel('A').tobytes()), 'stage_source_pixel_binding_mismatch')
+    for color in ['#ffffff', *policy['ci_colors']]:
+        name = 'white.png' if color == '#ffffff' else 'ci-' + color[1:] + '.png'
+        expected = Image.alpha_composite(Image.new('RGBA', rgba.size, color), rgba).convert('RGB')
+        try:
+            with Image.open(io.BytesIO(_read(directory / name, policy['max_artifact_bytes']))) as flat:
+                require(flat.format == 'PNG' and flat.mode == 'RGB' and flat.size == rgba.size
+                        and flat.tobytes() == expected.tobytes(), 'background_pixel_readback_mismatch')
+        except ImageBatchRejected:
+            raise
+        except Exception as exc:
+            raise ImageBatchRejected('background_pixel_readback_mismatch') from exc
 
 
 def _current(root):
@@ -409,28 +648,33 @@ def _verify_result(root, key, policy):
     require(set(result) == {'schema_version', 'batch_key', 'policy', 'engine', 'stages',
             'status', 'publishable', 'network_calls', 'model_calls', 'external_spend_minor',
             'artifact_bytes', 'successful_alpha_pixels', 'header_pixels'}
-            and type(result['schema_version']) is int and result['schema_version'] == 1,
+            and type(result['schema_version']) is int and result['schema_version'] in (1, 2),
             'result_schema_invalid')
     require(result['publishable'] is False
             and all(type(result[k]) is int and result[k] == 0
-                    for k in ('network_calls', 'model_calls', 'external_spend_minor')),
+                    for k in ('network_calls', 'external_spend_minor')),
             'result_effect_flags_invalid')
     require(isinstance(result['stages'], list) and 0 < len(result['stages']) <= policy['max_images'],
             'result_stage_set_invalid')
-    inputs, artifact_bytes, alpha_pixels = [], 0, 0
+    inputs, artifact_bytes, alpha_pixels, calls = [], 0, 0, 0
     for entry in result['stages']:
         require(isinstance(entry, dict) and set(entry) == {'id', 'stage_key', 'manifest_sha256', 'status'},
                 'result_entry_invalid')
         record = _verify_stage(root, entry['stage_key'], policy)
         require(digest(record) == entry['manifest_sha256'], 'stage_manifest_hash_mismatch')
-        require(record['id'] == entry['id'] and record['status'] == entry['status']
+        require(record['schema_version'] == result['schema_version']
+                and record['id'] == entry['id'] and record['status'] == entry['status']
                 and record['engine'] == result['engine'], 'result_stage_binding_invalid')
+        calls += record.get('local_model_calls', 0)
         inputs.append(record['input'])
         artifact_bytes += sum(v['bytes'] for v in record['artifacts'].values())
         size = record.get('qa', {}).get('input_size', [0, 0])
         require(isinstance(size, list) and len(size) == 2
                 and all(type(v) is int and v >= 0 for v in size), 'stage_qa_size_invalid')
-        alpha_pixels += size[0] * size[1]
+        if result['schema_version'] == 1 or record['status'] == 'review_required':
+            alpha_pixels += size[0] * size[1]
+    require(type(result['model_calls']) is int and result['model_calls'] == calls
+            and (result['schema_version'] != 1 or calls == 0), 'result_model_call_count_invalid')
     require(inputs == sorted(inputs, key=lambda v: v['id'])
             and len({v['id'] for v in inputs}) == len(inputs)
             and digest({'inputs': inputs, 'policy': policy, 'engine': result['engine']}) == key,
@@ -495,8 +739,7 @@ def run_batch(items, *, policy, store, expected_current):
     require(total_input <= policy['max_total_input_bytes'], 'total_input_byte_limit')
     require(header_pixels <= policy['max_total_pixels'], 'total_pixel_limit')
     require(largest_pixels * 128 + total_input <= policy['max_working_bytes'], 'working_memory_estimate_limit')
-    engine = {'version': VERSION, 'pillow': pillow_version, 'zlib': zlib.ZLIB_RUNTIME_VERSION,
-              'python': '.'.join(map(str, sys.version_info[:3]))}
+    engine = _engine(policy, pillow_version)
     config = {'policy': policy, 'engine': engine}
     descriptors.sort(key=lambda row: row['id'])
     key = digest({'inputs': descriptors, **config})
@@ -515,7 +758,8 @@ def run_batch(items, *, policy, store, expected_current):
             return {**result, 'current_token': digest(current)}
         require((digest(current) if current is not None else None) == expected_current, 'current_conflict')
         batch_dir = _safe_directory(root / 'batches' / key, create=True)
-        entries, total_artifact, total_pixels = [], 0, 0
+        entries, total_artifact, total_pixels, model_calls = [], 0, 0, 0
+        segmenter = _LazySegmenter(policy['segmenter']) if isinstance(policy['segmenter'], dict) else None
         checkpoint_path = batch_dir / 'checkpoint.json'
         completed = []
         if checkpoint_path.exists() or checkpoint_path.is_symlink():
@@ -532,10 +776,10 @@ def run_batch(items, *, policy, store, expected_current):
                 record = _verify_stage(root, stage_key, policy)
             else:
                 item = indexed[descriptor['id']]
-                artifacts, report = _render(item, policy)
+                artifacts, report = _render(item, policy, segmenter)
                 deadline()
                 pending = _safe_directory(root / 'stages' / ('.pending-' + stage_key), create=True)
-                record = {'schema_version': 1, 'stage_key': stage_key, 'input': descriptor,
+                record = {'schema_version': 2, 'stage_key': stage_key, 'input': descriptor,
                           **config, **report, 'artifacts': {
                               name: {'sha256': sha(raw), 'bytes': len(raw)}
                               for name, raw in sorted(artifacts.items())}}
@@ -554,9 +798,11 @@ def run_batch(items, *, policy, store, expected_current):
                 record = _verify_stage(root, stage_key, policy)
             require(record.get('input') == descriptor and record.get('policy') == policy
                     and record.get('engine') == engine, 'stage_binding_mismatch')
+            model_calls += record.get('local_model_calls', 0)
             total_artifact += sum(v['bytes'] for v in record['artifacts'].values())
             size = record.get('qa', {}).get('input_size', [0, 0])
-            total_pixels += size[0] * size[1]
+            if record['status'] == 'review_required':
+                total_pixels += size[0] * size[1]
             require(total_artifact <= policy['max_total_artifact_bytes'], 'total_artifact_byte_limit')
             require(total_pixels <= policy['max_total_pixels'], 'total_pixel_limit')
             entry = {'id': descriptor['id'], 'stage_key': stage_key,
@@ -567,9 +813,9 @@ def run_batch(items, *, policy, store, expected_current):
             _write(root, batch_dir / 'checkpoint.json', canonical({
                 'schema_version': 1, 'batch_key': key, 'completed': entries,
                 'checkpoint_is_not_publication': True}), policy['max_store_bytes'])
-        result = {'schema_version': 1, 'batch_key': key, **config, 'stages': entries,
+        result = {'schema_version': 2, 'batch_key': key, **config, 'stages': entries,
                   'status': 'quarantined' if any(e['status'] == 'quarantined' for e in entries) else 'review_required',
-                  'publishable': False, 'network_calls': 0, 'model_calls': 0,
+                  'publishable': False, 'network_calls': 0, 'model_calls': model_calls,
                   'external_spend_minor': 0, 'artifact_bytes': total_artifact,
                   'successful_alpha_pixels': total_pixels, 'header_pixels': header_pixels}
         raw = canonical(result)

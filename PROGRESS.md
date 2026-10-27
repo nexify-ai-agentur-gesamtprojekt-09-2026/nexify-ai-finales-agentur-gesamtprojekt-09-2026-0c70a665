@@ -815,3 +815,18 @@ Vier zusätzliche Dokument-/Voraussetzungsfehler lokal korrigiert; keine
 Remote-Threadauflösung. Von18 Masterfällen sind1 lokal begrenzt geprüft,
 5 mit lokalen Prüf-/Scope-Lücken und12 extern blockiert. Kein Gesamtfall ist
 als produktiv abgenommen markiert. Bestehende Queue und Freigabegates unverändert.
+
+## 2026-10-27 — fester lokaler BiRefNet-ONNX-Pfad nach v12
+
+Auf Basis `da25e75` ist ein fester General-BiRefNet-Adapter mit tatsächlichem
+CPU-Sessionaufruf, Tensor-/Maskenlogik und Quellen-/Lizenz-/Hash-/Shapeprüfung
+implementiert und an den vorhandenen Batchworker gebunden. Batch v2 erhält
+Originale, Quarantäne, Replay und v1-Rollback. Keine zweite Plattform.
+Die Tests verwenden kontrollierte Graph-/Sessiondoubles, keine echte Inferenz.
+Gepinnte offizielle Quellen und präzise Export-/Runtime-/Ressourcengrenzen:
+`config/integrations/birefnet-onnx.json`, `docs/contracts/birefnet-onnx.md`.
+Native Runtime und geprüfter General-ONNX-Export fehlen; kein Download, keine
+Installation, keine echten Produktderivate oder Veröffentlichung ausgeführt.
+Der tatsächliche Kataloghandler wurde in den ausdrücklich geprüften lokalen
+Quellen nicht gefunden; Fortsetzung bleibt unbestätigt. Evidenz und Restschritte:
+`evidence/birefnet-onnx-2026-10-27`. Gesamtshop/Livebetrieb bleiben offen.

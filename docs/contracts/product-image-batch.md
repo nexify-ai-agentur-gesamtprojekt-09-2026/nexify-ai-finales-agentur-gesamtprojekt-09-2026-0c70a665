@@ -2,7 +2,8 @@
 
 Stand 27.10.2026. `tools/product_image_batch.py` ist ein tatsächlich ausführbarer,
 rein lokaler Artefaktschritt. Er verändert keine Shoproute, veröffentlicht nichts,
-lädt keine Bildreferenz und führt kein Modell aus. Bestehender Controller bleibt
+lädt keine Bildreferenz und ruft keinen externen Modellprovider auf. Version 2
+verdrahtet zusätzlich den festen lokalen CPU-BiRefNet-Adapter. Bestehender Controller bleibt
 zuständig; es gibt keine zweite Queue oder Datenbank. Alle Ergebnisse sind
 `review_required` oder `quarantined`, immer `publishable=false`.
 
@@ -38,14 +39,25 @@ in diese nachweisbaren lokalen Manifeste.
 
 Für PNG/JPEG/WEBP wird das Original byteidentisch als `original.bin` archiviert.
 Aus einem **bereits vorhandenen** nichtleeren Alphakanal entstehen `rgba.png`,
-`white.png` und `ci-<rrggbb>.png`. Opaque RGB und auch vollständig opakes RGBA
-blockieren mit `opaque_source_requires_verified_segmentation_adapter`. Das ist
-keine automatische Hintergrundentfernung; es wird kein neuer Segmentierungs-
-oder Maskenqualitätsnachweis behauptet. Ein einzelner transparenter Pixel ist
-kein Beweis eines korrekten Freistellers und benötigt dieselbe manuelle QA.
+`white.png` und `ci-<rrggbb>.png`; dieser Pfad führt auch bei konfiguriertem
+BiRefNet **keine Inferenz** aus. Ein einzelner transparenter Pixel beweist keinen
+korrekten Freisteller und benötigt dieselbe manuelle QA.
 
-Produktpixel bleiben im RGBA-Derivat einschließlich RGB-Werten transparenter
-Pixel erhalten. Keine Skalierung, kein Beschnitt, keine Schärfung, Farberfindung,
+Opaque RGB und vollständig opakes RGBA benötigen ein explizites gültiges
+`segmenter`-Konfigurationsobjekt. Ohne Adapter bleiben sie mit
+`opaque_source_requires_verified_segmentation_adapter` in Quarantäne. Mit
+Konfiguration wird ausschließlich für bereits genehmigte, zulässige opake
+Quellen einmal pro Batch lazy eine feste CPU-Session aufgebaut und für weitere
+opake Bilder wiederverwendet. Modell-/Runtime-/Manifestfehler werden als
+konkrete Quarantänegründe erhalten; kein Fallback und kein impliziter Download.
+Ein fest verdrahteter Adapteraufruf ist implementiert, ein echter Lauf mit
+verifiziertem ONNX-Artefakt und realem Produkt wurde hier nicht nachgewiesen.
+
+Originalauflösung und RGB-Produktpixel bleiben im RGBA-Derivat einschließlich
+RGB-Werten transparenter Pixel erhalten. Der Segmentierungsadapter darf nur Alpha
+ändern; neue Alpha darf vorhandene Alpha niemals erhöhen. Die RGB-Werte werden
+vor/nach Inferenz und beim Artefakt-Readback mit dem Original verglichen. Keine
+Produktskalierung, kein Beschnitt, keine Schärfung, Farberfindung,
 Labelretusche, Hintergrundrekonstruktion oder künstlicher Schatten. EXIF-
 Orientierung 1–8 wird einmal angewendet; abgeleitete EXIF-Daten werden entfernt,
 das Original bleibt vollständig. ICC-Profile sowie eingebettetes gAMA/cHRM ohne
@@ -84,8 +96,8 @@ keine Servermessungen. Die Implementierung erzwingt zusätzlich feste Obergrenze
 | `max_wall_seconds` | 3600 Sekunden |
 
 Zusätzlich exakt `tenant`, `project`, `ci_colors`, `allowed_ci_colors`,
-`external_budget_minor=0` und `segmenter="none_verified"`. Keine impliziten
-Budgetdefaults. Positive Integer, keine Booleans; CI-Auswahl und Allowlist jeweils
+`external_budget_minor=0` und `segmenter` als `"none_verified"` oder als exakt
+begrenztes lokales Konfigurationsobjekt (unten). Keine impliziten Budgetdefaults. Positive Integer, keine Booleans; CI-Auswahl und Allowlist jeweils
 1–4 eindeutige Farben. Anzahl, Eingangsbytes, Headerpixel und größte
 Arbeitsprognose werden vor dem ersten Decode/Storewrite geprüft. PNG-Ausgaben
 werden bereits beim Schreiben des Encoderbuffers begrenzt. Summe der Artefakte
@@ -97,8 +109,13 @@ Storedateien; keine unbegrenzte automatische Aufbewahrung oder Löschung.
 Arbeitsprognose: `größte_Bildpixel * 128 + gesamte_Inputbytes`. Der Faktor ist
 bewusste konservative Planung für Pillow-Konvertierung, Komposition, Readback,
 Encoderbuffer und Pythonkopien, keine gemessene RSS-Garantie. Einzelbilder werden
-nacheinander verarbeitet. Kein NumPy und kein GPU-/Modell-RAM erforderlich.
-1200 × 1200 entsprechen 184320000 Bytes Prognose plus Batchinput. Walltime wird an
+nacheinander verarbeitet. Der vorhandene Alphapfad benötigt weder NumPy noch
+GPU-/Modell-RAM. Die optionale Segmentierung benötigt **zusätzlich** ihre
+expliziten `max_session_working_bytes` und `max_tensor_working_bytes`; diese sind
+keine im Pixelbudget bereits eingerechneten Speicherfreigaben. Die tatsächliche
+Hostplanung muss Pixelarbeit, Modell-/Session-/Tensorressourcen und Reserve
+zusammen berücksichtigen. 1200 × 1200 entsprechen 184320000 Bytes Pixelprognose
+plus Batchinput. Walltime wird an
 Stufengrenzen und vor Commit geprüft; ein laufender nativer Decoder kann dadurch
 nicht präemptiv unterbrochen werden. Harte CPU-/RSS-/Zeit-/Filesystemquoten und
 Hostreserve muss ein autorisierter Runner separat setzen. Das Skript verändert
@@ -137,8 +154,12 @@ python3 -m unittest discover -s tests -p test_product_image_batch.py -v
 
 Runtime: Python≥3.10 auf POSIX/Linux mit `fcntl`, exakt `Pillow==12.3.0`.
 Lokal wurden Pillow 12.3.0, Metadaten `License-Expression:MIT-CMU` und
-`Requires-Python:>=3.10` geprüft. NumPy 2.3.5 ist vorhanden, wird nicht benutzt;
-rembg und onnxruntime fehlen. Kein Paket wird von diesem Skript installiert.
+`Requires-Python:>=3.10` geprüft. Vorhandene Alpha nutzt ausschließlich Pillow.
+Für echte lokale Segmentierung verlangt der feste Adapter zusätzlich exakt
+NumPy 2.3.5, ONNX 1.23.2 und ONNXRuntime 1.31.1. NumPy 2.3.5 ist vorhanden,
+ONNX/ONNXRuntime und Modellgewichte sind in der hier geprüften Umgebung nicht
+installiert. Kein Paket wird von diesem Skript installiert; keine native
+Inferenz wird durch Testdoubles belegt.
 Ohne die optionale Bildabhängigkeit blockiert der konkrete Aufruf; Bildtests
 überspringen fehlendes Pillow ausdrücklich nicht. Bestehende andere Tools
 importieren Pillow durch dieses Modul nicht vorzeitig.
@@ -146,8 +167,10 @@ importieren Pillow durch dieses Modul nicht vorzeitig.
 ## Commit, Wiederaufnahme und Rückweg
 
 `stage_key` bindet Originalhash, ID, gesamte Approvalbindung, gesamte Policy und
-Engineversion. Engine enthält Transformversion, Pillow-, Python- und
-zlib-Laufzeitversion. `batch_key` bindet die sortierte Eingangsmenge und dieselbe
+Engineversion. Version 2 schreibt Stage-/Resultatschema2 und bindet zusätzlich
+`engine.segmenter` an deklarierte Adapter-ID, Modell-SHA256, Manifest-SHA256 und
+festen Runtimevertrag; dies ist keine Behauptung tatsächlich geladener Runtime.
+Engine enthält außerdem Transformversion, Pillow-, Python- und zlib-Laufzeitversion. `batch_key` bindet die sortierte Eingangsmenge und dieselbe
 Konfiguration. Neue Eingangsbytes, Zuordnung, Lizenzbelege, Farben, Budget- oder
 Engineversion ergeben neue Stages; unveränderte Stages werden exakt rückgelesen.
 Keine Wiederverwendung anhand eines URL- oder Inventarhashs ohne Originalbytes.
@@ -169,13 +192,35 @@ atomarer Ersetzung geschrieben. `fstat` prüft reguläre Dateien und Linkzahl 1
 vor Schreibzugriff; auch Lock und Lesezugriffe verweigern Hardlinks.
 Eine vollständige Stage wird durch Verzeichnisrename atomar sichtbar. Beim
 Restart werden jedes Original/Derivat, Bytezahl, Hash, unveränderlicher
-Originalhashanker, Manifest-/Scopebindung, feste Status-/Wirkungsflags und
-vorhandener Checkpoint geprüft. Selbst konsistent neu gehashte Metadaten
-dürfen keine Publikations-, Modell-, Netzwerk- oder QA-Freigabe erteilen; korrupte fertige Stages werden blockiert und
-nicht überschrieben. Verwaiste `.pending`-/`.write`-Dateien bleiben zunächst sichtbar. Beim erneuten
+Originalhashanker, Manifest-/Scopebindung, feste Status-/Wirkungsflags,
+Original-RGB/Alpha, Derivatpixel und Hintergrundkomposition sowie vorhandener
+Checkpoint geprüft. Ein Replay führt keine erneute Inferenz aus. Selbst konsistent neu gehashte Metadaten
+dürfen keine Publikations-, Netzwerk- oder manuelle QA-Freigabe erteilen.
+Lokale Modellzähler und Segmentierungsmetadaten müssen zur gebundenen Stage
+passen; korrupte fertige Stages werden blockiert und nicht überschrieben. Verwaiste `.pending`-/`.write`-Dateien bleiben zunächst sichtbar. Beim erneuten
 Schreibversuch wird nur der feste sichere `.write`-Temporärname nach Prüfung
 entfernt und exklusiv neu angelegt; Originaldateien werden dabei nicht gelöscht. Schon
 vorliegende Pendingoriginale müssen byteidentisch sein. Kein rekursives Cleanup.
+
+`local_model_calls` je Stage ist das strikte 0/1-Delta der vor jedem tatsächlichen
+`session.run` erhöhten Adapterproperty. Auch ein Runtime-/Output-/Deadlinefehler
+nach begonnenem Run bleibt als 1 gezählt, ohne `segmentation_performed=true` zu
+behaupten. Constructorfehler und Fehler vor Run sind 0; Constructorfehler werden
+für diesen Batch einmal festgestellt. `result.model_calls` summiert diese
+provenienzgebundenen lokalen Runversuche der Stages, einschließlich aus Cache
+übernommener Stages; es ist kein externer LLM-Aufrufzähler und keine Abrechnung.
+`network_calls=0` und `external_spend_minor=0` bleiben fest. QA-Erfolg vor späterem
+PNG-Fehler kann als `segmentation_performed=true` mit Quarantäne erhalten bleiben;
+das ist keine veröffentlichbare Stage.
+
+`successful_alpha_pixels` zählt in Schema 2 nur erfolgreiche Derivatstages;
+quarantinierte Originale gehen ausschließlich in `header_pixels` ein. Der
+Legacyreader erhält die bereits gespeicherten Schema 1-Zähler unverändert.
+
+Fertig quarantinierte Stages bleiben ebenfalls unveränderlich. Eine reparierte
+Umgebung bewirkt kein stilles Unquarantinieren unter identischem Key. Für einen
+bewussten neuen Versuch nach Behebung muss die gültige Bindung/Version oder ein
+explizites Callerbudget neu gebunden werden; alte Belege bleiben erhalten.
 
 Erst nach allen Stages entsteht das finale Resultat; zuletzt setzt ein
 Vergleich-und-Tausch die lokale `current.json`. Absturz oder Stufenfehler erhält
@@ -186,6 +231,11 @@ verteilte Stores, Netzdateisystem-Semantik und feindliche Dateimanipulation sind
 nicht zugesagt. Der Checkpoint ist ein begrenztes Artefaktverzeichnis des
 bestehenden Controllers, keine Scheduler-/Leasingalternative.
 
+Vorhandene v1-Stages/Resultate bleiben streng lesbar und rollbackfähig, mit
+`segmenter="none_verified"`, Segmentierungsflag false und Modellzähler 0. Neue
+Ausführung erzeugt Version 2 und einen neuen Key; der Wechsel benötigt den
+bestehenden CAS-Token. Alte Artefakte werden nicht in neue Erfolge umgedeutet.
+
 `rollback(..., expected_current=token)` prüft Auswahl und Artefakte, stellt die
 vorherige lokale Auswahl wieder her oder entfernt ausschließlich den initialen
 Pointer. Originale, Stages und Resultate werden nie gelöscht. Ein veralteter
@@ -195,12 +245,60 @@ Adapter muss fertigen Manifesthash, Scope, Modell-/QA-/Lizenzfreigabe und den
 Nachweis `SupplierFact → Originalhash → Derivathash → tatsächlich dargestellte
 SKU/Slot` binden. Zwei reale SKU-Durchläufe sind offen.
 
-## Fehlende Segmentierungsgewichte: gesperrter Adaptervertrag
+## Fester lokaler Segmentierungsadapter und fehlende Artefakte
 
-Einziger derzeit zugelassener Adapterwert ist `none_verified`. Jeder andere
-Name, Modellpfad, Befehl, URL oder Adapterobjekt blockiert. Es gibt keinen
-Callable-/Shelladapter, keinen dynamischen Import, keinen Modelldownload,
-kein `trust_remote_code` und keine Installation durch Modelltext.
+Die einzige zusätzliche Adapter-ID lautet
+`birefnet-default-onnx-1024-logits-v1` und wird ausschließlich auf
+[tools/birefnet_onnx.py](../../tools/birefnet_onnx.py) abgebildet. Caller kann keine
+Module, Callables, Befehle, anderen Modellnamen oder Remotequellen auswählen.
+Das lokale Konfigurationsobjekt muss exakt diese Felder enthalten:
+
+```json
+{
+  "adapter": "birefnet-default-onnx-1024-logits-v1",
+  "artifact_root": "<genehmigtes lokales Artefaktverzeichnis>",
+  "manifest_file": "birefnet-export.json",
+  "manifest_sha256": "<geprüfter tatsächlicher Manifest-SHA256>",
+  "expected_model_sha256": "<geprüfter tatsächlicher ONNX-SHA256>",
+  "max_model_bytes": 1073741824,
+  "max_session_working_bytes": 4294967296,
+  "max_tensor_working_bytes": 268435456,
+  "max_graph_nodes": 200000,
+  "max_input_pixels": 2000000,
+  "max_inference_seconds": 120
+}
+```
+
+Dies sind Platzhalter und Beispielbudgets, kein vorhandenes Modellpaket,
+Benchmark oder Hardwarevorschlag. Alle Budgets sind explizite positive Integer;
+Hashwerte müssen wirkliche 64stellige SHA256 sein. Dateinamen sind fest:
+`birefnet-export.json`, `LICENSE.MIT` und
+`birefnet-e2bf8e4-fp32-opset17-lastlogits-1024.onnx`. Keine beliebigen Input-
+oder Dateipfadapter. Der Worker speichert keine Modellbytes in seinem
+Original-/Derivatstore und startet keine Installation oder Downloads.
+
+Vertrag: CPU, FP32, Opset17, statischer Eingang
+`input_image[1,3,1024,1024]`, Ausgang `mask_logits[1,1,1024,1024]`. Der Adapter
+verwendet ausschließlich letzte rohe Logits, Sigmoid, 8bit-Maskenquantisierung,
+BICUBIC-Rückführung der Maske auf Originalauflösung und Multiplikation mit
+vorhandener Alpha. Die auf 1024×1024 skalierte Eingabe ist nur der interne
+Modelltensor; das Original und Derivat werden nicht auf 1024 verkleinert.
+Modell-/Export-/Lizenzhashes, fester Graph und tatsächliche Runtime werden vor
+Sessionaufbau geprüft. Keine Customops, Fremdprovider oder stillen Fallbacks.
+Inferenz und tatsächlicher Gewichts-/Qualitäts-/Kapazitätsnachweis sind damit
+weiterhin getrennte Abnahmeschritte.
+
+`qa.segmenter` enthält bei Erfolg exakt Adapter/Modell-/Manifesthash,
+Runtimevertrag, Input-/Outputnamen und Shapes, Maskenhash, Input-RGB-/Input-Alpha-/
+Output-Alphahash sowie `local_model_calls=1`. Bei typisiertem Fehler enthält es
+nur `{status:"failed",reason,local_model_calls:0|1}`. Es gibt keine
+`runtime_loaded`- oder Selbstfreigabe durch eine Deklaration. Vorhandene Alpha
+bekommt kein `qa.segmenter` und konstruiert keine Modellsession.
+
+Die 43 fokussierten Workerregressionen verwenden ausschließlich synthetische
+Originale und kontrollierte Sessiondoubles; sie prüfen Wiring, Laufzählung,
+Quarantäne, Pixelintegrität und Legacy-Rollback. Sie sind keine echte
+BiRefNet-Inferenz oder reale Produktbildabnahme.
 
 Direkt gelesene Primärquellen am 27.10.2026:
 
@@ -219,16 +317,16 @@ Direkt gelesene Primärquellen am 27.10.2026:
   oder Produktbildqualität. Die verlinkten dynamischen Seiten sind ein
   Quellenhinweis, keine gepinnte Gewichtsfreigabe.
 
-Vor neuer Adapterimplementierung ist konkret zu liefern:
+Vor dem ersten freigegebenen echten Segmentierungslauf ist konkret zu liefern:
 
 | Beleg | Aktueller Stand / erforderlicher Nachweis |
 | --- | --- |
-| Modell | BiRefNet nur Kandidat; exakter Variantenname und unveränderliche Upstreamrevision fehlen |
-| Code und Lizenz | vollständiger geprüfter Inferenz-/Pre-/Postprocessingcode samt Commit, SHA256 und Lizenztext-SHA256 |
-| Originalgewichte | echte Datei, Bytezahl, SHA256, Bezugspfad und zu diesen Bytes gültiger kommerzieller Lizenzbeleg fehlen |
+| Modell | Fester Kandidat ZhengPeng7/BiRefNet, Revision `e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4`; keine lokal vorhandenen freigegebenen ONNX-Bytes |
+| Code und Lizenz | Fester lokaler Inferenzadapter implementiert; gepinnte Source-/Lizenzbindungen werden dort geprüft, konkrete Exporterdatei und Exporter-SHA256 fehlen |
+| Originalgewichte | Erwarteter Quellhash `9ab37426bf4de0567af6b5d21b16151357149139362e6e8992021b8ce356a154`, 444473596 Bytes, aus gepinntem Root-Quellenvertrag; kein lokales Download-/Lade-/kommerziales Abnahmeereignis |
 | ONNX | keine verifizierte lokale Datei; eigener Export oder verifizierter Konverter mit Commit/Hash, Opset, statischen Shapes und Exportparametern nötig |
 | Graph | ONNX-/externe-Tensor-SHA256, keine dynamischen Plugins/Customops/externen Datenpfade; festes Input-/Outputschema |
-| Runtime | exakte CPU-Runtimeversion/Lock und tatsächlich unterstützte Operatoren fehlen; kein stiller Runtime-/Modellfallback |
+| Runtime | Exakter Vertrag NumPy 2.3.5 / ONNX 1.23.2 / ONNXRuntime 1.31.1 implementiert; native lokale Session und reale Graphoperatoren ohne Exportartefakt noch nicht nachgewiesen |
 | Ressourcen | reale Gewichtbytes, Peak-RSS, Laufzeit pro Pixelklasse, temporäre Diskbytes und CPUkosten auf Zielhost fehlen; vorab Concurrency 1 / Threads 1 als Pilotannahme getrennt messen |
 | QA | autorisierte reale Produktoriginale mit Zuordnung/Lizenz und manueller Alpha-/Farb-/Label-/Lieferumfangabnahme; zwei SKU-End-to-Endbelege fehlen |
 
@@ -236,6 +334,7 @@ Owner für reale Zuordnungen/Rechte und Modell-/Hostfreigabe bleibt die
 Rootintegration mit dem autorisierten Datenverantwortlichen; nächster Schritt
 ist das konkrete Hash-/Lizenz-/Ressourcenpaket vor dem ersten Segmentierungslauf.
 Keine Gewichtsgröße, Hash, CPUzeit oder kommerzielle Freigabe wird erfunden.
-Ein neuer fester Adapter benötigt anschließend Code-Review, deterministische
-Originalauflösungsmaske ohne Produktretusche, die gleichen Quarantänegates und
-Versionsinvalidierung. Synthetische Masken dürfen nur in isolierten Tests stehen.
+Der implementierte feste Adapter benötigt vor realer Freistellung weiterhin
+unabhängiges Code-Review und tatsächliches Hash-/Lizenz-/Ressourcenpaket. Die
+Quarantänegates, Originalauflösung und Versionsinvalidierung bleiben verbindlich.
+Synthetische Masken dürfen nur in isolierten Tests stehen.

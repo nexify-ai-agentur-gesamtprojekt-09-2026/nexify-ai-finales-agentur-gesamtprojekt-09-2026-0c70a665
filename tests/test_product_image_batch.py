@@ -35,6 +35,37 @@ def synthetic_png(*, mode='RGBA', icc=None, orientation=None, transparent=True):
     return out.getvalue()
 
 
+class ControlledSegmenter:
+    """Synthetic alpha test double, never a model or real inference evidence."""
+    def __init__(self, config, behavior='good'):
+        self.config = config
+        self.behavior = behavior
+        self.local_model_calls = 0
+
+    def apply(self, rgba):
+        from tools import birefnet_onnx as adapter
+        if self.behavior == 'failed_before_run':
+            raise adapter.SegmentationRejected('synthetic_preinference_failure')
+        self.local_model_calls += 2 if self.behavior == 'double_call' else 1
+        if self.behavior == 'failed_after_run':
+            raise adapter.SegmentationRejected('synthetic_postinference_failure')
+        output = rgba.copy()
+        output.putalpha(Image.new('L', rgba.size, 128))
+        output.putpixel((0, 0), (*rgba.getpixel((0, 0))[:3], 0))
+        metadata = {**adapter.binding(self.config), 'input_shape': [1, 3, 1024, 1024],
+                    'output_shape': [1, 1, 1024, 1024], 'input_name': 'input_image',
+                    'output_name': 'mask_logits', 'mask_sha256': batch.sha(output.getchannel('A').tobytes()),
+                    'input_rgb_sha256': batch.sha(rgba.convert('RGB').tobytes()),
+                    'input_alpha_sha256': batch.sha(rgba.getchannel('A').tobytes()),
+                    'output_alpha_sha256': batch.sha(output.getchannel('A').tobytes()),
+                    'local_model_calls': 1}
+        if self.behavior == 'changed_rgb':
+            output.putpixel((1, 1), (1, 2, 3, 128))
+        if self.behavior == 'wrong_model_binding':
+            metadata['model_sha256'] = 'e' * 64
+        return output, metadata
+
+
 class ProductImageBatchTest(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -60,6 +91,26 @@ class ProductImageBatchTest(unittest.TestCase):
             'association_evidence': 'synthetic-test-association-only',
             'license': 'approved', 'license_evidence': 'synthetic-test-fixture-only',
             'color_space': 'srgb'}}
+
+    def segmenter_config(self):
+        return {'adapter': 'birefnet-default-onnx-1024-logits-v1',
+                'artifact_root': str(self.root / 'synthetic-model-artifacts'),
+                'manifest_file': 'birefnet-export.json', 'manifest_sha256': 'a' * 64,
+                'expected_model_sha256': 'b' * 64, 'max_model_bytes': 1024,
+                'max_session_working_bytes': 128 * 1024**2,
+                'max_tensor_working_bytes': 128 * 1024**2, 'max_graph_nodes': 100,
+                'max_input_pixels': 1000, 'max_inference_seconds': 10}
+
+    def rehash_record(self, result, record):
+        directory = self.store / 'stages' / result['stages'][0]['stage_key']
+        (directory / 'manifest.json').write_bytes(batch.canonical(record))
+        result_path = self.store / 'batches' / result['batch_key'] / 'result.json'
+        stored = json.loads(result_path.read_bytes())
+        stored['stages'][0]['manifest_sha256'] = batch.digest(record)
+        result_path.write_bytes(batch.canonical(stored))
+        pointer = json.loads((self.store / 'current.json').read_bytes())
+        pointer['result_sha256'] = batch.digest(stored)
+        (self.store / 'current.json').write_bytes(batch.canonical(pointer))
 
     def run_batch(self, *, items=None, expected=None):
         return batch.run_batch(items or [self.item], policy=self.policy,
@@ -434,7 +485,7 @@ class ProductImageBatchTest(unittest.TestCase):
         for field, value, reason in (
             ('publishable', True, 'result_effect_flags_invalid'),
             ('network_calls', 1, 'result_effect_flags_invalid'),
-            ('model_calls', 1, 'result_effect_flags_invalid'),
+            ('model_calls', 1, 'result_model_call_count_invalid'),
             ('external_spend_minor', 1, 'result_effect_flags_invalid'),
             ('status', 'approved', 'result_status_invalid'),
         ):
@@ -469,7 +520,7 @@ class ProductImageBatchTest(unittest.TestCase):
             pointer_path.write_bytes(batch.canonical(pointer))
         for field, value, reason in (
             ('publishable', True, 'stage_effect_flags_invalid'),
-            ('segmentation_performed', True, 'stage_effect_flags_invalid'),
+            ('segmentation_performed', True, 'stage_segmentation_invalid'),
             ('generative_changes', True, 'stage_effect_flags_invalid'),
             ('status', 'approved', 'stage_review_invalid'),
             ('manual_review_required', [], 'stage_effect_flags_invalid'),
@@ -485,6 +536,238 @@ class ProductImageBatchTest(unittest.TestCase):
         record['artifacts']['original.bin'] = {'sha256': batch.sha(altered_original), 'bytes': len(altered_original)}
         rehash(record)
         self.assert_rejected('original_anchor_mismatch', self.run_batch)
+
+    def test_declared_adapter_binding_does_not_load_for_existing_alpha(self):
+        from tools import birefnet_onnx as adapter
+        self.policy['segmenter'] = self.segmenter_config()
+        with patch.object(batch, '_build_segmenter', side_effect=AssertionError('must stay lazy')):
+            out = self.run_batch()
+            self.assertEqual(self.run_batch(), out)
+        self.assertEqual(out['engine']['segmenter'], adapter.binding(self.policy['segmenter']))
+        self.assertEqual(out['schema_version'], 2)
+        self.assertEqual(out['model_calls'], 0)
+        self.assertNotIn('segmenter', self.stage(out)[1]['qa'])
+        self.assertFalse(self.stage(out)[1]['segmentation_performed'])
+        self.assertEqual(set(out['engine']['segmenter']), {'adapter', 'model_sha256', 'manifest_sha256', 'runtime_contract'})
+
+    def test_controlled_opaque_path_reuses_single_session_and_replay_never_infers(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        controlled = ControlledSegmenter(self.policy['segmenter'])
+        items = [self.make_item('OPAQUE-A', synthetic_png(mode='RGB')),
+                 self.make_item('OPAQUE-B', synthetic_png(mode='RGB'))]
+        with patch.object(batch, '_build_segmenter', return_value=controlled) as builder:
+            out = self.run_batch(items=items)
+        self.assertEqual(builder.call_count, 1)
+        self.assertEqual(controlled.local_model_calls, 2)
+        self.assertEqual(out['model_calls'], 2)
+        for index, item in enumerate(items):
+            directory, record = self.stage(out, index)
+            self.assertTrue(record['segmentation_performed'])
+            self.assertEqual(record['local_model_calls'], 1)
+            self.assertEqual(record['qa']['segmenter']['local_model_calls'], 1)
+            self.assertEqual((directory / 'original.bin').read_bytes(), item['original'])
+            with Image.open(directory / 'rgba.png') as rgba, Image.open(io.BytesIO(item['original'])) as original:
+                self.assertEqual(rgba.convert('RGB').tobytes(), original.tobytes())
+        with patch.object(batch, '_build_segmenter', side_effect=AssertionError('replay must not infer')):
+            self.assertEqual(self.run_batch(items=items), out)
+
+    def test_unapproved_opaque_and_existing_alpha_do_not_allocate_model(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        opaque = self.make_item('UNAPPROVED-OPAQUE', synthetic_png(mode='RGB'))
+        opaque['approval']['association'] = 'unknown'
+        with patch.object(batch, '_build_segmenter', side_effect=AssertionError('unapproved inference')):
+            out = self.run_batch(items=[opaque, self.item])
+        self.assertEqual(out['model_calls'], 0)
+        self.assertEqual(out['status'], 'quarantined')
+        for index in range(2):
+            self.assertFalse(self.stage(out, index)[1]['segmentation_performed'])
+
+    def test_missing_model_constructor_quarantines_once_without_runtime_claim(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        self.item = self.make_item('OPAQUE', synthetic_png(mode='RGB'))
+        out = self.run_batch()
+        record = self.stage(out)[1]
+        self.assertEqual(out['model_calls'], 0)
+        self.assertEqual(out['successful_alpha_pixels'], 0)
+        self.assertFalse(record['segmentation_performed'])
+        self.assertIn('model_artifact_directory_missing_or_unsafe', record['blocking_reasons'])
+        self.assertEqual(record['qa']['segmenter'], {'status': 'failed',
+            'reason': 'model_artifact_directory_missing_or_unsafe', 'local_model_calls': 0})
+        self.assertEqual(set(record['artifacts']), {'original.bin'})
+
+    def test_missing_runtime_is_typed_quarantine_and_constructor_failure_is_reused(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        items = [self.make_item('OPAQUE-A', synthetic_png(mode='RGB')),
+                 self.make_item('OPAQUE-B', synthetic_png(mode='RGB'))]
+        with patch.object(batch, '_build_segmenter', side_effect=batch.ImageBatchRejected('onnxruntime_not_installed')) as builder:
+            out = self.run_batch(items=items)
+        self.assertEqual(builder.call_count, 1)
+        self.assertEqual(out['model_calls'], 0)
+        self.assertEqual(out['status'], 'quarantined')
+        self.assertIn('onnxruntime_not_installed', self.stage(out)[1]['blocking_reasons'])
+
+    def test_controlled_failed_apply_records_actual_attempt_delta_without_success(self):
+        for behavior, expected_calls in [('failed_before_run', 0), ('failed_after_run', 1)]:
+            with self.subTest(behavior=behavior):
+                self.policy['segmenter'] = self.segmenter_config()
+                self.item = self.make_item(behavior, synthetic_png(mode='RGB'))
+                controlled = ControlledSegmenter(self.policy['segmenter'], behavior)
+                with patch.object(batch, '_build_segmenter', return_value=controlled):
+                    out = self.run_batch(expected=batch.current_token(self.store))
+                record = self.stage(out)[1]
+                self.assertEqual(out['model_calls'], expected_calls)
+                self.assertEqual(record['local_model_calls'], expected_calls)
+                self.assertFalse(record['segmentation_performed'])
+                self.assertEqual(record['qa']['segmenter']['status'], 'failed')
+                self.assertEqual(set(record['artifacts']), {'original.bin'})
+                with patch.object(batch, '_build_segmenter', side_effect=AssertionError('no retry')):
+                    self.assertEqual(self.run_batch(), out)
+
+    def test_controlled_output_cannot_recolor_or_claim_wrong_model(self):
+        for behavior, reason in [('changed_rgb', 'segmenter_rgb_changed'),
+                                  ('wrong_model_binding', 'segmenter_metadata_binding_mismatch')]:
+            with self.subTest(behavior=behavior):
+                self.policy['segmenter'] = self.segmenter_config()
+                self.item = self.make_item(behavior, synthetic_png(mode='RGB'))
+                controlled = ControlledSegmenter(self.policy['segmenter'], behavior)
+                with patch.object(batch, '_build_segmenter', return_value=controlled):
+                    out = self.run_batch(expected=batch.current_token(self.store))
+                record = self.stage(out)[1]
+                self.assertIn(reason, record['blocking_reasons'])
+                self.assertEqual(out['model_calls'], 1)
+                self.assertFalse(record['segmentation_performed'])
+                self.assertEqual(set(record['artifacts']), {'original.bin'})
+
+    def test_successful_controlled_inference_followed_by_encoder_failure_stays_quarantined(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        self.item = self.make_item('OPAQUE', synthetic_png(mode='RGB'))
+        with patch.object(batch, '_build_segmenter', return_value=ControlledSegmenter(self.policy['segmenter'])), \
+             patch.object(batch, '_png', side_effect=batch.ImageBatchRejected('artifact_byte_limit')):
+            out = self.run_batch()
+        record = self.stage(out)[1]
+        self.assertEqual(out['status'], 'quarantined')
+        self.assertEqual(out['model_calls'], 1)
+        self.assertEqual(out['successful_alpha_pixels'], 0)
+        self.assertTrue(record['segmentation_performed'])
+        self.assertFalse(record['publishable'])
+        self.assertEqual(set(record['artifacts']), {'original.bin'})
+        with patch.object(batch, '_build_segmenter', side_effect=AssertionError('no repeat')):
+            self.assertEqual(self.run_batch(), out)
+
+    def test_controlled_double_inference_attempts_block_before_stage_commit(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        self.item = self.make_item('OPAQUE', synthetic_png(mode='RGB'))
+        controlled = ControlledSegmenter(self.policy['segmenter'], 'double_call')
+        with patch.object(batch, '_build_segmenter', return_value=controlled):
+            self.assert_rejected('segmenter_call_counter_invalid', self.run_batch)
+        self.assertIsNone(batch.current_token(self.store))
+        self.assertFalse(list((self.store / 'stages').iterdir()))
+
+    def test_controlled_counter_and_binding_tamper_fail_closed(self):
+        self.policy['segmenter'] = self.segmenter_config()
+        self.item = self.make_item('OPAQUE', synthetic_png(mode='RGB'))
+        with patch.object(batch, '_build_segmenter', return_value=ControlledSegmenter(self.policy['segmenter'])):
+            out = self.run_batch()
+        original_record = self.stage(out)[1]
+        for field, value, reason in [('model_sha256', 'f' * 64, 'segmenter_metadata_binding_mismatch'),
+                                     ('local_model_calls', 0, 'segmenter_call_counter_invalid'),
+                                     ('mask_sha256', 'f' * 64, 'segmenter_mask_binding_mismatch')]:
+            with self.subTest(field=field):
+                record = copy.deepcopy(original_record)
+                record['qa']['segmenter'][field] = value
+                self.rehash_record(out, record)
+                self.assert_rejected(reason, self.run_batch)
+        for value, reason in [(0, 'stage_segmentation_invalid'), (2, 'stage_call_counter_invalid'),
+                              (True, 'stage_call_counter_invalid')]:
+            with self.subTest(stage_calls=value):
+                record = copy.deepcopy(original_record)
+                record['local_model_calls'] = value
+                self.rehash_record(out, record)
+                self.assert_rejected(reason, self.run_batch)
+        self.rehash_record(out, original_record)
+        result_path = self.store / 'batches' / out['batch_key'] / 'result.json'
+        stored = json.loads(result_path.read_bytes())
+        stored['model_calls'] = 0
+        result_path.write_bytes(batch.canonical(stored))
+        pointer = json.loads((self.store / 'current.json').read_bytes())
+        pointer['result_sha256'] = batch.digest(stored)
+        (self.store / 'current.json').write_bytes(batch.canonical(pointer))
+        self.assert_rejected('result_model_call_count_invalid', self.run_batch)
+
+    def test_consistently_rehashed_rgba_rgb_mutation_rejected_against_original(self):
+        out = self.run_batch()
+        directory, record = self.stage(out)
+        path = directory / 'rgba.png'
+        with Image.open(path) as image:
+            altered = image.copy()
+        altered.putpixel((2, 1), (200, 100, 0, 255))
+        raw = batch._png(altered, self.policy['max_artifact_bytes'])
+        path.write_bytes(raw)
+        record['artifacts']['rgba.png'] = {'sha256': batch.sha(raw), 'bytes': len(raw)}
+        record['qa']['rgba_pixels_sha256'] = batch.sha(altered.tobytes())
+        self.rehash_record(out, record)
+        self.assert_rejected('original_rgba_changed', self.run_batch)
+
+    def test_alpha_increase_and_segmenter_input_budget_are_blocked(self):
+        with Image.open(io.BytesIO(synthetic_png())) as image:
+            source = image.copy()
+        output = source.copy()
+        output.putpixel((1, 0), (10, 20, 30, 255))
+        self.assert_rejected('segmenter_alpha_increased', lambda: batch._validate_segmented_pixels(source, output))
+        self.policy['segmenter'] = self.segmenter_config()
+        self.policy['segmenter']['max_input_pixels'] = 1
+        self.item = self.make_item('OPAQUE', synthetic_png(mode='RGB'))
+        with patch.object(batch, '_build_segmenter', side_effect=AssertionError('input already over budget')):
+            out = self.run_batch()
+        self.assertEqual(out['model_calls'], 0)
+        self.assertIn('segmenter_input_pixel_limit', self.stage(out)[1]['blocking_reasons'])
+
+    def test_backward_v1_readonly_validation_and_rollback(self):
+        # This fixed legacy schema is an artifact fixture, never a runtime downgrade.
+        policy = batch.validate_policy(self.policy)
+        _, _, pillow_version = batch._pillow()
+        engine = {'version': 'product-image-batch/1', 'pillow': pillow_version,
+                  'zlib': batch.zlib.ZLIB_RUNTIME_VERSION,
+                  'python': '.'.join(map(str, sys.version_info[:3]))}
+        descriptor = {'id': self.item['id'], 'original_sha256': batch.sha(self.item['original']),
+                      'approval': self.item['approval']}
+        stage_key = batch.digest({'input': descriptor, 'policy': policy, 'engine': engine})
+        artifacts, report = batch._render(self.item, policy)
+        report.pop('local_model_calls')
+        for name in ('input_rgb_sha256', 'input_alpha_sha256', 'output_alpha_sha256'):
+            report['qa'].pop(name)
+        record = {'schema_version': 1, 'stage_key': stage_key, 'input': descriptor,
+                  'policy': policy, 'engine': engine, **report, 'artifacts': {
+                      name: {'sha256': batch.sha(raw), 'bytes': len(raw)} for name, raw in artifacts.items()}}
+        directory = self.store / 'stages' / stage_key
+        directory.mkdir(parents=True)
+        for name, raw in artifacts.items():
+            (directory / name).write_bytes(raw)
+        (directory / 'manifest.json').write_bytes(batch.canonical(record))
+        key = batch.digest({'inputs': [descriptor], 'policy': policy, 'engine': engine})
+        legacy = {'schema_version': 1, 'batch_key': key, 'policy': policy, 'engine': engine,
+                  'stages': [{'id': descriptor['id'], 'stage_key': stage_key,
+                              'manifest_sha256': batch.digest(record), 'status': 'review_required'}],
+                  'status': 'review_required', 'publishable': False, 'network_calls': 0,
+                  'model_calls': 0, 'external_spend_minor': 0,
+                  'artifact_bytes': sum(map(len, artifacts.values())),
+                  'successful_alpha_pixels': 24, 'header_pixels': 24}
+        batch_dir = self.store / 'batches' / key
+        batch_dir.mkdir(parents=True)
+        (batch_dir / 'result.json').write_bytes(batch.canonical(legacy))
+        pointer = {'batch_key': key, 'result_sha256': batch.digest(legacy), 'previous': None}
+        (self.store / 'current.json').write_bytes(batch.canonical(pointer))
+        self.assertEqual(batch._verify_result(self.store, key, policy)[0], legacy)
+        token = batch.digest(pointer)
+        current = self.run_batch(expected=token)
+        self.assertNotEqual(current['batch_key'], key)
+        self.assertEqual(current['schema_version'], 2)
+        receipt = batch.rollback(self.store, expected_current=current['current_token'])
+        self.assertEqual(receipt['restored_batch_key'], key)
+        self.assertEqual(receipt['current_token'], token)
+        batch.rollback(self.store, expected_current=token)
+        self.assertIsNone(batch.current_token(self.store))
+        self.assertEqual((directory / 'original.bin').read_bytes(), self.item['original'])
 
     def test_duplicate_json_keys_and_nonfinite_values_are_rejected(self):
         for raw in (b'{"a":1,"a":2}', b'{"a":NaN}'):

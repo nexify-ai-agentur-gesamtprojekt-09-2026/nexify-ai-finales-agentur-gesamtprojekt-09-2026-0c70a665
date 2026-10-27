@@ -274,11 +274,11 @@
     {
       "id": "ARCH-031",
       "description": "Lokale Bildartefakte erhalten Originale und umgehen Quarantäne/QA/ZeroBudget nie durch Replay.",
-      "check": "python3 -m unittest discover -s tests -p test_product_image_batch.py -q >/dev/null 2>&1",
+      "check": "python3 -m unittest discover -s tests -p test_product_image_batch.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_birefnet_onnx.py -q >/dev/null 2>&1",
       "expect": "exit 0",
       "what": "Hardlinks überschreiben externe Dateien oder neu gehashte Manifeste behaupten unzulässige Publikation/Modell-/QAfreigaben.",
       "why": "Artefakthashes ersetzen weder Originalanker noch Effekt-/Statussemantik, Nutzungsrechte oder Freistellungsprüfung.",
-      "fix": "Exklusive sichere Dateioperationen, feste Replaysemantik, Quarantäne, Originalvergleich und negative CAS-/Crash-/Rollbacktests ausführen."
+      "fix": "Exklusive sichere Dateioperationen, feste Replaysemantik, Quarantäne, Originalvergleich und negative CAS-/Crash-/Rollbacktests ausführen. Feste ONNX-Quelle/Lizenz/Hash/IO/CPU-Session und RGB-/Alphaintegrität mit kontrollierten Doubles prüfen; echte Inferenz separat belegen."
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "base_commit": "da25e75dc48846c0cef4faba7e7b5f340d1481de",
+  "observed_at": "2026-10-27T17:59:14.508801+00:00",
+  "scope": "local fixed CPU BiRefNet adapter and v2 batch integration; no native model inference",
+  "source_sha256": {
+    "tools/birefnet_onnx.py": "afe4a06ab567ebd647a791cbdf77ee0a2c7148014020174598f9285905dfdf14",
+    "tools/product_image_batch.py": "ee296e91adfa5153337fcbdd2d3d68fd33ea11a473529f560c695b0d3a9b073d",
+    "tests/test_birefnet_onnx.py": "cef12904af73ae461f80833066f719f29717f7051c803d04c3af98cc77822261",
+    "tests/test_product_image_batch.py": "511146c15181ed9fe071394291c0bd5706dbf693076a303254e6db3ae4788def",
+    "config/integrations/birefnet-onnx.json": "eb812904ff5ff2484e9f8cf428a8a3008787f5e9526984c288a35556899e1315",
+    "docs/contracts/birefnet-onnx.md": "c9aa67a65ed40df81614aa33383327f17905a7220498c3b8a3e2234990789b12",
+    "docs/contracts/product-image-batch.md": "1f060b185323ec9e39e0fb38b3a47e4a091178879e14b3ef3f15d1432e9f2987",
+    "docs/licenses/birefnet-MIT.txt": "92a7089e0915fc32bc40067560b398f1e6a7a5958abd7d04eda393629a5acefb",
+    "requirements-image.txt": "4d76d84ff2a0177af64fa94b4b8556981cf1938fe11b5a06735c30fc37abd066"
+  },
+  "tests": {
+    "focused_adapter": 11,
+    "focused_batch": 43,
+    "overall_python": 455,
+    "node": 31,
+    "make_check": "passed",
+    "make_e2e": "passed",
+    "make_check_arch": "passed",
+    "make_clean_check": "passed",
+    "actual_graph_session_doubles_only": true,
+    "native_onnxruntime_tested": false,
+    "model_downloaded": false,
+    "runtime_installed_by_task": false,
+    "actual_product_derivatives_created": false
+  },
+  "limits": {
+    "native_runtime": "onnx and onnxruntime absent; numpy and Pillow available",
+    "artifact": "fixed self-contained General FP32 ONNX export absent; needs reviewed DCN lowering/exporter source hash and numerical parity",
+    "resources": "admission estimates only; native peak RSS/latency/export disk size unmeasured",
+    "catalog": "handler not found within enumerated local sources; continuation remains unverified"
+  },
+  "owner_next_action": {
+    "model_pilot": "Implementation / model export owner supplies reviewed offline artifact and runtime closure, then isolated bounded two-image native QA pilot",
+    "catalog": "Deployed catalog owner supplies actual handler repository/commit or authoritative pagination contract"
+  },
+  "independent_review": "pending; recorded separately after reviewer readback",
+  "rollback": "Use segmenter=none_verified and prior projection/current token; legacy v1 remains read-only/rollback; no external state changed"
+}
