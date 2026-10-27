@@ -1,0 +1,1684 @@
+{
+  "schema_version": 1,
+  "base_commit": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
+  "observed_at": "2026-10-27T06:10:21.466Z",
+  "scope": "Local rendered ordinary text on opaque solid CSS surfaces, default public states, DE/NL at390/1280. No provider or whole Accessibility acceptance.",
+  "threshold": 4.5,
+  "source_sha256": {
+    "config/design-rules.json": "8afcdc885e2953aaab273421b071e83d4a175095a215b629e23968453d0f4a02",
+    "config/design-tokens.json": "76411ab83c18fa071efaaa518da8fb7fb97867c67a016bcfb67f35359a68c480",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
+    "apps/site/.generated/public-site.json": "b9d87c7d3b141a9ddcc6b04ad6eca9c59250e0128620494df7cf5827ebcc2aab",
+    "apps/web/app/globals.css": "a8a4fc1be5f532b318c31a357229752563cebdad46a4de1c9f45fdf3cf8598cf",
+    "apps/web/components/Workspace.tsx": "35d46f19f915ee71f615d1eb6dcf45a3daa49711c38ad99bb45888cf1366f959",
+    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
+    "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
+    "apps/web/components/HomeRebuild.css": "3020ffd4093dfd26f4b788fddbe3b3bc5ee148c5c1861dad6a78df67c858c386",
+    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
+    "apps/site/tests/browser-contrast-scope.mjs": "e2f62ea0ae39c9cd4f352fbfa6b9f6a7a7db14c28574719bd2d3137cd80125a0"
+  },
+  "method": "sRGB relative luminance (linear channel <=0.04045 /12.92 else ((c+0.055)/1.055)^2.4); (lighter+0.05)/(darker+0.05). Direct text nodes, visible layout boxes. Transparent-zero ancestors allowed; partial alpha, ancestor opacity, images/gradients, pseudo-element paint, filters and blends excluded conservatively. No pixel sampling.",
+  "limits": [
+    "No computed result for skipped surfaces",
+    "No screenreader, focus/hover/error states, native control text, SVG/canvas, text shadows or overlapping unrelated elements proof",
+    "Large text still uses project threshold4.5; no automatic WCAG exemption",
+    "No screenshot is stored in this report or repository",
+    "Prior screenshot spot checks: homepage1280/390 and actual200% font resize; DE select and N badge corrected; not all pages visually audited"
+  ],
+  "external_requests_blocked": 0,
+  "checks": [
+    {
+      "path": "/",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 149,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 147
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 166,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 149
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 149
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 149,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 149,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/loesungen",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 142,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/loesungen",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 161,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 140
+      },
+      "failures": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 159,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 114
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 133,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 114
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 133,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 114,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 133,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/kontakt",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 115,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/kontakt",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 135,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 161
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 180,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 136,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 155,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 136
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 155,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/impressum",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/impressum",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 111,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/cookies",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 111,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/cookies",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/anmelden",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 117
+      },
+      "failures": []
+    },
+    {
+      "path": "/anmelden",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 136,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/registrieren",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 125
+      },
+      "failures": []
+    },
+    {
+      "path": "/registrieren",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 144,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 121,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 127,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 118
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 124,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 116
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 116
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 125,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 131,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 123
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "width": 1280,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 129
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 123
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 129,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 116,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 104
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 110,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 116
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 111,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 117,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 111,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 117,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 103
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "width": 1280,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 109
+      },
+      "failures": []
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 149
+      },
+      "failures": []
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 147,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 166,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 149,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 149,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 149
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 149
+      },
+      "failures": []
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 168,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/loesungen",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 142,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/loesungen",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 161,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 140
+      },
+      "failures": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 159,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 114
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 133,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 114
+      },
+      "failures": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 133,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 114,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 133,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/kontakt",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 115
+      },
+      "failures": []
+    },
+    {
+      "path": "/kontakt",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 135,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 161
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 180,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 136
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 155,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 136
+      },
+      "failures": []
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 155,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/impressum",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/impressum",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 111,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/cookies",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/cookies",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 130,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/anmelden",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 117
+      },
+      "failures": []
+    },
+    {
+      "path": "/anmelden",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 136,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/registrieren",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 125
+      },
+      "failures": []
+    },
+    {
+      "path": "/registrieren",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 144,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 121,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 127,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 118,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 124,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 116,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 116,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 125
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 131,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 123
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 129,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 123,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 129,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 116,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 104
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 110,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 116,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 122,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 111
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 117
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "nl",
+      "width": 390,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 111,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 117,
+        "opacity": 2
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "nl",
+      "width": 390,
+      "measured": 7,
+      "skipped": {
+        "image_or_gradient": 103
+      },
+      "failures": []
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "nl",
+      "width": 1280,
+      "measured": 11,
+      "skipped": {
+        "image_or_gradient": 109,
+        "opacity": 2
+      },
+      "failures": []
+    }
+  ],
+  "combinations": [
+    {
+      "foreground": [
+        255,
+        255,
+        255
+      ],
+      "background": [
+        27,
+        30,
+        29
+      ],
+      "ratio": 16.79928363116638,
+      "meets_project_threshold": true,
+      "occurrences": 385,
+      "sample": {
+        "path": "/",
+        "locale": "de",
+        "width": 390,
+        "selector": "h2",
+        "text": "NeX Agentic AIFly"
+      }
+    },
+    {
+      "foreground": [
+        156,
+        162,
+        158
+      ],
+      "background": [
+        27,
+        30,
+        29
+      ],
+      "ratio": 6.460076956207317,
+      "meets_project_threshold": true,
+      "occurrences": 241,
+      "sample": {
+        "path": "/",
+        "locale": "de",
+        "width": 390,
+        "selector": "p",
+        "text": "Dein Vorhaben. Gemeinsam der nächste Schritt."
+      }
+    },
+    {
+      "foreground": [
+        188,
+        193,
+        189
+      ],
+      "background": [
+        27,
+        30,
+        29
+      ],
+      "ratio": 9.200474489687569,
+      "meets_project_threshold": true,
+      "occurrences": 513,
+      "sample": {
+        "path": "/",
+        "locale": "de",
+        "width": 390,
+        "selector": "button.icon-button",
+        "text": "×"
+      }
+    },
+    {
+      "foreground": [
+        215,
+        250,
+        80
+      ],
+      "background": [
+        27,
+        30,
+        29
+      ],
+      "ratio": 14.142992779933339,
+      "meets_project_threshold": true,
+      "occurrences": 225,
+      "sample": {
+        "path": "/",
+        "locale": "de",
+        "width": 390,
+        "selector": "button",
+        "text": "Orientierung"
+      }
+    },
+    {
+      "foreground": [
+        255,
+        255,
+        255
+      ],
+      "background": [
+        42,
+        46,
+        44
+      ],
+      "ratio": 13.764931923456444,
+      "meets_project_threshold": true,
+      "occurrences": 32,
+      "sample": {
+        "path": "/wissen",
+        "locale": "de",
+        "width": 390,
+        "selector": "button",
+        "text": "Orientierung"
+      }
+    }
+  ],
+  "full_case_accepted": false,
+  "total_measured": 1396,
+  "failure_occurrences": 0,
+  "completed": true
+}

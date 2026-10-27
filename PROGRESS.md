@@ -1,3 +1,16 @@
+# Entscheidungskreis nach PaketVersion3 · lokal
+
+Current State: Grundlage c8c865f unverändert als ausgeliefertes PaketVersion3.
+13 offene Abnahmefälle mit Quellen, Ownerbereich, nächster Aktion und präzisem
+Abschlusskriterium im vorhandenen Register ergänzt. MASTER12 enthält einen
+lokal bestätigten Suite-/Funding-Regelkonflikt; keine Geschäftslogik geändert.
+Neue Charakterisierung und synthetischer SQLite-Backup/Restore getestet.
+Kontrast nur auf berechenbaren deckenden Flächen ausgewertet; komplexe Flächen
+und qualifizierte Assistenztechnik bleiben offen.
+Next Steps: Entscheidung zu MASTER12-TRIAL-01 und autoritative externe Belege
+entsprechend docs/contracts/acceptance-decisions.md. Kein Handoff schließt Fälle.
+Keine neue Provider-/Domain-/Runtimeaktion, keine aktualisierte Libraryversion.
+
 # Lokales Abdeckungsdelta · 27.10.2026
 
 Current State: auf Basis0cf8545 generische NL/FR-Beschriftungen und kleine
