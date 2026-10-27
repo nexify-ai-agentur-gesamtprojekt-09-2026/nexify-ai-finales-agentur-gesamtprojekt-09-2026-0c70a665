@@ -1,0 +1,37 @@
+test_parallel_start_and_restart_write_one_fixed_server_window_without_funding (test_suite_trial.SuiteTrialTests.test_parallel_start_and_restart_write_one_fixed_server_window_without_funding) ... ERROR
+
+======================================================================
+ERROR: test_parallel_start_and_restart_write_one_fixed_server_window_without_funding (test_suite_trial.SuiteTrialTests.test_parallel_start_and_restart_write_one_fixed_server_window_without_funding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-one-app/tests/test_suite_trial.py", line 46, in test_parallel_start_and_restart_write_one_fixed_server_window_without_funding
+    results=list(pool.map(lambda _:self.f.reopen().start_trial(self.principal,self.tenant),range(8)))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-one-app/tests/test_suite_trial.py", line 46, in <lambda>
+    results=list(pool.map(lambda _:self.f.reopen().start_trial(self.principal,self.tenant),range(8)))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-one-app/.local/takeover/remote-domain.py", line 355, in start_trial
+    self._funding(db, workspace)
+  File "/workspace/nexify-one-app/.local/takeover/remote-domain.py", line 370, in _funding
+    raise DomainError("explicit_validated_funding_required")
+audited_remote_domain.DomainError: explicit_validated_funding_required
+
+----------------------------------------------------------------------
+Ran 1 test in 0.014s
+
+FAILED (errors=1)
+EXPECTED DIFFERENCE REPRODUCED: exact remote source blocks unfunded suite start; no provider called
