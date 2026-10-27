@@ -845,3 +845,16 @@ Folgebranch erforderlich, weil42 diese Nachträge nicht enthält. GitLab ist
 serverlokal gemeldet, aktuelle Projekt-/Transportbindung bleibt unbestätigt.
 Details und Grenzen: `docs/contracts/reviewed-delivery.md`. Kein Mainpush,
 Forcepush, Promote, Domain-/Server-/Rechtewechsel durch diesen Auftrag.
+
+CI-Nachtrag: Der echte CLI-Pilot90b9f94 lieferte PR43 und identischer Replay
+führte null weitere Writes aus. Gleichnamige Push-/PR-Kontexte erwiesen sich
+als ungenaue CI-Quelle. Die Auswertung bindet deshalb den neuesten gewöhnlichen
+Push des exakten Heads/Branches an Workflow, Run und aktuelle Attempt-Jobs;
+neuere Fehler und Änderungen im Readback verdrängen alte Erfolge. 27 fokussierte
+Commanddouble-Fälle sind vom tatsächlichen GitHub-/Providerbeleg getrennt.
+
+PR43 wurde anschließend extern am27.10.um18:24:12UTC gemergt: mainad17a459,
+übernommenerHead90b9f94. Kein Merge durch diesen CLI-Auftrag. Die jüngste
+typisierte CI-Auswertung bleibt ein getrenntes lokal geprüftes Delta; nach
+Koordinationsanweisung keine weitere automatische Folge-PR-Schleife. Reale
+Modellinferenz, GitLabprojektbindung und Produktivabnahme bleiben offen.

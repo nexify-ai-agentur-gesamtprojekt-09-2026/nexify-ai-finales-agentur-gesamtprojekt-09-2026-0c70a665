@@ -23,6 +23,7 @@ HEX = re.compile(r'^[0-9a-f]{64}$')
 BRANCH = re.compile(r'^integration/[A-Za-z0-9][A-Za-z0-9._/-]{0,150}$')
 MAX_OUTPUT = 1024 * 1024
 GATES = {'check', 'test', 'e2e', 'check-arch'}
+CI_PATH, CI_NAME = '.github/workflows/ci.yml', 'CI'
 
 
 class DeliveryRejected(ValueError):
@@ -306,35 +307,85 @@ class Flow:
             require(not paths & foreign, 'foreign_pr_file_overlap')
         return len(paths)
 
+    def _ci_run(self, value, workflow, request):
+        require(isinstance(value, dict)
+                and all(type(value.get(k)) is int and value[k] > 0
+                        for k in ('id', 'workflow_id', 'run_number', 'run_attempt')),
+                'ci_run_identity_invalid')
+        require(value['workflow_id'] == workflow['id'] and value.get('name') == CI_NAME
+                and value.get('path') == CI_PATH and value.get('event') == 'push'
+                and value.get('head_sha') == request['head']
+                and value.get('head_branch') == request['branch'], 'ci_run_binding_mismatch')
+        require(value.get('status') in ('completed', 'queued', 'in_progress', 'waiting', 'pending', 'requested'),
+                'ci_run_status_invalid')
+        return {k: value.get(k) for k in ('id', 'workflow_id', 'run_number', 'run_attempt',
+                'name', 'path', 'event', 'head_sha', 'head_branch', 'status', 'conclusion')}
+
+    def _latest_push_run(self, workflow, request):
+        rows = self.pages('repos/' + REPO + '/actions/workflows/ci.yml/runs',
+                          {'event': 'push', 'head_sha': request['head'], 'branch': request['branch']},
+                          key='workflow_runs')
+        require(bool(rows), 'ci_push_run_missing')
+        runs = [self._ci_run(row, workflow, request) for row in rows]
+        require(len({r['id'] for r in runs}) == len(runs)
+                and len({r['run_number'] for r in runs}) == len(runs), 'ci_run_list_ambiguous')
+        # run_number increments per new workflow run; reruns increment run_attempt.
+        return max(runs, key=lambda row: row['run_number'])
+
+    @staticmethod
+    def _ci_state(status, conclusion):
+        if status != 'completed':
+            return 'pending' if conclusion is None else 'unavailable'
+        return ('passed' if conclusion == 'success' else
+                'failed' if conclusion in ('failure', 'cancelled', 'timed_out', 'action_required') else 'unavailable')
+
     def ci(self, request):
+        report = {'head': request['head'], 'status': 'unavailable', 'checks': {},
+                  'source': 'github_actions_push', 'event': 'push', 'workflow': CI_PATH,
+                  'external_checks': {'status': 'not_evaluated', 'affects_core': False}}
         try:
-            checks = self.pages('repos/' + REPO + '/commits/' + request['head'] + '/check-runs', {'filter': 'latest'}, key='check_runs')
-            statuses = self.api('repos/' + REPO + '/commits/' + request['head'] + '/status?per_page=100')
-            require(isinstance(statuses, dict) and statuses.get('sha') == request['head']
-                    and isinstance(statuses.get('statuses'), list)
-                    and type(statuses.get('total_count')) is int
-                    and statuses['total_count'] == len(statuses['statuses']) <= 100, 'ci_status_incomplete_or_wrong_sha')
-            observed = {}
-            def add(name, status):
-                require(isinstance(name, str), 'ci_context_invalid')
-                if name in request['required_ci']:
-                    require(name not in observed, 'ci_context_ambiguous')
-                    observed[name] = status
-            for row in checks:
-                require(isinstance(row, dict) and row.get('head_sha') == request['head'], 'ci_check_wrong_sha')
-                state, conclusion = row.get('status'), row.get('conclusion')
-                add(row.get('name'), 'passed' if state == 'completed' and conclusion == 'success' else
-                    'failed' if conclusion in ('failure', 'cancelled', 'timed_out', 'action_required') else
-                    'pending' if state != 'completed' else 'unavailable')
-            for row in statuses['statuses']:
-                require(isinstance(row, dict), 'ci_status_shape')
-                add(row.get('context'), {'success': 'passed', 'failure': 'failed', 'error': 'failed', 'pending': 'pending'}.get(row.get('state'), 'unavailable'))
-            selected = {name: observed.get(name, 'unavailable') for name in request['required_ci']}
-            state = ('passed' if all(v == 'passed' for v in selected.values()) else
-                     'failed' if 'failed' in selected.values() else 'pending' if 'pending' in selected.values() else 'unavailable')
-            return {'head': request['head'], 'status': state, 'checks': selected}
-        except DeliveryRejected:
-            return {'head': request['head'], 'status': 'unavailable', 'checks': {}}
+            workflow = self.api('repos/' + REPO + '/actions/workflows/ci.yml')
+            require(isinstance(workflow, dict) and type(workflow.get('id')) is int and workflow['id'] > 0
+                    and workflow.get('name') == CI_NAME and workflow.get('path') == CI_PATH
+                    and workflow.get('state') == 'active', 'ci_workflow_identity_mismatch')
+            selected = self._latest_push_run(workflow, request)
+            run_path = 'repos/' + REPO + '/actions/runs/' + str(selected['id'])
+            require(self._ci_run(self.api(run_path), workflow, request) == selected, 'ci_run_changed')
+            attempt_path = run_path + '/attempts/' + str(selected['run_attempt'])
+            require(self._ci_run(self.api(attempt_path), workflow, request) == selected, 'ci_attempt_changed')
+            report.update(workflow_id=workflow['id'], run_id=selected['id'],
+                          run_number=selected['run_number'], run_attempt=selected['run_attempt'])
+            jobs = self.pages(attempt_path + '/jobs', {}, key='jobs')
+            observed, identifiers = {}, set()
+            for job in jobs:
+                require(isinstance(job, dict) and type(job.get('id')) is int and job['id'] > 0
+                        and job['id'] not in identifiers and type(job.get('run_id')) is int
+                        and job['run_id'] == selected['id'] and type(job.get('run_attempt')) is int
+                        and job['run_attempt'] == selected['run_attempt']
+                        and job.get('head_sha') == request['head'] and isinstance(job.get('name'), str),
+                        'ci_job_binding_mismatch')
+                identifiers.add(job['id'])
+                require(job.get('status') in ('completed', 'queued', 'in_progress', 'waiting', 'pending', 'requested'),
+                        'ci_job_status_invalid')
+                if 'workflow_name' in job:
+                    require(job['workflow_name'] == CI_NAME, 'ci_job_workflow_mismatch')
+                if 'head_branch' in job:
+                    require(job['head_branch'] == request['branch'], 'ci_job_branch_mismatch')
+                if job['name'] in request['required_ci']:
+                    require(job['name'] not in observed, 'ci_required_job_ambiguous')
+                    observed[job['name']] = self._ci_state(job['status'], job.get('conclusion'))
+            checks = {name: observed.get(name, 'unavailable') for name in request['required_ci']}
+            run_state = self._ci_state(selected['status'], selected['conclusion'])
+            state = ('failed' if run_state == 'failed' or 'failed' in checks.values() else
+                     'unavailable' if run_state == 'unavailable' or 'unavailable' in checks.values() else
+                     'pending' if run_state == 'pending' or 'pending' in checks.values() else 'passed')
+            # Finite readback: neither a rerun nor a newer failed run may be hidden by old green jobs.
+            require(self._ci_run(self.api(run_path), workflow, request) == selected, 'ci_run_changed_after_jobs')
+            require(self._latest_push_run(workflow, request) == selected, 'ci_latest_run_changed_after_jobs')
+            report.update(status=state, checks=checks)
+        except DeliveryRejected as exc:
+            report.update(status='unavailable', checks={}, reason=str(exc))
+        return report
 
 
 @contextmanager

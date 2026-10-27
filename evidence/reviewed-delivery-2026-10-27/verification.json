@@ -2,9 +2,9 @@
   "schema_version": 1,
   "observed_at": "2026-10-27T18:14:26.583389+00:00",
   "source_sha256": {
-    "tools/reviewed_delivery.py": "eb9fce1f73378e494f7acdcc18d69f7980e01817f07378341dc67963b606fd45",
-    "tests/test_reviewed_delivery.py": "1eb4149ae84bba7271f0c596ecea6c16035dd86d7a4b23baae28a7ef59d4d0f3",
-    "docs/contracts/reviewed-delivery.md": "3fe0dfb12bd1b5d48d39a4b470d0d9b8f8e3549a784046b20bb43e46ff79c343"
+    "tools/reviewed_delivery.py": "bc5435357b86b4defd2bc3a266bdc1ac9b74b055ae0c0cba812e9489f23798ed",
+    "tests/test_reviewed_delivery.py": "a5fa79c13c7028db63a0410dbcbba586d313ab60f5df217683a1f712884929ca",
+    "docs/contracts/reviewed-delivery.md": "1453ae109ca7b60470bc85b11c58d0a96e5c34cdb5531f510da9d66f50bb0584"
   },
   "independent_review": {
     "reviewer": "separate read-only Sol agent /root/review_current_main_sol",
@@ -16,7 +16,16 @@
   },
   "execution_scope": "fixed repo GitHub own integration branch push and draft only; no merge/force/promote; existing hooks retained",
   "tested_with_command_doubles": 21,
-  "native_flow_execution": "pending exactcommit preflight; separately verified root native GitHub PR42 is already externally merged",
+  "native_flow_execution": {
+    "exact_head": "90b9f9436ce1e1177b0b73b05111ce6be3d87251",
+    "pr": 43,
+    "push_and_draft": "real authorized CLI execute succeeded with final readback",
+    "identical_replay": "no push or PR-create attempts, same43",
+    "old_ci_selector": "unavailable on duplicate push/PR names; fixed typed ordinary-push selector pending independent review",
+    "ordinary_push_independent_readback": "40558440811 exact90b9 all5jobs success",
+    "does_not_prove": "GitLab/production/provider acceptance",
+    "recorded_at": "2026-10-27T18:23:41.559778+00:00"
+  },
   "gitlab": {
     "location": "server-local per relayed user18:05UTC",
     "current_remote": "unbound",
@@ -28,5 +37,20 @@
     "main/otherPR/branch APIs are not globally atomic",
     "existing PR title/body not automatically edited",
     "no provider/production acceptance"
-  ]
+  ],
+  "typed_ci_followup": {
+    "commanddouble_tests": 27,
+    "source": "ordinary push workflow/run/attempt jobs only",
+    "independent_review": "Separate read-only Sol independently repeated27tests,3freezehashes; no concrete open findings",
+    "real_readonly_probe": "Passed all5jobs against actual GitHub ordinary push40558440811,attempt1,workflow371083871,exact90b9; native-typed-ci-90b9.json"
+  },
+  "external_merge43": {
+    "merge_sha": "ad17a459ebb0a169cfef08ec0fe7686e7b627950",
+    "merged_head": "90b9f9436ce1e1177b0b73b05111ce6be3d87251",
+    "merged_at": "2026-10-27T18:24:12Z",
+    "merge_by_this_workflow": false,
+    "actor_not_checked": true,
+    "latest_typed_ci_delta_published": false,
+    "no_automatic_followup_pr_loop": true
+  }
 }
