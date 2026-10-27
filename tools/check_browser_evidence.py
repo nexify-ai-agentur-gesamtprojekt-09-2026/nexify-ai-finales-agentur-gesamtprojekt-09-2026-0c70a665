@@ -29,6 +29,13 @@ SDK_SOURCE_PATHS = (
     "packages/agent-runtime/public-orientation.ts",
     "tools/agent-preview.mjs",
 )
+AUXILIARY_SOURCE_PATHS = (
+    "apps/site/src/main.tsx",
+    "apps/web/components/WorkspaceRebuild.css",
+    "apps/web/components/HomeRebuild.css",
+    "packages/tokens/tokens.css",
+    "apps/site/tests/browser-critical.mjs",
+)
 SDK_CRITICAL_CHECKS = frozenset((
     "sdk_guided_preview_works_when_visitor_session_is_404",
     "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
@@ -98,6 +105,12 @@ def check_evidence(root):
     checks = evidence.get("checks")
     if not isinstance(checks, list) or any(not isinstance(item, str) for item in checks) or not CRITICAL_CHECKS.issubset(checks):
         raise EvidenceError("critical_browser_check_missing")
+    auxiliary = evidence.get("auxiliary_source_sha256")
+    if not isinstance(auxiliary, dict) or set(auxiliary) != set(AUXILIARY_SOURCE_PATHS):
+        raise EvidenceError("exact_auxiliary_source_path_set_required")
+    for relative in AUXILIARY_SOURCE_PATHS:
+        if hashlib.sha256(_read(root, relative)).hexdigest() != auxiliary[relative]:
+            raise EvidenceError("stale_auxiliary_source_sha256: " + relative)
     sdk_hashes = evidence.get("sdk_source_sha256")
     if not isinstance(sdk_hashes, dict) or set(sdk_hashes) != set(SDK_SOURCE_PATHS):
         raise EvidenceError("exact_sdk_source_path_set_required")

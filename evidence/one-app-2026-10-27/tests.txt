@@ -3,7 +3,7 @@ node tools/ds-audit-cli.js
 Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)
 python3 -m unittest discover -s tests -q
 ----------------------------------------------------------------------
-Ran 325 tests in 31.450s
+Ran 328 tests in 35.749s
 
 OK
 ./API-Rechtliches.dc.html: OK

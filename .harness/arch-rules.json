@@ -207,6 +207,15 @@
       "what": "Tokenherkunft oder explizite netzabhängige Installationsgrenze driftet.",
       "why": "Installation darf keine versteckte Datenhaltung, Authaktivierung oder Schreibwiederholung erzeugen.",
       "fix": "Zentrale Tokenableitung und expliziten Modus erhalten; browser-coverage/accessibility/pwa nach UIänderungen ausführen."
+    },
+    {
+      "id": "ARCH-024",
+      "description": "200%-Textnachweise messen gerenderte Schrift statt nur Root-CSS.",
+      "check": "python3 tools/check_text_resize_evidence.py >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Root-Font-Override wurde als tatsächliche Textverdopplung oder überlaufende Texte als geprüft ausgegeben.",
+      "why": "Nicht wirksame Testmanipulation darf keine Abnahme vortäuschen.",
+      "fix": "Vorher/Nachher gerenderte Schrift assertieren, lokale Inhaltsüberläufe messen und browser-text-spacing.mjs frisch ausführen."
     }
   ]
 }

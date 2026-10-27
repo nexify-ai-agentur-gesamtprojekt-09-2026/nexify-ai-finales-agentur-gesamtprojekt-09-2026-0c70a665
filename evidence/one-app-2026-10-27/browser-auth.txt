@@ -1,5 +1,5 @@
-5:47:41 AM [vite] (client) Re-optimizing dependencies because vite config has changed
-5:47:43 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:38891/tests/fixtures/clerk.tsx
+6:00:36 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+6:00:39 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:32875/tests/fixtures/clerk.tsx
 
 The above error occurred in one of your React components.
 

@@ -2,185 +2,185 @@ TAP version 13
 # Subtest: auth is disabled by default and only explicit public true plus a valid key enables it
 ok 1 - auth is disabled by default and only explicit public true plus a valid key enables it
   ---
-  duration_ms: 1.309613
+  duration_ms: 3.293375
   type: 'test'
   ...
 # Subtest: malformed public keys never mount a broken provider
 ok 2 - malformed public keys never mount a broken provider
   ---
-  duration_ms: 0.305416
+  duration_ms: 0.418086
   type: 'test'
   ...
 # Subtest: only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted
 ok 3 - only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted
   ---
-  duration_ms: 1.343343
+  duration_ms: 1.527354
   type: 'test'
   ...
 # Subtest: the wrapper retains public media, guide and honest disabled fallback
 ok 4 - the wrapper retains public media, guide and honest disabled fallback
   ---
-  duration_ms: 0.314269
+  duration_ms: 0.264416
   type: 'test'
   ...
 # Subtest: all public pages must be represented without private or duplicate page entries
 ok 5 - all public pages must be represented without private or duplicate page entries
   ---
-  duration_ms: 1.182834
+  duration_ms: 1.292513
   type: 'test'
   ...
 # Subtest: private action targets and invented playable pending assets are rejected
 ok 6 - private action targets and invented playable pending assets are rejected
   ---
-  duration_ms: 0.238305
+  duration_ms: 0.228152
   type: 'test'
   ...
 # Subtest: published videos need canonical own-origin video paths and every caption locale
 ok 7 - published videos need canonical own-origin video paths and every caption locale
   ---
-  duration_ms: 1.097226
+  duration_ms: 14.337894
   type: 'test'
   ...
 # Subtest: projection preserves all public explainer copy but excludes unrelated configuration
 ok 8 - projection preserves all public explainer copy but excludes unrelated configuration
   ---
-  duration_ms: 0.606154
+  duration_ms: 0.778445
   type: 'test'
   ...
 # Subtest: invented source references cannot pass the provenance gate
 ok 9 - invented source references cannot pass the provenance gate
   ---
-  duration_ms: 0.322351
+  duration_ms: 0.346709
   type: 'test'
   ...
 # Subtest: protected fields never cross the public build boundary
 ok 10 - protected fields never cross the public build boundary
   ---
-  duration_ms: 1.013232
+  duration_ms: 5.597602
   type: 'test'
   ...
 # Subtest: missing explicit authentication false is excluded
 ok 11 - missing explicit authentication false is excluded
   ---
-  duration_ms: 0.776509
+  duration_ms: 0.777172
   type: 'test'
   ...
 # Subtest: unknown and private action targets fail rather than silently redirect
 ok 12 - unknown and private action targets fail rather than silently redirect
   ---
-  duration_ms: 0.427537
+  duration_ms: 0.490614
   type: 'test'
   ...
 # Subtest: route redirects and duplicate paths are rejected
 ok 13 - route redirects and duplicate paths are rejected
   ---
-  duration_ms: 0.216924
+  duration_ms: 0.287009
   type: 'test'
   ...
 # Subtest: contact channels exclude encoded headers and arbitrary schemes
 ok 14 - contact channels exclude encoded headers and arbitrary schemes
   ---
-  duration_ms: 0.294138
+  duration_ms: 0.310474
   type: 'test'
   ...
 # Subtest: portable route parser accepts normal and file hash navigation without unsafe decoding
 ok 15 - portable route parser accepts normal and file hash navigation without unsafe decoding
   ---
-  duration_ms: 0.286448
+  duration_ms: 0.310805
   type: 'test'
   ...
 # Subtest: only ordinary same-origin primary clicks are intercepted
 ok 16 - only ordinary same-origin primary clicks are intercepted
   ---
-  duration_ms: 0.244434
+  duration_ms: 0.306518
   type: 'test'
   ...
 # Subtest: default/standalone/unknown build modes emit no manifest or worker
 ok 17 - default/standalone/unknown build modes emit no manifest or worker
   ---
-  duration_ms: 1.049115
+  duration_ms: 1.124441
   type: 'test'
   ...
 # Subtest: explicit mode emits network-only installation and unchanged existing brand icon
 ok 18 - explicit mode emits network-only installation and unchanged existing brand icon
   ---
-  duration_ms: 1.153651
+  duration_ms: 2.193691
   type: 'test'
   ...
 # Subtest: missing capability, insecure, file and standalone fail closed
 ok 19 - missing capability, insecure, file and standalone fail closed
   ---
-  duration_ms: 0.282982
+  duration_ms: 0.258116
   type: 'test'
   ...
 # Subtest: exact worker registration, errors remain explicit without retry
 ok 20 - exact worker registration, errors remain explicit without retry
   ---
-  duration_ms: 0.257905
+  duration_ms: 0.264105
   type: 'test'
   ...
 # Subtest: split standalone input fails before publishing an incomplete preview
 ok 21 - split standalone input fails before publishing an incomplete preview
   ---
-  duration_ms: 147.566091
+  duration_ms: 250.550312
   type: 'test'
   ...
 # Subtest: self contained input retains offline CSP and preview mode
 ok 22 - self contained input retains offline CSP and preview mode
   ---
-  duration_ms: 136.334608
+  duration_ms: 366.970822
   type: 'test'
   ...
 # Subtest: standalone rejects nested static chunk even with only one top-level JavaScript file
 ok 23 - standalone rejects nested static chunk even with only one top-level JavaScript file
   ---
-  duration_ms: 132.161598
+  duration_ms: 538.423954
   type: 'test'
   ...
 # Subtest: standalone rejects external re-export even with only one top-level JavaScript file
 ok 24 - standalone rejects external re-export even with only one top-level JavaScript file
   ---
-  duration_ms: 138.484529
+  duration_ms: 545.350553
   type: 'test'
   ...
 # Subtest: standalone rejects dynamic literal chunk even with only one top-level JavaScript file
 ok 25 - standalone rejects dynamic literal chunk even with only one top-level JavaScript file
   ---
-  duration_ms: 135.855928
+  duration_ms: 292.594106
   type: 'test'
   ...
 # Subtest: standalone rejects computed dynamic chunk even with only one top-level JavaScript file
 ok 26 - standalone rejects computed dynamic chunk even with only one top-level JavaScript file
   ---
-  duration_ms: 131.645743
+  duration_ms: 387.99496
   type: 'test'
   ...
 # Subtest: standalone rejects bare module even with only one top-level JavaScript file
 ok 27 - standalone rejects bare module even with only one top-level JavaScript file
   ---
-  duration_ms: 133.766121
+  duration_ms: 318.234083
   type: 'test'
   ...
 # Subtest: standalone rejects invalid syntax even with only one top-level JavaScript file
 ok 28 - standalone rejects invalid syntax even with only one top-level JavaScript file
   ---
-  duration_ms: 144.299503
+  duration_ms: 453.838248
   type: 'test'
   ...
-# (node:75847) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///workspace/nexify-one-app/apps/web/components/WorkspaceCapabilities.ts is not specified and it doesn't parse as CommonJS.
+# (node:89920) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///workspace/nexify-one-app/apps/web/components/WorkspaceCapabilities.ts is not specified and it doesn't parse as CommonJS.
 # Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 # To eliminate this warning, add "type": "module" to /workspace/nexify-one-app/apps/web/package.json.
 # (Use `node --trace-warnings ...` to show where the warning was created)
 # Subtest: missing or malformed server capability descriptions never enable operations
 ok 29 - missing or malformed server capability descriptions never enable operations
   ---
-  duration_ms: 1.684983
+  duration_ms: 4.375824
   type: 'test'
   ...
 # Subtest: local draft tools stay distinct from live model, delivery and calendar capabilities
 ok 30 - local draft tools stay distinct from live model, delivery and calendar capabilities
   ---
-  duration_ms: 0.689098
+  duration_ms: 0.631985
   type: 'test'
   ...
 1..30
@@ -191,4 +191,4 @@ ok 30 - local draft tools stay distinct from live model, delivery and calendar c
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1203.606716
+# duration_ms 3456.790383

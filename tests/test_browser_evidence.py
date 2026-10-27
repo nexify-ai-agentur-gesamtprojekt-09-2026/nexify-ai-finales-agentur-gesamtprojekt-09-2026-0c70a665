@@ -17,7 +17,7 @@ class BrowserEvidenceTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
-        for relative in (*checker.SOURCE_PATHS, *checker.SDK_SOURCE_PATHS, checker.EVIDENCE_PATH):
+        for relative in (*checker.SOURCE_PATHS, *checker.SDK_SOURCE_PATHS, *checker.AUXILIARY_SOURCE_PATHS, checker.EVIDENCE_PATH):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((ROOT / relative).read_bytes())
@@ -48,6 +48,12 @@ class BrowserEvidenceTests(unittest.TestCase):
         malicious["source_sha256"]["../../outside-repository"] = "0" * 64
         self.write(malicious)
         with self.assertRaisesRegex(checker.EvidenceError, "exact_source_path_set_required"):
+            checker.check_evidence(self.root)
+
+    def test_stylesheet_drift_cannot_reuse_an_old_browser_pass(self):
+        path = self.root / "apps/web/components/WorkspaceRebuild.css"
+        path.write_bytes(path.read_bytes() + b"\n/* changed layout */\n")
+        with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
             checker.check_evidence(self.root)
 
     def test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed(self):

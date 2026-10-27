@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-27T05:48:22.200Z",
+  "recorded_at": "2026-10-27T06:00:34.832Z",
   "checks": [
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
     "native_product_menu_and_direct_legal_footer_links",
@@ -54,7 +54,7 @@
   },
   "auxiliary_source_sha256": {
     "apps/site/src/main.tsx": "970a44a39271a3da64c8468542f00be0a70a2e1a002032bfcc9f9c1608d6aeab",
-    "apps/web/components/WorkspaceRebuild.css": "66a2e7978ca7ae7f5beffb572c5e37cccaea60df02872af95892277dccc20afd",
+    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
     "apps/web/components/HomeRebuild.css": "3020ffd4093dfd26f4b788fddbe3b3bc5ee148c5c1861dad6a78df67c858c386",
     "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
     "apps/site/tests/browser-critical.mjs": "c36730b7d4601c187b32756937acb5f195d2f77812fcaf476adb988ed938035c"
@@ -123,7 +123,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-27T05:48:22.200Z",
+    "recorded_at": "2026-10-27T06:00:34.832Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

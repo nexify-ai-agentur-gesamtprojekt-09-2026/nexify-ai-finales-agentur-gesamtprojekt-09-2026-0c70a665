@@ -73,3 +73,10 @@
 .footer-bottom > a { display: inline-flex; align-items: center; }
 
 .site-header .main-navigation a { min-width: var(--target-min); justify-content: center; }
+/* Enlarged user text must reflow instead of pushing the shared shell sideways. */
+.workspace-shell { overflow-wrap: anywhere; }
+.site-header { flex-wrap: wrap; }
+.site-header .brand { flex-shrink: 0; }
+.site-header .main-navigation, .header-actions { min-width: 0; flex-wrap: wrap; }
+.header-actions select { width: calc(68em / 13); min-width: var(--target-min); }
+.aifly-symbol { width: calc(34em / 18); height: calc(34em / 18); flex-basis: calc(34em / 18); }

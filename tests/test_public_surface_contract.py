@@ -34,3 +34,14 @@ class PublicSurfaceContractTests(unittest.TestCase):
         self.assertEqual(re.findall(r"addEventListener\('([^']+)'",worker),['install'])
         self.assertNotRegex(worker,r'caches\.|fetch\(|skipWaiting\(|clients\.claim\(')
         self.assertTrue((ROOT/'prototypen/sw.js').exists())
+    def test_root_font_claim_is_not_accepted_as_rendered_text_doubling(self):
+        from tools.check_text_resize_evidence import check_resize
+        with self.assertRaisesRegex(ValueError, 'rendered text doubling'):
+            check_resize({'checks':[{'path':'/','text_resize_200':True,'overflow':False}], 'issues':[]}, {'/'})
+    def test_actual_resize_requires_both_page_and_content_geometry(self):
+        from tools.check_text_resize_evidence import check_resize
+        row={'path':'/','text_resize_200':True,'resized':{'all_doubled':True,'count':10},'overflow':False,'content_overflows':[]}
+        self.assertEqual(check_resize({'checks':[row],'issues':[]},{'/'}),1)
+        row['content_overflows']=[{'class':'headline','client':100,'scroll':180}]
+        with self.assertRaisesRegex(ValueError,'overflow'):
+            check_resize({'checks':[row],'issues':[]},{'/'})

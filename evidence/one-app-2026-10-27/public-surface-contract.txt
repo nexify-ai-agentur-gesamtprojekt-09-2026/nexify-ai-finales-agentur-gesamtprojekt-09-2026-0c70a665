@@ -1,8 +1,10 @@
+test_actual_resize_requires_both_page_and_content_geometry (test_public_surface_contract.PublicSurfaceContractTests.test_actual_resize_requires_both_page_and_content_geometry) ... ok
 test_generated_token_values_match_central_source_semantically (test_public_surface_contract.PublicSurfaceContractTests.test_generated_token_values_match_central_source_semantically) ... ok
 test_own_active_styles_do_not_bypass_central_color_tokens (test_public_surface_contract.PublicSurfaceContractTests.test_own_active_styles_do_not_bypass_central_color_tokens) ... ok
 test_public_installation_is_explicit_and_network_only (test_public_surface_contract.PublicSurfaceContractTests.test_public_installation_is_explicit_and_network_only) ... ok
+test_root_font_claim_is_not_accepted_as_rendered_text_doubling (test_public_surface_contract.PublicSurfaceContractTests.test_root_font_claim_is_not_accepted_as_rendered_text_doubling) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.061s
+Ran 5 tests in 0.102s
 
 OK

@@ -3,9 +3,11 @@
 Current State: auf Basis0cf8545 generische NL/FR-Beschriftungen und kleine
 Linkflächen korrigiert, Marken erhalten.72 Routen-/Sprachfälle,1724 reale
 Linkaktivierungen,36 mobile Accessibilityfälle und108 Textabstands-/Textgrößen-
-Geometriefälle bestanden. Öffentliche Installation nur im expliziten
+Geometriefälle mit tatsächlich gemessener Textverdopplung bestanden. Der
+unabhängig gefundene Root-Font-Scheinnachweis und echte Resizeüberläufe wurden
+korrigiert; Header/Wörter umbrechbar, Select/N-Symbol schriftrelativ. Öffentliche Installation nur im expliziten
 public-pwa-Build, netzabhängig ohne Cache/Replay;9 lokale Browserchecks bestanden.
-325 Python- und30 Node-Tests; unabhängige kritische UI-/SDK-/PWA-Nachprüfung.
+328 Python- und30 Node-Tests; unabhängige kritische UI-/SDK-/PWA-Nachprüfung.
 
 Next Steps: qualifizierte visuelle/Assistenztechnikprüfung MASTER-09 bleibt
 konkret offen. Vier lokale Teilnachweise schließen keine Produktivabnahme;
