@@ -16,7 +16,7 @@ type Slot = {id:string;starts:string;source:string};
 type Booking = {id:string;starts:string;confirmed:boolean};
 const PublicOrientationChat=lazy(()=>import("./PublicOrientationChat"));
 const intents: Intent[] = ["quote", "booking", "marketing"];
-const UIContext=createContext({locale:"de" as Locale,t:translations.de});
+const UIContext=createContext({locale:"de" as Locale,t:translations.de,session:null as {csrf:string}|null});
 export const useUI=()=>useContext(UIContext);
 
 function ActionGlyph({intent}:{intent:Intent}){return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">{intent==="quote"?<><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h4M9 12h6M9 16h6"/></>:intent==="booking"?<><circle cx="12" cy="12" r="9"/><path d="M12 7v6h4"/></>:<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/>}</svg>}
@@ -108,7 +108,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
   }
 
-  return <UIContext.Provider value={{locale,t}}><div className={`workspace-shell ${open?"is-open":"is-closed"}`}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null}}><div className={`workspace-shell ${open?"is-open":"is-closed"}`}>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":"Aller au contenu"}</a>
       <header className="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={`${site==="teileklar"?"TEILEKLAR":"NeXify AI"} · ${locale==="de"?"Startseite":locale==="nl"?"Startpagina":"Accueil"}`}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>{locale==="de"?"Ein Bereich von NeXify AI":locale==="nl"?"Een onderdeel van NeXify AI":"Une activité de NeXify AI"}</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>NeXify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>

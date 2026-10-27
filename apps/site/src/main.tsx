@@ -11,6 +11,7 @@ import PresenterGuide,{PresenterGuideProvider,type PresenterJourney} from "../..
 import ExplainerSections,{type ExplainerModule} from "../../web/components/ExplainerSections";
 import HomeContent from "../../web/components/HomeContent";
 import PublicContent from "../../web/components/PublicContent";
+import ShopPanel from "../../web/components/ShopPanel";
 import {RouterProvider,type SiteLinkProps} from "../../web/components/Router";
 import type {PublicPage} from "../../web/lib/page-types";
 import {routePath,interceptNavigation} from "./router-state.mjs";
@@ -41,7 +42,7 @@ function RouteContent({page}:{page?:PublicPage}){
   const explanation=<><PresenterGuide pageId={page.id} pages={pages} journeys={journeys}/><ExplainerSections modules={modules} pages={pages}/></>;
   if(page.path==='/')return <HomeContent home={page} pages={pages}>{explanation}</HomeContent>;
   const authFallback=['login','signup'].includes(page.id);
-  return <>{authFallback&&<AuthenticationPanel hashMode={hashMode} mode={page.id==='signup'?'signup':'login'}/>}<PublicContent page={page} pages={pages}>{explanation}</PublicContent></>;
+  return <>{authFallback&&<AuthenticationPanel hashMode={hashMode} mode={page.id==='signup'?'signup':'login'}/>}<PublicContent page={page} pages={pages}>{["tk-search","tk-categories","tk-category","tk-product","tk-cart","tk-checkout"].includes(page.id)&&<ShopPanel pageId={page.id}/>} {explanation}</PublicContent></>;
 }
 function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');

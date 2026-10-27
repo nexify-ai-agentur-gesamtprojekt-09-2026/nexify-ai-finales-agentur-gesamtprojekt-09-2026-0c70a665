@@ -37,6 +37,11 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-CALL-BRAIN-20261027: user; Datum 2026-10-27; parent_verified_excerpt; parent delegation of current user call; precise call time not supplied. Umfang: Prefer repairing and retaining existing Brain if verifiably functional; no mandatory rebuild. Parent owns separate diagnosis. Server retention after real dependency inventory; user handles payment, no payment or server changes by implementation owner.
 - SRC-MASTER-1.2-REQUIREMENTS: compiled_master_contract; Datum 2026-10-27; direct_library_read_bounded_lines; libfile_6188057b2048819196091cd6ec5d5b08 version2 file_00000000661081f9b5b0ff41d54fcc10 lines1-332. Umfang: Read requirements/status definitions only, lines1-332. Full business register not imported; this compiled contract is not original chat evidence.
 - SRC-SYSTEM-PREVIEW-20261027: runtime_observation; Datum 2026-10-27; parent_browser_observation; https://system.nexifyai.cloud/. Umfang: Parent cloudbrowser13:27/13:28: development-preview public agency/product landing, text guide without Live AI. Origin repo/commit/writer unknown; Vercel known-team404 is no nonexistence proof. Codex CLI authorship is user hypothesis.
+- SRC-DATA001-PARENT: versioned_technical_contract; Datum 2026-08-31; parent_verified_excerpt; https://drive.google.com/file/d/1_d8SIRCsI1QvkvLbY3H1Ih9dnRfkuI_b/view. Umfang: DATA-001 v1.0 schema/integration contract: provenance/validity/freshness; no live supplier feed; only delegated excerpt read here
+- SRC-ECO001-PARENT: versioned_technical_contract; Datum 2026-08-31; parent_verified_excerpt; https://drive.google.com/file/d/1vYLSkEiBVJ88700wF9Zqk5xfQWMTsjJL/view. Umfang: ECO-001 v1.0 economic/publishing fields, no concrete margins/costs or commercial release; only delegated excerpt read here
+- SRC-MCP-IDENTITY-20261027: runtime_observation; Datum 2026-10-27; direct_native_mcp_read; evidence/shop-http-2026-10-27/connection-reference-proof.json. Umfang: inventory_targets registry plus fresh nexify-2 authenticated identity probe srv1941843/179.198.195.91; writable_verified false; primary registry timestamp historical, no fresh primary runtime claim
+- SRC-DESIGN-CHOICE-20261027-1439: user; Datum 2026-10-27T14:39Z; parent_verified_excerpt; trusted parent delegation quoting user choice of https://nexify-ai-finales-agentur-gesamtpro.vercel.app/. Umfang: Newest design choice supersedes older a19/system preview authority; parent freshly mapped alias to production main2a552ed; functional fixes retained, no feature/media acceptance.
+- SRC-SERVER-T018-REPORT: execution_report; Datum 2026-10-27; parent_forwarded_executor_report; evidence/shop-http-2026-10-27/server-handoff-reference.json. Umfang: Reported REJECT/6/rolled-back Brain canary and provisional web-route mapping; not independent service/release acceptance; no web-executor server authority.
 
 ## Soll / Ist / Abschluss
 
@@ -295,13 +300,13 @@ Abschluss: Named authoritative hosts/resources with backup/restore/dry-run/rollb
 
 ### REC-DESIGN-01
 
-Soll (SRC-LINKED-STANDARDS): Original logo/mark, registered composition and central tokens; promoted design source hashes and941px/mobile/keyboard proof.
+Soll (SRC-LINKED-STANDARDS, SRC-DESIGN-CHOICE-20261027-1439): Original logo/mark, registered composition and central tokens; promoted design source hashes and941px/mobile/keyboard proof.
 Einordnung: scoped requirement derived from cited source; not reconstructed original transcript
-Dateien/Funktionen: config/design-tokens.json, packages/design-system/README.md, docs/contracts/acceptance-decisions.md
+Dateien/Funktionen: config/design-tokens.json, packages/design-system/README.md, docs/contracts/acceptance-decisions.md, evidence/shop-http-2026-10-27/design-reference-comparison.json
 Beleg: Local token regeneration/browser checks; external headless contract URLs not accessible through available reader
 Auslieferung: partial_local_evidence; keine Gesamtanforderung abgenommen.
-Lücke: Promoted v6 source/lock import and pixel/source conformity not verified; repo design README identifies2.0.
-Nächster Schritt (D04 / D06 / D07): Retrieve authorized original contracts/assets before dependent design promotion; preserve baseline.
+Lücke: Latest explicit choice main2a governs design; older promoted-v6 document applicability remains to reconcile without replacing the chosen theme. Full actual visual/qualified accessibility acceptance remains open.
+Nächster Schritt (D04 / D06 / D07): Use main2a source baseline and existing tokens; preserve reviewed functional/A11y changes, independently verify exact release visuals and resolve remaining older-source applicability.
 Abschluss: Exact promoted source/lock/asset hashes, applicable visual941px/mobile/keyboard proof and independent review.
 
 ### REC-REA-01
@@ -394,13 +399,13 @@ Abschluss: Scoped actual data-path, tenant and readback evidence; no universal p
 
 ### RQ-028
 
-Soll (SRC-MASTER-1.2-REQUIREMENTS): Preserve chosen original visual reference, later corrections and central tokens rather than restore historical themes.
+Soll (SRC-MASTER-1.2-REQUIREMENTS, SRC-DESIGN-CHOICE-20261027-1439): Newest user design reference is production alias at main2a552ed. Preserve that headless layout/tokens/components plus already reviewed functional/A11y fixes; no visual import from a19 or system preview.
 Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
-Dateien/Funktionen: config/design-tokens.json, apps/web/components/Workspace.tsx
-Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
+Dateien/Funktionen: config/design-tokens.json, apps/web/components/Workspace.tsx, evidence/shop-http-2026-10-27/design-reference-comparison.json
+Beleg: Actual Git comparison: seven of eight inspected design/token files identical to main2a; WorkspaceRebuild.css differs only by13 pre-existing target-size/text-reflow accessibility lines; HomeContent differs by one generic NL/FR label localization. Scoped local browser evidence retained.
 Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
-Lücke: Exact original baseline visual/source comparison remains incomplete.
-Nächster Schritt (Design / Implementation): Compare chosen a19 preview against current local candidate without discarding newer fixes.
+Lücke: Source conformity is bounded; full actual live pixel/function/media acceptance not inferred. New cart component follows existing tokens.
+Nächster Schritt (Design / Implementation): Bind current source comparison and screenshots/regressions to main2a reference; retain functional fixes and scope-specific live gates.
 Abschluss: Source/version-bound visual comparison and applicable independent review.
 
 ### RQ-029
@@ -460,11 +465,11 @@ Abschluss: Scoped gates and real target readback pass; partial publication never
 
 ### RQ-034
 
-Soll (SRC-MASTER-1.2-REQUIREMENTS): Complete shop and chosen unfinished preview reference while preserving newer fixes; frontend/demo is not a functioning shop.
+Soll (SRC-MASTER-1.2-REQUIREMENTS, SRC-DATA001-PARENT, SRC-ECO001-PARENT, SRC-DESIGN-CHOICE-20261027-1439): Complete shop while preserving newer fixes under latest design choice main2a552ed production alias; older a19 choice is historical. A frontend/cart draft is not a fully operational shop.
 Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
-Dateien/Funktionen: config/site-map.json, docs/contracts/factory.openapi.json, apps/agent-gateway/cart.py, tests/test_local_shop_cart.py, docs/contracts/local-shop-cart.md
-Beleg: 16 synthetic local cart tests passed on existing Store: scoped access, exact replay, expiry, binding, CAS/concurrency, transaction abort and actual process exit/restart before commit; server-only signing key, forged browser-CSRF token, missing/invalid key negatives. Separate Sol review found and rechecked two signing-key defects; both corrected, final commit binding pending; no HTTP/UI/production acceptance.
+Dateien/Funktionen: config/site-map.json, docs/contracts/factory.openapi.json, apps/agent-gateway/cart.py, tests/test_local_shop_cart.py, docs/contracts/local-shop-cart.md, apps/agent-gateway/server.py, apps/web/components/ShopPanel.tsx, apps/web/components/ShopPanel.css, apps/site/tests/browser-shop.mjs, tests/test_local_shop_http.py, docs/contracts/local-shop-http.md, evidence/shop-http-2026-10-27/browser-shop.json, evidence/shop-http-2026-10-27/design-reference-comparison.json
+Beleg: 16 Cart plus6 real HTTP tests and9 actual browser/API/SQLite fixture cases (DE/NL/FR, reload, lost response/readback, process restart, tenant/visitor negatives, blocked checkout dedupe). Final commit review and overall gates pending; no provider or production acceptance.
 Auslieferung: reported_partial_implementation_unverified; keine Gesamtanforderung abgenommen.
-Lücke: Local cart core implemented; no HTTP/UI attachment, authoritative live catalog, stock/tax/shipping/payment/returns or complete order backend. Public scope and exact shop/brand/tenant mapping remain open.
-Nächster Schritt (Shop / Product / Implementation): Review local core independently, attach a bounded local test adapter and own UI, then collect source-bound production catalog/identity/commercial inputs for actual shop flows.
+Lücke: Local HTTP/UI cart and blocked checkout preparation are wired; real source/licensing/freshness/fitment/prices/tax/stock/shipping/provider/order/returns acceptance absent. Conditional purchase-policy conflict remains unresolved; no actual sale.
+Nächster Schritt (Shop / Product / Implementation): Finish final source-bound gates/review, then implement validated DATA/ECO provider adapter only against authorized actual inputs; continue independent page/portal work without claiming shop completion.
 Abschluss: Actual product/cart/checkout/order/return/funding/tenant flows accepted; no fake stock or paid execution.

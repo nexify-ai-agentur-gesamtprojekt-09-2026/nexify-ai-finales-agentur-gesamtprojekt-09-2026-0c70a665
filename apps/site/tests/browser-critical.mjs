@@ -14,7 +14,7 @@ const repo=new URL('../../../',import.meta.url),root=fileURLToPath(new URL('../'
 const sourcePaths=['apps/site/src/Auth.tsx','apps/site/src/main.tsx','apps/web/app/globals.css','apps/web/components/HomeContent.tsx','apps/web/components/Workspace.tsx','apps/web/components/PublicContentLayout.css','config/site-map.json'];
 const sdkPaths=['apps/web/components/PublicOrientationChat.tsx','apps/web/components/PublicOrientationChat.css','api/agent-chat.ts','packages/agent-runtime/public-orientation.ts','tools/agent-preview.mjs'];
 async function hashes(paths){return Object.fromEntries(await Promise.all(paths.map(async p=>[p,createHash('sha256').update(await readFile(new URL(p,repo))).digest('hex')])));}
-const auxiliaryPaths=['apps/site/src/main.tsx','apps/web/components/WorkspaceRebuild.css','apps/web/components/HomeRebuild.css','packages/tokens/tokens.css','apps/site/tests/browser-critical.mjs'];
+const auxiliaryPaths=['apps/web/components/ShopPanel.tsx','apps/web/components/ShopPanel.css','apps/site/src/main.tsx','apps/web/components/WorkspaceRebuild.css','apps/web/components/HomeRebuild.css','packages/tokens/tokens.css','apps/site/tests/browser-critical.mjs'];
 const before=await hashes([...sourcePaths,...sdkPaths,...auxiliaryPaths]);
 const map=JSON.parse(await readFile(new URL('config/site-map.json',repo),'utf8'));
 const pages=map.pages.filter(p=>map.public_allowlist.includes(p.id)&&p.access.visibility==='public'&&!p.access.auth_required);

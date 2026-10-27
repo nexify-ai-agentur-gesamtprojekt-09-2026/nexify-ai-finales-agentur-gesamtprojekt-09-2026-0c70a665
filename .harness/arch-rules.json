@@ -237,7 +237,7 @@
     },
     {
       "id": "ARCH-027",
-      "description": "Abgeleitete Quellenansicht bleibt deckungsgleich und Berichte werden nicht zu Originalen oder Abnahme.",
+      "description": "Abgeleitete Quellenansicht bleibt deckungsgleich; keine rekursive Register-Selbsthashbindung oder Promotion von Berichten zu Originalen/Abnahme.",
       "check": "python3 tools/verify_requirements_reconciliation.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_requirements_reconciliation.py -q >/dev/null 2>&1",
       "expect": "exit 0",
       "what": "Quellenregister verliert Owner, Referenzen oder seine abgeleitete Ansicht.",
@@ -252,6 +252,15 @@
       "what": "Browserbekannter CSRF-Wert wird als Autorität genutzt oder Replay umgeht Ablauf/CAS/Transaktion.",
       "why": "Ein CSRF-Token ist kein geheimer Signierschlüssel; lokale Vorbereitung erteilt keine Checkout-/Providerrechte.",
       "fix": "Getrennten persistenten serverinternen Schlüssel und Negativ-, Race-/Prozessabbruchtests erhalten; keine Produktionsfreigabe ableiten."
+    },
+    {
+      "id": "ARCH-029",
+      "description": "Shop-HTTP/UI belegt persistentes Readback und entsperrt nach bestätigtem leerem Zustand.",
+      "check": "python3 tools/check_browser_evidence.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_local_shop_http.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Shop UI/HTTP/Fixture driftet von gebundenen Browserbelegen oder Reconciliation/Target/CSRF scheitert.",
+      "why": "Ein 404 kann bestätigter Leerzustand sein; unbekannte Schreibausgänge dürfen weder blind wiederholt noch dauerhaft als unbestätigt ausgegeben werden.",
+      "fix": "Quellengebundenen echten Browser/API/SQLite-Nachweis mit Abbruch/Readback/Restart und negativen HTTP-Prüfungen erneuern; keine Produktionsabnahme daraus ableiten."
     }
   ]
 }

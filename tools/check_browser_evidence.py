@@ -33,6 +33,8 @@ SDK_SOURCE_PATHS = (
     "tools/agent-preview.mjs",
 )
 AUXILIARY_SOURCE_PATHS = (
+    "apps/web/components/ShopPanel.tsx",
+    "apps/web/components/ShopPanel.css",
     "apps/site/src/main.tsx",
     "apps/web/components/WorkspaceRebuild.css",
     "apps/web/components/HomeRebuild.css",
@@ -167,12 +169,59 @@ def check_evidence(root):
             "public_route_count": len(routes), "gutter_rows": len(seen)}
 
 
+
+SHOP_EVIDENCE_PATH = "evidence/shop-http-2026-10-27/browser-shop.json"
+SHOP_SOURCE_PATHS = (
+    "apps/agent-gateway/cart.py", "apps/agent-gateway/server.py",
+    "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
+    "apps/web/components/Workspace.tsx", "apps/site/src/main.tsx",
+    "apps/site/tests/browser-shop.mjs", "apps/site/tests/fixtures/shop-server.py",
+)
+SHOP_CHECKS = frozenset((
+    "real DE NL FR catalog search and categories using isolated fixtures",
+    "aborted create before commit blocks writes until deliberate successful empty readback",
+    "browser creates scoped HttpOnly cart and persists server-authoritative amount across reload",
+    "committed change with lost response requires readback and does not blindly repeat effect",
+    "quantity submit remove and repeated blocked checkout survive direct cart link and reload",
+    "HTTP backend process restart keeps browser session cart and persisted source binding",
+    "foreign visitor cart cookie and client role/tenant claims grant no cart access",
+    "unconfigured catalog and failed catalog connection remain distinct with no sample products",
+    "mobile keyboard layout retains shared tokens and no horizontal overflow",
+))
+
+
+def check_shop_evidence(root):
+    evidence = json.loads(_read(root, SHOP_EVIDENCE_PATH))
+    hashes = evidence.get("source_sha256", {})
+    if set(hashes) != set(SHOP_SOURCE_PATHS):
+        raise EvidenceError("shop_exact_source_path_set_required")
+    for relative in SHOP_SOURCE_PATHS:
+        if hashlib.sha256(_read(root, relative)).hexdigest() != hashes[relative]:
+            raise EvidenceError("stale_shop_source_sha256: " + relative)
+    if not SHOP_CHECKS.issubset(evidence.get("checks", [])):
+        raise EvidenceError("shop_critical_check_missing")
+    if (evidence.get("external_requests") != [] or evidence.get("payment_started") is not False
+            or evidence.get("order_submitted") is not False):
+        raise EvidenceError("shop_effect_boundaries_required")
+    observed = {(row.get("method"), row.get("path"), row.get("status")) for row in evidence.get("requests", [])}
+    for method, path, status in (("POST", "/api/shop/cart", 200), ("POST", "/api/shop/cart/items", 200),
+                                ("GET", "/api/shop/cart", 200), ("GET", "/api/shop/cart", 404),
+                                ("POST", "/api/shop/cart/checkout-draft", 200),
+                                ("GET", "/api/shop/cart/checkout-draft", 200)):
+        if (method, path, status) not in observed:
+            raise EvidenceError("shop_actual_http_boundary_missing")
+    if evidence.get("persistent_objects") != {"cart": 1, "checkout_draft": 1}:
+        raise EvidenceError("shop_persistent_duplicate_or_missing")
+    return {"scope": "stored_local_fixture_browser_api_sqlite_evidence_only", "checks": len(SHOP_CHECKS)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
     try:
         result = check_evidence(args.root)
+        result["shop"] = check_shop_evidence(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

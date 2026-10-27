@@ -15,7 +15,7 @@ import re
 import secrets
 import sqlite3
 import time
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit, unquote, parse_qs
 import uuid
 from zoneinfo import ZoneInfo
 
@@ -259,7 +259,9 @@ def public_pages():
             if page["id"] in allowlist and page["access"]["visibility"] == "public" and not page["access"]["auth_required"]]
 
 
-def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
+def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None):
+    if shop is not None and shop.cart.store is not store:
+        raise ValueError("shop and visitor must use the same scoped Store")
     pages = public_pages()
     allowed_pages = {page["path"] for page in pages}
     class Handler(BaseHTTPRequestHandler):
@@ -270,7 +272,7 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
         def log_message(self, *_):
             pass
 
-        def respond(self, status, payload, content_type="application/json; charset=utf-8", cookie=None, disposition=None):
+        def respond(self, status, payload, content_type="application/json; charset=utf-8", cookie=None, disposition=None, cart_cookie=None):
             raw = json.dumps(payload, ensure_ascii=False).encode() if isinstance(payload, (dict, list)) else payload
             self.send_response(status)
             self.send_header("Content-Type", content_type)
@@ -281,6 +283,8 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
             self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
             if cookie:
                 self.send_header("Set-Cookie", f"nx_visit={cookie}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400")
+            if cart_cookie:
+                self.send_header("Set-Cookie", cart_cookie)
             if disposition:
                 self.send_header("Content-Disposition", disposition)
             self.end_headers()
@@ -303,10 +307,54 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                 raise Rejected(401, "session_required")
             return store.visitor(token.value if token else None)
 
+        def shop_target(self):
+            if shop is None:
+                raise Rejected(503, "catalog_not_configured")
+            cookie = SimpleCookie()
+            try:
+                cookie.load(self.headers.get("Cookie", ""))
+            except Exception:
+                raise Rejected(401, "cart_capability_invalid") from None
+            token = cookie.get("nx_cart")
+            if token is None:
+                raise Rejected(404, "cart_not_found")
+            if re.fullmatch(r"[a-f0-9]{32}\.[a-f0-9]{64}", token.value) is None:
+                raise Rejected(401, "cart_capability_invalid")
+            return token.value.split(".")
+
+        def shop_error(self, error):
+            # Cart adapters expose only a typed status/code, never keys or payloads.
+            from_errors = getattr(error, "status", None), getattr(error, "code", None)
+            if (type(from_errors[0]) is int and from_errors[0] in {401, 404, 409, 410, 422}
+                    and isinstance(from_errors[1], str)):
+                return self.respond(from_errors[0], {"error": from_errors[1]})
+            if isinstance(error, sqlite3.OperationalError):
+                return self.respond(503, {"error": "storage_unavailable"})
+            return self.respond(500, {"error": "internal_shop_error"})
+
         def do_GET(self):
             try:
                 self.check_host()
                 path = unquote(urlsplit(self.path).path)
+                if path == "/api/shop/catalog":
+                    if shop is None:
+                        return self.respond(503, {"error": "catalog_not_configured", "available": False})
+                    query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                    if set(query) - {"q", "category", "locale"} or any(len(values) != 1 for values in query.values()):
+                        raise Rejected(422, "invalid_catalog_query")
+                    try:
+                        result = shop.catalog(query=query.get("q", [""])[0], category=query.get("category", [""])[0], locale=query.get("locale", ["de"])[0])
+                    except Exception as error:
+                        return self.shop_error(error)
+                    return self.respond(200, result)
+                if path in {"/api/shop/cart", "/api/shop/cart/checkout-draft"}:
+                    visitor, _ = self.visitor()
+                    identifier, capability = self.shop_target()
+                    try:
+                        result = (shop.cart.read if path == "/api/shop/cart" else shop.cart.read_checkout)(visitor["id"], identifier, capability)
+                    except Exception as error:
+                        return self.shop_error(error)
+                    return self.respond(200, result)
                 if path == "/api/session":
                     visitor, cookie = self.visitor(create=True)
                     with store.connect() as db:
@@ -363,6 +411,33 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                 except (ValueError, UnicodeError, RecursionError):
                     raise Rejected(422, "invalid_body") from None
                 path = urlsplit(self.path).path
+                if path.startswith("/api/shop/"):
+                    if shop is None:
+                        raise Rejected(503, "catalog_not_configured")
+                    key = self.headers.get("Idempotency-Key")
+                    try:
+                        if path == "/api/shop/cart":
+                            created = shop.cart.create(visitor["id"], key, body)
+                            token = created["cart"]["id"] + "." + created["guest_capability"]
+                            cookie = f"nx_cart={token}; HttpOnly; SameSite=Lax; Path=/api/shop; Max-Age={shop.cart.lifetime}"
+                            return self.respond(200, created["cart"], cart_cookie=cookie)
+                        if path not in {"/api/shop/cart/items", "/api/shop/cart/checkout-draft"}:
+                            raise Rejected(404, "not_found")
+                        identifier, capability = self.shop_target()
+                        if self.headers.get("X-Cart-Id") != identifier:
+                            raise Rejected(409, "cart_target_mismatch")
+                        version = self.headers.get("If-Match")
+                        if path.endswith("/items"):
+                            result = shop.cart.change(visitor["id"], identifier, capability, key, version, body)
+                        else:
+                            if body:
+                                raise Rejected(422, "unexpected_field")
+                            result = shop.cart.prepare_checkout(visitor["id"], identifier, capability, key, version)
+                    except Rejected:
+                        raise
+                    except Exception as error:
+                        return self.shop_error(error)
+                    return self.respond(200, result)
                 mapping = {"/api/chat": "chat", "/api/quotes": "quote", "/api/bookings": "booking", "/api/marketing": "marketing"}
                 operation = mapping.get(path)
                 match = re.fullmatch(r"/api/quotes/([a-f0-9]{32})/send", path)

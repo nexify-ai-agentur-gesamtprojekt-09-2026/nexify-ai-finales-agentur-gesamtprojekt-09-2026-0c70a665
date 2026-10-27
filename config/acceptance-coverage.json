@@ -351,6 +351,44 @@
       "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
       "owner_role": "Engineering / unabhängiger Reviewer",
       "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
+    },
+    {
+      "id": "PR39-4388404270",
+      "thread_id": null,
+      "comment_id": 4388404270,
+      "pr": 39,
+      "title": "Clerk-Menüsprache",
+      "status": "local_fixed_verified",
+      "remote_resolved": false,
+      "source_refs": [
+        "apps/site/src/Auth.tsx",
+        "apps/site/tests/browser-auth.mjs"
+      ],
+      "regression_or_method": "Current source selects localizations[locale]; fresh synthetic browser-auth DE/NL/FR locale regression passed. No real provider login claimed.",
+      "change": "Already integrated in079057f; no duplicate repair in shop phase.",
+      "remaining_limit": "Actual provider session/menu acceptance remains separate; remote thread not changed.",
+      "owner_role": "Web Engineering / independent review",
+      "next_action": "Preserve dynamic locale regression and bind exact release; no new Auth activation.",
+      "completion_criterion": "Scoped source/browser review plus actual affected provider acceptance before production claims."
+    },
+    {
+      "id": "PR39-4388404318",
+      "thread_id": null,
+      "comment_id": 4388404318,
+      "pr": 39,
+      "title": "Medien-Skriptwerte müssen Strings sein",
+      "status": "local_remaining",
+      "remote_resolved": false,
+      "source_refs": [
+        "tools/verify_factory_contract.py",
+        "tests/test_factory_contract.py"
+      ],
+      "regression_or_method": "Safe local deepcopy probe sets comparison_script.de=42; validator currently accepts it. No provider invocation.",
+      "change": "Not fixed by prior casting-source reconciliation; queued as separate confirmed local follow-up.",
+      "remaining_limit": "Current script type validation is too permissive; production/generation still blocked independently.",
+      "owner_role": "Web Engineering / media contract validation",
+      "next_action": "After shop checkpoint reject non-string script values/containers with focused regressions and separate Sol review; preserve casting gates.",
+      "completion_criterion": "Non-string DE/NL/FR comparison/hero scripts rejected; valid string scripts pass and no casting/provider gates weakened."
     }
   ],
   "master_cases": [
@@ -1121,15 +1159,16 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "4d6fcdb4002f4de3cf6910c15728f3e5afb73f6791903a197041120f648a0d5c",
-    "apps/agent-gateway/cart.py": "c5f8fbe5fbbc63e9caaf4dc72b2392ddc349605f91b2823850d9c43546bd93f5",
+    "PROGRESS.md": "8b4b29f060e9435e9b194793dc3abc1370a4830108d21bd34edbfa3280d2c21f",
+    "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
+    "apps/agent-gateway/server.py": "5a413b9493a0d18ae0c94ce70b152824be8f3f327c7929f603bc70ff48cc2403",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
     "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
     "apps/site/pwa/plugin.mjs": "3c805218638e6923569ce5f61dbdce70c1b67c6a0e45893fa0cf409cad4c0587",
     "apps/site/pwa/worker.js": "2057580e929673c153101f5ef1c0c642735d10797d3acd341706a3a78006a7ac",
     "apps/site/scripts/build-standalone.mjs": "28f0e7b5e68ce94c26b94557cb11c608028cee4b88e2b02e5887f50a4f728359",
     "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
-    "apps/site/src/main.tsx": "e2b5f22a13bb1f142f4e9812d8698d39dee0838d5adc43b4c318d5b40b506d4d",
+    "apps/site/src/main.tsx": "0fd3f63bae18c176e1163579ca1d4e23e7f8153bb3b18e4ac0bb8ebcde2f26b0",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/tests/browser-accessibility.mjs": "2827709b3ba5c0af65f9cce02dbf75aee9baa485660ac5ce1d8a9ad57e92ad05",
     "apps/site/tests/browser-auth.mjs": "0dabd6d7ae985138e50e8cd4498ec06b9c00d47e77e52c0cb2db9cbcdff0c740",
@@ -1137,13 +1176,15 @@
     "apps/site/tests/browser-coverage.mjs": "4be16cd3fdad33f57ff1085467849d3d875ca8890846f21706579572ce2f1a3d",
     "apps/site/tests/browser-integration.mjs": "df37b80dd1adf86b503379d512a6bd37ddd860657b5bb17ac94a3492341b6d28",
     "apps/site/tests/browser-pwa.mjs": "229eef780923b14d6a895c485ef96802d1f687a01c6f4cf6de9c0a43e91b207a",
+    "apps/site/tests/browser-shop.mjs": "5910d1cab342f62ab5e8af56cb60c0205e0b1f1fc2cc5ededb9cb458387db277",
     "apps/site/tests/browser-text-spacing.mjs": "a47697021676da5984c1fcbc58fbccb5f40dff7d7dd8dd07d73a71c15cff5adb",
     "apps/site/tests/public-installation.test.mjs": "d497095dd7482603311073f505933a6e23f129c5f7d9c0d819e24f44510a4c5e",
     "apps/site/tests/standalone.test.mjs": "5b9cf3e97ed5829bea566deceb0b4a2c7b135c03849f0f29d47e23cf5d65b502",
     "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
-    "apps/web/components/Workspace.tsx": "dfaf02f69ce5cf3b2bc9f2d040fe3222131d44c3aa79c3fd7e555bb74841ffce",
+    "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
+    "apps/web/components/ShopPanel.tsx": "c3b5e089e420c892791fceb5c26c81387bc37165662c522dad39534c18cd5334",
+    "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
     "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
-    "config/acceptance-coverage.json": "750a5dc4114b551f8b3c59f5d6ef731abd1ca905a7f0cba393902816b53ee9b4",
     "config/ai-migration-policy.json": "98ba89849bff3585843f3fd603a8d0da9df8c568ee534b90f3ddf5c3a82aeaa0",
     "config/api-prepaid.json": "4dcbfeaff130110213cbbb8a736b3f9ac90b25f4cf81bdf26ad2258622898708",
     "config/brain/agents.json": "062336475b7436f2f68307df66efc8008e26bde949d5f0508fbfa9746249d5c5",
@@ -1155,7 +1196,7 @@
     "config/fakten.json": "23fb0e569849bcca763b420cc85a3726d406f4ce098837b76db82640427f5700",
     "config/integrations/rea-mcp.json": "17a8fe0336945a9f3f632849db9c6f86565ddd5e44f5d1f74c339f8e3c8105d9",
     "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
-    "config/one-web-app.json": "6ebd17405df7428a944c152b565885742f739ae3bebef0f68d77f3553bf44252",
+    "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
     "config/operating-model.json": "cf06ea67d0ad29812541528b64724f6da456b1da59532003f5d410d0b7662845",
     "config/page-explainers.json": "fda351339aa3ca5f55ecd76c8443189a5d023f83aef64167d3b8af0a5e6adc2c",
     "config/presenter-system.json": "cd7728150d92891760ab3adfc236011c03401391ae490a2038e585cf63c27696",
@@ -1172,9 +1213,10 @@
     "docs/contracts/hero-media.md": "a63b2b12fd0a028c4c0760ea9ebcd325df0d1d3ef89875d5dabc885bb168c048",
     "docs/contracts/hero-production-plan.json": "f351c138ff8c0ae8d14445b6cba59344b14a6aafa8848cf207caa315153dd3f6",
     "docs/contracts/local-shop-cart.md": "3b7e82f45eef1213322f1d43949b8af8d0db2a20bb49f4b5487ce819eaba02c0",
+    "docs/contracts/local-shop-http.md": "cf57ddab5e9ca67ce9778721f97017882461c04ddf9661a43f9012a6774bdf46",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "358eb9e1dd2bc2c091e6ae7188e3411f6f2ce514c2bd530aa98e7db2e7d14b1d",
+    "docs/contracts/requirements-reconciliation.md": "235c7792fafb67f9a4429c6e5a3958b2d4f69008c025331585d1463a5dead05e",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1205,6 +1247,8 @@
     "evidence/reconciliation-2026-10-27/linked-standards-reference.json": "f20d9e9d8b66d49057c038a17aaea6ce9c8392e92cecbe55ed5594bb0adbaf48",
     "evidence/reconciliation-2026-10-27/review-asset-inspection.json": "11f5c4eee4527585f607fadec7cec4c99cc10b18228a4f6cb7794bcf46056f2e",
     "evidence/reconciliation-2026-10-27/route-feature-inventory.json": "fbea71c96cf69f0db41d5f405a8535629a4cfb1c8fd06c270c7267cb4f8495e4",
+    "evidence/shop-http-2026-10-27/browser-shop.json": "4b71927c8e58f31f3f103f759afe6edb05b711a98caab6761d7972b614f81095",
+    "evidence/shop-http-2026-10-27/design-reference-comparison.json": "8802df3b29de9560c12633d84692f631cc2344e01043dd879e219bb392300ae7",
     "package.json": "0ecf5786228084c168d842b05c2d2a71def31d00c99c853c04431e04cfbbe6ef",
     "packages/design-system/README.md": "fc465da4a2222b5a863727b28096ba2bf0509f7b34323499d755b6de022f853a",
     "prototypen/sw.js": "fc540f897ae035251424faccb412c7fb2f3b73a523536255a6178ef03c60d4dc",
@@ -1215,10 +1259,11 @@
     "tests/test_factory_contract.py": "69c9decb4c393b2342c3a77bc23d5f582f9cee41b38c58222114d330167d4905",
     "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
     "tests/test_local_shop_cart.py": "4f3dfbfbbb8703be23401e10efe33648cf41d5a03f05d89b2e1a7a49b6af2c76",
+    "tests/test_local_shop_http.py": "4ccb484ad2e9a0e32a41985bd75fd0a355d326c67bc70b7a69008222a6f8659a",
     "tests/test_one_app_backend.py": "72c6571231a073ea4eb3397823620e1f97a1b7f53f8cc4b9304e3e41a722fb9a",
     "tests/test_public_surface_contract.py": "6b69cfde2ad888c001357e15199b50f3d89091ff41218976f5e011b5ccf6d4ef",
     "tests/test_release_prerequisites.py": "328cd20630a1962b3cb7d146cb0a0de91c3b028558dd40c3c258c8af91526e0b",
-    "tests/test_requirements_reconciliation.py": "f50eba286dd6bd5a9979f73862c20d51e15efbd80217ee3fe4d2099599a85e32",
+    "tests/test_requirements_reconciliation.py": "b110b2a75fc3cb8ca8e0f18f629001066738ec81fd93e29ed66b695ebf600e2b",
     "tests/test_selfservice_decisions.py": "6a04b03f262198fdb06c2be3e0792edb2f60652947c3d39613f1f3dd1c3a0369",
     "tests/test_selfservice_domain.py": "25470e0621ac30875606e331c58495172d386cac801537d69128f58460b19509",
     "tests/test_seo_catalog.py": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97",
@@ -1234,7 +1279,7 @@
     "tools/remediation_queue.py": "26ed67b946ccf4e50863f80e99bb636010d3c1c29712f437194ae34f467c586b",
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
     "tools/verify_factory_contract.py": "b303186e148f1147ab29e99af94f391f26e6c943e872a4a591cd4bb18561d0b4",
-    "tools/verify_requirements_reconciliation.py": "e6509af0761a56b17b4bd67fa1ab589e54b6d43ac832a05c484199ead4c7d489"
+    "tools/verify_requirements_reconciliation.py": "8415c107d4fc17157b1f0469d35ee54761e5e53166c446779c30fe836a234fa9"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -1570,6 +1615,52 @@
         "acquisition": "parent_browser_observation",
         "original_seen_here": false,
         "scope": "Parent cloudbrowser13:27/13:28: development-preview public agency/product landing, text guide without Live AI. Origin repo/commit/writer unknown; Vercel known-team404 is no nonexistence proof. Codex CLI authorship is user hypothesis."
+      },
+      {
+        "id": "SRC-DATA001-PARENT",
+        "locator": "https://drive.google.com/file/d/1_d8SIRCsI1QvkvLbY3H1Ih9dnRfkuI_b/view",
+        "source_date": "2026-08-31",
+        "role": "versioned_technical_contract",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "DATA-001 v1.0 schema/integration contract: provenance/validity/freshness; no live supplier feed; only delegated excerpt read here"
+      },
+      {
+        "id": "SRC-ECO001-PARENT",
+        "locator": "https://drive.google.com/file/d/1vYLSkEiBVJ88700wF9Zqk5xfQWMTsjJL/view",
+        "source_date": "2026-08-31",
+        "role": "versioned_technical_contract",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "ECO-001 v1.0 economic/publishing fields, no concrete margins/costs or commercial release; only delegated excerpt read here"
+      },
+      {
+        "id": "SRC-MCP-IDENTITY-20261027",
+        "locator": "evidence/shop-http-2026-10-27/connection-reference-proof.json",
+        "source_date": "2026-10-27",
+        "role": "runtime_observation",
+        "acquisition": "direct_native_mcp_read",
+        "original_seen_here": true,
+        "scope": "inventory_targets registry plus fresh nexify-2 authenticated identity probe srv1941843/179.198.195.91; writable_verified false; primary registry timestamp historical, no fresh primary runtime claim"
+      },
+      {
+        "id": "SRC-DESIGN-CHOICE-20261027-1439",
+        "locator": "trusted parent delegation quoting user choice of https://nexify-ai-finales-agentur-gesamtpro.vercel.app/",
+        "source_date": "2026-10-27T14:39Z",
+        "source_time_precision": "minute from supplied user transcript; seconds unknown",
+        "role": "user",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "Newest design choice supersedes older a19/system preview authority; parent freshly mapped alias to production main2a552ed; functional fixes retained, no feature/media acceptance."
+      },
+      {
+        "id": "SRC-SERVER-T018-REPORT",
+        "locator": "evidence/shop-http-2026-10-27/server-handoff-reference.json",
+        "source_date": "2026-10-27",
+        "role": "execution_report",
+        "acquisition": "parent_forwarded_executor_report",
+        "original_seen_here": false,
+        "scope": "Reported REJECT/6/rolled-back Brain canary and provisional web-route mapping; not independent service/release acceptance; no web-executor server authority."
       }
     ],
     "requirements": [
@@ -2146,20 +2237,22 @@
         "requirement_id": "REC-DESIGN-01",
         "acceptance_case_id": null,
         "source_ids": [
-          "SRC-LINKED-STANDARDS"
+          "SRC-LINKED-STANDARDS",
+          "SRC-DESIGN-CHOICE-20261027-1439"
         ],
         "applicable_requirement": "Original logo/mark, registered composition and central tokens; promoted design source hashes and941px/mobile/keyboard proof.",
         "interpretation": "scoped requirement derived from cited source; not reconstructed original transcript",
         "implementation_files": [
           "config/design-tokens.json",
           "packages/design-system/README.md",
-          "docs/contracts/acceptance-decisions.md"
+          "docs/contracts/acceptance-decisions.md",
+          "evidence/shop-http-2026-10-27/design-reference-comparison.json"
         ],
         "test_evidence": "Local token regeneration/browser checks; external headless contract URLs not accessible through available reader",
         "actual_delivery": "partial_local_evidence",
         "full_requirement_accepted": false,
-        "gap": "Promoted v6 source/lock import and pixel/source conformity not verified; repo design README identifies2.0.",
-        "next_step": "Retrieve authorized original contracts/assets before dependent design promotion; preserve baseline.",
+        "gap": "Latest explicit choice main2a governs design; older promoted-v6 document applicability remains to reconcile without replacing the chosen theme. Full actual visual/qualified accessibility acceptance remains open.",
+        "next_step": "Use main2a source baseline and existing tokens; preserve reviewed functional/A11y changes, independently verify exact release visuals and resolve remaining older-source applicability.",
         "completion_criterion": "Exact promoted source/lock/asset hashes, applicable visual941px/mobile/keyboard proof and independent review.",
         "owner_area": "D04 / D06 / D07"
       },
@@ -2359,19 +2452,21 @@
         "requirement_id": "RQ-028",
         "acceptance_case_id": null,
         "source_ids": [
-          "SRC-MASTER-1.2-REQUIREMENTS"
+          "SRC-MASTER-1.2-REQUIREMENTS",
+          "SRC-DESIGN-CHOICE-20261027-1439"
         ],
-        "applicable_requirement": "Preserve chosen original visual reference, later corrections and central tokens rather than restore historical themes.",
+        "applicable_requirement": "Newest user design reference is production alias at main2a552ed. Preserve that headless layout/tokens/components plus already reviewed functional/A11y fixes; no visual import from a19 or system preview.",
         "interpretation": "Paraphrase of directly read compiled Master1.2; not original user transcript.",
         "implementation_files": [
           "config/design-tokens.json",
-          "apps/web/components/Workspace.tsx"
+          "apps/web/components/Workspace.tsx",
+          "evidence/shop-http-2026-10-27/design-reference-comparison.json"
         ],
-        "test_evidence": "Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.",
+        "test_evidence": "Actual Git comparison: seven of eight inspected design/token files identical to main2a; WorkspaceRebuild.css differs only by13 pre-existing target-size/text-reflow accessibility lines; HomeContent differs by one generic NL/FR label localization. Scoped local browser evidence retained.",
         "actual_delivery": "source_reconciled_implementation_unverified",
         "full_requirement_accepted": false,
-        "gap": "Exact original baseline visual/source comparison remains incomplete.",
-        "next_step": "Compare chosen a19 preview against current local candidate without discarding newer fixes.",
+        "gap": "Source conformity is bounded; full actual live pixel/function/media acceptance not inferred. New cart component follows existing tokens.",
+        "next_step": "Bind current source comparison and screenshots/regressions to main2a reference; retain functional fixes and scope-specific live gates.",
         "completion_criterion": "Source/version-bound visual comparison and applicable independent review.",
         "owner_area": "Design / Implementation"
       },
@@ -2482,22 +2577,33 @@
         "requirement_id": "RQ-034",
         "acceptance_case_id": null,
         "source_ids": [
-          "SRC-MASTER-1.2-REQUIREMENTS"
+          "SRC-MASTER-1.2-REQUIREMENTS",
+          "SRC-DATA001-PARENT",
+          "SRC-ECO001-PARENT",
+          "SRC-DESIGN-CHOICE-20261027-1439"
         ],
-        "applicable_requirement": "Complete shop and chosen unfinished preview reference while preserving newer fixes; frontend/demo is not a functioning shop.",
+        "applicable_requirement": "Complete shop while preserving newer fixes under latest design choice main2a552ed production alias; older a19 choice is historical. A frontend/cart draft is not a fully operational shop.",
         "interpretation": "Paraphrase of directly read compiled Master1.2; not original user transcript.",
         "implementation_files": [
           "config/site-map.json",
           "docs/contracts/factory.openapi.json",
           "apps/agent-gateway/cart.py",
           "tests/test_local_shop_cart.py",
-          "docs/contracts/local-shop-cart.md"
+          "docs/contracts/local-shop-cart.md",
+          "apps/agent-gateway/server.py",
+          "apps/web/components/ShopPanel.tsx",
+          "apps/web/components/ShopPanel.css",
+          "apps/site/tests/browser-shop.mjs",
+          "tests/test_local_shop_http.py",
+          "docs/contracts/local-shop-http.md",
+          "evidence/shop-http-2026-10-27/browser-shop.json",
+          "evidence/shop-http-2026-10-27/design-reference-comparison.json"
         ],
-        "test_evidence": "16 synthetic local cart tests passed on existing Store: scoped access, exact replay, expiry, binding, CAS/concurrency, transaction abort and actual process exit/restart before commit; server-only signing key, forged browser-CSRF token, missing/invalid key negatives. Separate Sol review found and rechecked two signing-key defects; both corrected, final commit binding pending; no HTTP/UI/production acceptance.",
+        "test_evidence": "16 Cart plus6 real HTTP tests and9 actual browser/API/SQLite fixture cases (DE/NL/FR, reload, lost response/readback, process restart, tenant/visitor negatives, blocked checkout dedupe). Final commit review and overall gates pending; no provider or production acceptance.",
         "actual_delivery": "reported_partial_implementation_unverified",
         "full_requirement_accepted": false,
-        "gap": "Local cart core implemented; no HTTP/UI attachment, authoritative live catalog, stock/tax/shipping/payment/returns or complete order backend. Public scope and exact shop/brand/tenant mapping remain open.",
-        "next_step": "Review local core independently, attach a bounded local test adapter and own UI, then collect source-bound production catalog/identity/commercial inputs for actual shop flows.",
+        "gap": "Local HTTP/UI cart and blocked checkout preparation are wired; real source/licensing/freshness/fitment/prices/tax/stock/shipping/provider/order/returns acceptance absent. Conditional purchase-policy conflict remains unresolved; no actual sale.",
+        "next_step": "Finish final source-bound gates/review, then implement validated DATA/ECO provider adapter only against authorized actual inputs; continue independent page/portal work without claiming shop completion.",
         "completion_criterion": "Actual product/cart/checkout/order/return/funding/tenant flows accepted; no fake stock or paid execution.",
         "owner_area": "Shop / Product / Implementation"
       }
@@ -2508,8 +2614,8 @@
     "current_scope_decisions": {
       "headless_reuse": true,
       "framer_migration": false,
-      "reference_deployment": "dpl_3wK7KDaaaAYUBS8fGm3mK7fm7q3n",
-      "reference_commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "reference_deployment": "dpl_4V5wejxZKiij1ZbniFkD5vCwUxLg",
+      "reference_commit": "2a552ed6319c21332d7c2957d3d757b99c187910",
       "reference_is_final_acceptance": false,
       "preserve_newer_fixes": true,
       "intended_final_domain": "nexifyai.cloud",
@@ -2517,10 +2623,32 @@
       "brain_diagnosis_owner": "parent separate workstream",
       "server_changes_by_this_workstream": false,
       "system_preview_reference": "https://system.nexifyai.cloud/",
-      "system_preview_repo_commit_owner": "not_verified; parent coordinating server executor",
+      "system_preview_repo_commit_owner": "Provisional server route/path mapping reported in T-018; exact web repo/release/writer transition remains unverified. No overwrite/publication by this executor.",
       "remote_publication_requires_writer_reconciliation": true,
       "exclusive_server_workstream": "Server-Codex: host/owner/REA hooks/Brain/failed units/read-only system URL identity; prompt delivery confirmed, execution success unverified",
-      "exclusive_web_workstream": "this worktree: public pages, media integration, shop, portal/workplace UI and scoped app tests; no server/Brain/hooks/domain writes"
-    }
+      "exclusive_web_workstream": "this worktree: public pages, media integration, shop, portal/workplace UI and scoped app tests; no server/Brain/hooks/domain writes",
+      "connection_proof": "Local coding checkout verified. Native MCP nexify-2 authenticated identity read verified; no local SSH alias found at checked paths; writable_verified false. Server owner remains separate.",
+      "historical_reference_deployment": "dpl_3wK7KDaaaAYUBS8fGm3mK7fm7q3n",
+      "historical_reference_commit": "a19cd5035d3809dedda94050486026ac0186662e",
+      "reference_url": "https://nexify-ai-finales-agentur-gesamtpro.vercel.app/",
+      "reference_authority_source": "SRC-DESIGN-CHOICE-20261027-1439",
+      "system_preview_is_design_authority": false,
+      "brain_report_status": "Latest Server-Codex T-018 reported REJECT/6, not complete. No automatic repaired/connected status; separate owner follows up."
+    },
+    "conflicts": [
+      {
+        "id": "SHOP-FITMENT-001",
+        "source_refs": [
+          "docs/03-backend/backend-und-datenbank.md:259",
+          "docs/04-betrieb/betriebslogik-und-prozesse.md:28"
+        ],
+        "status": "decision_pending",
+        "owner_area": "Shop / Product",
+        "current_safe_behavior": "No real order submission for either verified or conditional; no permissive union",
+        "next_step": "Resolve applicable current purchasing policy with source-qualified commercial/fitment owner before sales activation",
+        "completion_criterion": "Authoritative current policy plus actual positive/negative fitment/order acceptance"
+      }
+    ],
+    "hash_binding_note": "source_sha256 excludes this register itself; exact register bytes are bound by Git commit and delivery package manifest to avoid a recursive self-hash."
   }
 }

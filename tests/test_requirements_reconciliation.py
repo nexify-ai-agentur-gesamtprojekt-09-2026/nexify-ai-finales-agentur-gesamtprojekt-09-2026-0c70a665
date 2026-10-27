@@ -20,6 +20,10 @@ class ReconciliationTests(unittest.TestCase):
         self.assertEqual(checker.validate(self.document, ROOT), [])
         self.assertEqual((ROOT / checker.VIEW).read_text(), checker.render(self.document))
 
+    def test_register_cannot_claim_its_own_recursive_source_hash(self):
+        self.document['source_sha256'][str(checker.REGISTER)] = '0' * 64
+        self.assertIn('Register self-hash is recursive; bind it with commit/package manifest instead', checker.validate(self.document, ROOT))
+
     def test_report_cannot_be_promoted_to_original(self):
         source = next(s for s in self.record['sources'] if s['acquisition'] == 'parent_verified_excerpt')
         source['original_seen_here'] = True

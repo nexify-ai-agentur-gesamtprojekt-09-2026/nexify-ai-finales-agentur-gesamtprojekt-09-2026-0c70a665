@@ -1,3 +1,25 @@
+# Lokale Shop-HTTP-/UI-Anbindung
+
+Current State: b08a7fc / PaketVersion8 als geprüfter Rückweg erhalten. Bestehender
+HTTP-Server und TEILEKLAR-Shell verbinden nun Suche/Kategorien/Warenkorb und
+persistent gesperrten Checkout-Entwurf. Sechs reale HTTP- und neun reale lokale
+Browser/API/SQLite-Fälle inklusive DE/NL/FR, Cookiegrenzen, verlorener Antwort,
+Readback, Reload und Backendprozess-Neustart bestanden. Nur isolierte Testfixtures;
+normale Laufzeit hat keinen freigegebenen Katalog und keine Testartikel. Sol-Befund
+zur404-Reconciliation behoben;373Tests und Gesamtgates bestanden.
+Metadatenregression verhindert rekursive Register-Selbsthashes.
+Auth7/Shell8/Node31 und Build grün. Neue Designwahl main2a552ed integriert;
+Sourcevergleich bewahrt nur bestehende funktionale A11y-/Sprachkorrekturen.
+Abschließender Quellen-/Commitfreeze wird gebunden.
+DATA-001/ECO-001 aus Parentauszug zugeordnet; conditional-Kaufkonflikt offen.
+Keine echten Artikel-/Preis-/Bestands-/Fitmentdaten, Orders, Zahlungen oder
+Providerfreigaben erfunden. Neue native MCP-Leseevidenz bestätigt nexify-2→
+srv1941843 authentifiziert, writable_verified false; keine Serverreparatur.
+Next Steps: exakten Stand prüfen/sichern, danach bestätigten Medien-Skripttypfehler
+separat korrigieren und unabhängige Seiten-/Portalteile fortsetzen. Keine parallele
+Mediengenerierung; Root koordiniert reale Assets/Casting. Kein Astra.
+Details: docs/contracts/local-shop-http.md.
+
 # Lokale Shop-Warenkorbvorbereitung
 
 Current State: geprüfter und ausgelieferter Quellen-/Medienstand a66a509 bleibt

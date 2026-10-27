@@ -164,3 +164,86 @@ class LocalCart:
             db.execute('INSERT INTO receipts VALUES (?,?,?,?,?)',
                        (self._owner(owner), operation, key, hashed, canonical(result)))
             return result
+
+    def read_checkout(self, owner, identifier, capability):
+        with self.store.connect() as db:
+            cart = self._load(db, owner, identifier, capability)
+            draft_id = hashlib.sha256(canonical([self._owner(owner), identifier, str(cart['version']), 'checkout_draft']).encode()).hexdigest()[:32]
+            row = db.execute("SELECT payload FROM objects WHERE id=? AND owner=? AND kind='checkout_draft'", (draft_id, self._owner(owner))).fetchone()
+            if row is None:
+                raise CartRejected(404, 'checkout_draft_not_found')
+            return json.loads(row[0])
+
+    def prepare_checkout(self, owner, identifier, capability, key, version):
+        """Persist a blocked checkout draft, never an order or payment instruction."""
+        if not isinstance(version, str):
+            raise CartRejected(422, 'version_required')
+        with self.store.connect() as db:
+            db.execute('BEGIN IMMEDIATE')
+            cart = self._load(db, owner, identifier, capability)
+            operation = 'shop_checkout_draft:' + identifier
+            hashed, receipt = self._receipt(db, owner, operation, key, {'version': version})
+            if receipt is not None:
+                return receipt
+            if version != str(cart['version']):
+                raise CartRejected(409, 'cart_version_conflict')
+            if not cart['items']:
+                raise CartRejected(409, 'cart_empty')
+            draft_id = hashlib.sha256(canonical([self._owner(owner), identifier, version, 'checkout_draft']).encode()).hexdigest()[:32]
+            prior = db.execute("SELECT payload FROM objects WHERE id=? AND owner=? AND kind='checkout_draft'", (draft_id, self._owner(owner))).fetchone()
+            result = json.loads(prior[0]) if prior else {'id': draft_id, 'state': 'blocked_provider_acceptance',
+                      'cart': self._public(cart), 'order_submitted': False, 'payment_started': False}
+            if prior is None:
+                db.execute('INSERT INTO objects VALUES (?,?,?,?)',
+                           (result['id'], self._owner(owner), 'checkout_draft', canonical(result)))
+            db.execute('INSERT INTO receipts VALUES (?,?,?,?,?)',
+                       (self._owner(owner), operation, key, hashed, canonical(result)))
+            return result
+
+
+class LocalShop:
+    """Explicit trusted catalog input; no automatic supplier or fixture discovery."""
+    def __init__(self, cart, *, records, source_reference, maximum_results):
+        if not isinstance(source_reference, str) or not source_reference.strip():
+            raise ValueError('catalog provenance required')
+        if type(maximum_results) is not int or maximum_results <= 0:
+            raise ValueError('explicit result bound required')
+        if not isinstance(records, list) or len(records) != len(cart.products):
+            raise ValueError('catalog records must match the bound price snapshot')
+        self.cart, self.source_reference, self.maximum = cart, source_reference, maximum_results
+        self.records = json.loads(canonical(records))
+        ids = set()
+        for row in self.records:
+            if not isinstance(row, dict) or set(row) != {'product_id', 'name', 'category_id', 'category'}:
+                raise ValueError('unexpected catalog record')
+            identifier = row['product_id']
+            if not isinstance(identifier, str) or identifier in ids or identifier not in cart.products:
+                raise ValueError('duplicate or unpriced catalog record')
+            ids.add(identifier)
+            if not isinstance(row['category_id'], str) or not 1 <= len(row['category_id']) <= 128:
+                raise ValueError('category ID required')
+            for field in ('name', 'category'):
+                translations = row[field]
+                if (not isinstance(translations, dict) or set(translations) != {'de', 'nl', 'fr'}
+                        or any(not isinstance(value, str) or not 1 <= len(value.strip()) <= 240 for value in translations.values())):
+                    raise ValueError('localized catalog text required')
+        categories = {}
+        for row in self.records:
+            if row['category_id'] in categories and categories[row['category_id']] != row['category']:
+                raise ValueError('conflicting category labels')
+            categories[row['category_id']] = row['category']
+        self.categories = categories
+
+    def catalog(self, *, query='', category='', locale='de'):
+        if (locale not in ('de', 'nl', 'fr') or not isinstance(query, str) or len(query) > 128
+                or not isinstance(category, str) or len(category) > 128):
+            raise CartRejected(422, 'invalid_catalog_query')
+        rows = [row for row in self.records if (not category or row['category_id'] == category)
+                and (not query or query.casefold() in row['name'][locale].casefold() or query.casefold() in row['product_id'].casefold())]
+        return {'available': True, 'store_id': self.cart.store_id, 'currency': self.cart.currency,
+                'source_reference': self.source_reference, 'maximum_quantity': self.cart.maximum,
+                'checkout_enabled': False, 'production_accepted': False, 'partial': len(rows) > self.maximum,
+                'categories': [{'id': identifier, 'name': text[locale]} for identifier, text in sorted(self.categories.items())],
+                'products': [{'product_id': row['product_id'], 'name': row['name'][locale], 'category_id': row['category_id'],
+                              'price_minor': self.cart.products[row['product_id']], 'fitment_status': 'not_verified',
+                              'availability_status': 'not_verified'} for row in rows[:self.maximum]]}

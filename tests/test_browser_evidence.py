@@ -96,5 +96,47 @@ class BrowserEvidenceTests(unittest.TestCase):
                     checker.check_evidence(self.root)
 
 
+
+class ShopEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        for relative in (*checker.SHOP_SOURCE_PATHS, checker.SHOP_EVIDENCE_PATH):
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+        self.evidence = json.loads((self.root / checker.SHOP_EVIDENCE_PATH).read_text())
+
+    def write(self):
+        (self.root / checker.SHOP_EVIDENCE_PATH).write_text(json.dumps(self.evidence))
+
+    def test_saved_shop_proof_is_bounded_and_current(self):
+        self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 9)
+
+    def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
+        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py'):
+            path = self.root / relative
+            original = path.read_bytes(); path.write_bytes(original + b'\n# changed')
+            with self.assertRaisesRegex(checker.EvidenceError, 'stale_shop_source_sha256'):
+                checker.check_shop_evidence(self.root)
+            path.write_bytes(original)
+
+    def test_missing_reconciliation_case_and_false_effect_claim_rejected(self):
+        self.evidence['checks'].remove('aborted create before commit blocks writes until deliberate successful empty readback')
+        self.write()
+        with self.assertRaisesRegex(checker.EvidenceError, 'shop_critical_check_missing'):
+            checker.check_shop_evidence(self.root)
+        self.evidence['checks'].append('aborted create before commit blocks writes until deliberate successful empty readback')
+        self.evidence['payment_started'] = True; self.write()
+        with self.assertRaisesRegex(checker.EvidenceError, 'shop_effect_boundaries_required'):
+            checker.check_shop_evidence(self.root)
+
+    def test_static_labels_without_real_http_or_single_persistence_are_rejected(self):
+        self.evidence['requests'] = []; self.write()
+        with self.assertRaisesRegex(checker.EvidenceError, 'shop_actual_http_boundary_missing'):
+            checker.check_shop_evidence(self.root)
+
+
 if __name__ == "__main__":
     unittest.main()

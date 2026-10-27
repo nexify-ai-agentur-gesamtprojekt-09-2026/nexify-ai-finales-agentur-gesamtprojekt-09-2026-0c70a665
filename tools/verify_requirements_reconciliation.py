@@ -13,6 +13,8 @@ VIEW = Path('docs/contracts/requirements-reconciliation.md')
 
 def validate(document, root):
     errors = []
+    if str(REGISTER) in document.get('source_sha256', {}):
+        errors.append('Register self-hash is recursive; bind it with commit/package manifest instead')
     record = document.get('requirements_reconciliation', {})
     if record.get('all_original_chats_recovered') is not False or record.get('raw_private_notes_imported') is not False:
         errors.append('Recovery and privacy boundaries must remain explicit')
