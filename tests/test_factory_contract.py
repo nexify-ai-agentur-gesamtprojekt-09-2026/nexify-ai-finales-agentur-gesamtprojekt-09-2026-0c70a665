@@ -182,6 +182,29 @@ class SourceTests(unittest.TestCase):
         self.assertTrue(any("scripts incomplete" in error for error in errors))
         self.assertTrue(any("distinct-voice" in error for error in errors))
 
+    def test_media_scripts_require_nonblank_strings_for_each_locale_and_presenter(self):
+        original = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
+        for slot in range(4):
+            for locale in ("de", "nl", "fr"):
+                for value in (None, True, 42, 1.5, {}, [], " ", "\t\n"):
+                    with self.subTest(slot=slot, locale=locale, value=value):
+                        plan = copy.deepcopy(original)
+                        scripts = (plan["voice_casting"]["comparison_script"] if slot == 0
+                                   else plan["jobs"][slot - 1]["script_drafts"])
+                        scripts[locale] = value
+                        self.assertTrue(any("scripts incomplete" in e for e in contract.validate_media_plan(plan)))
+        self.assertEqual(contract.validate_media_plan(original), [])
+
+    def test_media_script_containers_are_objects_not_coerced_values(self):
+        original = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
+        for slot in range(4):
+            for value in (None, True, 42, [], "de,nl,fr"):
+                with self.subTest(slot=slot, value=value):
+                    plan = copy.deepcopy(original)
+                    if slot == 0: plan["voice_casting"]["comparison_script"] = value
+                    else: plan["jobs"][slot - 1]["script_drafts"] = value
+                    self.assertTrue(any("scripts incomplete" in e for e in contract.validate_media_plan(plan)))
+
     def test_historical_voices_cannot_be_silently_approved_or_generated(self):
         plan = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
         for field in ("historical_ids_are_approved", "generation_allowed"):

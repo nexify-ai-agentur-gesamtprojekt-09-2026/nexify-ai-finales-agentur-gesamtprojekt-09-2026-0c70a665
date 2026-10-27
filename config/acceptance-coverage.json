@@ -377,17 +377,17 @@
       "comment_id": 4388404318,
       "pr": 39,
       "title": "Medien-Skriptwerte müssen Strings sein",
-      "status": "local_remaining",
+      "status": "local_fixed_verified",
       "remote_resolved": false,
       "source_refs": [
         "tools/verify_factory_contract.py",
         "tests/test_factory_contract.py"
       ],
-      "regression_or_method": "Safe local deepcopy probe sets comparison_script.de=42; validator currently accepts it. No provider invocation.",
-      "change": "Not fixed by prior casting-source reconciliation; queued as separate confirmed local follow-up.",
-      "remaining_limit": "Current script type validation is too permissive; production/generation still blocked independently.",
+      "regression_or_method": "Before: numeric comparison_script.de=42 accepted. After:22 factory tests including all3 locales/4 maps with96 nontext/blank values and20 invalid containers; valid current plan passes. Sol independently repeated22tests and CLI;387Python tests and all overall gates passed.",
+      "change": "Strict dict/exact locale/nonblank string checks; no coercion or casting/generation policy change.",
+      "remaining_limit": "Only final exact-hash readback remains for this local repair; actual voice/media/provider acceptance stays open. No remote thread resolved.",
       "owner_role": "Web Engineering / media contract validation",
-      "next_action": "After shop checkpoint reject non-string script values/containers with focused regressions and separate Sol review; preserve casting gates.",
+      "next_action": "Bind final exact commit and versioned package; genuine media assets/audition and publication remain separate gates.",
       "completion_criterion": "Non-string DE/NL/FR comparison/hero scripts rejected; valid string scripts pass and no casting/provider gates weakened."
     },
     {
@@ -1220,7 +1220,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "3d4b3ccb7d42aed6cb2df5920c8e2c96e5bc200360816507adec9e2b1fabac5a",
+    "PROGRESS.md": "bfa6bec63c33dc4e92f4bcaa14b6a6796190319fffb13a0fc27fe6c50aee3e91",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "5a413b9493a0d18ae0c94ce70b152824be8f3f327c7929f603bc70ff48cc2403",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1271,7 +1271,7 @@
     "docs/contracts/factory-api-auth.md": "892b50d298d3ad89b8d03e5cea0815a0d224c27f711d653ab81145230c6046ad",
     "docs/contracts/factory.openapi.json": "a5a7ac8f95a991eac1dd1cbbaf0a328cd0944fe8a4f71cff8bc4b5b0de5ad410",
     "docs/contracts/hero-media.json": "92a55c579cd26b31bb4850e284e64bfb13d4df1dcd74188d8becc0ff5c3f3ac2",
-    "docs/contracts/hero-media.md": "a63b2b12fd0a028c4c0760ea9ebcd325df0d1d3ef89875d5dabc885bb168c048",
+    "docs/contracts/hero-media.md": "df58a8a8a3581d8352654f04d64ecd400ed3c5926d6fe7739e70c76f0c4b3ed7",
     "docs/contracts/hero-production-plan.json": "f351c138ff8c0ae8d14445b6cba59344b14a6aafa8848cf207caa315153dd3f6",
     "docs/contracts/local-shop-cart.md": "3b7e82f45eef1213322f1d43949b8af8d0db2a20bb49f4b5487ce819eaba02c0",
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
@@ -1317,7 +1317,7 @@
     "tests/test_ai_migration.py": "dbe2653f3d69e8d5e9907173f92b1fcc12c1cbd8ea1db4eb46f63196a011f414",
     "tests/test_brain_ingestion.py": "c0b88440609ed22e6aec20eb3a7ff687d0676ca356ef9b7829c2d0af15b81194",
     "tests/test_capacity_planner.py": "660b6271ba509e2fa570b5e903457e5de8802f0f50307466f2b48dc7fa85773d",
-    "tests/test_factory_contract.py": "69c9decb4c393b2342c3a77bc23d5f582f9cee41b38c58222114d330167d4905",
+    "tests/test_factory_contract.py": "243e9616a63c691c42038c27e07b18c5bcb28e14fd95a0338565310a400b8a99",
     "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
     "tests/test_local_shop_cart.py": "4f3dfbfbbb8703be23401e10efe33648cf41d5a03f05d89b2e1a7a49b6af2c76",
     "tests/test_local_shop_http.py": "4ccb484ad2e9a0e32a41985bd75fd0a355d326c67bc70b7a69008222a6f8659a",
@@ -1339,7 +1339,7 @@
     "tools/local_control.py": "9d5c71c42600592f7090a66e2093589ede7d71f2f3a2653194a61f5879291b1d",
     "tools/remediation_queue.py": "26ed67b946ccf4e50863f80e99bb636010d3c1c29712f437194ae34f467c586b",
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
-    "tools/verify_factory_contract.py": "b303186e148f1147ab29e99af94f391f26e6c943e872a4a591cd4bb18561d0b4",
+    "tools/verify_factory_contract.py": "f4fd9d39f15ad805d2978f0687f766ab9913000b021d4e9ff61630317bb17810",
     "tools/verify_requirements_reconciliation.py": "8415c107d4fc17157b1f0469d35ee54761e5e53166c446779c30fe836a234fa9",
     "tools/bigbuy_batch.py": "0e790b975c018218dcee4d06891475a9bfc3267393bd04e852b5e2360f944647",
     "tests/test_bigbuy_batch.py": "4d0afc6817a087f2d9d55f9b8a4ff814e8931ec83b4ccacfbf880ad18686c72a",
@@ -1349,7 +1349,8 @@
     "evidence/bigbuy-batch-2026-10-27/local-verification.json": "5c49a107c05ab28f89ce9a9739bb54c32624f5a43adc81f6c68726b417e13ed6",
     "config/text-resize-sources.json": "7b654634119052f1bc9830b7411265b7265120beea03f0f8958f1be1e6e854d5",
     "tests/test_resize_source_binding.py": "b87944753920cef4e39092fb4663eb2e4b7fba3c94b103a8791e09d5ae57328f",
-    "evidence/pr40-followup-2026-10-27/verification.json": "1170e7012e9d5a3c45ffc399fa4a80d9ea7d7e55fc2420bc4305894a5691eb6f"
+    "evidence/pr40-followup-2026-10-27/verification.json": "1170e7012e9d5a3c45ffc399fa4a80d9ea7d7e55fc2420bc4305894a5691eb6f",
+    "evidence/media-validator-2026-10-27/verification.json": "857462c510fc822513112bf6caadf0108ef4524e730a91a1d82279c9b42b30b5"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",

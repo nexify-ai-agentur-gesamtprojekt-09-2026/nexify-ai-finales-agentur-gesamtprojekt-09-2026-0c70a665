@@ -338,7 +338,8 @@ def validate_media_plan(plan):
     if casting.get("state") != "provider_asset_inventory_and_audition_required":
         errors.append("Media plan: casting inventory gate missing")
     comparison = casting.get("comparison_script", {})
-    if set(comparison) != locales or any(not str(comparison[key]).strip() for key in locales):
+    if (not isinstance(comparison, dict) or set(comparison) != locales
+            or any(not isinstance(comparison[key], str) or not comparison[key].strip() for key in locales)):
         errors.append("Media plan: DE/NL/FR comparison scripts incomplete")
 
     jobs = plan.get("jobs", [])
@@ -347,7 +348,8 @@ def validate_media_plan(plan):
         errors.append("Media plan: presenter jobs missing or duplicated")
     for slot, job in by_slot.items():
         scripts = job.get("script_drafts", {})
-        if set(scripts) != locales or any(not str(scripts[key]).strip() for key in locales):
+        if (not isinstance(scripts, dict) or set(scripts) != locales
+                or any(not isinstance(scripts[key], str) or not scripts[key].strip() for key in locales)):
             errors.append(f"Media plan: {slot} DE/NL/FR hero scripts incomplete")
         if job.get("text_status") != "editorial_ready_pending_voice_audition":
             errors.append(f"Media plan: {slot} text/audition boundary missing")

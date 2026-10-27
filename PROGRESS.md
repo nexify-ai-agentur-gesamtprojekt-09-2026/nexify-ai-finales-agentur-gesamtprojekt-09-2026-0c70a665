@@ -1,3 +1,22 @@
+# PR39: strikter Medien-Skriptvertrag
+
+Current State: PaketVersion10/26f9128 in derselbenLibrary gesichert; vorherige
+CI-/BigBuy-/Cart-/Resizekorrekturen bleiben unverändert. Noch offene bestätigte
+PR39-4388404318-Abweichung separat geschlossen: numerischerVergleichstext42
+wurde vorher akzeptiert; jetzt müssenVergleichs-/Hero-Skriptmappings exakt
+DE/NL/FR mitnichtleerenStrings enthalten. UngültigeContainer führenzumFehler,
+keine stillschweigendeStringkonvertierung.22Fokustests grün inklusive96Wert-
+und20Containergegenproben. Kein Stimme-/Skriptinhalt-/Asset-/Preiswechsel,
+keineGenerierung oderFreigabe ausdemValidator abgeleitet.
+
+Nachweis: unabhängigeSolprüfung wiederholte22Vertragstests/CLI ohneFinding.
+387Python-Tests,check/test/e2e/arch/clean grün;UI/Assets unverändert,
+beideBrowser-Evidenzcheckerweitergrün.
+
+Next Steps: exakterCommit-/Hashreadback;
+versionsgesichert dasselbePaket aufVersion11fortschreiben. EchteBigBuy-/Medien-
+undProvider-/Assistenztechnikgates bleibenoffen; keineweitereRemoteauslieferung.
+
 # PR40: lokale Folgekorrekturen und tatsächlicher Deploymentstand
 
 Current State: BigBuy-Vorstufe65a8e8b auf lokalem CI-Fix3e92663 gesichert.

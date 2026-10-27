@@ -228,10 +228,10 @@
     },
     {
       "id": "ARCH-026",
-      "description": "Historische Stimmenreferenzen umgehen keine Quellenfreigabe über parallele Presenter-Konfiguration.",
+      "description": "Historische Stimmenreferenzen umgehen keine Quellenfreigabe über parallele Presenter-Konfiguration. Medien-Skriptmappings benötigen exakte Locale-Strings ohne Typkonvertierung.",
       "check": "python3 -m unittest discover -s tests -p test_factory_contract.py -q >/dev/null 2>&1",
       "expect": "exit 0",
-      "what": "Medienvertrag, Produktionsplan oder Presenter geben unbestätigte Stimmen frei.",
+      "what": "Medienvertrag, Produktionsplan oder Presenter geben unbestätigte Stimmen frei. Nichttextliche Skriptwerte oder ungültige Container dürfen keine Textevidenz ersetzen.",
       "why": "Ein historischer Identifier ist keine aktuelle Nutzerfreigabe oder Hörabnahme.",
       "fix": "Quellenkonflikt konsistent sperren und negative Cross-Config-Tests erhalten."
     },
