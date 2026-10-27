@@ -1,5 +1,36 @@
 # Freigabe-Gate · Status je Phase · 27.09.2026
 
+## Aktualisierung · 27.10.2026
+
+**Urteil: Preview technisch bereit, Produktionsfreigabe weiterhin gesperrt.**
+
+Der Stand `3f19561` auf `factory/goal-completion-2026-10-27` hat im GitHub-CI-
+Lauf `40497507088` alle fünf Jobs bestanden. Das kanonische Vercel-Projekt
+`nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` meldet für denselben
+Commit `Deployment has completed`. Der bekannte Preview-Host ist von außen
+zugangsgeschützt und antwortet mit HTTP 302 zu Vercel SSO. Damit sind weder ein
+anonymer Seiten-Readback noch der unten geforderte Health-Lauf belegt.
+
+Die Hartsperre bleibt bestehen, bis mindestens folgende Nachweise am exakt zu
+veröffentlichenden Commit mehrfach fehlerfrei vorliegen:
+
+1. echte Anmeldung, Abmeldung und Wiederanmeldung mit vereinbarter starker
+   Authentisierung sowie negative Rollen-, Membership- und Tenant-Gegenproben;
+2. sämtliche vertraglich benötigten Provider-, Workspace-, Daten-, Mail-,
+   Kalender-, Zahlungs- und Medienverbindungen mit Fehler- und Widerrufspfaden;
+3. Preview-Readback, mindestens 60 Sekunden Health mit Cache-Buster, Belastungs-
+   und Wiederanlaufprobe innerhalb der vereinbarten Grenzen;
+4. tatsächlich ausgeführter und gemessener Rollback auf die letzte freigegebene
+   Fassung;
+5. bereinigte Vercel-Projektzuordnung: Die zusätzlichen Altprojekte `web` und
+   `site-k23m` schlagen für denselben Commit in ihren eigenen Konfigurationen
+   fehl und dürfen kein Freigabesignal liefern;
+6. dokumentierte Endabnahme. Erst danach dürfen Main, Produktivdomain oder DNS
+   umgestellt werden.
+
+Der folgende historische Status bleibt als Herkunftsnachweis erhalten; seine
+Messhinweise vom September ersetzen die aktuelle Aktualisierung nicht.
+
 **Urteil: Auftrag „Liveschaltung“ nicht ausführbar.** Keine Phase besteht Stufe 1. Diese Tabelle ist die Nachweis-Vorlage; sie wird auf dem Server ausgefüllt, nicht hier.
 
 **G5-Hinweis:** Die Aussage „Vorschau fehlt“ stammt aus der Messung vom 08.09.2026 und ist in dieser Umgebung nicht neu messbar (kein Netz-/DNS-Zugriff). Vor P0 neu messen: `dig +short vorschau.nexifyai.cloud` und `curl -sI "https://vorschau.nexifyai.cloud/health?cb=$(date +%s)"`.

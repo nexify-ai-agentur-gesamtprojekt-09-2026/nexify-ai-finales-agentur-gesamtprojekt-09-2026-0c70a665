@@ -11,7 +11,22 @@ Zustand bleibt ehrlich und fragt keine Passwörter ab. Die neue Kopfzeile wurde
 lokal auf Desktop/Mobil, 44-Pixel-Zielgröße, DE/NL/FR, Routen, Tastatur und
 Offlineausgabe geprüft. Authentifizierung erteilt weiterhin keine Membership.
 
-Arbeitszweig: `factory/source-faithful-rebuild-2026-10-26`, Basis6bb8b4c.
+Der geprüfte Stand liegt auf `factory/goal-completion-2026-10-27`, Commit
+`3f19561`. GitHub-CI-Lauf `40497507088` hat Repository, React-Site, Next-Web,
+OpenAPI und PostgreSQL-Isolation vollständig bestanden. Das kanonische
+Vercel-Projekt meldet für denselben Commit `Deployment has completed`; der
+bekannte Preview-Host antwortet außerhalb der Vercel-Sitzung erwartungsgemäß
+mit dem Zugangsschutz (HTTP 302 zu Vercel SSO). Zwei zusätzlich mit demselben
+Repository verbundene Altprojekte (`web`, `site-k23m`) schlagen unabhängig
+davon in ihrer eigenen Vercel-Konfiguration fehl und sind zu bereinigen.
+
+Der Preview-Erfolg ist keine Produktionsfreigabe. Main, Produktivdomain und
+DNS bleiben unverändert. Das Freigabe-Gate bleibt geschlossen, bis echte
+Clerk-Anmeldung samt vereinbarter starker Authentisierung, Membership-/Tenant-
+Trennung, Providerverbindungen, wiederholter Health-Lauf, ausgeführter Rollback
+und die Endabnahme mit tatsächlichen Laufzeitnachweisen bestanden sind.
+
+Arbeitszweig: `factory/goal-completion-2026-10-27`, Basis `a19cd50`.
 Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
 parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.
 Keine aktive Migration, Produktionsbelegung oder globale Modellsperre durchgeführt.
@@ -58,9 +73,9 @@ kein Live-LLM-Chat. Internes ToolLoopAgent-Prototyping verwendet echte SDK-Mocks
 keine Modellkosten ausgelöst. Readonly-Creditsprobe nur für diesen Vercel-
 Previewzweig konfiguriert, Ergebnis nach Deployment rücklesen.
 
-Lokaler Gesamtstand:281Pythonfälle,26SDK- und18Site-Tests grün;
+Lokaler Gesamtstand:282Pythonfälle,26SDK- und18Site-Tests grün;
 Site/Standalone/Nextbuilds, API-/App-Typechecks, Audit, E2E und14Architekturregeln
-bestanden. Sauberzustandsprüfung bestanden; neues Vercel-Deployment folgt.
+bestanden. Sauberzustandsprüfung und kanonisches Vercel-Preview bestanden.
 Browser:36öffentliche/10privateRouten,49Erklärmodule,SDK404Fallback/Streams/
 Negativkontext/Sprachen/Mobilfokus,Offline/Hashrouting; kein Produktionsnachweis.
 Bundle561KB/gzip158KB bleibt Leistungsfinding, keine Normzertifizierung.
