@@ -996,3 +996,26 @@ REA-Analyse der neuen Quellen werden nach Quellsicherung separat geliefert.
 Der bestehende REA-Prüfer wurde isoliert integritätsgeprüft geladen,ohne
 persistente MCP-Registrierung; dieser Bootstrap ist keine Zertifizierung.
 Vertrag und Rückweg:docs/contracts/next-public-parity.md.
+
+
+## Bestätigtes Original als Chat-Companion · 27.10.2026
+
+Auf Basis5828c14:gemeinsames OracleCompanion ersetzt die beiden N-Symbole im
+Chatkopf/Wiederöffnen-Button. AI Fly Oracle ist nur die persönliche
+Assistenzbezeichnung;Produkt-/Rollennamen bleiben erhalten. Exaktes vom Nutzer
+bestätigtes Original512x512RGBA/217874Bytes/SHA9f705e5b...330f2f66 liegt unverändert
+im öffentlichen Assetpfad. Kein neu generierter Charakter,Hero- oder Videoersatz.
+
+Nur tatsächlicher Requeststatus löst eine180ms-Transformtransition aus,ohne
+Schleife. Reduced-Motion unterbindet Neigung und Transition;initialer CSS-
+Spezifitätsfehler reproduziert und behoben. Sechs gezielte Browserfälle
+320/390/1280xmotion/reduce prüfen Originalhash nachHTTP,Dekoration,Keyboard,
+Geometrie,Accessibility-Snapshot,working→503→idle und Eingabeerhalt. Screenshots
+bleiben interne QA;keine qualifizierte Assistenztechnik-/Videoabnahme behauptet.
+
+72Next-DE/NL- und72Vite-DE/NL-Fälle,1724History-Kanten,108Resize sowie13Shop-
+und4Katalogprüfungen bestehen erneut.53Site- und11Next-Nodetests,Next-/Vite-
+undStandalonebuilds grün. Auth/Membership,Provider-/Portalfunktionen und sämtliche
+externen Grenzen unverändert. Abschließende Gesamtgates,REA-Quellanalyse und
+unabhängige exakte Commitprüfung werden nach Quellsicherung separat geliefert.
+Quelle und Grenzen:config/companion-avatar.json,docs/contracts/oracle-companion.md.

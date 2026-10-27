@@ -51,7 +51,7 @@ class BrowserEvidenceTests(unittest.TestCase):
             checker.check_evidence(self.root)
 
     def test_stylesheet_drift_cannot_reuse_an_old_browser_pass(self):
-        for relative in ("apps/web/components/WorkspaceRebuild.css", "apps/web/components/PublicExperience.tsx"):
+        for relative in ("apps/web/components/WorkspaceRebuild.css", "apps/web/components/PublicExperience.tsx", "apps/web/components/OracleCompanion.tsx", "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png"):
             path = self.root / relative
             original = path.read_bytes(); path.write_bytes(original + b"\n/* changed public composition */\n")
             with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
@@ -117,7 +117,7 @@ class ShopEvidenceTests(unittest.TestCase):
         self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
 
     def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
-        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx'):
+        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
             path = self.root / relative
             original = path.read_bytes(); path.write_bytes(original + b'\n# changed')
             with self.assertRaisesRegex(checker.EvidenceError, 'stale_shop_source_sha256'):
@@ -154,7 +154,7 @@ class CatalogBrowserEvidenceTests(unittest.TestCase):
 
     def test_source_drift_and_effect_promotion_rejected(self):
         self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
-        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx'):
+        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
             path = self.root / relative
             before = path.read_bytes(); path.write_bytes(before+b'\n/* changed source */')
             with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)

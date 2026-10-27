@@ -33,6 +33,10 @@ SDK_SOURCE_PATHS = (
     "tools/agent-preview.mjs",
 )
 AUXILIARY_SOURCE_PATHS = (
+    "apps/web/components/OracleCompanion.tsx",
+    "apps/web/components/OracleCompanion.css",
+    "apps/web/lib/i18n.ts",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
     "apps/web/components/PublicExperience.tsx",
     "apps/web/components/ShopPanel.tsx",
     "apps/web/components/ShopPanel.css",
@@ -174,6 +178,10 @@ def check_evidence(root):
 SHOP_EVIDENCE_PATH = "evidence/shop-http-2026-10-27/browser-shop.json"
 SHOP_SOURCE_PATHS = (
     "apps/agent-gateway/cart.py", "apps/agent-gateway/server.py",
+    "apps/web/components/OracleCompanion.tsx",
+    "apps/web/components/OracleCompanion.css",
+    "apps/web/lib/i18n.ts",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
     "apps/web/components/PublicExperience.tsx",
     "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
     "apps/web/components/Workspace.tsx", "apps/site/src/main.tsx",
@@ -225,6 +233,10 @@ def check_shop_evidence(root):
 CATALOG_EVIDENCE_PATH = "evidence/catalog-image-batch-2026-10-27/browser-catalog.json"
 CATALOG_SOURCE_PATHS = (
     "apps/agent-gateway/catalog.py", "apps/agent-gateway/server.py",
+    "apps/web/components/OracleCompanion.tsx",
+    "apps/web/components/OracleCompanion.css",
+    "apps/web/lib/i18n.ts",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
     "apps/web/components/PublicExperience.tsx",
     "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
     "apps/site/tests/browser-catalog.mjs", "apps/site/tests/fixtures/catalog-server.py",

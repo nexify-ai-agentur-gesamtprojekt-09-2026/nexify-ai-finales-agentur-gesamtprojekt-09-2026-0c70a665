@@ -27,6 +27,9 @@ try{
   await page.waitForFunction(l=>document.documentElement.lang===l,locale);
   await page.waitForFunction(t=>document.title===t,source.localizedTitle[locale]+' · NeXify AI');
   assert.equal(await page.locator('.workspace-shell').count(),1);
+  assert.equal(await page.locator('.panel-heading h2').innerText(),'AI Fly Oracle');
+  assert.equal(await page.locator('.panel-heading .oracle-companion').getAttribute('aria-hidden'),'true');
+  assert.equal(await page.locator('.panel-heading .oracle-companion img').evaluate(i=>i.complete&&i.naturalWidth===512),true);
   assert.equal(await page.locator('main h1').count(),1);assert.equal(await page.locator('head title').count(),1);
   assert.equal(await page.locator('.editorial-module').count(),data.explainers.find(p=>p.page_id===source.id)?.modules.length||0);
   assert.equal(await page.locator('.editorial-guide').count(),1);

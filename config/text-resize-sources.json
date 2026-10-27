@@ -23,6 +23,8 @@
     "apps/site/tests/browser-text-spacing.mjs",
     "apps/web/app/globals.css",
     "apps/web/public/fonts/geist-latin.woff2",
-    "apps/web/public/fonts/geist-mono-latin.woff2"
+    "apps/web/public/fonts/geist-mono-latin.woff2",
+    "config/companion-avatar.json",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-27T21:36:49.282Z",
+  "recorded_at": "2026-10-27T21:54:32.610Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -52,11 +52,15 @@
     "apps/site/src/main.tsx": "69cb173c86924fb41498c964728b462a3effaee2cdb9a4b26bcc5bb7194b6cd6",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
     "apps/web/components/HomeContent.tsx": "74b12a12c43d9386a4f420b444911d7c788d7b615f180d9883ba8b4699f5a44a",
-    "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
+    "apps/web/components/Workspace.tsx": "1fc4647b5127e03d6676080a2197000f9f893a7c5bef06263b2089fb91c181e3",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
   },
   "auxiliary_source_sha256": {
+    "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
+    "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
+    "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/web/components/PublicExperience.tsx": "5d2d921be94b2a9d7a1e7f85b66535f02c48e02746fc7b5f718a222f2abf9867",
     "apps/web/components/ShopPanel.tsx": "4aedf98d00a3f77728ab5f2739315147054066fe859a9d221d7a550be4e17aed",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
@@ -64,10 +68,10 @@
     "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
-    "apps/site/tests/browser-critical.mjs": "ad5040553b5263d2d3539b94858ca9855679b6370c976eea1481665f352dfba1"
+    "apps/site/tests/browser-critical.mjs": "160a5ab4c1a5a0a438f9635903398d93a812e44597f74156960630012a1fa0d5"
   },
   "sdk_source_sha256": {
-    "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
+    "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
     "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
     "api/agent-chat.ts": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
     "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
@@ -130,7 +134,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-27T21:36:49.282Z",
+    "recorded_at": "2026-10-27T21:54:32.610Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
