@@ -1,3 +1,5 @@
+import "./observability";
+import {capturePageview} from "./analytics";
 import {registerPublicInstallation} from "./public-installation.mjs";
 declare const __PUBLIC_PWA__:boolean;
 void registerPublicInstallation(__PUBLIC_PWA__);
@@ -51,6 +53,7 @@ function RouteContent({page}:{page?:PublicPage}){
 function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');
   useEffect(()=>{const changed=()=>setPath(routePath(location,hashMode)||'__invalid__');addEventListener('popstate',changed);addEventListener('hashchange',changed);return()=>{removeEventListener('popstate',changed);removeEventListener('hashchange',changed);};},[]);
+  useEffect(()=>{capturePageview(path);},[path]);
   const adapter=useMemo(()=>({pathname:path,Link:BrowserLink}),[path]);
   return <RouterProvider adapter={adapter}><PresenterGuideProvider journeys={journeys} defaultJourneyId={journeys.find(journey=>journey.steps.includes(routeIndex.get(path)?.id||""))?.id}><Workspace pages={pages} accountControl={<AccountControl/>}><RouteContent page={routeIndex.get(path)}/></Workspace></PresenterGuideProvider></RouterProvider>;
 }

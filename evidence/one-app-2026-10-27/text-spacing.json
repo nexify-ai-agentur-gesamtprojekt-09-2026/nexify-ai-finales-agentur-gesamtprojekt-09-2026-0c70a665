@@ -2,13 +2,15 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-27T19:34:40.938Z",
+  "observed_at": "2026-10-27T21:46:51.657Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
     "apps/site/index.html": "2c4433488c2341ab761c27933f65393b740cbeff8555ebe749ea683fd0a56818",
     "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
+    "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
     "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
-    "apps/site/src/main.tsx": "b95aec09ed6c7d3fede2e2b0778721b253d98dd904fc7a8cbb9b40197dd5fd0c",
+    "apps/site/src/main.tsx": "73926e28b6205213533dde7c6a11152f5827566a132d0cc16dd99cc467acc440",
+    "apps/site/src/observability.ts": "0829ee8ac7b0bd2e7a1903b26f0e65b7eff34076dd2e6bdd614202aab7cb0e32",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
     "apps/site/tests/browser-text-spacing.mjs": "de0e011d6cde9fab72660a9ea70fd43a7eb13ac044dce1da49d0d58bbe3a0aae",
@@ -46,7 +48,7 @@
     "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
     "packages/tokens/tokens.json": "196d2abf221a1169608984b9805fd150f2649375989bb4021a1448bc91299fda",
     "packages/tokens/tokens.ts": "9d73c48eca26b0a0f405c3deaf07a7d0125ff53fa842843fcfdcfe92e0fac1f3",
-    "pnpm-lock.yaml": "66113f3d0bd4537ead76ce07b68701bdcd8e1d4d392f4365ac1f24637933cb4c"
+    "pnpm-lock.yaml": "c0816e718a86ca6ddb9cede8b5f6354587ad6c7f30323132fd7602fe11c848ea"
   },
   "scope": "text-spacing and 200% text resize geometry; not screenreader or full visual conformance",
   "checks": [

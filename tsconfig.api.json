@@ -19,6 +19,7 @@
   },
   "include": [
     "api/**/*.ts",
-    "packages/agent-runtime/**/*.ts"
+    "packages/agent-runtime/**/*.ts",
+    "packages/observability/**/*.ts"
   ]
 }
