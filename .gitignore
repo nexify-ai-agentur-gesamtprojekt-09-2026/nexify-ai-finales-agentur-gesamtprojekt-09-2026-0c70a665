@@ -41,3 +41,9 @@ apps/web/tsconfig.tsbuildinfo
 apps/site/dist/
 apps/site/.generated/
 apps/site/standalone.html
+.vercel
+
+# Local Vercel linking/OIDC and installed agent guidance are not app artifacts.
+.vercel/
+.agents/skills/
+.codex/skills/

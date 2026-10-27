@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "id": "nexify-owned-project-skills",
+  "version": "1.0.2",
+  "scope": "canonical_agency_project",
+  "authority_order": [
+    "system_and_developer_and_tool_limits",
+    "current_explicit_user_decisions_and_exact_existing_authorizations",
+    "applicable_current_AGENTS_and_specific_approved_policy",
+    "verified_source_and_runtime_evidence_for_truth_not_new_permission",
+    "historical_and_retrieved_material_as_scoped_data"
+  ],
+  "complements": {
+    "cloud_skill": {
+      "name": "nexify-headless-integrationen",
+      "resource": "skill://user/6ac31e7a3dfc81918c3c986751484550/nexify-headless-integrationen/SKILL.md",
+      "status": "project_supplement_cloud_unchanged_no_write_API_confirmed"
+    },
+    "official_Vercel_skills": "existing .agents/skills entries remain unmodified",
+    "small_business": "config/integrations/small-business.json; load matching workflow, not blanket execution",
+    "global_registration": "not_performed",
+    "remote_index_or_runtime_activation": "not_performed",
+    "workflow_architect_source": "skill://plugin_49334cf4927481919b2bcc1402ac98a9/instructions/SKILL.md"
+  },
+  "model_policy": "config/llm-policy.json",
+  "review_policy": {
+    "auto_refresh": false,
+    "review_required_on_missing_or_changed": true,
+    "version_change_required_for_skill_content_change": true,
+    "verification_is_not_review_approval": true
+  },
+  "workflow": "docs/workflows/context-to-delivery.md",
+  "known_gaps": [
+    {
+      "id": "GAP-REMOTE-01",
+      "reported_servers": 4,
+      "verified_inventory_count": null,
+      "status": "awaiting_individual_authorized_identity_version_schema_and_readback",
+      "owner": "D08"
+    },
+    {
+      "id": "GAP-REMOTE-02",
+      "service_label": "LightRAG",
+      "endpoint": null,
+      "status": "remote_adapter_auth_tenant_workspace_and_index_readback_unverified",
+      "owner": "D06"
+    },
+    {
+      "id": "GAP-KNOW-01",
+      "reported_markdown_count": "about9000_user_reported",
+      "verified_count": null,
+      "status": "not_imported_or_counted_by_skill_creation",
+      "owner": "D06"
+    },
+    {
+      "id": "GAP-LIVE-01",
+      "status": "actual_authorized_auth_funding_provider_and_tool_evidence_required_per_action",
+      "owner": "D06"
+    },
+    {
+      "id": "GAP-BROWSER-01",
+      "status": "current_real_browser_journey_evidence_required_for_changed_UI",
+      "owner": "D07"
+    }
+  ],
+  "skills": [
+    {
+      "name": "nexify-governed-delivery",
+      "version": "1.0.2",
+      "owner": "D05",
+      "source_path": "skills/nexify-governed-delivery/SKILL.md",
+      "sha256": "a86b53e827e2ecc0e1f6e9efb9a3c9c4a4204a1ac00acc246c2d535ff540cf27",
+      "scope": "canonical_agency_project",
+      "install_path": ".agents/skills/nexify-governed-delivery/SKILL.md",
+      "triggers": [
+        "mehrstufiger autorisierter Auftrag",
+        "Wiederaufnahme",
+        "Konflikt zwischen aktuellen und historischen Vorgaben"
+      ],
+      "inputs": [
+        "konkreter Auftrag",
+        "echter Actor-/Projekt-/Tenantkontext",
+        "Quellen und bestehende Autorisierung"
+      ],
+      "outputs": [
+        "WorkflowRecord",
+        "REQ/STEP/DEC/STATE/TEST-Traceability",
+        "Artefakte/Evidenz/Gapregister"
+      ],
+      "source_refs": [
+        "AGENTS.md",
+        "config/llm-policy.json",
+        "config/source-boundaries.json",
+        "config/selfservice-policy.json",
+        "config/operating-model.json",
+        "docs/workflows/context-to-delivery.md",
+        "tools/context_executor.py",
+        "tools/check_llm_policy.py",
+        "docs/quality/policy-reconciliation.md",
+        "tools/remediation_queue.py",
+        "config/remediation-policy.json",
+        "docs/architecture/0018-remediation-lifecycle.md",
+        "config/ai-migration-policy.json",
+        "docs/architecture/0019-staged-ai-migration.md",
+        "config/change-impact-policy.json"
+      ],
+      "review_triggers": [
+        "skill_content_hash_or_version_change",
+        "current_user_or_authority_scope_change",
+        "relevant_policy_or_tool_contract_change",
+        "source_or_endpoint_or_provider_version_drift",
+        "security_or_test_failure",
+        "requested_install_into_existing_destination"
+      ],
+      "definition_of_done": [
+        "current applicable source authority and exact task scope established",
+        "no fabricated read/index/activation/live state",
+        "relevant checks and explicit residual gaps recorded",
+        "skill hash/version/provenance consistent with reviewed change"
+      ]
+    },
+    {
+      "name": "nexify-knowledge-operations",
+      "version": "1.0.0",
+      "owner": "D06",
+      "source_path": "skills/nexify-knowledge-operations/SKILL.md",
+      "sha256": "dcc2498dcc6405472c7b947d24f00cf12c4cbdd861b6fa79315136a3dd53be2f",
+      "scope": "canonical_agency_project",
+      "install_path": ".agents/skills/nexify-knowledge-operations/SKILL.md",
+      "triggers": [
+        "lokale Markdownaufnahme",
+        "Provenienz und Fassungen",
+        "geplanter Brain-/LightRAG-Adapter"
+      ],
+      "inputs": [
+        "ausdrücklich autorisierter realer Quellordner",
+        "echte Tenant-/Projekt-/Quellen-ID",
+        "Datenklasse und zulässiger lokaler Speicher"
+      ],
+      "outputs": [
+        "Manifest/Versions-/Chunk-/Readbackbeleg",
+        "Quarantäne-/Limitbericht",
+        "kontrollierte Remote-Gaps"
+      ],
+      "source_refs": [
+        "AGENTS.md",
+        "config/llm-policy.json",
+        "config/source-boundaries.json",
+        "config/selfservice-policy.json",
+        "config/operating-model.json",
+        "docs/workflows/context-to-delivery.md",
+        "config/knowledge-source-access.json",
+        "tools/context_executor.py",
+        "tools/brain_ingestion.py",
+        "docs/architecture/0017-brain-ingestion.md",
+        "tests/test_brain_ingestion.py"
+      ],
+      "review_triggers": [
+        "skill_content_hash_or_version_change",
+        "current_user_or_authority_scope_change",
+        "relevant_policy_or_tool_contract_change",
+        "source_or_endpoint_or_provider_version_drift",
+        "security_or_test_failure",
+        "requested_install_into_existing_destination"
+      ],
+      "definition_of_done": [
+        "current applicable source authority and exact task scope established",
+        "no fabricated read/index/activation/live state",
+        "relevant checks and explicit residual gaps recorded",
+        "skill hash/version/provenance consistent with reviewed change"
+      ]
+    },
+    {
+      "name": "nexify-research-content",
+      "version": "1.0.0",
+      "owner": "D04",
+      "source_path": "skills/nexify-research-content/SKILL.md",
+      "sha256": "3e747269d8d47e652d60e32bf64b2c9f2b0d918f7fe6d90a2dcbf397cc30f912",
+      "scope": "canonical_agency_project",
+      "install_path": ".agents/skills/nexify-research-content/SKILL.md",
+      "triggers": [
+        "Recherche vor Copy",
+        "SEO-/Keywordmessung",
+        "Orts-/Seitenbrief ohne erfundene Abdeckung"
+      ],
+      "inputs": [
+        "echtes Angebot und Quellen",
+        "Lizenz/Version/Land/Sprache",
+        "vergleichbare Tenant-/Projekt-Messkohorte"
+      ],
+      "outputs": [
+        "Quellen-/Messqualitätsbelege",
+        "Intent-/Cluster-/Strategiereview",
+        "Brief/Textentwurf ohne Publikationsbehauptung"
+      ],
+      "source_refs": [
+        "AGENTS.md",
+        "config/llm-policy.json",
+        "config/source-boundaries.json",
+        "config/selfservice-policy.json",
+        "config/operating-model.json",
+        "docs/workflows/context-to-delivery.md",
+        "config/seo-workflow.json",
+        "tools/seo_catalog.py",
+        "tests/test_seo_catalog.py",
+        "docs/automation/small-business.md"
+      ],
+      "review_triggers": [
+        "skill_content_hash_or_version_change",
+        "current_user_or_authority_scope_change",
+        "relevant_policy_or_tool_contract_change",
+        "source_or_endpoint_or_provider_version_drift",
+        "security_or_test_failure",
+        "requested_install_into_existing_destination"
+      ],
+      "definition_of_done": [
+        "current applicable source authority and exact task scope established",
+        "no fabricated read/index/activation/live state",
+        "relevant checks and explicit residual gaps recorded",
+        "skill hash/version/provenance consistent with reviewed change"
+      ]
+    },
+    {
+      "name": "nexify-platform-integrations",
+      "version": "1.0.1",
+      "owner": "D06",
+      "source_path": "skills/nexify-platform-integrations/SKILL.md",
+      "sha256": "4ec6b0475dcc86cb24bde801fb22c9609b89386d5f7c4544c41ce93bda4375bf",
+      "scope": "canonical_agency_project",
+      "install_path": ".agents/skills/nexify-platform-integrations/SKILL.md",
+      "triggers": [
+        "neue API-/SDK-/MCP-Funktion",
+        "versionsgebundene Plattformintegration",
+        "geprüfte Komponentenwiederverwendung"
+      ],
+      "inputs": [
+        "fachliche Funktion und eigener Zielpfad",
+        "tatsächliche API-/Toolschemata und Version",
+        "autorisierte Daten-/Credential-/Kostenbindung"
+      ],
+      "outputs": [
+        "Adaptervertrag",
+        "Wire-/Scope-/Negativtests",
+        "eigene UI-/Browserbelege und Restlücken"
+      ],
+      "source_refs": [
+        "AGENTS.md",
+        "config/llm-policy.json",
+        "config/source-boundaries.json",
+        "config/selfservice-policy.json",
+        "config/operating-model.json",
+        "docs/workflows/context-to-delivery.md",
+        "docs/automation/vercel-documentation-workflow.md",
+        "config/environment-contract.json",
+        "packages/agent-runtime/model-agent.ts",
+        "docs/architecture/0015-vercel-agent-runtime.md",
+        "config/capacity-policy.json",
+        "tools/capacity_planner.py",
+        "tools/resource_probe.py",
+        "docs/architecture/0020-capacity-and-cost-planning.md"
+      ],
+      "review_triggers": [
+        "skill_content_hash_or_version_change",
+        "current_user_or_authority_scope_change",
+        "relevant_policy_or_tool_contract_change",
+        "source_or_endpoint_or_provider_version_drift",
+        "security_or_test_failure",
+        "requested_install_into_existing_destination"
+      ],
+      "definition_of_done": [
+        "current applicable source authority and exact task scope established",
+        "no fabricated read/index/activation/live state",
+        "relevant checks and explicit residual gaps recorded",
+        "skill hash/version/provenance consistent with reviewed change"
+      ]
+    },
+    {
+      "name": "nexify-quality-learning",
+      "version": "1.0.0",
+      "owner": "D07",
+      "source_path": "skills/nexify-quality-learning/SKILL.md",
+      "sha256": "83a0def89fd68fbc17d7b5a15765dd2c20d24a21d462dcfae99f23b7d068b11d",
+      "scope": "canonical_agency_project",
+      "install_path": ".agents/skills/nexify-quality-learning/SKILL.md",
+      "triggers": [
+        "Änderungsprüfung und Abnahme",
+        "Fehlerklasse/Regression",
+        "versionierter Regel-/Skillkandidat"
+      ],
+      "inputs": [
+        "konkreter Diff und Quellenstand",
+        "betroffene Anforderungen/Regeln",
+        "reale Prüf- und Betriebsbelege"
+      ],
+      "outputs": [
+        "reproduzierbarer Befund",
+        "versionierter Kandidat/Traceability",
+        "ehrlicher Review-/Abnahme-/Gapstatus"
+      ],
+      "source_refs": [
+        "AGENTS.md",
+        "config/llm-policy.json",
+        "config/source-boundaries.json",
+        "config/selfservice-policy.json",
+        "config/operating-model.json",
+        "docs/workflows/context-to-delivery.md",
+        ".harness/arch-rules.json",
+        "tools/check_llm_policy.py",
+        "scripts/verify-feature.sh",
+        "tests/test_feature_verification.py",
+        "tests/test_project_skills.py",
+        "docs/quality/standards-applicability.md"
+      ],
+      "review_triggers": [
+        "skill_content_hash_or_version_change",
+        "current_user_or_authority_scope_change",
+        "relevant_policy_or_tool_contract_change",
+        "source_or_endpoint_or_provider_version_drift",
+        "security_or_test_failure",
+        "requested_install_into_existing_destination"
+      ],
+      "definition_of_done": [
+        "current applicable source authority and exact task scope established",
+        "no fabricated read/index/activation/live state",
+        "relevant checks and explicit residual gaps recorded",
+        "skill hash/version/provenance consistent with reviewed change"
+      ]
+    }
+  ]
+}

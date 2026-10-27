@@ -1,3 +1,192 @@
+# Gemeinsame KI-Governance und Kapazitätsplanung · 26.10.2026
+
+Arbeitszweig: `factory/source-faithful-rebuild-2026-10-26`, Basis6bb8b4c.
+Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
+parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.
+Keine aktive Migration, Produktionsbelegung oder globale Modellsperre durchgeführt.
+17 zwischenzeitlich neue Legacy-Einschränkungen vor Veröffentlichung zurückgenommen;
+Altpfade sind ausdrücklich unmigriert/audit, nicht fälschlich abgesichert.
+
+52 KI-bezogene Quellen registriert; aktueller begrenzter Scan168Dateien/30Kandidaten.
+Auditmodus meldet Lücken/Drift, stoppt keine laufende Arbeit. Neue interne
+Modell-/CI-Adapter prüfen exaktDeepSeekV4.1Flash1017/high und finale Requests.
+Hostmodelle von ChatGPT/Codex/Claude werden dadurch nicht umgeschaltet.
+AGENTS/CLAUDE/Copilot weisen auf gemeinsame Regeln und relevante eigene Skills.
+Fünf eigene Skillkopien projektlokal installiert und exakt rückgelesen:
+Delivery1.0.2,Integration1.0.1,übrige1.0.0; keine globale Pluginregistrierung.
+
+Kontextauswahl führt sechs Kernquellen einschließlich Wirkungsprüfung immer mit.
+232Projekt-Markdown-Dateien lokal mit Originalhashen rückgelesen.
+Der Markdown-Stager trennt Herkunft/Mandant/Fassungen/Chunks/Readback;
+FIFO/Hardlink/Secret-/Versions-/Löschungsgegenproben nach Review behoben.
+LightRAG/ca9000MD/vierServer nicht verifiziert oder eingespielt.
+Behebungsqueue tatsächlich15Aufträge:8lokal aktuell geprüft abgeschlossen,
+7externe/Migrationsvoraussetzungen zugewiesen; kein Worker/Scheduler aktiviert.
+
+Offlinekapazitätsplaner rechnet gemessene CPU/RAM/Storage/IO/Netzprofile,
+Lastbereiche und externe Tokenkosten; unbekannte Profile/Raten bleiben unbekannt.
+14Fälle plus unabhängige Gegenrechnung grün. Lokaler Ressourcenprobe beschreibt
+nur diese Codex-Cloudumgebung, keine VPS; Produktionshostinventar weiterhin leer.
+Keine produktive Last, kein Serverlimit oder Loadbalancer geändert.
+
+SEO-Katalog tatsächlich136883GeoNames-Orts-/Ortsteil-Kandidaten(DE/AT/CH/NL/BE)
+in lokaler SQLite aufgenommen, sämtliche Entwürfe/noindex/Abdeckung unbestätigt.
+Kein amtliches Vollständigkeitsversprechen, keine Keywordmessung, keine Ortsseite
+veröffentlicht. Lizenz/Quellhashes: config/research/local-place-import-evidence.json.
+
+AI7/React4-Streamingorientierung im Vercel-Frontend samt realen Browsergegenproben
+und passender Next-Referenz gebaut. Explizit textgeführter Zwischenmodus, noch
+kein Live-LLM-Chat. Internes ToolLoopAgent-Prototyping verwendet echte SDK-Mocks;
+keine Modellkosten ausgelöst. Readonly-Creditsprobe nur für diesen Vercel-
+Previewzweig konfiguriert, Ergebnis nach Deployment rücklesen.
+
+Lokaler Gesamtstand:281Pythonfälle,26SDK- und18Site-Tests grün;
+Site/Standalone/Nextbuilds, API-/App-Typechecks, Audit, E2E und14Architekturregeln
+bestanden. Sauberzustandsprüfung bestanden; neues Vercel-Deployment folgt.
+Browser:36öffentliche/10privateRouten,49Erklärmodule,SDK404Fallback/Streams/
+Negativkontext/Sprachen/Mobilfokus,Offline/Hashrouting; kein Produktionsnachweis.
+Bundle561KB/gzip158KB bleibt Leistungsfinding, keine Normzertifizierung.
+
+Nächster Betriebsanschluss: autorisierte tatsächliche Server-/Brain-Messung und
+Wissensadapter, gebundene Workloadprofile/Lastszenarien, finanzierter und
+authentifizierter Livechat, reale Auth/Suite/Mail/Kalender/Shop/Medienadapter;
+danach einzelne geprüfte Cutovers. Marketing/Mailings/Social erst bei Bereitschaft,
+GEO nach SEO-Grundlage. F-007 bleibt aktiv; .cloud/Affilinet/Main unverändert.
+
+---
+
+# Ausarbeitung des angenommenen Grundentwurfs · 26.10.2026
+
+Der Nutzer akzeptiert den vorherigen Stand ausschließlich als Anfang und
+beauftragt die weitere Ausarbeitung. Vercel ist ausdrücklich die verbindliche
+Live-Vorschau; ChatGPT-Bilddarstellung/Backupsync blockieren diese nicht.
+
+Umgesetzt: ungecroppte Herofiguren (auch bei2464/2560/3440px), vier direkte
+Bereichseinstiege, native Produktnavigation und geordneter Footer. Acht passende
+Folgeseitentypen mit echten Breadcrumbs, Abschnittsnavigation und Folgeaktionen.
+Eigene NeX2fly-Produktseite, 21 zusätzliche originalbasierte Abschnitte auf sieben
+Leistungs-/Entscheidungsseiten. Jetzt46Routen/36öffentlich/10geschützt und49
+vollständig erhaltene Erklärmodule. Keine veröffentlichten Presenter-Videos.
+
+Agentenbereich: aktuelle öffentliche Seite und tatsächliche Angebotsvorschau/
+Detailansicht; Verfügbarkeit aus streng geprüften Serverflags. Lokaler Gateway
+liefert Capabilityvertrag und bindet Chatkontext vor dem Idempotenzhash an die
+öffentliche Allowlist. Keine Rechte aus Clientkontext, keine Liveproviderbehauptung.
+
+Unabhängige Prüfung fand einen Hashrouter-Skiplinkfehler; korrigiert und per
+Tastatur nachgeprüft. Zentrale Sichtprüfung fand veraltete CSS-Selektoren für
+Folgeseiten-Erklärmodule; korrigiert, Desktop-/Mobilgutter nachgemessen.
+
+Prüfungen:152Pythonfälle,18Site-Contracts, React-/Standalone- und Next-Build,
+Typen, Audit, Architektur und E2E grün. Browser:36öffentlicheRouten mit gesamtem
+Textbestand,10privategesperrt,49Textmodule,PDF/Entwurfsansichten,Pendingoutbox,
+Marketingvorlage,öffentlicherChatkontext,Menü/Footer,DE/NL/FR,Mobil/Offline,
+Sprunglink/Abschnittsfokus und fünf Desktopbreiten. Keine Gesamt-, Produktiv-
+oder Normzertifizierung. Bundle559,62KB/gzip157,15KB bleibt Leistungsfinding.
+
+Quellen: docs/architecture/nex2fly-page-source.md und service-content-source.md.
+Prüfumfang: docs/design/detail-expansion-contract.md; unabhängiger Bericht:
+docs/quality/detail-expansion-review.md. F007 bleibt aktiv; bestehende
+Main-/Releasegates bleiben unverändert. .cloud/Affilinet unverändert.
+
+Nächste Arbeiten: weitere Originalinhalte und fehlende produktive Auth-/Suite-/
+Provider-/Versand-/Kalender-/Medien-/Shopanbindungen mit getrennten Rechten und
+Betriebsnachweisen umsetzen; Performancebudget auflösen. Marketing/Mailings/
+Social erst nach Systemfertigstellung; GEO nach SEO-Grundlage und Vermarktung.
+
+---
+
+# Rekonstruktion nach verworfener Vorschau · 26.10.2026
+
+Aktiver Zweig: `factory/source-faithful-rebuild-2026-10-26`. Der vorherige
+Oberflächenstand ist ausdrücklich vom Nutzer verworfen; historische grüne
+Technikprüfungen weiter unten sind keine Designabnahme. Archivzweig und Bundle
+bewahren ihn. Änderungen von `origin/main` bis 07833fb sind integriert.
+
+Die neuere Nutzergrafik ist eine Gestaltungsreferenz ohne vorhandenen Codeexport.
+Neue React-Startseite mit offener Bühne, transparentem Figurenentwurf und
+redaktionellen Folgeabschnitten gebaut. Große leere Videokästen entfernt;
+Erklärtexte, Folgeaktionen und Rundgänge erhalten. Agentenwege sind offline
+anschaubar; Schreibaktionen bleiben an den lokalen Gatewaystatus gebunden.
+Keine vorgetäuschten Versand-/Kalender-/CRM-/Modellzustände.
+
+Neue Unterlagen: Quellenrekonstruktion (93 Original-/Referenz-HTML-Dateien plus
+1 verworfener Implementierungseintrag), Standards-Anforderungsmatrix,
+Gesamtbetriebsmodell und Selfservice-Policy. Das Betriebsmodell ordnet
+12 Abteilungen und 15 Workflowketten zu; es behauptet keinen laufenden
+24/7-Agentenbetrieb. Siehe `docs/operating-model/NEXIFY-GESAMTSYSTEM.md`.
+
+Öffentliche Registrierung als Produktregel korrigiert: 24h Suite, BYOK oder
+bestätigtes 500-Cent-Testguthaben, keine geschenkten LLM-Credits und
+bestandserhaltende Konvertierung. Reguläres Prepaid-Minimum unverändert.
+Privater SQLite-Domainkern mit 13 gezielten Tests; unabhängige Prüfung fand
+zwei Fehler, beide behoben und erneut geprüft. Echte Clerk-/Vault-/Payment-/
+Provideradapter und serverberechnete Payload-/Kostenbindung bleiben offen.
+Kein produktiver Login, keine Zahlung und kein kostenpflichtiger Modellaufruf.
+
+Die .de ist weiterhin dem vorherigen Entwicklungszweig zugeordnet; keine
+neue Designabnahme oder Domainumstellung erfolgt. .cloud unverändert.
+Affilinet Portal Aachen bleibt unangetastetes, separates Kundenprojekt.
+
+Prüf- und Abnahmekriterien: `docs/design/rebuild-acceptance.md`;
+unabhängiges Review: `docs/quality/rebuild-independent-review.md`.
+F007 und bestehende Main-/Releasegates bleiben unverändert.
+
+Aktuelle Nutzerpriorität: erst Gesamtsystem fertigstellen; Marketing/Mailings und
+alle eigenen Social-Kanäle danach aktivieren. Vollständige SEO-Basis bleibt offen;
+GEO erst auf geprüfter SEO-Basis und laufender Vermarktung. Als geordneter Backlog
+in `config/operating-model.json` erfasst, keine aktuelle Kampagnenaktivierung.
+
+Geprüft: 146 Pythonfälle, 16 Site-Contracts, Site-Build/Standalone, Next-Typecheck,
+make check/test/e2e/check-arch/clean-check. Lokaler Browser: 35 öffentliche Routen,
+47 erhaltene Erklärmodule, 10 private Ansichten gesperrt, PDF/Outboxpending/
+Marketingvorlage, DE/NL/FR, mobile Dialogführung und Offlinevorschau.
+Keine gestalterische Nutzerabnahme oder Produktiv-/DIN-/ISO-Zertifizierung.
+
+---
+
+# Live-Vorschau bestätigt · 26.10.2026
+
+https://nexifyai.de ist als Alias des READY-Previewdeployments
+ dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm für409db50durchauthentifizierteAPI+CLIbestätigt.
+VercelAusgabepfadfehlerundAutorblockadesindfürkanonischesProjektbehoben;
+GitHubautorjetztnexifyai-dev,5eigeneCIjobsauchauf409db50grün.
+KeineeigeneMain-/Produktivpromotion,.cloudChatGPTseiteunangetastet.
+ZusätzlicheVercelAppsite(selbesRepo,nurvercel.app)hatteparallelRoot/outputFehler;
+Konfigurationistkonsistentkorrigiert,Read-backvorhanden;keineLöschungoderDomainübernahme.
+ExternCloudflareWorkernamelängeweiterseparatoffen.
+
+---
+
+# Vercel-Projekt eingerichtet, React-Clerk und ENV abgeglichen · 26.10.2026
+
+CLI65.2.0OAuthalsnex2fly-nexifyai-nexifyerfolgreich,Projektprj_Po7jlB7srMP6sxyMvf5zIwzXzNyh
+gezieltverknüpft. AuthentifizierterRead-backzeigtefalschPython/Node24; aufVite,
+Node22.x,Reporoot,pnpm12workspacebuild,Outputapps/site/distkorrigiertundzurückgelesen.
+Nexifyai.deistverifiziertundandenvorhandenenEntwicklungszweiggebunden; .cloud
+bleibtunangetastet. HauptbranchwurdevomNutzeraußerhalbdieserSitzungviaPR34auf
+ccbe092gemergt;keineeigeneMainpromotion/Jeffgateerfunden.
+
+Zukunftscommitsnutzennutzerbestätigtemail@nexifyai.cloud;GitHubordneteCommitd1539de
+nexifyai-devzu,vorherigeCommitsschonendunverändertNeXify-Automate. KeinTeamgatebypass.
+EigenefünfRemoteCIjobsnach339af39grün. ZusätzlicheCloudflareWorkersIntegration
+scheitertunverändertanNamelänge,keineheimlicheProvideränderung.
+
+EchteReact-ClerkUI6.18.1jetztwiederhergestellt;lazySDK,explizitesVITEFlag+validPK,
+Datei/Standaloneimmeraus,fixerRedirect/,keineAdmin-/Tenantautofreigabe.
+VITE_CLERK_PUBLISHABLE_KEYundVITE_CLERK_ENABLEDfalsefüralle3Umgebungenhinzugefügt
+undbeideWerteperAPIbooleschverglichen. ClerkDomainnochNXDOMAINdeshalbnichtaktiviert.
+VorhandeneClerkserverSecrets/Auth0/DB/Providerwerteunverändert,keineSecretwertegelesen.
+42ENV-Vertragsnamen/24RemoteNamen/38Metadatensätzegeordnet,nichtalleDiensteVercel.
+
+16SiteTests,133PythonTests,E2E/Architektur/Clean/Browser35public+47Module+Guide/Offlinegrün.
+GlobalePlugininstallationundMCPregistrierungandenphysischschreibgeschützten
+Client/Homebereichenblockiert;offizielle9StandaloneSkillsprojektbezogeninstalliert
+undlistverifiziert,skills-lock.jsonerhalten. CLIbleibtauthentifiziertnutzbar.
+NochkeineVercelDeployReady/LiveLogin/produktiveVisitorAPI/ChatGPTBackupsyncAbnahme.
+
+---
+
 # Durchgängige Seitenbegleitung · 26.10.2026
 
 React-Begleitung nun9geführteNutzerwege+47Erklärmoduleauf35öffentlichenSeiten,

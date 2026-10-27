@@ -1,0 +1,2650 @@
+{
+  "schema_version": 1,
+  "status": "read_only_reuse_research_not_installed_or_connected",
+  "observed_at": "2026-10-26T11:35:59.112005+00:00",
+  "scope": {
+    "authorized_source": "Official public OpenRouter, LiteLLM documentation, GitHub repository and PyPI metadata only.",
+    "sdk_installed": false,
+    "sdk_imported_or_executed": false,
+    "downloaded_package_executed": false,
+    "credential_values_read": false,
+    "account_changes": false,
+    "paid_inference_calls": 0,
+    "source_or_lockfiles_modified": false
+  },
+  "counts": {
+    "openrouter_declared_hosting_provider_records": 114,
+    "litellm_declared_adapter_identifiers": 166,
+    "litellm_distinct_llm_vendor_count": "not established: aliases, media, local runtimes and generic adapters are included",
+    "suite_provider_implementations": 0,
+    "separate_ai_review_openrouter_implementation": 1,
+    "active_python_litellm_package_installed": false,
+    "native_byok_key_live_verified_providers": 0,
+    "openrouter_byok_key_live_verified_providers": 0,
+    "public_catalog_get_verified": true,
+    "interpretation": "Catalog size is not installed support, a BYOK-eligible account count, tenant authorization or verified connectivity."
+  },
+  "local_evidence": [
+    {
+      "path": "apps/agent-gateway/server.py",
+      "lines": [
+        215,
+        297
+      ],
+      "finding": "Structured assistant; model_chat false; no suite multi-provider inference implementation."
+    },
+    {
+      "path": "tools/automation/ai_review.py",
+      "lines": [
+        23,
+        24,
+        102
+      ],
+      "finding": "Separate exact-model OpenRouter advisory CI reviewer; not a suite BYOK backend and not evidence of live customer-key inference."
+    }
+  ],
+  "openrouter": {
+    "provider_catalog_url": "https://openrouter.ai/api/v1/providers",
+    "provider_catalog_snapshot_sha256": "94d1cb9d9de4810456e2fd498bdd21f203d982826678591c0234254f0ec2ff11",
+    "providers": [
+      {
+        "name": "Ionstream",
+        "slug": "ionstream",
+        "privacy_policy_url": "https://ionstream.ai/privacy-policy/",
+        "terms_of_service_url": "https://ionstream.ai/terms-and-conditions/",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Moonshot AI",
+        "slug": "moonshotai",
+        "privacy_policy_url": "https://platform.moonshot.ai/docs/agreement/userprivacy",
+        "terms_of_service_url": "https://platform.moonshot.ai/docs/agreement/modeluse",
+        "status_page_url": null,
+        "headquarters": "SG",
+        "datacenters": [
+          "SG"
+        ]
+      },
+      {
+        "name": "Deepgram",
+        "slug": "deepgram",
+        "privacy_policy_url": "https://deepgram.com/privacy",
+        "terms_of_service_url": "https://deepgram.com/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "VoyageAI by MongoDB",
+        "slug": "voyageai",
+        "privacy_policy_url": "https://www.voyageai.com/privacy",
+        "terms_of_service_url": "https://www.voyageai.com/tos",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Morph",
+        "slug": "morph",
+        "privacy_policy_url": "https://morphllm.com/privacy",
+        "terms_of_service_url": "https://www.morphllm.com/privacy/tos",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Featherless",
+        "slug": "featherless",
+        "privacy_policy_url": "https://featherless.ai/privacy",
+        "terms_of_service_url": "https://featherless.ai/terms",
+        "status_page_url": "https://featherless.ai/status",
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Arcee AI",
+        "slug": "arcee-ai",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Recursive",
+        "slug": "recursive",
+        "privacy_policy_url": "https://recursive.com/legal/privacy-policy",
+        "terms_of_service_url": "https://recursive.com/legal/terms-of-use",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "ParetoAlpha",
+        "slug": "pareto-alpha",
+        "privacy_policy_url": "https://paretoalphainference.com/privacy",
+        "terms_of_service_url": "https://paretoalphainference.com/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Mistral",
+        "slug": "mistral",
+        "privacy_policy_url": "https://mistral.ai/terms/#privacy-policy",
+        "terms_of_service_url": "https://mistral.ai/terms/#terms-of-use",
+        "status_page_url": "https://status.mistral.ai/",
+        "headquarters": "FR",
+        "datacenters": null
+      },
+      {
+        "name": "AI21",
+        "slug": "ai21",
+        "privacy_policy_url": "https://www.ai21.com/privacy-policy/",
+        "terms_of_service_url": "https://www.ai21.com/terms-of-service/",
+        "status_page_url": "https://status.ai21.com/",
+        "headquarters": "IL",
+        "datacenters": null
+      },
+      {
+        "name": "Io Net",
+        "slug": "io-net",
+        "privacy_policy_url": "https://io.net/privacy",
+        "terms_of_service_url": "https://io.net/terms",
+        "status_page_url": "https://status.io.net/",
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Black Forest Labs",
+        "slug": "black-forest-labs",
+        "privacy_policy_url": "https://bfl.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://bfl.ai/legal/terms-of-service",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Claude Platform on AWS",
+        "slug": "claude-on-aws",
+        "privacy_policy_url": "https://www.anthropic.com/legal/privacy",
+        "terms_of_service_url": "https://www.anthropic.com/legal/commercial-terms",
+        "status_page_url": "https://status.anthropic.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "StepFun",
+        "slug": "stepfun",
+        "privacy_policy_url": null,
+        "terms_of_service_url": "https://platform.stepfun.ai/docs/en/agreement/userservice",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Darkbloom",
+        "slug": "darkbloom",
+        "privacy_policy_url": "https://www.darkbloom.dev/privacy.html",
+        "terms_of_service_url": "https://www.darkbloom.dev/terms.html",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Modal",
+        "slug": "modal",
+        "privacy_policy_url": "https://modal.com/legal/privacy-policy",
+        "terms_of_service_url": "https://modal.com/legal/terms",
+        "status_page_url": "https://status.modal.com/",
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Sail Research",
+        "slug": "sail-research",
+        "privacy_policy_url": "https://www.sailresearch.com/privacy",
+        "terms_of_service_url": "https://www.sailresearch.com/terms",
+        "status_page_url": "https://status.sailresearch.com/",
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Tencent",
+        "slug": "tencent",
+        "privacy_policy_url": "https://www.tencentcloud.com/en/document/product/1300/78952",
+        "terms_of_service_url": "https://www.tencentcloud.com/en/document/product/301/78869",
+        "status_page_url": "https://status.tencentcloud.com",
+        "headquarters": "CN",
+        "datacenters": [
+          "SG"
+        ]
+      },
+      {
+        "name": "Perplexity",
+        "slug": "perplexity",
+        "privacy_policy_url": "https://www.perplexity.ai/hub/legal/privacy-policy",
+        "terms_of_service_url": "https://www.perplexity.ai/hub/legal/perplexity-api-terms-of-service",
+        "status_page_url": "https://status.perplexity.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "SambaNova",
+        "slug": "sambanova",
+        "privacy_policy_url": "https://sambanova.ai/privacy-policy",
+        "terms_of_service_url": "https://sambanova.ai/terms-and-conditions",
+        "status_page_url": "https://status.sambanova.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Stealth",
+        "slug": "stealth",
+        "privacy_policy_url": null,
+        "terms_of_service_url": "https://openrouter.ai/terms/stealth",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Switchpoint",
+        "slug": "switchpoint",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Ollama",
+        "slug": "ollama",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Krea",
+        "slug": "krea",
+        "privacy_policy_url": "https://www.krea.ai/privacy-policy",
+        "terms_of_service_url": "https://www.krea.ai/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Mara",
+        "slug": "mara",
+        "privacy_policy_url": "https://www.mara.com/mara-legals/ai-policies#cloud-pp",
+        "terms_of_service_url": "https://www.mara.com/mara-legals/ai-policies#cloud-toc",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Amazon Nova",
+        "slug": "amazon-nova",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Cosine",
+        "slug": "cosine",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Sourceful",
+        "slug": "sourceful",
+        "privacy_policy_url": "https://www.sourceful.com/legal/privacy-policy",
+        "terms_of_service_url": "https://www.sourceful.com/legal/spring-terms-of-use",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Groq",
+        "slug": "groq",
+        "privacy_policy_url": "https://groq.com/privacy-policy/",
+        "terms_of_service_url": "https://groq.com/terms-of-use/",
+        "status_page_url": "https://status.groq.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Cloudflare",
+        "slug": "cloudflare",
+        "privacy_policy_url": "https://developers.cloudflare.com/workers-ai/privacy",
+        "terms_of_service_url": "https://www.cloudflare.com/service-specific-terms-developer-platform/#developer-platform-terms",
+        "status_page_url": "https://www.cloudflarestatus.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Mancer 2",
+        "slug": "mancer",
+        "privacy_policy_url": "https://mancer.tech/privacy",
+        "terms_of_service_url": "https://mancer.tech/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Amazon Bedrock",
+        "slug": "amazon-bedrock",
+        "privacy_policy_url": "https://aws.amazon.com/privacy",
+        "terms_of_service_url": "https://aws.amazon.com/service-terms/",
+        "status_page_url": "https://health.aws.amazon.com/health/status",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Crucible",
+        "slug": "crucible",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Recraft",
+        "slug": "recraft",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Decart",
+        "slug": "decart",
+        "privacy_policy_url": "https://cogito.decart.ai/legal/privacy",
+        "terms_of_service_url": "https://cogito.decart.ai/legal/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "DekaLLM",
+        "slug": "dekallm",
+        "privacy_policy_url": "https://www.cloudeka.id/id/privacy-policy/",
+        "terms_of_service_url": "https://docs.cloudeka.ai/service-portal-ai/end-user-license-agreement",
+        "status_page_url": null,
+        "headquarters": "ID",
+        "datacenters": [
+          "ID"
+        ]
+      },
+      {
+        "name": "Minimax",
+        "slug": "minimax",
+        "privacy_policy_url": "https://www.minimax.io/platform/protocol/privacy-policy",
+        "terms_of_service_url": "https://www.minimax.io/platform/protocol/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "SG",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "ModelRun",
+        "slug": "modelrun",
+        "privacy_policy_url": "https://www.modular.com/legal/privacy",
+        "terms_of_service_url": "https://www.modular.com/legal/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Perceptron",
+        "slug": "perceptron",
+        "privacy_policy_url": "https://www.perceptron.inc/privacy-policy",
+        "terms_of_service_url": "https://www.perceptron.inc/terms-of-use",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Poolside",
+        "slug": "poolside",
+        "privacy_policy_url": "https://poolside.ai/legal/privacy",
+        "terms_of_service_url": "http://poolside.ai/legal",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Seed",
+        "slug": "seed",
+        "privacy_policy_url": "https://docs.byteplus.com/en/docs/legal/docs-privacy-policy",
+        "terms_of_service_url": "https://docs.byteplus.com/en/docs/legal/docs-terms-of-service",
+        "status_page_url": null,
+        "headquarters": "SG",
+        "datacenters": []
+      },
+      {
+        "name": "Inferact vLLM",
+        "slug": "inferact-vllm",
+        "privacy_policy_url": "https://inferact.ai/privacy-policy",
+        "terms_of_service_url": "https://inferact.ai/ortoc",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US",
+          "FI"
+        ]
+      },
+      {
+        "name": "CoreWeave",
+        "slug": "coreweave",
+        "privacy_policy_url": "https://docs.coreweave.com/policies/terms-of-service/privacy-policy",
+        "terms_of_service_url": "https://docs.coreweave.com/policies/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Runway",
+        "slug": "runway",
+        "privacy_policy_url": "https://runwayml.com/privacy-policy",
+        "terms_of_service_url": "https://runwayml.com/terms-of-use",
+        "status_page_url": "https://status.runwayml.com",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Baidu",
+        "slug": "baidu",
+        "privacy_policy_url": "https://intl.cloud.baidu.com/en/doc/Agreements/s/Plr0fi68q-intl-en",
+        "terms_of_service_url": "https://intl.cloud.baidu.com/en/doc/Agreements/s/bmesahnjh-intl-en",
+        "status_page_url": null,
+        "headquarters": "CN",
+        "datacenters": []
+      },
+      {
+        "name": "Modular",
+        "slug": "modular",
+        "privacy_policy_url": "https://www.runmodelrun.com/privacy-policy.html",
+        "terms_of_service_url": "https://www.runmodelrun.com/TOS.html",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Cirrascale",
+        "slug": "cirrascale",
+        "privacy_policy_url": "https://www.cirrascale.com/privacy-policy",
+        "terms_of_service_url": "https://www.cirrascale.com/terms-of-service",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "BaseTen",
+        "slug": "baseten",
+        "privacy_policy_url": "https://www.baseten.co/privacy-policy",
+        "terms_of_service_url": "https://www.baseten.co/terms-and-conditions",
+        "status_page_url": "https://status.baseten.co/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Ambient",
+        "slug": "ambient",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Crusoe",
+        "slug": "crusoe",
+        "privacy_policy_url": "https://legal.crusoe.ai/open-router#cloud-privacy-policy",
+        "terms_of_service_url": "https://legal.crusoe.ai/open-router#managed-inference-tos-open-router",
+        "status_page_url": "https://status.crusoecloud.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Inceptron",
+        "slug": "inceptron",
+        "privacy_policy_url": "https://www.inceptron.io/privacy",
+        "terms_of_service_url": "https://www.inceptron.io/termsofservice",
+        "status_page_url": null,
+        "headquarters": "SE",
+        "datacenters": [
+          "FI"
+        ]
+      },
+      {
+        "name": "Cohere",
+        "slug": "cohere",
+        "privacy_policy_url": "https://cohere.com/privacy",
+        "terms_of_service_url": "https://cohere.com/terms-of-use",
+        "status_page_url": "https://status.cohere.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "DeepSeek",
+        "slug": "deepseek",
+        "privacy_policy_url": "https://chat.deepseek.com/downloads/DeepSeek%20Privacy%20Policy.html",
+        "terms_of_service_url": "https://chat.deepseek.com/downloads/DeepSeek%20Terms%20of%20Use.html",
+        "status_page_url": "https://status.deepseek.com/",
+        "headquarters": "CN",
+        "datacenters": null
+      },
+      {
+        "name": "Nex AGI",
+        "slug": "nex-agi",
+        "privacy_policy_url": "https://api.nex-agi.cn/privacy-policy",
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": "CN",
+        "datacenters": [
+          "SG"
+        ]
+      },
+      {
+        "name": "Reka",
+        "slug": "reka",
+        "privacy_policy_url": "https://reka.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://reka.ai/legal/terms-of-use",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Thinking Machines",
+        "slug": "thinkingmachines",
+        "privacy_policy_url": "https://thinkingmachines.ai/legal/tml-free-research-api-tier-privacy-notice.pdf",
+        "terms_of_service_url": "https://thinkingmachines.ai/legal/tml-free-research-api-tier-terms-of-service.pdf",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Upstage",
+        "slug": "upstage",
+        "privacy_policy_url": "https://www.upstage.ai/privacy-policy",
+        "terms_of_service_url": "https://www.upstage.ai/terms-of-service",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Xiaomi",
+        "slug": "xiaomi",
+        "privacy_policy_url": "https://platform.xiaomimimo.com/#/docs/terms/privacy-policy",
+        "terms_of_service_url": "https://platform.xiaomimimo.com/#/docs/terms/user-agreement",
+        "status_page_url": null,
+        "headquarters": "CN",
+        "datacenters": [
+          "SG",
+          "NL"
+        ]
+      },
+      {
+        "name": "NextBit",
+        "slug": "nextbit",
+        "privacy_policy_url": "https://www.nextbit256.com/docs/privacy-policy",
+        "terms_of_service_url": "https://www.nextbit256.com/docs/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "ES",
+        "datacenters": [
+          "ES"
+        ]
+      },
+      {
+        "name": "Databricks",
+        "slug": "databricks",
+        "privacy_policy_url": "https://www.databricks.com/legal/privacynotice",
+        "terms_of_service_url": "https://www.databricks.com/terms-of-use",
+        "status_page_url": "https://status.databricks.com",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Nvidia",
+        "slug": "nvidia",
+        "privacy_policy_url": "https://www.nvidia.com/en-us/about-nvidia/privacy-policy/",
+        "terms_of_service_url": "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Relace",
+        "slug": "relace",
+        "privacy_policy_url": "https://www.relace.ai/privacy-policy",
+        "terms_of_service_url": "https://www.relace.ai/terms-of-use",
+        "status_page_url": "https://status.relace.ai",
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Infermatic",
+        "slug": "infermatic",
+        "privacy_policy_url": "https://infermatic.ai/privacy-policy/",
+        "terms_of_service_url": "https://infermatic.ai/terms-and-conditions/",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Makora",
+        "slug": "makora",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": "https://status.makora.com",
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "StreamLake",
+        "slug": "streamlake",
+        "privacy_policy_url": "https://www.streamlake.ai/document/DOC/mgkci47q13qr66h9i54",
+        "terms_of_service_url": "https://www.streamlake.ai/document/DOC/mgkchnd89grpt1961fw",
+        "status_page_url": "https://status.streamlake.ai/",
+        "headquarters": "CN",
+        "datacenters": []
+      },
+      {
+        "name": "Avian",
+        "slug": "avian",
+        "privacy_policy_url": "https://avian.io/privacy",
+        "terms_of_service_url": "https://avian.io/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "AssemblyAI",
+        "slug": "assemblyai",
+        "privacy_policy_url": "https://www.assemblyai.com/legal/privacy-policy",
+        "terms_of_service_url": "https://www.assemblyai.com/legal/terms-of-service",
+        "status_page_url": "https://status.assemblyai.com",
+        "headquarters": null,
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "TypeSafe",
+        "slug": "typesafe",
+        "privacy_policy_url": "https://typesafe.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://typesafe.ai/legal/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Near AI",
+        "slug": "near-ai",
+        "privacy_policy_url": "https://near.ai/privacy-policy",
+        "terms_of_service_url": "https://near.ai/terms-of-service",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Quiver",
+        "slug": "quiver",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Clarifai",
+        "slug": "clarifai",
+        "privacy_policy_url": "https://www.clarifai.com/company/privacy-policy",
+        "terms_of_service_url": "https://www.clarifai.com/company/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Z.AI",
+        "slug": "z-ai",
+        "privacy_policy_url": "https://chat.z.ai/legal-agreement/privacy-policy",
+        "terms_of_service_url": "https://chat.z.ai/legal-agreement/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "SG",
+        "datacenters": [
+          "SG"
+        ]
+      },
+      {
+        "name": "DeepInfra",
+        "slug": "deepinfra",
+        "privacy_policy_url": "https://deepinfra.com/privacy",
+        "terms_of_service_url": "https://deepinfra.com/terms",
+        "status_page_url": "https://status.deepinfra.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Unbiased",
+        "slug": "unbiased",
+        "privacy_policy_url": "https://unbiased.ai/terms/#privacy-policy",
+        "terms_of_service_url": "https://unbiased.ai/terms/",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "HeyGen",
+        "slug": "heygen",
+        "privacy_policy_url": "https://www.heygen.com/privacy",
+        "terms_of_service_url": "https://www.heygen.com/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Tenstorrent",
+        "slug": "tenstorrent",
+        "privacy_policy_url": "https://tenstorrent.com/privacy",
+        "terms_of_service_url": "https://console.tenstorrent.com/terms",
+        "status_page_url": "https://status.tenstorrent.com/",
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Sakana AI",
+        "slug": "sakana",
+        "privacy_policy_url": "https://console.sakana.ai/privacy-policy",
+        "terms_of_service_url": "https://console.sakana.ai/terms-of-service",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Fish Audio",
+        "slug": "fish-audio",
+        "privacy_policy_url": "https://fish.audio/privacy",
+        "terms_of_service_url": "https://fish.audio/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "AkashML",
+        "slug": "akashml",
+        "privacy_policy_url": "https://akashml.com/privacy",
+        "terms_of_service_url": "https://akashml.com/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": []
+      },
+      {
+        "name": "Inflection",
+        "slug": "inflection",
+        "privacy_policy_url": "https://inflection.ai/privacy-policy",
+        "terms_of_service_url": "https://developers.inflection.ai/tos",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "xAI",
+        "slug": "xai",
+        "privacy_policy_url": "https://x.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://x.ai/legal/terms-of-service-enterprise",
+        "status_page_url": "https://status.x.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "ScaleDown",
+        "slug": "scaledown",
+        "privacy_policy_url": "https://scaledown.ai/privacy",
+        "terms_of_service_url": "https://scaledown.ai/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Respan",
+        "slug": "respan",
+        "privacy_policy_url": "https://respan.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://respan.ai/legal/terms-of-use",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Wafer",
+        "slug": "wafer",
+        "privacy_policy_url": "https://www.wafer.ai/privacy-policy",
+        "terms_of_service_url": "https://www.wafer.ai/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "OpenInference",
+        "slug": "open-inference",
+        "privacy_policy_url": "https://www.openinference.ai/privacy",
+        "terms_of_service_url": "https://www.openinference.ai/terms",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Azure",
+        "slug": "azure",
+        "privacy_policy_url": "https://www.microsoft.com/en-us/privacy/privacystatement",
+        "terms_of_service_url": "https://www.microsoft.com/en-us/legal/terms-of-use?oneroute=true",
+        "status_page_url": "https://status.azure.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Nebius",
+        "slug": "nebius",
+        "privacy_policy_url": "https://docs.nebius.com/legal/studio/privacy/",
+        "terms_of_service_url": "https://docs.nebius.com/legal/studio/terms-of-use/",
+        "status_page_url": null,
+        "headquarters": "NL",
+        "datacenters": null
+      },
+      {
+        "name": "PrimeIntellect",
+        "slug": "primeintellect",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Cerebras",
+        "slug": "cerebras",
+        "privacy_policy_url": "https://www.cerebras.ai/privacy-policy",
+        "terms_of_service_url": "https://www.cerebras.ai/terms-of-service",
+        "status_page_url": "https://status.cerebras.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "ElevenLabs",
+        "slug": "elevenlabs",
+        "privacy_policy_url": "https://elevenlabs.io/privacy-policy",
+        "terms_of_service_url": "https://elevenlabs.io/terms-of-use",
+        "status_page_url": "https://status.elevenlabs.io",
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "Parasail",
+        "slug": "parasail",
+        "privacy_policy_url": "https://www.parasail.io/legal/privacy-policy",
+        "terms_of_service_url": "https://parasail.io/legal/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "AionLabs",
+        "slug": "aion-labs",
+        "privacy_policy_url": "https://www.aionlabs.ai/privacy-policy/",
+        "terms_of_service_url": "https://www.aionlabs.ai/terms/",
+        "status_page_url": null,
+        "headquarters": "IL",
+        "datacenters": []
+      },
+      {
+        "name": "InferenceNet",
+        "slug": "inference-net",
+        "privacy_policy_url": "https://inference.net/privacy-policy",
+        "terms_of_service_url": "https://inference.net/terms-of-service",
+        "status_page_url": "https://status.inference.net",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Liquid",
+        "slug": "liquid",
+        "privacy_policy_url": "https://www.liquid.ai/privacy-policy",
+        "terms_of_service_url": "https://www.liquid.ai/terms-conditions",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "SiliconFlow",
+        "slug": "siliconflow",
+        "privacy_policy_url": "https://docs.siliconflow.com/en/legals/privacy-policy",
+        "terms_of_service_url": "https://docs.siliconflow.com/en/legals/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "SG",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "FakeProvider",
+        "slug": "fake-provider",
+        "privacy_policy_url": null,
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Phala",
+        "slug": "phala",
+        "privacy_policy_url": "https://redpill.ai/privacy",
+        "terms_of_service_url": "https://redpill.ai/terms",
+        "status_page_url": "https://status.phala.network/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Anthropic",
+        "slug": "anthropic",
+        "privacy_policy_url": "https://www.anthropic.com/legal/privacy",
+        "terms_of_service_url": "https://www.anthropic.com/legal/commercial-terms",
+        "status_page_url": "https://status.anthropic.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "AtlasCloud",
+        "slug": "atlas-cloud",
+        "privacy_policy_url": "https://www.atlascloud.ai/privacy",
+        "terms_of_service_url": null,
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Chutes",
+        "slug": "chutes",
+        "privacy_policy_url": "https://chutes.ai/privacy",
+        "terms_of_service_url": "https://chutes.ai/tos",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Meta",
+        "slug": "meta",
+        "privacy_policy_url": "https://www.facebook.com/privacy/policy/",
+        "terms_of_service_url": "https://ai.developer.meta.com/legal/terms-of-service",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Google AI Studio",
+        "slug": "google-ai-studio",
+        "privacy_policy_url": "https://cloud.google.com/terms/cloud-privacy-notice",
+        "terms_of_service_url": "https://cloud.google.com/terms/",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Google",
+        "slug": "google-vertex",
+        "privacy_policy_url": "https://cloud.google.com/terms/cloud-privacy-notice",
+        "terms_of_service_url": "https://cloud.google.com/terms/",
+        "status_page_url": "https://status.cloud.google.com/products/sdXM79fz1FS6ekNpu37K/history",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Venice",
+        "slug": "venice",
+        "privacy_policy_url": "https://venice.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://venice.ai/legal/tos",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "OpenAI",
+        "slug": "openai",
+        "privacy_policy_url": "https://openai.com/policies/privacy-policy/",
+        "terms_of_service_url": "https://openai.com/policies/row-terms-of-use/",
+        "status_page_url": "https://status.openai.com/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Together",
+        "slug": "together",
+        "privacy_policy_url": "https://www.together.ai/privacy",
+        "terms_of_service_url": "https://www.together.ai/terms-of-service",
+        "status_page_url": "https://status.together.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Friendli",
+        "slug": "friendli",
+        "privacy_policy_url": "https://friendli.ai/privacypolicy",
+        "terms_of_service_url": "https://friendli.ai/terms-of-service",
+        "status_page_url": "https://status.friendli.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Inception",
+        "slug": "inception",
+        "privacy_policy_url": "https://www.inceptionlabs.ai/terms#privacy-policy",
+        "terms_of_service_url": "https://www.inceptionlabs.ai/terms",
+        "status_page_url": null,
+        "headquarters": null,
+        "datacenters": null
+      },
+      {
+        "name": "GMICloud",
+        "slug": "gmicloud",
+        "privacy_policy_url": "https://docs.gmicloud.ai/privacy",
+        "terms_of_service_url": "https://www.gmicloud.ai/terms-and-conditions",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": [
+          "US"
+        ]
+      },
+      {
+        "name": "Fireworks",
+        "slug": "fireworks",
+        "privacy_policy_url": "https://fireworks.ai/privacy-policy",
+        "terms_of_service_url": "https://fireworks.ai/terms-of-service",
+        "status_page_url": "https://status.fireworks.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      },
+      {
+        "name": "Alibaba",
+        "slug": "alibaba",
+        "privacy_policy_url": "https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy",
+        "terms_of_service_url": "https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-product-terms-of-service-v-3-8-0",
+        "status_page_url": "https://status.alibabacloud.com/",
+        "headquarters": "SG",
+        "datacenters": [
+          "SG",
+          "CN"
+        ]
+      },
+      {
+        "name": "DigitalOcean",
+        "slug": "digitalocean",
+        "privacy_policy_url": "https://www.digitalocean.com/legal/privacy-policy",
+        "terms_of_service_url": "https://www.digitalocean.com/legal/terms-of-service-agreement",
+        "status_page_url": null,
+        "headquarters": "US",
+        "datacenters": []
+      },
+      {
+        "name": "Novita",
+        "slug": "novita",
+        "privacy_policy_url": "https://novita.ai/legal/privacy-policy",
+        "terms_of_service_url": "https://novita.ai/legal/terms-of-service",
+        "status_page_url": "https://status.novita.ai/",
+        "headquarters": "US",
+        "datacenters": null
+      }
+    ],
+    "byok_mode": "Keys stored/used by OpenRouter, routed through OpenRouter to provider account; this is not direct native provider access.",
+    "all_catalog_providers_byok_eligible_verified": false,
+    "published_fee_observation": {
+      "value": "5% of the normal OpenRouter model/provider list-price cost",
+      "allowance": "Plan-dependent list-price inference allowance; public docs currently describe $25000 monthly on pay-as-you-go and custom enterprise allowances.",
+      "authority": "Observed provider documentation, not a newly adopted NeXify price or billing promise.",
+      "source_id": "openrouter-byok"
+    },
+    "default_shared_capacity_fallback": true,
+    "strict_byok_requirements": [
+      "Disable shared capacity for any model on the selected provider; key filter and other-provider behavior must also be constrained.",
+      "Use provider.only with exact allowed provider and allow_fallbacks:false; order alone is not an allowlist.",
+      "Check observed response route/provider and key-account evidence before claiming direct BYOK cost provenance."
+    ],
+    "region_status": "Provider datacenter fields are catalog metadata, not a per-call EU/AVV/ZDR guarantee. Regional BYOK declaration is user attestation; docs say OpenRouter does not verify it."
+  },
+  "litellm": {
+    "package": "litellm",
+    "pypi_observed_version": "1.106.4",
+    "source_tag": "v1.106.4",
+    "source_commit": "ea7ca16dbc3904d9e59a9505f379a2ca3091821f",
+    "requires_python": "<3.15,>=3.10",
+    "candidate_pin_only_not_runtime_install": true,
+    "license": {
+      "core": "MIT outside enterprise/ exceptions",
+      "enterprise": "Separate enterprise/LICENSE; not assumed MIT",
+      "copyright": "2023 Berri AI",
+      "source_id": "litellm-license"
+    },
+    "declaration_source": {
+      "path": "litellm/types/utils.py",
+      "class": "LlmProviders",
+      "source_id": "litellm-types",
+      "extraction": "Python ast.parse + literal string assignments; no import, eval or package execution"
+    },
+    "declared_adapter_ids": [
+      {
+        "enum": "OPENAI",
+        "provider_id": "openai",
+        "source_line": 4137
+      },
+      {
+        "enum": "CHATGPT",
+        "provider_id": "chatgpt",
+        "source_line": 4138
+      },
+      {
+        "enum": "OPENAI_LIKE",
+        "provider_id": "openai_like",
+        "source_line": 4139
+      },
+      {
+        "enum": "JINA_AI",
+        "provider_id": "jina_ai",
+        "source_line": 4140
+      },
+      {
+        "enum": "XAI",
+        "provider_id": "xai",
+        "source_line": 4141
+      },
+      {
+        "enum": "ZAI",
+        "provider_id": "zai",
+        "source_line": 4142
+      },
+      {
+        "enum": "CUSTOM_OPENAI",
+        "provider_id": "custom_openai",
+        "source_line": 4143
+      },
+      {
+        "enum": "TEXT_COMPLETION_OPENAI",
+        "provider_id": "text-completion-openai",
+        "source_line": 4144
+      },
+      {
+        "enum": "COHERE",
+        "provider_id": "cohere",
+        "source_line": 4145
+      },
+      {
+        "enum": "COHERE_CHAT",
+        "provider_id": "cohere_chat",
+        "source_line": 4146
+      },
+      {
+        "enum": "CLARIFAI",
+        "provider_id": "clarifai",
+        "source_line": 4147
+      },
+      {
+        "enum": "ANTHROPIC",
+        "provider_id": "anthropic",
+        "source_line": 4148
+      },
+      {
+        "enum": "ANTHROPIC_TEXT",
+        "provider_id": "anthropic_text",
+        "source_line": 4149
+      },
+      {
+        "enum": "BYTEZ",
+        "provider_id": "bytez",
+        "source_line": 4150
+      },
+      {
+        "enum": "REPLICATE",
+        "provider_id": "replicate",
+        "source_line": 4151
+      },
+      {
+        "enum": "REDUCTO",
+        "provider_id": "reducto",
+        "source_line": 4152
+      },
+      {
+        "enum": "AWS_TEXTRACT",
+        "provider_id": "aws_textract",
+        "source_line": 4153
+      },
+      {
+        "enum": "RUNWAYML",
+        "provider_id": "runwayml",
+        "source_line": 4154
+      },
+      {
+        "enum": "AWS_POLLY",
+        "provider_id": "aws_polly",
+        "source_line": 4155
+      },
+      {
+        "enum": "TRANSCRIBE",
+        "provider_id": "transcribe",
+        "source_line": 4156
+      },
+      {
+        "enum": "HUGGINGFACE",
+        "provider_id": "huggingface",
+        "source_line": 4157
+      },
+      {
+        "enum": "TOGETHER_AI",
+        "provider_id": "together_ai",
+        "source_line": 4158
+      },
+      {
+        "enum": "OPENROUTER",
+        "provider_id": "openrouter",
+        "source_line": 4159
+      },
+      {
+        "enum": "DATAROBOT",
+        "provider_id": "datarobot",
+        "source_line": 4160
+      },
+      {
+        "enum": "VERTEX_AI",
+        "provider_id": "vertex_ai",
+        "source_line": 4161
+      },
+      {
+        "enum": "VERTEX_AI_BETA",
+        "provider_id": "vertex_ai_beta",
+        "source_line": 4162
+      },
+      {
+        "enum": "GEMINI",
+        "provider_id": "gemini",
+        "source_line": 4163
+      },
+      {
+        "enum": "AI21",
+        "provider_id": "ai21",
+        "source_line": 4164
+      },
+      {
+        "enum": "BASETEN",
+        "provider_id": "baseten",
+        "source_line": 4165
+      },
+      {
+        "enum": "BLACK_FOREST_LABS",
+        "provider_id": "black_forest_labs",
+        "source_line": 4166
+      },
+      {
+        "enum": "AZURE",
+        "provider_id": "azure",
+        "source_line": 4167
+      },
+      {
+        "enum": "AZURE_TEXT",
+        "provider_id": "azure_text",
+        "source_line": 4168
+      },
+      {
+        "enum": "AZURE_AI",
+        "provider_id": "azure_ai",
+        "source_line": 4169
+      },
+      {
+        "enum": "SAGEMAKER",
+        "provider_id": "sagemaker",
+        "source_line": 4170
+      },
+      {
+        "enum": "SAGEMAKER_CHAT",
+        "provider_id": "sagemaker_chat",
+        "source_line": 4171
+      },
+      {
+        "enum": "SAGEMAKER_NOVA",
+        "provider_id": "sagemaker_nova",
+        "source_line": 4172
+      },
+      {
+        "enum": "BEDROCK",
+        "provider_id": "bedrock",
+        "source_line": 4173
+      },
+      {
+        "enum": "VLLM",
+        "provider_id": "vllm",
+        "source_line": 4174
+      },
+      {
+        "enum": "NLP_CLOUD",
+        "provider_id": "nlp_cloud",
+        "source_line": 4175
+      },
+      {
+        "enum": "PETALS",
+        "provider_id": "petals",
+        "source_line": 4176
+      },
+      {
+        "enum": "OOBABOOGA",
+        "provider_id": "oobabooga",
+        "source_line": 4177
+      },
+      {
+        "enum": "OLLAMA",
+        "provider_id": "ollama",
+        "source_line": 4178
+      },
+      {
+        "enum": "OLLAMA_CHAT",
+        "provider_id": "ollama_chat",
+        "source_line": 4179
+      },
+      {
+        "enum": "DEEPINFRA",
+        "provider_id": "deepinfra",
+        "source_line": 4180
+      },
+      {
+        "enum": "PERPLEXITY",
+        "provider_id": "perplexity",
+        "source_line": 4181
+      },
+      {
+        "enum": "TYPESAFE",
+        "provider_id": "typesafe",
+        "source_line": 4182
+      },
+      {
+        "enum": "STRANDS_DECIDER",
+        "provider_id": "strands_decider",
+        "source_line": 4183
+      },
+      {
+        "enum": "MISTRAL",
+        "provider_id": "mistral",
+        "source_line": 4184
+      },
+      {
+        "enum": "MILVUS",
+        "provider_id": "milvus",
+        "source_line": 4185
+      },
+      {
+        "enum": "GROQ",
+        "provider_id": "groq",
+        "source_line": 4186
+      },
+      {
+        "enum": "A2A",
+        "provider_id": "a2a",
+        "source_line": 4187
+      },
+      {
+        "enum": "GIGACHAT",
+        "provider_id": "gigachat",
+        "source_line": 4188
+      },
+      {
+        "enum": "NVIDIA_NIM",
+        "provider_id": "nvidia_nim",
+        "source_line": 4189
+      },
+      {
+        "enum": "NVIDIA_RIVA",
+        "provider_id": "nvidia_riva",
+        "source_line": 4190
+      },
+      {
+        "enum": "SONIOX",
+        "provider_id": "soniox",
+        "source_line": 4191
+      },
+      {
+        "enum": "CEREBRAS",
+        "provider_id": "cerebras",
+        "source_line": 4192
+      },
+      {
+        "enum": "NADIR",
+        "provider_id": "nadir",
+        "source_line": 4193
+      },
+      {
+        "enum": "AI21_CHAT",
+        "provider_id": "ai21_chat",
+        "source_line": 4194
+      },
+      {
+        "enum": "VOLCENGINE",
+        "provider_id": "volcengine",
+        "source_line": 4195
+      },
+      {
+        "enum": "CODESTRAL",
+        "provider_id": "codestral",
+        "source_line": 4196
+      },
+      {
+        "enum": "TEXT_COMPLETION_CODESTRAL",
+        "provider_id": "text-completion-codestral",
+        "source_line": 4197
+      },
+      {
+        "enum": "DASHSCOPE",
+        "provider_id": "dashscope",
+        "source_line": 4198
+      },
+      {
+        "enum": "QWENCLOUD",
+        "provider_id": "qwencloud",
+        "source_line": 4199
+      },
+      {
+        "enum": "QWEN_AI_PLATFORM",
+        "provider_id": "qwen_ai_platform",
+        "source_line": 4200
+      },
+      {
+        "enum": "MODELSCOPE",
+        "provider_id": "modelscope",
+        "source_line": 4201
+      },
+      {
+        "enum": "MOONSHOT",
+        "provider_id": "moonshot",
+        "source_line": 4202
+      },
+      {
+        "enum": "PUBLICAI",
+        "provider_id": "publicai",
+        "source_line": 4203
+      },
+      {
+        "enum": "V0",
+        "provider_id": "v0",
+        "source_line": 4204
+      },
+      {
+        "enum": "MORPH",
+        "provider_id": "morph",
+        "source_line": 4205
+      },
+      {
+        "enum": "LAMBDA_AI",
+        "provider_id": "lambda_ai",
+        "source_line": 4206
+      },
+      {
+        "enum": "INCEPTION",
+        "provider_id": "inception",
+        "source_line": 4207
+      },
+      {
+        "enum": "TEXT_COMPLETION_INCEPTION",
+        "provider_id": "text-completion-inception",
+        "source_line": 4208
+      },
+      {
+        "enum": "DEEPSEEK",
+        "provider_id": "deepseek",
+        "source_line": 4209
+      },
+      {
+        "enum": "SAMBANOVA",
+        "provider_id": "sambanova",
+        "source_line": 4210
+      },
+      {
+        "enum": "MARITALK",
+        "provider_id": "maritalk",
+        "source_line": 4211
+      },
+      {
+        "enum": "VOYAGE",
+        "provider_id": "voyage",
+        "source_line": 4212
+      },
+      {
+        "enum": "CLOUDFLARE",
+        "provider_id": "cloudflare",
+        "source_line": 4213
+      },
+      {
+        "enum": "XINFERENCE",
+        "provider_id": "xinference",
+        "source_line": 4214
+      },
+      {
+        "enum": "FIREWORKS_AI",
+        "provider_id": "fireworks_ai",
+        "source_line": 4215
+      },
+      {
+        "enum": "FRIENDLIAI",
+        "provider_id": "friendliai",
+        "source_line": 4216
+      },
+      {
+        "enum": "FEATHERLESS_AI",
+        "provider_id": "featherless_ai",
+        "source_line": 4217
+      },
+      {
+        "enum": "WATSONX",
+        "provider_id": "watsonx",
+        "source_line": 4218
+      },
+      {
+        "enum": "WATSONX_TEXT",
+        "provider_id": "watsonx_text",
+        "source_line": 4219
+      },
+      {
+        "enum": "TRITON",
+        "provider_id": "triton",
+        "source_line": 4220
+      },
+      {
+        "enum": "PREDIBASE",
+        "provider_id": "predibase",
+        "source_line": 4221
+      },
+      {
+        "enum": "DATABRICKS",
+        "provider_id": "databricks",
+        "source_line": 4222
+      },
+      {
+        "enum": "EMPOWER",
+        "provider_id": "empower",
+        "source_line": 4223
+      },
+      {
+        "enum": "GITHUB",
+        "provider_id": "github",
+        "source_line": 4224
+      },
+      {
+        "enum": "RAGFLOW",
+        "provider_id": "ragflow",
+        "source_line": 4225
+      },
+      {
+        "enum": "COMPACTIFAI",
+        "provider_id": "compactifai",
+        "source_line": 4226
+      },
+      {
+        "enum": "DOCKER_MODEL_RUNNER",
+        "provider_id": "docker_model_runner",
+        "source_line": 4227
+      },
+      {
+        "enum": "CUSTOM",
+        "provider_id": "custom",
+        "source_line": 4228
+      },
+      {
+        "enum": "LITELLM_PROXY",
+        "provider_id": "litellm_proxy",
+        "source_line": 4229
+      },
+      {
+        "enum": "HOSTED_VLLM",
+        "provider_id": "hosted_vllm",
+        "source_line": 4230
+      },
+      {
+        "enum": "TENCENT",
+        "provider_id": "tencent",
+        "source_line": 4231
+      },
+      {
+        "enum": "LLAMAFILE",
+        "provider_id": "llamafile",
+        "source_line": 4232
+      },
+      {
+        "enum": "LM_STUDIO",
+        "provider_id": "lm_studio",
+        "source_line": 4233
+      },
+      {
+        "enum": "GALADRIEL",
+        "provider_id": "galadriel",
+        "source_line": 4234
+      },
+      {
+        "enum": "NEBIUS",
+        "provider_id": "nebius",
+        "source_line": 4235
+      },
+      {
+        "enum": "INFINITY",
+        "provider_id": "infinity",
+        "source_line": 4236
+      },
+      {
+        "enum": "DEEPGRAM",
+        "provider_id": "deepgram",
+        "source_line": 4237
+      },
+      {
+        "enum": "ELEVENLABS",
+        "provider_id": "elevenlabs",
+        "source_line": 4238
+      },
+      {
+        "enum": "NOVITA",
+        "provider_id": "novita",
+        "source_line": 4239
+      },
+      {
+        "enum": "AIOHTTP_OPENAI",
+        "provider_id": "aiohttp_openai",
+        "source_line": 4240
+      },
+      {
+        "enum": "LANGFUSE",
+        "provider_id": "langfuse",
+        "source_line": 4241
+      },
+      {
+        "enum": "HUMANLOOP",
+        "provider_id": "humanloop",
+        "source_line": 4242
+      },
+      {
+        "enum": "TOPAZ",
+        "provider_id": "topaz",
+        "source_line": 4243
+      },
+      {
+        "enum": "SAP_GENERATIVE_AI_HUB",
+        "provider_id": "sap",
+        "source_line": 4244
+      },
+      {
+        "enum": "ASSEMBLYAI",
+        "provider_id": "assemblyai",
+        "source_line": 4245
+      },
+      {
+        "enum": "AZURE_SPEECH",
+        "provider_id": "azure_speech",
+        "source_line": 4246
+      },
+      {
+        "enum": "CHARITY_ENGINE",
+        "provider_id": "charity_engine",
+        "source_line": 4247
+      },
+      {
+        "enum": "GITHUB_COPILOT",
+        "provider_id": "github_copilot",
+        "source_line": 4248
+      },
+      {
+        "enum": "SNOWFLAKE",
+        "provider_id": "snowflake",
+        "source_line": 4249
+      },
+      {
+        "enum": "GRADIENT_AI",
+        "provider_id": "gradient_ai",
+        "source_line": 4250
+      },
+      {
+        "enum": "LLAMA",
+        "provider_id": "meta_llama",
+        "source_line": 4251
+      },
+      {
+        "enum": "NSCALE",
+        "provider_id": "nscale",
+        "source_line": 4252
+      },
+      {
+        "enum": "PG_VECTOR",
+        "provider_id": "pg_vector",
+        "source_line": 4253
+      },
+      {
+        "enum": "S3_VECTORS",
+        "provider_id": "s3_vectors",
+        "source_line": 4254
+      },
+      {
+        "enum": "VALKEY",
+        "provider_id": "valkey",
+        "source_line": 4255
+      },
+      {
+        "enum": "MONGODB",
+        "provider_id": "mongodb",
+        "source_line": 4256
+      },
+      {
+        "enum": "HELICONE",
+        "provider_id": "helicone",
+        "source_line": 4257
+      },
+      {
+        "enum": "HYPERBOLIC",
+        "provider_id": "hyperbolic",
+        "source_line": 4258
+      },
+      {
+        "enum": "RECRAFT",
+        "provider_id": "recraft",
+        "source_line": 4259
+      },
+      {
+        "enum": "FAL_AI",
+        "provider_id": "fal_ai",
+        "source_line": 4260
+      },
+      {
+        "enum": "STABILITY",
+        "provider_id": "stability",
+        "source_line": 4261
+      },
+      {
+        "enum": "HEROKU",
+        "provider_id": "heroku",
+        "source_line": 4262
+      },
+      {
+        "enum": "AIML",
+        "provider_id": "aiml",
+        "source_line": 4263
+      },
+      {
+        "enum": "COMETAPI",
+        "provider_id": "cometapi",
+        "source_line": 4264
+      },
+      {
+        "enum": "OCI",
+        "provider_id": "oci",
+        "source_line": 4265
+      },
+      {
+        "enum": "AUTO_ROUTER",
+        "provider_id": "auto_router",
+        "source_line": 4266
+      },
+      {
+        "enum": "VERCEL_AI_GATEWAY",
+        "provider_id": "vercel_ai_gateway",
+        "source_line": 4267
+      },
+      {
+        "enum": "EDENAI",
+        "provider_id": "edenai",
+        "source_line": 4268
+      },
+      {
+        "enum": "DOTPROMPT",
+        "provider_id": "dotprompt",
+        "source_line": 4269
+      },
+      {
+        "enum": "MANUS",
+        "provider_id": "manus",
+        "source_line": 4270
+      },
+      {
+        "enum": "WANDB",
+        "provider_id": "wandb",
+        "source_line": 4271
+      },
+      {
+        "enum": "OVHCLOUD",
+        "provider_id": "ovhcloud",
+        "source_line": 4272
+      },
+      {
+        "enum": "SCALEWAY",
+        "provider_id": "scaleway",
+        "source_line": 4273
+      },
+      {
+        "enum": "LEMONADE",
+        "provider_id": "lemonade",
+        "source_line": 4274
+      },
+      {
+        "enum": "AMAZON_NOVA",
+        "provider_id": "amazon_nova",
+        "source_line": 4275
+      },
+      {
+        "enum": "A2A_AGENT",
+        "provider_id": "a2a_agent",
+        "source_line": 4276
+      },
+      {
+        "enum": "LANGGRAPH",
+        "provider_id": "langgraph",
+        "source_line": 4277
+      },
+      {
+        "enum": "LANGFLOW",
+        "provider_id": "langflow",
+        "source_line": 4278
+      },
+      {
+        "enum": "MINIMAX",
+        "provider_id": "minimax",
+        "source_line": 4279
+      },
+      {
+        "enum": "SYNTHETIC",
+        "provider_id": "synthetic",
+        "source_line": 4280
+      },
+      {
+        "enum": "APERTIS",
+        "provider_id": "apertis",
+        "source_line": 4281
+      },
+      {
+        "enum": "NANOGPT",
+        "provider_id": "nano-gpt",
+        "source_line": 4282
+      },
+      {
+        "enum": "POE",
+        "provider_id": "poe",
+        "source_line": 4283
+      },
+      {
+        "enum": "CHUTES",
+        "provider_id": "chutes",
+        "source_line": 4284
+      },
+      {
+        "enum": "NEOSANTARA",
+        "provider_id": "neosantara",
+        "source_line": 4285
+      },
+      {
+        "enum": "PARASAIL",
+        "provider_id": "parasail",
+        "source_line": 4286
+      },
+      {
+        "enum": "XIAOMI_MIMO",
+        "provider_id": "xiaomi_mimo",
+        "source_line": 4287
+      },
+      {
+        "enum": "TENSORMESH",
+        "provider_id": "tensormesh",
+        "source_line": 4288
+      },
+      {
+        "enum": "LIBERTAI",
+        "provider_id": "libertai",
+        "source_line": 4289
+      },
+      {
+        "enum": "PINSTRIPES",
+        "provider_id": "pinstripes",
+        "source_line": 4290
+      },
+      {
+        "enum": "COGNITION",
+        "provider_id": "cognition",
+        "source_line": 4291
+      },
+      {
+        "enum": "CORTECS",
+        "provider_id": "cortecs",
+        "source_line": 4292
+      },
+      {
+        "enum": "SCX_AI",
+        "provider_id": "scx-ai",
+        "source_line": 4293
+      },
+      {
+        "enum": "PRISM",
+        "provider_id": "prism",
+        "source_line": 4294
+      },
+      {
+        "enum": "DARKBLOOM",
+        "provider_id": "darkbloom",
+        "source_line": 4295
+      },
+      {
+        "enum": "META",
+        "provider_id": "meta",
+        "source_line": 4296
+      },
+      {
+        "enum": "SAIL",
+        "provider_id": "sail",
+        "source_line": 4297
+      },
+      {
+        "enum": "REKA",
+        "provider_id": "reka",
+        "source_line": 4298
+      },
+      {
+        "enum": "LITELLM_AGENT",
+        "provider_id": "litellm_agent",
+        "source_line": 4299
+      },
+      {
+        "enum": "CURSOR",
+        "provider_id": "cursor",
+        "source_line": 4300
+      },
+      {
+        "enum": "BEDROCK_MANTLE",
+        "provider_id": "bedrock_mantle",
+        "source_line": 4301
+      },
+      {
+        "enum": "GDC",
+        "provider_id": "gdc",
+        "source_line": 4302
+      }
+    ],
+    "api_surface": {
+      "source_id": "litellm-main",
+      "path": "litellm/main.py",
+      "function": "acompletion",
+      "source_line": 428,
+      "observed_parameters": [
+        "model",
+        "messages",
+        "timeout",
+        "max_tokens",
+        "max_completion_tokens",
+        "reasoning_effort",
+        "base_url",
+        "api_key",
+        "response_format",
+        "tools",
+        "tool_choice",
+        "kwargs"
+      ],
+      "proposed_usage": "Narrow private server adapter only; allowlisted adapter/model/key_ref and normalized response. Do not expose raw SDK kwargs, routing params, api_base or custom callbacks to callers.",
+      "full_proxy_recommended": false
+    },
+    "operation_capabilities_per_adapter_verified": false,
+    "wheel_or_transitive_dependency_review_completed": false,
+    "pypi_release_file_sha256": [
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-macosx_10_12_x86_64.whl",
+        "sha256": "fb5dbe12d8789cc8c44dcf6a7f76eeef5e219007384b6a0ac74b3784203c216c"
+      },
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-macosx_11_0_arm64.whl",
+        "sha256": "9ea61a1660528d5d72459acefa38762de3bda3c20fe1f44eab674ec3b72f9238"
+      },
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-manylinux_2_28_aarch64.whl",
+        "sha256": "1c2b7d072a47c3f04032764d8143ed6ade8c354a331f4ad5ab9b9d5b1ba2dd4c"
+      },
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-manylinux_2_28_x86_64.whl",
+        "sha256": "d4cd1c1cab5c1e7f32d6a06a74e88176575fcbf427e8a4b6a434207aca007fb4"
+      },
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-musllinux_1_2_aarch64.whl",
+        "sha256": "9f36a1d4a58fec0286e87f1bae5eab2819077b28efb9d77a310a0d78b4ae07f5"
+      },
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-musllinux_1_2_x86_64.whl",
+        "sha256": "7dd40a6c2a495bdf0b80151d140c8b65fe77f7fecadef989c244d78c646c3a97"
+      },
+      {
+        "filename": "litellm-1.106.4-cp310-abi3-win_amd64.whl",
+        "sha256": "1dc78af5a710715b1807a73d1b378d4d1fd82a4f4a13e45179b76287cbbabba9"
+      },
+      {
+        "filename": "litellm-1.106.4.tar.gz",
+        "sha256": "f99a2c5615f26c7cb3b38b3d7657643d866852495a1d48b8c847b27cc1727949"
+      }
+    ]
+  },
+  "security": {
+    "official_incident": {
+      "url": "https://docs.litellm.ai/blog/security-update-march-2026",
+      "source_id": "litellm-security-doc",
+      "affected_versions": [
+        "1.82.7",
+        "1.82.8"
+      ],
+      "incident_date": "2026-03-24",
+      "observed_payloads": [
+        "malicious proxy_server.py",
+        "litellm_init.pth in 1.82.8"
+      ],
+      "vendor_report": "Unauthorized PyPI uploads with credential stealing; versions quarantined/removed. Vendor states official pinned Proxy Docker image was not impacted and Git main had no malicious code.",
+      "claim_limits": "Vendor incident statement is not independent verification of current wheel, image or all transitive dependencies. No incident scanner scripts were executed."
+    },
+    "public_repository_advisories_count": 17,
+    "public_repository_advisories": [
+      {
+        "id": "GHSA-7hp6-4w63-5g45",
+        "cve": "CVE-2026-114612",
+        "title": "Privilege Escalation to Proxy Admin via Cross-Domain Reuse of the Salt Key",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-7hp6-4w63-5g45",
+        "published_at": "2026-09-30T01:13:51Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.91.0, < 1.100.4",
+            "patched_versions": "1.100.4",
+            "vulnerable_functions": []
+          },
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.101.0, < 1.101.3",
+            "patched_versions": "1.101.3",
+            "vulnerable_functions": []
+          },
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.102.0, < 1.102.2",
+            "patched_versions": "1.102.2",
+            "vulnerable_functions": []
+          },
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.103.0, <1.103.1",
+            "patched_versions": "1.103.1",
+            "vulnerable_functions": []
+          },
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.104.0rc1, < 1.104.0rc2",
+            "patched_versions": "1.104.0rc2",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-3cv6-jpf6-8222",
+        "cve": "CVE-2026-84377",
+        "title": "Authenticated SSRF and provider-credential exfiltration via unvalidated request-body routing parameters",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-3cv6-jpf6-8222",
+        "published_at": "2026-08-26T20:00:03Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<1.94.0",
+            "patched_versions": "1.96.2, 1.95.1, 1.94.3, 1.93.2, 1.92.2, 1.91.5, 1.90.7, 1.89.7, 1.88.6",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-4g5m-c9r5-49xf",
+        "cve": "CVE-2026-59819",
+        "title": "Local file read via request-supplied OIDC file references",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-4g5m-c9r5-49xf",
+        "published_at": "2026-06-30T22:42:59Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "< 1.83.10-stable",
+            "patched_versions": ">= 1.83.10-stable",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-5jmr-gcrj-2c9q",
+        "cve": "CVE-2026-59820",
+        "title": "Arbitrary file write via path traversal in Skills archive extraction",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-5jmr-gcrj-2c9q",
+        "published_at": "2026-06-30T22:40:36Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "< 1.83.7-stable",
+            "patched_versions": ">= 1.83.7-stable",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-hx8v-g79f-8w5f",
+        "cve": "CVE-2026-59823",
+        "title": "Server-side request forgery via the `user_config` request parameter in LiteLLM Proxy",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-hx8v-g79f-8w5f",
+        "published_at": "2026-08-26T07:16:34Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<=1.83.8",
+            "patched_versions": "1.83.9",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-g5ff-637f-6q2m",
+        "cve": null,
+        "title": "internal_user_viewer arbitrary local file read via `vertex_ai_credentials`",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-g5ff-637f-6q2m",
+        "published_at": "2026-10-01T13:57:14Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<1.95.0",
+            "patched_versions": "1.95.0",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-4xpc-pv4p-pm3w",
+        "cve": "CVE-2026-49468",
+        "title": "Authentication Bypass via Host Header Injection",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-4xpc-pv4p-pm3w",
+        "published_at": "2026-05-28T21:05:17Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<1.84.0",
+            "patched_versions": ">=1.84.0",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-hhww-mrg2-969h",
+        "cve": null,
+        "title": "Reflected XSS in /sso/debug/callback",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-hhww-mrg2-969h",
+        "published_at": "2026-09-30T12:49:29Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.65.5, < 1.85.0",
+            "patched_versions": "1.85.0",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-72m8-9m7m-h278",
+        "cve": "CVE-2026-59821",
+        "title": "Custom Code Guardrails production endpoints bypass code safety checks",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-72m8-9m7m-h278",
+        "published_at": "2026-06-30T23:08:45Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "< 1.82.0-stable",
+            "patched_versions": ">= 1.82.0-stable",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-7488-6r32-c95q",
+        "cve": "CVE-2026-59822",
+        "title": "MCP Authentication Bypass via OAuth2 Passthrough Fallback",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-7488-6r32-c95q",
+        "published_at": "2026-06-30T23:08:35Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "< 1.84.0",
+            "patched_versions": ">= 1.84.0",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-v4p8-mg3p-g94g",
+        "cve": "CVE-2026-42271",
+        "title": "Authenticated command execution via MCP stdio test endpoints",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-v4p8-mg3p-g94g",
+        "published_at": "2026-04-21T17:19:18Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">=1.74.2, <1.83.7",
+            "patched_versions": ">=1.83.7",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-wxxx-gvqv-xp7p",
+        "cve": "CVE-2026-40217",
+        "title": "Sandbox escape in custom-code guardrail",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-wxxx-gvqv-xp7p",
+        "published_at": "2026-05-07T00:50:19Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.81.8, < 1.83.10",
+            "patched_versions": ">= 1.83.10",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-r75f-5x8p-qvmc",
+        "cve": "CVE-2026-42208",
+        "title": "SQL injection in Proxy API key verification",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-r75f-5x8p-qvmc",
+        "published_at": "2026-04-20T21:14:19Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">=1.81.16, <1.83.7",
+            "patched_versions": ">=1.83.7",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-xqmj-j6mv-4862",
+        "cve": "CVE-2026-42203",
+        "title": "Server-Side Template Injection in /prompts/test endpoint",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-xqmj-j6mv-4862",
+        "published_at": "2026-04-20T19:50:41Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": ">= 1.80.5, < 1.83.7",
+            "patched_versions": ">= 1.83.7",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-69x8-hrgq-fjj8",
+        "cve": null,
+        "title": "Password hash exposure and pass-the-hash authentication bypass",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-69x8-hrgq-fjj8",
+        "published_at": "2026-04-04T01:00:18Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<1.83.0",
+            "patched_versions": "1.83.0",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-53mr-6c8q-9789",
+        "cve": "CVE-2026-35029",
+        "title": "Privilege escalation via unrestricted proxy configuration endpoint",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-53mr-6c8q-9789",
+        "published_at": "2026-04-03T19:26:04Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<1.83.0",
+            "patched_versions": "1.83.0",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "id": "GHSA-jjhc-v7c2-5hh6",
+        "cve": "CVE-2026-35030",
+        "title": "Authentication bypass via OIDC userinfo cache key collision",
+        "url": "https://github.com/BerriAI/litellm/security/advisories/GHSA-jjhc-v7c2-5hh6",
+        "published_at": "2026-04-03T19:24:57Z",
+        "affected": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "litellm"
+            },
+            "vulnerable_version_range": "<1.83.0",
+            "patched_versions": "1.83.0",
+            "vulnerable_functions": []
+          }
+        ]
+      }
+    ],
+    "focused_risks": [
+      "Request-supplied routing/endpoint SSRF can exfiltrate provider credentials.",
+      "Proxy config, MCP stdio, code guardrails and OIDC files create unnecessary attack surface for a simple backend adapter.",
+      "A trusted Git source tag does not by itself prove the distribution wheel matches it; hashes bind bytes, not safety."
+    ],
+    "adoption_gates": [
+      "Inspect exact wheel/source/dependency artifacts without executing them and compare provenance/attestations; reject known compromised releases.",
+      "Run any future import/contract test in an isolated no-secret environment with reviewed dependency lock and restricted network.",
+      "Keep full home/cloud credentials, global environment and host filesystem out of the worker.",
+      "Pass only the authorized per-request key from a server-owned secret reference; disable unrelated callback/logging/plugin surfaces.",
+      "Deny caller-supplied arbitrary endpoints, SDK kwargs, code, file references, proxy admin and MCP execution."
+    ]
+  },
+  "model_bindings": {
+    "NeXify_DeepSeek_1017": {
+      "provider": "openrouter",
+      "exact_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "reasoning_effort": "high",
+      "binding_source": "Explicit user instruction plus existing official exact-catalog evidence; no substitution."
+    },
+    "JavAI": {
+      "exact_model_id": null,
+      "status": "unresolved",
+      "not_assumed_to_be": [
+        "typesafe",
+        "Jev",
+        "Jeff",
+        "any legacy model alias"
+      ]
+    }
+  },
+  "implementation_plan": [
+    {
+      "step": 1,
+      "deliverable": "Versioned source-derived adapter catalog",
+      "verification": "Keep all source identifiers but distinguish aliases, media, local and LLM operations. UI labels declared/installed/configured/verified separately; 70+ is catalog target, not 70 live claims."
+    },
+    {
+      "step": 2,
+      "deliverable": "Private isolated reusable SDK adapter",
+      "verification": "Exact artifact/dependency provenance review, no-secret import, provider-boundary mocked contracts, normalized usage/errors; no full proxy dashboard or broad SDK execution API."
+    },
+    {
+      "step": 3,
+      "deliverable": "Tenant-bound key lifecycle",
+      "verification": "Server secret refs, ownership/scopes, encryption, rotation/revoke and redacted audit; no browser persistence/logs of provider keys. No automatic public visitor LLM enabling."
+    },
+    {
+      "step": 4,
+      "deliverable": "Explicit native BYOK versus broker BYOK routes",
+      "verification": "No silent fallback, hard time/token/byte/cost budgets, one paid attempt per durable request, reconcile unknown outcome; exact model/provider and regional policy per route."
+    },
+    {
+      "step": 5,
+      "deliverable": "Gradual provider validation",
+      "verification": "Read-only key/model validation only where a documented non-billable endpoint exists; one separately authorized bounded inference per selected key/model/operation before live-verified status. No bulk 70-provider paid test."
+    }
+  ],
+  "open_items": [
+    "70+ distinct LLM providers with verified per-operation contracts have not been established by enum counting.",
+    "No SDK wheel/import/dependency trust gate has run.",
+    "No user key/provider account was connected or live-tested.",
+    "No general EU residency, ZDR, no-charge or all-provider feature parity claim.",
+    "JavAI exact vendor/model identifier remains unknown."
+  ],
+  "sources": [
+    {
+      "id": "openrouter-providers",
+      "requested_url": "https://openrouter.ai/api/v1/providers",
+      "final_url": "https://openrouter.ai/api/v1/providers",
+      "status": 200,
+      "bytes": 26600,
+      "sha256": "94d1cb9d9de4810456e2fd498bdd21f203d982826678591c0234254f0ec2ff11",
+      "path": "/workspace/.onboarding/byok-research/openrouter-providers.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "openrouter-byok",
+      "requested_url": "https://openrouter.ai/docs/guides/overview/auth/byok",
+      "final_url": "https://openrouter.ai/docs/guides/overview/auth/byok",
+      "status": 200,
+      "bytes": 781848,
+      "sha256": "918e76329d01abdc8c3f47d46ffae43705fb792f30362af1883f1d03d61c6aae",
+      "path": "/workspace/.onboarding/byok-research/openrouter-byok.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-pypi",
+      "requested_url": "https://pypi.org/pypi/litellm/json",
+      "final_url": "https://pypi.org/pypi/litellm/json",
+      "status": 200,
+      "bytes": 2478595,
+      "sha256": "4eaac4f250f6716cec9c63a9506511d74e8350761a255372140a2500952d29fa",
+      "path": "/workspace/.onboarding/byok-research/litellm-pypi.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-repository",
+      "requested_url": "https://api.github.com/repos/BerriAI/litellm",
+      "final_url": "https://api.github.com/repos/BerriAI/litellm",
+      "status": 200,
+      "bytes": 6463,
+      "sha256": "0367989cbbdd25e331a66478a8f6c41c5a9e3d2e836d830b5a91fcfe6cf51a5b",
+      "path": "/workspace/.onboarding/byok-research/litellm-repository.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-advisories",
+      "requested_url": "https://api.github.com/repos/BerriAI/litellm/security-advisories",
+      "final_url": "https://api.github.com/repos/BerriAI/litellm/security-advisories",
+      "status": 200,
+      "bytes": 64445,
+      "sha256": "bbace0d16be2eda9ab583b173033c72f6fd759015ab776343fcfa9bf156538f5",
+      "path": "/workspace/.onboarding/byok-research/litellm-advisories.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-docs",
+      "requested_url": "https://docs.litellm.ai/docs/providers",
+      "final_url": "https://docs.litellm.ai/docs/providers",
+      "status": 200,
+      "bytes": 55713,
+      "sha256": "f544cefe4ff376ce7941760db03ffbdd0954b71336f3756445e2f2c048cae39d",
+      "path": "/workspace/.onboarding/byok-research/litellm-docs.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-tag",
+      "requested_url": "https://api.github.com/repos/BerriAI/litellm/git/ref/tags/v1.106.4",
+      "final_url": "https://api.github.com/repos/BerriAI/litellm/git/ref/tags/v1.106.4",
+      "status": 200,
+      "bytes": 338,
+      "sha256": "d46272f624c5bb6f7ee5f143ceb3708329aed2d06b43d7163309c65f23ee323c",
+      "path": "/workspace/.onboarding/byok-research/litellm-tag.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-security-search",
+      "requested_url": "https://api.github.com/search/issues?q=repo%3ABerriAI%2Flitellm%201.82.8&per_page=10",
+      "status": 422,
+      "error": "HTTPError"
+    },
+    {
+      "id": "litellm-security-doc",
+      "requested_url": "https://docs.litellm.ai/blog/security-update-march-2026",
+      "final_url": "https://docs.litellm.ai/blog/security-update-march-2026",
+      "status": 200,
+      "bytes": 303932,
+      "sha256": "843408086503b45cb954d3319b95ec4a43c78d8c057fc644092775caf40414f8",
+      "path": "/workspace/.onboarding/byok-research/litellm-security-doc.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-license",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/LICENSE",
+      "status": 200,
+      "bytes": 1419,
+      "sha256": "b170d6bf8e8835dd357e011681db028f4d51e2fb0ea892058f56e01fb39b8273",
+      "path": "/workspace/.onboarding/byok-research/litellm-license.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-constants",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/constants.py",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/constants.py",
+      "status": 200,
+      "bytes": 105640,
+      "sha256": "5c3b984d90f09ce9be44168f701a0af2b614173e4cf233073141959b8c4808c7",
+      "path": "/workspace/.onboarding/byok-research/litellm-constants.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-types",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/types/utils.py",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/types/utils.py",
+      "status": 200,
+      "bytes": 177509,
+      "sha256": "e3df2a8c3ceafdd7717dd0fae606fe6dad54a62f9d50fbc6b515b2cf089dfe06",
+      "path": "/workspace/.onboarding/byok-research/litellm-types.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-init",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/__init__.py",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/__init__.py",
+      "status": 200,
+      "bytes": 104961,
+      "sha256": "63776514534e49849bf20225e39881375b8f8d5b9727ead57feb297cabdfdbe5",
+      "path": "/workspace/.onboarding/byok-research/litellm-init.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-readme",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/README.md",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/README.md",
+      "status": 200,
+      "bytes": 38323,
+      "sha256": "a2b9501979614f76e0eaf790352b5a6d9826a6512c777e4b9dd8e905327f05ba",
+      "path": "/workspace/.onboarding/byok-research/litellm-readme.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-contributing",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/pyproject.toml",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/pyproject.toml",
+      "status": 200,
+      "bytes": 16858,
+      "sha256": "077dfa8d978959806605d9707e261971ad7eb36846ddf4d2288c25fa19ddd064",
+      "path": "/workspace/.onboarding/byok-research/litellm-contributing.raw",
+      "exact_readback": true
+    },
+    {
+      "id": "litellm-main",
+      "requested_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/main.py",
+      "final_url": "https://raw.githubusercontent.com/BerriAI/litellm/ea7ca16dbc3904d9e59a9505f379a2ca3091821f/litellm/main.py",
+      "status": 200,
+      "bytes": 375551,
+      "sha256": "e83e4178cfac47a23b5fa0cb548556042c4a3b02ed8a8596cfe9a9d25d94fb2e",
+      "path": "/workspace/.onboarding/byok-research/litellm-main.raw",
+      "exact_readback": true
+    }
+  ]
+}

@@ -2254,6 +2254,93 @@
           ]
         }
       ]
+    },
+    {
+      "page_id": "nex2fly",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "nex2fly-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Kundenkonto und 24 Stunden Suite-Test",
+            "nl": "Klantaccount en 24 uur Suite-proefperiode",
+            "fr": "Compte client et essai de la Suite pendant 24 heures"
+          },
+          "body": {
+            "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Sobald sie verfügbar ist, erstellst du dein Konto, bestätigst deine E-Mail und aktivierst deinen eigenen Kundenarbeitsbereich. Danach startest du die kostenlose Suite-Testphase ausdrücklich: einmalig 24 Stunden ab diesem Zeitpunkt. Eine erneute Anmeldung startet keinen neuen Test. Du erhältst Kundenrechte in deinem eigenen Bereich, keine internen Verwaltungsrechte.",
+            "nl": "Openbare klantregistratie is voorzien. Zodra deze beschikbaar is, maak je een account aan, bevestig je je e-mailadres en activeer je je eigen klantwerkruimte. Daarna start je uitdrukkelijk de gratis Suite-proefperiode: eenmalig 24 uur vanaf dat moment. Opnieuw aanmelden start geen nieuwe proefperiode. Je krijgt klantrechten binnen je eigen omgeving, geen interne beheerrechten.",
+            "fr": "L’inscription publique des clients est prévue. Dès qu’elle sera disponible, tu créeras ton compte, vérifieras ton e-mail et activeras ton propre espace client. Tu démarreras ensuite explicitement l’essai gratuit de la Suite : 24 heures, une seule fois à partir de cet instant. Une nouvelle connexion ne démarre pas un nouvel essai. Tu reçois des droits client dans ton propre espace, sans droits d’administration interne."
+          },
+          "outcome": {
+            "de": "Einstieg und Bedingungen vor der Nutzung verstehen.",
+            "nl": "Begrijp toegang en voorwaarden vóór gebruik.",
+            "fr": "Comprendre l’accès et les conditions avant utilisation."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "signup",
+            "label": {
+              "de": "Registrierungsablauf ansehen",
+              "nl": "Registratieproces bekijken",
+              "fr": "Voir le parcours d’inscription"
+            }
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        },
+        {
+          "id": "nex2fly-explain-2",
+          "speaker": "nex",
+          "status": "script_draft",
+          "title": {
+            "de": "Du entscheidest, wie du LLM-Nutzung bezahlst",
+            "nl": "Jij kiest hoe je LLM-gebruik betaalt",
+            "fr": "Tu choisis comment payer l’utilisation des LLM"
+          },
+          "body": {
+            "de": "Die kostenlose Suite-Testphase enthält kein geschenktes LLM-Guthaben. Du nutzt entweder deinen eigenen Anbieterschlüssel (BYOK) auf eigene Anbieterrechnung oder einmalig 5 EUR (500 Cent) bezahltes Testguthaben für unsere verwaltete Route. Die verwaltete Route und die Anbieterauswahl werden erst bei Verfügbarkeit freigegeben. Eine Testaufladung ist kein kostenpflichtiges Suite-Abo.",
+            "nl": "De gratis Suite-proefperiode bevat geen gratis LLM-tegoed. Je gebruikt je eigen providersleutel (BYOK), voor rekening van je eigen provideraccount, of eenmalig 5 EUR (500 cent) betaald proefsaldo voor onze beheerde route. De beheerde route en de providerkeuze worden pas vrijgegeven zodra ze beschikbaar zijn. Proefsaldo kopen is geen betaald Suite-abonnement.",
+            "fr": "L’essai gratuit de la Suite n’inclut aucun crédit LLM offert. Tu utilises ta propre clé fournisseur (BYOK), facturée sur ton compte fournisseur, ou un achat initial unique de 5 EUR (500 centimes) de crédit d’essai pour notre routage géré. Le routage géré et le choix des fournisseurs seront proposés lorsqu’ils seront disponibles. L’achat de crédit d’essai n’est pas un abonnement Suite payant."
+          },
+          "outcome": {
+            "de": "Einstieg und Bedingungen vor der Nutzung verstehen.",
+            "nl": "Begrijp toegang en voorwaarden vóór gebruik.",
+            "fr": "Comprendre l’accès et les conditions avant utilisation."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "one",
+            "label": {
+              "de": "one und one+ verstehen",
+              "nl": "one en one+ begrijpen",
+              "fr": "Comprendre one et one+"
+            }
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        }
+      ]
     }
   ]
 }

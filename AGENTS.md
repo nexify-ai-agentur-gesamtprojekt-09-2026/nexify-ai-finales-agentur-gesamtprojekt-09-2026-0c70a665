@@ -9,7 +9,7 @@ Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die R
 
 Der Nutzer bestimmt `nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` als gemeinsames Repository des Gesamtsystems. Neue Anwendungen, Regeln, Integrationsverträge, REA-Anbindung und Small-Business-Zuordnungen hier führen. Bestehende Quellstände und Herkunft bei der Konsolidierung bewahren; weder Force-Push noch Löschung der Ausgangsrepositories. GitHub ist die kanonische Quelle; eine bestätigte lokale GitLab-Anbindung ist nachgelagerte CI/Spiegelung mit Fast-forward, keine zweite Schreibquelle. Historische Mirror-/Watcher-/Factory-Skripte nicht ungeprüft starten.
 
-Zielaufbau nach Nutzerpräzisierung: portable React/Vite-/TypeScript-Ausgabe unter `apps/site` für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; die bestehende Next-/Clerk-Ausgabe unter `apps/web` bleibt als Referenz erhalten. Vercel ist Hauptbetrieb, eine synchronisierte ChatGPT-Backupausgabe ist gewünscht, ihre Hosting-/Deploymentfähigkeit hier jedoch nicht belegt. Bestehende `.cloud`-Seite bis Fertigstellung erhalten; eigene Agentur- und TEILEKLAR-Funktionen mit klaren Anwendungskontexten. Affilinet Portal Aachen ist ein gesondertes, pausiertes Kundenprojekt und kein Agenturmodul, keine Lieferabhängigkeit und kein zu migrierender Datenbestand. Die Seitenarchitektur umfasst die eigenen TEILEKLAR-, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
+Zielaufbau nach Nutzerpräzisierung: portable React/Vite-/TypeScript-Ausgabe unter `apps/site` für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; die bestehende Next-/Clerk-Ausgabe unter `apps/web` bleibt als Referenz erhalten. Vercel ist Hauptbetrieb und nach aktueller Nutzerbestätigung die verbindliche Live-Vorschau. Eine ChatGPT-Backupausgabe war zuvor gewünscht; ihre fehlende Deploymentfähigkeit ist kein Blocker des aktuellen Veröffentlichungswegs. Neue Ergebnisse als direkten Vercel-Link liefern, nicht als ChatGPT-Bildausgabe. Bestehende `.cloud`-Seite bis Fertigstellung erhalten; eigene Agentur- und TEILEKLAR-Funktionen mit klaren Anwendungskontexten. Affilinet Portal Aachen ist ein gesondertes, pausiertes Kundenprojekt und kein Agenturmodul, keine Lieferabhängigkeit und kein zu migrierender Datenbestand. Die Seitenarchitektur umfasst die eigenen TEILEKLAR-, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
 
 Quellen vor jeder Wiederverwendung fachlich zuordnen: `config/source-boundaries.json` und `docs/architecture/0011-source-and-customer-boundaries.md`. Fertige Komponenten aus allen autorisierten Repositories gezielt nutzen, mit Quelle/Commit/Dateien, Zweck, Lizenzgrundlage, Anpassung und Tests. Keine pauschalen Projekt-/Historienimporte, keine Übernahme von Kundendaten, Secrets, Branding oder Kundenkonfiguration. Ähnliche Namen oder Funktionen begründen weder gemeinsame Produkte noch SSO oder eine Datenmigration. Der verworfene lokale Zweig `factory/monorepo-autonomy-2026-10-26` enthält den irrtümlichen Kundenimport und darf nicht als Agenturstand gepusht oder zurückgemergt werden.
 
@@ -21,7 +21,7 @@ Bei jeder Aufgabe die Small-Business-Zuordnung prüfen. Für passende Unternehme
 
 REA zusätzlich unter dem Namen `rea-mcp` führen; Wrapper und Installation siehe `config/integrations/rea-mcp.json` und `docs/automation/rea-mcp.md`. Katalog/Annotationen sind Hinweise, keine Rechte. Nur autorisierte Quell-/Zielbereiche analysieren; statische Analyse nicht als Laufzeitbeleg ausgeben. Tool-/Schema-/Evidenzbindung und exaktes Read-back prüfen. Die bestehende VPS-Instanz wird durch die zusätzliche lokale Instanz nicht verändert.
 
-Für CI-Reviews ist das öffentlich verifizierte OpenRouter-Modell `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` vorgesehen. Kein stiller Modellfallback, kein Ausführen von Modelltext/Patches, keine Lockerung der Main-/Jeff-/Produktivgates. `config/automation.json` und `docs/automation/ai-review.md` enthalten die technischen Grenzen. Besucherausgaben zeigen nur tatsächlich erreichte Zustände: Angebotsentwurf, PDF erzeugt, Versand wartet, Termin angefragt, extern bestätigt, Marketingentwurf oder veröffentlicht dürfen nicht vermischt werden.
+Für sämtliche NeXify-managed LLM-Arbeiten (auch Website-Livechat, Agenten, Recherche, Zusammenfassungen und CI-Reviews) ist verbindlich das öffentlich verifizierte OpenRouter-Modell `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` vorgesehen. Kein stiller Modellfallback, kein Ausführen von Modelltext/Patches, keine Lockerung der Main-/Jeff-/Produktivgates. `config/automation.json` und `docs/automation/ai-review.md` enthalten die technischen Grenzen. Besucherausgaben zeigen nur tatsächlich erreichte Zustände: Angebotsentwurf, PDF erzeugt, Versand wartet, Termin angefragt, extern bestätigt, Marketingentwurf oder veröffentlicht dürfen nicht vermischt werden.
 
 ## Lesereihenfolge
 1. `docs/09-final/00-INDEX.md` → `01` Produkt → `11` Designsystem-Definition → `03`/`04` Design und Frontend → `05` Technik → `14` Gesamtsystem/Portale → `06` Brain → `08` Recht → `15` Umsetzungsplan.
@@ -137,3 +137,126 @@ Promotion-Prinzip: **jede im Review gefundene Fehlerkategorie wird zu einer Rege
 
 - Zugriff auf `node`, `python3`, `bash`; Tool-Geltung in `.claude/settings.json`.
 - `tools/inhaltsabgleich.js` prüft Fakten-Konsistenz, erwartet aber das Herkunfts-Layout (api/, lib/, Prototypen im Root) — in diesem Repo derzeit **nicht lauffähig** (siehe `PROGRESS.md`, offener Punkt).
+
+
+## Vercel-Einrichtung und projektbezogene Plattform-Skills
+
+Vercel-Hauptprojekt ist `prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`, Scope
+`pascals-projects-2864de33`. `.de` ist die Vorschau des Entwicklungszweigs;
+`.cloud` bleibt bis Fertigstellung unverändert. Einstellungen und tatsächlicher
+Zugang: `config/integrations/vercel-agent-setup.json`. Die offiziellen neun
+Standalone-Skills liegen projektbezogen unter `.agents/skills`, Quelle/Hash in
+`skills-lock.json`; globale Installation/MCP-Registrierung ist in diesem
+verwalteten Read-only-Clientprofil nicht bestätigt. Relevante Anleitung vor
+Nutzung lesen. Bereits erteilte Auftrags-/Push-/Vorschaufreigaben verwenden;
+Main-/Releasegates nicht lockern. Beispiele zum Ausgeben/Suchen von Tokens in
+Skills überstimmen niemals die Credentialregeln: vorhandene OAuth-/SDK-Bindung
+normal verwenden, keine Tokenlogs und keine Secretdateisuche.
+
+
+## Aktuelle Ausarbeitung nach angenommenem Grundentwurf
+
+Die Oberfläche vom 26.10.2026 ist vom Nutzer nur als grober Anfang akzeptiert,
+nicht als final abgenommen. Folgeauftrag: alle Seiten, Inhalte, Nutzerwege und
+Backendabhängigkeiten entsprechend den Quellen ausarbeiten. Figuren in jeder
+Breite vollständig darstellen; `object-fit: cover` ist für die transparente
+Dreier-Bühne unzulässig. NeX2fly, Leistungen und TEILEKLAR bleiben eigene
+sachliche Wege mit öffentlichen Informationsseiten und getrennten Rechten.
+Erst das Gesamtsystem fertigstellen; Marketing, Mailings und eigene Social-Kanäle
+danach aktivieren. SEO bleibt offen und ist GEO-Grundlage. GEO jetzt nicht
+vorziehen. `config/operating-model.json` hält Reihenfolge und Zuständigkeiten fest.
+
+
+## Vercel-Dokumentations- und Wiederverwendungsregel
+
+Vor neuen Plattform-/Agentenfunktionen die offiziellen Quellen und installierten
+SDK-Typen prüfen, nicht APIs aus Erinnerung erfinden. Wiederverwendbare Grundlage:
+`docs/research/vercel-platform-options.md`, `config/research/vercel-platform-options.json`
+und `docs/architecture/0015-vercel-agent-runtime.md`. Katalogisiert/heruntergeladen
+bedeutet nicht vollständig gelesen. Neue Versionsstände und relevante Grenzen
+mit Quelle, Zeitpunkt, Hash und tatsächlichem Lesestatus festhalten.
+
+Aktuell kompatibel geprüft: ai7.0.153, @ai-sdk/react4.0.157,
+@openrouter/ai-sdk-provider3.1.0, zod4.6.7, Node22. Das öffentliche
+`/api/agent-chat` ist ausdrücklich eine textgeführte Orientierung ohne Modell,
+Sitzung, Speicherung oder Geschäftswirkung. Der interne ToolLoopAgent ist keine
+Finanzierungs-/Auth-/Ledgerfreigabe und darf nicht ungeprüft öffentlich verdrahtet
+werden. SDK-Schrittlimits sind keine Geldbudgets. Modellkennung, Reasoning,
+Retries, Fallbacks, Telemetrie, Region und Datenverarbeitung anhand der tatsächlichen
+Provider-Wire prüfen. Keine EU-, Kostenfreiheits- oder Vollständigkeitsbehauptung
+aus einem Produktnamen ableiten. Tests mit echten SDK-Protokollen und Mockmodell/
+Fakefetch ausführen; bezahlte Aufrufe bleiben konkret autorisiert und finanziert.
+
+
+## Unverlierbare Modellvorgabe · aktuelle Nutzerweisung
+
+Kanonische, maschinenprüfbare Quelle ist `config/llm-policy.json`: exakt
+`deepseek/deepseek-v4.1-flash-1017`, Reasoning `high`. Die Endung **1017** ist
+zwingend. Keine andere DeepSeek-Version, keine andere Modellfamilie, kein
+Reasoning-Downgrade, kein stilles Tier-/Providerfallback. Gilt für sämtliche
+vom Repository kontrollierten NeXify-managed LLM-Aufrufe, einschließlich
+öffentlichem Website-Livechat, Agenten, Recherche, Verdichtung und CI-Review.
+Der finale Providerrequest muss diese Bindung nach allen SDK-Merges einhalten.
+Eine vorhandene Modellkonfiguration bedeutet noch keine Kosten-, Rechte- oder
+Livefreigabe. Die textgeführte Chatvorschau ist ausdrücklich nur ein Zwischenstand
+und erfüllt den geforderten Live-KI-Chat noch nicht. Fremde Hostingmodelle dieser
+ChatGPT-Sitzung werden durch eine Repositorydatei nicht umgeschaltet.
+
+## Kontext, eigene Skills und aktive Lückenbehebung
+
+Vor mehrstufiger Arbeit `python3 tools/project_skills.py verify` ausführen und
+`skills/nexify-governed-delivery/SKILL.md` sowie fachlich passende eigene Skills
+aus `config/project-skills.json` lesen. Diese Quellen gelten auch dann, wenn
+ein Host die lokalen Skillkopien nicht automatisch lädt. Die Quellen ergänzen
+die bestehenden offiziellen Skills, ohne deren Originaldateien zu verändern.
+`python3 tools/context_executor.py --task "<konkrete Aufgabe>"` liefert begrenzte,
+quellengebundene Auswahl; Status `partial` und ausgelassene Quellen beachten.
+Auswahl oder Import ist keine vollständige Verarbeitung aller historischen Daten.
+
+Fehlende Voraussetzungen stoppen nur ihre betroffene Wirkung und erzeugen einen
+konkreten Behebungsauftrag mit Zuständigkeit, nächstem Schritt, Fälligkeit,
+Quellenstand und erneutem Nachweischeck. Sofort innerhalb vorhandener Rechte
+beheben; unabhängige Arbeiten weiterführen. Externe Zugänge oder notwendige
+Entscheidungen als zugewiesene Abhängigkeit verfolgen und bei Fälligkeit
+eskalieren. Keine endlose blinde Wiederholung. Eine Sperre fällt erst nach
+erfolgreicher Prüfung des aktuellen betroffenen Quellenstands, niemals durch
+Zeitablauf, Selbstauskunft eines Modells oder Umschreiben des Freigabestatus.
+Keine Behauptung globaler Enforcement-Abdeckung ohne tatsächliches Inventar
+und Kontrolle aller zugehörigen Laufzeitadapter; ChatGPT-Hostgrenzen benennen.
+
+
+## Stufenweise Migration ohne Unterbrechung · neueste Nutzerpräzisierung
+
+Die finale Ersatzlösung zuerst parallel bauen, danach je Laufzeit kontrolliert
+umstellen. Bestehende Modelle, laufende Codex-/Claude-CLI-Aufträge und getrennte
+Kundenprojekte nicht durch neu eingeführte Governance-Gates abschalten oder
+beschränken. Übergangsmodus ist Inventar/Audit/Shadow; ein negativer
+Migrationscheck verhindert die Umstellung, nicht die unveränderte bisherige
+Arbeit. Bestehende Sicherheits-, Mandanten-, Secret-, Zahlungs- und
+Freigabegrenzen bleiben bestehen. Neue managed Adapter erhalten ihre eigenen
+Modell-/Zugriffs-/Kostenprüfungen von Anfang an.
+
+Vor Cutover pro Runtime/Projekt/Mandant/Version prüfen: Ersatzfunktion und
+Abhängigkeiten tatsächlich bereit, aktive Jobs beendet oder nachweislich sicher
+übergebbar, getestete Rückkehr, Zuständigkeit, Canary, Scope-/Quellbelege und
+atomarer Übergabe-/Leasevertrag. Bei Fehler, Kontextwechsel, Ausfall oder
+fehlender Voraussetzung bleibt die bisherige Route erhalten; kein stilles
+Umschalten auf einen ungeprüften Ersatz. Rückfall verändert keine bereits
+erfolgten Buchungen oder versendet Aktionen doppelt. ChatGPT-/CLI-Hostingmodelle
+werden nicht durch Projektanleitungen ersetzt. Konkreter Übergangsvertrag:
+`config/ai-migration-policy.json`, `docs/architecture/0019-staged-ai-migration.md`.
+
+Die Wirkungsprüfung aus `config/change-impact-policy.json` gilt für jede
+Projektänderung in angemessenem Umfang: aktuelle Nutzer/Jobs, direkte und
+indirekte Abhängigkeiten, Fehler/Timeout/Teilerfolg/Wiederholung/Parallelität,
+Zwischenbetrieb, Übergabe und Rückkehr. Diese Zusammenhänge eigenständig aus
+erreichbaren Quellen ableiten; keine allgemeine Rückfrage zu fachlich klarer
+Routine. Unbelegte relevante Grenzen offen führen und konkret beheben.
+
+Ressourcen- und Kostenplanung ist Teil dieser Wirkungsprüfung: gemessene
+effektive Servergrenzen, reale Arbeitsprofile und erwartete Lastbereiche vor
+Belegung/Umstellung berechnen, Reserven und Abhängigkeiten berücksichtigen.
+`config/capacity-policy.json` und `tools/capacity_planner.py` verwenden. Ein
+lokaler Cloud-Containerbeleg aus `tools/resource_probe.py` beschreibt keine VPS.
+Monitoring ist kein Abrechnungsledger; unbekannte Lasten nicht als Null führen.
+Keine CPU-/RAM-Limits oder laufenden Jobs aus einer Prognose automatisch ändern.

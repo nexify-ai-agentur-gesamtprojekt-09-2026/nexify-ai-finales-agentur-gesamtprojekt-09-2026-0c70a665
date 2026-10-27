@@ -3,6 +3,7 @@ import {createContext,useContext,useEffect,useState,type ReactNode} from "react"
 import type {Localized,PublicPage} from "../lib/page-types";
 import {SiteLink} from "./Router";
 import {useUI} from "./Workspace";
+import "./PresenterEditorial.css";
 
 export type PresenterJourney={id:string;label:Localized;steps:string[]};
 type State={enabled:boolean;journeyId:string};
@@ -31,11 +32,16 @@ export default function PresenterGuide({pageId,pages,journeys}:{pageId:string;pa
   const index=journey.steps.indexOf(pageId);
   const find=(step:string|undefined)=>pages.find(page=>page.id===step);
   const previous=find(journey.steps[index-1]),next=find(journey.steps[index+1]),begin=find(journey.steps[0]);
-  return <section className="presenter-guide" aria-label={text.title}>
-    <div><span className="eyebrow">PASCAL · NEX · AIFLY</span><h2>{text.title}</h2><p>{text.available}</p></div>
-    <div className="presenter-guide-controls"><label>{text.label}<select value={journey.id} onChange={event=>update({...state,journeyId:event.target.value})}>{journeys.map(item=><option value={item.id} key={item.id}>{item.label[locale]}</option>)}</select></label><button type="button" className="outline-button" aria-pressed={state.enabled} onClick={()=>update({journeyId:journey.id,enabled:!state.enabled})}>{state.enabled?text.pause:text.start}</button></div>
-    {state.enabled&&<div className="presenter-guide-progress">
-      {index<0?<><p>{text.outside}</p>{begin&&<SiteLink className="route-action" href={begin.path}>{text.begin}: {begin.localizedTitle[locale]}</SiteLink>}</>:<><p role="status">{text.position} {index+1} {text.of} {journey.steps.length} · {journey.label[locale]}</p><nav aria-label={journey.label[locale]}>{previous&&<SiteLink className="route-action" href={previous.path}>← {text.previous}</SiteLink>}{next?<SiteLink className="route-action" href={next.path}>{text.next}: {next.localizedTitle[locale]} →</SiteLink>:<p>{text.finished}</p>}</nav></>}
+  return <section className="editorial-guide" aria-label={text.title}>
+    <details className="editorial-guide-disclosure">
+      <summary><span>{text.title}</span><span className="editorial-guide-mark" aria-hidden="true" /></summary>
+      <div className="editorial-guide-settings">
+        <p>{text.available}</p>
+        <div className="editorial-guide-controls"><label>{text.label}<select value={journey.id} onChange={event=>update({...state,journeyId:event.target.value})}>{journeys.map(item=><option value={item.id} key={item.id}>{item.label[locale]}</option>)}</select></label><button type="button" className="outline-button" aria-pressed={state.enabled} onClick={()=>update({journeyId:journey.id,enabled:!state.enabled})}>{state.enabled?text.pause:text.start}</button></div>
+      </div>
+    </details>
+    {state.enabled&&<div className="editorial-guide-progress">
+      {index<0?<><p>{text.outside}</p>{begin&&<SiteLink className="editorial-next-step" href={begin.path}>{text.begin}: {begin.localizedTitle[locale]}</SiteLink>}</>:<><p role="status">{text.position} {index+1} {text.of} {journey.steps.length} · {journey.label[locale]}</p><nav aria-label={journey.label[locale]}>{previous&&<SiteLink className="editorial-next-step" href={previous.path}>← {text.previous}</SiteLink>}{next?<SiteLink className="editorial-next-step" href={next.path}>{text.next}: {next.localizedTitle[locale]} →</SiteLink>:<p>{text.finished}</p>}</nav></>}
     </div>}
   </section>;
 }

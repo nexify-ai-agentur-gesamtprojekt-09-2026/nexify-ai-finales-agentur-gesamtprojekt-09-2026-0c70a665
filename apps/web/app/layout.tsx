@@ -1,3 +1,5 @@
+import "../../../packages/tokens/tokens.css";
+import "./globals.css";
 import { deDE } from "@clerk/localizations";
 import { ClerkProvider } from "@clerk/nextjs";
 import { clerkConfiguration } from "../auth/policy";
@@ -6,8 +8,6 @@ import type { ReactNode } from "react";
 import Workspace from "../components/Workspace";
 import NextRouterBridge from "../components/NextRouterBridge";
 import { publicPages } from "../lib/catalog";
-import "../../../packages/tokens/tokens.css";
-import "./globals.css";
 
 export const metadata: Metadata = { title: {default:"NeXify AI – Mehr Zeit für Kunden",template:"%s · NeXify AI"}, description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false}};
 export default function RootLayout({children}:{children:ReactNode}) {

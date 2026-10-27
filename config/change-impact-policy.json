@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "scope": "canonical_agency_project",
+  "authority": "current_explicit_user_direction_preserve_work_before_migration",
+  "applies_to": "all_project_changes_and_integrations_scaled_to_actual_effect",
+  "impact_checks": [
+    "identify_existing_users_tenants_active_jobs_and_owners_from_available_evidence",
+    "map_direct_and_indirect_dependencies_and_changed_contracts",
+    "consider_failure_timeout_partial_success_duplicate_retry_and_concurrent_work",
+    "preserve_existing_work_during_parallel_build_and_validation",
+    "define_reversible_step_canary_handover_and_rollback_before_cutover",
+    "reverify_source_version_readiness_and_existing_authorization_before_effect",
+    "assign_and_act_on_missing_prerequisites_without_stopping_independent_work",
+    "measure_effective_resources_and_workload_profiles_forecast_load_cost_and_failure_headroom_before_placement"
+  ],
+  "transition_rule": {
+    "default_existing_runtime": "inventory_audit_shadow_no_new_runtime_restriction",
+    "missing_migration_prerequisite": "deny_cutover_preserve_existing_work",
+    "existing_safety_tenant_secret_financial_gates": "remain_in_force",
+    "new_managed_adapter": "own_enforced_model_access_and_funding_contract",
+    "customer_project_and_hosted_chatgpt_models": "outside_agency_runtime_reconfiguration_scope"
+  },
+  "reasoning_rule": {
+    "derive_routine_implementation_choices_and_needed_checks_autonomously": true,
+    "consult_available_sources_before_asking": true,
+    "do_not_treat_absence_of_evidence_as_safety_or_readiness": true,
+    "escalate_only_unresolvable_material_access_authorization_or_scope_dependency": true
+  },
+  "automation_limit": "Policy is a source-bound checklist; does not claim complete causal reasoning or modify any running model or process."
+}

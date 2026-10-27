@@ -28,5 +28,19 @@
       "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/agent-chat.ts": {
+      "maxDuration": 10,
+      "regions": [
+        "fra1"
+      ]
+    },
+    "api/agent-runtime-status.ts": {
+      "maxDuration": 15,
+      "regions": [
+        "fra1"
+      ]
+    }
+  }
 }

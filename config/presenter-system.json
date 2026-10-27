@@ -46,6 +46,11 @@
       "de": "Bestehenden Vorgang klären",
       "nl": "Een bestaand dossier bespreken",
       "fr": "Clarifier un dossier existant"
+    },
+    "nex2fly-trial": {
+      "de": "NeX2fly Suite kennenlernen",
+      "nl": "NeX2fly Suite leren kennen",
+      "fr": "Découvrir la NeX2fly Suite"
     }
   },
   "speakers": {

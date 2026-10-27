@@ -22,6 +22,8 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 MODELS_URL = 'https://openrouter.ai/api/v1/models'
 REVIEW_URL = 'https://openrouter.ai/api/v1/chat/completions'
+MODEL_POLICY_PATH = Path(__file__).resolve().parents[2] / 'config/llm-policy.json'
+MANAGED_MODEL = 'deepseek/deepseek-v4.1-flash-1017'
 CATALOG_BYTES = 8 * 1024 * 1024
 RESPONSE_BYTES = 1024 * 1024
 SHA = re.compile(r'^[a-f0-9]{40}$')
@@ -94,6 +96,44 @@ def decimal_amount(value):
         raise ReviewBlocked('invalid_price_or_cost') from None
 
 
+def require_managed_binding(settings=None, payload=None):
+    """Fixed local authority and literal user instruction, before credentials/egress.
+
+    Configured paths/models and catalog labels cannot select a substitute policy.
+    This is a request guard, not funding or deployment approval.
+    """
+    try:
+        policy = parse_json(MODEL_POLICY_PATH.read_bytes())
+    except OSError:
+        raise ReviewBlocked('managed_llm_policy_unavailable') from None
+    if (not isinstance(policy, dict) or not isinstance(policy.get('model'), dict)
+            or not isinstance(policy.get('routing'), dict)
+            or policy.get('status') != 'mandatory_for_repository_controlled_managed_llm_calls'
+            or policy.get('authority') != 'explicit_current_user_instruction_2026-10-26'
+            or not isinstance(policy.get('applies_to'), list) or 'ci_ai_review' not in policy['applies_to']
+            or policy['model'].get('id') != MANAGED_MODEL
+            or policy['model'].get('primary_provider') != 'OpenRouter'
+            or policy['model'].get('reasoning_effort') != 'high'
+            or policy['routing'].get('silent_model_fallback') is not False
+            or policy['routing'].get('silent_reasoning_downgrade') is not False
+            or policy['routing'].get('automatic_tier_escalation_or_substitution') is not False):
+        raise ReviewBlocked('managed_llm_policy_mismatch')
+    if settings is not None:
+        if not settings.get('exact_model_id'):
+            raise ReviewBlocked('exact_model_id_unverified')
+        if settings.get('exact_model_id') != MANAGED_MODEL:
+            raise ReviewBlocked('managed_model_policy_mismatch')
+        if settings.get('provider') != 'openrouter' or settings.get('reasoning_effort') != 'high':
+            raise ReviewBlocked('unsupported_provider_or_reasoning')
+    if payload is not None:
+        if (not isinstance(payload, dict) or payload.get('model') != MANAGED_MODEL
+                or payload.get('reasoning') != {'effort': 'high'}
+                or not isinstance(payload.get('provider'), dict)
+                or payload['provider'].get('allow_fallbacks') is not False
+                or payload['provider'].get('require_parameters') is not True):
+            raise ReviewBlocked('final_managed_request_policy_mismatch')
+
+
 def load_settings(path):
     config = parse_json(Path(path).read_bytes())
     settings = config.get('ai_review') if isinstance(config, dict) else None
@@ -104,8 +144,7 @@ def load_settings(path):
     if not isinstance(settings.get('requested_model'), str) or not settings['requested_model'].strip():
         raise ReviewBlocked('requested_model_missing')
     model_id = settings.get('exact_model_id')
-    if model_id is not None and (not isinstance(model_id, str) or not model_id.strip()):
-        raise ReviewBlocked('exact_model_id_invalid')
+    require_managed_binding(settings)
     if not isinstance(settings.get('api_key_env'), str) or not ENV_NAME.fullmatch(settings['api_key_env']):
         raise ReviewBlocked('invalid_secret_variable_name')
     limits = settings.get('limits', {})
@@ -149,6 +188,10 @@ class Transport:
     def json(self, url, *, body=None, headers=None, timeout=45, limit=RESPONSE_BYTES):
         if url not in (MODELS_URL, REVIEW_URL):
             raise ReviewBlocked('destination_not_allowed')
+        if body is not None:
+            if url != REVIEW_URL:
+                raise ReviewBlocked('destination_not_allowed')
+            require_managed_binding(payload=body)
         request = Request(url, data=json.dumps(body, ensure_ascii=False).encode() if body is not None else None,
                           headers=headers or {}, method='POST' if body is not None else 'GET')
         try:
@@ -177,6 +220,7 @@ def verify_model(catalog, settings):
     exact = settings.get('exact_model_id')
     if not exact:
         raise ReviewBlocked('exact_model_id_unverified')
+    require_managed_binding(settings)
     rows = catalog.get('data') if isinstance(catalog, dict) else None
     if not isinstance(rows, list):
         raise ReviewBlocked('invalid_catalog')
@@ -344,6 +388,9 @@ def repository_diff(repository, base, head, settings):
 
 
 def request_payload(context, diff, settings, model, rates):
+    require_managed_binding(settings)
+    if model.get('id') != MANAGED_MODEL:
+        raise ReviewBlocked('managed_catalog_model_mismatch')
     user = json.dumps({'untrusted_review_input': {**context, 'diff': diff}}, ensure_ascii=False)
     # UTF-8 byte count conservatively bounds text tokens; reserve framing overhead.
     prompt_bound = len(SYSTEM.encode()) + len(user.encode()) + len(json.dumps(REVIEW_SCHEMA).encode()) + 512
@@ -363,6 +410,7 @@ def request_payload(context, diff, settings, model, rates):
                      'max_price': {'prompt': float(rates['prompt'] * 1_000_000),
                                    'completion': float(rates['completion'] * 1_000_000), 'request': 0}},
         'response_format': {'type': 'json_schema', 'json_schema': {'name': 'bound_code_review', 'strict': True, 'schema': schema}}}
+    require_managed_binding(settings, payload)
     return payload, predicted, prompt_bound
 
 
@@ -399,12 +447,14 @@ def validate_review(review, context):
 
 
 def review_commits(repository, base, head, settings, *, transport=None, environ=None):
+    require_managed_binding(settings)
     transport = transport or Transport()
     environ = os.environ if environ is None else environ
     context, diff = repository_diff(repository, base, head, settings)
     catalog, catalog_hash = transport.json(MODELS_URL, timeout=settings['limits']['timeout_seconds'], limit=CATALOG_BYTES)
     model, rates = verify_model(catalog, settings)
     payload, predicted, prompt_bound = request_payload(context, diff, settings, model, rates)
+    require_managed_binding(settings, payload)
     key = environ.get(settings['api_key_env'])
     if not isinstance(key, str) or not key.strip():
         raise ReviewBlocked('api_key_binding_missing')

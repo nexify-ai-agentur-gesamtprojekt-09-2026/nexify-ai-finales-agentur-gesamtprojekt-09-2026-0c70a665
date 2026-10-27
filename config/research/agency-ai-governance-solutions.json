@@ -1,0 +1,1042 @@
+{
+  "schema_version": 1,
+  "as_of_utc": "2026-10-26T14:38:39.197715+00:00",
+  "status": "official_source_evaluation_no_install_or_policy_change",
+  "scope": {
+    "solutions_compared": 8,
+    "paid_model_calls": 0,
+    "package_installations": 0,
+    "policies_changed": false,
+    "deployment": false,
+    "all_documentation_read": false,
+    "standards_full_texts_purchased_or_claimed_read": false,
+    "model_requirement": "deepseek/deepseek-v4.1-flash-1017, reasoning high for repository-controlled NeXify-managed calls; no change to underlying model of this ChatGPT session"
+  },
+  "minimal_decision": {
+    "adopt_now": "No new framework dependency. Reuse AGENTS/Skills/context citations + canonical policy configs + Zod + existing harness/wireguards, tests and requirement/evidence mapping.",
+    "candidate_later": [
+      "OPA after shared multi-adapter policy requirement",
+      "promptfoo after explicit offline dataset/report need",
+      "one durable engine after real recovery requirement"
+    ],
+    "avoid": [
+      "Installing Spec Kit and OpenSpec together",
+      "Treating Markdown, plugin installation or retrieved context as executable authority",
+      "Replacing domain transaction/auth guards with SDK approval or OPA availability",
+      "Equating CI pass with DIN/ISO certification"
+    ]
+  },
+  "solutions": [
+    {
+      "id": "spec-kit",
+      "name": "GitHub Spec Kit",
+      "source_ids": [
+        "spec-kit-repo",
+        "spec-kit-readme",
+        "spec-kit-license",
+        "spec-kit-release"
+      ],
+      "machine_capability": "Versioned constitution, specification, plan, tasks and workflow artifacts; executable workflow hooks possible when separately configured.",
+      "does_not_prove": "Markdown principles and generated checks do not guarantee runtime enforcement, legal correctness, secure hooks or user acceptance. Main README may describe changes after latest tagged release.",
+      "existing_fit": "AGENTS, ADRs, contracts, feature verification and tests already supply most artifact roles.",
+      "dependencies_and_operations": "Specify Python CLI and coding-agent integration; generator/workflow scripts are executable supply-chain additions; do not run init over existing root without reviewed diff.",
+      "recommendation": "Reference artifact practice only now; no new parallel source of truth.",
+      "observed_metadata": {
+        "repository": "https://github.com/github/spec-kit",
+        "default_branch": "main",
+        "last_push": "2026-10-26T14:26:02Z",
+        "archived": false,
+        "license_spdx": "MIT",
+        "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit",
+        "latest_release": {
+          "tag": "v1.2.3",
+          "published_at": "2026-10-22T13:33:20Z",
+          "prerelease": false
+        }
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "openspec",
+      "name": "Fission-AI OpenSpec",
+      "source_ids": [
+        "openspec-repo",
+        "openspec-readme",
+        "openspec-license",
+        "openspec-release"
+      ],
+      "machine_capability": "Change-scoped proposal/specs/design/tasks and archive; scenarios make acceptance reviewable.",
+      "does_not_prove": "Workflow outputs and AI verify do not prove every task executed or a financial/security policy enforced.",
+      "existing_fit": "Existing change/ADR/feature artifacts can link requirements to source and tests without framework adoption.",
+      "dependencies_and_operations": "Node/npm CLI and supported coding-agent files; review exact version, generated prompts and lifecycle scripts before any future adoption.",
+      "recommendation": "Alternative to Spec Kit, not an additional framework to install simultaneously.",
+      "observed_metadata": {
+        "repository": "https://github.com/Fission-AI/OpenSpec",
+        "default_branch": "main",
+        "last_push": "2026-10-26T01:47:05Z",
+        "archived": false,
+        "license_spdx": "MIT",
+        "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit",
+        "latest_release": {
+          "tag": "v1.15.0",
+          "published_at": "2026-10-24T00:50:05Z",
+          "prerelease": false
+        }
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "agent-instructions",
+      "name": "AGENTS.md + project Skills",
+      "source_ids": [
+        "agents-standard",
+        "agents-repo",
+        "agents-license"
+      ],
+      "machine_capability": "Open Markdown convention that lets supported hosts discover relevant instructions and commands; reusable scoped Skills organize guidance.",
+      "does_not_prove": "No required schema, sandbox, universal instruction compliance, automatic scheduler, connector login or host-independent enforcement. Higher-priority system/tool limits still apply.",
+      "existing_fit": "Already present AGENTS plus verified SmallBusiness library44Skills; context selector and local candidate staging preserve source boundaries. Six host plugins are not a verified six-runtime repository inventory.",
+      "dependencies_and_operations": "Supported host/context loader; licenses apply to each actual source. agents.md site/repo MIT does not relicense arbitrary Skills.",
+      "recommendation": "Keep existing sources canonical; selected context citations, not all-text autoauthority.",
+      "observed_metadata": {
+        "repository": "https://github.com/agentsmd/agents.md",
+        "default_branch": "main",
+        "last_push": "2026-09-10T18:46:16Z",
+        "archived": false,
+        "license_spdx": "MIT",
+        "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit"
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "opa",
+      "name": "Open Policy Agent",
+      "source_ids": [
+        "opa-introduction",
+        "opa-integration",
+        "opa-default",
+        "opa-repo",
+        "opa-license",
+        "opa-release"
+      ],
+      "machine_capability": "Rego decisions and tests; REST/embedded interfaces; bundles, decision logs and versioned policies.",
+      "does_not_prove": "Policy decision is not enforcement; undefined decision, service failure, stale policy and forged input must be denied by trusted adapter. Does not create verified memberships or atomic budgets.",
+      "existing_fit": "Potential future shared decision layer for existing typed action gates; current wireguard/harness remains effective boundary, no assumed migration.",
+      "dependencies_and_operations": "Rego maintenance plus local service/sidecar or reviewed embedded runtime; authenticated authoritative context, timeouts, failclosed result schema, policy distribution/log redaction needed.",
+      "recommendation": "Defer until at least two runtime adapters need the same policy; first implement narrow deny-default adapter contract and negative tests, do not add OPA solely to look compliant.",
+      "observed_metadata": {
+        "repository": "https://github.com/open-policy-agent/opa",
+        "default_branch": "main",
+        "last_push": "2026-10-26T12:46:19Z",
+        "archived": false,
+        "license_spdx": "Apache-2.0",
+        "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit",
+        "latest_release": {
+          "tag": "v1.21.4",
+          "published_at": "2026-10-23T13:42:06Z",
+          "prerelease": false
+        }
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "validation",
+      "name": "JSON Schema2020-12 + Zod + optional Spectral",
+      "source_ids": [
+        "jsonschema-202012",
+        "zod-basics",
+        "zod-repo",
+        "zod-license",
+        "zod-package",
+        "spectral-readme",
+        "spectral-repo",
+        "spectral-license",
+        "spectral-release"
+      ],
+      "machine_capability": "Shape/bounds validation when parse/validator is actually called; Zod TS inference; Spectral configurable static API rules.",
+      "does_not_prove": "Type inference or schema declaration alone does not run validation. Valid content need not be true or authorized; dialect conversion and format enforcement require explicit tests.",
+      "existing_fit": "Zod4.6.7 already pinned; factory OpenAPI validator and dedicated negative gates already exist.",
+      "dependencies_and_operations": "Reuse installed Zod for server inputs/final wire. Spectral would add CLI+reviewed rules/functions and possible remote refs; Docker README discloses startup telemetry opt-out. JSON Schema specification is not a runtime package.",
+      "recommendation": "Retain Zod and existing validators; Spectral only if new API style rules have clear uncovered value.",
+      "observed_metadata": {
+        "zod": {
+          "repository": "https://github.com/colinhacks/zod",
+          "default_branch": "main",
+          "last_push": "2026-10-19T22:46:10Z",
+          "archived": false,
+          "license_spdx": "MIT",
+          "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit"
+        },
+        "spectral": {
+          "repository": "https://github.com/stoplightio/spectral",
+          "default_branch": "develop",
+          "last_push": "2026-10-22T11:42:38Z",
+          "archived": false,
+          "license_spdx": "Apache-2.0",
+          "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit",
+          "latest_release": {
+            "tag": "v6.17.0",
+            "published_at": "2026-10-01T12:40:07Z",
+            "prerelease": false
+          }
+        }
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "ai-sdk",
+      "name": "Vercel AI SDK7 tool and approval primitives",
+      "source_ids": [
+        "ai7-tools",
+        "ai7-agent",
+        "aisdk-package",
+        "ai-sdk-license"
+      ],
+      "machine_capability": "inputSchema validation, ToolLoopAgent bounds, streaming tool states and toolApproval approval protocol.",
+      "does_not_prove": "execute tools run automatically by default; strict depends on provider. Approval response/SDK status does not verify approver membership, bind exact action, reserve money or guarantee safe execution.",
+      "existing_fit": "ai7.0.153 already installed; model-agent uses Zod final-wire checks, exact1017/high, no fallback, maxRetries0 and a bounded public read tool.",
+      "dependencies_and_operations": "Node>=22; current npm7.0.153 peers zod^3.25.76||^4.1.8. needsApproval deprecated in current official guide in favor of toolApproval; verify pinned package before adopting new API.",
+      "recommendation": "Reuse installed SDK; server-owned action/version/tenant/hash approval receipt and domain transaction remain required before side effects.",
+      "observed_metadata": {
+        "version": "7.0.153",
+        "license": "Apache-2.0",
+        "runtime": "Node>=22"
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "eval",
+      "name": "promptfoo",
+      "source_ids": [
+        "promptfoo-repo",
+        "promptfoo-evaluation",
+        "promptfoo-custom-provider",
+        "promptfoo-license",
+        "promptfoo-release"
+      ],
+      "machine_capability": "Dataset-driven deterministic and model-graded assertions, custom providers and regression reports.",
+      "does_not_prove": "Pass rate is limited to dataset/judge; not proof against all prompt injection or a compliance certification. Default/custom graders/providers may cause network/cost/code execution.",
+      "existing_fit": "Existing Node/Python tests already cover SDK wire, guards and contracts with mocks. Can export versioned semantic fixtures without replacing them.",
+      "dependencies_and_operations": "Node tool and dependencies; custom JS/Python assertions are executable trusted code, never untrusted model output. Review telemetry/cloud/report handling; no default grader or paid inference permitted.",
+      "recommendation": "Optional later offline fixture evaluator; begin with current tests, then exact1017/high-bound model evaluations only with explicit funded contract.",
+      "observed_metadata": {
+        "repository": "https://github.com/promptfoo/promptfoo",
+        "default_branch": "main",
+        "last_push": "2026-10-26T11:19:23Z",
+        "archived": false,
+        "license_spdx": "MIT",
+        "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit",
+        "latest_release": {
+          "tag": "0.125.1",
+          "published_at": "2026-10-25T01:53:11Z",
+          "prerelease": false
+        }
+      },
+      "installed_or_run_by_this_research": false
+    },
+    {
+      "id": "durable",
+      "name": "Vercel Workflow SDK / Temporal alternatives",
+      "source_ids": [
+        "workflow-errors",
+        "workflow-repo",
+        "workflow-package",
+        "workflow-license-api",
+        "temporal-durable",
+        "temporal-activity-retry",
+        "temporal-repo",
+        "temporal-license",
+        "temporal-release"
+      ],
+      "machine_capability": "Durable execution/history, persisted step progress, recovery and timers; Temporal uses replay and worker/service separation.",
+      "does_not_prove": "No universal exactly-once external effects, rollback of remote payment, authorization, legal retention or distributed database transaction. A durable record is not successful external delivery.",
+      "existing_fit": "Local SQLite staging already uses transactional versions, outbox and exact readback; no RemoteBrain adapter or durable business workflow accepted by this research.",
+      "dependencies_and_operations": "Workflow5.2.3 Apache2.0; existing research pins AI7-compatible @ai-sdk/workflow2.0.85, not legacy @workflow/ai5 requiringAI6. Workflow default retries3. Temporal MIT service requires workers/persistence/operations or separately contracted Cloud.",
+      "recommendation": "Choose one only for demonstrated long-running recovery requirement; favor existing Vercel path if platform fit proven, Temporal only for explicit cross-service need. Configure nonretry for unresolved paid calls; require idempotency and reconciliation.",
+      "observed_metadata": {
+        "workflow": {
+          "repository": "https://github.com/vercel/workflow",
+          "default_branch": "main",
+          "last_push": "2026-10-26T11:17:46Z",
+          "archived": false,
+          "license_spdx": "Apache-2.0",
+          "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit"
+        },
+        "workflow_package_version": "5.2.3",
+        "temporal": {
+          "repository": "https://github.com/temporalio/temporal",
+          "default_branch": "main",
+          "last_push": "2026-10-26T12:09:56Z",
+          "archived": false,
+          "license_spdx": "MIT",
+          "maintenance_inference": "recent_activity_observed_not_future_support_or_security_audit",
+          "latest_release": {
+            "tag": "v1.32.1",
+            "published_at": "2026-10-08T21:56:07Z",
+            "prerelease": false
+          }
+        }
+      },
+      "installed_or_run_by_this_research": false
+    }
+  ],
+  "normative_boundary": {
+    "source_ids": [
+      "din-norm-law",
+      "din-norm-faq"
+    ],
+    "official_statement": "DIN use generally voluntary; becomes binding through contract or mandatory legislative reference; context-specific legal judgment still required.",
+    "existing_matrix": "config/standards-applicability.json",
+    "matrix_requirements_observed": 25,
+    "matrix_status": "source-verified planning and gaps, not current rebuilt UI acceptance",
+    "catalog_only_standards": [
+      "DIN5008",
+      "ISO9241-210",
+      "ISO9241-11",
+      "ISO9001",
+      "ISO27001",
+      "EN301549"
+    ],
+    "full_copyrighted_normative_text_read": false,
+    "edition_warning": "Existing matrix records ISO9001:2026 DIN2026-11 as advance provided and older active baseline; select edition/transition explicitly, not silently promote prerelease."
+  },
+  "enforcement_layers": [
+    {
+      "layer": "instructions/context",
+      "machine_enforced": "Path/byte/source-hash boundaries in context selector and staging",
+      "human_or_runtime_gap": "Reading a clause is not executing or authorizing it; context may be partial."
+    },
+    {
+      "layer": "schema/static gates",
+      "machine_enforced": "When configured checks run: shapes, allowed refs, source boundary and fixed model configurations",
+      "human_or_runtime_gap": "No guarantee tests ran on deployed commit or statements are true."
+    },
+    {
+      "layer": "runtime action boundary",
+      "machine_enforced": "Existing guarded code paths validate provider URL/body/model/high/tool shapes",
+      "human_or_runtime_gap": "Must bind every actual entry point, authenticated actor/tenant, funds and committed effects; framework cannot manufacture missing integrations."
+    },
+    {
+      "layer": "approval/evidence",
+      "machine_enforced": "Can verify signed/scoped approval action identity, hash, expiry and one-time consumption when implemented",
+      "human_or_runtime_gap": "Business/legal decisions and final acceptance stay with authorized owners; no blanket new permission required for ordinary authorized work."
+    },
+    {
+      "layer": "recovery",
+      "machine_enforced": "Transactional domain writes and durable state only within implemented boundary",
+      "human_or_runtime_gap": "External unknown results require reconciliation, not blind retry or success claims."
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "af627d7d9d56aaaf33d916452e9bc01d2b3b09bfaa41074e0aa0020a220e649c",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": ".harness/arch-rules.json",
+      "sha256": "397f8b6f96677ec017915e240b4f9dcc979b783c56b587a92137e8fbb9987c37",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "config/llm-policy.json",
+      "sha256": "bd1bd7b946384fa5ec3eafb1bf93d090adc44085172d663b15a8892fb5a95a9f",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "tools/check_llm_policy.py",
+      "sha256": "1256c667402f6bf3f563bb68234a4f6db814d7627cee264a2e6595bc8569f84f",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "tools/automation/ai_review.py",
+      "sha256": "2bd60bc72caa760ac4c9d27d5b175312c0602cf5831cef12850685d63b116c62",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "tools/verify_factory_contract.py",
+      "sha256": "6c547dfea2fb571e1dc488d3d6cab1f244f479f83a3a02d841cbffb9c352004d",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "tools/context_executor.py",
+      "sha256": "81af2f65848b97cde97923f8e52367414523d6d949e582c4b2911cb55e75436c",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "tools/brain_ingestion.py",
+      "sha256": "76543d9c0f2577b92269e2ebbbc0ca515cce8578eadb683793989ced6f337b00",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "packages/agent-runtime/model-agent.ts",
+      "sha256": "6a542bfd4c9727ba6686baf2841414a3c0dd63ca6841514996a04014657d6435",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "package.json",
+      "sha256": "6e21354704b0d528c9137927b9b83e8c3215b6d135eaa8182afc5991cc406a65",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "config/integrations/small-business.json",
+      "sha256": "37d00fadd22f0fa0505afa90710649114dc11b5fe55f130994851f6d2429b2a8",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "config/knowledge-source-access.json",
+      "sha256": "35e4b2e281c7920e73a0c73e63401ba2ac60ae61391a6725e2d24f70cf593994",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "docs/architecture/0011-source-and-customer-boundaries.md",
+      "sha256": "2ea2c5720b08468b61a0fe3a830220597b9f9a3880bf771b3e539560bd47cbc5",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "docs/architecture/0016-context-executor.md",
+      "sha256": "99ad0ef95b1c8380fc906af4066433e8d00fed4ea70195ab6721949df812ce49",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "docs/architecture/0017-brain-ingestion.md",
+      "sha256": "a7626d955776103495a3ef44b4a868699532f4c4d22df065cd89fe8e2a902d9e",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "docs/workflows/context-to-delivery.md",
+      "sha256": "8547e34d989227553c5712451c60e256f793b717a4dc9331a6797d5451f2099b",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "docs/quality/standards-applicability.md",
+      "sha256": "3373bc345789614d4613c7e4e99dc3ad3b985965961e90e387572d2b7d1a70e9",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "config/standards-applicability.json",
+      "sha256": "20b3d35738ad5952cbb7bd898cd289275e5a0e391f687deb28e59eedc1de9040",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    },
+    {
+      "path": "docs/research/vercel-platform-options.md",
+      "sha256": "6d9c4724bc6a6eeea24fd3bebe506720e9b3501ed0d892b947ea15508f27e1d9",
+      "status": "source_snapshot_not_new_runtime_acceptance"
+    }
+  ],
+  "research_execution": {
+    "context_selector": "python3 tools/context_executor.py --task Agentur_KI_Governance_DIN_Standards_Regeln_Policy_Framework",
+    "context_result": "selected",
+    "context_output_path": "/workspace/.onboarding/agency-ai-governance/current-task-context.json",
+    "test_suite_rerun": false,
+    "reason": "Read-only research; inspected code/test declarations are source evidence, not new test acceptance."
+  },
+  "sources": [
+    {
+      "id": "spec-kit-repo",
+      "requested_url": "https://api.github.com/repos/github/spec-kit",
+      "final_url": "https://api.github.com/repos/github/spec-kit",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6559,
+      "sha256": "590ff58d966f07adc9ee615ba828736a535770b3e4944ea5c2e899ff24b0595f",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spec-kit-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:09.899880+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "spec-kit-readme",
+      "requested_url": "https://raw.githubusercontent.com/github/spec-kit/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/github/spec-kit/main/README.md",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 13539,
+      "sha256": "3baa99368443f26244b3a021b40eaf6f167ee591f5759c91315ad50d0a204592",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spec-kit-readme.raw",
+      "retrieved_at": "2026-10-26T14:34:09.528723+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "spec-kit-license",
+      "requested_url": "https://raw.githubusercontent.com/github/spec-kit/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/github/spec-kit/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 1060,
+      "sha256": "2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spec-kit-license.raw",
+      "retrieved_at": "2026-10-26T14:34:09.522817+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "openspec-repo",
+      "requested_url": "https://api.github.com/repos/Fission-AI/OpenSpec",
+      "final_url": "https://api.github.com/repos/Fission-AI/OpenSpec",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6503,
+      "sha256": "25b2c383083563027947521d7821b6ee301d883b1b12cc980359bf78585822b9",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/openspec-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:09.842850+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "openspec-readme",
+      "requested_url": "https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/README.md",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 11042,
+      "sha256": "a64074d2eebc76e9b27ef7989175e74540b14bdf81028665a4f4c461881b825e",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/openspec-readme.raw",
+      "retrieved_at": "2026-10-26T14:34:09.484525+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "openspec-license",
+      "requested_url": "https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 1079,
+      "sha256": "c3c7235bea1214ab62df643473975c2e8b8848f528901a976693f7d069713e64",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/openspec-license.raw",
+      "retrieved_at": "2026-10-26T14:34:09.613377+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "agents-standard",
+      "requested_url": "https://agents.md/",
+      "final_url": "https://agents.md/",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 81690,
+      "sha256": "8321a50f30b9ff050f6479e771ac3212cbb1d3f9ef8d49635eca37976ea7fdc8",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/agents-standard.raw",
+      "retrieved_at": "2026-10-26T14:34:09.651363+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "opa-introduction",
+      "requested_url": "https://www.openpolicyagent.org/docs",
+      "final_url": "https://www.openpolicyagent.org/docs",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 279967,
+      "sha256": "df8e09a7d97c317788a61245e6add0bcb2b379ef8ab70f8292b063d715cdf985",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/opa-introduction.raw",
+      "retrieved_at": "2026-10-26T14:34:09.796190+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "opa-integration",
+      "requested_url": "https://www.openpolicyagent.org/docs/integration",
+      "final_url": "https://www.openpolicyagent.org/docs/integration",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 124479,
+      "sha256": "8a369e530e1f6901e715c8b975d94fbb82a007914e0ff43083078fd64a780abe",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/opa-integration.raw",
+      "retrieved_at": "2026-10-26T14:34:09.701255+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "opa-repo",
+      "requested_url": "https://api.github.com/repos/open-policy-agent/opa",
+      "final_url": "https://api.github.com/repos/open-policy-agent/opa",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6820,
+      "sha256": "501acc7f966e0336a90dbaadf83edb81b97bca4c4a4725576b750af383e75230",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/opa-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:09.968833+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "opa-license",
+      "requested_url": "https://raw.githubusercontent.com/open-policy-agent/opa/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/open-policy-agent/opa/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 11358,
+      "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/opa-license.raw",
+      "retrieved_at": "2026-10-26T14:34:09.865193+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "jsonschema-202012",
+      "requested_url": "https://json-schema.org/draft/2020-12/json-schema-core.html",
+      "final_url": "https://json-schema.org/draft/2020-12/json-schema-core",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 342931,
+      "sha256": "406df4de35efb92e4a8898424da25da84902e01abfdaa87c386de1c4f3d3c6b9",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/jsonschema-202012.raw",
+      "retrieved_at": "2026-10-26T14:34:10.444210+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "zod-basics",
+      "requested_url": "https://zod.dev/basics",
+      "final_url": "https://zod.dev/basics",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 198220,
+      "sha256": "3018bd6e946a0122db34f553345a53a4295dd67ecf804f9a8bacc581871e0554",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/zod-basics.raw",
+      "retrieved_at": "2026-10-26T14:34:10.068762+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "zod-repo",
+      "requested_url": "https://api.github.com/repos/colinhacks/zod",
+      "final_url": "https://api.github.com/repos/colinhacks/zod",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 5264,
+      "sha256": "72f74a01b17c302b2df6568cb57f2d521f55e8789e54c3d031bbeefe71c3ecee",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/zod-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:10.308761+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "spectral-readme",
+      "requested_url": "https://raw.githubusercontent.com/stoplightio/spectral/develop/README.md",
+      "final_url": "https://raw.githubusercontent.com/stoplightio/spectral/develop/README.md",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 11159,
+      "sha256": "f0dd1b8599a834acc60efeda70c51992a8ce33c044c819eade7c4b3896a402ad",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spectral-readme.raw",
+      "retrieved_at": "2026-10-26T14:34:10.023096+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "spectral-repo",
+      "requested_url": "https://api.github.com/repos/stoplightio/spectral",
+      "final_url": "https://api.github.com/repos/stoplightio/spectral",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6828,
+      "sha256": "28c7da6f254b70dc8f3ed298b319ddec80a07b5e6b155ef328db14eeaca7bfd6",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spectral-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:10.424657+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "ai7-tools",
+      "requested_url": "https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling",
+      "final_url": "https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling",
+      "http_status": 200,
+      "content_type": "text/markdown",
+      "bytes": 56987,
+      "sha256": "dab6020bf99be7fb5b0f60284e8b5280b07ac0e90f5401e0d36cdd72b5635a70",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/ai7-tools.raw",
+      "retrieved_at": "2026-10-26T14:34:10.204391+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "ai7-agent",
+      "requested_url": "https://ai-sdk.dev/docs/agents/building-agents",
+      "final_url": "https://ai-sdk.dev/docs/agents/building-agents",
+      "http_status": 200,
+      "content_type": "text/markdown",
+      "bytes": 17484,
+      "sha256": "4bfcaad09775ff1c284110f1527e308835e7fdb34eb0e77c26e6541f0d59e209",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/ai7-agent.raw",
+      "retrieved_at": "2026-10-26T14:34:10.340222+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "promptfoo-evaluation",
+      "requested_url": "https://www.promptfoo.dev/docs/configuration/expected-outputs/",
+      "final_url": "https://www.promptfoo.dev/docs/configuration/expected-outputs/",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 183244,
+      "sha256": "0dc17299a828ec10bb425f7eb07fa260f4cfbd043df5a6cbcb7cf31c526546e9",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/promptfoo-evaluation.raw",
+      "retrieved_at": "2026-10-26T14:34:10.374471+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "promptfoo-repo",
+      "requested_url": "https://api.github.com/repos/promptfoo/promptfoo",
+      "final_url": "https://api.github.com/repos/promptfoo/promptfoo",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6822,
+      "sha256": "a65a496bba2752dd7189c5e451e4fe19b77325c9f207738b92f2ecdf4dd7b66c",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/promptfoo-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:10.646499+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "promptfoo-license",
+      "requested_url": "https://raw.githubusercontent.com/promptfoo/promptfoo/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/promptfoo/promptfoo/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 1053,
+      "sha256": "bf813686553f451e1b833fbd827488aee49b60b189626915bf3108d10b754e44",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/promptfoo-license.raw",
+      "retrieved_at": "2026-10-26T14:34:10.354973+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "workflow-errors",
+      "requested_url": "https://useworkflow.dev/docs/foundations/errors-and-retries",
+      "final_url": "https://workflow-sdk.dev/docs/foundations/errors-and-retries",
+      "http_status": 200,
+      "content_type": "text/markdown",
+      "bytes": 14959,
+      "sha256": "f631629b882d0619215ccdd17f6d011fdd6a5d4cca2ec60b99ee7795b729a017",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/workflow-errors.raw",
+      "retrieved_at": "2026-10-26T14:34:10.820142+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "workflow-repo",
+      "requested_url": "https://api.github.com/repos/vercel/workflow",
+      "final_url": "https://api.github.com/repos/vercel/workflow",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6291,
+      "sha256": "63975456f0457f887a10d0d7cc65ff0676163cf6094e43b5e1e598df4476c082",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/workflow-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:10.844852+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "temporal-durable",
+      "requested_url": "https://docs.temporal.io/workflow-execution",
+      "final_url": "https://docs.temporal.io/workflow-execution",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 71398,
+      "sha256": "105838e443f674e3206f19d83e5d6b3afba87f9a205c5a120c87cddc6773b622",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/temporal-durable.raw",
+      "retrieved_at": "2026-10-26T14:34:10.646003+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "temporal-repo",
+      "requested_url": "https://api.github.com/repos/temporalio/temporal",
+      "final_url": "https://api.github.com/repos/temporalio/temporal",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6738,
+      "sha256": "a6bc93490bb5cb3715ea4c72befc00c9c5a93fca0a82bae57c4f5c89dec47de6",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/temporal-repo.raw",
+      "retrieved_at": "2026-10-26T14:34:11.029043+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "din-norm-law",
+      "requested_url": "https://www.din.de/de/ueber-normen-und-standards/normen-und-recht",
+      "final_url": "https://www.din.de/de/ueber-normen-und-standards/normen-und-recht",
+      "http_status": 200,
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 221168,
+      "sha256": "45b1b2628ef61d7ce95cdda5c010cbfbd7bbc8c9a7d7cd8383c32b848508b770",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/din-norm-law.raw",
+      "retrieved_at": "2026-10-26T14:34:12.745654+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "din-norm-faq",
+      "requested_url": "https://www.din.de/de/ueber-normen-und-standards/basiswissen",
+      "final_url": "https://www.din.de/de/ueber-normen-und-standards/basiswissen",
+      "http_status": 200,
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 230336,
+      "sha256": "90556e55d14d23fb91cf69a7a3b1d1225b484b15f88a68398db9eca4e04c11d5",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/din-norm-faq.raw",
+      "retrieved_at": "2026-10-26T14:34:12.610358+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "spec-kit-release",
+      "requested_url": "https://api.github.com/repos/github/spec-kit/releases/latest",
+      "final_url": "https://api.github.com/repos/github/spec-kit/releases/latest",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 3605,
+      "sha256": "505a49ab8995a2bc79999c681c57ba08963de350ba63266905683f8af29576f5",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spec-kit-release.raw",
+      "retrieved_at": "2026-10-26T14:35:33.270879+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "openspec-release",
+      "requested_url": "https://api.github.com/repos/Fission-AI/OpenSpec/releases/latest",
+      "final_url": "https://api.github.com/repos/Fission-AI/OpenSpec/releases/latest",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 18808,
+      "sha256": "891649d16735a2389324c4ac15063e4de01b2b1528d75bc41dac7d78e25edc88",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/openspec-release.raw",
+      "retrieved_at": "2026-10-26T14:35:33.118515+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "opa-release",
+      "requested_url": "https://api.github.com/repos/open-policy-agent/opa/releases/latest",
+      "final_url": "https://api.github.com/repos/open-policy-agent/opa/releases/latest",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 28847,
+      "sha256": "e88b13e34ac296811d09b7e42ba793e9eb8f77b82ba4d23b016be5cf3c04ddb2",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/opa-release.raw",
+      "retrieved_at": "2026-10-26T14:35:33.433829+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "spectral-release",
+      "requested_url": "https://api.github.com/repos/stoplightio/spectral/releases/latest",
+      "final_url": "https://api.github.com/repos/stoplightio/spectral/releases/latest",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 16123,
+      "sha256": "c8056a38abc7fd8d563526e5eadbbc0fa91d06aef6e1c917a98fa57e9b371a13",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spectral-release.raw",
+      "retrieved_at": "2026-10-26T14:35:33.304176+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "promptfoo-release",
+      "requested_url": "https://api.github.com/repos/promptfoo/promptfoo/releases/latest",
+      "final_url": "https://api.github.com/repos/promptfoo/promptfoo/releases/latest",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 2240,
+      "sha256": "f7113bc2908ec5bc4a8ed6bdb649b3054400768e1927f47b48ab85484201bce2",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/promptfoo-release.raw",
+      "retrieved_at": "2026-10-26T14:35:33.391750+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "temporal-release",
+      "requested_url": "https://api.github.com/repos/temporalio/temporal/releases/latest",
+      "final_url": "https://api.github.com/repos/temporalio/temporal/releases/latest",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 14585,
+      "sha256": "a883a913d604709cb744d2e3f2bc9a04bd6e20e0bf673c5cd08e159ecf8d4d90",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/temporal-release.raw",
+      "retrieved_at": "2026-10-26T14:35:33.264902+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "workflow-package",
+      "requested_url": "https://registry.npmjs.org/workflow/latest",
+      "final_url": "https://registry.npmjs.org/workflow/latest",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 3471,
+      "sha256": "2f4b8f53fe2695cb7e8930e7a4b4e4f9b9d587b4c5378843ddd559af871c7a54",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/workflow-package.raw",
+      "retrieved_at": "2026-10-26T14:35:33.019233+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "aisdk-package",
+      "requested_url": "https://registry.npmjs.org/ai/latest",
+      "final_url": "https://registry.npmjs.org/ai/latest",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 3874,
+      "sha256": "a48e49afef4cb45f6fdfb2744726fa13afd2cd0cc0005cc753cb5d6ded0e8288",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/aisdk-package.raw",
+      "retrieved_at": "2026-10-26T14:35:32.814710+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "zod-package",
+      "requested_url": "https://registry.npmjs.org/zod/latest",
+      "final_url": "https://registry.npmjs.org/zod/latest",
+      "http_status": 200,
+      "content_type": "application/json",
+      "bytes": 4362,
+      "sha256": "d6eac84f6c13cbef91acd6ee6b4c1ccbaef774a2f5e7147a0166880ca30ccbbb",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/zod-package.raw",
+      "retrieved_at": "2026-10-26T14:35:32.796048+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "ai-sdk-license",
+      "requested_url": "https://raw.githubusercontent.com/vercel/ai/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/vercel/ai/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 552,
+      "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/ai-sdk-license.raw",
+      "retrieved_at": "2026-10-26T14:35:32.981837+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "workflow-license",
+      "requested_url": "https://raw.githubusercontent.com/vercel/workflow/main/LICENSE",
+      "http_status": 404,
+      "error": "HTTPError",
+      "readback_exact": false,
+      "read_scope": "failed_fetch"
+    },
+    {
+      "id": "temporal-license",
+      "requested_url": "https://raw.githubusercontent.com/temporalio/temporal/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/temporalio/temporal/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 1152,
+      "sha256": "6aab9afd99ceb1dcaf6a0d91386b46baef9bce17ae4006044e0f231e31430b69",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/temporal-license.raw",
+      "retrieved_at": "2026-10-26T14:35:33.490996+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "agents-repo",
+      "requested_url": "https://api.github.com/repos/agentsmd/agents.md",
+      "final_url": "https://api.github.com/repos/agentsmd/agents.md",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 6280,
+      "sha256": "1cc1d948b9def11f4f083825a068a7c8d9feebc12a4487145b89b5e35153abb2",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/agents-repo.raw",
+      "retrieved_at": "2026-10-26T14:35:33.648387+00:00",
+      "read_scope": "repository_release_or_package_metadata_read"
+    },
+    {
+      "id": "agents-license",
+      "requested_url": "https://raw.githubusercontent.com/agentsmd/agents.md/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/agentsmd/agents.md/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 1063,
+      "sha256": "13df7812ca53ecaae1cb4a868844bb598373047ae1d580e4debfbef1dd5b6915",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/agents-license.raw",
+      "retrieved_at": "2026-10-26T14:35:33.518894+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "spectral-license",
+      "requested_url": "https://raw.githubusercontent.com/stoplightio/spectral/develop/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/stoplightio/spectral/develop/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 10760,
+      "sha256": "d45c17f7ecc80e0deab3372ff352c7d00b7d573755c3c672088c21a376673698",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/spectral-license.raw",
+      "retrieved_at": "2026-10-26T14:35:33.520965+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "zod-license",
+      "requested_url": "https://raw.githubusercontent.com/colinhacks/zod/main/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/colinhacks/zod/main/LICENSE",
+      "http_status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 1072,
+      "sha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/zod-license.raw",
+      "retrieved_at": "2026-10-26T14:35:33.877677+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "workflow-license-api",
+      "requested_url": "https://api.github.com/repos/vercel/workflow/license",
+      "final_url": "https://api.github.com/repos/vercel/workflow/license",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 16547,
+      "sha256": "77beb0a3cc24341f1743baafe8617594e52f74c3fadf0c726eeed4b9dc270f33",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/workflow-license-api.raw",
+      "retrieved_at": "2026-10-26T14:36:59.201856+00:00",
+      "read_scope": "license_text_read"
+    },
+    {
+      "id": "opa-default",
+      "requested_url": "https://www.openpolicyagent.org/docs/policy-language",
+      "final_url": "https://www.openpolicyagent.org/docs/policy-language",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 836654,
+      "sha256": "a39495c8d4610dd568f41f30f77ebd173265b35c8758368e2e01a412cb0147f4",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/opa-default.raw",
+      "retrieved_at": "2026-10-26T14:36:59.088429+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "promptfoo-custom-provider",
+      "requested_url": "https://www.promptfoo.dev/docs/providers/custom-api/",
+      "final_url": "https://www.promptfoo.dev/docs/providers/custom-api/",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 225714,
+      "sha256": "e9868dfd265f99302d1dfbf68a663ad92fc9d87949a58e5845b248f68f35c323",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/promptfoo-custom-provider.raw",
+      "retrieved_at": "2026-10-26T14:36:58.770983+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    },
+    {
+      "id": "temporal-activity-retry",
+      "requested_url": "https://docs.temporal.io/encyclopedia/retry-policies",
+      "final_url": "https://docs.temporal.io/encyclopedia/retry-policies",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 93049,
+      "sha256": "5cf58fc6b0e4773ef14c28d6504318ba2d87fceede16172fd97e2587e0f28279",
+      "readback_exact": true,
+      "local_path": "/workspace/.onboarding/agency-ai-governance/temporal-activity-retry.raw",
+      "retrieved_at": "2026-10-26T14:36:58.739551+00:00",
+      "read_scope": "relevant_document_sections_read_not_entire_linked_documentation"
+    }
+  ]
+}

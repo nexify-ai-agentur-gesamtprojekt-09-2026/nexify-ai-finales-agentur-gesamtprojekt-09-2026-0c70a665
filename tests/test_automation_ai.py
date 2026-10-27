@@ -31,6 +31,11 @@ def catalog():
                      'pricing': {'prompt': '0.0000003', 'completion': '0.0000012', 'input_cache_read': '0.000000006'}}]}
 
 
+def policy_wire():
+    return {'model': MODEL, 'reasoning': {'effort': 'high'},
+            'provider': {'allow_fallbacks': False, 'require_parameters': True}}
+
+
 def review(context):
     return {'schema_version': 1, **{k: context[k] for k in ['repository', 'base_sha', 'head_sha']},
             'recommendation': 'no_findings', 'summary': 'Advisory review only; tests were not executed.',
@@ -141,6 +146,32 @@ class AiReviewContracts(unittest.TestCase):
         finally:
             path.unlink()
 
+    def test_arbitrary_or_missing_model_blocks_before_catalog_and_credentials(self):
+        class NoCredentials(dict):
+            def get(self, *args):
+                raise AssertionError('credential binding must not be accessed')
+        for model in [None, 'openrouter/typesafe/jev-1.13', 'deepseek/other', MODEL + '-replacement']:
+            with self.subTest(model=model):
+                self.config['exact_model_id'] = model
+                with patch.object(self.provider, 'json', side_effect=AssertionError('no network')):
+                    with self.assertRaises(ai.ReviewBlocked):
+                        self.invoke(environ=NoCredentials())
+        path = self.repo / 'model-fixture.json'
+        self.addCleanup(lambda: path.unlink(missing_ok=True))
+        for model in [None, 'deepseek/other']:
+            bad = settings(); bad['exact_model_id'] = model
+            path.write_text(json.dumps({'ai_review': bad}))
+            with self.assertRaises(ai.ReviewBlocked):
+                ai.load_settings(path)
+
+    def test_final_transport_rejects_mutated_model_reasoning_or_fallback_before_open(self):
+        for field, value in [('model', 'other/model'), ('reasoning', {'effort': 'low'}),
+                             ('provider', {'allow_fallbacks': True, 'require_parameters': True})]:
+            body = policy_wire(); body[field] = value
+            with self.subTest(field=field), patch.object(ai, 'build_opener', side_effect=AssertionError('no egress')):
+                with self.assertRaisesRegex(ai.ReviewBlocked, 'final_managed_request_policy_mismatch'):
+                    ai.Transport().json(ai.REVIEW_URL, body=body)
+
     def test_missing_key_and_oversized_diff_never_call_paid_endpoint(self):
         with self.assertRaisesRegex(ai.ReviewBlocked, 'api_key_binding_missing'):
             self.invoke(environ={})
@@ -227,7 +258,7 @@ class AiReviewContracts(unittest.TestCase):
                 raise HTTPError(ai.REVIEW_URL, 302, 'redirect', {}, None)
         with patch.object(ai, 'build_opener', return_value=Opener()):
             with self.assertRaises(ai.PaidCallUnresolved):
-                ai.Transport().json(ai.REVIEW_URL, body={})
+                ai.Transport().json(ai.REVIEW_URL, body=policy_wire())
 
     def test_maker_patch_is_bounded_data_and_cannot_target_unchanged_path(self):
         body = review(self.context)
@@ -296,7 +327,7 @@ class AiReviewContracts(unittest.TestCase):
             def open(self, *args, **kwargs):
                 time.sleep(.2)
                 raise AssertionError('deadline did not interrupt headers')
-        for body, exception in [(None, ai.ReviewBlocked), ({}, ai.PaidCallUnresolved)]:
+        for body, exception in [(None, ai.ReviewBlocked), (policy_wire(), ai.PaidCallUnresolved)]:
             start = time.monotonic()
             with patch.object(ai, 'build_opener', return_value=SlowOpener()):
                 with self.assertRaises(exception):
