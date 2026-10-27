@@ -40,6 +40,10 @@ class ResizeSourceBindingTest(unittest.TestCase):
             report.write_text(json.dumps(changed))
             with self.assertRaisesRegex(ValueError, 'stale resize'): check_bound_resize(root)
             changed = json.loads(original)
+            changed['runtime_errors'] = [{'name': 'module failed'}]
+            report.write_text(json.dumps(changed))
+            with self.assertRaisesRegex(ValueError, 'runtime error'): check_bound_resize(root)
+            changed = json.loads(original)
             changed['source_sha256']['../../foreign'] = '0' * 64
             report.write_text(json.dumps(changed))
             with self.assertRaisesRegex(ValueError, 'stale resize'): check_bound_resize(root)

@@ -140,3 +140,23 @@ class ShopEvidenceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CatalogBrowserEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*checker.CATALOG_SOURCE_PATHS, checker.CATALOG_EVIDENCE_PATH):
+            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+
+    def test_source_drift_and_effect_promotion_rejected(self):
+        self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
+        path = self.root / checker.CATALOG_SOURCE_PATHS[0]
+        before = path.read_bytes(); path.write_bytes(before+b'\n# changed adapter')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
+        path.write_bytes(before)
+        evidence_path = self.root / checker.CATALOG_EVIDENCE_PATH
+        report = json.loads(evidence_path.read_text()); report['order_started'] = True
+        evidence_path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError, 'read_only_partial'): checker.check_catalog_evidence(self.root)

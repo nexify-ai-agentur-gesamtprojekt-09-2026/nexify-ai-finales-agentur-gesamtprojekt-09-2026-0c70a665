@@ -87,12 +87,12 @@
       "status": 200
     },
     {
-      "path": "/api/shop/catalog?locale=de&q=&category=",
+      "path": "/api/session",
       "method": "GET",
       "status": 200
     },
     {
-      "path": "/api/session",
+      "path": "/api/shop/catalog?locale=de&q=&category=",
       "method": "GET",
       "status": 200
     },
@@ -212,12 +212,12 @@
       "status": 200
     },
     {
-      "path": "/api/shop/catalog?locale=de&q=&category=",
+      "path": "/api/session",
       "method": "GET",
       "status": 200
     },
     {
-      "path": "/api/session",
+      "path": "/api/shop/catalog?locale=de&q=&category=",
       "method": "GET",
       "status": 200
     },
@@ -325,12 +325,12 @@
   "external_requests": [],
   "source_sha256": {
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
-    "apps/agent-gateway/server.py": "5a413b9493a0d18ae0c94ce70b152824be8f3f327c7929f603bc70ff48cc2403",
-    "apps/web/components/ShopPanel.tsx": "03210b812653fc5b06c1c0ae056a0a1a17a97bc88704da0d798d25515b219779",
+    "apps/agent-gateway/server.py": "a676defdf7dcdee6d299afa30b3ab19a59d317ce154583c4ba058d9177a33166",
+    "apps/web/components/ShopPanel.tsx": "577710a7b395bc63dec079a83a03495964145430ca5a084af75c2337bcf0e3b1",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
     "apps/site/src/main.tsx": "0fd3f63bae18c176e1163579ca1d4e23e7f8153bb3b18e4ac0bb8ebcde2f26b0",
-    "apps/site/tests/browser-shop.mjs": "5c49fc5687bb9749106131711ceeab7aa131c31c8798ddaa874b455da00c88f9",
+    "apps/site/tests/browser-shop.mjs": "7fff41db565df1eb1ab8a8d4ad81e7114f8693d04fe67180ad47167b94403952",
     "apps/site/tests/fixtures/shop-server.py": "fac5b80427ec919bfc2102150e21af0162252e19466cda6239414a104fab9ac6"
   },
   "persistent_objects": {

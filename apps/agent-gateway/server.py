@@ -260,7 +260,7 @@ def public_pages():
 
 
 def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None):
-    if shop is not None and shop.cart.store is not store:
+    if shop is not None and getattr(shop, "cart", None) is not None and shop.cart.store is not store:
         raise ValueError("shop and visitor must use the same scoped Store")
     pages = public_pages()
     allowed_pages = {page["path"] for page in pages}
@@ -310,6 +310,8 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None)
         def shop_target(self):
             if shop is None:
                 raise Rejected(503, "catalog_not_configured")
+            if getattr(shop, "cart", None) is None:
+                raise Rejected(403, "catalog_read_only")
             cookie = SimpleCookie()
             try:
                 cookie.load(self.headers.get("Cookie", ""))
@@ -414,6 +416,8 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None)
                 if path.startswith("/api/shop/"):
                     if shop is None:
                         raise Rejected(503, "catalog_not_configured")
+                    if getattr(shop, "cart", None) is None:
+                        raise Rejected(403, "catalog_read_only")
                     key = self.headers.get("Idempotency-Key")
                     try:
                         if path == "/api/shop/cart":
@@ -460,14 +464,30 @@ def main():
     parser.add_argument("--port", type=int, default=3003)
     parser.add_argument("--seed-local-planning-proposals", action="store_true")
     parser.add_argument("--web-origin", default="http://127.0.0.1:3004")
+    parser.add_argument("--catalog-snapshot", type=Path)
+    parser.add_argument("--catalog-tenant")
+    parser.add_argument("--catalog-project")
+    parser.add_argument("--catalog-store")
+    parser.add_argument("--catalog-max-bytes", type=int)
+    parser.add_argument("--catalog-max-rows", type=int)
+    parser.add_argument("--catalog-max-text", type=int)
+    parser.add_argument("--catalog-max-price-minor", type=int)
     args = parser.parse_args()
+    shop = None
+    if args.catalog_snapshot is not None:
+        from catalog import ReadOnlyCatalog, load_snapshot
+        raw, manifest = load_snapshot(args.catalog_snapshot, maximum_bytes=args.catalog_max_bytes)
+        shop = ReadOnlyCatalog(raw, tenant=args.catalog_tenant, project=args.catalog_project,
+             store_id=args.catalog_store, observed_at=manifest.get("observed_at"),
+             max_bytes=args.catalog_max_bytes, max_rows=args.catalog_max_rows,
+             max_text=args.catalog_max_text, max_price_minor=args.catalog_max_price_minor)
     store = Store(args.database)
     if args.seed_local_planning_proposals:
         store.seed_planning_slots()
     origin = urlsplit(args.web_origin)
     if origin.scheme != "http" or origin.hostname not in {"127.0.0.1", "localhost"} or origin.path or origin.query or origin.fragment or origin.username:
         raise SystemExit("Only an explicit local web origin is supported by this development gateway")
-    server = build_server(store, port=args.port, web_origin=args.web_origin)
+    server = build_server(store, port=args.port, web_origin=args.web_origin, shop=shop)
     print(f"Native visitor workspace listening on loopback port {server.server_port}; mail/model/external calendar not connected", flush=True)
     server.serve_forever()
 

@@ -1,0 +1,112 @@
+{
+  "scope": "isolated synthetic supplier-shaped snapshot in actual browser/API",
+  "checks": [
+    "source-bound partial catalog displayed without commerce or image requests",
+    "DE NL FR labels retain explicit German supplier facts",
+    "local filtering and reload remain scoped to partial snapshot",
+    "valid visitor and csrf cannot create cart or checkout from read-only source"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart/checkout-draft",
+      "status": 403
+    }
+  ],
+  "external_requests": [],
+  "source_sha256": {
+    "apps/agent-gateway/catalog.py": "22d3f7faac91e471a137d8c2427ec0fbc8e9749f8400b4b150c57633259c7cfa",
+    "apps/agent-gateway/server.py": "a676defdf7dcdee6d299afa30b3ab19a59d317ce154583c4ba058d9177a33166",
+    "apps/web/components/ShopPanel.tsx": "577710a7b395bc63dec079a83a03495964145430ca5a084af75c2337bcf0e3b1",
+    "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
+    "apps/site/tests/browser-catalog.mjs": "899714d18b1d67464932d719bc1af62146dfbfd15b0ff918398228bcbfab90e7",
+    "apps/site/tests/fixtures/catalog-server.py": "0fac0208276111c8bef7191707b8cee16ac67cc9f8cda99058bad40d824eb3c3"
+  },
+  "mode": "read_only",
+  "order_started": false,
+  "payment_started": false,
+  "image_requests": 0,
+  "catalog_input_sha256": "38992e6a4984409213bf3404cd3f43720872ecbcc8df360c457db87043bde54b",
+  "observed_at": "2026-10-27T01:00:00+00:00",
+  "source_facts": [
+    {
+      "sku": "SYNTH-A",
+      "ean": "0012345678901",
+      "stock": 0,
+      "source_price_minor": 706,
+      "fact_ids": [
+        "38992e6a4984409213bf3404cd3f43720872ecbcc8df360c457db87043bde54b:SYNTH-A:name"
+      ]
+    },
+    {
+      "sku": "SYNTH-B",
+      "ean": "0012345678902",
+      "stock": 0,
+      "source_price_minor": 1234,
+      "fact_ids": [
+        "38992e6a4984409213bf3404cd3f43720872ecbcc8df360c457db87043bde54b:SYNTH-B:name"
+      ]
+    }
+  ],
+  "returned_skus": [
+    "SYNTH-A",
+    "SYNTH-B"
+  ],
+  "partial": true,
+  "reported_total": 99
+}
