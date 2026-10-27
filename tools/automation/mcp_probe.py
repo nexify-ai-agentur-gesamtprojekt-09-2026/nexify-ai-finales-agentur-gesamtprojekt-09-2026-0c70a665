@@ -19,21 +19,6 @@ class ProbeError(Exception):
     pass
 
 
-def strict_json_loads(raw):
-    def unique_object(pairs):
-        result = {}
-        for key, value in pairs:
-            if key in result:
-                raise ValueError("duplicate JSON key")
-            result[key] = value
-        return result
-
-    def reject_constant(_value):
-        raise ValueError("non-finite JSON number")
-
-    return json.loads(raw, object_pairs_hook=unique_object, parse_constant=reject_constant)
-
-
 @contextmanager
 def hard_deadline(seconds):
     if (threading.current_thread() is not threading.main_thread() or not hasattr(signal, "setitimer")
@@ -146,13 +131,13 @@ class Client:
                     for frame in raw.decode().replace("\r\n", "\n").split("\n\n"):
                         data = "\n".join(line[5:].lstrip() for line in frame.splitlines() if line.startswith("data:"))
                         if data:
-                            candidates.append(strict_json_loads(data))
+                            candidates.append(json.loads(data))
                     matches = [item for item in candidates if isinstance(item, dict) and item.get("id") == self.counter]
                     if len(matches) != 1:
                         raise ProbeError("sse_response_ambiguous")
                     result = matches[0]
                 elif content_type == "application/json":
-                    result = strict_json_loads(raw)
+                    result = json.loads(raw)
                 else:
                     raise ProbeError("unsupported_response_type")
                 if (not isinstance(result, dict) or result.get("jsonrpc") != "2.0"

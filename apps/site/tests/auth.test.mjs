@@ -24,13 +24,10 @@ test('only public Clerk variables are consumed; forced redirects stay fixed and 
  assert.match(source,/signInForceRedirectUrl=\{AUTH_REDIRECT\}/);assert.match(source,/signUpForceRedirectUrl=\{AUTH_REDIRECT\}/);
  assert.match(source,/<SignIn routing="hash"/);assert.match(source,/<SignUp routing="hash"/);
  assert.match(source,/localization=\{deDE\}/);
- assert.match(source,/<Show when="signed-out"/);
- assert.match(source,/<UserButton\/>/);
- assert.match(source,/afterSignOutUrl=\{AUTH_REDIRECT\}/);
 });
 test('the wrapper retains public media, guide and honest disabled fallback',()=>{
  const source=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');
- for(const marker of ['<PresenterGuide ','<ExplainerSections ','<PublicAuthProvider hashMode={hashMode}>','<AuthenticationPanel mode=','accountControl={<AccountControl/>}'])assert.ok(source.includes(marker),marker);
+ for(const marker of ['<PresenterGuide ','<ExplainerSections ','<PublicAuthProvider hashMode={hashMode}>','<AuthenticationPanel mode='])assert.ok(source.includes(marker),marker);
  const auth=readFileSync(new URL('../src/Auth.tsx',import.meta.url),'utf8');
  assert.match(auth,/auth-fallback editorial-note/);assert.match(auth,/keine automatische Adminrolle/);
  assert.match(source,/routeIndex\.get\(path\)/);

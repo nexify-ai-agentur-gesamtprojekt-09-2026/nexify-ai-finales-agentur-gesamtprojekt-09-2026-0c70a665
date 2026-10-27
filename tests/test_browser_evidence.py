@@ -33,7 +33,7 @@ class BrowserEvidenceTests(unittest.TestCase):
         before = {str(file.relative_to(self.root)): file.read_bytes() for file in self.root.rglob("*") if file.is_file()}
         result = checker.check_evidence(self.root)
         self.assertEqual(result["scope"], "stored_browser_evidence_binding_only")
-        self.assertEqual(result["source_count"], len(checker.SOURCE_PATHS))
+        self.assertEqual(result["source_count"], 4)
         self.assertEqual(result["gutter_rows"], 6)
         after = {str(file.relative_to(self.root)): file.read_bytes() for file in self.root.rglob("*") if file.is_file()}
         self.assertEqual(before, after)

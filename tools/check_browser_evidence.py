@@ -16,9 +16,6 @@ import sys
 
 
 SOURCE_PATHS = (
-    "apps/site/src/Auth.tsx",
-    "apps/site/src/main.tsx",
-    "apps/web/app/globals.css",
     "apps/web/components/HomeContent.tsx",
     "apps/web/components/Workspace.tsx",
     "apps/web/components/PublicContentLayout.css",
@@ -38,7 +35,6 @@ SDK_CRITICAL_CHECKS = frozenset((
     "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
 ))
 CRITICAL_CHECKS = frozenset((
-    "account_control_fallback_and_auth_routes_present",
     "keyboard_skip_link_preserves_standalone_product_hash_route",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
     "uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes",

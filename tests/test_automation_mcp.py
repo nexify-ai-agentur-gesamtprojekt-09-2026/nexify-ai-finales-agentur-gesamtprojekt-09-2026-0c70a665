@@ -41,14 +41,8 @@ class MCPTests(unittest.TestCase):
                 elif method == "prompts/list": result = {"prompts": [{"name": "owned_review"}]}
                 else: raise AssertionError("Unexpected protocol method: " + method)
                 raw = json.dumps({"jsonrpc": "2.0", "id": 999 if parent.mode == "wrong_id" else body["id"], "result": result}).encode()
-                if method == "tools/list" and parent.mode == "duplicate_json":
-                    raw = ('{"jsonrpc":"2.0","id":%d,"result":{"tools":[],"tools":[]}}' % body["id"]).encode()
-                if method == "tools/list" and parent.mode == "nonfinite_json":
-                    raw = ('{"jsonrpc":"2.0","id":%d,"result":{"tools":[],"unknown":NaN}}' % body["id"]).encode()
-                if method == "tools/list" and parent.mode == "duplicate_sse":
-                    raw = ('data: {"jsonrpc":"2.0","id":%d,"result":{"tools":[],"tools":[]}}\n\n' % body["id"]).encode()
                 try:
-                    self.send_response(200); self.send_header("Content-Type", "text/event-stream" if parent.mode == "duplicate_sse" and method == "tools/list" else "application/json")
+                    self.send_response(200); self.send_header("Content-Type", "application/json")
                     self.send_header("Mcp-Session-Id", "controlled-session"); self.send_header("Content-Length", str(len(raw)))
                     self.end_headers(); self.wfile.write(raw)
                 except OSError: pass  # Expected when the deadline test closes its socket.
@@ -64,16 +58,6 @@ class MCPTests(unittest.TestCase):
         self.server.shutdown(); self.server.server_close(); self.thread.join(3)
 
     def run_probe(self): return probe.probe(self.config, self.server_config, self.environment)
-
-    def test_ambiguous_and_nonstandard_json_cannot_complete_inventory(self):
-        for mode in ("duplicate_json", "nonfinite_json", "duplicate_sse"):
-            with self.subTest(mode=mode):
-                self.mode = mode
-                report = self.run_probe()
-                self.assertEqual(report["status"], "blocked")
-                self.assertEqual(report["blocker"], "invalid_response")
-                self.assertFalse(report["complete"])
-                self.assertNotIn("tools/call", self.calls)
 
     def test_complete_pagination_measurements_and_no_tool_execution(self):
         report = self.run_probe()

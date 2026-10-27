@@ -1,19 +1,18 @@
 import {createContext,useContext,lazy,Suspense,type ReactNode} from "react";
-import {deDE} from "@clerk/localizations/de-DE";
+import {deDE} from "@clerk/localizations";
 import {useUI} from "../../web/components/Workspace";
-import {SiteLink} from "../../web/components/Router";
 import {AUTH_REDIRECT,publicAuthConfiguration} from "./auth-policy.mjs";
 
-type Widgets={SignIn:typeof import("@clerk/react").SignIn;SignUp:typeof import("@clerk/react").SignUp;Show:typeof import("@clerk/react").Show;UserButton:typeof import("@clerk/react").UserButton};
+type Widgets={SignIn:typeof import("@clerk/react").SignIn;SignUp:typeof import("@clerk/react").SignUp};
 const AuthAvailability=createContext<{loading?:boolean;widgets?:Widgets}>({});
 const ClerkBoundary=lazy(async()=>{
-  const {ClerkProvider,SignIn,SignUp,Show,UserButton}=await import("@clerk/react");
+  const {ClerkProvider,SignIn,SignUp}=await import("@clerk/react");
   return {default:function ConfiguredClerk({publishableKey,children}:{publishableKey:string;children:ReactNode}) {
     return <ClerkProvider publishableKey={publishableKey} localization={deDE}
       signInUrl="/anmelden" signUpUrl="/registrieren"
       signInForceRedirectUrl={AUTH_REDIRECT} signUpForceRedirectUrl={AUTH_REDIRECT}
       afterSignOutUrl={AUTH_REDIRECT}>
-      <AuthAvailability.Provider value={{widgets:{SignIn,SignUp,Show,UserButton}}}>{children}</AuthAvailability.Provider>
+      <AuthAvailability.Provider value={{widgets:{SignIn,SignUp}}}>{children}</AuthAvailability.Provider>
     </ClerkProvider>;
   }};
 });
@@ -28,18 +27,6 @@ export function PublicAuthProvider({children,hashMode=false}:{children:ReactNode
   return <Suspense fallback={<AuthAvailability.Provider value={{loading:true}}>{children}</AuthAvailability.Provider>}>
     <ClerkBoundary publishableKey={configuration.publishableKey!}>{children}</ClerkBoundary>
   </Suspense>;
-}
-export function AccountControl() {
-  const {widgets,loading}=useContext(AuthAvailability);
-  const {locale}=useUI();
-  const login=locale==='nl'?'Aanmelden':locale==='fr'?'Se connecter':'Anmelden';
-  const account=locale==='nl'?'Account en afmelden':locale==='fr'?'Compte et déconnexion':'Konto und Abmelden';
-  if(loading)return <span className="account-control is-loading" aria-label={login} aria-busy="true"/>;
-  if(!widgets)return <SiteLink className="account-control account-link" href="/anmelden">{login}</SiteLink>;
-  const {Show,UserButton}=widgets;
-  return <span className="account-control"><Show when="signed-out" fallback={
-    <span aria-label={account}><UserButton/></span>
-  }><SiteLink className="account-link" href="/anmelden">{login}</SiteLink></Show></span>;
 }
 export function AuthenticationPanel({mode}:{mode:"login"|"signup"}) {
   const {widgets,loading}=useContext(AuthAvailability);
