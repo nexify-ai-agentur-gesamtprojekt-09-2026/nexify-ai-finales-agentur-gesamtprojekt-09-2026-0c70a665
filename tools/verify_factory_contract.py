@@ -286,6 +286,41 @@ def validate_media(media):
     return errors
 
 
+def validate_media_plan(plan):
+    """Keep multilingual scripts and the unexecuted casting gate in sync."""
+    errors = []
+    locales = {"de", "nl", "fr"}
+    if plan.get("state") != "draft_not_submitted":
+        errors.append("Media plan: unverified execution state")
+    execution = plan.get("execution", {})
+    if (execution.get("provider_jobs_started") != 0
+            or execution.get("audio_files_generated") != 0
+            or execution.get("video_files_generated") != 0
+            or execution.get("published") is not False):
+        errors.append("Media plan: provider work claimed without runtime evidence")
+
+    casting = plan.get("voice_casting", {})
+    if casting.get("state") != "provider_asset_inventory_and_audition_required":
+        errors.append("Media plan: casting inventory gate missing")
+    comparison = casting.get("comparison_script", {})
+    if set(comparison) != locales or any(not str(comparison[key]).strip() for key in locales):
+        errors.append("Media plan: DE/NL/FR comparison scripts incomplete")
+
+    jobs = plan.get("jobs", [])
+    by_slot = {job.get("participant_slot"): job for job in jobs}
+    if len(jobs) != len(by_slot) or set(by_slot) != {"nex", "aifly", "user"}:
+        errors.append("Media plan: presenter jobs missing or duplicated")
+    for slot, job in by_slot.items():
+        scripts = job.get("script_drafts", {})
+        if set(scripts) != locales or any(not str(scripts[key]).strip() for key in locales):
+            errors.append(f"Media plan: {slot} DE/NL/FR hero scripts incomplete")
+        if job.get("text_status") != "editorial_ready_pending_voice_audition":
+            errors.append(f"Media plan: {slot} text/audition boundary missing")
+    if by_slot.get("aifly", {}).get("voice_assignment_status") != "recast_preferred_from_existing_provider_assets":
+        errors.append("Media plan: AIFly distinct-voice decision missing")
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
@@ -295,12 +330,14 @@ def main():
     try:
         document = json.loads((folder / "factory.openapi.json").read_text())
         media = json.loads((folder / "hero-media.json").read_text())
+        media_plan = json.loads((folder / "hero-production-plan.json").read_text())
         catalog = json.loads((folder / "prototype-pages.json").read_text())
         bundled_reference = args.root / "reference/handoff-n2"
         roots = {"N1": args.root, "N2": args.repo_n2 or (bundled_reference if bundled_reference.is_dir()
                  else args.root.parent / "nexify-ai-finales-agentur-gesamtprojekt-09-2026")}
         page_ids = {page["page_id"] for page in catalog.get("pages", [])}
         errors = (validate_document(document, page_ids) + validate_media(media)
+                  + validate_media_plan(media_plan)
                   + validate_catalog(catalog, roots) + validate_sources(document, roots)
                   + validate_coverage(document, catalog))
     except (OSError, ValueError, TypeError) as exc:

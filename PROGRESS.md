@@ -1,11 +1,60 @@
 # Gemeinsame KI-Governance und Kapazitätsplanung · 26.10.2026
 
-Arbeitszweig: `factory/source-faithful-rebuild-2026-10-26`, Basis6bb8b4c.
+## Anmelde-/Abmeldezugang und MCP-Antwortintegrität · 27.10.2026
+
+F-007 ist über den vorgeschriebenen dreischichtigen Prüfpfad lokal technisch
+bestanden. MCP-Discovery verweigert doppelte JSON-Schlüssel und `NaN` in JSON/SSE.
+
+F-008 ergänzt in der React-Site einen sprachabhängigen Anmeldezugang und bei
+geladener Clerk-Sitzung den vorhandenen Konto-/Abmeldeknopf. Der deaktivierte
+Zustand bleibt ehrlich und fragt keine Passwörter ab. Die neue Kopfzeile wurde
+lokal auf Desktop/Mobil, 44-Pixel-Zielgröße, DE/NL/FR, Routen, Tastatur und
+Offlineausgabe geprüft. Authentifizierung erteilt weiterhin keine Membership.
+
+Der geprüfte Stand liegt auf
+`factory/goal-completion-gated-2026-10-27`. Der Anwendungsstand aus Commit
+`3f19561` wurde ohne Force-Push auf den wiederhergestellten Main aufgesetzt.
+GitHub-CI-Lauf `40497507088` hat Repository, React-Site, Next-Web,
+OpenAPI und PostgreSQL-Isolation vollständig bestanden. Das kanonische
+Vercel-Projekt meldet für denselben Commit `Deployment has completed`; der
+bekannte Preview-Host antwortet außerhalb der Vercel-Sitzung erwartungsgemäß
+mit dem Zugangsschutz (HTTP 302 zu Vercel SSO). Zwei zusätzlich mit demselben
+Repository verbundene Altprojekte (`web`, `site-k23m`) schlagen unabhängig
+davon in ihrer eigenen Vercel-Konfiguration fehl und sind zu bereinigen.
+
+Der Preview-Erfolg ist keine Produktionsfreigabe. Ein gleichzeitig durch einen
+anderen Prozess zusammengeführter PR wurde mit Commit `839c8f2` nachvollziehbar
+zurückgenommen; der Main-Dateibaum entspricht wieder exakt dem vorherigen Stand
+`e541462`, Main-CI und kanonisches Vercel-Deployment des Rückwegs sind grün.
+Produktivdomain und DNS wurden nicht umgestellt. Das Freigabe-Gate bleibt
+geschlossen, bis echte Clerk-Anmeldung samt vereinbarter starker
+Authentisierung, Membership-/Tenant-
+Trennung, Providerverbindungen, wiederholter Health-Lauf, ausgeführter Rollback
+und die Endabnahme mit tatsächlichen Laufzeitnachweisen bestanden sind.
+
+Medienarbeit 27.10.2026: Die vorhandenen Voice-Referenzen sind Rollen und
+Seitentexten zugeordnet. DE/NL/FR-Heroentwürfe, Rollenprofile, ein identischer
+Hörvergleichstext und Abnahmekriterien stehen in
+`docs/contracts/hero-production-plan.json`. NeX bleibt vorläufig auf seiner
+Referenz; Pascals Referenz braucht persönliche Rechte- und Hörprüfung; AIFly
+soll aus den vorhandenen Provider-Assets eine eigene, klar unterscheidbare
+Stimme erhalten. Die aktuelle Toolregistry exponiert weder Runway- noch
+ElevenLabs-Aktionen, deshalb wurden keine Provider-Assets gelesen, keine Jobs
+gestartet und keine Medien veröffentlicht.
+
+Arbeitszweig: `factory/goal-completion-gated-2026-10-27`, Basis `839c8f2`.
 Neueste Nutzerpriorität: bestehende Modelle/CLI-/Kundenarbeit erhalten; Ersatz
 parallel bauen und prüfen, pro Laufzeit mit Canary/Übergabe/Rollback umstellen.
 Keine aktive Migration, Produktionsbelegung oder globale Modellsperre durchgeführt.
 17 zwischenzeitlich neue Legacy-Einschränkungen vor Veröffentlichung zurückgenommen;
 Altpfade sind ausdrücklich unmigriert/audit, nicht fälschlich abgesichert.
+
+## MCP-Discovery: eindeutige Antworten · 27.10.2026
+
+F-007: Lesende Discovery weist JSON und SSE mit doppelten Objektschlüsseln
+oder nichtstandardisierten Zahlen ab. Lokale HTTP-Gegenproben sind Teil der
+Automationsprüfung. Keine Toolausführung oder Provideraktivierung; die Änderung
+wird auf dem vom Vercel-Previewcommit `a19cd50` abgeleiteten Arbeitszweig geprüft.
 
 52 KI-bezogene Quellen registriert; aktueller begrenzter Scan168Dateien/30Kandidaten.
 Auditmodus meldet Lücken/Drift, stoppt keine laufende Arbeit. Neue interne
@@ -40,9 +89,9 @@ kein Live-LLM-Chat. Internes ToolLoopAgent-Prototyping verwendet echte SDK-Mocks
 keine Modellkosten ausgelöst. Readonly-Creditsprobe nur für diesen Vercel-
 Previewzweig konfiguriert, Ergebnis nach Deployment rücklesen.
 
-Lokaler Gesamtstand:281Pythonfälle,26SDK- und18Site-Tests grün;
+Lokaler Gesamtstand:283Pythonfälle,26SDK- und18Site-Tests grün;
 Site/Standalone/Nextbuilds, API-/App-Typechecks, Audit, E2E und14Architekturregeln
-bestanden. Sauberzustandsprüfung bestanden; neues Vercel-Deployment folgt.
+bestanden. Sauberzustandsprüfung und kanonisches Vercel-Preview bestanden.
 Browser:36öffentliche/10privateRouten,49Erklärmodule,SDK404Fallback/Streams/
 Negativkontext/Sprachen/Mobilfokus,Offline/Hashrouting; kein Produktionsnachweis.
 Bundle561KB/gzip158KB bleibt Leistungsfinding, keine Normzertifizierung.
