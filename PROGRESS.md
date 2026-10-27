@@ -7,6 +7,13 @@ Keine aktive Migration, Produktionsbelegung oder globale Modellsperre durchgefü
 17 zwischenzeitlich neue Legacy-Einschränkungen vor Veröffentlichung zurückgenommen;
 Altpfade sind ausdrücklich unmigriert/audit, nicht fälschlich abgesichert.
 
+## MCP-Discovery: eindeutige Antworten · 27.10.2026
+
+F-007: Lesende Discovery weist JSON und SSE mit doppelten Objektschlüsseln
+oder nichtstandardisierten Zahlen ab. Lokale HTTP-Gegenproben sind Teil der
+Automationsprüfung. Keine Toolausführung oder Provideraktivierung; die Änderung
+wird auf dem vom Vercel-Previewcommit `a19cd50` abgeleiteten Arbeitszweig geprüft.
+
 52 KI-bezogene Quellen registriert; aktueller begrenzter Scan168Dateien/30Kandidaten.
 Auditmodus meldet Lücken/Drift, stoppt keine laufende Arbeit. Neue interne
 Modell-/CI-Adapter prüfen exaktDeepSeekV4.1Flash1017/high und finale Requests.
