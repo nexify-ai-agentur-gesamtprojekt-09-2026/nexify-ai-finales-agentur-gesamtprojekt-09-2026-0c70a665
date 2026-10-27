@@ -1,0 +1,239 @@
+{
+  "observed_at": "2026-10-27T20:11:01.332604+00:00",
+  "code_commit": "38f6c6549101ba830055817fdd70ccd0e493e3b4",
+  "code_search_scope": "all tracked *.ts,tsx,js,mjs,py,json,yml,yaml,sh at origin/main excluding lockfile",
+  "aifly_variable_references_found": [],
+  "variables": [
+    "AIFLY_CONNECTIONS_JSON",
+    "AIFLY_CONNECTIONS_TOKEN",
+    "AIFLY_SSH_PRIVATE_KEY",
+    "AIFLY_SSH_KNOWN_HOSTS"
+  ],
+  "secret_values_read": false,
+  "application_changes": false,
+  "deployment": {
+    "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+    "deployment_id": "dpl_2mSLEZJXdrGjsX5rcNcsoFuGHbqb",
+    "state": "READY",
+    "target": "production",
+    "framework": "vite",
+    "type": "LAMBDAS",
+    "metadata_regions": [
+      "iad1"
+    ],
+    "tracked_agent_function_regions": [
+      "fra1"
+    ],
+    "per_function_execution_region_measured": false,
+    "function_list_exposed_by_native_get_deployment": false
+  },
+  "existing_routes": {
+    "api/agent-chat.ts": "POST deterministic public orientation only;no model/session/persistence/write",
+    "api/agent-runtime-status.ts": "POST {} preview-only optional OIDC credits metadata;no host identity or business auth",
+    "apps/agent-gateway/server.py": "local loopback HTTP visitor/cart/draft adapter,not production identity",
+    "tools/app_backend.py": "trusted local Session -> dispatch,not HTTP identity provider",
+    "connections_gateway": "none found;cannot provide an existing invocation contract for AIFLY variables"
+  },
+  "native_reads": {
+    "connector": "hostinger_vps_nexify_agentur",
+    "get_systemmaster_status": {
+      "status": "ok",
+      "systemmaster_version": "0.1.8",
+      "host": "srv1243952",
+      "now_iso": "2026-10-27T20:08:33.173Z"
+    },
+    "inventory_secondary": {
+      "id": "nexify-2",
+      "resolved_host": "179.198.195.91",
+      "observed_hostname": "srv1941843",
+      "authenticated": true,
+      "writable_verified": false,
+      "checked_at": "2026-10-27T20:07:29.491Z"
+    },
+    "run_health_checks": {
+      "failed_unit": "nx-kanon-pruefung.service",
+      "unhealthy_container_count": 0,
+      "load_avg": "3.84 4.80 5.31",
+      "mem_used_pct": 63,
+      "limitation": "health payload lacks atomic host/time binding;separate identity call does not fix that"
+    }
+  },
+  "protected_routes": [
+    {
+      "id": "customer-portal",
+      "path": "/portal/kunde",
+      "declared_roles": [
+        "customer"
+      ],
+      "site_context": "nexify",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "api-console",
+      "path": "/portal/api",
+      "declared_roles": [
+        "customer",
+        "team",
+        "admin"
+      ],
+      "site_context": "nexify",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "affiliate-portal",
+      "path": "/portal/affiliate",
+      "declared_roles": [
+        "affiliate"
+      ],
+      "site_context": "nexify",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "tk-account",
+      "path": "/teileklar/konto",
+      "declared_roles": [
+        "customer"
+      ],
+      "site_context": "teileklar",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "tk-partner-portal",
+      "path": "/teileklar/partnerportal",
+      "declared_roles": [
+        "partner"
+      ],
+      "site_context": "teileklar",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "tk-neighbourhood",
+      "path": "/teileklar/nachbarschaft",
+      "declared_roles": [
+        "customer"
+      ],
+      "site_context": "teileklar",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "internal-workspace",
+      "path": "/intern/workspace",
+      "declared_roles": [
+        "team",
+        "admin"
+      ],
+      "site_context": "internal",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "internal-inbox",
+      "path": "/intern/posteingang",
+      "declared_roles": [
+        "team",
+        "admin"
+      ],
+      "site_context": "internal",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "internal-control",
+      "path": "/intern/leitstand",
+      "declared_roles": [
+        "team",
+        "admin"
+      ],
+      "site_context": "internal",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    },
+    {
+      "id": "internal-admin",
+      "path": "/intern/verwaltung",
+      "declared_roles": [
+        "admin"
+      ],
+      "site_context": "internal",
+      "tenant_and_membership_required": true,
+      "portable_vite": "excluded_from_public_projection;unavailable UI on unknown route;not server authorization",
+      "next_reference": "503ifauthunready;401anonymous;403membership_required even verified subject",
+      "backend": "no production identity/membership adapter or protected business handler bound in canonical Vite release",
+      "live_check": "HEAD connection refused from this executor;no body read;not runtime acceptance"
+    }
+  ],
+  "unblocking_inputs": [
+    {
+      "id": "CONNECTIONS-01",
+      "owner": "existing Connections runtime/implementation owner plus web owner",
+      "missing": "actual existing handler/repository/commit and typed adapter contract consuming these four project variables,or confirm none exists",
+      "next": "supply sanitized operation/target metadata only;no credential export",
+      "done_when": "real server-side typed read call bound to exact existing target/project and fresh response"
+    },
+    {
+      "id": "IDENTITY-01",
+      "owner": "Identity/membership operator",
+      "missing": "issuer/JWKS/audience plus server-owned actor-to-tenant/project/role and revocation source",
+      "next": "bind existing verified identity adapter to business handler without granting browser claims",
+      "done_when": "real allowed-own/foreign-role-tenant/expired-revoked negatives at exact runtime"
+    },
+    {
+      "id": "ROUTING-01",
+      "owner": "release/runtime owner",
+      "missing": "production-safe business API origin/route mapping and deployment/service ownership",
+      "next": "confirm existing runtime route,secure cookie/CSRF and per-operation scope;do not expose loopback service directly",
+      "done_when": "browser -> authorized backend -> own data -> readback with safe rollback"
+    }
+  ],
+  "source_sha256": {
+    "vercel.json": "ede1b5b0680667108e7da201948d0714ccfd765ef088fa14a8785b8df6b623d4",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
+    "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
+    "config/clerk-production.json": "828ba5cc15da5535b850757e72500d1a53a28e320d66f544afe688b79341685e",
+    "apps/site/scripts/generate-public-data.mjs": "88c7a4645e2b7e09b11ace4b313b8e133b5ec85045ffb77f643ac6cdeae3ffc7",
+    "apps/site/src/main.tsx": "b95aec09ed6c7d3fede2e2b0778721b253d98dd904fc7a8cbb9b40197dd5fd0c",
+    "apps/site/vite.config.ts": "69cc859d041285a09a9afbbe6e10172a6681783abfa6be921a0bc4709342d31a",
+    "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
+    "apps/web/auth/policy.ts": "ad7db99b0dc03d54bb94f9a667d93f2c2a9272504b7cf40e713753b7c5a1e1d7",
+    "apps/web/proxy.ts": "b169af651da613bca0afc0fd0639cd288d700ae7dd44add898d012ebffb788bf",
+    "tools/app_backend.py": "90d3e37fdd3508d0149de39b8bcef8c9b990492b11f599122ce1891138747a5a",
+    "apps/agent-gateway/server.py": "a676defdf7dcdee6d299afa30b3ab19a59d317ce154583c4ba058d9177a33166",
+    "api/agent-chat.ts": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
+    "api/agent-runtime-status.ts": "2a17ecb99889eee8d669938e49859282aaba6035d19cd71dd54dad154026639b",
+    "packages/agent-runtime/preview-access.ts": "2795c56f6ef87fe8455c8ce7afab3963501ea51e57ecaa2f52e87828f1c6a5b8"
+  },
+  "whole_system_accepted": false
+}

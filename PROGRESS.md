@@ -917,3 +917,29 @@ Vorher26Tests mit3Rotfehlern,danach26grün;separater Sol wiederholte26ohneFindin
 Kein Modellaufruf,Versand,Preisänderung oder neuer produktiver Auth-/APIanschluss.
 Nachtfenster/Inputs/Owner im bestehenden Register und
 docs/contracts/night-release-checkpoint.md;Frist05:00UTC ist Ziel,keineGarantie.
+
+
+### Begrenzte Main-CI-/Gatewaygegenprüfung
+
+Main38 / CI40573693739 meldete unsafe_database_sidecar im Mehrprozessclaim;
+Queuecode identisch zu grünem4e. 50 lokale Wiederholungen bestanden bereits
+vorher; physischer CI-Race nicht reproduziert. Eine deterministisch geprüfte
+plausible Null-Link-Sidecarbedingung erhält genau ein neues lstat. Nur Abwesenheit
+oder regulär/ein Link wird akzeptiert; MainDB, Symlink, Hardlink und FIFO bleiben
+abgewiesen. 25 Queuefälle und50 weitere Mehrprozessläufe grün; Sol wiederholte25
+und Claim ohne Finding. Keine SQLite-/Transaktions-Retrys, Locks, Timeouts oder
+Sicherheitsrechte geändert. Originalursache bleibt unbewiesen; CI-Logredirect403
+wurde nicht umgangen.
+
+Gatewaybefund: Main38 hat keine Consumer der vier AIFLY-Variablen und keinen
+ConnectionsHandler. Bestehender MCP primary srv1243952/0.1.8 frisch lesbar;
+secondary srv1941843 Identität lesend bestätigt, keine Schreibprüfung. Die
+Vercel-App ist dadurch nicht verbunden. Zehn private Routen sind konfiguriert
+und aus public Vite ausgeschlossen; Next erhält die Membershipsperre.
+Anonyme HEADs scheiterten hier mit ConnectionRefused, nicht als Websiteausfall
+gewertet. Keine Secret-/Kundeninhalte gelesen, keine Serverreparatur.
+Belege: evidence/gateway-binding-2026-10-27. Nachtplan20:12 mit beiden SHA
+verifiziert, N0-N5 als Ergänzung gelesen, Master1.3 unverändert.
+Kleinster sicherer nächster Verbindungsschritt: vorhandene native typisierte
+Identity-/Healthreads nutzen; für Appintegration erst realen Handler/Commit,
+Schema und Issuer/Actor→Tenant/Rolle/Widerrufsquelle binden. Keine SSH-Rootbrücke.

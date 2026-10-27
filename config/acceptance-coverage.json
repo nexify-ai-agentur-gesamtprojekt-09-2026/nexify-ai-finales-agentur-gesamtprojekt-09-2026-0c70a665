@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "268ea7277c337d2395ec144728bf6cad7ec694bea65843565d45cf9d418421c7",
+    "PROGRESS.md": "8dfb77da075715aa0d5226da73893ee6da1dc76df65b4be641df15007f0bfe46",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "f327c21b74ab1b628917ec157828ccf455b4b2cf7b8ddcd543dcb030cefc6044",
+    "docs/contracts/requirements-reconciliation.md": "a9901f871651e90580ca41273c04c83f23c9dc056cdbd8d1c20f531a99af6efd",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1341,7 +1341,7 @@
     "tools/check_text_resize_evidence.py": "b47f96459d188e0520a6ffb6e4bf02cc5db34085c592b951146062c3651dabeb",
     "tools/context_executor.py": "b4fe37c32759e36efec82ffea2b35f4a3a36696545bf86114fa5bc78940e9a55",
     "tools/local_control.py": "9d5c71c42600592f7090a66e2093589ede7d71f2f3a2653194a61f5879291b1d",
-    "tools/remediation_queue.py": "26ed67b946ccf4e50863f80e99bb636010d3c1c29712f437194ae34f467c586b",
+    "tools/remediation_queue.py": "d5f6516af3607dad788c7682ea25c83e84707d51e1a933643bf3a1cb521cd499",
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
     "tools/verify_factory_contract.py": "f4fd9d39f15ad805d2978f0687f766ab9913000b021d4e9ff61630317bb17810",
     "tools/verify_requirements_reconciliation.py": "8415c107d4fc17157b1f0469d35ee54761e5e53166c446779c30fe836a234fa9",
@@ -1416,7 +1416,11 @@
     "evidence/page-videos-2026-10-27/manifest-reconciliation.json": "c87c8883f7e11e173e8475d7769b356bd12e8fdedd2dd2d5b0967849da000ea7",
     "docs/contracts/night-release-checkpoint.md": "e431ad4da94bdf953f5c244e2a613a92b22a9b065053a7eecd54b4b30925ab33",
     "tests/test_native_chat.py": "10626a4962387489800342bf00300b054bcf0d6141488086c4fd60587a31ad33",
-    "evidence/night-release-2026-10-27/local-flow-fixes.json": "81f1bf918176bd15f39eece7efcaefd30932a9f3bf5644d69b8d65ae5c8c636f"
+    "evidence/night-release-2026-10-27/local-flow-fixes.json": "81f1bf918176bd15f39eece7efcaefd30932a9f3bf5644d69b8d65ae5c8c636f",
+    "evidence/gateway-binding-2026-10-27/route-heads.json": "aed560214cc71316b2f880e435756d0f1ee667399920bf614c73768303d16255",
+    "evidence/sidecar-race-2026-10-27/report.json": "80e56c6cf65634ce4be7ed3af8517b7be9ce08e75da71a17d3998031e817ede8",
+    "evidence/gateway-binding-2026-10-27/findings.json": "681b89e7e9dc0a2e8f0cb9eeaecb0a61f2b756d567ba6f2dd1b7e0a8c8f8aa40",
+    "tests/test_remediation_queue.py": "935bd91f442af2a4e801e825d56ddd745f4a33bd1739d0ec934f89ecd0f1ad11"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -1879,6 +1883,15 @@
         "acquisition": "parent_verified_excerpt",
         "original_seen_here": false,
         "scope": "Direct alternative to unavailable REA permitted for the scoped verification;no native REA cloning or fabricated APPROVE."
+      },
+      {
+        "id": "SRC-NIGHT-PLAN-2012",
+        "locator": "libfile_fa46a979d9988191a78200da82c69859 and libfile_e0451c7585a08191ab6a6e00b54bc505",
+        "source_date": "2026-10-27T20:12:00Z",
+        "role": "additive_plan_not_acceptance",
+        "acquisition": "library_bytes_materialized_hash_verified_technical_phases_read",
+        "original_seen_here": true,
+        "scope": "MD961ebf1556cb6e139d27a1480b174bb04c8d9a87c7691c1c2729f2bdb3fa0abc;JSON9986035fc742203cd50667e5018d594ebe45682ac27ae96b6e5522c19fdb780a. N0-N5 supplement keepsMaster1.3 unchanged;15patterns not installed;no new platform/provider/server action."
       }
     ],
     "requirements": [
@@ -2027,9 +2040,11 @@
           "evidence/one-app-2026-10-27/closed-loop.txt",
           "tools/local_control.py",
           "tools/remediation_queue.py",
-          "config/local-control.json"
+          "config/local-control.json",
+          "tests/test_remediation_queue.py",
+          "evidence/sidecar-race-2026-10-27/report.json"
         ],
-        "test_evidence": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups geprüft.",
+        "test_evidence": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups geprüft. MainCI40573693739 sidecar rejection reported;queue source identical to green4e. Bounded regular/nlink0 recheck and strict negative cases25passed;50multiprocess passes before and after. Original CIrootcause remains unproven;no globalrace-free claim.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
         "gap": "Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.",
@@ -2621,9 +2636,10 @@
           "apps/agent-gateway/server.py",
           "tests/test_native_chat.py",
           "evidence/night-release-2026-10-27/local-flow-fixes.json",
-          "docs/contracts/night-release-checkpoint.md"
+          "docs/contracts/night-release-checkpoint.md",
+          "evidence/gateway-binding-2026-10-27/findings.json"
         ],
-        "test_evidence": "Current public Workspace is a public shell, not proven original authenticated AionUi workplace. Night delta:PORTAL-LOCAL-01 fixed newest20chronological session restore after21quotes;foreignPDF/send404 retained. PUBLIC-LOCAL-02 fixes deterministic DE/NL/FR marketing draft.26HTTP/session tests passed after3red failures;separate Sol repeated26without findings.13shop browser/API/SQLite checks repeated. No actual production identity/workplace abnahme.",
+        "test_evidence": "Current public Workspace is a public shell, not proven original authenticated AionUi workplace. Night delta:PORTAL-LOCAL-01 fixed newest20chronological session restore after21quotes;foreignPDF/send404 retained. PUBLIC-LOCAL-02 fixes deterministic DE/NL/FR marketing draft.26HTTP/session tests passed after3red failures;separate Sol repeated26without findings.13shop browser/API/SQLite checks repeated. No actual production identity/workplace abnahme. Read-only canonicalMain38 investigation:zero tracked AIFLY consumer routes;10protected routes excluded from public Vite,Next reference membership blocked;native MCP primaryidentity succeeded andsecondaryidentity probe authenticated without writeverification;13HEAD attempts ConnectionRefused,not outage/auth proof.",
         "actual_delivery": "planned_targets_backend_not_connected",
         "full_requirement_accepted": false,
         "gap": "Original source/license/import contract, actual eight-agent execution/library flow and packaged local application not demonstrated. Historical internal routes /workspace,/posteingang,/myadmin are not implemented by the public shell; original module source and actual protected flows missing. Actual current internal targets use /intern/workspace, /intern/posteingang, /intern/leitstand, /intern/verwaltung; historical /workspace,/posteingang,/myadmin mapping unresolved. Config marks targets planned/backend not_connected; this is a local implementation gap plus external identity acceptance, not an implemented workplace. Production server-side identity issuer/subject-tenant-role/revocation and exact business endpoint binding remain unverified;Vite public projection and local gateway are not production portal implementation.",
@@ -3022,7 +3038,14 @@
           "action": "conditional final release/readback or precise open-blocker report;no automatic main merge/domain switch"
         }
       ],
-      "reachability": "Local defects/evidence and prepared integration are executable now. All real films and protected production flows by05:00UTC are not presently assured because inputs/gates remain unresolved."
+      "reachability": "Local defects/evidence and prepared integration are executable now. All real films and protected production flows by05:00UTC are not presently assured because inputs/gates remain unresolved.",
+      "additive_plan": {
+        "source_id": "SRC-NIGHT-PLAN-2012",
+        "as_of": "2026-10-27T20:12:00Z",
+        "phases": "N0-N5 planned,not globally executed or accepted",
+        "n0_delta": "exact4e774b58/tree/CI40573998034 known;MainCI sidecar rootcause stillunproven,guardcondition fixed and tested;Gatewaymissingconsumer confirmed;no secretsread",
+        "source_paths_in_parent_not_accessed": true
+      }
     }
   }
 }

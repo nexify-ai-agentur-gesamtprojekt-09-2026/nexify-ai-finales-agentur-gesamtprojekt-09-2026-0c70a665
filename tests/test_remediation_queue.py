@@ -6,6 +6,8 @@ import importlib.util
 import io
 import json
 import os
+import stat
+from types import SimpleNamespace
 from pathlib import Path
 import tempfile
 import unittest
@@ -36,6 +38,75 @@ class RemediationTests(unittest.TestCase):
         values = dict(source_paths=['docs/source.md'], owner='D07', next_action='Repair the artifact and verify its exact scope.', now=100)
         values.update(kw)
         return self.q.register(self.scope, self.check, **values)['id']
+
+    def test_unlinked_regular_sidecar_is_rechecked_before_sqlite_open(self):
+        wal = Path(str(self.q.path) + '-wal')
+        original = Path.lstat
+        observed = []
+        def disappear(path, *args, **kwargs):
+            if path == wal and not observed:
+                observed.append('unlinked')
+                return SimpleNamespace(st_mode=stat.S_IFREG | 0o600, st_nlink=0)
+            return original(path, *args, **kwargs)
+        with patch.object(Path, 'lstat', disappear):
+            with self.q.connection() as db:
+                self.assertEqual(db.execute('SELECT 1').fetchone()[0], 1)
+        self.assertEqual(observed, ['unlinked'])
+
+    def test_recheck_accepts_only_fresh_single_link_regular_sidecar(self):
+        for mode, links, accepted in [(stat.S_IFREG, 1, True), (stat.S_IFREG, 0, False),
+                                      (stat.S_IFREG, 2, False), (stat.S_IFLNK, 1, False),
+                                      (stat.S_IFIFO, 1, False)]:
+            with self.subTest(mode=mode, links=links):
+                wal = Path(str(self.q.path) + '-wal')
+                original = Path.lstat
+                count = []
+                def replace(path, *args, **kwargs):
+                    if path == wal:
+                        count.append(1)
+                        return SimpleNamespace(st_mode=(stat.S_IFREG if len(count)==1 else mode) | 0o600,
+                                               st_nlink=0 if len(count)==1 else links)
+                    return original(path, *args, **kwargs)
+                with patch.object(Path, 'lstat', replace):
+                    if accepted:
+                        with self.q.connection() as db:
+                            self.assertEqual(db.execute('SELECT 1').fetchone()[0], 1)
+                    else:
+                        with patch.object(m.sqlite3, 'connect') as connect:
+                            with self.assertRaisesRegex(m.QueueError, 'unsafe_database_sidecar'):
+                                with self.q.connection():
+                                    self.fail('unsafe sidecar reached SQLite')
+                            connect.assert_not_called()
+                self.assertEqual(len(count), 2)
+
+    def test_main_database_zero_links_and_real_unsafe_sidecars_stay_rejected(self):
+        original = Path.lstat
+        def unlinked_database(path, *args, **kwargs):
+            if path == self.q.path:
+                return SimpleNamespace(st_mode=stat.S_IFREG | 0o600, st_nlink=0)
+            return original(path, *args, **kwargs)
+        with patch.object(Path, 'lstat', unlinked_database), patch.object(m.sqlite3, 'connect') as connect:
+            with self.assertRaisesRegex(m.QueueError, 'unsafe_database_sidecar'):
+                with self.q.connection():
+                    self.fail('unlinked main database reached SQLite')
+            connect.assert_not_called()
+        outside = self.root / 'docs/outside-canary'
+        outside.write_bytes(b'UNCHANGED')
+        for suffix in ['-wal', '-shm', '-journal']:
+            target = Path(str(self.q.path) + suffix)
+            for kind in ['symlink', 'hardlink', 'fifo']:
+                with self.subTest(suffix=suffix, kind=kind):
+                    if kind == 'symlink':target.symlink_to(outside)
+                    elif kind == 'hardlink':os.link(outside, target)
+                    else:os.mkfifo(target)
+                    try:
+                        with patch.object(m.sqlite3, 'connect') as connect:
+                            with self.assertRaisesRegex(m.QueueError, 'unsafe_database_sidecar'):
+                                with self.q.connection():
+                                    self.fail('unsafe sidecar reached SQLite')
+                            connect.assert_not_called()
+                        self.assertEqual(outside.read_bytes(), b'UNCHANGED')
+                    finally:target.unlink()
 
     def test_persistence_dedup_owner_plan_deadline(self):
         item = self.register(due_at=200)
