@@ -96,3 +96,28 @@ Keine destruktive Rückmigration. Das Paket liefert Patch gegen a19cd503, sodass
 PR35-Korrekturen, Controller, PR36-Folgepatch und Integrationsdelta gemeinsam
 reproduzierbar sind. Der historische gemeinsame Vorfahr und beide Mergeparents
 sind separat dokumentiert; dies behauptet keinen Merge in main.
+
+## Nachprüfung und aktueller Split der Aliasstände
+
+Unabhängige Gegenprüfung an899c326 reproduzierte einen gecachten Rollenvertrag:
+Ein bereits erzeugter lokaler Adapter übersah einen späteren Rechteentzug. Jede
+Dispatchoperation vergleicht jetzt zuerst den sicher gelesenen Vertragshash;
+Drift blockiert vor dem Claim und verlangt expliziten Neustart mit aktuellem
+Vertrag. Regression prüft bestehenden und neu erzeugten Adapter bei Rollenentzug,
+Versuchszahl bleibt0. Das ersetzt keine verteilte Auth-/Widerrufsinfrastruktur.
+
+Neue ausschließlich vom Parent übermittelte Vercel-Leseevidenz (nicht hier erneut
+abgefragt): nexifyai.de ist branchgebundene verifizierte Vorschau, READY
+`dpl_3KcSgJUsdNbsJjiWvR74Xf95SdFA`, Commit66866298 auf
+factory/agency-separated-2026-10-26, target=null, Vite. Die normale Production-
+Alias desselben Projekts zeigt auf READY `dpl_XXZBR56U9Nwx9Nj6MDR5GER5v4ZG`,
+main07833fb3. Domainverifikation beweist weder gleiche Version noch Abnahme.
+Auslesezeit wurde in der Mitteilung nicht exakt angegeben und bleibt unbekannt.
+Der lokale neue Integrationskandidat ist keiner dieser beiden Deployments.
+
+Cutover bleibt ausgesetzt: zuerst aktuelle App-Root-/Ausgabe-/Domain-/Ownerbindung
+lesen, den gewünschten kanonischen Alias ausdrücklich festlegen, exakten gemeinsamen
+Release mit realen Providergrenzen abnehmen, Backup/Restore und Rückrouting belegen,
+aktive Jobs/Leaseübergabe klären. Erst eine gesondert autorisierte Umstellung darf
+Aliases ändern; anschließend jeden Alias separat mit exaktem Release rücklesen.
+Keine Umschaltung, Projektlöschung oder Einstellung wurde hier vorgenommen.

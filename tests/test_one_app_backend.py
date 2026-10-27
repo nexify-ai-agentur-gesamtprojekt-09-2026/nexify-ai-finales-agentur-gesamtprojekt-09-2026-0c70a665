@@ -49,6 +49,16 @@ class CombinedBackendTests(unittest.TestCase):
         with self.assertRaisesRegex(rq.QueueError,'role_or_operation'):self.backend.dispatch(self.reviewer,'run-once',{'request_id':request})
         with self.assertRaisesRegex(rq.QueueError,'schema'):self.backend.dispatch(self.operator,'status',{'request_id':request,'tenant':'other'})
         with self.assertRaisesRegex(rq.QueueError,'role_or_operation'):self.backend.dispatch(self.operator,'execute_command',{'command':'unused'})
+    def test_policy_revocation_blocks_existing_adapter_before_any_claim(self):
+        request=self.f.submit()
+        path=self.f.root/'config/one-web-app.json';policy=json.loads(path.read_text())
+        policy['session_contract']['roles']['operator']=[];path.write_text(json.dumps(policy))
+        with self.assertRaisesRegex(rq.QueueError,'app_contract_changed'):
+            self.backend.dispatch(self.operator,'run-once',{'request_id':request})
+        with self.assertRaisesRegex(rq.QueueError,'role_or_operation_forbidden'):
+            LocalAppBackend(self.f.reopen()).dispatch(self.operator,'run-once',{'request_id':request})
+        self.assertEqual(self.f.c.status(request)['jobs'][0]['attempts'],0)
+
     def test_crashed_claim_restarts_without_old_worker_readback(self):
         request=self.f.submit();old=self.f.c.claim(request,self.operator.actor)
         self.f.clock+=31

@@ -7,7 +7,9 @@ und lokaler Backendrollenvertrag integriert. Neue kombinierte Regressionen
 belegen Shell/Navigation/Locale, synthetische Auth, Rollen-/Tenantnegatives,
 Context-Parent-Join, Replay und Crash/Restart. Alle Remotezustände unverändert.
 
-Next Steps: unabhängige Gegenprüfung am exakten Integrationscommit und Paket;
+Unabhängige Gegenprüfung fand gecachten Rollenvertrag; Hashprüfung pro Dispatch
+und Widerrufsregression korrigieren dies. Abschließende Nachprüfung am neuen Hash.
+Next Steps: bereinigtes Paket und versionsgebundene Gegenprüfung sichern;
 echte Provider-/Tenant-/Domain-/Restoreabnahme bleibt getrennt offen. Kein
 Produktivabschluss, kein Daemon und keine öffentliche Controllerroute aktiviert.
 Details: docs/contracts/one-web-app-integration.md und evidence/one-app-2026-10-27.

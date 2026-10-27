@@ -1,8 +1,9 @@
 test_context_children_readback_and_parent_join_survive_reopen_and_replay (test_one_app_backend.CombinedBackendTests.test_context_children_readback_and_parent_join_survive_reopen_and_replay) ... ok
 test_crashed_claim_restarts_without_old_worker_readback (test_one_app_backend.CombinedBackendTests.test_crashed_claim_restarts_without_old_worker_readback) ... ok
+test_policy_revocation_blocks_existing_adapter_before_any_claim (test_one_app_backend.CombinedBackendTests.test_policy_revocation_blocks_existing_adapter_before_any_claim) ... ok
 test_session_role_tenant_expiry_and_payload_claims_fail_closed (test_one_app_backend.CombinedBackendTests.test_session_role_tenant_expiry_and_payload_claims_fail_closed) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.097s
+Ran 4 tests in 0.066s
 
 OK

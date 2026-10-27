@@ -23,11 +23,14 @@ class Session:
 class LocalAppBackend:
     def __init__(self, control: LocalControl):
         self.control = control
-        self.contract = rq.json_value(rq.read_source(control.root, 'config/one-web-app.json'))
+        raw = rq.read_source(control.root, 'config/one-web-app.json')
+        self.contract = rq.json_value(raw)
+        self.contract_hash = rq.digest(raw)
         require(self.contract['schema_version'] == 1, 'unsupported_app_contract')
 
     def dispatch(self, session: Session, action: str, payload: dict):
         """One local operation, fresh session check every call; never accepts claims in payload."""
+        require(rq.digest(rq.read_source(self.control.root, 'config/one-web-app.json')) == self.contract_hash, 'app_contract_changed_restart_required')
         require(type(session) is Session, 'trusted_local_session_required')
         rq.identifier(session.actor)
         require((session.tenant, session.project) == (self.control.tenant, self.control.project), 'session_tenant_or_project_mismatch')
