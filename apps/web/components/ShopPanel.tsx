@@ -17,12 +17,23 @@ const readonlyWords={
  nl:{title:"Catalogusfragment · alleen lezen",sourceTime:"Opgehaald",partial:"Zoeken controleert alleen dit geladen fragment",sourceLanguage:"Bronteksten: Duits",sourcePrice:"Ongeverifieerde prijs uit de bron",unitsPending:"Netto/bruto, belasting en verzending zijn niet bevestigd",stock:"Gemelde voorraad, actualiteit niet bevestigd",sku:"SKU",ean:"EAN",image:"Afbeeldingskoppeling en goedkeuring staan open",notice:"Herkomst, geschiktheid en verversingsritme zijn niet goedgekeurd. Dit fragment ondersteunt geen winkelwagen-, bestel- of betaalactie."},
  fr:{title:"Extrait du catalogue · lecture seule",sourceTime:"Récupéré",partial:"La recherche ne porte que sur cet extrait chargé",sourceLanguage:"Textes source : allemand",sourcePrice:"Prix source non vérifié",unitsPending:"HT/TTC, taxes et livraison non confirmés",stock:"Stock déclaré, actualité non confirmée",sku:"SKU",ean:"EAN",image:"Association et approbation de l’image en attente",notice:"La provenance, la compatibilité et le rythme de mise à jour ne sont pas approuvés. Cet extrait ne permet aucune action de panier, de commande ou de paiement."}
 };
+const viewTitles:Record<string,Record<string,string>>={
+ de:{'tk-search':'Teile suchen','tk-categories':'Kategorien','tk-category':'Artikel der Kategorie','tk-product':'Produktdaten','tk-cart':'Dein Warenkorb','tk-checkout':'Checkout vorbereiten'},
+ nl:{'tk-search':'Onderdelen zoeken','tk-categories':'Categorieën','tk-category':'Artikelen in de categorie','tk-product':'Productgegevens','tk-cart':'Je winkelwagen','tk-checkout':'Checkout voorbereiden'},
+ fr:{'tk-search':'Rechercher des pièces','tk-categories':'Catégories','tk-category':'Articles de la catégorie','tk-product':'Données produit','tk-cart':'Votre panier','tk-checkout':'Préparer le paiement'}
+};
+const catalogState={
+ de:{loading:'Katalogdaten werden geladen …',unconfigured:'Für diesen Bereich ist noch kein freigegebener Katalog verbunden. Es werden keine Beispielartikel angeboten.',unavailable:'Die Katalogverbindung ist momentan nicht verfügbar.',search:'Suche und Filter werden mit dem freigegebenen Katalog verfügbar. Aktuell kann keine Artikelsuche ausgeführt werden.'},
+ nl:{loading:'Catalogusgegevens worden geladen …',unconfigured:'Voor dit onderdeel is nog geen goedgekeurde catalogus verbonden. Er worden geen voorbeeldartikelen aangeboden.',unavailable:'De catalogusverbinding is momenteel niet beschikbaar.',search:'Zoeken en filters worden beschikbaar met de goedgekeurde catalogus. Artikelen zoeken is nu niet mogelijk.'},
+ fr:{loading:'Chargement des données du catalogue…',unconfigured:'Aucun catalogue approuvé n’est encore connecté à cette rubrique. Aucun article de démonstration n’est proposé.',unavailable:'La connexion au catalogue est momentanément indisponible.',search:'La recherche et les filtres seront disponibles avec le catalogue approuvé. La recherche d’articles est actuellement indisponible.'}
+};
 export default function ShopPanel({pageId}:{pageId:string}){
  const{locale,session}=useUI(),t=words[locale],rw=readonlyWords[locale];
  const[catalog,setCatalog]=useState<Catalog|null>(null),[cart,setCart]=useState<Cart|null>(null),[draft,setDraft]=useState<Draft|null>(null);
  const[query,setQuery]=useState(""),[category,setCategory]=useState(""),[loaded,setLoaded]=useState(false),[unconfigured,setUnconfigured]=useState(false),[error,setError]=useState(false),[busy,setBusy]=useState(false);
  const active=useRef(false),keys=useRef(new Map<string,string>());
  const readOnly=catalog?.mode==='read_only';
+ const isCatalogView=['tk-search','tk-categories','tk-category','tk-product'].includes(pageId),stateCopy=catalogState[locale];
  const standalone=typeof window!=="undefined"&&(window.location.protocol==='file:'||(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true);
  useEffect(()=>{
   if(standalone){setLoaded(true);return;}
@@ -67,8 +78,9 @@ export default function ShopPanel({pageId}:{pageId:string}){
   }catch{setError(true);}finally{active.current=false;setBusy(false);}
  }
  const money=(value:number,currency:string)=>{const format=new Intl.NumberFormat(locale,{style:'currency',currency});const digits=format.resolvedOptions().maximumFractionDigits;if(digits===undefined)return t.unknown;return format.format(value/10**digits);};
- return <section className="shop-panel" aria-labelledby="shop-panel-title"><h2 id="shop-panel-title">{t.title}</h2>
-  {!loaded?<p role="status">{t.loading}</p>:!catalog?<p role="status">{unconfigured?t.unavailable:t.unknown}</p>:<>
+ return <section className="shop-panel" aria-labelledby="shop-panel-title"><h2 id="shop-panel-title">{viewTitles[locale][pageId]||t.title}</h2>
+  {!catalog&&pageId==='tk-search'&&<div className="shop-controls"><label>{t.search}<input type="search" disabled aria-describedby="shop-catalog-state shop-search-unavailable"/></label><p id="shop-search-unavailable">{stateCopy.search}</p></div>}
+  {!loaded?<p id="shop-catalog-state" role="status">{isCatalogView?stateCopy.loading:t.loading}</p>:!catalog?<p id="shop-catalog-state" role="status">{isCatalogView?(unconfigured?stateCopy.unconfigured:stateCopy.unavailable):(unconfigured?t.unavailable:t.unknown)}</p>:<>
    <p className="status-note">{t.source}: {catalog.source_reference}</p>
    {readOnly&&<div className="status-note" data-catalog-mode="read_only"><p><strong>{rw.title}</strong></p><p>{rw.notice}</p><p>{rw.sourceLanguage}</p><p>{rw.sourceTime}: <time dateTime={catalog.observed_at}>{catalog.observed_at}</time></p><p>{rw.partial}: {catalog.pagination?.snapshot_rows} / {catalog.pagination?.reported_total}</p><p>{rw.unitsPending}</p></div>}
    {!readOnly&&!session&&<p role="status">{t.unknown}</p>}

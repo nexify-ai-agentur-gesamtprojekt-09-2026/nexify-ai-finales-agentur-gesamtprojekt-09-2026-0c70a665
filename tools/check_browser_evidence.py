@@ -33,6 +33,8 @@ SDK_SOURCE_PATHS = (
     "tools/agent-preview.mjs",
 )
 AUXILIARY_SOURCE_PATHS = (
+    "apps/web/components/DeferredChatBoundary.tsx",
+    "apps/web/components/PublicRequestFallback.tsx",
     "apps/web/components/OracleCompanion.tsx",
     "apps/web/components/OracleCompanion.css",
     "apps/web/lib/i18n.ts",
@@ -178,6 +180,8 @@ def check_evidence(root):
 SHOP_EVIDENCE_PATH = "evidence/shop-http-2026-10-27/browser-shop.json"
 SHOP_SOURCE_PATHS = (
     "apps/agent-gateway/cart.py", "apps/agent-gateway/server.py",
+    "apps/web/components/DeferredChatBoundary.tsx",
+    "apps/web/components/PublicRequestFallback.tsx",
     "apps/web/components/OracleCompanion.tsx",
     "apps/web/components/OracleCompanion.css",
     "apps/web/lib/i18n.ts",
@@ -233,6 +237,8 @@ def check_shop_evidence(root):
 CATALOG_EVIDENCE_PATH = "evidence/catalog-image-batch-2026-10-27/browser-catalog.json"
 CATALOG_SOURCE_PATHS = (
     "apps/agent-gateway/catalog.py", "apps/agent-gateway/server.py",
+    "apps/web/components/DeferredChatBoundary.tsx",
+    "apps/web/components/PublicRequestFallback.tsx",
     "apps/web/components/OracleCompanion.tsx",
     "apps/web/components/OracleCompanion.css",
     "apps/web/lib/i18n.ts",
@@ -273,6 +279,35 @@ def check_catalog_evidence(root):
     return {'scope': 'stored_local_read_only_catalog_browser_evidence_only', 'checks': len(CATALOG_CHECKS)}
 
 
+PUBLIC_FALLBACK_PATH = 'evidence/frontend-reliability-2026-10-27/public-fallbacks.json'
+PUBLIC_FALLBACK_SOURCES = (
+    'apps/web/components/Workspace.tsx', 'apps/web/components/DeferredChatBoundary.tsx',
+    'apps/web/components/PublicRequestFallback.tsx', 'apps/web/components/ShopPanel.tsx',
+    'apps/site/tests/browser-public-fallbacks.mjs',
+)
+
+
+def check_public_fallbacks(root):
+    report = json.loads(_read(root, PUBLIC_FALLBACK_PATH))
+    sources = report.get('source_sha256', {})
+    if set(sources) != set(PUBLIC_FALLBACK_SOURCES):
+        raise EvidenceError('fallback_exact_sources_required')
+    for relative in PUBLIC_FALLBACK_SOURCES:
+        if hashlib.sha256(_read(root, relative)).hexdigest() != sources[relative]:
+            raise EvidenceError('stale_fallback_source: ' + relative)
+    expected = {(w, l, f) for w in (320, 390, 1280) for l in ('de', 'nl')
+                for f in ('unavailable', 'capabilities', 'chunk')}
+    rows = report.get('checks', [])
+    if (len(rows) != len(expected) or {(r.get('width'), r.get('locale'), r.get('failure')) for r in rows} != expected
+            or any(r.get('passed') is not True for r in rows) or report.get('passed') is not True):
+        raise EvidenceError('fallback_complete_matrix_required')
+    if any(r.get('session_status') != {'unavailable': 204, 'capabilities': 200, 'chunk': 404}[r['failure']] for r in rows):
+        raise EvidenceError('fallback_session_contract_required')
+    if report.get('external') != [] or report.get('uncaught') != [] or report.get('mutations') != 0:
+        raise EvidenceError('fallback_no_external_uncaught_or_mutations_required')
+    return {'scope': 'stored_local_synthetic_public_failure_evidence_only', 'checks': len(expected)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -281,6 +316,7 @@ def main():
         result = check_evidence(args.root)
         result["shop"] = check_shop_evidence(args.root)
         result["catalog"] = check_catalog_evidence(args.root)
+        result["public_fallbacks"] = check_public_fallbacks(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

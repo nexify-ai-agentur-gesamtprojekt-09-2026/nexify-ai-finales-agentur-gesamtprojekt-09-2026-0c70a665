@@ -51,7 +51,7 @@ class BrowserEvidenceTests(unittest.TestCase):
             checker.check_evidence(self.root)
 
     def test_stylesheet_drift_cannot_reuse_an_old_browser_pass(self):
-        for relative in ("apps/web/components/WorkspaceRebuild.css", "apps/web/components/PublicExperience.tsx", "apps/web/components/OracleCompanion.tsx", "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png"):
+        for relative in ("apps/web/components/WorkspaceRebuild.css", "apps/web/components/PublicExperience.tsx", "apps/web/components/OracleCompanion.tsx", "apps/web/components/DeferredChatBoundary.tsx", "apps/web/components/PublicRequestFallback.tsx", "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png"):
             path = self.root / relative
             original = path.read_bytes(); path.write_bytes(original + b"\n/* changed public composition */\n")
             with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
@@ -117,7 +117,7 @@ class ShopEvidenceTests(unittest.TestCase):
         self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
 
     def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
-        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
+        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/components/DeferredChatBoundary.tsx', 'apps/web/components/PublicRequestFallback.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
             path = self.root / relative
             original = path.read_bytes(); path.write_bytes(original + b'\n# changed')
             with self.assertRaisesRegex(checker.EvidenceError, 'stale_shop_source_sha256'):
@@ -154,7 +154,7 @@ class CatalogBrowserEvidenceTests(unittest.TestCase):
 
     def test_source_drift_and_effect_promotion_rejected(self):
         self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
-        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
+        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/components/DeferredChatBoundary.tsx', 'apps/web/components/PublicRequestFallback.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
             path = self.root / relative
             before = path.read_bytes(); path.write_bytes(before+b'\n/* changed source */')
             with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
@@ -163,3 +163,29 @@ class CatalogBrowserEvidenceTests(unittest.TestCase):
         report = json.loads(evidence_path.read_text()); report['order_started'] = True
         evidence_path.write_text(json.dumps(report))
         with self.assertRaisesRegex(checker.EvidenceError, 'read_only_partial'): checker.check_catalog_evidence(self.root)
+
+
+class PublicFallbackEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*checker.PUBLIC_FALLBACK_SOURCES, checker.PUBLIC_FALLBACK_PATH):
+            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+
+    def test_current_pass_cannot_survive_a_changed_boundary(self):
+        self.assertEqual(checker.check_public_fallbacks(self.root)['checks'], 18)
+        path = self.root / 'apps/web/components/DeferredChatBoundary.tsx'
+        path.write_bytes(path.read_bytes()+b'\n/* changed boundary */')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_fallback_source'):
+            checker.check_public_fallbacks(self.root)
+
+    def test_missing_mobile_case_or_false_no_effect_claim_is_rejected(self):
+        path = self.root / checker.PUBLIC_FALLBACK_PATH
+        report = json.loads(path.read_text()); original = copy.deepcopy(report)
+        report['checks'].pop(); path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError, 'complete_matrix'):
+            checker.check_public_fallbacks(self.root)
+        original['mutations'] = 1; path.write_text(json.dumps(original))
+        with self.assertRaisesRegex(checker.EvidenceError, 'no_external_uncaught_or_mutations'):
+            checker.check_public_fallbacks(self.root)

@@ -1,0 +1,7 @@
+{
+  "scope": "synthetic local chunk network failure;not telemetry evidence",
+  "blocked_chunk_requests": 1,
+  "uncaught_error_names": [],
+  "shell_count": 1,
+  "body_text_length": 7192
+}

@@ -65,7 +65,7 @@
     },
     {
       "path": "/leistungen/websites",
-      "locale": "nl",
+      "locale": "de",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -78,19 +78,6 @@
     },
     {
       "path": "/leistungen/websites",
-      "locale": "de",
-      "deep_link": true,
-      "reload": true,
-      "localized_content": true,
-      "skip_link": true,
-      "viewports": [
-        320,
-        390,
-        1280
-      ]
-    },
-    {
-      "path": "/leistungen/agenten-automatisierung",
       "locale": "nl",
       "deep_link": true,
       "reload": true,
@@ -105,6 +92,19 @@
     {
       "path": "/leistungen/agenten-automatisierung",
       "locale": "de",
+      "deep_link": true,
+      "reload": true,
+      "localized_content": true,
+      "skip_link": true,
+      "viewports": [
+        320,
+        390,
+        1280
+      ]
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -222,6 +222,19 @@
     {
       "path": "/wissen",
       "locale": "nl",
+      "deep_link": true,
+      "reload": true,
+      "localized_content": true,
+      "skip_link": true,
+      "viewports": [
+        320,
+        390,
+        1280
+      ]
+    },
+    {
+      "path": "/wissen",
+      "locale": "de",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -246,7 +259,7 @@
       ]
     },
     {
-      "path": "/wissen",
+      "path": "/wissen/projekt-vorbereiten",
       "locale": "de",
       "deep_link": true,
       "reload": true,
@@ -272,7 +285,7 @@
       ]
     },
     {
-      "path": "/wissen/projekt-vorbereiten",
+      "path": "/unternehmen",
       "locale": "de",
       "deep_link": true,
       "reload": true,
@@ -287,19 +300,6 @@
     {
       "path": "/kontakt",
       "locale": "nl",
-      "deep_link": true,
-      "reload": true,
-      "localized_content": true,
-      "skip_link": true,
-      "viewports": [
-        320,
-        390,
-        1280
-      ]
-    },
-    {
-      "path": "/unternehmen",
-      "locale": "de",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -417,6 +417,19 @@
     {
       "path": "/datenschutz",
       "locale": "nl",
+      "deep_link": true,
+      "reload": true,
+      "localized_content": true,
+      "skip_link": true,
+      "viewports": [
+        320,
+        390,
+        1280
+      ]
+    },
+    {
+      "path": "/impressum",
+      "locale": "de",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -441,7 +454,7 @@
       ]
     },
     {
-      "path": "/impressum",
+      "path": "/datenschutz",
       "locale": "de",
       "deep_link": true,
       "reload": true,
@@ -456,19 +469,6 @@
     {
       "path": "/ki-hinweise",
       "locale": "nl",
-      "deep_link": true,
-      "reload": true,
-      "localized_content": true,
-      "skip_link": true,
-      "viewports": [
-        320,
-        390,
-        1280
-      ]
-    },
-    {
-      "path": "/datenschutz",
-      "locale": "de",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -779,8 +779,8 @@
       ]
     },
     {
-      "path": "/teileklar/termine",
-      "locale": "nl",
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -792,8 +792,8 @@
       ]
     },
     {
-      "path": "/teileklar/warenkorb",
-      "locale": "de",
+      "path": "/teileklar/termine",
+      "locale": "nl",
       "deep_link": true,
       "reload": true,
       "localized_content": true,
@@ -1652,181 +1652,6 @@
     {
       "from": "/leistungen/websites",
       "to": "/",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/leistungen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/loesungen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/produkte/nex2fly",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/produkte/one",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/produkte/api",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/teileklar",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/teileklar/werkstatt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/preise-ablauf",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/wissen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/unternehmen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/kontakt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/anmelden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/registrieren",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/leistungsumfang",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/leistungen/agenten-automatisierung",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/leistungen/apps-portale",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/teileklar/partner-werden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/wissen/projekt-vorbereiten",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/impressum",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/datenschutz",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/vertragsgrundlagen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/ki-hinweise",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/barrierefreiheit",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/cookies",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/websites",
-      "to": "/",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
@@ -2000,175 +1825,175 @@
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/leistungen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/loesungen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/produkte/nex2fly",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/produkte/one",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/produkte/api",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/teileklar",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/teileklar/werkstatt",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/preise-ablauf",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/wissen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/unternehmen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/kontakt",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/anmelden",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/registrieren",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/leistungsumfang",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
-      "to": "/leistungen/websites",
+      "from": "/leistungen/websites",
+      "to": "/leistungen/agenten-automatisierung",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/leistungen/apps-portale",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
-      "to": "/wissen/projekt-vorbereiten",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/teileklar/partner-werden",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
+      "to": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/websites",
       "to": "/impressum",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/datenschutz",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/vertragsgrundlagen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/ki-hinweise",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/barrierefreiheit",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/leistungen/agenten-automatisierung",
+      "from": "/leistungen/websites",
       "to": "/cookies",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
@@ -2350,6 +2175,181 @@
       "shell_preserved": true
     },
     {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/leistungen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/loesungen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/produkte/nex2fly",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/produkte/one",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/produkte/api",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/teileklar",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/teileklar/werkstatt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/preise-ablauf",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/wissen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/unternehmen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/kontakt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/anmelden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/registrieren",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/leistungsumfang",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/leistungen/websites",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/leistungen/apps-portale",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/teileklar/partner-werden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/impressum",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/datenschutz",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/vertragsgrundlagen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/ki-hinweise",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/barrierefreiheit",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/leistungen/agenten-automatisierung",
+      "to": "/cookies",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
       "from": "/leistungen/apps-portale",
       "to": "/",
       "locale": "nl",
@@ -4275,181 +4275,6 @@
       "shell_preserved": true
     },
     {
-      "from": "/unternehmen",
-      "to": "/",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/leistungen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/loesungen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/produkte/nex2fly",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/produkte/one",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/produkte/api",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/teileklar",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/teileklar/werkstatt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/preise-ablauf",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/wissen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/kontakt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/anmelden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/registrieren",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/impressum",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/teileklar/partner-werden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/leistungsumfang",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/wissen/projekt-vorbereiten",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/datenschutz",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/vertragsgrundlagen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/ki-hinweise",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/barrierefreiheit",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/cookies",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/leistungen/websites",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/leistungen/agenten-automatisierung",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/unternehmen",
-      "to": "/leistungen/apps-portale",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
       "from": "/wissen/projekt-vorbereiten",
       "to": "/",
       "locale": "de",
@@ -4625,175 +4450,175 @@
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/leistungen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/loesungen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/produkte/nex2fly",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/produkte/one",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/produkte/api",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/teileklar",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/teileklar/werkstatt",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/preise-ablauf",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/wissen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
-      "to": "/unternehmen",
+      "from": "/unternehmen",
+      "to": "/kontakt",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/anmelden",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/registrieren",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
-      "to": "/leistungsumfang",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/kontakt",
-      "to": "/datenschutz",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/kontakt",
-      "to": "/teileklar/partner-werden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/kontakt",
-      "to": "/wissen/projekt-vorbereiten",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/impressum",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
+      "to": "/teileklar/partner-werden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/unternehmen",
+      "to": "/leistungsumfang",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/unternehmen",
+      "to": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/unternehmen",
+      "to": "/datenschutz",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/unternehmen",
       "to": "/vertragsgrundlagen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/ki-hinweise",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/barrierefreiheit",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/cookies",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/leistungen/websites",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/leistungen/agenten-automatisierung",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/kontakt",
+      "from": "/unternehmen",
       "to": "/leistungen/apps-portale",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
@@ -4971,6 +4796,181 @@
       "from": "/unternehmen",
       "to": "/leistungen/apps-portale",
       "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/leistungen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/loesungen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/produkte/nex2fly",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/produkte/one",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/produkte/api",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/teileklar",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/teileklar/werkstatt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/preise-ablauf",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/wissen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/unternehmen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/anmelden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/registrieren",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/leistungsumfang",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/datenschutz",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/teileklar/partner-werden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/impressum",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/vertragsgrundlagen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/ki-hinweise",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/barrierefreiheit",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/cookies",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/leistungen/websites",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/kontakt",
+      "to": "/leistungen/apps-portale",
+      "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
@@ -6550,6 +6550,181 @@
       "shell_preserved": true
     },
     {
+      "from": "/impressum",
+      "to": "/",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/leistungen",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/loesungen",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/produkte/nex2fly",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/produkte/one",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/produkte/api",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/teileklar",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/teileklar/werkstatt",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/preise-ablauf",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/wissen",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/unternehmen",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/kontakt",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/anmelden",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/registrieren",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/vertragsgrundlagen",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/datenschutz",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/ki-hinweise",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/teileklar/partner-werden",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/leistungsumfang",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/barrierefreiheit",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/cookies",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/leistungen/websites",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/impressum",
+      "to": "/leistungen/apps-portale",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
       "from": "/vertragsgrundlagen",
       "to": "/",
       "locale": "nl",
@@ -6725,175 +6900,175 @@
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/leistungen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/loesungen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/produkte/nex2fly",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/produkte/one",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/produkte/api",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/teileklar",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/teileklar/werkstatt",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/preise-ablauf",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/wissen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/unternehmen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/kontakt",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/anmelden",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/registrieren",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/vertragsgrundlagen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
-      "to": "/datenschutz",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/impressum",
-      "to": "/ki-hinweise",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/impressum",
-      "to": "/teileklar/partner-werden",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/impressum",
-      "to": "/leistungsumfang",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/impressum",
-      "to": "/wissen/projekt-vorbereiten",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/impressum",
-      "to": "/barrierefreiheit",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/cookies",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
+      "to": "/impressum",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/datenschutz",
+      "to": "/ki-hinweise",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/datenschutz",
+      "to": "/teileklar/partner-werden",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/datenschutz",
+      "to": "/leistungsumfang",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/datenschutz",
+      "to": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/datenschutz",
+      "to": "/barrierefreiheit",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/datenschutz",
       "to": "/leistungen/websites",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/leistungen/agenten-automatisierung",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/impressum",
+      "from": "/datenschutz",
       "to": "/leistungen/apps-portale",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
@@ -7075,175 +7250,175 @@
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/leistungen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/loesungen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/produkte/nex2fly",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/produkte/one",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/produkte/api",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/teileklar",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/teileklar/werkstatt",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/preise-ablauf",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/wissen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/unternehmen",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/kontakt",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/anmelden",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/registrieren",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
-      "to": "/vertragsgrundlagen",
+      "from": "/vertragsgrundlagen",
+      "to": "/datenschutz",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
-      "to": "/cookies",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/impressum",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/ki-hinweise",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/teileklar/partner-werden",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/leistungsumfang",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/wissen/projekt-vorbereiten",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/barrierefreiheit",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
+      "to": "/cookies",
+      "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/vertragsgrundlagen",
       "to": "/leistungen/websites",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/leistungen/agenten-automatisierung",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/datenschutz",
+      "from": "/vertragsgrundlagen",
       "to": "/leistungen/apps-portale",
       "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
@@ -7421,181 +7596,6 @@
       "from": "/barrierefreiheit",
       "to": "/leistungen/apps-portale",
       "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/leistungen",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/loesungen",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/produkte/nex2fly",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/produkte/one",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/produkte/api",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/teileklar",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/teileklar/werkstatt",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/preise-ablauf",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/wissen",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/unternehmen",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/kontakt",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/anmelden",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/registrieren",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/datenschutz",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/impressum",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/ki-hinweise",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/teileklar/partner-werden",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/leistungsumfang",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/wissen/projekt-vorbereiten",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/barrierefreiheit",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/cookies",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/leistungen/websites",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/leistungen/agenten-automatisierung",
-      "locale": "de",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/vertragsgrundlagen",
-      "to": "/leistungen/apps-portale",
-      "locale": "de",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
@@ -11002,160 +11002,6 @@
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/termine",
-      "to": "/teileklar",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/suche",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/kategorien",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/warenkorb",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/fahrzeug-und-passung",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/partner-werden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/produkte/nex2fly",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/anmelden",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/registrieren",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/werkstatt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/kontakt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/gutscheine",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/unternehmen",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/rechtliches",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/datenschutz",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/ki-hinweise",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/barrierefreiheit",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/cookies",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/kategorie",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/produkt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/termine",
-      "to": "/teileklar/kasse",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
       "from": "/teileklar/warenkorb",
       "to": "/teileklar",
       "locale": "de",
@@ -11310,154 +11156,154 @@
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/suche",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/kategorien",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/warenkorb",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/fahrzeug-und-passung",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
-      "to": "/teileklar/termine",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/partner-werden",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/produkte/nex2fly",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/anmelden",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/registrieren",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
-      "to": "/teileklar/rechtliches",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/gutscheine",
-      "to": "/kontakt",
-      "locale": "nl",
-      "history": "back on each edge; forward/back on first edge per source",
-      "shell_preserved": true
-    },
-    {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/werkstatt",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
+      "to": "/kontakt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/termine",
+      "to": "/teileklar/gutscheine",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/termine",
       "to": "/unternehmen",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
+      "to": "/teileklar/rechtliches",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/termine",
       "to": "/datenschutz",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/ki-hinweise",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/barrierefreiheit",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/cookies",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/kategorie",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/produkt",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },
     {
-      "from": "/teileklar/gutscheine",
+      "from": "/teileklar/termine",
       "to": "/teileklar/kasse",
       "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
@@ -11614,6 +11460,160 @@
       "from": "/teileklar/kasse",
       "to": "/teileklar/produkt",
       "locale": "de",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/suche",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/kategorien",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/warenkorb",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/fahrzeug-und-passung",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/termine",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/partner-werden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/produkte/nex2fly",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/anmelden",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/registrieren",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/rechtliches",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/kontakt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/werkstatt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/unternehmen",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/datenschutz",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/ki-hinweise",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/barrierefreiheit",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/cookies",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/kategorie",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/produkt",
+      "locale": "nl",
+      "history": "back on each edge; forward/back on first edge per source",
+      "shell_preserved": true
+    },
+    {
+      "from": "/teileklar/gutscheine",
+      "to": "/teileklar/kasse",
+      "locale": "nl",
       "history": "back on each edge; forward/back on first edge per source",
       "shell_preserved": true
     },

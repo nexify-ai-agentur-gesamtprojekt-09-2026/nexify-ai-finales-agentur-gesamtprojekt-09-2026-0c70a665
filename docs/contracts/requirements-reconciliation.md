@@ -54,6 +54,7 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-NIGHT-PLAN-2012: additive_plan_not_acceptance; Datum 2026-10-27T20:12:00Z; library_bytes_materialized_hash_verified_technical_phases_read; libfile_fa46a979d9988191a78200da82c69859 and libfile_e0451c7585a08191ab6a6e00b54bc505. Umfang: MD961ebf1556cb6e139d27a1480b174bb04c8d9a87c7691c1c2729f2bdb3fa0abc;JSON9986035fc742203cd50667e5018d594ebe45682ac27ae96b6e5522c19fdb780a. N0-N5 supplement keepsMaster1.3 unchanged;15patterns not installed;no new platform/provider/server action.
 - SRC-ORACLE-AVATAR-ORIGINAL: user_supplied_original_asset; Datum unbekannt; library_bytes_materialized_hash_verified_visually_read; libfile_54eb1fde3fc48191b8b3cbb956de2235. Umfang: 512x512RGBA,217874bytes,SHA2569f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66;original pixels preserved;no video or voice acceptance
 - SRC-ORACLE-CHAT-DIRECTION: reported_user_direction_and_delegated_chat_scope; Datum 2026-10-27T21:39Z; parent_verified_excerpt; parent thread01a17489-405e-7098-b452-a8c54ba42016;delegated existing web task;user visual confirmation21:39. Umfang: exact confirmed original in shared chat;name AI Fly Oracle;bounded request-state motion,reduced-motion,keyboard/mobile;no hero/video rewrite,generation,credential or production change
+- SRC-PUBLIC-FRONTEND-RELIABILITY-20261027: reported_user_scope_and_independent_live_QA; Datum 2026-10-27; parent_verified_excerpt; parent thread01a17489-405e-7098-b452-a8c54ba42016;user22:55/23:02/23:03 and liveQA22:58-22:59. Umfang: Public frontend priority,contact CTA dead-end,shop search mislabel,telemetry gap;no new privacy/cost/CSP/credential authority
 
 ## Soll / Ist / Abschluss
 
@@ -496,3 +497,14 @@ Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
 Lücke: Exact production delivery/readback and qualified assistive-technology acceptance remain open;no actual video animation delivered.
 Nächster Schritt (Existing web implementation owner;release/account and qualified accessibility owners separate): Complete exact-source REA/readback and independent final review,normal own branch delivery;no main merge,provider or credential change.
 Abschluss: Exact accepted release renders the original on the intended target with working/idle/reduced-motion/keyboard behavior and scoped qualified acceptance;no false film/provider completion.
+
+### REC-PUBLIC-FALLBACKS-01
+
+Soll (SRC-PUBLIC-FRONTEND-RELIABILITY-20261027): Public contact CTAs must provide an actionable honest path without a backend;chat chunk failure must preserve shell;shop search must show a relevant catalog state.
+Einordnung: Three bounded frontend corrections;does not claim actual mailbox delivery,product commerce,portal or telemetry runtime acceptance.
+Dateien/Funktionen: apps/web/components/Workspace.tsx, apps/web/components/ShopPanel.tsx, apps/web/components/DeferredChatBoundary.tsx, apps/web/components/PublicRequestFallback.tsx, apps/site/tests/browser-public-fallbacks.mjs, tools/check_browser_evidence.py, tests/test_browser_evidence.py, evidence/frontend-reliability-2026-10-27/public-fallbacks.json, evidence/frontend-reliability-2026-10-27/chunk-before.json, evidence/frontend-reliability-2026-10-27/chunk-after.json
+Beleg: 18real local browser cases320/390/1280xDE/NLxsession/capability/chunk failures;3request intents,keyboard/back/close,mail focus,search-unavailable,0external/uncaught/mutations;chunk fault before0shell/after1shell.24CTA routes are inventory only. Session204(empty),200(capabilities denied),404(chunk failure) are explicitly checked;204 grants no session or capability.
+Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
+Lücke: Production is foreign696c0d2,not this baseline;writer handoff and safe consolidation pending.SDK/source-map integration pending that handoff;GitHub401 and Actions cost gate prevent remote delivery;real media remain pending.
+Nächster Schritt (Existing web writer;parent coordinates foreign writer,account/budget/domain;secondary server remains separate): Finish local aggregate gates,exact REA/readback and independent review;deliver local commit/patch;parent resolves writer/auth/budget and domain mapping.
+Abschluss: Exact authorized released candidate confirms contact/navigation/shop states and minimized exception/source-map flow end-to-end;no assumed release from local tests.

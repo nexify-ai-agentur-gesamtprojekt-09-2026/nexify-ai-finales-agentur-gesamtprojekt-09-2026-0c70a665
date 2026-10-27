@@ -1019,3 +1019,23 @@ undStandalonebuilds grün. Auth/Membership,Provider-/Portalfunktionen und sämtl
 externen Grenzen unverändert. Abschließende Gesamtgates,REA-Quellanalyse und
 unabhängige exakte Commitprüfung werden nach Quellsicherung separat geliefert.
 Quelle und Grenzen:config/companion-avatar.json,docs/contracts/oracle-companion.md.
+
+
+## Öffentliche Fehlerpfade · lokaler Nachtrag 27.10.2026
+
+Drei belegte Fehler korrigiert: fehlende Anfragefähigkeiten führen zum bestehenden
+E-Mail-Kontakt statt in ein deaktiviertes Formular; ein abgelehnter Lazy-Chat-Chunk
+bleibt innerhalb einer lokalen Fehlergrenze; Suche/Kategorien/Produkt verwenden
+Katalogzustände statt Warenkorbtexte. Keine Verkaufs- oder Providerfreigabe.
+18 synthetische Browserfälle (DE/NL,320/390/1280,Session204/Fähigkeiten200/Chunkfehler)
+bestehen einschließlich Tastatur,Rückweg,Schließen und Wiederöffnen.
+72 Routen-/Sprachfälle je Next und Vite,1724 History-Kanten,108 Resize-,13 Shop-
+und4 Katalogprüfungen sowie Next/Vite/Standalonebuilds erneut bestanden.
+
+PostHog/Sentry: fremder Observability-Zweig696c0d2 liegt laut Parent bereits in
+Production; Zuständigkeit und kontrollierte Zusammenführung offen. Keine eigene
+SDK-Initialisierung,Credentialkopie oder CSP-Lockerung in diesem Nachtrag.
+Neue Push-/CI-Läufe wegen ungeklärter Actions-Folgekosten pausiert; letzter
+GitHub-Metadatenabruf401,kein Identitätswechsel. Lokal auf Basis a708a2d; kein
+Produktionsfix behauptet. Finale lokale Gates,REA und unabhängiges Review werden
+mit dem exakten Nachtragscommit im bereinigten Übergabemanifest verbunden.
