@@ -112,7 +112,7 @@ class ShopEvidenceTests(unittest.TestCase):
         (self.root / checker.SHOP_EVIDENCE_PATH).write_text(json.dumps(self.evidence))
 
     def test_saved_shop_proof_is_bounded_and_current(self):
-        self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 9)
+        self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
 
     def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
         for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py'):

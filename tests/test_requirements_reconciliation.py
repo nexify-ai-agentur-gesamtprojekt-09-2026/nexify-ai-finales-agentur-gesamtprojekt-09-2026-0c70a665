@@ -1,5 +1,6 @@
 """The source reconciliation must not turn reports into acceptance or originals."""
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -23,6 +24,11 @@ class ReconciliationTests(unittest.TestCase):
     def test_register_cannot_claim_its_own_recursive_source_hash(self):
         self.document['source_sha256'][str(checker.REGISTER)] = '0' * 64
         self.assertIn('Register self-hash is recursive; bind it with commit/package manifest instead', checker.validate(self.document, ROOT))
+
+    def test_recorded_source_hashes_match_actual_bytes(self):
+        for relative, expected in self.document['source_sha256'].items():
+            with self.subTest(source=relative):
+                self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
 
     def test_report_cannot_be_promoted_to_original(self):
         source = next(s for s in self.record['sources'] if s['acquisition'] == 'parent_verified_excerpt')

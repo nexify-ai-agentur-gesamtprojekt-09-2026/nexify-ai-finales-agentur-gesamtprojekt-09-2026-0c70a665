@@ -10,6 +10,9 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url)),repo=fileURLToPath(new URL('../../../',import.meta.url));
+const sources=['apps/agent-gateway/cart.py','apps/agent-gateway/server.py','apps/web/components/ShopPanel.tsx','apps/web/components/ShopPanel.css','apps/web/components/Workspace.tsx','apps/site/src/main.tsx','apps/site/tests/browser-shop.mjs','apps/site/tests/fixtures/shop-server.py'];
+async function hashes(){return Object.fromEntries(await Promise.all(sources.map(async path=>[path,createHash('sha256').update(await readFile(join(repo,path))).digest('hex')])));}
+const before=await hashes();
 const folder=await mkdtemp(join(tmpdir(),'nexify-browser-shop-')),database=join(folder,'visitor.sqlite');
 let backendPort=0,backend;const requests=[],external=[],checks=[];
 const server=await createServer({root,server:{port:0,strictPort:false},plugins:[{name:'isolated-shop-proxy',configureServer(vite){vite.middlewares.use((req,res,next)=>{
@@ -102,9 +105,42 @@ try{
   assert.ok(await panel.evaluate(n=>getComputedStyle(n).getPropertyValue('--color-marke-lime').trim()));
   await panel.screenshot({path:join(repo,'.local/shop-http/mobile-panel.png')});
  });
+ await check('expired successful creation key cannot trap a cookie-less cart in permanent 410',async()=>{
+  await context.clearCookies({name:'nx_cart'});await refresh().click();await waitEnabled(start());
+  await start().click();await waitEnabled(add());const created=dbCounts().cart;
+  const expire=spawnSync('python3',['-c',"import sqlite3,sys;d=sqlite3.connect(sys.argv[1]);d.execute(\"UPDATE objects SET payload=json_set(payload,'$.expires',0) WHERE kind='cart'\");d.commit()",database],{encoding:'utf8'});assert.equal(expire.status,0);
+  await context.clearCookies({name:'nx_cart'});await refresh().click();await waitEnabled(start());
+  await start().click();await waitEnabled(add());assert.equal(await panel.getByRole('alert').count(),0);assert.equal(dbCounts().cart,created+1);
+ });
+ await check('lost creation response preserves key until readback and restores one committed cart',async()=>{
+  await context.clearCookies({name:'nx_cart'});await refresh().click();await waitEnabled(start());const before=dbCounts().cart;
+  await page.route('**/api/shop/cart',async route=>{if(route.request().method()!=='POST')return route.continue();const response=await route.fetch();assert.equal(response.status(),200);await route.abort();});
+  await start().click();await panel.getByRole('alert').waitFor();assert.equal(await start().isDisabled(),true);assert.equal(dbCounts().cart,before+1);
+  await context.clearCookies({name:'nx_cart'});await page.unroute('**/api/shop/cart');await refresh().click();await waitEnabled(start());
+  await start().click();await waitEnabled(add());assert.equal(dbCounts().cart,before+1);assert.equal(await panel.getByRole('alert').count(),0);
+ });
+ await check('expired unknown creation requires explicit 410 readback before a fresh creation key',async()=>{
+  await context.clearCookies({name:'nx_cart'});await refresh().click();await waitEnabled(start());const before=dbCounts().cart;
+  await page.route('**/api/shop/cart',async route=>{if(route.request().method()!=='POST')return route.continue();const response=await route.fetch();assert.equal(response.status(),200);await route.abort();});
+  await start().click();await panel.getByRole('alert').waitFor();assert.equal(dbCounts().cart,before+1);
+  const expire=spawnSync('python3',['-c',"import sqlite3,sys;d=sqlite3.connect(sys.argv[1]);d.execute(\"UPDATE objects SET payload=json_set(payload,'$.expires',0) WHERE kind='cart'\");d.commit()",database],{encoding:'utf8'});assert.equal(expire.status,0);
+  await context.clearCookies({name:'nx_cart'});await page.unroute('**/api/shop/cart');await refresh().click();await waitEnabled(start());
+  await start().click();await panel.getByRole('alert').waitFor();assert.equal(await start().isDisabled(),true);assert.equal(dbCounts().cart,before+1);
+  await refresh().click();await waitEnabled(start());await start().click();await waitEnabled(add());assert.equal(dbCounts().cart,before+2);
+ });
+ await check('authoritative expired cart read clears stale UI but requires deliberate new creation',async()=>{
+  await page.route('**/api/shop/cart',route=>route.request().method()==='GET'?route.fulfill({status:410,json:{error:'other_terminal_reason'}}):route.continue());
+  await refresh().click();await panel.getByRole('alert').waitFor();assert.equal(await start().count(),0);
+  await page.unroute('**/api/shop/cart');await refresh().click();await waitEnabled(add());
+  const before=dbCounts().cart;
+  const expire=spawnSync('python3',['-c',"import sqlite3,sys;d=sqlite3.connect(sys.argv[1]);d.execute(\"UPDATE objects SET payload=json_set(payload,'$.expires',0) WHERE kind='cart'\");d.commit()",database],{encoding:'utf8'});assert.equal(expire.status,0);
+  assert.ok((await context.cookies()).some(c=>c.name==='nx_cart'));await refresh().click();await waitEnabled(start());
+  assert.equal(await panel.getByRole('alert').count(),0);assert.equal(dbCounts().cart,before);
+  await start().click();await waitEnabled(add());assert.equal(dbCounts().cart,before+1);
+ });
  assert.deepEqual(external,[]);assert.equal(stderr,'');
- const sources=['apps/agent-gateway/cart.py','apps/agent-gateway/server.py','apps/web/components/ShopPanel.tsx','apps/web/components/ShopPanel.css','apps/web/components/Workspace.tsx','apps/site/src/main.tsx','apps/site/tests/browser-shop.mjs','apps/site/tests/fixtures/shop-server.py'];
- const source_sha256=Object.fromEntries(await Promise.all(sources.map(async path=>[path,createHash('sha256').update(await readFile(join(repo,path))).digest('hex')])));
+
+ const source_sha256=await hashes();assert.deepEqual(source_sha256,before,'source drift during shop browser test');
  const report={scope:'actual local browser/API/SQLite with isolated synthetic catalog fixture; no provider or production acceptance',checks,requests,external_requests:external,source_sha256,persistent_objects:dbCounts(),payment_started:false,order_submitted:false};
  await writeFile(join(repo,'.local/shop-http/browser-shop.json'),JSON.stringify(report,null,2)+'\n');
 }finally{await context.close();await browser.close();await server.close();backend.kill('SIGTERM');await rm(folder,{recursive:true,force:true});}

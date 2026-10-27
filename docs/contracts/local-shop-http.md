@@ -113,3 +113,17 @@ Design-/Tokenquellen sind bytegleich; WorkspaceRebuild.css ergänzt ausschließl
 Werkstattbeschriftung korrigiert. Diese funktionalen Korrekturen bleiben erhalten.
 Der Vergleich in evidence/shop-http-2026-10-27/design-reference-comparison.json
 belegt diese begrenzte Sourceaussage, keine vollständige Live-Pixelabnahme.
+
+
+## PR40-Folgekorrektur: abgelaufene Warenkörbe
+
+Erfolgreich bestätigte Creation-Keys werden im laufenden UI nicht für einen
+späteren neuen Warenkorb wiederverwendet. Verlorene Createantworten behalten
+ihren Key bis zur bewussten Rücklesung; Wiederholung stellt denselben
+persistierten Warenkorb wieder her. Ein bestätigtes POST410/cart_expired
+verwirft nur den abgelaufenen Key; weitere Mutationen bleiben bis zur bewussten
+Rücklesung gesperrt. GET410/cart_expired setzt den bekannten abgelaufenen
+UIzustand zurück, erzeugt aber keinen neuen Warenkorb ohne Nutzeraktion.
+Andere410-/Netzwerkfehler sind keine Entwarnung. Dreizehn reale lokale
+Browser/API/SQLite-Fälle binden nun auch diese vier Abläufe; isolierte Fixtures,
+keine reale Händler- oder Zahlungsabnahme.

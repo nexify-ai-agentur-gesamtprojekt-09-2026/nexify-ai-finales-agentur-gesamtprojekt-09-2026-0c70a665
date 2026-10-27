@@ -1,3 +1,33 @@
+# PR40: lokale Folgekorrekturen und tatsächlicher Deploymentstand
+
+Current State: BigBuy-Vorstufe65a8e8b auf lokalem CI-Fix3e92663 gesichert.
+Remote main219f244 vom27.10.15:25:02Z hat denselben Gitbaum wie geprüfter69ed580;
+Vercel dpl_7cJkhVUzjZjxhZzxbtaQwFbeeq1V ist production READY. Dies waren
+fremde Merge-/Deployaktionen, keine eigene Produktionserlaubnis oder fachliche
+Abnahme. Der alte69Preview-Autorzugriffsblocker wurde nicht durch uns umgangen.
+
+In Progress: bestätigter Cartablauf-/Creation-Keyfehler mit realem Browserlauf
+reproduziert. Erfolgreiche Keys werden nicht für neueCarts recycelt; ungewisse
+Createausgänge behaltenKey und benötigenReadback. AutoritativesGET410/cart_expired
+öffnet nachRücklesung nur den bewusstenNeustart; unbekannteFehler bleiben gesperrt.
+13 lokale Browser/API/SQLite-Fälle bestanden inklusive4neuerExpirykreise.
+Resizeprüfer akzeptierte zuvor36ungebundeneRouten; jetzt UI/CSS, beidegeladene
+Schriften, Tokens, Datensnapshot, Lockfile und Messskript vor/nachgebunden.
+UnabhängigerSolbefund ergänzte Globals/Fonts unddirektesGET410; nachgebessert,
+frische108Messungen/36Routen und25unabhängig ausgeführteFokustests grün. Registerpin nachRenderer warveraltet;
+neuerTest prüft sämtlicheDateipins, abschließenderRefresh nachRendering.
+Keine echte Bestellung, Zahlung, Providerfreischaltung oder externeMutation.
+
+Nachweis:385Python-/31Node-Tests,check/test/e2e/arch/clean,Typecheck,
+Produktions- undStandalonebuild grün.13Shopfälle,108Resizeprüfungen,
+frischerCritical-/SSE-Browserlauf und4echteProduktionsassets ohneTestartikelmarker.
+Alle130bisherigenRegisterpins unabhängig bestätigt; kein offenesCodefinding.
+
+Next Steps: finalerCommit-/Hashreadback durchSol;
+versionsgesichertesPaket. CI-Fix bleibtlokal, nochkeinRemoteCI-Erfolg behauptet.
+BigBuy-Bildmodell/Rohdatenzugriff/Kommerz-/Fitment-/Publikationsgates offen;
+keine Vorstufe wird alsvollständigerShop oderfertigeBildproduktion ausgegeben.
+
 # BigBuy: begrenzte lokale Rohdatenaufbereitung
 
 Current State: 3e92663 enthält den unabhängig geprüften CI-Setupfix, noch nicht

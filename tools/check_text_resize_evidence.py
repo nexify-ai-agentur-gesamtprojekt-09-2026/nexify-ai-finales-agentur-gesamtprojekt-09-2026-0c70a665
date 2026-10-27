@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Validate bounded stored resize evidence; this is not a browser execution."""
+import hashlib
 import json
 from pathlib import Path
 
@@ -19,9 +20,37 @@ def check_resize(report, expected_paths):
     return len(rows)
 
 
-if __name__ == '__main__':
-    root = Path(__file__).resolve().parents[1]
+def source_hashes(root):
+    root = root.resolve()
+    config = json.loads((root / 'config/text-resize-sources.json').read_text())
+    paths = set(config['files'])
+    for directory in config['directories']:
+        base = root / directory
+        if base.is_symlink() or not base.resolve().is_relative_to(root):
+            raise ValueError('unsafe resize source directory')
+        for path in base.rglob('*'):
+            if path.is_symlink():
+                raise ValueError('linked resize source forbidden')
+            if path.is_file() and path.suffix in config['extensions']:
+                paths.add(path.relative_to(root).as_posix())
+    result = {}
+    for relative in sorted(paths):
+        path = root / relative
+        if path.is_symlink() or not path.resolve().is_relative_to(root):
+            raise ValueError('unsafe resize source path')
+        result[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return result
+
+
+def check_bound_resize(root):
     mapping = json.loads((root / 'config/site-map.json').read_text())
     paths = {p['path'] for p in mapping['pages'] if p['id'] in mapping['public_allowlist'] and p['access']['visibility'] == 'public' and p['access']['auth_required'] is False}
     report = json.loads((root / 'evidence/one-app-2026-10-27/text-spacing.json').read_text())
-    print(json.dumps({'scope': 'stored measured text-resize evidence only', 'routes': check_resize(report, paths)}))
+    if report.get('completed') is not True or report.get('source_sha256') != source_hashes(root):
+        raise ValueError('missing or stale resize source binding')
+    return check_resize(report, paths)
+
+
+if __name__ == '__main__':
+    root = Path(__file__).resolve().parents[1]
+    print(json.dumps({'scope': 'stored measured source-bound text-resize evidence only', 'routes': check_bound_resize(root)}))

@@ -1,4 +1,49 @@
 {
+  "completed": true,
+  "observed_at": "2026-10-27T15:53:45.846Z",
+  "source_sha256": {
+    "apps/site/.generated/public-site.json": "b9d87c7d3b141a9ddcc6b04ad6eca9c59250e0128620494df7cf5827ebcc2aab",
+    "apps/site/index.html": "2c4433488c2341ab761c27933f65393b740cbeff8555ebe749ea683fd0a56818",
+    "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
+    "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
+    "apps/site/src/main.tsx": "0fd3f63bae18c176e1163579ca1d4e23e7f8153bb3b18e4ac0bb8ebcde2f26b0",
+    "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
+    "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
+    "apps/site/tests/browser-text-spacing.mjs": "9fa24f483846f9e1f225971c418e4632964934e3be6653d46b516066d6e85801",
+    "apps/site/vite.config.ts": "69cc859d041285a09a9afbbe6e10172a6681783abfa6be921a0bc4709342d31a",
+    "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
+    "apps/web/components/ExplainerSections.tsx": "79b9bcc46e9be369d551ad60918a3ffc5e2b24653550d6b57b398c024791739d",
+    "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
+    "apps/web/components/HomeRebuild.css": "3020ffd4093dfd26f4b788fddbe3b3bc5ee148c5c1861dad6a78df67c858c386",
+    "apps/web/components/NextRouterBridge.tsx": "13262725f7487b2616c2a8ac2d7c15f55a4eee5fe4c257db9f69a1460daa7157",
+    "apps/web/components/PresenterEditorial.css": "211ba36c1ecdb619f364b978fbacc8f943e518318ca304f0f13880654304b458",
+    "apps/web/components/PresenterGuide.tsx": "700b673d650b2331aba2741a9e3cde890d43ad05e353f205dc8c4fa369eb8772",
+    "apps/web/components/PublicContent.tsx": "cef8e0c3084a582868f4b82128cc96eae7df9d68571c7c2efc469c1d97fb7d08",
+    "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
+    "apps/web/components/PublicOrientationChat.tsx": "d46f064a7640ede218b06c70d6a93e55e2f12fb773241f3bb42cc787c21ee51a",
+    "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
+    "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
+    "apps/web/components/ShopPanel.tsx": "03210b812653fc5b06c1c0ae056a0a1a17a97bc88704da0d798d25515b219779",
+    "apps/web/components/SiteFooter.tsx": "7fc20d094fb4e4f4f4090ece24224a3599dbfd06d1a4e4fc34c1a25aa5932de8",
+    "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
+    "apps/web/components/Workspace.tsx": "9a493e28de596af0f10fa5fcd8f5e890f604fca62ebdaf48f19c4ec64f3b93e8",
+    "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
+    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
+    "apps/web/lib/catalog.ts": "dd8d9aa6f413398e3a559811e42ecdb787df397e23b1147175170d2765beda2f",
+    "apps/web/lib/i18n.ts": "9501e46d67ffa0a98b71e8354622ac830ddec14e0b4f023c4b8c30c5ff652a18",
+    "apps/web/lib/page-types.ts": "e066fc6cbaabac8e98c02f26ee984e2f36a324b546421dd44ce737db696f2b85",
+    "apps/web/public/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
+    "apps/web/public/fonts/geist-mono-latin.woff2": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
+    "config/design-tokens.json": "76411ab83c18fa071efaaa518da8fb7fb97867c67a016bcfb67f35359a68c480",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
+    "config/text-resize-sources.json": "7b654634119052f1bc9830b7411265b7265120beea03f0f8958f1be1e6e854d5",
+    "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
+    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
+    "packages/tokens/tokens.json": "196d2abf221a1169608984b9805fd150f2649375989bb4021a1448bc91299fda",
+    "packages/tokens/tokens.ts": "9d73c48eca26b0a0f405c3deaf07a7d0125ff53fa842843fcfdcfe92e0fac1f3",
+    "pnpm-lock.yaml": "66113f3d0bd4537ead76ce07b68701bdcd8e1d4d392f4365ac1f24637933cb4c"
+  },
   "scope": "text-spacing and 200% text resize geometry; not screenreader or full visual conformance",
   "checks": [
     {
@@ -570,7 +615,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 254,
+        "count": 257,
         "all_doubled": true
       },
       "overflow": false,
@@ -593,7 +638,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 252,
+        "count": 255,
         "all_doubled": true
       },
       "overflow": false,
@@ -616,7 +661,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 252,
+        "count": 255,
         "all_doubled": true
       },
       "overflow": false,
@@ -639,7 +684,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 263,
+        "count": 266,
         "all_doubled": true
       },
       "overflow": false,
@@ -662,7 +707,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 261,
+        "count": 264,
         "all_doubled": true
       },
       "overflow": false,
@@ -685,7 +730,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 261,
+        "count": 264,
         "all_doubled": true
       },
       "overflow": false,
