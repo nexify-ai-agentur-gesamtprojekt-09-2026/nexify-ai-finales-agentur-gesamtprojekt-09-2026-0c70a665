@@ -20,9 +20,13 @@ mit dem Zugangsschutz (HTTP 302 zu Vercel SSO). Zwei zusätzlich mit demselben
 Repository verbundene Altprojekte (`web`, `site-k23m`) schlagen unabhängig
 davon in ihrer eigenen Vercel-Konfiguration fehl und sind zu bereinigen.
 
-Der Preview-Erfolg ist keine Produktionsfreigabe. Main, Produktivdomain und
-DNS bleiben unverändert. Das Freigabe-Gate bleibt geschlossen, bis echte
-Clerk-Anmeldung samt vereinbarter starker Authentisierung, Membership-/Tenant-
+Der Preview-Erfolg ist keine Produktionsfreigabe. Ein gleichzeitig durch einen
+anderen Prozess zusammengeführter PR wurde mit Commit `839c8f2` nachvollziehbar
+zurückgenommen; der Main-Dateibaum entspricht wieder exakt dem vorherigen Stand
+`e541462`, Main-CI und kanonisches Vercel-Deployment des Rückwegs sind grün.
+Produktivdomain und DNS wurden nicht umgestellt. Das Freigabe-Gate bleibt
+geschlossen, bis echte Clerk-Anmeldung samt vereinbarter starker
+Authentisierung, Membership-/Tenant-
 Trennung, Providerverbindungen, wiederholter Health-Lauf, ausgeführter Rollback
 und die Endabnahme mit tatsächlichen Laufzeitnachweisen bestanden sind.
 

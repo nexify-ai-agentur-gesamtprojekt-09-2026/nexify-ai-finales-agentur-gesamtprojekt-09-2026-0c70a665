@@ -11,6 +11,13 @@ Commit `Deployment has completed`. Der bekannte Preview-Host ist von außen
 zugangsgeschützt und antwortet mit HTTP 302 zu Vercel SSO. Damit sind weder ein
 anonymer Seiten-Readback noch der unten geforderte Health-Lauf belegt.
 
+Ein parallel zusammengeführter PR brachte den Featurestand kurzzeitig auf Main.
+Der nachvollziehbare Revert `839c8f2` stellt exakt den vorherigen Dateibaum
+`e541462` wieder her; GitHub-CI-Lauf `40498050282` und das kanonische Vercel-
+Deployment des Reverts sind grün. Das ist ein ausgeführter technischer Rückweg
+für diesen Merge, aber noch kein vollständiger Produktions-Rollbacktest aller
+Daten-, Auth-, Provider- und Hintergrundabläufe.
+
 Die Hartsperre bleibt bestehen, bis mindestens folgende Nachweise am exakt zu
 veröffentlichenden Commit mehrfach fehlerfrei vorliegen:
 
