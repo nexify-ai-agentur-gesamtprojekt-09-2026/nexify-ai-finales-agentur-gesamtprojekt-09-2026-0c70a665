@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "version": "local-control-1",
+  "controller": "AIFly",
+  "scope": "canonical_agency_project",
+  "mode": "explicit_local_operator_only",
+  "limits": {"max_jobs": 32, "max_requests": 2000, "lease_seconds": 30, "evidence_ttl_seconds": 3600, "max_result_bytes": 262144},
+  "limits_source": "bounded local engineering defaults; not user SLA, money budget or distributed runtime authority",
+  "capabilities": [
+    {"intent": "inspect_context", "operation": "context.select", "version": "1", "effect": "local_read", "skill": "nexify-governed-delivery", "input_fields": ["task"], "adapter_sources": ["tools/context_executor.py"], "output_schema": "context_executor_v1"},
+    {"intent": "verify_source", "operation": "source.verify", "version": "1", "effect": "local_read", "skill": "nexify-governed-delivery", "input_fields": ["path", "sha256"], "adapter_sources": ["tools/remediation_queue.py"], "output_schema": "source_hash_v1"},
+    {"intent": "preview_knowledge", "operation": "brain.preview", "version": "1", "effect": "local_read", "skill": "nexify-knowledge-operations", "input_fields": ["path", "sha256"], "adapter_sources": ["tools/brain_ingestion.py"], "output_schema": "redacted_chunk_hashes_v1"}
+  ],
+  "not_executable": ["ssh", "execute_command", "remote_mcp", "remote_brain_write", "payments", "tools/kunden-journey.mjs", "tools/ledger.mjs"],
+  "boundaries": {"distributed_fencing_verified": false, "network_allowed": false, "customer_data_allowed": false, "production_acceptance": false, "new_error_queue": false}
+}

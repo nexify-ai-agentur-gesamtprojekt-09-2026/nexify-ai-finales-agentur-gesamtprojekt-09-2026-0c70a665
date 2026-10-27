@@ -443,3 +443,14 @@ kein Umgehen der Netzrichtlinie und keine bestaetigte Suite-API-Verbindung.
 Der Gesamtauftrag bleibt aktiv. Ein gespeicherter Auftrag garantiert keinen
 unbegrenzten Hintergrundlauf; bei Wiederaufnahme zuerst die aktuellen
 `FACTORY-AUFTRAG.json` und `FACTORY-UMSETZUNGSSTAND.md` lesen und fortsetzen.
+
+## 2026-10-27 — isolierter lokaler Steuerungspfad
+
+Auf Basis b44e448 entstand `integration/local-control-2026-10-27`: unveränderliche
+Auftragsrevisionen, getrennte Start-/Abschlussabhängigkeiten, drei fest registrierte
+lokale Prüffähigkeiten, persistente Ergebnisse/Checkpoints, SQLite-Lease/Fencing,
+begrenzte Wiederaufnahme und explizite lokale Abnahme. Vorhandene RemediationQueue
+ist der einzige Fehlerkanal. Details, Semantik-Diff, Ein-Web-App-Matrix und Rollback:
+`docs/automation/local-control.md`. Tests/Review: `evidence/local-control-2026-10-27`.
+PR35 und PR36 bleiben getrennte Stände; keine Remote-/Providerintegration oder
+Produktionsabnahme, kein Daemon und kein zusätzliches Frontend aktiviert.
