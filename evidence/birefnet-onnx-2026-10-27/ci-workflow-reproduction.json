@@ -7,11 +7,19 @@
   "cause": "colon-space in unquoted run scalar --only-binary=:all:",
   "fix": "YAML literal block preserves exact pip command as string",
   "local_parse_after_fix": "passed",
-  "workflow_sha256": "71a3692c99ee5621a2624def2d3b6ab6677451a5781d288d04dd5997b109b49d",
+  "workflow_sha256": "8f55c7f81bad67a6c6d0f85879b6b34e844d8a3b109930be6d18eebe400013c9",
   "external_blockers": {
     "canonical_vercel": "existing GitHub author NeXify-Automate not linked to Vercel team; no identity or team change",
     "cloudflare": "preview script name exceeds54characters; not changed",
     "paperclip": "automatic review unauthorized by bot configuration; no rights change"
   },
-  "remote_ci_after_fix": "pending"
+  "remote_ci_after_fix": "pending",
+  "second_run": {
+    "head": "1451f7a8bae156f4c26371cb0748ea618a33be14",
+    "run": 40556591213,
+    "other_jobs": "react-site,next-web,postgres-isolation,openapi-schema all success",
+    "repository_failure": "setup-python3.12.15 binary from Ubuntu24 hosted cache cannot start in Debianbookworm container: GLIBC_2.38 not found",
+    "fix": "same existing Ubuntu24.04 host for setup-python and repository execution; explicit Python3.12.15; pinned Node/actions and all checks retained; obsolete container safe.directory write removed",
+    "native_ci_readback": "pending"
+  }
 }
