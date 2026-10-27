@@ -243,6 +243,15 @@
       "what": "Quellenregister verliert Owner, Referenzen oder seine abgeleitete Ansicht.",
       "why": "Quellenkonsolidierung und lokale Tests beweisen keine vollständige Originalrekonstruktion oder Produktionsabnahme.",
       "fix": "Bestehendes Register und Ansicht gemeinsam aktualisieren; offene Abnahmen behalten."
+    },
+    {
+      "id": "ARCH-028",
+      "description": "Lokale Warenkorbfähigkeiten werden serverseitig signiert und bleiben tenant-/cartgebunden.",
+      "check": "python3 -m unittest discover -s tests -p test_local_shop_cart.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Browserbekannter CSRF-Wert wird als Autorität genutzt oder Replay umgeht Ablauf/CAS/Transaktion.",
+      "why": "Ein CSRF-Token ist kein geheimer Signierschlüssel; lokale Vorbereitung erteilt keine Checkout-/Providerrechte.",
+      "fix": "Getrennten persistenten serverinternen Schlüssel und Negativ-, Race-/Prozessabbruchtests erhalten; keine Produktionsfreigabe ableiten."
     }
   ]
 }

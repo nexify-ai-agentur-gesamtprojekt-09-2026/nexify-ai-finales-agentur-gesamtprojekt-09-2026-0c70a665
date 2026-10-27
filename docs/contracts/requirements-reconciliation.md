@@ -462,9 +462,9 @@ Abschluss: Scoped gates and real target readback pass; partial publication never
 
 Soll (SRC-MASTER-1.2-REQUIREMENTS): Complete shop and chosen unfinished preview reference while preserving newer fixes; frontend/demo is not a functioning shop.
 Einordnung: Paraphrase of directly read compiled Master1.2; not original user transcript.
-Dateien/Funktionen: config/site-map.json, docs/contracts/factory.openapi.json
-Beleg: Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.
-Auslieferung: source_reconciled_implementation_unverified; keine Gesamtanforderung abgenommen.
-Lücke: Shop/checkout/order contracts are target definitions, no complete production shop or accepted route/brand mapping.
-Nächster Schritt (Shop / Product / Implementation): Resolve source-backed shop assortment/route/backend scope and implement the safe local slice with regression.
+Dateien/Funktionen: config/site-map.json, docs/contracts/factory.openapi.json, apps/agent-gateway/cart.py, tests/test_local_shop_cart.py, docs/contracts/local-shop-cart.md
+Beleg: 16 synthetic local cart tests passed on existing Store: scoped access, exact replay, expiry, binding, CAS/concurrency, transaction abort and actual process exit/restart before commit; server-only signing key, forged browser-CSRF token, missing/invalid key negatives. Separate Sol review found and rechecked two signing-key defects; both corrected, final commit binding pending; no HTTP/UI/production acceptance.
+Auslieferung: reported_partial_implementation_unverified; keine Gesamtanforderung abgenommen.
+Lücke: Local cart core implemented; no HTTP/UI attachment, authoritative live catalog, stock/tax/shipping/payment/returns or complete order backend. Public scope and exact shop/brand/tenant mapping remain open.
+Nächster Schritt (Shop / Product / Implementation): Review local core independently, attach a bounded local test adapter and own UI, then collect source-bound production catalog/identity/commercial inputs for actual shop flows.
 Abschluss: Actual product/cart/checkout/order/return/funding/tenant flows accepted; no fake stock or paid execution.

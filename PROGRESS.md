@@ -1,3 +1,21 @@
+# Lokale Shop-Warenkorbvorbereitung
+
+Current State: geprüfter und ausgelieferter Quellen-/Medienstand a66a509 bleibt
+als PaketVersion7 erhalten. Neuer begrenzter Warenkorbkern nutzt bestehende
+visitor.Store objects/receipts, keine zweite Datenbank/Queue. Sechzehn synthetische
+Regressionen bestanden, einschließlich Prozessabbruch vor Commit und Restart.
+Keine HTTP-/UI-Anbindung, keine Artikel-/Preis-/Steueraktivierung, kein Checkout,
+keine Zahlung oder Produktionssitzung. Sol-Review fand einen browserbekannten CSRF-Signierschlüssel; durch separaten
+serverinternen Schlüssel korrigiert. Zweiter Befund zum Schlüsselverlust durch
+gebundene Schlüsselgeneration korrigiert; beide separat Sol-nachgeprüft.
+check/test/e2e/check-arch/clean-check mit362Pythonfällen bestanden;
+abschließende Commitbindung folgt. Kein Gesamtshop-/Produktionsabschluss.
+Next Steps: Findings beheben/nachprüfen, Gesamtgates, dann lokale sichere
+Testadapter-/UI-Anbindung; autoritativer Shop-/Tenant-/Katalogstand bleibt nötig.
+Server-/Brainarbeit liegt exklusiv beim getrennten Server-Codex; keine Hook-,
+DNS-, Auth-, Server- oder Domainänderung durch diesen lokalen Schritt.
+Details: docs/contracts/local-shop-cart.md.
+
 # Wiederaufnahme: Quellen- und Medienvertrag
 
 Current State: geprüfte Version6 auf079057f erhalten; laufendes Delta schließt

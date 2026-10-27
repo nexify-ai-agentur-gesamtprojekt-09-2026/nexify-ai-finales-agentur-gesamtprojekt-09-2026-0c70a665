@@ -1121,7 +1121,8 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "8a0ed7d8f595944b33ee0f173fa2451b00fe321d0203bbbe70bee187742ac448",
+    "PROGRESS.md": "4d6fcdb4002f4de3cf6910c15728f3e5afb73f6791903a197041120f648a0d5c",
+    "apps/agent-gateway/cart.py": "c5f8fbe5fbbc63e9caaf4dc72b2392ddc349605f91b2823850d9c43546bd93f5",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
     "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
     "apps/site/pwa/plugin.mjs": "3c805218638e6923569ce5f61dbdce70c1b67c6a0e45893fa0cf409cad4c0587",
@@ -1142,7 +1143,7 @@
     "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
     "apps/web/components/Workspace.tsx": "dfaf02f69ce5cf3b2bc9f2d040fe3222131d44c3aa79c3fd7e555bb74841ffce",
     "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
-    "config/acceptance-coverage.json": "724cb0b711a865b7526f7df3e99ea2b5bc15ecfee96eed3228716fc101b06c76",
+    "config/acceptance-coverage.json": "750a5dc4114b551f8b3c59f5d6ef731abd1ca905a7f0cba393902816b53ee9b4",
     "config/ai-migration-policy.json": "98ba89849bff3585843f3fd603a8d0da9df8c568ee534b90f3ddf5c3a82aeaa0",
     "config/api-prepaid.json": "4dcbfeaff130110213cbbb8a736b3f9ac90b25f4cf81bdf26ad2258622898708",
     "config/brain/agents.json": "062336475b7436f2f68307df66efc8008e26bde949d5f0508fbfa9746249d5c5",
@@ -1170,9 +1171,10 @@
     "docs/contracts/hero-media.json": "92a55c579cd26b31bb4850e284e64bfb13d4df1dcd74188d8becc0ff5c3f3ac2",
     "docs/contracts/hero-media.md": "a63b2b12fd0a028c4c0760ea9ebcd325df0d1d3ef89875d5dabc885bb168c048",
     "docs/contracts/hero-production-plan.json": "f351c138ff8c0ae8d14445b6cba59344b14a6aafa8848cf207caa315153dd3f6",
+    "docs/contracts/local-shop-cart.md": "3b7e82f45eef1213322f1d43949b8af8d0db2a20bb49f4b5487ce819eaba02c0",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "6390842b21d4169bf9d84e0679374df1a4e92d3c08df30e919c30f79f68bfb4f",
+    "docs/contracts/requirements-reconciliation.md": "358eb9e1dd2bc2c091e6ae7188e3411f6f2ce514c2bd530aa98e7db2e7d14b1d",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1212,6 +1214,7 @@
     "tests/test_capacity_planner.py": "660b6271ba509e2fa570b5e903457e5de8802f0f50307466f2b48dc7fa85773d",
     "tests/test_factory_contract.py": "69c9decb4c393b2342c3a77bc23d5f582f9cee41b38c58222114d330167d4905",
     "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
+    "tests/test_local_shop_cart.py": "4f3dfbfbbb8703be23401e10efe33648cf41d5a03f05d89b2e1a7a49b6af2c76",
     "tests/test_one_app_backend.py": "72c6571231a073ea4eb3397823620e1f97a1b7f53f8cc4b9304e3e41a722fb9a",
     "tests/test_public_surface_contract.py": "6b69cfde2ad888c001357e15199b50f3d89091ff41218976f5e011b5ccf6d4ef",
     "tests/test_release_prerequisites.py": "328cd20630a1962b3cb7d146cb0a0de91c3b028558dd40c3c258c8af91526e0b",
@@ -2485,13 +2488,16 @@
         "interpretation": "Paraphrase of directly read compiled Master1.2; not original user transcript.",
         "implementation_files": [
           "config/site-map.json",
-          "docs/contracts/factory.openapi.json"
+          "docs/contracts/factory.openapi.json",
+          "apps/agent-gateway/cart.py",
+          "tests/test_local_shop_cart.py",
+          "docs/contracts/local-shop-cart.md"
         ],
-        "test_evidence": "Existing local evidence applies only to its recorded source/version/scope; no new provider or production test.",
-        "actual_delivery": "source_reconciled_implementation_unverified",
+        "test_evidence": "16 synthetic local cart tests passed on existing Store: scoped access, exact replay, expiry, binding, CAS/concurrency, transaction abort and actual process exit/restart before commit; server-only signing key, forged browser-CSRF token, missing/invalid key negatives. Separate Sol review found and rechecked two signing-key defects; both corrected, final commit binding pending; no HTTP/UI/production acceptance.",
+        "actual_delivery": "reported_partial_implementation_unverified",
         "full_requirement_accepted": false,
-        "gap": "Shop/checkout/order contracts are target definitions, no complete production shop or accepted route/brand mapping.",
-        "next_step": "Resolve source-backed shop assortment/route/backend scope and implement the safe local slice with regression.",
+        "gap": "Local cart core implemented; no HTTP/UI attachment, authoritative live catalog, stock/tax/shipping/payment/returns or complete order backend. Public scope and exact shop/brand/tenant mapping remain open.",
+        "next_step": "Review local core independently, attach a bounded local test adapter and own UI, then collect source-bound production catalog/identity/commercial inputs for actual shop flows.",
         "completion_criterion": "Actual product/cart/checkout/order/return/funding/tenant flows accepted; no fake stock or paid execution.",
         "owner_area": "Shop / Product / Implementation"
       }
@@ -2512,7 +2518,9 @@
       "server_changes_by_this_workstream": false,
       "system_preview_reference": "https://system.nexifyai.cloud/",
       "system_preview_repo_commit_owner": "not_verified; parent coordinating server executor",
-      "remote_publication_requires_writer_reconciliation": true
+      "remote_publication_requires_writer_reconciliation": true,
+      "exclusive_server_workstream": "Server-Codex: host/owner/REA hooks/Brain/failed units/read-only system URL identity; prompt delivery confirmed, execution success unverified",
+      "exclusive_web_workstream": "this worktree: public pages, media integration, shop, portal/workplace UI and scoped app tests; no server/Brain/hooks/domain writes"
     }
   }
 }
