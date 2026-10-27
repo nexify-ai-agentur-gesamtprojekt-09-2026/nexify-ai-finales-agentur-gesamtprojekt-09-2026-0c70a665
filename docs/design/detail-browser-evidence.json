@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-26T14:49:51.202069+00:00",
+  "recorded_at": "2026-10-27T11:29:11.751878+00:00",
   "checks": [
     "client_navigation_preserves_conversation_draft",
     "guided_website_journey_and_reload_preferences_persist_without_auto_navigation",
@@ -24,7 +24,8 @@
     "sdk_mobile_real_chat_no_overflow_escape_and_focus_return",
     "sdk_browser_no_external_provider_requests_observed",
     "fresh_standalone_sdk_disabled_after_mobile_focus_fix",
-    "development_supervisor_stops_all_owned_process_groups"
+    "development_supervisor_stops_all_owned_process_groups",
+    "account_control_fallback_and_auth_routes_present"
   ],
   "public_routes": [
     "/",
@@ -65,7 +66,7 @@
     "/teileklar/rechtliches"
   ],
   "passed": true,
-  "scope": "Actual local React browser, visitor gateway, AI7 guided-preview SSE (session404 simulated) and fresh static standalone; no live LLM/provider call, production deployment, real Clerk login, external mail/calendar/payment or MCP authentication.",
+  "scope": "Actual local React browser, visitor gateway, AI7 guided-preview SSE (session404 simulated), fresh static standalone and disabled-auth account-control fallback; no live LLM/provider call, production deployment, real Clerk login, external mail/calendar/payment or MCP authentication.",
   "targeted_supplement_gutter_followup": [
     {
       "width": 1920,
@@ -123,8 +124,11 @@
     }
   ],
   "source_sha256": {
+    "apps/site/src/Auth.tsx": "4565e77538c4284b8992f6f66c64685f9ff114b67ac42cc8012e465eca27c903",
+    "apps/site/src/main.tsx": "8b8bc797994e3fce2355d430823e8b25f512d5b6621c26f677a2d566e5e1037d",
+    "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
     "apps/web/components/HomeContent.tsx": "eeb1fe649097390680011b7147ab5411249b724ea979b75266c36ac1b32eeb61",
-    "apps/web/components/Workspace.tsx": "a9bbfa009a1c66989387d3aa60672767a26c502e01259b5118869a12f54146d4",
+    "apps/web/components/Workspace.tsx": "6628ab16bdfa36ef40771b35b97ccd0c08d799eb962578b6131a59371562fd4d",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
   },
