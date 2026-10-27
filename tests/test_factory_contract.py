@@ -148,9 +148,19 @@ class SourceTests(unittest.TestCase):
         document = json.loads((ROOT / "docs/contracts/factory.openapi.json").read_text())
         catalog = json.loads((ROOT / "docs/contracts/prototype-pages.json").read_text())
         media = json.loads((ROOT / "docs/contracts/hero-media.json").read_text())
+        media_plan = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
         self.assertEqual(contract.validate_document(document, {p["page_id"] for p in catalog["pages"]}), [])
         self.assertEqual(contract.validate_coverage(document, catalog), [])
         self.assertEqual(contract.validate_media(media), [])
+        self.assertEqual(contract.validate_media_plan(media_plan), [])
+
+    def test_media_plan_rejects_missing_locale_and_shared_aifly_decision(self):
+        plan = json.loads((ROOT / "docs/contracts/hero-production-plan.json").read_text())
+        del plan["jobs"][0]["script_drafts"]["fr"]
+        next(job for job in plan["jobs"] if job["participant_slot"] == "aifly")["voice_assignment_status"] = "shared"
+        errors = contract.validate_media_plan(plan)
+        self.assertTrue(any("scripts incomplete" in error for error in errors))
+        self.assertTrue(any("distinct-voice" in error for error in errors))
 
     def test_real_private_operation_loses_tenant_binding_or_deny_policy(self):
         document = json.loads((ROOT / "docs/contracts/factory.openapi.json").read_text())
