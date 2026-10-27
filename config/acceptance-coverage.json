@@ -390,8 +390,8 @@
       "next_allowed_action": "Ziel-/Ownerbindung lesend ermitteln; keine Aliasänderung.",
       "required_prerequisite": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.",
       "closure_decision": {
-        "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
-        "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
+        "review_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
+        "reviewed_at": "2026-10-27T06:26:46.789884+00:00",
         "missing_input": "Aktueller autoritativer Project-Settings-Read mit Projekt-/Teamidentität, rootDirectory, buildCommand, outputDirectory, productionBranch; bestätigte gewünschte kanonische Domain.",
         "owner_area": "Deployment / Domainentscheidung",
         "assigned_external_person": null,
@@ -410,7 +410,27 @@
           "MASTER-15"
         ],
         "state": "open_not_closed_by_handoff",
-        "external_action_attempted": false
+        "external_action_attempted": false,
+        "known_mapping_evidence": {
+          "source": "evidence/one-app-2026-10-27/deployment-parent-report.json",
+          "received_at": "2026-10-27T05:10:15.483610+00:00",
+          "observed_at": null,
+          "independently_reproduced_here": false,
+          "preview_domain": "nexifyai.de",
+          "preview_commit": "66866298b3eb4054371b0e2a1e1f618f1bc8ca73",
+          "preview_branch": "factory/agency-separated-2026-10-26",
+          "preview_deployment": "dpl_3KcSgJUsdNbsJjiWvR74Xf95SdFA",
+          "preview_target": null,
+          "production_alias_branch": "main",
+          "production_alias_commit": "07833fb3f8166a3f8534f52bb1c1843c49f40919",
+          "production_deployment": "dpl_XXZBR56U9Nwx9Nj6MDR5GER5v4ZG",
+          "state": "READY for both reported deployments",
+          "not_proven": [
+            "current configured rootDirectory/buildCommand/outputDirectory/productionBranch",
+            "desired final canonical mapping",
+            "acceptance of integrated candidate"
+          ]
+        }
       }
     },
     {
@@ -794,19 +814,20 @@
         "docs/operating-model/NEXIFY-GESAMTSYSTEM.md",
         "config/selfservice-policy.json",
         "config/local-control.json",
-        "tests/test_selfservice_decisions.py"
+        "tests/test_selfservice_decisions.py",
+        "docs/contracts/trial-policy-clarification.md"
       ],
       "local_proof": "Nur lokale Fixtures und negative Verträge; Legacy-Zahlung/Journey nicht eingebunden.",
-      "remaining_gap": "Zusätzlich zu realen Adapterbelegen: explizite Auflösung MASTER-12-TRIAL-01 zwischen dokumentiertem fundingunabhängigem Suitebeginn und aktuellem start_trial-Fundinggate.",
+      "remaining_gap": "Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.",
       "owner_role": "Jeweiliger Adapterowner",
       "assigned_executor": null,
-      "next_allowed_action": "Produkt-/Finanzierungsowner bestätigt gültigen Suite-Startvertrag und betroffene UI/API-Zustände; dann gezielt fachlich freigegebene Implementierung samt unverändert striktem LLM-Fundingguard. Reale Adapter separat autorisieren.",
-      "required_prerequisite": "Zusätzlich zu realen Adapterbelegen: explizite Auflösung MASTER-12-TRIAL-01 zwischen dokumentiertem fundingunabhängigem Suitebeginn und aktuellem start_trial-Fundinggate.",
+      "next_allowed_action": "D06 korrigiert in einem gesonderten lokalen Umsetzungsschritt die bestätigte Abweichung: Suitebeginn gemäß Policy ohne Funding, Kostenfreigabe weiter zwingend vor LLM-Ausführung; D02 prüft unveränderten Kosten-/Leistungsumfang. In diesem Dokumentdelta keine Verhaltensänderung.",
+      "required_prerequisite": "Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.",
       "closure_decision": {
-        "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
-        "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Zusätzlich zu realen Adapterbelegen: explizite Auflösung MASTER-12-TRIAL-01 zwischen dokumentiertem fundingunabhängigem Suitebeginn und aktuellem start_trial-Fundinggate.",
-        "owner_area": "Produkt D06 / Finanzierung D02 / Identity-Vault-Payment-Modell-Usage-Owner",
+        "review_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
+        "reviewed_at": "2026-10-27T06:26:46.789884+00:00",
+        "missing_input": "Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.",
+        "owner_area": "D06 Entwicklung, KI und Integrationen / D02 Produkt und Finanzen",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
         "inspected_sources": [
@@ -818,9 +839,9 @@
           "config/local-control.json"
         ],
         "local_analysis_or_test": "Neue Charakterisierung: aktivierter unfundierter Workspace kann Trial nicht starten; Fehler explicit_validated_funding_required, Zustand unverändert, kein Hold/LLM-Reservierung. Betriebsmodell§5.1 und policy.starts_when nennen Funding nicht als Suite-Startbedingung. Öffentliche UI-Ansehbarkeit ist keine aktivierte Kunden-Suiteberechtigung. Kein kostenloses LLM-Guthaben daraus abgeleitet.",
-        "smallest_next_action": "Produkt-/Finanzierungsowner bestätigt gültigen Suite-Startvertrag und betroffene UI/API-Zustände; dann gezielt fachlich freigegebene Implementierung samt unverändert striktem LLM-Fundingguard. Reale Adapter separat autorisieren.",
-        "closure_criterion": "Quellen-/Codewiderspruch entschieden und freigegeben umgesetzt; Suiteberechtigung und LLM-Kostenfreigabe separat positiv/negativ geprüft; zusätzlich Identity/Vault/Payment/Modell/Usage-Reconciliation mit exaktem Readback.",
-        "boundary": "local_business_contract_conflict_and_external_adapter_acceptance",
+        "smallest_next_action": "D06 korrigiert in einem gesonderten lokalen Umsetzungsschritt die bestätigte Abweichung: Suitebeginn gemäß Policy ohne Funding, Kostenfreigabe weiter zwingend vor LLM-Ausführung; D02 prüft unveränderten Kosten-/Leistungsumfang. In diesem Dokumentdelta keine Verhaltensänderung.",
+        "closure_criterion": "Suitebeginn nach den drei dokumentierten Voraussetzungen ohne Funding geprüft; Modellreservierung ohne gültiges Funding bleibt gesperrt, Replay/Startzeit/Tenantgrenzen erhalten und unabhängig geprüft. Reale Adapterbelege separat erforderlich.",
+        "boundary": "confirmed_local_implementation_deviation_and_external_adapter_acceptance",
         "related_cases_not_start_locks": [
           "MASTER-03",
           "MASTER-04",
@@ -1088,7 +1109,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "e931870717a8947837c11199bcc5b3205bbf429f41f795c8dbe6cc88a8214361",
+    "PROGRESS.md": "3fda711f19a6832fc30c2363f90093b8b40aed538e6572da1686db1a17129760",
     "apps/selfservice/domain.py": "0023a14fc8f142b7be728c0797dee8d0f08f767c1e4a2563d4423eee6a78e485",
     "apps/site/package.json": "f8e2cb173d5bc1fe7cc9a901f33d69b6cd5cad9c28a92cfe1b0dcf53384a21c2",
     "apps/site/pwa/plugin.mjs": "3c805218638e6923569ce5f61dbdce70c1b67c6a0e45893fa0cf409cad4c0587",
@@ -1122,6 +1143,7 @@
     "docs/contracts/factory.openapi.json": "a5a7ac8f95a991eac1dd1cbbaf0a328cd0944fe8a4f71cff8bc4b5b0de5ad410",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
+    "docs/contracts/trial-policy-clarification.md": "dae84a4f7a69baef19cc7e850f8ed76564d836c916bceea46f36c26961d69d8b",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
     "evidence/integration-2026-10-27/independent-review.md": "324bd80874ddfe764734532b71ae51fd17d865bd63efa2eebcee5228c5814aa4",
     "evidence/one-app-2026-10-27/accessibility-local.json": "de45d2ff1842ddb711aec063684cd9e80e566c36b100bf34ef66531ebd473500",
@@ -1166,5 +1188,7 @@
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca"
   },
   "whole_system_accepted": false,
-  "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853"
+  "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
+  "clarification_delta_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
+  "clarification_observed_at": "2026-10-27T06:26:46.789884+00:00"
 }

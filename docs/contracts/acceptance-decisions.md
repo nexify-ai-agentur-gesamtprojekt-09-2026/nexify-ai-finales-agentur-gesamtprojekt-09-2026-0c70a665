@@ -2,7 +2,7 @@
 
 Basis c8c865fc700cd2f0049e50efda19cb3a638fe853 / LibraryVersion3. Nur lokale Analyse und synthetische Regression; keine aktuelle externe Lesung, Mutation oder neue fachliche Regel. Rollen benennen Verantwortungsbereiche, keine verifizierte konkrete Personenzuweisung. Alle Fälle bleiben bis zum jeweiligen Nachweis offen.
 
-Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber nicht zwölf rein externe Arbeitsstopps: MASTER-12 enthält zusätzlich einen lokal bestätigten Geschäftsregelkonflikt und wird als local_remaining geführt; MASTER-04/10/14/18 benötigen auch konkrete Implementierungs-/Mappingarbeit. MASTER-16 erhielt einen zusätzlichen lokalen Restore-Nachweis. MASTER-09 bleibt lokal/qualifiziert zu prüfen. Abhängige Fälle unten sind Beziehungen, keine pauschalen Startsperren oder ausführbare Queue.
+Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber nicht zwölf rein externe Arbeitsstopps: MASTER-12 enthält zusätzlich eine lokal bestätigte Abweichung von eindeutiger Policy und wird als local_remaining geführt; MASTER-04/10/14/18 benötigen auch konkrete Implementierungs-/Mappingarbeit. MASTER-16 erhielt einen zusätzlichen lokalen Restore-Nachweis. MASTER-09 bleibt lokal/qualifiziert zu prüfen. Abhängige Fälle unten sind Beziehungen, keine pauschalen Startsperren oder ausführbare Queue.
 
 ## MASTER-02 — Deployment / Domainentscheidung
 
@@ -102,17 +102,17 @@ Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber
 
 **Gesamtzielbezug:** MASTER-12, MASTER-18, MASTER-15. Kein Handoff schließt diesen Fall.
 
-## MASTER-12 — Produkt D06 / Finanzierung D02 / Identity-Vault-Payment-Modell-Usage-Owner
+## MASTER-12 — D06 Entwicklung / D02 Produkt und Finanzen / Adapterowner
 
-**Fehlender Eingang:** Zusätzlich zu realen Adapterbelegen: explizite Auflösung MASTER-12-TRIAL-01 zwischen dokumentiertem fundingunabhängigem Suitebeginn und aktuellem start_trial-Fundinggate.
+**Fehlender Eingang:** Kein neuer fachlicher Entscheidungsinput für den Suitebeginn erforderlich: dokumentierte Policy ist eindeutig. Fehlend sind die quellentreue lokale Korrektur des start_trial-Fundinggates und deren Regression/Review; reale Adapterabnahme bleibt separat offen.
 
 **Geprüfte Quellen:** `docs/operating-model/NEXIFY-GESAMTSYSTEM.md`; `config/selfservice-policy.json`; `apps/selfservice/domain.py`; `tests/test_selfservice_domain.py`; `tests/test_selfservice_decisions.py`; `config/local-control.json`.
 
 **Lokal möglich/erledigt:** Neue Charakterisierung: aktivierter unfundierter Workspace kann Trial nicht starten; Fehler explicit_validated_funding_required, Zustand unverändert, kein Hold/LLM-Reservierung. Betriebsmodell§5.1 und policy.starts_when nennen Funding nicht als Suite-Startbedingung. Öffentliche UI-Ansehbarkeit ist keine aktivierte Kunden-Suiteberechtigung. Kein kostenloses LLM-Guthaben daraus abgeleitet.
 
-**Kleinste nächste Aktion:** Produkt-/Finanzierungsowner bestätigt gültigen Suite-Startvertrag und betroffene UI/API-Zustände; dann gezielt fachlich freigegebene Implementierung samt unverändert striktem LLM-Fundingguard. Reale Adapter separat autorisieren.
+**Kleinste nächste Aktion:** D06 korrigiert in einem gesonderten lokalen Umsetzungsschritt die bestätigte Abweichung: Suitebeginn gemäß Policy ohne Funding, Kostenfreigabe weiter zwingend vor LLM-Ausführung; D02 prüft unveränderten Kosten-/Leistungsumfang. In diesem Dokumentdelta keine Verhaltensänderung.
 
-**Abschlusskriterium:** Quellen-/Codewiderspruch entschieden und freigegeben umgesetzt; Suiteberechtigung und LLM-Kostenfreigabe separat positiv/negativ geprüft; zusätzlich Identity/Vault/Payment/Modell/Usage-Reconciliation mit exaktem Readback.
+**Abschlusskriterium:** Suitebeginn nach den drei dokumentierten Voraussetzungen ohne Funding geprüft; Modellreservierung ohne gültiges Funding bleibt gesperrt, Replay/Startzeit/Tenantgrenzen erhalten und unabhängig geprüft. Reale Adapterbelege separat erforderlich.
 
 **Gesamtzielbezug:** MASTER-03, MASTER-04, MASTER-05, MASTER-10, MASTER-15. Kein Handoff schließt diesen Fall.
 
@@ -185,3 +185,7 @@ Die zwölf bisherigen externen Abnahmeflächen bleiben unbewiesen. Sie sind aber
 **Abschlusskriterium:** Operation wird nur bei passendem aktuellen vollständigen Nachweis gewählt; falsches Ziel/Rechteverlust/Skillfehler/Partial/ungewisser Ausgang blockieren oder reconciliieren belegt; kein stiller Fallback.
 
 **Gesamtzielbezug:** MASTER-10, MASTER-14, MASTER-15. Kein Handoff schließt diesen Fall.
+
+## Quellenpräzisierung nach Entscheidungsdelta c09204c
+
+[Trial-Policy und bekannte Vercel-Zuordnungen](trial-policy-clarification.md) präzisieren die frühere Entscheidungseinordnung. Keine neue Nutzerentscheidung zum bereits definierten Suitebeginn; keine Änderung am Domaincode.

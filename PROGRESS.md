@@ -1,3 +1,15 @@
+# Quellenpräzisierung für PaketVersion4 · lokal
+
+Current State: geprüftes Entscheidungsdelta c09204c wird mit PaketVersion3
+zusammengeführt. Neue Dokumentpräzisierung: Suitebeginn vor Funding ist bereits
+verbindlich beschrieben; keine neue fachliche Nutzerentscheidung nötig.
+D06 korrigiert künftig die technische Abweichung, D02 prüft Kostenumfang.
+In diesem Schritt keine Verhaltens-, Preis-, Auth- oder Provideränderung.
+Bekannte Vercel-Zuordnungen mit Parentberichtstand erhalten; nur fehlende
+Settings und gewünschte endgültige Zuordnung bleiben unbestätigt.
+Next Steps: quellentreuer lokaler Trial-Fix als gesonderter Auftrag; reale
+Adapter-/Tenant-/Release-/Restoreabnahmen bleiben offen.
+
 # Entscheidungskreis nach PaketVersion3 · lokal
 
 Current State: Grundlage c8c865f unverändert als ausgeliefertes PaketVersion3.
