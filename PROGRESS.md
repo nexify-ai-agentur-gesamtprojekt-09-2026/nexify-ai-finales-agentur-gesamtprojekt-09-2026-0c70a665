@@ -1,3 +1,16 @@
+# Freigegebene CSP-Meldewegkorrektur · lokaler Prüfstand vor PR46-Übertragung
+
+Rückweg3cad2ad bleibt auf preservation/reviewed-scenes-3cad2ad-20261028 erhalten.
+Neue ausdrücklich bestätigteFreigabe28.10.13:48UTC:direktenCSP-Meldeweg entfernen,
+ALLESchutzregeln erhalten;geprüftenStandPR46 und maximal5USD zusätzlicheActions.
+Nurreport-uri/report-to undReport-ToHeaderentfernt;9Schutzdirektiven sowieandere
+Header/Configwerteidentisch. DreiFokustests undechterlokalerProduktionsbrowser
+bestätigenweiterblockierteFremdskripte/-bilderbei0externenRequests. Abschließende
+Gates/SHAbindung/ReviewundRemoteergebniswerdengetrenntgeführt. KeineDNS-/Konto-/
+Credential-/RepoLösch-/MainMerge-/ProductionPromote-/Uploadaktion freigegeben.
+HistorischeAutoren bleiben erhalten;neueArbeit nutztverifiziertesnexifyai-dev.
+NextMap-Finalassetzuordnung sowieechteProvider-/Tenant-/Releaseabnahmen offen.
+
 # Bildzwischenlösung und öffentliche Build-Konfiguration · ab 702e670
 
 NeuestePriorität: Bilder zuerst.49Slots/36öffentlicheRouten mit12Pascal-,16NeX-

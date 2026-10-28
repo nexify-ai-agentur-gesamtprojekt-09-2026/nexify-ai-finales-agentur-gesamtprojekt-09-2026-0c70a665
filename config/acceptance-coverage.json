@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "87c91afd372039525d26f16ff2daac8ad8c58f572b0978a10434a481642c8822",
+    "PROGRESS.md": "048aae6c241d9c0e961c2df09f07bf376868faca9994e131fdce8b539c91a09c",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "a7bf5ad6fb497af73b447b85053b08404b7a4a7788809e277c9a94a6f04973c4",
+    "docs/contracts/requirements-reconciliation.md": "630691f51325e757456591161ac07558487a1beeeef80bb1a6abb205d984cd2f",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1480,7 +1480,7 @@
     "apps/site/tests/exception-privacy.test.mjs": "18e3c181141635338d080a3611bb02769196a9edd6d2406327d9bb2f9acada34",
     "apps/site/tests/private-sourcemaps.test.mjs": "84890dc1c6a599733143e3212ae23d997c83e69543187b548b71a487e63d9fec",
     "apps/site/tests/browser-exception-capture.mjs": "5c416573af5b6954eabda874ca046706b7300cdd0100ea5ae44ef28e8b495836",
-    "docs/contracts/observability-local-integration.md": "af54d9727b3d2fe2ab3d42ecc1705964dd1a0a6487d51e789c70793574c0415e",
+    "docs/contracts/observability-local-integration.md": "8fd460750bef55512fe9e6d265ce13855514d3910eac68ab7b0b37bb9d4036b6",
     "docs/runbooks/sentry.md": "cd6ba98201912487cfccb9081b86f9d40d7f9ff65fe74adb4d44169bb090350c",
     "evidence/observability-integration-2026-10-28/browser-exceptions-vite.json": "d597816ba97dac5816b1d50c66ac4f51544b125aa7c477625e39afea55bc8477",
     "evidence/observability-integration-2026-10-28/browser-exceptions-next.json": "3bde1a81268fd4031f7592635e724b4b9e28f3df4aaf9fb4d992e2b28cd0f3c5",
@@ -1531,7 +1531,12 @@
     "docs/contracts/interim-scene-images.md": "3d2534b86feaeebfac4ccf5a4b7a3e12672f61b12391f43c2dfc435c45346198",
     "tools/lint.mjs": "7e0ac19d6e10f703b66b840d5aa7beaad498e32115c01ce1606d08b754ee97b0",
     "tsconfig.json": "4dfc64b7b6309f9e4a86f23fe10bf6535ba54fd61586a0657f304c5006ae202d",
-    "evidence/configuration-2026-10-28/interim-scenes-browser.json": "3390feb0ffcbb06fd863c63f6b5287bf273d44be830a7cfec5f35f3c1dba046d"
+    "evidence/configuration-2026-10-28/interim-scenes-browser.json": "3390feb0ffcbb06fd863c63f6b5287bf273d44be830a7cfec5f35f3c1dba046d",
+    "vercel.json": "aadfeead08cd84ae9aece5015f721aa264c53db002619f8f39f57e67b482704a",
+    "apps/site/tests/csp-reporting.test.mjs": "b5c153edda8cbe047195d96ea01728e8993c510da2211081132f2e357b60127f",
+    "apps/site/tests/browser-csp-policy.mjs": "4a44ead995c998c5e882a69a33b25518757787fd3fd68ef939343fa228528e9f",
+    "apps/site/tests/fixtures/csp-enforcement-baseline.json": "c44d95bf33dd6ae5257073d29379c8b13bec6911f669c4de858478debaf7cf24",
+    "evidence/csp-report-removal-2026-10-28/browser.json": "9fc4f61d59d825491504aaf45889e74419b9b799d0fd04dac42aeb19b15a8a8e"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2061,6 +2066,16 @@
         "acquisition": "parent_verified_excerpt",
         "original_seen_here": false,
         "scope": "Existing suitable scene images temporarily before videos;images first,then deployment codechecks;no media generation/credentials/security/remote release authorization"
+      },
+      {
+        "id": "SRC-CSP-REPORT-REMOVAL-APPROVAL-20261028",
+        "locator": "Parent verified user_message.read_messages Sentinel_4b826df48b148191b777746858d91e1f after questionSentinel_8032ba350cb081919d997f9ae8c00d9a;partial=false",
+        "source_date": "2026-10-28T13:48:46.876029Z",
+        "observed_at": "2026-10-28",
+        "role": "explicit_user_scoped_security_and_PR_CI_approval_reported_by_parent",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "Remove direct CSP report-toPostHog only while preserving all protective rules;transferreviewedcodePR46 and max5USD additionalActions until evening;no other provider spend,identity rewriting,repo deletion,DNS or account changes bythiswriter"
       }
     ],
     "requirements": [
@@ -3191,7 +3206,8 @@
         "acceptance_case_id": "REC-EXCEPTIONS-LOCAL-01",
         "source_ids": [
           "SRC-LOCAL-OBSERVABILITY-INTEGRATION-20261028",
-          "SRC-PUBLIC-FRONTEND-RELIABILITY-20261027"
+          "SRC-PUBLIC-FRONTEND-RELIABILITY-20261027",
+          "SRC-CSP-REPORT-REMOVAL-APPROVAL-20261028"
         ],
         "applicable_requirement": "Shared Vite/Next exception-only capture with explicit consent,privacy and release binding;private source maps;preserve newer UI and compatible pinned observability sources.",
         "interpretation": "Purely local integration,actual SDK intercept;no added user analytics,Sentry browser duplication,external event,upload or production approval.",
@@ -3214,9 +3230,14 @@
           "docs/runbooks/sentry.md",
           "evidence/observability-integration-2026-10-28/browser-exceptions-vite.json",
           "evidence/observability-integration-2026-10-28/browser-exceptions-next.json",
-          "evidence/observability-integration-2026-10-28/private-maps.json"
+          "evidence/observability-integration-2026-10-28/private-maps.json",
+          "vercel.json",
+          "apps/site/tests/csp-reporting.test.mjs",
+          "apps/site/tests/browser-csp-policy.mjs",
+          "apps/site/tests/fixtures/csp-enforcement-baseline.json",
+          "evidence/csp-report-removal-2026-10-28/browser.json"
         ],
-        "test_evidence": "Both actual SDK surfaces:8 checks and4 local wire attempts each (3positive+1intentional503),0external events;503→revoke→immediate reconsent cannot revive retries/unload;5controller/privacy+2map Node regressions;private Vite5/Next17maps,0public maps.",
+        "test_evidence": "Both actual SDK surfaces:8 checks and4 local wire attempts each (3positive+1intentional503),0external events;503→revoke→immediate reconsent cannot revive retries/unload;5controller/privacy+2map Node regressions;private Vite5/Next17maps,0public maps. Scoped CSPdelta:3Nodeenforcement/header tests andactualproductionBrowser2blockedforeignsources,0externalrequests;explicitnewapproval. Exactcommit/review/publishstatus separatelybound.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
         "gap": "Consent interface now locally bound in follow-up;real privacy/release/provider acceptance,officialsource-map upload/debug-ID/deobfuscation and remote gates remain open. Map5/17 receipt is historical b4build,not a new consentbuild claim.",

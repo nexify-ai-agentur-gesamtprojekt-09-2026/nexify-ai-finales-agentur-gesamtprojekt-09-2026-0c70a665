@@ -1,0 +1,23 @@
+{
+  "scope": "actual local production assets with current deployment CSP;two controlled blocked URLs;no live deployment or customer data",
+  "violations": [
+    {
+      "directive": "script-src-elem",
+      "disposition": "enforce"
+    },
+    {
+      "directive": "img-src",
+      "disposition": "enforce"
+    }
+  ],
+  "external_requests": 0,
+  "external_events": 0,
+  "page_errors": [],
+  "source_sha256": {
+    "vercel.json": "aadfeead08cd84ae9aece5015f721aa264c53db002619f8f39f57e67b482704a",
+    "apps/site/tests/fixtures/csp-enforcement-baseline.json": "c44d95bf33dd6ae5257073d29379c8b13bec6911f669c4de858478debaf7cf24",
+    "apps/site/tests/csp-reporting.test.mjs": "b5c153edda8cbe047195d96ea01728e8993c510da2211081132f2e357b60127f",
+    "apps/site/tests/browser-csp-policy.mjs": "4a44ead995c998c5e882a69a33b25518757787fd3fd68ef939343fa228528e9f"
+  },
+  "passed": true
+}

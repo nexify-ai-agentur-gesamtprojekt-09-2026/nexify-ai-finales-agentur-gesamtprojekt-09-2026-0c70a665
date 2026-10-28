@@ -62,6 +62,20 @@ keine Persistenz. Rechtliche und reale Release-/Ingestionabnahme bleiben offen.
 CI40613522911 am Head4fc8753 wurde durch die unveränderte 24-Stunden-Supply-Chain-Regel vor den Browser-/Buildtests gestoppt. Beide Apps verwenden deshalb den offiziellen npm-Pin posthog-js1.438.24 (veröffentlicht26.10.2026 22:15UTC), mit vorhandenen kompatiblen Core-/Types-Versionen. Keine neue Release-Age-Ausnahme. Ein erfolgreicher Frozen-Install ersetzt nicht die erneuten SDK-/Consent-Browserprüfungen; deren aktuelle Nachweise sind separat gebunden.
 # Konfigurationsprüfung optimierter Ausgaben · 28.10.2026
 
+## Späteres ausdrücklich freigegebenes CSP-Delta
+
+Parent verifizierte die direkte Nutzerantwort `Sentinel_4b826df48b148191b777746858d91e1f`
+vom28.10.2026T13:48:46.876029Z nach der konkreten Frage
+`Sentinel_8032ba350cb081919d997f9ae8c00d9a` neu und vollständig. Dies ersetzt im
+begrenzten Scope die frühere Ablehnung: Der direkte CSP-PostHog-Meldeweg darf weg,
+sämtliche schützenden Regeln bleiben. Keine andere Datenschutz-/Authkonfiguration.
+Die lokalen drei Tests vergleichen Schutzdirektiven und andere Header mit3cad2ad;
+der echte lokale Produktionsbrowser erhält die aktuelle Headerkonfiguration,
+blockiert zwei kontrollierte Fremdquellen weiterhin und sendet nichts extern.
+Das ist keine bereits erfolgte Änderung der produktiven Header oder Liveabnahme.
+PR46/CI bis5USDzusätzlich ist separat erlaubt; keine anderen Providerkosten,
+Autorenumschreibung, Sourcearchiv-/Symbolsetuploads oder Main-/Productionaktion.
+
 Der Harness erstellt optimierte Ausgaben nun selbst mit minimaler synthetischer
 Prozessumgebung. Vorhandene Dotenvdateien werden nur auf Existenz geprüft und
 blockieren den Lauf, ohne Inhalte zu lesen. Eingaben und tatsächlich getestete
