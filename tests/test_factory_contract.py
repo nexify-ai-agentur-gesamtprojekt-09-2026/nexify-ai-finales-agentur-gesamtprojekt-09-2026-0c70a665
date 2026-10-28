@@ -224,7 +224,7 @@ class SourceTests(unittest.TestCase):
         self.assertTrue(any("deny-by-default" in error for error in errors))
 
     def test_real_git_enumeration_detects_omission_and_hash_drift(self):
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
             root = Path(tmp)
             subprocess.run(["git", "init", "-q", str(root)], check=True)
             (root / "one.html").write_text("<title>One</title>")
@@ -241,7 +241,7 @@ class SourceTests(unittest.TestCase):
             self.assertTrue(any("omits" in error for error in contract.validate_catalog(catalog, {"N1": root})))
 
     def test_path_traversal_and_symlink_escape_rejected(self):
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
             root = Path(tmp) / "repo"
             root.mkdir()
             outside = Path(tmp) / "private"

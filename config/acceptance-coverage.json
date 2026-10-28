@@ -1321,7 +1321,7 @@
     "tests/test_ai_migration.py": "dbe2653f3d69e8d5e9907173f92b1fcc12c1cbd8ea1db4eb46f63196a011f414",
     "tests/test_brain_ingestion.py": "c0b88440609ed22e6aec20eb3a7ff687d0676ca356ef9b7829c2d0af15b81194",
     "tests/test_capacity_planner.py": "660b6271ba509e2fa570b5e903457e5de8802f0f50307466f2b48dc7fa85773d",
-    "tests/test_factory_contract.py": "243e9616a63c691c42038c27e07b18c5bcb28e14fd95a0338565310a400b8a99",
+    "tests/test_factory_contract.py": "ff94d35ada4393758584e35ecbb036ce6db8c025fd0133a9765736877fe9e4eb",
     "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
     "tests/test_local_shop_cart.py": "4f3dfbfbbb8703be23401e10efe33648cf41d5a03f05d89b2e1a7a49b6af2c76",
     "tests/test_local_shop_http.py": "4ccb484ad2e9a0e32a41985bd75fd0a355d326c67bc70b7a69008222a6f8659a",

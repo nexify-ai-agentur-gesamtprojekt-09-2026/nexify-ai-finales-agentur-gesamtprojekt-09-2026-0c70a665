@@ -21,7 +21,7 @@ SPEC.loader.exec_module(release)
 
 class ReleaseTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory()
+        self.temporary = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.root = Path(self.temporary.name)
         self.source = self.root / "apps/site/dist"
         self.source.mkdir(parents=True)
