@@ -23,6 +23,16 @@
   --color-semantik-warnung: #FFC24A;
   --color-semantik-fehler: #FF8A7A;
   --color-semantik-licht: #A78BFA;
+  --color-identity-scene-wall-top: #E0E3DC;
+  --color-identity-scene-wall-base: #D8DED4;
+  --color-identity-scene-wall-edge: #C6CEC0;
+  --color-identity-scene-floor: #AEB9A7;
+  --color-identity-scene-ink: #26312B;
+  --color-identity-scene-muted: #536445;
+  --color-identity-scene-accent: #7D9D2E;
+  --color-identity-scene-shadow: #273722;
+  --color-identity-scene-card: #EDF0E0;
+  --color-identity-scene-rim: #555F55;
   --color-print-tinte: #14191C;
   --color-print-papier: #F2F3EF;
   --color-print-lime: #C8F04B;

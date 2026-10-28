@@ -6,6 +6,18 @@
     "text": { "primaer": { "$value": "#FFFFFF", "$type": "color" }, "sekundaer": { "$value": "#E3E6E3", "$type": "color" }, "tertiaer": { "$value": "#BCC1BD", "$type": "color" }, "gedaempft": { "$value": "#9CA29E", "$type": "color", "$description": "5,9:1 auf graphit-800" }, "aufLime": { "$value": "#111312", "$type": "color" } },
     "marke": { "lime": { "$value": "#D7FA50", "$type": "color" }, "limeHell": { "$value": "#EEFF9A", "$type": "color" }, "limeDunkel": { "$value": "#BFE83C", "$type": "color" }, "limeGruen": { "$value": "#78C331", "$type": "color" } },
     "semantik": { "erfolg": { "$value": "#6FE3CF", "$type": "color" }, "warnung": { "$value": "#FFC24A", "$type": "color" }, "fehler": { "$value": "#FF8A7A", "$type": "color" }, "licht": { "$value": "#A78BFA", "$type": "color", "$description": "nur Signalfeld und Lichtflecken" } },
+    "identityScene": {
+      "wallTop": { "$value": "#E0E3DC", "$type": "color" },
+      "wallBase": { "$value": "#D8DED4", "$type": "color" },
+      "wallEdge": { "$value": "#C6CEC0", "$type": "color" },
+      "floor": { "$value": "#AEB9A7", "$type": "color" },
+      "ink": { "$value": "#26312B", "$type": "color" },
+      "muted": { "$value": "#536445", "$type": "color" },
+      "accent": { "$value": "#7D9D2E", "$type": "color" },
+      "shadow": { "$value": "#273722", "$type": "color" },
+      "card": { "$value": "#EDF0E0", "$type": "color" },
+      "rim": { "$value": "#555F55", "$type": "color" }
+    },
     "print": { "tinte": { "$value": "#14191C", "$type": "color" }, "papier": { "$value": "#F2F3EF", "$type": "color" }, "lime": { "$value": "#C8F04B", "$type": "color", "$description": "Lime für Papier und E-Mail (CD-2026); auf Bildschirm immer marke.lime" }, "grau": { "$value": "#646769", "$type": "color" } }
   },
   "font": { "text": { "$value": "Geist, Helvetica, Arial, sans-serif", "$type": "fontFamily" }, "mono": { "$value": "'Geist Mono', ui-monospace, monospace", "$type": "fontFamily" } },

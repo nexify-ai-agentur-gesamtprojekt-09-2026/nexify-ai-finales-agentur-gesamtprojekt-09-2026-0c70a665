@@ -45,6 +45,10 @@ AUXILIARY_SOURCE_PATHS = (
     "apps/site/src/main.tsx",
     "apps/web/components/WorkspaceRebuild.css",
     "apps/web/components/HomeRebuild.css",
+    "apps/web/components/IdentityHero.tsx",
+    "apps/web/components/IdentityHero.css",
+    "config/identity-hero.json",
+    "apps/site/tests/browser-identity-hero.mjs",
     "packages/tokens/tokens.css",
     "apps/site/tests/browser-critical.mjs",
 )

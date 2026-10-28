@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-28T14:51:02.313Z",
+  "recorded_at": "2026-10-28T17:52:39.542Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -51,7 +51,7 @@
     "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
-    "apps/web/components/HomeContent.tsx": "883679f1fc4b1b71ea95b18550310046087b54d53b6ca86278b7499e9c20d97b",
+    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
     "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
@@ -69,8 +69,12 @@
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
     "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
-    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
-    "apps/site/tests/browser-critical.mjs": "7e84c087b847b00eea328f4dc6349b89cc8024c3cbbfe02d555fd34ea3d46c50"
+    "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
+    "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
+    "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
+    "apps/site/tests/browser-identity-hero.mjs": "868ce2d469b0cd31dc1bcffcc89ad0986d755f3722adf26b8ded1e2154f5b591",
+    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
+    "apps/site/tests/browser-critical.mjs": "438f56cca6d8cc934aa0f4e70e0c46146b3b0f32e6d8fc7d264c2797a5a54c61"
   },
   "sdk_source_sha256": {
     "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
@@ -136,7 +140,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-28T14:51:02.313Z",
+    "recorded_at": "2026-10-28T17:52:39.542Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
@@ -147,53 +151,53 @@
   },
   "presenter_measurements": [
     {
-      "width": 189.28125,
+      "width": 142.125,
       "fit": "contain",
-      "left": 448.640625,
-      "right": 637.921875,
-      "parentLeft": 448.640625,
-      "parentRight": 637.921875,
-      "height": 189.28125,
+      "left": 477.953125,
+      "right": 620.078125,
+      "parentLeft": 477.953125,
+      "parentRight": 620.078125,
+      "height": 142.125,
       "overflow": false
     },
     {
-      "width": 120.328125,
+      "width": 117.109375,
       "fit": "contain",
-      "left": 762.0625,
-      "right": 882.390625,
-      "parentLeft": 762.0625,
-      "parentRight": 882.390625,
-      "height": 120.328125,
+      "left": 688.5,
+      "right": 805.609375,
+      "parentLeft": 688.5,
+      "parentRight": 805.609375,
+      "height": 117.109375,
       "overflow": false
     },
     {
-      "width": 142.78125,
+      "width": 137.796875,
       "fit": "contain",
-      "left": 886.828125,
-      "right": 1029.609375,
-      "parentLeft": 886.828125,
-      "parentRight": 1029.609375,
-      "height": 142.78125,
+      "left": 804.296875,
+      "right": 942.09375,
+      "parentLeft": 804.296875,
+      "parentRight": 942.09375,
+      "height": 137.796875,
       "overflow": false
     },
     {
-      "width": 159.953125,
+      "width": 154.09375,
       "fit": "contain",
-      "left": 984.046875,
-      "right": 1144,
-      "parentLeft": 984.046875,
-      "parentRight": 1144,
-      "height": 159.953125,
+      "left": 895.5,
+      "right": 1049.59375,
+      "parentLeft": 895.5,
+      "parentRight": 1049.59375,
+      "height": 154.09375,
       "overflow": false
     },
     {
-      "width": 199.6875,
+      "width": 189.46875,
       "fit": "contain",
-      "left": 1200.296875,
-      "right": 1399.984375,
-      "parentLeft": 1200.296875,
-      "parentRight": 1399.984375,
-      "height": 199.6875,
+      "left": 1093.5,
+      "right": 1282.96875,
+      "parentLeft": 1093.5,
+      "parentRight": 1282.96875,
+      "height": 189.46875,
       "overflow": false
     }
   ],

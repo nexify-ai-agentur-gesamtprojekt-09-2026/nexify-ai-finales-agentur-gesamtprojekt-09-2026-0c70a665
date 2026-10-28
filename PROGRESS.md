@@ -1,3 +1,10 @@
+## IDENTITY-HERO-01 · akzeptierte V1-Komposition · 28.10.2026
+
+- Basis d92ee1b; bestehender Mailstand unverändert erhalten. Gemeinsamer React-Hero statt privatem HTML/iframe: akzeptierte Originalfiguren bytegleich, zentrale zusätzliche Bühnenfarben ohne Änderungen vorhandener Tokenwerte, DE/NL/FR, Unternehmensbeschreibung und Anfrageaktionen erhalten. Bilder bleiben ausdrücklich Zwischenlösung, kein Video-/Providerabschluss.
+- Unabhängige Sol-Prüfung reproduzierte zwei echte Layoutprobleme: enger Desktop-Zwischenbereich und200%Textvergrößerung. Früheres Stapeln bis700px sowie intrinsisch wachsende Desktopbühne korrigieren Überlappung/Beschnitt. Normale große Desktopproportion bleibt erhalten, mittlere Container dürfen höher wachsen. Geschlossener Assistent in normalem Fluss statt über Storytext.
+- Vite/Next jeweils24 normale/Grenzansichten plus15 echte200%-Fälle (DE/NL/FR320/390/Desktop,Seitenleiste,Grenze), ursprüngliche PNG-HTTP-Hashes, Tastatur/Anfragewege/Navigation und0externe Requests/Laufzeitfehler. Unabhängige39Grenz-/Zoomfälle zusätzlich geprüft. Öffentliche Regressionen und Abschlussgates im lokalen endgültigen Übergabebeleg, keine Behauptung einer vollständigen Assistenztechnik-/Produktionsabnahme.
+- Next Steps: finalen lokalen Releasekandidaten nach Prüf-/REA-/Reviewbeleg an Releaseowner übergeben; Push/CI/Deployment/Domain sind in diesem Schnitt nicht ausgeführt. Reale Videos, übrige Medienabnahmen und fachliche öffentliche Releasegates bleiben eigenständig offen. Keine Mail-/Paperclip-/Server-/Secret-/DNSänderung und kein erneuter Library-Upload.
+
 ## MAIL-LOCAL-01 · Mail-Arbeitsplatz · 28.10.2026
 
 - Basis c58ad90 bleibt erhalten; derselbe Webwriter, disjunkte Kern-/UI-Umsetzung und unabhängige Sol-Gegenprüfung. Keine Pushes, externen Uploads, CI, Provideraufrufe oder Produktionsänderungen.

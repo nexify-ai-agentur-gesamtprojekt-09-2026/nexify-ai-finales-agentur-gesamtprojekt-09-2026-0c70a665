@@ -71,6 +71,13 @@ class BrowserEvidenceTests(unittest.TestCase):
             self.write(evidence)
             with self.assertRaisesRegex(checker.EvidenceError, 'critical_sdk_browser_check_missing'):
                 checker.check_evidence(self.root)
+    def test_identity_composition_drift_invalidates_the_saved_browser_pass(self):
+        for relative in ('apps/web/components/IdentityHero.tsx','apps/web/components/IdentityHero.css',
+                         'config/identity-hero.json','apps/site/tests/browser-identity-hero.mjs'):
+            path=self.root/relative;old=path.read_bytes();path.write_bytes(old+b'\n')
+            with self.assertRaisesRegex(checker.EvidenceError,'stale_auxiliary_source_sha256'):
+                checker.check_evidence(self.root)
+            path.write_bytes(old)
     def test_missing_critical_check_and_unpassed_recording_are_rejected(self):
         for identifier in checker.CRITICAL_CHECKS:
             with self.subTest(check=identifier):

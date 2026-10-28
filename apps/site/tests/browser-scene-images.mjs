@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url)),repo=fileURLToPath(new URL('../../../',import.meta.url));
 const data=JSON.parse(await readFile(root+'.generated/public-site.json','utf8'));
-const sources=['config/interim-scene-images.json','apps/web/components/PresenterScene.tsx','apps/web/components/ExplainerSections.tsx','apps/web/components/PresenterEditorial.css','apps/web/components/HomeContent.tsx','apps/site/scripts/generate-public-data.mjs','apps/site/tests/browser-scene-images.mjs'];
+const sources=['config/interim-scene-images.json','apps/web/components/PresenterScene.tsx','apps/web/components/ExplainerSections.tsx','apps/web/components/PresenterEditorial.css','apps/web/components/HomeContent.tsx','apps/web/components/IdentityHero.tsx','apps/web/components/IdentityHero.css','config/identity-hero.json','packages/tokens/tokens.css','apps/site/scripts/generate-public-data.mjs','apps/site/tests/browser-scene-images.mjs'];
 const hashes=async()=>Object.fromEntries(await Promise.all(sources.map(async p=>[p,createHash('sha256').update(await readFile(repo+p)).digest('hex')])));
 const before=await hashes();const server=await preview({root,preview:{host:'127.0.0.1',port:0,strictPort:false}});
 const origin='http://127.0.0.1:'+server.httpServer.address().port;

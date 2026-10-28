@@ -5,7 +5,7 @@ import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import "./HomeRebuild.css";
 import PresenterVideo,{isPublicVideo,type PublicVideo} from "./PresenterVideo";
-import PresenterScene from './PresenterScene';
+import IdentityHero from './IdentityHero';
 import './PresenterEditorial.css';
 
 const copy={
@@ -25,7 +25,6 @@ function PresenterStage({text,video,locale}:{text:typeof copy.de;video?:PublicVi
   <div className="home-stage-aura" aria-hidden="true"/>
   <div className={"home-presenter-art"+(playable?" has-video":"")}>
   {playable&&<PresenterVideo video={video} locale={locale} hero/>}
-  {!playable&&<div className="home-interim-scenes">{(['pascal','nex','aifly'] as const).map(speaker=><PresenterScene key={speaker} speaker={speaker} title={text.stageLabel} locale={locale} hero/>)}</div>}
   </div>
   <figcaption><span className="home-stage-line" aria-hidden="true"/>{text.fallbackNote}</figcaption>
  </figure>;
@@ -42,7 +41,7 @@ export default function HomeContent({home,pages=[],children,video}:{home?:Public
  const scope=pages.find(page=>page.id==="scope");
  const tasks=[{intent:"quote" as const,title:t.quoteTitle,body:t.quoteBody,action:t.quoteAction},{intent:"booking" as const,title:t.bookingTitle,body:t.bookingBody,action:t.appointment},{intent:"marketing" as const,title:t.marketingTitle,body:t.marketingBody,action:t.marketingAction}];
  return <div className="home-rebuild">
-  <section className="home-hero" aria-labelledby="home-headline">
+  {isPublicVideo(video,locale)?<section className="home-hero" aria-labelledby="home-headline">
    <div className="home-light-ribbon home-light-ribbon-one" aria-hidden="true"/><div className="home-light-ribbon home-light-ribbon-two" aria-hidden="true"/>
    <div className="home-hero-copy"><span className="home-kicker">NEXIFY AI <span aria-hidden="true">/</span> CHAT IT. AUTOMATE IT.</span>
     <h1 id="home-headline"><span>{t.one}</span>{" "}<span>{t.two}</span>{" "}<span className="home-headline-accent">{t.three}</span></h1>
@@ -51,7 +50,7 @@ export default function HomeContent({home,pages=[],children,video}:{home?:Public
     <div className="home-hero-note"><span aria-hidden="true">✦</span><p>{t.caption}<br/><strong>{t.captionStrong}</strong></p></div>
    </div>
    <PresenterStage text={t} video={video} locale={locale}/>
-  </section>
+  </section>:<IdentityHero locale={locale} intro={t.intro} actions={<><StartAction intent="quote">{t.plan}<span aria-hidden="true">→</span></StartAction><StartAction intent="booking">{t.appointment}</StartAction></>}/>}
   <nav className="home-area-nav" aria-label={areaText.label}>
    <div className="home-area-intro"><span className="home-kicker">{areaText.label}</span><p>{areaText.hint}</p></div>
    <div className="home-area-links">{areas.map(({name,page})=>page?<SiteLink key={name} href={page.path} className="home-area-link"><span className="home-area-name">{name}</span><span className="home-area-destination">{page.localizedTitle[locale]}</span><span className="home-area-arrow" aria-hidden="true">→</span></SiteLink>:null)}</div>

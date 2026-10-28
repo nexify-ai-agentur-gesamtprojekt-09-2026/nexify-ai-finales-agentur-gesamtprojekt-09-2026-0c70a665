@@ -1159,9 +1159,13 @@
     "apps/web/components/PresenterScene.tsx": "f47fb7d6b917912da4b651ed2b2b5832761768ab59f34792244d0f0077764691",
     "apps/web/components/ExplainerSections.tsx": "0b25af5b66cffd1821613d8984f53f85fc0e4b8bd1ea6e63af8fbcc2ec941fcc",
     "apps/web/components/PresenterEditorial.css": "1568ed80ac71b3ef236280e9d90a7f1c1b7ff14977f88198171d26ea630215da",
-    "apps/web/components/HomeContent.tsx": "883679f1fc4b1b71ea95b18550310046087b54d53b6ca86278b7499e9c20d97b",
+    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
+    "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
+    "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
+    "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
+    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
     "apps/site/scripts/generate-public-data.mjs": "53c61bd0a87bd515e6f3c9a548e9ecc7c69b008e4a05aedbb3a49f4550823701",
-    "apps/site/tests/browser-scene-images.mjs": "2ba2f7251c34868f7ee62f201347d3c3e110a95116ea1592b3bd35a0c669ff09"
+    "apps/site/tests/browser-scene-images.mjs": "5199e67a74f2c8c6bf3009d5eb5ad9261d22680f2974c2e82d7f42bbd6e27dfd"
   },
   "external_requests": 0,
   "page_errors": [],
