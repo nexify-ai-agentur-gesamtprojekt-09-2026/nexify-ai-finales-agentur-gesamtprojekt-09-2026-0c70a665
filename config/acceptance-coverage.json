@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "d757afcf8ea99f20b2d10991fc6d0908862cd112136e6443a81ec0dd892ef1b7",
+    "PROGRESS.md": "d985468d2135e39a04c6a4ef21400416e3b9702f4d744290e841b0cd3c2ab86b",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "c2c0464b30e1967fd651761c8b3db74ddc6b0a5c7a08d4f31ec33a6701bbbf40",
+    "docs/contracts/requirements-reconciliation.md": "f0bc153342877f7e0aaafa099cf3a718eaf7b8d5f01d0d238dc7b8dea354e20a",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1328,7 +1328,7 @@
     "tests/test_one_app_backend.py": "72c6571231a073ea4eb3397823620e1f97a1b7f53f8cc4b9304e3e41a722fb9a",
     "tests/test_public_surface_contract.py": "6b69cfde2ad888c001357e15199b50f3d89091ff41218976f5e011b5ccf6d4ef",
     "tests/test_release_prerequisites.py": "328cd20630a1962b3cb7d146cb0a0de91c3b028558dd40c3c258c8af91526e0b",
-    "tests/test_requirements_reconciliation.py": "34783bf63d58a3405338a359daf31c1c89f9b58a2796804101f23b1fcab11eed",
+    "tests/test_requirements_reconciliation.py": "eef5f3ba4821fbf1eb324fa24908dd60f7582af3fc9a2b1ff58411d1cbb0e1b6",
     "tests/test_selfservice_decisions.py": "6a04b03f262198fdb06c2be3e0792edb2f60652947c3d39613f1f3dd1c3a0369",
     "tests/test_selfservice_domain.py": "25470e0621ac30875606e331c58495172d386cac801537d69128f58460b19509",
     "tests/test_seo_catalog.py": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97",
@@ -1344,7 +1344,7 @@
     "tools/remediation_queue.py": "c9fb0dfb4bc634e23774a622a9c38ba869764514bd8b9e64a92e54e9b3f98840",
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
     "tools/verify_factory_contract.py": "f4fd9d39f15ad805d2978f0687f766ab9913000b021d4e9ff61630317bb17810",
-    "tools/verify_requirements_reconciliation.py": "0ebf1094863e72e9fd21e93019c48c3dff7385b0fd51eed6007c53c53c145e23",
+    "tools/verify_requirements_reconciliation.py": "87b7a8a3335c943f046ef1339b3a1a2880a3c910c291e457d7ef78ef8dad5bc3",
     "tools/bigbuy_batch.py": "0e790b975c018218dcee4d06891475a9bfc3267393bd04e852b5e2360f944647",
     "tests/test_bigbuy_batch.py": "4d0afc6817a087f2d9d55f9b8a4ff814e8931ec83b4ccacfbf880ad18686c72a",
     "docs/contracts/bigbuy-batch.md": "21ac93ced78511c403690bb13ed9f7f27f1b9da44208042071a9592687dd9f32",
@@ -1537,9 +1537,9 @@
     "apps/site/tests/browser-csp-policy.mjs": "4a44ead995c998c5e882a69a33b25518757787fd3fd68ef939343fa228528e9f",
     "apps/site/tests/fixtures/csp-enforcement-baseline.json": "c44d95bf33dd6ae5257073d29379c8b13bec6911f669c4de858478debaf7cf24",
     "evidence/csp-report-removal-2026-10-28/browser.json": "9fc4f61d59d825491504aaf45889e74419b9b799d0fd04dac42aeb19b15a8a8e",
-    "apps/site/tests/browser-legal-footer.mjs": "2c84c680fdd2ead6d8d45e3cfa5bca65c36bfeb664b2b649e4afad709c814746",
-    "evidence/legal-footer-2026-10-28/browser.json": "4515e554abaca95a030c00dd3d88b182195a6d0d96c49798c27c3c6a68ed926a",
-    "evidence/legal-footer-2026-10-28/next-browser.json": "a2519664ba435f6dd1d8880d3c21fd965c09120e16e6bf66a8146307afdc836c"
+    "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363",
+    "evidence/legal-footer-2026-10-28/browser.json": "aafe6d9936c1fc3a58cddc15391abf74b8abe4dec1b1868dcc30b4636e50d18d",
+    "evidence/legal-footer-2026-10-28/next-browser.json": "976d5e55345f68a93c75dc94be7595a48fbb4dfadf8c71e01eeedd849546fa42"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2099,6 +2099,16 @@
         "acquisition": "direct_tool_read",
         "original_seen_here": true,
         "scope": "Read exact review and inline comments;confirmed active-site legal-route gap and missing hash coverage;locator allegation not reproduced because footer-legal is already scoped."
+      },
+      {
+        "id": "SRC-CUBIC-FR-FOOTER-689E140",
+        "locator": "https://github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/46#discussion_r4402490598;review5685160708;exacthead689e14013ed0e9d5bbd9e46fc72a2885f6932b91",
+        "source_date": "2026-10-28T15:23:28Z",
+        "observed_at": "2026-10-28",
+        "role": "automated_advisory_coverage_finding_not_user_authorization",
+        "acquisition": "direct_tool_read",
+        "original_seen_here": true,
+        "scope": "Existing FR footer copy was only statically reviewed while browserproofscoveredDE/NL;confirmedcoveragegap,no demonstratedruntimefailure. CodeRabbitterminalcheck122910012572reviewedbeforegroupedfollowup;itsautomaticreviewsremainpaused."
       }
     ],
     "requirements": [
@@ -3315,10 +3325,11 @@
         "acceptance_case_id": "REC-LEGAL-FOOTER-01",
         "source_ids": [
           "SRC-LEGAL-FOOTER-20261028",
-          "SRC-CUBIC-FOOTER-3B19982"
+          "SRC-CUBIC-FOOTER-3B19982",
+          "SRC-CUBIC-FR-FOOTER-689E140"
         ],
-        "applicable_requirement": "One shared collapsible legal footer, permanent real legal links outside disclosure selected for active context:NeXify imprint/privacy,TEILEKLAR own existing legal page;DE/NL and accessible mobile/keyboard behavior;complete version/hash evidence coverage.",
-        "interpretation": "Public navigation only,no legal certification. Notice-only content remains pending review;no license route invented. Confirmed review findings:context routing and missing referenced-source bindings;locator finding not reproduced with unique scoped legal disclosure and separate AllPages disclosure.",
+        "applicable_requirement": "One shared collapsible legal footer, permanent real legal links outside disclosure selected for active context:NeXify imprint/privacy,TEILEKLAR own existing legal page;DE/NL/FR and accessible mobile/keyboard behavior;complete version/hash evidence coverage.",
+        "interpretation": "Public navigation only,no legal certification. Notice-only content remains pending review;no license route invented. Confirmed review findings:context routing and missing referenced-source bindings;locator finding not reproduced with unique scoped legal disclosure and separate AllPages disclosure. FRcoveragegap is corrected with real renderer runs and explicit acceptance scope;no runtime bug or translation/legal approval inferred.",
         "implementation_files": [
           "apps/web/components/SiteFooter.tsx",
           "apps/web/components/WorkspaceRebuild.css",
@@ -3329,7 +3340,7 @@
           "tools/verify_requirements_reconciliation.py",
           "tests/test_requirements_reconciliation.py"
         ],
-        "test_evidence": "Fresh optimized Vite144 and Next144 context-specific footer views,each8keyboard/link/back/reload cases;unique scoped disclosures;consent18,resize108 and Next72public/10protected repeated. Generic verifier rejects every omitted or stale referenced implementation binding except recursive register itself;negative regressions include all3new test/proof files.",
+        "test_evidence": "Optimized Vite216 and Next216=36publicroutesxDE/NL/FRx320/1280,each12keyboard/link/back/reload cases;exactlocalizedlegal labels,pending-content notices,contextpaths andseparate disclosures. Stored proof verifier requires complete three-locale matrices,rendereridentity,currentfour-sourcebindings,cleanruntime andcorrectcontext;negative regressions reject missingFR,stalesources andwrongshoproutes. Previously repeated consent18DE/NL,resize108,Next72public/10protected remain separately scoped and source-current.",
         "actual_delivery": "local_built_browser_verified_remote_update_pending",
         "full_requirement_accepted": false,
         "gap": "No complete release-specific license inventory/public license route;NeXify imprint/privacy and TEILEKLAR legal page remain notice-only. Real reviewed applicable operator/privacy/shop content and art approval are not supplied by footer navigation.",

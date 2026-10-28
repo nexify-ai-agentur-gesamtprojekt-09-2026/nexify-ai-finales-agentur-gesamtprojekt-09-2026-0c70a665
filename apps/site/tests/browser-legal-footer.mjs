@@ -16,7 +16,7 @@ const origin=externalOrigin||'http://127.0.0.1:'+server.httpServer.address().por
 const out=repo+'.local/legal-footer/';await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true}),external=[],errors=[],views=[],interaction=[];
 try{
- for(const width of [320,1280])for(const locale of ['de','nl']){
+ for(const width of [320,1280])for(const locale of ['de','nl','fr']){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.addInitScript(l=>localStorage.setItem('nexify-locale',l),locale);
   await context.route('**/*',r=>{const u=new URL(r.request().url());if(u.origin!==origin){external.push(u.origin);return r.abort();}if(u.pathname.startsWith('/api/'))return r.fulfill({status:503,json:{error:'local_unconfigured'}});return r.continue();});
@@ -31,6 +31,7 @@ try{
     const a=direct.locator(`a[href="${path}"]`);assert.equal(await a.isVisible(),true);assert.equal(await a.evaluate(e=>e.closest('details')),null);
     const box=await a.boundingBox();assert.ok(box.height>=44&&box.width>=44);
    }
+   const labels={de:entry.site_context==='teileklar'?['TEILEKLAR: Anbieterinformationen und Datenschutz']:['Impressum','Datenschutz'],nl:entry.site_context==='teileklar'?['TEILEKLAR: aanbiederinformatie en privacy']:['Colofon','Privacy'],fr:entry.site_context==='teileklar'?['TEILEKLAR : prestataire et confidentialité']:['Mentions légales','Confidentialité']}[locale];assert.deepEqual(await direct.locator('a').allTextContents(),labels);
    assert.equal(await direct.locator('a').count(),paths.length);if(entry.site_context==='teileklar')assert.equal(await direct.locator('a[href="/datenschutz"],a[href="/impressum"]').count(),0);assert.equal(await footer.locator('a[href="#"],a[href="/lizenzen"]').count(),0);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
    views.push({path:entry.path,width,locale,legal_context:entry.site_context,legal_paths:paths,legal_disclosures:1,all_pages_disclosures_outside:1,passed:true});
@@ -39,7 +40,8 @@ try{
    const focus=await summary.evaluate(e=>({style:getComputedStyle(e).outlineStyle,width:parseFloat(getComputedStyle(e).outlineWidth)}));assert.notEqual(focus.style,'none');assert.ok(focus.width>=2);
    await page.keyboard.press('Enter');await page.waitForFunction(()=>document.querySelector('.footer-legal summary').getAttribute('aria-expanded')==='true');
    const controlled=await summary.getAttribute('aria-controls');assert.equal(await page.locator(`[id="${controlled}"]`).isVisible(),true);
-   assert.match(await details.innerText(),locale==='de'?/noch nicht verfügbar/:/nog niet beschikbaar/);
+   assert.match(await details.innerText(),{de:/noch nicht verfügbar/,nl:/nog niet beschikbaar/,fr:/pas encore disponible/}[locale]);
+   assert.match(await details.locator('div').innerText(),{de:/Prüfung und Freigabe/,nl:/gecontroleerd en goedgekeurd/,fr:/à vérifier et à valider/}[locale]);
    assert.equal(await page.locator('.diagnostic-consent').count(),1);
    await page.screenshot({path:out+`footer-${entry.path==='/'?'nexify':'teileklar'}-${width}-${locale}.png`});
    await summary.focus();await page.keyboard.press('Space');await page.waitForFunction(()=>document.querySelector('.footer-legal summary').getAttribute('aria-expanded')==='false');
@@ -49,6 +51,7 @@ try{
   }
   await context.close();
  }
+ assert.equal(views.length,data.pages.length*3*2);assert.equal(interaction.length,2*3*2);
  assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);
  const report={scope:'local optimized shared footer;not legal completeness or production acceptance',renderer:externalOrigin?'Next-local':'Vite-local',views,interaction,source_sha256:before,missing_license_route:true,external_requests:0,page_errors:errors,passed:true};
  await writeFile(out+(externalOrigin?'next-browser.json':'browser.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({views:views.length,interaction:interaction.length,external:0,passed:true}));

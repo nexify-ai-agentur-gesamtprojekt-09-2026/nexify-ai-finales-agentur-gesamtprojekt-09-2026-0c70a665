@@ -914,6 +914,461 @@
     },
     {
       "path": "/",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/",
       "width": 1280,
       "locale": "de",
       "legal_context": "nexify",
@@ -1814,6 +2269,461 @@
       "path": "/teileklar/rechtliches",
       "width": 1280,
       "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "nexify",
+      "legal_paths": [
+        "/impressum",
+        "/datenschutz"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 1280,
+      "locale": "fr",
       "legal_context": "teileklar",
       "legal_paths": [
         "/teileklar/rechtliches"
@@ -1862,6 +2772,24 @@
     },
     {
       "path": "/",
+      "width": 320,
+      "locale": "fr",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 320,
+      "locale": "fr",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/",
       "width": 1280,
       "locale": "de",
       "keyboard_open_close": true,
@@ -1895,13 +2823,31 @@
       "direct_links": true,
       "back_reload": true,
       "passed": true
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "locale": "fr",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "locale": "fr",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
     }
   ],
   "source_sha256": {
     "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
     "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
-    "apps/site/tests/browser-legal-footer.mjs": "2c84c680fdd2ead6d8d45e3cfa5bca65c36bfeb664b2b649e4afad709c814746"
+    "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
   "missing_license_route": true,
   "external_requests": 0,

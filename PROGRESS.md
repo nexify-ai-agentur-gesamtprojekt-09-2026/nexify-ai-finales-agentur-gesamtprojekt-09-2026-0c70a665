@@ -1,3 +1,10 @@
+## Rechtsfußzeile · FR-Nachweisergänzung nach 689e140 · 28.10.2026
+
+- Beide CIs an689e140 abgeschlossen erfolgreich. CodeRabbit am selben SHA terminal; künftige automatische Reviews laut dessen Kommentar pausiert, nicht durch uns umgestellt. Cubic4402490598 bestätigt eine Abdeckungslücke: vorhandene FR-Texte waren nur statisch geprüft, kein belegter Laufzeitfehler.
+- Gebündelte Test-/Nachweisergänzung ohne Produkt-/Rechts-/Grafikänderung: Vite und Next jeweils216 Ansichten (36Routen,DE/NL/FR,320/1280) und12 echte Interaktionen. Exakte lokalisierte Linktexte, Vorbehalte, Kontextziele, native Klappbereiche, Tastatur, Zurück/Reload und ausbleibende externe Requests tatsächlich messen.
+- Bestehenden Nachweisverifier um vollständige FR-Matrix, Rendereridentität, direkte Quellbindung und Kontextprojektion ergänzen; negative Regressionen gegen fehlende FR-Fälle, veraltete Messquellen und falsche Shoprechtsziele. Die zuvor geforderten Hashbindungen bleiben vollständig.
+- Consent-/Auth-/Resize-Belege behalten ihren eigenen engeren Testumfang. Keine vollständige FR-Provider-/Rechts-/Assistenztechnik-Abnahme und keine gestalterische Freigabe der verworfenen Szenen. Kein Main-/Produktions-/DNS-/Credentialeingriff, keine Threadauflösung oder zusätzliche Providerkosten.
+
 ## Rechtsfußzeile · Reviewkorrekturen nach 3b19982 · 28.10.2026
 
 - Cubic-Review5684839133 am exakten3b199825 selbst gelesen. Bestätigt: neue Direktnavigation braucht aktiven TEILEKLAR-Rechtskontext; drei neue Test-/Belegdateien fehlten im zentralen Hashregister. Beides im bestehenden Footer-/Nachweisumfang korrigieren und erneut prüfen.

@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('reconciliation', ROOT / 'tools/verify_requirements_reconciliation.py')
@@ -48,6 +49,36 @@ class ReconciliationTests(unittest.TestCase):
                 changed = copy.deepcopy(self.document)
                 changed['source_sha256'][relative] = '0' * 64
                 self.assertIn('Stale implementation source: ' + relative, checker.validate(changed, ROOT))
+
+    def test_footer_evidence_requires_actual_fr_matrix(self):
+        original = Path.read_text
+        def without_fr(path, *args, **kwargs):
+            raw = original(path, *args, **kwargs)
+            if path == ROOT / 'evidence/legal-footer-2026-10-28/browser.json':
+                report = json.loads(raw)
+                report['views'] = [r for r in report['views'] if r['locale'] != 'fr']
+                return json.dumps(report)
+            return raw
+        with patch.object(Path, 'read_text', without_fr):
+            self.assertIn('Incomplete or stale legal footer browser evidence: browser.json',
+                          checker.validate_legal_footer_evidence(ROOT))
+
+    def test_footer_evidence_rejects_stale_sources_and_wrong_site_routes(self):
+        original = Path.read_text
+        for mutation in ('source', 'route'):
+            def changed(path, *args, **kwargs):
+                raw = original(path, *args, **kwargs)
+                if path == ROOT / 'evidence/legal-footer-2026-10-28/next-browser.json':
+                    report = json.loads(raw)
+                    if mutation == 'source':
+                        report['source_sha256']['apps/site/tests/browser-legal-footer.mjs'] = '0' * 64
+                    else:
+                        next(r for r in report['views'] if r['legal_context'] == 'teileklar')['legal_paths'] = ['/datenschutz']
+                    return json.dumps(report)
+                return raw
+            with self.subTest(mutation=mutation), patch.object(Path, 'read_text', changed):
+                self.assertIn('Incomplete or stale legal footer browser evidence: next-browser.json',
+                              checker.validate_legal_footer_evidence(ROOT))
 
     def test_report_cannot_be_promoted_to_original(self):
         source = next(s for s in self.record['sources'] if s['acquisition'] == 'parent_verified_excerpt')
