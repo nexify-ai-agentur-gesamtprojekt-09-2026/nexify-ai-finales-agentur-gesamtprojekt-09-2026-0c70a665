@@ -12,7 +12,8 @@ Pageviews/Klickerfassung, keine Profile oder Identifikation. Der vorhandene
 
 Default ist aus. Ein berechtigter vorhandener Consentmanager kann ausdrücklich
 `nexify:exception-consent` mit `detail.granted === true` senden; Widerruf `false`.
-Eine solche Consentoberfläche ist im Bestand noch nicht verbunden. Keine
+Die gemeinsame Consentoberfläche im vorhandenen Footer ist lokal verbunden. Die
+Auswahl bleibt nur im Arbeitsspeicher und startet nach Reload wieder aus. Keine
 Einwilligung aus Login, Sprache, Umgebungsvariable oder Seitenbesuch ableiten.
 Nach initialisierter Erfassung ist Widerruf für dieses Dokument endgültig. Eine
 erneute Einwilligung erfordert Neuladen: Das gepinnte SDK hat keinen verifizierten

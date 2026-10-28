@@ -342,6 +342,56 @@ def check_exception_evidence(root):
     return {'scope': 'stored_local_actual_sdk_intercept_only', 'surfaces': 2, 'checks_per_surface': 8}
 
 
+CONSENT_UI_SOURCES = (
+    'apps/web/components/DiagnosticConsent.tsx','apps/web/components/DiagnosticConsent.css',
+    'apps/web/components/SiteFooter.tsx','apps/web/observability/exceptions.mjs',
+    'apps/web/observability/exceptions.d.mts','apps/site/tests/browser-consent-ui.mjs',
+)
+CONSENT_UI_PATH = 'evidence/consent-ui-2026-10-28/browser-consent-ui.json'
+LOCALE_BRIDGE_SOURCES = (
+    'apps/web/components/LocaleAwareClerk.tsx','apps/web/app/layout.tsx','apps/web/auth/public-provider.ts',
+    'apps/site/tests/fixtures/clerk-integration.tsx','apps/site/tests/fixtures/next-clerk-locale.tsx',
+    'apps/site/tests/fixtures/next-clerk-locale.html','apps/site/tests/browser-next-clerk-locale.mjs',
+)
+LOCALE_BRIDGE_PATH = 'evidence/consent-ui-2026-10-28/next-clerk-locale.json'
+
+NEXT_CONSENT_SOURCES = (
+    'apps/web/components/AuthAvailabilityNotice.tsx','apps/web/components/LocaleAwareClerk.tsx',
+    'apps/web/auth/public-provider.ts','apps/web/app/layout.tsx',
+    'apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx',
+    'apps/web/components/DiagnosticConsent.tsx','apps/web/components/DiagnosticConsent.css',
+    'apps/web/components/SiteFooter.tsx','apps/web/auth/tests/browser-public-experience.mjs',
+)
+NEXT_CONSENT_PATH = 'evidence/consent-ui-2026-10-28/next-public.json'
+
+def check_consent_ui(root):
+    report=json.loads(_read(root,CONSENT_UI_PATH))
+    locale=json.loads(_read(root,LOCALE_BRIDGE_PATH))
+    for record,paths in ((report,CONSENT_UI_SOURCES),(locale,LOCALE_BRIDGE_SOURCES)):
+        if set(record.get('source_sha256',{}))!=set(paths):raise EvidenceError('consent_exact_sources_required')
+        for path in paths:
+            if hashlib.sha256(_read(root,path)).hexdigest()!=record['source_sha256'][path]:raise EvidenceError('stale_consent_source: '+path)
+    expected={(w,l,m) for w in (320,390,1280) for l in ('de','nl') for m in ('configured','missing','load_failure')}
+    checks=report.get('checks',[])
+    if len(checks)!=18 or {(c.get('width'),c.get('locale'),c.get('mode')) for c in checks}!=expected or any(c.get('passed') is not True for c in checks):raise EvidenceError('consent_complete_matrix_required')
+    if report.get('passed') is not True or report.get('external_events_sent')!=0 or report.get('unexpected_origins')!=[] or report.get('uncaught')!=[]:raise EvidenceError('consent_local_no_errors_required')
+    pairs={(c.get('lang'),c.get('expected')) for c in locale.get('checks',[]) if c.get('passed') is True}
+    if locale.get('passed') is not True or len(locale.get('checks',[]))!=4 or pairs!={('de','de-DE'),('nl','nl-NL'),('fr','fr-FR'),('unknown','de-DE')} or locale.get('external')!=0 or locale.get('errors')!=[]:raise EvidenceError('locale_bridge_complete_fixture_required')
+    next_report=json.loads(_read(root,NEXT_CONSENT_PATH))
+    if set(next_report.get('source_sha256',{}))!=set(NEXT_CONSENT_SOURCES):raise EvidenceError('next_consent_exact_sources_required')
+    for path in NEXT_CONSENT_SOURCES:
+        if hashlib.sha256(_read(root,path)).hexdigest()!=next_report['source_sha256'][path]:raise EvidenceError('stale_next_consent_source: '+path)
+    mapping=json.loads(_read(root,'config/site-map.json'))
+    expected_public={p['path'] for p in mapping['pages'] if p['access']['visibility']=='public' and not p['access']['auth_required']}
+    expected_private={p['path'] for p in mapping['pages'] if p['access']['visibility']!='public' or p['access']['auth_required']}
+    rows=next_report.get('routes',[]);mobile=next_report.get('auth_mobile',[])
+    if (len(rows)!=72 or {(r.get('path'),r.get('locale')) for r in rows if r.get('passed') is True}!={(p,l) for p in expected_public for l in ('de','nl')}
+            or set(next_report.get('private',[]))!=expected_private or len(mobile)!=4
+            or {(r.get('path'),r.get('locale'),r.get('width')) for r in mobile if r.get('passed') is True}!={(p,l,320) for p in ('/anmelden','/registrieren') for l in ('de','nl')}
+            or next_report.get('passed') is not True or next_report.get('external')!=0 or next_report.get('mutations')!=0 or next_report.get('pageErrors')!=[]):raise EvidenceError('next_consent_complete_local_routes_required')
+    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':4,'next_route_locales':72,'next_auth_mobile':4}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -352,6 +402,7 @@ def main():
         result["catalog"] = check_catalog_evidence(args.root)
         result["public_fallbacks"] = check_public_fallbacks(args.root)
         result["exceptions"] = check_exception_evidence(args.root)
+        result["consent"] = check_consent_ui(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

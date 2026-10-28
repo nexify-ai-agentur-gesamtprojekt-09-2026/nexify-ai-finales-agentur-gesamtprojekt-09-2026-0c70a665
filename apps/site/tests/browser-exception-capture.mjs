@@ -29,7 +29,7 @@ const page=await context.newPage(),checks=[];
 async function state(){return page.evaluate(()=>window[Symbol.for('nexify.exceptions.v1')]?.state());}
 try{
  await page.goto(origin+'/kontakt?__posthog_debug=true');await page.locator('#locale').waitFor();await page.waitForTimeout(400);assert.equal(requests.length,0);assert.equal((await state()).initialized,false);checks.push('no_initialization_or_requests_without_consent');
- await page.evaluate(()=>dispatchEvent(new CustomEvent('nexify:exception-consent',{detail:{granted:true}})));await assert.doesNotReject(async()=>{for(let n=0;n<100;n++){if((await state()).initialized)return;await page.waitForTimeout(100);}throw new Error('SDK failed to initialize');});
+ await page.locator('.diagnostic-consent summary').click();await page.locator('.diagnostic-consent').getByRole('button',{name:'Ablehnen',exact:true}).click();assert.equal((await state()).decision,'declined');await page.locator('.diagnostic-consent').getByRole('button',{name:'Zulassen',exact:true}).click();await assert.doesNotReject(async()=>{for(let n=0;n<100;n++){if((await state()).initialized)return;await page.waitForTimeout(100);}throw new Error('SDK failed to initialize');});
  
  await page.evaluate(async()=>{(await import('/src/synthetic-error.js')).boom();});await assert.doesNotReject(async()=>{for(let n=0;n<100;n++){if(events.length===1)return;await page.waitForTimeout(100);}throw new Error('missing unhandled event');});checks.push('real_sdk_unhandled_error_intercepted');
  await page.evaluate(async()=>{(await import('/src/synthetic-error.js')).reject();});await assert.doesNotReject(async()=>{for(let n=0;n<100;n++){if(events.length===2)return;await page.waitForTimeout(100);}throw new Error('missing rejection event');});checks.push('real_sdk_unhandled_rejection_intercepted');
@@ -42,7 +42,7 @@ try{
  // A real failed SDK request must not escape through retries after revocation or later re-consent.
  ingestStatus=503;await page.evaluate(()=>{const ctl=window[Symbol.for('nexify.exceptions.v1')],err=new Error('retry private@example.test token=secret');if(!ctl.capture(err)||ctl.capture(err))throw new Error('manual dedup failed');});
  for(let n=0;events.length<4&&n<100;n++)await page.waitForTimeout(50);assert.equal(events.length,4);await page.waitForTimeout(150);
- await page.evaluate(()=>{dispatchEvent(new CustomEvent('nexify:exception-consent',{detail:{granted:false}}));dispatchEvent(new Event('online'));});
+ await page.locator('.diagnostic-consent').getByRole('button',{name:'Einwilligung widerrufen',exact:true}).click();await page.evaluate(()=>dispatchEvent(new Event('online')));
  // Re-consent before the first scheduled retry must NOT replace the aborted signal.
  await page.evaluate(()=>dispatchEvent(new CustomEvent('nexify:exception-consent',{detail:{granted:true}})));
  assert.equal((await state()).requiresReload,true);assert.equal((await state()).consent,false);

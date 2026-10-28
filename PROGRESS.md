@@ -1067,3 +1067,32 @@ exakter unabhängiger Review werden dem finalen Integrationscommit zugeordnet.
 Keine Pushes/CI/Uploads/externen Testevents/Deployment/Domain- oder Secretaktion.
 Next steps: finalenlokalenStand prüfen/sichern;parentklärtWriterübergabe,
 GitHub401,Actionskosten,Consent-/Release-/Uploadbindung undProduktionsfreigabe.
+
+
+## Consent-Oberfläche und begrenzte Sprachkorrektur · 28.10.2026
+
+Auf Basis b4ae9bc ergänzt eine gemeinsame Footerkomponente die bisher fehlende
+Fehlerdiagnose-Auswahl. Standard aus, gleichwertige DE/NL/FR-Auswahl, Tastatur und
+Mobilansicht, keine Persistenz. SPA-Navigation erhält die Entscheidung; Neuladen
+startet aus. Widerruf auch während Laden oder ohne Konfiguration ist bis zum
+Neuladen endgültig. Technische Nichtverfügbarkeit und SDK-Aktivierung sind getrennt;
+Empfang wird nicht behauptet. 18 UI-Fälle bestanden. Der feste Chatlauncher
+überdeckte bei 320px zunächst den Datenschutzlink; behoben und nachgeprüft.
+Keine Erweiterung von Rechten, Rechtstexten oder Erfassungszwecken.
+
+Next-Authhinweise waren bei NL noch deutsch und wurden lokalisiert. Die zuvor feste
+Providerlokalisierung folgt jetzt der Shellsprache. Serveraufgelöste öffentliche
+Props bleiben erhalten; keine Secrets. Review fand zunächst eine Build-/Runtime-
+Abweichung durch Clientauflösung: korrigierte Whitelist erhält den Serververtrag.
+Vier Locale-Fälle mit Providerdouble und zwei Konfigurationsregressionen bestanden;
+echte Auth-/Tenantabnahme bleibt offen. Keine Provideraktivierung.
+
+Öffentlicher Abgleich: evidence/consent-ui-2026-10-28/public-scope-check.json.
+36 öffentliche Routen und 49 Erklärmodule bleiben ohne lokal freigegebene Filmbytes;
+keine Mockmedien, Bestellungen oder Providerfunktionen als fertig bezeichnet.
+Portal-Teilauftrag PORTAL-LOCAL-READ-01 ist im bestehenden Register vorbereitet,
+nicht ausgeführt: zuerst Statusprojektion ohne Sync-Gaps-Schreibeffekt extrahieren,
+gleiche Datenbank, keine zweite Queue. Vertrag: docs/contracts/next-local-portal-slice.md.
+Next steps: Gesamtgates, REA und unabhängiges Review am exakten Endcommit; lokalen
+Patch sichern. Keine Pushes, CI, Deployments, DNS, Uploads, Secretkonfiguration oder
+externen Testevents.

@@ -15,28 +15,31 @@ export function redactException(event,c,origin,distinctId){
  return {event:'$exception',timestamp:event.timestamp,uuid:event.uuid,properties:{token:c.token,distinct_id:distinctId,$process_person_profile:false,$exception_list:list,$exception_type:list[0].type,$exception_message:'Application error (details redacted)',release_sha:c.release,release_version:c.release,release_name:'nexify-'+c.surface,environment:c.environment,app_surface:c.surface}};
 }
 export function createExceptionController({load,origin}){
- let sdk,loading,consent=false,config,identity,epoch,revoked=false,failed=false;
+ let sdk,loading,consent=false,config,identity,epoch,revoked=false,failed=false,pending=false,decision="unset";
+ const listeners=new Set();
+ let snapshot=Object.freeze({available:true,initialized:false,configured:false,loading:false,consent:false,failed:false,requiresReload:false,decision:"unset"});
+ function emit(){const next={available:true,initialized:Boolean(sdk),configured:Boolean(config),loading:pending,consent,failed,requiresReload:revoked,decision};if(Object.keys(next).some(k=>next[k]!==snapshot[k])){snapshot=Object.freeze(next);for(const listener of listeners)listener();}}
  const seen=new WeakSet();
  async function start(c){
   if(!validConfiguration(c))return false;
   if(config&&JSON.stringify(config)!==JSON.stringify(c))return false;
-  config={...c};if(!consent||failed||revoked)return false;if(sdk)return true;
-  if(!loading)loading=(async()=>{
+  config={...c};emit();if(!consent||failed||revoked)return false;if(sdk)return true;
+  if(!loading){pending=true;emit();loading=(async()=>{
    try{const candidate=await load();if(!consent)return false;identity='nexify-unidentified-exception';epoch=new AbortController();
     sdk=candidate.init(c.token,{api_host:c.host,debug:false,api_transport:'fetch',disable_beacon:true,fetch_options:{signal:epoch.signal,keepalive:false},autocapture:false,capture_pageview:false,capture_pageleave:false,capture_dead_clicks:false,capture_heatmaps:false,capture_performance:false,capture_exceptions:{capture_unhandled_errors:true,capture_unhandled_rejections:true,capture_console_errors:false},disable_session_recording:true,disable_surveys:true,disable_conversations:true,disable_product_tours:true,advanced_disable_toolbar_metrics:true,save_campaign_params:false,save_referrer:false,ip:false,disable_surveys_automatic_display:true,disable_web_experiments:true,enable_recording_console_log:false,person_profiles:'never',persistence:'memory',disable_persistence:true,request_batching:false,opt_out_capturing_by_default:false,advanced_disable_flags:true,disable_external_dependency_loading:true,error_tracking:{exception_steps:{enabled:false}},before_send:event=>consent?redactException(event,c,origin,identity):null},'nexify_errors');
     return Boolean(sdk);
-   }catch{failed=true;consent=false;epoch?.abort();return false;}finally{loading=undefined;}
-  })();return loading;
+   }catch{failed=true;consent=false;epoch?.abort();return false;}finally{loading=undefined;pending=false;emit();}
+  })();}return loading;
  }
  async function setConsent(value){
-  if(value!==true){consent=false;if(sdk)revoked=true;epoch?.abort();sdk?.set_config({capture_exceptions:false,opt_out_capturing_by_default:true});return false;}
+  if(value!==true){if(decision==="granted"||sdk)revoked=true;decision=revoked?"revoked":"declined";consent=false;epoch?.abort();sdk?.set_config({capture_exceptions:false,opt_out_capturing_by_default:true});emit();return false;}
   // A fresh document is required after revocation: this SDK can resolve retry fetchOptions
   // from current config, so rotating to a new signal could revive an old queued event.
   if(revoked||failed)return false;
-  consent=true;return sdk?true:config?start(config):false;
+  consent=true;decision="granted";emit();return sdk?true:config?start(config):false;
  }
  function capture(error){if(!consent||!sdk||!(error instanceof Error)||seen.has(error))return false;seen.add(error);sdk.captureException(error);return true;}
- return {start,setConsent,capture,state:()=>({initialized:Boolean(sdk),consent,failed,requiresReload:revoked})};
+ return {start,setConsent,capture,state:()=>snapshot,subscribe:listener=>{listeners.add(listener);return ()=>listeners.delete(listener);}};
 }
 // Pinned1.440.0 spreads fetch_options into native fetch. Revocation permanently
 // aborts that signal for this document, including retries and unload. There is no

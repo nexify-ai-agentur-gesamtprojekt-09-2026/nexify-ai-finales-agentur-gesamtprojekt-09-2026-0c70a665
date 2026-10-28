@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-28T00:06:19.226Z",
+  "recorded_at": "2026-10-28T00:33:40.482Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -136,7 +136,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-28T00:06:19.226Z",
+    "recorded_at": "2026-10-28T00:33:40.482Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

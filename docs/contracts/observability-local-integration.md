@@ -53,4 +53,6 @@ Release und humanlike Navigator sind ausdrücklich Fixtures, keine Endnutzer-
 oder Produktionsnachweise. Vite/Next: Unhandled Error, Rejection, tatsächliche
 Chat-Boundary, Payloadminimierung, Nullverkehr ohne Consent, HTTP503→Widerruf→
 unmittelbare erneute Einwilligung→Retry/Unload blockiert und keine SDKpersistenz.
-Consentmanager-Anbindung fehlt noch; Standardbetrieb sendet daher nichts.
+Die nachfolgende lokale Consent-Oberfläche im vorhandenen Footer bindet den
+Controller ausdrücklich an eine bewusste Auswahl. Default und Reload bleiben aus;
+keine Persistenz. Rechtliche und reale Release-/Ingestionabnahme bleiben offen.

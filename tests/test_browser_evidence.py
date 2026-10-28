@@ -215,3 +215,22 @@ class ExceptionEvidenceTests(unittest.TestCase):
         original['external_events_sent'] = 1; path.write_text(json.dumps(original))
         with self.assertRaisesRegex(checker.EvidenceError, 'local_intercept_only'):
             checker.check_exception_evidence(self.root)
+
+
+class ConsentUIEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder=tempfile.TemporaryDirectory();self.addCleanup(self.folder.cleanup);self.root=Path(self.folder.name)
+        for relative in (*checker.CONSENT_UI_SOURCES,*checker.LOCALE_BRIDGE_SOURCES,*checker.NEXT_CONSENT_SOURCES,checker.CONSENT_UI_PATH,checker.LOCALE_BRIDGE_PATH,checker.NEXT_CONSENT_PATH,'config/site-map.json'):
+            path=self.root/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes((ROOT/relative).read_bytes())
+
+    def test_current_consent_pass_is_bound_to_UI_source(self):
+        self.assertEqual(checker.check_consent_ui(self.root)['ui_cases'],18)
+        path=self.root/'apps/web/components/DiagnosticConsent.tsx';path.write_bytes(path.read_bytes()+b'\n/* changed choice */')
+        with self.assertRaisesRegex(checker.EvidenceError,'stale_consent_source'):checker.check_consent_ui(self.root)
+
+    def test_missing_mobile_case_or_claimed_external_send_rejected(self):
+        path=self.root/checker.CONSENT_UI_PATH;report=json.loads(path.read_text());original=copy.deepcopy(report)
+        report['checks'].pop();path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError,'complete_matrix'):checker.check_consent_ui(self.root)
+        original['external_events_sent']=1;path.write_text(json.dumps(original))
+        with self.assertRaisesRegex(checker.EvidenceError,'local_no_errors'):checker.check_consent_ui(self.root)
