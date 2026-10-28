@@ -22,3 +22,18 @@
 .sdk-orientation-view[hidden] { display: none; }
 
 .orientation-message p a { color: var(--color-marke-lime); text-decoration: underline; text-underline-offset: 3px; }
+.orientation-starters,.project-brief,.project-brief > div,.project-brief form,.project-brief-review {display:grid;gap:12px;min-width:0;}
+.orientation-starters button,.project-brief button,.project-brief-mail {min-height:44px;white-space:normal;overflow-wrap:anywhere;font-size:13px;box-shadow:none;}
+.project-brief {border-block:1px solid var(--color-linie-mittel);padding-block:20px;}
+.project-brief [hidden] {display:none;}
+.project-brief-heading {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;}
+.project-brief h4 {font-size:18px;line-height:1.4;}
+.project-brief label,.project-brief-source {font-size:13px;line-height:1.6;}
+.project-brief-source a {color:var(--color-marke-lime);text-decoration:underline;}
+.project-brief textarea {min-width:0;width:100%;font-size:14px;overflow-wrap:anywhere;}
+.project-brief-actions {display:flex;flex-wrap:wrap;gap:8px;}
+.project-brief-actions > button {flex:1;}
+.project-brief-review dl {display:grid;gap:12px;margin:0;}
+.project-brief-review dt {font-size:12px;color:var(--color-text-tertiaer);}
+.project-brief-review dd {margin:0;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;}
+.project-brief-reset {margin-top:12px;}

@@ -198,6 +198,41 @@ class PublicFallbackEvidenceTests(unittest.TestCase):
             checker.check_public_fallbacks(self.root)
 
 
+class ProjectBriefEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*checker.BRIEF_SOURCE_PATHS, *(f'evidence/project-brief-2026-10-28/{s}.json' for s in ('vite', 'next'))):
+            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+
+    def test_project_brief_source_drift_is_rejected(self):
+        self.assertEqual(checker.check_project_brief(self.root)['cases_each'], 18)
+        path = self.root / 'apps/web/lib/project-brief.mjs'; path.write_bytes(path.read_bytes() + b'\n// drift\n')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_source'):
+            checker.check_project_brief(self.root)
+
+    def test_project_brief_missing_locale_or_negative_case_is_rejected(self):
+        path = self.root / 'evidence/project-brief-2026-10-28/next.json'
+        original = json.loads(path.read_text())
+        for mutation in ('locale', 'double_submit', 'quote'):
+            report = copy.deepcopy(original)
+            if mutation == 'locale': report['checks'] = [r for r in report['checks'] if r['locale'] != 'fr']
+            elif mutation == 'double_submit': report['checks'][0]['double_submit_required_steps'] = False
+            else: report['checks'][0]['quote_posts'] = 1
+            path.write_text(json.dumps(report))
+            with self.assertRaises(checker.EvidenceError): checker.check_project_brief(self.root)
+
+    def test_project_brief_unbuilt_or_external_claim_is_rejected(self):
+        path = self.root / 'evidence/project-brief-2026-10-28/vite.json'; original = json.loads(path.read_text())
+        for mutation in ('build', 'external'):
+            report = copy.deepcopy(original)
+            if mutation == 'build': report['fresh_build_performed'] = False
+            else: report['external'] = ['synthetic.invalid']
+            path.write_text(json.dumps(report))
+            with self.assertRaises(checker.EvidenceError): checker.check_project_brief(self.root)
+
+
 class ExceptionEvidenceTests(unittest.TestCase):
     def setUp(self):
         self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)

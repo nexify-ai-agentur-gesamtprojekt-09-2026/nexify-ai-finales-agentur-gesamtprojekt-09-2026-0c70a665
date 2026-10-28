@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-28T17:52:39.542Z",
+  "recorded_at": "2026-10-28T19:09:26.919Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -52,7 +52,7 @@
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
     "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
-    "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
+    "apps/web/components/Workspace.tsx": "e40008d1058c352ab01d403b46907afdcbe601aa3ac6fee9235b8b648b99ee16",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
   },
@@ -74,11 +74,16 @@
     "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
     "apps/site/tests/browser-identity-hero.mjs": "868ce2d469b0cd31dc1bcffcc89ad0986d755f3722adf26b8ded1e2154f5b591",
     "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
-    "apps/site/tests/browser-critical.mjs": "438f56cca6d8cc934aa0f4e70e0c46146b3b0f32e6d8fc7d264c2797a5a54c61"
+    "apps/site/tests/browser-critical.mjs": "2c0dfd0d1d5210bf4eb3f2c69a1e56c811a75cc114b50dd3b02dea245ae937b6",
+    "apps/web/components/ProjectBrief.tsx": "c35cf37d8f9e8264aef04ecd157675345ff8808eaf39d8d8154e8843a51b50fc",
+    "apps/web/lib/project-brief.mjs": "e4eb926bf7d4ee2eec34407969a7dbc7d8788b951c214b5fea90aa797e3e80b0",
+    "apps/web/lib/project-brief.d.mts": "69cff7f1cb2ad932ee27cc948120fb514f5882af125729f90fa1e5e8f95cfc9a",
+    "apps/web/lib/project-brief-i18n.ts": "82f4f391bcf1b86adc448f8704a2b5026a61f77a14841a47f31ff4c99c98137f",
+    "apps/site/tests/browser-project-brief.mjs": "d09f6baa73c71e953b4d96196139563169ffb361322657922020f44cb515a7da"
   },
   "sdk_source_sha256": {
-    "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
-    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
+    "apps/web/components/PublicOrientationChat.tsx": "c9809bf0aac066043a6e9ee9058240fe300521a707668e26acb8795030c3402b",
+    "apps/web/components/PublicOrientationChat.css": "ba9dd45f56d0d3016562947c49d82ab81d0fc224f5f211a6259e5c7390e6c190",
     "api/agent-chat.ts": "78384cefd8829a9610e209fce0787228b3b40539a256183135c9c49b21d50d3a",
     "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
     "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
@@ -140,7 +145,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-28T17:52:39.542Z",
+    "recorded_at": "2026-10-28T19:09:26.919Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

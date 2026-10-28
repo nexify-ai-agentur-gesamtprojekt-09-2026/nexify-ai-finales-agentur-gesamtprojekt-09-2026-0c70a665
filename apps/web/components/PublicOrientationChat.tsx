@@ -1,9 +1,12 @@
 "use client";
 import {useChat} from "@ai-sdk/react";
 import {DefaultChatTransport} from "ai";
-import {useEffect,useMemo,useRef,useState,type FormEvent} from "react";
+import {useEffect,useMemo,useRef,useState,type FormEvent,type Dispatch,type SetStateAction} from "react";
 import type {Locale} from "../lib/i18n";
-import type {PublicPage} from "../lib/page-types";
+import type {ContactChannel,PublicPage} from "../lib/page-types";
+import type {ProjectBriefDraft} from '../lib/project-brief.mjs';
+import {projectBriefCopy} from '../lib/project-brief-i18n';
+import ProjectBrief from './ProjectBrief';
 import {SiteLink} from "./Router";
 import "./PublicOrientationChat.css";
 
@@ -21,17 +24,19 @@ function guidedText(text:string,pages:PublicPage[]){
  });
 }
 
-export default function PublicOrientationChat({locale,pagePath,pages,onActivityChange}:{locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void}){
+export default function PublicOrientationChat({locale,pagePath,pages,onActivityChange,projectBrief,onProjectBriefChange,onUseQuote,canQuote,contact}:{locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void;projectBrief:ProjectBriefDraft;onProjectBriefChange:Dispatch<SetStateAction<ProjectBriefDraft>>;onUseQuote:(title:string,details:string)=>void;canQuote:boolean;contact?:ContactChannel}){
  const text=copy[locale];const[draft,setDraft]=useState("");const lastSubmitted=useRef("");
  const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>({body:{id,trigger,...(messageId?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:messages.filter(message=>message.role==="user").slice(-1).map(message=>({id:message.id,role:message.role,parts:message.parts.filter(part=>part.type==="text")}))}})}),[]);
  const{messages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>setDraft(previous=>previous||lastSubmitted.current)});
  const busy=status==="submitted"||status==="streaming";
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
- const composerInput=useRef<HTMLTextAreaElement>(null);
+ const composerInput=useRef<HTMLTextAreaElement>(null),submitting=useRef(false);
+ const page=pages.find(p=>p.path===pagePath),briefCopy=projectBriefCopy[locale];
  useEffect(()=>{if(!busy&&lastSubmitted.current&&document.activeElement===document.body&&composerInput.current?.offsetParent!==null)composerInput.current?.focus();},[busy]);
- async function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy)return;lastSubmitted.current=value;setDraft("");try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{setDraft(previous=>previous||value);}}
+ async function submit(event:FormEvent){event.preventDefault();const value=(composerInput.current?.value??draft).trim();if(!value||busy||submitting.current)return;submitting.current=true;lastSubmitted.current=value;setDraft("");try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{setDraft(previous=>previous||value);}finally{submitting.current=false;}}
  return <section className="public-orientation" aria-label={text.title}>
   <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  {page&&<><div className="orientation-starters"><p className="connection-note">{briefCopy.context}: <SiteLink href={page.path}>{page.localizedTitle[locale]}</SiteLink></p>{[briefCopy.starter,briefCopy.nextStarter].map(prompt=><button type="button" className="outline-button" key={prompt} disabled={busy||Boolean(draft.trim())} aria-label={briefCopy.useStarter+': '+prompt} onClick={()=>{setDraft(page.localizedTitle[locale]+': '+prompt);composerInput.current?.focus();}}>{prompt}</button>)}</div><ProjectBrief locale={locale} page={page} pages={pages} contact={contact} draft={projectBrief} onChange={onProjectBriefChange} onUseQuote={onUseQuote} canQuote={canQuote}/></>}
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map(message=><article className={"orientation-message role-"+message.role} key={message.id}><strong>{message.role==="user"?text.you:text.assistant}</strong>{message.parts.map((part,index)=>{
    if(part.type==="text")return <p key={index}>{message.role==="assistant"?guidedText(part.text,pages):part.text}</p>;
    if(part.type!=="data-page"||!("data" in part)||!part.data||typeof part.data!=="object")return null;

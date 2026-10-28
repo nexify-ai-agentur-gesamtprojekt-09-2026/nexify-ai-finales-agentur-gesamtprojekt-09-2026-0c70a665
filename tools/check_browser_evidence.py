@@ -51,6 +51,11 @@ AUXILIARY_SOURCE_PATHS = (
     "apps/site/tests/browser-identity-hero.mjs",
     "packages/tokens/tokens.css",
     "apps/site/tests/browser-critical.mjs",
+    "apps/web/components/ProjectBrief.tsx",
+    "apps/web/lib/project-brief.mjs",
+    "apps/web/lib/project-brief.d.mts",
+    "apps/web/lib/project-brief-i18n.ts",
+    "apps/site/tests/browser-project-brief.mjs",
 )
 SDK_CRITICAL_CHECKS = frozenset((
     "sdk_guided_preview_works_when_visitor_session_is_404",
@@ -423,6 +428,46 @@ def check_workspace_read(root):
     return {'scope':'isolated_synthetic_workspace_fixture_only','cases':4,'production_membership_verified':False}
 
 
+BRIEF_SOURCE_PATHS = (
+    'apps/web/components/Workspace.tsx', 'apps/web/components/PublicOrientationChat.tsx',
+    'apps/web/components/PublicOrientationChat.css', 'apps/web/components/ProjectBrief.tsx',
+    'apps/web/lib/project-brief.mjs', 'apps/web/lib/project-brief.d.mts',
+    'apps/web/lib/project-brief-i18n.ts', 'apps/site/tests/browser-project-brief.mjs',
+    'package.json', 'pnpm-lock.yaml', 'packages/tokens/tokens.css',
+    'apps/web/components/WorkspaceRebuild.css', 'config/site-map.json',
+    'config/design-tokens.json', 'apps/site/vite.config.ts', 'apps/web/next.config.ts',
+)
+
+
+def check_project_brief(root):
+    expected = {(width, locale, mode) for width in (320, 1280)
+                for locale in ('de', 'nl', 'fr') for mode in ('unavailable', 'denied', 'quote')}
+    for surface in ('vite', 'next'):
+        report = json.loads(_read(root, f'evidence/project-brief-2026-10-28/{surface}.json'))
+        hashes = report.get('source_sha256', {})
+        if set(hashes) != set(BRIEF_SOURCE_PATHS) or any(
+                hashes[path] != hashlib.sha256(_read(root, path)).hexdigest() for path in BRIEF_SOURCE_PATHS):
+            raise EvidenceError('project_brief_stale_source')
+        rows = report.get('checks', [])
+        if report.get('renderer') != surface or report.get('full_matrix') is not True or len(rows) != len(expected) or {
+                (row.get('width'), row.get('locale'), row.get('mode')) for row in rows} != expected:
+            raise EvidenceError('project_brief_complete_matrix')
+        for row in rows:
+            if any(row.get(key) is not True for key in ('navigation_resume', 'edited', 'reset_confirmation',
+                    'reload_clears', 'unavailable_honest', 'no_unrequested_writes',
+                    'double_submit_required_steps', 'focus_transitions', 'passed')) or (
+                    row.get('chat_posts') != 1 or row.get('quote_posts') != (1 if row['mode'] == 'quote' else 0)):
+                raise EvidenceError('project_brief_negative_cases_required')
+        artifacts = report.get('served_artifact_sha256')
+        if (report.get('fresh_build_performed') is not True or not isinstance(artifacts, dict)
+                or not artifacts or any(not isinstance(value, str) or not re.fullmatch(r'[a-f0-9]{64}', value)
+                                        for value in artifacts.values())):
+            raise EvidenceError('project_brief_fresh_artifact_binding_required')
+        if report.get('passed') is not True or report.get('external') != [] or report.get('errors') != []:
+            raise EvidenceError('project_brief_local_no_external_or_errors')
+    return {'scope': 'local_synthetic_project_preparation_only', 'surfaces': 2, 'cases_each': len(expected)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -435,6 +480,7 @@ def main():
         result["exceptions"] = check_exception_evidence(args.root)
         result["consent"] = check_consent_ui(args.root)
         result["workspace"] = check_workspace_read(args.root)
+        result["project_brief"] = check_project_brief(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

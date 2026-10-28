@@ -129,7 +129,7 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
+    "apps/web/components/Workspace.tsx": "e40008d1058c352ab01d403b46907afdcbe601aa3ac6fee9235b8b648b99ee16",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",

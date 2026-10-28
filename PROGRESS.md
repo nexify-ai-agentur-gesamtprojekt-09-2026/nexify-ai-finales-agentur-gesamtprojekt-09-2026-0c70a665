@@ -1,3 +1,31 @@
+## Public chat project preparation · 28.10.2026
+
+Local increment on preserved Sentry fix 153aa550; no remote push, PR, CI,
+deployment or paid provider operation. Existing shared chat now has page-bound
+starters, three required project questions, an editable overview and explicit
+contact preparation. State remains in the mounted Workspace; navigation, collapse
+and mode changes retain it, reload clears it. No new browser storage or telemetry.
+
+Existing server-described quote capability can fill only an empty existing quote
+form, without creating anything; existing edits survive. Mailto opens the user's
+mail program and does not send. Missing capabilities remain visibly unavailable.
+No second chat engine or autonomous feature-changing daemon.
+
+Both fresh optimized renderers passed 18 actual cases each: DE/NL/FR,320/1280,
+unavailable/denied/quote-capable fixtures. Independent review found and prompted
+fixes for queued submits skipping a question and focus loss. Further negative
+checks found delayed reset focus stealing rapid composer input; commit-time focus,
+DOM-boundary input and one-submit guards now pass exact request/retention checks.
+Five model/encoding/locale tests passed. Existing critical5+SDK3,public fallback18,
+shop browser/API/SQLite negatives,SDK intercepts8per surface and spacing/resize108
+were genuinely refreshed. Final source-bound gates/review are recorded at the end
+commit. These are local fixtures,not real provider/mail/AI or production acceptance.
+
+Public legal source ZIP was separately materialized and its archive plus all ten
+text hashes verified outside the repository. No legal content is mixed into this
+chat increment. The newly authorized live-source operator data is a separate
+follow-up,not an assumption that the B.V. placeholder is correct.
+
 ## Sentry function compiler repair · 28.10.2026
 
 Current production build dpl_BHGK78EVcYhzCHjJ8rnVU3ZbuqBa at externally merged main
