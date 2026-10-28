@@ -19,6 +19,7 @@ try{
   await avatar.evaluate(img=>img.decode());
   assert.deepEqual(await avatar.evaluate(img=>({data:img.src.startsWith('data:image/png;base64,'),width:img.naturalWidth,height:img.naturalHeight})),{data:true,width:512,height:512});
  }
+ await page.locator('.home-hero-actions button').first().click();await page.locator('.action-card .request-fallback a[href="mailto:mail@nexifyai.cloud"]').waitFor();assert.equal(await page.locator('.project-brief:visible').count(),0);
  await page.evaluate(()=>location.hash='#/anmelden');await page.locator('.auth-fallback').waitFor();
  for(const locale of ['nl','fr','de']){
   await page.locator('#locale').selectOption(locale);

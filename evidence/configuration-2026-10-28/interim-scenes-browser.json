@@ -7,6 +7,60 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "home-explain-1",
+          "title": "Dein Vorhaben zuerst",
+          "lead_speaker": "pascal",
+          "composition": "project",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 135,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 83.6875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 62.09375,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "home-explain-2",
+          "title": "So findest du deinen Einstieg",
+          "lead_speaker": "aifly",
+          "composition": "orientation",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 118.796875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 78.296875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 83.6875,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -15,6 +69,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "services-explain-1",
+          "title": "Welche Leistung gehört zu welchem Ziel?",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "services-explain-2",
+          "title": "Was für deine Auswahl wichtig ist",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -23,6 +107,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "websites-explain-1",
+          "title": "Vom Seitenziel zum nächsten Schritt",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "websites-explain-2",
+          "title": "Inhalte und Verantwortung früh klären",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -31,6 +145,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "automation-explain-1",
+          "title": "Wiederkehrende Arbeit nachvollziehbar planen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "automation-explain-2",
+          "title": "Einen Ablauf in überschaubare Schritte zerlegen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -39,6 +183,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "apps-portals-explain-1",
+          "title": "Oberfläche und Berechtigung zusammen denken",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "apps-portals-explain-2",
+          "title": "Übergaben zwischen Menschen und Systemen klären",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -47,6 +221,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "scope-explain-1",
+          "title": "Was vor einem Projektstart geklärt wird",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "scope-explain-2",
+          "title": "Abhängigkeiten gehören zum Umfang",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -55,6 +259,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "solutions-explain-1",
+          "title": "Agenturleistung oder eigener Produktkontext?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -63,6 +283,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "pricing-explain-1",
+          "title": "Umfang vor einer verbindlichen Preisentscheidung",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -71,6 +307,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-explain-1",
+          "title": "Wissen als Vorbereitung für Entscheidungen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -79,6 +331,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-start-explain-1",
+          "title": "Was du für die erste Anfrage sammeln kannst",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -87,6 +355,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "company-explain-1",
+          "title": "Persönliche Klärung statt unbelegter Versprechen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -95,6 +379,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "contact-explain-1",
+          "title": "Mit einem klaren Anliegen ins Gespräch",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -103,6 +403,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "nex2fly-explain-1",
+          "title": "Kundenkonto und 24 Stunden Suite-Test",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "nex2fly-explain-2",
+          "title": "Du entscheidest, wie du LLM-Nutzung bezahlst",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -111,6 +441,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "one-explain-1",
+          "title": "Produktziel und Aktivierung unterscheiden",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -119,6 +465,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "api-explain-1",
+          "title": "Technischen Bedarf vor dem Zugang klären",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -127,6 +489,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "imprint-explain-1",
+          "title": "Anbieterangaben gezielt finden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -135,6 +513,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "privacy-explain-1",
+          "title": "Datenverwendung nachvollziehen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -143,6 +537,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "terms-explain-1",
+          "title": "Entwurf und verbindliche Grundlage unterscheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -151,6 +561,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "ai-notice-explain-1",
+          "title": "KI-Ausgabe und bestätigten Vorgang trennen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -159,6 +585,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "accessibility-explain-1",
+          "title": "Hürden bei der Nutzung melden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -167,6 +609,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "cookies-explain-1",
+          "title": "Optionale Verarbeitung bewusst einordnen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -175,6 +633,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "login-explain-1",
+          "title": "Anmeldung ist nur der erste Zugangsschritt",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -183,6 +657,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "signup-explain-1",
+          "title": "Ein Konto begründet keine Verwaltungsrechte",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -191,6 +681,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-home-explain-1",
+          "title": "Fahrzeug, Teil und Werkstatt sinnvoll verbinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-home-explain-2",
+          "title": "Der Werkstattweg ist eine eigene Anfrage",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -199,6 +719,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-search-explain-1",
+          "title": "Eine Teilesuche mit den richtigen Angaben starten",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -207,6 +743,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-categories-explain-1",
+          "title": "Vom Sortiment zur passenden Kategorie",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -215,6 +767,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-category-explain-1",
+          "title": "Welche Angaben eine Kategorie braucht",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -223,6 +791,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-product-explain-1",
+          "title": "Produktinformationen vor einer Auswahl prüfen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-product-explain-2",
+          "title": "Bei fehlenden Angaben zurück zur Orientierung",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -231,6 +829,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-cart-explain-1",
+          "title": "Auswahl und Bestellung sind verschiedene Schritte",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-cart-explain-2",
+          "title": "Eine Auswahl bleibt überprüfbar",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -239,6 +867,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-checkout-explain-1",
+          "title": "Warum hier noch kein Kauf abgeschlossen wird",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-checkout-explain-2",
+          "title": "Rückfragen vor einer Kaufentscheidung klären",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -247,6 +905,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-fitment-explain-1",
+          "title": "Passung braucht nachvollziehbare Fahrzeugdaten",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -255,6 +929,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-appointments-explain-1",
+          "title": "Ein Terminwunsch ist noch keine Reservierung",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -263,6 +953,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-vouchers-explain-1",
+          "title": "Gutscheininformation und eingelöstes Guthaben trennen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -271,6 +977,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-partner-explain-1",
+          "title": "Eine Werkstattpartnerschaft gezielt anfragen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-partner-explain-2",
+          "title": "Profil und geschützten Zugang getrennt behandeln",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -279,6 +1015,36 @@
       "locale": "de",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-workshop-explain-1",
+          "title": "Ein Werkstattprofil braucht freigegebene Angaben",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-workshop-explain-2",
+          "title": "Vom Anliegen zum Terminwunsch",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -287,6 +1053,22 @@
       "locale": "de",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-legal-explain-1",
+          "title": "Rechtliche Informationen im Shopkontext finden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -295,6 +1077,60 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "home-explain-1",
+          "title": "Eerst uw plan",
+          "lead_speaker": "pascal",
+          "composition": "project",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 135,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 83.6875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 62.09375,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "home-explain-2",
+          "title": "Zo vindt u uw startpunt",
+          "lead_speaker": "aifly",
+          "composition": "orientation",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 118.796875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 78.296875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 83.6875,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -303,6 +1139,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "services-explain-1",
+          "title": "Welke dienst past bij welk doel?",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "services-explain-2",
+          "title": "Wat belangrijk is voor uw keuze",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -311,6 +1177,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "websites-explain-1",
+          "title": "Van paginadoel naar volgende stap",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "websites-explain-2",
+          "title": "Inhoud en verantwoordelijkheid vroeg bepalen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -319,6 +1215,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "automation-explain-1",
+          "title": "Terugkerend werk inzichtelijk plannen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "automation-explain-2",
+          "title": "Een proces in duidelijke stappen verdelen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -327,6 +1253,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "apps-portals-explain-1",
+          "title": "Interface en rechten samen ontwerpen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "apps-portals-explain-2",
+          "title": "Overdrachten tussen mensen en systemen bepalen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -335,6 +1291,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "scope-explain-1",
+          "title": "Wat vóór een projectstart duidelijk moet zijn",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "scope-explain-2",
+          "title": "Afhankelijkheden horen bij de scope",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -343,6 +1329,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "solutions-explain-1",
+          "title": "Bureaudienst of aparte productomgeving?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -351,6 +1353,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "pricing-explain-1",
+          "title": "Scope vóór een bindende prijsafspraak",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -359,6 +1377,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-explain-1",
+          "title": "Kennis als voorbereiding op beslissingen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -367,6 +1401,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-start-explain-1",
+          "title": "Wat u voor de eerste aanvraag kunt verzamelen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -375,6 +1425,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "company-explain-1",
+          "title": "Persoonlijke afstemming zonder ongefundeerde beloften",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -383,6 +1449,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "contact-explain-1",
+          "title": "Begin het gesprek met een duidelijke vraag",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -391,6 +1473,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "nex2fly-explain-1",
+          "title": "Klantaccount en 24 uur Suite-proefperiode",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "nex2fly-explain-2",
+          "title": "Jij kiest hoe je LLM-gebruik betaalt",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -399,6 +1511,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "one-explain-1",
+          "title": "Productdoel en activatie onderscheiden",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -407,6 +1535,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "api-explain-1",
+          "title": "Technische behoefte vóór toegang bepalen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -415,6 +1559,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "imprint-explain-1",
+          "title": "Aanbiedersgegevens gericht vinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -423,6 +1583,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "privacy-explain-1",
+          "title": "Gegevensgebruik begrijpen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -431,6 +1607,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "terms-explain-1",
+          "title": "Concept en bindende grondslag onderscheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -439,6 +1631,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "ai-notice-explain-1",
+          "title": "AI-uitvoer en bevestigde handeling scheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -447,6 +1655,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "accessibility-explain-1",
+          "title": "Gebruiksdrempels melden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -455,6 +1679,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "cookies-explain-1",
+          "title": "Optionele verwerking bewust beoordelen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -463,6 +1703,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "login-explain-1",
+          "title": "Aanmelden is slechts de eerste toegangsstap",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -471,6 +1727,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "signup-explain-1",
+          "title": "Een account geeft geen beheerrechten",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -479,6 +1751,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-home-explain-1",
+          "title": "Voertuig, onderdeel en garage verbinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-home-explain-2",
+          "title": "Het garagetraject is een aparte aanvraag",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -487,6 +1789,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-search-explain-1",
+          "title": "Onderdelen zoeken met de juiste gegevens",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -495,6 +1813,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-categories-explain-1",
+          "title": "Van assortiment naar passende categorie",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -503,6 +1837,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-category-explain-1",
+          "title": "Welke gegevens een categorie nodig heeft",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -511,6 +1861,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-product-explain-1",
+          "title": "Productinformatie vóór een keuze controleren",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-product-explain-2",
+          "title": "Bij ontbrekende gegevens terug naar oriëntatie",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -519,6 +1899,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-cart-explain-1",
+          "title": "Selectie en bestelling zijn verschillende stappen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-cart-explain-2",
+          "title": "Een selectie blijft controleerbaar",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -527,6 +1937,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-checkout-explain-1",
+          "title": "Waarom hier nog geen aankoop wordt afgerond",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-checkout-explain-2",
+          "title": "Vragen vóór een aankoopbeslissing bespreken",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -535,6 +1975,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-fitment-explain-1",
+          "title": "Pasvorm vraagt om controleerbare voertuiggegevens",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -543,6 +1999,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-appointments-explain-1",
+          "title": "Een afspraakverzoek is nog geen reservering",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -551,6 +2023,22 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-vouchers-explain-1",
+          "title": "Voucherinformatie en besteed tegoed scheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -559,6 +2047,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-partner-explain-1",
+          "title": "Gericht een garagepartnerschap aanvragen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-partner-explain-2",
+          "title": "Profiel en beschermde toegang apart behandelen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -567,6 +2085,36 @@
       "locale": "nl",
       "width": 320,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-workshop-explain-1",
+          "title": "Een garageprofiel vraagt om vrijgegeven gegevens",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-workshop-explain-2",
+          "title": "Van vraag naar afspraakverzoek",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -575,6 +2123,1092 @@
       "locale": "nl",
       "width": 320,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-legal-explain-1",
+          "title": "Juridische informatie in de winkelcontext vinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "home",
+      "path": "/",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "home-explain-1",
+          "title": "Votre projet d’abord",
+          "lead_speaker": "pascal",
+          "composition": "project",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 135,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 83.6875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 62.09375,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "home-explain-2",
+          "title": "Trouvez votre point de départ",
+          "lead_speaker": "aifly",
+          "composition": "orientation",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 118.796875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 78.296875,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 83.6875,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "services-explain-1",
+          "title": "Quel service pour quel objectif ?",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "services-explain-2",
+          "title": "Ce qui compte pour votre choix",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "websites-explain-1",
+          "title": "De l’objectif de page à l’étape suivante",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "websites-explain-2",
+          "title": "Préciser tôt les contenus et responsabilités",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "automation-explain-1",
+          "title": "Planifier le travail récurrent de façon traçable",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "automation-explain-2",
+          "title": "Décomposer un processus en étapes claires",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "apps-portals-explain-1",
+          "title": "Concevoir ensemble interface et autorisations",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "apps-portals-explain-2",
+          "title": "Préciser les échanges entre personnes et systèmes",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "scope-explain-1",
+          "title": "Ce qu’il faut préciser avant de démarrer",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "scope-explain-2",
+          "title": "Les dépendances font partie du périmètre",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "solutions-explain-1",
+          "title": "Service d’agence ou univers produit distinct ?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "pricing-explain-1",
+          "title": "Le périmètre avant un prix engageant",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-explain-1",
+          "title": "Des repères pour préparer vos décisions",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-start-explain-1",
+          "title": "Que préparer pour une première demande ?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "company-explain-1",
+          "title": "Un échange clair sans promesses non étayées",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "contact-explain-1",
+          "title": "Commencez par une demande précise",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "nex2fly-explain-1",
+          "title": "Compte client et essai de la Suite pendant 24 heures",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "nex2fly-explain-2",
+          "title": "Tu choisis comment payer l’utilisation des LLM",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "one-explain-1",
+          "title": "Distinguer objectif produit et activation",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "api-explain-1",
+          "title": "Préciser le besoin technique avant l’accès",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "imprint-explain-1",
+          "title": "Trouver les informations du prestataire",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "privacy-explain-1",
+          "title": "Comprendre l’utilisation des données",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "terms-explain-1",
+          "title": "Distinguer brouillon et base contractuelle",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "ai-notice-explain-1",
+          "title": "Distinguer réponse IA et opération confirmée",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "accessibility-explain-1",
+          "title": "Signaler une difficulté d’accès",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "cookies-explain-1",
+          "title": "Comprendre les traitements facultatifs",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "login-explain-1",
+          "title": "La connexion n’est qu’une première étape",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "signup-explain-1",
+          "title": "Un compte ne confère aucun droit d’administration",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-home-explain-1",
+          "title": "Relier véhicule, pièce et atelier",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-home-explain-2",
+          "title": "Le parcours atelier est une demande distincte",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-search-explain-1",
+          "title": "Chercher une pièce avec les bonnes informations",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-categories-explain-1",
+          "title": "De l’offre à la catégorie adaptée",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-category-explain-1",
+          "title": "Les informations utiles à une catégorie",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-product-explain-1",
+          "title": "Vérifier la fiche produit avant de choisir",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-product-explain-2",
+          "title": "Revenir aux repères si des informations manquent",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-cart-explain-1",
+          "title": "La sélection et la commande sont distinctes",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-cart-explain-2",
+          "title": "Une sélection reste à vérifier",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-checkout-explain-1",
+          "title": "Pourquoi aucun achat n’est encore conclu ici",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-checkout-explain-2",
+          "title": "Clarifier les questions avant une décision d’achat",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-fitment-explain-1",
+          "title": "La compatibilité exige des données véhicule fiables",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-appointments-explain-1",
+          "title": "Une demande de rendez-vous n’est pas une réservation",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-vouchers-explain-1",
+          "title": "Distinguer information bon et crédit utilisé",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-partner-explain-1",
+          "title": "Préparer une demande de partenariat atelier",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-partner-explain-2",
+          "title": "Séparer profil et accès protégé",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-workshop-explain-1",
+          "title": "Un profil atelier exige des données validées",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-workshop-explain-2",
+          "title": "Du besoin à la demande de rendez-vous",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "locale": "fr",
+      "width": 320,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-legal-explain-1",
+          "title": "Trouver les informations juridiques de la boutique",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 240,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -583,6 +3217,60 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "home-explain-1",
+          "title": "Dein Vorhaben zuerst",
+          "lead_speaker": "pascal",
+          "composition": "project",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 200.40625,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 124.25,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 92.171875,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "home-explain-2",
+          "title": "So findest du deinen Einstieg",
+          "lead_speaker": "aifly",
+          "composition": "orientation",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 176.34375,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 116.234375,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 124.25,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -591,6 +3279,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "services-explain-1",
+          "title": "Welche Leistung gehört zu welchem Ziel?",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "services-explain-2",
+          "title": "Was für deine Auswahl wichtig ist",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -599,6 +3317,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "websites-explain-1",
+          "title": "Vom Seitenziel zum nächsten Schritt",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "websites-explain-2",
+          "title": "Inhalte und Verantwortung früh klären",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -607,6 +3355,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "automation-explain-1",
+          "title": "Wiederkehrende Arbeit nachvollziehbar planen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "automation-explain-2",
+          "title": "Einen Ablauf in überschaubare Schritte zerlegen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -615,6 +3393,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "apps-portals-explain-1",
+          "title": "Oberfläche und Berechtigung zusammen denken",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "apps-portals-explain-2",
+          "title": "Übergaben zwischen Menschen und Systemen klären",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -623,6 +3431,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "scope-explain-1",
+          "title": "Was vor einem Projektstart geklärt wird",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "scope-explain-2",
+          "title": "Abhängigkeiten gehören zum Umfang",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -631,6 +3469,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "solutions-explain-1",
+          "title": "Agenturleistung oder eigener Produktkontext?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -639,6 +3493,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "pricing-explain-1",
+          "title": "Umfang vor einer verbindlichen Preisentscheidung",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -647,6 +3517,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-explain-1",
+          "title": "Wissen als Vorbereitung für Entscheidungen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -655,6 +3541,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-start-explain-1",
+          "title": "Was du für die erste Anfrage sammeln kannst",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -663,6 +3565,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "company-explain-1",
+          "title": "Persönliche Klärung statt unbelegter Versprechen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -671,6 +3589,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "contact-explain-1",
+          "title": "Mit einem klaren Anliegen ins Gespräch",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -679,6 +3613,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "nex2fly-explain-1",
+          "title": "Kundenkonto und 24 Stunden Suite-Test",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "nex2fly-explain-2",
+          "title": "Du entscheidest, wie du LLM-Nutzung bezahlst",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -687,6 +3651,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "one-explain-1",
+          "title": "Produktziel und Aktivierung unterscheiden",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -695,6 +3675,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "api-explain-1",
+          "title": "Technischen Bedarf vor dem Zugang klären",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -703,6 +3699,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "imprint-explain-1",
+          "title": "Anbieterangaben gezielt finden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -711,6 +3723,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "privacy-explain-1",
+          "title": "Datenverwendung nachvollziehen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -719,6 +3747,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "terms-explain-1",
+          "title": "Entwurf und verbindliche Grundlage unterscheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -727,6 +3771,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "ai-notice-explain-1",
+          "title": "KI-Ausgabe und bestätigten Vorgang trennen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -735,6 +3795,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "accessibility-explain-1",
+          "title": "Hürden bei der Nutzung melden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -743,6 +3819,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "cookies-explain-1",
+          "title": "Optionale Verarbeitung bewusst einordnen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -751,6 +3843,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "login-explain-1",
+          "title": "Anmeldung ist nur der erste Zugangsschritt",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -759,6 +3867,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "signup-explain-1",
+          "title": "Ein Konto begründet keine Verwaltungsrechte",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -767,6 +3891,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-home-explain-1",
+          "title": "Fahrzeug, Teil und Werkstatt sinnvoll verbinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-home-explain-2",
+          "title": "Der Werkstattweg ist eine eigene Anfrage",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -775,6 +3929,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-search-explain-1",
+          "title": "Eine Teilesuche mit den richtigen Angaben starten",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -783,6 +3953,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-categories-explain-1",
+          "title": "Vom Sortiment zur passenden Kategorie",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -791,6 +3977,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-category-explain-1",
+          "title": "Welche Angaben eine Kategorie braucht",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -799,6 +4001,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-product-explain-1",
+          "title": "Produktinformationen vor einer Auswahl prüfen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-product-explain-2",
+          "title": "Bei fehlenden Angaben zurück zur Orientierung",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -807,6 +4039,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-cart-explain-1",
+          "title": "Auswahl und Bestellung sind verschiedene Schritte",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-cart-explain-2",
+          "title": "Eine Auswahl bleibt überprüfbar",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -815,6 +4077,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-checkout-explain-1",
+          "title": "Warum hier noch kein Kauf abgeschlossen wird",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-checkout-explain-2",
+          "title": "Rückfragen vor einer Kaufentscheidung klären",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -823,6 +4115,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-fitment-explain-1",
+          "title": "Passung braucht nachvollziehbare Fahrzeugdaten",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -831,6 +4139,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-appointments-explain-1",
+          "title": "Ein Terminwunsch ist noch keine Reservierung",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -839,6 +4163,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-vouchers-explain-1",
+          "title": "Gutscheininformation und eingelöstes Guthaben trennen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -847,6 +4187,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-partner-explain-1",
+          "title": "Eine Werkstattpartnerschaft gezielt anfragen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-partner-explain-2",
+          "title": "Profil und geschützten Zugang getrennt behandeln",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -855,6 +4225,36 @@
       "locale": "de",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-workshop-explain-1",
+          "title": "Ein Werkstattprofil braucht freigegebene Angaben",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-workshop-explain-2",
+          "title": "Vom Anliegen zum Terminwunsch",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -863,6 +4263,22 @@
       "locale": "de",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-legal-explain-1",
+          "title": "Rechtliche Informationen im Shopkontext finden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -871,6 +4287,60 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "home-explain-1",
+          "title": "Eerst uw plan",
+          "lead_speaker": "pascal",
+          "composition": "project",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 200.40625,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 124.25,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 92.171875,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "home-explain-2",
+          "title": "Zo vindt u uw startpunt",
+          "lead_speaker": "aifly",
+          "composition": "orientation",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 176.34375,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 116.234375,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 124.25,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -879,6 +4349,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "services-explain-1",
+          "title": "Welke dienst past bij welk doel?",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "services-explain-2",
+          "title": "Wat belangrijk is voor uw keuze",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -887,6 +4387,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "websites-explain-1",
+          "title": "Van paginadoel naar volgende stap",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "websites-explain-2",
+          "title": "Inhoud en verantwoordelijkheid vroeg bepalen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -895,6 +4425,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "automation-explain-1",
+          "title": "Terugkerend werk inzichtelijk plannen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "automation-explain-2",
+          "title": "Een proces in duidelijke stappen verdelen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -903,6 +4463,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "apps-portals-explain-1",
+          "title": "Interface en rechten samen ontwerpen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "apps-portals-explain-2",
+          "title": "Overdrachten tussen mensen en systemen bepalen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -911,6 +4501,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "scope-explain-1",
+          "title": "Wat vóór een projectstart duidelijk moet zijn",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "scope-explain-2",
+          "title": "Afhankelijkheden horen bij de scope",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -919,6 +4539,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "solutions-explain-1",
+          "title": "Bureaudienst of aparte productomgeving?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -927,6 +4563,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "pricing-explain-1",
+          "title": "Scope vóór een bindende prijsafspraak",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -935,6 +4587,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-explain-1",
+          "title": "Kennis als voorbereiding op beslissingen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -943,6 +4611,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-start-explain-1",
+          "title": "Wat u voor de eerste aanvraag kunt verzamelen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -951,6 +4635,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "company-explain-1",
+          "title": "Persoonlijke afstemming zonder ongefundeerde beloften",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -959,6 +4659,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "contact-explain-1",
+          "title": "Begin het gesprek met een duidelijke vraag",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -967,6 +4683,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "nex2fly-explain-1",
+          "title": "Klantaccount en 24 uur Suite-proefperiode",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "nex2fly-explain-2",
+          "title": "Jij kiest hoe je LLM-gebruik betaalt",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -975,6 +4721,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "one-explain-1",
+          "title": "Productdoel en activatie onderscheiden",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -983,6 +4745,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "api-explain-1",
+          "title": "Technische behoefte vóór toegang bepalen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -991,6 +4769,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "imprint-explain-1",
+          "title": "Aanbiedersgegevens gericht vinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -999,6 +4793,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "privacy-explain-1",
+          "title": "Gegevensgebruik begrijpen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1007,6 +4817,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "terms-explain-1",
+          "title": "Concept en bindende grondslag onderscheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1015,6 +4841,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "ai-notice-explain-1",
+          "title": "AI-uitvoer en bevestigde handeling scheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1023,6 +4865,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "accessibility-explain-1",
+          "title": "Gebruiksdrempels melden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1031,6 +4889,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "cookies-explain-1",
+          "title": "Optionele verwerking bewust beoordelen",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1039,6 +4913,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "login-explain-1",
+          "title": "Aanmelden is slechts de eerste toegangsstap",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1047,6 +4937,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "signup-explain-1",
+          "title": "Een account geeft geen beheerrechten",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1055,6 +4961,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-home-explain-1",
+          "title": "Voertuig, onderdeel en garage verbinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-home-explain-2",
+          "title": "Het garagetraject is een aparte aanvraag",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1063,6 +4999,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-search-explain-1",
+          "title": "Onderdelen zoeken met de juiste gegevens",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1071,6 +5023,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-categories-explain-1",
+          "title": "Van assortiment naar passende categorie",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1079,6 +5047,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-category-explain-1",
+          "title": "Welke gegevens een categorie nodig heeft",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1087,6 +5071,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-product-explain-1",
+          "title": "Productinformatie vóór een keuze controleren",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-product-explain-2",
+          "title": "Bij ontbrekende gegevens terug naar oriëntatie",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1095,6 +5109,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-cart-explain-1",
+          "title": "Selectie en bestelling zijn verschillende stappen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-cart-explain-2",
+          "title": "Een selectie blijft controleerbaar",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1103,6 +5147,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-checkout-explain-1",
+          "title": "Waarom hier nog geen aankoop wordt afgerond",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-checkout-explain-2",
+          "title": "Vragen vóór een aankoopbeslissing bespreken",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1111,6 +5185,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-fitment-explain-1",
+          "title": "Pasvorm vraagt om controleerbare voertuiggegevens",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1119,6 +5209,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-appointments-explain-1",
+          "title": "Een afspraakverzoek is nog geen reservering",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1127,6 +5233,22 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-vouchers-explain-1",
+          "title": "Voucherinformatie en besteed tegoed scheiden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1135,6 +5257,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-partner-explain-1",
+          "title": "Gericht een garagepartnerschap aanvragen",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-partner-explain-2",
+          "title": "Profiel en beschermde toegang apart behandelen",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1143,6 +5295,36 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-workshop-explain-1",
+          "title": "Een garageprofiel vraagt om vrijgegeven gegevens",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-workshop-explain-2",
+          "title": "Van vraag naar afspraakverzoek",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     },
     {
@@ -1151,21 +5333,1113 @@
       "locale": "nl",
       "width": 1280,
       "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-legal-explain-1",
+          "title": "Juridische informatie in de winkelcontext vinden",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "home",
+      "path": "/",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "home-explain-1",
+          "title": "Votre projet d’abord",
+          "lead_speaker": "pascal",
+          "composition": "project",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 200.40625,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 124.25,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 92.171875,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "home-explain-2",
+          "title": "Trouvez votre point de départ",
+          "lead_speaker": "aifly",
+          "composition": "orientation",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 176.34375,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 116.234375,
+              "loaded": true
+            },
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 124.25,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "services-explain-1",
+          "title": "Quel service pour quel objectif ?",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "services-explain-2",
+          "title": "Ce qui compte pour votre choix",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "websites-explain-1",
+          "title": "De l’objectif de page à l’étape suivante",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "websites-explain-2",
+          "title": "Préciser tôt les contenus et responsabilités",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "automation-explain-1",
+          "title": "Planifier le travail récurrent de façon traçable",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "automation-explain-2",
+          "title": "Décomposer un processus en étapes claires",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "apps-portals-explain-1",
+          "title": "Concevoir ensemble interface et autorisations",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "apps-portals-explain-2",
+          "title": "Préciser les échanges entre personnes et systèmes",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "scope-explain-1",
+          "title": "Ce qu’il faut préciser avant de démarrer",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "scope-explain-2",
+          "title": "Les dépendances font partie du périmètre",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "solutions-explain-1",
+          "title": "Service d’agence ou univers produit distinct ?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "pricing-explain-1",
+          "title": "Le périmètre avant un prix engageant",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-explain-1",
+          "title": "Des repères pour préparer vos décisions",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "knowledge-start-explain-1",
+          "title": "Que préparer pour une première demande ?",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "company-explain-1",
+          "title": "Un échange clair sans promesses non étayées",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "contact-explain-1",
+          "title": "Commencez par une demande précise",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "nex2fly-explain-1",
+          "title": "Compte client et essai de la Suite pendant 24 heures",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "nex2fly-explain-2",
+          "title": "Tu choisis comment payer l’utilisation des LLM",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "one-explain-1",
+          "title": "Distinguer objectif produit et activation",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "api-explain-1",
+          "title": "Préciser le besoin technique avant l’accès",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "imprint-explain-1",
+          "title": "Trouver les informations du prestataire",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "privacy-explain-1",
+          "title": "Comprendre l’utilisation des données",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "terms-explain-1",
+          "title": "Distinguer brouillon et base contractuelle",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "ai-notice-explain-1",
+          "title": "Distinguer réponse IA et opération confirmée",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "accessibility-explain-1",
+          "title": "Signaler une difficulté d’accès",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "cookies-explain-1",
+          "title": "Comprendre les traitements facultatifs",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "login-explain-1",
+          "title": "La connexion n’est qu’une première étape",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "signup-explain-1",
+          "title": "Un compte ne confère aucun droit d’administration",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-home-explain-1",
+          "title": "Relier véhicule, pièce et atelier",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-home-explain-2",
+          "title": "Le parcours atelier est une demande distincte",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-search-explain-1",
+          "title": "Chercher une pièce avec les bonnes informations",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-categories-explain-1",
+          "title": "De l’offre à la catégorie adaptée",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-category-explain-1",
+          "title": "Les informations utiles à une catégorie",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-product-explain-1",
+          "title": "Vérifier la fiche produit avant de choisir",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-product-explain-2",
+          "title": "Revenir aux repères si des informations manquent",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-cart-explain-1",
+          "title": "La sélection et la commande sont distinctes",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-cart-explain-2",
+          "title": "Une sélection reste à vérifier",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-checkout-explain-1",
+          "title": "Pourquoi aucun achat n’est encore conclu ici",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-checkout-explain-2",
+          "title": "Clarifier les questions avant une décision d’achat",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-fitment-explain-1",
+          "title": "La compatibilité exige des données véhicule fiables",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-appointments-explain-1",
+          "title": "Une demande de rendez-vous n’est pas une réservation",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-vouchers-explain-1",
+          "title": "Distinguer information bon et crédit utilisé",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-partner-explain-1",
+          "title": "Préparer une demande de partenariat atelier",
+          "lead_speaker": "pascal",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/pascal-original-6dd03834.png",
+              "persona": "pascal",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-partner-explain-2",
+          "title": "Séparer profil et accès protégé",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 2,
+      "modules": [
+        {
+          "module_id": "tk-workshop-explain-1",
+          "title": "Un profil atelier exige des données validées",
+          "lead_speaker": "nex",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/nex-toucan-121a804c.png",
+              "persona": "nex",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "module_id": "tk-workshop-explain-2",
+          "title": "Du besoin à la demande de rendez-vous",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "locale": "fr",
+      "width": 1280,
+      "scenes": 1,
+      "modules": [
+        {
+          "module_id": "tk-legal-explain-1",
+          "title": "Trouver les informations juridiques de la boutique",
+          "lead_speaker": "aifly",
+          "composition": "original-role-illustration",
+          "assets": [
+            {
+              "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+              "persona": "aifly",
+              "width": 358,
+              "loaded": true
+            }
+          ]
+        }
+      ],
       "passed": true
     }
   ],
   "source_sha256": {
+    "config/site-map.json": "17a852cbb9a69f66276bd6f6cf70fefd388a0c0b4e9fac8b36bc082b468fa7d1",
+    "config/page-explainers.json": "876167201270b7808c10cd4b7f1938447af186ca635ce570ee09faffe2c25652",
+    "config/companion-avatar.json": "fa692579d0bc87d63074284e7fab7eb84052da9eecb7898706ce382b10b6f5eb",
+    "apps/web/components/PublicContent.tsx": "6bc1b3b2fe6d97f053e91ca876aad2b7af0657186d982225ab4caa202103190f",
+    "apps/web/components/IdentityIllustration.tsx": "e25a0062d4ad736aa5ab4c57788d57e9ea4a63c1a48ad1cc541fb93406491c5e",
+    "apps/web/components/IdentityIllustration.css": "99d2e27f83f077efd6f071034fda0f16b3515f8b7a98b10d3eb37b7de35ac366",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
     "apps/web/components/PresenterScene.tsx": "f47fb7d6b917912da4b651ed2b2b5832761768ab59f34792244d0f0077764691",
-    "apps/web/components/ExplainerSections.tsx": "0b25af5b66cffd1821613d8984f53f85fc0e4b8bd1ea6e63af8fbcc2ec941fcc",
+    "apps/web/components/ExplainerSections.tsx": "592fbd43a650590ce258aacef476e0929e57bb1ca4003ffd6eef4ab8e463db5c",
     "apps/web/components/PresenterEditorial.css": "1568ed80ac71b3ef236280e9d90a7f1c1b7ff14977f88198171d26ea630215da",
-    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
+    "apps/web/components/HomeContent.tsx": "7304b1a7afb804c20d996ae2f423ff9c5dff846776b9949b6de6483aa98cb59f",
     "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
     "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
-    "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
+    "config/identity-hero.json": "03e24b969ec283e2e096c0b9e5937abe3f3589a391e997c8476f873adfc628ca",
     "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
     "apps/site/scripts/generate-public-data.mjs": "f9b3eeab38c81432080365709eab79bbffcaac3ce10147c70d6d072543c9f950",
-    "apps/site/tests/browser-scene-images.mjs": "5199e67a74f2c8c6bf3009d5eb5ad9261d22680f2974c2e82d7f42bbd6e27dfd"
+    "apps/site/tests/browser-scene-images.mjs": "61af41c2c30c2b1987d21e00c3429a204192ae30664601895740e75d88849c0d"
   },
   "external_requests": 0,
   "page_errors": [],

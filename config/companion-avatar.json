@@ -14,8 +14,22 @@
   "source": "user_supplied_original",
   "user_visual_direction_confirmed_at": "2026-10-27T21:39Z",
   "original_bytes_unchanged": true,
-  "scope": "chat companion only;no hero/video replacement or production capability claim",
+  "scope": "final Oracle identity in existing chat controls and explicitly declared still illustrations;no video/provider/runtime claim",
   "motion": "bounded transform transition on actual request state;no looping animation;reduced-motion disables transform/transition",
   "video_animation_delivered": false,
-  "source_time_precision": "minute"
+  "source_time_precision": "minute",
+  "identity_audit": {
+    "user_instruction": "Sentinel_3df16a07dd408191a206ab4d0b2e1421;2026-10-28",
+    "active_chat_variants": [
+      "heading",
+      "launcher"
+    ],
+    "all_active_variants_use_same_original": true,
+    "separate_companion_logo_found": false,
+    "agency_signet_is_not_companion": true,
+    "nex_and_pascal_preserved": true,
+    "animation_sprite_frames_delivered": false,
+    "legacy_trio_asset": "Retained historical/rejected source;not rendered;unused standalone embedding removed",
+    "work_pet_hoots_used": false
+  }
 }

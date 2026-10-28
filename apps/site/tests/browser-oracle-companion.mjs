@@ -13,9 +13,10 @@ const sources=['apps/web/components/OracleCompanion.tsx','apps/web/components/Or
 async function hashes(){return Object.fromEntries(await Promise.all(sources.map(async path=>[path,createHash('sha256').update(await readFile(repo+path)).digest('hex')])));}
 const before=await hashes(),directory=repo+'.local/oracle-companion';await mkdir(directory,{recursive:true});
 async function bounded(promise){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('synthetic request did not reach the held adapter')),5000);})]);}finally{clearTimeout(timer);}}
-const cache=await mkdtemp(join(tmpdir(),'nexify-oracle-'));const server=await createServer({root,cacheDir:cache,server:{port:0,strictPort:false,hmr:false},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"'}});await server.listen();
-const origin=`http://127.0.0.1:${server.httpServer.address().port}`,browser=await chromium.launch({headless:true});
-const report={scope:'local Vite and shared companion;synthetic request,not provider or assistive-technology certification',checks:[],runtime_errors:[],external_requests:[],source_sha256:before,screenshots:'internal_QA_only',video_animation_delivered:false};
+const externalOrigin=process.env.LOCAL_COMPANION_ORIGIN;if(externalOrigin)assert.ok(['127.0.0.1','localhost'].includes(new URL(externalOrigin).hostname),'local QA only');
+const cache=await mkdtemp(join(tmpdir(),'nexify-oracle-'));const server=externalOrigin?null:await createServer({root,cacheDir:cache,server:{port:0,strictPort:false,hmr:false},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"'}});if(server)await server.listen();
+const origin=externalOrigin||`http://127.0.0.1:${server.httpServer.address().port}`,browser=await chromium.launch({headless:true});
+const report={renderer:externalOrigin?'Next-local':'Vite-local',scope:'local Vite and shared companion;synthetic request,not provider or assistive-technology certification',checks:[],runtime_errors:[],external_requests:[],source_sha256:before,screenshots:'internal_QA_only',video_animation_delivered:false};
 try{
  for(const width of [320,390,1280])for(const reducedMotion of ['no-preference','reduce']){
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion});let held,release;
@@ -55,5 +56,5 @@ try{
   }finally{release();await context.close();}
  }
  assert.deepEqual(report.runtime_errors,[]);assert.deepEqual(report.external_requests,[]);assert.deepEqual(await hashes(),before);report.passed=true;
-}finally{await browser.close();await server.close();await rm(cache,{recursive:true,force:true});await writeFile(directory+'/browser.json',JSON.stringify(report,null,2)+'\n');}
+}finally{await browser.close();if(server)await server.close();await rm(cache,{recursive:true,force:true});await writeFile(directory+(externalOrigin?'/browser-next.json':'/browser.json'),JSON.stringify(report,null,2)+'\n');}
 console.log(JSON.stringify({checks:report.checks.length,passed:report.passed}));

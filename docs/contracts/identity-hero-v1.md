@@ -1,3 +1,5 @@
+> Historical placement note: the owner's 28 October 19:47 correction supersedes the full-Hero placement below. The original reference and component are preserved, but the current regular Hero and two lower illustrations follow section-media-placement.md.
+
 # Identity-Hero V1 · lokaler Integrationsschnitt
 
 Basis `d92ee1b2bb4dcdfda9ac5fbd1978e8a2f53615f8`; abgeschlossener Mailteil bleibt

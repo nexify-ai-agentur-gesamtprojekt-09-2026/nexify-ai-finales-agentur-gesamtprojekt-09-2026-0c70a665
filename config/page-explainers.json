@@ -69,12 +69,12 @@
           "speaker": "pascal",
           "status": "script_draft",
           "title": {
-            "de": "Ihr Vorhaben zuerst",
+            "de": "Dein Vorhaben zuerst",
             "nl": "Eerst uw plan",
             "fr": "Votre projet d’abord"
           },
           "body": {
-            "de": "Eine Website, ein Portal und ein automatisierter Ablauf lösen unterschiedliche Aufgaben. Beschreiben Sie zuerst Ihr Ziel und den heutigen Engpass. Über die Leistungsseiten grenzen Sie ein, was zu Ihrem Vorhaben passt; ein möglicher Projektstart beginnt mit geklärtem Umfang.",
+            "de": "Eine Website, ein Portal und ein automatisierter Ablauf lösen unterschiedliche Aufgaben. Beschreibe zuerst dein Ziel und den heutigen Engpass. Über die Leistungsseiten grenzt du ein, was zu deinem Vorhaben passt; ein möglicher Projektstart beginnt mit geklärtem Umfang.",
             "nl": "Een website, portaal en geautomatiseerd proces lossen verschillende taken op. Beschrijf eerst uw doel en het huidige knelpunt. Via de diensten bepaalt u wat bij uw plan past; een mogelijke projectstart begint met een duidelijke scope.",
             "fr": "Un site, un portail et un processus automatisé répondent à des besoins différents. Décrivez votre objectif et le blocage actuel. Les pages de services vous aident à préciser le périmètre avant un éventuel démarrage."
           },
@@ -110,12 +110,12 @@
           "speaker": "aifly",
           "status": "script_draft",
           "title": {
-            "de": "So finden Sie Ihren Einstieg",
+            "de": "So findest du deinen Einstieg",
             "nl": "Zo vindt u uw startpunt",
             "fr": "Trouvez votre point de départ"
           },
           "body": {
-            "de": "Wenn Sie noch zwischen Website, Automatisierung und Portal abwägen, helfen die Leistungsseiten beim Vergleich. Für ein konkretes Vorhaben führt der nächste Schritt zur Klärung des Umfangs; der Chat kann eine Anfrage vorbereiten.",
+            "de": "Wenn du noch zwischen Website, Automatisierung und Portal abwägst, helfen die Leistungsseiten beim Vergleich. Für ein konkretes Vorhaben führt der nächste Schritt zur Klärung des Umfangs; der Chat kann eine Anfrage vorbereiten.",
             "nl": "Als u nog twijfelt tussen website, automatisering en portaal, helpen de dienstenpagina’s bij het vergelijken. Voor een concreet plan volgt de scopebepaling; de chat kan een aanvraag voorbereiden.",
             "fr": "Si vous hésitez entre site, automatisation et portail, comparez les pages de services. Pour un projet concret, précisez ensuite le périmètre ; le chat peut préparer une demande."
           },
@@ -163,7 +163,7 @@
             "fr": "Quel service pour quel objectif ?"
           },
           "body": {
-            "de": "Für einen öffentlichen Auftritt beginnen Sie bei Websites. Für wiederkehrende Arbeit sehen Sie sich Agenten und Automatisierung an. Für Anmeldung, Rollen und verbundene Arbeitsabläufe führt der Weg zu Apps und Portalen; anschließend wird der konkrete Umfang geklärt.",
+            "de": "Für einen öffentlichen Auftritt beginnst du bei Websites. Für wiederkehrende Arbeit sieh dir Agenten und Automatisierung an. Für Anmeldung, Rollen und verbundene Arbeitsabläufe führt der Weg zu Apps und Portalen; anschließend wird der konkrete Umfang geklärt.",
             "nl": "Voor een publieke presentatie begint u bij websites. Voor terugkerend werk bekijkt u agents en automatisering. Voor aanmelden, rollen en verbonden werkprocessen kiest u apps en portalen; daarna wordt de concrete scope bepaald.",
             "fr": "Pour une présence publique, commencez par les sites web. Pour le travail récurrent, consultez les agents et l’automatisation. Pour les comptes, rôles et processus reliés, explorez les applications et portails, puis précisez le périmètre."
           },
@@ -199,12 +199,12 @@
           "speaker": "pascal",
           "status": "script_draft",
           "title": {
-            "de": "Was für Ihre Auswahl wichtig ist",
+            "de": "Was für deine Auswahl wichtig ist",
             "nl": "Wat belangrijk is voor uw keuze",
             "fr": "Ce qui compte pour votre choix"
           },
           "body": {
-            "de": "Beschreiben Sie die Aufgabe und wer mit dem Ergebnis arbeiten soll. Nicht jede Idee braucht dieselben Funktionen. Die nächste Klärung hält fest, was zum Projekt gehört und welche Abhängigkeiten noch offen sind.",
+            "de": "Beschreibe die Aufgabe und wer mit dem Ergebnis arbeiten soll. Nicht jede Idee braucht dieselben Funktionen. Die nächste Klärung hält fest, was zum Projekt gehört und welche Abhängigkeiten noch offen sind.",
             "nl": "Beschrijf de taak en wie met het resultaat gaat werken. Niet elk idee heeft dezelfde functies nodig. De volgende afstemming legt vast wat bij het project hoort en welke afhankelijkheden nog openstaan.",
             "fr": "Décrivez la tâche et les personnes qui utiliseront le résultat. Chaque idée ne demande pas les mêmes fonctions. L’échange suivant précise le contenu du projet et les dépendances ouvertes."
           },
@@ -252,7 +252,7 @@
             "fr": "De l’objectif de page à l’étape suivante"
           },
           "body": {
-            "de": "Eine Website braucht verständliche Inhalte und passende Folgeseiten. Klären Sie, wer die Seite nutzt, welche Informationen benötigt werden und wie eine Anfrage beginnt. Gestaltung, Sprachen und Schnittstellen gehören in den Leistungsumfang, bevor verbindliche Zusagen entstehen.",
+            "de": "Eine Website braucht verständliche Inhalte und passende Folgeseiten. Kläre, wer die Seite nutzt, welche Informationen benötigt werden und wie eine Anfrage beginnt. Gestaltung, Sprachen und Schnittstellen gehören in den Leistungsumfang, bevor verbindliche Zusagen entstehen.",
             "nl": "Een website heeft begrijpelijke inhoud en passende vervolgpagina’s nodig. Bepaal wie de pagina gebruikt, welke informatie nodig is en hoe een aanvraag begint. Vormgeving, talen en koppelingen horen in de scope vóór bindende afspraken.",
             "fr": "Un site demande des contenus clairs et des pages suivantes cohérentes. Précisez les utilisateurs, leurs informations utiles et le début d’une demande. Design, langues et intégrations font partie du périmètre avant tout engagement."
           },
@@ -341,7 +341,7 @@
             "fr": "Planifier le travail récurrent de façon traçable"
           },
           "body": {
-            "de": "Beginnen Sie mit einem konkreten Ablauf: Was kommt herein, welche Regeln gelten und wer entscheidet? Agenten und Automatisierung benötigen definierte Datenquellen, Berechtigungen und Freigaben. Eine vorgeschlagene Aktion ist noch keine ausgeführte Buchung oder versandte Nachricht.",
+            "de": "Beginne mit einem konkreten Ablauf: Was kommt herein, welche Regeln gelten und wer entscheidet? Agenten und Automatisierung benötigen definierte Datenquellen, Berechtigungen und Freigaben. Eine vorgeschlagene Aktion ist noch keine ausgeführte Buchung oder versandte Nachricht.",
             "nl": "Begin met één proces: wat komt binnen, welke regels gelden en wie beslist? Agents en automatisering hebben afgebakende bronnen, rechten en goedkeuringen nodig. Een voorgestelde actie is nog geen uitgevoerde boeking of verzonden bericht.",
             "fr": "Partez d’un processus précis : quelles entrées, quelles règles et quel décideur ? Agents et automatisation exigent des sources, droits et validations définis. Une action proposée n’est pas encore une opération exécutée ni un message envoyé."
           },
@@ -383,7 +383,7 @@
             "fr": "Décomposer un processus en étapes claires"
           },
           "body": {
-            "de": "Ordnen Sie Eingang, Verarbeitung, Entscheidung und Ergebnis. Markieren Sie die Stellen, an denen eine Person freigeben muss. So wird aus einer allgemeinen Automationsidee eine nachvollziehbare Projektbeschreibung.",
+            "de": "Ordne Eingang, Verarbeitung, Entscheidung und Ergebnis. Markiere die Stellen, an denen eine Person freigeben muss. So wird aus einer allgemeinen Automationsidee eine nachvollziehbare Projektbeschreibung.",
             "nl": "Orden invoer, verwerking, beslissing en resultaat. Markeer waar een persoon moet goedkeuren. Zo wordt een algemeen automatiseringsidee een begrijpelijke projectbeschrijving.",
             "fr": "Distinguez entrée, traitement, décision et résultat. Repérez les étapes qui exigent une validation humaine. Une idée générale d’automatisation devient ainsi une description de projet compréhensible."
           },
@@ -432,7 +432,7 @@
             "fr": "Concevoir ensemble interface et autorisations"
           },
           "body": {
-            "de": "Ein Portal zeigt unterschiedliche Informationen je nach Aufgabe und Berechtigung. Beschreiben Sie deshalb Nutzerrollen, benötigte Daten und Übergaben an andere Systeme. Eine sichtbare Anmeldung ersetzt keine geprüfte Mandanten- und Zugriffstrennung.",
+            "de": "Ein Portal zeigt unterschiedliche Informationen je nach Aufgabe und Berechtigung. Beschreibe deshalb Nutzerrollen, benötigte Daten und Übergaben an andere Systeme. Eine sichtbare Anmeldung ersetzt keine geprüfte Mandanten- und Zugriffstrennung.",
             "nl": "Een portaal toont informatie volgens taak en rechten. Beschrijf daarom gebruikersrollen, benodigde gegevens en overdrachten naar andere systemen. Een zichtbaar aanmeldscherm vervangt geen gecontroleerde scheiding van tenants en toegangsrechten.",
             "fr": "Un portail présente des informations selon la tâche et les droits. Décrivez les rôles, données et échanges avec les autres systèmes. Un écran de connexion ne remplace pas une séparation vérifiée des accès et des espaces clients."
           },
@@ -473,7 +473,7 @@
             "fr": "Préciser les échanges entre personnes et systèmes"
           },
           "body": {
-            "de": "Klären Sie, wer einen Vorgang beginnt, wer ihn bearbeitet und wer das Ergebnis sehen darf. Bereits vorhandene Systeme gehören in diese Beschreibung. Damit lässt sich der Bedarf besprechen, ohne ungeprüfte Integrationen zu versprechen.",
+            "de": "Kläre, wer einen Vorgang beginnt, wer ihn bearbeitet und wer das Ergebnis sehen darf. Bereits vorhandene Systeme gehören in diese Beschreibung. Damit lässt sich der Bedarf besprechen, ohne ungeprüfte Integrationen zu versprechen.",
             "nl": "Bepaal wie een proces begint, wie het behandelt en wie het resultaat mag zien. Neem bestaande systemen mee in die beschrijving. Zo bespreekt u de behoefte zonder ongecontroleerde integraties te beloven.",
             "fr": "Précisez qui ouvre un dossier, qui le traite et qui peut voir le résultat. Incluez les systèmes existants. Le besoin peut alors être discuté sans promettre des intégrations non vérifiées."
           },
@@ -521,7 +521,7 @@
             "fr": "Ce qu’il faut préciser avant de démarrer"
           },
           "body": {
-            "de": "Ziel, Inhalte, Zuständigkeiten und Abhängigkeiten bilden die Grundlage einer Anfrage. Halten Sie vorhandene Systeme und offene Entscheidungen fest. Daraus lässt sich ein Angebotsentwurf vorbereiten; Preis, Vertrag und Start werden dadurch nicht automatisch verbindlich.",
+            "de": "Ziel, Inhalte, Zuständigkeiten und Abhängigkeiten bilden die Grundlage einer Anfrage. Halte vorhandene Systeme und offene Entscheidungen fest. Daraus lässt sich ein Angebotsentwurf vorbereiten; Preis, Vertrag und Start werden dadurch nicht automatisch verbindlich.",
             "nl": "Doel, inhoud, verantwoordelijkheden en afhankelijkheden vormen de basis van een aanvraag. Noteer bestaande systemen en open beslissingen. Daarmee kan een offerteconcept worden voorbereid; prijs, contract en start worden niet automatisch bindend.",
             "fr": "Objectif, contenus, responsabilités et dépendances fondent la demande. Notez les systèmes existants et les décisions ouvertes. Cela permet de préparer un devis indicatif sans rendre automatiquement le prix, le contrat ou le démarrage contraignants."
           },
@@ -562,7 +562,7 @@
             "fr": "Les dépendances font partie du périmètre"
           },
           "body": {
-            "de": "Datenquellen, Zugänge und Freigaben können die Umsetzung beeinflussen. Halten Sie offene Voraussetzungen getrennt von bereits bestätigten Angaben fest. Ein realistischer Entwurf zeigt diese Unterschiede, statt fehlende Voraussetzungen als erledigt zu behandeln.",
+            "de": "Datenquellen, Zugänge und Freigaben können die Umsetzung beeinflussen. Halte offene Voraussetzungen getrennt von bereits bestätigten Angaben fest. Ein realistischer Entwurf zeigt diese Unterschiede, statt fehlende Voraussetzungen als erledigt zu behandeln.",
             "nl": "Databronnen, toegang en goedkeuringen kunnen de uitvoering beïnvloeden. Houd open voorwaarden gescheiden van bevestigde informatie. Een realistisch concept toont dat verschil in plaats van ontbrekende voorwaarden als afgerond te behandelen.",
             "fr": "Sources de données, accès et validations peuvent influer sur la réalisation. Séparez les prérequis ouverts des éléments confirmés. Un brouillon réaliste montre ces différences sans présenter les manques comme résolus."
           },
@@ -610,7 +610,7 @@
             "fr": "Service d’agence ou univers produit distinct ?"
           },
           "body": {
-            "de": "NeXify-Leistungen, one und API haben unterschiedliche Zwecke. TEILEKLAR gehört zum eigenen Fahrzeug-, Teile- und Werkstattkontext. Nutzen Sie die Produktseiten zur Orientierung; ein Produktziel ist noch kein Nachweis freigeschalteter Funktionen.",
+            "de": "NeXify-Leistungen, one und API haben unterschiedliche Zwecke. TEILEKLAR gehört zum eigenen Fahrzeug-, Teile- und Werkstattkontext. Nutze die Produktseiten zur Orientierung; ein Produktziel ist noch kein Nachweis freigeschalteter Funktionen.",
             "nl": "NeXify-diensten, one en API hebben verschillende doelen. TEILEKLAR heeft een eigen omgeving voor voertuigen, onderdelen en garages. Gebruik de productpagina’s ter oriëntatie; een productdoel bewijst nog geen geactiveerde functies.",
             "fr": "Les services NeXify, one et l’API ont des finalités distinctes. TEILEKLAR possède son propre contexte automobile, pièces et ateliers. Les pages produits orientent votre choix sans prouver l’activation de toutes les fonctions prévues."
           },
@@ -658,7 +658,7 @@
             "fr": "Le périmètre avant un prix engageant"
           },
           "body": {
-            "de": "Welche Inhalte, Abläufe und Anbindungen benötigt werden, beeinflusst den Projektumfang. Klären Sie diese Punkte vor einer verbindlichen Preisentscheidung. Diese Erläuterung ergänzt keine Tarife und ersetzt weder ein geprüftes Angebot noch Vertragsbedingungen.",
+            "de": "Welche Inhalte, Abläufe und Anbindungen benötigt werden, beeinflusst den Projektumfang. Kläre diese Punkte vor einer verbindlichen Preisentscheidung. Diese Erläuterung ergänzt keine Tarife und ersetzt weder ein geprüftes Angebot noch Vertragsbedingungen.",
             "nl": "Inhoud, processen en koppelingen bepalen mede de projectscope. Bespreek deze punten vóór een bindende prijsafspraak. Deze toelichting voegt geen tarieven toe en vervangt geen gecontroleerde offerte of voorwaarden.",
             "fr": "Contenus, processus et intégrations déterminent le périmètre du projet. Précisez-les avant un engagement tarifaire. Cette explication n’ajoute aucun tarif et ne remplace ni une offre vérifiée ni les conditions contractuelles."
           },
@@ -707,7 +707,7 @@
             "fr": "Des repères pour préparer vos décisions"
           },
           "body": {
-            "de": "Eine gute Projektanfrage beginnt mit verständlichen Begriffen und offenen Fragen. Nutzen Sie die vorhandene Orientierung, um Ziele, Inhalte und Beteiligte zu ordnen. Fachliche Entscheidungen bleiben an die tatsächlichen Quellen und den konkreten Projektumfang gebunden.",
+            "de": "Eine gute Projektanfrage beginnt mit verständlichen Begriffen und offenen Fragen. Nutze die vorhandene Orientierung, um Ziele, Inhalte und Beteiligte zu ordnen. Fachliche Entscheidungen bleiben an die tatsächlichen Quellen und den konkreten Projektumfang gebunden.",
             "nl": "Een goede projectaanvraag begint met begrijpelijke begrippen en open vragen. Gebruik de beschikbare uitleg om doelen, inhoud en betrokkenen te ordenen. Inhoudelijke beslissingen blijven verbonden aan de echte bronnen en projectscope.",
             "fr": "Une bonne demande commence par des termes clairs et des questions ouvertes. Les repères disponibles aident à organiser objectifs, contenus et participants. Les décisions restent liées aux sources réelles et au périmètre concret."
           },
@@ -750,12 +750,12 @@
           "speaker": "aifly",
           "status": "script_draft",
           "title": {
-            "de": "Was Sie für die erste Anfrage sammeln können",
+            "de": "Was du für die erste Anfrage sammeln kannst",
             "nl": "Wat u voor de eerste aanvraag kunt verzamelen",
             "fr": "Que préparer pour une première demande ?"
           },
           "body": {
-            "de": "Notieren Sie das gewünschte Ergebnis, die heutigen Arbeitsschritte und die benötigten Inhalte. Ergänzen Sie bestehende Systeme und die zuständigen Personen. Zugangsdaten und sensible Unterlagen gehören nicht in eine ungeschützte erste Beschreibung.",
+            "de": "Notiere das gewünschte Ergebnis, die heutigen Arbeitsschritte und die benötigten Inhalte. Ergänze bestehende Systeme und die zuständigen Personen. Zugangsdaten und sensible Unterlagen gehören nicht in eine ungeschützte erste Beschreibung.",
             "nl": "Noteer het gewenste resultaat, de huidige stappen en benodigde inhoud. Voeg bestaande systemen en verantwoordelijke personen toe. Wachtwoorden en gevoelige documenten horen niet in een onbeschermde eerste beschrijving.",
             "fr": "Notez le résultat souhaité, les étapes actuelles et les contenus nécessaires. Ajoutez les systèmes existants et les responsables. N’incluez pas de mots de passe ni de documents sensibles dans une première description non protégée."
           },
@@ -851,7 +851,7 @@
             "fr": "Commencez par une demande précise"
           },
           "body": {
-            "de": "Beschreiben Sie, was Sie erreichen möchten und welche Systeme bereits vorhanden sind. Sie können eine Projektanfrage, einen Gesprächswunsch oder ein Marketingbriefing vorbereiten. Ein Entwurf ist noch kein versandtes Angebot, und ein Terminwunsch noch keine bestätigte Buchung.",
+            "de": "Beschreibe, was du erreichen möchtest und welche Systeme bereits vorhanden sind. Du kannst eine Projektanfrage, einen Gesprächswunsch oder ein Marketingbriefing vorbereiten. Ein Entwurf ist noch kein versandtes Angebot, und ein Terminwunsch noch keine bestätigte Buchung.",
             "nl": "Beschrijf wat u wilt bereiken en welke systemen al bestaan. U kunt een projectaanvraag, gespreksverzoek of marketingbrief voorbereiden. Een concept is nog geen verzonden offerte en een afspraakverzoek nog geen bevestigde boeking.",
             "fr": "Décrivez votre objectif et les systèmes déjà présents. Vous pouvez préparer une demande de projet, de rendez-vous ou un brief marketing. Un brouillon n’est pas une offre envoyée ; une demande de rendez-vous n’est pas une réservation confirmée."
           },
@@ -899,7 +899,7 @@
             "fr": "Distinguer objectif produit et activation"
           },
           "body": {
-            "de": "one und one+ gehören zum dokumentierten NeXify-Produktbild. Welche Zugänge und Funktionen für Ihren Einsatz benötigt werden, muss konkret geklärt werden. Die Produktbeschreibung aktiviert weder einen Schlüssel noch Guthaben oder einen Tarif.",
+            "de": "one und one+ gehören zum dokumentierten NeXify-Produktbild. Welche Zugänge und Funktionen für deinen Einsatz benötigt werden, muss konkret geklärt werden. Die Produktbeschreibung aktiviert weder einen Schlüssel noch Guthaben oder einen Tarif.",
             "nl": "one en one+ horen bij het gedocumenteerde NeXify-productbeeld. Welke toegang en functies uw gebruik vraagt, moet concreet worden vastgesteld. De productbeschrijving activeert geen sleutel, tegoed of tarief.",
             "fr": "one et one+ font partie de la vision produit documentée de NeXify. Les accès et fonctions nécessaires à votre usage doivent être précisés. La description n’active ni clé, ni crédit, ni tarif."
           },
@@ -948,7 +948,7 @@
             "fr": "Préciser le besoin technique avant l’accès"
           },
           "body": {
-            "de": "Eine API-Anbindung braucht einen definierten Einsatzzweck, sichere Schlüsselverwaltung und passende Berechtigungen. Beschreiben Sie die beteiligten Systeme und Datenflüsse. Diese Vorschau stellt keinen produktiven Schlüssel aus und bestätigt keine Abrechnungsfreigabe.",
+            "de": "Eine API-Anbindung braucht einen definierten Einsatzzweck, sichere Schlüsselverwaltung und passende Berechtigungen. Beschreibe die beteiligten Systeme und Datenflüsse. Diese Vorschau stellt keinen produktiven Schlüssel aus und bestätigt keine Abrechnungsfreigabe.",
             "nl": "Een API-koppeling vraagt om een bepaald doel, veilig sleutelbeheer en passende rechten. Beschrijf de betrokken systemen en gegevensstromen. Deze preview geeft geen productiesleutel uit en bevestigt geen facturatievrijgave.",
             "fr": "Une intégration API exige un usage défini, une gestion sûre des clés et des droits adaptés. Décrivez les systèmes et flux concernés. Cet aperçu ne délivre aucune clé de production et ne valide aucune facturation."
           },
@@ -1044,7 +1044,7 @@
             "fr": "Comprendre l’utilisation des données"
           },
           "body": {
-            "de": "Lesen Sie die Datenschutzhinweise für den jeweiligen Dienst und Nutzungskontext. Eine Erklärung im Chat ersetzt diese Informationen nicht. Die gesonderte Einstellungsseite hilft bei der Orientierung zu optionaler Verarbeitung; daraus entsteht keine pauschale Einwilligung.",
+            "de": "Lies die Datenschutzhinweise für den jeweiligen Dienst und Nutzungskontext. Eine Erklärung im Chat ersetzt diese Informationen nicht. Die gesonderte Einstellungsseite hilft bei der Orientierung zu optionaler Verarbeitung; daraus entsteht keine pauschale Einwilligung.",
             "nl": "Lees de privacyinformatie voor de betreffende dienst en gebruikscontext. Een chatuitleg vervangt deze informatie niet. De aparte instellingenpagina helpt bij optionele verwerking; dit vormt geen algemene toestemming.",
             "fr": "Lisez les informations de confidentialité du service et du contexte concernés. Une explication dans le chat ne les remplace pas. La page dédiée aux réglages oriente sur les traitements facultatifs sans constituer un consentement général."
           },
@@ -1092,7 +1092,7 @@
             "fr": "Distinguer brouillon et base contractuelle"
           },
           "body": {
-            "de": "Eine Leistungsbeschreibung oder ein Angebotsentwurf ist nicht automatisch eine verbindliche Vereinbarung. Prüfen Sie die vorgesehenen Vertragsgrundlagen und ihren Freigabestand. Diese Orientierung ändert keine Bedingungen und enthält keine zusätzliche Rechtsauskunft.",
+            "de": "Eine Leistungsbeschreibung oder ein Angebotsentwurf ist nicht automatisch eine verbindliche Vereinbarung. Prüfe die vorgesehenen Vertragsgrundlagen und ihren Freigabestand. Diese Orientierung ändert keine Bedingungen und enthält keine zusätzliche Rechtsauskunft.",
             "nl": "Een dienstbeschrijving of offerteconcept is niet automatisch een bindende overeenkomst. Controleer de bedoelde contractbasis en vrijgavestatus. Deze uitleg wijzigt geen voorwaarden en geeft geen aanvullend juridisch advies.",
             "fr": "Une description de service ou un devis indicatif ne constitue pas automatiquement un accord. Consultez les bases contractuelles prévues et leur état de validation. Cette orientation ne modifie aucune condition et n’ajoute aucun avis juridique."
           },
@@ -1140,7 +1140,7 @@
             "fr": "Distinguer réponse IA et opération confirmée"
           },
           "body": {
-            "de": "KI kann bei Orientierung und Entwürfen unterstützen. Ein generierter Text beweist weder Richtigkeit noch eine ausgeführte Handlung. Achten Sie auf den ausgewiesenen Status: Entwurf, Anfrage, Versand und Bestätigung sind unterschiedliche Schritte.",
+            "de": "KI kann bei Orientierung und Entwürfen unterstützen. Ein generierter Text beweist weder Richtigkeit noch eine ausgeführte Handlung. Achte auf den ausgewiesenen Status: Entwurf, Anfrage, Versand und Bestätigung sind unterschiedliche Schritte.",
             "nl": "AI kan helpen bij oriëntatie en concepten. Een gegenereerde tekst bewijst geen juistheid of uitgevoerde handeling. Let op de aangegeven status: concept, aanvraag, verzending en bevestiging zijn verschillende stappen.",
             "fr": "L’IA peut aider à s’orienter et à rédiger des brouillons. Un texte généré ne prouve ni son exactitude ni l’exécution d’une action. Distinguez les états : brouillon, demande, envoi et confirmation."
           },
@@ -1188,7 +1188,7 @@
             "fr": "Signaler une difficulté d’accès"
           },
           "body": {
-            "de": "Wenn eine Navigation, ein Inhalt oder ein Bedienelement für Sie nicht nutzbar ist, beschreiben Sie die betroffene Seite und die konkrete Hürde. Diese Orientierung ist keine Behauptung einer abgeschlossenen Barrierefreiheitszertifizierung. Die vorhandenen Hinweise bleiben maßgeblich.",
+            "de": "Wenn eine Navigation, ein Inhalt oder ein Bedienelement für dich nicht nutzbar ist, beschreibe die betroffene Seite und die konkrete Hürde. Diese Orientierung ist keine Behauptung einer abgeschlossenen Barrierefreiheitszertifizierung. Die vorhandenen Hinweise bleiben maßgeblich.",
             "nl": "Kunt u navigatie, inhoud of een bediening niet gebruiken, beschrijf dan de pagina en het concrete probleem. Deze uitleg beweert niet dat een toegankelijkheidscertificering is afgerond. De bestaande informatie blijft bepalend.",
             "fr": "Si une navigation, un contenu ou une commande vous pose problème, indiquez la page et la difficulté précise. Cette explication n’affirme aucune certification d’accessibilité achevée. Les informations existantes restent la référence."
           },
@@ -1236,7 +1236,7 @@
             "fr": "Comprendre les traitements facultatifs"
           },
           "body": {
-            "de": "Cookies, externe Medien und Speicherung sind im jeweiligen Nutzungskontext zu betrachten. Lesen Sie die Erläuterungen und nutzen Sie die angebotenen Einstellungen. Ein Seitenwechsel oder dieses Erklärmodul ist keine Zustimmung; verschiedene Domains teilen nicht automatisch Ihre Auswahl.",
+            "de": "Cookies, externe Medien und Speicherung sind im jeweiligen Nutzungskontext zu betrachten. Lies die Erläuterungen und nutze die angebotenen Einstellungen. Ein Seitenwechsel oder dieses Erklärmodul ist keine Zustimmung; verschiedene Domains teilen nicht automatisch deine Auswahl.",
             "nl": "Cookies, externe media en opslag horen bij de betreffende gebruikscontext. Lees de uitleg en gebruik de aangeboden instellingen. Een paginawissel of deze toelichting geeft geen toestemming; verschillende domeinen delen uw keuze niet automatisch.",
             "fr": "Cookies, médias externes et stockage dépendent du contexte d’usage. Lisez les explications et utilisez les réglages proposés. Changer de page ne vaut pas consentement ; votre choix n’est pas automatiquement partagé entre domaines."
           },
@@ -1284,7 +1284,7 @@
             "fr": "La connexion n’est qu’une première étape"
           },
           "body": {
-            "de": "Ein angemeldetes Konto erhält nicht automatisch Zugriff auf alle Bereiche. Dafür müssen die passende Site-, Mandanten- und Rollenberechtigung vorliegen. Nutzen Sie die angezeigte Anmeldung nur, wenn sie verfügbar ist; bei Zugangsfragen bleibt der Kontaktweg erreichbar.",
+            "de": "Ein angemeldetes Konto erhält nicht automatisch Zugriff auf alle Bereiche. Dafür müssen die passende Site-, Mandanten- und Rollenberechtigung vorliegen. Nutze die angezeigte Anmeldung nur, wenn sie verfügbar ist; bei Zugangsfragen bleibt der Kontaktweg erreichbar.",
             "nl": "Een aangemeld account krijgt niet automatisch toegang tot alle onderdelen. Daarvoor zijn de juiste site-, tenant- en rolrechten nodig. Gebruik de getoonde aanmelding als deze beschikbaar is; voor toegangsproblemen blijft contact mogelijk.",
             "fr": "Un compte connecté n’accède pas automatiquement à tous les espaces. Des droits adaptés au site, à l’organisation et au rôle restent nécessaires. Utilisez la connexion affichée si elle est disponible ; le contact reste accessible en cas de difficulté."
           },
@@ -1381,7 +1381,7 @@
             "fr": "Relier véhicule, pièce et atelier"
           },
           "body": {
-            "de": "TEILEKLAR führt durch Fahrzeugangaben, Teilesuche und die vorgesehenen Werkstattwege. Beginnen Sie mit dem Fahrzeug und der benötigten Aufgabe. Solange Katalog und Fachabläufe nicht freigegeben angeschlossen sind, bleiben die Ansichten Vorbereitung statt einer Kauf- oder Passungszusage.",
+            "de": "TEILEKLAR führt durch Fahrzeugangaben, Teilesuche und die vorgesehenen Werkstattwege. Beginne mit dem Fahrzeug und der benötigten Aufgabe. Solange Katalog und Fachabläufe nicht freigegeben angeschlossen sind, bleiben die Ansichten Vorbereitung statt einer Kauf- oder Passungszusage.",
             "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en de voorziene garageprocessen. Begin met het voertuig en de gewenste taak. Zolang catalogus en processen niet zijn aangesloten en vrijgegeven, blijven de pagina’s voorbereiding zonder koop- of pasvormtoezegging.",
             "fr": "TEILEKLAR relie les informations du véhicule, la recherche de pièces et les parcours atelier prévus. Commencez par le véhicule et le besoin. Sans catalogue et processus validés, les écrans restent préparatoires, sans promesse d’achat ni de compatibilité."
           },
@@ -1472,7 +1472,7 @@
             "fr": "Chercher une pièce avec les bonnes informations"
           },
           "body": {
-            "de": "Fahrzeugdaten und die gesuchte Aufgabe helfen, eine Teileanfrage einzugrenzen. Die aktuelle Suchansicht bereitet diesen Weg vor; sie bestätigt keine echten Treffer oder verfügbaren Bestände. Klären Sie zuerst die Passung, bevor aus einer Auswahl eine Kaufentscheidung wird.",
+            "de": "Fahrzeugdaten und die gesuchte Aufgabe helfen, eine Teileanfrage einzugrenzen. Die aktuelle Suchansicht bereitet diesen Weg vor; sie bestätigt keine echten Treffer oder verfügbaren Bestände. Kläre zuerst die Passung, bevor aus einer Auswahl eine Kaufentscheidung wird.",
             "nl": "Voertuiggegevens en de gewenste taak helpen een onderdelenvraag af te bakenen. De huidige zoekpagina bereidt dit voor en bevestigt geen echte resultaten of voorraad. Controleer eerst de pasvorm vóór een aankoopbeslissing.",
             "fr": "Les données du véhicule et le besoin aident à préciser la recherche. L’écran actuel prépare ce parcours sans confirmer de résultats réels ni de stock. Clarifiez d’abord la compatibilité avant de décider un achat."
           },
@@ -1619,7 +1619,7 @@
             "fr": "Vérifier la fiche produit avant de choisir"
           },
           "body": {
-            "de": "Vor einer Teileauswahl müssen Produktangaben und Fahrzeugpassung belegt sein. Diese vorbereitete Ansicht behauptet weder einen echten Artikel noch Preis, Lieferbarkeit oder Freigabe zum Kauf. Gehen Sie bei offenen Angaben zurück zur Fahrzeugklärung.",
+            "de": "Vor einer Teileauswahl müssen Produktangaben und Fahrzeugpassung belegt sein. Diese vorbereitete Ansicht behauptet weder einen echten Artikel noch Preis, Lieferbarkeit oder Freigabe zum Kauf. Gehe bei offenen Angaben zurück zur Fahrzeugklärung.",
             "nl": "Vóór een onderdelenkeuze moeten productgegevens en voertuigpasvorm onderbouwd zijn. Deze voorbereide pagina beweert geen echt artikel, prijs, leverbaarheid of koopvrijgave. Ga bij ontbrekende gegevens terug naar de voertuigcontrole.",
             "fr": "Avant de choisir une pièce, ses caractéristiques et sa compatibilité doivent être établies. Cet écran préparatoire ne présente aucun article, prix ou délai comme confirmé et n’autorise pas un achat. Revenez au véhicule si des données manquent."
           },
@@ -1752,7 +1752,7 @@
             "fr": "Une sélection reste à vérifier"
           },
           "body": {
-            "de": "Vor einem späteren Kauf müssen ausgewählte Teile und Fahrzeugzuordnung noch einmal zusammen betrachtet werden. Im aktuellen Vorbereitungsstand gibt es keine verbindlichen Warenkorbpositionen. Nutzen Sie die Suche, um den vorgesehenen Auswahlweg zu verstehen.",
+            "de": "Vor einem späteren Kauf müssen ausgewählte Teile und Fahrzeugzuordnung noch einmal zusammen betrachtet werden. Im aktuellen Vorbereitungsstand gibt es keine verbindlichen Warenkorbpositionen. Nutze die Suche, um den vorgesehenen Auswahlweg zu verstehen.",
             "nl": "Vóór een latere aankoop moeten onderdelen en voertuigkoppeling opnieuw samen worden bekeken. In de huidige voorbereiding bestaan geen bindende winkelwagenregels. Gebruik de zoekpagina om de voorziene selectie te begrijpen.",
             "fr": "Avant un futur achat, pièces choisies et véhicule doivent être examinés ensemble. L’état préparatoire actuel ne comporte aucune ligne de panier engageante. La recherche explique le parcours de sélection prévu."
           },
@@ -2039,7 +2039,7 @@
             "fr": "Préparer une demande de partenariat atelier"
           },
           "body": {
-            "de": "Beschreiben Sie den Betrieb und die Art der gewünschten Zusammenarbeit. Eine Partneranfrage ist noch keine Aufnahme als Werkstattpartner und schaltet keine Abrechnung frei. Welche Profilangaben veröffentlicht werden dürfen, muss vor einer Veröffentlichung geklärt sein.",
+            "de": "Beschreibe den Betrieb und die Art der gewünschten Zusammenarbeit. Eine Partneranfrage ist noch keine Aufnahme als Werkstattpartner und schaltet keine Abrechnung frei. Welche Profilangaben veröffentlicht werden dürfen, muss vor einer Veröffentlichung geklärt sein.",
             "nl": "Beschrijf het bedrijf en de gewenste samenwerking. Een partneraanvraag betekent nog geen toelating als garagepartner en activeert geen afrekening. Vóór publicatie moet duidelijk zijn welke profielgegevens mogen worden getoond.",
             "fr": "Décrivez l’établissement et la collaboration souhaitée. Une demande ne vaut pas admission comme partenaire et n’active aucune facturation. Les données de profil publiables doivent être déterminées avant toute publication."
           },
@@ -2172,7 +2172,7 @@
             "fr": "Du besoin à la demande de rendez-vous"
           },
           "body": {
-            "de": "Beschreiben Sie den Anlass und welche Fahrzeugangaben verfügbar sind. Die Terminseite ordnet den nächsten Anfrageschritt ein. Ein Profil oder erklärter Ablauf bestätigt keine tatsächliche Kapazität eines Betriebs.",
+            "de": "Beschreibe den Anlass und welche Fahrzeugangaben verfügbar sind. Die Terminseite ordnet den nächsten Anfrageschritt ein. Ein Profil oder erklärter Ablauf bestätigt keine tatsächliche Kapazität eines Betriebs.",
             "nl": "Beschrijf de aanleiding en welke voertuiggegevens beschikbaar zijn. De afspraakpagina verduidelijkt de volgende aanvraagstap. Een profiel of procesbeschrijving bevestigt geen werkelijke capaciteit van een bedrijf.",
             "fr": "Décrivez le besoin et les données véhicule disponibles. La page rendez-vous présente l’étape de demande suivante. Un profil ou une explication ne confirme pas la capacité réelle d’un établissement."
           },
@@ -2221,7 +2221,7 @@
             "fr": "Trouver les informations juridiques de la boutique"
           },
           "body": {
-            "de": "Anbieter-, Datenschutz- und Kaufinformationen gehören zum konkreten Shopkontext. Diese Orientierung ersetzt oder übersetzt keine rechtlichen Bedingungen. Prüfen Sie die vorhandenen Angaben und ihren Freigabestand; ein öffentlicher Seitenaufruf bestätigt keine Kaufbereitschaft des Systems.",
+            "de": "Anbieter-, Datenschutz- und Kaufinformationen gehören zum konkreten Shopkontext. Diese Orientierung ersetzt oder übersetzt keine rechtlichen Bedingungen. Prüfe die vorhandenen Angaben und ihren Freigabestand; ein öffentlicher Seitenaufruf bestätigt keine Kaufbereitschaft des Systems.",
             "nl": "Aanbieders-, privacy- en aankoopinformatie horen bij de concrete winkelcontext. Deze uitleg vervangt of vertaalt geen juridische voorwaarden. Controleer de bestaande informatie en vrijgavestatus; een openbare pagina bewijst niet dat het systeem klaar is voor aankopen.",
             "fr": "Les informations du prestataire, de confidentialité et d’achat relèvent du contexte de la boutique. Cette orientation ne remplace ni ne traduit les conditions juridiques. Vérifiez les données et leur validation ; une page publique ne prouve pas que les achats sont ouverts."
           },

@@ -1,386 +1,150 @@
 {
-  "scope": "local Next build;no provider or tenant acceptance",
-  "routes": [
-    {
-      "path": "/",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/leistungen",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/leistungen/websites",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/leistungen/agenten-automatisierung",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/leistungen/apps-portale",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/leistungsumfang",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/loesungen",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/preise-ablauf",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/wissen",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/unternehmen",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/kontakt",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/produkte/one",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/produkte/api",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/impressum",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/datenschutz",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/vertragsgrundlagen",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/ki-hinweise",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/barrierefreiheit",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/cookies",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/anmelden",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/registrieren",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/suche",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/produkt",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/kasse",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/termine",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/partner-werden",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/werkstatt",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/rechtliches",
-      "locale": "de",
-      "passed": true
-    },
-    {
-      "path": "/",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/leistungen",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/leistungen/websites",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/leistungen/agenten-automatisierung",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/leistungen/apps-portale",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/leistungsumfang",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/loesungen",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/preise-ablauf",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/wissen",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/unternehmen",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/kontakt",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/produkte/one",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/produkte/api",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/impressum",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/datenschutz",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/vertragsgrundlagen",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/ki-hinweise",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/barrierefreiheit",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/cookies",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/anmelden",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/registrieren",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/suche",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/produkt",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/kasse",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/termine",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/partner-werden",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/werkstatt",
-      "locale": "nl",
-      "passed": true
-    },
-    {
-      "path": "/teileklar/rechtliches",
-      "locale": "nl",
-      "passed": true
+  "renderer": "Next-local",
+  "scope": "local Vite and shared companion;synthetic request,not provider or assistive-technology certification",
+  "checks": [
+    {
+      "width": 320,
+      "reducedMotion": "no-preference",
+      "working_state": true,
+      "error_returns_idle": true,
+      "draft_preserved": true,
+      "decorative_image": true,
+      "keyboard": true,
+      "geometry": {
+        "overflow": false,
+        "overlapsText": false,
+        "overlapsClose": false,
+        "headingVisible": true
+      },
+      "working_style": {
+        "transform": "matrix(0.99863, -0.052336, 0.052336, 0.99863, 0, -1)",
+        "transition": "0.18s",
+        "animation": "none"
+      },
+      "accessibility_snapshot_checked": true
+    },
+    {
+      "width": 320,
+      "reducedMotion": "reduce",
+      "working_state": true,
+      "error_returns_idle": true,
+      "draft_preserved": true,
+      "decorative_image": true,
+      "keyboard": true,
+      "geometry": {
+        "overflow": false,
+        "overlapsText": false,
+        "overlapsClose": false,
+        "headingVisible": true
+      },
+      "working_style": {
+        "transform": "none",
+        "transition": "0s",
+        "animation": "none"
+      },
+      "accessibility_snapshot_checked": true
+    },
+    {
+      "width": 390,
+      "reducedMotion": "no-preference",
+      "working_state": true,
+      "error_returns_idle": true,
+      "draft_preserved": true,
+      "decorative_image": true,
+      "keyboard": true,
+      "geometry": {
+        "overflow": false,
+        "overlapsText": false,
+        "overlapsClose": false,
+        "headingVisible": true
+      },
+      "working_style": {
+        "transform": "matrix(0.99863, -0.052336, 0.052336, 0.99863, 0, -1)",
+        "transition": "0.18s",
+        "animation": "none"
+      },
+      "accessibility_snapshot_checked": true
+    },
+    {
+      "width": 390,
+      "reducedMotion": "reduce",
+      "working_state": true,
+      "error_returns_idle": true,
+      "draft_preserved": true,
+      "decorative_image": true,
+      "keyboard": true,
+      "geometry": {
+        "overflow": false,
+        "overlapsText": false,
+        "overlapsClose": false,
+        "headingVisible": true
+      },
+      "working_style": {
+        "transform": "none",
+        "transition": "0s",
+        "animation": "none"
+      },
+      "accessibility_snapshot_checked": true
+    },
+    {
+      "width": 1280,
+      "reducedMotion": "no-preference",
+      "working_state": true,
+      "error_returns_idle": true,
+      "draft_preserved": true,
+      "decorative_image": true,
+      "keyboard": true,
+      "geometry": {
+        "overflow": false,
+        "overlapsText": false,
+        "overlapsClose": false,
+        "headingVisible": true
+      },
+      "working_style": {
+        "transform": "matrix(0.99863, -0.052336, 0.052336, 0.99863, 0, -1)",
+        "transition": "0.18s",
+        "animation": "none"
+      },
+      "accessibility_snapshot_checked": true
+    },
+    {
+      "width": 1280,
+      "reducedMotion": "reduce",
+      "working_state": true,
+      "error_returns_idle": true,
+      "draft_preserved": true,
+      "decorative_image": true,
+      "keyboard": true,
+      "geometry": {
+        "overflow": false,
+        "overlapsText": false,
+        "overlapsClose": false,
+        "headingVisible": true
+      },
+      "working_style": {
+        "transform": "none",
+        "transition": "0s",
+        "animation": "none"
+      },
+      "accessibility_snapshot_checked": true
     }
   ],
-  "private": [
-    "/portal/kunde",
-    "/portal/api",
-    "/portal/affiliate",
-    "/teileklar/konto",
-    "/teileklar/partnerportal",
-    "/teileklar/nachbarschaft",
-    "/intern/workspace",
-    "/intern/posteingang",
-    "/intern/leitstand",
-    "/intern/verwaltung"
-  ],
-  "external": 0,
-  "mutations": 0,
-  "pageErrors": [],
-  "pwa": {
-    "/manifest.webmanifest": 404,
-    "/public-install-worker.js": 404
+  "runtime_errors": [],
+  "external_requests": [],
+  "source_sha256": {
+    "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
+    "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
+    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
+    "apps/web/components/PublicOrientationChat.tsx": "c9809bf0aac066043a6e9ee9058240fe300521a707668e26acb8795030c3402b",
+    "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
+    "apps/site/tests/browser-oracle-companion.mjs": "64f18ed0d2fcab86a2e682b4f4f27e600257fbb225aba56383e8dcd4af443ccd",
+    "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
+    "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
+    "apps/web/components/PublicOrientationChat.css": "ba9dd45f56d0d3016562947c49d82ab81d0fc224f5f211a6259e5c7390e6c190",
+    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66"
   },
-  "navigation": true,
+  "screenshots": "internal_QA_only",
+  "video_animation_delivered": false,
   "passed": true
 }

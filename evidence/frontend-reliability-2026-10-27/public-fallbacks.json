@@ -129,11 +129,14 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/Workspace.tsx": "00a65c43e0d120b7516a613cd4667c81b29e044d323594bd0f15e9793f129824",
+    "apps/web/components/ProjectBrief.tsx": "c35cf37d8f9e8264aef04ecd157675345ff8808eaf39d8d8154e8843a51b50fc",
+    "apps/web/lib/project-brief.mjs": "e4eb926bf7d4ee2eec34407969a7dbc7d8788b951c214b5fea90aa797e3e80b0",
+    "apps/web/lib/project-brief-i18n.ts": "82f4f391bcf1b86adc448f8704a2b5026a61f77a14841a47f31ff4c99c98137f",
+    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
-    "apps/site/tests/browser-public-fallbacks.mjs": "97286b41aefecb0d792f06cf5b1d173b5903422e051afd6e66304e582085b687"
+    "apps/site/tests/browser-public-fallbacks.mjs": "2c377ccdc8f5db9f0e6b2653151c81989667645e3f07039af3a9a1361910e1f5"
   },
   "external": [],
   "uncaught": [],

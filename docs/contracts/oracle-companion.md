@@ -1,3 +1,5 @@
+> Current scope addition: the final original also appears in explicitly declared still illustrations. The existing request-state chat behavior below is unchanged; see section-media-placement.md for the canonical identity/logo audit and placement. No video/sprite delivery is inferred.
+
 # AI Fly Oracle · Chat-Companion
 
 Begrenztes UI-Delta auf Basis5828c14,27.10.2026. Keine neue Backendfähigkeit.

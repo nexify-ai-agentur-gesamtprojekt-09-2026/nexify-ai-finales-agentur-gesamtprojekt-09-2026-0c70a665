@@ -1,3 +1,34 @@
+## Regular Hero / section placement correction · 28.10.2026
+
+Own local branch integration/local-section-media-20261028 preserves040164f
+(chat/legal/focus repair). Parent independently mapped the user's current
+Preview tofe22d523,dpl_7qBiFNXHSTbSuW3o5SB179XqqPSH. That Preview does not
+contain the local chat/legal increment;no own remote mutation is made here.
+
+The regular Hero headline/actions layout is restored with separate transparent
+native artwork. Only home-explain-1/project and home-explain-2/orientation get
+the two new compositions,using byte-identical Pascal/NeX/final greenOracle.
+No layout screenshot,face generation,video or spriteframes. Other47original
+role images are retained and inventoried;not newly declared art-approved.
+Both existing chat variants already use the final original;agency signet stays
+separate. Actual request movement/ReducedMotion remain unchanged.
+
+31DEexplainer drafts use du/dein;their registrytitles remain bound and production
+script reconciliation stays open. Legal originals are untouched. Repeated intro
+bodies are collapsed without deleting source or changing existing section IDs.
+Current company/related content stays the adopted Eenmanszaak,not B.V.
+PDF/booking/marketing copy is capability-qualified. Missing quote capability
+opens the existing local project guide;standalone keeps its unavailable/contact
+fallback rather than choosing its deliberately disabled orientation mode.
+
+Vite/Next actual targeted builds pass33views and24text-zoom cases each,including
+375/390mobile,navigation,chat entry and source-PNG hashes. All36publicroutes/
+49modules pass216DE/NL/FR scene/content views;Vite legal/footer216+12 passes.
+Remaining source-bound checks and exact final review/REA are recorded in the
+local final handoff. No push,CI,upload,domain,secret or paidprovider call.
+The former Actions budget window ended19:00UTC;fresh authorized budget and a
+normal own-branch push/build readback are needed for a new Preview.
+
 ## Current public legal sources · 28.10.2026
 
 Local follow-up to preserved chat d390f902 and Sentry153aa550. The owner's

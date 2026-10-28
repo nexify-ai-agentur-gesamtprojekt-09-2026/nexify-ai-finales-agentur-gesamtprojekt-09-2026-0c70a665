@@ -2,11 +2,11 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T19:53:17.265Z",
+  "observed_at": "2026-10-28T20:43:31.495Z",
   "source_sha256": {
-    "apps/site/.generated/public-site.json": "b61e865c9ebd6bd9de0126030fef8ae88c1c98e87b453ffe2929f3ecc9f32408",
+    "apps/site/.generated/public-site.json": "645b07f212dd26117d692fa0981e67466a505bdff35dd935c49d7da22f476b6a",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
-    "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
+    "apps/site/src/Auth.tsx": "4b0a7ebf3ab8b5ec6fb8982ac008c1444552ff50d921cd6d8238e61ece591ea6",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
     "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
@@ -20,11 +20,13 @@
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
     "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
-    "apps/web/components/ExplainerSections.tsx": "0b25af5b66cffd1821613d8984f53f85fc0e4b8bd1ea6e63af8fbcc2ec941fcc",
-    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
-    "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
+    "apps/web/components/ExplainerSections.tsx": "592fbd43a650590ce258aacef476e0929e57bb1ca4003ffd6eef4ab8e463db5c",
+    "apps/web/components/HomeContent.tsx": "7304b1a7afb804c20d996ae2f423ff9c5dff846776b9949b6de6483aa98cb59f",
+    "apps/web/components/HomeRebuild.css": "979d28f481827e458437ea6ffab89963eaf42b64ce2c72b58b824e3f12d3fa3c",
     "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
     "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
+    "apps/web/components/IdentityIllustration.css": "99d2e27f83f077efd6f071034fda0f16b3515f8b7a98b10d3eb37b7de35ac366",
+    "apps/web/components/IdentityIllustration.tsx": "e25a0062d4ad736aa5ab4c57788d57e9ea4a63c1a48ad1cc541fb93406491c5e",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
     "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
     "apps/web/components/MailWorkspacePanel.tsx": "544b09b05ebfaf610c44fd3b8813b19b9d84fa8b47f495b1ca150ef03cf678cc",
@@ -37,7 +39,7 @@
     "apps/web/components/PresenterVideo.css": "2f0c719aa78d6d8ffc0f7d57bf57a3553630f34d8729a47b4fcca2638c91e992",
     "apps/web/components/PresenterVideo.tsx": "8aad2b972de21ee0e0d880a9723f0bc539184df6b1ea21e1975a2ccf19509e16",
     "apps/web/components/ProjectBrief.tsx": "c35cf37d8f9e8264aef04ecd157675345ff8808eaf39d8d8154e8843a51b50fc",
-    "apps/web/components/PublicContent.tsx": "6d3797e4c974782a240391d774c8919115d6240ea2d00ccccf76a22329480840",
+    "apps/web/components/PublicContent.tsx": "6bc1b3b2fe6d97f053e91ca876aad2b7af0657186d982225ab4caa202103190f",
     "apps/web/components/PublicContentLayout.css": "7345e3952d1c5ab7a7e5f57db203b3152b0c8cb45b3e6acdb838b29c5e1582c0",
     "apps/web/components/PublicExperience.tsx": "5d2d921be94b2a9d7a1e7f85b66535f02c48e02746fc7b5f718a222f2abf9867",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
@@ -49,7 +51,7 @@
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
     "apps/web/components/SiteFooter.tsx": "d4ed427f98f646e9daa7555770eb46728bebee14cbf77d5416187a3d832a5f22",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
-    "apps/web/components/Workspace.tsx": "00a65c43e0d120b7516a613cd4667c81b29e044d323594bd0f15e9793f129824",
+    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
     "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
     "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
     "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
@@ -64,7 +66,7 @@
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/web/public/media/presenters/nex-toucan-121a804c.png": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
     "apps/web/public/media/presenters/pascal-original-6dd03834.png": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
-    "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
+    "config/companion-avatar.json": "fa692579d0bc87d63074284e7fab7eb84052da9eecb7898706ce382b10b6f5eb",
     "config/design-tokens.json": "c086069f2ff70c1f998fe2686ec10c6cd0376098205737f582f09a5b216e36ea",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
     "config/site-map.json": "17a852cbb9a69f66276bd6f6cf70fefd388a0c0b4e9fac8b36bc082b468fa7d1",
@@ -94,7 +96,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 376,
+        "count": 383,
         "all_doubled": true
       },
       "overflow": false,
@@ -117,7 +119,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 348,
+        "count": 341,
         "all_doubled": true
       },
       "overflow": false,
@@ -140,7 +142,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 344,
         "all_doubled": true
       },
       "overflow": false,
@@ -163,7 +165,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 344,
         "all_doubled": true
       },
       "overflow": false,
@@ -186,7 +188,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 344,
         "all_doubled": true
       },
       "overflow": false,
@@ -209,7 +211,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 344,
         "all_doubled": true
       },
       "overflow": false,
@@ -232,7 +234,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 337,
+        "count": 330,
         "all_doubled": true
       },
       "overflow": false,
@@ -255,7 +257,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 335,
+        "count": 328,
         "all_doubled": true
       },
       "overflow": false,
@@ -278,7 +280,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 295,
+        "count": 290,
         "all_doubled": true
       },
       "overflow": false,
@@ -301,7 +303,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 294,
+        "count": 289,
         "all_doubled": true
       },
       "overflow": false,
@@ -324,7 +326,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 295,
+        "count": 290,
         "all_doubled": true
       },
       "overflow": false,
@@ -347,7 +349,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 313,
+        "count": 301,
         "all_doubled": true
       },
       "overflow": false,
@@ -370,7 +372,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 369,
+        "count": 362,
         "all_doubled": true
       },
       "overflow": false,
@@ -393,7 +395,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 326,
+        "count": 314,
         "all_doubled": true
       },
       "overflow": false,
@@ -416,7 +418,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 326,
+        "count": 314,
         "all_doubled": true
       },
       "overflow": false,
@@ -577,7 +579,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 303,
+        "count": 291,
         "all_doubled": true
       },
       "overflow": false,
@@ -600,7 +602,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 317,
+        "count": 310,
         "all_doubled": true
       },
       "overflow": false,
@@ -623,7 +625,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 287,
         "all_doubled": true
       },
       "overflow": false,
@@ -643,6 +645,98 @@
     },
     {
       "path": "/teileklar/suche",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 286,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 280,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 280,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 295,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -653,98 +747,6 @@
       "content_overflows": []
     },
     {
-      "path": "/teileklar/kategorien",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 285,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 285,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 300,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 298,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
       "path": "/teileklar/kasse",
       "width": 390,
       "text_spacing": true,
@@ -761,7 +763,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 298,
+        "count": 293,
         "all_doubled": true
       },
       "overflow": false,
@@ -784,7 +786,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 282,
+        "count": 277,
         "all_doubled": true
       },
       "overflow": false,
@@ -807,7 +809,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 266,
+        "count": 261,
         "all_doubled": true
       },
       "overflow": false,
@@ -830,7 +832,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 282,
+        "count": 277,
         "all_doubled": true
       },
       "overflow": false,
@@ -853,7 +855,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 279,
+        "count": 274,
         "all_doubled": true
       },
       "overflow": false,
@@ -876,7 +878,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 279,
+        "count": 274,
         "all_doubled": true
       },
       "overflow": false,
@@ -899,7 +901,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 267,
+        "count": 262,
         "all_doubled": true
       },
       "overflow": false,

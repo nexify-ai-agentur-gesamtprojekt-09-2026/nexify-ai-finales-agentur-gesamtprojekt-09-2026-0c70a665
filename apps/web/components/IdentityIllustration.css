@@ -1,0 +1,25 @@
+/* Original figures, shared stage language; distinct composition for each purpose. */
+.identity-illustration{width:100%;min-width:0;max-width:100%;isolation:isolate}
+.illustration-surface{position:relative;isolation:isolate;aspect-ratio:1.1;overflow:hidden;border:1px solid var(--color-identity-scene-rim);border-radius:var(--radius-leit);background:linear-gradient(180deg,var(--color-identity-scene-wall-top),var(--color-identity-scene-wall-base) 60%,var(--color-identity-scene-floor));}
+.illustration-horizon{position:absolute;top:67%;left:0;right:0;height:1px;background:color-mix(in srgb,var(--color-identity-scene-muted) 20%,transparent)}
+.illustration-ground{position:absolute;inset:60% 0 0;background:radial-gradient(ellipse at 50% 80%,var(--color-identity-scene-card),transparent 70%)}
+.illustration-persona{position:absolute;display:block;height:auto!important;max-height:none!important;max-width:none!important;object-fit:contain;filter:none;opacity:1;mix-blend-mode:normal;user-select:none}
+.illustration-surface>.persona-pascal{width:50%;left:24%;bottom:8%;z-index:3}
+.illustration-surface>.persona-nex{width:31%;left:6%;bottom:10%;z-index:4}
+.illustration-surface>.persona-aifly{width:23%;left:72%;bottom:26%;z-index:4}
+.illustration-shadow{position:absolute;z-index:1;height:3%;border-radius:50%;background:var(--color-identity-scene-shadow);filter:blur(7px);opacity:.22}
+.shadow-pascal{left:31%;bottom:8%;width:37%}.shadow-nex{left:9%;bottom:9%;width:24%}.shadow-aifly{left:75%;bottom:18%;width:18%;opacity:.14}
+.illustration-path{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.illustration-path path{fill:none;stroke:var(--color-identity-scene-accent);stroke-width:2;opacity:.7}
+.illustration-paper{position:absolute;z-index:2;width:14%;height:6%;bottom:6%;left:12%;border:1px solid var(--color-identity-scene-muted);border-radius:var(--radius-klein);background:var(--color-identity-scene-card);transform:rotate(-12deg)}
+.paper-two{left:18%;bottom:8%;transform:rotate(7deg)}.paper-three{left:79%;bottom:9%;width:12%;transform:rotate(-4deg)}
+.illustration-orientation .persona-pascal{width:44%;left:8%;bottom:8%}.illustration-orientation .persona-nex{width:29%;left:34%;bottom:9%}.illustration-orientation .persona-aifly{width:31%;left:63%;bottom:24%}
+.illustration-orientation .shadow-pascal{left:14%;width:32%}.illustration-orientation .shadow-nex{left:38%;width:22%}.illustration-orientation .shadow-aifly{left:67%;width:23%;bottom:17%}
+.illustration-hero .illustration-surface{aspect-ratio:1.5;border:0;border-radius:0;background:transparent;overflow:visible}
+.illustration-hero .illustration-horizon,.illustration-hero .illustration-paper{display:none}
+.illustration-hero .illustration-ground{background:radial-gradient(ellipse at 50% 80%,color-mix(in srgb,var(--color-marke-lime) 12%,transparent),transparent 70%)}
+.illustration-hero .persona-pascal{width:40%;left:30%;bottom:8%}.illustration-hero .persona-nex{width:30%;left:5%;bottom:9%}.illustration-hero .persona-aifly{width:25%;left:67%;bottom:30%}
+.illustration-hero .shadow-pascal{left:26%;width:44%;bottom:7%;opacity:.3}.illustration-hero .shadow-nex{left:4%;width:24%;bottom:8%}.illustration-hero .shadow-aifly{left:71%;width:21%;bottom:19%}
+@media(prefers-reduced-motion:reduce){.identity-illustration *{animation:none;transition:none}}
+
+.illustration-surface.home-interim-scenes{display:block}

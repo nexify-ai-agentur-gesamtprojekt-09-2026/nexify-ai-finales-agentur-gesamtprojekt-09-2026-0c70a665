@@ -1475,7 +1475,7 @@
       "page_id": "home",
       "module_id": "home-explain-1",
       "context_id": "module-home-explain-1",
-      "context_title": "Ihr Vorhaben zuerst",
+      "context_title": "Dein Vorhaben zuerst",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1489,7 +1489,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1497,7 +1498,7 @@
       "page_id": "home",
       "module_id": "home-explain-2",
       "context_id": "module-home-explain-2",
-      "context_title": "So finden Sie Ihren Einstieg",
+      "context_title": "So findest du deinen Einstieg",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1511,7 +1512,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1533,7 +1535,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1541,7 +1544,7 @@
       "page_id": "services",
       "module_id": "services-explain-2",
       "context_id": "module-services-explain-2",
-      "context_title": "Was für Ihre Auswahl wichtig ist",
+      "context_title": "Was für deine Auswahl wichtig ist",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1555,7 +1558,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1577,7 +1581,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1621,7 +1626,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1643,7 +1649,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1665,7 +1672,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1687,7 +1695,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1709,7 +1718,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1731,7 +1741,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1753,7 +1764,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1775,7 +1787,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1797,7 +1810,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1805,7 +1819,7 @@
       "page_id": "knowledge-start",
       "module_id": "knowledge-start-explain-1",
       "context_id": "module-knowledge-start-explain-1",
-      "context_title": "Was Sie für die erste Anfrage sammeln können",
+      "context_title": "Was du für die erste Anfrage sammeln kannst",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1819,7 +1833,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1863,7 +1878,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1885,7 +1901,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1907,7 +1924,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1951,7 +1969,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1973,7 +1992,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -1995,7 +2015,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2017,7 +2038,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2039,7 +2061,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2061,7 +2084,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2105,7 +2129,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2149,7 +2174,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2215,7 +2241,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2281,7 +2308,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2413,7 +2441,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2479,7 +2508,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },
@@ -2501,7 +2531,8 @@
       "gaps": [
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
-        "locale_audio_captions_transcript_review_missing"
+        "locale_audio_captions_transcript_review_missing",
+        "informal_de_copy_revision_requires_production_script_reconciliation"
       ],
       "owner": "Root / authorized media owner"
     },

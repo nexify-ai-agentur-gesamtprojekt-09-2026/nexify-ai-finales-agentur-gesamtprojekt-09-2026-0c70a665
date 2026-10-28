@@ -1,4 +1,5 @@
 {
+  "renderer": "Vite-local",
   "scope": "local Vite and shared companion;synthetic request,not provider or assistive-technology certification",
   "checks": [
     {
@@ -133,14 +134,14 @@
   "source_sha256": {
     "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
-    "apps/web/components/Workspace.tsx": "1fc4647b5127e03d6676080a2197000f9f893a7c5bef06263b2089fb91c181e3",
-    "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
+    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
+    "apps/web/components/PublicOrientationChat.tsx": "c9809bf0aac066043a6e9ee9058240fe300521a707668e26acb8795030c3402b",
     "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
-    "apps/site/tests/browser-oracle-companion.mjs": "1fd681d90180385450f8ac117f4bc1b1d3d101bdbeefc597c8336ec70ce82c98",
+    "apps/site/tests/browser-oracle-companion.mjs": "64f18ed0d2fcab86a2e682b4f4f27e600257fbb225aba56383e8dcd4af443ccd",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
-    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
-    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
-    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
+    "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
+    "apps/web/components/PublicOrientationChat.css": "ba9dd45f56d0d3016562947c49d82ab81d0fc224f5f211a6259e5c7390e6c190",
+    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66"
   },
   "screenshots": "internal_QA_only",

@@ -33,6 +33,13 @@ SDK_SOURCE_PATHS = (
     "tools/agent-preview.mjs",
 )
 AUXILIARY_SOURCE_PATHS = (
+    'apps/web/components/IdentityIllustration.tsx',
+    'apps/web/components/IdentityIllustration.css',
+    'apps/web/components/ExplainerSections.tsx',
+    'config/page-explainers.json',
+    'config/page-media-registry.json',
+    'config/companion-avatar.json',
+
     "apps/web/components/DeferredChatBoundary.tsx",
     "apps/web/components/PublicRequestFallback.tsx",
     "apps/web/components/OracleCompanion.tsx",
@@ -290,6 +297,10 @@ def check_catalog_evidence(root):
 
 PUBLIC_FALLBACK_PATH = 'evidence/frontend-reliability-2026-10-27/public-fallbacks.json'
 PUBLIC_FALLBACK_SOURCES = (
+    'apps/web/components/ProjectBrief.tsx',
+    'apps/web/lib/project-brief.mjs',
+    'apps/web/lib/project-brief-i18n.ts',
+
     'apps/web/components/Workspace.tsx', 'apps/web/components/DeferredChatBoundary.tsx',
     'apps/web/components/PublicRequestFallback.tsx', 'apps/web/components/ShopPanel.tsx',
     'apps/site/tests/browser-public-fallbacks.mjs',

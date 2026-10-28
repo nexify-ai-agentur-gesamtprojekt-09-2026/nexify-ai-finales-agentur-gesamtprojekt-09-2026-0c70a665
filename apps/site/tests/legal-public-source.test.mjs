@@ -11,7 +11,7 @@ test('ten complete original public texts retain byte/hash provenance',()=>{
 });
 test('current adopted operator replaces the BV placeholder without claiming registry or lawyer verification',()=>{
  assert.equal(legal.operator.owner,'Pascal Courbois');assert.equal(legal.operator.independent_register_check,false);assert.match(legal.operator.legal_form,/Eenmanszaak/);assert.equal(map.operator_context.legal_review,'pending');
- const imprint=map.pages.find(p=>p.id==='imprint');const body=JSON.stringify(imprint);for(const value of ['90483944','NL865786276B01','5921 JA Venlo'])assert.ok(body.includes(value));assert.doesNotMatch(body,/bestätigte B.V.-Profil/);
+ const imprint=map.pages.find(p=>p.id==='imprint');const body=JSON.stringify(imprint);for(const value of ['90483944','NL865786276B01','5921 JA Venlo'])assert.ok(body.includes(value));assert.doesNotMatch(body,/bestätigte B.V.-Profil/);assert.doesNotMatch(JSON.stringify(preparePublicData(map).pages),/B\.V\./);
 });
 test('all source documents are reachable in existing public legal routes, preserving German originals',()=>{
  assert.equal(new Set(Object.values(legal.route_mapping)).size,6);

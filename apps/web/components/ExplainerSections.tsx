@@ -6,6 +6,7 @@ import { useUI } from "./Workspace";
 import "./PresenterEditorial.css";
 import PresenterVideo,{isPublicVideo,type PublicVideo} from "./PresenterVideo";
 import PresenterScene from './PresenterScene';
+import IdentityIllustration from './IdentityIllustration';
 
 export type ExplainerModule = {
   id: string;
@@ -25,7 +26,7 @@ export type ExplainerModule = {
 
 const speakers = { pascal: "Pascal", nex: "NeX", aifly: "AIFly" } as const;
 const labels = {
-  de: { ai: "KI-Assistent", outcome: "Ihr nächster Schritt", captions: "Deutsch", collection: "So geht es weiter" },
+  de: { ai: "KI-Assistent", outcome: "Dein nächster Schritt", captions: "Deutsch", collection: "So geht es weiter" },
   nl: { ai: "AI-assistent", outcome: "Uw volgende stap", captions: "Nederlands", collection: "Zo gaat u verder" },
   fr: { ai: "Assistant IA", outcome: "Votre prochaine étape", captions: "Français", collection: "La suite de votre parcours" }
 };
@@ -43,7 +44,7 @@ export default function ExplainerSections({ modules, pages, video, moduleVideos 
       const next = pages.find(page => page.id === module.next_action.target_id);
       const side = module.media_side === "right" ? "right" : "left";
       return <section className={`editorial-module ${playable?'has-video':'has-image'} media-on-${side}`} key={module.id}>
-        {!playable&&<div className="editorial-module-media"><PresenterScene speaker={module.speaker} title={module.title[locale]} locale={locale}/></div>}
+        {!playable&&<div className="editorial-module-media">{module.id==='home-explain-1'||module.id==='home-explain-2'?<IdentityIllustration variant={module.id==='home-explain-1'?'project':'orientation'} locale={locale}/>:<PresenterScene speaker={module.speaker} title={module.title[locale]} locale={locale}/>}</div>}
         {playable && <div className="editorial-module-media">
           <figure>
             <PresenterVideo video={moduleVideo!} locale={locale}/>

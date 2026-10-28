@@ -12,7 +12,7 @@ const data=await generate(),root=fileURLToPath(new URL('../',import.meta.url)),r
 const cache=await mkdtemp(join(tmpdir(),'nexify-public-fallback-'));
 const server=await createServer({root,cacheDir:cache,server:{port:0,hmr:false},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"'}});await server.listen();
 const origin='http://127.0.0.1:'+server.httpServer.address().port,browser=await chromium.launch({headless:true});
-const sources=['apps/web/components/Workspace.tsx','apps/web/components/DeferredChatBoundary.tsx','apps/web/components/PublicRequestFallback.tsx','apps/web/components/ShopPanel.tsx','apps/site/tests/browser-public-fallbacks.mjs'];
+const sources=['apps/web/components/ProjectBrief.tsx','apps/web/lib/project-brief.mjs','apps/web/lib/project-brief-i18n.ts','apps/web/components/Workspace.tsx','apps/web/components/DeferredChatBoundary.tsx','apps/web/components/PublicRequestFallback.tsx','apps/web/components/ShopPanel.tsx','apps/site/tests/browser-public-fallbacks.mjs'];
 const hash=async()=>Object.fromEntries(await Promise.all(sources.map(async p=>[p,createHash('sha256').update(await readFile(repo+p)).digest('hex')])));
 const before=await hash(),report={scope:'synthetic local failure injection;not PostHog/Sentry or production acceptance',checks:[],source_sha256:before,external:[],uncaught:[],mutations:0,cta_routes:data.pages.filter(p=>p.actions.some(a=>a.type==='chat')).map(p=>p.path)};
 try{
@@ -53,6 +53,13 @@ try{
      const p=data.pages.find(p=>p.actions.some(a=>a.type==='chat'&&a.chat_intent===intent));const action=p.actions.find(a=>a.type==='chat'&&a.chat_intent===intent);
      await page.goto(origin+p.path);if(failure!=='capabilities')await page.locator('.public-orientation').waitFor({state:'attached'});else await page.waitForFunction(()=>!document.querySelector('#chat-message').disabled);
      await page.locator('main').getByRole('button',{name:action.label[locale],exact:true}).first().click();
+     if(intent==='quote'){
+      const guide=page.locator('.project-brief');await guide.waitFor();await guide.locator('button').first().click();
+      for(const value of ['Synthetic project goal','Synthetic existing workflow','Discuss the scope']){await guide.locator('form textarea').fill(value);await guide.locator('form button.primary-button').click();}
+      const mail=guide.locator('a.project-brief-mail');await mail.waitFor();assert.equal(new URL(await mail.getAttribute('href')).pathname,'mail@nexifyai.cloud');await mail.focus();assert.equal(await mail.evaluate(a=>a===document.activeElement),true);
+      assert.equal(await page.locator('.action-card:visible form').count(),0);assert.equal(await page.locator('#chat-message').isVisible(),false);
+      await page.locator('.panel-heading .icon-button').click();await page.locator('.reopen-chat').click();assert.equal(await mail.isVisible(),true);continue;
+     }
      const card=page.locator('.action-card');await card.locator('.request-fallback').waitFor();const link=card.locator('a[href="mailto:mail@nexifyai.cloud"]');await link.focus();assert.equal(await link.evaluate(a=>a===document.activeElement),true);
      assert.equal(await card.locator('form').count(),0);assert.equal(await page.locator('#chat-message').isVisible(),failure==='capabilities');
      assert.doesNotMatch(await card.innerText(),/Beschreibe deinen Terminwunsch im Chat|Beschrijf uw afspraakwens in de chat/);

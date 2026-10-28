@@ -92,9 +92,9 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   useEffect(() => {document.documentElement.lang=locale;try{localStorage.setItem("nexify-locale",locale);}catch{}},[locale]);
   useEffect(() => {chatEnd.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,intent,quote,booking,marketing]);
   useEffect(() => {
-    const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(intents.includes(selected)){setOpen(true);setIntent(selected);setChatMode("workspace");}};
+    const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(intents.includes(selected)){setOpen(true);setIntent(selected);const localBrief=selected==="quote"&&!standalone&&!canQuote&&Boolean(currentPage);if(localBrief)setOrientationLoaded(true);setChatMode(localBrief?"orientation":"workspace");}};
     window.addEventListener("nexify-action",handler);return()=>window.removeEventListener("nexify-action",handler);
-  },[]);
+  },[canQuote,currentPage?.id,standalone]);
   useEffect(() => {
     if(intent==="booking" && canBook)fetch("/api/slots",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error();return r.json();}).then(r=>setSlots(r.slots)).catch(()=>setError("error"));
   },[intent,canBook,booking]);

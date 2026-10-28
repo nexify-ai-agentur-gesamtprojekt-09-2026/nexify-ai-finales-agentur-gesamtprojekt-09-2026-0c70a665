@@ -1,3 +1,5 @@
+> Public CTA entry: when quote capability is absent, normal public pages open this existing local guide. Standalone keeps its deliberately disabled-orientation contact fallback. A real quote capability still selects the existing guarded tool, never a fabricated PDF or send.
+
 # Local project preparation in the existing public chat
 
 The accepted scope is a contextual start, three project questions, an editable

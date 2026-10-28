@@ -13,16 +13,40 @@
     "production_release_granted_by_this_file": false
   },
   "asset_registry": "config/interim-scene-images.json",
-  "component": "apps/web/components/IdentityHero.tsx",
-  "style": "apps/web/components/IdentityHero.css",
-  "geometry": {
+  "component": "apps/web/components/IdentityIllustration.tsx",
+  "style": "apps/web/components/IdentityIllustration.css",
+  "locales": [
+    "de",
+    "nl",
+    "fr"
+  ],
+  "original_asset_bytes_changed": false,
+  "video_produced": false,
+  "runtime_or_provider_accepted": false,
+  "historical_geometry": {
     "desktop_aspect_ratio": 1.6,
     "narrow_container_max_px": 700,
     "narrow_stage_aspect_ratio": 0.8,
     "narrow_text_above_figures": true
   },
-  "locales": ["de", "nl", "fr"],
-  "original_asset_bytes_changed": false,
-  "video_produced": false,
-  "runtime_or_provider_accepted": false
+  "geometry": {
+    "hero_aspect_ratio": 1.5,
+    "editorial_aspect_ratio": 1.1,
+    "original_pixel_ratios_preserved": true
+  },
+  "legacy_component_preserved": "apps/web/components/IdentityHero.tsx",
+  "legacy_style_preserved": "apps/web/components/IdentityHero.css",
+  "placement_correction": {
+    "source": "Parent-verified user excerpts Sentinel_9b1d9b3809e48191bab65b5da0d30f34;2026-10-28T19:47Z",
+    "regular_hero_structure_preserved": true,
+    "full_scene_must_not_replace_regular_hero": true,
+    "slots": {
+      "hero": "hero",
+      "home-explain-1": "project",
+      "home-explain-2": "orientation"
+    },
+    "other_modules": "Existing original role-specific illustrations retained;not a new mass art-direction approval",
+    "layout_screenshot_used": false,
+    "new_generation": false
+  }
 }

@@ -73,7 +73,8 @@ class BrowserEvidenceTests(unittest.TestCase):
                 checker.check_evidence(self.root)
     def test_identity_composition_drift_invalidates_the_saved_browser_pass(self):
         for relative in ('apps/web/components/IdentityHero.tsx','apps/web/components/IdentityHero.css',
-                         'config/identity-hero.json','apps/site/tests/browser-identity-hero.mjs'):
+                         'config/identity-hero.json','apps/site/tests/browser-identity-hero.mjs',
+                         'apps/web/components/IdentityIllustration.tsx','apps/web/components/IdentityIllustration.css'):
             path=self.root/relative;old=path.read_bytes();path.write_bytes(old+b'\n')
             with self.assertRaisesRegex(checker.EvidenceError,'stale_auxiliary_source_sha256'):
                 checker.check_evidence(self.root)
