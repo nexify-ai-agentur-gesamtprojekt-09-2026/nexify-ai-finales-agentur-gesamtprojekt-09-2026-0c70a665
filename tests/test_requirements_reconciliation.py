@@ -30,6 +30,25 @@ class ReconciliationTests(unittest.TestCase):
             with self.subTest(source=relative):
                 self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
 
+    def test_missing_implementation_bindings_are_rejected(self):
+        row = next(r for r in self.record['requirements'] if r['requirement_id'] == 'REC-LEGAL-FOOTER-01')
+        for relative in row['implementation_files']:
+            if relative == str(checker.REGISTER):
+                continue
+            with self.subTest(source=relative):
+                changed = copy.deepcopy(self.document)
+                changed['source_sha256'].pop(relative, None)
+                self.assertIn('Unbound implementation source: ' + relative, checker.validate(changed, ROOT))
+
+    def test_changed_implementation_bytes_do_not_pass_with_old_binding(self):
+        for relative in ('apps/site/tests/browser-legal-footer.mjs',
+                         'evidence/legal-footer-2026-10-28/browser.json',
+                         'evidence/legal-footer-2026-10-28/next-browser.json'):
+            with self.subTest(source=relative):
+                changed = copy.deepcopy(self.document)
+                changed['source_sha256'][relative] = '0' * 64
+                self.assertIn('Stale implementation source: ' + relative, checker.validate(changed, ROOT))
+
     def test_report_cannot_be_promoted_to_original(self):
         source = next(s for s in self.record['sources'] if s['acquisition'] == 'parent_verified_excerpt')
         source['original_seen_here'] = True

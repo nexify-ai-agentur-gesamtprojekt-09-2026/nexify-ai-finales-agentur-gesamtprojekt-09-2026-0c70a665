@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T14:48:46.564Z",
+  "observed_at": "2026-10-28T15:10:30.367Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -42,7 +42,7 @@
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
-    "apps/web/components/SiteFooter.tsx": "0f9ada68795470aa996c4044ee55820413a2ec7e1b2496d7031c225302bc1126",
+    "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
     "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
     "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
@@ -616,7 +616,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 294,
+        "count": 292,
         "all_doubled": true
       },
       "overflow": false,
@@ -639,7 +639,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 293,
+        "count": 291,
         "all_doubled": true
       },
       "overflow": false,
@@ -662,7 +662,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 287,
+        "count": 285,
         "all_doubled": true
       },
       "overflow": false,
@@ -685,7 +685,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 287,
+        "count": 285,
         "all_doubled": true
       },
       "overflow": false,
@@ -705,29 +705,6 @@
     },
     {
       "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 302,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -738,6 +715,29 @@
       "content_overflows": []
     },
     {
+      "path": "/teileklar/warenkorb",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 298,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/teileklar/kasse",
       "width": 390,
       "text_spacing": true,
@@ -754,7 +754,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 300,
+        "count": 298,
         "all_doubled": true
       },
       "overflow": false,
@@ -777,7 +777,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 284,
+        "count": 282,
         "all_doubled": true
       },
       "overflow": false,
@@ -800,7 +800,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 268,
+        "count": 266,
         "all_doubled": true
       },
       "overflow": false,
@@ -823,7 +823,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 284,
+        "count": 282,
         "all_doubled": true
       },
       "overflow": false,
@@ -846,7 +846,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 281,
+        "count": 279,
         "all_doubled": true
       },
       "overflow": false,
@@ -869,7 +869,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 281,
+        "count": 279,
         "all_doubled": true
       },
       "overflow": false,
@@ -892,7 +892,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 269,
+        "count": 267,
         "all_doubled": true
       },
       "overflow": false,

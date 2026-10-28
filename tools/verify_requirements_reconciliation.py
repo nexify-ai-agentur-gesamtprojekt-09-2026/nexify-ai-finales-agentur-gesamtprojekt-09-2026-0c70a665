@@ -3,6 +3,7 @@
 No execution queue, authority assignment or runtime acceptance is created here.
 """
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -46,6 +47,12 @@ def validate(document, root):
                     or path.is_symlink() or not path.resolve().is_relative_to(root.resolve())
                     or not path.is_file()):
                 errors.append('Invalid implementation source: ' + relative)
+            elif relative != str(REGISTER):
+                expected = document.get('source_sha256', {}).get(relative)
+                if expected is None:
+                    errors.append('Unbound implementation source: ' + relative)
+                elif expected != hashlib.sha256(path.read_bytes()).hexdigest():
+                    errors.append('Stale implementation source: ' + relative)
     return errors
 
 

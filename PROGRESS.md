@@ -1,3 +1,11 @@
+## Rechtsfußzeile · Reviewkorrekturen nach 3b19982 · 28.10.2026
+
+- Cubic-Review5684839133 am exakten3b199825 selbst gelesen. Bestätigt: neue Direktnavigation braucht aktiven TEILEKLAR-Rechtskontext; drei neue Test-/Belegdateien fehlten im zentralen Hashregister. Beides im bestehenden Footer-/Nachweisumfang korrigieren und erneut prüfen.
+- TEILEKLAR verwendet die eigene vorhandene Route /teileklar/rechtliches und benennt fehlende freigegebene Shop-Rechtstexte. NeXify behält /impressum und /datenschutz. Diagnose-Consent bleibt unverändert; keine Betreiber-/Vertragsdaten erfunden.
+- Vollständige aktuelle Hashbindung aller referenzierten sicheren Implementierungsdateien im Verifier erzwingen; nur der rekursive Registerselbsthash bleibt ausgeschlossen. Fehlende/veraltete Bindungen erhalten Negativregressionen, kein bloßer Nachtrag dreier erwarteter Werte.
+- Locatorvorwurf nicht reproduziert: .footer-legal kapselt seinen einen Klappbereich; Alle Seiten liegt außerhalb. Zusätzliche echte Count-/Kontextprüfungen sichern diese Grenze, keine blinde Selektoränderung. Gespeicherte Belege erst nach realen Wiederholungsläufen erneuern.
+- Szenenbilder weiterhin ausdrücklich gestalterisch abgelehnt; keine neuen Medien in diesem Delta. Vollständige Rechts-/Lizenzinhalte und unabhängige reale Releaseabnahme bleiben offen. Keine Threadauflösung, Main-/Produktionspromotion, DNS-/Credentialaktion oder Löschung.
+
 ## Rechtsfußzeile · lokales Delta nach d98c106 · 28.10.2026
 
 - Derselbe Footer für Vite/Next: ständig sichtbare echte Links zu Impressum/Datenschutz, zusätzlicher nativer Klappbereich mit Fokus, aria-expanded und DE/NL/FR-Texten. Bestehende Gruppen, Consent und Fachhinweise bleiben erhalten.

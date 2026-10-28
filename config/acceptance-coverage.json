@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "979631360bf54786591aaf7f67a3f1d489e48d0cb0b03b7ebe914da4d567e4e8",
+    "PROGRESS.md": "d757afcf8ea99f20b2d10991fc6d0908862cd112136e6443a81ec0dd892ef1b7",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "e6241238ed4e9f895b69cf0db62a200ea79dd374198dc54d426e89a43c41bb82",
+    "docs/contracts/requirements-reconciliation.md": "c2c0464b30e1967fd651761c8b3db74ddc6b0a5c7a08d4f31ec33a6701bbbf40",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1308,7 +1308,7 @@
     "evidence/one-app-2026-10-27/suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
     "evidence/one-app-2026-10-27/takeover-runtime-read.json": "cf604539a555287d63aca6d77217ab10b578a39a6d54991ac3367444646a6cf0",
     "evidence/one-app-2026-10-27/target-size-before.json": "1abda3087a139559ac17188171fd8e5de03c34f41cd5061c72d3a55a97a218db",
-    "evidence/one-app-2026-10-27/text-spacing.json": "545346a4e89868f3584a7a00b994729c5bbda20400969d8fe0c79345403b6096",
+    "evidence/one-app-2026-10-27/text-spacing.json": "ac31e0b0746e6543bec0bb55eb0f5a2b46c8227d68285d22dfe217279f2b1c25",
     "evidence/reconciliation-2026-10-27/linked-standards-reference.json": "f20d9e9d8b66d49057c038a17aaea6ce9c8392e92cecbe55ed5594bb0adbaf48",
     "evidence/reconciliation-2026-10-27/review-asset-inspection.json": "11f5c4eee4527585f607fadec7cec4c99cc10b18228a4f6cb7794bcf46056f2e",
     "evidence/reconciliation-2026-10-27/route-feature-inventory.json": "fbea71c96cf69f0db41d5f405a8535629a4cfb1c8fd06c270c7267cb4f8495e4",
@@ -1328,7 +1328,7 @@
     "tests/test_one_app_backend.py": "72c6571231a073ea4eb3397823620e1f97a1b7f53f8cc4b9304e3e41a722fb9a",
     "tests/test_public_surface_contract.py": "6b69cfde2ad888c001357e15199b50f3d89091ff41218976f5e011b5ccf6d4ef",
     "tests/test_release_prerequisites.py": "328cd20630a1962b3cb7d146cb0a0de91c3b028558dd40c3c258c8af91526e0b",
-    "tests/test_requirements_reconciliation.py": "88a78b180c646287bcd22138274ae62fcb10e706df480c5efcd44237d681a814",
+    "tests/test_requirements_reconciliation.py": "34783bf63d58a3405338a359daf31c1c89f9b58a2796804101f23b1fcab11eed",
     "tests/test_selfservice_decisions.py": "6a04b03f262198fdb06c2be3e0792edb2f60652947c3d39613f1f3dd1c3a0369",
     "tests/test_selfservice_domain.py": "25470e0621ac30875606e331c58495172d386cac801537d69128f58460b19509",
     "tests/test_seo_catalog.py": "ad57bb4d231c7583831df85df607e354283b33a05b3faf1999f8aa48143b3d97",
@@ -1344,7 +1344,7 @@
     "tools/remediation_queue.py": "c9fb0dfb4bc634e23774a622a9c38ba869764514bd8b9e64a92e54e9b3f98840",
     "tools/seo_catalog.py": "b0f6904d3db1174ffb541e0217e1e99485654cc27edf64332a8f6fdc6d72f5ca",
     "tools/verify_factory_contract.py": "f4fd9d39f15ad805d2978f0687f766ab9913000b021d4e9ff61630317bb17810",
-    "tools/verify_requirements_reconciliation.py": "8415c107d4fc17157b1f0469d35ee54761e5e53166c446779c30fe836a234fa9",
+    "tools/verify_requirements_reconciliation.py": "0ebf1094863e72e9fd21e93019c48c3dff7385b0fd51eed6007c53c53c145e23",
     "tools/bigbuy_batch.py": "0e790b975c018218dcee4d06891475a9bfc3267393bd04e852b5e2360f944647",
     "tests/test_bigbuy_batch.py": "4d0afc6817a087f2d9d55f9b8a4ff814e8931ec83b4ccacfbf880ad18686c72a",
     "docs/contracts/bigbuy-batch.md": "21ac93ced78511c403690bb13ed9f7f27f1b9da44208042071a9592687dd9f32",
@@ -1487,7 +1487,7 @@
     "evidence/observability-integration-2026-10-28/private-maps.json": "c3e9bab812254b901bb2e6a7ae6cd2ca18bb39dec97726851698431db0c5ec2d",
     "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
     "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
-    "apps/web/components/SiteFooter.tsx": "0f9ada68795470aa996c4044ee55820413a2ec7e1b2496d7031c225302bc1126",
+    "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
     "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
     "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
@@ -1499,10 +1499,10 @@
     "apps/web/auth/tests/public-provider.test.mjs": "8e0422765eb45a0582f82ad0426855a499628357e48d3e767ba50743f42d92ec",
     "docs/contracts/diagnostic-consent.md": "60ba324ef850bcdda2af5a6a76a84f21e71907d419ac488531e883e38e5628ee",
     "docs/contracts/next-local-portal-slice.md": "2093302650b1739f5aee13e1597f96e55d347122a04306ee3f652918361747b3",
-    "evidence/consent-ui-2026-10-28/browser-consent-ui.json": "47cac3776c76811793ee5428fb2a7624a2d64c77e41b7825dfb64d8bd870dbb2",
+    "evidence/consent-ui-2026-10-28/browser-consent-ui.json": "f3fae28eef837c4c127a3181b9aec265241cb6ee4fef6e0ba41d6b09a7bb5a37",
     "evidence/consent-ui-2026-10-28/next-clerk-locale.json": "0f1510ea655d847964e0d8c6829090001c60e9e8ddad2b64578ab4bdd3b62b56",
     "evidence/consent-ui-2026-10-28/public-scope-check.json": "10bbdb3ad71171336462406d381592dc39d9d580fa6f53965576b569623d783f",
-    "evidence/consent-ui-2026-10-28/next-public.json": "42e090eb1ad406d10689066aeca1b4a374cb32c72a92fccad30afa9ebba2ad46",
+    "evidence/consent-ui-2026-10-28/next-public.json": "b5db9182e03b30dd85e172cd188a517a48be0587aca0a406f2669844c8503174",
     "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/intern/workspace/page.tsx": "d018e8263570649632e2bf7fb732fe6d4aa1ea78693de447bb8e275ae85f4e5e",
@@ -1536,7 +1536,10 @@
     "apps/site/tests/csp-reporting.test.mjs": "b5c153edda8cbe047195d96ea01728e8993c510da2211081132f2e357b60127f",
     "apps/site/tests/browser-csp-policy.mjs": "4a44ead995c998c5e882a69a33b25518757787fd3fd68ef939343fa228528e9f",
     "apps/site/tests/fixtures/csp-enforcement-baseline.json": "c44d95bf33dd6ae5257073d29379c8b13bec6911f669c4de858478debaf7cf24",
-    "evidence/csp-report-removal-2026-10-28/browser.json": "9fc4f61d59d825491504aaf45889e74419b9b799d0fd04dac42aeb19b15a8a8e"
+    "evidence/csp-report-removal-2026-10-28/browser.json": "9fc4f61d59d825491504aaf45889e74419b9b799d0fd04dac42aeb19b15a8a8e",
+    "apps/site/tests/browser-legal-footer.mjs": "2c84c680fdd2ead6d8d45e3cfa5bca65c36bfeb664b2b649e4afad709c814746",
+    "evidence/legal-footer-2026-10-28/browser.json": "4515e554abaca95a030c00dd3d88b182195a6d0d96c49798c27c3c6a68ed926a",
+    "evidence/legal-footer-2026-10-28/next-browser.json": "a2519664ba435f6dd1d8880d3c21fd965c09120e16e6bf66a8146307afdc836c"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2086,6 +2089,16 @@
         "acquisition": "parent_verified_excerpt",
         "original_seen_here": false,
         "scope": "Shared collapsible footer; mandatory details in legal documents; real legal links remain permanently accessible; no legal-safety guarantee or invented operator information."
+      },
+      {
+        "id": "SRC-CUBIC-FOOTER-3B19982",
+        "locator": "https://github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/46#pullrequestreview-5684839133;comments4402241779,4402241824,4402241835;exacthead3b1998257584dbd24c3ea53c2eb026cab051de8a",
+        "source_date": "2026-10-28T15:03:09Z",
+        "observed_at": "2026-10-28",
+        "role": "automated_advisory_review_not_user_authorization",
+        "acquisition": "direct_tool_read",
+        "original_seen_here": true,
+        "scope": "Read exact review and inline comments;confirmed active-site legal-route gap and missing hash coverage;locator allegation not reproduced because footer-legal is already scoped."
       }
     ],
     "requirements": [
@@ -3301,23 +3314,26 @@
         "requirement_id": "REC-LEGAL-FOOTER-01",
         "acceptance_case_id": "REC-LEGAL-FOOTER-01",
         "source_ids": [
-          "SRC-LEGAL-FOOTER-20261028"
+          "SRC-LEGAL-FOOTER-20261028",
+          "SRC-CUBIC-FOOTER-3B19982"
         ],
-        "applicable_requirement": "One shared collapsible legal footer, permanent real imprint/privacy/license links outside its disclosure, DE/NL and accessible mobile/keyboard behavior.",
-        "interpretation": "Public navigation only; no legal certification. Requested final wording is deferred because actual imprint/privacy routes are notice-only; truthful current copy preserves their pending release status. No license route invented.",
+        "applicable_requirement": "One shared collapsible legal footer, permanent real legal links outside disclosure selected for active context:NeXify imprint/privacy,TEILEKLAR own existing legal page;DE/NL and accessible mobile/keyboard behavior;complete version/hash evidence coverage.",
+        "interpretation": "Public navigation only,no legal certification. Notice-only content remains pending review;no license route invented. Confirmed review findings:context routing and missing referenced-source bindings;locator finding not reproduced with unique scoped legal disclosure and separate AllPages disclosure.",
         "implementation_files": [
           "apps/web/components/SiteFooter.tsx",
           "apps/web/components/WorkspaceRebuild.css",
           "apps/site/tests/browser-legal-footer.mjs",
           "config/site-map.json",
           "evidence/legal-footer-2026-10-28/browser.json",
-          "evidence/legal-footer-2026-10-28/next-browser.json"
+          "evidence/legal-footer-2026-10-28/next-browser.json",
+          "tools/verify_requirements_reconciliation.py",
+          "tests/test_requirements_reconciliation.py"
         ],
-        "test_evidence": "Optimized Vite144 and Next144 route/locale/viewport footer views;each8 actual keyboard/open/close/links/back/reload cases;0external requests/page errors;source-bound receipts evidence/legal-footer-2026-10-28. Existing consent18,resize108 and critical subset repeated after shared source change.",
+        "test_evidence": "Fresh optimized Vite144 and Next144 context-specific footer views,each8keyboard/link/back/reload cases;unique scoped disclosures;consent18,resize108 and Next72public/10protected repeated. Generic verifier rejects every omitted or stale referenced implementation binding except recursive register itself;negative regressions include all3new test/proof files.",
         "actual_delivery": "local_built_browser_verified_remote_update_pending",
         "full_requirement_accepted": false,
-        "gap": "No public licenses route or complete release-specific license inventory; imprint/privacy remain notice_only_legal_text_release_pending. Owner/legal content and attribution review not replaced by footer UI.",
-        "next_step": "Complete final local gates,REA and independent exact-commit review,then at most one authorized PR update after budget and writer readback. Separately author release-specific license inventory and complete/review legal pages before final wording or legal acceptance.",
+        "gap": "No complete release-specific license inventory/public license route;NeXify imprint/privacy and TEILEKLAR legal page remain notice-only. Real reviewed applicable operator/privacy/shop content and art approval are not supplied by footer navigation.",
+        "next_step": "Finish exact review-fix gates/REA/independent review;one budget-checked own PR update if safe. Separately complete and review actual context-specific legal documents and versioned license notices before final wording/release acceptance.",
         "completion_criterion": "Exact released shared footer has directly reachable complete and reviewed legal documents plus release-specific third-party license notices; qualified legal scope review and real release readback.",
         "owner_area": "Existing web writer for UI and inventory; product/legal owner for applicable operator/privacy/attribution content."
       }
