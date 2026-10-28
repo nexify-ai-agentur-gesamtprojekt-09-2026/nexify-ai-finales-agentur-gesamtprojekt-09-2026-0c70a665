@@ -46,7 +46,7 @@
     "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
     "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
     "config/remediation-policy.json": "f32f8c29986d8abe01f62e5e3aecc325bc45dd52327d833288891e7b7c5de942",
-    "apps/web/auth/policy.ts": "ad7db99b0dc03d54bb94f9a667d93f2c2a9272504b7cf40e713753b7c5a1e1d7",
+    "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
     "tests/test_workspace_read.py": "8fc8efe1f0325cd24b392798aef2e3dc8157e7e52860ed86265785241f5fdea4",
     "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
     "tools/app_backend.py": "86e433086cf7bf41c6bf0db7e8ed381b7b4224297a071a02b3569f8d9be37404",

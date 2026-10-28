@@ -1123,3 +1123,15 @@ nachgeprüft. Vier Browserfälle mit20negativen Sessions,108Resizechecks,502Pyth
 62Site-,13Nexttests sowie alle vier lokalen Gesamtgates bestanden. ExakteCommit-
 REA/Reviewbelege werden separat an den gesicherten Endhash gebunden. API-/Clerk-Membership und vollständiger Arbeitsplatz bleiben Livegates.
 Kein Diff-Limit-/Previewguard-/Credential-/Server-/Domainwechsel.
+
+## Preview-Guard und vollständiger PR-Review · 28.10.2026
+
+Auf7ce5338 baut ein enger Sourcefix auf: matching Testschlüssel ausschließlich
+bei serverseitig bestätigter echter VercelPreview trotz optimiertem NODE_ENVproduction.
+Production/Live bleibt gültig; unbekannte,widersprüchliche,Development-/Test- und
+Customtargetkonfigurationen initialisieren keinen Provider. Keine Schlüsselkopie,
+keine neue Tenant-/Membershipfreigabe,kein Deployment oder Autorwechsel.
+16Next-Auth/Deploymenttests grün, einschliesslich neuer Positiv-/Negativmatrix.
+Gesamtgates/REA und vollständige unabhängige PR-Coverage ab realer PR-Basis folgen
+am gesicherten Endhash. Bound-AI-Limit/Scanner/Binärgate bleiben unverändert;
+keine zusätzlichen OpenRouter-Aufrufe oder ausgelassenen Dateien.

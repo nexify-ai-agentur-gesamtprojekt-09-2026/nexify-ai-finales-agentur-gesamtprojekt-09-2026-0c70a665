@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "0aa0bfb36eeaef9857de1bd491de51012181f0bbfc80c8bf7d2cafbb0daf4614",
+    "PROGRESS.md": "195fc998b755202e0e872323293253b504fe17f5acb67a9fd7cc8288bffea22a",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "321cd6ff177e851ad8b6960992c2b401a273e15889497008a7152c5be403603e",
+    "docs/contracts/requirements-reconciliation.md": "64672f0c7716321c4179165c82b3535aa48ed2d194382991dc7265aa16961d2f",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1498,11 +1498,11 @@
     "apps/site/tests/fixtures/clerk-integration.tsx": "217fab40829fc02e7f6c55564b1d51e331e871dfb4264a84d03353ccb60228a2",
     "apps/web/auth/tests/public-provider.test.mjs": "8e0422765eb45a0582f82ad0426855a499628357e48d3e767ba50743f42d92ec",
     "docs/contracts/diagnostic-consent.md": "60ba324ef850bcdda2af5a6a76a84f21e71907d419ac488531e883e38e5628ee",
-    "docs/contracts/next-local-portal-slice.md": "499b9774a3a22dc31c65907b08cc3023e43cf5cae13907fa08625cb4c5388ab8",
+    "docs/contracts/next-local-portal-slice.md": "2093302650b1739f5aee13e1597f96e55d347122a04306ee3f652918361747b3",
     "evidence/consent-ui-2026-10-28/browser-consent-ui.json": "84e30597b3b7f03ea2a8f0678b3f391d382c79356bc484c5a4b46c21db2b86e9",
     "evidence/consent-ui-2026-10-28/next-clerk-locale.json": "0f1510ea655d847964e0d8c6829090001c60e9e8ddad2b64578ab4bdd3b62b56",
     "evidence/consent-ui-2026-10-28/public-scope-check.json": "10bbdb3ad71171336462406d381592dc39d9d580fa6f53965576b569623d783f",
-    "evidence/consent-ui-2026-10-28/next-public.json": "1736a2136f42a9379f81c00564ccd216aa5c903b1a845d56283c4af7546b46ec",
+    "evidence/consent-ui-2026-10-28/next-public.json": "73678d67ba807870d3972a2dcb95de2a40d7b0f71ae25d46873d36a4bba605cc",
     "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/intern/workspace/page.tsx": "d018e8263570649632e2bf7fb732fe6d4aa1ea78693de447bb8e275ae85f4e5e",
@@ -1513,7 +1513,9 @@
     "apps/site/tests/fixtures/workspace-server.py": "45d09f69887a0918c0c82c89042878bdf0889d1eebe2f5c211985a4c37cda2f6",
     "apps/site/tests/fixtures/workspace-status.tsx": "4f1975cd560f5803388b3b608387b34f40c7f47c40a864bbf32e088c75b70bc8",
     "apps/site/tests/fixtures/workspace-status.html": "9851f225b40e81ab10825dc7c8038ff1bec82653a0374337b9b8795818f6f68d",
-    "evidence/workspace-read-2026-10-28/browser-workspace-read.json": "7ef42f511fc6ee82da20136a87e3a60dde2ff805c1f6edc92bb9d7d25fa391c5"
+    "evidence/workspace-read-2026-10-28/browser-workspace-read.json": "01840672e5d6a55fbafa3310cf5c2bfeaeddea3ccbb1f070304dc5138aad0ec9",
+    "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
+    "apps/web/auth/tests/policy.test.mjs": "b15d1e3ccaa82d7f8303a4bb118b0a34c3824b16bf28338b2c6c27f7669f6a35"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2819,13 +2821,15 @@
           "apps/site/tests/fixtures/workspace-server.py",
           "apps/site/tests/fixtures/workspace-status.tsx",
           "apps/site/tests/fixtures/workspace-status.html",
-          "evidence/workspace-read-2026-10-28/browser-workspace-read.json"
+          "evidence/workspace-read-2026-10-28/browser-workspace-read.json",
+          "apps/web/auth/policy.ts",
+          "apps/web/auth/tests/policy.test.mjs"
         ],
-        "test_evidence": "36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity. Existing web project exactfullsettings/repositoryroot read:apps/web,nextjs,node24→22 onlyglobalchange,rollback24saved;no production switch. Scoped apps/web/vercel.json prevents inherited Vite build/output.8auth/deploymenttests and13real localNextHTTPchecks,10private503;corrected defaultTurbopack+Webpack+typecheck passed. Independent Sol reviewed. NoClerkcopy/realprovider/portal acceptance. Delta PORTAL-LOCAL-READ-01:8 focused persistent read/auth/error/parent-join tests;4 real local sharedUI→HTTP→existingdatabase fixture cases,20 negative session cases,DE/NL320/1280,reload/repeat,no state delta. Next72routes/10private503 plus internalAPI503,no-store. These are isolated synthetic session tests,not provider/membership acceptance. Local make check/e2e/check-arch/clean-check pass with502Python/62Site/13Next tests. Independent Sol rechecked both corrected findings and approved bounded WIP; final commit review is a separately bound receipt,not live acceptance.",
+        "test_evidence": "36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity. Existing web project exactfullsettings/repositoryroot read:apps/web,nextjs,node24→22 onlyglobalchange,rollback24saved;no production switch. Scoped apps/web/vercel.json prevents inherited Vite build/output.8auth/deploymenttests and13real localNextHTTPchecks,10private503;corrected defaultTurbopack+Webpack+typecheck passed. Independent Sol reviewed. NoClerkcopy/realprovider/portal acceptance. Delta PORTAL-LOCAL-READ-01:8 focused persistent read/auth/error/parent-join tests;4 real local sharedUI→HTTP→existingdatabase fixture cases,20 negative session cases,DE/NL320/1280,reload/repeat,no state delta. Next72routes/10private503 plus internalAPI503,no-store. These are isolated synthetic session tests,not provider/membership acceptance. Local make check/e2e/check-arch/clean-check pass with502Python/62Site/13Next tests. Independent Sol rechecked both corrected findings and approved bounded WIP; final commit review is a separately bound receipt,not live acceptance. Previewguard-Sourcefix:16Nexttests including matching server Preview/test pair,Production/live preservation and unknown/conflicting/client-only metadata negatives. Fresh Next72routes/10private503+API503 and4workspace/20negative fixture cases;unchanged resize proof remains source-bound. Complete PR review is separately bound to final head;no real login acceptance.",
         "actual_delivery": "reported_partial_implementation_unverified",
         "full_requirement_accepted": false,
         "gap": "Live identity→tenant/project→role mapping,revocation integration and Next-to-existing-controller transport remain unbound. Production API/page fail closed; local technical review receipts do not provide business approval authority. Original AionUi/workplace modules remain separate open scope.",
-        "next_step": "Complete bounded local review,then bind verified server identity and existing durable backend on an authorized runtime;never accept browser claims or fixture fallback. Preview-specific Clerk guard requires separate reviewed policy delta;limits remain unchanged.",
+        "next_step": "Bind actual identity/tenant/project/role/revocation and controller transport on verified runtime. Previewguard correction is locally tested;Vercel author block,exact Preview origin/issuer and real provider acceptance remain separate. No new keys or membership grants.",
         "completion_criterion": "Each required portal works in its correct route with verified session/tenant, real data path and negative direct-link/API tests.",
         "owner_area": "D06 / D07",
         "local_next_work_package": {
@@ -2851,6 +2855,20 @@
           "tenant_scope": "isolated_synthetic_local_fixtures_only",
           "project_scope": "canonical_agency_project",
           "local_implementation_status": "built_and_locally_tested"
+        },
+        "preview_guard_delta": {
+          "source": "apps/web/auth/policy.ts",
+          "status": "locally_tested_full_pr_review_pending",
+          "status_definition": "source-only fix verified with synthetic keys;no credentials or hosting configuration changed",
+          "preview_markers": [
+            "NODE_ENV=production",
+            "VERCEL=1",
+            "VERCEL_ENV=preview",
+            "VERCEL_TARGET_ENV=preview"
+          ],
+          "app_env": "absent_or_preview",
+          "production_live_preserved": true,
+          "real_provider_login_verified": false
         }
       },
       {

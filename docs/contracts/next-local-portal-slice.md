@@ -86,10 +86,34 @@ PR46-Basis38f6c654→e2e90e0:686947Bytes Unified-Diff,5490Bytes Pfadmetadaten,
 tools/automation/ai_review.py::git_bytes bricht ab Überschreitung vor dem Modell ab.
 Keine künstliche Dateiauswahl,Limiterhöhung oder automatische Wiederholung.
 
-apps/web/auth/policy.ts::clerkConfiguration bindet Livepflicht an NODE_ENVproduction
+Historischer Stand7ce5338: apps/web/auth/policy.ts::clerkConfiguration band Livepflicht an NODE_ENVproduction
 oder APP_ENVproduction; VERCEL_ENVpreview wird nicht ausgewertet. Daher ist der
 vorhandene Testschlüsselpaartransfer noch kein nutzbarer Previewlogin. Ein möglicher
 separater Fix müsste eine autoritative Previewumgebung explizit behandeln und
 Production/Test-Verwechslungen sowie unbekannte/konfligierende Umgebung weiterhin
-ablehnen. Die Membership-/Tenantgrenze bleibt zusätzlich erforderlich. Dieser
-Schnitt ändert den Guard nicht und liest/kopiert keine Schlüssel.
+ablehnen. Die Membership-/Tenantgrenze bleibt zusätzlich erforderlich. Der damalige
+Leseschnitt änderte den Guard nicht und las/kopierte keine Schlüssel.
+
+
+## Folgekorrektur: explizite Previewumgebung
+
+Der nachfolgend beauftragte reine Sourcefix unterscheidet optimierten Buildmodus
+von Deploymentumgebung. Passende Testschlüssel dürfen ausschließlich unter den
+serverseitigen Markern NODE_ENVproduction,VERCEL1,VERCEL_ENVpreview und
+VERCEL_TARGET_ENVpreview verwendet werden; APP_ENV darf fehlen oder preview sein.
+Production-Marker/abweichende Customtargets/Widersprüche sperren. Passende Liveschlüssel
+bleiben für bekannte Productionkonfigurationen gültig, einschließlich des bisherigen
+Standalone-Productionfalls. Development,Test und unbekannte Konfigurationen werden
+nicht still als freigegebene Preview behandelt; dort initialisiert dieser Guard
+keinen Provider. Public/clientseitige Marker werden nicht als Autorität verwendet.
+
+Quelle der beiden getrennten Vercel-Umgebungsmarker:
+https://vercel.com/docs/environment-variables/system-environment-variables
+(lesend geprüft28.10.2026). Plattformvariablen sind kein kryptographischer Tenant-
+oder Rollenbeweis. Schlüsselwerte,Issuer-/Origin-/Membershipkonfiguration und
+Vercel-Autorblockade werden nicht verändert oder als funktional abgenommen behauptet.
+Gezielte synthetische Positiv-/Negativmatrix in auth/tests/policy.test.mjs;
+Production/Live-,Schema-,Modus- und privateDecision-Grenzen bleiben eigenständig.
+Der vollständige PR-Review wird am endgültigen Commit separat mit Dateimanifest,
+redigierter Scanner-Triage, tatsächlicher Binärsichtung und unabhängigen Sol-
+Fachprüfungen gebunden; ein enger Delta-Review ersetzt ihn nicht.

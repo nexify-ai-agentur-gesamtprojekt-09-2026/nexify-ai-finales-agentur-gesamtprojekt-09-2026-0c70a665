@@ -384,7 +384,7 @@
   "navigation": true,
   "source_sha256": {
     "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
-    "apps/web/auth/policy.ts": "ad7db99b0dc03d54bb94f9a667d93f2c2a9272504b7cf40e713753b7c5a1e1d7",
+    "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/intern/workspace/page.tsx": "d018e8263570649632e2bf7fb732fe6d4aa1ea78693de447bb8e275ae85f4e5e",
     "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
