@@ -176,7 +176,7 @@ class RemediationQueue:
             ''')
 
     @contextmanager
-    def connection(self):
+    def connection(self, *, read_only=False):
         for suffix in ('', '-wal', '-shm', '-journal'):
             target = Path(str(self.path) + suffix)
             try:
@@ -192,8 +192,9 @@ class RemediationQueue:
                 except FileNotFoundError:
                     continue
             require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1, 'unsafe_database_sidecar')
-        db = sqlite3.connect(self.path.as_uri() + '?mode=ro' if self.read_only else self.path,
-                             uri=self.read_only, timeout=15, isolation_level=None)
+        readonly = self.read_only or read_only
+        db = sqlite3.connect(self.path.as_uri() + '?mode=ro' if readonly else self.path,
+                             uri=readonly, timeout=15, isolation_level=None)
         db.row_factory = sqlite3.Row
         try:
             yield db

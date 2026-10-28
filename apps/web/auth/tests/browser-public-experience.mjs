@@ -8,7 +8,7 @@ import {createServer} from 'node:net';
 import {fileURLToPath} from 'node:url';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../../../../',import.meta.url));
-const sourcePaths=['apps/web/components/AuthAvailabilityNotice.tsx','apps/web/components/LocaleAwareClerk.tsx','apps/web/auth/public-provider.ts','apps/web/app/layout.tsx','apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx','apps/web/components/DiagnosticConsent.tsx','apps/web/components/DiagnosticConsent.css','apps/web/components/SiteFooter.tsx','apps/web/auth/tests/browser-public-experience.mjs'];
+const sourcePaths=['apps/web/proxy.ts','apps/web/auth/policy.ts','apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/intern/workspace/page.tsx','apps/web/components/AuthAvailabilityNotice.tsx','apps/web/components/LocaleAwareClerk.tsx','apps/web/auth/public-provider.ts','apps/web/app/layout.tsx','apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx','apps/web/components/DiagnosticConsent.tsx','apps/web/components/DiagnosticConsent.css','apps/web/components/SiteFooter.tsx','apps/web/auth/tests/browser-public-experience.mjs'];
 const hashes=async()=>Object.fromEntries(await Promise.all(sourcePaths.map(async p=>[p,createHash('sha256').update(await readFile(root+p)).digest('hex')])));const sourceHashes=await hashes();
 const data=JSON.parse(await readFile(new URL('../../../site/.generated/public-site.json',import.meta.url),'utf8'));
 const map=JSON.parse(await readFile(new URL('../../../../config/site-map.json',import.meta.url),'utf8'));
@@ -49,6 +49,7 @@ try{
  for(const path of ['/manifest.webmanifest','/public-install-worker.js']){const r=await context.request.get(origin+path);assert.equal(r.status(),installationOnly?200:404);report.pwa[path]=r.status();if(installationOnly&&path.endsWith('.js'))assert.equal(await r.text(),await readFile(root+'apps/site/pwa/worker.js','utf8'));}
  assert.equal(await page.locator('link[rel="manifest"]').count(),installationOnly?1:0);
  if(installationOnly){await page.waitForFunction(async()=>navigator.serviceWorker&&(await navigator.serviceWorker.getRegistrations()).length===1);assert.deepEqual(await page.evaluate(()=>caches.keys()),[]);report.pwa.registered_network_only=true;}
+ const internal=await context.request.get(origin+'/api/internal/workspace/status?request_id='+('0'.repeat(64)));assert.equal(internal.status(),503);assert.equal(internal.headers()['cache-control'],'private, no-store');assert.equal((await internal.json()).error,'authentication_unavailable');report.internal_workspace_api_unbound_503=true;
  assert.deepEqual(report.pageErrors,[]);assert.equal(report.external,0);assert.equal(report.mutations,0);
  assert.deepEqual(await hashes(),sourceHashes);report.passed=true;
 }finally{

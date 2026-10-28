@@ -1,8 +1,8 @@
 # Nächster lokaler Portal-Teilauftrag · PORTAL-LOCAL-READ-01
 
-Status: vorbereitet, nicht implementiert/ausgeführt/abgenommen. Owner: bestehender
+Status: begrenzt lokal implementiert; lokale Prüfung läuft, keine Liveabnahme. Owner: bestehender
 Webwriter; Auth-/Membershippolicy beim zuständigen Systemowner. Kein zweiter Writer.
-Die bestehenden zehn privaten Routen bleiben geschützt; keine Credentialkopie.
+Die bestehenden zehn privaten Routen bleiben geschützt. Dieser Schnitt überträgt keine Credentials.
 
 Ziel: ein schmaler interner Auftragsstatus unter dem bestehenden Ziel
 `/intern/workspace`, gleiche Shell/Tokens/DE-NL, keine Ersatzplattform für die noch
@@ -44,3 +44,52 @@ Projekt→Rollenbindung,Revocation,fachliche Rollenbrücke und tatsächlicher Ru
 APIvertrag; dafür keine neuen Keys,Rechte oder Serveränderungen aus diesem Plan.
 Original-Workspace-/Lizenz-/Downloadanforderungen bleiben eigenständige offene
 Umfangspunkte. Ein Statuspanel erfüllt diese nicht automatisch.
+
+
+## Implementierter begrenzter Schnitt
+
+`LocalControl.status_snapshot()` liest in einer SQLite-mode=ro-Transaktion einen
+konsistenten Snapshot. Der historische CLI-Status behält seine explizite
+Gap-Synchronisierung; Backend-Statusreads verwenden diese Mutation nicht mehr.
+`workspace_status()` projiziert nur Referenzen, Zustände, Versuche, Ergebnishash,
+Ownerrolle, Ursache, nächste Aktion und lokalen Parent-Join. Keine Rohdefinition,
+Checkpoints, Actorwerte oder Dateipfade. Keine neue Datenbank oder Fehlerqueue.
+
+`LocalAppBackend.workspace_response()` ist der transportneutrale GET-Vertrag;
+Session kommt ausschließlich von einem vertrauenswürdigen serverseitigen Resolver.
+Jeder Aufruf prüft den aktuellen Vertragsfingerprint, Rolle, Tenant, Projekt,
+Ablauf und Widerruf. Unberechtigte/ausgelaufene Identität401,fehlende Rolle403,
+fremder Scope/nicht vorhanden404,unbekannte Queryfelder400,Mutation405.
+Antworten private,no-store. Die Tests verwenden ausschließlich isolierte lokale
+Sessionzuordnungen, nicht produktive Provideridentitäten.
+
+`/intern/workspace` verwendet die gemeinsame Shell und WorkspaceStatusPanel mit
+DE/NL und denselben Tokens. `/api/internal/workspace` ist zusätzlich in der
+bestehenden Proxy-Schutzgrenze. Die reale Next-GET-Route bleibt503 ohne konfigurierte
+Backendbindung; der Proxy verlangt weiterhin verifizierte Identität UND Membership.
+Keine Aktivierung über Browserclaims, ENV-URL, Fixturecookie oder lokale Rolle.
+Die Browser-HTTP-Fixture liegt nur unter apps/site/tests/fixtures und ist kein
+Produktionsadapter oder Providerabnahmebeleg.
+
+Die zentrale Übersicht enthält Gegenstand,Zweck,Status,Ownerrolle,Risiko,
+Kostenobergrenze,Gültigkeit,Quellenhash und nächste Aktion. Gegenwärtige echte
+Datenquelle sind ausschließlich bestehende technische Ergebnisprüfungen aus
+control_jobs/control_reviews. Ein lokaler Prüfnachweis erlaubt keine Zahlung,
+Schlüsselübernahme,Publikation oder Geschäftsausführung. Kostenobergrenzen bleiben
+null/nicht festgelegt, statt aus SDK-/Joblimits Geldfreigaben zu erfinden.
+Geschäftliche Freigaben sind explizit not_connected; keine UI-Freigabetoggles.
+
+## Unveränderte technische Gates
+
+PR46-Basis38f6c654→e2e90e0:686947Bytes Unified-Diff,5490Bytes Pfadmetadaten,
+136Dateien. config/automation.json erlaubt64000Bytes pro Diff/Metadatenleseschritt;
+tools/automation/ai_review.py::git_bytes bricht ab Überschreitung vor dem Modell ab.
+Keine künstliche Dateiauswahl,Limiterhöhung oder automatische Wiederholung.
+
+apps/web/auth/policy.ts::clerkConfiguration bindet Livepflicht an NODE_ENVproduction
+oder APP_ENVproduction; VERCEL_ENVpreview wird nicht ausgewertet. Daher ist der
+vorhandene Testschlüsselpaartransfer noch kein nutzbarer Previewlogin. Ein möglicher
+separater Fix müsste eine autoritative Previewumgebung explizit behandeln und
+Production/Test-Verwechslungen sowie unbekannte/konfligierende Umgebung weiterhin
+ablehnen. Die Membership-/Tenantgrenze bleibt zusätzlich erforderlich. Dieser
+Schnitt ändert den Guard nicht und liest/kopiert keine Schlüssel.

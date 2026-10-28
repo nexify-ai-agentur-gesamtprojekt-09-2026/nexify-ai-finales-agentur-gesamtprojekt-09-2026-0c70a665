@@ -356,6 +356,7 @@ LOCALE_BRIDGE_SOURCES = (
 LOCALE_BRIDGE_PATH = 'evidence/consent-ui-2026-10-28/next-clerk-locale.json'
 
 NEXT_CONSENT_SOURCES = (
+    'apps/web/proxy.ts','apps/web/auth/policy.ts','apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/intern/workspace/page.tsx',
     'apps/web/components/AuthAvailabilityNotice.tsx','apps/web/components/LocaleAwareClerk.tsx',
     'apps/web/auth/public-provider.ts','apps/web/app/layout.tsx',
     'apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx',
@@ -378,6 +379,7 @@ def check_consent_ui(root):
     pairs={(c.get('lang'),c.get('expected')) for c in locale.get('checks',[]) if c.get('passed') is True}
     if locale.get('passed') is not True or len(locale.get('checks',[]))!=4 or pairs!={('de','de-DE'),('nl','nl-NL'),('fr','fr-FR'),('unknown','de-DE')} or locale.get('external')!=0 or locale.get('errors')!=[]:raise EvidenceError('locale_bridge_complete_fixture_required')
     next_report=json.loads(_read(root,NEXT_CONSENT_PATH))
+    if next_report.get('internal_workspace_api_unbound_503') is not True:raise EvidenceError('internal_workspace_fail_closed_proof_required')
     if set(next_report.get('source_sha256',{}))!=set(NEXT_CONSENT_SOURCES):raise EvidenceError('next_consent_exact_sources_required')
     for path in NEXT_CONSENT_SOURCES:
         if hashlib.sha256(_read(root,path)).hexdigest()!=next_report['source_sha256'][path]:raise EvidenceError('stale_next_consent_source: '+path)
@@ -392,6 +394,30 @@ def check_consent_ui(root):
     return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':4,'next_route_locales':72,'next_auth_mobile':4}
 
 
+
+WORKSPACE_SOURCES = (
+    'config/one-web-app.json','config/local-control.json','config/remediation-policy.json','apps/web/auth/policy.ts',
+    'tests/test_workspace_read.py','tests/test_local_control.py','tools/app_backend.py','tools/local_control.py','tools/remediation_queue.py',
+    'apps/web/components/WorkspaceStatusPanel.tsx','apps/web/components/WorkspaceStatusPanel.css','apps/web/proxy.ts',
+    'apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/intern/workspace/page.tsx',
+    'apps/site/tests/browser-workspace-read.mjs','apps/site/tests/fixtures/workspace-server.py',
+    'apps/site/tests/fixtures/workspace-status.tsx','apps/site/tests/fixtures/workspace-status.html',
+)
+WORKSPACE_PATH = 'evidence/workspace-read-2026-10-28/browser-workspace-read.json'
+
+def check_workspace_read(root):
+    report=json.loads(_read(root,WORKSPACE_PATH))
+    if set(report.get('source_sha256',{}))!=set(WORKSPACE_SOURCES):raise EvidenceError('workspace_exact_sources_required')
+    for path in WORKSPACE_SOURCES:
+        if report['source_sha256'][path]!=hashlib.sha256(_read(root,path)).hexdigest():raise EvidenceError('workspace_stale_source: '+path)
+    checks=report.get('checks',[])
+    if len(checks)!=4 or {(c.get('width'),c.get('locale')) for c in checks}!={(w,l) for w in (320,1280) for l in ('de','nl')}:raise EvidenceError('workspace_complete_matrix_required')
+    for c in checks:
+        if any(c.get(key) is not True for key in ('positive','reload','invalid','client_tenant_rejected','no_overflow')) or c.get('negative_sessions')!=5:raise EvidenceError('workspace_negative_proof_required')
+    if report.get('passed') is not True or report.get('persistent_state_unchanged') is not True or report.get('external')!=[] or report.get('errors')!=[]:raise EvidenceError('workspace_readonly_proof_required')
+    return {'scope':'isolated_synthetic_workspace_fixture_only','cases':4,'production_membership_verified':False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -403,6 +429,7 @@ def main():
         result["public_fallbacks"] = check_public_fallbacks(args.root)
         result["exceptions"] = check_exception_evidence(args.root)
         result["consent"] = check_consent_ui(args.root)
+        result["workspace"] = check_workspace_read(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T01:20:54.920Z",
+  "observed_at": "2026-10-28T01:52:19.373Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -46,6 +46,8 @@
     "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
     "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
     "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
+    "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
+    "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
     "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
     "apps/web/lib/page-types.ts": "e066fc6cbaabac8e98c02f26ee984e2f36a324b546421dd44ce737db696f2b85",

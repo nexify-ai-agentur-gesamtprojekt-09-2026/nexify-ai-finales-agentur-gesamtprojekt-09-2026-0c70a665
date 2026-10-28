@@ -1,0 +1,69 @@
+{
+  "scope": "isolated local shared UI and trusted fixture session boundary;not real provider or production membership",
+  "checks": [
+    {
+      "width": 320,
+      "locale": "de",
+      "positive": true,
+      "reload": true,
+      "invalid": true,
+      "negative_sessions": 5,
+      "client_tenant_rejected": true,
+      "no_overflow": true
+    },
+    {
+      "width": 320,
+      "locale": "nl",
+      "positive": true,
+      "reload": true,
+      "invalid": true,
+      "negative_sessions": 5,
+      "client_tenant_rejected": true,
+      "no_overflow": true
+    },
+    {
+      "width": 1280,
+      "locale": "de",
+      "positive": true,
+      "reload": true,
+      "invalid": true,
+      "negative_sessions": 5,
+      "client_tenant_rejected": true,
+      "no_overflow": true
+    },
+    {
+      "width": 1280,
+      "locale": "nl",
+      "positive": true,
+      "reload": true,
+      "invalid": true,
+      "negative_sessions": 5,
+      "client_tenant_rejected": true,
+      "no_overflow": true
+    }
+  ],
+  "source_sha256": {
+    "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
+    "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
+    "config/remediation-policy.json": "f32f8c29986d8abe01f62e5e3aecc325bc45dd52327d833288891e7b7c5de942",
+    "apps/web/auth/policy.ts": "ad7db99b0dc03d54bb94f9a667d93f2c2a9272504b7cf40e713753b7c5a1e1d7",
+    "tests/test_workspace_read.py": "8fc8efe1f0325cd24b392798aef2e3dc8157e7e52860ed86265785241f5fdea4",
+    "tests/test_local_control.py": "67bfc81f3d96e2d8b8c133907ce64bf4c5da46883ad9c11ee75105ee76f8d808",
+    "tools/app_backend.py": "86e433086cf7bf41c6bf0db7e8ed381b7b4224297a071a02b3569f8d9be37404",
+    "tools/local_control.py": "4cb356ca903920219b2212a6029672483e8b240ed6fa9166676f321bfaf1a26c",
+    "tools/remediation_queue.py": "c9fb0dfb4bc634e23774a622a9c38ba869764514bd8b9e64a92e54e9b3f98840",
+    "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
+    "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
+    "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
+    "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
+    "apps/web/app/intern/workspace/page.tsx": "d018e8263570649632e2bf7fb732fe6d4aa1ea78693de447bb8e275ae85f4e5e",
+    "apps/site/tests/browser-workspace-read.mjs": "ae26cdcbd615bd6981241dcd718d16b1f198182677d32dc8f63fcb6a4bb8a643",
+    "apps/site/tests/fixtures/workspace-server.py": "45d09f69887a0918c0c82c89042878bdf0889d1eebe2f5c211985a4c37cda2f6",
+    "apps/site/tests/fixtures/workspace-status.tsx": "4f1975cd560f5803388b3b608387b34f40c7f47c40a864bbf32e088c75b70bc8",
+    "apps/site/tests/fixtures/workspace-status.html": "9851f225b40e81ab10825dc7c8038ff1bec82653a0374337b9b8795818f6f68d"
+  },
+  "external": [],
+  "errors": [],
+  "persistent_state_unchanged": true,
+  "passed": true
+}

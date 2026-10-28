@@ -1104,3 +1104,22 @@ CI push40613517772 und PR40613522911 am4fc8753 scheiterten vor Tests/Build an ER
 PR-Triage erhält ausschließlich einen 5-Minuten-Jobtimeout; Labels, Berechtigungen und Fehlersichtbarkeit bleiben erhalten. Bound-AI-Review40613520613 ist blocked_not_reviewed wegen diff_or_metadata_limit_exceeded, automatic_retry_allowed:false. Keine Limits gelockert, keine manuelle Wiederholung, kein Providerrequest aus diesem blockierten Lauf belegt. OpenRouterkosten sind getrennt von Actions zu behandeln.
 
 Autorisierte Clerkübernahme ist abgeschlossen: ausschließlich zwei vorhandene Preview/Development-Werte nach web Preview, Metadatenreadback bestätigt, kein Wert im Repository oder Beleg. Vorhandene Schlüssel sind Testmodus; der bestehende Production-Buildguard akzeptiert diese auch im Preview nicht. Login-/Tenantfunktion bleibt deshalb offen, keine Productionregel gelockert. VercelPreview4fc8753 für canonical und web ist BLOCKED; keine Autorumschreibung oder Deploymentumgehung. Remote-Push/PR/CI im genehmigten10USD-Rahmen bis07:00UTC, keine Main-/Prod-/Domainänderung oder Libraryübertragung.
+
+## Begrenzter Arbeitsplatz-Readschnitt · 28.10.2026
+
+PORTAL-LOCAL-READ-01 auf e2e90e0: reine SQLite-status_snapshot ohne Gapmutation,
+serverseitige Rollen-/Tenant-/Projekt-/Ablauf-/Widerrufsprüfung an der bestehenden
+LocalAppBackend-Grenze, begrenzte DTOs und gemeinsame DE/NL-Status-/Freigabenansicht
+unter /intern/workspace. Die interne API ist zusätzlich geschützt und ohne echte
+Backend-/Membershipbindung weiterhin geschlossen. Keine Geschäftsfreigabe oder
+Mutation durch die Ansicht. Technische Reviewreceipts sind vorhanden; Budgetwerte
+bleiben unbekannt statt aus technischen Limits erfunden.
+
+Fokustests und reale lokale Browser→HTTP→persistente Controllerfixture laufen mit
+synthetischen Sessions; kein realer Providerzugriff. Review fand entweichende
+DB-/Dateifehler und irreführenden aggregierten In-Bearbeitung-Status ohne Worker:
+neutral503/no-store und tatsächliche Offenen-/Reviewzustände korrigiert und separat
+nachgeprüft. Vier Browserfälle mit20negativen Sessions,108Resizechecks,502Python-,
+62Site-,13Nexttests sowie alle vier lokalen Gesamtgates bestanden. ExakteCommit-
+REA/Reviewbelege werden separat an den gesicherten Endhash gebunden. API-/Clerk-Membership und vollständiger Arbeitsplatz bleiben Livegates.
+Kein Diff-Limit-/Previewguard-/Credential-/Server-/Domainwechsel.

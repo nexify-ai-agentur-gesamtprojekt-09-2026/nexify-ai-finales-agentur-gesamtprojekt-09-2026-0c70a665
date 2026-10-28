@@ -383,6 +383,10 @@
   },
   "navigation": true,
   "source_sha256": {
+    "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
+    "apps/web/auth/policy.ts": "ad7db99b0dc03d54bb94f9a667d93f2c2a9272504b7cf40e713753b7c5a1e1d7",
+    "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
+    "apps/web/app/intern/workspace/page.tsx": "d018e8263570649632e2bf7fb732fe6d4aa1ea78693de447bb8e275ae85f4e5e",
     "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
     "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
@@ -392,7 +396,7 @@
     "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
     "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
     "apps/web/components/SiteFooter.tsx": "e575e1f8e842a4069447429a1ab3ae75c8b6591611ad228a35a58220321d8e45",
-    "apps/web/auth/tests/browser-public-experience.mjs": "32568480f7db6a4cbabaf99a34c93456f3b07a0fc5ccdd16304816ca355aa8c0"
+    "apps/web/auth/tests/browser-public-experience.mjs": "ac1710eebf128eab2a06d149d2e322b9e1a92ab76a83b496136e34d1ca70bc43"
   },
   "auth_mobile": [
     {
@@ -420,5 +424,6 @@
       "passed": true
     }
   ],
+  "internal_workspace_api_unbound_503": true,
   "passed": true
 }

@@ -234,3 +234,19 @@ class ConsentUIEvidenceTests(unittest.TestCase):
         with self.assertRaisesRegex(checker.EvidenceError,'complete_matrix'):checker.check_consent_ui(self.root)
         original['external_events_sent']=1;path.write_text(json.dumps(original))
         with self.assertRaisesRegex(checker.EvidenceError,'local_no_errors'):checker.check_consent_ui(self.root)
+
+    def test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads(self):
+        paths=(*checker.WORKSPACE_SOURCES,checker.WORKSPACE_PATH)
+        for rel in paths:
+            target=self.root/rel;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/rel).read_bytes())
+        self.assertEqual(checker.check_workspace_read(self.root)['cases'],4)
+        source=self.root/'tools/app_backend.py';old=source.read_bytes();source.write_bytes(old+b'\n# drift\n')
+        with self.assertRaisesRegex(checker.EvidenceError,'workspace_stale'):checker.check_workspace_read(self.root)
+        source.write_bytes(old);path=self.root/checker.WORKSPACE_PATH;original=json.loads(path.read_text())
+        for mutate in ('negative','state','external'):
+            changed=copy.deepcopy(original)
+            if mutate=='negative':changed['checks'][0]['negative_sessions']=0
+            elif mutate=='state':changed['persistent_state_unchanged']=False
+            else:changed['external']=['synthetic.invalid']
+            path.write_text(json.dumps(changed))
+            with self.assertRaises(checker.EvidenceError):checker.check_workspace_read(self.root)
