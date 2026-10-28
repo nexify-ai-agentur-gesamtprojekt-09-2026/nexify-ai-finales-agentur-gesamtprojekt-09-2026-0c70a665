@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-28T00:33:40.482Z",
+  "recorded_at": "2026-10-28T13:10:52.248Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -51,7 +51,7 @@
     "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
     "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
-    "apps/web/components/HomeContent.tsx": "74b12a12c43d9386a4f420b444911d7c788d7b615f180d9883ba8b4699f5a44a",
+    "apps/web/components/HomeContent.tsx": "883679f1fc4b1b71ea95b18550310046087b54d53b6ca86278b7499e9c20d97b",
     "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
@@ -70,7 +70,7 @@
     "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
-    "apps/site/tests/browser-critical.mjs": "14294b5d2edf658b9aaf3b20a8d608668c6ef20ce069409e972a0d057e5f27aa"
+    "apps/site/tests/browser-critical.mjs": "7e84c087b847b00eea328f4dc6349b89cc8024c3cbbfe02d555fd34ea3d46c50"
   },
   "sdk_source_sha256": {
     "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
@@ -136,7 +136,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-28T00:33:40.482Z",
+    "recorded_at": "2026-10-28T13:10:52.248Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
@@ -147,53 +147,53 @@
   },
   "presenter_measurements": [
     {
-      "width": 591.84375,
+      "width": 189.28125,
       "fit": "contain",
-      "left": 46.078125,
+      "left": 448.640625,
       "right": 637.921875,
-      "parentLeft": 46.078125,
+      "parentLeft": 448.640625,
       "parentRight": 637.921875,
-      "height": 394.5625,
+      "height": 189.28125,
       "overflow": false
     },
     {
-      "width": 385.015625,
+      "width": 120.328125,
       "fit": "contain",
-      "left": 497.390625,
-      "right": 882.40625,
-      "parentLeft": 497.390625,
-      "parentRight": 882.40625,
-      "height": 256.671875,
+      "left": 762.0625,
+      "right": 882.390625,
+      "parentLeft": 762.0625,
+      "parentRight": 882.390625,
+      "height": 120.328125,
       "overflow": false
     },
     {
-      "width": 452.328125,
+      "width": 142.78125,
       "fit": "contain",
-      "left": 577.28125,
+      "left": 886.828125,
       "right": 1029.609375,
-      "parentLeft": 577.28125,
+      "parentLeft": 886.828125,
       "parentRight": 1029.609375,
-      "height": 301.546875,
+      "height": 142.78125,
       "overflow": false
     },
     {
-      "width": 503.859375,
+      "width": 159.953125,
       "fit": "contain",
-      "left": 640.140625,
+      "left": 984.046875,
       "right": 1144,
-      "parentLeft": 640.140625,
+      "parentLeft": 984.046875,
       "parentRight": 1144,
-      "height": 335.90625,
+      "height": 159.953125,
       "overflow": false
     },
     {
-      "width": 623.078125,
+      "width": 199.6875,
       "fit": "contain",
-      "left": 776.921875,
-      "right": 1400,
-      "parentLeft": 776.921875,
-      "parentRight": 1400,
-      "height": 415.375,
+      "left": 1200.296875,
+      "right": 1399.984375,
+      "parentLeft": 1200.296875,
+      "parentRight": 1399.984375,
+      "height": 199.6875,
       "overflow": false
     }
   ],

@@ -1,3 +1,25 @@
+# Bildzwischenlösung und öffentliche Build-Konfiguration · ab 702e670
+
+NeuestePriorität: Bilder zuerst.49Slots/36öffentlicheRouten mit12Pascal-,16NeX-
+und21AIFly-Referenzen; echte unveränderteOriginale angesehen/hashgebunden.
+HeroohnealteOrb; keinPlayversprechen, Filmfreigabenweiteroffen. Aktueller
+DE/NL/Mobil/Desktopnachweis und unabhängiger Bildreview werden zum Endcommit
+gebunden. RootTypeScript/Build-/Lintchecks ergänzt; SentryTS2353 lokal NICHT
+reproduziert, daher keinVercelheilungsnachweis. Autor-/ClerkDNS-/CSP-/Livegates
+bleibenoffen. KeinPush/CI/Deployment/Upload/ENV-/Credential-/DNS-/Serverwrite.
+
+Sauberer Ausgangscommit702e670 vorhanden. Kanonische Vite-Root-/Outputkonfiguration
+korrekt; Next-API-Rewriteverdacht nicht bestätigt, keine Routingänderung.
+Bestätigter Offlinefehler: Companion-Original fehlte in der Inline-Liste und
+dekodierte im frischen Standalone-Browser mit0Pixeln. Liste korrigiert, Original
+unverändert;10Buildertests und tatsächliches512×512-Decoding grün. Keine CSPänderung.
+PostHog: bestehender SDK-Test jetzt zusätzlich gegen optimierte Vite-Ausgabe;
+Next ebenfalls echterProduktionsbuild. Je8Checks/4lokal abgefangeneSendeversuche,
+synthetischeRelease, keine externenEvents; keinDashboard-/Symbolicationnachweis.
+REA, unabhängige Delta-Gegenprüfung und Gesamtgates werden exakt zum Endcommit
+geführt. KeinPush/CI/Deployment/Upload/ENV-/Server-/Credential-/Domainwrite.
+GesamtstatusweiterREQUEST_CHANGES, CSPfreigabe und echteAuslieferung offen.
+
 # Sentry-Stichprobe: gezieltes lokales Delta nach Vollreview
 
 Ausgangspunkt e058ac3527c1348a1eaa086143135c74b7553cf5 bleibt erhalten.

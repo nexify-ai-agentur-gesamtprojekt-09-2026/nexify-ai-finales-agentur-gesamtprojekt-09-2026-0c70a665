@@ -5,6 +5,7 @@ import { SiteLink } from "./Router";
 import { useUI } from "./Workspace";
 import "./PresenterEditorial.css";
 import PresenterVideo,{isPublicVideo,type PublicVideo} from "./PresenterVideo";
+import PresenterScene from './PresenterScene';
 
 export type ExplainerModule = {
   id: string;
@@ -41,7 +42,8 @@ export default function ExplainerSections({ modules, pages, video, moduleVideos 
       const playable = isPublicVideo(moduleVideo,locale);
       const next = pages.find(page => page.id === module.next_action.target_id);
       const side = module.media_side === "right" ? "right" : "left";
-      return <section className={`editorial-module${playable ? ` has-video media-on-${side}` : ""}`} key={module.id}>
+      return <section className={`editorial-module ${playable?'has-video':'has-image'} media-on-${side}`} key={module.id}>
+        {!playable&&<div className="editorial-module-media"><PresenterScene speaker={module.speaker} title={module.title[locale]} locale={locale}/></div>}
         {playable && <div className="editorial-module-media">
           <figure>
             <PresenterVideo video={moduleVideo!} locale={locale}/>

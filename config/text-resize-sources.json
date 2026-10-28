@@ -25,6 +25,9 @@
     "apps/web/public/fonts/geist-latin.woff2",
     "apps/web/public/fonts/geist-mono-latin.woff2",
     "config/companion-avatar.json",
-    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png"
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
+    "config/interim-scene-images.json",
+    "apps/web/public/media/presenters/nex-toucan-121a804c.png",
+    "apps/web/public/media/presenters/pascal-original-6dd03834.png"
   ]
 }

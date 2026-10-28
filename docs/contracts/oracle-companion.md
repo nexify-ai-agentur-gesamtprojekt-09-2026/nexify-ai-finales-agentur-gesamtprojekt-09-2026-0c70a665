@@ -47,3 +47,11 @@ Hero,vorhandene Videos,Stimmenfreigabe,Runway-Budget,Clerk-Credentials,
 Mandantenrechte und Produktionskonfiguration bleiben außerhalb dieses Deltas.
 Rückweg:den isolierten UI-Commit revertieren;keine Datenmigration oder externe
 Mutation erforderlich. REA/Review müssen den exakten Quellstand benennen.
+# Standalone-Konfigurationsdelta 28.10.2026
+
+Der ursprüngliche Companion war in der Standalone-Einbettungsliste nicht enthalten.
+Ein frischer Offline-Build reproduzierte `naturalWidth:0`. Der Builder bettet nun
+dieselben unveränderten Originalbytes als PNG-Daten-URL ein; keine CSP-Änderung.
+Regressionen prüfen Bytegleichheit, fehlende Quelldatei und tatsächliches
+512×512-Decoding im Datei-Browser. Diese lokale Offline-Korrektur liefert weder
+ein Video noch eine Produktionsauslieferung.

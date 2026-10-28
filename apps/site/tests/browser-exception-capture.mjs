@@ -1,19 +1,42 @@
 // Real pinned browser SDK, actual application entry; all ingestion requests intercepted locally.
 import assert from 'node:assert/strict';
-import {createServer} from 'vite';
+import {createServer,preview} from 'vite';
 import {fileURLToPath} from 'node:url';
-import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile,readdir,access} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {spawn} from 'node:child_process';import {once} from 'node:events';import {createServer as portServer} from 'node:net';
+import {spawn,execFileSync} from 'node:child_process';import {once} from 'node:events';import {createServer as portServer} from 'node:net';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url)),repo=fileURLToPath(new URL('../../../',import.meta.url));
 const release='1'.repeat(40),originEnv={};const keys=['NEXIFY_RELEASE_SHA','NEXIFY_APP_ENV'];for(const k of keys)originEnv[k]=process.env[k];process.env.NEXIFY_RELEASE_SHA=release;process.env.NEXIFY_APP_ENV='test';
-const surface=process.env.NEXIFY_EXCEPTION_SURFACE==='next'?'next':'vite';let server,child,origin;
+const surface=process.env.NEXIFY_EXCEPTION_SURFACE==='next'?'next':'vite';const built=process.env.NEXIFY_EXCEPTION_BUILD==='1';let server,child,origin;
+const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+// The acceptance receipt is not a build input; including it would recursively hash this report.
+const inputPaths=[...new Set(execFileSync('git',['ls-files','-z','--','apps/site','apps/web','packages','config','tools/observability','package.json','pnpm-lock.yaml','pnpm-workspace.yaml'],{cwd:repo}).toString().split('\0').filter(p=>p&&p!=='config/acceptance-coverage.json'&&!/(?:^|\/)\.env(?:\.|$)/.test(p)).concat(['tsconfig.json','tsconfig.api.json']))];
+const inputHashes=async()=>Object.fromEntries(await Promise.all(inputPaths.map(async p=>[p,digest(await readFile(repo+p))])));
+const buildInputs=await inputHashes();
+async function artifacts(){
+ const paths=[];const base=repo+(surface==='next'?'apps/web/.next/static/':'apps/site/dist/');
+ async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){assert.equal(e.isSymbolicLink(),false);if(e.isDirectory())await walk(dir+e.name+'/');else if(e.isFile())paths.push(dir+e.name);}}
+ await walk(base);if(surface==='next'){await walk(repo+'apps/web/.next/server/');paths.push(repo+'apps/web/.next/BUILD_ID');}
+ return Object.fromEntries(await Promise.all(paths.filter(p=>!p.includes('/.next/server/route-cache/')).sort().map(async p=>[p.slice(repo.length),digest(await readFile(p))])));
+}
+if(surface==='next'||built){
+ for(const dir of [repo,repo+'apps/site/',repo+'apps/web/'])for(const name of ['.env','.env.local','.env.production','.env.production.local']){let exists=true;try{await access(dir+name);}catch(e){if(e.code==='ENOENT')exists=false;else throw e;}assert.equal(exists,false,'dotenv file present: use an isolated checkout;do not read or inherit its secrets');}
+ const env={PATH:process.env.PATH,LANG:'C.UTF-8',NEXT_TELEMETRY_DISABLED:'1',NEXIFY_RELEASE_SHA:release,NEXIFY_APP_ENV:'test',VITE_POSTHOG_PROJECT_TOKEN:'phc_synthetic_no_remote',NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN:'phc_synthetic_no_remote'};
+ const cwd=repo+(surface==='next'?'apps/web':'apps/site');
+ execFileSync(process.execPath,['scripts/generate-public-data.mjs'],{cwd,env,stdio:'pipe'});
+ if(surface==='vite')execFileSync(process.execPath,['node_modules/typescript/bin/tsc','--noEmit'],{cwd,env,stdio:'pipe'});
+ execFileSync(process.execPath,surface==='next'?['node_modules/next/dist/bin/next','build']:['node_modules/vite/bin/vite.js','build'],{cwd,env,stdio:'pipe',maxBuffer:4*1024*1024});
+ assert.deepEqual(await inputHashes(),buildInputs,'build must not change tracked inputs');
+}
+const buildArtifacts=surface==='next'||built?await artifacts():null;
 if(surface==='next'){
  const allocator=portServer();allocator.listen(0,'127.0.0.1');await once(allocator,'listening');const port=allocator.address().port;await new Promise(resolve=>allocator.close(resolve));
  child=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{cwd:repo+'apps/web',env:{PATH:process.env.PATH,NODE_ENV:'production',NEXT_TELEMETRY_DISABLED:'1'},stdio:'ignore'});origin='http://127.0.0.1:'+port;
  for(let n=0;n<100;n++){try{if((await fetch(origin)).ok)break;}catch{}if(n===99)throw new Error('local Next start timeout');await new Promise(resolve=>setTimeout(resolve,100));}
+}else if(built){
+ server=await preview({root,preview:{port:0,strictPort:false}});origin='http://127.0.0.1:'+server.httpServer.address().port;
 }else{
 server=await createServer({root,plugins:[{name:"local-synthetic-error-source",configureServer(server){server.middlewares.use((req,res,next)=>{if(req.url==='/src/synthetic-error.js'){res.setHeader('Content-Type','text/javascript');res.end(`export function boom(){setTimeout(()=>{throw new TypeError('synthetic private@example.test token=secret')},0)};export function reject(){setTimeout(()=>Promise.reject(new Error('synthetic private@example.test secret')),0)};`);}else next();});}}],server:{port:0,strictPort:false},define:{'import.meta.env.VITE_POSTHOG_PROJECT_TOKEN':'"phc_synthetic_no_remote"','import.meta.env.VITE_CLERK_ENABLED':'"false"'}});
 
@@ -24,7 +47,7 @@ const context=await browser.newContext({userAgent:'Mozilla/5.0 (X11; Linux x86_6
 // Model a consenting human for the SDK bot filter; this test is still explicitly synthetic.
 await context.addInitScript(()=>{Object.defineProperty(navigator,'webdriver',{get:()=>false});Object.defineProperty(navigator,'userAgentData',{get:()=>({brands:[{brand:'Chromium',version:'134'}],mobile:false,platform:'Linux'})});});let blockChat=false,ingestStatus=200;
 function decode(req){const data=req.postDataBuffer();try{return JSON.parse(data.toString());}catch{try{return JSON.parse(gunzipSync(data).toString());}catch{const p=new URLSearchParams(data.toString());const value=p.get('data');if(value)return JSON.parse(Buffer.from(value,'base64').toString());throw new Error('unsupported intercepted SDK wire encoding');}}}
-await context.route('**/*',route=>{const req=route.request(),u=new URL(req.url());if(u.origin==='https://eu.i.posthog.com'){requests.push(u.pathname);const d=decode(req);events.push(...(Array.isArray(d)?d:Array.isArray(d.batch)?d.batch:[d]));return route.fulfill({status:ingestStatus,json:{status:ingestStatus===200?1:0}});}if(u.origin!==origin){unexpected.push(u.origin);return route.abort();}if(blockChat&&(u.pathname.includes('PublicOrientationChat.tsx')||(surface==='next'&&u.pathname.startsWith('/_next/static/chunks/')&&u.pathname.endsWith('.js'))))return route.abort();if(u.pathname==='/src/synthetic-error.js')return route.fulfill({contentType:'text/javascript',body:`export function boom(){setTimeout(()=>{throw new TypeError('synthetic private@example.test token=secret')},0)};export function reject(){setTimeout(()=>Promise.reject(new Error('synthetic private@example.test secret')),0)};`});if(u.pathname==='/api/session')return route.fulfill({status:200,json:{csrf:'synthetic-local-only',history:[],capabilities:Object.fromEntries(['quote_pdf','pending_outbox','booking_request','marketing_template','email_delivery','external_calendar','model_chat','local_planning'].map(k=>[k,false]))}});if(u.pathname.startsWith('/api/'))return route.fulfill({status:503,json:{error:'synthetic_unavailable'}});return route.continue();});
+await context.route('**/*',route=>{const req=route.request(),u=new URL(req.url());if(u.origin==='https://eu.i.posthog.com'){requests.push(u.pathname);const d=decode(req);events.push(...(Array.isArray(d)?d:Array.isArray(d.batch)?d.batch:[d]));return route.fulfill({status:ingestStatus,json:{status:ingestStatus===200?1:0}});}if(u.origin!==origin){unexpected.push(u.origin);return route.abort();}if(blockChat&&(u.pathname.includes('PublicOrientationChat.tsx')||(surface==='next'&&u.pathname.startsWith('/_next/static/chunks/')&&u.pathname.endsWith('.js'))||(built&&u.pathname.startsWith('/assets/')&&u.pathname.endsWith('.js'))))return route.abort();if(u.pathname==='/src/synthetic-error.js')return route.fulfill({contentType:'text/javascript',body:`export function boom(){setTimeout(()=>{throw new TypeError('synthetic private@example.test token=secret')},0)};export function reject(){setTimeout(()=>Promise.reject(new Error('synthetic private@example.test secret')),0)};`});if(u.pathname==='/api/session')return route.fulfill({status:200,json:{csrf:'synthetic-local-only',history:[],capabilities:Object.fromEntries(['quote_pdf','pending_outbox','booking_request','marketing_template','email_delivery','external_calendar','model_chat','local_planning'].map(k=>[k,false]))}});if(u.pathname.startsWith('/api/'))return route.fulfill({status:503,json:{error:'synthetic_unavailable'}});return route.continue();});
 const page=await context.newPage(),checks=[];
 async function state(){return page.evaluate(()=>window[Symbol.for('nexify.exceptions.v1')]?.state());}
 try{
@@ -53,5 +76,9 @@ try{
 
  const sourceFiles=['apps/web/observability/exceptions.mjs','apps/site/src/observability.ts','apps/web/instrumentation-client.ts','apps/web/components/DeferredChatBoundary.tsx','apps/site/src/main.tsx','apps/site/tests/browser-exception-capture.mjs','apps/site/package.json','apps/web/package.json','pnpm-lock.yaml'];
  const hashes=Object.fromEntries(await Promise.all(sourceFiles.map(async p=>[p,createHash('sha256').update(await readFile(repo+p)).digest('hex')])));
- await mkdir(repo+'.local/observability-integration',{recursive:true});await writeFile(repo+'.local/observability-integration/browser-exceptions-'+surface+'.json',JSON.stringify({scope:'local actual '+surface+' SDK;all ingestion intercepted;synthetic release and human-like navigator;no external event',checks,events:events.length,external_events_sent:0,unexpected_origins:unexpected,synthetic:true,surface,source_sha256:hashes,passed:true},null,2)+'\n');console.log(JSON.stringify({surface,checks,events:events.length,passed:true}));
-}finally{await context.close();await browser.close();if(server)await server.close();if(child){child.kill('SIGTERM');await once(child,'exit');}for(const k of keys)if(originEnv[k]===undefined)delete process.env[k];else process.env[k]=originEnv[k];}
+ assert.deepEqual(await inputHashes(),buildInputs,'inputs changed while browser was running');
+ if(buildArtifacts)assert.deepEqual(await artifacts(),buildArtifacts,'served artifacts changed while browser was running');
+ const frames=events[0].properties.$exception_list.flatMap(e=>e.stacktrace.frames);
+ assert.ok(frames.some(f=>f.filename===origin+'/src/synthetic-error.js'&&Number.isInteger(f.lineno)),'controlled unhandled source location must survive redaction');
+ await mkdir(repo+'.local/observability-integration',{recursive:true});await writeFile(repo+'.local/observability-integration/browser-exceptions-'+surface+'.json',JSON.stringify({scope:'local actual '+surface+' SDK;all ingestion intercepted;synthetic release and human-like navigator;no external event',build_mode:surface==='next'||built?'optimized_production_output':'development',build_input_sha256:buildInputs,served_artifact_sha256:buildArtifacts,artifact_scope:'Vite dist or Next static+server build outputs+BUILD_ID;runtime route-cache excluded',fresh_build_performed:surface==='next'||built,release_sha:release,release_kind:'synthetic_test_release_not_delivered',controlled_unhandled_frames:frames,source_map_upload:false,dashboard_deobfuscation_verified:false,checks,events:events.length,external_events_sent:0,unexpected_origins:unexpected,synthetic:true,surface,source_sha256:hashes,passed:true},null,2)+'\n');console.log(JSON.stringify({surface,checks,events:events.length,passed:true}));
+}finally{await context.close();await browser.close();if(server){if(built)await new Promise(resolve=>server.httpServer.close(resolve));else await server.close();}if(child){child.kill('SIGTERM');await once(child,'exit');}for(const k of keys)if(originEnv[k]===undefined)delete process.env[k];else process.env[k]=originEnv[k];}

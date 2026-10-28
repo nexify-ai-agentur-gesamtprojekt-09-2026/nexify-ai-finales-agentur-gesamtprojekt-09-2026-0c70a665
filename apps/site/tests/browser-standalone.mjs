@@ -14,6 +14,11 @@ await page.route('**/*',route=>{
 });
 try{
  await page.goto(artifact.href);await page.locator('#locale').waitFor();
+ const avatars=page.locator('.oracle-companion img');assert.ok(await avatars.count()>0);
+ for(const avatar of await avatars.all()){
+  await avatar.evaluate(img=>img.decode());
+  assert.deepEqual(await avatar.evaluate(img=>({data:img.src.startsWith('data:image/png;base64,'),width:img.naturalWidth,height:img.naturalHeight})),{data:true,width:512,height:512});
+ }
  await page.evaluate(()=>location.hash='#/anmelden');await page.locator('.auth-fallback').waitFor();
  for(const locale of ['nl','fr','de']){
   await page.locator('#locale').selectOption(locale);
