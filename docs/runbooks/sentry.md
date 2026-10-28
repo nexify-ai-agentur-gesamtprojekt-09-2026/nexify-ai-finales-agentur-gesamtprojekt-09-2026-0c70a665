@@ -37,7 +37,38 @@ SENTRY_DSN nur für ausdrücklich gefangene unerwartete API-Fehler. Automatische
 Integrationen/Tracing sind aus; `beforeSend` ersetzt Rohfehler durch einen neutralen
 Fehlerdatensatz ohne Request/User/Breadcrumbs. Das ist kein getesteter Versandweg.
 `scripts/sentry-health.sh` bleibt ein manuell auszuführendes historisches Hilfsmittel,
-kein neu aktivierter Dienst und kein Beleg tatsächlicher Projektzuordnung.
+kein neu aktivierter Dienst und kein Beleg tatsächlicher Projektzuordnung. Der
+Wrapper ruft `scripts/sentry_health.py` auf. Dieser liest pro festem Projekt nur
+eine Seite mit höchstens einem Issue (maximal 64 KiB, Socket-Timeout 15 Sekunden,
+keine Wiederholungen, Redirects oder Link-Verfolgung). Keine Rohdaten werden
+ausgegeben oder gespeichert. Das bestehende Token wird nur im Requestheader
+verwendet; keine neuen Credentials oder Projektzuordnungen.
+
+Die JSONL-Ausgabe meldet immer `complete:false`, `total:null` und bei gültiger
+Antwort `status:partial` sowie `unresolved_lower_bound:0` oder `1`. Null Issues in
+der Stichprobe sind **kein Nachweis für Fehlerfreiheit**. Fehlende/fremde
+Projekt-Slugs, fehlende Issue-ID, falscher Status, fehlerhafte/gekürzte/übergroße
+Antworten oder Transportfehler ergeben `unavailable` mit unbekannter Untergrenze
+und Exit 1. Exit 0 bedeutet nur: beide Stichproben konnten geprüft werden.
+
+`source`, `requested_project`, `observed_at` und die angefragten Parameter bleiben
+sichtbar. `statsPeriod=24h` wählt bei diesem Projekt-Issues-Endpoint nur die
+Timeline-Statistik, nicht eine Suche ausschließlich nach Issues der letzten
+24 Stunden. Deshalb entfällt die irreführende Kennzahl `unresolved_24h`.
+Primärquelle: [Sentry: List a Project's Issues](https://docs.sentry.io/api/events/list-a-projects-issues/),
+gelesen 28.10.2026. Der Endpoint ist dort als deprecated dokumentiert; eine
+Umstellung auf Organization-Issues benötigt separat bestätigte Projektbindung.
+Projekt-Slug im Body wird geprüft, Organisation stammt aus dem angefragten Pfad;
+leere Antworten haben nur Requestbindung. Keine autoritative Organisation-,
+Release-, Domain- oder Browserfunktionsabnahme aus diesem Sample ableiten.
+Synthetische Health-Events und echte Browserexceptions werden hier nicht
+klassifiziert; beide Nachweise bleiben ausdrücklich `not_evaluated`.
+
+Offline-Regression: `python3 -m unittest discover -s tests -p test_sentry_health.py -v`.
+Die Fixtures erzeugen weder echte Events noch API-Aufrufe. Bestehende externe
+Parser müssten bei geplanter Runtimeübernahme auf das neue explizite JSONL-Schema
+umgestellt werden; im kanonischen Repository ist kein automatischer Verbraucher
+des alten `unresolved_24h`-Textformats vorhanden. Keine Serverumstellung erfolgt.
 
 Prüfung: `node --test apps/site/tests/exception-privacy.test.mjs` und
 `private-sourcemaps.test.mjs`; Browserregression

@@ -1,3 +1,15 @@
+# Sentry-Stichprobe: gezieltes lokales Delta nach Vollreview
+
+Ausgangspunkt e058ac3527c1348a1eaa086143135c74b7553cf5 bleibt erhalten.
+C-P2-SENTRY-COUNT: Das manuelle Hilfsskript meldet eine begrenzte, ausdrücklich
+unvollständige Issue-Stichprobe statt einer falschen Gesamtzahl. Null Treffer
+beweisen keine Fehlerfreiheit; Source/Projekt/Abrufzeit und Timelineparameter sind
+explizit, synthetische Health-Events und Browserexceptions bleiben unklassifiziert.
+Keine externen Requests, Rohdaten, Server-/Secret-/CSPänderungen oder Auslieferung.
+Lokale Fixtures und Delta-Gegenprüfung werden an einen eigenen Endcommit gebunden;
+das Vollreview für e058 bleibt unverändert und wird nicht auf neue Hashes umgedeutet.
+C-P1-CSP bleibt gesperrt/offen; Gesamtstatus REQUEST_CHANGES.
+
 # Vorhandener Katalog und lokaler Produktbild-Batch
 
 Current State: v11/8975ba4 unverändert auf eigenemRemotezweig gesichert.
