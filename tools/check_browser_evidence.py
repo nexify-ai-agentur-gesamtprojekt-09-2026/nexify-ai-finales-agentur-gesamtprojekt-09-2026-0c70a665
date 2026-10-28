@@ -308,6 +308,40 @@ def check_public_fallbacks(root):
     return {'scope': 'stored_local_synthetic_public_failure_evidence_only', 'checks': len(expected)}
 
 
+EXCEPTION_SOURCES = (
+    'apps/web/observability/exceptions.mjs', 'apps/site/src/observability.ts',
+    'apps/web/instrumentation-client.ts', 'apps/web/components/DeferredChatBoundary.tsx',
+    'apps/site/src/main.tsx', 'apps/site/tests/browser-exception-capture.mjs',
+    'apps/site/package.json', 'apps/web/package.json', 'pnpm-lock.yaml',
+)
+EXCEPTION_CHECKS = {
+    'no_initialization_or_requests_without_consent', 'real_sdk_unhandled_error_intercepted',
+    'real_sdk_unhandled_rejection_intercepted', 'actual_chat_boundary_reported_once_shell_preserved',
+    'only_redacted_exception_events_no_cookies_identity_or_other_requests',
+    '503_retry_and_immediate_reconsent_stay_blocked_until_reload',
+    'unload_cannot_bypass_aborted_consent', 'revocation_and_debug_query_create_no_persistent_sdk_state',
+}
+
+def check_exception_evidence(root):
+    for surface in ('vite', 'next'):
+        path = f'evidence/observability-integration-2026-10-28/browser-exceptions-{surface}.json'
+        report = json.loads(_read(root, path))
+        sources = report.get('source_sha256', {})
+        if set(sources) != set(EXCEPTION_SOURCES):
+            raise EvidenceError('exception_exact_sources_required')
+        for relative in EXCEPTION_SOURCES:
+            if hashlib.sha256(_read(root, relative)).hexdigest() != sources[relative]:
+                raise EvidenceError('stale_exception_source: ' + relative)
+        if (report.get('surface') != surface or report.get('passed') is not True
+                or report.get('synthetic') is not True or report.get('events') != 4
+                or len(report.get('checks', [])) != len(EXCEPTION_CHECKS)
+                or set(report.get('checks', [])) != EXCEPTION_CHECKS):
+            raise EvidenceError('exception_complete_surface_checks_required')
+        if report.get('external_events_sent') != 0 or report.get('unexpected_origins') != []:
+            raise EvidenceError('exception_local_intercept_only_required')
+    return {'scope': 'stored_local_actual_sdk_intercept_only', 'surfaces': 2, 'checks_per_surface': 8}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -317,6 +351,7 @@ def main():
         result["shop"] = check_shop_evidence(args.root)
         result["catalog"] = check_catalog_evidence(args.root)
         result["public_fallbacks"] = check_public_fallbacks(args.root)
+        result["exceptions"] = check_exception_evidence(args.root)
     except EvidenceError as error:
         print("Browser evidence binding failed: " + str(error), file=sys.stderr)
         return 1

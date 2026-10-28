@@ -1039,3 +1039,31 @@ Neue Push-/CI-Läufe wegen ungeklärter Actions-Folgekosten pausiert; letzter
 GitHub-Metadatenabruf401,kein Identitätswechsel. Lokal auf Basis a708a2d; kein
 Produktionsfix behauptet. Finale lokale Gates,REA und unabhängiges Review werden
 mit dem exakten Nachtragscommit im bereinigten Übergabemanifest verbunden.
+
+
+## Rein lokale Observability-Konsolidierung · 28.10.2026
+
+Neuer Integrationszweig verbindet Rückweg88f965b mit exakt696c0d2; fremder
+Branch und Produktion unverändert. Neuere Shared-Shell/Avatar/Next- und drei
+Frontendfehlerkorrekturen erhalten. Public-session204, kompatible Metadaten/CSP
+und Server-Sentry übernommen; keine CSP-Lockerung, keine aktive Connect-Tokenprobe
+oder zusätzliche Pageviewcalls. Ein gemeinsamer PostHog-Exceptioncontroller für
+Vite/Next bleibt ohne explizites Consentmanager-Signal,Token,SHA und Environment
+aus. Tatsächliche Consentoberfläche noch nicht verbunden.
+
+Echtes gepinntes SDK lokal interceptet: jeVite/Next acht Prüffälle und vier
+Wireversuche (drei positiveFehler,ein absichtlicher503),kein externesEvent.
+UnhandledError/Rejection,Chat-Boundary,Redaction,Release,keinConsent-Verkehr und
+keineSDKpersistenz geprüft. Review fand SDK-Retry-Consentlücke: dauerhaft
+abortiertes Signal und endgültiger Widerruf bisNeuladen verhindern auch nach
+unmittelbarererneuterEinwilligung alteRetries/Unload. Kein Signalwechsel,kein
+Queuehack. Debugfalse und Releasekonflikt-Negativtest ergänzt,nachgeprüft.
+
+Private Mapbuilds:Vite5/Next17Maps in eigener privater Ablage,0Mapsöffentlich;
+kein Upload. Plugin-/Debug-ID-/CI-Secret-/Deobfuskationsbeleg und tatsächlich
+ausgelieferte Releasebindung bleiben extern/offen. Details:docs/runbooks/sentry.md
+unddocs/contracts/observability-local-integration.md. Lokale Gesamtgates,REA und
+exakter unabhängiger Review werden dem finalen Integrationscommit zugeordnet.
+Keine Pushes/CI/Uploads/externen Testevents/Deployment/Domain- oder Secretaktion.
+Next steps: finalenlokalenStand prüfen/sichern;parentklärtWriterübergabe,
+GitHub401,Actionskosten,Consent-/Release-/Uploadbindung undProduktionsfreigabe.

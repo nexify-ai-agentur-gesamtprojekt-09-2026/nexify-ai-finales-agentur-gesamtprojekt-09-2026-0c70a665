@@ -189,3 +189,29 @@ class PublicFallbackEvidenceTests(unittest.TestCase):
         original['mutations'] = 1; path.write_text(json.dumps(original))
         with self.assertRaisesRegex(checker.EvidenceError, 'no_external_uncaught_or_mutations'):
             checker.check_public_fallbacks(self.root)
+
+
+class ExceptionEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*checker.EXCEPTION_SOURCES, *(f'evidence/observability-integration-2026-10-28/browser-exceptions-{s}.json' for s in ('vite', 'next'))):
+            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+
+    def test_source_drift_cannot_survive_consent_proof(self):
+        self.assertEqual(checker.check_exception_evidence(self.root)['surfaces'], 2)
+        path = self.root / 'apps/web/observability/exceptions.mjs'
+        path.write_bytes(path.read_bytes() + b'\n/* changed transport */')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_exception_source'):
+            checker.check_exception_evidence(self.root)
+
+    def test_missing_retry_proof_or_claimed_external_event_rejected(self):
+        path = self.root / 'evidence/observability-integration-2026-10-28/browser-exceptions-next.json'
+        report = json.loads(path.read_text()); original = copy.deepcopy(report)
+        report['checks'].pop(); path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError, 'complete_surface'):
+            checker.check_exception_evidence(self.root)
+        original['external_events_sent'] = 1; path.write_text(json.dumps(original))
+        with self.assertRaisesRegex(checker.EvidenceError, 'local_intercept_only'):
+            checker.check_exception_evidence(self.root)

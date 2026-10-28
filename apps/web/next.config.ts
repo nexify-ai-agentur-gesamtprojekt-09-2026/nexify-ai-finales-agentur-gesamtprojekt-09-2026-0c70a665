@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
+import {mapPolicy,escrowMaps} from "../../tools/observability/private-sourcemaps.mjs";
+import {resolve} from "node:path";
+const maps=mapPolicy(process.env,"next",resolve(import.meta.dirname,"../.."));
 const config: NextConfig = {
+  env:{NEXT_PUBLIC_RELEASE_SHA:maps.release,NEXT_PUBLIC_APP_ENV:process.env.VERCEL_ENV||process.env.NEXIFY_APP_ENV||""},
+  productionBrowserSourceMaps:maps.enabled,
+  compiler:maps.enabled?{runAfterProductionCompile:async({distDir})=>{await escrowMaps(resolve(distDir,"static"),maps);}}:undefined,
   poweredByHeader: false,
   images: { unoptimized: true },
   async rewrites() {

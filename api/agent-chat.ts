@@ -1,6 +1,7 @@
 /** Vercel Node 22 Web handler. Public guided preview: no model, session, persistence or write tools. */
 import { createUIMessageStream, createUIMessageStreamResponse } from 'ai';
 import { InputError, publicOrientation, validateOrientationInput } from '../packages/agent-runtime/public-orientation.ts';
+import { captureServerError, flush } from '../packages/observability/sentry-server.ts';
 
 const MAX_BYTES = 16 * 1024;
 const BODY_DEADLINE_MS = 5000;
@@ -68,6 +69,7 @@ async function fetchHandler(request: Request): Promise<Response> {
     }, onError: () => 'public_orientation_unavailable' });
     return createUIMessageStreamResponse({ stream, headers: HEADERS });
   } catch (error) {
+    if (!(error instanceof InputError)) { captureServerError(error, { route: '/api/agent-chat' }); await flush(); }
     return Response.json({ error: error instanceof InputError ? error.message : 'public_orientation_unavailable' },
       { status: error instanceof InputError ? error.status : 500, headers: HEADERS });
   }

@@ -1,0 +1,30 @@
+{
+  "scope": "local actual next SDK;all ingestion intercepted;synthetic release and human-like navigator;no external event",
+  "checks": [
+    "no_initialization_or_requests_without_consent",
+    "real_sdk_unhandled_error_intercepted",
+    "real_sdk_unhandled_rejection_intercepted",
+    "actual_chat_boundary_reported_once_shell_preserved",
+    "only_redacted_exception_events_no_cookies_identity_or_other_requests",
+    "503_retry_and_immediate_reconsent_stay_blocked_until_reload",
+    "unload_cannot_bypass_aborted_consent",
+    "revocation_and_debug_query_create_no_persistent_sdk_state"
+  ],
+  "events": 4,
+  "external_events_sent": 0,
+  "unexpected_origins": [],
+  "synthetic": true,
+  "surface": "next",
+  "source_sha256": {
+    "apps/web/observability/exceptions.mjs": "e093c42afa6bd72f2faef2b398bf17cdb40ce9b554b5695e0a5d868a9ada73f5",
+    "apps/site/src/observability.ts": "b42fcb14289b34a6295fea642438a2b0b12196fdd67317bf1836c0a2db87631d",
+    "apps/web/instrumentation-client.ts": "a38c34638acdc2be58083e34a234ee07f6fb821ebbf3a90be6eb2da8f3db4656",
+    "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+    "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
+    "apps/site/tests/browser-exception-capture.mjs": "2191f674c95a77b7cef59b62facd391170029265f2cbfbf068c093f5f05ba7eb",
+    "apps/site/package.json": "f01fd92260ab3660aa56ef413db165662376066756948418e6fe0fd403a97c99",
+    "apps/web/package.json": "e75bdd912ab632ae129662fad032b5aa1c00c67648fb5bcbaae7140c3693e852",
+    "pnpm-lock.yaml": "80e90f3eef1111b42b73f53814c346bae2e01c6b5f5ab30d063b42a0f59c177e"
+  },
+  "passed": true
+}

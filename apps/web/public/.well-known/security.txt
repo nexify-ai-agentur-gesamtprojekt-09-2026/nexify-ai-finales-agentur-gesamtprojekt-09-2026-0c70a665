@@ -1,0 +1,5 @@
+Contact: mailto:mail@nexifyai.cloud
+Expires: 2027-10-27T00:00:00Z
+Preferred-Languages: de, en, nl
+Canonical: https://www.nexifyai.de/.well-known/security.txt
+Policy: https://www.nexifyai.de/ki-hinweise
