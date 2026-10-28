@@ -235,6 +235,12 @@ class ConsentUIEvidenceTests(unittest.TestCase):
         original['external_events_sent']=1;path.write_text(json.dumps(original))
         with self.assertRaisesRegex(checker.EvidenceError,'local_no_errors'):checker.check_consent_ui(self.root)
 
+    def test_mail_fail_closed_proof_cannot_be_omitted(self):
+        path=self.root/checker.NEXT_CONSENT_PATH;report=json.loads(path.read_text())
+        report.pop('internal_mail_api_unbound_503',None);path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError,'internal_mail_fail_closed'):
+            checker.check_consent_ui(self.root)
+
     def test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads(self):
         paths=(*checker.WORKSPACE_SOURCES,checker.WORKSPACE_PATH)
         for rel in paths:

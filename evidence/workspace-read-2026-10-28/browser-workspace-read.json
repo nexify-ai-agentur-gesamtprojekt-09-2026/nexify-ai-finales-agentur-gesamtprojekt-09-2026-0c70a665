@@ -56,7 +56,7 @@
     "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
     "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
-    "apps/web/app/intern/workspace/page.tsx": "d018e8263570649632e2bf7fb732fe6d4aa1ea78693de447bb8e275ae85f4e5e",
+    "apps/web/app/intern/workspace/page.tsx": "f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe",
     "apps/site/tests/browser-workspace-read.mjs": "ae26cdcbd615bd6981241dcd718d16b1f198182677d32dc8f63fcb6a4bb8a643",
     "apps/site/tests/fixtures/workspace-server.py": "45d09f69887a0918c0c82c89042878bdf0889d1eebe2f5c211985a4c37cda2f6",
     "apps/site/tests/fixtures/workspace-status.tsx": "4f1975cd560f5803388b3b608387b34f40c7f47c40a864bbf32e088c75b70bc8",

@@ -356,7 +356,7 @@ LOCALE_BRIDGE_SOURCES = (
 LOCALE_BRIDGE_PATH = 'evidence/consent-ui-2026-10-28/next-clerk-locale.json'
 
 NEXT_CONSENT_SOURCES = (
-    'apps/web/proxy.ts','apps/web/auth/policy.ts','apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/intern/workspace/page.tsx',
+    'apps/web/proxy.ts','apps/web/auth/policy.ts','apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/api/internal/workspace/mail/route.ts','apps/web/app/intern/workspace/page.tsx',
     'apps/web/components/AuthAvailabilityNotice.tsx','apps/web/components/LocaleAwareClerk.tsx',
     'apps/web/auth/public-provider.ts','apps/web/app/layout.tsx',
     'apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx',
@@ -380,6 +380,7 @@ def check_consent_ui(root):
     if locale.get('passed') is not True or len(locale.get('checks',[]))!=4 or pairs!={('de','de-DE'),('nl','nl-NL'),('fr','fr-FR'),('unknown','de-DE')} or locale.get('external')!=0 or locale.get('errors')!=[]:raise EvidenceError('locale_bridge_complete_fixture_required')
     next_report=json.loads(_read(root,NEXT_CONSENT_PATH))
     if next_report.get('internal_workspace_api_unbound_503') is not True:raise EvidenceError('internal_workspace_fail_closed_proof_required')
+    if next_report.get('internal_mail_api_unbound_503') is not True:raise EvidenceError('internal_mail_fail_closed_proof_required')
     if set(next_report.get('source_sha256',{}))!=set(NEXT_CONSENT_SOURCES):raise EvidenceError('next_consent_exact_sources_required')
     for path in NEXT_CONSENT_SOURCES:
         if hashlib.sha256(_read(root,path)).hexdigest()!=next_report['source_sha256'][path]:raise EvidenceError('stale_next_consent_source: '+path)

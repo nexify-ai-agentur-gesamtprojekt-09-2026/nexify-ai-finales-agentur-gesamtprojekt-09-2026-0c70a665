@@ -1,3 +1,11 @@
+## MAIL-LOCAL-01 · Mail-Arbeitsplatz · 28.10.2026
+
+- Basis c58ad90 bleibt erhalten; derselbe Webwriter, disjunkte Kern-/UI-Umsetzung und unabhängige Sol-Gegenprüfung. Keine Pushes, externen Uploads, CI, Provideraufrufe oder Produktionsänderungen.
+- Gemeinsame geschützte Workplace-Komponente: getrennte Gmail-/Hostinger-Konten, sichere Text-/Anhangmetadaten, Reply/Reply-all/Forward, getrennte Signaturen, persistente vorbereitete Entwürfe mit wieder lesbarem Inhalt, lokale Read-/Task-/Archiv-Undo-Zustände. Bestehende Session-/Rollenprüfung und dieselbe Datenbank, kein SMTP-/Legacy-Mailpfad.
+- Echte Next-Mailroute bleibt503 hinter unveränderter Auth-/Membershipgrenze; keine Fakeverbindung oder Versandanzeige. Fehlende App-Connector-/Mailbox-/Transportbindung, Dispatchzustände und Provider-Reconciliation bleiben offen. Der separat gemeldete Hostingerwebhook ist disabled, kein Handler im Checkout; keine Reaktivierung oder DNSänderung.
+- Fokussierte lokale Unit-/Browser-/Typprüfungen und Nachprüfung der korrigierten Sol-Findings am endgültigen Stand; exakte Resultate im lokalen Übergabebeleg. Full- und Browserbelege sind synthetische Tests, keine privaten Providerdaten oder reale Zustellabnahme.
+- Next Steps: Mail-/Identity-/Runtimeowner verifiziert bestehende Konto-/Mailboxrechte und tatsächlichen API-/Webhooktransport; vor Dispatch unknown-outcome-Abgleich und begrenzte Provider-Retries. Akzeptierte Identity-V1-Herogestaltung als gesonderter nächster Codeauftrag, unveränderte Originalassets, noch kein Rollout.
+
 ## Rechtsfußzeile · FR-Nachweisergänzung nach 689e140 · 28.10.2026
 
 - Beide CIs an689e140 abgeschlossen erfolgreich. CodeRabbit am selben SHA terminal; künftige automatische Reviews laut dessen Kommentar pausiert, nicht durch uns umgestellt. Cubic4402490598 bestätigt eine Abdeckungslücke: vorhandene FR-Texte waren nur statisch geprüft, kein belegter Laufzeitfehler.
