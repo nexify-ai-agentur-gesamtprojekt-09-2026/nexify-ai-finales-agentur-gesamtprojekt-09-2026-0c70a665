@@ -51,10 +51,12 @@ class BrowserEvidenceTests(unittest.TestCase):
             checker.check_evidence(self.root)
 
     def test_stylesheet_drift_cannot_reuse_an_old_browser_pass(self):
-        path = self.root / "apps/web/components/WorkspaceRebuild.css"
-        path.write_bytes(path.read_bytes() + b"\n/* changed layout */\n")
-        with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
-            checker.check_evidence(self.root)
+        for relative in ("apps/web/components/WorkspaceRebuild.css", "apps/web/components/PublicExperience.tsx", "apps/web/components/OracleCompanion.tsx", "apps/web/components/DeferredChatBoundary.tsx", "apps/web/components/PublicRequestFallback.tsx", "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png"):
+            path = self.root / relative
+            original = path.read_bytes(); path.write_bytes(original + b"\n/* changed public composition */\n")
+            with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
+                checker.check_evidence(self.root)
+            path.write_bytes(original)
 
     def test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed(self):
         source = self.root / checker.SDK_SOURCE_PATHS[0]
@@ -69,6 +71,13 @@ class BrowserEvidenceTests(unittest.TestCase):
             self.write(evidence)
             with self.assertRaisesRegex(checker.EvidenceError, 'critical_sdk_browser_check_missing'):
                 checker.check_evidence(self.root)
+    def test_identity_composition_drift_invalidates_the_saved_browser_pass(self):
+        for relative in ('apps/web/components/IdentityHero.tsx','apps/web/components/IdentityHero.css',
+                         'config/identity-hero.json','apps/site/tests/browser-identity-hero.mjs'):
+            path=self.root/relative;old=path.read_bytes();path.write_bytes(old+b'\n')
+            with self.assertRaisesRegex(checker.EvidenceError,'stale_auxiliary_source_sha256'):
+                checker.check_evidence(self.root)
+            path.write_bytes(old)
     def test_missing_critical_check_and_unpassed_recording_are_rejected(self):
         for identifier in checker.CRITICAL_CHECKS:
             with self.subTest(check=identifier):
@@ -115,7 +124,7 @@ class ShopEvidenceTests(unittest.TestCase):
         self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
 
     def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
-        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py'):
+        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/components/DeferredChatBoundary.tsx', 'apps/web/components/PublicRequestFallback.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
             path = self.root / relative
             original = path.read_bytes(); path.write_bytes(original + b'\n# changed')
             with self.assertRaisesRegex(checker.EvidenceError, 'stale_shop_source_sha256'):
@@ -152,11 +161,105 @@ class CatalogBrowserEvidenceTests(unittest.TestCase):
 
     def test_source_drift_and_effect_promotion_rejected(self):
         self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
-        path = self.root / checker.CATALOG_SOURCE_PATHS[0]
-        before = path.read_bytes(); path.write_bytes(before+b'\n# changed adapter')
-        with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
-        path.write_bytes(before)
+        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/components/DeferredChatBoundary.tsx', 'apps/web/components/PublicRequestFallback.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
+            path = self.root / relative
+            before = path.read_bytes(); path.write_bytes(before+b'\n/* changed source */')
+            with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
+            path.write_bytes(before)
         evidence_path = self.root / checker.CATALOG_EVIDENCE_PATH
         report = json.loads(evidence_path.read_text()); report['order_started'] = True
         evidence_path.write_text(json.dumps(report))
         with self.assertRaisesRegex(checker.EvidenceError, 'read_only_partial'): checker.check_catalog_evidence(self.root)
+
+
+class PublicFallbackEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*checker.PUBLIC_FALLBACK_SOURCES, checker.PUBLIC_FALLBACK_PATH):
+            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+
+    def test_current_pass_cannot_survive_a_changed_boundary(self):
+        self.assertEqual(checker.check_public_fallbacks(self.root)['checks'], 18)
+        path = self.root / 'apps/web/components/DeferredChatBoundary.tsx'
+        path.write_bytes(path.read_bytes()+b'\n/* changed boundary */')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_fallback_source'):
+            checker.check_public_fallbacks(self.root)
+
+    def test_missing_mobile_case_or_false_no_effect_claim_is_rejected(self):
+        path = self.root / checker.PUBLIC_FALLBACK_PATH
+        report = json.loads(path.read_text()); original = copy.deepcopy(report)
+        report['checks'].pop(); path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError, 'complete_matrix'):
+            checker.check_public_fallbacks(self.root)
+        original['mutations'] = 1; path.write_text(json.dumps(original))
+        with self.assertRaisesRegex(checker.EvidenceError, 'no_external_uncaught_or_mutations'):
+            checker.check_public_fallbacks(self.root)
+
+
+class ExceptionEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*checker.EXCEPTION_SOURCES, *(f'evidence/observability-integration-2026-10-28/browser-exceptions-{s}.json' for s in ('vite', 'next'))):
+            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+
+    def test_source_drift_cannot_survive_consent_proof(self):
+        self.assertEqual(checker.check_exception_evidence(self.root)['surfaces'], 2)
+        path = self.root / 'apps/web/observability/exceptions.mjs'
+        path.write_bytes(path.read_bytes() + b'\n/* changed transport */')
+        with self.assertRaisesRegex(checker.EvidenceError, 'stale_exception_source'):
+            checker.check_exception_evidence(self.root)
+
+    def test_missing_retry_proof_or_claimed_external_event_rejected(self):
+        path = self.root / 'evidence/observability-integration-2026-10-28/browser-exceptions-next.json'
+        report = json.loads(path.read_text()); original = copy.deepcopy(report)
+        report['checks'].pop(); path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError, 'complete_surface'):
+            checker.check_exception_evidence(self.root)
+        original['external_events_sent'] = 1; path.write_text(json.dumps(original))
+        with self.assertRaisesRegex(checker.EvidenceError, 'local_intercept_only'):
+            checker.check_exception_evidence(self.root)
+
+
+class ConsentUIEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.folder=tempfile.TemporaryDirectory();self.addCleanup(self.folder.cleanup);self.root=Path(self.folder.name)
+        for relative in (*checker.CONSENT_UI_SOURCES,*checker.LOCALE_BRIDGE_SOURCES,*checker.NEXT_CONSENT_SOURCES,checker.CONSENT_UI_PATH,checker.LOCALE_BRIDGE_PATH,checker.NEXT_CONSENT_PATH,'config/site-map.json'):
+            path=self.root/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes((ROOT/relative).read_bytes())
+
+    def test_current_consent_pass_is_bound_to_UI_source(self):
+        self.assertEqual(checker.check_consent_ui(self.root)['ui_cases'],18)
+        path=self.root/'apps/web/components/DiagnosticConsent.tsx';path.write_bytes(path.read_bytes()+b'\n/* changed choice */')
+        with self.assertRaisesRegex(checker.EvidenceError,'stale_consent_source'):checker.check_consent_ui(self.root)
+
+    def test_missing_mobile_case_or_claimed_external_send_rejected(self):
+        path=self.root/checker.CONSENT_UI_PATH;report=json.loads(path.read_text());original=copy.deepcopy(report)
+        report['checks'].pop();path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError,'complete_matrix'):checker.check_consent_ui(self.root)
+        original['external_events_sent']=1;path.write_text(json.dumps(original))
+        with self.assertRaisesRegex(checker.EvidenceError,'local_no_errors'):checker.check_consent_ui(self.root)
+
+    def test_mail_fail_closed_proof_cannot_be_omitted(self):
+        path=self.root/checker.NEXT_CONSENT_PATH;report=json.loads(path.read_text())
+        report.pop('internal_mail_api_unbound_503',None);path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(checker.EvidenceError,'internal_mail_fail_closed'):
+            checker.check_consent_ui(self.root)
+
+    def test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads(self):
+        paths=(*checker.WORKSPACE_SOURCES,checker.WORKSPACE_PATH)
+        for rel in paths:
+            target=self.root/rel;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/rel).read_bytes())
+        self.assertEqual(checker.check_workspace_read(self.root)['cases'],4)
+        source=self.root/'tools/app_backend.py';old=source.read_bytes();source.write_bytes(old+b'\n# drift\n')
+        with self.assertRaisesRegex(checker.EvidenceError,'workspace_stale'):checker.check_workspace_read(self.root)
+        source.write_bytes(old);path=self.root/checker.WORKSPACE_PATH;original=json.loads(path.read_text())
+        for mutate in ('negative','state','external'):
+            changed=copy.deepcopy(original)
+            if mutate=='negative':changed['checks'][0]['negative_sessions']=0
+            elif mutate=='state':changed['persistent_state_unchanged']=False
+            else:changed['external']=['synthetic.invalid']
+            path.write_text(json.dumps(changed))
+            with self.assertRaises(checker.EvidenceError):checker.check_workspace_read(self.root)

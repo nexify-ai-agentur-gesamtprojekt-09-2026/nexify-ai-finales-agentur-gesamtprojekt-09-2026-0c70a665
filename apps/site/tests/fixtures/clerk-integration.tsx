@@ -3,7 +3,7 @@ import {useSyncExternalStore,type ReactNode} from 'react';
 const state=()=>Boolean((window as Window&{fixtureSignedIn?:boolean}).fixtureSignedIn);
 const subscribe=(fn:()=>void)=>{window.addEventListener('fixture-session',fn);return()=>window.removeEventListener('fixture-session',fn);};
 function change(value:boolean){(window as Window&{fixtureSignedIn?:boolean}).fixtureSignedIn=value;window.dispatchEvent(new Event('fixture-session'));}
-export function ClerkProvider({children,localization}:{children:ReactNode;localization:{locale:string}}){return <div data-fixture-locale={localization.locale}>{children}</div>;}
+export function ClerkProvider({children,localization,publishableKey}:{children:ReactNode;localization:{locale:string};publishableKey?:string}){return <div data-fixture-locale={localization.locale} data-fixture-public-key={publishableKey}>{children}</div>;}
 export function SignIn(){return <button data-fixture-login onClick={()=>change(true)}>Synthetic sign in</button>;}
 export function SignUp(){return <button data-fixture-signup onClick={()=>change(true)}>Synthetic sign up</button>;}
 export function useAuth(){return {isLoaded:true,isSignedIn:useSyncExternalStore(subscribe,state)};}

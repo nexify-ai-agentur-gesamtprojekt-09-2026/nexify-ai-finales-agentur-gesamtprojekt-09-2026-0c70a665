@@ -9,7 +9,8 @@
     "dev:gateway": "python3 apps/agent-gateway/server.py --database .local/visitor.sqlite --port 3003 --web-origin http://127.0.0.1:3004",
     "preview:references": "node server.mjs",
     "build": "pnpm --filter @nexify/site build",
-    "typecheck": "pnpm --filter @nexify/site typecheck",
+    "typecheck": "pnpm --filter @nexify/site typecheck && pnpm typecheck:agent && pnpm --filter @nexify/web typecheck",
+    "lint": "node apps/web/scripts/generate-public-data.mjs && node tools/lint.mjs && node tools/ds-audit-cli.js",
     "verify": "make check && make test && make check-arch",
     "dev:next-reference": "pnpm --filter @nexify/web dev",
     "build:next-reference": "pnpm --filter @nexify/web build",
@@ -24,6 +25,8 @@
   "dependencies": {
     "@ai-sdk/react": "4.0.157",
     "@openrouter/ai-sdk-provider": "3.1.0",
+    "@sentry/node": "11.9.0",
+    "@vercel/connect": "2.5.6",
     "ai": "7.0.153",
     "zod": "4.6.7"
   },

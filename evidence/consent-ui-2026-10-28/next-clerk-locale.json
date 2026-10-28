@@ -1,0 +1,37 @@
+{
+  "scope": "actual locale bridge with isolated provider double;not real authentication",
+  "checks": [
+    {
+      "lang": "de",
+      "expected": "de-DE",
+      "passed": true
+    },
+    {
+      "lang": "nl",
+      "expected": "nl-NL",
+      "passed": true
+    },
+    {
+      "lang": "fr",
+      "expected": "fr-FR",
+      "passed": true
+    },
+    {
+      "lang": "unknown",
+      "expected": "de-DE",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
+    "apps/web/app/layout.tsx": "549058a35387293c968522b88096b8e47e3bee9e3d74093afa2708b2ff97c53c",
+    "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
+    "apps/site/tests/fixtures/clerk-integration.tsx": "217fab40829fc02e7f6c55564b1d51e331e871dfb4264a84d03353ccb60228a2",
+    "apps/site/tests/fixtures/next-clerk-locale.tsx": "2fa5f0257ea52f1db4c8d378806a04c3faf80f262f9d16e158eb452c4be62862",
+    "apps/site/tests/fixtures/next-clerk-locale.html": "b20e326a58a9b96e4fa377a9cb00177fb9a104200070234e494d480da2e80674",
+    "apps/site/tests/browser-next-clerk-locale.mjs": "b7bc42105f01887b029c2ebceb9e1c51cc29b30827920b7c985bb85af77f00fe"
+  },
+  "external": 0,
+  "errors": [],
+  "passed": true
+}

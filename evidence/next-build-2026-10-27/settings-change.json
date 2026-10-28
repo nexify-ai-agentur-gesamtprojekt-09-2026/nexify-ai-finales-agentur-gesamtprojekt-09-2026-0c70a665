@@ -1,0 +1,48 @@
+{
+  "project_id": "prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5",
+  "before": {
+    "nodeVersion": "24.x",
+    "framework": "nextjs",
+    "rootDirectory": "apps/web",
+    "buildCommand": null,
+    "installCommand": null,
+    "outputDirectory": null
+  },
+  "change": {
+    "nodeVersion": "22.x"
+  },
+  "after": {
+    "id": "prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5",
+    "name": "web",
+    "nodeVersion": "22.x",
+    "framework": "nextjs"
+  },
+  "deployments_after": [
+    {
+      "id": "dpl_9myuRMELwTQUb4C1GvgPZiFnaEyr",
+      "state": "BLOCKED",
+      "target": null,
+      "sha": "b47b256075f5d8196dd62299ddb8108dc9aeee6a"
+    },
+    {
+      "id": "dpl_weKucBsx4xEZ4EpNkAQ4oUKSuGhg",
+      "state": "BLOCKED",
+      "target": null,
+      "sha": "4e774b58f47093834484866405a31549bc44b4f9"
+    },
+    {
+      "id": "dpl_2e7wTKNXWPRhBEKUrC6YZrsQhEHf",
+      "state": "ERROR",
+      "target": "production",
+      "sha": "38f6c6549101ba830055817fdd70ccd0e493e3b4"
+    }
+  ],
+  "rollback": {
+    "nodeVersion": "24.x"
+  },
+  "credentials_copied": false,
+  "domain_or_auth_change": false,
+  "billing_change": false,
+  "production_deployment_created": false,
+  "observed_at": "2026-10-27T20:45:19.624975+00:00"
+}

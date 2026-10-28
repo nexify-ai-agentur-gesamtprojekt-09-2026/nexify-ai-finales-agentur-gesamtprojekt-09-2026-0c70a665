@@ -14,13 +14,31 @@ function validPublishableKey(key: string): boolean {
       /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i.test(label));
   } catch { return false; }
 }
+// Server deployment metadata only: never infer Preview from public/client fields.
+// NODE_ENV=production is the optimized build mode for both Preview and Production.
+function clerkDeployment(env: AuthEnvironment): "production" | "preview" | null {
+  if (env.NODE_ENV !== "production") return null;
+  if (env.VERCEL === "1") {
+    if (env.VERCEL_ENV === "production" &&
+        (env.VERCEL_TARGET_ENV === undefined || env.VERCEL_TARGET_ENV === "production") &&
+        (env.APP_ENV === undefined || env.APP_ENV === "production")) return "production";
+    if (env.VERCEL_ENV === "preview" && env.VERCEL_TARGET_ENV === "preview" &&
+        (env.APP_ENV === undefined || env.APP_ENV === "preview")) return "preview";
+    return null; // Missing, unsupported or conflicting platform metadata.
+  }
+  if ((env.VERCEL !== undefined && env.VERCEL !== "0") || env.VERCEL_ENV !== undefined || env.VERCEL_TARGET_ENV !== undefined) return null;
+  // Preserve the existing standalone Production/live-key configuration.
+  return env.APP_ENV === undefined || env.APP_ENV === "production" ? "production" : null;
+}
 export function clerkConfiguration(env: AuthEnvironment) {
   const publicKey = env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "";
   const secret = env.CLERK_SECRET_KEY || "";
   const publicMode = /^pk_(live|test)_[A-Za-z0-9+/=]+$/.exec(publicKey)?.[1];
   const secretMode = /^sk_(live|test)_[A-Za-z0-9]{20,}$/.exec(secret)?.[1];
+  const deployment = clerkDeployment(env);
   const ready = Boolean(validPublishableKey(publicKey) && publicMode && publicMode === secretMode &&
-    ((env.NODE_ENV !== "production" && env.APP_ENV !== "production") || publicMode === "live"));
+    ((deployment === "production" && publicMode === "live") ||
+     (deployment === "preview" && publicMode === "test")));
   return { ready };
 }
 export function canonicalPath(path: string): string | null {

@@ -17,6 +17,18 @@ Bildschirm: Graphit `#1B1E1D` `#1E2220` `#242826` `#2A2E2C` `#262A28` `#303634` 
 Abgeleitete Töne (nur für Verläufe und Glühen) stehen in `farbe.abgeleitet`. Veraltete Werte sind zu migrieren (`farbe.veraltet_migrieren`, z. B. `#3E4240 → #363A38`, `#FFA43A → #FFC24A`).
 Text auf Lime ist immer `#111312` (DS-C-03). Papier-Vorschau-Fenster innerhalb von Bildschirmseiten (E-Mail, Rechnung, Suchergebnis) sind zulässig und werden als Info geführt (DS-C-05).
 
+### Akzeptierte Identity-Szene · 28.10.2026
+
+Die helle gemeinsame Hero-Bühne ist eine begrenzte Bildzwischenlösung nach der
+angenommenen Identity-HTML-Version1 (SHA256
+`87cce3dcfee53bc6573efe1ae81e76bdf80f81542f5e746448a96ed087057e0c`).
+`color.identityScene` bindet ausschließlich deren Wand-/Bodenfarben, Tinte,
+gedämpften Text, Akzent, Schatten, Papierkarten und Rand. Die übrige App bleibt
+Graphit & Lime. CSS/SVG verwenden ausschließlich die generierten Tokens;
+keine Figur erhält Farbfilter, Neugenerierung, andere Pose oder Beschnitt.
+Gemeinsame proportionale Bühne auf Desktop, Text über Figuren bei schmalem
+Container. Keine globale Themeänderung und kein Video-/Funktionsnachweis.
+
 ## §3 Typografie (DS-T-01)
 Nur Geist (Text) und Geist Mono (Kicker, Zahlen, IDs, Zeiten). Größen und Zeilenhöhen siehe Designsystem-Seite. Papier: IBM Plex Mono aus der Druckvorlage ist als Ausnahme zugelassen.
 

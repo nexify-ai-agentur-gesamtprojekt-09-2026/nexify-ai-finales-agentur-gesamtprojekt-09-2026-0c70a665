@@ -1,0 +1,24 @@
+{
+  "scope": "local source-map escrow with synthetic release;no upload or live deobfuscation",
+  "release_fixture": "1111111111111111111111111111111111111111",
+  "surfaces": {
+    "vite": {
+      "private_maps": 5,
+      "public_maps": 0,
+      "private_manifest_sha256": "90fcd00913c15619f28801ebace841d034f685a92e6f00d9d1ff07ea03f73a56",
+      "uploaded": false
+    },
+    "next": {
+      "private_maps": 17,
+      "public_maps": 0,
+      "private_manifest_sha256": "526a90e19f12d02d189241348eb6d8654721901a082de275a930a85e9ebcd228",
+      "uploaded": false
+    }
+  },
+  "source_sha256": {
+    "tools/observability/private-sourcemaps.mjs": "a06e0294951a7329b00617853a0892cf795bb41f9c42253a55800c668df1c6a2",
+    "apps/site/vite.config.ts": "89ffc11349f5d88645c2d627f3a7fa048be78107ea93953ba8f3501aeda1579a",
+    "apps/web/next.config.ts": "3095c76f89acd847efcfeb4465c055d092f1d9aca4e42b500ef94d5f0d7d5673",
+    "apps/web/observability/exceptions.mjs": "e093c42afa6bd72f2faef2b398bf17cdb40ce9b554b5695e0a5d868a9ada73f5"
+  }
+}

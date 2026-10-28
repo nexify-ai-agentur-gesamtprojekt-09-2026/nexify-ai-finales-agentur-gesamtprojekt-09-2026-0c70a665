@@ -40,6 +40,7 @@ apps/web/tsconfig.tsbuildinfo
 # Portable public React build outputs; source and release tools remain tracked.
 apps/site/dist/
 apps/site/.generated/
+apps/web/.generated/
 apps/site/standalone.html
 .vercel
 

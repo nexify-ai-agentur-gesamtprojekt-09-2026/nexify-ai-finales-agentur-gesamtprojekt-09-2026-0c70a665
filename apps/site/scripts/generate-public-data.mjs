@@ -69,6 +69,13 @@ export async function generate(){
   }
   data.explainers=prepareExplainers(explainers,data.pages,sourceInventory,data.videos,data.videoModules);
   const publicRoot=await realpath(resolve(root,"apps/web/public"));
+  const scenes=JSON.parse(await readFile(resolve(root,'config/interim-scene-images.json'),'utf8'));
+  for(const speaker of ['pascal','nex','aifly']){
+    const image=scenes.images?.[speaker];
+    if(!image||!/^\/(?:portrait\.png|media\/presenters\/[a-z0-9-]+\.png)$/.test(image.src)||!/^[a-f0-9]{64}$/.test(image.sha256))throw new Error('Invalid interim scene image');
+    const path=await realpath(resolve(publicRoot,image.src.slice(1)));
+    if(!path.startsWith(publicRoot+'/')||createHash('sha256').update(await readFile(path)).digest('hex')!==image.sha256)throw new Error('Interim scene image drift');
+  }
   for(const page of data.explainers)for(const module of page.modules){
     if(module.media.status!=="published")continue;
     for(const path of [module.media.src,...Object.values(module.media.captions)]){

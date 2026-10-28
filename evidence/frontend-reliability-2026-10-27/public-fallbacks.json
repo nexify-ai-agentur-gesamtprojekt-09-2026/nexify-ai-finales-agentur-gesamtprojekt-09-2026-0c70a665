@@ -1,0 +1,168 @@
+{
+  "scope": "synthetic local failure injection;not PostHog/Sentry or production acceptance",
+  "checks": [
+    {
+      "width": 320,
+      "locale": "de",
+      "failure": "unavailable",
+      "session_status": 204,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "de",
+      "failure": "capabilities",
+      "session_status": 200,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "de",
+      "failure": "chunk",
+      "session_status": 404,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "nl",
+      "failure": "unavailable",
+      "session_status": 204,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "nl",
+      "failure": "capabilities",
+      "session_status": 200,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "nl",
+      "failure": "chunk",
+      "session_status": 404,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "de",
+      "failure": "unavailable",
+      "session_status": 204,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "de",
+      "failure": "capabilities",
+      "session_status": 200,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "de",
+      "failure": "chunk",
+      "session_status": 404,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "nl",
+      "failure": "unavailable",
+      "session_status": 204,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "nl",
+      "failure": "capabilities",
+      "session_status": 200,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "nl",
+      "failure": "chunk",
+      "session_status": 404,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "locale": "de",
+      "failure": "unavailable",
+      "session_status": 204,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "locale": "de",
+      "failure": "capabilities",
+      "session_status": 200,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "locale": "de",
+      "failure": "chunk",
+      "session_status": 404,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "locale": "nl",
+      "failure": "unavailable",
+      "session_status": 204,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "locale": "nl",
+      "failure": "capabilities",
+      "session_status": 200,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "locale": "nl",
+      "failure": "chunk",
+      "session_status": 404,
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
+    "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+    "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
+    "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
+    "apps/site/tests/browser-public-fallbacks.mjs": "97286b41aefecb0d792f06cf5b1d173b5903422e051afd6e66304e582085b687"
+  },
+  "external": [],
+  "uncaught": [],
+  "mutations": 0,
+  "cta_routes": [
+    "/",
+    "/leistungen/websites",
+    "/leistungen/agenten-automatisierung",
+    "/leistungen/apps-portale",
+    "/leistungsumfang",
+    "/loesungen",
+    "/preise-ablauf",
+    "/wissen/projekt-vorbereiten",
+    "/kontakt",
+    "/produkte/one",
+    "/produkte/api",
+    "/teileklar",
+    "/teileklar/suche",
+    "/teileklar/kategorien",
+    "/teileklar/kategorie",
+    "/teileklar/produkt",
+    "/teileklar/warenkorb",
+    "/teileklar/kasse",
+    "/teileklar/fahrzeug-und-passung",
+    "/teileklar/termine",
+    "/teileklar/gutscheine",
+    "/teileklar/partner-werden",
+    "/teileklar/werkstatt",
+    "/teileklar/rechtliches"
+  ],
+  "passed": true
+}

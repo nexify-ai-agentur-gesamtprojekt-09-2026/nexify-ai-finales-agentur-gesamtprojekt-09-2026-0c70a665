@@ -1,0 +1,81 @@
+{
+  "recorded_at": "2026-10-27T23:33:38.513766+00:00",
+  "base_commit": "a708a2d404424921754c24237c8f1b5ffdb2d5c1",
+  "scope": "three concrete public UI failures;no telemetry SDK or foreign production overwrite",
+  "source_sha256": {
+    "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
+    "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
+    "apps/web/components/DeferredChatBoundary.tsx": "68e62c9bd07e22b660c6925f830b5e5d219f6421798be5bcdf7c3943e6fd5af0",
+    "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
+    "apps/site/tests/browser-public-fallbacks.mjs": "97286b41aefecb0d792f06cf5b1d173b5903422e051afd6e66304e582085b687",
+    "tools/check_browser_evidence.py": "efbe4f192e194d0cc69056bbe5d3ba03fb8107682bea8f73ee745bfd99fdda20",
+    "tests/test_browser_evidence.py": "1859b9dec9d7eff589345fad8f2486e7d45b142802d4538fe43be4167d1a5672"
+  },
+  "fixes": [
+    "all three unavailable request intents use the existing agency mailto instead of a disabled input path",
+    "unavailable capability does not render a fake functional form or request slots",
+    "lazy orientation chunk rejection is caught locally;public shell remains",
+    "search/category/product states use catalog language rather than cart language;unbound search visibly unavailable"
+  ],
+  "focused_browser_cases": 18,
+  "widths": [
+    320,
+    390,
+    1280
+  ],
+  "locales": [
+    "de",
+    "nl"
+  ],
+  "failure_modes": [
+    "session_unavailable",
+    "capabilities_unavailable",
+    "chunk_failed"
+  ],
+  "source_route_inventory": 24,
+  "source_route_inventory_is_not_all_CTA_runtime_clicks": true,
+  "telemetry": {
+    "posthog_project": 272482,
+    "exact_a708_release_issue_query_results": 0,
+    "empty_query_does_not_prove_error_free": true,
+    "app_exception_capture_added": false,
+    "new_capture_replay_or_PII_enabled": false,
+    "sentry_findings": "parent reports synthetic probes and secondary-host HTTP401,not actual frontend acceptance",
+    "CSP": "parent reports eval violations with unresolved source;no policy weakened",
+    "foreign_branch": "integration/observability-20261027",
+    "foreign_head_read": "696c0d2d416e90cfb25625d0d2c7e9e43938e0e0",
+    "foreign_merge_base": "38f6c6549101ba830055817fdd70ccd0e493e3b4",
+    "foreign_executor_owner": "unverified",
+    "foreign_source_not_merged_or_overwritten": true,
+    "SDK_package_preparation": "verified archives1.440.0/1.6.2/1.12.0;install metadata fetch refused;own manifests restored,lock unchanged;no parallel SDK setup while owner unresolved"
+  },
+  "production_report": {
+    "head": "696c0d2d416e90cfb25625d0d2c7e9e43938e0e0",
+    "deployment_id": "dpl_8JzqFvRn1PGKwL8nsU16NMM1PzXe",
+    "source": "parent_verified_read_only_report;not independently fetched here"
+  },
+  "remote_gate": {
+    "push_and_CI_paused": "Actions100percent quota and unverified overage policy",
+    "GitHub_read": "commit-metadata GET returned401BadCredentials;no alternative identity or retry",
+    "new_pushes_or_remote_runs": 0
+  },
+  "domain": "measurement and decision owned by parent;no DNS/proxy change",
+  "qualified_production_acceptance": false,
+  "session_contracts_tested": {
+    "unavailable": 204,
+    "capabilities": 200,
+    "chunk_failure": 404
+  },
+  "other_local_checks": {
+    "site_node": 53,
+    "next_node": 11,
+    "next_route_locale": 72,
+    "protected_next_denials": 10,
+    "vite_route_locale": 72,
+    "history_edges": 1724,
+    "resize": 108,
+    "shop": 13,
+    "catalog": 4,
+    "builds": "Next,Vite,standalone passed"
+  }
+}
