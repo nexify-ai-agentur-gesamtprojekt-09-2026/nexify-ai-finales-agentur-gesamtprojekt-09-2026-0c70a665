@@ -1,0 +1,74 @@
+{
+  "observed_at": "2026-10-27T20:08:59.240998+00:00",
+  "host": "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70-pbvgren8v.vercel.app",
+  "deployment_id": "dpl_2mSLEZJXdrGjsX5rcNcsoFuGHbqb",
+  "head": "38f6c6549101ba830055817fdd70ccd0e493e3b4",
+  "scope": "public anonymous HEAD metadata only;no portal contents read;no auth or tenant acceptance",
+  "routes": [
+    {
+      "path": "/portal/kunde",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/portal/api",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/portal/affiliate",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/teileklar/konto",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/teileklar/partnerportal",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/teileklar/nachbarschaft",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/intern/workspace",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/intern/posteingang",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/intern/leitstand",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/intern/verwaltung",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/api/session",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/api/connections",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    },
+    {
+      "path": "/api/health",
+      "error_class": "ConnectionRefusedError",
+      "body_read": false
+    }
+  ]
+}

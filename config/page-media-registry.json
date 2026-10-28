@@ -4,13 +4,10 @@
   "owner": "Root / authorized media owner",
   "source_bundle": {
     "library_file_id": "libfile_4c255bb88af48191a025daecac648997",
-    "archive_sha256": "281197b1a8eb4990670ec2de75d6699e58f0d11cd7a235638a5a8404f78b0e3b",
+    "archive_sha256": "34cc18cacddb4e5d952dcd6b07b187d700e999b2acd00c5a41a2a4d212b23377",
     "plan_sha256": "f9ac72f2680635c5098247dc77911f0c75d4465d86b929d700970eed58c0c871",
     "status": "preproduction_only",
-    "integrity_gaps": [
-      "inner script-package-manifest.json differs for ElevenLabs-Voice-Casting.de.md",
-      "inner script-package-manifest.json differs for voice-casting-options.de.json"
-    ]
+    "integrity_gaps": []
   },
   "rejected_visual_references": [
     {

@@ -13,13 +13,37 @@ async function fixture(split){
  await writeFile(join(root,'dist/assets/entry.js'),split?'import {ready} from "./shared.js";document.body.textContent=ready;':'document.body.textContent="ready";');
  if(split)await writeFile(join(root,'dist/assets/shared.js'),'export const ready="ready";');
  await writeFile(join(root,'dist/assets/site.css'),'body{display:block}');
- for(const f of ['portrait.png','media/presenters/hero-trio.png','signet.svg','fonts/geist-latin.woff2','fonts/geist-mono-latin.woff2'])await writeFile(join(root,'dist',f),'fixture');
+ for(const f of ['portrait.png','media/presenters/hero-trio.png','media/presenters/ai-fly-oracle-avatar-9f705e5b.png','media/presenters/nex-toucan-121a804c.png','media/presenters/pascal-original-6dd03834.png','signet.svg','fonts/geist-latin.woff2','fonts/geist-mono-latin.woff2'])await writeFile(join(root,'dist',f),'fixture');
  return root;
 }
 test('split standalone input fails before publishing an incomplete preview',async()=>{
  const root=await fixture(true);
  try{const result=spawnSync(process.execPath,[new URL('../scripts/build-standalone.mjs',import.meta.url).pathname,root],{encoding:'utf8'});assert.notEqual(result.status,0);await assert.rejects(readFile(join(root,'standalone/nexify-preview.html')));}
  finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('companion original is embedded byte-for-byte without an offline path',async()=>{
+ const root=await fixture(false);
+ try{
+  const path='media/presenters/ai-fly-oracle-avatar-9f705e5b.png';
+  const bytes=Buffer.from([0,1,2,127,128,254,255]);
+  await writeFile(join(root,'dist',path),bytes);
+  await writeFile(join(root,'dist/assets/entry.js'),`document.body.textContent="/${path}";`);
+  const result=spawnSync(process.execPath,[new URL('../scripts/build-standalone.mjs',import.meta.url).pathname,root],{encoding:'utf8'});
+  assert.equal(result.status,0,result.stderr);
+  const html=await readFile(join(root,'standalone/nexify-preview.html'),'utf8');
+  assert.ok(html.includes('data:image/png;base64,'+bytes.toString('base64')));
+  assert.equal(html.includes('/'+path),false);
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('missing companion bytes fail before publishing an incomplete preview',async()=>{
+ const root=await fixture(false);
+ try{
+  await rm(join(root,'dist/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'));
+  const result=spawnSync(process.execPath,[new URL('../scripts/build-standalone.mjs',import.meta.url).pathname,root],{encoding:'utf8'});
+  assert.notEqual(result.status,0);await assert.rejects(readFile(join(root,'standalone/nexify-preview.html')));
+ }finally{await rm(root,{recursive:true,force:true});}
 });
 test('self contained input retains offline CSP and preview mode',async()=>{
  const root=await fixture(false);

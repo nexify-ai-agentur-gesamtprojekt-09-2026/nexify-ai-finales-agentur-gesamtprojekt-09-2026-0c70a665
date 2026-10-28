@@ -44,8 +44,8 @@ benötigen die tatsächlich produzierten Filme.
 Ein Seitenintro schließt keine Modulabnahme. Master1.3 RQ-029/RQ-038 und
 TST-19/TST-24 sind damit technisch zugeordnet, nicht fachlich abgenommen.
 Die sieben Vorproduktionsfilme mit 21 Szenen sind Text-/Untertitelentwürfe, keine
-Medienbytes. Zwei interne Castinghashes stimmen nicht mit dem inneren Manifest
-überein; der äußere Liefermanifest stimmt. Angefragte Hörproben und Stimmen sind
+Medienbytes. Die zwei historischen inneren Castinghash-Abweichungen wurden in Libraryversion1
+ausschließlich durch Manifestkorrektur behoben; alle33Inhaltsdateien sind bytegleich. Angefragte Hörproben und Stimmen sind
 nicht freigegeben. Finaler AIFly-Charakter und geeignete tatsächliche Filmexports
 fehlen. Der bekannte Reviewclip und das abgelehnte Orb-/Augenbild können nicht
 bloß durch neue Statuswerte oder Belegdateien zu finalen Assets werden.
@@ -78,7 +78,11 @@ wurde nicht behauptet. Kein neuer Zugang oder Server-/DNS-/Authwechsel.
 REA ist anwendbar, aber der dokumentierte lokale 6.8.0-Einstieg fehlt in dieser
 Umgebung und eine passende native Analyseoperation ist nicht verfügbar. Das ist
 `blocked_not_reviewed`, kein erfolgreicher oder bedeutungsloser Scheinscan.
-Die unabhängige Sol-Codeprüfung und Browserbelege ersetzen diesen Nachweis nicht.
+Die Nutzerpräzisierung27.10.19:45 erlaubt laut Parent eine direkte Alternative.
+Für diesen begrenzten Code-/Byte-/Bedienpfad werden deshalb tatsächliche
+Quellen-/Regressions-/Browser-/HTTPbelege plus unabhängige Sol-Prüfung genutzt.
+Das behauptet weder einen nativen REA-Scan noch echtes Film-/Hör-/Runtime-APPROVE;
+die fehlende Toolinstallation allein ist kein pauschaler Produktblocker.
 
 Rückweg: Das lokale UI-Delta lässt sich im eigenen Reviewcheckout auf Basis
 `14929ebec897f6006d0a971660325a1e4cae7641` zurücknehmen. Vorhandene Registrybindungen

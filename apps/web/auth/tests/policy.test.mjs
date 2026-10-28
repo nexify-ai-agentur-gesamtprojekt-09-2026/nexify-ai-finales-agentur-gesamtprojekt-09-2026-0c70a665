@@ -58,3 +58,51 @@ test("deployment origins are exact and the supplied public key stays inactive un
   assert.equal(key.asymmetricKeyDetails.modulusLength, 2048);
   assert.equal(createHash("sha256").update(key.export({type:"spki",format:"der"})).digest("hex"), material.spki_der_sha256);
 });
+
+
+test("only authoritative server Preview admits matching test keys in an optimized build", () => {
+  const keys={NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:"pk_test_"+btoa("synthetic.example.invalid$"),CLERK_SECRET_KEY:"sk_test_"+"a".repeat(32)};
+  for (const APP_ENV of [undefined,"preview"]) {
+    assert.equal(clerkConfiguration({...keys,NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"preview",APP_ENV}).ready,true);
+  }
+  assert.equal(privateDecision(true,"synthetic-subject"),"membership_required");
+});
+
+test("unknown conflicting and client-only environment markers never enable auth", () => {
+  const testKeys={NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:"pk_test_"+btoa("synthetic.example.invalid$"),CLERK_SECRET_KEY:"sk_test_"+"a".repeat(32)};
+  const liveKeys={NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY:env.CLERK_SECRET_KEY};
+  const invalid=[{}, {NODE_ENV:"development"}, {NODE_ENV:"test"},
+    {NODE_ENV:"production",VERCEL:"1"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"production"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"staging"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"production",VERCEL_TARGET_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL_TARGET_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL:"0",VERCEL_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL:"true",VERCEL_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"Preview"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"staging"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"preview",APP_ENV:"production"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"production",APP_ENV:"preview"},
+    {NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"preview",APP_ENV:"development"},
+    {NODE_ENV:"production",APP_ENV:"preview"},
+    {NODE_ENV:"production",APP_ENV:"unknown"},
+    {NODE_ENV:"development",VERCEL:"1",VERCEL_ENV:"preview"}];
+  for(const keys of [testKeys,liveKeys])for(const runtime of invalid)assert.equal(clerkConfiguration({...keys,...runtime}).ready,false,JSON.stringify(runtime));
+  for(const runtime of [{NODE_ENV:"production"},{NODE_ENV:"production",APP_ENV:"production"},{NODE_ENV:"production",VERCEL:"0"},{NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"production"},{NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"production",APP_ENV:"production"},{NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"production",VERCEL_TARGET_ENV:"production"}]){
+    assert.equal(clerkConfiguration({...liveKeys,...runtime}).ready,true);
+    assert.equal(clerkConfiguration({...testKeys,...runtime}).ready,false);
+  }
+  assert.equal(clerkConfiguration({...testKeys,NODE_ENV:"production",NEXT_PUBLIC_VERCEL_ENV:"preview",NEXT_PUBLIC_VERCEL:"1"}).ready,false);
+});
+
+test("Preview keeps key parsing and pair modes fail closed without granting membership", () => {
+  const runtime={NODE_ENV:"production",VERCEL:"1",VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"preview"};
+  for(const keys of [{},{NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:"pk_test_invalid",CLERK_SECRET_KEY:"sk_test_"+"a".repeat(32)},
+    {NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:"pk_test_"+btoa("synthetic.example.invalid$"),CLERK_SECRET_KEY:env.CLERK_SECRET_KEY},
+    {NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY:"sk_test_"+"a".repeat(32)},
+    {NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY:env.CLERK_SECRET_KEY}])assert.equal(clerkConfiguration({...keys,...runtime}).ready,false);
+  assert.equal(privateDecision(true,null),"sign_in");
+  assert.equal(privateDecision(true,"synthetic-subject"),"membership_required");
+});

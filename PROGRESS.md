@@ -30,6 +30,90 @@ Follow-up-Zeitpunkt: 2026-10-28 16:45 UTC (keine Kunden-SLA). Quellen:
 `config/integrations/vercel-agent-setup.json`, `vercel.json`,
 `config/remediation-policy.json`.
 
+## IDENTITY-HERO-01 · akzeptierte V1-Komposition · 28.10.2026
+
+- Basis d92ee1b; bestehender Mailstand unverändert erhalten. Gemeinsamer React-Hero statt privatem HTML/iframe: akzeptierte Originalfiguren bytegleich, zentrale zusätzliche Bühnenfarben ohne Änderungen vorhandener Tokenwerte, DE/NL/FR, Unternehmensbeschreibung und Anfrageaktionen erhalten. Bilder bleiben ausdrücklich Zwischenlösung, kein Video-/Providerabschluss.
+- Unabhängige Sol-Prüfung reproduzierte zwei echte Layoutprobleme: enger Desktop-Zwischenbereich und200%Textvergrößerung. Früheres Stapeln bis700px sowie intrinsisch wachsende Desktopbühne korrigieren Überlappung/Beschnitt. Normale große Desktopproportion bleibt erhalten, mittlere Container dürfen höher wachsen. Geschlossener Assistent in normalem Fluss statt über Storytext.
+- Vite/Next jeweils24 normale/Grenzansichten plus15 echte200%-Fälle (DE/NL/FR320/390/Desktop,Seitenleiste,Grenze), ursprüngliche PNG-HTTP-Hashes, Tastatur/Anfragewege/Navigation und0externe Requests/Laufzeitfehler. Unabhängige39Grenz-/Zoomfälle zusätzlich geprüft. Öffentliche Regressionen und Abschlussgates im lokalen endgültigen Übergabebeleg, keine Behauptung einer vollständigen Assistenztechnik-/Produktionsabnahme.
+- Next Steps: finalen lokalen Releasekandidaten nach Prüf-/REA-/Reviewbeleg an Releaseowner übergeben; Push/CI/Deployment/Domain sind in diesem Schnitt nicht ausgeführt. Reale Videos, übrige Medienabnahmen und fachliche öffentliche Releasegates bleiben eigenständig offen. Keine Mail-/Paperclip-/Server-/Secret-/DNSänderung und kein erneuter Library-Upload.
+
+## MAIL-LOCAL-01 · Mail-Arbeitsplatz · 28.10.2026
+
+- Basis c58ad90 bleibt erhalten; derselbe Webwriter, disjunkte Kern-/UI-Umsetzung und unabhängige Sol-Gegenprüfung. Keine Pushes, externen Uploads, CI, Provideraufrufe oder Produktionsänderungen.
+- Gemeinsame geschützte Workplace-Komponente: getrennte Gmail-/Hostinger-Konten, sichere Text-/Anhangmetadaten, Reply/Reply-all/Forward, getrennte Signaturen, persistente vorbereitete Entwürfe mit wieder lesbarem Inhalt, lokale Read-/Task-/Archiv-Undo-Zustände. Bestehende Session-/Rollenprüfung und dieselbe Datenbank, kein SMTP-/Legacy-Mailpfad.
+- Echte Next-Mailroute bleibt503 hinter unveränderter Auth-/Membershipgrenze; keine Fakeverbindung oder Versandanzeige. Fehlende App-Connector-/Mailbox-/Transportbindung, Dispatchzustände und Provider-Reconciliation bleiben offen. Der separat gemeldete Hostingerwebhook ist disabled, kein Handler im Checkout; keine Reaktivierung oder DNSänderung.
+- Fokussierte lokale Unit-/Browser-/Typprüfungen und Nachprüfung der korrigierten Sol-Findings am endgültigen Stand; exakte Resultate im lokalen Übergabebeleg. Full- und Browserbelege sind synthetische Tests, keine privaten Providerdaten oder reale Zustellabnahme.
+- Next Steps: Mail-/Identity-/Runtimeowner verifiziert bestehende Konto-/Mailboxrechte und tatsächlichen API-/Webhooktransport; vor Dispatch unknown-outcome-Abgleich und begrenzte Provider-Retries. Akzeptierte Identity-V1-Herogestaltung als gesonderter nächster Codeauftrag, unveränderte Originalassets, noch kein Rollout.
+
+## Rechtsfußzeile · FR-Nachweisergänzung nach 689e140 · 28.10.2026
+
+- Beide CIs an689e140 abgeschlossen erfolgreich. CodeRabbit am selben SHA terminal; künftige automatische Reviews laut dessen Kommentar pausiert, nicht durch uns umgestellt. Cubic4402490598 bestätigt eine Abdeckungslücke: vorhandene FR-Texte waren nur statisch geprüft, kein belegter Laufzeitfehler.
+- Gebündelte Test-/Nachweisergänzung ohne Produkt-/Rechts-/Grafikänderung: Vite und Next jeweils216 Ansichten (36Routen,DE/NL/FR,320/1280) und12 echte Interaktionen. Exakte lokalisierte Linktexte, Vorbehalte, Kontextziele, native Klappbereiche, Tastatur, Zurück/Reload und ausbleibende externe Requests tatsächlich messen.
+- Bestehenden Nachweisverifier um vollständige FR-Matrix, Rendereridentität, direkte Quellbindung und Kontextprojektion ergänzen; negative Regressionen gegen fehlende FR-Fälle, veraltete Messquellen und falsche Shoprechtsziele. Die zuvor geforderten Hashbindungen bleiben vollständig.
+- Consent-/Auth-/Resize-Belege behalten ihren eigenen engeren Testumfang. Keine vollständige FR-Provider-/Rechts-/Assistenztechnik-Abnahme und keine gestalterische Freigabe der verworfenen Szenen. Kein Main-/Produktions-/DNS-/Credentialeingriff, keine Threadauflösung oder zusätzliche Providerkosten.
+
+## Rechtsfußzeile · Reviewkorrekturen nach 3b19982 · 28.10.2026
+
+- Cubic-Review5684839133 am exakten3b199825 selbst gelesen. Bestätigt: neue Direktnavigation braucht aktiven TEILEKLAR-Rechtskontext; drei neue Test-/Belegdateien fehlten im zentralen Hashregister. Beides im bestehenden Footer-/Nachweisumfang korrigieren und erneut prüfen.
+- TEILEKLAR verwendet die eigene vorhandene Route /teileklar/rechtliches und benennt fehlende freigegebene Shop-Rechtstexte. NeXify behält /impressum und /datenschutz. Diagnose-Consent bleibt unverändert; keine Betreiber-/Vertragsdaten erfunden.
+- Vollständige aktuelle Hashbindung aller referenzierten sicheren Implementierungsdateien im Verifier erzwingen; nur der rekursive Registerselbsthash bleibt ausgeschlossen. Fehlende/veraltete Bindungen erhalten Negativregressionen, kein bloßer Nachtrag dreier erwarteter Werte.
+- Locatorvorwurf nicht reproduziert: .footer-legal kapselt seinen einen Klappbereich; Alle Seiten liegt außerhalb. Zusätzliche echte Count-/Kontextprüfungen sichern diese Grenze, keine blinde Selektoränderung. Gespeicherte Belege erst nach realen Wiederholungsläufen erneuern.
+- Szenenbilder weiterhin ausdrücklich gestalterisch abgelehnt; keine neuen Medien in diesem Delta. Vollständige Rechts-/Lizenzinhalte und unabhängige reale Releaseabnahme bleiben offen. Keine Threadauflösung, Main-/Produktionspromotion, DNS-/Credentialaktion oder Löschung.
+
+## Rechtsfußzeile · lokales Delta nach d98c106 · 28.10.2026
+
+- Derselbe Footer für Vite/Next: ständig sichtbare echte Links zu Impressum/Datenschutz, zusätzlicher nativer Klappbereich mit Fokus, aria-expanded und DE/NL/FR-Texten. Bestehende Gruppen, Consent und Fachhinweise bleiben erhalten.
+- Lokal optimierte Vite- und Next-Ausgabe jeweils 144 Footeransichten und 8 Tastatur-/Direktlink-/Zurück-/Reloadfälle ohne externe Requests oder Laufzeitfehler. Sourcebindung: evidence/legal-footer-2026-10-28/. Consent-, Resize- und kritische Browserbelege nach Quelländerung tatsächlich neu ausführen; keine bloße Hashersetzung.
+- Nicht vollständig: keine öffentliche Lizenzroute/-inventur und nur notice-only Rechtsseiten. Daher kein erfundener Link und keine Zusage vollständiger Pflichtangaben. Der gewünschte endgültige Verweistext bleibt von tatsächlichen geprüften Dokumentinhalten abhängig; aktuelle UI benennt Prüfung/Freigabe. REC-LEGAL-FOOTER-01 hält Owner, nächsten Schritt und Abschlusskriterium fest.
+- Keine Rechtsgarantie, Produktivabnahme, Main-Merge, DNS-, Credential- oder Löschaktion. Push erst nach finalen Gates/Review und aktuellem Kosten-/Writerabgleich, höchstens ein konsolidierter Lauf.
+
+# Freigegebene CSP-Meldewegkorrektur · lokaler Prüfstand vor PR46-Übertragung
+
+Rückweg3cad2ad bleibt auf preservation/reviewed-scenes-3cad2ad-20261028 erhalten.
+Neue ausdrücklich bestätigteFreigabe28.10.13:48UTC:direktenCSP-Meldeweg entfernen,
+ALLESchutzregeln erhalten;geprüftenStandPR46 und maximal5USD zusätzlicheActions.
+Nurreport-uri/report-to undReport-ToHeaderentfernt;9Schutzdirektiven sowieandere
+Header/Configwerteidentisch. DreiFokustests undechterlokalerProduktionsbrowser
+bestätigenweiterblockierteFremdskripte/-bilderbei0externenRequests. Abschließende
+Gates/SHAbindung/ReviewundRemoteergebniswerdengetrenntgeführt. KeineDNS-/Konto-/
+Credential-/RepoLösch-/MainMerge-/ProductionPromote-/Uploadaktion freigegeben.
+HistorischeAutoren bleiben erhalten;neueArbeit nutztverifiziertesnexifyai-dev.
+NextMap-Finalassetzuordnung sowieechteProvider-/Tenant-/Releaseabnahmen offen.
+
+# Bildzwischenlösung und öffentliche Build-Konfiguration · ab 702e670
+
+NeuestePriorität: Bilder zuerst.49Slots/36öffentlicheRouten mit12Pascal-,16NeX-
+und21AIFly-Referenzen; echte unveränderteOriginale angesehen/hashgebunden.
+HeroohnealteOrb; keinPlayversprechen, Filmfreigabenweiteroffen. Aktueller
+DE/NL/Mobil/Desktopnachweis und unabhängiger Bildreview werden zum Endcommit
+gebunden. RootTypeScript/Build-/Lintchecks ergänzt; SentryTS2353 lokal NICHT
+reproduziert, daher keinVercelheilungsnachweis. Autor-/ClerkDNS-/CSP-/Livegates
+bleibenoffen. KeinPush/CI/Deployment/Upload/ENV-/Credential-/DNS-/Serverwrite.
+
+Sauberer Ausgangscommit702e670 vorhanden. Kanonische Vite-Root-/Outputkonfiguration
+korrekt; Next-API-Rewriteverdacht nicht bestätigt, keine Routingänderung.
+Bestätigter Offlinefehler: Companion-Original fehlte in der Inline-Liste und
+dekodierte im frischen Standalone-Browser mit0Pixeln. Liste korrigiert, Original
+unverändert;10Buildertests und tatsächliches512×512-Decoding grün. Keine CSPänderung.
+PostHog: bestehender SDK-Test jetzt zusätzlich gegen optimierte Vite-Ausgabe;
+Next ebenfalls echterProduktionsbuild. Je8Checks/4lokal abgefangeneSendeversuche,
+synthetischeRelease, keine externenEvents; keinDashboard-/Symbolicationnachweis.
+REA, unabhängige Delta-Gegenprüfung und Gesamtgates werden exakt zum Endcommit
+geführt. KeinPush/CI/Deployment/Upload/ENV-/Server-/Credential-/Domainwrite.
+GesamtstatusweiterREQUEST_CHANGES, CSPfreigabe und echteAuslieferung offen.
+
+# Sentry-Stichprobe: gezieltes lokales Delta nach Vollreview
+
+Ausgangspunkt e058ac3527c1348a1eaa086143135c74b7553cf5 bleibt erhalten.
+C-P2-SENTRY-COUNT: Das manuelle Hilfsskript meldet eine begrenzte, ausdrücklich
+unvollständige Issue-Stichprobe statt einer falschen Gesamtzahl. Null Treffer
+beweisen keine Fehlerfreiheit; Source/Projekt/Abrufzeit und Timelineparameter sind
+explizit, synthetische Health-Events und Browserexceptions bleiben unklassifiziert.
+Keine externen Requests, Rohdaten, Server-/Secret-/CSPänderungen oder Auslieferung.
+Lokale Fixtures und Delta-Gegenprüfung werden an einen eigenen Endcommit gebunden;
+das Vollreview für e058 bleibt unverändert und wird nicht auf neue Hashes umgedeutet.
+C-P1-CSP bleibt gesperrt/offen; Gesamtstatus REQUEST_CHANGES.
+
 # Vorhandener Katalog und lokaler Produktbild-Batch
 
 Current State: v11/8975ba4 unverändert auf eigenemRemotezweig gesichert.
@@ -922,3 +1006,248 @@ Vorheriger CI-Abschnitt: PR44/4340547 gewöhnlicher Pushlauf40561206111 alle5Job
 grün; danach extern18:37:38UTC nach14929eb gemergt. Kein eigener Mainmerge.
 GitLab-Projekttransport bleibt ungebunden. Actions-Minuten knapp laut datierter
 Anbietermeldung; keine unnötigen Wiederholungsläufe oder bezahlten Runner.
+
+### Vorproduktionsmanifest technisch abgeglichen
+
+Libraryquelle libfile_4c255bb88af48191a025daecac648997 versionsgeschützt0→1
+korrigiert: SHA34cc18cacddb4e5d952dcd6b07b187d700e999b2acd00c5a41a2a4d212b23377.
+Nur zwei Manifestdateien geändert;33Inhaltsdateien, Sprechertexte, Castingstatus
+und all_audio_unheard bleiben bytegleich. Unabhängiger Sol-Bytevergleich ohne
+Findings;33innere/34äußere Einträge korrekt. Historischer0-Befund bleibt erhalten.
+Die Quellintegritätslücke ist geschlossen, keine Medien-/Stimmenfreigabe erteilt.
+27gezielte Node-Regressionsfälle bestehen. PR45 beim lesenden Nachweis weiter
+Draft85c8f17,0Reviewthreads/Reviews; keine Remote-Threads eigenmächtig gelöst.
+Nachtziel28.10.05:00UTC: Medienbereitschaft, öffentliche Flows und geschützte
+Portale getrennt prüfen. Fehlende Casting-/Figuren-/Filmbytes und tatsächlicher
+Identity-/Runtime-/Releasevertrag erlauben keine100%-Fertigstellungszusage.
+
+
+### Nachtabschluss: zwei konkrete lokale Flowlücken
+
+PORTAL-LOCAL-01: nach21synthetischen Angeboten liefert die reale lokale Session
+jetzt die jüngsten20chronologisch;neuesterPDF und fremdePDF/Send404 getestet.
+PUBLIC-LOCAL-02: validierteDE/NL/FR-Auswahl bestimmt statische Marketingtexte;
+Nutzerfakten,Replay,Persistenz und published/model_generated:false erhalten.
+Vorher26Tests mit3Rotfehlern,danach26grün;separater Sol wiederholte26ohneFinding.
+13Browser→API→SQLite-Shopfälle nach Serveränderung real erneut bestanden.
+Kein Modellaufruf,Versand,Preisänderung oder neuer produktiver Auth-/APIanschluss.
+Nachtfenster/Inputs/Owner im bestehenden Register und
+docs/contracts/night-release-checkpoint.md;Frist05:00UTC ist Ziel,keineGarantie.
+
+
+### Begrenzte Main-CI-/Gatewaygegenprüfung
+
+Main38 / CI40573693739 meldete unsafe_database_sidecar im Mehrprozessclaim;
+Queuecode identisch zu grünem4e. 50 lokale Wiederholungen bestanden bereits
+vorher; physischer CI-Race nicht reproduziert. Eine deterministisch geprüfte
+plausible Null-Link-Sidecarbedingung erhält genau ein neues lstat. Nur Abwesenheit
+oder regulär/ein Link wird akzeptiert; MainDB, Symlink, Hardlink und FIFO bleiben
+abgewiesen. 25 Queuefälle und50 weitere Mehrprozessläufe grün; Sol wiederholte25
+und Claim ohne Finding. Keine SQLite-/Transaktions-Retrys, Locks, Timeouts oder
+Sicherheitsrechte geändert. Originalursache bleibt unbewiesen; CI-Logredirect403
+wurde nicht umgangen.
+
+Gatewaybefund: Main38 hat keine Consumer der vier AIFLY-Variablen und keinen
+ConnectionsHandler. Bestehender MCP primary srv1243952/0.1.8 frisch lesbar;
+secondary srv1941843 Identität lesend bestätigt, keine Schreibprüfung. Die
+Vercel-App ist dadurch nicht verbunden. Zehn private Routen sind konfiguriert
+und aus public Vite ausgeschlossen; Next erhält die Membershipsperre.
+Anonyme HEADs scheiterten hier mit ConnectionRefused, nicht als Websiteausfall
+gewertet. Keine Secret-/Kundeninhalte gelesen, keine Serverreparatur.
+Belege: evidence/gateway-binding-2026-10-27. Nachtplan20:12 mit beiden SHA
+verifiziert, N0-N5 als Ergänzung gelesen, Master1.3 unverändert.
+Kleinster sicherer nächster Verbindungsschritt: vorhandene native typisierte
+Identity-/Healthreads nutzen; für Appintegration erst realen Handler/Commit,
+Schema und Issuer/Actor→Tenant/Rolle/Widerrufsquelle binden. Keine SSH-Rootbrücke.
+
+
+### Bestehendes Next-Projekt: konkreter Buildfix
+
+web prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5 vollständig gelesen: Repo1397719293,
+Rootapps/web, Frameworknextjs, Build/Install/Outputnull. Global nurNode24→22
+geändert und rückgelesen; Rückweg24 gespeichert, Deploymentliste unverändert.
+Fehlgeschlagener Main38-Build hatte abweichend Vite/@site/Outputapps/site/dist
+übernommen. Neue apps/web/vercel.json bindet Next/@web/.next und sicheren
+frozen-ignore-scripts-Install. Andere Projektroots sind nicht apps/web.
+Next-Entwicklungsproxy bleibt auf development beschränkt; Produktion erhält
+keinen ungültigen localhost3003-Proxy. Keine neue Fach-API dadurch behauptet.
+
+Erster Turbopacklauf scheiterte an externen vorinstallierten node_modules-
+Symlinks. Identische vorhandene Dependencies lokal physisch in diesen Checkout
+kopiert, ohne Installation/Download oder breiteren Turbopackroot. Defaultbuild,
+Webpack und Typecheck danach grün.8Auth/Deploymenttests und13echte lokale
+NextHTTP-Prüfungen bestanden, darunter10geschützteRouten503 ohne Authkonfiguration.
+Separate Sol-Prüfung ohne konkretes Finding; fehlgeschlagener Erstlog erhalten.
+Clerkübernahme bleibt unfreigegeben und wurde nicht gelesen/kopiert. Keine
+Domain-/Auth-/Team-/Firewall-/Billingänderung, kein Productionpromote.
+Next-Hinweisseiten sind keine fertigen Portale. Es fehlen echte Module sowie
+verifizierter Fach-API-/Issuer-/Membership-/Widerrufsvertrag. Belege und Rückweg:
+evidence/next-build-2026-10-27. Normales Branchpreview separat nachweisen.
+
+
+## Gemeinsame öffentliche Next-/Vite-Komposition · 27.10.2026
+
+Auf Basis682d06f verwenden beide Renderer dieselbe geprüfte öffentliche
+Datenprojektion und PublicExperience-Komposition:36Routen,49Erklärmodule,
+Guide/Videozuordnungen und sechs bestehende Shop-Einstiege. Keine neuen Medien,
+Testartikel oder Backendfähigkeiten als produktiv ausgegeben. ShopPanel ist
+jetzt gegen serverseitige Browserzugriffe abgesichert. Next-Titel bleiben pro
+Seite/Sprache eindeutig; die bestehenden Tokens und Komponenten gelten weiter.
+
+Next-PWA wird nur durch einen ausdrücklich gewählten lokalen Build aktiviert;
+Standardbuild liefert kein Manifest/Worker und registriert nichts. Aktivierter
+Testbuild lieferte dieselbe Network-only-Workerquelle wie Vite, Registrierung
+und leeren Cache. Danach deaktivierten Standard wiederhergestellt. Kein
+Produktionswechsel oder Credentialtransfer.
+
+Lokal bestanden:72Next-Routen-/Sprachfälle DE/NL,10geschützte503-Negative,
+Navigation,0Runtimefehler/0externeRequests/0Mutationen;72Vite-Routen-/Sprachfälle
+mit1724Vor/Zurück-Kanten und0Issues;108Resizefälle;13Warenkorb-/HTTP-/SQLite-
+und4Katalogfälle.53Site- und10Next-Nodetests,Default-Next-,Vite- undStandalone-
+Builds sowie487Pythonprüfungen bestanden. Aktuelle Nachweise ersetzen keine
+reale Provider-,Membership-,Portal-,Medien- oder Produktionsabnahme.
+
+Unabhängiges Sol-Vorreview ohne offenes Finding; finale Commitbindung und
+REA-Analyse der neuen Quellen werden nach Quellsicherung separat geliefert.
+Der bestehende REA-Prüfer wurde isoliert integritätsgeprüft geladen,ohne
+persistente MCP-Registrierung; dieser Bootstrap ist keine Zertifizierung.
+Vertrag und Rückweg:docs/contracts/next-public-parity.md.
+
+
+## Bestätigtes Original als Chat-Companion · 27.10.2026
+
+Auf Basis5828c14:gemeinsames OracleCompanion ersetzt die beiden N-Symbole im
+Chatkopf/Wiederöffnen-Button. AI Fly Oracle ist nur die persönliche
+Assistenzbezeichnung;Produkt-/Rollennamen bleiben erhalten. Exaktes vom Nutzer
+bestätigtes Original512x512RGBA/217874Bytes/SHA9f705e5b...330f2f66 liegt unverändert
+im öffentlichen Assetpfad. Kein neu generierter Charakter,Hero- oder Videoersatz.
+
+Nur tatsächlicher Requeststatus löst eine180ms-Transformtransition aus,ohne
+Schleife. Reduced-Motion unterbindet Neigung und Transition;initialer CSS-
+Spezifitätsfehler reproduziert und behoben. Sechs gezielte Browserfälle
+320/390/1280xmotion/reduce prüfen Originalhash nachHTTP,Dekoration,Keyboard,
+Geometrie,Accessibility-Snapshot,working→503→idle und Eingabeerhalt. Screenshots
+bleiben interne QA;keine qualifizierte Assistenztechnik-/Videoabnahme behauptet.
+
+72Next-DE/NL- und72Vite-DE/NL-Fälle,1724History-Kanten,108Resize sowie13Shop-
+und4Katalogprüfungen bestehen erneut.53Site- und11Next-Nodetests,Next-/Vite-
+undStandalonebuilds grün. Auth/Membership,Provider-/Portalfunktionen und sämtliche
+externen Grenzen unverändert. Abschließende Gesamtgates,REA-Quellanalyse und
+unabhängige exakte Commitprüfung werden nach Quellsicherung separat geliefert.
+Quelle und Grenzen:config/companion-avatar.json,docs/contracts/oracle-companion.md.
+
+
+## Öffentliche Fehlerpfade · lokaler Nachtrag 27.10.2026
+
+Drei belegte Fehler korrigiert: fehlende Anfragefähigkeiten führen zum bestehenden
+E-Mail-Kontakt statt in ein deaktiviertes Formular; ein abgelehnter Lazy-Chat-Chunk
+bleibt innerhalb einer lokalen Fehlergrenze; Suche/Kategorien/Produkt verwenden
+Katalogzustände statt Warenkorbtexte. Keine Verkaufs- oder Providerfreigabe.
+18 synthetische Browserfälle (DE/NL,320/390/1280,Session204/Fähigkeiten200/Chunkfehler)
+bestehen einschließlich Tastatur,Rückweg,Schließen und Wiederöffnen.
+72 Routen-/Sprachfälle je Next und Vite,1724 History-Kanten,108 Resize-,13 Shop-
+und4 Katalogprüfungen sowie Next/Vite/Standalonebuilds erneut bestanden.
+
+PostHog/Sentry: fremder Observability-Zweig696c0d2 liegt laut Parent bereits in
+Production; Zuständigkeit und kontrollierte Zusammenführung offen. Keine eigene
+SDK-Initialisierung,Credentialkopie oder CSP-Lockerung in diesem Nachtrag.
+Neue Push-/CI-Läufe wegen ungeklärter Actions-Folgekosten pausiert; letzter
+GitHub-Metadatenabruf401,kein Identitätswechsel. Lokal auf Basis a708a2d; kein
+Produktionsfix behauptet. Finale lokale Gates,REA und unabhängiges Review werden
+mit dem exakten Nachtragscommit im bereinigten Übergabemanifest verbunden.
+
+
+## Rein lokale Observability-Konsolidierung · 28.10.2026
+
+Neuer Integrationszweig verbindet Rückweg88f965b mit exakt696c0d2; fremder
+Branch und Produktion unverändert. Neuere Shared-Shell/Avatar/Next- und drei
+Frontendfehlerkorrekturen erhalten. Public-session204, kompatible Metadaten/CSP
+und Server-Sentry übernommen; keine CSP-Lockerung, keine aktive Connect-Tokenprobe
+oder zusätzliche Pageviewcalls. Ein gemeinsamer PostHog-Exceptioncontroller für
+Vite/Next bleibt ohne explizites Consentmanager-Signal,Token,SHA und Environment
+aus. Tatsächliche Consentoberfläche noch nicht verbunden.
+
+Echtes gepinntes SDK lokal interceptet: jeVite/Next acht Prüffälle und vier
+Wireversuche (drei positiveFehler,ein absichtlicher503),kein externesEvent.
+UnhandledError/Rejection,Chat-Boundary,Redaction,Release,keinConsent-Verkehr und
+keineSDKpersistenz geprüft. Review fand SDK-Retry-Consentlücke: dauerhaft
+abortiertes Signal und endgültiger Widerruf bisNeuladen verhindern auch nach
+unmittelbarererneuterEinwilligung alteRetries/Unload. Kein Signalwechsel,kein
+Queuehack. Debugfalse und Releasekonflikt-Negativtest ergänzt,nachgeprüft.
+
+Private Mapbuilds:Vite5/Next17Maps in eigener privater Ablage,0Mapsöffentlich;
+kein Upload. Plugin-/Debug-ID-/CI-Secret-/Deobfuskationsbeleg und tatsächlich
+ausgelieferte Releasebindung bleiben extern/offen. Details:docs/runbooks/sentry.md
+unddocs/contracts/observability-local-integration.md. Lokale Gesamtgates,REA und
+exakter unabhängiger Review werden dem finalen Integrationscommit zugeordnet.
+Keine Pushes/CI/Uploads/externen Testevents/Deployment/Domain- oder Secretaktion.
+Next steps: finalenlokalenStand prüfen/sichern;parentklärtWriterübergabe,
+GitHub401,Actionskosten,Consent-/Release-/Uploadbindung undProduktionsfreigabe.
+
+
+## Consent-Oberfläche und begrenzte Sprachkorrektur · 28.10.2026
+
+Auf Basis b4ae9bc ergänzt eine gemeinsame Footerkomponente die bisher fehlende
+Fehlerdiagnose-Auswahl. Standard aus, gleichwertige DE/NL/FR-Auswahl, Tastatur und
+Mobilansicht, keine Persistenz. SPA-Navigation erhält die Entscheidung; Neuladen
+startet aus. Widerruf auch während Laden oder ohne Konfiguration ist bis zum
+Neuladen endgültig. Technische Nichtverfügbarkeit und SDK-Aktivierung sind getrennt;
+Empfang wird nicht behauptet. 18 UI-Fälle bestanden. Der feste Chatlauncher
+überdeckte bei 320px zunächst den Datenschutzlink; behoben und nachgeprüft.
+Keine Erweiterung von Rechten, Rechtstexten oder Erfassungszwecken.
+
+Next-Authhinweise waren bei NL noch deutsch und wurden lokalisiert. Die zuvor feste
+Providerlokalisierung folgt jetzt der Shellsprache. Serveraufgelöste öffentliche
+Props bleiben erhalten; keine Secrets. Review fand zunächst eine Build-/Runtime-
+Abweichung durch Clientauflösung: korrigierte Whitelist erhält den Serververtrag.
+Vier Locale-Fälle mit Providerdouble und zwei Konfigurationsregressionen bestanden;
+echte Auth-/Tenantabnahme bleibt offen. Keine Provideraktivierung.
+
+Öffentlicher Abgleich: evidence/consent-ui-2026-10-28/public-scope-check.json.
+36 öffentliche Routen und 49 Erklärmodule bleiben ohne lokal freigegebene Filmbytes;
+keine Mockmedien, Bestellungen oder Providerfunktionen als fertig bezeichnet.
+Portal-Teilauftrag PORTAL-LOCAL-READ-01 ist im bestehenden Register vorbereitet,
+nicht ausgeführt: zuerst Statusprojektion ohne Sync-Gaps-Schreibeffekt extrahieren,
+gleiche Datenbank, keine zweite Queue. Vertrag: docs/contracts/next-local-portal-slice.md.
+Next steps: Gesamtgates, REA und unabhängiges Review am exakten Endcommit; lokalen
+Patch sichern. Keine Pushes, CI, Deployments, DNS, Uploads, Secretkonfiguration oder
+externen Testevents.
+
+## Begrenzter CI-Folgefix · 28.10.2026
+
+CI push40613517772 und PR40613522911 am4fc8753 scheiterten vor Tests/Build an ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION. Beide Apps pinnen jetzt posthog-js1.438.24 mit offiziellen npm-Integritäten und vorhandenen kompatiblen älteren Transitiven; keine neue Age-Ausnahme. Lokaler Frozen-Install besteht. Actual-SDK-Tests werden mit frischem Next-Build und erneuter Vite-Optimierung ausgeführt, alle Ingestionrequests lokal abgefangen. Keine externen Testevents.
+
+PR-Triage erhält ausschließlich einen 5-Minuten-Jobtimeout; Labels, Berechtigungen und Fehlersichtbarkeit bleiben erhalten. Bound-AI-Review40613520613 ist blocked_not_reviewed wegen diff_or_metadata_limit_exceeded, automatic_retry_allowed:false. Keine Limits gelockert, keine manuelle Wiederholung, kein Providerrequest aus diesem blockierten Lauf belegt. OpenRouterkosten sind getrennt von Actions zu behandeln.
+
+Autorisierte Clerkübernahme ist abgeschlossen: ausschließlich zwei vorhandene Preview/Development-Werte nach web Preview, Metadatenreadback bestätigt, kein Wert im Repository oder Beleg. Vorhandene Schlüssel sind Testmodus; der bestehende Production-Buildguard akzeptiert diese auch im Preview nicht. Login-/Tenantfunktion bleibt deshalb offen, keine Productionregel gelockert. VercelPreview4fc8753 für canonical und web ist BLOCKED; keine Autorumschreibung oder Deploymentumgehung. Remote-Push/PR/CI im genehmigten10USD-Rahmen bis07:00UTC, keine Main-/Prod-/Domainänderung oder Libraryübertragung.
+
+## Begrenzter Arbeitsplatz-Readschnitt · 28.10.2026
+
+PORTAL-LOCAL-READ-01 auf e2e90e0: reine SQLite-status_snapshot ohne Gapmutation,
+serverseitige Rollen-/Tenant-/Projekt-/Ablauf-/Widerrufsprüfung an der bestehenden
+LocalAppBackend-Grenze, begrenzte DTOs und gemeinsame DE/NL-Status-/Freigabenansicht
+unter /intern/workspace. Die interne API ist zusätzlich geschützt und ohne echte
+Backend-/Membershipbindung weiterhin geschlossen. Keine Geschäftsfreigabe oder
+Mutation durch die Ansicht. Technische Reviewreceipts sind vorhanden; Budgetwerte
+bleiben unbekannt statt aus technischen Limits erfunden.
+
+Fokustests und reale lokale Browser→HTTP→persistente Controllerfixture laufen mit
+synthetischen Sessions; kein realer Providerzugriff. Review fand entweichende
+DB-/Dateifehler und irreführenden aggregierten In-Bearbeitung-Status ohne Worker:
+neutral503/no-store und tatsächliche Offenen-/Reviewzustände korrigiert und separat
+nachgeprüft. Vier Browserfälle mit20negativen Sessions,108Resizechecks,502Python-,
+62Site-,13Nexttests sowie alle vier lokalen Gesamtgates bestanden. ExakteCommit-
+REA/Reviewbelege werden separat an den gesicherten Endhash gebunden. API-/Clerk-Membership und vollständiger Arbeitsplatz bleiben Livegates.
+Kein Diff-Limit-/Previewguard-/Credential-/Server-/Domainwechsel.
+
+## Preview-Guard und vollständiger PR-Review · 28.10.2026
+
+Auf7ce5338 baut ein enger Sourcefix auf: matching Testschlüssel ausschließlich
+bei serverseitig bestätigter echter VercelPreview trotz optimiertem NODE_ENVproduction.
+Production/Live bleibt gültig; unbekannte,widersprüchliche,Development-/Test- und
+Customtargetkonfigurationen initialisieren keinen Provider. Keine Schlüsselkopie,
+keine neue Tenant-/Membershipfreigabe,kein Deployment oder Autorwechsel.
+16Next-Auth/Deploymenttests grün, einschliesslich neuer Positiv-/Negativmatrix.
+Gesamtgates/REA und vollständige unabhängige PR-Coverage ab realer PR-Basis folgen
+am gesicherten Endhash. Bound-AI-Limit/Scanner/Binärgate bleiben unverändert;
+keine zusätzlichen OpenRouter-Aufrufe oder ausgelassenen Dateien.

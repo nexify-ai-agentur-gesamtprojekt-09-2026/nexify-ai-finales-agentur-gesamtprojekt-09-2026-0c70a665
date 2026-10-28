@@ -3,12 +3,59 @@
 No execution queue, authority assignment or runtime acceptance is created here.
 """
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTER = Path('config/acceptance-coverage.json')
 VIEW = Path('docs/contracts/requirements-reconciliation.md')
+
+
+def validate_legal_footer_evidence(root):
+    """Stored local measurements only; never run a browser or grant acceptance."""
+    errors = []
+    def read_fixed(relative):
+        path = root / relative
+        if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+            raise ValueError('Unsafe fixed evidence/source path')
+        return path
+    try:
+        mapping = json.loads(read_fixed('config/site-map.json').read_text())
+        pages = {p['path']: p for p in mapping['pages'] if p['id'] in mapping['public_allowlist']
+                 and p['access']['visibility'] == 'public' and p['access']['auth_required'] is False}
+        locales, widths = ('de', 'nl', 'fr'), (320, 1280)
+        expected = {(path, locale, width) for path in pages for locale in locales for width in widths}
+        interactions = {(path, locale, width) for path in ('/', '/teileklar') for locale in locales for width in widths}
+        sources = ('apps/web/components/SiteFooter.tsx', 'apps/web/components/WorkspaceRebuild.css',
+                   'config/site-map.json', 'apps/site/tests/browser-legal-footer.mjs')
+        current = {p: hashlib.sha256(read_fixed(p).read_bytes()).hexdigest() for p in sources}
+        key = lambda row: (row.get('path'), row.get('locale'), row.get('width'))
+        for name in ('browser.json', 'next-browser.json'):
+            report = json.loads(read_fixed('evidence/legal-footer-2026-10-28/' + name).read_text())
+            rows, actions = report.get('views', []), report.get('interaction', [])
+            renderer = 'Vite-local' if name == 'browser.json' else 'Next-local'
+            valid = (report.get('renderer') == renderer and report.get('passed') is True and type(report.get('external_requests')) is int
+                     and report.get('external_requests') == 0
+                     and report.get('page_errors') == [] and report.get('source_sha256') == current
+                     and len(rows) == len(expected) and {key(r) for r in rows} == expected
+                     and len(actions) == len(interactions) and {key(r) for r in actions} == interactions)
+            for row in rows:
+                context = pages.get(row.get('path'), {}).get('site_context')
+                paths = ['/teileklar/rechtliches'] if context == 'teileklar' else ['/impressum', '/datenschutz']
+                valid = valid and (row.get('passed') is True and row.get('legal_context') == context
+                                   and type(row.get('width')) is int
+                                   and row.get('legal_paths') == paths and row.get('legal_disclosures') == 1
+                                   and type(row.get('legal_disclosures')) is int
+                                   and type(row.get('all_pages_disclosures_outside')) is int
+                                   and row.get('all_pages_disclosures_outside') == 1)
+            valid = valid and all(all(row.get(k) is True for k in
+                    ('passed', 'keyboard_open_close', 'direct_links', 'back_reload')) for row in actions)
+            if not valid:
+                errors.append('Incomplete or stale legal footer browser evidence: ' + name)
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        errors.append('Unreadable or malformed legal footer browser evidence')
+    return errors
 
 
 def validate(document, root):
@@ -46,6 +93,14 @@ def validate(document, root):
                     or path.is_symlink() or not path.resolve().is_relative_to(root.resolve())
                     or not path.is_file()):
                 errors.append('Invalid implementation source: ' + relative)
+            elif relative != str(REGISTER):
+                expected = document.get('source_sha256', {}).get(relative)
+                if expected is None:
+                    errors.append('Unbound implementation source: ' + relative)
+                elif expected != hashlib.sha256(path.read_bytes()).hexdigest():
+                    errors.append('Stale implementation source: ' + relative)
+    if not errors and any(row.get('requirement_id') == 'REC-LEGAL-FOOTER-01' for row in requirements):
+        errors.extend(validate_legal_footer_evidence(root))
     return errors
 
 

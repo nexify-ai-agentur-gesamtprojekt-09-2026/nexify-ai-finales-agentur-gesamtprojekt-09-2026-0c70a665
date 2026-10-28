@@ -1,0 +1,23 @@
+{
+  "scope": "local existing visitor draft adapter only;not production auth/workplace integration",
+  "base_commit": "b1948bd",
+  "cases": [
+    {
+      "id": "PORTAL-LOCAL-01",
+      "bug": "session selected oldest20quotes but UI used last as newest",
+      "fix": "latest20selected DESC then restored chronological order;owner predicate unchanged",
+      "proof": "21real loopback HTTP fixture writes;repeated reload returns latest20;latest PDF works,foreign PDF/send404"
+    },
+    {
+      "id": "PUBLIC-LOCAL-02",
+      "bug": "NL/FR marketing draft ignored requested locale",
+      "fix": "static3locale templates with unchanged supplied facts;no model/publication",
+      "proof": "DE/NL/FR HTTP draft persistence/replay;invalidlocale422;published/model_generated false"
+    }
+  ],
+  "red": "26tests,3failures(oldest20 and NL/FR)",
+  "green": "26tests passed",
+  "independent_review": "separate read-only Sol repeated26tests;no concrete findings;commit binding follows",
+  "shop_browser": "13actual isolated browser/API/SQLite checks repeated after gateway source change and passed",
+  "production_accepted": false
+}

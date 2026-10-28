@@ -1,0 +1,24 @@
+.mail-workspace{min-width:0}
+.mail-workspace p,.mail-workspace li,.mail-workspace dd,.mail-workspace h2{overflow-wrap:anywhere}
+.mail-account{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);margin-block:var(--space-4)}
+.mail-workspace input,.mail-workspace textarea,.mail-workspace select{box-sizing:border-box;min-width:0;max-width:100%;min-height:var(--target-min);padding:var(--space-3);color:var(--color-text-primaer);background:var(--color-graphit-900);border:1px solid var(--color-linie-stark);border-radius:var(--radius-klein);font:inherit}
+.mail-workspace select{width:100%}
+.mail-workspace button{min-height:var(--target-min);white-space:normal;overflow-wrap:anywhere}
+.mail-workspace :is(button,input,textarea,select):focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+.mail-workspace button:disabled{opacity:.65;cursor:not-allowed}
+.mail-metadata{display:grid;gap:var(--space-3);margin-block:var(--space-4)}
+.mail-metadata dt{font-weight:600;color:var(--color-text-sekundaer)}
+.mail-metadata dd{margin:0}
+.mail-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-5)}
+.mail-columns>*{min-width:0}
+.mail-message-list{list-style:none;padding:0;display:grid;gap:var(--space-3)}
+.mail-message-list button{display:flex;flex-direction:column;align-items:flex-start;text-align:start;width:100%;gap:var(--space-2)}
+.mail-message-list button[aria-pressed=true]{border-color:var(--color-marke-lime)}
+.mail-message,.mail-composer,.mail-saved{padding:var(--space-4);border:1px solid var(--color-linie-stark);border-radius:var(--radius-karte);margin-block:var(--space-4)}
+.mail-plain-text{white-space:pre-wrap;overflow-wrap:anywhere;padding-block:var(--space-4);border-block:1px solid var(--color-linie-fein)}
+.mail-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-block:var(--space-4)}
+.mail-composer label{display:grid;gap:var(--space-2);margin-block:var(--space-4);font-weight:600}
+.mail-composer textarea{resize:vertical;width:100%;font-weight:400}
+.mail-composer input{width:100%;font-weight:400}
+@media(min-width:820px){.mail-columns{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}.mail-workspace select{width:auto}.mail-metadata{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.workspace-shell:has(.mail-workspace)>.reopen-chat{position:static;grid-column:1/-1;transform:none;justify-self:start;margin:var(--space-4);z-index:auto}

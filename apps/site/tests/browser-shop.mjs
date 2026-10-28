@@ -10,7 +10,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url)),repo=fileURLToPath(new URL('../../../',import.meta.url));
-const sources=['apps/agent-gateway/cart.py','apps/agent-gateway/server.py','apps/web/components/ShopPanel.tsx','apps/web/components/ShopPanel.css','apps/web/components/Workspace.tsx','apps/site/src/main.tsx','apps/site/tests/browser-shop.mjs','apps/site/tests/fixtures/shop-server.py'];
+const sources=['apps/agent-gateway/cart.py','apps/agent-gateway/server.py','apps/web/components/DeferredChatBoundary.tsx','apps/web/components/PublicRequestFallback.tsx','apps/web/components/OracleCompanion.tsx','apps/web/components/OracleCompanion.css','apps/web/lib/i18n.ts','apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png','apps/web/components/PublicExperience.tsx','apps/web/components/ShopPanel.tsx','apps/web/components/ShopPanel.css','apps/web/components/Workspace.tsx','apps/site/src/main.tsx','apps/site/tests/browser-shop.mjs','apps/site/tests/fixtures/shop-server.py'];
 async function hashes(){return Object.fromEntries(await Promise.all(sources.map(async path=>[path,createHash('sha256').update(await readFile(join(repo,path))).digest('hex')])));}
 const before=await hashes();
 const folder=await mkdtemp(join(tmpdir(),'nexify-browser-shop-')),database=join(folder,'visitor.sqlite');

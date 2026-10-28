@@ -23,5 +23,7 @@
     "production/provider/qualified AT acceptance",
     "different model weights or human approval"
   ],
-  "production_accepted": false
+  "production_accepted": false,
+  "reviewed_source_commit": "85c8f177567f563187f7c3396ac4cca749425d17",
+  "historical_source_hashes": true
 }

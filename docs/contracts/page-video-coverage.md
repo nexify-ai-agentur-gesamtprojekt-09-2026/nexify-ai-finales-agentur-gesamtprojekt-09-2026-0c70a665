@@ -2,7 +2,7 @@
 
 Abgeleitete Ansicht von `config/page-media-registry.json`, keine zweite Aufgaben- oder Freigabequelle.
 
-Registry SHA256: `3a670b6713617164902782e94b59ec6fbed5ce465b1fc074aa33480b91792038`.
+Registry SHA256: `bca4a4a7d96cfb5e1230b73caabcc69236c8ccf85274392fa1ec3a655e3aeefd`.
 
 46 Routen: 36 öffentlich, sechs privat und vier intern. Null freigegebene Seitenfilme; 108 Seitenintro-Sprachplätze und 147 Sprachplätze für49Module offen. Seitenintro-Filme ersetzen keine Modulfilme. Sieben DE-Filme/21 Szenen sind Vorproduktion, sechs nur als öffentliche Textpläne zugeordnet; der interne Arbeitsplatzfilm ist noch ohne verbindliche Route.
 
@@ -59,7 +59,7 @@ Registry SHA256: `3a670b6713617164902782e94b59ec6fbed5ce465b1fc074aa33480b917920
 
 - Medienproduktion/Brand: freigegebene endgültige AIFly-Figur; das bestehende Orb-/Augenbild ist abgelehnte Referenz, kein freigegebenes Poster. Der 13-Sekunden-Reviewclip wird nicht zu einem finalen Asset umetikettiert.
 - Casting/Audio: geprüfte Rollenzuordnung und Aussprache, tatsächliche Audio-/Videoexports je benötigter Sprache. Die vorgeschlagenen Stimmen und der angefragte 540-Credit-Pilot sind nicht freigegeben.
-- Quellenowner: zwei interne Casting-Manifestabweichungen der Vorproduktion auflösen und Version/Provenienz nachweisen. Das unveränderte Quellarchiv bleibt als historische Quelle erhalten.
+- Quellenowner: Manifestabweichungen in Libraryversion1 nachgewiesen korrigiert;33Inhaltsdateien unverändert, Version0 historisch erhalten. Stimmen-/Produktionsfreigabe bleibt offen.
 - Fachredaktion: passende routebezogene Filme/Fassungen für die weiteren Kontexte; bestehende individuelle Textmodule bleiben erhalten. Kein beliebiges Wiederverwenden eines Hero-Films auf allen Seiten.
 - QA/Publikation: echte Bewegungs-/Ton-/Figuren-/Hintergrundprüfung, sprachgleiche Untertitel und beschreibendes Transkript, Rechte/Versions-/Renditionbindung und tatsächlicher Browserdecode/Mobil-/Assistenztechnikbeleg.
 - Private Bereiche: bestätigter Session-/Rollen-/Tenantvertrag und geschützte Medienauslieferung; das öffentliche Build enthält diese Inhalte und Bindungen nicht.

@@ -37,6 +37,13 @@
 }
 .editorial-next-step:hover { color: var(--color-text-primaer); }
 .editorial-module.has-video { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+.editorial-module.has-image { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+.presenter-scene { display: grid; justify-items: center; gap: var(--space-3); margin: 0; padding: var(--space-4); border-radius: var(--radius-karte); background: var(--color-graphit-850); }
+.presenter-scene img { display: block; width: 100%; max-height: 340px; height: auto; object-fit: contain; }
+.presenter-scene figcaption { color: var(--color-text-gedaempft); font-size: 13px; }
+.presenter-scene.scene-hero { background: transparent; padding: 0; }
+.presenter-scene.scene-hero img { max-height: 360px; }
+.home-interim-scenes { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: end; gap: var(--space-3); width: 100%; }
 .editorial-module.media-on-right .editorial-module-media { order: 2; }
 .editorial-module-media figure { margin: 0; }
 .editorial-module-media video { display: block; width: 100%; height: auto; border-radius: var(--radius-klein); }
@@ -73,6 +80,7 @@
 @media (max-width: 820px) {
   .editorial-explainers { gap: var(--space-6); padding: var(--space-6) var(--space-5); }
   .editorial-module.has-video { grid-template-columns: minmax(0, 1fr); }
+  .editorial-module.has-image { grid-template-columns: minmax(0, 1fr); }
   .editorial-module.media-on-right .editorial-module-media { order: initial; }
   .editorial-guide { margin-inline: var(--space-5); }
 }

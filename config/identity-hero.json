@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "identity-hero-v1",
+  "source": {
+    "library_file_id": "libfile_f9eab909ef9c81918fd6eaa5e958a543",
+    "version": 1,
+    "html_sha256": "87cce3dcfee53bc6573efe1ae81e76bdf80f81542f5e746448a96ed087057e0c"
+  },
+  "decision": {
+    "date": "2026-10-28",
+    "source_type": "parent_reported_explicit_user_acceptance",
+    "scope": "interim_identity_composition_until_real_approved_videos",
+    "production_release_granted_by_this_file": false
+  },
+  "asset_registry": "config/interim-scene-images.json",
+  "component": "apps/web/components/IdentityHero.tsx",
+  "style": "apps/web/components/IdentityHero.css",
+  "geometry": {
+    "desktop_aspect_ratio": 1.6,
+    "narrow_container_max_px": 700,
+    "narrow_stage_aspect_ratio": 0.8,
+    "narrow_text_above_figures": true
+  },
+  "locales": ["de", "nl", "fr"],
+  "original_asset_bytes_changed": false,
+  "video_produced": false,
+  "runtime_or_provider_accepted": false
+}

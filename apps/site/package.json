@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/generate-public-data.mjs && vite",
-    "build": "node scripts/generate-public-data.mjs && tsc --noEmit && vite build",
+    "build": "node scripts/generate-public-data.mjs && pnpm --dir ../.. lint && tsc --noEmit -p ../../tsconfig.api.json && tsc --noEmit && vite build",
     "typecheck": "node scripts/generate-public-data.mjs && tsc --noEmit",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
@@ -18,10 +18,13 @@
     "@ai-sdk/react": "4.0.157",
     "@clerk/localizations": "4.24.1",
     "@clerk/react": "6.18.1",
+    "@sentry/react": "11.9.0",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "posthog-js": "1.438.24"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^11.9.0",
     "@types/node": "22.18.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",

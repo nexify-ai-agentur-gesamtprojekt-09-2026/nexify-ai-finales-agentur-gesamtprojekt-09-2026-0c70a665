@@ -339,7 +339,13 @@ class LocalControl:
 
     def status(self,request_id):
         self.sync_gaps(request_id)
-        with self.queue.connection() as db:
+        return self.status_snapshot(request_id)
+
+    def status_snapshot(self,request_id):
+        """Pure scoped snapshot. No gap reconciliation, lease renewal or event writes."""
+        rq.identifier(request_id)
+        with self.queue.connection(read_only=True) as db:
+            db.execute("BEGIN")  # One read snapshot across jobs, receipts and parent join.
             rows=db.execute('SELECT j.* FROM control_jobs j JOIN control_requests r ON r.id=j.request_id WHERE r.id=? AND r.tenant=? AND r.project=? ORDER BY j.rowid',(request_id,self.tenant,self.project)).fetchall()
             require(rows,'scoped_request_not_found')
             jobs=[{key:row[key] for key in ('id','local_id','state','attempts','worker','fence','result_hash','checkpoint','blocked_reason','gap_id')} for row in rows]
@@ -350,6 +356,7 @@ class LocalControl:
                 receipt=db.execute('SELECT * FROM control_reviews WHERE job_id=?',(job['id'],)).fetchone()
                 orphaned=job['state']=='in_progress_limited' and (lease is None or lease['job_id']!=job['id'] or lease['token']!=job['fence'] or lease['expires']<=self.now())
                 definition=json.loads(self._job(db,job['id'])['definition']); spec=json.loads(row['spec'])
+                job['valid_until']=definition['deadline']
                 expired=self.now()>=definition['deadline']
                 cause=job['blocked_reason'] or ('local_lease_expired_or_superseded' if orphaned else None)
                 next_action={
@@ -376,6 +383,38 @@ class LocalControl:
                     'external_knowledge_return_verified':False}
             return {'id':request_id,'state':'verified_complete' if all(j['closed_loop_receipt']['closed'] for j in jobs) else 'blocked_not_reviewed' if any(r['state']=='blocked_not_reviewed' for r in rows) else 'in_progress_limited',
                     'jobs':jobs,'proof_scope':'local_only','distributed_fencing_verified':False,'production_accepted':False}
+
+
+    def workspace_status(self, request_id):
+        """Versioned allowlist DTO; never expose raw spec/checkpoint/paths/actor claims."""
+        snapshot = self.status_snapshot(request_id)
+        jobs = []
+        approvals = []
+        for job in snapshot['jobs']:
+            follow = job['follow_up']
+            receipt = job['closed_loop_receipt']
+            jobs.append({key: job[key] for key in ('id', 'local_id', 'state', 'attempts', 'result_hash')})
+            jobs[-1].update(owner_role=follow['owner_role'], blocked_reason=follow['cause'],
+                            next_action=follow['next_action'], joined=receipt['closed'])
+            if job['state'] in ('review_pending', 'verified_complete'):
+                approvals.append(dict(
+                    id=job['id'], subject=job['local_id'], purpose='independent_local_result_review',
+                    status='accepted_local_only' if receipt['closed'] else 'review_pending',
+                    owner_role='independent_local_reviewer', risk='local_read_only',
+                    cost_cap=None, valid_until=job['valid_until'],
+                    source=dict(result_hash=receipt['result_hash'], contract_hash=receipt['contract_hash'],
+                                evidence_sha256=receipt['review_evidence_sha256']),
+                    next_action=follow['next_action']))
+        state = ('verified_complete' if all(j['joined'] for j in jobs) else
+                 'blocked_not_reviewed' if any(j['state']=='blocked_not_reviewed' for j in jobs) else
+                 'in_progress_limited' if any(j['state']=='in_progress_limited' for j in jobs) else
+                 'review_pending' if any(j['state']=='review_pending' for j in jobs) else
+                 'open_awaiting_verification')
+        return dict(schema_version='workspace-read-1', request_id=snapshot['id'],
+                    state=state, jobs=jobs, approvals=approvals,
+                    approval_scope='existing_local_result_reviews_only',
+                    business_approval_binding='not_connected', proof_scope='local_only',
+                    production_accepted=False)
 
 
 def main():
