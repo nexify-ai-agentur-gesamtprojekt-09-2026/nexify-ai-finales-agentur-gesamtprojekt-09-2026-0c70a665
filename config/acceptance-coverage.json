@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "d6a6a0375fc8f4614b0830ae66e50f858e883efacc0f6a100267971973bbf51b",
-    "PROGRESS.md": "17b4644fe7519fe4b7ebad7bf0c41f8d0d2934465aa255a5f82811547da4b8e2",
+    "PROGRESS.md": "0ec0db5ab721ae0039798e8d0a3e04855a126e0630eeaef8f2d4272d874f5e3d",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
