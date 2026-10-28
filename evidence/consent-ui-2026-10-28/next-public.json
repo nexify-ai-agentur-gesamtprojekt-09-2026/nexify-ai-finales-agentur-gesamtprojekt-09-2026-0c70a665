@@ -395,7 +395,7 @@
     "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "15fbf55b0ae3a154a8036a8d777ec420c92e7fe4fb246f4892b270256ba57e8a",
     "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
     "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
-    "apps/web/components/SiteFooter.tsx": "e575e1f8e842a4069447429a1ab3ae75c8b6591611ad228a35a58220321d8e45",
+    "apps/web/components/SiteFooter.tsx": "0f9ada68795470aa996c4044ee55820413a2ec7e1b2496d7031c225302bc1126",
     "apps/web/auth/tests/browser-public-experience.mjs": "ac1710eebf128eab2a06d149d2e322b9e1a92ab76a83b496136e34d1ca70bc43"
   },
   "auth_mobile": [

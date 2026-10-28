@@ -1,0 +1,954 @@
+{
+  "scope": "local optimized shared footer;not legal completeness or production acceptance",
+  "renderer": "Vite-local",
+  "views": [
+    {
+      "path": "/",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 320,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 320,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 1280,
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 1280,
+      "locale": "nl",
+      "passed": true
+    }
+  ],
+  "interaction": [
+    {
+      "path": "/",
+      "width": 320,
+      "locale": "de",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 320,
+      "locale": "de",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 320,
+      "locale": "nl",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 320,
+      "locale": "nl",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "locale": "de",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "locale": "de",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "locale": "nl",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "locale": "nl",
+      "keyboard_open_close": true,
+      "direct_links": true,
+      "back_reload": true,
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "apps/web/components/SiteFooter.tsx": "0f9ada68795470aa996c4044ee55820413a2ec7e1b2496d7031c225302bc1126",
+    "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
+    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
+    "apps/site/tests/browser-legal-footer.mjs": "f0e4573b3f3d339b4785b41a56bcbea4dc165d94c89c57a357c31d5eb4ca7daf"
+  },
+  "missing_license_route": true,
+  "external_requests": 0,
+  "page_errors": [],
+  "passed": true
+}

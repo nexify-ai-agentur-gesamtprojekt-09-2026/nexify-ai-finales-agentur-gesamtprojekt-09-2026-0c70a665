@@ -59,6 +59,13 @@
 .footer-bottom { grid-column: 1 / -1; display: flex; align-items: center; flex-wrap: wrap; gap: 24px; padding-top: 24px; border-top: 1px solid var(--color-linie-mittel); }
 .structured-footer .footer-bottom details { margin-left: auto; }
 .structured-footer .footer-bottom details nav { max-width: 300px; }
+.footer-legal { grid-column: 1 / -1; min-width: 0; border-top: 1px solid var(--color-linie-mittel); padding-top: 24px; }
+.structured-footer .footer-legal-direct { display: flex; flex-wrap: wrap; gap: 8px 24px; max-width: none; }
+.structured-footer .footer-legal-direct a { display: inline-flex; align-items: center; min-width: 44px; }
+.structured-footer .footer-legal-details { margin: 16px 0 0; }
+.footer-legal-details summary { display: list-item; min-height: 44px; padding: 10px 0; color: var(--color-text-primaer); cursor: pointer; overflow-wrap: anywhere; }
+.footer-legal-details div { max-width: 72ch; }
+.footer-legal-details p { margin: 0 0 12px; overflow-wrap: anywhere; }
 @media (max-width: 1500px) { .account-link { display: none; } }
 @media (max-width: 1200px) { .site-header > nav { display: none; } }
 @media (max-width: 820px) { .workspace-shell { grid-template-columns: minmax(0, 1fr); } .site-header { padding: 16px 20px; gap: 12px; } }

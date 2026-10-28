@@ -1,3 +1,10 @@
+## Rechtsfußzeile · lokales Delta nach d98c106 · 28.10.2026
+
+- Derselbe Footer für Vite/Next: ständig sichtbare echte Links zu Impressum/Datenschutz, zusätzlicher nativer Klappbereich mit Fokus, aria-expanded und DE/NL/FR-Texten. Bestehende Gruppen, Consent und Fachhinweise bleiben erhalten.
+- Lokal optimierte Vite- und Next-Ausgabe jeweils 144 Footeransichten und 8 Tastatur-/Direktlink-/Zurück-/Reloadfälle ohne externe Requests oder Laufzeitfehler. Sourcebindung: evidence/legal-footer-2026-10-28/. Consent-, Resize- und kritische Browserbelege nach Quelländerung tatsächlich neu ausführen; keine bloße Hashersetzung.
+- Nicht vollständig: keine öffentliche Lizenzroute/-inventur und nur notice-only Rechtsseiten. Daher kein erfundener Link und keine Zusage vollständiger Pflichtangaben. Der gewünschte endgültige Verweistext bleibt von tatsächlichen geprüften Dokumentinhalten abhängig; aktuelle UI benennt Prüfung/Freigabe. REC-LEGAL-FOOTER-01 hält Owner, nächsten Schritt und Abschlusskriterium fest.
+- Keine Rechtsgarantie, Produktivabnahme, Main-Merge, DNS-, Credential- oder Löschaktion. Push erst nach finalen Gates/Review und aktuellem Kosten-/Writerabgleich, höchstens ein konsolidierter Lauf.
+
 # Freigegebene CSP-Meldewegkorrektur · lokaler Prüfstand vor PR46-Übertragung
 
 Rückweg3cad2ad bleibt auf preservation/reviewed-scenes-3cad2ad-20261028 erhalten.

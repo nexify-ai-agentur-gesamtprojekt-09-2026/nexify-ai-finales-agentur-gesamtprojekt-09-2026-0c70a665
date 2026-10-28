@@ -59,6 +59,7 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-CONSENT-UI-LOCAL-20261028: delegated_user_frontend_implementation_scope; Datum unbekannt; parent_verified_excerpt; parent thread01a17489-405e-7098-b452-a8c54ba42016;local consent/UI continuation fromb4ae9bc. Umfang: Consent UI in existing shell plus bounded local frontend fixes;no new collection,rights,cost or external actions
 - SRC-INTERIM-IMAGES-20261028: user_instruction_reported_by_parent; Datum 2026-10-28; parent_verified_excerpt; parent thread01a17489-405e-7098-b452-a8c54ba42016;user live-call instruction2026-10-28. Umfang: Existing suitable scene images temporarily before videos;images first,then deployment codechecks;no media generation/credentials/security/remote release authorization
 - SRC-CSP-REPORT-REMOVAL-APPROVAL-20261028: explicit_user_scoped_security_and_PR_CI_approval_reported_by_parent; Datum 2026-10-28T13:48:46.876029Z; parent_verified_excerpt; Parent verified user_message.read_messages Sentinel_4b826df48b148191b777746858d91e1f after questionSentinel_8032ba350cb081919d997f9ae8c00d9a;partial=false. Umfang: Remove direct CSP report-toPostHog only while preserving all protective rules;transferreviewedcodePR46 and max5USD additionalActions until evening;no other provider spend,identity rewriting,repo deletion,DNS or account changes bythiswriter
+- SRC-LEGAL-FOOTER-20261028: user_legal_document_navigation_requirement_reported_by_parent; Datum 2026-10-28T14:37:00Z; parent_verified_excerpt; Parent-transmitted explicit USER excerpt 2026-10-28 14:37 UTC; original not independently read in this executor. Umfang: Shared collapsible footer; mandatory details in legal documents; real legal links remain permanently accessible; no legal-safety guarantee or invented operator information.
 
 ## Soll / Ist / Abschluss
 
@@ -534,3 +535,14 @@ Auslieferung: local_fixed_verified; keine Gesamtanforderung abgenommen.
 Lücke: Real release/integration readback,legal/product privacy approval,actual provider/tenant acceptance and source-map upload/deobfuscation remain open;media not supplied in localapprovedprojection.
 Nächster Schritt (Existing web writer;product/privacy and release owners for real activation.): Finish exact local gates,REA and independent Sol review;retainb4rollback;no remote publication while cost/accessgates open.
 Abschluss: Authorized exact release has reviewed consent explanation,real redacted capture/readback and qualified auth/provider acceptance;local tests alone do not close this.
+
+### REC-LEGAL-FOOTER-01
+
+Soll (SRC-LEGAL-FOOTER-20261028): One shared collapsible legal footer, permanent real imprint/privacy/license links outside its disclosure, DE/NL and accessible mobile/keyboard behavior.
+Einordnung: Public navigation only; no legal certification. Requested final wording is deferred because actual imprint/privacy routes are notice-only; truthful current copy preserves their pending release status. No license route invented.
+Dateien/Funktionen: apps/web/components/SiteFooter.tsx, apps/web/components/WorkspaceRebuild.css, apps/site/tests/browser-legal-footer.mjs, config/site-map.json, evidence/legal-footer-2026-10-28/browser.json, evidence/legal-footer-2026-10-28/next-browser.json
+Beleg: Optimized Vite144 and Next144 route/locale/viewport footer views;each8 actual keyboard/open/close/links/back/reload cases;0external requests/page errors;source-bound receipts evidence/legal-footer-2026-10-28. Existing consent18,resize108 and critical subset repeated after shared source change.
+Auslieferung: local_built_browser_verified_remote_update_pending; keine Gesamtanforderung abgenommen.
+Lücke: No public licenses route or complete release-specific license inventory; imprint/privacy remain notice_only_legal_text_release_pending. Owner/legal content and attribution review not replaced by footer UI.
+Nächster Schritt (Existing web writer for UI and inventory; product/legal owner for applicable operator/privacy/attribution content.): Complete final local gates,REA and independent exact-commit review,then at most one authorized PR update after budget and writer readback. Separately author release-specific license inventory and complete/review legal pages before final wording or legal acceptance.
+Abschluss: Exact released shared footer has directly reachable complete and reviewed legal documents plus release-specific third-party license notices; qualified legal scope review and real release readback.

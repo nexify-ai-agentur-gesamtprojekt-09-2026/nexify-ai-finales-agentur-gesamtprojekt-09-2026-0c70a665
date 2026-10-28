@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T13:14:14.639Z",
+  "observed_at": "2026-10-28T14:48:46.564Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -42,11 +42,11 @@
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
-    "apps/web/components/SiteFooter.tsx": "e575e1f8e842a4069447429a1ab3ae75c8b6591611ad228a35a58220321d8e45",
+    "apps/web/components/SiteFooter.tsx": "0f9ada68795470aa996c4044ee55820413a2ec7e1b2496d7031c225302bc1126",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
     "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
     "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
-    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
+    "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
     "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
@@ -87,282 +87,6 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/leistungen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 339,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/leistungen/websites",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen/websites",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen/websites",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 342,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/leistungen/agenten-automatisierung",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen/agenten-automatisierung",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen/agenten-automatisierung",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 342,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/leistungen/apps-portale",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen/apps-portale",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungen/apps-portale",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 342,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/leistungsumfang",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungsumfang",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/leistungsumfang",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 342,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/loesungen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/loesungen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/loesungen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 328,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/preise-ablauf",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/preise-ablauf",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/preise-ablauf",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 326,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/wissen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 286,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 285,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/unternehmen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/unternehmen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/unternehmen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 286,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/kontakt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/kontakt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/kontakt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 288,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
         "count": 360,
         "all_doubled": true
       },
@@ -370,203 +94,203 @@
       "content_overflows": []
     },
     {
-      "path": "/produkte/one",
+      "path": "/leistungen",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/produkte/one",
+      "path": "/leistungen",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/produkte/one",
+      "path": "/leistungen",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 317,
+        "count": 348,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/produkte/api",
+      "path": "/leistungen/websites",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/produkte/api",
+      "path": "/leistungen/websites",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/produkte/api",
+      "path": "/leistungen/websites",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 317,
+        "count": 351,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/impressum",
+      "path": "/leistungen/agenten-automatisierung",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/impressum",
+      "path": "/leistungen/agenten-automatisierung",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/impressum",
+      "path": "/leistungen/agenten-automatisierung",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 283,
+        "count": 351,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/datenschutz",
+      "path": "/leistungen/apps-portale",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/datenschutz",
+      "path": "/leistungen/apps-portale",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/datenschutz",
+      "path": "/leistungen/apps-portale",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 283,
+        "count": 351,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/vertragsgrundlagen",
+      "path": "/leistungsumfang",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/vertragsgrundlagen",
+      "path": "/leistungsumfang",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/vertragsgrundlagen",
+      "path": "/leistungsumfang",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 283,
+        "count": 351,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/ki-hinweise",
+      "path": "/loesungen",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/ki-hinweise",
+      "path": "/loesungen",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/ki-hinweise",
+      "path": "/loesungen",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 283,
+        "count": 337,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/barrierefreiheit",
+      "path": "/preise-ablauf",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/barrierefreiheit",
+      "path": "/preise-ablauf",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/barrierefreiheit",
+      "path": "/preise-ablauf",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 283,
+        "count": 335,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/cookies",
+      "path": "/wissen",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/cookies",
+      "path": "/wissen",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/cookies",
+      "path": "/wissen",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 283,
+        "count": 295,
         "all_doubled": true
       },
       "overflow": false,
       "content_overflows": []
     },
     {
-      "path": "/anmelden",
+      "path": "/wissen/projekt-vorbereiten",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/anmelden",
+      "path": "/wissen/projekt-vorbereiten",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/anmelden",
+      "path": "/wissen/projekt-vorbereiten",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -577,6 +301,282 @@
       "content_overflows": []
     },
     {
+      "path": "/unternehmen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 295,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/kontakt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 297,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 369,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/one",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 326,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/api",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 326,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/impressum",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 292,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/datenschutz",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 292,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 292,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 292,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 292,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/cookies",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 292,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/anmelden",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 303,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/registrieren",
       "width": 390,
       "text_spacing": true,
@@ -593,7 +593,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 308,
+        "count": 317,
         "all_doubled": true
       },
       "overflow": false,
@@ -616,7 +616,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 285,
+        "count": 294,
         "all_doubled": true
       },
       "overflow": false,
@@ -636,75 +636,6 @@
     },
     {
       "path": "/teileklar/suche",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 284,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorien",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 278,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 278,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -715,6 +646,75 @@
       "content_overflows": []
     },
     {
+      "path": "/teileklar/kategorien",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 287,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 287,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 302,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/teileklar/warenkorb",
       "width": 390,
       "text_spacing": true,
@@ -731,7 +731,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 291,
+        "count": 300,
         "all_doubled": true
       },
       "overflow": false,
@@ -754,7 +754,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 291,
+        "count": 300,
         "all_doubled": true
       },
       "overflow": false,
@@ -777,7 +777,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 275,
+        "count": 284,
         "all_doubled": true
       },
       "overflow": false,
@@ -800,7 +800,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 259,
+        "count": 268,
         "all_doubled": true
       },
       "overflow": false,
@@ -823,7 +823,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 275,
+        "count": 284,
         "all_doubled": true
       },
       "overflow": false,
@@ -846,7 +846,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 272,
+        "count": 281,
         "all_doubled": true
       },
       "overflow": false,
@@ -869,7 +869,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 272,
+        "count": 281,
         "all_doubled": true
       },
       "overflow": false,
@@ -892,7 +892,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 260,
+        "count": 269,
         "all_doubled": true
       },
       "overflow": false,
