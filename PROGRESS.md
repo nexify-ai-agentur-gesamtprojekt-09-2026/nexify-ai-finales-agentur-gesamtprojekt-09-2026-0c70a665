@@ -1,3 +1,35 @@
+# Lokales Setup, GitHub und Vercel-Preview · 28.10.2026
+
+Current State: lokale Toolchain mit Node22.23.4 und pnpm12.15.0 über
+`npm exec` eingerichtet; Workspace nach `pnpm-lock.yaml` mit
+`--frozen-lockfile --ignore-scripts` installiert. `.venv` enthält ausschließlich
+Pillow12.3.0 und NumPy2.3.5 aus den SHA-gepinnten Linux/Python3.12-Wheels;
+`.venv/` ist jetzt ignoriert. Lokaler Stack läuft auf Loopback 3003/3004/3005;
+Vite liefert 200, Startseite im Browser geladen, keine Browserkonsolenfehler.
+Site-Build und `make check && make test` bestanden; 482 Python-Tests. Der
+Produktionsbuild meldet weiterhin einen >500-kB-Chunk als nichtblockierende
+Performancewarnung.
+
+GitHub: `origin` zeigt auf das kanonische Repository; `gh` authentifiziert als
+`nexifyai-dev`, letzte gelistete CI-/Triage-Läufe erfolgreich. Deployment-API
+Read ist für diese Integration mit HTTP403 nicht freigegeben.
+
+Vercel: lokale CLI65.2.0 sagt `Logged out`; weder Projektverknüpfung noch
+Deployment oder Einstellung geändert. Die dokumentierte `.de`-Domain und die
+historische `vercel.app`-Vorschau waren aus diesem Container nicht per DNS
+auflösbar. Daher kein aktueller Projekt-/Deployment-Read-back und keine neue
+Preview-Abnahme. Registrierung des externen Blocks in der lokalen
+Remediation-Queue wurde von deren Policy mit
+`local_remediation_operation_rejected`/`approval_granted=false` abgewiesen;
+kein Gate umgangen und kein Queueeintrag behauptet.
+
+Next Steps: Owner D06 stellt eine autorisierte Vercel-CLI-Sitzung bereit und
+liest Projekt-ID/Scope, Preview-Deployment sowie Branch-Zuordnung erneut zurück;
+danach ausschließlich den genehmigten Previewpfad prüfen. Technischer
+Follow-up-Zeitpunkt: 2026-10-28 16:45 UTC (keine Kunden-SLA). Quellen:
+`config/integrations/vercel-agent-setup.json`, `vercel.json`,
+`config/remediation-policy.json`.
+
 # Vorhandener Katalog und lokaler Produktbild-Batch
 
 Current State: v11/8975ba4 unverändert auf eigenemRemotezweig gesichert.
