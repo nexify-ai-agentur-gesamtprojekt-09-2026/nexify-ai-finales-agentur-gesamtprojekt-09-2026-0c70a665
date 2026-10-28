@@ -21,7 +21,7 @@
     "@sentry/react": "11.9.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "posthog-js": "1.440.0"
+    "posthog-js": "1.438.24"
   },
   "devDependencies": {
     "@sentry/vite-plugin": "^11.9.0",

@@ -207,8 +207,8 @@ importers:
         specifier: 11.9.0
         version: 11.9.0(react@19.3.1)
       posthog-js:
-        specifier: 1.440.0
-        version: 1.440.0(@types/react@19.3.0)(react@19.3.1)
+        specifier: 1.438.24
+        version: 1.438.24(@types/react@19.3.0)(react@19.3.1)
       react:
         specifier: 19.3.1
         version: 19.3.1
@@ -253,8 +253,8 @@ importers:
         specifier: 16.4.3
         version: 16.4.3(@opentelemetry/api@1.10.0)(@types/node@22.18.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       posthog-js:
-        specifier: 1.440.0
-        version: 1.440.0(@types/react@19.3.0)(react@19.3.1)
+        specifier: 1.438.24
+        version: 1.438.24(@types/react@19.3.0)(react@19.3.1)
       react:
         specifier: 19.3.1
         version: 19.3.1
@@ -715,14 +715,8 @@ packages:
   '@posthog/core@1.61.0':
     resolution: {integrity: sha512-FxOHbuxCZCFGb/46KdcBtilTX5ROeB4Gs8ZrWESzyNlCCxLw4/5xBVh8nfmPjbztuPvxRs5tOcpQ1kNnr2nlAA==}
 
-  '@posthog/core@1.61.1':
-    resolution: {integrity: sha512-qyMTxPfjeJkHIhpcukOgBN3BWXbCyFRPz8/Voy5qZtVh9NZqj3EhC6LLeYZuJhL3WpqhQTgn2FMIwAo/ag6fmw==}
-
   '@posthog/types@1.416.1':
     resolution: {integrity: sha512-PG06HE2axHNyyZ9CKSSHKSW4pWfQwEtPA1dewFqIwggcIgk1BsQ+tHSNqvZz+IvE2WnBZ8OcOkF9SWI55VxQfA==}
-
-  '@posthog/types@1.417.0':
-    resolution: {integrity: sha512-r/+gvmiE6egR6kkuMhEjOOE3Sm1pR00iFPQNoZZ0YvnZSsqGk7hK2IvQzcqjSRufG5Jf0EwhDMr5YOGtmf2/8g==}
 
   '@rolldown/binding-android-arm-eabi@1.2.15':
     resolution: {integrity: sha512-aLcgK9gIJ3YRvrrtfSBbRa27F5WrpiTaPulnFpsHPxpUHgFlSgnU4854MHwoRGEBhfRJDWCS2WQ7lIjskE9Olw==}
@@ -1455,8 +1449,8 @@ packages:
     resolution: {integrity: sha512-YUbWYCgErwnMAVkjUnYa+KlMBzGpHwiIt/DE7f0G33AuX2LH9UcTk6KgWxd3zRU+pN3u/C+Xl3EnMLM4Hea7Sg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.440.0:
-    resolution: {integrity: sha512-M5/7NE8fgR8Qi3Jl8UizWjum7xnxu68C3ddaewxbxhsD23Pj/a1O5f1n+oWrKoGBS2loWJma4IXb3MFv1/FNLw==}
+  posthog-js@1.438.24:
+    resolution: {integrity: sha512-spRkm2eZjBKpJovgoMq30S1lvnwD7s8ZQcTjADf6iLHFCD1RdIjakZ8mKy+Lnt1Wj7kkRe+mXVb+lUCDKa6aQw==}
     peerDependencies:
       '@types/react': '>=16.8.0'
       react: '>=16.8.0'
@@ -1978,13 +1972,7 @@ snapshots:
     dependencies:
       '@posthog/types': 1.416.1
 
-  '@posthog/core@1.61.1':
-    dependencies:
-      '@posthog/types': 1.417.0
-
   '@posthog/types@1.416.1': {}
-
-  '@posthog/types@1.417.0': {}
 
   '@rolldown/binding-android-arm-eabi@1.2.15':
     optional: true
@@ -2572,11 +2560,11 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.2
 
-  posthog-js@1.440.0(@types/react@19.3.0)(react@19.3.1):
+  posthog-js@1.438.24(@types/react@19.3.0)(react@19.3.1):
     dependencies:
       '@posthog/browser-common': 0.9.12
-      '@posthog/core': 1.61.1
-      '@posthog/types': 1.417.0
+      '@posthog/core': 1.61.0
+      '@posthog/types': 1.416.1
       core-js: 3.51.0
       dompurify: 3.4.17
       fflate: 0.4.9

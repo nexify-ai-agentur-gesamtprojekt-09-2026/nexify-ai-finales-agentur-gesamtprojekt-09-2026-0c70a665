@@ -114,7 +114,7 @@
     "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
     "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
     "apps/web/components/SiteFooter.tsx": "e575e1f8e842a4069447429a1ab3ae75c8b6591611ad228a35a58220321d8e45",
-    "apps/web/observability/exceptions.mjs": "8d77edbc84f2487197713060a312a114ae3d52d5e5297c3f2ea256e6e290cde5",
+    "apps/web/observability/exceptions.mjs": "ab85b180a7289b877b318f6b6011cb2ee4c580ff6225c7ecd4d47ddbbb0454b6",
     "apps/web/observability/exceptions.d.mts": "a483344332846b7ebe62801523b27416e7cf621a41ec5cec309b22beedc8da35",
     "apps/site/tests/browser-consent-ui.mjs": "7f07c81fdfc5a7014f267bc0f0edab827e3d32fe2a9416a0b292eb486fac1ae6"
   },

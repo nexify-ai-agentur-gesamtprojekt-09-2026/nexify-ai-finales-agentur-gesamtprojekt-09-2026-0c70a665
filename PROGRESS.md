@@ -1096,3 +1096,11 @@ gleiche Datenbank, keine zweite Queue. Vertrag: docs/contracts/next-local-portal
 Next steps: Gesamtgates, REA und unabhängiges Review am exakten Endcommit; lokalen
 Patch sichern. Keine Pushes, CI, Deployments, DNS, Uploads, Secretkonfiguration oder
 externen Testevents.
+
+## Begrenzter CI-Folgefix · 28.10.2026
+
+CI push40613517772 und PR40613522911 am4fc8753 scheiterten vor Tests/Build an ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION. Beide Apps pinnen jetzt posthog-js1.438.24 mit offiziellen npm-Integritäten und vorhandenen kompatiblen älteren Transitiven; keine neue Age-Ausnahme. Lokaler Frozen-Install besteht. Actual-SDK-Tests werden mit frischem Next-Build und erneuter Vite-Optimierung ausgeführt, alle Ingestionrequests lokal abgefangen. Keine externen Testevents.
+
+PR-Triage erhält ausschließlich einen 5-Minuten-Jobtimeout; Labels, Berechtigungen und Fehlersichtbarkeit bleiben erhalten. Bound-AI-Review40613520613 ist blocked_not_reviewed wegen diff_or_metadata_limit_exceeded, automatic_retry_allowed:false. Keine Limits gelockert, keine manuelle Wiederholung, kein Providerrequest aus diesem blockierten Lauf belegt. OpenRouterkosten sind getrennt von Actions zu behandeln.
+
+Autorisierte Clerkübernahme ist abgeschlossen: ausschließlich zwei vorhandene Preview/Development-Werte nach web Preview, Metadatenreadback bestätigt, kein Wert im Repository oder Beleg. Vorhandene Schlüssel sind Testmodus; der bestehende Production-Buildguard akzeptiert diese auch im Preview nicht. Login-/Tenantfunktion bleibt deshalb offen, keine Productionregel gelockert. VercelPreview4fc8753 für canonical und web ist BLOCKED; keine Autorumschreibung oder Deploymentumgehung. Remote-Push/PR/CI im genehmigten10USD-Rahmen bis07:00UTC, keine Main-/Prod-/Domainänderung oder Libraryübertragung.

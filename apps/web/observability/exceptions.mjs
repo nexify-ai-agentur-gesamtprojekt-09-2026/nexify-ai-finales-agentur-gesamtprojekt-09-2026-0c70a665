@@ -41,7 +41,7 @@ export function createExceptionController({load,origin}){
  function capture(error){if(!consent||!sdk||!(error instanceof Error)||seen.has(error))return false;seen.add(error);sdk.captureException(error);return true;}
  return {start,setConsent,capture,state:()=>snapshot,subscribe:listener=>{listeners.add(listener);return ()=>listeners.delete(listener);}};
 }
-// Pinned1.440.0 spreads fetch_options into native fetch. Revocation permanently
+// Pinned1.438.24 spreads fetch_options into native fetch. Revocation permanently
 // aborts that signal for this document, including retries and unload. There is no
 // signal rotation or private queue mutation; re-consent requires a fresh page.
 const slot=Symbol.for('nexify.exceptions.v1');

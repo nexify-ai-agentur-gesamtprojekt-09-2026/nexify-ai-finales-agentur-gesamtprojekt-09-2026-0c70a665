@@ -16,15 +16,15 @@
   "synthetic": true,
   "surface": "vite",
   "source_sha256": {
-    "apps/web/observability/exceptions.mjs": "8d77edbc84f2487197713060a312a114ae3d52d5e5297c3f2ea256e6e290cde5",
+    "apps/web/observability/exceptions.mjs": "ab85b180a7289b877b318f6b6011cb2ee4c580ff6225c7ecd4d47ddbbb0454b6",
     "apps/site/src/observability.ts": "b42fcb14289b34a6295fea642438a2b0b12196fdd67317bf1836c0a2db87631d",
     "apps/web/instrumentation-client.ts": "a38c34638acdc2be58083e34a234ee07f6fb821ebbf3a90be6eb2da8f3db4656",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
     "apps/site/tests/browser-exception-capture.mjs": "8b44b4d075484ea2e071441f788110d2ec5594148670a9eebfc1316743cfc8b9",
-    "apps/site/package.json": "f01fd92260ab3660aa56ef413db165662376066756948418e6fe0fd403a97c99",
-    "apps/web/package.json": "e75bdd912ab632ae129662fad032b5aa1c00c67648fb5bcbaae7140c3693e852",
-    "pnpm-lock.yaml": "80e90f3eef1111b42b73f53814c346bae2e01c6b5f5ab30d063b42a0f59c177e"
+    "apps/site/package.json": "e2e1995cb49a66a4637e821168c07d58dab07d79b0654a7dea0239dd80686acc",
+    "apps/web/package.json": "9c252846e5d03e74b6dc2298e3b8195aff01abf4ede416f5741d79e6d301b868",
+    "pnpm-lock.yaml": "56baa251e0717c15b49c72092c9099e412d74e5a7db2827dc85d51511633c7e2"
   },
   "passed": true
 }

@@ -15,7 +15,7 @@ bleibt ohne Aufruf; festes importiertes Sitemap ist keine neue Domainentscheidun
 Historische Evidenz wurde nicht als aktuelle Integration umetikettiert.
 
 Browserpfad: beide Einstiegspunkte verwenden denselben Exceptioncontroller mit
-gepinntem posthog-js1.440.0. Das SDK und lokale Exceptionextension werden erst nach
+gepinntem posthog-js1.438.24. Das SDK und lokale Exceptionextension werden erst nach
 explizitem Einwilligungssignal geladen. Einmalinit; fehlende/abweichende Config,
 Host, SHA oder Environment bleibt gesperrt. Browser ohne native Fetch-/Abort-
 Unterstützung bleibt gesperrt. Laufzeitbindung siehe `docs/runbooks/sentry.md`.
@@ -56,3 +56,7 @@ unmittelbare erneute Einwilligung→Retry/Unload blockiert und keine SDKpersiste
 Die nachfolgende lokale Consent-Oberfläche im vorhandenen Footer bindet den
 Controller ausdrücklich an eine bewusste Auswahl. Default und Reload bleiben aus;
 keine Persistenz. Rechtliche und reale Release-/Ingestionabnahme bleiben offen.
+
+## CI-Installationsdelta 28.10.2026
+
+CI40613522911 am Head4fc8753 wurde durch die unveränderte 24-Stunden-Supply-Chain-Regel vor den Browser-/Buildtests gestoppt. Beide Apps verwenden deshalb den offiziellen npm-Pin posthog-js1.438.24 (veröffentlicht26.10.2026 22:15UTC), mit vorhandenen kompatiblen Core-/Types-Versionen. Keine neue Release-Age-Ausnahme. Ein erfolgreicher Frozen-Install ersetzt nicht die erneuten SDK-/Consent-Browserprüfungen; deren aktuelle Nachweise sind separat gebunden.
