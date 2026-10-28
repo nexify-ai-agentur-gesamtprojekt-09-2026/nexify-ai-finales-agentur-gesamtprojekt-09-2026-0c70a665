@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T20:43:31.495Z",
+  "observed_at": "2026-10-28T22:29:41.263Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "645b07f212dd26117d692fa0981e67466a505bdff35dd935c49d7da22f476b6a",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -51,7 +51,7 @@
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
     "apps/web/components/SiteFooter.tsx": "d4ed427f98f646e9daa7555770eb46728bebee14cbf77d5416187a3d832a5f22",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
-    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
+    "apps/web/components/Workspace.tsx": "25d0093a973d1dc1310dc484dfdd2e52ad211588154b4f72e804fd6583cfa279",
     "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
     "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
     "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
@@ -740,7 +740,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 291,
+        "count": 293,
         "all_doubled": true
       },
       "overflow": false,

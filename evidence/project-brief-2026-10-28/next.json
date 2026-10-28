@@ -293,7 +293,7 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
+    "apps/web/components/Workspace.tsx": "25d0093a973d1dc1310dc484dfdd2e52ad211588154b4f72e804fd6583cfa279",
     "apps/web/components/PublicOrientationChat.tsx": "c9809bf0aac066043a6e9ee9058240fe300521a707668e26acb8795030c3402b",
     "apps/web/components/PublicOrientationChat.css": "ba9dd45f56d0d3016562947c49d82ab81d0fc224f5f211a6259e5c7390e6c190",
     "apps/web/components/ProjectBrief.tsx": "c35cf37d8f9e8264aef04ecd157675345ff8808eaf39d8d8154e8843a51b50fc",
@@ -312,9 +312,6 @@
   },
   "fresh_build_performed": true,
   "served_artifact_sha256": {
-    "apps/web/.next/static/65Y_K4qbU2wYEQxUL6-c0/_buildManifest.js": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea",
-    "apps/web/.next/static/65Y_K4qbU2wYEQxUL6-c0/_clientMiddlewareManifest.js": "ea48ccf34b5f86a840df6d548f6f77aa40e2c02e83d9d9edaf28c3c29b9a9c7e",
-    "apps/web/.next/static/65Y_K4qbU2wYEQxUL6-c0/_ssgManifest.js": "ce19c6e7b9c91a11bd8f985a20ae1eea0176840ecf2f809cf09bb636bb177c16",
     "apps/web/.next/static/chunks/050s-uy52tcdb.js": "9d86bd0214ef1cbe3d3fb6f1918986f17a2205dee3460c1c8e428fa5822eb7d6",
     "apps/web/.next/static/chunks/0aovx2rsfez8e.js": "a1012c903167cdac912de34ff68a83ff9247a0f7baa394ff6d7e2ee2ecd1b342",
     "apps/web/.next/static/chunks/0aoy8iaerswj0.css": "48c4677ea39ad6b5bd7a8a52250ef5817d73ea81a6c70b9ea21a598e8310ef7e",
@@ -323,7 +320,6 @@
     "apps/web/.next/static/chunks/0xdo575kwu3ec.js": "a63df4c89dae222adf9dc42df2ccae6277a910247321719c707a0d653728426f",
     "apps/web/.next/static/chunks/120ctp5eqw18j.css": "4c0ff271dfd2be95cc4c9a596adbb3b8697abfe8f1bf695eff16db1fcce1c268",
     "apps/web/.next/static/chunks/1enf8oigpu6fl.js": "af22cfa6383c9191b354ef2821c091cf3dda9d31074f6a2efe22e204de346700",
-    "apps/web/.next/static/chunks/1flry8gbcwfs7.js": "9b8a43efd5548736b740a73d9eef0fa79dc1111dd7a054263d57e18aff171f26",
     "apps/web/.next/static/chunks/1g4j5aw_1ya1c.js": "0bc01c4e6f8bd4e4bf60105f844819088384d1850e8dc256ef5a3aed1afbbc62",
     "apps/web/.next/static/chunks/1j_rz1_4pnfer.js": "fbc09973ef0c8b484654ae6d0ec206fedddaef01e0df1e5b97d2a265d07a0fe8",
     "apps/web/.next/static/chunks/1kwe_8plt05p6.css": "7e7445dbce75f26ad6b1f5b0b112499a3e559cbd94558e6986e3333550685931",
@@ -336,9 +332,13 @@
     "apps/web/.next/static/chunks/2rx8efrr0v3ra.js": "0836ebf795aaf0a17f788dd47cd60c106277dfe72e867744a827064494ca8722",
     "apps/web/.next/static/chunks/331t7_755lex9.css": "87664f460e50cbe7b799f5b7fe9a0e604a738cc12326cd62755b5eb546cbf7d7",
     "apps/web/.next/static/chunks/3458bg4qi6b0d.js": "20b1d519a7620ce7b713b30fefbb491c935803073cea24bf9a000f7337042d02",
+    "apps/web/.next/static/chunks/3_idpi1ms5i8s.js": "91062cb78b58464ae909eb4cee6cd721b2e64a67fb6cbe6b94c0b77cac661284",
     "apps/web/.next/static/chunks/417au0ebwvvqy.js": "876b96b1f3d736d68e9d42e38680e048d264ceec3929c08754df0c927ade54d3",
     "apps/web/.next/static/chunks/turbopack-3-ry682tkyiqk.js": "8bbb58cbfd4633c1d828c6bc37bc32abc768a149c01b1dfc4f5131fd81274551",
-    "apps/web/.next/BUILD_ID": "0f42206222d9a79d8bb94c61ad89fef157c3e17154d212adf1feb673fd7f1783"
+    "apps/web/.next/static/mzTXQeiRItRhw3mLk-aYw/_buildManifest.js": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea",
+    "apps/web/.next/static/mzTXQeiRItRhw3mLk-aYw/_clientMiddlewareManifest.js": "ea48ccf34b5f86a840df6d548f6f77aa40e2c02e83d9d9edaf28c3c29b9a9c7e",
+    "apps/web/.next/static/mzTXQeiRItRhw3mLk-aYw/_ssgManifest.js": "ce19c6e7b9c91a11bd8f985a20ae1eea0176840ecf2f809cf09bb636bb177c16",
+    "apps/web/.next/BUILD_ID": "de5cc49ade462c7c43544bea3351fc7eb143c30a4cd6a3a19739874dfed3cf67"
   },
   "external": [],
   "errors": [],

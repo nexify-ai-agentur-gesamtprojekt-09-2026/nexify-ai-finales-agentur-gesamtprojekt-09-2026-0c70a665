@@ -119,7 +119,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     setQuoteFields(previous=>previous.title||previous.details?previous:{title,details});
     setIntent('quote');setChatMode('workspace');setOpen(true);
   }
-  function closePanel(){setOpen(false);requestAnimationFrame(()=>{const target=document.querySelector<HTMLButtonElement>(".reopen-chat")||document.querySelector<HTMLButtonElement>(".header-actions button");target?.focus();});}
+  function closePanel(){setOpen(false);requestAnimationFrame(()=>{const target=document.querySelector<HTMLButtonElement>(".reopen-chat")||document.querySelector<HTMLButtonElement>(".header-actions button");target?.focus({preventScroll:true});});}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form=event.currentTarget; const value=String(new FormData(form).get("message")||"").trim();if(!value)return;
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});

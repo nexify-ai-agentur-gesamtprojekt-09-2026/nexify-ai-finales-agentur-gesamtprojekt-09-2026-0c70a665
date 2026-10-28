@@ -134,7 +134,7 @@
   "source_sha256": {
     "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
-    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
+    "apps/web/components/Workspace.tsx": "25d0093a973d1dc1310dc484dfdd2e52ad211588154b4f72e804fd6583cfa279",
     "apps/web/components/PublicOrientationChat.tsx": "c9809bf0aac066043a6e9ee9058240fe300521a707668e26acb8795030c3402b",
     "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
     "apps/site/tests/browser-oracle-companion.mjs": "64f18ed0d2fcab86a2e682b4f4f27e600257fbb225aba56383e8dcd4af443ccd",

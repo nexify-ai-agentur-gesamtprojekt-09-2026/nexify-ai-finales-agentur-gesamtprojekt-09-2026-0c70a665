@@ -1358,7 +1358,7 @@
     "aifly": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66"
   },
   "source_sha256": {
-    "apps/web/components/Workspace.tsx": "35461f33603a4433d8e84376a090a689be68a25bacbf27e6fad97ac1d2d8d523",
+    "apps/web/components/Workspace.tsx": "25d0093a973d1dc1310dc484dfdd2e52ad211588154b4f72e804fd6583cfa279",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
     "config/identity-hero.json": "03e24b969ec283e2e096c0b9e5937abe3f3589a391e997c8476f873adfc628ca",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",

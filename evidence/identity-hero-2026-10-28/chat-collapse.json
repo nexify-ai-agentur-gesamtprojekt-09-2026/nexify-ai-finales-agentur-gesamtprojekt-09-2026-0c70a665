@@ -1,0 +1,117 @@
+{
+  "scope": "local synthetic API204; no external event/provider/send; current sources",
+  "source_sha256": {
+    "apps/web/components/Workspace.tsx": "25d0093a973d1dc1310dc484dfdd2e52ad211588154b4f72e804fd6583cfa279",
+    "apps/web/components/HomeRebuild.css": "979d28f481827e458437ea6ffab89963eaf42b64ce2c72b58b824e3f12d3fa3c",
+    "apps/site/tests/browser-chat-collapse.mjs": "8fe3eada61355bc984ee1878d80ef28ab3f80fbe580fa09debcedbe6e9dd221c"
+  },
+  "checks": [
+    {
+      "width": 390,
+      "path": "/",
+      "textScale": 1,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/",
+      "textScale": 2,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/leistungen",
+      "textScale": 1,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/leistungen",
+      "textScale": 2,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 1180,
+      "path": "/",
+      "textScale": 1,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 1180,
+      "path": "/",
+      "textScale": 2,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 1180,
+      "path": "/leistungen",
+      "textScale": 1,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    },
+    {
+      "width": 1180,
+      "path": "/leistungen",
+      "textScale": 2,
+      "initial": 0,
+      "afterClick": 0,
+      "beforeEscape": 0,
+      "afterEscape": 0,
+      "focus_return": true,
+      "keyboard_reopen": true,
+      "backward_tab": true,
+      "passed": true
+    }
+  ],
+  "external": [],
+  "errors": [],
+  "passed": true
+}
