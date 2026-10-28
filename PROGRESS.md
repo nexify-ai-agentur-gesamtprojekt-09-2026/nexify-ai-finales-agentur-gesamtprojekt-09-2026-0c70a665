@@ -1,3 +1,24 @@
+## Sentry function compiler repair · 28.10.2026
+
+Current production build dpl_BHGK78EVcYhzCHjJ8rnVU3ZbuqBa at externally merged main
+1ca8eb8f45b1e900eb189b184cbf36abc8ffd1d7 contains TS2353 during function packaging,
+after the explicit API typecheck passes. The official CLI 65.1.0 builder
+@vercel/node 27.0.0 reproduces the diagnostic locally. Its legacy compiler host
+omits realpath and loses transitive Sentry Core types through pnpm symlinks.
+
+The existing Core 11.9.0 is now a direct, explicitly consumed ErrorEvent type
+dependency. The lockfile adds only its root importer binding. The unmodified
+official compiler passes, four focused regressions pass, and emitted server
+JavaScript matches the main baseline. No SDK upgrade, cast, suppressed check,
+privacy change or credential mutation. Final gates and independent review follow
+at the exact local commit; no new push, CI or deployment from this repair yet.
+Public imprint/privacy content remains an independent release blocker.
+
+After the lockfile change, actual Vite and Next SDK browser runs each passed all
+eight consent/exception cases with four locally intercepted events and no external
+event. The 108-case spacing/resize matrix was genuinely rerun and passed. The
+compiler test also passes without Git on PATH; no historical commit is required.
+
 ## IDENTITY-HERO-01 · akzeptierte V1-Komposition · 28.10.2026
 
 - Basis d92ee1b; bestehender Mailstand unverändert erhalten. Gemeinsamer React-Hero statt privatem HTML/iframe: akzeptierte Originalfiguren bytegleich, zentrale zusätzliche Bühnenfarben ohne Änderungen vorhandener Tokenwerte, DE/NL/FR, Unternehmensbeschreibung und Anfrageaktionen erhalten. Bilder bleiben ausdrücklich Zwischenlösung, kein Video-/Providerabschluss.

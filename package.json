@@ -25,6 +25,7 @@
   "dependencies": {
     "@ai-sdk/react": "4.0.157",
     "@openrouter/ai-sdk-provider": "3.1.0",
+    "@sentry/core": "11.9.0",
     "@sentry/node": "11.9.0",
     "@vercel/connect": "2.5.6",
     "ai": "7.0.153",

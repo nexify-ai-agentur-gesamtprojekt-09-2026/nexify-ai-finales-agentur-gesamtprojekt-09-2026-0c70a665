@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T17:52:40.542Z",
+  "observed_at": "2026-10-28T18:28:27.695Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -70,7 +70,7 @@
     "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
     "packages/tokens/tokens.json": "05ffaf3a0f3b88a0ff0569fe83a0a0c0ad52975eb71a93a2fa7bc419b63cc08a",
     "packages/tokens/tokens.ts": "2c5648c6d7252761666e1b9e772dec218719e70759db3c35f676e04d5fdb6662",
-    "pnpm-lock.yaml": "56baa251e0717c15b49c72092c9099e412d74e5a7db2827dc85d51511633c7e2"
+    "pnpm-lock.yaml": "142362291eac075a3f07ada6fd32cff5bf9cc402cefb6cac6504cda5b0cb83d6"
   },
   "scope": "text-spacing and 200% text resize geometry; not screenreader or full visual conformance",
   "checks": [
