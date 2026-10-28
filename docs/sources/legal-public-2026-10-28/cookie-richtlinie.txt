@@ -1,0 +1,27 @@
+NeXify AI
+ · Rechtszentrum
+Cookie- und Speicher-Richtlinie
+Technisch notwendige Speicherung ohne Einwilligung; optionale Komfortspeicherung nur nach Ihrer Auswahl. Kein Werbe- oder Cross-Site-Tracking durch NeXify AI.
+Stand: 
+11. September 2026
+Transparenter Arbeitsstand
+Diese Fassung bildet den aktuellen technischen Betrieb und die B2B-Ausrichtung ab. Sie ersetzt keine individuelle anwaltliche Beratung oder behördliche Prüfung.
+01
+Rechtsrahmen
+Für Endgerätezugriffe gelten insbesondere § 25 TDDDG im deutschen Markt, Art. 5 Abs. 3 der ePrivacy-Richtlinie, Art. 6 DSGVO und in den Niederlanden Art. 11.7a Telecommunicatiewet.
+02
+Technisch notwendige Speicherungen
+Sicheres HttpOnly-Sitzungscookie für den Kundenportalzugang
+Cloudflare-Sicherheits- und Missbrauchsschutz
+nexify-consent-v1 in localStorage zur Speicherung Ihrer Auswahl
+03
+Optionale Komfortspeicherung
+Wenn Sie Komfortspeicherung aktivieren, darf die Site lokale Anzeige- und Formularpräferenzen auf diesem Gerät merken. Derzeit werden keine externen Statistik- oder Marketingdienste geladen.
+04
+Einstellungen und Widerruf
+Über „Cookie-Einstellungen“ im Footer können Sie die Auswahl jederzeit öffnen, ändern oder auf nur notwendige Speicherung zurücksetzen. Die Rechtmäßigkeit einer bereits erfolgten Verarbeitung bleibt vom späteren Widerruf unberührt.
+Maßgebliche öffentliche Quellen
+Business.gov.nl · Cookies
+Europäische Kommission · Cookie policy
+Alle Rechtstexte 
+Rückfrage stellen 

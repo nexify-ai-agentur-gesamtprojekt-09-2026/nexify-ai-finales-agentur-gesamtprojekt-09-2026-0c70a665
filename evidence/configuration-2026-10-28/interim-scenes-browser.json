@@ -1164,7 +1164,7 @@
     "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
     "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
     "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
-    "apps/site/scripts/generate-public-data.mjs": "53c61bd0a87bd515e6f3c9a548e9ecc7c69b008e4a05aedbb3a49f4550823701",
+    "apps/site/scripts/generate-public-data.mjs": "f9b3eeab38c81432080365709eab79bbffcaac3ce10147c70d6d072543c9f950",
     "apps/site/tests/browser-scene-images.mjs": "5199e67a74f2c8c6bf3009d5eb5ad9261d22680f2974c2e82d7f42bbd6e27dfd"
   },
   "external_requests": 0,

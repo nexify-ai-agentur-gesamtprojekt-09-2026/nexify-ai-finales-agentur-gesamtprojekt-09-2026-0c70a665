@@ -6,9 +6,11 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const repo=fileURLToPath(new URL('../../../',import.meta.url)),root=repo+'apps/site/';
-const sources=['apps/web/components/SiteFooter.tsx','apps/web/components/WorkspaceRebuild.css','config/site-map.json','apps/site/tests/browser-legal-footer.mjs'];
+const sources=['apps/web/components/SiteFooter.tsx','apps/web/components/WorkspaceRebuild.css','config/site-map.json','config/legal-public-documents.json','apps/web/components/PublicContent.tsx','apps/web/components/PublicContentLayout.css','apps/web/lib/page-types.ts','apps/site/scripts/generate-public-data.mjs','apps/site/tests/browser-legal-footer.mjs'];
 const hashes=async()=>Object.fromEntries(await Promise.all(sources.map(async p=>[p,createHash('sha256').update(await readFile(repo+p)).digest('hex')])));
 const before=await hashes(),data=JSON.parse(await readFile(root+'.generated/public-site.json','utf8'));
+const legalDocuments=JSON.parse(await readFile(repo+'config/legal-public-documents.json','utf8'));
+const legalPages=new Set(Object.values(legalDocuments.route_mapping));
 const externalOrigin=process.env.LOCAL_FOOTER_ORIGIN;
 if(externalOrigin)assert.ok(['127.0.0.1','localhost'].includes(new URL(externalOrigin).hostname),'local servers only');
 const server=externalOrigin?null:await preview({root,preview:{host:'127.0.0.1',port:0,strictPort:false}});
@@ -23,6 +25,14 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
   for(const entry of data.pages){
    await page.goto(origin+entry.path);await page.waitForFunction(l=>document.documentElement.lang===l,locale);
+   if(legalPages.has(entry.id)){
+    const main=page.locator('main');
+    const original=main.locator('article[lang="de"]');assert.ok(await original.count()>0);
+    assert.ok((await main.innerText()).includes({de:'juristische Nachprüfung steht aus',nl:'Juridische controle volgt nog',fr:'vérification juridique reste à effectuer'}[locale]));
+    if(entry.id==='imprint')for(const value of ['Pascal Courbois','Eenmanszaak','90483944','NL865786276B01','5921 JA Venlo'])assert.ok((await main.innerText()).includes(value));
+    for(const para of await original.locator('p.legal-document-body').all())assert.equal(await para.evaluate(e=>getComputedStyle(e).whiteSpace),'pre-line');
+    for(const doc of legalDocuments.documents.filter(d=>legalDocuments.route_mapping[d.id]===entry.id&&d.id!=='recht'))for(const section of doc.sections)assert.ok((await main.innerText()).includes(section.body.replace(/\n/g,'\n')),doc.id+':'+section.source_section);
+   }
    const footer=page.locator('.footer-legal'),direct=footer.locator('.footer-legal-direct'),details=footer.locator('details'),summary=details.locator('summary');
    assert.equal(await details.count(),1);assert.equal(await page.locator('.site-footer .footer-bottom details').count(),1);
    const paths=entry.site_context==='teileklar'?['/teileklar/rechtliches']:['/impressum','/datenschutz'];
@@ -41,7 +51,7 @@ try{
    await page.keyboard.press('Enter');await page.waitForFunction(()=>document.querySelector('.footer-legal summary').getAttribute('aria-expanded')==='true');
    const controlled=await summary.getAttribute('aria-controls');assert.equal(await page.locator(`[id="${controlled}"]`).isVisible(),true);
    assert.match(await details.innerText(),{de:/noch nicht verfügbar/,nl:/nog niet beschikbaar/,fr:/pas encore disponible/}[locale]);
-   assert.match(await details.locator('div').innerText(),{de:/Prüfung und Freigabe/,nl:/gecontroleerd en goedgekeurd/,fr:/à vérifier et à valider/}[locale]);
+   assert.match(await details.locator('div').innerText(),(entry.site_context==='teileklar'?{de:/Prüfung und Freigabe/,nl:/gecontroleerd en goedgekeurd/,fr:/à vérifier et à valider/}:{de:/juristische Nachprüfung steht aus/,nl:/juridische controle volgt nog/,fr:/vérification juridique reste à effectuer/})[locale]);
    assert.equal(await page.locator('.diagnostic-consent').count(),1);
    await page.screenshot({path:out+`footer-${entry.path==='/'?'nexify':'teileklar'}-${width}-${locale}.png`});
    await summary.focus();await page.keyboard.press('Space');await page.waitForFunction(()=>document.querySelector('.footer-legal summary').getAttribute('aria-expanded')==='false');

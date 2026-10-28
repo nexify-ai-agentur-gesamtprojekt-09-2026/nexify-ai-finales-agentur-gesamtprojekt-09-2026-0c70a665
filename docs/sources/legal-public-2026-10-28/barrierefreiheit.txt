@@ -1,0 +1,24 @@
+NeXify AI
+ · Rechtszentrum
+Erklärung zur Barrierefreiheit
+NeXify AI verfolgt WCAG 2.2 AA und EN 301 549 als verbindlichen Qualitätsrahmen – auch für diese öffentlich erreichbare, ausschließlich an Unternehmen gerichtete Site.
+Stand: 
+11. September 2026
+Transparenter Arbeitsstand
+Diese Fassung bildet den aktuellen technischen Betrieb und die B2B-Ausrichtung ab. Sie ersetzt keine individuelle anwaltliche Beratung oder behördliche Prüfung.
+01
+Geltungsbereich
+Diese Erklärung gilt für die öffentlich erreichbare NeXify-AI-Premium-Site. Semantik, Tastaturbedienung, Fokus, Kontrast, Textvergrößerung, reduzierte Bewegung und responsive Darstellung werden in den Release-Gates geprüft.
+02
+Aktueller Stand
+Die Oberfläche ist nach automatisierter und manueller Selbstbewertung weitgehend auf WCAG 2.2 AA ausgerichtet. Noch nicht abschließend nachgewiesen sind vollständige Assistive-Technology-Tests aller externen Anmelde- und E-Mail-Flows.
+03
+Bekannte Grenzen
+E-Mail-Zustellung und technische Zustellprotokolle liegen teilweise beim Versanddienst Resend
+Automatisch erzeugte Angebots-PDFs benötigen zusätzlich einen vollständigen PDF/UA-Nachweis
+KI-Antworten können sprachlich variieren und werden bei verbindlicher Verwendung menschlich geprüft
+04
+Feedback
+Barrieren können per E-Mail an hello@nexifyai.cloud mit dem Betreff „Barrierefreiheit“ gemeldet werden. Rückmeldungen werden priorisiert geprüft.
+Alle Rechtstexte 
+Rückfrage stellen 

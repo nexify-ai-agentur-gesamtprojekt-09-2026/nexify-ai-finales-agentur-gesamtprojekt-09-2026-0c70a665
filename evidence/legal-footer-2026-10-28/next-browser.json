@@ -2844,10 +2844,15 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
+    "apps/web/components/SiteFooter.tsx": "d4ed427f98f646e9daa7555770eb46728bebee14cbf77d5416187a3d832a5f22",
     "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
-    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
-    "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
+    "config/site-map.json": "17a852cbb9a69f66276bd6f6cf70fefd388a0c0b4e9fac8b36bc082b468fa7d1",
+    "config/legal-public-documents.json": "6f9f641ae6d0e130245b13d2c0a9fbede85a117c71e862402f2083b8a497b796",
+    "apps/web/components/PublicContent.tsx": "6d3797e4c974782a240391d774c8919115d6240ea2d00ccccf76a22329480840",
+    "apps/web/components/PublicContentLayout.css": "7345e3952d1c5ab7a7e5f57db203b3152b0c8cb45b3e6acdb838b29c5e1582c0",
+    "apps/web/lib/page-types.ts": "62557db4cb752fda2facde2a8473e8c77c6f3d809a572e8ad21b95fa9b344921",
+    "apps/site/scripts/generate-public-data.mjs": "f9b3eeab38c81432080365709eab79bbffcaac3ce10147c70d6d072543c9f950",
+    "apps/site/tests/browser-legal-footer.mjs": "5a555b10fe5719b34e095ca7cff4a46c6c74f593ba6c5254c0cf3252b47e1cb6"
   },
   "missing_license_route": true,
   "external_requests": 0,

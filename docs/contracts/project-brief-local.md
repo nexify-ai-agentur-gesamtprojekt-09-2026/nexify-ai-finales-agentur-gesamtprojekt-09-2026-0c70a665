@@ -55,3 +55,8 @@ folder; the stored-proof verifier requires the complete matrix.
 Daily autonomous feature changes are not enabled by this increment. Any later
 automation must use the existing owner/review/release contracts and explicit
 cost/security boundaries; this local preparation is not a self-updating daemon.
+
+The legal-source refresh also reproduced a delayed quote-handover focus race.
+Quote-title focus now occurs in the committed layout effect, never a later
+animation frame. Browser regression holds old frame callbacks, edits details,
+flushes callbacks and types a suffix; title/details must remain independent.

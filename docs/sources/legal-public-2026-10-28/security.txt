@@ -1,0 +1,26 @@
+NeXify AI
+ · Rechtszentrum
+Security & Responsible Disclosure
+Sicherheitsprinzipien, Meldeweg und klare Grenzen für die NeXify-AI-Premium-Site und verbundene Dienste.
+Stand: 
+11. September 2026
+Transparenter Arbeitsstand
+Diese Fassung bildet den aktuellen technischen Betrieb und die B2B-Ausrichtung ab. Sie ersetzt keine individuelle anwaltliche Beratung oder behördliche Prüfung.
+01
+Schutzprinzipien
+Serverseitige Secrets und Least Privilege
+Mandanten- und Rollenprüfung vor Kundendaten
+Validierung, Rate Limits und sichere Fehlerzustände
+Freigaben für produktive oder destruktive Aktionen
+Backup, Restore und Rollback als Release-Bedingung
+02
+Sicherheitsmeldung
+Bitte melden Sie vermutete Schwachstellen vertraulich an hello@nexifyai.cloud mit dem Betreff „Security“. Beschreiben Sie betroffene URL, reproduzierbare Schritte und mögliche Auswirkungen. Veröffentlichen Sie keine Kundendaten oder Zugangsdaten.
+03
+Nicht zulässige Tests
+Ohne schriftliche Freigabe sind Social Engineering, Denial-of-Service, Datenexfiltration, Änderungen fremder Daten und Zugriffe außerhalb des eigenen Kontos ausgeschlossen.
+04
+Betriebsstatus
+Die Website zeigt Verbindungsfehler ehrlich an. Ist kein freigegebener Modellanbieter konfiguriert oder erreichbar, bleibt der KI-Assistent fail-closed deaktiviert; es werden weder vorgefertigte Scheinantworten noch erfundene Quellen oder Systemzustände ausgegeben.
+Alle Rechtstexte 
+Rückfrage stellen 

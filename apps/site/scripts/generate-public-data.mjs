@@ -25,7 +25,10 @@ export function preparePublicData(source){
     const title=localized(page.title),summary=localized(page.summary);
     return {id:page.id,path,title:title.de,purpose:summary.de,sourceId:"native:"+page.id,role:page.id,site_context:page.site_context,
       localizedTitle:title,localizedSummary:summary,
-      sections:(page.sections||[]).map(section=>({id:String(section.id),heading:localized(section.heading),body:localized(section.body)})),
+      sections:(page.sections||[]).map(section=>{
+        if(section.body_locale!==undefined&&section.body_locale!=='de')throw new Error('Unsupported original legal language');
+        return {id:String(section.id),heading:localized(section.heading),body:localized(section.body),...(section.body_locale?{bodyLocale:section.body_locale}:{})};
+      }),
       actions:(page.next_actions||[]).map(action=>{
         if(action.type==="chat"&&['quote','booking','marketing'].includes(action.chat_intent))return {type:"chat",chat_intent:action.chat_intent,label:localized(action.label)};
         if(action.type!=="route"||!ids.has(action.target_id))throw new Error("Unbound or non-public action target");

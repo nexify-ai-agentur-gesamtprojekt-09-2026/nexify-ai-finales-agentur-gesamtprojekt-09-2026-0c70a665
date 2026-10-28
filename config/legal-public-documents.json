@@ -1,0 +1,588 @@
+{
+  "schema_version": 1,
+  "source_archive_sha256": "ec4ab0c8e1a10287b3b06651ab3b20da85d75115ad7abbf9bb0f8c0e9c99d359",
+  "library_file_id": "libfile_517685a8cdb48191a70c99e916da1c09",
+  "source_version": 0,
+  "owner_instruction": "Sentinel_b4f21e5e21a081918c7657de31bef3cc;2026-10-28T18:46:40Z;copy current public operator/legal source with technical adaptations;lawyer review pending",
+  "operator": {
+    "display_name": "NeXify AI by NeXify",
+    "owner": "Pascal Courbois",
+    "legal_form": "Eenmanszaak nach niederländischem Recht",
+    "country": "NL",
+    "address": "Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande",
+    "register": "KvK 90483944 · Kamer van Koophandel",
+    "vat_id": "NL865786276B01",
+    "legal_email": "hello@nexifyai.cloud",
+    "phone": "+31 6 133 188 56",
+    "source": "https://www.nexifyai.cloud/impressum",
+    "independent_register_check": false
+  },
+  "documents": [
+    {
+      "id": "impressum",
+      "source": {
+        "url": "https://www.nexifyai.cloud/impressum",
+        "retrieved_utc": "2026-10-28T18:51:04.188450+00:00",
+        "html_sha256": "7dacbc993a0094089d94c487b40ba4bfeee7b8e1e26f3b281874c740b89a69cf",
+        "text_sha256": "8e987f727388fb8aaaf90a1773caaaf61260584f1309118be387d50bc493e348",
+        "main_text_bytes": 1534,
+        "filename": "impressum.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/impressum.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Diensteanbieter",
+          "body": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nRechtsform: Eenmanszaak nach niederländischem Recht\nHandelsregister: KvK 90483944 · Kamer van Koophandel\nUmsatzsteuer-ID: NL865786276B01",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Kontakt",
+          "body": "E-Mail: hello@nexifyai.cloud\nTelefon: +31 6 133 188 56\nWeb: www.nexifyai.cloud",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "03",
+          "heading": "Vertretung und Inhalt",
+          "body": "Gesetzlicher Vertreter und inhaltlich Verantwortlicher ist Pascal Courbois. Anschrift wie oben.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "04",
+          "heading": "Aufsicht und Register",
+          "body": "Zuständige Handelskammer ist die Kamer van Koophandel. Zuständige Datenschutzaufsicht ist grundsätzlich die Autoriteit Persoonsgegevens in Den Haag.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "05",
+          "heading": "B2B-Ausrichtung",
+          "body": "Leistungen und Angebotsfunktionen richten sich ausschließlich an Unternehmen, juristische Personen und beruflich selbstständig Handelnde. Verbraucherverträge werden über diese Website nicht geschlossen.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "06",
+          "heading": "Haftung und Urheberrecht",
+          "body": "Externe Inhalte werden bei Verlinkung geprüft; für deren fortlaufende Verfügbarkeit und Inhalt bleiben die jeweiligen Anbieter verantwortlich. Texte, Gestaltung, Software und Markenbestandteile dieser Website sind geschützt.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "datenschutz",
+      "source": {
+        "url": "https://www.nexifyai.cloud/datenschutz",
+        "retrieved_utc": "2026-10-28T18:51:04.142596+00:00",
+        "html_sha256": "fe78cb8599fab81f64859b1dd001384f1cb7a912580fedbb6e500d35b2e42dbf",
+        "text_sha256": "81e9dc5b2d9fc95db83ffaaf79386e3e42892e21f6dcc732af4bf634607936c1",
+        "main_text_bytes": 4332,
+        "filename": "datenschutz.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Verantwortlicher",
+          "body": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nDatenschutzanfragen: hello@nexifyai.cloud\nEs findet keine ausschließlich automatisierte Entscheidung mit rechtlicher oder ähnlich erheblicher Wirkung statt.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Hosting und sichere Anmeldung",
+          "body": "Diese Fassung beschreibt die öffentliche NeXify-Web-App mit Auslieferung über Vercel. Bei der Auslieferung können technische Verbindungsdaten wie IP-Adresse, angefragte Ressource, Zeitpunkt und Browser-/Protokollmerkmale verarbeitet werden. Zweck sind Bereitstellung und Missbrauchsabwehr; als Grundlage nennt die übernommene Erklärung Art. 6 Abs. 1 lit. f DSGVO, bei Vertragsanbahnung zusätzlich lit. b.\nDie Informationsseiten sind ohne Anmeldung nutzbar. Für gesonderte Anmeldeseiten ist Clerk als konfigurierbarer Anbieter vorgesehen. Je nach bereitgestellter App-Ausgabe kann der Anmeldedienst bereits beim Laden öffentlicher Seiten eingebunden sein: Die Vite-Ausgabe lädt ihn nur an den Anmeldeseiten; die konfigurierte Next-Ausgabe bindet ihn übergreifend ein. Die tatsächlich bereitgestellte Fassung ist für den jeweiligen Datenweg maßgeblich.\nEine Anmeldung allein begründet keine Projekt-, Rollen- oder Mandantenrechte. Eine vollständige produktive Abnahme der Konto- und Portalabläufe wird hier nicht behauptet.\nDie frühere Sites-/Magiclink-/Resend-Beschreibung und deren Sitzungsfristen werden nicht auf diese Web-App übertragen.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Current vercel.json;route-local Clerk;public session204;no Resend/Magiclink implementation;Next app/layout.tsx globally wraps configured Clerk;Vite route-local difference disclosed"
+        },
+        {
+          "source_section": "03",
+          "heading": "Kontakt und Angebotsgenerator",
+          "body": "Der Projektüberblick im Chat verarbeitet die von Ihnen eingegebenen Ziele, die Ausgangslage und den nächsten Schritt zunächst im Arbeitsspeicher des geöffneten Browsers. Interne Navigation und Einklappen erhalten diese Eingaben; Neuladen verwirft den lokalen Projektentwurf.\nEin E-Mail-Link öffnet Ihr eigenes Mailprogramm. Erst dort entscheiden Sie über Empfänger, Inhalt und tatsächlichen Versand. Diese Website versendet durch das Öffnen des Links keine E-Mail. Die weitere Bearbeitung einer bei NeXify eingegangenen Anfrage dient der vorvertraglichen Kommunikation gemäß der übernommenen Grundlage Art. 6 Abs. 1 lit. b DSGVO.\nGesonderte Entwurfswerkzeuge benötigen eine tatsächlich verfügbare Serverfähigkeit. Das Öffnen oder Vorbereiten eines Entwurfs bestätigt weder Versand noch Termin oder Vertrag. Eine automatische Zustellung über Resend wird nicht behauptet.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "ProjectBrief/Workspace capability and mailto behavior;retain original contact purpose without unsupported delivery"
+        },
+        {
+          "source_section": "04",
+          "heading": "NeXify AI Website-Assistent",
+          "body": "Der öffentliche Website-Assistent bietet eine textgeführte Orientierung und zeigt ausdrücklich an, dass keine Live-KI verwendet wird. Erst beim bewussten Absenden wird die Frage zusammen mit Sprache und öffentlichem Seitenkontext an die eigene Website-Route übertragen. Dort werden passende öffentliche Seitenhinweise ohne Anfrage an einen Modellanbieter erzeugt. Die Anwendungsroute legt keinen dauerhaften Chatverlauf an. Technische Hosting- und Fehlerdaten sind davon getrennt zu betrachten.\nBitte geben Sie keine Passwörter, Zahlungsdaten, Gesundheitsdaten oder sonstige besonders sensiblen Informationen ein. Verbindliche Angebote, rechtliche Bewertungen und Beauftragungen bleiben menschlich geprüft.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Exact api/agent-chat.ts and public-orientation.ts;no model/session/persistence/writes"
+        },
+        {
+          "source_section": "05",
+          "heading": "Cookies und lokale Speicherung",
+          "body": "Die Anwendung merkt die Sprachauswahl unter nexify-locale in localStorage. Die Seitenbegleitung nutzt nexify-presenter-guide in sessionStorage. Der lokale Projektüberblick erhält keinen eigenen Speicherschlüssel. Details und Grenzen stehen unter Cookies und Einstellungen.\nDie optionale Browser-Fehlerdiagnose mit PostHog bleibt standardmäßig aus. Sie wird nur nach Ihrer bewussten Zustimmung und mit gültiger Projektkonfiguration geladen. Erfasst werden technische Fehlerart, bereinigte Fehlerstellen und App-/Releaseversion. Eingaben, rohe Fehlertexte, Querystrings und Referrer werden aus den Anwendungsereignissen entfernt. Keine zusätzliche Klick-, Marketing-, Profil- oder Sitzungsaufzeichnung wird aktiviert. Bei einer Übertragung erhält der Dienst dennoch Netzwerkdaten wie die IP-Adresse; die Einstellung ip:false verhindert diesen Netzwerkvorgang nicht.\nDie Auswahl gilt nur im aktuellen Dokument und wird nicht dauerhaft gespeichert. Ablehnung beeinträchtigt die Seitenfunktionen nicht. Widerruf stoppt neue Berichte einschließlich ausstehender Wiederholungen; eine erneute Aktivierung ist erst nach Neuladen möglich und beginnt dann wieder ausgeschaltet. Die Einstellungen sind im Footer erreichbar.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "DiagnosticConsent and shared redacted exception controller;accurate memory-only consent/network caveat"
+        },
+        {
+          "source_section": "06",
+          "heading": "Speicherdauer",
+          "body": "Daten werden nur so lange gespeichert, wie Zweck, Vertragsabwicklung, Sicherheit, Nachweis- oder gesetzliche Aufbewahrungspflichten dies erfordern. Angebots- und Geschäftskorrespondenz kann entsprechend niederländischer steuer- und handelsrechtlicher Pflichten aufbewahrt werden. Nicht abgesendete Eingaben verbleiben im Browser und werden nicht serverseitig gespeichert.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "07",
+          "heading": "Ihre Rechte",
+          "body": "Auskunft, Berichtigung, Löschung und Einschränkung\nDatenübertragbarkeit und Widerspruch\nWiderruf einer Einwilligung mit Wirkung für die Zukunft\nBeschwerde bei einer Datenschutzaufsichtsbehörde",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "08",
+          "heading": "Sicherheit und Änderungen",
+          "body": "Für die Auslieferung gelten die tatsächlich eingerichteten Hosting-Schutzmaßnahmen. Die Anwendung enthält Eingabegrenzen, sichere Fehlerzustände und getrennte öffentliche und geschützte Bereiche; dies ist kein Nachweis einer vollständigen Sicherheitszertifizierung oder aller externen Dienste.\nFür unerwartete Serverfehler enthält der Code eine gesonderte optionale Sentry-Anbindung. Sie arbeitet nur mit vorhandener serverseitiger Konfiguration und reduziert Berichte auf technische Fehler-/Release-Metadaten; Eingaben und rohe Fehlerdetails werden nicht als Ereignisinhalt weitergereicht. Das Vorhandensein der Bibliothek beweist keinen aktiven Dienst oder erfolgreichen Empfang.\nKonkrete Hosting-, Diagnose- und Aufbewahrungseinstellungen können sich je freigegebenem Release unterscheiden. Es werden hier keine unbelegten Speicherfristen, Datenstandorte oder bereits hochgeladenen Source Maps zugesichert. Die Erklärung wird bei technischen und rechtlichen Änderungen angepasst.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Sentry server-only optional DSN;privacy redactor;no invented retention/location/runtime acceptance"
+        }
+      ]
+    },
+    {
+      "id": "agb",
+      "source": {
+        "url": "https://www.nexifyai.cloud/agb",
+        "retrieved_utc": "2026-10-28T18:51:04.384128+00:00",
+        "html_sha256": "4bdf00198ee2a3de719f455ae5b6dd939b077eb4a47bb39010a2e45fed34598c",
+        "text_sha256": "8a4765dd2764be2cc9a4bff9d2d226b572b1dde88f717ecbf72d00bafaac8122",
+        "main_text_bytes": 2982,
+        "filename": "agb.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/agb.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Geltungsbereich",
+          "body": "Diese Bedingungen gelten ausschließlich gegenüber Unternehmern. Abweichende Bedingungen des Auftraggebers gelten nur bei ausdrücklicher Bestätigung in Textform.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Kalkulation, Angebot und Vertrag",
+          "body": "Online-Rechner und automatisch erzeugte PDFs sind freibleibende Kalkulationen und noch keine Auftragsannahme. Ein bindender Vertrag entsteht erst durch persönlich freigegebenes Angebot und Auftragsbestätigung in Textform oder durch ausdrücklich vereinbarte Leistungsaufnahme.\nAngebotsversion und Gültigkeit werden im Dokument ausgewiesen\nÄnderungen werden vor Ausführung beschrieben und freigegeben\nKeine Bestellung durch bloßes Bedienen des Rechners",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "03",
+          "heading": "Leistungsumfang",
+          "body": "Maßgeblich sind Leistungsbeschreibung, Liefergegenstände, Mitwirkung, Ausschlüsse, Abnahmekriterien und Betriebsrahmen der bestätigten Angebotsversion. Drittanbieter-, Lizenz-, Domain-, API- und Hostingkosten sind nur enthalten, wenn sie ausdrücklich genannt sind.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "04",
+          "heading": "Vergütung und Steuern",
+          "body": "Die Vergütung, steuerliche Behandlung, Zahlungsplan und Fälligkeit ergeben sich aus dem individuell freigegebenen Angebot. Drittanbieter- und weitere Fremdkosten werden vor Beauftragung transparent benannt.\nDer in der früheren öffentlichen Fassung genannte Tagessatz wird hier nicht als neue Preiszusage veröffentlicht. Maßgeblich bleibt der freigegebene Angebotsstand.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "No fresh release-specific price approval;do not publish a numeric price or new tax guarantee"
+        },
+        {
+          "source_section": "05",
+          "heading": "Mitwirkung und Termine",
+          "body": "Der Auftraggeber stellt notwendige Inhalte, Zugänge, Ansprechpartner, Entscheidungen und Nutzungsrechte rechtzeitig bereit. Termine verschieben sich angemessen, wenn vereinbarte Mitwirkung ausbleibt oder sich der freigegebene Umfang ändert.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "06",
+          "heading": "KI-gestützte Arbeitsweise",
+          "body": "KI-Werkzeuge können unterstützend eingesetzt werden. Fachliche Letztverantwortung und Freigabe verbleiben bei NeXify AI. Vertrauliche Daten werden nicht ohne vereinbarte Grundlage zum Training öffentlicher Modelle bereitgestellt.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "07",
+          "heading": "Abnahme, Rechte und Haftung",
+          "body": "Abnahmeverfahren, Prüffrist und Mängelkorrektur werden im Angebot festgelegt. Individuell geschaffene Nutzungsrechte gehen im vereinbarten Umfang nach vollständiger Zahlung über. Zwingende Haftung, insbesondere für Vorsatz, grobe Fahrlässigkeit sowie Verletzung von Leben, Körper oder Gesundheit, bleibt unberührt.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "08",
+          "heading": "Recht und Gerichtsstand",
+          "body": "Soweit wirksam vereinbar, gilt niederländisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Venlo, Niederlande.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "avv",
+      "source": {
+        "url": "https://www.nexifyai.cloud/avv",
+        "retrieved_utc": "2026-10-28T18:51:04.184297+00:00",
+        "html_sha256": "77230c95c3cdb0e8d6d149cab18a1b4295bc34e41e6fc9621be0a6fcba44bdb8",
+        "text_sha256": "62e0dddb074cc8b3a2d7620d11aefad90fcf974755fa57ec5fa581bde48817b1",
+        "main_text_bytes": 1692,
+        "filename": "avv.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/avv.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Gegenstand und Weisung",
+          "body": "NeXify verarbeitet die im Hauptvertrag beschriebenen Daten ausschließlich dokumentiert und weisungsgebunden. Art, Zweck, Kategorien betroffener Personen und Dauer werden im projektspezifischen Anhang festgelegt.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Pflichten von NeXify",
+          "body": "Vertraulichkeit und Zugriff nach Erforderlichkeit\nTechnische und organisatorische Maßnahmen nach Art. 32 DSGVO\nUnterstützung bei Betroffenenrechten und Datenschutz-Folgenabschätzungen\nMeldung von Datenschutzverletzungen ohne unangemessene Verzögerung\nNachweis- und Auditunterstützung",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "03",
+          "heading": "Unterauftragsverarbeiter",
+          "body": "Eingesetzte Anbieter werden im projektspezifischen Subprozessoren-Verzeichnis genannt. Änderungen werden nach dem vereinbarten Verfahren angekündigt. Drittlandübermittlungen benötigen einen tragfähigen Mechanismus und ergänzende Schutzmaßnahmen.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "04",
+          "heading": "Löschung und Rückgabe",
+          "body": "Nach Vertragsende werden Auftragsdaten nach Weisung gelöscht oder zurückgegeben, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Durchführung kann nachweisbar bestätigt werden.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "05",
+          "heading": "Vertragsschluss",
+          "body": "Diese Webseite stellt den Rahmen transparent dar. Der rechtsverbindliche AVV wird projektbezogen mit Anlagen zu Verarbeitung, TOMs und Unterauftragsverarbeitern in Textform geschlossen.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "ki-transparenz",
+      "source": {
+        "url": "https://www.nexifyai.cloud/ki-transparenz",
+        "retrieved_utc": "2026-10-28T18:51:07.064117+00:00",
+        "html_sha256": "62989b81f024227ded9fe535743de434b977ed96f92de170e094230a0f3ea810",
+        "text_sha256": "fbe82ed2019297d0c054a629915da4c20dae7033b3b5aa19f24728ec84853bfa",
+        "main_text_bytes": 2047,
+        "filename": "ki-transparenz.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Interaktion mit KI",
+          "body": "Der öffentliche Website-Assistent ist derzeit eine textgeführte Orientierung ohne Live-KI. Beim bewussten Absenden werden Frage, Sprache und öffentlicher Seitenkontext an die Website übertragen und öffentliche Seitenhinweise ohne Modellanbieteranfrage erzeugt. Der lokale Projektüberblick dient der Vorbereitung; es erfolgen dadurch keine Buchung, kein Versand und kein kostenpflichtiger Modellaufruf.\nEin später aktivierter KI-Dienst benötigt eine eigene belegte Daten- und Providerbindung sowie eine zutreffende Kennzeichnung vor der Nutzung.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Replace old liveAI assertion with actual deterministic public handler and local brief"
+        },
+        {
+          "source_section": "02",
+          "heading": "Einsatzbereiche",
+          "body": "Aktuell verfügbar sind die Orientierung zu öffentlichen Seiten und die lokale Strukturierung eines Projektanliegens. Angebots-, Termin- und Marketingwerkzeuge zeigen ihren tatsächlich verfügbaren Stand an; ihre Oberfläche ist keine Zusage externer Ausführung.\nWissensrecherche, Modellantworten, Produktionsaktionen oder automatische tägliche Erweiterungen werden hier nicht allein aus einer geplanten Funktion abgeleitet.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Limit to existing surfaced capabilities;no provider or autonomous execution inference"
+        },
+        {
+          "source_section": "03",
+          "heading": "Grenzen",
+          "body": "KI kann unvollständige, veraltete oder falsche Inhalte erzeugen. Verbindliche Angebote, rechtliche Bewertungen, Produktionsfreigaben und Beauftragungen werden nicht allein durch ein Modell entschieden.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "04",
+          "heading": "Menschliche Kontrolle",
+          "body": "Pascal Courbois oder eine ausdrücklich benannte verantwortliche Rolle prüft kundenwirksame Empfehlungen und Freigaben. Nutzer können jederzeit in einen persönlichen Kontakt wechseln.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "05",
+          "heading": "Daten und Training",
+          "body": "Datenwege und Rechtsgrundlagen sind in der Datenschutzerklärung beschrieben. Kundendaten werden nicht zum Training öffentlicher Modelle verwendet, sofern dies nicht ausdrücklich und schriftlich vereinbart wurde.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "06",
+          "heading": "AI Literacy und Governance",
+          "body": "NeXify dokumentiert Zweck, Grenzen, erlaubte Tools, Freigaben und Prüfverfahren je Einsatz. Beteiligte erhalten die für ihre Rolle notwendige Einweisung und dürfen Hochrisiko- oder Produktionsaktionen nicht ohne passende Autorisierung ausführen.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "barrierefreiheit",
+      "source": {
+        "url": "https://www.nexifyai.cloud/barrierefreiheit",
+        "retrieved_utc": "2026-10-28T18:51:07.023694+00:00",
+        "html_sha256": "453ee370f0a4ebe479825c50b1b08097fc2b264f3d55c771f74f6ec39791d394",
+        "text_sha256": "8333bd5ec283ecd6f83381b786b93d34389bef76e19890171c515c9dcce26f8e",
+        "main_text_bytes": 1470,
+        "filename": "barrierefreiheit.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/barrierefreiheit.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Geltungsbereich",
+          "body": "Diese Erklärung bezieht sich auf den hier vorbereiteten öffentlichen Web-App-Stand. Geprüft wurden begrenzte lokale Browserabläufe für Mobil/Desktop, Tastatur und Fokus, DE/NL/FR, Textvergrößerung und reduzierte Bewegung. Ein lokaler Test ist keine vollständige Abnahme aller produktiven Umgebungen.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Actual bounded tests;not blanket site certification"
+        },
+        {
+          "source_section": "02",
+          "heading": "Aktueller Stand",
+          "body": "WCAG 2.2 AA und EN 301 549 dienen als Qualitätsrahmen. Es wird keine vollständige Konformität oder Zertifizierung behauptet. Eine qualifizierte Abnahme mit Assistenztechnologien sowie aller tatsächlichen externen Anmelde- und Providerabläufe steht weiterhin aus.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Keep goals separate from qualified AT acceptance"
+        },
+        {
+          "source_section": "03",
+          "heading": "Bekannte Grenzen",
+          "body": "Die Zwischenlösung verwendet Szenenbilder, keine fertigen gesprochenen Filme. Externe Anmeldung, Mailzustellung und weitere Providerabläufe besitzen gesonderte Prüfgrenzen. Automatisch vorbereitete Angebots-PDFs haben noch keinen vollständigen PDF/UA-Nachweis. Juristische Inhalte werden zunächst im deutschen Original mit Sprachkennzeichnung bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "No rejected media/liveAI/Resend assumptions;preserve PDF/AT limits"
+        },
+        {
+          "source_section": "04",
+          "heading": "Feedback",
+          "body": "Barrieren können per E-Mail an hello@nexifyai.cloud mit dem Betreff „Barrierefreiheit“ gemeldet werden. Rückmeldungen werden priorisiert geprüft.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "recht",
+      "source": {
+        "url": "https://www.nexifyai.cloud/recht",
+        "retrieved_utc": "2026-10-28T18:51:07.085748+00:00",
+        "html_sha256": "64d96f3087966292b9faa1938a9148cfbff34d25f9dd99d180bd0855fd467b9d",
+        "text_sha256": "6543b0583e1672f52c009ece7bb57040deab91e5025dab8bfc233d1ec68222b7",
+        "main_text_bytes": 1795,
+        "filename": "recht.txt",
+        "coverage": "complete HTML main element"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/recht.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Impressum",
+          "body": "Anbieterkennzeichnung für die deutschsprachige B2B-Präsenz von NeXify AI mit Sitz in den Niederlanden.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Datenschutz",
+          "body": "Transparenz über Datenwege, Zwecke, Rechtsgrundlagen und Rechte nach der DSGVO sowie über lokale Speicherungen nach dem TDDDG und der niederländischen Telecommunicatiewet.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "03",
+          "heading": "AGB B2B",
+          "body": "Rahmenbedingungen für Leistungen von NeXify AI gegenüber Unternehmen. Individuelle Angebote und Auftragsbestätigungen gehen diesen Bedingungen vor.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "04",
+          "heading": "AVV / DPA",
+          "body": "Vertragsrahmen nach Art. 28 DSGVO, wenn NeXify AI personenbezogene Daten im Auftrag eines Kunden verarbeitet.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "05",
+          "heading": "B2B-Hinweis",
+          "body": "NeXify AI schließt über diese Website ausschließlich Verträge mit Unternehmen. Der Angebotsgenerator ist kein Verbraucher-Checkout.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "06",
+          "heading": "Cookie-Richtlinie",
+          "body": "Technisch notwendige Speicherung ohne Einwilligung; optionale Komfortspeicherung nur nach Ihrer Auswahl. Kein Werbe- oder Cross-Site-Tracking durch NeXify AI.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "07",
+          "heading": "KI-Transparenz",
+          "body": "NeXify kennzeichnet KI-Interaktionen, beschreibt Grenzen und hält verbindliche Entscheidungen unter menschlicher Kontrolle.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "08",
+          "heading": "Barrierefreiheit",
+          "body": "NeXify AI verfolgt WCAG 2.2 AA und EN 301 549 als verbindlichen Qualitätsrahmen – auch für diese öffentlich erreichbare, ausschließlich an Unternehmen gerichtete Site.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "09",
+          "heading": "Security",
+          "body": "Sicherheitsprinzipien, Meldeweg und klare Grenzen für die NeXify-AI-Premium-Site und verbundene Dienste.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "widerruf",
+      "source": {
+        "url": "https://www.nexifyai.cloud/widerruf",
+        "retrieved_utc": "2026-10-28T18:51:47.292040+00:00",
+        "html_sha256": "22c5c942e2999140ec030ad73ec53ee2857b0497874491edebb4443fd0d504bc",
+        "text_sha256": "1cd64219f8c2eca49d12c278097f5795622190f7502a6abce568e46a235d4b2c",
+        "main_text_bytes": 1287,
+        "filename": "widerruf.txt",
+        "coverage": "complete HTML main element",
+        "discovered_from": "https://www.nexifyai.cloud/recht"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/widerruf.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Keine Verbraucherverträge",
+          "body": "Anfragen und Angebote richten sich an Unternehmer, juristische Personen und beruflich selbstständig Handelnde. Ein gesetzliches Verbraucher-Widerrufsrecht wird deshalb nicht als Vertragsbestandteil angeboten.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Keine Bestellung im Rechner",
+          "body": "Auswahl, Kalkulation, PDF-Erzeugung und E-Mail-Versand lösen noch keine Beauftragung oder Zahlung aus. Vor Vertragsschluss werden Unternehmen, Vertretungsberechtigung, Leistungsumfang, Preis, Steuern und Bedingungen geprüft.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "03",
+          "heading": "Korrektur und Rücknahme",
+          "body": "Eine Angebotsanfrage kann vor Auftragsbestätigung jederzeit korrigiert oder zurückgenommen werden. Bereits geschlossene B2B-Verträge können nach den individuell vereinbarten Kündigungs- und Pausenregeln beendet werden.",
+          "adaptation": "unchanged_source"
+        }
+      ]
+    },
+    {
+      "id": "cookie-richtlinie",
+      "source": {
+        "url": "https://www.nexifyai.cloud/cookie-richtlinie",
+        "retrieved_utc": "2026-10-28T18:51:47.268867+00:00",
+        "html_sha256": "407a21616a59b27c947273d60087cb2c1630721d66119ba8d1288de14c27ca90",
+        "text_sha256": "0661455289d54ed3068d2f5b2b611bc38258f6376e65c6e87887ff77522e1338",
+        "main_text_bytes": 1484,
+        "filename": "cookie-richtlinie.txt",
+        "coverage": "complete HTML main element",
+        "discovered_from": "https://www.nexifyai.cloud/recht"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/cookie-richtlinie.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Rechtsrahmen",
+          "body": "Für Endgerätezugriffe gelten insbesondere § 25 TDDDG im deutschen Markt, Art. 5 Abs. 3 der ePrivacy-Richtlinie, Art. 6 DSGVO und in den Niederlanden Art. 11.7a Telecommunicatiewet.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "02",
+          "heading": "Technisch notwendige Speicherungen",
+          "body": "Sprachauswahl: nexify-locale in localStorage; bleibt auf diesem Gerät bis zur Änderung oder Löschung durch den Browser gespeichert.\nSeitenbegleitung: nexify-presenter-guide in sessionStorage; gilt für die jeweilige Browsersitzung bzw. den geöffneten Tab.\nProjektüberblick und ungesendete Chat-Eingaben: nur im Arbeitsspeicher der geöffneten Anwendung; kein eigener dauerhafter Speicherschlüssel. Neuladen verwirft den lokalen Projektüberblick.\nDie früher beschriebenen Sites-/Cloudflare-/Magiclink-Cookies und nexify-consent-v1 werden nicht als Speicherbestand dieser Anwendungsimplementierung übernommen. Gesonderte Hosting- oder Anmeldedienste sind getrennt zu beurteilen.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Exact Workspace/PresenterGuide/ProjectBrief storage;public session204;no invented cookies"
+        },
+        {
+          "source_section": "03",
+          "heading": "Optionale Komfortspeicherung",
+          "body": "Optionale Fehlerdiagnose mit PostHog bleibt zunächst aus und benötigt Ihre ausdrückliche Zustimmung sowie eine gültige Projektkonfiguration. Die Auswahl und der Diagnosezustand werden nur im aktuellen Dokument gehalten, nicht in localStorage oder Cookies. Die Diagnose erfasst keine zusätzlichen Klickdaten, Nutzerprofile, Marketingdaten oder Sitzungsaufzeichnungen. Technische Netzwerkdaten fallen bei einer von Ihnen erlaubten Übertragung dennoch beim Empfänger an.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Actual exception-only SDK configuration;not false no external service claim"
+        },
+        {
+          "source_section": "04",
+          "heading": "Einstellungen und Widerruf",
+          "body": "Über Fehlerdiagnose-Einstellungen im Footer können Sie zustimmen, ablehnen oder eine erteilte Einwilligung widerrufen. Ablehnung schränkt die Seitenfunktionen nicht ein. Nach Widerruf bleibt die Diagnose in diesem Dokument gesperrt; Neuladen eröffnet eine neue, zunächst ausgeschaltete Auswahl. Die Rechtmäßigkeit einer bereits erfolgten Verarbeitung bleibt vom späteren Widerruf unberührt. Eine Auswahl für diese Website ist keine automatische Einwilligung für eine andere Domain.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Actual consent UI and terminal withdrawal;no old persisted comfort manager"
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "source": {
+        "url": "https://www.nexifyai.cloud/security",
+        "retrieved_utc": "2026-10-28T18:51:47.319495+00:00",
+        "html_sha256": "3a543b4f72baf5448711de3a788623c9e1d4595b78408ebfe7b59fcea477c6c3",
+        "text_sha256": "965e8837753dce3b47a6bc069f246d0223950c92e386309d18941f1ceb61247b",
+        "main_text_bytes": 1447,
+        "filename": "security.txt",
+        "coverage": "complete HTML main element",
+        "discovered_from": "https://www.nexifyai.cloud/recht"
+      },
+      "source_file": "docs/sources/legal-public-2026-10-28/security.txt",
+      "source_document_date": "2026-09-11",
+      "editorial_date": "2026-10-28",
+      "content_locale": "de",
+      "legal_review": "pending",
+      "sections": [
+        {
+          "source_section": "01",
+          "heading": "Schutzprinzipien",
+          "body": "Die Anwendung hält Secrets außerhalb des öffentlichen Browsercodes und trennt öffentliche Informationen von vorgesehenen geschützten Bereichen. Eingabevalidierung und sichere Fehlerzustände sind im begrenzten öffentlichen Orientierungspfad implementiert. Rollen-, Mandanten-, Provider-, Backup- und Restore-Abnahmen sind eigenständige Anforderungen und werden nicht allein durch diese Darstellung als produktiv nachgewiesen ausgegeben.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Preserve security principles without asserting unverified runtime/restore"
+        },
+        {
+          "source_section": "02",
+          "heading": "Sicherheitsmeldung",
+          "body": "Bitte melden Sie vermutete Schwachstellen vertraulich an hello@nexifyai.cloud mit dem Betreff „Security“. Beschreiben Sie betroffene URL, reproduzierbare Schritte und mögliche Auswirkungen. Veröffentlichen Sie keine Kundendaten oder Zugangsdaten.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "03",
+          "heading": "Nicht zulässige Tests",
+          "body": "Ohne schriftliche Freigabe sind Social Engineering, Denial-of-Service, Datenexfiltration, Änderungen fremder Daten und Zugriffe außerhalb des eigenen Kontos ausgeschlossen.",
+          "adaptation": "unchanged_source"
+        },
+        {
+          "source_section": "04",
+          "heading": "Betriebsstatus",
+          "body": "Die öffentliche Orientierung ist ausdrücklich eine textgeführte Vorschau ohne Live-KI. Bei fehlender Verbindung werden Fehler und verfügbare Kontaktwege angezeigt, keine erfolgreiche externe Ausführung. Die lokale Projektklärung kann ohne Modellanbieter vorbereitet werden; sie bestätigt weder Auftrag, Zahlung, Versand noch Termin.",
+          "adaptation": "technical_source_adaptation",
+          "reason": "Actual fallback and local project-preparation behavior"
+        }
+      ]
+    }
+  ],
+  "route_mapping": {
+    "impressum": "imprint",
+    "recht": "imprint",
+    "security": "imprint",
+    "datenschutz": "privacy",
+    "agb": "terms",
+    "avv": "terms",
+    "widerruf": "terms",
+    "ki-transparenz": "ai-notice",
+    "barrierefreiheit": "accessibility",
+    "cookie-richtlinie": "cookies"
+  },
+  "legal_review": "pending",
+  "automatic_legal_translation": false,
+  "normative_rules_added": false
+}

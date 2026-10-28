@@ -1,3 +1,44 @@
+## Current public legal sources · 28.10.2026
+
+Local follow-up to preserved chat d390f902 and Sentry153aa550. The owner's
+18:46:40 instruction adopts the current public operator/legal source. The
+consumer-local ZIP and all ten text hashes/byte counts were verified. Originals
+are preserved, with no private source archive or customer records imported.
+
+Current operator is NeXify AI by NeXify, Pascal Courbois, Dutch Eenmanszaak.
+The former B.V. placeholder is replaced. Ten documents consolidate into six
+existing public routes:48 sections plus nine index summaries represented by
+native links. German originals remain explicit in DE/NL/FR UI and section/TOC
+language annotations; no automatic legal translation or legal certification.
+
+Technical disclosure matches Vercel, Vite route-local versus configured Next
+global Clerk, deterministic orientation, memory-only project preparation and
+explicit mailto. Existing diagnostic consent/redaction/terminal withdrawal,
+provider configuration, enforcement headers and permissions remain unchanged.
+Agency footer now refers to adopted documents with pending lawyer review;
+TEILEKLAR shop conditions and public license inventory remain independently open.
+
+Local source tests, all typechecks, Vite/Next builds, consent18,critical5+SDK3,
+resize108,scene144 and Next72public/10protected checks passed. Legal/footer and project-brief receipts are refreshed against both optimized
+renderers for the final source state. The full route contract caught six extra
+legal-page email actions:they were removed and the legal email action moved
+to the existing contact page. The contact-only guard remains unchanged;all ten
+sitemap tests and five focused legal-source tests pass. A stale local Next testserver caused one failed receipt attempt;
+that attempt is retained only as a failure log and is not acceptance evidence.
+A repeated real quote-capable case found a delayed handover focus race;the
+quote-title ref now focuses at commit instead of a later animation frame. A
+deterministic held-frame regression preserves separate title/details typing.
+Final review/REA and complete gates are recorded with the resulting local hash.
+No push, PR, remote CI, upload, deployment, domain or provider action in this task.
+
+Remote-only drift was read earlier:Main6a9ee6e and PR48fe22d523 contain three
+external setup/progress/coverage changes. They are not this writer's actions;
+no remote ref is overwritten. This isolated branch keeps original153 and d390
+rollback points. Any later authorized integration must preserve foreign records.
+Pending:lawyer/operator scope review,release-specific recipient/agreement/retention
+facts,real production/readback and separate shop conditions. Tests do not close
+these dependencies.
+
 ## Public chat project preparation · 28.10.2026
 
 Local increment on preserved Sentry fix 153aa550; no remote push, PR, CI,

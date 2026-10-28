@@ -1,0 +1,95 @@
+[
+  {
+    "url": "https://www.nexifyai.cloud/impressum",
+    "retrieved_utc": "2026-10-28T18:51:04.188450+00:00",
+    "html_sha256": "7dacbc993a0094089d94c487b40ba4bfeee7b8e1e26f3b281874c740b89a69cf",
+    "text_sha256": "8e987f727388fb8aaaf90a1773caaaf61260584f1309118be387d50bc493e348",
+    "main_text_bytes": 1534,
+    "filename": "impressum.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/datenschutz",
+    "retrieved_utc": "2026-10-28T18:51:04.142596+00:00",
+    "html_sha256": "fe78cb8599fab81f64859b1dd001384f1cb7a912580fedbb6e500d35b2e42dbf",
+    "text_sha256": "81e9dc5b2d9fc95db83ffaaf79386e3e42892e21f6dcc732af4bf634607936c1",
+    "main_text_bytes": 4332,
+    "filename": "datenschutz.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/agb",
+    "retrieved_utc": "2026-10-28T18:51:04.384128+00:00",
+    "html_sha256": "4bdf00198ee2a3de719f455ae5b6dd939b077eb4a47bb39010a2e45fed34598c",
+    "text_sha256": "8a4765dd2764be2cc9a4bff9d2d226b572b1dde88f717ecbf72d00bafaac8122",
+    "main_text_bytes": 2982,
+    "filename": "agb.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/avv",
+    "retrieved_utc": "2026-10-28T18:51:04.184297+00:00",
+    "html_sha256": "77230c95c3cdb0e8d6d149cab18a1b4295bc34e41e6fc9621be0a6fcba44bdb8",
+    "text_sha256": "62e0dddb074cc8b3a2d7620d11aefad90fcf974755fa57ec5fa581bde48817b1",
+    "main_text_bytes": 1692,
+    "filename": "avv.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/ki-transparenz",
+    "retrieved_utc": "2026-10-28T18:51:07.064117+00:00",
+    "html_sha256": "62989b81f024227ded9fe535743de434b977ed96f92de170e094230a0f3ea810",
+    "text_sha256": "fbe82ed2019297d0c054a629915da4c20dae7033b3b5aa19f24728ec84853bfa",
+    "main_text_bytes": 2047,
+    "filename": "ki-transparenz.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/barrierefreiheit",
+    "retrieved_utc": "2026-10-28T18:51:07.023694+00:00",
+    "html_sha256": "453ee370f0a4ebe479825c50b1b08097fc2b264f3d55c771f74f6ec39791d394",
+    "text_sha256": "8333bd5ec283ecd6f83381b786b93d34389bef76e19890171c515c9dcce26f8e",
+    "main_text_bytes": 1470,
+    "filename": "barrierefreiheit.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/recht",
+    "retrieved_utc": "2026-10-28T18:51:07.085748+00:00",
+    "html_sha256": "64d96f3087966292b9faa1938a9148cfbff34d25f9dd99d180bd0855fd467b9d",
+    "text_sha256": "6543b0583e1672f52c009ece7bb57040deab91e5025dab8bfc233d1ec68222b7",
+    "main_text_bytes": 1795,
+    "filename": "recht.txt",
+    "coverage": "complete HTML main element"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/widerruf",
+    "retrieved_utc": "2026-10-28T18:51:47.292040+00:00",
+    "html_sha256": "22c5c942e2999140ec030ad73ec53ee2857b0497874491edebb4443fd0d504bc",
+    "text_sha256": "1cd64219f8c2eca49d12c278097f5795622190f7502a6abce568e46a235d4b2c",
+    "main_text_bytes": 1287,
+    "filename": "widerruf.txt",
+    "coverage": "complete HTML main element",
+    "discovered_from": "https://www.nexifyai.cloud/recht"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/cookie-richtlinie",
+    "retrieved_utc": "2026-10-28T18:51:47.268867+00:00",
+    "html_sha256": "407a21616a59b27c947273d60087cb2c1630721d66119ba8d1288de14c27ca90",
+    "text_sha256": "0661455289d54ed3068d2f5b2b611bc38258f6376e65c6e87887ff77522e1338",
+    "main_text_bytes": 1484,
+    "filename": "cookie-richtlinie.txt",
+    "coverage": "complete HTML main element",
+    "discovered_from": "https://www.nexifyai.cloud/recht"
+  },
+  {
+    "url": "https://www.nexifyai.cloud/security",
+    "retrieved_utc": "2026-10-28T18:51:47.319495+00:00",
+    "html_sha256": "3a543b4f72baf5448711de3a788623c9e1d4595b78408ebfe7b59fcea477c6c3",
+    "text_sha256": "965e8837753dce3b47a6bc069f246d0223950c92e386309d18941f1ceb61247b",
+    "main_text_bytes": 1447,
+    "filename": "security.txt",
+    "coverage": "complete HTML main element",
+    "discovered_from": "https://www.nexifyai.cloud/recht"
+  }
+]

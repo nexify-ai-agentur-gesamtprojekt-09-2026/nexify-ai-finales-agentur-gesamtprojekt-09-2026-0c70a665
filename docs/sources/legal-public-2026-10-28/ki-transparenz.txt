@@ -1,0 +1,34 @@
+NeXify AI
+ · Rechtszentrum
+KI-Transparenz und EU AI Act
+NeXify kennzeichnet KI-Interaktionen, beschreibt Grenzen und hält verbindliche Entscheidungen unter menschlicher Kontrolle.
+Stand: 
+11. September 2026
+Transparenter Arbeitsstand
+Diese Fassung bildet den aktuellen technischen Betrieb und die B2B-Ausrichtung ab. Sie ersetzt keine individuelle anwaltliche Beratung oder behördliche Prüfung.
+01
+Interaktion mit KI
+Der NeXify AI Website-Assistent ist ein KI-gestütztes Dialogsystem. Bereits vor der ersten Nachricht wird sichtbar angezeigt, ob das System bereit ist und dass Antworten automatisiert auf Grundlage der Website-Wissensbasis entstehen. Diese Transparenz folgt insbesondere Art. 50 der Verordnung (EU) 2024/1689.
+02
+Einsatzbereiche
+Erstorientierung und Strukturierung von Anliegen
+Wissensgestützte Recherche mit Quellenbindung
+Unterstützung bei Kalkulation, Planung, Code und Qualität
+Analyse von Workflows und Betriebsinformationen
+03
+Grenzen
+KI kann unvollständige, veraltete oder falsche Inhalte erzeugen. Verbindliche Angebote, rechtliche Bewertungen, Produktionsfreigaben und Beauftragungen werden nicht allein durch ein Modell entschieden.
+04
+Menschliche Kontrolle
+Pascal Courbois oder eine ausdrücklich benannte verantwortliche Rolle prüft kundenwirksame Empfehlungen und Freigaben. Nutzer können jederzeit in einen persönlichen Kontakt wechseln.
+05
+Daten und Training
+Datenwege und Rechtsgrundlagen sind in der Datenschutzerklärung beschrieben. Kundendaten werden nicht zum Training öffentlicher Modelle verwendet, sofern dies nicht ausdrücklich und schriftlich vereinbart wurde.
+06
+AI Literacy und Governance
+NeXify dokumentiert Zweck, Grenzen, erlaubte Tools, Freigaben und Prüfverfahren je Einsatz. Beteiligte erhalten die für ihre Rolle notwendige Einweisung und dürfen Hochrisiko- oder Produktionsaktionen nicht ohne passende Autorisierung ausführen.
+Maßgebliche öffentliche Quellen
+Verordnung (EU) 2024/1689 · AI Act
+EU-Kommission · Leitlinien zu Artikel 50
+Alle Rechtstexte 
+Rückfrage stellen 

@@ -2,9 +2,9 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T19:07:38.396Z",
+  "observed_at": "2026-10-28T19:53:17.265Z",
   "source_sha256": {
-    "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
+    "apps/site/.generated/public-site.json": "b61e865c9ebd6bd9de0126030fef8ae88c1c98e87b453ffe2929f3ecc9f32408",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
     "apps/site/src/Auth.tsx": "1b6239b65b9cb1bb6bb69e68f5318c8fb4fdb9f8165a7a763b11b6fa93968b41",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
@@ -37,8 +37,8 @@
     "apps/web/components/PresenterVideo.css": "2f0c719aa78d6d8ffc0f7d57bf57a3553630f34d8729a47b4fcca2638c91e992",
     "apps/web/components/PresenterVideo.tsx": "8aad2b972de21ee0e0d880a9723f0bc539184df6b1ea21e1975a2ccf19509e16",
     "apps/web/components/ProjectBrief.tsx": "c35cf37d8f9e8264aef04ecd157675345ff8808eaf39d8d8154e8843a51b50fc",
-    "apps/web/components/PublicContent.tsx": "cef8e0c3084a582868f4b82128cc96eae7df9d68571c7c2efc469c1d97fb7d08",
-    "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+    "apps/web/components/PublicContent.tsx": "6d3797e4c974782a240391d774c8919115d6240ea2d00ccccf76a22329480840",
+    "apps/web/components/PublicContentLayout.css": "7345e3952d1c5ab7a7e5f57db203b3152b0c8cb45b3e6acdb838b29c5e1582c0",
     "apps/web/components/PublicExperience.tsx": "5d2d921be94b2a9d7a1e7f85b66535f02c48e02746fc7b5f718a222f2abf9867",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
     "apps/web/components/PublicOrientationChat.css": "ba9dd45f56d0d3016562947c49d82ab81d0fc224f5f211a6259e5c7390e6c190",
@@ -47,16 +47,16 @@
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
-    "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
+    "apps/web/components/SiteFooter.tsx": "d4ed427f98f646e9daa7555770eb46728bebee14cbf77d5416187a3d832a5f22",
     "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
-    "apps/web/components/Workspace.tsx": "e40008d1058c352ab01d403b46907afdcbe601aa3ac6fee9235b8b648b99ee16",
+    "apps/web/components/Workspace.tsx": "00a65c43e0d120b7516a613cd4667c81b29e044d323594bd0f15e9793f129824",
     "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
     "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
     "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
     "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
-    "apps/web/lib/page-types.ts": "e066fc6cbaabac8e98c02f26ee984e2f36a324b546421dd44ce737db696f2b85",
+    "apps/web/lib/page-types.ts": "62557db4cb752fda2facde2a8473e8c77c6f3d809a572e8ad21b95fa9b344921",
     "apps/web/lib/project-brief-i18n.ts": "82f4f391bcf1b86adc448f8704a2b5026a61f77a14841a47f31ff4c99c98137f",
     "apps/web/lib/project-brief.mjs": "e4eb926bf7d4ee2eec34407969a7dbc7d8788b951c214b5fea90aa797e3e80b0",
     "apps/web/public/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
@@ -67,7 +67,7 @@
     "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
     "config/design-tokens.json": "c086069f2ff70c1f998fe2686ec10c6cd0376098205737f582f09a5b216e36ea",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
-    "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
+    "config/site-map.json": "17a852cbb9a69f66276bd6f6cf70fefd388a0c0b4e9fac8b36bc082b468fa7d1",
     "config/text-resize-sources.json": "8cef37815cd15a9f0c0180b0999bafb0aceba320b4bd0c537af68fb8bd8ae8b8",
     "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
     "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
@@ -347,7 +347,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 297,
+        "count": 313,
         "all_doubled": true
       },
       "overflow": false,
@@ -439,7 +439,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 375,
         "all_doubled": true
       },
       "overflow": false,
@@ -462,7 +462,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 353,
         "all_doubled": true
       },
       "overflow": false,
@@ -485,7 +485,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 409,
         "all_doubled": true
       },
       "overflow": false,
@@ -508,7 +508,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 339,
         "all_doubled": true
       },
       "overflow": false,
@@ -531,7 +531,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 325,
         "all_doubled": true
       },
       "overflow": false,
@@ -554,7 +554,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 325,
         "all_doubled": true
       },
       "overflow": false,

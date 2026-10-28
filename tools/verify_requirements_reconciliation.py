@@ -28,7 +28,10 @@ def validate_legal_footer_evidence(root):
         expected = {(path, locale, width) for path in pages for locale in locales for width in widths}
         interactions = {(path, locale, width) for path in ('/', '/teileklar') for locale in locales for width in widths}
         sources = ('apps/web/components/SiteFooter.tsx', 'apps/web/components/WorkspaceRebuild.css',
-                   'config/site-map.json', 'apps/site/tests/browser-legal-footer.mjs')
+                   'config/site-map.json', 'config/legal-public-documents.json',
+                   'apps/web/components/PublicContent.tsx','apps/web/components/PublicContentLayout.css',
+                   'apps/web/lib/page-types.ts','apps/site/scripts/generate-public-data.mjs',
+                   'apps/site/tests/browser-legal-footer.mjs')
         current = {p: hashlib.sha256(read_fixed(p).read_bytes()).hexdigest() for p in sources}
         key = lambda row: (row.get('path'), row.get('locale'), row.get('width'))
         for name in ('browser.json', 'next-browser.json'):

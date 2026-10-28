@@ -93,6 +93,25 @@ class ReconciliationTests(unittest.TestCase):
         self.assertIn('Unresolved requirement source', errors)
         self.assertIn('Incomplete requirement: owner_area', errors)
 
+    def test_legal_renderer_or_document_hash_cannot_reuse_previous_receipt(self):
+        for source in ('config/legal-public-documents.json',
+                       'apps/web/components/PublicContent.tsx',
+                       'apps/web/components/PublicContentLayout.css',
+                       'apps/web/lib/page-types.ts',
+                       'apps/site/scripts/generate-public-data.mjs'):
+            with self.subTest(source=source):
+                real_read = Path.read_text
+                def changed(path, *args, **kwargs):
+                    text = real_read(path, *args, **kwargs)
+                    if path == ROOT / 'evidence/legal-footer-2026-10-28/browser.json':
+                        report = json.loads(text)
+                        report['source_sha256'][source] = '0' * 64
+                        return json.dumps(report)
+                    return text
+                with patch.object(Path, 'read_text', changed):
+                    self.assertIn('Incomplete or stale legal footer browser evidence: browser.json',
+                                  checker.validate_legal_footer_evidence(ROOT))
+
     def test_no_automatic_acceptance_or_private_source_escape(self):
         row = self.record['requirements'][0]
         row['full_requirement_accepted'] = True

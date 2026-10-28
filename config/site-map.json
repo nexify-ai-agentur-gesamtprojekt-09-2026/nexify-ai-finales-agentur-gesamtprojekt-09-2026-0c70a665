@@ -15,10 +15,13 @@
     "source": "explicit_user_direction_2026-10-26"
   },
   "operator_context": {
-    "display_name": "NeXify AI FACTORY B.V.",
+    "display_name": "NeXify AI by NeXify",
     "legal_country_context": "NL",
-    "verification_policy": "Use separately verified operator evidence; market preference does not change register/tax/provider identity",
-    "historical_sole_trader_data_reused": false
+    "legal_form": "Eenmanszaak nach niederländischem Recht",
+    "verification_policy": "Current public operator source adopted at owner instruction 28Oct2026;not an independent register or legal review",
+    "historical_sole_trader_data_reused": false,
+    "current_public_operator_source": "config/legal-public-documents.json",
+    "legal_review": "pending"
   },
   "site_contexts": {
     "nexify": {
@@ -1790,9 +1793,9 @@
         "fr": "Entreprise"
       },
       "summary": {
-        "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Maßgeblich für Anbieterangaben bleiben die bestätigten Unternehmensdaten der NeXify AI FACTORY B.V.",
-        "nl": "NeXify ontwikkelt websites, apps en AI-ondersteunde processen voor bedrijven. Duitsland is de primaire doelgroep. Voor aanbiederinformatie blijven de bevestigde bedrijfsgegevens van NeXify AI FACTORY B.V. bepalend.",
-        "fr": "NeXify développe des sites, applications et processus assistés par IA pour les entreprises. L’Allemagne constitue le marché prioritaire. Les données confirmées de NeXify AI FACTORY B.V. restent la référence pour les informations du prestataire."
+        "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Anbieter ist NeXify AI by NeXify, Inhaber Pascal Courbois; die übernommenen aktuellen Angaben stehen im Impressum.",
+        "nl": "NeXify ontwikkelt websites, apps en AI-ondersteunde processen voor bedrijven. Duitsland is de primaire doelgroep. Aanbieder is NeXify AI by NeXify, eigenaar Pascal Courbois; de overgenomen actuele gegevens staan in het colofon.",
+        "fr": "NeXify développe des sites, applications et processus assistés par IA pour les entreprises. L’Allemagne est le marché prioritaire. Le prestataire est NeXify AI by NeXify, titulaire Pascal Courbois ; les données actuelles reprises figurent dans les mentions légales."
       },
       "site_context": "nexify",
       "sections": [
@@ -1804,21 +1807,22 @@
             "fr": "Entreprise"
           },
           "body": {
-            "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Maßgeblich für Anbieterangaben bleiben die bestätigten Unternehmensdaten der NeXify AI FACTORY B.V.",
-            "nl": "NeXify ontwikkelt websites, apps en AI-ondersteunde processen voor bedrijven. Duitsland is de primaire doelgroep. Voor aanbiederinformatie blijven de bevestigde bedrijfsgegevens van NeXify AI FACTORY B.V. bepalend.",
-            "fr": "NeXify développe des sites, applications et processus assistés par IA pour les entreprises. L’Allemagne constitue le marché prioritaire. Les données confirmées de NeXify AI FACTORY B.V. restent la référence pour les informations du prestataire."
+            "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Anbieter ist NeXify AI by NeXify, Inhaber Pascal Courbois; die übernommenen aktuellen Angaben stehen im Impressum.",
+            "nl": "NeXify ontwikkelt websites, apps en AI-ondersteunde processen voor bedrijven. Duitsland is de primaire doelgroep. Aanbieder is NeXify AI by NeXify, eigenaar Pascal Courbois; de overgenomen actuele gegevens staan in het colofon.",
+            "fr": "NeXify développe des sites, applications et processus assistés par IA pour les entreprises. L’Allemagne est le marché prioritaire. Le prestataire est NeXify AI by NeXify, titulaire Pascal Courbois ; les données actuelles reprises figurent dans les mentions légales."
           },
           "source_refs": [
             "docs/09-final/01-produkt-und-marke.md",
-            "docs/09-final/08-recht-und-compliance.md"
+            "docs/09-final/08-recht-und-compliance.md",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "NeXify AI FACTORY B.V. ist der benannte Unternehmenskontext. Der Schwerpunkt auf deutsche Nutzer ändert keine niederländischen Anbieter- oder Registerdaten. Verbindliche Firmendaten werden ausschließlich aus dem geprüften Anbieterprofil übernommen.",
-          "nl": "NeXify AI FACTORY B.V. is de genoemde bedrijfscontext. De focus op Duitse gebruikers verandert geen Nederlandse aanbieder- of registergegevens. Bindende bedrijfsgegevens komen uitsluitend uit het gecontroleerde bedrijfsprofiel.",
-          "fr": "NeXify AI FACTORY B.V. est le contexte d’entreprise indiqué. La priorité donnée aux utilisateurs allemands ne modifie pas les données néerlandaises du prestataire. Les informations officielles proviennent uniquement du profil vérifié."
+          "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Anbieter ist NeXify AI by NeXify, Inhaber Pascal Courbois; die übernommenen aktuellen Angaben stehen im Impressum.",
+          "nl": "NeXify ontwikkelt websites, apps en AI-ondersteunde processen voor bedrijven. Duitsland is de primaire doelgroep. Aanbieder is NeXify AI by NeXify, eigenaar Pascal Courbois; de overgenomen actuele gegevens staan in het colofon.",
+          "fr": "NeXify développe des sites, applications et processus assistés par IA pour les entreprises. L’Allemagne est le marché prioritaire. Le prestataire est NeXify AI by NeXify, titulaire Pascal Courbois ; les données actuelles reprises figurent dans les mentions légales."
         },
         "canonical_path": "/unternehmen",
         "canonical_origin": null,
@@ -1846,7 +1850,8 @@
       ],
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
-        "docs/09-final/08-recht-und-compliance.md"
+        "docs/09-final/08-recht-und-compliance.md",
+        "config/legal-public-documents.json"
       ],
       "next_actions": [
         {
@@ -1910,6 +1915,23 @@
           "source_refs": [
             "docs/09-final/02-informationsarchitektur-und-journeys.md",
             "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "rechtlicher-kontakt",
+          "heading": {
+            "de": "Rechtlicher Kontakt",
+            "nl": "Juridisch contact",
+            "fr": "Contact juridique"
+          },
+          "body": {
+            "de": "Für Anbieter-, Datenschutz- und Rechtsfragen gilt der veröffentlichte Kontakt hello@nexifyai.cloud. Projektanfragen können weiterhin über den vorhandenen Kontakt mail@nexifyai.cloud vorbereitet werden. Ein E-Mail-Link öffnet dein Mailprogramm und sendet nicht selbst.",
+            "nl": "Voor aanbieder-, privacy- en juridische vragen geldt het gepubliceerde adres hello@nexifyai.cloud. Projectaanvragen kunnen via het bestaande adres mail@nexifyai.cloud worden voorbereid. Een e-maillink opent je mailprogramma en verzendt zelf niets.",
+            "fr": "Pour les questions relatives au prestataire, à la confidentialité et au droit, le contact publié est hello@nexifyai.cloud. Les projets peuvent toujours être préparés via mail@nexifyai.cloud. Un lien e-mail ouvre votre messagerie sans rien envoyer lui-même."
+          },
+          "source_refs": [
+            "config/legal-public-documents.json",
+            "AGENTS.md"
           ]
         }
       ],
@@ -2001,6 +2023,18 @@
           },
           "source_refs": [
             "AGENTS.md"
+          ]
+        },
+        {
+          "type": "email",
+          "address": "hello@nexifyai.cloud",
+          "label": {
+            "de": "Rechtliche Rückfrage per E-Mail",
+            "nl": "Juridische vraag per e-mail",
+            "fr": "Question juridique par e-mail"
+          },
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt"
           ]
         }
       ]
@@ -2482,35 +2516,214 @@
         "fr": "Informations du prestataire"
       },
       "summary": {
-        "de": "Die Anbieterinformationen bleiben direkt erreichbar. Für eine Veröffentlichung sind das bestätigte B.V.-Profil und die zuständigen Pflichtangaben erforderlich; historische Einzelunternehmensdaten werden nicht übernommen.",
-        "nl": "De aanbiederinformatie blijft rechtstreeks bereikbaar. Publicatie vereist het bevestigde B.V.-profiel en de vereiste gegevens; oude eenmanszaakgegevens worden niet overgenomen.",
-        "fr": "Les informations du prestataire restent directement accessibles. La publication exige le profil B.V. confirmé et les mentions requises ; les anciennes données d’entreprise individuelle ne sont pas reprises."
+        "de": "Anbieter dieser Informationswebsite ist NeXify AI by NeXify, Inhaber Pascal Courbois, ein niederländisches Einzelunternehmen (Eenmanszaak). Hier findest du die übernommenen Anbieterangaben sowie Sicherheits- und Dokumenthinweise.",
+        "nl": "Deze informatiewebsite wordt aangeboden door NeXify AI by NeXify, eigenaar Pascal Courbois, een Nederlandse eenmanszaak. Hier staan de overgenomen aanbiedergegevens en informatie over veiligheid en documenten.",
+        "fr": "Ce site d’information est proposé par NeXify AI by NeXify, titulaire Pascal Courbois, entreprise individuelle néerlandaise (Eenmanszaak). Les coordonnées du prestataire et les informations de sécurité y sont reprises."
       },
       "site_context": "nexify",
       "sections": [
         {
-          "id": "ueberblick",
+          "id": "stand-und-sprache",
           "heading": {
-            "de": "Anbieterinformationen",
-            "nl": "Aanbiederinformatie",
-            "fr": "Informations du prestataire"
+            "de": "Stand und Sprache",
+            "nl": "Versie en taal",
+            "fr": "Version et langue"
           },
           "body": {
-            "de": "Die Anbieterinformationen bleiben direkt erreichbar. Für eine Veröffentlichung sind das bestätigte B.V.-Profil und die zuständigen Pflichtangaben erforderlich; historische Einzelunternehmensdaten werden nicht übernommen.",
-            "nl": "De aanbiederinformatie blijft rechtstreeks bereikbaar. Publicatie vereist het bevestigde B.V.-profiel en de vereiste gegevens; oude eenmanszaakgegevens worden niet overgenomen.",
-            "fr": "Les informations du prestataire restent directement accessibles. La publication exige le profil B.V. confirmé et les mentions requises ; les anciennes données d’entreprise individuelle ne sont pas reprises."
+            "de": "Übernommene öffentliche Fassung vom 11.09.2026, technisch angepasst am 28.10.2026. Die juristische Nachprüfung steht aus. Die Rechtsdokumente werden zunächst im deutschen Original bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Overgenomen openbare versie van 11-09-2026, technisch aangepast op 28-10-2026. Juridische controle volgt nog. De juridische documenten worden eerst in het Duitse origineel getoond; er wordt geen gecontroleerde juridische vertaling geclaimd.",
+            "fr": "Version publique du 11/09/2026 reprise et adaptée techniquement le 28/10/2026. La vérification juridique reste à effectuer. Les documents sont d’abord présentés dans leur original allemand ; aucune traduction juridique validée n’est annoncée."
           },
           "source_refs": [
-            "docs/09-final/08-recht-und-compliance.md",
-            "config/regelwerk.json"
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "impressum-01",
+          "heading": {
+            "de": "Impressum · Diensteanbieter",
+            "nl": "Impressum · Diensteanbieter",
+            "fr": "Impressum · Diensteanbieter"
+          },
+          "body": {
+            "de": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nRechtsform: Eenmanszaak nach niederländischem Recht\nHandelsregister: KvK 90483944 · Kamer van Koophandel\nUmsatzsteuer-ID: NL865786276B01",
+            "nl": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nRechtsform: Eenmanszaak nach niederländischem Recht\nHandelsregister: KvK 90483944 · Kamer van Koophandel\nUmsatzsteuer-ID: NL865786276B01",
+            "fr": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nRechtsform: Eenmanszaak nach niederländischem Recht\nHandelsregister: KvK 90483944 · Kamer van Koophandel\nUmsatzsteuer-ID: NL865786276B01"
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "impressum-02",
+          "heading": {
+            "de": "Impressum · Kontakt",
+            "nl": "Impressum · Kontakt",
+            "fr": "Impressum · Kontakt"
+          },
+          "body": {
+            "de": "E-Mail: hello@nexifyai.cloud\nTelefon: +31 6 133 188 56\nWeb: www.nexifyai.cloud",
+            "nl": "E-Mail: hello@nexifyai.cloud\nTelefon: +31 6 133 188 56\nWeb: www.nexifyai.cloud",
+            "fr": "E-Mail: hello@nexifyai.cloud\nTelefon: +31 6 133 188 56\nWeb: www.nexifyai.cloud"
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "impressum-03",
+          "heading": {
+            "de": "Impressum · Vertretung und Inhalt",
+            "nl": "Impressum · Vertretung und Inhalt",
+            "fr": "Impressum · Vertretung und Inhalt"
+          },
+          "body": {
+            "de": "Gesetzlicher Vertreter und inhaltlich Verantwortlicher ist Pascal Courbois. Anschrift wie oben.",
+            "nl": "Gesetzlicher Vertreter und inhaltlich Verantwortlicher ist Pascal Courbois. Anschrift wie oben.",
+            "fr": "Gesetzlicher Vertreter und inhaltlich Verantwortlicher ist Pascal Courbois. Anschrift wie oben."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "impressum-04",
+          "heading": {
+            "de": "Impressum · Aufsicht und Register",
+            "nl": "Impressum · Aufsicht und Register",
+            "fr": "Impressum · Aufsicht und Register"
+          },
+          "body": {
+            "de": "Zuständige Handelskammer ist die Kamer van Koophandel. Zuständige Datenschutzaufsicht ist grundsätzlich die Autoriteit Persoonsgegevens in Den Haag.",
+            "nl": "Zuständige Handelskammer ist die Kamer van Koophandel. Zuständige Datenschutzaufsicht ist grundsätzlich die Autoriteit Persoonsgegevens in Den Haag.",
+            "fr": "Zuständige Handelskammer ist die Kamer van Koophandel. Zuständige Datenschutzaufsicht ist grundsätzlich die Autoriteit Persoonsgegevens in Den Haag."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "impressum-05",
+          "heading": {
+            "de": "Impressum · B2B-Ausrichtung",
+            "nl": "Impressum · B2B-Ausrichtung",
+            "fr": "Impressum · B2B-Ausrichtung"
+          },
+          "body": {
+            "de": "Leistungen und Angebotsfunktionen richten sich ausschließlich an Unternehmen, juristische Personen und beruflich selbstständig Handelnde. Verbraucherverträge werden über diese Website nicht geschlossen.",
+            "nl": "Leistungen und Angebotsfunktionen richten sich ausschließlich an Unternehmen, juristische Personen und beruflich selbstständig Handelnde. Verbraucherverträge werden über diese Website nicht geschlossen.",
+            "fr": "Leistungen und Angebotsfunktionen richten sich ausschließlich an Unternehmen, juristische Personen und beruflich selbstständig Handelnde. Verbraucherverträge werden über diese Website nicht geschlossen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "impressum-06",
+          "heading": {
+            "de": "Impressum · Haftung und Urheberrecht",
+            "nl": "Impressum · Haftung und Urheberrecht",
+            "fr": "Impressum · Haftung und Urheberrecht"
+          },
+          "body": {
+            "de": "Externe Inhalte werden bei Verlinkung geprüft; für deren fortlaufende Verfügbarkeit und Inhalt bleiben die jeweiligen Anbieter verantwortlich. Texte, Gestaltung, Software und Markenbestandteile dieser Website sind geschützt.",
+            "nl": "Externe Inhalte werden bei Verlinkung geprüft; für deren fortlaufende Verfügbarkeit und Inhalt bleiben die jeweiligen Anbieter verantwortlich. Texte, Gestaltung, Software und Markenbestandteile dieser Website sind geschützt.",
+            "fr": "Externe Inhalte werden bei Verlinkung geprüft; für deren fortlaufende Verfügbarkeit und Inhalt bleiben die jeweiligen Anbieter verantwortlich. Texte, Gestaltung, Software und Markenbestandteile dieser Website sind geschützt."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/impressum.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "security-01",
+          "heading": {
+            "de": "Sicherheitsinformationen · Schutzprinzipien",
+            "nl": "Sicherheitsinformationen · Schutzprinzipien",
+            "fr": "Sicherheitsinformationen · Schutzprinzipien"
+          },
+          "body": {
+            "de": "Die Anwendung hält Secrets außerhalb des öffentlichen Browsercodes und trennt öffentliche Informationen von vorgesehenen geschützten Bereichen. Eingabevalidierung und sichere Fehlerzustände sind im begrenzten öffentlichen Orientierungspfad implementiert. Rollen-, Mandanten-, Provider-, Backup- und Restore-Abnahmen sind eigenständige Anforderungen und werden nicht allein durch diese Darstellung als produktiv nachgewiesen ausgegeben.",
+            "nl": "Die Anwendung hält Secrets außerhalb des öffentlichen Browsercodes und trennt öffentliche Informationen von vorgesehenen geschützten Bereichen. Eingabevalidierung und sichere Fehlerzustände sind im begrenzten öffentlichen Orientierungspfad implementiert. Rollen-, Mandanten-, Provider-, Backup- und Restore-Abnahmen sind eigenständige Anforderungen und werden nicht allein durch diese Darstellung als produktiv nachgewiesen ausgegeben.",
+            "fr": "Die Anwendung hält Secrets außerhalb des öffentlichen Browsercodes und trennt öffentliche Informationen von vorgesehenen geschützten Bereichen. Eingabevalidierung und sichere Fehlerzustände sind im begrenzten öffentlichen Orientierungspfad implementiert. Rollen-, Mandanten-, Provider-, Backup- und Restore-Abnahmen sind eigenständige Anforderungen und werden nicht allein durch diese Darstellung als produktiv nachgewiesen ausgegeben."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/security.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "security-02",
+          "heading": {
+            "de": "Sicherheitsinformationen · Sicherheitsmeldung",
+            "nl": "Sicherheitsinformationen · Sicherheitsmeldung",
+            "fr": "Sicherheitsinformationen · Sicherheitsmeldung"
+          },
+          "body": {
+            "de": "Bitte melden Sie vermutete Schwachstellen vertraulich an hello@nexifyai.cloud mit dem Betreff „Security“. Beschreiben Sie betroffene URL, reproduzierbare Schritte und mögliche Auswirkungen. Veröffentlichen Sie keine Kundendaten oder Zugangsdaten.",
+            "nl": "Bitte melden Sie vermutete Schwachstellen vertraulich an hello@nexifyai.cloud mit dem Betreff „Security“. Beschreiben Sie betroffene URL, reproduzierbare Schritte und mögliche Auswirkungen. Veröffentlichen Sie keine Kundendaten oder Zugangsdaten.",
+            "fr": "Bitte melden Sie vermutete Schwachstellen vertraulich an hello@nexifyai.cloud mit dem Betreff „Security“. Beschreiben Sie betroffene URL, reproduzierbare Schritte und mögliche Auswirkungen. Veröffentlichen Sie keine Kundendaten oder Zugangsdaten."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/security.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "security-03",
+          "heading": {
+            "de": "Sicherheitsinformationen · Nicht zulässige Tests",
+            "nl": "Sicherheitsinformationen · Nicht zulässige Tests",
+            "fr": "Sicherheitsinformationen · Nicht zulässige Tests"
+          },
+          "body": {
+            "de": "Ohne schriftliche Freigabe sind Social Engineering, Denial-of-Service, Datenexfiltration, Änderungen fremder Daten und Zugriffe außerhalb des eigenen Kontos ausgeschlossen.",
+            "nl": "Ohne schriftliche Freigabe sind Social Engineering, Denial-of-Service, Datenexfiltration, Änderungen fremder Daten und Zugriffe außerhalb des eigenen Kontos ausgeschlossen.",
+            "fr": "Ohne schriftliche Freigabe sind Social Engineering, Denial-of-Service, Datenexfiltration, Änderungen fremder Daten und Zugriffe außerhalb des eigenen Kontos ausgeschlossen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/security.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "security-04",
+          "heading": {
+            "de": "Sicherheitsinformationen · Betriebsstatus",
+            "nl": "Sicherheitsinformationen · Betriebsstatus",
+            "fr": "Sicherheitsinformationen · Betriebsstatus"
+          },
+          "body": {
+            "de": "Die öffentliche Orientierung ist ausdrücklich eine textgeführte Vorschau ohne Live-KI. Bei fehlender Verbindung werden Fehler und verfügbare Kontaktwege angezeigt, keine erfolgreiche externe Ausführung. Die lokale Projektklärung kann ohne Modellanbieter vorbereitet werden; sie bestätigt weder Auftrag, Zahlung, Versand noch Termin.",
+            "nl": "Die öffentliche Orientierung ist ausdrücklich eine textgeführte Vorschau ohne Live-KI. Bei fehlender Verbindung werden Fehler und verfügbare Kontaktwege angezeigt, keine erfolgreiche externe Ausführung. Die lokale Projektklärung kann ohne Modellanbieter vorbereitet werden; sie bestätigt weder Auftrag, Zahlung, Versand noch Termin.",
+            "fr": "Die öffentliche Orientierung ist ausdrücklich eine textgeführte Vorschau ohne Live-KI. Bei fehlender Verbindung werden Fehler und verfügbare Kontaktwege angezeigt, keine erfolgreiche externe Ausführung. Die lokale Projektklärung kann ohne Modellanbieter vorbereitet werden; sie bestätigt weder Auftrag, Zahlung, Versand noch Termin."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/security.txt",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Die Anbieterinformationen bleiben direkt erreichbar. Für eine Veröffentlichung sind das bestätigte B.V.-Profil und die zuständigen Pflichtangaben erforderlich; historische Einzelunternehmensdaten werden nicht übernommen.",
-          "nl": "De aanbiederinformatie blijft rechtstreeks bereikbaar. Publicatie vereist het bevestigde B.V.-profiel en de vereiste gegevens; oude eenmanszaakgegevens worden niet overgenomen.",
-          "fr": "Les informations du prestataire restent directement accessibles. La publication exige le profil B.V. confirmé et les mentions requises ; les anciennes données d’entreprise individuelle ne sont pas reprises."
+          "de": "Anbieter dieser Informationswebsite ist NeXify AI by NeXify, Inhaber Pascal Courbois, ein niederländisches Einzelunternehmen (Eenmanszaak). Hier findest du die übernommenen Anbieterangaben sowie Sicherheits- und Dokumenthinweise.",
+          "nl": "Deze informatiewebsite wordt aangeboden door NeXify AI by NeXify, eigenaar Pascal Courbois, een Nederlandse eenmanszaak. Hier staan de overgenomen aanbiedergegevens en informatie over veiligheid en documenten.",
+          "fr": "Ce site d’information est proposé par NeXify AI by NeXify, titulaire Pascal Courbois, entreprise individuelle néerlandaise (Eenmanszaak). Les coordonnées du prestataire et les informations de sécurité y sont reprises."
         },
         "canonical_path": "/impressum",
         "canonical_origin": null,
@@ -2525,10 +2738,10 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
+      "implementation_status": "implemented",
       "content_kind": "legal_notice",
       "readiness": {
-        "content": "notice_only_legal_text_release_pending",
+        "content": "public_source_adapted_legal_review_pending",
         "transactions": "not_enabled",
         "backend": "not_required_for_content",
         "production_release": "not_claimed"
@@ -2537,31 +2750,70 @@
         "N1:prototypen/Rechtliches.dc.html"
       ],
       "source_refs": [
-        "docs/09-final/08-recht-und-compliance.md",
-        "config/regelwerk.json"
+        "config/legal-public-documents.json",
+        "docs/sources/legal-public-2026-10-28/impressum.txt",
+        "docs/sources/legal-public-2026-10-28/recht.txt",
+        "docs/sources/legal-public-2026-10-28/security.txt"
       ],
       "next_actions": [
         {
           "type": "route",
-          "target_id": "contact",
+          "target_id": "privacy",
           "label": {
-            "de": "Kontaktmöglichkeiten ansehen",
-            "nl": "Contactmogelijkheden bekijken",
-            "fr": "Voir les possibilités de contact"
+            "de": "Datenschutz und Datenverwendung",
+            "nl": "Privacy en gegevensgebruik",
+            "fr": "Confidentialité et utilisation des données"
           }
         },
         {
           "type": "route",
           "target_id": "terms",
           "label": {
-            "de": "Weitere Vertragsinformationen",
-            "nl": "Meer contractinformatie",
-            "fr": "Autres informations contractuelles"
+            "de": "Vertragsgrundlagen und Freigabestand",
+            "nl": "Contractbasis en vrijgavestatus",
+            "fr": "Base contractuelle et état de validation"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "ai-notice",
+          "label": {
+            "de": "Hinweise zur KI-Nutzung",
+            "nl": "Informatie over AI-gebruik",
+            "fr": "Informations sur l’utilisation de l’IA"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "accessibility",
+          "label": {
+            "de": "Barrierefreiheit und Rückmeldung",
+            "nl": "Toegankelijkheid en feedback",
+            "fr": "Accessibilité et retour d’information"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "cookies",
+          "label": {
+            "de": "Cookies und Einstellungen",
+            "nl": "Cookies en instellingen",
+            "fr": "Cookies et paramètres"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Kontakt und nächste Schritte",
+            "nl": "Contact en vervolgstappen",
+            "fr": "Contact et prochaines étapes"
           }
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "legal_review": "pending"
     },
     {
       "id": "privacy",
@@ -2572,35 +2824,178 @@
         "fr": "Confidentialité et utilisation des données"
       },
       "summary": {
-        "de": "Diese Seite ist der direkte Zugang zu den freigegebenen Datenschutzinformationen. Bis Zweck, Verantwortlichkeit, Empfänger und Aufbewahrung abschließend geprüft sind, wird kein vollständiger Rechtstext behauptet.",
-        "nl": "Deze pagina biedt directe toegang tot vrijgegeven privacyinformatie. Zolang doel, verantwoordelijkheid, ontvangers en bewaring niet definitief zijn getoetst, wordt geen volledige juridische tekst geclaimd.",
-        "fr": "Cette page donne un accès direct aux informations de confidentialité validées. Aucun texte juridique complet n’est annoncé avant vérification des finalités, responsabilités, destinataires et durées."
+        "de": "Verantwortlicher, Datenwege und Rechte für die öffentliche Web-App: Vercel-Auslieferung, bewusste Kontaktaufnahme, lokale Projektvorbereitung und optionale Fehlerdiagnose.",
+        "nl": "Verantwoordelijke, gegevensstromen en rechten voor de openbare webapp: Vercel-hosting, bewust contact, lokale projectvoorbereiding en optionele foutdiagnose.",
+        "fr": "Responsable, flux de données et droits pour l’application publique : hébergement Vercel, prise de contact volontaire, préparation locale et diagnostic facultatif."
       },
       "site_context": "nexify",
       "sections": [
         {
-          "id": "ueberblick",
+          "id": "stand-und-sprache",
           "heading": {
-            "de": "Datenschutz und Datenverwendung",
-            "nl": "Privacy en gegevensgebruik",
-            "fr": "Confidentialité et utilisation des données"
+            "de": "Stand und Sprache",
+            "nl": "Versie en taal",
+            "fr": "Version et langue"
           },
           "body": {
-            "de": "Diese Seite ist der direkte Zugang zu den freigegebenen Datenschutzinformationen. Bis Zweck, Verantwortlichkeit, Empfänger und Aufbewahrung abschließend geprüft sind, wird kein vollständiger Rechtstext behauptet.",
-            "nl": "Deze pagina biedt directe toegang tot vrijgegeven privacyinformatie. Zolang doel, verantwoordelijkheid, ontvangers en bewaring niet definitief zijn getoetst, wordt geen volledige juridische tekst geclaimd.",
-            "fr": "Cette page donne un accès direct aux informations de confidentialité validées. Aucun texte juridique complet n’est annoncé avant vérification des finalités, responsabilités, destinataires et durées."
+            "de": "Übernommene öffentliche Fassung vom 11.09.2026, technisch angepasst am 28.10.2026. Die juristische Nachprüfung steht aus. Die Rechtsdokumente werden zunächst im deutschen Original bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Overgenomen openbare versie van 11-09-2026, technisch aangepast op 28-10-2026. Juridische controle volgt nog. De juridische documenten worden eerst in het Duitse origineel getoond; er wordt geen gecontroleerde juridische vertaling geclaimd.",
+            "fr": "Version publique du 11/09/2026 reprise et adaptée techniquement le 28/10/2026. La vérification juridique reste à effectuer. Les documents sont d’abord présentés dans leur original allemand ; aucune traduction juridique validée n’est annoncée."
           },
           "source_refs": [
-            "docs/09-final/08-recht-und-compliance.md",
-            "config/regelwerk.json"
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-01",
+          "heading": {
+            "de": "Datenschutzerklärung · Verantwortlicher",
+            "nl": "Datenschutzerklärung · Verantwortlicher",
+            "fr": "Datenschutzerklärung · Verantwortlicher"
+          },
+          "body": {
+            "de": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nDatenschutzanfragen: hello@nexifyai.cloud\nEs findet keine ausschließlich automatisierte Entscheidung mit rechtlicher oder ähnlich erheblicher Wirkung statt.",
+            "nl": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nDatenschutzanfragen: hello@nexifyai.cloud\nEs findet keine ausschließlich automatisierte Entscheidung mit rechtlicher oder ähnlich erheblicher Wirkung statt.",
+            "fr": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande\nDatenschutzanfragen: hello@nexifyai.cloud\nEs findet keine ausschließlich automatisierte Entscheidung mit rechtlicher oder ähnlich erheblicher Wirkung statt."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-02",
+          "heading": {
+            "de": "Datenschutzerklärung · Hosting und sichere Anmeldung",
+            "nl": "Datenschutzerklärung · Hosting und sichere Anmeldung",
+            "fr": "Datenschutzerklärung · Hosting und sichere Anmeldung"
+          },
+          "body": {
+            "de": "Diese Fassung beschreibt die öffentliche NeXify-Web-App mit Auslieferung über Vercel. Bei der Auslieferung können technische Verbindungsdaten wie IP-Adresse, angefragte Ressource, Zeitpunkt und Browser-/Protokollmerkmale verarbeitet werden. Zweck sind Bereitstellung und Missbrauchsabwehr; als Grundlage nennt die übernommene Erklärung Art. 6 Abs. 1 lit. f DSGVO, bei Vertragsanbahnung zusätzlich lit. b.\nDie Informationsseiten sind ohne Anmeldung nutzbar. Für gesonderte Anmeldeseiten ist Clerk als konfigurierbarer Anbieter vorgesehen. Je nach bereitgestellter App-Ausgabe kann der Anmeldedienst bereits beim Laden öffentlicher Seiten eingebunden sein: Die Vite-Ausgabe lädt ihn nur an den Anmeldeseiten; die konfigurierte Next-Ausgabe bindet ihn übergreifend ein. Die tatsächlich bereitgestellte Fassung ist für den jeweiligen Datenweg maßgeblich.\nEine Anmeldung allein begründet keine Projekt-, Rollen- oder Mandantenrechte. Eine vollständige produktive Abnahme der Konto- und Portalabläufe wird hier nicht behauptet.\nDie frühere Sites-/Magiclink-/Resend-Beschreibung und deren Sitzungsfristen werden nicht auf diese Web-App übertragen.",
+            "nl": "Diese Fassung beschreibt die öffentliche NeXify-Web-App mit Auslieferung über Vercel. Bei der Auslieferung können technische Verbindungsdaten wie IP-Adresse, angefragte Ressource, Zeitpunkt und Browser-/Protokollmerkmale verarbeitet werden. Zweck sind Bereitstellung und Missbrauchsabwehr; als Grundlage nennt die übernommene Erklärung Art. 6 Abs. 1 lit. f DSGVO, bei Vertragsanbahnung zusätzlich lit. b.\nDie Informationsseiten sind ohne Anmeldung nutzbar. Für gesonderte Anmeldeseiten ist Clerk als konfigurierbarer Anbieter vorgesehen. Je nach bereitgestellter App-Ausgabe kann der Anmeldedienst bereits beim Laden öffentlicher Seiten eingebunden sein: Die Vite-Ausgabe lädt ihn nur an den Anmeldeseiten; die konfigurierte Next-Ausgabe bindet ihn übergreifend ein. Die tatsächlich bereitgestellte Fassung ist für den jeweiligen Datenweg maßgeblich.\nEine Anmeldung allein begründet keine Projekt-, Rollen- oder Mandantenrechte. Eine vollständige produktive Abnahme der Konto- und Portalabläufe wird hier nicht behauptet.\nDie frühere Sites-/Magiclink-/Resend-Beschreibung und deren Sitzungsfristen werden nicht auf diese Web-App übertragen.",
+            "fr": "Diese Fassung beschreibt die öffentliche NeXify-Web-App mit Auslieferung über Vercel. Bei der Auslieferung können technische Verbindungsdaten wie IP-Adresse, angefragte Ressource, Zeitpunkt und Browser-/Protokollmerkmale verarbeitet werden. Zweck sind Bereitstellung und Missbrauchsabwehr; als Grundlage nennt die übernommene Erklärung Art. 6 Abs. 1 lit. f DSGVO, bei Vertragsanbahnung zusätzlich lit. b.\nDie Informationsseiten sind ohne Anmeldung nutzbar. Für gesonderte Anmeldeseiten ist Clerk als konfigurierbarer Anbieter vorgesehen. Je nach bereitgestellter App-Ausgabe kann der Anmeldedienst bereits beim Laden öffentlicher Seiten eingebunden sein: Die Vite-Ausgabe lädt ihn nur an den Anmeldeseiten; die konfigurierte Next-Ausgabe bindet ihn übergreifend ein. Die tatsächlich bereitgestellte Fassung ist für den jeweiligen Datenweg maßgeblich.\nEine Anmeldung allein begründet keine Projekt-, Rollen- oder Mandantenrechte. Eine vollständige produktive Abnahme der Konto- und Portalabläufe wird hier nicht behauptet.\nDie frühere Sites-/Magiclink-/Resend-Beschreibung und deren Sitzungsfristen werden nicht auf diese Web-App übertragen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-03",
+          "heading": {
+            "de": "Datenschutzerklärung · Kontakt und Angebotsgenerator",
+            "nl": "Datenschutzerklärung · Kontakt und Angebotsgenerator",
+            "fr": "Datenschutzerklärung · Kontakt und Angebotsgenerator"
+          },
+          "body": {
+            "de": "Der Projektüberblick im Chat verarbeitet die von Ihnen eingegebenen Ziele, die Ausgangslage und den nächsten Schritt zunächst im Arbeitsspeicher des geöffneten Browsers. Interne Navigation und Einklappen erhalten diese Eingaben; Neuladen verwirft den lokalen Projektentwurf.\nEin E-Mail-Link öffnet Ihr eigenes Mailprogramm. Erst dort entscheiden Sie über Empfänger, Inhalt und tatsächlichen Versand. Diese Website versendet durch das Öffnen des Links keine E-Mail. Die weitere Bearbeitung einer bei NeXify eingegangenen Anfrage dient der vorvertraglichen Kommunikation gemäß der übernommenen Grundlage Art. 6 Abs. 1 lit. b DSGVO.\nGesonderte Entwurfswerkzeuge benötigen eine tatsächlich verfügbare Serverfähigkeit. Das Öffnen oder Vorbereiten eines Entwurfs bestätigt weder Versand noch Termin oder Vertrag. Eine automatische Zustellung über Resend wird nicht behauptet.",
+            "nl": "Der Projektüberblick im Chat verarbeitet die von Ihnen eingegebenen Ziele, die Ausgangslage und den nächsten Schritt zunächst im Arbeitsspeicher des geöffneten Browsers. Interne Navigation und Einklappen erhalten diese Eingaben; Neuladen verwirft den lokalen Projektentwurf.\nEin E-Mail-Link öffnet Ihr eigenes Mailprogramm. Erst dort entscheiden Sie über Empfänger, Inhalt und tatsächlichen Versand. Diese Website versendet durch das Öffnen des Links keine E-Mail. Die weitere Bearbeitung einer bei NeXify eingegangenen Anfrage dient der vorvertraglichen Kommunikation gemäß der übernommenen Grundlage Art. 6 Abs. 1 lit. b DSGVO.\nGesonderte Entwurfswerkzeuge benötigen eine tatsächlich verfügbare Serverfähigkeit. Das Öffnen oder Vorbereiten eines Entwurfs bestätigt weder Versand noch Termin oder Vertrag. Eine automatische Zustellung über Resend wird nicht behauptet.",
+            "fr": "Der Projektüberblick im Chat verarbeitet die von Ihnen eingegebenen Ziele, die Ausgangslage und den nächsten Schritt zunächst im Arbeitsspeicher des geöffneten Browsers. Interne Navigation und Einklappen erhalten diese Eingaben; Neuladen verwirft den lokalen Projektentwurf.\nEin E-Mail-Link öffnet Ihr eigenes Mailprogramm. Erst dort entscheiden Sie über Empfänger, Inhalt und tatsächlichen Versand. Diese Website versendet durch das Öffnen des Links keine E-Mail. Die weitere Bearbeitung einer bei NeXify eingegangenen Anfrage dient der vorvertraglichen Kommunikation gemäß der übernommenen Grundlage Art. 6 Abs. 1 lit. b DSGVO.\nGesonderte Entwurfswerkzeuge benötigen eine tatsächlich verfügbare Serverfähigkeit. Das Öffnen oder Vorbereiten eines Entwurfs bestätigt weder Versand noch Termin oder Vertrag. Eine automatische Zustellung über Resend wird nicht behauptet."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-04",
+          "heading": {
+            "de": "Datenschutzerklärung · NeXify AI Website-Assistent",
+            "nl": "Datenschutzerklärung · NeXify AI Website-Assistent",
+            "fr": "Datenschutzerklärung · NeXify AI Website-Assistent"
+          },
+          "body": {
+            "de": "Der öffentliche Website-Assistent bietet eine textgeführte Orientierung und zeigt ausdrücklich an, dass keine Live-KI verwendet wird. Erst beim bewussten Absenden wird die Frage zusammen mit Sprache und öffentlichem Seitenkontext an die eigene Website-Route übertragen. Dort werden passende öffentliche Seitenhinweise ohne Anfrage an einen Modellanbieter erzeugt. Die Anwendungsroute legt keinen dauerhaften Chatverlauf an. Technische Hosting- und Fehlerdaten sind davon getrennt zu betrachten.\nBitte geben Sie keine Passwörter, Zahlungsdaten, Gesundheitsdaten oder sonstige besonders sensiblen Informationen ein. Verbindliche Angebote, rechtliche Bewertungen und Beauftragungen bleiben menschlich geprüft.",
+            "nl": "Der öffentliche Website-Assistent bietet eine textgeführte Orientierung und zeigt ausdrücklich an, dass keine Live-KI verwendet wird. Erst beim bewussten Absenden wird die Frage zusammen mit Sprache und öffentlichem Seitenkontext an die eigene Website-Route übertragen. Dort werden passende öffentliche Seitenhinweise ohne Anfrage an einen Modellanbieter erzeugt. Die Anwendungsroute legt keinen dauerhaften Chatverlauf an. Technische Hosting- und Fehlerdaten sind davon getrennt zu betrachten.\nBitte geben Sie keine Passwörter, Zahlungsdaten, Gesundheitsdaten oder sonstige besonders sensiblen Informationen ein. Verbindliche Angebote, rechtliche Bewertungen und Beauftragungen bleiben menschlich geprüft.",
+            "fr": "Der öffentliche Website-Assistent bietet eine textgeführte Orientierung und zeigt ausdrücklich an, dass keine Live-KI verwendet wird. Erst beim bewussten Absenden wird die Frage zusammen mit Sprache und öffentlichem Seitenkontext an die eigene Website-Route übertragen. Dort werden passende öffentliche Seitenhinweise ohne Anfrage an einen Modellanbieter erzeugt. Die Anwendungsroute legt keinen dauerhaften Chatverlauf an. Technische Hosting- und Fehlerdaten sind davon getrennt zu betrachten.\nBitte geben Sie keine Passwörter, Zahlungsdaten, Gesundheitsdaten oder sonstige besonders sensiblen Informationen ein. Verbindliche Angebote, rechtliche Bewertungen und Beauftragungen bleiben menschlich geprüft."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-05",
+          "heading": {
+            "de": "Datenschutzerklärung · Cookies und lokale Speicherung",
+            "nl": "Datenschutzerklärung · Cookies und lokale Speicherung",
+            "fr": "Datenschutzerklärung · Cookies und lokale Speicherung"
+          },
+          "body": {
+            "de": "Die Anwendung merkt die Sprachauswahl unter nexify-locale in localStorage. Die Seitenbegleitung nutzt nexify-presenter-guide in sessionStorage. Der lokale Projektüberblick erhält keinen eigenen Speicherschlüssel. Details und Grenzen stehen unter Cookies und Einstellungen.\nDie optionale Browser-Fehlerdiagnose mit PostHog bleibt standardmäßig aus. Sie wird nur nach Ihrer bewussten Zustimmung und mit gültiger Projektkonfiguration geladen. Erfasst werden technische Fehlerart, bereinigte Fehlerstellen und App-/Releaseversion. Eingaben, rohe Fehlertexte, Querystrings und Referrer werden aus den Anwendungsereignissen entfernt. Keine zusätzliche Klick-, Marketing-, Profil- oder Sitzungsaufzeichnung wird aktiviert. Bei einer Übertragung erhält der Dienst dennoch Netzwerkdaten wie die IP-Adresse; die Einstellung ip:false verhindert diesen Netzwerkvorgang nicht.\nDie Auswahl gilt nur im aktuellen Dokument und wird nicht dauerhaft gespeichert. Ablehnung beeinträchtigt die Seitenfunktionen nicht. Widerruf stoppt neue Berichte einschließlich ausstehender Wiederholungen; eine erneute Aktivierung ist erst nach Neuladen möglich und beginnt dann wieder ausgeschaltet. Die Einstellungen sind im Footer erreichbar.",
+            "nl": "Die Anwendung merkt die Sprachauswahl unter nexify-locale in localStorage. Die Seitenbegleitung nutzt nexify-presenter-guide in sessionStorage. Der lokale Projektüberblick erhält keinen eigenen Speicherschlüssel. Details und Grenzen stehen unter Cookies und Einstellungen.\nDie optionale Browser-Fehlerdiagnose mit PostHog bleibt standardmäßig aus. Sie wird nur nach Ihrer bewussten Zustimmung und mit gültiger Projektkonfiguration geladen. Erfasst werden technische Fehlerart, bereinigte Fehlerstellen und App-/Releaseversion. Eingaben, rohe Fehlertexte, Querystrings und Referrer werden aus den Anwendungsereignissen entfernt. Keine zusätzliche Klick-, Marketing-, Profil- oder Sitzungsaufzeichnung wird aktiviert. Bei einer Übertragung erhält der Dienst dennoch Netzwerkdaten wie die IP-Adresse; die Einstellung ip:false verhindert diesen Netzwerkvorgang nicht.\nDie Auswahl gilt nur im aktuellen Dokument und wird nicht dauerhaft gespeichert. Ablehnung beeinträchtigt die Seitenfunktionen nicht. Widerruf stoppt neue Berichte einschließlich ausstehender Wiederholungen; eine erneute Aktivierung ist erst nach Neuladen möglich und beginnt dann wieder ausgeschaltet. Die Einstellungen sind im Footer erreichbar.",
+            "fr": "Die Anwendung merkt die Sprachauswahl unter nexify-locale in localStorage. Die Seitenbegleitung nutzt nexify-presenter-guide in sessionStorage. Der lokale Projektüberblick erhält keinen eigenen Speicherschlüssel. Details und Grenzen stehen unter Cookies und Einstellungen.\nDie optionale Browser-Fehlerdiagnose mit PostHog bleibt standardmäßig aus. Sie wird nur nach Ihrer bewussten Zustimmung und mit gültiger Projektkonfiguration geladen. Erfasst werden technische Fehlerart, bereinigte Fehlerstellen und App-/Releaseversion. Eingaben, rohe Fehlertexte, Querystrings und Referrer werden aus den Anwendungsereignissen entfernt. Keine zusätzliche Klick-, Marketing-, Profil- oder Sitzungsaufzeichnung wird aktiviert. Bei einer Übertragung erhält der Dienst dennoch Netzwerkdaten wie die IP-Adresse; die Einstellung ip:false verhindert diesen Netzwerkvorgang nicht.\nDie Auswahl gilt nur im aktuellen Dokument und wird nicht dauerhaft gespeichert. Ablehnung beeinträchtigt die Seitenfunktionen nicht. Widerruf stoppt neue Berichte einschließlich ausstehender Wiederholungen; eine erneute Aktivierung ist erst nach Neuladen möglich und beginnt dann wieder ausgeschaltet. Die Einstellungen sind im Footer erreichbar."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-06",
+          "heading": {
+            "de": "Datenschutzerklärung · Speicherdauer",
+            "nl": "Datenschutzerklärung · Speicherdauer",
+            "fr": "Datenschutzerklärung · Speicherdauer"
+          },
+          "body": {
+            "de": "Daten werden nur so lange gespeichert, wie Zweck, Vertragsabwicklung, Sicherheit, Nachweis- oder gesetzliche Aufbewahrungspflichten dies erfordern. Angebots- und Geschäftskorrespondenz kann entsprechend niederländischer steuer- und handelsrechtlicher Pflichten aufbewahrt werden. Nicht abgesendete Eingaben verbleiben im Browser und werden nicht serverseitig gespeichert.",
+            "nl": "Daten werden nur so lange gespeichert, wie Zweck, Vertragsabwicklung, Sicherheit, Nachweis- oder gesetzliche Aufbewahrungspflichten dies erfordern. Angebots- und Geschäftskorrespondenz kann entsprechend niederländischer steuer- und handelsrechtlicher Pflichten aufbewahrt werden. Nicht abgesendete Eingaben verbleiben im Browser und werden nicht serverseitig gespeichert.",
+            "fr": "Daten werden nur so lange gespeichert, wie Zweck, Vertragsabwicklung, Sicherheit, Nachweis- oder gesetzliche Aufbewahrungspflichten dies erfordern. Angebots- und Geschäftskorrespondenz kann entsprechend niederländischer steuer- und handelsrechtlicher Pflichten aufbewahrt werden. Nicht abgesendete Eingaben verbleiben im Browser und werden nicht serverseitig gespeichert."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-07",
+          "heading": {
+            "de": "Datenschutzerklärung · Ihre Rechte",
+            "nl": "Datenschutzerklärung · Ihre Rechte",
+            "fr": "Datenschutzerklärung · Ihre Rechte"
+          },
+          "body": {
+            "de": "Auskunft, Berichtigung, Löschung und Einschränkung\nDatenübertragbarkeit und Widerspruch\nWiderruf einer Einwilligung mit Wirkung für die Zukunft\nBeschwerde bei einer Datenschutzaufsichtsbehörde",
+            "nl": "Auskunft, Berichtigung, Löschung und Einschränkung\nDatenübertragbarkeit und Widerspruch\nWiderruf einer Einwilligung mit Wirkung für die Zukunft\nBeschwerde bei einer Datenschutzaufsichtsbehörde",
+            "fr": "Auskunft, Berichtigung, Löschung und Einschränkung\nDatenübertragbarkeit und Widerspruch\nWiderruf einer Einwilligung mit Wirkung für die Zukunft\nBeschwerde bei einer Datenschutzaufsichtsbehörde"
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "datenschutz-08",
+          "heading": {
+            "de": "Datenschutzerklärung · Sicherheit und Änderungen",
+            "nl": "Datenschutzerklärung · Sicherheit und Änderungen",
+            "fr": "Datenschutzerklärung · Sicherheit und Änderungen"
+          },
+          "body": {
+            "de": "Für die Auslieferung gelten die tatsächlich eingerichteten Hosting-Schutzmaßnahmen. Die Anwendung enthält Eingabegrenzen, sichere Fehlerzustände und getrennte öffentliche und geschützte Bereiche; dies ist kein Nachweis einer vollständigen Sicherheitszertifizierung oder aller externen Dienste.\nFür unerwartete Serverfehler enthält der Code eine gesonderte optionale Sentry-Anbindung. Sie arbeitet nur mit vorhandener serverseitiger Konfiguration und reduziert Berichte auf technische Fehler-/Release-Metadaten; Eingaben und rohe Fehlerdetails werden nicht als Ereignisinhalt weitergereicht. Das Vorhandensein der Bibliothek beweist keinen aktiven Dienst oder erfolgreichen Empfang.\nKonkrete Hosting-, Diagnose- und Aufbewahrungseinstellungen können sich je freigegebenem Release unterscheiden. Es werden hier keine unbelegten Speicherfristen, Datenstandorte oder bereits hochgeladenen Source Maps zugesichert. Die Erklärung wird bei technischen und rechtlichen Änderungen angepasst.",
+            "nl": "Für die Auslieferung gelten die tatsächlich eingerichteten Hosting-Schutzmaßnahmen. Die Anwendung enthält Eingabegrenzen, sichere Fehlerzustände und getrennte öffentliche und geschützte Bereiche; dies ist kein Nachweis einer vollständigen Sicherheitszertifizierung oder aller externen Dienste.\nFür unerwartete Serverfehler enthält der Code eine gesonderte optionale Sentry-Anbindung. Sie arbeitet nur mit vorhandener serverseitiger Konfiguration und reduziert Berichte auf technische Fehler-/Release-Metadaten; Eingaben und rohe Fehlerdetails werden nicht als Ereignisinhalt weitergereicht. Das Vorhandensein der Bibliothek beweist keinen aktiven Dienst oder erfolgreichen Empfang.\nKonkrete Hosting-, Diagnose- und Aufbewahrungseinstellungen können sich je freigegebenem Release unterscheiden. Es werden hier keine unbelegten Speicherfristen, Datenstandorte oder bereits hochgeladenen Source Maps zugesichert. Die Erklärung wird bei technischen und rechtlichen Änderungen angepasst.",
+            "fr": "Für die Auslieferung gelten die tatsächlich eingerichteten Hosting-Schutzmaßnahmen. Die Anwendung enthält Eingabegrenzen, sichere Fehlerzustände und getrennte öffentliche und geschützte Bereiche; dies ist kein Nachweis einer vollständigen Sicherheitszertifizierung oder aller externen Dienste.\nFür unerwartete Serverfehler enthält der Code eine gesonderte optionale Sentry-Anbindung. Sie arbeitet nur mit vorhandener serverseitiger Konfiguration und reduziert Berichte auf technische Fehler-/Release-Metadaten; Eingaben und rohe Fehlerdetails werden nicht als Ereignisinhalt weitergereicht. Das Vorhandensein der Bibliothek beweist keinen aktiven Dienst oder erfolgreichen Empfang.\nKonkrete Hosting-, Diagnose- und Aufbewahrungseinstellungen können sich je freigegebenem Release unterscheiden. Es werden hier keine unbelegten Speicherfristen, Datenstandorte oder bereits hochgeladenen Source Maps zugesichert. Die Erklärung wird bei technischen und rechtlichen Änderungen angepasst."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/datenschutz.txt",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Diese Seite ist der direkte Zugang zu den freigegebenen Datenschutzinformationen. Bis Zweck, Verantwortlichkeit, Empfänger und Aufbewahrung abschließend geprüft sind, wird kein vollständiger Rechtstext behauptet.",
-          "nl": "Deze pagina biedt directe toegang tot vrijgegeven privacyinformatie. Zolang doel, verantwoordelijkheid, ontvangers en bewaring niet definitief zijn getoetst, wordt geen volledige juridische tekst geclaimd.",
-          "fr": "Cette page donne un accès direct aux informations de confidentialité validées. Aucun texte juridique complet n’est annoncé avant vérification des finalités, responsabilités, destinataires et durées."
+          "de": "Verantwortlicher, Datenwege und Rechte für die öffentliche Web-App: Vercel-Auslieferung, bewusste Kontaktaufnahme, lokale Projektvorbereitung und optionale Fehlerdiagnose.",
+          "nl": "Verantwoordelijke, gegevensstromen en rechten voor de openbare webapp: Vercel-hosting, bewust contact, lokale projectvoorbereiding en optionele foutdiagnose.",
+          "fr": "Responsable, flux de données et droits pour l’application publique : hébergement Vercel, prise de contact volontaire, préparation locale et diagnostic facultatif."
         },
         "canonical_path": "/datenschutz",
         "canonical_origin": null,
@@ -2615,10 +3010,10 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
+      "implementation_status": "implemented",
       "content_kind": "legal_notice",
       "readiness": {
-        "content": "notice_only_legal_text_release_pending",
+        "content": "public_source_adapted_legal_review_pending",
         "transactions": "not_enabled",
         "backend": "not_required_for_content",
         "production_release": "not_claimed"
@@ -2627,8 +3022,8 @@
         "N1:prototypen/Rechtliches.dc.html"
       ],
       "source_refs": [
-        "docs/09-final/08-recht-und-compliance.md",
-        "config/regelwerk.json"
+        "config/legal-public-documents.json",
+        "docs/sources/legal-public-2026-10-28/datenschutz.txt"
       ],
       "next_actions": [
         {
@@ -2651,7 +3046,8 @@
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "legal_review": "pending"
     },
     {
       "id": "terms",
@@ -2662,35 +3058,322 @@
         "fr": "Base contractuelle et état de validation"
       },
       "summary": {
-        "de": "Vertragsbedingungen, ein Angebot und ein unverbindlicher Entwurf sind unterschiedliche Stände. Hier werden nur freigegebene Vertragsunterlagen bereitgestellt; eine Chatantwort ersetzt keine Vertragsfreigabe.",
-        "nl": "Voorwaarden, offerte en vrijblijvend concept zijn verschillende statussen. Hier worden uitsluitend vrijgegeven contractstukken beschikbaar gesteld; een chatantwoord vervangt geen contractuele goedkeuring.",
-        "fr": "Conditions, devis et projet sans engagement correspondent à des états distincts. Seuls les documents contractuels validés sont fournis ici ; une réponse du chat ne remplace pas cette validation."
+        "de": "Übernommene B2B-Vertragsgrundlagen, AVV-Rahmen und Hinweise zur unverbindlichen Anfrage. Individuell freigegebene Angebote und Anlagen bleiben maßgeblich; kein Verbraucher-Checkout.",
+        "nl": "Overgenomen B2B-voorwaarden, verwerkersovereenkomst en informatie over vrijblijvende aanvragen. Individueel goedgekeurde offertes en bijlagen blijven bepalend; geen consumentencheckout.",
+        "fr": "Conditions B2B reprises, cadre de sous-traitance et demandes sans engagement. Les offres et annexes validées individuellement restent déterminantes ; aucun paiement consommateur."
       },
       "site_context": "nexify",
       "sections": [
         {
-          "id": "ueberblick",
+          "id": "stand-und-sprache",
           "heading": {
-            "de": "Vertragsgrundlagen und Freigabestand",
-            "nl": "Contractbasis en vrijgavestatus",
-            "fr": "Base contractuelle et état de validation"
+            "de": "Stand und Sprache",
+            "nl": "Versie en taal",
+            "fr": "Version et langue"
           },
           "body": {
-            "de": "Vertragsbedingungen, ein Angebot und ein unverbindlicher Entwurf sind unterschiedliche Stände. Hier werden nur freigegebene Vertragsunterlagen bereitgestellt; eine Chatantwort ersetzt keine Vertragsfreigabe.",
-            "nl": "Voorwaarden, offerte en vrijblijvend concept zijn verschillende statussen. Hier worden uitsluitend vrijgegeven contractstukken beschikbaar gesteld; een chatantwoord vervangt geen contractuele goedkeuring.",
-            "fr": "Conditions, devis et projet sans engagement correspondent à des états distincts. Seuls les documents contractuels validés sont fournis ici ; une réponse du chat ne remplace pas cette validation."
+            "de": "Übernommene öffentliche Fassung vom 11.09.2026, technisch angepasst am 28.10.2026. Die juristische Nachprüfung steht aus. Die Rechtsdokumente werden zunächst im deutschen Original bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Overgenomen openbare versie van 11-09-2026, technisch aangepast op 28-10-2026. Juridische controle volgt nog. De juridische documenten worden eerst in het Duitse origineel getoond; er wordt geen gecontroleerde juridische vertaling geclaimd.",
+            "fr": "Version publique du 11/09/2026 reprise et adaptée techniquement le 28/10/2026. La vérification juridique reste à effectuer. Les documents sont d’abord présentés dans leur original allemand ; aucune traduction juridique validée n’est annoncée."
           },
           "source_refs": [
-            "docs/09-final/08-recht-und-compliance.md",
-            "config/regelwerk.json"
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-01",
+          "heading": {
+            "de": "AGB B2B · Geltungsbereich",
+            "nl": "AGB B2B · Geltungsbereich",
+            "fr": "AGB B2B · Geltungsbereich"
+          },
+          "body": {
+            "de": "Diese Bedingungen gelten ausschließlich gegenüber Unternehmern. Abweichende Bedingungen des Auftraggebers gelten nur bei ausdrücklicher Bestätigung in Textform.",
+            "nl": "Diese Bedingungen gelten ausschließlich gegenüber Unternehmern. Abweichende Bedingungen des Auftraggebers gelten nur bei ausdrücklicher Bestätigung in Textform.",
+            "fr": "Diese Bedingungen gelten ausschließlich gegenüber Unternehmern. Abweichende Bedingungen des Auftraggebers gelten nur bei ausdrücklicher Bestätigung in Textform."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-02",
+          "heading": {
+            "de": "AGB B2B · Kalkulation, Angebot und Vertrag",
+            "nl": "AGB B2B · Kalkulation, Angebot und Vertrag",
+            "fr": "AGB B2B · Kalkulation, Angebot und Vertrag"
+          },
+          "body": {
+            "de": "Online-Rechner und automatisch erzeugte PDFs sind freibleibende Kalkulationen und noch keine Auftragsannahme. Ein bindender Vertrag entsteht erst durch persönlich freigegebenes Angebot und Auftragsbestätigung in Textform oder durch ausdrücklich vereinbarte Leistungsaufnahme.\nAngebotsversion und Gültigkeit werden im Dokument ausgewiesen\nÄnderungen werden vor Ausführung beschrieben und freigegeben\nKeine Bestellung durch bloßes Bedienen des Rechners",
+            "nl": "Online-Rechner und automatisch erzeugte PDFs sind freibleibende Kalkulationen und noch keine Auftragsannahme. Ein bindender Vertrag entsteht erst durch persönlich freigegebenes Angebot und Auftragsbestätigung in Textform oder durch ausdrücklich vereinbarte Leistungsaufnahme.\nAngebotsversion und Gültigkeit werden im Dokument ausgewiesen\nÄnderungen werden vor Ausführung beschrieben und freigegeben\nKeine Bestellung durch bloßes Bedienen des Rechners",
+            "fr": "Online-Rechner und automatisch erzeugte PDFs sind freibleibende Kalkulationen und noch keine Auftragsannahme. Ein bindender Vertrag entsteht erst durch persönlich freigegebenes Angebot und Auftragsbestätigung in Textform oder durch ausdrücklich vereinbarte Leistungsaufnahme.\nAngebotsversion und Gültigkeit werden im Dokument ausgewiesen\nÄnderungen werden vor Ausführung beschrieben und freigegeben\nKeine Bestellung durch bloßes Bedienen des Rechners"
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-03",
+          "heading": {
+            "de": "AGB B2B · Leistungsumfang",
+            "nl": "AGB B2B · Leistungsumfang",
+            "fr": "AGB B2B · Leistungsumfang"
+          },
+          "body": {
+            "de": "Maßgeblich sind Leistungsbeschreibung, Liefergegenstände, Mitwirkung, Ausschlüsse, Abnahmekriterien und Betriebsrahmen der bestätigten Angebotsversion. Drittanbieter-, Lizenz-, Domain-, API- und Hostingkosten sind nur enthalten, wenn sie ausdrücklich genannt sind.",
+            "nl": "Maßgeblich sind Leistungsbeschreibung, Liefergegenstände, Mitwirkung, Ausschlüsse, Abnahmekriterien und Betriebsrahmen der bestätigten Angebotsversion. Drittanbieter-, Lizenz-, Domain-, API- und Hostingkosten sind nur enthalten, wenn sie ausdrücklich genannt sind.",
+            "fr": "Maßgeblich sind Leistungsbeschreibung, Liefergegenstände, Mitwirkung, Ausschlüsse, Abnahmekriterien und Betriebsrahmen der bestätigten Angebotsversion. Drittanbieter-, Lizenz-, Domain-, API- und Hostingkosten sind nur enthalten, wenn sie ausdrücklich genannt sind."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-04",
+          "heading": {
+            "de": "AGB B2B · Vergütung und Steuern",
+            "nl": "AGB B2B · Vergütung und Steuern",
+            "fr": "AGB B2B · Vergütung und Steuern"
+          },
+          "body": {
+            "de": "Die Vergütung, steuerliche Behandlung, Zahlungsplan und Fälligkeit ergeben sich aus dem individuell freigegebenen Angebot. Drittanbieter- und weitere Fremdkosten werden vor Beauftragung transparent benannt.\nDer in der früheren öffentlichen Fassung genannte Tagessatz wird hier nicht als neue Preiszusage veröffentlicht. Maßgeblich bleibt der freigegebene Angebotsstand.",
+            "nl": "Die Vergütung, steuerliche Behandlung, Zahlungsplan und Fälligkeit ergeben sich aus dem individuell freigegebenen Angebot. Drittanbieter- und weitere Fremdkosten werden vor Beauftragung transparent benannt.\nDer in der früheren öffentlichen Fassung genannte Tagessatz wird hier nicht als neue Preiszusage veröffentlicht. Maßgeblich bleibt der freigegebene Angebotsstand.",
+            "fr": "Die Vergütung, steuerliche Behandlung, Zahlungsplan und Fälligkeit ergeben sich aus dem individuell freigegebenen Angebot. Drittanbieter- und weitere Fremdkosten werden vor Beauftragung transparent benannt.\nDer in der früheren öffentlichen Fassung genannte Tagessatz wird hier nicht als neue Preiszusage veröffentlicht. Maßgeblich bleibt der freigegebene Angebotsstand."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-05",
+          "heading": {
+            "de": "AGB B2B · Mitwirkung und Termine",
+            "nl": "AGB B2B · Mitwirkung und Termine",
+            "fr": "AGB B2B · Mitwirkung und Termine"
+          },
+          "body": {
+            "de": "Der Auftraggeber stellt notwendige Inhalte, Zugänge, Ansprechpartner, Entscheidungen und Nutzungsrechte rechtzeitig bereit. Termine verschieben sich angemessen, wenn vereinbarte Mitwirkung ausbleibt oder sich der freigegebene Umfang ändert.",
+            "nl": "Der Auftraggeber stellt notwendige Inhalte, Zugänge, Ansprechpartner, Entscheidungen und Nutzungsrechte rechtzeitig bereit. Termine verschieben sich angemessen, wenn vereinbarte Mitwirkung ausbleibt oder sich der freigegebene Umfang ändert.",
+            "fr": "Der Auftraggeber stellt notwendige Inhalte, Zugänge, Ansprechpartner, Entscheidungen und Nutzungsrechte rechtzeitig bereit. Termine verschieben sich angemessen, wenn vereinbarte Mitwirkung ausbleibt oder sich der freigegebene Umfang ändert."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-06",
+          "heading": {
+            "de": "AGB B2B · KI-gestützte Arbeitsweise",
+            "nl": "AGB B2B · KI-gestützte Arbeitsweise",
+            "fr": "AGB B2B · KI-gestützte Arbeitsweise"
+          },
+          "body": {
+            "de": "KI-Werkzeuge können unterstützend eingesetzt werden. Fachliche Letztverantwortung und Freigabe verbleiben bei NeXify AI. Vertrauliche Daten werden nicht ohne vereinbarte Grundlage zum Training öffentlicher Modelle bereitgestellt.",
+            "nl": "KI-Werkzeuge können unterstützend eingesetzt werden. Fachliche Letztverantwortung und Freigabe verbleiben bei NeXify AI. Vertrauliche Daten werden nicht ohne vereinbarte Grundlage zum Training öffentlicher Modelle bereitgestellt.",
+            "fr": "KI-Werkzeuge können unterstützend eingesetzt werden. Fachliche Letztverantwortung und Freigabe verbleiben bei NeXify AI. Vertrauliche Daten werden nicht ohne vereinbarte Grundlage zum Training öffentlicher Modelle bereitgestellt."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-07",
+          "heading": {
+            "de": "AGB B2B · Abnahme, Rechte und Haftung",
+            "nl": "AGB B2B · Abnahme, Rechte und Haftung",
+            "fr": "AGB B2B · Abnahme, Rechte und Haftung"
+          },
+          "body": {
+            "de": "Abnahmeverfahren, Prüffrist und Mängelkorrektur werden im Angebot festgelegt. Individuell geschaffene Nutzungsrechte gehen im vereinbarten Umfang nach vollständiger Zahlung über. Zwingende Haftung, insbesondere für Vorsatz, grobe Fahrlässigkeit sowie Verletzung von Leben, Körper oder Gesundheit, bleibt unberührt.",
+            "nl": "Abnahmeverfahren, Prüffrist und Mängelkorrektur werden im Angebot festgelegt. Individuell geschaffene Nutzungsrechte gehen im vereinbarten Umfang nach vollständiger Zahlung über. Zwingende Haftung, insbesondere für Vorsatz, grobe Fahrlässigkeit sowie Verletzung von Leben, Körper oder Gesundheit, bleibt unberührt.",
+            "fr": "Abnahmeverfahren, Prüffrist und Mängelkorrektur werden im Angebot festgelegt. Individuell geschaffene Nutzungsrechte gehen im vereinbarten Umfang nach vollständiger Zahlung über. Zwingende Haftung, insbesondere für Vorsatz, grobe Fahrlässigkeit sowie Verletzung von Leben, Körper oder Gesundheit, bleibt unberührt."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "agb-08",
+          "heading": {
+            "de": "AGB B2B · Recht und Gerichtsstand",
+            "nl": "AGB B2B · Recht und Gerichtsstand",
+            "fr": "AGB B2B · Recht und Gerichtsstand"
+          },
+          "body": {
+            "de": "Soweit wirksam vereinbar, gilt niederländisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Venlo, Niederlande.",
+            "nl": "Soweit wirksam vereinbar, gilt niederländisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Venlo, Niederlande.",
+            "fr": "Soweit wirksam vereinbar, gilt niederländisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Venlo, Niederlande."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/agb.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "avv-01",
+          "heading": {
+            "de": "AVV / DPA · Gegenstand und Weisung",
+            "nl": "AVV / DPA · Gegenstand und Weisung",
+            "fr": "AVV / DPA · Gegenstand und Weisung"
+          },
+          "body": {
+            "de": "NeXify verarbeitet die im Hauptvertrag beschriebenen Daten ausschließlich dokumentiert und weisungsgebunden. Art, Zweck, Kategorien betroffener Personen und Dauer werden im projektspezifischen Anhang festgelegt.",
+            "nl": "NeXify verarbeitet die im Hauptvertrag beschriebenen Daten ausschließlich dokumentiert und weisungsgebunden. Art, Zweck, Kategorien betroffener Personen und Dauer werden im projektspezifischen Anhang festgelegt.",
+            "fr": "NeXify verarbeitet die im Hauptvertrag beschriebenen Daten ausschließlich dokumentiert und weisungsgebunden. Art, Zweck, Kategorien betroffener Personen und Dauer werden im projektspezifischen Anhang festgelegt."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/avv.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "avv-02",
+          "heading": {
+            "de": "AVV / DPA · Pflichten von NeXify",
+            "nl": "AVV / DPA · Pflichten von NeXify",
+            "fr": "AVV / DPA · Pflichten von NeXify"
+          },
+          "body": {
+            "de": "Vertraulichkeit und Zugriff nach Erforderlichkeit\nTechnische und organisatorische Maßnahmen nach Art. 32 DSGVO\nUnterstützung bei Betroffenenrechten und Datenschutz-Folgenabschätzungen\nMeldung von Datenschutzverletzungen ohne unangemessene Verzögerung\nNachweis- und Auditunterstützung",
+            "nl": "Vertraulichkeit und Zugriff nach Erforderlichkeit\nTechnische und organisatorische Maßnahmen nach Art. 32 DSGVO\nUnterstützung bei Betroffenenrechten und Datenschutz-Folgenabschätzungen\nMeldung von Datenschutzverletzungen ohne unangemessene Verzögerung\nNachweis- und Auditunterstützung",
+            "fr": "Vertraulichkeit und Zugriff nach Erforderlichkeit\nTechnische und organisatorische Maßnahmen nach Art. 32 DSGVO\nUnterstützung bei Betroffenenrechten und Datenschutz-Folgenabschätzungen\nMeldung von Datenschutzverletzungen ohne unangemessene Verzögerung\nNachweis- und Auditunterstützung"
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/avv.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "avv-03",
+          "heading": {
+            "de": "AVV / DPA · Unterauftragsverarbeiter",
+            "nl": "AVV / DPA · Unterauftragsverarbeiter",
+            "fr": "AVV / DPA · Unterauftragsverarbeiter"
+          },
+          "body": {
+            "de": "Eingesetzte Anbieter werden im projektspezifischen Subprozessoren-Verzeichnis genannt. Änderungen werden nach dem vereinbarten Verfahren angekündigt. Drittlandübermittlungen benötigen einen tragfähigen Mechanismus und ergänzende Schutzmaßnahmen.",
+            "nl": "Eingesetzte Anbieter werden im projektspezifischen Subprozessoren-Verzeichnis genannt. Änderungen werden nach dem vereinbarten Verfahren angekündigt. Drittlandübermittlungen benötigen einen tragfähigen Mechanismus und ergänzende Schutzmaßnahmen.",
+            "fr": "Eingesetzte Anbieter werden im projektspezifischen Subprozessoren-Verzeichnis genannt. Änderungen werden nach dem vereinbarten Verfahren angekündigt. Drittlandübermittlungen benötigen einen tragfähigen Mechanismus und ergänzende Schutzmaßnahmen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/avv.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "avv-04",
+          "heading": {
+            "de": "AVV / DPA · Löschung und Rückgabe",
+            "nl": "AVV / DPA · Löschung und Rückgabe",
+            "fr": "AVV / DPA · Löschung und Rückgabe"
+          },
+          "body": {
+            "de": "Nach Vertragsende werden Auftragsdaten nach Weisung gelöscht oder zurückgegeben, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Durchführung kann nachweisbar bestätigt werden.",
+            "nl": "Nach Vertragsende werden Auftragsdaten nach Weisung gelöscht oder zurückgegeben, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Durchführung kann nachweisbar bestätigt werden.",
+            "fr": "Nach Vertragsende werden Auftragsdaten nach Weisung gelöscht oder zurückgegeben, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Durchführung kann nachweisbar bestätigt werden."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/avv.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "avv-05",
+          "heading": {
+            "de": "AVV / DPA · Vertragsschluss",
+            "nl": "AVV / DPA · Vertragsschluss",
+            "fr": "AVV / DPA · Vertragsschluss"
+          },
+          "body": {
+            "de": "Diese Webseite stellt den Rahmen transparent dar. Der rechtsverbindliche AVV wird projektbezogen mit Anlagen zu Verarbeitung, TOMs und Unterauftragsverarbeitern in Textform geschlossen.",
+            "nl": "Diese Webseite stellt den Rahmen transparent dar. Der rechtsverbindliche AVV wird projektbezogen mit Anlagen zu Verarbeitung, TOMs und Unterauftragsverarbeitern in Textform geschlossen.",
+            "fr": "Diese Webseite stellt den Rahmen transparent dar. Der rechtsverbindliche AVV wird projektbezogen mit Anlagen zu Verarbeitung, TOMs und Unterauftragsverarbeitern in Textform geschlossen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/avv.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "widerruf-01",
+          "heading": {
+            "de": "B2B-Hinweis · Keine Verbraucherverträge",
+            "nl": "B2B-Hinweis · Keine Verbraucherverträge",
+            "fr": "B2B-Hinweis · Keine Verbraucherverträge"
+          },
+          "body": {
+            "de": "Anfragen und Angebote richten sich an Unternehmer, juristische Personen und beruflich selbstständig Handelnde. Ein gesetzliches Verbraucher-Widerrufsrecht wird deshalb nicht als Vertragsbestandteil angeboten.",
+            "nl": "Anfragen und Angebote richten sich an Unternehmer, juristische Personen und beruflich selbstständig Handelnde. Ein gesetzliches Verbraucher-Widerrufsrecht wird deshalb nicht als Vertragsbestandteil angeboten.",
+            "fr": "Anfragen und Angebote richten sich an Unternehmer, juristische Personen und beruflich selbstständig Handelnde. Ein gesetzliches Verbraucher-Widerrufsrecht wird deshalb nicht als Vertragsbestandteil angeboten."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/widerruf.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "widerruf-02",
+          "heading": {
+            "de": "B2B-Hinweis · Keine Bestellung im Rechner",
+            "nl": "B2B-Hinweis · Keine Bestellung im Rechner",
+            "fr": "B2B-Hinweis · Keine Bestellung im Rechner"
+          },
+          "body": {
+            "de": "Auswahl, Kalkulation, PDF-Erzeugung und E-Mail-Versand lösen noch keine Beauftragung oder Zahlung aus. Vor Vertragsschluss werden Unternehmen, Vertretungsberechtigung, Leistungsumfang, Preis, Steuern und Bedingungen geprüft.",
+            "nl": "Auswahl, Kalkulation, PDF-Erzeugung und E-Mail-Versand lösen noch keine Beauftragung oder Zahlung aus. Vor Vertragsschluss werden Unternehmen, Vertretungsberechtigung, Leistungsumfang, Preis, Steuern und Bedingungen geprüft.",
+            "fr": "Auswahl, Kalkulation, PDF-Erzeugung und E-Mail-Versand lösen noch keine Beauftragung oder Zahlung aus. Vor Vertragsschluss werden Unternehmen, Vertretungsberechtigung, Leistungsumfang, Preis, Steuern und Bedingungen geprüft."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/widerruf.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "widerruf-03",
+          "heading": {
+            "de": "B2B-Hinweis · Korrektur und Rücknahme",
+            "nl": "B2B-Hinweis · Korrektur und Rücknahme",
+            "fr": "B2B-Hinweis · Korrektur und Rücknahme"
+          },
+          "body": {
+            "de": "Eine Angebotsanfrage kann vor Auftragsbestätigung jederzeit korrigiert oder zurückgenommen werden. Bereits geschlossene B2B-Verträge können nach den individuell vereinbarten Kündigungs- und Pausenregeln beendet werden.",
+            "nl": "Eine Angebotsanfrage kann vor Auftragsbestätigung jederzeit korrigiert oder zurückgenommen werden. Bereits geschlossene B2B-Verträge können nach den individuell vereinbarten Kündigungs- und Pausenregeln beendet werden.",
+            "fr": "Eine Angebotsanfrage kann vor Auftragsbestätigung jederzeit korrigiert oder zurückgenommen werden. Bereits geschlossene B2B-Verträge können nach den individuell vereinbarten Kündigungs- und Pausenregeln beendet werden."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/widerruf.txt",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Vertragsbedingungen, ein Angebot und ein unverbindlicher Entwurf sind unterschiedliche Stände. Hier werden nur freigegebene Vertragsunterlagen bereitgestellt; eine Chatantwort ersetzt keine Vertragsfreigabe.",
-          "nl": "Voorwaarden, offerte en vrijblijvend concept zijn verschillende statussen. Hier worden uitsluitend vrijgegeven contractstukken beschikbaar gesteld; een chatantwoord vervangt geen contractuele goedkeuring.",
-          "fr": "Conditions, devis et projet sans engagement correspondent à des états distincts. Seuls les documents contractuels validés sont fournis ici ; une réponse du chat ne remplace pas cette validation."
+          "de": "Übernommene B2B-Vertragsgrundlagen, AVV-Rahmen und Hinweise zur unverbindlichen Anfrage. Individuell freigegebene Angebote und Anlagen bleiben maßgeblich; kein Verbraucher-Checkout.",
+          "nl": "Overgenomen B2B-voorwaarden, verwerkersovereenkomst en informatie over vrijblijvende aanvragen. Individueel goedgekeurde offertes en bijlagen blijven bepalend; geen consumentencheckout.",
+          "fr": "Conditions B2B reprises, cadre de sous-traitance et demandes sans engagement. Les offres et annexes validées individuellement restent déterminantes ; aucun paiement consommateur."
         },
         "canonical_path": "/vertragsgrundlagen",
         "canonical_origin": null,
@@ -2705,10 +3388,10 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
+      "implementation_status": "implemented",
       "content_kind": "legal_notice",
       "readiness": {
-        "content": "notice_only_legal_text_release_pending",
+        "content": "public_source_adapted_legal_review_pending",
         "transactions": "not_enabled",
         "backend": "not_required_for_content",
         "production_release": "not_claimed"
@@ -2717,8 +3400,10 @@
         "N1:prototypen/Rechtliches.dc.html"
       ],
       "source_refs": [
-        "docs/09-final/08-recht-und-compliance.md",
-        "config/regelwerk.json"
+        "config/legal-public-documents.json",
+        "docs/sources/legal-public-2026-10-28/agb.txt",
+        "docs/sources/legal-public-2026-10-28/avv.txt",
+        "docs/sources/legal-public-2026-10-28/widerruf.txt"
       ],
       "next_actions": [
         {
@@ -2741,7 +3426,8 @@
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "legal_review": "pending"
     },
     {
       "id": "ai-notice",
@@ -2752,35 +3438,142 @@
         "fr": "Informations sur l’utilisation de l’IA"
       },
       "summary": {
-        "de": "KI-Antworten werden als solche gekennzeichnet. Entwürfe können Fehler enthalten; Preise, Rechtsfragen und folgenreiche Aktionen benötigen die zuständige Prüfung und Freigabe.",
-        "nl": "AI-antwoorden worden als zodanig aangeduid. Concepten kunnen fouten bevatten; prijzen, juridische vragen en ingrijpende acties vereisen bevoegde toetsing en goedkeuring.",
-        "fr": "Les réponses IA sont signalées comme telles. Les brouillons peuvent contenir des erreurs ; prix, questions juridiques et actions importantes nécessitent les vérifications et validations compétentes."
+        "de": "Der öffentliche Assistent ist eine textgeführte Orientierung ohne Live-KI. Diese Hinweise trennen lokale Vorbereitung, mögliche spätere KI-Dienste und menschliche Freigaben.",
+        "nl": "De openbare assistent biedt tekstgestuurde oriëntatie zonder live-AI. Deze informatie onderscheidt lokale voorbereiding, eventuele latere AI-diensten en menselijke goedkeuring.",
+        "fr": "L’assistant public propose un guide textuel sans IA en direct. Ces informations distinguent préparation locale, éventuels services IA futurs et validation humaine."
       },
       "site_context": "nexify",
       "sections": [
         {
-          "id": "ueberblick",
+          "id": "stand-und-sprache",
           "heading": {
-            "de": "Hinweise zur KI-Nutzung",
-            "nl": "Informatie over AI-gebruik",
-            "fr": "Informations sur l’utilisation de l’IA"
+            "de": "Stand und Sprache",
+            "nl": "Versie en taal",
+            "fr": "Version et langue"
           },
           "body": {
-            "de": "KI-Antworten werden als solche gekennzeichnet. Entwürfe können Fehler enthalten; Preise, Rechtsfragen und folgenreiche Aktionen benötigen die zuständige Prüfung und Freigabe.",
-            "nl": "AI-antwoorden worden als zodanig aangeduid. Concepten kunnen fouten bevatten; prijzen, juridische vragen en ingrijpende acties vereisen bevoegde toetsing en goedkeuring.",
-            "fr": "Les réponses IA sont signalées comme telles. Les brouillons peuvent contenir des erreurs ; prix, questions juridiques et actions importantes nécessitent les vérifications et validations compétentes."
+            "de": "Übernommene öffentliche Fassung vom 11.09.2026, technisch angepasst am 28.10.2026. Die juristische Nachprüfung steht aus. Die Rechtsdokumente werden zunächst im deutschen Original bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Overgenomen openbare versie van 11-09-2026, technisch aangepast op 28-10-2026. Juridische controle volgt nog. De juridische documenten worden eerst in het Duitse origineel getoond; er wordt geen gecontroleerde juridische vertaling geclaimd.",
+            "fr": "Version publique du 11/09/2026 reprise et adaptée techniquement le 28/10/2026. La vérification juridique reste à effectuer. Les documents sont d’abord présentés dans leur original allemand ; aucune traduction juridique validée n’est annoncée."
           },
           "source_refs": [
-            "docs/09-final/08-recht-und-compliance.md",
-            "config/regelwerk.json"
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz-01",
+          "heading": {
+            "de": "KI-Transparenz · Interaktion mit KI",
+            "nl": "KI-Transparenz · Interaktion mit KI",
+            "fr": "KI-Transparenz · Interaktion mit KI"
+          },
+          "body": {
+            "de": "Der öffentliche Website-Assistent ist derzeit eine textgeführte Orientierung ohne Live-KI. Beim bewussten Absenden werden Frage, Sprache und öffentlicher Seitenkontext an die Website übertragen und öffentliche Seitenhinweise ohne Modellanbieteranfrage erzeugt. Der lokale Projektüberblick dient der Vorbereitung; es erfolgen dadurch keine Buchung, kein Versand und kein kostenpflichtiger Modellaufruf.\nEin später aktivierter KI-Dienst benötigt eine eigene belegte Daten- und Providerbindung sowie eine zutreffende Kennzeichnung vor der Nutzung.",
+            "nl": "Der öffentliche Website-Assistent ist derzeit eine textgeführte Orientierung ohne Live-KI. Beim bewussten Absenden werden Frage, Sprache und öffentlicher Seitenkontext an die Website übertragen und öffentliche Seitenhinweise ohne Modellanbieteranfrage erzeugt. Der lokale Projektüberblick dient der Vorbereitung; es erfolgen dadurch keine Buchung, kein Versand und kein kostenpflichtiger Modellaufruf.\nEin später aktivierter KI-Dienst benötigt eine eigene belegte Daten- und Providerbindung sowie eine zutreffende Kennzeichnung vor der Nutzung.",
+            "fr": "Der öffentliche Website-Assistent ist derzeit eine textgeführte Orientierung ohne Live-KI. Beim bewussten Absenden werden Frage, Sprache und öffentlicher Seitenkontext an die Website übertragen und öffentliche Seitenhinweise ohne Modellanbieteranfrage erzeugt. Der lokale Projektüberblick dient der Vorbereitung; es erfolgen dadurch keine Buchung, kein Versand und kein kostenpflichtiger Modellaufruf.\nEin später aktivierter KI-Dienst benötigt eine eigene belegte Daten- und Providerbindung sowie eine zutreffende Kennzeichnung vor der Nutzung."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz-02",
+          "heading": {
+            "de": "KI-Transparenz · Einsatzbereiche",
+            "nl": "KI-Transparenz · Einsatzbereiche",
+            "fr": "KI-Transparenz · Einsatzbereiche"
+          },
+          "body": {
+            "de": "Aktuell verfügbar sind die Orientierung zu öffentlichen Seiten und die lokale Strukturierung eines Projektanliegens. Angebots-, Termin- und Marketingwerkzeuge zeigen ihren tatsächlich verfügbaren Stand an; ihre Oberfläche ist keine Zusage externer Ausführung.\nWissensrecherche, Modellantworten, Produktionsaktionen oder automatische tägliche Erweiterungen werden hier nicht allein aus einer geplanten Funktion abgeleitet.",
+            "nl": "Aktuell verfügbar sind die Orientierung zu öffentlichen Seiten und die lokale Strukturierung eines Projektanliegens. Angebots-, Termin- und Marketingwerkzeuge zeigen ihren tatsächlich verfügbaren Stand an; ihre Oberfläche ist keine Zusage externer Ausführung.\nWissensrecherche, Modellantworten, Produktionsaktionen oder automatische tägliche Erweiterungen werden hier nicht allein aus einer geplanten Funktion abgeleitet.",
+            "fr": "Aktuell verfügbar sind die Orientierung zu öffentlichen Seiten und die lokale Strukturierung eines Projektanliegens. Angebots-, Termin- und Marketingwerkzeuge zeigen ihren tatsächlich verfügbaren Stand an; ihre Oberfläche ist keine Zusage externer Ausführung.\nWissensrecherche, Modellantworten, Produktionsaktionen oder automatische tägliche Erweiterungen werden hier nicht allein aus einer geplanten Funktion abgeleitet."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz-03",
+          "heading": {
+            "de": "KI-Transparenz · Grenzen",
+            "nl": "KI-Transparenz · Grenzen",
+            "fr": "KI-Transparenz · Grenzen"
+          },
+          "body": {
+            "de": "KI kann unvollständige, veraltete oder falsche Inhalte erzeugen. Verbindliche Angebote, rechtliche Bewertungen, Produktionsfreigaben und Beauftragungen werden nicht allein durch ein Modell entschieden.",
+            "nl": "KI kann unvollständige, veraltete oder falsche Inhalte erzeugen. Verbindliche Angebote, rechtliche Bewertungen, Produktionsfreigaben und Beauftragungen werden nicht allein durch ein Modell entschieden.",
+            "fr": "KI kann unvollständige, veraltete oder falsche Inhalte erzeugen. Verbindliche Angebote, rechtliche Bewertungen, Produktionsfreigaben und Beauftragungen werden nicht allein durch ein Modell entschieden."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz-04",
+          "heading": {
+            "de": "KI-Transparenz · Menschliche Kontrolle",
+            "nl": "KI-Transparenz · Menschliche Kontrolle",
+            "fr": "KI-Transparenz · Menschliche Kontrolle"
+          },
+          "body": {
+            "de": "Pascal Courbois oder eine ausdrücklich benannte verantwortliche Rolle prüft kundenwirksame Empfehlungen und Freigaben. Nutzer können jederzeit in einen persönlichen Kontakt wechseln.",
+            "nl": "Pascal Courbois oder eine ausdrücklich benannte verantwortliche Rolle prüft kundenwirksame Empfehlungen und Freigaben. Nutzer können jederzeit in einen persönlichen Kontakt wechseln.",
+            "fr": "Pascal Courbois oder eine ausdrücklich benannte verantwortliche Rolle prüft kundenwirksame Empfehlungen und Freigaben. Nutzer können jederzeit in einen persönlichen Kontakt wechseln."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz-05",
+          "heading": {
+            "de": "KI-Transparenz · Daten und Training",
+            "nl": "KI-Transparenz · Daten und Training",
+            "fr": "KI-Transparenz · Daten und Training"
+          },
+          "body": {
+            "de": "Datenwege und Rechtsgrundlagen sind in der Datenschutzerklärung beschrieben. Kundendaten werden nicht zum Training öffentlicher Modelle verwendet, sofern dies nicht ausdrücklich und schriftlich vereinbart wurde.",
+            "nl": "Datenwege und Rechtsgrundlagen sind in der Datenschutzerklärung beschrieben. Kundendaten werden nicht zum Training öffentlicher Modelle verwendet, sofern dies nicht ausdrücklich und schriftlich vereinbart wurde.",
+            "fr": "Datenwege und Rechtsgrundlagen sind in der Datenschutzerklärung beschrieben. Kundendaten werden nicht zum Training öffentlicher Modelle verwendet, sofern dies nicht ausdrücklich und schriftlich vereinbart wurde."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz-06",
+          "heading": {
+            "de": "KI-Transparenz · AI Literacy und Governance",
+            "nl": "KI-Transparenz · AI Literacy und Governance",
+            "fr": "KI-Transparenz · AI Literacy und Governance"
+          },
+          "body": {
+            "de": "NeXify dokumentiert Zweck, Grenzen, erlaubte Tools, Freigaben und Prüfverfahren je Einsatz. Beteiligte erhalten die für ihre Rolle notwendige Einweisung und dürfen Hochrisiko- oder Produktionsaktionen nicht ohne passende Autorisierung ausführen.",
+            "nl": "NeXify dokumentiert Zweck, Grenzen, erlaubte Tools, Freigaben und Prüfverfahren je Einsatz. Beteiligte erhalten die für ihre Rolle notwendige Einweisung und dürfen Hochrisiko- oder Produktionsaktionen nicht ohne passende Autorisierung ausführen.",
+            "fr": "NeXify dokumentiert Zweck, Grenzen, erlaubte Tools, Freigaben und Prüfverfahren je Einsatz. Beteiligte erhalten die für ihre Rolle notwendige Einweisung und dürfen Hochrisiko- oder Produktionsaktionen nicht ohne passende Autorisierung ausführen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/ki-transparenz.txt",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "KI-Antworten werden als solche gekennzeichnet. Entwürfe können Fehler enthalten; Preise, Rechtsfragen und folgenreiche Aktionen benötigen die zuständige Prüfung und Freigabe.",
-          "nl": "AI-antwoorden worden als zodanig aangeduid. Concepten kunnen fouten bevatten; prijzen, juridische vragen en ingrijpende acties vereisen bevoegde toetsing en goedkeuring.",
-          "fr": "Les réponses IA sont signalées comme telles. Les brouillons peuvent contenir des erreurs ; prix, questions juridiques et actions importantes nécessitent les vérifications et validations compétentes."
+          "de": "Der öffentliche Assistent ist eine textgeführte Orientierung ohne Live-KI. Diese Hinweise trennen lokale Vorbereitung, mögliche spätere KI-Dienste und menschliche Freigaben.",
+          "nl": "De openbare assistent biedt tekstgestuurde oriëntatie zonder live-AI. Deze informatie onderscheidt lokale voorbereiding, eventuele latere AI-diensten en menselijke goedkeuring.",
+          "fr": "L’assistant public propose un guide textuel sans IA en direct. Ces informations distinguent préparation locale, éventuels services IA futurs et validation humaine."
         },
         "canonical_path": "/ki-hinweise",
         "canonical_origin": null,
@@ -2795,10 +3588,10 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
+      "implementation_status": "implemented",
       "content_kind": "legal_notice",
       "readiness": {
-        "content": "notice_only_legal_text_release_pending",
+        "content": "public_source_adapted_legal_review_pending",
         "transactions": "not_enabled",
         "backend": "not_required_for_content",
         "production_release": "not_claimed"
@@ -2807,8 +3600,8 @@
         "N1:prototypen/Rechtliches.dc.html"
       ],
       "source_refs": [
-        "docs/09-final/08-recht-und-compliance.md",
-        "config/regelwerk.json"
+        "config/legal-public-documents.json",
+        "docs/sources/legal-public-2026-10-28/ki-transparenz.txt"
       ],
       "next_actions": [
         {
@@ -2831,7 +3624,8 @@
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "legal_review": "pending"
     },
     {
       "id": "accessibility",
@@ -2842,35 +3636,106 @@
         "fr": "Accessibilité et retour d’information"
       },
       "summary": {
-        "de": "Zugängliche Bedienung und verständliche Inhalte sind Entwicklungsziele. Diese Statusseite ist keine unbelegte Konformitätserklärung. Hinweise auf Hindernisse können über den Kontaktweg vorbereitet werden.",
-        "nl": "Toegankelijke bediening en begrijpelijke inhoud zijn ontwikkeldoelen. Deze statuspagina is geen onbewezen conformiteitsverklaring. Meldingen van belemmeringen kunnen via contact worden voorbereid.",
-        "fr": "Une utilisation accessible et des contenus compréhensibles sont des objectifs de développement. Cette page n’est pas une déclaration de conformité non étayée. Les difficultés peuvent être signalées par le parcours de contact."
+        "de": "Qualitätsrahmen, tatsächlich begrenzte Prüfungen und bekannte Grenzen der Zugänglichkeit. Keine pauschale Konformitäts- oder Zertifizierungsbehauptung.",
+        "nl": "Kwaliteitskader, daadwerkelijk beperkte controles en bekende toegankelijkheidsgrenzen. Geen algemene conformiteits- of certificeringsclaim.",
+        "fr": "Cadre de qualité, vérifications limitées et limites d’accessibilité connues. Aucune déclaration générale de conformité ni certification."
       },
       "site_context": "nexify",
       "sections": [
         {
-          "id": "ueberblick",
+          "id": "stand-und-sprache",
           "heading": {
-            "de": "Barrierefreiheit und Rückmeldung",
-            "nl": "Toegankelijkheid en feedback",
-            "fr": "Accessibilité et retour d’information"
+            "de": "Stand und Sprache",
+            "nl": "Versie en taal",
+            "fr": "Version et langue"
           },
           "body": {
-            "de": "Zugängliche Bedienung und verständliche Inhalte sind Entwicklungsziele. Diese Statusseite ist keine unbelegte Konformitätserklärung. Hinweise auf Hindernisse können über den Kontaktweg vorbereitet werden.",
-            "nl": "Toegankelijke bediening en begrijpelijke inhoud zijn ontwikkeldoelen. Deze statuspagina is geen onbewezen conformiteitsverklaring. Meldingen van belemmeringen kunnen via contact worden voorbereid.",
-            "fr": "Une utilisation accessible et des contenus compréhensibles sont des objectifs de développement. Cette page n’est pas une déclaration de conformité non étayée. Les difficultés peuvent être signalées par le parcours de contact."
+            "de": "Übernommene öffentliche Fassung vom 11.09.2026, technisch angepasst am 28.10.2026. Die juristische Nachprüfung steht aus. Die Rechtsdokumente werden zunächst im deutschen Original bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Overgenomen openbare versie van 11-09-2026, technisch aangepast op 28-10-2026. Juridische controle volgt nog. De juridische documenten worden eerst in het Duitse origineel getoond; er wordt geen gecontroleerde juridische vertaling geclaimd.",
+            "fr": "Version publique du 11/09/2026 reprise et adaptée techniquement le 28/10/2026. La vérification juridique reste à effectuer. Les documents sont d’abord présentés dans leur original allemand ; aucune traduction juridique validée n’est annoncée."
           },
           "source_refs": [
-            "docs/09-final/08-recht-und-compliance.md",
-            "config/regelwerk.json"
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "barrierefreiheit-01",
+          "heading": {
+            "de": "Barrierefreiheit · Geltungsbereich",
+            "nl": "Barrierefreiheit · Geltungsbereich",
+            "fr": "Barrierefreiheit · Geltungsbereich"
+          },
+          "body": {
+            "de": "Diese Erklärung bezieht sich auf den hier vorbereiteten öffentlichen Web-App-Stand. Geprüft wurden begrenzte lokale Browserabläufe für Mobil/Desktop, Tastatur und Fokus, DE/NL/FR, Textvergrößerung und reduzierte Bewegung. Ein lokaler Test ist keine vollständige Abnahme aller produktiven Umgebungen.",
+            "nl": "Diese Erklärung bezieht sich auf den hier vorbereiteten öffentlichen Web-App-Stand. Geprüft wurden begrenzte lokale Browserabläufe für Mobil/Desktop, Tastatur und Fokus, DE/NL/FR, Textvergrößerung und reduzierte Bewegung. Ein lokaler Test ist keine vollständige Abnahme aller produktiven Umgebungen.",
+            "fr": "Diese Erklärung bezieht sich auf den hier vorbereiteten öffentlichen Web-App-Stand. Geprüft wurden begrenzte lokale Browserabläufe für Mobil/Desktop, Tastatur und Fokus, DE/NL/FR, Textvergrößerung und reduzierte Bewegung. Ein lokaler Test ist keine vollständige Abnahme aller produktiven Umgebungen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/barrierefreiheit.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "barrierefreiheit-02",
+          "heading": {
+            "de": "Barrierefreiheit · Aktueller Stand",
+            "nl": "Barrierefreiheit · Aktueller Stand",
+            "fr": "Barrierefreiheit · Aktueller Stand"
+          },
+          "body": {
+            "de": "WCAG 2.2 AA und EN 301 549 dienen als Qualitätsrahmen. Es wird keine vollständige Konformität oder Zertifizierung behauptet. Eine qualifizierte Abnahme mit Assistenztechnologien sowie aller tatsächlichen externen Anmelde- und Providerabläufe steht weiterhin aus.",
+            "nl": "WCAG 2.2 AA und EN 301 549 dienen als Qualitätsrahmen. Es wird keine vollständige Konformität oder Zertifizierung behauptet. Eine qualifizierte Abnahme mit Assistenztechnologien sowie aller tatsächlichen externen Anmelde- und Providerabläufe steht weiterhin aus.",
+            "fr": "WCAG 2.2 AA und EN 301 549 dienen als Qualitätsrahmen. Es wird keine vollständige Konformität oder Zertifizierung behauptet. Eine qualifizierte Abnahme mit Assistenztechnologien sowie aller tatsächlichen externen Anmelde- und Providerabläufe steht weiterhin aus."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/barrierefreiheit.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "barrierefreiheit-03",
+          "heading": {
+            "de": "Barrierefreiheit · Bekannte Grenzen",
+            "nl": "Barrierefreiheit · Bekannte Grenzen",
+            "fr": "Barrierefreiheit · Bekannte Grenzen"
+          },
+          "body": {
+            "de": "Die Zwischenlösung verwendet Szenenbilder, keine fertigen gesprochenen Filme. Externe Anmeldung, Mailzustellung und weitere Providerabläufe besitzen gesonderte Prüfgrenzen. Automatisch vorbereitete Angebots-PDFs haben noch keinen vollständigen PDF/UA-Nachweis. Juristische Inhalte werden zunächst im deutschen Original mit Sprachkennzeichnung bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Die Zwischenlösung verwendet Szenenbilder, keine fertigen gesprochenen Filme. Externe Anmeldung, Mailzustellung und weitere Providerabläufe besitzen gesonderte Prüfgrenzen. Automatisch vorbereitete Angebots-PDFs haben noch keinen vollständigen PDF/UA-Nachweis. Juristische Inhalte werden zunächst im deutschen Original mit Sprachkennzeichnung bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "fr": "Die Zwischenlösung verwendet Szenenbilder, keine fertigen gesprochenen Filme. Externe Anmeldung, Mailzustellung und weitere Providerabläufe besitzen gesonderte Prüfgrenzen. Automatisch vorbereitete Angebots-PDFs haben noch keinen vollständigen PDF/UA-Nachweis. Juristische Inhalte werden zunächst im deutschen Original mit Sprachkennzeichnung bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/barrierefreiheit.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "barrierefreiheit-04",
+          "heading": {
+            "de": "Barrierefreiheit · Feedback",
+            "nl": "Barrierefreiheit · Feedback",
+            "fr": "Barrierefreiheit · Feedback"
+          },
+          "body": {
+            "de": "Barrieren können per E-Mail an hello@nexifyai.cloud mit dem Betreff „Barrierefreiheit“ gemeldet werden. Rückmeldungen werden priorisiert geprüft.",
+            "nl": "Barrieren können per E-Mail an hello@nexifyai.cloud mit dem Betreff „Barrierefreiheit“ gemeldet werden. Rückmeldungen werden priorisiert geprüft.",
+            "fr": "Barrieren können per E-Mail an hello@nexifyai.cloud mit dem Betreff „Barrierefreiheit“ gemeldet werden. Rückmeldungen werden priorisiert geprüft."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/barrierefreiheit.txt",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Zugängliche Bedienung und verständliche Inhalte sind Entwicklungsziele. Diese Statusseite ist keine unbelegte Konformitätserklärung. Hinweise auf Hindernisse können über den Kontaktweg vorbereitet werden.",
-          "nl": "Toegankelijke bediening en begrijpelijke inhoud zijn ontwikkeldoelen. Deze statuspagina is geen onbewezen conformiteitsverklaring. Meldingen van belemmeringen kunnen via contact worden voorbereid.",
-          "fr": "Une utilisation accessible et des contenus compréhensibles sont des objectifs de développement. Cette page n’est pas une déclaration de conformité non étayée. Les difficultés peuvent être signalées par le parcours de contact."
+          "de": "Qualitätsrahmen, tatsächlich begrenzte Prüfungen und bekannte Grenzen der Zugänglichkeit. Keine pauschale Konformitäts- oder Zertifizierungsbehauptung.",
+          "nl": "Kwaliteitskader, daadwerkelijk beperkte controles en bekende toegankelijkheidsgrenzen. Geen algemene conformiteits- of certificeringsclaim.",
+          "fr": "Cadre de qualité, vérifications limitées et limites d’accessibilité connues. Aucune déclaration générale de conformité ni certification."
         },
         "canonical_path": "/barrierefreiheit",
         "canonical_origin": null,
@@ -2885,10 +3750,10 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
+      "implementation_status": "implemented",
       "content_kind": "legal_notice",
       "readiness": {
-        "content": "notice_only_legal_text_release_pending",
+        "content": "public_source_adapted_legal_review_pending",
         "transactions": "not_enabled",
         "backend": "not_required_for_content",
         "production_release": "not_claimed"
@@ -2897,8 +3762,8 @@
         "N1:prototypen/Rechtliches.dc.html"
       ],
       "source_refs": [
-        "docs/09-final/08-recht-und-compliance.md",
-        "config/regelwerk.json"
+        "config/legal-public-documents.json",
+        "docs/sources/legal-public-2026-10-28/barrierefreiheit.txt"
       ],
       "next_actions": [
         {
@@ -2921,7 +3786,8 @@
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "legal_review": "pending"
     },
     {
       "id": "cookies",
@@ -2932,35 +3798,106 @@
         "fr": "Cookies et paramètres"
       },
       "summary": {
-        "de": "Die Entscheidung über optionale Verarbeitung steht vor deren Aktivierung. Erforderliche Funktionen, Analyse und externe Medien sind getrennt zu erklären. Eine Entscheidung für eine Website ist keine automatische Einwilligung für eine andere Domain.",
-        "nl": "Optionele verwerking wordt pas na een keuze geactiveerd. Noodzakelijke functies, analyse en externe media worden apart uitgelegd. Een keuze voor één website is geen automatische toestemming voor een ander domein.",
-        "fr": "Le traitement facultatif n’est activé qu’après un choix. Fonctions nécessaires, analyse et médias externes sont expliqués séparément. Un choix sur un site ne vaut pas consentement automatique sur un autre domaine."
+        "de": "Tatsächliche Browser-Speicherungen, lokale Entwürfe und die gesonderte, standardmäßig ausgeschaltete Fehlerdiagnose. Keine domainübergreifende Einwilligung.",
+        "nl": "Werkelijke browseropslag, lokale concepten en afzonderlijke foutdiagnose die standaard uitstaat. Geen toestemming voor andere domeinen.",
+        "fr": "Stockage réel dans le navigateur, brouillons locaux et diagnostic distinct désactivé par défaut. Aucun consentement valable pour d’autres domaines."
       },
       "site_context": "nexify",
       "sections": [
         {
-          "id": "ueberblick",
+          "id": "stand-und-sprache",
           "heading": {
-            "de": "Cookies und Einstellungen",
-            "nl": "Cookies en instellingen",
-            "fr": "Cookies et paramètres"
+            "de": "Stand und Sprache",
+            "nl": "Versie en taal",
+            "fr": "Version et langue"
           },
           "body": {
-            "de": "Die Entscheidung über optionale Verarbeitung steht vor deren Aktivierung. Erforderliche Funktionen, Analyse und externe Medien sind getrennt zu erklären. Eine Entscheidung für eine Website ist keine automatische Einwilligung für eine andere Domain.",
-            "nl": "Optionele verwerking wordt pas na een keuze geactiveerd. Noodzakelijke functies, analyse en externe media worden apart uitgelegd. Een keuze voor één website is geen automatische toestemming voor een ander domein.",
-            "fr": "Le traitement facultatif n’est activé qu’après un choix. Fonctions nécessaires, analyse et médias externes sont expliqués séparément. Un choix sur un site ne vaut pas consentement automatique sur un autre domaine."
+            "de": "Übernommene öffentliche Fassung vom 11.09.2026, technisch angepasst am 28.10.2026. Die juristische Nachprüfung steht aus. Die Rechtsdokumente werden zunächst im deutschen Original bereitgestellt; es wird keine geprüfte juristische Übersetzung behauptet.",
+            "nl": "Overgenomen openbare versie van 11-09-2026, technisch aangepast op 28-10-2026. Juridische controle volgt nog. De juridische documenten worden eerst in het Duitse origineel getoond; er wordt geen gecontroleerde juridische vertaling geclaimd.",
+            "fr": "Version publique du 11/09/2026 reprise et adaptée techniquement le 28/10/2026. La vérification juridique reste à effectuer. Les documents sont d’abord présentés dans leur original allemand ; aucune traduction juridique validée n’est annoncée."
           },
           "source_refs": [
-            "docs/09-final/08-recht-und-compliance.md",
-            "config/regelwerk.json"
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "cookie-richtlinie-01",
+          "heading": {
+            "de": "Cookies und Speicherungen · Rechtsrahmen",
+            "nl": "Cookies und Speicherungen · Rechtsrahmen",
+            "fr": "Cookies und Speicherungen · Rechtsrahmen"
+          },
+          "body": {
+            "de": "Für Endgerätezugriffe gelten insbesondere § 25 TDDDG im deutschen Markt, Art. 5 Abs. 3 der ePrivacy-Richtlinie, Art. 6 DSGVO und in den Niederlanden Art. 11.7a Telecommunicatiewet.",
+            "nl": "Für Endgerätezugriffe gelten insbesondere § 25 TDDDG im deutschen Markt, Art. 5 Abs. 3 der ePrivacy-Richtlinie, Art. 6 DSGVO und in den Niederlanden Art. 11.7a Telecommunicatiewet.",
+            "fr": "Für Endgerätezugriffe gelten insbesondere § 25 TDDDG im deutschen Markt, Art. 5 Abs. 3 der ePrivacy-Richtlinie, Art. 6 DSGVO und in den Niederlanden Art. 11.7a Telecommunicatiewet."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/cookie-richtlinie.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "cookie-richtlinie-02",
+          "heading": {
+            "de": "Cookies und Speicherungen · Technisch notwendige Speicherungen",
+            "nl": "Cookies und Speicherungen · Technisch notwendige Speicherungen",
+            "fr": "Cookies und Speicherungen · Technisch notwendige Speicherungen"
+          },
+          "body": {
+            "de": "Sprachauswahl: nexify-locale in localStorage; bleibt auf diesem Gerät bis zur Änderung oder Löschung durch den Browser gespeichert.\nSeitenbegleitung: nexify-presenter-guide in sessionStorage; gilt für die jeweilige Browsersitzung bzw. den geöffneten Tab.\nProjektüberblick und ungesendete Chat-Eingaben: nur im Arbeitsspeicher der geöffneten Anwendung; kein eigener dauerhafter Speicherschlüssel. Neuladen verwirft den lokalen Projektüberblick.\nDie früher beschriebenen Sites-/Cloudflare-/Magiclink-Cookies und nexify-consent-v1 werden nicht als Speicherbestand dieser Anwendungsimplementierung übernommen. Gesonderte Hosting- oder Anmeldedienste sind getrennt zu beurteilen.",
+            "nl": "Sprachauswahl: nexify-locale in localStorage; bleibt auf diesem Gerät bis zur Änderung oder Löschung durch den Browser gespeichert.\nSeitenbegleitung: nexify-presenter-guide in sessionStorage; gilt für die jeweilige Browsersitzung bzw. den geöffneten Tab.\nProjektüberblick und ungesendete Chat-Eingaben: nur im Arbeitsspeicher der geöffneten Anwendung; kein eigener dauerhafter Speicherschlüssel. Neuladen verwirft den lokalen Projektüberblick.\nDie früher beschriebenen Sites-/Cloudflare-/Magiclink-Cookies und nexify-consent-v1 werden nicht als Speicherbestand dieser Anwendungsimplementierung übernommen. Gesonderte Hosting- oder Anmeldedienste sind getrennt zu beurteilen.",
+            "fr": "Sprachauswahl: nexify-locale in localStorage; bleibt auf diesem Gerät bis zur Änderung oder Löschung durch den Browser gespeichert.\nSeitenbegleitung: nexify-presenter-guide in sessionStorage; gilt für die jeweilige Browsersitzung bzw. den geöffneten Tab.\nProjektüberblick und ungesendete Chat-Eingaben: nur im Arbeitsspeicher der geöffneten Anwendung; kein eigener dauerhafter Speicherschlüssel. Neuladen verwirft den lokalen Projektüberblick.\nDie früher beschriebenen Sites-/Cloudflare-/Magiclink-Cookies und nexify-consent-v1 werden nicht als Speicherbestand dieser Anwendungsimplementierung übernommen. Gesonderte Hosting- oder Anmeldedienste sind getrennt zu beurteilen."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/cookie-richtlinie.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "cookie-richtlinie-03",
+          "heading": {
+            "de": "Cookies und Speicherungen · Optionale Komfortspeicherung",
+            "nl": "Cookies und Speicherungen · Optionale Komfortspeicherung",
+            "fr": "Cookies und Speicherungen · Optionale Komfortspeicherung"
+          },
+          "body": {
+            "de": "Optionale Fehlerdiagnose mit PostHog bleibt zunächst aus und benötigt Ihre ausdrückliche Zustimmung sowie eine gültige Projektkonfiguration. Die Auswahl und der Diagnosezustand werden nur im aktuellen Dokument gehalten, nicht in localStorage oder Cookies. Die Diagnose erfasst keine zusätzlichen Klickdaten, Nutzerprofile, Marketingdaten oder Sitzungsaufzeichnungen. Technische Netzwerkdaten fallen bei einer von Ihnen erlaubten Übertragung dennoch beim Empfänger an.",
+            "nl": "Optionale Fehlerdiagnose mit PostHog bleibt zunächst aus und benötigt Ihre ausdrückliche Zustimmung sowie eine gültige Projektkonfiguration. Die Auswahl und der Diagnosezustand werden nur im aktuellen Dokument gehalten, nicht in localStorage oder Cookies. Die Diagnose erfasst keine zusätzlichen Klickdaten, Nutzerprofile, Marketingdaten oder Sitzungsaufzeichnungen. Technische Netzwerkdaten fallen bei einer von Ihnen erlaubten Übertragung dennoch beim Empfänger an.",
+            "fr": "Optionale Fehlerdiagnose mit PostHog bleibt zunächst aus und benötigt Ihre ausdrückliche Zustimmung sowie eine gültige Projektkonfiguration. Die Auswahl und der Diagnosezustand werden nur im aktuellen Dokument gehalten, nicht in localStorage oder Cookies. Die Diagnose erfasst keine zusätzlichen Klickdaten, Nutzerprofile, Marketingdaten oder Sitzungsaufzeichnungen. Technische Netzwerkdaten fallen bei einer von Ihnen erlaubten Übertragung dennoch beim Empfänger an."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/cookie-richtlinie.txt",
+            "config/legal-public-documents.json"
+          ]
+        },
+        {
+          "id": "cookie-richtlinie-04",
+          "heading": {
+            "de": "Cookies und Speicherungen · Einstellungen und Widerruf",
+            "nl": "Cookies und Speicherungen · Einstellungen und Widerruf",
+            "fr": "Cookies und Speicherungen · Einstellungen und Widerruf"
+          },
+          "body": {
+            "de": "Über Fehlerdiagnose-Einstellungen im Footer können Sie zustimmen, ablehnen oder eine erteilte Einwilligung widerrufen. Ablehnung schränkt die Seitenfunktionen nicht ein. Nach Widerruf bleibt die Diagnose in diesem Dokument gesperrt; Neuladen eröffnet eine neue, zunächst ausgeschaltete Auswahl. Die Rechtmäßigkeit einer bereits erfolgten Verarbeitung bleibt vom späteren Widerruf unberührt. Eine Auswahl für diese Website ist keine automatische Einwilligung für eine andere Domain.",
+            "nl": "Über Fehlerdiagnose-Einstellungen im Footer können Sie zustimmen, ablehnen oder eine erteilte Einwilligung widerrufen. Ablehnung schränkt die Seitenfunktionen nicht ein. Nach Widerruf bleibt die Diagnose in diesem Dokument gesperrt; Neuladen eröffnet eine neue, zunächst ausgeschaltete Auswahl. Die Rechtmäßigkeit einer bereits erfolgten Verarbeitung bleibt vom späteren Widerruf unberührt. Eine Auswahl für diese Website ist keine automatische Einwilligung für eine andere Domain.",
+            "fr": "Über Fehlerdiagnose-Einstellungen im Footer können Sie zustimmen, ablehnen oder eine erteilte Einwilligung widerrufen. Ablehnung schränkt die Seitenfunktionen nicht ein. Nach Widerruf bleibt die Diagnose in diesem Dokument gesperrt; Neuladen eröffnet eine neue, zunächst ausgeschaltete Auswahl. Die Rechtmäßigkeit einer bereits erfolgten Verarbeitung bleibt vom späteren Widerruf unberührt. Eine Auswahl für diese Website ist keine automatische Einwilligung für eine andere Domain."
+          },
+          "body_locale": "de",
+          "source_refs": [
+            "docs/sources/legal-public-2026-10-28/cookie-richtlinie.txt",
+            "config/legal-public-documents.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Die Entscheidung über optionale Verarbeitung steht vor deren Aktivierung. Erforderliche Funktionen, Analyse und externe Medien sind getrennt zu erklären. Eine Entscheidung für eine Website ist keine automatische Einwilligung für eine andere Domain.",
-          "nl": "Optionele verwerking wordt pas na een keuze geactiveerd. Noodzakelijke functies, analyse en externe media worden apart uitgelegd. Een keuze voor één website is geen automatische toestemming voor een ander domein.",
-          "fr": "Le traitement facultatif n’est activé qu’après un choix. Fonctions nécessaires, analyse et médias externes sont expliqués séparément. Un choix sur un site ne vaut pas consentement automatique sur un autre domaine."
+          "de": "Tatsächliche Browser-Speicherungen, lokale Entwürfe und die gesonderte, standardmäßig ausgeschaltete Fehlerdiagnose. Keine domainübergreifende Einwilligung.",
+          "nl": "Werkelijke browseropslag, lokale concepten en afzonderlijke foutdiagnose die standaard uitstaat. Geen toestemming voor andere domeinen.",
+          "fr": "Stockage réel dans le navigateur, brouillons locaux et diagnostic distinct désactivé par défaut. Aucun consentement valable pour d’autres domaines."
         },
         "canonical_path": "/cookies",
         "canonical_origin": null,
@@ -2975,10 +3912,10 @@
         "tenant_required": false,
         "mfa_required_for_writes": false
       },
-      "implementation_status": "planned",
+      "implementation_status": "implemented",
       "content_kind": "legal_notice",
       "readiness": {
-        "content": "notice_only_legal_text_release_pending",
+        "content": "public_source_adapted_legal_review_pending",
         "transactions": "not_enabled",
         "backend": "not_required_for_content",
         "production_release": "not_claimed"
@@ -2987,8 +3924,8 @@
         "N1:prototypen/Rechtliches.dc.html"
       ],
       "source_refs": [
-        "docs/09-final/08-recht-und-compliance.md",
-        "config/regelwerk.json"
+        "config/legal-public-documents.json",
+        "docs/sources/legal-public-2026-10-28/cookie-richtlinie.txt"
       ],
       "next_actions": [
         {
@@ -3011,7 +3948,8 @@
         }
       ],
       "shared_chat_required": true,
-      "cookie_preferences_first": true
+      "cookie_preferences_first": true,
+      "legal_review": "pending"
     },
     {
       "id": "login",
@@ -5702,6 +6640,11 @@
         "sha256": "df83cd819c89726ad98e5a1e7f010ec0d0547517e2a728ab70782bc5328dc851",
         "hash_policy": "source_snapshot_not_runtime_claim"
       }
-    ]
+    ],
+    "current_public_legal_source_adapted": {
+      "manifest": "config/legal-public-documents.json",
+      "automatic_legal_translation": false,
+      "legal_review": "pending"
+    }
   }
 }

@@ -1,0 +1,54 @@
+NeXify AI
+ · Rechtszentrum
+Datenschutzerklärung
+Transparenz über Datenwege, Zwecke, Rechtsgrundlagen und Rechte nach der DSGVO sowie über lokale Speicherungen nach dem TDDDG und der niederländischen Telecommunicatiewet.
+Stand: 
+11. September 2026
+Transparenter Arbeitsstand
+Diese Fassung bildet den aktuellen technischen Betrieb und die B2B-Ausrichtung ab. Sie ersetzt keine individuelle anwaltliche Beratung oder behördliche Prüfung.
+01
+Verantwortlicher
+NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande
+Datenschutzanfragen: hello@nexifyai.cloud
+Es findet keine ausschließlich automatisierte Entscheidung mit rechtlicher oder ähnlich erheblicher Wirkung statt.
+02
+Hosting und sichere Anmeldung
+Diese öffentlich erreichbare Premium-Site wird über ChatGPT Sites bereitgestellt. Für Auslieferung, Sicherheit und technische Protokolle können OpenAI und die zugrunde liegende Cloudflare-Infrastruktur technische Verbindungsdaten verarbeiten. Im Kundenportal wird die geschäftliche E-Mail-Adresse durch einen zeitlich begrenzten Einmal-Link bestätigt; Projektberechtigungen werden davon getrennt serverseitig geprüft. Die Bestätigungs-E-Mail wird über Resend zugestellt.
+Zweck: sichere Bereitstellung, Identitätsbestätigung und Missbrauchsabwehr
+Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO; bei Vertragsanbahnung und Kundenbereich zusätzlich Art. 6 Abs. 1 lit. b DSGVO
+Bestätigungslinks sind 20 Minuten, Portalsitzungen höchstens 30 Tage gültig
+Keine Newsletter-Anmeldung im Registrierungsprozess
+03
+Kontakt und Angebotsgenerator
+Kontaktangaben, Unternehmensdaten, Projektparameter und ausgewählte Leistungsmodule werden nur verarbeitet, wenn Sie diese aktiv übermitteln. Die Verarbeitung dient der vorvertraglichen Einordnung, Kalkulation und Kommunikation. Der Angebotsgenerator versendet erst nach ausdrücklicher Bestätigung; ohne eingerichteten Versanddienst werden keine Daten an einen E-Mail-Dienst übertragen.
+Datenkategorien: Name, geschäftliche Kontaktdaten, Unternehmen, USt-ID, Bedarf und Kalkulationsparameter
+Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO
+Empfänger nach Aktivierung: Resend als E-Mail-Auftragsverarbeiter; NeXify AI als Empfänger
+04
+NeXify AI Website-Assistent
+Nachrichten werden erst beim bewussten Absenden an eine serverseitige Site-Route übermittelt. Die Antwort wird vorrangig aus der Website-Wissensbasis abgeleitet; bei aktiviertem AI-Dienst wird nur der für die Frage gefundene Wissenskontext serverseitig an den konfigurierten Modellanbieter übermittelt. Zugangsdaten verbleiben serverseitig. Bitte übermitteln Sie keine Passwörter, Zahlungsdaten, Gesundheitsdaten oder andere besonders sensible Informationen.
+Zweck: Erstorientierung und wissensgestützte Beantwortung
+Kennzeichnung: Interaktion mit einem KI-System
+Verbindliche Empfehlungen und Beauftragungen bleiben menschlich geprüft
+05
+Cookies und lokale Speicherung
+Es werden keine Marketing- oder Reichweiten-Tracker durch NeXify AI geladen. Technisch notwendige Sitzungs- und Sicherheitscookies können durch ChatGPT Sites, OpenAI oder Cloudflare gesetzt werden. Die Consent-Präferenz wird lokal im Browser gespeichert.
+Technisch notwendig: Bereitstellung, Sicherheit, Anmeldung
+Optional: Komfortpräferenz nur nach Auswahl
+Einstellungen können jederzeit im Footer geändert werden
+06
+Speicherdauer
+Daten werden nur so lange gespeichert, wie Zweck, Vertragsabwicklung, Sicherheit, Nachweis- oder gesetzliche Aufbewahrungspflichten dies erfordern. Angebots- und Geschäftskorrespondenz kann entsprechend niederländischer steuer- und handelsrechtlicher Pflichten aufbewahrt werden. Nicht abgesendete Eingaben verbleiben im Browser und werden nicht serverseitig gespeichert.
+07
+Ihre Rechte
+Auskunft, Berichtigung, Löschung und Einschränkung
+Datenübertragbarkeit und Widerspruch
+Widerruf einer Einwilligung mit Wirkung für die Zukunft
+Beschwerde bei einer Datenschutzaufsichtsbehörde
+08
+Sicherheit und Änderungen
+NeXify nutzt Transportverschlüsselung, serverseitige Geheimnisse, Zugriffstrennung, Eingabevalidierung, Rate Limits und protokollierte Freigaben. Diese Erklärung wird bei technischen oder rechtlichen Änderungen angepasst.
+Maßgebliche öffentliche Quellen
+Datenschutz-Grundverordnung (EU) 2016/679
+Alle Rechtstexte 
+Rückfrage stellen 
