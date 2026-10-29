@@ -12,20 +12,40 @@
 .connection-indicator { width: 7px; height: 7px; border-radius: var(--radius-pille); background: var(--color-text-gedaempft); }
 .connection-indicator.available { background: var(--color-semantik-erfolg); }
 .conversation { padding: 28px 20px; }
-.welcome-card > p { font-size: 27px; line-height: 1.2; margin: 16px 0 28px; }
-.action-options { gap: 10px; }
-.action-option { min-height: 58px; background: transparent; border-color: var(--color-linie-mittel); border-radius: var(--radius-chip); padding: 14px; }
-.action-option:hover { background: var(--color-graphit-700); border-color: var(--color-linie-stark); }
+.welcome-card { display: grid; gap: 10px; }
+.welcome-card > .eyebrow { color: var(--color-text-gedaempft); font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.welcome-card > p:not(.welcome-body) { font-size: 32px; line-height: 1.08; letter-spacing: -.025em; font-weight: 650; margin: 0 0 4px; color: var(--color-text-primaer); }
+.welcome-card > .welcome-body { font-size: 15px; line-height: 1.55; color: var(--color-text-tertiaer); margin: 0 0 18px; max-width: 46ch; }
+.welcome-card > .text-button { justify-self: start; padding: 4px 0; min-height: 32px; font-size: 11px; color: var(--color-marke-lime); margin: 0 0 10px; }
+.action-options { gap: 0; display: grid; margin-top: 6px; }
+.action-option { min-height: 56px; background: transparent; border: 0; border-top: 1px solid var(--color-linie-mittel); border-radius: 0; padding: 16px 2px; justify-content: flex-start; font-size: 15px; font-weight: 500; color: var(--color-text-primaer); gap: 14px; }
+.action-option:last-child { border-bottom: 1px solid var(--color-linie-mittel); }
+.action-option:hover { background: transparent; color: var(--color-marke-lime); border-top-color: var(--color-marke-lime); }
+.action-option:hover + .action-option { border-top-color: var(--color-marke-lime); }
+.action-option > span:first-child { color: var(--color-text-tertiaer); width: 22px; }
+.action-option > span:last-child { margin-left: auto; color: var(--color-text-tertiaer); font-size: 18px; }
+.action-option:hover > span { color: var(--color-marke-lime); }
 .action-card { margin-top: 28px; background: var(--color-graphit-800); border: 1px solid var(--color-linie-mittel); padding: 20px; border-radius: var(--radius-karte); }
 .action-card-heading { align-items: start; gap: 12px; }
 .action-card h3 { font-size: 20px; }
 .action-card form { gap: 16px; }
 .result-card { border-left: 2px solid var(--color-marke-lime); border-radius: 0; }
-.composer-area { padding: 16px 20px 20px; }
-.composer { background: var(--color-graphit-800); border-radius: var(--radius-karte); }
-.composer textarea { min-height: 76px; }
-.connection-note { line-height: 1.6; margin-top: 12px; color: var(--color-text-gedaempft); }
-.send-button { min-width: 44px; min-height: 44px; }
+.composer-area { padding: 20px 20px 24px; border-top: 1px solid var(--color-linie-mittel); display: grid; gap: 16px; }
+.composer { background: transparent; border: 1px solid var(--color-linie-mittel); border-radius: var(--radius-karte); padding: 14px 16px; transition: border-color .18s ease; }
+.composer:focus-within { border-color: var(--color-marke-lime); }
+.composer label.visually-hidden + textarea::placeholder { color: var(--color-text-primaer); font-weight: 500; }
+.composer textarea { min-height: 54px; background: transparent; border: 0; padding: 0; font-size: 14px; color: var(--color-text-primaer); }
+.composer textarea::placeholder { color: var(--color-text-primaer); font-size: 15px; font-weight: 500; }
+.composer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--color-linie-fein); }
+.composer-bottom > span { color: var(--color-text-gedaempft); font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; }
+.send-button { min-width: auto; min-height: 44px; width: auto; padding: 8px 18px; border-radius: var(--radius-pille); background: var(--gradient-button-primaer); color: var(--color-text-auf-lime); border: 0; font-size: 13px; font-weight: 650; box-shadow: var(--shadow-button-primaer); display: inline-flex; align-items: center; gap: 10px; }
+.send-button::after { content: "↗"; font-size: 15px; }
+.send-button:disabled { opacity: .55; cursor: wait; }
+.connection-note { line-height: 1.6; margin: 0; color: var(--color-text-gedaempft); font-size: 11px; }
+.panel-footnote { display: grid; gap: 4px; padding-top: 12px; border-top: 1px solid var(--color-linie-mittel); color: var(--color-text-gedaempft); font-size: 11px; }
+.panel-footnote strong { color: var(--color-text-sekundaer); font-weight: 500; font-size: 13px; }
+.panel-footnote-status { display: flex; justify-content: space-between; gap: 8px; margin-top: 6px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--color-text-gedaempft); text-transform: uppercase; }
+.panel-footnote-status b { color: var(--color-marke-lime); font-weight: 500; }
 .site-header .main-navigation { align-items: center; }
 .main-navigation [aria-current=page] { color: var(--color-text-primaer); text-decoration: underline; text-decoration-color: var(--color-marke-lime); text-underline-offset: 8px; }
 .product-navigation { position: relative; }
@@ -35,7 +55,7 @@
 .product-navigation-menu a { gap: 24px; padding: 12px; border-radius: var(--radius-klein); }
 .product-navigation-menu a:hover { background: var(--color-graphit-700); }
 .product-navigation-menu a span { margin-left: auto; color: var(--color-marke-lime); }
-.panel-page-context { display: grid; gap: 4px; margin-bottom: 24px; color: var(--color-text-gedaempft); font-size: 11px; }
+.panel-page-context { display: grid; gap: 4px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--color-linie-fein); color: var(--color-text-gedaempft); font-size: 11px; }
 .panel-page-context strong { color: var(--color-text-tertiaer); font-size: 13px; font-weight: 450; }
 .quote-view-switch { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
 .quote-view-switch button { font-size: 12px; background: transparent; }

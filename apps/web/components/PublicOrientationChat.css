@@ -13,7 +13,7 @@
 .orientation-composer label { font-size: 12px; color: var(--color-text-tertiaer); }
 .orientation-composer textarea { background: var(--color-graphit-800); font-size: 14px; }
 .orientation-composer button { min-height: 44px; box-shadow: none; font-size: 13px; }
-.workspace-chat-modes { display: flex; gap: 8px; margin: 20px 20px 0; }
+.workspace-chat-modes { display: flex; gap: 8px; margin: 20px 20px 12px; }
 .workspace-chat-modes button { flex: 1; background: transparent; font-size: 12px; min-height: 44px; padding: 8px; }
 .workspace-chat-modes button[aria-pressed=true] { color: var(--color-marke-lime); border-color: var(--color-marke-lime); }
 .orientation-loading { flex: 1; padding: 24px 20px; color: var(--color-text-tertiaer); font-size: 13px; }
