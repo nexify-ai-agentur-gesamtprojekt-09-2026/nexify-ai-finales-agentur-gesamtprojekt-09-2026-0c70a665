@@ -1,0 +1,202 @@
+/* TrioScene – Graphit-Bühne nach Zielbild: Lichtbänder, spiegelnder Boden, freie Figuren, kein Playerkasten.
+   Nur Tokens (keine lokalen Hex-/RGBA-Werte). Licht simuliert von oben links (45°): Schatten +x/+y, Rimlight -x/-y.
+   Zwei Darstellungen: .has-media (echte Loop-Clips, weich in die Fläche maskiert) und .has-figures (CSS-Freisteller). */
+.trio-scene { container: trio / inline-size; position: relative; min-width: 0; color: var(--color-text-primaer); }
+.trio-frame { position: relative; min-width: 0; }
+.trio-stage { position: relative; isolation: isolate; aspect-ratio: 4 / 3; min-width: 0; outline: none; border-radius: var(--radius-leit); }
+.has-media .trio-stage { aspect-ratio: 3 / 2; }
+.trio-stage:focus-visible { outline: var(--focus-ring); outline-offset: var(--space-2); }
+
+/* Lichtbänder */
+.trio-light { position: absolute; inset: -22% -34% -6%; width: auto; height: auto; max-width: none; z-index: 0; pointer-events: none; overflow: visible; }
+.trio-ribbon { fill: none; stroke-width: 2.4; stroke-linecap: round; opacity: .55; }
+.trio-ribbon-glow { stroke-width: 26; opacity: .22; }
+.trio-ribbon-soft { stroke-width: 1.6; opacity: .3; }
+.trio-ribbon-cyan { stroke-width: 1.4; opacity: .28; }
+.is-playing .trio-ribbon { animation: trio-breathe 7s ease-in-out infinite alternate; }
+.has-media .trio-light { opacity: .55; }
+
+/* Boden mit Spiegelung */
+.trio-floor { position: absolute; left: -12%; right: -12%; bottom: 0; height: 36%; z-index: 0; pointer-events: none;
+  background:
+   radial-gradient(ellipse 62% 70% at 46% 100%, color-mix(in srgb, var(--color-marke-lime) 11%, transparent), transparent 72%),
+   radial-gradient(ellipse 30% 40% at 82% 100%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 70%),
+   linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-graphit-900) 70%, transparent) 60%, color-mix(in srgb, var(--color-graphit-900) 40%, transparent)); }
+.trio-floor::before { content: ''; position: absolute; left: 8%; right: 8%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-marke-lime) 22%, transparent) 40%, color-mix(in srgb, var(--color-text-primaer) 10%, transparent) 60%, transparent); }
+.has-media .trio-floor { display: none; }
+
+/* Echte Clips: Poster unten, Intro darüber, Loop oben – alle weich in die Markenfläche maskiert (kein Rahmen, keine Kante) */
+.trio-media { position: absolute; inset: 0; z-index: 2; overflow: hidden; border-radius: var(--radius-leit); transition: filter .6s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  -webkit-mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 93%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 9%, var(--color-graphit-900) 80%, transparent);
+  mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 93%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 9%, var(--color-graphit-900) 80%, transparent);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+.trio-poster, .trio-clip { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 54%; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.trio-poster { z-index: 1; }
+.trio-clip-intro { z-index: 2; opacity: 0; transition: opacity .3s ease; }
+.trio-clip-loop { z-index: 3; opacity: 0; transition: opacity .45s ease; }
+.clip-intro .trio-clip-intro { opacity: 1; }
+.clip-loop .trio-clip-loop { opacity: 1; }
+.clip-loop .trio-clip-intro { opacity: 0; }
+.is-finale .trio-media, .is-ended .trio-media { filter: brightness(.72) saturate(.9); }
+
+/* Sprecher-Licht auf dem Boden (nur Clip-Modus): zeigt, wer gerade spricht, ohne die Figur zu verändern */
+.trio-speaker-light { position: absolute; z-index: 3; bottom: 6%; width: 34%; height: 14%; left: 50%; transform: translateX(-50%); border-radius: 50%; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--color-marke-lime) 36%, transparent), transparent 70%); filter: blur(10px); animation: trio-speaker-in .5s ease both; }
+.has-media .trio-speaker-light { opacity: 1; }
+.trio-speaker-pascal { left: 50%; }
+.trio-speaker-nex { left: 27%; }
+.trio-speaker-oracle { left: 75%; bottom: 12%; width: 26%; }
+.trio-project .trio-speaker-nex { left: 32%; }
+.trio-project .trio-speaker-oracle { left: 74%; bottom: 8%; }
+.trio-choice .trio-speaker-nex { left: 24%; }
+.trio-choice .trio-speaker-oracle { left: 77%; bottom: 18%; }
+
+/* Figuren (CSS-Freisteller, Fallback) */
+.trio-figure { position: absolute; z-index: 3; transition: transform .7s cubic-bezier(.2,.7,.2,1), opacity .6s ease, filter .6s ease; will-change: transform; }
+.trio-body { position: relative; z-index: 2; display: block; width: 100%; height: auto; max-width: none; user-select: none; -webkit-user-drag: none; filter: drop-shadow(10px 14px 18px color-mix(in srgb, var(--color-graphit-900) 65%, transparent)); transition: filter .6s ease; }
+.trio-reflection { position: absolute; z-index: 1; left: 0; top: 100%; width: 100%; height: auto; max-width: none; transform: scaleY(-1); transform-origin: top center; opacity: .42; filter: blur(2.5px) saturate(.9); pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, color-mix(in srgb, var(--color-graphit-900) 70%, transparent), transparent 46%); mask-image: linear-gradient(180deg, color-mix(in srgb, var(--color-graphit-900) 70%, transparent), transparent 46%); }
+.trio-contact { position: absolute; z-index: 0; left: 6%; right: 6%; bottom: -1.5%; height: 5%; border-radius: 50%; background: radial-gradient(ellipse at center, color-mix(in srgb, var(--color-graphit-900) 92%, transparent), transparent 70%); filter: blur(5px); transition: background .6s ease, opacity .6s ease; }
+.trio-oracle .trio-contact { display: none; }
+.trio-oracle .trio-reflection { opacity: .18; top: 128%; }
+
+/* Positionen – Welcome (Hero): NeX links, Pascal Mitte, AIFly rechts oben (Zielbild) */
+.trio-welcome .trio-nex { left: 2%; width: 30%; bottom: 20%; }
+.trio-welcome .trio-pascal { left: 34%; width: 27%; bottom: 20%; z-index: 4; }
+.trio-welcome .trio-oracle { left: 66%; width: 21%; bottom: 52%; }
+/* Projekt (S01): Pascal links stehend, NeX Mitte, AIFly über den Stationen */
+.trio-project .trio-pascal { left: 0; width: 40%; bottom: 26%; z-index: 4; }
+.trio-project .trio-nex { left: 40%; width: 25%; bottom: 26%; }
+.trio-project .trio-oracle { left: 70%; width: 19%; bottom: 58%; }
+/* Einstieg (S02): NeX vorn links, Pascal Mitte, AIFly rechts */
+.trio-choice .trio-nex { left: 2%; width: 30%; bottom: 20%; }
+.trio-choice .trio-pascal { left: 36%; width: 24%; bottom: 20%; z-index: 4; }
+.trio-choice .trio-oracle { left: 66%; width: 19%; bottom: 56%; }
+
+/* Ruhiges Schweben von AIFly */
+.trio-oracle .trio-body { animation: trio-float 6.5s ease-in-out infinite; }
+.is-paused:not(.is-idle) .trio-oracle .trio-body { animation-play-state: paused; }
+
+/* Einlauf 0–4 s: Pascal/NeX gehen aus leicht zurückliegender Position nach vorn, AIFly gleitet mit */
+.is-entering .trio-pascal, .is-entering .trio-nex { animation: trio-walk 4s cubic-bezier(.2,.7,.2,1) both; }
+.is-entering .trio-pascal .trio-body, .is-entering .trio-nex .trio-body { animation: trio-step .48s ease-in-out 8 alternate; }
+.is-entering .trio-oracle { animation: trio-glide 4s cubic-bezier(.2,.7,.2,1) both; }
+.is-paused .trio-figure, .is-paused .trio-figure .trio-body { animation-play-state: paused; }
+
+/* Sprechen: Licht, Haltung, Zuhören */
+.trio-figure.is-speaking { transform: translateY(-2%) scale(1.04); }
+.trio-figure.is-speaking .trio-body { filter: drop-shadow(10px 14px 18px color-mix(in srgb, var(--color-graphit-900) 65%, transparent)) drop-shadow(-4px -6px 16px color-mix(in srgb, var(--color-marke-lime) 38%, transparent)); }
+.trio-figure.is-speaking .trio-contact { background: radial-gradient(ellipse at center, color-mix(in srgb, var(--color-marke-lime) 42%, transparent), transparent 72%); }
+.trio-figure.is-listening { opacity: 1; } /* Charakterbibel: Zuhörende werden nicht abgedunkelt */
+
+/* Untertitel: eigene Zeile UNTER der Bühne – liegt nie vor einer Figur (Nutzervorgabe). Feste Höhe, damit nichts springt. */
+.trio-caption-bar { display: flex; align-items: flex-start; min-height: calc(var(--type-small-size) * 1.5 * 2 + var(--space-3) * 2 + var(--space-5)); margin-top: var(--space-2); padding-inline: var(--space-2); }
+.trio-caption { margin: 0; max-width: 70ch; padding: var(--space-3) var(--space-4); border-radius: var(--radius-karte); font-size: var(--type-small-size); line-height: 1.5; color: var(--color-text-primaer);
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); align-items: baseline;
+  background: color-mix(in srgb, var(--color-graphit-800) 72%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur));
+  border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 12%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte); animation: trio-caption-in .35s ease both; }
+.trio-caption strong { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-marke-lime); white-space: nowrap; }
+
+/* Schlussgrafik: baut sich nach dem letzten Satz auf – in freien Zonen der Komposition, nie über den Figuren */
+.trio-finale { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s linear .5s; }
+.is-finale .trio-finale, .is-ended .trio-finale { opacity: 1; visibility: visible; transition: opacity .5s ease; }
+.trio-finale > * { pointer-events: auto; }
+.trio-rise { opacity: 0; transform: translateY(16px); }
+.is-finale .trio-rise, .is-ended .trio-rise { animation: trio-rise .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * .32s + .2s); }
+/* Figuren-Modus: Trio macht Platz */
+.has-figures.is-finale .trio-figure, .has-figures.is-ended .trio-figure { transform: translateX(var(--trio-shift, -12%)); }
+.has-figures.is-finale .trio-oracle, .has-figures.is-ended .trio-oracle { transform: translate(var(--trio-shift-oracle, -32%), -8%); }
+.has-figures.trio-welcome.is-finale .trio-oracle, .has-figures.trio-welcome.is-ended .trio-oracle { transform: translate(-22%, -14%); }
+.has-figures.trio-project.is-finale .trio-pascal, .has-figures.trio-project.is-ended .trio-pascal { transform: none; }
+.has-figures.trio-project.is-finale .trio-nex, .has-figures.trio-project.is-ended .trio-nex { transform: translateX(-30%); }
+.has-figures.trio-project.is-finale .trio-oracle, .has-figures.trio-project.is-ended .trio-oracle { transform: translate(-4%, 92%); }
+.has-figures.trio-choice.is-finale .trio-oracle, .has-figures.trio-choice.is-ended .trio-oracle { transform: translate(-6%, -10%); }
+.has-figures .trio-welcome .trio-paths, .has-figures.trio-welcome .trio-paths { right: 3%; bottom: 22%; width: 30%; }
+.has-figures.trio-project .trio-overview { right: 3%; top: 2%; bottom: auto; width: 36%; }
+.has-figures.trio-choice .trio-paths { right: 3%; bottom: 20%; width: 32%; }
+/* Clip-Modus: freie Zonen (Welcome/Einstieg: oben links; Projekt: oben rechts) */
+.has-media.trio-welcome .trio-paths, .has-media.trio-choice .trio-paths { left: 3%; top: 5%; right: auto; bottom: auto; width: 34%; }
+.has-media.trio-project .trio-overview { right: 3%; top: 4%; bottom: auto; width: 38%; }
+
+/* Schlussgrafik-Bausteine (geteilt) */
+.trio-paths { position: absolute; right: 4%; bottom: 24%; display: grid; gap: var(--space-3); width: 30%; min-width: 180px; }
+.trio-paths-title { margin: 0 0 var(--space-1); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-tertiaer); }
+.trio-path-link { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: var(--layout-control-size); padding: var(--space-3) var(--space-4); border-radius: var(--radius-karte); color: var(--color-text-primaer); text-decoration: none;
+  background: color-mix(in srgb, var(--color-graphit-800) 70%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur)); border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 12%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte); transition: border-color var(--motion-feedback), transform var(--motion-feedback); }
+.trio-path-link strong { display: block; font-family: var(--font-display); font-size: 16px; font-weight: 600; }
+.trio-path-link small { display: block; margin-top: 2px; color: var(--color-text-tertiaer); font-size: var(--type-small-size); }
+.trio-path-link i { font-style: normal; color: var(--color-marke-lime); transition: transform var(--motion-feedback); }
+.trio-path-link:hover { border-color: var(--color-marke-lime); transform: translateX(2px); }
+.trio-path-link:hover i { transform: translate(2px, -2px); }
+.trio-path-link:active { transform: translateX(0); }
+.trio-overview { position: absolute; right: 3%; bottom: 20%; width: 38%; min-width: 220px; padding: var(--space-5); border-radius: var(--radius-karte); color: var(--color-text-primaer);
+  background: color-mix(in srgb, var(--color-graphit-800) 74%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur)); border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 12%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-karte); }
+.trio-overview h3 { margin: 0 0 var(--space-3); font-family: var(--font-display); font-size: 17px; font-weight: 600; }
+.trio-overview dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2) var(--space-4); margin: 0; font-size: var(--type-small-size); }
+.trio-overview dt { color: var(--color-marke-lime); font-weight: 600; }
+.trio-overview dd { margin: 0; color: var(--color-text-sekundaer); }
+.trio-overview .trio-path-link { margin-top: var(--space-4); background: var(--color-marke-lime); color: var(--color-text-auf-lime); border-color: transparent; }
+.trio-overview .trio-path-link i { color: var(--color-text-auf-lime); }
+
+/* Controls im Fluss unter der Bühne – echte DOM-Bedienung, kein Gehäuse, nichts liegt vor den Figuren */
+.trio-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2); padding-inline: var(--space-2); }
+.trio-scene .trio-control { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--layout-control-size); min-width: var(--layout-control-size); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pille); font-size: var(--type-small-size); font-weight: 600; color: var(--color-text-primaer); cursor: pointer;
+  background: color-mix(in srgb, var(--color-graphit-800) 72%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur)); border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 14%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte); transition: border-color var(--motion-feedback), color var(--motion-feedback), transform var(--motion-feedback), background-color var(--motion-feedback); }
+.trio-scene .trio-control:hover { border-color: var(--color-marke-lime); color: var(--color-marke-lime); }
+.trio-scene .trio-control:active { transform: scale(.98); }
+.trio-scene .trio-control:disabled { opacity: var(--control-disabled-opacity, .5); cursor: not-allowed; }
+.trio-scene .trio-control[aria-pressed=true]:not(.trio-control-main) { color: var(--color-marke-lime); }
+.trio-scene .trio-control-main { background: var(--gradient-button-primaer); color: var(--color-text-auf-lime); border-color: transparent; box-shadow: var(--shadow-button-primaer); padding-inline: var(--space-5); }
+.trio-scene .trio-control-main:hover { color: var(--color-text-auf-lime); filter: brightness(1.05); }
+.trio-icon { width: 18px; height: 18px; flex: 0 0 18px; }
+.trio-control-label { display: none; }
+.trio-control-main span { display: inline; }
+
+/* Meta: Verlauf, Zeit, Transkript */
+.trio-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-2) var(--space-4); margin-top: var(--space-3); padding-inline: var(--space-2); color: var(--color-text-tertiaer); font-size: var(--type-small-size); }
+.trio-progress { width: 100%; min-height: var(--layout-control-size); margin: 0; padding: 0; border: 0; background: transparent; accent-color: var(--color-marke-lime); cursor: pointer; }
+.trio-progress:disabled { cursor: default; opacity: .5; }
+.trio-time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.trio-transcript { grid-column: 1 / -1; }
+.trio-transcript summary { display: flex; align-items: center; min-height: var(--layout-control-size); width: fit-content; cursor: pointer; }
+.trio-transcript p { margin: var(--space-3) 0; max-width: 65ch; line-height: var(--type-body-leading); color: var(--color-text-sekundaer); }
+.trio-transcript strong { color: var(--color-text-primaer); }
+.trio-status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); min-height: 1lh; margin: var(--space-1) var(--space-2) 0; font-size: var(--type-small-size); color: var(--color-text-tertiaer); }
+.trio-status:empty { display: none; }
+
+/* Keyframes – nur transform/opacity */
+@keyframes trio-walk { from { transform: translate(-14%, -9%) scale(.82); opacity: 0; } 18% { opacity: 1; } to { transform: translate(0, 0) scale(1); opacity: 1; } }
+@keyframes trio-step { from { transform: translateY(0) rotate(-.8deg); } to { transform: translateY(-1.6%) rotate(.8deg); } }
+@keyframes trio-glide { from { transform: translate(26%, -16%) scale(.9); opacity: 0; } 20% { opacity: 1; } to { transform: translate(0, 0) scale(1); opacity: 1; } }
+@keyframes trio-float { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-2.2%) rotate(.6deg); } }
+@keyframes trio-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes trio-caption-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes trio-speaker-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes trio-breathe { from { opacity: .4; } to { opacity: .7; } }
+
+/* Kompakt: eigene hohe Komposition (Figuren) bzw. vollständiger Clip ohne Beschnitt (Media), nichts croppen */
+@container trio (max-width: 540px) {
+  .has-figures .trio-stage { aspect-ratio: 4 / 5; }
+  .has-media .trio-stage { aspect-ratio: 16 / 9; }
+  .has-media .trio-poster, .has-media .trio-clip { object-fit: contain; }
+  .trio-welcome .trio-nex, .trio-choice .trio-nex { left: 0; width: 42%; bottom: 20%; }
+  .trio-welcome .trio-pascal, .trio-choice .trio-pascal { left: 34%; width: 36%; bottom: 20%; }
+  .trio-welcome .trio-oracle, .trio-choice .trio-oracle { left: 66%; width: 30%; bottom: 60%; }
+  .trio-project .trio-pascal { left: 0; width: 52%; bottom: 20%; }
+  .trio-project .trio-nex { left: 50%; width: 36%; bottom: 20%; }
+  .trio-project .trio-oracle { left: 62%; width: 30%; bottom: 62%; }
+  .trio-caption { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-1); }
+  .trio-paths, .trio-overview { right: var(--space-3) !important; left: var(--space-3) !important; top: auto !important; width: auto !important; bottom: var(--space-3); }
+  .trio-overview { padding: var(--space-4); }
+  .has-figures.is-finale .trio-figure, .has-figures.is-ended .trio-figure, .has-figures.is-finale .trio-oracle, .has-figures.is-ended .trio-oracle { transform: translateY(-18%) scale(.9); }
+}
+@container trio (min-width: 900px) { .trio-control-label { display: inline; } }
+
+/* Reduzierte Bewegung: ruhiges Standbild (Poster), Sprache + Text bleiben nutzbar */
+@media (prefers-reduced-motion: reduce) {
+  .trio-scene *, .trio-scene *::before, .trio-scene *::after { animation: none !important; transition: none !important; }
+  .trio-rise { opacity: 1; transform: none; }
+  .trio-clip { display: none; }
+}
+.is-reduced .trio-figure, .is-reduced .trio-body, .is-reduced .trio-ribbon { animation: none !important; }
+.is-reduced .trio-clip { display: none; }

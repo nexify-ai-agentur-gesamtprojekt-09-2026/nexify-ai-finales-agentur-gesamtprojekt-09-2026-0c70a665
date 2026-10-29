@@ -191,3 +191,18 @@
 .structured-footer { border-top:0; position:relative; background:transparent; }
 .structured-footer::before { content:''; position:absolute; inset:0 var(--layout-page-padding) auto; height:var(--material-border); background:var(--material-section-divider); pointer-events:none; }
 .mobile-navigation-panel .nexify-control { justify-self:start; }
+
+/* Chat-Panel: feste Breite (Rasterwert), feste Höhe (100dvh, sticky). Nur der Verlauf scrollt –
+   Kopf, Eingabe und Fußzeile bleiben an Ort und Stelle. Dadurch wächst die Seite nicht mit dem Gesprächsverlauf. */
+@media (max-width: 1279px) { :root { --layout-panel-width: 384px; } }
+@media (min-width: 1700px) { .workspace-shell { grid-template-columns: minmax(0, 1fr) var(--layout-panel-width); } }
+.aifly-panel { height: 100dvh; max-height: 100dvh; overflow: hidden; }
+.aifly-panel .conversation { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--color-linie-stark) transparent; padding-bottom: var(--space-4); }
+.aifly-panel .sdk-orientation-view { flex: 1 1 auto; min-height: 0; }
+.aifly-panel .composer-area, .aifly-panel .panel-footer-row { flex: 0 0 auto; }
+.panel-footer-row { flex-wrap: wrap; row-gap: var(--space-1); gap: var(--space-3); padding: 0 var(--space-6) var(--space-4); }
+.workspace-chat-modes { flex: 0 0 auto; }
+.workspace-chat-modes button { white-space: nowrap; padding: var(--space-1) var(--space-3); }
+.panel-footer-row > :not(.workspace-chat-modes) { min-width: 0; }
+/* Sehr niedrige Fenster: das ganze Panel scrollt, damit die Eingabe erreichbar bleibt */
+@media (max-height: 560px) { .aifly-panel { overflow-y: auto; } .aifly-panel .conversation { flex: 1 0 auto; overflow-y: visible; } }

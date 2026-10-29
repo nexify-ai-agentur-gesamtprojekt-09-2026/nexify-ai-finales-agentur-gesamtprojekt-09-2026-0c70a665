@@ -47,7 +47,7 @@
   --layout-hero-min: 640px;
   --layout-control-size: 48px;
   --layout-media-max: 640px;
-  --layout-panel-width: clamp(360px, 28vw, 440px);
+  --layout-panel-width: 416px; /* fester Rasterwert (52 x 8px), Best Practice 400–420px für Side-Chat; < 1280px: 384px (48 x 8px) */
   --type-hero-size: clamp(40px, 4.4cqi, 64px);
   --type-hero-compact: clamp(36px, 4.4cqi, 48px);
   --type-hero-mobile: clamp(36px, 8.5cqi, 48px);

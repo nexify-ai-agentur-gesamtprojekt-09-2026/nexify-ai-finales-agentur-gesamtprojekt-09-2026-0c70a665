@@ -1,37 +1,21 @@
-/* Masterplan: echte Spalten, eine Markenfläche, keine Cover-Masken. */
-.identity-hero { container: identity-hero / inline-size; min-width:0; color:var(--color-text-primaer); }
-.identity-scene { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.618fr); align-items:center; gap:var(--space-5); margin-inline:auto; padding:var(--space-8) var(--layout-page-padding); min-height:var(--layout-hero-min); }
-.identity-copy { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-5); }
-.identity-copy h1 { font-family:var(--font-display); font-size:var(--type-hero-size); line-height:var(--type-hero-leading); letter-spacing:var(--type-display-tracking); font-weight:700; margin:0; max-width:18ch; text-wrap:balance; overflow-wrap:normal; hyphens:auto; }
-.identity-title-accent { color:var(--color-marke-lime); }
-.identity-body { font-size:var(--type-body-size); line-height:var(--type-body-leading); max-width:44ch; margin:0; color:var(--color-text-sekundaer); }
-.identity-links { display:flex; align-items:center; flex-wrap:wrap; gap:var(--space-5); }
-.identity-secondary-link { display:inline-flex; align-items:center; min-height:var(--layout-control-size); color:var(--color-text-sekundaer); text-decoration:underline; text-underline-offset:var(--space-1); }
-.identity-secondary-link:hover { color:var(--color-marke-lime); }
-.identity-primary-link { display:inline-flex; align-items:center; gap:var(--space-4); padding-block:var(--space-2); min-height:var(--layout-control-size); font-weight:600; border-bottom:1px solid var(--color-marke-lime); color:var(--color-marke-lime); }
-.identity-primary-arrow { transition:transform var(--motion-feedback); }
-.identity-primary-link:hover .identity-primary-arrow { transform:translateX(var(--space-2)); }
-.identity-primary-link:active { opacity:.8; }
-.identity-media { min-width:0; display:grid; align-content:center; gap:var(--space-4); }
-.identity-stage { min-width:0; aspect-ratio:16/10; display:grid; align-items:center; border:0; background:transparent; }
-.identity-video { display:block; width:100%; height:100%; object-fit:contain; object-position:center; border:0; border-radius:0; background:transparent; }
-.identity-controls { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-2); }
-.identity-sound { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--layout-control-size); padding:var(--space-2) var(--space-4); border:1px solid var(--color-linie-stark); border-radius:var(--radius-pille); color:var(--color-text-sekundaer); background:transparent; font-size:var(--type-small-size); cursor:pointer; }
-.identity-stage { position:relative; isolation:isolate; perspective:var(--material-film-perspective); padding:var(--space-1); }
-.identity-video { border-radius:var(--material-film-curvature); transform:rotateY(var(--material-film-turn)); transform-origin:center; }
-
-.identity-sound:hover,.identity-sound[aria-pressed=true] { border-color:var(--color-marke-lime); color:var(--color-marke-lime); }
-.identity-sound:active { transform:scale(.98); }
-.identity-sound:disabled { opacity:.5; cursor:not-allowed; }
-.identity-sound.is-icon { min-width:var(--layout-control-size); padding:var(--space-2); }
-.identity-progress { width:100%; min-height:var(--layout-control-size); accent-color:var(--color-marke-lime); padding:0; background:transparent; cursor:pointer; }
-.identity-timeline { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:var(--space-4); color:var(--color-text-tertiaer); font-size:var(--type-small-size); }
-.identity-transcript { font-size:var(--type-small-size); color:var(--color-text-tertiaer); }
-.identity-transcript summary { cursor:pointer; display:flex; align-items:center; min-height:var(--layout-control-size); width:fit-content; }
-.identity-transcript p { margin:var(--space-4) 0; line-height:var(--type-body-leading); max-width:65ch; }
-.identity-media-status { font-size:var(--type-small-size); color:var(--color-text-tertiaer); }
-.identity-error { border-left:2px solid var(--color-semantik-fehler); padding-left:var(--space-4); }
-.identity-media a { display:inline-flex; align-items:center; min-height:var(--layout-control-size); text-decoration:underline; text-underline-offset:var(--space-1); }
-@container identity-hero (max-width:1100px) { .identity-scene { gap:var(--space-6); padding-block:var(--space-7); } .identity-copy h1 { font-size:var(--type-hero-compact); } }
-@container identity-hero (max-width:820px) { .identity-scene { grid-template-columns:minmax(0,1fr); min-height:0; padding:var(--space-6) var(--space-5); } .identity-copy h1 { font-size:var(--type-hero-mobile); max-width:20ch; } .identity-media { max-width:var(--layout-media-max); width:100%; justify-self:center; } }
-@media(prefers-reduced-motion:reduce) { .identity-hero *, .identity-hero *::before, .identity-hero *::after { animation:none!important; transition:none!important; } }
+/* Hero H00: Text links, Live-Szene rechts, eine durchgehende Markenfläche ohne Kasten.
+   Alle Maße fluide über Container-Einheiten (cqi), damit auch 2560/3840 px nicht "verloren" wirken. */
+.identity-hero { container: identity-hero / inline-size; position: relative; isolation: isolate; min-width: 0; overflow: hidden; color: var(--color-text-primaer); }
+.identity-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 48% 60% at 70% 42%, color-mix(in srgb, var(--color-marke-lime) 7%, transparent), transparent 72%), radial-gradient(ellipse 30% 40% at 12% 90%, color-mix(in srgb, var(--color-marke-cyan) 5%, transparent), transparent 70%); }
+.identity-scene { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.75fr); align-items: center; gap: clamp(24px, 2.5cqi, 64px); padding: clamp(40px, 4.5cqi, 112px) var(--layout-page-padding) clamp(32px, 3cqi, 72px); min-height: var(--layout-hero-min); }
+.identity-copy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(16px, 1.6cqi, 36px); }
+.identity-copy h1 { font-family: var(--font-display); font-size: clamp(40px, 4.1cqi, 108px); line-height: var(--type-hero-leading); letter-spacing: var(--type-display-tracking); font-weight: 700; margin: 0; max-width: 16ch; text-wrap: balance; overflow-wrap: normal; hyphens: auto; }
+.identity-title-accent { color: var(--color-marke-lime); }
+.identity-body { font-size: clamp(17px, 1.2cqi, 28px); line-height: var(--type-body-leading); max-width: 40ch; margin: 0; color: var(--color-text-sekundaer); }
+.identity-links { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(16px, 1.6cqi, 36px); font-size: clamp(15px, 1cqi, 22px); }
+.identity-secondary-link { display: inline-flex; align-items: center; min-height: var(--layout-control-size); color: var(--color-text-sekundaer); text-decoration: underline; text-underline-offset: var(--space-1); }
+.identity-secondary-link:hover { color: var(--color-marke-lime); }
+.identity-primary-link { display: inline-flex; align-items: center; gap: var(--space-4); padding-block: var(--space-2); min-height: var(--layout-control-size); font-weight: 600; border-bottom: 1px solid var(--color-marke-lime); color: var(--color-marke-lime); }
+.identity-primary-arrow { transition: transform var(--motion-feedback); }
+.identity-primary-link:hover .identity-primary-arrow { transform: translateX(var(--space-2)); }
+.identity-primary-link:active { opacity: .8; }
+.identity-media { min-width: 0; }
+.identity-finale { --trio-shift: -14%; }
+@container identity-hero (max-width: 1100px) { .identity-scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); } }
+@container identity-hero (max-width: 820px) { .identity-scene { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: var(--space-6) var(--space-5); } .identity-copy h1 { font-size: var(--type-hero-mobile); max-width: 20ch; } .identity-media { max-width: var(--layout-media-max); width: 100%; justify-self: center; } }
+@media (prefers-reduced-motion:reduce) { .identity-hero *, .identity-hero *::before, .identity-hero *::after { animation: none !important; transition: none !important; } }

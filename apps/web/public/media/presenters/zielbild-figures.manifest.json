@@ -1,0 +1,49 @@
+{
+ "source": "/app/.local/hero-production/user-reference.png",
+ "source_sha256": "136e2fc5de05f3323c9ffee5d196d69fc0e4eccd729ef34bf7efe5f90cc4e2da",
+ "method": "rembg isnet-general-use alpha matting, no generative edit",
+ "figures": {
+  "pascal-walk": {
+   "file": "zielbild-pascal-walk.png",
+   "size": [
+    271,
+    596
+   ],
+   "crop_box": [
+    400,
+    300,
+    760,
+    930
+   ],
+   "sha256": "225f35c60b92f7328ca72975342595e95184146c788b7c25a3aefd9c3d6fb41c"
+  },
+  "nex-walk": {
+   "file": "zielbild-nex-walk.png",
+   "size": [
+    285,
+    352
+   ],
+   "crop_box": [
+    130,
+    515,
+    450,
+    900
+   ],
+   "sha256": "596e0a4b2914390d738238181a9a865b9bfa193c83337217ce0fb0406c0e9a74"
+  },
+  "aifly-float": {
+   "file": "zielbild-aifly-float.png",
+   "size": [
+    194,
+    193
+   ],
+   "crop_box": [
+    690,
+    330,
+    920,
+    540
+   ],
+   "sha256": "313f9826c0df25a23ad1d3f4ce60721894a13016530bf354b460b45bfb01a3d9"
+  }
+ }
+}

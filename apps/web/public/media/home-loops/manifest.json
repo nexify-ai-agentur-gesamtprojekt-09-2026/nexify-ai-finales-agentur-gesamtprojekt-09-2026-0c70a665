@@ -1,0 +1,50 @@
+{
+ "welcome-intro": {
+  "mp4": "welcome-intro.mp4",
+  "webm": "welcome-intro.webm",
+  "poster": "welcome-intro.jpg",
+  "resolution": "1920x1080",
+  "seconds": 5.04,
+  "sha256": "53375fc94bd06517fdd3af5ce196454e6d1e50c8d0f35583a76179da8113746a",
+  "webm_sha256": "0531ddb6a46e3ca1f11960faf459eb313e54406048d0c56b69e7e5304a8d4011",
+  "source_sha256": "13b35b6a4003408e4d761a599b8e387decc77880d5bd53ec53ada4efcc1ee70b",
+  "model": "fal-ai/kling-video/v3/pro/image-to-video",
+  "finish": "unsharp=5:5:0.55:3:3:0.0,eq=contrast=1.04:saturation=1.04:brightness=-0.005,format=yuv420p"
+ },
+ "welcome-loop": {
+  "mp4": "welcome-loop.mp4",
+  "webm": "welcome-loop.webm",
+  "poster": "welcome-loop.jpg",
+  "resolution": "1920x1080",
+  "seconds": 10.04,
+  "sha256": "30a46eb6bc18ce07c2c30fa5d3bcb6e7c50a8206556de1ace480dba91b21e549",
+  "webm_sha256": "8830f6e8b7656b6ee735e02e3dc1034166378fa3d6f3f274800ee4680138711c",
+  "source_sha256": "1e11ec65eb4c39e9141211bec4bfec3236d50865428dab04b579ce7777480596",
+  "model": "fal-ai/kling-video/v3/pro/image-to-video",
+  "finish": "unsharp=5:5:0.55:3:3:0.0,eq=contrast=1.04:saturation=1.04:brightness=-0.005,format=yuv420p"
+ },
+ "project-loop": {
+  "mp4": "project-loop.mp4",
+  "webm": "project-loop.webm",
+  "poster": "project-loop.jpg",
+  "resolution": "1920x1080",
+  "seconds": 10.04,
+  "sha256": "43ac818ee2b83785a1a5194e41c821374615b0a59430ea49434cedad3b8a553a",
+  "webm_sha256": "a65cff2976d4916a0c3e9b9df02b0c31acde683c95c4b3cf77d8584bd229fb86",
+  "source_sha256": "d28d18162b91e207d9f24db02f91947436926cb102bfb20de00d1a94a474a778",
+  "model": "fal-ai/kling-video/v3/pro/image-to-video",
+  "finish": "unsharp=5:5:0.55:3:3:0.0,eq=contrast=1.04:saturation=1.04:brightness=-0.005,format=yuv420p"
+ },
+ "choice-loop": {
+  "mp4": "choice-loop.mp4",
+  "webm": "choice-loop.webm",
+  "poster": "choice-loop.jpg",
+  "resolution": "1920x1080",
+  "seconds": 10.04,
+  "sha256": "212f885a3a3633e2b784f865ead40bad8ef04821e748203393d7b9f4e7011834",
+  "webm_sha256": "2dcd1ebd22959f534edaf4794b652f738b28c30af1ada77b78f0ae0060d06084",
+  "source_sha256": "e29dfe70908dc936af78e79504c8e54de9afa71935728cea653aa8c06f1acbbf",
+  "model": "fal-ai/kling-video/v3/pro/image-to-video",
+  "finish": "unsharp=5:5:0.55:3:3:0.0,eq=contrast=1.04:saturation=1.04:brightness=-0.005,format=yuv420p"
+ }
+}

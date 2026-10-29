@@ -1,18 +1,38 @@
 [
   {
-    "content": "Weitere ungeprüfte Gestaltungs- und Generierungsänderungen stoppen",
+    "content": "Freisteller erzeugen (rembg)",
     "status": "completed"
   },
   {
-    "content": "Laufenden isolierten Renderauftrag prüfen; bereits abgeschlossen, nicht heruntergeladen oder veröffentlicht",
+    "content": "4 Frames auf Graphit-Bühne komponieren",
     "status": "completed"
   },
   {
-    "content": "Abgelehnten Stand und unveränderte Originalreferenzen für einen kontrollierten Rückbau sichern",
+    "content": "Budget-Ledger 20 $ + tools/produce_loops.py",
     "status": "completed"
   },
   {
-    "content": "Rückbauumfang bestätigen; keinen pauschalen Reset vorbestehender Arbeit ausführen",
+    "content": "Clips generieren + 1080p-Export mit Finishing (mp4/webm/poster)",
+    "status": "completed"
+  },
+  {
+    "content": "TrioScene Video-Modus (Intro→Loop, Untertitel unter Bühne, Maske, Finale-Zonen)",
+    "status": "completed"
+  },
+  {
+    "content": "Chat-Panel: feste Breite 416px, feste Höhe, nur Verlauf scrollt",
+    "status": "completed"
+  },
+  {
+    "content": "Screenshots Hero/S01/S02 → Nutzerfreigabe einholen",
+    "status": "completed"
+  },
+  {
+    "content": "Nach Freigabe: Evidence-Hashes aktualisieren, Pillow 12.3.0, make test",
+    "status": "pending"
+  },
+  {
+    "content": "Resend E2E testen, danach ElevenLabs",
     "status": "pending"
   }
 ]
