@@ -1,0 +1,9 @@
+.shop-panel{padding:var(--space-5);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);margin-block:var(--space-6);background:var(--color-graphit-800);color:var(--color-text-primaer);overflow-wrap:anywhere}
+.shop-panel h2{margin-block:0 var(--space-4)}
+.shop-controls,.shop-products li,.shop-cart li{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);margin-block:var(--space-4)}
+.shop-panel label{display:grid;gap:var(--space-2);min-width:0}
+.shop-panel input,.shop-panel select{min-height:44px;max-width:100%;padding:var(--space-3);border:1px solid var(--color-linie-stark);border-radius:var(--radius-klein);background:var(--color-graphit-900);color:var(--color-text-primaer);font:inherit}
+.shop-panel input[type=number]{width:6em}
+.shop-panel ul{list-style:none;padding:0}
+.shop-panel button{min-height:44px;white-space:normal}
+.shop-panel :focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:var(--space-1)}

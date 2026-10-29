@@ -15,13 +15,19 @@ import re
 import secrets
 import sqlite3
 import time
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit, unquote, parse_qs
 import uuid
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "apps/web"
 AMSTERDAM = ZoneInfo("Europe/Amsterdam")
+
+
+def capabilities():
+    """Implemented local operations, never a connected-provider readiness claim."""
+    return {"quote_pdf": True, "pending_outbox": True, "booking_request": True, "marketing_template": True,
+            "email_delivery": False, "local_planning": True, "external_calendar": False, "model_chat": False}
 
 
 class Rejected(Exception):
@@ -104,6 +110,7 @@ def make_pdf(quote):
 class Store:
     def __init__(self, path):
         self.path = str(path)
+        self.page_contexts = {page["path"]: {"page_id": page["id"], "path": page["path"]} for page in public_pages()}
         Path(path).parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         with self.connect() as db:
             db.executescript("""
@@ -152,12 +159,22 @@ class Store:
         if not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key or ""):
             raise Rejected(422, "idempotency_key_required")
         schemas = {"quote": {"title", "details", "locale"}, "booking": {"slot_id", "name", "email", "locale"},
-                   "marketing": {"goal", "audience", "locale"}, "chat": {"message", "locale"}}
+                   "marketing": {"goal", "audience", "locale"}, "chat": {"message", "locale", "page_path"}}
         allowed = {"email", "confirmed"} if operation.startswith("send:") else schemas.get(operation)
         if allowed is None:
             raise Rejected(404, "not_found")
         if set(body) - allowed or body.get("locale", "de") not in {"de", "nl", "fr"}:
             raise Rejected(422, "unexpected_field_or_locale")
+        context = None
+        if operation == "chat" and "page_path" in body:
+            page_path = text(body, "page_path", 240)
+            canonical = page_path.rstrip("/") or "/"
+            # Match a curated public path directly: no URLs, query/fragment,
+            # percent decoding or arbitrary client-provided page metadata.
+            context = self.page_contexts.get(canonical)
+            if context is None or not page_path.startswith("/") or page_path.startswith("//"):
+                raise Rejected(422, "invalid_page_context")
+            body = {**body, "page_path": context["path"]}
         payload_hash = digest(json.dumps(body, sort_keys=True, ensure_ascii=False, separators=(",", ":")))
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
@@ -197,12 +214,26 @@ class Store:
             elif operation == "marketing":
                 goal = text(body, "goal", 800)
                 audience = text(body, "audience", 500)
+                templates = {
+                    "de": ["Ziel: ", "Zielgruppe: ",
+                           "Kernbotschaft: Bedarf und konkreten nächsten Schritt klar benennen.",
+                           "Maßnahmen: bestehende Inhalte prüfen, einen passenden Kanal auswählen, einen Entwurf erstellen.",
+                           "Prüfung: Aussagen belegen, Datenschutz und Rechte prüfen, vor Veröffentlichung freigeben.",
+                           "Messung: qualifizierte Anfragen und vereinbarte nächste Schritte erfassen."],
+                    "nl": ["Doel: ", "Doelgroep: ",
+                           "Kernboodschap: benoem de behoefte en de concrete volgende stap duidelijk.",
+                           "Acties: controleer bestaande inhoud, kies een passend kanaal en maak een concept.",
+                           "Controle: onderbouw uitspraken, controleer privacy en rechten en laat goedkeuren vóór publicatie.",
+                           "Meting: leg relevante aanvragen en afgesproken vervolgstappen vast."],
+                    "fr": ["Objectif : ", "Public cible : ",
+                           "Message clé : préciser le besoin et la prochaine étape concrète.",
+                           "Actions : vérifier les contenus existants, choisir un canal adapté et préparer un brouillon.",
+                           "Contrôle : étayer les affirmations, vérifier la confidentialité et les droits, puis faire approuver avant publication.",
+                           "Mesure : suivre les demandes qualifiées et les prochaines étapes convenues."]}
+                lines = templates[body.get("locale", "de")]
                 result = {"id": identifier, "state": "structured_draft", "goal": goal, "audience": audience,
-                          "draft": ["Ziel: " + goal, "Zielgruppe: " + audience,
-                                    "Kernbotschaft: Bedarf und konkreten nächsten Schritt klar benennen.",
-                                    "Maßnahmen: bestehende Inhalte prüfen, einen passenden Kanal auswählen, einen Entwurf erstellen.",
-                                    "Prüfung: Aussagen belegen, Datenschutz und Rechte prüfen, vor Veröffentlichung freigeben.",
-                                    "Messung: qualifizierte Anfragen und vereinbarte nächste Schritte erfassen."], "published": False, "model_generated": False}
+                          "draft": [lines[0] + goal, lines[1] + audience, *lines[2:]],
+                          "published": False, "model_generated": False}
                 db.execute("INSERT INTO objects VALUES (?,?,?,?)", (identifier, owner, "marketing", json.dumps(result)))
             elif operation == "chat":
                 message = text(body, "message", 3000)
@@ -212,7 +243,7 @@ class Store:
                            "booking": "Wählen Sie einen Terminvorschlag. Die Anfrage wird gespeichert; die persönliche Bestätigung steht anschließend noch aus.",
                            "marketing": "Legen wir Ziel und Zielgruppe fest. Daraus entsteht ein strukturierter Marketing-Entwurf.",
                            "choose": "Womit möchten Sie starten: Angebot besprechen, einen Termin anfragen oder Marketing planen?"}
-                result = {"intent": intent, "message": replies[intent], "mode": "structured_assistant"}
+                result = {"intent": intent, "message": replies[intent], "mode": "structured_assistant", "context": context}
                 db.execute("INSERT INTO messages(owner,role,body) VALUES (?,?,?)", (owner, "user", message))
                 db.execute("INSERT INTO messages(owner,role,body) VALUES (?,?,?)", (owner, "assistant", json.dumps(result)))
             else:
@@ -235,13 +266,16 @@ class Store:
 
 def public_pages():
     site_map = json.loads((ROOT / "config/site-map.json").read_text())
+    allowlist = set(site_map.get("public_allowlist", []))
     return [{"id": page["id"], "path": page["path"], "title": page["title"]["de"],
              "purpose": page["summary"]["de"], "site_context": page["site_context"]}
             for page in site_map["pages"]
-            if page["access"]["visibility"] == "public" and not page["access"]["auth_required"]]
+            if page["id"] in allowlist and page["access"]["visibility"] == "public" and not page["access"]["auth_required"]]
 
 
-def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
+def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None):
+    if shop is not None and getattr(shop, "cart", None) is not None and shop.cart.store is not store:
+        raise ValueError("shop and visitor must use the same scoped Store")
     pages = public_pages()
     allowed_pages = {page["path"] for page in pages}
     class Handler(BaseHTTPRequestHandler):
@@ -252,7 +286,7 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
         def log_message(self, *_):
             pass
 
-        def respond(self, status, payload, content_type="application/json; charset=utf-8", cookie=None, disposition=None):
+        def respond(self, status, payload, content_type="application/json; charset=utf-8", cookie=None, disposition=None, cart_cookie=None):
             raw = json.dumps(payload, ensure_ascii=False).encode() if isinstance(payload, (dict, list)) else payload
             self.send_response(status)
             self.send_header("Content-Type", content_type)
@@ -263,6 +297,8 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
             self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
             if cookie:
                 self.send_header("Set-Cookie", f"nx_visit={cookie}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400")
+            if cart_cookie:
+                self.send_header("Set-Cookie", cart_cookie)
             if disposition:
                 self.send_header("Content-Disposition", disposition)
             self.end_headers()
@@ -285,16 +321,64 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                 raise Rejected(401, "session_required")
             return store.visitor(token.value if token else None)
 
+        def shop_target(self):
+            if shop is None:
+                raise Rejected(503, "catalog_not_configured")
+            if getattr(shop, "cart", None) is None:
+                raise Rejected(403, "catalog_read_only")
+            cookie = SimpleCookie()
+            try:
+                cookie.load(self.headers.get("Cookie", ""))
+            except Exception:
+                raise Rejected(401, "cart_capability_invalid") from None
+            token = cookie.get("nx_cart")
+            if token is None:
+                raise Rejected(404, "cart_not_found")
+            if re.fullmatch(r"[a-f0-9]{32}\.[a-f0-9]{64}", token.value) is None:
+                raise Rejected(401, "cart_capability_invalid")
+            return token.value.split(".")
+
+        def shop_error(self, error):
+            # Cart adapters expose only a typed status/code, never keys or payloads.
+            from_errors = getattr(error, "status", None), getattr(error, "code", None)
+            if (type(from_errors[0]) is int and from_errors[0] in {401, 404, 409, 410, 422}
+                    and isinstance(from_errors[1], str)):
+                return self.respond(from_errors[0], {"error": from_errors[1]})
+            if isinstance(error, sqlite3.OperationalError):
+                return self.respond(503, {"error": "storage_unavailable"})
+            return self.respond(500, {"error": "internal_shop_error"})
+
         def do_GET(self):
             try:
                 self.check_host()
                 path = unquote(urlsplit(self.path).path)
+                if path == "/api/shop/catalog":
+                    if shop is None:
+                        return self.respond(503, {"error": "catalog_not_configured", "available": False})
+                    query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                    if set(query) - {"q", "category", "locale"} or any(len(values) != 1 for values in query.values()):
+                        raise Rejected(422, "invalid_catalog_query")
+                    try:
+                        result = shop.catalog(query=query.get("q", [""])[0], category=query.get("category", [""])[0], locale=query.get("locale", ["de"])[0])
+                    except Exception as error:
+                        return self.shop_error(error)
+                    return self.respond(200, result)
+                if path in {"/api/shop/cart", "/api/shop/cart/checkout-draft"}:
+                    visitor, _ = self.visitor()
+                    identifier, capability = self.shop_target()
+                    try:
+                        result = (shop.cart.read if path == "/api/shop/cart" else shop.cart.read_checkout)(visitor["id"], identifier, capability)
+                    except Exception as error:
+                        return self.shop_error(error)
+                    return self.respond(200, result)
                 if path == "/api/session":
                     visitor, cookie = self.visitor(create=True)
                     with store.connect() as db:
                         history = [dict(row) for row in db.execute("SELECT role,body FROM messages WHERE owner=? ORDER BY id DESC LIMIT 100", (visitor["id"],))][::-1]
-                        quotes = [json.loads(row[0]) for row in db.execute("SELECT payload FROM objects WHERE owner=? AND kind='quote' ORDER BY rowid LIMIT 20", (visitor["id"],))]
-                    return self.respond(200, {"csrf": visitor["csrf"], "history": history, "workspace": {"quotes": quotes}, "capabilities": {"quote_pdf": True, "email_delivery": False, "local_planning": True, "external_calendar": False, "model_chat": False}}, cookie=cookie)
+                        quotes = [json.loads(row[0]) for row in db.execute("SELECT payload FROM objects WHERE owner=? AND kind='quote' ORDER BY rowid DESC LIMIT 20", (visitor["id"],))][::-1]
+                    return self.respond(200, {"csrf": visitor["csrf"], "history": history, "workspace": {"quotes": quotes}, "capabilities": capabilities()}, cookie=cookie)
+                if path == "/api/capabilities":
+                    return self.respond(200, {"mode": "local_development", "capabilities": capabilities()})
                 if path == "/api/pages":
                     return self.respond(200, pages)
                 if path == "/api/slots":
@@ -343,6 +427,35 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None):
                 except (ValueError, UnicodeError, RecursionError):
                     raise Rejected(422, "invalid_body") from None
                 path = urlsplit(self.path).path
+                if path.startswith("/api/shop/"):
+                    if shop is None:
+                        raise Rejected(503, "catalog_not_configured")
+                    if getattr(shop, "cart", None) is None:
+                        raise Rejected(403, "catalog_read_only")
+                    key = self.headers.get("Idempotency-Key")
+                    try:
+                        if path == "/api/shop/cart":
+                            created = shop.cart.create(visitor["id"], key, body)
+                            token = created["cart"]["id"] + "." + created["guest_capability"]
+                            cookie = f"nx_cart={token}; HttpOnly; SameSite=Lax; Path=/api/shop; Max-Age={shop.cart.lifetime}"
+                            return self.respond(200, created["cart"], cart_cookie=cookie)
+                        if path not in {"/api/shop/cart/items", "/api/shop/cart/checkout-draft"}:
+                            raise Rejected(404, "not_found")
+                        identifier, capability = self.shop_target()
+                        if self.headers.get("X-Cart-Id") != identifier:
+                            raise Rejected(409, "cart_target_mismatch")
+                        version = self.headers.get("If-Match")
+                        if path.endswith("/items"):
+                            result = shop.cart.change(visitor["id"], identifier, capability, key, version, body)
+                        else:
+                            if body:
+                                raise Rejected(422, "unexpected_field")
+                            result = shop.cart.prepare_checkout(visitor["id"], identifier, capability, key, version)
+                    except Rejected:
+                        raise
+                    except Exception as error:
+                        return self.shop_error(error)
+                    return self.respond(200, result)
                 mapping = {"/api/chat": "chat", "/api/quotes": "quote", "/api/bookings": "booking", "/api/marketing": "marketing"}
                 operation = mapping.get(path)
                 match = re.fullmatch(r"/api/quotes/([a-f0-9]{32})/send", path)
@@ -365,14 +478,30 @@ def main():
     parser.add_argument("--port", type=int, default=3003)
     parser.add_argument("--seed-local-planning-proposals", action="store_true")
     parser.add_argument("--web-origin", default="http://127.0.0.1:3004")
+    parser.add_argument("--catalog-snapshot", type=Path)
+    parser.add_argument("--catalog-tenant")
+    parser.add_argument("--catalog-project")
+    parser.add_argument("--catalog-store")
+    parser.add_argument("--catalog-max-bytes", type=int)
+    parser.add_argument("--catalog-max-rows", type=int)
+    parser.add_argument("--catalog-max-text", type=int)
+    parser.add_argument("--catalog-max-price-minor", type=int)
     args = parser.parse_args()
+    shop = None
+    if args.catalog_snapshot is not None:
+        from catalog import ReadOnlyCatalog, load_snapshot
+        raw, manifest = load_snapshot(args.catalog_snapshot, maximum_bytes=args.catalog_max_bytes)
+        shop = ReadOnlyCatalog(raw, tenant=args.catalog_tenant, project=args.catalog_project,
+             store_id=args.catalog_store, observed_at=manifest.get("observed_at"),
+             max_bytes=args.catalog_max_bytes, max_rows=args.catalog_max_rows,
+             max_text=args.catalog_max_text, max_price_minor=args.catalog_max_price_minor)
     store = Store(args.database)
     if args.seed_local_planning_proposals:
         store.seed_planning_slots()
     origin = urlsplit(args.web_origin)
     if origin.scheme != "http" or origin.hostname not in {"127.0.0.1", "localhost"} or origin.path or origin.query or origin.fragment or origin.username:
         raise SystemExit("Only an explicit local web origin is supported by this development gateway")
-    server = build_server(store, port=args.port, web_origin=args.web_origin)
+    server = build_server(store, port=args.port, web_origin=args.web_origin, shop=shop)
     print(f"Native visitor workspace listening on loopback port {server.server_port}; mail/model/external calendar not connected", flush=True)
     server.serve_forever()
 

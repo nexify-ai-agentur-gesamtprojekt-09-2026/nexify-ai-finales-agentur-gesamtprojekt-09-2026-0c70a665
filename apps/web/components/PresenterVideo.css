@@ -1,0 +1,11 @@
+.presenter-video { display: grid; gap: var(--space-3); min-width: 0; width: 100%; color: var(--color-text-primaer); }
+.presenter-video video { display: block; width: 100%; height: auto; object-fit: contain; }
+.presenter-video--hero video { border: 0; border-radius: 0; }
+.presenter-video-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.presenter-video-controls button { min-height: var(--target-min); padding: var(--space-2) var(--space-3); max-width: 100%; }
+.presenter-video-controls button[aria-pressed="true"] { border-color: var(--color-marke-lime); }
+.presenter-video-transcript { min-width: 0; color: var(--color-text-sekundaer); }
+.presenter-video-transcript summary { min-height: var(--target-min); display: flex; align-items: center; cursor: pointer; }
+.presenter-video-transcript p { white-space: pre-line; overflow-wrap: anywhere; }
+.presenter-video-motion { color: var(--color-text-gedaempft); }
+@media (prefers-reduced-motion: reduce) { .presenter-video * { animation: none; transition: none; } }

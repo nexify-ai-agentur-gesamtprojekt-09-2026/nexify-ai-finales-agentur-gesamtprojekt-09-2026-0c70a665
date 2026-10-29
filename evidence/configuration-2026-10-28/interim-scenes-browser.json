@@ -1,0 +1,1173 @@
+{
+  "scope": "local optimized Vite output,interim unchanged reference images;not final videos or live acceptance",
+  "views": [
+    {
+      "page_id": "home",
+      "path": "/",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "home",
+      "path": "/",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "locale": "nl",
+      "width": 320,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "home",
+      "path": "/",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "home",
+      "path": "/",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 2,
+      "passed": true
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "locale": "nl",
+      "width": 1280,
+      "scenes": 1,
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
+    "apps/web/components/PresenterScene.tsx": "f47fb7d6b917912da4b651ed2b2b5832761768ab59f34792244d0f0077764691",
+    "apps/web/components/ExplainerSections.tsx": "0b25af5b66cffd1821613d8984f53f85fc0e4b8bd1ea6e63af8fbcc2ec941fcc",
+    "apps/web/components/PresenterEditorial.css": "1568ed80ac71b3ef236280e9d90a7f1c1b7ff14977f88198171d26ea630215da",
+    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
+    "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
+    "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
+    "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
+    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
+    "apps/site/scripts/generate-public-data.mjs": "53c61bd0a87bd515e6f3c9a548e9ecc7c69b008e4a05aedbb3a49f4550823701",
+    "apps/site/tests/browser-scene-images.mjs": "5199e67a74f2c8c6bf3009d5eb5ad9261d22680f2974c2e82d7f42bbd6e27dfd"
+  },
+  "external_requests": 0,
+  "page_errors": [],
+  "passed": true
+}

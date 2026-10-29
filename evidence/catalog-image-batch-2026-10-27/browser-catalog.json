@@ -1,0 +1,119 @@
+{
+  "scope": "isolated synthetic supplier-shaped snapshot in actual browser/API",
+  "checks": [
+    "source-bound partial catalog displayed without commerce or image requests",
+    "DE NL FR labels retain explicit German supplier facts",
+    "local filtering and reload remain scoped to partial snapshot",
+    "valid visitor and csrf cannot create cart or checkout from read-only source"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart/checkout-draft",
+      "status": 403
+    }
+  ],
+  "external_requests": [],
+  "source_sha256": {
+    "apps/agent-gateway/catalog.py": "22d3f7faac91e471a137d8c2427ec0fbc8e9749f8400b4b150c57633259c7cfa",
+    "apps/agent-gateway/server.py": "36016db218627036b49e2989767117bdf10b750071a81d0d7f323250bce4120c",
+    "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+    "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
+    "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
+    "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
+    "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
+    "apps/web/components/PublicExperience.tsx": "5d2d921be94b2a9d7a1e7f85b66535f02c48e02746fc7b5f718a222f2abf9867",
+    "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
+    "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
+    "apps/site/tests/browser-catalog.mjs": "2e9986800d46585ba8447e420af8f78171a9a2674558715e780a403767dd76ae",
+    "apps/site/tests/fixtures/catalog-server.py": "0fac0208276111c8bef7191707b8cee16ac67cc9f8cda99058bad40d824eb3c3"
+  },
+  "mode": "read_only",
+  "order_started": false,
+  "payment_started": false,
+  "image_requests": 0,
+  "catalog_input_sha256": "38992e6a4984409213bf3404cd3f43720872ecbcc8df360c457db87043bde54b",
+  "observed_at": "2026-10-27T01:00:00+00:00",
+  "source_facts": [
+    {
+      "sku": "SYNTH-A",
+      "ean": "0012345678901",
+      "stock": 0,
+      "source_price_minor": 706,
+      "fact_ids": [
+        "38992e6a4984409213bf3404cd3f43720872ecbcc8df360c457db87043bde54b:SYNTH-A:name"
+      ]
+    },
+    {
+      "sku": "SYNTH-B",
+      "ean": "0012345678902",
+      "stock": 0,
+      "source_price_minor": 1234,
+      "fact_ids": [
+        "38992e6a4984409213bf3404cd3f43720872ecbcc8df360c457db87043bde54b:SYNTH-B:name"
+      ]
+    }
+  ],
+  "returned_skus": [
+    "SYNTH-A",
+    "SYNTH-B"
+  ],
+  "partial": true,
+  "reported_total": 99
+}

@@ -8,6 +8,7 @@ from pathlib import Path
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("native_chat_gateway", ROOT / "apps/agent-gateway/server.py")
@@ -158,6 +159,41 @@ class NativeChatTests(unittest.TestCase):
         self.assertEqual(status, 200); self.assertEqual(len(session["history"]), 2)
         self.assertEqual(session["workspace"]["quotes"][0]["id"], quote["id"])
 
+    def test_session_reload_returns_latest_twenty_quotes_in_chronological_order(self):
+        created = []
+        for index in range(21):
+            status, quote, _ = self.action("/api/quotes", {"title": f"Synthetic quote {index}", "details": "Local reload regression"}, key=f"reload-quote-{index:04}")
+            self.assertEqual(status, 200)
+            created.append(quote)
+        for _ in range(2):
+            status, session, _ = self.request("GET", "/api/session", cookie=self.cookie)
+            self.assertEqual(status, 200)
+            self.assertEqual(session["workspace"]["quotes"], created[-20:])
+        latest = session["workspace"]["quotes"][-1]
+        self.assertEqual(latest, created[-1])
+        self.assertEqual(self.request("GET", latest["download_url"], cookie=self.cookie)[0], 200)
+        _, foreign, headers = self.request("GET", "/api/session")
+        foreign_cookie = headers["Set-Cookie"].split(";", 1)[0]
+        self.assertEqual(foreign["workspace"]["quotes"], [])
+        self.assertEqual(self.request("GET", latest["download_url"], cookie=foreign_cookie)[0], 404)
+        self.assertEqual(self.request("POST", f"/api/quotes/{latest['id']}/send", {"email": "fixture@example.invalid", "confirmed": True}, cookie=foreign_cookie, csrf=foreign["csrf"])[0], 404)
+
+    def test_marketing_drafts_use_requested_locale_and_preserve_facts_and_replay(self):
+        for locale, prefix, audience_prefix in [("de", "Ziel: ", "Zielgruppe: "), ("nl", "Doel: ", "Doelgroep: "), ("fr", "Objectif : ", "Public cible : ")]:
+            with self.subTest(locale=locale):
+                payload = {"locale": locale, "goal": "Synthetic goal", "audience": "Synthetic audience"}
+                status, draft, _ = self.action("/api/marketing", payload, key="locale-marketing-" + locale)
+                self.assertEqual(status, 200)
+                self.assertEqual(draft["draft"][0], prefix + payload["goal"])
+                self.assertEqual(draft["draft"][1], audience_prefix + payload["audience"])
+                self.assertEqual(draft["goal"], payload["goal"])
+                self.assertEqual(draft["audience"], payload["audience"])
+                self.assertFalse(draft["published"])
+                self.assertFalse(draft["model_generated"])
+                self.assertEqual(self.action("/api/marketing", payload, key="locale-marketing-" + locale)[1], draft)
+                self.assertEqual(self.store.object(self.store.visitor(self.cookie.split("=", 1)[1])[0]["id"], draft["id"], "marketing"), draft)
+        self.assertEqual(self.action("/api/marketing", {"locale": "xx", "goal": "Synthetic", "audience": "Synthetic"}, key="invalid-locale-0001")[0], 422)
+
     def test_marketing_is_persistent_draft_without_fake_model_or_publication(self):
         status, result, _ = self.action("/api/marketing", {"goal": "Qualifizierte Anfragen", "audience": "Lokale Werkstätten"})
         self.assertEqual(status, 200); self.assertFalse(result["published"]); self.assertFalse(result["model_generated"])
@@ -194,6 +230,96 @@ class NativeChatTests(unittest.TestCase):
         self.assertTrue(public)
         self.assertFalse({page["id"] for page in public} & protected)
         self.assertEqual({page["site_context"] for page in public}, {"nexify", "teileklar"})
+
+    def test_capabilities_describe_actual_local_operations_and_match_session(self):
+        status, result, headers = self.request("GET", "/api/capabilities")
+        self.assertEqual(status, 200)
+        self.assertEqual(result["mode"], "local_development")
+        self.assertEqual(headers["Cache-Control"], "no-store")
+        self.assertNotIn("Set-Cookie", headers)
+        for name in ("quote_pdf", "pending_outbox", "booking_request", "marketing_template", "local_planning"):
+            self.assertIs(result["capabilities"][name], True)
+        for name in ("email_delivery", "external_calendar", "model_chat"):
+            self.assertIs(result["capabilities"][name], False)
+        session = self.request("GET", "/api/session", cookie=self.cookie)[1]
+        self.assertEqual(session["capabilities"], result["capabilities"])
+
+    def test_public_allowlist_and_access_guards_both_gate_api_and_store_context(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); (root / "config").mkdir()
+            def page(identifier, visibility="public", auth=False):
+                return {"id": identifier, "path": "/" + identifier, "title": {"de": identifier},
+                        "summary": {"de": "fixture-" + identifier}, "site_context": "nexify",
+                        "access": {"visibility": visibility, "auth_required": auth}}
+            mapping = {"public_allowlist": ["allowed", "private", "requires-auth"],
+                       "pages": [page("allowed"), page("unlisted"), page("private", "private"), page("requires-auth", auth=True)]}
+            (root / "config/site-map.json").write_text(json.dumps(mapping))
+            with patch.object(gateway, "ROOT", root):
+                store = gateway.Store(root / "isolated.sqlite")
+                server = gateway.build_server(store, port=0)
+                thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+                try:
+                    connection = http.client.HTTPConnection("127.0.0.1", server.server_port, timeout=3)
+                    connection.request("GET", "/api/pages")
+                    response = connection.getresponse(); public = json.loads(response.read()); connection.close()
+                    self.assertEqual(response.status, 200)
+                    self.assertEqual([entry["id"] for entry in public], ["allowed"])
+                    self.assertEqual(set(store.page_contexts), {"/allowed"})
+                    visitor, _ = store.visitor()
+                    for path in ("/unlisted", "/private", "/requires-auth"):
+                        with self.subTest(path=path), self.assertRaises(gateway.Rejected) as rejected:
+                            store.action(visitor["id"], "chat", "isolated-context-001", {"message": "Hallo", "page_path": path})
+                        self.assertEqual(rejected.exception.code, "invalid_page_context")
+                    result = store.action(visitor["id"], "chat", "isolated-context-001", {"message": "Hallo", "page_path": "/allowed"})
+                    self.assertEqual(result["context"], {"page_id": "allowed", "path": "/allowed"})
+                finally:
+                    server.shutdown(); server.server_close(); thread.join(2)
+
+    def test_public_chat_context_is_normalized_persisted_and_replayed_once(self):
+        page = next(page for page in gateway.public_pages() if page["path"] != "/")
+        body = {"message": "Marketing planen", "page_path": " " + page["path"] + "/ "}
+        status, result, _ = self.action("/api/chat", body, key="context-replay-001")
+        self.assertEqual(status, 200)
+        self.assertEqual(result["context"], {"page_id": page["id"], "path": page["path"]})
+        body["page_path"] = page["path"]
+        replay = self.action("/api/chat", body, key="context-replay-001")
+        self.assertEqual(replay[0], 200); self.assertEqual(replay[1], result)
+        reloaded = self.request("GET", "/api/session", cookie=self.cookie)[1]
+        self.assertEqual(len(reloaded["history"]), 2)
+        self.assertEqual(json.loads(reloaded["history"][-1]["body"])["context"], result["context"])
+
+    def test_unknown_and_protected_chat_contexts_are_rejected_without_persistence(self):
+        mapping = json.loads((ROOT / "config/site-map.json").read_text())
+        private = [page["path"] for page in mapping["pages"] if page["access"]["visibility"] != "public" or page["access"]["auth_required"]]
+        self.assertTrue(private)
+        for path in ["/not-a-public-page", *private]:
+            with self.subTest(path=path):
+                status, result, _ = self.action("/api/chat", {"message": "Hallo", "page_path": path})
+                self.assertEqual(status, 422); self.assertEqual(result, {"error": "invalid_page_context"})
+        with self.store.connect() as db:
+            self.assertEqual(db.execute("SELECT count(*) FROM messages").fetchone()[0], 0)
+            self.assertEqual(db.execute("SELECT count(*) FROM receipts").fetchone()[0], 0)
+
+    def test_malicious_context_cannot_inject_page_fields_or_bypass_csrf(self):
+        for path in ("https://foreign.invalid/", "//foreign.invalid/", "/?role=admin", "/#private", "/%2e%2e/", "/../", "<script>", {"path": "/", "role": "admin"}, 42, None):
+            with self.subTest(path=path):
+                self.assertEqual(self.action("/api/chat", {"message": "Hallo", "page_path": path})[0], 422)
+        body = {"message": "Hallo", "page_path": "/"}
+        self.assertEqual(self.request("POST", "/api/chat", body, cookie=self.cookie)[0], 403)
+        self.assertEqual(self.action("/api/chat", {**body, "page_title": "Injected private metadata"})[0], 422)
+        self.assertEqual(self.request("GET", "/api/session", cookie=self.cookie)[1]["history"], [])
+
+    def test_context_remains_optional_but_changes_conflict_and_receipts_are_owner_scoped(self):
+        body = {"message": "Hallo"}
+        self.assertIsNone(self.action("/api/chat", body, key="context-optional-001")[1]["context"])
+        self.assertEqual(self.action("/api/chat", {**body, "page_path": "/"}, key="context-optional-001")[0], 409)
+        _, other, headers = self.request("GET", "/api/session")
+        cookie = headers["Set-Cookie"].split(";", 1)[0]
+        status, result, _ = self.request("POST", "/api/chat", {**body, "page_path": "/"}, cookie=cookie, csrf=other["csrf"], key="context-optional-001")
+        self.assertEqual(status, 200); self.assertEqual(result["context"]["path"], "/")
+        original = self.request("GET", "/api/session", cookie=self.cookie)[1]
+        self.assertEqual(len(original["history"]), 2)
+        self.assertIsNone(json.loads(original["history"][-1]["body"])["context"])
 
 
 if __name__ == "__main__":

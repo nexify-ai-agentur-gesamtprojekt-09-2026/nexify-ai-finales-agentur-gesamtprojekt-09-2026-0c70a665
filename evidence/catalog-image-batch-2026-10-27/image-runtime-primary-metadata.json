@@ -1,0 +1,13 @@
+{
+  "source": "https://pypi.org/pypi/Pillow/12.3.0/json",
+  "name": "pillow",
+  "version": "12.3.0",
+  "requires_python": ">=3.10",
+  "license_expression": "MIT-CMU",
+  "ci_linux_python312_wheels": [
+    {
+      "filename": "pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "78cb2c6865a35ab8ff8b75fd122f6033b92a62c82801110e48ddd6c936a45d91"
+    }
+  ]
+}

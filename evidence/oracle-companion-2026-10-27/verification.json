@@ -1,0 +1,81 @@
+{
+  "observed_at": "2026-10-27T21:59:56.606044+00:00",
+  "base_commit": "5828c144876dadbeaa1b369dbcc5589977430f77",
+  "scope": "shared chat UI only;no provider/portal/video acceptance",
+  "source_sha256": {
+    "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
+    "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
+    "apps/web/components/Workspace.tsx": "1fc4647b5127e03d6676080a2197000f9f893a7c5bef06263b2089fb91c181e3",
+    "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
+    "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
+    "apps/site/tests/browser-oracle-companion.mjs": "1fd681d90180385450f8ac117f4bc1b1d3d101bdbeefc597c8336ec70ce82c98",
+    "apps/web/auth/tests/oracle-companion.test.mjs": "5291c944bdd088e8a9106d4b37b50310d915aa1d78fb791101c73b2d4094adfa",
+    "apps/web/auth/tests/browser-public-experience.mjs": "30c296ac9c040995d9163aa60bdbbb596463ab7c0675bf77b710c082d2480e47",
+    "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0"
+  },
+  "original_unchanged": true,
+  "targeted_cases": 6,
+  "viewports": [
+    320,
+    390,
+    1280
+  ],
+  "reduced_motion_modes": [
+    "no-preference",
+    "reduce"
+  ],
+  "initial_regression": {
+    "observed": "reduced motion retained working transform due selector specificity",
+    "fixed": "equal-specificity reduced-motion selector removes transform and transition",
+    "final_six_cases_passed": true
+  },
+  "browser_accessibility_tree_checked": true,
+  "qualified_assistive_technology_acceptance": false,
+  "screenshots_internal_only": true,
+  "next_route_locale_checks": 72,
+  "protected_next_denials": 10,
+  "vite_route_locale_checks": 72,
+  "history_edges": 1724,
+  "resize_checks": 108,
+  "shop_checks": 13,
+  "catalog_checks": 4,
+  "node_site_tests": 53,
+  "node_next_tests": 11,
+  "video_animation_delivered": false,
+  "production_configuration_changed": false,
+  "credentials_transferred": false,
+  "independent_source_pre_review": "no open concrete finding;exact final hash review pending",
+  "rea": "exact final source analysis and complete readback pending",
+  "aggregate_gates": {
+    "check": "passed",
+    "e2e": "passed",
+    "python_tests": 487,
+    "architecture": "passed",
+    "clean": "passed",
+    "next_default_build": "passed",
+    "site_default_build": "passed",
+    "site_standalone_build": "passed"
+  },
+  "log_sha256": {
+    "check": "0e4de6b89d8246aa335683b308cec338e0319dba15fdc8b08918e7c5111fbf0a",
+    "e2e": "41c608c7121df9d7b4e116384034cefc79ac19e6ab936f4eadc64aa5bba37212",
+    "arch": "dbd2adb777136d1e78141d23b936d4f7e6000a769aecddc8def2cfb02e345485",
+    "clean": "c780352ac8f2ac91a8b9ea654618b96f22f15c77a3eea67d96be749dab3d7328",
+    "next-build": "93f824699850b35673dadd5e1195877a2c74a80235f5f2a11966302f9a912996",
+    "site-build": "8a987a3afeb2b31b169399a06fbfaa7e1340e28322960d5edba3cbdfca6f5d9c",
+    "standalone-build": "72240bd306b8f7df7840ce15afaf1484d11c85be80548e6320730375e84e9d70",
+    "standalone-embed": "4a631865c86c29784afa0d8e13029a8a8d188fc6375f4e51aa19f3a2372bbfc1",
+    "site-node": "2bfa482082a59ad817c85bc2b2484df158dd405c894c90a724bc3766833eff91",
+    "next-node": "040285c1e5fef2406fc852d1c70dc262da11472ded77573aeaf1d23d7a475ce0",
+    "site-typecheck": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "browser-final": "4b11f944d299acfefc0cf274afed92d89bde343f8c91531ffdcbfcdd0a8d99f8",
+    "browser-next": "b6fa26b1fd795a32f576bf9d539a8ee67dc33407271441d860029ae39e1ce379",
+    "critical": "34e4f1deff145d9badfd3d47b719df0a7c357bded8bfe776dca6639ea17ce110",
+    "shop": "b74b25b2eeb940c006f1da5485efde3d9567b27a39581b4e416d6b3c3c50d20d",
+    "catalog": "0ad8801fbe0e491834f3bd15a53d4860120ee7a003a322e7b2f48d20f8c219c0",
+    "integration": "b48c7b129e478cf9217cf0d36e87de71aa241a395f7542a43a844cb77ae5b194",
+    "text-spacing": "9c3196ba867a9e17db4ce3737d78338abe67e053db68dc4c89c87e1c92f1ce9d",
+    "coverage": "f1fe5488ba2be605038822981bc165a44b4db8359623078792f4a53c5cd0d00a"
+  }
+}

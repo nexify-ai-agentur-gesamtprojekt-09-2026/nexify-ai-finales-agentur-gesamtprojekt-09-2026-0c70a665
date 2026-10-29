@@ -1,0 +1,12 @@
+test_expiry_exact_boundary_and_later_funding_never_extend_trial (test_suite_trial.SuiteTrialTests.test_expiry_exact_boundary_and_later_funding_never_extend_trial) ... ok
+test_inactive_and_deactivated_workspace_cannot_start_or_replay_grant (test_suite_trial.SuiteTrialTests.test_inactive_and_deactivated_workspace_cannot_start_or_replay_grant) ... ok
+test_managed_funding_requires_settlement_after_suite_start (test_suite_trial.SuiteTrialTests.test_managed_funding_requires_settlement_after_suite_start) ... ok
+test_parallel_start_and_restart_write_one_fixed_server_window_without_funding (test_suite_trial.SuiteTrialTests.test_parallel_start_and_restart_write_one_fixed_server_window_without_funding) ... ok
+test_stale_funding_does_not_block_suite_but_still_blocks_model_reservation (test_suite_trial.SuiteTrialTests.test_stale_funding_does_not_block_suite_but_still_blocks_model_reservation) ... ok
+test_unverified_client_foreign_authority_future_identity_and_foreign_tenant (test_suite_trial.SuiteTrialTests.test_unverified_client_foreign_authority_future_identity_and_foreign_tenant) ... ok
+test_valid_byok_transition_and_revocation_keep_execution_funding_guard (test_suite_trial.SuiteTrialTests.test_valid_byok_transition_and_revocation_keep_execution_funding_guard) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.043s
+
+OK

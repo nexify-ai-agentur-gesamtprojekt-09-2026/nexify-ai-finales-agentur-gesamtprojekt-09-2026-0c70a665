@@ -1,0 +1,14 @@
+6:00:36 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+6:00:39 AM [vite] (client) [console.error] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:32875/tests/fixtures/clerk.tsx
+
+The above error occurred in one of your React components.
+
+React will try to recreate this component tree from scratch using the error boundary you provided, AuthErrorBoundary.
+
+PASS failed lazy auth chunk preserves public application and language control
+PASS signed in account exposes keyboard signout with fixed local redirect
+PASS public state survives delayed route-local SDK load
+PASS signout failure stays explicit and supports a later deliberate retry
+PASS mobile signout is keyboard accessible with existing target size
+PASS offline hash preview never initializes SDK even with fixture flag enabled
+PASS widget locale follows DE NL FR selection

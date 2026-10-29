@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "policy_version": "selfservice-2026-10-26-v1",
+  "status": "binding_user_policy_runtime_enforcement_in_progress",
+  "authority": {
+    "source": "explicit_user_instruction_relayed_in_current_task",
+    "public_registration": true,
+    "suite_trial_hours": 24,
+    "no_provider_financed_free_llm": true,
+    "trial_exception_topup_cent": 500,
+    "commercial_scope": "Explicit new user approval applies only to the EUR5 trial exception; regular prepaid limits remain unchanged."
+  },
+  "registration": {
+    "public_customer_registration_allowed": true,
+    "default_membership_role": "customer",
+    "public_role_assignment_allowed": [
+      "customer"
+    ],
+    "public_admin_grant_allowed": false,
+    "email_verification_required": true,
+    "tenant_membership_from_server_only": true,
+    "customer_intent_allows_scoped_transactional_verification_only": true
+  },
+  "trial": {
+    "duration_seconds": 86400,
+    "clock": "server_utc",
+    "starts_when": [
+      "verified_email",
+      "server_activated_customer_workspace",
+      "authenticated_customer_start_intent"
+    ],
+    "start_is_idempotent": true,
+    "start_is_atomic_with_entitlement": true,
+    "one_initial_grant_per_verified_account": true,
+    "relogin_key_rotation_or_new_checkout_does_not_reset": true,
+    "expires_at_formula": "started_at + duration_seconds",
+    "timezone_for_display": "Europe/Amsterdam",
+    "scope": "customer membership and suite entitlement in own tenant; no internal agency/admin rights",
+    "expiry_blocks_new_suite_work": true,
+    "expiry_keeps_identity_and_data_rights": true,
+    "existing_bounded_authorized_inflight_request": "finish within pre-reserved limits; no unbounded renewal or fresh provider request after expiry"
+  },
+  "llm": {
+    "free_credit_cent": 0,
+    "funding_modes": [
+      "byok",
+      "managed_trial_credit"
+    ],
+    "default_funding_mode": null,
+    "byok": {
+      "provider_charged_to": "customer_own_provider_account",
+      "secret_storage": "server_side_encrypted_vault_reference",
+      "plaintext_secret_in_browser_storage_allowed": false,
+      "plaintext_in_logs_urls_or_responses_allowed": false,
+      "validation": "server-validated provider binding, tenant/account ownership and permitted model; client flags never attest validity",
+      "platform_fallback_on_missing_invalid_or_exhausted_key": false
+    },
+    "managed_route": {
+      "deepseek_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "deepseek_provider": "OpenRouter",
+      "deepseek_reasoning_effort": "high",
+      "second_component_requested_name": "JavAI",
+      "second_component_model_id": null,
+      "second_component_status": "exact_user_name_and_provider_contract_unresolved",
+      "candidate_source_note": "Historical Jev/oracle references do not prove identity with JavAI; never silently substitute them.",
+      "price_version_required": true,
+      "reserve_maximum_cost_before_request": true,
+      "settle_only_actual_usage_once": true,
+      "negative_balance_or_operator_free_credit_fallback": false,
+      "no_automatic_external_retry_when_outcome_unknown": true,
+      "must_be_operational_before_new_managed_topup_offer": true
+    }
+  },
+  "trial_topup": {
+    "enabled_as_user_policy": true,
+    "amount_cent": 500,
+    "currency": "EUR",
+    "allowed_amounts_cent": [
+      500
+    ],
+    "scope": "one initial managed trial credit purchase for the existing trial/account/tenant; not a general prepaid minimum change",
+    "requires": [
+      "verified_authenticated_customer",
+      "active_own_tenant_membership",
+      "explicit_customer_consent_to_exact_amount",
+      "operational_approved_managed_route",
+      "approved_price_tax_invoice_version",
+      "authoritative_provider_confirmed_payment_receipt"
+    ],
+    "confirmation_binding": [
+      "provider_payment_id",
+      "merchant_account",
+      "customer_account_id",
+      "tenant_id",
+      "purpose=trial_topup",
+      "amount_cent=500",
+      "currency=EUR",
+      "authoritative_settled_state"
+    ],
+    "client_paid_flag_is_proof": false,
+    "receipt_replay_deduplicated": true,
+    "credit_atomic_with_ledger_and_receipt": true,
+    "additional_trial_grants_or_repeated_exception_purchases": false,
+    "expiry_does_not_erase_purchased_credit": true,
+    "tax_and_refund_treatment": "bind actual merchant/legal/tax terms; no tax rate or automatic refund invented"
+  },
+  "regular_prepaid": {
+    "minimum_cent": 1000,
+    "currency": "EUR",
+    "source": "unchanged current config/api-prepaid.json#aufladung.minCent; no new regular minimum authorized by latest user",
+    "existing_api_prepaid_config_minimum_cent": 1000,
+    "existing_api_prepaid_config_sha256": "4dcbfeaff130110213cbbb8a736b3f9ac90b25f4cf81bdf26ad2258622898708",
+    "existing_global_config_modified_by_this_policy": false,
+    "migration_required_before_consistent_general_topup_release": false,
+    "trial_exception_may_change_regular_minimum": false,
+    "historical_document_minimum_cent": 5000,
+    "historical_document_value_is_current_user_instruction": false,
+    "source_discrepancy_requires_product_finance_review": true
+  },
+  "conversion": {
+    "trial_topup_is_not_a_paid_suite_subscription": true,
+    "automatic_charge_or_conversion_at_trial_end": false,
+    "requires": "explicit selection and accepted terms for an approved paid suite plan; authoritative payment confirmation where applicable",
+    "preserve": [
+      "account_id",
+      "authentication_subject",
+      "tenant_id",
+      "workspace_id",
+      "memberships_subject_to_authorized_role_changes",
+      "settings",
+      "encrypted_provider_key_references",
+      "documents",
+      "history",
+      "wallet_and_ledger_references"
+    ],
+    "identity_recreation_or_tenant_move_for_conversion": false,
+    "trial_deadline_reset": false,
+    "paid_suite_plan_id": null,
+    "paid_suite_price_status": "product_finance_decision_required_no_price_invented"
+  },
+  "provider_coverage": {
+    "requested_target_minimum": 70,
+    "target_is_not_installed_count": true,
+    "suite_provider_adapters_verified_by_this_repository_scan": 0,
+    "automation_openrouter_client_implementations_observed": 1,
+    "measurement_scope": [
+      "apps/agent-gateway/server.py model_chat=false at source scan",
+      "config/llm-verbindungen.json declares unverified 9router and three model tiers",
+      "tools/automation/ai_review.py is an automation client, not suite BYOK coverage"
+    ],
+    "measurement_type": "repository_source_snapshot_not_vps_or_runtime_inventory",
+    "runtime_registry_measurement_required_after_adapter_installation": true,
+    "provider_model_tool_and_business_connector_counts_are_distinct": true,
+    "observed_at": "2026-10-26T11:40:49.997834+00:00",
+    "source_snapshots": [
+      {
+        "path": "apps/agent-gateway/server.py",
+        "sha256": "aab04e795e7c00fd92d82323d2705b9726a659816c1767d238e7ca29d2132c3f"
+      },
+      {
+        "path": "config/llm-verbindungen.json",
+        "sha256": "2ce8566b94a74220cba2ef70864f33f54385e44a5d5e6f9bbc2012f8829af01b"
+      },
+      {
+        "path": "tools/automation/ai_review.py",
+        "sha256": "2bd60bc72caa760ac4c9d27d5b175312c0602cf5831cef12850685d63b116c62"
+      }
+    ]
+  },
+  "controlled_findings": [
+    {
+      "id": "SS-PRICE-BASELINE",
+      "owner": "product_finance",
+      "state": "source_discrepancy_review_required",
+      "detail": "Current regular config remains EUR10 (1000 cents); older docs mention EUR50 (5000 cents). Latest user approved only EUR5 trial exception. Product/Finance reconcile sources without inventing a new general minimum."
+    },
+    {
+      "id": "SS-JAVAI",
+      "owner": "engineering_integrations_and_product_finance",
+      "state": "controlled_unresolved",
+      "detail": "No unambiguous JavAI provider/model contract in current sources; historical Jev gate is not proof."
+    },
+    {
+      "id": "SS-PROVIDERS",
+      "owner": "engineering_integrations",
+      "state": "implementation_and_measurement_required",
+      "detail": "70+ is a user target. Measure installed supported provider adapters and real authenticated connections independently."
+    },
+    {
+      "id": "SS-LEGAL-PAYMENTS",
+      "owner": "legal_privacy_and_product_finance",
+      "state": "live_payment_precondition",
+      "detail": "Operator identity, merchant scope, price/tax/invoice terms and real provider reconciliation must be bound before new managed trial charges."
+    }
+  ],
+  "implementation_boundary": {
+    "this_file_is_policy_not_an_authentication_or_payment_receipt": true,
+    "no_live_charge_or_external_model_request_executed": true,
+    "runtime_evidence_required_before_live_ready_claim": true
+  }
+}

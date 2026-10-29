@@ -1,0 +1,25 @@
+{
+  "reviewer": "separate_read_only_subagent:independent_pr36_review",
+  "base_commit": "66866298b3eb4054371b0e2a1e1f618f1bc8ca73",
+  "finding": "P2 nested import bypass reproduced; closed after parser validation and independent re-test",
+  "tests": {
+    "node": 24,
+    "auth_browser": 7,
+    "actual_offline_artifact": true
+  },
+  "not_proven": [
+    "real_clerk_session",
+    "server_tenant_permissions",
+    "production_acceptance"
+  ],
+  "sources": {
+    "apps/site/src/Auth.tsx": "f6af0b53f2d453d81b0b3d19fd952068bc978cbcc5324f2181013162b4a15a5b",
+    "apps/site/src/main.tsx": "ed78ad0c01cbab3bcb404a6e3600ea76ffdd2653f84a602684e5bf8885192be0",
+    "apps/site/scripts/build-standalone.mjs": "4a1fab327cb69aa60b52b3603eeecf2ba0127ad361cd1a80ae7c33b8c0e9eedc",
+    "apps/site/vite.config.ts": "dd9056a9ee316fc6dbc1c1d034cfe2b11718900139236aa3c1a9bbe58e182837",
+    "apps/site/tests/auth.test.mjs": "592e1738f7a059c15fd6e8e2fd64a1b325a37d26509c12a028655cbf2b9685d9",
+    "apps/site/tests/standalone.test.mjs": "455cee19e046bb5235e866faf7635ac0f934df2acd7927d0cffa01ac3c47c785",
+    "apps/site/tests/browser-auth.mjs": "4b88c3838250bf74edf6c8ed97519c8dcae479b7271e0a534245e3e7d5fc2a19",
+    "apps/site/tests/browser-standalone.mjs": "731250982a491ac84307301cc047ea79679b4aaa792dacf035b1e098a3cd563d"
+  }
+}

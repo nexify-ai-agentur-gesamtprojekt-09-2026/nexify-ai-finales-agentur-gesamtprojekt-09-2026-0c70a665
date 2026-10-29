@@ -7,6 +7,7 @@ secrets/
 # Node-/Toolchain-Artefakte
 node_modules/
 __pycache__/
+.venv/
 
 # Betriebssystem
 .DS_Store
@@ -40,4 +41,11 @@ apps/web/tsconfig.tsbuildinfo
 # Portable public React build outputs; source and release tools remain tracked.
 apps/site/dist/
 apps/site/.generated/
+apps/web/.generated/
 apps/site/standalone.html
+.vercel
+
+# Local Vercel linking/OIDC and installed agent guidance are not app artifacts.
+.vercel/
+.agents/skills/
+.codex/skills/

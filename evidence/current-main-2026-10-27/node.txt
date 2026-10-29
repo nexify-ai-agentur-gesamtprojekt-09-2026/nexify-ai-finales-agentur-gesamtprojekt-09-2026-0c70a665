@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: auth is disabled by default and only explicit public true plus a valid key enables it
+ok 1 - auth is disabled by default and only explicit public true plus a valid key enables it
+  ---
+  duration_ms: 1.5626
+  type: 'test'
+  ...
+# Subtest: malformed public keys never mount a broken provider
+ok 2 - malformed public keys never mount a broken provider
+  ---
+  duration_ms: 0.377803
+  type: 'test'
+  ...
+# Subtest: only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted
+ok 3 - only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted
+  ---
+  duration_ms: 1.021119
+  type: 'test'
+  ...
+# Subtest: the wrapper retains public media, guide and honest disabled fallback
+ok 4 - the wrapper retains public media, guide and honest disabled fallback
+  ---
+  duration_ms: 0.347597
+  type: 'test'
+  ...
+# Subtest: header account control reaches route-local lifecycle without global provider
+ok 5 - header account control reaches route-local lifecycle without global provider
+  ---
+  duration_ms: 0.234886
+  type: 'test'
+  ...
+# Subtest: all public pages must be represented without private or duplicate page entries
+ok 6 - all public pages must be represented without private or duplicate page entries
+  ---
+  duration_ms: 1.624304
+  type: 'test'
+  ...
+# Subtest: private action targets and invented playable pending assets are rejected
+ok 7 - private action targets and invented playable pending assets are rejected
+  ---
+  duration_ms: 0.283601
+  type: 'test'
+  ...
+# Subtest: published videos need canonical own-origin video paths and every caption locale
+ok 8 - published videos need canonical own-origin video paths and every caption locale
+  ---
+  duration_ms: 1.444381
+  type: 'test'
+  ...
+# Subtest: projection preserves all public explainer copy but excludes unrelated configuration
+ok 9 - projection preserves all public explainer copy but excludes unrelated configuration
+  ---
+  duration_ms: 1.038666
+  type: 'test'
+  ...
+# Subtest: invented source references cannot pass the provenance gate
+ok 10 - invented source references cannot pass the provenance gate
+  ---
+  duration_ms: 0.294026
+  type: 'test'
+  ...
+# Subtest: protected fields never cross the public build boundary
+ok 11 - protected fields never cross the public build boundary
+  ---
+  duration_ms: 1.217316
+  type: 'test'
+  ...
+# Subtest: missing explicit authentication false is excluded
+ok 12 - missing explicit authentication false is excluded
+  ---
+  duration_ms: 0.659821
+  type: 'test'
+  ...
+# Subtest: unknown and private action targets fail rather than silently redirect
+ok 13 - unknown and private action targets fail rather than silently redirect
+  ---
+  duration_ms: 0.442061
+  type: 'test'
+  ...
+# Subtest: route redirects and duplicate paths are rejected
+ok 14 - route redirects and duplicate paths are rejected
+  ---
+  duration_ms: 0.254205
+  type: 'test'
+  ...
+# Subtest: contact channels exclude encoded headers and arbitrary schemes
+ok 15 - contact channels exclude encoded headers and arbitrary schemes
+  ---
+  duration_ms: 0.266454
+  type: 'test'
+  ...
+# Subtest: portable route parser accepts normal and file hash navigation without unsafe decoding
+ok 16 - portable route parser accepts normal and file hash navigation without unsafe decoding
+  ---
+  duration_ms: 0.288888
+  type: 'test'
+  ...
+# Subtest: only ordinary same-origin primary clicks are intercepted
+ok 17 - only ordinary same-origin primary clicks are intercepted
+  ---
+  duration_ms: 0.245853
+  type: 'test'
+  ...
+# Subtest: default/standalone/unknown build modes emit no manifest or worker
+ok 18 - default/standalone/unknown build modes emit no manifest or worker
+  ---
+  duration_ms: 1.084125
+  type: 'test'
+  ...
+# Subtest: explicit mode emits network-only installation and unchanged existing brand icon
+ok 19 - explicit mode emits network-only installation and unchanged existing brand icon
+  ---
+  duration_ms: 1.073708
+  type: 'test'
+  ...
+# Subtest: missing capability, insecure, file and standalone fail closed
+ok 20 - missing capability, insecure, file and standalone fail closed
+  ---
+  duration_ms: 0.26367
+  type: 'test'
+  ...
+# Subtest: exact worker registration, errors remain explicit without retry
+ok 21 - exact worker registration, errors remain explicit without retry
+  ---
+  duration_ms: 0.298443
+  type: 'test'
+  ...
+# Subtest: split standalone input fails before publishing an incomplete preview
+ok 22 - split standalone input fails before publishing an incomplete preview
+  ---
+  duration_ms: 171.443699
+  type: 'test'
+  ...
+# Subtest: self contained input retains offline CSP and preview mode
+ok 23 - self contained input retains offline CSP and preview mode
+  ---
+  duration_ms: 136.618186
+  type: 'test'
+  ...
+# Subtest: standalone rejects nested static chunk even with only one top-level JavaScript file
+ok 24 - standalone rejects nested static chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 147.50507
+  type: 'test'
+  ...
+# Subtest: standalone rejects external re-export even with only one top-level JavaScript file
+ok 25 - standalone rejects external re-export even with only one top-level JavaScript file
+  ---
+  duration_ms: 158.094236
+  type: 'test'
+  ...
+# Subtest: standalone rejects dynamic literal chunk even with only one top-level JavaScript file
+ok 26 - standalone rejects dynamic literal chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 142.960436
+  type: 'test'
+  ...
+# Subtest: standalone rejects computed dynamic chunk even with only one top-level JavaScript file
+ok 27 - standalone rejects computed dynamic chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 133.268009
+  type: 'test'
+  ...
+# Subtest: standalone rejects bare module even with only one top-level JavaScript file
+ok 28 - standalone rejects bare module even with only one top-level JavaScript file
+  ---
+  duration_ms: 129.408551
+  type: 'test'
+  ...
+# Subtest: standalone rejects invalid syntax even with only one top-level JavaScript file
+ok 29 - standalone rejects invalid syntax even with only one top-level JavaScript file
+  ---
+  duration_ms: 138.915666
+  type: 'test'
+  ...
+# Subtest: missing or malformed server capability descriptions never enable operations
+ok 30 - missing or malformed server capability descriptions never enable operations
+  ---
+  duration_ms: 1.397921
+  type: 'test'
+  ...
+# Subtest: local draft tools stay distinct from live model, delivery and calendar capabilities
+ok 31 - local draft tools stay distinct from live model, delivery and calendar capabilities
+  ---
+  duration_ms: 0.614763
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1250.419936

@@ -12,7 +12,7 @@
     },
     {
       "path": "config/site-map.json",
-      "sha256": "ee64bdac0336c3af5820529a90966c3f8bfd79d89ffeb1f7e55d7f6b0b3812a3"
+      "sha256": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af"
     },
     {
       "path": "docs/01-konzept/gesamtprojektplan.md",
@@ -45,6 +45,14 @@
     {
       "path": "docs/deployment/clerk-setup.md",
       "sha256": "51c09928ea82dd5ba7217d1e0e8d48efa604491da40ca29c1cdfda19e195c7a1"
+    },
+    {
+      "path": "config/selfservice-policy.json",
+      "sha256": "355ccc200852e6e14087aa55a5dc10ed94e42f1a3222d9818086db393bcbf2ab"
+    },
+    {
+      "path": "docs/architecture/nex2fly-page-source.md",
+      "sha256": "aec8ca6e9df0821d3b583490022ced048a6de5477258bde78b187c640b6c657c"
     }
   ]
 }

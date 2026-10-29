@@ -1,0 +1,11 @@
+{
+  "method": "scan actual built JS/HTML for exact isolated fixture catalog markers; not a general secret scan",
+  "fixture_catalog_markers_found": false,
+  "files": {
+    "apps/site/dist/index.html": "684b848d1bffccd7a3300fd20faeafb126fa8be20224f65d21f49d7d4a56b47b",
+    "apps/site/dist/assets/PublicOrientationChat-DCUOAQus.js": "d511f034732c5cd150dd0acf0b749355a68de3986157ae8192c6bf162110338a",
+    "apps/site/dist/assets/dist-LwcDfd1g.js": "36fc09d54531b0bbb49f1317a1e55a3926df601d6cd2df16922d9bfb3d3bf07d",
+    "apps/site/dist/assets/index-Bj1m7sgw.js": "4d4539a136d0b81ffacc0c185ff317d085ee76609db6e5e4b3752b6b50c89118"
+  },
+  "production_catalog_connected": false
+}

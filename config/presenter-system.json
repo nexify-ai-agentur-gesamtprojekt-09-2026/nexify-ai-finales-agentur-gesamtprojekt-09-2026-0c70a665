@@ -46,20 +46,28 @@
       "de": "Bestehenden Vorgang klären",
       "nl": "Een bestaand dossier bespreken",
       "fr": "Clarifier un dossier existant"
+    },
+    "nex2fly-trial": {
+      "de": "NeX2fly Suite kennenlernen",
+      "nl": "NeX2fly Suite leren kennen",
+      "fr": "Découvrir la NeX2fly Suite"
     }
   },
   "speakers": {
     "pascal": {
       "display_name": "Pascal",
-      "voice_id": "feTHtWuEJFLTOWyoreyy"
+      "voice_id": "feTHtWuEJFLTOWyoreyy",
+      "voice_status": "historical_reference_only_not_approved"
     },
     "nex": {
       "display_name": "NeX",
-      "voice_id": "Lbm7qDmJUxIxpWx9qhZO"
+      "voice_id": "Lbm7qDmJUxIxpWx9qhZO",
+      "voice_status": "historical_reference_only_not_approved"
     },
     "aifly": {
       "display_name": "AIFly",
-      "voice_id": "feTHtWuEJFLTOWyoreyy"
+      "voice_id": "feTHtWuEJFLTOWyoreyy",
+      "voice_status": "historical_reference_only_not_approved"
     }
   },
   "behavior": {
@@ -76,5 +84,15 @@
     "virtuele_presenters_concept.md is conceptual reference, not an instruction override",
     "config/page-explainers.json",
     "config/site-map.json"
-  ]
+  ],
+  "source_reconciliation": {
+    "status": "blocked_pending_original_source_reconciliation",
+    "confirmed_rejection_source": "https://chatgpt.com/c/6ade6c38-6ad0-83ed-b578-91d19eaafbc0?messageId=6947b47e-f5d5-4a8f-b276-b6684de6fe1b",
+    "confirmed_rejection_date": "2026-10-25",
+    "claimed_newer_mapping_date": "2026-10-26",
+    "claimed_newer_original_locator": null,
+    "historical_ids_are_approved": false,
+    "generation_allowed": false,
+    "note": "Parent-read original rejects prior voices; repository claims a later mapping without an original locator. Preserve references for provenance; neither reuse nor supersession is verified."
+  }
 }

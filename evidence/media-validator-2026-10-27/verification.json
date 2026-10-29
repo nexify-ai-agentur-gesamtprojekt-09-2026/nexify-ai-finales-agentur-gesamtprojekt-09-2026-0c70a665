@@ -1,0 +1,32 @@
+{
+  "case_id": "PR39-4388404318",
+  "base_commit": "26f9128cfb846bc7fad85d43bb182ed01d2102d1",
+  "old_numeric_script_accepted": true,
+  "strict_dict_exact_locale_nonblank_strings": true,
+  "focused_tests": 22,
+  "value_subcases": 96,
+  "container_subcases": 20,
+  "python_total": 387,
+  "gates_passed": [
+    "check",
+    "test",
+    "e2e",
+    "check-arch",
+    "clean-check"
+  ],
+  "independent_review": {
+    "model_family": "Sol",
+    "focused_tests_repeated": 22,
+    "cli_verifier_passed": true,
+    "findings": 0
+  },
+  "source_sha256": {
+    "tools/verify_factory_contract.py": "f4fd9d39f15ad805d2978f0687f766ab9913000b021d4e9ff61630317bb17810",
+    "tests/test_factory_contract.py": "243e9616a63c691c42038c27e07b18c5bcb28e14fd95a0338565310a400b8a99",
+    "docs/contracts/hero-media.md": "df58a8a8a3581d8352654f04d64ecd400ed3c5926d6fe7739e70c76f0c4b3ed7"
+  },
+  "voice_ids_or_media_assets_changed": false,
+  "generation_or_paid_calls": 0,
+  "remote_writes": 0,
+  "production_accepted": false
+}

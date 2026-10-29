@@ -248,7 +248,8 @@
     "tk-vouchers",
     "tk-partner",
     "tk-workshop",
-    "tk-legal"
+    "tk-legal",
+    "nex2fly"
   ],
   "inter_site_links": [
     {
@@ -338,28 +339,28 @@
       "id": "home",
       "path": "/",
       "title": {
-        "de": "Digitale Lösungen für Ihr Unternehmen",
-        "nl": "Digitale oplossingen voor uw bedrijf",
-        "fr": "Des solutions numériques pour votre entreprise"
+        "de": "Digitale Lösungen für dein Unternehmen",
+        "nl": "Digitale oplossingen voor je bedrijf",
+        "fr": "Des solutions numériques pour ton entreprise"
       },
       "summary": {
-        "de": "Klären Sie zuerst Ihren Bedarf. Danach wählen Sie Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
-        "nl": "Verhelder eerst uw behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
-        "fr": "Précisez d’abord votre besoin. Choisissez ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
+        "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+        "nl": "Verhelder eerst je behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+        "fr": "Précise d’abord ton besoin. Choisis ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Digitale Lösungen für Ihr Unternehmen",
-            "nl": "Digitale oplossingen voor uw bedrijf",
-            "fr": "Des solutions numériques pour votre entreprise"
+            "de": "Digitale Lösungen für dein Unternehmen",
+            "nl": "Digitale oplossingen voor je bedrijf",
+            "fr": "Des solutions numériques pour ton entreprise"
           },
           "body": {
-            "de": "Klären Sie zuerst Ihren Bedarf. Danach wählen Sie Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
-            "nl": "Verhelder eerst uw behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
-            "fr": "Précisez d’abord votre besoin. Choisissez ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
+            "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+            "nl": "Verhelder eerst je behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+            "fr": "Précise d’abord ton besoin. Choisis ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
           },
           "source_refs": [
             "docs/09-final/01-produkt-und-marke.md",
@@ -369,9 +370,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Klären Sie zuerst Ihren Bedarf. Danach wählen Sie Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
-          "nl": "Verhelder eerst uw behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
-          "fr": "Précisez d’abord votre besoin. Choisissez ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
+          "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+          "nl": "Verhelder eerst je behoefte. Kies daarna websites, agents en automatisering of apps en portalen. Een gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+          "fr": "Précise d’abord ton besoin. Choisis ensuite sites web, agents et automatisations ou applications et portails. Un entretien ou projet de devis reste sans engagement avant validation distincte."
         },
         "canonical_path": "/",
         "canonical_origin": null,
@@ -466,6 +467,59 @@
             "docs/09-final/01-produkt-und-marke.md",
             "docs/09-final/02-informationsarchitektur-und-journeys.md"
           ]
+        },
+        {
+          "id": "leistung-auswaehlen",
+          "heading": {
+            "de": "Vom Ziel zur passenden Leistung",
+            "nl": "Van doel naar passende dienst",
+            "fr": "De l’objectif au bon service"
+          },
+          "body": {
+            "de": "Für einen öffentlichen Auftritt mit Leistungen und Kontaktwegen beginnst du bei Websites. Geht es um wiederkehrende Anfragen, Termine, Postfächer oder Angebotsentwürfe, prüfst du Agenten und Automatisierung. Für geschützte Projektübersichten, Dokumente und getrennte Teamrechte passt der Einstieg über Apps und Portale. Welche Teile zusammengehören, klären wir am konkreten Nutzerweg.",
+            "nl": "Voor een openbare presentatie met diensten en contactmogelijkheden begin je bij websites. Voor terugkerende aanvragen, afspraken, inboxen of offerteconcepten bekijk je agents en automatisering. Voor afgeschermde projectoverzichten, documenten en gescheiden teamrechten begin je bij apps en portalen. Welke delen samenhangen, bepalen we aan de hand van een concrete gebruikersroute.",
+            "fr": "Pour une présence publique présentant tes services et les moyens de te contacter, commence par les sites web. Pour les demandes récurrentes, rendez-vous, boîtes mail ou projets de devis, explore les agents et l’automatisation. Pour les projets protégés, documents et droits d’équipe distincts, commence par les applications et portails. Nous précisons les liens à partir d’un parcours concret."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "baustein-oder-individuell",
+          "heading": {
+            "de": "Baustein anpassen oder individuell entwickeln",
+            "nl": "Een bouwsteen aanpassen of maatwerk ontwikkelen",
+            "fr": "Adapter un module ou développer sur mesure"
+          },
+          "body": {
+            "de": "Ein vorhandener Baustein kann passen, wenn vor allem Marke, Ton, Regeln und Anbindung angepasst werden müssen. Eine Individuallösung kommt infrage, wenn dein Datenmodell oder das Zusammenspiel mehrerer Systeme neu entwickelt werden muss. Wiederverwendung, Anpassungsgrenzen, Nutzungsrechte und Betrieb werden im Angebot getrennt beschrieben; die Existenz einer Referenz ist noch keine Lieferzusage.",
+            "nl": "Een bestaande bouwsteen kan passen als vooral merk, toon, regels en koppelingen moeten worden aangepast. Maatwerk past wanneer je datamodel of de samenwerking tussen systemen nieuw moet worden ontwikkeld. Hergebruik, aanpassingsgrenzen, gebruiksrechten en beheer worden afzonderlijk in de offerte beschreven; een referentie is nog geen leveringsbelofte.",
+            "fr": "Un module existant peut convenir si l’essentiel concerne la marque, le ton, les règles et les connexions. Le sur-mesure est adapté lorsqu’il faut concevoir ton modèle de données ou les échanges entre plusieurs systèmes. Réutilisation, limites d’adaptation, droits d’usage et exploitation sont décrits séparément dans le devis ; une référence ne constitue pas une promesse de livraison."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "ergebnis-und-uebergabe",
+          "heading": {
+            "de": "Was am Ende vereinbart ist",
+            "nl": "Wat uiteindelijk wordt afgesproken",
+            "fr": "Ce qui sera convenu à la fin"
+          },
+          "body": {
+            "de": "Vor dem Aufbau halten wir Ziel, Umfang und Prüfkriterien fest. Während der Umsetzung sollen Vorschau, offene Entscheidungen und Ergebnisberichte den Fortschritt nachvollziehbar machen. Zur Abnahme gehören die vereinbarten Funktionen und die Übergabe der zugehörigen Unterlagen; ein laufender Betreuungsumfang wird gesondert festgelegt.",
+            "nl": "Voor de bouw leggen we doel, scope en toetscriteria vast. Tijdens de uitvoering moeten preview, open beslissingen en resultaatrapporten de voortgang inzichtelijk maken. De oplevering omvat de afgesproken functies en bijbehorende documentatie; doorlopende ondersteuning wordt afzonderlijk vastgelegd.",
+            "fr": "Avant la réalisation, nous définissons l’objectif, le périmètre et les critères de vérification. Pendant le travail, aperçu, décisions ouvertes et comptes rendus doivent rendre l’avancement lisible. La réception porte sur les fonctions convenues et les documents associés ; le suivi continu est défini séparément."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "prototypen/Kundenwege.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
@@ -500,7 +554,10 @@
       ],
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
-        "docs/09-final/02-informationsarchitektur-und-journeys.md"
+        "docs/09-final/02-informationsarchitektur-und-journeys.md",
+        "docs/architecture/service-content-source.md",
+        "prototypen/Kundenwege.dc.html",
+        "prototypen/NeXifyAI Cloud v12.dc.html"
       ],
       "next_actions": [
         {
@@ -574,6 +631,59 @@
             "docs/09-final/01-produkt-und-marke.md",
             "docs/09-final/02-informationsarchitektur-und-journeys.md"
           ]
+        },
+        {
+          "id": "inhalte-und-wege",
+          "heading": {
+            "de": "Vom Angebot zur passenden Anfrage",
+            "nl": "Van aanbod naar passende aanvraag",
+            "fr": "De ton offre à la bonne demande"
+          },
+          "body": {
+            "de": "Wir strukturieren, welche Leistungen dein Betrieb erklärt, welche Fragen Besucher haben und welcher Kontaktweg jeweils passt. Daraus entstehen Seiten, Navigation und die benötigten Sprachfassungen. Eine Landingpage konzentriert sich auf ein Angebot; eine Unternehmenswebsite verbindet mehrere Leistungen. Ein Shop ergänzt Produktdaten, Warenkorb und Bestellablauf und braucht dafür einen eigenen Umfang.",
+            "nl": "We structureren welke diensten je bedrijf uitlegt, welke vragen bezoekers hebben en welk contactkanaal daarbij past. Daaruit volgen pagina’s, navigatie en benodigde taalversies. Een landingspagina richt zich op één aanbod; een bedrijfswebsite verbindt meerdere diensten. Een webshop voegt productgegevens, winkelwagen en bestelproces toe en vereist een eigen scope.",
+            "fr": "Nous structurons les prestations à présenter, les questions des visiteurs et le contact adapté à chaque besoin. Cela détermine pages, navigation et langues nécessaires. Une page d’atterrissage se concentre sur une offre ; un site d’entreprise relie plusieurs prestations. Une boutique ajoute catalogue, panier et commande et nécessite un périmètre propre."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "vorschau-und-pruefung",
+          "heading": {
+            "de": "In der Vorschau prüfen",
+            "nl": "Controleren in de preview",
+            "fr": "Vérifier dans l’aperçu"
+          },
+          "body": {
+            "de": "Vor einer Veröffentlichung prüfen wir den vereinbarten Weg von der Einstiegsseite bis zur Anfrage: Inhalte, Links, mobile Bedienung und verständliche Rückmeldungen bei fehlenden Angaben. Benötigte Texte, Bilder und Nutzungsrechte werden geklärt. Ein gezeigter Formularentwurf ist noch keine bestätigte Übermittlung; echte Kontaktanbindungen gehören ausdrücklich in den Leistungsumfang.",
+            "nl": "Voor publicatie controleren we de afgesproken route van de startpagina tot de aanvraag: inhoud, links, mobiel gebruik en duidelijke meldingen bij ontbrekende gegevens. Benodigde teksten, beelden en gebruiksrechten worden afgestemd. Een getoond formulierconcept is nog geen bevestigde verzending; echte contactkoppelingen worden expliciet opgenomen in de scope.",
+            "fr": "Avant publication, nous vérifions le parcours convenu jusqu’à la demande : contenus, liens, usage mobile et messages clairs en cas d’informations manquantes. Textes, images et droits d’usage sont précisés. Une maquette de formulaire ne prouve pas un envoi réel ; les connexions de contact effectives doivent figurer dans le périmètre."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "pflege-und-verantwortung",
+          "heading": {
+            "de": "Übergabe und spätere Pflege",
+            "nl": "Overdracht en later onderhoud",
+            "fr": "Transmission et maintenance"
+          },
+          "body": {
+            "de": "Zur Übergabe legen wir fest, wer Inhalte ändern darf, wo das Projekt betrieben wird und welche Unterlagen dein Team erhält. Für individuell entwickelte Teile werden Code- und Datenübergabe vereinbart; bei wiederverwendeten Bausteinen werden die Nutzungsrechte benannt. Redaktionelle Pflege, technische Änderungen und laufende Betreuung sind eigene Leistungen. Sichtbarkeit oder Anfragenzahlen werden nicht garantiert.",
+            "nl": "Bij overdracht leggen we vast wie inhoud mag wijzigen, waar het project draait en welke documentatie je team ontvangt. Voor maatwerk worden code- en gegevensoverdracht afgesproken; voor hergebruikte bouwstenen worden gebruiksrechten benoemd. Redactioneel onderhoud, technische wijzigingen en doorlopende ondersteuning zijn afzonderlijke diensten. Vindbaarheid of aantallen aanvragen worden niet gegarandeerd.",
+            "fr": "Pour la transmission, nous précisons qui peut modifier les contenus, où le projet sera exploité et quels documents ton équipe recevra. Pour le sur-mesure, la remise du code et des données est convenue ; les droits des modules réutilisés sont précisés. Maintenance éditoriale, évolutions techniques et suivi sont des prestations distinctes. Visibilité et volume de demandes ne sont pas garantis."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
@@ -608,7 +718,9 @@
       ],
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
-        "docs/09-final/02-informationsarchitektur-und-journeys.md"
+        "docs/09-final/02-informationsarchitektur-und-journeys.md",
+        "docs/architecture/service-content-source.md",
+        "prototypen/NeXifyAI Cloud v12.dc.html"
       ],
       "next_actions": [
         {
@@ -676,6 +788,58 @@
             "docs/09-final/05-technische-spezifikation.md",
             "config/regelwerk.json"
           ]
+        },
+        {
+          "id": "konkrete-bausteine",
+          "heading": {
+            "de": "Anfragen, Termine, Postfach und Wissen",
+            "nl": "Aanvragen, afspraken, inbox en kennis",
+            "fr": "Demandes, rendez-vous, messagerie et connaissances"
+          },
+          "body": {
+            "de": "Der Baukasten beschreibt einen Chat-Agenten für Rückfragen und Übergaben, Terminbuchung anhand freier Kalenderplätze, E-Mail-Triage nach Anliegen und Zuständigkeit sowie einen Angebots-Generator für Entwürfe. Ein Wissensagent soll freigegebene Dokumente mit Quellenangabe nutzen. Wir wählen einen abgegrenzten Anwendungsfall; das Auflisten dieser Bausteine bedeutet nicht, dass alle bereits für dein System verbunden sind.",
+            "nl": "De bouwstenen beschrijven een chatagent voor vervolgvragen en overdracht, afspraken op basis van vrije kalenderplekken, e-mailtriage naar onderwerp en verantwoordelijke en een generator voor offerteconcepten. Een kennisagent moet goedgekeurde documenten met bronvermelding gebruiken. We kiezen één afgebakend geval; de lijst betekent niet dat alles al met je systeem verbonden is.",
+            "fr": "Les modules décrivent un agent de dialogue pour les questions et relais, des rendez-vous fondés sur les disponibilités, un tri des e-mails par sujet et responsable et un générateur de projets de devis. Un agent de connaissances doit utiliser les documents autorisés en citant ses sources. Nous choisissons un cas délimité ; cette liste ne signifie pas que tout est déjà connecté à tes systèmes."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "systeme-und-regeln",
+          "heading": {
+            "de": "Zugriffe und Freigaben vorher festlegen",
+            "nl": "Toegang en goedkeuring vooraf bepalen",
+            "fr": "Définir les accès et autorisations avant de commencer"
+          },
+          "body": {
+            "de": "Kalender, Postfach und weitere Fachsysteme werden über passende Schnittstellen angebunden, soweit der jeweilige Anbieter dies ermöglicht. Wir trennen Lesen, Entwerfen und Ausführen. Du legst fest, wann ein Mensch entscheiden muss, etwa vor Versand, verbindlichen Angeboten oder Änderungen. Fehlende Angaben und unsichere Ergebnisse führen zur Rückfrage statt zu einer erfundenen Zusage.",
+            "nl": "Kalenders, inboxen en andere bedrijfssystemen worden via passende interfaces gekoppeld voor zover de provider dit ondersteunt. We onderscheiden lezen, concepten maken en uitvoeren. Je bepaalt wanneer een mens moet beslissen, bijvoorbeeld vóór verzending, bindende offertes of wijzigingen. Ontbrekende gegevens en onzekere resultaten leiden tot een vraag in plaats van een verzonnen toezegging.",
+            "fr": "Calendriers, messageries et logiciels métier sont reliés par des interfaces adaptées lorsque le fournisseur le permet. Nous distinguons lecture, préparation et exécution. Tu définis quand une personne doit décider, notamment avant un envoi, un devis ferme ou une modification. Les informations manquantes et résultats incertains donnent lieu à une question plutôt qu’à une promesse inventée."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "pilot-und-messung",
+          "heading": {
+            "de": "Einen Ablauf testen und nachmessen",
+            "nl": "Eén proces testen en opnieuw meten",
+            "fr": "Tester un processus et mesurer ensuite"
+          },
+          "body": {
+            "de": "Für den Piloten wählen wir ein messbares Ziel, zum Beispiel die Zeit bis zur ersten Antwort. In der Vorschau prüfen wir Normalfall, fehlende Daten, gesperrte Aktionen und die Übergabe an einen Menschen. Nach freigegebener Inbetriebnahme wird dieselbe Kennzahl erneut erfasst. Der Vergleich zeigt den tatsächlichen Verlauf; er ist kein vorab zugesagter Zeitgewinn oder Umsatz.",
+            "nl": "Voor de pilot kiezen we een meetbaar doel, bijvoorbeeld de tijd tot het eerste antwoord. In de preview testen we het normale geval, ontbrekende gegevens, geblokkeerde acties en overdracht aan een mens. Na goedgekeurde ingebruikname meten we dezelfde indicator opnieuw. De vergelijking toont de werkelijke ontwikkeling en is geen vooraf beloofde tijdwinst of omzet.",
+            "fr": "Pour le pilote, nous choisissons un objectif mesurable, par exemple le délai de première réponse. Dans l’aperçu, nous vérifions cas normal, données manquantes, actions bloquées et relais humain. Après mise en service autorisée, nous mesurons à nouveau le même indicateur. La comparaison montre les résultats réels, sans gain de temps ni chiffre d’affaires promis à l’avance."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
@@ -712,7 +876,9 @@
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
         "docs/09-final/05-technische-spezifikation.md",
-        "config/regelwerk.json"
+        "config/regelwerk.json",
+        "docs/architecture/service-content-source.md",
+        "prototypen/NeXifyAI Cloud v12.dc.html"
       ],
       "next_actions": [
         {
@@ -779,6 +945,62 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/05-technische-spezifikation.md"
           ]
+        },
+        {
+          "id": "portal-aufgaben",
+          "heading": {
+            "de": "Angebot, Projekt und Dokumente zusammenführen",
+            "nl": "Offerte, project en documenten samenbrengen",
+            "fr": "Réunir devis, projet et documents"
+          },
+          "body": {
+            "de": "Ein Kundenportal kann Angebote mit Fassung und Status, Projektfortschritt, Abnahmen, Dokumente und Rechnungsübersichten verbinden. Für interne Arbeit kommen Zuständigkeiten, offene Entscheidungen und Berichte hinzu. Wir wählen die benötigten Ansichten und Aktionen aus; eine Rechnung ansehen, einen Auftrag annehmen und eine Zahlung auslösen sind unterschiedliche Funktionen.",
+            "nl": "Een klantportaal kan offertes met versie en status, projectvoortgang, oplevering, documenten en factuuroverzichten verbinden. Voor intern werk komen verantwoordelijkheden, open beslissingen en rapportages erbij. We kiezen de benodigde schermen en acties; een factuur bekijken, een opdracht accepteren en betalen zijn verschillende functies.",
+            "fr": "Un portail client peut réunir devis avec version et statut, avancement, réception, documents et factures. Le travail interne ajoute responsables, décisions ouvertes et rapports. Nous choisissons les vues et actions nécessaires ; consulter une facture, accepter une commande et déclencher un paiement sont des fonctions distinctes."
+          },
+          "source_refs": [
+            "prototypen/Kundenportal.dc.html",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "rollen-und-datenbereiche",
+          "heading": {
+            "de": "Jede Rolle sieht ihren eigenen Bereich",
+            "nl": "Elke rol ziet het eigen bereik",
+            "fr": "Chaque rôle voit son propre périmètre"
+          },
+          "body": {
+            "de": "Wir klären für Kunden, Teammitglieder und Partner, welche Daten sie sehen und welche Schritte sie ausführen dürfen. Anmeldung allein erteilt keine Rechte für fremde Projekte oder interne Verwaltung. Einladungen, Mandantenzuordnung und sensible Änderungen benötigen passende Berechtigungen. Diese Regeln werden an jedem betroffenen Ablauf geprüft, nicht nur an der Menüanzeige.",
+            "nl": "We bepalen voor klanten, teamleden en partners welke gegevens zij mogen zien en welke stappen zij mogen uitvoeren. Aanmelden geeft geen rechten op andere projecten of intern beheer. Uitnodigingen, tenanttoewijzing en gevoelige wijzigingen vereisen passende rechten. Deze regels worden per betrokken proces gecontroleerd, niet alleen via zichtbare menu’s.",
+            "fr": "Nous précisons les données et actions autorisées pour clients, membres d’équipe et partenaires. La connexion ne donne pas accès aux projets d’autrui ni à l’administration interne. Invitations, rattachement au tenant et modifications sensibles nécessitent les droits adaptés. Ces règles sont vérifiées dans chaque parcours concerné, au-delà de l’affichage des menus."
+          },
+          "source_refs": [
+            "prototypen/Kundenwege.dc.html",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "ablauf-und-abnahme",
+          "heading": {
+            "de": "Zustände und Schnittstellen sichtbar machen",
+            "nl": "Status en koppelingen zichtbaar maken",
+            "fr": "Rendre visibles les états et connexions"
+          },
+          "body": {
+            "de": "Beim Angebot unterscheiden wir Entwurf, freigegebene Fassung, Annahme, Ablehnung und Änderungswunsch. Für weitere Abläufe legen wir ebenso fest, was bei Laden, leeren Daten, Fehlern und gesperrten Aktionen angezeigt wird. Verbindungen zu bestehenden Systemen, Dokumentdownloads und Benachrichtigungen werden einzeln vereinbart und in einer Vorschau getestet. Vorbereitete Beispieldaten bleiben als solche erkennbar.",
+            "nl": "Bij offertes onderscheiden we concept, goedgekeurde versie, acceptatie, afwijzing en wijzigingsverzoek. Voor andere processen bepalen we eveneens wat verschijnt bij laden, lege gegevens, fouten en geblokkeerde acties. Koppelingen met bestaande systemen, documentdownloads en meldingen worden apart afgesproken en in een preview getest. Voorbeeldgegevens blijven herkenbaar.",
+            "fr": "Pour un devis, nous distinguons brouillon, version validée, acceptation, refus et demande de modification. Pour les autres parcours, nous définissons aussi chargement, absence de données, erreurs et actions bloquées. Connexions aux systèmes existants, téléchargements et notifications sont convenus séparément et testés dans un aperçu. Les données d’exemple restent identifiées."
+          },
+          "source_refs": [
+            "prototypen/Kundenwege.dc.html",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
@@ -815,7 +1037,11 @@
       ],
       "source_refs": [
         "docs/09-final/14-gesamtsystem-und-portale.md",
-        "docs/09-final/05-technische-spezifikation.md"
+        "docs/09-final/05-technische-spezifikation.md",
+        "docs/architecture/service-content-source.md",
+        "docs/09-final/02-informationsarchitektur-und-journeys.md",
+        "prototypen/Kundenportal.dc.html",
+        "prototypen/Kundenwege.dc.html"
       ],
       "next_actions": [
         {
@@ -860,9 +1086,9 @@
         "fr": "Périmètre et démarrage"
       },
       "summary": {
-        "de": "Beschreiben Sie Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
-        "nl": "Beschrijf doel, uitgangssituatie, functies en bestaande systemen. Dat leidt tot een navolgbaar concept met aannames, grenzen en vervolgstappen; een bindende toezegging volgt afzonderlijk.",
-        "fr": "Décrivez l’objectif, la situation, les fonctions et les systèmes existants. Un projet traçable précise hypothèses, limites et prochaines étapes ; tout engagement ferme fait l’objet d’une validation distincte."
+        "de": "Beschreibe Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
+        "nl": "Beschrijf doel, uitgangssituatie, benodigde functies en bestaande systemen. Daaruit ontstaat een navolgbaar concept met aannames, grenzen en vervolgstappen; een bindende toezegging volgt afzonderlijk.",
+        "fr": "Décris l’objectif, la situation initiale, les fonctions nécessaires et les systèmes existants. Cela permet un projet traçable avec hypothèses, limites et prochaines étapes ; un engagement ferme intervient séparément."
       },
       "site_context": "nexify",
       "sections": [
@@ -874,21 +1100,76 @@
             "fr": "Périmètre et démarrage"
           },
           "body": {
-            "de": "Beschreiben Sie Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
-            "nl": "Beschrijf doel, uitgangssituatie, functies en bestaande systemen. Dat leidt tot een navolgbaar concept met aannames, grenzen en vervolgstappen; een bindende toezegging volgt afzonderlijk.",
-            "fr": "Décrivez l’objectif, la situation, les fonctions et les systèmes existants. Un projet traçable précise hypothèses, limites et prochaines étapes ; tout engagement ferme fait l’objet d’une validation distincte."
+            "de": "Beschreibe Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
+            "nl": "Beschrijf doel, uitgangssituatie, benodigde functies en bestaande systemen. Daaruit ontstaat een navolgbaar concept met aannames, grenzen en vervolgstappen; een bindende toezegging volgt afzonderlijk.",
+            "fr": "Décris l’objectif, la situation initiale, les fonctions nécessaires et les systèmes existants. Cela permet un projet traçable avec hypothèses, limites et prochaines étapes ; un engagement ferme intervient séparément."
           },
           "source_refs": [
             "docs/09-final/02-informationsarchitektur-und-journeys.md",
             "docs/01-konzept/nexifyai-organisationshandbuch.md"
           ]
+        },
+        {
+          "id": "ausgangslage-erfassen",
+          "heading": {
+            "de": "Was du für die Klärung mitbringst",
+            "nl": "Wat je meeneemt naar de afstemming",
+            "fr": "Ce que tu prépares pour le cadrage"
+          },
+          "body": {
+            "de": "Beschreibe einen konkreten Vorgang: Wer beginnt, welche Angaben liegen vor, was wird heute von Hand erledigt und welches Ergebnis wird gebraucht? Nenne vorhandene Website, Kalender, Postfach oder Fachsoftware und eine verantwortliche Person für Entscheidungen. Anonymisierte Beispiele reichen für den Einstieg; Zugangsdaten gehören nicht in die Anfrage.",
+            "nl": "Beschrijf één concreet proces: wie begint, welke gegevens zijn aanwezig, wat gebeurt nu handmatig en welk resultaat is nodig? Noem je bestaande website, kalender, inbox of bedrijfssoftware en een beslissingsbevoegde contactpersoon. Geanonimiseerde voorbeelden volstaan voor de start; stuur geen inloggegevens mee.",
+            "fr": "Décris un cas concret : qui commence, quelles informations existent, quelles tâches sont manuelles et quel résultat est nécessaire ? Indique site, calendrier, messagerie ou logiciel métier existant et la personne responsable des décisions. Des exemples anonymisés suffisent au départ ; n’envoie pas d’identifiants dans la demande."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "umfang-und-angebot",
+          "heading": {
+            "de": "Aus der Aufnahme wird ein prüfbarer Umfang",
+            "nl": "Van inventarisatie naar toetsbare scope",
+            "fr": "Du diagnostic à un périmètre vérifiable"
+          },
+          "body": {
+            "de": "Wir halten fest, welche Funktionen zum Vorhaben gehören, welche Systeme angebunden werden sollen und welche Annahmen noch offen sind. Für die Prüfung werden konkrete Ergebnisse benannt, etwa eine vollständige Anfrage oder ein zugriffsgeschütztes Dokument. Ein Angebot beschreibt Umfang und Fassung; ein Chatentwurf ersetzt keine verbindliche Vereinbarung.",
+            "nl": "We leggen vast welke functies bij het plan horen, welke systemen gekoppeld moeten worden en welke aannames openstaan. Voor controle benoemen we concrete resultaten, zoals een volledige aanvraag of een afgeschermd document. Een offerte beschrijft scope en versie; een chatconcept vervangt geen bindende overeenkomst.",
+            "fr": "Nous précisons fonctions incluses, systèmes à relier et hypothèses ouvertes. Les résultats attendus sont concrets, par exemple une demande complète ou un document protégé par des droits d’accès. Le devis décrit le périmètre et sa version ; un brouillon de dialogue ne remplace pas un accord ferme."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "prototypen/Kundenwege.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "aenderung-und-uebergabe",
+          "heading": {
+            "de": "Entscheiden, prüfen und übergeben",
+            "nl": "Beslissen, controleren en overdragen",
+            "fr": "Décider, vérifier et transmettre"
+          },
+          "body": {
+            "de": "Vor dem Start werden die zuständige Person, benötigte Inhalte und Zugänge sowie der vorgesehene Prüfweg geklärt. In der Vorschau kannst du Ergebnisse prüfen und Änderungswünsche benennen. Neue Anforderungen werden mit ihren Auswirkungen auf Umfang und Aufwand festgehalten. Zur Abnahme werden die vereinbarten Ergebnisse und die Übergabe dokumentiert; Betreuung danach wird gesondert vereinbart.",
+            "nl": "Voor de start stemmen we verantwoordelijke, benodigde inhoud en toegang en de controleroute af. In de preview kun je resultaten controleren en wijzigingen benoemen. Nieuwe eisen worden vastgelegd met gevolgen voor scope en inspanning. Bij oplevering documenteren we afgesproken resultaten en overdracht; ondersteuning daarna wordt apart afgesproken.",
+            "fr": "Avant le démarrage, nous précisons responsable, contenus et accès nécessaires ainsi que le parcours de vérification. Dans l’aperçu, tu peux examiner les résultats et demander des modifications. Les nouvelles exigences sont consignées avec leurs effets sur le périmètre et le travail. Résultats convenus et transmission sont documentés à la réception ; le suivi ultérieur est convenu séparément."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "prototypen/Kundenwege.dc.html",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Beschreiben Sie Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
-          "nl": "Beschrijf doel, uitgangssituatie, functies en bestaande systemen. Dat leidt tot een navolgbaar concept met aannames, grenzen en vervolgstappen; een bindende toezegging volgt afzonderlijk.",
-          "fr": "Décrivez l’objectif, la situation, les fonctions et les systèmes existants. Un projet traçable précise hypothèses, limites et prochaines étapes ; tout engagement ferme fait l’objet d’une validation distincte."
+          "de": "Beschreibe Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
+          "nl": "Beschrijf doel, uitgangssituatie, benodigde functies en bestaande systemen. Daaruit ontstaat een navolgbaar concept met aannames, grenzen en vervolgstappen; een bindende toezegging volgt afzonderlijk.",
+          "fr": "Décris l’objectif, la situation initiale, les fonctions nécessaires et les systèmes existants. Cela permet un projet traçable avec hypothèses, limites et prochaines étapes ; un engagement ferme intervient séparément."
         },
         "canonical_path": "/leistungsumfang",
         "canonical_origin": null,
@@ -917,7 +1198,12 @@
       ],
       "source_refs": [
         "docs/09-final/02-informationsarchitektur-und-journeys.md",
-        "docs/01-konzept/nexifyai-organisationshandbuch.md"
+        "docs/01-konzept/nexifyai-organisationshandbuch.md",
+        "docs/architecture/service-content-source.md",
+        "docs/09-final/05-technische-spezifikation.md",
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "prototypen/Kundenwege.dc.html",
+        "prototypen/NeXifyAI Cloud v12.dc.html"
       ],
       "next_actions": [
         {
@@ -962,9 +1248,9 @@
         "fr": "Solutions et produits"
       },
       "summary": {
-        "de": "NeXify-Leistungen und eigenständige Produkte haben unterschiedliche Nutzerwege. TEILEKLAR ist ein eigener Handelskontext; one und API beschreiben KI-Zugänge. Vorbereitete Ansichten sind als solche erkennbar.",
-        "nl": "NeXify-diensten en zelfstandige producten hebben verschillende gebruikersroutes. TEILEKLAR is een eigen handelscontext; one en API beschrijven AI-toegang. Voorbereide weergaven worden herkenbaar aangeduid.",
-        "fr": "Les prestations NeXify et les produits autonomes suivent des parcours distincts. TEILEKLAR constitue un contexte commercial propre ; one et l’API décrivent les accès IA. Les vues en préparation sont clairement signalées."
+        "de": "Wähle deinen Einstieg: NeX2fly erklärt die Suite und ihren Testzugang. one und one+ unterscheiden Antworten und Entwürfe von begrenzter Ausführung. Die API richtet sich an eigene Anwendungen. Agenturleistungen werden separat vereinbart; TEILEKLAR hat einen eigenen Handelskontext. Verfügbarkeit und Vorschau bleiben klar erkennbar.",
+        "nl": "Kies je startpunt: NeX2fly legt de Suite en de proeftoegang uit. one en one+ onderscheiden antwoorden en concepten van begrensde uitvoering. De API is bedoeld voor je eigen toepassingen. Bureaudiensten worden apart afgesproken; TEILEKLAR heeft een eigen handelscontext. Beschikbaarheid en preview blijven duidelijk herkenbaar.",
+        "fr": "Choisis ton point de départ : NeX2fly présente la Suite et son accès d’essai. one et one+ distinguent réponses et brouillons de l’exécution encadrée. L’API s’adresse à tes propres applications. Les prestations d’agence font l’objet d’un accord distinct ; TEILEKLAR a son propre contexte commercial. Disponibilité et aperçu restent clairement signalés."
       },
       "site_context": "nexify",
       "sections": [
@@ -976,21 +1262,77 @@
             "fr": "Solutions et produits"
           },
           "body": {
-            "de": "NeXify-Leistungen und eigenständige Produkte haben unterschiedliche Nutzerwege. TEILEKLAR ist ein eigener Handelskontext; one und API beschreiben KI-Zugänge. Vorbereitete Ansichten sind als solche erkennbar.",
-            "nl": "NeXify-diensten en zelfstandige producten hebben verschillende gebruikersroutes. TEILEKLAR is een eigen handelscontext; one en API beschrijven AI-toegang. Voorbereide weergaven worden herkenbaar aangeduid.",
-            "fr": "Les prestations NeXify et les produits autonomes suivent des parcours distincts. TEILEKLAR constitue un contexte commercial propre ; one et l’API décrivent les accès IA. Les vues en préparation sont clairement signalées."
+            "de": "Wähle deinen Einstieg: NeX2fly erklärt die Suite und ihren Testzugang. one und one+ unterscheiden Antworten und Entwürfe von begrenzter Ausführung. Die API richtet sich an eigene Anwendungen. Agenturleistungen werden separat vereinbart; TEILEKLAR hat einen eigenen Handelskontext. Verfügbarkeit und Vorschau bleiben klar erkennbar.",
+            "nl": "Kies je startpunt: NeX2fly legt de Suite en de proeftoegang uit. one en one+ onderscheiden antwoorden en concepten van begrensde uitvoering. De API is bedoeld voor je eigen toepassingen. Bureaudiensten worden apart afgesproken; TEILEKLAR heeft een eigen handelscontext. Beschikbaarheid en preview blijven duidelijk herkenbaar.",
+            "fr": "Choisis ton point de départ : NeX2fly présente la Suite et son accès d’essai. one et one+ distinguent réponses et brouillons de l’exécution encadrée. L’API s’adresse à tes propres applications. Les prestations d’agence font l’objet d’un accord distinct ; TEILEKLAR a son propre contexte commercial. Disponibilité et aperçu restent clairement signalés."
           },
           "source_refs": [
             "docs/09-final/01-produkt-und-marke.md",
             "docs/01-konzept/gesamtprojektplan.md"
           ]
+        },
+        {
+          "id": "agentur-oder-produkt",
+          "heading": {
+            "de": "Ein Projekt beauftragen oder ein Produkt nutzen",
+            "nl": "Een project laten uitvoeren of een product gebruiken",
+            "fr": "Commander un projet ou utiliser un produit"
+          },
+          "body": {
+            "de": "Für eine Website, eine individuelle Automatisierung oder ein Portal beginnt der Weg mit der Klärung deines Vorhabens und einem eigenen Angebot. Für die geplante Suite-Nutzung erklärt NeX2fly Registrierung und Testphase. one und one+ beschreiben unterschiedliche Aufgaben der Unternehmens-KI; die API erklärt die Anbindung eigener Anwendungen. Diese Wege haben unterschiedliche Voraussetzungen und sind keine gemeinsame Pauschalleistung.",
+            "nl": "Voor een website, maatwerkautomatisering of portaal begint de route met afstemming van je plan en een eigen offerte. Voor het geplande Suite-gebruik legt NeX2fly registratie en proefperiode uit. one en one+ beschrijven verschillende taken van de bedrijfs-AI; de API legt koppeling met eigen toepassingen uit. Deze routes hebben verschillende voorwaarden en vormen geen gezamenlijk totaalpakket.",
+            "fr": "Pour un site, une automatisation sur mesure ou un portail, le parcours commence par le cadrage et un devis distinct. Pour l’usage prévu de la Suite, NeX2fly explique inscription et essai. one et one+ décrivent les tâches de l’IA d’entreprise ; l’API explique la connexion de tes applications. Ces parcours ont des conditions différentes et ne constituent pas un forfait commun."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/architecture/nex2fly-page-source.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "handel-und-shopprojekt",
+          "heading": {
+            "de": "TEILEKLAR und dein eigenes Shopprojekt",
+            "nl": "TEILEKLAR en je eigen webshopproject",
+            "fr": "TEILEKLAR et ton propre projet de boutique"
+          },
+          "body": {
+            "de": "TEILEKLAR ist der eigene Handelsbereich mit Suche, Produktinformationen und gesonderten Werkstatt- und Partnerwegen. Wenn du einen Shop für deinen Betrieb suchst, wird dagegen ein eigenes Projekt mit deiner Marke, deinem Sortiment und deinem Bestellablauf beschrieben. Ein gezeigtes Muster ersetzt weder einen bestätigten Warenbestand noch eine verbindliche Liefer- oder Zahlungsfunktion.",
+            "nl": "TEILEKLAR is de eigen handelsomgeving met zoeken, productinformatie en afzonderlijke werkplaats- en partnerroutes. Zoek je een webshop voor je bedrijf, dan wordt een apart project beschreven met je merk, assortiment en bestelproces. Een getoond voorbeeld bewijst geen bevestigde voorraad en geen bindende leverings- of betaalfunctie.",
+            "fr": "TEILEKLAR est l’espace commercial propre, avec recherche, informations produits et parcours distincts pour ateliers et partenaires. Pour une boutique destinée à ton entreprise, un projet séparé définit ta marque, ton catalogue et tes commandes. Un exemple présenté ne prouve ni stock confirmé ni fonction de livraison ou paiement engageante."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "kombination-und-grenzen",
+          "heading": {
+            "de": "Passende Teile verbinden",
+            "nl": "Passende onderdelen verbinden",
+            "fr": "Relier les éléments adaptés"
+          },
+          "body": {
+            "de": "Eine Website kann Anfragen an einen geregelten Ablauf übergeben; ein Portal kann den daraus entstehenden Projektstand zeigen. Welche Systeme und Datenbereiche verbunden werden, wird ausdrücklich vereinbart. Ein gemeinsamer Markenauftritt bedeutet keinen automatischen Zugriff zwischen Produkten oder Mandanten. Verfügbare Funktionen und vorbereitete Ansichten bleiben unterscheidbar.",
+            "nl": "Een website kan aanvragen overdragen aan een geregeld proces; een portaal kan de daaruit voortkomende projectstatus tonen. Welke systemen en gegevensbereiken verbonden worden, spreken we expliciet af. Een gezamenlijke merkuitstraling geeft geen automatische toegang tussen producten of tenants. Beschikbare functies en voorbereide weergaven blijven te onderscheiden.",
+            "fr": "Un site peut transmettre les demandes à un processus encadré ; un portail peut montrer l’avancement du projet qui en découle. Les systèmes et périmètres de données à relier sont convenus explicitement. Une marque commune ne donne aucun accès automatique entre produits ou tenants. Fonctions disponibles et vues préparées restent distinctes."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "NeXify-Leistungen und eigenständige Produkte haben unterschiedliche Nutzerwege. TEILEKLAR ist ein eigener Handelskontext; one und API beschreiben KI-Zugänge. Vorbereitete Ansichten sind als solche erkennbar.",
-          "nl": "NeXify-diensten en zelfstandige producten hebben verschillende gebruikersroutes. TEILEKLAR is een eigen handelscontext; one en API beschrijven AI-toegang. Voorbereide weergaven worden herkenbaar aangeduid.",
-          "fr": "Les prestations NeXify et les produits autonomes suivent des parcours distincts. TEILEKLAR constitue un contexte commercial propre ; one et l’API décrivent les accès IA. Les vues en préparation sont clairement signalées."
+          "de": "Wähle deinen Einstieg: NeX2fly erklärt die Suite und ihren Testzugang. one und one+ unterscheiden Antworten und Entwürfe von begrenzter Ausführung. Die API richtet sich an eigene Anwendungen. Agenturleistungen werden separat vereinbart; TEILEKLAR hat einen eigenen Handelskontext. Verfügbarkeit und Vorschau bleiben klar erkennbar.",
+          "nl": "Kies je startpunt: NeX2fly legt de Suite en de proeftoegang uit. one en one+ onderscheiden antwoorden en concepten van begrensde uitvoering. De API is bedoeld voor je eigen toepassingen. Bureaudiensten worden apart afgesproken; TEILEKLAR heeft een eigen handelscontext. Beschikbaarheid en preview blijven duidelijk herkenbaar.",
+          "fr": "Choisis ton point de départ : NeX2fly présente la Suite et son accès d’essai. one et one+ distinguent réponses et brouillons de l’exécution encadrée. L’API s’adresse à tes propres applications. Les prestations d’agence font l’objet d’un accord distinct ; TEILEKLAR a son propre contexte commercial. Disponibilité et aperçu restent clairement signalés."
         },
         "canonical_path": "/loesungen",
         "canonical_origin": null,
@@ -1020,9 +1362,24 @@
       ],
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
-        "docs/01-konzept/gesamtprojektplan.md"
+        "docs/01-konzept/gesamtprojektplan.md",
+        "docs/architecture/nex2fly-page-source.md",
+        "docs/architecture/service-content-source.md",
+        "docs/09-final/02-informationsarchitektur-und-journeys.md",
+        "docs/09-final/05-technische-spezifikation.md",
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "prototypen/NeXifyAI Cloud v12.dc.html"
       ],
       "next_actions": [
+        {
+          "type": "route",
+          "target_id": "nex2fly",
+          "label": {
+            "de": "NeX2fly Suite und Testphase",
+            "nl": "NeX2fly Suite en proefperiode",
+            "fr": "NeX2fly Suite et essai"
+          }
+        },
         {
           "type": "route",
           "target_id": "tk-home",
@@ -1096,6 +1453,58 @@
             "docs/09-final/08-recht-und-compliance.md",
             "docs/01-konzept/nexifyai-organisationshandbuch.md"
           ]
+        },
+        {
+          "id": "aufbau-betrieb-verbrauch",
+          "heading": {
+            "de": "Aufbau, Betreuung und Verbrauch trennen",
+            "nl": "Bouw, ondersteuning en verbruik scheiden",
+            "fr": "Distinguer réalisation, suivi et consommation"
+          },
+          "body": {
+            "de": "Der Aufbau betrifft die vereinbarte Entwicklung oder Einrichtung. Danach kann dein Team die Lösung gemäß vereinbarter Übergabe selbst betreiben oder einen eigenen Betreuungsumfang wählen. Modellnutzung und weitere Anbieterkosten werden getrennt betrachtet. Ein Entwicklungs-Tagessatz beschreibt keine tägliche Gebühr für den späteren Betrieb; was tatsächlich berechnet wird, steht im freigegebenen Angebot.",
+            "nl": "De bouw betreft de afgesproken ontwikkeling of inrichting. Daarna kan je team de oplossing volgens de overeengekomen overdracht zelf beheren of een apart ondersteuningspakket kiezen. Modelgebruik en andere providerkosten worden afzonderlijk bekeken. Een ontwikkelingsdagtarief is geen dagelijkse vergoeding voor later beheer; de goedgekeurde offerte bepaalt wat wordt berekend.",
+            "fr": "La réalisation couvre le développement ou la configuration convenus. Ton équipe peut ensuite exploiter la solution selon la transmission prévue ou choisir un suivi distinct. Utilisation des modèles et autres coûts fournisseurs sont examinés séparément. Un tarif journalier de développement n’est pas une facturation quotidienne de l’exploitation ; les montants dus figurent dans le devis validé."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "aufwandsfaktoren",
+          "heading": {
+            "de": "Was den Umfang beeinflusst",
+            "nl": "Wat de scope beïnvloedt",
+            "fr": "Ce qui influence le périmètre"
+          },
+          "body": {
+            "de": "Bei einem vorhandenen Baustein zählen insbesondere Marke, Inhalte, Regeln und die benötigte Anbindung. Bei einer Individuallösung kommen neues Datenmodell, eigene Oberflächen und das Zusammenspiel der Systeme hinzu. Fehlende Inhalte, unklare Zugriffsrechte oder zusätzliche Freigabewege werden vor dem Angebot als Abhängigkeiten benannt. Aus einem Beispiel folgt kein Festpreis und kein zugesagter Fertigstellungstermin.",
+            "nl": "Bij een bestaande bouwsteen tellen vooral merk, inhoud, regels en de benodigde koppeling. Maatwerk voegt een nieuw datamodel, eigen schermen en samenwerking tussen systemen toe. Ontbrekende inhoud, onduidelijke rechten en extra goedkeuringsroutes worden vooraf als afhankelijkheden benoemd. Een voorbeeld is geen vaste prijs of toegezegde opleverdatum.",
+            "fr": "Pour un module existant, marque, contenus, règles et connexion nécessaire comptent particulièrement. Le sur-mesure ajoute modèle de données, interfaces propres et échanges entre systèmes. Contenus manquants, droits imprécis ou validations supplémentaires sont identifiés avant le devis. Un exemple ne vaut ni prix forfaitaire ni date de livraison garantie."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/service-content-source.md"
+          ]
+        },
+        {
+          "id": "fragen-zur-kalkulation",
+          "heading": {
+            "de": "Was du vor der Entscheidung prüfen kannst",
+            "nl": "Wat je vóór je beslissing kunt controleren",
+            "fr": "Ce que tu peux vérifier avant de décider"
+          },
+          "body": {
+            "de": "Welche Ergebnisse sind enthalten, welche Leistungen nicht? Wer betreibt und pflegt die Lösung nach der Abnahme? Welche Nutzungsrechte werden übergeben, und welche laufenden Kosten entstehen durch Dritte? Diese Punkte gehören in die schriftliche Klärung. Der Suite-Test und das einmalige bezahlte Testguthaben werden auf der NeX2fly-Seite erklärt; sie sind kein Preis für ein Agenturprojekt.",
+            "nl": "Welke resultaten zijn inbegrepen en welke diensten niet? Wie beheert en onderhoudt de oplossing na oplevering? Welke gebruiksrechten worden overgedragen en welke doorlopende kosten ontstaan bij derden? Deze punten horen in de schriftelijke afstemming. De Suite-proefperiode en het eenmalige betaalde proefsaldo staan op de NeX2fly-pagina; zij vormen geen prijs voor een bureauproject.",
+            "fr": "Quels résultats sont inclus et quelles prestations ne le sont pas ? Qui exploite et maintient la solution après réception ? Quels droits d’usage sont transmis et quels frais récurrents proviennent de tiers ? Ces points doivent être précisés par écrit. L’essai de la Suite et le crédit d’essai initial acheté sont expliqués sur la page NeX2fly ; ils ne constituent pas le prix d’un projet d’agence."
+          },
+          "source_refs": [
+            "prototypen/NeXifyAI Cloud v12.dc.html",
+            "docs/architecture/nex2fly-page-source.md",
+            "docs/architecture/service-content-source.md"
+          ]
         }
       ],
       "metadata": {
@@ -1132,7 +1541,10 @@
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
         "docs/09-final/08-recht-und-compliance.md",
-        "docs/01-konzept/nexifyai-organisationshandbuch.md"
+        "docs/01-konzept/nexifyai-organisationshandbuch.md",
+        "docs/architecture/service-content-source.md",
+        "docs/architecture/nex2fly-page-source.md",
+        "prototypen/NeXifyAI Cloud v12.dc.html"
       ],
       "next_actions": [
         {
@@ -1594,6 +2006,211 @@
       ]
     },
     {
+      "id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "title": {
+        "de": "NeX2fly Suite: dein Einstieg",
+        "nl": "NeX2fly Suite: jouw startpunt",
+        "fr": "NeX2fly Suite : ton point de départ"
+      },
+      "summary": {
+        "de": "Entdecke den geplanten Zugang zu deiner NeX2fly Suite: öffentliches Kundenkonto, 24 Stunden kostenlose Suite-Testphase und LLM-Nutzung mit eigenem Anbieterschlüssel oder bezahltem Testguthaben. Diese Vorschau erklärt den Ablauf; die Live-Registrierung und LLM-Nutzung sind hier noch nicht aktiviert.",
+        "nl": "Ontdek de geplande toegang tot je NeX2fly Suite: een openbaar klantaccount, een gratis Suite-proefperiode van 24 uur en LLM-gebruik met je eigen providersleutel of betaald proefsaldo. Deze preview legt het proces uit; live-registratie en LLM-gebruik zijn hier nog niet geactiveerd.",
+        "fr": "Découvre l’accès prévu à ta NeX2fly Suite : compte client public, essai gratuit de la Suite pendant 24 heures et utilisation des LLM avec ta propre clé fournisseur ou un crédit d’essai acheté. Cet aperçu explique le parcours ; l’inscription en production et l’utilisation des LLM ne sont pas encore activées ici."
+      },
+      "site_context": "nexify",
+      "sections": [
+        {
+          "id": "ueberblick",
+          "heading": {
+            "de": "NeX2fly Suite: dein Einstieg",
+            "nl": "NeX2fly Suite: jouw startpunt",
+            "fr": "NeX2fly Suite : ton point de départ"
+          },
+          "body": {
+            "de": "Entdecke den geplanten Zugang zu deiner NeX2fly Suite: öffentliches Kundenkonto, 24 Stunden kostenlose Suite-Testphase und LLM-Nutzung mit eigenem Anbieterschlüssel oder bezahltem Testguthaben. Diese Vorschau erklärt den Ablauf; die Live-Registrierung und LLM-Nutzung sind hier noch nicht aktiviert.",
+            "nl": "Ontdek de geplande toegang tot je NeX2fly Suite: een openbaar klantaccount, een gratis Suite-proefperiode van 24 uur en LLM-gebruik met je eigen providersleutel of betaald proefsaldo. Deze preview legt het proces uit; live-registratie en LLM-gebruik zijn hier nog niet geactiveerd.",
+            "fr": "Découvre l’accès prévu à ta NeX2fly Suite : compte client public, essai gratuit de la Suite pendant 24 heures et utilisation des LLM avec ta propre clé fournisseur ou un crédit d’essai acheté. Cet aperçu explique le parcours ; l’inscription en production et l’utilisation des LLM ne sont pas encore activées ici."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        },
+        {
+          "id": "produktwahl",
+          "heading": {
+            "de": "Welcher Einstieg passt zu dir?",
+            "nl": "Welke toegang past bij jou?",
+            "fr": "Quel accès te convient ?"
+          },
+          "body": {
+            "de": "Die NeX2fly Suite ist der geplante Arbeitsbereich für dein Kundenkonto. one beschreibt Antworten, Beratung und Entwürfe; one+ ergänzt die Ausführung klar begrenzter Aufträge mit Prüfung und passenden Freigaben. Die API ist der technische Zugang für eigene Anwendungen. Ein Agenturprojekt wie eine Website oder ein Portal wird separat mit dir vereinbart.",
+            "nl": "De NeX2fly Suite is de geplande werkruimte voor je klantaccount. one beschrijft antwoorden, advies en concepten; one+ voegt uitvoering van duidelijk begrensde opdrachten met controle en passende goedkeuring toe. De API is de technische toegang voor je eigen toepassingen. Een bureauproject, zoals een website of portaal, wordt afzonderlijk met je afgesproken.",
+            "fr": "La NeX2fly Suite est l’espace de travail prévu pour ton compte client. one désigne les réponses, le conseil et les brouillons ; one+ ajoute l’exécution de missions délimitées, avec vérification et autorisations adaptées. L’API est l’accès technique pour tes propres applications. Un projet d’agence, comme un site ou un portail, fait l’objet d’un accord distinct."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md",
+            "reference/handoff-n2/dokumentation/01-produkt-und-marke.md"
+          ]
+        },
+        {
+          "id": "registrierung-teststart",
+          "heading": {
+            "de": "Kundenkonto und 24 Stunden Suite-Test",
+            "nl": "Klantaccount en 24 uur Suite-proefperiode",
+            "fr": "Compte client et essai de la Suite pendant 24 heures"
+          },
+          "body": {
+            "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Sobald sie verfügbar ist, erstellst du dein Konto, bestätigst deine E-Mail und aktivierst deinen eigenen Kundenarbeitsbereich. Danach startest du die kostenlose Suite-Testphase ausdrücklich: einmalig 24 Stunden ab diesem Zeitpunkt. Eine erneute Anmeldung startet keinen neuen Test. Du erhältst Kundenrechte in deinem eigenen Bereich, keine internen Verwaltungsrechte.",
+            "nl": "Openbare klantregistratie is voorzien. Zodra deze beschikbaar is, maak je een account aan, bevestig je je e-mailadres en activeer je je eigen klantwerkruimte. Daarna start je uitdrukkelijk de gratis Suite-proefperiode: eenmalig 24 uur vanaf dat moment. Opnieuw aanmelden start geen nieuwe proefperiode. Je krijgt klantrechten binnen je eigen omgeving, geen interne beheerrechten.",
+            "fr": "L’inscription publique des clients est prévue. Dès qu’elle sera disponible, tu créeras ton compte, vérifieras ton e-mail et activeras ton propre espace client. Tu démarreras ensuite explicitement l’essai gratuit de la Suite : 24 heures, une seule fois à partir de cet instant. Une nouvelle connexion ne démarre pas un nouvel essai. Tu reçois des droits client dans ton propre espace, sans droits d’administration interne."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        },
+        {
+          "id": "llm-finanzierung",
+          "heading": {
+            "de": "Du entscheidest, wie du LLM-Nutzung bezahlst",
+            "nl": "Jij kiest hoe je LLM-gebruik betaalt",
+            "fr": "Tu choisis comment payer l’utilisation des LLM"
+          },
+          "body": {
+            "de": "Die kostenlose Suite-Testphase enthält kein geschenktes LLM-Guthaben. Du nutzt entweder deinen eigenen Anbieterschlüssel (BYOK) auf eigene Anbieterrechnung oder einmalig 5 EUR (500 Cent) bezahltes Testguthaben für unsere verwaltete Route. Die verwaltete Route und die Anbieterauswahl werden erst bei Verfügbarkeit freigegeben. Eine Testaufladung ist kein kostenpflichtiges Suite-Abo.",
+            "nl": "De gratis Suite-proefperiode bevat geen gratis LLM-tegoed. Je gebruikt je eigen providersleutel (BYOK), voor rekening van je eigen provideraccount, of eenmalig 5 EUR (500 cent) betaald proefsaldo voor onze beheerde route. De beheerde route en de providerkeuze worden pas vrijgegeven zodra ze beschikbaar zijn. Proefsaldo kopen is geen betaald Suite-abonnement.",
+            "fr": "L’essai gratuit de la Suite n’inclut aucun crédit LLM offert. Tu utilises ta propre clé fournisseur (BYOK), facturée sur ton compte fournisseur, ou un achat initial unique de 5 EUR (500 centimes) de crédit d’essai pour notre routage géré. Le routage géré et le choix des fournisseurs seront proposés lorsqu’ils seront disponibles. L’achat de crédit d’essai n’est pas un abonnement Suite payant."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        },
+        {
+          "id": "nach-dem-test",
+          "heading": {
+            "de": "Weiterarbeiten mit deinem bestehenden Konto",
+            "nl": "Verder met je bestaande account",
+            "fr": "Continuer avec ton compte existant"
+          },
+          "body": {
+            "de": "Am Ende der 24 Stunden endet die Testberechtigung ohne automatische Abbuchung. Du entscheidest ausdrücklich über einen verfügbaren kostenpflichtigen Suite-Tarif. Bei einem Wechsel bleiben dein Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselverknüpfungen, Dokumente, Verlauf und Guthaben erhalten. Dein gekauftes Guthaben verfällt nicht allein durch das Testende; dein Konto und deine Datenrechte bleiben bestehen.",
+            "nl": "Na 24 uur eindigt het proefrecht zonder automatische afschrijving. Je kiest uitdrukkelijk of je een beschikbaar betaald Suite-abonnement wilt. Bij een overstap blijven je account, tenant, werkruimte, instellingen, sleutelverbindingen, documenten, geschiedenis en saldo behouden. Gekocht saldo vervalt niet alleen door het einde van de proefperiode; je account en gegevensrechten blijven bestaan.",
+            "fr": "Après 24 heures, le droit d’essai prend fin sans prélèvement automatique. Tu choisis explicitement un éventuel abonnement Suite payant disponible. En cas de changement, ton compte, tenant, espace de travail, paramètres, liens vers tes clés, documents, historique et solde sont conservés. Ton crédit acheté n’expire pas du seul fait de la fin de l’essai ; ton compte et tes droits sur tes données sont préservés."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        },
+        {
+          "id": "naechster-schritt",
+          "heading": {
+            "de": "So geht es weiter",
+            "nl": "Zo ga je verder",
+            "fr": "La prochaine étape"
+          },
+          "body": {
+            "de": "Lies den Registrierungsablauf, wenn du neu beginnst. Für ein vorhandenes Konto führt der Weg zur Anmeldung. Auf den Seiten one/one+ und API vergleichst du die Produktzugänge. Diese Vorschau erstellt noch kein nutzbares Konto und nimmt keine Zahlung entgegen; bei Fragen kannst du Kontakt aufnehmen.",
+            "nl": "Lees het registratieproces als je nieuw begint. Met een bestaand account ga je naar aanmelden. Op de pagina’s one/one+ en API vergelijk je de producttoegang. Deze preview maakt nog geen bruikbaar account aan en ontvangt geen betaling; neem contact op als je vragen hebt.",
+            "fr": "Lis le parcours d’inscription si tu débutes. Pour un compte existant, consulte la connexion. Les pages one/one+ et API permettent de comparer les accès. Cet aperçu ne crée pas encore de compte utilisable et n’encaisse aucun paiement ; tu peux nous contacter pour toute question."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Entdecke den geplanten Zugang zu deiner NeX2fly Suite: öffentliches Kundenkonto, 24 Stunden kostenlose Suite-Testphase und LLM-Nutzung mit eigenem Anbieterschlüssel oder bezahltem Testguthaben. Diese Vorschau erklärt den Ablauf; die Live-Registrierung und LLM-Nutzung sind hier noch nicht aktiviert.",
+          "nl": "Ontdek de geplande toegang tot je NeX2fly Suite: een openbaar klantaccount, een gratis Suite-proefperiode van 24 uur en LLM-gebruik met je eigen providersleutel of betaald proefsaldo. Deze preview legt het proces uit; live-registratie en LLM-gebruik zijn hier nog niet geactiveerd.",
+          "fr": "Découvre l’accès prévu à ta NeX2fly Suite : compte client public, essai gratuit de la Suite pendant 24 heures et utilisation des LLM avec ta propre clé fournisseur ou un crédit d’essai acheté. Cet aperçu explique le parcours ; l’inscription en production et l’utilisation des LLM ne sont pas encore activées ici."
+        },
+        "canonical_path": "/produkte/nex2fly",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N2:prototypen/NeXify AI one.dc.html",
+        "N2:prototypen/NeXify API.dc.html"
+      ],
+      "source_refs": [
+        "config/selfservice-policy.json",
+        "docs/architecture/nex2fly-page-source.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "signup",
+          "label": {
+            "de": "Registrierungsablauf ansehen",
+            "nl": "Registratieproces bekijken",
+            "fr": "Voir le parcours d’inscription"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "login",
+          "label": {
+            "de": "Anmeldung ansehen",
+            "nl": "Aanmelden bekijken",
+            "fr": "Voir la connexion"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "one",
+          "label": {
+            "de": "one und one+ verstehen",
+            "nl": "one en one+ begrijpen",
+            "fr": "Comprendre one et one+"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "api",
+          "label": {
+            "de": "Technischen API-Zugang verstehen",
+            "nl": "Technische API-toegang begrijpen",
+            "fr": "Comprendre l’accès API"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Fragen zur Suite stellen",
+            "nl": "Vragen over de Suite stellen",
+            "fr": "Poser une question sur la Suite"
+          }
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true,
+      "derivation_kind": "current_user_decision_with_related_prototype_references_not_original_nex2fly_html"
+    },
+    {
       "id": "one",
       "path": "/produkte/one",
       "title": {
@@ -1624,6 +2241,25 @@
             "docs/09-final/01-produkt-und-marke.md",
             "docs/09-final/05-technische-spezifikation.md",
             "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "produkt-einordnung",
+          "heading": {
+            "de": "Antworten oder Aufgaben ausführen?",
+            "nl": "Antwoorden of taken uitvoeren?",
+            "fr": "Obtenir des réponses ou exécuter des tâches ?"
+          },
+          "body": {
+            "de": "one ist für Fragen, Zusammenfassungen, Beratung und Entwürfe gedacht. one+ ergänzt klar begrenzte Werkzeugaufträge wie das Erstellen einer Seite oder das Prüfen von Code, mit sichtbaren Schritten und passenden Freigaben. Für den geplanten Suite-Einstieg mit Kundenkonto und Testphase führt der Weg zu NeX2fly; für die Einbindung in eigene Anwendungen zur API. Die Produktbeschreibung ist kein bereits aktivierter Zugang.",
+            "nl": "one is bedoeld voor vragen, samenvattingen, advies en concepten. one+ voegt duidelijk begrensde toolopdrachten toe, zoals een pagina maken of code controleren, met zichtbare stappen en passende goedkeuring. Voor de geplande Suite-toegang met klantaccount en proefperiode ga je naar NeX2fly; voor koppeling met je eigen toepassingen naar de API. De productbeschrijving is nog geen geactiveerde toegang.",
+            "fr": "one est prévu pour les questions, synthèses, conseils et brouillons. one+ ajoute des missions outillées délimitées, comme créer une page ou vérifier du code, avec des étapes visibles et des autorisations adaptées. Pour l’accès prévu à la Suite avec compte client et essai, consulte NeX2fly ; pour tes propres applications, consulte l’API. Cette description ne constitue pas un accès déjà activé."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md",
+            "reference/handoff-n2/dokumentation/01-produkt-und-marke.md",
+            "reference/handoff-n2/dokumentation/12-api-technisches-datenblatt.md"
           ]
         }
       ],
@@ -1660,9 +2296,19 @@
       "source_refs": [
         "docs/09-final/01-produkt-und-marke.md",
         "docs/09-final/05-technische-spezifikation.md",
-        "config/regelwerk.json"
+        "config/regelwerk.json",
+        "docs/architecture/nex2fly-page-source.md"
       ],
       "next_actions": [
+        {
+          "type": "route",
+          "target_id": "nex2fly",
+          "label": {
+            "de": "Suite und Testzugang verstehen",
+            "nl": "Suite en proeftoegang begrijpen",
+            "fr": "Comprendre la Suite et l’accès d’essai"
+          }
+        },
         {
           "type": "route",
           "target_id": "api",
@@ -1727,6 +2373,25 @@
             "docs/09-final/05-technische-spezifikation.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "produkt-einordnung",
+          "heading": {
+            "de": "Für deine eigenen Anwendungen",
+            "nl": "Voor je eigen toepassingen",
+            "fr": "Pour tes propres applications"
+          },
+          "body": {
+            "de": "Die API ist der geplante technische Zugang für Anwendungen, die Anfragen an NeXify senden. Der Entwurf sieht Schlüssel und Budgets je Kostenstelle sowie nachvollziehbaren Verbrauch vor. one und one+ erläutern Antworten und begrenzte Ausführung; NeX2fly erklärt den Suite-Einstieg mit Kundenkonto und Testphase. Diese Vorschau stellt keine nutzbaren Schlüssel aus und löst keine Zahlungen aus.",
+            "nl": "De API is de geplande technische toegang voor toepassingen die aanvragen naar NeXify sturen. Het ontwerp voorziet in sleutels en budgetten per kostenplaats en inzichtelijk verbruik. one en one+ leggen antwoorden en begrensde uitvoering uit; NeX2fly legt de Suite-toegang met klantaccount en proefperiode uit. Deze preview verstrekt geen bruikbare sleutels en voert geen betalingen uit.",
+            "fr": "L’API est l’accès technique prévu pour les applications qui envoient des demandes à NeXify. Le projet prévoit des clés et budgets par centre de coûts ainsi qu’un suivi de consommation. one et one+ expliquent les réponses et l’exécution encadrée ; NeX2fly présente l’accès à la Suite avec compte client et essai. Cet aperçu ne délivre aucune clé utilisable et ne déclenche aucun paiement."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json",
+            "docs/architecture/nex2fly-page-source.md",
+            "reference/handoff-n2/dokumentation/01-produkt-und-marke.md",
+            "reference/handoff-n2/dokumentation/12-api-technisches-datenblatt.md"
+          ]
         }
       ],
       "metadata": {
@@ -1762,9 +2427,19 @@
       ],
       "source_refs": [
         "docs/09-final/05-technische-spezifikation.md",
-        "docs/09-final/08-recht-und-compliance.md"
+        "docs/09-final/08-recht-und-compliance.md",
+        "docs/architecture/nex2fly-page-source.md"
       ],
       "next_actions": [
+        {
+          "type": "route",
+          "target_id": "nex2fly",
+          "label": {
+            "de": "Suite und Testzugang verstehen",
+            "nl": "Suite en proeftoegang begrijpen",
+            "fr": "Comprendre la Suite et l’accès d’essai"
+          }
+        },
         {
           "type": "chat",
           "chat_intent": "quote",
@@ -2347,9 +3022,9 @@
         "fr": "Connexion"
       },
       "summary": {
-        "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
-        "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
-        "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
+        "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+        "nl": "Veilig aanmelden is voorzien voor de goedgekeurde productieconfiguratie; live-toegang is hier nog niet geverifieerd. Je klantaccount gebruikt alleen toegekende rechten binnen je eigen tenant. Opnieuw aanmelden start geen nieuwe proefperiode van 24 uur.",
+        "fr": "La connexion sécurisée est prévue avec la configuration de production validée ; l’accès en production n’est pas encore vérifié ici. Ton compte client utilise uniquement les droits autorisés dans son propre tenant. Une nouvelle connexion ne démarre pas un nouvel essai de 24 heures."
       },
       "site_context": "nexify",
       "sections": [
@@ -2361,21 +3036,38 @@
             "fr": "Connexion"
           },
           "body": {
-            "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
-            "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
-            "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
+            "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+            "nl": "Veilig aanmelden is voorzien voor de goedgekeurde productieconfiguratie; live-toegang is hier nog niet geverifieerd. Je klantaccount gebruikt alleen toegekende rechten binnen je eigen tenant. Opnieuw aanmelden start geen nieuwe proefperiode van 24 uur.",
+            "fr": "La connexion sécurisée est prévue avec la configuration de production validée ; l’accès en production n’est pas encore vérifié ici. Ton compte client utilise uniquement les droits autorisés dans son propre tenant. Une nouvelle connexion ne démarre pas un nouvel essai de 24 heures."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "konto-behalten",
+          "heading": {
+            "de": "Dein bestehendes Konto bleibt erhalten",
+            "nl": "Je bestaande account blijft behouden",
+            "fr": "Ton compte existant est conservé"
+          },
+          "body": {
+            "de": "Beim Wechsel von der Testphase zu einem ausdrücklich gewählten, freigegebenen kostenpflichtigen Suite-Tarif bleiben Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselreferenzen, Dokumente, Verlauf und Guthabenreferenzen erhalten. Es gibt keine automatische Umwandlung und keine automatische Abbuchung am Testende. Die Suite-Testphase enthält kein geschenktes LLM-Guthaben: LLM-Nutzung setzt validiertes BYOK oder das nach Betriebs- und Preisfreigabe angebotene einmalige 5-EUR-Testguthaben voraus.",
+            "nl": "Bij de overstap van de proefperiode naar een uitdrukkelijk gekozen, goedgekeurd betaald Suite-abonnement blijven account, tenant, werkruimte, instellingen, sleutelreferenties, documenten, geschiedenis en saldoreferenties behouden. Er is geen automatische omzetting of afschrijving aan het einde van de proefperiode. De Suite-proefperiode bevat geen gratis LLM-tegoed: LLM-gebruik vereist gevalideerd BYOK of het eenmalige proefsaldo van 5 EUR dat na operationele en prijsgoedkeuring wordt aangeboden.",
+            "fr": "Lors du passage de l’essai à un abonnement Suite payant explicitement choisi et validé, compte, tenant, espace de travail, paramètres, références des clés, documents, historique et références du solde sont conservés. Aucun passage automatique ni prélèvement automatique n’a lieu à la fin de l’essai. L’essai de la Suite n’offre aucun crédit LLM : l’utilisation des LLM exige une clé BYOK validée ou le crédit d’essai initial unique de 5 EUR proposé après validation opérationnelle et tarifaire."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Sichere Anmeldung, sobald die Produktionskonfiguration vollständig ist. Ein Konto allein gewährt keine Mandanten- oder Portalrechte.",
-          "nl": "Veilig aanmelden zodra de productieconfiguratie volledig is. Een account alleen geeft geen tenant- of portaalrechten.",
-          "fr": "Connexion sécurisée lorsque la configuration de production est complète. Un compte seul ne donne aucun droit de tenant ou de portail."
+          "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+          "nl": "Veilig aanmelden is voorzien voor de goedgekeurde productieconfiguratie; live-toegang is hier nog niet geverifieerd. Je klantaccount gebruikt alleen toegekende rechten binnen je eigen tenant. Opnieuw aanmelden start geen nieuwe proefperiode van 24 uur.",
+          "fr": "La connexion sécurisée est prévue avec la configuration de production validée ; l’accès en production n’est pas encore vérifié ici. Ton compte client utilise uniquement les droits autorisés dans son propre tenant. Une nouvelle connexion ne démarre pas un nouvel essai de 24 heures."
         },
         "canonical_path": "/anmelden",
         "canonical_origin": null,
@@ -2404,7 +3096,8 @@
       ],
       "source_refs": [
         "docs/09-final/05-technische-spezifikation.md",
-        "docs/09-final/14-gesamtsystem-und-portale.md"
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "config/selfservice-policy.json"
       ],
       "next_actions": [
         {
@@ -2447,9 +3140,9 @@
         "fr": "Créer un compte"
       },
       "summary": {
-        "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
-        "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
-        "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+        "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+        "nl": "Openbare klantregistratie is voorzien. Na bevestiging van je e-mailadres en activering van je klantwerkruimte kun je de gratis Suite-proefperiode van 24 uur starten. LLM-gebruik wordt apart gefinancierd. Live-registratie is hier nog niet geverifieerd.",
+        "fr": "L’inscription publique des clients est prévue. Après vérification de ton e-mail et activation de ton espace client, tu pourras démarrer les 24 heures d’essai gratuit de la Suite. L’utilisation des LLM est financée séparément. L’inscription en production n’est pas encore vérifiée ici."
       },
       "site_context": "nexify",
       "sections": [
@@ -2461,22 +3154,71 @@
             "fr": "Créer un compte"
           },
           "body": {
-            "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
-            "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
-            "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+            "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+            "nl": "Openbare klantregistratie is voorzien. Na bevestiging van je e-mailadres en activering van je klantwerkruimte kun je de gratis Suite-proefperiode van 24 uur starten. LLM-gebruik wordt apart gefinancierd. Live-registratie is hier nog niet geverifieerd.",
+            "fr": "L’inscription publique des clients est prévue. Après vérification de ton e-mail et activation de ton espace client, tu pourras démarrer les 24 heures d’essai gratuit de la Suite. L’utilisation des LLM est financée séparément. L’inscription en production n’est pas encore vérifiée ici."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
-            "docs/deployment/clerk-setup.md"
+            "docs/deployment/clerk-setup.md",
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "testphase-start",
+          "heading": {
+            "de": "So beginnt deine Testphase",
+            "nl": "Zo begint je proefperiode",
+            "fr": "Comment démarre ton essai"
+          },
+          "body": {
+            "de": "Nach E-Mail-Bestätigung und Aktivierung startest du die Testphase ausdrücklich. Ab diesem Zeitpunkt laufen einmalig 24 Stunden nach Serverzeit. Eine erneute Anmeldung verlängert sie nicht. Dein Kundenkonto erhält ausschließlich Rechte in deinem eigenen Mandanten; interne Verwaltungsrechte sind ausgeschlossen.",
+            "nl": "Na e-mailbevestiging en activering start je de proefperiode uitdrukkelijk. Vanaf dat moment lopen eenmalig 24 uur volgens de serverklok. Opnieuw aanmelden verlengt deze niet. Je klantaccount krijgt alleen rechten binnen je eigen tenant, geen interne beheerrechten.",
+            "fr": "Après vérification de l’e-mail et activation, tu démarres explicitement l’essai. Les 24 heures commencent alors une seule fois selon l’horloge du serveur. Une nouvelle connexion ne les prolonge pas. Ton compte client reçoit uniquement des droits dans son propre tenant, sans droits d’administration interne."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "llm-finanzierung",
+          "heading": {
+            "de": "LLM-Nutzung: eigener Schlüssel oder Testguthaben",
+            "nl": "LLM-gebruik: eigen sleutel of proefsaldo",
+            "fr": "LLM : ta propre clé ou un crédit d’essai"
+          },
+          "body": {
+            "de": "Die kostenlose Suite-Testphase enthält kein geschenktes LLM-Guthaben. Du nutzt entweder deinen eigenen Anbieterschlüssel (BYOK) auf eigene Anbieterrechnung oder einmalig 5 EUR (500 Cent) bezahltes Testguthaben für unsere verwaltete Route. Die verwaltete Route und die Anbieterauswahl werden erst bei Verfügbarkeit freigegeben. In dieser Vorschau ist die LLM-Nutzung noch nicht aktiviert.",
+            "nl": "De gratis Suite-proefperiode bevat geen gratis LLM-tegoed. Je gebruikt je eigen providersleutel (BYOK), voor rekening van je eigen provideraccount, of eenmalig 5 EUR (500 cent) betaald proefsaldo voor onze beheerde route. De beheerde route en de providerkeuze worden pas vrijgegeven zodra ze beschikbaar zijn. In deze preview is LLM-gebruik nog niet geactiveerd.",
+            "fr": "L’essai gratuit de la Suite n’inclut aucun crédit LLM offert. Tu utilises soit ta propre clé fournisseur (BYOK), facturée sur ton compte fournisseur, soit un achat initial unique de 5 EUR (500 centimes) de crédit d’essai pour notre routage géré. Le routage géré et le choix des fournisseurs seront proposés lorsqu’ils seront disponibles. Dans cet aperçu, l’utilisation des LLM n’est pas encore activée."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
+          ]
+        },
+        {
+          "id": "bestandserhalt",
+          "heading": {
+            "de": "Nach der Testphase",
+            "nl": "Na de proefperiode",
+            "fr": "Après l’essai"
+          },
+          "body": {
+            "de": "Ohne ausdrücklich gewählten und freigegebenen kostenpflichtigen Suite-Tarif endet die Testberechtigung ohne automatische Abbuchung. Eine Testaufladung ist kein Suite-Abo. Bei einem Wechsel bleiben Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselreferenzen, Dokumente, Verlauf und Guthabenreferenzen erhalten. Gekauftes Guthaben verfällt nicht allein durch das Ende der Testphase; dein Konto und deine Datenrechte bleiben bestehen.",
+            "nl": "Zonder uitdrukkelijk gekozen en goedgekeurd betaald Suite-abonnement eindigt het proefrecht zonder automatische afschrijving. Proefsaldo kopen is geen Suite-abonnement. Bij een overstap blijven account, tenant, werkruimte, instellingen, sleutelreferenties, documenten, geschiedenis en saldoreferenties behouden. Gekocht saldo vervalt niet alleen doordat de proefperiode eindigt; je account en gegevensrechten blijven bestaan.",
+            "fr": "Sans choix explicite d’un abonnement Suite payant validé, le droit d’essai prend fin sans prélèvement automatique. L’achat de crédit d’essai n’est pas un abonnement Suite. En cas de passage à une offre payante, compte, tenant, espace de travail, paramètres, références des clés, documents, historique et références du solde sont conservés. Le crédit acheté n’expire pas du seul fait de la fin de l’essai ; ton compte et tes droits sur tes données sont préservés."
+          },
+          "source_refs": [
+            "config/selfservice-policy.json"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Registrierung über Clerk, sobald die Produktionskonfiguration vollständig ist. Neue Konten erhalten keine automatischen Geschäftsrechte.",
-          "nl": "Registratie via Clerk zodra de productieconfiguratie volledig is. Nieuwe accounts krijgen geen automatische zakelijke rechten.",
-          "fr": "Inscription via Clerk lorsque la configuration de production est complète. Les nouveaux comptes ne reçoivent aucun droit professionnel automatique."
+          "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+          "nl": "Openbare klantregistratie is voorzien. Na bevestiging van je e-mailadres en activering van je klantwerkruimte kun je de gratis Suite-proefperiode van 24 uur starten. LLM-gebruik wordt apart gefinancierd. Live-registratie is hier nog niet geverifieerd.",
+          "fr": "L’inscription publique des clients est prévue. Après vérification de ton e-mail et activation de ton espace client, tu pourras démarrer les 24 heures d’essai gratuit de la Suite. L’utilisation des LLM est financée séparément. L’inscription en production n’est pas encore vérifiée ici."
         },
         "canonical_path": "/registrieren",
         "canonical_origin": null,
@@ -2506,7 +3248,8 @@
       "source_refs": [
         "docs/09-final/05-technische-spezifikation.md",
         "docs/09-final/14-gesamtsystem-und-portale.md",
-        "docs/deployment/clerk-setup.md"
+        "docs/deployment/clerk-setup.md",
+        "config/selfservice-policy.json"
       ],
       "next_actions": [
         {
@@ -4891,6 +5634,20 @@
         "booking"
       ],
       "outcome": "safe_status_and_contact_not_fake_login"
+    },
+    {
+      "id": "nex2fly-trial",
+      "site_context": "nexify",
+      "steps": [
+        "solutions",
+        "nex2fly",
+        "signup",
+        "login"
+      ],
+      "final_intents": [
+        "quote"
+      ],
+      "outcome": "understand_trial_registration_preview_not_live_account_or_payment"
     }
   ],
   "source_policy": {

@@ -1,0 +1,54 @@
+{
+  "base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
+  "source_sha256": {
+    "apps/web/components/WorkspaceRebuild.css": "8f3b8b4bbd0d2370c882c2f3543e3ced3f6def8fad86c43b5c91a1c0a5fe2366",
+    "apps/web/components/Workspace.tsx": "35d46f19f915ee71f615d1eb6dcf45a3daa49711c38ad99bb45888cf1366f959",
+    "apps/web/components/HomeContent.tsx": "533589d1525b580c7c0b49fbd92af0f4257dafb6a496c84b48237159e8b9c8c9",
+    "apps/web/components/HomeRebuild.css": "3020ffd4093dfd26f4b788fddbe3b3bc5ee148c5c1861dad6a78df67c858c386",
+    "apps/web/app/globals.css": "a8a4fc1be5f532b318c31a357229752563cebdad46a4de1c9f45fdf3cf8598cf",
+    "packages/tokens/tokens.css": "03a8d33f1d1dba62632a36824f7e299816933726137945e830647f7c667cf946",
+    "apps/site/src/main.tsx": "970a44a39271a3da64c8468542f00be0a70a2e1a002032bfcc9f9c1608d6aeab"
+  },
+  "observed_at": "2026-10-27T06:15:07.919Z",
+  "scope": "local homepage screenshots only, external requests blocked, synthetic API403",
+  "screenshots": [
+    {
+      "path": "/tmp/c8-home-390-normal.png",
+      "width": 390,
+      "height": 900,
+      "resize": false,
+      "measured": null,
+      "sha256": "090b508e685a85da100dd778432771d84f71c20d3e7933dc68693f8d2760b543"
+    },
+    {
+      "path": "/tmp/c8-home-1280-normal.png",
+      "width": 1280,
+      "height": 900,
+      "resize": false,
+      "measured": null,
+      "sha256": "a4e9e797aa9f695e566bbdab14534d7019a872bcdca1f3346e16168ca000ea58"
+    },
+    {
+      "path": "/tmp/c8-home-1280-text200.png",
+      "width": 1280,
+      "height": 900,
+      "resize": true,
+      "measured": {
+        "count": 326,
+        "all_doubled": true
+      },
+      "sha256": "001c959629c66813d366dee37880a6581ae97504d1ced0c91453ba95b654bbb0"
+    }
+  ],
+  "reviewed_at": "2026-10-27T06:18:51.299660+00:00",
+  "review": "Root executor visually inspected the three fresh source-bound homepage frames; DE selection and decorative N are fully visible, normal mobile/desktop content legible in captured viewport. This is a spot inspection, not qualified conformance or whole-page/state coverage.",
+  "not_proven": [
+    "all routes and interaction states",
+    "screen-reader announcements",
+    "vertical reachability of every enlarged UI control",
+    "pixel contrast over gradients/images",
+    "full WCAG conformance"
+  ],
+  "stale_screenshot_excluded": "/tmp/review-home-resize-1280.png (before final select/badge correction)",
+  "image_files_delivered": false
+}

@@ -6,13 +6,15 @@
   "publishable_key_mode": "live",
   "frontend_api_host_from_key": "clerk.nexifyai.de",
   "production_web_origin": "https://nexifyai.cloud",
-  "hosting_project": null,
+  "hosting_project": "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
   "hosting_provider": "vercel",
   "required_server_secret": {
     "name": "CLERK_SECRET_KEY",
     "mode": "live",
     "must_not_be_public_or_committed": true,
-    "secret_binding_verified": false
+    "secret_binding_verified": false,
+    "present_in_vercel_metadata_all_environments": true,
+    "value_or_issuer_pair_validated": false
   },
   "dns": {
     "source_of_required_records": "Clerk production dashboard Domains for the exact instance",
@@ -68,16 +70,16 @@
   },
   "deployment_status": "local_preparation_not_production_release",
   "open_prerequisites": [
-    "bind_new_production_secret_in_server_secret_store",
+    "verify_production_domain_binding_to_exact_project_before_release",
     "verify_dns_and_clerk_frontend_api",
     "review_and_deploy_portable_react_site_with_separate_production_auth_api_service",
     "provide_production_safe_visitor_gateway_instead_of_loopback_development_proxy",
     "create_and_verify_real_first_user_without_automatic_business_rights",
-    "identify_existing_vercel_project_and_confirm_domain_bindings",
     "verify_clerk_primary_and_satellite_configuration_for_two_top_level_domains",
     "verify_public_key_against_exact_issuer_jwks",
     "connect_authorized_dns_zone_access_and_apply_five_exact_received_cnames",
-    "integrate_clerk_react_ui_after_exact_instance_and_server_auth_configuration"
+    "verify_existing_clerk_server_secret_matches_selected_instance_without_exposure",
+    "activate_and_verify_react_clerk_after_dns_and_instance_configuration"
   ],
   "preview_web_origin": "https://nexifyai.de",
   "domain_decision": {
@@ -110,5 +112,7 @@
     "spki_der_sha256": "684d4cf51e2d47b75abf4f2f97f7ec58c7333beb597f97ced56913f035faaed8"
   },
   "previous_next_implementation": "apps/web",
-  "frontend_auth_migration_status": "react_preview_no_login_widget_next_clerk_reference_retained"
+  "frontend_auth_migration_status": "react_clerk_ui_implemented_explicit_flag_off_pending_dns",
+  "hosting_project_source": "GitHub Vercel deployment status link",
+  "hosting_project_settings_verified": true
 }

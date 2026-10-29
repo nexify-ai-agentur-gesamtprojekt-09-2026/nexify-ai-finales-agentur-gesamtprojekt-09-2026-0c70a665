@@ -5,7 +5,26 @@
     "provider": "vercel",
     "domain": "nexifyai.cloud",
     "preview_domain": "nexifyai.de",
-    "live_deployment_verified": false
+    "live_deployment_verified": false,
+    "project_name": "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+    "team_slug": "pascals-projects-2864de33",
+    "project_identification_source": "GitHub Vercel commit status deployment link, not authenticated settings read",
+    "last_observed_git_deployment": "READY",
+    "last_observed_git_deployment_url": "https://vercel.com/pascals-projects-2864de33/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/5YEzN7oMMpBFjNUWvBrLmQgdxeLm",
+    "remote_settings_access_verified": true,
+    "confirmed_block_reason_from_user": "NeXify-Automate has no Vercel account linked to GitHub",
+    "github_author_email_for_future_commits": "mail@nexifyai.cloud",
+    "github_author_email_source": "explicit_user_correction_repository_local_no_history_rewrite",
+    "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+    "settings_updated_and_read_back": true,
+    "framework": "vite",
+    "node_version": "22.x",
+    "output_directory": "apps/site/dist",
+    "preview_domain_branch": "factory/agency-separated-2026-10-26",
+    "preview_deployment_verified": true,
+    "preview_deployment_url": "https://nexifyai.de",
+    "preview_deployment_id": "dpl_5YEzN7oMMpBFjNUWvBrLmQgdxeLm",
+    "preview_source_commit": "409db5021aaf4ceb08e64bb23795c2a4f144c443"
   },
   "backup": {
     "requested_surface": "existing_chatgpt_site",
@@ -31,9 +50,15 @@
   "next_application": "retained_as_previous_implementation_not_deleted",
   "open_prerequisites": [
     "verify_chatgpt_site_deployment_or_update_capability",
-    "connect_vercel_project",
+    "verify_current_project_root_build_output_and_domain_bindings",
     "select_independent_backup_host_if_chatgpt_cannot_accept_artifact",
     "production_api_auth_and_mcp_runtime",
     "real_remote_same_release_readback_and_failover_test"
-  ]
+  ],
+  "connection_history": {
+    "status": "historically_linked_no_reconnect_requested",
+    "source": "config/integrations/vercel-agent-setup.json",
+    "current_settings_evidence": "evidence/one-app-2026-10-27/deployment-parent-report.json",
+    "current_root_build_output_production_branch_verified": false
+  }
 }

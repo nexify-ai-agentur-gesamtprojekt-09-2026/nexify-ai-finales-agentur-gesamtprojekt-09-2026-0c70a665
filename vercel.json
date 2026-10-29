@@ -19,14 +19,32 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://clerk.nexifyai.de; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://eu.i.posthog.com https://*.ingest.de.sentry.io https://clerk.nexifyai.de; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         }
       ]
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)).*)",
+      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)|robots\\.txt$|sitemap\\.xml$).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/agent-chat.ts": {
+      "maxDuration": 10,
+      "regions": [
+        "fra1"
+      ]
+    },
+    "api/agent-runtime-status.ts": {
+      "maxDuration": 15,
+      "regions": [
+        "fra1"
+      ]
+    }
+  }
 }

@@ -1,3 +1,17 @@
+## Aktuelle Quellenabgrenzung nach Originalfund
+
+Direkt vom Parent gelesener Nutzertext25.10. verwirft alte Stimmen einschließlich
+der Nutzerstimme. Der bisherige Vertrag behauptet eine neuere explizite Zuordnung
+vom26.10., enthält aber keinen Originalchat-Locator. Daher ist die folgende
+Castingtabelle nur historische Referenz, keine aktuelle Empfehlung oder Freigabe.
+source_reconciliation in Medienvertrag, Plan und Presenterregister blockiert
+Freigabe/Generierung bis zum Originalabgleich. IDs werden zur Provenienz erhalten;
+keine bestehende Stimme gilt dadurch als geeignet. Kein bezahlter Lauf gestartet.
+Die aktuellen Originalvorgaben verlangen echte Bewegung, sauberen Ton nach
+Nutzeraktivierung, freie Charaktere ohne Bildschirmrahmen, passenden Hintergrund,
+finalen AIFly-Charakter und integrierte Sprach-/zugängliche Ton-/Pausekontrolle.
+Das13Sekunden-Trio-WebM ist nur ein noch zu prüfendes Reviewasset, nicht abgenommen.
+
 # Hero-Videos und ElevenLabs über Composio
 
 Stand 26.10.2026. Dies ist der abgeleitete Integrationsvertrag; keine behauptete aktive Medienpipeline. Die Nutzerergänzung nimmt Hero-Videos mit dem Nutzer und zwei weiteren Beteiligten in den Auftrag auf. Die anschließende Nutzerzuordnung benennt NeX, AIFly und den Nutzer. Assets und konkrete Seitenzuordnung werden weiterhin aus Quellen gebunden. Die drei Slots in `hero-media.json` bewahren diese Zuordnung.
@@ -35,8 +49,48 @@ Nächster ausführbarer Integrationsschritt: über eine tatsächlich exponierte 
 
 AIFly und der Nutzer teilen gemäß genauer Nutzervorgabe dieselbe ID. Es erfolgt keine automatische Korrektur, keine Ersetzung und keine neue Stimmkopie. Die IDs sind Konfigurationsreferenzen, keine API-Geheimnisse. Sie belegen weder Zugriff des aktuellen Providerkontos noch eine erzeugte Audiodatei. Die konkrete erlaubte Stimmenverwendung wird mit der jeweiligen Aktion und dem vorhandenen Providerrecht geprüft.
 
+## Zuordnungsmatrix für vorhandene Voice-Referenzen · 27.10.2026
+
+Bestand dieser Prüfung: Im Repository wurden in den üblichen Audio- und
+Videoformaten keine entsprechenden Dateien gefunden; die Assets-Verzeichnisse
+enthalten unter anderem Bilder, aber keine Hörproben. Die folgenden IDs sind
+vorhandene **Referenzen**, keine lokal geprüften Voice-Assets. Die Zuordnung ist
+inhaltlich anhand der Sprecherrollen und Textentwürfe vorgeschlagen; Klang,
+Aussprache, tatsächliche Sprachunterstützung, Kontozugriff und Nutzungsrechte
+sind nicht geprüft. Quellen sind `hero-production-plan.json`,
+`config/presenter-system.json` und `config/page-explainers.json`.
+
+| Voice-Referenz | Sprecherrolle | Sprache und geeignete vorhandene Texte | Bewertung und Alternative |
+|---|---|---|---|
+| `Lbm7qDmJUxIxpWx9qhZO` | NeX: Umsetzung und Prozess | Hero `hero-nex-de-001` und Seitenmodule `automation-explain-1`/`apps-portals-explain-1`. **DE/NL/FR-Heroentwürfe** stehen in `hero-production-plan.json`. | Vorläufig behalten; akustische Prüfung und Provider-Readback fehlen. |
+| `feTHtWuEJFLTOWyoreyy` | AIFly: Orientierung und Wissen | Hero `hero-aifly-de-001` und Seitenmodule `home-explain-2`/`knowledge-explain-1`/`tk-search-explain-1`. **DE/NL/FR-Heroentwürfe** stehen in `hero-production-plan.json`. | Neu besetzen, wenn die vorhandenen Provider-Assets eine eigene passende Stimme enthalten. AIFly muss in gemeinsamen Wegen sofort von Pascal und NeX unterscheidbar sein. |
+| `feTHtWuEJFLTOWyoreyy` | Pascal/Nutzer: persönliche Projektklärung und Vertrauen | Hero `hero-user-de-001` und Seitenmodule `home-explain-1`/`company-explain-1`/`contact-explain-1`. **DE/NL/FR-Heroentwürfe** stehen in `hero-production-plan.json`. | Vorläufig nur für Pascal behalten, wenn persönliche Verwendung, Klang und Rechte bestätigt sind. Keine Stimmkopie aus einem Bild oder einer bloßen ID ableiten. |
+
+Die Sprachen DE/NL/FR beziehen sich auf vorhandene **Textfassungen**, nicht auf
+nachgewiesene Sprachfähigkeiten der Stimmen oder fertige Aufnahmen. Die
+Seitentexte sind Skriptentwürfe und keine Zusage tatsächlich laufender
+Funktionen. Vor einer endgültigen Auswahl die beiden konkreten Stimmen je
+Sprache anhören, Aussprache und Unterscheidbarkeit prüfen sowie die jeweilige
+Verwendung und Rechte anhand des tatsächlichen Kontobestands bestätigen.
+Die historische, jetzt ausgesetzte Castingentscheidung lautete: NeX vorläufig behalten,
+Pascal nur nach persönlicher Rechte- und Hörprüfung behalten, AIFly bevorzugt
+aus den vorhandenen Provider-Assets eigenständig neu besetzen. Eine konkrete
+bessere AIFly-ID ist erst nach echtem Asset-Inventar und Hörvergleich belegbar.
+Vergleichstexte, Rollenprofile und Abnahmekriterien stehen maschinenlesbar in
+`hero-production-plan.json`.
+
 ## Runway: Bestand zuerst, Fehlendes erstellen
 
 Der Nutzer benennt Runway als Quelle der Videos und beauftragt ausdrücklich die Erstellung fehlender Clips. Das ist Teil des Auftrags; eine weitere pauschale Erstellungsfreigabe ist nicht nötig. Der aktuelle Toolbestand enthält auch keine Runway-Operation und `command -v runway` liefert keine CLI. Provider-Asset-IDs, Modellversion, Kontozuordnung und generierte Dateien sind daher noch nicht technisch nachgewiesen. Die einzige Runway-Textfundstelle im Prototypbestand ist eine gleichnamige Reifenmarke und keine Medienintegration.
 
 Ablauf: Runway-Bestand autorisiert lesen → vorhandene Medien an NeX/AIFly/Nutzer und Seiten binden → fehlende Varianten identifizieren → Skript-/Promptfassung und vorhandenes Generierungsbudget binden → nur fehlende Clips erzeugen → ElevenLabs-Audio gemäß exakter Voice-Zuordnung ergänzen → lokale Dateiprüfung, Untertitel, Wiedergabe und Sichtfreigabe → versionierte Veröffentlichung. Für Budget und Modelle gelten die tatsächliche Kontokonfiguration und das geprüfte Provider-Aktionsschema; es werden keine fiktiven Grenzen oder Modell-IDs erfunden. Ohne reale Verbindung werden keine Jobs als gestartet oder geliefert ausgewiesen.
+
+
+## Strikter Skriptvertrag
+
+PR39-4388404318: Vergleichs- und Hero-Skripte erfordern jeweils ein Objekt mit
+exakt de/nl/fr und nichtleeren Stringwerten. Zahlen, Boolesche Werte, null,
+Listen/Objekte als Texte oder fremde Mappingcontainer werden abgewiesen;
+Stringkonvertierung ist kein Nachweis eines Sprechertexts. Diese Typprüfung
+ändert keine Inhalte und ersetzt weder Stimmfreigabe/Hörprobe noch tatsächliche
+Audio-/Videoerzeugung, QA oder Veröffentlichungsabnahme.

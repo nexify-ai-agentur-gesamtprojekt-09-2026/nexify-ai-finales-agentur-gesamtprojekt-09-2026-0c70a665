@@ -1,5 +1,6 @@
 import {createHash} from "node:crypto";
 import {prepareExplainers} from "./public-explainers.mjs";
+import {prepareVideoAssets} from "./public-video-assets.mjs";
 import {readFile,mkdir,writeFile,realpath,stat} from "node:fs/promises";
 import {fileURLToPath,pathToFileURL} from "node:url";
 import {resolve} from "node:path";
@@ -40,13 +41,17 @@ export async function generate(){
   const root=fileURLToPath(new URL("../../../",import.meta.url));
   const source=JSON.parse(await readFile(resolve(root,"config/site-map.json"),"utf8"));
   const data=preparePublicData(source);
+  const explainers=JSON.parse(await readFile(resolve(root,"config/page-explainers.json"),"utf8"));
+  const videoRegistry=JSON.parse(await readFile(resolve(root,"config/page-media-registry.json"),"utf8"));
+  const checkedVideos=await prepareVideoAssets(videoRegistry,source,{publicRoot:resolve(root,"apps/web/public"),repositoryRoot:root,explainerPages:explainers.pages});
+  data.videos=checkedVideos.byPage;
+  data.videoModules=checkedVideos.byModule;
   const presenter=JSON.parse(await readFile(resolve(root,"config/presenter-system.json"),"utf8"));
   const publicIds=new Set(data.pages.map(page=>page.id));
   data.journeys=source.journeys.map(journey=>{
     if(!presenter.guide_labels[journey.id]||!Array.isArray(journey.steps)||journey.steps.length<2||journey.steps.some(id=>!publicIds.has(id)))throw new Error("Invalid public presenter journey");
     return {id:journey.id,label:localized(presenter.guide_labels[journey.id]),steps:journey.steps};
   });
-  const explainers=JSON.parse(await readFile(resolve(root,"config/page-explainers.json"),"utf8"));
   const approvedSources=JSON.parse(await readFile(resolve(root,"config/presenter-sources.json"),"utf8"));
   if(approvedSources.schema_version!==1||!Array.isArray(approvedSources.sources))throw new Error("Invalid presenter source inventory");
   const approvedHashes=new Map(approvedSources.sources.map(source=>[source.path,source.sha256]));
@@ -62,8 +67,15 @@ export async function generate(){
     if(!bytes.equals(await readFile(actual)))throw new Error("Explainer source changed during read");
     sourceInventory.set(ref,hash);
   }
-  data.explainers=prepareExplainers(explainers,data.pages,sourceInventory);
+  data.explainers=prepareExplainers(explainers,data.pages,sourceInventory,data.videos,data.videoModules);
   const publicRoot=await realpath(resolve(root,"apps/web/public"));
+  const scenes=JSON.parse(await readFile(resolve(root,'config/interim-scene-images.json'),'utf8'));
+  for(const speaker of ['pascal','nex','aifly']){
+    const image=scenes.images?.[speaker];
+    if(!image||!/^\/(?:portrait\.png|media\/presenters\/[a-z0-9-]+\.png)$/.test(image.src)||!/^[a-f0-9]{64}$/.test(image.sha256))throw new Error('Invalid interim scene image');
+    const path=await realpath(resolve(publicRoot,image.src.slice(1)));
+    if(!path.startsWith(publicRoot+'/')||createHash('sha256').update(await readFile(path)).digest('hex')!==image.sha256)throw new Error('Interim scene image drift');
+  }
   for(const page of data.explainers)for(const module of page.modules){
     if(module.media.status!=="published")continue;
     for(const path of [module.media.src,...Object.values(module.media.captions)]){
@@ -74,6 +86,7 @@ export async function generate(){
   }
   const target=resolve(root,"apps/site/.generated");
   await mkdir(target,{recursive:true});
+  await writeFile(resolve(target,"video-coverage.json"),JSON.stringify(checkedVideos.coverage)+"\n");
   await writeFile(resolve(target,"explainer-provenance.json"),JSON.stringify(Object.fromEntries(sourceInventory))+"\n");
   await writeFile(resolve(target,"public-site.json"),JSON.stringify(data)+"\n");
   console.log(`Public build data: ${data.pages.length} pages; protected content excluded`);

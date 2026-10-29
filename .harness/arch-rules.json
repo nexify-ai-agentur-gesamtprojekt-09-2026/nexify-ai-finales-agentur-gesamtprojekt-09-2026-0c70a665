@@ -81,6 +81,213 @@
       "what": "Eine öffentliche Daten-/Navigationsgrenze ist verletzt.",
       "why": "Private Daten dürfen nicht ins Backup; unbekannte Aktionsziele oder erfundene Presenterquellen dürfen keine gültige Seitenführung vortäuschen.",
       "fix": "Öffentliche Projektion, Navigationsziele und versionierte Quellenbindung korrigieren; negative Grenztests erhalten."
+    },
+    {
+      "id": "ARCH-010",
+      "description": "Hashnavigation, vollständige Presenteransicht und Layoutgutter bleiben an gespeicherte Browserbelege des aktuellen Quellstands gebunden.",
+      "check": "python3 tools/check_browser_evidence.py >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein kritischer Browserbeleg fehlt, ist widersprüchlich oder passt nicht zu den aktuellen Quellen.",
+      "why": "Ein Prototypen-Audit erkennt weder abgeschnittene Figuren noch Hashrouter-Fokusfehler oder veraltete CSS-Selektoren im tatsächlichen Reactprodukt. Die Quellenbindung ersetzt keinen Browserlauf.",
+      "fix": "Betroffene Browsergegenproben real ausführen, Fehler beheben und geprüfte Belege mit exakt passenden Quellhashes aktualisieren; keine Hashes ohne Laufzeitprüfung erneuern."
+    },
+    {
+      "id": "ARCH-011",
+      "description": "Alle verwalteten LLM-Bindungen verwenden exakt DeepSeek V4.1 Flash 1017 mit Reasoning high.",
+      "check": "python3 tools/check_llm_policy.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_llm_policy.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine aktive Modellbindung, Reasoningstufe oder Ersatzroute widerspricht der aktuellen Nutzerweisung.",
+      "why": "Eine nur im CI hinterlegte Modellregel verhindert keine Drift in Brain, Router oder Suite. Konfiguration ist noch kein Livezugangs-/Kostenbeleg.",
+      "fix": "Gelesene aktuelle Weisung mit der zentralen Policy und allen managed Bindungen abgleichen; exakte1017-Endung/high/keineErsatzroute erhalten und den tatsächlichen Provider-Wire zusätzlich testen."
+    },
+    {
+      "id": "ARCH-012",
+      "description": "KI-Aufrufstellen werden vor Migration beobachtet; eigene Skills bleiben quellengebunden.",
+      "check": "python3 tools/check_ai_coverage.py --audit >/dev/null 2>&1 && python3 tools/project_skills.py verify >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine registrierte Quelle driftet, ein neuer lexikalischer KI-Kandidat ist unregistriert oder ein eigener Skill passt nicht zum Katalog.",
+      "why": "Anleitungsdateien allein erzwingen keine Providergrenze. Der begrenzte Offline-Scan erkennt Quelländerungen, ist jedoch keine umfassende Laufzeit- oder semantische Garantie. Übergangsphase Audit/Shadow: neue Befunde stoppen keine laufenden Modelle oder Kundenaufträge; Cutover getrennt prüfen.",
+      "fix": "Betroffene Quelle und tatsächlichen Adapter unabhängig prüfen, Lücke zuweisen und beheben, Negativtests ausführen; erst danach bewussten Inventarbeleg aktualisieren. Keine automatischen Hash- oder Statusfreigaben."
+    },
+    {
+      "id": "ARCH-013",
+      "description": "Kontext- und Wissensquellen dürfen keine fremden Hardlinks, FIFO-Hänger, Tokenlecks oder ungeprüfte Versionsrückläufe verursachen.",
+      "check": "python3 -m unittest discover -s tests -p test_context_executor.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_brain_ingestion.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_seo_catalog.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine isolierte Dateisystem-, Datenbank- oder Versionsgegenprobe scheitert.",
+      "why": "Erfolgreiches Einlesen allein beweist weder Quellgrenzen, Secretunterdrückung noch den aktuellen Wissensstand.",
+      "fix": "Konkret reproduzierten Lesepfad oder atomaren Versionswechsel korrigieren, historische Belege erhalten und Gegenproben erneut ausführen; keine Remoteindexierung aus lokalem Staging ableiten."
+    },
+    {
+      "id": "ARCH-014",
+      "description": "Offline-Migration erhält bestehende Arbeit; Kapazitätsrechnung respektiert Messgrenzen und unbekannte Gesamtkosten.",
+      "check": "python3 -m unittest discover -s tests -p test_ai_migration.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_capacity_planner.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_resource_probe.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Übergangs-, Eingabelese-, Einheiten- oder Unbekanntheitsgegenprobe scheitert.",
+      "why": "Eine fehlende neue Voraussetzung darf alte Jobs nicht abschalten. Unvermessene Lastbereiche und bekannte Teilsummen sind keine passende Kapazität oder vollständige Kostenobergrenze.",
+      "fix": "Konkreten Offline-Entscheidungspfad oder Berechnungsfehler beheben, Grenzfälle nachstellen und erneut prüfen; weder bestehende Laufzeiten ändern noch aus Auditdaten Produktionsfreigaben ableiten."
+    },
+    {
+      "id": "ARCH-015",
+      "description": "Gekaufte Managed-Guthaben und Reservierungen bleiben an Händler, Route und Bedingungen gebunden.",
+      "check": "python3 -m unittest discover -s tests -p test_selfservice_domain.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine persistierte Finanzierungsbindung kann umgedeutet werden.",
+      "why": "Aktuelle Konfiguration ist keine Zustimmung zur Migration bestehender Käufe oder Aufträge.",
+      "fix": "Kaufbindung und Reservierungssnapshot prüfen; Legacy-Ausführung ohne Beleg sperren, Storno und Reconciliation erhalten."
+    },
+    {
+      "id": "ARCH-016",
+      "description": "Parallele Keywordimporte prüfen Aktualität atomar und rollen Fehler vollständig zurück.",
+      "check": "python3 -m unittest discover -s tests -p test_seo_catalog.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein älterer oder gleichzeitiger widersprüchlicher Import kann neuere Messdaten ersetzen.",
+      "why": "Vor der Schreibtransaktion gelesene Daten sind keine aktuelle Entscheidungsgrundlage.",
+      "fix": "Schreibsperre vor Aktualitätsprüfung erwerben und Parallelitäts-/Rollbacktests erhalten."
+    },
+    {
+      "id": "ARCH-017",
+      "description": "Aufgaben, Quellen und getrennte Evidenzstufen bleiben maschinenprüfbar; Offlineprüfung ist keine Runtimefreigabe.",
+      "check": "python3 tools/verify_workflow_record.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_workflow_record.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Workflowreferenzen, Hashes, Scope oder Abnahmestufen sind widersprüchlich.",
+      "why": "Dokumentation und lokaler Test dürfen keine Verbindung oder Abnahme vortäuschen.",
+      "fix": "Aktuelle Quellen und echte Belege prüfen; fehlende Runtimevoraussetzungen offen führen statt Status freizuschreiben."
+    },
+    {
+      "id": "ARCH-018",
+      "description": "Parallele Legacy-Starts serialisieren Schema-Prüfung und additive Migration.",
+      "check": "python3 -m unittest discover -s tests -p test_selfservice_domain.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Zwei Starts erkennen dieselbe fehlende Spalte und konkurrieren beim ALTER TABLE.",
+      "why": "Eine additive Migration ist ohne atomare Schemaentscheidung nicht parallel startfest.",
+      "fix": "Nach executescript die Schreibtransaktion vor PRAGMA/ALTER erwerben und den deterministischen Parallelstarttest erhalten."
+    },
+    {
+      "id": "ARCH-019",
+      "description": "Standalone-Ausgabe akzeptiert keine ungebundenen Modulimporte, auch nicht in Unterverzeichnissen.",
+      "check": "node --test apps/site/tests/standalone.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Eine Einzeldatei wurde mit verbleibenden statischen/dynamischen Modulabhängigkeiten freigegeben.",
+      "why": "Dateizählung allein beweist keine vollständige Offlineausgabe.",
+      "fix": "Importsyntax des Entry prüfen, dedicated Bundle erzeugen und Negativfälle erhalten."
+    },
+    {
+      "id": "ARCH-020",
+      "description": "Optionale Auth bleibt deaktiviert ohne explizite Konfiguration und gewährt keine Geschäftsrechte.",
+      "check": "node --test apps/site/tests/auth.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Auth-Konfiguration, Umgebungsgrenze oder lokalisierte UI-Verträge driften.",
+      "why": "Ein öffentlicher Login-Schalter ist keine Tenantfreigabe und ein Ladefehler darf keine öffentliche Anwendung entfernen.",
+      "fix": "Lokalen Auth-Panel-Vertrag reparieren und zusätzlich browser-auth.mjs mit synthetischem SDK prüfen; echte Runtimeabnahme getrennt halten."
+    },
+    {
+      "id": "ARCH-021",
+      "description": "Gemeinsamer Backendvertrag erhält Rollen, Tenantgrenzen, Wiederaufnahme und Parent-Join.",
+      "check": "python3 -m unittest discover -s tests -p test_one_app_backend.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_local_control.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Lokale Session-, Frist-, Graph- oder persistente Ergebnisgrenze driftet.",
+      "why": "Eine gemeinsame Shell verleiht weder Rollenrechte noch Abnahme; dichte Graphen und veraltete Worker dürfen keine neue Wirkung auslösen.",
+      "fix": "Betroffenen lokalen Pfad mit isolierten Negativtests korrigieren und unabhängig nachprüfen; externe Auth nicht aktivieren."
+    },
+    {
+      "id": "ARCH-022",
+      "description": "Historisches Projektsetup ersetzt keine aktuelle Produktionsdomain- und Settingsprüfung.",
+      "check": "python3 -m unittest discover -s tests -p test_release_prerequisites.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ein fehlender Domainnachweis wurde entfernt oder ein bereits verbundenes Projekt wird erneut als Setupblocker geführt.",
+      "why": "Historische Verknüpfung und aktueller Release-/Domainnachweis haben verschiedene Beweisumfänge.",
+      "fix": "Separaten Domain-/Settingsnachweis erhalten und veraltete Setupaufträge präzisieren; keine neuen Verbindungen oder Remote-Freigaben ableiten."
+    },
+    {
+      "id": "ARCH-023",
+      "description": "Öffentliche Oberfläche nutzt zentrale Tokens; PWA bleibt explizit und ohne Offline-Seiteneffekte.",
+      "check": "python3 -m unittest discover -s tests -p test_public_surface_contract.py -q >/dev/null 2>&1 && node --test apps/site/tests/public-installation.test.mjs >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Tokenherkunft oder explizite netzabhängige Installationsgrenze driftet.",
+      "why": "Installation darf keine versteckte Datenhaltung, Authaktivierung oder Schreibwiederholung erzeugen.",
+      "fix": "Zentrale Tokenableitung und expliziten Modus erhalten; browser-coverage/accessibility/pwa nach UIänderungen ausführen."
+    },
+    {
+      "id": "ARCH-024",
+      "description": "200%-Textnachweise messen gerenderte Schrift und binden aktuelle UI-/CSS-/Testquellen.",
+      "check": "python3 tools/check_text_resize_evidence.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_resize_source_binding.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Root-Override ersetzt Messung oder alte Geometrie wird nach UI-/CSS-/Teständerung wiederverwendet.",
+      "why": "Nicht wirksame Testmanipulation darf keine Abnahme vortäuschen.",
+      "fix": "Browser frisch ausführen; Vorher/Nachher-Quellhashes und tatsächliche Schriftverdopplung prüfen. Keine Hasherneuerung ohne Browserlauf."
+    },
+    {
+      "id": "ARCH-025",
+      "description": "Suitezeit beginnt ohne Funding; Modellreservierung und Dispatch bleiben fundinggebunden.",
+      "check": "python3 -m unittest discover -s tests -p test_suite_trial.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Suitebeginn wird durch Funding gesperrt oder gewährt unfinanzierte Modellnutzung.",
+      "why": "Kostenlose Suitezeit ist kein Modellguthaben; Replay darf keine neue Zeit oder Rechte erzeugen.",
+      "fix": "Startbedingungen, exaktes Zeitfenster und Funding-Negatives getrennt erhalten und unabhängig prüfen."
+    },
+    {
+      "id": "ARCH-026",
+      "description": "Historische Stimmenreferenzen umgehen keine Quellenfreigabe über parallele Presenter-Konfiguration. Medien-Skriptmappings benötigen exakte Locale-Strings ohne Typkonvertierung.",
+      "check": "python3 -m unittest discover -s tests -p test_factory_contract.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Medienvertrag, Produktionsplan oder Presenter geben unbestätigte Stimmen frei. Nichttextliche Skriptwerte oder ungültige Container dürfen keine Textevidenz ersetzen.",
+      "why": "Ein historischer Identifier ist keine aktuelle Nutzerfreigabe oder Hörabnahme.",
+      "fix": "Quellenkonflikt konsistent sperren und negative Cross-Config-Tests erhalten."
+    },
+    {
+      "id": "ARCH-027",
+      "description": "Abgeleitete Quellenansicht bleibt deckungsgleich; keine rekursive Register-Selbsthashbindung oder Promotion von Berichten zu Originalen/Abnahme.",
+      "check": "python3 tools/verify_requirements_reconciliation.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_requirements_reconciliation.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Quellenregister verliert Owner, Referenzen, abgeleitete Ansicht oder aktuelle Datei-Fingerprints.",
+      "why": "Quellenkonsolidierung und lokale Tests beweisen keine vollständige Originalrekonstruktion oder Produktionsabnahme.",
+      "fix": "Bestehendes Register und Ansicht gemeinsam aktualisieren; offene Abnahmen behalten."
+    },
+    {
+      "id": "ARCH-028",
+      "description": "Lokale Warenkorbfähigkeiten werden serverseitig signiert und bleiben tenant-/cartgebunden.",
+      "check": "python3 -m unittest discover -s tests -p test_local_shop_cart.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Browserbekannter CSRF-Wert wird als Autorität genutzt oder Replay umgeht Ablauf/CAS/Transaktion.",
+      "why": "Ein CSRF-Token ist kein geheimer Signierschlüssel; lokale Vorbereitung erteilt keine Checkout-/Providerrechte.",
+      "fix": "Getrennten persistenten serverinternen Schlüssel und Negativ-, Race-/Prozessabbruchtests erhalten; keine Produktionsfreigabe ableiten."
+    },
+    {
+      "id": "ARCH-029",
+      "description": "Shop-HTTP/UI belegt persistentes Readback und entsperrt nach bestätigtem leerem Zustand.",
+      "check": "python3 tools/check_browser_evidence.py >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_local_shop_http.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Shop UI/HTTP/Fixture driftet von gebundenen Browserbelegen oder Reconciliation/Target/CSRF scheitert.",
+      "why": "Ein 404 kann bestätigter Leerzustand sein; unbekannte Schreibausgänge dürfen weder blind wiederholt noch dauerhaft als unbestätigt ausgegeben werden. Erfolgreiche Create-Keys nach Ablauf nicht wiederverwenden; ungewisse Ergebnisse behalten den Key bis zur Reconciliation.",
+      "fix": "Quellengebundenen echten Browser/API/SQLite-Nachweis mit Abbruch/Readback/Restart und negativen HTTP-Prüfungen erneuern; keine Produktionsabnahme daraus ableiten."
+    },
+    {
+      "id": "ARCH-030",
+      "description": "Katalogquellen bleiben lesend, partiell und ohne erfundene Einheiten-/Handelsrechte.",
+      "check": "python3 -m unittest discover -s tests -p 'test_readonly_catalog*.py' -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Quellpreis/Label oder Teilfeed wird zur Kauf-, Frische- oder Vollständigkeitsfreigabe; Artefakt-/Fristbindung driftet.",
+      "why": "Vorhandene Artikel sind kein Lieferanten-/Preis-/Passungsnachweis. Hash allein attestiert keine unveränderte Zeit oder sichere Pfade.",
+      "fix": "Strict Schema-/MinorUnit-/Teilfeed-/ReadOnly403-/Manifestzeit-/Link-/EOF-Negativtests erhalten; bestehende Rohdaten nicht überschreiben."
+    },
+    {
+      "id": "ARCH-031",
+      "description": "Lokale Bildartefakte erhalten Originale und umgehen Quarantäne/QA/ZeroBudget nie durch Replay.",
+      "check": "python3 -m unittest discover -s tests -p test_product_image_batch.py -q >/dev/null 2>&1 && python3 -m unittest discover -s tests -p test_birefnet_onnx.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Hardlinks überschreiben externe Dateien oder neu gehashte Manifeste behaupten unzulässige Publikation/Modell-/QAfreigaben.",
+      "why": "Artefakthashes ersetzen weder Originalanker noch Effekt-/Statussemantik, Nutzungsrechte oder Freistellungsprüfung.",
+      "fix": "Exklusive sichere Dateioperationen, feste Replaysemantik, Quarantäne, Originalvergleich und negative CAS-/Crash-/Rollbacktests ausführen. Feste ONNX-Quelle/Lizenz/Hash/IO/CPU-Session und RGB-/Alphaintegrität mit kontrollierten Doubles prüfen; echte Inferenz separat belegen."
+    },
+    {
+      "id": "ARCH-032",
+      "description": "Geprüfte Branchzustellung bestätigt Erfolg erst nach finalem Readback und umgeht bestehende Hooks nicht.",
+      "check": "python3 -m unittest discover -s tests -p test_reviewed_delivery.py -q >/dev/null 2>&1",
+      "expect": "exit 0",
+      "what": "Ungewisser oder geänderter Remotezustand bleibt als Erfolg stehen; Wiederaufnahme erzeugt doppelte PRs.",
+      "why": "Ein gespeicherter Push-/PR-Versuch oder veralteter Erfolg beweist weder finalen Head noch Main-/CI-Zustand.",
+      "fix": "Reale Belegbytes, exakte Remoteidentity, preserved Hooks, alle PRStates, begrenzte Reconciliation und finale Readback-/Exit2-Negativtests erhalten."
     }
   ]
 }

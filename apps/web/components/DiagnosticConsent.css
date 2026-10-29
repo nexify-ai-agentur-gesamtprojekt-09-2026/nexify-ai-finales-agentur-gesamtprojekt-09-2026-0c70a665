@@ -1,0 +1,11 @@
+.structured-footer .diagnostic-consent {grid-column:1 / -1;min-width:0;border-top:1px solid var(--color-linie-mittel);padding-top:16px;}
+.diagnostic-consent summary {min-height:44px;display:list-item;align-content:center;cursor:pointer;overflow-wrap:anywhere;}
+.diagnostic-consent-content {display:grid;gap:16px;max-width:70ch;padding-block:16px;overflow-wrap:anywhere;}
+.diagnostic-consent-content p {margin:0;line-height:1.6;font-size:14px;color:var(--color-text-sekundaer);}
+.diagnostic-consent-actions {display:flex;flex-wrap:wrap;gap:12px;}
+.diagnostic-consent-actions button {flex:1 1 150px;}
+.diagnostic-consent-content a {min-height:44px;display:flex;align-items:center;text-decoration:underline;}
+.diagnostic-consent-actions button:disabled {cursor:not-allowed;}
+/* Keep the final controls reachable above the existing fixed chat launcher. */
+.diagnostic-consent[open] .diagnostic-consent-content {padding-bottom:calc(96px + env(safe-area-inset-bottom));}
+.diagnostic-consent :is(button,a,summary) {scroll-margin-block:96px;}

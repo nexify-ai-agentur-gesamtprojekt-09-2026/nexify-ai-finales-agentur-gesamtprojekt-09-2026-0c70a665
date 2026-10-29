@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "reviewed_commit": "5466700242aa8b277b97c40ff0302a7a5deaed45",
+  "same_tree_integration_commit": "cf32d335a77fc46ef6ddf56cac28b7df0a02c228",
+  "reviewed_tree": "7f6dfbaace90c3158e11930b879314b7d36293a7",
+  "reviewer": "separate read-only Sol agent /root/review_current_main_sol",
+  "received_at": "2026-10-27T18:02:17.023154+00:00",
+  "independently_repeated": {
+    "adapter_tests": 11,
+    "batch_tests": 43,
+    "source_hashes": 9
+  },
+  "open_findings": [],
+  "does_not_prove": [
+    "native ONNX/ORT inference",
+    "export provenance/numerical parity",
+    "native peak RSS/latency",
+    "mask/product QA",
+    "qualified human or production acceptance"
+  ],
+  "writes_by_reviewer": false
+}

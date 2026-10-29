@@ -1,0 +1,245 @@
+{
+  "scope": "source-bound local public requirements comparison;not full product acceptance",
+  "observed_at": "2026-10-28T00:48:51.134226+00:00",
+  "base_commit": "b4ae9bc6be3ef6a0d657db9388f303d29c4a6e18",
+  "public_routes": 36,
+  "protected_routes": 10,
+  "explainer_modules": 49,
+  "media_public_routes": [
+    {
+      "path": "/",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/leistungen",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/leistungen/websites",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/leistungsumfang",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/loesungen",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/preise-ablauf",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/wissen",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/unternehmen",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/kontakt",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/produkte/one",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/produkte/api",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/impressum",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/datenschutz",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/ki-hinweise",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/barrierefreiheit",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/cookies",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/anmelden",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/registrieren",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/suche",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/produkt",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/kasse",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/termine",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "status": "pending",
+      "approval_status": "not_approved"
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "status": "pending",
+      "approval_status": "not_approved"
+    }
+  ],
+  "fixed_here": [
+    "Shared default-off consent settings with18 localUIcases and SDK intercept inVite/Next",
+    "Mobile fixedlauncher overlap ofconsent privacy link reproduced andfixed",
+    "NextAuth unconfigured notices localized;native provider locale follows shell withserver-resolved publicprops preserved"
+  ],
+  "remaining": [
+    {
+      "id": "PUBLIC-MEDIA",
+      "kind": "authorized_media_input_not_present_in_local_projection",
+      "owner": "existing media owner",
+      "next": "deliver approved versioned actual bytes/captions/transcripts to existing media contract;no mocks"
+    },
+    {
+      "id": "PUBLIC-PROVIDER",
+      "kind": "real_runtime_and_business_acceptance_open",
+      "owner": "provider/data/identity owners and release coordinator",
+      "next": "verify actual auth/tenant,mail/calendar,livecatalog tax-stock-fitment/order contracts;do not infer readiness fromfixtures"
+    },
+    {
+      "id": "PUBLIC-RELEASE",
+      "kind": "external_publication_gate",
+      "owner": "account/budget/source owner",
+      "next": "resolve legitimate access,Actionscostpolicy,writerhandoff and qualified targetrelease gate;no remote action here"
+    },
+    {
+      "id": "PORTAL-LOCAL-READ-01",
+      "kind": "local_follow_up_prepared_not_executed",
+      "owner": "same web writer",
+      "next": "pure statusprojection first;current LocalControl.status synchronizes gaps and isnot GETsafe",
+      "contract": "docs/contracts/next-local-portal-slice.md"
+    }
+  ],
+  "source_sha256": {
+    "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
+    "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
+    "apps/web/components/SiteFooter.tsx": "e575e1f8e842a4069447429a1ab3ae75c8b6591611ad228a35a58220321d8e45",
+    "apps/web/observability/exceptions.mjs": "8d77edbc84f2487197713060a312a114ae3d52d5e5297c3f2ea256e6e290cde5",
+    "apps/web/observability/exceptions.d.mts": "a483344332846b7ebe62801523b27416e7cf621a41ec5cec309b22beedc8da35",
+    "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
+    "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
+    "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
+    "apps/web/app/layout.tsx": "549058a35387293c968522b88096b8e47e3bee9e3d74093afa2708b2ff97c53c",
+    "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "0ff3c2115db8c53003090683a8389e715cbd61225003b0d7d79c95d39523b772",
+    "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "15fbf55b0ae3a154a8036a8d777ec420c92e7fe4fb246f4892b270256ba57e8a",
+    "apps/site/tests/browser-consent-ui.mjs": "7f07c81fdfc5a7014f267bc0f0edab827e3d32fe2a9416a0b292eb486fac1ae6",
+    "apps/site/tests/browser-next-clerk-locale.mjs": "b7bc42105f01887b029c2ebceb9e1c51cc29b30827920b7c985bb85af77f00fe",
+    "apps/site/tests/fixtures/next-clerk-locale.tsx": "2fa5f0257ea52f1db4c8d378806a04c3faf80f262f9d16e158eb452c4be62862",
+    "apps/site/tests/fixtures/next-clerk-locale.html": "b20e326a58a9b96e4fa377a9cb00177fb9a104200070234e494d480da2e80674",
+    "apps/site/tests/fixtures/clerk-integration.tsx": "217fab40829fc02e7f6c55564b1d51e331e871dfb4264a84d03353ccb60228a2",
+    "apps/web/auth/tests/public-provider.test.mjs": "8e0422765eb45a0582f82ad0426855a499628357e48d3e767ba50743f42d92ec",
+    "apps/web/auth/tests/browser-public-experience.mjs": "32568480f7db6a4cbabaf99a34c93456f3b07a0fc5ccdd16304816ca355aa8c0",
+    "docs/contracts/diagnostic-consent.md": "60ba324ef850bcdda2af5a6a76a84f21e71907d419ac488531e883e38e5628ee",
+    "docs/contracts/next-local-portal-slice.md": "0ee9a78896576b268e782495f964cd1bbf9882194c4fd536173b84442e82f928"
+  },
+  "whole_system_accepted": false
+}

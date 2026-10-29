@@ -1,0 +1,22 @@
+node tools/ds-audit-cli.js
+
+Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)
+bash tools/gesundheit-selbsttest.sh
+✔ echte lokale HTTP-Proben, Redirectstatus, Ausfall und Statusdatei (27.706524ms)
+✔ Check-Untergrenze sperrt auch bei gesunden Diensten (0.684512ms)
+✔ Hostproben unterscheiden aktive Units und gesunde Container (0.371845ms)
+✔ Transportfehler werden begrenzt wiederholt (0.34857ms)
+✔ Statuspersistenzfehler sind sichtbar (0.367829ms)
+✔ Spezialnamen und ungueltige Erwartungswerte koennen Ausfaelle nicht verstecken (0.291586ms)
+✔ Ressourcengrenzen sind definiert, konfigurierbar und fail-closed (0.327319ms)
+✔ DNS-Diagnose prueft exakten DNS-only-Eintrag und hat keine Schreibschnittstelle (0.460427ms)
+✔ Fehlender DNS-Zugriff oder fremde Zone ist unbekannt statt gruen (0.217805ms)
+✔ Gemischte DNS-Aufloesung und Providerfehler koennen nicht gruen sein (0.292396ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.938672

@@ -1,0 +1,58 @@
+{
+  "scope": "local prepared video integration, not actual film delivery",
+  "base_commit": "14929ebec897f6006d0a971660325a1e4cae7641",
+  "coverage": {
+    "publicPageCount": 36,
+    "publishedLocaleCount": 0,
+    "pendingLocaleCount": 108,
+    "fullyVideoCovered": false,
+    "publicModuleCount": 49,
+    "publishedModuleLocaleCount": 0,
+    "pendingModuleLocaleCount": 147,
+    "completed": false,
+    "unresolvedSourceIntegrityGaps": 2
+  },
+  "browser_controller_checks": 6,
+  "browser_public_routes": 36,
+  "real_decode_or_audible_qa": false,
+  "production_accepted": false,
+  "native_rea": "blocked_not_reviewed_missing_local_entry_and_native_operation",
+  "build": "Node22.23.4 normal and standalone passed; existing large-chunk warning remains",
+  "standalone_dist_media_files": [],
+  "standalone_dist_index_sha256": "5b95aa2f8148f11d2032f2e59c18513237d3b011cc5275d0afcae3132333b2e6",
+  "private_business_registry_imported": false,
+  "remaining_inputs": [
+    {
+      "id": "VIDEO-FINAL-CHARACTER",
+      "owner": "authorized design/media owner",
+      "next": "provide accepted AIFly character revision; rejected Orb bytes remain denied",
+      "done_when": "exact approved reference and rights bound to produced assets"
+    },
+    {
+      "id": "VIDEO-CASTING",
+      "owner": "user/media production owner",
+      "next": "resolve2inner casting manifest mismatches and obtain exact voice/sample budget approval",
+      "done_when": "actual accepted voice samples and reconciled immutable production package"
+    },
+    {
+      "id": "VIDEO-PRODUCTION",
+      "owner": "authorized media production owner",
+      "next": "produce actual per-context/per-locale bytes, captions and descriptive transcripts after casting/character/budget gates",
+      "done_when": "49module bindings plus required page intros have exact approved assets and genuine visual/audio QA"
+    },
+    {
+      "id": "VIDEO-PRIVATE",
+      "owner": "auth/tenant and media owners",
+      "next": "prove actual protected delivery before binding10private/internal routes",
+      "done_when": "real positive/negative authorized delivery evidence, no private public projection"
+    },
+    {
+      "id": "VIDEO-RELEASE",
+      "owner": "release owner",
+      "next": "exact release browser/mobile/AT and native REA evidence with actual films",
+      "done_when": "qualified scope-specific approval at exact target/version, no handoff-as-completion"
+    }
+  ],
+  "historical_snapshot_head": "85c8f177567f563187f7c3396ac4cca749425d17",
+  "superseded_scope": "Only2manifest gaps subsequently closed by Libraryversion1;see manifest-reconciliation.json. All actual film/casting/production gaps remain."
+}

@@ -1,0 +1,54 @@
+{
+  "library_file_id": "libfile_dea4df8814b08191a738c8d6f727ae32",
+  "file_id": "file_00000000ede881f4a1b2e1a9ba6a4f11",
+  "name": "nexify-welcome-de-review-v1.webm",
+  "size_bytes": 22857106,
+  "sha256": "b2082a9f55167ddf1b8789a185135ad28968d170bd8b41f689a67d12d5c254a7",
+  "materialized_by_current_library_helper": true,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 1664,
+        "height": 1248,
+        "r_frame_rate": "24/1",
+        "tags": {
+          "alpha_mode": "1"
+        }
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 1,
+        "r_frame_rate": "0/0",
+        "tags": {}
+      }
+    ],
+    "format": {
+      "duration": "13.091000",
+      "size": "22857106"
+    }
+  },
+  "inspection": {
+    "frames_inspected_seconds": [
+      1,
+      7
+    ],
+    "observed_visuals": "Three freestanding figures: adult presenter, stylized bird and round eye-faced character. Two frames are not whole-video/story/motion acceptance.",
+    "alpha_decoded_with": "libvpx-vp9",
+    "alpha_min": 0,
+    "alpha_max": 255,
+    "audio_decoded": true,
+    "audio_mean_db": -16.6,
+    "audio_peak_db": -1.3,
+    "audio_audition": "not_supported_by_current_model_audio_input; no heard pronunciation/timbre judgment claimed",
+    "user_acceptance_verified": false,
+    "final_hero_approved": false
+  },
+  "source_media_or_images_committed": false,
+  "paid_generation": false
+}
