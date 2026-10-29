@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "CHATGPT-TEST-OPTION",
+  "authority": "explicit_user_decision_2026-10-29: ChatGPT nur als getrennte Zusatzoption",
+  "relation_to_llm_policy": "Separate, visibly labelled visitor-selected test option. It is not managed NeXify routing and replaces none of the scopes in config/llm-policy.json; the managed model stays deepseek/deepseek-v4.1-flash-1017 with reasoning high.",
+  "default_enabled": false,
+  "activation": "gateway flag --enable-chatgpt-option plus a per-message visitor opt-in checkbox; absent capability => no UI",
+  "label": "ChatGPT (OpenAI) · Testoption, nicht das NeXify-Standardmodell",
+  "model": "gpt-5.4 (CHATGPT_OPTION_MODEL)",
+  "credential_routes": ["OPENAI_API_KEY (direct OpenAI API, portable)", "EMERGENT_LLM_KEY via emergentintegrations (Emergent environment only)"],
+  "current_route_2026-10-29": "emergent_universal_key; the OPENAI_API_KEY entry did not contain a valid key (HTTP 401 readback)",
+  "limits": {"CHATGPT_VISITOR_LIMIT": 5, "CHATGPT_DAILY_CAP": 30, "input_chars": 1000, "PROVIDER_PAGES": "/"},
+  "guardrails": ["system prompt forbids prices, discounts, dates, commitments and legal advice", "answers marked ai_generated with label (Art. 50 KI-VO transparency)", "turns stored separately from the structured NeXify history"]
+}

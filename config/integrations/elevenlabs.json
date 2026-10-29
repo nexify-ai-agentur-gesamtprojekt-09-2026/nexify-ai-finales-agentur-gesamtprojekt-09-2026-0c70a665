@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "provider": "ElevenLabs",
+  "authority": "explicit_user_decision_2026-10-29: Sprecherstimme für Videos und Vorlesen im Chat",
+  "credential": "ELEVENLABS_API_KEY (server-side environment only, never in repository or browser)",
+  "model_id": "eleven_multilingual_v2",
+  "output_format": "mp3_44100_128",
+  "status": "verbunden_entwurf",
+  "status_note": "Account readback 2026-10-29: creator tier active. Voices below are provisional drafts; Pascal has not approved any voice. Existing voices including the user's own voice were rejected earlier (SRC-VOICE-REJECTION).",
+  "chat_readout": {
+    "voice_id": "FTNCalFNG5bRnkkaP5Ug",
+    "voice_name": "Otto - Casual and Normal (ElevenLabs library, de)",
+    "approval": "provisional_pending_pascal",
+    "scope": "only fixed assistant texts from apps/web/lib/i18n.ts (5 keys x de/nl/fr), cached by text hash",
+    "cost_bounds": {"max_distinct_texts": 15, "SPEECH_DAILY_CAP": 15, "PROVIDER_PAGES": "/"}
+  },
+  "video_voices": {
+    "pascal": {"voice_id": "gGjaVIGkCSfKUIBYtNT2", "voice_name": "Marc - Pleasant and Interesting", "approval": "provisional_pending_pascal", "note": "Real person: final use requires Pascal's explicit voice/persona decision."},
+    "nex": {"voice_id": "fzqS9sNPYJhLlhsfDm0l", "voice_name": "Mark - Interesting and Fun", "approval": "provisional_pending_pascal"},
+    "aifly": {"voice_id": "TVGn2JVJHeMuzxos8a3h", "voice_name": "Peter - Deep, calm German narrator", "approval": "provisional_pending_pascal"}
+  },
+  "not_claimed": ["final voice approval", "video export", "lip sync", "rights clearance of a real person's voice"]
+}

@@ -13,7 +13,9 @@ import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
 
 type Intent = "choose" | "quote" | "booking" | "marketing";
-type Message = {role:"user"|"assistant"; text?:string; intent?:Intent};
+type Message = {role:"user"|"assistant"; text?:string; intent?:Intent; label?:string};
+type Delivery = "queued"|"sent"|"blocked_limit"|"failed";
+const speechKey=(intent?:Intent)=>intent==="quote"?"quoteReply":intent==="booking"?"bookingReply":intent==="marketing"?"marketingReply":"choose";
 type Quote = {id:string;title:string;details:string;download_url:string};
 type Slot = {id:string;starts:string;source:string};
 type Booking = {id:string;starts:string;confirmed:boolean};
@@ -46,6 +48,10 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   const [slots,setSlots] = useState<Slot[]>([]);
   const [booking,setBooking] = useState<Booking|null>(null);
   const [mailPending,setMailPending] = useState(false);
+  const [delivery,setDelivery] = useState<Delivery|null>(null);
+  const [useChatGPT,setUseChatGPT] = useState(false);
+  const [speaking,setSpeaking] = useState<string|null>(null);
+  const audio = useRef<HTMLAudioElement|null>(null);
   const [marketing,setMarketing] = useState<string[]>([]);
   const csrf = useRef("");
   const active = useRef(false);
@@ -62,6 +68,11 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   const canOutbox=ready&&capabilities?.pending_outbox===true;
   const canBook=ready&&capabilities?.booking_request===true;
   const canMarket=ready&&capabilities?.marketing_template===true;
+  const canMail=ready&&capabilities?.email_delivery===true;
+  // Cost-bounded rollout (Pascal, 29.10.2026): paid read-aloud and ChatGPT option first only on the home page.
+  const providerPage=pathname==="/";
+  const canSpeak=ready&&providerPage&&capabilities?.speech_readout===true;
+  const canChatGPT=ready&&providerPage&&capabilities?.chatgpt_option===true;
   const canUseIntent=intent==="quote"?canQuote:intent==="booking"?canBook:intent==="marketing"?canMarket:false;
   const contact=pages.find(page=>page.path==="/kontakt")?.contact_channels?.find(channel=>channel.type==="email"&&channel.address==="mail@nexifyai.cloud");
 
@@ -95,22 +106,41 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     if(intent==="booking" && canBook)fetch("/api/slots",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error();return r.json();}).then(r=>setSlots(r.slots)).catch(()=>setError("error"));
   },[intent,canBook,booking]);
 
+  function watchDelivery(kind:string,ref:string){
+    let rounds=0;
+    const poll=()=>fetch("/api/deliveries",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error();return r.json();}).then(r=>{
+      const found=(r.deliveries as {kind:string;ref:string;state:string}[]).find(item=>item.kind===kind&&item.ref===ref);
+      const state=found?.state;
+      if(state==="sent"||state==="blocked_limit"){setDelivery(state);return;}
+      if(state==="failed_permanent"||state==="unknown_outcome_review"){setDelivery("failed");return;}
+      if(++rounds<15)window.setTimeout(poll,2000);
+    }).catch(()=>{if(++rounds<15)window.setTimeout(poll,4000);});
+    window.setTimeout(poll,1500);
+  }
+  function readAloud(key:string){
+    audio.current?.pause();
+    if(speaking===key){setSpeaking(null);return;}
+    const player=new Audio(`/api/speech/${key}?locale=${locale}&page=${encodeURIComponent(pathname)}`);audio.current=player;setSpeaking(key);
+    player.onended=()=>setSpeaking(null);player.onerror=()=>{setSpeaking(null);setError("speech");};
+    player.play().catch(()=>{setSpeaking(null);setError("speech");});
+  }
   async function post(path:string,body:object) {
     const identity=path+"|"+JSON.stringify(body);
     if(!keys.current.has(identity))keys.current.set(identity,crypto.randomUUID());
     const response=await fetch(path,{method:"POST",headers:{"Content-Type":"application/json","X-CSRF-Token":csrf.current,"Idempotency-Key":keys.current.get(identity)!},body:JSON.stringify(body)});
-    if(!response.ok)throw new Error("request");
+    if(!response.ok){const failure=await response.json().catch(()=>({}));throw new Error(typeof failure.error==="string"?failure.error:"request");}
     return response.json();
   }
   async function act(action:()=>Promise<void>) {
     if(active.current || !ready)return;
     active.current=true;setBusy(true);setError("");
-    try {await action();}catch {setError("error");}finally{active.current=false;setBusy(false);}
+    try {await action();}catch(failure){setError(failure instanceof Error&&failure.message.startsWith("chatgpt_")&&failure.message.endsWith("_reached")?"chatgpt_limit":"error");}finally{active.current=false;setBusy(false);}
   }
   const reply=(selected?:Intent)=>selected==="quote"?t.quoteReply:selected==="booking"?t.bookingReply:selected==="marketing"?t.marketingReply:t.choose;
   function closePanel(){setOpen(false);requestAnimationFrame(()=>{const target=document.querySelector<HTMLButtonElement>(".reopen-chat")||document.querySelector<HTMLButtonElement>(".header-actions button");target?.focus();});}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form=event.currentTarget; const value=String(new FormData(form).get("message")||"").trim();if(!value)return;
+    if(useChatGPT&&canChatGPT){await act(async()=>{const result=await post("/api/assistant/chatgpt",{message:value.slice(0,1000),locale,page_path:pathname});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",text:result.text,label:result.label}]);form.reset();});return;}
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
   }
 
@@ -133,20 +163,20 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
       {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"Orientierung wird geladen …":locale==="nl"?"Oriëntatie wordt geladen …":"Chargement du guide…"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages} onActivityChange={setOrientationWorking}/></Suspense></DeferredChatBoundary></div>}
       <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&Boolean(currentPage)}>
         <div className="panel-page-context">{locale==="de"?"Hier bist du":locale==="nl"?"Je bent hier":"Tu es ici"}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>
-        <div className="welcome-card"><span className="eyebrow">{site==="teileklar"?"TEILEKLAR":"NEXIFY AI"}</span><p>{t.welcome}</p><div className="action-options">{intents.map(action=><button key={action} className="action-option" disabled={busy} onClick={()=>setIntent(action)}><span><ActionGlyph intent={action}/></span>{t[action]}<span aria-hidden="true">→</span></button>)}</div></div>
-        <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?t.assistant:locale==="de"?"Du":locale==="nl"?"U":"Vous"}</span><p>{message.role==="user"?message.text:reply(message.intent)}</p></div>)}</div>
+        <div className="welcome-card"><span className="eyebrow">{site==="teileklar"?"TEILEKLAR":"NEXIFY AI"}</span><p>{t.welcome}</p>{canSpeak&&<button type="button" className="text-button" aria-pressed={speaking==="welcome"} onClick={()=>readAloud("welcome")}>{speaking==="welcome"?t.readAloudStop:t.readAloud}</button>}<div className="action-options">{intents.map(action=><button key={action} className="action-option" disabled={busy} onClick={()=>setIntent(action)}><span><ActionGlyph intent={action}/></span>{t[action]}<span aria-hidden="true">→</span></button>)}</div></div>
+        <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?t.assistant:locale==="de"?"Du":locale==="nl"?"U":"Vous"}</span><p>{message.role==="user"||message.label?message.text:reply(message.intent)}</p>{message.label&&<small className="state-label">{message.label}</small>}{canSpeak&&message.role==="assistant"&&!message.label&&<button type="button" className="text-button" aria-pressed={speaking===speechKey(message.intent)} onClick={()=>readAloud(speechKey(message.intent))}>{speaking===speechKey(message.intent)?t.readAloudStop:t.readAloud}</button>}</div>)}</div>
         {intent==="choose"&&!ready&&<PublicRequestFallback locale={locale} contact={contact}/>}
         {intent!=="choose" && <section className="action-card" aria-label={t[intent]}>
           <div className="action-card-heading"><h3>{t[intent]}</h3><button className="text-button" onClick={()=>setIntent("choose")}>{t.back}</button></div>
           {!canUseIntent&&<PublicRequestFallback locale={locale} contact={contact}/>}
-          {intent==="quote" && canQuote && <><form onSubmit={event=>{event.preventDefault();if(!canQuote)return;const data=new FormData(event.currentTarget);void act(async()=>{setQuote(await post("/api/quotes",{title:data.get("title"),details:data.get("details"),locale}));setMailPending(false);});}}><label>{t.title}<input name="title" maxLength={160} required/></label><label>{t.details}<textarea name="details" maxLength={3000} required rows={4}/></label><button className="primary-button" disabled={busy||!canQuote}>{t.createPdf}</button></form>{quote&&<div className="result-card"><p className="state-label">{t.draft}</p><h4>{quote.title}</h4><div className="quote-view-switch" role="group" aria-label={locale==="de"?"Entwurfsansicht":locale==="nl"?"Conceptweergave":"Vue du projet"}><button type="button" aria-pressed={quoteView==="preview"} onClick={()=>setQuoteView("preview")}>{locale==="de"?"Vorschau":locale==="nl"?"Voorbeeld":"Aperçu"}</button><button type="button" aria-pressed={quoteView==="details"} onClick={()=>setQuoteView("details")}>{locale==="de"?"Details":locale==="nl"?"Details":"Détails"}</button></div>{quoteView==="preview"?<div className="quote-document-preview"><span>NeXify AI</span><h5>{quote.title}</h5><p>{quote.details}</p><small>{t.draft}</small></div>:<dl className="quote-details"><dt>{locale==="de"?"Referenz":locale==="nl"?"Referentie":"Référence"}</dt><dd>{quote.id}</dd><dt>{t.title}</dt><dd>{quote.title}</dd></dl>}<a className="download-link" href={quote.download_url} download>{t.download} <span aria-hidden="true">↓</span></a><form onSubmit={event=>{event.preventDefault();if(!canOutbox)return;const data=new FormData(event.currentTarget);void act(async()=>{const result=await post(`/api/quotes/${quote.id}/send`,{email:data.get("email"),confirmed:data.get("confirmed")==="on"});setMailPending(result.state==="pending_provider" && result.sent===false);});}}><label>{t.email}<input name="email" type="email" maxLength={254} required autoComplete="email"/></label><label className="checkbox-label"><input type="checkbox" name="confirmed" required/>{t.emailConfirm}</label><button className="outline-button" disabled={busy||!canOutbox}>{t.prepareEmail}</button></form>{mailPending&&<p className="status-note" role="status">{t.pending}</p>}</div>}</>}
-          {intent==="booking" && canBook && <><p className="status-note">{t.planning}</p>{slots.length?<form onSubmit={event=>{event.preventDefault();if(!canBook)return;const data=new FormData(event.currentTarget);void act(async()=>{setBooking(await post("/api/bookings",{slot_id:data.get("slot_id"),name:data.get("name"),email:data.get("email")}));});}}><fieldset><legend>{t.times} · Europe/Amsterdam</legend><div className="slot-list">{slots.map(slot=><label className="slot" key={slot.id}><input type="radio" name="slot_id" value={slot.id} required/>{new Intl.DateTimeFormat(locale,{weekday:"short",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Amsterdam"}).format(new Date(slot.starts))}</label>)}</div></fieldset><label>{t.name}<input name="name" autoComplete="name" maxLength={100} required/></label><label>{t.email}<input name="email" type="email" autoComplete="email" maxLength={254} required/></label><button className="primary-button" disabled={busy||!canBook}>{t.requestBooking}</button></form>:<p>{t.noSlots}</p>}{booking&&<div className="result-card" role="status"><p>{t.bookingSaved}</p><strong>{new Intl.DateTimeFormat(locale,{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Amsterdam"}).format(new Date(booking.starts))}</strong></div>}</>}
+          {intent==="quote" && canQuote && <><form onSubmit={event=>{event.preventDefault();if(!canQuote)return;const data=new FormData(event.currentTarget);void act(async()=>{setQuote(await post("/api/quotes",{title:data.get("title"),details:data.get("details"),locale}));setMailPending(false);});}}><label>{t.title}<input name="title" maxLength={160} required/></label><label>{t.details}<textarea name="details" maxLength={3000} required rows={4}/></label><button className="primary-button" disabled={busy||!canQuote}>{t.createPdf}</button></form>{quote&&<div className="result-card"><p className="state-label">{t.draft}</p><h4>{quote.title}</h4><div className="quote-view-switch" role="group" aria-label={locale==="de"?"Entwurfsansicht":locale==="nl"?"Conceptweergave":"Vue du projet"}><button type="button" aria-pressed={quoteView==="preview"} onClick={()=>setQuoteView("preview")}>{locale==="de"?"Vorschau":locale==="nl"?"Voorbeeld":"Aperçu"}</button><button type="button" aria-pressed={quoteView==="details"} onClick={()=>setQuoteView("details")}>{locale==="de"?"Details":locale==="nl"?"Details":"Détails"}</button></div>{quoteView==="preview"?<div className="quote-document-preview"><span>NeXify AI</span><h5>{quote.title}</h5><p>{quote.details}</p><small>{t.draft}</small></div>:<dl className="quote-details"><dt>{locale==="de"?"Referenz":locale==="nl"?"Referentie":"Référence"}</dt><dd>{quote.id}</dd><dt>{t.title}</dt><dd>{quote.title}</dd></dl>}<a className="download-link" href={quote.download_url} download>{t.download} <span aria-hidden="true">↓</span></a><form onSubmit={event=>{event.preventDefault();if(!canOutbox)return;const data=new FormData(event.currentTarget);void act(async()=>{const result=await post(`/api/quotes/${quote.id}/send`,{email:data.get("email"),confirmed:data.get("confirmed")==="on",locale});setMailPending(result.state==="pending_provider" && result.sent===false && !result.delivery);if(result.delivery){setDelivery(result.delivery==="blocked_limit"?"blocked_limit":"queued");if(result.delivery==="queued")watchDelivery("customer_quote",quote.id);}});}}><label>{t.email}<input name="email" type="email" maxLength={254} required autoComplete="email"/></label><label className="checkbox-label"><input type="checkbox" name="confirmed" required/>{t.emailConfirm}</label><button className="outline-button" disabled={busy||!canOutbox}>{canMail?t.sendConfirmation:t.prepareEmail}</button></form>{mailPending&&<p className="status-note" role="status">{t.pending}</p>}{delivery&&<p className="status-note" role="status">{delivery==="queued"?t.mailQueued:delivery==="sent"?t.mailSent:delivery==="blocked_limit"?t.mailBlocked:t.mailFailed}</p>}</div>}</>}
+          {intent==="booking" && canBook && <><p className="status-note">{t.planning}</p>{slots.length?<form onSubmit={event=>{event.preventDefault();if(!canBook)return;const data=new FormData(event.currentTarget);void act(async()=>{const saved=await post("/api/bookings",{slot_id:data.get("slot_id"),name:data.get("name"),email:data.get("email"),locale});setBooking(saved);if(saved.delivery==="queued"){setDelivery("queued");watchDelivery("customer_booking",saved.id);}else if(saved.delivery==="blocked_limit")setDelivery("blocked_limit");});}}><fieldset><legend>{t.times} · Europe/Amsterdam</legend><div className="slot-list">{slots.map(slot=><label className="slot" key={slot.id}><input type="radio" name="slot_id" value={slot.id} required/>{new Intl.DateTimeFormat(locale,{weekday:"short",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Amsterdam"}).format(new Date(slot.starts))}</label>)}</div></fieldset><label>{t.name}<input name="name" autoComplete="name" maxLength={100} required/></label><label>{t.email}<input name="email" type="email" autoComplete="email" maxLength={254} required/></label><button className="primary-button" disabled={busy||!canBook}>{t.requestBooking}</button></form>:<p>{t.noSlots}</p>}{booking&&<div className="result-card" role="status"><p>{t.bookingSaved}</p>{canMail&&<p>{t.bookingMail}</p>}<strong>{new Intl.DateTimeFormat(locale,{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Amsterdam"}).format(new Date(booking.starts))}</strong></div>}</>}
           {intent==="marketing" && canMarket && <><form onSubmit={event=>{event.preventDefault();if(!canMarket)return;const data=new FormData(event.currentTarget);void act(async()=>setMarketing((await post("/api/marketing",{goal:data.get("goal"),audience:data.get("audience"),locale})).draft));}}><label>{t.goal}<textarea name="goal" maxLength={800} required rows={3}/></label><label>{t.audience}<input name="audience" maxLength={500} required/></label><button className="primary-button" disabled={busy||!canMarket}>{t.createMarketing}</button></form>{marketing.length>0&&<div className="result-card"><p className="state-label">{t.marketingDraft}</p><ul>{marketing.map((line,index)=><li key={index}>{line}</li>)}</ul></div>}</>}
         </section>}
-        {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="offline"?t.offline:t.error}</p>}
+        {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="speech"?t.readAloudError:error==="chatgpt_limit"?t.chatgptLimit:t.error}</p>}
         <div ref={chatEnd}/>
       </div>
-      <div className="composer-area" hidden={!ready||(chatMode!=="workspace"&&Boolean(currentPage))}><form className="composer" onSubmit={submitMessage}><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/><div className="composer-bottom"><span>{busy?t.working:"NeX · AIFly"}</span><button className="send-button" aria-label={t.send} disabled={!ready||busy}>↑</button></div></form><p className="connection-note">{ready?t.localStatus:t.offline}</p></div>
+      <div className="composer-area" hidden={!ready||(chatMode!=="workspace"&&Boolean(currentPage))}><form className="composer" onSubmit={submitMessage}><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/>{canChatGPT&&<div className="chatgpt-option"><label className="checkbox-label"><input type="checkbox" checked={useChatGPT} onChange={event=>setUseChatGPT(event.target.checked)}/>{t.chatgptToggle}</label>{useChatGPT&&<p className="status-note">{t.chatgptNote}</p>}</div>}<div className="composer-bottom"><span>{busy?t.working:useChatGPT&&canChatGPT?"ChatGPT · Test":"NeX · AIFly"}</span><button className="send-button" aria-label={t.send} disabled={!ready||busy}>↑</button></div></form><p className="connection-note">{ready?t.localStatus:t.offline}</p></div>
     </aside>
   </div></UIContext.Provider>;
 }
