@@ -1,5 +1,6 @@
 /** Minimal Sentry capture for Vercel Node functions. No-op without SENTRY_DSN. */
 import * as Sentry from '@sentry/node';
+import type { ErrorEvent } from '@sentry/core';
 
 let initialised = false;
 
@@ -12,7 +13,7 @@ function ensure(): boolean {
       environment: process.env.VERCEL_ENV ?? process.env.NODE_ENV ?? 'production',
       release: process.env.VERCEL_GIT_COMMIT_SHA,
       defaultIntegrations: false,
-      beforeSend(event) { return {type:event.type,event_id:event.event_id,timestamp:event.timestamp,platform:event.platform,level:event.level,release:event.release,environment:event.environment,exception:{values:[{type:'Error',value:'Server error (details redacted)'}]},tags:{app_surface:'server'}}; },
+      beforeSend(event: ErrorEvent) { return {type:event.type,event_id:event.event_id,timestamp:event.timestamp,platform:event.platform,level:event.level,release:event.release,environment:event.environment,exception:{values:[{type:'Error',value:'Server error (details redacted)'}]},tags:{app_surface:'server'}}; },
       dataCollection: { userInfo: false },
       tracesSampleRate: 0,
     });

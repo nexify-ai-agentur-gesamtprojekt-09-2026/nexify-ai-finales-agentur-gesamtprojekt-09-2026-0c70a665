@@ -1,3 +1,12 @@
+## PR #48 merge conflict resolution · 28.10.2026
+
+The current `main` commit `6a9ee6e1c1b66e2703617d14e99ebd35665db874` is merged
+into the Sentry function compiler repair branch. Both independent status entries
+from the branch and `main` are retained below; the acceptance-coverage source hash
+for this combined file is refreshed. The `review` job at run `40750955849`
+remains blocked because the diff exceeded the configured 64,000-byte limit; the
+limit and review gate were not changed.
+
 # Lokales Setup, GitHub und Vercel-Preview · 28.10.2026
 
 Current State: lokale Toolchain mit Node22.23.4 und pnpm12.15.0 über
@@ -29,6 +38,33 @@ danach ausschließlich den genehmigten Previewpfad prüfen. Technischer
 Follow-up-Zeitpunkt: 2026-10-28 16:45 UTC (keine Kunden-SLA). Quellen:
 `config/integrations/vercel-agent-setup.json`, `vercel.json`,
 `config/remediation-policy.json`.
+
+## Sentry function compiler repair · 28.10.2026
+
+Current production build dpl_BHGK78EVcYhzCHjJ8rnVU3ZbuqBa at externally merged main
+1ca8eb8f45b1e900eb189b184cbf36abc8ffd1d7 contains TS2353 during function packaging,
+after the explicit API typecheck passes. The official CLI 65.1.0 builder
+@vercel/node 27.0.0 reproduces the diagnostic locally. Its legacy compiler host
+omits realpath and loses transitive Sentry Core types through pnpm symlinks.
+
+The existing Core 11.9.0 is now a direct, explicitly consumed ErrorEvent type
+dependency. The lockfile adds only its root importer binding. The unmodified
+official compiler passing is a private, non-reproducible local diagnosis: the
+official `@vercel/node` 27.0.0 archive and its diagnosis scripts are not tracked
+and CI does not run them. The tracked evidence is four focused regressions that
+simulate the builder's no-realpath TypeScript language-service host and pin the
+emitted server JavaScript against the main baseline. The Vercel packaging repair
+is therefore not CI-verified until a new build log at the exact merged SHA shows
+a clean function compilation. No SDK upgrade, cast, suppressed check,
+privacy change or credential mutation. Final gates and independent review follow
+at the exact local commit; at the time of this status entry, no new push, CI or
+deployment from this repair had occurred.
+Public imprint/privacy content remains an independent release blocker.
+
+After the lockfile change, actual Vite and Next SDK browser runs each passed all
+eight consent/exception cases with four locally intercepted events and no external
+event. The 108-case spacing/resize matrix was genuinely rerun and passed. The
+compiler test also passes without Git on PATH; no historical commit is required.
 
 ## IDENTITY-HERO-01 · akzeptierte V1-Komposition · 28.10.2026
 
