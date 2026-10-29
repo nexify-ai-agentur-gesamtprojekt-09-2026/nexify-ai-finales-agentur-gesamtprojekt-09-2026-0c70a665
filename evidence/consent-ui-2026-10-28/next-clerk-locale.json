@@ -24,7 +24,7 @@
   ],
   "source_sha256": {
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
-    "apps/web/app/layout.tsx": "549058a35387293c968522b88096b8e47e3bee9e3d74093afa2708b2ff97c53c",
+    "apps/web/app/layout.tsx": "96f1f1ac331a805497c4729ee1717d23cb97d36ffc8039b8cfe1ebc44ad8d5a5",
     "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
     "apps/site/tests/fixtures/clerk-integration.tsx": "217fab40829fc02e7f6c55564b1d51e331e871dfb4264a84d03353ccb60228a2",
     "apps/site/tests/fixtures/next-clerk-locale.tsx": "2fa5f0257ea52f1db4c8d378806a04c3faf80f262f9d16e158eb452c4be62862",

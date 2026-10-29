@@ -52,7 +52,8 @@ try{
     for(const intent of ['booking','quote','marketing']){
      const p=data.pages.find(p=>p.actions.some(a=>a.type==='chat'&&a.chat_intent===intent));const action=p.actions.find(a=>a.type==='chat'&&a.chat_intent===intent);
      await page.goto(origin+p.path);if(failure!=='capabilities')await page.locator('.public-orientation').waitFor({state:'attached'});else await page.waitForFunction(()=>!document.querySelector('#chat-message').disabled);
-     await page.locator('main').getByRole('button',{name:action.label[locale],exact:true}).first().click();
+     const actionButton=p.path==='/'&&intent==='quote'?page.locator('[data-testid="home-finish-section"] .home-finish-actions button.primary-button'):page.locator('main').getByRole('button',{name:action.label[locale],exact:true}).first();
+     await actionButton.click();
      const card=page.locator('.action-card');await card.locator('.request-fallback').waitFor();const link=card.locator('a[href="mailto:mail@nexifyai.cloud"]');await link.focus();assert.equal(await link.evaluate(a=>a===document.activeElement),true);
      assert.equal(await card.locator('form').count(),0);assert.equal(await page.locator('#chat-message').isVisible(),failure==='capabilities');
      assert.doesNotMatch(await card.innerText(),/Beschreibe deinen Terminwunsch im Chat|Beschrijf uw afspraakwens in de chat/);

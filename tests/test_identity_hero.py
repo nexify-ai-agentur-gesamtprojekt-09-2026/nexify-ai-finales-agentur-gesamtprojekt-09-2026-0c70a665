@@ -36,9 +36,16 @@ class IdentityHeroTests(unittest.TestCase):
         component=(ROOT/'apps/web/components/IdentityHero.tsx').read_text()
         css=(ROOT/'apps/web/components/IdentityHero.css').read_text()
         self.assertNotRegex(css,r'#[0-9a-fA-F]{3,8}\b|rgba?\(')
-        for unsafe in ('<iframe','srcDoc=','dangerouslySetInnerHTML','fetch(','<video','<audio'):
+        # Video element is now explicitly required per user specification (iteration 7)
+        # Original interim-scene-images remain unchanged and are preserved for reference
+        self.assertIn('<video',component)
+        for unsafe in ('<iframe','srcDoc=','dangerouslySetInnerHTML','fetch('):
             self.assertNotIn(unsafe,component)
-        self.assertIn('PresenterScene',component)
+        # Video controls must be present
+        self.assertIn('hero-video',component)
+        self.assertIn('hero-play-toggle',component)
+        self.assertIn('hero-sound-toggle',component)
+        self.assertIn('hero-captions-toggle',component)
         self.assertIn('prefers-reduced-motion:reduce',css)
 
     def test_scene_ink_is_readable_across_the_entire_floor_gradient(self):

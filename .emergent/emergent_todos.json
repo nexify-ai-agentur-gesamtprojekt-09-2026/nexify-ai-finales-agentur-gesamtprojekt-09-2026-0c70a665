@@ -1,0 +1,18 @@
+[
+  {
+    "content": "Weitere ungeprüfte Gestaltungs- und Generierungsänderungen stoppen",
+    "status": "completed"
+  },
+  {
+    "content": "Laufenden isolierten Renderauftrag prüfen; bereits abgeschlossen, nicht heruntergeladen oder veröffentlicht",
+    "status": "completed"
+  },
+  {
+    "content": "Abgelehnten Stand und unveränderte Originalreferenzen für einen kontrollierten Rückbau sichern",
+    "status": "completed"
+  },
+  {
+    "content": "Rückbauumfang bestätigen; keinen pauschalen Reset vorbestehender Arbeit ausführen",
+    "status": "pending"
+  }
+]

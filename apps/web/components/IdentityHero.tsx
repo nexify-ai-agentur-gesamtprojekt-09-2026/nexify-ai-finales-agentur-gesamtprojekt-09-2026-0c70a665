@@ -1,116 +1,70 @@
-import {useEffect,useState,type ReactNode} from 'react';
+import {useEffect,useRef,useState,type ReactNode} from 'react';
 import type {Locale} from '../lib/i18n';
-import PresenterScene from './PresenterScene';
+import {isPublicVideo,type PublicVideo} from './PresenterVideo';
+import {ActionButton,ActionLink} from './ActionControl';
 import './IdentityHero.css';
 
 const copy={
- de:{
-  eyebrow:'NeXify AI · Chat it. Automate it.',
-  titleStart:'Websites, Apps und KI,',
-  titleAccent:'die für dich arbeiten.',
-  body:'Wir verbinden deinen digitalen Auftritt mit den Abläufen dahinter. Persönlich geplant. Gemeinsam umgesetzt.',
-  cta:'Unsere Leistungen',
-  sound:'Ton einschalten',
-  soundOff:'Ton ausschalten',
-  scene:'Pascal, NeX und AI Fly Oracle begrüßen dich',
-  stageLabel:'Bühne',
-  note:'Begrüßungsszene · Film folgt in Kürze.',
-  grid:['Design nach DIN EN ISO 9241-125 / 303','Satz nach DIN 1450 · Modular Scale 1.333','Kontraste WCAG 2.2 AAA','Interaktion ≥ 44 × 44 px'],
-  steps:[['Verstehen.','Ausgangspunkt sind die Aufgaben, die heute Zeit und Aufmerksamkeit kosten.'],['Bewusst entscheiden.','Du bestimmst Ziel, Grenzen und den nächsten Schritt.'],['Geordnet weiterarbeiten.','NeX und AI Fly Oracle begleiten Verbindung und Orientierung.']]
- },
- nl:{
-  eyebrow:'NeXify AI · Chat it. Automate it.',
-  titleStart:'Websites, apps en AI,',
-  titleAccent:'die voor jou werken.',
-  body:'We verbinden je digitale uitstraling met de processen erachter. Persoonlijk gepland. Samen gerealiseerd.',
-  cta:'Onze diensten',
-  sound:'Geluid aan',
-  soundOff:'Geluid uit',
-  scene:'Pascal, NeX en AI Fly Oracle verwelkomen jou',
-  stageLabel:'Podium',
-  note:'Welkomstscène · Film volgt binnenkort.',
-  grid:['Ontwerp volgens DIN EN ISO 9241','Zetwerk volgens DIN 1450','Contrasten WCAG 2.2 AAA','Interactie ≥ 44 × 44 px'],
-  steps:[['Begrijpen.','We beginnen bij de taken die vandaag tijd en aandacht vragen.'],['Bewust kiezen.','Jij bepaalt het doel, de grenzen en de volgende stap.'],['Geordend verderwerken.','NeX en AI Fly Oracle begeleiden verbinding en oriëntatie.']]
- },
- fr:{
-  eyebrow:'NeXify AI · Chat it. Automate it.',
-  titleStart:'Des sites, apps et IA',
-  titleAccent:'qui travaillent pour toi.',
-  body:'Nous relions ta présence numérique aux processus qui l’animent. Pensé avec toi, réalisé ensemble.',
-  cta:'Nos services',
-  sound:'Activer le son',
-  soundOff:'Couper le son',
-  scene:'Pascal, NeX et AI Fly Oracle te saluent',
-  stageLabel:'Scène',
-  note:'Scène de bienvenue · Vidéo à venir.',
-  grid:['Conception selon DIN EN ISO 9241','Typographie selon DIN 1450','Contrastes WCAG 2.2 AAA','Interaction ≥ 44 × 44 px'],
-  steps:[['Comprendre.','Nous partons des tâches qui demandent du temps et de l’attention aujourd’hui.'],['Choisir consciemment.','Tu définis l’objectif, les limites et la prochaine étape.'],['Avancer avec méthode.','NeX et AI Fly Oracle accompagnent la connexion et l’orientation.']]
- }
+ de:{titleStart:'Aus deiner Idee wird',titleAccent:'ein klarer nächster Schritt.',body:'Websites, Apps und Automatisierung für dein Unternehmen. Gemeinsam schauen wir auf dein Vorhaben und finden den passenden Einstieg.',cta:'Vorhaben besprechen',sound:'Ton einschalten',soundOff:'Ton ausschalten',play:'Film abspielen',pause:'Film anhalten',scene:'Pascal, NeX und AI Fly Oracle begrüßen dich',captions:'Untertitel',transcript:'Gesprochenen Text lesen',seek:'Filmposition',loading:'Film wird geladen …',error:'Der Film kann gerade nicht geladen werden. Der Text bleibt verfügbar.',retry:'Erneut laden',download:'Film herunterladen',review:'KI-animierter Film · Qualitätsüberarbeitung',reduced:'Bewegung reduziert. Du startest den Film selbst.'},
+ nl:{titleStart:'Van jouw idee naar',titleAccent:'een duidelijke volgende stap.',body:'Websites, apps en automatisering voor jouw bedrijf. Samen kijken we naar je plan en vinden we de juiste ingang.',cta:'Plan bespreken',sound:'Geluid aan',soundOff:'Geluid uit',play:'Film afspelen',pause:'Film pauzeren',scene:'Pascal, NeX en AI Fly Oracle verwelkomen jou',captions:'Ondertiteling',transcript:'Gesproken tekst lezen (Duits)',seek:'Filmpositie',loading:'Film wordt geladen …',error:'De film kan niet worden geladen. De tekst blijft beschikbaar.',retry:'Opnieuw laden',download:'Film downloaden',review:'AI-geanimeerde film · kwaliteitsherziening · Duits',reduced:'Beweging beperkt. Je start de film zelf.'},
+ fr:{titleStart:'De ton idée à',titleAccent:'une prochaine étape claire.',body:'Sites web, applications et automatisation pour ton entreprise. Ensemble, nous examinons ton projet et trouvons le bon point de départ.',cta:'Discuter du projet',sound:'Activer le son',soundOff:'Couper le son',play:'Lire le film',pause:'Mettre en pause',scene:'Pascal, NeX et AI Fly Oracle te saluent',captions:'Sous-titres',transcript:'Lire le texte (allemand)',seek:'Position du film',loading:'Chargement du film…',error:'Le film ne peut pas être chargé. Le texte reste disponible.',retry:'Réessayer',download:'Télécharger le film',review:'Film animé par IA · révision qualitative · allemand',reduced:'Mouvements réduits. Tu démarres le film.'}
 };
-
-/**
- * Hero V5 – vermessene Begrüßungsbühne.
- * - 8-pt Basisgrid, modulare Typo-Skala 1.333 (Perfect Fourth), DIN 1450 Lesewerte.
- * - Goldener Schnitt (φ ≈ 1.618) für Spalten- und Figurenpositionen.
- * - Echte 3D-Bühne mit perspective 1600 px, geneigter Bodenebene und Reflektionsebene.
- * - WCAG 2.2 AAA Kontraste; prefers-reduced-motion respektiert.
- */
-export default function IdentityHero({locale,intro:_intro,actions:_actions}:{locale:Locale;intro:string;actions:ReactNode}){
- const t=copy[locale];
- void _intro;void _actions;
- const [videoReady,setVideoReady]=useState(false);
- const [soundOn,setSoundOn]=useState(false);
- const videoSrc='/media/runway/hero.mp4';
+const transcript=[
+ ['Pascal','Hallo, ich bin Pascal. Willkommen bei NeXify! Schön, dass du da bist. Wir schauen gemeinsam, was dein Unternehmen wirklich braucht – und wie deine vorhandenen Systeme dabei helfen können.'],
+ ['NeX','Ich bin NeX. Geht es um eine Website, einen automatisierten Ablauf oder ein Kundenportal? Du kannst hier direkt deinen Einstieg wählen.'],
+ ['AI Fly Oracle','Und ich bin AI Fly Oracle. Ich helfe dir, dein Vorhaben zu ordnen, offene Fragen sichtbar zu machen und den nächsten Schritt vorzubereiten.'],
+ ['Pascal','Schau dich in Ruhe um. Womit möchtest du anfangen?']
+];
+const clock=(n:number)=>`${Math.floor(n/60)}:${String(Math.floor(n%60)).padStart(2,'0')}`;
+export default function IdentityHero({locale,intro:_intro,actions:_actions,video}:{locale:Locale;intro:string;actions:ReactNode;video?:PublicVideo}){
+ const t=copy[locale];void _intro;void _actions;
+ const approvedVideo=isPublicVideo(video,locale)?video:undefined;
+ const videoRef=useRef<HTMLVideoElement>(null);
+ const [soundOn,setSoundOn]=useState(false),[playing,setPlaying]=useState(false),[captions,setCaptions]=useState(false);
+ const [reduced,setReduced]=useState(false),[loaded,setLoaded]=useState(false),[failed,setFailed]=useState(false);
+ const [position,setPosition]=useState(0),[duration,setDuration]=useState(0);
  useEffect(()=>{
-  let cancelled=false;
-  fetch(videoSrc,{method:'HEAD'}).then(r=>{
-   const ct=r.headers.get('content-type')||'';
-   if(!cancelled && r.ok && ct.startsWith('video/')) setVideoReady(true);
-  }).catch(()=>{});
-  return()=>{cancelled=true;};
- },[]);
- return <section className="identity-hero" aria-labelledby="home-headline" data-media-state={videoReady?'approved-video':'interim-images-video-pending'} data-identity-layout="accepted-v5">
-  <div className="identity-scene">
-   <div className="identity-copy">
-    <p className="identity-eyebrow">{t.eyebrow}</p>
-    <h1 id="home-headline"><span>{t.titleStart}</span><br/><span className="identity-title-accent">{t.titleAccent}</span></h1>
-    <p className="identity-body">{t.body}</p>
-    <a className="identity-primary-link" href="#leistungen" data-testid="hero-services-link">
-     <span>{t.cta}</span><span aria-hidden="true" className="identity-primary-arrow">→</span>
-    </a>
-    <dl className="identity-standards" aria-label="Gestaltungsgrundlage" data-testid="hero-standards">
-     {t.grid.map(line=><div key={line} className="identity-standard"><dt aria-hidden="true">✓</dt><dd>{line}</dd></div>)}
-    </dl>
+  setFailed(false);setLoaded(false);setPosition(0);setDuration(0);
+  const node=videoRef.current;const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const change=()=>{setReduced(motion.matches);if(motion.matches)node?.pause();};change();
+  if(!motion.matches)node?.play().catch(()=>{});
+  const other=(e:Event)=>{if((e as CustomEvent).detail!=='identity-hero')node?.pause();};
+  motion.addEventListener('change',change);window.addEventListener('nexify:presenter-play',other);
+  return()=>{node?.pause();motion.removeEventListener('change',change);window.removeEventListener('nexify:presenter-play',other);};
+ },[approvedVideo?.src]);
+ const captionMode=(enabled:boolean)=>{const tracks=videoRef.current?.textTracks;if(tracks)for(let i=0;i<tracks.length;i++)tracks[i].mode=enabled?'showing':'hidden';};
+ const toggleCaptions=()=>{setCaptions(v=>{captionMode(!v);return !v;});};
+ const toggleSound=()=>{const node=videoRef.current;if(!node)return;node.muted=!node.muted;setSoundOn(!node.muted);};
+ const togglePlay=()=>{const node=videoRef.current;if(!node)return;if(!node.paused){node.pause();return;}window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:'identity-hero'}));node.play().catch(()=>setFailed(true));};
+ return <section className="identity-hero" aria-labelledby="home-headline" data-testid="identity-hero" data-media-state={failed?'error':loaded?'film':'loading'} data-identity-layout="zielbild-v2">
+  <div className="identity-scene" data-testid="hero-grid">
+   <div className="identity-copy" data-testid="hero-copy">
+    <h1 id="home-headline" data-testid="hero-headline"><span>{t.titleStart}</span>{' '}<span className="identity-title-accent">{t.titleAccent}</span></h1>
+    <p className="identity-body" data-testid="hero-description">{t.body}</p>
+    <div className="identity-links"><ActionLink variant="text" className="identity-primary-link" href="/leistungsumfang" data-testid="hero-project-link"><span>{t.cta}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionLink><ActionLink variant="quiet" className="identity-secondary-link" href="/leistungen" data-testid="hero-services-link">{locale==='de'?'Leistungen ansehen':locale==='nl'?'Diensten bekijken':'Voir les services'}</ActionLink></div>
    </div>
-   <div className="identity-stage" role="group" aria-label={t.scene} data-video={videoReady?'on':'off'}>
-    <div className="identity-stage-depth" aria-hidden="true">
-     <div className="identity-key-light"/>
-     <div className="identity-fill-light"/>
-     <div className="identity-rim-light"/>
-     <div className="identity-floor-plane">
-      <div className="identity-floor-grid"/>
-      <div className="identity-floor-horizon"/>
-     </div>
-     <div className="identity-floor-glow"/>
+   <div className="identity-media" data-testid="hero-media">
+    <div className="identity-stage" data-testid="hero-stage">
+     <video key={approvedVideo?.src||'welcome-draft'} ref={videoRef} className="identity-video" muted={!soundOn} playsInline preload="metadata" poster={approvedVideo?.poster||'/media/home-review/welcome-review-poster.jpg'} aria-label={approvedVideo?.title||t.scene} data-testid="hero-video" tabIndex={0}
+      onLoadedData={()=>setLoaded(true)} onLoadedMetadata={()=>{setDuration(videoRef.current?.duration||0);captionMode(captions);}}
+      onTimeUpdate={()=>setPosition(videoRef.current?.currentTime||0)} onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} onError={()=>{setFailed(true);setPlaying(false);}}
+      onKeyDown={e=>{if([' ','k','m','c'].includes(e.key.toLowerCase())){e.preventDefault();if(e.key===' '||e.key.toLowerCase()==='k')togglePlay();if(e.key.toLowerCase()==='m')toggleSound();if(e.key.toLowerCase()==='c')toggleCaptions();}}}>
+      {approvedVideo?<source src={approvedVideo.src} type={approvedVideo.mime}/>:<><source src="/media/home-review/welcome-review.webm" type="video/webm"/><source src="/media/home-review/welcome-review.mp4" type="video/mp4"/></>}
+      <track kind="captions" src={approvedVideo?.captionsSrc||'/media/home-review/welcome-review.vtt'} srcLang={approvedVideo?.locale||'de'} label={approvedVideo?.locale||'Deutsch'} onLoad={()=>captionMode(captions)}/>
+     </video>
     </div>
-    {videoReady?(
-     <video key={soundOn?'on':'off'} className="identity-video" src={videoSrc} autoPlay muted={!soundOn} loop playsInline preload="metadata" aria-label={t.scene}/>
-    ):(
-     <div className="identity-walk-in">
-      <div className="identity-shadow identity-shadow-nex" aria-hidden="true"/>
-      <div className="identity-shadow identity-shadow-pascal" aria-hidden="true"/>
-      <div className="identity-shadow identity-shadow-aifly" aria-hidden="true"/>
-      {(['nex','pascal','aifly'] as const).map(speaker=><div key={speaker} className={`identity-figure identity-figure-${speaker}`}><PresenterScene speaker={speaker} title={t.scene} locale={locale} hero/></div>)}
-     </div>
-    )}
-    <div className="identity-stage-vignette" aria-hidden="true"/>
-    {videoReady&&<button type="button" className="identity-sound" onClick={()=>setSoundOn(v=>!v)} aria-pressed={soundOn} data-testid="hero-sound-toggle">
-     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/>{soundOn?<><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></>:<path d="m16 9 5 6M21 9l-5 6"/>}</svg>
-     <span>{soundOn?t.soundOff:t.sound}</span>
-    </button>}
-    {!videoReady&&<p className="identity-note" data-testid="hero-note">{t.note}</p>}
+    <div className="identity-controls" role="group" aria-label={t.scene} data-testid="hero-controls">
+     <ActionButton variant="secondary" className="identity-sound" onClick={togglePlay} disabled={failed} aria-pressed={playing} data-testid="hero-play-toggle">{playing?t.pause:t.play}</ActionButton>
+     <ActionButton variant="secondary" className="identity-sound" onClick={toggleSound} disabled={failed} aria-pressed={soundOn} data-testid="hero-sound-toggle">{soundOn?t.soundOff:t.sound}</ActionButton>
+     <ActionButton variant="secondary" className="identity-sound" onClick={toggleCaptions} disabled={failed} aria-pressed={captions} data-testid="hero-captions-toggle">{t.captions}</ActionButton>
+    </div>
+    <div className="identity-timeline"><input className="identity-progress" type="range" min="0" max={duration||1} step="0.1" value={position} aria-label={t.seek} disabled={!loaded||failed} onChange={e=>{const value=Number(e.target.value);if(videoRef.current)videoRef.current.currentTime=value;setPosition(value);}} data-testid="hero-progress-slider"/><span data-testid="hero-time">{clock(position)} / {clock(duration)}</span></div>
+    {!loaded&&!failed&&<p className="identity-media-status" role="status" data-testid="hero-loading">{t.loading}</p>}
+    {failed&&<div className="identity-error" role="alert" data-testid="hero-error"><p>{t.error}</p><ActionButton variant="secondary" className="identity-sound" onClick={()=>{setFailed(false);setLoaded(false);videoRef.current?.load();}} data-testid="hero-retry">{t.retry}</ActionButton></div>}
+    {reduced&&<p className="identity-media-status" data-testid="hero-reduced-motion">{t.reduced}</p>}
+    {!approvedVideo&&<p className="identity-media-status" data-testid="hero-review-note">{locale==='de'?'Neue Begrüßungsfassung · zur Abstimmung':locale==='nl'?'Nieuwe welkomstfilm · ter beoordeling':'Nouvelle version du film · à valider'}</p>}
+    <details className="identity-transcript" data-testid="hero-transcript"><summary data-testid="hero-transcript-toggle">{t.transcript}</summary>{approvedVideo?<p lang={approvedVideo.locale} data-testid="hero-transcript-approved">{approvedVideo.transcript}</p>:transcript.map(([speaker,line],i)=><p key={i} lang="de" data-testid={`hero-transcript-line-${i}`}><strong>{speaker}: </strong>{line}</p>)}<a href={approvedVideo?.src||'/media/home-review/welcome-review.mp4'} download data-testid="hero-download">{t.download}</a></details>
    </div>
   </div>
-  <ol className="identity-story">{t.steps.map(([title,body],i)=><li key={i}><span className="identity-step-number" aria-hidden="true">0{i+1}</span><h2>{title}</h2><p>{body}</p></li>)}</ol>
  </section>;
 }

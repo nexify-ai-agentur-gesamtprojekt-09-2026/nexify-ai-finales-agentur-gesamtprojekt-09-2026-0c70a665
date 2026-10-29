@@ -19,6 +19,6 @@ export default function PublicExperience({page,data,documentTitle=false}:{page:P
   const{locale}=useUI();const video=data.videos[page.id]?.[locale];
   const title=documentTitle?<title>{`${page.localizedTitle[locale]} · NeXify AI`}</title>:null;
   const explanation=<><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/><ExplainerSections modules={data.explainers.find(entry=>entry.page_id===page.id)?.modules||[]} pages={data.pages} video={page.path==='/'?undefined:video} moduleVideos={data.videoModules[page.id]||{}}/></>;
-  if(page.path==='/')return <>{title}<HomeContent home={page} pages={data.pages} video={video}>{explanation}</HomeContent></>;
+  if(page.path==='/')return <>{title}<HomeContent home={page} pages={data.pages} video={video} moduleVideos={data.videoModules[page.id]||{}}><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/></HomeContent></>;
   return <>{title}<PublicContent page={page} pages={data.pages}>{["tk-search","tk-categories","tk-category","tk-product","tk-cart","tk-checkout"].includes(page.id)&&<ShopPanel pageId={page.id}/>} {explanation}</PublicContent></>;
 }

@@ -1,0 +1,144 @@
+/*
+ * NeXify Masterplan-Overlay — autoritative Werte aus Mastervorgabe 2026-10-29.
+ *
+ * Quelle:  /app/docs/09-final/mastervorgabe-2026-10-29.md §5.2 / §5.3.
+ *
+ * Dieses Overlay überschreibt gezielt die historischen Werte aus
+ * /app/packages/tokens/tokens.css. Es führt den semantischen Tokenvertrag
+ * ein (color.*, spacing.*, radius.*, shadow.*, motion.*). Historische
+ * Namen bleiben als Aliase bestehen, damit kein Komponenten-CSS bricht.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
+:root {
+  /* ============== Mastervorgabe 5.2 – Primärwerte ============== */
+  --color-canvas:            #080A0F;   /* Graphite Canvas */
+  --color-brand-lime:        #C0EE38;   /* CI Lime 2026 */
+  --color-brand-lime-soft:   #D7FA50;   /* legacy Lime, als Highlight weiter nutzbar */
+  --color-brand-cyan:        #38BDF8;   /* Cyan-Akzent */
+
+  /* Semantischer Tokenvertrag (Mastervorgabe §5.3) */
+  --color-background-canvas:    var(--color-canvas);
+  --color-background-surface:   #0F131A;
+  --color-background-elevated:  #141A22;
+  --color-text-primary:         #FFFFFF;
+  --color-text-secondary:       #CBD1D6;
+  --color-text-muted:           #8B939B;
+  --color-text-inverse:         #0A0C10;
+  --color-border-subtle:        rgba(255,255,255,.08);
+  --color-border-strong:        rgba(255,255,255,.18);
+  --color-border-focus:         var(--color-brand-lime);
+  --color-action-primary:       var(--color-brand-lime);
+  --color-action-primary-ink:   #0A0C10;
+  --color-action-secondary:     transparent;
+  --color-action-disabled:      rgba(255,255,255,.12);
+  --color-status-info:          var(--color-brand-cyan);
+  --color-status-success:       #6FE3CF;
+  --color-status-warning:       #FFC24A;
+  --color-status-error:         #FF8A7A;
+
+  /* Historische Variablen zentral neu mappen,
+     damit alle bestehenden Komponenten vom Overlay profitieren,
+     ohne jeweils einzeln umgeschrieben zu werden. */
+  --color-graphit-900:          var(--color-canvas);
+  --color-graphit-850:          var(--color-background-surface);
+  --color-graphit-800:          var(--color-background-surface);
+  --color-graphit-700:          var(--color-background-elevated);
+  --color-graphit-650:          #1A2029;
+  --color-graphit-600:          #202733;
+  --color-linie-fein:           var(--color-border-subtle);
+  --color-linie-mittel:         rgba(255,255,255,.12);
+  --color-linie-stark:          var(--color-border-strong);
+  --color-text-primaer:         var(--color-text-primary);
+  --color-text-sekundaer:       var(--color-text-secondary);
+  --color-text-tertiaer:        #AEB5BB;
+  --color-text-gedaempft:       var(--color-text-muted);
+  --color-text-auf-lime:        var(--color-action-primary-ink);
+  --color-marke-lime:           var(--color-brand-lime);
+  --color-marke-lime-hell:      #DBF68A;
+  --color-marke-lime-dunkel:    #A6D820;
+  --color-marke-lime-gruen:     #78C331;
+  --color-semantik-licht:       var(--color-brand-cyan);
+  --color-semantik-erfolg:      var(--color-status-success);
+  --color-semantik-warnung:     var(--color-status-warning);
+  --color-semantik-fehler:      var(--color-status-error);
+
+  /* ============== Typografie: Inter + Plus Jakarta Sans ============== */
+  --font-display: 'Plus Jakarta Sans', Inter, 'Segoe UI', system-ui, sans-serif;
+  --font-text:    Inter, 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, 'Courier New', monospace;
+
+  /* ============== 8-pt Grid + semantische Spacing-Namen ============== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;    /* Karteninnen-Padding Desktop (Mastervorgabe) */
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;    /* Sektionsabstand Richtwert */
+  --space-10: 128px;  /* Sektionsabstand Groß */
+  --card-padding-desktop: var(--space-6);
+  --card-padding-compact: var(--space-5);  /* 20px kompakt ≈ 24px, DIN-nahe Rundung */
+
+  /* ============== Radien & Elevation (bleiben kompatibel) ============== */
+  --radius-klein: 10px;
+  --radius-button: 12px;
+  --radius-chip: 14px;
+  --radius-karte: 18px;
+  --radius-leit: 24px;
+  --radius-pille: 999px;
+
+  /* Dialog-/Elevation-Schatten mit tieferem Canvas */
+  --shadow-karte:        inset 0 1px 0 rgba(255,255,255,.06), 0 32px 56px -32px rgba(0,0,0,.9),  0 2px 6px rgba(0,0,0,.3);
+  --shadow-kleine-karte: inset 0 1px 0 rgba(255,255,255,.05), 0 14px 24px -16px rgba(0,0,0,.85);
+  --shadow-dialog:       inset 0 1px 0 rgba(255,255,255,.08), 0 60px 120px -30px rgba(0,0,0,.98);
+  --shadow-button-primaer: inset 0 1px 0 rgba(255,255,255,.65), 0 16px 36px -14px rgba(192,238,56,.5), 0 2px 0 rgba(0,0,0,.3);
+  --shadow-leuchten: 0 0 32px rgba(192,238,56,.85);
+
+  /* Gradients auf neue Werte angepasst */
+  --gradient-button-primaer: linear-gradient(180deg, #DBF68A 0%, #C0EE38 55%, #A6D820 100%);
+  --gradient-balken:         linear-gradient(90deg, #A6D820, #C0EE38);
+  --gradient-seitengrund:
+    radial-gradient(1300px 640px at 88% -6%, rgba(192,238,56,.08), transparent 60%),
+    radial-gradient(1000px 560px at 4% 38%, rgba(56,189,248,.06), transparent 62%),
+    radial-gradient(900px 500px at 96% 72%, rgba(167,139,250,.05), transparent 62%),
+    var(--color-canvas);
+  --gradient-band:
+    radial-gradient(900px 320px at 12% 0%, rgba(192,238,56,.07), transparent 70%),
+    radial-gradient(700px 300px at 92% 100%, rgba(56,189,248,.06), transparent 70%),
+    linear-gradient(180deg, var(--color-background-surface), var(--color-background-elevated));
+  --gradient-karte:          linear-gradient(180deg, var(--color-background-elevated) 0%, var(--color-background-surface) 100%);
+  --gradient-kleine-karte:   linear-gradient(180deg, var(--color-background-elevated) 0%, var(--color-background-surface) 100%);
+
+  /* Motion-Standards (unverändert, auf Masterplan ausgerichtet) */
+  --motion-einblenden: var(--motion-base, 240ms) var(--ease-standard, cubic-bezier(.2,.8,.3,1));
+
+  /* Fokus durchgängig */
+  --focus-ring: 2px solid var(--color-brand-lime);
+  --focus-offset: 2px;
+}
+
+/* ============== Body-Schrift zuweisen (Mastervorgabe 5.2) ============== */
+body { font-family: var(--font-text); background: var(--color-canvas); color: var(--color-text-primary); }
+h1,h2,h3,h4 { font-family: var(--font-display); }
+
+/* ============== Fokus-Ring sichtbar überall ============== */
+:where(button,a,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* ============== Touch-Ziele 48 × 48 (Mastervorgabe 5.2) ============== */
+button, [role="button"], a.button, select,
+input:not([type=hidden]):not([type=checkbox]):not([type=radio]), textarea, summary {
+  min-height: 48px;
+}
+.compact-touch { min-height: 44px; }  /* explizite Opt-out-Klasse für kleine Chips */
+
+/* ============== Grafiken: NIE abschneiden ============== */
+img, picture, svg, video, canvas, iframe { max-width: 100%; }
+img, picture, svg, video, canvas { height: auto; }
+.frame-fluid > img, .frame-fluid > video { height: 100%; object-fit: cover; }

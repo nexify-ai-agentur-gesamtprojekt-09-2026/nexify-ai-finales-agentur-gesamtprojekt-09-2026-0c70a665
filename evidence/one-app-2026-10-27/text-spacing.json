@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-28T17:52:40.542Z",
+  "observed_at": "2026-10-29T20:51:37.680Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "6555e31e427c344b7b4869f665555ff1606de7d38bd3fc90544f45efb5dea60f",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -13,18 +13,19 @@
     "apps/site/src/observability.ts": "b42fcb14289b34a6295fea642438a2b0b12196fdd67317bf1836c0a2db87631d",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
-    "apps/site/tests/browser-text-spacing.mjs": "de0e011d6cde9fab72660a9ea70fd43a7eb13ac044dce1da49d0d58bbe3a0aae",
+    "apps/site/tests/browser-text-spacing.mjs": "bfa4ae535778d86b3ece517fd7408d7d0bd0f116a8c57c02860a29f107ae7fcc",
     "apps/site/vite.config.ts": "89ffc11349f5d88645c2d627f3a7fa048be78107ea93953ba8f3501aeda1579a",
-    "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
+    "apps/web/app/globals.css": "2903daef89c7451abed35393878052b2e716df45514ae8f46eba45ce65cc6397",
     "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
     "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
     "apps/web/components/ExplainerSections.tsx": "0b25af5b66cffd1821613d8984f53f85fc0e4b8bd1ea6e63af8fbcc2ec941fcc",
-    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
+    "apps/web/components/HomeContent.tsx": "0430788f53edc7945d77cbcef483faedf6ff9b623a4a160b0976a4a8853a5729",
+    "apps/web/components/HomeJourney.css": "ee6f0f6134b6f48f9e818e13312d5eabc1133045c17ff12b79edf2ce788f82ec",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
-    "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
-    "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
+    "apps/web/components/IdentityHero.css": "8e693b9b73b3b56b49545711097d3be499a27a669f7822683c49852d8a6d77a5",
+    "apps/web/components/IdentityHero.tsx": "05259d58eb1062d615e16a9a61de2eade134378b125caa32406e02633ed124d3",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
     "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
     "apps/web/components/MailWorkspacePanel.tsx": "544b09b05ebfaf610c44fd3b8813b19b9d84fa8b47f495b1ca150ef03cf678cc",
@@ -38,23 +39,23 @@
     "apps/web/components/PresenterVideo.tsx": "8aad2b972de21ee0e0d880a9723f0bc539184df6b1ea21e1975a2ccf19509e16",
     "apps/web/components/PublicContent.tsx": "cef8e0c3084a582868f4b82128cc96eae7df9d68571c7c2efc469c1d97fb7d08",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
-    "apps/web/components/PublicExperience.tsx": "5d2d921be94b2a9d7a1e7f85b66535f02c48e02746fc7b5f718a222f2abf9867",
+    "apps/web/components/PublicExperience.tsx": "3d4c6d7b6e72069061f8f575a96e3036647001aa258731bf6764df7af1fd2d6d",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
-    "apps/web/components/PublicOrientationChat.css": "4d2bfbb33b3b32e2b8e1fd75375458ab9f9f7317b0d580bda092f2915d9f1ad0",
+    "apps/web/components/PublicOrientationChat.css": "040c5b7fd99be0de6db745994facd8c3f50103f5dbcacd4db43c810427561f3d",
     "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
     "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
     "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
-    "apps/web/components/SiteNavigation.tsx": "458a89b42dff96b84a2177ea70b09e97eb1bb7b5c0e7e2354ca3bc277024112f",
-    "apps/web/components/Workspace.tsx": "930532ddcc4b78882ddd1d534d43aa9086d84c1b4b481203d9ce8d1b1fe24801",
-    "apps/web/components/WorkspaceCapabilities.ts": "7137ab6e62c3d2566d6fd247ce70bc76cc7d1ad5cabbbcfd6e60c1e61562a9e2",
-    "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
+    "apps/web/components/SiteNavigation.tsx": "df171a03db171604c41d029a899ef0069d68da4a93d62d768b3291dc8d176f29",
+    "apps/web/components/Workspace.tsx": "337357313ee6f0a7bc4790cc4c91a24f0639fda4c8e93f01681923f72fd79800",
+    "apps/web/components/WorkspaceCapabilities.ts": "010cc923971b1e6d033ee9f791ca3c0ba5eb28cd5139a1a0c86532eb5ce4189e",
+    "apps/web/components/WorkspaceRebuild.css": "931aff842cf87db681f2fe895c538a8d335d8e5e282f6b9c0e6fe1445c818439",
     "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
-    "apps/web/lib/i18n.ts": "6a0a9218399d729742ce35430fae9f2cd06234f7795be732a21de0ac07a137b0",
+    "apps/web/lib/i18n.ts": "eb71ab7e884614b938cb6c429785475efd8a0f8a51965e63fecbe786b13d937a",
     "apps/web/lib/page-types.ts": "e066fc6cbaabac8e98c02f26ee984e2f36a324b546421dd44ce737db696f2b85",
     "apps/web/public/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
     "apps/web/public/fonts/geist-mono-latin.woff2": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
@@ -62,14 +63,14 @@
     "apps/web/public/media/presenters/nex-toucan-121a804c.png": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
     "apps/web/public/media/presenters/pascal-original-6dd03834.png": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
     "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
-    "config/design-tokens.json": "c086069f2ff70c1f998fe2686ec10c6cd0376098205737f582f09a5b216e36ea",
+    "config/design-tokens.json": "64eb9fd79e78337552b1fb2f9cd2f384fbb7d7a67e622a143e84d57ef86d4b83",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
     "config/site-map.json": "9e6642a39a61cf2cdbbf02d13cc217ac7e84e5530ebc6c34208754cb949185af",
     "config/text-resize-sources.json": "8cef37815cd15a9f0c0180b0999bafb0aceba320b4bd0c537af68fb8bd8ae8b8",
     "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
-    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
-    "packages/tokens/tokens.json": "05ffaf3a0f3b88a0ff0569fe83a0a0c0ad52975eb71a93a2fa7bc419b63cc08a",
-    "packages/tokens/tokens.ts": "2c5648c6d7252761666e1b9e772dec218719e70759db3c35f676e04d5fdb6662",
+    "packages/tokens/tokens.css": "2679a7cbf1d6b54a16335bca9e6c3047be34a3bcd1b9b7a671c7025cd563630b",
+    "packages/tokens/tokens.json": "c68ab6725b3b71bcc2ba1b2c90b4ad069eb00e7e3883be6f932f8ee8a74f02e9",
+    "packages/tokens/tokens.ts": "cb21977e3e96740b170aa762b4865a917c49fcf825d0cb4488b96a15cf237ed5",
     "pnpm-lock.yaml": "56baa251e0717c15b49c72092c9099e412d74e5a7db2827dc85d51511633c7e2"
   },
   "scope": "text-spacing and 200% text resize geometry; not screenreader or full visual conformance",
@@ -91,7 +92,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 376,
+        "count": 351,
         "all_doubled": true
       },
       "overflow": false,
@@ -114,7 +115,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 348,
+        "count": 336,
         "all_doubled": true
       },
       "overflow": false,
@@ -137,7 +138,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 339,
         "all_doubled": true
       },
       "overflow": false,
@@ -160,7 +161,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 339,
         "all_doubled": true
       },
       "overflow": false,
@@ -183,7 +184,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 339,
         "all_doubled": true
       },
       "overflow": false,
@@ -206,7 +207,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 351,
+        "count": 339,
         "all_doubled": true
       },
       "overflow": false,
@@ -229,7 +230,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 337,
+        "count": 325,
         "all_doubled": true
       },
       "overflow": false,
@@ -252,7 +253,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 335,
+        "count": 323,
         "all_doubled": true
       },
       "overflow": false,
@@ -275,7 +276,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 295,
+        "count": 283,
         "all_doubled": true
       },
       "overflow": false,
@@ -298,7 +299,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 294,
+        "count": 282,
         "all_doubled": true
       },
       "overflow": false,
@@ -321,7 +322,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 295,
+        "count": 283,
         "all_doubled": true
       },
       "overflow": false,
@@ -344,7 +345,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 297,
+        "count": 285,
         "all_doubled": true
       },
       "overflow": false,
@@ -367,7 +368,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 369,
+        "count": 357,
         "all_doubled": true
       },
       "overflow": false,
@@ -390,7 +391,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 326,
+        "count": 314,
         "all_doubled": true
       },
       "overflow": false,
@@ -413,7 +414,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 326,
+        "count": 314,
         "all_doubled": true
       },
       "overflow": false,
@@ -436,7 +437,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 280,
         "all_doubled": true
       },
       "overflow": false,
@@ -459,7 +460,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 280,
         "all_doubled": true
       },
       "overflow": false,
@@ -482,7 +483,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 280,
         "all_doubled": true
       },
       "overflow": false,
@@ -505,7 +506,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 280,
         "all_doubled": true
       },
       "overflow": false,
@@ -528,7 +529,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 280,
         "all_doubled": true
       },
       "overflow": false,
@@ -551,7 +552,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 292,
+        "count": 280,
         "all_doubled": true
       },
       "overflow": false,
@@ -571,75 +572,6 @@
     },
     {
       "path": "/anmelden",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 303,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/registrieren",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/registrieren",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/registrieren",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 317,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 292,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/suche",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/suche",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/suche",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -650,6 +582,75 @@
       "content_overflows": []
     },
     {
+      "path": "/registrieren",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 305,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 289,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 288,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/teileklar/kategorien",
       "width": 390,
       "text_spacing": true,
@@ -663,121 +664,6 @@
     },
     {
       "path": "/teileklar/kategorien",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 285,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 285,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 300,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 298,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/kasse",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kasse",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kasse",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 298,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -788,42 +674,19 @@
       "content_overflows": []
     },
     {
-      "path": "/teileklar/termine",
+      "path": "/teileklar/kategorie",
       "width": 390,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/teileklar/termine",
+      "path": "/teileklar/kategorie",
       "width": 1280,
       "text_spacing": true,
       "overflow": false
     },
     {
-      "path": "/teileklar/termine",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 266,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/gutscheine",
+      "path": "/teileklar/kategorie",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -834,6 +697,144 @@
       "content_overflows": []
     },
     {
+      "path": "/teileklar/produkt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 297,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 295,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 295,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 279,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 263,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 279,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/teileklar/partner-werden",
       "width": 390,
       "text_spacing": true,
@@ -850,7 +851,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 279,
+        "count": 276,
         "all_doubled": true
       },
       "overflow": false,
@@ -873,7 +874,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 279,
+        "count": 276,
         "all_doubled": true
       },
       "overflow": false,
@@ -896,7 +897,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 267,
+        "count": 264,
         "all_doubled": true
       },
       "overflow": false,

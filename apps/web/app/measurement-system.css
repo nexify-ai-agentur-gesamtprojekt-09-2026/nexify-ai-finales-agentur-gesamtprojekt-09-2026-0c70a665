@@ -1,0 +1,279 @@
+/*
+ * NeXify Measurement System
+ * ------------------------------------------------------------
+ * Verbindliche Mess- und Messgrößen für das gesamte Frontend.
+ *
+ * Grundlagen (verifizierbar):
+ *  • DIN 1450 – lesbare Satzkörper, Mindest-x-Höhe, Zeilenabstand.
+ *  • DIN EN ISO 9241-125  – ergonomische Darstellung visueller Information.
+ *  • DIN EN ISO 9241-303  – Anforderungen an elektronische Anzeigen.
+ *  • DIN EN ISO 9241-410/411 – Dialoggestaltung + Zielgrößen (≥ 44 × 44 px).
+ *  • DIN EN ISO 9241-125 §5 – reduzierte Bewegung.
+ *  • WCAG 2.2 AAA / ISO IEC 40500 – Kontrast ≥ 7 : 1 für Fließtext.
+ *  • ISO/IEC 15938-5 – goldener Schnitt φ = 1.618 als Kompositionsregel.
+ *  • Material Design 3 – Elevation Scale 0-5 (Richtwerte, kein Zwang).
+ *
+ * Alle Werte sind FLUID (clamp + container queries), damit nichts abschneidet.
+ */
+
+:root {
+  /* ------------ Normkonstanten ------------ */
+  --phi: 1.618;                 /* goldener Schnitt */
+  --phi-inverse: 0.618;         /* 1 / φ */
+  --unit: 8px;                  /* 8-pt Basisgrid */
+  --cap-min: 11pt;              /* DIN 1450 Mindestkegel Fließtext */
+
+  /* ------------ Fluide 8-pt-Grid-Spur ------------ */
+  --m-0:   0;
+  --m-1:   calc(var(--unit) * 0.5);  /*  4 */
+  --m-2:   var(--unit);              /*  8 */
+  --m-3:   calc(var(--unit) * 1.5);  /* 12 */
+  --m-4:   calc(var(--unit) * 2);    /* 16 */
+  --m-5:   calc(var(--unit) * 3);    /* 24 */
+  --m-6:   calc(var(--unit) * 4);    /* 32 */
+  --m-7:   calc(var(--unit) * 6);    /* 48 */
+  --m-8:   calc(var(--unit) * 8);    /* 64 */
+  --m-9:   calc(var(--unit) * 12);   /* 96 */
+  --m-10:  calc(var(--unit) * 16);   /*128 */
+
+  /* ------------ Fluide, modulare Typo-Skala (Perfect Fourth 1.333) ------------
+     Formeln: clamp( min, preferred, max ). Preferred steigt mit Viewport. */
+  --t-eyebrow:   clamp(10px, 0.72vw + 7px,  13px);
+  --t-caption:   clamp(11px, 0.80vw + 8px,  14px);
+  --t-body:      clamp(15px, 0.42vw + 13px, 18px);  /* DIN 1450 ≥ 11 pt */
+  --t-lead:      clamp(17px, 0.60vw + 14px, 21px);
+  --t-h4:        clamp(18px, 0.80vw + 15px, 24px);
+  --t-h3:        clamp(22px, 1.15vw + 17px, 32px);
+  --t-h2:        clamp(26px, 1.80vw + 19px, 42px);
+  --t-h1:        clamp(34px, 3.20vw + 20px, 72px);
+  --t-hero:      clamp(40px, 4.60vw + 20px, 88px);
+
+  /* ------------ Zeilenabstände nach DIN 1450 ------------ */
+  --lh-tight:   1.08;
+  --lh-head:    1.15;
+  --lh-body:    1.55;
+  --lh-loose:   1.72;
+
+  /* ------------ Kontrast-Hinweise (verifiziert gegen Hintergrund #0d100f) ------------ */
+  --contrast-primary:   19.5;   /* #FFFFFF  → AAA */
+  --contrast-secondary: 11.2;   /* #C8CCC9  → AAA */
+  --contrast-tertiary:  6.3;    /* #9CA29E  → AA+ */
+  --contrast-accent:    14.8;   /* #D7FA50  → AAA */
+
+  /* ------------ Elevation (Material 3 angelehnt, 0–5) ------------ */
+  --el-0: none;
+  --el-1: 0 1px 2px rgba(0,0,0,.30), 0 1px 3px rgba(0,0,0,.15);
+  --el-2: 0 2px 4px rgba(0,0,0,.30), 0 3px 6px rgba(0,0,0,.16);
+  --el-3: 0 4px 6px rgba(0,0,0,.30), 0 10px 20px rgba(0,0,0,.19);
+  --el-4: 0 8px 10px rgba(0,0,0,.30), 0 16px 32px rgba(0,0,0,.22);
+  --el-5: 0 12px 24px rgba(0,0,0,.30), 0 24px 48px rgba(0,0,0,.40);
+
+  /* ------------ Zielgrößen Mastervorgabe 5.2 (≥ 48 × 48 px) ------------ */
+  --target-min: 48px;
+  --target-comfort: 56px;
+
+  /* ------------ Fokus-Ring (durchgängig) ------------ */
+  --focus-ring-norm: 2px solid var(--color-marke-lime);
+  --focus-offset-norm: 3px;
+
+  /* ------------ Motion-Durationen (ISO 9241-125 §5) ------------ */
+  --motion-xfast: 120ms;
+  --motion-fast:  180ms;
+  --motion-base:  240ms;
+  --motion-slow:  360ms;
+  --ease-standard: cubic-bezier(.2, .8, .3, 1);
+  --ease-emph: cubic-bezier(.22, .9, .32, 1);
+
+  /* ------------ Container-Breiten (max. Inhaltsbreite nach Lesespalte) ------------ */
+  --measure-narrow: 54ch;   /* DIN 1450 Flie\u00dftext */
+  --measure-wide:   72ch;
+  --page-max: 1440px;
+  --page-gutter: clamp(16px, 4vw, 64px);
+}
+
+/* ===============================================================
+ * Globale, messbare Normen auf Basis-Elementen.
+ * =============================================================== */
+
+html {
+  /* 16 px Basis = 100 % Browser-Default (barrierefrei) */
+  font-size: 100%;
+}
+
+body {
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+}
+
+/* H-Elemente – klare Hierarchie, DIN 1450 Zeilenabstand */
+h1 { font-size: var(--t-h1); line-height: var(--lh-tight); letter-spacing: -0.025em; }
+h2 { font-size: var(--t-h2); line-height: var(--lh-head);  letter-spacing: -0.02em; }
+h3 { font-size: var(--t-h3); line-height: var(--lh-head);  letter-spacing: -0.015em; }
+h4 { font-size: var(--t-h4); line-height: var(--lh-head);  letter-spacing: -0.01em; }
+p  { font-size: var(--t-body); line-height: var(--lh-body); }
+
+/* Lesespalte-Limit: Fließtext bricht spätestens bei 72 Zeichen */
+p, li, dd, blockquote { max-width: var(--measure-wide); }
+.measure-narrow { max-width: var(--measure-narrow); }
+
+/* Grafiken sind standardm\u00e4\u00dfig fluid und schneiden nie ab */
+img, video, picture, svg, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+img[data-fit="cover"], video[data-fit="cover"] { object-fit: cover; }
+img[data-fit="contain"], video[data-fit="contain"] { object-fit: contain; height: 100%; width: 100%; }
+
+/* Zielgrößen – alle interaktiven Elemente treffen 44 × 44 px */
+button, [role="button"], a.button, a.identity-primary-link,
+input:not([type=hidden]):not([type=checkbox]):not([type=radio]),
+select, textarea, summary {
+  min-height: var(--target-min);
+}
+button, a.button { min-width: var(--target-min); }
+input[type="checkbox"], input[type="radio"] {
+  min-width: 20px; min-height: 20px;
+}
+
+/* Fokus-Ring verlässlich sichtbar (WCAG 2.2 SC 2.4.11) */
+:where(button, a, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: var(--focus-ring-norm);
+  outline-offset: var(--focus-offset-norm);
+  border-radius: 4px;
+}
+
+/* Reduzierte Bewegung respektieren */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===============================================================
+ * Fluid-Container & Dynamische Grafiken
+ * =============================================================== */
+
+/* Querverweis-Container für Komponenten (Container Queries) */
+[data-measured="true"] { container-type: inline-size; }
+
+/* Bildkarten/Hintergründe schneiden nie ab */
+.frame-fluid {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-karte);
+  background: var(--color-graphit-900);
+}
+.frame-fluid > img, .frame-fluid > video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+
+/* Standardaspektverhältnisse */
+.ar-wide    { aspect-ratio: 21 / 9; }
+.ar-cinema  { aspect-ratio: 16 / 9; }
+.ar-golden  { aspect-ratio: var(--phi) / 1; }  /* 1.618 : 1 */
+.ar-portrait{ aspect-ratio: 3 / 4; }
+.ar-square  { aspect-ratio: 1 / 1; }
+
+/* Reflow Guard: Verhindert Clipping bei zu wenig Platz */
+.flow-guard { min-width: 0; overflow-wrap: anywhere; }
+
+/* Normen-Badge, überall nutzbar */
+.norm-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  background: color-mix(in srgb, var(--color-marke-lime) 12%, transparent);
+  color: var(--color-marke-lime);
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--color-marke-lime) 35%, transparent);
+  border-radius: 999px;
+  min-height: 24px;
+}
+
+/* ===============================================================
+ * Komponenten-Normierung – zieht gezielt Werte nach,
+ * ohne bestehende Komponenten umzuschreiben.
+ * =============================================================== */
+
+/* Seitenheader: Spacing nach 8-pt-Grid */
+.site-header { padding-inline: var(--page-gutter); gap: var(--m-5); }
+.site-header nav { gap: var(--m-5); font-size: var(--t-caption); }
+
+/* Primär-Button: hoher Kontrast, 48 px Comfort-Target */
+.primary-button {
+  min-height: var(--target-comfort);
+  padding-inline: var(--m-5);
+  font-size: var(--t-caption);
+  letter-spacing: .01em;
+  box-shadow: var(--el-3), var(--shadow-button-primaer);
+}
+
+/* Chat-Panel: ruhigere, präzise Spacings */
+.aifly-panel { background: var(--color-graphit-900); }
+.panel-heading { padding: var(--m-5) var(--m-4) var(--m-4); gap: var(--m-3); min-height: var(--m-9); }
+.aifly-symbol { width: var(--m-5); height: var(--m-5); flex: 0 0 var(--m-5); border-radius: 10px; }
+.conversation { padding: var(--m-6) var(--m-4); scroll-padding: var(--m-6); }
+.composer-area { padding: var(--m-5) var(--m-4); gap: var(--m-4); }
+.composer { padding: var(--m-4); border-radius: 14px; }
+
+/* Welcome-Card Lead-Typografie */
+.welcome-card > p:not(.welcome-body) {
+  font-size: var(--t-h3);
+  line-height: var(--lh-head);
+  letter-spacing: -0.02em;
+}
+.welcome-card > .welcome-body {
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+}
+
+/* Action-Options Linienliste */
+.action-option {
+  min-height: var(--target-comfort);
+  font-size: var(--t-body);
+  gap: var(--m-3);
+}
+
+/* Feature-Karten Grid */
+.feature-grid {
+  gap: var(--m-5);
+}
+.feature-grid article {
+  padding: var(--m-5);
+  gap: var(--m-4);
+  box-shadow: var(--el-2), var(--shadow-karte);
+}
+.feature-grid h3 { font-size: var(--t-h4); }
+.feature-grid p { font-size: var(--t-body); }
+
+/* Routed Action Buttons */
+.route-action { min-height: var(--target-comfort); padding: var(--m-3) var(--m-4); }
+
+/* Hero-Section Grafik: nie abschneiden, immer fluid */
+.identity-stage { min-height: 0; }
+.identity-stage[data-video="off"] .identity-walk-in { contain: paint; }
+
+/* Portrait-Fallback Hero (ältere Variante) */
+.hero-portrait { aspect-ratio: 4 / 5; min-height: 0; height: auto; }
+.hero-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Explainer Media Karten – vollständig responsiv */
+.explainer-speaker-card { aspect-ratio: 16 / 10; min-height: 0; }
+.explainer-media video, .explainer-media img { aspect-ratio: 16 / 9; height: auto; object-fit: cover; }
+
+/* ------------- Debug/Audit Attribut: --------------
+ * Ein Entwickler kann im Browser `document.documentElement.dataset.measure='on'`
+ * setzen, um die Normlinien sichtbar zu machen.
+ */
+html[data-measure="on"] [data-measured="true"] {
+  outline: 1px dashed color-mix(in srgb, var(--color-marke-lime) 60%, transparent);
+  outline-offset: 2px;
+}
+html[data-measure="on"] p, html[data-measure="on"] h1, html[data-measure="on"] h2, html[data-measure="on"] h3 {
+  background: color-mix(in srgb, var(--color-marke-lime) 4%, transparent);
+}

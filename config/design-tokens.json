@@ -1,10 +1,10 @@
 {
   "$description": "NeXify Designsystem 'Graphit & Lime' · einzige Token-Quelle · Fassung 2.0 (= NeXifyAI Cloud v12) · W3C-DTCG-Format",
   "color": {
-    "graphit": { "900": { "$value": "#1B1E1D", "$type": "color" }, "850": { "$value": "#1E2220", "$type": "color", "$description": "eingelassene Flächen (Well)" }, "800": { "$value": "#242826", "$type": "color", "$description": "Seitengrund" }, "700": { "$value": "#2A2E2C", "$type": "color" }, "650": { "$value": "#262A28", "$type": "color", "$description": "Karte unten" }, "600": { "$value": "#303634", "$type": "color", "$description": "Karte oben" } },
+    "graphit": { "900": { "$value": "#080A0F", "$type": "color" }, "850": { "$value": "#0F131A", "$type": "color", "$description": "Masterplan Oberfläche" }, "800": { "$value": "#080A0F", "$type": "color", "$description": "Zusammenhängende Masterplan-Markenfläche" }, "700": { "$value": "#141A22", "$type": "color" }, "650": { "$value": "#1A2029", "$type": "color", "$description": "Karte unten" }, "600": { "$value": "#202733", "$type": "color", "$description": "Karte oben" } },
     "linie": { "fein": { "$value": "rgba(255,255,255,.08)", "$type": "color" }, "mittel": { "$value": "#363A38", "$type": "color" }, "stark": { "$value": "#4A4F4C", "$type": "color" } },
     "text": { "primaer": { "$value": "#FFFFFF", "$type": "color" }, "sekundaer": { "$value": "#E3E6E3", "$type": "color" }, "tertiaer": { "$value": "#BCC1BD", "$type": "color" }, "gedaempft": { "$value": "#9CA29E", "$type": "color", "$description": "5,9:1 auf graphit-800" }, "aufLime": { "$value": "#111312", "$type": "color" } },
-    "marke": { "lime": { "$value": "#D7FA50", "$type": "color" }, "limeHell": { "$value": "#EEFF9A", "$type": "color" }, "limeDunkel": { "$value": "#BFE83C", "$type": "color" }, "limeGruen": { "$value": "#78C331", "$type": "color" } },
+    "marke": { "cyan": { "$value": "#38BDF8", "$type": "color" }, "lime": { "$value": "#C0EE38", "$type": "color" }, "limeHell": { "$value": "#EEFF9A", "$type": "color" }, "limeDunkel": { "$value": "#BFE83C", "$type": "color" }, "limeGruen": { "$value": "#78C331", "$type": "color" } },
     "semantik": { "erfolg": { "$value": "#6FE3CF", "$type": "color" }, "warnung": { "$value": "#FFC24A", "$type": "color" }, "fehler": { "$value": "#FF8A7A", "$type": "color" }, "licht": { "$value": "#A78BFA", "$type": "color", "$description": "nur Signalfeld und Lichtflecken" } },
     "identityScene": {
       "wallTop": { "$value": "#E0E3DC", "$type": "color" },
@@ -20,7 +20,14 @@
     },
     "print": { "tinte": { "$value": "#14191C", "$type": "color" }, "papier": { "$value": "#F2F3EF", "$type": "color" }, "lime": { "$value": "#C8F04B", "$type": "color", "$description": "Lime für Papier und E-Mail (CD-2026); auf Bildschirm immer marke.lime" }, "grau": { "$value": "#646769", "$type": "color" } }
   },
-  "font": { "text": { "$value": "Geist, Helvetica, Arial, sans-serif", "$type": "fontFamily" }, "mono": { "$value": "'Geist Mono', ui-monospace, monospace", "$type": "fontFamily" } },
+  "font": { "text": { "$value": "Inter, Helvetica, Arial, sans-serif", "$type": "fontFamily" }, "display": { "$value": "'Plus Jakarta Sans', Inter, Arial, sans-serif", "$type": "fontFamily" }, "mono": { "$value": "'Geist Mono', ui-monospace, monospace", "$type": "fontFamily" } },
+  "layout": { "lightHeight": "min(920px, 100vh)", "contentMax": "1440px", "pagePadding": "clamp(24px, 4.5vw, 80px)", "heroMin": "640px", "controlSize": "48px", "mediaMax": "640px", "panelWidth": "clamp(360px, 28vw, 440px)" },
+  "typeHero": { "size": "clamp(40px, 4.4cqi, 64px)", "compact": "clamp(36px, 4.4cqi, 48px)", "mobile": "clamp(36px, 8.5cqi, 48px)", "leading": "1.08" },
+  "typeBody": { "size": "18px", "leading": "1.65" },
+  "typeSmall": { "size": "13px" },
+  "typeSection": { "size": "clamp(32px, 3.5cqi, 48px)" },
+  "typeCard": { "size": "24px" },
+  "typeDisplay": { "tracking": "-.04em" },
   "type": { "h1": "80/0.98/-0.04em (mobil 38–52)", "h2": "42–52/1.05/-0.03em", "h3": "20–28/1.15/-0.02em", "body": "17–18/1.55", "small": "13–15/1.5", "kicker": "Mono 12–14" },
   "space": { "1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "24px", "6": "32px", "7": "48px", "8": "64px", "9": "96px" },
   "radius": { "klein": "8px", "button": "10px", "chip": "12px", "karte": "16px", "leit": "20px", "pille": "999px" },
@@ -35,15 +42,30 @@
     "dialog": "inset 0 1px 0 rgba(255,255,255,.08), 0 50px 100px -30px rgba(0,0,0,.95)"
   },
   "gradient": {
-    "karte": "linear-gradient(180deg, #303634 0%, #262A28 100%)",
-    "kleineKarte": "linear-gradient(180deg, #303634 0%, #292D2B 100%)",
-    "buttonPrimaer": "linear-gradient(180deg, #EEFF9A 0%, #D7FA50 55%, #BFE83C 100%)",
-    "balken": "linear-gradient(90deg, #78C331, #D7FA50)",
-    "band": "radial-gradient(900px 320px at 12% 0%, rgba(215,250,80,.07), transparent 70%), radial-gradient(700px 300px at 92% 100%, rgba(111,227,207,.06), transparent 70%), linear-gradient(180deg, #2C312F, #262A28)",
-    "seitengrund": "radial-gradient(1300px 640px at 88% -6%, rgba(215,250,80,.08), transparent 60%), radial-gradient(1000px 560px at 4% 38%, rgba(111,227,207,.055), transparent 62%), radial-gradient(900px 500px at 96% 72%, rgba(167,139,250,.06), transparent 62%), #242826",
-    "spotlight": "radial-gradient(420px circle at var(--mx), var(--my), rgba(215,250,80,.13), transparent 60%)"
+    "markenlicht": "radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%)",
+    "karte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
+    "kleineKarte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
+    "buttonPrimaer": "#C0EE38",
+    "balken": "linear-gradient(90deg, #A6D820, #C0EE38)",
+    "band": "#080A0F",
+    "seitengrund": "#080A0F",
+    "spotlight": "none"
   },
-  "motion": { "einblenden": "0.3–0.7s ease", "balken": "1.0–1.6s cubic-bezier(.2,.7,.2,1)", "laufband": "46s linear", "schimmer": "7s ease-in-out", "regel": "Bewegung = Zustand; prefers-reduced-motion schaltet alles ab" },
+  "motion": { "feedback": "180ms ease", "einblenden": "0.3–0.7s ease", "balken": "1.0–1.6s cubic-bezier(.2,.7,.2,1)", "laufband": "46s linear", "schimmer": "7s ease-in-out", "regel": "Bewegung = Zustand; prefers-reduced-motion schaltet alles ab" },
   "focus": { "ring": "2px solid #D7FA50", "offset": "2px", "logo": "Unterstreichung Lime, 6px Abstand" },
-  "target": { "min": "44px" }
+  "material": {
+    "blur": "20px",
+    "veil": "rgba(255,255,255,.10)",
+    "highlight": "rgba(255,255,255,.15)",
+    "border": "1px",
+    "shadow": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.18), 8px 8px 24px rgba(0,0,0,.22), 16px 16px 48px rgba(0,0,0,.14)",
+    "shadowRaised": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.16), 4px 4px 12px rgba(0,0,0,.24), 8px 8px 24px rgba(0,0,0,.16)",
+    "sectionDivider": "linear-gradient(90deg, transparent, rgba(255,255,255,.025) 35%, rgba(192,238,56,.035) 55%, transparent)",
+    "sectionGlow": "radial-gradient(ellipse 45% 100% at 45% 0%, rgba(192,238,56,.012), transparent 100%)",
+    "filmCurvature": "4% / 2%",
+    "filmTurn": "-.5deg",
+    "filmPerspective": "1800px"
+  },
+  "control": { "activeOpacity": ".9", "disabledOpacity": ".45", "focusWidth": "2px", "loadingDuration": "1s" },
+  "target": { "min": "48px" }
 }
