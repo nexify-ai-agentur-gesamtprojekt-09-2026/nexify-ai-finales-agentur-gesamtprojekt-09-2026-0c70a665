@@ -49,8 +49,13 @@ omits realpath and loses transitive Sentry Core types through pnpm symlinks.
 
 The existing Core 11.9.0 is now a direct, explicitly consumed ErrorEvent type
 dependency. The lockfile adds only its root importer binding. The unmodified
-official compiler passes, four focused regressions pass, and emitted server
-JavaScript matches the main baseline. No SDK upgrade, cast, suppressed check,
+official compiler passing is a private, non-reproducible local diagnosis: the
+official `@vercel/node` 27.0.0 archive and its diagnosis scripts are not tracked
+and CI does not run them. The tracked evidence is four focused regressions that
+simulate the builder's no-realpath TypeScript language-service host and pin the
+emitted server JavaScript against the main baseline. The Vercel packaging repair
+is therefore not CI-verified until a new build log at the exact merged SHA shows
+a clean function compilation. No SDK upgrade, cast, suppressed check,
 privacy change or credential mutation. Final gates and independent review follow
 at the exact local commit; at the time of this status entry, no new push, CI or
 deployment from this repair had occurred.
