@@ -1710,14 +1710,14 @@
             "fr": "La sélection et la commande sont distinctes"
           },
           "body": {
-            "de": "Ein Warenkorb soll ausgewählte Positionen vor einer Bestellung zusammenführen. Der aktuelle Stand enthält keine bestätigte Bestellung und löst keine Zahlung aus. Die anschließende Kassenansicht erläutert den noch nicht freigegebenen Bestellschritt.",
-            "nl": "Een winkelwagen moet gekozen artikelen vóór de bestelling samenbrengen. De huidige versie bevat geen bevestigde bestelling en start geen betaling. De volgende kassapagina licht de nog niet vrijgegeven bestelstap toe.",
-            "fr": "Le panier doit réunir les articles choisis avant la commande. L’état actuel ne contient aucune commande confirmée et ne déclenche aucun paiement. L’écran de caisse explique une étape de commande encore non ouverte."
+            "de": "Im Warenkorb führen Sie Ihre ausgewählten Teile zusammen und behalten den Überblick. Es wird nichts bestellt und keine Zahlung ausgelöst. An der Kasse fassen wir alles zusammen und klären Preis, Lieferung und Bezahlung, bevor etwas verbindlich wird.",
+            "nl": "In de winkelwagen brengt u uw gekozen onderdelen samen en houdt u het overzicht. Er wordt niets besteld en geen betaling gestart. Bij de kassa vatten we alles samen en bespreken we prijs, levering en betaling voordat er iets bindend wordt.",
+            "fr": "Dans le panier, vous réunissez les pièces choisies et gardez une vue d’ensemble. Rien n’est commandé et aucun paiement n’est déclenché. Au paiement, nous récapitulons tout et clarifions prix, livraison et règlement avant tout engagement."
           },
           "outcome": {
-            "de": "Den aktuellen Kassenstatus verstehen.",
-            "nl": "Bekijk de huidige kassastatus.",
-            "fr": "Consultez l’état actuel de la caisse."
+            "de": "Den nächsten Schritt zur Kasse verstehen.",
+            "nl": "De volgende stap naar de kassa begrijpen.",
+            "fr": "Comprendre l’étape suivante vers le paiement."
           },
           "media_side": "left",
           "media": {
@@ -1730,9 +1730,9 @@
             "type": "route",
             "target_id": "tk-checkout",
             "label": {
-              "de": "Kasse: nicht zum Kauf freigegeben",
-              "nl": "Afrekenen: niet vrijgegeven voor aankoop",
-              "fr": "Paiement : achat non activé"
+              "de": "Weiter zur Kasse",
+              "nl": "Verder naar de kassa",
+              "fr": "Vers le paiement"
             }
           },
           "source_refs": [
@@ -1752,14 +1752,14 @@
             "fr": "Une sélection reste à vérifier"
           },
           "body": {
-            "de": "Vor einem späteren Kauf müssen ausgewählte Teile und Fahrzeugzuordnung noch einmal zusammen betrachtet werden. Im aktuellen Vorbereitungsstand gibt es keine verbindlichen Warenkorbpositionen. Nutzen Sie die Suche, um den vorgesehenen Auswahlweg zu verstehen.",
-            "nl": "Vóór een latere aankoop moeten onderdelen en voertuigkoppeling opnieuw samen worden bekeken. In de huidige voorbereiding bestaan geen bindende winkelwagenregels. Gebruik de zoekpagina om de voorziene selectie te begrijpen.",
-            "fr": "Avant un futur achat, pièces choisies et véhicule doivent être examinés ensemble. L’état préparatoire actuel ne comporte aucune ligne de panier engageante. La recherche explique le parcours de sélection prévu."
+            "de": "Sie können jederzeit weitere Teile suchen und Ihrem Warenkorb hinzufügen. Beschreiben Sie Fahrzeug und gewünschtes Teil – wir helfen, die passende Auswahl zu finden.",
+            "nl": "U kunt op elk moment meer onderdelen zoeken en aan uw winkelwagen toevoegen. Beschrijf voertuig en gewenst onderdeel – wij helpen de juiste keuze te vinden.",
+            "fr": "Vous pouvez à tout moment rechercher d’autres pièces et les ajouter au panier. Décrivez le véhicule et la pièce souhaitée – nous vous aidons à trouver le bon choix."
           },
           "outcome": {
-            "de": "Den Auswahlweg erneut ansehen.",
-            "nl": "Bekijk het selectietraject opnieuw.",
-            "fr": "Consultez à nouveau le parcours de sélection."
+            "de": "Die Teilesuche erneut öffnen.",
+            "nl": "De onderdelenzoektocht opnieuw openen.",
+            "fr": "Rouvrir la recherche de pièces."
           },
           "media_side": "right",
           "media": {
@@ -1772,9 +1772,9 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche: in Vorbereitung",
-              "nl": "Onderdelen zoeken: in voorbereiding",
-              "fr": "Recherche de pièces : en préparation"
+              "de": "Teil suchen",
+              "nl": "Onderdeel zoeken",
+              "fr": "Rechercher une pièce"
             }
           },
           "source_refs": [
@@ -1801,14 +1801,14 @@
             "fr": "Pourquoi aucun achat n’est encore conclu ici"
           },
           "body": {
-            "de": "Für einen echten Kauf müssen Artikel, Preis, Versand und die erforderlichen Verbraucherinformationen verbindlich vorliegen. Dieser Kassenstand ist nicht zum Kauf freigegeben. Eine Erklärung oder Chatantwort ersetzt weder den vorgesehenen Bestellprozess noch dessen rechtliche Voraussetzungen.",
-            "nl": "Voor een echte aankoop moeten artikel, prijs, verzending en vereiste consumenteninformatie vaststaan. Deze kassa is niet vrijgegeven voor aankopen. Een uitleg of chatantwoord vervangt het bestelproces en de juridische voorwaarden niet.",
-            "fr": "Un achat réel exige un article, un prix, une livraison et les informations consommateurs applicables. Cette caisse n’est pas ouverte aux achats. Une explication ou réponse du chat ne remplace ni le processus de commande ni ses conditions légales."
+            "de": "Für Ihre Bestellung brauchen wir Artikel, Preis, Versand und die nötigen Verbraucherinformationen. Der direkte Online-Kauf mit Sofortzahlung ist derzeit noch nicht verfügbar – bis dahin nehmen wir Ihre Bestellung persönlich auf und zeigen Ihnen die nächsten Schritte.",
+            "nl": "Voor uw bestelling hebben we artikel, prijs, verzending en de nodige consumenteninformatie nodig. Direct online kopen met onmiddellijke betaling is op dit moment nog niet beschikbaar – tot die tijd nemen we uw bestelling persoonlijk op en tonen we u de volgende stappen.",
+            "fr": "Pour votre commande, il nous faut l’article, le prix, la livraison et les informations consommateurs nécessaires. L’achat en ligne direct avec paiement immédiat n’est pas encore disponible – en attendant, nous enregistrons votre commande personnellement et vous indiquons les prochaines étapes."
           },
           "outcome": {
-            "de": "Die vorgesehenen Kaufinformationen aufrufen.",
-            "nl": "Open de voorziene aankoopinformatie.",
-            "fr": "Consultez les informations d’achat prévues."
+            "de": "Die nächsten Schritte zur Bestellung sehen.",
+            "nl": "De volgende stappen voor de bestelling zien.",
+            "fr": "Voir les prochaines étapes de la commande."
           },
           "media_side": "left",
           "media": {

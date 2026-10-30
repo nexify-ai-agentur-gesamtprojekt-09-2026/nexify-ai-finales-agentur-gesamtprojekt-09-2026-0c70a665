@@ -2,9 +2,9 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-30T18:33:20.681Z",
+  "observed_at": "2026-10-30T20:23:14.983Z",
   "source_sha256": {
-    "apps/site/.generated/public-site.json": "e5af019bf9818672391d0ceeb82c89cd3d5d7f427c4cd989eb005afe00497a31",
+    "apps/site/.generated/public-site.json": "f94b654ba428fd97bc9db80026e8222ac48bc17adedd85c9b81af043ae391e05",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
     "apps/site/src/Auth.tsx": "ccbabebff74075203bdb56ff6ad8e10a75c738bab83146927e9fbc16437b93d7",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
@@ -174,7 +174,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 436,
+        "count": 440,
         "all_doubled": true
       },
       "overflow": false,
