@@ -1,0 +1,8 @@
+{
+ "_order": "NEX-WEB-EN-20261030-01",
+ "_purpose": "English translation part (build-preparation, NOT shipped). JSON-pointers into config/site-map.json; bound via inventory.json de_sha256. Runtime locales unchanged.",
+ "_group": "footer (site footer group labels)",
+ "/footer/0/label": "Services and Products",
+ "/footer/1/label": "Orientation and Contact",
+ "/footer/2/label": "Legal and Transparency"
+}
