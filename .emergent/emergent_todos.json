@@ -1,26 +1,30 @@
 [
   {
-    "content": "Fix layout: two-column hero (copy|complete scene) like Home; H1/CTA above fold",
+    "content": "Phase 1: Shop/BigBuy read-only — isolierter Nachweis + Produktiv-Lückenanalyse + öffentlicher Leerzustand (575 tests OK)",
     "status": "completed"
   },
   {
-    "content": "Move area nav below hero so fixed chat launcher no longer overlaps it (both chat states, mobile/tablet/desktop, 200%)",
-    "status": "completed"
+    "content": "Phase 2.0: Werkstatt-Quellen prüfen (TEILEKLAR Shop.dc.html Logik, workshops.json, Import-Spec, site-map id, Datenbereitstellung)",
+    "status": "in_progress"
   },
   {
-    "content": "TEILEKLAR default-visible orientation chat context-aware (Fahrzeug/Teil/Werkstatt, 'Teileanfrage vorbereiten') + workspace labels",
-    "status": "completed"
+    "content": "Phase 2.1: WorkshopDirectory React-Komponente (STANDORTE/kmDist/loadShops/standortBetriebe/cityList/openCity portiert), als Verzeichnis gekennzeichnet",
+    "status": "pending"
   },
   {
-    "content": "Re-record affected evidence (critical/text-spacing/shop/public-fallbacks/detail) + update reconciliation register + render view",
-    "status": "completed"
+    "content": "Phase 2.2: In PublicExperience für /teileklar/werkstatt einbinden, Graphite-Design, Filter/Stadtliste/Detail, Erfolg/leer/Fehler",
+    "status": "pending"
   },
   {
-    "content": "make test fully green (575) incl. audit + build",
-    "status": "completed"
+    "content": "Phase 2.3: E2E Browser→Daten→UI Nachweis + Evidence regenerieren + make test grün",
+    "status": "pending"
   },
   {
-    "content": "Secured local commit b27e773 (no push/publish); working tree clean; preview healthy on Vite",
-    "status": "completed"
+    "content": "Phase 3: Partner & Nachbarschaft Backend-Intents (fail-closed, Persistenz/Tenant/Eigentum/MFA) + Clerk-Blocker dokumentieren",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: PageMediaBand-Design-Rollout auf restliche Inhaltsseiten",
+    "status": "pending"
   }
 ]

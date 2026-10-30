@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-30T05:36:53.680Z",
+  "observed_at": "2026-10-30T11:58:33.884Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "3379aa1aa62818d9712ef0baaf1d0448471a1e6d7194cbbf7c64e50f8f414baf",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -36,6 +36,8 @@
     "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
     "apps/web/components/PageMediaBand.css": "7c95e5e7d2a031764e995df8af27ebb23a60d3c1d608051a63476411d0d3e12f",
     "apps/web/components/PageMediaBand.tsx": "26149d1b878233ad8b17709a26d8f825818fc4320f4cf7dea981b7f02d8253f7",
+    "apps/web/components/PartnerRequestForm.css": "173f2d8f04e85d14563ba18e290d772b6627d94ac744b91f001de558145da50d",
+    "apps/web/components/PartnerRequestForm.tsx": "d205b0f8726cc31c587f042c8afc0120beeff1c7a7bdb0b7e75568ab3e000a27",
     "apps/web/components/PresenterEditorial.css": "1568ed80ac71b3ef236280e9d90a7f1c1b7ff14977f88198171d26ea630215da",
     "apps/web/components/PresenterGuide.tsx": "700b673d650b2331aba2741a9e3cde890d43ad05e353f205dc8c4fa369eb8772",
     "apps/web/components/PresenterScene.tsx": "751a5cb0351d1e3ec25f56d8a87675dfbddd99746ca02293f7c9bc9edc5a3982",
@@ -45,7 +47,7 @@
     "apps/web/components/ProblemExplorer.tsx": "1f6b6f877a2970c3a72c4d2e1d7402a5d0db39cf247f683c20995826742f3cb5",
     "apps/web/components/PublicContent.tsx": "93b1da6f47c37b3b654c07a2cb4d780255fd83ec9811f72b0f460240f8e1a4f5",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
-    "apps/web/components/PublicExperience.tsx": "3d4c6d7b6e72069061f8f575a96e3036647001aa258731bf6764df7af1fd2d6d",
+    "apps/web/components/PublicExperience.tsx": "0563022ea7d9fafbd28b78057a26bfcc0fc586555854c251dbc4f0ec37729155",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
     "apps/web/components/PublicOrientationChat.css": "5e498bc2dfa5866647bd245c53c004f2b82888172c6598801b85324dedd3d49b",
     "apps/web/components/PublicOrientationChat.tsx": "6c442b783abc8853c4e5ace05628cf4e0319cc6b1a5f36cc0189cbdc2730923d",
@@ -57,6 +59,8 @@
     "apps/web/components/SiteNavigation.tsx": "4d4508069a139af8b8521496c154ee0a17dd6789fb5fcdee539bf0a25dcc690b",
     "apps/web/components/TrioScene.css": "2dbdef1eede834c702546247fa7c498f790918e161a00839a68c633827f17ee4",
     "apps/web/components/TrioScene.tsx": "7c885cb01bb503e36945ed1419302c97c4140319ca355d509c0dbd81bd1677d8",
+    "apps/web/components/WorkshopDirectory.css": "16c4698405a491b2b97d418494a2457faa5689e4dccbe42612009881e2ef8042",
+    "apps/web/components/WorkshopDirectory.tsx": "3cfdb55ea9e823b8caea7ff751b759d0106b0819371feed6d3d06238f1b6b49e",
     "apps/web/components/Workspace.tsx": "b00ce5187a849b80bcd86c9c0f0c58e3baed01197b0d45e065ae0c0722b4d70e",
     "apps/web/components/WorkspaceCapabilities.ts": "010cc923971b1e6d033ee9f791ca3c0ba5eb28cd5139a1a0c86532eb5ce4189e",
     "apps/web/components/WorkspaceRebuild.css": "907d8d6319404d3158be8ade0321de2d39a3964b921f024c9107fc837827b128",
@@ -860,7 +864,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 376,
+        "count": 394,
         "all_doubled": true
       },
       "overflow": false,
@@ -883,7 +887,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 376,
+        "count": 380,
         "all_doubled": true
       },
       "overflow": false,

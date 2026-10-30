@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-30T05:36:48.223Z",
+  "recorded_at": "2026-10-30T11:58:33.198Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -63,7 +63,7 @@
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
     "apps/web/lib/i18n.ts": "30b47c5ef0de0ff0e1a9e723f8d10d61ca37dc260f457583be69286ea5a8f07f",
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
-    "apps/web/components/PublicExperience.tsx": "3d4c6d7b6e72069061f8f575a96e3036647001aa258731bf6764df7af1fd2d6d",
+    "apps/web/components/PublicExperience.tsx": "0563022ea7d9fafbd28b78057a26bfcc0fc586555854c251dbc4f0ec37729155",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
     "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
@@ -140,7 +140,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-30T05:36:48.223Z",
+    "recorded_at": "2026-10-30T11:58:33.198Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

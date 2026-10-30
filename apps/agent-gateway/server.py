@@ -308,6 +308,11 @@ def public_pages():
 def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None, features=None, public_origin=None):
     if shop is not None and getattr(shop, "cart", None) is not None and shop.cart.store is not store:
         raise ValueError("shop and visitor must use the same scoped Store")
+    import importlib.util as _ilu
+    _pspec = _ilu.spec_from_file_location("nx_partner", Path(__file__).with_name("partner.py"))
+    _pmod = _ilu.module_from_spec(_pspec); _pspec.loader.exec_module(_pmod)
+    PartnerReception, PartnerError = _pmod.PartnerReception, _pmod.PartnerError
+    partner = PartnerReception(store.connect)
     pages = public_pages()
     allowed_pages = {page["path"] for page in pages}
     public_host = None
@@ -424,6 +429,16 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None,
                     with store.connect() as db:
                         rows = [dict(row) for row in db.execute("SELECT kind,ref,recipient,state,updated FROM mail_jobs WHERE owner=? AND audience='customer' ORDER BY created DESC LIMIT 20", (visitor["id"],))]
                     return self.respond(200, {"deliveries": rows, "meaning": "provider_accepted is not a delivery or read confirmation"})
+                if path == "/api/partner/requests/mine":
+                    visitor, _ = self.visitor()
+                    with store.connect() as db:
+                        rows = [dict(row) for row in db.execute("SELECT id,tenant,status,created FROM partner_requests WHERE submitter=? ORDER BY created DESC LIMIT 50", (visitor["id"],))]
+                    return self.respond(200, {"requests": rows, "meaning": "submitter storage readback only; not a receipt, delivery or approval"})
+                if path == "/api/partner/requests":
+                    self.visitor()
+                    # Reception needs an authenticated partner/staff role + tenant from the
+                    # protected portal auth (Clerk); this public gateway has no such identity.
+                    raise Rejected(403, "recipient_auth_required")
                 match = re.fullmatch(r"/api/speech/([A-Za-z]{4,20})", path)
                 if match:
                     self.visitor()
@@ -534,6 +549,12 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None,
                     except integrations().ProviderError as error:
                         status = 429 if error.code.endswith(("_limit_reached", "_cap_reached")) else 502
                         raise Rejected(status, error.code) from None
+                if path == "/api/partner/requests":
+                    try:
+                        result = partner.submit(visitor["id"], body.get("tenant"), {k: v for k, v in body.items() if k != "tenant"})
+                    except PartnerError as error:
+                        raise Rejected(error.status, error.code) from None
+                    return self.respond(200, result)
                 mapping = {"/api/chat": "chat", "/api/quotes": "quote", "/api/bookings": "booking", "/api/marketing": "marketing"}
                 operation = mapping.get(path)
                 match = re.fullmatch(r"/api/quotes/([a-f0-9]{32})/send", path)
