@@ -1,0 +1,17 @@
+gstreamer1.0-plugins-good=1.22.0-5+deb12u4
+libenchant-2-2=2.3.3-2
+libevent-2.1-7=2.1.12-stable-8+deb12u1
+libflite1=2.2-5
+libgles2=1.6.0-1
+libgraphene-1.0-0=1.10.8-1
+libgstreamer-gl1.0-0=1.22.0-3+deb12u7
+libgstreamer-plugins-bad1.0-0=1.22.0-4+deb12u8
+libgstreamer-plugins-base1.0-0=1.22.0-3+deb12u7
+libgtk-4-1=4.8.3+ds-2+deb12u1
+libharfbuzz-icu0=6.0.0+dfsg-3
+libhyphen0=2.8.8-7
+libmanette-0.2-0=0.2.6-3+b1
+libsecret-1-0=0.20.5-3
+libwebpdemux2=1.2.4-0.2+deb12u1
+libwebpmux3=1.2.4-0.2+deb12u1
+libx264-164=2:0.164.3095+gitbaee400-3

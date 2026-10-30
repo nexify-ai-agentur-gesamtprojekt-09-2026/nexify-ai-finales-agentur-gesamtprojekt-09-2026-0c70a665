@@ -42,7 +42,8 @@ export default function PublicContent({page,pages,children}:{page:PublicPage;pag
  const contextualPages=groups[layout].map(get).filter((candidate):candidate is PublicPage=>Boolean(candidate&&candidate.id!==page.id));
  const outbound=page.actions.filter(action=>action.type==="route").map(action=>get(action.target_id||""));
  const related=uniquePages([...outbound,...contextualPages]).filter(candidate=>candidate.id!==page.id).slice(0,4);
- const isQuiet=layout==="document"||layout==="account";
+  const isQuiet=layout==="document"||layout==="account";
+ const sections=page.sections.filter(section=>isQuiet||section.body[locale].trim()!==page.localizedSummary[locale].trim());
  const headingId="page-title-"+page.id;
  const actions=(items:PublicPage["actions"],placement:string)=><div className={"content-actions content-actions-"+placement}>{items.map((action,index)=>{
   if(action.type==="chat"&&action.chat_intent)return <StartAction key={index} intent={action.chat_intent}>{action.label[locale]}<span aria-hidden="true">→</span></StartAction>;
@@ -53,9 +54,9 @@ export default function PublicContent({page,pages,children}:{page:PublicPage;pag
   <header className="content-hero"><div className="content-hero-copy"><span className="content-kicker">{page.site_context==="teileklar"?"TEILEKLAR":"NEXIFY AI"}<span aria-hidden="true"> / </span>{t[layout]}</span><h1 id={headingId}>{page.localizedTitle[locale]}</h1><p className="content-purpose">{page.localizedSummary[locale]}</p>{actions(page.actions.slice(0,2),"primary")}</div>
    {!isQuiet&&<aside className="content-context" aria-label={t.overview}><span className="content-kicker">{t.overview}</span><strong>{t[layout]}</strong><nav aria-label={t.overview}>{contextualPages.slice(0,4).map(target=><SiteLink href={target.path} key={target.id}>{target.localizedTitle[locale]}<span aria-hidden="true">→</span></SiteLink>)}</nav>{overview&&overview.id!==page.id&&<SiteLink className="content-overview-link" href={overview.path}>{t.back}<span aria-hidden="true">←</span></SiteLink>}</aside>}
   </header>
-  <div className={"content-reading-grid"+(page.sections.length>1?" has-section-nav":"")}>
-   {page.sections.length>1&&<nav className="content-section-nav" aria-label={t.onPage}><span className="content-kicker">{t.onPage}</span><ol>{page.sections.map((section,index)=><li key={section.id}><button type="button" onClick={()=>jumpToSection(sectionAnchor(page.id,section.id,index))}>{section.heading[locale]}</button></li>)}</ol></nav>}
-   <div className="content-sections">{page.sections.map((section,index)=><article className="content-section" id={sectionAnchor(page.id,section.id,index)} tabIndex={-1} key={section.id}><span className="content-section-number" aria-hidden="true">{String(index+1).padStart(2,"0")}</span><div><h2>{section.heading[locale]}</h2><p>{section.body[locale]}</p></div></article>)}
+  <div className={"content-reading-grid"+(sections.length>1?" has-section-nav":"")}>
+   {sections.length>1&&<nav className="content-section-nav" aria-label={t.onPage}><span className="content-kicker">{t.onPage}</span><ol>{sections.map((section,index)=><li key={section.id}><button type="button" onClick={()=>jumpToSection(sectionAnchor(page.id,section.id,index))}>{section.heading[locale]}</button></li>)}</ol></nav>}
+   <div className="content-sections">{sections.map((section,index)=><article className="content-section" id={sectionAnchor(page.id,section.id,index)} tabIndex={-1} key={section.id}><span className="content-section-number" aria-hidden="true">{String(index+1).padStart(2,"0")}</span><div><h2>{section.heading[locale]}</h2><p>{section.body[locale]}</p></div></article>)}
     {Boolean(page.contact_channels?.length)&&<section className="content-contact" aria-labelledby={"contact-title-"+page.id}><h2 id={"contact-title-"+page.id}>{t.contact}</h2>{page.contact_channels?.map(channel=><a key={channel.address} className="contact-channel" href={"mailto:"+channel.address}><span>{channel.label[locale]}</span><strong>{channel.address}</strong><span aria-hidden="true">→</span></a>)}</section>}
    </div>
   </div>

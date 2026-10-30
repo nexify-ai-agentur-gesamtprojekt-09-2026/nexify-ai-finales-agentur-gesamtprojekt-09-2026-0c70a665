@@ -1,0 +1,64 @@
+{
+  "test_cases": [
+    {
+      "test_id": "webkit_mobile_small_320x568",
+      "browser": "webkit",
+      "viewport": {
+        "width": 320,
+        "height": 568,
+        "name": "mobile_small"
+      },
+      "status": "blocked",
+      "errors": [
+        "Exception: Page.wait_for_selector: Target page, context or browser has been closed\nCall log:\n  - waiting for locator(\"[data-testid=\\\"chat-launcher\\\"]\") to be visible\n"
+      ],
+      "geometry": null,
+      "assertions": {}
+    },
+    {
+      "test_id": "webkit_mobile_medium_390x844",
+      "browser": "webkit",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "name": "mobile_medium"
+      },
+      "status": "blocked",
+      "errors": [
+        "WebKit engine blocked due to crash"
+      ]
+    },
+    {
+      "test_id": "webkit_short_landscape_844x390",
+      "browser": "webkit",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "short_landscape"
+      },
+      "status": "blocked",
+      "errors": [
+        "WebKit engine blocked due to crash"
+      ]
+    },
+    {
+      "test_id": "webkit_desktop_1280x720",
+      "browser": "webkit",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "name": "desktop"
+      },
+      "status": "blocked",
+      "errors": [
+        "WebKit engine blocked due to crash"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "blocked": 4
+  }
+}

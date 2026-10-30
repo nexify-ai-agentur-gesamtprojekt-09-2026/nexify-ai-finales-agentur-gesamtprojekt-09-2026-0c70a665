@@ -1,0 +1,209 @@
+{
+  "test_cases": [
+    {
+      "test_id": "webkit_mobile_small_320x568",
+      "browser": "webkit",
+      "viewport": {
+        "width": 320,
+        "height": 568,
+        "name": "mobile_small"
+      },
+      "status": "passed",
+      "errors": [],
+      "geometry": {
+        "panel": {
+          "width": 320,
+          "height": 568,
+          "clientWidth": 319,
+          "scrollWidth": 319
+        },
+        "conversation": {
+          "height": 266.421875,
+          "clientHeight": 266,
+          "scrollHeight": 532,
+          "found": true
+        },
+        "composer": {
+          "height": 237.1875,
+          "clientHeight": 237
+        },
+        "sendButton": {
+          "bottom": 552,
+          "top": 492.8125,
+          "left": 17,
+          "right": 304,
+          "width": 287,
+          "height": 59.1875
+        },
+        "visualViewport": {
+          "height": 568,
+          "width": 320
+        },
+        "elementAtSender": "chat-send-button"
+      },
+      "assertions": {
+        "panel_height_positive": true,
+        "conversation_height_positive": true,
+        "composer_height_positive": true,
+        "send_button_fits_viewport": true,
+        "draft_retained": true
+      },
+      "draft_retention": {
+        "original_draft": "Test draft message",
+        "retained_draft": "Test draft message",
+        "draft_retained": true
+      }
+    },
+    {
+      "test_id": "webkit_mobile_medium_390x844",
+      "browser": "webkit",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "name": "mobile_medium"
+      },
+      "status": "passed",
+      "errors": [],
+      "geometry": {
+        "panel": {
+          "width": 384,
+          "height": 844,
+          "clientWidth": 383,
+          "scrollWidth": 383
+        },
+        "conversation": {
+          "height": 542.421875,
+          "clientHeight": 542,
+          "scrollHeight": 542,
+          "found": true
+        },
+        "composer": {
+          "height": 237.1875,
+          "clientHeight": 237
+        },
+        "sendButton": {
+          "bottom": 828,
+          "top": 768.8125,
+          "left": 23,
+          "right": 374,
+          "width": 351,
+          "height": 59.1875
+        },
+        "visualViewport": {
+          "height": 844,
+          "width": 390
+        },
+        "elementAtSender": "chat-send-button"
+      },
+      "assertions": {
+        "panel_height_positive": true,
+        "conversation_height_positive": true,
+        "composer_height_positive": true,
+        "send_button_fits_viewport": true
+      }
+    },
+    {
+      "test_id": "webkit_short_landscape_844x390",
+      "browser": "webkit",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "short_landscape"
+      },
+      "status": "passed",
+      "errors": [],
+      "geometry": {
+        "panel": {
+          "width": 384,
+          "height": 390,
+          "clientWidth": 383,
+          "scrollWidth": 383
+        },
+        "conversation": {
+          "height": 91.609375,
+          "clientHeight": 92,
+          "scrollHeight": 506,
+          "found": true
+        },
+        "composer": {
+          "height": 234,
+          "clientHeight": 234
+        },
+        "sendButton": {
+          "bottom": 377.1875,
+          "top": 318,
+          "left": 485,
+          "right": 820,
+          "width": 335,
+          "height": 59.1875
+        },
+        "visualViewport": {
+          "height": 390,
+          "width": 844
+        },
+        "elementAtSender": "chat-send-button"
+      },
+      "assertions": {
+        "panel_height_positive": true,
+        "conversation_height_positive": true,
+        "composer_height_positive": true,
+        "send_button_fits_viewport": true
+      }
+    },
+    {
+      "test_id": "webkit_desktop_1280x720",
+      "browser": "webkit",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "name": "desktop"
+      },
+      "status": "passed",
+      "errors": [],
+      "geometry": {
+        "panel": {
+          "width": 360,
+          "height": 720,
+          "clientWidth": 359,
+          "scrollWidth": 359
+        },
+        "conversation": {
+          "height": 418.421875,
+          "clientHeight": 418,
+          "scrollHeight": 532,
+          "found": true
+        },
+        "composer": {
+          "height": 237.1875,
+          "clientHeight": 237
+        },
+        "sendButton": {
+          "bottom": 704,
+          "top": 644.8125,
+          "left": 945,
+          "right": 1256,
+          "width": 311,
+          "height": 59.1875
+        },
+        "visualViewport": {
+          "height": 720,
+          "width": 1280
+        },
+        "elementAtSender": "chat-send-button"
+      },
+      "assertions": {
+        "panel_height_positive": true,
+        "conversation_height_positive": true,
+        "composer_height_positive": true,
+        "conversation_min_height_desktop": true,
+        "composer_max_height_desktop": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "blocked": 0
+  }
+}

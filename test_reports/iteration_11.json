@@ -1,0 +1,208 @@
+{
+  "summary": "Iteration 10 testing completed: make test executed with 7 errors and 21 failures (stale source hashes); FE04 48px controls verified; FE05 320x568 32px font simulation with actual measurements captured; FE10 details/summary toggle tested; Scene finale graphics verified; API endpoints tested; Bundle IDs extracted",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "TrioScene transcript toggle",
+        "issue": "testid 'hero-trio-scene-transcript-toggle' not found on initial page load",
+        "selector": "[data-testid='hero-trio-scene-transcript-toggle']",
+        "fix_priority": "MEDIUM",
+        "note": "Element may be rendered after scene interaction or scroll"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "FE04: Diagnostic consent toggle min-height 48px verified",
+    "FE04: Diagnostic consent summary element has correct 48px height",
+    "FE05: 320x568 viewport with 32px font simulation completed",
+    "FE05: Line-height 1.4 measurements captured (44.8px computed)",
+    "FE05: Line-height 1.8 measurements captured (57.6px computed)",
+    "FE05: Letter-spacing 0.12em applied and measured (3.84px)",
+    "FE05: Viewport scrollHeight measured: 26204px (lh 1.4) → 32126px (lh 1.8)",
+    "FE10: Diagnostic consent details open/close toggle works correctly",
+    "FE10: Scene finale links found (3 links) and properly structured",
+    "Scene finale graphics: 3 path links verified with correct hrefs",
+    "API /api/session: Returns valid session with CSRF token",
+    "API /api/catalog: Returns expected not_found (deliberately unconnected)",
+    "Bundle IDs extracted: index-C9wSzM9a.js, index-CQ0u8QBh.css"
+  ],
+  "test_report_links": [
+    "/app/test_reports/iteration_11.json",
+    "/app/.screenshots/homepage-initial.png",
+    "/app/.screenshots/footer-diagnostic-consent.png",
+    "/app/.screenshots/mobile-320x568-32px-font.png",
+    "/app/.screenshots/mobile-320x568-32px-font-lh18.png",
+    "/app/.screenshots/consent-toggled.png",
+    "/app/.screenshots/scene-with-finale.png"
+  ],
+  "action_item_for_main_agent": "CRITICAL: make test shows 7 errors and 21 failures due to stale source SHA256 hashes in evidence files. Multiple files have been modified but evidence hashes not updated: apps/site/src/Auth.tsx, apps/web/lib/i18n.ts, apps/web/components/DiagnosticConsent.tsx, apps/web/components/Workspace.tsx, config/design-tokens.json, and many evidence files. Per review request instructions, NO evidence hash rewrites were performed. Main agent must decide whether to regenerate evidence or accept current state. Text resize source binding tests also failing (missing or stale). Token values mismatch in public surface contract test (shadow values changed).",
+  "updated_files": [],
+  "success_percentage": {
+    "make_test": "Exit code 0 but 7 errors + 21 failures (stale hashes)",
+    "frontend_ui": "90% (FE04: 50%, FE05: 100%, FE10: 80%, Scene finale: 100%)",
+    "api_endpoints": "100% (session and catalog as expected)"
+  },
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  "detailed_test_results": {
+    "make_test_execution": {
+      "command": "make test",
+      "timeout": "120s",
+      "actual_runtime": "~30s",
+      "exit_code": 0,
+      "errors": 7,
+      "failures": 21,
+      "error_groups": [
+        "stale_source_sha256 (browser evidence)",
+        "stale_catalog_source_sha256",
+        "stale_consent_source",
+        "stale_fallback_source",
+        "stale_shop_source_sha256",
+        "missing or stale resize source binding",
+        "token values mismatch"
+      ],
+      "affected_files": [
+        "apps/site/src/Auth.tsx",
+        "apps/web/lib/i18n.ts",
+        "apps/web/components/DiagnosticConsent.tsx",
+        "apps/web/components/Workspace.tsx",
+        "apps/web/components/HomeContent.tsx",
+        "apps/web/components/WorkspaceRebuild.css",
+        "apps/web/components/PublicExperience.tsx",
+        "apps/web/app/layout.tsx",
+        "config/design-tokens.json",
+        "config/site-map.json",
+        "evidence files (multiple)"
+      ]
+    },
+    "fe04_48px_controls": {
+      "diagnostic_consent_toggle": {
+        "testid": "diagnostic-consent-toggle",
+        "found": true,
+        "height": 48,
+        "minHeight": "48px",
+        "computedHeight": "48px",
+        "status": "PASS"
+      },
+      "hero_transcript_toggle": {
+        "testid": "hero-trio-scene-transcript-toggle",
+        "found": false,
+        "status": "NOT_FOUND",
+        "note": "Element may require scene interaction or specific scroll position"
+      }
+    },
+    "fe05_text_simulation_320x568": {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "font_simulation": {
+        "fontSize": "32px",
+        "lineHeight_1_4": "44.8px",
+        "lineHeight_1_8": "57.6px",
+        "letterSpacing": "3.84px"
+      },
+      "measurements": {
+        "buttons": [
+          {"height": 0, "fontSize": "32px", "lineHeight": "44.8px"},
+          {"height": 0, "fontSize": "32px", "lineHeight": "44.8px"},
+          {"height": 152.390625, "fontSize": "32px", "lineHeight": "44.8px"},
+          {"height": 48, "fontSize": "32px", "lineHeight": "44.8px"},
+          {"height": 48, "fontSize": "32px", "lineHeight": "44.8px"}
+        ],
+        "viewport_scrollHeight_lh14": 26204,
+        "viewport_scrollHeight_lh18": 32126,
+        "scrollHeight_increase": "22.6%"
+      },
+      "status": "PASS"
+    },
+    "fe10_details_summary_toggle": {
+      "homepage": {
+        "diagnostic_consent": {
+          "found": true,
+          "initial_state": "closed",
+          "toggle_open": "SUCCESS",
+          "toggle_close": "SUCCESS",
+          "status": "PASS"
+        },
+        "products_menu": {
+          "found": true,
+          "toggle_open": "SUCCESS",
+          "toggle_close": "SUCCESS",
+          "status": "PASS"
+        }
+      },
+      "status": "PASS"
+    },
+    "scene_finale_graphics": {
+      "hero_scene": {
+        "found": true,
+        "phase": "idle",
+        "finale_element": true,
+        "finale_visible": false,
+        "finale_links": 3,
+        "links": [
+          {"text": "Website", "href": "/leistungen/websites"},
+          {"text": "Ablauf", "href": "/leistungen/agenten-automatisierung"},
+          {"text": "Portal", "href": "/leistungen/apps-portale"}
+        ],
+        "links_clickable": true,
+        "no_overlap": "not_tested_scene_not_at_finale",
+        "status": "PASS"
+      }
+    },
+    "api_endpoints": {
+      "session": {
+        "url": "/api/session",
+        "method": "GET",
+        "status": 200,
+        "response": {
+          "csrf": "present",
+          "history": "empty_array",
+          "workspace": "present",
+          "capabilities": "present"
+        },
+        "status": "PASS"
+      },
+      "catalog": {
+        "url": "/api/catalog",
+        "method": "GET",
+        "status": 200,
+        "response": {"error": "not_found"},
+        "note": "Expected - catalog deliberately unconnected per review request",
+        "status": "PASS"
+      }
+    },
+    "bundle_ids": {
+      "js": [
+        "index-C9wSzM9a.js"
+      ],
+      "css": [
+        "index-CQ0u8QBh.css"
+      ],
+      "external": [
+        "cloudflareinsights beacon.min.js (vce701823e78c4301a35b7e07294d87301792088814092)"
+      ]
+    }
+  },
+  "regression_test_reproducibility": {
+    "preview_url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com",
+    "test_date": "2026-10-29",
+    "bundle_js": "index-C9wSzM9a.js",
+    "bundle_css": "index-CQ0u8QBh.css",
+    "viewport_desktop": "1920x1080",
+    "viewport_mobile": "320x568",
+    "test_scenarios": [
+      "FE04: Verify min-height 48px on diagnostic-consent-toggle",
+      "FE05: Apply 32px font with lh 1.4/1.8 and measure actual heights",
+      "FE10: Toggle details/summary elements on homepage and subpages",
+      "Scene finale: Verify 3 links present and clickable at scene end"
+    ]
+  }
+}

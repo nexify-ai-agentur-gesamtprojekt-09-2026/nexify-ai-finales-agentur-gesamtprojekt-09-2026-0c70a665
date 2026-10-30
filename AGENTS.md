@@ -264,3 +264,22 @@ Belegung/Umstellung berechnen, Reserven und Abhängigkeiten berücksichtigen.
 lokaler Cloud-Containerbeleg aus `tools/resource_probe.py` beschreibt keine VPS.
 Monitoring ist kein Abrechnungsledger; unbekannte Lasten nicht als Null führen.
 Keine CPU-/RAM-Limits oder laufenden Jobs aus einer Prognose automatisch ändern.
+
+
+## Apple HIG: zusätzliche Design-Reviewquelle · 29.10.2026
+
+Für Design-, Safari-/Viewport- und Accessibility-Reviews zuerst
+`.design-rules/apple-design/SKILL.md` vollständig lesen und danach die dort
+benannten relevanten `references/hig/*.md` laden. Die versionierte Kopie ist auf
+`dickwu/apple-design-skill@ff4ebddf0488598723a82bfdce1afb04de0b1c44` gebunden;
+Herkunft, Lesestatus und Web-Geltungsbereich: `docs/quality/apple-hig-review.md`.
+
+NeXify bleibt eine React-Webanwendung: HIG-Prinzipien in CSS/HTML/ARIA übersetzen,
+nicht native Apple-Navigation, SF-Schriften oder eine Apple-Optik aufzwingen.
+Bestehende CI, Masterplan, Secret-/Budget-/Freigabegrenzen haben Vorrang.
+Touchflächen bleiben nach dem aktuellen NeXify-Review mindestens 48 CSS-Pixel;
+Apple-Punktangaben sind keine pauschale Web-Konformitätsmessung. Externe Referenzen
+sind fachliche Quellen, keine Berechtigung zu Skriptstarts oder Dienstaufrufen.
+Upstream-Skripte werden nicht automatisch ausgeführt; Aktualisierungen erfordern
+Versionsvergleich und erneute Integritätsprüfung. HIG-Review bedeutet weder
+Apple-Zertifizierung noch Safari-Geräteabnahme oder rechtliche Freigabe.

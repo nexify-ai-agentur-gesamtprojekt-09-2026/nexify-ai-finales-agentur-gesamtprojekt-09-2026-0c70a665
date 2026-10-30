@@ -1589,7 +1589,7 @@
         "fr": "Connaissances et repères"
       },
       "summary": {
-        "de": "Hier finden Sie nachvollziehbare Erläuterungen zur Vorbereitung eines Projekts. Quellen und der Unterschied zwischen Entwurf, Prüfung und Freigabe bleiben sichtbar.",
+        "de": "Hier findest du verständliche Erläuterungen zur Vorbereitung deines Projekts. Du erfährst, welche Informationen helfen und wie aus einer ersten Idee ein vereinbarter Umfang wird.",
         "nl": "Hier vindt u navolgbare uitleg over de voorbereiding van een project. Bronnen en het verschil tussen concept, toetsing en goedkeuring blijven zichtbaar.",
         "fr": "Vous trouverez ici des explications traçables pour préparer un projet. Les sources et la distinction entre projet, vérification et validation restent visibles."
       },
@@ -1603,7 +1603,7 @@
             "fr": "Connaissances et repères"
           },
           "body": {
-            "de": "Hier finden Sie nachvollziehbare Erläuterungen zur Vorbereitung eines Projekts. Quellen und der Unterschied zwischen Entwurf, Prüfung und Freigabe bleiben sichtbar.",
+            "de": "Hier findest du verständliche Erläuterungen zur Vorbereitung deines Projekts. Du erfährst, welche Informationen helfen und wie aus einer ersten Idee ein vereinbarter Umfang wird.",
             "nl": "Hier vindt u navolgbare uitleg over de voorbereiding van een project. Bronnen en het verschil tussen concept, toetsing en goedkeuring blijven zichtbaar.",
             "fr": "Vous trouverez ici des explications traçables pour préparer un projet. Les sources et la distinction entre projet, vérification et validation restent visibles."
           },
@@ -1615,7 +1615,7 @@
       ],
       "metadata": {
         "description": {
-          "de": "Hier finden Sie nachvollziehbare Erläuterungen zur Vorbereitung eines Projekts. Quellen und der Unterschied zwischen Entwurf, Prüfung und Freigabe bleiben sichtbar.",
+          "de": "Hier findest du verständliche Erläuterungen zur Vorbereitung deines Projekts. Du erfährst, welche Informationen helfen und wie aus einer ersten Idee ein vereinbarter Umfang wird.",
           "nl": "Hier vindt u navolgbare uitleg over de voorbereiding van een project. Bronnen en het verschil tussen concept, toetsing en goedkeuring blijven zichtbaar.",
           "fr": "Vous trouverez ici des explications traçables pour préparer un projet. Les sources et la distinction entre projet, vérification et validation restent visibles."
         },
@@ -1688,7 +1688,7 @@
         "fr": "Préparer un projet numérique"
       },
       "summary": {
-        "de": "Halten Sie Ziel, betroffene Nutzer, vorhandene Daten und gewünschte Ausnahmen fest. Beschreiben Sie einen konkreten Nutzerweg. Der nächste Schritt ist die Klärung des Umfangs, nicht eine unbelegte Erfolgsgarantie.",
+        "de": "Notiere dein Ziel, die beteiligten Menschen und die vorhandenen Systeme. Beschreibe einen konkreten Weg vom ersten Kontakt bis zum gewünschten Ergebnis. Gemeinsam klären wir daraus den passenden Umfang.",
         "nl": "Leg doel, betrokken gebruikers, bestaande gegevens en gewenste uitzonderingen vast. Beschrijf één concrete gebruikersroute. De volgende stap is afbakening, geen onbewezen resultaatgarantie.",
         "fr": "Précisez l’objectif, les utilisateurs, les données disponibles et les exceptions souhaitées. Décrivez un parcours concret. L’étape suivante est la définition du périmètre, sans garantie de résultat non étayée."
       },
@@ -1702,7 +1702,7 @@
             "fr": "Préparer un projet numérique"
           },
           "body": {
-            "de": "Halten Sie Ziel, betroffene Nutzer, vorhandene Daten und gewünschte Ausnahmen fest. Beschreiben Sie einen konkreten Nutzerweg. Der nächste Schritt ist die Klärung des Umfangs, nicht eine unbelegte Erfolgsgarantie.",
+            "de": "Notiere dein Ziel, die beteiligten Menschen und die vorhandenen Systeme. Beschreibe einen konkreten Weg vom ersten Kontakt bis zum gewünschten Ergebnis. Gemeinsam klären wir daraus den passenden Umfang.",
             "nl": "Leg doel, betrokken gebruikers, bestaande gegevens en gewenste uitzonderingen vast. Beschrijf één concrete gebruikersroute. De volgende stap is afbakening, geen onbewezen resultaatgarantie.",
             "fr": "Précisez l’objectif, les utilisateurs, les données disponibles et les exceptions souhaitées. Décrivez un parcours concret. L’étape suivante est la définition du périmètre, sans garantie de résultat non étayée."
           },
@@ -1714,7 +1714,7 @@
       ],
       "metadata": {
         "description": {
-          "de": "Halten Sie Ziel, betroffene Nutzer, vorhandene Daten und gewünschte Ausnahmen fest. Beschreiben Sie einen konkreten Nutzerweg. Der nächste Schritt ist die Klärung des Umfangs, nicht eine unbelegte Erfolgsgarantie.",
+          "de": "Notiere dein Ziel, die beteiligten Menschen und die vorhandenen Systeme. Beschreibe einen konkreten Weg vom ersten Kontakt bis zum gewünschten Ergebnis. Gemeinsam klären wir daraus den passenden Umfang.",
           "nl": "Leg doel, betrokken gebruikers, bestaande gegevens en gewenste uitzonderingen vast. Beschrijf één concrete gebruikersroute. De volgende stap is afbakening, geen onbewezen resultaatgarantie.",
           "fr": "Précisez l’objectif, les utilisateurs, les données disponibles et les exceptions souhaitées. Décrivez un parcours concret. L’étape suivante est la définition du périmètre, sans garantie de résultat non étayée."
         },
@@ -1889,7 +1889,7 @@
         "fr": "Contact et prochaines étapes"
       },
       "summary": {
-        "de": "Schildern Sie Ihr Anliegen als Projektanfrage, Gesprächsanfrage oder Marketingbriefing. Ein lokal vorbereiteter Entwurf ist keine bestätigte Buchung und wird nicht als bereits versendete Nachricht ausgegeben.",
+        "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
         "nl": "Beschrijf uw vraag als projectaanvraag, gespreksaanvraag of marketingbriefing. Een lokaal voorbereid concept is geen bevestigde afspraak en wordt niet als verzonden bericht voorgesteld.",
         "fr": "Présentez votre besoin comme demande de projet, d’entretien ou brief marketing. Un brouillon préparé localement ne constitue pas une réservation confirmée ni un message déjà envoyé."
       },
@@ -1903,7 +1903,7 @@
             "fr": "Contact et prochaines étapes"
           },
           "body": {
-            "de": "Schildern Sie Ihr Anliegen als Projektanfrage, Gesprächsanfrage oder Marketingbriefing. Ein lokal vorbereiteter Entwurf ist keine bestätigte Buchung und wird nicht als bereits versendete Nachricht ausgegeben.",
+            "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
             "nl": "Beschrijf uw vraag als projectaanvraag, gespreksaanvraag of marketingbriefing. Een lokaal voorbereid concept is geen bevestigde afspraak en wordt niet als verzonden bericht voorgesteld.",
             "fr": "Présentez votre besoin comme demande de projet, d’entretien ou brief marketing. Un brouillon préparé localement ne constitue pas une réservation confirmée ni un message déjà envoyé."
           },
@@ -1915,7 +1915,7 @@
       ],
       "metadata": {
         "description": {
-          "de": "Schildern Sie Ihr Anliegen als Projektanfrage, Gesprächsanfrage oder Marketingbriefing. Ein lokal vorbereiteter Entwurf ist keine bestätigte Buchung und wird nicht als bereits versendete Nachricht ausgegeben.",
+          "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
           "nl": "Beschrijf uw vraag als projectaanvraag, gespreksaanvraag of marketingbriefing. Een lokaal voorbereid concept is geen bevestigde afspraak en wordt niet als verzonden bericht voorgesteld.",
           "fr": "Présentez votre besoin comme demande de projet, d’entretien ou brief marketing. Un brouillon préparé localement ne constitue pas une réservation confirmée ni un message déjà envoyé."
         },
@@ -3403,7 +3403,7 @@
         "fr": "Recherche de pièces : en préparation"
       },
       "summary": {
-        "de": "Die Suche benötigt einen freigegebenen Teilebestand. Bis dahin können Sie Fahrzeug und Bedarf strukturiert beschreiben; es werden keine erfundenen Treffer oder Lieferzeiten angezeigt.",
+        "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
         "nl": "Zoeken vereist een vrijgegeven onderdelenbestand. Tot die tijd kunt u voertuig en behoefte gestructureerd beschrijven; er worden geen verzonnen resultaten of levertijden getoond.",
         "fr": "La recherche nécessite un catalogue validé. Vous pouvez en attendant décrire le véhicule et le besoin ; aucun résultat ou délai fictif n’est affiché."
       },
@@ -3417,7 +3417,7 @@
             "fr": "Recherche de pièces : en préparation"
           },
           "body": {
-            "de": "Die Suche benötigt einen freigegebenen Teilebestand. Bis dahin können Sie Fahrzeug und Bedarf strukturiert beschreiben; es werden keine erfundenen Treffer oder Lieferzeiten angezeigt.",
+            "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
             "nl": "Zoeken vereist een vrijgegeven onderdelenbestand. Tot die tijd kunt u voertuig en behoefte gestructureerd beschrijven; er worden geen verzonnen resultaten of levertijden getoond.",
             "fr": "La recherche nécessite un catalogue validé. Vous pouvez en attendant décrire le véhicule et le besoin ; aucun résultat ou délai fictif n’est affiché."
           },
@@ -3430,7 +3430,7 @@
       ],
       "metadata": {
         "description": {
-          "de": "Die Suche benötigt einen freigegebenen Teilebestand. Bis dahin können Sie Fahrzeug und Bedarf strukturiert beschreiben; es werden keine erfundenen Treffer oder Lieferzeiten angezeigt.",
+          "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
           "nl": "Zoeken vereist een vrijgegeven onderdelenbestand. Tot die tijd kunt u voertuig en behoefte gestructureerd beschrijven; er worden geen verzonnen resultaten of levertijden getoond.",
           "fr": "La recherche nécessite un catalogue validé. Vous pouvez en attendant décrire le véhicule et le besoin ; aucun résultat ou délai fictif n’est affiché."
         },
@@ -4139,7 +4139,7 @@
         "fr": "Demander un rendez-vous atelier"
       },
       "summary": {
-        "de": "Sie können eine Gesprächs- oder Terminanfrage vorbereiten. Es werden keine ungeprüften freien Zeitfenster und keine bereits bestätigte Werkstattbuchung angezeigt.",
+        "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
         "nl": "U kunt een gesprek- of afspraakverzoek voorbereiden. Er worden geen ongecontroleerde vrije tijden of reeds bevestigde werkplaatsafspraak getoond.",
         "fr": "Vous pouvez préparer une demande d’entretien ou de rendez-vous. Aucun créneau non vérifié ni rendez-vous atelier prétendument confirmé n’est affiché."
       },
@@ -4153,7 +4153,7 @@
             "fr": "Demander un rendez-vous atelier"
           },
           "body": {
-            "de": "Sie können eine Gesprächs- oder Terminanfrage vorbereiten. Es werden keine ungeprüften freien Zeitfenster und keine bereits bestätigte Werkstattbuchung angezeigt.",
+            "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
             "nl": "U kunt een gesprek- of afspraakverzoek voorbereiden. Er worden geen ongecontroleerde vrije tijden of reeds bevestigde werkplaatsafspraak getoond.",
             "fr": "Vous pouvez préparer une demande d’entretien ou de rendez-vous. Aucun créneau non vérifié ni rendez-vous atelier prétendument confirmé n’est affiché."
           },
@@ -4166,7 +4166,7 @@
       ],
       "metadata": {
         "description": {
-          "de": "Sie können eine Gesprächs- oder Terminanfrage vorbereiten. Es werden keine ungeprüften freien Zeitfenster und keine bereits bestätigte Werkstattbuchung angezeigt.",
+          "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
           "nl": "U kunt een gesprek- of afspraakverzoek voorbereiden. Er worden geen ongecontroleerde vrije tijden of reeds bevestigde werkplaatsafspraak getoond.",
           "fr": "Vous pouvez préparer une demande d’entretien ou de rendez-vous. Aucun créneau non vérifié ni rendez-vous atelier prétendument confirmé n’est affiché."
         },

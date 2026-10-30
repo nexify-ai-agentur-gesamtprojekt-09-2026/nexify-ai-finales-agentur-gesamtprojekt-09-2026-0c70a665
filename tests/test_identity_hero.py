@@ -36,16 +36,25 @@ class IdentityHeroTests(unittest.TestCase):
         component=(ROOT/'apps/web/components/IdentityHero.tsx').read_text()
         css=(ROOT/'apps/web/components/IdentityHero.css').read_text()
         self.assertNotRegex(css,r'#[0-9a-fA-F]{3,8}\b|rgba?\(')
-        # Video element is now explicitly required per user specification (iteration 7)
+        # IdentityHero now composes TrioScene with real video (not literal <video in IdentityHero)
         # Original interim-scene-images remain unchanged and are preserved for reference
-        self.assertIn('<video',component)
+        self.assertIn('import TrioScene',component,'IdentityHero must import TrioScene')
+        self.assertIn('<TrioScene',component,'IdentityHero must render TrioScene')
+        self.assertIn('sceneMedia.welcome',component,'IdentityHero must pass sceneMedia.welcome to TrioScene')
+        self.assertIn('testId="hero"',component,'IdentityHero must pass testId="hero" to TrioScene')
         for unsafe in ('<iframe','srcDoc=','dangerouslySetInnerHTML','fetch('):
             self.assertNotIn(unsafe,component)
-        # Video controls must be present
-        self.assertIn('hero-video',component)
-        self.assertIn('hero-play-toggle',component)
-        self.assertIn('hero-sound-toggle',component)
-        self.assertIn('hero-captions-toggle',component)
+        # TrioScene contains real video and dynamic testId-based controls
+        trio_scene=(ROOT/'apps/web/components/TrioScene.tsx').read_text()
+        self.assertIn('<video',trio_scene,'TrioScene must contain video elements')
+        self.assertIn('trio-clip-intro',trio_scene,'TrioScene must have intro video')
+        self.assertIn('trio-clip-loop',trio_scene,'TrioScene must have loop video')
+        # Verify dynamic testId pattern for controls (testId prop creates hero-play-toggle, etc.)
+        self.assertIn('data-testid={`${testId}-play-toggle`}',trio_scene)
+        self.assertIn('data-testid={`${testId}-sound-toggle`}',trio_scene)
+        self.assertIn('data-testid={`${testId}-captions-toggle`}',trio_scene)
+        for unsafe in ('<iframe','srcDoc=','dangerouslySetInnerHTML'):
+            self.assertNotIn(unsafe,trio_scene)
         self.assertIn('prefers-reduced-motion:reduce',css)
 
     def test_scene_ink_is_readable_across_the_entire_floor_gradient(self):

@@ -1,0 +1,181 @@
+{
+  "test_info": {
+    "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com",
+    "timestamp": "2026-10-30T00:00:45.839775",
+    "viewports": [
+      {
+        "width": 320,
+        "height": 568,
+        "name": "mobile_320x568"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "name": "mobile_390x844"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "name": "desktop_1280x720"
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "browser": "chromium",
+      "viewport": {
+        "width": 320,
+        "height": 568,
+        "name": "mobile_320x568"
+      },
+      "timestamp": "2026-10-30T00:00:46.174235",
+      "measurements": {
+        "panel": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "heading": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "conversation": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "composer": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "textarea": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "sendButton": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "viewportHeight": 568,
+        "viewportWidth": 320
+      },
+      "panel_open": false
+    },
+    {
+      "browser": "chromium",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "name": "mobile_390x844"
+      },
+      "timestamp": "2026-10-30T00:00:48.614468",
+      "measurements": {
+        "panel": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "heading": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "conversation": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "composer": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "textarea": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "sendButton": {
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "bottom": 0
+        },
+        "viewportHeight": 844,
+        "viewportWidth": 390
+      },
+      "panel_open": false
+    },
+    {
+      "browser": "chromium",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "name": "desktop_1280x720"
+      },
+      "timestamp": "2026-10-30T00:00:50.579409",
+      "measurements": {
+        "panel": {
+          "width": 416,
+          "height": 720,
+          "top": 0,
+          "bottom": 720
+        },
+        "heading": {
+          "width": 415,
+          "height": 64.390625,
+          "top": 0,
+          "bottom": 64.390625
+        },
+        "conversation": {
+          "width": 415,
+          "height": 418.421875,
+          "top": 64.390625,
+          "bottom": 482.8125
+        },
+        "composer": {
+          "width": 415,
+          "height": 237.1875,
+          "top": 482.8125,
+          "bottom": 720
+        },
+        "textarea": {
+          "width": 333,
+          "height": 48,
+          "top": 515.8125,
+          "bottom": 563.8125
+        },
+        "sendButton": {
+          "width": 367,
+          "height": 59.1875,
+          "top": 644.8125,
+          "bottom": 704
+        },
+        "viewportHeight": 720,
+        "viewportWidth": 1280
+      },
+      "panel_open": true,
+      "requirements_check": {
+        "conversation_height": 418.421875,
+        "conversation_meets_360": true,
+        "composer_height": 237.1875,
+        "composer_meets_260": true
+      }
+    }
+  ]
+}

@@ -156,7 +156,14 @@ def export():
     Published under /media/home-loops/ with SHA256 manifest."""
     PUBLIC.mkdir(parents=True, exist_ok=True)
     ff = pw.ffmpeg(); manifest = {}
-    finish = 'unsharp=5:5:0.55:3:3:0.0,eq=contrast=1.04:saturation=1.04:brightness=-0.005,format=yuv420p'
+    # Stage floor: the generated clips carry a soft graphite gradient (8..~30). Map the near-black band back onto the
+    # page colour #080A0F so the clip sits on the page without a visible box; mid/high tones untouched.
+    flat = ("format=gbrp,lutrgb="
+            "r='if(lt(val,18),8,if(lt(val,34),8+(val-18)*26/16,val))':"
+            "g='if(lt(val,20),10,if(lt(val,36),10+(val-20)*26/16,val))':"
+            "b='if(lt(val,25),15,if(lt(val,41),15+(val-25)*26/16,val))'")
+    finish = flat + ',unsharp=5:5:0.55:3:3:0.0,eq=contrast=1.03:saturation=1.04,format=yuv420p'
+    poster_vf = flat + ',unsharp=5:5:0.4,format=yuvj420p'
     for name in CLIP_SPECS:
         src = CLIPS / f'{name}.mp4'
         if not src.exists():
@@ -164,7 +171,7 @@ def export():
         mp4 = PUBLIC / f'{name}.mp4'; webm = PUBLIC / f'{name}.webm'; poster = PUBLIC / f'{name}.jpg'
         subprocess.run([ff, '-y', '-i', str(src), '-an', '-vf', finish, '-c:v', 'libx264', '-profile:v', 'high', '-level', '4.2', '-crf', '17', '-preset', 'slow', '-movflags', '+faststart', str(mp4)], check=True, capture_output=True)
         subprocess.run([ff, '-y', '-i', str(src), '-an', '-vf', finish, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '28', '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2', str(webm)], check=True, capture_output=True)
-        subprocess.run([ff, '-y', '-i', str(FRAMES / f'{CLIP_SPECS[name]["start"]}.png'), '-vf', 'unsharp=5:5:0.4', '-q:v', '2', str(poster)], check=True, capture_output=True)
+        subprocess.run([ff, '-y', '-i', str(FRAMES / f'{CLIP_SPECS[name]["start"]}.png'), '-vf', poster_vf, '-q:v', '2', str(poster)], check=True, capture_output=True)
         manifest[name] = {'mp4': mp4.name, 'webm': webm.name, 'poster': poster.name, 'resolution': '1920x1080', 'seconds': round(pw.duration(mp4), 2),
                           'sha256': hashlib.sha256(mp4.read_bytes()).hexdigest(), 'webm_sha256': hashlib.sha256(webm.read_bytes()).hexdigest(), 'source_sha256': hashlib.sha256(src.read_bytes()).hexdigest(), 'model': ENDPOINT, 'finish': finish}
         print(name, mp4.stat().st_size // 1024, 'KB mp4,', webm.stat().st_size // 1024, 'KB webm,', manifest[name]['seconds'], 's', flush=True)

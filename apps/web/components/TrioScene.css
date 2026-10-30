@@ -26,10 +26,12 @@
 .has-media .trio-floor { display: none; }
 
 /* Echte Clips: Poster unten, Intro darüber, Loop oben – alle weich in die Markenfläche maskiert (kein Rahmen, keine Kante) */
-.trio-media { position: absolute; inset: 0; z-index: 2; overflow: hidden; border-radius: var(--radius-leit); transition: filter .6s ease, transform .7s cubic-bezier(.2,.7,.2,1);
-  -webkit-mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 93%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 9%, var(--color-graphit-900) 80%, transparent);
-  mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 93%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 9%, var(--color-graphit-900) 80%, transparent);
+.trio-media { position: absolute; inset: 0; z-index: 2; overflow: hidden; mix-blend-mode: lighten; transition: filter .6s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  -webkit-mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 8%, var(--color-graphit-900) 92%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 78%, transparent);
+  mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 8%, var(--color-graphit-900) 92%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 78%, transparent);
   -webkit-mask-composite: source-in; mask-composite: intersect; }
+/* Blend erreicht die Seitenfarbe nur ohne eigenen Stacking-Kontext der Bühne; die Sektion liefert die Fläche (siehe IdentityHero/HomeJourney). */
+.has-media .trio-stage { isolation: auto; }
 .trio-poster, .trio-clip { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 54%; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
 .trio-poster { z-index: 1; }
 .trio-clip-intro { z-index: 2; opacity: 0; transition: opacity .3s ease; }
@@ -90,8 +92,8 @@
 .trio-figure.is-listening { opacity: 1; } /* Charakterbibel: Zuhörende werden nicht abgedunkelt */
 
 /* Untertitel: eigene Zeile UNTER der Bühne – liegt nie vor einer Figur (Nutzervorgabe). Feste Höhe, damit nichts springt. */
-.trio-caption-bar { display: flex; align-items: flex-start; min-height: calc(var(--type-small-size) * 1.5 * 2 + var(--space-3) * 2 + var(--space-5)); margin-top: var(--space-2); padding-inline: var(--space-2); }
-.trio-caption { margin: 0; max-width: 70ch; padding: var(--space-3) var(--space-4); border-radius: var(--radius-karte); font-size: var(--type-small-size); line-height: 1.5; color: var(--color-text-primaer);
+.trio-caption-bar { display: flex; align-items: flex-start; min-height: calc(var(--type-small-size) * 1.6 * 2 + var(--space-4) * 2 + var(--space-6)); margin-top: var(--space-5); padding-inline: var(--space-2); }
+.trio-caption { margin: 0; max-width: 72ch; padding: var(--space-4) var(--space-5); border-radius: var(--radius-karte); font-size: var(--type-small-size); line-height: 1.6; color: var(--color-text-primaer);
   display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); align-items: baseline;
   background: color-mix(in srgb, var(--color-graphit-800) 72%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur));
   border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 12%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte); animation: trio-caption-in .35s ease both; }
@@ -121,7 +123,7 @@
 /* Schlussgrafik-Bausteine (geteilt) */
 .trio-paths { position: absolute; right: 4%; bottom: 24%; display: grid; gap: var(--space-3); width: 30%; min-width: 180px; }
 .trio-paths-title { margin: 0 0 var(--space-1); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-tertiaer); }
-.trio-path-link { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: var(--layout-control-size); padding: var(--space-3) var(--space-4); border-radius: var(--radius-karte); color: var(--color-text-primaer); text-decoration: none;
+.trio-path-link { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: var(--target-min); padding: var(--space-3) var(--space-4); border-radius: var(--radius-karte); color: var(--color-text-primaer); text-decoration: none;
   background: color-mix(in srgb, var(--color-graphit-800) 70%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur)); border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 12%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte); transition: border-color var(--motion-feedback), transform var(--motion-feedback); }
 .trio-path-link strong { display: block; font-family: var(--font-display); font-size: 16px; font-weight: 600; }
 .trio-path-link small { display: block; margin-top: 2px; color: var(--color-text-tertiaer); font-size: var(--type-small-size); }
@@ -138,30 +140,39 @@
 .trio-overview .trio-path-link { margin-top: var(--space-4); background: var(--color-marke-lime); color: var(--color-text-auf-lime); border-color: transparent; }
 .trio-overview .trio-path-link i { color: var(--color-text-auf-lime); }
 
-/* Controls im Fluss unter der Bühne – echte DOM-Bedienung, kein Gehäuse, nichts liegt vor den Figuren */
-.trio-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2); padding-inline: var(--space-2); }
-.trio-scene .trio-control { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--layout-control-size); min-width: var(--layout-control-size); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pille); font-size: var(--type-small-size); font-weight: 600; color: var(--color-text-primaer); cursor: pointer;
-  background: color-mix(in srgb, var(--color-graphit-800) 72%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur)); border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 14%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte); transition: border-color var(--motion-feedback), color var(--motion-feedback), transform var(--motion-feedback), background-color var(--motion-feedback); }
-.trio-scene .trio-control:hover { border-color: var(--color-marke-lime); color: var(--color-marke-lime); }
-.trio-scene .trio-control:active { transform: scale(.98); }
-.trio-scene .trio-control:disabled { opacity: var(--control-disabled-opacity, .5); cursor: not-allowed; }
-.trio-scene .trio-control[aria-pressed=true]:not(.trio-control-main) { color: var(--color-marke-lime); }
-.trio-scene .trio-control-main { background: var(--gradient-button-primaer); color: var(--color-text-auf-lime); border-color: transparent; box-shadow: var(--shadow-button-primaer); padding-inline: var(--space-5); }
-.trio-scene .trio-control-main:hover { color: var(--color-text-auf-lime); filter: brightness(1.05); }
+/* Controls im Fluss unter der Bühne – echte DOM-Bedienung, kein Gehäuse, nichts liegt vor den Figuren.
+   Zustände eindeutig getrennt (Nutzerbefund „Hover-Fehler“): Ruhe / Hover / Aktiv / Eingeschaltet (aria-pressed) / Deaktiviert.
+   Selektoren bewusst spezifischer als ActionControl.css, damit die Hauptaktion nie Lime-auf-Lime wird. */
+.trio-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-5); padding-inline: var(--space-2); }
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant] { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--target-min); min-width: var(--target-min); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pille); font-size: var(--type-small-size); font-weight: 600; line-height: 1.2; color: var(--color-text-primaer); cursor: pointer; transform: none; opacity: 1;
+  background: color-mix(in srgb, var(--color-graphit-800) 72%, transparent); -webkit-backdrop-filter: blur(var(--material-blur)); backdrop-filter: blur(var(--material-blur)); border: var(--material-border) solid color-mix(in srgb, var(--color-text-primaer) 14%, transparent); box-shadow: inset 1px 1px 0 var(--material-highlight), var(--shadow-kleine-karte);
+  transition: opacity var(--motion-feedback); }
+/* Eingeschaltet (Ton an / Untertitel an): nur das Symbol wird lime, Rahmen bleibt ruhig – kein Dauer-Hover-Look */
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant][aria-pressed='true'] { color: var(--color-marke-lime); border-color: color-mix(in srgb, var(--color-text-primaer) 14%, transparent); }
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant]:hover:not(:disabled) { color: var(--color-marke-lime); border-color: color-mix(in srgb, var(--color-marke-lime) 55%, transparent); background: color-mix(in srgb, var(--color-graphit-700) 80%, transparent); }
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant]:active:not(:disabled) { opacity: 1; transform: none; background: color-mix(in srgb, var(--color-graphit-650) 86%, transparent); border-color: var(--color-marke-lime); }
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant]:focus-visible { outline: var(--control-focus-width) solid var(--color-marke-lime); outline-offset: var(--space-1); }
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant]:disabled { opacity: var(--control-disabled-opacity, .5); cursor: not-allowed; color: var(--color-text-tertiaer); border-color: color-mix(in srgb, var(--color-text-primaer) 10%, transparent); }
+/* Hauptaktion (Abspielen / Anhalten): immer dunkler Text auf Lime – auch eingeschaltet, auch im Hover */
+.workspace-shell .trio-scene .trio-control-main.nexify-control[data-variant], .workspace-shell .trio-scene .trio-control-main.nexify-control[data-variant][aria-pressed='true'] { background: var(--gradient-button-primaer); color: var(--color-text-auf-lime); border-color: transparent; box-shadow: var(--shadow-button-primaer); padding-inline: var(--space-5); font-size: 15px; }
+.workspace-shell .trio-scene .trio-control-main.nexify-control[data-variant]:hover:not(:disabled) { background: var(--color-marke-lime-hell); color: var(--color-text-auf-lime); border-color: transparent; box-shadow: var(--shadow-button-primaer); }
+.workspace-shell .trio-scene .trio-control-main.nexify-control[data-variant]:active:not(:disabled) { background: var(--color-marke-lime-dunkel); color: var(--color-text-auf-lime); border-color: transparent; }
+.workspace-shell .trio-scene .trio-control-main.nexify-control[data-variant]:disabled { background: color-mix(in srgb, var(--color-marke-lime) 40%, var(--color-graphit-800)); color: var(--color-text-auf-lime); box-shadow: none; }
+.workspace-shell .trio-scene .trio-control.nexify-control[data-variant] > span[aria-hidden='true'] { transform: none !important; }
 .trio-icon { width: 18px; height: 18px; flex: 0 0 18px; }
 .trio-control-label { display: none; }
 .trio-control-main span { display: inline; }
 
 /* Meta: Verlauf, Zeit, Transkript */
-.trio-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-2) var(--space-4); margin-top: var(--space-3); padding-inline: var(--space-2); color: var(--color-text-tertiaer); font-size: var(--type-small-size); }
-.trio-progress { width: 100%; min-height: var(--layout-control-size); margin: 0; padding: 0; border: 0; background: transparent; accent-color: var(--color-marke-lime); cursor: pointer; }
+.trio-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-3) var(--space-5); margin-top: var(--space-5); padding-inline: var(--space-2); color: var(--color-text-tertiaer); font-size: var(--type-small-size); }
+.trio-progress { width: 100%; min-height: var(--target-min); margin: 0; padding: 0; border: 0; background: transparent; accent-color: var(--color-marke-lime); cursor: pointer; }
 .trio-progress:disabled { cursor: default; opacity: .5; }
 .trio-time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .trio-transcript { grid-column: 1 / -1; }
-.trio-transcript summary { display: flex; align-items: center; min-height: var(--layout-control-size); width: fit-content; cursor: pointer; }
+.trio-transcript summary { display: flex; align-items: center; min-height: var(--target-min); width: fit-content; cursor: pointer; }
 .trio-transcript p { margin: var(--space-3) 0; max-width: 65ch; line-height: var(--type-body-leading); color: var(--color-text-sekundaer); }
 .trio-transcript strong { color: var(--color-text-primaer); }
-.trio-status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); min-height: 1lh; margin: var(--space-1) var(--space-2) 0; font-size: var(--type-small-size); color: var(--color-text-tertiaer); }
+.trio-status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); min-height: 1lh; margin: var(--space-3) var(--space-2) 0; font-size: var(--type-small-size); color: var(--color-text-tertiaer); }
 .trio-status:empty { display: none; }
 
 /* Keyframes – nur transform/opacity */
@@ -200,3 +211,17 @@
 }
 .is-reduced .trio-figure, .is-reduced .trio-body, .is-reduced .trio-ribbon { animation: none !important; }
 .is-reduced .trio-clip { display: none; }
+
+
+/* Text-safe closing graphic: its own area after the film, never over a face or body. */
+.trio-scene .trio-finale { position:relative; inset:auto; z-index:auto; margin-top:var(--space-6); opacity:1; visibility:visible; pointer-events:auto; transition:none; }
+.trio-scene.is-paused .trio-finale[data-visible='true'] .trio-rise { opacity:1; transform:none; animation:none; }
+.trio-finale[data-visible='true'] + .trio-caption-bar:empty { display:none; }
+.trio-scene .trio-finale[hidden] { display:none; }
+.trio-scene .trio-finale>.trio-paths,.trio-scene .trio-finale>.trio-overview { position:static; width:100%!important; min-width:0; margin:0; }
+.trio-scene .trio-finale>.trio-paths { grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-4); }
+.trio-scene .trio-paths-title { grid-column:1/-1; font:600 var(--type-body-size)/1.5 var(--font-display); color:var(--color-text-primaer); letter-spacing:0; text-transform:none; }
+.trio-scene .trio-path-link { min-width:0; padding:var(--space-4); box-shadow:none; transition:transform var(--motion-feedback); }
+.trio-overview .home-overview-row { display:contents; }
+.trio-overview .trio-path-link small { color:var(--color-text-auf-lime); }
+@container trio (max-width:540px) { .trio-scene .trio-finale>.trio-paths { grid-template-columns:minmax(0,1fr); } }

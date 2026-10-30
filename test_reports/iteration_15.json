@@ -1,0 +1,71 @@
+{
+  "summary": "Completed offline unit testing for Apple Design Skill integration and IdentityHero composition update. Created reproducible unittest tests/test_apple_design_skill.py and hash file config/integrations/apple-design-files.json based on byte comparison against /tmp/nexify-apple-design-source pinned git state. Updated tests/test_identity_hero.py to reflect TrioScene composition with real video. All 20 tests passed (11 Apple Design Skill + 4 IdentityHero + 5 Public Surface Contract).",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "test_apple_design_skill.py: All 11 tests passed - skill metadata, file integrity (134 files), hash verification, 124 HIG pages indexed, AGENTS binding, no upstream scripts executed",
+    "test_identity_hero.py: All 4 tests passed - IdentityHero imports/renders TrioScene with sceneMedia.welcome, video controls with dynamic testIds (hero-play-toggle, hero-sound-toggle, hero-captions-toggle), no iframe/innerHTML, color rules unchanged",
+    "test_public_surface_contract.py: All 5 tests passed - token generation, color token usage, PWA installation, text resize validation"
+  ],
+  "test_report_links": [
+    "/app/tests/test_apple_design_skill.py",
+    "/app/tests/test_identity_hero.py",
+    "/app/tests/test_public_surface_contract.py",
+    "/app/config/integrations/apple-design-files.json"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/tests/test_apple_design_skill.py",
+    "/app/tests/test_identity_hero.py",
+    "/app/config/integrations/apple-design-files.json"
+  ],
+  "success_percentage": {
+    "apple_design_skill": "100% (11/11 tests passed, 134 subtests)",
+    "identity_hero": "100% (4/4 tests passed, 3 subtests)",
+    "public_surface_contract": "100% (5/5 tests passed, 52 subtests)",
+    "overall": "100% (20/20 tests passed, 189 subtests)"
+  },
+  "test_details": {
+    "apple_design_skill_tests": {
+      "test_skill_metadata_matches_pinned_commit": "PASSED - Verified commit ff4ebddf, tree b5f0f99c, git_archive_sha256, mode vendored_reference_only",
+      "test_all_files_match_pinned_source_exactly": "PASSED - All 134 files match SHA256 hashes from /tmp/nexify-apple-design-source",
+      "test_no_extra_files_in_local_copy": "PASSED - No extra files in .design-rules/apple-design",
+      "test_all_124_hig_pages_indexed_in_skill": "PASSED - All 124 HIG pages referenced in SKILL.md",
+      "test_skill_index_only_references_existing_pages": "PASSED - SKILL.md only references existing pages",
+      "test_agents_md_binds_apple_design_skill": "PASSED - AGENTS.md references skill path, SKILL.md, and review doc",
+      "test_skill_entrypoint_exists_and_valid": "PASSED - SKILL.md exists with correct structure and page count",
+      "test_review_document_exists_and_references_skill": "PASSED - docs/quality/apple-hig-review.md references pinned commit",
+      "test_no_upstream_scripts_executed": "PASSED - upstream_scripts_executed is false, scripts exist but not run",
+      "test_skill_is_vendored_reference_only": "PASSED - Mode is vendored_reference_only, no runtime dependency",
+      "test_hig_pages_count_exactly_124": "PASSED - Exactly 124 HIG pages in references/hig/"
+    },
+    "identity_hero_tests": {
+      "test_reference_is_version_bound_and_never_a_release_grant": "PASSED - config/identity-hero.json version bound, no release grant",
+      "test_all_original_assets_are_unchanged_and_distinct": "PASSED - All 3 interim scene images unchanged with distinct hashes",
+      "test_scene_palette_is_centrally_generated_and_component_inert": "PASSED - IdentityHero imports TrioScene, passes sceneMedia.welcome and testId='hero', TrioScene contains video with dynamic controls, no iframe/innerHTML, reduced-motion CSS present",
+      "test_scene_ink_is_readable_across_the_entire_floor_gradient": "PASSED - All color contrasts meet 4.5:1 minimum"
+    },
+    "public_surface_contract_tests": {
+      "test_generated_token_values_match_central_source_semantically": "PASSED - Generated tokens match config/design-tokens.json",
+      "test_own_active_styles_do_not_bypass_central_color_tokens": "PASSED - No hardcoded colors in active styles",
+      "test_public_installation_is_explicit_and_network_only": "PASSED - PWA plugin and worker are network-only",
+      "test_root_font_claim_is_not_accepted_as_rendered_text_doubling": "PASSED - Text resize validation rejects false claims",
+      "test_actual_resize_requires_both_page_and_content_geometry": "PASSED - Resize validation requires both page and content geometry"
+    }
+  },
+  "verification_notes": {
+    "apple_design_skill": "Created reproducible unittest with byte-level verification against /tmp/nexify-apple-design-source at commit ff4ebddf. Hash file config/integrations/apple-design-files.json contains SHA256 for all 134 files. Test verifies exact file list, hashes, 124 HIG pages in SKILL index bidirectionally, JSON metadata, and AGENTS binding. No upstream scripts executed, no npm/git submodule installation, no existing evidence changed.",
+    "identity_hero": "Updated test to reflect real composition: IdentityHero now imports and renders TrioScene with sceneMedia.welcome. TrioScene contains actual video elements (intro and loop clips) with dynamic testId-based controls. Current source uses testId='hero', creating hero-play-toggle, hero-sound-toggle, hero-captions-toggle. Test verifies no iframe/innerHTML, generated color rules unchanged, reduced-motion CSS present.",
+    "no_browser_run": "As requested, this was OFFLINE unit testing only - no browser automation, no UI testing. Only the three specified test files were run in foreground.",
+    "exit_codes": "All tests exited with code 0 (success). Total: 20 tests passed, 189 subtests passed, 0 failures."
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": true
+}

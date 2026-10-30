@@ -153,9 +153,9 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
    {!useMedia&&figure('pascal',figures.pascal,'Pascal')}
    {!useMedia&&figure('oracle',figures.oracle,'AI Fly Oracle')}
    {speaker&&<span className={`trio-speaker-light trio-speaker-${speaker}`} aria-hidden="true"/>}
-   <div className="trio-finale" inert={!showFinale} data-testid={`${testId}-finale`} data-visible={showFinale}>{finale}</div>
   </div>
    {children}
+   <div className="trio-finale" hidden={!showFinale} data-testid={`${testId}-finale`} data-visible={showFinale}>{finale}</div>
    <div className="trio-caption-bar" aria-live="polite" data-testid={`${testId}-caption-bar`}>
     {cue&&<p className="trio-caption" data-speaker={cue.speaker} lang="de" data-testid={`${testId}-caption`}><strong>{speakerNames[cue.speaker]}</strong><span>{cue.text}</span></p>}
    </div>

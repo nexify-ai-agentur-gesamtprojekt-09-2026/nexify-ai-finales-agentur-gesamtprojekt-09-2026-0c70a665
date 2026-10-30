@@ -1,7 +1,7 @@
 /* Eine Interaktionsquelle für bestehende NeXify-Aktionen; keine zweite CI. */
 .workspace-shell .nexify-control[data-variant] { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--layout-control-size); min-width:var(--layout-control-size); padding:var(--space-3) var(--space-5); border:var(--material-border) solid transparent; border-radius:var(--radius-button); font:inherit; font-weight:600; line-height:1.4; text-align:left; text-decoration:none; cursor:pointer; transform:none; transition:opacity var(--motion-feedback); box-shadow:none; }
 .workspace-shell .nexify-control[data-variant]:hover { transform:none; }
-.workspace-shell .nexify-control[data-variant='primary'] { background:var(--color-marke-lime); color:var(--color-text-auf-lime); border-color:transparent; box-shadow:var(--material-shadow-raised); }
+.workspace-shell .nexify-control[data-variant='primary'] { background:var(--color-marke-lime); color:var(--color-text-auf-lime); border-color:transparent; box-shadow:var(--shadow-button-primaer); }
 .workspace-shell .nexify-control[data-variant='primary']:hover:not(:disabled) { background:var(--color-marke-lime-hell); color:var(--color-text-auf-lime); }
 .workspace-shell .nexify-control[data-variant='primary']:active:not(:disabled) { background:var(--color-marke-lime-dunkel); color:var(--color-text-auf-lime); }
 .workspace-shell .nexify-control[data-variant='secondary'] { background:transparent; color:var(--color-text-sekundaer); border-color:var(--color-linie-stark); }
@@ -11,13 +11,14 @@
 .workspace-shell .nexify-control:is([data-variant='text'],[data-variant='quiet']):hover { border-bottom-color:var(--color-marke-lime); color:var(--color-marke-lime); }
 .workspace-shell .nexify-control[data-variant='icon'] { padding:var(--space-2); background:transparent; color:var(--color-text-sekundaer); border-radius:var(--radius-pille); border-color:var(--color-linie-fein); }
 .workspace-shell .nexify-control[data-variant='icon']:hover:not(:disabled) { background:var(--color-glas-leicht); border-color:var(--color-linie-stark); }
-.workspace-shell .nexify-control[data-variant][aria-pressed='true'] { color:var(--color-marke-lime); border-color:var(--color-marke-lime); }
+.workspace-shell .nexify-control[data-variant]:not([data-variant='primary'])[aria-pressed='true'] { color:var(--color-marke-lime); border-color:var(--color-marke-lime); }
+.workspace-shell .nexify-control[data-variant='primary'][aria-pressed='true'] { color:var(--color-text-auf-lime); }
 .workspace-shell .nexify-control[data-variant]:active:not(:disabled) { transform:none; opacity:var(--control-active-opacity); }
 .workspace-shell .nexify-control[data-variant]:focus-visible { outline:var(--control-focus-width) solid var(--color-marke-lime); outline-offset:var(--space-1); }
 .workspace-shell .nexify-control[data-variant]:disabled,.workspace-shell .nexify-control[data-variant][aria-disabled='true'] { opacity:var(--control-disabled-opacity); cursor:not-allowed; transform:none; box-shadow:none; pointer-events:none; }
 .workspace-shell .nexify-control[data-variant][aria-invalid='true'] { border-color:var(--color-semantik-fehler); }
 .workspace-shell .nexify-control[data-variant]>span[aria-hidden='true']:not(.control-loading-indicator) { display:inline-block; transition:transform var(--motion-feedback); }
-.workspace-shell .nexify-control[data-variant]:hover>span[aria-hidden='true']:not(.control-loading-indicator) { transform:translateX(var(--space-1)); }
+.workspace-shell .nexify-control[data-variant]:hover>span.control-direction-arrow[aria-hidden='true'] { transform:translateX(var(--space-1)); }
 .workspace-shell .nexify-control[data-variant]:disabled>span[aria-hidden='true'] { transform:none; }
 .control-loading-indicator { width:var(--space-2); height:var(--space-2); border-radius:var(--radius-pille); background:currentColor; animation:control-pulse var(--control-loading-duration) ease-in-out infinite alternate; }
 @keyframes control-pulse { from {opacity:.35} to {opacity:1} }
