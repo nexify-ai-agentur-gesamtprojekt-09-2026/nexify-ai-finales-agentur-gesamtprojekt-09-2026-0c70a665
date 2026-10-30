@@ -104,6 +104,45 @@ class ShopHTTPTests(unittest.TestCase):
         self.assertEqual(self.change(cart,quantity=3)[0],409)
         self.assertEqual(self.change(cart,**{'Idempotency-Key':'another-change-key'})[0],409)
 
+    def _records(self):
+        return [{'product_id': 'fixture-a', 'name': {'de': 'Testfilter', 'nl': 'Testfilter', 'fr': 'Filtre test'}, 'category_id': 'filters', 'category': {'de': 'Filter', 'nl': 'Filters', 'fr': 'Filtres'}},
+                {'product_id': 'fixture-b', 'name': {'de': 'Testlampe', 'nl': 'Testlamp', 'fr': 'Lampe test'}, 'category_id': 'lights', 'category': {'de': 'Licht', 'nl': 'Verlichting', 'fr': 'Éclairage'}}]
+
+    def _get(self, port, path):
+        connection = http.client.HTTPConnection('127.0.0.1', port, timeout=3)
+        connection.request('GET', path, headers={'Cookie': '; '.join(k+'='+v for k,v in self.cookies.items())})
+        response = connection.getresponse(); raw = response.read(); connection.close()
+        return response.status, json.loads(raw)
+
+    def test_quantity_limit_and_price_change_rebinds_existing_cart(self):
+        """Mengen-Obergrenze (>max) und Bestands-/Preisaenderung -> neue Katalog-Bindung -> bestehender Warenkorb abgewiesen."""
+        cart = self.create()
+        status, at_max, _ = self.change(cart, quantity=5, **{'Idempotency-Key': 'qty-at-max-0001'})
+        self.assertEqual(status, 200)
+        self.assertEqual(at_max['total_minor'], 615)  # 123 * 5
+        over = self.request('POST', '/api/shop/cart/items', {'product_id': 'fixture-a', 'quantity': 6},
+                            headers={'If-Match': at_max['version'], 'X-Cart-Id': cart['id'], 'Idempotency-Key': 'qty-over-max-0001'})
+        self.assertEqual(over[0], 422)
+        self.assertEqual(over[1]['error'], 'invalid_cart_change')
+        # Simulierte Bestands-/Preisaenderung: neuer Katalog mit geaendertem Preis -> neue Bindung, gleicher Store.
+        changed = fixture.commerce.LocalShop(
+            fixture.commerce.LocalCart(self.store, tenant='synthetic-tenant', store_id='synthetic-store', currency='EUR',
+                                       catalog_version='fixture-v2-price-change', products={'fixture-a': 150, 'fixture-b': 456},
+                                       lifetime_seconds=3600, maximum_quantity=5),
+            source_reference='synthetic_test_fixture_only', maximum_results=20, records=self._records())
+        server2 = fixture.gateway.build_server(self.store, port=0, shop=changed)
+        thread2 = threading.Thread(target=server2.serve_forever, daemon=True); thread2.start()
+        try:
+            status, catalog = self._get(server2.server_port, '/api/shop/catalog?q=filter&locale=de')
+            self.assertEqual(status, 200)
+            self.assertEqual(catalog['products'][0]['price_minor'], 150)  # geaenderter Preis sichtbar
+            status, body = self._get(server2.server_port, '/api/shop/cart')  # alte Bindung
+            self.assertEqual(status, 409)
+            self.assertEqual(body['error'], 'catalog_binding_changed')
+            self.assertEqual(self._get(server2.server_port, '/api/shop/cart/checkout-draft')[0], 409)
+        finally:
+            server2.shutdown(); server2.server_close(); thread2.join(2)
+
     def test_unconfigured_default_has_no_synthetic_catalog_or_checkout(self):
         server=fixture.gateway.build_server(self.store,port=0)
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
