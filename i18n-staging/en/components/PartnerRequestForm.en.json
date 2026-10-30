@@ -1,0 +1,25 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/PartnerRequestForm.tsx",
+ "_de_sha256": "d205b0f8726cc31c587f042c8afc0120beeff1c7a7bdb0b7e75568ab3e000a27",
+ "_locale_dict": "words: Record<Locale,{...}> (add en). Fallback currently words.de.",
+ "_keys": ["title","intro","company","contact","email","message","submit","sending","ok","ref","mine","status","none","error","nosession","recipient"],
+ "en": {
+  "title": "Become a workshop partner",
+  "intro": "Send your interest as a workshop. Your details are saved and noted for review – this is not a confirmation of receipt, delivery or approval.",
+  "company": "Business",
+  "contact": "Contact",
+  "email": "Email",
+  "message": "Your request",
+  "submit": "Save the request",
+  "sending": "Saving…",
+  "ok": "Saved and noted for review (not yet received/verified).",
+  "ref": "Reference",
+  "mine": "Your saved requests",
+  "status": "Status",
+  "none": "No saved requests.",
+  "error": "Not saved. Check your details and try again.",
+  "nosession": "Sign-in in preparation… one moment.",
+  "recipient": "Authorized receipt happens separately via the protected partner access (role and tenant); nothing is validated here."
+ }
+}

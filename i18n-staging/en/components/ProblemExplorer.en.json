@@ -1,0 +1,21 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/ProblemExplorer.tsx",
+ "_de_sha256": "1f6b6f877a2970c3a72c4d2e1d7402a5d0db39cf247f683c20995826742f3cb5",
+ "_locale_dict": "copy: Record<Locale,{...,items:[{id,title,before,steps[],result,prefill}]}> (add en). item ids stay verbatim.",
+ "_keys": ["title","intro","before","flow","after","cta","note","items"],
+ "en": {
+  "title": "What is costing you unnecessary time today?",
+  "intro": "Choose an example from your everyday work. Here is how it could become a simpler process.",
+  "before": "Today",
+  "flow": "A possible process",
+  "after": "Your result",
+  "cta": "Discuss this process",
+  "note": "An example, not a finished service promise. We clarify your systems, requirements and approvals together.",
+  "items": [
+   {"id": "requests", "title": "Requests get lost", "before": "Requests arrive through different channels. Important details are missing and follow-ups cost time.", "steps": ["Capture the request","Organize the details","Clarify the next step"], "result": "An editable briefing instead of scattered notes – with a goal, open questions and a traceable next step.", "prefill": "I would like to organize my requests better. Today they arrive through different channels. I would like a clear briefing and a traceable next step."},
+   {"id": "manual", "title": "Too much duplicate work", "before": "The same information is entered multiple times. Work gets stuck between email, file and system.", "steps": ["Understand the process","Connect the systems","Check the exceptions"], "result": "A clearly defined process: information is passed on purposefully; important decisions stay with the responsible people.", "prefill": "I would like to reduce duplicate data entry and recurring manual work. Please help me clarify the existing process and possible connections between my systems."},
+   {"id": "information", "title": "Information is scattered", "before": "Customers and team look for the current status. Responsibilities and next steps are not immediately clear.", "steps": ["Bundle the information","Define the access","Keep working together"], "result": "An understandable workspace with the needed status, clear responsibilities and appropriate access rights.", "prefill": "I would like to make information accessible in one place for my team or my customers. A clear current status, responsibilities and appropriate access rights are important."}
+  ]
+ }
+}

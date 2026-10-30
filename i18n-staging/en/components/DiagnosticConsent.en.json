@@ -1,0 +1,24 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/DiagnosticConsent.tsx",
+ "_de_sha256": "0db92384b63d02d0e64341975325805070890aa788e9d96c00ea66e73b3c244e",
+ "_locale_dict": "copy: Record<Locale,{...}> (add en). 'PostHog' kept verbatim.",
+ "_keys": ["title","purpose","network","memory","allow","deny","revoke","off","declined","pending","active","unavailable","failed","revoked","privacy"],
+ "en": {
+  "title": "Error diagnostics settings",
+  "purpose": "Optional: error diagnostics with PostHog. With your consent, the technical locations of errors, their type and the app version may be transmitted. Inputs and error texts are removed. No marketing, click tracking or session recording.",
+  "network": "During a transfer, the service receives network data such as your IP address.",
+  "memory": "Your choice applies until reload and is not stored. Declining does not limit the page functions.",
+  "allow": "Allow",
+  "deny": "Decline",
+  "revoke": "Withdraw consent",
+  "off": "Disabled · no choice",
+  "declined": "Disabled · declined",
+  "pending": "Allowed · loading",
+  "active": "Diagnostics enabled. Receipt by the service is not yet confirmed.",
+  "unavailable": "Technically unavailable. No error report is transmitted.",
+  "failed": "Loading failed. No new error report is collected.",
+  "revoked": "Disabled · consent withdrawn. Re-enabling requires a reload; diagnostics stay disabled first.",
+  "privacy": "Privacy information"
+ }
+}
