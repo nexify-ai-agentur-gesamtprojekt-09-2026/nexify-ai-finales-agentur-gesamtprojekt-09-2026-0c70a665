@@ -1,30 +1,26 @@
 [
   {
-    "content": "PWA-Artefakte geprüft: Manifest (Originallogo /signet.svg, Tokens), SW network-only (kein Offline-Cache), Registrierung",
+    "content": "InstallInvitation-Komponente + CSS (Originalsignet/Tokens), ehrlich je Browser, standalone/dismiss, keine Auto-Popups/Garantien, kein Offline-Cache",
     "status": "completed"
   },
   {
-    "content": "public-pwa-Preview gebaut (.local/pwa-dist) gemäß Vertrag",
+    "content": "In SiteFooter eingehängt (Dokumentfluss, keine Chat-Überlagerung), esbuild/TS ok (Typfix)",
     "status": "completed"
   },
   {
-    "content": "Unit-Suite public-installation.test.mjs 4/4",
+    "content": "Gezielter Chromium-UI-Test 8/8 (fehlendes Event, Prompt, akzeptiert, abgelehnt, dismiss, standalone, Tastatur, schmaler Viewport)",
     "status": "completed"
   },
   {
-    "content": "Echter Chromium-PWA-Browserlauf browser-pwa.mjs: passed, 9 Checks, 1 Online-POST",
+    "content": "QS: Legal-Footer Vite+Next genuin gegen neuen Build re-run (216/12 passed), promotet; Text-Spacing regeneriert; Consent-Bindung nachgezogen; Register faithful",
     "status": "completed"
   },
   {
-    "content": "Offline-Fehlerfall + kein Auth/API-Cache + iOS-/Install-Prompt-Grenzen bewertet (keine konkreten Fehler)",
+    "content": "make test 620 grün + echte Builds (apps/site typecheck, apps/web Next-Build) grün",
     "status": "completed"
   },
   {
-    "content": "Evidence byte-identisch (pwa-browser.json) – Bindung stabil; gezielte Regression 31/31",
-    "status": "completed"
-  },
-  {
-    "content": "Ergebnis mit Versionsbindung + Prüfgrenzen lokal committet (9a7bcd0, kein Push)",
+    "content": "Lokaler Commit 17b929a mit echter Prüfgrundlage + Grenzen (kein Push)",
     "status": "completed"
   }
 ]
