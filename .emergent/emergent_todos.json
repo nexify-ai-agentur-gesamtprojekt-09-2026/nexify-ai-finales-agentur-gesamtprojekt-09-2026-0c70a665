@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "content": "Phase 2a: Kern-NeXify-Seiten (knowledge, knowledge-start, company, contact) – ERLEDIGT & verifiziert",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 2b: Rechtstexte (imprint, privacy, terms, ai-notice, accessibility, cookies) – ERLEDIGT (ehrlich, nur verifizierte Fakten)",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 2c: Alle TEILEKLAR-Seiten – ERLEDIGT & verifiziert (keine erfundenen Katalog-/Preisdaten)",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 3: Geschützte Portale funktional mit echtem Clerk-Login + Live-Daten (apps/web/Next – nicht in dieser Vite-Preview sichtbar)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4 (final): Hero-Tests an freigegebenes zielbild-v2 reconcilen, gesamte Evidence regenerieren, Hashes erneuern, make test grün",
+    "status": "pending"
+  }
+]

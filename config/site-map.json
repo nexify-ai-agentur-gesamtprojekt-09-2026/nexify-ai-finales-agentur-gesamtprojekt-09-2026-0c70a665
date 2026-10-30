@@ -1611,6 +1611,57 @@
             "config/brain/knowledge.json",
             "docs/01-konzept/nexifyai-organisationshandbuch.md"
           ]
+        },
+        {
+          "id": "wie-wir-arbeiten",
+          "heading": {
+            "de": "So entsteht Klarheit vor der Umsetzung",
+            "nl": "Zo ontstaat duidelijkheid voor de uitvoering",
+            "fr": "Comment la clarté précède la réalisation"
+          },
+          "body": {
+            "de": "Bevor etwas gebaut wird, ordnen wir deinen Bedarf, die betroffenen Systeme und ein prüfbares Ziel. Wissen ist dabei kein Selbstzweck: Es dient dazu, Aufgabe, Umfang und Prüfkriterien so festzuhalten, dass Fortschritt nachvollziehbar bleibt. Du erhältst eine verständliche Einordnung statt Fachjargon.",
+            "nl": "Voordat er iets wordt gebouwd, ordenen we je behoefte, de betrokken systemen en een toetsbaar doel. Kennis is geen doel op zich: ze helpt om taak, omvang en toetscriteria zo vast te leggen dat voortgang navolgbaar blijft. Je krijgt een begrijpelijke duiding in plaats van jargon.",
+            "fr": "Avant toute réalisation, nous structurons ton besoin, les systèmes concernés et un objectif vérifiable. Le savoir n’est pas une fin en soi : il sert à définir tâche, périmètre et critères de contrôle pour que la progression reste lisible. Tu reçois un éclairage compréhensible, sans jargon."
+          },
+          "source_refs": [
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md"
+          ]
+        },
+        {
+          "id": "brain-und-quellen",
+          "heading": {
+            "de": "Gesichertes Wissen statt Behauptungen",
+            "nl": "Geborgde kennis in plaats van beweringen",
+            "fr": "Un savoir étayé plutôt que des affirmations"
+          },
+          "body": {
+            "de": "Unsere Wissensbasis (Brain) verbindet Inhalte mit Herkunft, Datum und Umfang. So lässt sich jederzeit prüfen, worauf eine Aussage beruht. Kundendaten und allgemeines Wissen bleiben getrennt; nichts wird vermischt oder ungeprüft übernommen. Offene Punkte werden als offen ausgewiesen.",
+            "nl": "Onze kennisbasis (Brain) verbindt inhoud met herkomst, datum en reikwijdte. Zo is altijd toetsbaar waarop een uitspraak berust. Klantgegevens en algemene kennis blijven gescheiden; niets wordt vermengd of ongetoetst overgenomen. Open punten worden als open benoemd.",
+            "fr": "Notre base de connaissances (Brain) relie chaque contenu à sa source, sa date et son périmètre. On peut ainsi vérifier à tout moment ce qui fonde une affirmation. Données clients et savoir général restent séparés ; rien n’est mélangé ni repris sans vérification. Les points ouverts sont signalés comme tels."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "config/brain/knowledge.json"
+          ]
+        },
+        {
+          "id": "was-du-mitbringst",
+          "heading": {
+            "de": "Was dir den Einstieg erleichtert",
+            "nl": "Wat je instap vergemakkelijkt",
+            "fr": "Ce qui facilite ton démarrage"
+          },
+          "body": {
+            "de": "Hilfreich sind eine kurze Beschreibung des Ziels, Beispiele bestehender Abläufe und Hinweise auf Systeme, die angebunden werden sollen. Je konkreter der Nutzerweg, desto präziser der Vorschlag. Ein erstes Gespräch oder ein Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+            "nl": "Nuttig zijn een korte beschrijving van het doel, voorbeelden van bestaande processen en verwijzingen naar systemen die moeten worden gekoppeld. Hoe concreter de gebruikersroute, hoe preciezer het voorstel. Een eerste gesprek of offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+            "fr": "Sont utiles : une brève description de l’objectif, des exemples de processus existants et les systèmes à connecter. Plus le parcours est concret, plus la proposition est précise. Un premier entretien ou projet de devis reste sans engagement jusqu’à validation distincte."
+          },
+          "source_refs": [
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/09-final/07-betriebs-und-nutzerhandbuch.md"
+          ]
         }
       ],
       "metadata": {
@@ -1709,6 +1760,56 @@
           "source_refs": [
             "docs/01-konzept/nexifyai-organisationshandbuch.md",
             "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "schritt-1-ziel",
+          "heading": {
+            "de": "Schritt 1: Ziel und Nutzen klären",
+            "nl": "Stap 1: doel en nut verhelderen",
+            "fr": "Étape 1 : clarifier l’objectif et le bénéfice"
+          },
+          "body": {
+            "de": "Beschreibe, was am Ende besser laufen soll: weniger manuelle Arbeit, schnellere Antworten, klarere Übersicht. Ein Ziel in einem Satz hilft mehr als eine lange Wunschliste. Daraus leiten wir gemeinsam einen prüfbaren Umfang ab.",
+            "nl": "Beschrijf wat uiteindelijk beter moet lopen: minder handwerk, snellere antwoorden, meer overzicht. Eén doel in één zin helpt meer dan een lange wensenlijst. Daaruit leiden we samen een toetsbare omvang af.",
+            "fr": "Décris ce qui doit mieux fonctionner au final : moins de travail manuel, des réponses plus rapides, une vue plus claire. Un objectif en une phrase aide plus qu’une longue liste de souhaits. Nous en déduisons ensemble un périmètre vérifiable."
+          },
+          "source_refs": [
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "schritt-2-bestand",
+          "heading": {
+            "de": "Schritt 2: Bestehendes sichten",
+            "nl": "Stap 2: bestaande situatie bekijken",
+            "fr": "Étape 2 : examiner l’existant"
+          },
+          "body": {
+            "de": "Welche Systeme, Postfächer, Tabellen oder Portale sind heute im Einsatz? Was funktioniert, was stört? Diese Bestandsaufnahme verhindert Doppelarbeit und zeigt, wo eine Anbindung sinnvoll ist und wo eine Neuentwicklung.",
+            "nl": "Welke systemen, mailboxen, tabellen of portalen worden nu gebruikt? Wat werkt, wat stoort? Deze inventarisatie voorkomt dubbel werk en laat zien waar koppelen zinvol is en waar nieuwbouw.",
+            "fr": "Quels systèmes, boîtes mail, tableaux ou portails sont utilisés aujourd’hui ? Qu’est-ce qui fonctionne, qu’est-ce qui gêne ? Cet état des lieux évite les doublons et montre où une connexion est utile et où un développement neuf s’impose."
+          },
+          "source_refs": [
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/07-betriebs-und-nutzerhandbuch.md"
+          ]
+        },
+        {
+          "id": "schritt-3-weg",
+          "heading": {
+            "de": "Schritt 3: Den passenden Einstieg wählen",
+            "nl": "Stap 3: de juiste instap kiezen",
+            "fr": "Étape 3 : choisir le bon point d’entrée"
+          },
+          "body": {
+            "de": "Für einen öffentlichen Auftritt beginnst du bei Websites, für wiederkehrende Anfragen und Termine bei Agenten und Automatisierung, für geschützte Übersichten bei Apps und Portale. Welche Teile zusammengehören, klären wir am konkreten Nutzerweg – ohne Festlegung auf nicht freigegebene Preise.",
+            "nl": "Voor een openbare presentatie begin je bij websites, voor terugkerende aanvragen en afspraken bij agents en automatisering, voor afgeschermde overzichten bij apps en portalen. Welke delen samenhangen, bepalen we aan de hand van de concrete gebruikersroute – zonder vastlegging op niet-vrijgegeven prijzen.",
+            "fr": "Pour une présence publique, commence par les sites web ; pour les demandes récurrentes et rendez-vous, par les agents et l’automatisation ; pour les espaces protégés, par les applications et portails. Nous précisons les liens à partir du parcours concret, sans fixer de prix non validés."
+          },
+          "source_refs": [
+            "docs/09-final/02-informationsarchitektur-und-journeys.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
           ]
         }
       ],
@@ -1812,6 +1913,55 @@
             "docs/09-final/01-produkt-und-marke.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "worum-es-geht",
+          "heading": {
+            "de": "Worum es bei NeXify geht",
+            "nl": "Waar NeXify om draait",
+            "fr": "Ce qui compte chez NeXify"
+          },
+          "body": {
+            "de": "NeXify AI verbindet Beratung, Entwicklung und Betrieb zu greifbaren Ergebnissen für den Mittelstand. Der Leitsatz „Chat it. Automate it.“ steht für einen klaren Weg: beschreiben, was gebraucht wird – und wiederkehrende Arbeit verlässlich automatisieren. Der Schwerpunkt liegt auf dem europäischen Markt mit deutsch- und niederländischsprachigem Fokus.",
+            "nl": "NeXify AI verbindt advies, ontwikkeling en beheer tot tastbare resultaten voor het mkb. Het motto ‘Chat it. Automate it.’ staat voor een helder pad: beschrijven wat nodig is – en terugkerend werk betrouwbaar automatiseren. De nadruk ligt op de Europese markt met Duits- en Nederlandstalige focus.",
+            "fr": "NeXify AI relie conseil, développement et exploitation pour des résultats concrets destinés aux PME. La devise « Chat it. Automate it. » traduit une voie claire : décrire ce dont on a besoin et automatiser de façon fiable les tâches récurrentes. L’accent est mis sur le marché européen, avec un focus germanophone et néerlandophone."
+          },
+          "source_refs": [
+            "docs/09-final/01-produkt-und-marke.md"
+          ]
+        },
+        {
+          "id": "wie-wir-arbeiten",
+          "heading": {
+            "de": "Wie wir arbeiten",
+            "nl": "Hoe we werken",
+            "fr": "Notre façon de travailler"
+          },
+          "body": {
+            "de": "Wir legen Ziel, Umfang und Prüfkriterien vorab fest und machen den Fortschritt über Vorschau, offene Entscheidungen und Ergebnisberichte sichtbar. Behauptungen werden belegt, offene Punkte offen benannt. Eine Referenz ist noch keine Lieferzusage, und ein Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+            "nl": "We leggen doel, omvang en toetscriteria vooraf vast en maken voortgang zichtbaar via preview, open beslissingen en resultaatrapporten. Beweringen worden onderbouwd, open punten open benoemd. Een referentie is nog geen leveringsbelofte en een offerteconcept blijft vrijblijvend tot afzonderlijke goedkeuring.",
+            "fr": "Nous définissons à l’avance l’objectif, le périmètre et les critères de contrôle, et rendons l’avancement visible par l’aperçu, les décisions ouvertes et les comptes rendus. Les affirmations sont étayées, les points ouverts signalés. Une référence n’est pas une promesse de livraison, et un projet de devis reste sans engagement jusqu’à validation distincte."
+          },
+          "source_refs": [
+            "docs/09-final/07-betriebs-und-nutzerhandbuch.md",
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "verantwortung",
+          "heading": {
+            "de": "Anbieter, Recht und Transparenz",
+            "nl": "Aanbieder, recht en transparantie",
+            "fr": "Prestataire, droit et transparence"
+          },
+          "body": {
+            "de": "Betreiber ist die NeXify AI FACTORY B.V. mit rechtlichem Sitz in den Niederlanden. Marktpräferenz ändert nichts an Register-, Steuer- oder Anbieteridentität. Anbieterinformationen, Datenschutz und Vertragsgrundlagen findest du gebündelt im Bereich Recht und Transparenz.",
+            "nl": "De exploitant is NeXify AI FACTORY B.V. met juridische vestiging in Nederland. Marktvoorkeur verandert niets aan register-, belasting- of aanbiederidentiteit. Aanbiederinformatie, privacy en contractbasis vind je gebundeld onder Recht en transparantie.",
+            "fr": "L’exploitant est NeXify AI FACTORY B.V., dont le siège juridique est aux Pays-Bas. La préférence de marché ne change ni le registre, ni la fiscalité, ni l’identité du prestataire. Informations du prestataire, confidentialité et bases contractuelles sont regroupées dans la rubrique Droit et transparence."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
         }
       ],
       "metadata": {
@@ -1910,6 +2060,55 @@
           "source_refs": [
             "docs/09-final/02-informationsarchitektur-und-journeys.md",
             "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "so-erreichst-du-uns",
+          "heading": {
+            "de": "So kommen wir ins Gespräch",
+            "nl": "Zo komen we in gesprek",
+            "fr": "Comment entrer en contact"
+          },
+          "body": {
+            "de": "Beschreibe dein Ziel in wenigen Sätzen und nenne, welche Systeme betroffen sind. Du bekommst eine Einordnung und, wenn sinnvoll, einen nächsten Schritt. Ein erstes Gespräch oder ein Angebotsentwurf ist unverbindlich und wird erst mit gesonderter Freigabe zur Grundlage einer Zusammenarbeit.",
+            "nl": "Beschrijf je doel in enkele zinnen en noem welke systemen betrokken zijn. Je krijgt een duiding en, indien zinvol, een volgende stap. Een eerste gesprek of offerteconcept is vrijblijvend en wordt pas met afzonderlijke goedkeuring de basis voor samenwerking.",
+            "fr": "Décris ton objectif en quelques phrases et indique les systèmes concernés. Tu reçois un éclairage et, le cas échéant, une prochaine étape. Un premier entretien ou projet de devis est sans engagement et ne devient la base d’une collaboration qu’après validation distincte."
+          },
+          "source_refs": [
+            "docs/09-final/02-informationsarchitektur-und-journeys.md"
+          ]
+        },
+        {
+          "id": "was-danach-passiert",
+          "heading": {
+            "de": "Was nach deiner Anfrage passiert",
+            "nl": "Wat er na je aanvraag gebeurt",
+            "fr": "Ce qui se passe après ta demande"
+          },
+          "body": {
+            "de": "Wir ordnen Bedarf und Umfang, halten Prüfkriterien fest und zeigen einen möglichen Weg auf. Nichts wird ungeprüft zugesagt. Erfundene Städte, Werkstätten oder Referenzen gibt es nicht – angezeigt wird nur, was tatsächlich hinterlegt und freigegeben ist.",
+            "nl": "We ordenen behoefte en omvang, leggen toetscriteria vast en schetsen een mogelijk pad. Niets wordt ongetoetst toegezegd. Verzonnen steden, werkplaatsen of referenties bestaan niet – getoond wordt alleen wat daadwerkelijk is vastgelegd en vrijgegeven.",
+            "fr": "Nous structurons le besoin et le périmètre, fixons les critères de contrôle et esquissons une voie possible. Rien n’est promis sans vérification. Aucune ville, aucun atelier ni référence inventés : seul ce qui est réellement enregistré et validé est affiché."
+          },
+          "source_refs": [
+            "docs/09-final/07-betriebs-und-nutzerhandbuch.md",
+            "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "datenschutz-hinweis",
+          "heading": {
+            "de": "Vertraulichkeit deiner Angaben",
+            "nl": "Vertrouwelijkheid van je gegevens",
+            "fr": "Confidentialité de tes informations"
+          },
+          "body": {
+            "de": "Deine Angaben verwenden wir ausschließlich zur Bearbeitung deiner Anfrage. Es werden keine Zugangsdaten oder Geheimnisse über dieses Formular erbeten. Details zur Datenverwendung findest du im Datenschutzbereich.",
+            "nl": "Je gegevens gebruiken we uitsluitend om je aanvraag te behandelen. Via dit formulier worden geen inloggegevens of geheimen gevraagd. Details over gegevensgebruik vind je in het privacygedeelte.",
+            "fr": "Tes informations servent uniquement au traitement de ta demande. Aucun identifiant ni secret n’est demandé via ce formulaire. Les détails sur l’utilisation des données figurent dans la rubrique confidentialité."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
@@ -2504,6 +2703,22 @@
             "docs/09-final/08-recht-und-compliance.md",
             "config/regelwerk.json"
           ]
+        },
+        {
+          "id": "betreiber",
+          "heading": {
+            "de": "Verantwortlicher Anbieter",
+            "nl": "Verantwoordelijke aanbieder",
+            "fr": "Prestataire responsable"
+          },
+          "body": {
+            "de": "Anbieter dieses Angebots ist die NeXify AI FACTORY B.V. mit rechtlichem Sitz in den Niederlanden. Eine Marktpräferenz für den deutschsprachigen Raum ändert die Anbieter-, Register- und Steueridentität nicht. Verbindliche Registerangaben werden ausschließlich aus geprüften Anbieterunterlagen übernommen.",
+            "nl": "Aanbieder van dit aanbod is NeXify AI FACTORY B.V. met juridische vestiging in Nederland. Een marktvoorkeur voor het Duitstalige gebied verandert de aanbieder-, register- en belastingidentiteit niet. Bindende registergegevens worden uitsluitend uit geverifieerde aanbiederstukken overgenomen.",
+            "fr": "Le prestataire de cette offre est NeXify AI FACTORY B.V., siège juridique aux Pays-Bas. Une préférence de marché pour l’espace germanophone ne modifie pas l’identité de prestataire, de registre et fiscale. Les mentions de registre contraignantes proviennent exclusivement de pièces vérifiées."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
         }
       ],
       "metadata": {
@@ -2593,6 +2808,22 @@
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
             "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "grundsatz",
+          "heading": {
+            "de": "Grundsatz der Datenverwendung",
+            "nl": "Uitgangspunt gegevensgebruik",
+            "fr": "Principe d’utilisation des données"
+          },
+          "body": {
+            "de": "Personenbezogene Angaben werden nur zweckgebunden und so sparsam wie möglich verarbeitet. Über öffentliche Formulare werden keine Zugangsdaten oder Geheimnisse erbeten. Der verbindliche Umfang der Verarbeitung ergibt sich aus der freigegebenen Datenschutzerklärung.",
+            "nl": "Persoonsgegevens worden alleen doelgebonden en zo beperkt mogelijk verwerkt. Via publieke formulieren worden geen inloggegevens of geheimen gevraagd. De bindende omvang van de verwerking volgt uit de vrijgegeven privacyverklaring.",
+            "fr": "Les données personnelles ne sont traitées que de façon ciblée et au strict nécessaire. Aucun identifiant ni secret n’est demandé via les formulaires publics. L’étendue contraignante du traitement découle de la déclaration de confidentialité validée."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
@@ -2684,6 +2915,22 @@
             "docs/09-final/08-recht-und-compliance.md",
             "config/regelwerk.json"
           ]
+        },
+        {
+          "id": "freigabestand",
+          "heading": {
+            "de": "Vertragsgrundlagen und Freigabestand",
+            "nl": "Contractbasis en vrijgavestatus",
+            "fr": "Bases contractuelles et état de validation"
+          },
+          "body": {
+            "de": "Gespräche und Angebotsentwürfe sind bis zur gesonderten Freigabe unverbindlich. Erst eine bestätigte Vereinbarung legt Leistungsumfang, Rechte und Pflichten fest. Preise gelten nur, wenn sie ausdrücklich freigegeben sind.",
+            "nl": "Gesprekken en offerteconcepten zijn vrijblijvend tot afzonderlijke vrijgave. Pas een bevestigde overeenkomst legt omvang, rechten en plichten vast. Prijzen gelden alleen als ze uitdrukkelijk zijn vrijgegeven.",
+            "fr": "Entretiens et projets de devis sont sans engagement jusqu’à validation distincte. Seul un accord confirmé fixe le périmètre, les droits et les obligations. Les prix ne s’appliquent que s’ils sont expressément validés."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
         }
       ],
       "metadata": {
@@ -2773,6 +3020,22 @@
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
             "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "ki-transparenz",
+          "heading": {
+            "de": "Transparenz zur KI-Nutzung",
+            "nl": "Transparantie over AI-gebruik",
+            "fr": "Transparence sur l’usage de l’IA"
+          },
+          "body": {
+            "de": "KI unterstützt Orientierung und Entwürfe. Antworten können Fehler enthalten und ersetzen keine verbindliche Auskunft. Ergebnisse, die zugesichert werden, beruhen auf geprüften Quellen; offene Punkte werden als offen gekennzeichnet.",
+            "nl": "AI ondersteunt oriëntatie en concepten. Antwoorden kunnen fouten bevatten en vervangen geen bindende informatie. Toegezegde resultaten berusten op geverifieerde bronnen; open punten worden als open aangeduid.",
+            "fr": "L’IA soutient l’orientation et les ébauches. Les réponses peuvent comporter des erreurs et ne remplacent pas une information contraignante. Les résultats garantis reposent sur des sources vérifiées ; les points ouverts sont signalés."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
@@ -2864,6 +3127,22 @@
             "docs/09-final/08-recht-und-compliance.md",
             "config/regelwerk.json"
           ]
+        },
+        {
+          "id": "anspruch-rueckmeldung",
+          "heading": {
+            "de": "Anspruch und Rückmeldung",
+            "nl": "Ambitie en terugkoppeling",
+            "fr": "Engagement et retour d’information"
+          },
+          "body": {
+            "de": "Ziel ist eine bedienbare, lesbare und tastaturfreundliche Oberfläche mit ausreichenden Kontrasten und skalierbarem Text. Wenn dir eine Barriere auffällt, melde sie über den Kontaktweg; Hinweise fließen in die Verbesserung ein.",
+            "nl": "Doel is een bedienbare, leesbare en toetsenbordvriendelijke interface met voldoende contrast en schaalbare tekst. Merk je een drempel op, meld die via het contactkanaal; opmerkingen worden meegenomen in verbeteringen.",
+            "fr": "L’objectif est une interface utilisable, lisible et accessible au clavier, avec des contrastes suffisants et un texte ajustable. Si tu repères un obstacle, signale-le via le contact ; les retours alimentent les améliorations."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
         }
       ],
       "metadata": {
@@ -2953,6 +3232,22 @@
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
             "config/regelwerk.json"
+          ]
+        },
+        {
+          "id": "einstellungen",
+          "heading": {
+            "de": "Cookies und Einstellungen",
+            "nl": "Cookies en instellingen",
+            "fr": "Cookies et paramètres"
+          },
+          "body": {
+            "de": "Für den Betrieb notwendige Speicherung bleibt auf das Erforderliche beschränkt. Optionale Messung erfolgt nur mit deiner Zustimmung und lässt sich ändern. Es werden keine verborgenen Weitergaben an Dritte vorgenommen.",
+            "nl": "Voor de werking noodzakelijke opslag blijft beperkt tot het nodige. Optionele meting gebeurt alleen met jouw toestemming en is aanpasbaar. Er vinden geen verborgen doorgiften aan derden plaats.",
+            "fr": "Le stockage nécessaire au fonctionnement reste limité à l’indispensable. La mesure facultative n’a lieu qu’avec ton consentement et reste modifiable. Aucune transmission cachée à des tiers n’a lieu."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
@@ -3315,6 +3610,40 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "so-funktioniert-es",
+          "heading": {
+            "de": "So funktioniert TEILEKLAR",
+            "nl": "Zo werkt TEILEKLAR",
+            "fr": "Comment fonctionne TEILEKLAR"
+          },
+          "body": {
+            "de": "TEILEKLAR bringt Teile, Fahrzeugbezug und Werkstatt zusammen. Du beschreibst dein Fahrzeug und das gesuchte Teil; passende Optionen und nächste Schritte erscheinen, sobald ein freigegebener Teilebestand vorliegt. Bis dahin werden keine erfundenen Treffer, Preise oder Lieferzeiten angezeigt.",
+            "nl": "TEILEKLAR brengt onderdelen, voertuigkoppeling en werkplaats samen. Je beschrijft je voertuig en het gezochte onderdeel; passende opties en vervolgstappen verschijnen zodra er een vrijgegeven onderdelenbestand is. Tot die tijd worden geen verzonnen resultaten, prijzen of levertijden getoond.",
+            "fr": "TEILEKLAR réunit pièces, compatibilité véhicule et atelier. Tu décris ton véhicule et la pièce recherchée ; options et étapes apparaissent dès qu’un catalogue validé est disponible. En attendant, aucun résultat, prix ou délai fictif n’est affiché."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
+        },
+        {
+          "id": "fahrzeug-und-werkstatt",
+          "heading": {
+            "de": "Fahrzeugbezug und Werkstatttermin",
+            "nl": "Voertuigkoppeling en werkplaatsafspraak",
+            "fr": "Compatibilité et rendez-vous atelier"
+          },
+          "body": {
+            "de": "Hinterlege dein Fahrzeug, damit die Passung belegbar wird, statt geraten zu werden. Wenn eine Werkstatt nötig ist, kannst du einen Termin anfragen. Werkstattdaten erscheinen nur, wenn sie freigegeben sind – keine erfundenen Standorte.",
+            "nl": "Leg je voertuig vast zodat de passendheid onderbouwd is in plaats van gegokt. Is een werkplaats nodig, dan kun je een afspraak aanvragen. Werkplaatsgegevens verschijnen alleen als ze zijn vrijgegeven – geen verzonnen locaties.",
+            "fr": "Enregistre ton véhicule pour que la compatibilité soit étayée plutôt que devinée. Si un atelier est nécessaire, tu peux demander un rendez-vous. Les données atelier n’apparaissent que si elles sont validées – aucune adresse inventée."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -3426,6 +3755,23 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "jetzt-schon-moeglich",
+          "heading": {
+            "de": "Was jetzt schon möglich ist",
+            "nl": "Wat nu al mogelijk is",
+            "fr": "Ce qui est déjà possible"
+          },
+          "body": {
+            "de": "Du kannst Fahrzeug und gesuchtes Teil strukturiert als Anfrage beschreiben. Die eigentliche Suche mit Treffern erscheint, sobald ein freigegebener Teilebestand vorliegt – ohne erfundene Ergebnisse.",
+            "nl": "Je kunt voertuig en gezocht onderdeel gestructureerd als aanvraag beschrijven. De echte zoekfunctie met resultaten verschijnt zodra er een vrijgegeven onderdelenbestand is – zonder verzonnen resultaten.",
+            "fr": "Tu peux décrire ton véhicule et la pièce recherchée sous forme de demande. La recherche avec résultats apparaîtra dès qu’un catalogue validé sera disponible – sans résultats fictifs."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -3536,6 +3882,23 @@
             "docs/01-konzept/gesamtprojektplan.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "sortiment-orientierung",
+          "heading": {
+            "de": "Orientierung im Sortiment",
+            "nl": "Oriëntatie in het assortiment",
+            "fr": "Repères dans l’assortiment"
+          },
+          "body": {
+            "de": "Die Kategorien geben die geplante Struktur des Sortiments wieder. Konkrete Artikel, Verfügbarkeiten und Preise erscheinen erst mit bestätigten Katalogdaten. So bleibt die Übersicht ehrlich und belastbar.",
+            "nl": "De categorieën tonen de geplande structuur van het assortiment. Concrete artikelen, beschikbaarheid en prijzen verschijnen pas met bevestigde catalogusdata. Zo blijft het overzicht eerlijk en betrouwbaar.",
+            "fr": "Les catégories reflètent la structure prévue de l’assortiment. Articles, disponibilités et prix n’apparaissent qu’avec des données catalogue confirmées. L’aperçu reste ainsi honnête et fiable."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
           ]
         }
       ],
@@ -3741,6 +4104,23 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "produktdetails-status",
+          "heading": {
+            "de": "Produktdetails in Vorbereitung",
+            "nl": "Productdetails in voorbereiding",
+            "fr": "Détails produit en préparation"
+          },
+          "body": {
+            "de": "Produktseiten zeigen künftig Eigenschaften, Passung und Verfügbarkeit auf Basis bestätigter Daten. Bis dahin werden keine Spezifikationen oder Preise angezeigt, die nicht belegt sind.",
+            "nl": "Productpagina’s tonen straks eigenschappen, passendheid en beschikbaarheid op basis van bevestigde data. Tot die tijd worden geen specificaties of prijzen getoond die niet onderbouwd zijn.",
+            "fr": "Les fiches produit présenteront caractéristiques, compatibilité et disponibilité à partir de données confirmées. En attendant, aucune spécification ni prix non étayés ne sont affichés."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -3853,6 +4233,23 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "warenkorb-status",
+          "heading": {
+            "de": "Warenkorb ohne Bestellung",
+            "nl": "Winkelwagen zonder bestelling",
+            "fr": "Panier sans commande"
+          },
+          "body": {
+            "de": "Der Warenkorb hält deine Auswahl lokal fest. Eine Bestellung oder Zahlung ist nicht aktiv und wird erst mit gesonderter Freigabe möglich. So entsteht keine irreführende Kauf­erwartung.",
+            "nl": "De winkelwagen bewaart je selectie lokaal. Een bestelling of betaling is niet actief en wordt pas met afzonderlijke vrijgave mogelijk. Zo ontstaat geen misleidende koopverwachting.",
+            "fr": "Le panier conserve ta sélection localement. Aucune commande ni paiement n’est actif ; cela ne sera possible qu’après validation distincte. Aucune attente d’achat trompeuse n’est créée."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -3954,6 +4351,23 @@
             "docs/01-konzept/gesamtprojektplan.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "kasse-status",
+          "heading": {
+            "de": "Kasse nicht freigegeben",
+            "nl": "Kassa niet vrijgegeven",
+            "fr": "Paiement non activé"
+          },
+          "body": {
+            "de": "Ein Kaufabschluss ist bewusst nicht aktiviert. Zahlungs- und Bestellabläufe erscheinen erst, wenn Katalog, Preise und Bedingungen freigegeben sind. Bis dahin bleiben alle Angaben unverbindlich.",
+            "nl": "Een aankoop is bewust niet geactiveerd. Betaal- en bestelprocessen verschijnen pas als catalogus, prijzen en voorwaarden zijn vrijgegeven. Tot die tijd blijven alle gegevens vrijblijvend.",
+            "fr": "La finalisation d’achat est volontairement désactivée. Les processus de paiement et de commande apparaîtront une fois catalogue, prix et conditions validés. D’ici là, toutes les informations restent sans engagement."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
           ]
         }
       ],
@@ -4057,6 +4471,23 @@
             "docs/01-konzept/gesamtprojektplan.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "belegte-passung",
+          "heading": {
+            "de": "Warum belegte Passung zählt",
+            "nl": "Waarom onderbouwde passendheid telt",
+            "fr": "Pourquoi une compatibilité étayée compte"
+          },
+          "body": {
+            "de": "Eine belegte Passung verhindert Fehlkäufe. Über Fahrzeugmerkmale ordnen wir ein, welche Teile grundsätzlich in Frage kommen. Angezeigt wird nur, was sich auf bestätigte Daten stützt; Unsicherheiten werden benannt statt überspielt.",
+            "nl": "Onderbouwde passendheid voorkomt miskopen. Via voertuigkenmerken bepalen we welke onderdelen in aanmerking komen. Getoond wordt alleen wat op bevestigde data steunt; onzekerheden worden benoemd in plaats van verhuld.",
+            "fr": "Une compatibilité étayée évite les erreurs d’achat. À partir des caractéristiques du véhicule, nous identifions les pièces envisageables. Seul ce qui repose sur des données confirmées est affiché ; les incertitudes sont signalées."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
           ]
         }
       ],
@@ -4162,6 +4593,23 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "termin-ablauf",
+          "heading": {
+            "de": "Ablauf einer Terminanfrage",
+            "nl": "Verloop van een afspraakaanvraag",
+            "fr": "Déroulement d’une demande de rendez-vous"
+          },
+          "body": {
+            "de": "Beschreibe Anliegen und Fahrzeug; die Anfrage geht an eine freigegebene Werkstatt. Eine verbindliche Zusage entsteht erst durch Bestätigung der Werkstatt. Es werden keine Kapazitäten oder Standorte erfunden.",
+            "nl": "Beschrijf je vraag en voertuig; de aanvraag gaat naar een vrijgegeven werkplaats. Een bindende toezegging ontstaat pas na bevestiging door de werkplaats. Er worden geen capaciteiten of locaties verzonnen.",
+            "fr": "Décris ta demande et ton véhicule ; la demande est transmise à un atelier validé. Un engagement ferme n’existe qu’après confirmation de l’atelier. Aucune capacité ni adresse n’est inventée."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -4264,6 +4712,23 @@
             "docs/01-konzept/gesamtprojektplan.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "gutscheine-status",
+          "heading": {
+            "de": "Gutscheine: aktueller Stand",
+            "nl": "Vouchers: huidige status",
+            "fr": "Bons : état actuel"
+          },
+          "body": {
+            "de": "Einlösung und Bedingungen von Gutscheinen werden erst mit freigegebenen Regeln aktiv. Es werden keine Guthaben oder Rabatte dargestellt, die nicht hinterlegt sind.",
+            "nl": "Inwisseling en voorwaarden van vouchers worden pas actief met vrijgegeven regels. Er worden geen tegoeden of kortingen getoond die niet zijn vastgelegd.",
+            "fr": "L’utilisation et les conditions des bons seront actives avec des règles validées. Aucun avoir ni remise non enregistrés ne sont présentés."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
           ]
         }
       ],
@@ -4368,6 +4833,23 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "partner-nutzen",
+          "heading": {
+            "de": "Nutzen für Werkstattpartner",
+            "nl": "Voordeel voor werkplaatspartners",
+            "fr": "Avantages pour les ateliers partenaires"
+          },
+          "body": {
+            "de": "Als Werkstattpartner erhältst du strukturierte Anfragen mit Fahrzeugbezug und klarer Beschreibung. Umfang, Rechte und Abläufe werden gesondert vereinbart; eine Teilnahme ist erst nach Freigabe wirksam.",
+            "nl": "Als werkplaatspartner ontvang je gestructureerde aanvragen met voertuigkoppeling en heldere omschrijving. Omvang, rechten en processen worden apart afgesproken; deelname is pas na vrijgave actief.",
+            "fr": "En tant qu’atelier partenaire, tu reçois des demandes structurées avec compatibilité véhicule et description claire. Périmètre, droits et processus sont convenus séparément ; la participation n’est effective qu’après validation."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -4471,6 +4953,23 @@
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
           ]
+        },
+        {
+          "id": "werkstattprofil-status",
+          "heading": {
+            "de": "Werkstattprofil: freigegebene Daten nötig",
+            "nl": "Werkplaatsprofiel: vrijgegeven gegevens nodig",
+            "fr": "Profil atelier : données validées requises"
+          },
+          "body": {
+            "de": "Ein Werkstattprofil zeigt nur bestätigte Angaben. Ohne freigegebene Daten werden keine Standorte, Leistungen oder Bewertungen erfunden. Partner hinterlegen ihre Daten im Partnerprozess.",
+            "nl": "Een werkplaatsprofiel toont alleen bevestigde gegevens. Zonder vrijgegeven data worden geen locaties, diensten of beoordelingen verzonnen. Partners leggen hun gegevens vast in het partnerproces.",
+            "fr": "Un profil atelier n’affiche que des informations confirmées. Sans données validées, aucune adresse, prestation ou évaluation n’est inventée. Les partenaires enregistrent leurs données via le processus partenaire."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
         }
       ],
       "metadata": {
@@ -4572,6 +5071,23 @@
             "docs/01-konzept/gesamtprojektplan.md",
             "docs/09-final/14-gesamtsystem-und-portale.md",
             "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "anbieter-und-geltung",
+          "heading": {
+            "de": "Anbieter und Geltungsbereich",
+            "nl": "Aanbieder en toepassingsgebied",
+            "fr": "Prestataire et champ d’application"
+          },
+          "body": {
+            "de": "TEILEKLAR ist eine Marke im Rahmen der NeXify AI FACTORY B.V. Anbieterinformationen, Datenschutz und Kaufbedingungen gelten für den TEILEKLAR-Bereich. Eine Kauf- oder Bestellfunktion ist bis zur gesonderten Freigabe nicht aktiv.",
+            "nl": "TEILEKLAR is een merk binnen NeXify AI FACTORY B.V. Aanbiederinformatie, privacy en koopvoorwaarden gelden voor het TEILEKLAR-gedeelte. Een koop- of bestelfunctie is tot afzonderlijke vrijgave niet actief.",
+            "fr": "TEILEKLAR est une marque de NeXify AI FACTORY B.V. Informations du prestataire, confidentialité et conditions d’achat s’appliquent à l’espace TEILEKLAR. Aucune fonction d’achat ou de commande n’est active avant validation distincte."
+          },
+          "source_refs": [
+            "docs/09-final/08-recht-und-compliance.md",
+            "docs/09-final/11-teileklar-datenblatt.md"
           ]
         }
       ],
