@@ -55,13 +55,27 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  const lastCueEnd=scene.cues[scene.cues.length-1].end;
  const setPhase=useCallback((next:Phase)=>{setPhaseState(prev=>{if(prev!==next)onPhase?.(next);return next;});},[onPhase]);
 
+ // Weg B (NEX-MEDIA-SYNC-20261030-01): ONE scene controller, audio.currentTime is the master clock.
+ // The silent ambient loop stays ambient (modulo repetition) and is coupled to the master's STATE
+ // (play/pause/seek/stall/ended/replay) only – it is explicitly NOT a lip performance, so no
+ // per-frame audio↔video drift correction is applied (there is no matching mouth content).
+ const startTokenRef=useRef(0);
+ const pausedByUserRef=useRef(false);
+ const playLoopAmbient=useCallback(()=>{if(media&&!reduced&&!clipFailed)loopRef.current?.play().catch(()=>{});},[media,reduced,clipFailed]);
+ const freezeLoop=useCallback(()=>{loopRef.current?.pause();},[]);
+ const syncLoopToMaster=useCallback((master:number)=>{const l=loopRef.current;if(l&&Number.isFinite(l.duration)&&l.duration>0)l.currentTime=master%l.duration;},[]);
+ // Robust play(): a benign AbortError (interrupted by a quick pause/new load) or a blocked
+ // NotAllowedError (needs a fresh user gesture) must not be shown as a hard failure; a stale
+ // start token (after pause/unmount/locale change) is ignored so a late promise never restarts.
+ const playAudio=useCallback((a:HTMLAudioElement)=>{const token=++startTokenRef.current;a.play().then(()=>{}).catch((err:DOMException)=>{if(token!==startTokenRef.current)return;if(err&&(err.name==='AbortError'||err.name==='NotAllowedError'))return;setFailed(true);});},[]);
+
  useEffect(()=>{
   const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
   const change=()=>setReduced(motion.matches);change();
   const other=(e:Event)=>{if((e as CustomEvent).detail!==testId)audioRef.current?.pause();};
   motion.addEventListener('change',change);window.addEventListener('nexify:presenter-play',other);
-  return()=>{motion.removeEventListener('change',change);window.removeEventListener('nexify:presenter-play',other);audioRef.current?.pause();};
- },[testId]);
+  return()=>{startTokenRef.current++;motion.removeEventListener('change',change);window.removeEventListener('nexify:presenter-play',other);audioRef.current?.pause();};
+ },[testId,locale]);
 
  // Ambient clip: intro once (when the stage becomes visible), then the seamless loop – silent, independent of the voice track.
  useEffect(()=>{
@@ -86,7 +100,7 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  useEffect(()=>{
   if(!media||reduced)return;
   const loop=loopRef.current;if(!loop||!('IntersectionObserver' in window))return;
-  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(clip!=='loop')return;if(e.isIntersecting)loop.play().catch(()=>{});else loop.pause();});},{threshold:0});
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(clip!=='loop')return;if(e.isIntersecting){if(!pausedByUserRef.current)loop.play().catch(()=>{});}else loop.pause();});},{threshold:0});
   io.observe(loop);return()=>io.disconnect();
  },[media,reduced,clip]);
 
@@ -102,14 +116,14 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
 
  const start=()=>{
   const a=audioRef.current;if(!a)return;
+  pausedByUserRef.current=false;
   window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:testId}));
-  if(phase==='ended'||a.ended){a.currentTime=0;setCueIndex(-1);setSpeaker(null);}
+  if(phase==='ended'||a.ended){a.currentTime=0;setCueIndex(-1);setSpeaker(null);syncLoopToMaster(0);}
   if(phase==='idle'||phase==='ended')setPhase('entering');
-  a.play().catch(()=>setFailed(true));
-  if(media&&clip==='loop'&&!reduced)loopRef.current?.play().catch(()=>{});
+  playAudio(a);
  };
- const toggle=()=>{const a=audioRef.current;if(!a)return;if(!a.paused){a.pause();return;}start();};
- const restart=()=>{const a=audioRef.current;if(!a)return;a.pause();a.currentTime=0;setCueIndex(-1);setSpeaker(null);setPhase('entering');window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:testId}));a.play().catch(()=>setFailed(true));};
+ const toggle=()=>{const a=audioRef.current;if(!a)return;if(!a.paused){pausedByUserRef.current=true;a.pause();return;}start();};
+ const restart=()=>{const a=audioRef.current;if(!a)return;pausedByUserRef.current=false;a.pause();a.currentTime=0;setCueIndex(-1);setSpeaker(null);setPhase('entering');syncLoopToMaster(0);window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:testId}));playAudio(a);};
  const toggleMute=()=>{const a=audioRef.current;if(!a)return;a.muted=!a.muted;setMuted(a.muted);};
  const keys=(e:KeyboardEvent<HTMLDivElement>)=>{
   if((e.target as HTMLElement).closest('button,a,input,summary'))return;
@@ -172,10 +186,13 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
   </div>
   <audio ref={audioRef} preload="metadata" src={scene.audioSrc} data-testid={`${testId}-audio`}
    onLoadedMetadata={()=>{setDuration(audioRef.current?.duration||0);setReady(true);}} onCanPlay={()=>setReady(true)}
-   onTimeUpdate={()=>sync(audioRef.current?.currentTime||0)} onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)}
-   onEnded={()=>{setPlaying(false);setSpeaker(null);setPhase('ended');}} onError={()=>{setFailed(true);setPlaying(false);}}/>
+   onTimeUpdate={()=>sync(audioRef.current?.currentTime||0)} onPlay={()=>{setPlaying(true);playLoopAmbient();}}
+   onPlaying={()=>playLoopAmbient()} onWaiting={()=>freezeLoop()} onStalled={()=>freezeLoop()}
+   onSeeked={()=>syncLoopToMaster(audioRef.current?.currentTime||0)}
+   onPause={()=>{setPlaying(false);if(!audioRef.current?.ended)freezeLoop();}}
+   onEnded={()=>{setPlaying(false);setSpeaker(null);setPhase('ended');freezeLoop();}} onError={()=>{setFailed(true);setPlaying(false);}}/>
   <div className="trio-meta">
-   <input className="trio-progress" type="range" min="0" max={duration||1} step="0.1" value={time} aria-label={t.position} disabled={!ready||failed} onChange={e=>{const v=Number(e.target.value);if(audioRef.current)audioRef.current.currentTime=v;if(phase==='idle')setPhase('entering');sync(v);}} data-testid={`${testId}-progress-slider`}/>
+   <input className="trio-progress" type="range" min="0" max={duration||1} step="0.1" value={time} aria-label={t.position} disabled={!ready||failed} onChange={e=>{const v=Number(e.target.value);if(audioRef.current)audioRef.current.currentTime=v;if(phase==='idle')setPhase('entering');sync(v);syncLoopToMaster(v);}} data-testid={`${testId}-progress-slider`}/>
    <span className="trio-time" data-testid={`${testId}-time`}>{clock(time)} / {clock(duration)}</span>
    <details className="trio-transcript" data-testid={`${testId}-transcript`}><summary data-testid={`${testId}-transcript-toggle`}>{t.transcript}</summary>
     {scene.cues.map((cue,i)=><p key={i} lang="de" data-testid={`${testId}-transcript-line-${i}`}><strong>{speakerNames[cue.speaker]}: </strong>{cue.text}</p>)}

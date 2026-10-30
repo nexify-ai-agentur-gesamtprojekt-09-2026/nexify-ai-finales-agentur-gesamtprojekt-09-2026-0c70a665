@@ -58,3 +58,29 @@ versionierten Asset-**Manifest** und `file`-Headern, nicht aus einem Live-ffprob
 
 ## 8. Offene, nur mit ffprobe belegbare Punkte (für deinen Folgeauftrag)
 - Exakte FPS, Codec-Profil/Level, `start_time`, Audio-Streams je Clip (Loops sind stumm → vermutlich 0 Audiostreams, unbelegt ohne ffprobe), genaue MP3-Dauer je Stimme.
+
+## 9. Eignungsprüfung vorhandener Lip-/Review-Assets (lesend, NEX-MEDIA-SYNC §5)
+Ergebnis: **keine wiederverwendbaren, freigegebenen, identitätstreuen Lippen-Ergebnisse.**
+- `config/page-media-registry.json` → `welcome-review-clip-v1`: **`status: review_only_not_approved`**.
+- `tools/produce_face_sync.py` markiert `portrait-input.mp4`/`lip-audio-3` ausdrücklich:
+  `'purpose':'isolated face-crop test, not final film'`, `voice_acceptance:False`, `release:False`.
+- `lip-input-*`/`lip-audio-*` stammen aus `tools/produce_home_hero.py`/`produce_face_sync.py` (Experimente),
+  sind in **keinem** Produktionspfad verdrahtet.
+→ Diese Assets werden **nicht** als Lippenperformance wiederverwendet (keine falsche Abnahme).
+
+## 10. Umsetzung Weg B (deterministischer Zeitgleichlauf, umgesetzt)
+`apps/web/components/TrioScene.tsx`: ein Controller, `audio.currentTime` = Master.
+- Pause friert Audio **und** Loop ein (nicht bei natürlichem Ende); Resume/Playing spielt beide.
+- Seek re-derive't die Loop-Zeit deterministisch per **Modulo** (`master%l.duration`) — ausdrücklich
+  Ambient, **keine** Frame-/Lippensync.
+- `waiting`/`stalled` koppelt (friert Loop), `seeked` richtet neu aus.
+- Starttoken verhindert, dass eine verspätete `play()`-Promise nach Pause/Unmount/Locale-Wechsel
+  neu startet; benigner `AbortError`/`NotAllowedError` wird **nicht** als harter Fehler gezeigt.
+- Locale-Wechsel stoppt die laufende Szene (Effekt-Cleanup + Token-Invalidierung).
+- Battery-IntersectionObserver setzt den Loop bei Scroll-in nur fort, wenn der Nutzer **nicht**
+  pausiert hat. Hero-Baseline (DOM/Klassen/testids/reduced-motion) unverändert.
+- Beleg: `make test` 583 grün (inkl. neuem Contract-Test `test_trioscene_is_single_audio_master_controller_weg_b`),
+  Resize real neu gemessen (108 Checks/0 Issues), Identity-Hero real nachgemessen (passed, errors:0).
+- **Nicht erfüllt/offen (keine Schönrechnung):** echte phonetische Lippensynchronität fehlt weiterhin
+  mangels geeigneter, freigegebener Lippen-Assets; echte Geräte-/Lippenabnahme steht aus.
+

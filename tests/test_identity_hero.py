@@ -64,6 +64,25 @@ class IdentityHeroTests(unittest.TestCase):
             self.assertNotIn(unsafe,trio_scene)
         self.assertIn('prefers-reduced-motion:reduce',css)
 
+    def test_trioscene_is_single_audio_master_controller_weg_b(self):
+        """NEX-MEDIA-SYNC-20261030-01 Weg B: one controller, audio is the master clock, the silent
+        ambient loop is coupled to the master STATE (play/pause/seek/stall) and never claimed as
+        lip performance; a robust play() + start token keep start/pause/replay coherent."""
+        trio=(ROOT/'apps/web/components/TrioScene.tsx').read_text()
+        self.assertIn('audio.currentTime is the master clock',trio)
+        self.assertNotRegex(trio,r'setInterval\(|Date\.now\(')
+        self.assertIn('syncLoopToMaster',trio)
+        self.assertIn('master%l.duration',trio)
+        self.assertIn('freezeLoop',trio)
+        self.assertIn('onWaiting',trio)
+        self.assertIn('onSeeked',trio)
+        self.assertIn('if(!audioRef.current?.ended)freezeLoop()',trio)
+        self.assertIn('pausedByUserRef',trio)
+        self.assertIn('startTokenRef',trio)
+        self.assertIn("err.name==='AbortError'",trio)
+        self.assertIn('NOT a lip performance',trio)
+
+
     def test_scene_ink_is_readable_across_the_entire_floor_gradient(self):
         colors=json.loads((ROOT/'config/design-tokens.json').read_text())['color']['identityScene']
         def luminance(name):
