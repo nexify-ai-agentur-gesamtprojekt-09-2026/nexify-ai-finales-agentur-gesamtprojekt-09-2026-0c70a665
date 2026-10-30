@@ -11,10 +11,17 @@ ROOT=Path(__file__).resolve().parents[1]
 class IdentityHeroTests(unittest.TestCase):
     def test_reference_is_version_bound_and_never_a_release_grant(self):
         spec=json.loads((ROOT/'config/identity-hero.json').read_text())
-        self.assertEqual(spec['source']['version'],1)
-        self.assertEqual(spec['source']['html_sha256'],'87cce3dcfee53bc6573efe1ae81e76bdf80f81542f5e746448a96ed087057e0c')
-        self.assertFalse(spec['decision']['production_release_granted_by_this_file'])
-        self.assertFalse(spec['video_produced']);self.assertFalse(spec['original_asset_bytes_changed'])
+        # zielbild-v2 (Live-Szene). Designrichtung freigegeben – aber diese Datei erteilt
+        # KEINE technische/Runtime-/Provider-/Produktions-Abnahme (Schutzgrenzen bleiben erhalten).
+        self.assertEqual(spec['schema_version'],2)
+        self.assertEqual(spec['id'],'identity-hero-v2')
+        status=spec['status']
+        self.assertTrue(status['design_direction_approved'])
+        self.assertEqual(status['technical_verification'],'pending')
+        self.assertFalse(status['video_or_provider_full_acceptance'])
+        self.assertFalse(status['runtime_or_provider_accepted'])
+        self.assertFalse(status['production_release_granted_by_this_file'])
+        self.assertFalse(spec['original_asset_bytes_changed'])
         self.assertEqual(spec['locales'],['de','nl','fr'])
 
     def test_all_original_assets_are_unchanged_and_distinct(self):

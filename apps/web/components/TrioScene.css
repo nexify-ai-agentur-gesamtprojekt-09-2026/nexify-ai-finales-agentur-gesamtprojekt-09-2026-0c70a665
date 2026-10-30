@@ -8,7 +8,9 @@
 .trio-stage:focus-visible { outline: var(--focus-ring); outline-offset: var(--space-2); }
 
 /* Lichtbänder */
-.trio-light { position: absolute; inset: -22% -34% -6%; width: auto; height: auto; max-width: none; z-index: 0; pointer-events: none; overflow: visible; }
+/* Horizontal bündig zur Bühne: die Lichtbänder zeichnen via overflow:visible weiterhin frei über den Rand,
+   aber die SVG-CSS-Box ragt nicht mehr seitlich hinaus (sonst Phantom-scrollWidth der Hero, u. a. bei 200%-Zoom). */
+.trio-light { position: absolute; inset: -22% 0 -6%; width: auto; height: auto; max-width: none; z-index: 0; pointer-events: none; overflow: visible; }
 .trio-ribbon { fill: none; stroke-width: 2.4; stroke-linecap: round; opacity: .55; }
 .trio-ribbon-glow { stroke-width: 26; opacity: .22; }
 .trio-ribbon-soft { stroke-width: 1.6; opacity: .3; }

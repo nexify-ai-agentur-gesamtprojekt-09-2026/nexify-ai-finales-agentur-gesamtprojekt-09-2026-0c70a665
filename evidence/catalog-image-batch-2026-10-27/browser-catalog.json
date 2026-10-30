@@ -76,7 +76,7 @@
     "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
     "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
-    "apps/web/lib/i18n.ts": "ac897c691d7ae8c6a2697fac102d008109bb812ad0196ba5e42062f609a4b298",
+    "apps/web/lib/i18n.ts": "30b47c5ef0de0ff0e1a9e723f8d10d61ca37dc260f457583be69286ea5a8f07f",
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/web/components/PublicExperience.tsx": "3d4c6d7b6e72069061f8f575a96e3036647001aa258731bf6764df7af1fd2d6d",
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",

@@ -43,6 +43,11 @@ try{
    await page.goto(origin+'/');await page.waitForFunction(l=>document.documentElement.lang===l,locale);await page.evaluate(()=>document.fonts.ready);
    await closePanel();
    await page.locator('.workspace-shell.is-closed').waitFor();
+   // Deferred Orientierung (React.lazy + Suspense) vollständig auflösen lassen, bevor gemessen wird:
+   // sonst tauscht die Suspense-Fallback-Zeile (.orientation-loading) mitten in der Font-Verdopplung
+   // DOM-Knoten aus (abgelöster Knoten -> getComputedStyle '' -> NaN). Kein Hero-Defekt, reine Testdeterminanz.
+   await page.locator('.public-orientation').waitFor({state:'attached'});
+   await page.locator('.orientation-loading').waitFor({state:'detached'}).catch(()=>{});
    for(const sidebar of width===1440?['closed','open']:['closed']){
     if(sidebar==='open'){await page.locator('.reopen-chat').click();await page.locator('.workspace-shell.is-open').waitFor();}
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -56,7 +61,7 @@ try{
      const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
      const scene=rect(h.querySelector('.identity-scene')),copy=rect(h.querySelector('.identity-copy')),stage=rect(h.querySelector('.trio-stage'));
      const figures=[...h.querySelectorAll('.trio-media .trio-poster')].map(i=>({speaker:'poster',rect:rect(i),src:i.getAttribute('src'),ratio:i.naturalWidth/i.naturalHeight,fit:getComputedStyle(i).objectFit,filter:getComputedStyle(i).filter,opacity:Number(getComputedStyle(i).opacity)}));
-     return {scene,copy,stage,figures,overflow:document.documentElement.scrollWidth>innerWidth+1,text_overflow:[...h.querySelectorAll('h1,h2,p')].some(e=>e.scrollWidth>e.clientWidth+1),stacked:getComputedStyle(h.querySelector('.trio-stage')).position==='relative'};
+     return {scene,copy,stage,figures,overflow:document.documentElement.scrollWidth>innerWidth+1,text_overflow:[...h.querySelectorAll('h1,h2,p')].some(e=>e.scrollWidth>e.clientWidth+1),stacked:getComputedStyle(h.querySelector('.identity-scene')).gridTemplateColumns.split(' ').filter(Boolean).length===1};
     });
     assert.equal(geometry.overflow,false,'viewport overflow');assert.equal(geometry.text_overflow,false,'text overflow');
     for(const f of geometry.figures){const r=f.rect,s=geometry.scene,c=geometry.copy;assert.ok(r.width>0&&r.height>0,'poster has size');assert.ok(/\/media\/home-loops\/welcome-loop\.jpg$/.test(f.src),'approved brand-stage poster: '+f.src);assert.ok(f.opacity>=0.99,'scene fully visible');assert.ok(undistorted(f.filter),'no identity-distorting filter: '+f.filter);assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,'whole scene inside hero scene');assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'copy/scene collision');}
@@ -65,13 +70,15 @@ try{
     await hero.screenshot({path:out+'/'+width+'-'+locale+'-'+sidebar+'.png'});
     views.push({width,locale,sidebar,...geometry,passed:true});
     await checkZoom(hero,{width,sidebar});
-    if(width===1440&&sidebar==='closed')for(const forcedWidth of [720,763,765,800]){
+   // Breakpoint-Register straddelt den systemweiten 820px-Umbruch (identisch zu Workspace/HomeJourney/HomeRebuild):
+   // echte Spaltenmessung, gestapelt bei <=820, zweispaltig ab 821. 200%-Zoom in BEIDEN Zuständen belegt.
+   if(width===1440&&sidebar==='closed')for(const forcedWidth of [764,820,821,1000]){
      await hero.evaluate((h,w)=>h.style.width=w+'px',forcedWidth);await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-     const probe=await hero.evaluate(h=>{const r=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};const scene=r(h.querySelector('.identity-scene')),copy=r(h.querySelector('.identity-copy'));return {scene,copy,stacked:getComputedStyle(h.querySelector('.trio-stage')).position==='relative',figures:[...h.querySelectorAll('.trio-media .trio-poster')].map(i=>r(i)),overflow:document.documentElement.scrollWidth>innerWidth+1};});
+     const probe=await hero.evaluate(h=>{const r=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};const scene=r(h.querySelector('.identity-scene')),copy=r(h.querySelector('.identity-copy'));return {scene,copy,stacked:getComputedStyle(h.querySelector('.identity-scene')).gridTemplateColumns.split(' ').filter(Boolean).length===1,figures:[...h.querySelectorAll('.trio-media .trio-poster')].map(i=>r(i)),overflow:document.documentElement.scrollWidth>innerWidth+1};});
      for(const r of probe.figures){const c=probe.copy,s=probe.scene;assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'breakpoint copy/figure collision');assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1);}
-     assert.equal(probe.overflow,false,'breakpoint overflow');assert.equal(probe.stacked,forcedWidth<=763,'stack threshold');
+     assert.equal(probe.overflow,false,'breakpoint overflow');assert.equal(probe.stacked,forcedWidth<=820,'stack threshold');
      await hero.screenshot({path:out+'/breakpoint-'+forcedWidth+'-'+locale+'.png'});views.push({width,forced_width:forcedWidth,locale,sidebar,breakpoint_probe:true,...probe,passed:true});
-     if(forcedWidth===720)await checkZoom(hero,{width,sidebar,forced_width:forcedWidth});
+     if(forcedWidth===764||forcedWidth===1000)await checkZoom(hero,{width,sidebar,forced_width:forcedWidth});
      await hero.evaluate(h=>h.style.removeProperty('width'));
     }
    }
@@ -88,6 +95,6 @@ try{
    await page.locator('.identity-primary-link').click();await page.waitForURL(origin+'/leistungsumfang');await page.goBack();await page.waitForURL(origin+'/');await page.locator('.identity-hero').waitFor();
   }finally{await context.close();}
  }
- assert.equal(views.length,24);assert.equal(text_resize.length,15);assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);
+ assert.equal(views.length,24);assert.equal(text_resize.length,18);assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);
  await writeFile(out+'/browser.json',JSON.stringify({renderer,scope:'zielbild-v2 live-scene; design approved (identity-hero-v2), technical checks executed; original figure PNG bytes; not video/provider/production acceptance',layout:'zielbild-v2',media_state:'live-scene',reduced_motion:'still',views,text_resize,asset_hashes,source_sha256:before,external_requests:0,page_errors:errors,passed:true},null,2)+'\n');console.log(JSON.stringify({renderer,layout:'zielbild-v2',views:views.length,text_resize:text_resize.length,locales:3,figures:3,external:0,errors:0,passed:true}));
 }finally{await browser.close();if(server)await new Promise(resolve=>server.httpServer.close(resolve));if(child){child.kill('SIGTERM');if(child.exitCode===null)await once(child,'exit');await writeFile(out+'/runtime.log',log);}}

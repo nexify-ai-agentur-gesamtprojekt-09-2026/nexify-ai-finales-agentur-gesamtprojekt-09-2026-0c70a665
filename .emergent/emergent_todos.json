@@ -1,26 +1,22 @@
 [
   {
-    "content": "P0: Hero-Tests (browser-identity-hero, browser-critical, browser-scene-images) gezielt accepted-v1 -> zielbild-v2 aktualisieren; Schutz-/Funktionsinvarianten erhalten (Figuren vollstaendig/unverzerrt, kein Overflow, keine Copy-Overlap)",
+    "content": "C: 200%-Zoom-Overflow ursächlich beheben + Hero-Test (browser-identity-hero.mjs) grün, 820-Breakpoint systemkonform",
+    "status": "completed"
+  },
+  {
+    "content": "C: übrige Hero-/Szenen-Generatoren auf zielbild-v2 ausführen (browser-critical.mjs, browser-scene-images.mjs falls vorhanden) real grün",
     "status": "in_progress"
   },
   {
-    "content": "P0: Oeffentlichen Text 'Bildszene / Video folgt' aus Kunden-UI entfernen -> dezente/interne Statusbehandlung, reduced-motion/pause/mobile beruecksichtigen",
+    "content": "B: echte Evidence regenerieren (alle browser-*.mjs Generatoren), reale Hashes + Manifest-/Byte-Bindung pro ausgeliefertem Asset validieren (nicht nur Pfad+Hash)",
     "status": "pending"
   },
   {
-    "content": "P0: Alle Browser-Evidence regenerieren + nach evidence/ kopieren (inkl. legal-footer next-browser via Next-Build)",
+    "content": "A/D: Reconciliation-Register + evidence source_sha256 nur nachverifiziert aktualisieren; make test vollständig grün",
     "status": "pending"
   },
   {
-    "content": "P0: config/acceptance-coverage.json source_sha256 fuer alle geaenderten Dateien erneuern + --render view; make test iterieren bis gruen",
-    "status": "pending"
-  },
-  {
-    "content": "Pre-Abschluss-Audit: apps/site vs apps/web/Clerk + Katalog/Preis/Bestand/Passung/Warenkorb/Checkout auf tatsaechliche Funktion pruefen; Restblocker konkret melden; B.V./NL-Quelle benennen",
-    "status": "pending"
-  },
-  {
-    "content": "Abschluss: versionsgebundener Pruefstand + Commit + Preview + offene Entscheidungen melden",
+    "content": "Next/Login + gerenderte Shop-E2E (apps/web + agent-gateway, Offline-Fixtures, Clerk)",
     "status": "pending"
   }
 ]
