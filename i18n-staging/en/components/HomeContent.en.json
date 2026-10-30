@@ -1,0 +1,52 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/HomeContent.tsx",
+ "_de_sha256": "b21dca52338ecfb84c911029a9af6c100dc6229cd6d63a21e740473ddc571be3",
+ "_locale_dict": "two dicts: main homepage copy + example/visual explainer (add en to each)",
+ "_keys": ["main","example"],
+ "en": {
+  "main": {
+   "project": "Your project first",
+   "projectBody": "What should become easier for your customers or your team? Tell us your goal. You don't need to know the technical solution yet.",
+   "projectAction": "Describe your project",
+   "projectKicker": "UNDERSTAND FIRST. THEN CONNECT.",
+   "projectNote": "One conversation. One clear next step.",
+   "choice": "How to find your starting point",
+   "choiceBody": "Do you want to present your offer online, simplify recurring work, or share information together? Choose the area that fits your task.",
+   "choiceKicker": "THREE PATHS. YOUR GOAL.",
+   "serviceLink": "View area",
+   "pathLabels": ["Website","Process","Portal"],
+   "pathDescriptions": ["Present your offer clearly","Simplify recurring work","Share information together"],
+   "process": "From goal to delivery, together",
+   "processBody": "We clarify the scope, agree the next steps and review the result together with you.",
+   "processKicker": "PLANNED WITH YOU. DELIVERED TOGETHER.",
+   "steps": [["Clarify","We start with your goal, the existing systems and the open questions."],["Agree the scope","We define what should be created, who is involved and how you will check the result."],["Build and review","You see concrete interim results. We review the agreed flows and feedback."],["Hand over","You receive the agreed results and a clear introduction."]],
+   "products": "Get to know the products and workspaces",
+   "productsBody": "Explore the different entry points and find out which one fits your project.",
+   "productKicker": "ONE SYSTEM. FITTING ENTRY POINTS.",
+   "productLink": "Get to know the product",
+   "productAvailability": "Scope and availability in each area",
+   "productDescriptions": ["The entry into the NeX2fly Suite and its workspaces.","Possibilities around NeX Agentic AI and AI Fly Oracle.","Interfaces and integration options for existing systems.","The independent TEILEKLAR shop world and its services."],
+   "finish": "What would you like to start with?",
+   "finishBody": "Describe your project to us or take a look at our services first.",
+   "finishAction": "Discuss your project",
+   "services": "View services",
+   "contact": "Prefer no chat? Get in touch",
+   "sceneAlt": "Pascal in conversation, accompanied by NeX",
+   "nexAlt": "NeX accompanies the three possible entry points",
+   "start": "Start",
+   "work": "Work",
+   "result": "Result",
+   "visualLabel": "Your goal sets the direction"
+  },
+  "example": {
+   "example": "Example: a request",
+   "input": "“We lose track of incoming requests.”",
+   "output": "Your request becomes a plan.",
+   "rows": [["Your goal","Keep requests in one place"],["The starting point","Emails, notes and follow-ups"],["Clarify together","Who takes which step?"],["Next","Define the right process"]],
+   "note": "Understand first. Then connect meaningfully.",
+   "choiceTitle": "Three paths. One clear benefit.",
+   "routes": [["Show your offer","Win matching requests"],["Connect processes","Avoid duplicate entry"],["Bundle knowledge","Everyone on the same page"]]
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/SiteFooter.tsx",
+ "_de_sha256": "a15a9cb79ed215dd2b1c45ba197256dad94c96809a744cab2e932676ddcea74c",
+ "_locale_dict": "copy: Record<Locale, {...}> (add en)",
+ "_keys": ["intro","products","orientation","company","legal","places","all","allHint","preview","home","contact","more","services","productsShort","knowledge","shop","account","languages","claim"],
+ "en": {
+  "intro": "Ideas become clear next steps. Discuss in person, connect digitally, move forward together.",
+  "products": "Products and areas",
+  "orientation": "Orientation",
+  "company": "Company",
+  "legal": "Legal",
+  "places": "Cities and workshops",
+  "all": "Site overview",
+  "allHint": "All pages in this area, organized by topic",
+  "preview": "Development preview",
+  "home": "To the homepage",
+  "contact": "Discuss your project",
+  "more": "More pages",
+  "services": "Services",
+  "productsShort": "Products",
+  "knowledge": "Knowledge and company",
+  "shop": "TEILEKLAR",
+  "account": "Account",
+  "languages": "Language",
+  "claim": "Chat it. Automate it."
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/SiteNavigation.tsx",
+ "_de_sha256": "4d4508069a139af8b8521496c154ee0a17dd6789fb5fcdee539bf0a25dcc690b",
+ "_locale_dict": "copy: Record<Locale, {...}> (add en)",
+ "_keys": ["nav","menu","close","services","products","knowledge","contact","intro","ai","shop","start","hint","talk","overview","account"],
+ "en": {
+  "nav": "Main navigation",
+  "menu": "Menu",
+  "close": "Close menu",
+  "services": "Services",
+  "products": "Products",
+  "knowledge": "Approach",
+  "contact": "Contact",
+  "intro": "The right entry point for your project.",
+  "ai": "NeXify AI",
+  "shop": "TEILEKLAR",
+  "start": "Your starting point",
+  "hint": "Not sure yet what you need?",
+  "talk": "Discuss your project",
+  "overview": "View all products",
+  "account": "Your account"
+ }
+}

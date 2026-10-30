@@ -1,0 +1,15 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/PublicRequestFallback.tsx",
+ "_de_sha256": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
+ "_locale_dict": "copy: Record<Locale, {...}> (add en)",
+ "_keys": ["feature","chat","featureBody","chatBody","contact","reload"],
+ "en": {
+  "feature": "Direct contact",
+  "chat": "Orientation momentarily unavailable",
+  "featureBody": "This function is not yet connected here. Please write to us by email to discuss your project instead.",
+  "chatBody": "The conversation could not be loaded. The public pages remain available. You can also write to us by email.",
+  "contact": "Open the contact page",
+  "reload": "Reload the page"
+ }
+}
