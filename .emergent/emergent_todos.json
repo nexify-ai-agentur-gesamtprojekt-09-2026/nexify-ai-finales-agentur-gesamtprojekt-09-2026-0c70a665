@@ -1,22 +1,30 @@
 [
   {
-    "content": "EN-Komponenten-Staging A/B/C: alle 21 Komponenten als EN-Quellfragmente, quell-SHA-gebunden & verifiziert, in 3 Gruppen committet",
+    "content": "POC: /teileklar/kasse Copy kundengerecht (DE/NL/FR)",
     "status": "completed"
   },
   {
-    "content": "Git-Workflow-Trigger read-only geprueft: Branch-Push => nur ci.yml (read-only, kein Deploy), kein Agentenrun, kein Prod",
+    "content": "Evidenz-Kaskade POC regenerieren + make test 583 OK",
     "status": "completed"
   },
   {
-    "content": "Handoff-Push handoff/2026-10-30-release: BLOCKIERT durch ungueltigen GitHub-Token; Reconnect-Anleitung + Basis-SHA/Dateigrenzen geliefert",
+    "content": "Paket 1: alle TEILEKLAR Shop-Routen (16) kundengerecht umschreiben",
     "status": "completed"
   },
   {
-    "content": "OFFEN (nach Reconnect, geschuetzt): Branch-Push durch Pascal via Save-to-GitHub",
-    "status": "pending"
+    "content": "Paket 1 Evidenz-Kaskade regenerieren + make test 583 OK",
+    "status": "completed"
   },
   {
-    "content": "OFFEN (eigenes Paket): Shop/Katalog-Release - bestehender Shop vorhanden & ehrlich (\"kein freigegebener Katalog\"); echte Produkt/Preis/Bestand/Lieferbindung FEHLT (keine verifizierte Quelle) -> praezise benannt, kein Fake",
-    "status": "pending"
+    "content": "EN-Staging Drift (inventory.json sourceSHA + Drift-Notiz) nachführen",
+    "status": "completed"
+  },
+  {
+    "content": "Paket 1 Vorher/Nachher-Belege + verbleibende Pfadliste dokumentieren",
+    "status": "completed"
+  },
+  {
+    "content": "CHECKPOINT: Paket 1 an Nutzer berichten, Freigabe für Paket 2 (Partner/affiliate) + Paket 3 (Agentur) + Paket 4 (Chrome) abwarten",
+    "status": "in_progress"
   }
 ]

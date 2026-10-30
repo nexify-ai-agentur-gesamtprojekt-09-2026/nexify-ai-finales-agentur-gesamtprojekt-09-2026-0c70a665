@@ -3582,28 +3582,28 @@
       "id": "tk-home",
       "path": "/teileklar",
       "title": {
-        "de": "TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
-        "nl": "TEILEKLAR: onderdelen, voertuig en vervolgstappen",
-        "fr": "TEILEKLAR : pièces, véhicule et prochaines étapes"
+        "de": "TEILEKLAR: Teile und Fahrzeugservice",
+        "nl": "TEILEKLAR: onderdelen en voertuigservice",
+        "fr": "TEILEKLAR : pièces et service véhicule"
       },
       "summary": {
-        "de": "TEILEKLAR ist ein eigener Handelsbereich mit Fahrzeug- und Teilekontext. Der Shop ist in Vorbereitung. Ohne freigegebene Produkt-, Preis- und Lieferdaten werden weder Verfügbarkeit noch Passung oder Kaufabschluss behauptet.",
-        "nl": "TEILEKLAR is een eigen handelsgebied met voertuig- en onderdelencontext. De winkel is in voorbereiding. Zonder vrijgegeven product-, prijs- en levergegevens worden beschikbaarheid, passendheid of verkoop niet geclaimd.",
-        "fr": "TEILEKLAR constitue un contexte commercial propre lié aux véhicules et pièces. La boutique est en préparation. Disponibilité, compatibilité et vente ne sont pas annoncées sans données validées."
+        "de": "TEILEKLAR ist Ihr Anlaufpunkt für Autoteile mit passendem Fahrzeugbezug und Werkstattservice. Sie beschreiben Fahrzeug und gewünschtes Teil, wir finden gemeinsam die richtige Lösung und die nächsten Schritte – vom passenden Teil bis zum Werkstatttermin.",
+        "nl": "TEILEKLAR is uw aanspreekpunt voor auto-onderdelen met de juiste voertuigkoppeling en werkplaatsservice. U beschrijft voertuig en gewenst onderdeel, en samen vinden we de juiste oplossing en de volgende stappen – van het passende onderdeel tot de werkplaatsafspraak.",
+        "fr": "TEILEKLAR est votre point de contact pour les pièces auto avec le bon rattachement véhicule et un service d’atelier. Vous décrivez votre véhicule et la pièce souhaitée, et nous trouvons ensemble la bonne solution et les prochaines étapes – de la pièce adaptée au rendez-vous atelier."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
-            "nl": "TEILEKLAR: onderdelen, voertuig en vervolgstappen",
-            "fr": "TEILEKLAR : pièces, véhicule et prochaines étapes"
+            "de": "Teile, Fahrzeug und Service an einem Ort",
+            "nl": "Onderdelen, voertuig en service op één plek",
+            "fr": "Pièces, véhicule et service au même endroit"
           },
           "body": {
-            "de": "TEILEKLAR ist ein eigener Handelsbereich mit Fahrzeug- und Teilekontext. Der Shop ist in Vorbereitung. Ohne freigegebene Produkt-, Preis- und Lieferdaten werden weder Verfügbarkeit noch Passung oder Kaufabschluss behauptet.",
-            "nl": "TEILEKLAR is een eigen handelsgebied met voertuig- en onderdelencontext. De winkel is in voorbereiding. Zonder vrijgegeven product-, prijs- en levergegevens worden beschikbaarheid, passendheid of verkoop niet geclaimd.",
-            "fr": "TEILEKLAR constitue un contexte commercial propre lié aux véhicules et pièces. La boutique est en préparation. Disponibilité, compatibilité et vente ne sont pas annoncées sans données validées."
+            "de": "Bei TEILEKLAR bringen wir Teile, Fahrzeugbezug und Werkstatt zusammen. So finden Sie schneller das passende Teil und wissen, wie es weitergeht – ohne Rätselraten bei der Passung.",
+            "nl": "Bij TEILEKLAR brengen we onderdelen, voertuigkoppeling en werkplaats samen. Zo vindt u sneller het passende onderdeel en weet u hoe het verdergaat – zonder giswerk over de pasvorm.",
+            "fr": "Chez TEILEKLAR, nous réunissons pièces, rattachement véhicule et atelier. Vous trouvez ainsi plus vite la bonne pièce et savez comment avancer – sans deviner la compatibilité."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -3619,26 +3619,9 @@
             "fr": "Comment fonctionne TEILEKLAR"
           },
           "body": {
-            "de": "TEILEKLAR bringt Teile, Fahrzeugbezug und Werkstatt zusammen. Du beschreibst dein Fahrzeug und das gesuchte Teil; passende Optionen und nächste Schritte erscheinen, sobald ein freigegebener Teilebestand vorliegt. Bis dahin werden keine erfundenen Treffer, Preise oder Lieferzeiten angezeigt.",
-            "nl": "TEILEKLAR brengt onderdelen, voertuigkoppeling en werkplaats samen. Je beschrijft je voertuig en het gezochte onderdeel; passende opties en vervolgstappen verschijnen zodra er een vrijgegeven onderdelenbestand is. Tot die tijd worden geen verzonnen resultaten, prijzen of levertijden getoond.",
-            "fr": "TEILEKLAR réunit pièces, compatibilité véhicule et atelier. Tu décris ton véhicule et la pièce recherchée ; options et étapes apparaissent dès qu’un catalogue validé est disponible. En attendant, aucun résultat, prix ou délai fictif n’est affiché."
-          },
-          "source_refs": [
-            "docs/09-final/11-teileklar-datenblatt.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
-          ]
-        },
-        {
-          "id": "fahrzeug-und-werkstatt",
-          "heading": {
-            "de": "Fahrzeugbezug und Werkstatttermin",
-            "nl": "Voertuigkoppeling en werkplaatsafspraak",
-            "fr": "Compatibilité et rendez-vous atelier"
-          },
-          "body": {
-            "de": "Hinterlege dein Fahrzeug, damit die Passung belegbar wird, statt geraten zu werden. Wenn eine Werkstatt nötig ist, kannst du einen Termin anfragen. Werkstattdaten erscheinen nur, wenn sie freigegeben sind – keine erfundenen Standorte.",
-            "nl": "Leg je voertuig vast zodat de passendheid onderbouwd is in plaats van gegokt. Is een werkplaats nodig, dan kun je een afspraak aanvragen. Werkplaatsgegevens verschijnen alleen als ze zijn vrijgegeven – geen verzonnen locaties.",
-            "fr": "Enregistre ton véhicule pour que la compatibilité soit étayée plutôt que devinée. Si un atelier est nécessaire, tu peux demander un rendez-vous. Les données atelier n’apparaissent que si elles sont validées – aucune adresse inventée."
+            "de": "Beschreiben Sie Ihr Fahrzeug und das gesuchte Teil. Wir melden uns mit passenden Optionen, klären die Passung und schlagen bei Bedarf einen Werkstatttermin vor. Sie entscheiden in Ruhe, bevor etwas verbindlich wird.",
+            "nl": "Beschrijf uw voertuig en het gezochte onderdeel. Wij komen terug met passende opties, controleren de pasvorm en stellen indien nodig een werkplaatsafspraak voor. U beslist rustig voordat er iets bindend wordt.",
+            "fr": "Décrivez votre véhicule et la pièce recherchée. Nous revenons avec des options adaptées, vérifions la compatibilité et proposons au besoin un rendez-vous atelier. Vous décidez tranquillement avant tout engagement."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -3648,9 +3631,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "TEILEKLAR ist ein eigener Handelsbereich mit Fahrzeug- und Teilekontext. Der Shop ist in Vorbereitung. Ohne freigegebene Produkt-, Preis- und Lieferdaten werden weder Verfügbarkeit noch Passung oder Kaufabschluss behauptet.",
-          "nl": "TEILEKLAR is een eigen handelsgebied met voertuig- en onderdelencontext. De winkel is in voorbereiding. Zonder vrijgegeven product-, prijs- en levergegevens worden beschikbaarheid, passendheid of verkoop niet geclaimd.",
-          "fr": "TEILEKLAR constitue un contexte commercial propre lié aux véhicules et pièces. La boutique est en préparation. Disponibilité, compatibilité et vente ne sont pas annoncées sans données validées."
+          "de": "TEILEKLAR ist Ihr Anlaufpunkt für Autoteile mit passendem Fahrzeugbezug und Werkstattservice. Sie beschreiben Fahrzeug und gewünschtes Teil, wir finden gemeinsam die richtige Lösung und die nächsten Schritte – vom passenden Teil bis zum Werkstatttermin.",
+          "nl": "TEILEKLAR is uw aanspreekpunt voor auto-onderdelen met de juiste voertuigkoppeling en werkplaatsservice. U beschrijft voertuig en gewenst onderdeel, en samen vinden we de juiste oplossing en de volgende stappen – van het passende onderdeel tot de werkplaatsafspraak.",
+          "fr": "TEILEKLAR est votre point de contact pour les pièces auto avec le bon rattachement véhicule et un service d’atelier. Vous décrivez votre véhicule et la pièce souhaitée, et nous trouvons ensemble la bonne solution et les prochaines étapes – de la pièce adaptée au rendez-vous atelier."
         },
         "canonical_path": "/teileklar",
         "canonical_origin": null,
@@ -3686,36 +3669,36 @@
           "type": "route",
           "target_id": "tk-search",
           "label": {
-            "de": "Weiter: Teilesuche: in Vorbereitung",
-            "nl": "Verder: Onderdelen zoeken: in voorbereiding",
-            "fr": "Suite : Recherche de pièces : en préparation"
+            "de": "Teil suchen",
+            "nl": "Onderdeel zoeken",
+            "fr": "Rechercher une pièce"
           }
         },
         {
           "type": "route",
           "target_id": "tk-fitment",
           "label": {
-            "de": "Weiter: Fahrzeug und belegte Passung",
-            "nl": "Verder: Voertuig en onderbouwde passendheid",
-            "fr": "Suite : Véhicule et compatibilité étayée"
+            "de": "Fahrzeug und Passung",
+            "nl": "Voertuig en pasvorm",
+            "fr": "Véhicule et compatibilité"
           }
         },
         {
           "type": "route",
           "target_id": "tk-partner",
           "label": {
-            "de": "Weiter: Werkstattpartner werden",
-            "nl": "Verder: Werkplaatspartner worden",
-            "fr": "Suite : Devenir partenaire atelier"
+            "de": "Werkstattpartner werden",
+            "nl": "Werkplaatspartner worden",
+            "fr": "Devenir atelier partenaire"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Anliegen im Chat klären",
+            "nl": "Vraag in de chat bespreken",
+            "fr": "Préciser votre besoin dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -3727,28 +3710,28 @@
       "id": "tk-search",
       "path": "/teileklar/suche",
       "title": {
-        "de": "Teilesuche: in Vorbereitung",
-        "nl": "Onderdelen zoeken: in voorbereiding",
-        "fr": "Recherche de pièces : en préparation"
+        "de": "Teil suchen",
+        "nl": "Onderdeel zoeken",
+        "fr": "Rechercher une pièce"
       },
       "summary": {
-        "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
-        "nl": "Zoeken vereist een vrijgegeven onderdelenbestand. Tot die tijd kunt u voertuig en behoefte gestructureerd beschrijven; er worden geen verzonnen resultaten of levertijden getoond.",
-        "fr": "La recherche nécessite un catalogue validé. Vous pouvez en attendant décrire le véhicule et le besoin ; aucun résultat ou délai fictif n’est affiché."
+        "de": "Sagen Sie uns, welches Teil Sie für welches Fahrzeug brauchen. Wir prüfen die Passung und melden uns mit konkreten Optionen und dem besten nächsten Schritt. Die selbstständige Online-Suche im Katalog öffnen wir in Kürze.",
+        "nl": "Vertel ons welk onderdeel u voor welk voertuig nodig heeft. Wij controleren de pasvorm en komen terug met concrete opties en de beste volgende stap. De zelfstandige online zoekfunctie in de catalogus openen we binnenkort.",
+        "fr": "Dites-nous quelle pièce vous faut pour quel véhicule. Nous vérifions la compatibilité et revenons avec des options concrètes et la meilleure étape suivante. La recherche en ligne autonome dans le catalogue ouvrira prochainement."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Teilesuche: in Vorbereitung",
-            "nl": "Onderdelen zoeken: in voorbereiding",
-            "fr": "Recherche de pièces : en préparation"
+            "de": "Das passende Teil finden",
+            "nl": "Het juiste onderdeel vinden",
+            "fr": "Trouver la bonne pièce"
           },
           "body": {
-            "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
-            "nl": "Zoeken vereist een vrijgegeven onderdelenbestand. Tot die tijd kunt u voertuig en behoefte gestructureerd beschrijven; er worden geen verzonnen resultaten of levertijden getoond.",
-            "fr": "La recherche nécessite un catalogue validé. Vous pouvez en attendant décrire le véhicule et le besoin ; aucun résultat ou délai fictif n’est affiché."
+            "de": "Beschreiben Sie Fahrzeug, Baujahr und das gesuchte Teil möglichst genau. Je klarer die Angaben, desto schneller finden wir die passende Lösung für Sie.",
+            "nl": "Beschrijf voertuig, bouwjaar en het gezochte onderdeel zo nauwkeurig mogelijk. Hoe duidelijker de gegevens, hoe sneller we de passende oplossing voor u vinden.",
+            "fr": "Décrivez le véhicule, l’année et la pièce recherchée le plus précisément possible. Plus les informations sont claires, plus vite nous trouvons la bonne solution pour vous."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -3759,14 +3742,14 @@
         {
           "id": "jetzt-schon-moeglich",
           "heading": {
-            "de": "Was jetzt schon möglich ist",
-            "nl": "Wat nu al mogelijk is",
-            "fr": "Ce qui est déjà possible"
+            "de": "Was Sie jetzt tun können",
+            "nl": "Wat u nu al kunt doen",
+            "fr": "Ce que vous pouvez faire dès maintenant"
           },
           "body": {
-            "de": "Du kannst Fahrzeug und gesuchtes Teil strukturiert als Anfrage beschreiben. Die eigentliche Suche mit Treffern erscheint, sobald ein freigegebener Teilebestand vorliegt – ohne erfundene Ergebnisse.",
-            "nl": "Je kunt voertuig en gezocht onderdeel gestructureerd als aanvraag beschrijven. De echte zoekfunctie met resultaten verschijnt zodra er een vrijgegeven onderdelenbestand is – zonder verzonnen resultaten.",
-            "fr": "Tu peux décrire ton véhicule et la pièce recherchée sous forme de demande. La recherche avec résultats apparaîtra dès qu’un catalogue validé sera disponible – sans résultats fictifs."
+            "de": "Senden Sie uns Ihre Anfrage mit Fahrzeug und Teil. Wir melden uns persönlich mit passenden Optionen, Preis- und Lieferinformationen – verlässlich statt mit unklaren Treffern.",
+            "nl": "Stuur ons uw aanvraag met voertuig en onderdeel. Wij nemen persoonlijk contact op met passende opties, prijs- en leverinformatie – betrouwbaar in plaats van met vage resultaten.",
+            "fr": "Envoyez-nous votre demande avec véhicule et pièce. Nous revenons personnellement avec des options adaptées, des informations de prix et de livraison – fiables plutôt que des résultats flous."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -3776,9 +3759,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
-          "nl": "Zoeken vereist een vrijgegeven onderdelenbestand. Tot die tijd kunt u voertuig en behoefte gestructureerd beschrijven; er worden geen verzonnen resultaten of levertijden getoond.",
-          "fr": "La recherche nécessite un catalogue validé. Vous pouvez en attendant décrire le véhicule et le besoin ; aucun résultat ou délai fictif n’est affiché."
+          "de": "Sagen Sie uns, welches Teil Sie für welches Fahrzeug brauchen. Wir prüfen die Passung und melden uns mit konkreten Optionen und dem besten nächsten Schritt. Die selbstständige Online-Suche im Katalog öffnen wir in Kürze.",
+          "nl": "Vertel ons welk onderdeel u voor welk voertuig nodig heeft. Wij controleren de pasvorm en komen terug met concrete opties en de beste volgende stap. De zelfstandige online zoekfunctie in de catalogus openen we binnenkort.",
+          "fr": "Dites-nous quelle pièce vous faut pour quel véhicule. Nous vérifions la compatibilité et revenons avec des options concrètes et la meilleure étape suivante. La recherche en ligne autonome dans le catalogue ouvrira prochainement."
         },
         "canonical_path": "/teileklar/suche",
         "canonical_origin": null,
@@ -3814,36 +3797,36 @@
           "type": "route",
           "target_id": "tk-fitment",
           "label": {
-            "de": "Weiter: Fahrzeug und belegte Passung",
-            "nl": "Verder: Voertuig en onderbouwde passendheid",
-            "fr": "Suite : Véhicule et compatibilité étayée"
+            "de": "Fahrzeug und Passung",
+            "nl": "Voertuig en pasvorm",
+            "fr": "Véhicule et compatibilité"
           }
         },
         {
           "type": "route",
           "target_id": "tk-categories",
           "label": {
-            "de": "Weiter: Sortiment und Kategorien",
-            "nl": "Verder: Assortiment en categorieën",
-            "fr": "Suite : Assortiment et catégories"
+            "de": "Sortiment ansehen",
+            "nl": "Assortiment bekijken",
+            "fr": "Voir l’assortiment"
           }
         },
         {
           "type": "route",
           "target_id": "tk-product",
           "label": {
-            "de": "Weiter: Produktdetails: in Vorbereitung",
-            "nl": "Verder: Productdetails: in voorbereiding",
-            "fr": "Suite : Détails produit : en préparation"
+            "de": "Produktdetails",
+            "nl": "Productdetails",
+            "fr": "Détails produit"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Teil im Chat anfragen",
+            "nl": "Onderdeel in de chat aanvragen",
+            "fr": "Demander une pièce dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -3860,9 +3843,9 @@
         "fr": "Assortiment et catégories"
       },
       "summary": {
-        "de": "Kategorien ordnen erst den freigegebenen Katalog. Aktuell werden keine angeblich verfügbaren Artikelzahlen oder Markenbestände veröffentlicht.",
-        "nl": "Categorieën ordenen uitsluitend de vrijgegeven catalogus. Er worden momenteel geen beweerde aantallen beschikbare artikelen of merkvoorraden gepubliceerd.",
-        "fr": "Les catégories organisent uniquement le catalogue validé. Aucun nombre prétendument disponible ni stock de marques n’est actuellement publié."
+        "de": "Unser Sortiment ist nach Fahrzeugbereichen und Teilearten gegliedert, damit Sie sich schnell orientieren. Für konkrete Artikel und Preise beraten wir Sie gezielt zu Ihrem Fahrzeug.",
+        "nl": "Ons assortiment is ingedeeld naar voertuigonderdelen en soorten onderdelen, zodat u zich snel oriënteert. Voor concrete artikelen en prijzen adviseren we u gericht voor uw voertuig.",
+        "fr": "Notre assortiment est organisé par domaines du véhicule et types de pièces, pour vous repérer vite. Pour des articles et prix concrets, nous vous conseillons précisément selon votre véhicule."
       },
       "site_context": "teileklar",
       "sections": [
@@ -3874,9 +3857,9 @@
             "fr": "Assortiment et catégories"
           },
           "body": {
-            "de": "Kategorien ordnen erst den freigegebenen Katalog. Aktuell werden keine angeblich verfügbaren Artikelzahlen oder Markenbestände veröffentlicht.",
-            "nl": "Categorieën ordenen uitsluitend de vrijgegeven catalogus. Er worden momenteel geen beweerde aantallen beschikbare artikelen of merkvoorraden gepubliceerd.",
-            "fr": "Les catégories organisent uniquement le catalogue validé. Aucun nombre prétendument disponible ni stock de marques n’est actuellement publié."
+            "de": "Die Kategorien geben Ihnen einen schnellen Überblick über die Bereiche, in denen wir Teile anbieten – von Verschleißteilen bis Zubehör.",
+            "nl": "De categorieën geven u snel overzicht van de gebieden waarin we onderdelen aanbieden – van slijtdelen tot accessoires.",
+            "fr": "Les catégories vous donnent un aperçu rapide des domaines où nous proposons des pièces – des pièces d’usure aux accessoires."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -3892,9 +3875,9 @@
             "fr": "Repères dans l’assortiment"
           },
           "body": {
-            "de": "Die Kategorien geben die geplante Struktur des Sortiments wieder. Konkrete Artikel, Verfügbarkeiten und Preise erscheinen erst mit bestätigten Katalogdaten. So bleibt die Übersicht ehrlich und belastbar.",
-            "nl": "De categorieën tonen de geplande structuur van het assortiment. Concrete artikelen, beschikbaarheid en prijzen verschijnen pas met bevestigde catalogusdata. Zo blijft het overzicht eerlijk en betrouwbaar.",
-            "fr": "Les catégories reflètent la structure prévue de l’assortiment. Articles, disponibilités et prix n’apparaissent qu’avec des données catalogue confirmées. L’aperçu reste ainsi honnête et fiable."
+            "de": "Wählen Sie den passenden Bereich und beschreiben Sie Ihr Fahrzeug. Wir zeigen Ihnen gezielt die Teile, die für Sie in Frage kommen, und klären Verfügbarkeit und Preis individuell.",
+            "nl": "Kies het passende gebied en beschrijf uw voertuig. Wij tonen u gericht de onderdelen die voor u in aanmerking komen en verduidelijken beschikbaarheid en prijs individueel.",
+            "fr": "Choisissez le domaine adapté et décrivez votre véhicule. Nous vous montrons précisément les pièces envisageables et clarifions disponibilité et prix au cas par cas."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -3904,9 +3887,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Kategorien ordnen erst den freigegebenen Katalog. Aktuell werden keine angeblich verfügbaren Artikelzahlen oder Markenbestände veröffentlicht.",
-          "nl": "Categorieën ordenen uitsluitend de vrijgegeven catalogus. Er worden momenteel geen beweerde aantallen beschikbare artikelen of merkvoorraden gepubliceerd.",
-          "fr": "Les catégories organisent uniquement le catalogue validé. Aucun nombre prétendument disponible ni stock de marques n’est actuellement publié."
+          "de": "Unser Sortiment ist nach Fahrzeugbereichen und Teilearten gegliedert, damit Sie sich schnell orientieren. Für konkrete Artikel und Preise beraten wir Sie gezielt zu Ihrem Fahrzeug.",
+          "nl": "Ons assortiment is ingedeeld naar voertuigonderdelen en soorten onderdelen, zodat u zich snel oriënteert. Voor concrete artikelen en prijzen adviseren we u gericht voor uw voertuig.",
+          "fr": "Notre assortiment est organisé par domaines du véhicule et types de pièces, pour vous repérer vite. Pour des articles et prix concrets, nous vous conseillons précisément selon votre véhicule."
         },
         "canonical_path": "/teileklar/kategorien",
         "canonical_origin": null,
@@ -3942,27 +3925,27 @@
           "type": "route",
           "target_id": "tk-category",
           "label": {
-            "de": "Weiter: Kategorieansicht: in Vorbereitung",
-            "nl": "Verder: Categorieweergave: in voorbereiding",
-            "fr": "Suite : Vue de catégorie : en préparation"
+            "de": "Kategorie ansehen",
+            "nl": "Categorie bekijken",
+            "fr": "Voir la catégorie"
           }
         },
         {
           "type": "route",
           "target_id": "tk-search",
           "label": {
-            "de": "Weiter: Teilesuche: in Vorbereitung",
-            "nl": "Verder: Onderdelen zoeken: in voorbereiding",
-            "fr": "Suite : Recherche de pièces : en préparation"
+            "de": "Teil suchen",
+            "nl": "Onderdeel zoeken",
+            "fr": "Rechercher une pièce"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Beratung im Chat",
+            "nl": "Advies in de chat",
+            "fr": "Conseil dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -3974,28 +3957,28 @@
       "id": "tk-category",
       "path": "/teileklar/kategorie",
       "title": {
-        "de": "Kategorieansicht: in Vorbereitung",
-        "nl": "Categorieweergave: in voorbereiding",
-        "fr": "Vue de catégorie : en préparation"
+        "de": "Kategorie",
+        "nl": "Categorie",
+        "fr": "Catégorie"
       },
       "summary": {
-        "de": "Eine Kategorieansicht zeigt später die belegten Eigenschaften und passenden Filter ihrer Artikel. Bis diese Daten freigegeben sind, führt der nächste Schritt zur Bedarfsklärung statt zu einem erfundenen Sortiment.",
-        "nl": "Een categorieweergave toont later onderbouwde eigenschappen en relevante filters. Tot vrijgave van die gegevens gaat de volgende stap naar behoefteverheldering, niet naar een verzonnen assortiment.",
-        "fr": "Une catégorie présentera les caractéristiques étayées et filtres adaptés. Avant validation de ces données, l’étape suivante sert à préciser le besoin, sans assortiment fictif."
+        "de": "In einer Kategorie sehen Sie die passenden Teilearten und können Ihre Auswahl eingrenzen. Zu konkreten Artikeln beraten wir Sie passend zu Ihrem Fahrzeug, damit die Passung stimmt.",
+        "nl": "In een categorie ziet u de passende soorten onderdelen en kunt u uw keuze verfijnen. Voor concrete artikelen adviseren we u passend bij uw voertuig, zodat de pasvorm klopt.",
+        "fr": "Dans une catégorie, vous voyez les types de pièces adaptés et pouvez affiner votre choix. Pour des articles concrets, nous vous conseillons selon votre véhicule, afin que la compatibilité soit juste."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Kategorieansicht: in Vorbereitung",
-            "nl": "Categorieweergave: in voorbereiding",
-            "fr": "Vue de catégorie : en préparation"
+            "de": "Kategorie ansehen",
+            "nl": "Categorie bekijken",
+            "fr": "Voir la catégorie"
           },
           "body": {
-            "de": "Eine Kategorieansicht zeigt später die belegten Eigenschaften und passenden Filter ihrer Artikel. Bis diese Daten freigegeben sind, führt der nächste Schritt zur Bedarfsklärung statt zu einem erfundenen Sortiment.",
-            "nl": "Een categorieweergave toont later onderbouwde eigenschappen en relevante filters. Tot vrijgave van die gegevens gaat de volgende stap naar behoefteverheldering, niet naar een verzonnen assortiment.",
-            "fr": "Une catégorie présentera les caractéristiques étayées et filtres adaptés. Avant validation de ces données, l’étape suivante sert à préciser le besoin, sans assortiment fictif."
+            "de": "Grenzen Sie mit Fahrzeug und Teileart ein, was für Sie passt. So sehen Sie schneller die sinnvollen Optionen und sparen sich unpassende Treffer.",
+            "nl": "Baken met voertuig en soort onderdeel af wat bij u past. Zo ziet u sneller de zinvolle opties en bespaart u zich onpassende resultaten.",
+            "fr": "Affinez avec le véhicule et le type de pièce ce qui vous convient. Vous voyez ainsi plus vite les options pertinentes et évitez les résultats inadaptés."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4006,9 +3989,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Eine Kategorieansicht zeigt später die belegten Eigenschaften und passenden Filter ihrer Artikel. Bis diese Daten freigegeben sind, führt der nächste Schritt zur Bedarfsklärung statt zu einem erfundenen Sortiment.",
-          "nl": "Een categorieweergave toont later onderbouwde eigenschappen en relevante filters. Tot vrijgave van die gegevens gaat de volgende stap naar behoefteverheldering, niet naar een verzonnen assortiment.",
-          "fr": "Une catégorie présentera les caractéristiques étayées et filtres adaptés. Avant validation de ces données, l’étape suivante sert à préciser le besoin, sans assortiment fictif."
+          "de": "In einer Kategorie sehen Sie die passenden Teilearten und können Ihre Auswahl eingrenzen. Zu konkreten Artikeln beraten wir Sie passend zu Ihrem Fahrzeug, damit die Passung stimmt.",
+          "nl": "In een categorie ziet u de passende soorten onderdelen en kunt u uw keuze verfijnen. Voor concrete artikelen adviseren we u passend bij uw voertuig, zodat de pasvorm klopt.",
+          "fr": "Dans une catégorie, vous voyez les types de pièces adaptés et pouvez affiner votre choix. Pour des articles concrets, nous vous conseillons selon votre véhicule, afin que la compatibilité soit juste."
         },
         "canonical_path": "/teileklar/kategorie",
         "canonical_origin": null,
@@ -4044,27 +4027,27 @@
           "type": "route",
           "target_id": "tk-product",
           "label": {
-            "de": "Weiter: Produktdetails: in Vorbereitung",
-            "nl": "Verder: Productdetails: in voorbereiding",
-            "fr": "Suite : Détails produit : en préparation"
+            "de": "Produktdetails",
+            "nl": "Productdetails",
+            "fr": "Détails produit"
           }
         },
         {
           "type": "route",
           "target_id": "tk-search",
           "label": {
-            "de": "Weiter: Teilesuche: in Vorbereitung",
-            "nl": "Verder: Onderdelen zoeken: in voorbereiding",
-            "fr": "Suite : Recherche de pièces : en préparation"
+            "de": "Teil suchen",
+            "nl": "Onderdeel zoeken",
+            "fr": "Rechercher une pièce"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Beratung im Chat",
+            "nl": "Advies in de chat",
+            "fr": "Conseil dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4076,28 +4059,28 @@
       "id": "tk-product",
       "path": "/teileklar/produkt",
       "title": {
-        "de": "Produktdetails: in Vorbereitung",
-        "nl": "Productdetails: in voorbereiding",
-        "fr": "Détails produit : en préparation"
+        "de": "Produktdetails",
+        "nl": "Productdetails",
+        "fr": "Détails produit"
       },
       "summary": {
-        "de": "Ohne ausgewählten, freigegebenen Artikel gibt es hier keinen Preis und keine Passungszusage. Fahrzeug, Teilenummer und Quelle müssen für eine belastbare Auskunft zusammenpassen.",
-        "nl": "Zonder geselecteerd en vrijgegeven artikel staan hier geen prijs of passendheidsgarantie. Voertuig, onderdeelnummer en bron moeten overeenkomen voor een betrouwbare toelichting.",
-        "fr": "Sans article sélectionné et validé, aucun prix ni engagement de compatibilité n’est présenté. Véhicule, référence et source doivent correspondre pour une information fiable."
+        "de": "Auf einer Produktseite sehen Sie Eigenschaften, Passung und Verfügbarkeit zu einem konkreten Teil. Damit die Auskunft verlässlich ist, gleichen wir Fahrzeug, Teilenummer und Quelle ab – und nennen Ihnen Preis und Lieferweg klar.",
+        "nl": "Op een productpagina ziet u eigenschappen, pasvorm en beschikbaarheid van een concreet onderdeel. Voor een betrouwbaar advies stemmen we voertuig, onderdeelnummer en bron af – en noemen we prijs en leverwijze duidelijk.",
+        "fr": "Sur une page produit, vous voyez les caractéristiques, la compatibilité et la disponibilité d’une pièce précise. Pour une information fiable, nous recoupons véhicule, référence et source – et vous indiquons clairement prix et mode de livraison."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Produktdetails: in Vorbereitung",
-            "nl": "Productdetails: in voorbereiding",
-            "fr": "Détails produit : en préparation"
+            "de": "Produktdetails",
+            "nl": "Productdetails",
+            "fr": "Détails produit"
           },
           "body": {
-            "de": "Ohne ausgewählten, freigegebenen Artikel gibt es hier keinen Preis und keine Passungszusage. Fahrzeug, Teilenummer und Quelle müssen für eine belastbare Auskunft zusammenpassen.",
-            "nl": "Zonder geselecteerd en vrijgegeven artikel staan hier geen prijs of passendheidsgarantie. Voertuig, onderdeelnummer en bron moeten overeenkomen voor een betrouwbare toelichting.",
-            "fr": "Sans article sélectionné et validé, aucun prix ni engagement de compatibilité n’est présenté. Véhicule, référence et source doivent correspondre pour une information fiable."
+            "de": "Hier sehen Sie, worauf es bei einem Teil ankommt: Eigenschaften, Passung zu Ihrem Fahrzeug und Verfügbarkeit. So entscheiden Sie sicher.",
+            "nl": "Hier ziet u waar het bij een onderdeel op aankomt: eigenschappen, pasvorm bij uw voertuig en beschikbaarheid. Zo beslist u met zekerheid.",
+            "fr": "Vous voyez ici l’essentiel d’une pièce : caractéristiques, compatibilité avec votre véhicule et disponibilité. Vous décidez ainsi en confiance."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4106,28 +4089,29 @@
           ]
         },
         {
-          "id": "produktdetails-status",
+          "id": "passende-auskunft",
           "heading": {
-            "de": "Produktdetails in Vorbereitung",
-            "nl": "Productdetails in voorbereiding",
-            "fr": "Détails produit en préparation"
+            "de": "Verlässliche Auskunft zu Ihrem Teil",
+            "nl": "Betrouwbare informatie over uw onderdeel",
+            "fr": "Une information fiable sur votre pièce"
           },
           "body": {
-            "de": "Produktseiten zeigen künftig Eigenschaften, Passung und Verfügbarkeit auf Basis bestätigter Daten. Bis dahin werden keine Spezifikationen oder Preise angezeigt, die nicht belegt sind.",
-            "nl": "Productpagina’s tonen straks eigenschappen, passendheid en beschikbaarheid op basis van bevestigde data. Tot die tijd worden geen specificaties of prijzen getoond die niet onderbouwd zijn.",
-            "fr": "Les fiches produit présenteront caractéristiques, compatibilité et disponibilité à partir de données confirmées. En attendant, aucune spécification ni prix non étayés ne sont affichés."
+            "de": "Nennen Sie uns Fahrzeug und das gewünschte Teil. Wir bestätigen die Passung, nennen Preis und Lieferweg und zeigen Ihnen den nächsten Schritt – klar und ohne Überraschungen.",
+            "nl": "Geef ons voertuig en het gewenste onderdeel door. Wij bevestigen de pasvorm, noemen prijs en leverwijze en tonen u de volgende stap – duidelijk en zonder verrassingen.",
+            "fr": "Indiquez-nous le véhicule et la pièce souhaitée. Nous confirmons la compatibilité, précisons prix et mode de livraison et vous montrons l’étape suivante – clairement et sans surprise."
           },
           "source_refs": [
-            "docs/09-final/11-teileklar-datenblatt.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Ohne ausgewählten, freigegebenen Artikel gibt es hier keinen Preis und keine Passungszusage. Fahrzeug, Teilenummer und Quelle müssen für eine belastbare Auskunft zusammenpassen.",
-          "nl": "Zonder geselecteerd en vrijgegeven artikel staan hier geen prijs of passendheidsgarantie. Voertuig, onderdeelnummer en bron moeten overeenkomen voor een betrouwbare toelichting.",
-          "fr": "Sans article sélectionné et validé, aucun prix ni engagement de compatibilité n’est présenté. Véhicule, référence et source doivent correspondre pour une information fiable."
+          "de": "Auf einer Produktseite sehen Sie Eigenschaften, Passung und Verfügbarkeit zu einem konkreten Teil. Damit die Auskunft verlässlich ist, gleichen wir Fahrzeug, Teilenummer und Quelle ab – und nennen Ihnen Preis und Lieferweg klar.",
+          "nl": "Op een productpagina ziet u eigenschappen, pasvorm en beschikbaarheid van een concreet onderdeel. Voor een betrouwbaar advies stemmen we voertuig, onderdeelnummer en bron af – en noemen we prijs en leverwijze duidelijk.",
+          "fr": "Sur une page produit, vous voyez les caractéristiques, la compatibilité et la disponibilité d’une pièce précise. Pour une information fiable, nous recoupons véhicule, référence et source – et vous indiquons clairement prix et mode de livraison."
         },
         "canonical_path": "/teileklar/produkt",
         "canonical_origin": null,
@@ -4162,38 +4146,29 @@
       "next_actions": [
         {
           "type": "route",
-          "target_id": "tk-search",
-          "label": {
-            "de": "Weiter: Teilesuche: in Vorbereitung",
-            "nl": "Verder: Onderdelen zoeken: in voorbereiding",
-            "fr": "Suite : Recherche de pièces : en préparation"
-          }
-        },
-        {
-          "type": "route",
           "target_id": "tk-fitment",
           "label": {
-            "de": "Weiter: Fahrzeug und belegte Passung",
-            "nl": "Verder: Voertuig en onderbouwde passendheid",
-            "fr": "Suite : Véhicule et compatibilité étayée"
+            "de": "Fahrzeug und Passung",
+            "nl": "Voertuig en pasvorm",
+            "fr": "Véhicule et compatibilité"
           }
         },
         {
           "type": "route",
           "target_id": "tk-cart",
           "label": {
-            "de": "Weiter: Warenkorb: noch ohne Bestellung",
-            "nl": "Verder: Winkelwagen: nog geen bestelling",
-            "fr": "Suite : Panier : aucune commande effectuée"
+            "de": "In den Warenkorb legen",
+            "nl": "In winkelwagen leggen",
+            "fr": "Ajouter au panier"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Teil im Chat anfragen",
+            "nl": "Onderdeel in de chat aanvragen",
+            "fr": "Demander une pièce dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4205,28 +4180,28 @@
       "id": "tk-cart",
       "path": "/teileklar/warenkorb",
       "title": {
-        "de": "Warenkorb: noch ohne Bestellung",
-        "nl": "Winkelwagen: nog geen bestelling",
-        "fr": "Panier : aucune commande effectuée"
+        "de": "Warenkorb",
+        "nl": "Winkelwagen",
+        "fr": "Panier"
       },
       "summary": {
-        "de": "Ein Warenkorb wird erst mit freigegebenen Artikeln und nachvollziehbaren Summen befüllbar. Die aktuelle Ansicht löst keine Bestellung und keine Zahlung aus.",
-        "nl": "Een winkelwagen kan pas met vrijgegeven artikelen en navolgbare bedragen worden gevuld. Deze weergave plaatst geen bestelling en veroorzaakt geen betaling.",
-        "fr": "Le panier ne pourra contenir que des articles validés avec des montants vérifiables. Cette vue ne déclenche ni commande ni paiement."
+        "de": "Im Warenkorb sammeln Sie die Teile, die für Sie in Frage kommen, und behalten den Überblick. Von hier führen wir Sie zur Kasse und klären gemeinsam Preis, Lieferung und den nächsten Schritt.",
+        "nl": "In de winkelwagen verzamelt u de onderdelen die voor u in aanmerking komen en houdt u het overzicht. Van hieruit leiden we u naar de kassa en bespreken we samen prijs, levering en de volgende stap.",
+        "fr": "Dans le panier, vous rassemblez les pièces envisageables et gardez une vue d’ensemble. De là, nous vous menons au paiement et clarifions ensemble prix, livraison et prochaine étape."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Warenkorb: noch ohne Bestellung",
-            "nl": "Winkelwagen: nog geen bestelling",
-            "fr": "Panier : aucune commande effectuée"
+            "de": "Ihr Warenkorb",
+            "nl": "Uw winkelwagen",
+            "fr": "Votre panier"
           },
           "body": {
-            "de": "Ein Warenkorb wird erst mit freigegebenen Artikeln und nachvollziehbaren Summen befüllbar. Die aktuelle Ansicht löst keine Bestellung und keine Zahlung aus.",
-            "nl": "Een winkelwagen kan pas met vrijgegeven artikelen en navolgbare bedragen worden gevuld. Deze weergave plaatst geen bestelling en veroorzaakt geen betaling.",
-            "fr": "Le panier ne pourra contenir que des articles validés avec des montants vérifiables. Cette vue ne déclenche ni commande ni paiement."
+            "de": "Der Warenkorb hält Ihre Auswahl übersichtlich fest. Sie sehen auf einen Blick, welche Teile Sie betrachten, bevor Sie weitergehen.",
+            "nl": "De winkelwagen houdt uw keuze overzichtelijk bij. U ziet in één oogopslag welke onderdelen u bekijkt voordat u verdergaat.",
+            "fr": "Le panier conserve votre sélection de façon claire. Vous voyez d’un coup d’œil les pièces considérées avant de poursuivre."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4235,28 +4210,29 @@
           ]
         },
         {
-          "id": "warenkorb-status",
+          "id": "weiter-zur-kasse",
           "heading": {
-            "de": "Warenkorb ohne Bestellung",
-            "nl": "Winkelwagen zonder bestelling",
-            "fr": "Panier sans commande"
+            "de": "Weiter zur Kasse",
+            "nl": "Verder naar de kassa",
+            "fr": "Vers le paiement"
           },
           "body": {
-            "de": "Der Warenkorb hält deine Auswahl lokal fest. Eine Bestellung oder Zahlung ist nicht aktiv und wird erst mit gesonderter Freigabe möglich. So entsteht keine irreführende Kauf­erwartung.",
-            "nl": "De winkelwagen bewaart je selectie lokaal. Een bestelling of betaling is niet actief en wordt pas met afzonderlijke vrijgave mogelijk. Zo ontstaat geen misleidende koopverwachting.",
-            "fr": "Le panier conserve ta sélection localement. Aucune commande ni paiement n’est actif ; cela ne sera possible qu’après validation distincte. Aucune attente d’achat trompeuse n’est créée."
+            "de": "Wenn Sie bestellen möchten, geht es von hier zur Kasse. Dort fassen wir alles zusammen und klären Preis, Lieferung und Bezahlung, bevor etwas verbindlich wird.",
+            "nl": "Als u wilt bestellen, gaat u van hier naar de kassa. Daar vatten we alles samen en bespreken we prijs, levering en betaling voordat er iets bindend wordt.",
+            "fr": "Si vous souhaitez commander, vous passez d’ici au paiement. Nous y récapitulons tout et clarifions prix, livraison et paiement avant tout engagement."
           },
           "source_refs": [
-            "docs/09-final/11-teileklar-datenblatt.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Ein Warenkorb wird erst mit freigegebenen Artikeln und nachvollziehbaren Summen befüllbar. Die aktuelle Ansicht löst keine Bestellung und keine Zahlung aus.",
-          "nl": "Een winkelwagen kan pas met vrijgegeven artikelen en navolgbare bedragen worden gevuld. Deze weergave plaatst geen bestelling en veroorzaakt geen betaling.",
-          "fr": "Le panier ne pourra contenir que des articles validés avec des montants vérifiables. Cette vue ne déclenche ni commande ni paiement."
+          "de": "Im Warenkorb sammeln Sie die Teile, die für Sie in Frage kommen, und behalten den Überblick. Von hier führen wir Sie zur Kasse und klären gemeinsam Preis, Lieferung und den nächsten Schritt.",
+          "nl": "In de winkelwagen verzamelt u de onderdelen die voor u in aanmerking komen en houdt u het overzicht. Van hieruit leiden we u naar de kassa en bespreken we samen prijs, levering en de volgende stap.",
+          "fr": "Dans le panier, vous rassemblez les pièces envisageables et gardez une vue d’ensemble. De là, nous vous menons au paiement et clarifions ensemble prix, livraison et prochaine étape."
         },
         "canonical_path": "/teileklar/warenkorb",
         "canonical_origin": null,
@@ -4292,27 +4268,27 @@
           "type": "route",
           "target_id": "tk-search",
           "label": {
-            "de": "Weiter: Teilesuche: in Vorbereitung",
-            "nl": "Verder: Onderdelen zoeken: in voorbereiding",
-            "fr": "Suite : Recherche de pièces : en préparation"
+            "de": "Weiter suchen",
+            "nl": "Verder zoeken",
+            "fr": "Continuer la recherche"
           }
         },
         {
           "type": "route",
           "target_id": "tk-checkout",
           "label": {
-            "de": "Weiter: Kasse: nicht zum Kauf freigegeben",
-            "nl": "Verder: Afrekenen: niet vrijgegeven voor aankoop",
-            "fr": "Suite : Paiement : achat non activé"
+            "de": "Weiter zur Kasse",
+            "nl": "Verder naar de kassa",
+            "fr": "Vers le paiement"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Bestellung im Chat klären",
+            "nl": "Bestelling in de chat bespreken",
+            "fr": "Préciser la commande dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4324,28 +4300,28 @@
       "id": "tk-checkout",
       "path": "/teileklar/kasse",
       "title": {
-        "de": "Kasse: nicht zum Kauf freigegeben",
-        "nl": "Afrekenen: niet vrijgegeven voor aankoop",
-        "fr": "Paiement : achat non activé"
+        "de": "Kasse",
+        "nl": "Afrekenen",
+        "fr": "Paiement"
       },
       "summary": {
-        "de": "Ein echter Kauf setzt geprüfte Artikel-, Preis-, Versand-, Zahlungs- und Verbraucherinformationen voraus. Hier gibt es noch keinen verbindlichen Bestellknopf und keine vorgetäuschte Bestellbestätigung.",
-        "nl": "Een echte aankoop vereist gecontroleerde artikel-, prijs-, verzend-, betaal- en consumenteninformatie. Hier staat nog geen bindende bestelknop of nagebootste bestelbevestiging.",
-        "fr": "Un achat réel nécessite des informations validées sur articles, prix, livraison, paiement et droits des consommateurs. Aucun bouton de commande ferme ni fausse confirmation n’est proposé."
+        "de": "An der Kasse sehen Sie Ihre Auswahl, die Kosten und die nächsten Schritte, bevor etwas verbindlich wird. Der Online-Kauf mit Sofortzahlung ist hier aktuell noch nicht verfügbar. Ihre Bestellung nehmen wir deshalb persönlich auf – mit klarem Preis, Versand- und Zahlungsweg, bevor Sie zustimmen.",
+        "nl": "Bij het afrekenen ziet u uw selectie, de kosten en de volgende stappen voordat er iets bindend wordt. Online kopen met directe betaling is hier op dit moment nog niet beschikbaar. Daarom nemen we uw bestelling persoonlijk op – met een duidelijke prijs, verzend- en betaalwijze voordat u akkoord gaat.",
+        "fr": "Au paiement, vous voyez votre sélection, les coûts et les prochaines étapes avant tout engagement. L’achat en ligne avec paiement immédiat n’est pas encore disponible ici. Nous enregistrons donc votre commande personnellement – avec un prix clair, un mode de livraison et de paiement avant votre accord."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Kasse: nicht zum Kauf freigegeben",
-            "nl": "Afrekenen: niet vrijgegeven voor aankoop",
-            "fr": "Paiement : achat non activé"
+            "de": "Kasse",
+            "nl": "Afrekenen",
+            "fr": "Paiement"
           },
           "body": {
-            "de": "Ein echter Kauf setzt geprüfte Artikel-, Preis-, Versand-, Zahlungs- und Verbraucherinformationen voraus. Hier gibt es noch keinen verbindlichen Bestellknopf und keine vorgetäuschte Bestellbestätigung.",
-            "nl": "Een echte aankoop vereist gecontroleerde artikel-, prijs-, verzend-, betaal- en consumenteninformatie. Hier staat nog geen bindende bestelknop of nagebootste bestelbevestiging.",
-            "fr": "Un achat réel nécessite des informations validées sur articles, prix, livraison, paiement et droits des consommateurs. Aucun bouton de commande ferme ni fausse confirmation n’est proposé."
+            "de": "Hier fassen wir Ihre Auswahl zusammen und zeigen transparent, was der nächste Schritt ist. Sobald Sie bestellen möchten, prüfen wir Teile, Preis, Versand und Zahlung gemeinsam mit Ihnen – es wird nichts ausgelöst, das Sie nicht ausdrücklich bestätigt haben.",
+            "nl": "Hier vatten we uw selectie samen en laten we transparant zien wat de volgende stap is. Zodra u wilt bestellen, controleren we onderdelen, prijs, verzending en betaling samen met u – er wordt niets in gang gezet zonder uw uitdrukkelijke bevestiging.",
+            "fr": "Nous récapitulons ici votre sélection et indiquons clairement la prochaine étape. Dès que vous souhaitez commander, nous vérifions ensemble les pièces, le prix, la livraison et le paiement – rien n’est déclenché sans votre confirmation explicite."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4354,16 +4330,16 @@
           ]
         },
         {
-          "id": "kasse-status",
+          "id": "so-bestellen-sie",
           "heading": {
-            "de": "Kasse nicht freigegeben",
-            "nl": "Kassa niet vrijgegeven",
-            "fr": "Paiement non activé"
+            "de": "So schließen Sie Ihre Bestellung ab",
+            "nl": "Zo rondt u uw bestelling af",
+            "fr": "Comment finaliser votre commande"
           },
           "body": {
-            "de": "Ein Kaufabschluss ist bewusst nicht aktiviert. Zahlungs- und Bestellabläufe erscheinen erst, wenn Katalog, Preise und Bedingungen freigegeben sind. Bis dahin bleiben alle Angaben unverbindlich.",
-            "nl": "Een aankoop is bewust niet geactiveerd. Betaal- en bestelprocessen verschijnen pas als catalogus, prijzen en voorwaarden zijn vrijgegeven. Tot die tijd blijven alle gegevens vrijblijvend.",
-            "fr": "La finalisation d’achat est volontairement désactivée. Les processus de paiement et de commande apparaîtront une fois catalogue, prix et conditions validés. D’ici là, toutes les informations restent sans engagement."
+            "de": "Der direkte Online-Kauf mit Sofortzahlung ist derzeit noch nicht verfügbar. Bis dahin nehmen wir Ihre Bestellung persönlich auf: Sie erhalten eine verbindliche Übersicht zu Preis, Lieferung und Bezahlung und entscheiden in Ruhe. Schreiben Sie uns dazu einfach an – wir melden uns zeitnah mit den nächsten Schritten.",
+            "nl": "Direct online kopen met onmiddellijke betaling is op dit moment nog niet beschikbaar. Tot die tijd nemen we uw bestelling persoonlijk op: u krijgt een bindend overzicht van prijs, levering en betaling en beslist rustig. Stuur ons gewoon een bericht – we reageren snel met de volgende stappen.",
+            "fr": "L’achat en ligne direct avec paiement immédiat n’est pas encore disponible. En attendant, nous enregistrons votre commande personnellement : vous recevez un aperçu ferme du prix, de la livraison et du paiement, et décidez en toute tranquillité. Écrivez-nous simplement – nous revenons vers vous rapidement avec les prochaines étapes."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -4373,9 +4349,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Ein echter Kauf setzt geprüfte Artikel-, Preis-, Versand-, Zahlungs- und Verbraucherinformationen voraus. Hier gibt es noch keinen verbindlichen Bestellknopf und keine vorgetäuschte Bestellbestätigung.",
-          "nl": "Een echte aankoop vereist gecontroleerde artikel-, prijs-, verzend-, betaal- en consumenteninformatie. Hier staat nog geen bindende bestelknop of nagebootste bestelbevestiging.",
-          "fr": "Un achat réel nécessite des informations validées sur articles, prix, livraison, paiement et droits des consommateurs. Aucun bouton de commande ferme ni fausse confirmation n’est proposé."
+          "de": "An der Kasse sehen Sie Ihre Auswahl, die Kosten und die nächsten Schritte, bevor etwas verbindlich wird. Der Online-Kauf mit Sofortzahlung ist hier aktuell noch nicht verfügbar. Ihre Bestellung nehmen wir deshalb persönlich auf – mit klarem Preis, Versand- und Zahlungsweg, bevor Sie zustimmen.",
+          "nl": "Bij het afrekenen ziet u uw selectie, de kosten en de volgende stappen voordat er iets bindend wordt. Online kopen met directe betaling is hier op dit moment nog niet beschikbaar. Daarom nemen we uw bestelling persoonlijk op – met een duidelijke prijs, verzend- en betaalwijze voordat u akkoord gaat.",
+          "fr": "Au paiement, vous voyez votre sélection, les coûts et les prochaines étapes avant tout engagement. L’achat en ligne avec paiement immédiat n’est pas encore disponible ici. Nous enregistrons donc votre commande personnellement – avec un prix clair, un mode de livraison et de paiement avant votre accord."
         },
         "canonical_path": "/teileklar/kasse",
         "canonical_origin": null,
@@ -4412,27 +4388,27 @@
           "type": "route",
           "target_id": "tk-cart",
           "label": {
-            "de": "Weiter: Warenkorb: noch ohne Bestellung",
-            "nl": "Verder: Winkelwagen: nog geen bestelling",
-            "fr": "Suite : Panier : aucune commande effectuée"
+            "de": "Zurück zum Warenkorb",
+            "nl": "Terug naar winkelwagen",
+            "fr": "Retour au panier"
           }
         },
         {
           "type": "route",
-          "target_id": "tk-legal",
+          "target_id": "contact",
           "label": {
-            "de": "Weiter: TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
-            "nl": "Verder: TEILEKLAR: aanbieder, privacy en aankoopvoorwaarden",
-            "fr": "Suite : TEILEKLAR : prestataire, confidentialité et conditions d’achat"
+            "de": "Kontakt aufnehmen",
+            "nl": "Contact opnemen",
+            "fr": "Nous contacter"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Bestellung im Chat klären",
+            "nl": "Bestelling in de chat bespreken",
+            "fr": "Préciser la commande dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4444,28 +4420,28 @@
       "id": "tk-fitment",
       "path": "/teileklar/fahrzeug-und-passung",
       "title": {
-        "de": "Fahrzeug und belegte Passung",
-        "nl": "Voertuig en onderbouwde passendheid",
-        "fr": "Véhicule et compatibilité étayée"
+        "de": "Fahrzeug und Passung",
+        "nl": "Voertuig en pasvorm",
+        "fr": "Véhicule et compatibilité"
       },
       "summary": {
-        "de": "Ohne Fahrzeugkontext wird keine Passung behauptet. Unklare Varianten, Maße oder Zubehöranforderungen müssen zuerst geklärt werden. Eine Vorbereitung der Anfrage ist noch kein bestätigter Kompatibilitätsnachweis.",
-        "nl": "Zonder voertuigcontext wordt geen passendheid geclaimd. Onduidelijke varianten, maten of accessoires moeten eerst worden opgehelderd. Een voorbereide aanvraag is nog geen bevestigde compatibiliteitstoets.",
-        "fr": "Aucune compatibilité n’est affirmée sans contexte véhicule. Variantes, dimensions ou accessoires incertains doivent d’abord être précisés. Préparer une demande ne constitue pas une preuve de compatibilité."
+        "de": "Mit Ihren Fahrzeugdaten stellen wir sicher, dass ein Teil wirklich passt. Unklare Varianten, Maße oder Zubehörfragen klären wir vorab – damit Sie Fehlkäufe vermeiden.",
+        "nl": "Met uw voertuiggegevens zorgen we dat een onderdeel echt past. Onduidelijke varianten, maten of accessoirevragen verhelderen we vooraf – zodat u miskopen voorkomt.",
+        "fr": "Grâce à vos données véhicule, nous garantissons qu’une pièce correspond vraiment. Variantes, dimensions ou accessoires incertains sont clarifiés en amont – pour éviter les erreurs d’achat."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Fahrzeug und belegte Passung",
-            "nl": "Voertuig en onderbouwde passendheid",
-            "fr": "Véhicule et compatibilité étayée"
+            "de": "Fahrzeug und Passung",
+            "nl": "Voertuig en pasvorm",
+            "fr": "Véhicule et compatibilité"
           },
           "body": {
-            "de": "Ohne Fahrzeugkontext wird keine Passung behauptet. Unklare Varianten, Maße oder Zubehöranforderungen müssen zuerst geklärt werden. Eine Vorbereitung der Anfrage ist noch kein bestätigter Kompatibilitätsnachweis.",
-            "nl": "Zonder voertuigcontext wordt geen passendheid geclaimd. Onduidelijke varianten, maten of accessoires moeten eerst worden opgehelderd. Een voorbereide aanvraag is nog geen bevestigde compatibiliteitstoets.",
-            "fr": "Aucune compatibilité n’est affirmée sans contexte véhicule. Variantes, dimensions ou accessoires incertains doivent d’abord être précisés. Préparer une demande ne constitue pas une preuve de compatibilité."
+            "de": "Hinterlegen Sie Ihr Fahrzeug, damit wir die Passung belegen können. So erhalten Sie nur Teile vorgeschlagen, die zu Ihrem Auto passen.",
+            "nl": "Leg uw voertuig vast, zodat we de pasvorm kunnen onderbouwen. Zo krijgt u alleen onderdelen voorgesteld die bij uw auto passen.",
+            "fr": "Enregistrez votre véhicule pour que nous puissions étayer la compatibilité. Vous ne recevez ainsi que des pièces adaptées à votre voiture."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4476,14 +4452,14 @@
         {
           "id": "belegte-passung",
           "heading": {
-            "de": "Warum belegte Passung zählt",
-            "nl": "Waarom onderbouwde passendheid telt",
-            "fr": "Pourquoi une compatibilité étayée compte"
+            "de": "Warum die richtige Passung zählt",
+            "nl": "Waarom de juiste pasvorm telt",
+            "fr": "Pourquoi la bonne compatibilité compte"
           },
           "body": {
-            "de": "Eine belegte Passung verhindert Fehlkäufe. Über Fahrzeugmerkmale ordnen wir ein, welche Teile grundsätzlich in Frage kommen. Angezeigt wird nur, was sich auf bestätigte Daten stützt; Unsicherheiten werden benannt statt überspielt.",
-            "nl": "Onderbouwde passendheid voorkomt miskopen. Via voertuigkenmerken bepalen we welke onderdelen in aanmerking komen. Getoond wordt alleen wat op bevestigde data steunt; onzekerheden worden benoemd in plaats van verhuld.",
-            "fr": "Une compatibilité étayée évite les erreurs d’achat. À partir des caractéristiques du véhicule, nous identifions les pièces envisageables. Seul ce qui repose sur des données confirmées est affiché ; les incertitudes sont signalées."
+            "de": "Eine geprüfte Passung verhindert Fehlkäufe und spart Zeit. Anhand der Fahrzeugmerkmale ordnen wir ein, welche Teile in Frage kommen, und benennen offene Punkte klar, statt sie zu überspielen.",
+            "nl": "Een gecontroleerde pasvorm voorkomt miskopen en bespaart tijd. Aan de hand van de voertuigkenmerken bepalen we welke onderdelen in aanmerking komen en benoemen we open punten duidelijk.",
+            "fr": "Une compatibilité vérifiée évite les erreurs d’achat et fait gagner du temps. À partir des caractéristiques du véhicule, nous déterminons les pièces envisageables et signalons clairement les points ouverts."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -4493,9 +4469,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Ohne Fahrzeugkontext wird keine Passung behauptet. Unklare Varianten, Maße oder Zubehöranforderungen müssen zuerst geklärt werden. Eine Vorbereitung der Anfrage ist noch kein bestätigter Kompatibilitätsnachweis.",
-          "nl": "Zonder voertuigcontext wordt geen passendheid geclaimd. Onduidelijke varianten, maten of accessoires moeten eerst worden opgehelderd. Een voorbereide aanvraag is nog geen bevestigde compatibiliteitstoets.",
-          "fr": "Aucune compatibilité n’est affirmée sans contexte véhicule. Variantes, dimensions ou accessoires incertains doivent d’abord être précisés. Préparer une demande ne constitue pas une preuve de compatibilité."
+          "de": "Mit Ihren Fahrzeugdaten stellen wir sicher, dass ein Teil wirklich passt. Unklare Varianten, Maße oder Zubehörfragen klären wir vorab – damit Sie Fehlkäufe vermeiden.",
+          "nl": "Met uw voertuiggegevens zorgen we dat een onderdeel echt past. Onduidelijke varianten, maten of accessoirevragen verhelderen we vooraf – zodat u miskopen voorkomt.",
+          "fr": "Grâce à vos données véhicule, nous garantissons qu’une pièce correspond vraiment. Variantes, dimensions ou accessoires incertains sont clarifiés en amont – pour éviter les erreurs d’achat."
         },
         "canonical_path": "/teileklar/fahrzeug-und-passung",
         "canonical_origin": null,
@@ -4533,27 +4509,27 @@
           "type": "route",
           "target_id": "tk-search",
           "label": {
-            "de": "Weiter: Teilesuche: in Vorbereitung",
-            "nl": "Verder: Onderdelen zoeken: in voorbereiding",
-            "fr": "Suite : Recherche de pièces : en préparation"
+            "de": "Teil suchen",
+            "nl": "Onderdeel zoeken",
+            "fr": "Rechercher une pièce"
           }
         },
         {
           "type": "route",
           "target_id": "tk-product",
           "label": {
-            "de": "Weiter: Produktdetails: in Vorbereitung",
-            "nl": "Verder: Productdetails: in voorbereiding",
-            "fr": "Suite : Détails produit : en préparation"
+            "de": "Produktdetails",
+            "nl": "Productdetails",
+            "fr": "Détails produit"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Passung im Chat klären",
+            "nl": "Pasvorm in de chat bespreken",
+            "fr": "Clarifier la compatibilité dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4570,9 +4546,9 @@
         "fr": "Demander un rendez-vous atelier"
       },
       "summary": {
-        "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
-        "nl": "U kunt een gesprek- of afspraakverzoek voorbereiden. Er worden geen ongecontroleerde vrije tijden of reeds bevestigde werkplaatsafspraak getoond.",
-        "fr": "Vous pouvez préparer une demande d’entretien ou de rendez-vous. Aucun créneau non vérifié ni rendez-vous atelier prétendument confirmé n’est affiché."
+        "de": "Sie brauchen Einbau oder Beratung? Fragen Sie hier einen Werkstatttermin an. Sie beschreiben Anliegen und Fahrzeug, wir stimmen einen passenden Termin ab – verbindlich wird er erst mit der Bestätigung durch die Werkstatt.",
+        "nl": "Heeft u montage of advies nodig? Vraag hier een werkplaatsafspraak aan. U beschrijft uw vraag en voertuig, wij stemmen een passende afspraak af – deze wordt pas bindend na bevestiging door de werkplaats.",
+        "fr": "Besoin d’un montage ou d’un conseil ? Demandez ici un rendez-vous atelier. Vous décrivez votre besoin et votre véhicule, nous convenons d’un créneau adapté – il devient ferme après confirmation de l’atelier."
       },
       "site_context": "teileklar",
       "sections": [
@@ -4584,9 +4560,9 @@
             "fr": "Demander un rendez-vous atelier"
           },
           "body": {
-            "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
-            "nl": "U kunt een gesprek- of afspraakverzoek voorbereiden. Er worden geen ongecontroleerde vrije tijden of reeds bevestigde werkplaatsafspraak getoond.",
-            "fr": "Vous pouvez préparer une demande d’entretien ou de rendez-vous. Aucun créneau non vérifié ni rendez-vous atelier prétendument confirmé n’est affiché."
+            "de": "Teilen Sie uns Ihr Anliegen und Ihr Fahrzeug mit. Wir finden einen passenden Termin und melden uns mit einem Vorschlag zurück.",
+            "nl": "Laat ons uw vraag en uw voertuig weten. Wij vinden een passende afspraak en komen terug met een voorstel.",
+            "fr": "Indiquez-nous votre besoin et votre véhicule. Nous trouvons un créneau adapté et revenons avec une proposition."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4597,14 +4573,14 @@
         {
           "id": "termin-ablauf",
           "heading": {
-            "de": "Ablauf einer Terminanfrage",
-            "nl": "Verloop van een afspraakaanvraag",
-            "fr": "Déroulement d’une demande de rendez-vous"
+            "de": "So läuft die Terminanfrage",
+            "nl": "Zo verloopt de afspraakaanvraag",
+            "fr": "Déroulé de la demande de rendez-vous"
           },
           "body": {
-            "de": "Beschreibe Anliegen und Fahrzeug; die Anfrage geht an eine freigegebene Werkstatt. Eine verbindliche Zusage entsteht erst durch Bestätigung der Werkstatt. Es werden keine Kapazitäten oder Standorte erfunden.",
-            "nl": "Beschrijf je vraag en voertuig; de aanvraag gaat naar een vrijgegeven werkplaats. Een bindende toezegging ontstaat pas na bevestiging door de werkplaats. Er worden geen capaciteiten of locaties verzonnen.",
-            "fr": "Décris ta demande et ton véhicule ; la demande est transmise à un atelier validé. Un engagement ferme n’existe qu’après confirmation de l’atelier. Aucune capacité ni adresse n’est inventée."
+            "de": "Nach Ihrer Anfrage stimmen wir einen Termin mit der Werkstatt ab. Eine verbindliche Zusage erhalten Sie, sobald die Werkstatt bestätigt hat – so ist Ihr Termin wirklich gesichert.",
+            "nl": "Na uw aanvraag stemmen we een afspraak af met de werkplaats. Een bindende toezegging ontvangt u zodra de werkplaats heeft bevestigd – zo is uw afspraak echt zeker.",
+            "fr": "Après votre demande, nous convenons d’un créneau avec l’atelier. Vous recevez une confirmation ferme dès que l’atelier a validé – votre rendez-vous est alors réellement assuré."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -4614,9 +4590,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
-          "nl": "U kunt een gesprek- of afspraakverzoek voorbereiden. Er worden geen ongecontroleerde vrije tijden of reeds bevestigde werkplaatsafspraak getoond.",
-          "fr": "Vous pouvez préparer une demande d’entretien ou de rendez-vous. Aucun créneau non vérifié ni rendez-vous atelier prétendument confirmé n’est affiché."
+          "de": "Sie brauchen Einbau oder Beratung? Fragen Sie hier einen Werkstatttermin an. Sie beschreiben Anliegen und Fahrzeug, wir stimmen einen passenden Termin ab – verbindlich wird er erst mit der Bestätigung durch die Werkstatt.",
+          "nl": "Heeft u montage of advies nodig? Vraag hier een werkplaatsafspraak aan. U beschrijft uw vraag en voertuig, wij stemmen een passende afspraak af – deze wordt pas bindend na bevestiging door de werkplaats.",
+          "fr": "Besoin d’un montage ou d’un conseil ? Demandez ici un rendez-vous atelier. Vous décrivez votre besoin et votre véhicule, nous convenons d’un créneau adapté – il devient ferme après confirmation de l’atelier."
         },
         "canonical_path": "/teileklar/termine",
         "canonical_origin": null,
@@ -4653,27 +4629,27 @@
           "type": "route",
           "target_id": "tk-workshop",
           "label": {
-            "de": "Weiter: Werkstattprofil: freigegebene Daten erforderlich",
-            "nl": "Verder: Werkplaatsprofiel: vrijgegeven gegevens nodig",
-            "fr": "Suite : Profil atelier : données validées requises"
+            "de": "Werkstatt in Ihrer Nähe",
+            "nl": "Werkplaats bij u in de buurt",
+            "fr": "Atelier près de chez vous"
           }
         },
         {
           "type": "route",
           "target_id": "tk-partner",
           "label": {
-            "de": "Weiter: Werkstattpartner werden",
-            "nl": "Verder: Werkplaatspartner worden",
-            "fr": "Suite : Devenir partenaire atelier"
+            "de": "Werkstattpartner werden",
+            "nl": "Werkplaatspartner worden",
+            "fr": "Devenir atelier partenaire"
           }
         },
         {
           "type": "chat",
           "chat_intent": "booking",
           "label": {
-            "de": "Gespräch anfragen",
-            "nl": "Gesprek aanvragen",
-            "fr": "Demander un entretien"
+            "de": "Termin im Chat anfragen",
+            "nl": "Afspraak in de chat aanvragen",
+            "fr": "Demander un rendez-vous dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4685,28 +4661,28 @@
       "id": "tk-vouchers",
       "path": "/teileklar/gutscheine",
       "title": {
-        "de": "Gutscheine und Einlösung: aktueller Stand",
-        "nl": "Vouchers en inwisseling: huidige status",
-        "fr": "Bons et utilisation : état actuel"
+        "de": "Gutscheine",
+        "nl": "Vouchers",
+        "fr": "Bons d’achat"
       },
       "summary": {
-        "de": "Gutscheine benötigen eindeutige Bedingungen, berechtigte Konten und einen bestätigten Einlösungsstand. Diese öffentliche Seite zeigt keine persönlichen Codes, Guthaben oder angeblich bereits erfolgte Einlösung.",
-        "nl": "Vouchers vereisen duidelijke voorwaarden, bevoegde accounts en bevestigde gebruiksstatus. Deze publieke pagina toont geen persoonlijke codes, saldi of beweerd gebruik.",
-        "fr": "Les bons exigent conditions claires, comptes habilités et état d’utilisation confirmé. Cette page publique ne révèle aucun code, solde personnel ou utilisation prétendue."
+        "de": "Mit einem Kundenkonto lösen Sie Gutscheine sicher ein und sehen Ihr Guthaben. Aus Datenschutzgründen zeigen wir persönliche Codes und Guthaben nur im angemeldeten Bereich – nicht auf dieser öffentlichen Seite.",
+        "nl": "Met een klantaccount verzilvert u vouchers veilig en ziet u uw tegoed. Om privacyredenen tonen we persoonlijke codes en tegoeden alleen in het aangemelde gedeelte – niet op deze openbare pagina.",
+        "fr": "Avec un compte client, vous utilisez vos bons en toute sécurité et voyez votre solde. Pour des raisons de confidentialité, codes personnels et soldes n’apparaissent que dans l’espace connecté – pas sur cette page publique."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Gutscheine und Einlösung: aktueller Stand",
-            "nl": "Vouchers en inwisseling: huidige status",
-            "fr": "Bons et utilisation : état actuel"
+            "de": "Gutscheine und Einlösung",
+            "nl": "Vouchers en inwisselen",
+            "fr": "Bons et utilisation"
           },
           "body": {
-            "de": "Gutscheine benötigen eindeutige Bedingungen, berechtigte Konten und einen bestätigten Einlösungsstand. Diese öffentliche Seite zeigt keine persönlichen Codes, Guthaben oder angeblich bereits erfolgte Einlösung.",
-            "nl": "Vouchers vereisen duidelijke voorwaarden, bevoegde accounts en bevestigde gebruiksstatus. Deze publieke pagina toont geen persoonlijke codes, saldi of beweerd gebruik.",
-            "fr": "Les bons exigent conditions claires, comptes habilités et état d’utilisation confirmé. Cette page publique ne révèle aucun code, solde personnel ou utilisation prétendue."
+            "de": "Gutscheine erleichtern den Einkauf und lassen sich im Kundenkonto einlösen. So bleiben Ihr Guthaben und Ihre Codes geschützt.",
+            "nl": "Vouchers maken het winkelen makkelijker en kunt u in uw klantaccount inwisselen. Zo blijven uw tegoed en codes beschermd.",
+            "fr": "Les bons facilitent vos achats et s’utilisent depuis votre compte client. Votre solde et vos codes restent ainsi protégés."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4715,28 +4691,29 @@
           ]
         },
         {
-          "id": "gutscheine-status",
+          "id": "gutscheine-einloesen",
           "heading": {
-            "de": "Gutscheine: aktueller Stand",
-            "nl": "Vouchers: huidige status",
-            "fr": "Bons : état actuel"
+            "de": "So lösen Sie einen Gutschein ein",
+            "nl": "Zo wisselt u een voucher in",
+            "fr": "Comment utiliser un bon"
           },
           "body": {
-            "de": "Einlösung und Bedingungen von Gutscheinen werden erst mit freigegebenen Regeln aktiv. Es werden keine Guthaben oder Rabatte dargestellt, die nicht hinterlegt sind.",
-            "nl": "Inwisseling en voorwaarden van vouchers worden pas actief met vrijgegeven regels. Er worden geen tegoeden of kortingen getoond die niet zijn vastgelegd.",
-            "fr": "L’utilisation et les conditions des bons seront actives avec des règles validées. Aucun avoir ni remise non enregistrés ne sont présentés."
+            "de": "Melden Sie sich in Ihrem Kundenkonto an, um Gutscheine einzulösen und Ihr Guthaben einzusehen. Fragen zu Bedingungen beantworten wir Ihnen gern persönlich.",
+            "nl": "Meld u aan in uw klantaccount om vouchers in te wisselen en uw tegoed te bekijken. Vragen over voorwaarden beantwoorden we u graag persoonlijk.",
+            "fr": "Connectez-vous à votre compte client pour utiliser vos bons et consulter votre solde. Nous répondons volontiers à vos questions sur les conditions."
           },
           "source_refs": [
-            "docs/09-final/11-teileklar-datenblatt.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Gutscheine benötigen eindeutige Bedingungen, berechtigte Konten und einen bestätigten Einlösungsstand. Diese öffentliche Seite zeigt keine persönlichen Codes, Guthaben oder angeblich bereits erfolgte Einlösung.",
-          "nl": "Vouchers vereisen duidelijke voorwaarden, bevoegde accounts en bevestigde gebruiksstatus. Deze publieke pagina toont geen persoonlijke codes, saldi of beweerd gebruik.",
-          "fr": "Les bons exigent conditions claires, comptes habilités et état d’utilisation confirmé. Cette page publique ne révèle aucun code, solde personnel ou utilisation prétendue."
+          "de": "Mit einem Kundenkonto lösen Sie Gutscheine sicher ein und sehen Ihr Guthaben. Aus Datenschutzgründen zeigen wir persönliche Codes und Guthaben nur im angemeldeten Bereich – nicht auf dieser öffentlichen Seite.",
+          "nl": "Met een klantaccount verzilvert u vouchers veilig en ziet u uw tegoed. Om privacyredenen tonen we persoonlijke codes en tegoeden alleen in het aangemelde gedeelte – niet op deze openbare pagina.",
+          "fr": "Avec un compte client, vous utilisez vos bons en toute sécurité et voyez votre solde. Pour des raisons de confidentialité, codes personnels et soldes n’apparaissent que dans l’espace connecté – pas sur cette page publique."
         },
         "canonical_path": "/teileklar/gutscheine",
         "canonical_origin": null,
@@ -4773,27 +4750,27 @@
           "type": "route",
           "target_id": "tk-legal",
           "label": {
-            "de": "Weiter: TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
-            "nl": "Verder: TEILEKLAR: aanbieder, privacy en aankoopvoorwaarden",
-            "fr": "Suite : TEILEKLAR : prestataire, confidentialité et conditions d’achat"
+            "de": "Bedingungen und Rechtliches",
+            "nl": "Voorwaarden en juridisch",
+            "fr": "Conditions et mentions légales"
           }
         },
         {
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Weiter: Kundenbereich: aktueller Stand",
-            "nl": "Verder: Klantomgeving: huidige status",
-            "fr": "Suite : Espace client : état actuel"
+            "de": "Im Kundenkonto anmelden",
+            "nl": "Aanmelden bij klantaccount",
+            "fr": "Se connecter au compte client"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Frage im Chat klären",
+            "nl": "Vraag in de chat bespreken",
+            "fr": "Poser une question dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4807,12 +4784,12 @@
       "title": {
         "de": "Werkstattpartner werden",
         "nl": "Werkplaatspartner worden",
-        "fr": "Devenir partenaire atelier"
+        "fr": "Devenir atelier partenaire"
       },
       "summary": {
-        "de": "Eine Partneranfrage beschreibt Betrieb, Leistungen und Zusammenarbeit. Eine Registrierung allein ist keine Freischaltung; Prüfung und vereinbarte Bedingungen gehen einer veröffentlichten Partnerseite voraus.",
-        "nl": "Een partneraanvraag beschrijft bedrijf, diensten en samenwerking. Registratie alleen geeft geen vrijgave; toetsing en overeengekomen voorwaarden gaan vooraf aan publicatie van een partnerpagina.",
-        "fr": "Une demande de partenariat décrit l’atelier, ses prestations et la collaboration. Une inscription ne vaut pas habilitation ; vérification et conditions convenues précèdent la publication du profil."
+        "de": "Als Werkstattpartner erhalten Sie strukturierte Kundenanfragen mit Fahrzeugbezug und klarer Beschreibung. Sie stellen Ihren Betrieb und Ihre Leistungen vor; Umfang und Konditionen der Zusammenarbeit stimmen wir persönlich mit Ihnen ab.",
+        "nl": "Als werkplaatspartner ontvangt u gestructureerde klantaanvragen met voertuigkoppeling en duidelijke omschrijving. U stelt uw bedrijf en diensten voor; omvang en voorwaarden van de samenwerking stemmen we persoonlijk met u af.",
+        "fr": "En tant qu’atelier partenaire, vous recevez des demandes clients structurées avec rattachement véhicule et description claire. Vous présentez votre entreprise et vos prestations ; l’étendue et les conditions de la collaboration sont convenues personnellement avec vous."
       },
       "site_context": "teileklar",
       "sections": [
@@ -4821,12 +4798,12 @@
           "heading": {
             "de": "Werkstattpartner werden",
             "nl": "Werkplaatspartner worden",
-            "fr": "Devenir partenaire atelier"
+            "fr": "Devenir atelier partenaire"
           },
           "body": {
-            "de": "Eine Partneranfrage beschreibt Betrieb, Leistungen und Zusammenarbeit. Eine Registrierung allein ist keine Freischaltung; Prüfung und vereinbarte Bedingungen gehen einer veröffentlichten Partnerseite voraus.",
-            "nl": "Een partneraanvraag beschrijft bedrijf, diensten en samenwerking. Registratie alleen geeft geen vrijgave; toetsing en overeengekomen voorwaarden gaan vooraf aan publicatie van een partnerpagina.",
-            "fr": "Une demande de partenariat décrit l’atelier, ses prestations et la collaboration. Une inscription ne vaut pas habilitation ; vérification et conditions convenues précèdent la publication du profil."
+            "de": "Werden Sie Teil von TEILEKLAR und erreichen Sie Kundinnen und Kunden in Ihrer Region mit passenden Anfragen. Der Einstieg beginnt mit einer kurzen Vorstellung Ihres Betriebs.",
+            "nl": "Word onderdeel van TEILEKLAR en bereik klanten in uw regio met passende aanvragen. De start begint met een korte voorstelling van uw bedrijf.",
+            "fr": "Rejoignez TEILEKLAR et touchez des clients de votre région avec des demandes pertinentes. Tout commence par une brève présentation de votre entreprise."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4837,14 +4814,14 @@
         {
           "id": "partner-nutzen",
           "heading": {
-            "de": "Nutzen für Werkstattpartner",
-            "nl": "Voordeel voor werkplaatspartners",
-            "fr": "Avantages pour les ateliers partenaires"
+            "de": "Ihr Nutzen als Partner",
+            "nl": "Uw voordeel als partner",
+            "fr": "Votre intérêt comme partenaire"
           },
           "body": {
-            "de": "Als Werkstattpartner erhältst du strukturierte Anfragen mit Fahrzeugbezug und klarer Beschreibung. Umfang, Rechte und Abläufe werden gesondert vereinbart; eine Teilnahme ist erst nach Freigabe wirksam.",
-            "nl": "Als werkplaatspartner ontvang je gestructureerde aanvragen met voertuigkoppeling en heldere omschrijving. Omvang, rechten en processen worden apart afgesproken; deelname is pas na vrijgave actief.",
-            "fr": "En tant qu’atelier partenaire, tu reçois des demandes structurées avec compatibilité véhicule et description claire. Périmètre, droits et processus sont convenus séparément ; la participation n’est effective qu’après validation."
+            "de": "Sie erhalten vorqualifizierte Anfragen mit Fahrzeugbezug, sparen Rückfragen und planen leichter. Rechte, Umfang und Abläufe vereinbaren wir gemeinsam, bevor Ihre Partnerschaft startet.",
+            "nl": "U ontvangt voorgekwalificeerde aanvragen met voertuigkoppeling, bespaart navragen en plant eenvoudiger. Rechten, omvang en processen spreken we samen af voordat uw partnerschap begint.",
+            "fr": "Vous recevez des demandes préqualifiées avec rattachement véhicule, réduisez les allers-retours et planifiez plus facilement. Droits, périmètre et déroulés sont convenus ensemble avant le lancement."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -4854,9 +4831,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Eine Partneranfrage beschreibt Betrieb, Leistungen und Zusammenarbeit. Eine Registrierung allein ist keine Freischaltung; Prüfung und vereinbarte Bedingungen gehen einer veröffentlichten Partnerseite voraus.",
-          "nl": "Een partneraanvraag beschrijft bedrijf, diensten en samenwerking. Registratie alleen geeft geen vrijgave; toetsing en overeengekomen voorwaarden gaan vooraf aan publicatie van een partnerpagina.",
-          "fr": "Une demande de partenariat décrit l’atelier, ses prestations et la collaboration. Une inscription ne vaut pas habilitation ; vérification et conditions convenues précèdent la publication du profil."
+          "de": "Als Werkstattpartner erhalten Sie strukturierte Kundenanfragen mit Fahrzeugbezug und klarer Beschreibung. Sie stellen Ihren Betrieb und Ihre Leistungen vor; Umfang und Konditionen der Zusammenarbeit stimmen wir persönlich mit Ihnen ab.",
+          "nl": "Als werkplaatspartner ontvangt u gestructureerde klantaanvragen met voertuigkoppeling en duidelijke omschrijving. U stelt uw bedrijf en diensten voor; omvang en voorwaarden van de samenwerking stemmen we persoonlijk met u af.",
+          "fr": "En tant qu’atelier partenaire, vous recevez des demandes clients structurées avec rattachement véhicule et description claire. Vous présentez votre entreprise et vos prestations ; l’étendue et les conditions de la collaboration sont convenues personnellement avec vous."
         },
         "canonical_path": "/teileklar/partner-werden",
         "canonical_origin": null,
@@ -4893,27 +4870,27 @@
           "type": "route",
           "target_id": "tk-workshop",
           "label": {
-            "de": "Weiter: Werkstattprofil: freigegebene Daten erforderlich",
-            "nl": "Verder: Werkplaatsprofiel: vrijgegeven gegevens nodig",
-            "fr": "Suite : Profil atelier : données validées requises"
+            "de": "Werkstatt in Ihrer Nähe",
+            "nl": "Werkplaats bij u in de buurt",
+            "fr": "Atelier près de chez vous"
           }
         },
         {
           "type": "route",
           "target_id": "tk-appointments",
           "label": {
-            "de": "Weiter: Werkstatttermin anfragen",
-            "nl": "Verder: Werkplaatsafspraak aanvragen",
-            "fr": "Suite : Demander un rendez-vous atelier"
+            "de": "Werkstatttermin anfragen",
+            "nl": "Werkplaatsafspraak aanvragen",
+            "fr": "Demander un rendez-vous atelier"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Partnerschaft im Chat besprechen",
+            "nl": "Partnerschap in de chat bespreken",
+            "fr": "Discuter du partenariat dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -4925,28 +4902,28 @@
       "id": "tk-workshop",
       "path": "/teileklar/werkstatt",
       "title": {
-        "de": "Werkstattprofil: freigegebene Daten erforderlich",
-        "nl": "Werkplaatsprofiel: vrijgegeven gegevens nodig",
-        "fr": "Profil atelier : données validées requises"
+        "de": "Werkstatt in Ihrer Nähe",
+        "nl": "Werkplaats bij u in de buurt",
+        "fr": "Atelier près de chez vous"
       },
       "summary": {
-        "de": "Ein tatsächliches Werkstattprofil zeigt nur bestätigte Betriebsdaten, Leistungen und Kontaktwege. Aktuell werden keine Werkstattnamen, Entfernungen, Bewertungen oder freien Termine erfunden.",
-        "nl": "Een werkelijk werkplaatsprofiel toont alleen bevestigde bedrijfsgegevens, diensten en contactmogelijkheden. Er worden geen namen, afstanden, beoordelingen of beschikbare afspraken verzonnen.",
-        "fr": "Un profil réel ne présente que des données, prestations et contacts confirmés. Aucun nom, distance, avis ou créneau disponible n’est inventé."
+        "de": "Eine Werkstatt zeigt Ihnen bestätigte Leistungen, Öffnungszeiten und Kontaktwege. Wir stellen nur geprüfte Partnerbetriebe vor – damit Sie sich auf die Angaben verlassen können.",
+        "nl": "Een werkplaats toont u bevestigde diensten, openingstijden en contactmogelijkheden. Wij stellen alleen gecontroleerde partnerbedrijven voor – zodat u op de gegevens kunt vertrouwen.",
+        "fr": "Un atelier vous présente ses prestations confirmées, ses horaires et ses moyens de contact. Nous ne présentons que des partenaires vérifiés – pour que vous puissiez vous fier aux informations."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Werkstattprofil: freigegebene Daten erforderlich",
-            "nl": "Werkplaatsprofiel: vrijgegeven gegevens nodig",
-            "fr": "Profil atelier : données validées requises"
+            "de": "Werkstatt in Ihrer Nähe",
+            "nl": "Werkplaats bij u in de buurt",
+            "fr": "Atelier près de chez vous"
           },
           "body": {
-            "de": "Ein tatsächliches Werkstattprofil zeigt nur bestätigte Betriebsdaten, Leistungen und Kontaktwege. Aktuell werden keine Werkstattnamen, Entfernungen, Bewertungen oder freien Termine erfunden.",
-            "nl": "Een werkelijk werkplaatsprofiel toont alleen bevestigde bedrijfsgegevens, diensten en contactmogelijkheden. Er worden geen namen, afstanden, beoordelingen of beschikbare afspraken verzonnen.",
-            "fr": "Un profil réel ne présente que des données, prestations et contacts confirmés. Aucun nom, distance, avis ou créneau disponible n’est inventé."
+            "de": "Finden Sie eine passende Werkstatt für Einbau, Wartung oder Beratung. Sie sehen Leistungen und Kontaktwege und können direkt einen Termin anfragen.",
+            "nl": "Vind een passende werkplaats voor montage, onderhoud of advies. U ziet diensten en contactmogelijkheden en kunt direct een afspraak aanvragen.",
+            "fr": "Trouvez un atelier adapté pour le montage, l’entretien ou le conseil. Vous voyez les prestations et moyens de contact et pouvez demander un rendez-vous directement."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -4955,28 +4932,29 @@
           ]
         },
         {
-          "id": "werkstattprofil-status",
+          "id": "gepruefte-partner",
           "heading": {
-            "de": "Werkstattprofil: freigegebene Daten nötig",
-            "nl": "Werkplaatsprofiel: vrijgegeven gegevens nodig",
-            "fr": "Profil atelier : données validées requises"
+            "de": "Nur geprüfte Partnerbetriebe",
+            "nl": "Alleen gecontroleerde partnerbedrijven",
+            "fr": "Uniquement des partenaires vérifiés"
           },
           "body": {
-            "de": "Ein Werkstattprofil zeigt nur bestätigte Angaben. Ohne freigegebene Daten werden keine Standorte, Leistungen oder Bewertungen erfunden. Partner hinterlegen ihre Daten im Partnerprozess.",
-            "nl": "Een werkplaatsprofiel toont alleen bevestigde gegevens. Zonder vrijgegeven data worden geen locaties, diensten of beoordelingen verzonnen. Partners leggen hun gegevens vast in het partnerproces.",
-            "fr": "Un profil atelier n’affiche que des informations confirmées. Sans données validées, aucune adresse, prestation ou évaluation n’est inventée. Les partenaires enregistrent leurs données via le processus partenaire."
+            "de": "Wir zeigen Werkstätten erst, wenn ihre Angaben bestätigt sind. So erhalten Sie verlässliche Informationen zu Leistungen und Erreichbarkeit statt ungeprüfter Einträge.",
+            "nl": "We tonen werkplaatsen pas als hun gegevens bevestigd zijn. Zo krijgt u betrouwbare informatie over diensten en bereikbaarheid in plaats van ongecontroleerde vermeldingen.",
+            "fr": "Nous ne présentons les ateliers qu’une fois leurs informations confirmées. Vous obtenez ainsi des informations fiables sur les prestations et la disponibilité, plutôt que des annonces non vérifiées."
           },
           "source_refs": [
-            "docs/09-final/11-teileklar-datenblatt.md",
-            "docs/09-final/14-gesamtsystem-und-portale.md"
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],
       "metadata": {
         "description": {
-          "de": "Ein tatsächliches Werkstattprofil zeigt nur bestätigte Betriebsdaten, Leistungen und Kontaktwege. Aktuell werden keine Werkstattnamen, Entfernungen, Bewertungen oder freien Termine erfunden.",
-          "nl": "Een werkelijk werkplaatsprofiel toont alleen bevestigde bedrijfsgegevens, diensten en contactmogelijkheden. Er worden geen namen, afstanden, beoordelingen of beschikbare afspraken verzonnen.",
-          "fr": "Un profil réel ne présente que des données, prestations et contacts confirmés. Aucun nom, distance, avis ou créneau disponible n’est inventé."
+          "de": "Eine Werkstatt zeigt Ihnen bestätigte Leistungen, Öffnungszeiten und Kontaktwege. Wir stellen nur geprüfte Partnerbetriebe vor – damit Sie sich auf die Angaben verlassen können.",
+          "nl": "Een werkplaats toont u bevestigde diensten, openingstijden en contactmogelijkheden. Wij stellen alleen gecontroleerde partnerbedrijven voor – zodat u op de gegevens kunt vertrouwen.",
+          "fr": "Un atelier vous présente ses prestations confirmées, ses horaires et ses moyens de contact. Nous ne présentons que des partenaires vérifiés – pour que vous puissiez vous fier aux informations."
         },
         "canonical_path": "/teileklar/werkstatt",
         "canonical_origin": null,
@@ -5012,27 +4990,27 @@
           "type": "route",
           "target_id": "tk-appointments",
           "label": {
-            "de": "Weiter: Werkstatttermin anfragen",
-            "nl": "Verder: Werkplaatsafspraak aanvragen",
-            "fr": "Suite : Demander un rendez-vous atelier"
+            "de": "Werkstatttermin anfragen",
+            "nl": "Werkplaatsafspraak aanvragen",
+            "fr": "Demander un rendez-vous atelier"
           }
         },
         {
           "type": "route",
           "target_id": "tk-partner",
           "label": {
-            "de": "Weiter: Werkstattpartner werden",
-            "nl": "Verder: Werkplaatspartner worden",
-            "fr": "Suite : Devenir partenaire atelier"
+            "de": "Werkstattpartner werden",
+            "nl": "Werkplaatspartner worden",
+            "fr": "Devenir atelier partenaire"
           }
         },
         {
           "type": "chat",
           "chat_intent": "booking",
           "label": {
-            "de": "Gespräch anfragen",
-            "nl": "Gesprek aanvragen",
-            "fr": "Demander un entretien"
+            "de": "Werkstatt im Chat anfragen",
+            "nl": "Werkplaats in de chat aanvragen",
+            "fr": "Contacter un atelier dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -5049,23 +5027,23 @@
         "fr": "TEILEKLAR : prestataire, confidentialité et conditions d’achat"
       },
       "summary": {
-        "de": "Der Handelsbereich benötigt eigene freigegebene Anbieter-, Datenschutz- und Verbraucherinformationen. Ein B2C-Kauf wird erst nach Prüfung der einschlägigen Bestell-, Widerrufs-, Preis- und Versandbedingungen freigeschaltet. Diese Seite ersetzt die Prüfung nicht.",
-        "nl": "Het handelsgebied vereist eigen vrijgegeven aanbieder-, privacy- en consumenteninformatie. B2C-aankopen worden pas geactiveerd na toetsing van bestel-, herroepings-, prijs- en verzendvoorwaarden. Deze pagina vervangt die toetsing niet.",
-        "fr": "Le contexte commercial exige ses propres informations validées sur prestataire, confidentialité et consommateurs. L’achat B2C sera activé après vérification des conditions de commande, rétractation, prix et livraison. Cette page ne remplace pas cette vérification."
+        "de": "Hier finden Sie die rechtlichen Informationen zum TEILEKLAR-Bereich: Anbieter, Datenschutz sowie Bestell-, Widerrufs-, Preis- und Versandbedingungen. Diese Angaben gelten für Ihren Einkauf bei TEILEKLAR.",
+        "nl": "Hier vindt u de juridische informatie over het TEILEKLAR-gedeelte: aanbieder, privacy en bestel-, herroepings-, prijs- en verzendvoorwaarden. Deze gegevens gelden voor uw aankoop bij TEILEKLAR.",
+        "fr": "Vous trouvez ici les informations légales de l’espace TEILEKLAR : prestataire, confidentialité ainsi que conditions de commande, de rétractation, de prix et de livraison. Ces informations s’appliquent à vos achats chez TEILEKLAR."
       },
       "site_context": "teileklar",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
-            "nl": "TEILEKLAR: aanbieder, privacy en aankoopvoorwaarden",
-            "fr": "TEILEKLAR : prestataire, confidentialité et conditions d’achat"
+            "de": "Rechtliche Informationen zu TEILEKLAR",
+            "nl": "Juridische informatie over TEILEKLAR",
+            "fr": "Informations légales sur TEILEKLAR"
           },
           "body": {
-            "de": "Der Handelsbereich benötigt eigene freigegebene Anbieter-, Datenschutz- und Verbraucherinformationen. Ein B2C-Kauf wird erst nach Prüfung der einschlägigen Bestell-, Widerrufs-, Preis- und Versandbedingungen freigeschaltet. Diese Seite ersetzt die Prüfung nicht.",
-            "nl": "Het handelsgebied vereist eigen vrijgegeven aanbieder-, privacy- en consumenteninformatie. B2C-aankopen worden pas geactiveerd na toetsing van bestel-, herroepings-, prijs- en verzendvoorwaarden. Deze pagina vervangt die toetsing niet.",
-            "fr": "Le contexte commercial exige ses propres informations validées sur prestataire, confidentialité et consommateurs. L’achat B2C sera activé après vérification des conditions de commande, rétractation, prix et livraison. Cette page ne remplace pas cette vérification."
+            "de": "Transparenz ist uns wichtig: Hier sehen Sie, wer Anbieter ist, wie wir mit Ihren Daten umgehen und welche Bedingungen für Bestellung, Lieferung und Widerruf gelten.",
+            "nl": "Transparantie is voor ons belangrijk: hier ziet u wie de aanbieder is, hoe we met uw gegevens omgaan en welke voorwaarden gelden voor bestelling, levering en herroeping.",
+            "fr": "La transparence nous tient à cœur : vous voyez ici qui est le prestataire, comment nous traitons vos données et quelles conditions s’appliquent à la commande, la livraison et la rétractation."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -5077,13 +5055,13 @@
           "id": "anbieter-und-geltung",
           "heading": {
             "de": "Anbieter und Geltungsbereich",
-            "nl": "Aanbieder en toepassingsgebied",
+            "nl": "Aanbieder en reikwijdte",
             "fr": "Prestataire et champ d’application"
           },
           "body": {
-            "de": "TEILEKLAR ist eine Marke im Rahmen der NeXify AI FACTORY B.V. Anbieterinformationen, Datenschutz und Kaufbedingungen gelten für den TEILEKLAR-Bereich. Eine Kauf- oder Bestellfunktion ist bis zur gesonderten Freigabe nicht aktiv.",
-            "nl": "TEILEKLAR is een merk binnen NeXify AI FACTORY B.V. Aanbiederinformatie, privacy en koopvoorwaarden gelden voor het TEILEKLAR-gedeelte. Een koop- of bestelfunctie is tot afzonderlijke vrijgave niet actief.",
-            "fr": "TEILEKLAR est une marque de NeXify AI FACTORY B.V. Informations du prestataire, confidentialité et conditions d’achat s’appliquent à l’espace TEILEKLAR. Aucune fonction d’achat ou de commande n’est active avant validation distincte."
+            "de": "TEILEKLAR ist eine Marke der NeXify AI FACTORY B.V. Anbieterinformationen, Datenschutz und Kaufbedingungen gelten für den TEILEKLAR-Bereich. Bei Fragen zu Ihren Rechten als Verbraucher erreichen Sie uns jederzeit.",
+            "nl": "TEILEKLAR is een merk van NeXify AI FACTORY B.V. Aanbiederinformatie, privacy en aankoopvoorwaarden gelden voor het TEILEKLAR-gedeelte. Bij vragen over uw rechten als consument kunt u ons altijd bereiken.",
+            "fr": "TEILEKLAR est une marque de NeXify AI FACTORY B.V. Les informations prestataire, la confidentialité et les conditions d’achat s’appliquent à l’espace TEILEKLAR. Pour toute question sur vos droits de consommateur, vous pouvez nous contacter à tout moment."
           },
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
@@ -5093,9 +5071,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Der Handelsbereich benötigt eigene freigegebene Anbieter-, Datenschutz- und Verbraucherinformationen. Ein B2C-Kauf wird erst nach Prüfung der einschlägigen Bestell-, Widerrufs-, Preis- und Versandbedingungen freigeschaltet. Diese Seite ersetzt die Prüfung nicht.",
-          "nl": "Het handelsgebied vereist eigen vrijgegeven aanbieder-, privacy- en consumenteninformatie. B2C-aankopen worden pas geactiveerd na toetsing van bestel-, herroepings-, prijs- en verzendvoorwaarden. Deze pagina vervangt die toetsing niet.",
-          "fr": "Le contexte commercial exige ses propres informations validées sur prestataire, confidentialité et consommateurs. L’achat B2C sera activé après vérification des conditions de commande, rétractation, prix et livraison. Cette page ne remplace pas cette vérification."
+          "de": "Hier finden Sie die rechtlichen Informationen zum TEILEKLAR-Bereich: Anbieter, Datenschutz sowie Bestell-, Widerrufs-, Preis- und Versandbedingungen. Diese Angaben gelten für Ihren Einkauf bei TEILEKLAR.",
+          "nl": "Hier vindt u de juridische informatie over het TEILEKLAR-gedeelte: aanbieder, privacy en bestel-, herroepings-, prijs- en verzendvoorwaarden. Deze gegevens gelden voor uw aankoop bij TEILEKLAR.",
+          "fr": "Vous trouvez ici les informations légales de l’espace TEILEKLAR : prestataire, confidentialité ainsi que conditions de commande, de rétractation, de prix et de livraison. Ces informations s’appliquent à vos achats chez TEILEKLAR."
         },
         "canonical_path": "/teileklar/rechtliches",
         "canonical_origin": null,
@@ -5132,27 +5110,27 @@
           "type": "route",
           "target_id": "tk-home",
           "label": {
-            "de": "Weiter: TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
-            "nl": "Verder: TEILEKLAR: onderdelen, voertuig en vervolgstappen",
-            "fr": "Suite : TEILEKLAR : pièces, véhicule et prochaines étapes"
+            "de": "Zur TEILEKLAR-Startseite",
+            "nl": "Naar de TEILEKLAR-startpagina",
+            "fr": "Vers l’accueil TEILEKLAR"
           }
         },
         {
           "type": "route",
           "target_id": "cookies",
           "label": {
-            "de": "Weiter: Cookies und Einstellungen",
-            "nl": "Verder: Cookies en instellingen",
-            "fr": "Suite : Cookies et paramètres"
+            "de": "Cookies und Einstellungen",
+            "nl": "Cookies en instellingen",
+            "fr": "Cookies et paramètres"
           }
         },
         {
           "type": "chat",
           "chat_intent": "quote",
           "label": {
-            "de": "Projekt im Chat klären",
-            "nl": "Project in de chat bespreken",
-            "fr": "Préciser le projet dans le chat"
+            "de": "Frage im Chat klären",
+            "nl": "Vraag in de chat bespreken",
+            "fr": "Poser une question dans le chat"
           },
           "fallback_target_id": "contact"
         }
@@ -5426,9 +5404,9 @@
         "fr": "Compte client et véhicule"
       },
       "summary": {
-        "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-        "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-        "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+        "de": "In Ihrem Kundenkonto verwalten Sie Ihre Fahrzeuge, Anfragen und Gutscheine an einem Ort. Melden Sie sich an, um Ihre persönlichen Daten geschützt zu sehen.",
+        "nl": "In uw klantaccount beheert u uw voertuigen, aanvragen en vouchers op één plek. Meld u aan om uw persoonlijke gegevens beschermd te bekijken.",
+        "fr": "Dans votre compte client, vous gérez vos véhicules, demandes et bons au même endroit. Connectez-vous pour consulter vos données personnelles en toute sécurité."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5440,9 +5418,9 @@
             "fr": "Compte client et véhicule"
           },
           "body": {
-            "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-            "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-            "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+            "de": "Ihr Konto bündelt Fahrzeuge, Anfragen und Gutscheine. Zum Schutz Ihrer Daten ist dafür eine Anmeldung nötig.",
+            "nl": "Uw account bundelt voertuigen, aanvragen en vouchers. Ter bescherming van uw gegevens is hiervoor aanmelden nodig.",
+            "fr": "Votre compte regroupe véhicules, demandes et bons. Pour protéger vos données, une connexion est nécessaire."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -5453,9 +5431,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-          "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-          "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+          "de": "In Ihrem Kundenkonto verwalten Sie Ihre Fahrzeuge, Anfragen und Gutscheine an einem Ort. Melden Sie sich an, um Ihre persönlichen Daten geschützt zu sehen.",
+          "nl": "In uw klantaccount beheert u uw voertuigen, aanvragen en vouchers op één plek. Meld u aan om uw persoonlijke gegevens beschermd te bekijken.",
+          "fr": "Dans votre compte client, vous gérez vos véhicules, demandes et bons au même endroit. Connectez-vous pour consulter vos données personnelles en toute sécurité."
         },
         "canonical_path": "/teileklar/konto",
         "canonical_origin": null,
@@ -5493,9 +5471,9 @@
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Weiter: Kundenbereich: aktueller Stand",
-            "nl": "Verder: Klantomgeving: huidige status",
-            "fr": "Suite : Espace client : état actuel"
+            "de": "Im Kundenkonto anmelden",
+            "nl": "Aanmelden bij klantaccount",
+            "fr": "Se connecter au compte client"
           }
         }
       ],
@@ -5511,9 +5489,9 @@
         "fr": "Portail atelier et partenaire"
       },
       "summary": {
-        "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-        "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-        "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+        "de": "Im Partnerportal sehen Partnerbetriebe ihre Anfragen, Termine und Profildaten. Melden Sie sich mit Ihrem Partnerzugang an, um Ihren geschützten Bereich zu öffnen.",
+        "nl": "In het partnerportaal zien partnerbedrijven hun aanvragen, afspraken en profielgegevens. Meld u aan met uw partnertoegang om uw beschermde gedeelte te openen.",
+        "fr": "Dans le portail partenaire, les ateliers partenaires voient leurs demandes, rendez-vous et données de profil. Connectez-vous avec votre accès partenaire pour ouvrir votre espace sécurisé."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5525,9 +5503,9 @@
             "fr": "Portail atelier et partenaire"
           },
           "body": {
-            "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-            "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-            "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+            "de": "Das Partnerportal bündelt Anfragen, Termine und Ihr Betriebsprofil. Für den Zugang ist eine Anmeldung mit Partnerzugang erforderlich.",
+            "nl": "Het partnerportaal bundelt aanvragen, afspraken en uw bedrijfsprofiel. Voor toegang is aanmelden met partnertoegang vereist.",
+            "fr": "Le portail partenaire regroupe demandes, rendez-vous et votre profil d’entreprise. L’accès nécessite une connexion avec un accès partenaire."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -5538,9 +5516,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-          "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-          "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+          "de": "Im Partnerportal sehen Partnerbetriebe ihre Anfragen, Termine und Profildaten. Melden Sie sich mit Ihrem Partnerzugang an, um Ihren geschützten Bereich zu öffnen.",
+          "nl": "In het partnerportaal zien partnerbedrijven hun aanvragen, afspraken en profielgegevens. Meld u aan met uw partnertoegang om uw beschermde gedeelte te openen.",
+          "fr": "Dans le portail partenaire, les ateliers partenaires voient leurs demandes, rendez-vous et données de profil. Connectez-vous avec votre accès partenaire pour ouvrir votre espace sécurisé."
         },
         "canonical_path": "/teileklar/partnerportal",
         "canonical_origin": null,
@@ -5578,9 +5556,9 @@
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Weiter: Kundenbereich: aktueller Stand",
-            "nl": "Verder: Klantomgeving: huidige status",
-            "fr": "Suite : Espace client : état actuel"
+            "de": "Mit Partnerzugang anmelden",
+            "nl": "Aanmelden met partnertoegang",
+            "fr": "Se connecter avec l’accès partenaire"
           }
         }
       ],
@@ -5596,9 +5574,9 @@
         "fr": "Clients de proximité"
       },
       "summary": {
-        "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-        "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-        "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+        "de": "Der Nachbarschaftsbereich bringt Kundinnen und Kunden mit Werkstätten in ihrer Umgebung zusammen. Melden Sie sich an, um Ihre regionalen Angebote und Anfragen geschützt zu sehen.",
+        "nl": "Het buurtgedeelte brengt klanten samen met werkplaatsen in hun omgeving. Meld u aan om uw regionale aanbiedingen en aanvragen beschermd te bekijken.",
+        "fr": "L’espace de proximité met en relation les clients avec les ateliers de leur région. Connectez-vous pour consulter vos offres et demandes régionales en toute sécurité."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5610,9 +5588,9 @@
             "fr": "Clients de proximité"
           },
           "body": {
-            "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-            "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-            "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+            "de": "Hier finden Sie regionale Angebote und Werkstätten in Ihrer Nähe. Zum Schutz Ihrer Daten ist dafür eine Anmeldung nötig.",
+            "nl": "Hier vindt u regionale aanbiedingen en werkplaatsen bij u in de buurt. Ter bescherming van uw gegevens is aanmelden nodig.",
+            "fr": "Vous trouvez ici des offres régionales et des ateliers près de chez vous. Pour protéger vos données, une connexion est nécessaire."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -5623,9 +5601,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-          "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-          "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+          "de": "Der Nachbarschaftsbereich bringt Kundinnen und Kunden mit Werkstätten in ihrer Umgebung zusammen. Melden Sie sich an, um Ihre regionalen Angebote und Anfragen geschützt zu sehen.",
+          "nl": "Het buurtgedeelte brengt klanten samen met werkplaatsen in hun omgeving. Meld u aan om uw regionale aanbiedingen en aanvragen beschermd te bekijken.",
+          "fr": "L’espace de proximité met en relation les clients avec les ateliers de leur région. Connectez-vous pour consulter vos offres et demandes régionales en toute sécurité."
         },
         "canonical_path": "/teileklar/nachbarschaft",
         "canonical_origin": null,
@@ -5663,9 +5641,9 @@
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Weiter: Kundenbereich: aktueller Stand",
-            "nl": "Verder: Klantomgeving: huidige status",
-            "fr": "Suite : Espace client : état actuel"
+            "de": "Anmelden",
+            "nl": "Aanmelden",
+            "fr": "Se connecter"
           }
         }
       ],

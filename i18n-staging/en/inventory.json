@@ -1,7 +1,7 @@
 {
  "order": "NEX-WEB-EN-20261030-01",
  "purpose": "build-preparation field inventory, not shipped, runtime locales unchanged",
- "site_map_sha256": "016bea7ce6f66b769a2ea74a0756344593be6f3fe5bb256f5fc05599c416746e",
+ "site_map_sha256": "e8b78867d3bb8dedfbffacbcd0f9de19287d863e601cbd4bb18718286f75eda1",
  "generated_from": "config/site-map.json",
  "total_fields": 483,
  "by_group": {
@@ -3399,6 +3399,16 @@
    "group": "footer",
    "de": "Recht und Transparenz",
    "de_sha256": "37467a518c5c3a5f0e2f7b85381214b3009c5319e9f0f37aae5b6dadeb9780b9"
+  }
+ ],
+ "drift_notes": [
+  {
+   "change": "NEX-CONTENT-REGRESSION-20261030-04",
+   "scope": "DE customer copy rewrite for TEILEKLAR shop routes (Paket 1: tk-home, tk-search, tk-categories, tk-category, tk-product, tk-cart, tk-checkout, tk-fitment, tk-appointments, tk-vouchers, tk-partner, tk-workshop, tk-legal, tk-account, tk-partner-portal, tk-neighbourhood).",
+   "previous_site_map_sha256": "016bea7ce6f66b769a2ea74a0756344593be6f3fe5bb256f5fc05599c416746e",
+   "current_site_map_sha256": "e8b78867d3bb8dedfbffacbcd0f9de19287d863e601cbd4bb18718286f75eda1",
+   "en_fragments_status": "STALE for group \"teileklar\" (151 fields) + any changed next_action labels; EN fragments intentionally NOT re-translated now (budget). Re-translate from current DE before shipping EN.",
+   "runtime_impact": "none (EN staging is build-preparation only; runtime locales de/nl/fr unchanged)"
   }
  ]
 }
