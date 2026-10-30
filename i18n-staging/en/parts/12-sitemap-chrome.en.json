@@ -1,0 +1,17 @@
+{
+ "_order": "NEX-WEB-EN-20261030-01",
+ "_purpose": "English site-map CHROME part (build-preparation, NOT shipped). Covers localized objects outside pages/footer that the site-map i18n parity contract requires (site_contexts labels+footer, inter_site_links, customer_portal_entry). JSON-pointers into config/site-map.json. Runtime unchanged.",
+ "_surface": "config/site-map.json :: localized labels outside the 483-field page/footer inventory",
+ "/site_contexts/nexify/label": "NeXify AI",
+ "/site_contexts/nexify/footer/0/label": "Services and Products",
+ "/site_contexts/nexify/footer/1/label": "Orientation and Contact",
+ "/site_contexts/nexify/footer/2/label": "Legal and Transparency",
+ "/site_contexts/teileklar/label": "TEILEKLAR",
+ "/site_contexts/teileklar/footer/0/label": "TEILEKLAR",
+ "/site_contexts/teileklar/footer/1/label": "Workshop and Vouchers",
+ "/site_contexts/teileklar/footer/2/label": "Information and Settings",
+ "/site_contexts/internal/label": "Internal",
+ "/inter_site_links/0/label": "Discover TEILEKLAR",
+ "/inter_site_links/1/label": "NeXify solutions for businesses",
+ "/customer_portal_entry/label": "Customer area: current status"
+}
