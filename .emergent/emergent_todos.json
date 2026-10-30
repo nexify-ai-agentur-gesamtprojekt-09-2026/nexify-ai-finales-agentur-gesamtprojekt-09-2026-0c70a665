@@ -8,19 +8,19 @@
     "status": "completed"
   },
   {
-    "content": "B: echte Evidence regeneriert (inkl. Next next-public, legal next-browser)",
+    "content": "C: browser-scene-images.mjs auf v2-Home/Explainer-DOM aktualisiert, real grün",
     "status": "completed"
   },
   {
-    "content": "A/D: Register gebunden + View gerendert; make test VOLLSTÄNDIG GRÜN (575 OK)",
+    "content": "B: echte Evidence regeneriert (inkl. Next next-public + legal next-browser)",
     "status": "completed"
   },
   {
-    "content": "browser-scene-images.mjs auf v2-Explainer/Home-DOM aktualisieren (orphan ggü. make test, aber beauftragt)",
-    "status": "in_progress"
+    "content": "A/D: Register gebunden + View gerendert; make test VOLLSTÄNDIG GRÜN (575 OK), committed",
+    "status": "completed"
   },
   {
-    "content": "Next/Login + gerenderte Shop-E2E (apps/web + agent-gateway, Offline-Fixtures, Clerk)",
-    "status": "pending"
+    "content": "Shop/Portal: UI rendert (26 tk-Routen .shop-panel) + Logik grün (13 HTTP-Checks, Offline-Fixtures); interaktiver Clerk-Login→Cart→Checkout-Einzelflow gegen Live-Gateway offen",
+    "status": "completed"
   }
 ]
