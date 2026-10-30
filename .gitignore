@@ -49,3 +49,7 @@ apps/site/standalone.html
 .vercel/
 .agents/skills/
 .codex/skills/
+.env.*
+*.env
+credentials.json
+.credentials
