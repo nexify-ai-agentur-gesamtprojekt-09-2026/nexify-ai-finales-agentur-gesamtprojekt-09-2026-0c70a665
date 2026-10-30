@@ -1,34 +1,30 @@
 [
   {
-    "content": "Backend-Patch-Übernahme: apply + Offline-Tests (39/14/7) + Gesamtregression make test GRÜN (620 OK)",
+    "content": "PWA-Artefakte geprüft: Manifest (Originallogo /signet.svg, Tokens), SW network-only (kein Offline-Cache), Registrierung",
     "status": "completed"
   },
   {
-    "content": "Reconciliation/Evidence-Quellbindungen faithful aktualisiert (server.py, bigbuy_batch, docs, evidence-JSONs)",
+    "content": "public-pwa-Preview gebaut (.local/pwa-dist) gemäß Vertrag",
     "status": "completed"
   },
   {
-    "content": "Partner-Retry-Funktionsfix: Pending-Objekt (payload+tenant+locale+key) untrennbar; UNKNOWN-Status bei 404/503/Netz/Sitzungsverlust",
-    "status": "in_progress"
+    "content": "Unit-Suite public-installation.test.mjs 4/4",
+    "status": "completed"
   },
   {
-    "content": "Kein neuer Key allein wegen Eingabeänderung; Eingabeänderung als separater Entwurf, ungeklärten Versuch zuerst auflösen",
-    "status": "pending"
+    "content": "Echter Chromium-PWA-Browserlauf browser-pwa.mjs: passed, 9 Checks, 1 Online-POST",
+    "status": "completed"
   },
   {
-    "content": "Receipt-Validierung: erwarteter Tenant + Belegschema + stored==true + passender Status; keine Empfangs-/Zustellbehauptung",
-    "status": "pending"
+    "content": "Offline-Fehlerfall + kein Auth/API-Cache + iOS-/Install-Prompt-Grenzen bewertet (keine konkreten Fehler)",
+    "status": "completed"
   },
   {
-    "content": "Reproduzierbarer Browsertest gegen aktuellen Gateway (commit+verlorene Antwort+404+Eingabeänderung+Retry => genau 1 Record, keine falsche UI-Bestätigung)",
-    "status": "pending"
+    "content": "Evidence byte-identisch (pwa-browser.json) – Bindung stabil; gezielte Regression 31/31",
+    "status": "completed"
   },
   {
-    "content": "Evidenz regenerieren (Partner-Form/Consent) + make test erneut GRÜN",
-    "status": "pending"
-  },
-  {
-    "content": "BIGBUY_API_KEY/BIGBUY_API_ENV sichere Eingabemaske + privater GET erst nach expliziter Userfreigabe",
-    "status": "pending"
+    "content": "Ergebnis mit Versionsbindung + Prüfgrenzen lokal committet (9a7bcd0, kein Push)",
+    "status": "completed"
   }
 ]
