@@ -1,26 +1,22 @@
 [
   {
-    "content": "Handoff-Git-Status (read-only) dokumentieren + an User melden",
+    "content": "Daten-Integration (integrate-en.mjs) + Generator + Switcher + Workspace-starters angewandt & Blast-Radius final vermessen",
     "status": "completed"
   },
   {
-    "content": "NEX-UI-DEPTH komplett (Tokens, globals.css, Evidence real neu, Vorher/Nachher-Doku, commit 81c641d); make test 583 OK",
+    "content": "Entscheidung: kein riskanter Halbstand im Restbudget -> sauber auf gruenen Stand zurueckgesetzt (Staging 100% + Runbook bleiben)",
     "status": "completed"
   },
   {
-    "content": "EN i18n: alle 483 site-map-Felder + 12 Chrome-Labels + 61 chat-ui + 26 ui-config uebersetzt & verifiziert (VERIFY_OK)",
+    "content": "Read-only Workflow-Analyse (Push auf privaten Handoff-Branch) dokumentiert + committet",
     "status": "completed"
   },
   {
-    "content": "EN i18n: Daten-Integration probeweise angewandt, Blast-Radius vermessen (4 Testmodule), danach grün zurueckgesetzt",
+    "content": "make test gruen bestaetigt (583 OK), HEAD fa2944e",
     "status": "completed"
   },
   {
-    "content": "EN i18n: Integrations-Runbook + integrate-en.mjs committet (atomare Integration als eigener Lauf, Rendering-Schicht dokumentiert)",
-    "status": "completed"
-  },
-  {
-    "content": "OFFEN (Go/No-Go): atomare Laufzeit-Integration inkl. Rendering-Schicht + grosse Evidence-Regen ausfuehren",
+    "content": "OFFEN (Budget): voller EN-Rendering-Pass (~20 Komponenten + grosse Evidence-Kaskade) als ein atomarer gruener Commit - benoetigt dedizierte Budgetzuteilung",
     "status": "pending"
   }
 ]
