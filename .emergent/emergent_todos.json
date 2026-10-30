@@ -1,22 +1,22 @@
 [
   {
-    "content": "Daten-Integration (integrate-en.mjs) + Generator + Switcher + Workspace-starters angewandt & Blast-Radius final vermessen",
+    "content": "EN-Komponenten-Staging A/B/C: alle 21 Komponenten als EN-Quellfragmente, quell-SHA-gebunden & verifiziert, in 3 Gruppen committet",
     "status": "completed"
   },
   {
-    "content": "Entscheidung: kein riskanter Halbstand im Restbudget -> sauber auf gruenen Stand zurueckgesetzt (Staging 100% + Runbook bleiben)",
+    "content": "Git-Workflow-Trigger read-only geprueft: Branch-Push => nur ci.yml (read-only, kein Deploy), kein Agentenrun, kein Prod",
     "status": "completed"
   },
   {
-    "content": "Read-only Workflow-Analyse (Push auf privaten Handoff-Branch) dokumentiert + committet",
+    "content": "Handoff-Push handoff/2026-10-30-release: BLOCKIERT durch ungueltigen GitHub-Token; Reconnect-Anleitung + Basis-SHA/Dateigrenzen geliefert",
     "status": "completed"
   },
   {
-    "content": "make test gruen bestaetigt (583 OK), HEAD fa2944e",
-    "status": "completed"
+    "content": "OFFEN (nach Reconnect, geschuetzt): Branch-Push durch Pascal via Save-to-GitHub",
+    "status": "pending"
   },
   {
-    "content": "OFFEN (Budget): voller EN-Rendering-Pass (~20 Komponenten + grosse Evidence-Kaskade) als ein atomarer gruener Commit - benoetigt dedizierte Budgetzuteilung",
+    "content": "OFFEN (eigenes Paket): Shop/Katalog-Release - bestehender Shop vorhanden & ehrlich (\"kein freigegebener Katalog\"); echte Produkt/Preis/Bestand/Lieferbindung FEHLT (keine verifizierte Quelle) -> praezise benannt, kein Fake",
     "status": "pending"
   }
 ]
