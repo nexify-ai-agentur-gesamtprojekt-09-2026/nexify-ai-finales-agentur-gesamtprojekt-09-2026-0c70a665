@@ -19,14 +19,20 @@
     "scope": "/",
     "display": "standalone",
     "lang": "de",
-    "background_color": "#1B1E1D",
-    "theme_color": "#1B1E1D",
+    "background_color": "#080A0F",
+    "theme_color": "#080A0F",
     "icons": [
       {
         "src": "/signet.svg",
         "sizes": "any",
         "type": "image/svg+xml",
         "purpose": "any"
+      },
+      {
+        "src": "/signet.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "maskable"
       }
     ]
   },
