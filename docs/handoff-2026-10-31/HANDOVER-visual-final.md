@@ -26,9 +26,10 @@ Team für Backend-/Integrations-/Feinarbeit. **Keine Secrets. Kein Publish. Kein
 - Alle Dateien unter `i18n-staging/en/`. Werkzeuge: `_tools/build-inventory.mjs`, `_tools/verify-part.mjs`
   (prüft Pointer-Vollständigkeit, DE-SHA-Bindung, Platzhalter-/Produktnamen-Erhalt).
 - Inventar: `inventory.json` = **483 lokalisierte Seitenfelder** (+Footer), je Pointer + DE-SHA + Gruppe.
-- **FERTIG & VERIFIZIERT (181 Felder):** `parts/01-core.en.json` (home/leistungen/unternehmen/kontakt, 95),
-  `parts/02-leistungen-rahmen.en.json` (44), `parts/03-produkte.en.json` (42) — je VERIFY_OK.
-- **OFFEN (302 Felder):** wissen 28, recht 54, auth 24, teileklar 151, portal-intern 42, footer 3.
+- **FERTIG & VERIFIZIERT (209 Felder, alle öffentlichen Marketing-Seiten):** `parts/01-core.en.json`
+  (home/leistungen/unternehmen/kontakt, 95), `parts/02-leistungen-rahmen.en.json` (44),
+  `parts/03-produkte.en.json` (42), `parts/04-wissen.en.json` (28) — je VERIFY_OK (Batch bestätigt).
+- **OFFEN (274 Felder):** recht 54, auth 24, teileklar 151, portal-intern 42, footer 3.
   Pointer stehen vollständig in `inventory.json` (Gruppe-Feld). **recht/legal nur mit separater
   Rechtsprüfung übersetzen — nicht als juristisch geprüft ausgeben.**
 - **NOCH NICHT inventarisiert (eigene Teilinventare nötig):** UI-Chrome (`apps/web/lib/i18n.ts`,
