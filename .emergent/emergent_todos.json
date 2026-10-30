@@ -1,30 +1,34 @@
 [
   {
-    "content": "POC: /teileklar/kasse Copy kundengerecht (DE/NL/FR)",
+    "content": "Dateigrenzen bestätigen (api/**, apps/agent-gateway/**, bigbuy-* reserviert/unverändert)",
     "status": "completed"
   },
   {
-    "content": "Evidenz-Kaskade POC regenerieren + make test 583 OK",
+    "content": "Paket 3: geschützte Nexify-Portale (customer-portal, api-console, affiliate-portal) kundengerecht",
     "status": "completed"
   },
   {
-    "content": "Paket 1: alle TEILEKLAR Shop-Routen (16) kundengerecht umschreiben",
+    "content": "Footer-Badge 'Entwicklungsvorschau' -> 'Beta-Version' (DE/NL/FR) in SiteFooter.tsx",
     "status": "completed"
   },
   {
-    "content": "Paket 1 Evidenz-Kaskade regenerieren + make test 583 OK",
+    "content": "Partneranfrage-Idempotenz (stabiler Key + Receipt-Prüfung bei unbekanntem Ausgang)",
     "status": "completed"
   },
   {
-    "content": "EN-Staging Drift (inventory.json sourceSHA + Drift-Notiz) nachführen",
+    "content": "Agentur-Marketingseiten geprüft: bereits kundengerecht -> dokumentiert, nicht verändert",
     "status": "completed"
   },
   {
-    "content": "Paket 1 Vorher/Nachher-Belege + verbleibende Pfadliste dokumentieren",
+    "content": "Chat-3D/Schatten: bereits konsistente Tokens vorhanden -> globals.css bewusst unverändert",
     "status": "completed"
   },
   {
-    "content": "CHECKPOINT: Paket 1 an Nutzer berichten, Freigabe für Paket 2 (Partner/affiliate) + Paket 3 (Agentur) + Paket 4 (Chrome) abwarten",
-    "status": "in_progress"
+    "content": "Evidenz echt regenerieren (browser-critical/text-spacing) + SHA surgical (legal-footer/consent/register) + EN-Drift",
+    "status": "completed"
+  },
+  {
+    "content": "make test 583 OK + lokaler Commit (kein Push)",
+    "status": "completed"
   }
 ]
