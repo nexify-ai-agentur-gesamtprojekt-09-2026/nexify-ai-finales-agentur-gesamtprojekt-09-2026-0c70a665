@@ -3417,6 +3417,18 @@
    "current_site_map_sha256": "d06c7afbb24daddda0f9941eeab59489c1ee29977379b7df089f6e254d038c4e",
    "en_fragments_status": "STALE for groups \"portal-intern\"/\"footer\" and SiteFooter.en.json (label). EN fragments intentionally NOT re-translated now (budget); re-translate from current DE before shipping EN.",
    "runtime_impact": "none (EN staging is build-preparation only; runtime de/nl/fr unchanged)"
+  },
+  {
+   "change": "NEX-REMAINING-FUNCTIONS-20261030-08",
+   "scope": "Status-Konsolidierung EN-Staging vs. aktuelle DE-Quellen.",
+   "current_site_map_sha256": "d06c7afbb24daddda0f9941eeab59489c1ee29977379b7df089f6e254d038c4e",
+   "stale_groups": [
+    "teileklar (Paket 1)",
+    "portal-intern (Paket 3)",
+    "footer/SiteFooter (Paket 2+3 Label)"
+   ],
+   "decision": "Runtime-EN-Integration (Locale-Contract de/nl/fr -> +en inkl. 483 Felder, LocaleSwitcher, Clerk enUS, komplette Evidenz-Kaskade ueber 4 Locales) ist eine dedizierte Grosskaskade ueber der 200-Credit-Obergrenze dieses Pakets. Kein Dropdown-only-EN eingefuehrt (keine Mischsprache). EN-Fragmente der stale_groups vor Runtime-Flip aus aktuellem DE neu uebersetzen.",
+   "runtime_impact": "none (Staging bleibt build-preparation; Runtime de/nl/fr unveraendert)"
   }
  ]
 }
