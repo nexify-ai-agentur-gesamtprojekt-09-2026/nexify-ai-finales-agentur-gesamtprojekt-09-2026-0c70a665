@@ -4,7 +4,7 @@
 .identity-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 48% 60% at 70% 42%, color-mix(in srgb, var(--color-marke-lime) 7%, transparent), transparent 72%), radial-gradient(ellipse 30% 40% at 12% 90%, color-mix(in srgb, var(--color-marke-cyan) 5%, transparent), transparent 70%); }
 .identity-scene { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.75fr); align-items: center; gap: clamp(var(--space-6), 3cqi, var(--space-8)); padding: var(--space-8) var(--layout-page-padding) var(--space-8); min-height: var(--layout-hero-min); }
 .identity-copy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(16px, 1.6cqi, 36px); }
-.identity-copy h1 { font-family: var(--font-display); font-size: clamp(40px, 4.1cqi, 108px); line-height: var(--type-hero-leading); letter-spacing: var(--type-display-tracking); font-weight: 700; margin: 0; max-width: 16ch; text-wrap: balance; overflow-wrap: normal; hyphens: auto; }
+.identity-copy h1 { font-family: var(--font-display); font-size: clamp(40px, 4.1cqi, 108px); line-height: var(--type-hero-leading); letter-spacing: var(--type-display-tracking); font-weight: 700; margin: 0; max-width: 16ch; text-wrap: balance; overflow-wrap: anywhere; hyphens: auto; }
 .identity-title-accent { color: var(--color-marke-lime); }
 .identity-body { font-size: clamp(17px, 1.2cqi, 28px); line-height: var(--type-body-leading); max-width: 40ch; margin: 0; color: var(--color-text-sekundaer); }
 .identity-links { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(16px, 1.6cqi, 36px); font-size: clamp(15px, 1cqi, 22px); }
