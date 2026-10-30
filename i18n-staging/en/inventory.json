@@ -1,7 +1,7 @@
 {
  "order": "NEX-WEB-EN-20261030-01",
  "purpose": "build-preparation field inventory, not shipped, runtime locales unchanged",
- "site_map_sha256": "e8b78867d3bb8dedfbffacbcd0f9de19287d863e601cbd4bb18718286f75eda1",
+ "site_map_sha256": "d06c7afbb24daddda0f9941eeab59489c1ee29977379b7df089f6e254d038c4e",
  "generated_from": "config/site-map.json",
  "total_fields": 483,
  "by_group": {
@@ -3409,6 +3409,14 @@
    "current_site_map_sha256": "e8b78867d3bb8dedfbffacbcd0f9de19287d863e601cbd4bb18718286f75eda1",
    "en_fragments_status": "STALE for group \"teileklar\" (151 fields) + any changed next_action labels; EN fragments intentionally NOT re-translated now (budget). Re-translate from current DE before shipping EN.",
    "runtime_impact": "none (EN staging is build-preparation only; runtime locales de/nl/fr unchanged)"
+  },
+  {
+   "change": "NEX-CONTENT-FINAL-20261030-05",
+   "scope": "DE copy for Nexify protected portals (customer-portal, api-console, affiliate-portal) + footer badge label (SiteFooter.tsx preview \"Entwicklungsvorschau\"->\"Beta-Version\") + PartnerRequestForm idempotency fix.",
+   "previous_site_map_sha256": "e8b78867d3bb8dedfbffacbcd0f9de19287d863e601cbd4bb18718286f75eda1",
+   "current_site_map_sha256": "d06c7afbb24daddda0f9941eeab59489c1ee29977379b7df089f6e254d038c4e",
+   "en_fragments_status": "STALE for groups \"portal-intern\"/\"footer\" and SiteFooter.en.json (label). EN fragments intentionally NOT re-translated now (budget); re-translate from current DE before shipping EN.",
+   "runtime_impact": "none (EN staging is build-preparation only; runtime de/nl/fr unchanged)"
   }
  ]
 }

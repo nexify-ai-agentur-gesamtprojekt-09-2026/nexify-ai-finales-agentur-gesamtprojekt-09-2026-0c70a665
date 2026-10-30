@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-30T17:58:51.565Z",
+  "recorded_at": "2026-10-30T18:20:44.547Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -54,7 +54,7 @@
     "apps/web/components/HomeContent.tsx": "b21dca52338ecfb84c911029a9af6c100dc6229cd6d63a21e740473ddc571be3",
     "apps/web/components/Workspace.tsx": "b00ce5187a849b80bcd86c9c0f0c58e3baed01197b0d45e065ae0c0722b4d70e",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
-    "config/site-map.json": "e8b78867d3bb8dedfbffacbcd0f9de19287d863e601cbd4bb18718286f75eda1"
+    "config/site-map.json": "d06c7afbb24daddda0f9941eeab59489c1ee29977379b7df089f6e254d038c4e"
   },
   "auxiliary_source_sha256": {
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
@@ -140,7 +140,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-30T17:58:51.565Z",
+    "recorded_at": "2026-10-30T18:20:44.547Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

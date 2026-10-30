@@ -5142,28 +5142,28 @@
       "id": "customer-portal",
       "path": "/portal/kunde",
       "title": {
-        "de": "Kundenportal",
-        "nl": "Klantenportaal",
-        "fr": "Portail client"
+        "de": "Kundenbereich",
+        "nl": "Klantgedeelte",
+        "fr": "Espace client"
       },
       "summary": {
-        "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-        "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-        "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+        "de": "In Ihrem persönlichen Kundenbereich sehen Sie Ihre Projekte, Angebote und Dokumente an einem Ort. Melden Sie sich an, um Ihre Inhalte geschützt zu öffnen.",
+        "nl": "In uw persoonlijke klantgedeelte ziet u uw projecten, offertes en documenten op één plek. Meld u aan om uw inhoud beschermd te openen.",
+        "fr": "Dans votre espace client personnel, vous retrouvez vos projets, devis et documents au même endroit. Connectez-vous pour ouvrir vos contenus en toute sécurité."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Kundenportal",
-            "nl": "Klantenportaal",
-            "fr": "Portail client"
+            "de": "Kundenbereich",
+            "nl": "Klantgedeelte",
+            "fr": "Espace client"
           },
           "body": {
-            "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-            "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-            "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+            "de": "Hier bündeln Sie Angebote, Projektfortschritt und Dokumente. Zum Schutz Ihrer Daten ist dafür eine Anmeldung nötig; Sie sehen ausschließlich Ihre eigenen Inhalte.",
+            "nl": "Hier bundelt u offertes, projectvoortgang en documenten. Ter bescherming van uw gegevens is aanmelden nodig; u ziet uitsluitend uw eigen inhoud.",
+            "fr": "Vous y regroupez devis, avancement de projet et documents. Pour protéger vos données, une connexion est nécessaire ; vous ne voyez que vos propres contenus."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -5174,9 +5174,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-          "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-          "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+          "de": "In Ihrem persönlichen Kundenbereich sehen Sie Ihre Projekte, Angebote und Dokumente an einem Ort. Melden Sie sich an, um Ihre Inhalte geschützt zu öffnen.",
+          "nl": "In uw persoonlijke klantgedeelte ziet u uw projecten, offertes en documenten op één plek. Meld u aan om uw inhoud beschermd te openen.",
+          "fr": "Dans votre espace client personnel, vous retrouvez vos projets, devis et documents au même endroit. Connectez-vous pour ouvrir vos contenus en toute sécurité."
         },
         "canonical_path": "/portal/kunde",
         "canonical_origin": null,
@@ -5214,9 +5214,9 @@
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Zugangsstatus ansehen",
-            "nl": "Toegangsstatus bekijken",
-            "fr": "Voir l’état de l’accès"
+            "de": "Anmelden",
+            "nl": "Aanmelden",
+            "fr": "Se connecter"
           }
         }
       ],
@@ -5227,28 +5227,28 @@
       "id": "api-console",
       "path": "/portal/api",
       "title": {
-        "de": "API-Konsole",
-        "nl": "API-console",
-        "fr": "Console API"
+        "de": "API-Bereich",
+        "nl": "API-gedeelte",
+        "fr": "Espace API"
       },
       "summary": {
-        "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-        "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-        "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+        "de": "Im API-Bereich verwalten Sie Ihre Zugänge und sehen, wie Sie NeXify in eigene Anwendungen einbinden. Melden Sie sich an, um Ihre Schlüssel und Einstellungen geschützt zu verwalten.",
+        "nl": "In het API-gedeelte beheert u uw toegangen en ziet u hoe u NeXify in eigen toepassingen integreert. Meld u aan om uw sleutels en instellingen beschermd te beheren.",
+        "fr": "Dans l’espace API, vous gérez vos accès et voyez comment intégrer NeXify à vos applications. Connectez-vous pour gérer vos clés et paramètres en toute sécurité."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "API-Konsole",
-            "nl": "API-console",
-            "fr": "Console API"
+            "de": "API-Bereich",
+            "nl": "API-gedeelte",
+            "fr": "Espace API"
           },
           "body": {
-            "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-            "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-            "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+            "de": "Hier verwalten Sie Zugänge und Einstellungen für die Anbindung eigener Anwendungen. Zum Schutz Ihrer Zugangsdaten ist dafür eine Anmeldung nötig.",
+            "nl": "Hier beheert u toegangen en instellingen voor de koppeling van eigen toepassingen. Ter bescherming van uw toegangsgegevens is aanmelden nodig.",
+            "fr": "Vous gérez ici les accès et paramètres pour connecter vos propres applications. Pour protéger vos identifiants, une connexion est nécessaire."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -5259,9 +5259,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-          "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-          "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+          "de": "Im API-Bereich verwalten Sie Ihre Zugänge und sehen, wie Sie NeXify in eigene Anwendungen einbinden. Melden Sie sich an, um Ihre Schlüssel und Einstellungen geschützt zu verwalten.",
+          "nl": "In het API-gedeelte beheert u uw toegangen en ziet u hoe u NeXify in eigen toepassingen integreert. Meld u aan om uw sleutels en instellingen beschermd te beheren.",
+          "fr": "Dans l’espace API, vous gérez vos accès et voyez comment intégrer NeXify à vos applications. Connectez-vous pour gérer vos clés et paramètres en toute sécurité."
         },
         "canonical_path": "/portal/api",
         "canonical_origin": null,
@@ -5301,9 +5301,9 @@
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Zugangsstatus ansehen",
-            "nl": "Toegangsstatus bekijken",
-            "fr": "Voir l’état de l’accès"
+            "de": "Anmelden",
+            "nl": "Aanmelden",
+            "fr": "Se connecter"
           }
         }
       ],
@@ -5314,28 +5314,28 @@
       "id": "affiliate-portal",
       "path": "/portal/affiliate",
       "title": {
-        "de": "Affiliate-Bereich",
-        "nl": "Affiliateomgeving",
-        "fr": "Espace affilié"
+        "de": "Partnerbereich",
+        "nl": "Partnergedeelte",
+        "fr": "Espace partenaire"
       },
       "summary": {
-        "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-        "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-        "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+        "de": "Im Partnerbereich sehen Partner ihre Empfehlungen, Konditionen und Abrechnungen. Melden Sie sich mit Ihrem Partnerzugang an, um Ihren geschützten Bereich zu öffnen.",
+        "nl": "In het partnergedeelte zien partners hun aanbevelingen, voorwaarden en afrekeningen. Meld u aan met uw partnertoegang om uw beschermde gedeelte te openen.",
+        "fr": "Dans l’espace partenaire, les partenaires voient leurs recommandations, conditions et décomptes. Connectez-vous avec votre accès partenaire pour ouvrir votre espace sécurisé."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Affiliate-Bereich",
-            "nl": "Affiliateomgeving",
-            "fr": "Espace affilié"
+            "de": "Partnerbereich",
+            "nl": "Partnergedeelte",
+            "fr": "Espace partenaire"
           },
           "body": {
-            "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-            "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-            "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+            "de": "Hier bündeln Sie Empfehlungen, Konditionen und Abrechnungen Ihrer Partnerschaft. Zum Schutz Ihrer Daten ist dafür eine Anmeldung mit Partnerzugang nötig.",
+            "nl": "Hier bundelt u aanbevelingen, voorwaarden en afrekeningen van uw partnerschap. Ter bescherming van uw gegevens is aanmelden met partnertoegang nodig.",
+            "fr": "Vous y regroupez recommandations, conditions et décomptes de votre partenariat. Pour protéger vos données, une connexion avec accès partenaire est nécessaire."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -5346,9 +5346,9 @@
       ],
       "metadata": {
         "description": {
-          "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
-          "nl": "Beschermde omgeving. Inhoud vereist passende aanmelding en bevestigde rol-, website- en tenantrechten. Een publieke statuspagina verleent geen toegang.",
-          "fr": "Espace protégé. Le contenu exige connexion adaptée et droits de rôle, site et locataire confirmés. Une page publique de statut n’accorde aucun accès."
+          "de": "Im Partnerbereich sehen Partner ihre Empfehlungen, Konditionen und Abrechnungen. Melden Sie sich mit Ihrem Partnerzugang an, um Ihren geschützten Bereich zu öffnen.",
+          "nl": "In het partnergedeelte zien partners hun aanbevelingen, voorwaarden en afrekeningen. Meld u aan met uw partnertoegang om uw beschermde gedeelte te openen.",
+          "fr": "Dans l’espace partenaire, les partenaires voient leurs recommandations, conditions et décomptes. Connectez-vous avec votre accès partenaire pour ouvrir votre espace sécurisé."
         },
         "canonical_path": "/portal/affiliate",
         "canonical_origin": null,
@@ -5386,9 +5386,9 @@
           "type": "route",
           "target_id": "login",
           "label": {
-            "de": "Zugangsstatus ansehen",
-            "nl": "Toegangsstatus bekijken",
-            "fr": "Voir l’état de l’accès"
+            "de": "Mit Partnerzugang anmelden",
+            "nl": "Aanmelden met partnertoegang",
+            "fr": "Se connecter avec l’accès partenaire"
           }
         }
       ],

@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useState,type FormEvent} from "react";
+import {useEffect,useRef,useState,type FormEvent} from "react";
 import {useUI} from "./Workspace";
 import "./PartnerRequestForm.css";
 
@@ -20,6 +20,9 @@ export default function PartnerRequestForm(){
  const[state,setState]=useState<"idle"|"sending"|"ok"|"error">("idle");
  const[reference,setReference]=useState("");
  const[mine,setMine]=useState<Stored[]>([]);
+ // Stable idempotency: unchanged input keeps the same key so a retry cannot create a duplicate.
+ const idemKeyRef=useRef<string>("");
+ const lastSignatureRef=useRef<string>("");
  async function readback(){
   try{const r=await fetch('/api/partner/requests/mine',{cache:'no-store'});if(r.ok){const d=await r.json();if(Array.isArray(d.requests))setMine(d.requests);}}catch{/* ignore readback errors */}
  }
@@ -28,16 +31,25 @@ export default function PartnerRequestForm(){
   event.preventDefault();
   if(!session){setState("error");return;}
   const form=new FormData(event.currentTarget);
+  const payload={
+   tenant:INTAKE_TENANT,company:String(form.get('company')||''),contact:String(form.get('contact')||''),email:String(form.get('email')||''),message:String(form.get('message')||''),locale
+  };
+  // Reuse one idempotency key for unchanged input; a changed input gets a fresh key.
+  const signature=JSON.stringify([payload.company,payload.contact,payload.email,payload.message,payload.locale]);
+  if(!idemKeyRef.current||signature!==lastSignatureRef.current){idemKeyRef.current=crypto.randomUUID();lastSignatureRef.current=signature;}
   setState("sending");
   try{
-   const response=await fetch('/api/partner/requests',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrf,'Idempotency-Key':crypto.randomUUID()},body:JSON.stringify({
-    tenant:INTAKE_TENANT,company:String(form.get('company')||''),contact:String(form.get('contact')||''),email:String(form.get('email')||''),message:String(form.get('message')||''),locale
-   })});
+   const response=await fetch('/api/partner/requests',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrf,'Idempotency-Key':idemKeyRef.current},body:JSON.stringify(payload)});
    if(!response.ok)throw new Error('submit');
    const data=await response.json();
    if(data.status!=='pending_review'||data.stored!==true||data.received!==false)throw new Error('contract');
    setReference(data.id);setState("ok");await readback();
-  }catch{setState("error");}
+  }catch{
+   // Unknown outcome: check the receipt first via readback. The idempotency key is retained for the
+   // same input, so a deliberate retry re-sends the identical key and cannot create a duplicate.
+   await readback();
+   setState("error");
+  }
  }
  return <section className="partner-form" aria-labelledby="partner-form-title" data-testid="partner-request-form">
   <h2 id="partner-form-title">{t.title}</h2>
