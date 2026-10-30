@@ -27,6 +27,16 @@ export default function PartnerRequestForm(){
   try{const r=await fetch('/api/partner/requests/mine',{cache:'no-store'});if(r.ok){const d=await r.json();if(Array.isArray(d.requests))setMine(d.requests);}}catch{/* ignore readback errors */}
  }
  useEffect(()=>{if(session)void readback();},[session?.csrf]);
+ // Exact receipt for the frozen key (same session + Idempotency-Key). Never creates a new key.
+ // 200 = stored (no delivery); 404 may precede a still-running POST; 409/503/network stay unknown.
+ async function confirmReceipt(){
+  if(!session||!idemKeyRef.current)return false;
+  try{
+   const r=await fetch('/api/partner/requests/receipt?tenant='+encodeURIComponent(INTAKE_TENANT),{cache:'no-store',headers:{'X-CSRF-Token':session.csrf,'Idempotency-Key':idemKeyRef.current}});
+   if(r.status===200){const d=await r.json();if(d&&d.id){setReference(d.id);setState("ok");await readback();return true;}}
+  }catch{/* unknown outcome; keep the same frozen key and payload */}
+  return false;
+ }
  async function submit(event:FormEvent<HTMLFormElement>){
   event.preventDefault();
   if(!session){setState("error");return;}
@@ -40,15 +50,16 @@ export default function PartnerRequestForm(){
   setState("sending");
   try{
    const response=await fetch('/api/partner/requests',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrf,'Idempotency-Key':idemKeyRef.current},body:JSON.stringify(payload)});
+   if(response.status===409){setState("error");return;}
    if(!response.ok)throw new Error('submit');
    const data=await response.json();
    if(data.status!=='pending_review'||data.stored!==true||data.received!==false)throw new Error('contract');
    setReference(data.id);setState("ok");await readback();
   }catch{
-   // Unknown outcome: check the receipt first via readback. The idempotency key is retained for the
-   // same input, so a deliberate retry re-sends the identical key and cannot create a duplicate.
-   await readback();
-   setState("error");
+   // Unknown outcome (503/network/session loss or an ambiguous response): ask the exact receipt
+   // endpoint with the SAME frozen key before any retry. A deliberate retry re-sends the identical
+   // key+payload and cannot create a duplicate; we never guess from /mine or mint a new key on 404.
+   if(!await confirmReceipt())setState("error");
   }
  }
  return <section className="partner-form" aria-labelledby="partner-form-title" data-testid="partner-request-form">
