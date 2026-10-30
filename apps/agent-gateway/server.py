@@ -308,6 +308,8 @@ def public_pages():
 def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None, features=None, public_origin=None):
     if shop is not None and getattr(shop, "cart", None) is not None and shop.cart.store is not store:
         raise ValueError("shop and visitor must use the same scoped Store")
+    if shop is not None and getattr(shop, "local_private", False) and (host != "127.0.0.1" or public_origin is not None):
+        raise ValueError("local_staged_catalog_requires_loopback_without_public_origin")
     import importlib.util as _ilu
     _pspec = _ilu.spec_from_file_location("nx_partner", Path(__file__).with_name("partner.py"))
     _pmod = _ilu.module_from_spec(_pspec); _pspec.loader.exec_module(_pmod)
@@ -398,6 +400,12 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None,
                 self.check_host()
                 path = unquote(urlsplit(self.path).path)
                 if path == "/api/shop/catalog":
+                    if shop is not None and getattr(shop, "local_private", False):
+                        origin = self.headers.get("Origin")
+                        if origin is not None and origin not in {"http://" + self.headers["Host"], web_origin}:
+                            raise Rejected(403, "local_catalog_origin_required")
+                        if not shop.authorize(self.headers.get("X-Local-Catalog-Access")):
+                            raise Rejected(403, "local_catalog_access_required")
                     if shop is None:
                         return self.respond(503, {"error": "catalog_not_configured", "available": False})
                     query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
@@ -429,6 +437,18 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None,
                     with store.connect() as db:
                         rows = [dict(row) for row in db.execute("SELECT kind,ref,recipient,state,updated FROM mail_jobs WHERE owner=? AND audience='customer' ORDER BY created DESC LIMIT 20", (visitor["id"],))]
                     return self.respond(200, {"deliveries": rows, "meaning": "provider_accepted is not a delivery or read confirmation"})
+                if path == "/api/partner/requests/receipt":
+                    visitor, _ = self.visitor()
+                    query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                    if set(query) != {"tenant"} or len(query["tenant"]) != 1:
+                        raise Rejected(422, "invalid_receipt_query")
+                    try:
+                        result = partner.receipt(visitor["id"], query["tenant"][0], self.headers.get("Idempotency-Key"))
+                    except PartnerError as error:
+                        raise Rejected(error.status, error.code) from None
+                    except sqlite3.OperationalError:
+                        raise Rejected(503, "storage_unavailable") from None
+                    return self.respond(200, result)
                 if path == "/api/partner/requests/mine":
                     visitor, _ = self.visitor()
                     with store.connect() as db:
@@ -551,7 +571,7 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None,
                         raise Rejected(status, error.code) from None
                 if path == "/api/partner/requests":
                     try:
-                        result = partner.submit(visitor["id"], body.get("tenant"), {k: v for k, v in body.items() if k != "tenant"})
+                        result = partner.submit(visitor["id"], body.get("tenant"), {k: v for k, v in body.items() if k != "tenant"}, self.headers.get("Idempotency-Key"))
                     except PartnerError as error:
                         raise Rejected(error.status, error.code) from None
                     return self.respond(200, result)

@@ -71,7 +71,7 @@
   "external_requests": [],
   "source_sha256": {
     "apps/agent-gateway/catalog.py": "22d3f7faac91e471a137d8c2427ec0fbc8e9749f8400b4b150c57633259c7cfa",
-    "apps/agent-gateway/server.py": "18af33842e46e490cf058b1942f2a25ee65de85acddd6e027f2252b17277eca5",
+    "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/PublicRequestFallback.tsx": "6fa316a12ce219f2eb408b5ea5882ed488c204aa851b5a03167aa6bf54bf766b",
     "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",

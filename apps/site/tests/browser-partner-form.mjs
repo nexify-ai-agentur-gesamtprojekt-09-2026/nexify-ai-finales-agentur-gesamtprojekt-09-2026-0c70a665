@@ -47,6 +47,41 @@ try{
   const mineText=await form.locator('[data-testid="partner-mine"]').innerText();
   assert.ok(mineText.includes('pending_review'),'stored status rendered in UI readback');
  });
+ await check('committed first attempt with a lost response and a receipt outage resolves on retry as exactly one record and never a false not-saved claim',async()=>{
+  const mineCount=async()=>{const r=await page.request.get(origin+'/api/partner/requests/mine');assert.equal(r.status(),200);return (await r.json()).requests.length;};
+  const before=await mineCount();
+  const unique='Muster Kfz Ost (synthetisch) '+Date.now();
+  let phase='lost';
+  const postRoute=async route=>{
+   if(phase==='lost'&&route.request().method()==='POST'){await route.fetch().catch(()=>{});return route.abort('failed');} // server commits, browser loses the response
+   return route.continue();
+  };
+  const receiptRoute=async route=>{if(phase==='lost')return route.abort('failed');return route.continue();}; // receipt initially unreachable
+  await context.route('**/api/partner/requests',postRoute);
+  await context.route('**/api/partner/requests/receipt**',receiptRoute);
+  await page.locator('[data-testid="partner-company"]').fill(unique);
+  await page.locator('[data-testid="partner-contact"]').fill('Testkontakt Ost');
+  await page.locator('[data-testid="partner-email"]').fill('test-ost@example.invalid');
+  await page.locator('[data-testid="partner-message"]').fill('Erster Versuch – Antwort geht verloren.');
+  await page.locator('[data-testid="partner-submit"]:not([disabled])').click();
+  await form.locator('[data-testid="partner-unknown"]').waitFor({timeout:8000});
+  assert.equal(await form.locator('[data-testid="partner-error"]').count(),0,'no false not-saved on an unknown outcome');
+  assert.equal(await form.locator('[data-testid="partner-ok"]').count(),0,'no premature success on an unknown outcome');
+  assert.equal(await mineCount()-before,1,'the committed first attempt stored exactly one record');
+  // Editing the draft while the attempt is unresolved must not mint a new key or create a second record.
+  await page.locator('[data-testid="partner-message"]').fill('Geaenderter Entwurf nach verlorener Antwort (nur Entwurf).');
+  await page.locator('[data-testid="partner-company"]').fill(unique+' BEARBEITET');
+  phase='normal';
+  await page.locator('[data-testid="partner-submit"]:not([disabled])').click();
+  await form.locator('[data-testid="partner-ok"]').waitFor({timeout:8000});
+  const retryRef=(await form.locator('[data-testid="partner-ok"]').innerText()).split('Referenz:').pop().trim();
+  assert.match(retryRef,/[a-f0-9]{32}/,'stored reference shown after the retry');
+  assert.equal(await mineCount()-before,1,'retry after a lost response creates no duplicate: exactly one record');
+  const bogus=await page.request.get(origin+'/api/partner/requests/receipt?tenant='+encodeURIComponent('teileklar-partner-intake'),{headers:{'Idempotency-Key':'unknown-key-not-issued'}});
+  assert.equal(bogus.status(),404,'an unissued key never fabricates a receipt');
+  await context.unroute('**/api/partner/requests',postRoute);
+  await context.unroute('**/api/partner/requests/receipt**',receiptRoute);
+ });
  await check('reception stays fail-closed for an unauthorised browser request',async()=>{
   const res=await page.request.get(origin+'/api/partner/requests');
   assert.equal(res.status(),403);assert.equal((await res.json()).error,'recipient_auth_required');

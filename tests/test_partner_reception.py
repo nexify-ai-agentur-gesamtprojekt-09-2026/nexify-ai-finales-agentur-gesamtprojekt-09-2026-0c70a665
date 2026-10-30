@@ -15,15 +15,17 @@ class PartnerReceptionTests(unittest.TestCase):
     def setUp(self):
         self.db = sqlite3.connect(":memory:")
         self.db.row_factory = sqlite3.Row
+        self.db.execute("CREATE TABLE receipts(owner TEXT, operation TEXT, key TEXT, payload_hash TEXT, response TEXT, PRIMARY KEY(owner,operation,key))")
 
         @contextmanager
         def connect():
-            yield self.db
+            with self.db:
+                yield self.db
         self.reception = partner.PartnerReception(connect)
         # Separate synthetic test data (no real personal data).
-        self.a1 = self.reception.submit("visitor-a1", "tenant-nord", {"company": "Muster Kfz Nord", "contact": "Test Person", "email": "test-nord@example.invalid", "message": "Synthetischer Testantrag A1", "locale": "de"})
-        self.a2 = self.reception.submit("visitor-a2", "tenant-nord", {"company": "Muster Kfz Nord 2", "contact": "Test Person 2", "email": "test-nord2@example.invalid", "message": "Synthetischer Testantrag A2", "locale": "de"})
-        self.b1 = self.reception.submit("visitor-b1", "tenant-sued", {"company": "Muster Kfz Süd", "contact": "Test Person 3", "email": "test-sued@example.invalid", "message": "Synthetischer Testantrag B1", "locale": "de"})
+        self.a1 = self.reception.submit("visitor-a1", "tenant-nord", {"company": "Muster Kfz Nord", "contact": "Test Person", "email": "test-nord@example.invalid", "message": "Synthetischer Testantrag A1", "locale": "de"}, "fixture-key-001")
+        self.a2 = self.reception.submit("visitor-a2", "tenant-nord", {"company": "Muster Kfz Nord 2", "contact": "Test Person 2", "email": "test-nord2@example.invalid", "message": "Synthetischer Testantrag A2", "locale": "de"}, "fixture-key-001")
+        self.b1 = self.reception.submit("visitor-b1", "tenant-sued", {"company": "Muster Kfz Süd", "contact": "Test Person 3", "email": "test-sued@example.invalid", "message": "Synthetischer Testantrag B1", "locale": "de"}, "fixture-key-001")
 
     def test_submit_stores_pending_review_without_delivery_claim(self):
         self.assertEqual(self.a1["status"], "pending_review")
@@ -71,11 +73,11 @@ class PartnerReceptionTests(unittest.TestCase):
 
     def test_submit_rejects_unexpected_field_and_invalid_tenant(self):
         with self.assertRaises(partner.PartnerError):
-            self.reception.submit("visitor-x", "tenant-nord", {"company": "X", "contact": "Y", "email": "z@example.invalid", "message": "m", "locale": "de", "role": "admin"})
+            self.reception.submit("visitor-x", "tenant-nord", {"company": "X", "contact": "Y", "email": "z@example.invalid", "message": "m", "locale": "de", "role": "admin"}, "fixture-key-001")
         with self.assertRaises(partner.PartnerError):
-            self.reception.submit("visitor-x", "bad tenant!", {"company": "X", "contact": "Y", "email": "z@example.invalid", "message": "m", "locale": "de"})
+            self.reception.submit("visitor-x", "bad tenant!", {"company": "X", "contact": "Y", "email": "z@example.invalid", "message": "m", "locale": "de"}, "fixture-key-001")
         with self.assertRaises(partner.PartnerError):
-            self.reception.submit("", "tenant-nord", {"company": "X", "contact": "Y", "email": "z@example.invalid", "message": "m", "locale": "de"})
+            self.reception.submit("", "tenant-nord", {"company": "X", "contact": "Y", "email": "z@example.invalid", "message": "m", "locale": "de"}, "fixture-key-001")
 
 
 if __name__ == "__main__":

@@ -12,7 +12,11 @@ gebundenen freigegebenen Adapter; keine synthetischen Artikel gelangen dorthin.
 max_bytes=…, max_rows=…, max_text=…, max_images=…)` nimmt fünf JSON-Responsebytes:
 products, information, images, stock, taxonomies. Alle Grenzen sind explizite
 Callerbudgets; keine behaupteten Provider-SLAs. Taxonomie-IDs müssen ausdrücklich
-gewählt und in der gelieferten Taxonomie enthalten sein. Keine Keywordheuristik
+gewählt und in der gelieferten Taxonomie enthalten sein. Das Produktfeld `taxonomy`
+muss ein positiver Integer sein; fehlende oder ungültige Werte blockieren den Batch,
+auch wenn `category` vorhanden ist. `category` und der Abrufparameter
+`parentTaxonomy` sind kein Ersatz für `taxonomy`; ihre Beziehung und eine
+Subbaumzuordnung sind nicht nachgewiesen. Keine Keywordheuristik
 beweist Fahrzeugpassung. SKU und DE-Sprache der Beschreibung/Bestände werden
 gebunden, EAN bleibt String einschließlich führender Nullen. Unbekannte optionale
 Lieferantenfelder bleiben durch den unveränderten Inputhash nachweisbar.
@@ -66,3 +70,62 @@ permissiv zusammengeführt.
 Reproduktion: `python3 -m unittest discover -s tests -p test_bigbuy_batch.py`.
 Rückweg: dieses reine Modul nicht aufrufen; bestehende HTTP-/Shopfunktion bleibt
 unverändert. Keine Datenmigration oder externe Rücknahme erforderlich.
+
+## Offline-Stagingvertrag /2
+
+`stage_readonly_pages` erstellt ein eigenständiges Format
+`nexify.bigbuy.offline-staging/2`, keine der beiden früheren schemaVersion1-
+Formen. Es nimmt ausschließlich caller-gelieferte Metadaten und normalisierte
+Listen entgegen; kein Netzwerk, kein Shopadapter und keine Veröffentlichung.
+Grenzen: höchstens 10.000 Seiten beziehungsweise Zeilen pro Datentyp,
+1.000 Bestandsbuckets pro Artikel, 100.000 Buckets insgesamt und 16 MiB
+kanonische normalisierte Datensatzbytes; numerische Felder sind ebenfalls begrenzt.
+Es erstellt kanonische unveränderliche Manifest-Bytes und deren SHA-256. Die
+Quell- und Seitenhashes sind **Callerangaben**: Originalbytes und ihre Ableitung
+zu den Listen werden hier nicht überprüft. Das Ergebnis kennzeichnet dies mit
+`source_and_page_hashes_caller_asserted=true` und `raw_to_records_verified=false`.
+Echte Provenienz benötigt gesondertes Readback und verifizierte Rechte.
+
+Sample und Partial sind getrennt. Ein behauptetes Complete bleibt Partial und
+`complete_verified=false`; weder kurze Seiten noch Seitenzahlen belegen eine
+vollständige, stabil sortierte Lieferantenaufnahme. 409, 429 und Timeout stoppen
+den Lauf. Doppelte Seitenkörper, IDs und SKU sowie verwaiste Varianten werden
+abgewiesen. Bestandsbuckets behalten Mengen, Lager und Handlingbereich getrennt;
+es wird keine Lieferzeit aus einer Summierung abgeleitet. Altes oder zukünftiges
+Snapshotdatum wird gegen die ausdrücklich gelieferte Altersgrenze abgewiesen;
+diese technische Grenze ist keine Freigabe oder Lieferanten-SLA. Währung, Steuer,
+Rechte und Passung bleiben unbekannt, `saleEnabled=false`, ReleaseIDs leer.
+
+`staging_quota_plan` rechnet mehrere angegebene Jobs sowie begrenzte Versuche
+gegen ein caller-geliefertes Restbudget zusammen. Es ist nur eine offline
+Planrechnung, keine atomare Reservierung, kein Multi-Prozess-Limiter und kein
+Nachweis aktueller Kontingente oder Berechtigungen. Ein echter Abruf benötigt
+später eine zentral koordinierte, persistente Quotenbindung und bestätigte
+Endpunktgrenzen; keine automatischen Retries aus dieser Funktion. Das Modul
+verarbeitet weder Versandquoten noch Bestell- oder Zahlungsschnittstellen.
+
+## Begrenzte Rohdatenprojektion
+
+`stage_raw_streams` nimmt vom Aufrufer bereitgestellte Streams und explizite Seitenmetadaten
+entgegen; Lokalität und Laufzeit des Stream-Codes sind durch die Funktion nicht
+erzwingbar und liegen beim Aufrufer. Es begrenzt die Summe der Eingabebytes
+vor JSON-Parsing auf höchstens 16 MiB, hasht die tatsächlich gelesenen Bytes und
+projiziert daraus ausschließlich Produkt-ID/SKU/EAN, Varianten-Parent/SKU/EAN
+und getrennte Bestands-/Handling-/Lagerbuckets. Ungültiges JSON, doppelte Keys,
+fehlende Felder oder 409/429/andere nicht erfolgreiche Seiten stoppen den Lauf.
+Der Modulcode öffnet keine Netzwerkverbindung und startet keine Bestellungen;
+ein vom Aufrufer gelieferter Stream kann dennoch externe oder blockierende
+Operationen ausführen und muss vor Nutzung vertrauenswürdig geprüft werden. Das Manifest bindet
+die Seitenhashes an die aus diesen Bytes erzeugte Projektion; Seitenstatus,
+Scope und Abrufzeit bleiben Angaben des Aufrufers. Ein solcher Byte-Hash beweist
+weder Lieferantenidentität, Zugangsrechte, aktuelle Daten noch Vollständigkeit.
+Die Ausgabefelder für Verkauf und Rechte bleiben unverändert gesperrt/unbekannt.
+Nicht projizierte Felder und Originalbytes sind vom Aufrufer unverändert und
+sicher aufzubewahren; dieser Prozess archiviert sie nicht selbst.
+
+Die 16-MiB-Grenzprüfung betrifft die serialisierten normalisierten Daten; sie
+wird nach der Serialisierung ausgeführt und ist keine gemessene Peak-RAM-Garantie.
+Die Quotenrechnung ist und bleibt eine nicht atomare Planung: Zwei getrennte
+Caller können beide mit demselben alten Stand `allowed=true` erhalten. Vor realer
+Nutzung sind ein gemeinsamer atomarer Limiter und autorisierter Kontingentstand
+notwendig. Keine alleinige `allowed`-Antwort erteilt Abruf- oder Kostenfreigabe.

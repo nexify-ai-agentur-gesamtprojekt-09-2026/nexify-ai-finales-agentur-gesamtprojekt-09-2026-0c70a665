@@ -7,6 +7,7 @@ tenant; writes additionally require MFA. There is no public listing and no cross
 read. The live partner role/tenant identity is expected to come from the protected portal
 auth (Clerk) and is therefore not satisfiable in the public preview (documented blocker).
 """
+import hashlib
 import json
 import re
 import secrets
@@ -72,11 +73,13 @@ class PartnerReception:
         with self.connect() as db:
             db.executescript(PARTNER_SCHEMA)
 
-    def submit(self, submitter, tenant, payload):
+    def submit(self, submitter, tenant, payload, key):
         """Visitor-side storage only. Returns a reference; never a delivery/receipt claim."""
         if not isinstance(submitter, str) or not submitter:
             raise PartnerError(401, "session_required")
         tenant = _tenant(tenant)
+        if not isinstance(key, str) or not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key):
+            raise PartnerError(422, "idempotency_key_required")
         if not isinstance(payload, dict) or set(payload) - {"company", "contact", "email", "message", "locale"}:
             raise PartnerError(422, "unexpected_field")
         record = {
@@ -88,15 +91,36 @@ class PartnerReception:
         }
         if record["locale"] not in {"de", "nl", "fr"}:
             raise PartnerError(422, "invalid_locale")
-        identifier = secrets.token_hex(16)
+        payload_hash = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
+        operation = "partner_request:" + tenant
         with self.connect() as db:
-            db.execute(
-                "INSERT INTO partner_requests VALUES (?,?,?,?,?,?)",
-                (identifier, tenant, submitter, json.dumps(record), "pending_review", int(time.time())),
-            )
-        # Honest contract: stored and queued for review; not received/approved/delivered.
-        return {"id": identifier, "tenant": tenant, "status": "pending_review",
-                "stored": True, "received": False, "approved": False, "delivered": False}
+            db.execute("BEGIN IMMEDIATE")
+            receipt = db.execute("SELECT payload_hash,response FROM receipts WHERE owner=? AND operation=? AND key=?", (submitter, operation, key)).fetchone()
+            if receipt:
+                if receipt[0] != payload_hash:
+                    raise PartnerError(409, "idempotency_conflict")
+                return json.loads(receipt[1])
+            identifier = secrets.token_hex(16)
+            result = {"id": identifier, "tenant": tenant, "status": "pending_review",
+                      "stored": True, "received": False, "approved": False, "delivered": False}
+            db.execute("INSERT INTO partner_requests VALUES (?,?,?,?,?,?)",
+                       (identifier, tenant, submitter, json.dumps(record), "pending_review", int(time.time())))
+            db.execute("INSERT INTO receipts VALUES (?,?,?,?,?)", (submitter, operation, key, payload_hash, json.dumps(result)))
+            return result
+
+    def receipt(self, submitter, tenant, key):
+        """Read only this visitor/tenant/key receipt; absence is only a point-in-time observation."""
+        if not isinstance(submitter, str) or not submitter:
+            raise PartnerError(401, "session_required")
+        tenant = _tenant(tenant)
+        if not isinstance(key, str) or not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key):
+            raise PartnerError(422, "idempotency_key_required")
+        with self.connect() as db:
+            row = db.execute("SELECT response FROM receipts WHERE owner=? AND operation=? AND key=?",
+                             (submitter, "partner_request:" + tenant, key)).fetchone()
+        if row is None:
+            raise PartnerError(404, "receipt_not_found")
+        return json.loads(row[0])
 
     def inbox(self, actor, tenant):
         """Recipient-side read. Fail closed on role/tenant. Only this tenant's requests."""
