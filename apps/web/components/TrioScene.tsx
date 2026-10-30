@@ -70,6 +70,7 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
   let started=false;
   const begin=()=>{
    if(started)return;started=true;
+   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
    const intro=introRef.current,loop=loopRef.current;
    if(media.intro&&intro){setClip('intro');intro.currentTime=0;intro.play().catch(()=>{setClip('loop');loop?.play().catch(()=>setClipFailed(true));});}
    else{setClip('loop');loop?.play().catch(()=>setClipFailed(true));}
