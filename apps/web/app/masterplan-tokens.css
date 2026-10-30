@@ -99,6 +99,15 @@
   --shadow-button-primaer: inset 0 1px 0 rgba(255,255,255,.65), 0 16px 36px -14px rgba(192,238,56,.5), 0 2px 0 rgba(0,0,0,.3);
   --shadow-leuchten: 0 0 32px rgba(192,238,56,.85);
 
+  /* ===== NEX-UI-DEPTH-20261030-01: dezente, zurueckhaltende Tiefe =====
+     Nur weiche kurze Schatten + minimale Lichtkante. Layout-neutral (nur box-shadow),
+     Effekte liegen hinter dem Inhalt, nie vor Figuren. Keine Animation. */
+  --highlight-kante:       inset 0 1px 0 rgba(255,255,255,.05);           /* minimale obere Lichtkante */
+  --shadow-chat-bubble:    0 1px 2px rgba(0,0,0,.34), 0 6px 14px -10px rgba(0,0,0,.55), var(--highlight-kante);
+  --shadow-chat-raised:    0 2px 4px rgba(0,0,0,.40), 0 16px 30px -18px rgba(0,0,0,.70), var(--highlight-kante);
+  --shadow-chat-panel:     inset 1px 0 0 rgba(255,255,255,.03), -28px 0 56px -40px rgba(0,0,0,.65); /* leichte Ebenentrennung Panel<->Inhalt */
+  --shadow-akzent-weich:   0 1px 2px rgba(0,0,0,.30), 0 10px 22px -16px rgba(0,0,0,.52), var(--highlight-kante); /* zurueckhaltender Seitenakzent */
+
   /* Gradients auf neue Werte angepasst */
   --gradient-button-primaer: linear-gradient(180deg, #DBF68A 0%, #C0EE38 55%, #A6D820 100%);
   --gradient-balken:         linear-gradient(90deg, #A6D820, #C0EE38);

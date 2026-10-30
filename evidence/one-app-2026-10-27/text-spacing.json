@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-30T14:58:22.500Z",
+  "observed_at": "2026-10-30T15:51:39.108Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "3379aa1aa62818d9712ef0baaf1d0448471a1e6d7194cbbf7c64e50f8f414baf",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -15,7 +15,7 @@
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
     "apps/site/tests/browser-text-spacing.mjs": "bfa4ae535778d86b3ece517fd7408d7d0bd0f116a8c57c02860a29f107ae7fcc",
     "apps/site/vite.config.ts": "89ffc11349f5d88645c2d627f3a7fa048be78107ea93953ba8f3501aeda1579a",
-    "apps/web/app/globals.css": "2903daef89c7451abed35393878052b2e716df45514ae8f46eba45ce65cc6397",
+    "apps/web/app/globals.css": "5d9ef9421338f77bdff6f3bcfdb649a0e5f82c53ebfee97c86150f49b1459c35",
     "apps/web/components/ActionControl.css": "92922b5e2bb64513c3db4fcbc18f388de146d9e581a1a340856e11eab90377ae",
     "apps/web/components/ActionControl.tsx": "6909b910d4a417b6cc917eadabc0eded4a1a26309a9fb1f77c46a23ebdd8b3b0",
     "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
