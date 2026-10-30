@@ -36,3 +36,20 @@ Auftrag: Übergabe vor Creditsende sichern. **Kein Push** in diesem Schritt, **k
 - `tests/test_bigbuy_batch.py` — existiert, **keine** uncommitteten Änderungen durch mich.
 - `docs/contracts/bigbuy-batch.md` — existiert, **keine** uncommitteten Änderungen durch mich.
 - Ich habe an diesen Dateien keine laufenden Änderungen und werde sie nicht anfassen.
+
+## Read-only Workflow-Analyse (Push auf neuen privaten Handoff-Branch, z. B. `handoff/2026-10-31`)
+
+Quelle: `.github/workflows/*` + `vercel.json` (nur gelesen; keine Credentials ausgegeben, kein Push).
+
+- **ci.yml** — `on: push:` **ohne Branch-Filter** → läuft bei Push auf **jeden** Branch (also auch den Handoff-Branch). Jobs: Audit/Behavior/Integrity/Architecture, Migration-Gegenbeispiele, OpenAPI-Contract-Validate, `@nexify/web` auth-test + build. `permissions: contents: read`. **Kein Deploy-Schritt.** → reine CI-Rechenlast, kein Produktionseffekt.
+- **ai-review.yml** — `on: pull_request_target` (nur bei PR open/reopen/sync/ready). **Ein reiner Branch-Push triggert es NICHT.** Nutzt OpenRouter-Secret, nur im eigenen Repo.
+- **pr-triage.yml** — nur `pull_request`.
+- **slack-notify.yml** — `push: branches:[main]` (nicht der Handoff-Branch) + `pull_request`. Branch-Push → **keine** Slack-Meldung; ein PR würde melden.
+- **issue-triage.yml** — nur Issues.
+- **Kein GitHub-Actions-Deploy/Vercel-Schritt** in irgendeinem Workflow (`grep` = keine `vercel/deploy/--prod/production`).
+- **vercel.json**: `framework: vite`, `buildCommand: pnpm --filter @nexify/site build`. Vercel-Deploys laufen über Vercels **eigene** Git-Integration (außerhalb des Repos, hier nicht einsehbar). Übliche Regel: Nicht-Produktionsbranches → **Preview**-Deployment, Produktion nur vom Production-Branch (`main`). Ein Handoff-Branch-Push würde also **keinen** Produktionsdeploy auslösen — zu bestätigen in den externen Vercel-Projekteinstellungen (Production Branch = `main`).
+
+### Empfehlung für sichere, private Codeübergabe (kein ungeprüfter Prod-Deploy)
+1. Nur **Branch pushen** (`handoff/2026-10-31`), **keinen PR** öffnen → vermeidet ai-review (OpenRouter) + Slack.
+2. Vorab prüfen, dass der Vercel-Production-Branch `main` ist → Branch bleibt Preview-only.
+3. ci.yml läuft (read-only, kein Deploy) — unkritisch. Remote-Credentials nie ausgeben.
