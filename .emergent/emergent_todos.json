@@ -1,30 +1,34 @@
 [
   {
-    "content": "P0 Hero Band-Bleed (9bdad3c) + Doppelung (d054f7f) + /teileklar AIFly (0c4766a) behoben & verifiziert",
+    "content": "Phase 0.2: Live-DeepSeek-Pfad fail-closed in /api/agent-chat vorbereiten (managed-live-chat.ts + Route-Branch + Test). DONE: tsc clean, 35/35 agent tests, byte-identisch bei Flag AUS",
     "status": "completed"
   },
   {
-    "content": "project/choice Ambient-Loop-Startfehler behoben, real verifiziert, welcome ohne Regression (cfd87b9)",
+    "content": "Phase 0.2: Evidence/Hashes chirurgisch aktualisiert (ai-enforcement-coverage sha256+Status, detail-browser-evidence sdk-hash, acceptance-coverage meta-hash). make test 582 GRUEN, make check gruen, ARCH-008/009 gruen unter node22",
     "status": "completed"
   },
   {
-    "content": "Inventur: Logo-Master (nur signet.svg; Header=Signet+HTML-Wortmarke) + bestehende PWA (Next installation.json-Mechanik, derzeit enabled:false; prototypen/ Legacy-PWA; apps/site ohne PWA)",
+    "content": "Phase 0.4: Preisquellen-Audit (kein freigegebener Agentur-Preiskatalog) + Live-Nachweisbedarf dokumentiert in docs/handoff-2026-10-31/preisquellen-audit.md",
     "status": "completed"
   },
   {
-    "content": "PWA aktivieren/erweitern ueber bestehende installation.json-Mechanik (Manifest, stabile id/start_url/scope, Original-Logo-Icons inkl. maskable, updatefaehiger SW, sichere Offline-Anzeige ohne Auth/Checkout-Cache) - naechstes Paket",
+    "content": "Vorbestehende Drift behoben: apps/site workspace-capabilities.test.mjs Fixture an 10-Key-Capabilities-Vertrag angeglichen (nicht hash-gebunden, Negativ-Grenztests erhalten)",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 0.3: Preisfreie, bearbeitbare Angebotsentwuerfe + versioniertes Briefing mit Readback (Gateway + apps/site), Evidence regen",
     "status": "pending"
   },
   {
-    "content": "Responsive-Abnahme alle Routen 320/360/390/768/1024, Hoch/Quer, 200% Zoom, Tastatur/Safe-Areas, Touchziele 48px - naechstes Paket",
+    "content": "Phase EN (NEU, Pascal 14:32): Englisch zusaetzlich zu de/nl/fr in bestehende i18n (Inhalte, Navigation, Chat-Sprache, Formulare/Fehler, Briefing/Angebote, Shop/Werkstatt/Partner, PWA-Hilfe, html lang/hreflang/canonical/sitemap/Zahlen-Waehrung-Datum, Routeparitaet), keine zweite i18n-Loesung",
     "status": "pending"
   },
   {
-    "content": "Freigegebene Inhalts-/Shop-/Werkstatt-/Partnerarbeiten umsetzen (kundenverstaendliche Marketingtexte, keine internen Bauanweisungen oeffentlich)",
+    "content": "Phase 1: Touch-Targets global 44px->48px + chirurgische Evidence-Regeneration",
     "status": "pending"
   },
   {
-    "content": "Auth: nur konkret vorbereiten (DEV-Instanz/Preview-Variablen/Datenverarbeitung/Testkonten), nicht aktivieren",
+    "content": "Phase 2: Legal-Audit (Fake-Impressum) + Marketing-Copy",
     "status": "pending"
   }
 ]
