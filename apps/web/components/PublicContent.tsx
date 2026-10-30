@@ -3,6 +3,7 @@ import type {ReactNode} from "react";
 import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import {StartAction,useUI} from "./Workspace";
+import PageMediaBand from "./PageMediaBand";
 import "./PublicContentLayout.css";
 
 const words={
@@ -51,6 +52,7 @@ export default function PublicContent({page,pages,children}:{page:PublicPage;pag
  })}</div>;
  return <section className={"public-page content-layout layout-"+layout+" context-"+page.site_context} aria-labelledby={headingId}>
   <nav className="content-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map(parent=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink><span aria-hidden="true">/</span></li>)}<li><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
+  <PageMediaBand pageId={page.id} context={page.site_context} locale={locale}/>
   <header className="content-hero"><div className="content-hero-copy"><span className="content-kicker">{page.site_context==="teileklar"?"TEILEKLAR":"NEXIFY AI"}<span aria-hidden="true"> / </span>{t[layout]}</span><h1 id={headingId}>{page.localizedTitle[locale]}</h1><p className="content-purpose">{page.localizedSummary[locale]}</p>{actions(page.actions.slice(0,2),"primary")}</div>
    {!isQuiet&&<aside className="content-context" aria-label={t.overview}><span className="content-kicker">{t.overview}</span><strong>{t[layout]}</strong><nav aria-label={t.overview}>{contextualPages.slice(0,4).map(target=><SiteLink href={target.path} key={target.id}>{target.localizedTitle[locale]}<span aria-hidden="true">→</span></SiteLink>)}</nav>{overview&&overview.id!==page.id&&<SiteLink className="content-overview-link" href={overview.path}>{t.back}<span aria-hidden="true">←</span></SiteLink>}</aside>}
   </header>

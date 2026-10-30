@@ -1,22 +1,26 @@
 [
   {
-    "content": "Run live shop UI E2E (browser-shop.mjs) against offline fixtures via pw-shim",
+    "content": "Correct Clerk facts (DNS now resolves 2026-10-30; snapshot historical; managed key in THIS project)",
     "status": "completed"
   },
   {
-    "content": "Boot Next.js locally (internal 3004) + verify render; prove Clerk fail-closed (proxy.ts 503 + rendered /anmelden notice)",
+    "content": "Fix layout defect: figures COMPLETE via contain (no crop), no text overlay, connected to hero, single title",
     "status": "completed"
   },
   {
-    "content": "Verify Emergent-managed Clerk provisioning via project metadata (clerk-production.json, clerk-dns.json, clerk-setup.md); name exact missing platform steps",
+    "content": "Re-verify visually: apps-portale + teileklar, chat open/closed, desktop/tablet/mobile + 200% (all overflow False)",
     "status": "completed"
   },
   {
-    "content": "Document integrated rendered Shop-UI chain inputs->API->persisted result with step screenshots + correlated report",
+    "content": "TEILEKLAR starters/context: 'Teileanfrage vorbereiten' (no false search), Fahrzeug/Teil/Werkstatt seeds + welcome overrides",
     "status": "completed"
   },
   {
-    "content": "Keep Vite public preview (login unverifiable: managed secret not in preview runtime + DNS/issuer open)",
-    "status": "completed"
+    "content": "Evidence/governance renewal (~30 files: reconciliation register, browser-evidence JSONs, governance configs) + make test green",
+    "status": "pending"
+  },
+  {
+    "content": "Commit + show preview (BLOCKED until evidence renewal green; not committing red/half state)",
+    "status": "pending"
   }
 ]

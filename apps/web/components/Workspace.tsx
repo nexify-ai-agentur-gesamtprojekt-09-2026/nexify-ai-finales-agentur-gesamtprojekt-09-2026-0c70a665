@@ -23,10 +23,13 @@ type Booking = {id:string;starts:string;confirmed:boolean};
 const PublicOrientationChat=lazy(()=>import("./PublicOrientationChat"));
 const intents: Intent[] = ["quote", "booking", "marketing"];
 // Einstiegszeilen nach Zielbild: füllen das Textfeld vor, senden nichts automatisch.
-const starters:Record<Locale,[string,string][]>={
-  de:[["Website planen","Ich möchte eine Website planen: "],["Ablauf automatisieren","Ich möchte einen Ablauf automatisieren: "],["Bestehendes Projekt","Ich habe ein bestehendes Projekt: "]],
-  nl:[["Website plannen","Ik wil een website plannen: "],["Proces automatiseren","Ik wil een proces automatiseren: "],["Bestaand project","Ik heb een bestaand project: "]],
-  fr:[["Planifier un site","Je veux planifier un site web : "],["Automatiser un processus","Je veux automatiser un processus : "],["Projet existant","J’ai un projet existant : "]],
+const starters:Record<Locale,Record<"nexify"|"teileklar",[string,string][]>>={
+  de:{nexify:[["Website planen","Ich möchte eine Website planen: "],["Ablauf automatisieren","Ich möchte einen Ablauf automatisieren: "],["Bestehendes Projekt","Ich habe ein bestehendes Projekt: "]],
+      teileklar:[["Fahrzeug angeben","Mein Fahrzeug (Marke, Modell, Baujahr): "],["Teileanfrage vorbereiten","Meine Teileanfrage – Fahrzeug und gesuchtes Teil: "],["Werkstatt-Anliegen","Mein Werkstatt-Anliegen (Fahrzeug und Arbeit): "]]},
+  nl:{nexify:[["Website plannen","Ik wil een website plannen: "],["Proces automatiseren","Ik wil een proces automatiseren: "],["Bestaand project","Ik heb een bestaand project: "]],
+      teileklar:[["Voertuig opgeven","Mijn voertuig (merk, model, bouwjaar): "],["Onderdeelaanvraag voorbereiden","Mijn onderdeelaanvraag – voertuig en gezocht onderdeel: "],["Werkplaats-vraag","Mijn werkplaats-vraag (voertuig en werk): "]]},
+  fr:{nexify:[["Planifier un site","Je veux planifier un site web : "],["Automatiser un processus","Je veux automatiser un processus : "],["Projet existant","J’ai un projet existant : "]],
+      teileklar:[["Indiquer le véhicule","Mon véhicule (marque, modèle, année) : "],["Préparer une demande de pièce","Ma demande de pièce – véhicule et pièce recherchée : "],["Demande atelier","Ma demande d’atelier (véhicule et travaux) : "]]},
 };
 const UIContext=createContext({locale:"de" as Locale,t:translations.de,session:null as {csrf:string}|null,chatReady:false});
 export const useUI=()=>useContext(UIContext);
@@ -102,6 +105,11 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     if(anchor?.element.isConnected)window.scrollBy({top:anchor.element.getBoundingClientRect().top-anchor.y,behavior:'instant'});
   },[open]);
   const t = translations[locale];
+  const tkWelcome={
+    de:{title:"Teile, Fahrzeug und Werkstatt",body:"Nenne kurz dein Fahrzeug und das gesuchte Teil oder dein Werkstatt-Anliegen. Der Shop ist in Vorbereitung – wir bereiten deine Anfrage vor.",eyebrow:"Womit möchtest du starten?"},
+    nl:{title:"Onderdelen, voertuig en werkplaats",body:"Noem kort je voertuig en het gezochte onderdeel of je werkplaats-vraag. De shop is in voorbereiding – we bereiden je aanvraag voor.",eyebrow:"Waarmee wil je starten?"},
+    fr:{title:"Pièces, véhicule et atelier",body:"Indique brièvement ton véhicule et la pièce recherchée ou ta demande d’atelier. La boutique est en préparation – nous préparons ta demande.",eyebrow:"Par quoi souhaites-tu commencer ?"},
+  }[locale];
   const pathname=useSitePathname();
   const site=pathname.startsWith("/teileklar")?"teileklar":"nexify";
   const currentPage=pages.find(page=>page.path===pathname);
@@ -222,7 +230,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
       {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"Orientierung wird geladen …":locale==="nl"?"Oriëntatie wordt geladen …":"Chargement du guide…"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages} onActivityChange={setOrientationWorking}/></Suspense></DeferredChatBoundary></div>}
       <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&Boolean(currentPage)}>
         {pathname!=="/"&&<div className="panel-page-context">{locale==="de"?"Hier bist du":locale==="nl"?"Je bent hier":"Tu es ici"}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>}
-        <div className="welcome-card"><p>{t.welcome}</p><p className="welcome-body">{t.welcomeBody}</p><div className="welcome-eyebrow-row"><span className="eyebrow">{t.welcomeEyebrow}</span>{canSpeak&&<button type="button" className="text-button" aria-pressed={speaking==="welcome"} onClick={()=>readAloud("welcome")}>{speaking==="welcome"?t.readAloudStop:t.readAloud}</button>}</div><div className="action-options">{starters[locale].map(([label,seed])=><button key={label} type="button" className="action-option" disabled={busy} onClick={()=>{setIntent("choose");setChatMode("workspace");const field=messageInput.current;if(field){if(!field.value.trim())field.value=seed;field.focus();field.setSelectionRange(field.value.length,field.value.length);}}}>{label}<span aria-hidden="true">→</span></button>)}</div></div>
+        <div className="welcome-card"><p>{site==="teileklar"?tkWelcome.title:t.welcome}</p><p className="welcome-body">{site==="teileklar"?tkWelcome.body:t.welcomeBody}</p><div className="welcome-eyebrow-row"><span className="eyebrow">{site==="teileklar"?tkWelcome.eyebrow:t.welcomeEyebrow}</span>{canSpeak&&<button type="button" className="text-button" aria-pressed={speaking==="welcome"} onClick={()=>readAloud("welcome")}>{speaking==="welcome"?t.readAloudStop:t.readAloud}</button>}</div><div className="action-options">{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="action-option" disabled={busy} onClick={()=>{setIntent("choose");setChatMode("workspace");const field=messageInput.current;if(field){if(!field.value.trim())field.value=seed;field.focus();field.setSelectionRange(field.value.length,field.value.length);}}}>{label}<span aria-hidden="true">→</span></button>)}</div></div>
         <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?t.assistant:locale==="de"?"Du":locale==="nl"?"U":"Vous"}</span><p>{message.role==="user"||message.label?message.text:reply(message.intent)}</p>{message.label&&<small className="state-label">{message.label}</small>}{canSpeak&&message.role==="assistant"&&!message.label&&<button type="button" className="text-button" aria-pressed={speaking===speechKey(message.intent)} onClick={()=>readAloud(speechKey(message.intent))}>{speaking===speechKey(message.intent)?t.readAloudStop:t.readAloud}</button>}</div>)}</div>
         {intent==="choose"&&!ready&&<PublicRequestFallback locale={locale} contact={contact}/>}
         {intent!=="choose" && <section className="action-card" aria-label={t[intent]}>
