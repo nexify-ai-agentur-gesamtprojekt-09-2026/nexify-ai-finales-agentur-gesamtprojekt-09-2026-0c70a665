@@ -1,6 +1,7 @@
 "use client";
 import {useId,useState} from "react";
 import DiagnosticConsent from "./DiagnosticConsent";
+import InstallInvitation from "./InstallInvitation";
 import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import type {Locale} from "../lib/i18n";
@@ -80,6 +81,7 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
    <div id={noticeId}><p>{site==="teileklar"?legal.shopNotice:legal.notice}</p><p>{hasLicenses?legal.licenseNotice:legal.missingLicenses}</p></div>
   </details>
  </div>
+ <InstallInvitation locale={locale}/>
  <DiagnosticConsent locale={locale}/>
  </footer>;
 }

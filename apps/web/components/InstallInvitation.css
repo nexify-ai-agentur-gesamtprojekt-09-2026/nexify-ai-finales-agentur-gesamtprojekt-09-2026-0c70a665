@@ -1,0 +1,40 @@
+/* Discreet installation band inside the footer flow. Normal document flow only — never fixed or
+   absolute — so it can never overlay the chat panel on mobile. Original signet, central tokens. */
+.install-invitation{
+  display:flex;
+  align-items:flex-start;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:1.5rem;
+  padding:1rem 1.25rem;
+  border:1px solid var(--color-linie-fein);
+  border-radius:var(--radius-karte);
+  background:var(--color-graphit-850);
+  color:var(--color-text-sekundaer);
+  font-family:var(--font-text);
+}
+.install-invitation-mark{flex:0 0 auto;margin-top:0.15rem;opacity:0.9;}
+.install-invitation-copy{flex:1 1 16rem;min-width:0;}
+.install-invitation-copy h2{
+  margin:0 0 0.25rem;
+  font-size:var(--font-size-h4);
+  font-weight:var(--font-weight-semibold);
+  color:var(--color-text-primaer);
+}
+.install-invitation-copy p{margin:0.15rem 0;font-size:var(--font-size-body);}
+.install-invitation-note{font-size:var(--font-size-small);color:var(--color-text-tertiaer);}
+.install-invitation-actions{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  flex-wrap:wrap;
+  flex:0 0 auto;
+}
+.install-invitation .text-button{color:var(--color-text-tertiaer);}
+.install-invitation .text-button:hover,
+.install-invitation .text-button:focus-visible{color:var(--color-text-primaer);}
+@media (max-width:640px){
+  .install-invitation{flex-direction:column;gap:0.75rem;}
+  .install-invitation-actions{width:100%;}
+  .install-invitation-actions .primary-button{flex:1 1 auto;}
+}

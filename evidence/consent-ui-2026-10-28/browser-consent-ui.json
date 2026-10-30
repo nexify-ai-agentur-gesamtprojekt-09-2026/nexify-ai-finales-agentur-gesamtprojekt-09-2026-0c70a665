@@ -113,7 +113,7 @@
   "source_sha256": {
     "apps/web/components/DiagnosticConsent.tsx": "0db92384b63d02d0e64341975325805070890aa788e9d96c00ea66e73b3c244e",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
-    "apps/web/components/SiteFooter.tsx": "b38a0e0267a24d7d2689919856daa5ab25756d658e9dec1f0aef6ad46d15d7d7",
+    "apps/web/components/SiteFooter.tsx": "8fd5907b9e99aeadf62fec1fd91d7833696b31daa765ceb7fe8a1be608d36dc5",
     "apps/web/observability/exceptions.mjs": "ab85b180a7289b877b318f6b6011cb2ee4c580ff6225c7ecd4d47ddbbb0454b6",
     "apps/web/observability/exceptions.d.mts": "a483344332846b7ebe62801523b27416e7cf621a41ec5cec309b22beedc8da35",
     "apps/site/tests/browser-consent-ui.mjs": "7f07c81fdfc5a7014f267bc0f0edab827e3d32fe2a9416a0b292eb486fac1ae6"
