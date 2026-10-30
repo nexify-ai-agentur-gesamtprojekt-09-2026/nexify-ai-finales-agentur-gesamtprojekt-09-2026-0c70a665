@@ -1,0 +1,40 @@
+{
+  "summary": "Visual verification test completed for TrioScene CSS blend-mode fix on homepage hero. The green decorative wave line (SVG .trio-light) no longer bleeds through the central figure 'Pascal'. All CSS fixes verified: .trio-media now has isolation:isolate and mix-blend-mode:normal, while .trio-poster has mix-blend-mode:lighten. Visual inspection at 1280px and 1920px widths confirms figures are clearly in front of decorative lines with no bleed-through.",
+  "backend_issues": {},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Homepage '/' loads without console errors or runtime errors",
+    "Hero section [data-testid='identity-hero'] renders correctly",
+    "Hero media area [data-testid='hero-media'] displays Trio scene",
+    "Trio scene poster (.trio-poster) is present and loaded (naturalWidth > 0)",
+    "CSS fix verified: .trio-media has mix-blend-mode='normal' (was lighten before fix)",
+    "CSS fix verified: .trio-media has isolation='isolate' (new stacking context)",
+    "CSS fix verified: .trio-poster has mix-blend-mode='lighten' (moved from parent)",
+    "SVG .trio-light positioned behind poster with z-index=0",
+    "SVG .trio-light has correct opacity=0.55 for has-media mode",
+    "Visual verification: Green band does NOT bleed through Pascal's figure at 1280px width",
+    "Visual verification: Green band does NOT bleed through Pascal's figure at 1920px width",
+    "Visual verification: Figures are clearly in front of decorative lines",
+    "No horizontal overflow at 1280px width (scrollWidth=1280, innerWidth=1280)",
+    "No horizontal overflow at 1920px width (scrollWidth=1920, innerWidth=1920)",
+    "Play button [data-testid='hero-play-toggle'] is visible and clickable",
+    "Scene phase transitions correctly (idle state verified)",
+    "Clip mode set correctly (intro mode for has-media)"
+  ],
+  "test_report_links": [
+    ".screenshots/hero-1280-full.png",
+    ".screenshots/hero-1920-full.png"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [],
+  "success_percentage": {
+    "frontend": "100%",
+    "visual_verification": "100%"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false
+}
