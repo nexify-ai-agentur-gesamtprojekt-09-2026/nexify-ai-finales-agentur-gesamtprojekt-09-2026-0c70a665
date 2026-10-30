@@ -1,7 +1,14 @@
-/* Thematic media lead that connects into the page hero. Figures shown complete (contain), never cropped,
-   never under text. Background is the dark brand stage with a restrained lime glow (hero-only accent). */
-.page-media-band{position:relative;display:block;padding:var(--space-6) var(--content-gutter) 0;background:radial-gradient(ellipse at 62% 8%,color-mix(in srgb,var(--color-marke-lime) 11%,transparent),transparent 58%),var(--color-graphit-900)}
-.page-media-band .band-figure{display:block;width:100%;max-width:1040px;height:clamp(240px,32vw,440px);margin:0 auto;object-fit:contain;object-position:center bottom}
-.page-media-band.band-teileklar{background:radial-gradient(ellipse at 50% 8%,color-mix(in srgb,var(--color-marke-lime) 12%,transparent),transparent 60%),var(--color-graphit-900)}
-@media(max-width:820px){.page-media-band{padding:var(--space-5) var(--space-5) 0}.page-media-band .band-figure{height:clamp(190px,46vw,300px)}}
-@media(prefers-reduced-motion:reduce){.page-media-band *{animation:none;transition:none}}
+/* Hero scene column: figures shown COMPLETE (contain), never cropped, never under text.
+   Lives inside the existing hero's right column so the page reads as one responsive two-column hero. */
+.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start;gap:var(--space-7)}
+.content-layout .content-hero-aside{min-width:0;display:grid;gap:var(--space-6);align-content:start}
+.page-media-scene{position:relative;min-width:0}
+.page-media-scene .scene-figure{display:block;width:100%;height:clamp(240px,24vw,380px);object-fit:contain;object-position:center top}
+.content-layout .content-hero-aside .content-context{margin-top:0}
+@container(max-width:900px){.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1fr)}.page-media-scene .scene-figure{height:clamp(200px,42vw,320px)}}
+@media(max-width:820px){.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1fr)}.page-media-scene .scene-figure{height:clamp(190px,48vw,300px)}}
+@media(prefers-reduced-motion:reduce){.page-media-scene *{animation:none;transition:none}}
+/* Context nav relocated below the two-column hero (keeps the fixed chat launcher clear of the nav). */
+.content-layout .content-context-below{padding:var(--space-6) var(--content-gutter);border-bottom:1px solid var(--color-linie-mittel)}
+.content-layout .content-context-below .content-context{border-left:0;border-top:0;padding-left:0;padding-top:0;margin-top:0;max-width:960px}
+.content-layout .content-context-below .content-context>strong{margin-top:0}

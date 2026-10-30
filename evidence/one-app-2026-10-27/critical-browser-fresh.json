@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-30T03:23:59.646Z",
+  "recorded_at": "2026-10-30T05:36:48.223Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -52,7 +52,7 @@
     "apps/site/src/main.tsx": "c6dd914c3c8554ec55711888d41078ae597b8c7632be456941e17d97e218ba55",
     "apps/web/app/globals.css": "2903daef89c7451abed35393878052b2e716df45514ae8f46eba45ce65cc6397",
     "apps/web/components/HomeContent.tsx": "b21dca52338ecfb84c911029a9af6c100dc6229cd6d63a21e740473ddc571be3",
-    "apps/web/components/Workspace.tsx": "836a9648f44c3b954454ce21a14aa609e496406a51af26a817c3df0919405761",
+    "apps/web/components/Workspace.tsx": "b00ce5187a849b80bcd86c9c0f0c58e3baed01197b0d45e065ae0c0722b4d70e",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "016bea7ce6f66b769a2ea74a0756344593be6f3fe5bb256f5fc05599c416746e"
   },
@@ -77,8 +77,8 @@
     "apps/site/tests/browser-critical.mjs": "23c31a2beae171ccb0e1af9620f184676c44736d19d441a5a3ad1bf6419330ec"
   },
   "sdk_source_sha256": {
-    "apps/web/components/PublicOrientationChat.tsx": "7820df3d1f6fc68849c8ed84037478b27571545e32b105a0f45c9771677778bc",
-    "apps/web/components/PublicOrientationChat.css": "040c5b7fd99be0de6db745994facd8c3f50103f5dbcacd4db43c810427561f3d",
+    "apps/web/components/PublicOrientationChat.tsx": "6c442b783abc8853c4e5ace05628cf4e0319cc6b1a5f36cc0189cbdc2730923d",
+    "apps/web/components/PublicOrientationChat.css": "5e498bc2dfa5866647bd245c53c004f2b82888172c6598801b85324dedd3d49b",
     "api/agent-chat.ts": "78384cefd8829a9610e209fce0787228b3b40539a256183135c9c49b21d50d3a",
     "packages/agent-runtime/public-orientation.ts": "782edc47b55befbca4eb55f3077e18499ad2c5966c2e5173dbcaab4bc585f45b",
     "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
@@ -140,7 +140,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-30T03:23:59.646Z",
+    "recorded_at": "2026-10-30T05:36:48.223Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

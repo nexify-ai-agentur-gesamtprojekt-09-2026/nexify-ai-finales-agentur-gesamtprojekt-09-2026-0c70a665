@@ -13,6 +13,21 @@ const copy={
  fr:{title:"Trouver ton chemin",mode:"Aperçu guidé par texte · sans IA en direct",intro:"Pose une question sur les services, les produits ou ta prochaine étape. Tu obtiens les informations et les pages adaptées. Aucune réservation, aucun envoi ni action payante n’est effectué ici.",label:"Ta question sur le site",placeholder:"Que souhaites-tu découvrir ?",send:"Envoyer la question",stop:"Arrêter la réponse",waiting:"Réponse en cours de transmission…",error:"Le guide est momentanément indisponible. Ta saisie est conservée.",privacy:"Historique uniquement dans le navigateur pendant cette visite. Aucune conservation durable. Ne saisis pas d’identifiants.",you:"Toi",assistant:"AI Fly Oracle",next:"Ouvrir la page adaptée",prompt:"Comment commencer avec NeX2fly ?"}
 };
 
+// TEILEKLAR-specific overrides for the default-visible orientation chat (vehicle/part/workshop context).
+const tkCopy={
+ de:{title:"Orientierung: Fahrzeug, Teil, Werkstatt",intro:"Nenne dein Fahrzeug und das gesuchte Teil oder dein Werkstatt-Anliegen. Du erhältst passende Informationen und Seitenwege. Der Shop ist in Vorbereitung – hier wird nichts bestellt, versendet oder kostenpflichtig ausgeführt.",label:"Dein Fahrzeug-/Teile-Anliegen",placeholder:"Fahrzeug und gesuchtes Teil nennen …"},
+ nl:{title:"Oriëntatie: voertuig, onderdeel, werkplaats",intro:"Noem je voertuig en het gezochte onderdeel of je werkplaats-vraag. Je krijgt passende informatie en paginaroutes. De shop is in voorbereiding – hier wordt niets besteld, verzonden of tegen betaling uitgevoerd.",label:"Je voertuig-/onderdeelvraag",placeholder:"Voertuig en gezocht onderdeel noemen …"},
+ fr:{title:"Orientation : véhicule, pièce, atelier",intro:"Indique ton véhicule et la pièce recherchée ou ta demande d’atelier. Tu obtiens les informations et les pages adaptées. La boutique est en préparation – aucune commande, aucun envoi ni action payante ici.",label:"Ta demande véhicule/pièce",placeholder:"Indique le véhicule et la pièce recherchée …"}
+};
+const starters={
+ de:{nexify:[["Website planen","Ich möchte eine Website planen: "],["Ablauf automatisieren","Ich möchte einen Ablauf automatisieren: "],["Bestehendes Projekt","Ich habe ein bestehendes Projekt: "]],
+     teileklar:[["Fahrzeug angeben","Mein Fahrzeug (Marke, Modell, Baujahr): "],["Teileanfrage vorbereiten","Meine Teileanfrage – Fahrzeug und gesuchtes Teil: "],["Werkstatt-Anliegen","Mein Werkstatt-Anliegen (Fahrzeug und Arbeit): "]]},
+ nl:{nexify:[["Website plannen","Ik wil een website plannen: "],["Proces automatiseren","Ik wil een proces automatiseren: "],["Bestaand project","Ik heb een bestaand project: "]],
+     teileklar:[["Voertuig opgeven","Mijn voertuig (merk, model, bouwjaar): "],["Onderdeelaanvraag voorbereiden","Mijn onderdeelaanvraag – voertuig en gezocht onderdeel: "],["Werkplaats-vraag","Mijn werkplaats-vraag (voertuig en werk): "]]},
+ fr:{nexify:[["Planifier un site","Je veux planifier un site web : "],["Automatiser un processus","Je veux automatiser un processus : "],["Projet existant","J’ai un projet existant : "]],
+     teileklar:[["Indiquer le véhicule","Mon véhicule (marque, modèle, année) : "],["Préparer une demande de pièce","Ma demande de pièce – véhicule et pièce recherchée : "],["Demande atelier","Ma demande d’atelier (véhicule et travaux) : "]]}
+} as const;
+
 function guidedText(text:string,pages:PublicPage[]){
  return text.split(/(\[[^\]\n]+\]\(\/[A-Za-z0-9/-]*\))/g).map((part,index)=>{
   const match=/^\[([^\]\n]+)\]\((\/[A-Za-z0-9/-]*)\)$/.exec(part);
@@ -22,7 +37,7 @@ function guidedText(text:string,pages:PublicPage[]){
 }
 
 export default function PublicOrientationChat({locale,pagePath,pages,onActivityChange}:{locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void}){
- const text=copy[locale];const[draft,setDraft]=useState("");const lastSubmitted=useRef("");
+ const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify";const text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};const[draft,setDraft]=useState("");const lastSubmitted=useRef("");
  const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>({body:{id,trigger,...(messageId?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:messages.filter(message=>message.role==="user").slice(-1).map(message=>({id:message.id,role:message.role,parts:message.parts.filter(part=>part.type==="text")}))}})}),[]);
  const{messages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>setDraft(previous=>previous||lastSubmitted.current)});
  const busy=status==="submitted"||status==="streaming";
@@ -39,6 +54,7 @@ export default function PublicOrientationChat({locale,pagePath,pages,onActivityC
    return page?<SiteLink className="orientation-page-link" key={index} href={page.path}>{page.localizedTitle[locale]} <span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>:null;
   })}</article>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
+  {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);composerInput.current?.focus();}}>{label}<span aria-hidden="true">→</span></button>)}</div>}
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
   {busy&&<p className="connection-note" role="status">{text.waiting}</p>}<p className="connection-note">{text.privacy}</p>
  </section>;

@@ -2,9 +2,9 @@
 import type {Locale} from "../lib/i18n";
 import "./PageMediaBand.css";
 
-// Large thematic media lead for key content pages, visually connected to the page hero below.
-// Shows the APPROVED trio still (Pascal, NeX, AI Fly Oracle) COMPLETE via object-fit:contain on the
-// transparent brand stage — no crop, no text over the figures, no new paid clip, no generative edit.
+// Hero scene for key content pages: the APPROVED trio still (Pascal, NeX, AI Fly Oracle) shown COMPLETE
+// via object-fit:contain beside the hero copy — responsive two-column like Home, no crop, no text over
+// the figures, no new illustration, no generative edit. Reuses the existing Zielbild asset only.
 const HERO_TRIO = "/media/presenters/hero-trio.png";
 
 const alt: Record<string, Record<Locale, string>> = {
@@ -25,8 +25,8 @@ export default function PageMediaBand({pageId, context, locale}: {pageId: string
   if (!label) return null;
   const themeClass = context === "teileklar" ? "band-teileklar" : "band-nexify";
   return (
-    <div className={"page-media-band " + themeClass} data-testid={"page-media-band-" + pageId}>
-      <img className="band-figure" src={HERO_TRIO} alt={label[locale]} loading="lazy" decoding="async" width={1536} height={1024} />
+    <div className={"page-media-scene " + themeClass} data-testid={"page-media-band-" + pageId}>
+      <img className="scene-figure" src={HERO_TRIO} alt={label[locale]} loading="lazy" decoding="async" width={1536} height={1024} />
     </div>
   );
 }

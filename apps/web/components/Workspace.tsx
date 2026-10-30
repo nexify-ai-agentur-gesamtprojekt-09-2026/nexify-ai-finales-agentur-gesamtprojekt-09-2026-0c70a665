@@ -106,9 +106,9 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   },[open]);
   const t = translations[locale];
   const tkWelcome={
-    de:{title:"Teile, Fahrzeug und Werkstatt",body:"Nenne kurz dein Fahrzeug und das gesuchte Teil oder dein Werkstatt-Anliegen. Der Shop ist in Vorbereitung – wir bereiten deine Anfrage vor.",eyebrow:"Womit möchtest du starten?"},
-    nl:{title:"Onderdelen, voertuig en werkplaats",body:"Noem kort je voertuig en het gezochte onderdeel of je werkplaats-vraag. De shop is in voorbereiding – we bereiden je aanvraag voor.",eyebrow:"Waarmee wil je starten?"},
-    fr:{title:"Pièces, véhicule et atelier",body:"Indique brièvement ton véhicule et la pièce recherchée ou ta demande d’atelier. La boutique est en préparation – nous préparons ta demande.",eyebrow:"Par quoi souhaites-tu commencer ?"},
+    de:{title:"Teile, Fahrzeug und Werkstatt",body:"Nenne kurz dein Fahrzeug und das gesuchte Teil oder dein Werkstatt-Anliegen. Der Shop ist in Vorbereitung – wir bereiten deine Anfrage vor.",eyebrow:"Womit möchtest du starten?",placeholder:"Fahrzeug und gesuchtes Teil nennen …",send:"Anliegen beschreiben",mode:"Teileanfrage"},
+    nl:{title:"Onderdelen, voertuig en werkplaats",body:"Noem kort je voertuig en het gezochte onderdeel of je werkplaats-vraag. De shop is in voorbereiding – we bereiden je aanvraag voor.",eyebrow:"Waarmee wil je starten?",placeholder:"Voertuig en gezocht onderdeel noemen …",send:"Vraag beschrijven",mode:"Onderdeelaanvraag"},
+    fr:{title:"Pièces, véhicule et atelier",body:"Indique brièvement ton véhicule et la pièce recherchée ou ta demande d’atelier. La boutique est en préparation – nous préparons ta demande.",eyebrow:"Par quoi souhaites-tu commencer ?",placeholder:"Indique le véhicule et la pièce recherchée …",send:"Décrire la demande",mode:"Demande de pièce"},
   }[locale];
   const pathname=useSitePathname();
   const site=pathname.startsWith("/teileklar")?"teileklar":"nexify";
@@ -245,9 +245,9 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
       </div>
       <div className="composer-area" data-testid="chat-composer" hidden={!ready||(chatMode!=="workspace"&&Boolean(currentPage))}>
        <form className="composer-form" onSubmit={submitMessage}>
-        <div className="composer"><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" data-testid="chat-composer-textarea" ref={messageInput} name="message" placeholder={t.placeholder} maxLength={useChatGPT&&canChatGPT?1000:3000} rows={2} required disabled={!ready}/>{prefillNotice&&<p className="composer-hint" role="status" data-testid="chat-prefill-notice">{prefillNotice}</p>}</div>
+        <div className="composer"><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" data-testid="chat-composer-textarea" ref={messageInput} name="message" placeholder={site==="teileklar"?tkWelcome.placeholder:t.placeholder} maxLength={useChatGPT&&canChatGPT?1000:3000} rows={2} required disabled={!ready}/>{prefillNotice&&<p className="composer-hint" role="status" data-testid="chat-prefill-notice">{prefillNotice}</p>}</div>
         <details className="chat-hints" data-testid="chat-hints-disclosure">
-         <summary data-testid="chat-hints-toggle"><span>{locale==="de"?"Modus & Datenschutz":locale==="nl"?"Modus & privacy":"Mode et confidentialité"}</span><span className="chat-mode-label" data-testid="chat-mode-label">{useChatGPT&&canChatGPT?"ChatGPT":locale==="de"?"Projektplanung":locale==="nl"?"Projectplan":"Plan du projet"}</span></summary>
+         <summary data-testid="chat-hints-toggle"><span>{locale==="de"?"Modus & Datenschutz":locale==="nl"?"Modus & privacy":"Mode et confidentialité"}</span><span className="chat-mode-label" data-testid="chat-mode-label">{useChatGPT&&canChatGPT?"ChatGPT":site==="teileklar"?tkWelcome.mode:locale==="de"?"Projektplanung":locale==="nl"?"Projectplan":"Plan du projet"}</span></summary>
          <div className="chat-hints-content" data-testid="chat-hints-content">
           {canChatGPT&&<div className="chatgpt-option"><label className="checkbox-label"><input data-testid="chat-live-ai-toggle" type="checkbox" checked={useChatGPT} onChange={event=>setUseChatGPT(event.target.checked)}/>{t.chatgptToggle}</label><p className="status-note" data-testid="chat-provider-notice">{t.chatgptNote}</p></div>}
           <p className="connection-note">{locale==="de"?"Bitte keine Passwörter oder vertraulichen Daten eingeben.":locale==="nl"?"Voer geen wachtwoorden of vertrouwelijke gegevens in.":"Merci de ne pas saisir de mots de passe ou de données confidentielles."}</p>
@@ -255,7 +255,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
           <Link className="panel-pascal-link" data-testid="chat-contact-link" href="/kontakt" onClick={()=>{if(mobile)closePanel();}}>{locale==="de"?"Mit Pascal weiterklären":locale==="nl"?"Verder met Pascal":"Continuer avec Pascal"}<span aria-hidden="true">↗</span></Link>
          </div>
         </details>
-        <ActionButton type="submit" variant="primary" className="send-button" disabled={!ready} loading={busy} data-testid="chat-send-button">{busy?t.working:t.send}</ActionButton>
+        <ActionButton type="submit" variant="primary" className="send-button" disabled={!ready} loading={busy} data-testid="chat-send-button">{busy?t.working:(site==="teileklar"?tkWelcome.send:t.send)}</ActionButton>
        </form>
       </div>
       {chatMode==="orientation"&&<div className="chat-return"><ActionButton variant="quiet" data-testid="chat-return-workspace" onClick={()=>setChatMode("workspace")}>{locale==="de"?"Zurück zum Projektassistenten":locale==="nl"?"Terug naar projectassistent":"Revenir à l’assistant de projet"}</ActionButton></div>}
