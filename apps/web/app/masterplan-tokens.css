@@ -9,7 +9,8 @@
  * Namen bleiben als Aliase bestehen, damit kein Komponenten-CSS bricht.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+/* Schriften werden self-hosted über @font-face in app/globals.css geladen (Inter, Plus Jakarta Sans,
+   Geist, Geist Mono) – kein externer Font-Request (Datenschutz-/Offline-Grenze der öffentlichen Seiten). */
 
 :root {
   /* ============== Mastervorgabe 5.2 – Primärwerte ============== */

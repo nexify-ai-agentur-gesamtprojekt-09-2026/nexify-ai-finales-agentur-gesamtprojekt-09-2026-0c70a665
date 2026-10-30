@@ -391,13 +391,13 @@
     "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
     "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
-    "apps/web/app/layout.tsx": "549058a35387293c968522b88096b8e47e3bee9e3d74093afa2708b2ff97c53c",
+    "apps/web/app/layout.tsx": "96f1f1ac331a805497c4729ee1717d23cb97d36ffc8039b8cfe1ebc44ad8d5a5",
     "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "0ff3c2115db8c53003090683a8389e715cbd61225003b0d7d79c95d39523b772",
     "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "15fbf55b0ae3a154a8036a8d777ec420c92e7fe4fb246f4892b270256ba57e8a",
-    "apps/web/components/DiagnosticConsent.tsx": "457d5ae271142731851afbae6153ccbcf6bdabb4f969dfb854b1f167eeb34ee6",
-    "apps/web/components/DiagnosticConsent.css": "b639d22232932a73c0181b556778b0ce00871745e52a8abff70b97fb4ef16642",
-    "apps/web/components/SiteFooter.tsx": "e7e35444dd77850bd3ff9e51f3b4fa0ae260574c465fd62fe9086f164caa0748",
-    "apps/web/auth/tests/browser-public-experience.mjs": "c1afa87b14ee1db185b38d821708df52046b4b2043d5cb3c70aa3f63caa5515b"
+    "apps/web/components/DiagnosticConsent.tsx": "0db92384b63d02d0e64341975325805070890aa788e9d96c00ea66e73b3c244e",
+    "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
+    "apps/web/components/SiteFooter.tsx": "a15a9cb79ed215dd2b1c45ba197256dad94c96809a744cab2e932676ddcea74c",
+    "apps/web/auth/tests/browser-public-experience.mjs": "2f05bb0e19114812d72237c7a92a836bd27fdab84dcaa7b7ede6d4be984a932f"
   },
   "auth_mobile": [
     {
@@ -425,6 +425,12 @@
       "passed": true
     }
   ],
+  "companion_avatar": {
+    "aria_hidden": true,
+    "natural_width": 512,
+    "location": "reopen-chat launcher",
+    "passed": true
+  },
   "internal_workspace_api_unbound_503": true,
   "internal_mail_api_unbound_503": true,
   "passed": true

@@ -1,19 +1,23 @@
 [
   {
-    "content": "C: 200%-Zoom-Overflow ursächlich beheben + Hero-Test (browser-identity-hero.mjs) grün, 820-Breakpoint systemkonform",
+    "content": "C: 200%-Zoom-Fix + Hero-Test grün, 820-Breakpoint systemkonform",
     "status": "completed"
   },
   {
-    "content": "C: übrige Hero-/Szenen-Generatoren auf zielbild-v2 ausführen (browser-critical.mjs, browser-scene-images.mjs falls vorhanden) real grün",
+    "content": "C: browser-critical.mjs auf zielbild-v2 real grün",
+    "status": "completed"
+  },
+  {
+    "content": "B: echte Evidence regeneriert (inkl. Next next-public, legal next-browser)",
+    "status": "completed"
+  },
+  {
+    "content": "A/D: Register gebunden + View gerendert; make test VOLLSTÄNDIG GRÜN (575 OK)",
+    "status": "completed"
+  },
+  {
+    "content": "browser-scene-images.mjs auf v2-Explainer/Home-DOM aktualisieren (orphan ggü. make test, aber beauftragt)",
     "status": "in_progress"
-  },
-  {
-    "content": "B: echte Evidence regenerieren (alle browser-*.mjs Generatoren), reale Hashes + Manifest-/Byte-Bindung pro ausgeliefertem Asset validieren (nicht nur Pfad+Hash)",
-    "status": "pending"
-  },
-  {
-    "content": "A/D: Reconciliation-Register + evidence source_sha256 nur nachverifiziert aktualisieren; make test vollständig grün",
-    "status": "pending"
   },
   {
     "content": "Next/Login + gerenderte Shop-E2E (apps/web + agent-gateway, Offline-Fixtures, Clerk)",

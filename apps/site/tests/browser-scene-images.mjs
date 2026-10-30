@@ -26,21 +26,29 @@ try{
   for(const locale of ['de','nl'])for(const entry of data.pages){
    await page.goto(origin+entry.path);await page.locator('#locale').selectOption(locale);await page.waitForFunction(l=>document.documentElement.lang===l,locale);
    const expected=data.explainers.find(p=>p.page_id===entry.id).modules;
-   assert.equal(await page.locator('.editorial-module .presenter-scene').count(),expected.length);
-   for(let i=0;i<expected.length;i++){
-    const scene=page.locator('.editorial-module .presenter-scene').nth(i);await scene.scrollIntoViewIfNeeded();
-    assert.equal(await scene.getAttribute('data-scene-speaker'),expected[i].speaker);
-    const img=scene.locator('img');await img.evaluate(i=>i.decode());
-    const state=await img.evaluate(i=>({loaded:i.naturalWidth>0,fit:getComputedStyle(i).objectFit,alt:i.alt,width:i.getBoundingClientRect().width}));
-    assert.equal(state.loaded,true);assert.equal(state.fit,'contain');assert.ok(state.alt.includes(expected[i].title[locale]));assert.ok(state.width>0&&state.width<=width);
+   if(entry.path==='/'){
+    // zielbild-v2: Home präsentiert die Live-Szene (IdentityHero), nicht die generischen Explainer-Module.
+    assert.equal(await page.locator('.identity-hero[data-identity-layout="zielbild-v2"]').count(),1,'home live hero present');
+    const poster=page.locator('.identity-hero .trio-media .trio-poster');assert.equal(await poster.count(),1,'home brand-stage poster present');await poster.evaluate(i=>i.decode&&i.decode().catch(()=>{}));
+    assert.equal(await poster.evaluate(i=>i.naturalWidth>0),true,'home scene poster loads unbroken');
+   }else{
+    assert.equal(await page.locator('.editorial-module .presenter-scene').count(),expected.length);
+    for(let i=0;i<expected.length;i++){
+     const scene=page.locator('.editorial-module .presenter-scene').nth(i);await scene.scrollIntoViewIfNeeded();
+     assert.equal(await scene.getAttribute('data-scene-speaker'),expected[i].speaker);
+     const img=scene.locator('img');await img.evaluate(i=>i.complete?null:new Promise(r=>{i.addEventListener('load',r,{once:true});i.addEventListener('error',r,{once:true});}));
+     const state=await img.evaluate(i=>({loaded:i.naturalWidth>0,fit:getComputedStyle(i).objectFit,alt:i.alt,width:i.getBoundingClientRect().width}));
+     assert.equal(state.loaded,true);assert.equal(state.fit,'contain');assert.ok(state.alt.includes(expected[i].title[locale]));assert.ok(state.width>0&&state.width<=width);
+    }
    }
-   assert.equal(await page.locator('video,audio,.presenter-video-play').count(),0);
+   if(entry.path==='/')assert.equal(await page.evaluate(()=>{const media=[...document.querySelectorAll('video,audio')];const videos=[...document.querySelectorAll('video')];return media.length>0&&media.every(e=>e.muted||e.paused)&&videos.every(e=>e.muted&&!e.hasAttribute('controls'));}),true,'home media never auto-plays sound (clips muted/decorative, voice track paused)');
+   else assert.equal(await page.locator('video,audio,.presenter-video-play').count(),0);
    assert.equal(await page.locator('img[src="/media/presenters/hero-trio.png"]').count(),0);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    if(entry.path==='/'){
-    const hero=page.locator('.home-interim-scenes img');assert.equal(await hero.count(),3);
-    for(const img of await hero.all())await img.evaluate(i=>i.decode());
-    await page.locator('.home-interim-scenes').screenshot({path:out+`hero-${width}-${locale}.png`});
+    const hero=page.locator('.identity-hero .trio-media .trio-poster');
+    for(const img of await hero.all())await img.evaluate(i=>i.decode&&i.decode().catch(()=>{}));
+    await page.locator('.identity-hero').screenshot({path:out+`hero-${width}-${locale}.png`});
     await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:out+`home-${width}-${locale}.png`});
    }
    views.push({page_id:entry.id,path:entry.path,locale,width,scenes:expected.length,passed:true});
