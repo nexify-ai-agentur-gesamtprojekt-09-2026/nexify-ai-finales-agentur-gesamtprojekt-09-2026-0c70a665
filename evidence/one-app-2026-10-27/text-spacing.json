@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-30T12:18:00.383Z",
+  "observed_at": "2026-10-30T12:50:05.881Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "3379aa1aa62818d9712ef0baaf1d0448471a1e6d7194cbbf7c64e50f8f414baf",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -57,8 +57,8 @@
     "apps/web/components/ShopPanel.tsx": "fb47e85e5ecccc839bed12665ca28c997aa41361bbec18447e25b96c4a5f1549",
     "apps/web/components/SiteFooter.tsx": "a15a9cb79ed215dd2b1c45ba197256dad94c96809a744cab2e932676ddcea74c",
     "apps/web/components/SiteNavigation.tsx": "4d4508069a139af8b8521496c154ee0a17dd6789fb5fcdee539bf0a25dcc690b",
-    "apps/web/components/TrioScene.css": "16fa21e2ef3390c41e8dfdf9af3d6df5787cf6dd4b3cc8ff838f172c5192d808",
-    "apps/web/components/TrioScene.tsx": "7c885cb01bb503e36945ed1419302c97c4140319ca355d509c0dbd81bd1677d8",
+    "apps/web/components/TrioScene.css": "3d34d0255c6297b079c13191295bf4432987964406010baa3264f6df1b67e6f1",
+    "apps/web/components/TrioScene.tsx": "ec49fa87808b468e54f12104959d9a1134c91f2abc04b303cf9f8b816a012241",
     "apps/web/components/WorkshopDirectory.css": "16c4698405a491b2b97d418494a2457faa5689e4dccbe42612009881e2ef8042",
     "apps/web/components/WorkshopDirectory.tsx": "3cfdb55ea9e823b8caea7ff751b759d0106b0819371feed6d3d06238f1b6b49e",
     "apps/web/components/Workspace.tsx": "b00ce5187a849b80bcd86c9c0f0c58e3baed01197b0d45e065ae0c0722b4d70e",
@@ -105,7 +105,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 621,
+        "count": 624,
         "all_doubled": true
       },
       "overflow": false,

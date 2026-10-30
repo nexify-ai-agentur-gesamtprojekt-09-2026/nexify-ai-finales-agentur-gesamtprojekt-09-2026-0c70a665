@@ -27,17 +27,22 @@
 .trio-floor::before { content: ''; position: absolute; left: 8%; right: 8%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-marke-lime) 22%, transparent) 40%, color-mix(in srgb, var(--color-text-primaer) 10%, transparent) 60%, transparent); }
 .has-media .trio-floor { display: none; }
 
-/* Echte Clips: Poster unten, Intro darüber, Loop oben – alle weich in die Markenfläche maskiert (kein Rahmen, keine Kante).
-   Der Blend (lighten) liegt jetzt auf den inneren Ebenen und die Medienfläche ist ein eigener, isolierter Stacking-Kontext
-   mit eigener Seitenfläche. So hellt das Video gegen die Graphit-Fläche auf (schwarzer Clip-Grund verschwindet nahtlos),
-   ohne dass das Lichtband (.trio-light, z-index 0) dahinter durch die Figurenkörper blutet (Nutzerbefund: Band über Pascals Brust). */
-.trio-media { position: absolute; inset: 0; z-index: 2; overflow: hidden; isolation: isolate; background: var(--gradient-seitengrund); transition: filter .6s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+/* Opake Graphit-Fläche ZWISCHEN Lichtband (.trio-light, z-index 0) und Medien (z-index 2):
+   Sie nimmt das Band aus dem Blend-Backdrop der Medien (deckt es mittig ab), trägt dieselbe Feder-Maske wie die Medien,
+   sodass das Band nur noch am Rand/Überstand sichtbar ist und nicht durch die Figurenkörper blutet (Nutzerbefund: Band über Pascals Brust). */
+.trio-surface { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: var(--gradient-seitengrund);
   -webkit-mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 8%, var(--color-graphit-900) 92%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 78%, transparent);
   mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 8%, var(--color-graphit-900) 92%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 78%, transparent);
   -webkit-mask-composite: source-in; mask-composite: intersect; }
-/* Die Medienfläche ist selbst isoliert (siehe .trio-media), daher bleibt die Bühne in jedem Modus ein eigener Stacking-Kontext
-   und das Lichtband liegt verlässlich hinter den Figuren. */
-.trio-poster, .trio-clip { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 54%; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; mix-blend-mode: lighten; }
+
+/* Echte Clips: Poster unten, Intro darüber, Loop oben. Der Blend (lighten) liegt als GRUPPE auf .trio-media und wirkt gegen
+   die opake .trio-surface (Graphit), nicht gegen das Band. Die inneren Ebenen bleiben NORMAL und decken sich opak:
+   Der Loop überdeckt das Poster vollständig (kein Standbild-/Figuren-Ghosting), das Poster bleibt voll sichtbare Fallback-Ebene. */
+.trio-media { position: absolute; inset: 0; z-index: 2; overflow: hidden; mix-blend-mode: lighten; transition: filter .6s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  -webkit-mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 8%, var(--color-graphit-900) 92%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 78%, transparent);
+  mask-image: linear-gradient(90deg, transparent, var(--color-graphit-900) 8%, var(--color-graphit-900) 92%, transparent), linear-gradient(180deg, transparent, var(--color-graphit-900) 7%, var(--color-graphit-900) 78%, transparent);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+.trio-poster, .trio-clip { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 54%; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
 .trio-poster { z-index: 1; }
 .trio-clip-intro { z-index: 2; opacity: 0; transition: opacity .3s ease; }
 .trio-clip-loop { z-index: 3; opacity: 0; transition: opacity .45s ease; }

@@ -144,6 +144,7 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
     </g>
    </svg>
    <div className="trio-floor" aria-hidden="true"/>
+   {useMedia&&<div className="trio-surface" aria-hidden="true"/>}
    {useMedia&&media&&<div className="trio-media" data-testid={`${testId}-clips`}>
     <img className="trio-poster" src={media.poster} alt={title} draggable={false} loading={scene.id==='welcome'?'eager':'lazy'} decoding="async"/>
     {media.intro&&<video ref={introRef} className="trio-clip trio-clip-intro" muted playsInline preload={scene.id==='welcome'?'auto':'metadata'} disablePictureInPicture aria-hidden="true" tabIndex={-1}
