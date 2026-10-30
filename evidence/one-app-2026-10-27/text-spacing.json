@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-30T12:50:05.881Z",
+  "observed_at": "2026-10-30T13:12:03.811Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "3379aa1aa62818d9712ef0baaf1d0448471a1e6d7194cbbf7c64e50f8f414baf",
     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
@@ -34,8 +34,8 @@
     "apps/web/components/NextRouterBridge.tsx": "13262725f7487b2616c2a8ac2d7c15f55a4eee5fe4c257db9f69a1460daa7157",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
     "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
-    "apps/web/components/PageMediaBand.css": "7c95e5e7d2a031764e995df8af27ebb23a60d3c1d608051a63476411d0d3e12f",
-    "apps/web/components/PageMediaBand.tsx": "26149d1b878233ad8b17709a26d8f825818fc4320f4cf7dea981b7f02d8253f7",
+    "apps/web/components/PageMediaBand.css": "20dee8aaf640983cd1a9cc8fef105c047a99911193459f4b369f4383da7bee42",
+    "apps/web/components/PageMediaBand.tsx": "8529b5c7eef618e381e13ef8d823e2b97d08eb3e278f3b2829fba9e438727d56",
     "apps/web/components/PartnerRequestForm.css": "173f2d8f04e85d14563ba18e290d772b6627d94ac744b91f001de558145da50d",
     "apps/web/components/PartnerRequestForm.tsx": "d205b0f8726cc31c587f042c8afc0120beeff1c7a7bdb0b7e75568ab3e000a27",
     "apps/web/components/PresenterEditorial.css": "1568ed80ac71b3ef236280e9d90a7f1c1b7ff14977f88198171d26ea630215da",
@@ -197,7 +197,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 444,
+        "count": 447,
         "all_doubled": true
       },
       "overflow": false,
@@ -634,7 +634,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 405,
+        "count": 408,
         "all_doubled": true
       },
       "overflow": false,

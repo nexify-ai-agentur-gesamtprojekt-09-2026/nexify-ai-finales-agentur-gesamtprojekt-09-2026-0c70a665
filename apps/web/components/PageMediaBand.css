@@ -3,10 +3,12 @@
 .content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start;gap:var(--space-7)}
 .content-layout .content-hero-aside{min-width:0;display:grid;gap:var(--space-6);align-content:start}
 .page-media-scene{position:relative;min-width:0}
-.page-media-scene .scene-figure{display:block;width:100%;height:clamp(240px,24vw,380px);object-fit:contain;object-position:center top}
+.page-media-scene .scene-figure-row{display:flex;align-items:flex-end;justify-content:center;gap:var(--space-4);height:clamp(240px,24vw,380px)}
+.page-media-scene .scene-figure{display:block;width:auto;height:100%;max-width:38%;object-fit:contain;object-position:center bottom}
+.page-media-scene .scene-figure-oracle{height:64%;align-self:flex-start;max-width:30%}
 .content-layout .content-hero-aside .content-context{margin-top:0}
-@container(max-width:900px){.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1fr)}.page-media-scene .scene-figure{height:clamp(200px,42vw,320px)}}
-@media(max-width:820px){.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1fr)}.page-media-scene .scene-figure{height:clamp(190px,48vw,300px)}}
+@container(max-width:900px){.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1fr)}.page-media-scene .scene-figure-row{height:clamp(200px,42vw,320px)}}
+@media(max-width:820px){.content-layout .content-hero.has-scene{grid-template-columns:minmax(0,1fr)}.page-media-scene .scene-figure-row{height:clamp(190px,48vw,300px)}}
 @media(prefers-reduced-motion:reduce){.page-media-scene *{animation:none;transition:none}}
 /* Context nav relocated below the two-column hero (keeps the fixed chat launcher clear of the nav). */
 .content-layout .content-context-below{padding:var(--space-6) var(--content-gutter);border-bottom:1px solid var(--color-linie-mittel)}
