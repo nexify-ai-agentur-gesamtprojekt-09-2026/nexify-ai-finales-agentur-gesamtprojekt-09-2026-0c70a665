@@ -1,26 +1,30 @@
 [
   {
-    "content": "P0 Hero Wellenlinien-Bleed beheben + testen + committen (9bdad3c)",
+    "content": "P0 Hero Band-Bleed (9bdad3c) + Doppelung (d054f7f) + /teileklar AIFly (0c4766a) behoben & verifiziert",
     "status": "completed"
   },
   {
-    "content": "P0 Hero Figuren-Doppelung beheben, Zustaende verifizieren, committen (d054f7f)",
+    "content": "project/choice Ambient-Loop-Startfehler behoben, real verifiziert, welcome ohne Regression (cfd87b9)",
     "status": "completed"
   },
   {
-    "content": "Auth: harte Abhaengigkeiten belegt; DEV-Aktivierung im Preview wartet auf konkrete Freigabe von Pascal (kein Publish-Zwang behauptet)",
+    "content": "Inventur: Logo-Master (nur signet.svg; Header=Signet+HTML-Wortmarke) + bestehende PWA (Next installation.json-Mechanik, derzeit enabled:false; prototypen/ Legacy-PWA; apps/site ohne PWA)",
+    "status": "completed"
+  },
+  {
+    "content": "PWA aktivieren/erweitern ueber bestehende installation.json-Mechanik (Manifest, stabile id/start_url/scope, Original-Logo-Icons inkl. maskable, updatefaehiger SW, sichere Offline-Anzeige ohne Auth/Checkout-Cache) - naechstes Paket",
     "status": "pending"
   },
   {
-    "content": "Impressum/Rechtstexte: belegte Betreiberdaten uebernehmen, Fehlendes als 'ausstehend' dokumentieren (benoetigt autorisierte Quellen)",
+    "content": "Responsive-Abnahme alle Routen 320/360/390/768/1024, Hoch/Quer, 200% Zoom, Tastatur/Safe-Areas, Touchziele 48px - naechstes Paket",
     "status": "pending"
   },
   {
-    "content": "Content-Ausbau: pro Leistungs-/Produktseite ausfuehrliche Nutzer-Erklaerungen (Problem/Zielgruppe/Umfang/Faelle/Ergebnis/Ablauf/Voraussetzungen/Schnittstellen/Abgrenzung/FAQ/CTA), keine Doorwayseiten, FAQ nur fuer Nutzer",
+    "content": "Freigegebene Inhalts-/Shop-/Werkstatt-/Partnerarbeiten umsetzen (kundenverstaendliche Marketingtexte, keine internen Bauanweisungen oeffentlich)",
     "status": "pending"
   },
   {
-    "content": "Beauftragte Pakete zu belastbaren Betriebsablaeufen: Quelle->Aktion->Persistenz->Readback->Fehler/Recovery->unabhaengige Pruefung",
+    "content": "Auth: nur konkret vorbereiten (DEV-Instanz/Preview-Variablen/Datenverarbeitung/Testkonten), nicht aktivieren",
     "status": "pending"
   }
 ]
