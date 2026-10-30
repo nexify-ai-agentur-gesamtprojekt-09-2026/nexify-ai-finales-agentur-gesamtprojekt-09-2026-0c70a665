@@ -1,26 +1,26 @@
 [
   {
-    "content": "Correct Clerk facts (DNS now resolves 2026-10-30; snapshot historical; managed key in THIS project)",
+    "content": "Fix layout: two-column hero (copy|complete scene) like Home; H1/CTA above fold",
     "status": "completed"
   },
   {
-    "content": "Fix layout defect: figures COMPLETE via contain (no crop), no text overlay, connected to hero, single title",
+    "content": "Move area nav below hero so fixed chat launcher no longer overlaps it (both chat states, mobile/tablet/desktop, 200%)",
     "status": "completed"
   },
   {
-    "content": "Re-verify visually: apps-portale + teileklar, chat open/closed, desktop/tablet/mobile + 200% (all overflow False)",
+    "content": "TEILEKLAR default-visible orientation chat context-aware (Fahrzeug/Teil/Werkstatt, 'Teileanfrage vorbereiten') + workspace labels",
     "status": "completed"
   },
   {
-    "content": "TEILEKLAR starters/context: 'Teileanfrage vorbereiten' (no false search), Fahrzeug/Teil/Werkstatt seeds + welcome overrides",
+    "content": "Re-record affected evidence (critical/text-spacing/shop/public-fallbacks/detail) + update reconciliation register + render view",
     "status": "completed"
   },
   {
-    "content": "Evidence/governance renewal (~30 files: reconciliation register, browser-evidence JSONs, governance configs) + make test green",
-    "status": "pending"
+    "content": "make test fully green (575) incl. audit + build",
+    "status": "completed"
   },
   {
-    "content": "Commit + show preview (BLOCKED until evidence renewal green; not committing red/half state)",
-    "status": "pending"
+    "content": "Secured local commit b27e773 (no push/publish); working tree clean; preview healthy on Vite",
+    "status": "completed"
   }
 ]
