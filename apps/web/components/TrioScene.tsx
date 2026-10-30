@@ -66,7 +66,9 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  // Ambient clip: intro once (when the stage becomes visible), then the seamless loop – silent, independent of the voice track.
  useEffect(()=>{
   if(!media||reduced||clipFailed)return;
-  const el=introRef.current?.parentElement;if(!el)return;
+  // Ohne Intro (project/choice) auf das Loop-Element zurückfallen – beide liegen in derselben .trio-media,
+  // damit der Ambient-Loop auch bei intro-losen Szenen startet (zuvor brach der Effekt mangels introRef ab).
+  const el=(introRef.current||loopRef.current)?.parentElement;if(!el)return;
   let started=false;
   const begin=()=>{
    if(started)return;started=true;
