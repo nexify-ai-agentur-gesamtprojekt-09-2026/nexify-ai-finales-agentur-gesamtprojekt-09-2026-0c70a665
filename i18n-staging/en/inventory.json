@@ -1,0 +1,3404 @@
+{
+ "order": "NEX-WEB-EN-20261030-01",
+ "purpose": "build-preparation field inventory, not shipped, runtime locales unchanged",
+ "site_map_sha256": "016bea7ce6f66b769a2ea74a0756344593be6f3fe5bb256f5fc05599c416746e",
+ "generated_from": "config/site-map.json",
+ "total_fields": 483,
+ "by_group": {
+  "home": 8,
+  "leistungen": 57,
+  "leistungen-rahmen": 44,
+  "wissen": 28,
+  "unternehmen": 14,
+  "kontakt": 16,
+  "produkte": 42,
+  "recht": 54,
+  "auth": 24,
+  "teileklar": 151,
+  "portal-intern": 42,
+  "footer": 3
+ },
+ "entries": [
+  {
+   "pointer": "/pages/0/title",
+   "page": "home",
+   "group": "home",
+   "de": "Digitale Lösungen für dein Unternehmen",
+   "de_sha256": "7cef0bc6d771020a0f6018a6c36c36ebb338c223979f1abc790996ba27c16daa"
+  },
+  {
+   "pointer": "/pages/0/summary",
+   "page": "home",
+   "group": "home",
+   "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+   "de_sha256": "dee65ad950fda0ab35f1804cf1136d306e85f7355b3bf76b43ccbf3d9f47bd1d"
+  },
+  {
+   "pointer": "/pages/0/sections/0/heading",
+   "page": "home",
+   "group": "home",
+   "de": "Digitale Lösungen für dein Unternehmen",
+   "de_sha256": "7cef0bc6d771020a0f6018a6c36c36ebb338c223979f1abc790996ba27c16daa"
+  },
+  {
+   "pointer": "/pages/0/sections/0/body",
+   "page": "home",
+   "group": "home",
+   "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+   "de_sha256": "dee65ad950fda0ab35f1804cf1136d306e85f7355b3bf76b43ccbf3d9f47bd1d"
+  },
+  {
+   "pointer": "/pages/0/metadata/description",
+   "page": "home",
+   "group": "home",
+   "de": "Kläre zuerst deinen Bedarf. Danach wählst du Websites, Agenten und Automatisierungen oder Apps und Portale. Ein Gespräch oder Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+   "de_sha256": "dee65ad950fda0ab35f1804cf1136d306e85f7355b3bf76b43ccbf3d9f47bd1d"
+  },
+  {
+   "pointer": "/pages/0/next_actions/0/label",
+   "page": "home",
+   "group": "home",
+   "de": "Leistungen verstehen",
+   "de_sha256": "d8b8a92a2e321bf7206acbdab37d90f31f701716faf6d21925f2a359c7229bd3"
+  },
+  {
+   "pointer": "/pages/0/next_actions/1/label",
+   "page": "home",
+   "group": "home",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/0/next_actions/2/label",
+   "page": "home",
+   "group": "home",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/1/title",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Leistungen",
+   "de_sha256": "c246f300e8361fc3db1ae142a710a7e01d0e6db1c967f4c9c071fae62b3e8976"
+  },
+  {
+   "pointer": "/pages/1/summary",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Drei Leistungsbereiche bilden den Einstieg: Websites, Agenten und Automatisierungen sowie Apps und Portale. Entscheidend sind Aufgabe, bestehende Systeme und ein prüfbarer Umfang.",
+   "de_sha256": "961e149951a9bd1f2d0f3a71c482ed7469018b388cdf81648061167c85f48313"
+  },
+  {
+   "pointer": "/pages/1/sections/0/heading",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Leistungen",
+   "de_sha256": "c246f300e8361fc3db1ae142a710a7e01d0e6db1c967f4c9c071fae62b3e8976"
+  },
+  {
+   "pointer": "/pages/1/sections/0/body",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Drei Leistungsbereiche bilden den Einstieg: Websites, Agenten und Automatisierungen sowie Apps und Portale. Entscheidend sind Aufgabe, bestehende Systeme und ein prüfbarer Umfang.",
+   "de_sha256": "961e149951a9bd1f2d0f3a71c482ed7469018b388cdf81648061167c85f48313"
+  },
+  {
+   "pointer": "/pages/1/sections/1/heading",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Vom Ziel zur passenden Leistung",
+   "de_sha256": "1d99554955ef765a3d61310a2f6242e254988b4861578fdc28bf5523bd88bf40"
+  },
+  {
+   "pointer": "/pages/1/sections/1/body",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Für einen öffentlichen Auftritt mit Leistungen und Kontaktwegen beginnst du bei Websites. Geht es um wiederkehrende Anfragen, Termine, Postfächer oder Angebotsentwürfe, prüfst du Agenten und Automatisierung. Für geschützte Projektübersichten, Dokumente und getrennte Teamrechte passt der Einstieg über Apps und Portale. Welche Teile zusammengehören, klären wir am konkreten Nutzerweg.",
+   "de_sha256": "fc374b27d4ff18759e439a3cc5d5bb3631b4fe5ca9c52519086ba4178ad4c4be"
+  },
+  {
+   "pointer": "/pages/1/sections/2/heading",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Baustein anpassen oder individuell entwickeln",
+   "de_sha256": "c9a7cf0a41eedf5e8757c56d4aab0f45d84c06abd7e685c35d60a1861a7eda19"
+  },
+  {
+   "pointer": "/pages/1/sections/2/body",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Ein vorhandener Baustein kann passen, wenn vor allem Marke, Ton, Regeln und Anbindung angepasst werden müssen. Eine Individuallösung kommt infrage, wenn dein Datenmodell oder das Zusammenspiel mehrerer Systeme neu entwickelt werden muss. Wiederverwendung, Anpassungsgrenzen, Nutzungsrechte und Betrieb werden im Angebot getrennt beschrieben; die Existenz einer Referenz ist noch keine Lieferzusage.",
+   "de_sha256": "772e6515922a8b429875bed5c3ca32e9e19390678cd630557d7a7416a934479f"
+  },
+  {
+   "pointer": "/pages/1/sections/3/heading",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Was am Ende vereinbart ist",
+   "de_sha256": "5fc1dd17bfebd6f405151c644d6f23c5bd27a835f437cd3aef9eaf883ffacc40"
+  },
+  {
+   "pointer": "/pages/1/sections/3/body",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Vor dem Aufbau halten wir Ziel, Umfang und Prüfkriterien fest. Während der Umsetzung sollen Vorschau, offene Entscheidungen und Ergebnisberichte den Fortschritt nachvollziehbar machen. Zur Abnahme gehören die vereinbarten Funktionen und die Übergabe der zugehörigen Unterlagen; ein laufender Betreuungsumfang wird gesondert festgelegt.",
+   "de_sha256": "e7a569aad881e5c30098633043324d96cb22ed9383a7ebb6b2769192a9b089f3"
+  },
+  {
+   "pointer": "/pages/1/metadata/description",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Drei Leistungsbereiche bilden den Einstieg: Websites, Agenten und Automatisierungen sowie Apps und Portale. Entscheidend sind Aufgabe, bestehende Systeme und ein prüfbarer Umfang.",
+   "de_sha256": "961e149951a9bd1f2d0f3a71c482ed7469018b388cdf81648061167c85f48313"
+  },
+  {
+   "pointer": "/pages/1/next_actions/0/label",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Websites",
+   "de_sha256": "bec8768fab41a2df7d72ed317f6af053e225a1cd566d7decfa22bbacf2290be5"
+  },
+  {
+   "pointer": "/pages/1/next_actions/1/label",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Agenten und Automatisierung",
+   "de_sha256": "116f69feae23009450d9bc7c7ba44fbe1e5ab9bdf63f7cc8002bd7aa38abd67d"
+  },
+  {
+   "pointer": "/pages/1/next_actions/2/label",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Apps und Portale",
+   "de_sha256": "b69581a0a47094565c27488d0388b0dd7776ab2034be1c89794995dbae1a27ad"
+  },
+  {
+   "pointer": "/pages/1/next_actions/3/label",
+   "page": "services",
+   "group": "leistungen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/2/title",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Websites",
+   "de_sha256": "bec8768fab41a2df7d72ed317f6af053e225a1cd566d7decfa22bbacf2290be5"
+  },
+  {
+   "pointer": "/pages/2/summary",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Eine Website soll Leistungen verständlich erklären und zur passenden Anfrage führen. Wir klären Inhalte, Navigation, Sprachen, Kontaktweg und Pflege, bevor ein konkreter Umfang festgelegt wird.",
+   "de_sha256": "8a1fd009a72cfc429d14bc6dc07eee1423c508af21e8f06058cfa4bc30fbf581"
+  },
+  {
+   "pointer": "/pages/2/sections/0/heading",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Websites",
+   "de_sha256": "bec8768fab41a2df7d72ed317f6af053e225a1cd566d7decfa22bbacf2290be5"
+  },
+  {
+   "pointer": "/pages/2/sections/0/body",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Eine Website soll Leistungen verständlich erklären und zur passenden Anfrage führen. Wir klären Inhalte, Navigation, Sprachen, Kontaktweg und Pflege, bevor ein konkreter Umfang festgelegt wird.",
+   "de_sha256": "8a1fd009a72cfc429d14bc6dc07eee1423c508af21e8f06058cfa4bc30fbf581"
+  },
+  {
+   "pointer": "/pages/2/sections/1/heading",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Vom Angebot zur passenden Anfrage",
+   "de_sha256": "8119c4d5d9638c38e474db2efca23789af9d65e32b13469a20607e3bc40ebb70"
+  },
+  {
+   "pointer": "/pages/2/sections/1/body",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Wir strukturieren, welche Leistungen dein Betrieb erklärt, welche Fragen Besucher haben und welcher Kontaktweg jeweils passt. Daraus entstehen Seiten, Navigation und die benötigten Sprachfassungen. Eine Landingpage konzentriert sich auf ein Angebot; eine Unternehmenswebsite verbindet mehrere Leistungen. Ein Shop ergänzt Produktdaten, Warenkorb und Bestellablauf und braucht dafür einen eigenen Umfang.",
+   "de_sha256": "de37532fd16b5d6d75d4c062da7a86c9339080d267d91a7b1b039bf81f5d2138"
+  },
+  {
+   "pointer": "/pages/2/sections/2/heading",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "In der Vorschau prüfen",
+   "de_sha256": "57959354b9fcd5b993a6a39fc5d5ced39975df908d5db6d2ae3b9311275a9c3f"
+  },
+  {
+   "pointer": "/pages/2/sections/2/body",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Vor einer Veröffentlichung prüfen wir den vereinbarten Weg von der Einstiegsseite bis zur Anfrage: Inhalte, Links, mobile Bedienung und verständliche Rückmeldungen bei fehlenden Angaben. Benötigte Texte, Bilder und Nutzungsrechte werden geklärt. Ein gezeigter Formularentwurf ist noch keine bestätigte Übermittlung; echte Kontaktanbindungen gehören ausdrücklich in den Leistungsumfang.",
+   "de_sha256": "f63b5782fb91d18654926f815ccc487793175b01d4c52a81c4199c98677271ba"
+  },
+  {
+   "pointer": "/pages/2/sections/3/heading",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Übergabe und spätere Pflege",
+   "de_sha256": "793006291d97c434ff82348c37d9c373bc8dbc5914e15acd014241164282772b"
+  },
+  {
+   "pointer": "/pages/2/sections/3/body",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Zur Übergabe legen wir fest, wer Inhalte ändern darf, wo das Projekt betrieben wird und welche Unterlagen dein Team erhält. Für individuell entwickelte Teile werden Code- und Datenübergabe vereinbart; bei wiederverwendeten Bausteinen werden die Nutzungsrechte benannt. Redaktionelle Pflege, technische Änderungen und laufende Betreuung sind eigene Leistungen. Sichtbarkeit oder Anfragenzahlen werden nicht garantiert.",
+   "de_sha256": "d43507442eb1812409d570ed8ae25d4d1e447ce103dccfdd7b5ed9f75994d05f"
+  },
+  {
+   "pointer": "/pages/2/metadata/description",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Eine Website soll Leistungen verständlich erklären und zur passenden Anfrage führen. Wir klären Inhalte, Navigation, Sprachen, Kontaktweg und Pflege, bevor ein konkreter Umfang festgelegt wird.",
+   "de_sha256": "8a1fd009a72cfc429d14bc6dc07eee1423c508af21e8f06058cfa4bc30fbf581"
+  },
+  {
+   "pointer": "/pages/2/next_actions/0/label",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/2/next_actions/1/label",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/2/next_actions/2/label",
+   "page": "websites",
+   "group": "leistungen",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/3/title",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Agenten und Automatisierung",
+   "de_sha256": "116f69feae23009450d9bc7c7ba44fbe1e5ab9bdf63f7cc8002bd7aa38abd67d"
+  },
+  {
+   "pointer": "/pages/3/summary",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Wir beginnen mit einem konkreten Ablauf: Eingabe, Bearbeitung, Ausnahme und Übergabe. Regeln, Zugriffe und Freigaben begrenzen die Ausführung. Marketingaufgaben können zunächst als strukturiertes Briefing vorbereitet werden.",
+   "de_sha256": "5c7e124178d1dac27ea82c1ad6e8bee1599a57b12612f6d8b4f2259efceceddf"
+  },
+  {
+   "pointer": "/pages/3/sections/0/heading",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Agenten und Automatisierung",
+   "de_sha256": "116f69feae23009450d9bc7c7ba44fbe1e5ab9bdf63f7cc8002bd7aa38abd67d"
+  },
+  {
+   "pointer": "/pages/3/sections/0/body",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Wir beginnen mit einem konkreten Ablauf: Eingabe, Bearbeitung, Ausnahme und Übergabe. Regeln, Zugriffe und Freigaben begrenzen die Ausführung. Marketingaufgaben können zunächst als strukturiertes Briefing vorbereitet werden.",
+   "de_sha256": "5c7e124178d1dac27ea82c1ad6e8bee1599a57b12612f6d8b4f2259efceceddf"
+  },
+  {
+   "pointer": "/pages/3/sections/1/heading",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Anfragen, Termine, Postfach und Wissen",
+   "de_sha256": "dab2e3bd220c4b794002dbbf98254370d0a2b28a3c666f4c94b7e5758441541b"
+  },
+  {
+   "pointer": "/pages/3/sections/1/body",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Der Baukasten beschreibt einen Chat-Agenten für Rückfragen und Übergaben, Terminbuchung anhand freier Kalenderplätze, E-Mail-Triage nach Anliegen und Zuständigkeit sowie einen Angebots-Generator für Entwürfe. Ein Wissensagent soll freigegebene Dokumente mit Quellenangabe nutzen. Wir wählen einen abgegrenzten Anwendungsfall; das Auflisten dieser Bausteine bedeutet nicht, dass alle bereits für dein System verbunden sind.",
+   "de_sha256": "fcfa681cb7fdece8951adde1c2e3d55fe9e000c460cb600c289ea6d6056c6a16"
+  },
+  {
+   "pointer": "/pages/3/sections/2/heading",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Zugriffe und Freigaben vorher festlegen",
+   "de_sha256": "3aabba681d49f3d3245f16eb09e2082b9884d7379d2cb5bb3904a02366348500"
+  },
+  {
+   "pointer": "/pages/3/sections/2/body",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Kalender, Postfach und weitere Fachsysteme werden über passende Schnittstellen angebunden, soweit der jeweilige Anbieter dies ermöglicht. Wir trennen Lesen, Entwerfen und Ausführen. Du legst fest, wann ein Mensch entscheiden muss, etwa vor Versand, verbindlichen Angeboten oder Änderungen. Fehlende Angaben und unsichere Ergebnisse führen zur Rückfrage statt zu einer erfundenen Zusage.",
+   "de_sha256": "d6a60d2867b0237ca7e72b8da23e4e1e5b6292947b7b00efc2e63299215dd9f6"
+  },
+  {
+   "pointer": "/pages/3/sections/3/heading",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Einen Ablauf testen und nachmessen",
+   "de_sha256": "8ad82894c1dcb41055e88378995f2e1fc1e7d9dc5fd2cfe66ce5e4f9ab2525f0"
+  },
+  {
+   "pointer": "/pages/3/sections/3/body",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Für den Piloten wählen wir ein messbares Ziel, zum Beispiel die Zeit bis zur ersten Antwort. In der Vorschau prüfen wir Normalfall, fehlende Daten, gesperrte Aktionen und die Übergabe an einen Menschen. Nach freigegebener Inbetriebnahme wird dieselbe Kennzahl erneut erfasst. Der Vergleich zeigt den tatsächlichen Verlauf; er ist kein vorab zugesagter Zeitgewinn oder Umsatz.",
+   "de_sha256": "5cd839f5b671ce3108a65941e7f9b9f7f23867ae7dd0e0c5a7987b15fce17373"
+  },
+  {
+   "pointer": "/pages/3/metadata/description",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Wir beginnen mit einem konkreten Ablauf: Eingabe, Bearbeitung, Ausnahme und Übergabe. Regeln, Zugriffe und Freigaben begrenzen die Ausführung. Marketingaufgaben können zunächst als strukturiertes Briefing vorbereitet werden.",
+   "de_sha256": "5c7e124178d1dac27ea82c1ad6e8bee1599a57b12612f6d8b4f2259efceceddf"
+  },
+  {
+   "pointer": "/pages/3/next_actions/0/label",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/3/next_actions/1/label",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/3/next_actions/2/label",
+   "page": "automation",
+   "group": "leistungen",
+   "de": "Marketingbriefing vorbereiten",
+   "de_sha256": "8c5ae367e06ff5c48570ba48507a200321d6575655fa1e7b6d89a27a7288e475"
+  },
+  {
+   "pointer": "/pages/4/title",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Apps und Portale",
+   "de_sha256": "b69581a0a47094565c27488d0388b0dd7776ab2034be1c89794995dbae1a27ad"
+  },
+  {
+   "pointer": "/pages/4/summary",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Kunden- und interne Abläufe benötigen klare Rollen, Datenbereiche und Zustände. Gemeinsam klären wir, wer welche Informationen sehen und welche Schritte ausführen darf.",
+   "de_sha256": "ca6c065489585817b72889420464f0f9a333d51eb59b59e4e03863d59a1dd03c"
+  },
+  {
+   "pointer": "/pages/4/sections/0/heading",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Apps und Portale",
+   "de_sha256": "b69581a0a47094565c27488d0388b0dd7776ab2034be1c89794995dbae1a27ad"
+  },
+  {
+   "pointer": "/pages/4/sections/0/body",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Kunden- und interne Abläufe benötigen klare Rollen, Datenbereiche und Zustände. Gemeinsam klären wir, wer welche Informationen sehen und welche Schritte ausführen darf.",
+   "de_sha256": "ca6c065489585817b72889420464f0f9a333d51eb59b59e4e03863d59a1dd03c"
+  },
+  {
+   "pointer": "/pages/4/sections/1/heading",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Angebot, Projekt und Dokumente zusammenführen",
+   "de_sha256": "08ff001ed89a9729f330a316d694d8d5abdaac02c84ff86b1363ff81a006ee51"
+  },
+  {
+   "pointer": "/pages/4/sections/1/body",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Ein Kundenportal kann Angebote mit Fassung und Status, Projektfortschritt, Abnahmen, Dokumente und Rechnungsübersichten verbinden. Für interne Arbeit kommen Zuständigkeiten, offene Entscheidungen und Berichte hinzu. Wir wählen die benötigten Ansichten und Aktionen aus; eine Rechnung ansehen, einen Auftrag annehmen und eine Zahlung auslösen sind unterschiedliche Funktionen.",
+   "de_sha256": "b9ba237eecbfd21c93bfcc4c9a4d1ec912c6ef7b3a5674018fa3b254d8dcb841"
+  },
+  {
+   "pointer": "/pages/4/sections/2/heading",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Jede Rolle sieht ihren eigenen Bereich",
+   "de_sha256": "85902b0a27043e96588216ed243b0d7925887756045ddc8944f2190af8a9e531"
+  },
+  {
+   "pointer": "/pages/4/sections/2/body",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Wir klären für Kunden, Teammitglieder und Partner, welche Daten sie sehen und welche Schritte sie ausführen dürfen. Anmeldung allein erteilt keine Rechte für fremde Projekte oder interne Verwaltung. Einladungen, Mandantenzuordnung und sensible Änderungen benötigen passende Berechtigungen. Diese Regeln werden an jedem betroffenen Ablauf geprüft, nicht nur an der Menüanzeige.",
+   "de_sha256": "80717e8a1dc01b5d2e7df322d95ec3fbc650fff7c25a18a4c0c19e476cc07833"
+  },
+  {
+   "pointer": "/pages/4/sections/3/heading",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Zustände und Schnittstellen sichtbar machen",
+   "de_sha256": "f97f10388092c96c49089ae7f77ad521a39d456d2ca8a5afa0467c9f6807cc0b"
+  },
+  {
+   "pointer": "/pages/4/sections/3/body",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Beim Angebot unterscheiden wir Entwurf, freigegebene Fassung, Annahme, Ablehnung und Änderungswunsch. Für weitere Abläufe legen wir ebenso fest, was bei Laden, leeren Daten, Fehlern und gesperrten Aktionen angezeigt wird. Verbindungen zu bestehenden Systemen, Dokumentdownloads und Benachrichtigungen werden einzeln vereinbart und in einer Vorschau getestet. Vorbereitete Beispieldaten bleiben als solche erkennbar.",
+   "de_sha256": "b364486b1bc41b877785d9d270848bba2734ef7033ba0c93cb5ad4d9fd29410e"
+  },
+  {
+   "pointer": "/pages/4/metadata/description",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Kunden- und interne Abläufe benötigen klare Rollen, Datenbereiche und Zustände. Gemeinsam klären wir, wer welche Informationen sehen und welche Schritte ausführen darf.",
+   "de_sha256": "ca6c065489585817b72889420464f0f9a333d51eb59b59e4e03863d59a1dd03c"
+  },
+  {
+   "pointer": "/pages/4/next_actions/0/label",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/4/next_actions/1/label",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/4/next_actions/2/label",
+   "page": "apps-portals",
+   "group": "leistungen",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/5/title",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Leistungsumfang und Projektstart",
+   "de_sha256": "d1055ed3dba53ad8ed4b0956d73fd0f9034b29a68e833c917416a4910f8533cb"
+  },
+  {
+   "pointer": "/pages/5/summary",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Beschreibe Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
+   "de_sha256": "3f9c58a0d256f3267a542e54f40f50b3b7cbe25a641f456baafbb15ad221a3b1"
+  },
+  {
+   "pointer": "/pages/5/sections/0/heading",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Leistungsumfang und Projektstart",
+   "de_sha256": "d1055ed3dba53ad8ed4b0956d73fd0f9034b29a68e833c917416a4910f8533cb"
+  },
+  {
+   "pointer": "/pages/5/sections/0/body",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Beschreibe Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
+   "de_sha256": "3f9c58a0d256f3267a542e54f40f50b3b7cbe25a641f456baafbb15ad221a3b1"
+  },
+  {
+   "pointer": "/pages/5/sections/1/heading",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Was du für die Klärung mitbringst",
+   "de_sha256": "3f29e99d88d89b3be71e47458736458949ab5c3f79af4ec5192ec49356a0dee8"
+  },
+  {
+   "pointer": "/pages/5/sections/1/body",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Beschreibe einen konkreten Vorgang: Wer beginnt, welche Angaben liegen vor, was wird heute von Hand erledigt und welches Ergebnis wird gebraucht? Nenne vorhandene Website, Kalender, Postfach oder Fachsoftware und eine verantwortliche Person für Entscheidungen. Anonymisierte Beispiele reichen für den Einstieg; Zugangsdaten gehören nicht in die Anfrage.",
+   "de_sha256": "9cd17d5fb07ee433110ba6abf3feaf63c57af2cf1a2ab00245979471c2b96c94"
+  },
+  {
+   "pointer": "/pages/5/sections/2/heading",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Aus der Aufnahme wird ein prüfbarer Umfang",
+   "de_sha256": "cdf1682a4c1b92de4f0ba0a60844532a49ac53f9a359ae8b70f2385488e5bc32"
+  },
+  {
+   "pointer": "/pages/5/sections/2/body",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Wir halten fest, welche Funktionen zum Vorhaben gehören, welche Systeme angebunden werden sollen und welche Annahmen noch offen sind. Für die Prüfung werden konkrete Ergebnisse benannt, etwa eine vollständige Anfrage oder ein zugriffsgeschütztes Dokument. Ein Angebot beschreibt Umfang und Fassung; ein Chatentwurf ersetzt keine verbindliche Vereinbarung.",
+   "de_sha256": "9a47152c4e4c3b7b774511885e7b1072818da12abd389ee824d71f915b14117a"
+  },
+  {
+   "pointer": "/pages/5/sections/3/heading",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Entscheiden, prüfen und übergeben",
+   "de_sha256": "43e015f6061df0799c2f80c22508ab057c8511a6cdca2dde644523e26e18e274"
+  },
+  {
+   "pointer": "/pages/5/sections/3/body",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Vor dem Start werden die zuständige Person, benötigte Inhalte und Zugänge sowie der vorgesehene Prüfweg geklärt. In der Vorschau kannst du Ergebnisse prüfen und Änderungswünsche benennen. Neue Anforderungen werden mit ihren Auswirkungen auf Umfang und Aufwand festgehalten. Zur Abnahme werden die vereinbarten Ergebnisse und die Übergabe dokumentiert; Betreuung danach wird gesondert vereinbart.",
+   "de_sha256": "c0f790e875f10ad26941776dd1089747de2d021ed05d0718bab992f0570e6b2a"
+  },
+  {
+   "pointer": "/pages/5/metadata/description",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Beschreibe Ziel, Ausgangslage, benötigte Funktionen und vorhandene Systeme. Daraus entsteht ein nachvollziehbarer Entwurf mit Annahmen, Grenzen und nächsten Schritten; eine verbindliche Zusage erfolgt gesondert.",
+   "de_sha256": "3f9c58a0d256f3267a542e54f40f50b3b7cbe25a641f456baafbb15ad221a3b1"
+  },
+  {
+   "pointer": "/pages/5/next_actions/0/label",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/5/next_actions/1/label",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/5/next_actions/2/label",
+   "page": "scope",
+   "group": "leistungen-rahmen",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/6/title",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Lösungen und Produkte",
+   "de_sha256": "81a3613e9b287a3e9354aa311e742d5a69488e145ac03a096d74cbbc01c2292a"
+  },
+  {
+   "pointer": "/pages/6/summary",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Wähle deinen Einstieg: NeX2fly erklärt die Suite und ihren Testzugang. one und one+ unterscheiden Antworten und Entwürfe von begrenzter Ausführung. Die API richtet sich an eigene Anwendungen. Agenturleistungen werden separat vereinbart; TEILEKLAR hat einen eigenen Handelskontext. Verfügbarkeit und Vorschau bleiben klar erkennbar.",
+   "de_sha256": "745c672b64693b15cd066879c2912153fa68bba35c9e2bbf18fb9d33eddcaa6e"
+  },
+  {
+   "pointer": "/pages/6/sections/0/heading",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Lösungen und Produkte",
+   "de_sha256": "81a3613e9b287a3e9354aa311e742d5a69488e145ac03a096d74cbbc01c2292a"
+  },
+  {
+   "pointer": "/pages/6/sections/0/body",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Wähle deinen Einstieg: NeX2fly erklärt die Suite und ihren Testzugang. one und one+ unterscheiden Antworten und Entwürfe von begrenzter Ausführung. Die API richtet sich an eigene Anwendungen. Agenturleistungen werden separat vereinbart; TEILEKLAR hat einen eigenen Handelskontext. Verfügbarkeit und Vorschau bleiben klar erkennbar.",
+   "de_sha256": "745c672b64693b15cd066879c2912153fa68bba35c9e2bbf18fb9d33eddcaa6e"
+  },
+  {
+   "pointer": "/pages/6/sections/1/heading",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Ein Projekt beauftragen oder ein Produkt nutzen",
+   "de_sha256": "5b95db472fc72fe055b1cba19da90dab53ff0152324183405694f11f53516329"
+  },
+  {
+   "pointer": "/pages/6/sections/1/body",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Für eine Website, eine individuelle Automatisierung oder ein Portal beginnt der Weg mit der Klärung deines Vorhabens und einem eigenen Angebot. Für die geplante Suite-Nutzung erklärt NeX2fly Registrierung und Testphase. one und one+ beschreiben unterschiedliche Aufgaben der Unternehmens-KI; die API erklärt die Anbindung eigener Anwendungen. Diese Wege haben unterschiedliche Voraussetzungen und sind keine gemeinsame Pauschalleistung.",
+   "de_sha256": "2da57b01336ebae03a209beed879673614701d1bff68b65f4af2980045c0184b"
+  },
+  {
+   "pointer": "/pages/6/sections/2/heading",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "TEILEKLAR und dein eigenes Shopprojekt",
+   "de_sha256": "b375fad49ca8185611c038824e72943b7509ad11a05134cb20910b5ac1f6724a"
+  },
+  {
+   "pointer": "/pages/6/sections/2/body",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "TEILEKLAR ist der eigene Handelsbereich mit Suche, Produktinformationen und gesonderten Werkstatt- und Partnerwegen. Wenn du einen Shop für deinen Betrieb suchst, wird dagegen ein eigenes Projekt mit deiner Marke, deinem Sortiment und deinem Bestellablauf beschrieben. Ein gezeigtes Muster ersetzt weder einen bestätigten Warenbestand noch eine verbindliche Liefer- oder Zahlungsfunktion.",
+   "de_sha256": "9fba9d21706bb88a95779783837defddd814ff85b4d344eaac8a29cf67fc3721"
+  },
+  {
+   "pointer": "/pages/6/sections/3/heading",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Passende Teile verbinden",
+   "de_sha256": "bd6900bf17d49a414207a19d74f3e655e0318ededeb91ee1c53a8aa92210fce8"
+  },
+  {
+   "pointer": "/pages/6/sections/3/body",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Eine Website kann Anfragen an einen geregelten Ablauf übergeben; ein Portal kann den daraus entstehenden Projektstand zeigen. Welche Systeme und Datenbereiche verbunden werden, wird ausdrücklich vereinbart. Ein gemeinsamer Markenauftritt bedeutet keinen automatischen Zugriff zwischen Produkten oder Mandanten. Verfügbare Funktionen und vorbereitete Ansichten bleiben unterscheidbar.",
+   "de_sha256": "ac56863df6fdd56456a0596c3c686dcf95bd2da7e5b1fa9e506ed580b7a24356"
+  },
+  {
+   "pointer": "/pages/6/metadata/description",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Wähle deinen Einstieg: NeX2fly erklärt die Suite und ihren Testzugang. one und one+ unterscheiden Antworten und Entwürfe von begrenzter Ausführung. Die API richtet sich an eigene Anwendungen. Agenturleistungen werden separat vereinbart; TEILEKLAR hat einen eigenen Handelskontext. Verfügbarkeit und Vorschau bleiben klar erkennbar.",
+   "de_sha256": "745c672b64693b15cd066879c2912153fa68bba35c9e2bbf18fb9d33eddcaa6e"
+  },
+  {
+   "pointer": "/pages/6/next_actions/0/label",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "NeX2fly Suite und Testphase",
+   "de_sha256": "f13619fecc6d5a4ccccfb0034bf4c87af8b25f93697352c864a529e55159804b"
+  },
+  {
+   "pointer": "/pages/6/next_actions/1/label",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "TEILEKLAR entdecken",
+   "de_sha256": "2da2b3354f109e57e5ff24021f16b92c61ea120a2c105957bbe78ffc233dff9c"
+  },
+  {
+   "pointer": "/pages/6/next_actions/2/label",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "one und one+",
+   "de_sha256": "8c5eeec4106ec52d974f0420be9d7989ac4c881f79c4e350f4dcf45eea022161"
+  },
+  {
+   "pointer": "/pages/6/next_actions/3/label",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "API-Zugang",
+   "de_sha256": "808843ba00a0e8f0c90c4fe51847ddb88aca7998c91e88d3899d068636b94dab"
+  },
+  {
+   "pointer": "/pages/6/next_actions/4/label",
+   "page": "solutions",
+   "group": "leistungen-rahmen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/7/title",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Preise und Ablauf",
+   "de_sha256": "dac7291ef2c20484848a6d0d44ef6bbbabf8bd8f0d1914028cc69f196e652f54"
+  },
+  {
+   "pointer": "/pages/7/summary",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Aufbau und laufender Betrieb werden getrennt besprochen. Der Umfang wird vor dem Angebot geklärt; Betrieb und Pflege sind ein eigener Schritt. Ungeklärte Tarife oder Rechtsbedingungen werden nicht als verbindliche Preise veröffentlicht.",
+   "de_sha256": "4fc0a39fea801e8d90098696264335ed56aaa715e9522499301088590a9a8b8f"
+  },
+  {
+   "pointer": "/pages/7/sections/0/heading",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Preise und Ablauf",
+   "de_sha256": "dac7291ef2c20484848a6d0d44ef6bbbabf8bd8f0d1914028cc69f196e652f54"
+  },
+  {
+   "pointer": "/pages/7/sections/0/body",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Aufbau und laufender Betrieb werden getrennt besprochen. Der Umfang wird vor dem Angebot geklärt; Betrieb und Pflege sind ein eigener Schritt. Ungeklärte Tarife oder Rechtsbedingungen werden nicht als verbindliche Preise veröffentlicht.",
+   "de_sha256": "4fc0a39fea801e8d90098696264335ed56aaa715e9522499301088590a9a8b8f"
+  },
+  {
+   "pointer": "/pages/7/sections/1/heading",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Aufbau, Betreuung und Verbrauch trennen",
+   "de_sha256": "01c856a84ff2f2a56e932cb59cefdad9b26a0c742908f63189d182299419f652"
+  },
+  {
+   "pointer": "/pages/7/sections/1/body",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Der Aufbau betrifft die vereinbarte Entwicklung oder Einrichtung. Danach kann dein Team die Lösung gemäß vereinbarter Übergabe selbst betreiben oder einen eigenen Betreuungsumfang wählen. Modellnutzung und weitere Anbieterkosten werden getrennt betrachtet. Ein Entwicklungs-Tagessatz beschreibt keine tägliche Gebühr für den späteren Betrieb; was tatsächlich berechnet wird, steht im freigegebenen Angebot.",
+   "de_sha256": "47cdcdf77955442981abc77dcacbde18fbfd7c25175b1cf11e098732ea1006b7"
+  },
+  {
+   "pointer": "/pages/7/sections/2/heading",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Was den Umfang beeinflusst",
+   "de_sha256": "e6c56537f08f8d5a8bc009cbdb7a9f20317f47127b6e1bb68b485423f638f43a"
+  },
+  {
+   "pointer": "/pages/7/sections/2/body",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Bei einem vorhandenen Baustein zählen insbesondere Marke, Inhalte, Regeln und die benötigte Anbindung. Bei einer Individuallösung kommen neues Datenmodell, eigene Oberflächen und das Zusammenspiel der Systeme hinzu. Fehlende Inhalte, unklare Zugriffsrechte oder zusätzliche Freigabewege werden vor dem Angebot als Abhängigkeiten benannt. Aus einem Beispiel folgt kein Festpreis und kein zugesagter Fertigstellungstermin.",
+   "de_sha256": "fd699e18a715c0e395a2accbbff2337ddecce892bc28fa2988d0eab97b3d3bb5"
+  },
+  {
+   "pointer": "/pages/7/sections/3/heading",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Was du vor der Entscheidung prüfen kannst",
+   "de_sha256": "4fc060276fd27b934d7603cf357e6162b08565b47a02a4142a8c057a3b8f00a3"
+  },
+  {
+   "pointer": "/pages/7/sections/3/body",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Welche Ergebnisse sind enthalten, welche Leistungen nicht? Wer betreibt und pflegt die Lösung nach der Abnahme? Welche Nutzungsrechte werden übergeben, und welche laufenden Kosten entstehen durch Dritte? Diese Punkte gehören in die schriftliche Klärung. Der Suite-Test und das einmalige bezahlte Testguthaben werden auf der NeX2fly-Seite erklärt; sie sind kein Preis für ein Agenturprojekt.",
+   "de_sha256": "6a6171bee16fdbf30f0e128b4d110c3b61b76660581b8212dcc59b0c9bff57ff"
+  },
+  {
+   "pointer": "/pages/7/metadata/description",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Aufbau und laufender Betrieb werden getrennt besprochen. Der Umfang wird vor dem Angebot geklärt; Betrieb und Pflege sind ein eigener Schritt. Ungeklärte Tarife oder Rechtsbedingungen werden nicht als verbindliche Preise veröffentlicht.",
+   "de_sha256": "4fc0a39fea801e8d90098696264335ed56aaa715e9522499301088590a9a8b8f"
+  },
+  {
+   "pointer": "/pages/7/next_actions/0/label",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/7/next_actions/1/label",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/7/next_actions/2/label",
+   "page": "pricing",
+   "group": "leistungen-rahmen",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/8/title",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Wissen und Orientierung",
+   "de_sha256": "a40a78b71cba249d164bd8736c4745ef26ca13182b4d409b7f3e335b5daf5a39"
+  },
+  {
+   "pointer": "/pages/8/summary",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Hier findest du verständliche Erläuterungen zur Vorbereitung deines Projekts. Du erfährst, welche Informationen helfen und wie aus einer ersten Idee ein vereinbarter Umfang wird.",
+   "de_sha256": "c5b65c0a9816959ff90a93ae3b750aa1dcbed6de03b7736f5f1fe8a2a7070e21"
+  },
+  {
+   "pointer": "/pages/8/sections/0/heading",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Wissen und Orientierung",
+   "de_sha256": "a40a78b71cba249d164bd8736c4745ef26ca13182b4d409b7f3e335b5daf5a39"
+  },
+  {
+   "pointer": "/pages/8/sections/0/body",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Hier findest du verständliche Erläuterungen zur Vorbereitung deines Projekts. Du erfährst, welche Informationen helfen und wie aus einer ersten Idee ein vereinbarter Umfang wird.",
+   "de_sha256": "c5b65c0a9816959ff90a93ae3b750aa1dcbed6de03b7736f5f1fe8a2a7070e21"
+  },
+  {
+   "pointer": "/pages/8/sections/1/heading",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "So entsteht Klarheit vor der Umsetzung",
+   "de_sha256": "5a8a81c0f7664ccdaae1258ea137e32806f5883cb366044a8d0a4fb920f664fb"
+  },
+  {
+   "pointer": "/pages/8/sections/1/body",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Bevor etwas gebaut wird, ordnen wir deinen Bedarf, die betroffenen Systeme und ein prüfbares Ziel. Wissen ist dabei kein Selbstzweck: Es dient dazu, Aufgabe, Umfang und Prüfkriterien so festzuhalten, dass Fortschritt nachvollziehbar bleibt. Du erhältst eine verständliche Einordnung statt Fachjargon.",
+   "de_sha256": "ff5aade35c1576d0f43efdea02a2bdb480e3d5dc6e17cfa8d2e652e0f550d9e3"
+  },
+  {
+   "pointer": "/pages/8/sections/2/heading",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Gesichertes Wissen statt Behauptungen",
+   "de_sha256": "7f6b2cbecd1ede61000ccd8050a0570983df0e509fc75143595de53ddd56089f"
+  },
+  {
+   "pointer": "/pages/8/sections/2/body",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Unsere Wissensbasis (Brain) verbindet Inhalte mit Herkunft, Datum und Umfang. So lässt sich jederzeit prüfen, worauf eine Aussage beruht. Kundendaten und allgemeines Wissen bleiben getrennt; nichts wird vermischt oder ungeprüft übernommen. Offene Punkte werden als offen ausgewiesen.",
+   "de_sha256": "d6315c987af568b313a96d373ef6d66782cdbabc007a48571ddb7390c51a278c"
+  },
+  {
+   "pointer": "/pages/8/sections/3/heading",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Was dir den Einstieg erleichtert",
+   "de_sha256": "26c4817a012561e2e05983e0e077f94f38311a98133a4e2abc528dfc2a10f391"
+  },
+  {
+   "pointer": "/pages/8/sections/3/body",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Hilfreich sind eine kurze Beschreibung des Ziels, Beispiele bestehender Abläufe und Hinweise auf Systeme, die angebunden werden sollen. Je konkreter der Nutzerweg, desto präziser der Vorschlag. Ein erstes Gespräch oder ein Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+   "de_sha256": "a4efaa17acc21289ce195fe189fc4cb2fb67e41a7fbcebd83f2c2a76ca3c236b"
+  },
+  {
+   "pointer": "/pages/8/metadata/description",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Hier findest du verständliche Erläuterungen zur Vorbereitung deines Projekts. Du erfährst, welche Informationen helfen und wie aus einer ersten Idee ein vereinbarter Umfang wird.",
+   "de_sha256": "c5b65c0a9816959ff90a93ae3b750aa1dcbed6de03b7736f5f1fe8a2a7070e21"
+  },
+  {
+   "pointer": "/pages/8/next_actions/0/label",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "So beginnt ein Projekt",
+   "de_sha256": "01fc0b5819d60de79c54b0076cd6c7a406840c6022386b89ff39cc9a4a2918f1"
+  },
+  {
+   "pointer": "/pages/8/next_actions/1/label",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/8/next_actions/2/label",
+   "page": "knowledge",
+   "group": "wissen",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/9/title",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Ein digitales Projekt vorbereiten",
+   "de_sha256": "e78727aa1ff623e7f88f451b039757e6d4532e2f469051cd042791f1edb0aa7a"
+  },
+  {
+   "pointer": "/pages/9/summary",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Notiere dein Ziel, die beteiligten Menschen und die vorhandenen Systeme. Beschreibe einen konkreten Weg vom ersten Kontakt bis zum gewünschten Ergebnis. Gemeinsam klären wir daraus den passenden Umfang.",
+   "de_sha256": "2789247e43d234cbc5700caa9bd81db9111e7cd6862e90ef17fed2ce2c79b5b9"
+  },
+  {
+   "pointer": "/pages/9/sections/0/heading",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Ein digitales Projekt vorbereiten",
+   "de_sha256": "e78727aa1ff623e7f88f451b039757e6d4532e2f469051cd042791f1edb0aa7a"
+  },
+  {
+   "pointer": "/pages/9/sections/0/body",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Notiere dein Ziel, die beteiligten Menschen und die vorhandenen Systeme. Beschreibe einen konkreten Weg vom ersten Kontakt bis zum gewünschten Ergebnis. Gemeinsam klären wir daraus den passenden Umfang.",
+   "de_sha256": "2789247e43d234cbc5700caa9bd81db9111e7cd6862e90ef17fed2ce2c79b5b9"
+  },
+  {
+   "pointer": "/pages/9/sections/1/heading",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Schritt 1: Ziel und Nutzen klären",
+   "de_sha256": "b16063c1dc064ab01446350e19ef5a1c902f0e99154102ed9268bf5f83678842"
+  },
+  {
+   "pointer": "/pages/9/sections/1/body",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Beschreibe, was am Ende besser laufen soll: weniger manuelle Arbeit, schnellere Antworten, klarere Übersicht. Ein Ziel in einem Satz hilft mehr als eine lange Wunschliste. Daraus leiten wir gemeinsam einen prüfbaren Umfang ab.",
+   "de_sha256": "c16573edf0cd4eb161a52f8d4253930d57a824f93815c8012d80e6459411dd72"
+  },
+  {
+   "pointer": "/pages/9/sections/2/heading",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Schritt 2: Bestehendes sichten",
+   "de_sha256": "888393b81ef36b3e89b39cffaf30b53e7f5b8d42aeb97307b849f45d53fe8a08"
+  },
+  {
+   "pointer": "/pages/9/sections/2/body",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Welche Systeme, Postfächer, Tabellen oder Portale sind heute im Einsatz? Was funktioniert, was stört? Diese Bestandsaufnahme verhindert Doppelarbeit und zeigt, wo eine Anbindung sinnvoll ist und wo eine Neuentwicklung.",
+   "de_sha256": "14b31d11031d6372744aa830e7498bade76d9efe5551bb45dce45311f8b36465"
+  },
+  {
+   "pointer": "/pages/9/sections/3/heading",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Schritt 3: Den passenden Einstieg wählen",
+   "de_sha256": "9ddfd16379ab73bd94131b93d67641cba3dd9d48bf2010f2774c554a5e278663"
+  },
+  {
+   "pointer": "/pages/9/sections/3/body",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Für einen öffentlichen Auftritt beginnst du bei Websites, für wiederkehrende Anfragen und Termine bei Agenten und Automatisierung, für geschützte Übersichten bei Apps und Portale. Welche Teile zusammengehören, klären wir am konkreten Nutzerweg – ohne Festlegung auf nicht freigegebene Preise.",
+   "de_sha256": "11e00446477739c2df362201c89eabd6c1af44b08a161df7d7db413f923a11a8"
+  },
+  {
+   "pointer": "/pages/9/metadata/description",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Notiere dein Ziel, die beteiligten Menschen und die vorhandenen Systeme. Beschreibe einen konkreten Weg vom ersten Kontakt bis zum gewünschten Ergebnis. Gemeinsam klären wir daraus den passenden Umfang.",
+   "de_sha256": "2789247e43d234cbc5700caa9bd81db9111e7cd6862e90ef17fed2ce2c79b5b9"
+  },
+  {
+   "pointer": "/pages/9/next_actions/0/label",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Leistungsumfang klären",
+   "de_sha256": "211cf32663ecb3c8518492fb8a37866afa2597c56157c2c60be2afad4e50946f"
+  },
+  {
+   "pointer": "/pages/9/next_actions/1/label",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/9/next_actions/2/label",
+   "page": "knowledge-start",
+   "group": "wissen",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/10/title",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Unternehmen",
+   "de_sha256": "6eb0f94937ba38dae4febb803851bb1cdd3012e8a554ff129358f08142209c03"
+  },
+  {
+   "pointer": "/pages/10/summary",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Maßgeblich für Anbieterangaben bleiben die bestätigten Unternehmensdaten der NeXify AI FACTORY B.V.",
+   "de_sha256": "3e150210ae52d38d9847ea2dea4d95601df850fb0702500f201688e3d2e86f08"
+  },
+  {
+   "pointer": "/pages/10/sections/0/heading",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Unternehmen",
+   "de_sha256": "6eb0f94937ba38dae4febb803851bb1cdd3012e8a554ff129358f08142209c03"
+  },
+  {
+   "pointer": "/pages/10/sections/0/body",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "NeXify entwickelt Websites, Apps und KI-gestützte Abläufe für Unternehmen. Der Schwerpunkt liegt auf Deutschland. Maßgeblich für Anbieterangaben bleiben die bestätigten Unternehmensdaten der NeXify AI FACTORY B.V.",
+   "de_sha256": "3e150210ae52d38d9847ea2dea4d95601df850fb0702500f201688e3d2e86f08"
+  },
+  {
+   "pointer": "/pages/10/sections/1/heading",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Worum es bei NeXify geht",
+   "de_sha256": "350e1409009d6535b715ef4f82139463e10d8e1519a8ff8e2c6df2d211663868"
+  },
+  {
+   "pointer": "/pages/10/sections/1/body",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "NeXify AI verbindet Beratung, Entwicklung und Betrieb zu greifbaren Ergebnissen für den Mittelstand. Der Leitsatz „Chat it. Automate it.“ steht für einen klaren Weg: beschreiben, was gebraucht wird – und wiederkehrende Arbeit verlässlich automatisieren. Der Schwerpunkt liegt auf dem europäischen Markt mit deutsch- und niederländischsprachigem Fokus.",
+   "de_sha256": "21b5cc4f45ac704a2ae5993b5d342900b2443c956550a91a7013e712b4142b8f"
+  },
+  {
+   "pointer": "/pages/10/sections/2/heading",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Wie wir arbeiten",
+   "de_sha256": "c937e6d1f319d6bdc5f693c98ab57fd20e4bf60a9b57f49eaf783170f5b91d95"
+  },
+  {
+   "pointer": "/pages/10/sections/2/body",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Wir legen Ziel, Umfang und Prüfkriterien vorab fest und machen den Fortschritt über Vorschau, offene Entscheidungen und Ergebnisberichte sichtbar. Behauptungen werden belegt, offene Punkte offen benannt. Eine Referenz ist noch keine Lieferzusage, und ein Angebotsentwurf bleibt bis zur gesonderten Freigabe unverbindlich.",
+   "de_sha256": "9825065d408d338437f7b87316e619ea8d6189a1a073b441df711910b7c33cef"
+  },
+  {
+   "pointer": "/pages/10/sections/3/heading",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Anbieter, Recht und Transparenz",
+   "de_sha256": "8915771bfbd0e1570bacb733ba177a781c049f08658ac15cf92ba0b77532a4dc"
+  },
+  {
+   "pointer": "/pages/10/sections/3/body",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Betreiber ist die NeXify AI FACTORY B.V. mit rechtlichem Sitz in den Niederlanden. Marktpräferenz ändert nichts an Register-, Steuer- oder Anbieteridentität. Anbieterinformationen, Datenschutz und Vertragsgrundlagen findest du gebündelt im Bereich Recht und Transparenz.",
+   "de_sha256": "723d44e983acdc3c60a21ee0fedfa2edbc15f299eca29827eab7fe9bfee79fd7"
+  },
+  {
+   "pointer": "/pages/10/metadata/description",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "NeXify AI FACTORY B.V. ist der benannte Unternehmenskontext. Der Schwerpunkt auf deutsche Nutzer ändert keine niederländischen Anbieter- oder Registerdaten. Verbindliche Firmendaten werden ausschließlich aus dem geprüften Anbieterprofil übernommen.",
+   "de_sha256": "9ebd515ea138299536039496388a393c85e96dbf42f6d47a56f11cf047446388"
+  },
+  {
+   "pointer": "/pages/10/next_actions/0/label",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/10/next_actions/1/label",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Anbieterinformationen",
+   "de_sha256": "0d46738afce4192abe0d614655776048c7c609a65e5c606495e8d7b54720c3ce"
+  },
+  {
+   "pointer": "/pages/10/next_actions/2/label",
+   "page": "company",
+   "group": "unternehmen",
+   "de": "Kundenbereich: aktueller Stand",
+   "de_sha256": "bd9344fa4ecdd306d20032c2216daafe39ffcc6ccd2dd4b38d4e67ce60219b25"
+  },
+  {
+   "pointer": "/pages/11/title",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Kontakt und nächste Schritte",
+   "de_sha256": "0066eec233fb37fd83b66398d6f9d2db8a0903ec540240613dd93f6f039c8722"
+  },
+  {
+   "pointer": "/pages/11/summary",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
+   "de_sha256": "960b3fd9bfe3f4bb28233f711f04fd29910926ee3d8de2732535c690acb5450e"
+  },
+  {
+   "pointer": "/pages/11/sections/0/heading",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Kontakt und nächste Schritte",
+   "de_sha256": "0066eec233fb37fd83b66398d6f9d2db8a0903ec540240613dd93f6f039c8722"
+  },
+  {
+   "pointer": "/pages/11/sections/0/body",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
+   "de_sha256": "960b3fd9bfe3f4bb28233f711f04fd29910926ee3d8de2732535c690acb5450e"
+  },
+  {
+   "pointer": "/pages/11/sections/1/heading",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "So kommen wir ins Gespräch",
+   "de_sha256": "5692ccf9977b9b994755a58f99ca176fd97bc5b236213a8ca52e9903cea4838a"
+  },
+  {
+   "pointer": "/pages/11/sections/1/body",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Beschreibe dein Ziel in wenigen Sätzen und nenne, welche Systeme betroffen sind. Du bekommst eine Einordnung und, wenn sinnvoll, einen nächsten Schritt. Ein erstes Gespräch oder ein Angebotsentwurf ist unverbindlich und wird erst mit gesonderter Freigabe zur Grundlage einer Zusammenarbeit.",
+   "de_sha256": "f607dad800f068d659a237207449f2c90823ef8c26bc46fe199a1d56ea89a87d"
+  },
+  {
+   "pointer": "/pages/11/sections/2/heading",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Was nach deiner Anfrage passiert",
+   "de_sha256": "19d7f3d74a551660fa8fdf1d887f6ca4dcf62e91ddd3df1da6b882ab86847673"
+  },
+  {
+   "pointer": "/pages/11/sections/2/body",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Wir ordnen Bedarf und Umfang, halten Prüfkriterien fest und zeigen einen möglichen Weg auf. Nichts wird ungeprüft zugesagt. Erfundene Städte, Werkstätten oder Referenzen gibt es nicht – angezeigt wird nur, was tatsächlich hinterlegt und freigegeben ist.",
+   "de_sha256": "bd37216a8d2271ef5451a001f525aa3c27c1228f5164e0ee3e0764cdf777141f"
+  },
+  {
+   "pointer": "/pages/11/sections/3/heading",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Vertraulichkeit deiner Angaben",
+   "de_sha256": "16854ecf4b45596429c676689a9216025d051cf6b34ec559967728affe685b38"
+  },
+  {
+   "pointer": "/pages/11/sections/3/body",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Deine Angaben verwenden wir ausschließlich zur Bearbeitung deiner Anfrage. Es werden keine Zugangsdaten oder Geheimnisse über dieses Formular erbeten. Details zur Datenverwendung findest du im Datenschutzbereich.",
+   "de_sha256": "584bacf3918802868f11334e7c66d8d00d09c6c0c4e60ed126c06bb999d91d46"
+  },
+  {
+   "pointer": "/pages/11/metadata/description",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
+   "de_sha256": "960b3fd9bfe3f4bb28233f711f04fd29910926ee3d8de2732535c690acb5450e"
+  },
+  {
+   "pointer": "/pages/11/next_actions/0/label",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/11/next_actions/1/label",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/11/next_actions/2/label",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Marketinganfrage strukturieren",
+   "de_sha256": "ce6a96f7eb3417922b692cb96e1072c6a9839007d6017fd09d3a6ca66ead435e"
+  },
+  {
+   "pointer": "/pages/11/next_actions/3/label",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "Datenschutz lesen",
+   "de_sha256": "c39d86c78bdcf81646a8eb2ec82d861833730436540c9dfdf838c3b429a58db3"
+  },
+  {
+   "pointer": "/pages/11/contact_channels/0/label",
+   "page": "contact",
+   "group": "kontakt",
+   "de": "E-Mail schreiben",
+   "de_sha256": "42b67ce29cadf2d3070f842e8a386c9ad392373f0e19e4e54ad5bb73d74f3669"
+  },
+  {
+   "pointer": "/pages/12/title",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "NeX2fly Suite: dein Einstieg",
+   "de_sha256": "ce0bb4157e4d4696429ad3b98b5c03abf92b1e430c9f933751c1066283670006"
+  },
+  {
+   "pointer": "/pages/12/summary",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Entdecke den geplanten Zugang zu deiner NeX2fly Suite: öffentliches Kundenkonto, 24 Stunden kostenlose Suite-Testphase und LLM-Nutzung mit eigenem Anbieterschlüssel oder bezahltem Testguthaben. Diese Vorschau erklärt den Ablauf; die Live-Registrierung und LLM-Nutzung sind hier noch nicht aktiviert.",
+   "de_sha256": "10ef20befabeff4289f2c4adb8b31fe7f475c620c86fb70ea25e6ce028fa80c5"
+  },
+  {
+   "pointer": "/pages/12/sections/0/heading",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "NeX2fly Suite: dein Einstieg",
+   "de_sha256": "ce0bb4157e4d4696429ad3b98b5c03abf92b1e430c9f933751c1066283670006"
+  },
+  {
+   "pointer": "/pages/12/sections/0/body",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Entdecke den geplanten Zugang zu deiner NeX2fly Suite: öffentliches Kundenkonto, 24 Stunden kostenlose Suite-Testphase und LLM-Nutzung mit eigenem Anbieterschlüssel oder bezahltem Testguthaben. Diese Vorschau erklärt den Ablauf; die Live-Registrierung und LLM-Nutzung sind hier noch nicht aktiviert.",
+   "de_sha256": "10ef20befabeff4289f2c4adb8b31fe7f475c620c86fb70ea25e6ce028fa80c5"
+  },
+  {
+   "pointer": "/pages/12/sections/1/heading",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Welcher Einstieg passt zu dir?",
+   "de_sha256": "f849514442f0e44c4cd8779eb1bb538cc9bcfe19eb1f2e2bb9eec7c7d3a0fa70"
+  },
+  {
+   "pointer": "/pages/12/sections/1/body",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Die NeX2fly Suite ist der geplante Arbeitsbereich für dein Kundenkonto. one beschreibt Antworten, Beratung und Entwürfe; one+ ergänzt die Ausführung klar begrenzter Aufträge mit Prüfung und passenden Freigaben. Die API ist der technische Zugang für eigene Anwendungen. Ein Agenturprojekt wie eine Website oder ein Portal wird separat mit dir vereinbart.",
+   "de_sha256": "b55e583a6ca714ac5859e3a117049a8a151c1ebfac35e4dad64650deecde89de"
+  },
+  {
+   "pointer": "/pages/12/sections/2/heading",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Kundenkonto und 24 Stunden Suite-Test",
+   "de_sha256": "17b8cc0ddd3d91494f25ffc886e5e4e95b5ee2081fccc7d9a61a769a1bb0d1ea"
+  },
+  {
+   "pointer": "/pages/12/sections/2/body",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Sobald sie verfügbar ist, erstellst du dein Konto, bestätigst deine E-Mail und aktivierst deinen eigenen Kundenarbeitsbereich. Danach startest du die kostenlose Suite-Testphase ausdrücklich: einmalig 24 Stunden ab diesem Zeitpunkt. Eine erneute Anmeldung startet keinen neuen Test. Du erhältst Kundenrechte in deinem eigenen Bereich, keine internen Verwaltungsrechte.",
+   "de_sha256": "45dd51f13da55768c855d164377c80b11a8805aead158ec7393ebc4212c59bb7"
+  },
+  {
+   "pointer": "/pages/12/sections/3/heading",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Du entscheidest, wie du LLM-Nutzung bezahlst",
+   "de_sha256": "c9dc2e8aaf53856c5ec9d9d5522ddc3b0d3ccee82d9bb45ef492f6f6e5057bbd"
+  },
+  {
+   "pointer": "/pages/12/sections/3/body",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Die kostenlose Suite-Testphase enthält kein geschenktes LLM-Guthaben. Du nutzt entweder deinen eigenen Anbieterschlüssel (BYOK) auf eigene Anbieterrechnung oder einmalig 5 EUR (500 Cent) bezahltes Testguthaben für unsere verwaltete Route. Die verwaltete Route und die Anbieterauswahl werden erst bei Verfügbarkeit freigegeben. Eine Testaufladung ist kein kostenpflichtiges Suite-Abo.",
+   "de_sha256": "e8c8b8dc83c0be0bf9b94e723b7ea2376bc9295d1d5827364662a709614e84da"
+  },
+  {
+   "pointer": "/pages/12/sections/4/heading",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Weiterarbeiten mit deinem bestehenden Konto",
+   "de_sha256": "58f676b7636bc63740340e7b1fe91fbc1ee6eb1f91a1bf73a132b5da3e900995"
+  },
+  {
+   "pointer": "/pages/12/sections/4/body",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Am Ende der 24 Stunden endet die Testberechtigung ohne automatische Abbuchung. Du entscheidest ausdrücklich über einen verfügbaren kostenpflichtigen Suite-Tarif. Bei einem Wechsel bleiben dein Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselverknüpfungen, Dokumente, Verlauf und Guthaben erhalten. Dein gekauftes Guthaben verfällt nicht allein durch das Testende; dein Konto und deine Datenrechte bleiben bestehen.",
+   "de_sha256": "363af0a9ee5fdaa9723afcf51d3a2ea05e59dea641f240f473bf8e8a366641bf"
+  },
+  {
+   "pointer": "/pages/12/sections/5/heading",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "So geht es weiter",
+   "de_sha256": "eaef7327fbc3dd2deb56de073b0f063131f3dab677d9376224b24c1c7b8d9dd0"
+  },
+  {
+   "pointer": "/pages/12/sections/5/body",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Lies den Registrierungsablauf, wenn du neu beginnst. Für ein vorhandenes Konto führt der Weg zur Anmeldung. Auf den Seiten one/one+ und API vergleichst du die Produktzugänge. Diese Vorschau erstellt noch kein nutzbares Konto und nimmt keine Zahlung entgegen; bei Fragen kannst du Kontakt aufnehmen.",
+   "de_sha256": "fae24e2107b0f8396add157e367aca0ead52ea0103c2fa9f922da617814a0553"
+  },
+  {
+   "pointer": "/pages/12/metadata/description",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Entdecke den geplanten Zugang zu deiner NeX2fly Suite: öffentliches Kundenkonto, 24 Stunden kostenlose Suite-Testphase und LLM-Nutzung mit eigenem Anbieterschlüssel oder bezahltem Testguthaben. Diese Vorschau erklärt den Ablauf; die Live-Registrierung und LLM-Nutzung sind hier noch nicht aktiviert.",
+   "de_sha256": "10ef20befabeff4289f2c4adb8b31fe7f475c620c86fb70ea25e6ce028fa80c5"
+  },
+  {
+   "pointer": "/pages/12/next_actions/0/label",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Registrierungsablauf ansehen",
+   "de_sha256": "51db8f5755b39ddc5b31156942a167737593c55946966812ad7a999d5ed94071"
+  },
+  {
+   "pointer": "/pages/12/next_actions/1/label",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Anmeldung ansehen",
+   "de_sha256": "7c486d4269fe9f3921de3e30dc93fd5b0fc0ac707a0129e2098e920dbbdbf70b"
+  },
+  {
+   "pointer": "/pages/12/next_actions/2/label",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "one und one+ verstehen",
+   "de_sha256": "cb8fab96b633b10601cbe2e10821e322f36e5617a0f45fa8ecfefe1bfd6f7c13"
+  },
+  {
+   "pointer": "/pages/12/next_actions/3/label",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Technischen API-Zugang verstehen",
+   "de_sha256": "6d939bfd601478264e7c9bc45cdbbfad8f658f05177810b915b15fe941bb51f6"
+  },
+  {
+   "pointer": "/pages/12/next_actions/4/label",
+   "page": "nex2fly",
+   "group": "produkte",
+   "de": "Fragen zur Suite stellen",
+   "de_sha256": "473b7d9d929456035cb708e7f7d3a6f3ca2e441d774d0a704a97ef5a51b3c959"
+  },
+  {
+   "pointer": "/pages/13/title",
+   "page": "one",
+   "group": "produkte",
+   "de": "NeXify AI one und one+",
+   "de_sha256": "96afe5ff0df60745d6b1d97e4bec856de8eb9c21e35af3d96ec4c4b45ad3730e"
+  },
+  {
+   "pointer": "/pages/13/summary",
+   "page": "one",
+   "group": "produkte",
+   "de": "one beschreibt Antworten und Entwürfe, one+ zusätzlich begrenzte Ausführung mit Regeln und Freigaben. Diese Produktansicht erläutert das Zielbild; verfügbare Zugänge und verbindliche Tarife werden gesondert freigegeben.",
+   "de_sha256": "bb657cabedb9a85e3fb288533eb6ae227a1c29a9a060041ac073b86420f0f01c"
+  },
+  {
+   "pointer": "/pages/13/sections/0/heading",
+   "page": "one",
+   "group": "produkte",
+   "de": "NeXify AI one und one+",
+   "de_sha256": "96afe5ff0df60745d6b1d97e4bec856de8eb9c21e35af3d96ec4c4b45ad3730e"
+  },
+  {
+   "pointer": "/pages/13/sections/0/body",
+   "page": "one",
+   "group": "produkte",
+   "de": "one beschreibt Antworten und Entwürfe, one+ zusätzlich begrenzte Ausführung mit Regeln und Freigaben. Diese Produktansicht erläutert das Zielbild; verfügbare Zugänge und verbindliche Tarife werden gesondert freigegeben.",
+   "de_sha256": "bb657cabedb9a85e3fb288533eb6ae227a1c29a9a060041ac073b86420f0f01c"
+  },
+  {
+   "pointer": "/pages/13/sections/1/heading",
+   "page": "one",
+   "group": "produkte",
+   "de": "Antworten oder Aufgaben ausführen?",
+   "de_sha256": "9ee0f3a935bcd0c651959b95e34c432860dabc7ddc4ad33ea52ec28f20250733"
+  },
+  {
+   "pointer": "/pages/13/sections/1/body",
+   "page": "one",
+   "group": "produkte",
+   "de": "one ist für Fragen, Zusammenfassungen, Beratung und Entwürfe gedacht. one+ ergänzt klar begrenzte Werkzeugaufträge wie das Erstellen einer Seite oder das Prüfen von Code, mit sichtbaren Schritten und passenden Freigaben. Für den geplanten Suite-Einstieg mit Kundenkonto und Testphase führt der Weg zu NeX2fly; für die Einbindung in eigene Anwendungen zur API. Die Produktbeschreibung ist kein bereits aktivierter Zugang.",
+   "de_sha256": "8119dec19b061d1c594b435a0f5b2bb225c8f175f63094eb2e5adb2186175df5"
+  },
+  {
+   "pointer": "/pages/13/metadata/description",
+   "page": "one",
+   "group": "produkte",
+   "de": "one beschreibt Antworten und Entwürfe, one+ zusätzlich begrenzte Ausführung mit Regeln und Freigaben. Diese Produktansicht erläutert das Zielbild; verfügbare Zugänge und verbindliche Tarife werden gesondert freigegeben.",
+   "de_sha256": "bb657cabedb9a85e3fb288533eb6ae227a1c29a9a060041ac073b86420f0f01c"
+  },
+  {
+   "pointer": "/pages/13/next_actions/0/label",
+   "page": "one",
+   "group": "produkte",
+   "de": "Suite und Testzugang verstehen",
+   "de_sha256": "8b2f2ebde86793266c4c2005c952ca5673506b4b3028547d13e2794e0309f2b2"
+  },
+  {
+   "pointer": "/pages/13/next_actions/1/label",
+   "page": "one",
+   "group": "produkte",
+   "de": "API-Zugang verstehen",
+   "de_sha256": "1b323110763c3ce47e4a62d19e58fba8fa67d37dfefb3b1becc7c869a08bd0ab"
+  },
+  {
+   "pointer": "/pages/13/next_actions/2/label",
+   "page": "one",
+   "group": "produkte",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/13/next_actions/3/label",
+   "page": "one",
+   "group": "produkte",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/14/title",
+   "page": "api",
+   "group": "produkte",
+   "de": "API und technische Zugänge",
+   "de_sha256": "9f0a335bca0ee1c4ca0030a7305a7b01c69717d6cf447c44200aeca6844c7a9f"
+  },
+  {
+   "pointer": "/pages/14/summary",
+   "page": "api",
+   "group": "produkte",
+   "de": "Die API-Ansicht erklärt Konten, Schlüssel, Kostenstellen und Nutzungsgrenzen. Ein dokumentierter Zielvertrag ist kein aktivierter Kundenzugang. Schlüssel, Guthaben und Zahlungsfunktionen werden hier nicht vorgetäuscht.",
+   "de_sha256": "9eb20a76ab9653f6c92fb333b49350ff1c2a5d2788c13dad7c37c2e39a9e8cca"
+  },
+  {
+   "pointer": "/pages/14/sections/0/heading",
+   "page": "api",
+   "group": "produkte",
+   "de": "API und technische Zugänge",
+   "de_sha256": "9f0a335bca0ee1c4ca0030a7305a7b01c69717d6cf447c44200aeca6844c7a9f"
+  },
+  {
+   "pointer": "/pages/14/sections/0/body",
+   "page": "api",
+   "group": "produkte",
+   "de": "Die API-Ansicht erklärt Konten, Schlüssel, Kostenstellen und Nutzungsgrenzen. Ein dokumentierter Zielvertrag ist kein aktivierter Kundenzugang. Schlüssel, Guthaben und Zahlungsfunktionen werden hier nicht vorgetäuscht.",
+   "de_sha256": "9eb20a76ab9653f6c92fb333b49350ff1c2a5d2788c13dad7c37c2e39a9e8cca"
+  },
+  {
+   "pointer": "/pages/14/sections/1/heading",
+   "page": "api",
+   "group": "produkte",
+   "de": "Für deine eigenen Anwendungen",
+   "de_sha256": "cfcda44116614de3c8d780164f37efe3baea5a2ba0812dd07b8d4991b4a5ad46"
+  },
+  {
+   "pointer": "/pages/14/sections/1/body",
+   "page": "api",
+   "group": "produkte",
+   "de": "Die API ist der geplante technische Zugang für Anwendungen, die Anfragen an NeXify senden. Der Entwurf sieht Schlüssel und Budgets je Kostenstelle sowie nachvollziehbaren Verbrauch vor. one und one+ erläutern Antworten und begrenzte Ausführung; NeX2fly erklärt den Suite-Einstieg mit Kundenkonto und Testphase. Diese Vorschau stellt keine nutzbaren Schlüssel aus und löst keine Zahlungen aus.",
+   "de_sha256": "86fae315adf04f61f8638dd15e3c09a0339e5ed78165654c85d33c401c2be22f"
+  },
+  {
+   "pointer": "/pages/14/metadata/description",
+   "page": "api",
+   "group": "produkte",
+   "de": "Die API-Ansicht erklärt Konten, Schlüssel, Kostenstellen und Nutzungsgrenzen. Ein dokumentierter Zielvertrag ist kein aktivierter Kundenzugang. Schlüssel, Guthaben und Zahlungsfunktionen werden hier nicht vorgetäuscht.",
+   "de_sha256": "9eb20a76ab9653f6c92fb333b49350ff1c2a5d2788c13dad7c37c2e39a9e8cca"
+  },
+  {
+   "pointer": "/pages/14/next_actions/0/label",
+   "page": "api",
+   "group": "produkte",
+   "de": "Suite und Testzugang verstehen",
+   "de_sha256": "8b2f2ebde86793266c4c2005c952ca5673506b4b3028547d13e2794e0309f2b2"
+  },
+  {
+   "pointer": "/pages/14/next_actions/1/label",
+   "page": "api",
+   "group": "produkte",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/14/next_actions/2/label",
+   "page": "api",
+   "group": "produkte",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/14/next_actions/3/label",
+   "page": "api",
+   "group": "produkte",
+   "de": "Bedingungen und Freigabestand",
+   "de_sha256": "da3fbcbe3618bd1a42dc7da406ae5952388501a08ca96474e872ba306d235de6"
+  },
+  {
+   "pointer": "/pages/15/title",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Anbieterinformationen",
+   "de_sha256": "0d46738afce4192abe0d614655776048c7c609a65e5c606495e8d7b54720c3ce"
+  },
+  {
+   "pointer": "/pages/15/summary",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Die Anbieterinformationen bleiben direkt erreichbar. Für eine Veröffentlichung sind das bestätigte B.V.-Profil und die zuständigen Pflichtangaben erforderlich; historische Einzelunternehmensdaten werden nicht übernommen.",
+   "de_sha256": "569189473099df8fafcc3b68a3f167707356801665423ee8bd9767bb181d127d"
+  },
+  {
+   "pointer": "/pages/15/sections/0/heading",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Anbieterinformationen",
+   "de_sha256": "0d46738afce4192abe0d614655776048c7c609a65e5c606495e8d7b54720c3ce"
+  },
+  {
+   "pointer": "/pages/15/sections/0/body",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Die Anbieterinformationen bleiben direkt erreichbar. Für eine Veröffentlichung sind das bestätigte B.V.-Profil und die zuständigen Pflichtangaben erforderlich; historische Einzelunternehmensdaten werden nicht übernommen.",
+   "de_sha256": "569189473099df8fafcc3b68a3f167707356801665423ee8bd9767bb181d127d"
+  },
+  {
+   "pointer": "/pages/15/sections/1/heading",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Verantwortlicher Anbieter",
+   "de_sha256": "96e0708bd0278e10058a02ab929fd6bbd536b93a887b0269afcd8b10f3f4a11a"
+  },
+  {
+   "pointer": "/pages/15/sections/1/body",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Anbieter dieses Angebots ist die NeXify AI FACTORY B.V. mit rechtlichem Sitz in den Niederlanden. Eine Marktpräferenz für den deutschsprachigen Raum ändert die Anbieter-, Register- und Steueridentität nicht. Verbindliche Registerangaben werden ausschließlich aus geprüften Anbieterunterlagen übernommen.",
+   "de_sha256": "3cf006e3f4b1a9df64eddea328fbd132d0f78229173f3f51423cd1167b552fa2"
+  },
+  {
+   "pointer": "/pages/15/metadata/description",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Die Anbieterinformationen bleiben direkt erreichbar. Für eine Veröffentlichung sind das bestätigte B.V.-Profil und die zuständigen Pflichtangaben erforderlich; historische Einzelunternehmensdaten werden nicht übernommen.",
+   "de_sha256": "569189473099df8fafcc3b68a3f167707356801665423ee8bd9767bb181d127d"
+  },
+  {
+   "pointer": "/pages/15/next_actions/0/label",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/15/next_actions/1/label",
+   "page": "imprint",
+   "group": "recht",
+   "de": "Weitere Vertragsinformationen",
+   "de_sha256": "247ad8e921a5a1473a292ff272f7290c3c135f7e2776f089b8483c8356713f91"
+  },
+  {
+   "pointer": "/pages/16/title",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Datenschutz und Datenverwendung",
+   "de_sha256": "125c171045221cbf3690b6e46ceec39f544ab49af4b53aa785dbce760fbe3308"
+  },
+  {
+   "pointer": "/pages/16/summary",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Diese Seite ist der direkte Zugang zu den freigegebenen Datenschutzinformationen. Bis Zweck, Verantwortlichkeit, Empfänger und Aufbewahrung abschließend geprüft sind, wird kein vollständiger Rechtstext behauptet.",
+   "de_sha256": "a964114fade293fbd12cde0b4cdecca892cdfe44fc87e5a9942c15b958439729"
+  },
+  {
+   "pointer": "/pages/16/sections/0/heading",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Datenschutz und Datenverwendung",
+   "de_sha256": "125c171045221cbf3690b6e46ceec39f544ab49af4b53aa785dbce760fbe3308"
+  },
+  {
+   "pointer": "/pages/16/sections/0/body",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Diese Seite ist der direkte Zugang zu den freigegebenen Datenschutzinformationen. Bis Zweck, Verantwortlichkeit, Empfänger und Aufbewahrung abschließend geprüft sind, wird kein vollständiger Rechtstext behauptet.",
+   "de_sha256": "a964114fade293fbd12cde0b4cdecca892cdfe44fc87e5a9942c15b958439729"
+  },
+  {
+   "pointer": "/pages/16/sections/1/heading",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Grundsatz der Datenverwendung",
+   "de_sha256": "4af6ac1cadc39d57d88ef8377025160a0d52cb4c3b1f0284d9b5418f2b4386b8"
+  },
+  {
+   "pointer": "/pages/16/sections/1/body",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Personenbezogene Angaben werden nur zweckgebunden und so sparsam wie möglich verarbeitet. Über öffentliche Formulare werden keine Zugangsdaten oder Geheimnisse erbeten. Der verbindliche Umfang der Verarbeitung ergibt sich aus der freigegebenen Datenschutzerklärung.",
+   "de_sha256": "ab7b50ec20340d5650452ea7fd0f5961ba12633cc3c1b36acdc85e09171ea05f"
+  },
+  {
+   "pointer": "/pages/16/metadata/description",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Diese Seite ist der direkte Zugang zu den freigegebenen Datenschutzinformationen. Bis Zweck, Verantwortlichkeit, Empfänger und Aufbewahrung abschließend geprüft sind, wird kein vollständiger Rechtstext behauptet.",
+   "de_sha256": "a964114fade293fbd12cde0b4cdecca892cdfe44fc87e5a9942c15b958439729"
+  },
+  {
+   "pointer": "/pages/16/next_actions/0/label",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/16/next_actions/1/label",
+   "page": "privacy",
+   "group": "recht",
+   "de": "Weitere Vertragsinformationen",
+   "de_sha256": "247ad8e921a5a1473a292ff272f7290c3c135f7e2776f089b8483c8356713f91"
+  },
+  {
+   "pointer": "/pages/17/title",
+   "page": "terms",
+   "group": "recht",
+   "de": "Vertragsgrundlagen und Freigabestand",
+   "de_sha256": "14b5b953d739707798f33bef02fe180f2954cd2145517fdf9ac3698acba2dc56"
+  },
+  {
+   "pointer": "/pages/17/summary",
+   "page": "terms",
+   "group": "recht",
+   "de": "Vertragsbedingungen, ein Angebot und ein unverbindlicher Entwurf sind unterschiedliche Stände. Hier werden nur freigegebene Vertragsunterlagen bereitgestellt; eine Chatantwort ersetzt keine Vertragsfreigabe.",
+   "de_sha256": "b5b7799c03a583fdc11f6d60822d24315d419e3fb3d92458531addeb6ee0ae78"
+  },
+  {
+   "pointer": "/pages/17/sections/0/heading",
+   "page": "terms",
+   "group": "recht",
+   "de": "Vertragsgrundlagen und Freigabestand",
+   "de_sha256": "14b5b953d739707798f33bef02fe180f2954cd2145517fdf9ac3698acba2dc56"
+  },
+  {
+   "pointer": "/pages/17/sections/0/body",
+   "page": "terms",
+   "group": "recht",
+   "de": "Vertragsbedingungen, ein Angebot und ein unverbindlicher Entwurf sind unterschiedliche Stände. Hier werden nur freigegebene Vertragsunterlagen bereitgestellt; eine Chatantwort ersetzt keine Vertragsfreigabe.",
+   "de_sha256": "b5b7799c03a583fdc11f6d60822d24315d419e3fb3d92458531addeb6ee0ae78"
+  },
+  {
+   "pointer": "/pages/17/sections/1/heading",
+   "page": "terms",
+   "group": "recht",
+   "de": "Vertragsgrundlagen und Freigabestand",
+   "de_sha256": "14b5b953d739707798f33bef02fe180f2954cd2145517fdf9ac3698acba2dc56"
+  },
+  {
+   "pointer": "/pages/17/sections/1/body",
+   "page": "terms",
+   "group": "recht",
+   "de": "Gespräche und Angebotsentwürfe sind bis zur gesonderten Freigabe unverbindlich. Erst eine bestätigte Vereinbarung legt Leistungsumfang, Rechte und Pflichten fest. Preise gelten nur, wenn sie ausdrücklich freigegeben sind.",
+   "de_sha256": "b08e74d954fe5738b791f770b15e1dbae4168263608f78bb7e056a017cff5ab1"
+  },
+  {
+   "pointer": "/pages/17/metadata/description",
+   "page": "terms",
+   "group": "recht",
+   "de": "Vertragsbedingungen, ein Angebot und ein unverbindlicher Entwurf sind unterschiedliche Stände. Hier werden nur freigegebene Vertragsunterlagen bereitgestellt; eine Chatantwort ersetzt keine Vertragsfreigabe.",
+   "de_sha256": "b5b7799c03a583fdc11f6d60822d24315d419e3fb3d92458531addeb6ee0ae78"
+  },
+  {
+   "pointer": "/pages/17/next_actions/0/label",
+   "page": "terms",
+   "group": "recht",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/17/next_actions/1/label",
+   "page": "terms",
+   "group": "recht",
+   "de": "Weitere Vertragsinformationen",
+   "de_sha256": "247ad8e921a5a1473a292ff272f7290c3c135f7e2776f089b8483c8356713f91"
+  },
+  {
+   "pointer": "/pages/18/title",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "Hinweise zur KI-Nutzung",
+   "de_sha256": "0f885a3e5a15c8f0c4aee332c230c9564c3712e00b561ed2e690f2de2eaefe86"
+  },
+  {
+   "pointer": "/pages/18/summary",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "KI-Antworten werden als solche gekennzeichnet. Entwürfe können Fehler enthalten; Preise, Rechtsfragen und folgenreiche Aktionen benötigen die zuständige Prüfung und Freigabe.",
+   "de_sha256": "7bee02fb4b6ddf5720add3dae9490152457734ddbcea7c7b1b8fb89328398cd0"
+  },
+  {
+   "pointer": "/pages/18/sections/0/heading",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "Hinweise zur KI-Nutzung",
+   "de_sha256": "0f885a3e5a15c8f0c4aee332c230c9564c3712e00b561ed2e690f2de2eaefe86"
+  },
+  {
+   "pointer": "/pages/18/sections/0/body",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "KI-Antworten werden als solche gekennzeichnet. Entwürfe können Fehler enthalten; Preise, Rechtsfragen und folgenreiche Aktionen benötigen die zuständige Prüfung und Freigabe.",
+   "de_sha256": "7bee02fb4b6ddf5720add3dae9490152457734ddbcea7c7b1b8fb89328398cd0"
+  },
+  {
+   "pointer": "/pages/18/sections/1/heading",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "Transparenz zur KI-Nutzung",
+   "de_sha256": "f9a1fe278f284a50f70883a6ab48067e9e156f20c5f78bdb961588b155f8c8bb"
+  },
+  {
+   "pointer": "/pages/18/sections/1/body",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "KI unterstützt Orientierung und Entwürfe. Antworten können Fehler enthalten und ersetzen keine verbindliche Auskunft. Ergebnisse, die zugesichert werden, beruhen auf geprüften Quellen; offene Punkte werden als offen gekennzeichnet.",
+   "de_sha256": "49dae8a9ef8946b00be26ca1c95245bdb32518d12348893f6a54366cbfd7b2f3"
+  },
+  {
+   "pointer": "/pages/18/metadata/description",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "KI-Antworten werden als solche gekennzeichnet. Entwürfe können Fehler enthalten; Preise, Rechtsfragen und folgenreiche Aktionen benötigen die zuständige Prüfung und Freigabe.",
+   "de_sha256": "7bee02fb4b6ddf5720add3dae9490152457734ddbcea7c7b1b8fb89328398cd0"
+  },
+  {
+   "pointer": "/pages/18/next_actions/0/label",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/18/next_actions/1/label",
+   "page": "ai-notice",
+   "group": "recht",
+   "de": "Weitere Vertragsinformationen",
+   "de_sha256": "247ad8e921a5a1473a292ff272f7290c3c135f7e2776f089b8483c8356713f91"
+  },
+  {
+   "pointer": "/pages/19/title",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Barrierefreiheit und Rückmeldung",
+   "de_sha256": "047da8df80e6a2eae6db9a151ade6175d03898175d60456171a408b66b305674"
+  },
+  {
+   "pointer": "/pages/19/summary",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Zugängliche Bedienung und verständliche Inhalte sind Entwicklungsziele. Diese Statusseite ist keine unbelegte Konformitätserklärung. Hinweise auf Hindernisse können über den Kontaktweg vorbereitet werden.",
+   "de_sha256": "7cb02fe740f64be067b6693f252532f9e2ba4766f2dec6c817bc7f56f8bd9e2c"
+  },
+  {
+   "pointer": "/pages/19/sections/0/heading",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Barrierefreiheit und Rückmeldung",
+   "de_sha256": "047da8df80e6a2eae6db9a151ade6175d03898175d60456171a408b66b305674"
+  },
+  {
+   "pointer": "/pages/19/sections/0/body",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Zugängliche Bedienung und verständliche Inhalte sind Entwicklungsziele. Diese Statusseite ist keine unbelegte Konformitätserklärung. Hinweise auf Hindernisse können über den Kontaktweg vorbereitet werden.",
+   "de_sha256": "7cb02fe740f64be067b6693f252532f9e2ba4766f2dec6c817bc7f56f8bd9e2c"
+  },
+  {
+   "pointer": "/pages/19/sections/1/heading",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Anspruch und Rückmeldung",
+   "de_sha256": "6274b81f263089eed1c47892333080852b270631b489c2804088ae8a66e750ba"
+  },
+  {
+   "pointer": "/pages/19/sections/1/body",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Ziel ist eine bedienbare, lesbare und tastaturfreundliche Oberfläche mit ausreichenden Kontrasten und skalierbarem Text. Wenn dir eine Barriere auffällt, melde sie über den Kontaktweg; Hinweise fließen in die Verbesserung ein.",
+   "de_sha256": "d315ffe15b415e331a2acc801b67c5cf2781a1a48a8fcced4f06e76948dfbd7e"
+  },
+  {
+   "pointer": "/pages/19/metadata/description",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Zugängliche Bedienung und verständliche Inhalte sind Entwicklungsziele. Diese Statusseite ist keine unbelegte Konformitätserklärung. Hinweise auf Hindernisse können über den Kontaktweg vorbereitet werden.",
+   "de_sha256": "7cb02fe740f64be067b6693f252532f9e2ba4766f2dec6c817bc7f56f8bd9e2c"
+  },
+  {
+   "pointer": "/pages/19/next_actions/0/label",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/19/next_actions/1/label",
+   "page": "accessibility",
+   "group": "recht",
+   "de": "Weitere Vertragsinformationen",
+   "de_sha256": "247ad8e921a5a1473a292ff272f7290c3c135f7e2776f089b8483c8356713f91"
+  },
+  {
+   "pointer": "/pages/20/title",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Cookies und Einstellungen",
+   "de_sha256": "058860b273422920c782ad91dfd73a61fcda570df0ea1657a46aaa05380abffe"
+  },
+  {
+   "pointer": "/pages/20/summary",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Die Entscheidung über optionale Verarbeitung steht vor deren Aktivierung. Erforderliche Funktionen, Analyse und externe Medien sind getrennt zu erklären. Eine Entscheidung für eine Website ist keine automatische Einwilligung für eine andere Domain.",
+   "de_sha256": "d481c67880ef6996f6abad86a259307ac9e5f28652ad33846b092390a8d6a2dc"
+  },
+  {
+   "pointer": "/pages/20/sections/0/heading",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Cookies und Einstellungen",
+   "de_sha256": "058860b273422920c782ad91dfd73a61fcda570df0ea1657a46aaa05380abffe"
+  },
+  {
+   "pointer": "/pages/20/sections/0/body",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Die Entscheidung über optionale Verarbeitung steht vor deren Aktivierung. Erforderliche Funktionen, Analyse und externe Medien sind getrennt zu erklären. Eine Entscheidung für eine Website ist keine automatische Einwilligung für eine andere Domain.",
+   "de_sha256": "d481c67880ef6996f6abad86a259307ac9e5f28652ad33846b092390a8d6a2dc"
+  },
+  {
+   "pointer": "/pages/20/sections/1/heading",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Cookies und Einstellungen",
+   "de_sha256": "058860b273422920c782ad91dfd73a61fcda570df0ea1657a46aaa05380abffe"
+  },
+  {
+   "pointer": "/pages/20/sections/1/body",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Für den Betrieb notwendige Speicherung bleibt auf das Erforderliche beschränkt. Optionale Messung erfolgt nur mit deiner Zustimmung und lässt sich ändern. Es werden keine verborgenen Weitergaben an Dritte vorgenommen.",
+   "de_sha256": "c7e55d29a55f0ba115ee42dcf55cb28498b81a4e6e661073575640580a41e23a"
+  },
+  {
+   "pointer": "/pages/20/metadata/description",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Die Entscheidung über optionale Verarbeitung steht vor deren Aktivierung. Erforderliche Funktionen, Analyse und externe Medien sind getrennt zu erklären. Eine Entscheidung für eine Website ist keine automatische Einwilligung für eine andere Domain.",
+   "de_sha256": "d481c67880ef6996f6abad86a259307ac9e5f28652ad33846b092390a8d6a2dc"
+  },
+  {
+   "pointer": "/pages/20/next_actions/0/label",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/20/next_actions/1/label",
+   "page": "cookies",
+   "group": "recht",
+   "de": "Weitere Vertragsinformationen",
+   "de_sha256": "247ad8e921a5a1473a292ff272f7290c3c135f7e2776f089b8483c8356713f91"
+  },
+  {
+   "pointer": "/pages/21/title",
+   "page": "login",
+   "group": "auth",
+   "de": "Anmelden",
+   "de_sha256": "a329a32263a460ff8d4bdf4640fd793b5dd91c99362e0ab4fb061d56883b098f"
+  },
+  {
+   "pointer": "/pages/21/summary",
+   "page": "login",
+   "group": "auth",
+   "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+   "de_sha256": "804abd19d82c05a1f28d7798ac5af63f541e29e54a6c916244b96c644c4375cf"
+  },
+  {
+   "pointer": "/pages/21/sections/0/heading",
+   "page": "login",
+   "group": "auth",
+   "de": "Anmelden",
+   "de_sha256": "a329a32263a460ff8d4bdf4640fd793b5dd91c99362e0ab4fb061d56883b098f"
+  },
+  {
+   "pointer": "/pages/21/sections/0/body",
+   "page": "login",
+   "group": "auth",
+   "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+   "de_sha256": "804abd19d82c05a1f28d7798ac5af63f541e29e54a6c916244b96c644c4375cf"
+  },
+  {
+   "pointer": "/pages/21/sections/1/heading",
+   "page": "login",
+   "group": "auth",
+   "de": "Dein bestehendes Konto bleibt erhalten",
+   "de_sha256": "a6425614a2b645c4ababfc96d42a3174b4ba2ef7891e355035d6439318ddfaaf"
+  },
+  {
+   "pointer": "/pages/21/sections/1/body",
+   "page": "login",
+   "group": "auth",
+   "de": "Beim Wechsel von der Testphase zu einem ausdrücklich gewählten, freigegebenen kostenpflichtigen Suite-Tarif bleiben Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselreferenzen, Dokumente, Verlauf und Guthabenreferenzen erhalten. Es gibt keine automatische Umwandlung und keine automatische Abbuchung am Testende. Die Suite-Testphase enthält kein geschenktes LLM-Guthaben: LLM-Nutzung setzt validiertes BYOK oder das nach Betriebs- und Preisfreigabe angebotene einmalige 5-EUR-Testguthaben voraus.",
+   "de_sha256": "49c4202b176b2ab73ce5b84f09e457b79e8bfb6739c06c8283f38521929a3376"
+  },
+  {
+   "pointer": "/pages/21/metadata/description",
+   "page": "login",
+   "group": "auth",
+   "de": "Die sichere Anmeldung ist für die freigegebene Produktionskonfiguration vorgesehen; der Live-Zugang ist hier noch nicht verifiziert. Dein Kundenkonto nutzt ausschließlich freigegebene Rechte im eigenen Mandanten. Eine erneute Anmeldung startet keine neue 24-Stunden-Testphase.",
+   "de_sha256": "804abd19d82c05a1f28d7798ac5af63f541e29e54a6c916244b96c644c4375cf"
+  },
+  {
+   "pointer": "/pages/21/next_actions/0/label",
+   "page": "login",
+   "group": "auth",
+   "de": "Konto erstellen",
+   "de_sha256": "d7e7f57a7cd451f8ef6d4d4bb1da1326c5ca8ce8179315f195b96be3687e64a8"
+  },
+  {
+   "pointer": "/pages/21/next_actions/1/label",
+   "page": "login",
+   "group": "auth",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/21/next_actions/2/label",
+   "page": "login",
+   "group": "auth",
+   "de": "Zurück zu den Leistungen",
+   "de_sha256": "3340b71218687d963079bef4803b096d6720ba4d745d0c5426bdebd9a6ad5501"
+  },
+  {
+   "pointer": "/pages/22/title",
+   "page": "signup",
+   "group": "auth",
+   "de": "Konto erstellen",
+   "de_sha256": "d7e7f57a7cd451f8ef6d4d4bb1da1326c5ca8ce8179315f195b96be3687e64a8"
+  },
+  {
+   "pointer": "/pages/22/summary",
+   "page": "signup",
+   "group": "auth",
+   "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+   "de_sha256": "d8250c225b620a3cfbfeb2b577b6e6175b6c320004a8c439ee2551ed89c8a1a0"
+  },
+  {
+   "pointer": "/pages/22/sections/0/heading",
+   "page": "signup",
+   "group": "auth",
+   "de": "Konto erstellen",
+   "de_sha256": "d7e7f57a7cd451f8ef6d4d4bb1da1326c5ca8ce8179315f195b96be3687e64a8"
+  },
+  {
+   "pointer": "/pages/22/sections/0/body",
+   "page": "signup",
+   "group": "auth",
+   "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+   "de_sha256": "d8250c225b620a3cfbfeb2b577b6e6175b6c320004a8c439ee2551ed89c8a1a0"
+  },
+  {
+   "pointer": "/pages/22/sections/1/heading",
+   "page": "signup",
+   "group": "auth",
+   "de": "So beginnt deine Testphase",
+   "de_sha256": "d7dc30ab011f3bfc416fd9928f4cedd324c2b77cbd00a64b1cf05ee1988743b1"
+  },
+  {
+   "pointer": "/pages/22/sections/1/body",
+   "page": "signup",
+   "group": "auth",
+   "de": "Nach E-Mail-Bestätigung und Aktivierung startest du die Testphase ausdrücklich. Ab diesem Zeitpunkt laufen einmalig 24 Stunden nach Serverzeit. Eine erneute Anmeldung verlängert sie nicht. Dein Kundenkonto erhält ausschließlich Rechte in deinem eigenen Mandanten; interne Verwaltungsrechte sind ausgeschlossen.",
+   "de_sha256": "cd8164cf18fce720e396fb2799f807bbd26f0d48f5cad1f294b5803c513c1438"
+  },
+  {
+   "pointer": "/pages/22/sections/2/heading",
+   "page": "signup",
+   "group": "auth",
+   "de": "LLM-Nutzung: eigener Schlüssel oder Testguthaben",
+   "de_sha256": "0079372eaee2ac53060d4ea514557d9fd70b009fb7852882fbe8ad2952c96f11"
+  },
+  {
+   "pointer": "/pages/22/sections/2/body",
+   "page": "signup",
+   "group": "auth",
+   "de": "Die kostenlose Suite-Testphase enthält kein geschenktes LLM-Guthaben. Du nutzt entweder deinen eigenen Anbieterschlüssel (BYOK) auf eigene Anbieterrechnung oder einmalig 5 EUR (500 Cent) bezahltes Testguthaben für unsere verwaltete Route. Die verwaltete Route und die Anbieterauswahl werden erst bei Verfügbarkeit freigegeben. In dieser Vorschau ist die LLM-Nutzung noch nicht aktiviert.",
+   "de_sha256": "704af0f8f10d6cdf540fdf1e94a2109d4807e03f65438c3919a1374ea731463d"
+  },
+  {
+   "pointer": "/pages/22/sections/3/heading",
+   "page": "signup",
+   "group": "auth",
+   "de": "Nach der Testphase",
+   "de_sha256": "82746a76f1e166917a4ddc9ebbdad38d541578998a7a565193a80576ad918339"
+  },
+  {
+   "pointer": "/pages/22/sections/3/body",
+   "page": "signup",
+   "group": "auth",
+   "de": "Ohne ausdrücklich gewählten und freigegebenen kostenpflichtigen Suite-Tarif endet die Testberechtigung ohne automatische Abbuchung. Eine Testaufladung ist kein Suite-Abo. Bei einem Wechsel bleiben Konto, Mandant, Arbeitsbereich, Einstellungen, Schlüsselreferenzen, Dokumente, Verlauf und Guthabenreferenzen erhalten. Gekauftes Guthaben verfällt nicht allein durch das Ende der Testphase; dein Konto und deine Datenrechte bleiben bestehen.",
+   "de_sha256": "a929465715cce82646911edbc756c3b2da1bdddf226175f83ea202f74de00ef1"
+  },
+  {
+   "pointer": "/pages/22/metadata/description",
+   "page": "signup",
+   "group": "auth",
+   "de": "Die öffentliche Kundenregistrierung ist vorgesehen. Nach bestätigter E-Mail und Aktivierung deines Kundenarbeitsbereichs kannst du die 24-stündige kostenlose Suite-Testphase starten. LLM-Nutzung wird separat finanziert. Die Live-Registrierung ist hier noch nicht verifiziert.",
+   "de_sha256": "d8250c225b620a3cfbfeb2b577b6e6175b6c320004a8c439ee2551ed89c8a1a0"
+  },
+  {
+   "pointer": "/pages/22/next_actions/0/label",
+   "page": "signup",
+   "group": "auth",
+   "de": "Anmelden",
+   "de_sha256": "a329a32263a460ff8d4bdf4640fd793b5dd91c99362e0ab4fb061d56883b098f"
+  },
+  {
+   "pointer": "/pages/22/next_actions/1/label",
+   "page": "signup",
+   "group": "auth",
+   "de": "Kontaktmöglichkeiten ansehen",
+   "de_sha256": "326fea3fbeed0cebdb5bd0a0b11e827632168a3005deb5222020786f1da09f89"
+  },
+  {
+   "pointer": "/pages/22/next_actions/2/label",
+   "page": "signup",
+   "group": "auth",
+   "de": "Zurück zu den Leistungen",
+   "de_sha256": "3340b71218687d963079bef4803b096d6720ba4d745d0c5426bdebd9a6ad5501"
+  },
+  {
+   "pointer": "/pages/23/title",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
+   "de_sha256": "e8050ad75e0311111b5ba4273f16e4b0caa3294a7c8a5252e3ad2a306235f7d0"
+  },
+  {
+   "pointer": "/pages/23/summary",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "TEILEKLAR ist ein eigener Handelsbereich mit Fahrzeug- und Teilekontext. Der Shop ist in Vorbereitung. Ohne freigegebene Produkt-, Preis- und Lieferdaten werden weder Verfügbarkeit noch Passung oder Kaufabschluss behauptet.",
+   "de_sha256": "1aeabe444d3f8485069287c19feab39a3e7cfd88171c74e237e417e0dc75b474"
+  },
+  {
+   "pointer": "/pages/23/sections/0/heading",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
+   "de_sha256": "e8050ad75e0311111b5ba4273f16e4b0caa3294a7c8a5252e3ad2a306235f7d0"
+  },
+  {
+   "pointer": "/pages/23/sections/0/body",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "TEILEKLAR ist ein eigener Handelsbereich mit Fahrzeug- und Teilekontext. Der Shop ist in Vorbereitung. Ohne freigegebene Produkt-, Preis- und Lieferdaten werden weder Verfügbarkeit noch Passung oder Kaufabschluss behauptet.",
+   "de_sha256": "1aeabe444d3f8485069287c19feab39a3e7cfd88171c74e237e417e0dc75b474"
+  },
+  {
+   "pointer": "/pages/23/sections/1/heading",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "So funktioniert TEILEKLAR",
+   "de_sha256": "5d69ae2b50212e4f44e41079f542f7767dd0ec359fc15b8d6403b4caf9b6f7a7"
+  },
+  {
+   "pointer": "/pages/23/sections/1/body",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "TEILEKLAR bringt Teile, Fahrzeugbezug und Werkstatt zusammen. Du beschreibst dein Fahrzeug und das gesuchte Teil; passende Optionen und nächste Schritte erscheinen, sobald ein freigegebener Teilebestand vorliegt. Bis dahin werden keine erfundenen Treffer, Preise oder Lieferzeiten angezeigt.",
+   "de_sha256": "c3d52f506e5f917b39e264c0b1a400cf6aab29f8c656ff1255351d9b0019f9f1"
+  },
+  {
+   "pointer": "/pages/23/sections/2/heading",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "Fahrzeugbezug und Werkstatttermin",
+   "de_sha256": "1685814d595b7be09572eb33f7421b683f91c235aa5a36a1e0bf58742cd90ac5"
+  },
+  {
+   "pointer": "/pages/23/sections/2/body",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "Hinterlege dein Fahrzeug, damit die Passung belegbar wird, statt geraten zu werden. Wenn eine Werkstatt nötig ist, kannst du einen Termin anfragen. Werkstattdaten erscheinen nur, wenn sie freigegeben sind – keine erfundenen Standorte.",
+   "de_sha256": "3888d80dd33235ee9576d76250a7e454fe8c72a2eaa7f8d46f116df55fb69aae"
+  },
+  {
+   "pointer": "/pages/23/metadata/description",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "TEILEKLAR ist ein eigener Handelsbereich mit Fahrzeug- und Teilekontext. Der Shop ist in Vorbereitung. Ohne freigegebene Produkt-, Preis- und Lieferdaten werden weder Verfügbarkeit noch Passung oder Kaufabschluss behauptet.",
+   "de_sha256": "1aeabe444d3f8485069287c19feab39a3e7cfd88171c74e237e417e0dc75b474"
+  },
+  {
+   "pointer": "/pages/23/next_actions/0/label",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "Weiter: Teilesuche: in Vorbereitung",
+   "de_sha256": "42e61274f3ecb1357403d0440fbbb41c81f977ecf4b709a07811146e09a72414"
+  },
+  {
+   "pointer": "/pages/23/next_actions/1/label",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "Weiter: Fahrzeug und belegte Passung",
+   "de_sha256": "4bb59a6afca7657223aebbe05c5ec7ebe06961d1ee3fb36a3ff1a0c790d33b77"
+  },
+  {
+   "pointer": "/pages/23/next_actions/2/label",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "Weiter: Werkstattpartner werden",
+   "de_sha256": "9247256d31ea5f5fd20488f129d891a9e71385874829530a348879b403f48684"
+  },
+  {
+   "pointer": "/pages/23/next_actions/3/label",
+   "page": "tk-home",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/24/title",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Teilesuche: in Vorbereitung",
+   "de_sha256": "fb187ecaa2bb0f5a1c2e8d72733b5750effeab9f0df88d69e43b7e8949c37be9"
+  },
+  {
+   "pointer": "/pages/24/summary",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
+   "de_sha256": "fae39193578fc4b7e42e8349a7cacca017798f70e95cea930682e4492df5d24a"
+  },
+  {
+   "pointer": "/pages/24/sections/0/heading",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Teilesuche: in Vorbereitung",
+   "de_sha256": "fb187ecaa2bb0f5a1c2e8d72733b5750effeab9f0df88d69e43b7e8949c37be9"
+  },
+  {
+   "pointer": "/pages/24/sections/0/body",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
+   "de_sha256": "fae39193578fc4b7e42e8349a7cacca017798f70e95cea930682e4492df5d24a"
+  },
+  {
+   "pointer": "/pages/24/sections/1/heading",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Was jetzt schon möglich ist",
+   "de_sha256": "79bea1fbac60e2c486db5d0e9329e958e36d8767ca5d9d32eb4a8f47835b7bb9"
+  },
+  {
+   "pointer": "/pages/24/sections/1/body",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Du kannst Fahrzeug und gesuchtes Teil strukturiert als Anfrage beschreiben. Die eigentliche Suche mit Treffern erscheint, sobald ein freigegebener Teilebestand vorliegt – ohne erfundene Ergebnisse.",
+   "de_sha256": "fb5688b7a1c4db2d38db1210b62a580c0ff6769a2cda1045508f229da795165b"
+  },
+  {
+   "pointer": "/pages/24/metadata/description",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Die Suche braucht einen freigegebenen Teilebestand. Bis dahin kannst du dein Fahrzeug und das gesuchte Teil als Anfrage beschreiben. Treffer, Preise und Lieferzeiten erscheinen erst mit bestätigten Katalogdaten.",
+   "de_sha256": "fae39193578fc4b7e42e8349a7cacca017798f70e95cea930682e4492df5d24a"
+  },
+  {
+   "pointer": "/pages/24/next_actions/0/label",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Weiter: Fahrzeug und belegte Passung",
+   "de_sha256": "4bb59a6afca7657223aebbe05c5ec7ebe06961d1ee3fb36a3ff1a0c790d33b77"
+  },
+  {
+   "pointer": "/pages/24/next_actions/1/label",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Weiter: Sortiment und Kategorien",
+   "de_sha256": "f3e6fa046c281b04650237ba94e22d41ddcab58bc0a90e87183dc60c2ca3602a"
+  },
+  {
+   "pointer": "/pages/24/next_actions/2/label",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Weiter: Produktdetails: in Vorbereitung",
+   "de_sha256": "e48baf0f9804a6d2157b78c35c60ed5f7e19ad3d92bcbf9b26d7074f0769651e"
+  },
+  {
+   "pointer": "/pages/24/next_actions/3/label",
+   "page": "tk-search",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/25/title",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Sortiment und Kategorien",
+   "de_sha256": "2aaec385b32a3d6ad660f7f0b95debf57a2d7cb93d947224aa29ae5510cef0de"
+  },
+  {
+   "pointer": "/pages/25/summary",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Kategorien ordnen erst den freigegebenen Katalog. Aktuell werden keine angeblich verfügbaren Artikelzahlen oder Markenbestände veröffentlicht.",
+   "de_sha256": "d7ccd8ae10b046dfa3b89ec885b10b9078f1e90095b3debe9b1c12a44f1aa186"
+  },
+  {
+   "pointer": "/pages/25/sections/0/heading",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Sortiment und Kategorien",
+   "de_sha256": "2aaec385b32a3d6ad660f7f0b95debf57a2d7cb93d947224aa29ae5510cef0de"
+  },
+  {
+   "pointer": "/pages/25/sections/0/body",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Kategorien ordnen erst den freigegebenen Katalog. Aktuell werden keine angeblich verfügbaren Artikelzahlen oder Markenbestände veröffentlicht.",
+   "de_sha256": "d7ccd8ae10b046dfa3b89ec885b10b9078f1e90095b3debe9b1c12a44f1aa186"
+  },
+  {
+   "pointer": "/pages/25/sections/1/heading",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Orientierung im Sortiment",
+   "de_sha256": "65e87abe141f43fd679d66c431b5098fbe97af367656d1338c2184b867a3256b"
+  },
+  {
+   "pointer": "/pages/25/sections/1/body",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Die Kategorien geben die geplante Struktur des Sortiments wieder. Konkrete Artikel, Verfügbarkeiten und Preise erscheinen erst mit bestätigten Katalogdaten. So bleibt die Übersicht ehrlich und belastbar.",
+   "de_sha256": "d417b6b84dbfa2da05785740ed34ebb22896f8739affc44a159b18c2fcc16016"
+  },
+  {
+   "pointer": "/pages/25/metadata/description",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Kategorien ordnen erst den freigegebenen Katalog. Aktuell werden keine angeblich verfügbaren Artikelzahlen oder Markenbestände veröffentlicht.",
+   "de_sha256": "d7ccd8ae10b046dfa3b89ec885b10b9078f1e90095b3debe9b1c12a44f1aa186"
+  },
+  {
+   "pointer": "/pages/25/next_actions/0/label",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Weiter: Kategorieansicht: in Vorbereitung",
+   "de_sha256": "f3a5db4110eb91f5fbed39c5533f8e65faa176e65df020987df0c8187ff711c8"
+  },
+  {
+   "pointer": "/pages/25/next_actions/1/label",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Weiter: Teilesuche: in Vorbereitung",
+   "de_sha256": "42e61274f3ecb1357403d0440fbbb41c81f977ecf4b709a07811146e09a72414"
+  },
+  {
+   "pointer": "/pages/25/next_actions/2/label",
+   "page": "tk-categories",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/26/title",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Kategorieansicht: in Vorbereitung",
+   "de_sha256": "25a233d44ad13709b803a117364b3fe40e6cf7cbaa37efc7cb975b191826aa33"
+  },
+  {
+   "pointer": "/pages/26/summary",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Eine Kategorieansicht zeigt später die belegten Eigenschaften und passenden Filter ihrer Artikel. Bis diese Daten freigegeben sind, führt der nächste Schritt zur Bedarfsklärung statt zu einem erfundenen Sortiment.",
+   "de_sha256": "6db363e7cf0592b1c6ea0ef81a6fce9f0ff024c8c7ed033a97382313dff0506e"
+  },
+  {
+   "pointer": "/pages/26/sections/0/heading",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Kategorieansicht: in Vorbereitung",
+   "de_sha256": "25a233d44ad13709b803a117364b3fe40e6cf7cbaa37efc7cb975b191826aa33"
+  },
+  {
+   "pointer": "/pages/26/sections/0/body",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Eine Kategorieansicht zeigt später die belegten Eigenschaften und passenden Filter ihrer Artikel. Bis diese Daten freigegeben sind, führt der nächste Schritt zur Bedarfsklärung statt zu einem erfundenen Sortiment.",
+   "de_sha256": "6db363e7cf0592b1c6ea0ef81a6fce9f0ff024c8c7ed033a97382313dff0506e"
+  },
+  {
+   "pointer": "/pages/26/metadata/description",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Eine Kategorieansicht zeigt später die belegten Eigenschaften und passenden Filter ihrer Artikel. Bis diese Daten freigegeben sind, führt der nächste Schritt zur Bedarfsklärung statt zu einem erfundenen Sortiment.",
+   "de_sha256": "6db363e7cf0592b1c6ea0ef81a6fce9f0ff024c8c7ed033a97382313dff0506e"
+  },
+  {
+   "pointer": "/pages/26/next_actions/0/label",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Weiter: Produktdetails: in Vorbereitung",
+   "de_sha256": "e48baf0f9804a6d2157b78c35c60ed5f7e19ad3d92bcbf9b26d7074f0769651e"
+  },
+  {
+   "pointer": "/pages/26/next_actions/1/label",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Weiter: Teilesuche: in Vorbereitung",
+   "de_sha256": "42e61274f3ecb1357403d0440fbbb41c81f977ecf4b709a07811146e09a72414"
+  },
+  {
+   "pointer": "/pages/26/next_actions/2/label",
+   "page": "tk-category",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/27/title",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Produktdetails: in Vorbereitung",
+   "de_sha256": "adda86fe6e96d2618b67e6d95b2329cb3049561edff74190d7bc59a3c7c0443c"
+  },
+  {
+   "pointer": "/pages/27/summary",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Ohne ausgewählten, freigegebenen Artikel gibt es hier keinen Preis und keine Passungszusage. Fahrzeug, Teilenummer und Quelle müssen für eine belastbare Auskunft zusammenpassen.",
+   "de_sha256": "f6db31ca573c56a5d61aea9fc29eaf2e93bb485a7e9112a2ead5125c88fac67c"
+  },
+  {
+   "pointer": "/pages/27/sections/0/heading",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Produktdetails: in Vorbereitung",
+   "de_sha256": "adda86fe6e96d2618b67e6d95b2329cb3049561edff74190d7bc59a3c7c0443c"
+  },
+  {
+   "pointer": "/pages/27/sections/0/body",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Ohne ausgewählten, freigegebenen Artikel gibt es hier keinen Preis und keine Passungszusage. Fahrzeug, Teilenummer und Quelle müssen für eine belastbare Auskunft zusammenpassen.",
+   "de_sha256": "f6db31ca573c56a5d61aea9fc29eaf2e93bb485a7e9112a2ead5125c88fac67c"
+  },
+  {
+   "pointer": "/pages/27/sections/1/heading",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Produktdetails in Vorbereitung",
+   "de_sha256": "0b53e00fb088c01e89f47f9aacd0f1bbb2d30dd4dd84bb7f5fca981f090a9702"
+  },
+  {
+   "pointer": "/pages/27/sections/1/body",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Produktseiten zeigen künftig Eigenschaften, Passung und Verfügbarkeit auf Basis bestätigter Daten. Bis dahin werden keine Spezifikationen oder Preise angezeigt, die nicht belegt sind.",
+   "de_sha256": "65ea586e7a51ec47b33deede54cb8d5f2784b3bef3468b2ed460638b17e0acae"
+  },
+  {
+   "pointer": "/pages/27/metadata/description",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Ohne ausgewählten, freigegebenen Artikel gibt es hier keinen Preis und keine Passungszusage. Fahrzeug, Teilenummer und Quelle müssen für eine belastbare Auskunft zusammenpassen.",
+   "de_sha256": "f6db31ca573c56a5d61aea9fc29eaf2e93bb485a7e9112a2ead5125c88fac67c"
+  },
+  {
+   "pointer": "/pages/27/next_actions/0/label",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Weiter: Teilesuche: in Vorbereitung",
+   "de_sha256": "42e61274f3ecb1357403d0440fbbb41c81f977ecf4b709a07811146e09a72414"
+  },
+  {
+   "pointer": "/pages/27/next_actions/1/label",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Weiter: Fahrzeug und belegte Passung",
+   "de_sha256": "4bb59a6afca7657223aebbe05c5ec7ebe06961d1ee3fb36a3ff1a0c790d33b77"
+  },
+  {
+   "pointer": "/pages/27/next_actions/2/label",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Weiter: Warenkorb: noch ohne Bestellung",
+   "de_sha256": "6d13ac1a50ce6f5c03e27c48678fac890120cb1b10dcfda2a7984bcb7769ad07"
+  },
+  {
+   "pointer": "/pages/27/next_actions/3/label",
+   "page": "tk-product",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/28/title",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Warenkorb: noch ohne Bestellung",
+   "de_sha256": "0af9a2049500a15e454555f5afa7ff5a09793585390dbc32a90a349d3a3a6dc5"
+  },
+  {
+   "pointer": "/pages/28/summary",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Ein Warenkorb wird erst mit freigegebenen Artikeln und nachvollziehbaren Summen befüllbar. Die aktuelle Ansicht löst keine Bestellung und keine Zahlung aus.",
+   "de_sha256": "3d5d05a573743b2c10b92366c2f1f5afbb427bb168da796f2b33daf6808c6921"
+  },
+  {
+   "pointer": "/pages/28/sections/0/heading",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Warenkorb: noch ohne Bestellung",
+   "de_sha256": "0af9a2049500a15e454555f5afa7ff5a09793585390dbc32a90a349d3a3a6dc5"
+  },
+  {
+   "pointer": "/pages/28/sections/0/body",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Ein Warenkorb wird erst mit freigegebenen Artikeln und nachvollziehbaren Summen befüllbar. Die aktuelle Ansicht löst keine Bestellung und keine Zahlung aus.",
+   "de_sha256": "3d5d05a573743b2c10b92366c2f1f5afbb427bb168da796f2b33daf6808c6921"
+  },
+  {
+   "pointer": "/pages/28/sections/1/heading",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Warenkorb ohne Bestellung",
+   "de_sha256": "6b644c5832a0b1b1041b91c7ff7a2513821acb5ea9878bd693d1bd04b5dd28ef"
+  },
+  {
+   "pointer": "/pages/28/sections/1/body",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Der Warenkorb hält deine Auswahl lokal fest. Eine Bestellung oder Zahlung ist nicht aktiv und wird erst mit gesonderter Freigabe möglich. So entsteht keine irreführende Kauf­erwartung.",
+   "de_sha256": "d798536dd6629dad996da50fb44c30c1e92bf6ef3821bbf84811cbe26edbe741"
+  },
+  {
+   "pointer": "/pages/28/metadata/description",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Ein Warenkorb wird erst mit freigegebenen Artikeln und nachvollziehbaren Summen befüllbar. Die aktuelle Ansicht löst keine Bestellung und keine Zahlung aus.",
+   "de_sha256": "3d5d05a573743b2c10b92366c2f1f5afbb427bb168da796f2b33daf6808c6921"
+  },
+  {
+   "pointer": "/pages/28/next_actions/0/label",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Weiter: Teilesuche: in Vorbereitung",
+   "de_sha256": "42e61274f3ecb1357403d0440fbbb41c81f977ecf4b709a07811146e09a72414"
+  },
+  {
+   "pointer": "/pages/28/next_actions/1/label",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Weiter: Kasse: nicht zum Kauf freigegeben",
+   "de_sha256": "fa5fd5d3a0bf2095861c07c84fe3a9af36cd4da82ebdb5b3d36bf7db2391c6a1"
+  },
+  {
+   "pointer": "/pages/28/next_actions/2/label",
+   "page": "tk-cart",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/29/title",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Kasse: nicht zum Kauf freigegeben",
+   "de_sha256": "ac6df732af60d05adb2974c71fb48bf7f759668515343c59c2ac597bdf1a449c"
+  },
+  {
+   "pointer": "/pages/29/summary",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Ein echter Kauf setzt geprüfte Artikel-, Preis-, Versand-, Zahlungs- und Verbraucherinformationen voraus. Hier gibt es noch keinen verbindlichen Bestellknopf und keine vorgetäuschte Bestellbestätigung.",
+   "de_sha256": "0a5f70909ea4464ebb94c22337ca84e784790a5f897a381d211c10e5321077a1"
+  },
+  {
+   "pointer": "/pages/29/sections/0/heading",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Kasse: nicht zum Kauf freigegeben",
+   "de_sha256": "ac6df732af60d05adb2974c71fb48bf7f759668515343c59c2ac597bdf1a449c"
+  },
+  {
+   "pointer": "/pages/29/sections/0/body",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Ein echter Kauf setzt geprüfte Artikel-, Preis-, Versand-, Zahlungs- und Verbraucherinformationen voraus. Hier gibt es noch keinen verbindlichen Bestellknopf und keine vorgetäuschte Bestellbestätigung.",
+   "de_sha256": "0a5f70909ea4464ebb94c22337ca84e784790a5f897a381d211c10e5321077a1"
+  },
+  {
+   "pointer": "/pages/29/sections/1/heading",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Kasse nicht freigegeben",
+   "de_sha256": "c98e7921f4ba025b342dce3d85e07d32a8e1c182d52f3005c29a1555f9ca84b0"
+  },
+  {
+   "pointer": "/pages/29/sections/1/body",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Ein Kaufabschluss ist bewusst nicht aktiviert. Zahlungs- und Bestellabläufe erscheinen erst, wenn Katalog, Preise und Bedingungen freigegeben sind. Bis dahin bleiben alle Angaben unverbindlich.",
+   "de_sha256": "347ee0f9633056ac76ef39b0f3b700edab1e9663bb65ad802c3446e0eeb2c764"
+  },
+  {
+   "pointer": "/pages/29/metadata/description",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Ein echter Kauf setzt geprüfte Artikel-, Preis-, Versand-, Zahlungs- und Verbraucherinformationen voraus. Hier gibt es noch keinen verbindlichen Bestellknopf und keine vorgetäuschte Bestellbestätigung.",
+   "de_sha256": "0a5f70909ea4464ebb94c22337ca84e784790a5f897a381d211c10e5321077a1"
+  },
+  {
+   "pointer": "/pages/29/next_actions/0/label",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Weiter: Warenkorb: noch ohne Bestellung",
+   "de_sha256": "6d13ac1a50ce6f5c03e27c48678fac890120cb1b10dcfda2a7984bcb7769ad07"
+  },
+  {
+   "pointer": "/pages/29/next_actions/1/label",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Weiter: TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
+   "de_sha256": "1b2faeb1c526ee36d780eb73d7f70a5be7300127c8da2412b12ba889575a7699"
+  },
+  {
+   "pointer": "/pages/29/next_actions/2/label",
+   "page": "tk-checkout",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/30/title",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Fahrzeug und belegte Passung",
+   "de_sha256": "ba062113e85f45ea54a2700fd5b8843c27d0476ca475c45676ef7a058da8b975"
+  },
+  {
+   "pointer": "/pages/30/summary",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Ohne Fahrzeugkontext wird keine Passung behauptet. Unklare Varianten, Maße oder Zubehöranforderungen müssen zuerst geklärt werden. Eine Vorbereitung der Anfrage ist noch kein bestätigter Kompatibilitätsnachweis.",
+   "de_sha256": "677365a9cb32af20b7a8421d0afe961929a9c533b8695a9ffe788db44338141f"
+  },
+  {
+   "pointer": "/pages/30/sections/0/heading",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Fahrzeug und belegte Passung",
+   "de_sha256": "ba062113e85f45ea54a2700fd5b8843c27d0476ca475c45676ef7a058da8b975"
+  },
+  {
+   "pointer": "/pages/30/sections/0/body",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Ohne Fahrzeugkontext wird keine Passung behauptet. Unklare Varianten, Maße oder Zubehöranforderungen müssen zuerst geklärt werden. Eine Vorbereitung der Anfrage ist noch kein bestätigter Kompatibilitätsnachweis.",
+   "de_sha256": "677365a9cb32af20b7a8421d0afe961929a9c533b8695a9ffe788db44338141f"
+  },
+  {
+   "pointer": "/pages/30/sections/1/heading",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Warum belegte Passung zählt",
+   "de_sha256": "a01c946fbc752634602f62bea3ccae87b1dcabc48d7c305d5ec91bcb9acc7de9"
+  },
+  {
+   "pointer": "/pages/30/sections/1/body",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Eine belegte Passung verhindert Fehlkäufe. Über Fahrzeugmerkmale ordnen wir ein, welche Teile grundsätzlich in Frage kommen. Angezeigt wird nur, was sich auf bestätigte Daten stützt; Unsicherheiten werden benannt statt überspielt.",
+   "de_sha256": "a6c889d241c04242faf1a5e4720be4ca769a5ba5d59567e43d6a0a3ad007334e"
+  },
+  {
+   "pointer": "/pages/30/metadata/description",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Ohne Fahrzeugkontext wird keine Passung behauptet. Unklare Varianten, Maße oder Zubehöranforderungen müssen zuerst geklärt werden. Eine Vorbereitung der Anfrage ist noch kein bestätigter Kompatibilitätsnachweis.",
+   "de_sha256": "677365a9cb32af20b7a8421d0afe961929a9c533b8695a9ffe788db44338141f"
+  },
+  {
+   "pointer": "/pages/30/next_actions/0/label",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Weiter: Teilesuche: in Vorbereitung",
+   "de_sha256": "42e61274f3ecb1357403d0440fbbb41c81f977ecf4b709a07811146e09a72414"
+  },
+  {
+   "pointer": "/pages/30/next_actions/1/label",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Weiter: Produktdetails: in Vorbereitung",
+   "de_sha256": "e48baf0f9804a6d2157b78c35c60ed5f7e19ad3d92bcbf9b26d7074f0769651e"
+  },
+  {
+   "pointer": "/pages/30/next_actions/2/label",
+   "page": "tk-fitment",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/31/title",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Werkstatttermin anfragen",
+   "de_sha256": "96134110d54b9b981650cf9c0fa4d4f026cbc73036a428ffbcfba6b3c891edb7"
+  },
+  {
+   "pointer": "/pages/31/summary",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
+   "de_sha256": "35d4d33e03a8cd4610ca0d35d40e4752909aa439a3dc56251b5c4568edeb6691"
+  },
+  {
+   "pointer": "/pages/31/sections/0/heading",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Werkstatttermin anfragen",
+   "de_sha256": "96134110d54b9b981650cf9c0fa4d4f026cbc73036a428ffbcfba6b3c891edb7"
+  },
+  {
+   "pointer": "/pages/31/sections/0/body",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
+   "de_sha256": "35d4d33e03a8cd4610ca0d35d40e4752909aa439a3dc56251b5c4568edeb6691"
+  },
+  {
+   "pointer": "/pages/31/sections/1/heading",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Ablauf einer Terminanfrage",
+   "de_sha256": "b9799b425a0f1e2b3d823d502ef1a7f5e021a9ecf21a774bc10dc01ce3a9136d"
+  },
+  {
+   "pointer": "/pages/31/sections/1/body",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Beschreibe Anliegen und Fahrzeug; die Anfrage geht an eine freigegebene Werkstatt. Eine verbindliche Zusage entsteht erst durch Bestätigung der Werkstatt. Es werden keine Kapazitäten oder Standorte erfunden.",
+   "de_sha256": "3716b359b62a9a5e2e7ac526fde678c9d3f1c0f9b7c8d20902348c1889bcaa1f"
+  },
+  {
+   "pointer": "/pages/31/metadata/description",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Bereite deinen Gesprächs- oder Terminwunsch vor. Freie Werkstatttermine sind hier noch nicht angebunden. Eine Buchung ist erst nach einer persönlichen Bestätigung verbindlich.",
+   "de_sha256": "35d4d33e03a8cd4610ca0d35d40e4752909aa439a3dc56251b5c4568edeb6691"
+  },
+  {
+   "pointer": "/pages/31/next_actions/0/label",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Weiter: Werkstattprofil: freigegebene Daten erforderlich",
+   "de_sha256": "1e5957615d5f41bae9a3e457c97e0ae14c266c68603b4fb896e241b599bc4ed6"
+  },
+  {
+   "pointer": "/pages/31/next_actions/1/label",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Weiter: Werkstattpartner werden",
+   "de_sha256": "9247256d31ea5f5fd20488f129d891a9e71385874829530a348879b403f48684"
+  },
+  {
+   "pointer": "/pages/31/next_actions/2/label",
+   "page": "tk-appointments",
+   "group": "teileklar",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/32/title",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Gutscheine und Einlösung: aktueller Stand",
+   "de_sha256": "1e13ad8fdb96e538164847ee2200de0cf46a1e31425d78f454ccfcd4192a7a53"
+  },
+  {
+   "pointer": "/pages/32/summary",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Gutscheine benötigen eindeutige Bedingungen, berechtigte Konten und einen bestätigten Einlösungsstand. Diese öffentliche Seite zeigt keine persönlichen Codes, Guthaben oder angeblich bereits erfolgte Einlösung.",
+   "de_sha256": "b48f2e36f744543685ac9d628fad9ed89c5a2102ef7433a4a566f9508ad7ca5e"
+  },
+  {
+   "pointer": "/pages/32/sections/0/heading",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Gutscheine und Einlösung: aktueller Stand",
+   "de_sha256": "1e13ad8fdb96e538164847ee2200de0cf46a1e31425d78f454ccfcd4192a7a53"
+  },
+  {
+   "pointer": "/pages/32/sections/0/body",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Gutscheine benötigen eindeutige Bedingungen, berechtigte Konten und einen bestätigten Einlösungsstand. Diese öffentliche Seite zeigt keine persönlichen Codes, Guthaben oder angeblich bereits erfolgte Einlösung.",
+   "de_sha256": "b48f2e36f744543685ac9d628fad9ed89c5a2102ef7433a4a566f9508ad7ca5e"
+  },
+  {
+   "pointer": "/pages/32/sections/1/heading",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Gutscheine: aktueller Stand",
+   "de_sha256": "90e0cbee6c6978b01f30ad993fdb6456b193997e00e6e8f88731deb97332f114"
+  },
+  {
+   "pointer": "/pages/32/sections/1/body",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Einlösung und Bedingungen von Gutscheinen werden erst mit freigegebenen Regeln aktiv. Es werden keine Guthaben oder Rabatte dargestellt, die nicht hinterlegt sind.",
+   "de_sha256": "edfe8c73bd287df76c54d7ef8c7ef5e94f811bc55ea817fe89ba0060685d3475"
+  },
+  {
+   "pointer": "/pages/32/metadata/description",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Gutscheine benötigen eindeutige Bedingungen, berechtigte Konten und einen bestätigten Einlösungsstand. Diese öffentliche Seite zeigt keine persönlichen Codes, Guthaben oder angeblich bereits erfolgte Einlösung.",
+   "de_sha256": "b48f2e36f744543685ac9d628fad9ed89c5a2102ef7433a4a566f9508ad7ca5e"
+  },
+  {
+   "pointer": "/pages/32/next_actions/0/label",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Weiter: TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
+   "de_sha256": "1b2faeb1c526ee36d780eb73d7f70a5be7300127c8da2412b12ba889575a7699"
+  },
+  {
+   "pointer": "/pages/32/next_actions/1/label",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Weiter: Kundenbereich: aktueller Stand",
+   "de_sha256": "420dac97f1f9c2d4f55be66c7d5de05e39548890d4c8f05e2f3036e10be4697f"
+  },
+  {
+   "pointer": "/pages/32/next_actions/2/label",
+   "page": "tk-vouchers",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/33/title",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Werkstattpartner werden",
+   "de_sha256": "1182fe438848756b713df5153a8cce60a3811e93e4dec8a4ddb5145719c3e749"
+  },
+  {
+   "pointer": "/pages/33/summary",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Eine Partneranfrage beschreibt Betrieb, Leistungen und Zusammenarbeit. Eine Registrierung allein ist keine Freischaltung; Prüfung und vereinbarte Bedingungen gehen einer veröffentlichten Partnerseite voraus.",
+   "de_sha256": "ff7958b128e1ded4576a6de23db8e6411d8676c74602a8ca1269ed9946ab23c5"
+  },
+  {
+   "pointer": "/pages/33/sections/0/heading",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Werkstattpartner werden",
+   "de_sha256": "1182fe438848756b713df5153a8cce60a3811e93e4dec8a4ddb5145719c3e749"
+  },
+  {
+   "pointer": "/pages/33/sections/0/body",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Eine Partneranfrage beschreibt Betrieb, Leistungen und Zusammenarbeit. Eine Registrierung allein ist keine Freischaltung; Prüfung und vereinbarte Bedingungen gehen einer veröffentlichten Partnerseite voraus.",
+   "de_sha256": "ff7958b128e1ded4576a6de23db8e6411d8676c74602a8ca1269ed9946ab23c5"
+  },
+  {
+   "pointer": "/pages/33/sections/1/heading",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Nutzen für Werkstattpartner",
+   "de_sha256": "22312e41432cd33baaa53add375374b05fcb8de714e548ddc1bd1dc6544f87ed"
+  },
+  {
+   "pointer": "/pages/33/sections/1/body",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Als Werkstattpartner erhältst du strukturierte Anfragen mit Fahrzeugbezug und klarer Beschreibung. Umfang, Rechte und Abläufe werden gesondert vereinbart; eine Teilnahme ist erst nach Freigabe wirksam.",
+   "de_sha256": "7f95de68084b14c9e9367cfead9d35510dd838b2316a16bd5fc9600603d2a11e"
+  },
+  {
+   "pointer": "/pages/33/metadata/description",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Eine Partneranfrage beschreibt Betrieb, Leistungen und Zusammenarbeit. Eine Registrierung allein ist keine Freischaltung; Prüfung und vereinbarte Bedingungen gehen einer veröffentlichten Partnerseite voraus.",
+   "de_sha256": "ff7958b128e1ded4576a6de23db8e6411d8676c74602a8ca1269ed9946ab23c5"
+  },
+  {
+   "pointer": "/pages/33/next_actions/0/label",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Weiter: Werkstattprofil: freigegebene Daten erforderlich",
+   "de_sha256": "1e5957615d5f41bae9a3e457c97e0ae14c266c68603b4fb896e241b599bc4ed6"
+  },
+  {
+   "pointer": "/pages/33/next_actions/1/label",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Weiter: Werkstatttermin anfragen",
+   "de_sha256": "f6256c13fe6e0c6afeb9ddd78881b9d5b4f22a3292af9f2d53018501ff6a865b"
+  },
+  {
+   "pointer": "/pages/33/next_actions/2/label",
+   "page": "tk-partner",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/34/title",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Werkstattprofil: freigegebene Daten erforderlich",
+   "de_sha256": "7865b39bc052359f3df3ac60283656c27de29a6e2893ba348f368e015228540e"
+  },
+  {
+   "pointer": "/pages/34/summary",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Ein tatsächliches Werkstattprofil zeigt nur bestätigte Betriebsdaten, Leistungen und Kontaktwege. Aktuell werden keine Werkstattnamen, Entfernungen, Bewertungen oder freien Termine erfunden.",
+   "de_sha256": "6cd3bb9347245ea7060d9c3282f9ad7be91e3a5200ba6eb4646e2f9fa8a6be35"
+  },
+  {
+   "pointer": "/pages/34/sections/0/heading",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Werkstattprofil: freigegebene Daten erforderlich",
+   "de_sha256": "7865b39bc052359f3df3ac60283656c27de29a6e2893ba348f368e015228540e"
+  },
+  {
+   "pointer": "/pages/34/sections/0/body",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Ein tatsächliches Werkstattprofil zeigt nur bestätigte Betriebsdaten, Leistungen und Kontaktwege. Aktuell werden keine Werkstattnamen, Entfernungen, Bewertungen oder freien Termine erfunden.",
+   "de_sha256": "6cd3bb9347245ea7060d9c3282f9ad7be91e3a5200ba6eb4646e2f9fa8a6be35"
+  },
+  {
+   "pointer": "/pages/34/sections/1/heading",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Werkstattprofil: freigegebene Daten nötig",
+   "de_sha256": "c9d6cf03ea16adfc0ded92ae87327d5369cd4e300021f470bed9c66eba0d851b"
+  },
+  {
+   "pointer": "/pages/34/sections/1/body",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Ein Werkstattprofil zeigt nur bestätigte Angaben. Ohne freigegebene Daten werden keine Standorte, Leistungen oder Bewertungen erfunden. Partner hinterlegen ihre Daten im Partnerprozess.",
+   "de_sha256": "13cc43f8aa777f649f046197690f2afd1595767e9f265411ac6aac39de3461aa"
+  },
+  {
+   "pointer": "/pages/34/metadata/description",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Ein tatsächliches Werkstattprofil zeigt nur bestätigte Betriebsdaten, Leistungen und Kontaktwege. Aktuell werden keine Werkstattnamen, Entfernungen, Bewertungen oder freien Termine erfunden.",
+   "de_sha256": "6cd3bb9347245ea7060d9c3282f9ad7be91e3a5200ba6eb4646e2f9fa8a6be35"
+  },
+  {
+   "pointer": "/pages/34/next_actions/0/label",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Weiter: Werkstatttermin anfragen",
+   "de_sha256": "f6256c13fe6e0c6afeb9ddd78881b9d5b4f22a3292af9f2d53018501ff6a865b"
+  },
+  {
+   "pointer": "/pages/34/next_actions/1/label",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Weiter: Werkstattpartner werden",
+   "de_sha256": "9247256d31ea5f5fd20488f129d891a9e71385874829530a348879b403f48684"
+  },
+  {
+   "pointer": "/pages/34/next_actions/2/label",
+   "page": "tk-workshop",
+   "group": "teileklar",
+   "de": "Gespräch anfragen",
+   "de_sha256": "1e10dff09f4ef0d138354b8feaccbb5c3c62049e42984f4e4fda4a56a3e9e02f"
+  },
+  {
+   "pointer": "/pages/35/title",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
+   "de_sha256": "1f89272d409eaf92a61c5251f6f1b05ed3d53fc15f1ff05976c95ea8a2cde9cf"
+  },
+  {
+   "pointer": "/pages/35/summary",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Der Handelsbereich benötigt eigene freigegebene Anbieter-, Datenschutz- und Verbraucherinformationen. Ein B2C-Kauf wird erst nach Prüfung der einschlägigen Bestell-, Widerrufs-, Preis- und Versandbedingungen freigeschaltet. Diese Seite ersetzt die Prüfung nicht.",
+   "de_sha256": "9fdd28c215d2304cb76fd4ddc541031559e8cc218d445b6b01201c1ab07cb4b2"
+  },
+  {
+   "pointer": "/pages/35/sections/0/heading",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "TEILEKLAR: Anbieter, Datenschutz und Kaufbedingungen",
+   "de_sha256": "1f89272d409eaf92a61c5251f6f1b05ed3d53fc15f1ff05976c95ea8a2cde9cf"
+  },
+  {
+   "pointer": "/pages/35/sections/0/body",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Der Handelsbereich benötigt eigene freigegebene Anbieter-, Datenschutz- und Verbraucherinformationen. Ein B2C-Kauf wird erst nach Prüfung der einschlägigen Bestell-, Widerrufs-, Preis- und Versandbedingungen freigeschaltet. Diese Seite ersetzt die Prüfung nicht.",
+   "de_sha256": "9fdd28c215d2304cb76fd4ddc541031559e8cc218d445b6b01201c1ab07cb4b2"
+  },
+  {
+   "pointer": "/pages/35/sections/1/heading",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Anbieter und Geltungsbereich",
+   "de_sha256": "ca1bc1f29dcefd070db71729dbe53c946167eee8ae7ac819317f49bb2d645f4a"
+  },
+  {
+   "pointer": "/pages/35/sections/1/body",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "TEILEKLAR ist eine Marke im Rahmen der NeXify AI FACTORY B.V. Anbieterinformationen, Datenschutz und Kaufbedingungen gelten für den TEILEKLAR-Bereich. Eine Kauf- oder Bestellfunktion ist bis zur gesonderten Freigabe nicht aktiv.",
+   "de_sha256": "38cfb9b9b5ce7661d1f8d6d918626dc9d7c63b1ea1a6f23c5c8f477c807c7a96"
+  },
+  {
+   "pointer": "/pages/35/metadata/description",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Der Handelsbereich benötigt eigene freigegebene Anbieter-, Datenschutz- und Verbraucherinformationen. Ein B2C-Kauf wird erst nach Prüfung der einschlägigen Bestell-, Widerrufs-, Preis- und Versandbedingungen freigeschaltet. Diese Seite ersetzt die Prüfung nicht.",
+   "de_sha256": "9fdd28c215d2304cb76fd4ddc541031559e8cc218d445b6b01201c1ab07cb4b2"
+  },
+  {
+   "pointer": "/pages/35/next_actions/0/label",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Weiter: TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
+   "de_sha256": "8db04705b3caa9ab374311649d496deed2b6fe36c5aacdbe562011906c59052b"
+  },
+  {
+   "pointer": "/pages/35/next_actions/1/label",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Weiter: Cookies und Einstellungen",
+   "de_sha256": "5b424703865c47522554f645571973941571ff0b805370e9b8c5999ed7a91a70"
+  },
+  {
+   "pointer": "/pages/35/next_actions/2/label",
+   "page": "tk-legal",
+   "group": "teileklar",
+   "de": "Projekt im Chat klären",
+   "de_sha256": "292196b1413c77802d83a3168cb51b2b10ca66cad2bddad8645d3fe030bcc8ee"
+  },
+  {
+   "pointer": "/pages/36/title",
+   "page": "customer-portal",
+   "group": "portal-intern",
+   "de": "Kundenportal",
+   "de_sha256": "014508908e67ea9be8a218e12c72d6e9037bd4efc076027b6d7391c56cb37281"
+  },
+  {
+   "pointer": "/pages/36/summary",
+   "page": "customer-portal",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/36/sections/0/heading",
+   "page": "customer-portal",
+   "group": "portal-intern",
+   "de": "Kundenportal",
+   "de_sha256": "014508908e67ea9be8a218e12c72d6e9037bd4efc076027b6d7391c56cb37281"
+  },
+  {
+   "pointer": "/pages/36/sections/0/body",
+   "page": "customer-portal",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/36/metadata/description",
+   "page": "customer-portal",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/36/next_actions/0/label",
+   "page": "customer-portal",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/pages/37/title",
+   "page": "api-console",
+   "group": "portal-intern",
+   "de": "API-Konsole",
+   "de_sha256": "43aec09f49fac67dfa9beb45e60d97eb3418f7645d50d4418cecb220f414f4dd"
+  },
+  {
+   "pointer": "/pages/37/summary",
+   "page": "api-console",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/37/sections/0/heading",
+   "page": "api-console",
+   "group": "portal-intern",
+   "de": "API-Konsole",
+   "de_sha256": "43aec09f49fac67dfa9beb45e60d97eb3418f7645d50d4418cecb220f414f4dd"
+  },
+  {
+   "pointer": "/pages/37/sections/0/body",
+   "page": "api-console",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/37/metadata/description",
+   "page": "api-console",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/37/next_actions/0/label",
+   "page": "api-console",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/pages/38/title",
+   "page": "affiliate-portal",
+   "group": "portal-intern",
+   "de": "Affiliate-Bereich",
+   "de_sha256": "e07f8078433ed3ed81e48f75070b6f45c902d6b6c87e82bd8d7e9a1745021079"
+  },
+  {
+   "pointer": "/pages/38/summary",
+   "page": "affiliate-portal",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/38/sections/0/heading",
+   "page": "affiliate-portal",
+   "group": "portal-intern",
+   "de": "Affiliate-Bereich",
+   "de_sha256": "e07f8078433ed3ed81e48f75070b6f45c902d6b6c87e82bd8d7e9a1745021079"
+  },
+  {
+   "pointer": "/pages/38/sections/0/body",
+   "page": "affiliate-portal",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/38/metadata/description",
+   "page": "affiliate-portal",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/38/next_actions/0/label",
+   "page": "affiliate-portal",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/pages/39/title",
+   "page": "tk-account",
+   "group": "teileklar",
+   "de": "Kundenkonto und Fahrzeug",
+   "de_sha256": "0acbdf3304bd5536fae62a26a07757811d1e6b2d0abebd909e9738d78f9c5d4a"
+  },
+  {
+   "pointer": "/pages/39/summary",
+   "page": "tk-account",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/39/sections/0/heading",
+   "page": "tk-account",
+   "group": "teileklar",
+   "de": "Kundenkonto und Fahrzeug",
+   "de_sha256": "0acbdf3304bd5536fae62a26a07757811d1e6b2d0abebd909e9738d78f9c5d4a"
+  },
+  {
+   "pointer": "/pages/39/sections/0/body",
+   "page": "tk-account",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/39/metadata/description",
+   "page": "tk-account",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/39/next_actions/0/label",
+   "page": "tk-account",
+   "group": "teileklar",
+   "de": "Weiter: Kundenbereich: aktueller Stand",
+   "de_sha256": "420dac97f1f9c2d4f55be66c7d5de05e39548890d4c8f05e2f3036e10be4697f"
+  },
+  {
+   "pointer": "/pages/40/title",
+   "page": "tk-partner-portal",
+   "group": "teileklar",
+   "de": "Werkstatt- und Partnerportal",
+   "de_sha256": "7de5eef147adbe71a0536bd60484b914e227ec27b7dc59a24fe23b028bb4f811"
+  },
+  {
+   "pointer": "/pages/40/summary",
+   "page": "tk-partner-portal",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/40/sections/0/heading",
+   "page": "tk-partner-portal",
+   "group": "teileklar",
+   "de": "Werkstatt- und Partnerportal",
+   "de_sha256": "7de5eef147adbe71a0536bd60484b914e227ec27b7dc59a24fe23b028bb4f811"
+  },
+  {
+   "pointer": "/pages/40/sections/0/body",
+   "page": "tk-partner-portal",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/40/metadata/description",
+   "page": "tk-partner-portal",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/40/next_actions/0/label",
+   "page": "tk-partner-portal",
+   "group": "teileklar",
+   "de": "Weiter: Kundenbereich: aktueller Stand",
+   "de_sha256": "420dac97f1f9c2d4f55be66c7d5de05e39548890d4c8f05e2f3036e10be4697f"
+  },
+  {
+   "pointer": "/pages/41/title",
+   "page": "tk-neighbourhood",
+   "group": "teileklar",
+   "de": "Nachbarschaftskunden",
+   "de_sha256": "acc7b4e9d8ff7c2e06e08292d81088f09181126e50aa824d9ee53a6df4de527a"
+  },
+  {
+   "pointer": "/pages/41/summary",
+   "page": "tk-neighbourhood",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/41/sections/0/heading",
+   "page": "tk-neighbourhood",
+   "group": "teileklar",
+   "de": "Nachbarschaftskunden",
+   "de_sha256": "acc7b4e9d8ff7c2e06e08292d81088f09181126e50aa824d9ee53a6df4de527a"
+  },
+  {
+   "pointer": "/pages/41/sections/0/body",
+   "page": "tk-neighbourhood",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/41/metadata/description",
+   "page": "tk-neighbourhood",
+   "group": "teileklar",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/41/next_actions/0/label",
+   "page": "tk-neighbourhood",
+   "group": "teileklar",
+   "de": "Weiter: Kundenbereich: aktueller Stand",
+   "de_sha256": "420dac97f1f9c2d4f55be66c7d5de05e39548890d4c8f05e2f3036e10be4697f"
+  },
+  {
+   "pointer": "/pages/42/title",
+   "page": "internal-workspace",
+   "group": "portal-intern",
+   "de": "Interner Workspace",
+   "de_sha256": "fd16a2f62fdd4e29fd26b8edbc3b01f4d2beef8226e76fb57512ccc965ba802d"
+  },
+  {
+   "pointer": "/pages/42/summary",
+   "page": "internal-workspace",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/42/sections/0/heading",
+   "page": "internal-workspace",
+   "group": "portal-intern",
+   "de": "Interner Workspace",
+   "de_sha256": "fd16a2f62fdd4e29fd26b8edbc3b01f4d2beef8226e76fb57512ccc965ba802d"
+  },
+  {
+   "pointer": "/pages/42/sections/0/body",
+   "page": "internal-workspace",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/42/metadata/description",
+   "page": "internal-workspace",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/42/next_actions/0/label",
+   "page": "internal-workspace",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/pages/43/title",
+   "page": "internal-inbox",
+   "group": "portal-intern",
+   "de": "Interner Posteingang",
+   "de_sha256": "1378bacb1c022da99b9f7d1bbedd97f5da1a437b0578e282dd1339e3995499cc"
+  },
+  {
+   "pointer": "/pages/43/summary",
+   "page": "internal-inbox",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/43/sections/0/heading",
+   "page": "internal-inbox",
+   "group": "portal-intern",
+   "de": "Interner Posteingang",
+   "de_sha256": "1378bacb1c022da99b9f7d1bbedd97f5da1a437b0578e282dd1339e3995499cc"
+  },
+  {
+   "pointer": "/pages/43/sections/0/body",
+   "page": "internal-inbox",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/43/metadata/description",
+   "page": "internal-inbox",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/43/next_actions/0/label",
+   "page": "internal-inbox",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/pages/44/title",
+   "page": "internal-control",
+   "group": "portal-intern",
+   "de": "Interner Leitstand",
+   "de_sha256": "aebac3b33b9328151bb111ff0a3fb4cc0d3af40a8e7aad225c1b25e3f36fb54b"
+  },
+  {
+   "pointer": "/pages/44/summary",
+   "page": "internal-control",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/44/sections/0/heading",
+   "page": "internal-control",
+   "group": "portal-intern",
+   "de": "Interner Leitstand",
+   "de_sha256": "aebac3b33b9328151bb111ff0a3fb4cc0d3af40a8e7aad225c1b25e3f36fb54b"
+  },
+  {
+   "pointer": "/pages/44/sections/0/body",
+   "page": "internal-control",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/44/metadata/description",
+   "page": "internal-control",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/44/next_actions/0/label",
+   "page": "internal-control",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/pages/45/title",
+   "page": "internal-admin",
+   "group": "portal-intern",
+   "de": "Interne Verwaltung",
+   "de_sha256": "a528c62081b45d158cd47fee7860e22c8cbd4fd53945dc54b2abafb8405bb827"
+  },
+  {
+   "pointer": "/pages/45/summary",
+   "page": "internal-admin",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/45/sections/0/heading",
+   "page": "internal-admin",
+   "group": "portal-intern",
+   "de": "Interne Verwaltung",
+   "de_sha256": "a528c62081b45d158cd47fee7860e22c8cbd4fd53945dc54b2abafb8405bb827"
+  },
+  {
+   "pointer": "/pages/45/sections/0/body",
+   "page": "internal-admin",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/45/metadata/description",
+   "page": "internal-admin",
+   "group": "portal-intern",
+   "de": "Geschützter Bereich. Inhalte benötigen eine passende Anmeldung sowie bestätigte Rollen-, Website- und Mandantenrechte. Eine öffentliche Statusseite ist keine Freischaltung.",
+   "de_sha256": "f3553e4739bcba3c73d2ef1f39bb2a2ed5c5a1ba71bb79fcc1aaf5183e9495d9"
+  },
+  {
+   "pointer": "/pages/45/next_actions/0/label",
+   "page": "internal-admin",
+   "group": "portal-intern",
+   "de": "Zugangsstatus ansehen",
+   "de_sha256": "40dd9dea03bc55fb482c5a9a9a4b7726d9e580acabf613da69410b7653451881"
+  },
+  {
+   "pointer": "/footer/0/label",
+   "page": null,
+   "group": "footer",
+   "de": "Leistungen und Produkte",
+   "de_sha256": "bb413eec816e9f6c52f9adc2c1ca2a7e786e73bd9484edc873d9a8f2ddbb1f45"
+  },
+  {
+   "pointer": "/footer/1/label",
+   "page": null,
+   "group": "footer",
+   "de": "Orientierung und Kontakt",
+   "de_sha256": "be7e3741616c3b875c2018d4b561b50645a2c74afd874db229c3f714fc043b00"
+  },
+  {
+   "pointer": "/footer/2/label",
+   "page": null,
+   "group": "footer",
+   "de": "Recht und Transparenz",
+   "de_sha256": "37467a518c5c3a5f0e2f7b85381214b3009c5319e9f0f37aae5b6dadeb9780b9"
+  }
+ ]
+}
