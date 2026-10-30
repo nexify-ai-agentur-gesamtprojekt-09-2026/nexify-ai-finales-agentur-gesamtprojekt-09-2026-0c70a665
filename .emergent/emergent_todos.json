@@ -1,34 +1,26 @@
 [
   {
-    "content": "Phase 0.2: Live-DeepSeek-Pfad fail-closed in /api/agent-chat vorbereiten (managed-live-chat.ts + Route-Branch + Test). DONE: tsc clean, 35/35 agent tests, byte-identisch bei Flag AUS",
+    "content": "Handoff-Git-Status (read-only) dokumentieren + an User melden",
     "status": "completed"
   },
   {
-    "content": "Phase 0.2: Evidence/Hashes chirurgisch aktualisiert (ai-enforcement-coverage sha256+Status, detail-browser-evidence sdk-hash, acceptance-coverage meta-hash). make test 582 GRUEN, make check gruen, ARCH-008/009 gruen unter node22",
+    "content": "NEX-UI-DEPTH komplett (Tokens, globals.css, Evidence real neu, Vorher/Nachher-Doku, commit 81c641d); make test 583 OK",
     "status": "completed"
   },
   {
-    "content": "Phase 0.4: Preisquellen-Audit (kein freigegebener Agentur-Preiskatalog) + Live-Nachweisbedarf dokumentiert in docs/handoff-2026-10-31/preisquellen-audit.md",
+    "content": "EN i18n: alle 483 site-map-Felder + 12 Chrome-Labels + 61 chat-ui + 26 ui-config uebersetzt & verifiziert (VERIFY_OK)",
     "status": "completed"
   },
   {
-    "content": "Vorbestehende Drift behoben: apps/site workspace-capabilities.test.mjs Fixture an 10-Key-Capabilities-Vertrag angeglichen (nicht hash-gebunden, Negativ-Grenztests erhalten)",
+    "content": "EN i18n: Daten-Integration probeweise angewandt, Blast-Radius vermessen (4 Testmodule), danach grün zurueckgesetzt",
     "status": "completed"
   },
   {
-    "content": "Phase 0.3: Preisfreie, bearbeitbare Angebotsentwuerfe + versioniertes Briefing mit Readback (Gateway + apps/site), Evidence regen",
-    "status": "pending"
+    "content": "EN i18n: Integrations-Runbook + integrate-en.mjs committet (atomare Integration als eigener Lauf, Rendering-Schicht dokumentiert)",
+    "status": "completed"
   },
   {
-    "content": "Phase EN (NEU, Pascal 14:32): Englisch zusaetzlich zu de/nl/fr in bestehende i18n (Inhalte, Navigation, Chat-Sprache, Formulare/Fehler, Briefing/Angebote, Shop/Werkstatt/Partner, PWA-Hilfe, html lang/hreflang/canonical/sitemap/Zahlen-Waehrung-Datum, Routeparitaet), keine zweite i18n-Loesung",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 1: Touch-Targets global 44px->48px + chirurgische Evidence-Regeneration",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: Legal-Audit (Fake-Impressum) + Marketing-Copy",
+    "content": "OFFEN (Go/No-Go): atomare Laufzeit-Integration inkl. Rendering-Schicht + grosse Evidence-Regen ausfuehren",
     "status": "pending"
   }
 ]
