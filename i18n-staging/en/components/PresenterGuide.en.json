@@ -1,0 +1,21 @@
+{
+ "_order": "NEX-EN-COMPONENT-STAGING-20261030-03",
+ "_file": "apps/web/components/PresenterGuide.tsx",
+ "_de_sha256": "700b673d650b2331aba2741a9e3cde890d43ad05e353f205dc8c4fa369eb8772",
+ "_locale_dict": "copy: Record<Locale,{...}> (add en)",
+ "_keys": ["title","label","start","pause","previous","next","begin","position","of","available","outside","finished"],
+ "en": {
+  "title": "Walk through the pages with Pascal, NeX and AIFly",
+  "label": "What would you like to discover?",
+  "start": "Start the tour",
+  "pause": "Pause",
+  "previous": "Previous step",
+  "next": "Next step",
+  "begin": "Go to the starting point",
+  "position": "Step",
+  "of": "of",
+  "available": "The text tour is available. Videos will be added.",
+  "outside": "This page is not part of the chosen tour. Continue freely or go back to the start.",
+  "finished": "You have completed this tour. The following pages and AIFly remain available."
+ }
+}
