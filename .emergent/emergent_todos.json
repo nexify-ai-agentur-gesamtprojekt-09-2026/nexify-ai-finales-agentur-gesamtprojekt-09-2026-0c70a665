@@ -1,26 +1,22 @@
 [
   {
-    "content": "C: 200%-Zoom-Fix + Hero-Test grün, 820-Breakpoint systemkonform",
+    "content": "Run live shop UI E2E (browser-shop.mjs) against offline fixtures via pw-shim",
     "status": "completed"
   },
   {
-    "content": "C: browser-critical.mjs auf zielbild-v2 real grün",
+    "content": "Boot Next.js locally (internal 3004) + verify render; prove Clerk fail-closed (proxy.ts 503 + rendered /anmelden notice)",
     "status": "completed"
   },
   {
-    "content": "C: browser-scene-images.mjs auf v2-Home/Explainer-DOM aktualisiert, real grün",
+    "content": "Verify Emergent-managed Clerk provisioning via project metadata (clerk-production.json, clerk-dns.json, clerk-setup.md); name exact missing platform steps",
     "status": "completed"
   },
   {
-    "content": "B: echte Evidence regeneriert (inkl. Next next-public + legal next-browser)",
+    "content": "Document integrated rendered Shop-UI chain inputs->API->persisted result with step screenshots + correlated report",
     "status": "completed"
   },
   {
-    "content": "A/D: Register gebunden + View gerendert; make test VOLLSTÄNDIG GRÜN (575 OK), committed",
-    "status": "completed"
-  },
-  {
-    "content": "Shop/Portal: UI rendert (26 tk-Routen .shop-panel) + Logik grün (13 HTTP-Checks, Offline-Fixtures); interaktiver Clerk-Login→Cart→Checkout-Einzelflow gegen Live-Gateway offen",
+    "content": "Keep Vite public preview (login unverifiable: managed secret not in preview runtime + DNS/issuer open)",
     "status": "completed"
   }
 ]
