@@ -102,32 +102,73 @@
     {
       "id": "AI-a30dc4b2256c",
       "path": "api/agent-chat.ts",
-      "sha256": "205baeecf8ae1a3655efd018e13b30285cd994f408db8328bda7ef8c1faecbb2",
+      "sha256": "096928161c19778276d107d8731a38a73c1d5cb9b22a02575cc70f46d1d218b9",
       "classification": "owned_current_local_or_public_foundation",
-      "status": "deterministic_no_model",
+      "status": "disabled_fail_closed",
       "source_role": "public_deterministic_endpoint",
       "reviewed_non_inference": true,
       "execution": {
-        "observation": "Real text-guided/local visitor handling; not a generative model.",
+        "observation": "Default live behaviour is deterministic text-guided orientation; a managed live-AI branch is wired but off and fails closed.",
         "executed_live_by_this_audit": false
       },
       "egress": {
-        "observation": "No model provider call in this code path.",
+        "observation": "No model provider call on the default path; the managed live branch is gated off and fails closed before any provider access.",
         "actual_remote_provider_access_verified": false
       },
       "enforcement": {
-        "state": "deterministic_no_model",
+        "state": "disabled_fail_closed",
         "checks": [
-          "Explicit deterministic/no-live-model status; input/origin/ownership guards have their separate source tests."
+          "Managed live path gated by managedLiveChatGate (explicit NEXIFY_LIVE_CHAT flag plus managed 9router config); absent in preview/CI so the deterministic orientation stays the live behaviour.",
+          "No OPENAI_API_KEY/EMERGENT_LLM_KEY fallback; input/origin/ownership guards have their separate source tests."
         ],
         "gaps": [
-          "This interim/local foundation does not satisfy the final required live-AI capability or all customer-suite backend dependencies."
+          "Live DeepSeek operation still requires an authorised managed 9router binding, server-only key and funding release; this source does not satisfy the final live-AI capability."
         ]
       },
       "owner": "D06/D08",
-      "next_action": "Track live authorized/funded model integration separately; do not relabel deterministic output as live AI.",
+      "next_action": "Activate only via the authorised managed 9router adapter binding plus funding/secret release; do not relabel deterministic output as live AI.",
       "runtime_deployment_verified": false,
       "markers": []
+    },
+    {
+      "id": "AI-managedlivechat01",
+      "path": "packages/agent-runtime/managed-live-chat.ts",
+      "sha256": "742088e35a186a12cebc1a298f0bb151586facf6b8ad6bc293ba94e61162a54b",
+      "classification": "owned_new_managed_path",
+      "status": "disabled_fail_closed",
+      "source_role": "managed_live_chat_assembly",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Off-by-default assembly that reuses the pinned OpenRouter adapter; importing/constructing performs no model request and reads no secret.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "References the pinned OpenRouter inference endpoint constant for a fail-closed binding guard; the managed 9router route stays closed until a separately authorised binding + funding release.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "disabled_fail_closed",
+        "checks": [
+          "Gate closed unless NEXIFY_LIVE_CHAT=enabled plus managed 9router NINEROUTER_URL and ROUTER_KEY; OPENAI/EMERGENT keys are never a fallback.",
+          "Assembly fails closed (managed_live_chat_router_binding_pending) for any route that is not the authorised pinned endpoint; reuses model-agent.ts guards, no new provider path."
+        ],
+        "gaps": [
+          "No live funded provider invocation performed; the managed 9router binding, funding and tenant/ledger integration remain separate authorised requirements."
+        ]
+      },
+      "owner": "D06/D08",
+      "next_action": "Keep fail-closed until the authorised managed 9router adapter binding + funding are explicitly released; no silent provider bypass.",
+      "runtime_deployment_verified": false,
+      "markers": [
+        {
+          "marker": "provider_host",
+          "line": 30
+        },
+        {
+          "marker": "inference_path",
+          "line": 30
+        }
+      ]
     },
     {
       "id": "AI-8534902061c2",

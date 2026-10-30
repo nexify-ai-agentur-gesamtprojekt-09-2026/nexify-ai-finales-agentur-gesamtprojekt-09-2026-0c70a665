@@ -1,7 +1,13 @@
 /** Vercel Node 22 Web handler. Public guided preview: no model, session, persistence or write tools. */
 import { createUIMessageStream, createUIMessageStreamResponse } from 'ai';
 import { InputError, publicOrientation, validateOrientationInput } from '../packages/agent-runtime/public-orientation.ts';
+import { managedLiveChatGate } from '../packages/agent-runtime/managed-live-chat.ts';
 import { captureServerError, flush } from '../packages/observability/sentry-server.ts';
+
+/** Server env for the off-by-default managed live path. No secret is read into the response. */
+function liveEnv(): Record<string, string | undefined> {
+  return typeof process !== 'undefined' && process?.env ? process.env : {};
+}
 
 const MAX_BYTES = 16 * 1024;
 const BODY_DEADLINE_MS = 5000;
@@ -57,6 +63,13 @@ async function fetchHandler(request: Request): Promise<Response> {
     if (request.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') throw new InputError('application_json_required', 415);
     const input = validateOrientationInput(await readBounded(request));
     if (request.signal.aborted) throw new InputError('request_cancelled', 499);
+    // Managed live DeepSeek path is wired (packages/agent-runtime/managed-live-chat.ts) but
+    // OFF by default and fail-closed: it only engages with an explicit server flag plus the
+    // managed 9router configuration, and even then requires a separately authorised router
+    // binding + funding release. No secret is read into any response. Preview/CI never set
+    // these, so the deterministic public orientation below stays the live behaviour.
+    const gate = managedLiveChatGate(liveEnv());
+    if (gate.enabled) throw new InputError('managed_live_chat_unavailable', 503);
     const answer = publicOrientation(input);
     const stream = createUIMessageStream({ execute({ writer }) {
       if (request.signal.aborted) { writer.write({ type: 'abort', reason: 'request_cancelled' }); return; }
