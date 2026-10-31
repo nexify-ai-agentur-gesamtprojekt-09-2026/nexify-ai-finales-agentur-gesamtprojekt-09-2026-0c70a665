@@ -20,7 +20,7 @@ def load_function(path, name, namespace):
 
 
 class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
-    async def test_missing_price_and_shipping_approval_is_not_sellable(self):
+    async def test_missing_price_approval_is_unreleased(self):
         class Settings:
             async def find_one(self, query):
                 return None
