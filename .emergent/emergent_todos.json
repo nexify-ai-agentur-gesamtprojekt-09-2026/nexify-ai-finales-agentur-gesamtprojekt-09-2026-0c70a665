@@ -1,38 +1,30 @@
 [
   {
-    "content": "EN-Stand atomar committen + voller SHA",
+    "content": "EN atomar committet (SHA 0aaa8f5…)",
     "status": "completed"
   },
   {
-    "content": "Touch-Targets: 44->48px (globals + Komponenten + orientation-starter token)",
+    "content": "Touch-Targets 48px committet (SHA 94fde9a…)",
     "status": "completed"
   },
   {
-    "content": "Touch: Evidence real neu generieren (critical/text-spacing/shop/catalog/workspace/legal-footer vite+next)",
+    "content": "Handoff-Paket committet (SHA 06fc182…)",
     "status": "completed"
   },
   {
-    "content": "Touch: Register nachziehen, make test 620 OK, frische Mess-Verifikation",
+    "content": "NEX-COPY-17 (TEILEKLAR Kundentexte, Sie-Form, Markenfuehrung) + Impressum (echte Eenmanszaak, BTW offen) committet (SHA 52e0bf9…)",
     "status": "completed"
   },
   {
-    "content": "Touch: atomarer lokaler Commit",
+    "content": "Jev-Gate read-only Analyse-Doku ergaenzt (Teil des Inhalts-Commits)",
     "status": "completed"
   },
   {
-    "content": "Übergabepaket: SHAs EN+Touch, git status, Testläufe, Restfehler, Patch-Paket (ohne Secrets) im Handoff",
-    "status": "in_progress"
-  },
-  {
-    "content": "NEX-COPY-20261031-17 (global): /teileklar + gemeinsame Vorlagen - Kundentexte statt interner Spezifikation, Sie-Form, Grenzen am CTA",
+    "content": "Global: weitere Seiten/gemeinsame Vorlagen - Ersatztexte vom Redaktionsexperten einsetzen sobald geliefert (Semantik-Gate)",
     "status": "pending"
   },
   {
-    "content": "Impressum: Fake-BV -> echte Eenmanszaak (USt offen, Konflikte dokumentiert)",
-    "status": "pending"
-  },
-  {
-    "content": "Jev-Migration: read-only Analyse + Doku",
+    "content": "Offene Abnahmen: Backend-Runtime-Bindung + reale BigBuy-Katalogdaten (Integrationsaufgaben, blockiert)",
     "status": "pending"
   }
 ]
