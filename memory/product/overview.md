@@ -44,6 +44,12 @@ A real, working TEILEKLAR auto-parts online shop (real BigBuy products, real Rev
 - Phase 8: Go-Live (§21, §22 P4): deployment, domains, live readback, legal gates, independent acceptance → F-20
 
 ## Operating Mode
+- UPDATE 31.10.2026 (new coordinator on Pascal's behalf), SUPERSEDES the autopilot and full-approval lines below:
+  - Credit budget: 1,073.86 at handover. No top-ups, no plan changes, no new paid services.
+  - Keep the single web_app_dev writer and do not start a second writer.
+  - No automatic expansion after Phase 1. First verify and checkpoint Phase 1 together with the preview. Phases 1b/1c/2+ are prioritised separately by the coordinator.
+  - Do not output or forward secrets or OTPs. No new credentials, rights or security changes, and no real payments or orders, without concrete approval.
+  - Local packages eee6f637 and dcd9377 exist outside Emergent. Do not rebuild or overwrite them blindly.
 - AUTOPILOT (user instruction 31.10.2026): "Lade SOLL-WISSEN und SOLL-ZIEL (Gesamtziel) – Go-Live – führe aus und stelle fertig." Proceed phase to phase without waiting for feedback; stop only for measured blockers that need owner action (keys, legal/price decisions, real payments). Source of truth for the Gesamtziel: `docs/masterplan/NeXify-Masterplan-v2-2026-10-29.md` (V2.1).
 - FULL APPROVAL (user 31.10.2026: "Setze alles um. Freigabe."): all planned phases 1, 1b, 2–8 incl. Vercel CI are approved. Go-Live/production changes are executed in Phase 8 as planned.
 - Composio Connect (MCP, `COMPOSIO_API_KEY` ck_) gives access to Vercel/Hostinger. Read freely; production/DNS/deploy changes only as part of the Go-Live phase.

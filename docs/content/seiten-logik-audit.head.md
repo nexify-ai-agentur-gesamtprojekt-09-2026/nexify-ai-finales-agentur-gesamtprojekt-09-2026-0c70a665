@@ -38,3 +38,16 @@ Alle als `wrong` gefundenen Punkte sind korrigiert (siehe unten); deshalb enthä
 | Reifenrechner: Ergebnis in `aria-live`, Auswahllisten mit 44 px Mindesthöhe | Screenreader und Touch |
 | Next.js im Preview im Produktionsmodus | Dev-HMR-WebSocket brach im Preview ab und verzögerte die Hydration |
 | Link-Crawl aller öffentlichen Routen: 0 kaputte interne Links | JRN-116 |
+
+## Nachtrag: Rechter Chat (REQ-125..134)
+
+| Anweisung | Status | Phase | Umsetzung |
+|---|---|---|---|
+| Angedockte Spalte im Layout-Grid unter dem Header, kein Overlay (Desktop) | implemented | 1b | `.workspace-shell` mit Grid-Spalte `--layout-panel-width` |
+| Live-Ziehen 320 px bis 50 % Viewport | implemented | 1b | `ChatResizeHandle` (Pointer Capture), Klemmung bei Fenstergrößenwechsel |
+| Tastatur: Pfeiltasten in 16-px-Schritten, `role=separator`, `aria-valuenow`; Home/End = Minimum/Maximum, Enter/Doppelklick = Standard | implemented | 1b | Preview-Messung: 403 → 720 → 672 px, Reload behält 672, Doppelklick → Standard |
+| Seite fließt per Container Queries mit | implemented | 1b | Header wechselt auf Menü, Shop-Grid/Formulare passen sich an, `scrollWidth` = Viewport |
+| Einklappen gibt Breite frei, sichtbarer Öffnen-Button, Zustand pro Session | implemented | 1b | `nx-chat-open` / `nx-chat-width` in sessionStorage |
+| Zu schmal: eine Hauptansicht, Chat als Drawer (Tastatur, Safe Area) | implemented | 1b | bestehender Drawer ≤ 820 px, Griff dort ausgeblendet |
+| Begrenzte Lesespalte, Composer bündig | implemented | 1b | `max-width: 72ch` für Kopf, Verlauf und Composer |
+| Gleiches Verhalten im internen Workspace-Arbeitsbereich | out-of-phase | 6 | interner Workspace ist geschlossen (Phase 6) |

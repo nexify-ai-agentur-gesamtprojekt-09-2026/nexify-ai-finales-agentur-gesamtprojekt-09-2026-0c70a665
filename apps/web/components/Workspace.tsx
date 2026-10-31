@@ -7,7 +7,8 @@ import OracleCompanion from "./OracleCompanion";
 import DeferredChatBoundary from "./DeferredChatBoundary";
 import PublicRequestFallback from "./PublicRequestFallback";
 import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceCapabilities";
-import {lazy,Suspense, createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import {lazy,Suspense, createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import ChatResizeHandle,{chatWidthStyle,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
 import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
@@ -44,6 +45,8 @@ export function StartAction({intent,children,variant='primary'}:{intent:Intent;c
 export default function Workspace({children,pages,accountControl}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode}) {
   const [locale,setLocale] = useState<Locale>("de");
   const [open,setOpen] = useState(true);
+  const [chatWidth,setChatWidthState]=useState<number|null>(null);
+  const setChatWidth=useCallback((w:number|null)=>{setChatWidthState(w);storeChatWidth(w);},[]);
   const [mobile,setMobile]=useState(false);
   const [ready,setReady] = useState(false);
   const [chatMode,setChatMode]=useState<"workspace"|"orientation">("workspace");
@@ -101,6 +104,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
       readingAnchor.current=element?{element,y:element.getBoundingClientRect().top}:null;
     }
     setOpen(next);
+    try{sessionStorage.setItem("nx-chat-open",next?"1":"0");}catch{}
   }
   useLayoutEffect(()=>{
     const anchor=readingAnchor.current;readingAnchor.current=null;
@@ -130,6 +134,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   const contact=pages.find(page=>page.path==="/kontakt")?.contact_channels?.find(channel=>channel.type==="email"&&channel.address==="mail@nexifyai.cloud");
 
   useEffect(() => {
+    try { setChatWidthState(readChatWidth()); if(sessionStorage.getItem("nx-chat-open")==="0")setOpen(false); } catch {}
     try { const saved = localStorage.getItem("nexify-locale"); if(saved && saved in translations)setLocale(saved as Locale); } catch {}
     const query=window.matchMedia("(max-width: 820px)");
     setMobile(query.matches);if(query.matches)setOpen(false);
@@ -214,7 +219,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
   }
 
-  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell ${open?"is-open":"is-closed"}`}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
       <header className="site-header" data-testid="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={`${site==="teileklar"?"TEILEKLAR":"NeXify AI"} · ${locale==="de"?"Startseite":locale==="nl"?"Startpagina":locale==="fr"?"Accueil":"Home"}`}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>{locale==="de"?"Ein Bereich von NeXify AI":locale==="nl"?"Een onderdeel van NeXify AI":locale==="fr"?"Une activité de NeXify AI":"A part of NeXify AI"}</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>Ne<strong>X</strong>ify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
@@ -226,7 +231,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     </div>
     {!open && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>changePanel(true)} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{t.open}</ActionButton>}
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
-    <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>
+    <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>{!mobile&&<ChatResizeHandle width={chatWidth} onChange={setChatWidth} label={locale==="de"?"Chatbreite anpassen":locale==="nl"?"Chatbreedte aanpassen":locale==="fr"?"Ajuster la largeur du chat":"Resize chat"}/>}
       <div className="panel-topstrip" aria-hidden="true"/>
       <div className="panel-heading"><div className="panel-heading-copy"><p className="panel-brandline"><span>NeXify</span><span className="panel-brandline-sep" aria-hidden="true">/</span><span>{t.subtitle.split("·")[0].trim()}</span></p><h2 className="visually-hidden">{t.assistant}</h2></div><ActionButton variant="quiet" ref={closeButton} className="icon-button" data-testid="chat-panel-close-button" aria-label={t.close} onClick={closePanel}>×</ActionButton></div>
       <div className="panel-connection visually-hidden" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Textgeführte Orientierung":locale==="nl"?"Tekstgestuurde oriëntatie":locale==="fr"?"Guide textuel":"Text-guided overview"):ready?(locale==="de"?"Projektassistent verbunden":locale==="nl"?"Concepttools verbonden":locale==="fr"?"Outils de projet connectés":"Project assistant connected"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":locale==="fr"?"Aperçu · connexion en attente":"Preview · connection pending")}</div>
