@@ -1,6 +1,6 @@
 "use client";
 export type ApiError = { status: number; error: string; fields?: Record<string, string>; body?: Record<string, unknown> };
-export type Product = { id: string; name: string; sku: string; ean: string; image: string | null; stock: number; in_stock: boolean; price_cents: number; currency: string; category_id?: number };
+export type Product = { id: string; name: string; sku: string; ean: string; image: string | null; stock: number; in_stock: boolean; price_cents: number | null; price_status?: "released" | "not_released"; currency: string; category_id?: number };
 export type ProductDetail = Product & { images: string[]; description: string; details: Record<string, string | number>; fitment_status: string; source: string; imported_at: string; category_name?: string; bigbuy_id: number; vat_percent: string };
 export type Line = { product_id: string; name: string; sku: string; ean: string; image: string | null; quantity: number; unit_cents: number; line_cents: number; stock: number };
 export type Change = { product_id: string; kind: "price" | "stock" | "unavailable"; name?: string; old?: number; new?: number };
