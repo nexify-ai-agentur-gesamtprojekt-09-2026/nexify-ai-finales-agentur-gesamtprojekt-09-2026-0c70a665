@@ -2,7 +2,7 @@
 .workspace-shell { grid-template-columns: minmax(0, 1fr) var(--layout-panel-width); transition:none; }
 .site-header { padding: 18px clamp(24px, 3vw, 56px); gap: 24px; }
 .site-header nav { gap: 20px; font-size: 14px; }
-.account-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 16px; border: 1px solid var(--color-linie-stark); border-radius: var(--radius-pille); font-size: 13px; white-space: nowrap; }
+.account-link { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 16px; border: 1px solid var(--color-linie-stark); border-radius: var(--radius-pille); font-size: 13px; white-space: nowrap; }
 .header-actions .compact { background: var(--color-marke-lime); color: var(--color-text-auf-lime); border-color: var(--color-marke-lime); font-size: 13px; font-weight: 650; padding: 10px 18px; }
 .aifly-panel { background: var(--color-graphit-800); border-left: 1px solid var(--color-linie-mittel); }
 .panel-heading { padding: 24px 32px 8px; gap: 12px; }
@@ -26,7 +26,7 @@
 .welcome-card { display: grid; gap: 12px; }
 .welcome-eyebrow-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
 .welcome-eyebrow-row .text-button { white-space: nowrap; margin-left: auto; }
-.welcome-eyebrow-row .text-button { padding: 4px 8px; min-height: 44px; min-width: 44px; font-size: 12px; color: var(--color-marke-lime); }
+.welcome-eyebrow-row .text-button { padding: 4px 8px; min-height: 48px; min-width: 48px; font-size: 12px; color: var(--color-marke-lime); }
 .welcome-card .eyebrow { color: var(--color-text-tertiaer); font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; }
 .welcome-card > p:not(.welcome-body) { font-family: var(--font-display); font-size: 32px; line-height: 1.12; letter-spacing: -.03em; font-weight: 600; margin: 0; color: var(--color-text-primaer); }
 .welcome-card > .welcome-body { font-size: 16px; line-height: 1.5; color: var(--color-text-sekundaer); margin: 0; max-width: 46ch; }
@@ -59,15 +59,15 @@
 .send-button:disabled { opacity: .55; cursor: wait; }
 .connection-note { line-height: 1.6; margin: 0; color: var(--color-text-tertiaer); font-size: 12px; }
 .chatgpt-option { display: grid; gap: 6px; }
-.chatgpt-option .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--color-text-tertiaer); min-height: 44px; cursor: pointer; }
+.chatgpt-option .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--color-text-tertiaer); min-height: 48px; cursor: pointer; }
 .panel-footnote { display: grid; gap: 6px; margin-top: 12px; padding-top: 20px; border-top: 1px solid var(--color-linie-mittel); color: var(--color-text-tertiaer); font-size: 12px; }
-.panel-pascal-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--color-text-primaer); font-weight: 500; font-size: 16px; width: fit-content; }
+.panel-pascal-link { display: inline-flex; align-items: center; gap: 6px; min-height: 48px; color: var(--color-text-primaer); font-weight: 500; font-size: 16px; width: fit-content; }
 .panel-pascal-link:hover { color: var(--color-marke-lime); }
 .panel-footer-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 32px 20px; margin-top: auto; }
 .panel-footnote-status { display: flex; gap: 8px; margin-left: auto; font-family: var(--font-text); font-size: 12px; color: var(--color-text-gedaempft); }
 .panel-footnote-status b { color: var(--color-text-gedaempft); font-weight: 400; }
 .workspace-chat-modes { display: flex; gap: 2px; }
-.workspace-chat-modes button { min-height: 44px; padding: 4px 10px; background: transparent; border: 0; border-bottom: 1px solid transparent; border-radius: 0; font-size: 11px; color: var(--color-text-gedaempft); }
+.workspace-chat-modes button { min-height: 48px; padding: 4px 10px; background: transparent; border: 0; border-bottom: 1px solid transparent; border-radius: 0; font-size: 11px; color: var(--color-text-gedaempft); }
 .workspace-chat-modes button[aria-pressed=true] { color: var(--color-text-sekundaer); border-bottom-color: var(--color-marke-lime); }
 .site-header .main-navigation { align-items: center; }
 .main-navigation [aria-current=page] { color: var(--color-text-primaer); text-decoration: underline; text-decoration-color: var(--color-marke-lime); text-underline-offset: 8px; }

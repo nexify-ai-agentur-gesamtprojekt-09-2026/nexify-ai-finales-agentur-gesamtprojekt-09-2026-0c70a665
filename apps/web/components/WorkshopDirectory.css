@@ -9,8 +9,8 @@
 .workshop-building{color:var(--color-text-sekundaer);font-style:italic;font-size:var(--font-size-klein,0.8125rem)}
 .workshop-verified-note{display:inline-block;padding:var(--space-1) var(--space-2);border:1px solid var(--color-linie-stark);border-radius:var(--radius-klein);color:var(--color-text-sekundaer);font-size:var(--font-size-klein,0.75rem)}
 .workshop-search{display:grid;gap:var(--space-2);margin-block:var(--space-3)}
-.workshop-directory input{min-height:44px;max-width:100%;padding:var(--space-3);border:1px solid var(--color-linie-stark);border-radius:var(--radius-klein);background:var(--color-graphit-900);color:var(--color-text-primaer);font:inherit}
-.workshop-directory button{min-height:44px;white-space:normal;margin-inline-start:auto}
+.workshop-directory input{min-height:48px;max-width:100%;padding:var(--space-3);border:1px solid var(--color-linie-stark);border-radius:var(--radius-klein);background:var(--color-graphit-900);color:var(--color-text-primaer);font:inherit}
+.workshop-directory button{min-height:48px;white-space:normal;margin-inline-start:auto}
 .workshop-directory a{color:var(--color-marke-lime)}
 .workshop-directory :focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:var(--space-1)}
 @media (max-width:640px){.workshop-directory button{margin-inline-start:0}}

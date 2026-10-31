@@ -53,7 +53,7 @@
     "tools/local_control.py": "4cb356ca903920219b2212a6029672483e8b240ed6fa9166676f321bfaf1a26c",
     "tools/remediation_queue.py": "c9fb0dfb4bc634e23774a622a9c38ba869764514bd8b9e64a92e54e9b3f98840",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
-    "apps/web/components/WorkspaceStatusPanel.css": "55314121c7b818d75778a832298b3476149d3be002bc1502dbff12dde1e5d8e8",
+    "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
     "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/intern/workspace/page.tsx": "f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe",

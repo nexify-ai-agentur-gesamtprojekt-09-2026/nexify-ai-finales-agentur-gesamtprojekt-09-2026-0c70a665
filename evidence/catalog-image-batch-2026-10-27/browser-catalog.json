@@ -80,7 +80,7 @@
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/web/components/PublicExperience.tsx": "24db69babb871c62e303a19728dc267ab6ed8dbc6bf237df84b314f0008139c4",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
-    "apps/web/components/ShopPanel.css": "fff710c1e7a93499340eeea3ae355d3c1211b7eaa8cb9566b71bfbf598d964f7",
+    "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
     "apps/site/tests/browser-catalog.mjs": "2e9986800d46585ba8447e420af8f78171a9a2674558715e780a403767dd76ae",
     "apps/site/tests/fixtures/catalog-server.py": "0fac0208276111c8bef7191707b8cee16ac67cc9f8cda99058bad40d824eb3c3"
   },

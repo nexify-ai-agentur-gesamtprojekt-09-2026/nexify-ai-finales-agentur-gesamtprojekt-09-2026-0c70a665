@@ -27,7 +27,7 @@
   align-items: center;
   justify-self: start;
   gap: var(--space-2);
-  min-height: 44px;
+  min-height: 48px;
   max-width: 100%;
   color: var(--color-marke-lime);
   font-weight: 500;
@@ -61,7 +61,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  min-height: 44px;
+  min-height: 48px;
   cursor: pointer;
   list-style: none;
 }
