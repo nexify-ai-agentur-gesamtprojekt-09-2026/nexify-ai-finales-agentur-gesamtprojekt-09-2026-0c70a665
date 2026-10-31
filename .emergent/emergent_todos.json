@@ -1,26 +1,38 @@
 [
   {
-    "content": "InstallInvitation-Komponente + CSS (Originalsignet/Tokens), ehrlich je Browser, standalone/dismiss, keine Auto-Popups/Garantien, kein Offline-Cache",
+    "content": "EN-Stand atomar committen + voller SHA",
     "status": "completed"
   },
   {
-    "content": "In SiteFooter eingehängt (Dokumentfluss, keine Chat-Überlagerung), esbuild/TS ok (Typfix)",
+    "content": "Touch-Targets: 44->48px (globals + Komponenten + orientation-starter token)",
     "status": "completed"
   },
   {
-    "content": "Gezielter Chromium-UI-Test 8/8 (fehlendes Event, Prompt, akzeptiert, abgelehnt, dismiss, standalone, Tastatur, schmaler Viewport)",
+    "content": "Touch: Evidence real neu generieren (critical/text-spacing/shop/catalog/workspace/legal-footer vite+next)",
     "status": "completed"
   },
   {
-    "content": "QS: Legal-Footer Vite+Next genuin gegen neuen Build re-run (216/12 passed), promotet; Text-Spacing regeneriert; Consent-Bindung nachgezogen; Register faithful",
+    "content": "Touch: Register nachziehen, make test 620 OK, frische Mess-Verifikation",
     "status": "completed"
   },
   {
-    "content": "make test 620 grün + echte Builds (apps/site typecheck, apps/web Next-Build) grün",
+    "content": "Touch: atomarer lokaler Commit",
     "status": "completed"
   },
   {
-    "content": "Lokaler Commit 17b929a mit echter Prüfgrundlage + Grenzen (kein Push)",
-    "status": "completed"
+    "content": "Übergabepaket: SHAs EN+Touch, git status, Testläufe, Restfehler, Patch-Paket (ohne Secrets) im Handoff",
+    "status": "in_progress"
+  },
+  {
+    "content": "NEX-COPY-20261031-17 (global): /teileklar + gemeinsame Vorlagen - Kundentexte statt interner Spezifikation, Sie-Form, Grenzen am CTA",
+    "status": "pending"
+  },
+  {
+    "content": "Impressum: Fake-BV -> echte Eenmanszaak (USt offen, Konflikte dokumentiert)",
+    "status": "pending"
+  },
+  {
+    "content": "Jev-Migration: read-only Analyse + Doku",
+    "status": "pending"
   }
 ]
