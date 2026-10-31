@@ -184,6 +184,11 @@
 .trio-transcript strong { color: var(--color-text-primaer); }
 .trio-status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); min-height: 1lh; margin: var(--space-3) var(--space-2) 0; font-size: var(--type-small-size); color: var(--color-text-tertiaer); }
 .trio-status:empty { display: none; }
+/* 1c-a B (REQ-217..219): container follows the media, compact control row, no seek bar without a known duration. */
+.trio-caption-bar:empty { min-height: 0; margin-top: 0; }
+.trio-controls { margin-top: var(--space-3); }
+.trio-meta { margin-top: var(--space-2); }
+.trio-meta[data-duration="unknown"] { grid-template-columns: minmax(0, 1fr); }
 
 /* Keyframes – nur transform/opacity */
 @keyframes trio-walk { from { transform: translate(-14%, -9%) scale(.82); opacity: 0; } 18% { opacity: 1; } to { transform: translate(0, 0) scale(1); opacity: 1; } }

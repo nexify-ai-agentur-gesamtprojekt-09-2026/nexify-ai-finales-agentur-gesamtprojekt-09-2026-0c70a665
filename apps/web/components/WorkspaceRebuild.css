@@ -310,3 +310,23 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .aifly-panel .composer-area > *, .aifly-panel .panel-heading, .aifly-panel [role="log"] { max-width: 72ch; margin-inline: auto; width: 100%; }
 @media (max-width: 820px) { .chat-resize-handle { display: none; } }
 @media (prefers-reduced-motion: reduce) { .chat-resize-handle::after { transition: none; } }
+/* 1c-a A (REQ-207..216): graphite layers, lateral contact shadow with light edge, compact honest header. */
+.workspace-shell .aifly-panel { background: var(--color-canvas); border-left: 0; box-shadow: inset 1px 0 0 color-mix(in srgb, var(--color-text-primaer) 8%, transparent), -24px 0 48px -24px color-mix(in srgb, var(--color-canvas) 90%, transparent); }
+.workspace-shell .aifly-panel .panel-topstrip { display: none; }
+.workspace-shell .aifly-panel .panel-heading { min-height: var(--space-8); padding: var(--space-2) var(--space-5); }
+.panel-status { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-size: var(--type-small-size); line-height: 1.5; color: var(--color-text-tertiaer); }
+.panel-status[data-state="connected"] .connection-indicator { background: var(--color-semantik-erfolg); }
+.panel-status[data-state="connecting"] .connection-indicator { background: var(--color-brand-cyan); }
+.workspace-shell .aifly-panel .conversation { background: var(--color-graphit-800); margin: 0 var(--space-2); border-radius: var(--radius-karte); }
+.workspace-shell .aifly-panel .composer-area { background: var(--color-graphit-650); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-text-primaer) 6%, transparent); padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom)); }
+.workspace-shell .aifly-panel .composer { background: var(--color-canvas); box-shadow: none; border-color: transparent; }
+.workspace-shell .aifly-panel .composer:focus-within { outline: 2px solid var(--color-brand-cyan); outline-offset: 2px; }
+.workspace-shell .aifly-panel :focus-visible { outline: 2px solid var(--color-brand-cyan); outline-offset: 2px; }
+.workspace-shell .aifly-panel .welcome-card { gap: var(--space-3); }
+.workspace-shell .aifly-panel .welcome-body { margin-bottom: 0; }
+.workspace-shell .aifly-panel .welcome-eyebrow-row { margin-top: 0; }
+.workspace-shell .aifly-panel .action-options { margin-top: 0; }
+.workspace-shell .aifly-panel .action-option { border-bottom: 0; }
+.workspace-shell .aifly-panel .orientation-message { border-top: 0; }
+.workspace-shell .aifly-panel .orientation-message.role-user { border: 0; background: var(--color-graphit-650); }
+@media (max-width: 820px) { .header-actions .compact { display: none; } .workspace-shell .aifly-panel { width: 100%; } }

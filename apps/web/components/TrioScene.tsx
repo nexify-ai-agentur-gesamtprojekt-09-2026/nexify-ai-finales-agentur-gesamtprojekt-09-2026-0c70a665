@@ -50,6 +50,7 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  const [failed,setFailed]=useState(false);
  const [time,setTime]=useState(0);
  const [duration,setDuration]=useState(0);
+ const knownDuration=Number.isFinite(duration)&&duration>0;
  const [clip,setClip]=useState<'poster'|'intro'|'loop'>('poster');
  const [clipFailed,setClipFailed]=useState(false);
  const lastCueEnd=scene.cues[scene.cues.length-1].end;
@@ -191,15 +192,15 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
    onSeeked={()=>syncLoopToMaster(audioRef.current?.currentTime||0)}
    onPause={()=>{setPlaying(false);if(!audioRef.current?.ended)freezeLoop();}}
    onEnded={()=>{setPlaying(false);setSpeaker(null);setPhase('ended');freezeLoop();}} onError={()=>{setFailed(true);setPlaying(false);}}/>
-  <div className="trio-meta">
-   <input className="trio-progress" type="range" min="0" max={duration||1} step="0.1" value={time} aria-label={t.position} disabled={!ready||failed} onChange={e=>{const v=Number(e.target.value);if(audioRef.current)audioRef.current.currentTime=v;if(phase==='idle')setPhase('entering');sync(v);syncLoopToMaster(v);}} data-testid={`${testId}-progress-slider`}/>
-   <span className="trio-time" data-testid={`${testId}-time`}>{clock(time)} / {clock(duration)}</span>
+  <div className="trio-meta" data-duration={knownDuration?"known":"unknown"}>
+   {knownDuration&&<input className="trio-progress" type="range" min="0" max={duration||1} step="0.1" value={time} aria-label={t.position} disabled={!ready||failed} onChange={e=>{const v=Number(e.target.value);if(audioRef.current)audioRef.current.currentTime=v;if(phase==='idle')setPhase('entering');sync(v);syncLoopToMaster(v);}} data-testid={`${testId}-progress-slider`}/>}
+   {(knownDuration||time>0)&&<span className="trio-time" data-testid={`${testId}-time`}>{knownDuration?`${clock(time)} / ${clock(duration)}`:clock(time)}</span>}
    <details className="trio-transcript" data-testid={`${testId}-transcript`}><summary data-testid={`${testId}-transcript-toggle`}>{t.transcript}</summary>
     {scene.cues.map((cue,i)=><p key={i} lang="de" data-testid={`${testId}-transcript-line-${i}`}><strong>{speakerNames[cue.speaker]}: </strong>{cue.text}</p>)}
    </details>
   </div>
   <p className="trio-status" role="status" data-testid={`${testId}-status-text`}>
-   {failed?t.error:!ready&&playing?t.loading:reduced?t.reduced:phase==='ended'?t.ended:locale!=='de'?t.spokenIn:''}
+   {failed?t.error:(!ready||!knownDuration)&&playing?t.loading:reduced?t.reduced:phase==='ended'?t.ended:locale!=='de'?t.spokenIn:''}
    {failed&&<ActionButton variant="secondary" className="trio-control trio-retry" onClick={()=>{setFailed(false);audioRef.current?.load();}} data-testid={`${testId}-retry`}>{t.retry}</ActionButton>}
   </p>
  </div>;
