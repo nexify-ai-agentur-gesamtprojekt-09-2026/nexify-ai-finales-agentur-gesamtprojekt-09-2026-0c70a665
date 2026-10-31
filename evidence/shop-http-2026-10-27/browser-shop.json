@@ -335,7 +335,7 @@
     "apps/web/components/PublicExperience.tsx": "24db69babb871c62e303a19728dc267ab6ed8dbc6bf237df84b314f0008139c4",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
     "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
-    "apps/web/components/Workspace.tsx": "c6e85ff5d54764ccddff012f472e64ecb57e74aa6d15a4d7be3e94328fe58472",
+    "apps/web/components/Workspace.tsx": "66635bfc84ab930e130728fcf951c8059f75523eb78dd80624b4fe25e4da3167",
     "apps/site/src/main.tsx": "04b19229b2aa3d288628777df09a1d866e786728c3de37e7f43173d87a3ceefa",
     "apps/site/tests/browser-shop.mjs": "e33bf3b235742524d0553d8e9b271ad92117a1deeba4cd59fe9e81100e006333",
     "apps/site/tests/fixtures/shop-server.py": "fac5b80427ec919bfc2102150e21af0162252e19466cda6239414a104fab9ac6"
