@@ -1,16 +1,26 @@
 # TEILEKLAR Phase 1 regression: health, auth (register/login/logout/lockout/reset), roles, admin settings/import, cart, workshops
 import os
+import secrets
 import uuid
 
 import pytest
 import requests
 
 BASE_URL = os.environ["PREVIEW_PUBLIC_ORIGIN"].rstrip("/")
-ADMIN = {"email": "admin@teileklar.test", "password": "Admin-d9d42034"}
-CUSTOMER = {"email": "kunde@teileklar.test", "password": "Kunde-ebecd35a"}
+# No fixed passwords in the repo: the customer is registered per run; the admin account comes from optional test env vars.
+ADMIN = {"email": os.environ.get("TEILEKLAR_TEST_ADMIN_EMAIL", ""), "password": os.environ.get("TEILEKLAR_TEST_ADMIN_PASSWORD", "")}
+CUSTOMER = {"email": f"qa+kunde-{uuid.uuid4().hex[:8]}@example.org", "password": secrets.token_urlsafe(16)}
+
+
+@pytest.fixture(scope="session", autouse=True)
+def customer_account():
+    r = requests.post(f"{BASE_URL}/api/auth/register", json={**CUSTOMER, "name": "QA Kunde"}, timeout=20)
+    assert r.status_code == 201, r.text
 
 
 def login(creds):
+    if creds is ADMIN and not (ADMIN["email"] and ADMIN["password"]):
+        pytest.skip("TEILEKLAR_TEST_ADMIN_EMAIL/PASSWORD not set")
     s = requests.Session()
     r = s.post(f"{BASE_URL}/api/auth/login", json=creds, timeout=20)
     assert r.status_code == 200, r.text
@@ -81,7 +91,7 @@ class TestAuth:
         assert r.status_code == 429
 
     def test_forgot_password_generic(self):
-        for e in ("kunde@teileklar.test", "nobody-xyz@example.org"):
+        for e in (CUSTOMER["email"], "nobody-xyz@example.org"):
             r = requests.post(f"{BASE_URL}/api/auth/forgot-password", json={"email": e}, timeout=20)
             assert r.status_code == 200 and r.json()["ok"] is True
 
