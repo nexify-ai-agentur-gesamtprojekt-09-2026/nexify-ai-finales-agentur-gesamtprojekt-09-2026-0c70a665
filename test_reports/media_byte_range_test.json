@@ -281,7 +281,7 @@
   "http_tests": [
     {
       "name": "GET mp3 with If-Range",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
       "method": "GET",
       "range_header": "bytes=0-1",
       "if_range": "some-etag",
@@ -314,7 +314,7 @@
     },
     {
       "name": "HEAD mp3 no range",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
       "method": "HEAD",
       "range_header": null,
       "expected_status": 200,
@@ -346,7 +346,7 @@
     },
     {
       "name": "HEAD mp4 no range",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
       "method": "HEAD",
       "range_header": null,
       "expected_status": 200,
@@ -378,7 +378,7 @@
     },
     {
       "name": "GET mp3 bytes 0-1",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
       "method": "GET",
       "range_header": "bytes=0-1",
       "expected_status": 206,
@@ -411,7 +411,7 @@
     },
     {
       "name": "GET mp4 bytes 0-1",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
       "method": "GET",
       "range_header": "bytes=0-1",
       "expected_status": 206,
@@ -444,7 +444,7 @@
     },
     {
       "name": "GET mp3 suffix -100",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
       "method": "GET",
       "range_header": "bytes=-100",
       "expected_status": 206,
@@ -477,7 +477,7 @@
     },
     {
       "name": "GET mp4 suffix -100",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
       "method": "GET",
       "range_header": "bytes=-100",
       "expected_status": 206,
@@ -510,7 +510,7 @@
     },
     {
       "name": "GET mp3 open from 1000",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
       "method": "GET",
       "range_header": "bytes=1000-",
       "expected_status": 206,
@@ -543,7 +543,7 @@
     },
     {
       "name": "GET mp4 open from 1000",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
       "method": "GET",
       "range_header": "bytes=1000-",
       "expected_status": 206,
@@ -576,7 +576,7 @@
     },
     {
       "name": "GET mp3 out of bounds",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-review/welcome-elevenlabs-v4.mp3",
       "method": "GET",
       "range_header": "bytes=999999999-999999999",
       "expected_status": 416,
@@ -609,7 +609,7 @@
     },
     {
       "name": "GET mp4 out of bounds",
-      "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
+      "url": "https://fresh-sync--3on01101.preview.emergentagent.com/media/home-loops/welcome-loop.mp4",
       "method": "GET",
       "range_header": "bytes=999999999-999999999",
       "expected_status": 416,

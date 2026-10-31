@@ -27,6 +27,18 @@ COPY-17 copy is moved to Phase 1b; shop, checkout and auth use only factual func
 - GitHub workflow `.github/workflows/vercel-deploy.yml`: gated by `make check && make test`, deploy is opt-in via `VERCEL_CI_DEPLOY`.
 - F-22 prepared: policy use case `product_enrichment` (ds/deepseek-v4-pro, high, no fallback).
 
+## Implemented (2026-10-31, later the same day)
+- Phase 1 extension: Resend outbox. Mails: order confirmation, internal new-order, welcome, reset, workshop receipt, in-progress/shipped.
+- Order timeline with "Was passiert als Nächstes" and admin order status (tracking number).
+- Checkout shows seller and delivery countries (fakten.json); TEILEKLAR AGB/Widerruf incl. Muster-Widerrufsformular on /teileklar/rechtliches.
+- Phase 1b (WIP, stopped by coordination change):
+  - docs/content/seiten-logik-audit.md
+  - Contact and partner requests via /api/requests
+  - Fitment checklist, tyre calculator, honest placeholders
+  - Removed dead ShopPanel calls
+  - Resizable docked chat
+- HEAD f0279a1 on branch phase1/teileklar-shop-auth-vercel-ci, not pushed.
+
 ## Blockers
 - BigBuy API: 401 Invalid Token. BigBuy FTP: 530 Login incorrect. The catalog has 0 products.
 - RESEND_API_KEY / RESEND_FROM_ADDRESS are missing, so reset mails are not sent.
@@ -38,3 +50,10 @@ COPY-17 copy is moved to Phase 1b; shop, checkout and auth use only factual func
 - P1: Phase 1b: full copy concept for all pages.
 - P1: Regenerate browser evidence.
 - P2: Phase 2 F-22: product enrichment via router; images processed deterministically into object storage.
+
+## 2026-10-31 Phase-1 completion package (HEAD 76c3bad)
+- Truthful status copy (empty catalog, directory workshops not verified partners), chat loading state, TEILEKLAR account scope label.
+- Preview-only frame-ancestors via ALLOW_EMERGENT_PREVIEW_FRAME (pod env); otherwise X-Frame-Options DENY, with tests.
+- Blocked: BigBuy API access_denied, FTP ftp_login_incorrect; catalog 0 products.
+- Open: admin anonymous 403 vs 401 decision; full make test failures pre-existing; test_credentials.md missing.
+
