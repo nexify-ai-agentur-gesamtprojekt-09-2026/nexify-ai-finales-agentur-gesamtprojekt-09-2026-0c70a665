@@ -167,7 +167,8 @@ def load_existing(binding: Binding):
         os.environ["DB_NAME"] = binding.namespace
     os.environ.setdefault("GATEWAY_PORT", "0")
     service_root = Path(__file__).resolve().parent
-    helper_root = service_root.parent / "agent-gateway"
+    bundled_helper = service_root / "vercel_support"
+    helper_root = bundled_helper if (bundled_helper / "bigbuy_get.py").is_file() else service_root.parent / "agent-gateway"
     if str(service_root) not in sys.path:
         sys.path.insert(0, str(service_root))
     if str(helper_root) not in sys.path:

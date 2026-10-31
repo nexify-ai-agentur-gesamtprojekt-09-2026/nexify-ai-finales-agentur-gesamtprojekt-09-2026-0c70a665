@@ -91,10 +91,35 @@ Produktionsdatenbank, kein Provider, keine Kunden-/Passwortdaten. Der bisherige
 Root-stdlib-Testjob wird nicht still um neue Pflichtabhängigkeiten erweitert;
 diese Tests sind ausdrücklich mit dem Service-Lock auszuführen.
 
-Nextbuild: pnpm --filter @nexify/web build. Vercel-Services-Lokaltest nach
-bestätigter passender bestehender CLI: vercel dev -L. Das ist hier noch kein
-bestandener Services-Build. Frühere Vitekomponenten-/UIbelege ersetzen weder
-Next/Backend-Ingress noch den aktuellen Release-SHA.
+Nextbuild: pnpm --filter @nexify/web build ist an diesem unveränderten
+Frontend erfolgreich gelaufen (Next16.4.3/Node22.23.4/pnpm12.15.0). VercelCLI65.2.0
+validiert die Konfiguration und erkennt beide Services ohne Fehler/Warnungen.
+Die explizite runtime-Angabe python3.12 wurde vom CLI-Servicedetektor abgewiesen;
+stattdessen erkennt framework=fastapi die Runtime und .python-version pinnt3.12.
+
+vercel dev --local --listen 127.0.0.1:3019 --non-interactive startete beide
+Services ohne Projektlink/Auth/ENV-Pull. Lokaler GET: Frontend /200; Shophealth
+und Produkte503 project_binding_unverified; /api/auth/me503 payment_mode_unbound;
+/api/agent-chat405 vom Nextservice. Kein konfigurierter Checkout-/Providerbeleg.
+CLI-Selbstupdate meldete zusätzlich einen npm-dist-tags-Fetchfehler; beide
+Services und das gemessene Routing liefen trotzdem. Lokale Prozesse danach beendet.
+
+Der tatsächliche @vercel/python28.0.1-Builder erzeugte ein Python3.12-Function-ZIP
+mit984Dateien, ohne absolute oder Elternpfade. Entry, Checkout, Mailer und Helper
+sind bytegleich mit den geprüften Quellen. Lokales Builderresultat ersetzt keinen
+providerseitigen Plattformbuild oder Team-/Deploycheck.
+
+Der reproduzierbare lokale Buildercheck liegt unter
+apps/shop-api/tests/verify_vercel_bundle.cjs. VERCEL_TOOLING_ROOT verweist nur
+auf eine isolierte Installation von vercel@65.2.0 aus der offiziellen Registry.
+Der Check installiert/authentifiziert/deployt nichts; er erzeugt ausschließlich
+.local/vercel-bundle-check/{report.json,files.json,function.zip} und prüft
+Archivpfade sowie bytegleiche zentrale Quellen. Runtime-Buildpakete werden
+durch den offiziellen Builder aus den gesperrten Anwendungsrequirements installiert.
+
+```text
+VERCEL_TOOLING_ROOT=/path/to/isolated/vercel-install node apps/shop-api/tests/verify_vercel_bundle.cjs
+```
 
 ## Vor tatsächlichem Release und Rollback
 
@@ -102,9 +127,14 @@ Next/Backend-Ingress noch den aktuellen Release-SHA.
    abgleichen. Rootprojektdaten und vorhandene Build-/Teamrechte rücklesen.
 2. Neues Namespace-/Schema ausschließlich nach obiger Metadatenprüfung im
    freigegebenen Store kontrolliert vorbereiten. Kein Produktionsimport/Seed.
-3. Vercel muss den gemeinsamen Pythonhelper apps/agent-gateway/bigbuy_get.py
-   im Shopbundle enthalten (functions.includeFiles); ebenso die gemeinsamen
-   Repoquellen des Nextbuilds. Lokale Existenz ist kein Vercel-Artefaktnachweis.
+3. Der Shop-Buildcommand python3 prepare_vercel.py prüft den kanonischen
+   Helper apps/agent-gateway/bigbuy_get.py auf den gepinnten SHA und kopiert ihn
+   ohne Ausführung nach vercel_support/bigbuy_get.py. includeFiles bindet diesen
+   Service-internen Pfad ein. Ein Elternpfad in includeFiles war tatsächlich
+   nicht ZIP-fähig und ist entfernt. Keine manuelle Codekopie im Git. Der
+   Plattformbuild muss den kanonischen Helper als Buildinput verfügbar haben;
+   bei fehlendem/geändertem Input scheitert die Vorbereitung sichtbar. Die
+   gemeinsame Next-Quellauflösung und tatsächliche Plattformartefakte verifizieren.
 4. Gezieltes Routing, TLS/Cookies, Owner-/Role-Negativfälle, Preis-/Provider-
    Sperren, Outbox-Recovery und Entwürfe am exakten bereitgestellten Kandidaten
    prüfen. Keine echte Zahlung/Mail ohne passenden Testauftrag.

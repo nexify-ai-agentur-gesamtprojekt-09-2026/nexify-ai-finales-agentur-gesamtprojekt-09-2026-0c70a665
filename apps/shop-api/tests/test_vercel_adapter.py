@@ -5,6 +5,7 @@ import importlib.util
 import json
 import os
 import sys
+import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -217,11 +218,36 @@ class DispatchTests(unittest.TestCase):
                         sys.modules.pop(name, None)
 
 
+class HelperPackagingTests(unittest.TestCase):
+    def test_only_byte_identical_canonical_helper_is_staged_without_execution(self):
+        spec = importlib.util.spec_from_file_location('prepare_shop_service', ROOT/'apps/shop-api/prepare_vercel.py')
+        prepare = importlib.util.module_from_spec(spec); spec.loader.exec_module(prepare)
+        with tempfile.TemporaryDirectory() as temp:
+            service = Path(temp)/'apps/shop-api'; service.mkdir(parents=True)
+            source = service.parent/'agent-gateway/bigbuy_get.py'; source.parent.mkdir()
+            canonical = (ROOT/'apps/agent-gateway/bigbuy_get.py').read_bytes()
+            source.write_bytes(canonical)
+            target = prepare.prepare(service)
+            self.assertEqual(target.read_bytes(), canonical)
+            self.assertEqual(target.relative_to(service).as_posix(), 'vercel_support/bigbuy_get.py')
+            source.write_text('raise RuntimeError("must never execute")')
+            with self.assertRaisesRegex(RuntimeError, 'source changed'):
+                prepare.prepare(service)
+            self.assertEqual(target.read_bytes(), canonical)
+            missing = Path(temp)/'other/shop-api'; missing.mkdir(parents=True)
+            with self.assertRaisesRegex(RuntimeError, 'source missing'):
+                prepare.prepare(missing)
+
+
 class RoutingTests(unittest.TestCase):
     def test_services_keep_headers_and_only_owned_api_prefixes(self):
         config = json.loads((ROOT/'vercel.json').read_text())
         self.assertEqual(config['services']['frontend']['root'], 'apps/web')
         self.assertEqual(config['services']['shop']['entrypoint'], 'vercel_app:app')
+        self.assertNotIn('runtime', config['services']['shop'])
+        self.assertEqual(config['services']['shop']['buildCommand'], 'python3 prepare_vercel.py')
+        self.assertEqual(config['services']['shop']['functions']['vercel_app.py']['includeFiles'], 'vercel_support/bigbuy_get.py')
+        self.assertEqual((ROOT/'apps/shop-api/.python-version').read_text().strip(), '3.12')
         for field in ('framework','functions','buildCommand','installCommand','outputDirectory'):
             self.assertNotIn(field, config)
         rules = config['rewrites']

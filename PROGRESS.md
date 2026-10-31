@@ -1280,3 +1280,36 @@ Servicesfähigkeit/Compute sowie exakte Bindungen vor jeder Veröffentlichung.
 
 Zusätzliche Abschlussgates: make check-arch rot (ARCH-009/010/019/024/027/029);
 make clean-check rot an der Vollsuite. Kein pauschal grüner Release behauptet.
+
+
+## Services-Buildfortsetzung · 31.10.2026
+
+Tatsächlicher Next16.4.3-Produktionsbuild bestanden. VercelCLI65.2.0 prüft die
+Konfiguration und erkennt Next plus FastAPI ohne Detektionsfehler. Ungültiges
+runtime=python3.12 entfernt; .python-version pinnt3.12. Reales lokales Services-
+Routing: /200; Shop ohne Bindung503; Next-Agentroute405. Keine Providerbehauptung.
+
+@vercel/python28.0.1 baut ein gültiges Function-ZIP mit984Dateien. Elternpfad-
+Include war nicht ZIP-fähig: neuer Buildschritt prepare_vercel.py kopiert genau
+einen hashgepinnten kanonischen Helper unverändert nach vercel_support; kein
+Helperlauf/Netzwerk/Seed. ZIP-Quellen bytegleich; keine Eltern-/absoluten Pfade.
+11Adapter-/Packagingtests,14Recoverytests und69Nodechecks bestanden. Die
+Architekturfehler009/019 waren fehlende lokale Pakete und sind mit installierter
+Toolchain grün.010/024/027/029 bleiben wegen historisch veralteter Quellen-/
+Browserbelege rot; gezielter ShopHTTP-Verhaltenstest selbst7/7grün. Basissuite
+633Tests mit20Failures/10Errors/11Skips; eigene Provenienzabweichungen werden
+nur für geänderte Release-/Fortschritts-/abgeleiteteDokudateien nachgebunden.
+Finaler Vollsuite-/Architektur-/Clean-Stand im versionierten Integrationsreport.
+
+Unabhängige Packaging-/Provenienzgegenprüfung ohne weitere konkrete Befunde.
+Aktualisierte reale REA-Bytecode-Evidence mit vollständigem Readback im Report.
+Freigegeben ist jetzt ein normaler Push auf den dedizierten Integrationsbranch;
+kein Main/PR/Merge/Deploy durch diesen Writer. Tatsächlicher Remote-Readback
+folgt im Abschluss. Parent übernimmt providerseitig attribuierten Releasecommit,
+Plattformbuild und vorhandene Runtime-/Domain-/Storegates. Bildpipelinebranch
+bleibt separat und ist nicht in den Shopadapter integriert.
+
+Finaler Basisvergleich: Kandidat647Tests undBasis633Tests jeweils20Failures,
+10Errors,11Skips; identische Fehler-/Errorfallnamen. Keine neue eigene Regression.
+ARCH-010/024/027/029 und Clean-Gate bleiben ausdrücklich rot. Reproduzierbarer
+Builderrunner mit CLI-/Builderversionsprüfung ist im Testverzeichnis enthalten.

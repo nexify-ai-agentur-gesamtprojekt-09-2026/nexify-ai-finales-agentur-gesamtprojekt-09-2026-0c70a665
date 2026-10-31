@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138",
-    "PROGRESS.md": "be8a0b9e8a46477bd1e97d1a8564314261c1909b24b17051e14cd0d94ca1b4d8",
+    "PROGRESS.md": "be630e4131247da5d491a9a3d50d89f57c27269c68aa6a419d4f93a8a353e51c",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "028e7339ba26fb30e70848aeb19a859edbfdb5c90a72b7b477d122fc94ecfe07",
+    "docs/contracts/requirements-reconciliation.md": "ec4f8018d087f902bb6d5732cef50be21fdb76b6a571741e1b6d6d960c5ed6c0",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1532,7 +1532,7 @@
     "tools/lint.mjs": "7e0ac19d6e10f703b66b840d5aa7beaad498e32115c01ce1606d08b754ee97b0",
     "tsconfig.json": "4dfc64b7b6309f9e4a86f23fe10bf6535ba54fd61586a0657f304c5006ae202d",
     "evidence/configuration-2026-10-28/interim-scenes-browser.json": "317ba1b88dadc122af4a0641fd769728fc187b06d04c6be5ad33237c9c7fc03a",
-    "vercel.json": "aadfeead08cd84ae9aece5015f721aa264c53db002619f8f39f57e67b482704a",
+    "vercel.json": "27b4e985f7a8b7d37fea3b32a19d8f31dc19b4217ca3efc47bd317cb1c34dea6",
     "apps/site/tests/csp-reporting.test.mjs": "b5c153edda8cbe047195d96ea01728e8993c510da2211081132f2e357b60127f",
     "apps/site/tests/browser-csp-policy.mjs": "4a44ead995c998c5e882a69a33b25518757787fd3fd68ef939343fa228528e9f",
     "apps/site/tests/fixtures/csp-enforcement-baseline.json": "c44d95bf33dd6ae5257073d29379c8b13bec6911f669c4de858478debaf7cf24",
@@ -1564,7 +1564,17 @@
     "config/identity-hero.json": "2a7c121508a2c6c39ddd1c1961f8b44a1e2b216b0dc10fe43cd4defab18ca556",
     "apps/site/tests/browser-identity-hero.mjs": "359114f9be686db9e0acddb3ea8be2bfb639b24d397889a247f81a2e2863fba5",
     "docs/contracts/identity-hero-v1.md": "480683dc3b1ba85c2930e29ee0cf029a7ce111298990dc66dcabb2e7557d1ba7",
-    "packages/tokens/tokens.css": "19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544"
+    "packages/tokens/tokens.css": "19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544",
+    "apps/shop-api/vercel_app.py": "b79ef17659ff9abc32b424e94ab83b94e8cd7e6b9a0841351a1f9c73a505e901",
+    "apps/shop-api/requirements.in": "d5acb47415054efd8327839cb65b3be04333acba9d3d7ba2fe991d0187fd5963",
+    "apps/shop-api/requirements.txt": "15e850c9f224f5c21528d2dc6015cc5c79437e8202adcee5dbcb4508eba8ae29",
+    "apps/shop-api/tests/test_vercel_adapter.py": "05b171f0bb54f768fcc5388822c36086f8ffb03f7c9fe9bfdb956b649cc4e04d",
+    "docs/deployment/services-namespace-plan-2026-10-31.json": "fc92870b22242b09a70d7fc28fdb8ab8e6f63247803819bf5aaddc7534a2dd95",
+    "docs/deployment/services-release-2026-10-31.md": "2c4c6a6bf9df22a90dcffaac67218ea1b3d6d9f2d31323c45d1dafedb6211b1c",
+    "apps/shop-api/.python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+    "apps/shop-api/.gitignore": "ee81c565658d897cf0f71b1a56c838d992b89003b99e01ebdbc392dc2e5f1a90",
+    "apps/shop-api/prepare_vercel.py": "49dcf8e433b4041c97c31feb45bdd7872e420408bc1edb22de3f0bd084d6a9d8",
+    "apps/shop-api/tests/verify_vercel_bundle.cjs": "a249aa004128794c2592b1cdd6e1bfaef41b53b0f375e96444fa9c13c0bd8a14"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2154,6 +2164,15 @@
         "acquisition": "parent_verified_excerpt",
         "original_seen_here": false,
         "scope": "accepted original identity composition as interim Hero until actual approved videos;local integration/tests only,no push/release grant"
+      },
+      {
+        "id": "SRC-SERVICES-RELEASE-20261031",
+        "source_date": "2026-10-31",
+        "locator": "Parent release-integration mandate; canonical base66185f1; local a3e95d3379ecf8aa61e6de04ee2c0fe10a6867d4",
+        "role": "bounded Services deployment integration and targeted provenance correction",
+        "acquisition": "parent_verified_excerpt",
+        "original_seen_here": false,
+        "scope": "New local runtime adapter/configuration only; no UI evidence refresh, no production acceptance"
       }
     ],
     "requirements": [
@@ -3462,6 +3481,38 @@
         "next_step": "Releaseownerreviewsexactcandidateandseparatesactualpublicfunctional/domaingatesfromindependentMail/Brain/Portalwork;noautomaticpushorproductionpromotion.",
         "completion_criterion": "ApprovedHeroisrenderedfromexacttestedreleaseontheconfirmedtargetwithoriginalidentityandresponsive/keyboard/textresizechecks;separateactualvideoacceptancewhenfilmsreplaceimages.",
         "owner_area": "existing_web_writer / D07;releaseowner for external delivery"
+      },
+      {
+        "requirement_id": "REC-SERVICES-RELEASE-01",
+        "acceptance_case_id": null,
+        "source_ids": [
+          "SRC-SERVICES-RELEASE-20261031",
+          "SRC-REPO-POLICY"
+        ],
+        "applicable_requirement": "Integrate existing Next frontend and isolated FastAPI service on canonical base, preserving routes and existing authorization; no startup writes.",
+        "interpretation": "Bounded deployment adapter; existing historical browser proofs do not cover this Services configuration.",
+        "implementation_files": [
+          "vercel.json",
+          "apps/shop-api/vercel_app.py",
+          "apps/shop-api/requirements.in",
+          "apps/shop-api/requirements.txt",
+          "apps/shop-api/tests/test_vercel_adapter.py",
+          "docs/deployment/services-namespace-plan-2026-10-31.json",
+          "docs/deployment/services-release-2026-10-31.md",
+          "apps/shop-api/.python-version",
+          "apps/shop-api/.gitignore",
+          "apps/shop-api/prepare_vercel.py",
+          "PROGRESS.md",
+          "docs/contracts/requirements-reconciliation.md",
+          "apps/shop-api/tests/verify_vercel_bundle.cjs"
+        ],
+        "test_evidence": "11 adapter/packaging +14 recovery fake tests; Next16.4.3 production build;69 Node tests; VercelCLI65.2.0 validates/detects both services; local ingress frontend200/backend503; official Python28.0.1 builder produces valid ZIP with byte-identical helper/entry/checkout/mailer. REA6.8.0 bytecode inventory with complete readback; independent source review.",
+        "actual_delivery": "local_candidate_not_deployed",
+        "full_requirement_accepted": false,
+        "gap": "Provider-side platform build, deployed bundle and actual namespace/index/runtime/provider/tenant E2E remain unverified. Existing unrelated browser/requirements evidence remains stale.",
+        "next_step": "Push tested dedicated branch; Parent reads exact tree and creates owner-attributed integration commit for actual platform build. No production store changes or deployment by this local task.",
+        "completion_criterion": "Exact release build and ingress verified on intended existing project, with namespace/provider/tenant gates preserved.",
+        "owner_area": "release integration owner; Parent owns platform publication"
       }
     ],
     "scope_note": "Initial sourced register awaiting further parent-read originals. Page policy and local files are not substitutes for missing original chat transcripts.",

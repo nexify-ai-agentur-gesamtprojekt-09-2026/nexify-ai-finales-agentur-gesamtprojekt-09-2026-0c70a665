@@ -24,7 +24,6 @@
     "shop": {
       "root": "apps/shop-api",
       "framework": "fastapi",
-      "runtime": "python3.12",
       "entrypoint": "vercel_app:app",
       "functions": {
         "vercel_app.py": {
@@ -32,9 +31,10 @@
           "regions": [
             "fra1"
           ],
-          "includeFiles": "../agent-gateway/bigbuy_get.py"
+          "includeFiles": "vercel_support/bigbuy_get.py"
         }
-      }
+      },
+      "buildCommand": "python3 prepare_vercel.py"
     }
   },
   "headers": [
