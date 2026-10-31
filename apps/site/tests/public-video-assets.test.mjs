@@ -69,20 +69,20 @@ async function fixture(t) {
   return {root, publicRoot, registry, input, execute, addApproved, approve, publicFile};
 }
 
-test('actual registry covers 46 routes and projects only 36 empty public entries', async () => {
+test('actual registry covers 49 routes and projects only 39 empty public entries', async () => {
   const output = await prepareVideoAssets(registryTemplate, sitemap, {publicRoot: path.join(repository, 'apps/web/public'), repositoryRoot: repository, explainerPages});
-  assert.equal(registryTemplate.pages.length, 46);
+  assert.equal(registryTemplate.pages.length, 49);
   assert.equal(registryTemplate.films.length, 7);
   assert.equal(registryTemplate.films.filter(f => f.bound_page_id !== null).length, 6);
   assert.equal(registryTemplate.films.find(f => f.scope === 'internal').bound_page_id, null);
-  assert.equal(Object.keys(output.byPage).length, 36);
-  assert.equal(registryTemplate.modules.length, 49);
-  assert.equal(Object.values(output.byModule).reduce((sum, modules) => sum + Object.keys(modules).length, 0), 49);
+  assert.equal(Object.keys(output.byPage).length, 39);
+  assert.equal(registryTemplate.modules.length, 52);
+  assert.equal(Object.values(output.byModule).reduce((sum, modules) => sum + Object.keys(modules).length, 0), 52);
   assert.ok(registryTemplate.modules.every(m => m.film_id === null && m.scene_ids.length === 0));
   assert.ok(Object.values(output.byPage).every(value => Object.keys(value).length === 0));
-  assert.deepEqual(output.coverage, {publicPageCount: 36, publishedLocaleCount: 0, pendingLocaleCount: 108,
-    fullyVideoCovered: false, publicModuleCount: 49, publishedModuleLocaleCount: 0,
-    pendingModuleLocaleCount: 147, completed: false, unresolvedSourceIntegrityGaps: 0});
+  assert.deepEqual(output.coverage, {publicPageCount: 39, publishedLocaleCount: 0, pendingLocaleCount: 117,
+    fullyVideoCovered: false, publicModuleCount: 52, publishedModuleLocaleCount: 0,
+    pendingModuleLocaleCount: 156, completed: false, unresolvedSourceIntegrityGaps: 0});
   const raw = JSON.stringify(output);
   for (const page of sitemap.pages.filter(p => p.access.visibility !== 'public')) {
     assert.equal(raw.includes(page.path), false); assert.equal(Object.hasOwn(output.byPage, page.id), false); assert.equal(Object.hasOwn(output.byModule, page.id), false);
@@ -296,7 +296,7 @@ test('approved module clip projects only to its exact module without route or si
   assert.deepEqual(out.byModule.home['home-explain-2'], {});
   assert.equal(out.coverage.publishedLocaleCount, 1); // One module is enough for route/locale coverage.
   assert.equal(out.coverage.publishedModuleLocaleCount, 1);
-  assert.equal(out.coverage.pendingModuleLocaleCount, 146);
+  assert.equal(out.coverage.pendingModuleLocaleCount, 155);
   assert.equal(out.coverage.completed, false);
 });
 
