@@ -145,3 +145,8 @@
 .content-supplement>.tk-form,.content-supplement>.tk-notice,.content-supplement>.tk-legal,.content-supplement>.tk-home-entry,.content-supplement>section:not([class*="editorial"]){margin-inline:var(--content-gutter,var(--space-5));margin-block:var(--space-6)}
 .content-supplement>.tk-legal{padding-block:var(--space-2)}
 .tk-check a{display:inline;padding:0;margin:0;min-height:0;text-decoration:underline}
+.tk-shop{align-content:start;padding-bottom:calc(var(--space-8) + var(--space-7))}
+.tk-shop-nav{align-content:flex-start}
+.tk-tag{justify-self:start;width:fit-content}
+.tk-ws-detail>div{container-type:inline-size}
+@container (max-width:480px){.tk-facts{grid-template-columns:1fr;row-gap:var(--space-1)}.tk-facts dd{margin-bottom:var(--space-3)}}

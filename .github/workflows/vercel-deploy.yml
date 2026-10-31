@@ -2,12 +2,9 @@ name: Vercel Deploy
 # Gate: make check && make test must pass before any Vercel build/deploy.
 # Opt-in: deploys only run when repository variable VERCEL_CI_DEPLOY == 'true'
 # (keeps Vercel Git auto-deploy and project settings untouched until go-live).
-# Required GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
+# DISABLED: production deploys run via the existing GitHub-Vercel integration on main.
+# Manual dispatch only; no Vercel secrets are requested or configured for this workflow.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

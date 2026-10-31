@@ -138,6 +138,9 @@ class ShopFlow(unittest.TestCase):
 
     def test_roles_markup_and_cart_authority(self):
         self.assertEqual(self.client.get("/api/admin/settings").status_code, 401)
+        self.assertEqual(self.client.get("/api/admin/settings", headers={"Authorization": "Bearer ungueltig-0000"}).status_code, 401)
+        self.assertEqual(self.client.get("/api/admin/settings", headers=self.user_a).status_code, 403)
+        self.assertEqual(self.client.get("/api/admin/settings", headers=self.admin).status_code, 200)
         self.assertEqual(self.client.put("/api/admin/settings", headers=self.user_a, json={"markup_percent": "40", "shipping_cents": 0}).status_code, 403)
         self.assertEqual(self.client.post("/api/admin/import", headers=self.user_a, json={}).status_code, 403)
         self.assertEqual(self.client.get("/api/shop/products/bb-1").json()["price_cents"], 1547)
