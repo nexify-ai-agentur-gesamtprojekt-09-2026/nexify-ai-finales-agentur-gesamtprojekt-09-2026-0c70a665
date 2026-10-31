@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-31T15:10:03.265Z",
+  "observed_at": "2026-10-31T15:36:17.235Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "892c8c8d23556f14cc08e2de6bd5945b8659c9858df4665e0b51e57f5a806975",
     "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
@@ -23,11 +23,11 @@
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
     "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
     "apps/web/components/ExplainerSections.tsx": "8124204256ebd8562efb53f3e7d70efe2bf03a448219160fc44f60327b817c46",
-    "apps/web/components/HomeContent.tsx": "5d0b995513086178dfac69baa88c889ef0dd1ec98a7137f078ba45eba1e44935",
+    "apps/web/components/HomeContent.tsx": "fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136",
     "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
-    "apps/web/components/IdentityHero.tsx": "e528c05af4775acc34f6edc0b6071b2b65f51c2a461f02461cb69c7cdc766dfe",
+    "apps/web/components/IdentityHero.tsx": "d54887ee9c5085f75dea5a3f65385c0275312cb57ad9885ff912d7024814eef8",
     "apps/web/components/InstallInvitation.css": "cb5e290f23a79a29767540098a1cd04a48a87112ecfd83baf3fe370b623b6117",
     "apps/web/components/InstallInvitation.tsx": "27571e28b2a9d3984353c3b971e96f0c5167e0b37ff8b81074047dd78f38d2e8",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
@@ -728,7 +728,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 412,
+        "count": 416,
         "all_doubled": true
       },
       "overflow": false,

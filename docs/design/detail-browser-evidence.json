@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-31T02:09:50.484Z",
+  "recorded_at": "2026-10-31T15:36:16.608Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -51,7 +51,7 @@
     "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
     "apps/site/src/main.tsx": "04b19229b2aa3d288628777df09a1d866e786728c3de37e7f43173d87a3ceefa",
     "apps/web/app/globals.css": "c4b3f0561a5d9e1786d516c6db04de4b9ed1e1053dfb5e721de6082a1d4c0bfc",
-    "apps/web/components/HomeContent.tsx": "5d0b995513086178dfac69baa88c889ef0dd1ec98a7137f078ba45eba1e44935",
+    "apps/web/components/HomeContent.tsx": "fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136",
     "apps/web/components/Workspace.tsx": "66635bfc84ab930e130728fcf951c8059f75523eb78dd80624b4fe25e4da3167",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
     "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb"
@@ -69,7 +69,7 @@
     "apps/site/src/main.tsx": "04b19229b2aa3d288628777df09a1d866e786728c3de37e7f43173d87a3ceefa",
     "apps/web/components/WorkspaceRebuild.css": "c1933759e96b3420d2e35c56a72ee6d9baa1aa23efc7e91ba72cc9fb823522c1",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
-    "apps/web/components/IdentityHero.tsx": "e528c05af4775acc34f6edc0b6071b2b65f51c2a461f02461cb69c7cdc766dfe",
+    "apps/web/components/IdentityHero.tsx": "d54887ee9c5085f75dea5a3f65385c0275312cb57ad9885ff912d7024814eef8",
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
     "config/identity-hero.json": "2a7c121508a2c6c39ddd1c1961f8b44a1e2b216b0dc10fe43cd4defab18ca556",
     "apps/site/tests/browser-identity-hero.mjs": "359114f9be686db9e0acddb3ea8be2bfb639b24d397889a247f81a2e2863fba5",
@@ -140,7 +140,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-31T02:09:50.484Z",
+    "recorded_at": "2026-10-31T15:36:16.608Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
