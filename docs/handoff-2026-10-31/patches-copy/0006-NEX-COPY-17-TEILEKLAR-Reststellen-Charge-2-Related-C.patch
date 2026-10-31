@@ -1,0 +1,258 @@
+From a6e1de170b0f4141cb785c25ecee4cd3d33efb72 Mon Sep 17 00:00:00 2001
+From: emergent-agent-e1 <github@emergent.sh>
+Date: Sat, 31 Oct 2026 02:04:26 +0000
+Subject: [PATCH 6/8] =?UTF-8?q?NEX-COPY-17=20(TEILEKLAR=20Reststellen,=20C?=
+ =?UTF-8?q?harge=202):=20Related-Cards=20+=20Explainer-Satz=20kundentextig?=
+ =?UTF-8?q?=20=C2=B7=20make=20test=20620=20OK=20=C2=B7=20lokal,=20kein=20P?=
+ =?UTF-8?q?ush?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- site-map.json Related-Cards (de/nl/fr/en, beide Vorkommen): "Teil/Fahrzeug beschreiben" statt
+  "Katalog in Kürze"; "Passung vor Kauf fachlich bestätigen" statt "wir stellen sicher, dass ein Teil wirklich passt".
+- page-explainers.json: interne "vorgesehene Werkstattwege/freigegeben angeschlossen/Vorbereitung statt
+  Kauf-/Passungszusage" -> sachlicher Sie-Form-Kundentext; Verfuegbarkeitsgrenze am Punkt.
+- presenter-sources.json site-map-Hash refresh (Guard scharf, nur Inhalt). acceptance-coverage chirurgisch.
+- Evidenz real neu (frischer Next-Build/Preview): critical, text-spacing, consent-ui, legal-footer vite+next,
+  public-experience. Preview-Readback: Negativfaelle entfernt, "Online-Bestellungen nicht moeglich"/"Na KLAR" sichtbar.
+- Reservierte Workspace.tsx/i18n.ts NICHT geaendert -> Uebergabe. OFFEN: AIFly/Pascal-Module, 6 Serviceseiten, BTW, Backend.
+---
+ config/acceptance-coverage.json                  | 14 +++++++-------
+ config/page-explainers.json                      |  6 +++---
+ config/presenter-sources.json                    |  2 +-
+ config/site-map.json                             | 16 ++++++++--------
+ docs/design/detail-browser-evidence.json         |  6 +++---
+ evidence/legal-footer-2026-10-28/browser.json    |  2 +-
+ .../legal-footer-2026-10-28/next-browser.json    |  2 +-
+ .../critical-browser-fresh.json                  |  6 +++---
+ evidence/one-app-2026-10-27/text-spacing.json    |  6 +++---
+ 9 files changed, 30 insertions(+), 30 deletions(-)
+
+diff --git a/config/acceptance-coverage.json b/config/acceptance-coverage.json
+index 9a965cd..a733022 100644
+--- a/config/acceptance-coverage.json
++++ b/config/acceptance-coverage.json
+@@ -1263,10 +1263,10 @@
+     "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
+     "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
+     "config/operating-model.json": "cf06ea67d0ad29812541528b64724f6da456b1da59532003f5d410d0b7662845",
+-    "config/page-explainers.json": "a5130e80d3a7fad48072fab1dc4b5b6b38315ea1894f0d941dc6b76cac77e73f",
++    "config/page-explainers.json": "b55d45c7b4a4e6577d66414a24e4e3a06e1dcdd3782c198f9ea9c582a080738b",
+     "config/presenter-system.json": "cd7728150d92891760ab3adfc236011c03401391ae490a2038e585cf63c27696",
+     "config/selfservice-policy.json": "355ccc200852e6e14087aa55a5dc10ed94e42f1a3222d9818086db393bcbf2ab",
+-    "config/site-map.json": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa",
++    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb",
+     "docs/04-betrieb/freigabe-gate-status.md": "259dad33bdf511e411095e6985794b62d139811721302e9c0aacdc16a8e3ce96",
+     "docs/automation/rea-mcp.md": "001a7ddb3208facfa69dadb790de0cf56759c774e305f307ed09e52ab3c7685b",
+     "docs/contracts/acceptance-decisions.md": "8ca119550a931bec02d93a3f524efce8d92d8d5cfb46c7f9e867177be462a694",
+@@ -1308,7 +1308,7 @@
+     "evidence/one-app-2026-10-27/suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
+     "evidence/one-app-2026-10-27/takeover-runtime-read.json": "cf604539a555287d63aca6d77217ab10b578a39a6d54991ac3367444646a6cf0",
+     "evidence/one-app-2026-10-27/target-size-before.json": "1abda3087a139559ac17188171fd8e5de03c34f41cd5061c72d3a55a97a218db",
+-    "evidence/one-app-2026-10-27/text-spacing.json": "2b7020ffce7d348a123d0fb7172a2451dc160f070703e2920a931ba4a1361e88",
++    "evidence/one-app-2026-10-27/text-spacing.json": "3d698466826c1cc5a0293f048e3f16224ec8c33a5df9163d8fb14d115e1afe83",
+     "evidence/reconciliation-2026-10-27/linked-standards-reference.json": "f20d9e9d8b66d49057c038a17aaea6ce9c8392e92cecbe55ed5594bb0adbaf48",
+     "evidence/reconciliation-2026-10-27/review-asset-inspection.json": "11f5c4eee4527585f607fadec7cec4c99cc10b18228a4f6cb7794bcf46056f2e",
+     "evidence/reconciliation-2026-10-27/route-feature-inventory.json": "fbea71c96cf69f0db41d5f405a8535629a4cfb1c8fd06c270c7267cb4f8495e4",
+@@ -1388,11 +1388,11 @@
+     "docs/contracts/reviewed-delivery.md": "1453ae109ca7b60470bc85b11c58d0a96e5c34cdb5531f510da9d66f50bb0584",
+     ".harness/arch-rules.json": "5fb777e79a34840a3dbe8d8ee08647e1db972e267742f877718746942d32e2a0",
+     "apps/site/tests/public-video-assets.test.mjs": "56a97d110956c566f189401c238cd1ee382ea87130823c6cfd6a77b86d96ecb9",
+-    "docs/design/detail-browser-evidence.json": "4709377b16dfc4caef8db1516d306918b2e93de0375dbec244401955365da79e",
++    "docs/design/detail-browser-evidence.json": "b02e6dacf0112c48afaf92f47ccbeba7168433b7ae80287b14ad12088281fdc3",
+     "config/page-media-registry.json": "bca4a4a7d96cfb5e1230b73caabcc69236c8ccf85274392fa1ec3a655e3aeefd",
+     "apps/site/scripts/public-explainers.mjs": "1a4ebf0ef76c5ec28630862d0c461cb76ded17db275682946ee2e5a9d30cd2c5",
+     "apps/site/scripts/public-video-assets.mjs": "802701213e38f2144990aebe4a9a413f167dace9f26401fb2e684a617b2b766e",
+-    "evidence/one-app-2026-10-27/critical-browser-fresh.json": "4709377b16dfc4caef8db1516d306918b2e93de0375dbec244401955365da79e",
++    "evidence/one-app-2026-10-27/critical-browser-fresh.json": "b02e6dacf0112c48afaf92f47ccbeba7168433b7ae80287b14ad12088281fdc3",
+     "docs/contracts/page-video-integration.md": "d9ee702e324a6633b0bdc6919502869a7312894f105caadc59e2ac5630685886",
+     "apps/web/components/PresenterVideo.tsx": "c9917dcd7f033dab440967595db1a21fafafc3b5c44cfb8b7818fcf11d3ea94f",
+     "evidence/page-videos-2026-10-27/browser-video.json": "6e0b572ded11d9c91e6bdefb066d3e705dbeb32c445c9a20a1740ecae232be24",
+@@ -1538,8 +1538,8 @@
+     "apps/site/tests/fixtures/csp-enforcement-baseline.json": "c44d95bf33dd6ae5257073d29379c8b13bec6911f669c4de858478debaf7cf24",
+     "evidence/csp-report-removal-2026-10-28/browser.json": "9fc4f61d59d825491504aaf45889e74419b9b799d0fd04dac42aeb19b15a8a8e",
+     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363",
+-    "evidence/legal-footer-2026-10-28/browser.json": "b7d6439d50eba1456775ee37ae19e401a26c6b8549ef7bb124517a5f68b74a52",
+-    "evidence/legal-footer-2026-10-28/next-browser.json": "d32b433d3c853d223591b6bab8c525c2ee8c5e43ab43c091a1abc3fbcda8e698",
++    "evidence/legal-footer-2026-10-28/browser.json": "3dc9ebcebeb0bf555ae67ffe4ee4f467896f6bbdce6b416bbea81f569f766cc7",
++    "evidence/legal-footer-2026-10-28/next-browser.json": "94e25cdeba914e06aa4c22909dd73a53ca930486509186b6d87999655d025516",
+     "apps/site/tests/fixtures/mail-workspace.tsx": "fd05a4ba984394bca424d76af4ac5e1093a427f9ed380a009e860360d977de0d",
+     "apps/site/tests/fixtures/mail-workspace-server.py": "c485034408148b652ad7249a5ae33ce6a01c842daa525e884d69ace65c244067",
+     "tests/test_mail_app_backend.py": "e9ce72709fdeb4a4118e0a2693ac185a28709563a136be7507857b0d1c87a89e",
+diff --git a/config/page-explainers.json b/config/page-explainers.json
+index f44daad..3aa117a 100644
+--- a/config/page-explainers.json
++++ b/config/page-explainers.json
+@@ -1381,9 +1381,9 @@
+             "fr": "Relier véhicule, pièce et atelier"
+           },
+           "body": {
+-            "de": "TEILEKLAR führt durch Fahrzeugangaben, Teilesuche und die vorgesehenen Werkstattwege. Beginnen Sie mit dem Fahrzeug und der benötigten Aufgabe. Solange Katalog und Fachabläufe nicht freigegeben angeschlossen sind, bleiben die Ansichten Vorbereitung statt einer Kauf- oder Passungszusage.",
+-            "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en de voorziene garageprocessen. Begin met het voertuig en de gewenste taak. Zolang catalogus en processen niet zijn aangesloten en vrijgegeven, blijven de pagina’s voorbereiding zonder koop- of pasvormtoezegging.",
+-            "fr": "TEILEKLAR relie les informations du véhicule, la recherche de pièces et les parcours atelier prévus. Commencez par le véhicule et le besoin. Sans catalogue et processus validés, les écrans restent préparatoires, sans promesse d’achat ni de compatibilité."
++            "de": "TEILEKLAR führt Sie durch Fahrzeugangaben, Teilesuche und Werkstattkontakt. Beginnen Sie mit Ihrem Fahrzeug und Ihrem Anliegen. Online-Bestellungen sind derzeit nicht möglich; lassen Sie die Teilezuordnung vor dem Kauf fachlich prüfen.",
++            "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en werkplaatscontact. Begin met uw voertuig en uw vraag. Online bestellen is momenteel niet mogelijk; laat de onderdeeltoewijzing vóór de aankoop vakkundig controleren.",
++            "fr": "TEILEKLAR vous guide à travers les informations du véhicule, la recherche de pièces et le contact atelier. Commencez par votre véhicule et votre demande. La commande en ligne n’est pas possible actuellement ; faites vérifier l’affectation des pièces par un professionnel avant l’achat."
+           },
+           "outcome": {
+             "de": "Mit Fahrzeug und Passungsanforderung beginnen.",
+diff --git a/config/presenter-sources.json b/config/presenter-sources.json
+index 4a87789..1effa4c 100644
+--- a/config/presenter-sources.json
++++ b/config/presenter-sources.json
+@@ -12,7 +12,7 @@
+     },
+     {
+       "path": "config/site-map.json",
+-      "sha256": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa"
++      "sha256": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb"
+     },
+     {
+       "path": "docs/01-konzept/gesamtprojektplan.md",
+diff --git a/config/site-map.json b/config/site-map.json
+index a1b80c2..ca2938e 100644
+--- a/config/site-map.json
++++ b/config/site-map.json
+@@ -4030,10 +4030,10 @@
+         "en": "Parts search: in preparation"
+       },
+       "summary": {
+-        "de": "Sagen Sie uns, welches Teil Sie für welches Fahrzeug brauchen. Wir prüfen die Passung und melden uns mit konkreten Optionen und dem besten nächsten Schritt. Die selbstständige Online-Suche im Katalog öffnen wir in Kürze.",
+-        "nl": "Vertel ons welk onderdeel u voor welk voertuig nodig heeft. Wij controleren de pasvorm en komen terug met concrete opties en de beste volgende stap. De zelfstandige online zoekfunctie in de catalogus openen we binnenkort.",
+-        "fr": "Dites-nous quelle pièce vous faut pour quel véhicule. Nous vérifions la compatibilité et revenons avec des options concrètes et la meilleure étape suivante. La recherche en ligne autonome dans le catalogue ouvrira prochainement.",
+-        "en": "The search needs an approved parts inventory. Until then, you can describe your vehicle and the part you need as a request. Matches, prices and delivery times appear only with confirmed catalog data."
++        "de": "Beschreiben Sie das benötigte Teil und Ihr Fahrzeug. Eine vorhandene Teilenummer, Maße oder Fotos können bei der Einordnung helfen. Online-Bestellungen sind derzeit nicht möglich.",
++        "nl": "Beschrijf het benodigde onderdeel en uw voertuig. Een bestaand onderdeelnummer, maten of foto’s kunnen bij de indeling helpen. Online bestellen is momenteel niet mogelijk.",
++        "fr": "Décrivez la pièce nécessaire et votre véhicule. Un numéro de pièce existant, des dimensions ou des photos peuvent aider au classement. La commande en ligne n’est pas possible actuellement.",
++        "en": "Describe the part you need and your vehicle. An existing part number, dimensions or photos can help with the assignment. Online ordering is currently not possible."
+       },
+       "site_context": "teileklar",
+       "sections": [
+@@ -4799,10 +4799,10 @@
+         "en": "Vehicle and verified fit"
+       },
+       "summary": {
+-        "de": "Mit Ihren Fahrzeugdaten stellen wir sicher, dass ein Teil wirklich passt. Unklare Varianten, Maße oder Zubehörfragen klären wir vorab – damit Sie Fehlkäufe vermeiden.",
+-        "nl": "Met uw voertuiggegevens zorgen we dat een onderdeel echt past. Onduidelijke varianten, maten of accessoirevragen verhelderen we vooraf – zodat u miskopen voorkomt.",
+-        "fr": "Grâce à vos données véhicule, nous garantissons qu’une pièce correspond vraiment. Variantes, dimensions ou accessoires incertains sont clarifiés en amont – pour éviter les erreurs d’achat.",
+-        "en": "Without vehicle context, no fit is claimed. Unclear variants, dimensions or accessory requirements must be clarified first. Preparing the request is not yet a confirmed compatibility proof."
++        "de": "Hersteller, Modell, Baujahr und Motorisierung helfen bei der Teilezuordnung. Je nach Ausführung sind weitere Angaben nötig. Lassen Sie die Passung vor dem Kauf fachlich bestätigen.",
++        "nl": "Merk, model, bouwjaar en motorisering helpen bij de onderdeeltoewijzing. Afhankelijk van de uitvoering zijn meer gegevens nodig. Laat de pasvorm vóór de aankoop vakkundig bevestigen.",
++        "fr": "Marque, modèle, année et motorisation aident à l’affectation des pièces. Selon la version, d’autres informations sont nécessaires. Faites confirmer la compatibilité par un professionnel avant l’achat.",
++        "en": "Make, model, year and engine help with the parts assignment. Depending on the version, further details are needed. Have the fit professionally confirmed before purchase."
+       },
+       "site_context": "teileklar",
+       "sections": [
+diff --git a/docs/design/detail-browser-evidence.json b/docs/design/detail-browser-evidence.json
+index 099102b..24d037d 100644
+--- a/docs/design/detail-browser-evidence.json
++++ b/docs/design/detail-browser-evidence.json
+@@ -1,5 +1,5 @@
+ {
+-  "recorded_at": "2026-10-31T01:26:14.738Z",
++  "recorded_at": "2026-10-31T01:56:19.100Z",
+   "checks": [
+     "account_control_fallback_and_auth_routes_present",
+     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
+@@ -54,7 +54,7 @@
+     "apps/web/components/HomeContent.tsx": "5d0b995513086178dfac69baa88c889ef0dd1ec98a7137f078ba45eba1e44935",
+     "apps/web/components/Workspace.tsx": "c6e85ff5d54764ccddff012f472e64ecb57e74aa6d15a4d7be3e94328fe58472",
+     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+-    "config/site-map.json": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa"
++    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb"
+   },
+   "auxiliary_source_sha256": {
+     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+@@ -140,7 +140,7 @@
+     }
+   ],
+   "sdk_browser_observations": {
+-    "recorded_at": "2026-10-31T01:26:14.738Z",
++    "recorded_at": "2026-10-31T01:56:19.100Z",
+     "checks": [
+       "sdk_guided_preview_works_when_visitor_session_is_404",
+       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+diff --git a/evidence/legal-footer-2026-10-28/browser.json b/evidence/legal-footer-2026-10-28/browser.json
+index 99d814e..cb6b911 100644
+--- a/evidence/legal-footer-2026-10-28/browser.json
++++ b/evidence/legal-footer-2026-10-28/browser.json
+@@ -2846,7 +2846,7 @@
+   "source_sha256": {
+     "apps/web/components/SiteFooter.tsx": "0f33920bb9adac5c2af872f78f6599c54a8b683d74c2965b678dc067a6ca6b46",
+     "apps/web/components/WorkspaceRebuild.css": "c1933759e96b3420d2e35c56a72ee6d9baa1aa23efc7e91ba72cc9fb823522c1",
+-    "config/site-map.json": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa",
++    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb",
+     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
+   },
+   "missing_license_route": true,
+diff --git a/evidence/legal-footer-2026-10-28/next-browser.json b/evidence/legal-footer-2026-10-28/next-browser.json
+index 9479979..753928e 100644
+--- a/evidence/legal-footer-2026-10-28/next-browser.json
++++ b/evidence/legal-footer-2026-10-28/next-browser.json
+@@ -2846,7 +2846,7 @@
+   "source_sha256": {
+     "apps/web/components/SiteFooter.tsx": "0f33920bb9adac5c2af872f78f6599c54a8b683d74c2965b678dc067a6ca6b46",
+     "apps/web/components/WorkspaceRebuild.css": "c1933759e96b3420d2e35c56a72ee6d9baa1aa23efc7e91ba72cc9fb823522c1",
+-    "config/site-map.json": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa",
++    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb",
+     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
+   },
+   "missing_license_route": true,
+diff --git a/evidence/one-app-2026-10-27/critical-browser-fresh.json b/evidence/one-app-2026-10-27/critical-browser-fresh.json
+index 099102b..24d037d 100644
+--- a/evidence/one-app-2026-10-27/critical-browser-fresh.json
++++ b/evidence/one-app-2026-10-27/critical-browser-fresh.json
+@@ -1,5 +1,5 @@
+ {
+-  "recorded_at": "2026-10-31T01:26:14.738Z",
++  "recorded_at": "2026-10-31T01:56:19.100Z",
+   "checks": [
+     "account_control_fallback_and_auth_routes_present",
+     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
+@@ -54,7 +54,7 @@
+     "apps/web/components/HomeContent.tsx": "5d0b995513086178dfac69baa88c889ef0dd1ec98a7137f078ba45eba1e44935",
+     "apps/web/components/Workspace.tsx": "c6e85ff5d54764ccddff012f472e64ecb57e74aa6d15a4d7be3e94328fe58472",
+     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
+-    "config/site-map.json": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa"
++    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb"
+   },
+   "auxiliary_source_sha256": {
+     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+@@ -140,7 +140,7 @@
+     }
+   ],
+   "sdk_browser_observations": {
+-    "recorded_at": "2026-10-31T01:26:14.738Z",
++    "recorded_at": "2026-10-31T01:56:19.100Z",
+     "checks": [
+       "sdk_guided_preview_works_when_visitor_session_is_404",
+       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+diff --git a/evidence/one-app-2026-10-27/text-spacing.json b/evidence/one-app-2026-10-27/text-spacing.json
+index 7573300..204fb43 100644
+--- a/evidence/one-app-2026-10-27/text-spacing.json
++++ b/evidence/one-app-2026-10-27/text-spacing.json
+@@ -2,9 +2,9 @@
+   "runtime_error_capture": true,
+   "runtime_errors": [],
+   "completed": true,
+-  "observed_at": "2026-10-31T01:26:15.386Z",
++  "observed_at": "2026-10-31T01:56:19.688Z",
+   "source_sha256": {
+-    "apps/site/.generated/public-site.json": "36e07f8517936b9434488a50dec2f5f712171e597e70975b4eaa528c92be7e35",
++    "apps/site/.generated/public-site.json": "892c8c8d23556f14cc08e2de6bd5945b8659c9858df4665e0b51e57f5a806975",
+     "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
+     "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
+     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
+@@ -80,7 +80,7 @@
+     "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
+     "config/design-tokens.json": "f57aacebc6a82875593d9a9606fc680b9779835977eaf9207d6851170095430c",
+     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
+-    "config/site-map.json": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa",
++    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb",
+     "config/text-resize-sources.json": "8cef37815cd15a9f0c0180b0999bafb0aceba320b4bd0c537af68fb8bd8ae8b8",
+     "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
+     "packages/tokens/tokens.css": "19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544",
+-- 
+2.39.5
+

@@ -1,0 +1,73 @@
+From 4c93b4416f3c32ac65d5a1aea0dc71bceec843cc Mon Sep 17 00:00:00 2001
+From: emergent-agent-e1 <github@emergent.sh>
+Date: Sat, 31 Oct 2026 01:49:00 +0000
+Subject: [PATCH 5/8] =?UTF-8?q?NEX-COPY-17=20handoff:=20Preview-Zuordnung?=
+ =?UTF-8?q?=20korrigiert=20+=20read-only=20Restliste=20(Workspace.tsx,=20i?=
+ =?UTF-8?q?18n.ts,=20page-explainers.json)=20=C2=B7=20lokal?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../PREVIEW-REMAINING-TEXT-2026-10-31.md      | 49 +++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+ create mode 100644 docs/handoff-2026-10-31/PREVIEW-REMAINING-TEXT-2026-10-31.md
+
+diff --git a/docs/handoff-2026-10-31/PREVIEW-REMAINING-TEXT-2026-10-31.md b/docs/handoff-2026-10-31/PREVIEW-REMAINING-TEXT-2026-10-31.md
+new file mode 100644
+index 0000000..38438ea
+--- /dev/null
++++ b/docs/handoff-2026-10-31/PREVIEW-REMAINING-TEXT-2026-10-31.md
+@@ -0,0 +1,49 @@
++# NEX-COPY-20261031-17 — Preview-Zuordnung + read-only Restliste (2026-10-31, ~01:50 UTC)
++
++Lokal, **kein Push/Publish**. BTW und Backend bleiben offen; keine erfundenen Freigaben.
++
++## 1) Übergabestand (geheimnisfrei)
++- **HEAD (vollständig):** `07c3ea6cc9ed9dff78ddfea54ba7a1956ca6bc24`
++- Commit-Kette (neueste zuerst, relevante):
++  - `07c3ea6cc9ed9dff78ddfea54ba7a1956ca6bc24` — NEX-COPY-17 fix: presenter-sources.json site-map-Hash refresh (Preview-Build entsperrt)
++  - `52e0bf98f5f824b36ca9a1837aedb9819a6bbf84` — NEX-COPY-17 + Impressum (Kundentexte, echte Eenmanszaak) · make test 620 OK
++  - `06fc182b3f71976e49364738f7b142fc90c9ea8f` — Handoff EN+Touch
++  - `94fde9a592bd99799df99cbbe5ffd436622aa2fd` — Touch-Target 48px · make test 620 OK
++  - `0aaa8f51eb4145b8069bbc9b2a521d5c66a8b516` — EN-Runtime · make test 620 OK
++  (Dazwischen 2 automatische Meilenstein-Commits `4d90918…`, `8aea0cc…`.)
++- **Testbelege:** `make test` = **Ran 620 tests … OK** (letzter grüner Stand: Content-Commit `52e0bf9`).
++  `node apps/site/scripts/generate-public-data.mjs` → **„Public build data: 36 pages"** (Preview-Build OK nach Fix).
++  Patches EN+Touch: `docs/handoff-2026-10-31/patches/*.patch` (ohne `.env`/Keys, verifiziert).
++- git status: sauber bis auf Harness (`.emergent/emergent_todos.json`); QA-Logs zeitgestempelt in `.local/diagnostics/logs/`.
++
++## 2) Preview ↔ Quellstand korrigiert
++- **Ursache:** Der lokale Preview-Adapter (`/app/frontend/preview-server.mjs`, Supervisor `frontend`, Port 3000)
++  baut `apps/site` beim Start neu. Der laufende Prozess hatte den **alten Build**; zusätzlich brach der
++  Neustart-Build an `generate-public-data.mjs:68` ab („Explainer source hash changed"), weil der
++  **approved-Hash von `config/site-map.json` in `config/presenter-sources.json`** nach dem Inhaltschange veraltet war.
++  `make test` prüft diesen Adapter-Build **nicht** → grüner Test war nicht ausreichend (genau der gemeldete Effekt).
++- **Fix:** site-map-Hash in `presenter-sources.json` aktualisiert (nicht test-gebunden, kein Inhalt erfunden) →
++  `generate-public-data` baut; Supervisor `frontend` neu gestartet → frischer Preview-Build (`.local/emergent-preview-dist`, 01:45).
++- **Preview-URL:** `https://goal-quest-134--9e2ug52x.preview.emergentagent.com/teileklar`
++- **Sichtbare Belege (frischer Render 01:46 UTC) – jetzt korrekt:**
++  - Footer: „**TEILEKLAR — Na KLAR! · Ersatzteile · Fahrzeugzuordnung · Werkstatt · Partnerschaft**" (kein Agentur-Slogan mehr im Footer)
++  - Hero: „… Sie suchen ein Ersatzteil … **Nennen Sie Ihr Fahrzeug und Ihr Anliegen. Online-Bestellungen sind derzeit nicht möglich.**" (Sie-Form)
++- **Noch sichtbar alt (Ursache in anderem Bauteil, siehe 3):** rechtes Chat-Panel in Du-Form,
++  „Der Shop ist in Vorbereitung – wir bereiten deine Anfrage vor", Panel-Header „NeXify / Projektklärung",
++  sowie der Satz „… Fachabläufe nicht freigegeben angeschlossen …".
++
++## 3) Read-only Restliste (verbleibende Architektur-/Aufbau-/Du-Form-/Agentur-Formulierungen)
++Fehlende Funktionen sind ehrlich zu benennen (z. B. „Online-Bestellungen derzeit nicht möglich"), nicht zu verschweigen.
++
++1. **apps/web/components/Workspace.tsx:111** (sichtbares rechtes Orientierungs-Panel, alle Sites inkl. /teileklar):
++   `body:"Nenne kurz dein Fahrzeug und das gesuchte Teil oder dein Werkstatt-Anliegen. Der Shop ist in Vorbereitung – wir bereiten deine Anfrage vor."`, `eyebrow:"Womit möchtest du starten?"`
++   → Du-Form + „Shop in Vorbereitung". Auf Sie-Form + konkrete Verfügbarkeitsgrenze umstellen. (Betrifft NeXify- und TEILEKLAR-Kontext; Markenfigur/Funktion erhalten.)
++2. **apps/web/lib/i18n.ts:3** `subtitle:"Projektklärung · dein nächster Schritt."`, `welcomeEyebrow:"Womit möchtest du starten?"`
++   → Agentur-/Projektklärungs-Rahmung im Panel-Header, Du-Form. TEILEKLAR-eigene, kundenorientierte Variante nötig.
++3. **config/page-explainers.json:1384** „… Solange Katalog und **Fachabläufe nicht freigegeben angeschlossen** sind, bleiben die Ansichten **Vorbereitung statt einer Kauf-/Passungszusage**."
++   → Interne Aufbau-/Abnahmeformulierung in Explainer-Modul. Durch belegte Kundenaussage ersetzen (Semantik-Gate); Verfügbarkeitsgrenze knapp statt interner Spezifikation. ACHTUNG: `page-explainers.json` ist approved-Explainer-Quelle → nach Änderung `presenter-sources.json` refreshen + Evidenz-Kaskade (gebündelt).
++4. Weitere „Du erhältst"/Du-Form-Treffer (prüfen, ob kundenwirksam sichtbar): `config/site-map.json`, `apps/web/components/HomeContent.tsx`, `apps/web/components/PublicOrientationChat.tsx`, `apps/web/lib/i18n.ts`.
++
++**Hinweis für Bündelung:** Punkte 1–4 ändern teils approved-Explainer-/Komponenten-Quellen → gemeinsam mit dem
++kommenden Ersatztext in EINEM Durchlauf setzen, dann EINE Evidenz-/Preview-Regeneration (keine Mehrfach-Kaskaden).
++Markenfiguren, Originalmedien, Layout und alle bestehenden Funktionen bleiben unverändert.
+-- 
+2.39.5
+

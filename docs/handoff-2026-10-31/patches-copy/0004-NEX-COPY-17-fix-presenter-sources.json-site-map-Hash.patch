@@ -1,0 +1,31 @@
+From 07c3ea6cc9ed9dff78ddfea54ba7a1956ca6bc24 Mon Sep 17 00:00:00 2001
+From: emergent-agent-e1 <github@emergent.sh>
+Date: Sat, 31 Oct 2026 01:47:41 +0000
+Subject: [PATCH 4/8] =?UTF-8?q?NEX-COPY-17=20fix:=20presenter-sources.json?=
+ =?UTF-8?q?=20site-map-Hash=20refresh=20(Preview-/generate-public-data-Bui?=
+ =?UTF-8?q?ld=20entsperrt;=20nicht=20test-gebunden,=20kein=20Inhalt=20erfu?=
+ =?UTF-8?q?nden)=20=C2=B7=20lokal?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ config/presenter-sources.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/presenter-sources.json b/config/presenter-sources.json
+index fb7b261..4a87789 100644
+--- a/config/presenter-sources.json
++++ b/config/presenter-sources.json
+@@ -12,7 +12,7 @@
+     },
+     {
+       "path": "config/site-map.json",
+-      "sha256": "09d7dc0daba843b7cadf828729f12f8f98b68f7cde59b5deafc084767f9eb95c"
++      "sha256": "757896072965fe44db807033bbdeb6a49ff74c6a2b8f4c5ad0ceff424e9813aa"
+     },
+     {
+       "path": "docs/01-konzept/gesamtprojektplan.md",
+-- 
+2.39.5
+

@@ -1,0 +1,92 @@
+From 4d90918b5ab2f66a1c623df6a6cde963694c30f8 Mon Sep 17 00:00:00 2001
+From: emergent-agent-e1 <github@emergent.sh>
+Date: Sat, 31 Oct 2026 01:34:45 +0000
+Subject: [PATCH 3/8] =?UTF-8?q?##=20Inhaltspaket=20NEX-COPY-20261031-17=20?=
+ =?UTF-8?q?+=20Impressum=20abgeschlossen=20(lokal,=20kein=20Push,=20keine?=
+ =?UTF-8?q?=20zus=C3=A4tzlichen=20Services=20gekauft=20=E2=80=94=20Emergen?=
+ =?UTF-8?q?t-Credits=20wurden=20verbraucht)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Gebündelt umgesetzt, danach EINE Evidenz-Kaskade (keine Mehrfachläufe), `make test` = **620 OK**.
+
+**Vollständige 40-stellige SHAs (chronologisch):**
+- EN-Runtime: `0aaa8f51eb4145b8069bbc9b2a521d5c66a8b516`
+- Touch-Target 48px: `94fde9a592bd99799df99cbbe5ffd436622aa2fd`
+- Handoff-Paket: `06fc182b3f71976e49364738f7b142fc90c9ea8f`
+- Inhaltspaket (Impressum+TEILEKLAR+Jev-Doku): `52e0bf98f5f824b36ca9a1837aedb9819a6bbf84`
+
+**Impressum (config/site-map.json):** erfundene „NeXify AI FACTORY B.V." global ersetzt durch echte Eenmanszaak-Daten (Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo/NL, KvK 90483944, mail@nexifyai.cloud, +31 6 133 188 56). **USt-/BTW-Nummer bewusst OFFEN** (widersprüchliche Quellen — keine Nummer erfunden/ausgewählt). Falsche „historische Einzelunternehmensdaten werden nicht übernommen"-Behauptung entfernt. **Nicht als rechtlich final publiziert.**
+
+**TEILEKLAR:** Hero-Intro, 3-Schritt-Ablauf (Sie-Form), EN-Texte und Chat-Begrüßung von interner Aufbau-/Spezifikationssprache auf belegte Kundentexte umgestellt; funktionale Überclaims („klären die Passung") entfernt; Verfügbarkeitsgrenze am Punkt genannt („Online-Bestellungen sind derzeit nicht möglich"); eigene Markenführung im Footer („TEILEKLAR — Na KLAR!") statt Agentur-Slogan. Umfang/Routen/Portale/Markenfiguren unverändert.
+
+**Evidenz real neu gemessen** (echte Chromium-Läufe gegen frischen Next-Build): browser-critical, text-spacing, consent-ui, legal-footer vite+next, public-experience (next-public). Register chirurgisch nachgezogen. Logs zeitgestempelt in `.local/diagnostics/logs/` (nichts gelöscht). git status sauber (nur Harness-Datei). **Jev-Gate read-only Analyse** ergänzt (keine Routerinstallation, Lane wiederverwenden, Gate nicht abgeschwächt).
+
+**Explizit OFFEN (nicht als fertig dargestellt):** Backend-Runtime-Bindung + reale BigBuy-Katalogdaten = Integrationsaufgaben (blockiert); USt-/BTW offen; globaler Textdurchlauf weiterer Seiten wartet auf die konkreten Ersatztexte des Redaktionsexperten (Semantik-Gate je Absatz).
+
+- Next Action Items:
+  - **Weitere Seitentexte**: Liefere die Ersatztexte des Redaktionsexperten pro Seite, ich setze sie per Semantik-Gate ein und regeneriere gebündelt
+  - **USt/BTW klären**: Gib die bestätigte BTW-Nummer frei, dann ergänze ich sie im Impressum
+  - **BigBuy freischalten**: Hinterlege die BigBuy-Keys über die sichere Karte, damit echte Katalogdaten in Shop/Werkstatt fließen
+  - **Jev-Trockenlauf**: Gib einen read-only Gate-Trockenlauf gegen die bestehende Lane frei, um Modell-ID/Exit zu bestätigen
+
+Emergent-Commit-Key: 39d492e744cd27b29db84afa1e8a16e14f293205563fc300a244330f2038b666
+---
+ .emergent/emergent_todos.json | 22 +++++++---------------
+ 1 file changed, 7 insertions(+), 15 deletions(-)
+
+diff --git a/.emergent/emergent_todos.json b/.emergent/emergent_todos.json
+index 13611c2..24eb8ae 100644
+--- a/.emergent/emergent_todos.json
++++ b/.emergent/emergent_todos.json
+@@ -1,38 +1,30 @@
+ [
+   {
+-    "content": "EN-Stand atomar committen + voller SHA",
++    "content": "EN atomar committet (SHA 0aaa8f5…)",
+     "status": "completed"
+   },
+   {
+-    "content": "Touch-Targets: 44->48px (globals + Komponenten + orientation-starter token)",
++    "content": "Touch-Targets 48px committet (SHA 94fde9a…)",
+     "status": "completed"
+   },
+   {
+-    "content": "Touch: Evidence real neu generieren (critical/text-spacing/shop/catalog/workspace/legal-footer vite+next)",
++    "content": "Handoff-Paket committet (SHA 06fc182…)",
+     "status": "completed"
+   },
+   {
+-    "content": "Touch: Register nachziehen, make test 620 OK, frische Mess-Verifikation",
++    "content": "NEX-COPY-17 (TEILEKLAR Kundentexte, Sie-Form, Markenfuehrung) + Impressum (echte Eenmanszaak, BTW offen) committet (SHA 52e0bf9…)",
+     "status": "completed"
+   },
+   {
+-    "content": "Touch: atomarer lokaler Commit",
++    "content": "Jev-Gate read-only Analyse-Doku ergaenzt (Teil des Inhalts-Commits)",
+     "status": "completed"
+   },
+   {
+-    "content": "Übergabepaket: SHAs EN+Touch, git status, Testläufe, Restfehler, Patch-Paket (ohne Secrets) im Handoff",
+-    "status": "in_progress"
+-  },
+-  {
+-    "content": "NEX-COPY-20261031-17 (global): /teileklar + gemeinsame Vorlagen - Kundentexte statt interner Spezifikation, Sie-Form, Grenzen am CTA",
+-    "status": "pending"
+-  },
+-  {
+-    "content": "Impressum: Fake-BV -> echte Eenmanszaak (USt offen, Konflikte dokumentiert)",
++    "content": "Global: weitere Seiten/gemeinsame Vorlagen - Ersatztexte vom Redaktionsexperten einsetzen sobald geliefert (Semantik-Gate)",
+     "status": "pending"
+   },
+   {
+-    "content": "Jev-Migration: read-only Analyse + Doku",
++    "content": "Offene Abnahmen: Backend-Runtime-Bindung + reale BigBuy-Katalogdaten (Integrationsaufgaben, blockiert)",
+     "status": "pending"
+   }
+ ]
+\ No newline at end of file
+-- 
+2.39.5
+
