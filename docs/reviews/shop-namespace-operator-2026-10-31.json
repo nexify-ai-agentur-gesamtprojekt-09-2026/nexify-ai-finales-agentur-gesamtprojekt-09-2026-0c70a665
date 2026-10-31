@@ -1,0 +1,138 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_ON_RUNTIME",
+  "base": "a4b74dc9793d0d6b5a40878d690b03b80bcc80ea",
+  "base_tree": "7c4a289d40369dfc1745862a8467f9e9f21b3d07",
+  "parent_reported_platform_deployment": "dpl_AKHeHVZ7bwCWfuXyhsQ5AoMVPkko",
+  "remote_main_observed": "d6b8467d7f487e5c0b4b4c7440be6879e32a1787",
+  "remote_main_own_overlap": [
+    "config/acceptance-coverage.json"
+  ],
+  "remote_reconciliation": "Do not replace main. Preserve foreign image-pipeline entries; merge only operator/own source bindings into coverage. No image files integrated here.",
+  "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+  "plan_execution": "Only plan rendering and fakes; no real preflight, initialization, namespace metadata, documents, env export or credentials transfer",
+  "tests": {
+    "operator_and_adapter_passed": 24,
+    "scope": "isolated metadata/DDL/session fakes, including Mongo same-options no-op, concurrency, partial failure and auth gate",
+    "full_suite": {
+      "tests": 647,
+      "failures": 20,
+      "errors": 10,
+      "skipped": 11,
+      "new_failure_labels": [],
+      "new_error_labels": []
+    },
+    "make_check": "passed, zero audit errors/warnings",
+    "make_clean_check": "fails inherited full unittest suite"
+  },
+  "independent_review": {
+    "reviewer": "commerce_contract_read",
+    "first_finding": "P1 identical-options create is not a lock; fixed before execution",
+    "resolution": "Fresh128bit per-run validator marker, exact claim readback; fake corrected to actual Mongo no-op semantics; no docs/extra collection/collMod",
+    "final_source_result": "No further concrete issue in narrow marker/auth/preflight delta; not runtime acceptance"
+  },
+  "rea": {
+    "exit_code": 0,
+    "passed": true,
+    "records": [
+      {
+        "arguments": {
+          "detail": "complete",
+          "max_depth": 64,
+          "max_file_bytes": 262144,
+          "max_objects": 16384,
+          "max_string_bytes": 65536,
+          "path": "/workspace/nexify-release-integration-20261031/.local/release-integration/rea-operator/vercel_app.pyc"
+        },
+        "complete_readback_equal": true,
+        "evidence_id": "ev_2b07d243cc386f69dc96fe2f4abefb6fcb998200962eaa79daafba3089ec1f21",
+        "pyc_sha256": "569f6278b0b843c72ce41dabda364d9ea9e6fe362201e5145f146ce0c5e9045d",
+        "source": "apps/shop-api/vercel_app.py",
+        "source_sha256": "3336a252d2dd8182f14716094fda3ba2e43cf23a6dfdd2b121b4bc9cb378c9a4",
+        "source_unchanged": true
+      },
+      {
+        "arguments": {
+          "detail": "complete",
+          "max_depth": 64,
+          "max_file_bytes": 262144,
+          "max_objects": 16384,
+          "max_string_bytes": 65536,
+          "path": "/workspace/nexify-release-integration-20261031/.local/release-integration/rea-operator/namespace_operator.pyc"
+        },
+        "complete_readback_equal": true,
+        "evidence_id": "ev_824085bc37ecbb2d5bd67c7db5ff689f9c4b339e7e4b604af557a8dc2bd865a3",
+        "pyc_sha256": "2568662bdf3cd562bafba2d5532d3a3360962dc1a3eeb27dcdfc0e3384553a7c",
+        "source": "apps/shop-api/namespace_operator.py",
+        "source_sha256": "d2bcea09db8981f1c0cf4bac311c501cc044fb1857cdb540671028511c86fb59",
+        "source_unchanged": true
+      }
+    ],
+    "scope": "Actual Python bytecode inventory only; no application execution or database access; not a security certification",
+    "server": {
+      "name": "rea",
+      "version": "6.8.0"
+    },
+    "time_utc": "2026-10-31T15:41:38Z",
+    "tool": "inspect_python_pyc",
+    "tool_count": 229
+  },
+  "local_python_bundle": {
+    "tool_versions": {
+      "cli": "65.2.0",
+      "python": "28.0.1"
+    },
+    "runtime": "python3.12",
+    "handler": "vc__handler__python.vc_handler",
+    "file_count": 986,
+    "helper_key": "vercel_support/bigbuy_get.py",
+    "required_sources": [
+      {
+        "path": "vercel_app.py",
+        "present": true
+      },
+      {
+        "path": "shop/checkout_api.py",
+        "present": true
+      },
+      {
+        "path": "shop/mailer.py",
+        "present": true
+      },
+      {
+        "path": "shop/accounts_api.py",
+        "present": true
+      }
+    ],
+    "parent_paths": [],
+    "helper_fs_sha256": "1709bdf3ae328e7e338f21b1f3b7703725d62ed3263da9d575716e73ee906591",
+    "source_sha256": {
+      "vercel_support/bigbuy_get.py": "1709bdf3ae328e7e338f21b1f3b7703725d62ed3263da9d575716e73ee906591",
+      "vercel_app.py": "3336a252d2dd8182f14716094fda3ba2e43cf23a6dfdd2b121b4bc9cb378c9a4",
+      "shop/checkout_api.py": "30820be21cc748917abbd5e128891601ed906bd75adebe4f46443ac0f117ff3e",
+      "shop/mailer.py": "18300aa600bf6f7a2398c40753706c432ac3e961fad331ed0483a9a0f3065b98"
+    }
+  },
+  "runtime_path": "One-off existing-project operator Previewbuild with unchanged normal release buildCommand; only default-read-only preflight unless separate explicit init command. Provider execution not performed here.",
+  "auth_read_delta": "Only GET/HEAD /api/auth/me independent of REVOLUT_MODE; still requires runtime metadata and real session; no write/provider call. Existing write/payment paths unchanged.",
+  "protected_actions_executed": false,
+  "source_sha256": {
+    "PROGRESS.md": "b5ecd23576ba0a186658e2f87ad6b7f776d5222e9ad6a8a54a750c884bcbb844",
+    "apps/shop-api/namespace_operator.py": "d2bcea09db8981f1c0cf4bac311c501cc044fb1857cdb540671028511c86fb59",
+    "apps/shop-api/tests/test_namespace_operator.py": "6b0122f185f75bab7c8073c4af2326372001db03c1170330896b71cab1036790",
+    "apps/shop-api/tests/test_vercel_adapter.py": "dd727eab692e5f668e5dddf745d5bd29ba1d33ffc17439f4f3e1227f3780b3a4",
+    "apps/shop-api/vercel_app.py": "3336a252d2dd8182f14716094fda3ba2e43cf23a6dfdd2b121b4bc9cb378c9a4",
+    "config/acceptance-coverage.json": "d51072e6295a1bc8aa44ce3ec4ffd7f12844b1030975da47adc9e87dc0af46ac",
+    "docs/contracts/requirements-reconciliation.md": "32366e4d1a37c95769a8a764a4fce9c17d6a1e08e3f071195fc1b1c08de714c5",
+    "docs/deployment/services-namespace-plan-2026-10-31.json": "373f3a804fc30e80743bf691f865aee62577954a1ca12252ac6cdb187eeb9a69",
+    "docs/deployment/services-release-2026-10-31.md": "89fbfc7f65c98ab82c47918c881e4f15b61ab216906b14b88d691069d8169a34",
+    "docs/deployment/shop-namespace-operator-2026-10-31.md": "96024fcf10bf0b93fc59b34e4cdae3f00571cd35bd4da535716f3fcdb34e9c0e"
+  },
+  "parent_reported_production": {
+    "deployment": "dpl_2Z93mvEioEN1UfUjTkYfzGakZTZH",
+    "main": "d6b8467d7f487e5c0b4b4c7440be6879e32a1787",
+    "root_status": 200,
+    "health_status": 503,
+    "health_reason": "database_namespace_unapproved",
+    "source": "Parent read-back; not executed by this operator"
+  }
+}

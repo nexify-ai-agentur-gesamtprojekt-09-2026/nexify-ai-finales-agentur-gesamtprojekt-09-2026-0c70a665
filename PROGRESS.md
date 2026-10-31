@@ -1313,3 +1313,28 @@ Finaler Basisvergleich: Kandidat647Tests undBasis633Tests jeweils20Failures,
 10Errors,11Skips; identische Fehler-/Errorfallnamen. Keine neue eigene Regression.
 ARCH-010/024/027/029 und Clean-Gate bleiben ausdrücklich rot. Reproduzierbarer
 Builderrunner mit CLI-/Builderversionsprüfung ist im Testverzeichnis enthalten.
+
+
+## Neuer Namespace-Operator und reine Sitzungsauskunft · 31.10.2026
+
+Ausgangspunkt Owner-Releasea4b74dc (Treeidentischb09). Neuer CLI-Operator ohne
+öffentlicheRoute, Lifespan oder Standard-Buildhook: default Metadatenpreflight,
+plan ohne ENV/DB, init nur nach exaktem Planhash und erneuter Leereprüfung.
+Festes neues Namespace,18Collections/17Zusatzindizes, keine Geschäftsdokumente,
+Seeds/Migration/Deletes/Resume. Mongo-same-options-create-No-op berücksichtigt:
+per-run128-Bit-Descriptionclaim in source_manifests, exakter Readback, keine
+anderen Claimformate freigegeben. Abbruch verlangt Readback, keine Write-Retries.
+Realer Store/Init in diesem Teil NICHT aufgerufen. Operatorplan beschreibt den
+gezielten einmaligen bestehenden Preview-Buildkontext ohne URIexport.
+
+/api/auth/me als geprüfter reiner DB-Leseweg unabhängig vom Zahlungsmodus;
+Session-/Userprüfung bleibt, ungültig/abgelaufen401, MetadataDrift503, kein
+Providercall/Write/Moduswechsel. Andere Auth-/Payment-/Writepfade unverändert.
+24isolierte Operator-/Adaptertests grün, einschließlich realer Mongo-No-op-
+Semantik im Fake, Konkurrenz/Teilabbruch und redigierter Ausgabe. Offizieller
+Pythonbuilder erstellt neues gültiges Paket; kein Frontend-, Fachbackend-,
+Credential-, Domain-, Workflow- oder Standardvercel.json-Delta. Neue Quellen
+und eigene Fortschritts-/Dokubelege gezielt gebunden; fremde UIhashes bleibenrot.
+Vorheriger Servicesreport ist historischer b09/a4-Buildbeleg. Dieses Delta hat
+eigenen Report docs/reviews/shop-namespace-operator-2026-10-31.json; keine
+behauptete produktive Namespace-/Steuer-/Preis-/Versand-/Providerabnahme.
