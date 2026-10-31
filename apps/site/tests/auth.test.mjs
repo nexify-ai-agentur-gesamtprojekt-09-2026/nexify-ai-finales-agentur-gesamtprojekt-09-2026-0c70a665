@@ -16,14 +16,11 @@ test('malformed public keys never mount a broken provider',()=>{
  }
  assert.equal(validPublicClerkKey(key),true);
 });
-test('only public Clerk variables are consumed; forced redirects stay fixed and no membership is minted',()=>{
+test('Clerk removed (D-007): no identity SDK, no env-driven auth and no membership is minted',()=>{
  const source=readFileSync(new URL('../src/Auth.tsx',import.meta.url),'utf8');
- assert.deepEqual([...new Set([...source.matchAll(/import\.meta\.env\.([A-Z0-9_]+)/g)].map(match=>match[1]))].sort(),['VITE_CLERK_ENABLED','VITE_CLERK_PUBLISHABLE_KEY']);
- assert.doesNotMatch(source,/CLERK_SECRET|AUTH0|unsafeMetadata|publicMetadata|roles?\s*:/);
+ assert.doesNotMatch(source,/@clerk|import\.meta\.env|CLERK_SECRET|AUTH0|unsafeMetadata|publicMetadata|roles?\s*:/);
  assert.equal(AUTH_REDIRECT,'/');
- assert.match(source,/signInForceRedirectUrl=\{AUTH_REDIRECT\}/);assert.match(source,/signUpForceRedirectUrl=\{AUTH_REDIRECT\}/);
- assert.match(source,/<SignIn routing="hash"/);assert.match(source,/<SignUp routing="hash"/);
- assert.match(source,/localization=\{localizations\[locale\]\}/);
+ assert.match(source,/href=\{mode==="signup"\?"\/registrieren":"\/anmelden"\}/);
 });
 test('the wrapper retains public media, guide and honest disabled fallback',()=>{
  const source=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');

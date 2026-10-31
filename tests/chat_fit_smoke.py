@@ -10,7 +10,7 @@ import sys
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
 # Test configuration
-TEST_URL = os.environ.get("CHAT_TEST_URL", "https://goal-quest-134--9e2ug52x.preview.emergentagent.com")
+TEST_URL = os.environ.get("CHAT_TEST_URL", "https://fresh-sync--3on01101.preview.emergentagent.com")
 VIEWPORTS = [
     {"width": 320, "height": 568, "name": "mobile_small"},
     {"width": 390, "height": 844, "name": "mobile_medium"},

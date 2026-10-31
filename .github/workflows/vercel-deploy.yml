@@ -1,0 +1,69 @@
+name: Vercel Deploy
+# Gate: make check && make test must pass before any Vercel build/deploy.
+# Opt-in: deploys only run when repository variable VERCEL_CI_DEPLOY == 'true'
+# (keeps Vercel Git auto-deploy and project settings untouched until go-live).
+# Required GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.4'
+      - run: |
+          npm install --global --ignore-scripts pnpm@12.15.0
+          pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.15'
+      - run: python -m pip install --only-binary=:all: --no-deps --require-hashes --requirement requirements-image.txt
+      - run: node apps/site/scripts/generate-public-data.mjs
+      - name: Gate before deploy
+        run: make check && make test
+
+  deploy:
+    needs: gate
+    if: vars.VERCEL_CI_DEPLOY == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'production' || 'preview' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.4'
+      - run: npm install --global --ignore-scripts pnpm@12.15.0 vercel@latest
+      - name: Resolve target
+        id: target
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "env=production" >> "$GITHUB_OUTPUT"; echo "flag=--prod" >> "$GITHUB_OUTPUT"
+          else
+            echo "env=preview" >> "$GITHUB_OUTPUT"; echo "flag=" >> "$GITHUB_OUTPUT"
+          fi
+      - run: vercel pull --yes --environment=${{ steps.target.outputs.env }} --token="${{ secrets.VERCEL_TOKEN }}"
+      - run: vercel build ${{ steps.target.outputs.flag }} --token="${{ secrets.VERCEL_TOKEN }}"
+      - id: deploy
+        run: echo "url=$(vercel deploy --prebuilt ${{ steps.target.outputs.flag }} --token="${{ secrets.VERCEL_TOKEN }}")" >> "$GITHUB_OUTPUT"
+      - run: echo "Deployed ${{ steps.target.outputs.env }}: ${{ steps.deploy.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"

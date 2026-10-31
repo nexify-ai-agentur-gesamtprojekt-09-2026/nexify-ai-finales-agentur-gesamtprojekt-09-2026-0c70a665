@@ -23,6 +23,7 @@ SOURCES = (
     "config/brain/agents.json",
     "config/llm-verbindungen.json",
 )
+PRODUCT_ENRICHMENT = {"id": "ds/deepseek-v4-pro", "reasoning_effort": "high", "provider": "own_router_9router", "base_url_env": "ROUTER_URL", "api_key_env": "ROUTER_KEY"}
 REQUIRED_SCOPES = frozenset(("website_live_chat", "managed_customer_suite", "internal_agent_orchestration",
                             "research_and_summaries", "tool_loops", "ci_ai_review", "managed_text_generation"))
 
@@ -79,6 +80,12 @@ def validate(configs):
     _require(_at(policy, "cost_and_access", "customer_trial_financing_policy") == SOURCES[2], "fixed_financing_reference_required")
     for key in ("separate_explicit_customer_provider_selection_preserved", "no_silent_fallback_to_company_paid_credits"):
         _require(_at(policy, "customer_byok", key) is True, "explicit_customer_byok_exception_required")
+    # User decision 2026-10-31 (DECISIONS D-009): separate product_enrichment use case, no silent fallback.
+    enrichment = _at(policy, "use_cases", "product_enrichment")
+    _require(_at(enrichment, "model") == PRODUCT_ENRICHMENT and _at(enrichment, "authority") == "explicit_current_user_instruction_2026-10-31", "product_enrichment_model_mismatch")
+    _require(_at(enrichment, "silent_model_fallback") is False and _at(enrichment, "unavailable_model") == "fail_run_with_error", "product_enrichment_fallback_forbidden")
+    _require(_at(connections, "anwendungsfaelle", "product_enrichment", "modell") == PRODUCT_ENRICHMENT["id"] and
+             _at(connections, "anwendungsfaelle", "product_enrichment", "bei_nicht_verfuegbar") == "geschlossen_mit_Fehler_ohne_Modellersatz", "product_enrichment_router_binding_mismatch")
 
     review = _at(automation, "ai_review")
     _exact_keys(review, ("enabled", "provider", "requested_model", "exact_model_id", "reasoning_effort", "api_key_env", "limits"), "unreviewed_ci_model_binding")

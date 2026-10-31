@@ -35,8 +35,9 @@ test("verified identity never auto-grants business membership, admin or first-us
 });
 test("public visitor API bypasses Clerk and no frontend secret or role promotion is introduced", () => {
   const proxy=readFileSync(new URL("../../proxy.ts",import.meta.url),"utf8");
-  assert.match(proxy,/if \(!protectedRoute && !authRoute\) return NextResponse.next\(\)/);
-  assert.match(proxy,/status: 503/);assert.match(proxy,/status: 401/);assert.match(proxy,/status: 403/);
+  // D-007: own shop-API session cookie replaces Clerk; private routes stay closed (401 without, 403 with session).
+  assert.match(proxy,/return NextResponse.next\(\)/);assert.doesNotMatch(proxy,/@clerk/);
+  assert.match(proxy,/cookies.get\("tk_session"\)/);assert.match(proxy,/status: 401/);assert.match(proxy,/status: 403/);
   const layout=readFileSync(new URL("../../app/layout.tsx",import.meta.url),"utf8");
   assert.doesNotMatch(layout,/CLERK_SECRET_KEY|secretKey=/);
   assert.doesNotMatch(proxy,/unsafeMetadata|publicMetadata|emailAddress|role\s*:/);
@@ -48,7 +49,7 @@ test("deployment origins are exact and the supplied public key stays inactive un
   assert.equal(settings.domain_decision.switch_cloud_dns_before_final_acceptance, false);
   assert.equal(settings.auth.automatic_cross_domain_sso, false);
   const proxy = readFileSync(new URL("../../proxy.ts", import.meta.url), "utf8");
-  assert.match(proxy, /authorizedParties: productionConfig.auth.authorized_parties/);
+  assert.doesNotMatch(proxy, /clerkMiddleware|authorizedParties/);
   assert.doesNotMatch(proxy, /jwtKey:/);
   const material = settings.jwt_verification_material;
   assert.equal(material.active_static_jwt_key, false);

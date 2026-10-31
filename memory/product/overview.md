@@ -1,0 +1,80 @@
+# Requirements: TEILEKLAR Shop, Werkstattsuche und Portale (NeXify AI Repo)
+
+## Core Value
+A real, working TEILEKLAR auto-parts online shop (real BigBuy products, real Revolut payment, real orders) plus a real workshop finder (Werkstattsuche), followed by real customer/partner/neighbourhood/affiliate portals and myADMIN. Built inside the EXISTING repo and design system. The current new design/layout (apps/web, design tokens, header/footer) is LEADING. Prototype pages in `/app/prototypen/*.dc.html` are the functional source: the texts ON those pages (and `<!-- TODO(BACKEND) -->` comments, `data-api-endpoint` attributes, inline notes) are HANDOFF build instructions describing how each page must be built and behave — NOT marketing copy to paste.
+
+## Personas & Roles
+- Guest shopper (B2C, DE/NL/BE…): browse, search, cart, checkout as guest or logged in.
+- Registered customer (own auth: e-mail+password or Emergent Google login): order history, account, later garage/portal.
+- Workshop seeker: find a workshop by PLZ/Ort, view profile, send a request (request ≠ appointment).
+- Partner workshop (phase 3): own profile, requests, appointments, vouchers.
+- Neighbourhood customer (phase 3), Affiliate (phase 3).
+- Admin (Pascal / NeXify team, role admin in own user DB): markup %, catalog sync, orders; full myADMIN in phase 4.
+
+## Features
+| id | feature | persona | phase |
+|---|---|---|---|
+| F-1 | BigBuy import of category "Auto & Motorrad" (real API, production key; sandbox for tests), stored with source/stand, dedupe, pagination | admin/system | 1 |
+| F-2 | Selling price = BigBuy purchase price + fixed % markup (start 30 %), editable by admin | admin | 1 |
+| F-3 | Shop home, category listing, search, product detail (TEILEKLAR Shop prototype views shop/search/product), honest fitment status (no invented "passt") | shopper | 1 |
+| F-4 | Server-side cart (guest + own user account), quantity, price/stock re-check | shopper | 1 |
+| F-5 | Checkout (address, shipping, review, "Zahlungspflichtig bestellen", AGB checkbox not pre-ticked) → Revolut hosted checkout (LIVE) → webhook + status readback → order confirmed exactly once | shopper | 1 |
+| F-6 | Order confirmation page + order list in account | customer | 1 |
+| F-7 | Werkstattsuche: PLZ/Ort search over the 4,000 workshops (`prototypen/assets/workshops.json`), radius/distance (Luftlinie labelled), map with text alternative, result list, zero-hit state | seeker | 1 |
+| F-8 | Workshop detail page + persisted contact/appointment REQUEST (status "Anfrage", never "Termin bestätigt"); no partner badge for non-partners | seeker | 1 |
+| F-9 | NEX-COPY-17 remainder: 6 service pages, AIFly/Pascal cards, related cards, TEILEKLAR footer intro, brandline in i18n (Sie-Form) | visitor | 1 |
+| F-10 | Garage / vehicle selection, Fitment-Checker, Batterie-Berater, Reifenrechner wired to the real catalog | shopper | 2 |
+| F-11 | Order mails (Resend), invoice PDF, BigBuy order forwarding/fulfilment status, returns/withdrawal flow, coupons, B2B VAT-ID | customer/admin | 2 |
+| F-12 | City/Standorte pages linked both ways with workshop profiles (Masterplan §30) | seeker | 2 |
+| F-13 | Kundenportal (offers accept/decline/change, invoices, documents) | customer | 3 |
+| F-14 | Partnerportal + Partner-werden onboarding, profile → approval → publish, requests/appointments, vouchers | partner | 3 |
+| F-15 | Nachbarschaftskunden-Portal (voucher redeem, appointments), Affiliate-Portal (links, conversions) | neighbour/affiliate | 3 |
+| F-16 | myADMIN v2 + Leitstand: orders, catalog, partners review, settings | admin | 4 |
+
+## Phases
+- Phase 1 (MVP): Real shop loop + Werkstattsuche + NEX-COPY-17 remainder → F-1…F-9. Docs: `/app/memory/product/phase1/requirement.md`, `/app/memory/product/phase1/journeys.md`
+- Phase 1b (user priority 31.10.2026, directly after Phase 1): GESAMT-TEXTKONZEPT for ALL 46 pages in `config/site-map.json` (+ page-explainers, i18n, header/footer). Problem: yesterday's round turned page-structure/build descriptions into marketing copy. Goal: one continuous concept from home to footer — every page gets purpose, audience, section flow and new customer copy written from its real function; build instructions are implemented or removed, never published as text → F-21. Replaces the COPY-17 copy items of Phase 1.
+- Phase 2: Shop completion (vehicle/fitment tools, mails, invoices, fulfilment, returns, coupons, city pages) → F-10…F-12
+- Phase 3: Portals → F-13…F-15
+- Phase 4: myADMIN / Leitstand → F-16
+- Phase 5: NeX2fly Suite + one/one+ + API (Masterplan §9, §10, P2B): registration/trial, workspace, usage/ledger, prepaid → F-17
+- Phase 6: Arbeitsplatzdienste (Masterplan §13, §14, P2D): mail, CRM, documents, Brain → F-18
+- Phase 7: Medien/Content finalisation + public agency gates (§7, §8, P2A/P2E) → F-19
+- Phase 8: Go-Live (§21, §22 P4): deployment, domains, live readback, legal gates, independent acceptance → F-20
+
+## Operating Mode
+- AUTOPILOT (user instruction 31.10.2026): "Lade SOLL-WISSEN und SOLL-ZIEL (Gesamtziel) – Go-Live – führe aus und stelle fertig." Proceed phase to phase without waiting for feedback; stop only for measured blockers that need owner action (keys, legal/price decisions, real payments). Source of truth for the Gesamtziel: `docs/masterplan/NeXify-Masterplan-v2-2026-10-29.md` (V2.1).
+- FULL APPROVAL (user 31.10.2026: "Setze alles um. Freigabe."): all planned phases 1, 1b, 2–8 incl. Vercel CI are approved. Go-Live/production changes are executed in Phase 8 as planned.
+- Composio Connect (MCP, `COMPOSIO_API_KEY` ck_) gives access to Vercel/Hostinger. Read freely; production/DNS/deploy changes only as part of the Go-Live phase.
+
+| F-17 | NeX2fly Suite Privat/Business, one/one+, AIFly API, 24h trial, 30 days access + usage | customer | 5 |
+| F-18 | Mail workspace, CRM, Belegpipeline, documents, Brain/LightRAG | internal | 6 |
+| F-19 | Media/scene integration all routes, content/legal/SEO gates | visitor | 7 |
+| F-20 | Go-Live: production deploy, domains, live readback, monitoring | owner | 8 |
+| F-22 | Permanent AI product enrichment via own router (9router, `ROUTER_URL=https://ai-router.nexifyai.cloud/v1`, `ROUTER_KEY`, OpenAI-compatible, model `ds/deepseek-v4-pro` (user decision 31.10.2026, overrides config/llm-policy.json for product enrichment), reasoning high): rewrite product descriptions from verified BigBuy facts only (versioned, raw data kept) + image normalisation (background/size/sharpness, never alter product or scope of delivery); runs on every import/sync | admin/system | 2 |
+
+## UI/UX Rules
+- The NEW design system in the repo is leading (`config/design-tokens.json`, apps/web components, shared header/footer). Prototypes give structure/behaviour/content-intent only.
+- German Sie-Form in customer texts; DE first, NL/FR via existing i18n where present.
+- Inline validation with `role=alert`; button "Zahlungspflichtig bestellen"; AGB checkbox never pre-checked; reduced-motion respected.
+- Never invent: fitment ("passt"), delivery days, stock "sofort lieferbar", workshop partner status, slots, ratings, prices.
+
+## Integrations
+- BigBuy API: `BIGBUY_API_KEY_PRODUCTION` (import), `BIGBUY_API_KEY_SANDBOX` (tests). Existing `apps/agent-gateway/bigbuy_get.py` to be reused.
+- Revolut Merchant API (Hosted Checkout + webhook HMAC signature verification): `REVOLUT_MERCHANT_SECRET_KEY_PRODUCTION` = LIVE (user decision: live money immediately); `REVOLUT_MERCHANT_SECRET_KEY_SANDBOX` for automated tests. Mode switch via server env.
+- Auth (user decision 31.10.2026): Clerk REPLACED by own auth — e-mail + password (JWT in httpOnly cookie, bcrypt, register/login/logout/password reset) PLUS Emergent-managed Google social login. Same user record for both methods (linked by e-mail). Clerk code paths removed or disabled.
+- Resend (managed, available) – phase 2.
+- Note: keys are stored in the frontend env file; they must only ever be read server-side.
+
+## Edge Cases
+- Price/stock change between cart and payment → re-check, show change before payment.
+- Double click / reload / back on checkout → one order only (idempotency).
+- Webhook duplicated / out of order / bad signature → exactly one paid transition; bad signature rejected.
+- Browser closed after payment → order still confirmed through webhook/readback.
+- Foreign order ID → 404.
+- PLZ unknown / zero hits / workshops without coordinates / same city names.
+
+## Seed Data
+- Products: real BigBuy "Auto & Motorrad" import (no fake products).
+- Workshops: `prototypen/assets/workshops.json` (4,000 DE entries, TKW-IDs) as directory data, all flagged "Verzeichnisbetrieb", not partners.
+- Admin user: a test admin (e-mail+password) documented in `/app/memory/test_credentials.md`.

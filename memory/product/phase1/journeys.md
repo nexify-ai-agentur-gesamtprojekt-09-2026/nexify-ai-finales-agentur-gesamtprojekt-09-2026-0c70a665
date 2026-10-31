@@ -1,0 +1,33 @@
+# Phase 1 Journeys
+
+- JRN-1 steps: Admin logs in, opens import status, starts BigBuy import "Auto & Motorrad". expected: status shows running then done with product count > 0 and timestamp; shop shows these real products.
+- JRN-2 steps: Run the import a second time. expected: product count unchanged for unchanged items, no duplicates by BigBuy ID.
+- JRN-3 steps: Admin sets markup from 30 % to 40 %. expected: a product price on its page rises accordingly (purchase × 1.40 incl. VAT).
+- JRN-4 steps: Non-admin (guest or normal user) calls markup/import API. expected: 403.
+- JRN-5 steps: Open shop home, open a category, go to page 2. expected: real BigBuy products with images and prices; pagination works.
+- JRN-6 steps: Search by product name, then by EAN, then nonsense "xyzqq". expected: hits for first two; empty state with "Suche zurücksetzen" for the third.
+- JRN-7 steps: Open a product. expected: images (not stretched), price incl. VAT, stock, SKU/EAN, "Passung nicht geprüft"; out-of-stock product has disabled add button.
+- JRN-8 steps: Guest adds 2 products, changes quantity, reloads. expected: cart persists after reload; totals computed server-side.
+- JRN-9 steps: POST add-to-cart with a manipulated price. expected: cart uses catalog price.
+- JRN-10 steps: Guest with cart logs in (e-mail+password or Google). expected: items merged into user cart.
+- JRN-11 steps: Checkout: leave address empty, continue. expected: inline errors with role=alert.
+- JRN-12 steps: Review step without ticking AGB. expected: checkbox unchecked by default; "Zahlungspflichtig bestellen" disabled.
+- JRN-13 steps: (sandbox mode) Complete checkout and pay with Revolut sandbox test card. expected: redirect back to confirmation with order number, items, total; order status "bezahlt"; order visible in account list.
+- JRN-14 steps: Double click "Zahlungspflichtig bestellen" / reload during redirect. expected: exactly one order.
+- JRN-15 steps: Replay the same valid webhook twice. expected: order paid once, no duplicate effect.
+- JRN-16 steps: Send webhook with invalid signature. expected: 401, order unchanged.
+- JRN-17 steps: Cancel payment on Revolut page. expected: "Zahlung nicht abgeschlossen", cart still filled.
+- JRN-18 steps: User B requests User A's order ID. expected: 404.
+- JRN-19 steps: Werkstattsuche: enter PLZ "14547". expected: list sorted by distance labelled "Luftlinie", map + text list, entries marked "Verzeichnisbetrieb", no partner badge.
+- JRN-20 steps: Enter city "Berlin", then an unknown PLZ "00000". expected: Berlin results; "Keine Werkstatt gefunden" for unknown.
+- JRN-21 steps: Open a workshop, submit request form empty, then valid. expected: inline errors; then confirmation "Anfrage gesendet – noch kein Termin", request persisted.
+- JRN-22 steps: Visit /leistungen, /leistungen/websites, /leistungen/agenten-automatisierung, /leistungen/apps-portale, /preise-ablauf, /kontakt. expected: each page renders finished Sie-Form copy, no placeholder/handoff text visible.
+- JRN-23 steps: Open /teileklar. expected: AIFly and Pascal cards, Partner/Kategorien related cards, TEILEKLAR footer intro present; brandline shows "KI-Assistent".
+- JRN-24 steps: View shop, product, cart, checkout, finder at 320/768/1440 px. expected: no horizontal overflow, layout intact.
+- JRN-25 steps: (human) Owner places a small real order with live Revolut. expected: payment captured, order "bezahlt" once, visible in account.
+- JRN-26 steps: Register with new e-mail + 10+ char password. expected: logged in, account page shows e-mail.
+- JRN-27 steps: Register same e-mail again; register with 5-char password. expected: "Diese E-Mail-Adresse ist bereits registriert"; inline password error.
+- JRN-28 steps: Log out, log in with wrong password, then correct. expected: "E-Mail oder Passwort ist falsch"; then logged in; reload keeps session.
+- JRN-29 steps: 5 wrong logins in a row. expected: 6th attempt blocked with lockout message.
+- JRN-30 steps: Click "Mit Google anmelden". expected: redirect to Emergent Google login and back, logged in (human-verifiable if tester cannot complete Google).
+- JRN-31 steps: Log out, open account page. expected: redirected to login; session cookie invalid.

@@ -1,0 +1,208 @@
+"""Own accounts: e-mail/password (bcrypt), server-side sessions in httpOnly cookie, reset via Resend, lockout, Emergent Google Auth."""
+import hashlib
+import os
+import re
+import secrets
+import uuid
+from datetime import datetime, timedelta, timezone
+
+import bcrypt
+import httpx
+from fastapi import APIRouter, HTTPException, Request, Response
+from pydantic import BaseModel, Field
+from pymongo.errors import DuplicateKeyError
+
+from . import config
+from .db import db, now_iso
+
+router = APIRouter(prefix="/api/auth")
+SESSION_COOKIE = "tk_session"
+SESSION_DAYS = 14
+LOCK_WINDOW = timedelta(minutes=15)
+MAX_FAILS = 5
+EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
+GOOGLE_SESSION_URL = "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data"
+WRONG = "E-Mail oder Passwort ist falsch"
+
+
+def hash_password(password):
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+
+def check_password(password, hashed):
+    return bool(hashed) and bcrypt.checkpw(password.encode(), hashed.encode())
+
+
+def digest(token):
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+def public_user(user):
+    return {"user_id": user["user_id"], "email": user["email"], "name": user.get("name", ""), "role": user.get("role", "customer")}
+
+
+async def ensure_auth_indexes(database=None):
+    d = database if database is not None else db
+    await d.users.create_index("email", unique=True)
+    await d.users.create_index("user_id", unique=True)
+    await d.sessions.create_index("token_hash", unique=True)
+    await d.sessions.create_index("expires_at", expireAfterSeconds=0)
+    await d.login_failures.create_index("at", expireAfterSeconds=int(LOCK_WINDOW.total_seconds()))
+    await d.password_resets.create_index("expires_at", expireAfterSeconds=0)
+
+
+async def seed_accounts():
+    for prefix, role in (("ADMIN", "admin"), ("TEST_CUSTOMER", "customer")):
+        email, password = os.environ.get(prefix + "_EMAIL", "").lower(), os.environ.get(prefix + "_PASSWORD", "")
+        if email and password and not await db.users.find_one({"email": email}, {"_id": 1}):
+            await db.users.insert_one({"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": role.title(), "role": role,
+                                       "password_hash": hash_password(password), "created_at": now_iso()})
+
+
+async def start_session(response, user):
+    token = secrets.token_urlsafe(32)
+    await db.sessions.insert_one({"token_hash": digest(token), "user_id": user["user_id"], "created_at": now_iso(),
+                                  "expires_at": datetime.now(timezone.utc) + timedelta(days=SESSION_DAYS)})
+    response.set_cookie(SESSION_COOKIE, token, max_age=SESSION_DAYS * 86400, httponly=True, secure=True, samesite="lax", path="/")
+    return public_user(user)
+
+
+async def session_user(request):
+    header = request.headers.get("authorization", "")
+    token = request.cookies.get(SESSION_COOKIE) or (header[7:] if header.lower().startswith("bearer ") else None)
+    if not token or len(token) > 128:
+        return None
+    session = await db.sessions.find_one({"token_hash": digest(token)})
+    if not session:
+        return None
+    expires = session["expires_at"] if session["expires_at"].tzinfo else session["expires_at"].replace(tzinfo=timezone.utc)
+    if expires < datetime.now(timezone.utc):
+        return None
+    return await db.users.find_one({"user_id": session["user_id"]}, {"_id": 0, "password_hash": 0})
+
+
+class RegisterIn(BaseModel):
+    email: str = Field(max_length=160)
+    password: str = Field(max_length=200)
+    name: str = Field("", max_length=100)
+
+
+class LoginIn(BaseModel):
+    email: str = Field(max_length=160)
+    password: str = Field(max_length=200)
+
+
+class ForgotIn(BaseModel):
+    email: str = Field(max_length=160)
+
+
+class ResetIn(BaseModel):
+    token: str = Field(max_length=128)
+    password: str = Field(max_length=200)
+
+
+class GoogleIn(BaseModel):
+    session_id: str = Field(max_length=256)
+
+
+@router.post("/register", status_code=201)
+async def register(body: RegisterIn, response: Response):
+    email, errors = body.email.strip().lower(), {}
+    if not EMAIL.fullmatch(email):
+        errors["email"] = "invalid"
+    if len(body.password) < 10:
+        errors["password"] = "too_short"
+    if errors:
+        raise HTTPException(422, {"error": "register_invalid", "fields": errors})
+    if await db.users.find_one({"email": email}, {"_id": 1}):
+        raise HTTPException(409, {"error": "email_taken", "message": "Diese E-Mail-Adresse ist bereits registriert", "fields": {"email": "taken"}})
+    user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": body.name.strip(), "role": "customer",
+            "password_hash": hash_password(body.password), "created_at": now_iso()}
+    try:
+        await db.users.insert_one(user)
+    except DuplicateKeyError:
+        raise HTTPException(409, {"error": "email_taken", "message": "Diese E-Mail-Adresse ist bereits registriert", "fields": {"email": "taken"}}) from None
+    return await start_session(response, user)
+
+
+@router.post("/login")
+async def login(body: LoginIn, response: Response):
+    email = body.email.strip().lower()
+    since = datetime.now(timezone.utc) - LOCK_WINDOW
+    if await db.login_failures.count_documents({"email": email, "at": {"$gte": since}}) >= MAX_FAILS:
+        raise HTTPException(429, {"error": "locked", "message": "Zu viele Fehlversuche. Bitte versuchen Sie es in 15 Minuten erneut."})
+    user = await db.users.find_one({"email": email})
+    if not user or not check_password(body.password, user.get("password_hash")):
+        await db.login_failures.insert_one({"email": email, "at": datetime.now(timezone.utc)})
+        raise HTTPException(401, {"error": "invalid_credentials", "message": WRONG})
+    await db.login_failures.delete_many({"email": email})
+    return await start_session(response, user)
+
+
+@router.post("/logout")
+async def logout(request: Request, response: Response):
+    token = request.cookies.get(SESSION_COOKIE)
+    if token:
+        await db.sessions.delete_one({"token_hash": digest(token)})
+    response.delete_cookie(SESSION_COOKIE, path="/")
+    return {"ok": True}
+
+
+@router.get("/me")
+async def me(request: Request):
+    user = await session_user(request)
+    if not user:
+        raise HTTPException(401, {"error": "authentication_required"})
+    return public_user(user)
+
+
+@router.post("/forgot-password")
+async def forgot_password(body: ForgotIn):
+    user = await db.users.find_one({"email": body.email.strip().lower()})
+    if user:
+        token = secrets.token_urlsafe(32)
+        await db.password_resets.insert_one({"token_hash": digest(token), "user_id": user["user_id"], "used": False,
+                                             "expires_at": datetime.now(timezone.utc) + timedelta(hours=1)})
+        link = config.PUBLIC_ORIGIN + "/passwort-zuruecksetzen?token=" + token
+        text = "Guten Tag,\n\nüber den folgenden Link können Sie innerhalb einer Stunde ein neues Passwort festlegen:\n" + link + "\n\nFalls Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail.\n\nTEILEKLAR / NeXify AI"
+        key, sender = os.environ.get("RESEND_API_KEY", ""), os.environ.get("RESEND_FROM_ADDRESS", "")
+        status = "not_configured"
+        if key and sender:
+            try:
+                async with httpx.AsyncClient(timeout=15) as client:
+                    sent = await client.post("https://api.resend.com/emails", headers={"Authorization": "Bearer " + key},
+                                             json={"from": "TEILEKLAR <%s>" % sender, "to": [user["email"]], "subject": "Passwort zurücksetzen", "text": text})
+                status = sent.status_code
+            except httpx.HTTPError:
+                status = "transport_error"
+        await db.password_resets.update_one({"token_hash": digest(token)}, {"$set": {"mail_status": status}})
+    return {"ok": True, "message": "Wenn ein Konto zu dieser E-Mail-Adresse besteht, haben wir einen Link zum Zurücksetzen gesendet."}
+
+
+@router.post("/reset-password")
+async def reset_password(body: ResetIn):
+    if len(body.password) < 10:
+        raise HTTPException(422, {"error": "reset_invalid", "fields": {"password": "too_short"}})
+    reset = await db.password_resets.find_one_and_update({"token_hash": digest(body.token), "used": False, "expires_at": {"$gt": datetime.now(timezone.utc)}}, {"$set": {"used": True}})
+    if not reset:
+        raise HTTPException(400, {"error": "token_invalid", "message": "Der Link ist ungültig oder abgelaufen."})
+    await db.users.update_one({"user_id": reset["user_id"]}, {"$set": {"password_hash": hash_password(body.password)}})
+    await db.sessions.delete_many({"user_id": reset["user_id"]})
+    await db.login_failures.delete_many({"email": (await db.users.find_one({"user_id": reset["user_id"]}))["email"]})
+    return {"ok": True}
+
+
+@router.post("/google/session")
+async def google_session(body: GoogleIn, response: Response):
+    async with httpx.AsyncClient(timeout=15) as client:
+        data = await client.get(GOOGLE_SESSION_URL, headers={"X-Session-ID": body.session_id})
+    if data.status_code != 200 or not EMAIL.fullmatch((data.json().get("email") or "").lower()):
+        raise HTTPException(401, {"error": "google_session_invalid"})
+    profile = data.json()
+    email = profile["email"].lower()
+    user = await db.users.find_one({"email": email})
+    if not user:
+        user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": profile.get("name", ""), "role": "customer", "created_at": now_iso()}
+        await db.users.insert_one(user)
+    await db.users.update_one({"user_id": user["user_id"]}, {"$set": {"google_linked": True}})
+    return await start_session(response, user)

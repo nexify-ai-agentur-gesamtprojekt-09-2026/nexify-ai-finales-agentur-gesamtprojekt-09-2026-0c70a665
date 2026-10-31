@@ -1376,17 +1376,17 @@
           "speaker": "aifly",
           "status": "script_draft",
           "title": {
-            "de": "Fahrzeug, Teil und Werkstatt sinnvoll verbinden",
+            "de": "Welches Ersatzteil benötigen Sie?",
             "nl": "Voertuig, onderdeel en garage verbinden",
             "fr": "Relier véhicule, pièce et atelier"
           },
           "body": {
-            "de": "TEILEKLAR führt Sie durch Fahrzeugangaben, Teilesuche und Werkstattkontakt. Beginnen Sie mit Ihrem Fahrzeug und Ihrem Anliegen. Online-Bestellungen sind derzeit nicht möglich; lassen Sie die Teilezuordnung vor dem Kauf fachlich prüfen.",
+            "de": "Nennen Sie Hersteller, Modell, Baujahr und Motorisierung Ihres Fahrzeugs und beschreiben Sie das gesuchte Teil – am besten mit vorhandener Teilenummer. Im Shop finden Sie Artikel mit Preis inklusive Mehrwertsteuer und Lagerbestand; die Passung zu Ihrem Fahrzeug vergleichen Sie bitte vor der Bestellung anhand der Teilenummer.",
             "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en werkplaatscontact. Begin met uw voertuig en uw vraag. Online bestellen is momenteel niet mogelijk; laat de onderdeeltoewijzing vóór de aankoop vakkundig controleren.",
             "fr": "TEILEKLAR vous guide à travers les informations du véhicule, la recherche de pièces et le contact atelier. Commencez par votre véhicule et votre demande. La commande en ligne n’est pas possible actuellement ; faites vérifier l’affectation des pièces par un professionnel avant l’achat."
           },
           "outcome": {
-            "de": "Mit Fahrzeug und Passungsanforderung beginnen.",
+            "de": "Fahrzeugangaben zusammenstellen und das passende Teil finden.",
             "nl": "Begin met voertuig en pasvormvereisten.",
             "fr": "Commencez par le véhicule et la compatibilité attendue."
           },
@@ -1401,7 +1401,7 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Fahrzeug und belegte Passung",
+              "de": "Fahrzeugangaben zusammenstellen",
               "nl": "Voertuig en onderbouwde passendheid",
               "fr": "Véhicule et compatibilité étayée"
             }
@@ -1418,17 +1418,17 @@
           "speaker": "pascal",
           "status": "script_draft",
           "title": {
-            "de": "Der Werkstattweg ist eine eigene Anfrage",
+            "de": "Als Werkstatt mit TEILEKLAR zusammenarbeiten",
             "nl": "Het garagetraject is een aparte aanvraag",
             "fr": "Le parcours atelier est une demande distincte"
           },
           "body": {
-            "de": "Neben der Teileorientierung ist die Zusammenarbeit mit Werkstätten vorgesehen. Eine Anfrage klärt Betrieb, Anliegen und nächste Schritte. Sie ist weder eine bestätigte Partnerschaft noch eine zugesagte Werkstattleistung.",
+            "de": "Sie führen eine Werkstatt und möchten Kundinnen und Kunden mit klar beschriebenen Anliegen erreichen? Stellen Sie Ihren Betrieb und Ihre Leistungen vor. Umfang und Konditionen einer Zusammenarbeit stimmen wir anschließend persönlich mit Ihnen ab.",
             "nl": "Naast onderdelenoriëntatie is samenwerking met garages voorzien. Een aanvraag verduidelijkt bedrijf, vraag en vervolgstappen. Het is geen bevestigd partnerschap of toegezegde garageprestatie.",
             "fr": "La coopération avec des ateliers est prévue en complément des pièces. Une demande précise établissement, besoin et suite. Elle ne confirme ni partenariat ni prestation atelier."
           },
           "outcome": {
-            "de": "Die Partneranfrage kennenlernen.",
+            "de": "Den eigenen Betrieb vorstellen.",
             "nl": "Bekijk de partneraanvraag.",
             "fr": "Découvrez la demande de partenariat."
           },
@@ -1443,7 +1443,7 @@
             "type": "route",
             "target_id": "tk-partner",
             "label": {
-              "de": "Werkstattpartner werden",
+              "de": "Werkstatt vorstellen",
               "nl": "Werkplaatspartner worden",
               "fr": "Devenir partenaire atelier"
             }

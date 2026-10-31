@@ -12,7 +12,7 @@ import sys
 import requests
 
 # Test configuration
-PREVIEW_URL = os.environ.get("PREVIEW_URL", "https://goal-quest-134--9e2ug52x.preview.emergentagent.com")
+PREVIEW_URL = os.environ.get("PREVIEW_URL", "https://fresh-sync--3on01101.preview.emergentagent.com")
 OUTPUT_FILE = "/app/test_reports/media_byte_range_test.json"
 
 results = {

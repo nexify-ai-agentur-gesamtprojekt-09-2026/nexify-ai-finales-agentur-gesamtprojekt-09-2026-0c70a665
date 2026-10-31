@@ -8,6 +8,7 @@ const config: NextConfig = {
   productionBrowserSourceMaps:maps.enabled,
   compiler:maps.enabled?{runAfterProductionCompile:async({distDir})=>{await escrowMaps(resolve(distDir,"static"),maps);}}:undefined,
   poweredByHeader: false,
+  allowedDevOrigins: ["*.preview.emergentagent.com"],
   images: { unoptimized: true },
   async rewrites() {
     return process.env.NODE_ENV === "development"

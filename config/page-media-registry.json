@@ -2091,7 +2091,7 @@
       "page_id": "tk-home",
       "module_id": "tk-home-explain-1",
       "context_id": "module-tk-home-explain-1",
-      "context_title": "Fahrzeug, Teil und Werkstatt sinnvoll verbinden",
+      "context_title": "Welches Ersatzteil benötigen Sie?",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2113,7 +2113,7 @@
       "page_id": "tk-home",
       "module_id": "tk-home-explain-2",
       "context_id": "module-tk-home-explain-2",
-      "context_title": "Der Werkstattweg ist eine eigene Anfrage",
+      "context_title": "Als Werkstatt mit TEILEKLAR zusammenarbeiten",
       "film_id": null,
       "scene_ids": [],
       "assets": {
