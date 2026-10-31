@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 import {mapPolicy,escrowMaps} from "../../tools/observability/private-sourcemaps.mjs";
 import {resolve} from "node:path";
+import {frameHeaders} from "./frame-headers.mjs";
 const maps=mapPolicy(process.env,"next",resolve(import.meta.dirname,"../.."));
 const config: NextConfig = {
   env:{NEXT_PUBLIC_RELEASE_SHA:maps.release,NEXT_PUBLIC_APP_ENV:process.env.VERCEL_ENV||process.env.NEXIFY_APP_ENV||""},
@@ -20,7 +21,7 @@ const config: NextConfig = {
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "Referrer-Policy", value: "same-origin" },
       { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-      { key: "X-Frame-Options", value: "DENY" }
+      ...frameHeaders(process.env)
     ] }];
   }
 };

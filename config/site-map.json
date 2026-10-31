@@ -4030,10 +4030,10 @@
         "en": "Parts search: in preparation"
       },
       "summary": {
-        "de": "Beschreiben Sie das benötigte Teil und Ihr Fahrzeug. Eine vorhandene Teilenummer, Maße oder Fotos können bei der Einordnung helfen. Online-Bestellungen sind derzeit nicht möglich.",
-        "nl": "Beschrijf het benodigde onderdeel en uw voertuig. Een bestaand onderdeelnummer, maten of foto’s kunnen bij de indeling helpen. Online bestellen is momenteel niet mogelijk.",
-        "fr": "Décrivez la pièce nécessaire et votre véhicule. Un numéro de pièce existant, des dimensions ou des photos peuvent aider au classement. La commande en ligne n’est pas possible actuellement.",
-        "en": "Describe the part you need and your vehicle. An existing part number, dimensions or photos can help with the assignment. Online ordering is currently not possible."
+        "de": "Beschreiben Sie das benötigte Teil und Ihr Fahrzeug. Eine vorhandene Teilenummer, Maße oder Fotos können bei der Einordnung helfen.",
+        "nl": "Beschrijf het benodigde onderdeel en uw voertuig. Een bestaand onderdeelnummer, maten of foto’s kunnen bij de indeling helpen.",
+        "fr": "Décrivez la pièce nécessaire et votre véhicule. Un numéro de pièce existant, des dimensions ou des photos peuvent aider au classement.",
+        "en": "Describe the part you need and your vehicle. An existing part number, dimensions or photos can help with the assignment."
       },
       "site_context": "teileklar",
       "sections": [
@@ -4685,10 +4685,10 @@
             "en": "Checkout: not released for purchase"
           },
           "body": {
-            "de": "Hier fassen wir Ihre Auswahl zusammen und zeigen transparent, was der nächste Schritt ist. Sobald Sie bestellen möchten, prüfen wir Teile, Preis, Versand und Zahlung gemeinsam mit Ihnen – es wird nichts ausgelöst, das Sie nicht ausdrücklich bestätigt haben.",
-            "nl": "Hier vatten we uw selectie samen en laten we transparant zien wat de volgende stap is. Zodra u wilt bestellen, controleren we onderdelen, prijs, verzending en betaling samen met u – er wordt niets in gang gezet zonder uw uitdrukkelijke bevestiging.",
-            "fr": "Nous récapitulons ici votre sélection et indiquons clairement la prochaine étape. Dès que vous souhaitez commander, nous vérifions ensemble les pièces, le prix, la livraison et le paiement – rien n’est déclenché sans votre confirmation explicite.",
-            "en": "A real purchase requires verified item, price, shipping, payment and consumer information. There is no binding order button here yet and no faked order confirmation."
+            "de": "Hier prüfen Sie Adresse, Versand und den Gesamtpreis inklusive Mehrwertsteuer. Mit „Zahlungspflichtig bestellen“ geht es zur Zahlung bei Revolut. Verbindlich wird die Bestellung erst mit der bestätigten Zahlung.",
+            "nl": "Hier controleert u adres, verzending en de totaalprijs inclusief btw. Met „Bestelling met betalingsverplichting“ gaat u naar de betaling bij Revolut. De bestelling wordt pas bindend na de bevestigde betaling.",
+            "fr": "Vérifiez ici l’adresse, la livraison et le prix total TVA comprise. « Commander avec obligation de paiement » mène au paiement chez Revolut. La commande ne devient ferme qu’après le paiement confirmé.",
+            "en": "Here you check the address, shipping and the total price including VAT. “Order with obligation to pay” takes you to payment with Revolut. The order only becomes binding once the payment is confirmed."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -5321,10 +5321,10 @@
         "en": "Workshop profile: approved data required"
       },
       "summary": {
-        "de": "Eine Werkstatt zeigt Ihnen bestätigte Leistungen, Öffnungszeiten und Kontaktwege. Wir stellen nur geprüfte Partnerbetriebe vor – damit Sie sich auf die Angaben verlassen können.",
-        "nl": "Een werkplaats toont u bevestigde diensten, openingstijden en contactmogelijkheden. Wij stellen alleen gecontroleerde partnerbedrijven voor – zodat u op de gegevens kunt vertrouwen.",
-        "fr": "Un atelier vous présente ses prestations confirmées, ses horaires et ses moyens de contact. Nous ne présentons que des partenaires vérifiés – pour que vous puissiez vous fier aux informations.",
-        "en": "An actual workshop profile shows only confirmed business data, services and contact channels. Currently no workshop names, distances, ratings or available slots are invented."
+        "de": "Die Werkstattsuche zeigt Betriebe aus einem Werkstattverzeichnis mit Adresse, Entfernung und Kontaktweg. Es sind Verzeichnisbetriebe, keine geprüften TEILEKLAR-Partner.",
+        "nl": "De werkplaatszoeker toont bedrijven uit een werkplaatsregister met adres, afstand en contactmogelijkheid. Het zijn registerbedrijven, geen gecontroleerde TEILEKLAR-partners.",
+        "fr": "La recherche de garage affiche des entreprises issues d’un annuaire, avec adresse, distance et moyen de contact. Ce sont des entreprises de l’annuaire, pas des partenaires TEILEKLAR vérifiés.",
+        "en": "The workshop search shows businesses from a workshop directory with address, distance and contact details. They are directory listings, not verified TEILEKLAR partners."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5351,16 +5351,16 @@
         {
           "id": "gepruefte-partner",
           "heading": {
-            "de": "Nur geprüfte Partnerbetriebe",
-            "nl": "Alleen gecontroleerde partnerbedrijven",
-            "fr": "Uniquement des partenaires vérifiés",
-            "en": "Workshop profile: approved data needed"
+            "de": "Verzeichnisbetriebe, keine geprüften Partner",
+            "nl": "Registerbedrijven, geen gecontroleerde partners",
+            "fr": "Entreprises de l’annuaire, pas de partenaires vérifiés",
+            "en": "Directory listings, not verified partners"
           },
           "body": {
-            "de": "Wir zeigen Werkstätten erst, wenn ihre Angaben bestätigt sind. So erhalten Sie verlässliche Informationen zu Leistungen und Erreichbarkeit statt ungeprüfter Einträge.",
-            "nl": "We tonen werkplaatsen pas als hun gegevens bevestigd zijn. Zo krijgt u betrouwbare informatie over diensten en bereikbaarheid in plaats van ongecontroleerde vermeldingen.",
-            "fr": "Nous ne présentons les ateliers qu’une fois leurs informations confirmées. Vous obtenez ainsi des informations fiables sur les prestations et la disponibilité, plutôt que des annonces non vérifiées.",
-            "en": "A workshop profile shows only confirmed details. Without approved data, no locations, services or ratings are invented. Partners store their data in the partner process."
+            "de": "Die Angaben stammen aus dem Verzeichnis und sind nicht von TEILEKLAR bestätigt. Prüfen Sie Leistungen und Öffnungszeiten direkt beim Betrieb. Eine Anfrage über TEILEKLAR ist noch kein Termin.",
+            "nl": "De gegevens komen uit het register en zijn niet door TEILEKLAR bevestigd. Controleer diensten en openingstijden rechtstreeks bij het bedrijf. Een aanvraag via TEILEKLAR is nog geen afspraak.",
+            "fr": "Les informations proviennent de l’annuaire et ne sont pas confirmées par TEILEKLAR. Vérifiez les prestations et les horaires directement auprès de l’entreprise. Une demande via TEILEKLAR n’est pas encore un rendez-vous.",
+            "en": "The details come from the directory and are not confirmed by TEILEKLAR. Check services and opening hours directly with the business. A request via TEILEKLAR is not yet an appointment."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -5371,10 +5371,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Eine Werkstatt zeigt Ihnen bestätigte Leistungen, Öffnungszeiten und Kontaktwege. Wir stellen nur geprüfte Partnerbetriebe vor – damit Sie sich auf die Angaben verlassen können.",
-          "nl": "Een werkplaats toont u bevestigde diensten, openingstijden en contactmogelijkheden. Wij stellen alleen gecontroleerde partnerbedrijven voor – zodat u op de gegevens kunt vertrouwen.",
-          "fr": "Un atelier vous présente ses prestations confirmées, ses horaires et ses moyens de contact. Nous ne présentons que des partenaires vérifiés – pour que vous puissiez vous fier aux informations.",
-          "en": "An actual workshop profile shows only confirmed business data, services and contact channels. Currently no workshop names, distances, ratings or available slots are invented."
+          "de": "Die Werkstattsuche zeigt Betriebe aus einem Werkstattverzeichnis mit Adresse, Entfernung und Kontaktweg. Es sind Verzeichnisbetriebe, keine geprüften TEILEKLAR-Partner.",
+          "nl": "De werkplaatszoeker toont bedrijven uit een werkplaatsregister met adres, afstand en contactmogelijkheid. Het zijn registerbedrijven, geen gecontroleerde TEILEKLAR-partners.",
+          "fr": "La recherche de garage affiche des entreprises issues d’un annuaire, avec adresse, distance et moyen de contact. Ce sont des entreprises de l’annuaire, pas des partenaires TEILEKLAR vérifiés.",
+          "en": "The workshop search shows businesses from a workshop directory with address, distance and contact details. They are directory listings, not verified TEILEKLAR partners."
         },
         "canonical_path": "/teileklar/werkstatt",
         "canonical_origin": null,
