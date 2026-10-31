@@ -1380,7 +1380,7 @@
     "tools/birefnet_onnx.py": "afe4a06ab567ebd647a791cbdf77ee0a2c7148014020174598f9285905dfdf14",
     "tests/test_birefnet_onnx.py": "cef12904af73ae461f80833066f719f29717f7051c803d04c3af98cc77822261",
     "config/integrations/birefnet-onnx.json": "eb812904ff5ff2484e9f8cf428a8a3008787f5e9526984c288a35556899e1315",
-    "docs/contracts/birefnet-onnx.md": "c9aa67a65ed40df81614aa33383327f17905a7220498c3b8a3e2234990789b12",
+    "docs/contracts/birefnet-onnx.md": "788bfef2fac00421c3eaaf8b75e2f5df4dddf7df2a226cb05588d19a08912f37",
     "docs/licenses/birefnet-MIT.txt": "92a7089e0915fc32bc40067560b398f1e6a7a5958abd7d04eda393629a5acefb",
     "evidence/birefnet-onnx-2026-10-27/catalog-handler-search.md": "389639d7882f1121237e627916d41975321f65a8e89ab4e4ceb49e526d5ec47d",
     "tools/reviewed_delivery.py": "bc5435357b86b4defd2bc3a266bdc1ac9b74b055ae0c0cba812e9489f23798ed",

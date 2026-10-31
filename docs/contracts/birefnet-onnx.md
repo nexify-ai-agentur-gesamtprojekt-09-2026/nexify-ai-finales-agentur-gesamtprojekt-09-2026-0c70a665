@@ -59,8 +59,9 @@ keine Symlink-/Hardlink-/FIFO-/Parentpfadumgehung. Hash und Größe müssen stim
 bevor ein Modell in eine Session gelangt.
 
 Optional sind exakt NumPy2.3.5, onnx1.23.2 und onnxruntime1.31.1 vorgesehen;
-Versionen wurden anhand offizieller PyPI-Metadaten ausgewählt, nicht installiert.
-Hier ist nur NumPy2.3.5 bereits vorhanden; ONNX/ORT fehlen. `requirements-image`
+Versionen wurden zunächst anhand offizieller PyPI-Metadaten ausgewählt. In der
+isolierten Testumgebung wurden ONNX und ORT inzwischen für die unten beschriebene
+synthetische Probe installiert. `requirements-image`
 bindet zusätzlich das NumPy-Wheel für bestehende kontrollierte Tensor-Tests;
 keine native ONNX-Runtime wird dadurch automatisch installiert. Für den nativen
 Pilot ist die vollständige geprüfte Dependency-/Wheelhashclosure noch nötig.
@@ -115,7 +116,7 @@ Converter-/Paritybeleg; vollständige native Runtimeclosure; gemessene CPUzeit,
 Peak-RSS und temporäre Diskbytes auf freigegebenem Ziel; dann zwei tatsächlich
 zugeordnete/rechtmäßig nutzbare Originale für Masken-/Label-/Farb-/Lieferumfang-
 QA und anschließenden Derivat→Anzeige-Nachweis. Modellgewichte oder Runtime
-werden in diesem Schritt nicht beschafft. Die echte Inferenz bleibt blockiert.
+wurden für den Modellpilot nicht beschafft. Die echte BiRefNet-Inferenz bleibt blockiert.
 
 ## Prüfung und Rückweg
 
@@ -123,7 +124,7 @@ werden in diesem Schritt nicht beschafft. Die echte Inferenz bleibt blockiert.
 führt ausschließlich kontrollierte Graph-/Sessiondoubles mit echten NumPy-/PIL-
 Tensor-/Maskenoperationen aus. Geprüft werden Sessionaufruf/Normalisierung,
 Alpha-/RGBintegrität, Version/Quelle/Lizenz/Hash, Shapes, Provider, externe Daten,
-Budgets, Deadline und Fehlerzähler. Kein Torch/ONNX/ORT oder Modell wurde geladen.
+Budgets, Deadline und Fehlerzähler. Dabei werden kein Torch/ONNX/ORT und kein Modell geladen.
 Batchtests prüfen Wiring, Sessionreuse, Quarantäne, Replay und Legacy-Rollback.
 
 Rückweg: `segmenter="none_verified"` verwendet weiterhin nur vorhandene
@@ -145,3 +146,29 @@ Ein eigener Worker, dauerhafter Speicher, Rechteprüfung, Rücklese- und
 Veröffentlichungsvertrag sowie dessen Kosten und Betrieb sind noch zu klären.
 Ohne gemessene Laufzeit und Speichergrenzen wird die schwere Inferenz keiner
 Vercel Function zugewiesen. Bestehende Konfiguration bleibt unverändert.
+
+## Native Laufzeitprobe vom 31.10.2026
+
+`tests/native_image_runtime_probe.py` erzeugt einen kleinen ONNX-Graphen mit
+`ReduceMean` und einem synthetischen Rechteckbild. Die echte ONNX-Runtime
+prüft den Graphen, erzeugt eine CPU-Session und führt die Tensor- und
+Maskenverarbeitung des Adapters aus. Die Probe verwendet **keine** BiRefNet-
+Gewichte und beweist weder eine BiRefNet-Inferenz noch Freistellqualität.
+
+Mit NumPy 2.3.5, ONNX 1.23.2, ONNX Runtime 1.31.1 und Pillow 12.3.0 wurde
+ein Lauf mit `CPUExecutionProvider`, einem Aufruf und unveränderten RGB-Bytes
+beobachtet: 0,159 Sekunden und 119300 KiB Prozess-Peak-RSS. Diese Messung
+betrifft ausschließlich den winzigen synthetischen Graphen, nicht den Speicher-
+oder Zeitbedarf von BiRefNet. Die Maske hatte Alpha-Werte von 86 bis 233;
+sie ist keine brauchbare Freistellung. Aufruf mit lokal installierter Runtime:
+
+```sh
+PYTHONPATH=/workspace/.onboarding/image-runtime:. timeout 60s \
+  python3 tests/native_image_runtime_probe.py /tmp/nexify-synthetic-native
+```
+
+Der offizielle, hashgeprüfte Exportnotebook-Stand lädt einen ungepinnten
+externen DeformConv-Konverter und verändert ihn vor dem Export. Ein geprüfter
+Converter, der feste General-Export und der numerische Vergleich fehlen weiter;
+das Notebook wurde nicht ausgeführt. Die technische Runtimeprobe schließt diese
+Modell- und Qualitätslücke nicht.
