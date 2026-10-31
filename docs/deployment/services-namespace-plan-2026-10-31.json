@@ -10,7 +10,9 @@
         "bsonType": "object",
         "description": "nexify/teileklar/shop-v1/prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh/nexify_teileklar_shop_v1"
       }
-    }
+    },
+    "validationLevel": "strict",
+    "validationAction": "error"
   },
   "collections": [
     "products",
@@ -216,5 +218,11 @@
       }
     ]
   },
-  "executed": false
+  "executed": false,
+  "schema_plan_version": 2,
+  "claim_protocol": {
+    "collection": "source_manifests",
+    "description_template": "nexify/teileklar/shop-v1/prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh/nexify_teileklar_shop_v1/claim/<32 lowercase hex run id>",
+    "same_options_create_is_not_a_lock": true
+  }
 }
