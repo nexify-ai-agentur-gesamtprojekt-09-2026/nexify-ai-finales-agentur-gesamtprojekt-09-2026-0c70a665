@@ -1381,9 +1381,9 @@
             "fr": "Relier véhicule, pièce et atelier"
           },
           "body": {
-            "de": "TEILEKLAR führt durch Fahrzeugangaben, Teilesuche und die vorgesehenen Werkstattwege. Beginnen Sie mit dem Fahrzeug und der benötigten Aufgabe. Solange Katalog und Fachabläufe nicht freigegeben angeschlossen sind, bleiben die Ansichten Vorbereitung statt einer Kauf- oder Passungszusage.",
-            "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en de voorziene garageprocessen. Begin met het voertuig en de gewenste taak. Zolang catalogus en processen niet zijn aangesloten en vrijgegeven, blijven de pagina’s voorbereiding zonder koop- of pasvormtoezegging.",
-            "fr": "TEILEKLAR relie les informations du véhicule, la recherche de pièces et les parcours atelier prévus. Commencez par le véhicule et le besoin. Sans catalogue et processus validés, les écrans restent préparatoires, sans promesse d’achat ni de compatibilité."
+            "de": "TEILEKLAR führt Sie durch Fahrzeugangaben, Teilesuche und Werkstattkontakt. Beginnen Sie mit Ihrem Fahrzeug und Ihrem Anliegen. Online-Bestellungen sind derzeit nicht möglich; lassen Sie die Teilezuordnung vor dem Kauf fachlich prüfen.",
+            "nl": "TEILEKLAR leidt u langs voertuiggegevens, onderdelen zoeken en werkplaatscontact. Begin met uw voertuig en uw vraag. Online bestellen is momenteel niet mogelijk; laat de onderdeeltoewijzing vóór de aankoop vakkundig controleren.",
+            "fr": "TEILEKLAR vous guide à travers les informations du véhicule, la recherche de pièces et le contact atelier. Commencez par votre véhicule et votre demande. La commande en ligne n’est pas possible actuellement ; faites vérifier l’affectation des pièces par un professionnel avant l’achat."
           },
           "outcome": {
             "de": "Mit Fahrzeug und Passungsanforderung beginnen.",

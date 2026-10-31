@@ -4030,10 +4030,10 @@
         "en": "Parts search: in preparation"
       },
       "summary": {
-        "de": "Sagen Sie uns, welches Teil Sie für welches Fahrzeug brauchen. Wir prüfen die Passung und melden uns mit konkreten Optionen und dem besten nächsten Schritt. Die selbstständige Online-Suche im Katalog öffnen wir in Kürze.",
-        "nl": "Vertel ons welk onderdeel u voor welk voertuig nodig heeft. Wij controleren de pasvorm en komen terug met concrete opties en de beste volgende stap. De zelfstandige online zoekfunctie in de catalogus openen we binnenkort.",
-        "fr": "Dites-nous quelle pièce vous faut pour quel véhicule. Nous vérifions la compatibilité et revenons avec des options concrètes et la meilleure étape suivante. La recherche en ligne autonome dans le catalogue ouvrira prochainement.",
-        "en": "The search needs an approved parts inventory. Until then, you can describe your vehicle and the part you need as a request. Matches, prices and delivery times appear only with confirmed catalog data."
+        "de": "Beschreiben Sie das benötigte Teil und Ihr Fahrzeug. Eine vorhandene Teilenummer, Maße oder Fotos können bei der Einordnung helfen. Online-Bestellungen sind derzeit nicht möglich.",
+        "nl": "Beschrijf het benodigde onderdeel en uw voertuig. Een bestaand onderdeelnummer, maten of foto’s kunnen bij de indeling helpen. Online bestellen is momenteel niet mogelijk.",
+        "fr": "Décrivez la pièce nécessaire et votre véhicule. Un numéro de pièce existant, des dimensions ou des photos peuvent aider au classement. La commande en ligne n’est pas possible actuellement.",
+        "en": "Describe the part you need and your vehicle. An existing part number, dimensions or photos can help with the assignment. Online ordering is currently not possible."
       },
       "site_context": "teileklar",
       "sections": [
@@ -4799,10 +4799,10 @@
         "en": "Vehicle and verified fit"
       },
       "summary": {
-        "de": "Mit Ihren Fahrzeugdaten stellen wir sicher, dass ein Teil wirklich passt. Unklare Varianten, Maße oder Zubehörfragen klären wir vorab – damit Sie Fehlkäufe vermeiden.",
-        "nl": "Met uw voertuiggegevens zorgen we dat een onderdeel echt past. Onduidelijke varianten, maten of accessoirevragen verhelderen we vooraf – zodat u miskopen voorkomt.",
-        "fr": "Grâce à vos données véhicule, nous garantissons qu’une pièce correspond vraiment. Variantes, dimensions ou accessoires incertains sont clarifiés en amont – pour éviter les erreurs d’achat.",
-        "en": "Without vehicle context, no fit is claimed. Unclear variants, dimensions or accessory requirements must be clarified first. Preparing the request is not yet a confirmed compatibility proof."
+        "de": "Hersteller, Modell, Baujahr und Motorisierung helfen bei der Teilezuordnung. Je nach Ausführung sind weitere Angaben nötig. Lassen Sie die Passung vor dem Kauf fachlich bestätigen.",
+        "nl": "Merk, model, bouwjaar en motorisering helpen bij de onderdeeltoewijzing. Afhankelijk van de uitvoering zijn meer gegevens nodig. Laat de pasvorm vóór de aankoop vakkundig bevestigen.",
+        "fr": "Marque, modèle, année et motorisation aident à l’affectation des pièces. Selon la version, d’autres informations sont nécessaires. Faites confirmer la compatibilité par un professionnel avant l’achat.",
+        "en": "Make, model, year and engine help with the parts assignment. Depending on the version, further details are needed. Have the fit professionally confirmed before purchase."
       },
       "site_context": "teileklar",
       "sections": [
