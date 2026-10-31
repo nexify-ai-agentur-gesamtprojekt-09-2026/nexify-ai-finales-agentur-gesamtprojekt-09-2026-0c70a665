@@ -10,7 +10,7 @@
     "ui_bugs": [],
     "integration_issues": [],
     "notes": [
-      "Frontend loading correctly at https://goal-quest-134--9e2ug52x.preview.emergentagent.com",
+      "Frontend loading correctly at https://fresh-sync--3on01101.preview.emergentagent.com",
       "Chat panel rendering correctly with proper geometry across all viewports",
       "Progress sliders (hero-progress-slider, home-project-progress-slider, home-choice-progress-slider) detected and functional"
     ]
@@ -147,7 +147,7 @@
     "HomeContent inner home-choice-finale-content prevents duplicate testid",
     "WebKit browser engine fully functional after GStreamer autoaudiosink fix",
     "No CSP loosening, no disable-web-security used",
-    "All tests run against exact preview URL: https://goal-quest-134--9e2ug52x.preview.emergentagent.com",
+    "All tests run against exact preview URL: https://fresh-sync--3on01101.preview.emergentagent.com",
     "Normal user controls maintained, no hidden/manual phase changes",
     "Testing type: both (UI + Safari-chat + AppleDesignSkill)",
     "Scope: solved sub-packages, overall regression still separate as intended"

@@ -53,6 +53,22 @@ class ManagedLLMPolicyTests(unittest.TestCase):
                 configs = copy.deepcopy(self.configs); mutate(configs)
                 with self.assertRaises(checker.PolicyError): checker.validate(configs)
 
+    def test_product_enrichment_use_case_is_pinned_without_fallback(self):
+        enrichment = self.configs[checker.SOURCES[0]]["use_cases"]["product_enrichment"]
+        self.assertEqual((enrichment["model"]["id"], enrichment["model"]["reasoning_effort"]), ("ds/deepseek-v4-pro", "high"))
+        mutations = (
+            lambda c: c[checker.SOURCES[0]]["use_cases"]["product_enrichment"]["model"].update(id="ds/deepseek-v4.1-flash"),
+            lambda c: c[checker.SOURCES[0]]["use_cases"]["product_enrichment"]["model"].update(reasoning_effort="low"),
+            lambda c: c[checker.SOURCES[0]]["use_cases"]["product_enrichment"].update(silent_model_fallback=True),
+            lambda c: c[checker.SOURCES[4]]["anwendungsfaelle"]["product_enrichment"].update(modell="cx/gpt-6-luna"),
+            lambda c: c[checker.SOURCES[0]].pop("use_cases"),
+        )
+        for index, mutate in enumerate(mutations):
+            with self.subTest(mutation=index):
+                configs = copy.deepcopy(self.configs); mutate(configs)
+                with self.assertRaises(checker.PolicyError): checker.validate(configs)
+
+
     def test_coordinated_policy_and_all_binding_tampering_cannot_rewrite_user_instruction(self):
         configs = copy.deepcopy(self.configs)
         wrong = "deepseek/deepseek-v4.1-flash-1018"

@@ -1,7 +1,6 @@
-import type {ComponentProps} from 'react';
-import type {ClerkProvider} from '@clerk/nextjs';
 import type {AuthEnvironment} from './policy';
-export type PublicProviderProps=Omit<ComponentProps<typeof ClerkProvider>,'children'|'localization'>&{
+// Legacy Clerk prop mapping (DECISIONS D-007): kept for inventories, no SDK is loaded.
+export type PublicProviderProps=Record<string,unknown>&{
  __internal_clerkJSUrl?:string;__internal_clerkJSVersion?:string;__internal_clerkUIUrl?:string;__internal_clerkUIVersion?:string;
 };
 const truth=(v:string|undefined)=>v?.toLowerCase()==='true'||(v?.toLowerCase()!=='false'&&parseInt(v||'',10)>0);

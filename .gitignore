@@ -53,3 +53,7 @@ apps/site/standalone.html
 *.env
 credentials.json
 .credentials
+
+# local secrets / caches (Phase 1)
+memory/test_credentials.md
+apps/shop-api/data/

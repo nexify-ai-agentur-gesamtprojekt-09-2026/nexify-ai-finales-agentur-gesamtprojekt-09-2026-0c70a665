@@ -1,0 +1,303 @@
+{
+  "status": "LOCAL_CANDIDATE_NOT_DEPLOYED",
+  "base": "66185f1a184d8f0a65c039850cca936d8d5b7177",
+  "backend_commit": "93cb7f04f29387b44fcb527ee50c7347094e37a7",
+  "backend_merge": "27c2d65aab6393ab967d03b0a492acba2f7cbf3c",
+  "source_sha256": {
+    "PROGRESS.md": "be630e4131247da5d491a9a3d50d89f57c27269c68aa6a419d4f93a8a353e51c",
+    "apps/shop-api/.gitignore": "ee81c565658d897cf0f71b1a56c838d992b89003b99e01ebdbc392dc2e5f1a90",
+    "apps/shop-api/.python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+    "apps/shop-api/prepare_vercel.py": "49dcf8e433b4041c97c31feb45bdd7872e420408bc1edb22de3f0bd084d6a9d8",
+    "apps/shop-api/requirements.in": "d5acb47415054efd8327839cb65b3be04333acba9d3d7ba2fe991d0187fd5963",
+    "apps/shop-api/requirements.txt": "15e850c9f224f5c21528d2dc6015cc5c79437e8202adcee5dbcb4508eba8ae29",
+    "apps/shop-api/shop/checkout_api.py": "30820be21cc748917abbd5e128891601ed906bd75adebe4f46443ac0f117ff3e",
+    "apps/shop-api/shop/mailer.py": "18300aa600bf6f7a2398c40753706c432ac3e961fad331ed0483a9a0f3065b98",
+    "apps/shop-api/tests/test_vercel_adapter.py": "05b171f0bb54f768fcc5388822c36086f8ffb03f7c9fe9bfdb956b649cc4e04d",
+    "apps/shop-api/tests/verify_vercel_bundle.cjs": "a249aa004128794c2592b1cdd6e1bfaef41b53b0f375e96444fa9c13c0bd8a14",
+    "apps/shop-api/vercel_app.py": "b79ef17659ff9abc32b424e94ab83b94e8cd7e6b9a0841351a1f9c73a505e901",
+    "config/acceptance-coverage.json": "aa5eb462aa226dbe740ddc9bace201e8f0a4050dc3e446fb77a53d1ed92c99c9",
+    "docs/contracts/requirements-reconciliation.md": "ec4f8018d087f902bb6d5732cef50be21fdb76b6a571741e1b6d6d960c5ed6c0",
+    "docs/deployment/services-namespace-plan-2026-10-31.json": "fc92870b22242b09a70d7fc28fdb8ab8e6f63247803819bf5aaddc7534a2dd95",
+    "docs/deployment/services-release-2026-10-31.md": "2c4c6a6bf9df22a90dcffaac67218ea1b3d6d9f2d31323c45d1dafedb6211b1c",
+    "docs/reviews/shop-recovery-contract-2026-10-31.md": "f10ecca292bcd1835ce037f8ef4eec02f53bec70b28e324201ba382cfb0abf68",
+    "tests/test_shop_recovery_contract_20261031.py": "b44f4f93bffa4f0e3fa10133302c2dce4ba1d2bde85c3dc75d84f3eb6f9ad78a",
+    "vercel.json": "27b4e985f7a8b7d37fea3b32a19d8f31dc19b4217ca3efc47bd317cb1c34dea6"
+  },
+  "tests": {
+    "adapter": {
+      "passed": 11,
+      "isolated_fakes": true
+    },
+    "backend_recovery": {
+      "passed": 14,
+      "isolated_fakes": true
+    },
+    "make_check": "passed, zero audit errors/warnings",
+    "base_make_test": {
+      "tests": 633,
+      "failures": 20,
+      "errors": 10,
+      "skipped": 11
+    },
+    "candidate_make_test": {
+      "tests": 647,
+      "failures": 20,
+      "errors": 10,
+      "skipped": 11
+    },
+    "new_full_suite_failure": null,
+    "vercel_schema_instance_validation_errors": 0,
+    "original_headers_identical": true,
+    "make_check_arch": {
+      "passed": false,
+      "violations": [
+        "ARCH-010",
+        "ARCH-024",
+        "ARCH-027",
+        "ARCH-029"
+      ],
+      "attribution": {
+        "ARCH-009": "resolved installed dependencies,69 Node tests pass base and candidate",
+        "ARCH-019": "resolved installed dependencies; standalone tests included in69 passing Node tests",
+        "ARCH-010": "inherited stale apps/site/src/Auth.tsx browser source proof",
+        "ARCH-024": "inherited absent generated-public-site source in old resize proof",
+        "ARCH-027": "inherited stale UI/Next/source-map hashes; all own13 bindings current",
+        "ARCH-029": "blocked by inherited browser proof; isolated local-shop HTTP tests7/7pass both"
+      }
+    },
+    "make_clean_check": "fails inherited full unittest suite",
+    "next_build": {
+      "passed": true,
+      "command": "pnpm --filter @nexify/web build",
+      "node": "22.23.4",
+      "pnpm": "12.15.0",
+      "next": "16.4.3",
+      "production_data_access": false
+    },
+    "node_tests": {
+      "candidate_passed": 69,
+      "base_passed": 69,
+      "failures": 0
+    },
+    "baseline_comparison": {
+      "new_failure_cases": [],
+      "new_error_cases": [],
+      "method": "Exact FAIL/ERROR case-label set comparison against fresh66185f1 baseline with same toolchain"
+    }
+  },
+  "independent_review": {
+    "reviewer": "commerce_contract_read",
+    "scope": "adapter metadata gates, exactness, alias normalization, read-only payment-mode exception callgraph",
+    "findings": "P1/P2 corrected; final narrow read-back no remaining concrete gap; reviewer performed source inspection, no independent runtime test",
+    "packaging_and_provenance": "Final scoped independent source read-back: no concrete remaining issue; ten source hashes match; no acceptance promotion"
+  },
+  "rea": {
+    "arguments": {
+      "detail": "complete",
+      "max_depth": 64,
+      "max_file_bytes": 262144,
+      "max_objects": 16384,
+      "max_string_bytes": 65536,
+      "path": "/workspace/nexify-release-integration-20261031/.local/release-integration/rea/vercel_app.pyc"
+    },
+    "complete_readback_equal": true,
+    "evidence_id": "ev_a6693f473cc80994ede4429ada1a308b350bc008a580518f70a6443b43a03dd1",
+    "exit_code": 0,
+    "passed": true,
+    "pyc_sha256": "91a2c0d0d469331e770995e5742bc34d81fd38e71a83f5dac928717af79b38f5",
+    "result_keys": [
+      "evidence_id",
+      "subject",
+      "provider",
+      "analysis_profile",
+      "predicate_type",
+      "operation",
+      "parameters",
+      "raw_result",
+      "normalized_result",
+      "confidence",
+      "authority",
+      "environment",
+      "limitations",
+      "relationship_coverage",
+      "locations",
+      "evidence_links"
+    ],
+    "scope": "Actual adapter compiled bytecode inventory only; no application execution, no business/security proof",
+    "server": {
+      "name": "rea",
+      "version": "6.8.0"
+    },
+    "source_sha256": "b79ef17659ff9abc32b424e94ab83b94e8cd7e6b9a0841351a1f9c73a505e901",
+    "source_unchanged": true,
+    "time_utc": "2026-10-31T15:05:21Z",
+    "tool": "inspect_python_pyc",
+    "tool_count": 229
+  },
+  "unverified": [
+    "provider-side Vercel Services build and deployed artifact",
+    "real namespace/schema/index metadata and runtime configuration",
+    "real provider keys/modes/price approval",
+    "Mongo atomicity and mail/payment E2E",
+    "private tenant membership and complete portal operation"
+  ],
+  "side_effects": {
+    "production_store_access": false,
+    "deployment": false,
+    "provider_test": false,
+    "frontend_edits": false,
+    "credential_transfer": false,
+    "git_transfer": "Dedicated branch push authorized; actual remote result is a separate final readback"
+  },
+  "cli_validation": {
+    "config_sha256": "27b4e985f7a8b7d37fea3b32a19d8f31dc19b4217ca3efc47bd317cb1c34dea6",
+    "cli": "65.2.0",
+    "schema_validation": "passed",
+    "detection_errors": [],
+    "services": [
+      {
+        "name": "frontend",
+        "root": "apps/web",
+        "builder": {
+          "src": "apps/web/package.json",
+          "use": "@vercel/next",
+          "config": {
+            "zeroConfig": true,
+            "framework": "nextjs",
+            "workspace": "apps/web"
+          }
+        }
+      },
+      {
+        "name": "shop",
+        "root": "apps/shop-api",
+        "runtime": "python",
+        "entrypoint": "vercel_app.py",
+        "builder": {
+          "src": "apps/shop-api/vercel_app.py",
+          "use": "@vercel/python",
+          "config": {
+            "zeroConfig": true,
+            "framework": "fastapi",
+            "workspace": "apps/shop-api",
+            "handlerFunction": "app"
+          }
+        }
+      }
+    ],
+    "warnings": []
+  },
+  "local_services_http": [
+    {
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "seconds": 3.122
+    },
+    {
+      "path": "/api/health",
+      "status": 503,
+      "content_type": "application/json",
+      "seconds": 0.117,
+      "response": {
+        "detail": {
+          "error": "runtime_binding_unavailable",
+          "reason": "project_binding_unverified"
+        },
+        "available": false
+      }
+    },
+    {
+      "path": "/api/shop/products",
+      "status": 503,
+      "content_type": "application/json",
+      "seconds": 0.063,
+      "response": {
+        "detail": {
+          "error": "runtime_binding_unavailable",
+          "reason": "project_binding_unverified"
+        },
+        "available": false
+      }
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 405,
+      "content_type": null,
+      "seconds": 1.867
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 503,
+      "content_type": "application/json",
+      "seconds": 0.069,
+      "response": {
+        "detail": {
+          "error": "runtime_binding_unavailable",
+          "reason": "payment_mode_unbound"
+        },
+        "available": false
+      }
+    }
+  ],
+  "python_builder": {
+    "package": "@vercel/python",
+    "version": "28.0.1",
+    "production_target": "python3.12",
+    "zip_verification": {
+      "files": 984,
+      "zip_bytes": 5763596,
+      "zip_sha256": "ea288cf974a4d5f7aaecaf93b237974ef8e099be1acaa080af7fddb89cba9657",
+      "no_absolute_or_parent_paths": true,
+      "byte_identical_sources": {
+        "vercel_support/bigbuy_get.py": "1709bdf3ae328e7e338f21b1f3b7703725d62ed3263da9d575716e73ee906591",
+        "vercel_app.py": "b79ef17659ff9abc32b424e94ab83b94e8cd7e6b9a0841351a1f9c73a505e901",
+        "shop/checkout_api.py": "30820be21cc748917abbd5e128891601ed906bd75adebe4f46443ac0f117ff3e",
+        "shop/mailer.py": "18300aa600bf6f7a2398c40753706c432ac3e961fad331ed0483a9a0f3065b98"
+      }
+    },
+    "limits": "Local official builder and valid ZIP; actual Vercel platform build still required",
+    "local_report": {
+      "tool_versions": {
+        "cli": "65.2.0",
+        "python": "28.0.1"
+      },
+      "runtime": "python3.12",
+      "handler": "vc__handler__python.vc_handler",
+      "file_count": 984,
+      "helper_key": "vercel_support/bigbuy_get.py",
+      "required_sources": [
+        {
+          "path": "vercel_app.py",
+          "present": true
+        },
+        {
+          "path": "shop/checkout_api.py",
+          "present": true
+        },
+        {
+          "path": "shop/mailer.py",
+          "present": true
+        },
+        {
+          "path": "shop/accounts_api.py",
+          "present": true
+        }
+      ],
+      "parent_paths": [],
+      "helper_fs_sha256": "1709bdf3ae328e7e338f21b1f3b7703725d62ed3263da9d575716e73ee906591",
+      "source_sha256": {
+        "vercel_support/bigbuy_get.py": "1709bdf3ae328e7e338f21b1f3b7703725d62ed3263da9d575716e73ee906591",
+        "vercel_app.py": "b79ef17659ff9abc32b424e94ab83b94e8cd7e6b9a0841351a1f9c73a505e901",
+        "shop/checkout_api.py": "30820be21cc748917abbd5e128891601ed906bd75adebe4f46443ac0f117ff3e",
+        "shop/mailer.py": "18300aa600bf6f7a2398c40753706c432ac3e961fad331ed0483a9a0f3065b98"
+      }
+    },
+    "current_zip_sha256": "ea288cf974a4d5f7aaecaf93b237974ef8e099be1acaa080af7fddb89cba9657"
+  },
+  "corrections": [
+    "Services runtime python3.12 rejected by actual CLI; omit runtime, pin .python-version=3.12",
+    "Parent-relative helper include rejected during ZIP creation; pinned build-time in-service staging, no execution",
+    "New vercel source hash updated with bounded scope record; unrelated historical UI evidence unchanged"
+  ]
+}

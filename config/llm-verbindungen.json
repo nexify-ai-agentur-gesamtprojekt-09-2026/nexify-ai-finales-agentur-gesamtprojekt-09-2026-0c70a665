@@ -80,5 +80,14 @@
   },
   "kennzeichnung": "Antworten tragen 'KI' (Art. 50 KI-VO)",
   "policy": "config/llm-policy.json",
-  "runtime_status": "not_verified_connected"
+  "runtime_status": "not_verified_connected",
+  "anwendungsfaelle": {
+    "product_enrichment": {
+      "verbindung": "9router",
+      "modell": "ds/deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "bei_nicht_verfuegbar": "geschlossen_mit_Fehler_ohne_Modellersatz",
+      "policy": "config/llm-policy.json#use_cases.product_enrichment"
+    }
+  }
 }

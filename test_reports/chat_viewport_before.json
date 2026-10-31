@@ -1,6 +1,6 @@
 {
   "test_info": {
-    "url": "https://goal-quest-134--9e2ug52x.preview.emergentagent.com",
+    "url": "https://fresh-sync--3on01101.preview.emergentagent.com",
     "timestamp": "2026-10-29T23:38:41.334016",
     "browsers": [
       "chromium",
@@ -1741,7 +1741,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1757,7 +1757,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1773,7 +1773,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1789,7 +1789,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1805,7 +1805,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1821,7 +1821,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1837,7 +1837,7 @@
       "visual_viewport": {},
       "send_button_accessibility": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     },
     {
@@ -1852,7 +1852,7 @@
       "chat_opened": false,
       "measurements": {},
       "errors": [
-        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://goal-quest-134--9e2ug52x.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
+        "Page.goto: Page crashed\nCall log:\n  - navigating to \"https://fresh-sync--3on01101.preview.emergentagent.com/\", waiting until \"networkidle\"\n"
       ]
     }
   ]
