@@ -1,30 +1,54 @@
 [
   {
-    "content": "EN atomar committet (SHA 0aaa8f5…)",
+    "content": "Phase 0: Standalone-Build grün + browser-critical.mjs grün reproduziert (Evidenz-Regen bewiesen) — Toolchain /root/toolchain/pw 1.58.2 + Browser rev1208",
     "status": "completed"
   },
   {
-    "content": "Touch-Targets 48px committet (SHA 94fde9a…)",
-    "status": "completed"
+    "content": "Phase 0b: Vollständige Evidenz-Regen-Kette dokumentieren (welche Runner/Register pro Quelldatei) als Referenz für alle Folgeänderungen",
+    "status": "in_progress"
   },
   {
-    "content": "Handoff-Paket committet (SHA 06fc182…)",
-    "status": "completed"
-  },
-  {
-    "content": "NEX-COPY-17 (TEILEKLAR Kundentexte, Sie-Form, Markenfuehrung) + Impressum (echte Eenmanszaak, BTW offen) committet (SHA 52e0bf9…)",
-    "status": "completed"
-  },
-  {
-    "content": "Jev-Gate read-only Analyse-Doku ergaenzt (Teil des Inhalts-Commits)",
-    "status": "completed"
-  },
-  {
-    "content": "Global: weitere Seiten/gemeinsame Vorlagen - Ersatztexte vom Redaktionsexperten einsetzen sobald geliefert (Semantik-Gate)",
+    "content": "Phase 1: Gesamte Seite + rechter Chat dynamisch/responsiv, kein Hero-Overlap (Workspace.tsx + CSS)",
     "status": "pending"
   },
   {
-    "content": "Offene Abnahmen: Backend-Runtime-Bindung + reale BigBuy-Katalogdaten (Integrationsaufgaben, blockiert)",
+    "content": "Phase 1: Video-Hintergründe entfernen (Ansatz messen, Media-/Evidenz-Register beachten)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 1: PWA/Mobile vervollständigen (PNG-Icons 192/512+maskable, Apple-Metas, theme-color, Install-Hinweis)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Home (/) nach Prototyp v12 neu (Struktur+Abstände+echte Marketingtexte) + Evidenz-Regen + make test + Commit",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Leistungen + 3 Unterseiten",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: loesungen/preise-ablauf/leistungsumfang",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: wissen/unternehmen/kontakt",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: API-Seiten + Rechtliches",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: TEILEKLAR Shop + Werkzeuge/Werkstatt/Partner",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Mock-Daten → Echtdaten (Blocker/Secrets markieren)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: Finaler Politur-Pass + Betriebsabläufe/Rechnungsversand (deutsche Standards)",
     "status": "pending"
   }
 ]
