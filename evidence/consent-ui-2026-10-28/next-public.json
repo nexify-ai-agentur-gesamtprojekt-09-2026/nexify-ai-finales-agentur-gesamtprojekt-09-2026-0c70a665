@@ -388,15 +388,15 @@
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/api/internal/workspace/mail/route.ts": "e8a5b7abf16d44d628cf730bcd0b70d471116584659ac0545f5416d2a44a3df2",
     "apps/web/app/intern/workspace/page.tsx": "f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe",
-    "apps/web/components/AuthAvailabilityNotice.tsx": "783344b1dca747645596fd8de7a3edf733aa0dbbe0e9f00f74f13c546623cbdc",
+    "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
     "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
     "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
     "apps/web/app/layout.tsx": "96f1f1ac331a805497c4729ee1717d23cb97d36ffc8039b8cfe1ebc44ad8d5a5",
     "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "0ff3c2115db8c53003090683a8389e715cbd61225003b0d7d79c95d39523b772",
     "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "15fbf55b0ae3a154a8036a8d777ec420c92e7fe4fb246f4892b270256ba57e8a",
-    "apps/web/components/DiagnosticConsent.tsx": "0db92384b63d02d0e64341975325805070890aa788e9d96c00ea66e73b3c244e",
+    "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
-    "apps/web/components/SiteFooter.tsx": "8fd5907b9e99aeadf62fec1fd91d7833696b31daa765ceb7fe8a1be608d36dc5",
+    "apps/web/components/SiteFooter.tsx": "ead3d5418a88c4eb79f05bb8a57b7bb119eb3a6641e8334ee2591734c4e1a34c",
     "apps/web/auth/tests/browser-public-experience.mjs": "2f05bb0e19114812d72237c7a92a836bd27fdab84dcaa7b7ede6d4be984a932f"
   },
   "auth_mobile": [

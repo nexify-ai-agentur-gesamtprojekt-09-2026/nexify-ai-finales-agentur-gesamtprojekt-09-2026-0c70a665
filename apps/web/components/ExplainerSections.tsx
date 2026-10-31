@@ -27,28 +27,32 @@ const speakers = { pascal: "Pascal", nex: "NeX", aifly: "AIFly" } as const;
 const labels = {
   de: { ai: "KI-Assistent", outcome: "Ihr nächster Schritt", captions: "Deutsch", collection: "So geht es weiter" },
   nl: { ai: "AI-assistent", outcome: "Uw volgende stap", captions: "Nederlands", collection: "Zo gaat u verder" },
-  fr: { ai: "Assistant IA", outcome: "Votre prochaine étape", captions: "Français", collection: "La suite de votre parcours" }
+  fr: { ai: "Assistant IA", outcome: "Votre prochaine étape", captions: "Français", collection: "La suite de votre parcours" },
+  en:{"ai": "AI assistant", "outcome": "Your next step", "captions": "English", "collection": "The rest of your journey"}
 };
 
 export default function ExplainerSections({ modules, pages, video, moduleVideos = {} }: { modules: ExplainerModule[]; pages: PublicPage[]; video?:PublicVideo;moduleVideos?:Record<string,Partial<Record<PublicVideo["locale"],PublicVideo>>> }) {
   const { locale } = useUI();
   const text = labels[locale];
+  const vlocale = locale==="en"?"de":locale; // videos exist only in de/nl/fr; en viewers get the de film (documented)
+  const germanAudioNote = locale==="en"?<p className="editorial-note" data-testid="en-video-audio-note">This film’s audio is in German. The explanatory text on this page is available in English.</p>:null;
   return <div className="editorial-explainers" role="group" aria-label={text.collection}>
-    {isPublicVideo(video,locale)?<section className="editorial-route-film"><PresenterVideo video={video} locale={locale}/></section>:null}
+    {isPublicVideo(video,vlocale)?<section className="editorial-route-film"><PresenterVideo video={video} locale={vlocale}/>{germanAudioNote}</section>:null}
     {modules.map(module => {
       if (!Object.hasOwn(speakers, module.speaker)) return null;
       const speaker = speakers[module.speaker];
-      const moduleVideo = moduleVideos[module.id]?.[locale];
-      const playable = isPublicVideo(moduleVideo,locale);
+      const moduleVideo = moduleVideos[module.id]?.[vlocale];
+      const playable = isPublicVideo(moduleVideo,vlocale);
       const next = pages.find(page => page.id === module.next_action.target_id);
       const side = module.media_side === "right" ? "right" : "left";
       return <section className={`editorial-module ${playable?'has-video':'has-image'} media-on-${side}`} key={module.id}>
         {!playable&&<div className="editorial-module-media"><PresenterScene speaker={module.speaker} title={module.title[locale]} locale={locale}/></div>}
         {playable && <div className="editorial-module-media">
           <figure>
-            <PresenterVideo video={moduleVideo!} locale={locale}/>
+            <PresenterVideo video={moduleVideo!} locale={vlocale}/>
             <figcaption>{moduleVideo?.title}</figcaption>
           </figure>
+          {germanAudioNote}
         </div>}
         <div className="editorial-module-copy">
           <span className="editorial-speaker">{speaker}{module.speaker !== "pascal" ? ` · ${text.ai}` : ""}</span>

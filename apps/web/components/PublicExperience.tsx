@@ -18,7 +18,7 @@ export function PublicExperienceProvider({data,children}:{data:PublicExperienceD
   return <PresenterGuideProvider journeys={data.journeys} defaultJourneyId={data.journeys.find(journey=>journey.steps.includes(id||""))?.id}>{children}</PresenterGuideProvider>;
 }
 export default function PublicExperience({page,data,documentTitle=false}:{page:PublicPage;data:PublicExperienceData;documentTitle?:boolean}){
-  const{locale}=useUI();const video=data.videos[page.id]?.[locale];
+  const{locale}=useUI();const video=data.videos[page.id]?.[locale==="en"?"de":locale];
   const title=documentTitle?<title>{`${page.localizedTitle[locale]} · NeXify AI`}</title>:null;
   const explanation=<><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/><ExplainerSections modules={data.explainers.find(entry=>entry.page_id===page.id)?.modules||[]} pages={data.pages} video={page.path==='/'?undefined:video} moduleVideos={data.videoModules[page.id]||{}}/></>;
   if(page.path==='/')return <>{title}<HomeContent home={page} pages={data.pages} video={video} moduleVideos={data.videoModules[page.id]||{}}><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/></HomeContent></>;

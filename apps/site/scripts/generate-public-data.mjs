@@ -7,7 +7,9 @@ import {resolve} from "node:path";
 
 function localized(value){
   if(!value||["de","nl","fr"].some(locale=>typeof value[locale]!=="string"))throw new Error("Invalid public localization");
-  return {de:value.de,nl:value.nl,fr:value.fr};
+  // EN runtime locale: use verified staged en when present, else base-locale (de)
+  // fallback. No invented product/legal/UI text.
+  return {de:value.de,nl:value.nl,fr:value.fr,en:typeof value.en==="string"?value.en:value.de};
 }
 function publicPath(path){
   if(typeof path!=="string"||!/^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*)?$/.test(path))throw new Error("Invalid public route");

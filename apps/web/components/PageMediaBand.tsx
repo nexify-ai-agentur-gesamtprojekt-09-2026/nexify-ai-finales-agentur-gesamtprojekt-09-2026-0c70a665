@@ -18,11 +18,13 @@ const alt: Record<string, Record<Locale, string>> = {
     de: "Pascal, NeX und AI Fly Oracle vor der NeXify-Markenbühne",
     nl: "Pascal, NeX en AI Fly Oracle voor het NeXify-merkpodium",
     fr: "Pascal, NeX et AI Fly Oracle devant la scène de marque NeXify",
+    en:"Pascal, NeX and AI Fly Oracle in front of the NeXify brand stage",
   },
   "tk-home": {
     de: "Pascal, NeX und AI Fly Oracle begleiten den TEILEKLAR-Einstieg",
     nl: "Pascal, NeX en AI Fly Oracle begeleiden de TEILEKLAR-ingang",
     fr: "Pascal, NeX et AI Fly Oracle accompagnent l’accès TEILEKLAR",
+    en:"Pascal, NeX and AI Fly Oracle accompany the TEILEKLAR entry",
   },
 };
 

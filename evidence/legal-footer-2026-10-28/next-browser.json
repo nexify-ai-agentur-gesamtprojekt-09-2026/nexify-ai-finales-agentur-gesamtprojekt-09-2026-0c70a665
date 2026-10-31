@@ -2844,9 +2844,9 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/SiteFooter.tsx": "8fd5907b9e99aeadf62fec1fd91d7833696b31daa765ceb7fe8a1be608d36dc5",
+    "apps/web/components/SiteFooter.tsx": "ead3d5418a88c4eb79f05bb8a57b7bb119eb3a6641e8334ee2591734c4e1a34c",
     "apps/web/components/WorkspaceRebuild.css": "907d8d6319404d3158be8ade0321de2d39a3964b921f024c9107fc837827b128",
-    "config/site-map.json": "d06c7afbb24daddda0f9941eeab59489c1ee29977379b7df089f6e254d038c4e",
+    "config/site-map.json": "09d7dc0daba843b7cadf828729f12f8f98b68f7cde59b5deafc084767f9eb95c",
     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
   "missing_license_route": true,

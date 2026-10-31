@@ -1,5 +1,5 @@
 /** Public presentation data only; this module never reads server configuration. */
-export type Localized = { de: string; nl: string; fr: string };
+export type Localized = { de: string; nl: string; fr: string; en: string };
 export type ContactChannel = { type: "email"; address: string; label: Localized };
 export type PublicPage = {
   id: string; path: string; title: string; purpose: string; sourceId: string; role: string;

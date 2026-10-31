@@ -1,5 +1,5 @@
 import {Component,lazy,Suspense,useState,type ReactNode} from "react";
-import {deDE,nlNL,frFR} from "@clerk/localizations";
+import {deDE,nlNL,frFR,enUS} from "@clerk/localizations";
 import {SiteLink} from "../../web/components/Router";
 import {useUI} from "../../web/components/Workspace";
 import type {Locale} from "../../web/lib/i18n";
@@ -8,9 +8,10 @@ import {AUTH_REDIRECT,publicAuthConfiguration} from "./auth-policy.mjs";
 const copy={
  de:{loading:"Anmeldung wird vorbereitet…",disabled:"Die Anmeldung ist hier noch nicht aktiviert.",unavailable:"Die Anmeldung ist momentan nicht verfügbar.",help:"Es werden keine Zugangsdaten angefordert. Nutze bei Fragen die Kontaktseite.",signedIn:"Sie sind angemeldet.",signOut:"Abmelden",signingOut:"Abmeldung läuft…",signOutError:"Die Abmeldung konnte nicht bestätigt werden. Bitte erneut versuchen.",disclaimer:"Ein Konto erteilt keine automatische Adminrolle und keine Freigabe für Mandanten- oder Geschäftsdaten."},
  nl:{loading:"Aanmelding wordt voorbereid…",disabled:"Aanmelden is hier nog niet geactiveerd.",unavailable:"Aanmelden is momenteel niet beschikbaar.",help:"Voer geen wachtwoorden in. Neem bij vragen contact met ons op.",signedIn:"U bent aangemeld.",signOut:"Afmelden",signingOut:"Bezig met afmelden…",signOutError:"Afmelden kon niet worden bevestigd. Probeer het opnieuw.",disclaimer:"Een account geeft niet automatisch beheerdersrechten of toegang tot bedrijfsgegevens."},
- fr:{loading:"Préparation de la connexion…",disabled:"La connexion n’est pas encore activée ici.",unavailable:"La connexion est momentanément indisponible.",help:"Ne saisissez aucun mot de passe. Contactez-nous pour toute question.",signedIn:"Vous êtes connecté.",signOut:"Se déconnecter",signingOut:"Déconnexion en cours…",signOutError:"La déconnexion n’a pas pu être confirmée. Réessayez.",disclaimer:"Un compte n’accorde automatiquement aucun droit d’administration ni accès aux données professionnelles."}
+ fr:{loading:"Préparation de la connexion…",disabled:"La connexion n’est pas encore activée ici.",unavailable:"La connexion est momentanément indisponible.",help:"Ne saisissez aucun mot de passe. Contactez-nous pour toute question.",signedIn:"Vous êtes connecté.",signOut:"Se déconnecter",signingOut:"Déconnexion en cours…",signOutError:"La déconnexion n’a pas pu être confirmée. Réessayez.",disclaimer:"Un compte n’accorde automatiquement aucun droit d’administration ni accès aux données professionnelles."},
+ en:{loading:"Preparing sign-in…",disabled:"Sign-in is not yet activated here.",unavailable:"Sign-in is momentarily unavailable.",help:"No credentials are requested. Use the contact page if you have questions.",signedIn:"You are signed in.",signOut:"Sign out",signingOut:"Signing out…",signOutError:"Sign-out could not be confirmed. Please try again.",disclaimer:"An account grants no automatic admin role and no access to tenant or business data."}
 };
-const localizations={de:deDE,nl:nlNL,fr:frFR};
+const localizations={de:deDE,nl:nlNL,fr:frFR,en:enUS};
 type Mode="login"|"signup";
 function AuthStatus({kind}:{kind:"loading"|"disabled"|"unavailable"}){
  const {locale}=useUI();const text=copy[locale];
@@ -66,6 +67,6 @@ export function AuthenticationPanel({mode,hashMode=false}:{mode:Mode;hashMode?:b
 // an identity SDK on every public page must not replace shell state or mint rights.
 export function AccountControl(){
  const {locale}=useUI();
- const label={de:"Kundenbereich",nl:"Klantenzone",fr:"Espace client"}[locale];
+ const label={de:"Kundenbereich",nl:"Klantenzone",fr:"Espace client",en:"Customer area"}[locale];
  return <SiteLink className="account-control account-link" href="/anmelden">{label}</SiteLink>;
 }

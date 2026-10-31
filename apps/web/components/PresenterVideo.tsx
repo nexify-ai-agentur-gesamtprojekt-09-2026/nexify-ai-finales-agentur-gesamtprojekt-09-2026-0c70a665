@@ -13,7 +13,8 @@ export type PublicVideo = {
 const words = {
   de: {play:"Video abspielen", pause:"Video pausieren", mute:"Ton ausschalten", unmute:"Ton einschalten", captions:"Untertitel", transcript:"Transkript", error:"Das Video kann gerade nicht abgespielt werden. Der Text bleibt verfügbar.", reduced:"Bewegung ist reduziert. Das Video startet nur auf deine Auswahl.", label:"Videosteuerung"},
   nl: {play:"Video afspelen", pause:"Video pauzeren", mute:"Geluid uitschakelen", unmute:"Geluid inschakelen", captions:"Ondertiteling", transcript:"Transcript", error:"De video kan nu niet worden afgespeeld. De tekst blijft beschikbaar.", reduced:"Beweging is beperkt. De video start alleen wanneer je die kiest.", label:"Videobediening"},
-  fr: {play:"Lire la vidéo", pause:"Mettre la vidéo en pause", mute:"Couper le son", unmute:"Activer le son", captions:"Sous-titres", transcript:"Transcription", error:"La vidéo ne peut pas être lue pour le moment. Le texte reste disponible.", reduced:"Les mouvements sont réduits. La vidéo démarre uniquement sur votre demande.", label:"Commandes vidéo"}
+  fr: {play:"Lire la vidéo", pause:"Mettre la vidéo en pause", mute:"Couper le son", unmute:"Activer le son", captions:"Sous-titres", transcript:"Transcription", error:"La vidéo ne peut pas être lue pour le moment. Le texte reste disponible.", reduced:"Les mouvements sont réduits. La vidéo démarre uniquement sur votre demande.", label:"Commandes vidéo"},
+  en:{"play": "Play the video", "pause": "Pause the video", "mute": "Mute", "unmute": "Unmute", "captions": "Captions", "transcript": "Transcript", "error": "The video cannot be played right now. The text remains available.", "reduced": "Motion is reduced. The video starts only on your request.", "label": "Video controls"}
 };
 const own = (value:unknown, extensions:string) => typeof value === "string" && !value.includes("..") && new RegExp("^/media/[A-Za-z0-9/_-]+\\.(?:"+extensions+")$").test(value);
 

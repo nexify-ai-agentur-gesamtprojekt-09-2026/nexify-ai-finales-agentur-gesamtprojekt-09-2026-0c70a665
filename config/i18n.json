@@ -2,139 +2,166 @@
   "sprachen": [
     "de",
     "nl",
-    "fr"
+    "fr",
+    "en"
   ],
   "default": "de",
   "texte": {
     "produkt.one": {
       "de": "NeXify AI one",
       "nl": "NeXify AI one",
-      "fr": "NeXify AI one"
+      "fr": "NeXify AI one",
+      "en": "NeXify AI one"
     },
     "produkt.onePlus": {
       "de": "NeXify AI one+",
       "nl": "NeXify AI one+",
-      "fr": "NeXify AI one+"
+      "fr": "NeXify AI one+",
+      "en": "NeXify AI one+"
     },
     "modell.flash": {
       "de": "NeXify flash",
       "nl": "NeXify flash",
-      "fr": "NeXify flash"
+      "fr": "NeXify flash",
+      "en": "NeXify flash"
     },
     "modell.pro": {
       "de": "NeXify pro",
       "nl": "NeXify pro",
-      "fr": "NeXify pro"
+      "fr": "NeXify pro",
+      "en": "NeXify pro"
     },
     "companion": {
       "de": "NeXify Companion",
       "nl": "NeXify Companion",
-      "fr": "NeXify Companion"
+      "fr": "NeXify Companion",
+      "en": "NeXify Companion"
     },
     "willkommen": {
       "de": "Willkommen bei",
       "nl": "Welkom bij",
-      "fr": "Bienvenue chez"
+      "fr": "Bienvenue chez",
+      "en": "Welcome to"
     },
     "aktiv": {
       "de": "ist aktiv",
       "nl": "is actief",
-      "fr": "est actif"
+      "fr": "est actif",
+      "en": "is active"
     },
     "guthaben": {
       "de": "Guthaben",
       "nl": "Tegoed",
-      "fr": "Crédit"
+      "fr": "Crédit",
+      "en": "Credit"
     },
     "ab": {
       "de": "ab",
       "nl": "vanaf",
-      "fr": "dès"
+      "fr": "dès",
+      "en": "from"
     },
     "abo.monat": {
       "de": "pro Monat",
       "nl": "per maand",
-      "fr": "par mois"
+      "fr": "par mois",
+      "en": "per month"
     },
     "abo.aufladen": {
       "de": "Guthaben aufladen",
       "nl": "Tegoed opladen",
-      "fr": "Recharger le crédit"
+      "fr": "Recharger le crédit",
+      "en": "Top up credit"
     },
     "zahlung.bestaetigt": {
       "de": "Zahlung bestätigt",
       "nl": "Betaling bevestigd",
-      "fr": "Paiement confirmé"
+      "fr": "Paiement confirmé",
+      "en": "Payment confirmed"
     },
     "rechnung.nr": {
       "de": "Rechnung",
       "nl": "Factuur",
-      "fr": "Facture"
+      "fr": "Facture",
+      "en": "Invoice"
     },
     "support.ticket": {
       "de": "Support-Ticket",
       "nl": "Supportticket",
-      "fr": "Ticket d'assistance"
+      "fr": "Ticket d'assistance",
+      "en": "Support ticket"
     },
     "support.offen": {
       "de": "offen",
       "nl": "open",
-      "fr": "ouvert"
+      "fr": "ouvert",
+      "en": "open"
     },
     "support.geloest": {
       "de": "gelöst",
       "nl": "opgelost",
-      "fr": "résolu"
+      "fr": "résolu",
+      "en": "resolved"
     },
     "mail.willkommen": {
       "de": "Willkommen",
       "nl": "Welkom",
-      "fr": "Bienvenue"
+      "fr": "Bienvenue",
+      "en": "Welcome"
     },
     "mail.bestaetigung": {
       "de": "Bestätigung",
       "nl": "Bevestiging",
-      "fr": "Confirmation"
+      "fr": "Confirmation",
+      "en": "Confirmation"
     },
     "abo.bestaetigt": {
       "de": "Abo aktiviert",
       "nl": "Abonnement geactiveerd",
-      "fr": "Abonnement activé"
+      "fr": "Abonnement activé",
+      "en": "Subscription activated"
     },
     "abo.storniert": {
       "de": "Abo beendet",
       "nl": "Abonnement beëindigd",
-      "fr": "Abonnement résilié"
+      "fr": "Abonnement résilié",
+      "en": "Subscription ended"
     },
     "zahlung.erfolgreich": {
       "de": "Zahlung erfolgreich",
       "nl": "Betaling geslaagd",
-      "fr": "Paiement réussi"
+      "fr": "Paiement réussi",
+      "en": "Payment successful"
     },
     "zahlung.fehlgeschlagen": {
       "de": "Zahlung fehlgeschlagen",
       "nl": "Betaling mislukt",
-      "fr": "Paiement échoué"
+      "fr": "Paiement échoué",
+      "en": "Payment failed"
     },
     "rechnung.erstellt": {
       "de": "Rechnung erstellt",
       "nl": "Factuur aangemaakt",
-      "fr": "Facture créée"
+      "fr": "Facture créée",
+      "en": "Invoice created"
     },
     "support.antwort": {
       "de": "Support-Antwort",
       "nl": "Supportantwoord",
-      "fr": "Réponse du support"
+      "fr": "Réponse du support",
+      "en": "Support reply"
     },
     "mail.guthaben": {
       "de": "Guthaben-Aufladung",
       "nl": "Tegoed opladen",
-      "fr": "Recharge de crédit"
+      "fr": "Recharge de crédit",
+      "en": "Credit top-up"
     },
     "guthaben.aufgeladen": {
       "de": "Guthaben aufgeladen",
       "nl": "Tegoed opgeladen",
-      "fr": "Crédit rechargé"
+      "fr": "Crédit rechargé",
+      "en": "Credit topped up"
     }
   }
 }

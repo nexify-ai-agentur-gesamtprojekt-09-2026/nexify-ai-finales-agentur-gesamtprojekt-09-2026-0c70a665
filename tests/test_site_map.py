@@ -15,7 +15,7 @@ def validate_site_map(data):
             raise ValueError(message)
 
     locales = set(data['locales'])
-    require(locales == {'de', 'nl', 'fr'} and data['default_locale'] == 'de', 'locale contract')
+    require(locales == {'de', 'nl', 'fr', 'en'} and data['default_locale'] == 'de', 'locale contract')
 
     def translated(value):
         require(isinstance(value, dict) and set(value) == locales, 'i18n key parity')

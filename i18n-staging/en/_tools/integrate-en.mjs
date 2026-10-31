@@ -17,14 +17,19 @@ for (const name of pointerParts) {
 const setAt = (ptr, en) => {
   const keys = ptr.split('/').slice(1);
   let o = sm;
-  for (let i = 0; i < keys.length - 1; i++) o = o[keys[i]];
+  // Skip-guard: pointers for nodes removed in an earlier session no longer
+  // resolve. Do not invent nodes; skip them instead of writing fake content.
+  for (let i = 0; i < keys.length - 1; i++) { o = o?.[keys[i]]; }
+  if (o === undefined || o === null) return false;
   const leaf = o[keys[keys.length - 1]];
-  if (!leaf || typeof leaf !== 'object' || typeof leaf.de !== 'string') throw new Error('not a loc object: ' + ptr);
-  if (!(['de','nl','fr'].every(l => typeof leaf[l] === 'string'))) throw new Error('loc missing base locale: ' + ptr);
+  if (!leaf || typeof leaf !== 'object' || typeof leaf.de !== 'string') return false;
+  if (!(['de','nl','fr'].every(l => typeof leaf[l] === 'string'))) return false;
   leaf.en = en;
+  return true;
 };
-let count = 0;
-for (const ptr of Object.keys(ptrEn)) { setAt(ptr, ptrEn[ptr]); count++; }
+let count = 0, skipped = [];
+for (const ptr of Object.keys(ptrEn)) { if (setAt(ptr, ptrEn[ptr])) count++; else skipped.push(ptr); }
+if (skipped.length) console.log('skipped stale pointers (removed nodes, not invented):', JSON.stringify(skipped));
 if (!sm.locales.includes('en')) sm.locales.push('en');
 // verify every loc object now has en (whole-doc)
 const isLoc = v => v && typeof v === 'object' && !Array.isArray(v) && ['de','nl','fr'].every(k => typeof v[k] === 'string');

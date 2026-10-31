@@ -30,10 +30,10 @@ function BrowserLink({href,onClick,target,download,...props}:SiteLinkProps){
   }
   return <a {...props} href={presented} target={target} download={download} onClick={clicked}/>;
 }
-const descriptions={de:"NeXify AI: Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",nl:"NeXify AI: websites, apps en verbonden processen. Bespreek uw plan direct met NeX Agentic AIFly.",fr:"NeXify AI : sites web, applications et processus connectés. Discutez de votre projet directement avec NeX Agentic AIFly."};
+const descriptions={de:"NeXify AI: Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",nl:"NeXify AI: websites, apps en verbonden processen. Bespreek uw plan direct met NeX Agentic AIFly.",fr:"NeXify AI : sites web, applications et processus connectés. Discutez de votre projet directement avec NeX Agentic AIFly.",en:"NeXify AI: websites, apps and connected processes. Discuss your project directly with NeX Agentic AIFly."};
 function RouteContent({page}:{page?:PublicPage}){
   const{locale}=useUI();
-  const unavailable={de:['Seite nicht verfügbar','Diese Seite ist in dieser öffentlichen Anwendung nicht freigegeben. Private Daten werden nicht angezeigt.','Zur Startseite'],nl:['Pagina niet beschikbaar','Deze pagina is niet beschikbaar in deze openbare toepassing. Privégegevens worden niet getoond.','Naar de startpagina'],fr:['Page indisponible',"Cette page n’est pas disponible dans cette application publique. Les données privées ne sont pas affichées.",'Vers l’accueil']}[locale];
+  const unavailable={de:['Seite nicht verfügbar','Diese Seite ist in dieser öffentlichen Anwendung nicht freigegeben. Private Daten werden nicht angezeigt.','Zur Startseite'],nl:['Pagina niet beschikbaar','Deze pagina is niet beschikbaar in deze openbare toepassing. Privégegevens worden niet getoond.','Naar de startpagina'],fr:['Page indisponible',"Cette page n’est pas disponible dans cette application publique. Les données privées ne sont pas affichées.",'Vers l’accueil'],en:['Page unavailable','This page is not available in this public application. Private data is not shown.','To the homepage']}[locale];
   useEffect(()=>{
     document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:`${unavailable[0]} · NeXify AI`;
     const meta=document.querySelector('meta[name="description"]');

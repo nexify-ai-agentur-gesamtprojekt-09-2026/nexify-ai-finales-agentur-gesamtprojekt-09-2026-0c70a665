@@ -45,7 +45,7 @@ try{
  });
  await check('nex2fly_product_copy_all_locales_and_section_focus_preserves_route',async()=>{
   await navigate(page,'/produkte/nex2fly');const source=pages.find(p=>p.id==='nex2fly');
-  for(const locale of ['de','nl','fr']){
+  for(const locale of ['de','nl','fr','en']){
    await page.locator('#locale').selectOption(locale);await page.waitForFunction(l=>document.documentElement.lang===l,locale);
    assert.equal(await page.locator('main h1').innerText(),source.title[locale]);
    const body=await page.locator('main').innerText();for(const section of source.sections)assert.ok(body.includes(section.body[locale]),locale+' '+section.id);
