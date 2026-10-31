@@ -2009,7 +2009,7 @@
       },
       {
         "path": "apps/web/components/PublicContent.tsx",
-        "sha256": "3f738bea1d4bbc5cb79f0fbc289680b0d2666ee99437231cdf42f9ebc66ee160"
+        "sha256": "c73ad055c78de77e113283e2c4cd091a6ec6f5bcaa81bab1126293122dfa419d"
       },
       {
         "path": "apps/web/components/Router.tsx",
