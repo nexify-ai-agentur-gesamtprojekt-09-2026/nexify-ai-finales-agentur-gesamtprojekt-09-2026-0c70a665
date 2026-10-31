@@ -2,6 +2,7 @@
 import ast
 import asyncio
 import copy
+import re
 from decimal import Decimal
 from pathlib import Path
 import types
@@ -100,6 +101,8 @@ class FakeOutbox:
                     if op == "$lt" and (actual is None or not actual < expected):
                         return False
                     if op == "$exists" and (key in row) != expected:
+                        return False
+                    if op == "$not" and isinstance(actual, str) and re.search(expected["$regex"], actual):
                         return False
             elif row.get(key) != value:
                 return False
@@ -237,14 +240,26 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
         await ns["retry_pending"]()
         self.assertEqual((db.rows["event"]["status"], calls), ("gesendet", ["event"]))
 
-    async def test_definite_rejection_and_uncertain_outcomes(self):
-        for outcome, expected in ((400, "fehlgeschlagen"), (503, "abgleich_erforderlich"), ("unknown", "abgleich_erforderlich")):
+    async def test_provider_responses_without_proven_rejection_are_uncertain(self):
+        for outcome, expected in ((202, "abgleich_erforderlich"), (302, "abgleich_erforderlich"), (400, "abgleich_erforderlich"), (503, "abgleich_erforderlich"), ("unknown", "abgleich_erforderlich")):
             ns, db, calls = self.setup_mailer([self.row("wartend")], outcome)
             await ns["deliver"]("event")
             self.assertEqual(db.rows["event"]["status"], expected)
             if expected == "abgleich_erforderlich":
                 await ns["retry_pending"]()
                 self.assertEqual(calls, ["event"])
+
+    async def test_noncanonical_claim_timestamps_require_reconciliation(self):
+        import datetime
+        values = (None, "2026-10-31T12:00:00", "2026-10-31T12:00:00+01:00",
+                  datetime.datetime(2020, 1, 1), datetime.datetime(2020, 1, 1, tzinfo=datetime.timezone.utc))
+        for status in ("wird_vorbereitet", "wird_gesendet"):
+            for value in values:
+                row = self.row(status)
+                row["claimed_at"] = value
+                ns, db, calls = self.setup_mailer([row])
+                await ns["retry_pending"]()
+                self.assertEqual((db.rows["event"]["status"], calls), ("abgleich_erforderlich", []))
 
     async def test_database_failure_after_provider_success_needs_manual_reconciliation(self):
         ns, db, calls = self.setup_mailer([self.row("wartend")])
@@ -258,6 +273,31 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
             await ns["deliver"]("event")
         db.rows["event"]["claimed_at"] = "2000-01-01T00:00:00+00:00"
         await ns["retry_pending"]()
+        self.assertEqual((db.rows["event"]["status"], calls), ("abgleich_erforderlich", ["event"]))
+
+    async def test_slow_provider_crossing_lease_does_not_trigger_resend(self):
+        ns, db, calls = self.setup_mailer([self.row("wartend")])
+        started, finish = asyncio.Event(), asyncio.Event()
+        class SlowClient:
+            def __init__(self, **kwargs):
+                pass
+            async def __aenter__(self):
+                return self
+            async def __aexit__(self, *args):
+                pass
+            async def post(self, url, json, headers):
+                calls.append(headers["Idempotency-Key"])
+                started.set()
+                await finish.wait()
+                return types.SimpleNamespace(status_code=200, json=lambda: {"id": "fake-id"})
+        ns["httpx"].AsyncClient = SlowClient
+        worker = asyncio.create_task(ns["deliver"]("event"))
+        await started.wait()
+        db.rows["event"]["claimed_at"] = "2000-01-01T00:00:00+00:00"
+        await ns["retry_pending"]()
+        await ns["retry_pending"]()
+        finish.set()
+        await worker
         self.assertEqual((db.rows["event"]["status"], calls), ("abgleich_erforderlich", ["event"]))
 
 

@@ -74,9 +74,8 @@ async def deliver(event_key):
     if response.status_code in (200, 201):
         await db.outbox.update_one({"_id": event_key, "status": "wird_gesendet", "claim_id": claim_id}, {"$set": {"status": "gesendet", "sent_at": now_iso(), "provider_id": response.json().get("id")}, "$inc": {"attempts": 1}})
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
-    # A server error or timeout response does not prove that the provider did not accept it.
-    uncertain = response.status_code >= 500 or response.status_code in (408, 409, 429)
-    return await _finish(event_key, claim_id, "abgleich_erforderlich" if uncertain else "fehlgeschlagen", "provider_http_%d" % response.status_code, count=True)
+    # No provider rejection contract is established here; do not guess it is retry-safe.
+    return await _finish(event_key, claim_id, "abgleich_erforderlich", "provider_http_%d" % response.status_code, count=True)
 
 
 async def _finish(event_key, claim_id, status, error, count):
@@ -89,6 +88,10 @@ async def _finish(event_key, claim_id, status, error, count):
 
 async def retry_pending():
     cutoff = (datetime.now(timezone.utc) - timedelta(seconds=CLAIM_LEASE_SECONDS)).isoformat()
+    # now_iso() writes UTC strings. Other representations cannot be ordered safely.
+    utc_iso = r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?\+00:00$"
+    await db.outbox.update_many({"status": {"$in": ["wird_vorbereitet", "wird_gesendet"]}, "claimed_at": {"$not": {"$regex": utc_iso}}},
+                                {"$set": {"status": "abgleich_erforderlich", "last_error": "claim_time_unverifiable"}})
     # Preparation has not reached the provider; a conditional transition fences the old worker.
     await db.outbox.update_many({"status": "wird_vorbereitet", "claimed_at": {"$lt": cutoff}},
                                 {"$set": {"status": "wartend", "last_error": "preparation_lease_expired"}})
