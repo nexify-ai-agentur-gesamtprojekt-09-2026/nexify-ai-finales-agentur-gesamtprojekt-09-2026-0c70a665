@@ -1,54 +1,30 @@
 [
   {
-    "content": "Phase 0: Standalone-Build grün + browser-critical.mjs grün reproduziert (Evidenz-Regen bewiesen) — Toolchain /root/toolchain/pw 1.58.2 + Browser rev1208",
+    "content": "Add 3 pages + explainers + media registry + refresh presenter-sources hash",
     "status": "completed"
   },
   {
-    "content": "Phase 0b: Vollständige Evidenz-Regen-Kette dokumentieren (welche Runner/Register pro Quelldatei) als Referenz für alle Folgeänderungen",
-    "status": "in_progress"
+    "content": "Regenerate public-site.json (39 pages)",
+    "status": "completed"
   },
   {
-    "content": "Phase 1: Gesamte Seite + rechter Chat dynamisch/responsiv, kein Hero-Overlap (Workspace.tsx + CSS)",
-    "status": "pending"
+    "content": "Update test counts + check_browser_evidence 72->78",
+    "status": "completed"
   },
   {
-    "content": "Phase 1: Video-Hintergründe entfernen (Ansatz messen, Media-/Evidenz-Register beachten)",
-    "status": "pending"
+    "content": "Regenerate vite evidence: browser-critical + text-spacing",
+    "status": "completed"
   },
   {
-    "content": "Phase 1: PWA/Mobile vervollständigen (PNG-Icons 192/512+maskable, Apple-Metas, theme-color, Install-Hinweis)",
-    "status": "pending"
+    "content": "Next build + public-experience -> next-public.json (78)",
+    "status": "completed"
   },
   {
-    "content": "Phase 2: Home (/) nach Prototyp v12 neu (Struktur+Abstände+echte Marketingtexte) + Evidenz-Regen + make test + Commit",
-    "status": "pending"
+    "content": "Regenerate legal-footer evidence (vite+next) + resync acceptance-coverage hashes",
+    "status": "completed"
   },
   {
-    "content": "Phase 2: Leistungen + 3 Unterseiten",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: loesungen/preise-ablauf/leistungsumfang",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: wissen/unternehmen/kontakt",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: API-Seiten + Rechtliches",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: TEILEKLAR Shop + Werkzeuge/Werkstatt/Partner",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 3: Mock-Daten → Echtdaten (Blocker/Secrets markieren)",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 4: Finaler Politur-Pass + Betriebsabläufe/Rechnungsversand (deutsche Standards)",
-    "status": "pending"
+    "content": "Run make test and ensure 620 pass",
+    "status": "completed"
   }
 ]

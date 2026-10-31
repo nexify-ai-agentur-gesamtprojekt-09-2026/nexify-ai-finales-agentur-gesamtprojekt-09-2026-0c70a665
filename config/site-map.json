@@ -122,7 +122,10 @@
             "tk-search",
             "tk-categories",
             "tk-fitment",
-            "tk-cart"
+            "tk-cart",
+            "tk-shop",
+            "tk-reifenrechner",
+            "tk-batterie"
           ]
         },
         {
@@ -262,7 +265,10 @@
     "tk-partner",
     "tk-workshop",
     "tk-legal",
-    "nex2fly"
+    "nex2fly",
+    "tk-shop",
+    "tk-reifenrechner",
+    "tk-batterie"
   ],
   "inter_site_links": [
     {
@@ -5566,6 +5572,394 @@
             "en": "Clarify your project in the chat"
           },
           "fallback_target_id": "contact"
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true
+    },
+    {
+      "id": "tk-shop",
+      "path": "/teileklar/shop",
+      "title": {
+        "de": "TEILEKLAR Shop: Teile und Service im Überblick",
+        "nl": "TEILEKLAR Shop: onderdelen en service in één overzicht",
+        "fr": "TEILEKLAR Shop : pièces et service en un coup d’œil",
+        "en": "TEILEKLAR shop: parts and service at a glance"
+      },
+      "summary": {
+        "de": "Der Shop-Bereich bündelt Sortiment, Fahrzeugbezug und Werkstattservice an einer Stelle. Sie sehen, wie Teilesuche, Passung und Terminvereinbarung zusammenspielen. Online-Bestellungen sind derzeit nicht möglich; Sie erhalten eine persönliche Rückmeldung zu Ihrem Fahrzeug.",
+        "nl": "Het shopgedeelte bundelt assortiment, voertuigkoppeling en werkplaatsservice op één plek. U ziet hoe onderdelen zoeken, pasvorm en afspraak samenhangen. Online bestellen is momenteel niet mogelijk; u krijgt een persoonlijke terugkoppeling voor uw voertuig.",
+        "fr": "L’espace boutique réunit assortiment, rattachement véhicule et service d’atelier au même endroit. Vous voyez comment recherche de pièces, compatibilité et prise de rendez-vous s’articulent. La commande en ligne n’est pas possible actuellement ; vous recevez une réponse personnelle pour votre véhicule.",
+        "en": "The shop area brings range, vehicle reference and workshop service together in one place. You can see how parts search, fit and appointment booking connect. Online ordering is currently not possible; you receive a personal response for your vehicle."
+      },
+      "site_context": "teileklar",
+      "sections": [
+        {
+          "id": "ueberblick",
+          "heading": {
+            "de": "Alles zum Teil an einer Stelle",
+            "nl": "Alles rond het onderdeel op één plek",
+            "fr": "Tout sur la pièce au même endroit",
+            "en": "Everything about the part in one place"
+          },
+          "body": {
+            "de": "Im Shop führen wir Sortiment, Fahrzeugbezug und Werkstatt zusammen, damit Sie den Weg vom gesuchten Teil bis zum nächsten Schritt klar vor sich haben. So vermeiden Sie Fehlkäufe und wissen, wie es weitergeht.",
+            "nl": "In de shop brengen we assortiment, voertuigkoppeling en werkplaats samen, zodat u de weg van het gezochte onderdeel naar de volgende stap helder voor u heeft. Zo voorkomt u miskopen en weet u hoe het verdergaat.",
+            "fr": "Dans la boutique, nous réunissons assortiment, rattachement véhicule et atelier pour que le chemin de la pièce recherchée à l’étape suivante soit clair. Vous évitez les erreurs d’achat et savez comment avancer.",
+            "en": "In the shop we bring range, vehicle reference and workshop together so the path from the part you need to the next step is clear. This avoids wrong purchases and shows what comes next."
+          },
+          "source_refs": [
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "wie-es-funktioniert",
+          "heading": {
+            "de": "So nutzen Sie den Shop",
+            "nl": "Zo gebruikt u de shop",
+            "fr": "Comment utiliser la boutique",
+            "en": "How to use the shop"
+          },
+          "body": {
+            "de": "Beschreiben Sie Ihr Fahrzeug und das Anliegen. Wir ordnen das passende Teil ein, klären die Passung und schlagen bei Bedarf einen Werkstatttermin vor. Verfügbarkeit und Preis besprechen wir individuell, sobald freigegebene Katalogdaten vorliegen.",
+            "nl": "Beschrijf uw voertuig en uw vraag. Wij bepalen het passende onderdeel, verduidelijken de pasvorm en stellen indien nodig een werkplaatsafspraak voor. Beschikbaarheid en prijs bespreken we individueel zodra er vrijgegeven catalogusgegevens zijn.",
+            "fr": "Décrivez votre véhicule et votre besoin. Nous identifions la pièce adaptée, clarifions la compatibilité et proposons au besoin un rendez-vous en atelier. Disponibilité et prix sont discutés au cas par cas dès que des données catalogue validées sont disponibles.",
+            "en": "Describe your vehicle and your request. We identify the right part, clarify the fit and, if needed, suggest a workshop appointment. Availability and price are discussed individually once approved catalog data is available."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Der Shop-Bereich bündelt Sortiment, Fahrzeugbezug und Werkstattservice an einer Stelle. Sie sehen, wie Teilesuche, Passung und Terminvereinbarung zusammenspielen. Online-Bestellungen sind derzeit nicht möglich; Sie erhalten eine persönliche Rückmeldung zu Ihrem Fahrzeug.",
+          "nl": "Het shopgedeelte bundelt assortiment, voertuigkoppeling en werkplaatsservice op één plek. U ziet hoe onderdelen zoeken, pasvorm en afspraak samenhangen. Online bestellen is momenteel niet mogelijk; u krijgt een persoonlijke terugkoppeling voor uw voertuig.",
+          "fr": "L’espace boutique réunit assortiment, rattachement véhicule et service d’atelier au même endroit. Vous voyez comment recherche de pièces, compatibilité et prise de rendez-vous s’articulent. La commande en ligne n’est pas possible actuellement ; vous recevez une réponse personnelle pour votre véhicule.",
+          "en": "The shop area brings range, vehicle reference and workshop service together in one place. You can see how parts search, fit and appointment booking connect. Online ordering is currently not possible; you receive a personal response for your vehicle."
+        },
+        "canonical_path": "/teileklar/shop",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/TEILEKLAR Shop.dc.html",
+        "N1:prototypen/NeXify Shop.dc.html"
+      ],
+      "source_refs": [
+        "docs/01-konzept/gesamtprojektplan.md",
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "docs/09-final/08-recht-und-compliance.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "tk-categories",
+          "label": {
+            "de": "Sortiment ansehen",
+            "nl": "Assortiment bekijken",
+            "fr": "Voir l’assortiment",
+            "en": "View the range"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "tk-search",
+          "label": {
+            "de": "Teil suchen",
+            "nl": "Onderdeel zoeken",
+            "fr": "Rechercher une pièce",
+            "en": "Search for a part"
+          }
+        },
+        {
+          "type": "chat",
+          "chat_intent": "quote",
+          "fallback_target_id": "contact",
+          "label": {
+            "de": "Beratung im Chat",
+            "nl": "Advies in de chat",
+            "fr": "Conseil dans le chat",
+            "en": "Get advice in the chat"
+          }
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true
+    },
+    {
+      "id": "tk-reifenrechner",
+      "path": "/teileklar/reifenrechner",
+      "title": {
+        "de": "Reifenrechner: Reifengrößen vergleichen",
+        "nl": "Bandencalculator: bandenmaten vergelijken",
+        "fr": "Calculateur de pneus : comparer les dimensions",
+        "en": "Tyre calculator: compare tyre sizes"
+      },
+      "summary": {
+        "de": "Der Reifenrechner hilft Ihnen, Reifengrößen nach gängiger Kennzeichnung einzuordnen und Alternativen zu vergleichen. Breite, Querschnitt und Felgendurchmesser werden nach ISO-Reifenkennzeichnung gelesen. Lassen Sie die Freigängigkeit und Zulässigkeit vor dem Kauf fachlich bestätigen.",
+        "nl": "De bandencalculator helpt u bandenmaten volgens de gangbare markering in te delen en alternatieven te vergelijken. Breedte, hoogte-breedteverhouding en velgdiameter worden volgens de ISO-bandenmarkering gelezen. Laat vrijloop en toelaatbaarheid vóór de aankoop vakkundig bevestigen.",
+        "fr": "Le calculateur de pneus vous aide à classer les dimensions selon le marquage usuel et à comparer des alternatives. Largeur, rapport d’aspect et diamètre de jante sont lus selon le marquage ISO des pneus. Faites confirmer le dégagement et l’homologation par un professionnel avant l’achat.",
+        "en": "The tyre calculator helps you classify tyre sizes by common marking and compare alternatives. Width, aspect ratio and rim diameter are read per ISO tyre marking. Have clearance and approval professionally confirmed before purchase."
+      },
+      "site_context": "teileklar",
+      "sections": [
+        {
+          "id": "ueberblick",
+          "heading": {
+            "de": "Reifengrößen richtig lesen",
+            "nl": "Bandenmaten juist lezen",
+            "fr": "Lire correctement les dimensions",
+            "en": "Read tyre sizes correctly"
+          },
+          "body": {
+            "de": "Eine Reifenkennung wie 205/55 R16 benennt Breite, Verhältnis von Höhe zu Breite und Felgendurchmesser. Der Rechner ordnet diese Angaben ein und zeigt, wie sich abweichende Größen auf den Abrollumfang auswirken. Das dient der Orientierung, nicht als technische Freigabe.",
+            "nl": "Een bandenaanduiding als 205/55 R16 benoemt breedte, hoogte-breedteverhouding en velgdiameter. De calculator deelt deze gegevens in en toont hoe afwijkende maten de rolomtrek beïnvloeden. Dit dient ter oriëntatie, niet als technische vrijgave.",
+            "fr": "Un marquage comme 205/55 R16 indique largeur, rapport hauteur/largeur et diamètre de jante. Le calculateur classe ces données et montre l’effet de dimensions différentes sur la circonférence de roulement. À titre indicatif, pas comme homologation technique.",
+            "en": "A marking such as 205/55 R16 states width, aspect ratio and rim diameter. The calculator classifies these values and shows how deviating sizes affect rolling circumference. For orientation, not as technical approval."
+          },
+          "source_refs": [
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "passung-pruefen",
+          "heading": {
+            "de": "Freigängigkeit und Zulässigkeit",
+            "nl": "Vrijloop en toelaatbaarheid",
+            "fr": "Dégagement et homologation",
+            "en": "Clearance and approval"
+          },
+          "body": {
+            "de": "Ob eine Reifengröße an Ihrem Fahrzeug zulässig und freigängig ist, hängt von Fahrzeugpapieren und Ausführung ab. Nennen Sie uns Ihr Fahrzeug, dann ordnen wir die in Frage kommenden Größen ein und benennen offene Punkte, die eine Werkstatt prüfen sollte.",
+            "nl": "Of een bandenmaat op uw voertuig toelaatbaar is en vrijloopt, hangt af van voertuigpapieren en uitvoering. Noem uw voertuig, dan bepalen wij de mogelijke maten en benoemen openstaande punten die een werkplaats moet controleren.",
+            "fr": "L’admissibilité et le dégagement d’une dimension dépendent des documents et de la version du véhicule. Indiquez votre véhicule : nous identifions les dimensions envisageables et signalons les points qu’un atelier doit vérifier.",
+            "en": "Whether a tyre size is permitted and clears on your vehicle depends on the vehicle documents and version. Name your vehicle and we classify the eligible sizes and flag open points a workshop should check."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Der Reifenrechner hilft Ihnen, Reifengrößen nach gängiger Kennzeichnung einzuordnen und Alternativen zu vergleichen. Breite, Querschnitt und Felgendurchmesser werden nach ISO-Reifenkennzeichnung gelesen. Lassen Sie die Freigängigkeit und Zulässigkeit vor dem Kauf fachlich bestätigen.",
+          "nl": "De bandencalculator helpt u bandenmaten volgens de gangbare markering in te delen en alternatieven te vergelijken. Breedte, hoogte-breedteverhouding en velgdiameter worden volgens de ISO-bandenmarkering gelezen. Laat vrijloop en toelaatbaarheid vóór de aankoop vakkundig bevestigen.",
+          "fr": "Le calculateur de pneus vous aide à classer les dimensions selon le marquage usuel et à comparer des alternatives. Largeur, rapport d’aspect et diamètre de jante sont lus selon le marquage ISO des pneus. Faites confirmer le dégagement et l’homologation par un professionnel avant l’achat.",
+          "en": "The tyre calculator helps you classify tyre sizes by common marking and compare alternatives. Width, aspect ratio and rim diameter are read per ISO tyre marking. Have clearance and approval professionally confirmed before purchase."
+        },
+        "canonical_path": "/teileklar/reifenrechner",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/Reifenrechner.dc.html"
+      ],
+      "source_refs": [
+        "docs/01-konzept/gesamtprojektplan.md",
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "docs/09-final/08-recht-und-compliance.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "tk-fitment",
+          "label": {
+            "de": "Fahrzeug und Passung",
+            "nl": "Voertuig en pasvorm",
+            "fr": "Véhicule et compatibilité",
+            "en": "Vehicle and fit"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "tk-search",
+          "label": {
+            "de": "Reifen anfragen",
+            "nl": "Banden aanvragen",
+            "fr": "Demander des pneus",
+            "en": "Request tyres"
+          }
+        },
+        {
+          "type": "chat",
+          "chat_intent": "quote",
+          "fallback_target_id": "contact",
+          "label": {
+            "de": "Beratung im Chat",
+            "nl": "Advies in de chat",
+            "fr": "Conseil dans le chat",
+            "en": "Get advice in the chat"
+          }
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true
+    },
+    {
+      "id": "tk-batterie",
+      "path": "/teileklar/batterie-berater",
+      "title": {
+        "de": "Batterie-Berater: passende Starterbatterie finden",
+        "nl": "Accu-adviseur: de juiste startaccu vinden",
+        "fr": "Conseiller batterie : trouver la bonne batterie de démarrage",
+        "en": "Battery advisor: find the right starter battery"
+      },
+      "summary": {
+        "de": "Der Batterie-Berater ordnet Starterbatterien nach Bauform, Kapazität und Kaltstartstrom ein und berücksichtigt die Bordnetz-Technik Ihres Fahrzeugs. Angaben werden nach gängiger Norm (EN) gelesen. Die genaue Passung bestätigen wir anhand Ihrer Fahrzeugdaten.",
+        "nl": "De accu-adviseur deelt startaccu’s in naar bouwvorm, capaciteit en koudstartstroom en houdt rekening met de boordnettechniek van uw voertuig. Gegevens worden volgens de gangbare norm (EN) gelezen. De exacte pasvorm bevestigen we aan de hand van uw voertuiggegevens.",
+        "fr": "Le conseiller batterie classe les batteries de démarrage selon forme, capacité et courant de démarrage à froid, en tenant compte de l’électronique de bord de votre véhicule. Les valeurs sont lues selon la norme usuelle (EN). La compatibilité exacte est confirmée d’après les données de votre véhicule.",
+        "en": "The battery advisor classifies starter batteries by form factor, capacity and cold cranking current and considers your vehicle’s electrical system. Values are read per the common standard (EN). We confirm the exact fit from your vehicle data."
+      },
+      "site_context": "teileklar",
+      "sections": [
+        {
+          "id": "ueberblick",
+          "heading": {
+            "de": "Welche Batterie passt zu Ihrem Auto?",
+            "nl": "Welke accu past bij uw auto?",
+            "fr": "Quelle batterie pour votre voiture ?",
+            "en": "Which battery suits your car?"
+          },
+          "body": {
+            "de": "Starterbatterien unterscheiden sich in Bauform, Kapazität (Ah) und Kaltstartstrom (A). Fahrzeuge mit Start-Stopp benötigen oft eine AGM- oder EFB-Batterie. Der Berater ordnet diese Merkmale ein, damit Sie die Anforderungen Ihres Fahrzeugs verstehen.",
+            "nl": "Startaccu’s verschillen in bouwvorm, capaciteit (Ah) en koudstartstroom (A). Voertuigen met start-stop vragen vaak een AGM- of EFB-accu. De adviseur deelt deze kenmerken in, zodat u de eisen van uw voertuig begrijpt.",
+            "fr": "Les batteries de démarrage diffèrent par forme, capacité (Ah) et courant de démarrage à froid (A). Les véhicules start-stop exigent souvent une batterie AGM ou EFB. Le conseiller classe ces caractéristiques pour comprendre les besoins de votre véhicule.",
+            "en": "Starter batteries differ in form factor, capacity (Ah) and cold cranking current (A). Vehicles with start-stop often require an AGM or EFB battery. The advisor classifies these so you understand your vehicle’s requirements."
+          },
+          "source_refs": [
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        },
+        {
+          "id": "sicher-einordnen",
+          "heading": {
+            "de": "Technik und Einbau sicher klären",
+            "nl": "Techniek en montage zeker klaren",
+            "fr": "Clarifier technique et montage",
+            "en": "Clarify technology and installation"
+          },
+          "body": {
+            "de": "Batterietyp und Einbau hängen von der Bordnetz-Technik ab; ein Wechsel kann eine Anlernung erfordern. Nennen Sie uns Ihr Fahrzeug, dann benennen wir die passenden Batterietypen und klären, ob ein Werkstatttermin für den Einbau sinnvoll ist.",
+            "nl": "Accutype en montage hangen af van de boordnettechniek; vervangen kan aanleren vereisen. Noem uw voertuig, dan benoemen wij de passende accutypen en klaren we of een werkplaatsafspraak voor de montage zinvol is.",
+            "fr": "Le type de batterie et le montage dépendent de l’électronique de bord ; un remplacement peut nécessiter un apprentissage. Indiquez votre véhicule : nous nommons les types adaptés et voyons si un rendez-vous en atelier est utile.",
+            "en": "Battery type and installation depend on the electrical system; a replacement may require relearning. Name your vehicle and we state the suitable battery types and whether a workshop appointment for installation makes sense."
+          },
+          "source_refs": [
+            "docs/09-final/11-teileklar-datenblatt.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Der Batterie-Berater ordnet Starterbatterien nach Bauform, Kapazität und Kaltstartstrom ein und berücksichtigt die Bordnetz-Technik Ihres Fahrzeugs. Angaben werden nach gängiger Norm (EN) gelesen. Die genaue Passung bestätigen wir anhand Ihrer Fahrzeugdaten.",
+          "nl": "De accu-adviseur deelt startaccu’s in naar bouwvorm, capaciteit en koudstartstroom en houdt rekening met de boordnettechniek van uw voertuig. Gegevens worden volgens de gangbare norm (EN) gelezen. De exacte pasvorm bevestigen we aan de hand van uw voertuiggegevens.",
+          "fr": "Le conseiller batterie classe les batteries de démarrage selon forme, capacité et courant de démarrage à froid, en tenant compte de l’électronique de bord de votre véhicule. Les valeurs sont lues selon la norme usuelle (EN). La compatibilité exacte est confirmée d’après les données de votre véhicule.",
+          "en": "The battery advisor classifies starter batteries by form factor, capacity and cold cranking current and considers your vehicle’s electrical system. Values are read per the common standard (EN). We confirm the exact fit from your vehicle data."
+        },
+        "canonical_path": "/teileklar/batterie-berater",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow"
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "commerce_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/Batterie-Berater.dc.html"
+      ],
+      "source_refs": [
+        "docs/01-konzept/gesamtprojektplan.md",
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "docs/09-final/08-recht-und-compliance.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "tk-fitment",
+          "label": {
+            "de": "Fahrzeug und Passung",
+            "nl": "Voertuig en pasvorm",
+            "fr": "Véhicule et compatibilité",
+            "en": "Vehicle and fit"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "tk-appointments",
+          "label": {
+            "de": "Werkstatttermin anfragen",
+            "nl": "Werkplaatsafspraak aanvragen",
+            "fr": "Demander un rendez-vous",
+            "en": "Request an appointment"
+          }
+        },
+        {
+          "type": "chat",
+          "chat_intent": "quote",
+          "fallback_target_id": "contact",
+          "label": {
+            "de": "Beratung im Chat",
+            "nl": "Advies in de chat",
+            "fr": "Conseil dans le chat",
+            "en": "Get advice in the chat"
+          }
         }
       ],
       "shared_chat_required": true,

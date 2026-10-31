@@ -392,11 +392,11 @@ def check_consent_ui(root):
     expected_public={p['path'] for p in mapping['pages'] if p['access']['visibility']=='public' and not p['access']['auth_required']}
     expected_private={p['path'] for p in mapping['pages'] if p['access']['visibility']!='public' or p['access']['auth_required']}
     rows=next_report.get('routes',[]);mobile=next_report.get('auth_mobile',[])
-    if (len(rows)!=72 or {(r.get('path'),r.get('locale')) for r in rows if r.get('passed') is True}!={(p,l) for p in expected_public for l in ('de','nl')}
+    if (len(rows)!=78 or {(r.get('path'),r.get('locale')) for r in rows if r.get('passed') is True}!={(p,l) for p in expected_public for l in ('de','nl')}
             or set(next_report.get('private',[]))!=expected_private or len(mobile)!=4
             or {(r.get('path'),r.get('locale'),r.get('width')) for r in mobile if r.get('passed') is True}!={(p,l,320) for p in ('/anmelden','/registrieren') for l in ('de','nl')}
             or next_report.get('passed') is not True or next_report.get('external')!=0 or next_report.get('mutations')!=0 or next_report.get('pageErrors')!=[]):raise EvidenceError('next_consent_complete_local_routes_required')
-    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':4,'next_route_locales':72,'next_auth_mobile':4}
+    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':4,'next_route_locales':78,'next_auth_mobile':4}
 
 
 

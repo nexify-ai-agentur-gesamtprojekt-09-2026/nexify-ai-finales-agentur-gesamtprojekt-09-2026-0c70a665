@@ -2,9 +2,9 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-31T16:00:15.236Z",
+  "observed_at": "2026-10-31T16:31:10.735Z",
   "source_sha256": {
-    "apps/site/.generated/public-site.json": "892c8c8d23556f14cc08e2de6bd5945b8659c9858df4665e0b51e57f5a806975",
+    "apps/site/.generated/public-site.json": "bdd8280579578f0f364e7824bc85e0a4a292dd791205a9d695b73fe9e6645cde",
     "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
     "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
@@ -80,7 +80,7 @@
     "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
     "config/design-tokens.json": "f57aacebc6a82875593d9a9606fc680b9779835977eaf9207d6851170095430c",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
-    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb",
+    "config/site-map.json": "524345f969ebd5129c74f5ed2f39df611008c30dd3108a71e8c3acbd8072d879",
     "config/text-resize-sources.json": "8cef37815cd15a9f0c0180b0999bafb0aceba320b4bd0c537af68fb8bd8ae8b8",
     "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
     "packages/tokens/tokens.css": "19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544",
@@ -636,7 +636,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 417,
+        "count": 420,
         "all_doubled": true
       },
       "overflow": false,
@@ -659,7 +659,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 409,
+        "count": 412,
         "all_doubled": true
       },
       "overflow": false,
@@ -679,6 +679,121 @@
     },
     {
       "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 406,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 394,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 419,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 419,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 419,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -689,121 +804,6 @@
       "content_overflows": []
     },
     {
-      "path": "/teileklar/kategorie",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kategorie",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 391,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/produkt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 416,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/warenkorb",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 416,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/kasse",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kasse",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/kasse",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 416,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/fahrzeug-und-passung",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 400,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
       "path": "/teileklar/termine",
       "width": 390,
       "text_spacing": true,
@@ -820,7 +820,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 384,
+        "count": 387,
         "all_doubled": true
       },
       "overflow": false,
@@ -843,7 +843,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 400,
+        "count": 403,
         "all_doubled": true
       },
       "overflow": false,
@@ -866,7 +866,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 415,
+        "count": 418,
         "all_doubled": true
       },
       "overflow": false,
@@ -889,7 +889,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 401,
+        "count": 404,
         "all_doubled": true
       },
       "overflow": false,
@@ -912,7 +912,76 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 385,
+        "count": 388,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 403,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 403,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 403,
         "all_doubled": true
       },
       "overflow": false,

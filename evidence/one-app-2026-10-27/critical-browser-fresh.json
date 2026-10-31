@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-31T16:00:14.544Z",
+  "recorded_at": "2026-10-31T16:30:16.376Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -43,7 +43,10 @@
     "/teileklar/gutscheine",
     "/teileklar/partner-werden",
     "/teileklar/werkstatt",
-    "/teileklar/rechtliches"
+    "/teileklar/rechtliches",
+    "/teileklar/shop",
+    "/teileklar/reifenrechner",
+    "/teileklar/batterie-berater"
   ],
   "passed": true,
   "scope": "Fresh local critical subset only; actual browser and deterministic Web handler SSE with simulated session404; no provider, production or full accessibility acceptance. Public route list is inventory, not an assertion every route was revisited here.",
@@ -54,7 +57,7 @@
     "apps/web/components/HomeContent.tsx": "fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136",
     "apps/web/components/Workspace.tsx": "66635bfc84ab930e130728fcf951c8059f75523eb78dd80624b4fe25e4da3167",
     "apps/web/components/PublicContentLayout.css": "ff74a7129d2cbc9117c24b289efb752d705fabd35015d271500f409ddf867557",
-    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb"
+    "config/site-map.json": "524345f969ebd5129c74f5ed2f39df611008c30dd3108a71e8c3acbd8072d879"
   },
   "auxiliary_source_sha256": {
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
@@ -140,7 +143,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-10-31T16:00:14.544Z",
+    "recorded_at": "2026-10-31T16:30:16.376Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

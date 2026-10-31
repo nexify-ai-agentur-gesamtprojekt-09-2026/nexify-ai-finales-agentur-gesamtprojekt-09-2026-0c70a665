@@ -182,6 +182,21 @@
       "passed": true
     },
     {
+      "path": "/teileklar/shop",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "locale": "de",
+      "passed": true
+    },
+    {
       "path": "/",
       "locale": "nl",
       "passed": true
@@ -358,6 +373,21 @@
     },
     {
       "path": "/teileklar/rechtliches",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/shop",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
       "locale": "nl",
       "passed": true
     }
