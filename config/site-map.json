@@ -3891,10 +3891,10 @@
         "en": "TEILEKLAR: parts, vehicle and next steps"
       },
       "summary": {
-        "de": "TEILEKLAR ist Ihr Anlaufpunkt für Autoteile, Fahrzeugfragen und Werkstattkontakte. Sie suchen ein Ersatzteil, eine Werkstatt in Ihrer Nähe oder interessieren sich für eine Zusammenarbeit? Im Shop bestellen Sie Artikel aus dem Sortiment Auto & Motorrad direkt online.",
-        "nl": "TEILEKLAR is uw aanspreekpunt voor auto-onderdelen met de juiste voertuigkoppeling en werkplaatsservice. Zoekt u een onderdeel, plant u een werkplaatsbezoek of heeft u interesse in samenwerking? Noem uw voertuig en uw vraag. Online bestellen is momenteel niet mogelijk.",
-        "fr": "TEILEKLAR est votre point de contact pour les pièces auto avec le bon rattachement véhicule et un service d’atelier. Vous cherchez une pièce, prévoyez une visite en atelier ou vous intéressez à une collaboration ? Indiquez votre véhicule et votre demande. La commande en ligne n’est pas possible actuellement.",
-        "en": "TEILEKLAR is your contact point for car parts with the right vehicle reference and workshop service. Are you looking for a spare part, planning a workshop visit, or interested in a partnership? Name your vehicle and your request. Online ordering is currently not possible."
+        "de": "TEILEKLAR ist Ihr Anlaufpunkt für Autoteile, Fahrzeugfragen und Werkstattkontakte. Sie suchen ein Ersatzteil, eine Werkstatt in Ihrer Nähe oder interessieren sich für eine Zusammenarbeit? Der Shop für Auto & Motorrad ist eingerichtet; das Sortiment ist derzeit noch leer, weil der Katalogimport noch nicht freigeschaltet ist.",
+        "nl": "TEILEKLAR is uw aanspreekpunt voor auto-onderdelen met de juiste voertuigkoppeling en werkplaatsservice. Zoekt u een onderdeel, plant u een werkplaatsbezoek of heeft u interesse in samenwerking? De shop voor auto & motor is ingericht; het assortiment is momenteel nog leeg, omdat de catalogusimport nog niet is vrijgegeven.",
+        "fr": "TEILEKLAR est votre point de contact pour les pièces auto avec le bon rattachement véhicule et un service d’atelier. Vous cherchez une pièce, prévoyez une visite en atelier ou vous intéressez à une collaboration ? La boutique auto & moto est en place ; l’assortiment est encore vide, car l’import du catalogue n’est pas encore activé.",
+        "en": "TEILEKLAR is your contact point for car parts with the right vehicle reference and workshop service. Are you looking for a spare part, planning a workshop visit, or interested in a partnership? The car & motorcycle shop is set up; the range is still empty because the catalogue import has not been enabled yet."
       },
       "site_context": "teileklar",
       "sections": [
