@@ -21,7 +21,7 @@ SPEC.loader.exec_module(ADAPTER)
 ENV = {'VERCEL_PROJECT_ID': ADAPTER.PROJECT_ID,
        'MONGODB_URI': 'mongodb://isolated.invalid/' + ADAPTER.PLANNED_NAMESPACE,
        'DB_NAME': ADAPTER.PLANNED_NAMESPACE, 'PREVIEW_PUBLIC_ORIGIN': 'https://shop.example.invalid',
-       'SHOP_VAT_PERCENT': '19'}  # synthetic only, no price approval
+       'SHOP_VAT_PERCENT': '19', 'REVOLUT_MODE': 'sandbox'}  # synthetic only, no price approval
 
 
 class Cursor:
@@ -50,9 +50,8 @@ class Database:
         self.metadata_reads = self.document_reads = 0
         self.writes, self.documents = [], {}
         self.metadata = [{'name': name, 'type': 'collection', 'options': {'validator': {'$jsonSchema': {'bsonType': 'object', 'description': ADAPTER.SCHEMA_MARKER}}}} for name in ADAPTER.COLLECTIONS]
-        self.indexes = {}
+        self.indexes = {name: {'_id_': {'key': [('_id', 1)]}} for name in ADAPTER.COLLECTIONS}
         for name, specs in ADAPTER.INDEXES.items():
-            self.indexes[name] = {}
             for n, (keys, unique, ttl) in enumerate(specs):
                 index = {'key': [(key, 1) for key in keys]}
                 if unique: index['unique'] = True
@@ -100,7 +99,7 @@ class MetadataTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(db.writes, [])
 
     async def test_missing_foreign_schema_view_partial_sparse_and_ttl_never_enable_dispatch(self):
-        for change in ('missing', 'foreign_marker', 'view', 'unique', 'partial', 'sparse', 'ttl', 'keys'):
+        for change in ('missing', 'foreign_marker', 'view', 'unique', 'partial', 'sparse', 'ttl', 'keys', 'warn', 'off', 'capped', 'validator', 'unexpected_unique', 'extra_index', 'prepare_unique', 'id_option', 'extra_collection'):
             with self.subTest(change=change):
                 db = Database()
                 if change == 'missing': db.metadata.pop()
@@ -110,7 +109,16 @@ class MetadataTests(unittest.IsolatedAsyncioTestCase):
                 elif change == 'partial': db.indexes['orders']['0']['partialFilterExpression'] = {'active': True}
                 elif change == 'sparse': db.indexes['orders']['0']['sparse'] = True
                 elif change == 'ttl': db.indexes['sessions']['1']['expireAfterSeconds'] = 10
-                else: db.indexes['orders']['0']['key'].reverse()
+                elif change == 'keys': db.indexes['orders']['0']['key'].reverse()
+                elif change == 'warn': db.metadata[0]['options']['validationAction'] = 'warn'
+                elif change == 'off': db.metadata[0]['options']['validationLevel'] = 'off'
+                elif change == 'capped': db.metadata[0]['options']['capped'] = True
+                elif change == 'validator': db.metadata[0]['options']['validator']['$jsonSchema']['required'] = ['foreign_field']
+                elif change == 'unexpected_unique': db.indexes['products']['2']['unique'] = True
+                elif change == 'prepare_unique': db.indexes['products']['2']['prepareUnique'] = True
+                elif change == 'id_option': db.indexes['products']['_id_']['prepareUnique'] = True
+                elif change == 'extra_index': db.indexes['outbox']['foreign'] = {'key': [('foreign_id', 1)], 'unique': True}
+                else: db.metadata.append({'name': 'foreign_collection', 'type': 'collection'})
                 self.assertIsNotNone(await ADAPTER.check_metadata(db))
                 self.assertEqual(db.writes, [])
                 self.assertEqual(db.document_reads, 0)
@@ -120,7 +128,7 @@ class DispatchTests(unittest.TestCase):
     def fake_app(self, db):
         self.calls, self.loaded = [], []
         router = APIRouter()
-        for path in ('/api/shop/cart', '/api/shop/orders/id', '/api/auth/login'):
+        for path in ('/api/shop/cart', '/api/shop/orders/id', '/api/auth/login', '/api/shop/products'):
             async def endpoint(path=path):
                 self.calls.append(path)
                 return {'synthetic': True}
@@ -135,7 +143,7 @@ class DispatchTests(unittest.TestCase):
         with TestClient(self.fake_app(db)) as client:
             self.assertEqual(self.loaded, [])
             self.assertEqual(db.metadata_reads, 0)
-            for path in ('/api/shop/cart', '/api/shop/orders/id', '/api/auth/login'):
+            for path in ('/api/shop/cart', '/api/shop/orders/id', '/api/auth/login', '/api/shop/products'):
                 self.assertEqual(client.get(path).status_code, 503)
             self.assertEqual(self.calls, [])
             self.assertEqual(db.writes, [])
@@ -153,6 +161,25 @@ class DispatchTests(unittest.TestCase):
             self.assertEqual(self.calls, ['/api/shop/cart'])
             self.assertEqual(db.writes, [])
 
+    def test_payment_mode_never_defaults_to_live_and_catalog_remains_read_only(self):
+        for mode in (None, "", "unknown"):
+            env = dict(ENV)
+            if mode is None: env.pop('REVOLUT_MODE')
+            else: env['REVOLUT_MODE'] = mode
+            loaded = []
+            router = APIRouter()
+            @router.get('/api/shop/products')
+            async def products(): return {'synthetic': True}
+            def loader(binding):
+                loaded.append(True)
+                return [router], Database()
+            with TestClient(ADAPTER.create_app(env, loader=loader)) as client:
+                for method, path in [('post', '/api/shop/orders'), ('get', '/api/shop/orders/id'), ('post', '/api/auth/login')]:
+                    self.assertEqual(getattr(client, method)(path).status_code, 503)
+                self.assertEqual(loaded, [])
+                self.assertEqual(client.get('/api/shop/products').status_code, 200)
+                self.assertFalse(client.get('/api/health').json()['payment_mode_configured'])
+
     def test_bad_driver_never_leaks_exception_or_uri(self):
         def broken(binding): raise RuntimeError('mongodb://REAL_SECRET_SENTINEL')
         with TestClient(ADAPTER.create_app(ENV, loader=broken)) as client:
@@ -164,13 +191,16 @@ class DispatchTests(unittest.TestCase):
         db = Database()
         class Client:
             def __getitem__(self, name): return db
-        with patch.dict(os.environ, ENV, clear=True), patch('motor.motor_asyncio.AsyncIOMotorClient', return_value=Client()), patch('subprocess.Popen', side_effect=AssertionError('no subprocess')):
+        with patch.dict(os.environ, {**ENV, 'MONGO_URL': '', 'DB_NAME': ''}, clear=True), patch('motor.motor_asyncio.AsyncIOMotorClient', return_value=Client()), patch('subprocess.Popen', side_effect=AssertionError('no subprocess')):
             # Remove only test-created module references on exit, preserving caller state.
             existing = set(sys.modules)
             try:
                 routers, bound = ADAPTER.load_existing(ADAPTER.resolve_binding(ENV))
                 self.assertNotIn('shop.main', sys.modules)
                 self.assertIs(bound, db)
+                self.assertEqual(os.environ['MONGO_URL'], ENV['MONGODB_URI'])
+                self.assertEqual(os.environ['DB_NAME'], ADAPTER.PLANNED_NAMESPACE)
+                self.assertEqual(os.environ['REVOLUT_MODE'], 'sandbox')
                 self.assertEqual(len(routers), len(ADAPTER.MODULES))
                 with TestClient(ADAPTER.create_app(ENV, loader=lambda _: (routers, db))) as client:
                     self.assertEqual(client.get('/api/health').status_code, 200)

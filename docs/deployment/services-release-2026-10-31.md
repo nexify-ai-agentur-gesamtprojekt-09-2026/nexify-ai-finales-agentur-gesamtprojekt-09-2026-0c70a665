@@ -35,7 +35,7 @@ Dispatch durch Projekt-, Namespace-, Schema- und Indexprüfung gesperrt. Die
 Prüfung verwendet ausschließlich listCollections/index_information, niemals
 Businessdokumente oder counts. Sie schreibt nichts und prüft bei jedem Request
 neu. Fehlende/fremde/partielle/sparse/falsche TTL-/Schlüsselkonfiguration:503.
-Vorhandene Auth-, Admin-, Owner-, CSRF/Origin-/Webhook- und Preisregeln der Router
+Vorhandene Auth-, Admin-, Owner-, Origin-/Webhook- und Preisregeln der Router
 werden nicht durch Clientclaims ersetzt. Same-Origin-Verhalten bleibt wie im
 bisherigen main.py (inklusive Webhookausnahme); keine neue Originliste.
 
@@ -64,7 +64,10 @@ sperren. Alias passiert ausschließlich im Backendprozess; nie URI ausgeben,
 ins Browserbundle übernehmen oder Credentials kopieren. Fehlende Bindung hält
 APIs auf503; Frontendbuild benötigt keine funktionierende Datenbank.
 
-Keine Revolutvariablen aliasen, keinen Zahlungsmodus wechseln, keine Preise
+Fehlendes/ungültiges REVOLUT_MODE sperrt alle zustandsändernden Wege sowie
+GETs mit möglichen Schreib-/Paymentfolgen vor Routerimport. Nur die explizit
+aufgeführten öffentlichen Katalog-/Werkstattlesewege bleiben möglich. Kein
+stiller Livefallback. Keine Revolutvariablen aliasen, keinen Zahlungsmodus wechseln, keine Preise
 freigeben. Bestehende REVOLUT_API_SECRET_KEY ist nicht automatisch ein passender
 Merchantkey. Preise, Versand, Rollen, Provider und reale Produktdaten werden
 nicht durch Metadatenbereitschaft abgenommen. Kein eigener Maildaemon; Nachholung

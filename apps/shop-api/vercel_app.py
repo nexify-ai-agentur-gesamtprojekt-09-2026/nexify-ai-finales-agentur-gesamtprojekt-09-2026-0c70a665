@@ -64,6 +64,8 @@ def resolve_binding(env: Mapping[str, str]) -> Binding:
     if old and new and old != new:
         raise BindingError("database_configuration_conflict")
     uri = old or new
+    if not isinstance(uri, str) or not uri:
+        raise BindingError("database_binding_missing_or_unsuitable")
     try:
         parsed = urlsplit(uri)
         if parsed.scheme not in ("mongodb", "mongodb+srv") or not parsed.hostname or parsed.fragment:
@@ -80,7 +82,10 @@ def resolve_binding(env: Mapping[str, str]) -> Binding:
     namespace = explicit or uri_name
     if namespace != PLANNED_NAMESPACE:
         raise BindingError("database_namespace_unapproved")
-    origin = env.get("PREVIEW_PUBLIC_ORIGIN", "").rstrip("/")
+    raw_origin = env.get("PREVIEW_PUBLIC_ORIGIN", "")
+    if not isinstance(raw_origin, str):
+        raise BindingError("public_origin_unbound")
+    origin = raw_origin.rstrip("/")
     try:
         public = urlsplit(origin)
         if public.scheme != "https" or not public.hostname or public.username or public.password or public.port or public.path or public.query or public.fragment:
@@ -99,36 +104,54 @@ def resolve_binding(env: Mapping[str, str]) -> Binding:
 
 async def check_metadata(database) -> str | None:
     """No find/count/doc reads, create_index, seed/import, or schema writes."""
-    cursor = await database.list_collections(filter={"name": {"$in": list(COLLECTIONS)}})
+    cursor = await database.list_collections()
     metadata = await cursor.to_list(length=None)
     by_name = {item.get("name"): item for item in metadata}
     if set(by_name) != set(COLLECTIONS):
         return "namespace_schema_unbound"
+    expected_validator = {"$jsonSchema": {"bsonType": "object", "description": SCHEMA_MARKER}}
     for name in COLLECTIONS:
         item = by_name[name]
         options = item.get("options", {})
-        schema = options.get("validator", {}).get("$jsonSchema", {})
-        if item.get("type") != "collection" or schema.get("description") != SCHEMA_MARKER or schema.get("bsonType") != "object":
+        if not isinstance(options, dict) or item.get("type") != "collection":
             return "namespace_schema_unbound"
-    for collection, specifications in INDEXES.items():
-        indexes = await database[collection].index_information()
-        for keys, unique, ttl in specifications:
-            matching = [value for value in indexes.values() if value.get("key") == [(key, 1) for key in keys]]
-            def suitable(value):
-                if value.get("sparse") or "partialFilterExpression" in value:
-                    return False
-                if value.get("collation", {}).get("locale", "simple") != "simple":
-                    return False
-                if unique and value.get("unique") is not True:
-                    return False
-                actual_ttl = value.get("expireAfterSeconds")
-                if ttl is not None and (isinstance(actual_ttl, bool) or actual_ttl != ttl):
-                    return False
-                if ttl is None and actual_ttl is not None:
-                    return False
-                return True
-            if not any(suitable(value) for value in matching):
+        if set(options) - {"validator", "validationLevel", "validationAction", "capped"}:
+            return "namespace_schema_unbound"
+        if options.get("validator") != expected_validator or options.get("validationLevel", "strict") != "strict" or options.get("validationAction", "error") != "error" or options.get("capped", False) is not False:
+            return "namespace_schema_unbound"
+        indexes = await database[name].index_information()
+        specifications = INDEXES.get(name, [])
+        expected = {tuple((key, 1) for key in keys): (unique, ttl) for keys, unique, ttl in specifications}
+        found = set()
+        found_id = False
+        for value in indexes.values():
+            # Unknown options can impose constraints (e.g. prepareUnique) even
+            # while unique=False; never infer compatibility from keys alone.
+            if set(value) - {"v", "key", "name", "ns", "background", "unique", "expireAfterSeconds", "collation"}:
                 return "required_index_unverified"
+            key = tuple(tuple(part) for part in value.get("key", []))
+            if key == (("_id", 1),):
+                if value.get("sparse") or "partialFilterExpression" in value or "expireAfterSeconds" in value or value.get("hidden", False) is not False:
+                    return "required_index_unverified"
+                found_id = True
+                continue
+            if key not in expected:
+                return "required_index_unverified"
+            unique, ttl = expected[key]
+            if value.get("sparse") or "partialFilterExpression" in value or value.get("hidden", False) is not False:
+                return "required_index_unverified"
+            if value.get("collation", {}).get("locale", "simple") != "simple":
+                return "required_index_unverified"
+            if value.get("unique", False) is not unique:
+                return "required_index_unverified"
+            actual_ttl = value.get("expireAfterSeconds")
+            if ttl is None and "expireAfterSeconds" in value:
+                return "required_index_unverified"
+            if ttl is not None and (isinstance(actual_ttl, bool) or actual_ttl != ttl):
+                return "required_index_unverified"
+            found.add(key)
+        if not found_id or found != set(expected):
+            return "required_index_unverified"
     return None
 
 
@@ -138,8 +161,10 @@ def load_existing(binding: Binding):
     Aliases exist only in this server process. GATEWAY_PORT=0 satisfies an inert
     legacy config import; no gateway module/server/port is started or used.
     """
-    os.environ.setdefault("MONGO_URL", binding.uri)
-    os.environ.setdefault("DB_NAME", binding.namespace)
+    if not os.environ.get("MONGO_URL"):
+        os.environ["MONGO_URL"] = binding.uri
+    if not os.environ.get("DB_NAME"):
+        os.environ["DB_NAME"] = binding.namespace
     os.environ.setdefault("GATEWAY_PORT", "0")
     service_root = Path(__file__).resolve().parent
     helper_root = service_root.parent / "agent-gateway"
@@ -156,6 +181,13 @@ def owns(path: str) -> bool:
     return path in ("/api/health", "/api/openapi.json", "/api/docs", "/api/docs/oauth2-redirect") or any(path == prefix or path.startswith(prefix + "/") for prefix in PREFIXES)
 
 
+def catalog_read_only(path: str, method: str) -> bool:
+    """These existing public read routes never call payment mode or mutate state."""
+    if method not in ("GET", "HEAD"):
+        return False
+    return path in ("/api/health", "/api/openapi.json", "/api/docs", "/api/docs/oauth2-redirect", "/api/shop/status", "/api/shop/categories", "/api/shop/products") or path.startswith(("/api/shop/products/", "/api/workshops/"))
+
+
 def unavailable(code: str):
     return JSONResponse({"detail": {"error": "runtime_binding_unavailable", "reason": code}, "available": False}, status_code=503, headers={"Cache-Control": "no-store"})
 
@@ -166,6 +198,7 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
         binding, binding_error = resolve_binding(values), None
     except BindingError as error:
         binding, binding_error = None, str(error)
+    payment_mode_configured = values.get("REVOLUT_MODE") in ("live", "sandbox")
     app = FastAPI(title="TEILEKLAR Shop API", version="1.0", openapi_url="/api/openapi.json", docs_url="/api/docs", redoc_url=None)
     lock = asyncio.Lock()
     loaded = False
@@ -196,6 +229,8 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
         path = request.url.path
         if not owns(path):
             return JSONResponse({"error": "route_not_owned"}, status_code=404, headers={"Cache-Control": "no-store"})
+        if not payment_mode_configured and not catalog_read_only(path, request.method):
+            return unavailable("payment_mode_unbound")
         error = await ready()
         if error:
             return unavailable(error)
@@ -212,7 +247,7 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
     @app.get("/api/health")
     async def health():
         # Metadata readiness only; not provider health, stock approval or portal acceptance.
-        return {"ok": True, "runtime": "vercel-services", "schema": "shop-runtime-v1"}
+        return {"ok": True, "runtime": "vercel-services", "schema": "shop-runtime-v1", "payment_mode_configured": payment_mode_configured}
 
     return app
 

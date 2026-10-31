@@ -1,0 +1,122 @@
+{
+  "status": "LOCAL_CANDIDATE_NOT_DEPLOYED",
+  "base": "66185f1a184d8f0a65c039850cca936d8d5b7177",
+  "backend_commit": "93cb7f04f29387b44fcb527ee50c7347094e37a7",
+  "backend_merge": "27c2d65aab6393ab967d03b0a492acba2f7cbf3c",
+  "source_sha256": {
+    "apps/shop-api/requirements.in": "d5acb47415054efd8327839cb65b3be04333acba9d3d7ba2fe991d0187fd5963",
+    "apps/shop-api/requirements.txt": "15e850c9f224f5c21528d2dc6015cc5c79437e8202adcee5dbcb4508eba8ae29",
+    "apps/shop-api/shop/checkout_api.py": "30820be21cc748917abbd5e128891601ed906bd75adebe4f46443ac0f117ff3e",
+    "apps/shop-api/shop/mailer.py": "18300aa600bf6f7a2398c40753706c432ac3e961fad331ed0483a9a0f3065b98",
+    "apps/shop-api/tests/test_vercel_adapter.py": "c440a7c1437f2c9dc9dbbfaa5e11d64c859743c601a5f4cee1d4f18ccef223a4",
+    "apps/shop-api/vercel_app.py": "10372899ccead02ba649bcb8c3e949a96d784d05e38242117ef20ce589550951",
+    "docs/deployment/services-namespace-plan-2026-10-31.json": "fc92870b22242b09a70d7fc28fdb8ab8e6f63247803819bf5aaddc7534a2dd95",
+    "docs/deployment/services-release-2026-10-31.md": "c92870037e3e49d4c5ec5f2aa6693ca0203b3a9acd72d23a95f0373ff4a288a2",
+    "docs/reviews/shop-recovery-contract-2026-10-31.md": "f10ecca292bcd1835ce037f8ef4eec02f53bec70b28e324201ba382cfb0abf68",
+    "tests/test_shop_recovery_contract_20261031.py": "b44f4f93bffa4f0e3fa10133302c2dce4ba1d2bde85c3dc75d84f3eb6f9ad78a",
+    "vercel.json": "9f0cacd1c1043264d97294c565ce518456ef981a6660c1efd90685bee18f1f43"
+  },
+  "tests": {
+    "adapter": {
+      "passed": 10,
+      "isolated_fakes": true
+    },
+    "backend_recovery": {
+      "passed": 14,
+      "isolated_fakes": true
+    },
+    "make_check": "passed, zero audit errors/warnings",
+    "base_make_test": {
+      "tests": 633,
+      "failures": 20,
+      "errors": 10,
+      "skipped": 11
+    },
+    "candidate_make_test": {
+      "tests": 647,
+      "failures": 21,
+      "errors": 10,
+      "skipped": 11
+    },
+    "new_full_suite_failure": "test_requirements_reconciliation recorded vercel.json hash is stale after intentional Services configuration change; existing stale register not broadly rewritten",
+    "vercel_schema_instance_validation_errors": 0,
+    "original_headers_identical": true,
+    "make_check_arch": {
+      "passed": false,
+      "violations": [
+        "ARCH-009",
+        "ARCH-010",
+        "ARCH-019",
+        "ARCH-024",
+        "ARCH-027",
+        "ARCH-029"
+      ],
+      "scope": "existing browser/resize/reconciliation evidence gates, no freshness claims renewed"
+    },
+    "make_clean_check": "failed at existing full unittest suite"
+  },
+  "independent_review": {
+    "reviewer": "commerce_contract_read",
+    "scope": "adapter metadata gates, exactness, alias normalization, read-only payment-mode exception callgraph",
+    "findings": "P1/P2 corrected; final narrow read-back no remaining concrete gap; reviewer performed source inspection, no independent runtime test"
+  },
+  "rea": {
+    "arguments": {
+      "detail": "complete",
+      "max_depth": 64,
+      "max_file_bytes": 262144,
+      "max_objects": 16384,
+      "max_string_bytes": 65536,
+      "path": "/workspace/nexify-release-integration-20261031/.local/release-integration/rea/vercel_app.pyc"
+    },
+    "complete_readback_equal": true,
+    "evidence_id": "ev_54f06b1fd95b89776ee9c0d6434130082ea1ab453ea414605ebb0a24f9920c73",
+    "exit_code": 0,
+    "passed": true,
+    "pyc_sha256": "bb5a342a141599694ce5293fedd8a93230155dcbf8043f4d803ed95a89326399",
+    "result_keys": [
+      "evidence_id",
+      "subject",
+      "provider",
+      "analysis_profile",
+      "predicate_type",
+      "operation",
+      "parameters",
+      "raw_result",
+      "normalized_result",
+      "confidence",
+      "authority",
+      "environment",
+      "limitations",
+      "relationship_coverage",
+      "locations",
+      "evidence_links"
+    ],
+    "scope": "Actual adapter compiled bytecode inventory only; no application execution, no business/security proof",
+    "server": {
+      "name": "rea",
+      "version": "6.8.0"
+    },
+    "source_sha256": "10372899ccead02ba649bcb8c3e949a96d784d05e38242117ef20ce589550951",
+    "source_unchanged": true,
+    "time_utc": "2026-10-31T14:47:46Z",
+    "tool": "inspect_python_pyc",
+    "tool_count": 229
+  },
+  "unverified": [
+    "Vercel Services build and traced shared helper packaging",
+    "Next build at exact integration tree",
+    "real namespace/schema/index metadata and runtime configuration",
+    "real provider keys/modes/price approval",
+    "Mongo atomicity and mail/payment E2E",
+    "private tenant membership and complete portal operation"
+  ],
+  "side_effects": {
+    "production_store_access": false,
+    "push": false,
+    "deployment": false,
+    "provider_test": false,
+    "frontend_edits": false,
+    "credential_transfer": false
+  }
+}

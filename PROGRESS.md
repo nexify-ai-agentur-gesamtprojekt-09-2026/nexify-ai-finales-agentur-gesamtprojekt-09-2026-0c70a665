@@ -1251,3 +1251,32 @@ keine neue Tenant-/Membershipfreigabe,kein Deployment oder Autorwechsel.
 Gesamtgates/REA und vollständige unabhängige PR-Coverage ab realer PR-Basis folgen
 am gesicherten Endhash. Bound-AI-Limit/Scanner/Binärgate bleiben unverändert;
 keine zusätzlichen OpenRouter-Aufrufe oder ausgelassenen Dateien.
+
+
+## Lokale Services-Releaseintegration · 31.10.2026
+
+Basis66185f1; Backend93cb7f04 lokal unverändert gemergt (Merge27c2d65).
+Neuer FastAPI-Einstieg ohne Seeds/Indizes/Subprozesse/Retrydaemon; genaue
+Next-/Shop-Routingzuständigkeit und hashgepinntes Pythonmanifest. Fehlende
+Projekt-/Namespace-/Schema-/Indexbindung sperrt sämtliche Routeraufrufe.
+Unbekannter Zahlungsmodus sperrt zustandsändernde Wege und schreibende GETs;
+explizite Katalog-/Werkstattlesewege sind separat geprüft. Keine Livebehauptung.
+
+10 Adapter- und14 Backend-Recovery-Faketests bestanden. make check grün.
+Vollsuite647 Tests:21 Failures/10 Errors/11 Skips; unveränderte Basis633 Tests:
+20 Failures/10 Errors/11 Skips. Zusätzlich veralteter vercel.json-Hash im alten
+Reconciliationregister; keine pauschale Neuhashung fremder UI-/Browserbelege.
+REA6.8.0 inspiziert echtes kompiliertes Adapterbytecode mit vollständigem
+Evidenzreadback; dies ist Inventarisierung, keine Python-Logik-/Produktionsabnahme.
+Unabhängige Quellprüfung und behobene konkrete Befunde siehe
+docs/reviews/services-integration-2026-10-31.json.
+
+Next-/Vercel-Services-Build, Helper-Bundle, autorisierte Namespacevorbereitung,
+Runtimekonfiguration und Provider-/Tenant-/E2E bleiben Releasegates. Keine
+Frontendänderung, kein Push/Deploy, kein Produktionsstorezugriff. Vorherige
+Frontend-/Shopbranches und letzte bestätigte Produktion unverändert erhalten.
+Nächster Owner: Parent prüft Integrationstree und providerseitige Attribution,
+Servicesfähigkeit/Compute sowie exakte Bindungen vor jeder Veröffentlichung.
+
+Zusätzliche Abschlussgates: make check-arch rot (ARCH-009/010/019/024/027/029);
+make clean-check rot an der Vollsuite. Kein pauschal grüner Release behauptet.
