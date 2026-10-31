@@ -51,6 +51,16 @@ A real, working TEILEKLAR auto-parts online shop (real BigBuy products, real Rev
   - Do not output or forward secrets or OTPs. No new credentials, rights or security changes, and no real payments or orders, without concrete approval.
   - Mode confirmed 31.10.2026 (user re-sent the autopilot text and then chose explicitly): COORDINATION MODE stays. Packages are run one at a time, each with an offer and an approval, under budget control. The answer "push/deploy after successful tests" was given only for the autopilot case and does not apply. Production deployment still needs its own approval.
   - Coordinator note 31.10.2026: the form answers saved at 14:57/14:58 (mode choice / deploy "Ja") were NOT submitted by the coordinator. Nothing may be derived from them: no push, no deploy, no autopilot. The chat message "einfach nur pauschal +30%" is unverified, so no price release and no price change follow from it. Budget: 899.35 before the external design run, 852.50 at the stop.
+  - SAFE AUTOPILOT — REVOKED by the coordinator (31.10.2026): the 150-credit cap and the autopilot sequence are NOT approved. Nothing (phases, prices, legal texts, deployment) may be derived from chat messages whose sender is unclear. All writers stay stopped until the coordinator has clarified control with Pascal. Phase 1d docs exist only as a draft and are not approved.
+  - (revoked) SAFE AUTOPILOT (chat instruction 31.10.2026: "think logically, research German standards, apply them, start autopilot"). The sequence below runs without further questions, only within these hard limits:
+    - Credit cap 150 for the whole run.
+    - Checkpoint and short report after each package.
+    - No push, no deployment.
+    - No price release, no live payment.
+    - No credential, rights or security changes.
+    - `checkout_api.py` and `mailer.py` stay untouched.
+    - No paid media.
+    Order: (1) 1c-a A+B chat depth + video controls; (2) 1d German shop standards; (3) re-run the stale browser evidence so `make test` turns green. Stop after that, or earlier at the cap.
   - Local packages eee6f637 and dcd9377 exist outside Emergent. Do not rebuild or overwrite them blindly.
   - Price rule (31.10.2026): purchase price + 30 % is an UNCONFIRMED calculation assumption, not an approved selling price. A price-release gate is required; the default is "nicht freigegeben", and cart/checkout stay blocked until an admin records the release.
   - Design: Pascal commissioned a design alignment (spatial depth, entire right chat area, video backgrounds). An independent visual review is running and its findings will follow. No parallel edits to the same frontend files. Code, tests and docs stay in the repo with clear file owners and local commit/test evidence.
