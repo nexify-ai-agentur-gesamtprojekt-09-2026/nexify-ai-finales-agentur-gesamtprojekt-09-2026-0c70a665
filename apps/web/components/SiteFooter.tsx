@@ -65,7 +65,7 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
    {placePages.length>0&&<nav aria-label={text.places} data-testid="footer-places"><h2>{text.places}</h2>{placePages.slice(0,8).map(page=><SiteLink key={page.id} href={page.path}>{page.localizedTitle[locale]}</SiteLink>)}</nav>}
   </div>
   <div className="footer-bottom">
-   <span className="footer-claim">{site==="teileklar"?"TEILEKLAR":"NeXify AI"} <span aria-hidden="true">·</span> {text.claim}</span>
+   <span className="footer-claim">{site==="teileklar"?"TEILEKLAR — Na KLAR!":"NeXify AI"} <span aria-hidden="true">·</span> {site==="teileklar"?"Ersatzteile · Fahrzeugzuordnung · Werkstatt · Partnerschaft":text.claim}</span>
    <span className="preview-badge">{text.preview}</span>
    <SiteLink href={site==="teileklar"?"/":"/teileklar"} className="footer-crosslink">{site==="teileklar"?"NeXify AI":"TEILEKLAR"} <span aria-hidden="true">→</span></SiteLink>
    <details className="footer-overview" onToggle={event=>setOverviewOpen(event.currentTarget.open)} data-testid="footer-overview">
