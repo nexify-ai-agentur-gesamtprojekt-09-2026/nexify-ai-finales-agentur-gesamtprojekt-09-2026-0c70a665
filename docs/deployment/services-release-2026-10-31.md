@@ -66,7 +66,8 @@ APIs auf503; Frontendbuild benötigt keine funktionierende Datenbank.
 
 Fehlendes/ungültiges REVOLUT_MODE sperrt alle zustandsändernden Wege sowie
 GETs mit möglichen Schreib-/Paymentfolgen vor Routerimport. Nur die explizit
-aufgeführten öffentlichen Katalog-/Werkstattlesewege bleiben möglich. Kein
+aufgeführten öffentlichen Katalog-/Werkstattlesewege und reine Sitzungsauskunft
+GET/HEAD /api/auth/me bleiben möglich; deren bestehende Authprüfung bleibt erhalten. Kein
 stiller Livefallback. Keine Revolutvariablen aliasen, keinen Zahlungsmodus wechseln, keine Preise
 freigeben. Bestehende REVOLUT_API_SECRET_KEY ist nicht automatisch ein passender
 Merchantkey. Preise, Versand, Rollen, Provider und reale Produktdaten werden

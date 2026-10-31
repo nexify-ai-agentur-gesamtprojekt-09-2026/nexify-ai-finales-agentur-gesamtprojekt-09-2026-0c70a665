@@ -24,6 +24,8 @@ PROJECT_ID = "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh"
 # This is a NEW planned namespace, not a statement that it exists in Atlas.
 PLANNED_NAMESPACE = "nexify_teileklar_shop_v1"
 SCHEMA_MARKER = f"nexify/teileklar/shop-v1/{PROJECT_ID}/{PLANNED_NAMESPACE}"
+CLAIM_COLLECTION = "source_manifests"
+CLAIM_DESCRIPTION = re.compile(re.escape(SCHEMA_MARKER) + r"/claim/[0-9a-f]{32}\Z")
 COLLECTIONS = (
     "products", "categories", "imports", "source_manifests", "carts", "orders",
     "webhook_events", "workshops", "workshop_requests", "users", "sessions",
@@ -105,7 +107,7 @@ def resolve_binding(env: Mapping[str, str]) -> Binding:
 async def check_metadata(database) -> str | None:
     """No find/count/doc reads, create_index, seed/import, or schema writes."""
     cursor = await database.list_collections()
-    metadata = await cursor.to_list(length=None)
+    metadata = await cursor.to_list(length=len(COLLECTIONS) + 1)
     by_name = {item.get("name"): item for item in metadata}
     if set(by_name) != set(COLLECTIONS):
         return "namespace_schema_unbound"
@@ -117,7 +119,11 @@ async def check_metadata(database) -> str | None:
             return "namespace_schema_unbound"
         if set(options) - {"validator", "validationLevel", "validationAction", "capped"}:
             return "namespace_schema_unbound"
-        if options.get("validator") != expected_validator or options.get("validationLevel", "strict") != "strict" or options.get("validationAction", "error") != "error" or options.get("capped", False) is not False:
+        allowed_validator = expected_validator
+        description = options.get("validator", {}).get("$jsonSchema", {}).get("description", "")
+        if name == CLAIM_COLLECTION and isinstance(description, str) and CLAIM_DESCRIPTION.fullmatch(description):
+            allowed_validator = {"$jsonSchema": {"bsonType": "object", "description": description}}
+        if options.get("validator") != allowed_validator or options.get("validationLevel", "strict") != "strict" or options.get("validationAction", "error") != "error" or options.get("capped", False) is not False:
             return "namespace_schema_unbound"
         indexes = await database[name].index_information()
         specifications = INDEXES.get(name, [])
@@ -182,11 +188,11 @@ def owns(path: str) -> bool:
     return path in ("/api/health", "/api/openapi.json", "/api/docs", "/api/docs/oauth2-redirect") or any(path == prefix or path.startswith(prefix + "/") for prefix in PREFIXES)
 
 
-def catalog_read_only(path: str, method: str) -> bool:
-    """These existing public read routes never call payment mode or mutate state."""
+def provider_independent_read(path: str, method: str) -> bool:
+    """These specific existing reads never call payment mode or mutate state."""
     if method not in ("GET", "HEAD"):
         return False
-    return path in ("/api/health", "/api/openapi.json", "/api/docs", "/api/docs/oauth2-redirect", "/api/shop/status", "/api/shop/categories", "/api/shop/products") or path.startswith(("/api/shop/products/", "/api/workshops/"))
+    return path in ("/api/health", "/api/openapi.json", "/api/docs", "/api/docs/oauth2-redirect", "/api/shop/status", "/api/shop/categories", "/api/shop/products", "/api/auth/me") or path.startswith(("/api/shop/products/", "/api/workshops/"))
 
 
 def unavailable(code: str):
@@ -230,7 +236,7 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
         path = request.url.path
         if not owns(path):
             return JSONResponse({"error": "route_not_owned"}, status_code=404, headers={"Cache-Control": "no-store"})
-        if not payment_mode_configured and not catalog_read_only(path, request.method):
+        if not payment_mode_configured and not provider_independent_read(path, request.method):
             return unavailable("payment_mode_unbound")
         error = await ready()
         if error:

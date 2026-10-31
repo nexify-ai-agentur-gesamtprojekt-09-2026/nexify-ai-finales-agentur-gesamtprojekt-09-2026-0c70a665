@@ -2,6 +2,7 @@
 import asyncio
 import copy
 import importlib.util
+import hashlib
 import json
 import os
 import sys
@@ -27,7 +28,7 @@ ENV = {'VERCEL_PROJECT_ID': ADAPTER.PROJECT_ID,
 
 class Cursor:
     def __init__(self, data): self.data = data
-    async def to_list(self, length=None): return copy.deepcopy(self.data)
+    async def to_list(self, length=None): return copy.deepcopy(self.data if length is None else self.data[:length])
 
 
 class Collection:
@@ -98,6 +99,17 @@ class MetadataTests(unittest.IsolatedAsyncioTestCase):
         self.assertGreater(db.metadata_reads, 1)
         self.assertEqual(db.document_reads, 0)
         self.assertEqual(db.writes, [])
+
+    async def test_per_run_claim_is_only_valid_for_its_fixed_collection_and_project(self):
+        db = Database()
+        claim = next(row for row in db.metadata if row['name']==ADAPTER.CLAIM_COLLECTION)
+        claim['options']['validator']['$jsonSchema']['description'] = ADAPTER.SCHEMA_MARKER+'/claim/'+'a'*32
+        self.assertIsNone(await ADAPTER.check_metadata(db))
+        claim['options']['validator']['$jsonSchema']['description'] = ADAPTER.SCHEMA_MARKER+'/claim/'+'A'*32
+        self.assertIsNotNone(await ADAPTER.check_metadata(db))
+        db = Database()
+        db.metadata[0]['options']['validator']['$jsonSchema']['description'] = ADAPTER.SCHEMA_MARKER+'/claim/'+'a'*32
+        self.assertIsNotNone(await ADAPTER.check_metadata(db))
 
     async def test_missing_foreign_schema_view_partial_sparse_and_ttl_never_enable_dispatch(self):
         for change in ('missing', 'foreign_marker', 'view', 'unique', 'partial', 'sparse', 'ttl', 'keys', 'warn', 'off', 'capped', 'validator', 'unexpected_unique', 'extra_index', 'prepare_unique', 'id_option', 'extra_collection'):
@@ -180,6 +192,44 @@ class DispatchTests(unittest.TestCase):
                 self.assertEqual(loaded, [])
                 self.assertEqual(client.get('/api/shop/products').status_code, 200)
                 self.assertFalse(client.get('/api/health').json()['payment_mode_configured'])
+
+    def test_auth_me_reads_real_session_without_payment_mode_and_keeps_auth_checks(self):
+        class MatchCollection(Collection):
+            async def find_one(self, query, projection=None):
+                self.database.document_reads += 1
+                value = self.database.documents.get(self.name)
+                return copy.deepcopy(value) if value and all(value.get(k)==v for k,v in query.items()) else None
+        class AuthDatabase(Database):
+            def __getitem__(self, name): return MatchCollection(self, name)
+        db = AuthDatabase()
+        class MotorClient:
+            def __getitem__(self, name): return db
+        env = {k:v for k,v in ENV.items() if k!='REVOLUT_MODE'}
+        existing = set(sys.modules)
+        try:
+            with patch.dict(os.environ, env, clear=True), patch('motor.motor_asyncio.AsyncIOMotorClient', return_value=MotorClient()), patch('httpx.AsyncClient', side_effect=AssertionError('no provider calls')):
+                routers, _ = ADAPTER.load_existing(ADAPTER.resolve_binding(env))
+                with TestClient(ADAPTER.create_app(env, loader=lambda _: (routers, db))) as client:
+                    self.assertEqual(client.get('/api/auth/me').status_code,401)
+                    token = 'synthetic-valid-token'
+                    db.documents['sessions'] = {'token_hash':hashlib.sha256(token.encode()).hexdigest(), 'user_id':'synthetic-customer','expires_at':datetime.now(timezone.utc)+timedelta(hours=1)}
+                    db.documents['users'] = {'user_id':'synthetic-customer','email':'synthetic@example.invalid','role':'customer'}
+                    self.assertEqual(client.get('/api/auth/me',headers={'Authorization':'Bearer foreign-token','X-Tenant-Id':'pretend-admin'}).status_code,401)
+                    headers = {'Authorization':'Bearer '+token}
+                    result = client.get('/api/auth/me',headers=headers)
+                    self.assertEqual(result.status_code,200)
+                    self.assertEqual(result.json()['role'],'customer')
+                    db.documents['sessions']['expires_at'] = datetime.now(timezone.utc)-timedelta(seconds=1)
+                    self.assertEqual(client.get('/api/auth/me',headers=headers).status_code,401)
+                    db.documents['sessions']['expires_at'] = datetime.now(timezone.utc)+timedelta(hours=1)
+                    db.indexes['sessions']['1']['expireAfterSeconds'] = 10
+                    self.assertEqual(client.get('/api/auth/me',headers=headers).status_code,503)
+                    self.assertEqual(client.post('/api/auth/login',json={}).status_code,503)
+                    self.assertEqual(db.writes,[])
+                    self.assertNotIn('REVOLUT_MODE',os.environ)
+        finally:
+            for name in set(sys.modules)-existing:
+                if name=='shop' or name.startswith('shop.') or name=='bigbuy_get': sys.modules.pop(name,None)
 
     def test_bad_driver_never_leaks_exception_or_uri(self):
         def broken(binding): raise RuntimeError('mongodb://REAL_SECRET_SENTINEL')
