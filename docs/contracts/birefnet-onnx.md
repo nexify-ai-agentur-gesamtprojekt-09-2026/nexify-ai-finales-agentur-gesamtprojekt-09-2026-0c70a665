@@ -129,3 +129,19 @@ Batchtests prüfen Wiring, Sessionreuse, Quarantäne, Replay und Legacy-Rollback
 Rückweg: `segmenter="none_verified"` verwendet weiterhin nur vorhandene
 Alphabilder; opakes RGB bleibt quarantiniert. Alte v1-Artefakte werden nur nach
 ihrem unveränderten Vertrag gelesen. Keine neue Publikation oder Löschung.
+
+## Anschluss an den bestehenden Vercel-Auftritt
+
+Die vorhandene Vercel-Konfiguration baut `apps/site` als statische Vite-Ausgabe;
+sie richtet keinen Bildworker ein. Ein möglicher nächster Schritt ist ein separat
+betriebener, ressourcenbegrenzt isolierter CPU-Worker, der ausschließlich belegbar
+freigegebene Originale verarbeitet und Entwürfe zur Sichtprüfung ablegt. Erst
+nach nachgewiesener Prüfung können Derivate über einen gesondert implementierten
+Katalog-/Auslieferungsvertrag referenziert werden. Die Anwendung darf keine
+lokalen Worker-Pfade oder ungeprüfte Entwürfe als öffentliche Bild-URLs ausgeben.
+
+Dies ist ein Integrationsvorschlag, kein vorhandener Dienst oder Deployment.
+Ein eigener Worker, dauerhafter Speicher, Rechteprüfung, Rücklese- und
+Veröffentlichungsvertrag sowie dessen Kosten und Betrieb sind noch zu klären.
+Ohne gemessene Laufzeit und Speichergrenzen wird die schwere Inferenz keiner
+Vercel Function zugewiesen. Bestehende Konfiguration bleibt unverändert.
