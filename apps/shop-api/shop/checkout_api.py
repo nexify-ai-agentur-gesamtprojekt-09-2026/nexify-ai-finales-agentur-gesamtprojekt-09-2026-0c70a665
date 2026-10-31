@@ -97,11 +97,19 @@ def timeline(order):
 async def send_paid_mails(order):
     try:
         subject, html, text = mail_templates.order_confirmation(order)
-        await mailer.enqueue("order_paid:customer:" + order["_id"], order["address"].get("email", ""), subject, html, text)
+        customer = await mailer.enqueue("order_paid:customer:" + order["_id"], order["address"].get("email", ""), subject, html, text)
         subject, html, text = mail_templates.internal_new_order(order)
-        await mailer.enqueue("order_paid:internal:" + order["_id"], mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=order["address"].get("email", ""))
+        internal = await mailer.enqueue("order_paid:internal:" + order["_id"], mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=order["address"].get("email", ""))
+        if customer is not None and internal is not None:
+            await db.orders.update_one({"_id": order["_id"], "status": PAID}, {"$set": {"paid_mail_intents_recorded": True, "paid_mail_recovery_pending": False}})
     except Exception:
-        pass  # mail problems never change the order; the outbox keeps the state
+        pass  # Leave the marker unset so a later reconciliation can retry safely.
+
+
+async def recover_paid_mail_intents():
+    """Recreate missing idempotent outbox intents, including after a process crash."""
+    async for order in db.orders.find({"status": PAID, "paid_mail_recovery_pending": True}):
+        await send_paid_mails(order)
 
 
 def public_order(order):
@@ -115,10 +123,10 @@ async def create_order(body: CheckoutIn, request: Request, response: Response, i
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         raise HTTPException(409, {"error": "cart_empty"})
-    await require_price_release()
     existing = await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key})
     if existing:
         return replay(existing)
+    await require_price_release()
     errors = address_errors(body.address)
     if errors:
         raise HTTPException(422, {"error": "address_invalid", "fields": errors})
@@ -161,17 +169,23 @@ def replay(order):
 
 async def sync_payment(order):
     """Read the authoritative Revolut state; exactly one atomic transition to paid."""
-    if order.get("status") == PAID or not order.get("revolut_order_id"):
+    if order.get("status") == PAID:
+        if order.get("paid_mail_recovery_pending"):
+            await send_paid_mails(order)
+        return order
+    if not order.get("revolut_order_id"):
         return order
     state = (await revolut.retrieve_order(order["revolut_order_id"])).get("state")
     await db.orders.update_one({"_id": order["_id"]}, {"$set": {"payment_state": state}})
     if state == "completed":
         updated = await db.orders.find_one_and_update({"_id": order["_id"], "status": {"$ne": PAID}},
-                                                      {"$set": {"status": PAID, "paid_at": now_iso()}, "$inc": {"paid_transitions": 1}})
+                                                      {"$set": {"status": PAID, "paid_at": now_iso(), "paid_mail_recovery_pending": True}, "$inc": {"paid_transitions": 1}})
         if updated:
             paid_ids = [l["product_id"] for l in order["lines"]]
             await db.carts.update_one({"owner": order["owner"]}, {"$pull": {"items": {"product_id": {"$in": paid_ids}}}})
-            await send_paid_mails(await db.orders.find_one({"_id": order["_id"]}))
+        current = await db.orders.find_one({"_id": order["_id"]})
+        if current and current.get("status") == PAID and current.get("paid_mail_recovery_pending"):
+            await send_paid_mails(current)
     elif state in ("cancelled", "failed") and order.get("status") == OPEN:
         await db.orders.update_one({"_id": order["_id"], "status": OPEN}, {"$set": {"status": FAILED}})
     return await db.orders.find_one({"_id": order["_id"]})

@@ -108,6 +108,11 @@ async def retry_loop():
     while True:
         await asyncio.sleep(300)
         try:
+            from .checkout_api import recover_paid_mail_intents
+            await recover_paid_mail_intents()
+        except Exception:
+            pass
+        try:
             await retry_pending()
         except Exception:
             pass

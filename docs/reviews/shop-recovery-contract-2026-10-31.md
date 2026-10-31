@@ -37,3 +37,13 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_shop_re
 ```
 
 Ergebnis auf dieser Basis: neun Mailer-Tests bestanden; der Gesamtlauf enthält zusätzlich die zwei oben beschriebenen weiterhin fehlgeschlagenen Preis- und Checkout-Tests. Die Fakes simulieren das voreingestellte `ReturnDocument.BEFORE`-Verhalten; MongoDB-Atomizität im Betrieb, BSON-Typfilter, Providervertrag und tatsächliche Zustellung sind damit nicht bewiesen. Vor Übernahme sind diese Grenzen mit isolierter echter MongoDB und Provider-Mocks sowie dem tatsächlich aktuellen Quellstand zu prüfen.
+
+## Übernahme auf den verifizierten Main-Stand
+
+Basis ist nun `66185f1a184d8f0a65c039850cca936d8d5b7177`; `86ed4b28c5230ee0bbb050a212b9f511db473545` ist dessen Vorfahr. Die vorherigen beiden roten Befunde beschreiben den historischen Stand `b060445`, nicht diesen neuen Testlauf. Die Mailer-Commits wurden nachvollziehbar übernommen.
+
+Beim atomaren Übergang zu `bezahlt` wird `paid_mail_recovery_pending` gesetzt. Ein Callback oder der periodische Mailer-Loop kann fehlende Outbox-Absichten erneut erzeugen. Die beiden vorhandenen eindeutigen Ereignisschlüssel verhindern die doppelte Anlage; erst nach bestätigter Anlage beider Absichten wird die Markierung entfernt. Fehlende Mailkonfiguration oder eine Unterbrechung lassen sie stehen. Historische bezahlte Bestellungen ohne diese neue Markierung werden nicht automatisch erneut angeschrieben und bedürfen gegebenenfalls eines gesonderten Abgleichs. Outbox-Anlage bedeutet keine bestätigte Zustellung. Der Warenkorb-Abbruch wird in diesem Paket nicht nachträglich repariert.
+
+Eine bereits angelegte Bestellung mit demselben Owner und Idempotenzschlüssel wird vor der Freigabeprüfung wiedergegeben; für eine neue Bestellung bleibt die Preissperre bestehen. Die neue vorhandene Preisprüfung ist erhalten; ein Test bestätigt nur `price_released == false` bei leerer Konfiguration und die Reihenfolge im Checkout. Ob die Preisfreigabe fachlich auch alle Versand- und Steuerwerte abdeckt, ist damit nicht belegt.
+
+Der vollständige lokale Recovery-Testlauf verwendet ausschließlich Fakes und die Standardbibliothek. Er prüft Zustandswechsel, teilweise Outbox-Anlage, wiederholte und konkurrierende Wiederaufnahme, nicht konfigurierte Empfänger, Preissperre und den Mailer-Lease. Er ersetzt weder echte MongoDB-Transaktionstests noch Providervertrags- oder End-to-End-Abnahme. Der Lauf und seine aktuelle Anzahl werden im Commitbericht angegeben.

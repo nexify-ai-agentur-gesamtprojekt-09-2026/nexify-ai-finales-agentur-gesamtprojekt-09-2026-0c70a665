@@ -27,14 +27,38 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
 
         config = types.SimpleNamespace(DEFAULT_MARKUP_PERCENT=Decimal("30"))
         settings = load_function("apps/shop-api/shop/pricing.py", "settings", {"Decimal": Decimal, "config": config})
-        try:
-            result = await settings(types.SimpleNamespace(settings=Settings()))
-        except (ValueError, LookupError):
-            return  # explicit fail-closed result
-        self.assertFalse(
-            result is not None and result.get("markup_percent") is not None and result.get("shipping_cents") is not None,
-            "Missing approved settings must not yield usable markup and shipping prices",
-        )
+        result = await settings(types.SimpleNamespace(settings=Settings()))
+        self.assertFalse(result["price_released"], "Missing price approval must remain unreleased")
+
+    async def test_existing_order_replay_precedes_price_gate_but_new_order_does_not(self):
+        tree = ast.parse((ROOT / "apps/shop-api/shop/checkout_api.py").read_text(encoding="utf-8"))
+        node = next(n for n in tree.body if isinstance(n, ast.AsyncFunctionDef) and n.name == "create_order")
+        node.decorator_list = []
+        for arg in node.args.args:
+            arg.annotation = None
+        node.args.defaults = []
+        node.returns = None
+        calls = []
+        class Orders:
+            existing = {"_id": "existing", "checkout_url": "https://example.invalid"}
+            async def find_one(self, query):
+                return self.existing
+        orders = Orders()
+        async def owner_for(request, response, create=False):
+            return types.SimpleNamespace(owner="user:test")
+        async def require_price_release():
+            calls.append("price_gate")
+            raise ValueError("unreleased")
+        namespace = {"owner_for": owner_for, "db": types.SimpleNamespace(orders=orders),
+                     "require_price_release": require_price_release, "replay": lambda order: {"order_id": order["_id"]}}
+        exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), "checkout_api.py", "exec"), namespace)
+        create = namespace["create_order"]
+        self.assertEqual(await create(None, None, None, "test-key"), {"order_id": "existing"})
+        self.assertEqual(calls, [])
+        orders.existing = None
+        with self.assertRaisesRegex(ValueError, "unreleased"):
+            await create(None, None, None, "test-key")
+        self.assertEqual(calls, ["price_gate"])
 
     async def test_paid_transition_recovers_mail_after_interrupted_cart_update(self):
         order = {"_id": "order-test", "status": "zahlung_offen", "revolut_order_id": "fake-provider-id",
@@ -81,6 +105,72 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(str(error), "injected interruption after paid transition")
         await sync_payment(copy.deepcopy(order))
         self.assertEqual(emails, ["order-test"], "Retry must recover paid-order mail intent exactly once")
+
+    async def test_outbox_intents_reconcile_after_partial_insert_and_concurrent_callbacks(self):
+        order = {"_id": "order-test", "status": "bezahlt", "paid_mail_recovery_pending": True,
+                 "address": {"email": "customer@example.invalid"}}
+        intents = set()
+        class Orders:
+            async def update_one(self, query, update):
+                order.update(update["$set"])
+            def find(self, query):
+                self.query = query
+                class Cursor:
+                    def __aiter__(self):
+                        self.done = False
+                        return self
+                    async def __anext__(self):
+                        if self.done or not order.get("paid_mail_recovery_pending"):
+                            raise StopAsyncIteration
+                        self.done = True
+                        return copy.deepcopy(order)
+                return Cursor()
+        class Mailer:
+            fail_once = True
+            @staticmethod
+            def setting(name):
+                return "internal@example.invalid"
+            async def enqueue(self, key, *args, **kwargs):
+                intents.add(key)
+                if self.fail_once:
+                    self.fail_once = False
+                    raise RuntimeError("interrupted after insert")
+                await asyncio.sleep(0)
+                return {"_id": key}
+        templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
+                                          internal_new_order=lambda _: ("subject", "html", "text"))
+        orders = Orders()
+        ns = {"PAID": "bezahlt", "db": types.SimpleNamespace(orders=orders), "mailer": Mailer(), "mail_templates": templates}
+        send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails", ns)
+        recover = load_function("apps/shop-api/shop/checkout_api.py", "recover_paid_mail_intents", ns)
+        await send(copy.deepcopy(order))
+        self.assertTrue(order["paid_mail_recovery_pending"])
+        await asyncio.gather(recover(), recover())
+        self.assertEqual(intents, {"order_paid:customer:order-test", "order_paid:internal:order-test"})
+        self.assertFalse(order["paid_mail_recovery_pending"])
+        self.assertTrue(order["paid_mail_intents_recorded"])
+        self.assertEqual(orders.query, {"status": "bezahlt", "paid_mail_recovery_pending": True})
+
+    async def test_missing_internal_recipient_never_marks_recovery_complete(self):
+        order = {"_id": "order-test", "status": "bezahlt", "paid_mail_recovery_pending": True,
+                 "address": {"email": "customer@example.invalid"}}
+        updates = []
+        class Orders:
+            async def update_one(self, *args):
+                updates.append(args)
+        class Mailer:
+            @staticmethod
+            def setting(name):
+                return ""
+            async def enqueue(self, key, to, *args, **kwargs):
+                return {"_id": key} if to else None
+        templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
+                                          internal_new_order=lambda _: ("subject", "html", "text"))
+        ns = {"PAID": "bezahlt", "db": types.SimpleNamespace(orders=Orders()), "mailer": Mailer(), "mail_templates": templates}
+        send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails", ns)
+        await send(order)
+        self.assertTrue(order["paid_mail_recovery_pending"])
+        self.assertEqual(updates, [])
 
 
 class FakeOutbox:
