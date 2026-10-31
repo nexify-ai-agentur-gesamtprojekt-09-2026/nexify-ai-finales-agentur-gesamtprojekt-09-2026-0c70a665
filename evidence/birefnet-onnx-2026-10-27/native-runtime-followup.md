@@ -57,6 +57,20 @@ Faltung mit ONNX-Operatoren nach. Die selektive Quellsichtung ist kein
 unabhängiges Code- oder Lizenzreview und keine numerische Funktionsprüfung.
 Der Konverter wurde nicht ausgeführt.
 
+Nachtrag zur eigenen vollständigen Quellsichtung vom 31.10.: Die 694 Zeilen und
+27 Funktionsdefinitionen wurden selbst gelesen und per Python-AST inventarisiert;
+ein unabhängiger Reviewer stand nicht zur Verfügung. Außer Torch und dessen
+ONNX-Hilfsmodulen fanden sich keine Imports; kein `eval`, `exec`, `open`,
+`__import__`, `getattr` oder `setattr`-Aufruf. Der Code registriert einen
+Torchvision-Symbolic-Handler und berechnet Offsetkoordinaten, vier Nachbarn,
+bilineare Gewichte, Padded Gather, Modulationsmaske und Gruppenkonvolution.
+Risiken bleiben: Dimensions- und Stride-Annahmen sind an Traceformen gebunden;
+die Notebook-Ersetzung leitet unbekannte Größen aus Strides ab, was bei anderen
+Layouts nicht allgemein korrekt ist. Padding, Randkoordinaten, Offset- und
+Gewichtsgruppen, verschiedene Shapes sowie die resultierenden Gesamtnetz-Logits
+erfordern numerische Referenztests. Diese Sichtung ersetzt sie nicht und gibt
+keine unabhängige oder rechtliche Freigabe; der Code wurde nicht ausgeführt.
+
 Der [rembg-General-Adapter](https://github.com/danielgatis/rembg/blob/c5b48b0417a0254df7d461efa14573597f369a83/rembg/sessions/birefnet_general.py)
 verweist auf `BiRefNet-general-epoch_244.onnx` (972666916 Bytes, MD5
 `7a35a0141cbbc80de11d9c9a28f52697`). Dessen Code-SHA256 ist
