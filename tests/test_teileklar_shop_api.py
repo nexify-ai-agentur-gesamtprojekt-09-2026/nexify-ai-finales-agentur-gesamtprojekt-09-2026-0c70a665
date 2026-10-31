@@ -91,6 +91,8 @@ class ShopFlow(unittest.TestCase):
         self.call(self.reset)
         self.admin, self.user_a, self.user_b = (self.account(n) for n in ("admin_t", "kunde_a", "kunde_b"))
         self.client.cookies.clear()
+        if not getattr(self, "keep_prices_unreleased", False):
+            self.assertEqual(self.client.post("/api/admin/price-release", headers=self.admin).status_code, 200)
 
     def account(self, name):
         self.client.cookies.clear()
@@ -145,6 +147,8 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual(self.client.post("/api/admin/import", headers=self.user_a, json={}).status_code, 403)
         self.assertEqual(self.client.get("/api/shop/products/bb-1").json()["price_cents"], 1547)
         self.assertEqual(self.client.put("/api/admin/settings", headers=self.admin, json={"markup_percent": "40", "shipping_cents": 0}).status_code, 200)
+        self.assertIsNone(self.client.get("/api/shop/products/bb-1").json()["price_cents"])
+        self.client.post("/api/admin/price-release", headers=self.admin)
         self.assertEqual(self.client.get("/api/shop/products/bb-1").json()["price_cents"], 1666)
         cart = self.client.post("/api/shop/cart/items", headers=self.user_a, json={"product_id": "bb-1", "quantity": 2, "price_cents": 1, "unit_cents": 1}).json()
         self.assertEqual(cart["total_cents"], 2 * 1666)
@@ -160,6 +164,7 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual(guest.get("/api/shop/cart").json()["count"], 0)
         guest.cookies.clear()
         self.client.put("/api/admin/settings", headers=self.admin, json={"markup_percent": "50", "shipping_cents": 0})
+        self.client.post("/api/admin/price-release", headers=self.admin)
         self.assertEqual(self.checkout(self.user_b).status_code, 409)
         self.client.post("/api/shop/cart/confirm-changes", headers=self.user_b)
         self.assertEqual(self.checkout(self.user_b, "key-after-confirm-0001").status_code, 200)
@@ -247,7 +252,7 @@ class ShopFlow(unittest.TestCase):
                 return httpx.Response(200, json=[{"id": 77, "name": "Auto & Motorrad", "parentTaxonomy": 0}, {"id": 78, "name": "Zubehör", "parentTaxonomy": 77}])
             if path.endswith("products.json"):
                 rows = [{"id": 1000 + i + page * 1000, "sku": "BB%d" % i, "ean13": "84%011d" % i, "wholesalePrice": 9.5, "taxonomy": 78} for i in range(1000 if page == 0 else 3)]
-                return httpx.Response(200, json=rows + ([rows[0]] if page == 1 else []))
+                return httpx.Response(200, json=rows + ([rows[0], {"id": 9999, "sku": "OUT", "wholesalePrice": 1, "taxonomy": 555}] if page == 1 else []))
             if path.endswith("productsinformation.json"):
                 return httpx.Response(200, json=[{"id": 1000, "name": "Felgenreiniger"}] if page == 0 else [])
             if path.endswith("productsimages.json"):
@@ -277,6 +282,25 @@ class ShopFlow(unittest.TestCase):
             self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
         finally:
             bigbuy_import.transport, bigbuy_import.pause_seconds = None, 1.0
+
+    def test_price_release_gate_blocks_price_cart_and_checkout(self):
+        self.call(db.settings.update_one, {"_id": "shop"}, {"$unset": {"price_release": ""}})
+        product = self.client.get("/api/shop/products/bb-1").json()
+        self.assertIsNone(product["price_cents"])
+        self.assertEqual(product["price_status"], "not_released")
+        response = self.client.post("/api/shop/cart/items", headers=self.user_a, json={"product_id": "bb-1", "quantity": 1})
+        self.assertEqual((response.status_code, response.json()["detail"]["error"]), (409, "price_not_released"))
+        self.assertEqual(self.client.post("/api/shop/checkout/quote", headers=self.user_a).status_code, 409)
+        self.assertEqual(self.client.post("/api/admin/price-release", headers=self.user_a).status_code, 403)
+        self.assertEqual(self.client.post("/api/admin/price-release").status_code, 401)
+        released = self.client.post("/api/admin/price-release", headers=self.admin).json()
+        self.assertTrue(released["price_released"])
+        self.assertTrue(released["price_release"]["released_at"])
+        self.assertIsNotNone(self.client.get("/api/shop/products/bb-1").json()["price_cents"])
+        self.assertEqual(self.client.post("/api/shop/cart/items", headers=self.user_a, json={"product_id": "bb-1", "quantity": 1}).status_code, 200)
+        self.client.put("/api/admin/settings", headers=self.admin, json={"markup_percent": "35", "shipping_cents": 0})
+        self.assertFalse(self.client.get("/api/admin/settings", headers=self.admin).json()["price_released"])
+        self.assertEqual(self.client.post("/api/shop/checkout/quote", headers=self.user_a).status_code, 409)
 
     def test_contact_and_partner_requests(self):
         bad = self.client.post("/api/requests", json={"name": "A", "email": "x", "message": "kurz", "consent": False})

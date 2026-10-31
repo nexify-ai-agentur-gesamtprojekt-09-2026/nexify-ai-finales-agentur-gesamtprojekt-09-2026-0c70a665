@@ -9,10 +9,12 @@ router = APIRouter(prefix="/api/shop")
 PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1}
 
 
-def present(product, markup, full=False):
+def present(product, settings, full=False):
+    released = settings["price_released"]
     item = {"id": product["_id"], "sku": product.get("sku"), "ean": product.get("ean"), "name": product["name"],
             "image": (product.get("images") or [None])[0], "stock": product.get("stock", 0), "in_stock": product.get("stock", 0) > 0,
-            "price_cents": pricing.sell_cents(product["purchase_cents"], markup), "currency": "EUR", "vat_included": True,
+            "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
+            "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
             "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id")}
     if full:
         item.update({"images": product.get("images") or [], "description": product.get("description") or "",
@@ -44,9 +46,9 @@ async def products(q: str = Query("", max_length=120), category: int | None = No
     if category is not None:
         query["category_ids"] = category
     total = await db.products.count_documents(query)
-    markup = (await pricing.settings(db))["markup_percent"]
+    settings = await pricing.settings(db)
     cursor = db.products.find(query, PUBLIC_FIELDS).sort([("stock", -1), ("name", 1)]).skip((page - 1) * page_size).limit(page_size)
-    items = [present(p, markup) async for p in cursor]
+    items = [present(p, settings) async for p in cursor]
     return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": term, "category": category}
 
 
@@ -56,6 +58,6 @@ async def product(product_id: str):
     if not doc:
         raise HTTPException(404, {"error": "product_not_found"})
     category = await db.categories.find_one({"_id": doc.get("category_id")})
-    item = present(doc, (await pricing.settings(db))["markup_percent"], full=True)
+    item = present(doc, await pricing.settings(db), full=True)
     item["category_name"] = category and category["name"]
     return item

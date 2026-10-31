@@ -23,6 +23,7 @@ async def read_settings(ident=Depends(auth.require_admin)):
     s = await pricing.settings(db)
     return {"markup_percent": str(s["markup_percent"]), "shipping_cents": s["shipping_cents"], "vat_percent": str(config.VAT_PERCENT),
             "updated_at": s["updated_at"], "updated_by": s["updated_by"], "revolut_mode": config.revolut_mode(),
+            "price_released": s["price_released"], "price_release": s["price_release"],
             "webhook_registered": bool(await db.revolut_webhooks.find_one({"_id": config.revolut_mode()}, {"_id": 1}))}
 
 
@@ -34,6 +35,15 @@ async def write_settings(body: SettingsIn, ident=Depends(auth.require_admin)):
         raise HTTPException(422, {"error": "markup_invalid", "fields": {"markup_percent": "invalid"}}) from None
     await db.settings.update_one({"_id": "shop"}, {"$set": {"markup_percent": str(markup), "shipping_cents": body.shipping_cents,
                                                             "updated_at": now_iso(), "updated_by": ident.user_id}}, upsert=True)
+    return await read_settings(ident)
+
+
+@router.post("/price-release")
+async def release_prices(ident=Depends(auth.require_admin)):
+    s = await pricing.settings(db)
+    release = {"markup_percent": str(s["markup_percent"]), "released_at": now_iso(), "released_by": ident.user_id}
+    await db.settings.update_one({"_id": "shop"}, {"$set": {"price_release": release, "markup_percent": str(s["markup_percent"])}}, upsert=True)
+    await db.price_releases.insert_one({**release, "action": "release"})
     return await read_settings(ident)
 
 

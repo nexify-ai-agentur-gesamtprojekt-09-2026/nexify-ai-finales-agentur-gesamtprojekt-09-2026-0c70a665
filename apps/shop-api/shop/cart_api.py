@@ -86,7 +86,10 @@ async def set_item(body: ItemIn, request: Request, response: Response):
             raise HTTPException(404, {"error": "product_not_found"})
         if product.get("stock", 0) < body.quantity:
             raise HTTPException(409, {"error": "insufficient_stock", "stock": product.get("stock", 0)})
-        unit = pricing.sell_cents(product["purchase_cents"], (await pricing.settings(db))["markup_percent"])
+        settings = await pricing.settings(db)
+        if not settings["price_released"]:
+            raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
+        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
         items.append({"product_id": body.product_id, "name": product["name"], "quantity": body.quantity, "price_seen_cents": unit})
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": items, "updated_at": now_iso()}}, upsert=True)
     return await priced(ident.owner)

@@ -9,7 +9,7 @@ from fastapi import APIRouter, Header, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 from pymongo.errors import DuplicateKeyError
 
-from . import auth, mail_templates, mailer, revolut
+from . import auth, mail_templates, mailer, pricing, revolut
 from .cart_api import owner_for, priced
 from .config import PUBLIC_ORIGIN
 from .db import db, now_iso
@@ -74,10 +74,16 @@ async def shipping_options(request: Request, response: Response):
 @router.post("/checkout/quote")
 async def checkout_quote(request: Request, response: Response):
     ident = await owner_for(request, response, create=False)
+    await require_price_release()
     quote = await priced(ident.owner or "none")
     if not quote["lines"]:
         raise HTTPException(409, {"error": "cart_empty"})
     return {**quote, "quote_hash": quote_hash(quote)}
+
+
+async def require_price_release():
+    if not (await pricing.settings(db))["price_released"]:
+        raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
 
 
 TIMELINE = (("bestellt", "Bestellt", "created_at"), ("bezahlt", "Bezahlt", "paid_at"), ("in_bearbeitung", "In Bearbeitung", "processing_at"),
@@ -109,6 +115,7 @@ async def create_order(body: CheckoutIn, request: Request, response: Response, i
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         raise HTTPException(409, {"error": "cart_empty"})
+    await require_price_release()
     existing = await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key})
     if existing:
         return replay(existing)

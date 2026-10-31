@@ -27,6 +27,9 @@ def parse_markup(value):
 
 async def settings(db):
     doc = await db.settings.find_one({"_id": "shop"}) or {}
-    return {"markup_percent": Decimal(doc.get("markup_percent", str(config.DEFAULT_MARKUP_PERCENT))),
+    markup = Decimal(doc.get("markup_percent", str(config.DEFAULT_MARKUP_PERCENT)))
+    release = doc.get("price_release") or {}
+    released = bool(release.get("released_at")) and Decimal(release.get("markup_percent", "-1")) == markup
+    return {"markup_percent": markup, "price_released": released, "price_release": release if released else None,
             "shipping_cents": int(doc.get("shipping_cents", 0)),
             "updated_at": doc.get("updated_at"), "updated_by": doc.get("updated_by")}

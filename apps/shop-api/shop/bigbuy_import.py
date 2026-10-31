@@ -2,19 +2,22 @@
 import asyncio
 import os
 import re
+import time
 import uuid
 
 import httpx
+from bigbuy_get import (  # existing gateway module: hosts + typed error codes
+    HOSTS,
+    BigBuyReadError,
+)
 from pymongo import UpdateOne
-
-from bigbuy_get import HOSTS, BigBuyReadError  # existing gateway module: hosts + typed error codes
 
 from . import bigbuy_ftp, config
 from .db import now_iso
 
 PAGE_SIZE = 1000
-MAX_PAGES = 200
-ROOT_PATTERN = re.compile(r"auto|motorrad|motor", re.I)
+MAX_PAGES = 600
+ROOT_PATTERN = re.compile(r"^\s*auto\s*(und|&)\s*motorrad\s*$", re.I)
 transport = None  # tests inject httpx.MockTransport
 pause_seconds = 1.0
 _running = {"task": None}
@@ -26,6 +29,7 @@ class BigBuyClient:
         if not key:
             raise BigBuyReadError("api_key_missing")
         self.base, self.headers = HOSTS[environment], {"Authorization": "Bearer " + key, "Accept": "application/json"}
+        self.page_counts = {}
 
     async def get(self, path, params):
         async with httpx.AsyncClient(base_url=self.base, timeout=60, transport=transport, follow_redirects=False) as client:
@@ -44,19 +48,23 @@ class BigBuyClient:
                     return None
                 if response.status_code != 200:
                     raise BigBuyReadError("provider_http_error_%d" % response.status_code)
+                remaining, reset = response.headers.get("x-ratelimit-remaining"), response.headers.get("x-ratelimit-reset")
+                if pause_seconds and remaining is not None and remaining.isdigit() and int(remaining) <= 1 and (reset or "").isdigit():
+                    await asyncio.sleep(max(1.0, min(65.0, int(reset) - time.time() + 1)))
                 await asyncio.sleep(pause_seconds)
                 return response.json()
         raise BigBuyReadError("rate_limited")
 
-    async def pages(self, path, params):
+    async def pages(self, path, params, keep=None):
         rows, seen = [], set()
         for page in range(MAX_PAGES):
+            self.page_counts[path] = page + 1
             batch = await self.get(path, {**params, "page": page, "pageSize": PAGE_SIZE})
             if not isinstance(batch, list) or not batch:
                 break
             fresh = [r for r in batch if isinstance(r, dict) and r.get("id") not in seen]
             seen.update(r.get("id") for r in fresh)
-            rows.extend(fresh)
+            rows.extend(r for r in fresh if keep is None or keep(r))
             if len(batch) < PAGE_SIZE or not fresh:
                 break
         return rows
@@ -102,17 +110,30 @@ async def fetch_catalog(environment):
     if not roots:
         raise BigBuyReadError("category_auto_motorrad_not_found")
     names = {int(t["id"]): t.get("name") for t in taxonomies if str(t.get("id", "")).isdigit()}
+    # BigBuy ignores taxonomy filters below first level, so read the full catalog and keep the root subtrees locally.
+    children = {}
+    for t in taxonomies:
+        children.setdefault(t.get("parentTaxonomy"), []).append(t.get("id"))
+    scope, stack = {r: r for r in roots}, list(roots)
+    while stack:
+        node = stack.pop()
+        for child in children.get(node, []):
+            if child not in scope:
+                scope[child] = scope[node]
+                stack.append(child)
+    rows = await client.pages("/rest/catalog/products.json", {}, keep=lambda r: r.get("taxonomy") in scope)
+    ids = {r["id"] for r in rows if "id" in r}
+    keep = lambda r: r.get("id") in ids
+    info = {r["id"]: r for r in await client.pages("/rest/catalog/productsinformation.json", {"isoCode": "de"}, keep)}
+    images = {r["id"]: r.get("images") or [] for r in await client.pages("/rest/catalog/productsimages.json", {}, keep)}
+    stock = {r["id"]: sum(int(s.get("quantity") or 0) for s in r.get("stocks") or []) for r in await client.pages("/rest/catalog/productsstockbyhandlingdays.json", {}, keep)}
     collected = {}
-    for root in roots:
-        params = {"parentTaxonomy": root}
-        rows = await client.pages("/rest/catalog/products.json", params)
-        info = {r["id"]: r for r in await client.pages("/rest/catalog/productsinformation.json", {**params, "isoCode": "de"})}
-        images = {r["id"]: r.get("images") or [] for r in await client.pages("/rest/catalog/productsimages.json", params)}
-        stock = {r["id"]: sum(int(s.get("quantity") or 0) for s in r.get("stocks") or []) for r in await client.pages("/rest/catalog/productsstockbyhandlingdays.json", params)}
-        for row in rows:
-            if "id" in row:
-                collected.setdefault(row["id"], (row, info.get(row["id"], {}), images.get(row["id"], []), stock.get(row["id"]), root))
-    return roots, names, collected
+    for row in rows:
+        if "id" in row:
+            collected.setdefault(row["id"], (row, info.get(row["id"], {}), images.get(row["id"], []), stock.get(row["id"]), scope[row["taxonomy"]]))
+    manifest = [{"source": "api", "taxonomy_ids": roots, "scope_taxonomies": len(scope), "iso_code": "de", "page_size": PAGE_SIZE,
+                 "pages": dict(client.page_counts), "rows": {"products": len(rows), "information": len(info), "images": len(images), "stock": len(stock)}}]
+    return roots, names, collected, manifest
 
 
 async def run_import(db, environment, run_id):
@@ -125,8 +146,11 @@ async def run_import(db, environment, run_id):
             if manifest:
                 await db.source_manifests.insert_many([{**m, "run_id": run_id} for m in manifest])
         else:
-            roots, names, collected = await fetch_catalog(environment)
+            roots, names, collected, manifest = await fetch_catalog(environment)
             products = [build_product(*values[:4], names, values[4], stamp, run_id, environment) for values in collected.values()]
+            await db.imports.update_one({"_id": run_id}, {"$set": {"manifest": manifest}})
+            await db.source_manifests.insert_many([{**m, "run_id": run_id, "created_at": stamp} for m in manifest])
+        skipped = [{"bigbuy_id": p["bigbuy_id"], "reason": "missing_wholesale_price"} for p in products if p["purchase_cents"] is None]
         products = [p for p in products if p["purchase_cents"] is not None]
         if not products:
             raise BigBuyReadError("no_products_returned")
@@ -137,7 +161,10 @@ async def run_import(db, environment, run_id):
         await db.categories.delete_many({})
         await db.categories.insert_many([{"_id": c, "name": names.get(c) or "Auto & Motorrad", "root": c in roots} for c in used])
         counts = {"fetched": len(collected), "stored": len(products), "created": result.upserted_count,
-                  "updated": len(products) - result.upserted_count, "deactivated": gone.modified_count, "before": before}
+                  "updated": len(products) - result.upserted_count, "deactivated": gone.modified_count, "before": before,
+                  "skipped": len(skipped), "with_images": sum(1 for p in products if p["images"]), "in_stock": sum(1 for p in products if p["stock"] > 0)}
+        if skipped:
+            await db.imports.update_one({"_id": run_id}, {"$set": {"skipped": skipped[:500]}})
         await db.imports.update_one({"_id": run_id}, {"$set": {"status": "done", "finished_at": now_iso(), "counts": counts, "taxonomy_ids": roots}})
     except BigBuyReadError as error:
         await db.imports.update_one({"_id": run_id}, {"$set": {"status": "failed", "finished_at": now_iso(), "error": str(error)}})
