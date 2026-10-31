@@ -1251,3 +1251,65 @@ keine neue Tenant-/Membershipfreigabe,kein Deployment oder Autorwechsel.
 Gesamtgates/REA und vollständige unabhängige PR-Coverage ab realer PR-Basis folgen
 am gesicherten Endhash. Bound-AI-Limit/Scanner/Binärgate bleiben unverändert;
 keine zusätzlichen OpenRouter-Aufrufe oder ausgelassenen Dateien.
+
+
+## Lokale Services-Releaseintegration · 31.10.2026
+
+Basis66185f1; Backend93cb7f04 lokal unverändert gemergt (Merge27c2d65).
+Neuer FastAPI-Einstieg ohne Seeds/Indizes/Subprozesse/Retrydaemon; genaue
+Next-/Shop-Routingzuständigkeit und hashgepinntes Pythonmanifest. Fehlende
+Projekt-/Namespace-/Schema-/Indexbindung sperrt sämtliche Routeraufrufe.
+Unbekannter Zahlungsmodus sperrt zustandsändernde Wege und schreibende GETs;
+explizite Katalog-/Werkstattlesewege sind separat geprüft. Keine Livebehauptung.
+
+10 Adapter- und14 Backend-Recovery-Faketests bestanden. make check grün.
+Vollsuite647 Tests:21 Failures/10 Errors/11 Skips; unveränderte Basis633 Tests:
+20 Failures/10 Errors/11 Skips. Zusätzlich veralteter vercel.json-Hash im alten
+Reconciliationregister; keine pauschale Neuhashung fremder UI-/Browserbelege.
+REA6.8.0 inspiziert echtes kompiliertes Adapterbytecode mit vollständigem
+Evidenzreadback; dies ist Inventarisierung, keine Python-Logik-/Produktionsabnahme.
+Unabhängige Quellprüfung und behobene konkrete Befunde siehe
+docs/reviews/services-integration-2026-10-31.json.
+
+Next-/Vercel-Services-Build, Helper-Bundle, autorisierte Namespacevorbereitung,
+Runtimekonfiguration und Provider-/Tenant-/E2E bleiben Releasegates. Keine
+Frontendänderung, kein Push/Deploy, kein Produktionsstorezugriff. Vorherige
+Frontend-/Shopbranches und letzte bestätigte Produktion unverändert erhalten.
+Nächster Owner: Parent prüft Integrationstree und providerseitige Attribution,
+Servicesfähigkeit/Compute sowie exakte Bindungen vor jeder Veröffentlichung.
+
+Zusätzliche Abschlussgates: make check-arch rot (ARCH-009/010/019/024/027/029);
+make clean-check rot an der Vollsuite. Kein pauschal grüner Release behauptet.
+
+
+## Services-Buildfortsetzung · 31.10.2026
+
+Tatsächlicher Next16.4.3-Produktionsbuild bestanden. VercelCLI65.2.0 prüft die
+Konfiguration und erkennt Next plus FastAPI ohne Detektionsfehler. Ungültiges
+runtime=python3.12 entfernt; .python-version pinnt3.12. Reales lokales Services-
+Routing: /200; Shop ohne Bindung503; Next-Agentroute405. Keine Providerbehauptung.
+
+@vercel/python28.0.1 baut ein gültiges Function-ZIP mit984Dateien. Elternpfad-
+Include war nicht ZIP-fähig: neuer Buildschritt prepare_vercel.py kopiert genau
+einen hashgepinnten kanonischen Helper unverändert nach vercel_support; kein
+Helperlauf/Netzwerk/Seed. ZIP-Quellen bytegleich; keine Eltern-/absoluten Pfade.
+11Adapter-/Packagingtests,14Recoverytests und69Nodechecks bestanden. Die
+Architekturfehler009/019 waren fehlende lokale Pakete und sind mit installierter
+Toolchain grün.010/024/027/029 bleiben wegen historisch veralteter Quellen-/
+Browserbelege rot; gezielter ShopHTTP-Verhaltenstest selbst7/7grün. Basissuite
+633Tests mit20Failures/10Errors/11Skips; eigene Provenienzabweichungen werden
+nur für geänderte Release-/Fortschritts-/abgeleiteteDokudateien nachgebunden.
+Finaler Vollsuite-/Architektur-/Clean-Stand im versionierten Integrationsreport.
+
+Unabhängige Packaging-/Provenienzgegenprüfung ohne weitere konkrete Befunde.
+Aktualisierte reale REA-Bytecode-Evidence mit vollständigem Readback im Report.
+Freigegeben ist jetzt ein normaler Push auf den dedizierten Integrationsbranch;
+kein Main/PR/Merge/Deploy durch diesen Writer. Tatsächlicher Remote-Readback
+folgt im Abschluss. Parent übernimmt providerseitig attribuierten Releasecommit,
+Plattformbuild und vorhandene Runtime-/Domain-/Storegates. Bildpipelinebranch
+bleibt separat und ist nicht in den Shopadapter integriert.
+
+Finaler Basisvergleich: Kandidat647Tests undBasis633Tests jeweils20Failures,
+10Errors,11Skips; identische Fehler-/Errorfallnamen. Keine neue eigene Regression.
+ARCH-010/024/027/029 und Clean-Gate bleiben ausdrücklich rot. Reproduzierbarer
+Builderrunner mit CLI-/Builderversionsprüfung ist im Testverzeichnis enthalten.

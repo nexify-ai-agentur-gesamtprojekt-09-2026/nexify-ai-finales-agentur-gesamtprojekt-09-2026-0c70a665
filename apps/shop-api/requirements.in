@@ -1,0 +1,7 @@
+# Exact direct dependencies already used by the existing shop routers.
+fastapi==0.141.1
+pydantic==2.13.4
+httpx==0.28.1
+python-dotenv==1.2.2
+motor==3.7.1
+bcrypt==5.0.0
