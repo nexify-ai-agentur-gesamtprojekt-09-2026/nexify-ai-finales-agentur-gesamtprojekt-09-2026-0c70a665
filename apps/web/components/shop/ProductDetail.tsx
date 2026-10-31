@@ -39,7 +39,7 @@ export default function ProductDetail({ id }: { id: string }) {
       {images.length > 1 && <div className="tk-thumbs">{images.map((src, index) => <button key={index} type="button" aria-label={"Bild " + (index + 1)} aria-pressed={index === active} onClick={() => setActive(index)}><ProductImage src={src} alt="" /></button>)}</div>}</div>
     <div className="tk-product-info">
       <h2 data-testid="product-name">{product.name}</h2>
-      <p className="tk-price is-large" data-testid="product-price">{product.price_cents === null ? "Preis noch nicht freigegeben" : <>{money(product.price_cents)} <small>inkl. {product.vat_percent} % MwSt.</small></>}</p>
+      <p className="tk-price is-large" data-testid="product-price">{product.price_cents === null ? "Preis noch nicht freigegeben" : <>{money(product.price_cents)} <small>inkl. {product.vat_percent} % MwSt., zzgl. <a href="/teileklar/rechtliches" data-testid="product-shipping-info-link">Versandkosten</a></small></>}</p>
       {product.price_cents === null && <p className="tk-meta" data-testid="price-not-released-note">Der Verkaufspreis wird noch geprüft. Bis zur Freigabe ist keine Bestellung möglich.</p>}
       <StockLabel stock={product.stock} />
       <p className="tk-fitment" data-testid="fitment-status"><strong>Passung nicht geprüft.</strong> Für diesen Artikel liegt keine geprüfte Fahrzeugzuordnung vor. Bitte vergleichen Sie Teilenummer und Fahrzeugangaben vor der Bestellung.</p>

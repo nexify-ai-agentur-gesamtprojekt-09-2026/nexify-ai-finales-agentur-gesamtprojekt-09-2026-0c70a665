@@ -17,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
       <strong className="tk-card-name">{product.name}</strong>
     </SiteLink>
     <span className="tk-meta">SKU {product.sku}{product.ean ? " · EAN " + product.ean : ""}</span>
-    <span className="tk-price" data-testid={"product-price-" + product.id}>{product.price_cents === null ? "Preis noch nicht freigegeben" : <>{money(product.price_cents)} <small>inkl. MwSt.</small></>}</span>
+    <span className="tk-price" data-testid={"product-price-" + product.id}>{product.price_cents === null ? "Preis noch nicht freigegeben" : <>{money(product.price_cents)} <small>inkl. MwSt., zzgl. Versandkosten</small></>}</span>
     <StockLabel stock={product.stock} />
   </li>;
 }
