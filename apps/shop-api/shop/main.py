@@ -11,7 +11,8 @@ from fastapi.responses import JSONResponse
 
 from . import auth, config
 from .db import db, ensure_indexes
-from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, workshops_api
+from . import mailer
+from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, requests_api, workshops_api
 
 NEXT_API = ("/api/agent-chat", "/api/agent-runtime-status", "/api/internal")
 HOP = {"host", "content-length", "connection", "transfer-encoding", "keep-alive"}
@@ -40,7 +41,9 @@ async def lifespan(app):
     await accounts_api.seed_accounts()
     await workshops_api.import_workshops()
     start_gateway()
+    retry = asyncio.create_task(mailer.retry_loop())
     yield
+    retry.cancel()
     if _gateway.get("proc"):
         _gateway["proc"].terminate()
 
@@ -55,12 +58,12 @@ async def same_origin_writes(request: Request, call_next):
     if writes and origin and origin.rstrip("/") != config.PUBLIC_ORIGIN and not request.url.path.startswith("/api/shop/webhooks/"):
         return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403)
     response = await call_next(request)
-    if request.url.path.startswith(("/api/shop", "/api/admin", "/api/auth", "/api/workshops")):
+    if request.url.path.startswith(("/api/shop", "/api/admin", "/api/auth", "/api/workshops", "/api/requests")):
         response.headers.setdefault("Cache-Control", "no-store")
     return response
 
 
-for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api):
+for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api):
     app.include_router(module.router)
 
 

@@ -31,3 +31,11 @@
 - JRN-29 steps: 5 wrong logins in a row. expected: 6th attempt blocked with lockout message.
 - JRN-30 steps: Click "Mit Google anmelden". expected: redirect to Emergent Google login and back, logged in (human-verifiable if tester cannot complete Google).
 - JRN-31 steps: Log out, open account page. expected: redirected to login; session cookie invalid.
+- JRN-32 steps: Complete a paid order (sandbox webhook in tests). expected: exactly one Bestellbestätigung in the outbox/Resend with all REQ-49 content and links; one internal notification to MAIL_INTERNAL_TO.
+- JRN-33 steps: Replay the paid webhook. expected: no second confirmation e-mail.
+- JRN-34 steps: Simulate a Resend failure. expected: order stays "bezahlt"; mail status "fehlgeschlagen"; retry sends exactly once.
+- JRN-35 steps: Register; request password reset; use link twice and after 61 min. expected: welcome mail; reset works once; second use and expired link rejected.
+- JRN-36 steps: Submit workshop request. expected: receipt e-mail with "Anfrage gesendet – noch kein Termin".
+- JRN-37 steps: Open own order page. expected: timeline with only reached states marked; "Was passiert als Nächstes" section.
+- JRN-38 steps: Admin sets order to "Versendet" with tracking number. expected: customer timeline updates, shipping e-mail with tracking sent once.
+- JRN-39 steps: Cart/checkout review. expected: shipping costs, delivery countries, total incl. VAT and seller identity visible before "Zahlungspflichtig bestellen".

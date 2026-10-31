@@ -4,6 +4,7 @@ import { SiteLink } from "../Router";
 import { api, money, type ApiError, type Cart } from "./api";
 import AddressStep, { EMPTY_ADDRESS, type AddressData } from "./AddressStep";
 import { Totals } from "./CartView";
+import SellerInfo from "./SellerInfo";
 
 const STEPS = ["Adresse", "Versand", "Prüfen", "Zahlung"];
 type Option = { id: string; label: string; price_cents: number };
@@ -48,10 +49,11 @@ export default function Checkout() {
     </form>}
     {step >= 2 && quote && <div className="tk-review" data-testid="checkout-review">
       <section><h3>Lieferadresse</h3><p data-testid="review-address">{address.first_name} {address.last_name}<br />{address.street}<br />{address.zip} {address.city} · {address.country}<br />{address.email}</p><button className="text-button" onClick={() => setStep(0)} disabled={busy}>Ändern</button></section>
-      <section><h3>Artikel</h3><ul className="tk-review-lines">{quote.lines.map(line => <li key={line.product_id}><span>{line.quantity} × {line.name}</span><span>{money(line.line_cents)}</span></li>)}</ul><Totals cart={quote} /></section>
+      <section><h3>Artikel</h3><ul className="tk-review-lines">{quote.lines.map(line => <li key={line.product_id}><span>{line.quantity} × {line.name}</span><span>{money(line.line_cents)}</span></li>)}</ul><Totals cart={quote} /><p className="tk-meta" data-testid="review-shipping-note">Versand: {money(quote.shipping_cents)} · Gesamtpreis inkl. {quote.vat_percent || "19"} % MwSt.: {money(quote.total_cents)}</p></section>
+      <SellerInfo />
       {quote.changes.length > 0 && <div role="alert" className="tk-alert" data-testid="checkout-changes"><strong>Änderungen seit dem Hinzufügen:</strong><ul>{quote.changes.map(c => <li key={c.product_id + c.kind}>{c.name}: {CHANGE_TEXT[c.kind]}{c.kind === "price" ? ` (${money(c.old!)} → ${money(c.new!)})` : c.kind === "stock" ? ` (verfügbar: ${c.new})` : ""}</li>)}</ul>
         <button className="outline-button" disabled={busy} onClick={() => void acceptChanges()} data-testid="checkout-accept-changes">Änderungen übernehmen</button></div>}
-      <label className="tk-terms"><input type="checkbox" checked={terms} onChange={event => setTerms(event.target.checked)} data-testid="checkout-terms-checkbox" /><span>Ich habe die <SiteLink href="/teileklar/rechtliches">AGB und die Widerrufsbelehrung</SiteLink> gelesen und akzeptiere sie.</span></label>
+      <label className="tk-terms"><input type="checkbox" checked={terms} onChange={event => setTerms(event.target.checked)} data-testid="checkout-terms-checkbox" /><span>Ich habe die <SiteLink href="/teileklar/rechtliches#agb">AGB</SiteLink> und die <SiteLink href="/teileklar/rechtliches#widerruf">Widerrufsbelehrung</SiteLink> gelesen und akzeptiere sie.</span></label>
       <button className="primary-button tk-cta" disabled={!terms || busy || quote.changes.length > 0} onClick={() => void order()} data-testid="checkout-place-order">Zahlungspflichtig bestellen</button>
       {step === 3 && busy && <p role="status" data-testid="checkout-redirecting">Sie werden zur sicheren Zahlungsseite von Revolut weitergeleitet …</p>}
     </div>}

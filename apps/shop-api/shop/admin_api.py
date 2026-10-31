@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 
-from . import auth, bigbuy_import, config, pricing, revolut
+from pymongo import ReturnDocument
+
+from . import auth, bigbuy_import, config, mail_templates, mailer, pricing, revolut
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/admin")
@@ -60,3 +62,60 @@ async def register_webhook(ident=Depends(auth.require_admin)):
     except revolut.RevolutError as error:
         raise HTTPException(502, {"error": error.code}) from None
     return {"mode": doc["_id"], "webhook_id": doc["webhook_id"], "url": doc["url"]}
+
+
+FLOW = {"in_bearbeitung": ("bezahlt",), "versendet": ("bezahlt", "in_bearbeitung"), "zugestellt": ("versendet",)}
+STAMP = {"in_bearbeitung": "processing_at", "versendet": "shipped_at", "zugestellt": "delivered_at"}
+
+
+class StatusIn(BaseModel):
+    status: str = Field(pattern="^(in_bearbeitung|versendet|zugestellt)$")
+    tracking_number: str = Field("", max_length=60)
+    carrier: str = Field("", max_length=60)
+
+
+@router.get("/orders")
+async def list_orders(ident=Depends(auth.require_admin)):
+    rows = db.orders.find({}, {"lines": 0}).sort("created_at", -1).limit(200)
+    orders = []
+    async for o in rows:
+        mails = [m async for m in db.outbox.find({"_id": {"$regex": "^order_(paid|status):[a-z:_]*" + o["_id"]}}, {"status": 1, "subject": 1, "attempts": 1})]
+        orders.append({"id": o["_id"], "number": o["number"], "status": o["status"], "fulfilment": o.get("fulfilment") or ("bezahlt" if o["status"] == "bezahlt" else None),
+                       "total_cents": o["total_cents"], "email": o["address"].get("email"), "created_at": o["created_at"], "paid_at": o.get("paid_at"),
+                       "tracking_number": o.get("tracking_number"), "carrier": o.get("carrier"), "mails": mails})
+    return {"orders": orders}
+
+
+@router.post("/orders/{order_id}/status")
+async def set_order_status(order_id: str, body: StatusIn, ident=Depends(auth.require_admin)):
+    order = await db.orders.find_one({"_id": order_id})
+    if not order:
+        raise HTTPException(404, {"error": "order_not_found"})
+    current = order.get("fulfilment") or ("bezahlt" if order["status"] == "bezahlt" else order["status"])
+    if order["status"] != "bezahlt" or current not in FLOW[body.status]:
+        raise HTTPException(409, {"error": "transition_not_allowed", "current": current})
+    if body.status == "versendet" and not body.tracking_number.strip():
+        raise HTTPException(422, {"error": "tracking_required", "fields": {"tracking_number": "required"}})
+    update = {"fulfilment": body.status, STAMP[body.status]: now_iso(), "status_changed_by": ident.user_id}
+    if body.status == "versendet":
+        update.update(tracking_number=body.tracking_number.strip(), carrier=body.carrier.strip())
+    changed = await db.orders.find_one_and_update({"_id": order_id, "fulfilment": order.get("fulfilment")}, {"$set": update}, return_document=ReturnDocument.AFTER)
+    if not changed:
+        raise HTTPException(409, {"error": "concurrent_change"})
+    if body.status in ("in_bearbeitung", "versendet"):
+        subject, html, text = mail_templates.order_status(changed, body.status)
+        await mailer.enqueue("order_status:%s:%s" % (body.status, order_id), changed["address"].get("email", ""), subject, html, text)
+    return {"id": order_id, "fulfilment": body.status}
+
+
+@router.get("/outbox")
+async def outbox(ident=Depends(auth.require_admin)):
+    rows = [m async for m in db.outbox.find({}, {"html": 0, "text": 0}).sort("created_at", -1).limit(100)]
+    for m in rows:
+        m["id"] = m.pop("_id")
+    return {"mails": rows}
+
+
+@router.post("/outbox/retry")
+async def outbox_retry(ident=Depends(auth.require_admin)):
+    return {"retried": await mailer.retry_pending()}

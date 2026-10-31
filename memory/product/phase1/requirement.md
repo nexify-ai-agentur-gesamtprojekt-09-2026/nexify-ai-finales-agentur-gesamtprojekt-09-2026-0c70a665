@@ -108,3 +108,19 @@ Q-9  Tag: Payment.Live
 - REQ-46 [event] When a user clicks "Mit Google anmelden", the system shall log in via Emergent-managed Google Auth and link to the existing account with the same e-mail.
 - REQ-47 [event] When a user logs out, the system shall invalidate the session.
 - REQ-48 [always] The system shall store role (customer, admin) on the user record; admin endpoints check it server-side.
+
+## Addendum (31.10.2026): customer clarity, operations and transactional e-mails (Resend)
+User: "Especially in the shop, everything has to be perfect: the presentation, and the logic must be clear to the customer, how the processes and operations run. Resend too, of course: confirmation e-mails etc. Really think of everything."
+Resend is managed and set up (RESEND_API_KEY, RESEND_FROM/RESEND_FROM_ADDRESS, MAIL_INTERNAL_TO, MAIL_DAILY_CAP exist).
+
+- REQ-49 [event] When an order is paid, the system shall send the customer a Bestellbestätigung via Resend. It contains the order number, items, prices incl. VAT, shipping, total, billing and delivery address, payment method, and links to the AGB, Widerrufsbelehrung + Muster-Widerrufsformular and Datenschutz.
+- REQ-50 [event] When an order is paid, the system shall send an internal new-order notification to MAIL_INTERNAL_TO.
+- REQ-51 [event] When a user registers, the system shall send a welcome/confirmation e-mail.
+- REQ-52 [event] When a user requests a password reset, the system shall send a reset e-mail with a single-use link valid for 60 minutes.
+- REQ-53 [event] When a workshop request is submitted, the system shall send the requester a receipt e-mail stating "Anfrage gesendet – noch kein Termin".
+- REQ-54 [unwanted] If an e-mail fails to send, then the system shall keep the order or request unchanged, record the mail status "fehlgeschlagen", and retry without sending duplicates (outbox, idempotent per event).
+- REQ-55 [always] The system shall render all e-mails in the TEILEKLAR / NeXify brand design (based on the prototype e-mail templates), with a plain-text alternative, in Sie-Form.
+- REQ-56 [always] The system shall show on the order page a status timeline: "Bestellt" → "Bezahlt" → "In Bearbeitung" → "Versendet" → "Zugestellt". Only states that are actually reached are marked.
+- REQ-57 [always] The system shall explain "Was passiert als Nächstes" on the confirmation page and in the e-mail: processing, shipping by the supplier, expected handling time only when the source data provides it, and how to withdraw or return.
+- REQ-58 [always] The system shall show, before checkout, the shipping costs, the delivery country restrictions, the total incl. VAT, and the seller identity from config/fakten.json.
+- REQ-59 [always] The system shall give the admin an order list with status. Admins can manually set "In Bearbeitung" and "Versendet" (with tracking number), and each change triggers the matching customer e-mail (interpreted).

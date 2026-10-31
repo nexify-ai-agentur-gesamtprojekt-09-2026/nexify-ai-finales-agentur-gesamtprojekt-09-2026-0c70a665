@@ -12,7 +12,7 @@ from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 from pymongo.errors import DuplicateKeyError
 
-from . import config
+from . import config, mail_templates, mailer
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/auth")
@@ -105,6 +105,11 @@ class GoogleIn(BaseModel):
     session_id: str = Field(max_length=256)
 
 
+async def send_welcome(user):
+    subject, html, text = mail_templates.welcome(user)
+    await mailer.enqueue("welcome:" + user["user_id"], user["email"], subject, html, text)
+
+
 @router.post("/register", status_code=201)
 async def register(body: RegisterIn, response: Response):
     email, errors = body.email.strip().lower(), {}
@@ -122,6 +127,7 @@ async def register(body: RegisterIn, response: Response):
         await db.users.insert_one(user)
     except DuplicateKeyError:
         raise HTTPException(409, {"error": "email_taken", "message": "Diese E-Mail-Adresse ist bereits registriert", "fields": {"email": "taken"}}) from None
+    await send_welcome(user)
     return await start_session(response, user)
 
 
@@ -162,20 +168,11 @@ async def forgot_password(body: ForgotIn):
     if user:
         token = secrets.token_urlsafe(32)
         await db.password_resets.insert_one({"token_hash": digest(token), "user_id": user["user_id"], "used": False,
-                                             "expires_at": datetime.now(timezone.utc) + timedelta(hours=1)})
+                                             "expires_at": datetime.now(timezone.utc) + timedelta(minutes=60)})
         link = config.PUBLIC_ORIGIN + "/passwort-zuruecksetzen?token=" + token
-        text = "Guten Tag,\n\nüber den folgenden Link können Sie innerhalb einer Stunde ein neues Passwort festlegen:\n" + link + "\n\nFalls Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail.\n\nTEILEKLAR / NeXify AI"
-        key, sender = os.environ.get("RESEND_API_KEY", ""), os.environ.get("RESEND_FROM_ADDRESS", "")
-        status = "not_configured"
-        if key and sender:
-            try:
-                async with httpx.AsyncClient(timeout=15) as client:
-                    sent = await client.post("https://api.resend.com/emails", headers={"Authorization": "Bearer " + key},
-                                             json={"from": "TEILEKLAR <%s>" % sender, "to": [user["email"]], "subject": "Passwort zurücksetzen", "text": text})
-                status = sent.status_code
-            except httpx.HTTPError:
-                status = "transport_error"
-        await db.password_resets.update_one({"token_hash": digest(token)}, {"$set": {"mail_status": status}})
+        subject, html, text = mail_templates.password_reset(link)
+        outbox = await mailer.enqueue("reset:" + digest(token), user["email"], subject, html, text)
+        await db.password_resets.update_one({"token_hash": digest(token)}, {"$set": {"mail_status": (outbox or {}).get("status")}})
     return {"ok": True, "message": "Wenn ein Konto zu dieser E-Mail-Adresse besteht, haben wir einen Link zum Zurücksetzen gesendet."}
 
 
@@ -204,5 +201,6 @@ async def google_session(body: GoogleIn, response: Response):
     if not user:
         user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": profile.get("name", ""), "role": "customer", "created_at": now_iso()}
         await db.users.insert_one(user)
+        await send_welcome(user)
     await db.users.update_one({"user_id": user["user_id"]}, {"$set": {"google_linked": True}})
     return await start_session(response, user)

@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from . import config
+from . import mail_templates, mailer
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/workshops")
@@ -118,4 +119,7 @@ async def create_request(workshop_id: str, body: RequestIn):
     request_id = "WA-" + secrets.token_hex(5).upper()
     await db.workshop_requests.insert_one({"_id": request_id, "workshop_id": workshop_id, "workshop_name": doc.get("name"), **body.model_dump(),
                                            "status": REQUEST_STATUS, "created_at": now_iso()})
+    stored = await db.workshop_requests.find_one({"_id": request_id})
+    subject, html, text = mail_templates.workshop_receipt(stored)
+    await mailer.enqueue("workshop_request:" + request_id, body.email.strip(), subject, html, text)
     return {"id": request_id, "status": REQUEST_STATUS, "workshop_id": workshop_id}

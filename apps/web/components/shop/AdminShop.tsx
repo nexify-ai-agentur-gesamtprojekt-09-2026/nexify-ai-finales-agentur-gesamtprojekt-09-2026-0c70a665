@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SiteLink } from "../Router";
 import { api, dateTime, money, type ApiError } from "./api";
+import AdminOrders from "./AdminOrders";
 
 type Settings = { markup_percent: string; shipping_cents: number; vat_percent: string; updated_at?: string; revolut_mode: string; webhook_registered: boolean };
 type Run = { id: string; status: string; environment: string; started_at: string; finished_at?: string; error?: string; counts?: Record<string, number> };
@@ -11,7 +12,7 @@ export default function AdminShop() {
   const [runs, setRuns] = useState<Run[]>([]), [active, setActive] = useState(0), [message, setMessage] = useState(""), [error, setError] = useState("");
   const loadRuns = () => api<{ runs: Run[]; active_products: number }>("/api/admin/import").then(d => { setRuns(d.runs); setActive(d.active_products); }).catch(() => undefined);
   useEffect(() => {
-    api<Settings>("/api/admin/settings").then(s => { setSettings(s); setMarkup(s.markup_percent); setShipping((s.shipping_cents / 100).toFixed(2).replace(".", ",")); void loadRuns(); }).catch((e: ApiError) => e.status === 403 ? setDenied(true) : setError("Einstellungen nicht erreichbar."));
+    api<Settings>("/api/admin/settings").then(s => { setSettings(s); setMarkup(s.markup_percent); setShipping((s.shipping_cents / 100).toFixed(2).replace(".", ",")); void loadRuns(); }).catch((e: ApiError) => e.status === 403 || e.status === 401 ? setDenied(true) : setError("Einstellungen nicht erreichbar."));
   }, []);
   useEffect(() => { if (!runs.some(r => r.status === "running")) return; const t = setTimeout(() => void loadRuns(), 4000); return () => clearTimeout(t); }, [runs]);
   if (denied) return <div className="tk-empty" data-testid="admin-denied"><h2>Kein Zugriff</h2><p>Dieser Bereich ist nur für Administratoren.</p><SiteLink href="/anmelden" className="content-action-link">Anmelden</SiteLink></div>;
@@ -35,6 +36,7 @@ export default function AdminShop() {
         <div className="tk-field"><label htmlFor="adm-ship">Versandkosten je Bestellung in €</label><input id="adm-ship" inputMode="decimal" value={shipping} onChange={e => setShipping(e.target.value)} data-testid="admin-shipping-input" /></div></div>
       <button className="primary-button" type="submit" data-testid="admin-settings-save">Speichern</button>
       {settings.updated_at && <p className="tk-meta">Zuletzt geändert: {dateTime(settings.updated_at)}</p>}</form>
+    <AdminOrders />
     <section className="tk-form" data-testid="admin-import"><h2>BigBuy-Import „Auto &amp; Motorrad“</h2><p className="tk-meta" data-testid="admin-active-products">Aktive Produkte im Shop: {active}</p>
       <div className="tk-actions"><button className="primary-button" onClick={() => void start("ftp")} data-testid="admin-import-ftp">Sync über FTP (CSV)</button><button className="outline-button" onClick={() => void start("production")} data-testid="admin-import-start">Import über API</button><button className="outline-button" onClick={() => void start("sandbox")} data-testid="admin-import-sandbox">Testimport (BigBuy-Sandbox)</button></div>
       <table className="tk-table" data-testid="admin-import-runs"><thead><tr><th>Start</th><th>Umgebung</th><th>Status</th><th>Ergebnis</th></tr></thead><tbody>{runs.map(r => <tr key={r.id} data-testid={"admin-import-run-" + r.id}><td>{dateTime(r.started_at)}</td><td>{r.environment}</td><td>{r.status === "running" ? "läuft" : r.status === "done" ? "fertig" : "fehlgeschlagen"}</td><td>{r.counts ? `${r.counts.stored} gespeichert · ${r.counts.created} neu · ${r.counts.updated} aktualisiert · ${r.counts.deactivated} deaktiviert` : r.error ? `Fehler: ${r.error} – bisheriger Katalog bleibt erhalten` : ""}</td></tr>)}</tbody></table></section>

@@ -54,3 +54,29 @@ Q-106 Tag: Layout.TextFit
       Meter: tester screenshots of 10 key pages
       Must: 0   Plan: 0
 ```
+
+## Addendum (31.10.2026): page-logic audit for all pages, done before the copy rewrite
+User instruction: "Go through all pages and their logic. Orient yourself on the prototype files: read what is written on them and in their front ends, because that says what has to be done. Transfer it to the new design (the new design is the correct one). Correct every mistake made so far, think logically, make sure the logic is right, implement it."
+
+- REQ-117 [always] The system shall have an audit file `docs/content/seiten-logik-audit.md`. It maps every prototype file in `prototypen/*.dc.html` to its route(s) in `config/site-map.json`, including any prototype without a route.
+- REQ-118 [always] For every prototype, the audit shall list each on-page instruction: visible handoff texts, `TODO(BACKEND)` comments, `data-api-endpoint` attributes, views, states, forms, validations and calculations.
+- REQ-119 [always] For every instruction, the audit shall record its status in the new build: implemented, wrong, missing or out of phase. Each entry carries a target phase.
+- REQ-120 [always] The system shall fix every audit entry marked "wrong", for example invented values, fake success messages, wrong states, broken links or build text published as copy.
+- REQ-121 [always] The system shall implement every "missing" item that belongs to the public pages, Shop, Werkstattsuche or Auth of Phase 1/1b, in the new design.
+- REQ-122 [always] The system shall show an honest, short placeholder for every "missing" item assigned to Phases 2–8, plus a note in the audit.
+- REQ-123 [always] The system shall keep the new design system as the visual source. Prototype layout is used only for structure, order and behaviour.
+- REQ-124 [unwanted] If a page action has no real backend, then the system shall not show a success state for it.
+
+## Addendum (31.10.2026): right-hand chat panel becomes dynamic
+User: "Load all the specifications for the chat on the right. It is not dynamic, cannot be made narrower or wider and does not adapt dynamically with the whole page."
+Sources: Masterplan §6.1–6.6 (public hero chat right, workspace layout, closed view, responsive & state retention, shell contract), `prototypen/NeXifyAI Cloud v12.dc.html` (Companion-Chat, chat bar under the shared header), `prototypen/NeXify Workspace.dc.html`, `NeXify-AI-Companion.dc.html`.
+- REQ-125 [always] The system shall render the right-hand chat as a docked column in the page layout grid, below the shared header, never as an overlay covering core content (interpreted).
+- REQ-126 [event] When the user drags the chat's resize handle, the system shall change the chat width live between a minimum of 320 px and a maximum of 50 % of the viewport (interpreted).
+- REQ-127 [event] When the resize handle has focus and the user presses Arrow Left/Right, the system shall change the width in 16 px steps (role="separator" with aria-valuenow).
+- REQ-128 [event] When the chat width changes, the system shall reflow the page content (hero, sections, shop grid, forms, footer) through container queries without horizontal scroll or overlapping.
+- REQ-129 [event] When the user collapses the chat, the system shall give the freed width to the page and show a clear reopen control.
+- REQ-130 [always] The system shall keep the chat width and the open/closed state per session after reload (non-sensitive UI preference only).
+- REQ-131 [event] When the user double-clicks the resize handle, the system shall reset the chat to its default width.
+- REQ-132 [state] While the viewport is too narrow for two usable columns, the system shall switch to a single main view with the chat as a toggleable drawer that respects the keyboard and safe area.
+- REQ-133 [always] The system shall limit the chat reading column and keep the composer aligned to it (no full-width chat text), per Masterplan §6.3.
+- REQ-134 [always] The system shall apply the same panel behaviour in the internal workspace's right work area (Browser/Artefakt/PDF/Dokument), per Masterplan §6.2/6.4.

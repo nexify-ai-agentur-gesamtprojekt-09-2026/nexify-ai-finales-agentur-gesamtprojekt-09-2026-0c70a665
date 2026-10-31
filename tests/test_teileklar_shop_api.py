@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 os.environ.update({"DB_NAME": "teileklar_shop_unittest", "REVOLUT_MODE": "sandbox", "REVOLUT_MERCHANT_SECRET_KEY_SANDBOX": "sk_unittest_only",
-                   "RESEND_API_KEY": "re_unittest", "RESEND_FROM_ADDRESS": "test@example.org", "BIGBUY_API_KEY_SANDBOX": "unittest-bigbuy",
+                   "RESEND_API_KEY": "re_unittest", "RESEND_FROM_ADDRESS": "test@example.org", "RESEND_FROM": "", "MAIL_INTERNAL_TO": "intern@example.org", "MAIL_DAILY_CAP": "", "BIGBUY_API_KEY_SANDBOX": "unittest-bigbuy",
                    "MONGO_URL": os.environ.get("MONGO_URL", "mongodb://localhost:27017"), "PREVIEW_PUBLIC_ORIGIN": "https://shop.preview.emergentagent.com",
                    "SHOP_VAT_PERCENT": "19", "GATEWAY_PORT": "3993", "REVOLUT_API_VERSION": "2026-04-20"})
 sys.path[:0] = [str(ROOT / "apps" / "shop-api"), str(ROOT / "apps" / "agent-gateway")]
@@ -31,7 +31,7 @@ def mongo_up():
 try:
     import httpx
     from fastapi.testclient import TestClient
-    from shop import accounts_api, bigbuy_import, pricing, revolut
+    from shop import accounts_api, bigbuy_import, mailer, pricing, revolut
     from shop.main import app
     from shop.db import db
     DEPS = mongo_up()
@@ -79,6 +79,13 @@ class ShopFlow(unittest.TestCase):
                 return httpx.Response(200, json={"id": path.rsplit("/", 1)[1], "state": self.state["order_state"]})
             return httpx.Response(404)
         revolut.transport = httpx.MockTransport(handler)
+        self.mails, self.mail_fail = [], {"on": False}
+        def mail_handler(request):
+            if self.mail_fail["on"]:
+                return httpx.Response(500, json={"message": "down"})
+            self.mails.append(json.loads(request.content))
+            return httpx.Response(200, json={"id": "re_%d" % len(self.mails)})
+        mailer.transport = httpx.MockTransport(mail_handler)
         self.client = type(self).shared
         self.client.cookies.clear()
         self.call(self.reset)
@@ -112,13 +119,13 @@ class ShopFlow(unittest.TestCase):
         cls.ctx.__exit__(None, None, None)
 
     def tearDown(self):
-        revolut.transport = None
+        revolut.transport = mailer.transport = None
 
     def call(self, fn, *args):
         return self.client.portal.call(fn, *args)
 
     async def reset(self):
-        for name in ("products", "carts", "orders", "webhook_events", "revolut_webhooks", "settings", "imports", "categories", "users", "sessions", "login_failures"):
+        for name in ("products", "carts", "orders", "webhook_events", "revolut_webhooks", "settings", "imports", "categories", "users", "sessions", "login_failures", "outbox", "requests", "workshop_requests", "password_resets"):
             await db[name].delete_many({})
         await db.products.insert_many([
             {"_id": "bb-1", "bigbuy_id": 1, "sku": "S1", "ean": "4000000000001", "name": "Testartikel Eins", "purchase_cents": 1000, "stock": 5, "active": True, "images": [], "category_ids": [9], "category_id": 9, "source": "unittest", "imported_at": "2026-01-01T00:00:00+00:00"},
@@ -177,6 +184,56 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual([o["status"] for o in self.client.get("/api/shop/orders", headers=self.user_a).json()["orders"]], ["bezahlt"])
         self.assertEqual(self.client.get("/api/shop/orders", headers=self.user_b).json()["orders"], [])
 
+    def test_paid_order_mails_once_failure_retry_and_status_mails(self):
+        self.client.post("/api/shop/cart/items", headers=self.user_a, json={"product_id": "bb-1", "quantity": 2})
+        order_id = self.checkout(self.user_a).json()["order_id"]
+        rev_id = self.call(db.orders.find_one, {"_id": order_id})["revolut_order_id"]
+        body = json.dumps({"event": "ORDER_COMPLETED", "order_id": rev_id}).encode()
+        self.state["order_state"] = "completed"
+        welcome = len(self.mails)
+        self.mail_fail["on"] = True
+        self.assertEqual(self.client.post("/api/shop/webhooks/revolut", content=body, headers=signed(body)).status_code, 204)
+        self.assertEqual(self.call(db.orders.find_one, {"_id": order_id})["status"], "bezahlt")
+        self.assertEqual(self.call(db.outbox.find_one, {"_id": "order_paid:customer:" + order_id})["status"], "fehlgeschlagen")
+        self.mail_fail["on"] = False
+        for _ in range(2):
+            self.client.post("/api/shop/webhooks/revolut", content=body, headers=signed(body))
+            self.client.post("/api/admin/outbox/retry", headers=self.admin)
+        sent = self.mails[welcome:]
+        self.assertEqual(sorted(m["to"][0] for m in sent), ["erika@example.org", "intern@example.org"])
+        confirmation = next(m for m in sent if m["to"] == ["erika@example.org"])
+        for needle in ("2 × Testartikel Eins", "Gesamt inkl. MwSt.", "Versand", "Hauptstr. 1", "Revolut", "#agb", "#widerruf", "#widerrufsformular", "/datenschutz", "Was passiert als Nächstes"):
+            self.assertIn(needle, confirmation["text"])
+        self.assertIn("<table", confirmation["html"])
+        self.assertEqual(self.client.post("/api/admin/orders/%s/status" % order_id, headers=self.admin, json={"status": "versendet"}).status_code, 422)
+        self.assertEqual(self.client.post("/api/admin/orders/%s/status" % order_id, headers=self.user_a, json={"status": "in_bearbeitung"}).status_code, 403)
+        self.assertEqual(self.client.post("/api/admin/orders/%s/status" % order_id, headers=self.admin, json={"status": "in_bearbeitung"}).status_code, 200)
+        self.assertEqual(self.client.post("/api/admin/orders/%s/status" % order_id, headers=self.admin, json={"status": "versendet", "tracking_number": "DHL123", "carrier": "DHL"}).status_code, 200)
+        self.assertEqual(self.client.post("/api/admin/orders/%s/status" % order_id, headers=self.admin, json={"status": "versendet", "tracking_number": "DHL123"}).status_code, 409)
+        self.assertEqual(len(self.mails) - welcome, 4)
+        self.assertIn("DHL123", self.mails[-1]["text"])
+        timeline = self.client.get("/api/shop/orders/" + order_id, headers=self.user_a).json()["timeline"]
+        self.assertEqual([s["reached"] for s in timeline], [True, True, True, True, False])
+        self.assertEqual(len(self.client.get("/api/admin/orders", headers=self.admin).json()["orders"][0]["mails"]), 4)
+
+    def test_welcome_reset_once_and_expiry_and_workshop_receipt(self):
+        self.assertTrue(any(m["subject"] == "Willkommen bei TEILEKLAR" and m["to"] == ["kunde_a@example.org"] for m in self.mails))
+        self.client.post("/api/auth/forgot-password", json={"email": "kunde_a@example.org"})
+        link = next(m for m in self.mails if m["subject"] == "Passwort zurücksetzen")["text"]
+        token = link.split("token=")[1].split()[0]
+        self.assertEqual(self.client.post("/api/auth/reset-password", json={"token": token, "password": "neues-passwort-1"}).status_code, 200)
+        self.assertEqual(self.client.post("/api/auth/reset-password", json={"token": token, "password": "neues-passwort-2"}).status_code, 400)
+        self.client.post("/api/auth/forgot-password", json={"email": "kunde_a@example.org"})
+        late = [m for m in self.mails if m["subject"] == "Passwort zurücksetzen"][-1]["text"].split("token=")[1].split()[0]
+        from datetime import datetime, timedelta, timezone
+        self.call(db.password_resets.update_many, {"used": False}, {"$set": {"expires_at": datetime.now(timezone.utc) - timedelta(minutes=1)}})
+        self.assertEqual(self.client.post("/api/auth/reset-password", json={"token": late, "password": "neues-passwort-3"}).status_code, 400)
+        workshop = self.call(db.workshops.find_one, {})
+        r = self.client.post("/api/workshops/%s/requests" % workshop["_id"], json={"name": "Erika Muster", "email": "erika@example.org", "phone": "", "message": "Bremsen prüfen bitte.", "consent": True})
+        self.assertEqual(r.status_code, 201, r.text)
+        receipt = [m for m in self.mails if m["to"] == ["erika@example.org"]][-1]
+        self.assertIn("Anfrage gesendet – noch kein Termin", receipt["text"])
+
     def test_bigbuy_import_paginates_dedupes_and_keeps_catalog_on_failure(self):
         calls = {"fail": False}
         def handler(request):
@@ -217,6 +274,18 @@ class ShopFlow(unittest.TestCase):
             self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
         finally:
             bigbuy_import.transport, bigbuy_import.pause_seconds = None, 1.0
+
+    def test_contact_and_partner_requests(self):
+        bad = self.client.post("/api/requests", json={"name": "A", "email": "x", "message": "kurz", "consent": False})
+        self.assertEqual(bad.status_code, 422)
+        self.assertEqual(set(bad.json()["detail"]["fields"]), {"name", "email", "message", "consent"})
+        partner = self.client.post("/api/requests", json={"name": "Max Muster", "email": "werk@example.org", "message": "Wir möchten Partner werden.", "consent": True, "kind": "partner"})
+        self.assertEqual((partner.status_code, partner.json()["detail"]["fields"]), (422, {"company": "required"}))
+        ok = self.client.post("/api/requests", json={"name": "Max Muster", "email": "kontakt@example.org", "message": "Bitte um Rückruf zum Projekt.", "consent": True})
+        self.assertEqual(ok.status_code, 201)
+        stored = self.call(db.requests.find_one, {"number": ok.json()["number"]})
+        self.assertEqual((stored["kind"], stored["status"]), ("contact", "eingegangen"))
+
 
     def test_bigbuy_ftp_import_manifest_category_filter_and_dedupe(self):
         from shop import bigbuy_ftp

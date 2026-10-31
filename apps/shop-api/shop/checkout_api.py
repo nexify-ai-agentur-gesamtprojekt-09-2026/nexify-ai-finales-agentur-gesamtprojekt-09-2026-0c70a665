@@ -9,7 +9,7 @@ from fastapi import APIRouter, Header, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 from pymongo.errors import DuplicateKeyError
 
-from . import auth, revolut
+from . import auth, mail_templates, mailer, revolut
 from .cart_api import owner_for, priced
 from .config import PUBLIC_ORIGIN
 from .db import db, now_iso
@@ -80,9 +80,28 @@ async def checkout_quote(request: Request, response: Response):
     return {**quote, "quote_hash": quote_hash(quote)}
 
 
+TIMELINE = (("bestellt", "Bestellt", "created_at"), ("bezahlt", "Bezahlt", "paid_at"), ("in_bearbeitung", "In Bearbeitung", "processing_at"),
+            ("versendet", "Versendet", "shipped_at"), ("zugestellt", "Zugestellt", "delivered_at"))
+
+
+def timeline(order):
+    return [{"id": key, "label": label, "reached": bool(order.get(field)), "at": order.get(field)} for key, label, field in TIMELINE]
+
+
+async def send_paid_mails(order):
+    try:
+        subject, html, text = mail_templates.order_confirmation(order)
+        await mailer.enqueue("order_paid:customer:" + order["_id"], order["address"].get("email", ""), subject, html, text)
+        subject, html, text = mail_templates.internal_new_order(order)
+        await mailer.enqueue("order_paid:internal:" + order["_id"], mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=order["address"].get("email", ""))
+    except Exception:
+        pass  # mail problems never change the order; the outbox keeps the state
+
+
 def public_order(order):
-    return {k: order.get(k) for k in ("id", "number", "status", "lines", "subtotal_cents", "shipping_cents", "total_cents", "vat_included_cents",
-                                     "vat_percent", "currency", "address", "shipping_method", "created_at", "paid_at", "checkout_url", "payment_state")}
+    return {**{k: order.get(k) for k in ("id", "number", "status", "lines", "subtotal_cents", "shipping_cents", "total_cents", "vat_included_cents",
+                                         "vat_percent", "currency", "address", "shipping_method", "created_at", "paid_at", "checkout_url", "payment_state",
+                                         "fulfilment", "tracking_number", "carrier")}, "timeline": timeline(order)}
 
 
 @router.post("/orders")
@@ -145,6 +164,7 @@ async def sync_payment(order):
         if updated:
             paid_ids = [l["product_id"] for l in order["lines"]]
             await db.carts.update_one({"owner": order["owner"]}, {"$pull": {"items": {"product_id": {"$in": paid_ids}}}})
+            await send_paid_mails(await db.orders.find_one({"_id": order["_id"]}))
     elif state in ("cancelled", "failed") and order.get("status") == OPEN:
         await db.orders.update_one({"_id": order["_id"], "status": OPEN}, {"$set": {"status": FAILED}})
     return await db.orders.find_one({"_id": order["_id"]})
