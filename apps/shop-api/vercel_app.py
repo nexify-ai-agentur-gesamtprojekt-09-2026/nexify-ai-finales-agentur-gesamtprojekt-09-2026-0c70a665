@@ -27,7 +27,7 @@ SCHEMA_MARKER = f"nexify/teileklar/shop-v1/{PROJECT_ID}/{PLANNED_NAMESPACE}"
 COLLECTIONS = (
     "products", "categories", "imports", "source_manifests", "carts", "orders",
     "webhook_events", "workshops", "workshop_requests", "users", "sessions",
-    "login_failures", "password_resets", "settings", "revolut_webhooks", "outbox", "requests",
+    "login_failures", "password_resets", "settings", "revolut_webhooks", "outbox", "requests", "price_releases",
 )
 # Existing db.ensure_indexes + accounts_api.ensure_auth_indexes, not executed here.
 INDEXES = {
@@ -179,6 +179,8 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
             async with lock:
                 if not loaded:
                     routers, database = loader(binding)
+                    if getattr(database, "name", None) != binding.namespace:
+                        return "database_namespace_conflict"
                     for router in routers:
                         app.include_router(router)
                     app.openapi_schema = None
