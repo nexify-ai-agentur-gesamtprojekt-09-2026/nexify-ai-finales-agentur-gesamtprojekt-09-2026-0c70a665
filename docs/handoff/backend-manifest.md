@@ -98,6 +98,11 @@ Response schemas: `/api/openapi.json` (also `/api/docs`). Errors are `{"detail":
 - Web: `cd apps/web && node --test auth/tests/*.test.mjs` (including frame headers).
 - Full suite `make check && make test`: currently red because of older groups (birefnet, browser_evidence, product_image_batch, reconciliation, resize).
 
+## Open delivery boundary
+- GitHub main = b06044526a9300663c87ae7e23796267f71afe00; the canonical Vercel project reports production READY on this SHA.
+- vercel.json builds @nexify/site → apps/site/dist (Vite), while the shop, auth and new pages live in apps/web (Next.js) and the shop API in apps/shop-api.
+- READY and repo saves therefore do not prove a working live shop; nothing in Vercel, vercel.json or the workflows was changed.
+
 ## Known open items
 - BigBuy: API `access_denied` (401 Invalid Token), FTP `ftp_login_incorrect`; catalog 0.
 - Google Auth and reset by real mail: no E2E run (external systems not allowed).
