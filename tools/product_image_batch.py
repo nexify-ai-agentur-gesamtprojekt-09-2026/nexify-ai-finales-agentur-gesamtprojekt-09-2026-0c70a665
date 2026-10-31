@@ -85,9 +85,11 @@ def _pillow():
     return Image, ImageOps, __version__
 
 
-def _segmenter_api():
+def _segmenter_api(config=None):
     try:
-        if __package__:
+        if isinstance(config, dict) and config.get('adapter') == 'birefnet-rembg-general-epoch244-cpu-v1':
+            from tools import birefnet_rembg_batch as birefnet_onnx
+        elif __package__:
             from . import birefnet_onnx
         else:
             import birefnet_onnx
@@ -99,7 +101,7 @@ def _segmenter_api():
 def _declared_segmenter_binding(config):
     if config == 'none_verified':
         return {'adapter': 'none_verified'}
-    api = _segmenter_api()
+    api = _segmenter_api(config)
     try:
         return api.binding(config)
     except api.SegmentationRejected as exc:
@@ -107,7 +109,7 @@ def _declared_segmenter_binding(config):
 
 
 def _build_segmenter(config):
-    api = _segmenter_api()
+    api = _segmenter_api(config)
     try:
         return api.BiRefNetOnnx(config)
     except api.SegmentationRejected as exc:
@@ -138,7 +140,7 @@ class _LazySegmenter:
             except ImageBatchRejected as exc:
                 self.constructor_failure = str(exc)
                 raise
-        api = _segmenter_api()
+        api = _segmenter_api(self.config)
         try:
             return self.instance.apply(rgba)
         except api.SegmentationRejected as exc:
@@ -164,9 +166,10 @@ def validate_policy(policy):
     # No arbitrary command, module, model path or URL may become an adapter.
     segmenter = policy['segmenter']
     if isinstance(segmenter, dict):
-        require(set(segmenter) == SEGMENTER_FIELDS and segmenter.get('adapter') == SEGMENTER_ID,
+        require((set(segmenter) == SEGMENTER_FIELDS and segmenter.get('adapter') == SEGMENTER_ID)
+                or segmenter.get('adapter') == 'birefnet-rembg-general-epoch244-cpu-v1',
                 'no_verified_segmentation_adapter')
-        api = _segmenter_api()
+        api = _segmenter_api(segmenter)
         try:
             segmenter = api.validate_config(segmenter)
         except api.SegmentationRejected as exc:
@@ -275,10 +278,11 @@ def _validate_segmenter_metadata(metadata, config, source, output, calls):
               'input_shape', 'output_shape', 'input_name', 'output_name', 'mask_sha256',
               'input_rgb_sha256', 'input_alpha_sha256', 'output_alpha_sha256', 'local_model_calls'}
     require(isinstance(metadata, dict) and set(metadata) == fields, 'segmenter_metadata_invalid')
-    require(metadata['adapter'] == 'birefnet-default-onnx-1024-logits-v1'
-            and metadata['adapter'] == config['adapter']
-            and metadata['model_sha256'] == config['expected_model_sha256']
-            and metadata['manifest_sha256'] == config['manifest_sha256']
+    declared = _declared_segmenter_binding(config)
+    expected_output = 'output_image' if config['adapter'] == 'birefnet-rembg-general-epoch244-cpu-v1' else 'mask_logits'
+    require(metadata['adapter'] == config['adapter']
+            and metadata['model_sha256'] == declared['model_sha256']
+            and metadata['manifest_sha256'] == declared['manifest_sha256']
             and metadata['runtime_contract'] == {'numpy': '2.3.5', 'onnx': '1.23.2', 'onnxruntime': '1.31.1'}
             and isinstance(metadata['input_shape'], list)
             and all(type(v) is int for v in metadata['input_shape'])
@@ -286,7 +290,7 @@ def _validate_segmenter_metadata(metadata, config, source, output, calls):
             and all(type(v) is int for v in metadata['output_shape'])
             and metadata['input_shape'] == [1, 3, 1024, 1024]
             and metadata['output_shape'] == [1, 1, 1024, 1024]
-            and metadata['input_name'] == 'input_image' and metadata['output_name'] == 'mask_logits',
+            and metadata['input_name'] == 'input_image' and metadata['output_name'] == expected_output,
             'segmenter_metadata_binding_mismatch')
     require(type(metadata['local_model_calls']) is int and metadata['local_model_calls'] == calls == 1,
             'segmenter_call_counter_invalid')

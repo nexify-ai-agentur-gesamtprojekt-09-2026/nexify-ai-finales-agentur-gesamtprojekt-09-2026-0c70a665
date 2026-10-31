@@ -1,10 +1,10 @@
 # BiRefNet-General-ONNX-Pilot (separater Vertrag)
 
-`birefnet-rembg-general-epoch244-pilot-v1` bezeichnet ausschließlich den lokalen
-synthetischen Pilot in `tools/birefnet_rembg_pilot.py`. Er ersetzt oder erweitert
-den produktiven Batchvertrag und den gepinnten Adapter
-`birefnet-default-onnx-1024-logits-v1` nicht. Der Pilot nimmt absichtlich kein
-beliebiges Bild entgegen und ist keine Veröffentlichungsschnittstelle.
+`birefnet-rembg-general-epoch244-pilot-v1` bezeichnet den lokalen synthetischen
+Pilot in `tools/birefnet_rembg_pilot.py`. Der separat auswählbare Batchadapter
+heißt `birefnet-rembg-general-epoch244-cpu-v1`; der bisherige gepinnte Adapter
+`birefnet-default-onnx-1024-logits-v1` bleibt bestehen. Es gibt keinen Fallback
+zwischen beiden. Der Pilot ist keine Veröffentlichungsschnittstelle.
 
 Der Modellurheber stellt [BiRefNet-general-epoch_244.onnx](https://github.com/ZhengPeng7/BiRefNet/releases/tag/v1)
 als eigenen ONNX-Export bereit. Das BiRefNet-Projekt erklärt MIT und die offizielle
@@ -33,9 +33,48 @@ unterscheidet sich absichtlich von der des anderen Adapters.
 
 Die CPU-Probe ist kein Eignungsnachweis für Vercel Functions, kein Vergleich mit
 den anderen gepinnten Modellgewichten und keine Produktqualitätsabnahme. Es
-fehlen noch Einbindung in den Batch, Rechte-/Zuordnungsprüfung realer Originale,
-Aufsicht und Abbruch laufender nativer Kernel, sowie Sichtprüfung echter
-Produktbilder und deren Kanten und Beschriftung.
+fehlen noch ein betrieblich zugelassener Worker sowie Sichtprüfung realer
+Produktbilder und deren Kanten und Beschriftung. Der Batch verlangt weiterhin
+die bestehende Rechte- und Zuordnungsbindung und erzeugt nur lokale Entwürfe.
+
+## Explizite Batchauswahl
+
+```json
+{
+  "adapter": "birefnet-rembg-general-epoch244-cpu-v1",
+  "artifact_root": "<lokales-artefaktverzeichnis>",
+  "max_session_working_bytes": 12884901888,
+  "max_tensor_working_bytes": 134217728,
+  "max_input_pixels": 1000000,
+  "max_inference_seconds": 180
+}
+```
+
+Der Modellname und SHA256 sind fest eingebunden. Der lokale Prozess prüft die
+reguläre Datei mit sicherem Dateideskriptor, Größe und Hash vor Sessionaufbau;
+die ONNX-Runtime erhält die unveränderlichen, geprüften Modellbytes. Der Batch richtet
+EXIF vor Inferenz aus, erhält Originalbytes und Produkt-RGB, vermehrt vorhandenes
+Alpha nicht und verwahrt jede Ausgabe als `review_required` ohne Veröffentlichung.
+Transparente Eingaben verwenden weiterhin den bisherigen Alpha-Pfad.
+
+Jeder Modellversuch läuft in einem separaten CPU-Prozess, mit lokaler
+nicht-blockierender Einzelplatzsperre und `RLIMIT_AS` von 9 bis höchstens 12 GiB.
+Das Timeout beendet den Prozess, auch wenn ein nativer Kernel noch läuft; ein
+belegter Worker meldet `worker_busy`. Es gibt keinen automatischen Retry. Die
+Batch- und Storegrenzen gelten zusätzlich. Die Sperre gilt nur für Prozesse mit
+demselben `/tmp`-Dateisystem, nicht für getrennte Container oder Hosts. Ein
+Fünf-Minuten-Request oder Vercel Function wird daraus
+nicht abgeleitet; für den Betrieb ist ein isolierter Worker erforderlich.
+
+Die [native Batchprobe](../../tests/native_rembg_batch_probe.py) nutzt ausschließlich
+das eigene synthetische Fixture. Sie prüft Originalerhalt, erzeugte RGBA-Datei,
+einen Modellaufruf und bytegleiche Wiederaufnahme aus dem lokalen Store.
+Der echte Lauf mit unveränderlichen Modellbytes dauerte 49,788 Sekunden, lieferte `review_required` und
+`publishable=false`; Replay und Originalbytes waren identisch. Eine parallele
+Anfrage wurde mit `worker_busy` und null Modellaufrufen abgelehnt. Ein Modell
+falscher Größe, ein gleich großes Modell mit falschem Hash und ein Timeout wurden
+ohne Modellaufruf zurückgewiesen. Messwerte stehen im
+[Batchbeleg](../../evidence/birefnet-onnx-2026-10-27/rembg-general-synthetic/batch-result.json).
 
 ## Beobachteter Pilot
 

@@ -1,0 +1,18 @@
+{
+  "description": "Self-generated synthetic bottle; not a real product or quality acceptance",
+  "files": {
+    "after.png": {
+      "bytes": 3417,
+      "sha256": "87a70bb280846377ffa0c72dec47fa77347de9e2f49b4310905e64ad57027738"
+    },
+    "before.png": {
+      "bytes": 1171,
+      "sha256": "4aa75a27466f5755112fc97609e650b44d97fad3944ab828c432c608bf23a019"
+    },
+    "mask.png": {
+      "bytes": 1949,
+      "sha256": "87c6044d2df2158e5a8d7447f00f4404c6c0bd1f7e66f569616bbc51f13e7a33"
+    }
+  },
+  "schema_version": 1
+}
