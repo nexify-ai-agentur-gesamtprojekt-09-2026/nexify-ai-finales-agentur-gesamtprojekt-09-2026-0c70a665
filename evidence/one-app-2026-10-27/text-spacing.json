@@ -2,10 +2,10 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-31T02:09:51.097Z",
+  "observed_at": "2026-10-31T15:10:03.265Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "892c8c8d23556f14cc08e2de6bd5945b8659c9858df4665e0b51e57f5a806975",
-    "apps/site/index.html": "90cbb8a63fd451524fc12f2577d77bb5a831642eb3d0065fa6d65d7bd2ab06b7",
+    "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
     "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
     "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
@@ -728,7 +728,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 416,
+        "count": 412,
         "all_doubled": true
       },
       "overflow": false,
