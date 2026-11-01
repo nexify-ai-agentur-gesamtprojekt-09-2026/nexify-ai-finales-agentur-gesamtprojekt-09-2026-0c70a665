@@ -13,7 +13,7 @@ const copy={
 };
 const productNames:Record<string,Partial<Record<Locale,string>>>={
  nex2fly:{de:'NeX2fly Suite',nl:'NeX2fly Suite',fr:'NeX2fly Suite'},one:{de:'NeXify AI one / one+',nl:'NeXify AI one / one+',fr:'NeXify AI one / one+'},api:{de:'API & Integrationen',nl:'API & integraties',fr:'API et intégrations'},
- 'tk-home':{de:'TEILEKLAR entdecken',nl:'TEILEKLAR ontdekken',fr:'Découvrir TEILEKLAR'},'tk-workshop':{de:'Werkstattprofile',nl:'Werkplaatsprofielen',fr:'Profils d’ateliers'},'tk-partner':{de:'Werkstattpartner werden',nl:'Werkplaatspartner worden',fr:'Devenir atelier partenaire'},
+ 'tk-home':{de:'TEILEKLAR entdecken',nl:'TEILEKLAR ontdekken',fr:'Découvrir TEILEKLAR'},'tk-shop':{de:'Shop',nl:'Shop',fr:'Boutique',en:'Shop'},'tk-reifenrechner':{de:'Reifenrechner',nl:'Bandencalculator',fr:'Calculateur de pneus',en:'Tyre calculator'},'tk-batterie':{de:'Batterie-Berater',nl:'Accu-adviseur',fr:'Conseiller batterie',en:'Battery advisor'},'tk-workshop':{de:'Werkstattprofile',nl:'Werkplaatsprofielen',fr:'Profils d’ateliers'},'tk-partner':{de:'Werkstattpartner werden',nl:'Werkplaatspartner worden',fr:'Devenir atelier partenaire'},
  pricing:{de:'Preise & Ablauf',nl:'Prijzen & aanpak',fr:'Tarifs et étapes'},scope:{de:'Projektstart',nl:'Een project starten',fr:'Démarrer un projet'},'knowledge-start':{de:'Projekt vorbereiten',nl:'Je project voorbereiden',fr:'Préparer ton projet'}
 };
 export default function SiteNavigation({pages,site,locale,pathname}:{pages:PublicPage[];site:string;locale:Locale;pathname:string}){
@@ -21,7 +21,7 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  const desktop=useRef<HTMLDetailsElement>(null),mobile=useRef<HTMLDetailsElement>(null);
  const [opened,setOpened]=useState({desktop:false,mobile:false});
  const page=(id:string)=>pages.find(p=>p.id===id);
- const groups=[{id:'ai',title:t.ai,ids:['nex2fly','one','api']},{id:'shop',title:t.shop,ids:['tk-home','tk-workshop','tk-partner']},{id:'start',title:t.start,ids:['pricing','scope','knowledge-start']}];
+ const groups=[{id:'ai',title:t.ai,ids:['nex2fly','one','api']},{id:'shop',title:t.shop,ids:['tk-home','tk-shop','tk-reifenrechner','tk-batterie','tk-workshop','tk-partner']},{id:'start',title:t.start,ids:['pricing','scope','knowledge-start']}];
  const label=(p:PublicPage)=>productNames[p.id]?.[locale]||p.localizedTitle[locale];
  const active=(p:PublicPage)=>pathname===p.path?'page' as const:undefined;
  const close=(focus=false)=>{[desktop,mobile].forEach(ref=>{if(ref.current?.open){ref.current.open=false;if(focus)ref.current.querySelector('summary')?.focus();}});};
