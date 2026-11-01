@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-01T01:35:47.245Z",
+  "observed_at": "2026-11-01T02:14:44.719Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "bdd8280579578f0f364e7824bc85e0a4a292dd791205a9d695b73fe9e6645cde",
     "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
@@ -19,6 +19,7 @@
     "apps/web/components/ActionControl.css": "92922b5e2bb64513c3db4fcbc18f388de146d9e581a1a340856e11eab90377ae",
     "apps/web/components/ActionControl.tsx": "6909b910d4a417b6cc917eadabc0eded4a1a26309a9fb1f77c46a23ebdd8b3b0",
     "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
+    "apps/web/components/BatteryAdvisor.tsx": "21941c8b29a2dc6ada3df47c8b81abf419b00d583df321c89a48c6463f648680",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
     "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
@@ -47,7 +48,7 @@
     "apps/web/components/PresenterVideo.tsx": "c9917dcd7f033dab440967595db1a21fafafc3b5c44cfb8b7818fcf11d3ea94f",
     "apps/web/components/ProblemExplorer.css": "b097aca7f8d135896e136feb05f2eac08a420b905e8be5c7dab79f82cb1e9a33",
     "apps/web/components/ProblemExplorer.tsx": "1ac68abcc64b3632f336b479b5293a297823444acb19a731106a08e5a804c547",
-    "apps/web/components/PublicContent.tsx": "c73ad055c78de77e113283e2c4cd091a6ec6f5bcaa81bab1126293122dfa419d",
+    "apps/web/components/PublicContent.tsx": "0ed0dac7f00f43d50f6aecc9bbc2da8afb4970928d7ebde69ecd6854ffe47b0b",
     "apps/web/components/PublicContentLayout.css": "ee819b96a19b37eb9367a802f3245ce7972f2fe60e5257c683850757cb9b08d8",
     "apps/web/components/PublicExperience.tsx": "24db69babb871c62e303a19728dc267ab6ed8dbc6bf237df84b314f0008139c4",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
@@ -55,12 +56,15 @@
     "apps/web/components/PublicOrientationChat.tsx": "b0e1ede1014d3568cd04d5fe6a7dce766084e2d849118b5eaed998ae37189675",
     "apps/web/components/PublicRequestFallback.tsx": "dc8ba5eb69dcec426d0419980d3a19ad0992318928428283c92183127ab837de",
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
+    "apps/web/components/ShopOverview.tsx": "58c5e6cb9cbdc0371f91d5e69dbc307ff061e39d01263ae65a8646173f1b8665",
     "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
     "apps/web/components/SiteFooter.tsx": "de7dbd86cc91b1bb5cb70146164d75d453c835aba2aada55f5ac5dcd9cc3b860",
     "apps/web/components/SiteNavigation.tsx": "56f888cc552953a53dd18ed585dc794f66676d456ad5b7fdecd34ac0652c895f",
+    "apps/web/components/TeileklarTools.css": "41a8e9cb133596da05f19c53c2949604f56d685556a63c286b3b9c3d1879d5ca",
     "apps/web/components/TrioScene.css": "3d34d0255c6297b079c13191295bf4432987964406010baa3264f6df1b67e6f1",
     "apps/web/components/TrioScene.tsx": "47b098e371f2962c36c528cfdff90ae3c024f9304495dafdde37790aaef6b29d",
+    "apps/web/components/TyreCalculator.tsx": "b80f1b49f5ec8992b9e30e57c0953d81b4dc4822bdfdf54ca08bffc6efa2fc85",
     "apps/web/components/WorkshopDirectory.css": "005e64cb50757f86342946aabdff95eebb6bb284580e2a190e28fe5eafbc3374",
     "apps/web/components/WorkshopDirectory.tsx": "46da756d96570baff9a7dd78c60b2dd2ed91b7c89f2a8b086211d4b30e2a3d56",
     "apps/web/components/Workspace.tsx": "66635bfc84ab930e130728fcf951c8059f75523eb78dd80624b4fe25e4da3167",
@@ -935,7 +939,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 422,
+        "count": 484,
         "all_doubled": true
       },
       "overflow": false,
@@ -958,7 +962,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 422,
+        "count": 467,
         "all_doubled": true
       },
       "overflow": false,
@@ -981,7 +985,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 422,
+        "count": 446,
         "all_doubled": true
       },
       "overflow": false,

@@ -1,30 +1,34 @@
 [
   {
-    "content": "Add 3 pages + explainers + media registry + refresh presenter-sources hash",
+    "content": "ShopOverview-Komponente (Kategorie-/Einstiegs-Kacheln)",
     "status": "completed"
   },
   {
-    "content": "Regenerate public-site.json (39 pages)",
+    "content": "TyreCalculator-Komponente (Reifenrechner interaktiv)",
     "status": "completed"
   },
   {
-    "content": "Update test counts + check_browser_evidence 72->78",
+    "content": "BatteryAdvisor-Komponente (Batterie-Berater-Dialog)",
     "status": "completed"
   },
   {
-    "content": "Regenerate vite evidence: browser-critical + text-spacing",
+    "content": "PublicContent.tsx: Komponenten nach page.id einbinden",
     "status": "completed"
   },
   {
-    "content": "Next build + public-experience -> next-public.json (78)",
+    "content": "Evidenz (text-spacing) regen + acceptance/reconciliation resync",
     "status": "completed"
   },
   {
-    "content": "Regenerate legal-footer evidence (vite+next) + resync acceptance-coverage hashes",
+    "content": "make test 620 + make check 0/0 grün",
     "status": "completed"
   },
   {
-    "content": "Run make test and ensure 620 pass",
+    "content": "Funktionale + Mobile-Verifikation (Reifen-Math, Batterie-Logik, Shop 390px)",
     "status": "completed"
+  },
+  {
+    "content": "Richere Sie-Form-Sektionstexte (Folgeauftrag, voller Cascade) - offen",
+    "status": "pending"
   }
 ]

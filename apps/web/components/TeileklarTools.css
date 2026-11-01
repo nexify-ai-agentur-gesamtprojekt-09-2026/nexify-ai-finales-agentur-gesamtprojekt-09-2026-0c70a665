@@ -1,0 +1,43 @@
+.tk-tool{margin:0;padding:var(--space-7) var(--content-gutter);border-top:1px solid var(--color-linie-fein)}
+.tk-tool-head{display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-5)}
+.tk-tool-head .content-kicker{margin:0}
+.tk-tool-head h2{font:500 clamp(20px,2.4vw,26px)/1.25 var(--font-display);letter-spacing:-.02em;margin:0;color:var(--color-text-primaer)}
+.tk-tool-head p{margin:0;max-width:62ch;font-size:15px;line-height:1.7;color:var(--color-text-sekundaer)}
+
+.tk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:var(--space-4)}
+.tk-tile{display:flex;flex-direction:column;gap:var(--space-2);min-height:112px;padding:var(--space-4) var(--space-5);background:var(--color-graphit-800);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);box-shadow:var(--shadow-kleine-karte);color:var(--color-text-primaer);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.tk-tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-karte);border-color:var(--color-marke-lime)}
+.tk-tile:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:2px}
+.tk-tile .tk-tile-label{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);font-size:16px;font-weight:500;letter-spacing:-.01em}
+.tk-tile .tk-tile-label>span[aria-hidden]{color:var(--color-marke-lime)}
+.tk-tile small{font-size:13px;line-height:1.55;color:var(--color-text-tertiaer)}
+.tk-tile.is-entry{background:var(--color-graphit-850);border-color:var(--color-linie-stark)}
+
+.tk-form{display:grid;gap:var(--space-5);max-width:720px}
+.tk-fieldrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:var(--space-4)}
+.tk-field{display:flex;flex-direction:column;gap:var(--space-2);min-width:0}
+.tk-field label{font-size:13px;font-weight:500;color:var(--color-text-sekundaer)}
+.tk-field .tk-hint{font-size:12px;line-height:1.5;color:var(--color-text-tertiaer)}
+.tk-field input,.tk-field select{width:100%;min-height:48px;padding:0 var(--space-4);background:var(--color-graphit-900);border:1px solid var(--color-linie-stark);border-radius:var(--radius-button);color:var(--color-text-primaer);font:400 16px/1.4 var(--font-text)}
+.tk-field input:hover,.tk-field select:hover{border-color:var(--color-linie-mittel)}
+.tk-field input:focus-visible,.tk-field select:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:1px;border-color:var(--color-marke-lime)}
+.tk-field input:invalid{border-color:var(--color-semantik-fehler)}
+
+.tk-subhead{font:500 13px/1.6 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-tertiaer);margin:var(--space-2) 0 0}
+
+.tk-result{display:grid;gap:var(--space-3);padding:var(--space-5);background:var(--color-graphit-850);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);box-shadow:var(--shadow-well)}
+.tk-result-row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--space-3);padding-block:var(--space-2);border-top:1px solid var(--color-linie-fein)}
+.tk-result-row:first-of-type{border-top:0}
+.tk-result-row dt{font-size:14px;color:var(--color-text-sekundaer)}
+.tk-result-row dd{margin:0;font:500 18px/1.3 var(--font-mono);color:var(--color-text-primaer)}
+.tk-badge{display:inline-flex;align-items:center;gap:var(--space-2);align-self:flex-start;padding:var(--space-2) var(--space-4);border-radius:var(--radius-pille);font-size:13px;font-weight:500;line-height:1.3}
+.tk-badge.is-ok{background:var(--color-graphit-900);color:var(--color-semantik-erfolg);border:1px solid var(--color-semantik-erfolg)}
+.tk-badge.is-warn{background:var(--color-graphit-900);color:var(--color-semantik-warnung);border:1px solid var(--color-semantik-warnung)}
+.tk-note{margin:0;font-size:13px;line-height:1.6;color:var(--color-text-tertiaer)}
+.tk-recommend{font:500 20px/1.3 var(--font-display);letter-spacing:-.01em;color:var(--color-marke-lime);margin:0}
+.tk-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-2)}
+.tk-link{display:inline-flex;align-items:center;gap:var(--space-2);min-height:44px;padding:var(--space-2) var(--space-5);border:1px solid var(--color-linie-stark);border-radius:var(--radius-button);font-size:14px;font-weight:500;color:var(--color-text-primaer);transition:border-color .18s ease,color .18s ease}
+.tk-link:hover{border-color:var(--color-marke-lime);color:var(--color-marke-lime)}
+.tk-link:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:2px}
+.tk-link>span[aria-hidden]{color:var(--color-marke-lime)}
+@media (prefers-reduced-motion:reduce){.tk-tile,.tk-link{transition:none}}
