@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-01T03:53:52.596Z",
+  "observed_at": "2026-11-01T04:21:50.399Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "bdd8280579578f0f364e7824bc85e0a4a292dd791205a9d695b73fe9e6645cde",
     "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
@@ -19,7 +19,7 @@
     "apps/web/components/ActionControl.css": "92922b5e2bb64513c3db4fcbc18f388de146d9e581a1a340856e11eab90377ae",
     "apps/web/components/ActionControl.tsx": "6909b910d4a417b6cc917eadabc0eded4a1a26309a9fb1f77c46a23ebdd8b3b0",
     "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
-    "apps/web/components/BatteryAdvisor.tsx": "21941c8b29a2dc6ada3df47c8b81abf419b00d583df321c89a48c6463f648680",
+    "apps/web/components/BatteryAdvisor.tsx": "7d95bc4486cd4133e9bde127a46f00f465be2a284972a24835bdd9d7be23381b",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
     "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
@@ -56,15 +56,17 @@
     "apps/web/components/PublicOrientationChat.tsx": "b0e1ede1014d3568cd04d5fe6a7dce766084e2d849118b5eaed998ae37189675",
     "apps/web/components/PublicRequestFallback.tsx": "dc8ba5eb69dcec426d0419980d3a19ad0992318928428283c92183127ab837de",
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
-    "apps/web/components/ShopOverview.tsx": "a1035dba676f7d43b84efef5598d62a5861ed59dded262be36b9728cd9966548",
+    "apps/web/components/ShopCheckout.tsx": "06c66408e8aad2c5b54dfc56cd9fa360d47b0c6d01f8b5d3351973dbcc4096f0",
+    "apps/web/components/ShopOverview.tsx": "81296a2d2b48c723a9e4f864f6393868934ff82d32a183f320c570428d7e2cc2",
     "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
+    "apps/web/components/ShopWorkshopFinder.tsx": "c44a60090707a07a43d60d0eea4f205477413e62d03e5af6195e146e6ef8eaac",
     "apps/web/components/SiteFooter.tsx": "de7dbd86cc91b1bb5cb70146164d75d453c835aba2aada55f5ac5dcd9cc3b860",
     "apps/web/components/SiteNavigation.tsx": "56f888cc552953a53dd18ed585dc794f66676d456ad5b7fdecd34ac0652c895f",
-    "apps/web/components/TeileklarTools.css": "fae05745810b7d06776b2d9416779cc4f74b773214d4cfd26b45eae60b1679e4",
+    "apps/web/components/TeileklarTools.css": "bab76b9da41067731e1e2c7913b4953ec9b9bc17b5d87aec93813aeb6567f0fd",
     "apps/web/components/TrioScene.css": "3d34d0255c6297b079c13191295bf4432987964406010baa3264f6df1b67e6f1",
     "apps/web/components/TrioScene.tsx": "47b098e371f2962c36c528cfdff90ae3c024f9304495dafdde37790aaef6b29d",
-    "apps/web/components/TyreCalculator.tsx": "b80f1b49f5ec8992b9e30e57c0953d81b4dc4822bdfdf54ca08bffc6efa2fc85",
+    "apps/web/components/TyreCalculator.tsx": "fb032b2f228878bd06321e3a4db5812d29169054817214cd8742721cfc56078b",
     "apps/web/components/WorkshopDirectory.css": "005e64cb50757f86342946aabdff95eebb6bb284580e2a190e28fe5eafbc3374",
     "apps/web/components/WorkshopDirectory.tsx": "46da756d96570baff9a7dd78c60b2dd2ed91b7c89f2a8b086211d4b30e2a3d56",
     "apps/web/components/Workspace.tsx": "66635bfc84ab930e130728fcf951c8059f75523eb78dd80624b4fe25e4da3167",
@@ -72,6 +74,7 @@
     "apps/web/components/WorkspaceRebuild.css": "c1933759e96b3420d2e35c56a72ee6d9baa1aa23efc7e91ba72cc9fb823522c1",
     "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
+    "apps/web/components/teileklar-shop-data.ts": "2455a6a7c4a8d9e7aef3e63315baae604b4562d9581e069e04a57a72f920fbfe",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
     "apps/web/lib/home-scenes.ts": "4eb5f25c1c119de3b04c85eacb86432b9f4992b8a055ed349488dab18fd4e8cf",
     "apps/web/lib/i18n.ts": "d3a05fcb6172214809879c8d27398f69306953cc7b7995529e96d273b2e1e2bd",
@@ -939,7 +942,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 501,
+        "count": 551,
         "all_doubled": true
       },
       "overflow": false,
@@ -962,7 +965,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 467,
+        "count": 479,
         "all_doubled": true
       },
       "overflow": false,
@@ -985,7 +988,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 446,
+        "count": 462,
         "all_doubled": true
       },
       "overflow": false,
