@@ -93,10 +93,20 @@ Node lokal 24.22.1 statt der vorgesehenen vollständigen Projekttoolchain 22.23.
 
 ## Veröffentlichung und Übergabe
 
-Eigener Arbeitszweig; main und conflict_011126_0014 bleiben erhalten. Seine
-Vercel-Autoauslieferung wird allein für diesen neuen Zweignamen über
-git.deploymentEnabled=false unterbunden; alle bisherigen Branchregeln,
-Services, Header und Rewrites bleiben identisch. Der Checkpoint trägt [skip ci],
+Eigener Arbeitszweig; main und conflict_011126_0014 bleiben erhalten. Für den
+neuen Zweignamen gilt git.deploymentEnabled=false nun sowohl in vercel.json
+als auch in apps/web/vercel.json. Alle bisherigen Branchregeln, Services,
+Header und Rewrites bleiben identisch. Die anfänglich nur im Root gesetzte
+Regel erfasste ein zusätzliches Projekt mit verschachteltem App-Root nicht:
+web/prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5 baute d60ec797 als Preview
+dpl_c8t4kwgVTex9cUgTposqQBRZXDJ7, READY, target null. Projektreadback:
+ssoProtection.enabled=true, deploymentType=all_except_custom_domains,
+kein eigener Customdomainwechsel. Kein Produktiv-Go-live oder fachlicher
+Abnahmenachweis. Die Vorschau bleibt SSO-geschützt vorhanden; fertige
+Deployments lassen sich mit den hier verbundenen Werkzeugen nicht entfernen.
+Nur der neue Zweig erhält die zusätzliche verschachtelte Sperre, keine
+bestehende Projekt-/Automations-/Berechtigungseinstellung wird geändert.
+Der Checkpoint trägt [skip ci],
 um keinen ungeprüften zusätzlichen Actions-/Providerlauf auszulösen.
 Bestehende Workflows, Zeitpläne, Freigaben und öffentliche Domains unverändert.
 

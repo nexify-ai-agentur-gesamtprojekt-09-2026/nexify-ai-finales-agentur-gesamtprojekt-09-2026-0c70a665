@@ -1353,3 +1353,10 @@ Nachweis und nächste Schritte: docs/implementation/v3r2-p26-local-files.md,
 docs/reviews/v3r2-file-intake/report.json. Eigener Zweig verhindert nur seine eigene
 Autoauslieferung; keine Änderung vorhandener Workflows/Automationen, kein Main-
 oder Releasewechsel. P26 bleibt Teilfortschritt, Gesamtprojekt nicht fertig.
+
+Präzisierung desselben P26.1-Checkpoints: zusätzliches Vercel-Projekt web hat
+d60ec797 trotz Rootregel automatisch als SSO-geschützte Preview gebaut, READY,
+target null. Kein Customdomain-/Produktivwechsel. Nur für den neuen Zweig wird
+dieselbe Sperre jetzt auch in apps/web/vercel.json geführt. Fertige Vorschau
+nicht entfernt, keine Entfernungsmöglichkeit im verbundenen Werkzeugkatalog.
+Beobachtung und Grenzen im selben Integrationsbericht nachgetragen.

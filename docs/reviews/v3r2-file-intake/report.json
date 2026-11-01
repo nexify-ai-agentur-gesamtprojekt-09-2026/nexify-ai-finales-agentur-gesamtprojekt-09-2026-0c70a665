@@ -136,5 +136,22 @@
     "jsdom": "27.0.1",
     "expected_project_node": "22.23.4",
     "full_project_toolchain_verified": false
+  },
+  "automatic_private_preview": {
+    "observed": true,
+    "source_commit": "d60ec7974cf9f0de3549f91d0c16896875bc1947",
+    "deployment_id": "dpl_c8t4kwgVTex9cUgTposqQBRZXDJ7",
+    "project_id": "prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5",
+    "state": "READY",
+    "target": null,
+    "sso_protection": {
+      "enabled": true,
+      "deploymentType": "all_except_custom_domains"
+    },
+    "custom_domain_promotion": false,
+    "removed": false,
+    "removal_tool_available": false,
+    "correction": "same own-branch deploymentEnabled=false added to apps/web/vercel.json; existing settings and other branches unchanged",
+    "full_application_acceptance": false
   }
 }
