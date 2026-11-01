@@ -1338,3 +1338,18 @@ und eigene Fortschritts-/Dokubelege gezielt gebunden; fremde UIhashes bleibenrot
 Vorheriger Servicesreport ist historischer b09/a4-Buildbeleg. Dieses Delta hat
 eigenen Report docs/reviews/shop-namespace-operator-2026-10-31.json; keine
 behauptete produktive Namespace-/Steuer-/Preis-/Versand-/Providerabnahme.
+
+
+## Gesamtplan v3 Revision 2 · P26.1 · 01.11.2026
+
+Expliziten Startauftrag umgesetzt als isolierter lokaler Datei-Kandidat; Basis
+8fc8a3b, F-009 active. Gemeinsame Komponente in Assistent und internem Arbeitsplatz:
+Projektlabel/Zweck, begrenzte Auswahl, Bytehash, Dubletten, ausdrückliche zusätzliche
+Fassung, Metadatenexport, Abbruch/Verwerfen. Keine Upload-/Tenant-/Connector-/Brain-
+oder Serverwirkung. Acht Verhaltenstests, strenge Typprüfung, isolierter Build und
+zehn DOM-Simulationschecks bestanden; echte Browser-/Gesamt-/unabhängige Abnahme offen.
+REA6.8.0-MCP statisch mit vollständigem exaktem Readback, keine Laufzeitabnahme.
+Nachweis und nächste Schritte: docs/implementation/v3r2-p26-local-files.md,
+docs/reviews/v3r2-file-intake/report.json. Eigener Zweig verhindert nur seine eigene
+Autoauslieferung; keine Änderung vorhandener Workflows/Automationen, kein Main-
+oder Releasewechsel. P26 bleibt Teilfortschritt, Gesamtprojekt nicht fertig.

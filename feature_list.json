@@ -172,6 +172,30 @@
         }
       ],
       "verified_at": "2026-10-27T11:34:15.394Z"
+    },
+    {
+      "id": "F-009",
+      "behavior": "Projektunterlagen lokal prüfen, Dubletten und abweichende Fassungen nachvollziehbar behandeln; keine Übertragung oder Projektberechtigung erfinden.",
+      "verification": "pnpm --filter @nexify/site test && pnpm --filter @nexify/site typecheck; echte quellgebundene Browserabnahme ausstehend",
+      "state": "active",
+      "evidence": "docs/reviews/v3r2-file-intake/report.json; lokale Teilprüfungen grün, vollständige Integration/Browser/Review offen",
+      "layers": [
+        {
+          "label": "Layer 1 (Typen)",
+          "cmd": "pnpm --filter @nexify/site typecheck",
+          "repair": "Neue Komponenten und Umgebung anhand tatsächlicher Fehler korrigieren."
+        },
+        {
+          "label": "Layer 2 (Verhalten)",
+          "cmd": "pnpm --filter @nexify/site test",
+          "repair": "Dateiprüfung, Fassungskonflikte und sichere lokale Zustände prüfen."
+        },
+        {
+          "label": "Layer 3 (Gesamte Integration)",
+          "cmd": "pnpm build:next-reference && make e2e && make check-arch && python3 tools/check_browser_evidence.py",
+          "repair": "Vollständigen Checkout, aktuelle Browserbelege für neue Dateien und unabhängiges Review herstellen; nicht allein aus alten Checks passing ableiten."
+        }
+      ]
     }
   ]
 }

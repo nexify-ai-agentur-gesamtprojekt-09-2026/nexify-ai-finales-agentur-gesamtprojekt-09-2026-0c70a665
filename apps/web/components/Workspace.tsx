@@ -13,6 +13,7 @@ import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
 import {ActionButton,type ActionVariant} from './ActionControl';
+import ProjectFilesPanel from './ProjectFilesPanel';
 
 type Intent = "choose" | "quote" | "booking" | "marketing";
 type Message = {role:"user"|"assistant"; text?:string; intent?:Intent; label?:string};
@@ -252,6 +253,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
           {intent==="marketing" && canMarket && <><form onSubmit={event=>{event.preventDefault();if(!canMarket)return;const data=new FormData(event.currentTarget);void act(async()=>setMarketing((await post("/api/marketing",{goal:data.get("goal"),audience:data.get("audience"),locale})).draft));}}><label>{t.goal}<textarea name="goal" maxLength={800} required rows={3}/></label><label>{t.audience}<input name="audience" maxLength={500} required/></label><button className="primary-button" disabled={busy||!canMarket}>{t.createMarketing}</button></form>{marketing.length>0&&<div className="result-card"><p className="state-label">{t.marketingDraft}</p><ul>{marketing.map((line,index)=><li key={index}>{line}</li>)}</ul></div>}</>}
         </section>}
         {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="speech"?t.readAloudError:error==="chatgpt_limit"?t.chatgptLimit:t.error}</p>}
+        <ProjectFilesPanel locale={locale}/>
         <div ref={chatEnd}/>
       </div>
       <div className="composer-area" data-testid="chat-composer" hidden={!ready||(chatMode!=="workspace"&&Boolean(currentPage))}>
