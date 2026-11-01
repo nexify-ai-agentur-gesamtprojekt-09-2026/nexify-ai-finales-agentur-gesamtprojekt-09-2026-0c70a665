@@ -2,14 +2,14 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-01T04:49:17.316Z",
+  "observed_at": "2026-11-01T05:25:04.198Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "258595cf3bec2dc084af00bf72b50ced6db0eea7ca90ede9438941a30caebe75",
     "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
     "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
     "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
-    "apps/site/src/main.tsx": "923a11979b649159c9fe3c6931219fa1f02f194fde0a61c5b705c5216e9dd523",
+    "apps/site/src/main.tsx": "4f403bcae142b2de1f79bf552d086d6cb143b9a0f665cab1194ecb61f6a151f2",
     "apps/site/src/observability.ts": "b42fcb14289b34a6295fea642438a2b0b12196fdd67317bf1836c0a2db87631d",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
@@ -48,7 +48,7 @@
     "apps/web/components/PresenterVideo.tsx": "c9917dcd7f033dab440967595db1a21fafafc3b5c44cfb8b7818fcf11d3ea94f",
     "apps/web/components/ProblemExplorer.css": "b097aca7f8d135896e136feb05f2eac08a420b905e8be5c7dab79f82cb1e9a33",
     "apps/web/components/ProblemExplorer.tsx": "1ac68abcc64b3632f336b479b5293a297823444acb19a731106a08e5a804c547",
-    "apps/web/components/PublicContent.tsx": "0ed0dac7f00f43d50f6aecc9bbc2da8afb4970928d7ebde69ecd6854ffe47b0b",
+    "apps/web/components/PublicContent.tsx": "1cc0d3e1bd032cd773207dbbb0a03cedc2d6ebd5a37bd5e9a2f5bdea5046cbd7",
     "apps/web/components/PublicContentLayout.css": "ee819b96a19b37eb9367a802f3245ce7972f2fe60e5257c683850757cb9b08d8",
     "apps/web/components/PublicExperience.tsx": "24db69babb871c62e303a19728dc267ab6ed8dbc6bf237df84b314f0008139c4",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
@@ -942,7 +942,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 551,
+        "count": 423,
         "all_doubled": true
       },
       "overflow": false,
@@ -965,7 +965,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 479,
+        "count": 423,
         "all_doubled": true
       },
       "overflow": false,
@@ -988,7 +988,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 462,
+        "count": 423,
         "all_doubled": true
       },
       "overflow": false,

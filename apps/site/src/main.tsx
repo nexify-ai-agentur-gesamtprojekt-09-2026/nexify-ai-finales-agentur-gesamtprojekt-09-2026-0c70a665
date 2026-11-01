@@ -47,6 +47,11 @@ function RouteContent({page}:{page?:PublicPage}){
     document.title=page?`${page.localizedTitle[locale]} · NeXify AI`:`${unavailable[0]} · NeXify AI`;
     const meta=document.querySelector('meta[name="description"]');
     if(meta)meta.setAttribute('content',descriptions[locale]);
+    if(!hashMode){
+      let link=document.querySelector('link[rel="canonical"]') as HTMLLinkElement|null;
+      if(!link){link=document.createElement('link');link.rel='canonical';document.head.appendChild(link);}
+      link.href=location.origin+(page?page.path:'/');
+    }
     window.scrollTo(0,0);
   },[page,locale]);
   if(!page)return <section className="public-page"><span className="eyebrow">NEXIFY AI</span><h1>{unavailable[0]}</h1><p>{unavailable[1]}</p><BrowserLink className="route-action" href="/">{unavailable[2]}</BrowserLink></section>;
