@@ -196,13 +196,13 @@ Methode: Produktiv-Build (`vite build`, `apps/site/dist`) statisch serviert, gem
 | /teileklar/reifenrechner | 216 | 1 | 59 | 59 | ~1710 | 11 | 515 | 0 |
 | /teileklar/batterie-berater | 196 | 2 | 57 | 57 | ~1710 | 11 | 498 | 0 |
 
-**SEO-Signale (alle Seiten):** `title` gesetzt (51–61 Zeichen), `meta description` vorhanden, `html[lang=de]`, genau **1× `h1`**, `viewport`-Meta vorhanden, kein Quirks-Mode. **Best-Practice/A11y:** 0 Konsolenfehler, Landmarks (`main`/`nav`/`header`) vorhanden, **0 Bilder ohne `alt`**.
+**SEO-Signale (alle Seiten):** `title` gesetzt (51–61 Zeichen), `meta description` vorhanden, `html[lang=de]`, genau **1× `h1`**, `viewport`-Meta vorhanden, **per-Route `rel=canonical`**, kein Quirks-Mode. **Best-Practice/A11y:** 0 Konsolenfehler, Landmarks (`main`/`nav`/`header`) vorhanden, **0 Bilder ohne `alt`**. **Code-Splitting:** Tool-Komponenten als separate Chunks (ShopOverview 40 KB, BatteryAdvisor 12 KB, TyreCalculator 8 KB) — nicht im Initial-Bundle der übrigen Seiten.
 
 | 25010-Merkmal | Kennzahl | Bewertung |
 |---|---|---|
-| Leistungseffizienz | FCP < 300 ms, Load < 100 ms (lokal) | ✓ erfüllt; **Caveat:** JS-Bundle > 500 KB → Code-Splitting empfohlen |
+| Leistungseffizienz | FCP < 300 ms, Load < 100 ms (lokal) | ✓ erfüllt; JS-Tools per `React.lazy` code-gesplittet (ShopOverview/TyreCalculator/BatteryAdvisor als eigene Chunks, ~60 KB kleineres Initial-Bundle) |
 | Zuverlässigkeit | 0 Konsolenfehler über alle Seiten | ✓ |
-| Funktionale Eignung (SEO) | Titel/Description/lang/h1/viewport | ✓ (Empfehlung: `canonical` ergänzen) |
+| Funktionale Eignung (SEO) | Titel/Description/lang/h1/viewport + per-Route `rel=canonical` | ✓ (Canonical je Seite gesetzt) |
 | Benutzbarkeit/A11y | Landmarks, alt-Texte, 1× h1 | ✓ |
 
 ### Gruppe I — UI/UX-Interaktionsprinzipien (`ISO 9241-110`, `ISO-HCD`, `ISO-USABILITY`)| PF | Prinzip (ISO 9241-110) | Umsetzung im Prüfling | Nachweis | Erg. |
