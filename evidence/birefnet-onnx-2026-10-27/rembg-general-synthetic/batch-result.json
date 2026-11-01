@@ -1,0 +1,19 @@
+{
+  "adapter": "birefnet-rembg-general-epoch244-cpu-v1",
+  "concurrent_model_calls": 0,
+  "concurrent_worker": "worker_busy",
+  "elapsed_seconds": 49.788,
+  "model_calls": 1,
+  "network_calls": 0,
+  "original_preserved": true,
+  "publishable": false,
+  "replay_equal": true,
+  "rgba_sha256": "ead2349e7eb47d480fbc49d99c3782156a14917cfe5a17b31f644c88e6b0570b",
+  "status": "review_required",
+  "timeout": "segmenter_inference_deadline",
+  "timeout_model_calls": 0,
+  "verified_model_bytes": "immutable_in_memory_snapshot",
+  "wrong_hash": "model_hash_mismatch",
+  "wrong_hash_model_calls": 0,
+  "wrong_size": "model_artifact_unsafe_or_wrong_size"
+}

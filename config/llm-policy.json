@@ -54,5 +54,21 @@
     "new_managed_adapter_and_completed_cutover": "exact_1017_high_and_existing_access_funding_guards",
     "cutover_policy": "config/ai-migration-policy.json",
     "hosted_cli_and_customer_work": "not_reconfigured_by_this_repository"
+  },
+  "use_cases": {
+    "product_enrichment": {
+      "model": {
+        "id": "ds/deepseek-v4-pro",
+        "reasoning_effort": "high",
+        "provider": "own_router_9router",
+        "base_url_env": "ROUTER_URL",
+        "api_key_env": "ROUTER_KEY"
+      },
+      "authority": "explicit_current_user_instruction_2026-10-31",
+      "scope": "product_texts_only_images_deterministic_no_generative_editing",
+      "silent_model_fallback": false,
+      "unavailable_model": "fail_run_with_error",
+      "phase": "phase_2"
+    }
   }
 }

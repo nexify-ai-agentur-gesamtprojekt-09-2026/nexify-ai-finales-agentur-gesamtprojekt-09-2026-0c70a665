@@ -18,6 +18,6 @@ test('the shared public projection excludes a private page even when accidentall
  const map=JSON.parse(await readFile(new URL('../../../../config/site-map.json',import.meta.url),'utf8'));
  const privateIds=map.pages.filter(p=>p.access.visibility!=='public'||p.access.auth_required).map(p=>p.id);
  const projection=preparePublicData({...map,public_allowlist:[...map.public_allowlist,...privateIds]});
- assert.equal(projection.pages.length,36);
+ assert.equal(projection.pages.length,39);
  assert.ok(projection.pages.every(p=>!privateIds.includes(p.id)));
 });

@@ -1,0 +1,994 @@
+{
+  "schema_version": 1,
+  "source_project": "appgprj_6adbe5e0e6308191b0e90182e2413361",
+  "source_commit": "3df04b3cd0f5f5aa3fc8771a3c16b7125c13b247",
+  "source_path": "config/nex-agentic-aifly-orchestration.json",
+  "source_sha256": "c8055df0b9f13b6dec72b11b39ea8d5abee45fdae321f7db6fbd8dfa5175ef33",
+  "meaning": "reference catalogue only; does not grant execution; originals and assignments unchanged",
+  "enterprise_roles": {
+    "meaning": "44 numbered enterprise competence roles from V3; not the Anthropic SKILL.md collection",
+    "clusters": [
+      {
+        "id": "A",
+        "title": "Strategie, Governance & Orakel-Steuerung",
+        "roleIds": [
+          "ER-01",
+          "ER-02",
+          "ER-03",
+          "ER-04",
+          "ER-05"
+        ]
+      },
+      {
+        "id": "B",
+        "title": "Produktentwicklung, NeX2fly Suite & API-Gesamtlösung",
+        "roleIds": [
+          "ER-06",
+          "ER-07",
+          "ER-08",
+          "ER-09",
+          "ER-10",
+          "ER-11"
+        ]
+      },
+      {
+        "id": "C",
+        "title": "E-Commerce, Katalog-Forensik & Automotive-Shop",
+        "roleIds": [
+          "ER-12",
+          "ER-13",
+          "ER-14",
+          "ER-15",
+          "ER-16",
+          "ER-17",
+          "ER-18"
+        ]
+      },
+      {
+        "id": "D",
+        "title": "Buchhaltung, Finanzen & Rechtssicherheit",
+        "roleIds": [
+          "ER-19",
+          "ER-20",
+          "ER-21",
+          "ER-22",
+          "ER-23",
+          "ER-24"
+        ]
+      },
+      {
+        "id": "E",
+        "title": "Marketing, Brand & Demand Generation",
+        "roleIds": [
+          "ER-25",
+          "ER-26",
+          "ER-27",
+          "ER-28",
+          "ER-29",
+          "ER-30"
+        ]
+      },
+      {
+        "id": "F",
+        "title": "Mailingteam, CRM & Lifecycle Automation",
+        "roleIds": [
+          "ER-31",
+          "ER-32",
+          "ER-33",
+          "ER-34",
+          "ER-35"
+        ]
+      },
+      {
+        "id": "G",
+        "title": "Support, SLA & Customer Success",
+        "roleIds": [
+          "ER-36",
+          "ER-37",
+          "ER-38",
+          "ER-39",
+          "ER-40"
+        ]
+      },
+      {
+        "id": "H",
+        "title": "Agentic Operations, Memory & Infrastruktur",
+        "roleIds": [
+          "ER-41",
+          "ER-42",
+          "ER-43",
+          "ER-44"
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "id": "ER-01",
+        "sourceNumber": 1,
+        "clusterId": "A",
+        "title": "Business Model & Value Proposition Architecture",
+        "originalRequirement": "Schärfung des White-Label-Modells *„NeX2fly — White-Label AI by NeXify | Chat it. Automate it.“*",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster A",
+          "line": 129
+        },
+        "anthropicSkillIds": [
+          "content-strategy",
+          "proposal-builder"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-02",
+        "sourceNumber": 2,
+        "clusterId": "A",
+        "title": "OKR, KPI & Monotonic Ratchet Governance",
+        "originalRequirement": "Definition und Überwachung aller SOLL-Metriken ($\\ge 100\\,\\%$ Zielerhalt).",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster A",
+          "line": 130
+        },
+        "anthropicSkillIds": [
+          "business-pulse",
+          "report-builder",
+          "report-pack"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-03",
+        "sourceNumber": 3,
+        "clusterId": "A",
+        "title": "Portfolio & Suite Gap Analysis",
+        "originalRequirement": "Systematische Erkennung fehlender Produkte und Module in der NeX2fly Suite.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster A",
+          "line": 131
+        },
+        "anthropicSkillIds": [
+          "business-pulse",
+          "growth-pulse",
+          "smb-router"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-04",
+        "sourceNumber": 4,
+        "clusterId": "A",
+        "title": "Competitive & Market Intelligence (Online Research)",
+        "originalRequirement": "Evidenzbasierte Echtzeit-Recherche nach Best Practices (2026).",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster A",
+          "line": 132
+        },
+        "anthropicSkillIds": [
+          "lead-finder",
+          "grow-pipeline",
+          "marketing-monday"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-05",
+        "sourceNumber": 5,
+        "clusterId": "A",
+        "title": "Risk, Archive & Business Continuity Management",
+        "originalRequirement": "Zero-Data-Loss-Archivierung (`_archive/YYYY-MM-DD/...` + `ARCHIVE_MANIFEST.json`).",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster A",
+          "line": 133
+        },
+        "anthropicSkillIds": [
+          "contract-review",
+          "build-agent"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-06",
+        "sourceNumber": 6,
+        "clusterId": "B",
+        "title": "SaaS & White-Label Suite Packaging",
+        "originalRequirement": "Lizenz-, Tier-, Mandanten- und Pricing-Architektur für alle NeX2fly-Produkte.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster B",
+          "line": 136
+        },
+        "anthropicSkillIds": [
+          "proposal-builder",
+          "report-builder"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-07",
+        "sourceNumber": 7,
+        "clusterId": "B",
+        "title": "Enterprise API Product Management",
+        "originalRequirement": "Design, Auth, Rate-Limiting, Webhooks, OpenAPI-Specs und Developer-Portal der API-Gesamtlösung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster B",
+          "line": 137
+        },
+        "anthropicSkillIds": [
+          "build-connector",
+          "contract-review"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-08",
+        "sourceNumber": 8,
+        "clusterId": "B",
+        "title": "App & Web Platform Specification",
+        "originalRequirement": "Lückenlose Aufarbeitung, Erklärung und User-Flow-Definition aller bisher unzureichend dokumentierten Apps und Webseiten.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster B",
+          "line": 138
+        },
+        "anthropicSkillIds": [
+          "build-agent",
+          "proposal-builder"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-09",
+        "sourceNumber": 9,
+        "clusterId": "B",
+        "title": "UX/UI Design System Governance",
+        "originalRequirement": "Durchsetzung eines konsistenten, hellen, hochmodernen Design-Standards (Apple-inspirierte Klarheit).",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster B",
+          "line": 139
+        },
+        "anthropicSkillIds": [
+          "brand-style",
+          "canva-creator"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-10",
+        "sourceNumber": 10,
+        "clusterId": "B",
+        "title": "Technical Documentation & Knowledge Engineering",
+        "originalRequirement": "Produktionsreife Spezifikationen und Playbooks ohne Platzhalter.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster B",
+          "line": 140
+        },
+        "anthropicSkillIds": [
+          "build-agent",
+          "report-builder"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-11",
+        "sourceNumber": 11,
+        "clusterId": "B",
+        "title": "Release, Migration & Cutover Management",
+        "originalRequirement": "Atomare Vollmigration in den Produktivbestand mit Rollback-Sicherung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster B",
+          "line": 141
+        },
+        "anthropicSkillIds": [],
+        "mappingMeaning": "no-equivalent-in-the-Anthropic-44-catalog",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-12",
+        "sourceNumber": 12,
+        "clusterId": "C",
+        "title": "Catalog Taxonomy & Domain Filtering (Automotive Only)",
+        "originalRequirement": "Forensische Klassifizierung aller ~6.000 Artikel; strikte Aussortierung und strukturierte Archivierung sämtlicher themenfremder Artikel (Betten, Sofas, Möbel, Haushaltswaren) bei $100\\,\\%$ Fokus auf Fahrzeuge aller Art.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 144
+        },
+        "anthropicSkillIds": [
+          "inventory-planner",
+          "seo-ai-visibility"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-13",
+        "sourceNumber": 13,
+        "clusterId": "C",
+        "title": "Automated Product Image Pipeline (Background Removal)",
+        "originalRequirement": "Saubere Entfernung weißer/störender Hintergründe (Freistellung), Alpha-Matting, Schattierung und konsistente Shop-Einbettung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 145
+        },
+        "anthropicSkillIds": [],
+        "mappingMeaning": "no-equivalent-in-the-Anthropic-44-catalog",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-14",
+        "sourceNumber": 14,
+        "clusterId": "C",
+        "title": "High-Conversion Product Copywriting (~6K Scale)",
+        "originalRequirement": "Technische Präzisierung, Nutzenargumentation und strukturierte Bullet-Points für alle Fahrzeug-Produkte.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 146
+        },
+        "anthropicSkillIds": [
+          "content-strategy",
+          "seo-ai-visibility"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-15",
+        "sourceNumber": 15,
+        "clusterId": "C",
+        "title": "Technical E-Commerce SEO & Schema.org",
+        "originalRequirement": "Optimierung von Meta-Titeln, Beschreibungen, JSON-LD Product-Schemata, Canonical-Tags und Kategorie-Filtern.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 147
+        },
+        "anthropicSkillIds": [
+          "seo-ai-visibility"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-16",
+        "sourceNumber": 16,
+        "clusterId": "C",
+        "title": "Pricing, Margin & Inventory Sync",
+        "originalRequirement": "Bestands-, Varianten-, EAN/OEM-Nummern- und Preislogik.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 148
+        },
+        "anthropicSkillIds": [
+          "inventory-planner",
+          "restock",
+          "cash-flow-snapshot"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-17",
+        "sourceNumber": 17,
+        "clusterId": "C",
+        "title": "Storefront & Checkout Conversion Optimization",
+        "originalRequirement": "Optimierung aller Kategorie-, Produktdetail- und Warenkorbseiten.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 149
+        },
+        "anthropicSkillIds": [
+          "seo-ai-visibility",
+          "ticket-deflector"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-18",
+        "sourceNumber": 18,
+        "clusterId": "C",
+        "title": "Cross-Selling & Vehicle Compatibility Logic",
+        "originalRequirement": "Fahrzeugtypen-Zuordnung (Pkw, Nfz, Zweirad, Werkstatt) und passendes Zubehör-Bundling.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster C",
+          "line": 150
+        },
+        "anthropicSkillIds": [
+          "inventory-planner",
+          "proposal-builder"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-19",
+        "sourceNumber": 19,
+        "clusterId": "D",
+        "title": "Automated Bookkeeping & Ledger Architecture",
+        "originalRequirement": "Einrichtung der kompletten Buchhaltung, Kontenrahmen-Mapping (SKR03/SKR04) und Buchungslogik.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster D",
+          "line": 153
+        },
+        "anthropicSkillIds": [
+          "ap-processor",
+          "month-end-prep",
+          "close-month",
+          "payroll-prep"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-20",
+        "sourceNumber": 20,
+        "clusterId": "D",
+        "title": "Invoicing, Billing & Subscription Lifecycle",
+        "originalRequirement": "Automatisierte Rechnungsstellung für Suite-Abos, API-Nutzung und Shop-Bestellungen.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster D",
+          "line": 154
+        },
+        "anthropicSkillIds": [
+          "proposal-builder",
+          "invoice-chase",
+          "pay-the-bills"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-21",
+        "sourceNumber": 21,
+        "clusterId": "D",
+        "title": "Tax, VAT/OSS & Compliance Management",
+        "originalRequirement": "Umsatzsteuer-Logik, Belegprüfung und GoBD-konforme Archivierung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster D",
+          "line": 155
+        },
+        "anthropicSkillIds": [
+          "tax-prep",
+          "tax-season-organizer",
+          "contract-review"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-22",
+        "sourceNumber": 22,
+        "clusterId": "D",
+        "title": "Payment Gateway & Reconciliation Automation",
+        "originalRequirement": "Abgleich von Zahlungseingängen (Stripe/PayPal/Bank) mit offenen Posten.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster D",
+          "line": 156
+        },
+        "anthropicSkillIds": [
+          "month-end-prep",
+          "cash-flow-snapshot",
+          "ap-processor"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-23",
+        "sourceNumber": 23,
+        "clusterId": "D",
+        "title": "Dunning & Receivables Management",
+        "originalRequirement": "Mehrstufiges, automatisiertes Mahnwesen und Liquiditäts-Tracking.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster D",
+          "line": 157
+        },
+        "anthropicSkillIds": [
+          "invoice-chase",
+          "plan-payroll"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-24",
+        "sourceNumber": 24,
+        "clusterId": "D",
+        "title": "Financial Reporting & Unit Economics",
+        "originalRequirement": "Echtzeit-Auswertung von MRR, ARR, CAC, LTV und Deckungsbeiträgen.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster D",
+          "line": 158
+        },
+        "anthropicSkillIds": [
+          "report-builder",
+          "business-pulse",
+          "growth-pulse"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-25",
+        "sourceNumber": 25,
+        "clusterId": "E",
+        "title": "Brand Positioning & Messaging Matrix",
+        "originalRequirement": "Einheitliche Markenkommunikation über Agentur, NeX2fly Suite und Automotive-Shop.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster E",
+          "line": 161
+        },
+        "anthropicSkillIds": [
+          "brand-style",
+          "content-strategy",
+          "smb-onboard"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-26",
+        "sourceNumber": 26,
+        "clusterId": "E",
+        "title": "Full-Funnel Campaign Architecture",
+        "originalRequirement": "Aufbau von Awareness-, Consideration- und Conversion-Funnels.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster E",
+          "line": 162
+        },
+        "anthropicSkillIds": [
+          "grow-pipeline",
+          "outreach-composer",
+          "canva-creator"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-27",
+        "sourceNumber": 27,
+        "clusterId": "E",
+        "title": "Content Marketing & Editorial Engine",
+        "originalRequirement": "Automatisierte Redaktions- und Fachartikel-Pipelines.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster E",
+          "line": 163
+        },
+        "anthropicSkillIds": [
+          "content-strategy",
+          "social-content-engine"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-28",
+        "sourceNumber": 28,
+        "clusterId": "E",
+        "title": "Search Engine Marketing (SEO/SEA) & Local Visibility",
+        "originalRequirement": "Organische und bezahlte Sichtbarkeitssteuerung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster E",
+          "line": 164
+        },
+        "anthropicSkillIds": [
+          "ad-manager",
+          "seo-ai-visibility"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-29",
+        "sourceNumber": 29,
+        "clusterId": "E",
+        "title": "Social Media & Community Orchestration",
+        "originalRequirement": "Multi-Channel-Distributionslogik und Asset-Generierung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster E",
+          "line": 165
+        },
+        "anthropicSkillIds": [
+          "social-content-engine",
+          "canva-creator",
+          "review-reputation"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-30",
+        "sourceNumber": 30,
+        "clusterId": "E",
+        "title": "Marketing Analytics & Attribution",
+        "originalRequirement": "Klare Messung von RoAS, Conversion-Rates und Funnel-Drop-offs.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster E",
+          "line": 166
+        },
+        "anthropicSkillIds": [
+          "growth-pulse",
+          "marketing-monday",
+          "report-builder"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-31",
+        "sourceNumber": 31,
+        "clusterId": "F",
+        "title": "Email Infrastructure & Deliverability Engineering",
+        "originalRequirement": "Technisches Setup und Verifikation von SPF, DKIM, DMARC, Bounce-Handling und IP-Reputation.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster F",
+          "line": 169
+        },
+        "anthropicSkillIds": [
+          "build-connector",
+          "inbox-manager"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-32",
+        "sourceNumber": 32,
+        "clusterId": "F",
+        "title": "Transactional Email Architecture",
+        "originalRequirement": "Sofortige, fehlerfreie System-Mails (Bestellbestätigung, Rechnung, API-Keys, Passwort-Reset).",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster F",
+          "line": 170
+        },
+        "anthropicSkillIds": [
+          "inbox-manager",
+          "build-agent"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-33",
+        "sourceNumber": 33,
+        "clusterId": "F",
+        "title": "Onboarding & Activation Sequences",
+        "originalRequirement": "Automatisierte Willkommens- und Aktivierungsstrecken für NeX2fly- und Shop-Kunden.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster F",
+          "line": 171
+        },
+        "anthropicSkillIds": [
+          "smb-onboard",
+          "speed-to-lead",
+          "outreach-composer"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-34",
+        "sourceNumber": 34,
+        "clusterId": "F",
+        "title": "CRM Segmentation & Behavioral Triggering",
+        "originalRequirement": "Dynamische Zielgruppensegmentierung nach Kauf- und Nutzungsverhalten.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster F",
+          "line": 172
+        },
+        "anthropicSkillIds": [
+          "crm-autopilot",
+          "lead-triage",
+          "call-list"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-35",
+        "sourceNumber": 35,
+        "clusterId": "F",
+        "title": "Retention, Win-Back & Newsletter Operations",
+        "originalRequirement": "Regelmäßige Kampagnen, Warenkorbabbruch-Recovery und Reaktivierung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster F",
+          "line": 173
+        },
+        "anthropicSkillIds": [
+          "reactivate",
+          "outreach-composer",
+          "review-reputation"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-36",
+        "sourceNumber": 36,
+        "clusterId": "G",
+        "title": "Multi-Tier Support Architecture (Tier 1–3)",
+        "originalRequirement": "Klare Trennung zwischen KI-Erstbeantwortung, Fach-Support und Engineering-Eskalation.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster G",
+          "line": 176
+        },
+        "anthropicSkillIds": [
+          "ticket-deflector",
+          "inbox-manager"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-37",
+        "sourceNumber": 37,
+        "clusterId": "G",
+        "title": "Intelligent Ticket Routing & SLA Governance",
+        "originalRequirement": "Automatische Klassifizierung, Priorisierung und Einhaltung verbindlicher Antwortzeiten.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster G",
+          "line": 177
+        },
+        "anthropicSkillIds": [
+          "ticket-deflector",
+          "speed-to-lead"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-38",
+        "sourceNumber": 38,
+        "clusterId": "G",
+        "title": "Self-Service Knowledge Base & FAQ Sync",
+        "originalRequirement": "Direkte Kopplung des Supports an Brain/LightRAG für sofortige, korrekte Antworten.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster G",
+          "line": 178
+        },
+        "anthropicSkillIds": [
+          "build-agent",
+          "ticket-deflector"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-39",
+        "sourceNumber": 39,
+        "clusterId": "G",
+        "title": "RMA, Returns & Warranty Workflows",
+        "originalRequirement": "Reibungslose Retouren- und Reklamationsabwicklung für den Fahrzeug-Shop.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster G",
+          "line": 179
+        },
+        "anthropicSkillIds": [
+          "ticket-deflector",
+          "review-reputation"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-40",
+        "sourceNumber": 40,
+        "clusterId": "G",
+        "title": "Customer Health Scoring & Churn Prevention",
+        "originalRequirement": "Proaktive Erkennung unzufriedener Kunden und Gegensteuerung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster G",
+          "line": 180
+        },
+        "anthropicSkillIds": [
+          "reactivate",
+          "growth-pulse",
+          "review-reputation"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-41",
+        "sourceNumber": 41,
+        "clusterId": "H",
+        "title": "Atomic Task Checkout & Lock Management",
+        "originalRequirement": "Verhinderung von Race-Conditions durch eindeutige Task-Reservierung.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster H",
+          "line": 183
+        },
+        "anthropicSkillIds": [],
+        "mappingMeaning": "no-equivalent-in-the-Anthropic-44-catalog",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-42",
+        "sourceNumber": 42,
+        "clusterId": "H",
+        "title": "Cross-Chat Memory Crystallization & RAG Hygiene",
+        "originalRequirement": "Kontinuierliche Deduplizierung, Messung und Anreicherung von Brain, AgentMemory und LightRAG.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster H",
+          "line": 184
+        },
+        "anthropicSkillIds": [],
+        "mappingMeaning": "no-equivalent-in-the-Anthropic-44-catalog",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-43",
+        "sourceNumber": 43,
+        "clusterId": "H",
+        "title": "Forensic QA & Adversarial Gate Verification",
+        "originalRequirement": "Zwingende Abnahme über `morluto/rea` und `reviewer-gate.py`.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster H",
+          "line": 185
+        },
+        "anthropicSkillIds": [],
+        "mappingMeaning": "no-equivalent-in-the-Anthropic-44-catalog",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      },
+      {
+        "id": "ER-44",
+        "sourceNumber": 44,
+        "clusterId": "H",
+        "title": "Autonomous Cron, Routine & Incident Self-Healing",
+        "originalRequirement": "Dauerhafter 24/7-Betrieb mit automatischer Selbstheilung und Health-Checks.",
+        "sourceRef": {
+          "sourceId": "master-v3",
+          "section": "4/Cluster H",
+          "line": 186
+        },
+        "anthropicSkillIds": [
+          "build-agent",
+          "business-pulse",
+          "monday-brief",
+          "report-pack"
+        ],
+        "mappingMeaning": "supporting-workflows-not-a-complete-enterprise-executor",
+        "executorAssignment": null,
+        "executionCapability": "must-be-discovered-and-verified-for-this-task"
+      }
+    ]
+  },
+  "original_skill_ids": [
+    "ad-manager",
+    "ap-processor",
+    "brand-style",
+    "build-agent",
+    "build-connector",
+    "business-pulse",
+    "call-list",
+    "canva-creator",
+    "cash-flow-snapshot",
+    "close-month",
+    "content-strategy",
+    "contract-review",
+    "crm-autopilot",
+    "grant-rfp-writer",
+    "grow-pipeline",
+    "growth-pulse",
+    "hiring-screener",
+    "inbox-manager",
+    "inventory-planner",
+    "invoice-chase",
+    "job-post-builder",
+    "lead-finder",
+    "lead-triage",
+    "marketing-monday",
+    "monday-brief",
+    "month-end-prep",
+    "outreach-composer",
+    "pay-the-bills",
+    "payroll-prep",
+    "plan-payroll",
+    "proposal-builder",
+    "reactivate",
+    "report-builder",
+    "report-pack",
+    "restock",
+    "review-reputation",
+    "seo-ai-visibility",
+    "smb-onboard",
+    "smb-router",
+    "social-content-engine",
+    "speed-to-lead",
+    "tax-prep",
+    "tax-season-organizer",
+    "ticket-deflector"
+  ],
+  "original_skill_inventory_sha256": "4f6eda6f2d56a3080bb39506eb897c494c8ba4be7c267034e14e89e49d17105e"
+}

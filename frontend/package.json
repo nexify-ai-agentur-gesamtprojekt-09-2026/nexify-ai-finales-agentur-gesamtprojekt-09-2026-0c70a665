@@ -1,0 +1,9 @@
+{
+  "name": "nexify-preview-frontend-wrapper",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "description": "Thin supervisor wrapper: serves the existing Next.js app apps/web on port 3000 (see DECISIONS.md D-005).",
+  "scripts": {
+    "start": "bash ./start.sh"
+  }
+}

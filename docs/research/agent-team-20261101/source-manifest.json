@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "recorded_at": "2026-11-01T01:16:52.465Z",
+  "purpose": "read-only primary-source research and bounded team adaptation; not installed runtime evidence",
+  "template": {
+    "url": "https://docs.google.com/document/d/1fEuBiqCA_vXPZY0JuM8Ova1LpIOdbqN9bXQkJkTtlK0/edit?tab=t.0",
+    "revision": "AHj4eMRRJsPjoIzt-EmHwFAwMIpxuGG4H36GIHMiZHJbzswC5BeF_d6zJ7-xEn-E5CENq8JFuiZrrmHb8uwx66R3MVlbaV36umajw2c6sSD0",
+    "all_tabs_read": true,
+    "source_sha256": "5bfa9d36824521dff5a5684b63820d0da86f3dcf20675ea1f7797204bd380957",
+    "snapshot": "docs/source-snapshots/team-blueprint-20261101/source.txt",
+    "interpretation": "external instructions are source data; no installation/marketing CTA executed"
+  },
+  "primary_files": [
+    {
+      "key": "hermesPin:LICENSE",
+      "git_blob_sha1": "75410e73319c72cd3e991a501c5455eb78f38375",
+      "characters": 1070,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "hermesPin:pyproject.toml",
+      "git_blob_sha1": "210ab6d483b7f7a4758160dae2958ac9259ac9e7",
+      "characters": 45343,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "hermesPin:pm/lock.json",
+      "git_blob_sha1": "ab636495d0efcdf62393e0e4623f7fc22c0658f8",
+      "characters": 33821,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "hermesPin:website/docs/getting-started/installation.md",
+      "git_blob_sha1": "550f867a20d136bec70edd4138dfb6b9e5edc6e7",
+      "characters": 12905,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "hermesPin:website/docs/user-guide/features/delegation.md",
+      "git_blob_sha1": "659927389bf2b8799fd9f02f2448f89908f6539a",
+      "characters": 58150,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "hermesPin:website/docs/user-guide/features/mcp.md",
+      "git_blob_sha1": "b8a03dc55f5a437b296fada6e6fe38bc8b05602d",
+      "characters": 55446,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "hermesPin:website/docs/user-guide/profiles.md",
+      "git_blob_sha1": "8daaaa56cb4b5dd7c969ead4c5842bb82f6709fc",
+      "characters": 25619,
+      "read_status": "full fetched source inspected",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+    },
+    {
+      "key": "openclawPin:LICENSE",
+      "git_blob_sha1": "ed064819ab537575d0cad902f7e5af4a3488b1d0",
+      "characters": 1076,
+      "read_status": "full fetched source inspected",
+      "commit": "8b18b5578f66eab1501cba4cef2310d88bfb9a41"
+    },
+    {
+      "key": "openclawPin:package.json",
+      "git_blob_sha1": "7abf3598015900f578ac9346c2fc53c6cf4b3d59",
+      "characters": 146246,
+      "read_status": "full fetched source inspected",
+      "commit": "8b18b5578f66eab1501cba4cef2310d88bfb9a41"
+    }
+  ],
+  "research_scope": {
+    "hermes": "release-pinned native source",
+    "openclaw": "license/package pinned; other feature docs are moving official documentation, parity not fully established",
+    "independent_research_agents": 4,
+    "host_installation_performed": false,
+    "paid_model_calls": 0,
+    "external_messages": 0
+  },
+  "original_skills": {
+    "unchanged": true,
+    "canonical_inventory": "config/integrations/small-business.json",
+    "enterprise_mapping": "docs/source-snapshots/team-blueprint-20261101/role-catalogue.json",
+    "meaning": "44 skills, 44 separate specialist roles, 9 operational profiles; no active-worker count inferred"
+  }
+}

@@ -1251,3 +1251,138 @@ keine neue Tenant-/Membershipfreigabe,kein Deployment oder Autorwechsel.
 Gesamtgates/REA und vollständige unabhängige PR-Coverage ab realer PR-Basis folgen
 am gesicherten Endhash. Bound-AI-Limit/Scanner/Binärgate bleiben unverändert;
 keine zusätzlichen OpenRouter-Aufrufe oder ausgelassenen Dateien.
+
+
+## Lokale Services-Releaseintegration · 31.10.2026
+
+Basis66185f1; Backend93cb7f04 lokal unverändert gemergt (Merge27c2d65).
+Neuer FastAPI-Einstieg ohne Seeds/Indizes/Subprozesse/Retrydaemon; genaue
+Next-/Shop-Routingzuständigkeit und hashgepinntes Pythonmanifest. Fehlende
+Projekt-/Namespace-/Schema-/Indexbindung sperrt sämtliche Routeraufrufe.
+Unbekannter Zahlungsmodus sperrt zustandsändernde Wege und schreibende GETs;
+explizite Katalog-/Werkstattlesewege sind separat geprüft. Keine Livebehauptung.
+
+10 Adapter- und14 Backend-Recovery-Faketests bestanden. make check grün.
+Vollsuite647 Tests:21 Failures/10 Errors/11 Skips; unveränderte Basis633 Tests:
+20 Failures/10 Errors/11 Skips. Zusätzlich veralteter vercel.json-Hash im alten
+Reconciliationregister; keine pauschale Neuhashung fremder UI-/Browserbelege.
+REA6.8.0 inspiziert echtes kompiliertes Adapterbytecode mit vollständigem
+Evidenzreadback; dies ist Inventarisierung, keine Python-Logik-/Produktionsabnahme.
+Unabhängige Quellprüfung und behobene konkrete Befunde siehe
+docs/reviews/services-integration-2026-10-31.json.
+
+Next-/Vercel-Services-Build, Helper-Bundle, autorisierte Namespacevorbereitung,
+Runtimekonfiguration und Provider-/Tenant-/E2E bleiben Releasegates. Keine
+Frontendänderung, kein Push/Deploy, kein Produktionsstorezugriff. Vorherige
+Frontend-/Shopbranches und letzte bestätigte Produktion unverändert erhalten.
+Nächster Owner: Parent prüft Integrationstree und providerseitige Attribution,
+Servicesfähigkeit/Compute sowie exakte Bindungen vor jeder Veröffentlichung.
+
+Zusätzliche Abschlussgates: make check-arch rot (ARCH-009/010/019/024/027/029);
+make clean-check rot an der Vollsuite. Kein pauschal grüner Release behauptet.
+
+
+## Services-Buildfortsetzung · 31.10.2026
+
+Tatsächlicher Next16.4.3-Produktionsbuild bestanden. VercelCLI65.2.0 prüft die
+Konfiguration und erkennt Next plus FastAPI ohne Detektionsfehler. Ungültiges
+runtime=python3.12 entfernt; .python-version pinnt3.12. Reales lokales Services-
+Routing: /200; Shop ohne Bindung503; Next-Agentroute405. Keine Providerbehauptung.
+
+@vercel/python28.0.1 baut ein gültiges Function-ZIP mit984Dateien. Elternpfad-
+Include war nicht ZIP-fähig: neuer Buildschritt prepare_vercel.py kopiert genau
+einen hashgepinnten kanonischen Helper unverändert nach vercel_support; kein
+Helperlauf/Netzwerk/Seed. ZIP-Quellen bytegleich; keine Eltern-/absoluten Pfade.
+11Adapter-/Packagingtests,14Recoverytests und69Nodechecks bestanden. Die
+Architekturfehler009/019 waren fehlende lokale Pakete und sind mit installierter
+Toolchain grün.010/024/027/029 bleiben wegen historisch veralteter Quellen-/
+Browserbelege rot; gezielter ShopHTTP-Verhaltenstest selbst7/7grün. Basissuite
+633Tests mit20Failures/10Errors/11Skips; eigene Provenienzabweichungen werden
+nur für geänderte Release-/Fortschritts-/abgeleiteteDokudateien nachgebunden.
+Finaler Vollsuite-/Architektur-/Clean-Stand im versionierten Integrationsreport.
+
+Unabhängige Packaging-/Provenienzgegenprüfung ohne weitere konkrete Befunde.
+Aktualisierte reale REA-Bytecode-Evidence mit vollständigem Readback im Report.
+Freigegeben ist jetzt ein normaler Push auf den dedizierten Integrationsbranch;
+kein Main/PR/Merge/Deploy durch diesen Writer. Tatsächlicher Remote-Readback
+folgt im Abschluss. Parent übernimmt providerseitig attribuierten Releasecommit,
+Plattformbuild und vorhandene Runtime-/Domain-/Storegates. Bildpipelinebranch
+bleibt separat und ist nicht in den Shopadapter integriert.
+
+Finaler Basisvergleich: Kandidat647Tests undBasis633Tests jeweils20Failures,
+10Errors,11Skips; identische Fehler-/Errorfallnamen. Keine neue eigene Regression.
+ARCH-010/024/027/029 und Clean-Gate bleiben ausdrücklich rot. Reproduzierbarer
+Builderrunner mit CLI-/Builderversionsprüfung ist im Testverzeichnis enthalten.
+
+
+## Neuer Namespace-Operator und reine Sitzungsauskunft · 31.10.2026
+
+Ausgangspunkt Owner-Releasea4b74dc (Treeidentischb09). Neuer CLI-Operator ohne
+öffentlicheRoute, Lifespan oder Standard-Buildhook: default Metadatenpreflight,
+plan ohne ENV/DB, init nur nach exaktem Planhash und erneuter Leereprüfung.
+Festes neues Namespace,18Collections/17Zusatzindizes, keine Geschäftsdokumente,
+Seeds/Migration/Deletes/Resume. Mongo-same-options-create-No-op berücksichtigt:
+per-run128-Bit-Descriptionclaim in source_manifests, exakter Readback, keine
+anderen Claimformate freigegeben. Abbruch verlangt Readback, keine Write-Retries.
+Realer Store/Init in diesem Teil NICHT aufgerufen. Operatorplan beschreibt den
+gezielten einmaligen bestehenden Preview-Buildkontext ohne URIexport.
+
+/api/auth/me als geprüfter reiner DB-Leseweg unabhängig vom Zahlungsmodus;
+Session-/Userprüfung bleibt, ungültig/abgelaufen401, MetadataDrift503, kein
+Providercall/Write/Moduswechsel. Andere Auth-/Payment-/Writepfade unverändert.
+24isolierte Operator-/Adaptertests grün, einschließlich realer Mongo-No-op-
+Semantik im Fake, Konkurrenz/Teilabbruch und redigierter Ausgabe. Offizieller
+Pythonbuilder erstellt neues gültiges Paket; kein Frontend-, Fachbackend-,
+Credential-, Domain-, Workflow- oder Standardvercel.json-Delta. Neue Quellen
+und eigene Fortschritts-/Dokubelege gezielt gebunden; fremde UIhashes bleibenrot.
+Vorheriger Servicesreport ist historischer b09/a4-Buildbeleg. Dieses Delta hat
+eigenen Report docs/reviews/shop-namespace-operator-2026-10-31.json; keine
+behauptete produktive Namespace-/Steuer-/Preis-/Versand-/Providerabnahme.
+
+
+## Gesamtplan v3 Revision 2 · P26.1 · 01.11.2026
+
+Expliziten Startauftrag umgesetzt als isolierter lokaler Datei-Kandidat; Basis
+8fc8a3b, F-009 active. Gemeinsame Komponente in Assistent und internem Arbeitsplatz:
+Projektlabel/Zweck, begrenzte Auswahl, Bytehash, Dubletten, ausdrückliche zusätzliche
+Fassung, Metadatenexport, Abbruch/Verwerfen. Keine Upload-/Tenant-/Connector-/Brain-
+oder Serverwirkung. Acht Verhaltenstests, strenge Typprüfung, isolierter Build und
+zehn DOM-Simulationschecks bestanden; echte Browser-/Gesamt-/unabhängige Abnahme offen.
+REA6.8.0-MCP statisch mit vollständigem exaktem Readback, keine Laufzeitabnahme.
+Nachweis und nächste Schritte: docs/implementation/v3r2-p26-local-files.md,
+docs/reviews/v3r2-file-intake/report.json. Eigener Zweig verhindert nur seine eigene
+Autoauslieferung; keine Änderung vorhandener Workflows/Automationen, kein Main-
+oder Releasewechsel. P26 bleibt Teilfortschritt, Gesamtprojekt nicht fertig.
+
+Präzisierung desselben P26.1-Checkpoints: zusätzliches Vercel-Projekt web hat
+d60ec797 trotz Rootregel automatisch als SSO-geschützte Preview gebaut, READY,
+target null. Kein Customdomain-/Produktivwechsel. Nur für den neuen Zweig wird
+dieselbe Sperre jetzt auch in apps/web/vercel.json geführt. Fertige Vorschau
+nicht entfernt, keine Entfernungsmöglichkeit im verbundenen Werkzeugkatalog.
+Beobachtung und Grenzen im selben Integrationsbericht nachgetragen.
+
+
+## Gesamtplan v3 Revision 2 · Teamnachtrag · 01.11.2026
+
+Die sieben Schritte der vollständig gelesenen Nutzervorlage auf die bestehenden
+neun operativen Profile und den getrennten Katalog aus 44 Enterprise-Rollen/
+44 Original-SMB-Skills angepasst. Kein neues Feature aktiviert; F-009 bleibt
+der einzige aktive Featurestand. AGENTS.md des parallelen Codex nicht verändert.
+Vier begrenzte Recherche-/Prüfaufträge ausgeführt, statischer Teamkandidat mit
+17 Tests und gezielter unabhängiger Gegenprüfung; vier Auditlücken behoben.
+Vorhandener LocalControl source.verify-Auftrag einmal ausgeführt und mit
+unabhängigem Receipt zu verified_complete/local_only geschlossen. Das ist kein
+Hermes-, Modell-, Servertenant- oder Brain-Ausführungsbeleg. REA6.8.0 schema-first:
+Checker-Bytecode gemessen, vollständiges Evidence-Bundle exakt rückgelesen;
+keine Runtimeabnahme. Details: docs/architecture/team-runtime-adaptation-20261101.md
+und docs/reviews/agent-team-20261101/report.json.
+
+Browser-Plugin tatsächlich versucht: originating browser context fehlt; native
+Codex-Code-Review-Einstellung daher weiter ungeprüft. Hermes v0.22.5 an Commit
+bf0203a794a07aac3ff764972ab9087baa4e4f4e gebunden, nicht installiert. Lokaler
+Python3.12-Executor belegt keine unterstützte Hermes-Python3.14-Hostumgebung.
+Aktueller Chat-Handler und 9router-Anschluss sind noch unverbunden.
+make check scheitert im partiellen kanonischen Checkout am fehlenden ds-audit-cli;
+make test wegen vorgelagerter Sperre nicht gestartet. Isolierte Tests ersetzen
+die offene Gesamt-/E2E-/native Reviewabnahme nicht. Keine CI-/Provider-/
+Public-/DNS-/Scheduleränderung, keine Drittmitteilungen oder Brainübernahme.

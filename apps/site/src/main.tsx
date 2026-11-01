@@ -61,7 +61,7 @@ function RouteContent({page}:{page?:PublicPage}){
 function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');
   useEffect(()=>{const changed=()=>setPath(routePath(location,hashMode)||'__invalid__');addEventListener('popstate',changed);addEventListener('hashchange',changed);return()=>{removeEventListener('popstate',changed);removeEventListener('hashchange',changed);};},[]);
-  const adapter=useMemo(()=>({pathname:path,Link:BrowserLink}),[path]);
+  const adapter=useMemo(()=>({pathname:path,Link:BrowserLink,navigate:(href:string)=>{history.pushState(null,'',href);window.dispatchEvent(new Event('popstate'));}}),[path]);
   return <RouterProvider adapter={adapter}><PublicExperienceProvider data={experienceData}><Workspace pages={pages} accountControl={<AccountControl/>}><RouteContent page={resolveRoute(path)}/></Workspace></PublicExperienceProvider></RouterProvider>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);

@@ -1,0 +1,59 @@
+"use client";
+import { useEffect, useState } from "react";
+import { SiteLink } from "../Router";
+import { api, type ApiError, type Workshop } from "./api";
+
+type Form = { name: string; email: string; phone: string; vehicle: string; message: string; consent: boolean };
+const EMPTY: Form = { name: "", email: "", phone: "", vehicle: "", message: "", consent: false };
+const MSG: Record<string, string> = { required: "Bitte füllen Sie dieses Feld aus.", invalid: "Bitte geben Sie eine gültige E-Mail-Adresse ein.", too_short: "Bitte beschreiben Sie Ihr Anliegen etwas genauer (mindestens 10 Zeichen)." };
+
+function validate(f: Form) {
+  const e: Record<string, string> = {};
+  if (f.name.trim().length < 2) e.name = "required";
+  if (!f.email.trim()) e.email = "required"; else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.trim())) e.email = "invalid";
+  if (!f.message.trim()) e.message = "required"; else if (f.message.trim().length < 10) e.message = "too_short";
+  if (!f.consent) e.consent = "required";
+  return e;
+}
+
+function RequestForm({ workshop }: { workshop: Workshop }) {
+  const [form, setForm] = useState(EMPTY), [errors, setErrors] = useState<Record<string, string>>({}), [sent, setSent] = useState<{ id: string; status: string } | null>(null), [busy, setBusy] = useState(false), [failed, setFailed] = useState(false);
+  const field = (key: keyof Form, label: string, multiline = false) => <div className="tk-field is-wide"><label htmlFor={"wr-" + key}>{label}</label>
+    {multiline ? <textarea id={"wr-" + key} rows={4} value={form[key] as string} onChange={e => setForm({ ...form, [key]: e.target.value })} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "wr-" + key + "-error" : undefined} data-testid={"workshop-request-" + key} />
+      : <input id={"wr-" + key} type={key === "email" ? "email" : "text"} value={form[key] as string} onChange={e => setForm({ ...form, [key]: e.target.value })} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "wr-" + key + "-error" : undefined} data-testid={"workshop-request-" + key} />}
+    {errors[key] && <p id={"wr-" + key + "-error"} role="alert" className="tk-field-error" data-testid={"workshop-request-" + key + "-error"}>{MSG[errors[key]]}</p>}</div>;
+  async function submit(event: React.FormEvent) {
+    event.preventDefault(); setFailed(false);
+    const local = validate(form); setErrors(local);
+    if (Object.keys(local).length) return;
+    setBusy(true);
+    try { setSent(await api("/api/workshops/" + workshop.id + "/requests", { method: "POST", json: form })); }
+    catch (e) { const err = e as ApiError; if (err.fields) setErrors(err.fields); else setFailed(true); }
+    finally { setBusy(false); }
+  }
+  if (sent) return <div className="tk-success" role="status" data-testid="workshop-request-success"><h3>{sent.status}</h3><p>Ihre Anfrage an {workshop.name} wurde gespeichert (Vorgang {sent.id}). Ein Termin entsteht erst, wenn die Werkstatt ihn bestätigt.</p></div>;
+  return <form className="tk-form" noValidate onSubmit={submit} data-testid="workshop-request-form"><h3>Anfrage an diese Werkstatt</h3>
+    <div className="tk-form-grid">{field("name", "Ihr Name")}{field("email", "E-Mail-Adresse")}{field("phone", "Telefon (optional)")}{field("vehicle", "Fahrzeug (optional, z. B. Marke, Modell, Baujahr)")}{field("message", "Ihr Anliegen", true)}</div>
+    <label className="tk-terms"><input type="checkbox" checked={form.consent} onChange={e => setForm({ ...form, consent: e.target.checked })} aria-describedby={errors.consent ? "wr-consent-error" : undefined} data-testid="workshop-request-consent" /><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage gespeichert werden.</span></label>
+    {errors.consent && <p id="wr-consent-error" role="alert" className="tk-field-error" data-testid="workshop-request-consent-error">Bitte bestätigen Sie die Einwilligung.</p>}
+    {failed && <p role="alert" className="tk-alert">Die Anfrage konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.</p>}
+    <button className="primary-button" type="submit" disabled={busy} data-testid="workshop-request-submit">Anfrage senden</button></form>;
+}
+
+export default function WorkshopDetail({ id }: { id: string }) {
+  const [w, setW] = useState<Workshop | null>(null), [missing, setMissing] = useState(false);
+  useEffect(() => { api<Workshop>("/api/workshops/" + encodeURIComponent(id)).then(setW).catch(() => setMissing(true)); }, [id]);
+  if (missing) return <div className="tk-empty" data-testid="workshop-missing"><h2>Werkstatt nicht gefunden</h2><SiteLink href="/teileklar/werkstatt" className="content-action-link">Zur Werkstattsuche</SiteLink></div>;
+  if (!w) return <p role="status">Werkstatt wird geladen …</p>;
+  return <div className="tk-ws-detail" data-testid="workshop-detail">
+    <div><h2 data-testid="workshop-detail-name">{w.name}</h2><span className="tk-tag" data-testid="workshop-detail-label">{w.kind_label}</span>
+      <p className="tk-note">Dieser Eintrag stammt aus einem Werkstattverzeichnis. Die Werkstatt ist kein bestätigter TEILEKLAR-Partner.</p>
+      <dl className="tk-facts">
+        {(w.street || w.zip || w.city) && <><dt>Adresse</dt><dd data-testid="workshop-detail-address">{[w.street, [w.zip, w.city].filter(Boolean).join(" ")].filter(Boolean).join(", ")}</dd></>}
+        {w.tel && <><dt>Telefon</dt><dd><a href={"tel:" + w.tel} data-testid="workshop-detail-phone">{w.tel}</a></dd></>}
+        {w.web && <><dt>Website</dt><dd><a href={w.web} target="_blank" rel="nofollow noopener noreferrer" data-testid="workshop-detail-web">{w.web.replace(/^https?:\/\//, "")}</a></dd></>}
+        {w.hours && <><dt>Öffnungszeiten</dt><dd data-testid="workshop-detail-hours">{w.hours}</dd></>}
+      </dl></div>
+    <RequestForm workshop={w} />
+  </div>;
+}

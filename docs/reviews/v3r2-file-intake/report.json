@@ -1,0 +1,157 @@
+{
+  "calls": [
+    {
+      "input": {
+        "expected_package_version": "6.8.0"
+      },
+      "is_error": false,
+      "name": "binary_session",
+      "schema_sha256": "b702551084554c09a72c5e07742a361a6d93f2470e6175ea79a8defd48b4ee56"
+    },
+    {
+      "input": {
+        "analysis_timeout_ms": 10000,
+        "detail": "complete",
+        "format": "directory",
+        "input_path": "/workspace/scratch/nexify-v3r2-implementation/.local/rea/target",
+        "integrity_policy": "fail",
+        "max_heap_mb": 256,
+        "max_semantic_nodes": 2000,
+        "max_semantic_nodes_per_file": 2000,
+        "max_semantic_unknowns": 256
+      },
+      "is_error": false,
+      "name": "analyze_javascript_application",
+      "schema_sha256": "b51909aeadf9d67e6debec9428180a13f19bdea75d493ee4e5a73ddcd8a0f3f2"
+    },
+    {
+      "input": {
+        "detail": "complete"
+      },
+      "is_error": false,
+      "name": "get_evidence_bundle",
+      "schema_sha256": "089cc4465e7fe82861d3f56722df2f1c93cb9709957d03954d7c1788d4269e68"
+    }
+  ],
+  "compiled_target_sha256": "f80219ff2b14d1f5aeca994f73ff7d2602c43d7aaa1f78ff4a7fb8027706c520",
+  "evidence_id": "ev_6d503c57e06b88a4edcbdd8a6d01e745508a11c337b9e2c62908e7db9ebd46cc",
+  "evidence_sha256": "364f16e36b6857c6b5b738153c6ef2512c4c8293045336ac3598f5681a6bfbf7",
+  "exact_readback_equal": true,
+  "exit_status": 0,
+  "production_mutation": false,
+  "server": {
+    "name": "rea",
+    "version": "6.8.0"
+  },
+  "source_ts_sha256": "458a8bef0abfe106938d8e877885c2677a2b2763bf33a45cab6cfc381de721ba",
+  "status": "measured_static_not_runtime_accepted",
+  "target_execution": false,
+  "tool_count": 229,
+  "compressed_evidence_file": "rea-evidence.json.gz",
+  "compressed_evidence_sha256": "c6eb319fc2793f7235063fa0593aeee63b5f4e594e2fbdb1905878e839c790f7",
+  "initial_readback_error": {
+    "calls": [
+      {
+        "input": {
+          "expected_package_version": "6.8.0"
+        },
+        "is_error": false,
+        "name": "binary_session",
+        "schema_sha256": "b702551084554c09a72c5e07742a361a6d93f2470e6175ea79a8defd48b4ee56"
+      },
+      {
+        "input": {
+          "analysis_timeout_ms": 10000,
+          "detail": "complete",
+          "format": "directory",
+          "input_path": "/workspace/scratch/nexify-v3r2-implementation/.local/rea/target",
+          "integrity_policy": "fail",
+          "max_heap_mb": 256,
+          "max_semantic_nodes": 2000,
+          "max_semantic_nodes_per_file": 2000,
+          "max_semantic_unknowns": 256
+        },
+        "is_error": false,
+        "name": "analyze_javascript_application",
+        "schema_sha256": "b51909aeadf9d67e6debec9428180a13f19bdea75d493ee4e5a73ddcd8a0f3f2"
+      },
+      {
+        "input": {
+          "detail": "complete",
+          "filters": {
+            "evidence_id": "ev_c12230529efe3f894c1359a224eaeb9745af65b5a2929a44074a46ff7d3ff982"
+          }
+        },
+        "is_error": true,
+        "name": "get_evidence_bundle",
+        "schema_sha256": "089cc4465e7fe82861d3f56722df2f1c93cb9709957d03954d7c1788d4269e68"
+      }
+    ],
+    "error": "RuntimeError: get_evidence_bundle returned isError; no bypass",
+    "exit_status": 0,
+    "production_mutation": false,
+    "server": {
+      "name": "rea",
+      "version": "6.8.0"
+    },
+    "status": "blocked",
+    "target_execution": false,
+    "tool_count": 229
+  },
+  "checks": {
+    "core_tests": 8,
+    "core_exit": 0,
+    "strict_typecheck": true,
+    "isolated_component_build": true,
+    "dom_checks": 10,
+    "dom_environment": "jsdom not browser",
+    "real_browser": "blocked_connection_refused",
+    "canonical_full_checks": "not_established_in_partial_copy",
+    "independent_review": "pending"
+  },
+  "source_commit": "8fc8a3ba5ebeb72c6361a86b0bd9ebc118008859",
+  "scope": "P26.1 local preparation; no upload or tenant authorization",
+  "brain": {
+    "write": "not_started",
+    "index": "not_started",
+    "exact_readback": "not_started",
+    "content_compare": "not_started"
+  },
+  "source_hashes": {
+    "apps/web/lib/project-files.ts": "458a8bef0abfe106938d8e877885c2677a2b2763bf33a45cab6cfc381de721ba",
+    "apps/web/components/ProjectFilesPanel.tsx": "2fb523dc07763068deb19b1a3e24caff80ed93641ed654ed4372566e7301c5c9",
+    "apps/web/components/ProjectFilesPanel.css": "878e009d14076c6e791d0d130686e7102feee12debf7bc5b916d8acf04a08c55",
+    "apps/web/components/Workspace.tsx": "2159af9373a896ce57d689367255ac72354b7eda24c377569e15b4b886292700",
+    "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
+    "apps/site/tests/project-files.test.mjs": "c704f240f11ddf2ae4fa9221d8e02d619a6d60d6c85da8cf16a27d5e573789de",
+    "docs/reviews/v3r2-file-intake/project-files.compiled.js": "f80219ff2b14d1f5aeca994f73ff7d2602c43d7aaa1f78ff4a7fb8027706c520",
+    "docs/reviews/v3r2-file-intake/dom-check.mjs": "a19fda1e9714a253ae4da894114c1aaddc594a71adb01dbfee53c7f3394b8bae"
+  },
+  "collected_at_utc": "2026-11-01T00:42:07.253535+00:00",
+  "toolchain": {
+    "node": "24.22.1",
+    "typescript": "5.9.3",
+    "react": "19.3.1",
+    "vite": "8.3.5",
+    "jsdom": "27.0.1",
+    "expected_project_node": "22.23.4",
+    "full_project_toolchain_verified": false
+  },
+  "automatic_private_preview": {
+    "observed": true,
+    "source_commit": "d60ec7974cf9f0de3549f91d0c16896875bc1947",
+    "deployment_id": "dpl_c8t4kwgVTex9cUgTposqQBRZXDJ7",
+    "project_id": "prj_BGwGfbTDrnwoZFOZVPoVO0SQ2Ab5",
+    "state": "READY",
+    "target": null,
+    "sso_protection": {
+      "enabled": true,
+      "deploymentType": "all_except_custom_domains"
+    },
+    "custom_domain_promotion": false,
+    "removed": false,
+    "removal_tool_available": false,
+    "correction": "same own-branch deploymentEnabled=false added to apps/web/vercel.json; existing settings and other branches unchanged",
+    "full_application_acceptance": false
+  }
+}

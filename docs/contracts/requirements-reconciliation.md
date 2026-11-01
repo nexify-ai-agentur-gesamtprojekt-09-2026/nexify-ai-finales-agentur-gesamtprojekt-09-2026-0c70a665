@@ -64,6 +64,8 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-CUBIC-FR-FOOTER-689E140: automated_advisory_coverage_finding_not_user_authorization; Datum 2026-10-28T15:23:28Z; direct_tool_read; https://github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/46#discussion_r4402490598;review5685160708;exacthead689e14013ed0e9d5bbd9e46fc72a2885f6932b91. Umfang: Existing FR footer copy was only statically reviewed while browserproofscoveredDE/NL;confirmedcoveragegap,no demonstratedruntimefailure. CodeRabbitterminalcheck122910012572reviewedbeforegroupedfollowup;itsautomaticreviewsremainpaused.
 - SRC-WORKPLACE-MAIL-20261028: user_requirement_reported_by_parent_not_original_transcript_read; Datum 2026-10-28; parent_verified_excerpt; parent-delegated NeXify workplace mail instruction,2026-10-28;current scoped local work order. Umfang: Own workplace mail center for existing Gmail and Hostinger;separate mailbox authorities,noGoogleWorkspace/forwarding/SMTPregistration;localimplementation/tests,no external actions
 - SRC-IDENTITY-HERO-ACCEPTED-20261028: user_design_decision_reported_by_parent_not_original_transcript_read; Datum 2026-10-28; parent_verified_excerpt; parent-reported explicit user acceptance 2026-10-28;Identity Library libfile_f9eab909ef9c81918fd6eaa5e958a543 version1 SHA87cce3dcfee53bc6573efe1ae81e76bdf80f81542f5e746448a96ed087057e0c. Umfang: accepted original identity composition as interim Hero until actual approved videos;local integration/tests only,no push/release grant
+- SRC-SERVICES-RELEASE-20261031: bounded Services deployment integration and targeted provenance correction; Datum 2026-10-31; parent_verified_excerpt; Parent release-integration mandate; canonical base66185f1; local a3e95d3379ecf8aa61e6de04ee2c0fe10a6867d4. Umfang: New local runtime adapter/configuration only; no UI evidence refresh, no production acceptance
+- SRC-SHOP-NAMESPACE-OPERATOR-20261031: controlled technical runtime preparation and read-only auth isolation; Datum 2026-10-31; parent_verified_excerpt; Parent bounded namespace-operator task following owner releasea4b74dc / Previewdpl_AKHeHVZ7bwCWfuXyhsQ5AoMVPkko. Umfang: Default metadata-only preflight; later explicit empty namespace initialization; no execution in this task, no secrets transfer or provider claims
 
 ## Soll / Ist / Abschluss
 
@@ -572,3 +574,25 @@ Auslieferung: reported_partial_implementation_unverified; keine Gesamtanforderun
 Lücke: Localcandidateonly;publicrelease/domain/CIpromotionnotperformed;genuinevideosandremainingeditorialmedia/legal/provideracceptancesareseparate. Screenshotsarelocal,Libraryupload401notretried.
 Nächster Schritt (existing_web_writer / D07;releaseowner for external delivery): Releaseownerreviewsexactcandidateandseparatesactualpublicfunctional/domaingatesfromindependentMail/Brain/Portalwork;noautomaticpushorproductionpromotion.
 Abschluss: ApprovedHeroisrenderedfromexacttestedreleaseontheconfirmedtargetwithoriginalidentityandresponsive/keyboard/textresizechecks;separateactualvideoacceptancewhenfilmsreplaceimages.
+
+### REC-SERVICES-RELEASE-01
+
+Soll (SRC-SERVICES-RELEASE-20261031, SRC-REPO-POLICY): Integrate existing Next frontend and isolated FastAPI service on canonical base, preserving routes and existing authorization; no startup writes.
+Einordnung: Bounded deployment adapter; existing historical browser proofs do not cover this Services configuration.
+Dateien/Funktionen: vercel.json, apps/shop-api/vercel_app.py, apps/shop-api/requirements.in, apps/shop-api/requirements.txt, apps/shop-api/tests/test_vercel_adapter.py, docs/deployment/services-namespace-plan-2026-10-31.json, docs/deployment/services-release-2026-10-31.md, apps/shop-api/.python-version, apps/shop-api/.gitignore, apps/shop-api/prepare_vercel.py, PROGRESS.md, docs/contracts/requirements-reconciliation.md, apps/shop-api/tests/verify_vercel_bundle.cjs
+Beleg: 11 adapter/packaging +14 recovery fake tests; Next16.4.3 production build;69 Node tests; VercelCLI65.2.0 validates/detects both services; local ingress frontend200/backend503; official Python28.0.1 builder produces valid ZIP with byte-identical helper/entry/checkout/mailer. REA6.8.0 bytecode inventory with complete readback; independent source review.
+Auslieferung: local_candidate_not_deployed; keine Gesamtanforderung abgenommen.
+Lücke: Provider-side platform build, deployed bundle and actual namespace/index/runtime/provider/tenant E2E remain unverified. Existing unrelated browser/requirements evidence remains stale.
+Nächster Schritt (release integration owner; Parent owns platform publication): Push tested dedicated branch; Parent reads exact tree and creates owner-attributed integration commit for actual platform build. No production store changes or deployment by this local task.
+Abschluss: Exact release build and ingress verified on intended existing project, with namespace/provider/tenant gates preserved.
+
+### REC-SHOP-NAMESPACE-OPERATOR-01
+
+Soll (SRC-SHOP-NAMESPACE-OPERATOR-20261031, SRC-REPO-POLICY): Prepare controlled default-read-only namespace operator in existing project; explicit future init creates only new own schema after fresh empty-metadata check; separate pure auth reads from payment mode.
+Einordnung: Technical preparation only, no public bootstrap endpoint, startup write, credentials transfer, data seeding, migration or actual store execution.
+Dateien/Funktionen: apps/shop-api/namespace_operator.py, apps/shop-api/vercel_app.py, apps/shop-api/tests/test_namespace_operator.py, apps/shop-api/tests/test_vercel_adapter.py, docs/deployment/services-namespace-plan-2026-10-31.json, docs/deployment/shop-namespace-operator-2026-10-31.md
+Beleg: 24 fake operator/adapter cases; real Mongo same-options create no-op modeled; distinct run marker and ownership readback; auth valid200/invalidexpired401/metadata503 without provider or writes; local Python bundle and actual REA bytecode inventory/readback, independent review.
+Auslieferung: local_candidate_not_deployed; keine Gesamtanforderung abgenommen.
+Lücke: Actual operator build metadata, store privileges, empty-namespace confirmation, explicit init and runtime configuration remain separate Root steps. No commercial/product/tax/provider/tenant acceptance.
+Nächster Schritt (release integration writer; Root controls actual runtime/store execution): Root reviews exact candidate and runs only a separately controlled existing-project operator Previewbuild if appropriate; no default deployment bootstrap.
+Abschluss: Explicit operator report on verified project/store proves namespace metadata; any init is separately invoked and read back; real runtime/commerce tests remain required.

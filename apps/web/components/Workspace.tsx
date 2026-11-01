@@ -7,11 +7,13 @@ import OracleCompanion from "./OracleCompanion";
 import DeferredChatBoundary from "./DeferredChatBoundary";
 import PublicRequestFallback from "./PublicRequestFallback";
 import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceCapabilities";
-import {lazy,Suspense, createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import {lazy,Suspense, createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import ChatResizeHandle,{chatWidthStyle,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
 import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
 import {ActionButton,type ActionVariant} from './ActionControl';
+import ProjectFilesPanel from './ProjectFilesPanel';
 
 type Intent = "choose" | "quote" | "booking" | "marketing";
 type Message = {role:"user"|"assistant"; text?:string; intent?:Intent; label?:string};
@@ -44,6 +46,8 @@ export function StartAction({intent,children,variant='primary'}:{intent:Intent;c
 export default function Workspace({children,pages,accountControl}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode}) {
   const [locale,setLocale] = useState<Locale>("de");
   const [open,setOpen] = useState(true);
+  const [chatWidth,setChatWidthState]=useState<number|null>(null);
+  const setChatWidth=useCallback((w:number|null)=>{setChatWidthState(w);storeChatWidth(w);},[]);
   const [mobile,setMobile]=useState(false);
   const [ready,setReady] = useState(false);
   const [chatMode,setChatMode]=useState<"workspace"|"orientation">("workspace");
@@ -101,6 +105,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
       readingAnchor.current=element?{element,y:element.getBoundingClientRect().top}:null;
     }
     setOpen(next);
+    try{sessionStorage.setItem("nx-chat-open",next?"1":"0");}catch{}
   }
   useLayoutEffect(()=>{
     const anchor=readingAnchor.current;readingAnchor.current=null;
@@ -108,14 +113,15 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   },[open]);
   const t = translations[locale];
   const tkWelcome={
-    de:{title:"Teile, Fahrzeug und Werkstatt",body:"Für welches Fahrzeug suchen Sie ein Teil oder eine Werkstattleistung? Nennen Sie Hersteller, Modell, Baujahr und Ihr Anliegen. Online-Bestellungen sind derzeit nicht möglich.",eyebrow:"Womit möchten Sie beginnen?",placeholder:"Fahrzeug und gesuchtes Teil nennen …",send:"Anliegen beschreiben",mode:"Teileanfrage"},
+    de:{title:"Teile, Fahrzeug und Werkstatt",body:"Für welches Fahrzeug suchen Sie ein Teil oder eine Werkstattleistung? Nennen Sie Hersteller, Modell, Baujahr und Ihr Anliegen.",eyebrow:"Womit möchten Sie beginnen?",placeholder:"Fahrzeug und gesuchtes Teil nennen …",send:"Anliegen beschreiben",mode:"Teileanfrage"},
     nl:{title:"Onderdelen, voertuig en werkplaats",body:"Voor welk voertuig zoekt u een onderdeel of een werkplaatsdienst? Noem merk, model, bouwjaar en uw vraag. Online bestellen is momenteel niet mogelijk.",eyebrow:"Waarmee wilt u beginnen?",placeholder:"Voertuig en gezocht onderdeel noemen …",send:"Vraag beschrijven",mode:"Onderdeelaanvraag"},
     fr:{title:"Pièces, véhicule et atelier",body:"Pour quel véhicule cherchez-vous une pièce ou une prestation d’atelier ? Indiquez marque, modèle, année et votre demande. La commande en ligne n’est pas possible actuellement.",eyebrow:"Par quoi souhaitez-vous commencer ?",placeholder:"Indiquez le véhicule et la pièce recherchée …",send:"Décrire la demande",mode:"Demande de pièce"},
     en:{title:"Parts, vehicle and workshop",body:"For which vehicle are you looking for a part or a workshop service? Give make, model, year and your request. Online ordering is currently not possible.",eyebrow:"What would you like to start with?",placeholder:"Enter the vehicle and the part you need …",send:"Describe your request",mode:"Parts request"},
   }[locale];
   const pathname=useSitePathname();
-  const site=pathname.startsWith("/teileklar")?"teileklar":"nexify";
   const currentPage=pages.find(page=>page.path===pathname);
+  const site=(currentPage?currentPage.site_context==="teileklar":pathname.startsWith("/teileklar"))?"teileklar":"nexify";
+  const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Erstgespräch starten",nl:"Gesprek starten",fr:"Démarrer l'entretien",en:"Start the first conversation"}[locale]};
   const standalone=typeof window!=="undefined"&&(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
   const canQuote=ready&&capabilities?.quote_pdf===true;
   const canOutbox=ready&&capabilities?.pending_outbox===true;
@@ -130,6 +136,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   const contact=pages.find(page=>page.path==="/kontakt")?.contact_channels?.find(channel=>channel.type==="email"&&channel.address==="mail@nexifyai.cloud");
 
   useEffect(() => {
+    try { setChatWidthState(readChatWidth()); if(sessionStorage.getItem("nx-chat-open")==="0")setOpen(false); } catch {}
     try { const saved = localStorage.getItem("nexify-locale"); if(saved && saved in translations)setLocale(saved as Locale); } catch {}
     const query=window.matchMedia("(max-width: 820px)");
     setMobile(query.matches);if(query.matches)setOpen(false);
@@ -206,36 +213,38 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     active.current=true;setBusy(true);setError("");
     try {await action();}catch(failure){setError(failure instanceof Error&&failure.message.startsWith("chatgpt_")&&failure.message.endsWith("_reached")?"chatgpt_limit":"error");}finally{active.current=false;setBusy(false);}
   }
+  const chatState=ready?"connected":error==="offline"?"unavailable":"connecting";
+  const chatStateLabel={de:{connected:"Verbunden",unavailable:"Nicht verfügbar · Anfrage per Formular",connecting:"Wird verbunden …"},nl:{connected:"Verbonden",unavailable:"Niet beschikbaar · aanvraag via formulier",connecting:"Wordt verbonden …"},fr:{connected:"Connecté",unavailable:"Indisponible · demande par formulaire",connecting:"Connexion …"},en:{connected:"Connected",unavailable:"Unavailable · request via form",connecting:"Connecting …"}}[locale][chatState];
   const reply=(selected?:Intent)=>selected==="quote"?t.quoteReply:selected==="booking"?t.bookingReply:selected==="marketing"?t.marketingReply:t.choose;
-  function closePanel(){changePanel(false);requestAnimationFrame(()=>{const target=document.querySelector<HTMLButtonElement>(".reopen-chat")||document.querySelector<HTMLButtonElement>(".header-actions button");target?.focus({preventScroll:true});});}
+  function closePanel(){changePanel(false);requestAnimationFrame(()=>{const target=[...document.querySelectorAll<HTMLButtonElement>(".reopen-chat,.header-actions .compact")].find(element=>element.getClientRects().length>0);target?.focus({preventScroll:true});});}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form=event.currentTarget; const value=String(new FormData(form).get("message")||"").trim();if(!value)return;setPrefillNotice('');
     if(useChatGPT&&canChatGPT){await act(async()=>{const result=await post("/api/assistant/chatgpt",{message:value.slice(0,1000),locale,page_path:pathname});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",text:result.text,label:result.label}]);form.reset();});return;}
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
   }
 
-  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell ${open?"is-open":"is-closed"}`}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
       <header className="site-header" data-testid="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={`${site==="teileklar"?"TEILEKLAR":"NeXify AI"} · ${locale==="de"?"Startseite":locale==="nl"?"Startpagina":locale==="fr"?"Accueil":"Home"}`}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>{locale==="de"?"Ein Bereich von NeXify AI":locale==="nl"?"Een onderdeel van NeXify AI":locale==="fr"?"Une activité de NeXify AI":"A part of NeXify AI"}</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>Ne<strong>X</strong>ify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
         <SiteNavigation pages={pages} site={site} locale={locale} pathname={pathname}/>
-        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option><option value="en">EN</option></select>{accountControl??<Link className="account-link" href="/anmelden">{locale==="de"?"Kundenbereich":locale==="nl"?"Klantenzone":locale==="fr"?"Espace client":"Customer area"}</Link>}{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
+        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option><option value="en">EN</option></select>{site==="teileklar"&&(accountControl??<Link className="account-link" data-testid="header-teileklar-account" href="/anmelden">{locale==="de"?"TEILEKLAR-Konto":locale==="nl"?"TEILEKLAR-account":locale==="fr"?"Compte TEILEKLAR":"TEILEKLAR account"}</Link>)}<Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
       </header>
       <main id="page-content" tabIndex={-1}>{children}</main>
       <SiteFooter pages={pages} site={site} locale={locale}/>
     </div>
     {!open && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>changePanel(true)} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{t.open}</ActionButton>}
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
-    <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>
+    <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>{!mobile&&<ChatResizeHandle width={chatWidth} onChange={setChatWidth} label={locale==="de"?"Chatbreite anpassen":locale==="nl"?"Chatbreedte aanpassen":locale==="fr"?"Ajuster la largeur du chat":"Resize chat"}/>}
       <div className="panel-topstrip" aria-hidden="true"/>
-      <div className="panel-heading"><div className="panel-heading-copy"><p className="panel-brandline"><span>NeXify</span><span className="panel-brandline-sep" aria-hidden="true">/</span><span>{t.subtitle.split("·")[0].trim()}</span></p><h2 className="visually-hidden">{t.assistant}</h2></div><ActionButton variant="quiet" ref={closeButton} className="icon-button" data-testid="chat-panel-close-button" aria-label={t.close} onClick={closePanel}>×</ActionButton></div>
+      <div className="panel-heading"><div className="panel-heading-copy"><p className="panel-brandline"><span>NeXify</span><span className="panel-brandline-sep" aria-hidden="true">/</span><span>{t.subtitle.split("·")[0].trim()}</span></p><h2 className="visually-hidden">{t.assistant}</h2><p className="panel-status" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p></div><ActionButton variant="quiet" ref={closeButton} className="icon-button" data-testid="chat-panel-close-button" aria-label={t.close} onClick={closePanel}>×</ActionButton></div>
       <div className="panel-connection visually-hidden" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Textgeführte Orientierung":locale==="nl"?"Tekstgestuurde oriëntatie":locale==="fr"?"Guide textuel":"Text-guided overview"):ready?(locale==="de"?"Projektassistent verbunden":locale==="nl"?"Concepttools verbonden":locale==="fr"?"Outils de projet connectés":"Project assistant connected"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":locale==="fr"?"Aperçu · connexion en attente":"Preview · connection pending")}</div>
       {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"Orientierung wird geladen …":locale==="nl"?"Oriëntatie wordt geladen …":locale==="fr"?"Chargement du guide…":"Loading the guide …"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages} onActivityChange={setOrientationWorking}/></Suspense></DeferredChatBoundary></div>}
       <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&Boolean(currentPage)}>
         {pathname!=="/"&&<div className="panel-page-context">{site==="teileklar"?(locale==="de"?"Sie sind hier":locale==="nl"?"U bent hier":locale==="fr"?"Vous êtes ici":"You are here"):(locale==="de"?"Hier bist du":locale==="nl"?"Je bent hier":locale==="fr"?"Tu es ici":"You are here")}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>}
         <div className="welcome-card"><p>{site==="teileklar"?tkWelcome.title:t.welcome}</p><p className="welcome-body">{site==="teileklar"?tkWelcome.body:t.welcomeBody}</p><div className="welcome-eyebrow-row"><span className="eyebrow">{site==="teileklar"?tkWelcome.eyebrow:t.welcomeEyebrow}</span>{canSpeak&&<button type="button" className="text-button" aria-pressed={speaking==="welcome"} onClick={()=>readAloud("welcome")}>{speaking==="welcome"?t.readAloudStop:t.readAloud}</button>}</div><div className="action-options">{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="action-option" disabled={busy} onClick={()=>{setIntent("choose");setChatMode("workspace");const field=messageInput.current;if(field){if(!field.value.trim())field.value=seed;field.focus();field.setSelectionRange(field.value.length,field.value.length);}}}>{label}<span aria-hidden="true">→</span></button>)}</div></div>
         <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?t.assistant:locale==="de"?"Du":locale==="nl"?"U":locale==="fr"?"Vous":"You"}</span><p>{message.role==="user"||message.label?message.text:reply(message.intent)}</p>{message.label&&<small className="state-label">{message.label}</small>}{canSpeak&&message.role==="assistant"&&!message.label&&<button type="button" className="text-button" aria-pressed={speaking===speechKey(message.intent)} onClick={()=>readAloud(speechKey(message.intent))}>{speaking===speechKey(message.intent)?t.readAloudStop:t.readAloud}</button>}</div>)}</div>
-        {intent==="choose"&&!ready&&<PublicRequestFallback locale={locale} contact={contact}/>}
+        {intent==="choose"&&!ready&&(error==="offline"?<PublicRequestFallback locale={locale} contact={contact}/>:<p className="status-note" role="status" data-testid="chat-connecting">{locale==="de"?"Assistent wird verbunden …":locale==="nl"?"Assistent wordt verbonden …":locale==="fr"?"Connexion à l’assistant …":"Connecting assistant …"}</p>)}
         {intent!=="choose" && <section className="action-card" aria-label={t[intent]}>
           <div className="action-card-heading"><h3>{t[intent]}</h3><button className="text-button" onClick={()=>setIntent("choose")}>{t.back}</button></div>
           {!canUseIntent&&<PublicRequestFallback locale={locale} contact={contact}/>}
@@ -244,6 +253,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
           {intent==="marketing" && canMarket && <><form onSubmit={event=>{event.preventDefault();if(!canMarket)return;const data=new FormData(event.currentTarget);void act(async()=>setMarketing((await post("/api/marketing",{goal:data.get("goal"),audience:data.get("audience"),locale})).draft));}}><label>{t.goal}<textarea name="goal" maxLength={800} required rows={3}/></label><label>{t.audience}<input name="audience" maxLength={500} required/></label><button className="primary-button" disabled={busy||!canMarket}>{t.createMarketing}</button></form>{marketing.length>0&&<div className="result-card"><p className="state-label">{t.marketingDraft}</p><ul>{marketing.map((line,index)=><li key={index}>{line}</li>)}</ul></div>}</>}
         </section>}
         {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="speech"?t.readAloudError:error==="chatgpt_limit"?t.chatgptLimit:t.error}</p>}
+        <ProjectFilesPanel locale={locale}/>
         <div ref={chatEnd}/>
       </div>
       <div className="composer-area" data-testid="chat-composer" hidden={!ready||(chatMode!=="workspace"&&Boolean(currentPage))}>

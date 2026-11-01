@@ -1,9 +1,47 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "vite",
-  "buildCommand": "pnpm --filter @nexify/site build",
-  "installCommand": "pnpm install --frozen-lockfile --ignore-scripts",
-  "outputDirectory": "apps/site/dist",
+  "git": {
+    "deploymentEnabled": {
+      "work/v3r2-p26-local-files": false
+    }
+  },
+  "services": {
+    "frontend": {
+      "root": "apps/web",
+      "framework": "nextjs",
+      "installCommand": "pnpm install --frozen-lockfile --ignore-scripts",
+      "buildCommand": "pnpm --filter @nexify/web build",
+      "functions": {
+        "app/api/agent-chat/route.ts": {
+          "maxDuration": 10,
+          "regions": [
+            "fra1"
+          ]
+        },
+        "app/api/agent-runtime-status/route.ts": {
+          "maxDuration": 15,
+          "regions": [
+            "fra1"
+          ]
+        }
+      }
+    },
+    "shop": {
+      "root": "apps/shop-api",
+      "framework": "fastapi",
+      "entrypoint": "vercel_app:app",
+      "functions": {
+        "vercel_app.py": {
+          "maxDuration": 30,
+          "regions": [
+            "fra1"
+          ],
+          "includeFiles": "vercel_support/bigbuy_get.py"
+        }
+      },
+      "buildCommand": "python3 prepare_vercel.py"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
@@ -29,22 +67,64 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)|robots\\.txt$|sitemap\\.xml$).*)",
-      "destination": "/index.html"
-    }
-  ],
-  "functions": {
-    "api/agent-chat.ts": {
-      "maxDuration": 10,
-      "regions": [
-        "fra1"
-      ]
+      "source": "/api/shop/:path*",
+      "destination": {
+        "service": "shop"
+      }
     },
-    "api/agent-runtime-status.ts": {
-      "maxDuration": 15,
-      "regions": [
-        "fra1"
-      ]
+    {
+      "source": "/api/auth/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/admin/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/workshops/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/requests/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/health",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/openapi.json",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/docs",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/docs/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
     }
-  }
+  ]
 }

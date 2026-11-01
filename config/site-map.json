@@ -511,7 +511,7 @@
             "en": "From the goal to the right service"
           },
           "body": {
-            "de": "Für einen öffentlichen Auftritt mit Leistungen und Kontaktwegen beginnst du bei Websites. Geht es um wiederkehrende Anfragen, Termine, Postfächer oder Angebotsentwürfe, prüfst du Agenten und Automatisierung. Für geschützte Projektübersichten, Dokumente und getrennte Teamrechte passt der Einstieg über Apps und Portale. Welche Teile zusammengehören, klären wir am konkreten Nutzerweg.",
+            "de": "Für einen öffentlichen Auftritt mit Leistungen und Kontaktwegen beginnen Sie bei Websites. Geht es um wiederkehrende Anfragen, Termine, Postfächer oder Angebotsentwürfe, ist Agenten und Automatisierung der passende Einstieg. Für geschützte Projektübersichten, Dokumente und getrennte Teamrechte passt der Bereich Apps und Portale. Welche Teile zusammengehören, klären wir gemeinsam am konkreten Nutzerweg.",
             "nl": "Voor een openbare presentatie met diensten en contactmogelijkheden begin je bij websites. Voor terugkerende aanvragen, afspraken, inboxen of offerteconcepten bekijk je agents en automatisering. Voor afgeschermde projectoverzichten, documenten en gescheiden teamrechten begin je bij apps en portalen. Welke delen samenhangen, bepalen we aan de hand van een concrete gebruikersroute.",
             "fr": "Pour une présence publique présentant tes services et les moyens de te contacter, commence par les sites web. Pour les demandes récurrentes, rendez-vous, boîtes mail ou projets de devis, explore les agents et l’automatisation. Pour les projets protégés, documents et droits d’équipe distincts, commence par les applications et portails. Nous précisons les liens à partir d’un parcours concret.",
             "en": "For a public presence with services and contact paths, you start with websites. For recurring enquiries, appointments, inboxes or draft quotes, you look at agents and automation. For protected project overviews, documents and separated team permissions, the entry point is apps and portals. Which parts belong together is clarified along the concrete user journey."
@@ -531,7 +531,7 @@
             "en": "Adapt a building block or build a custom solution"
           },
           "body": {
-            "de": "Ein vorhandener Baustein kann passen, wenn vor allem Marke, Ton, Regeln und Anbindung angepasst werden müssen. Eine Individuallösung kommt infrage, wenn dein Datenmodell oder das Zusammenspiel mehrerer Systeme neu entwickelt werden muss. Wiederverwendung, Anpassungsgrenzen, Nutzungsrechte und Betrieb werden im Angebot getrennt beschrieben; die Existenz einer Referenz ist noch keine Lieferzusage.",
+            "de": "Ein vorhandener Baustein kann passen, wenn vor allem Marke, Ton, Regeln und Anbindung angepasst werden müssen. Eine Individuallösung kommt infrage, wenn Ihr Datenmodell oder das Zusammenspiel mehrerer Systeme neu entwickelt werden muss. Wiederverwendung, Anpassungsgrenzen, Nutzungsrechte und Betrieb beschreiben wir im Angebot getrennt; ein Referenzbeispiel ist noch keine Lieferzusage.",
             "nl": "Een bestaande bouwsteen kan passen als vooral merk, toon, regels en koppelingen moeten worden aangepast. Maatwerk past wanneer je datamodel of de samenwerking tussen systemen nieuw moet worden ontwikkeld. Hergebruik, aanpassingsgrenzen, gebruiksrechten en beheer worden afzonderlijk in de offerte beschreven; een referentie is nog geen leveringsbelofte.",
             "fr": "Un module existant peut convenir si l’essentiel concerne la marque, le ton, les règles et les connexions. Le sur-mesure est adapté lorsqu’il faut concevoir ton modèle de données ou les échanges entre plusieurs systèmes. Réutilisation, limites d’adaptation, droits d’usage et exploitation sont décrits séparément dans le devis ; une référence ne constitue pas une promesse de livraison.",
             "en": "An existing building block can fit when mainly the brand, tone, rules and connections need to be adapted. A custom solution is appropriate when your data model or the interplay of several systems has to be newly developed. Reuse, adaptation limits, usage rights and operation are described separately in the quote; the existence of a reference is not yet a delivery commitment."
@@ -690,7 +690,7 @@
             "en": "From the offer to the right enquiry"
           },
           "body": {
-            "de": "Wir strukturieren, welche Leistungen dein Betrieb erklärt, welche Fragen Besucher haben und welcher Kontaktweg jeweils passt. Daraus entstehen Seiten, Navigation und die benötigten Sprachfassungen. Eine Landingpage konzentriert sich auf ein Angebot; eine Unternehmenswebsite verbindet mehrere Leistungen. Ein Shop ergänzt Produktdaten, Warenkorb und Bestellablauf und braucht dafür einen eigenen Umfang.",
+            "de": "Wir strukturieren, welche Leistungen Ihr Betrieb erklärt, welche Fragen Ihre Besucher haben und welcher Kontaktweg jeweils passt. Daraus entstehen Seiten, Navigation und die benötigten Sprachfassungen. Eine Landingpage konzentriert sich auf ein Angebot; eine Unternehmenswebsite verbindet mehrere Leistungen. Ein Shop ergänzt Produktdaten, Warenkorb und Bestellablauf und erhält dafür einen eigenen Umfang.",
             "nl": "We structureren welke diensten je bedrijf uitlegt, welke vragen bezoekers hebben en welk contactkanaal daarbij past. Daaruit volgen pagina’s, navigatie en benodigde taalversies. Een landingspagina richt zich op één aanbod; een bedrijfswebsite verbindt meerdere diensten. Een webshop voegt productgegevens, winkelwagen en bestelproces toe en vereist een eigen scope.",
             "fr": "Nous structurons les prestations à présenter, les questions des visiteurs et le contact adapté à chaque besoin. Cela détermine pages, navigation et langues nécessaires. Une page d’atterrissage se concentre sur une offre ; un site d’entreprise relie plusieurs prestations. Une boutique ajoute catalogue, panier et commande et nécessite un périmètre propre.",
             "en": "We structure which services your business explains, which questions visitors have and which contact path fits each case. From this we derive pages, navigation and the required language versions. A landing page focuses on a single offer; a company website connects several services. A shop adds product data, a cart and an ordering process and therefore needs its own scope."
@@ -710,7 +710,7 @@
             "en": "Check it in the preview"
           },
           "body": {
-            "de": "Vor einer Veröffentlichung prüfen wir den vereinbarten Weg von der Einstiegsseite bis zur Anfrage: Inhalte, Links, mobile Bedienung und verständliche Rückmeldungen bei fehlenden Angaben. Benötigte Texte, Bilder und Nutzungsrechte werden geklärt. Ein gezeigter Formularentwurf ist noch keine bestätigte Übermittlung; echte Kontaktanbindungen gehören ausdrücklich in den Leistungsumfang.",
+            "de": "Vor der Veröffentlichung prüfen wir den vereinbarten Weg von der Einstiegsseite bis zur Anfrage: Inhalte, Links, mobile Bedienung und verständliche Rückmeldungen bei fehlenden Angaben. Benötigte Texte, Bilder und Nutzungsrechte klären wir vorab. Die Anbindung Ihres Kontaktformulars an Postfach oder System ist ausdrücklich Teil des Leistungsumfangs.",
             "nl": "Voor publicatie controleren we de afgesproken route van de startpagina tot de aanvraag: inhoud, links, mobiel gebruik en duidelijke meldingen bij ontbrekende gegevens. Benodigde teksten, beelden en gebruiksrechten worden afgestemd. Een getoond formulierconcept is nog geen bevestigde verzending; echte contactkoppelingen worden expliciet opgenomen in de scope.",
             "fr": "Avant publication, nous vérifions le parcours convenu jusqu’à la demande : contenus, liens, usage mobile et messages clairs en cas d’informations manquantes. Textes, images et droits d’usage sont précisés. Une maquette de formulaire ne prouve pas un envoi réel ; les connexions de contact effectives doivent figurer dans le périmètre.",
             "en": "Before publishing, we check the agreed path from the entry page to the enquiry: content, links, mobile operation and understandable feedback when details are missing. Required texts, images and usage rights are clarified. A shown form draft is not yet a confirmed submission; real contact connections belong explicitly in the scope of services."
@@ -730,7 +730,7 @@
             "en": "Handover and later maintenance"
           },
           "body": {
-            "de": "Zur Übergabe legen wir fest, wer Inhalte ändern darf, wo das Projekt betrieben wird und welche Unterlagen dein Team erhält. Für individuell entwickelte Teile werden Code- und Datenübergabe vereinbart; bei wiederverwendeten Bausteinen werden die Nutzungsrechte benannt. Redaktionelle Pflege, technische Änderungen und laufende Betreuung sind eigene Leistungen. Sichtbarkeit oder Anfragenzahlen werden nicht garantiert.",
+            "de": "Zur Übergabe legen wir fest, wer Inhalte ändern darf, wo das Projekt betrieben wird und welche Unterlagen Ihr Team erhält. Für individuell entwickelte Teile vereinbaren wir die Übergabe von Code und Daten; bei wiederverwendeten Bausteinen benennen wir die Nutzungsrechte. Redaktionelle Pflege, technische Änderungen und laufende Betreuung sind eigene Leistungen. Sichtbarkeit in Suchmaschinen oder Anfragenzahlen garantieren wir nicht.",
             "nl": "Bij overdracht leggen we vast wie inhoud mag wijzigen, waar het project draait en welke documentatie je team ontvangt. Voor maatwerk worden code- en gegevensoverdracht afgesproken; voor hergebruikte bouwstenen worden gebruiksrechten benoemd. Redactioneel onderhoud, technische wijzigingen en doorlopende ondersteuning zijn afzonderlijke diensten. Vindbaarheid of aantallen aanvragen worden niet gegarandeerd.",
             "fr": "Pour la transmission, nous précisons qui peut modifier les contenus, où le projet sera exploité et quels documents ton équipe recevra. Pour le sur-mesure, la remise du code et des données est convenue ; les droits des modules réutilisés sont précisés. Maintenance éditoriale, évolutions techniques et suivi sont des prestations distinctes. Visibilité et volume de demandes ne sont pas garantis.",
             "en": "For the handover we define who may change content, where the project is operated and which documents your team receives. For custom-built parts, code and data handover are agreed; for reused building blocks, the usage rights are named. Editorial maintenance, technical changes and ongoing support are separate services. Visibility or enquiry numbers are not guaranteed."
@@ -861,7 +861,7 @@
             "en": "Enquiries, appointments, inbox and knowledge"
           },
           "body": {
-            "de": "Der Baukasten beschreibt einen Chat-Agenten für Rückfragen und Übergaben, Terminbuchung anhand freier Kalenderplätze, E-Mail-Triage nach Anliegen und Zuständigkeit sowie einen Angebots-Generator für Entwürfe. Ein Wissensagent soll freigegebene Dokumente mit Quellenangabe nutzen. Wir wählen einen abgegrenzten Anwendungsfall; das Auflisten dieser Bausteine bedeutet nicht, dass alle bereits für dein System verbunden sind.",
+            "de": "Zu den Bausteinen gehören ein Chat-Agent für Rückfragen und Übergaben, Terminbuchung anhand freier Kalenderplätze, E-Mail-Triage nach Anliegen und Zuständigkeit sowie ein Angebots-Generator für Entwürfe. Ein Wissensagent nutzt freigegebene Dokumente mit Quellenangabe. Wir beginnen mit einem klar abgegrenzten Anwendungsfall und binden ihn an Ihre Systeme an.",
             "nl": "De bouwstenen beschrijven een chatagent voor vervolgvragen en overdracht, afspraken op basis van vrije kalenderplekken, e-mailtriage naar onderwerp en verantwoordelijke en een generator voor offerteconcepten. Een kennisagent moet goedgekeurde documenten met bronvermelding gebruiken. We kiezen één afgebakend geval; de lijst betekent niet dat alles al met je systeem verbonden is.",
             "fr": "Les modules décrivent un agent de dialogue pour les questions et relais, des rendez-vous fondés sur les disponibilités, un tri des e-mails par sujet et responsable et un générateur de projets de devis. Un agent de connaissances doit utiliser les documents autorisés en citant ses sources. Nous choisissons un cas délimité ; cette liste ne signifie pas que tout est déjà connecté à tes systèmes.",
             "en": "The toolkit describes a chat agent for follow-up questions and handovers, appointment booking based on free calendar slots, email triage by topic and responsibility, and a quote generator for drafts. A knowledge agent is meant to use approved documents with source references. We choose one bounded use case; listing these building blocks does not mean they are all already connected to your system."
@@ -880,7 +880,7 @@
             "en": "Define access and approvals up front"
           },
           "body": {
-            "de": "Kalender, Postfach und weitere Fachsysteme werden über passende Schnittstellen angebunden, soweit der jeweilige Anbieter dies ermöglicht. Wir trennen Lesen, Entwerfen und Ausführen. Du legst fest, wann ein Mensch entscheiden muss, etwa vor Versand, verbindlichen Angeboten oder Änderungen. Fehlende Angaben und unsichere Ergebnisse führen zur Rückfrage statt zu einer erfundenen Zusage.",
+            "de": "Kalender, Postfach und weitere Fachsysteme binden wir über passende Schnittstellen an, soweit der jeweilige Anbieter dies ermöglicht. Lesen, Entwerfen und Ausführen bleiben getrennt. Sie legen fest, wann ein Mensch entscheidet, etwa vor dem Versand, vor verbindlichen Angeboten oder vor Änderungen. Fehlen Angaben oder ist ein Ergebnis unsicher, fragt der Agent nach, statt etwas zuzusagen.",
             "nl": "Kalenders, inboxen en andere bedrijfssystemen worden via passende interfaces gekoppeld voor zover de provider dit ondersteunt. We onderscheiden lezen, concepten maken en uitvoeren. Je bepaalt wanneer een mens moet beslissen, bijvoorbeeld vóór verzending, bindende offertes of wijzigingen. Ontbrekende gegevens en onzekere resultaten leiden tot een vraag in plaats van een verzonnen toezegging.",
             "fr": "Calendriers, messageries et logiciels métier sont reliés par des interfaces adaptées lorsque le fournisseur le permet. Nous distinguons lecture, préparation et exécution. Tu définis quand une personne doit décider, notamment avant un envoi, un devis ferme ou une modification. Les informations manquantes et résultats incertains donnent lieu à une question plutôt qu’à une promesse inventée.",
             "en": "Calendar, inbox and other business systems are connected via suitable interfaces, as far as the respective provider allows. We separate reading, drafting and executing. You decide when a human must decide, for example before sending, binding quotes or changes. Missing details and uncertain results lead to a follow-up question instead of an invented commitment."
@@ -1032,7 +1032,7 @@
             "en": "Bring quote, project and documents together"
           },
           "body": {
-            "de": "Ein Kundenportal kann Angebote mit Fassung und Status, Projektfortschritt, Abnahmen, Dokumente und Rechnungsübersichten verbinden. Für interne Arbeit kommen Zuständigkeiten, offene Entscheidungen und Berichte hinzu. Wir wählen die benötigten Ansichten und Aktionen aus; eine Rechnung ansehen, einen Auftrag annehmen und eine Zahlung auslösen sind unterschiedliche Funktionen.",
+            "de": "Ein Kundenportal kann Angebote mit Fassung und Status, Projektfortschritt, Abnahmen, Dokumente und Rechnungsübersichten verbinden. Für die interne Arbeit kommen Zuständigkeiten, offene Entscheidungen und Berichte hinzu. Gemeinsam wählen wir die benötigten Ansichten und Aktionen aus; eine Rechnung ansehen, einen Auftrag annehmen und eine Zahlung auslösen sind dabei unterschiedliche Funktionen.",
             "nl": "Een klantportaal kan offertes met versie en status, projectvoortgang, oplevering, documenten en factuuroverzichten verbinden. Voor intern werk komen verantwoordelijkheden, open beslissingen en rapportages erbij. We kiezen de benodigde schermen en acties; een factuur bekijken, een opdracht accepteren en betalen zijn verschillende functies.",
             "fr": "Un portail client peut réunir devis avec version et statut, avancement, réception, documents et factures. Le travail interne ajoute responsables, décisions ouvertes et rapports. Nous choisissons les vues et actions nécessaires ; consulter une facture, accepter une commande et déclencher un paiement sont des fonctions distinctes.",
             "en": "A customer portal can connect quotes with version and status, project progress, acceptances, documents and invoice overviews. For internal work, responsibilities, open decisions and reports are added. We select the required views and actions; viewing an invoice, accepting an order and triggering a payment are different functions."
@@ -1073,7 +1073,7 @@
             "en": "Make states and interfaces visible"
           },
           "body": {
-            "de": "Beim Angebot unterscheiden wir Entwurf, freigegebene Fassung, Annahme, Ablehnung und Änderungswunsch. Für weitere Abläufe legen wir ebenso fest, was bei Laden, leeren Daten, Fehlern und gesperrten Aktionen angezeigt wird. Verbindungen zu bestehenden Systemen, Dokumentdownloads und Benachrichtigungen werden einzeln vereinbart und in einer Vorschau getestet. Vorbereitete Beispieldaten bleiben als solche erkennbar.",
+            "de": "Beim Angebot unterscheiden wir Entwurf, freigegebene Fassung, Annahme, Ablehnung und Änderungswunsch. Für weitere Abläufe legen wir ebenso fest, was beim Laden, bei leeren Daten, bei Fehlern und bei gesperrten Aktionen angezeigt wird. Verbindungen zu bestehenden Systemen, Dokumentdownloads und Benachrichtigungen vereinbaren wir einzeln und testen sie in einer Vorschau. Beispieldaten bleiben als solche erkennbar.",
             "nl": "Bij offertes onderscheiden we concept, goedgekeurde versie, acceptatie, afwijzing en wijzigingsverzoek. Voor andere processen bepalen we eveneens wat verschijnt bij laden, lege gegevens, fouten en geblokkeerde acties. Koppelingen met bestaande systemen, documentdownloads en meldingen worden apart afgesproken en in een preview getest. Voorbeeldgegevens blijven herkenbaar.",
             "fr": "Pour un devis, nous distinguons brouillon, version validée, acceptation, refus et demande de modification. Pour les autres parcours, nous définissons aussi chargement, absence de données, erreurs et actions bloquées. Connexions aux systèmes existants, téléchargements et notifications sont convenus séparément et testés dans un aperçu. Les données d’exemple restent identifiées.",
             "en": "For a quote we distinguish draft, approved version, acceptance, rejection and change request. For further processes we likewise define what is shown during loading, empty data, errors and blocked actions. Connections to existing systems, document downloads and notifications are agreed individually and tested in a preview. Prepared sample data stays recognizable as such."
@@ -1584,7 +1584,7 @@
             "en": "Separate build-up, support and consumption"
           },
           "body": {
-            "de": "Der Aufbau betrifft die vereinbarte Entwicklung oder Einrichtung. Danach kann dein Team die Lösung gemäß vereinbarter Übergabe selbst betreiben oder einen eigenen Betreuungsumfang wählen. Modellnutzung und weitere Anbieterkosten werden getrennt betrachtet. Ein Entwicklungs-Tagessatz beschreibt keine tägliche Gebühr für den späteren Betrieb; was tatsächlich berechnet wird, steht im freigegebenen Angebot.",
+            "de": "Der Aufbau umfasst die vereinbarte Entwicklung oder Einrichtung. Danach kann Ihr Team die Lösung gemäß vereinbarter Übergabe selbst betreiben, oder Sie wählen einen eigenen Betreuungsumfang. Modellnutzung und weitere Anbieterkosten betrachten wir getrennt. Ein Entwicklungs-Tagessatz ist keine tägliche Gebühr für den späteren Betrieb; was tatsächlich berechnet wird, steht in Ihrem freigegebenen Angebot.",
             "nl": "De bouw betreft de afgesproken ontwikkeling of inrichting. Daarna kan je team de oplossing volgens de overeengekomen overdracht zelf beheren of een apart ondersteuningspakket kiezen. Modelgebruik en andere providerkosten worden afzonderlijk bekeken. Een ontwikkelingsdagtarief is geen dagelijkse vergoeding voor later beheer; de goedgekeurde offerte bepaalt wat wordt berekend.",
             "fr": "La réalisation couvre le développement ou la configuration convenus. Ton équipe peut ensuite exploiter la solution selon la transmission prévue ou choisir un suivi distinct. Utilisation des modèles et autres coûts fournisseurs sont examinés séparément. Un tarif journalier de développement n’est pas une facturation quotidienne de l’exploitation ; les montants dus figurent dans le devis validé.",
             "en": "The build-up concerns the agreed development or setup. Afterwards, your team can operate the solution itself according to the agreed handover, or choose a dedicated support scope. Model usage and other provider costs are considered separately. A development day rate does not describe a daily fee for later operation; what is actually charged is stated in the approved quote."
@@ -1622,7 +1622,7 @@
             "en": "What you can check before deciding"
           },
           "body": {
-            "de": "Welche Ergebnisse sind enthalten, welche Leistungen nicht? Wer betreibt und pflegt die Lösung nach der Abnahme? Welche Nutzungsrechte werden übergeben, und welche laufenden Kosten entstehen durch Dritte? Diese Punkte gehören in die schriftliche Klärung. Der Suite-Test und das einmalige bezahlte Testguthaben werden auf der NeX2fly-Seite erklärt; sie sind kein Preis für ein Agenturprojekt.",
+            "de": "Welche Ergebnisse sind enthalten, welche Leistungen nicht? Wer betreibt und pflegt die Lösung nach der Abnahme? Welche Nutzungsrechte werden übergeben, und welche laufenden Kosten entstehen durch Dritte? Diese Punkte klären wir mit Ihnen schriftlich. Der Suite-Test und das einmalige bezahlte Testguthaben sind auf der NeX2fly-Seite erklärt; sie sind kein Preis für ein Agenturprojekt.",
             "nl": "Welke resultaten zijn inbegrepen en welke diensten niet? Wie beheert en onderhoudt de oplossing na oplevering? Welke gebruiksrechten worden overgedragen en welke doorlopende kosten ontstaan bij derden? Deze punten horen in de schriftelijke afstemming. De Suite-proefperiode en het eenmalige betaalde proefsaldo staan op de NeX2fly-pagina; zij vormen geen prijs voor een bureauproject.",
             "fr": "Quels résultats sont inclus et quelles prestations ne le sont pas ? Qui exploite et maintient la solution après réception ? Quels droits d’usage sont transmis et quels frais récurrents proviennent de tiers ? Ces points doivent être précisés par écrit. L’essai de la Suite et le crédit d’essai initial acheté sont expliqués sur la page NeX2fly ; ils ne constituent pas le prix d’un projet d’agence.",
             "en": "Which results are included, which services are not? Who operates and maintains the solution after acceptance? Which usage rights are handed over, and which ongoing third-party costs arise? These points belong in the written clarification. The suite trial and the one-time paid trial credit are explained on the NeX2fly page; they are not a price for an agency project."
@@ -2213,7 +2213,7 @@
         "en": "Contact and next steps"
       },
       "summary": {
-        "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
+        "de": "Beschreiben Sie Ihr Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Sie können Ihr Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail an mail@nexifyai.cloud erreichen.",
         "nl": "Beschrijf uw vraag als projectaanvraag, gespreksaanvraag of marketingbriefing. Een lokaal voorbereid concept is geen bevestigde afspraak en wordt niet als verzonden bericht voorgesteld.",
         "fr": "Présentez votre besoin comme demande de projet, d’entretien ou brief marketing. Un brouillon préparé localement ne constitue pas une réservation confirmée ni un message déjà envoyé.",
         "en": "Describe your project: a website, a simpler process or a shared workspace. You can prepare your request in the project assistant or reach Pascal directly by email."
@@ -2229,7 +2229,7 @@
             "en": "Contact and next steps"
           },
           "body": {
-            "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
+            "de": "Beschreiben Sie Ihr Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Sie können Ihr Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail an mail@nexifyai.cloud erreichen.",
             "nl": "Beschrijf uw vraag als projectaanvraag, gespreksaanvraag of marketingbriefing. Een lokaal voorbereid concept is geen bevestigde afspraak en wordt niet als verzonden bericht voorgesteld.",
             "fr": "Présentez votre besoin comme demande de projet, d’entretien ou brief marketing. Un brouillon préparé localement ne constitue pas une réservation confirmée ni un message déjà envoyé.",
             "en": "Describe your project: a website, a simpler process or a shared workspace. You can prepare your request in the project assistant or reach Pascal directly by email."
@@ -2248,7 +2248,7 @@
             "en": "How we get into conversation"
           },
           "body": {
-            "de": "Beschreibe dein Ziel in wenigen Sätzen und nenne, welche Systeme betroffen sind. Du bekommst eine Einordnung und, wenn sinnvoll, einen nächsten Schritt. Ein erstes Gespräch oder ein Angebotsentwurf ist unverbindlich und wird erst mit gesonderter Freigabe zur Grundlage einer Zusammenarbeit.",
+            "de": "Beschreiben Sie Ihr Ziel in wenigen Sätzen und nennen Sie die betroffenen Systeme. Sie erhalten eine Einordnung und, wenn sinnvoll, einen Vorschlag für den nächsten Schritt. Ein erstes Gespräch oder ein Angebotsentwurf ist unverbindlich; Grundlage einer Zusammenarbeit wird erst ein von Ihnen freigegebenes Angebot.",
             "nl": "Beschrijf je doel in enkele zinnen en noem welke systemen betrokken zijn. Je krijgt een duiding en, indien zinvol, een volgende stap. Een eerste gesprek of offerteconcept is vrijblijvend en wordt pas met afzonderlijke goedkeuring de basis voor samenwerking.",
             "fr": "Décris ton objectif en quelques phrases et indique les systèmes concernés. Tu reçois un éclairage et, le cas échéant, une prochaine étape. Un premier entretien ou projet de devis est sans engagement et ne devient la base d’une collaboration qu’après validation distincte.",
             "en": "Describe your goal in a few sentences and name which systems are affected. You receive an assessment and, where useful, a next step. A first conversation or a draft quote is non-binding and only becomes the basis for cooperation with separate approval."
@@ -2260,13 +2260,13 @@
         {
           "id": "was-danach-passiert",
           "heading": {
-            "de": "Was nach deiner Anfrage passiert",
+            "de": "Was nach Ihrer Anfrage passiert",
             "nl": "Wat er na je aanvraag gebeurt",
             "fr": "Ce qui se passe après ta demande",
             "en": "What happens after your enquiry"
           },
           "body": {
-            "de": "Wir ordnen Bedarf und Umfang, halten Prüfkriterien fest und zeigen einen möglichen Weg auf. Nichts wird ungeprüft zugesagt. Erfundene Städte, Werkstätten oder Referenzen gibt es nicht – angezeigt wird nur, was tatsächlich hinterlegt und freigegeben ist.",
+            "de": "Wir ordnen Bedarf und Umfang ein, halten Prüfkriterien fest und zeigen Ihnen einen möglichen Weg auf. Zugesagt wird nur, was geprüft ist. Referenzen und Beispiele nennen wir nur, wenn sie tatsächlich vorliegen und freigegeben sind.",
             "nl": "We ordenen behoefte en omvang, leggen toetscriteria vast en schetsen een mogelijk pad. Niets wordt ongetoetst toegezegd. Verzonnen steden, werkplaatsen of referenties bestaan niet – getoond wordt alleen wat daadwerkelijk is vastgelegd en vrijgegeven.",
             "fr": "Nous structurons le besoin et le périmètre, fixons les critères de contrôle et esquissons une voie possible. Rien n’est promis sans vérification. Aucune ville, aucun atelier ni référence inventés : seul ce qui est réellement enregistré et validé est affiché.",
             "en": "We sort out need and scope, record acceptance criteria and outline a possible path. Nothing is promised unchecked. There are no invented cities, workshops or references – only what is actually stored and approved is shown."
@@ -2279,13 +2279,13 @@
         {
           "id": "datenschutz-hinweis",
           "heading": {
-            "de": "Vertraulichkeit deiner Angaben",
+            "de": "Vertraulichkeit Ihrer Angaben",
             "nl": "Vertrouwelijkheid van je gegevens",
             "fr": "Confidentialité de tes informations",
             "en": "Confidentiality of your information"
           },
           "body": {
-            "de": "Deine Angaben verwenden wir ausschließlich zur Bearbeitung deiner Anfrage. Es werden keine Zugangsdaten oder Geheimnisse über dieses Formular erbeten. Details zur Datenverwendung findest du im Datenschutzbereich.",
+            "de": "Ihre Angaben verwenden wir ausschließlich zur Bearbeitung Ihrer Anfrage. Bitte senden Sie uns keine Zugangsdaten oder Passwörter. Details zur Datenverwendung finden Sie in der Datenschutzerklärung.",
             "nl": "Je gegevens gebruiken we uitsluitend om je aanvraag te behandelen. Via dit formulier worden geen inloggegevens of geheimen gevraagd. Details over gegevensgebruik vind je in het privacygedeelte.",
             "fr": "Tes informations servent uniquement au traitement de ta demande. Aucun identifiant ni secret n’est demandé via ce formulaire. Les détails sur l’utilisation des données figurent dans la rubrique confidentialité.",
             "en": "We use your information solely to process your request. No access credentials or secrets are requested via this form. Details on data use can be found in the data protection area."
@@ -2297,7 +2297,7 @@
       ],
       "metadata": {
         "description": {
-          "de": "Schilder dein Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Du kannst dein Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail erreichen.",
+          "de": "Beschreiben Sie Ihr Vorhaben: eine Website, einen einfacheren Ablauf oder einen gemeinsamen Arbeitsbereich. Sie können Ihr Anliegen im Projektassistenten vorbereiten oder Pascal direkt per E-Mail an mail@nexifyai.cloud erreichen.",
           "nl": "Beschrijf uw vraag als projectaanvraag, gespreksaanvraag of marketingbriefing. Een lokaal voorbereid concept is geen bevestigde afspraak en wordt niet als verzonden bericht voorgesteld.",
           "fr": "Présentez votre besoin comme demande de projet, d’entretien ou brief marketing. Un brouillon préparé localement ne constitue pas une réservation confirmée ni un message déjà envoyé.",
           "en": "Describe your project: a website, a simpler process or a shared workspace. You can prepare your request in the project assistant or reach Pascal directly by email."
@@ -3897,10 +3897,10 @@
         "en": "TEILEKLAR: parts, vehicle and next steps"
       },
       "summary": {
-        "de": "TEILEKLAR ist Ihr Anlaufpunkt für Autoteile mit passendem Fahrzeugbezug und Werkstattservice. Sie suchen ein Ersatzteil, planen einen Werkstattbesuch oder interessieren sich für eine Zusammenarbeit? Nennen Sie Ihr Fahrzeug und Ihr Anliegen. Online-Bestellungen sind derzeit nicht möglich.",
-        "nl": "TEILEKLAR is uw aanspreekpunt voor auto-onderdelen met de juiste voertuigkoppeling en werkplaatsservice. Zoekt u een onderdeel, plant u een werkplaatsbezoek of heeft u interesse in samenwerking? Noem uw voertuig en uw vraag. Online bestellen is momenteel niet mogelijk.",
-        "fr": "TEILEKLAR est votre point de contact pour les pièces auto avec le bon rattachement véhicule et un service d’atelier. Vous cherchez une pièce, prévoyez une visite en atelier ou vous intéressez à une collaboration ? Indiquez votre véhicule et votre demande. La commande en ligne n’est pas possible actuellement.",
-        "en": "TEILEKLAR is your contact point for car parts with the right vehicle reference and workshop service. Are you looking for a spare part, planning a workshop visit, or interested in a partnership? Name your vehicle and your request. Online ordering is currently not possible."
+        "de": "TEILEKLAR ist Ihr Anlaufpunkt für Autoteile, Fahrzeugfragen und Werkstattkontakte. Sie suchen ein Ersatzteil, eine Werkstatt in Ihrer Nähe oder interessieren sich für eine Zusammenarbeit? Der Shop für Auto & Motorrad ist eingerichtet; das Sortiment ist derzeit noch leer, weil der Katalogimport noch nicht freigeschaltet ist.",
+        "nl": "TEILEKLAR is uw aanspreekpunt voor auto-onderdelen met de juiste voertuigkoppeling en werkplaatsservice. Zoekt u een onderdeel, plant u een werkplaatsbezoek of heeft u interesse in samenwerking? De shop voor auto & motor is ingericht; het assortiment is momenteel nog leeg, omdat de catalogusimport nog niet is vrijgegeven.",
+        "fr": "TEILEKLAR est votre point de contact pour les pièces auto avec le bon rattachement véhicule et un service d’atelier. Vous cherchez une pièce, prévoyez une visite en atelier ou vous intéressez à une collaboration ? La boutique auto & moto est en place ; l’assortiment est encore vide, car l’import du catalogue n’est pas encore activé.",
+        "en": "TEILEKLAR is your contact point for car parts with the right vehicle reference and workshop service. Are you looking for a spare part, planning a workshop visit, or interested in a partnership? The car & motorcycle shop is set up; the range is still empty because the catalogue import has not been enabled yet."
       },
       "site_context": "teileklar",
       "sections": [
@@ -3933,10 +3933,10 @@
             "en": "How TEILEKLAR works"
           },
           "body": {
-            "de": "1. Fahrzeug und Anliegen benennen: Hersteller, Modell, Baujahr und Motorisierung bereithalten. 2. Teil oder Arbeit beschreiben: vorhandene Teilenummer und benötigte Ausführung ergänzen. 3. Vor der Entscheidung prüfen: Teilezuordnung fachlich klären; Umfang, Kosten und Termin einer Werkstattleistung mit dem jeweiligen Betrieb vereinbaren. Online-Bestellungen sind derzeit nicht möglich.",
-            "nl": "1. Voertuig en vraag benoemen: houd merk, model, bouwjaar en motorisering bij de hand. 2. Onderdeel of werk beschrijven: vul een bestaand onderdeelnummer en de benodigde uitvoering aan. 3. Vóór de beslissing controleren: laat de onderdeeltoewijzing vakkundig vaststellen; stem omvang, kosten en afspraak van een werkplaatsdienst af met het betreffende bedrijf. Online bestellen is momenteel niet mogelijk.",
-            "fr": "1. Indiquer le véhicule et la demande : préparez marque, modèle, année et motorisation. 2. Décrire la pièce ou le travail : ajoutez un numéro de pièce existant et la version requise. 3. Vérifier avant de décider : faites clarifier l’affectation de la pièce ; convenez de l’étendue, du coût et du rendez-vous d’une prestation d’atelier avec l’entreprise concernée. La commande en ligne n’est pas possible actuellement.",
-            "en": "1. Name the vehicle and request: have make, model, year and engine ready. 2. Describe the part or work: add any existing part number and the required version. 3. Check before deciding: have the parts assignment clarified professionally; agree the scope, cost and appointment of any workshop service with the respective business. Online ordering is currently not possible."
+            "de": "1. Fahrzeug und Anliegen benennen: Hersteller, Modell, Baujahr und Motorisierung bereithalten. 2. Teil oder Arbeit beschreiben: vorhandene Teilenummer und benötigte Ausführung ergänzen. 3. Vor der Entscheidung prüfen: Teilezuordnung fachlich klären; Umfang, Kosten und Termin einer Werkstattleistung mit dem jeweiligen Betrieb vereinbaren. Der Shop ist eingerichtet, das Sortiment aber noch leer; derzeit sind keine Artikel bestellbar.",
+            "nl": "1. Voertuig en vraag benoemen: houd merk, model, bouwjaar en motorisering bij de hand. 2. Onderdeel of werk beschrijven: vul een bestaand onderdeelnummer en de benodigde uitvoering aan. 3. Vóór de beslissing controleren: laat de onderdeeltoewijzing vakkundig vaststellen; stem omvang, kosten en afspraak van een werkplaatsdienst af met het betreffende bedrijf. De shop is ingericht, maar het assortiment is nog leeg; momenteel zijn er geen artikelen te bestellen.",
+            "fr": "1. Indiquer le véhicule et la demande : préparez marque, modèle, année et motorisation. 2. Décrire la pièce ou le travail : ajoutez un numéro de pièce existant et la version requise. 3. Vérifier avant de décider : faites clarifier l’affectation de la pièce ; convenez de l’étendue, du coût et du rendez-vous d’une prestation d’atelier avec l’entreprise concernée. La boutique est en place, mais l’assortiment est encore vide ; aucun article n’est commandable pour le moment.",
+            "en": "1. Name the vehicle and request: have make, model, year and engine ready. 2. Describe the part or work: add any existing part number and the required version. 3. Check before deciding: have the parts assignment clarified professionally; agree the scope, cost and appointment of any workshop service with the respective business. The shop is set up, but the range is still empty; no items can be ordered at the moment."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -4036,10 +4036,10 @@
         "en": "Parts search: in preparation"
       },
       "summary": {
-        "de": "Beschreiben Sie das benötigte Teil und Ihr Fahrzeug. Eine vorhandene Teilenummer, Maße oder Fotos können bei der Einordnung helfen. Online-Bestellungen sind derzeit nicht möglich.",
-        "nl": "Beschrijf het benodigde onderdeel en uw voertuig. Een bestaand onderdeelnummer, maten of foto’s kunnen bij de indeling helpen. Online bestellen is momenteel niet mogelijk.",
-        "fr": "Décrivez la pièce nécessaire et votre véhicule. Un numéro de pièce existant, des dimensions ou des photos peuvent aider au classement. La commande en ligne n’est pas possible actuellement.",
-        "en": "Describe the part you need and your vehicle. An existing part number, dimensions or photos can help with the assignment. Online ordering is currently not possible."
+        "de": "Beschreiben Sie das benötigte Teil und Ihr Fahrzeug. Eine vorhandene Teilenummer, Maße oder Fotos können bei der Einordnung helfen.",
+        "nl": "Beschrijf het benodigde onderdeel en uw voertuig. Een bestaand onderdeelnummer, maten of foto’s kunnen bij de indeling helpen.",
+        "fr": "Décrivez la pièce nécessaire et votre véhicule. Un numéro de pièce existant, des dimensions ou des photos peuvent aider au classement.",
+        "en": "Describe the part you need and your vehicle. An existing part number, dimensions or photos can help with the assignment."
       },
       "site_context": "teileklar",
       "sections": [
@@ -4175,7 +4175,7 @@
         "en": "Range and categories"
       },
       "summary": {
-        "de": "Unser Sortiment ist nach Fahrzeugbereichen und Teilearten gegliedert, damit Sie sich schnell orientieren. Für konkrete Artikel und Preise beraten wir Sie gezielt zu Ihrem Fahrzeug.",
+        "de": "Das Sortiment Auto & Motorrad ist nach Kategorien gegliedert. Jeder Artikel zeigt Preis inklusive Mehrwertsteuer, Lagerbestand, SKU und EAN; die Passung zu Ihrem Fahrzeug prüfen Sie bitte anhand der Teilenummer.",
         "nl": "Ons assortiment is ingedeeld naar voertuigonderdelen en soorten onderdelen, zodat u zich snel oriënteert. Voor concrete artikelen en prijzen adviseren we u gericht voor uw voertuig.",
         "fr": "Notre assortiment est organisé par domaines du véhicule et types de pièces, pour vous repérer vite. Pour des articles et prix concrets, nous vous conseillons précisément selon votre véhicule.",
         "en": "Categories only organize the approved catalog. Currently no supposedly available item counts or brand stocks are published."
@@ -4691,10 +4691,10 @@
             "en": "Checkout: not released for purchase"
           },
           "body": {
-            "de": "Hier fassen wir Ihre Auswahl zusammen und zeigen transparent, was der nächste Schritt ist. Sobald Sie bestellen möchten, prüfen wir Teile, Preis, Versand und Zahlung gemeinsam mit Ihnen – es wird nichts ausgelöst, das Sie nicht ausdrücklich bestätigt haben.",
-            "nl": "Hier vatten we uw selectie samen en laten we transparant zien wat de volgende stap is. Zodra u wilt bestellen, controleren we onderdelen, prijs, verzending en betaling samen met u – er wordt niets in gang gezet zonder uw uitdrukkelijke bevestiging.",
-            "fr": "Nous récapitulons ici votre sélection et indiquons clairement la prochaine étape. Dès que vous souhaitez commander, nous vérifions ensemble les pièces, le prix, la livraison et le paiement – rien n’est déclenché sans votre confirmation explicite.",
-            "en": "A real purchase requires verified item, price, shipping, payment and consumer information. There is no binding order button here yet and no faked order confirmation."
+            "de": "Hier prüfen Sie Adresse, Versand und den Gesamtpreis inklusive Mehrwertsteuer. Mit „Zahlungspflichtig bestellen“ geht es zur Zahlung bei Revolut. Verbindlich wird die Bestellung erst mit der bestätigten Zahlung.",
+            "nl": "Hier controleert u adres, verzending en de totaalprijs inclusief btw. Met „Bestelling met betalingsverplichting“ gaat u naar de betaling bij Revolut. De bestelling wordt pas bindend na de bevestigde betaling.",
+            "fr": "Vérifiez ici l’adresse, la livraison et le prix total TVA comprise. « Commander avec obligation de paiement » mène au paiement chez Revolut. La commande ne devient ferme qu’après le paiement confirmé.",
+            "en": "Here you check the address, shipping and the total price including VAT. “Order with obligation to pay” takes you to payment with Revolut. The order only becomes binding once the payment is confirmed."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -5197,7 +5197,7 @@
         "en": "Become a workshop partner"
       },
       "summary": {
-        "de": "Als Werkstattpartner erhalten Sie strukturierte Kundenanfragen mit Fahrzeugbezug und klarer Beschreibung. Sie stellen Ihren Betrieb und Ihre Leistungen vor; Umfang und Konditionen der Zusammenarbeit stimmen wir persönlich mit Ihnen ab.",
+        "de": "Sie führen eine Werkstatt? Stellen Sie Ihren Betrieb und Ihre Leistungen vor und erhalten Sie Anfragen mit Fahrzeugbezug und klarer Beschreibung. Umfang und Konditionen der Zusammenarbeit stimmen wir persönlich mit Ihnen ab.",
         "nl": "Als werkplaatspartner ontvangt u gestructureerde klantaanvragen met voertuigkoppeling en duidelijke omschrijving. U stelt uw bedrijf en diensten voor; omvang en voorwaarden van de samenwerking stemmen we persoonlijk met u af.",
         "fr": "En tant qu’atelier partenaire, vous recevez des demandes clients structurées avec rattachement véhicule et description claire. Vous présentez votre entreprise et vos prestations ; l’étendue et les conditions de la collaboration sont convenues personnellement avec vous.",
         "en": "A partner request describes the business, services and collaboration. Registration alone is not an activation; review and agreed terms precede a published partner page."
@@ -5327,10 +5327,10 @@
         "en": "Workshop profile: approved data required"
       },
       "summary": {
-        "de": "Eine Werkstatt zeigt Ihnen bestätigte Leistungen, Öffnungszeiten und Kontaktwege. Wir stellen nur geprüfte Partnerbetriebe vor – damit Sie sich auf die Angaben verlassen können.",
-        "nl": "Een werkplaats toont u bevestigde diensten, openingstijden en contactmogelijkheden. Wij stellen alleen gecontroleerde partnerbedrijven voor – zodat u op de gegevens kunt vertrouwen.",
-        "fr": "Un atelier vous présente ses prestations confirmées, ses horaires et ses moyens de contact. Nous ne présentons que des partenaires vérifiés – pour que vous puissiez vous fier aux informations.",
-        "en": "An actual workshop profile shows only confirmed business data, services and contact channels. Currently no workshop names, distances, ratings or available slots are invented."
+        "de": "Die Werkstattsuche zeigt Betriebe aus einem Werkstattverzeichnis mit Adresse, Entfernung und Kontaktweg. Es sind Verzeichnisbetriebe, keine geprüften TEILEKLAR-Partner.",
+        "nl": "De werkplaatszoeker toont bedrijven uit een werkplaatsregister met adres, afstand en contactmogelijkheid. Het zijn registerbedrijven, geen gecontroleerde TEILEKLAR-partners.",
+        "fr": "La recherche de garage affiche des entreprises issues d’un annuaire, avec adresse, distance et moyen de contact. Ce sont des entreprises de l’annuaire, pas des partenaires TEILEKLAR vérifiés.",
+        "en": "The workshop search shows businesses from a workshop directory with address, distance and contact details. They are directory listings, not verified TEILEKLAR partners."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5357,16 +5357,16 @@
         {
           "id": "gepruefte-partner",
           "heading": {
-            "de": "Nur geprüfte Partnerbetriebe",
-            "nl": "Alleen gecontroleerde partnerbedrijven",
-            "fr": "Uniquement des partenaires vérifiés",
-            "en": "Workshop profile: approved data needed"
+            "de": "Verzeichnisbetriebe, keine geprüften Partner",
+            "nl": "Registerbedrijven, geen gecontroleerde partners",
+            "fr": "Entreprises de l’annuaire, pas de partenaires vérifiés",
+            "en": "Directory listings, not verified partners"
           },
           "body": {
-            "de": "Wir zeigen Werkstätten erst, wenn ihre Angaben bestätigt sind. So erhalten Sie verlässliche Informationen zu Leistungen und Erreichbarkeit statt ungeprüfter Einträge.",
-            "nl": "We tonen werkplaatsen pas als hun gegevens bevestigd zijn. Zo krijgt u betrouwbare informatie over diensten en bereikbaarheid in plaats van ongecontroleerde vermeldingen.",
-            "fr": "Nous ne présentons les ateliers qu’une fois leurs informations confirmées. Vous obtenez ainsi des informations fiables sur les prestations et la disponibilité, plutôt que des annonces non vérifiées.",
-            "en": "A workshop profile shows only confirmed details. Without approved data, no locations, services or ratings are invented. Partners store their data in the partner process."
+            "de": "Die Angaben stammen aus dem Verzeichnis und sind nicht von TEILEKLAR bestätigt. Prüfen Sie Leistungen und Öffnungszeiten direkt beim Betrieb. Eine Anfrage über TEILEKLAR ist noch kein Termin.",
+            "nl": "De gegevens komen uit het register en zijn niet door TEILEKLAR bevestigd. Controleer diensten en openingstijden rechtstreeks bij het bedrijf. Een aanvraag via TEILEKLAR is nog geen afspraak.",
+            "fr": "Les informations proviennent de l’annuaire et ne sont pas confirmées par TEILEKLAR. Vérifiez les prestations et les horaires directement auprès de l’entreprise. Une demande via TEILEKLAR n’est pas encore un rendez-vous.",
+            "en": "The details come from the directory and are not confirmed by TEILEKLAR. Check services and opening hours directly with the business. A request via TEILEKLAR is not yet an appointment."
           },
           "source_refs": [
             "docs/01-konzept/gesamtprojektplan.md",
@@ -5377,10 +5377,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Eine Werkstatt zeigt Ihnen bestätigte Leistungen, Öffnungszeiten und Kontaktwege. Wir stellen nur geprüfte Partnerbetriebe vor – damit Sie sich auf die Angaben verlassen können.",
-          "nl": "Een werkplaats toont u bevestigde diensten, openingstijden en contactmogelijkheden. Wij stellen alleen gecontroleerde partnerbedrijven voor – zodat u op de gegevens kunt vertrouwen.",
-          "fr": "Un atelier vous présente ses prestations confirmées, ses horaires et ses moyens de contact. Nous ne présentons que des partenaires vérifiés – pour que vous puissiez vous fier aux informations.",
-          "en": "An actual workshop profile shows only confirmed business data, services and contact channels. Currently no workshop names, distances, ratings or available slots are invented."
+          "de": "Die Werkstattsuche zeigt Betriebe aus einem Werkstattverzeichnis mit Adresse, Entfernung und Kontaktweg. Es sind Verzeichnisbetriebe, keine geprüften TEILEKLAR-Partner.",
+          "nl": "De werkplaatszoeker toont bedrijven uit een werkplaatsregister met adres, afstand en contactmogelijkheid. Het zijn registerbedrijven, geen gecontroleerde TEILEKLAR-partners.",
+          "fr": "La recherche de garage affiche des entreprises issues d’un annuaire, avec adresse, distance et moyen de contact. Ce sont des entreprises de l’annuaire, pas des partenaires TEILEKLAR vérifiés.",
+          "en": "The workshop search shows businesses from a workshop directory with address, distance and contact details. They are directory listings, not verified TEILEKLAR partners."
         },
         "canonical_path": "/teileklar/werkstatt",
         "canonical_origin": null,

@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "id": "nexify-team-runtime-candidate",
+  "status": "candidate_not_runtime_activation",
+  "authority": "explicit_owner_request_2026-11-01",
+  "controller": "existing_NeX_Agentic_AIFly_no_second_queue",
+  "base_source_commit": "b62b3f28861d11e0d8c967dae88335c1740a5d94",
+  "activation": {
+    "new_daemon": false,
+    "new_scheduler": false,
+    "automatic_external_messages": false,
+    "public_cutover": false,
+    "global_tool_or_model_config_changed": false
+  },
+  "canonical_roles_path": "config/brain/agents.json",
+  "enterprise_reference": {
+    "path": "docs/source-snapshots/team-blueprint-20261101/role-catalogue.json",
+    "sha256": "88703a45dcf877169c3bdac84ba986a9d75e5d8aad0a042d5003e7a249f640ca",
+    "roles": 44,
+    "skills": 44,
+    "originals_immutable": true
+  },
+  "skill_library_ref": "config/integrations/small-business.json",
+  "profiles": [
+    {
+      "role_id": "companion",
+      "purpose": "Fachlich passende Orientierung und Übergabe; keine erfundene Ausführung",
+      "runtime_id": "managed-gateway",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "baumeister",
+      "purpose": "Ein schreibender Entwickler pro freigegebenem physischem Arbeitsbereich",
+      "runtime_id": "codex-existing",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "pruefer",
+      "purpose": "Unabhängiger Quellen-, Verhaltens- und Commitreview",
+      "runtime_id": "codex-code-review",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "recherche",
+      "purpose": "Quellengebundene Recherche mit vollständigen Beleggrenzen",
+      "runtime_id": "session-native",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "triage",
+      "purpose": "Vorbereitung und Zuordnung ohne unautorisierten Versand",
+      "runtime_id": "hermes-candidate",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "angebot",
+      "purpose": "Quellengebundene Angebotsvorbereitung ohne neue Preisfreigabe",
+      "runtime_id": "hermes-candidate",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "wissen",
+      "purpose": "Versionierte Quellenarbeit und tenantgebundene Wissensprüfung",
+      "runtime_id": "local-control",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "orchestrator",
+      "purpose": "Bestehende Auftragssteuerung, Budget und begrenzte Übergabe",
+      "runtime_id": "existing-coordinator",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    },
+    {
+      "role_id": "waechter",
+      "purpose": "Lesende Betriebs- und Nachweisprüfung mit Wiederaufnahmegrenzen",
+      "runtime_id": "systemmaster-read-only",
+      "delegation": false,
+      "connected_worker_id": null,
+      "tool_bindings": [],
+      "guidance": "docs/architecture/team-runtime-adaptation-20261101.md#rollenvertrag",
+      "execution_authority": "requires_actual_task_scope_and_verified_adapter"
+    }
+  ],
+  "runtime_candidates": [
+    {
+      "id": "hermes-candidate",
+      "upstream": "NousResearch/hermes-agent",
+      "release": "v0.22.5",
+      "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+      "license": "MIT",
+      "supported_python_major_minor": [
+        3,
+        14
+      ],
+      "observed_local_python": [
+        3,
+        12
+      ],
+      "local_cli_detected": false,
+      "remote_installation": "unknown_not_inferred_from_container_query",
+      "installed_by_this_work": false,
+      "connected": false,
+      "sampling_enabled": false,
+      "automatic_skill_mutation": false,
+      "unrestricted_shell": false,
+      "profile_is_sandbox": false
+    },
+    {
+      "id": "openclaw-candidate",
+      "upstream": "openclaw/openclaw",
+      "release": "v2026.10.9",
+      "commit": "8b18b5578f66eab1501cba4cef2310d88bfb9a41",
+      "license": "MIT",
+      "selected_for_install": false,
+      "connected": false,
+      "gateway_trust_domain": "one_mutual_trust_domain_not_shared_across_untrusted_tenants"
+    }
+  ],
+  "migration": {
+    "mode": "audit_shadow",
+    "preserve_existing_jobs": true,
+    "preserve_AGENTS_writer": true,
+    "cross_tenant_state_clone": false,
+    "automatic_replacement": false
+  },
+  "delegation_bounds": {
+    "max_concurrency": 4,
+    "max_depth": 1,
+    "max_steps": 20,
+    "max_wall_seconds": 900,
+    "writer_per_physical_resource": 1,
+    "shared_monetary_budget": null,
+    "paid_calls_enabled": false,
+    "note": "candidate operational caps; must be enforced by actual adapter before activation; no runtime configuration claimed"
+  },
+  "memory": {
+    "scope": "tenant_project",
+    "stages": [
+      "WRITE",
+      "INDEX",
+      "EXACT_READ_BACK",
+      "CONTENT_COMPARE"
+    ],
+    "connected": false,
+    "shared_private_customer_index": false,
+    "external_transcript_export": false
+  },
+  "model_policy_ref": "config/llm-policy.json",
+  "review": {
+    "required": "Codex_Code_Review_at_exact_commit",
+    "settings_url": "https://chatgpt.com/settings/code-review/repositories/github-1397719293",
+    "settings_verified": false,
+    "browser_plugin": "originating_browser_context_unavailable",
+    "AGENTS_changed_by_this_work": false,
+    "independent_source_review_is_not_native_Codex_review": true
+  },
+  "adaptation": {
+    "role_prompts": "candidate_versioned_guidance",
+    "original_skills": "read_only_canonical",
+    "learning": "separate_reviewed_candidates",
+    "weight_fine_tuning_performed": false,
+    "training_dataset_approved": false
+  }
+}
