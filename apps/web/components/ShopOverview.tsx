@@ -1,42 +1,68 @@
 "use client";
+import {useState} from "react";
 import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import type {Locale} from "../lib/i18n";
 import "./TeileklarTools.css";
 
 const copy={
- de:{kicker:"Sortiment",title:"Einstieg ins Sortiment",intro:"W\u00e4hlen Sie einen Bereich oder starten Sie \u00fcber Ihr Fahrzeug. Online-Bestellungen sind derzeit nicht m\u00f6glich; wir ordnen das passende Teil zu und melden uns pers\u00f6nlich.",entry:"So starten Sie",categories:"Teilebereiche",byVehicle:"Nach Fahrzeug suchen",byVehicleHint:"Hersteller, Modell und Baujahr angeben",bySearch:"Teilnummer oder Stichwort",bySearchHint:"Gezielt nach OE-/Teilenummer suchen",tyres:"Reifenrechner",tyresHint:"Reifengr\u00f6\u00dfen vergleichen",battery:"Batterie-Berater",batteryHint:"Passende Starterbatterie finden",note:"Die Bereiche sind Einstiegspunkte. Verf\u00fcgbarkeit, Passung und Preis besprechen wir individuell anhand Ihres Fahrzeugs."},
- nl:{kicker:"Assortiment",title:"Ingang tot het assortiment",intro:"Kies een onderdeel of start via uw voertuig. Online bestellen is momenteel niet mogelijk; wij bepalen het passende onderdeel en nemen persoonlijk contact op.",entry:"Zo begint u",categories:"Onderdeelgebieden",byVehicle:"Op voertuig zoeken",byVehicleHint:"Merk, model en bouwjaar opgeven",bySearch:"Onderdeelnummer of trefwoord",bySearchHint:"Gericht op OE-/onderdeelnummer zoeken",tyres:"Bandencalculator",tyresHint:"Bandenmaten vergelijken",battery:"Accu-adviseur",batteryHint:"De juiste startaccu vinden",note:"De gebieden zijn ingangen. Beschikbaarheid, pasvorm en prijs bespreken we per voertuig."},
- fr:{kicker:"Assortiment",title:"Entr\u00e9e dans l\u2019assortiment",intro:"Choisissez un domaine ou commencez par votre v\u00e9hicule. La commande en ligne n\u2019est pas possible actuellement ; nous identifions la pi\u00e8ce adapt\u00e9e et vous r\u00e9pondons personnellement.",entry:"Pour commencer",categories:"Domaines de pi\u00e8ces",byVehicle:"Rechercher par v\u00e9hicule",byVehicleHint:"Indiquer marque, mod\u00e8le et ann\u00e9e",bySearch:"R\u00e9f\u00e9rence ou mot-cl\u00e9",bySearchHint:"Rechercher par r\u00e9f\u00e9rence OE/pi\u00e8ce",tyres:"Calculateur de pneus",tyresHint:"Comparer les dimensions",battery:"Conseiller batterie",batteryHint:"Trouver la bonne batterie",note:"Les domaines sont des points d\u2019entr\u00e9e. Disponibilit\u00e9, compatibilit\u00e9 et prix se discutent selon le v\u00e9hicule."},
- en:{kicker:"Range",title:"Entry into the range",intro:"Choose an area or start from your vehicle. Online ordering is currently not possible; we identify the right part and respond personally.",entry:"How to start",categories:"Part areas",byVehicle:"Search by vehicle",byVehicleHint:"Enter make, model and year",bySearch:"Part number or keyword",bySearchHint:"Search by OE/part number",tyres:"Tyre calculator",tyresHint:"Compare tyre sizes",battery:"Battery advisor",batteryHint:"Find the right battery",note:"The areas are entry points. Availability, fit and price are discussed per vehicle."}
+ de:{kicker:"TEILEKLAR Shop",title:"Erst Passung prüfen, dann bestellen",intro:"Wählen Sie Ihr Fahrzeug über HSN/TSN, dann sehen Sie je Artikel, ob er passt. So vermeiden Sie Fehlkäufe. Muster-Shop: Beispielartikel, keine echte Lieferung und keine Zahlung.",vehicle:"Ihr Fahrzeug",hsn:"HSN (2–4)",tsn:"TSN (3)",check:"Passung prüfen",reset:"Zurücksetzen",chosen:"Gewählt",none:"Noch kein Fahrzeug gewählt – Status „prüfen“.",parts:"Beispielartikel",oe:"OE-Nr.",maker:"Hersteller",ex:"Beispiel",fits:"passt",maybe:"prüfen",nofit:"passt nicht",addToCart:"In den Warenkorb",inCart:"Im Warenkorb",cart:"Warenkorb (Muster)",items:"Artikel",order:"Zahlungspflichtig bestellen",orderNote:"Muster-Shop – es erfolgt keine echte Bestellung, Lieferung oder Zahlung.",priceNote:"Preise brutto inkl. USt., zzgl. Versand – Beispielwerte, zur Freigabe.",workshop:"Einbau in Werkstatt",workshopHint:"Termin beim Werkstattpartner zum Teil"},
+ nl:{kicker:"TEILEKLAR shop",title:"Eerst pasvorm, dan bestellen",intro:"Kies uw voertuig via HSN/TSN; per artikel ziet u of het past. Zo voorkomt u miskopen. Demoshop: voorbeeldartikelen, geen echte levering of betaling.",vehicle:"Uw voertuig",hsn:"HSN (2–4)",tsn:"TSN (3)",check:"Pasvorm controleren",reset:"Wissen",chosen:"Gekozen",none:"Nog geen voertuig gekozen – status „controleren“.",parts:"Voorbeeldartikelen",oe:"OE-nr.",maker:"Fabrikant",ex:"Voorbeeld",fits:"past",maybe:"controleren",nofit:"past niet",addToCart:"In winkelwagen",inCart:"In winkelwagen",cart:"Winkelwagen (demo)",items:"artikelen",order:"Bestelling met betaalplicht",orderNote:"Demoshop – geen echte bestelling, levering of betaling.",priceNote:"Prijzen incl. btw, excl. verzending – voorbeeldwaarden, ter vrijgave.",workshop:"Montage in werkplaats",workshopHint:"Afspraak bij werkplaatspartner bij het onderdeel"},
+ fr:{kicker:"Boutique TEILEKLAR",title:"D’abord la compatibilité, puis la commande",intro:"Choisissez votre véhicule via HSN/TSN ; chaque article indique s’il convient. Évitez les erreurs. Boutique démo : articles d’exemple, sans livraison ni paiement réels.",vehicle:"Votre véhicule",hsn:"HSN (2–4)",tsn:"TSN (3)",check:"Vérifier la compatibilité",reset:"Réinitialiser",chosen:"Choisi",none:"Aucun véhicule choisi – statut « à vérifier ».",parts:"Articles d’exemple",oe:"Réf. OE",maker:"Fabricant",ex:"Exemple",fits:"compatible",maybe:"à vérifier",nofit:"non compatible",addToCart:"Ajouter au panier",inCart:"Au panier",cart:"Panier (démo)",items:"articles",order:"Commande avec obligation de paiement",orderNote:"Boutique démo – aucune commande, livraison ni paiement réels.",priceNote:"Prix TTC, hors livraison – valeurs d’exemple, à valider.",workshop:"Montage en atelier",workshopHint:"Rendez-vous chez l’atelier partenaire pour la pièce"},
+ en:{kicker:"TEILEKLAR shop",title:"Check fit first, then order",intro:"Select your vehicle via HSN/TSN; each item shows whether it fits. Avoid wrong purchases. Demo shop: sample items, no real delivery or payment.",vehicle:"Your vehicle",hsn:"HSN (2–4)",tsn:"TSN (3)",check:"Check fit",reset:"Reset",chosen:"Chosen",none:"No vehicle chosen yet – status “check”.",parts:"Sample items",oe:"OE no.",maker:"Maker",ex:"Example",fits:"fits",maybe:"check",nofit:"no fit",addToCart:"Add to cart",inCart:"In cart",cart:"Cart (demo)",items:"items",order:"Order with obligation to pay",orderNote:"Demo shop – no real order, delivery or payment.",priceNote:"Prices incl. VAT, plus shipping – example values, pending release.",workshop:"Install at workshop",workshopHint:"Appointment at the workshop partner for the part"}
 };
-const categories:Record<Locale,string[]>={
- de:["Bremsen","Filter","\u00d6l & Betriebsstoffe","Z\u00fcndung & Gl\u00fchkerzen","Fahrwerk & Lenkung","Elektrik & Batterie","Reifen & R\u00e4der","Beleuchtung","K\u00fchlung","Abgasanlage","Scheibenwischer","Karosserie"],
- nl:["Remmen","Filters","Olie & vloeistoffen","Ontsteking & gloeibougies","Onderstel & besturing","Elektra & accu","Banden & wielen","Verlichting","Koeling","Uitlaat","Ruitenwissers","Carrosserie"],
- fr:["Freins","Filtres","Huile & fluides","Allumage & bougies","Train roulant & direction","\u00c9lectricit\u00e9 & batterie","Pneus & roues","\u00c9clairage","Refroidissement","\u00c9chappement","Essuie-glaces","Carrosserie"],
- en:["Brakes","Filters","Oil & fluids","Ignition & glow plugs","Suspension & steering","Electrics & battery","Tyres & wheels","Lighting","Cooling","Exhaust","Wipers","Body"]
-};
+type Fit="fits"|"maybe"|"nofit";
+const PARTS=[
+ {k:"Bremsbeläge vorne",oe:"34 11 6 858 652",maker:"Beispiel Brake Co.",price:"49,90",fit:"fits" as Fit},
+ {k:"Ölfilter",oe:"11 42 8 507 683",maker:"Beispiel Filter AG",price:"12,50",fit:"fits" as Fit},
+ {k:"Zündkerze (4er-Satz)",oe:"12 12 0 037 607",maker:"Beispiel Ignite",price:"28,00",fit:"maybe" as Fit},
+ {k:"Starterbatterie 70 Ah EFB",oe:"61 21 8 720 018",maker:"Beispiel Power",price:"119,00",fit:"maybe" as Fit},
+ {k:"Scheibenwischer-Satz",oe:"61 61 2 160 773",maker:"Beispiel Clear",price:"24,90",fit:"fits" as Fit},
+ {k:"Luftfilter",oe:"13 71 8 507 320",maker:"Beispiel Filter AG",price:"18,40",fit:"nofit" as Fit}
+];
 
 export default function ShopOverview({locale,pages}:{locale:Locale;pages:PublicPage[]}){
  const t=copy[locale];
- const path=(id:string,fallback:string)=>pages.find(p=>p.id===id)?.path||fallback;
- const cat=path("tk-categories","/teileklar/kategorien");
- const entries=[
-  {id:"tk-fitment",label:t.byVehicle,hint:t.byVehicleHint,href:path("tk-fitment","/teileklar/fahrzeug-und-passung"),tid:"shop-entry-fahrzeug"},
-  {id:"tk-search",label:t.bySearch,hint:t.bySearchHint,href:path("tk-search","/teileklar/suche"),tid:"shop-entry-suche"},
-  {id:"tk-reifenrechner",label:t.tyres,hint:t.tyresHint,href:path("tk-reifenrechner","/teileklar/reifenrechner"),tid:"shop-entry-reifen"},
-  {id:"tk-batterie",label:t.battery,hint:t.batteryHint,href:path("tk-batterie","/teileklar/batterie-berater"),tid:"shop-entry-batterie"}
- ];
- return <section className="tk-tool" aria-labelledby="shop-overview-title" data-testid="shop-overview">
-  <div className="tk-tool-head"><span className="content-kicker">{t.kicker}</span><h2 id="shop-overview-title">{t.title}</h2><p>{t.intro}</p></div>
-  <p className="tk-subhead">{t.entry}</p>
-  <div className="tk-grid" style={{marginBottom:"var(--space-6)"}}>
-   {entries.map(e=><SiteLink key={e.id} href={e.href} className="tk-tile is-entry" data-testid={e.tid}><span className="tk-tile-label">{e.label}<span aria-hidden="true">→</span></span><small>{e.hint}</small></SiteLink>)}
+ const [hsn,setHsn]=useState("");
+ const [tsn,setTsn]=useState("");
+ const [vehicle,setVehicle]=useState<string|null>(null);
+ const [cart,setCart]=useState<string[]>([]);
+ const path=(id:string,fb:string)=>pages.find(p=>p.id===id)?.path||fb;
+ const checked=vehicle!==null;
+ const statusOf=(fit:Fit):Fit=>checked?fit:"maybe";
+ const badge:Record<Fit,{cls:string;label:string}>={fits:{cls:"is-ok",label:t.fits},maybe:{cls:"is-warn",label:t.maybe},nofit:{cls:"is-nofit",label:t.nofit}};
+ const submit=(e:React.FormEvent)=>{e.preventDefault();if(hsn.trim()&&tsn.trim())setVehicle(`${hsn.trim().toUpperCase()} / ${tsn.trim().toUpperCase()}`);};
+ const add=(k:string)=>setCart(c=>c.includes(k)?c:[...c,k]);
+ return <section className="tk-tool" aria-labelledby="shop-front-title" data-testid="shop-overview">
+  <div className="tk-tool-head"><span className="content-kicker">{t.kicker}</span><h2 id="shop-front-title">{t.title}</h2><p>{t.intro}</p></div>
+  <form className="tk-form" onSubmit={submit} data-testid="shop-vehicle-form" aria-label={t.vehicle}>
+   <p className="tk-subhead">{t.vehicle}</p>
+   <div className="tk-fieldrow">
+    <div className="tk-field"><label htmlFor="shop-hsn">{t.hsn}</label><input id="shop-hsn" data-testid="shop-hsn" inputMode="numeric" maxLength={4} value={hsn} onChange={e=>setHsn(e.target.value)} placeholder="0603"/></div>
+    <div className="tk-field"><label htmlFor="shop-tsn">{t.tsn}</label><input id="shop-tsn" data-testid="shop-tsn" maxLength={3} value={tsn} onChange={e=>setTsn(e.target.value)} placeholder="BID"/></div>
+    <div className="tk-field" style={{justifyContent:"flex-end"}}><button type="submit" className="tk-submit" data-testid="shop-check-fit">{t.check}</button></div>
+   </div>
+   <p className="tk-note" data-testid="shop-vehicle-status">{checked?`${t.chosen}: ${vehicle}`:t.none}{checked&&<> · <button type="button" className="tk-inline-btn" onClick={()=>{setVehicle(null);setHsn("");setTsn("");}} data-testid="shop-reset">{t.reset}</button></>}</p>
+  </form>
+  <p className="tk-subhead">{t.parts}</p>
+  <div className="tk-grid" data-testid="shop-product-grid">
+   {PARTS.map((p,i)=>{const st=statusOf(p.fit);const b=badge[st];const inCart=cart.includes(p.k);return (
+    <article key={i} className="tk-product" data-testid={`shop-product-${i}`}>
+     <span className={"tk-badge "+b.cls} data-testid={`shop-fit-${i}`}>{b.label}</span>
+     <h3 className="tk-product-name">{p.k}</h3>
+     <small>{t.maker}: {p.maker} ({t.ex})<br/>{t.oe}: {p.oe}</small>
+     <p className="tk-price" data-testid={`shop-price-${i}`}>{p.price} € <span className="tk-price-ex">· {t.ex}</span></p>
+     <button type="button" className="tk-submit tk-full" disabled={st==="nofit"||inCart} onClick={()=>add(p.k)} data-testid={`shop-add-${i}`}>{inCart?t.inCart:t.addToCart}</button>
+    </article>);})}
   </div>
-  <p className="tk-subhead">{t.categories}</p>
-  <div className="tk-grid" data-testid="shop-category-grid">
-   {categories[locale].map((name,i)=><SiteLink key={i} href={cat} className="tk-tile" data-testid={`shop-category-${i}`}><span className="tk-tile-label">{name}<span aria-hidden="true">→</span></span></SiteLink>)}
+  <p className="tk-note" data-testid="shop-price-note">{t.priceNote}</p>
+  <div className="tk-result" data-testid="shop-cart" style={{marginTop:"var(--space-5)"}}>
+   <p className="tk-subhead">{t.cart}</p>
+   <div className="tk-result-row"><dt>{t.items}</dt><dd data-testid="shop-cart-count">{cart.length}</dd></div>
+   <button type="button" className="tk-submit tk-full" disabled={cart.length===0} data-testid="shop-order">{t.order}</button>
+   <p className="tk-note">{t.orderNote}</p>
+   <div className="tk-actions"><SiteLink className="tk-link" href={path("tk-appointments","/teileklar/termine")} data-testid="shop-link-workshop">{t.workshop}<span aria-hidden="true">→</span></SiteLink></div>
+   <p className="tk-note">{t.workshopHint}</p>
   </div>
-  <p className="tk-note" style={{marginTop:"var(--space-5)"}}>{t.note}</p>
  </section>;
 }

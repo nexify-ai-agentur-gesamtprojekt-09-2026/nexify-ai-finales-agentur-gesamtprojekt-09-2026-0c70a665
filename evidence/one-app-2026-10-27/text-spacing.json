@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-01T02:14:44.719Z",
+  "observed_at": "2026-11-01T03:53:52.596Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "bdd8280579578f0f364e7824bc85e0a4a292dd791205a9d695b73fe9e6645cde",
     "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
@@ -56,12 +56,12 @@
     "apps/web/components/PublicOrientationChat.tsx": "b0e1ede1014d3568cd04d5fe6a7dce766084e2d849118b5eaed998ae37189675",
     "apps/web/components/PublicRequestFallback.tsx": "dc8ba5eb69dcec426d0419980d3a19ad0992318928428283c92183127ab837de",
     "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
-    "apps/web/components/ShopOverview.tsx": "58c5e6cb9cbdc0371f91d5e69dbc307ff061e39d01263ae65a8646173f1b8665",
+    "apps/web/components/ShopOverview.tsx": "a1035dba676f7d43b84efef5598d62a5861ed59dded262be36b9728cd9966548",
     "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
     "apps/web/components/SiteFooter.tsx": "de7dbd86cc91b1bb5cb70146164d75d453c835aba2aada55f5ac5dcd9cc3b860",
     "apps/web/components/SiteNavigation.tsx": "56f888cc552953a53dd18ed585dc794f66676d456ad5b7fdecd34ac0652c895f",
-    "apps/web/components/TeileklarTools.css": "41a8e9cb133596da05f19c53c2949604f56d685556a63c286b3b9c3d1879d5ca",
+    "apps/web/components/TeileklarTools.css": "fae05745810b7d06776b2d9416779cc4f74b773214d4cfd26b45eae60b1679e4",
     "apps/web/components/TrioScene.css": "3d34d0255c6297b079c13191295bf4432987964406010baa3264f6df1b67e6f1",
     "apps/web/components/TrioScene.tsx": "47b098e371f2962c36c528cfdff90ae3c024f9304495dafdde37790aaef6b29d",
     "apps/web/components/TyreCalculator.tsx": "b80f1b49f5ec8992b9e30e57c0953d81b4dc4822bdfdf54ca08bffc6efa2fc85",
@@ -939,7 +939,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 484,
+        "count": 501,
         "all_doubled": true
       },
       "overflow": false,
