@@ -1,34 +1,34 @@
 [
   {
-    "content": "ShopOverview-Komponente (Kategorie-/Einstiegs-Kacheln)",
+    "content": "Produktdetailseite: Fitment-Liste, Lieferzeit, Mengenwahl, OE/SKU/EAN, Grundpreis",
     "status": "completed"
   },
   {
-    "content": "TyreCalculator-Komponente (Reifenrechner interaktiv)",
+    "content": "Werkstattsuche nach PLZ, verknüpft mit gewähltem Teil (reale workshops.json)",
     "status": "completed"
   },
   {
-    "content": "BatteryAdvisor-Komponente (Batterie-Berater-Dialog)",
+    "content": "Kassenstrecke Muster: Adresse→Versand→Zahlung→Prüfen (WCAG 2.2, Widerruf)",
     "status": "completed"
   },
   {
-    "content": "PublicContent.tsx: Komponenten nach page.id einbinden",
+    "content": "Werkstatt-Netto-Konto: Netto statt Brutto",
     "status": "completed"
   },
   {
-    "content": "Evidenz (text-spacing) regen + acceptance/reconciliation resync",
+    "content": "Reifenrechner: Lastindex + Felgenbreite; Batterie-Berater: Einbaumaße + Pollage",
     "status": "completed"
   },
   {
-    "content": "make test 620 + make check 0/0 grün",
+    "content": "Sie-Form-Texte site-map.json (3 Seiten) + Evidenz-Kaskade",
     "status": "completed"
   },
   {
-    "content": "Funktionale + Mobile-Verifikation (Reifen-Math, Batterie-Logik, Shop 390px)",
+    "content": "REA proaktiv genutzt: Prototyp-App analysiert, USt.-Modell (rechenkern) umgesetzt",
     "status": "completed"
   },
   {
-    "content": "Richere Sie-Form-Sektionstexte (Folgeauftrag, voller Cascade) - offen",
-    "status": "pending"
+    "content": "Endabnahme: make test 620 OK, ds-audit DIN/ISO/WCAG 0/0, E2E verifiziert, committet",
+    "status": "completed"
   }
 ]
