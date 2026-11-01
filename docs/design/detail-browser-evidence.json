@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-01T05:26:45.800Z",
+  "recorded_at": "2026-11-01T06:20:13.831Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -51,7 +51,7 @@
   "passed": true,
   "scope": "Fresh local critical subset only; actual browser and deterministic Web handler SSE with simulated session404; no provider, production or full accessibility acceptance. Public route list is inventory, not an assertion every route was revisited here.",
   "source_sha256": {
-    "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
+    "apps/site/src/Auth.tsx": "623bb693a3470dfeae7cedce9eb54677ffa3d7bbc711d780536b39fa08105fbd",
     "apps/site/src/main.tsx": "4f403bcae142b2de1f79bf552d086d6cb143b9a0f665cab1194ecb61f6a151f2",
     "apps/web/app/globals.css": "c4b3f0561a5d9e1786d516c6db04de4b9ed1e1053dfb5e721de6082a1d4c0bfc",
     "apps/web/components/HomeContent.tsx": "fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136",
@@ -143,7 +143,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-01T05:26:45.800Z",
+    "recorded_at": "2026-11-01T06:20:13.831Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

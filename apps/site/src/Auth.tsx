@@ -1,5 +1,4 @@
 import {Component,lazy,Suspense,useState,type ReactNode} from "react";
-import {deDE,nlNL,frFR,enUS} from "@clerk/localizations";
 import {SiteLink} from "../../web/components/Router";
 import {useUI} from "../../web/components/Workspace";
 import type {Locale} from "../../web/lib/i18n";
@@ -11,7 +10,6 @@ const copy={
  fr:{loading:"Préparation de la connexion…",disabled:"La connexion n’est pas encore activée ici.",unavailable:"La connexion est momentanément indisponible.",help:"Ne saisissez aucun mot de passe. Contactez-nous pour toute question.",signedIn:"Vous êtes connecté.",signOut:"Se déconnecter",signingOut:"Déconnexion en cours…",signOutError:"La déconnexion n’a pas pu être confirmée. Réessayez.",disclaimer:"Un compte n’accorde automatiquement aucun droit d’administration ni accès aux données professionnelles."},
  en:{loading:"Preparing sign-in…",disabled:"Sign-in is not yet activated here.",unavailable:"Sign-in is momentarily unavailable.",help:"No credentials are requested. Use the contact page if you have questions.",signedIn:"You are signed in.",signOut:"Sign out",signingOut:"Signing out…",signOutError:"Sign-out could not be confirmed. Please try again.",disclaimer:"An account grants no automatic admin role and no access to tenant or business data."}
 };
-const localizations={de:deDE,nl:nlNL,fr:frFR,en:enUS};
 type Mode="login"|"signup";
 function AuthStatus({kind}:{kind:"loading"|"disabled"|"unavailable"}){
  const {locale}=useUI();const text=copy[locale];
@@ -23,7 +21,10 @@ class AuthErrorBoundary extends Component<{children:ReactNode;fallback:ReactNode
  render(){return this.state.failed?this.props.fallback:this.props.children;}
 }
 const ClerkBoundary=lazy(async()=>{
- const {ClerkProvider,SignIn,SignUp,useAuth,useClerk}=await import("@clerk/react");
+ const [{ClerkProvider,SignIn,SignUp,useAuth,useClerk},{localizations}]=await Promise.all([
+  import("@clerk/react"),
+  import("./clerk-localizations")
+ ]);
  function AccountPanel({mode,locale}:{mode:Mode;locale:Locale}){
   const {isLoaded,isSignedIn}=useAuth();const {signOut}=useClerk();
   const [busy,setBusy]=useState(false);const [failed,setFailed]=useState(false);const text=copy[locale];

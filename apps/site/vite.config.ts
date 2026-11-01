@@ -9,5 +9,8 @@ export default defineConfig(({mode})=>({
   server:{host:"127.0.0.1",port:3004,strictPort:true,proxy:{"/api/agent-runtime-status":{target:"http://127.0.0.1:3005",changeOrigin:true},"/api/agent-chat":{target:"http://127.0.0.1:3005",changeOrigin:true},"/api":{target:"http://127.0.0.1:3003",changeOrigin:true}}},
   preview:{host:"127.0.0.1",port:3004,strictPort:true,proxy:{"/api/agent-runtime-status":{target:"http://127.0.0.1:3005",changeOrigin:true},"/api/agent-chat":{target:"http://127.0.0.1:3005",changeOrigin:true},"/api":{target:"http://127.0.0.1:3003",changeOrigin:true}}},
   define:{"import.meta.env.VITE_RELEASE_SHA":JSON.stringify(maps.release),"import.meta.env.VITE_APP_ENV":JSON.stringify(process.env.VERCEL_ENV||process.env.NEXIFY_APP_ENV||"")},
-  build:{sourcemap:maps.enabled?"hidden":false,...(mode==="standalone"?{rolldownOptions:{output:{codeSplitting:false}}}:{})}
+  build:{sourcemap:maps.enabled?"hidden":false,...(mode==="standalone"?{rolldownOptions:{output:{codeSplitting:false}}}:{rolldownOptions:{output:{codeSplitting:{groups:[
+    {name:"react-vendor",test:/[\\/]node_modules[\\/](react|react-dom|scheduler|react-is|use-sync-external-store)[\\/]/,priority:40},
+    {name:"clerk-vendor",test:/[\\/]node_modules[\\/]@clerk[\\/]/,priority:30}
+  ]}}}})}
 }));
