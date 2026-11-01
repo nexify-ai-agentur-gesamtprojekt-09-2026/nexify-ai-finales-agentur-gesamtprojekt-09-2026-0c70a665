@@ -65,6 +65,13 @@ python3 docs/pruefverfahren/verify-logik.py      # Erwartung: 24/24, Exit 0
 # Frontend/UI/UX/Design/Technik-Prüfung (statisch, deterministisch)
 python3 docs/pruefverfahren/verify-frontend.py   # Erwartung: 22/22, Exit 0
 
+# Kontrast-Messprotokoll (WCAG 1.4.3/1.4.11) aus design-tokens.json
+python3 docs/pruefverfahren/verify-kontrast.py   # Erwartung: 13/13, Exit 0
+
+# Technik-Kennzahlen (Lighthouse-Methodik, Chromium gegen Produktiv-Build dist):
+#   apps/site produktiv bauen -> dist statisch servieren -> Chromium misst
+#   FCP/TTFB/DCL/Load, Bytes/Requests, SEO-/Best-Practice-/A11y-Signale, Konsolenfehler
+
 # Browser-Evidenz (echter Lauf, deterministisch, Hash-gebunden)
 #   text-spacing (Reflow/Zoom 200 %), critical (A11y/Fokus), legal-footer (Vite+Next)
 #   via Toolchain-Node + lokalem Playwright (apps/site/tests/browser-*.mjs)
@@ -157,9 +164,48 @@ Legende Ergebnis: **✓ bestanden**. Nachweisquelle = ausgeführter Automatismus
 
 ---
 
-### Gruppe I — UI/UX-Interaktionsprinzipien (`ISO 9241-110`, `ISO-HCD`, `ISO-USABILITY`)
+### Gruppe B-K — Kontrast-Messprotokoll (`WCAG` SC 1.4.3/1.4.11; gemessen aus `config/design-tokens.json`)
 
-| PF | Prinzip (ISO 9241-110) | Umsetzung im Prüfling | Nachweis | Erg. |
+Methode: WCAG-Relativluminanz, Verhältnis `(L_hell+0,05)/(L_dunkel+0,05)`. Alle tatsächlich verwendeten Token-Paare; Schwellen: Normaltext ≥ 4,5:1, Groß-/Nicht-Text ≥ 3:1. Nachweis: `verify-kontrast.py` (13/13).
+
+| Paar | FG | BG | Ratio | Soll | Erg. |
+|---|---|---|---|---|---|
+| Primärtext auf Canvas | #FFFFFF | #080A0F | 19,80 | 4,5 | ✓ |
+| Sekundärtext auf Canvas | #E3E6E3 | #080A0F | 15,74 | 4,5 | ✓ |
+| Tertiärtext (small) auf Canvas | #BCC1BD | #080A0F | 10,84 | 4,5 | ✓ |
+| Gedämpft auf Canvas | #9CA29E | #080A0F | 7,61 | 4,5 | ✓ |
+| Primärtext auf Karte 850 | #FFFFFF | #0F131A | 18,61 | 4,5 | ✓ |
+| Sekundärtext auf Karte 850 | #E3E6E3 | #0F131A | 14,79 | 4,5 | ✓ |
+| Lime Link/Recommend auf 900 | #C0EE38 | #080A0F | 14,64 | 4,5 | ✓ |
+| Cyan-Akzent | #38BDF8 | #080A0F | 9,24 | 3,0 | ✓ |
+| Badge Erfolg | #6FE3CF | #080A0F | 12,79 | 4,5 | ✓ |
+| Badge Warnung | #FFC24A | #080A0F | 12,32 | 4,5 | ✓ |
+| Badge/Fehlertext | #FF8A7A | #080A0F | 8,64 | 4,5 | ✓ |
+| Button-Text auf Lime (CTA) | #080A0F | #C0EE38 | 14,64 | 4,5 | ✓ |
+| Fokusrahmen Lime | #C0EE38 | #080A0F | 14,64 | 3,0 | ✓ |
+
+Ergebnis: **13/13 bestanden**, kleinster Normaltext-Kontrast 7,61:1 (deutlich über AA-Schwelle 4,5:1).
+
+### Gruppe L — Lighthouse-Technikkennzahlen (`ISO/IEC 25010` Leistungsnachweis)
+
+Methode: Produktiv-Build (`vite build`, `apps/site/dist`) statisch serviert, gemessen mit Chromium/Playwright nach Lighthouse-Methodik (Navigation-Timing, Paint-Timing, Transfergröße, Request-Zahl, SEO-/Best-Practice-/A11y-Signale). Viewport 1280×900. **Absolutwerte ohne Netzwerk-Drosselung (lokal) — als relativer Leistungsnachweis, nicht als zertifizierter Lighthouse-Score.**
+
+| Seite | FCP (ms) | TTFB (ms) | DCL (ms) | Load (ms) | Transfer (KB) | Requests | DOM-Knoten | Konsolenfehler |
+|---|---|---|---|---|---|---|---|---|
+| /teileklar/shop | 276 | 5 | 61 | 62 | ~1710 | 11 | 587 | 0 |
+| /teileklar/reifenrechner | 216 | 1 | 59 | 59 | ~1710 | 11 | 515 | 0 |
+| /teileklar/batterie-berater | 196 | 2 | 57 | 57 | ~1710 | 11 | 498 | 0 |
+
+**SEO-Signale (alle Seiten):** `title` gesetzt (51–61 Zeichen), `meta description` vorhanden, `html[lang=de]`, genau **1× `h1`**, `viewport`-Meta vorhanden, kein Quirks-Mode. **Best-Practice/A11y:** 0 Konsolenfehler, Landmarks (`main`/`nav`/`header`) vorhanden, **0 Bilder ohne `alt`**.
+
+| 25010-Merkmal | Kennzahl | Bewertung |
+|---|---|---|
+| Leistungseffizienz | FCP < 300 ms, Load < 100 ms (lokal) | ✓ erfüllt; **Caveat:** JS-Bundle > 500 KB → Code-Splitting empfohlen |
+| Zuverlässigkeit | 0 Konsolenfehler über alle Seiten | ✓ |
+| Funktionale Eignung (SEO) | Titel/Description/lang/h1/viewport | ✓ (Empfehlung: `canonical` ergänzen) |
+| Benutzbarkeit/A11y | Landmarks, alt-Texte, 1× h1 | ✓ |
+
+### Gruppe I — UI/UX-Interaktionsprinzipien (`ISO 9241-110`, `ISO-HCD`, `ISO-USABILITY`)| PF | Prinzip (ISO 9241-110) | Umsetzung im Prüfling | Nachweis | Erg. |
 |---|---|---|---|---|
 | I1 | Aufgabenangemessenheit | Fitment-first: erst Fahrzeug, dann Teil, dann Kauf | `verify-frontend` UI-X1; E2E | ✓ |
 | I2 | Selbstbeschreibungsfähigkeit | sichtbarer Fahrzeug-/Passungsstatus, `aria-live` | UI-X1 | ✓ |
@@ -211,7 +257,7 @@ Vollständiger Prozess ohne Runtime-Fehler verifiziert:
 | `implementation_reference` | `apps/web/components/{ShopOverview,ShopCheckout,ShopWorkshopFinder,TyreCalculator,BatteryAdvisor}.tsx`, `teileklar-shop-data.ts`, `TeileklarTools.css`; `config/site-map.json` |
 | `test_method_and_inputs` | `make test`, `make check`, `verify-logik.py`, `browser-*.mjs` (echter Browser), Playwright-E2E |
 | `execution_time_and_environment` | 2026-11-01Z, Node 22.23.4, Chromium (lokal), Python 3 |
-| `actual_result_and_failures` | `make test` 620 OK; `make check` 0/0, Selbsttest 10/10; `verify-logik` 24/24; `verify-frontend` 22/22; E2E 0 Fehler; ds-audit 0/0 |
+| `actual_result_and_failures` | `make test` 620 OK; `make check` 0/0, Selbsttest 10/10; `verify-logik` 24/24; `verify-frontend` 22/22; `verify-kontrast` 13/13; Technik-Kennzahlen (FCP 196–276 ms, 0 Konsolenfehler); E2E 0 Fehler; ds-audit 0/0 |
 | `evidence_location_and_hash` | `evidence/one-app-2026-10-27/text-spacing.json` (02c92ea7…), `critical-browser-fresh.json` (8c673654…), `evidence/legal-footer-2026-10-28/{browser,next-browser}.json` (46dd1899…/525697…) |
 | `reviewer_and_owner` | Erbringende Instanz: Build-Agent; **inhaltliche Owner-Freigabe (Pascal Courbois) ausstehend** für kommerzielle/Live-Gates |
 | `resolved_blocking_findings` | keine offenen blockierenden Befunde im Prüfumfang |
@@ -224,3 +270,39 @@ Vollständiger Prozess ohne Runtime-Fehler verifiziert:
 - Quelltreue Gestaltung ist von Normkonformität getrennt zu bewerten.
 - Konformitätsaussage erfordert vollständigen Geltungsbereich + Evidenz + Owner-Review je konkretem Release.
 - **Offene Gates:** Reale Preise/Bestellungen/Zahlungen (Revolut), Live-BigBuy-Katalog und bindende Rechtstexte erst nach ausdrücklicher Freigabe durch den Owner.
+
+---
+
+## 8. Owner-Freigabe-Record (Reviewer/Owner-Zeichnung)
+
+Gemäß `release_gate` erfordert jede Freigabe eine Owner-Zeichnung. **Status: AUSSTEHEND** — wird eingetragen, sobald erteilt.
+
+| Feld | Eintrag |
+|---|---|
+| Owner | Pascal Courbois |
+| Rolle | Inhaltliche/kommerzielle Freigabe (E1/E3/E4) |
+| Prüfumfang | TEILEKLAR Shop (Muster): Produktdetail, Werkstattsuche, Muster-Kasse, Netto-Konto, Reifenrechner, Batterie-Berater |
+| Freigabe-Status | ☐ ausstehend ☐ freigegeben ☐ abgelehnt |
+| Freigabe-Datum (UTC) | _— (bei Erteilung eintragen)_ |
+| Freigegebener Release-Commit | _— (Commit-Hash bei Erteilung)_ |
+| Bedingungen/Auflagen | _— (z. B. nur Muster, keine Live-Zahlung)_ |
+| Signatur/Referenz | _— (Zeichnungsnachweis)_ |
+
+> Vorgehen bei Erteilung: Owner nennt Datum, Commit-Hash und etwaige Auflagen; diese werden hier und im Feld `reviewer_and_owner` (Abschnitt 6) eingetragen; anschließend `make test`/`make check` am freigegebenen Commit erneut ausführen und die Evidenz-Hashes aktualisieren.
+
+---
+
+## 9. Live-Gate-Prüfspezifikation (BigBuy / Revolut) — **STATUS: GESPERRT**
+
+Diese Prüffälle sind spezifiziert, aber **nicht ausgeführt**: Gates E1/E3/E4 geschlossen; Aktivierung erst nach Owner-Freigabe (Abschnitt 8). Kein Live-Aufruf ohne Freigabe (ISMS-02).
+
+| PF | Live-Gate | Prüfmethode (bei Aktivierung) | Akzeptanzkriterium | Status |
+|---|---|---|---|---|
+| LG1 | **BigBuy-Katalog** (echte Artikel/Preise/Bestand) | `/api/shop/catalog` gegen freigegebenen Snapshot; Felder `buyable`/`price`/`stock`/`oe`/`ean` prüfen | Katalog liefert freigegebene Daten, `commercial_approval=true`, Preise mit Herkunft/Stand | GESPERRT |
+| LG2 | **Preis-/Steuerfreigabe** | USt. nach Lieferland (DE 19 %/NL 21 %/OSS, Reverse-Charge) gegen `rechenkern`; Grundpreis (PAngV) | Preise + USt. korrekt und freigegeben; keine „Klärung nötig" mehr | GESPERRT |
+| LG3 | **Revolut-Zahlung** | Zahlungsintent in Sandbox → autorisiert → Status-Callback; Idempotenz, Fehlerpfade | Erfolg/Abbruch/Fehler korrekt; keine Doppelbelastung; Beleg erzeugt | GESPERRT |
+| LG4 | **Bestell-/Widerrufsrechtstexte** | Verbindliche AGB/Widerruf/Datenschutz statt Muster | Rechtstexte final, geprüft, versioniert | GESPERRT |
+| LG5 | **Werkstatt-Netto-Konto (B2B live)** | Konto-Login, USt-IdNr.-Validierung (VIES), Reverse-Charge | Netto nur für verifizierte Werkstätten; USt-IdNr. geprüft | GESPERRT |
+| LG6 | **DSGVO-Kassendaten** | Datenminimierung, Aufbewahrung/Löschung, AV-Verträge (Art. 25/32) | Nur erforderliche Daten; Lösch-/Aufbewahrungskonzept belegt | GESPERRT |
+
+> Aktivierungsfolge: Owner-Freigabe (Abschnitt 8) → Secrets/Keys über sichere Verwaltung → Sandbox-Nachweis LG1–LG6 → erneute Evidenz-Regeneration und `make test`/`make check` → Produktivschaltung.
