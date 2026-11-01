@@ -18,6 +18,7 @@ const copy = {
     back: "Zurück", next: "Weiter", place: "Zahlungspflichtig bestellen",
     terms: "Ich habe die AGB und die Widerrufsbelehrung (14 Tage) gelesen und akzeptiere sie.",
     priceNote: "Alle Preise inkl. gesetzlicher USt. und zzgl. Versand, sofern nicht anders angegeben. Beispielwerte – zur Freigabe.",
+    taxNote: "USt. nach Lieferland (DE 19 %, NL 21 %) im OSS-Verfahren; für Werkstatt-Konten mit gültiger USt-IdNr. ist Reverse-Charge möglich. Muster-Werte.",
     withdrawalNote: "Verbraucher haben ein 14-tägiges Widerrufsrecht. Ausnahmen gelten u. a. für versiegelte Waren. Dies ist ein Muster-Shop.",
     musterBanner: "Muster-Kasse: Es wird keine echte Bestellung ausgelöst, keine Lieferung veranlasst und keine Zahlung eingezogen.",
     required: "Bitte füllen Sie die Pflichtfelder aus.",
@@ -36,6 +37,7 @@ const copy = {
     back: "Terug", next: "Verder", place: "Bestelling met betaalplicht",
     terms: "Ik heb de voorwaarden en het herroepingsrecht (14 dagen) gelezen en accepteer ze.",
     priceNote: "Alle prijzen incl. wettelijke btw en excl. verzending, tenzij anders vermeld. Voorbeeldwaarden – ter vrijgave.",
+    taxNote: "Btw volgens leverland (DE 19 %, NL 21 %) via OSS; voor werkplaatsaccounts met geldig btw-nr. is de verleggingsregeling mogelijk. Demowaarden.",
     withdrawalNote: "Consumenten hebben 14 dagen herroepingsrecht. Uitzonderingen gelden o.a. voor verzegelde waren. Dit is een demoshop.",
     musterBanner: "Demo-kassa: er wordt geen echte bestelling, levering of betaling uitgevoerd.",
     required: "Vul de verplichte velden in.",
@@ -54,6 +56,7 @@ const copy = {
     back: "Retour", next: "Continuer", place: "Commande avec obligation de paiement",
     terms: "J’ai lu et j’accepte les CGV et le droit de rétractation (14 jours).",
     priceNote: "Tous les prix TTC et hors livraison, sauf indication contraire. Valeurs d’exemple – à valider.",
+    taxNote: "TVA selon le pays de livraison (DE 19 %, NL 21 %) via OSS ; pour les comptes atelier avec n° de TVA valide, l’autoliquidation est possible. Valeurs démo.",
     withdrawalNote: "Les consommateurs disposent d’un droit de rétractation de 14 jours. Des exceptions s’appliquent. Boutique démo.",
     musterBanner: "Caisse démo : aucune commande, livraison ni paiement réels ne sont déclenchés.",
     required: "Veuillez remplir les champs obligatoires.",
@@ -72,6 +75,7 @@ const copy = {
     back: "Back", next: "Next", place: "Order with obligation to pay",
     terms: "I have read and accept the terms and the 14-day right of withdrawal.",
     priceNote: "All prices incl. statutory VAT and plus shipping unless stated otherwise. Example values – pending release.",
+    taxNote: "VAT by delivery country (DE 19%, NL 21%) via OSS; for workshop accounts with a valid VAT ID, reverse charge is possible. Demo values.",
     withdrawalNote: "Consumers have a 14-day right of withdrawal. Exceptions apply. This is a demo shop.",
     musterBanner: "Demo checkout: no real order, delivery or payment is triggered.",
     required: "Please complete the required fields.",
@@ -215,6 +219,7 @@ export default function ShopCheckout({locale, lines, netto, terminePath, onBack,
         <div className="tk-result-row"><dt><strong>{t.total}</strong></dt><dd data-testid="shop-checkout-total"><strong>{money(grossTotal, locale)}</strong></dd></div>
       </dl>
       <p className="tk-note">{t.priceNote}</p>
+      <p className="tk-note" data-testid="shop-tax-note">{t.taxNote}</p>
 
       <div className="tk-actions">
         <button type="button" className="tk-link" onClick={goBack} data-testid="shop-checkout-back">{t.back}</button>
