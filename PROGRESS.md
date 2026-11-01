@@ -1360,3 +1360,29 @@ target null. Kein Customdomain-/Produktivwechsel. Nur für den neuen Zweig wird
 dieselbe Sperre jetzt auch in apps/web/vercel.json geführt. Fertige Vorschau
 nicht entfernt, keine Entfernungsmöglichkeit im verbundenen Werkzeugkatalog.
 Beobachtung und Grenzen im selben Integrationsbericht nachgetragen.
+
+
+## Gesamtplan v3 Revision 2 · Teamnachtrag · 01.11.2026
+
+Die sieben Schritte der vollständig gelesenen Nutzervorlage auf die bestehenden
+neun operativen Profile und den getrennten Katalog aus 44 Enterprise-Rollen/
+44 Original-SMB-Skills angepasst. Kein neues Feature aktiviert; F-009 bleibt
+der einzige aktive Featurestand. AGENTS.md des parallelen Codex nicht verändert.
+Vier begrenzte Recherche-/Prüfaufträge ausgeführt, statischer Teamkandidat mit
+17 Tests und gezielter unabhängiger Gegenprüfung; vier Auditlücken behoben.
+Vorhandener LocalControl source.verify-Auftrag einmal ausgeführt und mit
+unabhängigem Receipt zu verified_complete/local_only geschlossen. Das ist kein
+Hermes-, Modell-, Servertenant- oder Brain-Ausführungsbeleg. REA6.8.0 schema-first:
+Checker-Bytecode gemessen, vollständiges Evidence-Bundle exakt rückgelesen;
+keine Runtimeabnahme. Details: docs/architecture/team-runtime-adaptation-20261101.md
+und docs/reviews/agent-team-20261101/report.json.
+
+Browser-Plugin tatsächlich versucht: originating browser context fehlt; native
+Codex-Code-Review-Einstellung daher weiter ungeprüft. Hermes v0.22.5 an Commit
+bf0203a794a07aac3ff764972ab9087baa4e4f4e gebunden, nicht installiert. Lokaler
+Python3.12-Executor belegt keine unterstützte Hermes-Python3.14-Hostumgebung.
+Aktueller Chat-Handler und 9router-Anschluss sind noch unverbunden.
+make check scheitert im partiellen kanonischen Checkout am fehlenden ds-audit-cli;
+make test wegen vorgelagerter Sperre nicht gestartet. Isolierte Tests ersetzen
+die offene Gesamt-/E2E-/native Reviewabnahme nicht. Keine CI-/Provider-/
+Public-/DNS-/Scheduleränderung, keine Drittmitteilungen oder Brainübernahme.
