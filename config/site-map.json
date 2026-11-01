@@ -5623,10 +5623,10 @@
             "en": "How to use the shop"
           },
           "body": {
-            "de": "Beschreiben Sie Ihr Fahrzeug und das Anliegen. Wir ordnen das passende Teil ein, klären die Passung und schlagen bei Bedarf einen Werkstatttermin vor. Verfügbarkeit und Preis besprechen wir individuell, sobald freigegebene Katalogdaten vorliegen.",
-            "nl": "Beschrijf uw voertuig en uw vraag. Wij bepalen het passende onderdeel, verduidelijken de pasvorm en stellen indien nodig een werkplaatsafspraak voor. Beschikbaarheid en prijs bespreken we individueel zodra er vrijgegeven catalogusgegevens zijn.",
-            "fr": "Décrivez votre véhicule et votre besoin. Nous identifions la pièce adaptée, clarifions la compatibilité et proposons au besoin un rendez-vous en atelier. Disponibilité et prix sont discutés au cas par cas dès que des données catalogue validées sont disponibles.",
-            "en": "Describe your vehicle and your request. We identify the right part, clarify the fit and, if needed, suggest a workshop appointment. Availability and price are discussed individually once approved catalog data is available."
+            "de": "Beschreiben Sie Ihr Fahrzeug und das Anliegen. Wir ordnen das passende Teil ein, klären die Passung und schlagen bei Bedarf einen Werkstatttermin vor. Verfügbarkeit und Preis besprechen wir individuell, sobald freigegebene Katalogdaten vorliegen. Im interaktiven Fitment-Check unten wählen Sie Ihr Fahrzeug, sehen je Beispielartikel „passt / prüfen / passt nicht“, legen Teile in einen Muster-Warenkorb und finden über die Postleitzahl eine Werkstatt für den Einbau.",
+            "nl": "Beschrijf uw voertuig en uw vraag. Wij bepalen het passende onderdeel, verduidelijken de pasvorm en stellen indien nodig een werkplaatsafspraak voor. Beschikbaarheid en prijs bespreken we individueel zodra er vrijgegeven catalogusgegevens zijn. In de interactieve fitment-check hieronder kiest u uw voertuig, ziet u per voorbeeldartikel „past / controleren / past niet“, legt u onderdelen in een demo-winkelwagen en vindt u via de postcode een werkplaats voor de montage.",
+            "fr": "Décrivez votre véhicule et votre besoin. Nous identifions la pièce adaptée, clarifions la compatibilité et proposons au besoin un rendez-vous en atelier. Disponibilité et prix sont discutés au cas par cas dès que des données catalogue validées sont disponibles. Dans le vérificateur de compatibilité ci-dessous, choisissez votre véhicule, voyez par article « compatible / à vérifier / non compatible », ajoutez des pièces à un panier démo et trouvez un atelier par code postal.",
+            "en": "Describe your vehicle and your request. We identify the right part, clarify the fit and, if needed, suggest a workshop appointment. Availability and price are discussed individually once approved catalog data is available. In the interactive fitment check below you select your vehicle, see per sample item “fits / check / no fit”, add parts to a demo cart and find a workshop by postal code."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
@@ -5717,10 +5717,10 @@
         "en": "Tyre calculator: compare tyre sizes"
       },
       "summary": {
-        "de": "Der Reifenrechner hilft Ihnen, Reifengrößen nach gängiger Kennzeichnung einzuordnen und Alternativen zu vergleichen. Breite, Querschnitt und Felgendurchmesser werden nach ISO-Reifenkennzeichnung gelesen. Lassen Sie die Freigängigkeit und Zulässigkeit vor dem Kauf fachlich bestätigen.",
-        "nl": "De bandencalculator helpt u bandenmaten volgens de gangbare markering in te delen en alternatieven te vergelijken. Breedte, hoogte-breedteverhouding en velgdiameter worden volgens de ISO-bandenmarkering gelezen. Laat vrijloop en toelaatbaarheid vóór de aankoop vakkundig bevestigen.",
-        "fr": "Le calculateur de pneus vous aide à classer les dimensions selon le marquage usuel et à comparer des alternatives. Largeur, rapport d’aspect et diamètre de jante sont lus selon le marquage ISO des pneus. Faites confirmer le dégagement et l’homologation par un professionnel avant l’achat.",
-        "en": "The tyre calculator helps you classify tyre sizes by common marking and compare alternatives. Width, aspect ratio and rim diameter are read per ISO tyre marking. Have clearance and approval professionally confirmed before purchase."
+        "de": "Der Reifenrechner hilft Ihnen, Reifengrößen nach gängiger Kennzeichnung einzuordnen und Alternativen zu vergleichen. Breite, Querschnitt und Felgendurchmesser werden nach ISO-Reifenkennzeichnung gelesen. Zusätzlich sehen Sie die zulässige Felgenbreite und – über den Lastindex – die Tragfähigkeit je Reifen. Lassen Sie die Freigängigkeit und Zulässigkeit vor dem Kauf fachlich bestätigen.",
+        "nl": "De bandencalculator helpt u bandenmaten volgens de gangbare markering in te delen en alternatieven te vergelijken. Breedte, hoogte-breedteverhouding en velgdiameter worden volgens de ISO-bandenmarkering gelezen. Daarnaast ziet u de toegestane velgbreedte en – via de belastingsindex – het draagvermogen per band. Laat vrijloop en toelaatbaarheid vóór de aankoop vakkundig bevestigen.",
+        "fr": "Le calculateur de pneus vous aide à classer les dimensions selon le marquage usuel et à comparer des alternatives. Largeur, rapport d’aspect et diamètre de jante sont lus selon le marquage ISO des pneus. Vous voyez en plus la largeur de jante admissible et – via l’indice de charge – la charge par pneu. Faites confirmer le dégagement et l’homologation par un professionnel avant l’achat.",
+        "en": "The tyre calculator helps you classify tyre sizes by common marking and compare alternatives. Width, aspect ratio and rim diameter are read per ISO tyre marking. You also see the allowed rim width and – via the load index – the load capacity per tyre. Have clearance and approval professionally confirmed before purchase."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5766,10 +5766,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Der Reifenrechner hilft Ihnen, Reifengrößen nach gängiger Kennzeichnung einzuordnen und Alternativen zu vergleichen. Breite, Querschnitt und Felgendurchmesser werden nach ISO-Reifenkennzeichnung gelesen. Lassen Sie die Freigängigkeit und Zulässigkeit vor dem Kauf fachlich bestätigen.",
-          "nl": "De bandencalculator helpt u bandenmaten volgens de gangbare markering in te delen en alternatieven te vergelijken. Breedte, hoogte-breedteverhouding en velgdiameter worden volgens de ISO-bandenmarkering gelezen. Laat vrijloop en toelaatbaarheid vóór de aankoop vakkundig bevestigen.",
-          "fr": "Le calculateur de pneus vous aide à classer les dimensions selon le marquage usuel et à comparer des alternatives. Largeur, rapport d’aspect et diamètre de jante sont lus selon le marquage ISO des pneus. Faites confirmer le dégagement et l’homologation par un professionnel avant l’achat.",
-          "en": "The tyre calculator helps you classify tyre sizes by common marking and compare alternatives. Width, aspect ratio and rim diameter are read per ISO tyre marking. Have clearance and approval professionally confirmed before purchase."
+          "de": "Der Reifenrechner hilft Ihnen, Reifengrößen nach gängiger Kennzeichnung einzuordnen und Alternativen zu vergleichen. Breite, Querschnitt und Felgendurchmesser werden nach ISO-Reifenkennzeichnung gelesen. Zusätzlich sehen Sie die zulässige Felgenbreite und – über den Lastindex – die Tragfähigkeit je Reifen. Lassen Sie die Freigängigkeit und Zulässigkeit vor dem Kauf fachlich bestätigen.",
+          "nl": "De bandencalculator helpt u bandenmaten volgens de gangbare markering in te delen en alternatieven te vergelijken. Breedte, hoogte-breedteverhouding en velgdiameter worden volgens de ISO-bandenmarkering gelezen. Daarnaast ziet u de toegestane velgbreedte en – via de belastingsindex – het draagvermogen per band. Laat vrijloop en toelaatbaarheid vóór de aankoop vakkundig bevestigen.",
+          "fr": "Le calculateur de pneus vous aide à classer les dimensions selon le marquage usuel et à comparer des alternatives. Largeur, rapport d’aspect et diamètre de jante sont lus selon le marquage ISO des pneus. Vous voyez en plus la largeur de jante admissible et – via l’indice de charge – la charge par pneu. Faites confirmer le dégagement et l’homologation par un professionnel avant l’achat.",
+          "en": "The tyre calculator helps you classify tyre sizes by common marking and compare alternatives. Width, aspect ratio and rim diameter are read per ISO tyre marking. You also see the allowed rim width and – via the load index – the load capacity per tyre. Have clearance and approval professionally confirmed before purchase."
         },
         "canonical_path": "/teileklar/reifenrechner",
         "canonical_origin": null,
@@ -5882,10 +5882,10 @@
             "en": "Clarify technology and installation"
           },
           "body": {
-            "de": "Batterietyp und Einbau hängen von der Bordnetz-Technik ab; ein Wechsel kann eine Anlernung erfordern. Nennen Sie uns Ihr Fahrzeug, dann benennen wir die passenden Batterietypen und klären, ob ein Werkstatttermin für den Einbau sinnvoll ist.",
-            "nl": "Accutype en montage hangen af van de boordnettechniek; vervangen kan aanleren vereisen. Noem uw voertuig, dan benoemen wij de passende accutypen en klaren we of een werkplaatsafspraak voor de montage zinvol is.",
-            "fr": "Le type de batterie et le montage dépendent de l’électronique de bord ; un remplacement peut nécessiter un apprentissage. Indiquez votre véhicule : nous nommons les types adaptés et voyons si un rendez-vous en atelier est utile.",
-            "en": "Battery type and installation depend on the electrical system; a replacement may require relearning. Name your vehicle and we state the suitable battery types and whether a workshop appointment for installation makes sense."
+            "de": "Batterietyp und Einbau hängen von der Bordnetz-Technik ab; ein Wechsel kann eine Anlernung erfordern. Nennen Sie uns Ihr Fahrzeug, dann benennen wir die passenden Batterietypen und klären, ob ein Werkstatttermin für den Einbau sinnvoll ist. Achten Sie darauf, dass Einbaumaß (Gehäuse) und Pollage mit Ihrer ausgebauten Batterie übereinstimmen.",
+            "nl": "Accutype en montage hangen af van de boordnettechniek; vervangen kan aanleren vereisen. Noem uw voertuig, dan benoemen wij de passende accutypen en klaren we of een werkplaatsafspraak voor de montage zinvol is. Let erop dat inbouwmaat (behuizing) en polligging overeenkomen met uw uitgebouwde accu.",
+            "fr": "Le type de batterie et le montage dépendent de l’électronique de bord ; un remplacement peut nécessiter un apprentissage. Indiquez votre véhicule : nous nommons les types adaptés et voyons si un rendez-vous en atelier est utile. Veillez à ce que la dimension (boîtier) et la polarité correspondent à votre batterie déposée.",
+            "en": "Battery type and installation depend on the electrical system; a replacement may require relearning. Name your vehicle and we state the suitable battery types and whether a workshop appointment for installation makes sense. Make sure the case size and pole layout match your removed battery."
           },
           "source_refs": [
             "docs/09-final/11-teileklar-datenblatt.md",
