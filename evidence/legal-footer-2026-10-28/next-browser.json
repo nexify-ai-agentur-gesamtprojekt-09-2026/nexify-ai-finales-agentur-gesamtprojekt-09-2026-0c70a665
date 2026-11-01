@@ -458,6 +458,42 @@
       "passed": true
     },
     {
+      "path": "/teileklar/shop",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 320,
       "locale": "nl",
@@ -913,6 +949,42 @@
       "passed": true
     },
     {
+      "path": "/teileklar/shop",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 320,
       "locale": "fr",
@@ -1368,6 +1440,42 @@
       "passed": true
     },
     {
+      "path": "/teileklar/shop",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 1280,
       "locale": "de",
@@ -1823,6 +1931,42 @@
       "passed": true
     },
     {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 1280,
       "locale": "nl",
@@ -2278,6 +2422,42 @@
       "passed": true
     },
     {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 1280,
       "locale": "fr",
@@ -2722,6 +2902,42 @@
     },
     {
       "path": "/teileklar/rechtliches",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
       "width": 1280,
       "locale": "fr",
       "legal_context": "teileklar",
@@ -2844,9 +3060,9 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/SiteFooter.tsx": "0f33920bb9adac5c2af872f78f6599c54a8b683d74c2965b678dc067a6ca6b46",
-    "apps/web/components/WorkspaceRebuild.css": "c1933759e96b3420d2e35c56a72ee6d9baa1aa23efc7e91ba72cc9fb823522c1",
-    "config/site-map.json": "b4e07663520298ac428087a160b0d3cd68c5a9f342ac12ca8e455b448c0639cb",
+    "apps/web/components/SiteFooter.tsx": "2546230d1e15a5427488f0412306b357847120867389adf814b402b594c38284",
+    "apps/web/components/WorkspaceRebuild.css": "69068ca8a65ee3915df8c6243b38daa6377a72e4e9f3a6def56b63266b5246a8",
+    "config/site-map.json": "69fbf53a45d48c562a3c37ff9e241c01fb49f7daf4252748490e4ea7c8aa9845",
     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
   "missing_license_route": true,

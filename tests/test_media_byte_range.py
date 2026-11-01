@@ -9,7 +9,8 @@ import json
 import os
 import subprocess
 import sys
-import requests
+from urllib.error import HTTPError
+from urllib.request import Request, urlopen
 
 # Test configuration
 PREVIEW_URL = os.environ.get("PREVIEW_URL", "https://fresh-sync--3on01101.preview.emergentagent.com")
@@ -99,6 +100,16 @@ def test_unit_case(name, header, size, expected_status, expected_start=None, exp
     
     return result
 
+def http_request(url, method="GET", headers=None, timeout=10):
+    request = Request(url, headers=headers or {}, method=method)
+    try:
+        response = urlopen(request, timeout=timeout)
+    except HTTPError as error:
+        response = error
+    with response:
+        body = response.read() if method == "GET" else b""
+        return response.status, response.headers, body
+
 def test_http_range(name, path, range_header=None, method="GET", expected_status=200):
     """Test HTTP range request against preview server"""
     print(f"\n🔍 Testing HTTP: {name}")
@@ -122,28 +133,26 @@ def test_http_range(name, path, range_header=None, method="GET", expected_status
         if range_header:
             headers["Range"] = range_header
         
-        if method == "GET":
-            response = requests.get(url, headers=headers, timeout=10)
-        elif method == "HEAD":
-            response = requests.head(url, headers=headers, timeout=10)
+        status_code, response_headers, response_body = http_request(
+            url, method=method, headers=headers)
         
-        result["actual_status"] = response.status_code
-        result["headers"] = dict(response.headers)
-        result["body_length"] = len(response.content) if method == "GET" else 0
+        result["actual_status"] = status_code
+        result["headers"] = dict(response_headers)
+        result["body_length"] = len(response_body) if method == "GET" else 0
         
         # Check status
-        if response.status_code != expected_status:
+        if status_code != expected_status:
             result["status"] = "failed"
-            result["errors"].append(f"Status mismatch: expected {expected_status}, got {response.status_code}")
+            result["errors"].append(f"Status mismatch: expected {expected_status}, got {status_code}")
         
         # For 206 responses, check Content-Range header
         if expected_status == 206:
-            if "Content-Range" not in response.headers:
+            if "Content-Range" not in response_headers:
                 result["status"] = "failed"
                 result["errors"].append("Missing Content-Range header")
             else:
                 # Verify body length matches range
-                content_range = response.headers.get("Content-Range", "")
+                content_range = response_headers.get("Content-Range", "")
                 if content_range.startswith("bytes "):
                     parts = content_range.split()[1].split("/")
                     if len(parts) == 2:
@@ -280,7 +289,8 @@ def main():
     url = f"{PREVIEW_URL}/media/home-review/welcome-elevenlabs-v4.mp3"
     try:
         headers = {"Range": "bytes=0-1", "If-Range": "some-etag"}
-        response = requests.get(url, headers=headers, timeout=10)
+        status_code, response_headers, response_body = http_request(
+            url, headers=headers)
         
         result = {
             "name": "GET mp3 with If-Range",
@@ -289,11 +299,11 @@ def main():
             "range_header": "bytes=0-1",
             "if_range": "some-etag",
             "expected_status": 200,
-            "actual_status": response.status_code,
-            "headers": dict(response.headers),
-            "body_length": len(response.content),
-            "status": "passed" if response.status_code == 200 else "failed",
-            "errors": [] if response.status_code == 200 else [f"Expected 200, got {response.status_code}"]
+            "actual_status": status_code,
+            "headers": dict(response_headers),
+            "body_length": len(response_body),
+            "status": "passed" if status_code == 200 else "failed",
+            "errors": [] if status_code == 200 else [f"Expected 200, got {status_code}"]
         }
         
         if result["status"] == "passed":

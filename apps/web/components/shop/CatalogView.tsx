@@ -1,16 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { SiteLink } from "../Router";
+import { SiteLink, useSiteNavigate } from "../Router";
 import { api, type Product } from "./api";
 import { ProductCard } from "./ProductCard";
 
 type Result = { items: Product[]; total: number; page: number; pages: number };
 
 export function SearchBar({ initial = "", base = "/teileklar/suche" }: { initial?: string; base?: string }) {
-  const router = useRouter(); const [value, setValue] = useState(initial);
+  const navigate = useSiteNavigate(); const [value, setValue] = useState(initial);
   useEffect(() => setValue(initial), [initial]);
-  return <form role="search" className="tk-search" onSubmit={event => { event.preventDefault(); router.push(base + (value.trim() ? "?q=" + encodeURIComponent(value.trim()) : "")); }} data-testid="shop-search-form">
+  return <form role="search" className="tk-search" onSubmit={event => { event.preventDefault(); navigate(base + (value.trim() ? "?q=" + encodeURIComponent(value.trim()) : "")); }} data-testid="shop-search-form">
     <label htmlFor="tk-search-input">Artikel suchen (Name, SKU oder EAN)</label>
     <div className="tk-search-row"><input id="tk-search-input" type="search" value={value} maxLength={120} onChange={event => setValue(event.target.value)} data-testid="shop-search-input" />
       <button className="primary-button" type="submit" data-testid="shop-search-submit">Suchen</button></div>

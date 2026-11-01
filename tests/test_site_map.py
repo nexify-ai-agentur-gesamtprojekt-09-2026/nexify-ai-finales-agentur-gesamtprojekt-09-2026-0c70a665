@@ -179,7 +179,7 @@ class SiteMapContracts(unittest.TestCase):
 
     def test_actual_full_route_graph_is_reachable_and_source_bound(self):
         result = validate_site_map(self.data)
-        self.assertEqual(result, {'routes':46,'public':36,'protected':10})
+        self.assertEqual(result, {'routes':49,'public':39,'protected':10})
 
     def test_internal_route_cannot_enter_public_navigation(self):
         self.data['site_contexts']['nexify']['navigation'].append('internal-admin')

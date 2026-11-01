@@ -19,6 +19,15 @@ const pages=publicData.pages as PublicPage[];
 const experienceData=publicData as unknown as PublicExperienceData;
 const hashMode=location.protocol==='file:'||(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
 const routeIndex=new Map(pages.map(page=>[page.path,page]));
+const dynamicDetailBases:ReadonlyArray<readonly[string,string]>=[['/teileklar/kategorie/','/teileklar/kategorie'],['/teileklar/produkt/','/teileklar/produkt'],['/teileklar/werkstatt/','/teileklar/werkstatt']];
+function resolveRoute(path:string):PublicPage|undefined{
+  const exact=routeIndex.get(path);
+  if(exact)return exact;
+  for(const [prefix,base] of dynamicDetailBases){
+    if(path.startsWith(prefix)&&path.length>prefix.length&&!path.slice(prefix.length).includes('/'))return routeIndex.get(base);
+  }
+  return undefined;
+}
 function BrowserLink({href,onClick,target,download,...props}:SiteLinkProps){
   const internal=href.startsWith('/')&&!href.startsWith('//');
   const presented=hashMode&&internal?'#'+href:href;
@@ -47,7 +56,7 @@ function RouteContent({page}:{page?:PublicPage}){
 function App(){
   const[path,setPath]=useState(()=>routePath(location,hashMode)||'__invalid__');
   useEffect(()=>{const changed=()=>setPath(routePath(location,hashMode)||'__invalid__');addEventListener('popstate',changed);addEventListener('hashchange',changed);return()=>{removeEventListener('popstate',changed);removeEventListener('hashchange',changed);};},[]);
-  const adapter=useMemo(()=>({pathname:path,Link:BrowserLink}),[path]);
-  return <RouterProvider adapter={adapter}><PublicExperienceProvider data={experienceData}><Workspace pages={pages} accountControl={<AccountControl/>}><RouteContent page={routeIndex.get(path)}/></Workspace></PublicExperienceProvider></RouterProvider>;
+  const adapter=useMemo(()=>({pathname:path,Link:BrowserLink,navigate:(href:string)=>{history.pushState(null,'',href);window.dispatchEvent(new Event('popstate'));}}),[path]);
+  return <RouterProvider adapter={adapter}><PublicExperienceProvider data={experienceData}><Workspace pages={pages} accountControl={<AccountControl/>}><RouteContent page={resolveRoute(path)}/></Workspace></PublicExperienceProvider></RouterProvider>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);

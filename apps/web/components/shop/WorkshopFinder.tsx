@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { SiteLink } from "../Router";
+import { SiteLink, useSiteNavigate } from "../Router";
 import { api, type Workshop } from "./api";
 import WorkshopMap from "./WorkshopMap";
 
@@ -9,7 +8,7 @@ type Result = { q: string; radius_km: number; center: { lat: number; lon: number
 const RADII = [10, 25, 50, 100];
 
 export default function WorkshopFinder({ q = "", radius = 25 }: { q?: string; radius?: number }) {
-  const router = useRouter();
+  const navigate = useSiteNavigate();
   const [term, setTerm] = useState(q), [r, setR] = useState(radius), [result, setResult] = useState<Result | null>(null), [error, setError] = useState(""), [loading, setLoading] = useState(false);
   useEffect(() => {
     setTerm(q); setR(radius);
@@ -20,7 +19,7 @@ export default function WorkshopFinder({ q = "", radius = 25 }: { q?: string; ra
   function submit(event: React.FormEvent) {
     event.preventDefault();
     if (term.trim().length < 2) { setError("Bitte geben Sie eine PLZ oder einen Ort ein (mindestens 2 Zeichen)."); return; }
-    router.push("/teileklar/werkstatt?" + new URLSearchParams({ q: term.trim(), umkreis: String(r) }));
+    navigate("/teileklar/werkstatt?" + new URLSearchParams({ q: term.trim(), umkreis: String(r) }));
   }
   return <div className="tk-finder" data-testid="workshop-finder">
     <form role="search" className="tk-search tk-finder-form" onSubmit={submit} noValidate data-testid="workshop-search-form">

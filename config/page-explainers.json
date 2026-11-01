@@ -2341,6 +2341,153 @@
           ]
         }
       ]
+    },
+    {
+      "page_id": "tk-shop",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-shop-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Vom Anliegen zum passenden Teil",
+            "nl": "Van vraag naar passend onderdeel",
+            "fr": "Du besoin à la pièce adaptée"
+          },
+          "body": {
+            "de": "Der Shop verbindet Sortiment, Passung und Werkstatt. Diese Übersicht zeigt den Weg, ohne Verfügbarkeiten oder Preise zu behaupten. Erst mit freigegebenen Katalogdaten entstehen konkrete Artikel.",
+            "nl": "De shop verbindt assortiment, pasvorm en werkplaats. Dit overzicht toont de weg zonder beschikbaarheid of prijzen te beweren. Pas met vrijgegeven catalogusgegevens ontstaan concrete artikelen.",
+            "fr": "La boutique relie assortiment, compatibilité et atelier. Cet aperçu montre le parcours sans affirmer de disponibilité ni de prix. Les articles concrets n’existent qu’avec des données catalogue validées."
+          },
+          "outcome": {
+            "de": "Den passenden Einstieg in den Shop finden.",
+            "nl": "De juiste ingang in de shop vinden.",
+            "fr": "Trouver la bonne entrée dans la boutique."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-categories",
+            "label": {
+              "de": "Sortiment und Kategorien ansehen",
+              "nl": "Assortiment en categorieën bekijken",
+              "fr": "Voir l’assortiment et les catégories"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-reifenrechner",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-reifenrechner-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Reifengrößen verstehen und vergleichen",
+            "nl": "Bandenmaten begrijpen en vergelijken",
+            "fr": "Comprendre et comparer les dimensions"
+          },
+          "body": {
+            "de": "Der Reifenrechner liest Breite, Querschnitt und Felgendurchmesser nach ISO-Kennzeichnung. Er hilft beim Vergleich, ersetzt aber keine technische Freigabe. Zulässigkeit und Freigängigkeit gehören ans Fahrzeug belegt.",
+            "nl": "De bandencalculator leest breedte, hoogte-breedteverhouding en velgdiameter volgens ISO-markering. Hij helpt vergelijken, maar vervangt geen technische vrijgave. Toelaatbaarheid en vrijloop horen aan het voertuig onderbouwd.",
+            "fr": "Le calculateur lit largeur, rapport d’aspect et diamètre selon le marquage ISO. Il aide à comparer sans remplacer une homologation. L’admissibilité et le dégagement se vérifient sur le véhicule."
+          },
+          "outcome": {
+            "de": "Mit geklärten Reifendaten zur Passung wechseln.",
+            "nl": "Met duidelijke bandengegevens naar de pasvorm.",
+            "fr": "Passer à la compatibilité avec des données claires."
+          },
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-fitment",
+            "label": {
+              "de": "Fahrzeug und belegte Passung",
+              "nl": "Voertuig en onderbouwde passendheid",
+              "fr": "Véhicule et compatibilité étayée"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "tk-batterie",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-batterie-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "title": {
+            "de": "Die passende Starterbatterie einordnen",
+            "nl": "De juiste startaccu bepalen",
+            "fr": "Identifier la bonne batterie de démarrage"
+          },
+          "body": {
+            "de": "Bauform, Kapazität und Kaltstartstrom bestimmen, welche Batterie passt; Start-Stopp braucht oft AGM oder EFB. Der Berater ordnet die Anforderungen ein, ohne eine konkrete Lieferbarkeit zu behaupten.",
+            "nl": "Bouwvorm, capaciteit en koudstartstroom bepalen welke accu past; start-stop vraagt vaak AGM of EFB. De adviseur deelt de eisen in zonder concrete leverbaarheid te beweren.",
+            "fr": "Forme, capacité et courant de démarrage à froid déterminent la batterie ; le start-stop exige souvent AGM ou EFB. Le conseiller classe les exigences sans affirmer une disponibilité concrète."
+          },
+          "outcome": {
+            "de": "Mit den Fahrzeugdaten die Passung klären.",
+            "nl": "Met de voertuiggegevens de pasvorm klaren.",
+            "fr": "Clarifier la compatibilité avec les données véhicule."
+          },
+          "media_side": "right",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-fitment",
+            "label": {
+              "de": "Fahrzeug und belegte Passung",
+              "nl": "Voertuig en onderbouwde passendheid",
+              "fr": "Véhicule et compatibilité étayée"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/01-konzept/gesamtprojektplan.md",
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/08-recht-und-compliance.md"
+          ]
+        }
+      ]
     }
   ]
 }

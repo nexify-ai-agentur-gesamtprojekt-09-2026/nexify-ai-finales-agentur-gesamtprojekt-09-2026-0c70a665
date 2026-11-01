@@ -1190,6 +1190,90 @@
       "owner": "Root / authorized media owner"
     },
     {
+      "page_id": "tk-shop",
+      "path": "/teileklar/shop",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-shop",
+      "context_title": "TEILEKLAR Shop: Teile und Service im Überblick",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-shop-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-reifenrechner",
+      "path": "/teileklar/reifenrechner",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-reifenrechner",
+      "context_title": "Reifenrechner: Reifengrößen vergleichen",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-reifenrechner-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-batterie",
+      "path": "/teileklar/batterie-berater",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-batterie",
+      "context_title": "Batterie-Berater: passende Starterbatterie finden",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-batterie-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
       "page_id": "customer-portal",
       "path": "/portal/kunde",
       "site_context": "nexify",
@@ -2546,6 +2630,75 @@
         "module_specific_video_bytes_missing",
         "module_script_voice_character_approval_missing",
         "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-shop",
+      "module_id": "tk-shop-explain-1",
+      "context_id": "module-tk-shop-explain-1",
+      "context_title": "Vom Anliegen zum passenden Teil",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-reifenrechner",
+      "module_id": "tk-reifenrechner-explain-1",
+      "context_id": "module-tk-reifenrechner-explain-1",
+      "context_title": "Reifengrößen verstehen und vergleichen",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-batterie",
+      "module_id": "tk-batterie-explain-1",
+      "context_id": "module-tk-batterie-explain-1",
+      "context_title": "Die passende Starterbatterie einordnen",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
       ],
       "owner": "Root / authorized media owner"
     }
