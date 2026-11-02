@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138",
-    "PROGRESS.md": "b5ecd23576ba0a186658e2f87ad6b7f776d5222e9ad6a8a54a750c884bcbb844",
+    "PROGRESS.md": "11acf13517fea0490aaea64cb5601288062218f9e464b0fef259fbbc3f56ca80",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1233,7 +1233,7 @@
     "apps/site/pwa/worker.js": "2057580e929673c153101f5ef1c0c642735d10797d3acd341706a3a78006a7ac",
     "apps/site/scripts/build-standalone.mjs": "b51c3ccae071b5b66f66e527aa433a866ca5ee77676fa530da3e68917c3d93b6",
     "apps/site/src/Auth.tsx": "0799bb63414c8ae1c9765b64f05b47139d924cc5d6ea69dd2c586eb1acc8b9de",
-    "apps/site/src/main.tsx": "460190a19f9565ce1563eda77d30cc6ed1926b4bb7203bdb5d197f629fa696ba",
+    "apps/site/src/main.tsx": "e5f61dbf725ebdf7bc45478e11b667d6c49219d837309f4d54255ef2b9c4a07d",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/tests/browser-accessibility.mjs": "2827709b3ba5c0af65f9cce02dbf75aee9baa485660ac5ce1d8a9ad57e92ad05",
     "apps/site/tests/browser-auth.mjs": "0dabd6d7ae985138e50e8cd4498ec06b9c00d47e77e52c0cb2db9cbcdff0c740",
@@ -1578,7 +1578,13 @@
     "apps/shop-api/namespace_operator.py": "d2bcea09db8981f1c0cf4bac311c501cc044fb1857cdb540671028511c86fb59",
     "apps/shop-api/tests/test_namespace_operator.py": "6b0122f185f75bab7c8073c4af2326372001db03c1170330896b71cab1036790",
     "docs/deployment/shop-namespace-operator-2026-10-31.md": "96024fcf10bf0b93fc59b34e4cdae3f00571cd35bd4da535716f3fcdb34e9c0e",
-    "docs/contracts/completion-goal-2026-11-01.md": "6e5865ebf521fe764b39bebead029b54e5a5402055139bbc30ee532ee6e9f38a"
+    "docs/contracts/completion-goal-2026-11-01.md": "6e5865ebf521fe764b39bebead029b54e5a5402055139bbc30ee532ee6e9f38a",
+    "apps/site/src/seo-state.mjs": "9c9025204657ac97ed344575e02cb9b2f35b590f0635b53380e277d1bb9d9823",
+    "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
+    "apps/site/tests/seo-metadata.test.mjs": "a24f3517cf86faff7b595a3edf1a9b515e3ad5f3b55e6f013c6b9864a2f3eddc",
+    "apps/site/tests/browser-seo-metadata.mjs": "bb166ee7ae8b4c5b92950a47ca917a43caa9b933d3dd46737142b707fb4d0e80",
+    "docs/reviews/sitewide-seo-metadata-2026-11-02.md": "a3cbe32a7260dbbcde57d9ff75f45958d1f188be54f0c43673d5f19b9109aae8",
+    "evidence/sitewide-seo-2026-11-02/runtime.json": "25f0518a58d3137a42cef4b471591caeb4c708d1a06038881f457609a78c1ba5"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -3571,13 +3577,20 @@
         "applicable_requirement": "Continue the existing NeXify assignment as a binding GOAL/LOOP until evidenced completion of agency, products/suite, TEILEKLAR shop and workshop area; a build, deployment or present screen is not whole-system acceptance.",
         "interpretation": "Revision 2 of the existing completion contract and the one existing reconciliation register; no second queue. Each package binds current revision and writer, proves visitor outcome and boundaries, implements the smallest dependency-ready slice, tests positive/negative/persistence/readback and records evidence and residual scope.",
         "implementation_files": [
-          "docs/contracts/completion-goal-2026-11-01.md"
+          "docs/contracts/completion-goal-2026-11-01.md",
+          "apps/site/src/seo-state.mjs",
+          "apps/site/src/main.tsx",
+          "apps/site/index.html",
+          "apps/site/tests/seo-metadata.test.mjs",
+          "apps/site/tests/browser-seo-metadata.mjs",
+          "docs/reviews/sitewide-seo-metadata-2026-11-02.md",
+          "evidence/sitewide-seo-2026-11-02/runtime.json"
         ],
-        "test_evidence": "Project skill sources verified; bounded context selection completed; register schema/derived-view verifier and LLM policy check required for this documentation slice. No product or runtime acceptance inferred.",
-        "actual_delivery": "active_goal_loop_documented_in_existing_contract",
+        "test_evidence": "4 pure metadata contract tests; 122 site tests; 16 standalone contract tests and standalone build; site typecheck and production build; Chromium direct-route/language/dynamic-detail/unknown-route runtime check with zero external requests; independent review APPROVE after three findings were corrected and rechecked; LLM policy and make check passed. Full make test failed closed at 697 tests / 61 failures / 10 errors / 11 skips from recorded historical evidence drift and missing pymongo. Evidence: evidence/sitewide-seo-2026-11-02/runtime.json and docs/reviews/sitewide-seo-metadata-2026-11-02.md.",
+        "actual_delivery": "goal_loop_active; P03 route-specific metadata slice implemented_and_local_browser_verified",
         "full_requirement_accepted": false,
-        "gap": "All package criteria P01-P26 and unresolved deviations remain open until their current route, data/API, user-journey, persistence, visual, independent-review and live-readback evidence passes on one bound revision.",
-        "next_step": "Bind the latest route and source inventory, keep one writer per file area, select the smallest independent package, implement and execute the documented loop; design owner retains light, shadow, Hero and shared design components until writer coordination completes.",
+        "gap": "P01-P26 remain open. P03 still needs all-route FR/EN runtime coverage, crawler-visible server rendering, target-host sitemap/canonical readback, public indexing/domain decision and per-page editorial acceptance.",
+        "next_step": "Continue P03 with a complete route/content/CTA inventory and the next dependency-ready customer journey while shared visual components remain with their active design writer.",
         "completion_criterion": "One complete reconciliation matrix with original source, desired user result, route, dependency, owner, status, criterion, evidence and remainder; bound branch/commit/site version; verified live URLs, journeys, persistence, visual acceptance and independent review; every remainder resolved or explicitly assigned.",
         "owner_area": "D01/D05 overall; package owner; D07 independent review; active design owner for shared visual components"
       }
@@ -3863,9 +3876,9 @@
             "line": 45
           },
           "owner_function": "UX/Frontend/Redaktion",
-          "writer_binding": "unassigned_until_scoped_implementation",
+          "writer_binding": "/root for route metadata and content inventory; shared visual components excluded pending design writer handoff",
           "independent_reviewer_required": true,
-          "status": "not_accepted",
+          "status": "in_progress_metadata_slice_browser_verified",
           "monetary_budget": null,
           "paid_effects_authorized_by_plan": false,
           "deadline": "critical_path_after_prerequisite_readback_not_estimated",

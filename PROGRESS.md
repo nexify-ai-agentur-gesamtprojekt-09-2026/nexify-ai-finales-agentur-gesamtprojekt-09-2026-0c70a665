@@ -1546,3 +1546,38 @@ Verifikation bleibt für diesen Slice blockiert, weil die gepinnte Quelle
 ist grün. `make test` bleibt fail-closed bei 697 Tests / 63 Failures / 10 Errors /
 11 Skips: bekannte historische Quellen-/Browserevidenzdrift sowie fehlendes
 `pymongo`. Diese alten Hashbelege wurden nicht auf den neuen Stand umgeschrieben.
+
+### P03 · Seitenbezogene SEO- und Social-Metadaten
+
+Erster unabhängiger GOAL/LOOP-Slice auf Branch
+`codex/sitewide-design-2026-11-02`: Die portable Site aktualisiert Titel,
+Beschreibung, Robots, Canonical, Open Graph, Twitter und `WebPage`-JSON-LD jetzt
+gemeinsam nach Direktaufruf, internem Routenwechsel und Sprachwechsel. Dynamische
+TEILEKLAR-Detailpfade bleiben ohne belegten Datensatz auf ihrer Basisroute;
+unbekannte Pfade werden nicht als eigene Canonical- oder `WebPage`-Seite
+ausgegeben. Standalone-Dateien ohne HTTP-Origin bleiben funktionsfähig. Hero,
+Licht, Schatten und gemeinsame
+Designkomponenten blieben wegen der Writergrenze unverändert.
+
+Nachweis: vier reine Metadaten-Vertragstests, 122 Site-Tests, Typecheck,
+Produktionsbuild, LLM-Policy und `make check` bestanden. Reale lokale
+Chromium-Prüfung für drei direkte Routen, DE/NL, dynamischen Produktpfad und
+Fehlerroute bestand ohne externe Requests. Bericht:
+`docs/reviews/sitewide-seo-metadata-2026-11-02.md`.
+
+P03 und der Gesamtauftrag bleiben offen. Die private Vorschau bleibt bewusst
+`noindex,nofollow`. Die vorhandene Sitemap führt 36 der 39 öffentlichen Routen
+und verweist auf `www.nexifyai.de`; `/teileklar/shop`,
+`/teileklar/reifenrechner` und `/teileklar/batterie-berater` fehlen. Domain,
+Indexierung, vollständige Sitemap und Zielhost-Readback werden erst gemeinsam
+umgestellt. Der bestehende Matrixverifier bleibt fail-closed an bereits
+dokumentierter historischer Hashdrift vieler Altbelege; nur die Dateien dieses
+Slices wurden aktuell gebunden, fremde historische Hashes nicht pauschal
+freigezeichnet.
+
+Vollständiger `make test` auf diesem Slice: 697 Tests, 61 Fehler, 10 Errors,
+11 Skips. Hauptursachen bleiben historische Browser-/Resize-/Registerbelege mit
+abweichenden Quellhashes sowie das nicht installierte `pymongo`. Die alte
+Exception-Evidenz verwirft zusätzlich den bewusst geänderten `main.tsx`-Stand;
+der neue SEO-Browserlauf ist separat aktuell gebunden. Keine Altbelege wurden
+auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
