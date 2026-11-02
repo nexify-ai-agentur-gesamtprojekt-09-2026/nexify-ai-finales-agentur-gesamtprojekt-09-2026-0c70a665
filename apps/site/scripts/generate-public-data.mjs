@@ -1,15 +1,13 @@
 import {createHash} from "node:crypto";
-import {prepareExplainers} from "./public-explainers.mjs";
+import {prepareExplainers,resolveExplainerReferences} from "./public-explainers.mjs";
 import {prepareVideoAssets} from "./public-video-assets.mjs";
 import {readFile,mkdir,writeFile,realpath,stat} from "node:fs/promises";
 import {fileURLToPath,pathToFileURL} from "node:url";
 import {resolve} from "node:path";
 
 function localized(value){
-  if(!value||["de","nl","fr"].some(locale=>typeof value[locale]!=="string"))throw new Error("Invalid public localization");
-  // EN runtime locale: use verified staged en when present, else base-locale (de)
-  // fallback. No invented product/legal/UI text.
-  return {de:value.de,nl:value.nl,fr:value.fr,en:typeof value.en==="string"?value.en:value.de};
+  if(!value||["de","nl","fr","en"].some(locale=>typeof value[locale]!=="string"||!value[locale].trim()))throw new Error("Invalid public localization");
+  return {de:value.de,nl:value.nl,fr:value.fr,en:value.en};
 }
 function publicPath(path){
   if(typeof path!=="string"||!/^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*)?$/.test(path))throw new Error("Invalid public route");
@@ -43,7 +41,7 @@ export async function generate(){
   const root=fileURLToPath(new URL("../../../",import.meta.url));
   const source=JSON.parse(await readFile(resolve(root,"config/site-map.json"),"utf8"));
   const data=preparePublicData(source);
-  const explainers=JSON.parse(await readFile(resolve(root,"config/page-explainers.json"),"utf8"));
+  const explainers=resolveExplainerReferences(JSON.parse(await readFile(resolve(root,"config/page-explainers.json"),"utf8")),data.pages);
   const videoRegistry=JSON.parse(await readFile(resolve(root,"config/page-media-registry.json"),"utf8"));
   const checkedVideos=await prepareVideoAssets(videoRegistry,source,{publicRoot:resolve(root,"apps/web/public"),repositoryRoot:root,explainerPages:explainers.pages});
   data.videos=checkedVideos.byPage;

@@ -1,9 +1,15 @@
-"""BigBuy "Auto & Motorrad" import: full pagination, dedupe by BigBuy ID, previous catalog kept on failure."""
+"""Bounded BigBuy import; publish only a validated, nonempty acquisition in a Mongo transaction.
+
+Requires a transaction-capable Mongo deployment. No nontransactional fallback exists.
+Pagination checks detect incomplete reads; they do not establish supplier snapshot isolation.
+Sandbox publication is forbidden because the public schema has no environment boundary.
+"""
 import asyncio
 import os
 import re
 import time
 import uuid
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
 import httpx
 from bigbuy_get import (  # existing gateway module: hosts + typed error codes
@@ -11,6 +17,8 @@ from bigbuy_get import (  # existing gateway module: hosts + typed error codes
     BigBuyReadError,
 )
 from pymongo import UpdateOne
+from pymongo.read_concern import ReadConcern
+from pymongo.write_concern import WriteConcern
 
 from . import bigbuy_ftp, config
 from .db import now_iso
@@ -45,14 +53,17 @@ class BigBuyClient:
                 if response.status_code in (401, 403):
                     raise BigBuyReadError("access_denied")
                 if response.status_code == 404:
-                    return None
+                    raise BigBuyReadError("catalog_endpoint_not_found")
                 if response.status_code != 200:
                     raise BigBuyReadError("provider_http_error_%d" % response.status_code)
                 remaining, reset = response.headers.get("x-ratelimit-remaining"), response.headers.get("x-ratelimit-reset")
                 if pause_seconds and remaining is not None and remaining.isdigit() and int(remaining) <= 1 and (reset or "").isdigit():
                     await asyncio.sleep(max(1.0, min(65.0, int(reset) - time.time() + 1)))
                 await asyncio.sleep(pause_seconds)
-                return response.json()
+                try:
+                    return response.json()
+                except ValueError:
+                    raise BigBuyReadError("catalog_invalid_json") from None
         raise BigBuyReadError("rate_limited")
 
     async def pages(self, path, params, keep=None):
@@ -60,19 +71,32 @@ class BigBuyClient:
         for page in range(MAX_PAGES):
             self.page_counts[path] = page + 1
             batch = await self.get(path, {**params, "page": page, "pageSize": PAGE_SIZE})
-            if not isinstance(batch, list) or not batch:
-                break
-            fresh = [r for r in batch if isinstance(r, dict) and r.get("id") not in seen]
-            seen.update(r.get("id") for r in fresh)
-            rows.extend(r for r in fresh if keep is None or keep(r))
-            if len(batch) < PAGE_SIZE or not fresh:
-                break
-        return rows
+            if not isinstance(batch, list) or len(batch) > PAGE_SIZE:
+                raise BigBuyReadError("catalog_page_schema")
+            for row in batch:
+                if not isinstance(row, dict) or type(row.get("id")) is not int or row["id"] <= 0:
+                    raise BigBuyReadError("catalog_row_identity")
+                if row["id"] in seen:
+                    raise BigBuyReadError("catalog_duplicate_page_identity")
+                seen.add(row["id"])
+            rows.extend(r for r in batch if keep is None or keep(r))
+            # A short page may be a provider cap that ignores our requested size.
+            # Without a verified total/size contract only an explicit empty page
+            # terminates acquisition. Repeated pages and cap exhaustion still fail.
+            if not batch:
+                return rows
+        raise BigBuyReadError("catalog_page_limit_incomplete")
 
 
 def find_roots(taxonomies):
-    override = [int(x) for x in os.environ.get("BIGBUY_TAXONOMY_IDS", "").split(",") if x.strip().isdigit()]
+    raw_override = os.environ.get("BIGBUY_TAXONOMY_IDS", "").strip()
+    if raw_override and any(not x.strip().isascii() or not x.strip().isdigit() or int(x) <= 0 for x in raw_override.split(",")):
+        raise BigBuyReadError("category_override_invalid")
+    override = [int(x) for x in raw_override.split(",")] if raw_override else []
     if override:
+        known = {t["id"] for t in taxonomies}
+        if not set(override) <= known:
+            raise BigBuyReadError("category_override_unknown")
         return override
     roots = [t for t in taxonomies if not t.get("parentTaxonomy") and ROOT_PATTERN.search(t.get("name") or "")]
     return [int(t["id"]) for t in roots]
@@ -86,12 +110,42 @@ def first(row, *keys):
 
 
 def to_cents(value):
-    return int(round(float(value) * 100)) if value not in (None, "") else None
+    try:
+        if isinstance(value, bool) or value is None or len(str(value)) > 80:
+            raise ValueError()
+        price = Decimal(str(value))
+        if not price.is_finite() or price < 0 or price > Decimal(2**63 - 1) / 100:
+            raise ValueError()
+        return int((price * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+    except (ValueError, InvalidOperation, OverflowError):
+        raise BigBuyReadError("invalid_wholesale_price") from None
+
+
+def stock_quantity(value):
+    """Only observed JSON integers represent quantity; unknown is never zero."""
+    if type(value) is not int or not 0 <= value <= 2**63 - 1:
+        raise BigBuyReadError("catalog_stock_invalid")
+    return value
+
+
+def stock_total(row):
+    buckets = row.get("stocks")
+    # An empty array has no independently verified zero-stock semantics here.
+    if not isinstance(buckets, list) or not buckets:
+        raise BigBuyReadError("catalog_stock_unknown")
+    total = 0
+    for bucket in buckets:
+        if not isinstance(bucket, dict):
+            raise BigBuyReadError("catalog_stock_invalid")
+        total = stock_quantity(total + stock_quantity(bucket.get("quantity")))
+    return total
 
 
 def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_id, environment):
     tax_id = first(row, "taxonomy", "taxonomyId")
-    category_id = int(tax_id) if str(tax_id or "").isdigit() and int(tax_id) in taxonomy_names else root_id
+    if type(tax_id) is not int or tax_id not in taxonomy_names or root_id not in taxonomy_names:
+        raise BigBuyReadError("product_category_invalid")
+    category_id = tax_id
     image_urls = [i["url"] for i in sorted(images, key=lambda i: not i.get("isCover")) if isinstance(i, dict) and str(i.get("url", "")).startswith("https://")]
     details = {k: row.get(k) for k in ("weight", "height", "width", "depth", "condition", "manufacturer", "dateUpd") if row.get(k) not in (None, "")}
     return {"_id": "bb-%s" % row["id"], "bigbuy_id": int(row["id"]), "sku": str(first(row, "sku") or ""),
@@ -99,13 +153,25 @@ def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_
             "description": info.get("description") or "", "images": image_urls[:12],
             "category_ids": sorted({category_id, root_id}), "category_id": category_id,
             "purchase_cents": to_cents(first(row, "wholesalePrice", "wholesale_price")),
-            "stock": int(stock) if stock is not None else 0, "details": details, "active": True,
+            "stock": stock_quantity(stock), "details": details, "active": True,
             "source": "bigbuy", "source_environment": environment, "imported_at": stamp, "import_run_id": run_id}
 
 
 async def fetch_catalog(environment):
     client = BigBuyClient(environment)
-    taxonomies = await client.get("/rest/catalog/taxonomies.json", {"isoCode": "de"}) or []
+    taxonomies = await client.get("/rest/catalog/taxonomies.json", {"isoCode": "de"})
+    if not isinstance(taxonomies, list) or not taxonomies:
+        raise BigBuyReadError("taxonomy_schema")
+    known = set()
+    for t in taxonomies:
+        if (not isinstance(t, dict) or type(t.get("id")) is not int or t["id"] <= 0
+                or t["id"] in known or not isinstance(t.get("name"), str) or not t["name"].strip()
+                or (t.get("parentTaxonomy") is not None and
+                    (type(t["parentTaxonomy"]) is not int or t["parentTaxonomy"] < 0))):
+            raise BigBuyReadError("taxonomy_schema")
+        known.add(t["id"])
+    if any(t.get("parentTaxonomy") and t["parentTaxonomy"] not in known for t in taxonomies):
+        raise BigBuyReadError("taxonomy_parent_unknown")
     roots = find_roots(taxonomies)
     if not roots:
         raise BigBuyReadError("category_auto_motorrad_not_found")
@@ -121,12 +187,20 @@ async def fetch_catalog(environment):
             if child not in scope:
                 scope[child] = scope[node]
                 stack.append(child)
-    rows = await client.pages("/rest/catalog/products.json", {}, keep=lambda r: r.get("taxonomy") in scope)
+    def in_scope(row):
+        if type(row.get("taxonomy")) is not int or row["taxonomy"] not in names:
+            raise BigBuyReadError("product_category_invalid")
+        return row["taxonomy"] in scope
+    rows = await client.pages("/rest/catalog/products.json", {}, keep=in_scope)
+    if not rows:
+        raise BigBuyReadError("no_products_returned")
     ids = {r["id"] for r in rows if "id" in r}
     keep = lambda r: r.get("id") in ids
     info = {r["id"]: r for r in await client.pages("/rest/catalog/productsinformation.json", {"isoCode": "de"}, keep)}
     images = {r["id"]: r.get("images") or [] for r in await client.pages("/rest/catalog/productsimages.json", {}, keep)}
-    stock = {r["id"]: sum(int(s.get("quantity") or 0) for s in r.get("stocks") or []) for r in await client.pages("/rest/catalog/productsstockbyhandlingdays.json", {}, keep)}
+    stock = {r["id"]: stock_total(r) for r in await client.pages("/rest/catalog/productsstockbyhandlingdays.json", {}, keep)}
+    if set(info) != ids or set(stock) != ids:
+        raise BigBuyReadError("catalog_resource_coverage_incomplete")
     collected = {}
     for row in rows:
         if "id" in row:
@@ -139,37 +213,52 @@ async def fetch_catalog(environment):
 async def run_import(db, environment, run_id):
     stamp = now_iso()
     try:
+        if environment not in ("production", "ftp"):
+            raise BigBuyReadError("sandbox_publication_forbidden" if environment == "sandbox" else "invalid_environment")
         if environment == "ftp":
             roots, names, products, manifest = await bigbuy_ftp.fetch(stamp, run_id)
             collected = products
-            await db.imports.update_one({"_id": run_id}, {"$set": {"manifest": manifest}})
-            if manifest:
-                await db.source_manifests.insert_many([{**m, "run_id": run_id} for m in manifest])
         else:
             roots, names, collected, manifest = await fetch_catalog(environment)
             products = [build_product(*values[:4], names, values[4], stamp, run_id, environment) for values in collected.values()]
-            await db.imports.update_one({"_id": run_id}, {"$set": {"manifest": manifest}})
-            await db.source_manifests.insert_many([{**m, "run_id": run_id, "created_at": stamp} for m in manifest])
-        skipped = [{"bigbuy_id": p["bigbuy_id"], "reason": "missing_wholesale_price"} for p in products if p["purchase_cents"] is None]
-        products = [p for p in products if p["purchase_cents"] is not None]
         if not products:
             raise BigBuyReadError("no_products_returned")
-        before = await db.products.count_documents({"source": "bigbuy"})
-        result = await db.products.bulk_write([UpdateOne({"_id": p["_id"]}, {"$set": p, "$setOnInsert": {"first_imported_at": stamp}}, upsert=True) for p in products], ordered=False)
-        gone = await db.products.update_many({"source": "bigbuy", "import_run_id": {"$ne": run_id}}, {"$set": {"active": False}})
         used = {c for p in products for c in p["category_ids"]}
-        await db.categories.delete_many({})
-        await db.categories.insert_many([{"_id": c, "name": names.get(c) or "Auto & Motorrad", "root": c in roots} for c in used])
-        counts = {"fetched": len(collected), "stored": len(products), "created": result.upserted_count,
-                  "updated": len(products) - result.upserted_count, "deactivated": gone.modified_count, "before": before,
-                  "skipped": len(skipped), "with_images": sum(1 for p in products if p["images"]), "in_stock": sum(1 for p in products if p["stock"] > 0)}
-        if skipped:
-            await db.imports.update_one({"_id": run_id}, {"$set": {"skipped": skipped[:500]}})
-        await db.imports.update_one({"_id": run_id}, {"$set": {"status": "done", "finished_at": now_iso(), "counts": counts, "taxonomy_ids": roots}})
+        if (not roots or not used or not used <= names.keys()
+                or len({p["_id"] for p in products}) != len(products)
+                or any(type(p["purchase_cents"]) is not int or p["purchase_cents"] < 0 for p in products)):
+            raise BigBuyReadError("catalog_publication_invalid")
+        for product in products:
+            stock_quantity(product.get("stock"))
+
+        async def publish(session):
+            # Shared write serializes concurrent publishers; driver retries the entire
+            # transaction on a write conflict, never a partial catalog publication.
+            await db.settings.update_one({"_id": "bigbuy_publication"}, {"$inc": {"revision": 1}}, upsert=True, session=session)
+            claimed = await db.imports.update_one({"_id": run_id, "status": "running"}, {"$set": {"publication_started_at": stamp}}, session=session)
+            if claimed.matched_count != 1:
+                raise BigBuyReadError("import_run_not_running")
+            before = await db.products.count_documents({"source": "bigbuy"}, session=session)
+            result = await db.products.bulk_write([UpdateOne({"_id": p["_id"]}, {"$set": p, "$setOnInsert": {"first_imported_at": stamp}}, upsert=True) for p in products], ordered=False, session=session)
+            gone = await db.products.update_many({"source": "bigbuy", "import_run_id": {"$ne": run_id}}, {"$set": {"active": False}}, session=session)
+            await db.categories.delete_many({}, session=session)
+            await db.categories.insert_many([{"_id": c, "name": names[c], "root": c in roots} for c in used], session=session)
+            if manifest:
+                await db.source_manifests.insert_many([{**m, "run_id": run_id, "created_at": stamp} for m in manifest], session=session)
+            counts = {"fetched": len(collected), "stored": len(products), "created": result.upserted_count,
+                      "updated": len(products) - result.upserted_count, "deactivated": gone.modified_count, "before": before,
+                      "skipped": 0, "with_images": sum(1 for p in products if p["images"]), "in_stock": sum(1 for p in products if p["stock"] > 0)}
+            await db.imports.update_one({"_id": run_id}, {"$set": {"status": "done", "finished_at": now_iso(), "counts": counts, "taxonomy_ids": roots, "manifest": manifest}}, session=session)
+
+        async with await db.client.start_session() as session:
+            await session.with_transaction(publish, read_concern=ReadConcern("snapshot"), write_concern=WriteConcern("majority"), max_commit_time_ms=10000)
     except BigBuyReadError as error:
-        await db.imports.update_one({"_id": run_id}, {"$set": {"status": "failed", "finished_at": now_iso(), "error": str(error)}})
+        await db.imports.update_one({"_id": run_id, "status": {"$ne": "done"}}, {"$set": {"status": "failed", "finished_at": now_iso(), "error": str(error)}})
     except Exception as error:
-        await db.imports.update_one({"_id": run_id}, {"$set": {"status": "failed", "finished_at": now_iso(), "error": "unexpected_" + type(error).__name__}})
+        unknown = callable(getattr(error, "has_error_label", None)) and error.has_error_label("UnknownTransactionCommitResult")
+        # A lost commit acknowledgement may have committed everything. Never relabel
+        # a committed done record as failed or retry publication based on that guess.
+        await db.imports.update_one({"_id": run_id, "status": {"$ne": "done"}}, {"$set": {"status": "publication_unknown" if unknown else "failed", "finished_at": now_iso(), "error": "transaction_commit_unknown" if unknown else "unexpected_" + type(error).__name__}})
 
 
 async def start_import(db, environment, actor):

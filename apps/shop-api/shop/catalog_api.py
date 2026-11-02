@@ -1,4 +1,5 @@
 import re
+from urllib.parse import urlsplit
 
 from fastapi import APIRouter, HTTPException, Query
 
@@ -8,16 +9,45 @@ from .db import db
 router = APIRouter(prefix="/api/shop")
 PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1}
 
+# Exact supplier host observed in the read-only catalogue; no wildcard or proxy.
+# Deployment CSP must separately permit this host before images can load.
+SUPPLIER_IMAGE_HOSTS = frozenset({"cdnbigbuy.com"})
+
+
+def supplier_image(value):
+    if (not isinstance(value, str) or not value.startswith("https://cdnbigbuy.com/")
+            or len(value) > 2048 or re.search(r"[\s\x00-\x1f\x7f\\]", value)):
+        return None
+    try:
+        parsed = urlsplit(value)
+        if (parsed.scheme != "https" or parsed.netloc != parsed.hostname
+                or parsed.hostname not in SUPPLIER_IMAGE_HOSTS
+                or parsed.username or parsed.password or parsed.port
+                or parsed.query or parsed.fragment
+                or not re.fullmatch(r"/images/[A-Za-z0-9_./-]+\.(?:jpg|jpeg|png|webp)", parsed.path, re.I)
+                or any(part in (".", "..") for part in parsed.path.split("/"))):
+            return None
+    except ValueError:
+        return None
+    return value
+
 
 def present(product, settings, full=False):
     released = settings["price_released"]
+    raw_stock = product.get("stock")
+    stock = raw_stock if type(raw_stock) is int and 0 <= raw_stock <= 2**53 - 1 else None
+    raw_images = product.get("images")
+    images = list(dict.fromkeys(url for value in raw_images if (url := supplier_image(value)))) if isinstance(raw_images, list) else []
     item = {"id": product["_id"], "sku": product.get("sku"), "ean": product.get("ean"), "name": product["name"],
-            "image": (product.get("images") or [None])[0], "stock": product.get("stock", 0), "in_stock": product.get("stock", 0) > 0,
+            "image": images[0] if images else None,
+            "image_status": "supplier_original" if images else "unavailable",
+            "stock": stock, "in_stock": stock > 0 if stock is not None else None,
+            "stock_status": "reported" if stock is not None else "unknown",
             "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
             "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
             "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id")}
     if full:
-        item.update({"images": product.get("images") or [], "description": product.get("description") or "",
+        item.update({"images": images, "description": product.get("description") or "",
                      "details": product.get("details") or {}, "fitment_status": "not_checked",
                      "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id")})
     return item
