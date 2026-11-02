@@ -1577,7 +1577,8 @@
     "apps/shop-api/tests/verify_vercel_bundle.cjs": "a249aa004128794c2592b1cdd6e1bfaef41b53b0f375e96444fa9c13c0bd8a14",
     "apps/shop-api/namespace_operator.py": "d2bcea09db8981f1c0cf4bac311c501cc044fb1857cdb540671028511c86fb59",
     "apps/shop-api/tests/test_namespace_operator.py": "6b0122f185f75bab7c8073c4af2326372001db03c1170330896b71cab1036790",
-    "docs/deployment/shop-namespace-operator-2026-10-31.md": "96024fcf10bf0b93fc59b34e4cdae3f00571cd35bd4da535716f3fcdb34e9c0e"
+    "docs/deployment/shop-namespace-operator-2026-10-31.md": "96024fcf10bf0b93fc59b34e4cdae3f00571cd35bd4da535716f3fcdb34e9c0e",
+    "docs/contracts/completion-goal-2026-11-01.md": "6e5865ebf521fe764b39bebead029b54e5a5402055139bbc30ee532ee6e9f38a"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2185,6 +2186,15 @@
         "acquisition": "parent_verified_excerpt",
         "original_seen_here": false,
         "scope": "Default metadata-only preflight; later explicit empty namespace initialization; no execution in this task, no secrets transfer or provider claims"
+      },
+      {
+        "id": "SRC-GOAL-LOOP-20261102",
+        "source_date": "2026-11-02",
+        "locator": "Current user-supplied GOAL/LOOP attachment in active ChatGPT task",
+        "role": "binding continuation and completion loop for the existing NeXify whole-system assignment",
+        "acquisition": "direct_user_supplied_attachment",
+        "original_seen_here": true,
+        "scope": "Agency, products and suite, TEILEKLAR shop, workshop area, cross-cutting design, function, SEO, legal, verification and evidence; no new payment, legal approval or production permission"
       }
     ],
     "requirements": [
@@ -3550,6 +3560,26 @@
         "next_step": "Root reviews exact candidate and runs only a separately controlled existing-project operator Previewbuild if appropriate; no default deployment bootstrap.",
         "completion_criterion": "Explicit operator report on verified project/store proves namespace metadata; any init is separately invoked and read back; real runtime/commerce tests remain required.",
         "owner_area": "release integration writer; Root controls actual runtime/store execution"
+      },
+      {
+        "requirement_id": "REC-GOAL-LOOP-20261102",
+        "acceptance_case_id": null,
+        "source_ids": [
+          "SRC-GOAL-LOOP-20261102",
+          "SRC-REPO-POLICY"
+        ],
+        "applicable_requirement": "Continue the existing NeXify assignment as a binding GOAL/LOOP until evidenced completion of agency, products/suite, TEILEKLAR shop and workshop area; a build, deployment or present screen is not whole-system acceptance.",
+        "interpretation": "Revision 2 of the existing completion contract and the one existing reconciliation register; no second queue. Each package binds current revision and writer, proves visitor outcome and boundaries, implements the smallest dependency-ready slice, tests positive/negative/persistence/readback and records evidence and residual scope.",
+        "implementation_files": [
+          "docs/contracts/completion-goal-2026-11-01.md"
+        ],
+        "test_evidence": "Project skill sources verified; bounded context selection completed; register schema/derived-view verifier and LLM policy check required for this documentation slice. No product or runtime acceptance inferred.",
+        "actual_delivery": "active_goal_loop_documented_in_existing_contract",
+        "full_requirement_accepted": false,
+        "gap": "All package criteria P01-P26 and unresolved deviations remain open until their current route, data/API, user-journey, persistence, visual, independent-review and live-readback evidence passes on one bound revision.",
+        "next_step": "Bind the latest route and source inventory, keep one writer per file area, select the smallest independent package, implement and execute the documented loop; design owner retains light, shadow, Hero and shared design components until writer coordination completes.",
+        "completion_criterion": "One complete reconciliation matrix with original source, desired user result, route, dependency, owner, status, criterion, evidence and remainder; bound branch/commit/site version; verified live URLs, journeys, persistence, visual acceptance and independent review; every remainder resolved or explicitly assigned.",
+        "owner_area": "D01/D05 overall; package owner; D07 independent review; active design owner for shared visual components"
       }
     ],
     "scope_note": "Initial sourced register awaiting further parent-read originals. Page policy and local files are not substitutes for missing original chat transcripts.",
@@ -4814,5 +4844,7 @@
       }
     }
   },
-  "consent_ui_delta_base": "b4ae9bc6be3ef6a0d657db9388f303d29c4a6e18"
+  "consent_ui_delta_base": "b4ae9bc6be3ef6a0d657db9388f303d29c4a6e18",
+  "goal_loop_delta_base": "83b23c35cee778388dfac6a45023e6038f1f6aa1",
+  "goal_loop_observed_at": "2026-11-02T00:00:00+01:00"
 }

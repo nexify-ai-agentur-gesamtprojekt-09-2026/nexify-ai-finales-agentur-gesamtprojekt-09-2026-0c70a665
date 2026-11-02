@@ -1527,3 +1527,22 @@ Build bestanden. Die Site bleibt privat und absichtlich `noindex,nofollow`;
 nachgewiesen. Eine öffentliche Freigabe braucht eigene Domain-/Rechts-/Inhaltsprüfung.
 Die Home-Einleitung und der Sichtbarkeitseinstieg wurden in DE/NL/FR/EN auf
 konkreten Kundennutzen überarbeitet; Build und 118 Site-Tests erneut bestanden.
+
+## GOAL/LOOP-Fortsetzung · 02.11.2026
+
+Der aktuelle Nutzerauftrag wurde als Revision 2 in das bestehende Completion-Goal
+übernommen und im allein führenden Soll-Ist-Abgleich als
+`REC-GOAL-LOOP-20261102` gebunden. Kein zweites Register angelegt. Gesamtstatus
+bleibt offen; Build/Deployment/Seitenvorhandensein gelten nicht als Abnahme.
+Aktueller Arbeitszweig `codex/sitewide-design-2026-11-02` auf `83b23c3`; private
+Sites-Ausgabe bleibt Ausgangspunkt. Writer-Abstimmung für Licht, Schatten, Hero
+und gemeinsame Designkomponenten ist angefragt; unabhängige Inventar-, Produkt-,
+Daten-, Funktions- und Dokumentationsarbeit darf fortgesetzt werden.
+
+Projekt-Skillquellen wurden verifiziert und der begrenzte Context-Executor hat
+die aktuellen Kernpolicies ohne fehlende Quelle ausgewählt. Small-Business-
+Verifikation bleibt für diesen Slice blockiert, weil die gepinnte Quelle
+`LICENSE` im Checkout fehlt; keine SMB-Automation wurde ausgeführt. `make check`
+ist grün. `make test` bleibt fail-closed bei 697 Tests / 63 Failures / 10 Errors /
+11 Skips: bekannte historische Quellen-/Browserevidenzdrift sowie fehlendes
+`pymongo`. Diese alten Hashbelege wurden nicht auf den neuen Stand umgeschrieben.
