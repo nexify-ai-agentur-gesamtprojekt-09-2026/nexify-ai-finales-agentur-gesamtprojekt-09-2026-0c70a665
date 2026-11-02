@@ -10,7 +10,7 @@ export default function proxy(request: NextRequest) {
   if (!path) return NextResponse.json({ error: "invalid_path" }, { status: 400 });
   if (privateRoute(path, protectedPaths)) {
     if (!request.cookies.get("tk_session")) return privateJson({ error: "authentication_required", sign_in_path: "/anmelden" }, { status: 401 });
-    return privateJson({ error: "membership_required", message: "Konto verifiziert. Eine geprüfte Mandanten-, Seiten- und Rollenfreigabe fehlt." }, { status: 403 });
+    return privateJson({ error: "membership_required", message: "Die Sitzung und die erforderliche Mandanten-, Seiten- und Rollenfreigabe sind hier nicht verifiziert." }, { status: 403 });
   }
   return NextResponse.next();
 }

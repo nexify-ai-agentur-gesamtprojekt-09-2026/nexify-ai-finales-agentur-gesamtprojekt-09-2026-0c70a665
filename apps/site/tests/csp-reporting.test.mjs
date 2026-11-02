@@ -11,8 +11,9 @@ test('external CSP reporting is absent without dropping the enforced header',()=
  assert.equal(directives.some(s=>/^report-(?:uri|to)\b/i.test(s)),false);
  assert.equal(config.headers.some(g=>g.headers.some(h=>['report-to','reporting-endpoints'].includes(h.key.toLowerCase()))),false);
 });
-test('every protective directive remains byte-equivalent to reviewed baseline',()=>{
- assert.deepEqual(directives,baseline.enforcement_directives);
+test('only the observed supplier image directory extends the reviewed CSP',()=>{
+ assert.deepEqual(directives.filter(s=>!s.startsWith('img-src ')),baseline.enforcement_directives.filter(s=>!s.startsWith('img-src ')));
+ assert.deepEqual(directives.filter(s=>s.startsWith('img-src ')),["img-src 'self' data: blob: https://cdnbigbuy.com/images/"]);
  assert.ok(directives.includes("frame-ancestors 'none'"));
  assert.ok(directives.includes("base-uri 'self'"));
  assert.ok(directives.includes("form-action 'self'"));

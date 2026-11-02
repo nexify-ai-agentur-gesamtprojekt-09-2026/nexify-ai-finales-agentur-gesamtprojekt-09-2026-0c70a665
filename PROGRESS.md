@@ -1,3 +1,33 @@
+# Aktuell · FACTORY-Markenausgabe · 02.11.2026
+
+Eigentümerprivate Sites-Fassung: vollständige neue Unternehmenssprache auf 39 öffentlichen Seiten, 81 Sektionen und DE/NL/FR/EN; Metadaten und 52 Textmodule folgen denselben Quellen. Drei Agenturfelder, klar gefasste Projektpakete und getrennte Produktwelten. NeX2fly-Zugang verweist zur FACTORY, kein behaupteter TEILEKLAR-Kontoverbund. AIFly ORACLE einheitlich benannt. Statische Website-Beratung nutzt nur die übergebene öffentliche Seitenprojektion; kein Modell, keine Serveranfrage, keine Geschäftsausführung.
+
+Gestaltung: Text links, begrenzter randloser 16:9-TV rechts, warme Glas-/Metallvideos wiederhergestellt. Drei Fachfilme in 3:2 und eine 10s-Heromontage mit KI-freigestellter Ableitung des ersten Gehporträts. Originale erhalten; verworfene Atelierfamilie separat archiviert. Stumme Montage ist kein natürlicher Geh-/Sprechfilm und kein Lippensynchronitätsnachweis. Echte 30s-Performance ist am Runway-Guthabenlimit blockiert; keine Aufladung oder Ersatzgeneration durchgeführt. Alle 52 Performance-Module bleiben pending/not_approved.
+
+Messung: acht gleichursprüngliche Browser-CSS-Viewports mit 320,390,820,821,1024,1348,1903,2560px, kein horizontaler Überlauf. Desktop-Chatabstand24px auch bei Tastatur-Min-/Maxbreite; kompakter Hero stapelt. Lokaler Marketingdialog liefert geprüfte Seitenkarten. Unabhängiger Quell-/Marken-/Mediendelta-Review; tatsächliche Browserprüfungen sind enger als ein Geräte-/Screenreader-/WCAG-Gesamtnachweis.
+
+Prüfstand: offizieller Sites-Build, TS/Lint und 118 Site-Tests bestanden (einschließlich 12 fachlicher Tests der lokalen Beratung). 7 SDK/Serverchat-Tests, 33 Offline-BigBuy-Integritätsfälle, 10 Sitemap-, 7 Assistant-Copy- und 5 Hero-Vertragsprüfungen bestanden. Vier MP4s mit ffprobe und vollständiger Dekodierung geprüft. make check bestanden. Vollkette729Tests:57Failures/9Errors/14Skips; make clean-check bleibt deshalb rot. Historische Quell-/Browser-/Reconciliation-Nachweise werden nicht blind umgebunden. Node24.22.1/pnpm11.25.0 weicht weiterhin von deklarierter Toolchain ab. Keine Gesamtplattform-/Rechts-/Providerfreigabe.
+
+Next Steps: private Version aus exakt gebautem Quellcommit bereitstellen und nativen Deploymentstatus prüfen; echten Sprecherfilm erst nach aufgehobenem Dienstlimit produzieren; veraltete Systemnachweise fachlich neu erheben. Rechtsregister-/Katalog-/Live-KI-/Zahlungs-/Kalender-/Mandantennachweise bleiben eigenständige offene Auditpunkte.
+
+---
+
+## Historische Arbeitsstände
+
+# Aktuell · Inhalte und Katalogintegrität · 02.11.2026
+
+32 redaktionelle Seiten / vier Sprachen und67 Fachabschnitte neu gefasst; sieben Rechtsseiten unverändert und weiterhin offen. Home/Hero/Erklärmodule sind auf gemeinsame Seiteninhalte gebunden. Vite-Katalog/Suche/Detailansichten, Sprachtexte, Bildfehler und unbekannter Bestand korrigiert; HTML-API-Fallbacks gelten als Fehler. BigBuy wird nur nach vollständiger Validierung atomar veröffentlicht. Keine realen Imports/DB-/Zahlungs-/DNSänderungen.
+
+Kanonischer Draft-PR60: 77d80462944ed2320ad563cd1140036b95bf21ba, basiert auf main ad4bbf69243b7d489594a8c2d20d7cf838dcf14c. Main ist unverändert; seine bestehenden Medien-/Authkomponenten wurden in den angepassten Varianten erhalten. Interner Volltext-Prüfdatensatz ist nicht Teil des PR. Sites bleibt eine getrennte eigentümerprivate Arbeitsausgabe.
+
+Prüfung:102 Site-Tests,80 gezielte BigBuy-Checks, Site-Build und make check bestanden. Vollkette729 Tests:54 Failures/9 Errors/11 Skips; verbleibende gebundene Nachweise sind veraltet. make check-arch ist rot. Keine Gesamtabnahme. Gemessene Hosttoolchain Node24.22.1/pnpm11.25.0 weicht vom deklarierten22.23.4/12.15.0 ab. Details/Quellen/Owner/nächste Nachweise: docs/research/content-product-blueprint-2026-11-02.md.
+
+Next Steps: Runtimeowner bestätigt Store-/Namespacebindung und stellt nach kontrolliertem Preflight den echten Katalog wieder her; Katalogowner verifiziert aktuellen Providervertrag und vollständige Daten; Medienowner prüft echte Artikelbilder; QA erneuert die tatsächlich betroffenen Browserbelege. Betreiber-, Rechts- und Preisfakten bleiben unentschieden, bis belegt. Interner Wiederprüfungspunkt03.11.2026,12:00UTC, keine Kunden-SLA/Automation.
+
+---
+
+## Erhaltene Vorstände
+
 # Lokales Setup, GitHub und Vercel-Preview · 28.10.2026
 
 Current State: lokale Toolchain mit Node22.23.4 und pnpm12.15.0 über
@@ -1386,3 +1416,114 @@ make check scheitert im partiellen kanonischen Checkout am fehlenden ds-audit-cl
 make test wegen vorgelagerter Sperre nicht gestartet. Isolierte Tests ersetzen
 die offene Gesamt-/E2E-/native Reviewabnahme nicht. Keine CI-/Provider-/
 Public-/DNS-/Scheduleränderung, keine Drittmitteilungen oder Brainübernahme.
+
+
+## Separate Sites-Ausgabe · 01.11.2026
+
+Ausgangsquelle `ad4bbf69243b7d489594a8c2d20d7cf838dcf14c`; neues privates Sites-Projekt `appgprj_6ae7ad63df2081918a843f996caf9422`. Produktionsbuild, 77 Site-Tests, Designaudit und Datei-/Konfigurationsintegrität bestanden. Vollsuite und Architekturprüfung nicht grün; historische Quell-/Browsernachweise sowie Backendbetrieb bleiben offen. Keine bestehende Domain oder Runtime umgestellt. Umfang, Messwerte, Quellenübertragung und Owner für Restlücken: `docs/deployment/sites-2026-11-01.md`. Veröffentlichung wird über den nativen Sites-Deploymentstatus nachgewiesen; dieser lokale Eintrag behauptet noch keinen Erfolg.
+
+
+## SOLL-/Abweichungsprüfung · 01.11.2026
+
+Führender V3R2-Plan Library-v4 quellengebunden: alle 26 Pflichtpakete, 30 Befunde, keine Gesamtfreigabe. Kontakt-Recovery, vier Textsprachen, Mediensteuerung und PWA-Teilkorrekturen umgesetzt. Build/Typecheck, 81 Site-Tests, acht Recovery- und drei HTTP-Tests bestanden; Pythonvollkette 685/28 Failures/9 Errors/14 Skips bleibt rot. Begrenzter Browser- und unabhängiger Reviewnachweis: `docs/reviews/completion-goal-2026-11-01.json`; Fertigstellungspfad: `docs/contracts/completion-goal-2026-11-01.md`. Kein produktiver Backend-/Provider-/Kaufabschluss und keine öffentliche Domainumstellung.
+
+
+## Graphite Atelier und Medien-/REA-Migration · 01.11.2026
+
+Aktuelle Nutzerentscheidung USER-LUXURY-20261101: warme Graphit-/Metallmaterialien, gezieltes Glas, eingerückte Authcard, optionales Assistenzdock mit Einklapppfeil und drei Bereichsstills. Ungeprüfte Home-Reviewperformances nicht mehr veröffentlicht; Originalquellen erhalten. Build/Typecheck,81 Site- und5 Hero-Vertragsprüfungen bestanden; Vollkette685Tests/40Failures/9Errors/14Skips bleibt rot, keine historische Hashfreigabe erneuert. Desktopteilprüfung und unabhängiger Quell-/Bildreview vorhanden; letzte Browserwiederholung wegen URLpolicyblockiert, finale Mobil/Safari-/Glasabnahme offen. REA6.8.0 isoliert wiederhergestellt,MCP229Tools/6Prompts,Analyse an Prozessownership/ps blockiert. Keine globale Registrierung/HTTP-/Securityänderung oder bezahlte Videogenerierung. Dokumentation: `docs/design/graphite-atelier-media-migration-2026-11-01.md`; native private Veröffentlichung gesondert nachweisen.
+
+
+## Hero- und Kantenverfeinerung · 01.11.2026
+
+Aktuelle Nutzerkorrektur: Chatinterface beibehalten,nur innenliegende Kante/Licht verfeinern. Große ursprüngliche Trio-Grafik1920×1080bytegleich imHero wiederhergestellt,Miniaturenreihe entfernt,keinBeschnitt/keineGesichtsänderung. Desktop1348px: Bild748,83×421,20px,keinOverflow;Dock28pxRadius,Minimierer48×48px,Einklappen/EscapeFokuszurück. Build/Typecheck+81Site+5HeroTestsbestanden;Fullsuite685/40Failures/9Errors/14Skipsbleibtrot. Enger unabhängigerQuellreviewohneBlocker;Mobil/Safari/Filmabnahmeoffen. AktuellerReadback im bestehenden `docs/reviews/graphite-atelier-2026-11-01.json` unter `refinement`.
+
+
+## Gesamtteam-Bildfeinschliff · 02.11.2026
+
+Freie Originalfiguren auf gemeinsamer warmer Seitenfläche statt JPEG-Bildkasten; glatter Oracle in allen Erklärmodulen und im Companion vereinheitlicht. Die WebP-Derivate wurden unabhängig auf identische Alphakanäle und sichtbare RGBA-Pixel geprüft. Originaldateien bleiben erhalten. Home-Fachmotive erscheinen jeweils einmal; acht passende Routenzuordnungen, keine Text- oder CTA-Verluste. 85 Site-Tests, fünf Hero-Prüfungen, Build und Typecheck bestehen. Die Vollkette bleibt bei 685 Tests / 43 Failures / neun Errors / 14 Skips rot. Desktop und CSS-Viewports mit 320/390/820 Pixeln geprüft; Dialog und Fokusrückkehr bei 390 Pixeln korrekt. Keine physische Safari- oder Filmabnahme. Vier Fachreviews ohne weitere konkrete Blocker. Aktueller Nachweis im bestehenden Designbericht und Reviewrecord unter `whole_team_image_finish`.
+
+## Begrenzter Fernseher und Chatabstand · 02.11.2026
+
+Neueste Nutzerkorrektur: große TV-/Leinwandfläche mit freien Rändern statt Vollbreite; links am vorhandenen Chat Platz lassen. Ausschließlich die bestehende owner-private Cinema-Darstellung angepasst: Filmrahmen maximal1120px, Originalfilm weiterhin16:9/contain, Text darüber,24px Spaltenabstand bei offenem Desktopdock. Keine Medienbytes, Aussagen, Rechte oder Chatfunktionen verändert. Die konkrete historische „erste oder zweite Szene“ ist nicht eindeutig belegt; vorhandener Film bleibt erhalten.
+
+Build inklusive Typecheck und Compilerprüfung sowie102Site-Tests bestanden. Browser1348px Inhaltsbreite: geschlossene Ansicht1120px Rahmen/1102×619,875px Bild; geöffneter Chat24px Abstand, Bild801,719×450,953px, kein horizontaler Overflow. Separate Browser-Iframe-Viewports390/820/1000px:16:9 contain, kein Overflow; nativer Transkriptmarker und48px Ziel bleiben erhalten. Wiedergabe/Pause, Transkriptöffnung und mobiles Escape-Schließen geprüft. Unabhängiger Quellreview: entfallenen Summary-Marker korrigiert; keine weitere statische Sperre. Keine physische Safari-/Geräteabnahme.
+
+`make check` bestanden; `make test` bleibt rot:697Tests/54Failures/10Errors/14Skips, unter anderem veraltete Quellen-/Evidenzbindungen und fehlendesPython-httpx im Executor. `make clean-check` scheitert ebenfalls an der Pythonvollkette; übrige Sauberkeitsdimensionen melden keinen Fehler. Keine historischen Freigaben oder Prüfsummen zur Erzeugung eines grünen Status umgebunden. Buildhinweise: HostNode24/pnpm11 statt deklarierterNode22/pnpm12; bestehende großeJS-Chunks. Die Gesamtsystemabnahme bleibt offen. Next Steps: native private Sites-Veröffentlichung dieses eng begrenzten Patches und Live-Readback; keine Änderung der Audience oder anderer Laufzeiten.
+
+## 02.11.2026 · Home nach eingefügtem Gesamtkonzept (private Sites-Ausgabe)
+
+Nur Home neu aufgebaut; vorhandener Hero und Identitätsdateien erhalten,
+begrenzter zweispaltiger Film, räumliche Rundungen, drei statische Fachbilder,
+neue DE/NL/FR/EN-Inhalte und getrennte Produktwege. Preisbeispiel ausdrücklich
+hypothetisch, keine neue Ratecard/Kaufaktivierung. Dokumentation und Belege:
+`docs/design/home-review-2026-11-02.{md,json}` und
+`docs/design/home-browser-qa-2026-11-02.json`.
+
+Build/TypeScript und 118 Site-Tests grün; make check grün. Chromium: 320/390/
+820/1280/1440 CSS-px ohne horizontalen Überlauf, Sidebar, Sprachen, echte
+Tastaturnavigation, Rechner und manuelle Videowiedergabe geprüft. Kein
+nativer Safari-/200%-Zoom-/Sprecherfilm-/Backendnachweis. Vollsuite und
+Ausgangsstand jeweils 697 Tests mit 59 Failures/10 Errors/11 Skips; bekannte
+Evidenzdrift und fehlendes pymongo bleiben offen. Keine alten Hashbelege
+umgeschrieben. Veröffentlichung bleibt in derselben owner-private Sites-Ausgabe;
+keine Änderung an öffentlichen Domains oder aktiven Diensten.
+
+## 02.11.2026 · Home-Details und gemeldeter Videohänger
+
+Detailpass auf der bestätigten Home, neuer Befund zum Scroll-/Wiedergabestatus
+behoben. Explizite Pause bleibt erhalten; Scrollpause kann wiederaufnehmen.
+Ladezustand, Fortschritt und „Erneut abspielen“ unterscheiden Laden/Ende von
+Fehlern. Vollständiger natürlicher 10s-Decode, Restart und verzögerte Medienantwort
+lokal im Browser getestet. Bestehende stumme Montage unverändert. Home-Typografie,
+SVG-Pfeile, Lichtkante und mobile 48px-Steuerung verfeinert. Nachweise und Grenzen:
+`docs/design/home-detail-polish-2026-11-02.md`. Build, 118 Site-Tests, make check
+grün; historische Gesamtsuite bleibt rot. Keine neuen Tarife, Backendänderungen
+oder öffentlichen Domainumstellungen.
+
+## 02.11.2026 · Breite Home statt 1440px-Begrenzung
+
+Direkte Nutzerkorrektur anhand 2761×1280px mit offener Seitenleiste: ganze Home
+bis 2160px Inhaltscontainer, Film bis1120px, variable kleine Schrift bis16/18px.
+In diesem Fenster: Website2297px, Home2160px, Film1119,97px. Weitere geprüfte
+Breiten2560/1920/1440/820/390/320 ohne horizontalen Überlauf. Beleg:
+`docs/design/home-wide-qa-2026-11-02.json`. Unterseiten/Chat behalten ihre Grenzen.
+
+Neuer24s-Film explizit beauftragt; das eingefügte Agentur-Drehbuch ist konkret
+in `docs/production/art-direction/home-film-24s-20261102.md` vorbereitet.
+Runway-Zugang aktuell bestätigt,398Credits. Vorbereitete personenbezogene
+Studioszene noch nicht an Runway übertragen: gezielte Rückfrage zur im alten
+Produktionsprotokoll dokumentierten Uploadsperre ist offen. Keine bezahlte
+Generation, Aufladung, Stimmklonung oder vermeintlich fertiger neuer Film.
+
+## 02.11.2026 · Aktuell: breite Home, neuer Film, Redaktion und Footer
+
+Die zwischenzeitlich offene Referenzübertragung wurde vom Nutzer ausdrücklich
+freigegeben. Neuer nativer24s-Studiofilm mit deutscher Off-Stimme und passenden
+Untertiteln eingebaut; kein Stimmklon, kein Creditkauf. Letzte Nutzerkorrekturen
+(halbierter Leerraum, alle Home-Abschnitte breiter, neue Texte/Angebote statt
+Standardkarten/Trenner/Rechner, kompletter Footer und vier Sidebar-Bereiche)
+umgesetzt. Kanonischer aktueller Bericht:
+`docs/design/home-final-review-2026-11-02.md`. Tests: Build/118Site-Tests/make check
+grün; vollständige historische Python-Prüfung bleibt59Failures/10Errors/11Skips
+bei697Tests. Browser- und Filmkontrollen mit aktuellen Quellen gebunden.
+Nur bestehende private Sites-Ausgabe; keine öffentliche Domainumstellung.
+
+## Home-Verfeinerung · 02.11.2026
+Home: gemeinsame Atelier-Oberflächen und Überschriftenverlauf, SEO/GEO/lokale
+Sichtbarkeit in DE/NL/FR/EN, Footer-Utilities eingerückt. Die bestehende Glasmontage
+enthält jetzt die nachgewiesene ElevenLabs-Offstimme (keine Sprechperformance).
+Browserprüfung: Wiedergabe mit unmuted=true, fortschreitender Zeit und dekodierten
+Audiobytes; 2709/1440/390px ohne horizontalen Überlauf, Footer seitlich mindestens
+24px und unten 48px. Site-Tests: 118 bestanden. Globaler Python-Testlauf: weiterhin
+59 Fehlerfälle und 10 Errors wie im vorher dokumentierten Stand; keine globale
+Abnahme. Die konkret gelobte frühere Schriftfassung bleibt nicht eindeutig zugeordnet.
+
+## Home-Metadaten · 02.11.2026
+Die owner-private Site hat Home-Titel, Beschreibung, Open Graph, Canonical und
+strukturierte Angaben zu Organization, WebSite, WebPage sowie dem vorhandenen
+Leistungsangebot. DE/NL-Metadaten wurden im Browser gelesen; 118 Site-Tests und
+Build bestanden. Die Site bleibt privat und absichtlich `noindex,nofollow`;
+öffentliches Ranking, GEO-Zitationen oder lokale Sichtbarkeit sind damit nicht
+nachgewiesen. Eine öffentliche Freigabe braucht eigene Domain-/Rechts-/Inhaltsprüfung.
+Die Home-Einleitung und der Sichtbarkeitseinstieg wurden in DE/NL/FR/EN auf
+konkreten Kundennutzen überarbeitet; Build und 118 Site-Tests erneut bestanden.

@@ -4,11 +4,11 @@
   "version": "0.2.0",
   "type": "module",
   "scripts": {
-    "dev": "node tools/dev.mjs",
+    "dev": "node apps/site/node_modules/vite/bin/vite.js preview apps/site --config apps/site/vite.config.ts",
     "dev:web": "pnpm --filter @nexify/site dev",
     "dev:gateway": "python3 apps/agent-gateway/server.py --database .local/visitor.sqlite --port 3003 --web-origin http://127.0.0.1:3004",
     "preview:references": "node server.mjs",
-    "build": "pnpm --filter @nexify/site build",
+    "build": "pnpm --filter @nexify/site build && node scripts/sites-output.mjs",
     "typecheck": "pnpm --filter @nexify/site typecheck && pnpm typecheck:agent && pnpm --filter @nexify/web typecheck",
     "lint": "node apps/web/scripts/generate-public-data.mjs && node tools/lint.mjs && node tools/ds-audit-cli.js",
     "verify": "make check && make test && make check-arch",
@@ -16,7 +16,9 @@
     "build:next-reference": "pnpm --filter @nexify/web build",
     "release:site": "python3 tools/site_release.py build --input apps/site/dist --output .local/releases",
     "test:agent": "node --test packages/agent-runtime/tests/*.test.mjs",
-    "typecheck:agent": "tsc -p tsconfig.api.json"
+    "typecheck:agent": "tsc -p tsconfig.api.json",
+    "dev:original": "node tools/dev.mjs",
+    "dev:source": "node apps/site/scripts/generate-public-data.mjs && node apps/site/node_modules/vite/bin/vite.js apps/site --config apps/site/vite.config.ts"
   },
   "packageManager": "pnpm@12.15.0",
   "engines": {

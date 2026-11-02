@@ -3,7 +3,7 @@
   "created_at": "2026-10-27T06:20:27.628626+00:00",
   "implementation_base": "0cf854505a1f938c9d3fc49110c9a127fd3afca6",
   "status_vocabulary": {
-    "local_fixed_verified": "lokal behoben und gepr\u00fcft",
+    "local_fixed_verified": "lokal behoben und geprüft",
     "not_reproduced": "nicht reproduziert mit Grund",
     "local_remaining": "lokal noch behebbar",
     "external_blocked": "konkret extern blockiert"
@@ -27,15 +27,15 @@
       "regression_or_method": "Persistierter Kaufvertrag und Reservierungssnapshot; Legacy-Start-/Route-/Merchant- und Replaygegenproben.",
       "change": "6064c70, b44e448",
       "remaining_limit": "Reale Zahlungs-/Provideradapter bleiben offen.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR35-4379248093",
       "thread_id": "PRRT_kwDOU0-A_c6wVYq0",
       "comment_id": 4379248093,
       "pr": 35,
-      "title": "SEO-Importatomizit\u00e4t",
+      "title": "SEO-Importatomizität",
       "status": "local_fixed_verified",
       "remote_resolved": false,
       "source_refs": [
@@ -43,11 +43,11 @@
         "tests/test_seo_catalog.py",
         "evidence/integration-2026-10-27/independent-review.md"
       ],
-      "regression_or_method": "BEGIN IMMEDIATE vor Aktualit\u00e4tsvergleich; Konkurrenz, \u00e4ltere Messung, Konflikt und Rollback.",
+      "regression_or_method": "BEGIN IMMEDIATE vor Aktualitätsvergleich; Konkurrenz, ältere Messung, Konflikt und Rollback.",
       "change": "72cdff1",
       "remaining_limit": "Kein Remoteindexingbeleg.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359032",
@@ -62,11 +62,11 @@
         "apps/site/tests/standalone.test.mjs",
         "evidence/one-app-2026-10-27/browser-standalone.txt"
       ],
-      "regression_or_method": "Einzelbundle plus syntaktische Import-/Reexportpr\u00fcfung, negative verschachtelte Chunks und echter Offlinebrowser.",
+      "regression_or_method": "Einzelbundle plus syntaktische Import-/Reexportprüfung, negative verschachtelte Chunks und echter Offlinebrowser.",
       "change": "58ea5b3, 899c326",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359041",
@@ -81,11 +81,11 @@
         "apps/site/package.json",
         "evidence/one-app-2026-10-27/build.txt"
       ],
-      "regression_or_method": "Engines >=22.23.4 <23.0.0; Build tats\u00e4chlich unter22.23.4. Fr\u00fchere Node22.0 wurde nicht ausgef\u00fchrt.",
+      "regression_or_method": "Engines >=22.23.4 <23.0.0; Build tatsächlich unter22.23.4. Frühere Node22.0 wurde nicht ausgeführt.",
       "change": "58ea5b3",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359082",
@@ -100,11 +100,11 @@
         "tests/test_release_prerequisites.py",
         "evidence/one-app-2026-10-27/release-prerequisites.txt"
       ],
-      "regression_or_method": "Fehlende separate Voraussetzung reproduziert und erg\u00e4nzt; Regression verhindert Ersatz durch Projektsetup.",
+      "regression_or_method": "Fehlende separate Voraussetzung reproduziert und ergänzt; Regression verhindert Ersatz durch Projektsetup.",
       "change": "aktuelles Abdeckungsdelta",
-      "remaining_limit": "Tats\u00e4chliche Domainbindung extern unbest\u00e4tigt; Produktionsfreigabe bleibt offen. Regression pr\u00fcft den Voraussetzungskatalog, keinen Deploymentadapter.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "remaining_limit": "Tatsächliche Domainbindung extern unbestätigt; Produktionsfreigabe bleibt offen. Regression prüft den Voraussetzungskatalog, keinen Deploymentadapter.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359093",
@@ -119,11 +119,11 @@
         "tests/test_release_prerequisites.py",
         "evidence/one-app-2026-10-27/release-prerequisites.txt"
       ],
-      "regression_or_method": "connect_vercel_project durch pr\u00e4zisen aktuellen Root/Build/Output/Domain-Nachweis ersetzt; historischer Anschluss erhalten.",
+      "regression_or_method": "connect_vercel_project durch präzisen aktuellen Root/Build/Output/Domain-Nachweis ersetzt; historischer Anschluss erhalten.",
       "change": "aktuelles Abdeckungsdelta",
       "remaining_limit": "Keine neue Verbindung und keine verifizierten fehlenden Settings behauptet.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359101",
@@ -136,11 +136,11 @@
       "source_refs": [
         "PROGRESS.md"
       ],
-      "regression_or_method": "Gemeldete verkettete Deployment-/Authabs\u00e4tze reproduziert und quellentreu mit normalen Wortabst\u00e4nden neu gefasst; manuelle Lesekontrolle.",
+      "regression_or_method": "Gemeldete verkettete Deployment-/Authabsätze reproduziert und quellentreu mit normalen Wortabständen neu gefasst; manuelle Lesekontrolle.",
       "change": "aktuelles Abdeckungsdelta",
-      "remaining_limit": "Historische Fakten ausdr\u00fccklich keine heutigen Laufzeitbelege; keine UI-Neugestaltung.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "remaining_limit": "Historische Fakten ausdrücklich keine heutigen Laufzeitbelege; keine UI-Neugestaltung.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359108",
@@ -158,8 +158,8 @@
       "regression_or_method": "Root-Engine ebenfalls >=22.23.4 <23.0.0; keine pauschale22.x-Freigabe.",
       "change": "58ea5b3, 899c326",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359121",
@@ -173,18 +173,18 @@
         "AGENTS.md",
         "skills-lock.json"
       ],
-      "regression_or_method": "Sauberer Clone ohne .agents/skills best\u00e4tigt; Anleitung jetzt bedingt auf lokale Verf\u00fcgbarkeit und Hashpr\u00fcfung, fehlende Kopie bleibt L\u00fccke.",
+      "regression_or_method": "Sauberer Clone ohne .agents/skills bestätigt; Anleitung jetzt bedingt auf lokale Verfügbarkeit und Hashprüfung, fehlende Kopie bleibt Lücke.",
       "change": "aktuelles Abdeckungsdelta",
       "remaining_limit": "Keine Installation erfolgt; Lockfile ist kein gelesener Skill.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359133",
       "thread_id": "PRRT_kwDOU0-A_c6wcuM_",
       "comment_id": 4382359133,
       "pr": 36,
-      "title": "Auth auf allen \u00f6ffentlichen Routen",
+      "title": "Auth auf allen öffentlichen Routen",
       "status": "local_fixed_verified",
       "remote_resolved": false,
       "source_refs": [
@@ -193,11 +193,11 @@
         "apps/site/tests/browser-auth.mjs",
         "evidence/one-app-2026-10-27/browser-auth.txt"
       ],
-      "regression_or_method": "Globale Providerh\u00fclle entfernt; Browser pr\u00fcft null SDK-Ladevorg\u00e4nge vor Loginroute.",
+      "regression_or_method": "Globale Providerhülle entfernt; Browser prüft null SDK-Ladevorgänge vor Loginroute.",
       "change": "58ea5b3, 899c326",
-      "remaining_limit": "Provider bleibt standardm\u00e4\u00dfig deaktiviert.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "remaining_limit": "Provider bleibt standardmäßig deaktiviert.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359144",
@@ -212,11 +212,11 @@
         "apps/site/tests/browser-auth.mjs",
         "evidence/one-app-2026-10-27/browser-auth.txt"
       ],
-      "regression_or_method": "Localeauswahl deDE/nlNL/frFR aus Workspace; Browser pr\u00fcft alle drei.",
+      "regression_or_method": "Localeauswahl deDE/nlNL/frFR aus Workspace; Browser prüft alle drei.",
       "change": "58ea5b3",
       "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382359158",
@@ -231,11 +231,11 @@
         "apps/site/tests/browser-auth.mjs",
         "evidence/one-app-2026-10-27/browser-auth.txt"
       ],
-      "regression_or_method": "Nur Authpanel suspendiert; verz\u00f6gerter SDK-Import erh\u00e4lt Entwurf und gew\u00e4hlte Sprache.",
+      "regression_or_method": "Nur Authpanel suspendiert; verzögerter SDK-Import erhält Entwurf und gewählte Sprache.",
       "change": "58ea5b3, 899c326",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382373019",
@@ -253,8 +253,8 @@
       "regression_or_method": "Derselbe Befund, eigene Thread-ID erhalten; gleicher kausaler Fix und Regression.",
       "change": "58ea5b3, 899c326",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382373095",
@@ -269,11 +269,11 @@
         "apps/site/tests/browser-auth.mjs",
         "evidence/one-app-2026-10-27/browser-auth.txt"
       ],
-      "regression_or_method": "Lokale ErrorBoundary; abgebrochener Chunk l\u00e4sst Navigation, Sprache und \u00f6ffentliche App intakt.",
+      "regression_or_method": "Lokale ErrorBoundary; abgebrochener Chunk lässt Navigation, Sprache und öffentliche App intakt.",
       "change": "58ea5b3",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382373156",
@@ -291,8 +291,8 @@
       "regression_or_method": "Doppelter Locale-Befund; derselbe Sprach-/Widget-Browsernachweis.",
       "change": "58ea5b3",
       "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382373215",
@@ -308,11 +308,11 @@
         "evidence/one-app-2026-10-27/browser-auth.txt",
         "apps/site/tests/browser-integration.mjs"
       ],
-      "regression_or_method": "Signout mit festem lokalem Redirect, Tastatur, Pending-/Fehlerzustand und bewusstem Retry; zustandsf\u00e4higes Test-SDK.",
+      "regression_or_method": "Signout mit festem lokalem Redirect, Tastatur, Pending-/Fehlerzustand und bewusstem Retry; zustandsfähiges Test-SDK.",
       "change": "58ea5b3, 899c326",
-      "remaining_limit": "Keine echte Sessionwiderrufs-/Mehrtab-/Providerpr\u00fcfung.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "remaining_limit": "Keine echte Sessionwiderrufs-/Mehrtab-/Providerprüfung.",
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382376714",
@@ -327,11 +327,11 @@
         "apps/site/package.json",
         "evidence/one-app-2026-10-27/build.txt"
       ],
-      "regression_or_method": "Doppelter Befund, eigenst\u00e4ndige Zuordnung; dieselbe deklarierte Untergrenze und Buildprobe.",
+      "regression_or_method": "Doppelter Befund, eigenständige Zuordnung; dieselbe deklarierte Untergrenze und Buildprobe.",
       "change": "58ea5b3",
       "remaining_limit": "Remote-Thread bleibt offen; keine Produktionsabnahme aus lokalem Test.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR36-4382376721",
@@ -349,15 +349,15 @@
       "regression_or_method": "Doppelter Locale-Befund; derselbe Sprach-/Widget-Browsernachweis.",
       "change": "58ea5b3",
       "remaining_limit": "Synthetisches SDK, keine reale Providerabnahme.",
-      "owner_role": "Engineering / unabh\u00e4ngiger Reviewer",
-      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht l\u00f6sen."
+      "owner_role": "Engineering / unabhängiger Reviewer",
+      "next_action": "Remote-Abnahme nur nach separater Freigabe am publizierten exakten Stand; Thread hier nicht lösen."
     },
     {
       "id": "PR39-4388404270",
       "thread_id": null,
       "comment_id": 4388404270,
       "pr": 39,
-      "title": "Clerk-Men\u00fcsprache",
+      "title": "Clerk-Menüsprache",
       "status": "local_fixed_verified",
       "remote_resolved": false,
       "source_refs": [
@@ -376,7 +376,7 @@
       "thread_id": null,
       "comment_id": 4388404318,
       "pr": 39,
-      "title": "Medien-Skriptwerte m\u00fcssen Strings sein",
+      "title": "Medien-Skriptwerte müssen Strings sein",
       "status": "local_fixed_verified",
       "remote_resolved": false,
       "source_refs": [
@@ -461,13 +461,13 @@
         "apps/site/tests/browser-coverage.mjs",
         "evidence/one-app-2026-10-27/public-route-coverage.json"
       ],
-      "local_proof": "72 direkte Routen-/Sprachpr\u00fcfungen f\u00fcr36 \u00f6ffentliche Seiten,1724 reale DOM-Linkaktivierungen mit Back/Forward und gemeinsamer Shell;216 Breitenf\u00e4lle, Reload und Skiplink; unbekannte/private Wege im Integrationstest.",
+      "local_proof": "72 direkte Routen-/Sprachprüfungen für36 öffentliche Seiten,1724 reale DOM-Linkaktivierungen mit Back/Forward und gemeinsamer Shell;216 Breitenfälle, Reload und Skiplink; unbekannte/private Wege im Integrationstest.",
       "remaining_gap": "Keine freie Kombination nicht vorhandener Links; keine Produktions-/Providerroute aus dem lokalen Browser abgeleitet.",
       "owner_role": "Frontend QA",
       "assigned_executor": null,
-      "next_allowed_action": "Am freigegebenen Zielbuild die realen Providergrenzen separat pr\u00fcfen.",
+      "next_allowed_action": "Am freigegebenen Zielbuild die realen Providergrenzen separat prüfen.",
       "required_prerequisite": "Keine freie Kombination nicht vorhandener Links; keine Produktions-/Providerroute aus dem lokalen Browser abgeleitet.",
-      "local_executor": "isolierter Engineering-Executor; unabh\u00e4ngige Gegenpr\u00fcfung separat"
+      "local_executor": "isolierter Engineering-Executor; unabhängige Gegenprüfung separat"
     },
     {
       "id": "MASTER-02",
@@ -483,16 +483,16 @@
         "evidence/one-app-2026-10-27/takeover-runtime-read.json",
         "evidence/bigbuy-batch-2026-10-27/remote-observation.json"
       ],
-      "local_proof": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zur\u00fcckgegeben. Lokale Integration ist kein Deployment. New direct27.10 read: actual external PR40 merge main219f244 at15:25:02Z; canonical deployment dpl_7cJkhVUzjZjxhZzxbtaQwFbeeq1V production READY, same Git tree as reviewed69ed580. Earlier main2a/.de mapping is historical, current .de reassignment not inferred. No functional acceptance from metadata. Parent independent observation: final nexifyai.cloud HTTP404 at16:32/17:10Z; separate external repository job skipped backend-health. Domain not accepted and no DNS/hosting changes; canonical Vercel READY is separate.",
+      "local_proof": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zurückgegeben. Lokale Integration ist kein Deployment. New direct27.10 read: actual external PR40 merge main219f244 at15:25:02Z; canonical deployment dpl_7cJkhVUzjZjxhZzxbtaQwFbeeq1V production READY, same Git tree as reviewed69ed580. Earlier main2a/.de mapping is historical, current .de reassignment not inferred. No functional acceptance from metadata. Parent independent observation: final nexifyai.cloud HTTP404 at16:32/17:10Z; separate external repository job skipped backend-health. Domain not accepted and no DNS/hosting changes; canonical Vercel READY is separate.",
       "remaining_gap": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.",
       "owner_role": "Deploymentowner",
       "assigned_executor": null,
-      "next_allowed_action": "Ziel-/Ownerbindung lesend ermitteln; keine Alias\u00e4nderung.",
+      "next_allowed_action": "Ziel-/Ownerbindung lesend ermitteln; keine Aliasänderung.",
       "required_prerequisite": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.",
       "closure_decision": {
         "review_base": "c09204c4cfe5d972b7185123d5eca530d1052038",
         "reviewed_at": "2026-10-27T06:26:46.789884+00:00",
-        "missing_input": "Aktueller autoritativer Project-Settings-Read mit Projekt-/Teamidentit\u00e4t, rootDirectory, buildCommand, outputDirectory, productionBranch; best\u00e4tigte gew\u00fcnschte kanonische Domain.",
+        "missing_input": "Aktueller autoritativer Project-Settings-Read mit Projekt-/Teamidentität, rootDirectory, buildCommand, outputDirectory, productionBranch; bestätigte gewünschte kanonische Domain.",
         "owner_area": "Deployment / Domainentscheidung",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -501,9 +501,9 @@
           "config/one-web-app.json",
           "evidence/one-app-2026-10-27/deployment-parent-report.json"
         ],
-        "local_analysis_or_test": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zur\u00fcckgegeben. Lokale Integration ist kein Deployment.",
-        "smallest_next_action": "Deploymentowner liefert unver\u00e4nderten aktuellen Settings-/Alias-Lesebeleg und dokumentiert Zielentscheidung; keine Umschaltung.",
-        "closure_criterion": "Projekt, Root, Build, Output, Branch, Aliasziel und Zeitpunkt eindeutig gebunden; Ist/Ziel und R\u00fcckweg best\u00e4tigt, keine Ableitung aus READY allein.",
+        "local_analysis_or_test": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zurückgegeben. Lokale Integration ist kein Deployment.",
+        "smallest_next_action": "Deploymentowner liefert unveränderten aktuellen Settings-/Alias-Lesebeleg und dokumentiert Zielentscheidung; keine Umschaltung.",
+        "closure_criterion": "Projekt, Root, Build, Output, Branch, Aliasziel und Zeitpunkt eindeutig gebunden; Ist/Ziel und Rückweg bestätigt, keine Ableitung aus READY allein.",
         "boundary": "current_authoritative_settings_and_domain_decision",
         "related_cases_not_start_locks": [
           "MASTER-03",
@@ -546,16 +546,16 @@
         "tools/app_backend.py",
         "config/one-web-app.json"
       ],
-      "local_proof": "Synthetisches Sign-in/out, Fehlergrenzen, lokale Frist und Rollenentzug gepr\u00fcft.",
-      "remaining_gap": "Realer Providerablauf, Widerruf, mehrere Tabs und gesch\u00fctzte Serverdirektaufrufe unbewiesen.",
+      "local_proof": "Synthetisches Sign-in/out, Fehlergrenzen, lokale Frist und Rollenentzug geprüft.",
+      "remaining_gap": "Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.",
       "owner_role": "Identityowner",
       "assigned_executor": null,
-      "next_allowed_action": "Exakten autorisierten Issuer und Sessionadapter nachweisen, dann reale Positiv-/Negativf\u00e4lle.",
-      "required_prerequisite": "Realer Providerablauf, Widerruf, mehrere Tabs und gesch\u00fctzte Serverdirektaufrufe unbewiesen.",
+      "next_allowed_action": "Exakten autorisierten Issuer und Sessionadapter nachweisen, dann reale Positiv-/Negativfälle.",
+      "required_prerequisite": "Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Passender tats\u00e4chlicher Issuer, serverseitige Signatur-/Audiencepr\u00fcfung, Session-/Widerrufadapter und autorisierte Testidentit\u00e4ten; Domainbindung.",
+        "missing_input": "Passender tatsächlicher Issuer, serverseitige Signatur-/Audienceprüfung, Session-/Widerrufadapter und autorisierte Testidentitäten; Domainbindung.",
         "owner_area": "Identity / Sessionintegration",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -567,9 +567,9 @@
           "apps/site/tests/browser-auth.mjs",
           "tests/test_one_app_backend.py"
         ],
-        "local_analysis_or_test": "Lokale Sessionklasse vertraut ausschlie\u00dflich dem autorisierten Testaufrufer; kein Browser\u2192Server-Identityadapter. Historische Secret-Metadaten belegen weder Wert noch Issuerpaar. Synthetische UI-/Role-/Expirytests vorhanden.",
-        "smallest_next_action": "Identityowner weist exakten Issuer/Origin/Adaptervertrag ohne Secretwerte nach; danach begrenzte reale Mehrtab-/Ablauf-/Logout-/Direktaufrufpr\u00fcfung autorisieren.",
-        "closure_criterion": "Reale Sign-in/out-, Ablauf-/Widerruf- und Mehrtabf\u00e4lle plus abgewiesener gesch\u00fctzter Serverdirektaufruf am exakten Release bestanden; Testsession z\u00e4hlt nicht.",
+        "local_analysis_or_test": "Lokale Sessionklasse vertraut ausschließlich dem autorisierten Testaufrufer; kein Browser→Server-Identityadapter. Historische Secret-Metadaten belegen weder Wert noch Issuerpaar. Synthetische UI-/Role-/Expirytests vorhanden.",
+        "smallest_next_action": "Identityowner weist exakten Issuer/Origin/Adaptervertrag ohne Secretwerte nach; danach begrenzte reale Mehrtab-/Ablauf-/Logout-/Direktaufrufprüfung autorisieren.",
+        "closure_criterion": "Reale Sign-in/out-, Ablauf-/Widerruf- und Mehrtabfälle plus abgewiesener geschützter Serverdirektaufruf am exakten Release bestanden; Testsession zählt nicht.",
         "boundary": "verified_identity_adapter_and_authorized_test_scope",
         "related_cases_not_start_locks": [
           "MASTER-04",
@@ -598,16 +598,16 @@
         "docs/contracts/factory-api-auth.md",
         "tests/test_selfservice_decisions.py"
       ],
-      "local_proof": "Lokale Domain-/Queue-Tenantnegatives; gef\u00e4lschte Browserclaims liefern keine privaten Seiten.",
-      "remaining_gap": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchg\u00e4ngig abgenommen.",
+      "local_proof": "Lokale Domain-/Queue-Tenantnegatives; gefälschte Browserclaims liefern keine privaten Seiten.",
+      "remaining_gap": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.",
       "owner_role": "Identity-/Datenowner",
       "assigned_executor": null,
-      "next_allowed_action": "Serverseitiges Actor-Tenant-Mapping und ACL-Pr\u00fcfumgebung belegen.",
-      "required_prerequisite": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchg\u00e4ngig abgenommen.",
+      "next_allowed_action": "Serverseitiges Actor-Tenant-Mapping und ACL-Prüfumgebung belegen.",
+      "required_prerequisite": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Autoritative Actor\u2192Tenant\u2192Projekt-/Workspacekette und tats\u00e4chlich angeschlossene Objekt-, Suche-, Cache-, Export- und DOI/Einmallinkpfade.",
+        "missing_input": "Autoritative Actor→Tenant→Projekt-/Workspacekette und tatsächlich angeschlossene Objekt-, Suche-, Cache-, Export- und DOI/Einmallinkpfade.",
         "owner_area": "Identity / Tenant- und Datenverantwortung",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -619,9 +619,9 @@
           "tests/test_one_app_backend.py",
           "docs/contracts/factory-api-auth.md"
         ],
-        "local_analysis_or_test": "Lokale Owner-/Tenantnegatives und fremder Tenant nach synthetischem Restore pr\u00fcfbar. Browserclaims aktivieren keine privaten Seiten. Ein API-Zielvertrag ist keine angeschlossene ACL.",
-        "smallest_next_action": "Datenowner benennt konkrete Adapter-/Objektfl\u00e4chen und serverseitiges Mapping; fehlende Fl\u00e4chen als Implementierungsauftr\u00e4ge getrennt von Providerzugang f\u00fchren.",
-        "closure_criterion": "F\u00fcr jede tats\u00e4chlich angebotene Fl\u00e4che positiver erlaubter und negativer fremder Actor/Tenant-Test, DOI-/Einmallink-Replay und Exportisolation am gebundenen Ziel nachgewiesen.",
+        "local_analysis_or_test": "Lokale Owner-/Tenantnegatives und fremder Tenant nach synthetischem Restore prüfbar. Browserclaims aktivieren keine privaten Seiten. Ein API-Zielvertrag ist keine angeschlossene ACL.",
+        "smallest_next_action": "Datenowner benennt konkrete Adapter-/Objektflächen und serverseitiges Mapping; fehlende Flächen als Implementierungsaufträge getrennt von Providerzugang führen.",
+        "closure_criterion": "Für jede tatsächlich angebotene Fläche positiver erlaubter und negativer fremder Actor/Tenant-Test, DOI-/Einmallink-Replay und Exportisolation am gebundenen Ziel nachgewiesen.",
         "boundary": "authoritative_mapping_and_real_data_adapters",
         "related_cases_not_start_locks": [
           "MASTER-10",
@@ -650,16 +650,16 @@
         "tests/test_selfservice_decisions.py"
       ],
       "local_proof": "Lokale Replay-/Hold-/Unknown-outcome-/Settlement- und Wiederanlauftests; kein doppeltes lokales Ergebnis.",
-      "remaining_gap": "Echte externe Schreibausg\u00e4nge und Reconciliation nicht getestet.",
+      "remaining_gap": "Echte externe Schreibausgänge und Reconciliation nicht getestet.",
       "owner_role": "Adapter-/Finanzierungsowner",
       "assigned_executor": null,
-      "next_allowed_action": "Nur autorisierte Sandboxadapter mit eindeutiger Reconciliation pr\u00fcfen; keine echten Zahlungen.",
-      "required_prerequisite": "Echte externe Schreibausg\u00e4nge und Reconciliation nicht getestet.",
+      "next_allowed_action": "Nur autorisierte Sandboxadapter mit eindeutiger Reconciliation prüfen; keine echten Zahlungen.",
+      "required_prerequisite": "Echte externe Schreibausgänge und Reconciliation nicht getestet.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Autorisierter Sandboxvertrag, externer Idempotenzschl\u00fcssel und autoritativer Reconciliation-/Readbackpfad f\u00fcr ungewisse Schreibausg\u00e4nge.",
-        "owner_area": "Adapter / fachliche Buchungsautorit\u00e4t",
+        "missing_input": "Autorisierter Sandboxvertrag, externer Idempotenzschlüssel und autoritativer Reconciliation-/Readbackpfad für ungewisse Schreibausgänge.",
+        "owner_area": "Adapter / fachliche Buchungsautorität",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
         "inspected_sources": [
@@ -669,9 +669,9 @@
           "tools/local_control.py",
           "config/local-control.json"
         ],
-        "local_analysis_or_test": "Lokale Replay-, Hold-, Unknown-outcome- und Snapshotgrenzen gepr\u00fcft; historischer ledger/kunden-journey bleibt ausdr\u00fccklich nicht ausf\u00fchrbare Controllerf\u00e4higkeit.",
-        "smallest_next_action": "Adapterowner beschreibt einen begrenzten Sandboxfall mit verlorenem Antwortkanal und anschlie\u00dfendem Nachlesen; keine echte Zahlung oder blinde Wiederholung.",
-        "closure_criterion": "Doppelte Zustellung/Timeout/Restart erzeugt genau eine autoritativ belegte Wirkung, unklarer Ausgang bleibt bis Reconciliation offen; Preise/Buchungsrechte separat best\u00e4tigt.",
+        "local_analysis_or_test": "Lokale Replay-, Hold-, Unknown-outcome- und Snapshotgrenzen geprüft; historischer ledger/kunden-journey bleibt ausdrücklich nicht ausführbare Controllerfähigkeit.",
+        "smallest_next_action": "Adapterowner beschreibt einen begrenzten Sandboxfall mit verlorenem Antwortkanal und anschließendem Nachlesen; keine echte Zahlung oder blinde Wiederholung.",
+        "closure_criterion": "Doppelte Zustellung/Timeout/Restart erzeugt genau eine autoritativ belegte Wirkung, unklarer Ausgang bleibt bis Reconciliation offen; Preise/Buchungsrechte separat bestätigt.",
         "boundary": "external_sandbox_reconciliation_evidence",
         "related_cases_not_start_locks": [
           "MASTER-12",
@@ -694,17 +694,17 @@
         "tools/remediation_queue.py",
         "config/local-control.json"
       ],
-      "local_proof": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups gepr\u00fcft.",
-      "remaining_gap": "Verteilte Runtimes, serverseitiges Fencing und echte unabh\u00e4ngige fachliche Abnahme fehlen.",
+      "local_proof": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups geprüft.",
+      "remaining_gap": "Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.",
       "owner_role": "Runtimeowner",
       "assigned_executor": null,
       "next_allowed_action": "Autorisierte Runtime-/Leasegrenze bestimmen, vor Cutover verteilte Gegenproben planen.",
-      "required_prerequisite": "Verteilte Runtimes, serverseitiges Fencing und echte unabh\u00e4ngige fachliche Abnahme fehlen.",
+      "required_prerequisite": "Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Tats\u00e4chliche verteilte Ressource mit serverseitig durchgesetztem monotonem Fencing und Identit\u00e4t unabh\u00e4ngiger Abnahmeinstanz.",
-        "owner_area": "Runtime / exklusive Zust\u00e4ndigkeit",
+        "missing_input": "Tatsächliche verteilte Ressource mit serverseitig durchgesetztem monotonem Fencing und Identität unabhängiger Abnahmeinstanz.",
+        "owner_area": "Runtime / exklusive Zuständigkeit",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
         "inspected_sources": [
@@ -714,8 +714,8 @@
           "config/local-control.json"
         ],
         "local_analysis_or_test": "Mehrprozessclaims, Leaseverlust, Restart, Parent-Join und begrenzte Versuche werden lokal durch SQLite erzwungen. Das ist kein verteilter Zielserverbeleg.",
-        "smallest_next_action": "Runtimeowner benennt konkrete Ressource und Fencingvertrag; danach veralteten Worker am tats\u00e4chlichen Ziel ablehnen und \u00dcbergabe testen.",
-        "closure_criterion": "Alter Fence wird serverseitig verworfen, kein zweiter Writer; Checkpoint/Resultat nach Restart exakt gelesen, Parent nur nach allen unabh\u00e4ngigen Receipts geschlossen.",
+        "smallest_next_action": "Runtimeowner benennt konkrete Ressource und Fencingvertrag; danach veralteten Worker am tatsächlichen Ziel ablehnen und Übergabe testen.",
+        "closure_criterion": "Alter Fence wird serverseitig verworfen, kein zweiter Writer; Checkpoint/Resultat nach Restart exakt gelesen, Parent nur nach allen unabhängigen Receipts geschlossen.",
         "boundary": "distributed_runtime_and_fencing_contract",
         "related_cases_not_start_locks": [
           "MASTER-15",
@@ -741,13 +741,13 @@
         "apps/site/tests/browser-coverage.mjs",
         "evidence/one-app-2026-10-27/public-route-coverage.json"
       ],
-      "local_proof": "Alle36 \u00f6ffentlichen Seiten in DE/NL mit Titel, Zusammenfassung und Abschnitten gepr\u00fcft. Zwei generische deutsche Beschriftungen korrigiert; Marken, Logos und fester Claim erhalten. Bestehende FR-/Authf\u00e4lle separat getestet.",
-      "remaining_gap": "Kein linguistisches oder rechtliches \u00dcbersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
+      "local_proof": "Alle36 öffentlichen Seiten in DE/NL mit Titel, Zusammenfassung und Abschnitten geprüft. Zwei generische deutsche Beschriftungen korrigiert; Marken, Logos und fester Claim erhalten. Bestehende FR-/Authfälle separat getestet.",
+      "remaining_gap": "Kein linguistisches oder rechtliches Übersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
       "owner_role": "Frontend QA / Sprachfreigabe",
       "assigned_executor": null,
-      "next_allowed_action": "Fachliche Sprachfreigabe und echte Widgetpr\u00fcfung nach Providerbereitschaft.",
-      "required_prerequisite": "Kein linguistisches oder rechtliches \u00dcbersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
-      "local_executor": "isolierter Engineering-Executor; unabh\u00e4ngige Gegenpr\u00fcfung separat"
+      "next_allowed_action": "Fachliche Sprachfreigabe und echte Widgetprüfung nach Providerbereitschaft.",
+      "required_prerequisite": "Kein linguistisches oder rechtliches Übersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
+      "local_executor": "isolierter Engineering-Executor; unabhängige Gegenprüfung separat"
     },
     {
       "id": "MASTER-08",
@@ -763,13 +763,13 @@
         "apps/web/components/WorkspaceRebuild.css",
         "evidence/one-app-2026-10-27/public-surface-contract.txt"
       ],
-      "local_proof": "Eigene aktive CSS/TSX-Oberfl\u00e4che auf harte Farbwerte gepr\u00fcft; generierte CSS-/JSON-Tokenwerte unabh\u00e4ngig aus zentraler Quelle rekonstruiert und verglichen; keine eigenen Chart-/Canvaszust\u00e4nde vorhanden. Linkzielgr\u00f6\u00dfen nutzen bestehenden target-min-Token.",
-      "remaining_gap": "Reale externe Clerk-Widgetzust\u00e4nde sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
+      "local_proof": "Eigene aktive CSS/TSX-Oberfläche auf harte Farbwerte geprüft; generierte CSS-/JSON-Tokenwerte unabhängig aus zentraler Quelle rekonstruiert und verglichen; keine eigenen Chart-/Canvaszustände vorhanden. Linkzielgrößen nutzen bestehenden target-min-Token.",
+      "remaining_gap": "Reale externe Clerk-Widgetzustände sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
       "owner_role": "Designsystemowner",
       "assigned_executor": null,
-      "next_allowed_action": "Echtes Widget nach best\u00e4tigter Providerkonfiguration gegen Tokens pr\u00fcfen; keine pauschale Fremdwidgetabdeckung.",
-      "required_prerequisite": "Reale externe Clerk-Widgetzust\u00e4nde sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
-      "local_executor": "isolierter Engineering-Executor; unabh\u00e4ngige Gegenpr\u00fcfung separat"
+      "next_allowed_action": "Echtes Widget nach bestätigter Providerkonfiguration gegen Tokens prüfen; keine pauschale Fremdwidgetabdeckung.",
+      "required_prerequisite": "Reale externe Clerk-Widgetzustände sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
+      "local_executor": "isolierter Engineering-Executor; unabhängige Gegenprüfung separat"
     },
     {
       "id": "MASTER-09",
@@ -794,18 +794,18 @@
         "config/text-resize-sources.json",
         "tests/test_resize_source_binding.py"
       ],
-      "local_proof": "36mobile Seiten: sichtbare Kontrollnamen,44px-Ziele,Reduced Motion,Overflow und Skiplink; Dialog Tab/Shift-Tab/ESC/Fokusreturn.216 Routen-/Locale-/Breitenf\u00e4lle sowie108 Geometriepr\u00fcfungen mit Textabst\u00e4nden und tats\u00e4chlich gemessener Textverdopplung. Root-Font-Scheinnachweis unabh\u00e4ngig erkannt, ersetzt; Header-/Text\u00fcberl\u00e4ufe korrigiert. Kleine Marken-/Footer-/Desktoplinks konkret korrigiert. PR40 followup reran108 geometry measurements; exact UI/CSS/global CSS/loaded fonts/data/lock/test source hashes frozen before and after. Missing/changed/new source and incomplete report rejected. Qualified assistive technology acceptance still open.",
-      "remaining_gap": "Screenreader-Ausgaben, visuelle Inhaltsverluste/\u00dcberlagerungen bei Zoom/Textabstand und Kontrast \u00fcber Bilder/Gradienten sind nicht vollst\u00e4ndig gepr\u00fcft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
+      "local_proof": "36mobile Seiten: sichtbare Kontrollnamen,44px-Ziele,Reduced Motion,Overflow und Skiplink; Dialog Tab/Shift-Tab/ESC/Fokusreturn.216 Routen-/Locale-/Breitenfälle sowie108 Geometrieprüfungen mit Textabständen und tatsächlich gemessener Textverdopplung. Root-Font-Scheinnachweis unabhängig erkannt, ersetzt; Header-/Textüberläufe korrigiert. Kleine Marken-/Footer-/Desktoplinks konkret korrigiert. PR40 followup reran108 geometry measurements; exact UI/CSS/global CSS/loaded fonts/data/lock/test source hashes frozen before and after. Missing/changed/new source and incomplete report rejected. Qualified assistive technology acceptance still open.",
+      "remaining_gap": "Screenreader-Ausgaben, visuelle Inhaltsverluste/Überlagerungen bei Zoom/Textabstand und Kontrast über Bilder/Gradienten sind nicht vollständig geprüft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
       "owner_role": "Accessibility QA",
       "assigned_executor": null,
-      "next_allowed_action": "Qualifizierte manuelle Kriterienpr\u00fcfung mit tats\u00e4chlicher Assistenztechnik durchf\u00fchren; visuelle Kontrast-/Inhaltsverlustpr\u00fcfung erg\u00e4nzen; Orca/NVDA sind in dieser Umgebung nicht verf\u00fcgbar, Fall bleibt offen.",
-      "required_prerequisite": "Screenreader-Ausgaben, visuelle Inhaltsverluste/\u00dcberlagerungen bei Zoom/Textabstand und Kontrast \u00fcber Bilder/Gradienten sind nicht vollst\u00e4ndig gepr\u00fcft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
-      "local_executor": "isolierter Engineering-Executor; unabh\u00e4ngige Gegenpr\u00fcfung separat",
+      "next_allowed_action": "Qualifizierte manuelle Kriterienprüfung mit tatsächlicher Assistenztechnik durchführen; visuelle Kontrast-/Inhaltsverlustprüfung ergänzen; Orca/NVDA sind in dieser Umgebung nicht verfügbar, Fall bleibt offen.",
+      "required_prerequisite": "Screenreader-Ausgaben, visuelle Inhaltsverluste/Überlagerungen bei Zoom/Textabstand und Kontrast über Bilder/Gradienten sind nicht vollständig geprüft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
+      "local_executor": "isolierter Engineering-Executor; unabhängige Gegenprüfung separat",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Qualifizierte Screenreader-/Assistenztechnikabnahme und vollst\u00e4ndige visuelle Pr\u00fcfung von Kontrast \u00fcber Bildern/Gradienten sowie Textverlust/\u00dcberlagerungen.",
-        "owner_area": "Accessibility-QA / qualifizierte Ger\u00e4tepr\u00fcfung",
+        "missing_input": "Qualifizierte Screenreader-/Assistenztechnikabnahme und vollständige visuelle Prüfung von Kontrast über Bildern/Gradienten sowie Textverlust/Überlagerungen.",
+        "owner_area": "Accessibility-QA / qualifizierte Geräteprüfung",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
         "inspected_sources": [
@@ -818,9 +818,9 @@
           "evidence/one-app-2026-10-27/decision-accessibility.json",
           "evidence/one-app-2026-10-27/decision-screenshot-review.json"
         ],
-        "local_analysis_or_test": "Drei frische c8-gebundene Homepage-Screenshots390/1280/echtes2x intern gesichtet: DE und N vollst\u00e4ndig, keine breite visuelle Kriterienabnahme; Geometrie36Routen/216Breiten/108Spacing-Resizef\u00e4lle gepr\u00fcft. Zus\u00e4tzlich144 DE/NL/Breiten-Snapshots:1396 deckende CSS-Textvorkommen,5Farbpaare,Minimum6.4601 bei Projektschwelle4.5;19126Vorkommen ausgeschlossen (18932Bild/Gradient,194Opacity), keine breite Website-Kontrastabnahme. Orca/NVDA hier nicht verf\u00fcgbar.",
-        "smallest_next_action": "Lokalen deckenden Kontrastbericht und Screenshotbefunde auswerten; qualifizierter QA-Owner \u00fcbernimmt danach konkrete nicht gepr\u00fcfte Kriterien mit tats\u00e4chlicher Assistenztechnik.",
-        "closure_criterion": "Anwendbare Kriterien einzeln mit Zielbrowser/Assistenztechnik/Version und fachlicher Pr\u00fcferqualifikation belegt; alle best\u00e4tigten Befunde nachgepr\u00fcft, keine Zertifizierung aus Heuristik.",
+        "local_analysis_or_test": "Drei frische c8-gebundene Homepage-Screenshots390/1280/echtes2x intern gesichtet: DE und N vollständig, keine breite visuelle Kriterienabnahme; Geometrie36Routen/216Breiten/108Spacing-Resizefälle geprüft. Zusätzlich144 DE/NL/Breiten-Snapshots:1396 deckende CSS-Textvorkommen,5Farbpaare,Minimum6.4601 bei Projektschwelle4.5;19126Vorkommen ausgeschlossen (18932Bild/Gradient,194Opacity), keine breite Website-Kontrastabnahme. Orca/NVDA hier nicht verfügbar.",
+        "smallest_next_action": "Lokalen deckenden Kontrastbericht und Screenshotbefunde auswerten; qualifizierter QA-Owner übernimmt danach konkrete nicht geprüfte Kriterien mit tatsächlicher Assistenztechnik.",
+        "closure_criterion": "Anwendbare Kriterien einzeln mit Zielbrowser/Assistenztechnik/Version und fachlicher Prüferqualifikation belegt; alle bestätigten Befunde nachgeprüft, keine Zertifizierung aus Heuristik.",
         "boundary": "local_visual_work_remaining_plus_qualified_assistive_technology",
         "related_cases_not_start_locks": [
           "MASTER-15"
@@ -831,7 +831,7 @@
     },
     {
       "id": "MASTER-10",
-      "title": "API-/Modulvertr\u00e4ge",
+      "title": "API-/Modulverträge",
       "status": "external_blocked",
       "full_case_accepted": false,
       "source_refs": [
@@ -844,17 +844,17 @@
         "docs/contracts/factory.openapi.json",
         "evidence/catalog-image-batch-2026-10-27/source-and-release-scope.json"
       ],
-      "local_proof": "Feste lokale Schemas/Versionen, unbekannte Felder, Rollen und Paginationnegatives gepr\u00fcft. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
-      "remaining_gap": "Tats\u00e4chliche externe Backends und vollst\u00e4ndige Pagination/Fehlerzust\u00e4nde unbewiesen.",
+      "local_proof": "Feste lokale Schemas/Versionen, unbekannte Felder, Rollen und Paginationnegatives geprüft. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
+      "remaining_gap": "Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.",
       "owner_role": "Backend-/Adapterowner",
       "assigned_executor": null,
       "next_allowed_action": "Autorisierte typisierte Adapter und aktuelle Zielantworten nachweisen.",
-      "required_prerequisite": "Tats\u00e4chliche externe Backends und vollst\u00e4ndige Pagination/Fehlerzust\u00e4nde unbewiesen.",
+      "required_prerequisite": "Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Tats\u00e4chlich ausf\u00fchrbare versionierte API-/Moduladapter, vollst\u00e4ndige Pagination- und Fehlerbelege statt generischer Payloads.",
-        "owner_area": "Backend / versionierte Adaptervertr\u00e4ge",
+        "missing_input": "Tatsächlich ausführbare versionierte API-/Moduladapter, vollständige Pagination- und Fehlerbelege statt generischer Payloads.",
+        "owner_area": "Backend / versionierte Adapterverträge",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
         "inspected_sources": [
@@ -864,9 +864,9 @@
           "docs/contracts/factory.openapi.json",
           "tests/test_local_control.py"
         ],
-        "local_analysis_or_test": "Drei feste lokale F\u00e4higkeiten und Schemas ausf\u00fchrbar; fremde Felder, falscher Scope/Host, unvollst\u00e4ndige Evidenz/Pagination abgewiesen. Weitere Backends sind nicht dadurch implementiert.",
-        "smallest_next_action": "Backendowner liefert Operationsinventar mit exakten Ein-/Ausgabeschemas und Zielantworten; lokal fehlende Adapter separat vor externer Pr\u00fcfung bauen, keine Shellbr\u00fccke.",
-        "closure_criterion": "Jede ben\u00f6tigte Operation besitzt Versions-/Schema-/Fehlervertrag und vollst\u00e4ndigen realen Antwort-/Paginationbeleg; unbekannte Operation bleibt gesperrt.",
+        "local_analysis_or_test": "Drei feste lokale Fähigkeiten und Schemas ausführbar; fremde Felder, falscher Scope/Host, unvollständige Evidenz/Pagination abgewiesen. Weitere Backends sind nicht dadurch implementiert.",
+        "smallest_next_action": "Backendowner liefert Operationsinventar mit exakten Ein-/Ausgabeschemas und Zielantworten; lokal fehlende Adapter separat vor externer Prüfung bauen, keine Shellbrücke.",
+        "closure_criterion": "Jede benötigte Operation besitzt Versions-/Schema-/Fehlervertrag und vollständigen realen Antwort-/Paginationbeleg; unbekannte Operation bleibt gesperrt.",
         "boundary": "missing_adapter_implementation_and_authoritative_target_evidence",
         "related_cases_not_start_locks": [
           "MASTER-12",
@@ -896,7 +896,7 @@
       "remaining_gap": "Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers.",
       "owner_role": "Frontend QA",
       "assigned_executor": null,
-      "next_allowed_action": "Pr\u00fcfungen am sp\u00e4teren Release wiederholen; Providergrenzen gesondert behandeln.",
+      "next_allowed_action": "Prüfungen am späteren Release wiederholen; Providergrenzen gesondert behandeln.",
       "required_prerequisite": "Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers."
     },
     {
@@ -921,11 +921,11 @@
         "evidence/one-app-2026-10-27/suite-trial-method-binding.json",
         "evidence/catalog-image-batch-2026-10-27/source-and-release-scope.json"
       ],
-      "local_proof": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelit\u00e4t/Expiry/Identity-/Tenant-/Activationnegatives und g\u00fcltigerFunding\u00fcbergang lokal gepr\u00fcft; Funding vor Modellreservierung/Dispatch unver\u00e4ndert. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
+      "local_proof": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelität/Expiry/Identity-/Tenant-/Activationnegatives und gültigerFundingübergang lokal geprüft; Funding vor Modellreservierung/Dispatch unverändert. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
       "remaining_gap": "Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.",
       "owner_role": "Jeweiliger Adapterowner",
       "assigned_executor": null,
-      "next_allowed_action": "Autorisierte konkrete externe Adaptervertr\u00e4ge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
+      "next_allowed_action": "Autorisierte konkrete externe Adapterverträge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
       "required_prerequisite": "Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.",
       "closure_decision": {
         "review_base": "245e96e9f468474e41fe4a3a1dc2b5785c2fc3e4",
@@ -947,9 +947,9 @@
           "evidence/one-app-2026-10-27/suite-trial-independent-review.md",
           "evidence/one-app-2026-10-27/suite-trial-method-binding.json"
         ],
-        "local_analysis_or_test": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelit\u00e4t/Expiry/Identity-/Tenant-/Activationnegatives und g\u00fcltigerFunding\u00fcbergang lokal gepr\u00fcft; Funding vor Modellreservierung/Dispatch unver\u00e4ndert.",
-        "smallest_next_action": "Autorisierte konkrete externe Adaptervertr\u00e4ge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
-        "closure_criterion": "Lokale Regel MASTER-12-TRIAL-01 gepr\u00fcft; Gesamtfall erst nach realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.",
+        "local_analysis_or_test": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelität/Expiry/Identity-/Tenant-/Activationnegatives und gültigerFundingübergang lokal geprüft; Funding vor Modellreservierung/Dispatch unverändert.",
+        "smallest_next_action": "Autorisierte konkrete externe Adapterverträge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
+        "closure_criterion": "Lokale Regel MASTER-12-TRIAL-01 geprüft; Gesamtfall erst nach realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.",
         "boundary": "external_adapter_acceptance_after_verified_local_trial_fix",
         "related_cases_not_start_locks": [
           "MASTER-03",
@@ -980,13 +980,13 @@
         "evidence/one-app-2026-10-27/pwa-browser.json",
         "docs/contracts/public-installation.md"
       ],
-      "local_proof": "Installationsl\u00fccke lokal implementiert: expliziter public-pwa-Modus, Manifest mit Originalsignet und zentralen Tokens, echter netzabh\u00e4ngiger Serviceworker.9Browserpr\u00fcfungen: Registrierung, Manifest, Cache leer, Offline-GET/POST ohne Antwort, Reconnect ohne Replay, eigener Unregister-R\u00fcckweg.4negative/positive Nodef\u00e4lle. Normale/Standalone-Builds deaktiviert.",
-      "remaining_gap": "Keine tats\u00e4chliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
-      "owner_role": "Frontend Engineering / Ger\u00e4te-QA / Deploymentowner",
+      "local_proof": "Installationslücke lokal implementiert: expliziter public-pwa-Modus, Manifest mit Originalsignet und zentralen Tokens, echter netzabhängiger Serviceworker.9Browserprüfungen: Registrierung, Manifest, Cache leer, Offline-GET/POST ohne Antwort, Reconnect ohne Replay, eigener Unregister-Rückweg.4negative/positive Nodefälle. Normale/Standalone-Builds deaktiviert.",
+      "remaining_gap": "Keine tatsächliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
+      "owner_role": "Frontend Engineering / Geräte-QA / Deploymentowner",
       "assigned_executor": null,
-      "next_allowed_action": "Expliziten Build auf freigegebenen Zielger\u00e4ten installieren/aktualisieren/deinstallieren; privates Offlineverhalten nur nach separatem Produkt-/Datenvertrag.",
-      "required_prerequisite": "Keine tats\u00e4chliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
-      "local_executor": "isolierter Engineering-Executor; unabh\u00e4ngige Gegenpr\u00fcfung separat"
+      "next_allowed_action": "Expliziten Build auf freigegebenen Zielgeräten installieren/aktualisieren/deinstallieren; privates Offlineverhalten nur nach separatem Produkt-/Datenvertrag.",
+      "required_prerequisite": "Keine tatsächliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
+      "local_executor": "isolierter Engineering-Executor; unabhängige Gegenprüfung separat"
     },
     {
       "id": "MASTER-14",
@@ -1001,16 +1001,16 @@
         "evidence/one-app-2026-10-27/closed-loop.txt",
         "config/local-control.json"
       ],
-      "local_proof": "Lokales Staging/Version/ACL/Redaktion und Chunkhashvorschau; externe R\u00fcckf\u00fchrung ausdr\u00fccklich false.",
-      "remaining_gap": "Autoritative Brain-Tenantzuordnung und WRITE\u2192INDEX\u2192EXACT READ-BACK\u2192CONTENT COMPARE fehlen.",
+      "local_proof": "Lokales Staging/Version/ACL/Redaktion und Chunkhashvorschau; externe Rückführung ausdrücklich false.",
+      "remaining_gap": "Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.",
       "owner_role": "Brainowner",
       "assigned_executor": null,
       "next_allowed_action": "Mapping/ACL und autorisierten neutralen Readbackpfad nachweisen; keine Kundendateninjektion.",
-      "required_prerequisite": "Autoritative Brain-Tenantzuordnung und WRITE\u2192INDEX\u2192EXACT READ-BACK\u2192CONTENT COMPARE fehlen.",
+      "required_prerequisite": "Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Autoritative Actor/Tenant/Projekt-/Workspacezuordnung, ACL sowie freigegebener neutraler WRITE\u2192INDEX\u2192EXACT READ-BACK\u2192CONTENT COMPARE-Pfad.",
+        "missing_input": "Autoritative Actor/Tenant/Projekt-/Workspacezuordnung, ACL sowie freigegebener neutraler WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE-Pfad.",
         "owner_area": "Brain / Wissens- und Tenantverantwortung",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -1020,9 +1020,9 @@
           "config/local-control.json",
           "tests/test_local_control.py"
         ],
-        "local_analysis_or_test": "Lokales redigiertes Staging mit Version/Chunkhash, Replay und Prozessrestart testbar; remote_brain_write nicht registrierte Ausf\u00fchrungsf\u00e4higkeit. Seedname ist keine Tenantautorit\u00e4t.",
-        "smallest_next_action": "Brainowner liefert autoritatives Mapping/ACL und Operationsschema; erst danach neutralen freigegebenen Testumfang w\u00e4hlen. Kein Kunden-/Privatimport.",
-        "closure_criterion": "Exakte Inhaltsgleichheit und Indexzuordnung am best\u00e4tigten Tenant nach Write/Index/Readback, Fremdtenantnegative und Provenienz-/Lifecyclebeleg bestanden; Toolerfolg allein gen\u00fcgt nicht.",
+        "local_analysis_or_test": "Lokales redigiertes Staging mit Version/Chunkhash, Replay und Prozessrestart testbar; remote_brain_write nicht registrierte Ausführungsfähigkeit. Seedname ist keine Tenantautorität.",
+        "smallest_next_action": "Brainowner liefert autoritatives Mapping/ACL und Operationsschema; erst danach neutralen freigegebenen Testumfang wählen. Kein Kunden-/Privatimport.",
+        "closure_criterion": "Exakte Inhaltsgleichheit und Indexzuordnung am bestätigten Tenant nach Write/Index/Readback, Fremdtenantnegative und Provenienz-/Lifecyclebeleg bestanden; Toolerfolg allein genügt nicht.",
         "boundary": "authoritative_brain_mapping_and_write_readback_authorization",
         "related_cases_not_start_locks": [
           "MASTER-04",
@@ -1051,16 +1051,16 @@
         "docs/contracts/one-web-app-integration.md",
         "evidence/catalog-image-batch-2026-10-27/source-and-release-scope.json"
       ],
-      "local_proof": "Normal-/Standalonebuild, Chunks/ESM und bestehende lokale Release-Archivtests gepr\u00fcft. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
-      "remaining_gap": "Gemeinsamer Kandidat nicht deployed; tats\u00e4chliche Routing-/Assetpr\u00fcfung am Zielrelease fehlt.",
+      "local_proof": "Normal-/Standalonebuild, Chunks/ESM und bestehende lokale Release-Archivtests geprüft. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
+      "remaining_gap": "Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.",
       "owner_role": "Releaseowner",
       "assigned_executor": null,
-      "next_allowed_action": "Exakten Kandidaten erst nach Freigabe in autorisierter Runtime pr\u00fcfen.",
-      "required_prerequisite": "Gemeinsamer Kandidat nicht deployed; tats\u00e4chliche Routing-/Assetpr\u00fcfung am Zielrelease fehlt.",
+      "next_allowed_action": "Exakten Kandidaten erst nach Freigabe in autorisierter Runtime prüfen.",
+      "required_prerequisite": "Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Genehmigter Zielrelease des gemeinsamen Kandidaten, tats\u00e4chlicher Runtime-/Asset-/Routenbeleg und unabh\u00e4ngige Releasefreigabe.",
+        "missing_input": "Genehmigter Zielrelease des gemeinsamen Kandidaten, tatsächlicher Runtime-/Asset-/Routenbeleg und unabhängige Releasefreigabe.",
         "owner_area": "Release / Produktionsfreigabe",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -1070,9 +1070,9 @@
           "evidence/one-app-2026-10-27/deployment-parent-report.json",
           "apps/site/scripts/build-standalone.mjs"
         ],
-        "local_analysis_or_test": "Kandidat c8c865f und LibraryVersion3 sind lokal gepr\u00fcft; neue Entscheidungstests \u00e4ndern keinen produktiven Release. Root apps/site ist Quellbuild, kein Beweis unbekannter Projectsettings.",
-        "smallest_next_action": "Releaseowner sammelt vorgeschaltete Abnahmen und exakten Artefakthash; Deployment erst nach gesonderter Freigabe. Keine jetzige Ver\u00f6ffentlichung.",
-        "closure_criterion": "Exakter Release-/Assethash auf best\u00e4tigter Runtime, echte Routen/Session/Provider-E2E, Restore/R\u00fcckweg und qualifizierte unabh\u00e4ngige Freigabe vollst\u00e4ndig belegt.",
+        "local_analysis_or_test": "Kandidat c8c865f und LibraryVersion3 sind lokal geprüft; neue Entscheidungstests ändern keinen produktiven Release. Root apps/site ist Quellbuild, kein Beweis unbekannter Projectsettings.",
+        "smallest_next_action": "Releaseowner sammelt vorgeschaltete Abnahmen und exakten Artefakthash; Deployment erst nach gesonderter Freigabe. Keine jetzige Veröffentlichung.",
+        "closure_criterion": "Exakter Release-/Assethash auf bestätigter Runtime, echte Routen/Session/Provider-E2E, Restore/Rückweg und qualifizierte unabhängige Freigabe vollständig belegt.",
         "boundary": "release_authorization_and_target_runtime_acceptance",
         "related_cases_not_start_locks": [
           "MASTER-02",
@@ -1103,16 +1103,16 @@
         "config/ai-migration-policy.json",
         "tests/test_selfservice_decisions.py"
       ],
-      "local_proof": "Offline-CAS-/\u00dcbergangsplanung und parallele additive Schema-Starts getestet.",
-      "remaining_gap": "Serverbackupstand, echter Restore, Writehandoff und R\u00fcckrouting unbewiesen.",
+      "local_proof": "Offline-CAS-/Übergangsplanung und parallele additive Schema-Starts getestet.",
+      "remaining_gap": "Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.",
       "owner_role": "Runtime-/Backupowner",
       "assigned_executor": null,
-      "next_allowed_action": "Backup-/Exitbelege lesen und kontrollierten Restore innerhalb gesonderter Rechte durchf\u00fchren.",
-      "required_prerequisite": "Serverbackupstand, echter Restore, Writehandoff und R\u00fcckrouting unbewiesen.",
+      "next_allowed_action": "Backup-/Exitbelege lesen und kontrollierten Restore innerhalb gesonderter Rechte durchführen.",
+      "required_prerequisite": "Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.",
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Letztes erfolgreiches Backup samt Ziel-/Zeit-/Exitbindung, tats\u00e4chliche Wiederherstellung und Schreib\u00fcbergabe/R\u00fcckrouting auf freigegebener Zielumgebung.",
+        "missing_input": "Letztes erfolgreiches Backup samt Ziel-/Zeit-/Exitbindung, tatsächliche Wiederherstellung und Schreibübergabe/Rückrouting auf freigegebener Zielumgebung.",
         "owner_area": "Runtime / Backup und Migration",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -1123,8 +1123,8 @@
           "config/ai-migration-policy.json"
         ],
         "local_analysis_or_test": "NEU: SQLite-Backup/Restore mit synthetischer Reservierung, integrity_check, Zustandsgleichheit, Requestreplay ohne neuen Hold und Fremdtenantnegative bestanden. Keine Dify/VPS-/Providerwiederherstellung und kein Recovery nach externen Seiteneffekten.",
-        "smallest_next_action": "Backupowner liefert unver\u00e4ndertes Exitprotokoll/letzten erfolgreichen Stand f\u00fcr srv1941843 und kontrollierten Restoreplan; lokale Punkt-in-Zeit-Pr\u00fcfung bereits vorbereitet.",
-        "closure_criterion": "Echtes Backup am Ziel lesbar, Restore und Integrit\u00e4t nachgewiesen, RPO/RTO nur gegen genehmigte Vorgaben bewertet, Jobs/Schreibrechte sicher \u00fcbergeben und R\u00fcckrouting ohne doppelte Wirkung gepr\u00fcft.",
+        "smallest_next_action": "Backupowner liefert unverändertes Exitprotokoll/letzten erfolgreichen Stand für srv1941843 und kontrollierten Restoreplan; lokale Punkt-in-Zeit-Prüfung bereits vorbereitet.",
+        "closure_criterion": "Echtes Backup am Ziel lesbar, Restore und Integrität nachgewiesen, RPO/RTO nur gegen genehmigte Vorgaben bewertet, Jobs/Schreibrechte sicher übergeben und Rückrouting ohne doppelte Wirkung geprüft.",
         "boundary": "real_backup_exit_restore_and_cutover_authorization",
         "related_cases_not_start_locks": [
           "MASTER-06",
@@ -1145,7 +1145,7 @@
         "config/capacity-policy.json",
         "tools/capacity_planner.py"
       ],
-      "local_proof": "Lokale Pr\u00fcfmethoden/Versionen und begrenzte Kapazit\u00e4tsrechnungen dokumentiert.",
+      "local_proof": "Lokale Prüfmethoden/Versionen und begrenzte Kapazitätsrechnungen dokumentiert.",
       "remaining_gap": "Vergleichbare echte Ziel-/Lastmessung und autorisierte quantitative Akzeptanzgrenzen fehlen.",
       "owner_role": "Betriebs-/Performanceowner",
       "assigned_executor": null,
@@ -1154,7 +1154,7 @@
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Identit\u00e4tsgebundene aktuelle Zielmessung mit Einheiten/Zeitraum/Lastprofil und ausdr\u00fccklich genehmigte quantitative Akzeptanzgrenzen.",
+        "missing_input": "Identitätsgebundene aktuelle Zielmessung mit Einheiten/Zeitraum/Lastprofil und ausdrücklich genehmigte quantitative Akzeptanzgrenzen.",
         "owner_area": "Betrieb / Performance und Produktentscheidung",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
@@ -1163,9 +1163,9 @@
           "tools/capacity_planner.py",
           "tests/test_capacity_planner.py"
         ],
-        "local_analysis_or_test": "Offlineplaner pr\u00fcft fehlende/veraltete/Zukunftsmessungen, Last-/Einheiten-/Scopegrenzen.25%Headroom und30Tage sind lokale Planungsannahmen, keine Nutzer-SLAs. Kein VPS-Lasttest durchgef\u00fchrt.",
-        "smallest_next_action": "Betriebsowner liefert passende begrenzte Baseline; Produkt/Betrieb best\u00e4tigt messbare Grenzen. Keine Grenzwerte oder fehlende Last als Null erfinden.",
-        "closure_criterion": "Gleiche Methode/Ziel-/Versions-/Lastbindung vor/nach, vollst\u00e4ndige Messdimensionen und genehmigte Grenzwerte; Teilmessung bleibt Teilmessung.",
+        "local_analysis_or_test": "Offlineplaner prüft fehlende/veraltete/Zukunftsmessungen, Last-/Einheiten-/Scopegrenzen.25%Headroom und30Tage sind lokale Planungsannahmen, keine Nutzer-SLAs. Kein VPS-Lasttest durchgeführt.",
+        "smallest_next_action": "Betriebsowner liefert passende begrenzte Baseline; Produkt/Betrieb bestätigt messbare Grenzen. Keine Grenzwerte oder fehlende Last als Null erfinden.",
+        "closure_criterion": "Gleiche Methode/Ziel-/Versions-/Lastbindung vor/nach, vollständige Messdimensionen und genehmigte Grenzwerte; Teilmessung bleibt Teilmessung.",
         "boundary": "target_measurements_and_authorized_acceptance_thresholds",
         "related_cases_not_start_locks": [
           "MASTER-15",
@@ -1189,7 +1189,7 @@
         "tools/context_executor.py",
         "evidence/catalog-image-batch-2026-10-27/source-and-release-scope.json"
       ],
-      "local_proof": "Drei feste lokale F\u00e4higkeiten; Skillhash, Scope/Host, stale/partial-Evidenz und SSH-Fallback negativ gepr\u00fcft. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
+      "local_proof": "Drei feste lokale Fähigkeiten; Skillhash, Scope/Host, stale/partial-Evidenz und SSH-Fallback negativ geprüft. Current delta: existing public catalog read proved locally for2SKUs, partialonly; read-only HTTP/UI and private image quarantine, no real supplier/commercial/segmentation/production acceptance. Ordinaryv11CI repository failure diagnosed and clean-generator correction locally reproduced.",
       "remaining_gap": "Reale MCP-/SSH-Operationsrechte und Zielantworten nicht integriert; neuere externe Fehler-/Unknown-outcome-Abgleich fehlt.",
       "owner_role": "Adapter-/Securityowner",
       "assigned_executor": null,
@@ -1198,8 +1198,8 @@
       "closure_decision": {
         "review_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
         "reviewed_at": "2026-10-27T06:20:27.628626+00:00",
-        "missing_input": "Passende typisierte Operationen, lesbare Skillreferenzen/Hashes, reale Scopes/Rechte und frische vollst\u00e4ndige Ziel-/Operationsevidenz.",
-        "owner_area": "Adapter / Security / Skillvertr\u00e4ge",
+        "missing_input": "Passende typisierte Operationen, lesbare Skillreferenzen/Hashes, reale Scopes/Rechte und frische vollständige Ziel-/Operationsevidenz.",
+        "owner_area": "Adapter / Security / Skillverträge",
         "assigned_external_person": null,
         "local_next_step_owner": "isolierter Engineering-Executor /root",
         "inspected_sources": [
@@ -1208,9 +1208,9 @@
           "tests/test_local_control.py",
           "tools/context_executor.py"
         ],
-        "local_analysis_or_test": "Intent\u2192Skill/Hash\u2192registrierte lokale Operation l\u00e4uft mit festen Grenzen. Unknown/Host-/Scope-/stale/partial-Negatives und fehlender SSH-Ersatzweg testbar. Reale MCP/SSH-F\u00e4higkeiten nicht dadurch integriert.",
-        "smallest_next_action": "Adapterowner liefert exakten Operationsvertrag und aktuellen vollst\u00e4ndigen Zielbeleg einschlie\u00dflich j\u00fcngstem Fehler/Unknown-outcome; kein allgemeiner execute_command-Ersatz.",
-        "closure_criterion": "Operation wird nur bei passendem aktuellen vollst\u00e4ndigen Nachweis gew\u00e4hlt; falsches Ziel/Rechteverlust/Skillfehler/Partial/ungewisser Ausgang blockieren oder reconciliieren belegt; kein stiller Fallback.",
+        "local_analysis_or_test": "Intent→Skill/Hash→registrierte lokale Operation läuft mit festen Grenzen. Unknown/Host-/Scope-/stale/partial-Negatives und fehlender SSH-Ersatzweg testbar. Reale MCP/SSH-Fähigkeiten nicht dadurch integriert.",
+        "smallest_next_action": "Adapterowner liefert exakten Operationsvertrag und aktuellen vollständigen Zielbeleg einschließlich jüngstem Fehler/Unknown-outcome; kein allgemeiner execute_command-Ersatz.",
+        "closure_criterion": "Operation wird nur bei passendem aktuellen vollständigen Nachweis gewählt; falsches Ziel/Rechteverlust/Skillfehler/Partial/ungewisser Ausgang blockieren oder reconciliieren belegt; kein stiller Fallback.",
         "boundary": "registered_remote_contract_and_fresh_authoritative_operation_evidence",
         "related_cases_not_start_locks": [
           "MASTER-10",
@@ -2202,11 +2202,11 @@
           "apps/site/tests/browser-coverage.mjs",
           "evidence/one-app-2026-10-27/public-route-coverage.json"
         ],
-        "test_evidence": "72 direkte Routen-/Sprachpr\u00fcfungen f\u00fcr36 \u00f6ffentliche Seiten,1724 reale DOM-Linkaktivierungen mit Back/Forward und gemeinsamer Shell;216 Breitenf\u00e4lle, Reload und Skiplink; unbekannte/private Wege im Integrationstest.",
+        "test_evidence": "72 direkte Routen-/Sprachprüfungen für36 öffentliche Seiten,1724 reale DOM-Linkaktivierungen mit Back/Forward und gemeinsamer Shell;216 Breitenfälle, Reload und Skiplink; unbekannte/private Wege im Integrationstest.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
         "gap": "Keine freie Kombination nicht vorhandener Links; keine Produktions-/Providerroute aus dem lokalen Browser abgeleitet.",
-        "next_step": "Am freigegebenen Zielbuild die realen Providergrenzen separat pr\u00fcfen.",
+        "next_step": "Am freigegebenen Zielbuild die realen Providergrenzen separat prüfen.",
         "completion_criterion": "exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review",
         "owner_area": "Frontend QA"
       },
@@ -2226,12 +2226,12 @@
           "docs/contracts/current-runtime-gap.md",
           "evidence/one-app-2026-10-27/takeover-runtime-read.json"
         ],
-        "test_evidence": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zur\u00fcckgegeben. Lokale Integration ist kein Deployment.",
+        "test_evidence": "Aktueller autorisierter Lesebeleg: nexifyai.de Preview66866298; Standard-Production-Alias main2a552ed ausPR39. Projekt Vite/Node22.x, Settingsfelder weiterhin nicht zurückgegeben. Lokale Integration ist kein Deployment.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
         "gap": "Aktuelle Root/Build/Output/productionBranch und gewollte kanonische Aliaszuordnung fehlen.",
-        "next_step": "Ziel-/Ownerbindung lesend ermitteln; keine Alias\u00e4nderung.",
-        "completion_criterion": "Projekt, Root, Build, Output, Branch, Aliasziel und Zeitpunkt eindeutig gebunden; Ist/Ziel und R\u00fcckweg best\u00e4tigt, keine Ableitung aus READY allein.",
+        "next_step": "Ziel-/Ownerbindung lesend ermitteln; keine Aliasänderung.",
+        "completion_criterion": "Projekt, Root, Build, Output, Branch, Aliasziel und Zeitpunkt eindeutig gebunden; Ist/Ziel und Rückweg bestätigt, keine Ableitung aus READY allein.",
         "owner_area": "Deploymentowner"
       },
       {
@@ -2240,7 +2240,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Session: Realer Providerablauf, Widerruf, mehrere Tabs und gesch\u00fctzte Serverdirektaufrufe unbewiesen.",
+        "applicable_requirement": "Session: Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "apps/site/src/Auth.tsx",
@@ -2255,12 +2255,12 @@
           "tools/app_backend.py",
           "config/one-web-app.json"
         ],
-        "test_evidence": "Synthetisches Sign-in/out, Fehlergrenzen, lokale Frist und Rollenentzug gepr\u00fcft.",
+        "test_evidence": "Synthetisches Sign-in/out, Fehlergrenzen, lokale Frist und Rollenentzug geprüft.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Realer Providerablauf, Widerruf, mehrere Tabs und gesch\u00fctzte Serverdirektaufrufe unbewiesen.",
-        "next_step": "Exakten autorisierten Issuer und Sessionadapter nachweisen, dann reale Positiv-/Negativf\u00e4lle.",
-        "completion_criterion": "Reale Sign-in/out-, Ablauf-/Widerruf- und Mehrtabf\u00e4lle plus abgewiesener gesch\u00fctzter Serverdirektaufruf am exakten Release bestanden; Testsession z\u00e4hlt nicht.",
+        "gap": "Realer Providerablauf, Widerruf, mehrere Tabs und geschützte Serverdirektaufrufe unbewiesen.",
+        "next_step": "Exakten autorisierten Issuer und Sessionadapter nachweisen, dann reale Positiv-/Negativfälle.",
+        "completion_criterion": "Reale Sign-in/out-, Ablauf-/Widerruf- und Mehrtabfälle plus abgewiesener geschützter Serverdirektaufruf am exakten Release bestanden; Testsession zählt nicht.",
         "owner_area": "Identityowner"
       },
       {
@@ -2269,7 +2269,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Rollen/Tenants: Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchg\u00e4ngig abgenommen.",
+        "applicable_requirement": "Rollen/Tenants: Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "apps/selfservice/domain.py",
@@ -2284,12 +2284,12 @@
           "docs/contracts/factory-api-auth.md",
           "tests/test_selfservice_decisions.py"
         ],
-        "test_evidence": "Lokale Domain-/Queue-Tenantnegatives; gef\u00e4lschte Browserclaims liefern keine privaten Seiten.",
+        "test_evidence": "Lokale Domain-/Queue-Tenantnegatives; gefälschte Browserclaims liefern keine privaten Seiten.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchg\u00e4ngig abgenommen.",
-        "next_step": "Serverseitiges Actor-Tenant-Mapping und ACL-Pr\u00fcfumgebung belegen.",
-        "completion_criterion": "F\u00fcr jede tats\u00e4chlich angebotene Fl\u00e4che positiver erlaubter und negativer fremder Actor/Tenant-Test, DOI-/Einmallink-Replay und Exportisolation am gebundenen Ziel nachgewiesen.",
+        "gap": "Authentifizierte Objekt/API/Suche/Cache/Exportgrenzen, DOI und echte Einmallinks nicht durchgängig abgenommen.",
+        "next_step": "Serverseitiges Actor-Tenant-Mapping und ACL-Prüfumgebung belegen.",
+        "completion_criterion": "Für jede tatsächlich angebotene Fläche positiver erlaubter und negativer fremder Actor/Tenant-Test, DOI-/Einmallink-Replay und Exportisolation am gebundenen Ziel nachgewiesen.",
         "owner_area": "Identity-/Datenowner"
       },
       {
@@ -2298,7 +2298,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Seiteneffekte: Echte externe Schreibausg\u00e4nge und Reconciliation nicht getestet.",
+        "applicable_requirement": "Seiteneffekte: Echte externe Schreibausgänge und Reconciliation nicht getestet.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "apps/selfservice/domain.py",
@@ -2314,9 +2314,9 @@
         "test_evidence": "Lokale Replay-/Hold-/Unknown-outcome-/Settlement- und Wiederanlauftests; kein doppeltes lokales Ergebnis.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Echte externe Schreibausg\u00e4nge und Reconciliation nicht getestet.",
-        "next_step": "Nur autorisierte Sandboxadapter mit eindeutiger Reconciliation pr\u00fcfen; keine echten Zahlungen.",
-        "completion_criterion": "Doppelte Zustellung/Timeout/Restart erzeugt genau eine autoritativ belegte Wirkung, unklarer Ausgang bleibt bis Reconciliation offen; Preise/Buchungsrechte separat best\u00e4tigt.",
+        "gap": "Echte externe Schreibausgänge und Reconciliation nicht getestet.",
+        "next_step": "Nur autorisierte Sandboxadapter mit eindeutiger Reconciliation prüfen; keine echten Zahlungen.",
+        "completion_criterion": "Doppelte Zustellung/Timeout/Restart erzeugt genau eine autoritativ belegte Wirkung, unklarer Ausgang bleibt bis Reconciliation offen; Preise/Buchungsrechte separat bestätigt.",
         "owner_area": "Adapter-/Finanzierungsowner"
       },
       {
@@ -2325,7 +2325,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Runner: Verteilte Runtimes, serverseitiges Fencing und echte unabh\u00e4ngige fachliche Abnahme fehlen.",
+        "applicable_requirement": "Runner: Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "tests/test_local_control.py",
@@ -2337,12 +2337,12 @@
           "tests/test_remediation_queue.py",
           "evidence/sidecar-race-2026-10-27/report.json"
         ],
-        "test_evidence": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups gepr\u00fcft. MainCI40573693739 sidecar rejection reported;queue source identical to green4e. Bounded regular/nlink0 recheck and strict negative cases25passed;50multiprocess passes before and after. Original CIrootcause remains unproven;no globalrace-free claim.",
+        "test_evidence": "Crash/Restart, konkurrierende Claims, lokales Fencing, getrennte Graphen, Parent-Join, bounded attempts, Orphanfollowups geprüft. MainCI40573693739 sidecar rejection reported;queue source identical to green4e. Bounded regular/nlink0 recheck and strict negative cases25passed;50multiprocess passes before and after. Original CIrootcause remains unproven;no globalrace-free claim.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Verteilte Runtimes, serverseitiges Fencing und echte unabh\u00e4ngige fachliche Abnahme fehlen.",
+        "gap": "Verteilte Runtimes, serverseitiges Fencing und echte unabhängige fachliche Abnahme fehlen.",
         "next_step": "Autorisierte Runtime-/Leasegrenze bestimmen, vor Cutover verteilte Gegenproben planen.",
-        "completion_criterion": "Alter Fence wird serverseitig verworfen, kein zweiter Writer; Checkpoint/Resultat nach Restart exakt gelesen, Parent nur nach allen unabh\u00e4ngigen Receipts geschlossen.",
+        "completion_criterion": "Alter Fence wird serverseitig verworfen, kein zweiter Writer; Checkpoint/Resultat nach Restart exakt gelesen, Parent nur nach allen unabhängigen Receipts geschlossen.",
         "owner_area": "Runtimeowner"
       },
       {
@@ -2351,7 +2351,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Sprache: Kein linguistisches oder rechtliches \u00dcbersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
+        "applicable_requirement": "Sprache: Kein linguistisches oder rechtliches Übersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "apps/site/src/Auth.tsx",
@@ -2364,11 +2364,11 @@
           "apps/site/tests/browser-coverage.mjs",
           "evidence/one-app-2026-10-27/public-route-coverage.json"
         ],
-        "test_evidence": "Alle36 \u00f6ffentlichen Seiten in DE/NL mit Titel, Zusammenfassung und Abschnitten gepr\u00fcft. Zwei generische deutsche Beschriftungen korrigiert; Marken, Logos und fester Claim erhalten. Bestehende FR-/Authf\u00e4lle separat getestet.",
+        "test_evidence": "Alle36 öffentlichen Seiten in DE/NL mit Titel, Zusammenfassung und Abschnitten geprüft. Zwei generische deutsche Beschriftungen korrigiert; Marken, Logos und fester Claim erhalten. Bestehende FR-/Authfälle separat getestet.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
-        "gap": "Kein linguistisches oder rechtliches \u00dcbersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
-        "next_step": "Fachliche Sprachfreigabe und echte Widgetpr\u00fcfung nach Providerbereitschaft.",
+        "gap": "Kein linguistisches oder rechtliches Übersetzungsgutachten; echtes Providerwidget bleibt unverbunden.",
+        "next_step": "Fachliche Sprachfreigabe und echte Widgetprüfung nach Providerbereitschaft.",
         "completion_criterion": "exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review",
         "owner_area": "Frontend QA / Sprachfreigabe"
       },
@@ -2378,7 +2378,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Tokens: Reale externe Clerk-Widgetzust\u00e4nde sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
+        "applicable_requirement": "Tokens: Reale externe Clerk-Widgetzustände sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "config/design-tokens.json",
@@ -2389,11 +2389,11 @@
           "apps/web/components/WorkspaceRebuild.css",
           "evidence/one-app-2026-10-27/public-surface-contract.txt"
         ],
-        "test_evidence": "Eigene aktive CSS/TSX-Oberfl\u00e4che auf harte Farbwerte gepr\u00fcft; generierte CSS-/JSON-Tokenwerte unabh\u00e4ngig aus zentraler Quelle rekonstruiert und verglichen; keine eigenen Chart-/Canvaszust\u00e4nde vorhanden. Linkzielgr\u00f6\u00dfen nutzen bestehenden target-min-Token.",
+        "test_evidence": "Eigene aktive CSS/TSX-Oberfläche auf harte Farbwerte geprüft; generierte CSS-/JSON-Tokenwerte unabhängig aus zentraler Quelle rekonstruiert und verglichen; keine eigenen Chart-/Canvaszustände vorhanden. Linkzielgrößen nutzen bestehenden target-min-Token.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
-        "gap": "Reale externe Clerk-Widgetzust\u00e4nde sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
-        "next_step": "Echtes Widget nach best\u00e4tigter Providerkonfiguration gegen Tokens pr\u00fcfen; keine pauschale Fremdwidgetabdeckung.",
+        "gap": "Reale externe Clerk-Widgetzustände sind deaktiviert und nicht durch lokale Fixtures als gestylt abgenommen.",
+        "next_step": "Echtes Widget nach bestätigter Providerkonfiguration gegen Tokens prüfen; keine pauschale Fremdwidgetabdeckung.",
         "completion_criterion": "exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review",
         "owner_area": "Designsystemowner"
       },
@@ -2403,7 +2403,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Responsive/Accessibility: Screenreader-Ausgaben, visuelle Inhaltsverluste/\u00dcberlagerungen bei Zoom/Textabstand und Kontrast \u00fcber Bilder/Gradienten sind nicht vollst\u00e4ndig gepr\u00fcft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
+        "applicable_requirement": "Responsive/Accessibility: Screenreader-Ausgaben, visuelle Inhaltsverluste/Überlagerungen bei Zoom/Textabstand und Kontrast über Bilder/Gradienten sind nicht vollständig geprüft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "apps/site/tests/browser-integration.mjs",
@@ -2421,12 +2421,12 @@
           "evidence/one-app-2026-10-27/decision-accessibility.json",
           "evidence/one-app-2026-10-27/decision-screenshot-review.json"
         ],
-        "test_evidence": "36mobile Seiten: sichtbare Kontrollnamen,44px-Ziele,Reduced Motion,Overflow und Skiplink; Dialog Tab/Shift-Tab/ESC/Fokusreturn.216 Routen-/Locale-/Breitenf\u00e4lle sowie108 Geometriepr\u00fcfungen mit Textabst\u00e4nden und tats\u00e4chlich gemessener Textverdopplung. Root-Font-Scheinnachweis unabh\u00e4ngig erkannt, ersetzt; Header-/Text\u00fcberl\u00e4ufe korrigiert. Kleine Marken-/Footer-/Desktoplinks konkret korrigiert.",
+        "test_evidence": "36mobile Seiten: sichtbare Kontrollnamen,44px-Ziele,Reduced Motion,Overflow und Skiplink; Dialog Tab/Shift-Tab/ESC/Fokusreturn.216 Routen-/Locale-/Breitenfälle sowie108 Geometrieprüfungen mit Textabständen und tatsächlich gemessener Textverdopplung. Root-Font-Scheinnachweis unabhängig erkannt, ersetzt; Header-/Textüberläufe korrigiert. Kleine Marken-/Footer-/Desktoplinks konkret korrigiert.",
         "actual_delivery": "local_remaining",
         "full_requirement_accepted": false,
-        "gap": "Screenreader-Ausgaben, visuelle Inhaltsverluste/\u00dcberlagerungen bei Zoom/Textabstand und Kontrast \u00fcber Bilder/Gradienten sind nicht vollst\u00e4ndig gepr\u00fcft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
-        "next_step": "Qualifizierte manuelle Kriterienpr\u00fcfung mit tats\u00e4chlicher Assistenztechnik durchf\u00fchren; visuelle Kontrast-/Inhaltsverlustpr\u00fcfung erg\u00e4nzen; Orca/NVDA sind in dieser Umgebung nicht verf\u00fcgbar, Fall bleibt offen.",
-        "completion_criterion": "Anwendbare Kriterien einzeln mit Zielbrowser/Assistenztechnik/Version und fachlicher Pr\u00fcferqualifikation belegt; alle best\u00e4tigten Befunde nachgepr\u00fcft, keine Zertifizierung aus Heuristik.",
+        "gap": "Screenreader-Ausgaben, visuelle Inhaltsverluste/Überlagerungen bei Zoom/Textabstand und Kontrast über Bilder/Gradienten sind nicht vollständig geprüft. Ein Chromium-DOM-Test ersetzt diese Kriterien nicht. Keine WCAG-Zertifizierung.",
+        "next_step": "Qualifizierte manuelle Kriterienprüfung mit tatsächlicher Assistenztechnik durchführen; visuelle Kontrast-/Inhaltsverlustprüfung ergänzen; Orca/NVDA sind in dieser Umgebung nicht verfügbar, Fall bleibt offen.",
+        "completion_criterion": "Anwendbare Kriterien einzeln mit Zielbrowser/Assistenztechnik/Version und fachlicher Prüferqualifikation belegt; alle bestätigten Befunde nachgeprüft, keine Zertifizierung aus Heuristik.",
         "owner_area": "Accessibility QA"
       },
       {
@@ -2435,7 +2435,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "API-/Modulvertr\u00e4ge: Tats\u00e4chliche externe Backends und vollst\u00e4ndige Pagination/Fehlerzust\u00e4nde unbewiesen.",
+        "applicable_requirement": "API-/Modulverträge: Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "tests/test_local_control.py",
@@ -2446,12 +2446,12 @@
           "config/local-control.json",
           "docs/contracts/factory.openapi.json"
         ],
-        "test_evidence": "Feste lokale Schemas/Versionen, unbekannte Felder, Rollen und Paginationnegatives gepr\u00fcft.",
+        "test_evidence": "Feste lokale Schemas/Versionen, unbekannte Felder, Rollen und Paginationnegatives geprüft.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Tats\u00e4chliche externe Backends und vollst\u00e4ndige Pagination/Fehlerzust\u00e4nde unbewiesen.",
+        "gap": "Tatsächliche externe Backends und vollständige Pagination/Fehlerzustände unbewiesen.",
         "next_step": "Autorisierte typisierte Adapter und aktuelle Zielantworten nachweisen.",
-        "completion_criterion": "Jede ben\u00f6tigte Operation besitzt Versions-/Schema-/Fehlervertrag und vollst\u00e4ndigen realen Antwort-/Paginationbeleg; unbekannte Operation bleibt gesperrt.",
+        "completion_criterion": "Jede benötigte Operation besitzt Versions-/Schema-/Fehlervertrag und vollständigen realen Antwort-/Paginationbeleg; unbekannte Operation bleibt gesperrt.",
         "owner_area": "Backend-/Adapterowner"
       },
       {
@@ -2476,7 +2476,7 @@
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
         "gap": "Beweisumfang auf lokalen Generator/Browser begrenzt; keine reale Tenant- oder Secretisolation eines Providers.",
-        "next_step": "Pr\u00fcfungen am sp\u00e4teren Release wiederholen; Providergrenzen gesondert behandeln.",
+        "next_step": "Prüfungen am späteren Release wiederholen; Providergrenzen gesondert behandeln.",
         "completion_criterion": "exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review",
         "owner_area": "Frontend QA"
       },
@@ -2504,12 +2504,12 @@
           "evidence/one-app-2026-10-27/suite-trial-independent-review.md",
           "evidence/one-app-2026-10-27/suite-trial-method-binding.json"
         ],
-        "test_evidence": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelit\u00e4t/Expiry/Identity-/Tenant-/Activationnegatives und g\u00fcltigerFunding\u00fcbergang lokal gepr\u00fcft; Funding vor Modellreservierung/Dispatch unver\u00e4ndert.",
+        "test_evidence": "Suitebeginn ohne Funding und ohne Credits; einmaliges86400Sekundenfenster, Replay/Restart/Parallelität/Expiry/Identity-/Tenant-/Activationnegatives und gültigerFundingübergang lokal geprüft; Funding vor Modellreservierung/Dispatch unverändert.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
         "gap": "Reale Identity/Vault/Payment/Modell/Usage/Reconciliation mit autoritativem Readback weiterhin nicht abgenommen; lokale Suite-Startabweichung behoben.",
-        "next_step": "Autorisierte konkrete externe Adaptervertr\u00e4ge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
-        "completion_criterion": "Lokale Regel MASTER-12-TRIAL-01 gepr\u00fcft; Gesamtfall erst nach realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.",
+        "next_step": "Autorisierte konkrete externe Adapterverträge/Ziele und Testrechte nachweisen; keine neuen finanziellen oder produktiven Wirkungen aus lokalem Test ableiten.",
+        "completion_criterion": "Lokale Regel MASTER-12-TRIAL-01 geprüft; Gesamtfall erst nach realer autoritativer Identity/Vault/Payment/Modell/Usage-Reconciliation und exaktem Readback geschlossen.",
         "owner_area": "Jeweiliger Adapterowner"
       },
       {
@@ -2518,7 +2518,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "PWA: Keine tats\u00e4chliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
+        "applicable_requirement": "PWA: Keine tatsächliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "prototypen/sw.js",
@@ -2531,13 +2531,13 @@
           "evidence/one-app-2026-10-27/pwa-browser.json",
           "docs/contracts/public-installation.md"
         ],
-        "test_evidence": "Installationsl\u00fccke lokal implementiert: expliziter public-pwa-Modus, Manifest mit Originalsignet und zentralen Tokens, echter netzabh\u00e4ngiger Serviceworker.9Browserpr\u00fcfungen: Registrierung, Manifest, Cache leer, Offline-GET/POST ohne Antwort, Reconnect ohne Replay, eigener Unregister-R\u00fcckweg.4negative/positive Nodef\u00e4lle. Normale/Standalone-Builds deaktiviert.",
+        "test_evidence": "Installationslücke lokal implementiert: expliziter public-pwa-Modus, Manifest mit Originalsignet und zentralen Tokens, echter netzabhängiger Serviceworker.9Browserprüfungen: Registrierung, Manifest, Cache leer, Offline-GET/POST ohne Antwort, Reconnect ohne Replay, eigener Unregister-Rückweg.4negative/positive Nodefälle. Normale/Standalone-Builds deaktiviert.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
-        "gap": "Keine tats\u00e4chliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
-        "next_step": "Expliziten Build auf freigegebenen Zielger\u00e4ten installieren/aktualisieren/deinstallieren; privates Offlineverhalten nur nach separatem Produkt-/Datenvertrag.",
+        "gap": "Keine tatsächliche OS-/Mehrbrowser-Installations- oder Updateabnahme. Kein privater Offlinebetrieb; weder API-/Authcaching noch Backgroundsync. Produktionsaktivierung/Zielorigin unfreigegeben.",
+        "next_step": "Expliziten Build auf freigegebenen Zielgeräten installieren/aktualisieren/deinstallieren; privates Offlineverhalten nur nach separatem Produkt-/Datenvertrag.",
         "completion_criterion": "exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review",
-        "owner_area": "Frontend Engineering / Ger\u00e4te-QA / Deploymentowner"
+        "owner_area": "Frontend Engineering / Geräte-QA / Deploymentowner"
       },
       {
         "requirement_id": "MASTER-14",
@@ -2545,7 +2545,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Wissen: Autoritative Brain-Tenantzuordnung und WRITE\u2192INDEX\u2192EXACT READ-BACK\u2192CONTENT COMPARE fehlen.",
+        "applicable_requirement": "Wissen: Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "tools/brain_ingestion.py",
@@ -2555,12 +2555,12 @@
           "evidence/one-app-2026-10-27/closed-loop.txt",
           "config/local-control.json"
         ],
-        "test_evidence": "Lokales Staging/Version/ACL/Redaktion und Chunkhashvorschau; externe R\u00fcckf\u00fchrung ausdr\u00fccklich false.",
+        "test_evidence": "Lokales Staging/Version/ACL/Redaktion und Chunkhashvorschau; externe Rückführung ausdrücklich false.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Autoritative Brain-Tenantzuordnung und WRITE\u2192INDEX\u2192EXACT READ-BACK\u2192CONTENT COMPARE fehlen.",
+        "gap": "Autoritative Brain-Tenantzuordnung und WRITE→INDEX→EXACT READ-BACK→CONTENT COMPARE fehlen.",
         "next_step": "Mapping/ACL und autorisierten neutralen Readbackpfad nachweisen; keine Kundendateninjektion.",
-        "completion_criterion": "Exakte Inhaltsgleichheit und Indexzuordnung am best\u00e4tigten Tenant nach Write/Index/Readback, Fremdtenantnegative und Provenienz-/Lifecyclebeleg bestanden; Toolerfolg allein gen\u00fcgt nicht.",
+        "completion_criterion": "Exakte Inhaltsgleichheit und Indexzuordnung am bestätigten Tenant nach Write/Index/Readback, Fremdtenantnegative und Provenienz-/Lifecyclebeleg bestanden; Toolerfolg allein genügt nicht.",
         "owner_area": "Brainowner"
       },
       {
@@ -2569,7 +2569,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Build/Deployment: Gemeinsamer Kandidat nicht deployed; tats\u00e4chliche Routing-/Assetpr\u00fcfung am Zielrelease fehlt.",
+        "applicable_requirement": "Build/Deployment: Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "apps/site/scripts/build-standalone.mjs",
@@ -2580,12 +2580,12 @@
           "config/one-web-app.json",
           "docs/contracts/one-web-app-integration.md"
         ],
-        "test_evidence": "Normal-/Standalonebuild, Chunks/ESM und bestehende lokale Release-Archivtests gepr\u00fcft.",
+        "test_evidence": "Normal-/Standalonebuild, Chunks/ESM und bestehende lokale Release-Archivtests geprüft.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Gemeinsamer Kandidat nicht deployed; tats\u00e4chliche Routing-/Assetpr\u00fcfung am Zielrelease fehlt.",
-        "next_step": "Exakten Kandidaten erst nach Freigabe in autorisierter Runtime pr\u00fcfen.",
-        "completion_criterion": "Exakter Release-/Assethash auf best\u00e4tigter Runtime, echte Routen/Session/Provider-E2E, Restore/R\u00fcckweg und qualifizierte unabh\u00e4ngige Freigabe vollst\u00e4ndig belegt.",
+        "gap": "Gemeinsamer Kandidat nicht deployed; tatsächliche Routing-/Assetprüfung am Zielrelease fehlt.",
+        "next_step": "Exakten Kandidaten erst nach Freigabe in autorisierter Runtime prüfen.",
+        "completion_criterion": "Exakter Release-/Assethash auf bestätigter Runtime, echte Routen/Session/Provider-E2E, Restore/Rückweg und qualifizierte unabhängige Freigabe vollständig belegt.",
         "owner_area": "Releaseowner"
       },
       {
@@ -2594,7 +2594,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Migration: Serverbackupstand, echter Restore, Writehandoff und R\u00fcckrouting unbewiesen.",
+        "applicable_requirement": "Migration: Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.",
         "interpretation": "master acceptance requirement, not claimed original user wording",
         "implementation_files": [
           "tests/test_ai_migration.py",
@@ -2602,12 +2602,12 @@
           "config/ai-migration-policy.json",
           "tests/test_selfservice_decisions.py"
         ],
-        "test_evidence": "Offline-CAS-/\u00dcbergangsplanung und parallele additive Schema-Starts getestet.",
+        "test_evidence": "Offline-CAS-/Übergangsplanung und parallele additive Schema-Starts getestet.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
-        "gap": "Serverbackupstand, echter Restore, Writehandoff und R\u00fcckrouting unbewiesen.",
-        "next_step": "Backup-/Exitbelege lesen und kontrollierten Restore innerhalb gesonderter Rechte durchf\u00fchren.",
-        "completion_criterion": "Echtes Backup am Ziel lesbar, Restore und Integrit\u00e4t nachgewiesen, RPO/RTO nur gegen genehmigte Vorgaben bewertet, Jobs/Schreibrechte sicher \u00fcbergeben und R\u00fcckrouting ohne doppelte Wirkung gepr\u00fcft.",
+        "gap": "Serverbackupstand, echter Restore, Writehandoff und Rückrouting unbewiesen.",
+        "next_step": "Backup-/Exitbelege lesen und kontrollierten Restore innerhalb gesonderter Rechte durchführen.",
+        "completion_criterion": "Echtes Backup am Ziel lesbar, Restore und Integrität nachgewiesen, RPO/RTO nur gegen genehmigte Vorgaben bewertet, Jobs/Schreibrechte sicher übergeben und Rückrouting ohne doppelte Wirkung geprüft.",
         "owner_area": "Runtime-/Backupowner"
       },
       {
@@ -2624,12 +2624,12 @@
           "config/capacity-policy.json",
           "tools/capacity_planner.py"
         ],
-        "test_evidence": "Lokale Pr\u00fcfmethoden/Versionen und begrenzte Kapazit\u00e4tsrechnungen dokumentiert.",
+        "test_evidence": "Lokale Prüfmethoden/Versionen und begrenzte Kapazitätsrechnungen dokumentiert.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
         "gap": "Vergleichbare echte Ziel-/Lastmessung und autorisierte quantitative Akzeptanzgrenzen fehlen.",
         "next_step": "Gleiche Ziel-/Zeit-/Lastmethode und genehmigte Grenzen festlegen; keine SLAs erfinden.",
-        "completion_criterion": "Gleiche Methode/Ziel-/Versions-/Lastbindung vor/nach, vollst\u00e4ndige Messdimensionen und genehmigte Grenzwerte; Teilmessung bleibt Teilmessung.",
+        "completion_criterion": "Gleiche Methode/Ziel-/Versions-/Lastbindung vor/nach, vollständige Messdimensionen und genehmigte Grenzwerte; Teilmessung bleibt Teilmessung.",
         "owner_area": "Betriebs-/Performanceowner"
       },
       {
@@ -2648,12 +2648,12 @@
           "tools/local_control.py",
           "tools/context_executor.py"
         ],
-        "test_evidence": "Drei feste lokale F\u00e4higkeiten; Skillhash, Scope/Host, stale/partial-Evidenz und SSH-Fallback negativ gepr\u00fcft.",
+        "test_evidence": "Drei feste lokale Fähigkeiten; Skillhash, Scope/Host, stale/partial-Evidenz und SSH-Fallback negativ geprüft.",
         "actual_delivery": "external_blocked",
         "full_requirement_accepted": false,
         "gap": "Reale MCP-/SSH-Operationsrechte und Zielantworten nicht integriert; neuere externe Fehler-/Unknown-outcome-Abgleich fehlt.",
         "next_step": "Typisierte Operation und frischen autoritativen Nachweis lesen; keine generische Shellersatzroute.",
-        "completion_criterion": "Operation wird nur bei passendem aktuellen vollst\u00e4ndigen Nachweis gew\u00e4hlt; falsches Ziel/Rechteverlust/Skillfehler/Partial/ungewisser Ausgang blockieren oder reconciliieren belegt; kein stiller Fallback.",
+        "completion_criterion": "Operation wird nur bei passendem aktuellen vollständigen Nachweis gewählt; falsches Ziel/Rechteverlust/Skillfehler/Partial/ungewisser Ausgang blockieren oder reconciliieren belegt; kein stiller Fallback.",
         "owner_area": "Adapter-/Securityowner"
       },
       {
@@ -2724,7 +2724,7 @@
         "source_ids": [
           "SRC-MASTER-TECH-1.1"
         ],
-        "applicable_requirement": "Intent\u2192skill/version/hash\u2192typed operation\u2192tenant/project/exact target\u2192fresh matching evidence.",
+        "applicable_requirement": "Intent→skill/version/hash→typed operation→tenant/project/exact target→fresh matching evidence.",
         "interpretation": "scoped requirement derived from cited source; not reconstructed original transcript",
         "implementation_files": [
           "tools/local_control.py",
@@ -2982,10 +2982,10 @@
           "apps/web/auth/policy.ts",
           "apps/web/auth/tests/policy.test.mjs"
         ],
-        "test_evidence": "36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity. Existing web project exactfullsettings/repositoryroot read:apps/web,nextjs,node24\u219222 onlyglobalchange,rollback24saved;no production switch. Scoped apps/web/vercel.json prevents inherited Vite build/output.8auth/deploymenttests and13real localNextHTTPchecks,10private503;corrected defaultTurbopack+Webpack+typecheck passed. Independent Sol reviewed. NoClerkcopy/realprovider/portal acceptance. Delta PORTAL-LOCAL-READ-01:8 focused persistent read/auth/error/parent-join tests;4 real local sharedUI\u2192HTTP\u2192existingdatabase fixture cases,20 negative session cases,DE/NL320/1280,reload/repeat,no state delta. Next72routes/10private503 plus internalAPI503,no-store. These are isolated synthetic session tests,not provider/membership acceptance. Local make check/e2e/check-arch/clean-check pass with502Python/62Site/13Next tests. Independent Sol rechecked both corrected findings and approved bounded WIP; final commit review is a separately bound receipt,not live acceptance. Previewguard-Sourcefix:16Nexttests including matching server Preview/test pair,Production/live preservation and unknown/conflicting/client-only metadata negatives. Fresh Next72routes/10private503+API503 and4workspace/20negative fixture cases;unchanged resize proof remains source-bound. Complete PR review is separately bound to final head;no real login acceptance.",
+        "test_evidence": "36 public routes tested; customer module explicitly false/private and backend blocked pending verified identity. Existing web project exactfullsettings/repositoryroot read:apps/web,nextjs,node24→22 onlyglobalchange,rollback24saved;no production switch. Scoped apps/web/vercel.json prevents inherited Vite build/output.8auth/deploymenttests and13real localNextHTTPchecks,10private503;corrected defaultTurbopack+Webpack+typecheck passed. Independent Sol reviewed. NoClerkcopy/realprovider/portal acceptance. Delta PORTAL-LOCAL-READ-01:8 focused persistent read/auth/error/parent-join tests;4 real local sharedUI→HTTP→existingdatabase fixture cases,20 negative session cases,DE/NL320/1280,reload/repeat,no state delta. Next72routes/10private503 plus internalAPI503,no-store. These are isolated synthetic session tests,not provider/membership acceptance. Local make check/e2e/check-arch/clean-check pass with502Python/62Site/13Next tests. Independent Sol rechecked both corrected findings and approved bounded WIP; final commit review is a separately bound receipt,not live acceptance. Previewguard-Sourcefix:16Nexttests including matching server Preview/test pair,Production/live preservation and unknown/conflicting/client-only metadata negatives. Fresh Next72routes/10private503+API503 and4workspace/20negative fixture cases;unchanged resize proof remains source-bound. Complete PR review is separately bound to final head;no real login acceptance.",
         "actual_delivery": "reported_partial_implementation_unverified",
         "full_requirement_accepted": false,
-        "gap": "Live identity\u2192tenant/project\u2192role mapping,revocation integration and Next-to-existing-controller transport remain unbound. Production API/page fail closed; local technical review receipts do not provide business approval authority. Original AionUi/workplace modules remain separate open scope.",
+        "gap": "Live identity→tenant/project→role mapping,revocation integration and Next-to-existing-controller transport remain unbound. Production API/page fail closed; local technical review receipts do not provide business approval authority. Original AionUi/workplace modules remain separate open scope.",
         "next_step": "Bind actual identity/tenant/project/role/revocation and controller transport on verified runtime. Previewguard correction is locally tested;Vercel author block,exact Preview origin/issuer and real provider acceptance remain separate. No new keys or membership grants.",
         "completion_criterion": "Each required portal works in its correct route with verified session/tenant, real data path and negative direct-link/API tests.",
         "owner_area": "D06 / D07",
@@ -3275,7 +3275,7 @@
           "evidence/oracle-companion-2026-10-27/browser.json",
           "evidence/oracle-companion-2026-10-27/verification.json"
         ],
-        "test_evidence": "6actual browser cases320/390/1280xmotion/reduce;working\u2192synthetic503\u2192idle,draft preserved,original HTTP hash,decorative image,geometry,keyboard and accessibility snapshot;72Next+72Vite route-locale cases,1724history edges,108resize,13shop4catalog;11Next+53siteNode.",
+        "test_evidence": "6actual browser cases320/390/1280xmotion/reduce;working→synthetic503→idle,draft preserved,original HTTP hash,decorative image,geometry,keyboard and accessibility snapshot;72Next+72Vite route-locale cases,1724history edges,108resize,13shop4catalog;11Next+53siteNode.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
         "gap": "Exact production delivery/readback and qualified assistive-technology acceptance remain open;no actual video animation delivered.",
@@ -3347,7 +3347,7 @@
           "apps/site/tests/fixtures/csp-enforcement-baseline.json",
           "evidence/csp-report-removal-2026-10-28/browser.json"
         ],
-        "test_evidence": "Both actual SDK surfaces:8 checks and4 local wire attempts each (3positive+1intentional503),0external events;503\u2192revoke\u2192immediate reconsent cannot revive retries/unload;5controller/privacy+2map Node regressions;private Vite5/Next17maps,0public maps. Scoped CSPdelta:3Nodeenforcement/header tests andactualproductionBrowser2blockedforeignsources,0externalrequests;explicitnewapproval. Exactcommit/review/publishstatus separatelybound.",
+        "test_evidence": "Both actual SDK surfaces:8 checks and4 local wire attempts each (3positive+1intentional503),0external events;503→revoke→immediate reconsent cannot revive retries/unload;5controller/privacy+2map Node regressions;private Vite5/Next17maps,0public maps. Scoped CSPdelta:3Nodeenforcement/header tests andactualproductionBrowser2blockedforeignsources,0externalrequests;explicitnewapproval. Exactcommit/review/publishstatus separatelybound.",
         "actual_delivery": "local_fixed_verified",
         "full_requirement_accepted": false,
         "gap": "Consent interface now locally bound in follow-up;real privacy/release/provider acceptance,officialsource-map upload/debug-ID/deobfuscation and remote gates remain open. Map5/17 receipt is historical b4build,not a new consentbuild claim.",
@@ -3449,12 +3449,12 @@
           "docs/contracts/local-mail-workspace.md",
           "evidence/mail-workspace-2026-10-28/browser.json"
         ],
-        "test_evidence": "22 focused local Python tests;6 actual sharedUI\u2192loopbackHTTP\u2192persistentDB browser views DE/NL/FR320/1280,30 negative session cases,reply-all/forward,HTML/attachments inert,postcommit response loss/same-key readback,doubleclick,localarchiveundo,reload saved-draft readback,malformed DTO and delayed account-switch negatives. Noexternalrequests/runtimeerrors. Existing4workspace-read fixtures retained withcurrentpagehash. Independent review/finalcommitreceipt separatelybound.",
+        "test_evidence": "22 focused local Python tests;6 actual sharedUI→loopbackHTTP→persistentDB browser views DE/NL/FR320/1280,30 negative session cases,reply-all/forward,HTML/attachments inert,postcommit response loss/same-key readback,doubleclick,localarchiveundo,reload saved-draft readback,malformed DTO and delayed account-switch negatives. Noexternalrequests/runtimeerrors. Existing4workspace-read fixtures retained withcurrentpagehash. Independent review/finalcommitreceipt separatelybound.",
         "actual_delivery": "reported_partial_implementation_unverified",
         "full_requirement_accepted": false,
         "gap": "Live identity/membership-to-mailbox binding,AppConnectorcredentials/transport,providersync/rate/reconciliation,dispatch sending/sent/failed/unknown,webhookruntime/authpayload andactualmailE2Eremainunbound. CurrentHostingerwebhookreporteddisabled;nohandlerincheckout.",
         "next_step": "Mail/identity/runtimeownersverifyexistingauthorizedmailboxscopeandtransport;thenboundedreadsyncandproviderreconciliationgatesbeforeanysend. No automatic webhook reactivation.",
-        "completion_criterion": "Actual private session\u2192authorized mailbox\u2192verified provider read/safe drafts and separately approved dispatch/reconciliation with tenant/replay/timeoutnegativeE2E.",
+        "completion_criterion": "Actual private session→authorized mailbox→verified provider read/safe drafts and separately approved dispatch/reconciliation with tenant/replay/timeoutnegativeE2E.",
         "owner_area": "D06 / D07;existing_web_writer;mail_identity_runtime_owners"
       },
       {
@@ -3732,6 +3732,1084 @@
           "independent_review_passed": true,
           "rea_evidence_id": "ev_245301f079b87af819a463b12b693c7a2f58415da43afd51c2f561242a52c452",
           "production_acceptance": false
+        }
+      }
+    },
+    "current_execution": {
+      "id": "GOAL-NEXIFY-COMPLETION-20261101",
+      "version": 1,
+      "observed_at": "2026-11-01T22:21:19.647662+00:00",
+      "user_request": "Abweichungen eigenständig ermitteln, ehrlichen SOLL ableiten, verifizieren, planen, vorbereiten und bereitstellen.",
+      "mode": "bounded_execution_and_evidence_not_background_worker",
+      "whole_system_accepted": false,
+      "master": {
+        "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+        "version_id": "4",
+        "sha256": "abaae8524fa231265ca16183504da13cb9e78602e9b94ae3ac71dfac030d20ea",
+        "current_normative_line_range_read": [
+          1,
+          113
+        ],
+        "historical_appendices": "indexed_and_targeted_sections_read_not_all_semantically_reviewed",
+        "bytes": 2029181
+      },
+      "roots": {
+        "github_main": "ad4bbf69243b7d489594a8c2d20d7cf838dcf14c",
+        "leading_design_branch": "conflict_011126_0014",
+        "leading_design_commit": "8fc8a3ba5ebeb72c6361a86b0bd9ebc118008859",
+        "main_contains_design": true,
+        "main_commits_ahead_of_design": 4,
+        "sites_project_id": "appgprj_6ae7ad63df2081918a843f996caf9422",
+        "sites_baseline_commit": "30fce1446bb9d5c71712de51a1186420d4821953",
+        "parallel_vercel_branch": "conflict_011126_2103",
+        "parallel_vercel_commit": "2c3059a83cff3193f81ebbe64afacc49b04e9ac1",
+        "parallel_branch_ahead": 17,
+        "parallel_branch_behind": 58,
+        "cutover_performed": false
+      },
+      "authority": {
+        "writer": "/root",
+        "reviewers": [
+          "/root/soll_abgleich",
+          "/root/runtime_pruefung",
+          "/root/qualitaet_review",
+          "/root/brand_ux_pruefung"
+        ],
+        "new_paid_provider_calls": 0,
+        "new_external_messages": 0,
+        "new_credentials_or_security_access": false,
+        "full_context_recovery_claimed": false
+      },
+      "packages": [
+        {
+          "id": "P01",
+          "name": "Auftrag/CRM",
+          "required_result": "Anfrage, Quelle, Kontakt, Tenant, Projekt, Scope, Owner, Termin, Budget, Version und Auftrag verbinden",
+          "dependencies": "Identität, berechtigte Eingangskanäle",
+          "acceptance_and_return": "Anfrage → Briefing → Fassung des Angebots → autorisierte Annahme → Projekt; Dedupe/Änderung/Abbruch. Vorzustand/Version erhalten.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 43
+          },
+          "owner_function": "Backend/Portale",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P02",
+          "name": "Design",
+          "required_result": "Gemeinsame semantische Tokens, Originallogos, Figuren, Schriftrollen, Raster, Cards/Sections, Material/Noise, Komponenten und Zustände",
+          "dependencies": "Führendes Repository-Design conflict_011126_0014 und Assetrechte",
+          "acceptance_and_return": "Gleiches System über alle Seiten, Dark/Light, 320 px/200 % Text, Tastatur, Reduced Motion; Rückkehr zur vorigen Designversion.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 44
+          },
+          "owner_function": "Grafik/Brand und UX/Frontend",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P03",
+          "name": "Seiten/Redaktion",
+          "required_result": "49 registrierte Routen plus eigenständige Unteransichten, Nutzerfrage, Struktur, echte CTA, Inhalte/Metadaten/Sprachen",
+          "dependencies": "Originalprototypen, Inhalt/Fakten",
+          "acceptance_and_return": "Alle Aktionen haben erreichbares Ziel und Fehlerweg; eigene Kundentexte entstehen aus realer Funktion. Originale/alte Pfade erhalten.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 45
+          },
+          "owner_function": "UX/Frontend/Redaktion",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P04",
+          "name": "Medien",
+          "required_result": "Je Route und relevantem Abschnitt Szenenzweck, Text, Regie, Figur, Sprache, Medienexport, Rechte und Bedienung",
+          "dependencies": "Charakterbibel, Originalfiguren, echte Video-/Audiofiles",
+          "acceptance_and_return": "Sichtbare vollständige Figuren, tatsächliche transparente Einbettung, Untertitel/Transkript/Pause/Ton, Seitenprüfung; Rückweg auf vorherige freigegebene Datei.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 46
+          },
+          "owner_function": "Grafik/Brand",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P05",
+          "name": "Suitezugang",
+          "required_result": "Privat/Business, Entitlement, bewusst gestarteter 24-h-Test, 30-Tage-Berechtigung, NeX mit AIFly, Add-ons ohne Doppelgebühr",
+          "dependencies": "Verifizierte Identität, Produkt-/Preis-/Fundingvertrag",
+          "acceptance_and_return": "Parallelität, Serverzeit, Ablauf, Wiederholung, Upgrade, fremder Tenant; bezahlte Datenansichten bei fehlendem Modellfunding erhalten.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 47
+          },
+          "owner_function": "Backend/Portale",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P06",
+          "name": "Arbeitsplatz",
+          "required_result": "Navigation, Chat, Oracle-Status, tatsächlicher Browser-/Artefakt-/PDF-Bereich, geschlossener zentrierter Chat",
+          "dependencies": "Session/Projekt, berechtigte Tools",
+          "acceptance_and_return": "Verlauf erhalten, Datei/Artefakt bearbeiten, Fehler/Cancel/Resume, mobile Tastatur, Resize; keine verdeckten Inhalte.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 48
+          },
+          "owner_function": "UX/Frontend und Backend/Portale",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P07",
+          "name": "API/Kosten",
+          "required_result": "Schlüssel, Kostenstelle, Entitlement, Schätzung, Reservierung, Usage, Journal, Abrechnung, Refundpfad",
+          "dependencies": "Auth/Tenant, Provider- und Preisvertrag",
+          "acceptance_and_return": "Keine Doppelbuchung oder negativer Saldo bei Parallelität; fehlendes Funding stoppt Kostenaktion. Unklarer Providererfolg wird abgeglichen.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 49
+          },
+          "owner_function": "Backend/Portale und Finance",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P08",
+          "name": "Produktdaten",
+          "required_result": "Lieferantenrohstand, SKU/EAN/Variante, Kategorie, Rechte, Bild, Maße, Quelle/Zeit, Produktstatus",
+          "dependencies": "Reale Datenquelle, Nutzungsrecht, Pagination/Quota",
+          "acceptance_and_return": "Exakte tatsächliche Zeilen/IDs, reproduzierbare Normalisierung, Dedupe/Delta, Quarantäne und Rückkehr zum vorigen Snapshot.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 50
+          },
+          "owner_function": "Shop",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P09",
+          "name": "Passung/Beratung",
+          "required_result": "Fahrzeugvariante, Achse/Bauzeit/Maße, Quelle, Status, Bedingungen, Zubehör mit Begründung",
+          "dependencies": "Lizenzierter Fitmentbeleg und Produktdaten",
+          "acceptance_and_return": "Kein Name/Bild als Fitmentbeweis; Mehrdeutigkeit klären, Sicherheitsfälle sperren; kein Kauf aufgrund verlorenen Fahrzeugkontexts.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 51
+          },
+          "owner_function": "Shop",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P10",
+          "name": "Kauf",
+          "required_result": "Serverseitiger Cart, Varianten/Mengen, Marktpreis, Steuer/Versand/Pfand, Order, Zahlungsstatus",
+          "dependencies": "P08/P09, freigegebene Kalkulation, Providerrechte",
+          "acceptance_and_return": "Preis-/Bestandsänderung, Gast/Konto, doppelter Klick, Reload, abgebrochene Zahlung, Webhook/Readback; Bestell-/Zahlungs-/Annahmestatus getrennt.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 52
+          },
+          "owner_function": "Shop und Finance",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P11",
+          "name": "Lieferung/Nachkauf",
+          "required_result": "Beschaffung, Versand/Tracking, Teilsendung, Retoure, Widerruf/Mangel/Fehlpassung, Refund/Beleg",
+          "dependencies": "Supplier-/OMS-/Versand-/Zahlungsadapter",
+          "acceptance_and_return": "Echte Wiederaufnahme, keine doppelte Order/Erstattung; Sicherheitsrückkopplung in Katalog; Belege nicht überschreiben.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 53
+          },
+          "owner_function": "Shop/Betrieb",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P12",
+          "name": "Stadt/Werkstatt",
+          "required_result": "Land/Ort/Einzugsgebiet, reale Betriebe, Quellen/Koordinaten/Leistungen, Profile, gegenseitige Links",
+          "dependencies": "Freigegebene Projektion und tatsächliche Daten",
+          "acceptance_and_return": "Stadt → Betrieb → Anfrage und zurück; Nulltreffer/fehlende Koordinaten/Duplikate; Metadatum ist kein Adressbestand.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 54
+          },
+          "owner_function": "Shop/Partner und Redaktion",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P13",
+          "name": "Partner",
+          "required_result": "Betriebsnachweise, Vereinbarung, Profilentwurf/Review/Freigabe, Portalrollen und echte Anfragen",
+          "dependencies": "Qualifikation/Versicherung, Verantwortlicher, Auth",
+          "acceptance_and_return": "Verzeichnisbetrieb bleibt ohne Vertrag Nichtpartner; suspendiertes Profil, Änderung und Widerruf geprüft.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 55
+          },
+          "owner_function": "Partner/Backend",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P14",
+          "name": "Termin/Gutschein",
+          "required_result": "Coupon/Charge/Einlösung, Terminversion, Gegenseite, Teilnahmebehauptung, Widerspruch, Abrechnungsposition",
+          "dependencies": "P12/P13, bestätigte Konditionsfassung",
+          "acceptance_and_return": "No-show/Widerspruch sperren unberechtigte Abrechnung; Fristlaufkonkurrenz, Doppelcode, Änderung/Storno, Kalendereintrag und Empfängerprüfung.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 56
+          },
+          "owner_function": "Partner/Finance",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P15",
+          "name": "Portale",
+          "required_result": "Kundenangebote/Projekt/Abnahme, Bestellungen/Belege, Partner, Nachbarschaft, Affiliate",
+          "dependencies": "Eigene Rolle/Organisation/Objektbindung",
+          "acceptance_and_return": "Erlaubter und verbotener Fall je Rolle; PDF/Annahme/Änderung/Download, Attribution/Linkkennzeichnung; keine Veröffentlichung privater Props.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 57
+          },
+          "owner_function": "Backend/Portale",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P16",
+          "name": "Auth",
+          "required_result": "Tatsächlich aktueller Provider, Registrierung/Login/Logout/Reset, Sitzung, Rollen, MFA/Passkeys/Recovery",
+          "dependencies": "Unterstützte aktuelle Authkonfiguration",
+          "acceptance_and_return": "Kein Vertrauen in frei gewählten Client-Tenant; abgelaufen/verbraucht/replayed, fremdes Konto, Revoke und Reload; keine Umstellung aus alten Clerk-Vorlagen.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 58
+          },
+          "owner_function": "Backend/Portale/Sicherheit",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P17",
+          "name": "Mail/Inbox",
+          "required_result": "Inbound-Nachweis, Vorgangszuordnung, Entwurf, Empfängerfreigabe, Outbox, Provider-/Zustellstatus, Signaturen/Archiv",
+          "dependencies": "Berechtigtes Postfach, persistenter Auftrag, Mail-/Kalenderadapter",
+          "acceptance_and_return": "Unklarer Sendestatus wird abgeglichen statt blind wiederholt; neue Termine an richtige Gegenseite mit konsistenter Kalender-UID/Sequenz.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 59
+          },
+          "owner_function": "Backend/Portale/Kommunikation",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P18",
+          "name": "Belege/Finance",
+          "required_result": "Eingang, Rohbeleg, Extraktion, Dublette, Kontierungsvorschlag, Prüfung, Export/Rechnung/Gutschrift",
+          "dependencies": "Aktuelles kaufmännisches System und bestätigte Fachwerte",
+          "acceptance_and_return": "Keine Zahlung oder Buchhaltungsfreigabe aus Extraktion; auditierbare Korrektur und Export/Restore.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 60
+          },
+          "owner_function": "Finance",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P19",
+          "name": "Wissen/Lernen",
+          "required_result": "Quelle/Version/Hash, Tenant, Candidate, Review/Eval/Receipt, Index, Retrieval und Restore",
+          "dependencies": "Bestehender Brain-/Skillowner, unabhängige Evaluation",
+          "acceptance_and_return": "WRITE → INDEX → EXACT READ-BACK → CONTENT COMPARE einzeln; Source-/Policyänderung invalidiert Promotion, begrenzter Rollout/Rollback.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 61
+          },
+          "owner_function": "Wissen/Skills",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P20",
+          "name": "Interne Steuerung",
+          "required_result": "Ideen/Abteilung/Nutzen/Aufwand, Vorlagen/Tasks, Bausteinversion/Nutzung/Korrektur, Freigaben",
+          "dependencies": "Vorhandene Auftrags- und Regelregister",
+          "acceptance_and_return": "Ein Übergang erzeugt einen Auftrag, keine Doppelarbeit; Nutzung allein aktiviert keine neue Policy.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 62
+          },
+          "owner_function": "Projektsteuerung",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P21",
+          "name": "Skills/Rollen",
+          "required_result": "44 Originalskills, 44 Enterprise-Rollen, Herkunft/Lizenz/Hash, Eignung und konkrete Bindung",
+          "dependencies": "Vorhandene Kataloge, reale Loader-/Kontorechte",
+          "acceptance_and_return": "Fachzuordnung, Positiv-/Negativfälle je Einsatz, Volumen-/Budgetgrenzen; keine Originaländerung und keine erfundene Ausführung.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 63
+          },
+          "owner_function": "Wissen/Skills",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P22",
+          "name": "Marketing/Vertrieb",
+          "required_result": "Segment, Problem, belegtes Angebot, Botschaft, Zielseite, Funnel, Kanal/Redaktion, Betreuung, Messung",
+          "dependencies": "Vollständige Seitenaufbau-/Faktenbasis und Skillzuordnung",
+          "acceptance_and_return": "Konkreter Kalender/Budget/Stop/Evidence, Attribution ohne Doppelzählung; Veröffentlichung/Versand erst im passenden Auftrag.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 64
+          },
+          "owner_function": "Marketing/Vertrieb",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P23",
+          "name": "Betrieb",
+          "required_result": "Persistente Queue/Lease/Fencing/Heartbeat/Checkpoint, Kapazität, Backup/Restore, Monitoring/Incident/Support",
+          "dependencies": "Reale Host-/Accountbindung, Budget und Verantwortliche",
+          "acceptance_and_return": "Worker läuft tatsächlich und übergibt sicher; keine zweite Wirkung nach Leaseablauf; erfolgreicher Restore und Rückweg je Runtime.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 65
+          },
+          "owner_function": "Infrastruktur/Netz",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P24",
+          "name": "Release/Recht/QS",
+          "required_result": "Quellen-/Releasebindung, zutreffende Normen/Fachprüfung, echte Nutzerwege, Produkt-/Betriebsabnahme",
+          "dependencies": "Alle relevanten Pakete und tatsächliche Nachweise",
+          "acceptance_and_return": "Kein Build/HTTP200 als Gesamtfreigabe. Öffentliche Agentur/Shop/DNS/Altadressen bleiben an spezifische finale Freigabe gebunden.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 66
+          },
+          "owner_function": "Qualität/Recht",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P25",
+          "name": "Besucher-Plugins",
+          "required_result": "Konto des Besuchers verbinden, Auswahl/Vorschau, beschränkter Import in Suite/Arbeitsplatz/Kundencenter",
+          "dependencies": "Aktuelle Sites-Eligibility, gewählter Connector, dynamischer Serverpfad, Besucherzustimmung",
+          "acceptance_and_return": "Kein Betreiberkonto als Besucherkonto; fremder Tenant/Importziel gesperrt, Reauth/Cancel/Retry/Readback geprüft.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 67
+          },
+          "owner_function": "Backend/Portale",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        },
+        {
+          "id": "P26",
+          "name": "Dateien/Projektübergabe",
+          "required_result": "Bilder, Pflichtenhefte, Spezifikationen, Original/Version/Hash/Provenienz/Rechte, Projektzuordnung",
+          "dependencies": "Gewähltes eigenes Konto oder Direktupload; berechtigtes Projektziel",
+          "acceptance_and_return": "Größen-/Typprüfung, sichere Vorschau, Duplicate/Versionconflict, Importstatus und nachvollziehbare Bestätigung; kein stilles Überschreiben.",
+          "source_locator": {
+            "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+            "version": 4,
+            "line": 68
+          },
+          "owner_function": "Backend/Portale",
+          "writer_binding": "unassigned_until_scoped_implementation",
+          "independent_reviewer_required": true,
+          "status": "not_accepted",
+          "monetary_budget": null,
+          "paid_effects_authorized_by_plan": false,
+          "deadline": "critical_path_after_prerequisite_readback_not_estimated",
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+        }
+      ],
+      "findings": [
+        {
+          "id": "G01",
+          "priority": "P0",
+          "description": "Statisches Sites-Hosting betreibt die Fach-APIs nicht.",
+          "package_id": "P23",
+          "source": "apps/site/src/main.tsx",
+          "required_acceptance": "Runtime mit Session, Datenbank und konkretem Adapter; echter positiver/negativer E2E-Weg.",
+          "status": "open",
+          "owner_function": "Infrastruktur/Netz",
+          "next_step": "Runtime mit Session, Datenbank und konkretem Adapter; echter positiver/negativer E2E-Weg.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G02",
+          "priority": "P0",
+          "description": "Gastwarenkorb wird vor bestätigtem Benutzer-Commit entfernt.",
+          "package_id": "P10",
+          "source": "apps/shop-api/shop/cart_api.py",
+          "required_acceptance": "Atomarer/claimbasierter Merge mit Crash-/Parallelitäts-/Recoverybeleg; keine Daten verlieren.",
+          "status": "open",
+          "owner_function": "Shop und Finance",
+          "next_step": "Atomarer/claimbasierter Merge mit Crash-/Parallelitäts-/Recoverybeleg; keine Daten verlieren.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G03",
+          "priority": "P0",
+          "description": "Anfragen benötigen idempotente Speicherung und dauerhaften Benachrichtigungsintent.",
+          "package_id": "P01",
+          "source": "apps/shop-api/shop/requests_api.py",
+          "required_acceptance": "Same-key-Replay, Nutzlastkonflikt, Lost-ACK, unterschiedliche Outbox-IDs und Recovery getrennt prüfen.",
+          "status": "implemented_local_candidate_not_live",
+          "owner_function": "Backend/Portale",
+          "next_step": "Same-key-Replay, Nutzlastkonflikt, Lost-ACK, unterschiedliche Outbox-IDs und Recovery getrennt prüfen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G04",
+          "priority": "P0",
+          "description": "Registrierung und Suite-Verifizierung/Entitlement sind nicht dieselbe Funktion.",
+          "package_id": "P16",
+          "source": "apps/shop-api/shop/accounts_api.py",
+          "required_acceptance": "E-Mail-/Workspaceverifizierung, Rollen-/Tenantbindung und einmaliger Trial mit Negativfällen.",
+          "status": "open",
+          "owner_function": "Backend/Portale/Sicherheit",
+          "next_step": "E-Mail-/Workspaceverifizierung, Rollen-/Tenantbindung und einmaliger Trial mit Negativfällen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G05",
+          "priority": "P0",
+          "description": "Öffentlicher Betreibertext und offene B.V.-Identitätsquelle widersprechen sich.",
+          "package_id": "P24",
+          "source": "config/site-map.json",
+          "required_acceptance": "Aktuellen Betreiber-/Register-/Merchantbeleg fachlich prüfen; keine Rechtsform aus einem Namen raten.",
+          "status": "decision_evidence_required",
+          "owner_function": "Qualität/Recht",
+          "next_step": "Aktuellen Betreiber-/Register-/Merchantbeleg fachlich prüfen; keine Rechtsform aus einem Namen raten.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G06",
+          "priority": "P0",
+          "description": "Systemmaster meldet LightRAG mit einem Workspace ohne Kundentrennung.",
+          "package_id": "P19",
+          "source": "Systemmaster.audit_tenant_isolation",
+          "required_acceptance": "Getrennte Workspace-/ACL-/Retrieval-/Restorebelege; keine Kundendaten-Ingestion bis geklärt.",
+          "status": "external_boundary_open",
+          "owner_function": "Wissen/Skills",
+          "next_step": "Getrennte Workspace-/ACL-/Retrieval-/Restorebelege; keine Kundendaten-Ingestion bis geklärt.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G07",
+          "priority": "P1",
+          "description": "Home spielt direkte Review-/Loopmedien außerhalb der registrierten Projektion.",
+          "package_id": "P04",
+          "source": "apps/web/lib/home-scenes.ts",
+          "required_acceptance": "Dieselben Asset-/Stimmen-/Skript-/Freigabeverträge für alle Verbraucher; finale Medien einzeln abnehmen.",
+          "status": "home_review_media_removed_in_luxury_revision_final_films_still_open",
+          "owner_function": "Grafik/Brand",
+          "next_step": "Dieselben Asset-/Stimmen-/Skript-/Freigabeverträge für alle Verbraucher; finale Medien einzeln abnehmen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G08",
+          "priority": "P1",
+          "description": "Ambientloops sind keine nachgewiesene Lippenperformance.",
+          "package_id": "P04",
+          "source": "apps/web/components/TrioScene.tsx",
+          "required_acceptance": "Sprecheridentität und Lip-Sync am Anfang, in der Mitte und am Ende tatsächlich prüfen.",
+          "status": "open",
+          "owner_function": "Grafik/Brand",
+          "next_step": "Sprecheridentität und Lip-Sync am Anfang, in der Mitte und am Ende tatsächlich prüfen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G09",
+          "priority": "P1",
+          "description": "Bewegung darf nicht unabhängig vom steuerbaren Sprachzustand starten.",
+          "package_id": "P04",
+          "source": "apps/web/components/TrioScene.tsx",
+          "required_acceptance": "Idle ruhig; Start/Pause, schneller Abbruch, Scroll, Replay und Reduced Motion prüfen.",
+          "status": "implemented_browser_subset_verified",
+          "owner_function": "Grafik/Brand",
+          "next_step": "Idle ruhig; Start/Pause, schneller Abbruch, Scroll, Replay und Reduced Motion prüfen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G10",
+          "priority": "P1",
+          "description": "EN-Erklärtexte wurden von der Projektion verworfen.",
+          "package_id": "P03",
+          "source": "apps/site/scripts/public-explainers.mjs",
+          "required_acceptance": "Vier Textsprachen ohne leere Überschriften/Links; keine erfundenen EN-Captions.",
+          "status": "implemented_browser_verified",
+          "owner_function": "UX/Frontend/Redaktion",
+          "next_step": "Vier Textsprachen ohne leere Überschriften/Links; keine erfundenen EN-Captions.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G11",
+          "priority": "P1",
+          "description": "Formular-/Shopstatus-Sprachen waren trotz Auswahl nur Deutsch.",
+          "package_id": "P03",
+          "source": "apps/web/components/ContactRequestForm.tsx",
+          "required_acceptance": "Labels, lokale Validierung, Status und Rechtskontext in DE/NL/FR/EN.",
+          "status": "implemented_browser_subset_verified",
+          "owner_function": "UX/Frontend/Redaktion",
+          "next_step": "Labels, lokale Validierung, Status und Rechtskontext in DE/NL/FR/EN.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G12",
+          "priority": "P1",
+          "description": "Installationsangebot wurde ohne PWA-Manifest ausgegeben.",
+          "package_id": "P03",
+          "source": "apps/site/pwa/plugin.mjs",
+          "required_acceptance": "Manifest/Icons/SW im Build und am HTTPS-Ziel; keine privaten Offline-Caches.",
+          "status": "implemented_build_verified_hosted_pending",
+          "owner_function": "UX/Frontend/Redaktion",
+          "next_step": "Manifest/Icons/SW im Build und am HTTPS-Ziel; keine privaten Offline-Caches.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G13",
+          "priority": "P1",
+          "description": "Historische Browsernachweise passen nicht zu aktuellen Quellen.",
+          "package_id": "P24",
+          "source": "tools/check_browser_evidence.py",
+          "required_acceptance": "Neue tatsächliche Browserfälle an aktuelle Quellen binden; historische Reports erhalten.",
+          "status": "open",
+          "owner_function": "Qualität/Recht",
+          "next_step": "Neue tatsächliche Browserfälle an aktuelle Quellen binden; historische Reports erhalten.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G14",
+          "priority": "P2",
+          "description": "make e2e und Designaudit benannten ihren engeren Prüfumfang nicht ausreichend.",
+          "package_id": "P24",
+          "source": "Makefile",
+          "required_acceptance": "Prototypen-/Unit-/Browser-/Live-E2E-Nachweise getrennt ausgeben und ausführen.",
+          "status": "implemented_scope_label_corrected",
+          "owner_function": "Qualität/Recht",
+          "next_step": "Prototypen-/Unit-/Browser-/Live-E2E-Nachweise getrennt ausgeben und ausführen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G15",
+          "priority": "P1",
+          "description": "Aktuelle 26-Paket-Coverage und ihre Quellenbindung fehlten im Register.",
+          "package_id": "P20",
+          "source": "config/acceptance-coverage.json",
+          "required_acceptance": "Bestehendes Register ergänzen, alle Pflichtpakete mit Owner, Abnahme, Budgetgrenze und Rückweg erhalten.",
+          "status": "prepared_in_existing_register_not_functional_acceptance",
+          "owner_function": "Projektsteuerung",
+          "next_step": "Bestehendes Register ergänzen, alle Pflichtpakete mit Owner, Abnahme, Budgetgrenze und Rückweg erhalten.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G16",
+          "priority": "P1",
+          "description": "Aktuelle Vercel-Preview stammt aus einer divergierenden parallelen Quelle.",
+          "package_id": "P23",
+          "source": "vercel.json",
+          "required_acceptance": "Repo/Branch/Commit/Projekt/Services/Domain lesend binden; keine blinde Übernahme oder bidirektionale Spiegelung.",
+          "status": "observed_no_cutover",
+          "owner_function": "Infrastruktur/Netz",
+          "next_step": "Repo/Branch/Commit/Projekt/Services/Domain lesend binden; keine blinde Übernahme oder bidirektionale Spiegelung.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G17",
+          "priority": "P1",
+          "description": "Mailtageslimit ist optional und Count-before-send nicht atomar.",
+          "package_id": "P17",
+          "source": "apps/shop-api/shop/mailer.py",
+          "required_acceptance": "Atomare Kosten-/Volumenreservierung, Lease und Unknown-outcome-Abgleich.",
+          "status": "open",
+          "owner_function": "Backend/Portale/Kommunikation",
+          "next_step": "Atomare Kosten-/Volumenreservierung, Lease und Unknown-outcome-Abgleich.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G18",
+          "priority": "P1",
+          "description": "Vercel-Services starten keinen belegten dauerhaften Outbox-Recoveryjob.",
+          "package_id": "P17",
+          "source": "apps/shop-api/vercel_app.py",
+          "required_acceptance": "Vorhandenen freigegebenen Jobpfad mit Lease/Readback anbinden; keinen Seed-Lifespan importieren.",
+          "status": "open",
+          "owner_function": "Backend/Portale/Kommunikation",
+          "next_step": "Vorhandenen freigegebenen Jobpfad mit Lease/Readback anbinden; keinen Seed-Lifespan importieren.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G19",
+          "priority": "P1",
+          "description": "Geschützte Portale sind gesperrt, keine echte Session-/Membershipintegration.",
+          "package_id": "P15",
+          "source": "apps/web/proxy.ts",
+          "required_acceptance": "Token serverseitig verifizieren, Tenant/Rolle/Objekt prüfen; Text darf Cookiepräsenz nicht als Verifikation ausgeben.",
+          "status": "truthful_message_fixed_access_integration_open",
+          "owner_function": "Backend/Portale",
+          "next_step": "Token serverseitig verifizieren, Tenant/Rolle/Objekt prüfen; Text darf Cookiepräsenz nicht als Verifikation ausgeben.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G20",
+          "priority": "P1",
+          "description": "Editionen, Bundle, Addons und 30-Tage-Vertrag sind nicht insgesamt provisioniert.",
+          "package_id": "P05",
+          "source": "config/selfservice-policy.json",
+          "required_acceptance": "Bestätigte Produkt-/Preis-/Entitlementfassung; kein Gratis-LLM oder doppelte Grundgebühr.",
+          "status": "open",
+          "owner_function": "Backend/Portale",
+          "next_step": "Bestätigte Produkt-/Preis-/Entitlementfassung; kein Gratis-LLM oder doppelte Grundgebühr.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G21",
+          "priority": "P1",
+          "description": "City-/Werkstatt-/Partnerverknüpfung ist nicht als vollständiger Daten-/Nutzerweg belegt.",
+          "package_id": "P12",
+          "source": "config/site-map.json",
+          "required_acceptance": "Reale Betriebe/Quellen/Freigaben und beide Navigationsrichtungen mit Nulltreffer-/Tenantnegativen.",
+          "status": "open",
+          "owner_function": "Shop/Partner und Redaktion",
+          "next_step": "Reale Betriebe/Quellen/Freigaben und beide Navigationsrichtungen mit Nulltreffer-/Tenantnegativen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G22",
+          "priority": "P2",
+          "description": "Tannet hat keinen bestätigten aktuellen Routen-/Mandantenvertrag.",
+          "package_id": "P15",
+          "source": "docs/masterplan/NeXify-Masterplan-v2-2026-10-29.md",
+          "required_acceptance": "Originalbriefing und richtige Marke/Domain/Owner/Abnahme binden; keine erfundene Route.",
+          "status": "source_evidence_required",
+          "owner_function": "Backend/Portale",
+          "next_step": "Originalbriefing und richtige Marke/Domain/Owner/Abnahme binden; keine erfundene Route.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G23",
+          "priority": "P1",
+          "description": "Factory-Rollenname ist noch keine ausführende Instanz mit Completionroute.",
+          "package_id": "P23",
+          "source": "config/brain/agents.json",
+          "required_acceptance": "Agent-ID, Betreiber, Tenant, Version, Operationen, Queue/Lease/Budget und Rückkanal pro Runtime belegen; Cockpit offen.",
+          "status": "open",
+          "owner_function": "Infrastruktur/Netz",
+          "next_step": "Agent-ID, Betreiber, Tenant, Version, Operationen, Queue/Lease/Budget und Rückkanal pro Runtime belegen; Cockpit offen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G24",
+          "priority": "P1",
+          "description": "Besucher-Connectoren und dauerhafte Projektdateiübernahme sind nicht angebunden.",
+          "package_id": "P25",
+          "source": "docs/implementation/v3r2-p26-local-files.md",
+          "required_acceptance": "Eigene Besucheridentität, erlaubter Connector, bewusstes Projektziel, dauerhafter Import und exakter Readback.",
+          "status": "eligibility_read_provider_binding_open",
+          "owner_function": "Backend/Portale",
+          "next_step": "Eigene Besucheridentität, erlaubter Connector, bewusstes Projektziel, dauerhafter Import und exakter Readback.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G25",
+          "priority": "P1",
+          "description": "44-Skill-Katalog und REA sind hier nicht als laufende Fähigkeiten belegt.",
+          "package_id": "P21",
+          "source": "config/integrations/small-business.json",
+          "required_acceptance": "Lizenz-/Quell-/Loader-/Invocationbelege; REA nur mit echtem Tool/Schema/Evidence-Readback behaupten.",
+          "status": "source_license_probe_blocked_REA_not_exposed",
+          "owner_function": "Wissen/Skills",
+          "next_step": "Lizenz-/Quell-/Loader-/Invocationbelege; REA nur mit echtem Tool/Schema/Evidence-Readback behaupten.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G26",
+          "priority": "P2",
+          "description": "Lokale Node-Laufzeit ist 24, Projektvertrag fordert 22.",
+          "package_id": "P24",
+          "source": "package.json",
+          "required_acceptance": "Abschließende Prüfungen auf unterstützter gepinnter Runtime oder dokumentierte Kompatibilitätsentscheidung.",
+          "status": "open_supported_runtime_retest",
+          "owner_function": "Qualität/Recht",
+          "next_step": "Abschließende Prüfungen auf unterstützter gepinnter Runtime oder dokumentierte Kompatibilitätsentscheidung.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G27",
+          "priority": "P1",
+          "description": "GitHub/GitLab-SoT-Richtung ist zwischen Dokumenten und späterem Kontext nicht abschließend belegt.",
+          "package_id": "P20",
+          "source": "AGENTS.md",
+          "required_acceptance": "Aktuelle zuständige Entscheidung und reale Mirror-/CI-/Writerbindung lesen, keine Altwatcher starten.",
+          "status": "decision_evidence_required",
+          "owner_function": "Projektsteuerung",
+          "next_step": "Aktuelle zuständige Entscheidung und reale Mirror-/CI-/Writerbindung lesen, keine Altwatcher starten.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G28",
+          "priority": "P1",
+          "description": "Monitoring-/Reviewkonfiguration ersetzt keinen Nachweis des tatsächlich geladenen Releases.",
+          "package_id": "P24",
+          "source": "apps/site/src/observability.ts",
+          "required_acceptance": "Commit→Review→Deployment→echtes Ereignis/Exception/Source-Map und Incidentowner binden.",
+          "status": "open",
+          "owner_function": "Qualität/Recht",
+          "next_step": "Commit→Review→Deployment→echtes Ereignis/Exception/Source-Map und Incidentowner binden.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G29",
+          "priority": "P1",
+          "description": "08:00-Bericht und Goal-Fortsetzung sind ohne aktuellen Scheduler-/Completionbeleg kein Dauerbetrieb.",
+          "package_id": "P20",
+          "source": "docs/masterplan/NeXify-Masterplan-v2-2026-10-29.md",
+          "required_acceptance": "Bestehenden Scheduler/Empfänger/Completionquelle prüfen; keinen doppelten Zeitplan oder 24/7-Claim erzeugen.",
+          "status": "runtime_evidence_required",
+          "owner_function": "Projektsteuerung",
+          "next_step": "Bestehenden Scheduler/Empfänger/Completionquelle prüfen; keinen doppelten Zeitplan oder 24/7-Claim erzeugen.",
+          "full_requirement_accepted": false
+        },
+        {
+          "id": "G30",
+          "priority": "P1",
+          "description": "Produkttext und vorgeschlagene Kauf-/Partnerleistung widersprechen teilweise dem Verfügbarkeitsstand.",
+          "package_id": "P03",
+          "source": "config/page-explainers.json",
+          "required_acceptance": "Funktion und autoritative Fakten vervollständigen, danach kundenbezogene Texte pro CTA konsistent prüfen.",
+          "status": "open_not_hidden_by_translation",
+          "owner_function": "UX/Frontend/Redaktion",
+          "next_step": "Funktion und autoritative Fakten vervollständigen, danach kundenbezogene Texte pro CTA konsistent prüfen.",
+          "full_requirement_accepted": false
+        }
+      ],
+      "critical_path": [
+        "P24:Quellen/Betreiber/Runtimebindung",
+        "P01:Anfragepersistenz/Recovery",
+        "P16:Identität/Tenant",
+        "P05:Produktberechtigung",
+        "P07:API-/Kostenfreigaben vor Agentenwirkungen",
+        "P06/P15/P25/P26:Arbeitsplatz/Portale/Besucherconnectoren/Dateiübernahme nach P16 und P05",
+        "P02/P03/P04:Design/Seiten/Medien disjunkt parallel zu Arbeitsplatz",
+        "P08/P09:Katalog/Passung",
+        "P10/P11:Kauf/Nachkauf",
+        "P12/P13/P14:City/Partner/Termin",
+        "P15/P17/P18:Portale/Mail/Finance",
+        "P19/P20/P21/P22/P23:Wissen/Steuerung/Skills/Marketing/Betrieb"
+      ],
+      "parallel_priority": "Öffentliche Seiten und Arbeitsplatz gleichrangig; Betriebspflege verdrängt Fertigstellung nicht.",
+      "verification": {
+        "site_units": 81,
+        "contact_offline": 8,
+        "contact_http": 3,
+        "en_browser_routes": 39,
+        "visible_en_modules": 50,
+        "generated_explainer_modules": 52,
+        "contact_browser_locales": [
+          "de",
+          "nl",
+          "fr",
+          "en"
+        ],
+        "partner_privacy_route": "/teileklar/rechtliches",
+        "media_browser": "idle all videos paused; rapid start/pause retains media and pauses audio/video",
+        "mobile_safari_zoom_full_acceptance": false,
+        "mongo_provider_live_acceptance": false,
+        "historical_full_suite_green": false,
+        "full_suite": {
+          "tests": 685,
+          "failures": 28,
+          "errors": 9,
+          "skipped": 14
+        }
+      },
+      "research": {
+        "internal": "bestehendes Repo, Master v3 R2/v4, vorhandene Code-/Test-/Servicesmodule",
+        "official": [
+          "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide/",
+          "https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable",
+          "https://www.mongodb.com/docs/manual/core/write-operations-atomicity/",
+          "https://vercel.com/docs/services",
+          "https://vercel.com/docs/services/routing"
+        ],
+        "alternative": "Cloudflare Worker mit Assetbinding geprüft; Sites-Connectoren brauchen dynamische requestgebundene Visitorbindung. Kein generischer Proxy, keine neue Datenbank oder Secretübertragung."
+      },
+      "completion_rule": "Kein Pflichtpaket wird wegen fehlender Umsetzung gestrichen. Gesamtabschluss erst nach echten Nutzerwegen, Daten-/Tenant-/Recovery-/Restore-/Releasebelegen und unabhängiger Abnahme. Offene fremde Zugänge nur als konkrete Abhängigkeit verfolgen.",
+      "design_revision": {
+        "id": "USER-LUXURY-20261101",
+        "request_id": "fcd9b1a3-a4b3-4471-9cf9-5b0bbbd960ef",
+        "observed_at": "2026-11-01T22:40:31.875088+00:00",
+        "scope": "shared_visual_materials_auth_inset_assistant_dock_editorial_stills_and_REA_media_research",
+        "writer": "/root",
+        "owner_functions": [
+          "Grafik/Brand",
+          "UX/Frontend"
+        ],
+        "reviewers": [
+          "/root/brand_ux_pruefung",
+          "/root/qualitaet_review"
+        ],
+        "status": "implemented_source_reviewed_final_browser_recheck_blocked",
+        "registry": "config/editorial-art.json",
+        "canonical_tokens": "config/design-tokens.json",
+        "new_stills": 3,
+        "mapped_public_routes": 17,
+        "home_unapproved_performance_removed": true,
+        "original_media_deleted": false,
+        "whole_system_accepted": false,
+        "media_generation_provider_calls": 0,
+        "generated_images_builtin": 3,
+        "REA": {
+          "package": "rea-agents@6.8.0",
+          "MCP_discovery": true,
+          "tools": 229,
+          "prompts": 6,
+          "analysis_accepted": false,
+          "blocker": "process_ownership_ps_fatal_library_error_lookup_self",
+          "global_registration_changed": false
+        },
+        "refinement": {
+          "request_id": "4e5f4b2b-850a-476b-a3f5-2c6920b3512c",
+          "decision": "Keep assistant interface; refine rim/header light; restore prominent original trio hero",
+          "hero_src": "/media/home-loops/welcome-loop.jpg",
+          "hero_sha256": "1b30401ae1022a7bf88e9e600131d3badc4019a7b504c270508966fda8202add",
+          "original_bytes_unchanged": true,
+          "face_edits": false,
+          "small_hero_signature_removed": true,
+          "chat_behavior_changed": false,
+          "video_performance_acceptance_changed": false
+        },
+        "whole_team_finish": {
+          "id": "USER-IMAGE-FINISH-20261102",
+          "request_id": "e6fa5df2-bb99-4732-bd74-4475152dfd1f",
+          "observed_at": "2026-11-02T00:25:36.362825+01:00",
+          "writer": "/root",
+          "reviewers": [
+            "/root/brand_ux_pruefung",
+            "/root/qualitaet_review",
+            "/root/soll_abgleich",
+            "/root/runtime_pruefung"
+          ],
+          "status": "implemented_reviewed_browser_subset_verified",
+          "chat_javascript_changed": false,
+          "hero": "free_original_character_composition_on_shared_canvas",
+          "original_assets_changed": false,
+          "visible_RGBA_and_alpha_unchanged": true,
+          "derivative_bytes": 1136162,
+          "figure_registry": "config/presenter-artwork.json",
+          "editorial_art_route_bindings": 8,
+          "home_art_motifs_each_once": true,
+          "explainer_module_count_preserved": 52,
+          "tests": {
+            "site_units": 85,
+            "hero_contracts": 5,
+            "production_build": "passed",
+            "site_typecheck": "passed",
+            "full_python": {
+              "tests": 685,
+              "failures": 43,
+              "errors": 9,
+              "skipped": 14
+            }
+          },
+          "browser": {
+            "desktop_width": 1348,
+            "iframe_CSS_widths": [
+              320,
+              390,
+              820
+            ],
+            "no_horizontal_overflow": true,
+            "full_compositions_visually_checked": true,
+            "mobile_dialog_390x844": true,
+            "close_focus_return": "chat-launcher",
+            "smooth_oracle_explainer_verified": true,
+            "real_ios_safari_verified": false,
+            "physical_device_verified": false
+          },
+          "whole_system_accepted": false,
+          "final_performance_video_accepted": false
         }
       }
     }

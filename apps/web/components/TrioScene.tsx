@@ -12,7 +12,7 @@ import './TrioScene.css';
  *
  * Two visual modes:
  *  - media: real loop clips (Kling v3 Pro image-to-video from the identity-true frames, no face edits). The optional
- *    intro clip plays once on mount (walk-in), then the seamless loop runs silently as an ambient scene. Audio and
+ *    intro clip starts only with the user's play action, then the loop follows the audio play/pause state. Audio and
  *    captions are driven by the ElevenLabs track independently of the clip.
  *  - figures: CSS-only cut-outs (fallback when no media is available for a scene).
  * Captions always live below the stage – they never cover a figure.
@@ -51,7 +51,9 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  const [time,setTime]=useState(0);
  const [duration,setDuration]=useState(0);
  const knownDuration=Number.isFinite(duration)&&duration>0;
- const [clip,setClip]=useState<'poster'|'intro'|'loop'>('poster');
+ const [clip,setClipState]=useState<'poster'|'intro'|'loop'>('poster');
+ const clipModeRef=useRef<'poster'|'intro'|'loop'>('poster');
+ const setClip=useCallback((next:'poster'|'intro'|'loop')=>{clipModeRef.current=next;setClipState(next);},[]);
  const [clipFailed,setClipFailed]=useState(false);
  const lastCueEnd=scene.cues[scene.cues.length-1].end;
  const setPhase=useCallback((next:Phase)=>{setPhaseState(prev=>{if(prev!==next)onPhase?.(next);return next;});},[onPhase]);
@@ -61,9 +63,23 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  // (play/pause/seek/stall/ended/replay) only – it is explicitly NOT a lip performance, so no
  // per-frame audio↔video drift correction is applied (there is no matching mouth content).
  const startTokenRef=useRef(0);
+ const visualTokenRef=useRef(0);
  const pausedByUserRef=useRef(false);
- const playLoopAmbient=useCallback(()=>{if(media&&!reduced&&!clipFailed)loopRef.current?.play().catch(()=>{});},[media,reduced,clipFailed]);
- const freezeLoop=useCallback(()=>{loopRef.current?.pause();},[]);
+ const playVisual=useCallback((video:HTMLVideoElement)=>{
+  const token=visualTokenRef.current;
+  video.play().catch((error:DOMException)=>{
+   if(token!==visualTokenRef.current||error?.name==='AbortError'||error?.name==='NotAllowedError')return;
+   setClipFailed(true);
+  });
+ },[]);
+ const playLoopAmbient=useCallback(()=>{
+  if(!media||reduced||clipFailed||pausedByUserRef.current||!audioRef.current||audioRef.current.paused)return;
+  const intro=introRef.current;
+  if(media.intro&&intro&&(clipModeRef.current==='poster'||(clipModeRef.current==='intro'&&!intro.ended))){
+   setClip('intro');playVisual(intro);
+  }else{setClip('loop');if(loopRef.current)playVisual(loopRef.current);}
+ },[media,reduced,clipFailed,playVisual,setClip]);
+ const freezeLoop=useCallback(()=>{visualTokenRef.current++;introRef.current?.pause();loopRef.current?.pause();},[]);
  const syncLoopToMaster=useCallback((master:number)=>{const l=loopRef.current;if(l&&Number.isFinite(l.duration)&&l.duration>0)l.currentTime=master%l.duration;},[]);
  // Robust play(): a benign AbortError (interrupted by a quick pause/new load) or a blocked
  // NotAllowedError (needs a fresh user gesture) must not be shown as a hard failure; a stale
@@ -73,37 +89,22 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
  useEffect(()=>{
   const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
   const change=()=>setReduced(motion.matches);change();
-  const other=(e:Event)=>{if((e as CustomEvent).detail!==testId)audioRef.current?.pause();};
+  const other=(e:Event)=>{if((e as CustomEvent).detail!==testId){audioRef.current?.pause();freezeLoop();}};
   motion.addEventListener('change',change);window.addEventListener('nexify:presenter-play',other);
-  return()=>{startTokenRef.current++;motion.removeEventListener('change',change);window.removeEventListener('nexify:presenter-play',other);audioRef.current?.pause();};
- },[testId,locale]);
+  return()=>{startTokenRef.current++;motion.removeEventListener('change',change);window.removeEventListener('nexify:presenter-play',other);audioRef.current?.pause();freezeLoop();};
+ },[testId,locale,freezeLoop]);
 
- // Ambient clip: intro once (when the stage becomes visible), then the seamless loop – silent, independent of the voice track.
+ // Visibility saves battery; it never starts an idle scene or overrides an explicit pause.
  useEffect(()=>{
-  if(!media||reduced||clipFailed)return;
-  // Ohne Intro (project/choice) auf das Loop-Element zurückfallen – beide liegen in derselben .trio-media,
-  // damit der Ambient-Loop auch bei intro-losen Szenen startet (zuvor brach der Effekt mangels introRef ab).
-  const el=(introRef.current||loopRef.current)?.parentElement;if(!el)return;
-  let started=false;
-  const begin=()=>{
-   if(started)return;started=true;
-   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-   const intro=introRef.current,loop=loopRef.current;
-   if(media.intro&&intro){setClip('intro');intro.currentTime=0;intro.play().catch(()=>{setClip('loop');loop?.play().catch(()=>setClipFailed(true));});}
-   else{setClip('loop');loop?.play().catch(()=>setClipFailed(true));}
-  };
-  if(!('IntersectionObserver' in window)){begin();return;}
-  const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){begin();io.disconnect();}},{threshold:.25});
-  io.observe(el);return()=>io.disconnect();
- },[media,reduced,clipFailed]);
-
- // Pause the ambient loop when the scene is scrolled far away (battery), resume when visible again.
- useEffect(()=>{
-  if(!media||reduced)return;
-  const loop=loopRef.current;if(!loop||!('IntersectionObserver' in window))return;
-  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(clip!=='loop')return;if(e.isIntersecting){if(!pausedByUserRef.current)loop.play().catch(()=>{});}else loop.pause();});},{threshold:0});
-  io.observe(loop);return()=>io.disconnect();
- },[media,reduced,clip]);
+  if(!media)return;
+  if(reduced){freezeLoop();return;}
+  const element=(introRef.current||loopRef.current)?.parentElement;
+  if(!element||!('IntersectionObserver' in window))return;
+  const io=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.isIntersecting))playLoopAmbient();else freezeLoop();
+  },{threshold:0});
+  io.observe(element);return()=>io.disconnect();
+ },[media,reduced,playLoopAmbient,freezeLoop]);
 
  const sync=useCallback((now:number)=>{
   setTime(now);
@@ -119,12 +120,12 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
   const a=audioRef.current;if(!a)return;
   pausedByUserRef.current=false;
   window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:testId}));
-  if(phase==='ended'||a.ended){a.currentTime=0;setCueIndex(-1);setSpeaker(null);syncLoopToMaster(0);}
+  if(phase==='ended'||a.ended){freezeLoop();a.currentTime=0;if(introRef.current)introRef.current.currentTime=0;setClip('poster');setCueIndex(-1);setSpeaker(null);syncLoopToMaster(0);}
   if(phase==='idle'||phase==='ended')setPhase('entering');
   playAudio(a);
  };
- const toggle=()=>{const a=audioRef.current;if(!a)return;if(!a.paused){pausedByUserRef.current=true;a.pause();return;}start();};
- const restart=()=>{const a=audioRef.current;if(!a)return;pausedByUserRef.current=false;a.pause();a.currentTime=0;setCueIndex(-1);setSpeaker(null);setPhase('entering');syncLoopToMaster(0);window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:testId}));playAudio(a);};
+ const toggle=()=>{const a=audioRef.current;if(!a)return;if(!a.paused){pausedByUserRef.current=true;a.pause();freezeLoop();return;}start();};
+ const restart=()=>{const a=audioRef.current;if(!a)return;pausedByUserRef.current=false;a.pause();freezeLoop();a.currentTime=0;if(introRef.current)introRef.current.currentTime=0;setClip('poster');setCueIndex(-1);setSpeaker(null);setPhase('entering');syncLoopToMaster(0);window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:testId}));playAudio(a);};
  const toggleMute=()=>{const a=audioRef.current;if(!a)return;a.muted=!a.muted;setMuted(a.muted);};
  const keys=(e:KeyboardEvent<HTMLDivElement>)=>{
   if((e.target as HTMLElement).closest('button,a,input,summary'))return;
@@ -165,12 +166,12 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
    {useMedia&&media&&<div className="trio-media" data-testid={`${testId}-clips`}>
     <img className="trio-poster" src={media.poster} alt={title} draggable={false} loading={scene.id==='welcome'?'eager':'lazy'} decoding="async"/>
     {media.intro&&<video ref={introRef} className="trio-clip trio-clip-intro" muted playsInline preload={scene.id==='welcome'?'auto':'metadata'} disablePictureInPicture aria-hidden="true" tabIndex={-1}
-     onEnded={()=>{setClip('loop');loopRef.current?.play().catch(()=>setClipFailed(true));}}><source src={media.intro.mp4} type="video/mp4"/><source src={media.intro.webm} type="video/webm"/></video>}
+     onEnded={()=>{setClip('loop');if(!reduced&&!pausedByUserRef.current&&audioRef.current&&!audioRef.current.paused&&loopRef.current)playVisual(loopRef.current);}}><source src={media.intro.mp4} type="video/mp4"/><source src={media.intro.webm} type="video/webm"/></video>}
     <video ref={loopRef} className="trio-clip trio-clip-loop" muted loop playsInline preload={scene.id==='welcome'?'auto':'metadata'} disablePictureInPicture aria-hidden="true" tabIndex={-1}><source src={media.loop.mp4} type="video/mp4"/><source src={media.loop.webm} type="video/webm"/></video>
    </div>}
    {!useMedia&&figure('nex',figures.nex,'NeX')}
    {!useMedia&&figure('pascal',figures.pascal,'Pascal')}
-   {!useMedia&&figure('oracle',figures.oracle,'AI Fly Oracle')}
+   {!useMedia&&figure('oracle',figures.oracle,'AIFly ORACLE')}
    {speaker&&<span className={`trio-speaker-light trio-speaker-${speaker}`} aria-hidden="true"/>}
   </div>
    {children}
@@ -191,7 +192,7 @@ export default function TrioScene({scene,locale,figures,media,testId,title,final
    onPlaying={()=>playLoopAmbient()} onWaiting={()=>freezeLoop()} onStalled={()=>freezeLoop()}
    onSeeked={()=>syncLoopToMaster(audioRef.current?.currentTime||0)}
    onPause={()=>{setPlaying(false);if(!audioRef.current?.ended)freezeLoop();}}
-   onEnded={()=>{setPlaying(false);setSpeaker(null);setPhase('ended');freezeLoop();}} onError={()=>{setFailed(true);setPlaying(false);}}/>
+   onEnded={()=>{setPlaying(false);setSpeaker(null);setPhase('ended');freezeLoop();}} onError={()=>{setFailed(true);setPlaying(false);freezeLoop();}}/>
   <div className="trio-meta" data-duration={knownDuration?"known":"unknown"}>
    {knownDuration&&<input className="trio-progress" type="range" min="0" max={duration||1} step="0.1" value={time} aria-label={t.position} disabled={!ready||failed} onChange={e=>{const v=Number(e.target.value);if(audioRef.current)audioRef.current.currentTime=v;if(phase==='idle')setPhase('entering');sync(v);syncLoopToMaster(v);}} data-testid={`${testId}-progress-slider`}/>}
    {(knownDuration||time>0)&&<span className="trio-time" data-testid={`${testId}-time`}>{knownDuration?`${clock(time)} / ${clock(duration)}`:clock(time)}</span>}

@@ -20,7 +20,8 @@ test('Clerk removed (D-007): no identity SDK, no env-driven auth and no membersh
  const source=readFileSync(new URL('../src/Auth.tsx',import.meta.url),'utf8');
  assert.doesNotMatch(source,/@clerk|import\.meta\.env|CLERK_SECRET|AUTH0|unsafeMetadata|publicMetadata|roles?\s*:/);
  assert.equal(AUTH_REDIRECT,'/');
- assert.match(source,/href=\{mode==="signup"\?"\/registrieren":"\/anmelden"\}/);
+ assert.match(source,/<SiteLink data-testid="site-auth-link" href="\/kontakt"/);
+ assert.doesNotMatch(source,/href=\{mode===/);
 });
 test('the wrapper retains public media, guide and honest disabled fallback',()=>{
  const source=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');

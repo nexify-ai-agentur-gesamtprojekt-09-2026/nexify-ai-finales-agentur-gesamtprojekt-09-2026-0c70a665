@@ -50,7 +50,9 @@ export default function InstallInvitation({locale}:{locale:Locale}){
   const [dismissed,setDismissed]=useState(false);
   const [resolved,setResolved]=useState(false);
   const [standalone,setStandalone]=useState(false);
+  const [manifestAvailable,setManifestAvailable]=useState(false);
   useEffect(()=>{
+    setManifestAvailable(Boolean(document.querySelector('link[rel="manifest"][href]')));
     setStandalone(runningStandalone());
     try{setDismissed(localStorage.getItem(DISMISS_KEY)==="1");}catch{/* storage optional */}
     const update=()=>setTick(value=>value+1);
@@ -58,7 +60,7 @@ export default function InstallInvitation({locale}:{locale:Locale}){
     return()=>{subscribers.delete(update);};
   },[]);
   const t=copy[locale as keyof typeof copy]||copy.de;
-  if(standalone||dismissed||resolved)return null; // installed or declined: never nag
+  if(!manifestAvailable||standalone||dismissed||resolved)return null; // only a configured PWA can be offered
   const hasPrompt=deferredPrompt!==null;
   const userAgent=typeof navigator!=="undefined"?navigator.userAgent:"";
   const mode:Mode=hasPrompt?"prompt":isIosSafari(userAgent)?"ios":"instructions";

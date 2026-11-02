@@ -4,7 +4,11 @@
   "component": "apps/web/components/IdentityHero.tsx",
   "style": "apps/web/components/IdentityHero.css",
   "asset_registry": "config/interim-scene-images.json",
-  "locales": ["de", "nl", "fr"],
+  "locales": [
+    "de",
+    "nl",
+    "fr"
+  ],
   "status": {
     "design_direction_approved": true,
     "technical_verification": "pending",
@@ -37,9 +41,18 @@
     }
   },
   "figures": {
-    "pascal": {"src": "/media/presenters/zielbild-pascal-walk.png", "sha256": "225f35c60b92f7328ca72975342595e95184146c788b7c25a3aefd9c3d6fb41c"},
-    "nex": {"src": "/media/presenters/zielbild-nex-walk.png", "sha256": "596e0a4b2914390d738238181a9a865b9bfa193c83337217ce0fb0406c0e9a74"},
-    "oracle": {"src": "/media/presenters/zielbild-aifly-float.png", "sha256": "313f9826c0df25a23ad1d3f4ce60721894a13016530bf354b460b45bfb01a3d9"}
+    "pascal": {
+      "src": "/media/presenters/zielbild-pascal-walk.png",
+      "sha256": "225f35c60b92f7328ca72975342595e95184146c788b7c25a3aefd9c3d6fb41c"
+    },
+    "nex": {
+      "src": "/media/presenters/zielbild-nex-walk.png",
+      "sha256": "596e0a4b2914390d738238181a9a865b9bfa193c83337217ce0fb0406c0e9a74"
+    },
+    "oracle": {
+      "src": "/media/presenters/zielbild-aifly-float.png",
+      "sha256": "313f9826c0df25a23ad1d3f4ce60721894a13016530bf354b460b45bfb01a3d9"
+    }
   },
   "loop_media_manifest": "apps/web/public/media/home-loops/manifest.json",
   "figure_manifest": "apps/web/public/media/presenters/zielbild-figures.manifest.json",
@@ -76,5 +89,14 @@
       "video_produced": false,
       "runtime_or_provider_accepted": false
     }
-  ]
+  ],
+  "current_implementation": {
+    "date": "2026-11-02",
+    "default": "original_cutout_still",
+    "owner_private_preview": "config/welcome-production-preview.json",
+    "explicit_build_flag": "NEXIFY_OWNER_CINEMA_PREVIEW=1",
+    "public_spoken_film_contract": "config/page-media-registry.json",
+    "old_loop_assets_reused": false,
+    "full_public_voice_identity_acceptance": false
+  }
 }

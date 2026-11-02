@@ -3,54 +3,70 @@
   "mode": "native_route_aware_text_guide_media_pending",
   "guide_labels": {
     "business-website": {
-      "de": "Website planen",
-      "nl": "Een website plannen",
-      "fr": "Préparer un site"
+      "de": "Markenstart",
+      "nl": "Merkstart",
+      "fr": "Lancement de marque",
+      "en": "Brand launch"
     },
     "business-automation": {
-      "de": "Abläufe automatisieren",
-      "nl": "Processen automatiseren",
-      "fr": "Automatiser les processus"
+      "de": "KI im Betrieb",
+      "nl": "AI in het bedrijf",
+      "fr": "IA en entreprise",
+      "en": "AI in business"
     },
     "business-apps": {
-      "de": "App oder Portal planen",
-      "nl": "Een app of portaal plannen",
-      "fr": "Préparer une application ou un portail"
+      "de": "Digitale Arbeitsräume",
+      "nl": "Digitale werkruimtes",
+      "fr": "Espaces de travail numériques",
+      "en": "Digital workspaces"
     },
     "business-api": {
-      "de": "KI-Produkte und API verstehen",
-      "nl": "AI-producten en API begrijpen",
-      "fr": "Comprendre les produits IA et l’API"
+      "de": "Agentische KI & Integrationen",
+      "nl": "Agentische AI & integraties",
+      "fr": "IA agentique et intégrations",
+      "en": "Agentic AI & integrations"
     },
     "knowledge-to-project": {
-      "de": "Vorhaben vorbereiten",
-      "nl": "Uw plan voorbereiden",
-      "fr": "Préparer votre projet"
+      "de": "Ihr Projektbriefing",
+      "nl": "Uw projectbriefing",
+      "fr": "Votre brief de projet",
+      "en": "Your project brief"
     },
     "teileklar-selection": {
-      "de": "Passendes Teil auswählen",
-      "nl": "Een passend onderdeel kiezen",
-      "fr": "Choisir une pièce adaptée"
+      "de": "Ihr Fahrzeug. Die passende Anfrage.",
+      "nl": "Uw voertuig. De passende aanvraag.",
+      "fr": "Votre véhicule. Une demande précise.",
+      "en": "Your vehicle. A precise enquiry."
     },
     "teileklar-workshop": {
-      "de": "Werkstatt und Partner kennenlernen",
-      "nl": "Werkplaats en partners ontdekken",
-      "fr": "Découvrir les ateliers et partenaires"
+      "de": "Werkstatt & Zusammenarbeit",
+      "nl": "Werkplaats & samenwerking",
+      "fr": "Atelier et collaboration",
+      "en": "Workshop & collaboration"
     },
     "teileklar-vouchers": {
-      "de": "Gutscheine verstehen",
-      "nl": "Tegoedbonnen begrijpen",
-      "fr": "Comprendre les bons"
+      "de": "Gutschein & Bedingungen",
+      "nl": "Tegoedbon & voorwaarden",
+      "fr": "Bon et conditions",
+      "en": "Voucher & terms"
     },
     "existing-client": {
-      "de": "Bestehenden Vorgang klären",
-      "nl": "Een bestaand dossier bespreken",
-      "fr": "Clarifier un dossier existant"
+      "de": "Zusammenarbeit mit der FACTORY",
+      "nl": "Samenwerken met de FACTORY",
+      "fr": "Collaborer avec la FACTORY",
+      "en": "Working with the FACTORY"
     },
     "nex2fly-trial": {
-      "de": "NeX2fly Suite kennenlernen",
-      "nl": "NeX2fly Suite leren kennen",
-      "fr": "Découvrir la NeX2fly Suite"
+      "de": "NeX2fly · Ihr eigener Bereich",
+      "nl": "NeX2fly · Uw eigen omgeving",
+      "fr": "NeX2fly · Votre espace dédié",
+      "en": "NeX2fly · Your own workspace"
+    },
+    "business-growth": {
+      "de": "Wachstum & Kampagnen",
+      "nl": "Groei & campagnes",
+      "fr": "Développement et campagnes",
+      "en": "Growth & campaigns"
     }
   },
   "speakers": {
@@ -65,7 +81,7 @@
       "voice_status": "historical_reference_only_not_approved"
     },
     "aifly": {
-      "display_name": "AIFly",
+      "display_name": "AIFly ORACLE",
       "voice_id": "feTHtWuEJFLTOWyoreyy",
       "voice_status": "historical_reference_only_not_approved"
     }

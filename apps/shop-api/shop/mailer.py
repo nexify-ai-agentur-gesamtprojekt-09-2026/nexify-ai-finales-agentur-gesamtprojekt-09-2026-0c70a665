@@ -113,6 +113,11 @@ async def retry_loop():
         except Exception:
             pass
         try:
+            from .requests_api import recover_request_mail_intents
+            await recover_request_mail_intents()
+        except Exception:
+            pass
+        try:
             await retry_pending()
         except Exception:
             pass

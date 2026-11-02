@@ -12,7 +12,7 @@
     },
     {
       "path": "config/site-map.json",
-      "sha256": "69fbf53a45d48c562a3c37ff9e241c01fb49f7daf4252748490e4ea7c8aa9845"
+      "sha256": "f46b646161147a75dcf8a3da9663a31d87f83c13714a76e1a6a39b9354305d8f"
     },
     {
       "path": "docs/01-konzept/gesamtprojektplan.md",
@@ -53,6 +53,10 @@
     {
       "path": "docs/architecture/nex2fly-page-source.md",
       "sha256": "aec8ca6e9df0821d3b583490022ced048a6de5477258bde78b187c640b6c657c"
+    },
+    {
+      "path": "docs/09-final/mastervorgabe-2026-10-29.md",
+      "sha256": "0e532f6697d91fb6381736d570c446d44dfdc7e07940b506c855ed1d5f8c2c82"
     }
   ]
 }

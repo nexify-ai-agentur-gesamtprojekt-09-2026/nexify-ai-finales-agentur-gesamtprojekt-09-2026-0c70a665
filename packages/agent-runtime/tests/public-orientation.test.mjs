@@ -42,7 +42,7 @@ test('official SDK decodes real UI SSE, public context and explicitly unexecuted
     const text = message.parts.filter(part => part.type === 'text').map(part => part.text).join('');
     assert.match(text, /Textgeführte Orientierung ohne Live-KI/);
     assert.match(text, /keine Aktion ausgeführt/);
-    assert.match(text, /bucht keine Termine/);
+    assert.match(text, /keine Buchungen|bucht keine Termine/);
     assert.doesNotMatch(text, /Termin (ist |wurde )?bestätigt|E-Mail (ist |wurde )?versendet/);
     assert.ok(message.parts.every(part => part.type === 'text' || part.type === 'data-page'));
     assert.deepEqual(message.parts.find(part => part.type === 'data-page').data, { page_id: 'home', path: '/' });
@@ -52,7 +52,7 @@ test('official SDK decodes real UI SSE, public context and explicitly unexecuted
 });
 
 test('actual DefaultChatTransport contract and bounded text history work in all locales', async () => {
-  for (const locale of ['de', 'nl', 'fr']) {
+  for (const locale of ['de', 'nl', 'fr', 'en']) {
     const transport = new DefaultChatTransport({ api: ORIGIN + '/api/agent-chat', body: { locale, page_path: '/produkte/nex2fly' },
       fetch: async (url, init) => handler.fetch(new Request(url, { ...init, headers: { ...init.headers, Origin: ORIGIN } })) });
     const stream = await transport.sendMessages({ chatId: 'fixture-chat', trigger: 'submit-message', messages: input().messages });
@@ -64,6 +64,20 @@ test('actual DefaultChatTransport contract and bounded text history work in all 
       { id: 'followup', role: 'user', parts: [{ type: 'text', text: 'Websites' }] }] })));
     assert.equal(followup.status, 200); await followup.text();
   }
+});
+
+test('English guidance uses English page copy and preserves the no-action boundary', async () => {
+  const response = await handler.fetch(request(input({ locale: 'en', page_path: '/leistungen' })));
+  assert.equal(response.status, 200);
+  const message = await decode(response);
+  const text = message.parts.filter(part => part.type === 'text').map(part => part.text).join('');
+  const page = publicPages.find(page => page.path === '/leistungen');
+  assert.match(text, /NeXify AI FACTORY B\.V\./);
+  assert.match(text, /without live AI/);
+  assert.ok(text.includes(page.title.en));
+  assert.ok(text.includes(page.summary.en));
+  assert.match(text, /No action has been performed/);
+  assert.doesNotMatch(text, /Termin (ist |wurde )?bestätigt|E-Mail (ist |wurde )?versendet/);
 });
 
 test('private, unknown, URL and missing contexts never disclose page content', async () => {
@@ -83,7 +97,7 @@ test('client system, tool, provider, metadata and malformed message fields are r
     input({ messages: [{ id: 'x', role: 'user', parts: [{ type: 'text', text: 'a', providerMetadata: { secret: 'x' } }] }] }),
     input({ messages: [{ id: 'x', role: 'user', parts: [{ type: 'text', text: 'a', state: 'executed' }] }] }),
     input({ messages: [{ id: 'x', role: 'user', parts: [{ type: 'text', text: 'a' }], metadata: { roles: ['admin'] } }] }),
-    input({ trigger: 'approve-tool' }), input({ messageId: 'not-in-history' }), input({ locale: 'xx' }),
+    input({ trigger: 'approve-tool' }), input({ messageId: 'not-in-history' }), input({ locale: 'it' }),
   ];
   for (const body of invalid) { const response = await handler.fetch(request(body)); assert.equal(response.status, 422); await response.text(); }
 });

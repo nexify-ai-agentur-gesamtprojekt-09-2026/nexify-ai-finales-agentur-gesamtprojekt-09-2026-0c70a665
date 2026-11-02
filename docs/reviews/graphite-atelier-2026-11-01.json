@@ -1,0 +1,170 @@
+{
+  "id": "USER-LUXURY-20261101",
+  "observed_at": "2026-11-01T22:42:49.227202+00:00",
+  "source_sha256": {
+    "apps/site/src/Auth.tsx": "f2267c9084f0d5e29a2682774ab57411540cc5efbf67a72123d04b5f09858922",
+    "apps/web/components/Workspace.tsx": "44f0b1269f0539a84b44dd633b0cb6b0df300ee4031ac9846684b1dad3a0b092",
+    "apps/web/components/IdentityHero.tsx": "b9234c28464d2d7613162f87b9fc070b59fbac6c84357574a3652b6364a6fdfe",
+    "apps/web/components/HomeContent.tsx": "7e4ad7c34374d19af65c395c025a332834096ba80ab53404aad7a6b7178f0a95",
+    "apps/web/components/LuxuryMaterials.css": "1061fed1e2919c30770428cafc40016918a0c51c69b00650651e413a6d641c68",
+    "apps/web/components/DomainArtwork.tsx": "0fde548abcfb17ea5cfaeaf4f92b1f61a02ce8a082ddbda171ffbc702b7061aa",
+    "apps/web/components/OracleCompanion.tsx": "672329852268caefcc80646b8c4ceabb2b5fffa3ea22935077289b3b9b8c5977",
+    "config/design-tokens.json": "8ada1f1d6d19ef40609f7753bd8b7738307439725038b6f126134c50869437dd",
+    "config/editorial-art.json": "106978ef0bd3c7b9902c073e8edf51fb5d72c9f48d637a6c9b247000acddf086",
+    "packages/tokens/tokens.css": "48c12fc23a7ff4039d6c2da476dc4b4f3b650d2e487c01f8c6e18a68f64bad73",
+    "tests/test_identity_hero.py": "b845f77466661004e365347273e9b3b8551d69e73a55d7b4701ef82aa4a097dc"
+  },
+  "tests": {
+    "production_build": "passed",
+    "site_typecheck": "passed",
+    "site_units": 81,
+    "identity_contracts": 5,
+    "reference_audit": {
+      "errors": 0,
+      "warnings": 0,
+      "scope": "HTML_reference_prototypes_only"
+    },
+    "full_python": {
+      "tests": 685,
+      "failures": 40,
+      "errors": 9,
+      "skipped": 14
+    }
+  },
+  "browser": {
+    "auth_desktop": {
+      "x": 194,
+      "width": 960,
+      "padding": 32
+    },
+    "dock_open_close_focus_return": "passed_before_final_home_refactor",
+    "website_art_loaded": true,
+    "initial_gallery_links_and_assets": 3,
+    "final_browser_recheck": "blocked_by_environment_URL_policy_not_bypassed",
+    "final_mobile_safari_transparency_acceptance": false
+  },
+  "independent_reviewers": [
+    "/root/qualitaet_review",
+    "/root/brand_ux_pruefung",
+    "/root/soll_abgleich",
+    "/root/runtime_pruefung"
+  ],
+  "media": {
+    "new_editorial_stills": 3,
+    "route_bindings": 17,
+    "source_figures_unchanged": true,
+    "home_unapproved_performances_not_rendered": true,
+    "lip_gesture_films_accepted": false
+  },
+  "REA": {
+    "evidence": "docs/research/rea-restoration-2026-11-01.json",
+    "sha256": "32ed603bbe2838ee92df3a6b6d9051a7ff864b667572d0a86884ae45b2b2ba2b",
+    "mcp_discovery": true,
+    "analysis_evidence_id": null
+  },
+  "whole_system_accepted": false,
+  "refinement": {
+    "request_id": "4e5f4b2b-850a-476b-a3f5-2c6920b3512c",
+    "observed_at": "2026-11-01T23:04:58.575303+00:00",
+    "source_sha256": {
+      "apps/web/components/IdentityHero.tsx": "59948d05a3c9bc189f985ad4e5a44ff04df4456aa1f7e5738433747cd7a003c4",
+      "apps/web/components/LuxuryMaterials.css": "dd47ecbec6d4f0fe81a3b42ad0e8042210dba0ad816d64b1643817ffd82084af",
+      "config/design-tokens.json": "cbf058a789154aa314b1186f1fdaab851a54e546309c7add834da0fa82cf66d9",
+      "packages/tokens/tokens.css": "a65c9aaf95fa497ed5131496c3f763900382b7815b4affe1245ab97834508d30",
+      "apps/web/public/media/home-loops/welcome-loop.jpg": "1b30401ae1022a7bf88e9e600131d3badc4019a7b504c270508966fda8202add"
+    },
+    "source_review": "/root/qualitaet_review_no_new_concrete_blocker",
+    "tests": {
+      "site_units": 81,
+      "hero_contracts": 5,
+      "build": "passed",
+      "typecheck": "passed",
+      "full_python": {
+        "tests": 685,
+        "failures": 40,
+        "errors": 9,
+        "skipped": 14
+      }
+    },
+    "browser": {
+      "viewport_width": 1348,
+      "hero_width": 748.828125,
+      "hero_height": 421.203125,
+      "natural_width": 1920,
+      "object_fit": "contain",
+      "no_horizontal_overflow": true,
+      "chat_radius": 28,
+      "close_target": {
+        "width": 48,
+        "height": 48
+      },
+      "panel_header_background": "transparent",
+      "close_and_escape_focus_return": "chat-launcher",
+      "locale": "de",
+      "mobile_safari_not_verified": true
+    },
+    "original_trio_bytes_unchanged": true,
+    "chat_javascript_changed": false
+  },
+  "whole_team_image_finish": {
+    "id": "USER-IMAGE-FINISH-20261102",
+    "request_id": "e6fa5df2-bb99-4732-bd74-4475152dfd1f",
+    "observed_at": "2026-11-02T00:25:36.362825+01:00",
+    "writer": "/root",
+    "reviewers": [
+      "/root/brand_ux_pruefung",
+      "/root/qualitaet_review",
+      "/root/soll_abgleich",
+      "/root/runtime_pruefung"
+    ],
+    "status": "implemented_reviewed_browser_subset_verified",
+    "chat_javascript_changed": false,
+    "hero": "free_original_character_composition_on_shared_canvas",
+    "original_assets_changed": false,
+    "visible_RGBA_and_alpha_unchanged": true,
+    "derivative_bytes": 1136162,
+    "figure_registry": "config/presenter-artwork.json",
+    "editorial_art_route_bindings": 8,
+    "home_art_motifs_each_once": true,
+    "explainer_module_count_preserved": 52,
+    "source_sha256": {
+      "apps/web/components/IdentityHero.tsx": "c338588a5ecc68753330f2d3b1147530e1bbf4f4005592d48b7c82b528e7fe61",
+      "apps/web/components/HomeContent.tsx": "82aba5c3ac129e2fd60aef6d314591681ad20a9190d93eeeb913ef8c2bf5229a",
+      "apps/web/components/PresenterScene.tsx": "4c1ad40ba869bd91a410774ca76390d33a061d155b4ec051754b643aacc3a699",
+      "apps/web/components/LuxuryMaterials.css": "4952dfefcba534b949e478b4b791017c23da5f1225363ad4390f609ea4dee844",
+      "config/presenter-artwork.json": "a907d36b283af617278241d2ff5ce691694f5b711b551a53389bea7c16b92586",
+      "config/editorial-art.json": "8a35fe9c72d463f63477bc64a95387020cf4d1d91cca69a913443dedff45a234",
+      "apps/site/scripts/presenter-artwork.mjs": "c3dd6cfa799056f0d957cada1d8a75be5ae984c822d2fb68149621d8d030f46e",
+      "apps/site/scripts/build-standalone.mjs": "4cbd29d0f417a859a70366170e9f606994a8170683bc388cf003365dbfea04c3"
+    },
+    "tests": {
+      "site_units": 85,
+      "hero_contracts": 5,
+      "production_build": "passed",
+      "site_typecheck": "passed",
+      "full_python": {
+        "tests": 685,
+        "failures": 43,
+        "errors": 9,
+        "skipped": 14
+      }
+    },
+    "browser": {
+      "desktop_width": 1348,
+      "iframe_CSS_widths": [
+        320,
+        390,
+        820
+      ],
+      "no_horizontal_overflow": true,
+      "full_compositions_visually_checked": true,
+      "mobile_dialog_390x844": true,
+      "close_focus_return": "chat-launcher",
+      "smooth_oracle_explainer_verified": true,
+      "real_ios_safari_verified": false,
+      "physical_device_verified": false
+    },
+    "whole_system_accepted": false,
+    "final_performance_video_accepted": false
+  }
+}

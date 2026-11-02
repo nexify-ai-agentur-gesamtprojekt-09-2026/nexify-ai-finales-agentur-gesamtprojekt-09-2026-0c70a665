@@ -6,12 +6,78 @@ import type {Locale} from "../lib/i18n";
 import type {PublicPage} from "../lib/page-types";
 import {SiteLink} from "./Router";
 import "./PublicOrientationChat.css";
+import {staticOrientation,type StaticGuidance} from "../lib/static-orientation";
+declare const __NEXIFY_STATIC_ORIENTATION__:boolean;
 
 const copy={
- de:{title:"Orientierung im Gespräch",mode:"Textgeführte Vorschau · ohne Live-KI",intro:"Frage nach Leistungen, Produkten oder deinem nächsten Schritt. Du erhältst passende Informationen und Seitenwege. Hier wird nichts gebucht, versendet oder kostenpflichtig ausgeführt.",label:"Deine Frage zur Website",placeholder:"Was möchtest du kennenlernen?",send:"Frage senden",stop:"Antwort stoppen",waiting:"Antwort wird übertragen …",error:"Die Orientierung ist gerade nicht erreichbar. Deine Eingabe bleibt erhalten.",privacy:"Verlauf nur für diesen Besuch im Browser. Keine dauerhafte Speicherung. Bitte keine Zugangsdaten eingeben.",you:"Du",assistant:"AI Fly Oracle",next:"Passende Seite öffnen",prompt:"Wie starte ich mit NeX2fly?"},
- nl:{title:"Oriëntatie in gesprek",mode:"Tekstgestuurd voorbeeld · zonder live-AI",intro:"Vraag naar diensten, producten of je volgende stap. Je krijgt passende informatie en paginaroutes. Hier wordt niets geboekt, verzonden of tegen betaling uitgevoerd.",label:"Je vraag over de website",placeholder:"Wat wil je ontdekken?",send:"Vraag verzenden",stop:"Antwoord stoppen",waiting:"Antwoord wordt ontvangen …",error:"De oriëntatie is nu niet bereikbaar. Je invoer blijft behouden.",privacy:"Geschiedenis alleen tijdens dit bezoek in de browser. Geen blijvende opslag. Voer geen toegangsgegevens in.",you:"Jij",assistant:"AI Fly Oracle",next:"Passende pagina openen",prompt:"Hoe begin ik met NeX2fly?"},
- fr:{title:"Trouver ton chemin",mode:"Aperçu guidé par texte · sans IA en direct",intro:"Pose une question sur les services, les produits ou ta prochaine étape. Tu obtiens les informations et les pages adaptées. Aucune réservation, aucun envoi ni action payante n’est effectué ici.",label:"Ta question sur le site",placeholder:"Que souhaites-tu découvrir ?",send:"Envoyer la question",stop:"Arrêter la réponse",waiting:"Réponse en cours de transmission…",error:"Le guide est momentanément indisponible. Ta saisie est conservée.",privacy:"Historique uniquement dans le navigateur pendant cette visite. Aucune conservation durable. Ne saisis pas d’identifiants.",you:"Toi",assistant:"AI Fly Oracle",next:"Ouvrir la page adaptée",prompt:"Comment commencer avec NeX2fly ?"},
- en:{"title": "Find your way", "mode": "Text-guided overview · no live AI", "intro": "Ask about services, products or your next step. You get the information and matching pages. No booking, no sending and no paid action happens here.", "label": "Your question about the site", "placeholder": "What would you like to discover?", "send": "Send question", "stop": "Stop the response", "waiting": "Response is being transmitted…", "error": "The guide is momentarily unavailable. Your input is preserved.", "privacy": "History stays in the browser only during this visit. No lasting storage. Do not enter credentials.", "you": "You", "assistant": "AI Fly Oracle", "next": "Open the matching page", "prompt": "How do I start with NeX2fly?"}
+  "de": {
+    "title": "Was haben Sie vor?",
+    "mode": "Leistungen finden",
+    "intro": "Beschreiben Sie kurz Ihr Vorhaben oder wählen Sie einen Bereich. Hier finden Sie passende Informationen und den Weg zum persönlichen Gespräch.",
+    "label": "Wobei können wir Ihnen helfen?",
+    "placeholder": "Zum Beispiel: Ich möchte meine Website erneuern …",
+    "send": "Informationen anzeigen",
+    "stop": "Antwort anhalten",
+    "waiting": "Passende Informationen werden geladen …",
+    "error": "Die Website-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten. Für die persönliche Projektklärung nutzen Sie bitte die Kontaktseite.",
+    "privacy": "NeX Agentic AIFly kann Fehler machen.",
+    "notice": "Wie diese Einordnung entsteht",
+    "you": "Sie",
+    "assistant": "AIFly ORACLE",
+    "next": "Zum passenden Angebot",
+    "prompt": "Welcher Einstieg von NeXify passt zu meinem Unternehmen?"
+  },
+  "nl": {
+    "title": "Wat bent u van plan?",
+    "mode": "Diensten vinden",
+    "intro": "Beschrijf kort uw plan of kies een onderwerp. Hier vindt u passende informatie en de weg naar een persoonlijk gesprek.",
+    "label": "Waarmee kunnen we u helpen?",
+    "placeholder": "Bijvoorbeeld: Ik wil mijn website vernieuwen …",
+    "send": "Informatie tonen",
+    "stop": "Antwoord onderbreken",
+    "waiting": "Passende informatie wordt geladen …",
+    "error": "Het websiteadvies is nu niet bereikbaar. Uw invoer blijft behouden. Gebruik de contactpagina voor een persoonlijk projectgesprek.",
+    "privacy": "NeX Agentic AIFly kan fouten maken.",
+    "notice": "Hoe deze indeling ontstaat",
+    "you": "U",
+    "assistant": "AIFly ORACLE",
+    "next": "Naar het passende aanbod",
+    "prompt": "Welke eerste stap van NeXify past bij mijn bedrijf?"
+  },
+  "fr": {
+    "title": "Quel est votre projet ?",
+    "mode": "Trouver une prestation",
+    "intro": "Décrivez brièvement votre projet ou choisissez un sujet. Retrouvez les informations utiles et le contact pour en discuter.",
+    "label": "Comment pouvons-nous vous aider ?",
+    "placeholder": "Par exemple : je souhaite refaire mon site …",
+    "send": "Afficher les informations",
+    "stop": "Suspendre la réponse",
+    "waiting": "Chargement des informations pertinentes…",
+    "error": "Le conseil sur le site est momentanément indisponible. Votre saisie est conservée. Utilisez la page de contact pour un échange personnel sur votre projet.",
+    "privacy": "NeX Agentic AIFly peut faire des erreurs.",
+    "notice": "Comment cette orientation est établie",
+    "you": "Vous",
+    "assistant": "AIFly ORACLE",
+    "next": "Vers l’offre adaptée",
+    "prompt": "Quelle première étape de NeXify convient à mon entreprise ?"
+  },
+  "en": {
+    "title": "What are you planning?",
+    "mode": "Find a service",
+    "intro": "Briefly describe your project or choose a topic. Find relevant information and the route to a personal conversation.",
+    "label": "How can we help?",
+    "placeholder": "For example: I would like to update my website …",
+    "send": "Show information",
+    "stop": "Pause response",
+    "waiting": "Loading relevant information …",
+    "error": "Website guidance is temporarily unavailable. Your input is retained. Please use the contact page for a personal project discussion.",
+    "privacy": "NeX Agentic AIFly can make mistakes.",
+    "notice": "How this guidance is made",
+    "you": "You",
+    "assistant": "AIFly ORACLE",
+    "next": "View the relevant offer",
+    "prompt": "Which NeXify starting point suits my business?"
+  }
 };
 
 // TEILEKLAR-specific overrides for the default-visible orientation chat (vehicle/part/workshop context).
@@ -22,13 +88,126 @@ const tkCopy={
  en:{"title": "Welcome to TEILEKLAR", "intro": "Welcome to TEILEKLAR. What is it about for you: a spare part, a workshop visit or a partnership? For a parts or workshop question, please name your vehicle and describe your request. An existing part number helps with the assignment. Online ordering is currently not possible.", "label": "Your vehicle/part request", "placeholder": "Enter the vehicle and the part you need …"}
 };
 const starters={
- de:{nexify:[["Website planen","Ich möchte eine Website planen: "],["Ablauf automatisieren","Ich möchte einen Ablauf automatisieren: "],["Bestehendes Projekt","Ich habe ein bestehendes Projekt: "]],
-     teileklar:[["Fahrzeug angeben","Mein Fahrzeug (Marke, Modell, Baujahr): "],["Teileanfrage vorbereiten","Meine Teileanfrage – Fahrzeug und gesuchtes Teil: "],["Werkstatt-Anliegen","Mein Werkstatt-Anliegen (Fahrzeug und Arbeit): "]]},
- nl:{nexify:[["Website plannen","Ik wil een website plannen: "],["Proces automatiseren","Ik wil een proces automatiseren: "],["Bestaand project","Ik heb een bestaand project: "]],
-     teileklar:[["Voertuig opgeven","Mijn voertuig (merk, model, bouwjaar): "],["Onderdeelaanvraag voorbereiden","Mijn onderdeelaanvraag – voertuig en gezocht onderdeel: "],["Werkplaats-vraag","Mijn werkplaats-vraag (voertuig en werk): "]]},
- fr:{nexify:[["Planifier un site","Je veux planifier un site web : "],["Automatiser un processus","Je veux automatiser un processus : "],["Projet existant","J’ai un projet existant : "]],
-     teileklar:[["Indiquer le véhicule","Mon véhicule (marque, modèle, année) : "],["Préparer une demande de pièce","Ma demande de pièce – véhicule et pièce recherchée : "],["Demande atelier","Ma demande d’atelier (véhicule et travaux) : "]]},
- en:{"nexify": [["Plan a website", "I would like to plan a website: "], ["Automate a process", "I would like to automate a process: "], ["Existing project", "I have an existing project: "]], "teileklar": [["Specify vehicle", "My vehicle (make, model, year): "], ["Prepare a parts request", "My parts request – vehicle and part needed: "], ["Workshop request", "My workshop request (vehicle and work): "]]}
+  "de": {
+    "nexify": [
+      [
+        "Marke & Web",
+        "Ich möchte meinen Markenauftritt und meine Website entwickeln: "
+      ],
+      [
+        "Systeme & KI",
+        "Ich möchte diesen Arbeitsablauf mit KI und Automatisierung verbessern: "
+      ],
+      [
+        "Ads & Marketing",
+        "Ich möchte diese Zielgruppe mit einer Kampagne erreichen: "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Fahrzeug & Teil",
+        "Mein Fahrzeug und das gesuchte Teil: "
+      ],
+      [
+        "Werkstatt-Anfrage",
+        "Mein Fahrzeug und die gewünschte Werkstattleistung: "
+      ],
+      [
+        "Zusammenarbeit",
+        "Ich möchte eine Zusammenarbeit mit TEILEKLAR besprechen: "
+      ]
+    ]
+  },
+  "nl": {
+    "nexify": [
+      [
+        "Merk & web",
+        "Ik wil mijn merkuitstraling en website ontwikkelen: "
+      ],
+      [
+        "Systemen & AI",
+        "Ik wil dit werkproces met AI en automatisering verbeteren: "
+      ],
+      [
+        "Ads & marketing",
+        "Ik wil deze doelgroep met een campagne bereiken: "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Voertuig & onderdeel",
+        "Mijn voertuig en het gezochte onderdeel: "
+      ],
+      [
+        "Werkplaatsaanvraag",
+        "Mijn voertuig en de gewenste werkplaatsdienst: "
+      ],
+      [
+        "Samenwerking",
+        "Ik wil samenwerking met TEILEKLAR bespreken: "
+      ]
+    ]
+  },
+  "fr": {
+    "nexify": [
+      [
+        "Marque & web",
+        "Je souhaite développer ma marque et mon site web : "
+      ],
+      [
+        "Systèmes & IA",
+        "Je souhaite améliorer ce processus grâce à l’IA et à l’automatisation : "
+      ],
+      [
+        "Publicité & marketing",
+        "Je souhaite toucher ce public avec une campagne : "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Véhicule & pièce",
+        "Mon véhicule et la pièce recherchée : "
+      ],
+      [
+        "Demande atelier",
+        "Mon véhicule et la prestation d’atelier souhaitée : "
+      ],
+      [
+        "Collaboration",
+        "Je souhaite discuter d’une collaboration avec TEILEKLAR : "
+      ]
+    ]
+  },
+  "en": {
+    "nexify": [
+      [
+        "Brand & web",
+        "I want to develop my brand presence and website: "
+      ],
+      [
+        "Systems & AI",
+        "I want to improve this workflow with AI and automation: "
+      ],
+      [
+        "Ads & marketing",
+        "I want to reach this audience with a campaign: "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Vehicle & part",
+        "My vehicle and the part I need: "
+      ],
+      [
+        "Workshop enquiry",
+        "My vehicle and the workshop service I am seeking: "
+      ],
+      [
+        "Partnership",
+        "I would like to discuss working with TEILEKLAR: "
+      ]
+    ]
+  }
 } as const;
 
 function guidedText(text:string,pages:PublicPage[]){
@@ -39,7 +218,14 @@ function guidedText(text:string,pages:PublicPage[]){
  });
 }
 
-export default function PublicOrientationChat({locale,pagePath,pages,onActivityChange}:{locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void}){
+type OrientationProps={locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void};
+
+export default function PublicOrientationChat(props:OrientationProps){
+ const local=typeof __NEXIFY_STATIC_ORIENTATION__!=="undefined"&&__NEXIFY_STATIC_ORIENTATION__===true;
+ return local?<StaticOrientationChat {...props}/>:<ServerOrientationChat {...props}/>;
+}
+
+function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:OrientationProps){
  const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify";const text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};const[draft,setDraft]=useState("");const lastSubmitted=useRef("");
  const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>({body:{id,trigger,...(messageId?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:messages.filter(message=>message.role==="user").slice(-1).map(message=>({id:message.id,role:message.role,parts:message.parts.filter(part=>part.type==="text")}))}})}),[]);
  const{messages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>setDraft(previous=>previous||lastSubmitted.current)});
@@ -57,8 +243,35 @@ export default function PublicOrientationChat({locale,pagePath,pages,onActivityC
    return page?<SiteLink className="orientation-page-link" key={index} href={page.path}>{page.localizedTitle[locale]} <span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>:null;
   })}</article>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);composerInput.current?.focus();}}>{label}<span aria-hidden="true">→</span></button>)}</div>}
+  {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);composerInput.current?.focus();}}><span className="orientation-starter-label">{label}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>}
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
   {busy&&<p className="connection-note" role="status">{text.waiting}</p>}<p className="connection-note">{text.privacy}</p>
+ </section>;
+}
+
+
+function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:OrientationProps){
+ const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify",text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};
+ const [draft,setDraft]=useState(""),[error,setError]=useState(false);
+ const [messages,setMessages]=useState<{question:string;answer:StaticGuidance}[]>([]);
+ const input=useRef<HTMLTextAreaElement>(null),history=useRef<HTMLDivElement>(null);
+ useEffect(()=>{onActivityChange?.(false);},[onActivityChange]);
+ useEffect(()=>{setMessages([]);setError(false);},[locale]);
+ useEffect(()=>{if(messages.length&&history.current)history.current.scrollTop=messages.length===1?0:history.current.scrollHeight;},[messages]);
+ function submit(event:FormEvent){
+  event.preventDefault();const question=draft.trim();if(!question)return;
+  try{const answer=staticOrientation({locale,pagePath,question,pages});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
+  catch{setError(true);}
+ }
+ return <section className="public-orientation" aria-label={text.title} data-orientation-mode="local-public-pages">
+  <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <div className="orientation-history" ref={history} role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
+   <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
+   <article className="orientation-message role-assistant"><strong>{text.assistant}</strong><p>{message.answer.text}</p>{message.answer.cards.map(card=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span><strong>{card.title}</strong><br/>{card.summary}</span><span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}<details className="orientation-disclosure"><summary>{text.notice}</summary><p>{message.answer.notice}</p></details></article>
+  </div>)}</div>
+  {error&&<p className="error-note" role="alert">{text.error}</p>}
+  {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);input.current?.focus();}}><span className="orientation-starter-label">{label}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>}
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
+  <p className="connection-note">{text.privacy}</p>
  </section>;
 }

@@ -24,6 +24,15 @@ for(const [file,mime]of[['portrait.png','image/png'],['media/presenters/hero-tri
  const data=`data:${mime};base64,${(await readFile(resolve(dist,file))).toString('base64')}`;
  js=js.replaceAll('/'+file,data);css=css.replaceAll('/'+file,data);
 }
+// All currently referenced artwork must remain visible under the data-only image CSP.
+const presenterArt=JSON.parse(await readFile(new URL('../../../config/presenter-artwork.json',import.meta.url),'utf8'));
+const editorialArt=JSON.parse(await readFile(new URL('../../../config/editorial-art.json',import.meta.url),'utf8'));
+for(const image of [...Object.values(presenterArt.images),...editorialArt.assets]){
+ if(!/^\/media\/[a-z0-9/-]+\.webp$/.test(image.src))throw new Error('Invalid inline artwork path');
+ if(!js.includes(image.src)&&!css.includes(image.src))continue;
+ const data=`data:image/webp;base64,${(await readFile(ownedPath(image.src))).toString('base64')}`;
+ js=js.replaceAll(image.src,data);css=css.replaceAll(image.src,data);
+}
 html=html.replace(style[0],()=>`<style>${css.replace(/<\/style/gi,'\\3c /style')}</style>`);
 html=html.replace(script[0],()=>`<script>window.__NEXIFY_STANDALONE_PREVIEW__=true;</script><script type="module">${js.replace(/<\/script/gi,'<\\/script')}</script>`);
 html=html.replace('<head>','<head><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'unsafe-inline\'; style-src \'unsafe-inline\'; img-src data:; font-src data:; connect-src \'none\'; base-uri \'none\'; form-action \'none\'">');

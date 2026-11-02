@@ -1,0 +1,60 @@
+{
+  "decision": "USER-THREE-VOICE-HERO-20261102",
+  "kind": "glass_walk_in_with_existing_three_character_elevenlabs_dialogue",
+  "speaking_performance": false,
+  "lip_sync": false,
+  "original_portrait": "/media/atelier/presenters/pascal-walking-original-20261102.jpg",
+  "original_sha256": "4b46820025ae887c49ec18b7f606fd12082e6c6ef63b094458b1f313efafaea8",
+  "cutout": "/media/atelier/presenters/pascal-walking-cutout-20261102.png",
+  "cutout_sha256": "b97938ef2540edbe51e5a1398111a39ddb5f6a238c7469f4682a086d96d40e92",
+  "film": {
+    "src": "/media/atelier/films/hero-glass-trio-20261102.mp4",
+    "poster": "/media/atelier/films/hero-glass-portrait-20261102.jpg",
+    "width": 1280,
+    "height": 720,
+    "title": "Pascal, NeX und AIFly ORACLE im Glasatelier",
+    "duration_seconds": 43.458333,
+    "hasAudio": true,
+    "autoplayWithAudio": true,
+    "playOnce": true,
+    "sha256": "6dfc21460f0822c9881bede9d330355e2a6f7f1907a0670c70f8555605bb7d1b",
+    "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa",
+    "transcript": "Hallo, ich bin Pascal. Willkommen bei NeXify! Schön, dass du da bist. Wir schauen gemeinsam, was dein Unternehmen wirklich braucht – und wie deine vorhandenen Systeme dabei helfen können. Ich bin NeX. Geht es um eine Website, einen automatisierten Ablauf oder ein Kundenportal? Du kannst hier direkt deinen Einstieg wählen. Und ich bin AI Fly Oracle. Ich helfe dir, dein Vorhaben zu ordnen, offene Fragen sichtbar zu machen und den nächsten Schritt vorzubereiten. Schau dich in Ruhe um. Womit möchtest du anfangen?"
+  },
+  "film_history": [
+    {
+      "src": "/media/atelier/films/home-studio-welcome-20261102.mp4",
+      "poster": "/media/atelier/films/home-studio-welcome-20261102.jpg",
+      "width": 1280,
+      "height": 720,
+      "title": "Pascal, NeX und AIFly im NeXify Studio",
+      "duration_seconds": 24.083333,
+      "hasAudio": true,
+      "autoplayWithAudio": false,
+      "playOnce": true,
+      "captions": "/media/atelier/films/home-studio-welcome-20261102.de.vtt",
+      "transcript": "Ein klarer Auftritt beginnt mit einer klaren Idee. Wir bringen Marke, Website und Inhalte in einen verständlichen Zusammenhang. Von der ersten Struktur bis zur passenden Umsetzung – mit einem nachvollziehbaren nächsten Schritt. Was braucht Ihr Vorhaben? Das klären wir gemeinsam. Projekt besprechen.",
+      "sha256": "ef58704e06e3e3e18f2a3f9cc7eced452fdfb5f888338230bbbe5f42511dcb63",
+      "poster_sha256": "31ee54c31e9588724eb457c108ef3c0d8310d1e79b9a228e539c020c9e046448"
+    },
+    {
+      "src": "/media/atelier/films/hero-glass-portrait-20261102.mp4",
+      "poster": "/media/atelier/films/hero-glass-portrait-20261102.jpg",
+      "width": 1920,
+      "height": 1080,
+      "title": "Pascal, NeX und AIFly ORACLE im Glasatelier",
+      "duration_seconds": 10,
+      "hasAudio": false,
+      "autoplayWithAudio": false,
+      "playOnce": true,
+      "sha256": "17ca37ecbb128a58c9c2d8ea986e45ef96559fc54069bb8026beb3e22a3f2164",
+      "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa"
+    }
+  ],
+  "voice_provenance": {
+    "provider": "ElevenLabs, existing home-review/welcome-elevenlabs-v4.mp3",
+    "model": "eleven_v4",
+    "voice": "Pascal, NeX and AIFly ORACLE dialogue",
+    "source": "apps/web/lib/home-scenes.ts"
+  }
+}

@@ -63,3 +63,62 @@ Tinte `#14191C`, Papier `#F2F3EF`, Cover `#0E1315`, Grau `#646769`, Lime als Fl�
 1. `tools/ds-audit.js` liest alle Dateien, wendet `config/design-rules.json` an und erzeugt den Bericht.
 2. Ausnahmen stehen in `design-rules.json → ausnahmen` mit Begründung; ohne Eintrag gilt eine Abweichung als offen.
 3. Neue Farbe, neuer Radius oder neue Fläche: zuerst in `design-tokens.json` und diese Definition, dann in den Code.
+
+
+## Materialfortschreibung · 01.11.2026
+
+Die aktuelle Nutzerentscheidung `USER-LUXURY-20261101` ergänzt diese historische Definition um Graphite Atelier: warmes Graphit, Platin, Champagner und gezieltes Glas an funktionalen Flächen. Primärquelle bleibt `config/design-tokens.json` (`color.atelier`, `radius.atelier`, `gradient.atelier*`, `shadow.atelier`); generierte Ausgabe in `packages/tokens`. Lime und das grüne X bleiben Markenanker. Inhaltstext liegt auf opaken Flächen; reduzierte Transparenz, höhere Kontraste und Reduced Motion haben eigene CSS-Rückfälle. Kein Norm-/Geräte-/Gesamtfreigabeclaim. Umsetzung und Medien-/REA-Grenzen: `docs/design/graphite-atelier-media-migration-2026-11-01.md`.
+
+
+## Atelier-Farbherkunft · 02.11.2026
+
+Die bisherigen Farbwerte von AtelierFilm und LuxuryMaterials liegen nun zentral unter color.atelier in config/design-tokens.json. 13 fehlende Werte wurden exakt übernommen, sechs bestehende Tokens wiederverwendet. Alle137 bisherigen Tokenwerte bleiben unverändert; aufgelöste CSS-Werte sind zur Vorfassung identisch. tokens.css/json/ts werden gemeinsam generiert. Dies ist eine Herkunftskorrektur, keine neue Marken- oder WCAG-Abnahme.
+
+### Begrenzte TV-Fläche · 02.11.2026
+
+Die aktuelle Nutzerkorrektur begrenzt ausschließlich den großen Hero-Film: `layout.filmMax = 1120px`, mittig mit Seitenabständen und vollständiger 16:9-Darstellung. Texte stehen außerhalb des Bildes; Rahmen und Licht verwenden die vorhandenen Atelier-Materialtokens. Bei offenem Desktop-Chat trennt `space.5 = 24px` die Seitenfläche vom unverändert breiten Assistenzdock. Mobile behält die bestehende Dialogdarstellung. Keine neue Szene oder Sprecherproduktion und keine Gesamtfreigabe.
+
+## Home · räumliche Medienkante · 02.11.2026
+
+Autorisierter Home-Review nach dem eingefügten Gesamtkonzept. `radius.homeMedia`
+(36px), `shadow.homeMedia` und `gradient.homeMediaRim` ergänzen die vorhandenen
+Atelier-Tokens. Die Farbe kommt aus bestehenden Platin-/Champagnerrollen, ohne
+neue Markenpalette. Die begrenzte 16:9-Heroöffnung bleibt unverzerrt (contain),
+mit schmalem Licht oben und dunkler Unterkante statt breitem Rahmen. Desktop-
+Split 43/57; unter 760 CSS-px verfügbarer Inhaltsbreite gestapelt. Nachfolgende
+Glasmotive sind statische Illustrationen; Leseflächen bleiben opak. Auf schmalen
+Ansichten sind sie bewusst kleiner als die Heroöffnung. Bedienelemente 48px,
+Fokus Lime, Reduced Motion und Contrast-Fallback erhalten.
+
+### Home-Feinschliff · 02.11.2026
+
+`typeHome.detail` (14px), `typeHome.reading` (15px) und
+`gradient.homeDivider` ergänzen die bestehende Skala gezielt für Home.
+Kleine Lesetexte werden größer, Aktionspfeile sind einheitliche dekorative SVGs,
+Hover und Tastaturfokus teilen denselben Hinweis. Die Medienkante nutzt den
+bereits vorhandenen `gradient.homeMediaRim`; keine neue Farbe. Auf schmalem
+Hero bleibt die 48px-Videosteuerung als kompakte Schaltfläche im Bild, statt
+unterhalb eine zusätzliche dunkle Fläche zu erzeugen. Reduced Motion bleibt
+wirksam. Diese Details ändern nicht die freigegebene Home-Komposition.
+
+### Große Bildschirme · direkte Nutzerkorrektur 02.11.2026
+
+Die erste Verbreiterung auf2160px wurde durch die präzisere Nutzeranweisung
+„je die Hälfte des aktuellen Leerraums“ ersetzt. `layout.homeWideMax` ist jetzt
+`calc((100% + var(--layout-home-base-max)) / 2)` bei1440px Baseline. Große
+Inhaltsflächen verwenden zusätzlich halbierte Innenränder. Damit halbiert sich
+der ursprüngliche seitliche Leerraum auch mit geöffneter Seitenleiste. Ab 1400px Hero-Inhaltsbreite erhält die
+Medienseite etwa 61 Prozent; native 16:9-Darstellung, bestehende Medienobergrenze
+und kompakte Umbrüche bleiben. Home-Detail-/Lesetexte wachsen von 14/15px bis
+16/18px über die tatsächliche Containerbreite. Prüfung explizit in 2761×1280 CSS-px,
+mit und ohne Assistentenpanel; Unterseiten und Chatbreite bleiben separat.
+
+### Home-Verfeinerung · 02.11.2026
+Ein gemeinsamer Überschriftenverlauf `gradient.atelierHeading` verbindet Ink,
+Champagne und Platinum. Er gilt für H1–H4, ohne Animation; hoher Kontrast und
+Forced Colors erhalten einfarbige Schrift. Navigation, Angebote und Footer
+verwenden dieselben Atelier-Materialien. Installations- und Diagnosebereich
+liegen in einer gemeinsamen Footer-Innenfläche mit seitlichem und unterem Abstand.
+Licht: `atelierAmbient` bildet drei weiche, seitenweite Lichtfelder; `atelierReflection`
+zeichnet randgebundene Reflexe an Bildflächen; `atelierDepth` kombiniert einen
+kurzen Kontaktschatten mit weicher räumlicher Tiefe. Keine laufenden Lichtanimationen.

@@ -4,10 +4,38 @@ import type {ContactChannel} from "../lib/page-types";
 import {SiteLink} from "./Router";
 
 const copy={
- de:{feature:"Direkter Kontakt",chat:"Orientierung momentan nicht verfügbar",featureBody:"Diese Funktion ist hier noch nicht verbunden. Besprich dein Vorhaben stattdessen per E-Mail mit uns.",chatBody:"Die Gesprächsansicht konnte nicht geladen werden. Die öffentlichen Seiten bleiben nutzbar. Du erreichst uns auch per E-Mail.",contact:"Kontaktseite öffnen",reload:"Seite neu laden"},
- nl:{feature:"Rechtstreeks contact",chat:"Oriëntatie momenteel niet beschikbaar",featureBody:"Deze functie is hier nog niet verbonden. Bespreek je plan in plaats daarvan per e-mail met ons.",chatBody:"De gespreksweergave kon niet worden geladen. De openbare pagina’s blijven beschikbaar. Je kunt ons ook e-mailen.",contact:"Contactpagina openen",reload:"Pagina opnieuw laden"},
- fr:{feature:"Contact direct",chat:"Orientation momentanément indisponible",featureBody:"Cette fonction n’est pas encore connectée ici. Écrivez-nous plutôt par e-mail pour discuter de votre projet.",chatBody:"La conversation n’a pas pu être chargée. Les pages publiques restent disponibles. Vous pouvez aussi nous écrire par e-mail.",contact:"Ouvrir la page de contact",reload:"Recharger la page"},
- en:{"feature": "Direct contact", "chat": "Orientation momentarily unavailable", "featureBody": "This function is not yet connected here. Please write to us by email to discuss your project instead.", "chatBody": "The conversation could not be loaded. The public pages remain available. You can also write to us by email.", "contact": "Open the contact page", "reload": "Reload the page"}
+  "de": {
+    "feature": "Ihr direkter Weg zu NeXify",
+    "chat": "Ihre Anfrage bleibt bei Ihnen",
+    "featureBody": "Die Projektfunktion ist in dieser Ansicht noch nicht verbunden. Senden Sie Ihr Anliegen an NeXify AI FACTORY B.V. per E-Mail; Ziel, Umfang und die passende Zusammenarbeit klären wir persönlich.",
+    "chatBody": "Die Website-Beratung konnte nicht geladen werden. Leistungen und Angebote bleiben zugänglich. NeXify AI FACTORY B.V. erreichen Sie über die Kontaktseite oder per E-Mail.",
+    "contact": "NeXify kontaktieren",
+    "reload": "Beratung neu laden"
+  },
+  "nl": {
+    "feature": "Uw directe weg naar NeXify",
+    "chat": "Uw aanvraag blijft bij u",
+    "featureBody": "De projectfunctie is in deze weergave nog niet verbonden. Stuur uw vraag per e-mail naar NeXify AI FACTORY B.V.; doel, omvang en passende samenwerking bespreken we persoonlijk.",
+    "chatBody": "Het websiteadvies kon niet worden geladen. Diensten en aanbod blijven toegankelijk. U bereikt NeXify AI FACTORY B.V. via de contactpagina of per e-mail.",
+    "contact": "Contact met NeXify",
+    "reload": "Advies opnieuw laden"
+  },
+  "fr": {
+    "feature": "Votre accès direct à NeXify",
+    "chat": "Votre demande reste entre vos mains",
+    "featureBody": "La fonction projet n’est pas encore connectée dans cette vue. Adressez votre demande par e-mail à NeXify AI FACTORY B.V. ; nous définirons personnellement l’objectif, le périmètre et la collaboration adaptée.",
+    "chatBody": "Le conseil sur le site n’a pas pu être chargé. Les prestations et les offres restent accessibles. Contactez NeXify AI FACTORY B.V. via la page de contact ou par e-mail.",
+    "contact": "Contacter NeXify",
+    "reload": "Recharger le conseil"
+  },
+  "en": {
+    "feature": "Your direct route to NeXify",
+    "chat": "Your request stays in your hands",
+    "featureBody": "The project function is not yet connected in this view. Email your request to NeXify AI FACTORY B.V.; we will discuss your goal, scope and suitable collaboration personally.",
+    "chatBody": "Website guidance could not be loaded. Services and offers remain accessible. Reach NeXify AI FACTORY B.V. through the contact page or by email.",
+    "contact": "Contact NeXify",
+    "reload": "Reload guidance"
+  }
 };
 export default function PublicRequestFallback({locale,contact,kind="feature"}:{locale:Locale;contact?:ContactChannel;kind?:"feature"|"chat"}){
  const t=copy[locale];

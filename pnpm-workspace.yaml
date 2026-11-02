@@ -2,6 +2,8 @@ packages:
   - apps/web
   - apps/site
   - packages/*
+allowBuilds:
+  core-js: false
 minimumReleaseAgeExclude:
   - '@vercel/cli-config@0.3.4'
   - '@vercel/connect@2.5.6'

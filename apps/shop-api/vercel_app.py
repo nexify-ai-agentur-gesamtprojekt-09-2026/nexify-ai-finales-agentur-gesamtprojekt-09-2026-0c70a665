@@ -242,7 +242,7 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
         if error:
             return unavailable(error)
         # Preserve the existing same_origin_writes contract, including webhook exception.
-        writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth"))
+        writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests"))
         origin = request.headers.get("origin")
         if writes and origin and origin.rstrip("/") != binding.origin and not path.startswith("/api/shop/webhooks/"):
             return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403, headers={"Cache-Control": "no-store"})

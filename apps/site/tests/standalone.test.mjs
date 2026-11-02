@@ -68,3 +68,27 @@ for(const [name,source]of[
   assert.notEqual(result.status,0);await assert.rejects(readFile(join(root,'standalone/nexify-preview.html')));
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('current presenter WebP is embedded under the offline data-only image policy',async()=>{
+ const root=await fixture(false);
+ try{
+  const path='media/atelier/presenters/oracle-lossless.webp';
+  const bytes=Buffer.from([1,2,3,4,5]);
+  await mkdir(join(root,'dist/media/atelier/presenters'),{recursive:true});
+  await writeFile(join(root,'dist',path),bytes);
+  await writeFile(join(root,'dist/assets/entry.js'),`document.body.textContent="/${path}";`);
+  const result=spawnSync(process.execPath,[new URL('../scripts/build-standalone.mjs',import.meta.url).pathname,root],{encoding:'utf8'});
+  assert.equal(result.status,0,result.stderr);
+  const html=await readFile(join(root,'standalone/nexify-preview.html'),'utf8');
+  assert.ok(html.includes('data:image/webp;base64,'+bytes.toString('base64')));
+  assert.equal(html.includes('/'+path),false);
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+test('referenced current artwork cannot silently disappear from an offline export',async()=>{
+ const root=await fixture(false);
+ try{
+  await writeFile(join(root,'dist/assets/entry.js'),'document.body.textContent="/media/atelier/presenters/oracle-lossless.webp";');
+  const result=spawnSync(process.execPath,[new URL('../scripts/build-standalone.mjs',import.meta.url).pathname,root],{encoding:'utf8'});
+  assert.notEqual(result.status,0);await assert.rejects(readFile(join(root,'standalone/nexify-preview.html')));
+ }finally{await rm(root,{recursive:true,force:true});}
+});

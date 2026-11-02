@@ -1,7 +1,7 @@
-import assets from '../../../config/interim-scene-images.json';
+import assets from '../../../config/presenter-artwork.json';
 import type {Locale} from '../lib/i18n';
 export type SceneSpeaker=keyof typeof assets.images;
-const names={pascal:'Pascal',nex:'NeX',aifly:'AI Fly Oracle'};
+const names={pascal:'Pascal',nex:'NeX',aifly:'AIFly ORACLE'};
 /** Unchanged supplied references, not a product screenshot or simulated video. */
 export default function PresenterScene({speaker,title,locale,hero=false}:{speaker:SceneSpeaker;title:string;locale:Locale;hero?:boolean}){
  void locale;

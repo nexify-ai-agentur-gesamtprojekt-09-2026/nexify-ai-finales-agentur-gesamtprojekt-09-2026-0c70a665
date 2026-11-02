@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/generate-public-data.mjs && vite",
-    "build": "node scripts/generate-public-data.mjs && pnpm --dir ../.. lint && tsc --noEmit -p ../../tsconfig.api.json && tsc --noEmit && vite build",
+    "build": "node scripts/generate-public-data.mjs && pnpm --dir ../.. lint && tsc --noEmit -p ../../tsconfig.api.json && tsc --noEmit && vite build --mode public-pwa",
     "typecheck": "node scripts/generate-public-data.mjs && tsc --noEmit",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
