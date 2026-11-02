@@ -285,6 +285,10 @@
 .chat-hints-content .panel-pascal-link { min-height:var(--target-min); display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); color:var(--color-marke-lime); }
 .chat-return { padding:var(--space-2) var(--space-5); }
 .workspace-shell .reopen-chat { z-index:8; max-width:calc(100vw - var(--space-6)); bottom:calc(var(--space-4) + env(safe-area-inset-bottom)); right:var(--space-4); }
+@media(max-width:720px) {
+ .workspace-shell.site-teileklar .reopen-chat { bottom:calc(82px + env(safe-area-inset-bottom)); width:52px; height:52px; min-width:52px; padding:6px; overflow:hidden; font-size:0; }
+ .workspace-shell.site-teileklar .reopen-chat .oracle-companion { flex:none; }
+}
 @media(max-width:820px) {
  .workspace-shell .aifly-panel { position:fixed; inset:var(--chat-viewport-top) 0 auto auto; width:min(100%,var(--layout-panel-width)); padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom); }
  .workspace-shell .aifly-panel .composer-area { padding:var(--space-4); }

@@ -10,6 +10,7 @@ import Checkout from "./Checkout";
 import WorkshopFinder from "./WorkshopFinder";
 import WorkshopDetail from "./WorkshopDetail";
 import { api, CART_EVENT, type Cart } from "./api";
+import type { Locale } from "../../lib/i18n";
 import "./shop.css";
 
 /** Route projection shared by the public catalogue, checkout and workshop journey. */
@@ -41,14 +42,16 @@ export function publicShopRoute(pageId: string, pathname: string, search: string
   return { kind: "none" as const };
 }
 
-const MOBILE_LINKS = [
-  ["/teileklar/shop", "Shop"],
-  ["/teileklar/suche", "Suche"],
-  ["/teileklar/fahrzeug-und-passung", "Fahrzeug"],
-  ["/teileklar/werkstatt", "Werkstatt"],
-] as const;
+const mobileCopy: Record<Locale, { aria: string; links: readonly (readonly [string, string])[]; cart: string }> = {
+  de: { aria: "TEILEKLAR Schnellzugriff", links: [["/teileklar/shop", "Shop"], ["/teileklar/suche", "Suche"], ["/teileklar/fahrzeug-und-passung", "Fahrzeug"], ["/teileklar/werkstatt", "Werkstatt"]], cart: "Warenkorb" },
+  nl: { aria: "TEILEKLAR snelkeuze", links: [["/teileklar/shop", "Shop"], ["/teileklar/suche", "Zoeken"], ["/teileklar/fahrzeug-und-passung", "Voertuig"], ["/teileklar/werkstatt", "Werkplaats"]], cart: "Mandje" },
+  fr: { aria: "Accès rapide TEILEKLAR", links: [["/teileklar/shop", "Boutique"], ["/teileklar/suche", "Recherche"], ["/teileklar/fahrzeug-und-passung", "Véhicule"], ["/teileklar/werkstatt", "Atelier"]], cart: "Panier" },
+  en: { aria: "TEILEKLAR quick access", links: [["/teileklar/shop", "Shop"], ["/teileklar/suche", "Search"], ["/teileklar/fahrzeug-und-passung", "Vehicle"], ["/teileklar/werkstatt", "Workshop"]], cart: "Cart" },
+};
 
 function MobileCommerceNav({ pathname }: { pathname: string }) {
+  const { locale = "de" } = useShopCopy();
+  const copy = mobileCopy[locale];
   const [count, setCount] = useState(0);
   useEffect(() => {
     const changed = (event: Event) => setCount(Number((event as CustomEvent<number>).detail) || 0);
@@ -56,9 +59,9 @@ function MobileCommerceNav({ pathname }: { pathname: string }) {
     api<Cart>("/api/shop/cart").then(cart => setCount(cart.count)).catch(() => undefined);
     return () => window.removeEventListener(CART_EVENT, changed);
   }, []);
-  return <nav className="tk-mobile-commerce-nav" aria-label="TEILEKLAR Schnellzugriff">
-    {MOBILE_LINKS.map(([href, label]) => <SiteLink href={href} key={href} aria-current={pathname === href ? "page" : undefined}>{label}</SiteLink>)}
-    <SiteLink href="/teileklar/warenkorb" className="tk-mobile-cart" aria-current={pathname === "/teileklar/warenkorb" || pathname === "/teileklar/kasse" ? "page" : undefined}>Warenkorb{count > 0 && <span>{count}</span>}</SiteLink>
+  return <nav className="tk-mobile-commerce-nav" aria-label={copy.aria}>
+    {copy.links.map(([href, label]) => <SiteLink href={href} key={href} aria-current={pathname === href ? "page" : undefined}>{label}</SiteLink>)}
+    <SiteLink href="/teileklar/warenkorb" className="tk-mobile-cart" aria-current={pathname === "/teileklar/warenkorb" || pathname === "/teileklar/kasse" ? "page" : undefined}>{copy.cart}{count > 0 && <span>{count}</span>}</SiteLink>
   </nav>;
 }
 
