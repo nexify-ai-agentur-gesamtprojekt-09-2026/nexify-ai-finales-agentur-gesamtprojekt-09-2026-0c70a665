@@ -7,17 +7,17 @@
       "Produktwelt"
     ],
     "introKicker": "Die Factory für Ihr nächstes Kapitel",
-    "introTitle": "Zeigen Sie, was Ihr Unternehmen besonders macht.",
-    "introBody": "Sie kennen Ihr Geschäft. Wir bringen Ihr Angebot in eine klare Form: mit Gestaltung, Texten und einer Website, auf der Interessenten schnell verstehen, warum sie bei Ihnen richtig sind. Die Abläufe dahinter richten wir an Ihrer Arbeit aus.",
+    "introTitle": "Ihr Unternehmen ist kein Baukasten.",
+    "introBody": "Darum beginnt Ihr Auftritt nicht mit einem Template, sondern mit Ihrem Angebot, Ihren Kunden und dem Eindruck, den Sie hinterlassen möchten. Daraus entwickeln wir Sprache, Design und digitale Abläufe als ein zusammenhängendes System – eigenständig, hochwertig und für Ihr Geschäft gemacht.",
     "galleryTitles": [
       "Marke & Web",
       "Systeme & KI",
       "TEILEKLAR"
     ],
     "galleryBodies": [
-      "Zeigen Sie, was Ihr Unternehmen ausmacht – mit einem eigenständigen Auftritt und einer verständlichen Website.",
-      "Verbinden Sie die Systeme, mit denen Sie bereits arbeiten, und vereinfachen Sie wiederkehrende Aufgaben.",
-      "Fahrzeugteile finden, die Passung klären und den Kontakt zur Werkstatt vorbereiten."
+      "Positionierung, Texte und Webdesign aus einer Idee – damit aus Aufmerksamkeit Vertrauen und aus Vertrauen eine passende Anfrage wird.",
+      "Digitale Abläufe, die zu Ihrem Betrieb passen: weniger Übertragen, klare Freigaben und mehr Zeit für die Arbeit, die Menschen braucht.",
+      "Eine eigenständige Produktwelt für Fahrzeugteile, Passungsfragen und den direkten Weg zur passenden Werkstatt."
     ],
     "galleryLinks": [
       "Websitevorhaben entdecken",
@@ -30,71 +30,71 @@
       "NeX neben Fahrzeug, Bauteil und optischer Linse – TEILEKLAR Illustration, kein Produktangebot"
     ],
     "serviceKicker": "Drei Wege, konkret zu beginnen",
-    "serviceTitle": "Was brauchen Sie für Ihren nächsten Schritt?",
-    "serviceBody": "Vielleicht ist Ihre Website aus der Zeit gefallen. Vielleicht kostet ein Ablauf jeden Tag zu viel Zeit. Oder Ihr Angebot erreicht noch nicht die richtigen Menschen. Genau dort setzen wir gemeinsam an.",
+    "serviceTitle": "Was soll bei Ihren Kunden ankommen?",
+    "serviceBody": "Ein schöner Auftritt allein reicht nicht. Er muss Ihr Angebot verständlich machen, Vertrauen schaffen und den nächsten Schritt leicht machen. Deshalb verbinden wir Gestaltung mit Text, Technik und einem klaren Ziel.",
     "offers": [
       [
-        "Website & Markenauftritt",
-        "Damit Interessenten verstehen, warum sie bei Ihnen richtig sind.",
-        "Struktur und verständliche Texte für Ihr Angebot",
-        "Ein eigenes Design, das auch auf dem Smartphone überzeugt",
-        "Ein passender Kontaktweg und eine persönliche Übergabe",
-        "Für Ihren Start oder Relaunch. Seiten, Sprachen und Funktionen vereinbaren wir passend zu Ihrem Vorhaben."
+        "Marke, Text & Website",
+        "Ein Auftritt, der nach Ihrem Unternehmen aussieht – und sich auch so anfühlt.",
+        "Positionierung, Seitenstruktur und menschlich geschriebene Texte",
+        "Individuelle Art Direction und Webdesign statt Theme oder KI-Baukasten",
+        "Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe",
+        "Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart."
       ],
       [
-        "Automatisierung für Ihr Team",
-        "Weniger Daten übertragen. Mehr Zeit für die eigentliche Arbeit.",
-        "Einen wiederkehrenden Ablauf gemeinsam durchgehen",
-        "Ihre vorhandenen Systeme gezielt miteinander verbinden",
-        "Fehlerfälle testen und die Bedienung nachvollziehbar erklären",
-        "Wir beginnen mit einem konkreten Ablauf. Zugriffe, Daten und Freigaben werden vorher geklärt."
+        "Systeme & Automatisierung",
+        "Weniger Routine, mehr Überblick – ohne Ihre Arbeitsweise in ein fremdes System zu pressen.",
+        "Einen konkreten, wiederkehrenden Ablauf vollständig verstehen",
+        "Vorhandene Systeme, Daten und Freigaben gezielt verbinden",
+        "Fehlerfälle prüfen, Verantwortlichkeiten klären und Bedienung dokumentieren",
+        "Wir beginnen bewusst mit einem Ablauf. Erst wenn er zuverlässig funktioniert, planen wir den nächsten."
       ],
       [
-        "Landingpage & Kampagne",
-        "Damit Ihre Werbung und die Seite dahinter zusammenpassen.",
-        "Ihr Angebot und die passende Zielgruppe herausarbeiten",
-        "Landingpage, Texte und vereinbarte Werbemittel gestalten",
-        "Anfrageweg und Auswertung aufeinander abstimmen",
-        "Werbebudget und laufende Betreuung werden getrennt von der Erstellung vereinbart."
+        "Sichtbarkeit & Kampagne",
+        "Gefunden werden, verstanden werden und den richtigen Anlass für eine Anfrage schaffen.",
+        "Angebot, Zielgruppe und Suchintention präzise herausarbeiten",
+        "Landingpage, Inhalte und Werbemittel aus einem visuellen Konzept entwickeln",
+        "SEO, GEO, lokale Signale und Auswertung aufeinander abstimmen",
+        "Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt."
       ]
     ],
     "offerCta": "Ihr Vorhaben mit uns besprechen",
     "processKicker": "So arbeiten wir zusammen",
-    "processTitle": "Sie wissen, wer sich kümmert. Und wie es weitergeht.",
-    "processBody": "Pascal begleitet Ihr Projekt persönlich. Umfang, Budget und Entscheidungen besprechen wir, bevor daraus zusätzliche Arbeit wird.",
+    "processTitle": "Persönlich geführt. Sauber entschieden.",
+    "processBody": "Pascal begleitet Ihr Projekt vom ersten Gespräch bis zur Übergabe. Sie sehen früh, welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes gebraucht wird.",
     "steps": [
       [
-        "Sie erzählen uns, was Sie vorhaben.",
-        "Wir schauen auf Ihr Ziel, Ihre bisherige Lösung und das, was Ihnen wichtig ist."
+        "Wir verstehen, was Sie erreichen möchten.",
+        "Wir sprechen über Ihr Angebot, Ihre Kunden, die bisherige Lösung und den Maßstab, an dem das Ergebnis bestehen muss."
       ],
       [
-        "Sie erhalten ein konkretes Angebot.",
-        "Darin stehen die vereinbarten Leistungen, sinnvolle Optionen und der Kostenrahmen."
+        "Sie erhalten einen klaren Leistungsrahmen.",
+        "Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden verständlich voneinander getrennt."
       ],
       [
-        "Wir setzen um und zeigen Ihnen den Stand.",
-        "Sie sehen, was entsteht, und können an den vereinbarten Stellen Rückmeldung geben."
+        "Konzept, Text und Design entstehen gemeinsam.",
+        "Sie beurteilen kein loses Sammelsurium, sondern ein schlüssiges Gesamtbild an vereinbarten Entscheidungspunkten."
       ],
       [
-        "Sie erhalten Ihr Ergebnis und die Übergabe.",
-        "Wir erklären die Bedienung. Wenn Sie Unterstützung wünschen, vereinbaren wir die passende Betreuung."
+        "Wir prüfen, übergeben und bleiben erreichbar.",
+        "Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und Weiterentwicklung können Sie passend ergänzen."
       ]
     ],
     "budgetKicker": "Budget mit nachvollziehbarer Grundlage",
-    "budgetTitle": "Sie wissen vorher, wofür Sie bezahlen.",
-    "budgetBody": "Ihr Angebot beschreibt, was wir für Sie umsetzen. Betreuung und laufende Nutzung vereinbaren wir separat. So können Sie entscheiden, was Sie zum Start brauchen und was später hinzukommt.",
+    "budgetTitle": "Luxus im Ergebnis. Klarheit im Preis.",
+    "budgetBody": "Hochwertiges Design muss nicht mit undurchsichtigen Agenturpaketen beginnen. Unsere Projektarbeit hat eine feste Kalkulationsbasis. Sie erhalten vor dem Start einen abgegrenzten Umfang und entscheiden bewusst, was jetzt entsteht und was später folgen kann.",
     "costs": [
       [
-        "Die Umsetzung",
-        "Die vereinbarten Seiten, Inhalte, Funktionen oder Abläufe werden als Projekt kalkuliert."
+        "Alles, was wir entwickeln",
+        "Konzept, Text, Design und technische Umsetzung werden im Angebot einem konkreten Ergebnis zugeordnet."
       ],
       [
-        "Die Betreuung",
-        "Pflege und Unterstützung können Sie bei Bedarf zusätzlich mit uns vereinbaren."
+        "Alles, was danach bleibt",
+        "Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart."
       ],
       [
-        "Laufende Kosten",
-        "Hosting, Software, KI-Nutzung und Werbebudget werden im Angebot ausdrücklich zugeordnet."
+        "Alles, was extern anfällt",
+        "Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden offen ausgewiesen statt im Projektpreis versteckt."
       ]
     ],
     "exampleTitle": "Wie eine Kalkulation entsteht",
@@ -113,8 +113,8 @@
     "benchmarkBody": "Veröffentlichte Einstiegspreise dienen nur zur Einordnung. Leistungsumfang, Aktionen und Folgekosten unterscheiden sich; daraus folgt kein eigener NeXify-Preis.",
     "benchmarkDate": "Quellen geprüft am 2. November 2026. Keine repräsentative Marktstatistik.",
     "productsKicker": "Agenturprojekt oder eigener Arbeitsbereich",
-    "productsTitle": "Sie möchten selbst mit KI arbeiten?",
-    "productsBody": "Neben unseren Agenturleistungen gibt es eigene Produkte für unterschiedliche Aufgaben. Informieren Sie sich über den jeweiligen Umfang und den passenden Zugang.",
+    "productsTitle": "Die passende Lösung soll sich nach Ihnen richten.",
+    "productsBody": "Neben individuellen Projekten entwickelt NeXify eigene Produkte für Wissen, Aufgaben, Integrationen und den Fahrzeugbereich. Jeder Bereich hat eine klare Aufgabe – und nur dann einen Platz in Ihrem Projekt, wenn er wirklich passt.",
     "products": [
       [
         "NeX2fly Suite",
@@ -138,8 +138,8 @@
       ]
     ],
     "finishKicker": "Persönlich begleitet",
-    "finishTitle": "Ein gutes Projekt beginnt mit Ihrem Ziel.",
-    "finishBody": "Was möchten Sie verändern? Beschreiben Sie Ihr Vorhaben, Ihre Ausgangslage und was Ihnen wichtig ist. Pascal begleitet die fachliche Ausrichtung und den passenden nächsten Schritt.",
+    "finishTitle": "Lassen Sie uns etwas Eigenständiges schaffen.",
+    "finishBody": "Erzählen Sie uns, was Ihr Unternehmen besonders macht, was heute nicht funktioniert und welchen Eindruck Ihre Kunden künftig mitnehmen sollen. Daraus entwickeln wir einen klaren, realistischen Einstieg.",
     "finishCta": "Projekt beschreiben",
     "finishAlternative": "Leistungsumfang ansehen",
     "finishNote": "Ziel, Umfang und Budget werden vor der Beauftragung abgestimmt.",
