@@ -1,6 +1,6 @@
 {
-  "decision": "USER-THREE-VOICE-HERO-20261102",
-  "kind": "glass_walk_in_with_existing_three_character_elevenlabs_dialogue",
+  "decision": "USER-VIDEO-SHOTPLAN-20261102",
+  "kind": "existing_glass_montage_with_elevenlabs_offscreen_narration",
   "speaking_performance": false,
   "lip_sync": false,
   "original_portrait": "/media/atelier/presenters/pascal-walking-original-20261102.jpg",
@@ -8,18 +8,18 @@
   "cutout": "/media/atelier/presenters/pascal-walking-cutout-20261102.png",
   "cutout_sha256": "b97938ef2540edbe51e5a1398111a39ddb5f6a238c7469f4682a086d96d40e92",
   "film": {
-    "src": "/media/atelier/films/hero-glass-trio-20261102.mp4",
+    "src": "/media/atelier/films/hero-glass-eleven-20261102.mp4",
     "poster": "/media/atelier/films/hero-glass-portrait-20261102.jpg",
-    "width": 1280,
-    "height": 720,
+    "width": 1920,
+    "height": 1080,
     "title": "Pascal, NeX und AIFly ORACLE im Glasatelier",
-    "duration_seconds": 43.458333,
+    "duration_seconds": 17,
     "hasAudio": true,
     "autoplayWithAudio": true,
     "playOnce": true,
-    "sha256": "6dfc21460f0822c9881bede9d330355e2a6f7f1907a0670c70f8555605bb7d1b",
+    "sha256": "0cd162971738aa305978ce172eac16e0fdeb28cc76338c45c1d1c71e36841036",
     "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa",
-    "transcript": "Hallo, ich bin Pascal. Willkommen bei NeXify! Schön, dass du da bist. Wir schauen gemeinsam, was dein Unternehmen wirklich braucht – und wie deine vorhandenen Systeme dabei helfen können. Ich bin NeX. Geht es um eine Website, einen automatisierten Ablauf oder ein Kundenportal? Du kannst hier direkt deinen Einstieg wählen. Und ich bin AI Fly Oracle. Ich helfe dir, dein Vorhaben zu ordnen, offene Fragen sichtbar zu machen und den nächsten Schritt vorzubereiten. Schau dich in Ruhe um. Womit möchtest du anfangen?"
+    "transcript": "Ein guter Auftritt beginnt mit einer klaren Idee. Wir verbinden Marke, Website und digitale Systeme, damit aus Ihrem Vorhaben etwas entsteht, das Menschen erreicht und Ihr Unternehmen voranbringt. NeXify. Gemeinsam machen wir den nächsten Schritt."
   },
   "film_history": [
     {
@@ -52,9 +52,9 @@
     }
   ],
   "voice_provenance": {
-    "provider": "ElevenLabs, existing home-review/welcome-elevenlabs-v4.mp3",
-    "model": "eleven_v4",
-    "voice": "Pascal, NeX and AIFly ORACLE dialogue",
-    "source": "apps/web/lib/home-scenes.ts"
+    "provider": "ElevenLabs via Runway",
+    "model": "eleven_multilingual_v2",
+    "voice": "Lisa",
+    "task_id": "75fea70d-6ca8-49f4-add6-6dfec67c5bb3"
   }
 }

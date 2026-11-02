@@ -197,8 +197,12 @@
 .workspace-shell #page-content{background:var(--gradient-atelier-light)}
 .workspace-shell :is(.identity-title-accent,.content-kicker,.home-kicker){color:var(--color-atelier-champagne)}
 .workspace-shell .content-layout .content-hero.has-domain-art{gap:clamp(28px,4vw,72px)}
+.scene-storyline{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:20px 2px 8px;border-bottom:1px solid var(--color-linie-fein);color:var(--color-atelier-ink)}
+.scene-storyline li{display:grid;gap:8px;align-content:start;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.scene-storyline li>span{font-size:10px;letter-spacing:.12em;color:var(--color-atelier-platinum)}
 .workspace-shell .home-domain-gallery{padding-block:clamp(32px,4vw,72px)}
 .workspace-shell .home-domain-gallery .domain-artwork{height:100%}
+@media(max-width:420px){.scene-storyline{gap:10px;padding-top:16px}.scene-storyline li{font-size:11px}}
 /* Refined assistant: a clear identity and full-width, readable topic selection. */
 .workspace-shell .aifly-panel .panel-heading{padding:var(--space-4) var(--space-5) var(--space-5);align-items:center}
 .workspace-shell .aifly-panel .panel-identity{display:flex;align-items:center;gap:var(--space-4);min-width:0}

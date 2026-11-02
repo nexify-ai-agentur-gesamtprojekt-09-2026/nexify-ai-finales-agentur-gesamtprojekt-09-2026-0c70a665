@@ -21,7 +21,6 @@ const copy={
     "waiting": "Passende Informationen werden geladen …",
     "error": "Die Website-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten. Für die persönliche Projektklärung nutzen Sie bitte die Kontaktseite.",
     "privacy": "NeX Agentic AIFly kann Fehler machen.",
-    "notice": "Wie diese Einordnung entsteht",
     "you": "Sie",
     "assistant": "AIFly ORACLE",
     "next": "Zum passenden Angebot",
@@ -38,7 +37,6 @@ const copy={
     "waiting": "Passende informatie wordt geladen …",
     "error": "Het websiteadvies is nu niet bereikbaar. Uw invoer blijft behouden. Gebruik de contactpagina voor een persoonlijk projectgesprek.",
     "privacy": "NeX Agentic AIFly kan fouten maken.",
-    "notice": "Hoe deze indeling ontstaat",
     "you": "U",
     "assistant": "AIFly ORACLE",
     "next": "Naar het passende aanbod",
@@ -55,7 +53,6 @@ const copy={
     "waiting": "Chargement des informations pertinentes…",
     "error": "Le conseil sur le site est momentanément indisponible. Votre saisie est conservée. Utilisez la page de contact pour un échange personnel sur votre projet.",
     "privacy": "NeX Agentic AIFly peut faire des erreurs.",
-    "notice": "Comment cette orientation est établie",
     "you": "Vous",
     "assistant": "AIFly ORACLE",
     "next": "Vers l’offre adaptée",
@@ -72,7 +69,6 @@ const copy={
     "waiting": "Loading relevant information …",
     "error": "Website guidance is temporarily unavailable. Your input is retained. Please use the contact page for a personal project discussion.",
     "privacy": "NeX Agentic AIFly can make mistakes.",
-    "notice": "How this guidance is made",
     "you": "You",
     "assistant": "AIFly ORACLE",
     "next": "View the relevant offer",
@@ -254,10 +250,10 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
  const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify",text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};
  const [draft,setDraft]=useState(""),[error,setError]=useState(false);
  const [messages,setMessages]=useState<{question:string;answer:StaticGuidance}[]>([]);
- const input=useRef<HTMLTextAreaElement>(null),history=useRef<HTMLDivElement>(null);
+ const input=useRef<HTMLTextAreaElement>(null),latest=useRef<HTMLElement|null>(null);
  useEffect(()=>{onActivityChange?.(false);},[onActivityChange]);
  useEffect(()=>{setMessages([]);setError(false);},[locale]);
- useEffect(()=>{if(messages.length&&history.current)history.current.scrollTop=messages.length===1?0:history.current.scrollHeight;},[messages]);
+ useEffect(()=>{if(messages.length)latest.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages]);
  function submit(event:FormEvent){
   event.preventDefault();const question=draft.trim();if(!question)return;
   try{const answer=staticOrientation({locale,pagePath,question,pages});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
@@ -265,9 +261,9 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
  }
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="local-public-pages">
   <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
-  <div className="orientation-history" ref={history} role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
+  <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
-   <article className="orientation-message role-assistant"><strong>{text.assistant}</strong><p>{message.answer.text}</p>{message.answer.cards.map(card=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span><strong>{card.title}</strong><br/>{card.summary}</span><span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}<details className="orientation-disclosure"><summary>{text.notice}</summary><p>{message.answer.notice}</p></details></article>
+   <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><p>{message.answer.text}</p>{message.answer.cards.map(card=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span><strong>{card.title}</strong><br/>{card.summary}</span><span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</article>
   </div>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);input.current?.focus();}}><span className="orientation-starter-label">{label}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>}
