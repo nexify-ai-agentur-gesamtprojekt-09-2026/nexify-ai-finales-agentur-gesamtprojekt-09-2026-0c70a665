@@ -1,0 +1,421 @@
+{
+  "$description": "NeXify Graphite Atelier · Materialfortschreibung 01.11.2026 nach Nutzerentscheidung: ruhiger Luxus, Metall und gezieltes Glas; Lime-Markenidentität erhalten",
+  "color": {
+    "graphit": {
+      "900": {
+        "$value": "#080A0F",
+        "$type": "color"
+      },
+      "850": {
+        "$value": "#0F131A",
+        "$type": "color",
+        "$description": "Masterplan Oberfläche"
+      },
+      "800": {
+        "$value": "#080A0F",
+        "$type": "color",
+        "$description": "Zusammenhängende Masterplan-Markenfläche"
+      },
+      "700": {
+        "$value": "#141A22",
+        "$type": "color"
+      },
+      "650": {
+        "$value": "#1A2029",
+        "$type": "color",
+        "$description": "Karte unten"
+      },
+      "600": {
+        "$value": "#202733",
+        "$type": "color",
+        "$description": "Karte oben"
+      }
+    },
+    "linie": {
+      "fein": {
+        "$value": "rgba(255,255,255,.08)",
+        "$type": "color"
+      },
+      "mittel": {
+        "$value": "#363A38",
+        "$type": "color"
+      },
+      "stark": {
+        "$value": "#4A4F4C",
+        "$type": "color"
+      }
+    },
+    "text": {
+      "primaer": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "sekundaer": {
+        "$value": "#E3E6E3",
+        "$type": "color"
+      },
+      "tertiaer": {
+        "$value": "#BCC1BD",
+        "$type": "color"
+      },
+      "gedaempft": {
+        "$value": "#9CA29E",
+        "$type": "color",
+        "$description": "5,9:1 auf graphit-800"
+      },
+      "aufLime": {
+        "$value": "#111312",
+        "$type": "color"
+      }
+    },
+    "marke": {
+      "cyan": {
+        "$value": "#38BDF8",
+        "$type": "color"
+      },
+      "lime": {
+        "$value": "#A8C76A",
+        "$type": "color"
+      },
+      "limeHell": {
+        "$value": "#C7DA98",
+        "$type": "color"
+      },
+      "limeDunkel": {
+        "$value": "#8EAD51",
+        "$type": "color"
+      },
+      "limeGruen": {
+        "$value": "#638C45",
+        "$type": "color"
+      }
+    },
+    "semantik": {
+      "erfolg": {
+        "$value": "#6FE3CF",
+        "$type": "color"
+      },
+      "warnung": {
+        "$value": "#FFC24A",
+        "$type": "color"
+      },
+      "fehler": {
+        "$value": "#FF8A7A",
+        "$type": "color"
+      },
+      "licht": {
+        "$value": "#A78BFA",
+        "$type": "color",
+        "$description": "nur Signalfeld und Lichtflecken"
+      }
+    },
+    "identityScene": {
+      "wallTop": {
+        "$value": "#E0E3DC",
+        "$type": "color"
+      },
+      "wallBase": {
+        "$value": "#D8DED4",
+        "$type": "color"
+      },
+      "wallEdge": {
+        "$value": "#C6CEC0",
+        "$type": "color"
+      },
+      "floor": {
+        "$value": "#AEB9A7",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "#26312B",
+        "$type": "color"
+      },
+      "muted": {
+        "$value": "#536445",
+        "$type": "color"
+      },
+      "accent": {
+        "$value": "#7D9D2E",
+        "$type": "color"
+      },
+      "shadow": {
+        "$value": "#273722",
+        "$type": "color"
+      },
+      "card": {
+        "$value": "#EDF0E0",
+        "$type": "color"
+      },
+      "rim": {
+        "$value": "#555F55",
+        "$type": "color"
+      }
+    },
+    "print": {
+      "tinte": {
+        "$value": "#14191C",
+        "$type": "color"
+      },
+      "papier": {
+        "$value": "#F2F3EF",
+        "$type": "color"
+      },
+      "lime": {
+        "$value": "#A8C76A",
+        "$type": "color",
+        "$description": "Lime für Papier und E-Mail (CD-2026); auf Bildschirm immer marke.lime"
+      },
+      "grau": {
+        "$value": "#646769",
+        "$type": "color"
+      }
+    },
+    "atelier": {
+      "canvas": {
+        "$value": "#111212",
+        "$type": "color"
+      },
+      "surface": {
+        "$value": "#191B1C",
+        "$type": "color"
+      },
+      "raised": {
+        "$value": "#242728",
+        "$type": "color"
+      },
+      "platinum": {
+        "$value": "#BDC5C9",
+        "$type": "color"
+      },
+      "champagne": {
+        "$value": "#C4B394",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "#F3F0EA",
+        "$type": "color"
+      },
+      "muted": {
+        "$value": "#B9BBBA",
+        "$type": "color"
+      },
+      "glass": {
+        "$value": "rgba(30,33,34,.91)",
+        "$type": "color"
+      },
+      "glassEdge": {
+        "$value": "rgba(220,212,195,.22)",
+        "$type": "color"
+      },
+      "filmCanvas": {
+        "$value": "#131415",
+        "$type": "color"
+      },
+      "filmControlEdge": {
+        "$value": "rgba(237,227,205,.26)",
+        "$type": "color"
+      },
+      "filmControlFill": {
+        "$value": "rgba(17,18,18,.82)",
+        "$type": "color"
+      },
+      "filmControlHover": {
+        "$value": "rgba(45,45,41,.96)",
+        "$type": "color"
+      },
+      "filmTranscript": {
+        "$value": "#141515",
+        "$type": "color"
+      },
+      "filmError": {
+        "$value": "#161717",
+        "$type": "color"
+      },
+      "artRim": {
+        "$value": "rgba(232,218,185,.12)",
+        "$type": "color"
+      },
+      "artShadow": {
+        "$value": "rgba(0,0,0,.12)",
+        "$type": "color"
+      },
+      "heroTitleShadow": {
+        "$value": "rgba(0,0,0,.45)",
+        "$type": "color"
+      },
+      "heroBody": {
+        "$value": "#e2dfd8",
+        "$type": "color"
+      },
+      "heroBodyShadow": {
+        "$value": "#111",
+        "$type": "color"
+      },
+      "transcriptEdge": {
+        "$value": "rgba(196,179,148,.12)",
+        "$type": "color"
+      },
+      "pageGlow": {
+        "$value": "rgba(189,197,201,.055)",
+        "$type": "color"
+      }
+    }
+  },
+  "font": {
+    "text": {
+      "$value": "Inter, Helvetica, Arial, sans-serif",
+      "$type": "fontFamily"
+    },
+    "display": {
+      "$value": "'Plus Jakarta Sans', Inter, Arial, sans-serif",
+      "$type": "fontFamily"
+    },
+    "mono": {
+      "$value": "'Geist Mono', ui-monospace, monospace",
+      "$type": "fontFamily"
+    }
+  },
+  "layout": {
+    "lightHeight": "min(920px, 100vh)",
+    "contentMax": "1440px",
+    "pagePadding": "clamp(24px, 4.5vw, 80px)",
+    "heroMin": "640px",
+    "controlSize": "48px",
+    "mediaMax": "640px",
+    "filmMax": "1120px",
+    "panelWidth": "clamp(360px, 28vw, 440px)",
+    "homeWideMax": "calc((100% + var(--layout-home-base-max)) / 2)",
+    "homeBaseMax": "1440px",
+    "homeWidePadding": "clamp(12px, 2.25vw, 40px)"
+  },
+  "typeHero": {
+    "size": "clamp(40px, 4.4cqi, 64px)",
+    "compact": "clamp(36px, 4.4cqi, 48px)",
+    "mobile": "clamp(36px, 8.5cqi, 48px)",
+    "leading": "1.08"
+  },
+  "typeBody": {
+    "size": "18px",
+    "leading": "1.65"
+  },
+  "typeSmall": {
+    "size": "13px"
+  },
+  "typeSection": {
+    "size": "clamp(32px, 3.5cqi, 48px)"
+  },
+  "typeCard": {
+    "size": "24px"
+  },
+  "typeDisplay": {
+    "tracking": "-.04em"
+  },
+  "type": {
+    "h1": "80/0.98/-0.04em (mobil 38–52)",
+    "h2": "42–52/1.05/-0.03em",
+    "h3": "20–28/1.15/-0.02em",
+    "body": "17–18/1.55",
+    "small": "13–15/1.5",
+    "kicker": "Mono 12–14"
+  },
+  "space": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "24px",
+    "6": "32px",
+    "7": "48px",
+    "8": "64px",
+    "9": "96px"
+  },
+  "radius": {
+    "klein": "8px",
+    "button": "10px",
+    "chip": "12px",
+    "karte": "16px",
+    "leit": "20px",
+    "pille": "999px",
+    "atelier": "28px",
+    "homeMedia": "36px"
+  },
+  "breakpoint": {
+    "s": "640px",
+    "m": "820px",
+    "l": "1040px",
+    "xl": "1100px"
+  },
+  "container": {
+    "$value": "min(1280px, 100% - 48px)"
+  },
+  "shadow": {
+    "karte": "inset 0 1px 0 rgba(255,255,255,.06), 0 16px 32px -24px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.18)",
+    "kleineKarte": "inset 0 1px 0 rgba(255,255,255,.05), 0 8px 16px -14px rgba(0,0,0,.5)",
+    "well": "inset 0 2px 10px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05)",
+    "buttonPrimaer": "inset 0 1px 0 rgba(255,255,255,.35), 0 6px 18px -10px rgba(215,250,80,.28), 0 1px 0 rgba(0,0,0,.18)",
+    "leuchten": "0 0 16px rgba(215,250,80,.45)",
+    "dialog": "inset 0 1px 0 rgba(255,255,255,.08), 0 50px 100px -30px rgba(0,0,0,.95)",
+    "atelier": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-platinum) 16%, transparent), 0 24px 64px -32px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
+    "atelierPolish": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-platinum) 32%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 12%, transparent), 0 24px 64px -32px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
+    "homeMedia": "inset 0 2px 2px color-mix(in srgb, var(--color-atelier-ink) 26%, transparent), inset 0 -3px 8px color-mix(in srgb, var(--color-atelier-canvas) 80%, transparent), 0 16px 32px -16px color-mix(in srgb, var(--color-atelier-canvas) 70%, transparent)",
+    "atelierDepth": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-ink) 20%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 9%, transparent), 0 6px 12px -6px var(--color-atelier-canvas), 0 32px 64px -28px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)"
+  },
+  "gradient": {
+    "markenlicht": "radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%)",
+    "karte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
+    "kleineKarte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
+    "buttonPrimaer": "#A8C76A",
+    "balken": "linear-gradient(90deg, #789C48, #A8C76A)",
+    "band": "#080A0F",
+    "seitengrund": "#080A0F",
+    "spotlight": "none",
+    "atelierGlass": "linear-gradient(145deg, color-mix(in srgb, var(--color-atelier-platinum) 8%, transparent), transparent 45%), var(--color-atelier-glass)",
+    "atelierLight": "radial-gradient(ellipse at 85% 5%, color-mix(in srgb, var(--color-atelier-champagne) 7%, transparent), transparent 58%)",
+    "atelierStage": "radial-gradient(ellipse 66% 50% at 55% 78%, color-mix(in srgb, var(--color-atelier-champagne) 12%, transparent), transparent 75%)",
+    "homeMediaRim": "linear-gradient(145deg, color-mix(in srgb, var(--color-atelier-platinum) 32%, transparent), transparent 24%, transparent 75%, color-mix(in srgb, var(--color-atelier-champagne) 16%, transparent))",
+    "homeDivider": "linear-gradient(90deg, color-mix(in srgb, var(--color-atelier-platinum) 18%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 10%, transparent) 55%, transparent)",
+    "atelierHeading": "linear-gradient(115deg, var(--color-atelier-ink) 8%, var(--color-atelier-champagne) 62%, var(--color-atelier-platinum) 100%)",
+    "atelierAmbient": "radial-gradient(ellipse 60% 24% at 85% 5%, color-mix(in srgb, var(--color-atelier-champagne) 19%, transparent), transparent 78%), radial-gradient(ellipse 40% 20% at 0% 44%, color-mix(in srgb, var(--color-atelier-platinum) 8%, transparent), transparent 85%), radial-gradient(ellipse 50% 18% at 95% 78%, color-mix(in srgb, var(--color-atelier-champagne) 11%, transparent), transparent 85%)",
+    "atelierReflection": "linear-gradient(135deg, color-mix(in srgb, var(--color-atelier-ink) 48%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 22%, transparent) 24%, transparent 48%, transparent 78%, color-mix(in srgb, var(--color-atelier-champagne) 28%, transparent))"
+  },
+  "motion": {
+    "feedback": "180ms ease",
+    "einblenden": "0.3–0.7s ease",
+    "balken": "1.0–1.6s cubic-bezier(.2,.7,.2,1)",
+    "laufband": "46s linear",
+    "schimmer": "7s ease-in-out",
+    "regel": "Bewegung = Zustand; prefers-reduced-motion schaltet alles ab",
+    "lightEntrance": "3.6s ease-out"
+  },
+  "focus": {
+    "ring": "2px solid #A8C76A",
+    "offset": "2px",
+    "logo": "Unterstreichung Lime, 6px Abstand"
+  },
+  "material": {
+    "blur": "20px",
+    "veil": "rgba(255,255,255,.10)",
+    "highlight": "rgba(255,255,255,.15)",
+    "border": "1px",
+    "shadow": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.18), 8px 8px 24px rgba(0,0,0,.22), 16px 16px 48px rgba(0,0,0,.14)",
+    "shadowRaised": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.16), 4px 4px 12px rgba(0,0,0,.24), 8px 8px 24px rgba(0,0,0,.16)",
+    "sectionDivider": "linear-gradient(90deg, transparent, rgba(255,255,255,.025) 35%, rgba(192,238,56,.035) 55%, transparent)",
+    "sectionGlow": "radial-gradient(ellipse 45% 100% at 45% 0%, rgba(192,238,56,.012), transparent 100%)",
+    "filmCurvature": "4% / 2%",
+    "filmTurn": "-.5deg",
+    "filmPerspective": "1800px"
+  },
+  "control": {
+    "activeOpacity": ".9",
+    "disabledOpacity": ".45",
+    "focusWidth": "2px",
+    "loadingDuration": "1s"
+  },
+  "target": {
+    "min": "48px"
+  },
+  "typeHome": {
+    "detail": "clamp(14px, .7cqi, 16px)",
+    "reading": "clamp(15px, .8cqi, 18px)"
+  }
+}

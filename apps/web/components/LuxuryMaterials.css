@@ -1,0 +1,326 @@
+/* Graphite Atelier: canonical material tokens, shared by both web renderers.
+   Glass belongs to controls; reading surfaces remain opaque. */
+.workspace-shell {
+ --color-canvas:var(--color-atelier-canvas);
+ --color-background-canvas:var(--color-atelier-canvas);
+ --color-background-surface:var(--color-atelier-surface);
+ --color-background-elevated:var(--color-atelier-raised);
+ --color-graphit-900:var(--color-atelier-canvas);
+ --color-graphit-850:var(--color-atelier-surface);
+ --color-graphit-800:var(--color-atelier-canvas);
+ --color-graphit-700:var(--color-atelier-raised);
+ --color-graphit-650:var(--color-atelier-surface);
+ --color-text-primaer:var(--color-atelier-ink);
+ --color-text-sekundaer:var(--color-atelier-platinum);
+ --color-text-tertiaer:var(--color-atelier-muted);
+ --color-text-gedaempft:var(--color-atelier-muted);
+ --gradient-seitengrund:var(--color-atelier-canvas);
+ --gradient-band:var(--color-atelier-canvas);
+ --gradient-markenlicht:var(--gradient-atelier-light);
+ --color-linie-fein:color-mix(in srgb,var(--color-atelier-platinum) 12%,transparent);
+ --color-linie-mittel:color-mix(in srgb,var(--color-atelier-platinum) 18%,transparent);
+ --color-linie-stark:color-mix(in srgb,var(--color-atelier-platinum) 34%,transparent);
+ --material-section-glow:var(--gradient-atelier-light);
+ --material-section-divider:none;
+ background:var(--color-atelier-canvas);
+ transition:none;
+}
+.workspace-shell .website { background:var(--gradient-atelier-light),var(--color-atelier-canvas); }
+.workspace-shell .site-header { margin-inline:var(--space-5); padding-inline:var(--space-5); border-bottom-color:var(--color-linie-fein); background:transparent; min-height:104px; }
+.workspace-shell .header-cta { border-radius:var(--radius-pille); background:transparent; color:var(--color-atelier-ink); border:1px solid var(--color-atelier-glass-edge); box-shadow:var(--shadow-kleine-karte); }
+.workspace-shell .header-cta:hover { background:var(--color-atelier-raised); border-color:var(--color-atelier-champagne); }
+.workspace-shell .header-cta>span { background:var(--color-marke-lime); }
+.workspace-shell :is(.eyebrow,.content-kicker,.home-kicker,.home-station-number,.home-number,.home-process-number,.content-related-context) { font-family:var(--font-text); letter-spacing:.035em; text-transform:none; color:var(--color-atelier-champagne); }
+.workspace-shell :is(h1,h2,h3) { font-weight:500; }
+.workspace-shell :is(.public-page.content-layout,.home-rebuild,.home-journey) { background:transparent; }
+.workspace-shell .content-layout .content-hero { background:transparent; border-bottom-color:var(--color-linie-fein); gap:var(--space-7); }
+.workspace-shell .content-layout .content-breadcrumb { border-bottom:0; padding-block:var(--space-4) 0; }
+.workspace-shell .content-layout .content-context { border-color:var(--color-linie-fein); }
+.workspace-shell .content-layout :is(.content-related,.content-next) { background:transparent; border-color:var(--color-linie-fein); }
+.workspace-shell .content-layout .content-section { border-top-color:var(--color-linie-fein); }
+.workspace-shell :is(.identity-hero::before,.home-chapter::after) { background:var(--gradient-atelier-light); }
+.workspace-shell .trio-light { opacity:.12; }
+.workspace-shell .trio-ribbon { animation:none; }
+.workspace-shell .trio-floor { background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--color-atelier-champagne) 4%,transparent)); }
+.workspace-shell .home-journey .home-station { background:var(--color-atelier-surface); backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:none; border-color:var(--color-linie-fein); }
+.workspace-shell .home-stations::before { display:none; }
+.workspace-shell .home-choice-link { border-color:var(--color-linie-fein); padding-block:var(--space-6); }
+.workspace-shell .home-process-steps li { border-color:var(--color-linie-fein); }
+.workspace-shell .auth-fallback.editorial-note { width:calc(100% - var(--layout-page-padding) * 2); max-width:960px; margin:var(--space-6) auto; padding:var(--space-6); display:flex; gap:var(--space-5); align-items:flex-start; background:var(--color-atelier-surface); border:1px solid var(--color-linie-fein); border-radius:var(--radius-atelier); box-shadow:var(--shadow-atelier); }
+.auth-emblem { flex:0 0 var(--target-min); display:grid; place-items:center; min-height:var(--target-min); border:1px solid var(--color-linie-mittel); border-radius:var(--radius-karte); color:var(--color-atelier-champagne); }
+.auth-emblem svg { width:var(--space-5); height:var(--space-5); }
+.auth-panel-copy { display:grid; gap:var(--space-3); min-width:0; }
+.auth-panel-copy strong { font-size:18px; line-height:1.5; font-weight:500; }
+.workspace-shell .auth-panel-copy p { margin:0; max-width:62ch; line-height:1.7; color:var(--color-text-tertiaer); }
+.auth-panel-copy a { display:inline-flex; align-items:center; min-height:var(--target-min); color:var(--color-marke-lime); text-decoration:underline; text-underline-offset:var(--space-1); }
+/* A bounded, floating assistant replaces the full-height control-room rail. */
+.workspace-shell.is-open { grid-template-columns:minmax(0,1fr) var(--layout-panel-width); column-gap:var(--space-5); }
+.workspace-shell .aifly-panel { position:sticky; top:var(--space-5); align-self:start; margin:var(--space-5) var(--space-5) var(--space-5) 0; width:auto; height:calc(var(--chat-viewport-height) - var(--space-7)); max-height:calc(var(--chat-viewport-height) - var(--space-7)); padding:var(--space-3) 0; gap:0; background:var(--gradient-atelier-glass); border:1px solid var(--color-atelier-glass-edge); border-radius:var(--radius-atelier); box-shadow:var(--shadow-atelier); backdrop-filter:blur(var(--material-blur)); -webkit-backdrop-filter:blur(var(--material-blur)); }
+.workspace-shell .aifly-panel .panel-heading { padding:var(--space-2) var(--space-5) var(--space-4); }
+.workspace-shell .aifly-panel .panel-brandline { font-family:var(--font-display); font-size:16px; color:var(--color-text-primaer); white-space:normal; }
+.workspace-shell .aifly-panel .panel-brandline-sep { color:var(--color-atelier-champagne); }
+.workspace-shell .aifly-panel .panel-status { font-size:12px; line-height:1.6; margin-top:var(--space-2); color:var(--color-text-tertiaer); }
+.workspace-shell .aifly-panel .panel-minimize { flex:0 0 var(--target-min); width:var(--target-min); height:var(--target-min); min-height:var(--target-min); border-radius:var(--radius-pille); border:1px solid var(--color-linie-mittel); background:transparent; }
+.workspace-shell .aifly-panel :is(.conversation,.sdk-orientation-view,.composer-area,.public-orientation) { background:transparent; box-shadow:none; }
+.workspace-shell .aifly-panel .conversation { margin:0; border-radius:0; }
+.workspace-shell .aifly-panel .public-orientation { padding:var(--space-5); gap:var(--space-6); }
+.workspace-shell .aifly-panel .orientation-intro { gap:var(--space-4); }
+.workspace-shell .aifly-panel .orientation-intro h3 { font-size:26px; line-height:1.3; font-weight:500; }
+.workspace-shell .aifly-panel .orientation-intro p { font-size:14px; line-height:1.8; }
+.workspace-shell .aifly-panel .orientation-starter { font-family:var(--font-text); border-radius:var(--radius-pille); background:transparent; padding:var(--space-3) var(--space-4); color:var(--color-text-sekundaer); }
+.workspace-shell .aifly-panel .orientation-composer textarea { background:var(--color-atelier-canvas); border:1px solid var(--color-linie-mittel); border-radius:var(--radius-leit); padding:var(--space-4); }
+.workspace-shell .aifly-panel .orientation-composer label { font-size:13px; }
+.workspace-shell .aifly-panel .chat-return { padding:var(--space-3) var(--space-5) 0; }
+.workspace-shell .aifly-panel .chat-return button { width:100%; font-size:12px; color:var(--color-text-tertiaer); }
+.workspace-shell .aifly-panel :focus-visible { outline:2px solid var(--color-marke-lime); outline-offset:2px; }
+.workspace-shell .reopen-chat.nexify-control[data-variant] { display:inline-flex; background:var(--gradient-atelier-glass); border:1px solid var(--color-atelier-glass-edge); border-radius:var(--radius-pille); box-shadow:var(--shadow-atelier); backdrop-filter:blur(var(--material-blur)); -webkit-backdrop-filter:blur(var(--material-blur)); padding:var(--space-3) var(--space-5); }
+.workspace-shell .header-actions .compact { display:none; }
+.workspace-shell .chat-resize-handle { left:calc(var(--space-2) * -1); }
+.workspace-shell .site-footer { background:transparent; border-color:var(--color-linie-fein); }
+/* Domain imagery: editorial concepts, never mock product UI or purchasable SKU photography. */
+.domain-artwork { margin:0; min-width:0; }
+.domain-artwork img { display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; border-radius:var(--radius-leit); }
+.domain-artwork figcaption { padding-top:var(--space-3); color:var(--color-text-tertiaer); font-size:12px; line-height:1.6; }
+.workspace-shell .content-layout .content-hero.has-domain-art { grid-template-columns:minmax(0,1fr) minmax(260px,1fr); align-items:center; }
+.domain-artwork-small figcaption { display:none; }
+.home-domain-gallery { padding:var(--space-7) var(--layout-page-padding); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-5); }
+.home-domain-gallery a { display:grid; align-content:start; gap:var(--space-4); min-width:0; }
+.home-domain-gallery strong { display:flex; justify-content:space-between; align-items:center; min-height:var(--target-min); font-weight:500; font-size:18px; }
+.home-domain-gallery strong span { color:var(--color-atelier-champagne); }
+@media(max-width:1100px) { .workspace-shell .content-layout .content-hero.has-domain-art { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:820px) {
+ .workspace-shell.is-open { grid-template-columns:minmax(0,1fr); column-gap:0; }
+ .workspace-shell .site-header { margin-inline:0; padding-inline:var(--space-5); min-height:88px; }
+ .workspace-shell .auth-fallback.editorial-note { width:calc(100% - var(--space-7)); padding:var(--space-5); gap:var(--space-4); margin-block:var(--space-5); }
+ .workspace-shell .aifly-panel { position:fixed; inset:var(--chat-viewport-top) 0 auto auto; margin:0; width:100%; max-width:100%; height:var(--chat-viewport-height); max-height:var(--chat-viewport-height); border-radius:0; padding-top:calc(var(--space-3) + env(safe-area-inset-top)); padding-bottom:env(safe-area-inset-bottom); }
+ .workspace-shell .home-domain-gallery { grid-template-columns:minmax(0,1fr); gap:var(--space-6); padding-block:var(--space-6); }
+}
+@media(max-width:420px) { .workspace-shell .auth-fallback.editorial-note { flex-direction:column; } }
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more) {
+ .workspace-shell :is(.aifly-panel,.reopen-chat.nexify-control[data-variant]) { background:var(--color-atelier-surface); backdrop-filter:none; -webkit-backdrop-filter:none; }
+ .workspace-shell :is(.aifly-panel,.auth-fallback.editorial-note) { border-color:var(--color-atelier-platinum); }
+}
+@media(forced-colors:active) { .workspace-shell :is(.aifly-panel,.reopen-chat,.auth-fallback) { border:1px solid CanvasText; box-shadow:none; } }
+@media(prefers-reduced-motion:reduce) { .workspace-shell .trio-light { display:none; } }
+
+.workspace-shell .content-layout .content-kicker,.workspace-shell .content-layout .content-related-context,.workspace-shell .aifly-panel .eyebrow { font-family:var(--font-text); text-transform:none; letter-spacing:.025em; color:var(--color-atelier-champagne); }
+.workspace-shell .aifly-panel .orientation-composer button:disabled { background:var(--color-atelier-raised); color:var(--color-text-tertiaer); border:1px solid var(--color-linie-mittel); opacity:1; }
+
+.workspace-shell .content-layout.layout-service .content-hero,.workspace-shell .content-layout.layout-product .content-hero,.workspace-shell .content-layout.layout-commerce .content-hero { background:transparent; border-bottom:1px solid var(--color-linie-fein); }
+.workspace-shell .content-layout .content-context-below { padding:var(--space-5) var(--content-gutter); }
+.workspace-shell .content-layout .content-context-below .content-context { border-left:0; padding-left:0; }
+.workspace-shell .content-layout .content-context-below .content-context nav { display:flex; flex-wrap:wrap; gap:var(--space-5); }
+.workspace-shell .content-layout .content-context-below .content-context nav a { border:0; gap:var(--space-3); }
+
+.workspace-shell .identity-scene { grid-template-columns:minmax(0,1fr) minmax(0,1fr); padding-block:var(--space-7); min-height:0; align-items:center; }
+.workspace-shell .identity-copy h1 { font-size:clamp(38px,4.4cqi,72px); max-width:17ch; font-weight:500; line-height:1.13; }
+.workspace-shell .identity-title-accent { color:var(--color-atelier-champagne); }
+@container identity-hero (max-width:820px) { .workspace-shell .identity-scene { grid-template-columns:minmax(0,1fr); padding-block:var(--space-6); } }
+
+/* Refinement requested by Pascal: same rounded assistant, continuous inner rim;
+   a large, unchanged trio replaces the small host signature. */
+.workspace-shell .site-header { position:relative; border:0; }
+.workspace-shell .site-header::after { content:''; position:absolute; inset:auto var(--space-5) 0; height:1px; pointer-events:none; background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--color-atelier-platinum) 18%,transparent) 25%,color-mix(in srgb,var(--color-atelier-champagne) 26%,transparent) 70%,transparent); }
+.workspace-shell .aifly-panel { box-shadow:var(--shadow-atelier-polish); }
+.workspace-shell .aifly-panel .panel-heading { border-radius:calc(var(--radius-atelier) - var(--space-3)) calc(var(--radius-atelier) - var(--space-3)) 0 0; background:transparent; }
+.workspace-shell .identity-hero { background:transparent; }
+.workspace-shell .identity-hero::before { background:none; }
+.workspace-shell .identity-scene { grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr); gap:var(--space-5); padding-block:var(--space-7); }
+.workspace-shell .identity-media { position:relative; isolation:isolate; width:100%; }
+.workspace-shell .identity-media::before { content:''; position:absolute; inset:15% -4% -12%; z-index:-1; pointer-events:none; background:var(--gradient-atelier-stage); }
+@container identity-hero (max-width:1000px) { .workspace-shell .identity-scene { grid-template-columns:minmax(0,1fr); } .workspace-shell .identity-copy { max-width:64ch; } .workspace-shell .identity-copy h1 { max-width:22ch; } .workspace-shell .identity-media { max-width:900px; justify-self:center; } }
+@media(max-width:820px) { .workspace-shell .aifly-panel .panel-heading { border-radius:0; } .workspace-shell .identity-media { max-width:none; } }
+
+/* Whole-team image finish: one warm canvas, original transparent characters,
+   no photographed stage inside a second frame. Shared stills keep their own material detail. */
+.workspace-shell .identity-cast { position:relative; isolation:isolate; aspect-ratio:6/5; width:100%; max-width:820px; margin:0 auto; }
+.workspace-shell .identity-cast::after { content:''; position:absolute; left:8%; right:8%; bottom:3%; height:6%; z-index:0; pointer-events:none; background:radial-gradient(ellipse,color-mix(in srgb,var(--color-atelier-canvas) 75%,transparent),transparent 72%); }
+.workspace-shell .identity-cast img { position:absolute; display:block; object-fit:contain; object-position:center bottom; }
+.workspace-shell .identity-cast .cast-pascal { width:55%; height:100%; left:50%; bottom:0; transform:translateX(-50%); z-index:2; }
+.workspace-shell .identity-cast .cast-nex { width:42%; height:56%; left:0; bottom:0; z-index:3; }
+.workspace-shell .identity-cast .cast-oracle { width:26%; max-width:194px; height:34%; right:0; top:25%; z-index:1; }
+.workspace-shell :is(.identity-cast .cast-nex,.identity-cast .cast-oracle,.oracle-companion img,.presenter-scene.scene-nex img,.presenter-scene.scene-aifly img,.scene-figure-nex,.scene-figure-oracle){filter:saturate(.68) hue-rotate(8deg) brightness(.93)}
+.workspace-shell .domain-artwork img { border:0; box-shadow:none; border-radius:var(--radius-karte); }
+.workspace-shell .home-choice-layout { display:block; }
+.workspace-shell .home-choice-links { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-5); }
+.workspace-shell .home-choice-link { min-width:0; grid-template-columns:var(--space-5) minmax(0,1fr) var(--space-4); gap:var(--space-3); align-items:start; }
+.workspace-shell .home-choice-link strong { font-size:22px; }
+.workspace-shell .home-journey .home-stations { display:grid; grid-template-columns:minmax(0,1fr); gap:0; margin:0; }
+.workspace-shell .home-journey .home-station { display:grid; grid-template-columns:var(--space-5) 80px minmax(0,1fr); align-items:start; gap:var(--space-4); padding:var(--space-5) 0; border:0; border-bottom:1px solid var(--color-linie-fein); border-radius:0; box-shadow:none; background:transparent; }
+.workspace-shell .home-journey .home-station small { display:block; margin:0; overflow:visible; -webkit-line-clamp:unset; line-clamp:unset; }
+.workspace-shell .home-journey .home-station strong { font-size:17px; }
+.workspace-shell .presenter-scene { position:relative; padding:var(--space-4); border:0; border-radius:0; background:transparent; box-shadow:none; }
+.workspace-shell .presenter-scene img { width:auto; max-width:100%; height:280px; object-fit:contain; }
+.workspace-shell .presenter-scene.scene-aifly img { height:auto; width:180px; max-width:100%; }
+.workspace-shell .presenter-scene figcaption { display:none; }
+.workspace-shell .editorial-speaker { font-family:var(--font-text); letter-spacing:0; color:var(--color-atelier-champagne); }
+.workspace-shell .editorial-module.has-image { grid-template-columns:minmax(140px,.4fr) minmax(0,1fr); }
+.workspace-shell .editorial-module.has-image.media-on-right { grid-template-columns:minmax(0,1fr) minmax(140px,.4fr); }
+@container (max-width:900px) { .workspace-shell .content-layout .content-hero.has-domain-art { grid-template-columns:minmax(0,1fr); } }
+@container home (max-width:750px) { .workspace-shell .home-choice-links { grid-template-columns:minmax(0,1fr); gap:0; } }
+@container identity-hero (max-width:600px) { .workspace-shell .identity-cast { aspect-ratio:5/6; } .workspace-shell .identity-cast .cast-pascal { width:66%; height:100%; left:47%; } .workspace-shell .identity-cast .cast-nex { width:46%; height:46%; } .workspace-shell .identity-cast .cast-oracle { width:29%; height:30%; top:25%; } }
+@media(max-width:640px) { .workspace-shell .editorial-module.has-image,.workspace-shell .editorial-module.has-image.media-on-right { grid-template-columns:minmax(0,1fr); } .workspace-shell .editorial-module.has-image .editorial-module-media { order:2; } .workspace-shell .presenter-scene img { height:220px; } .workspace-shell .presenter-scene.scene-aifly img { height:auto; width:150px; } }
+
+/* Motion campaign: generous film frames with a shared light temperature. */
+.workspace-shell .home-domain-gallery{gap:clamp(20px,2vw,36px);padding-top:var(--space-6)}
+.home-domain-gallery>div{min-width:0;display:grid;align-content:start;gap:12px}
+.workspace-shell .domain-artwork .atelier-film video{aspect-ratio:3/2;object-fit:contain}
+.workspace-shell .domain-artwork .atelier-film{box-shadow:0 1px 0 var(--color-atelier-art-rim),0 24px 60px var(--color-atelier-art-shadow)}
+/* Editorial TV: text left, complete scene right; no bezel or nested frame. */
+.workspace-shell .identity-hero-cinema .identity-scene{position:relative;display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:var(--space-6);padding:var(--space-7) var(--layout-page-padding);min-height:0;max-width:var(--layout-content-max);margin-inline:auto;box-sizing:border-box}
+.workspace-shell .identity-hero-cinema .identity-media{max-width:var(--layout-film-max);margin-inline:auto;border:0;border-radius:var(--radius-atelier);box-shadow:var(--shadow-atelier-polish)}
+.workspace-shell .identity-hero-cinema .identity-media::before{display:none}
+.workspace-shell .identity-hero-cinema .identity-copy{position:relative;inset:auto;transform:none;width:100%;max-width:52ch;margin:0;display:flex;flex-direction:column;gap:var(--space-5);align-items:flex-start}
+.workspace-shell .identity-hero-cinema .identity-copy h1{font-size:clamp(34px,3.2cqi,58px);max-width:18ch;line-height:var(--type-hero-leading);text-shadow:none}
+.workspace-shell .identity-hero-cinema .identity-body{font-size:var(--type-body-size);max-width:52ch;color:var(--color-atelier-platinum);text-shadow:none}
+.workspace-shell .identity-hero-cinema .identity-links{font-size:clamp(14px,.9cqi,18px);gap:var(--space-5)}
+.workspace-shell .identity-hero-cinema .atelier-film-hero{padding:0;border:0;border-radius:inherit;background:var(--color-atelier-film-canvas);overflow:hidden}
+.workspace-shell .identity-hero-cinema .atelier-film-picture{border-radius:inherit}
+.workspace-shell .identity-hero-cinema .atelier-film-picture::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:linear-gradient(125deg,color-mix(in srgb,var(--color-atelier-champagne) 6%,transparent),transparent 40%);box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge);animation:atelier-light-entrance var(--motion-light-entrance) both}
+.workspace-shell .identity-hero-cinema .atelier-film-hero video{aspect-ratio:16/9;object-fit:contain;object-position:center}
+.identity-hero-cinema .atelier-film-transcript{position:relative;padding:var(--space-3) var(--space-4);background:transparent}
+.identity-hero-cinema .atelier-film-transcript summary{min-height:var(--target-min);padding-block:var(--space-3);box-sizing:border-box}
+.identity-hero-cinema .atelier-film-transcript p{max-width:70ch}
+.identity-hero-cinema .atelier-film-hero .atelier-film-controls{bottom:var(--space-4);right:var(--space-4);left:auto}
+@keyframes atelier-light-entrance{from{opacity:0;transform:translateX(-3%)}to{opacity:1;transform:translateX(0)}}
+@container identity-hero (max-width:900px){
+ .workspace-shell .identity-hero-cinema .identity-scene{grid-template-columns:minmax(0,1fr)}
+ .workspace-shell .identity-hero-cinema .identity-copy{max-width:64ch}
+ .workspace-shell .identity-hero-cinema .identity-copy h1{max-width:22ch}
+}
+@container identity-hero (max-width:600px){
+ .workspace-shell .identity-hero-cinema .identity-scene{padding-block:var(--space-6);gap:var(--space-5)}
+ .workspace-shell .identity-hero-cinema .identity-copy h1{font-size:var(--type-hero-mobile)}
+ .identity-hero-cinema .atelier-film-hero .atelier-film-controls{position:static;inset:auto;justify-content:flex-end;padding:var(--space-3);background:var(--color-atelier-canvas)}
+}
+@media(prefers-reduced-motion:reduce){.workspace-shell .identity-hero-cinema .atelier-film-picture::after{animation:none;transform:none}}
+/* Warm light unifies glass scenes, editorial surfaces and the assistant. */
+.workspace-shell #page-content{background:var(--gradient-atelier-light)}
+.workspace-shell :is(.identity-title-accent,.content-kicker,.home-kicker){color:var(--color-atelier-champagne)}
+.workspace-shell .content-layout .content-hero.has-domain-art{gap:clamp(28px,4vw,72px)}
+.scene-storyline{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:20px 2px 8px;border-bottom:1px solid var(--color-linie-fein);color:var(--color-atelier-ink)}
+.scene-storyline li{display:grid;gap:8px;align-content:start;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.scene-storyline li>span{font-size:10px;letter-spacing:.12em;color:var(--color-atelier-platinum)}
+.workspace-shell .home-domain-gallery{padding-block:clamp(32px,4vw,72px)}
+.workspace-shell .home-domain-gallery .domain-artwork{height:100%}
+@media(max-width:420px){.scene-storyline{gap:10px;padding-top:16px}.scene-storyline li{font-size:11px}}
+/* Refined assistant: a clear identity and full-width, readable topic selection. */
+.workspace-shell .aifly-panel .panel-heading{padding:var(--space-4) var(--space-5) var(--space-5);align-items:center}
+.workspace-shell .aifly-panel .panel-identity{display:flex;align-items:center;gap:var(--space-4);min-width:0}
+.workspace-shell .aifly-panel .panel-identity .oracle-companion{flex:none;width:var(--target-min);height:var(--target-min)}
+.workspace-shell .aifly-panel .panel-brandline{font:500 18px/1.35 var(--font-display);letter-spacing:var(--type-display-tracking);margin:0}
+.workspace-shell .aifly-panel .panel-identity-subtitle{font:400 var(--type-small-size)/1.5 var(--font-text);color:var(--color-text-tertiaer);margin:var(--space-1) 0 0}
+.workspace-shell .aifly-panel .orientation-intro{gap:var(--space-4)}
+.workspace-shell .aifly-panel .orientation-intro .state-label{font:400 var(--type-small-size)/1.5 var(--font-text);color:var(--color-atelier-champagne);text-transform:none;letter-spacing:0}
+.workspace-shell .aifly-panel .orientation-intro h3{font-size:28px;line-height:1.2;letter-spacing:var(--type-display-tracking)}
+.workspace-shell .aifly-panel .orientation-intro p{font-size:15px;line-height:1.65;hyphens:none}
+.workspace-shell .aifly-panel .orientation-starters{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-3);margin:0}
+.workspace-shell .aifly-panel .orientation-starter{display:grid;grid-template-columns:30px minmax(0,1fr) 18px;justify-content:stretch;gap:var(--space-3);text-align:left;min-height:76px;padding:var(--space-3);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:linear-gradient(145deg,color-mix(in srgb,var(--color-atelier-raised) 94%,white),var(--color-atelier-raised));font:500 15px/1.5 var(--font-text);color:var(--color-text-primaer);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.workspace-shell .aifly-panel .orientation-starter svg{flex:none;color:var(--color-atelier-champagne)}
+.workspace-shell .aifly-panel .orientation-starter:hover{background:var(--color-atelier-surface)}
+.workspace-shell .aifly-panel .public-orientation{gap:var(--space-5)}
+.workspace-shell .aifly-panel .orientation-history:empty{display:none}
+.workspace-shell .aifly-panel .connection-note{font:400 12px/1.6 var(--font-text);color:var(--color-text-tertiaer);text-align:center;margin:0}
+.workspace-shell .site-header::after{display:none}
+.workspace-shell .aifly-panel .orientation-message{border:0}
+
+/* The header shares the page canvas; light is reserved for navigation controls. */
+.workspace-shell .website .site-header{margin-inline:0;background:transparent;border-radius:0;box-shadow:none;padding-inline:var(--layout-page-padding)}
+.workspace-shell .site-header .header-cta{background:var(--gradient-atelier-glass);box-shadow:var(--shadow-atelier);border:0}
+.workspace-shell .site-header .main-navigation{padding-inline:var(--space-5);border-radius:var(--radius-pille);background:var(--gradient-atelier-glass);box-shadow:var(--shadow-atelier);gap:var(--space-5)}
+@container website (min-width:1700px){.workspace-shell .website .site-header{padding-inline:max(var(--layout-home-wide-padding),calc((100% - var(--layout-home-wide-max))/2 + var(--layout-home-wide-padding)))}}
+
+.workspace-shell .identity-copy h1 span { display:block; }
+.workspace-shell .identity-subtitle { max-width:30ch; color:var(--color-text-primaer); font-size:clamp(18px,1.15cqi,24px); font-weight:500; line-height:1.35; letter-spacing:-.02em; }
+/* One shared heading treatment across the website and its companion panel. */
+.workspace-shell :is(h1,h2,h3,h4){font-family:var(--font-display);font-weight:500;text-wrap:balance}
+@supports (background-clip:text){
+ .workspace-shell :is(h1,h2,h3,h4){background-image:var(--gradient-atelier-heading);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+ .workspace-shell :is(h1,h2,h3,h4) svg{color:var(--color-atelier-champagne)}
+}
+@media(forced-colors:active),(prefers-contrast:more){.workspace-shell :is(h1,h2,h3,h4){background:none;-webkit-text-fill-color:currentColor}}
+/* Shared illumination: warm light from the upper right, grounded dark shadows. */
+.workspace-shell .website{background:var(--gradient-atelier-ambient),var(--color-atelier-canvas)}
+.workspace-shell .home-concept .identity-hero{background:transparent}
+.workspace-shell .website .site-header .main-navigation,.workspace-shell .website .site-header .header-cta{box-shadow:var(--shadow-atelier-depth)}
+.workspace-shell .home-concept :is(.hc-art,.hc-product,.hc-service-detail,.hc-budget .hc-costs){box-shadow:var(--shadow-atelier-depth)}
+.workspace-shell .home-concept .identity-hero-cinema .atelier-film-picture{box-shadow:var(--shadow-atelier-depth)}
+.workspace-shell .home-concept .identity-hero-cinema .atelier-film-picture::after{background:var(--gradient-atelier-reflection)}
+.home-concept .hc-art::after{background:var(--gradient-atelier-reflection);padding:1px;mask:linear-gradient(var(--color-atelier-ink) 0 0) content-box,linear-gradient(var(--color-atelier-ink) 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(var(--color-atelier-ink) 0 0) content-box,linear-gradient(var(--color-atelier-ink) 0 0);-webkit-mask-composite:xor;box-shadow:none}
+.workspace-shell .site-footer.footer-refined{background:var(--gradient-atelier-stage),var(--color-atelier-canvas)}
+@media(prefers-contrast:more),(forced-colors:active){.workspace-shell .website{background:var(--color-atelier-canvas)}.home-concept .hc-art::after{display:none}}
+/* The composer keeps its position while replies scroll inside the panel. */
+.workspace-shell .aifly-panel{overflow:hidden}
+.workspace-shell .aifly-panel .conversation{flex:1 1 0;min-height:0;overflow-y:auto}
+.workspace-shell .aifly-panel .composer-area{flex:0 0 auto;max-height:45%;overflow-y:auto;overscroll-behavior:contain}
+.workspace-shell .aifly-panel .panel-footer-row{flex:0 0 auto}
+@media(max-width:820px){.workspace-shell .aifly-panel{position:fixed;height:var(--chat-viewport-height);max-height:var(--chat-viewport-height)}}
+.workspace-shell .aifly-panel .public-orientation{overflow-y:auto;min-height:0;scrollbar-width:thin}
+.workspace-shell .aifly-panel .orientation-intro,.workspace-shell .aifly-panel .orientation-starters,.workspace-shell .aifly-panel .orientation-journey,.workspace-shell .aifly-panel .orientation-composer,.workspace-shell .aifly-panel .connection-note{flex:0 0 auto}
+.workspace-shell .aifly-panel .orientation-history{flex:0 0 auto;min-height:0;overflow:visible}
+.workspace-shell .aifly-panel .orientation-composer{margin-top:0}
+.workspace-shell .aifly-panel .public-orientation{gap:var(--space-3);padding:var(--space-4)}
+.workspace-shell .aifly-panel .orientation-intro{gap:var(--space-2)}
+.workspace-shell .aifly-panel .orientation-starters{gap:var(--space-2);max-height:none;overflow:visible}
+.workspace-shell .aifly-panel .orientation-starter{min-height:76px;padding:var(--space-3)}
+.workspace-shell .aifly-panel .orientation-composer{margin-top:0;padding:var(--space-3);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:color-mix(in srgb,var(--color-atelier-canvas) 82%,transparent)}
+/* Distinct, readable turns within the fixed-height chat history. */
+.workspace-shell .aifly-panel .orientation-history>div{display:grid;gap:var(--space-3)}
+.workspace-shell .aifly-panel .orientation-history .orientation-message{min-width:0;padding:var(--space-4);border:0;border-radius:var(--radius-karte)}
+.workspace-shell .aifly-panel .orientation-history .orientation-message.role-user{margin-inline-start:var(--space-5);background:var(--color-atelier-canvas)}
+.workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant{margin-inline-end:var(--space-2);padding:var(--space-4);border:1px solid var(--color-linie-fein);background:linear-gradient(145deg,var(--color-atelier-raised),var(--color-atelier-canvas));box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge),var(--shadow-kleine-karte)}
+.workspace-shell .aifly-panel .orientation-history .orientation-message p{margin:0;color:var(--color-text-sekundaer);line-height:1.6}
+.workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant>strong{color:var(--color-atelier-champagne)}
+.workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant>p{font-size:13px}
+@media(forced-colors:active),(prefers-contrast:more){.workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant{box-shadow:none;border:1px solid var(--color-linie-stark)}}
+@media(max-width:820px){.workspace-shell .aifly-panel{background:var(--color-atelier-surface);backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* Editorial page rhythm: space, material and changing proportions replace divider-led stacks. */
+.workspace-shell .brand>img{filter:saturate(.72) hue-rotate(8deg) brightness(.92)}
+.workspace-shell .content-layout .content-hero{border:0}
+.workspace-shell .content-layout .content-context{padding:var(--space-5);border:0;border-radius:var(--radius-leit);background:linear-gradient(145deg,var(--color-atelier-raised),var(--color-atelier-surface));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),var(--shadow-kleine-karte)}
+.workspace-shell .content-layout .content-context nav{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.workspace-shell .content-layout .content-context nav a{flex:1 1 150px;min-height:var(--target-min);padding:var(--space-3);border:0;border-radius:var(--radius-chip);background:color-mix(in srgb,var(--color-atelier-canvas) 74%,transparent)}
+.workspace-shell .content-layout .content-reading-grid.has-section-nav{grid-template-columns:minmax(0,1fr);gap:var(--space-6)}
+.workspace-shell .content-layout .content-section-nav{position:static;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:var(--space-5);padding:var(--space-3) var(--space-4);border-radius:var(--radius-pille);background:color-mix(in srgb,var(--color-atelier-raised) 72%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.045)}
+.workspace-shell .content-layout .content-section-nav ol{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);margin:0}
+.workspace-shell .content-layout .content-section-nav button{width:auto;min-height:40px;padding:var(--space-2) var(--space-3);border:0;border-radius:var(--radius-pille);background:transparent;font-size:12px}
+.workspace-shell .content-layout .content-section-nav button:hover{background:var(--color-atelier-canvas)}
+.workspace-shell .content-layout .content-sections{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(22px,3vw,46px);align-items:start}
+.workspace-shell .content-layout .content-section{min-height:220px;padding:clamp(26px,3.4vw,52px);border:0;border-radius:var(--radius-atelier);background:radial-gradient(420px 240px at 100% 0%,color-mix(in srgb,var(--color-marke-lime) 5%,transparent),transparent 72%),linear-gradient(145deg,var(--color-atelier-surface),var(--color-atelier-canvas));box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 30px 72px -58px #000}
+.workspace-shell .content-layout .content-section:nth-child(5n+1){grid-column:1/8}
+.workspace-shell .content-layout .content-section:nth-child(5n+2){grid-column:8/13;margin-top:clamp(42px,6vw,92px)}
+.workspace-shell .content-layout .content-section:nth-child(5n+3){grid-column:3/11}
+.workspace-shell .content-layout .content-section:nth-child(5n+4){grid-column:1/6}
+.workspace-shell .content-layout .content-section:nth-child(5n){grid-column:6/13;margin-top:clamp(30px,4vw,64px)}
+.workspace-shell .content-layout .content-section.has-custom-content{grid-column:1/13;margin-top:0;min-height:0;padding:0;background:transparent;box-shadow:none}
+.workspace-shell .content-layout .content-section h2{max-width:20ch;font-size:clamp(27px,3vw,42px);line-height:1.12}
+.workspace-shell .content-layout .content-section p{max-width:62ch;line-height:1.75}
+.workspace-shell .content-layout .content-contact{grid-column:2/12;padding:clamp(28px,4vw,56px);border:0;border-radius:var(--radius-atelier);background:var(--color-atelier-raised)}
+.workspace-shell .content-layout .content-contact .contact-channel{padding:var(--space-4);border:0;border-radius:var(--radius-karte);background:var(--color-atelier-canvas)}
+.workspace-shell .content-layout :is(.content-supplement,.content-related,.content-next){border:0}
+.workspace-shell .content-layout .content-related-grid{gap:var(--space-4)}
+.workspace-shell .content-layout .content-related-grid article{padding:var(--space-5);border:0;border-radius:var(--radius-leit);background:linear-gradient(145deg,var(--color-atelier-raised),var(--color-atelier-surface));box-shadow:inset 0 1px 0 rgba(255,255,255,.045)}
+.workspace-shell .content-layout .content-next{margin:0 var(--content-gutter) var(--space-7);padding:clamp(28px,4vw,56px);border-radius:var(--radius-atelier);background:radial-gradient(560px 240px at 100% 0%,color-mix(in srgb,var(--color-marke-lime) 7%,transparent),transparent 72%),var(--color-atelier-surface)}
+.workspace-shell .content-layout .content-supplement .editorial-guide{border:0}
+.workspace-shell .editorial-module{padding:clamp(24px,3vw,44px);border:0;border-radius:var(--radius-atelier);background:linear-gradient(145deg,var(--color-atelier-surface),var(--color-atelier-canvas));box-shadow:inset 0 1px 0 rgba(255,255,255,.045)}
+.workspace-shell .editorial-module{width:calc(100% - clamp(0px,8vw,140px))}
+.workspace-shell .editorial-module:nth-child(even){margin-inline-start:auto}
+.workspace-shell .editorial-module:nth-child(odd){margin-inline-end:auto}
+.workspace-shell .editorial-guide{border:0}
+.workspace-shell .home-concept .hc-process li{padding:var(--space-5);border:0;border-radius:var(--radius-karte);background:var(--color-atelier-surface)}
+.workspace-shell .home-concept .hc-calculation,.workspace-shell .home-concept .hc-product{border:0}
+.workspace-shell .home-concept .hc-benchmarks{display:grid;gap:var(--space-2)}
+.workspace-shell .home-concept .hc-benchmarks li{padding:var(--space-3);border:0;border-radius:var(--radius-chip);background:color-mix(in srgb,var(--color-atelier-raised) 72%,transparent)}
+@container(max-width:900px){
+ .workspace-shell .content-layout .content-section-nav{grid-template-columns:minmax(0,1fr);border-radius:var(--radius-leit)}
+ .workspace-shell .content-layout .content-sections{grid-template-columns:minmax(0,1fr)}
+ .workspace-shell .content-layout .content-section:nth-child(n),.workspace-shell .content-layout .content-contact{grid-column:1;margin-top:0}
+ .workspace-shell .editorial-module:nth-child(n){width:100%;margin-inline:0}
+}
+@media(max-width:640px){
+ .workspace-shell .content-layout .content-section-nav ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+ .workspace-shell .content-layout .content-section-nav button{width:100%;text-align:left}
+ .workspace-shell .content-layout .content-section{min-height:0;padding:var(--space-5);border-radius:var(--radius-leit)}
+ .workspace-shell .content-layout .content-next{margin-inline:var(--space-4);padding:var(--space-5);border-radius:var(--radius-leit)}
+}
