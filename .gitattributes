@@ -1,3 +1,0 @@
-
-# Preserve the user-supplied concept byte-for-byte, including original spacing.
-docs/research/inputs/virtuele_presenters_concept.md -whitespace

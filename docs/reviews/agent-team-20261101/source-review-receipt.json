@@ -1,8 +1,0 @@
-{
-  "job_id": "6195b811b4029922534a587cfca5485bfc1a4848b0a224b9c7254711c7de0712",
-  "reviewer": "native-team-deep-review",
-  "result_hash": "cd00ae68fc2f9271b2f53f3870752284fc4420dc72fd0714cd71d7bee0717166",
-  "contract_hash": "c79df1b91e60336edf4494f527fdc60362a1d02348a5ba6a141020a7293d7f56",
-  "decision": "accept",
-  "proof_scope": "local_only"
-}

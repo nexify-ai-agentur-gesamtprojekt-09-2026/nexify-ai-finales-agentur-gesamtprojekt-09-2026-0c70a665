@@ -1,0 +1,1469 @@
+[
+{
+"id": "ai-maestro-agenten-nachrichten",
+"name": "Ai maestro agenten nachrichten",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "ai-maestro-agenten-verwaltung",
+"name": "Ai maestro agenten verwaltung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "ai-maestro-code-graph-abfrage",
+"name": "Ai maestro code graph abfrage",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "ai-maestro-dokumentationssuche",
+"name": "Ai maestro dokumentationssuche",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "ai-maestro-gedaechtnissuche",
+"name": "Ai maestro gedaechtnissuche",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "ai-maestro-planungsdateien",
+"name": "Ai maestro planungsdateien",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "akademischer-lebenslauf-cv-aufbau",
+"name": "Akademischer lebenslauf cv aufbau",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "algorithmische-kunst-p5js",
+"name": "Algorithmische kunst p5js",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "anschreiben-generator",
+"name": "Anschreiben generator",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Inhalte & Marketing"
+},
+{
+"id": "architektur-entscheidungsprotokolle-adr",
+"name": "Architektur entscheidungsprotokolle adr",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/adr/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "architektur-entscheidungsrahmen",
+"name": "Architektur entscheidungsrahmen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/adr/0001–0006",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "architektur-muster-clean-hexagonal",
+"name": "Architektur muster clean hexagonal",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "artifact-themes-gestaltung",
+"name": "Artifact themes gestaltung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "audio-transkription-sprechererkennnung",
+"name": "Audio transkription sprechererkennnung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "automatisierte-code-analyse-werkzeugkette",
+"name": "Automatisierte code analyse werkzeugkette",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "backend-architektur-resilienz-observability",
+"name": "Backend architektur resilienz observability",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "berufswechsel-uebersetzer",
+"name": "Berufswechsel uebersetzer",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "bewerbungsgespraech-vorbereitung",
+"name": "Bewerbungsgespraech vorbereitung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "bildqualitaet-verbesserung",
+"name": "Bildqualitaet verbesserung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "bildschirmfoto-erfassung-plattformuebergreifend",
+"name": "Bildschirmfoto erfassung plattformuebergreifend",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "blockrun-bezahlte-ki-modell-zugriffe",
+"name": "Blockrun bezahlte ki modell zugriffe",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "browser-automatisierung-grundlagen",
+"name": "Browser automatisierung grundlagen",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "browser-erweiterung-entwicklung",
+"name": "Browser erweiterung entwicklung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "busybox-windows-unix-tools",
+"name": "Busybox windows unix tools",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "c-experte",
+"name": "C experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "clean-code-architekturkonventionen",
+"name": "Clean code architekturkonventionen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/* reine Kerne",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "cloud-architektur-multi-cloud-finops",
+"name": "Cloud architektur multi cloud finops",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "cloud-devops-orchestrierung",
+"name": "Cloud devops orchestrierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "code-review-anfordern-subagent",
+"name": "Code review anfordern subagent",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/pruefprotokoll-code-review-2026-09-28.md",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "code-review-pruefkatalog",
+"name": "Code review pruefkatalog",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "computer-use-agenten",
+"name": "Computer use agenten",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/regelwerk.js R-21, config/computer-use.json",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "corporate-design-ist-soll-umsetzung",
+"name": "Corporate design ist soll umsetzung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "cpp-experte",
+"name": "Cpp experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "csharp-experte",
+"name": "Csharp experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "datenbank-performance-tuning",
+"name": "Datenbank performance tuning",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: db/migrations/005–006 (Indizes)",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "datenbankarchitektur-technologieauswahl",
+"name": "Datenbankarchitektur technologieauswahl",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "datenbestand-vereinheitlichen",
+"name": "Datenbestand vereinheitlichen",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Analyse"
+},
+{
+"id": "design-philosophie-leinwand",
+"name": "Design philosophie leinwand",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "detaillierte-umsetzungsplanung",
+"name": "Detaillierte umsetzungsplanung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "devops-iac-workflow-methodik",
+"name": "Devops iac workflow methodik",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "django-experte",
+"name": "Django experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "dokument-koautorenschaft",
+"name": "Dokument koautorenschaft",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/paket/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Allgemein"
+},
+{
+"id": "domain-namen-brainstorming",
+"name": "Domain namen brainstorming",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "e-mail-zustellbarkeit-infrastruktur",
+"name": "E mail zustellbarkeit infrastruktur",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/versand.js",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Allgemein"
+},
+{
+"id": "elixir-experte",
+"name": "Elixir experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "entwicklungszweig-abschluss-workflow",
+"name": "Entwicklungszweig abschluss workflow",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "exa-search-integration",
+"name": "Exa search integration",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "expo-app-deployment",
+"name": "Expo app deployment",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "feedback-technisch-verifizieren",
+"name": "Feedback technisch verifizieren",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "figma-zu-react-codegenerierung",
+"name": "Figma zu react codegenerierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "firecrawl-scraper-integration",
+"name": "Firecrawl scraper integration",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "freigabe-gate-live-betrieb",
+"name": "Freigabe gate live betrieb",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/regelwerk.js R-03, docs/04-betrieb/freigabe-gate-status.md",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+},
+{
+"id": "fuehrungskraefte-lebenslauf-texter",
+"name": "Fuehrungskraefte lebenslauf texter",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "gehaltsverhandlung-vorbereitung",
+"name": "Gehaltsverhandlung vorbereitung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "geo-generative-engine-optimierung",
+"name": "Geo generative engine optimierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "git-commit-typ-auto-erkennung",
+"name": "Git commit typ auto erkennung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "git-kontext-versionierung-gcc",
+"name": "Git kontext versionierung gcc",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "git-worktree-sichere-einrichtung",
+"name": "Git worktree sichere einrichtung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "gitlab-schnellablauf-commit-push-mr",
+"name": "Gitlab schnellablauf commit push mr",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "go-live-abschlusstest",
+"name": "Go live abschlusstest",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+},
+{
+"id": "golang-experte",
+"name": "Golang experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "google-analytics-auswertung",
+"name": "Google analytics auswertung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Analyse"
+},
+{
+"id": "google-cloud-netzwerk-observability",
+"name": "Google cloud netzwerk observability",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "google-cloud-onboarding-einstieg",
+"name": "Google cloud onboarding einstieg",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "google-cloud-waf-kostenoptimierung",
+"name": "Google cloud waf kostenoptimierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "google-cloud-waf-zuverlaessigkeit",
+"name": "Google cloud waf zuverlaessigkeit",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "graphql-federation-enterprise-architektur",
+"name": "Graphql federation enterprise architektur",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "gutachten-autopilot-de",
+"name": "Gutachten autopilot de",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/autopilot/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+},
+{
+"id": "gutachten-kette-ablageort",
+"name": "Gutachten kette ablageort",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/autopilot/ (Nachtrag 28.09.2026), AGENT.md",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+},
+{
+"id": "gutachten-umsetzungsplan-de",
+"name": "Gutachten umsetzungsplan de",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/autopilot/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+},
+{
+"id": "haskell-experte",
+"name": "Haskell experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "ideenfindung-spezifikationsdialog",
+"name": "Ideenfindung spezifikationsdialog",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "interne-kommunikation",
+"name": "Interne kommunikation",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Inhalte & Marketing"
+},
+{
+"id": "java-experte",
+"name": "Java experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "javascript-experte",
+"name": "Javascript experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "jobangebote-vergleich",
+"name": "Jobangebote vergleich",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "ki-council",
+"name": "Ki council",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "ki-produktentwicklung",
+"name": "Ki produktentwicklung",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/08-gesamtloesung/05-produktreife-checkliste.md",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "kreativ-portfolio-lebenslauf",
+"name": "Kreativ portfolio lebenslauf",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "kubernetes-plattform-architektur-gitops",
+"name": "Kubernetes plattform architektur gitops",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "lebenslauf-abschnitte-aufbau",
+"name": "Lebenslauf abschnitte aufbau",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "lebenslauf-anpassung",
+"name": "Lebenslauf anpassung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "lebenslauf-kennzahlen-quantifizierung",
+"name": "Lebenslauf kennzahlen quantifizierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "lebenslauf-versionsverwaltung",
+"name": "Lebenslauf versionsverwaltung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "lernbegleitung-verstehen",
+"name": "Lernbegleitung verstehen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: Gesprächsführung",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Allgemein"
+},
+{
+"id": "linkedin-profil-optimierung",
+"name": "Linkedin profil optimierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "llm-observability-langfuse-phoenix-langsmith",
+"name": "Llm observability langfuse phoenix langsmith",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/langfuse.js, Workspace › Ablauf",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "llm-rlhf-verteiltes-training",
+"name": "Llm rlhf verteiltes training",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: ADR-0005 (nicht einschlägig)",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "manim-mathematische-animationen",
+"name": "Manim mathematische animationen",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "mcp-server-entwicklung",
+"name": "Mcp server entwicklung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "mixture-of-experts-training-routing",
+"name": "Mixture of experts training routing",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: ADR-0005 (nicht einschlägig)",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "morgenbriefing",
+"name": "Morgenbriefing",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Inhalte & Marketing"
+},
+{
+"id": "motion-canvas-videoerstellung",
+"name": "Motion canvas videoerstellung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "neon-instagres-schnellstart",
+"name": "Neon instagres schnellstart",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "neon-serverless-postgres",
+"name": "Neon serverless postgres",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "netzwerkdienste-testlabor",
+"name": "Netzwerkdienste testlabor",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "nexify-governed-delivery",
+"name": "Nexify governed delivery",
+"purpose": "Führt autorisierten Projektkontext durch Quellenabgleich, Planung, Umsetzung und beweisbare Übergabe. Nutzen bei mehrstufigen NeXify-Aufträgen, widersprüchlichen Vorgaben oder Wiederaufnahme.",
+"version": "1.0.2",
+"origin": "NeXify Repository (skills/)",
+"status": "adaptiert",
+"category": "NeXify Betrieb"
+},
+{
+"id": "nexify-knowledge-operations",
+"name": "Nexify knowledge operations",
+"purpose": "Bereitet autorisierte lokale Wissensquellen tenantgebunden vor und hält Remote-Brain-Lücken kontrolliert offen. Nutzen bei Markdown-Aufnahme, Kontextselektion, Provenienz oder geplanter LightRAG-Anbindung.",
+"version": "1.0.0",
+"origin": "NeXify Repository (skills/)",
+"status": "adaptiert",
+"category": "NeXify Betrieb"
+},
+{
+"id": "nexify-platform-integrations",
+"name": "Nexify platform integrations",
+"purpose": "Integriert geprüfte APIs/SDKs/MCP-Funktionen in die eigene NeXify-Oberfläche. Nutzen bei neuen Plattformfunktionen, Provideradaptern und verifizierbarer Wiederverwendung; Cloud-Integrationsskill wird ergänzt, nicht geändert.",
+"version": "1.0.1",
+"origin": "NeXify Repository (skills/)",
+"status": "adaptiert",
+"category": "NeXify Betrieb"
+},
+{
+"id": "nexify-quality-learning",
+"name": "Nexify quality learning",
+"purpose": "Prüft Änderungen und überführt belegte Erkenntnisse kontrolliert in versionierte Kandidaten. Nutzen bei Abnahme, Fehlerklassen, Regel-/Skilländerungen und Wiederaufnahme; keine automatische Selbstfreigabe.",
+"version": "1.0.0",
+"origin": "NeXify Repository (skills/)",
+"status": "adaptiert",
+"category": "NeXify Betrieb"
+},
+{
+"id": "nexify-research-content",
+"name": "Nexify research content",
+"purpose": "Führt quellengebundene Recherche und gemessene SEO-Daten über Strategie zum Inhaltsbrief. Nutzen vor neuen Copy-/Landingpage-/Marktbehauptungen; keine GEO-/Kampagnenaktivierung aus dem Skill ableiten.",
+"version": "1.0.0",
+"origin": "NeXify Repository (skills/)",
+"status": "adaptiert",
+"category": "NeXify Betrieb"
+},
+{
+"id": "nexifyai-markengestaltung",
+"name": "Nexifyai markengestaltung",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/01-konzept/cd-2026-bildschirm.md (Bildschirm offen)",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Gestaltung"
+},
+{
+"id": "nexifyai-skill-vorlage",
+"name": "Nexifyai skill vorlage",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "nextjs-sanity-blog-orchestrierung",
+"name": "Nextjs sanity blog orchestrierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "open-banking-kontodaten-abruf",
+"name": "Open banking kontodaten abruf",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "paralleles-arbeiten-terminal-multiplexer",
+"name": "Paralleles arbeiten terminal multiplexer",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "pareto-ursachenanalyse",
+"name": "Pareto ursachenanalyse",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Analyse"
+},
+{
+"id": "phasenpipeline-mit-agentenrollen",
+"name": "Phasenpipeline mit agentenrollen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/paket/01–10, lib/langlauf.js, lib/entscheidungen.js",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "php-experte",
+"name": "Php experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "planausfuehrung-mit-kontrollpunkten",
+"name": "Planausfuehrung mit kontrollpunkten",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "plattform-datenfeeds",
+"name": "Plattform datenfeeds",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Analyse"
+},
+{
+"id": "pocketbase-schema-design",
+"name": "Pocketbase schema design",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "pocketbase-sdk-integration",
+"name": "Pocketbase sdk integration",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "pocketbase-zugriffsregeln",
+"name": "Pocketbase zugriffsregeln",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "portfolio-fallstudien",
+"name": "Portfolio fallstudien",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "postgresql-tabellendesign-referenz",
+"name": "Postgresql tabellendesign referenz",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: db/migrations/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Gestaltung"
+},
+{
+"id": "prognosegenauigkeit-check",
+"name": "Prognosegenauigkeit check",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Analyse"
+},
+{
+"id": "programmatic-seo-skalierung",
+"name": "Programmatic seo skalierung",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/pseo.js",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Inhalte & Marketing"
+},
+{
+"id": "prompt-caching-kosten-latenz-optimierung",
+"name": "Prompt caching kosten latenz optimierung",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/prompt-cache.js",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "python-experte",
+"name": "Python experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "rag-pipeline-engineering-grundlagen",
+"name": "Rag pipeline engineering grundlagen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/rag.js",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "referenzliste-erstellung",
+"name": "Referenzliste erstellung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "remotion-react-videoerstellung",
+"name": "Remotion react videoerstellung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "ruby-experte",
+"name": "Ruby experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "rust-experte",
+"name": "Rust experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "scala-experte",
+"name": "Scala experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "schreibstil-profil-einrichten",
+"name": "Schreibstil profil einrichten",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Inhalte & Marketing"
+},
+{
+"id": "senior-architekt-tech-stack-entscheidungen",
+"name": "Senior architekt tech stack entscheidungen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: tools/abhaengigkeiten.js, docs/paket/04-architektur.md",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "sicherheitsbestand-pruefung",
+"name": "Sicherheitsbestand pruefung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "skill-aufruf-disziplin",
+"name": "Skill aufruf disziplin",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: AGENT.md",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "skill-erstellung-team-benachrichtigung",
+"name": "Skill erstellung team benachrichtigung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "skill-erstellung-und-evaluation",
+"name": "Skill erstellung und evaluation",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "slack-gif-erstellung",
+"name": "Slack gif erstellung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "sora-ki-videogenerierung",
+"name": "Sora ki videogenerierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "speicherimport-fremd-ki",
+"name": "Speicherimport fremd ki",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "KI & Agenten"
+},
+{
+"id": "sprachsynthese-text-zu-sprache",
+"name": "Sprachsynthese text zu sprache",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "sre-incident-response-methodik",
+"name": "Sre incident response methodik",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "stellenanzeigen-analyse",
+"name": "Stellenanzeigen analyse",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "sternenverlauf-chart-selbstgehostet",
+"name": "Sternenverlauf chart selbstgehostet",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "strukturierte-websuche",
+"name": "Strukturierte websuche",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "systematisches-debugging-grundursachenanalyse",
+"name": "Systematisches debugging grundursachenanalyse",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: pruefprotokoll … Anhang A",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Allgemein"
+},
+{
+"id": "tavily-web-suche-integration",
+"name": "Tavily web suche integration",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "tdd-orchestrierung-teamweite-governance",
+"name": "Tdd orchestrierung teamweite governance",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "tech-lebenslauf-optimierung",
+"name": "Tech lebenslauf optimierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "technisches-gutachten-de",
+"name": "Technisches gutachten de",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/autopilot/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+},
+{
+"id": "telegram-bot-api-technische-referenz",
+"name": "Telegram bot api technische referenz",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "terraform-opentofu-spezialist",
+"name": "Terraform opentofu spezialist",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "test-getriebene-entwicklung-workflow",
+"name": "Test getriebene entwicklung workflow",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: FAELLE je Kern (Einschränkung: meist zusammen mit Code geschrieben)",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Allgemein"
+},
+{
+"id": "trigger-dev-hintergrundjobs",
+"name": "Trigger dev hintergrundjobs",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "typescript-experte",
+"name": "Typescript experte",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "vektordatenbanken-und-embeddings-praxis",
+"name": "Vektordatenbanken und embeddings praxis",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: ADR-0006, db/migrations/006",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "verhaltensmodi-ki-arbeitsweisen",
+"name": "Verhaltensmodi ki arbeitsweisen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: lib/modi.js",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "verteiltes-training-sharding-speicher",
+"name": "Verteiltes training sharding speicher",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: ADR-0005",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "KI & Agenten"
+},
+{
+"id": "video-download-offline-archivierung",
+"name": "Video download offline archivierung",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Medien"
+},
+{
+"id": "waechter-bauen",
+"name": "Waechter bauen",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: config/runbooks.json, Außenwächter",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Allgemein"
+},
+{
+"id": "web-artifact-baukasten",
+"name": "Web artifact baukasten",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "webdesign-stiluebernahme",
+"name": "Webdesign stiluebernahme",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Gestaltung"
+},
+{
+"id": "webseiten-inhaltsextraktion",
+"name": "Webseiten inhaltsextraktion",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "website-crawling-cloudflare-rendering",
+"name": "Website crawling cloudflare rendering",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "workflow-automatisierung-architekturprinzipien",
+"name": "Workflow automatisierung architekturprinzipien",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Entwicklung & Betrieb"
+},
+{
+"id": "workorai-talent-marktplatz-referenz",
+"name": "Workorai talent marktplatz referenz",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "zapier-make-patterns-referenz",
+"name": "Zapier make patterns referenz",
+"purpose": "Bei passender Aufgabe ladbar; bisher keine Anwendung im NeXify-Arbeitsstand belegt.",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (bei Bedarf)",
+"status": "quelle",
+"category": "Allgemein"
+},
+{
+"id": "zertifizierungsgutachten-de",
+"name": "Zertifizierungsgutachten de",
+"purpose": "Im NeXify-Arbeitsstand angewendet; Fundstelle: docs/04-betrieb/autopilot/",
+"version": null,
+"origin": "Skill-Register 28.09.2026 (angewendet)",
+"status": "adaptiert",
+"category": "Qualität & Abnahme"
+}
+]

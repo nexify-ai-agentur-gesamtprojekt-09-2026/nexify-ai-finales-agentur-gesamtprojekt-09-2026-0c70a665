@@ -1,6 +1,0 @@
-# Abhaengigkeiten dieses Repos.
-#
-# Standardwerkzeuge nutzen die Node-/Python-Standardbibliothek.
-# Der optionale Bildbatch und seine Tests benötigen requirements-image.txt (Pillow, exakt gepinnt).
-# Reproduzierbarkeit wird ueber die gepinnten CI-Images und die Prototyp-Artefakte gebunden
-# (siehe deps.lock und prototypen/MANIFEST.sha256).

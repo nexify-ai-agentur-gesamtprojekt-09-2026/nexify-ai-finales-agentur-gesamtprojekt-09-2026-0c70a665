@@ -1,3 +1,0 @@
-# Linux x86_64 / Python3.12 local image runner; official PyPI wheel hash. No model weights.
-Pillow==12.3.0 --hash=sha256:78cb2c6865a35ab8ff8b75fd122f6033b92a62c82801110e48ddd6c936a45d91
-numpy==2.3.5 --hash=sha256:0d8163f43acde9a73c2a33605353a4f1bc4798745a8b1d73183b28e5b435ae28
