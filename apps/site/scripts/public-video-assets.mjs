@@ -1,3 +1,4 @@
+import {resolveExplainerReferences} from "./public-explainers.mjs";
 import {constants} from 'node:fs';
 import {open} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -183,6 +184,7 @@ export async function prepareVideoAssets(registry, fullSiteMap, {publicRoot, rep
     }
   }
   need(Array.isArray(explainerPages) && explainerPages.length === publicPages.size, 'explainer_pages_required');
+  explainerPages=resolveExplainerReferences({pages:explainerPages},fullSiteMap.pages).pages;
   const sourceModules = new Map(); const sourceModuleIds = new Set(); const sourcePageIds = new Set();
   for (const page of explainerPages) {
     need(object(page) && publicPages.has(page.page_id) && !sourcePageIds.has(page.page_id)

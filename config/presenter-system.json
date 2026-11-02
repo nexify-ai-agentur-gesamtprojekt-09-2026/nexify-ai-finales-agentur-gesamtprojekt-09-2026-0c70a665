@@ -5,52 +5,62 @@
     "business-website": {
       "de": "Website planen",
       "nl": "Een website plannen",
-      "fr": "Préparer un site"
+      "fr": "Préparer un site",
+      "en": "Plan a website"
     },
     "business-automation": {
       "de": "Abläufe automatisieren",
       "nl": "Processen automatiseren",
-      "fr": "Automatiser les processus"
+      "fr": "Automatiser les processus",
+      "en": "Automate workflows"
     },
     "business-apps": {
       "de": "App oder Portal planen",
       "nl": "Een app of portaal plannen",
-      "fr": "Préparer une application ou un portail"
+      "fr": "Préparer une application ou un portail",
+      "en": "Plan an app or portal"
     },
     "business-api": {
       "de": "KI-Produkte und API verstehen",
       "nl": "AI-producten en API begrijpen",
-      "fr": "Comprendre les produits IA et l’API"
+      "fr": "Comprendre les produits IA et l’API",
+      "en": "Explore AI products and API"
     },
     "knowledge-to-project": {
       "de": "Vorhaben vorbereiten",
       "nl": "Uw plan voorbereiden",
-      "fr": "Préparer votre projet"
+      "fr": "Préparer votre projet",
+      "en": "Prepare your project"
     },
     "teileklar-selection": {
       "de": "Passendes Teil auswählen",
       "nl": "Een passend onderdeel kiezen",
-      "fr": "Choisir une pièce adaptée"
+      "fr": "Choisir une pièce adaptée",
+      "en": "Choose a suitable part"
     },
     "teileklar-workshop": {
       "de": "Werkstatt und Partner kennenlernen",
       "nl": "Werkplaats en partners ontdekken",
-      "fr": "Découvrir les ateliers et partenaires"
+      "fr": "Découvrir les ateliers et partenaires",
+      "en": "Explore workshops and partners"
     },
     "teileklar-vouchers": {
       "de": "Gutscheine verstehen",
       "nl": "Tegoedbonnen begrijpen",
-      "fr": "Comprendre les bons"
+      "fr": "Comprendre les bons",
+      "en": "Understand vouchers"
     },
     "existing-client": {
       "de": "Bestehenden Vorgang klären",
       "nl": "Een bestaand dossier bespreken",
-      "fr": "Clarifier un dossier existant"
+      "fr": "Clarifier un dossier existant",
+      "en": "Discuss an existing enquiry"
     },
     "nex2fly-trial": {
       "de": "NeX2fly Suite kennenlernen",
       "nl": "NeX2fly Suite leren kennen",
-      "fr": "Découvrir la NeX2fly Suite"
+      "fr": "Découvrir la NeX2fly Suite",
+      "en": "Explore NeX2fly Suite"
     }
   },
   "speakers": {

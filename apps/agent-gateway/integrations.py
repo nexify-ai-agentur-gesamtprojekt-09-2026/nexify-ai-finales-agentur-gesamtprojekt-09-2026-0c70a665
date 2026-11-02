@@ -271,19 +271,37 @@ class MailDispatcher:
 SPEECH_KEYS = ("welcome", "choose", "quoteReply", "bookingReply", "marketingReply")
 
 
-def speech_texts(source=ROOT / "apps/web/lib/i18n.ts"):
-    """Fixed assistant texts per locale, read from the same dictionary the UI renders."""
-    content = Path(source).read_text(encoding="utf-8")
-    texts = {}
-    for locale in ("de", "nl", "fr"):
-        block = re.search(rf"\b{locale}\s*:\s*\{{(.*?)\n\s*\}}", content, re.S)
-        if block is None:
-            continue
-        for key in SPEECH_KEYS:
-            found = re.search(rf"\b{key}:\"((?:[^\"\\]|\\.)*)\"", block[1])
-            if found:
-                texts[(key, locale)] = found[1]
-    return texts
+def speech_texts(source=ROOT / "config/assistant-interface-copy.json"):
+    """Validate the canonical UI JSON, then project only the existing 15 TTS texts.
+
+    English UI copy does not grant English speech access. Invalid/missing copy
+    fails explicitly; source formatting, escaping and TS syntax are irrelevant.
+    """
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("duplicate_copy_key")
+            result[key] = value
+        return result
+    try:
+        data = json.loads(Path(source).read_text(encoding="utf-8"), object_pairs_hook=unique)
+    except OSError:
+        raise ProviderError("speech_copy_unavailable") from None
+    except (ValueError, UnicodeError, RecursionError):
+        raise ProviderError("speech_copy_invalid") from None
+    locales = {"de", "nl", "fr", "en"}
+    if not isinstance(data, dict) or set(data) != locales:
+        raise ProviderError("speech_copy_invalid")
+    fields = set(data["de"]) if isinstance(data["de"], dict) else set()
+    if not fields or not set(SPEECH_KEYS) <= fields:
+        raise ProviderError("speech_copy_invalid")
+    for copy in data.values():
+        if (not isinstance(copy, dict) or set(copy) != fields
+                or any(not isinstance(text, str) or not text.strip() for text in copy.values())):
+            raise ProviderError("speech_copy_invalid")
+    return {(key, locale): data[locale][key]
+            for locale in ("de", "nl", "fr") for key in SPEECH_KEYS}
 
 
 class SpeechService:

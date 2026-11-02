@@ -1,0 +1,622 @@
+{
+  "schema_version": 1,
+  "authority": "Customer interface microcopy. Page-specific facts, title, summary and sections come from site-map.json.",
+  "home": {
+    "de": {
+      "project": "Ihr Vorhaben zuerst",
+      "projectBody": "Was soll für Ihre Kunden oder Ihr Team einfacher werden? Erzählen Sie uns von Ihrem Ziel. Die technische Lösung müssen Sie noch nicht kennen.",
+      "projectAction": "Ihr Vorhaben beschreiben",
+      "projectKicker": "Erst verstehen. Dann verbinden.",
+      "projectNote": "Ihr Ziel und die nächsten Schritte im Blick.",
+      "choice": "So finden Sie Ihren Einstieg",
+      "choiceBody": "Möchten Sie Ihr Angebot im Internet zeigen, wiederkehrende Arbeit vereinfachen oder Informationen gemeinsam nutzen? Wählen Sie den Bereich, der zu Ihrer Aufgabe passt.",
+      "choiceKicker": "Drei Wege. Ihr Ziel.",
+      "serviceLink": "Bereich ansehen",
+      "pathLabels": [
+        "Website",
+        "Ablauf",
+        "Portal"
+      ],
+      "pathDescriptions": [
+        "Ihr Angebot verständlich zeigen",
+        "Wiederkehrende Arbeit vereinfachen",
+        "Informationen gemeinsam nutzen"
+      ],
+      "process": "Gemeinsam vom Ziel zur Umsetzung",
+      "processBody": "Wir klären den Umfang, vereinbaren die nächsten Schritte und prüfen das Ergebnis gemeinsam mit Ihnen.",
+      "processKicker": "Persönlich begleitet. Nachvollziehbar umgesetzt.",
+      "steps": [
+        [
+          "Klären",
+          "Wir beginnen mit Ihrem Ziel, den vorhandenen Systemen und den offenen Fragen."
+        ],
+        [
+          "Umfang vereinbaren",
+          "Wir halten fest, was entstehen soll, wer beteiligt ist und woran Sie das Ergebnis prüfen."
+        ],
+        [
+          "Umsetzen und prüfen",
+          "Sie sehen konkrete Zwischenstände. Wir prüfen die vereinbarten Abläufe und Rückmeldungen."
+        ],
+        [
+          "Übergeben",
+          "Sie erhalten die vereinbarten Ergebnisse und eine verständliche Einweisung."
+        ]
+      ],
+      "products": "Produkte und Arbeitsbereiche kennenlernen",
+      "productsBody": "Entdecken Sie den KI-Arbeitsplatz, agentische KI, die API und TEILEKLAR als unterschiedliche Angebote.",
+      "productKicker": "Unterschiedliche Produkte. Der passende Einstieg.",
+      "productLink": "Produkt kennenlernen",
+      "productAvailability": "Umfang und Verfügbarkeit im jeweiligen Bereich",
+      "productDescriptions": [
+        "Der Einstieg in die NeX2fly Suite und ihre Arbeitsbereiche.",
+        "Möglichkeiten rund um NeX Agentic AI und AI Fly Oracle.",
+        "Schnittstellen und Integrationsmöglichkeiten für bestehende Systeme.",
+        "Die eigenständige TEILEKLAR-Shopwelt und ihre Services."
+      ],
+      "finish": "Womit möchten Sie anfangen?",
+      "finishBody": "Beschreiben Sie uns Ihr Vorhaben oder schauen Sie sich zuerst unsere Leistungen an.",
+      "finishAction": "Vorhaben besprechen",
+      "services": "Leistungen ansehen",
+      "contact": "Lieber ohne Chat? Kontakt aufnehmen",
+      "sceneAlt": "Pascal und NeX in einer gemeinsamen Darstellung",
+      "nexAlt": "NeX als Begleiter der drei Leistungsbereiche",
+      "start": "Start",
+      "work": "Arbeit",
+      "result": "Ergebnis",
+      "visualLabel": "Ihr Ziel gibt die Richtung vor"
+    },
+    "nl": {
+      "project": "Uw plan eerst",
+      "projectBody": "Wat moet eenvoudiger worden voor uw klanten of team? Vertel ons over uw doel. U hoeft de technische oplossing nog niet te kennen.",
+      "projectAction": "Beschrijf uw plan",
+      "projectKicker": "EERST BEGRIJPEN. DAN VERBINDEN.",
+      "projectNote": "Uw doel en de vervolgstappen in beeld.",
+      "choice": "Zo vindt u uw vertrekpunt",
+      "choiceBody": "Wilt u uw aanbod online presenteren, terugkerend werk vereenvoudigen of informatie delen? Kies het onderdeel dat bij uw vraag past.",
+      "choiceKicker": "Drie mogelijkheden. Uw doel.",
+      "serviceLink": "Bekijk het onderdeel",
+      "pathLabels": [
+        "Website",
+        "Proces",
+        "Portaal"
+      ],
+      "pathDescriptions": [
+        "Uw aanbod helder presenteren",
+        "Terugkerend werk vereenvoudigen",
+        "Informatie samen gebruiken"
+      ],
+      "process": "Samen van doel naar uitvoering",
+      "processBody": "We bepalen de omvang, spreken de volgende stappen af en beoordelen het resultaat samen met u.",
+      "processKicker": "PERSOONLIJK GEPLAND. SAMEN UITGEVOERD.",
+      "steps": [
+        [
+          "Verhelderen",
+          "We beginnen met uw doel, bestaande systemen en open vragen."
+        ],
+        [
+          "Omvang afspreken",
+          "We leggen vast wat er komt, wie betrokken is en hoe u het resultaat beoordeelt."
+        ],
+        [
+          "Uitvoeren en toetsen",
+          "U ziet concrete tussenresultaten. We toetsen de afgesproken processen en feedback."
+        ],
+        [
+          "Overdragen",
+          "U ontvangt de afgesproken resultaten en een begrijpelijke uitleg."
+        ]
+      ],
+      "products": "Maak kennis met producten en werkgebieden",
+      "productsBody": "Ontdek de AI-werkplek, agentische AI, de API en TEILEKLAR als afzonderlijke aanbiedingen.",
+      "productKicker": "Verschillende producten. Een passende keuze.",
+      "productLink": "Product ontdekken",
+      "productAvailability": "Omvang en beschikbaarheid per onderdeel",
+      "productDescriptions": [
+        "De ingang naar de NeX2fly Suite en haar werkgebieden.",
+        "Mogelijkheden rond NeX Agentic AI en AI Fly Oracle.",
+        "Koppelingen en integratieopties voor bestaande systemen.",
+        "De eigen TEILEKLAR-shopwereld en haar diensten."
+      ],
+      "finish": "Waar wilt u beginnen?",
+      "finishBody": "Beschrijf uw plan of bekijk eerst onze diensten.",
+      "finishAction": "Plan bespreken",
+      "services": "Diensten bekijken",
+      "contact": "Liever zonder chat? Neem contact op",
+      "sceneAlt": "Pascal en NeX in een gezamenlijke illustratie",
+      "nexAlt": "NeX als begeleider van de drie dienstgebieden",
+      "start": "Start",
+      "work": "Werk",
+      "result": "Resultaat",
+      "visualLabel": "Uw doel bepaalt de richting"
+    },
+    "fr": {
+      "project": "Votre projet d’abord",
+      "projectBody": "Que souhaitez-vous simplifier pour vos clients ou votre équipe ? Parlez-nous de votre objectif. Vous n’avez pas besoin de connaître la solution technique.",
+      "projectAction": "Décrire votre projet",
+      "projectKicker": "COMPRENDRE. PUIS RELIER.",
+      "projectNote": "Votre objectif et les prochaines étapes en vue.",
+      "choice": "Trouvez votre point de départ",
+      "choiceBody": "Souhaitez-vous présenter votre offre en ligne, simplifier les tâches récurrentes ou partager des informations ? Choisissez le domaine adapté à votre besoin.",
+      "choiceKicker": "Trois possibilités. Votre objectif.",
+      "serviceLink": "Voir le domaine",
+      "pathLabels": [
+        "Site web",
+        "Processus",
+        "Portail"
+      ],
+      "pathDescriptions": [
+        "Présenter clairement votre offre",
+        "Simplifier le travail répétitif",
+        "Partager les informations"
+      ],
+      "process": "De l’objectif à la réalisation, ensemble",
+      "processBody": "Nous définissons le périmètre, convenons des prochaines étapes et examinons le résultat avec vous.",
+      "processKicker": "Un projet défini ensemble, une réalisation accompagnée.",
+      "steps": [
+        [
+          "Comprendre",
+          "Nous partons de votre objectif, des systèmes existants et des questions à résoudre."
+        ],
+        [
+          "Définir le périmètre",
+          "Nous précisons les résultats attendus, les responsabilités et les critères de vérification."
+        ],
+        [
+          "Réaliser et vérifier",
+          "Vous découvrez des résultats intermédiaires. Nous examinons les parcours convenus et vos retours."
+        ],
+        [
+          "Transmettre",
+          "Vous recevez les résultats convenus et une présentation de leur utilisation."
+        ]
+      ],
+      "products": "Découvrez les produits et espaces de travail",
+      "productsBody": "Découvrez l’espace IA, l’IA agentique, l’API et TEILEKLAR comme des offres distinctes.",
+      "productKicker": "Des produits distincts. Un choix adapté.",
+      "productLink": "Découvrir le produit",
+      "productAvailability": "Périmètre et disponibilité dans chaque domaine",
+      "productDescriptions": [
+        "L’entrée dans la NeX2fly Suite et ses espaces de travail.",
+        "Les possibilités autour de NeX Agentic AI et AI Fly Oracle.",
+        "Les interfaces et intégrations pour les systèmes existants.",
+        "L’univers de la boutique TEILEKLAR et ses services."
+      ],
+      "finish": "Par quoi souhaitez-vous commencer ?",
+      "finishBody": "Décrivez votre projet ou découvrez d’abord nos prestations.",
+      "finishAction": "Discuter du projet",
+      "services": "Voir les services",
+      "contact": "Sans chat ? Nous contacter",
+      "sceneAlt": "Pascal et NeX dans une illustration commune",
+      "nexAlt": "NeX accompagne les trois domaines de prestations",
+      "start": "Départ",
+      "work": "Travail",
+      "result": "Résultat",
+      "visualLabel": "Votre objectif donne la direction"
+    },
+    "en": {
+      "project": "Your project first",
+      "projectBody": "What should become easier for your customers or your team? Tell us your goal. You don't need to know the technical solution yet.",
+      "projectAction": "Describe your project",
+      "projectKicker": "UNDERSTAND FIRST. THEN CONNECT.",
+      "projectNote": "Keep your goal and next steps in view.",
+      "choice": "How to find your starting point",
+      "choiceBody": "Would you like to present your offering online, simplify recurring work or share information? Choose the area that fits your task.",
+      "choiceKicker": "THREE PATHS. YOUR GOAL.",
+      "serviceLink": "View area",
+      "pathLabels": [
+        "Website",
+        "Process",
+        "Portal"
+      ],
+      "pathDescriptions": [
+        "Present your offer clearly",
+        "Simplify recurring work",
+        "Share information together"
+      ],
+      "process": "From goal to delivery, together",
+      "processBody": "We clarify the scope, agree the next steps and review the result together with you.",
+      "processKicker": "PLANNED WITH YOU. DELIVERED TOGETHER.",
+      "steps": [
+        [
+          "Clarify",
+          "We start with your goal, the existing systems and the open questions."
+        ],
+        [
+          "Agree the scope",
+          "We define what should be created, who is involved and how you will check the result."
+        ],
+        [
+          "Build and review",
+          "You see concrete interim results. We review the agreed flows and feedback."
+        ],
+        [
+          "Hand over",
+          "You receive the agreed results and a clear introduction."
+        ]
+      ],
+      "products": "Get to know the products and workspaces",
+      "productsBody": "Explore the AI workspace, agentic AI, the API and TEILEKLAR as distinct offerings.",
+      "productKicker": "Distinct products. The right starting point.",
+      "productLink": "Get to know the product",
+      "productAvailability": "Scope and availability in each area",
+      "productDescriptions": [
+        "The entry into the NeX2fly Suite and its workspaces.",
+        "Possibilities around NeX Agentic AI and AI Fly Oracle.",
+        "Interfaces and integration options for existing systems.",
+        "The independent TEILEKLAR shop world and its services."
+      ],
+      "finish": "What would you like to start with?",
+      "finishBody": "Describe your project to us or take a look at our services first.",
+      "finishAction": "Discuss your project",
+      "services": "View services",
+      "contact": "Prefer no chat? Get in touch",
+      "sceneAlt": "Pascal and NeX shown together",
+      "nexAlt": "NeX accompanies the three service areas",
+      "start": "Start",
+      "work": "Work",
+      "result": "Result",
+      "visualLabel": "Your goal sets the direction"
+    }
+  },
+  "homeDiagrams": {
+    "de": {
+      "example": "Beispiel: eine Anfrage",
+      "input": "„Wir verlieren bei Anfragen den Überblick.“",
+      "output": "Ein Beispiel für Ihr Projektbriefing",
+      "rows": [
+        [
+          "Ihr Ziel",
+          "Anfragen an einem Ort im Blick"
+        ],
+        [
+          "Der Ausgangspunkt",
+          "E-Mails, Notizen und Rückfragen"
+        ],
+        [
+          "Gemeinsam klären",
+          "Wer übernimmt welchen Schritt?"
+        ],
+        [
+          "Als Nächstes",
+          "Den passenden Ablauf festlegen"
+        ]
+      ],
+      "note": "Erst verstehen. Dann sinnvoll verbinden.",
+      "choiceTitle": "Drei Einstiege für unterschiedliche Aufgaben",
+      "routes": [
+        [
+          "Angebot zeigen",
+          "Den Weg zur Anfrage verständlich machen"
+        ],
+        [
+          "Abläufe verbinden",
+          "Wiederholte Eingaben verringern"
+        ],
+        [
+          "Wissen bündeln",
+          "Informationen gemeinsam nutzen"
+        ]
+      ]
+    },
+    "nl": {
+      "example": "Voorbeeld: een aanvraag",
+      "input": "“We verliezen het overzicht over aanvragen.”",
+      "output": "Een voorbeeld van uw projectbriefing",
+      "rows": [
+        [
+          "Doel",
+          "Aanvragen op één plek ordenen"
+        ],
+        [
+          "Vandaag",
+          "E-mail, notities, vragen"
+        ],
+        [
+          "Open vraag",
+          "Wie neemt de volgende stap?"
+        ],
+        [
+          "Volgende stap",
+          "Samen het proces verduidelijken"
+        ]
+      ],
+      "note": "Uw vraag vormt het uitgangspunt voor het gesprek.",
+      "choiceTitle": "Drie ingangen voor verschillende taken",
+      "routes": [
+        [
+          "Uw aanbod presenteren",
+          "De weg naar een aanvraag verduidelijken"
+        ],
+        [
+          "Processen verbinden",
+          "Herhaalde invoer verminderen"
+        ],
+        [
+          "Kennis bundelen",
+          "Informatie samen gebruiken"
+        ]
+      ]
+    },
+    "fr": {
+      "example": "Exemple : une demande",
+      "input": "« Nous perdons le suivi des demandes. »",
+      "output": "Un exemple de cadrage de votre projet",
+      "rows": [
+        [
+          "Objectif",
+          "Organiser les demandes au même endroit"
+        ],
+        [
+          "Aujourd’hui",
+          "E-mails, notes, questions"
+        ],
+        [
+          "Question ouverte",
+          "Qui prend en charge la prochaine étape ?"
+        ],
+        [
+          "Prochaine étape",
+          "Clarifier le processus ensemble"
+        ]
+      ],
+      "note": "Votre besoin sert de point de départ à la discussion.",
+      "choiceTitle": "Trois entrées pour des besoins différents",
+      "routes": [
+        [
+          "Présenter votre offre",
+          "Clarifier le parcours de demande"
+        ],
+        [
+          "Relier les processus",
+          "Réduire les saisies répétées"
+        ],
+        [
+          "Réunir les connaissances",
+          "Partager les informations"
+        ]
+      ]
+    },
+    "en": {
+      "example": "Example: a request",
+      "input": "“We lose track of incoming requests.”",
+      "output": "An example of your project brief",
+      "rows": [
+        [
+          "Your goal",
+          "Keep requests in one place"
+        ],
+        [
+          "The starting point",
+          "Emails, notes and follow-ups"
+        ],
+        [
+          "Clarify together",
+          "Who takes which step?"
+        ],
+        [
+          "Next",
+          "Define the right process"
+        ]
+      ],
+      "note": "Understand first. Then connect meaningfully.",
+      "choiceTitle": "Three starting points for different tasks",
+      "routes": [
+        [
+          "Present your offering",
+          "Make the enquiry route clear"
+        ],
+        [
+          "Connect workflows",
+          "Reduce repeated data entry"
+        ],
+        [
+          "Bring knowledge together",
+          "Share information"
+        ]
+      ]
+    }
+  },
+  "hero": {
+    "de": {
+      "cta": "Vorhaben besprechen",
+      "services": "Leistungen ansehen",
+      "scene": "Pascal, NeX und AI Fly Oracle begrüßen Sie",
+      "start": "Begrüßung starten",
+      "finaleTitle": "Ihr Ziel. Ihr nächster Schritt.",
+      "paths": [
+        [
+          "Website",
+          "Ihr Angebot auf den Punkt bringen"
+        ],
+        [
+          "Ablauf",
+          "Weniger Routine. Mehr Überblick."
+        ],
+        [
+          "Portal",
+          "Zusammenarbeit für Ihr Team und Ihre Kunden"
+        ]
+      ]
+    },
+    "nl": {
+      "cta": "Plan bespreken",
+      "services": "Diensten bekijken",
+      "scene": "Pascal, NeX en AI Fly Oracle verwelkomen u",
+      "start": "Welkom starten",
+      "finaleTitle": "Waar wilt u beginnen?",
+      "paths": [
+        [
+          "Website",
+          "Uw aanbod helder presenteren"
+        ],
+        [
+          "Proces",
+          "Terugkerend werk vereenvoudigen"
+        ],
+        [
+          "Portaal",
+          "Informatie samen gebruiken"
+        ]
+      ]
+    },
+    "fr": {
+      "cta": "Discuter du projet",
+      "services": "Voir les services",
+      "scene": "Pascal, NeX et AI Fly Oracle vous souhaitent la bienvenue",
+      "start": "Lancer l’accueil",
+      "finaleTitle": "Par quoi souhaitez-vous commencer ?",
+      "paths": [
+        [
+          "Site web",
+          "Présenter clairement votre offre"
+        ],
+        [
+          "Processus",
+          "Simplifier le travail répétitif"
+        ],
+        [
+          "Portail",
+          "Partager les informations"
+        ]
+      ]
+    },
+    "en": {
+      "cta": "Discuss your project",
+      "services": "View services",
+      "scene": "Pascal, NeX and AI Fly Oracle greet you",
+      "start": "Start the welcome",
+      "finaleTitle": "What would you like to start with?",
+      "paths": [
+        [
+          "Website",
+          "Present your offer clearly"
+        ],
+        [
+          "Process",
+          "Simplify repetitive work"
+        ],
+        [
+          "Portal",
+          "Collaboration for your team and customers"
+        ]
+      ]
+    }
+  },
+  "page": {
+    "de": {
+      "breadcrumb": "Sie sind hier",
+      "onPage": "Auf dieser Seite",
+      "connections": "Passende Themen",
+      "next": "Wie möchten Sie fortfahren?",
+      "nextIntro": "Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.",
+      "details": "Im Detail",
+      "contact": "Direkter Kontakt",
+      "learn": "Seite ansehen",
+      "unavailable": "Ziel derzeit nicht verfügbar",
+      "home": "Startseite",
+      "service": "Leistungen",
+      "product": "Produkte und Lösungen",
+      "workshop": "Werkstatt und Zusammenarbeit",
+      "commerce": "Teile, Fahrzeug und nächste Schritte",
+      "document": "Informationen und Recht",
+      "account": "Ihr Konto",
+      "article": "Wissen und Orientierung",
+      "company": "NeXify kennenlernen",
+      "back": "Zur Übersicht",
+      "overview": "In diesem Bereich",
+      "related": "Weiterführende Seiten"
+    },
+    "nl": {
+      "breadcrumb": "U bent hier",
+      "onPage": "Op deze pagina",
+      "connections": "Passende onderwerpen",
+      "next": "Hoe wilt u verdergaan?",
+      "nextIntro": "Kies de volgende stap die bij uw plan past.",
+      "details": "In detail",
+      "contact": "Direct contact",
+      "learn": "Pagina bekijken",
+      "unavailable": "Doel momenteel niet beschikbaar",
+      "home": "Startpagina",
+      "service": "Diensten",
+      "product": "Producten en oplossingen",
+      "workshop": "Garage en samenwerking",
+      "commerce": "Onderdelen, voertuig en volgende stappen",
+      "document": "Informatie en voorwaarden",
+      "account": "Uw account",
+      "article": "Kennis en oriëntatie",
+      "company": "Ontdek NeXify",
+      "back": "Naar het overzicht",
+      "overview": "In dit onderdeel",
+      "related": "Gerelateerde pagina’s"
+    },
+    "fr": {
+      "breadcrumb": "Vous êtes ici",
+      "onPage": "Sur cette page",
+      "connections": "Liens utiles",
+      "next": "Comment souhaitez-vous poursuivre ?",
+      "nextIntro": "Choisissez la prochaine étape adaptée à votre projet.",
+      "details": "En détail",
+      "contact": "Contact direct",
+      "learn": "Voir la page",
+      "unavailable": "Destination actuellement indisponible",
+      "home": "Accueil",
+      "service": "Prestations",
+      "product": "Produits et solutions",
+      "workshop": "Atelier et collaboration",
+      "commerce": "Pièces, véhicule et prochaines étapes",
+      "document": "Informations et conditions",
+      "account": "Votre compte",
+      "article": "Conseils et orientation",
+      "company": "Découvrir NeXify",
+      "back": "Revenir à la vue d’ensemble",
+      "overview": "Dans cette rubrique",
+      "related": "Pages associées"
+    },
+    "en": {
+      "breadcrumb": "You are here",
+      "onPage": "On this page",
+      "connections": "Useful links",
+      "next": "How would you like to proceed?",
+      "nextIntro": "Choose the next step that fits your project.",
+      "details": "In detail",
+      "contact": "Direct contact",
+      "learn": "View page",
+      "unavailable": "Destination currently unavailable",
+      "home": "Home",
+      "service": "Services",
+      "product": "Products and solutions",
+      "workshop": "Workshop and collaboration",
+      "commerce": "Parts, vehicle and next steps",
+      "document": "Information and terms",
+      "account": "Your account",
+      "article": "Advice and orientation",
+      "company": "Discover NeXify",
+      "back": "Back to the overview",
+      "overview": "In this section",
+      "related": "Related pages"
+    }
+  },
+  "shopFooter": {
+    "de": {
+      "intro": "Teile, Fahrzeugfragen und Werkstattkontakte. Beschreiben Sie, was Sie benötigen.",
+      "contact": "Anliegen beschreiben",
+      "areas": "Teile · Fahrzeugzuordnung · Werkstatt · Partnerschaft"
+    },
+    "nl": {
+      "intro": "Onderdelen, voertuigvragen en werkplaatscontacten. Beschrijf wat u nodig heeft.",
+      "contact": "Uw vraag beschrijven",
+      "areas": "Onderdelen · Voertuigkoppeling · Werkplaats · Samenwerking"
+    },
+    "fr": {
+      "intro": "Pièces, questions sur votre véhicule et contacts d’ateliers. Décrivez votre besoin.",
+      "contact": "Décrire votre besoin",
+      "areas": "Pièces · Compatibilité véhicule · Atelier · Partenariat"
+    },
+    "en": {
+      "intro": "Parts, vehicle questions and workshop contacts. Tell us what you need.",
+      "contact": "Describe your enquiry",
+      "areas": "Parts · Vehicle compatibility · Workshop · Partnership"
+    }
+  }
+}

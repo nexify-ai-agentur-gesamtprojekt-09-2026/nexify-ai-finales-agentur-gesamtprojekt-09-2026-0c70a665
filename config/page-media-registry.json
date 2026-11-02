@@ -1559,7 +1559,7 @@
       "page_id": "home",
       "module_id": "home-explain-1",
       "context_id": "module-home-explain-1",
-      "context_title": "Ihr Vorhaben zuerst",
+      "context_title": "Was soll einfacher werden?",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1581,7 +1581,7 @@
       "page_id": "home",
       "module_id": "home-explain-2",
       "context_id": "module-home-explain-2",
-      "context_title": "So finden Sie Ihren Einstieg",
+      "context_title": "Persönlich begleitet, klar zugeordnet",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1603,7 +1603,7 @@
       "page_id": "services",
       "module_id": "services-explain-1",
       "context_id": "module-services-explain-1",
-      "context_title": "Welche Leistung gehört zu welchem Ziel?",
+      "context_title": "Auftritt, Abläufe und Zusammenarbeit",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1625,7 +1625,7 @@
       "page_id": "services",
       "module_id": "services-explain-2",
       "context_id": "module-services-explain-2",
-      "context_title": "Was für Ihre Auswahl wichtig ist",
+      "context_title": "Beratung, Einführung und Weiterentwicklung",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1647,7 +1647,7 @@
       "page_id": "websites",
       "module_id": "websites-explain-1",
       "context_id": "module-websites-explain-1",
-      "context_title": "Vom Seitenziel zum nächsten Schritt",
+      "context_title": "Inhalte und Kontakt gehören zusammen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1669,7 +1669,7 @@
       "page_id": "websites",
       "module_id": "websites-explain-2",
       "context_id": "module-websites-explain-2",
-      "context_title": "Inhalte und Verantwortung früh klären",
+      "context_title": "Von Ihren Inhalten zur Übergabe",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1691,7 +1691,7 @@
       "page_id": "automation",
       "module_id": "automation-explain-1",
       "context_id": "module-automation-explain-1",
-      "context_title": "Wiederkehrende Arbeit nachvollziehbar planen",
+      "context_title": "Ein Ablauf statt vieler Einzelwerkzeuge",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1713,7 +1713,7 @@
       "page_id": "automation",
       "module_id": "automation-explain-2",
       "context_id": "module-automation-explain-2",
-      "context_title": "Einen Ablauf in überschaubare Schritte zerlegen",
+      "context_title": "Mit einem nachvollziehbaren Piloten beginnen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1735,7 +1735,7 @@
       "page_id": "apps-portals",
       "module_id": "apps-portals-explain-1",
       "context_id": "module-apps-portals-explain-1",
-      "context_title": "Oberfläche und Berechtigung zusammen denken",
+      "context_title": "Den Vorgang im Blick behalten",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1757,7 +1757,7 @@
       "page_id": "apps-portals",
       "module_id": "apps-portals-explain-2",
       "context_id": "module-apps-portals-explain-2",
-      "context_title": "Übergaben zwischen Menschen und Systemen klären",
+      "context_title": "Vom ersten Angebot zur Zusammenarbeit",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1779,7 +1779,7 @@
       "page_id": "scope",
       "module_id": "scope-explain-1",
       "context_id": "module-scope-explain-1",
-      "context_title": "Was vor einem Projektstart geklärt wird",
+      "context_title": "Ein konkreter Fall reicht für den Anfang",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1801,7 +1801,7 @@
       "page_id": "scope",
       "module_id": "scope-explain-2",
       "context_id": "module-scope-explain-2",
-      "context_title": "Abhängigkeiten gehören zum Umfang",
+      "context_title": "Umfang und Änderungen nachvollziehen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1823,7 +1823,7 @@
       "page_id": "solutions",
       "module_id": "solutions-explain-1",
       "context_id": "module-solutions-explain-1",
-      "context_title": "Agenturleistung oder eigener Produktkontext?",
+      "context_title": "Beauftragen oder selbst nutzen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1845,7 +1845,7 @@
       "page_id": "pricing",
       "module_id": "pricing-explain-1",
       "context_id": "module-pricing-explain-1",
-      "context_title": "Umfang vor einer verbindlichen Preisentscheidung",
+      "context_title": "Entwicklung ist kein täglicher Betriebspreis",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1867,7 +1867,7 @@
       "page_id": "knowledge",
       "module_id": "knowledge-explain-1",
       "context_id": "module-knowledge-explain-1",
-      "context_title": "Wissen als Vorbereitung für Entscheidungen",
+      "context_title": "Die passende Art von Lösung erkennen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1889,7 +1889,7 @@
       "page_id": "knowledge-start",
       "module_id": "knowledge-start-explain-1",
       "context_id": "module-knowledge-start-explain-1",
-      "context_title": "Was Sie für die erste Anfrage sammeln können",
+      "context_title": "Ausgangslage und Ziel beschreiben",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1911,7 +1911,7 @@
       "page_id": "company",
       "module_id": "company-explain-1",
       "context_id": "module-company-explain-1",
-      "context_title": "Persönliche Klärung statt unbelegter Versprechen",
+      "context_title": "Chat it. Automate it.",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1933,7 +1933,7 @@
       "page_id": "contact",
       "module_id": "contact-explain-1",
       "context_id": "module-contact-explain-1",
-      "context_title": "Mit einem klaren Anliegen ins Gespräch",
+      "context_title": "Worum geht es?",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1955,7 +1955,7 @@
       "page_id": "one",
       "module_id": "one-explain-1",
       "context_id": "module-one-explain-1",
-      "context_title": "Produktziel und Aktivierung unterscheiden",
+      "context_title": "Antwort, Entwurf und ausgeführte Arbeit",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1977,7 +1977,7 @@
       "page_id": "api",
       "module_id": "api-explain-1",
       "context_id": "module-api-explain-1",
-      "context_title": "Technischen Bedarf vor dem Zugang klären",
+      "context_title": "Verbindungen passend zur Aufgabe",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2131,7 +2131,7 @@
       "page_id": "login",
       "module_id": "login-explain-1",
       "context_id": "module-login-explain-1",
-      "context_title": "Anmeldung ist nur der erste Zugangsschritt",
+      "context_title": "Der passende Bereich für Ihre Aufgabe",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2153,7 +2153,7 @@
       "page_id": "signup",
       "module_id": "signup-explain-1",
       "context_id": "module-signup-explain-1",
-      "context_title": "Ein Konto begründet keine Verwaltungsrechte",
+      "context_title": "Den Test bewusst beginnen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2175,7 +2175,7 @@
       "page_id": "tk-home",
       "module_id": "tk-home-explain-1",
       "context_id": "module-tk-home-explain-1",
-      "context_title": "Welches Ersatzteil benötigen Sie?",
+      "context_title": "Das Fahrzeug macht den Unterschied",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2197,7 +2197,7 @@
       "page_id": "tk-home",
       "module_id": "tk-home-explain-2",
       "context_id": "module-tk-home-explain-2",
-      "context_title": "Als Werkstatt mit TEILEKLAR zusammenarbeiten",
+      "context_title": "Teil und Werkstattleistung getrennt betrachten",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2219,7 +2219,7 @@
       "page_id": "tk-search",
       "module_id": "tk-search-explain-1",
       "context_id": "module-tk-search-explain-1",
-      "context_title": "Eine Teilesuche mit den richtigen Angaben starten",
+      "context_title": "Nummer, Ausführung und Fahrzeug",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2241,7 +2241,7 @@
       "page_id": "tk-categories",
       "module_id": "tk-categories-explain-1",
       "context_id": "module-tk-categories-explain-1",
-      "context_title": "Vom Sortiment zur passenden Kategorie",
+      "context_title": "Funktion statt bloßem Namen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2263,7 +2263,7 @@
       "page_id": "tk-category",
       "module_id": "tk-category-explain-1",
       "context_id": "module-tk-category-explain-1",
-      "context_title": "Welche Angaben eine Kategorie braucht",
+      "context_title": "Vergleichbare Angaben nutzen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2285,7 +2285,7 @@
       "page_id": "tk-product",
       "module_id": "tk-product-explain-1",
       "context_id": "module-tk-product-explain-1",
-      "context_title": "Produktinformationen vor einer Auswahl prüfen",
+      "context_title": "Das konkrete Produkt erkennen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2307,7 +2307,7 @@
       "page_id": "tk-product",
       "module_id": "tk-product-explain-2",
       "context_id": "module-tk-product-explain-2",
-      "context_title": "Bei fehlenden Angaben zurück zur Orientierung",
+      "context_title": "Vor dem Kauf zusammenführen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2329,7 +2329,7 @@
       "page_id": "tk-cart",
       "module_id": "tk-cart-explain-1",
       "context_id": "module-tk-cart-explain-1",
-      "context_title": "Auswahl und Bestellung sind verschiedene Schritte",
+      "context_title": "Auswahl prüfen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2351,7 +2351,7 @@
       "page_id": "tk-cart",
       "module_id": "tk-cart-explain-2",
       "context_id": "module-tk-cart-explain-2",
-      "context_title": "Eine Auswahl bleibt überprüfbar",
+      "context_title": "Vor dem Bestellschritt",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2373,7 +2373,7 @@
       "page_id": "tk-checkout",
       "module_id": "tk-checkout-explain-1",
       "context_id": "module-tk-checkout-explain-1",
-      "context_title": "Warum hier noch kein Kauf abgeschlossen wird",
+      "context_title": "Was vor einer Bestellung feststehen muss",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2395,7 +2395,7 @@
       "page_id": "tk-checkout",
       "module_id": "tk-checkout-explain-2",
       "context_id": "module-tk-checkout-explain-2",
-      "context_title": "Rückfragen vor einer Kaufentscheidung klären",
+      "context_title": "Bestellung, Zahlung und Lieferung unterscheiden",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2417,7 +2417,7 @@
       "page_id": "tk-fitment",
       "module_id": "tk-fitment-explain-1",
       "context_id": "module-tk-fitment-explain-1",
-      "context_title": "Passung braucht nachvollziehbare Fahrzeugdaten",
+      "context_title": "Welche Angaben helfen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2439,7 +2439,7 @@
       "page_id": "tk-appointments",
       "module_id": "tk-appointments-explain-1",
       "context_id": "module-tk-appointments-explain-1",
-      "context_title": "Ein Terminwunsch ist noch keine Reservierung",
+      "context_title": "Anliegen und Zeitraum benennen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2461,7 +2461,7 @@
       "page_id": "tk-vouchers",
       "module_id": "tk-vouchers-explain-1",
       "context_id": "module-tk-vouchers-explain-1",
-      "context_title": "Gutscheininformation und eingelöstes Guthaben trennen",
+      "context_title": "Wofür gilt der Gutschein?",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2483,7 +2483,7 @@
       "page_id": "tk-partner",
       "module_id": "tk-partner-explain-1",
       "context_id": "module-tk-partner-explain-1",
-      "context_title": "Eine Werkstattpartnerschaft gezielt anfragen",
+      "context_title": "Betrieb und Leistungen sichtbar machen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2505,7 +2505,7 @@
       "page_id": "tk-partner",
       "module_id": "tk-partner-explain-2",
       "context_id": "module-tk-partner-explain-2",
-      "context_title": "Profil und geschützten Zugang getrennt behandeln",
+      "context_title": "Zusammenarbeit mit klaren Abläufen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2527,7 +2527,7 @@
       "page_id": "tk-workshop",
       "module_id": "tk-workshop-explain-1",
       "context_id": "module-tk-workshop-explain-1",
-      "context_title": "Ein Werkstattprofil braucht freigegebene Angaben",
+      "context_title": "Leistungen direkt beim Betrieb prüfen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2549,7 +2549,7 @@
       "page_id": "tk-workshop",
       "module_id": "tk-workshop-explain-2",
       "context_id": "module-tk-workshop-explain-2",
-      "context_title": "Vom Anliegen zum Terminwunsch",
+      "context_title": "Anfrage und Termin unterscheiden",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2593,7 +2593,7 @@
       "page_id": "nex2fly",
       "module_id": "nex2fly-explain-1",
       "context_id": "module-nex2fly-explain-1",
-      "context_title": "Kundenkonto und 24 Stunden Suite-Test",
+      "context_title": "Von der Frage zur bearbeitbaren Aufgabe",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2615,7 +2615,7 @@
       "page_id": "nex2fly",
       "module_id": "nex2fly-explain-2",
       "context_id": "module-nex2fly-explain-2",
-      "context_title": "Du entscheidest, wie du LLM-Nutzung bezahlst",
+      "context_title": "Dokumente, Kommunikation und längere Aufgaben",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2637,7 +2637,7 @@
       "page_id": "tk-shop",
       "module_id": "tk-shop-explain-1",
       "context_id": "module-tk-shop-explain-1",
-      "context_title": "Vom Anliegen zum passenden Teil",
+      "context_title": "Mit dem Bedarf beginnen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2660,7 +2660,7 @@
       "page_id": "tk-reifenrechner",
       "module_id": "tk-reifenrechner-explain-1",
       "context_id": "module-tk-reifenrechner-explain-1",
-      "context_title": "Reifengrößen verstehen und vergleichen",
+      "context_title": "Die Kennzeichnung lesen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2683,7 +2683,7 @@
       "page_id": "tk-batterie",
       "module_id": "tk-batterie-explain-1",
       "context_id": "module-tk-batterie-explain-1",
-      "context_title": "Die passende Starterbatterie einordnen",
+      "context_title": "Mehr als Ah und Ampere",
       "film_id": null,
       "scene_ids": [],
       "assets": {
