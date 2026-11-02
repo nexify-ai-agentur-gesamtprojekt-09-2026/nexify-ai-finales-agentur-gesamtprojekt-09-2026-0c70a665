@@ -12,7 +12,7 @@ export function useShopCopy() {
   const t = (key: keyof typeof shopCopy.de, values: Record<string, string | number> = {}) => copy[key].replace(/\{(\w+)\}/g, (_, name: string) => String(values[name] ?? ""));
   const money = (cents: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(cents / 100);
   const date = (value: string) => Number.isNaN(Date.parse(value)) ? t("dateUnknown") : new Intl.DateTimeFormat(locale).format(new Date(value));
-  return { t, number, money, date };
+  return { t, number, money, date, locale };
 }
 
 export function ProductImage({ src, alt, large = false }: { src: string | null | undefined; alt: string; large?: boolean }) {
