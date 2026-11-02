@@ -2,9 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {preparePublicData} from '../scripts/generate-public-data.mjs';
 import {routePath,interceptNavigation} from '../src/router-state.mjs';
-const localized=value=>({de:value,nl:value,fr:value});
+const localized=value=>({de:value,nl:value,fr:value,en:value});
 const page=(id,path,extra={})=>({id,path,title:localized(id),summary:localized('Public summary'),site_context:'nexify',access:{visibility:'public',auth_required:false},sections:[],next_actions:[],...extra});
 function fixture(){return{public_allowlist:['home','contact'],pages:[page('home','/'),page('contact','/kontakt'),page('private-customer','/customer-private-route',{access:{visibility:'private',auth_required:true},summary:localized('PRIVATE_PAYLOAD_SENTINEL')})],site_contexts:{nexify:{navigation:['home','contact','private-customer']}}};}
+
+test('missing English is rejected rather than replaced with German customer text',()=>{
+ const source=fixture();delete source.pages[0].summary.en;
+ assert.throws(()=>preparePublicData(source),/Invalid public localization/);
+});
 
 test('protected fields never cross the public build boundary',()=>{
  const source=fixture();source.pages[0].secret='UNRELATED_SECRET_SENTINEL';source.pages[0].roles=['admin'];source.public_allowlist.push('private-customer');

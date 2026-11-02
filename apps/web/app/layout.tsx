@@ -10,6 +10,7 @@ import { publicPages,publicExperienceData } from "../lib/catalog";
 import {PublicExperienceProvider} from "../components/PublicExperience";
 import PublicInstallation from "../components/PublicInstallation";
 import installation from '../.generated/installation.json';
+import "../components/LuxuryMaterials.css";
 
 export const metadata: Metadata = { description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false},...(installation.enabled?{manifest:'/manifest.webmanifest'}:{})};
 export default function RootLayout({children}:{children:ReactNode}) {

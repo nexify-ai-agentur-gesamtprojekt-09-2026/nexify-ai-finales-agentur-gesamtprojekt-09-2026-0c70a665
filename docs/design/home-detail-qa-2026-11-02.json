@@ -1,0 +1,187 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "overflow": false,
+      "homeOverflow": false,
+      "hero": {
+        "x": 647.1563110351562,
+        "y": 151.63734436035156,
+        "w": 728.6776733398438,
+        "h": 410.615966796875
+      },
+      "copy": {
+        "x": 64.796875,
+        "y": 169.140625,
+        "w": 524.875,
+        "h": 375.59375
+      },
+      "card": {
+        "x": 64.796875,
+        "y": 1040.421875,
+        "w": 420.796875,
+        "h": 420.796875
+      },
+      "galleryVideos": 0,
+      "loadedImages": true
+    },
+    {
+      "width": 1280,
+      "overflow": false,
+      "homeOverflow": false,
+      "hero": {
+        "x": 577.2199096679688,
+        "y": 151.71530151367188,
+        "w": 645.6801147460938,
+        "h": 363.7724914550781
+      },
+      "copy": {
+        "x": 57.59375,
+        "y": 153.40625,
+        "w": 487.109375,
+        "h": 360.375
+      },
+      "card": {
+        "x": 57.59375,
+        "y": 986.390625,
+        "w": 372.265625,
+        "h": 372.265625
+      },
+      "galleryVideos": 0,
+      "loadedImages": true
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "homeOverflow": false,
+      "hero": {
+        "x": 376.20843505859375,
+        "y": 249.63690185546875,
+        "w": 407.09423828125,
+        "h": 229.2105712890625
+      },
+      "copy": {
+        "x": 36.890625,
+        "y": 136,
+        "w": 307.109375,
+        "h": 456.5
+      },
+      "card": {
+        "x": 36.890625,
+        "y": 1034.25,
+        "w": 232.734375,
+        "h": 232.734375
+      },
+      "galleryVideos": 0,
+      "loadedImages": true
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "homeOverflow": false,
+      "hero": {
+        "x": 24,
+        "y": 583.875,
+        "w": 342,
+        "h": 192.375
+      },
+      "copy": {
+        "x": 24,
+        "y": 176,
+        "w": 342,
+        "h": 375.875
+      },
+      "card": {
+        "x": 71.875,
+        "y": 1323.0625,
+        "w": 246.234375,
+        "h": 246.234375
+      },
+      "galleryVideos": 0,
+      "loadedImages": true
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "homeOverflow": false,
+      "hero": {
+        "x": 24,
+        "y": 715.25,
+        "w": 272,
+        "h": 153
+      },
+      "copy": {
+        "x": 24,
+        "y": 176,
+        "w": 272,
+        "h": 507.25
+      },
+      "card": {
+        "x": 62.078125,
+        "y": 1529.546875,
+        "w": 195.828125,
+        "h": 195.828125
+      },
+      "galleryVideos": 0,
+      "loadedImages": true
+    },
+    {
+      "state": "sidebar open",
+      "width": 1440,
+      "overflow": false,
+      "homeOverflow": false,
+      "heroColumns": "366.016px 485.203px"
+    },
+    {
+      "state": "200% equivalent CSS viewport",
+      "overflow": false
+    },
+    {
+      "language": "NL",
+      "h2": "Een sterke uitstraling. En alles erachter.",
+      "calculator": "€ 1.925,00"
+    },
+    {
+      "language": "FR",
+      "h2": "Une présence forte. Et tout ce qui la soutient.",
+      "calculator": "1 925,00 €"
+    },
+    {
+      "language": "EN",
+      "h2": "A strong presence. And everything behind it.",
+      "calculator": "€1,925.00"
+    },
+    {
+      "language": "DE",
+      "h2": "Ein starker Auftritt. Und alles, was dahinter wirkt.",
+      "calculator": "1.925,00 €"
+    },
+    {
+      "focusVisible": true,
+      "outline": "solid"
+    },
+    {
+      "state": "reduced motion",
+      "paused": true,
+      "loop": false,
+      "readyState": 4
+    },
+    {
+      "state": "manual playback",
+      "paused": false,
+      "currentTime": 0.266041,
+      "videoWidth": 1920
+    }
+  ],
+  "pageErrors": [],
+  "scope": "Home detail refinement, local compiled static build",
+  "base_commit": "24aa8b0122bd375416fdb3df78cc37c377d3cf6b",
+  "physicalSafari": false,
+  "source_hashes": {
+    "apps/web/components/AtelierFilm.tsx": "dfffb77294690016d0ffc386ac1c1373f17c42df7440e9261ccbfcbf7311cebc",
+    "apps/web/components/AtelierFilm.css": "d9b94d6df6a060e99a603948014320cc41ad01c71269595692dd1879277a8c3f",
+    "apps/web/components/HomeContent.tsx": "d9de78a2963744033e4f94850ca0ce1fd0e112a4b815960eb1551090dbe15f2b",
+    "apps/web/components/HomeConcept.css": "d4fd1c2425c678be5ddd9916f29fd338ad0fb1f6b28a935611dd942180b23ca6",
+    "config/design-tokens.json": "5bd32f961f9ffa440b860da8a7a8a9afe9be87975f4b0826afafd4057b4abf9e"
+  }
+}

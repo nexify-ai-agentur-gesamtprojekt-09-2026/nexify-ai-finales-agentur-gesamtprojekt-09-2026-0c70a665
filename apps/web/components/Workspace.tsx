@@ -26,14 +26,126 @@ const PublicOrientationChat=lazy(()=>import("./PublicOrientationChat"));
 const intents: Intent[] = ["quote", "booking", "marketing"];
 // Einstiegszeilen nach Zielbild: füllen das Textfeld vor, senden nichts automatisch.
 const starters:Record<Locale,Record<"nexify"|"teileklar",[string,string][]>>={
-  de:{nexify:[["Website planen","Ich möchte eine Website planen: "],["Ablauf automatisieren","Ich möchte einen Ablauf automatisieren: "],["Bestehendes Projekt","Ich habe ein bestehendes Projekt: "]],
-      teileklar:[["Fahrzeug angeben","Mein Fahrzeug (Marke, Modell, Baujahr): "],["Teileanfrage vorbereiten","Meine Teileanfrage – Fahrzeug und gesuchtes Teil: "],["Werkstatt-Anliegen","Mein Werkstatt-Anliegen (Fahrzeug und Arbeit): "]]},
-  nl:{nexify:[["Website plannen","Ik wil een website plannen: "],["Proces automatiseren","Ik wil een proces automatiseren: "],["Bestaand project","Ik heb een bestaand project: "]],
-      teileklar:[["Voertuig opgeven","Mijn voertuig (merk, model, bouwjaar): "],["Onderdeelaanvraag voorbereiden","Mijn onderdeelaanvraag – voertuig en gezocht onderdeel: "],["Werkplaats-vraag","Mijn werkplaats-vraag (voertuig en werk): "]]},
-  fr:{nexify:[["Planifier un site","Je veux planifier un site web : "],["Automatiser un processus","Je veux automatiser un processus : "],["Projet existant","J’ai un projet existant : "]],
-      teileklar:[["Indiquer le véhicule","Mon véhicule (marque, modèle, année) : "],["Préparer une demande de pièce","Ma demande de pièce – véhicule et pièce recherchée : "],["Demande atelier","Ma demande d’atelier (véhicule et travaux) : "]]},
-  en:{nexify:[["Plan a website","I would like to plan a website: "],["Automate a process","I would like to automate a process: "],["Existing project","I have an existing project: "]],
-      teileklar:[["Specify vehicle","My vehicle (make, model, year): "],["Prepare a parts request","My parts request – vehicle and part needed: "],["Workshop request","My workshop request (vehicle and work): "]]},
+  "de": {
+    "nexify": [
+      [
+        "Marke & Web",
+        "Ich möchte meinen Markenauftritt und meine Website entwickeln: "
+      ],
+      [
+        "Systeme & KI",
+        "Ich möchte diesen Arbeitsablauf mit KI und Automatisierung verbessern: "
+      ],
+      [
+        "Ads & Marketing",
+        "Ich möchte diese Zielgruppe mit einer Kampagne erreichen: "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Fahrzeug & Teil",
+        "Mein Fahrzeug und das gesuchte Teil: "
+      ],
+      [
+        "Werkstatt-Anfrage",
+        "Mein Fahrzeug und die gewünschte Werkstattleistung: "
+      ],
+      [
+        "Zusammenarbeit",
+        "Ich möchte eine Zusammenarbeit mit TEILEKLAR besprechen: "
+      ]
+    ]
+  },
+  "nl": {
+    "nexify": [
+      [
+        "Merk & web",
+        "Ik wil mijn merkuitstraling en website ontwikkelen: "
+      ],
+      [
+        "Systemen & AI",
+        "Ik wil dit werkproces met AI en automatisering verbeteren: "
+      ],
+      [
+        "Ads & marketing",
+        "Ik wil deze doelgroep met een campagne bereiken: "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Voertuig & onderdeel",
+        "Mijn voertuig en het gezochte onderdeel: "
+      ],
+      [
+        "Werkplaatsaanvraag",
+        "Mijn voertuig en de gewenste werkplaatsdienst: "
+      ],
+      [
+        "Samenwerking",
+        "Ik wil samenwerking met TEILEKLAR bespreken: "
+      ]
+    ]
+  },
+  "fr": {
+    "nexify": [
+      [
+        "Marque & web",
+        "Je souhaite développer ma marque et mon site web : "
+      ],
+      [
+        "Systèmes & IA",
+        "Je souhaite améliorer ce processus grâce à l’IA et à l’automatisation : "
+      ],
+      [
+        "Publicité & marketing",
+        "Je souhaite toucher ce public avec une campagne : "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Véhicule & pièce",
+        "Mon véhicule et la pièce recherchée : "
+      ],
+      [
+        "Demande atelier",
+        "Mon véhicule et la prestation d’atelier souhaitée : "
+      ],
+      [
+        "Collaboration",
+        "Je souhaite discuter d’une collaboration avec TEILEKLAR : "
+      ]
+    ]
+  },
+  "en": {
+    "nexify": [
+      [
+        "Brand & web",
+        "I want to develop my brand presence and website: "
+      ],
+      [
+        "Systems & AI",
+        "I want to improve this workflow with AI and automation: "
+      ],
+      [
+        "Ads & marketing",
+        "I want to reach this audience with a campaign: "
+      ]
+    ],
+    "teileklar": [
+      [
+        "Vehicle & part",
+        "My vehicle and the part I need: "
+      ],
+      [
+        "Workshop enquiry",
+        "My vehicle and the workshop service I am seeking: "
+      ],
+      [
+        "Partnership",
+        "I would like to discuss working with TEILEKLAR: "
+      ]
+    ]
+  }
 };
 const UIContext=createContext({locale:"de" as Locale,t:translations.de,session:null as {csrf:string}|null,chatReady:false});
 export const useUI=()=>useContext(UIContext);
@@ -45,7 +157,7 @@ export function StartAction({intent,children,variant='primary'}:{intent:Intent;c
 
 export default function Workspace({children,pages,accountControl}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode}) {
   const [locale,setLocale] = useState<Locale>("de");
-  const [open,setOpen] = useState(true);
+  const [open,setOpen] = useState(false);
   const [chatWidth,setChatWidthState]=useState<number|null>(null);
   const setChatWidth=useCallback((w:number|null)=>{setChatWidthState(w);storeChatWidth(w);},[]);
   const [mobile,setMobile]=useState(false);
@@ -121,7 +233,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   const pathname=useSitePathname();
   const currentPage=pages.find(page=>page.path===pathname);
   const site=(currentPage?currentPage.site_context==="teileklar":pathname.startsWith("/teileklar"))?"teileklar":"nexify";
-  const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Erstgespräch starten",nl:"Gesprek starten",fr:"Démarrer l'entretien",en:"Start the first conversation"}[locale]};
+  const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Projektgespräch anfragen",nl:"Projectgesprek aanvragen",fr:"Demander un échange projet",en:"Request a project conversation"}[locale]};
   const standalone=typeof window!=="undefined"&&(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
   const canQuote=ready&&capabilities?.quote_pdf===true;
   const canOutbox=ready&&capabilities?.pending_outbox===true;
@@ -136,7 +248,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   const contact=pages.find(page=>page.path==="/kontakt")?.contact_channels?.find(channel=>channel.type==="email"&&channel.address==="mail@nexifyai.cloud");
 
   useEffect(() => {
-    try { setChatWidthState(readChatWidth()); if(sessionStorage.getItem("nx-chat-open")==="0")setOpen(false); } catch {}
+    try { setChatWidthState(readChatWidth()); setOpen(sessionStorage.getItem("nx-chat-open")==="1"); } catch {}
     try { const saved = localStorage.getItem("nexify-locale"); if(saved && saved in translations)setLocale(saved as Locale); } catch {}
     const query=window.matchMedia("(max-width: 820px)");
     setMobile(query.matches);if(query.matches)setOpen(false);
@@ -172,7 +284,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
         const input=messageInput.current;if(!input)return;
         const existing=input.value.trim();const next=existing&&!existing.includes(text)?`${existing}\n\n${text}`:existing||text;
         if(next.length<=3000){input.value=next;setPrefillNotice(locale==='de'?'Du kannst den Text anpassen. Es wurde noch nichts gesendet.':locale==='nl'?'Je kunt de tekst aanpassen. Er is nog niets verzonden.':locale==='fr'?'Tu peux modifier le texte. Rien n’a encore été envoyé.':'You can edit the text. Nothing has been sent yet.');}
-        else setPrefillNotice(locale==='de'?'Dein vorhandener Text bleibt erhalten. Kürze ihn, bevor du ein Beispiel ergänzt.':locale==='nl'?'Je bestaande tekst blijft behouden. Kort deze in voordat je een voorbeeld toevoegt.':locale==='fr'?'Ton texte est conservé. Raccourcis-le avant d’ajouter un exemple.':'Your existing text is kept. Shorten it before adding an example.');
+        else setPrefillNotice(locale==='de'?'Ihr vorhandener Text bleibt erhalten. Kürzen Sie ihn, bevor Sie ein Beispiel ergänzen.':locale==='nl'?'Uw bestaande tekst blijft behouden. Kort deze in voordat u een voorbeeld toevoegt.':locale==='fr'?'Votre texte est conservé. Raccourcissez-le avant d’ajouter un exemple.':'Your existing text is kept. Shorten it before adding an example.');
         input.focus({preventScroll:true});
       });
     };
@@ -214,7 +326,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     try {await action();}catch(failure){setError(failure instanceof Error&&failure.message.startsWith("chatgpt_")&&failure.message.endsWith("_reached")?"chatgpt_limit":"error");}finally{active.current=false;setBusy(false);}
   }
   const chatState=ready?"connected":error==="offline"?"unavailable":"connecting";
-  const chatStateLabel={de:{connected:"Verbunden",unavailable:"Nicht verfügbar · Anfrage per Formular",connecting:"Wird verbunden …"},nl:{connected:"Verbonden",unavailable:"Niet beschikbaar · aanvraag via formulier",connecting:"Wordt verbonden …"},fr:{connected:"Connecté",unavailable:"Indisponible · demande par formulaire",connecting:"Connexion …"},en:{connected:"Connected",unavailable:"Unavailable · request via form",connecting:"Connecting …"}}[locale][chatState];
+  const chatStateLabel={"de": {"connected": "Projektverbindung bereit", "unavailable": "Persönliche Anfrage per Kontakt", "connecting": "Verbindung wird geprüft …"}, "nl": {"connected": "Projectverbinding gereed", "unavailable": "Persoonlijke aanvraag via contact", "connecting": "Verbinding wordt gecontroleerd …"}, "fr": {"connected": "Connexion projet prête", "unavailable": "Demande personnelle via contact", "connecting": "Vérification de la connexion…"}, "en": {"connected": "Project connection ready", "unavailable": "Personal enquiry via contact", "connecting": "Checking the connection …"}}[locale][chatState];
   const reply=(selected?:Intent)=>selected==="quote"?t.quoteReply:selected==="booking"?t.bookingReply:selected==="marketing"?t.marketingReply:t.choose;
   function closePanel(){changePanel(false);requestAnimationFrame(()=>{const target=[...document.querySelectorAll<HTMLButtonElement>(".reopen-chat,.header-actions .compact")].find(element=>element.getClientRects().length>0);target?.focus({preventScroll:true});});}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
@@ -226,7 +338,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
-      <header className="site-header" data-testid="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={`${site==="teileklar"?"TEILEKLAR":"NeXify AI"} · ${locale==="de"?"Startseite":locale==="nl"?"Startpagina":locale==="fr"?"Accueil":"Home"}`}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>{locale==="de"?"Ein Bereich von NeXify AI":locale==="nl"?"Een onderdeel van NeXify AI":locale==="fr"?"Une activité de NeXify AI":"A part of NeXify AI"}</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>Ne<strong>X</strong>ify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
+      <header className="site-header" data-testid="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={`${site==="teileklar"?"TEILEKLAR":"NeXify AI FACTORY B.V."} · ${locale==="de"?"Startseite":locale==="nl"?"Startpagina":locale==="fr"?"Accueil":"Home"}`}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>{locale==="de"?"Ein Bereich von NeXify AI":locale==="nl"?"Een onderdeel van NeXify AI":locale==="fr"?"Une activité de NeXify AI":"A part of NeXify AI"}</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>Ne<strong>X</strong>ify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
         <SiteNavigation pages={pages} site={site} locale={locale} pathname={pathname}/>
         <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option><option value="en">EN</option></select>{site==="teileklar"&&(accountControl??<Link className="account-link" data-testid="header-teileklar-account" href="/anmelden">{locale==="de"?"TEILEKLAR-Konto":locale==="nl"?"TEILEKLAR-account":locale==="fr"?"Compte TEILEKLAR":"TEILEKLAR account"}</Link>)}<Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
       </header>
@@ -237,11 +349,11 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
     <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>{!mobile&&<ChatResizeHandle width={chatWidth} onChange={setChatWidth} label={locale==="de"?"Chatbreite anpassen":locale==="nl"?"Chatbreedte aanpassen":locale==="fr"?"Ajuster la largeur du chat":"Resize chat"}/>}
       <div className="panel-topstrip" aria-hidden="true"/>
-      <div className="panel-heading"><div className="panel-heading-copy"><p className="panel-brandline"><span>NeXify</span><span className="panel-brandline-sep" aria-hidden="true">/</span><span>{t.subtitle.split("·")[0].trim()}</span></p><h2 className="visually-hidden">{t.assistant}</h2><p className="panel-status" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p></div><ActionButton variant="quiet" ref={closeButton} className="icon-button" data-testid="chat-panel-close-button" aria-label={t.close} onClick={closePanel}>×</ActionButton></div>
-      <div className="panel-connection visually-hidden" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Textgeführte Orientierung":locale==="nl"?"Tekstgestuurde oriëntatie":locale==="fr"?"Guide textuel":"Text-guided overview"):ready?(locale==="de"?"Projektassistent verbunden":locale==="nl"?"Concepttools verbonden":locale==="fr"?"Outils de projet connectés":"Project assistant connected"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":locale==="fr"?"Aperçu · connexion en attente":"Preview · connection pending")}</div>
-      {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"Orientierung wird geladen …":locale==="nl"?"Oriëntatie wordt geladen …":locale==="fr"?"Chargement du guide…":"Loading the guide …"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages} onActivityChange={setOrientationWorking}/></Suspense></DeferredChatBoundary></div>}
+      <div className="panel-heading"><div className="panel-heading-copy"><div className="panel-identity"><OracleCompanion/><div><h2 className="panel-brandline">NeX Agentic AIFly</h2><p className="panel-identity-subtitle">NeXify AI</p></div></div><p className="panel-status visually-hidden" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p></div><ActionButton variant="icon" ref={closeButton} className="panel-minimize" data-testid="chat-panel-close-button" aria-label={t.close} title={t.close} onClick={closePanel}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg></ActionButton></div>
+      <div className="panel-connection visually-hidden" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Website-Beratung ohne Live-KI":locale==="nl"?"Websiteadvies zonder live-AI":locale==="fr"?"Conseil sur le site sans IA en direct":"Website guidance without live AI"):ready?(locale==="de"?"Projektassistent verbunden":locale==="nl"?"Concepttools verbonden":locale==="fr"?"Outils de projet connectés":"Project assistant connected"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":locale==="fr"?"Aperçu · connexion en attente":"Preview · connection pending")}</div>
+      {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"NeXify-Beratung wird geladen …":locale==="nl"?"NeXify-advies wordt geladen …":locale==="fr"?"Chargement du conseil NeXify…":"Loading NeXify guidance …"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages} onActivityChange={setOrientationWorking}/></Suspense></DeferredChatBoundary></div>}
       <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&Boolean(currentPage)}>
-        {pathname!=="/"&&<div className="panel-page-context">{site==="teileklar"?(locale==="de"?"Sie sind hier":locale==="nl"?"U bent hier":locale==="fr"?"Vous êtes ici":"You are here"):(locale==="de"?"Hier bist du":locale==="nl"?"Je bent hier":locale==="fr"?"Tu es ici":"You are here")}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>}
+        {pathname!=="/"&&<div className="panel-page-context">{site==="teileklar"?(locale==="de"?"Sie sind hier":locale==="nl"?"U bent hier":locale==="fr"?"Vous êtes ici":"You are here"):(locale==="de"?"Ihr aktueller Bereich":locale==="nl"?"Uw huidige onderdeel":locale==="fr"?"Votre rubrique actuelle":"You are here")}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>}
         <div className="welcome-card"><p>{site==="teileklar"?tkWelcome.title:t.welcome}</p><p className="welcome-body">{site==="teileklar"?tkWelcome.body:t.welcomeBody}</p><div className="welcome-eyebrow-row"><span className="eyebrow">{site==="teileklar"?tkWelcome.eyebrow:t.welcomeEyebrow}</span>{canSpeak&&<button type="button" className="text-button" aria-pressed={speaking==="welcome"} onClick={()=>readAloud("welcome")}>{speaking==="welcome"?t.readAloudStop:t.readAloud}</button>}</div><div className="action-options">{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="action-option" disabled={busy} onClick={()=>{setIntent("choose");setChatMode("workspace");const field=messageInput.current;if(field){if(!field.value.trim())field.value=seed;field.focus();field.setSelectionRange(field.value.length,field.value.length);}}}>{label}<span aria-hidden="true">→</span></button>)}</div></div>
         <div className="message-list" aria-live="polite" aria-relevant="additions">{messages.map((message,index)=><div key={index} className={`message ${message.role}`}><span className="message-role">{message.role==="assistant"?t.assistant:locale==="de"?"Du":locale==="nl"?"U":locale==="fr"?"Vous":"You"}</span><p>{message.role==="user"||message.label?message.text:reply(message.intent)}</p>{message.label&&<small className="state-label">{message.label}</small>}{canSpeak&&message.role==="assistant"&&!message.label&&<button type="button" className="text-button" aria-pressed={speaking===speechKey(message.intent)} onClick={()=>readAloud(speechKey(message.intent))}>{speaking===speechKey(message.intent)?t.readAloudStop:t.readAloud}</button>}</div>)}</div>
         {intent==="choose"&&!ready&&(error==="offline"?<PublicRequestFallback locale={locale} contact={contact}/>:<p className="status-note" role="status" data-testid="chat-connecting">{locale==="de"?"Assistent wird verbunden …":locale==="nl"?"Assistent wordt verbonden …":locale==="fr"?"Connexion à l’assistant …":"Connecting assistant …"}</p>)}
@@ -264,14 +376,14 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
          <div className="chat-hints-content" data-testid="chat-hints-content">
           {canChatGPT&&<div className="chatgpt-option"><label className="checkbox-label"><input data-testid="chat-live-ai-toggle" type="checkbox" checked={useChatGPT} onChange={event=>setUseChatGPT(event.target.checked)}/>{t.chatgptToggle}</label><p className="status-note" data-testid="chat-provider-notice">{t.chatgptNote}</p></div>}
           <p className="connection-note">{locale==="de"?"Bitte keine Passwörter oder vertraulichen Daten eingeben.":locale==="nl"?"Voer geen wachtwoorden of vertrouwelijke gegevens in.":locale==="fr"?"Merci de ne pas saisir de mots de passe ou de données confidentielles.":"Please do not enter passwords or confidential data."}</p>
-          <div className="panel-footer-row">{!standalone&&currentPage&&<div className="workspace-chat-modes" role="group" aria-label={locale==="de"?"Arbeitsbereich wählen":locale==="nl"?"Werkruimte kiezen":locale==="fr"?"Choisir un espace":"Choose a workspace"}><ActionButton variant="quiet" data-testid="chat-mode-orientation" aria-pressed={chatMode==="orientation"} onClick={()=>{setOrientationLoaded(true);setChatMode("orientation");}}>{locale==="de"?"Orientierung":locale==="nl"?"Oriëntatie":locale==="fr"?"Orientation":"Orientation"}</ActionButton><ActionButton variant="quiet" data-testid="chat-mode-workspace" aria-pressed={chatMode==="workspace"} onClick={()=>setChatMode("workspace")}>{locale==="de"?"Projektassistent":locale==="nl"?"Concepttools":locale==="fr"?"Outils de projet":"Project assistant"}</ActionButton></div>}</div>
+          <div className="panel-footer-row">{!standalone&&currentPage&&<div className="workspace-chat-modes" role="group" aria-label={locale==="de"?"Arbeitsbereich wählen":locale==="nl"?"Werkruimte kiezen":locale==="fr"?"Choisir un espace":"Choose a workspace"}><ActionButton variant="quiet" data-testid="chat-mode-orientation" aria-pressed={chatMode==="orientation"} onClick={()=>{setOrientationLoaded(true);setChatMode("orientation");}}>{locale==="de"?"Leistungen entdecken":locale==="nl"?"Diensten ontdekken":locale==="fr"?"Découvrir les prestations":"Explore services"}</ActionButton><ActionButton variant="quiet" data-testid="chat-mode-workspace" aria-pressed={chatMode==="workspace"} onClick={()=>setChatMode("workspace")}>{locale==="de"?"Projekt vorbereiten":locale==="nl"?"Project voorbereiden":locale==="fr"?"Préparer le projet":"Prepare your project"}</ActionButton></div>}</div>
           <Link className="panel-pascal-link" data-testid="chat-contact-link" href="/kontakt" onClick={()=>{if(mobile)closePanel();}}>{locale==="de"?"Mit Pascal weiterklären":locale==="nl"?"Verder met Pascal":locale==="fr"?"Continuer avec Pascal":"Continue with Pascal"}<span aria-hidden="true">↗</span></Link>
          </div>
         </details>
         <ActionButton type="submit" variant="primary" className="send-button" disabled={!ready} loading={busy} data-testid="chat-send-button">{busy?t.working:(site==="teileklar"?tkWelcome.send:t.send)}</ActionButton>
        </form>
       </div>
-      {chatMode==="orientation"&&<div className="chat-return"><ActionButton variant="quiet" data-testid="chat-return-workspace" onClick={()=>setChatMode("workspace")}>{locale==="de"?"Zurück zum Projektassistenten":locale==="nl"?"Terug naar projectassistent":locale==="fr"?"Revenir à l’assistant de projet":"Back to the project assistant"}</ActionButton></div>}
+      {chatMode==="orientation"&&<div className="chat-return"><ActionButton variant="quiet" data-testid="chat-return-workspace" onClick={()=>setChatMode("workspace")}>{locale==="de"?"Zur Projektvorbereitung":locale==="nl"?"Naar de projectvoorbereiding":locale==="fr"?"Vers la préparation du projet":"Back to project preparation"}</ActionButton></div>}
     </aside>
   </div></UIContext.Provider>;
 }

@@ -1,0 +1,70 @@
+{
+  "welcome": {
+    "sha256": "5d2f4d6133bef1678750578126521c77b3c403ce20968a4a5856589e6f434c26",
+    "bytes": 1564752,
+    "duration": "10.100000",
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "24/1",
+        "duration": "10.041667"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "width": null,
+        "height": null,
+        "r_frame_rate": "0/0",
+        "duration": "10.100000"
+      }
+    ]
+  },
+  "web": {
+    "sha256": "399c442d5a372f3bf270bf5e24b80097a87023b38e405591289edf81a862d909",
+    "bytes": 1650537,
+    "duration": "10.083333",
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "24/1",
+        "duration": "10.083333"
+      }
+    ]
+  },
+  "workspace": {
+    "sha256": "f520b71d508bb98686719fc7730a88be0db5d3be104bd80944f591a1e7f12524",
+    "bytes": 2049038,
+    "duration": "10.083333",
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "24/1",
+        "duration": "10.083333"
+      }
+    ]
+  },
+  "automotive": {
+    "sha256": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
+    "bytes": 3188415,
+    "duration": "10.083333",
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "24/1",
+        "duration": "10.083333"
+      }
+    ]
+  }
+}

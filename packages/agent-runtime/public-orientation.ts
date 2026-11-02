@@ -1,7 +1,7 @@
 /** Public, deterministic orientation. This is neither a live model nor an action executor. */
 import siteMap from '../../config/site-map.json' with { type: 'json' };
 
-export type Locale = 'de' | 'nl' | 'fr';
+export type Locale = 'de' | 'nl' | 'fr' | 'en';
 export type PageContext = { page_id: string; path: string };
 type Localized = Record<Locale, string>;
 type SourcePage = { id: string; path: string; title: Localized; summary: Localized;
@@ -44,7 +44,7 @@ export function validateOrientationInput(raw: unknown): { locale: Locale; contex
   if ('id' in body) sdkId(body.id);
   if ('trigger' in body && body.trigger !== 'submit-message' && body.trigger !== 'regenerate-message') throw new InputError('invalid_trigger');
   if ('messageId' in body) sdkId(body.messageId);
-  if (body.locale !== 'de' && body.locale !== 'nl' && body.locale !== 'fr') throw new InputError('invalid_locale');
+  if (body.locale !== 'de' && body.locale !== 'nl' && body.locale !== 'fr' && body.locale !== 'en') throw new InputError('invalid_locale');
   if (typeof body.page_path !== 'string' || body.page_path.length > 240 || !byPath.has(body.page_path)) throw new InputError('invalid_public_page_context');
   if (!Array.isArray(body.messages) || body.messages.length === 0 || body.messages.length > 12) throw new InputError('invalid_message_count');
   const ids = new Set<string>();
@@ -78,12 +78,34 @@ export function validateOrientationInput(raw: unknown): { locale: Locale; contex
 }
 
 const copy = {
-  de: { heading: 'Textgeführte Orientierung ohne Live-KI.', limits: 'Diese Vorschau nutzt öffentliche Seiteninformationen und einen einfachen Wortabgleich. Dieser Webdienst speichert keinen Gesprächsverlauf und nutzt keine Sitzung. Er versendet nichts, bucht keine Termine und verändert keine Konten oder Guthaben.',
-    current: 'Auf dieser Seite', next: 'Passende öffentliche Informationen und nächste Schritte', ending: 'Über diese Links kannst du dein Vorhaben weiter vorbereiten. Hier wurde keine Aktion ausgeführt.' },
-  nl: { heading: 'Tekstgestuurde oriëntatie zonder live-AI.', limits: 'Deze preview gebruikt openbare pagina-informatie en eenvoudige woordherkenning. Deze webdienst slaat geen gespreksgeschiedenis op en gebruikt geen sessie. Er worden geen berichten verzonden, afspraken geboekt of accounts en tegoeden gewijzigd.',
-    current: 'Op deze pagina', next: 'Passende openbare informatie en volgende stappen', ending: 'Via deze links kun je je project verder voorbereiden. Hier is geen actie uitgevoerd.' },
-  fr: { heading: 'Orientation textuelle sans IA en direct.', limits: 'Cet aperçu utilise les informations publiques des pages et une simple comparaison de mots. Ce service web n’enregistre pas l’historique de la conversation et n’utilise aucune session. Aucun message n’est envoyé, aucun rendez-vous n’est réservé et aucun compte ou crédit n’est modifié.',
-    current: 'Sur cette page', next: 'Informations publiques pertinentes et prochaines étapes', ending: 'Ces liens te permettent de préparer la suite de ton projet. Aucune action n’a été effectuée ici.' },
+  "de": {
+    "heading": "NeXify AI FACTORY B.V. · Textgeführte Orientierung ohne Live-KI.",
+    "limits": "Ich ordne Ihre Frage anhand der öffentlichen NeXify-Seiten ein. Hier entstehen keine Buchungen, Nachrichten, Verträge oder Änderungen an Ihrem Konto.",
+    "current": "Ihr Ausgangspunkt",
+    "next": "Leistungen und Angebote für Ihr Vorhaben",
+    "ending": "Die passende Seite führt Sie zum Leistungsumfang oder zur persönlichen Abstimmung mit NeXify. Es wurde keine Aktion ausgeführt."
+  },
+  "nl": {
+    "heading": "NeXify AI FACTORY B.V. · Tekstgestuurde oriëntatie zonder live-AI.",
+    "limits": "Ik plaats uw vraag in de context van de openbare NeXify-pagina’s. Hier ontstaan geen boekingen, berichten, overeenkomsten of wijzigingen in uw account.",
+    "current": "Uw vertrekpunt",
+    "next": "Diensten en aanbod voor uw project",
+    "ending": "De passende pagina brengt u naar de dienstenomvang of een persoonlijk gesprek met NeXify. Er is geen actie uitgevoerd."
+  },
+  "fr": {
+    "heading": "NeXify AI FACTORY B.V. · Orientation textuelle sans IA en direct.",
+    "limits": "Je situe votre demande à partir des pages publiques de NeXify. Aucune réservation, aucun message, aucun contrat ni changement de compte n’est effectué ici.",
+    "current": "Votre point de départ",
+    "next": "Prestations et offres pour votre projet",
+    "ending": "La page adaptée vous conduit au périmètre des prestations ou à un échange personnel avec NeXify. Aucune action n’a été effectuée."
+  },
+  "en": {
+    "heading": "NeXify AI FACTORY B.V. · Text-guided information without live AI.",
+    "limits": "I match your question to NeXify’s public pages. No booking, message, contract or account change is made here.",
+    "current": "Your starting point",
+    "next": "Services and offers for your project",
+    "ending": "The relevant page takes you to the service scope or a personal discussion with NeXify. No action has been performed."
+  }
 };
 const stopWords = new Set(['eine', 'einen', 'einem', 'einer', 'für', 'und', 'mit', 'ich', 'sie', 'das', 'die', 'der', 'wie', 'was', 'ist', 'the', 'and', 'een', 'van', 'met', 'voor', 'les', 'des', 'une', 'pour', 'avec']);
 function words(text: string): Set<string> {

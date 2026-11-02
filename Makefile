@@ -22,7 +22,7 @@ test:
 
 e2e:
 	@$(MAKE) --no-print-directory test
-	@echo "e2e: vollstaendige Pruefkette (Audit + Tests + Artefakt-/Config-Integritaet) gruen"
+	@echo "Lokale Pruefkette bestanden (Prototypen-Audit + Python-Tests + Artefakt-/Config-Integritaet); Browser-/Live-E2E ist separat nachzuweisen."
 
 audit:
 	bash /root/.codex/skills/harness-engineering/scripts/audit-harness.sh .

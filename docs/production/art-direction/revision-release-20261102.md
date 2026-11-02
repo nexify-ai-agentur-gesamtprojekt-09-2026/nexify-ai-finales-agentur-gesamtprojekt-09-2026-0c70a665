@@ -1,0 +1,13 @@
+# Stand der Film-Neuregiefassung · 02.11.2026
+
+Keine Gesamtabnahme und kein neuer fertiger Hero. Der neue Hero-Upload wurde ausdrücklich von der automatischen Freigabeprüfung gesperrt. Genaue Szene, Regie, Datenumfang, Ziel Runway und notwendige Bestätigung: `hero-regie-revision-20261102.md`. Keine erneute Übertragung über Ersatzwege.
+
+Unabhängig erledigt: drei rein textbeschriebene, personen- und markenfreie Bereichsfilme. Tatsächliche Ausgaben je H.264 1280×720, 5,041667 s, ohne Audiospur, vollständig decodiert. Vorwärts einmalig abspielen, Endbild halten, kein rückwärts laufender Prozess. Source-Tasks und Byte-/Posterhashes: `section-films-revision-20261102.json`; alte Ausgabedateien und Film-Metadaten bleiben in `film_history` erhalten. Die Webansicht ist ein generiertes Layoutbeispiel, kein Screenshot eines echten Kundenprodukts; auch die anderen Darstellungen sind redaktionelle Illustrationen ohne behauptete Transaktions-/Prüfergebnisse.
+
+Zuordnung `config/scene-direction.json`: exakt 39 öffentliche Seiten, 22 filmische Fachseiten in drei Filmfamilien, 16 ruhige Lese-/Formular-/Transaktionsseiten, ein Hero mit offenem Produktionsschritt. Keine Behauptung 39 eigenständiger Filme oder vollständiger Sprecherfilm-Abdeckung. Jede Szene hat passenden erläuternden Dreischritt in DE/NL/FR/EN. Eine Filmfamilie wird auf verwandten Seiten wiederverwendet; Seitenbesuch-/Sprachwechsel setzt den Player explizit zurück.
+
+Review: ArtDirection kritisierte Goldlobby, Frontstehen ohne gemeinsame Aufgabe, generische Materialskulpturen, Rückwärtsloops und fehlende Seitenzuordnung. Die neue Studioszene zeigt die Gruppe am Arbeitstisch; sie ist nur eine Produktionsreferenz. Qualitätsreview fand außerdem Playerzustand beim Routenwechsel und alte Fehlerzustände; mit Quellen-/Generationsbindung und Schlüssel je Seite/Sprache korrigiert.
+
+Nachweis: 89 Site-Tests bestanden, Site-Build inkl. TypeScript bestanden. Browser: neue Website-Fassung tatsächliche Datei loaded, nach5,041667s paused und loop=false. CSS-Viewportframes 320px Websites,390px API,820px TEILEKLAR: passende Filmfamilien, kein horizontaler Überlauf, klare Dreischrittzeilen. Kein physischer Safari-/iPhone-Nachweis; keine neue globale Python-/WCAG-Abnahme. Bekannte Host-Node24/declared22- und Bundle>500kB-Warnungen bleiben.
+
+Die bestehende private Hero-Arbeitsfassung bleibt bis zur neuen tatsächlich produzierten Aufnahme erhalten. Das bestätigte Chatinterface und seine Funktionen wurden nicht verändert. Veröffentlichung der unabhängigen Bereichsänderungen bleibt eigentümerprivat und bedeutet keine Hero-/Gesamtabnahme.

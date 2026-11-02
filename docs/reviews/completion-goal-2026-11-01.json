@@ -1,0 +1,59 @@
+{
+  "id": "GOAL-NEXIFY-COMPLETION-20261101",
+  "observed_at": "2026-11-01T22:22:28.972197+00:00",
+  "source_sha256": {
+    "apps/web/components/ContactRequestForm.tsx": "c6a54d8e9e786ab56fe9c92791b60e47d39ba53c3670d55aea17e07494f53e34",
+    "apps/web/components/TrioScene.tsx": "de0a08e2d9148f6996a9a47178c26a100c9febe5fb566f834c640d6b9fa9dedf",
+    "apps/web/lib/contact-attempt.ts": "2deb708f4c7ceac90b316ee661799d9bd346223e04c1bcc363d7645b9111ee04",
+    "apps/shop-api/shop/requests_api.py": "32323c50b0b04761e7f703013bccb78b324125b847a2500a284693945c635982",
+    "apps/shop-api/shop/mailer.py": "fe541d3aa5280da12bcf465fa58a3a3476e7cd410a7047fe093b723a578caa6d",
+    "config/page-explainers.json": "a3c0e74b868bad12ae81fa77e6768a97fafbac774994b4f6cd1e9f5fcd8f3760",
+    "apps/site/scripts/public-explainers.mjs": "572e301d0facc31085f6af08902de0feb61e47f8e790cbb0128dcb587d40d1c1",
+    "docs/contracts/completion-goal-2026-11-01.md": "03d5b7b9a13de4360abc09fbb77b4cefdbbcc3916a30481ea4d213244fbbeb7f",
+    "config/acceptance-coverage.json": "c495d4672e920d1b849a459b5c10ba9a991120fdd5919cc576f237df0c3d549a"
+  },
+  "tests": {
+    "site": {
+      "pass": 81
+    },
+    "contact_recovery": {
+      "pass": 8,
+      "real_mongo": false
+    },
+    "http_contract": {
+      "pass": 3,
+      "real_provider": false
+    },
+    "site_typecheck": "passed_with_node24_engine_warning",
+    "full_python": {
+      "tests": 685,
+      "failures": 28,
+      "errors": 9,
+      "skipped": 14
+    }
+  },
+  "browser": {
+    "target": "http://terminal.local:4173",
+    "en_routes": 39,
+    "visible_modules": 50,
+    "form_locales": [
+      "de",
+      "nl",
+      "fr",
+      "en"
+    ],
+    "valid_form_submitted": false,
+    "idle_videos_paused": 4,
+    "quick_pause_audio_video": "passed",
+    "replay_ended": "source_review_only"
+  },
+  "independent_reviews": {
+    "qualitaet_review": "final_storage_and_replay_delta_no_concrete_blocker",
+    "soll_abgleich": "26_package_source_and_path_review_no_new_blocker",
+    "runtime_pruefung": "limited_recovery_delta_review_no_blocker",
+    "brand_ux_pruefung": "182_translation_pairs_reviewed_3_findings_corrected"
+  },
+  "whole_system_accepted": false,
+  "live_backend_accepted": false,
+  "mobile_safari_restore_accepted": false
+}

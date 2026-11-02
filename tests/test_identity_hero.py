@@ -43,12 +43,14 @@ class IdentityHeroTests(unittest.TestCase):
         component=(ROOT/'apps/web/components/IdentityHero.tsx').read_text()
         css=(ROOT/'apps/web/components/IdentityHero.css').read_text()
         self.assertNotRegex(css,r'#[0-9a-fA-F]{3,8}\b|rgba?\(')
-        # IdentityHero now composes TrioScene with real video (not literal <video in IdentityHero)
-        # Original interim-scene-images remain unchanged and are preserved for reference
-        self.assertIn('import TrioScene',component,'IdentityHero must import TrioScene')
-        self.assertIn('<TrioScene',component,'IdentityHero must render TrioScene')
-        self.assertIn('sceneMedia.welcome',component,'IdentityHero must pass sceneMedia.welcome to TrioScene')
-        self.assertIn('testId="hero"',component,'IdentityHero must pass testId="hero" to TrioScene')
+        # USER-LUXURY-20261101: a still must not publish unapproved performances or fake playback.
+        self.assertIn('owner-private-edited-video',component)
+        self.assertIn('const ownerCinemaPreview=typeof __NEXIFY_OWNER_CINEMA_PREVIEW__',component)
+        self.assertIn('verified-public-film',component)
+        for unapproved in ('<TrioScene','sceneMedia.welcome','<video','<audio','play-toggle'):
+            self.assertNotIn(unapproved,component)
+        home=(ROOT/'apps/web/components/HomeContent.tsx').read_text()
+        self.assertNotRegex(home,r'<TrioScene|sceneMedia\.|/media/home-review/')
         for unsafe in ('<iframe','srcDoc=','dangerouslySetInnerHTML','fetch('):
             self.assertNotIn(unsafe,component)
         # TrioScene contains real video and dynamic testId-based controls

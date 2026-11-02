@@ -308,7 +308,7 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual(set(bad.json()["detail"]["fields"]), {"name", "email", "message", "consent"})
         partner = self.client.post("/api/requests", json={"name": "Max Muster", "email": "werk@example.org", "message": "Wir möchten Partner werden.", "consent": True, "kind": "partner"})
         self.assertEqual((partner.status_code, partner.json()["detail"]["fields"]), (422, {"company": "required"}))
-        ok = self.client.post("/api/requests", json={"name": "Max Muster", "email": "kontakt@example.org", "message": "Bitte um Rückruf zum Projekt.", "consent": True})
+        ok = self.client.post("/api/requests", headers={"Idempotency-Key": "contact-test-key-0001"}, json={"name": "Max Muster", "email": "kontakt@example.org", "message": "Bitte um Rückruf zum Projekt.", "consent": True})
         self.assertEqual(ok.status_code, 201)
         stored = self.call(db.requests.find_one, {"number": ok.json()["number"]})
         self.assertEqual((stored["kind"], stored["status"]), ("contact", "eingegangen"))

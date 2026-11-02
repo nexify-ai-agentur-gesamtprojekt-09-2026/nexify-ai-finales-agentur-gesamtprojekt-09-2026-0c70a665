@@ -9,6 +9,7 @@ import PresenterScene from './PresenterScene';
 
 export type ExplainerModule = {
   id: string;
+  content_section_id?: string | null;
   speaker: "pascal" | "nex" | "aifly";
   title: Localized;
   body: Localized;
@@ -23,7 +24,7 @@ export type ExplainerModule = {
   source_refs: string[];
 };
 
-const speakers = { pascal: "Pascal", nex: "NeX", aifly: "AIFly" } as const;
+const speakers = { pascal: "Pascal", nex: "NeX", aifly: "AIFly ORACLE" } as const;
 const labels = {
   de: { ai: "KI-Assistent", outcome: "Ihr nächster Schritt", captions: "Deutsch", collection: "So geht es weiter" },
   nl: { ai: "AI-assistent", outcome: "Uw volgende stap", captions: "Nederlands", collection: "Zo gaat u verder" },

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { auditDateien, paritaet } from './ds-audit.js';
 const root = process.cwd();
+console.log('Pruefumfang: HTML-Referenzprototypen; kein React-, Live- oder WCAG-Vollnachweis.');
 const rules = JSON.parse(fs.readFileSync(path.join(root, 'config/design-rules.json'), 'utf8'));
 const R = { farbe: { bildschirm: rules.farbe.bildschirm, abgeleitet: rules.farbe.abgeleitet, veraltet: Object.keys(rules.farbe.veraltet_migrieren).concat(['#191C1F']), papier: rules.farbe.papier }, radius: { erlaubt: rules.radius.erlaubt_px.map(x => x + 'px') } };
 const PRINT = /^(Geschaeftsdokumente-Vorlagen|Investoren-PowerPoint|Kundenbroschuere|Partner-Broschuere|Partner-PowerPoint Werkstatt|Visitenkarte-Pascal-Courbois)\.dc\.html$/;

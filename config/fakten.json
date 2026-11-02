@@ -162,6 +162,20 @@
       "id": "teileklar.lieferlaender",
       "wert": "Deutschland, Österreich, Niederlande, Belgien, Luxemburg",
       "quelle": "apps/shop-api/shop/checkout_api.py#COUNTRIES"
+    },
+    {
+      "id": "home.kalkulationsbeispiel",
+      "wert": {
+        "hours": 24,
+        "internalHourlyCost": 45,
+        "external": 120,
+        "overheads": 200,
+        "risk": 140,
+        "marginPercent": 20
+      },
+      "status": "illustrative_assumptions_not_ratecard",
+      "commercial_approval": false,
+      "quelle": "User-uploaded NeXify Gesamtkonzept, 2026-11-02, §6.1; user requests competitor-based calculation. All inputs are explicit illustrative assumptions, not actual NeXify costs."
     }
   ],
   "verweise": [

@@ -57,3 +57,6 @@ credentials.json
 # local secrets / caches (Phase 1)
 memory/test_credentials.md
 apps/shop-api/data/
+
+# Sites static publication output
+/dist/

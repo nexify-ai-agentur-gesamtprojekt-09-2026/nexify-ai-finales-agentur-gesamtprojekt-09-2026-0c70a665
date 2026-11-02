@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "decision": "USER-FILM-DIRECTION-REVISION-20261102",
+  "owner": "root_art_direction",
+  "all_public_pages": true,
+  "public_spoken_video_coverage_claimed": false,
+  "pages": [
+    {
+      "page_id": "home",
+      "path": "/",
+      "family": "workspace",
+      "mode": "hero_pending",
+      "reason": "Neue Studioszene vorbereitet; Übertragung zur Videoproduktion durch Auto-Review gesperrt."
+    },
+    {
+      "page_id": "services",
+      "path": "/leistungen",
+      "family": "web",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "websites",
+      "path": "/leistungen/websites",
+      "family": "web",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "automation",
+      "path": "/leistungen/agenten-automatisierung",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "apps-portals",
+      "path": "/leistungen/apps-portale",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "scope",
+      "path": "/leistungsumfang",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "solutions",
+      "path": "/loesungen",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "pricing",
+      "path": "/preise-ablauf",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "knowledge",
+      "path": "/wissen",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "knowledge-start",
+      "path": "/wissen/projekt-vorbereiten",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "company",
+      "path": "/unternehmen",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "contact",
+      "path": "/kontakt",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "nex2fly",
+      "path": "/produkte/nex2fly",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "one",
+      "path": "/produkte/one",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "api",
+      "path": "/produkte/api",
+      "family": "workspace",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "imprint",
+      "path": "/impressum",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "privacy",
+      "path": "/datenschutz",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "terms",
+      "path": "/vertragsgrundlagen",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "ai-notice",
+      "path": "/ki-hinweise",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "accessibility",
+      "path": "/barrierefreiheit",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "cookies",
+      "path": "/cookies",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "login",
+      "path": "/anmelden",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "signup",
+      "path": "/registrieren",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-home",
+      "path": "/teileklar",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-search",
+      "path": "/teileklar/suche",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-categories",
+      "path": "/teileklar/kategorien",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-category",
+      "path": "/teileklar/kategorie",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-product",
+      "path": "/teileklar/produkt",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-cart",
+      "path": "/teileklar/warenkorb",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-checkout",
+      "path": "/teileklar/kasse",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-fitment",
+      "path": "/teileklar/fahrzeug-und-passung",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-appointments",
+      "path": "/teileklar/termine",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-vouchers",
+      "path": "/teileklar/gutscheine",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-partner",
+      "path": "/teileklar/partner-werden",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-workshop",
+      "path": "/teileklar/werkstatt",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-legal",
+      "path": "/teileklar/rechtliches",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-shop",
+      "path": "/teileklar/shop",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-reifenrechner",
+      "path": "/teileklar/reifenrechner",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-batterie",
+      "path": "/teileklar/batterie-berater",
+      "family": "automotive",
+      "mode": "cinematic",
+      "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    }
+  ]
+}

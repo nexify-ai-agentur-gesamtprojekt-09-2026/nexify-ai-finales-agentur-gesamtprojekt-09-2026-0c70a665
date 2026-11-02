@@ -54,7 +54,7 @@ app = FastAPI(title="TEILEKLAR Shop API", version="1.0", lifespan=lifespan, open
 @app.middleware("http")
 async def same_origin_writes(request: Request, call_next):
     origin = request.headers.get("origin")
-    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth"))
+    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests"))
     if writes and origin and origin.rstrip("/") != config.PUBLIC_ORIGIN and not request.url.path.startswith("/api/shop/webhooks/"):
         return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403)
     response = await call_next(request)

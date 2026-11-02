@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "decision": "USER-IMAGE-FINISH-20261102",
+  "status": "preserved_original_stills_not_performance_video",
+  "images": {
+    "pascal": {
+      "src": "/media/atelier/presenters/pascal-lossless.webp",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "9eeea2337320fa340a45c7c22e2512bcdca92b533654f373eb058cdd20a448cc",
+      "source": "/media/presenters/pascal-original-6dd03834.png",
+      "source_sha256": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
+      "visible_RGBA_pixels_unchanged": true
+    },
+    "nex": {
+      "src": "/media/atelier/presenters/nex-lossless.webp",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "c23363eaf3f75cf8333448d97ae8f65d1a255711b804366ee62a49f09c9e3c64",
+      "source": "/media/presenters/nex-toucan-121a804c.png",
+      "source_sha256": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
+      "visible_RGBA_pixels_unchanged": true
+    },
+    "aifly": {
+      "src": "/media/atelier/presenters/oracle-lossless.webp",
+      "width": 194,
+      "height": 193,
+      "sha256": "2d9a44b13098d316c421e3ed55b34979e16bacbaaf7ac202f56548652a6eed8b",
+      "source": "/media/presenters/zielbild-aifly-float.png",
+      "source_sha256": "313f9826c0df25a23ad1d3f4ce60721894a13016530bf354b460b45bfb01a3d9",
+      "visible_RGBA_pixels_unchanged": true
+    }
+  }
+}
