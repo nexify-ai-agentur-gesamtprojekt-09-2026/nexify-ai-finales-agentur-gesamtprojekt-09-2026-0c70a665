@@ -15,6 +15,7 @@ import TeileklarLegal from "./shop/TeileklarLegal";
 import WorkshopDirectory from "./WorkshopDirectory";
 import PublicShopContent from "./shop/PublicShopContent";
 import ShopEntry from "./shop/ShopEntry";
+import PartnerJourney from "./shop/PartnerJourney";
 import type {PublicVideo} from "./PresenterVideo";
 
 export type PublicExperienceData={pages:PublicPage[];journeys:PresenterJourney[];explainers:{page_id:string;modules:ExplainerModule[]}[];videos:Record<string,Partial<Record<PublicVideo["locale"],PublicVideo>>>;videoModules:Record<string,Record<string,Partial<Record<PublicVideo["locale"],PublicVideo>>>>};
@@ -33,5 +34,5 @@ export default function PublicExperience({page,data,documentTitle=false,shopRunt
   }
   const explanation=<><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/><ExplainerSections modules={modules.filter(module=>!module.content_section_id)} pages={data.pages} video={page.path==='/'?undefined:video} moduleVideos={data.videoModules[page.id]||{}}/></>;
   if(page.path==='/')return <>{title}<HomeContent home={page} pages={data.pages} video={video} moduleVideos={data.videoModules[page.id]||{}}><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/></HomeContent></>;
-  return <>{title}<PublicContent page={page} pages={data.pages} sectionContent={sectionContent}>{shopRuntime&&<PublicShopContent pageId={page.id} pathname={pathname} search={search}/>} {(!shopRuntime||page.id==="tk-home")&&["tk-home","tk-search","tk-categories","tk-category","tk-product","tk-cart","tk-checkout"].includes(page.id)&&<ShopEntry/>} {page.id==="tk-fitment"&&<><FitmentChecklist/><TyreCalculator/><PhaseNotice id="tk-battery"/></>} {["tk-appointments","tk-vouchers"].includes(page.id)&&<PhaseNotice id={page.id}/>} {page.id==="tk-workshop"&&<WorkshopDirectory/>} {page.id==="tk-partner"&&<ContactRequestForm kind="partner"/>} {page.id==="contact"&&<ContactRequestForm/>} {page.id==="tk-legal"&&<TeileklarLegal/>} {explanation}</PublicContent></>;
+  return <>{title}<PublicContent page={page} pages={data.pages} sectionContent={sectionContent}>{shopRuntime&&<PublicShopContent pageId={page.id} pathname={pathname} search={search}/>} {(!shopRuntime||page.id==="tk-home")&&["tk-home","tk-search","tk-categories","tk-category","tk-product","tk-cart","tk-checkout"].includes(page.id)&&<ShopEntry/>} {page.id==="tk-fitment"&&<><FitmentChecklist/><TyreCalculator/><PhaseNotice id="tk-battery"/></>} {["tk-appointments","tk-vouchers"].includes(page.id)&&<PhaseNotice id={page.id}/>} {page.id==="tk-workshop"&&!shopRuntime&&<WorkshopDirectory/>} {page.id==="tk-partner"&&<><PartnerJourney/><ContactRequestForm kind="partner"/></>} {page.id==="contact"&&<ContactRequestForm/>} {page.id==="tk-legal"&&<TeileklarLegal/>} {explanation}</PublicContent></>;
 }

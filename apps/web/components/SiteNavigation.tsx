@@ -16,6 +16,12 @@ const productNames:Record<string,Partial<Record<Locale,string>>>={
  'tk-home':{de:'TEILEKLAR entdecken',nl:'TEILEKLAR ontdekken',fr:'Découvrir TEILEKLAR',en:'Explore TEILEKLAR'},'tk-workshop':{de:'Werkstattprofile',nl:'Werkplaatsprofielen',fr:'Profils d’ateliers',en:'Workshop profiles'},'tk-partner':{de:'Werkstattpartner werden',nl:'Werkplaatspartner worden',fr:'Devenir atelier partenaire',en:'Become a workshop partner'},
  pricing:{de:'Preise & Ablauf',nl:'Prijzen & aanpak',fr:'Tarifs et étapes',en:'Pricing & process'},scope:{de:'Projektstart',nl:'Een project starten',fr:'Démarrer un projet',en:'Starting a project'},'knowledge-start':{de:'Projekt vorbereiten',nl:'Uw project voorbereiden',fr:'Préparer votre projet',en:'Prepare your project'}
 };
+const shopCopy:Record<Locale,{search:string;categories:string;fitment:string;workshop:string;partner:string;cart:string;more:string;service:string;back:string}>={
+ de:{search:'Teilesuche',categories:'Kategorien',fitment:'Fahrzeug & Passung',workshop:'Werkstatt',partner:'Partner werden',cart:'Warenkorb',more:'Weitere Angebote',service:'Service & Shop',back:'NeXify AI'},
+ nl:{search:'Onderdelen zoeken',categories:'Categorieën',fitment:'Voertuig & passing',workshop:'Werkplaats',partner:'Partner worden',cart:'Winkelwagen',more:'Meer aanbod',service:'Service & shop',back:'NeXify AI'},
+ fr:{search:'Recherche de pièces',categories:'Catégories',fitment:'Véhicule & compatibilité',workshop:'Atelier',partner:'Devenir partenaire',cart:'Panier',more:'Autres offres',service:'Service & boutique',back:'NeXify AI'},
+ en:{search:'Find parts',categories:'Categories',fitment:'Vehicle & fitment',workshop:'Workshops',partner:'Become a partner',cart:'Cart',more:'More options',service:'Service & shop',back:'NeXify AI'}
+};
 export default function SiteNavigation({pages,site,locale,pathname}:{pages:PublicPage[];site:string;locale:Locale;pathname:string}){
  const t=copy[locale],uid=useId();
  const desktop=useRef<HTMLDetailsElement>(null),mobile=useRef<HTMLDetailsElement>(null);
@@ -37,6 +43,16 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  const links=(ids:string[],prefix:string)=>ids.flatMap(id=>{const p=page(id);return p?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}><span>{label(p)}</span><span aria-hidden="true">→</span></SiteLink>]:[];});
  const primary=(prefix:string)=>['services','knowledge','contact'].flatMap(id=>{const p=page(id);return p&&p.navigationContexts.includes(site)?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}>{t[id as 'services'|'knowledge'|'contact']}</SiteLink>]:[];});
  const main=primary('desktop-navigation-link');
+ const shop=shopCopy[locale];
+ const shopLink=(id:string,label:string,prefix:string)=>{const target=page(id);return target?<SiteLink key={id} href={target.path} aria-current={active(target)} data-testid={`${prefix}-${id}`} onClick={()=>close()}>{label}</SiteLink>:null;};
+ const shopMain=[['tk-search',shop.search],['tk-categories',shop.categories],['tk-fitment',shop.fitment],['tk-workshop',shop.workshop],['tk-partner',shop.partner],['tk-cart',shop.cart]] as const;
+ if(site==='teileklar')return <>
+  <nav className="main-navigation shop-main-navigation" aria-label={t.nav} data-testid="desktop-navigation">
+   {shopMain.map(([id,name])=>shopLink(id,name,'desktop-navigation-link'))}
+   <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}}><summary aria-expanded={opened.desktop} aria-controls={`${uid}-shop-more`}>{shop.more}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary><div className="product-navigation-menu shop-navigation-menu" id={`${uid}-shop-more`}><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'desktop-shop-more-link')}</div><SiteLink href="/" onClick={()=>close()}>{shop.back}<span aria-hidden="true">→</span></SiteLink></div></details>
+  </nav>
+  <details className="mobile-navigation" ref={mobile} data-testid="mobile-navigation" onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,mobile:open}));}}><summary aria-label={t.menu} aria-expanded={opened.mobile} aria-controls={`${uid}-mobile`} data-testid="mobile-navigation-toggle"><span className="mobile-menu-mark" aria-hidden="true"><i/><i/></span></summary><nav className="mobile-navigation-panel" id={`${uid}-mobile`} aria-label={t.nav} data-testid="mobile-navigation-panel"><div className="megamenu-group"><h2>TEILEKLAR</h2>{shopMain.map(([id,name])=>shopLink(id,name,'mobile-navigation-link'))}</div><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'mobile-shop-link')}</div><div className="megamenu-group"><h2>{t.account}</h2>{links(['login','signup'],'mobile-account-link')}<SiteLink href="/" onClick={()=>close()}>{shop.back}<span aria-hidden="true">→</span></SiteLink></div><ActionButton variant="quiet" data-testid="mobile-navigation-close" onClick={()=>close(true)}>{t.close}</ActionButton></nav></details>
+ </>;
  return <>
   <nav className="main-navigation" aria-label={t.nav} data-testid="desktop-navigation">
    {main[0]}

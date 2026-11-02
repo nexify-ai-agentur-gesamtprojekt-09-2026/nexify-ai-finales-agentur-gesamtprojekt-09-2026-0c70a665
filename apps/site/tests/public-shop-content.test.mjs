@@ -12,7 +12,7 @@ const useShopCopy=()=>({t:(key,values={})=>shopCopy.de[key].replace(/\{(\w+)\}/g
 function harness(filename,api=()=>Promise.reject(new Error('Unexpected API call'))){
  const state=[],effects=[],cleanups=[];let cursor=0,rendered;
  const react={useId:()=>':test-id:',useState(initial){const index=cursor++;if(!(index in state))state[index]=initial;return [state[index],value=>{state[index]=typeof value==='function'?value(state[index]):value;}];},useEffect(effect,deps){const index=cursor++,old=effects[index];if(!old||deps.some((x,i)=>x!==old.deps[i]))effects[index]={effect,deps,pending:true};}};
- const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'}};
+ const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed'},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./shop.css':{}};
  const source=readFileSync(new URL(filename,componentRoot),'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
  const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,require(name){if(!(name in mocks))throw new Error('Unmocked import '+name);return mocks[name];},AbortController,URLSearchParams,console},{filename});
@@ -23,7 +23,7 @@ function text(node){if(node==null||typeof node==='boolean')return '';if(typeof n
 function children(node){return [node,...(Array.isArray(node?.props?.children)?node.props.children:[node?.props?.children]).filter(x=>x&&typeof x==='object').flatMap(children)];}
 const catalog=(name)=>({items:[{id:name}],total:1,page:1,pages:1});
 
-test('public catalogue route projection preserves query/category/page and excludes transactional routes',()=>{
+test('public shop route projection preserves catalogue, checkout and workshop journeys',()=>{
  const {exports:{publicShopRoute:route}}=harness('PublicShopContent.tsx');
  assert.equal(route('tk-search','/teileklar/suche','?q=Bremsen&seite=2').q,'Bremsen');
  assert.equal(route('tk-search','/teileklar/suche','?seite=2').page,2);
@@ -32,14 +32,19 @@ test('public catalogue route projection preserves query/category/page and exclud
  for(const value of ['-1','NaN','1.5','9007199254740992'])assert.equal(route('tk-search','/teileklar/suche','?seite='+value).page,1);
  assert.equal(route('tk-product','/teileklar/produkt/abc123','').id,'abc123');
  assert.equal(route('tk-product','/teileklar/produkt','').kind,'product-search');
- assert.equal(route('tk-cart','/teileklar/warenkorb','').kind,'none');
- assert.equal(route('tk-checkout','/teileklar/kasse','').kind,'none');
+ assert.equal(route('tk-cart','/teileklar/warenkorb','').kind,'cart');
+ assert.equal(route('tk-checkout','/teileklar/kasse','').kind,'checkout');
+ const workshops=route('tk-workshop','/teileklar/werkstatt','?q=50667&umkreis=50');assert.equal(workshops.kind,'workshops');assert.equal(workshops.q,'50667');assert.equal(workshops.radius,50);
+ const workshop=route('tk-workshop','/teileklar/werkstatt/ws_42','');assert.equal(workshop.kind,'workshop-detail');assert.equal(workshop.id,'ws_42');
 });
-test('public renderer uses real catalogue/detail components and makes detail read-only',()=>{
+test('public renderer uses real catalogue, transactional and workshop components',()=>{
  const h=harness('PublicShopContent.tsx');
  const shop=children(h.render({pageId:'tk-shop',pathname:'/teileklar/shop',search:''}));
  assert.ok(shop.some(n=>n.type==='catalog'));assert.ok(shop.some(n=>n.type==='categories'));assert.ok(shop.some(n=>n.type==='search'));
- const detail=h.render({pageId:'tk-product',pathname:'/teileklar/produkt/abc',search:''});assert.equal(detail.type,'product-detail');assert.equal(detail.props.readOnly,true);
+ const detail=children(h.render({pageId:'tk-product',pathname:'/teileklar/produkt/abc',search:''})).find(n=>n.type==='product-detail');assert.equal(detail.props.readOnly,undefined);
+ assert.ok(children(h.render({pageId:'tk-cart',pathname:'/teileklar/warenkorb',search:''})).some(n=>n.type==='cart-view'));
+ assert.ok(children(h.render({pageId:'tk-checkout',pathname:'/teileklar/kasse',search:''})).some(n=>n.type==='checkout'));
+ assert.ok(children(h.render({pageId:'tk-workshop',pathname:'/teileklar/werkstatt',search:'?q=Köln'})).some(n=>n.type==='workshop-finder'));
  assert.match(text(h.render({pageId:'tk-product',pathname:'/teileklar/produkt',search:''})),/Artikelsuche/);
 });
 test('catalogue ignores old responses and aborts requests on query change/unmount',async()=>{

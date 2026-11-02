@@ -4986,10 +4986,10 @@
         "en": "A clear route to purchase."
       },
       "summary": {
-        "de": "Ein guter Bestellprozess macht Artikel, Kosten und Verpflichtung eindeutig. Der Online-Abschluss ist in dieser Vorschau nicht aktiv; diese Seite nimmt keine Bestellung oder Zahlung entgegen.",
-        "nl": "Een goed bestelproces maakt artikelen, kosten en verplichtingen duidelijk. Online afronden is in deze preview niet actief; deze pagina ontvangt geen bestelling of betaling.",
-        "fr": "Un bon parcours précise articles, coûts et engagement. La finalisation en ligne n’est pas active dans cet aperçu ; cette page n’enregistre ni commande ni paiement.",
-        "en": "A good ordering process makes items, costs and commitment clear. Online checkout is not active in this preview; this page accepts no order or payment."
+        "de": "Adresse, Versand, Bestellübersicht und Zahlung folgen in klaren Schritten. Vor dem verbindlichen Abschluss sehen Sie Artikel, Kosten und Bedingungen noch einmal vollständig.",
+        "nl": "Adres, verzending, besteloverzicht en betaling volgen in duidelijke stappen. Voor de bindende afronding ziet u artikelen, kosten en voorwaarden volledig terug.",
+        "fr": "Adresse, livraison, récapitulatif et paiement suivent des étapes claires. Avant validation, vous revoyez l’ensemble des articles, coûts et conditions.",
+        "en": "Address, shipping, order review and payment follow clear steps. Before the binding checkout, you see all items, costs and terms again."
       },
       "site_context": "teileklar",
       "sections": [
@@ -5046,10 +5046,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Ein guter Bestellprozess macht Artikel, Kosten und Verpflichtung eindeutig. Der Online-Abschluss ist in dieser Vorschau nicht aktiv; diese Seite nimmt keine Bestellung oder Zahlung entgegen.",
-          "nl": "Een goed bestelproces maakt artikelen, kosten en verplichtingen duidelijk. Online afronden is in deze preview niet actief; deze pagina ontvangt geen bestelling of betaling.",
-          "fr": "Un bon parcours précise articles, coûts et engagement. La finalisation en ligne n’est pas active dans cet aperçu ; cette page n’enregistre ni commande ni paiement.",
-          "en": "A good ordering process makes items, costs and commitment clear. Online checkout is not active in this preview; this page accepts no order or payment."
+          "de": "Adresse, Versand, Bestellübersicht und Zahlung folgen in klaren Schritten. Vor dem verbindlichen Abschluss sehen Sie Artikel, Kosten und Bedingungen noch einmal vollständig.",
+          "nl": "Adres, verzending, besteloverzicht en betaling volgen in duidelijke stappen. Voor de bindende afronding ziet u artikelen, kosten en voorwaarden volledig terug.",
+          "fr": "Adresse, livraison, récapitulatif et paiement suivent des étapes claires. Avant validation, vous revoyez l’ensemble des articles, coûts et conditions.",
+          "en": "Address, shipping, order review and payment follow clear steps. Before the binding checkout, you see all items, costs and terms again."
         },
         "canonical_path": "/teileklar/kasse",
         "canonical_origin": null,
@@ -6081,10 +6081,10 @@
         "en": "Parts and service. With structure."
       },
       "summary": {
-        "de": "TEILEKLAR verbindet Ihren Teilebedarf mit den nächsten Servicefragen. Die Anfrage steht im Mittelpunkt; ein Online-Kaufabschluss ist in dieser Vorschau noch nicht möglich.",
-        "nl": "TEILEKLAR verbindt uw onderdelenbehoefte met de volgende servicevragen. De aanvraag staat centraal; online afrekenen is in deze preview nog niet mogelijk.",
-        "fr": "TEILEKLAR relie votre besoin de pièces aux prochaines questions de service. La demande est au centre du parcours ; l’achat en ligne n’est pas encore possible dans cet aperçu.",
-        "en": "TEILEKLAR connects the part you need with the service questions that follow. Enquiries are the focus; online purchase completion is not yet available in this preview."
+        "de": "TEILEKLAR führt vom Teilebedarf über Fahrzeug und Passung bis zu Warenkorb, Lieferung und Werkstatt. Verbindlich wird der Kauf erst mit der bestätigten Bestellung und Zahlung.",
+        "nl": "TEILEKLAR begeleidt u van onderdeel en voertuigcontrole tot winkelwagen, levering en werkplaats. De koop wordt pas bindend na bevestigde bestelling en betaling.",
+        "fr": "TEILEKLAR vous guide du besoin et de la compatibilité véhicule au panier, à la livraison et à l’atelier. L’achat n’est conclu qu’après confirmation de la commande et du paiement.",
+        "en": "TEILEKLAR guides you from the part and vehicle fitment through cart, delivery and workshop. The purchase becomes binding only after confirmed order and payment."
       },
       "site_context": "teileklar",
       "sections": [
@@ -6141,10 +6141,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "TEILEKLAR verbindet Ihren Teilebedarf mit den nächsten Servicefragen. Die Anfrage steht im Mittelpunkt; ein Online-Kaufabschluss ist in dieser Vorschau noch nicht möglich.",
-          "nl": "TEILEKLAR verbindt uw onderdelenbehoefte met de volgende servicevragen. De aanvraag staat centraal; online afrekenen is in deze preview nog niet mogelijk.",
-          "fr": "TEILEKLAR relie votre besoin de pièces aux prochaines questions de service. La demande est au centre du parcours ; l’achat en ligne n’est pas encore possible dans cet aperçu.",
-          "en": "TEILEKLAR connects the part you need with the service questions that follow. Enquiries are the focus; online purchase completion is not yet available in this preview."
+          "de": "TEILEKLAR führt vom Teilebedarf über Fahrzeug und Passung bis zu Warenkorb, Lieferung und Werkstatt. Verbindlich wird der Kauf erst mit der bestätigten Bestellung und Zahlung.",
+          "nl": "TEILEKLAR begeleidt u van onderdeel en voertuigcontrole tot winkelwagen, levering en werkplaats. De koop wordt pas bindend na bevestigde bestelling en betaling.",
+          "fr": "TEILEKLAR vous guide du besoin et de la compatibilité véhicule au panier, à la livraison et à l’atelier. L’achat n’est conclu qu’après confirmation de la commande et du paiement.",
+          "en": "TEILEKLAR guides you from the part and vehicle fitment through cart, delivery and workshop. The purchase becomes binding only after confirmed order and payment."
         },
         "canonical_path": "/teileklar/shop",
         "canonical_origin": null,
