@@ -1,3 +1,11 @@
 {
-  "ignorePatterns": ["**/node_modules/**", "node_modules/**", "dist/**", "build/**", "**/public/**"]
+  "ignorePatterns": ["**/node_modules/**", "node_modules/**", "dist/**", "build/**", "public/**"],
+  "globals": {
+    "define": "readonly",
+    "module": "readonly",
+    "exports": "readonly",
+    "require": "readonly",
+    "global": "readonly",
+    "process": "readonly"
+  }
 }

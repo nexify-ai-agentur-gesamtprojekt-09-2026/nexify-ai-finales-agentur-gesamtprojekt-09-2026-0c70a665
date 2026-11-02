@@ -12,42 +12,72 @@ export function Home() {
       <div className="hero-copy">
         <span className="kicker"><i />NeXify AI · Agentur & Produktwelt</span>
         <h1 style={{ marginTop: 18 }} data-testid="hero-headline"><span>Marke. System.</span><span className="accent">Wachstum.</span></h1>
-        <p className="hero-body">NeXify AI FACTORY B.V. verbindet Markenauftritt, digitale Systeme und Marketing. Für Unternehmen, die hochwertig auftreten, gezielter arbeiten und mit einem klaren Budget starten möchten.</p>
-        <div className="hero-links"><Link to="/projektbriefing" className="hero-link-primary" data-testid="hero-project-link">Ihr Projekt mit NeXify<Arrow /></Link><Link to="/leistungen" className="hero-link-secondary" data-testid="hero-services-link">Leistungen entdecken<Arrow /></Link></div>
+        <p className="hero-body">NeXify AI verbindet Agenturarbeit und Produktzugänge – damit Ihr Auftritt verständlich wird, Abläufe laufen und Wachstum messbar wird.</p>
+        <div className="hero-links"><Link to="/projektbriefing" className="hero-link-primary" data-testid="home-hero-primary-link">Ihr Projekt mit NeXify<Arrow /></Link><Link to="/leistungen" className="hero-link-secondary" data-testid="home-hero-secondary-link">Leistungen entdecken<Arrow /></Link></div>
+        <p className="trust-line" data-testid="hero-trust">Keine erfundenen Referenzen · Klare Grenzen · Übergabe der Quellen</p>
       </div>
-      <HeroFilm src="/media/films/home-studio-welcome-20261102.mp4" poster="/media/films/home-studio-welcome-20261102.jpg" captions="/media/films/home-studio-welcome-20261102.de.vtt" transcript={TRANSCRIPT} title="Pascal, NeX und AIFly ORACLE im NeXify Studio" />
+      <div className="backglow"><HeroFilm src="/media/films/home-studio-welcome-20261102.mp4" poster="/media/films/home-studio-welcome-20261102.jpg" captions="/media/films/home-studio-welcome-20261102.de.vtt" transcript={TRANSCRIPT} title="Pascal, NeX und AIFly ORACLE im NeXify Studio" /></div>
     </div></section>
 
-    <section className="section" style={{ paddingTop: 24 }}><div className="wrap">
-      <div className="section-head"><h2>Zeigen Sie, was Ihr Unternehmen besonders macht.</h2><p>Sie kennen Ihr Geschäft. Wir bringen Ihr Angebot in eine klare Form: mit Gestaltung, Texten und einer Website, auf der Interessenten schnell verstehen, warum sie bei Ihnen richtig sind.</p></div>
-      <div className="grid-3">{HOME.galleries.map((g, i) => <Link key={g.title} to={g.to} className="still" data-testid={`home-still-${i}`}>
-        <figure><img src={g.img} alt={g.alt} width="1024" height="1024" loading="lazy" /></figure>
-        <h3>{g.title}<Arrow /></h3><p>{g.body}</p><span className="link">{g.link}<Arrow /></span></Link>)}</div>
+    <section className="section" style={{ paddingTop: 20 }}><div className="wrap">
+      <div className="section-head"><span className="kicker"><i />Ergebnis</span><h2>Was Sie am Ende in der Hand haben</h2><p>Drei klare Ergebnisse statt Buzzwords – jedes mit ehrlich benannten Grenzen.</p></div>
+      <div className="grid-3" data-testid="home-outcomes">{OUTCOMES.map(o => <Link key={o.testid} to={o.to} className="glass card surface-curve sheen outcome" data-testid={o.testid}>
+        <span className="outcome-no">{o.no}</span><h3>{o.title}</h3><p>{o.body}</p><span className="link">{o.link}<Arrow /></span></Link>)}</div>
     </div></section>
 
-    <section className="section"><div className="wrap">
-      <div className="section-head"><h2>Was brauchen Sie für Ihren nächsten Schritt?</h2><p>Vielleicht ist Ihre Website aus der Zeit gefallen. Vielleicht kostet ein Ablauf jeden Tag zu viel Zeit. Oder Ihr Angebot erreicht noch nicht die richtigen Menschen.</p></div>
-      <div className="grid-3">{PAGES.leistungen.frames.map(fr => <article key={fr.name} className="glass card"><span className="kicker">{fr.who}</span><h3 style={{ marginTop: 14 }}>{fr.name}</h3><p>{fr.problem}</p><ul>{fr.deliver.slice(0, 3).map(d => <li key={d}>{d}</li>)}</ul><Go to={fr.to}>Leistung ansehen<Arrow /></Go></article>)}</div>
+    <section className="section" style={{ paddingTop: 0 }}><div className="wrap">
+      <div className="section-head"><span className="kicker"><i />So arbeitet NeXify</span><h2>Drei Säulen. Ein System.</h2><p>Marke, Systeme und Wachstum greifen ineinander – nicht als Einzelteile, sondern als ein zusammenhängender Weg.</p></div>
+      <div className="grid-3" data-testid="home-pillars">{PILLARS.map(p => <article key={p.testid} className="glass card surface-curve pillar" data-testid={p.testid}>
+        <h3>{p.title}</h3><ul className="pillar-list">{p.bullets.map(b => <li key={b}>{b}</li>)}</ul><Go to={p.to}>{p.cta}<Arrow /></Go></article>)}</div>
     </div></section>
 
-    <section className="section" id="zusammenarbeit"><div className="wrap">
-      <div className="section-head"><h2>Sie wissen, wer sich kümmert. Und wie es weitergeht.</h2><p>Pascal begleitet Ihr Projekt persönlich. Umfang, Budget und Entscheidungen besprechen wir, bevor daraus zusätzliche Arbeit wird.</p></div>
-      <div className="flow">{[['Sie erzählen uns, was Sie vorhaben.', 'Ziel, bisherige Lösung und das, was Ihnen wichtig ist.'], ['Sie erhalten ein konkretes Angebot.', 'Vereinbarte Leistungen, Optionen und Kostenrahmen.'], ['Wir setzen um und zeigen den Stand.', 'Rückmeldung an den vereinbarten Stellen.'], ['Ergebnis und Übergabe.', 'Bedienung erklärt, Betreuung optional.']].map(([h, p]) => <div key={h}><h3>{h}</h3><p>{p}</p></div>)}</div>
-      <div style={{ marginTop: 24 }}><Go to="/zusammenarbeit">Projektablauf im Detail<Arrow /></Go></div>
+    <section className="section"><div className="wrap grid-2" style={{ alignItems: 'start', gap: 'clamp(28px,4vw,56px)' }}>
+      <div><span className="kicker"><i />Arbeitsweise</span><h2 style={{ marginTop: 14 }}>So läuft ein Projekt ab – ohne Überraschungen</h2>
+        <div className="flow" style={{ marginTop: 24 }}>{[['Sie erzählen uns Ihr Ziel.', 'Ausgangslage, bisherige Lösung und was Ihnen wichtig ist.'], ['Sie erhalten ein konkretes Angebot.', 'Vereinbarte Leistungen, Optionen und ein klarer Kostenrahmen.'], ['Wir setzen um und zeigen den Stand.', 'Rückmeldung an vereinbarten Abnahmepunkten.'], ['Ergebnis und Übergabe.', 'Bedienung erklärt, Quellen übergeben, Betreuung optional.']].map(([h, p], i) => <div key={h}><span className="flow-no">{String(i + 1).padStart(2, '0')}</span><h3>{h}</h3><p>{p}</p></div>)}</div>
+        <div style={{ marginTop: 24 }}><Go to="/zusammenarbeit" data-testid="home-process-primary-link">Zusammenarbeit ansehen<Arrow /></Go></div>
+      </div>
+      <aside className="glass card surface-curve limits-box" data-testid="home-limits"><span className="kicker"><i />Grenzen & Klarheit</span><ul className="limits-list">
+        <li>Keine Garantien auf Rankings, Reichweite oder Umsatz.</li>
+        <li>Keine unbegrenzten Korrekturschleifen – Umfang ist vereinbart.</li>
+        <li>Keine erfundenen Zahlen oder Referenzen.</li>
+        <li>KI nur kontrolliert: mit Quellen, Zugängen und Prüfschritten.</li>
+      </ul></aside>
     </div></section>
 
-    <section className="section" id="produktwelt"><div className="wrap">
-      <div className="section-head"><h2>Sie möchten selbst mit KI arbeiten?</h2><p>Neben den Agenturleistungen gibt es eigene Produkte. Jedes hat einen eigenen Zugang und einen ehrlich ausgewiesenen Status.</p></div>
-      <div className="grid-2">{PAGES.produkte.products.map(p => <Link key={p.name} to={p.to} className="glass card" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'space-between', gap: 20 }} data-testid={`home-product-${p.name}`}><div><h3>{p.name}</h3><p style={{ marginTop: 8 }}>{p.task}</p><div className="chips" style={{ marginTop: 14 }}><span className="chip">{p.status}</span></div><span className="link" style={{ marginTop: 8 }}>{p.cta}<Arrow /></span></div></Link>)}</div>
+    <section className="section" style={{ paddingTop: 0 }}><div className="wrap">
+      <div className="section-head"><span className="kicker"><i />Produktwelt</span><h2>Produkte – wenn Sie selbst arbeiten möchten</h2><p>Neben den Agenturleistungen gibt es eigene Produkte. Jedes mit eigenem Zugang und ehrlich ausgewiesenem Status.</p></div>
+      <div className="bento" data-testid="home-products-bento">
+        <Link to="/produkte/nex2fly" className="glass card surface-curve sheen bento-lg" data-testid="home-bento-nex2fly"><span className="kicker"><i />Suite</span><h3>NeX2fly Suite</h3><p>Die zusammenhängende Produkt-Suite, um Marke, Website und Abläufe selbst zu steuern.</p><span className="link">NeX2fly ansehen<Arrow /></span></Link>
+        {[['NeX Agentic AI', '/produkte/one', 'Agentische KI mit kontrolliertem Zugang.'], ['AIFly ORACLE', '/produkte/oracle', 'Orientierung & Beratung auf Ihrer Seite.'], ['NeXify API', '/produkte/api', 'Programmatischer Zugang für Integrationen.']].map(([n, to, d]) => <Link key={to} to={to} className="glass card surface-curve bento-sm" data-testid={`home-bento-${n}`}><h3>{n}</h3><p>{d}</p><span className="link">Mehr<Arrow /></span></Link>)}
+      </div>
+      <div style={{ marginTop: 22 }}><Go to="/produkte" data-testid="home-products-compare-link">Produkte vergleichen<Arrow /></Go></div>
     </div></section>
 
-    <section className="section" id="budget"><div className="wrap grid-2" style={{ alignItems: 'start' }}>
-      <div><h2>Sie wissen vorher, wofür Sie bezahlen.</h2><p style={{ marginTop: 16, maxWidth: '50ch' }}>Ihr Angebot beschreibt, was wir für Sie umsetzen. Betreuung und laufende Nutzung vereinbaren wir separat.</p><Go to="/preise">Preise & Optionen verstehen<Arrow /></Go></div>
-      <div className="glass card" style={{ display: 'grid', gap: 20 }}>{[['Die Umsetzung', 'Seiten, Inhalte, Funktionen oder Abläufe werden als Projekt kalkuliert.'], ['Die Betreuung', 'Pflege und Unterstützung können Sie zusätzlich vereinbaren.'], ['Laufende Kosten', 'Hosting, Software, KI-Nutzung und Werbebudget werden ausdrücklich zugeordnet.']].map(([h, p]) => <div key={h}><h3 style={{ fontSize: 17 }}>{h}</h3><p style={{ fontSize: 15, marginTop: 4 }}>{p}</p></div>)}</div>
+    <section className="section" style={{ paddingTop: 0 }}><div className="wrap">
+      <div className="glass card surface-curve sheen tk-teaser" data-testid="home-teileklar">
+        <div><span className="kicker"><i />Eigenständiger Shop</span><h2 style={{ marginTop: 12 }}>TEILEKLAR</h2><p style={{ marginTop: 10, maxWidth: '52ch' }}>Ein separater Shop für Auto- und Motorradteile mit Werkstattsuche – kein Agenturangebot, sondern ein eigenständiges Produkt von NeXify.</p></div>
+        <Link to="/teileklar" className="btn btn-primary" data-testid="home-teileklar-cta">Zum Shop<Arrow /></Link>
+      </div>
     </div></section>
-    <CtaBand />
+
+    <section className="section" style={{ paddingTop: 0 }}><div className="wrap"><div className="final-cta backglow" data-testid="home-final-cta">
+      <div><h2>Starten wir mit Ihrem Ziel.</h2><p style={{ marginTop: 10, maxWidth: '54ch' }}>Beschreiben Sie Ihr Vorhaben – Pascal meldet sich persönlich mit dem nächsten Schritt.</p></div>
+      <div className="hero-actions"><Link to="/projektbriefing" className="btn btn-primary" data-testid="home-final-cta-primary">Projektbriefing öffnen<Arrow /></Link><Link to="/kontakt" className="btn btn-ghost" data-testid="home-final-cta-secondary">Kontakt</Link></div>
+    </div></div></section>
   </main>;
 }
+
+const OUTCOMES = [
+  { no: '01', title: 'Ein Auftritt, der erklärt', body: 'Positionierung, Seitenstruktur, Texte und ein Anfrageweg, der nachweislich ankommt.', link: 'Websites & Marke', to: '/leistungen/websites', testid: 'home-outcome-card-web' },
+  { no: '02', title: 'Ein Ablauf, der läuft', body: 'Systeme verbunden, Fehlerwege definiert, Freigaben sichtbar – ohne Autopilot-Versprechen.', link: 'Automatisierung & KI', to: '/leistungen/automatisierung', testid: 'home-outcome-card-systems' },
+  { no: '03', title: 'Wachstum, das messbar ist', body: 'Kampagne, Landingpage und Messkette als eine Strecke – mit Zeitraum und klaren Nennern.', link: 'Marketing & Wachstum', to: '/leistungen/marketing', testid: 'home-outcome-card-growth' },
+];
+const PILLARS = [
+  { title: 'Marke & Web', bullets: ['Positionierung', 'Websites & Landingpages', 'Texte & Struktur'], cta: 'Leistungen ansehen', to: '/leistungen/websites', testid: 'home-pillar-brand-web' },
+  { title: 'Systeme & KI', bullets: ['Automatisierung', 'Integrationen', 'KI-Agenten (kontrolliert)'], cta: 'Ablauf prüfen', to: '/leistungen/automatisierung', testid: 'home-pillar-systems-ai' },
+  { title: 'Wachstum & Kampagnen', bullets: ['Ads', 'SEO', 'Messung & Optimierung'], cta: 'Kampagne besprechen', to: '/leistungen/marketing', testid: 'home-pillar-growth' },
+];
+
 
 const crumbFor = slug => ['marke', 'websites', 'automatisierung', 'ki-agenten', 'marketing', 'seo'].includes(slug) ? [['Leistungen', '/leistungen'], [PAGES[slug].kicker]] : ['nex2fly', 'one', 'oracle', 'api'].includes(slug) ? [['Produkte', '/produkte'], [PAGES[slug].kicker]] : [[PAGES[slug].kicker]];
 

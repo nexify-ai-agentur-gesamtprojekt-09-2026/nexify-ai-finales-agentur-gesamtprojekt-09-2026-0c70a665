@@ -58,8 +58,8 @@ p{margin:0;color:var(--text-2);text-wrap:pretty}
 /* header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(29,32,31,.82);backdrop-filter:saturate(1.4) blur(18px);border-bottom:1px solid var(--line)}
 .site-header .wrap{display:flex;align-items:center;gap:20px;height:72px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:-.01em}
-.brand img{width:32px;height:32px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:-.01em;flex-shrink:0}
+.brand img{width:32px;height:32px;flex:none}
 .nav{display:flex;gap:4px;margin-left:28px}
 .nav>a,.nav>div>button{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 14px;border-radius:var(--pill);color:var(--text-2);text-decoration:none;font:500 15px var(--font);background:none;border:0;cursor:pointer}
 .nav>a:hover,.nav>a.active,.nav>div>button:hover{color:var(--text);background:rgba(255,255,255,.05)}
@@ -106,8 +106,8 @@ p{margin:0;color:var(--text-2);text-wrap:pretty}
 
 /* sections */
 .section{padding:clamp(48px,7vw,104px) 0;position:relative}
-.section-head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(28px,4vw,48px)}
-.section-head p{max-width:58ch;font-size:17px}
+.section-head{margin-bottom:clamp(28px,4vw,48px);max-width:760px}
+.section-head p{max-width:58ch;font-size:17px;margin-top:12px}
 @media(max-width:860px){.section-head{grid-template-columns:1fr}}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
 .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
