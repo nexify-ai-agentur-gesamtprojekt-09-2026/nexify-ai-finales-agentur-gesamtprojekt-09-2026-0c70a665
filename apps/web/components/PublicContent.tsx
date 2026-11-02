@@ -60,7 +60,7 @@ export default function PublicContent({page,pages,children,sectionContent={}}:{p
   {hasScene&&contextAside&&<div className="content-context-below">{contextAside}</div>}
   <div className={"content-reading-grid"+(sections.length>1?" has-section-nav":"")}>
    {sections.length>1&&<nav className="content-section-nav" aria-label={t.onPage}><span className="content-kicker">{t.onPage}</span><ol>{sections.map((section,index)=><li key={section.id}><button type="button" onClick={()=>jumpToSection(sectionAnchor(page.id,section.id,index))}>{section.heading[locale]}</button></li>)}</ol></nav>}
-   <div className="content-sections">{sections.map((section,index)=><article className="content-section" id={sectionAnchor(page.id,section.id,index)} tabIndex={-1} key={section.id}><div>{sectionContent[section.id]??<><h2>{section.heading[locale]}</h2><p>{section.body[locale]}</p></>}</div></article>)}
+   <div className="content-sections">{sections.map((section,index)=>{const custom=sectionContent[section.id];return <article className={"content-section"+(custom?" has-custom-content":"")} id={sectionAnchor(page.id,section.id,index)} tabIndex={-1} key={section.id}><div>{custom??<><h2>{section.heading[locale]}</h2><p>{section.body[locale]}</p></>}</div></article>})}
     {Boolean(page.contact_channels?.length)&&<section className="content-contact" aria-labelledby={"contact-title-"+page.id}><h2 id={"contact-title-"+page.id}>{t.contact}</h2>{page.contact_channels?.map(channel=><a key={channel.address} className="contact-channel" href={"mailto:"+channel.address}><span>{channel.label[locale]}</span><strong>{channel.address}</strong><span aria-hidden="true">→</span></a>)}</section>}
    </div>
   </div>

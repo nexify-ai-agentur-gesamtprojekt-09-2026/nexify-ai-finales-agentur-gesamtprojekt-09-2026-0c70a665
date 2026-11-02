@@ -384,7 +384,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
         <ActionButton type="submit" variant="primary" className="send-button" disabled={!ready} loading={busy} data-testid="chat-send-button">{busy?t.working:(site==="teileklar"?tkWelcome.send:t.send)}</ActionButton>
        </form>
       </div>
-      {chatMode==="orientation"&&<div className="chat-return"><ActionButton variant="quiet" data-testid="chat-return-workspace" onClick={()=>setChatMode("workspace")}>{locale==="de"?"Zur Projektvorbereitung":locale==="nl"?"Naar de projectvoorbereiding":locale==="fr"?"Vers la préparation du projet":"Back to project preparation"}</ActionButton></div>}
+      {chatMode==="orientation"&&<div className="chat-return"><div><span>{locale==="de"?"Nächster Schritt":locale==="nl"?"Volgende stap":locale==="fr"?"Prochaine étape":"Next step"}</span><strong>{locale==="de"?"Ihr Vorhaben konkretisieren":locale==="nl"?"Uw project concretiseren":locale==="fr"?"Préciser votre projet":"Shape your project"}</strong></div><ActionButton variant="icon" data-testid="chat-return-workspace" aria-label={locale==="de"?"Projektvorbereitung öffnen":locale==="nl"?"Projectvoorbereiding openen":locale==="fr"?"Ouvrir la préparation du projet":"Open project preparation"} onClick={()=>setChatMode("workspace")}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></ActionButton></div>}
     </aside>
   </div></UIContext.Provider>;
 }

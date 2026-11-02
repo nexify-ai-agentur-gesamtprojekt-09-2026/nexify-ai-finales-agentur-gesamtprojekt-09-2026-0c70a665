@@ -206,6 +206,59 @@ const starters={
   }
 } as const;
 
+const starterDetails:Record<Locale,Record<"nexify"|"teileklar",readonly string[]>>={
+ de:{
+  nexify:["Positionierung, Sprache, Design und Website als überzeugender Auftritt.","Abläufe, Systeme und KI zu einer kontrollierten Arbeitsweise verbinden.","Angebot, Zielgruppe, Kampagne und Landingpage gemeinsam auf Wirkung ausrichten."],
+  teileklar:["Mit Fahrzeugdaten und vorhandenem Hinweis zum passenden Teil starten.","Leistung, Fahrzeug und Standort für die Werkstattsuche einordnen.","Werkstattprofil, Zusammenarbeit und gemeinsamen Serviceweg besprechen."]
+ },
+ nl:{
+  nexify:["Positionering, taal, design en website als overtuigend geheel.","Processen, systemen en AI verbinden tot een controleerbare werkwijze.","Aanbod, doelgroep, campagne en landingspagina samen op resultaat richten."],
+  teileklar:["Start met voertuiggegevens en bekende informatie over het onderdeel.","Werkplaatsdienst, voertuig en locatie samen afbakenen.","Werkplaatsprofiel, samenwerking en gezamenlijke service bespreken."]
+ },
+ fr:{
+  nexify:["Positionnement, langage, design et site réunis dans une présence convaincante.","Relier processus, systèmes et IA dans un fonctionnement maîtrisé.","Aligner offre, cible, campagne et page d’arrivée sur un même résultat."],
+  teileklar:["Commencer avec le véhicule et les informations connues sur la pièce.","Préciser la prestation, le véhicule et la zone de recherche.","Échanger sur le profil atelier, la collaboration et le parcours de service."]
+ },
+ en:{
+  nexify:["Positioning, language, design and website shaped as one convincing presence.","Connect workflows, systems and AI in a controlled way of working.","Align offer, audience, campaign and landing page around one result."],
+  teileklar:["Start with vehicle details and any known information about the part.","Frame the service, vehicle and location for the workshop search.","Discuss the workshop profile, partnership and shared service journey."]
+ }
+};
+
+const journeyCopy:Record<Locale,Record<"nexify"|"teileklar",{eyebrow:string;title:string;body:string;steps:readonly [string,string][]}>>={
+ de:{
+  nexify:{eyebrow:"Persönlich geführt",title:"Aus einer Idee wird ein klarer nächster Schritt.",body:"AIFly ordnet Ihr Vorhaben vor. Pascal übernimmt, sobald Ziele, Umfang und Entscheidungen persönlich geklärt werden sollen.",steps:[["01","Vorhaben einordnen"],["02","Passenden Weg finden"],["03","Persönlich vertiefen"]]},
+  teileklar:{eyebrow:"Gezielt vorbereitet",title:"Vom Anliegen zur passenden Anlaufstelle.",body:"AIFly sammelt die entscheidenden Angaben. Anschließend führt der passende Weg zu Teil, Werkstatt oder Zusammenarbeit.",steps:[["01","Fahrzeug nennen"],["02","Anliegen eingrenzen"],["03","Nächsten Weg wählen"]]}
+ },
+ nl:{
+  nexify:{eyebrow:"Persoonlijk begeleid",title:"Van idee naar een duidelijke volgende stap.",body:"AIFly ordent uw plan vooraf. Pascal neemt over zodra doelen, omvang en keuzes persoonlijk besproken moeten worden.",steps:[["01","Plan duiden"],["02","Route bepalen"],["03","Persoonlijk verdiepen"]]},
+  teileklar:{eyebrow:"Gericht voorbereid",title:"Van vraag naar het juiste aanspreekpunt.",body:"AIFly verzamelt de beslissende gegevens. Daarna leidt de passende route naar onderdeel, werkplaats of samenwerking.",steps:[["01","Voertuig noemen"],["02","Vraag afbakenen"],["03","Route kiezen"]]}
+ },
+ fr:{
+  nexify:{eyebrow:"Accompagnement personnel",title:"De l’idée à une prochaine étape claire.",body:"AIFly structure d’abord votre projet. Pascal prend le relais lorsque les objectifs, le périmètre et les décisions doivent être précisés ensemble.",steps:[["01","Situer le projet"],["02","Trouver la voie"],["03","Approfondir ensemble"]]},
+  teileklar:{eyebrow:"Préparation ciblée",title:"De la demande au bon interlocuteur.",body:"AIFly rassemble les informations décisives, puis oriente vers la pièce, l’atelier ou la collaboration appropriée.",steps:[["01","Nommer le véhicule"],["02","Préciser le besoin"],["03","Choisir la suite"]]}
+ },
+ en:{
+  nexify:{eyebrow:"Personally guided",title:"Turn an idea into a clear next step.",body:"AIFly structures your project first. Pascal takes over when goals, scope and decisions need a personal conversation.",steps:[["01","Frame the project"],["02","Find the right route"],["03","Develop it together"]]},
+  teileklar:{eyebrow:"Purposefully prepared",title:"From request to the right point of contact.",body:"AIFly gathers the decisive details, then directs you to the relevant part, workshop or partnership route.",steps:[["01","Name the vehicle"],["02","Narrow the request"],["03","Choose the route"]]}
+ }
+};
+
+function OrientationStarters({locale,site,label,onChoose}:{locale:Locale;site:"nexify"|"teileklar";label:string;onChoose:(seed:string)=>void}){
+ return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
+}
+
+function OrientationJourney({locale,site}:{locale:Locale;site:"nexify"|"teileklar"}){
+ const content=journeyCopy[locale][site];
+ return <aside className="orientation-journey" aria-label={content.title}><span>{content.eyebrow}</span><h4>{content.title}</h4><p>{content.body}</p><ol>{content.steps.map(([number,label])=><li key={number}><small>{number}</small><strong>{label}</strong></li>)}</ol></aside>;
+}
+
+function OrientationAnswer({text,locale}:{text:string;locale:Locale}){
+ const paragraphs=text.split(/\n\n+/).filter(Boolean),last=paragraphs.length-1;
+ const noteLabel=({de:"Hinweis zur Einordnung",nl:"Toelichting",fr:"Note d’orientation",en:"Guidance note"} as const)[locale];
+ return <div className="orientation-answer-copy">{paragraphs.map((paragraph,index)=>index===0?<p className="orientation-answer-heading" key={paragraph}>{paragraph}</p>:index===last&&paragraphs.length>2?<details className="orientation-answer-note" key={paragraph}><summary>{noteLabel}<span aria-hidden="true">+</span></summary><p>{paragraph}</p></details>:<p key={paragraph}>{paragraph}</p>)}</div>;
+}
+
 function guidedText(text:string,pages:PublicPage[]){
  return text.split(/(\[[^\]\n]+\]\(\/[A-Za-z0-9/-]*\))/g).map((part,index)=>{
   const match=/^\[([^\]\n]+)\]\((\/[A-Za-z0-9/-]*)\)$/.exec(part);
@@ -236,10 +289,10 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
    if(part.type==="text")return <p key={index}>{message.role==="assistant"?guidedText(part.text,pages):part.text}</p>;
    if(part.type!=="data-page"||!("data" in part)||!part.data||typeof part.data!=="object")return null;
    const ref=part.data as Record<string,unknown>;const page=pages.find(page=>page.id===ref.page_id&&page.path===ref.path);
-   return page?<SiteLink className="orientation-page-link" key={index} href={page.path}>{page.localizedTitle[locale]} <span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>:null;
+   return page?<SiteLink className="orientation-page-link" key={index} href={page.path}><span className="orientation-page-index" aria-hidden="true">0{index+1}</span><span className="orientation-page-copy"><strong>{page.localizedTitle[locale]}</strong><small>{page.localizedSummary[locale]}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>:null;
   })}</article>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);composerInput.current?.focus();}}><span className="orientation-starter-label">{label}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>}
+  {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
   {busy&&<p className="connection-note" role="status">{text.waiting}</p>}<p className="connection-note">{text.privacy}</p>
  </section>;
@@ -263,10 +316,10 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
   <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
-   <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><p>{message.answer.text}</p>{message.answer.cards.map(card=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span><strong>{card.title}</strong><br/>{card.summary}</span><span aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</article>
+   <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>
   </div>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<div className="orientation-starters" role="group" aria-label={text.label}>{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="orientation-starter" onClick={()=>{setDraft(seed);input.current?.focus();}}><span className="orientation-starter-label">{label}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>}
+  {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
   <p className="connection-note">{text.privacy}</p>
  </section>;
