@@ -11,7 +11,7 @@
     },
     "site_tests": {
       "status": "passed",
-      "tests": 122
+      "tests": 125
     },
     "site_typecheck": "passed",
     "site_production_build": "passed",
@@ -51,11 +51,24 @@
       "reviewer": "/root/grafik_design",
       "findings_closed": 3,
       "files_changed_by_reviewer": 0
+    },
+    "sitemap_contract_tests": {
+      "status": "passed",
+      "tests": 3,
+      "public_routes": 39,
+      "target_origin": "https://www.nexifyai.de"
+    },
+    "sitemap_independent_review": {
+      "status": "approved",
+      "reviewer": "/root/grafik_design",
+      "findings": 0,
+      "files_changed_by_reviewer": 0
     }
   },
   "publication": {
     "performed": false,
     "private_preview_remains_noindex": true,
-    "domain_or_indexing_changed": false
+    "domain_or_indexing_changed": false,
+    "sitemap_complete_for_public_registry": true
   }
 }

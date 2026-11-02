@@ -1559,18 +1559,19 @@ ausgegeben. Standalone-Dateien ohne HTTP-Origin bleiben funktionsfähig. Hero,
 Licht, Schatten und gemeinsame
 Designkomponenten blieben wegen der Writergrenze unverändert.
 
-Nachweis: vier reine Metadaten-Vertragstests, 122 Site-Tests, Typecheck,
+Nachweis: vier reine Metadaten-Vertragstests, 125 Site-Tests, Typecheck,
 Produktionsbuild, LLM-Policy und `make check` bestanden. Reale lokale
 Chromium-Prüfung für drei direkte Routen, DE/NL, dynamischen Produktpfad und
 Fehlerroute bestand ohne externe Requests. Bericht:
 `docs/reviews/sitewide-seo-metadata-2026-11-02.md`.
 
 P03 und der Gesamtauftrag bleiben offen. Die private Vorschau bleibt bewusst
-`noindex,nofollow`. Die vorhandene Sitemap führt 36 der 39 öffentlichen Routen
-und verweist auf `www.nexifyai.de`; `/teileklar/shop`,
-`/teileklar/reifenrechner` und `/teileklar/batterie-berater` fehlen. Domain,
-Indexierung, vollständige Sitemap und Zielhost-Readback werden erst gemeinsam
-umgestellt. Der bestehende Matrixverifier bleibt fail-closed an bereits
+`noindex,nofollow`. Die Sitemap führt jetzt exakt alle 39 öffentlichen Routen;
+die drei neueren TEILEKLAR-Wege sind ergänzt und mit drei Vertragstests gegen
+fehlende, doppelte oder private Einträge gesichert. `www.nexifyai.de` bleibt die
+dokumentierte Zieladresse, wurde aber nicht umgeschaltet oder als indexierbar
+freigegeben. Domain, Indexierung und Zielhost-Readback bleiben ein gemeinsames
+Veröffentlichungsgate. Der bestehende Matrixverifier bleibt fail-closed an bereits
 dokumentierter historischer Hashdrift vieler Altbelege; nur die Dateien dieses
 Slices wurden aktuell gebunden, fremde historische Hashes nicht pauschal
 freigezeichnet.

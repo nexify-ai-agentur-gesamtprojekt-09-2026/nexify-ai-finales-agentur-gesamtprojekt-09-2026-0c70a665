@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138",
-    "PROGRESS.md": "11acf13517fea0490aaea64cb5601288062218f9e464b0fef259fbbc3f56ca80",
+    "PROGRESS.md": "cfcb6e90cd7ed5f561249f1c1ae45a53cabf8ef288af379774db6da65958ffcd",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1583,8 +1583,10 @@
     "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
     "apps/site/tests/seo-metadata.test.mjs": "a24f3517cf86faff7b595a3edf1a9b515e3ad5f3b55e6f013c6b9864a2f3eddc",
     "apps/site/tests/browser-seo-metadata.mjs": "bb166ee7ae8b4c5b92950a47ca917a43caa9b933d3dd46737142b707fb4d0e80",
-    "docs/reviews/sitewide-seo-metadata-2026-11-02.md": "a3cbe32a7260dbbcde57d9ff75f45958d1f188be54f0c43673d5f19b9109aae8",
-    "evidence/sitewide-seo-2026-11-02/runtime.json": "25f0518a58d3137a42cef4b471591caeb4c708d1a06038881f457609a78c1ba5"
+    "docs/reviews/sitewide-seo-metadata-2026-11-02.md": "87ec132b7009baac34d355110c6f3d8ea7f27028d6744c120ea00b383e363927",
+    "evidence/sitewide-seo-2026-11-02/runtime.json": "ad3db8dba5fffb495bd99ac887a3f24da242666d15fe61577d085e3cea742500",
+    "apps/web/public/sitemap.xml": "b81e6965e8c8ba59600e84f261039e2ee319694ea6e0afa58103a92d4bda459f",
+    "apps/site/tests/seo-sitemap.test.mjs": "f83916ca7c6a86d290aaf86eea1bc358f6191c0a15dd8f0b0e0c300606e0f824"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -3584,9 +3586,11 @@
           "apps/site/tests/seo-metadata.test.mjs",
           "apps/site/tests/browser-seo-metadata.mjs",
           "docs/reviews/sitewide-seo-metadata-2026-11-02.md",
-          "evidence/sitewide-seo-2026-11-02/runtime.json"
+          "evidence/sitewide-seo-2026-11-02/runtime.json",
+          "apps/web/public/sitemap.xml",
+          "apps/site/tests/seo-sitemap.test.mjs"
         ],
-        "test_evidence": "4 pure metadata contract tests; 122 site tests; 16 standalone contract tests and standalone build; site typecheck and production build; Chromium direct-route/language/dynamic-detail/unknown-route runtime check with zero external requests; independent review APPROVE after three findings were corrected and rechecked; LLM policy and make check passed. Full make test failed closed at 697 tests / 61 failures / 10 errors / 11 skips from recorded historical evidence drift and missing pymongo. Evidence: evidence/sitewide-seo-2026-11-02/runtime.json and docs/reviews/sitewide-seo-metadata-2026-11-02.md.",
+        "test_evidence": "4 pure metadata contract tests; 125 site tests; 16 standalone contract tests and standalone build; site typecheck and production build; Chromium direct-route/language/dynamic-detail/unknown-route runtime check with zero external requests; independent review APPROVE after three findings were corrected and rechecked; 3 sitemap contract tests and independent review APPROVE cover all 39 public routes on the documented German-market target origin; LLM policy and make check passed. Full make test failed closed at 697 tests / 61 failures / 10 errors / 11 skips from recorded historical evidence drift and missing pymongo. Evidence: evidence/sitewide-seo-2026-11-02/runtime.json and docs/reviews/sitewide-seo-metadata-2026-11-02.md.",
         "actual_delivery": "goal_loop_active; P03 route-specific metadata slice implemented_and_local_browser_verified",
         "full_requirement_accepted": false,
         "gap": "P01-P26 remain open. P03 still needs all-route FR/EN runtime coverage, crawler-visible server rendering, target-host sitemap/canonical readback, public indexing/domain decision and per-page editorial acceptance.",

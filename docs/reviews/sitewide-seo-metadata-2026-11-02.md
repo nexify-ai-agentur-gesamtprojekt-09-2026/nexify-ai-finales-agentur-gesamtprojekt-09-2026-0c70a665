@@ -34,7 +34,7 @@ Modellfunktion, Terminzusage oder öffentliche Indexierung.
 ## Nachweis
 
 - 4 reine Metadaten-Vertragstests bestanden.
-- 122 Site-Tests bestanden.
+- 125 Site-Tests bestanden.
 - TypeScript-Typecheck und Produktionsbuild bestanden.
 - Reale Chromium-Prüfung: drei direkte Routen, DE/NL, dynamischer Produktpfad
   und unbekannte Route; null externe Requests.
@@ -49,9 +49,21 @@ Modellfunktion, Terminzusage oder öffentliche Indexierung.
 APPROVE durch `/root/grafik_design`: drei gefundene Randfehler wurden behoben
 und erneut geprüft. Der Reviewer änderte keine Dateien.
 
+## Sitemap
+
+Die vorhandene Sitemap enthält jetzt exakt alle 39 öffentlichen Routen aus dem
+Register. Die drei neueren TEILEKLAR-Wege `shop`, `reifenrechner` und
+`batterie-berater` sind ergänzt. Ein eigener Vertragstest verhindert fehlende,
+doppelte oder private Routen sowie gemischte Origins.
+
+Der Origin `https://www.nexifyai.de` bleibt die dokumentierte Zieladresse des
+deutschen Marktauftritts. Die aktuelle private Vorschau bleibt dennoch
+`noindex,nofollow`; dieser Abgleich ist kein Domain-Cutover und keine
+Indexierungsfreigabe.
+
 ## Restumfang
 
 Dieses Paket schließt weder P03 noch den Gesamtauftrag. Offen bleiben insbesondere
 die Prüfung aller 39 öffentlichen Routen in FR/EN, serverseitig vorgerenderte
-Metadaten für Crawler, die öffentliche Domain-/Indexierungsentscheidung, Sitemap-
-und Canonical-Abgleich am Zielhost sowie fachliche Abnahme jedes Seitentextes.
+Metadaten für Crawler, die öffentliche Domain-/Indexierungsentscheidung,
+Sitemap-/Canonical-Readback am Zielhost sowie fachliche Abnahme jedes Seitentextes.
