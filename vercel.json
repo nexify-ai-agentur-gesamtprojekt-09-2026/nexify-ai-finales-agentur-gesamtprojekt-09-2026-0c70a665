@@ -39,7 +39,7 @@
           "includeFiles": "vercel_support/bigbuy_get.py"
         }
       },
-      "buildCommand": "python3 prepare_vercel.py && python3 namespace_operator.py preflight"
+      "buildCommand": "python3 prepare_vercel.py && python3 namespace_operator.py init --confirm-plan-sha256 52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773"
     }
   },
   "headers": [
