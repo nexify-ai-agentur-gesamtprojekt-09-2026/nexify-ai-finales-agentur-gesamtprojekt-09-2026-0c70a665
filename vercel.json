@@ -39,7 +39,7 @@
           "includeFiles": "vercel_support/bigbuy_get.py"
         }
       },
-      "buildCommand": "python3 prepare_vercel.py"
+      "buildCommand": "python3 prepare_vercel.py && python3 namespace_operator.py preflight"
     }
   },
   "headers": [
