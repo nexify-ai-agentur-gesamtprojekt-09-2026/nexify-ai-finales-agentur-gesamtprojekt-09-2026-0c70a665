@@ -1,0 +1,720 @@
+Public build data: 39 pages; protected content excluded
+$ node --test tests/*.test.mjs
+TAP version 13
+# Subtest: UI exports the canonical JSON dictionary with all existing locales and string fields
+ok 1 - UI exports the canonical JSON dictionary with all existing locales and string fields
+  ---
+  duration_ms: 7.084405
+  type: 'test'
+  ...
+# Subtest: auth is disabled by default and only explicit public true plus a valid key enables it
+ok 2 - auth is disabled by default and only explicit public true plus a valid key enables it
+  ---
+  duration_ms: 2.020289
+  type: 'test'
+  ...
+# Subtest: malformed public keys never mount a broken provider
+ok 3 - malformed public keys never mount a broken provider
+  ---
+  duration_ms: 0.477894
+  type: 'test'
+  ...
+# Subtest: Clerk removed (D-007): no identity SDK, no env-driven auth and no membership is minted
+ok 4 - Clerk removed (D-007): no identity SDK, no env-driven auth and no membership is minted
+  ---
+  duration_ms: 1.925649
+  type: 'test'
+  ...
+# Subtest: the wrapper retains public media, guide and honest disabled fallback
+ok 5 - the wrapper retains public media, guide and honest disabled fallback
+  ---
+  duration_ms: 0.708254
+  type: 'test'
+  ...
+# Subtest: header account control reaches route-local lifecycle without global provider
+ok 6 - header account control reaches route-local lifecycle without global provider
+  ---
+  duration_ms: 0.434741
+  type: 'test'
+  ...
+# Subtest: compiler lint rejects actual control-flow defects in isolated TS sources
+ok 7 - compiler lint rejects actual control-flow defects in isolated TS sources
+  ---
+  duration_ms: 1294.020642
+  type: 'test'
+  ...
+# Subtest: public build includes API typecheck and root uses existing NodeNext contract
+ok 8 - public build includes API typecheck and root uses existing NodeNext contract
+  ---
+  duration_ms: 2290.628822
+  type: 'test'
+  ...
+# Subtest: uncertain retry and reload keep the same identifier without storing contact details
+ok 9 - uncertain retry and reload keep the same identifier without storing contact details
+  ---
+  duration_ms: 10.261038
+  type: 'test'
+  ...
+# Subtest: corrupt pending state cannot silently become a fresh submission
+ok 10 - corrupt pending state cannot silently become a fresh submission
+  ---
+  duration_ms: 0.67801
+  type: 'test'
+  ...
+# Subtest: blocked storage or a mismatching readback stops before any HTTP side effect
+ok 11 - blocked storage or a mismatching readback stops before any HTTP side effect
+  ---
+  duration_ms: 1.848365
+  type: 'test'
+  ...
+# Subtest: external CSP reporting is absent without dropping the enforced header
+ok 12 - external CSP reporting is absent without dropping the enforced header
+  ---
+  duration_ms: 1.729529
+  type: 'test'
+  ...
+# Subtest: only the observed supplier image directory extends the reviewed CSP
+ok 13 - only the observed supplier image directory extends the reviewed CSP
+  ---
+  duration_ms: 2.490717
+  type: 'test'
+  ...
+# Subtest: other security headers and their values remain intact
+ok 14 - other security headers and their values remain intact
+  ---
+  duration_ms: 1.11936
+  type: 'test'
+  ...
+# Subtest: audible autoplay remains audible when the browser permits it
+ok 15 - audible autoplay remains audible when the browser permits it
+  ---
+  duration_ms: 1.689341
+  type: 'test'
+  ...
+# Subtest: audible rejection gets exactly one muted fallback
+ok 16 - audible rejection gets exactly one muted fallback
+  ---
+  duration_ms: 0.425177
+  type: 'test'
+  ...
+# Subtest: two rejected attempts preserve the manual playback state
+ok 17 - two rejected attempts preserve the manual playback state
+  ---
+  duration_ms: 0.39348
+  type: 'test'
+  ...
+# Subtest: silent editorial footage makes only a muted attempt
+ok 18 - silent editorial footage makes only a muted attempt
+  ---
+  duration_ms: 0.320312
+  type: 'test'
+  ...
+# Subtest: delivered editorial films bind to exact source and poster bytes
+ok 19 - delivered editorial films bind to exact source and poster bytes
+  ---
+  duration_ms: 22.01084
+  type: 'test'
+  ...
+# Subtest: corrupted film descriptor and path escape fail closed
+ok 20 - corrupted film descriptor and path escape fail closed
+  ---
+  duration_ms: 9.223103
+  type: 'test'
+  ...
+# Subtest: all public scene routes are explicitly assigned, without private routes
+ok 21 - all public scene routes are explicitly assigned, without private routes
+  ---
+  duration_ms: 0.293523
+  type: 'test'
+  ...
+# Subtest: missing and unauthorized scene routes fail closed
+ok 22 - missing and unauthorized scene routes fail closed
+  ---
+  duration_ms: 0.506467
+  type: 'test'
+  ...
+# Subtest: no configuration, no consent, or wrong host/release stays closed
+ok 23 - no configuration, no consent, or wrong host/release stays closed
+  ---
+  duration_ms: 1.04436
+  type: 'test'
+  ...
+# Subtest: one init, duplicate starts and dedup; revoke remains terminal until fresh document
+ok 24 - one init, duplicate starts and dedup; revoke remains terminal until fresh document
+  ---
+  duration_ms: 1.565298
+  type: 'test'
+  ...
+# Subtest: revocation while SDK import is pending prevents initialization
+ok 25 - revocation while SDK import is pending prevents initialization
+  ---
+  duration_ms: 0.20344
+  type: 'test'
+  ...
+# Subtest: SDK import failure is contained without blind repeated import
+ok 26 - SDK import failure is contained without blind repeated import
+  ---
+  duration_ms: 0.404136
+  type: 'test'
+  ...
+# Subtest: redactor permits only exception fields and same-origin static frames
+ok 27 - redactor permits only exception fields and same-origin static frames
+  ---
+  duration_ms: 0.856633
+  type: 'test'
+  ...
+# Subtest: reactive snapshots stable; decline stays changeable, grant/revoke while loading is terminal
+ok 28 - reactive snapshots stable; decline stays changeable, grant/revoke while loading is terminal
+  ---
+  duration_ms: 0.281735
+  type: 'test'
+  ...
+# Subtest: unconfigured consent never pretends initialized and can be withdrawn
+ok 29 - unconfigured consent never pretends initialized and can be withdrawn
+  ---
+  duration_ms: 0.259272
+  type: 'test'
+  ...
+# Subtest: all public pages must be represented without private or duplicate page entries
+ok 30 - all public pages must be represented without private or duplicate page entries
+  ---
+  duration_ms: 1.311263
+  type: 'test'
+  ...
+# Subtest: private action targets and invented playable pending assets are rejected
+ok 31 - private action targets and invented playable pending assets are rejected
+  ---
+  duration_ms: 0.21025
+  type: 'test'
+  ...
+# Subtest: published videos need canonical own-origin video paths and every caption locale
+ok 32 - published videos need canonical own-origin video paths and every caption locale
+  ---
+  duration_ms: 2.721042
+  type: 'test'
+  ...
+# Subtest: projection preserves all public explainer copy but excludes unrelated configuration
+ok 33 - projection preserves all public explainer copy but excludes unrelated configuration
+  ---
+  duration_ms: 0.251401
+  type: 'test'
+  ...
+# Subtest: invented source references cannot pass the provenance gate
+ok 34 - invented source references cannot pass the provenance gate
+  ---
+  duration_ms: 0.235207
+  type: 'test'
+  ...
+# Subtest: every explanatory text and action needs real English; video captions retain their separately verified locales
+ok 35 - every explanatory text and action needs real English; video captions retain their separately verified locales
+  ---
+  duration_ms: 0.358138
+  type: 'test'
+  ...
+# Subtest: canonical section edits propagate to the explainer without duplicate scripts
+ok 36 - canonical section edits propagate to the explainer without duplicate scripts
+  ---
+  duration_ms: 0.506227
+  type: 'test'
+  ...
+# Subtest: published character derivatives and preserved originals match their exact hash bindings
+ok 37 - published character derivatives and preserved originals match their exact hash bindings
+  ---
+  duration_ms: 79.244172
+  type: 'test'
+  ...
+# Subtest: source drift, outside paths and invalid image dimensions fail before publication
+ok 38 - source drift, outside paths and invalid image dimensions fail before publication
+  ---
+  duration_ms: 55.634663
+  type: 'test'
+  ...
+# Subtest: maps disabled by default, exact release required; uploads forbidden even with env
+ok 39 - maps disabled by default, exact release required; uploads forbidden even with env
+  ---
+  duration_ms: 1.343221
+  type: 'test'
+  ...
+# Subtest: private maps read back exactly, removed from public output, directives stripped
+ok 40 - private maps read back exactly, removed from public output, directives stripped
+  ---
+  duration_ms: 41.784484
+  type: 'test'
+  ...
+# Subtest: hashes original UTF-8 bytes and records preparation without transfer or Brain effects
+ok 41 - hashes original UTF-8 bytes and records preparation without transfer or Brain effects
+  ---
+  duration_ms: 8.602503
+  type: 'test'
+  ...
+# Subtest: rejects forged MIME, active formats, inherited keys, unsafe and bidi names
+ok 42 - rejects forged MIME, active formats, inherited keys, unsafe and bidi names
+  ---
+  duration_ms: 0.518254
+  type: 'test'
+  ...
+# Subtest: blocks binary masquerading as UTF-8, invalid JSON and empty files
+ok 43 - blocks binary masquerading as UTF-8, invalid JSON and empty files
+  ---
+  duration_ms: 0.926706
+  type: 'test'
+  ...
+# Subtest: deduplicates by bytes across names and preserves conflicting versions
+ok 44 - deduplicates by bytes across names and preserves conflicting versions
+  ---
+  duration_ms: 3.836216
+  type: 'test'
+  ...
+# Subtest: checks count, per-file and aggregate budgets before reading any bytes
+ok 45 - checks count, per-file and aggregate budgets before reading any bytes
+  ---
+  duration_ms: 0.510472
+  type: 'test'
+  ...
+# Subtest: cancel before and during a pending read cannot yield prepared files
+ok 46 - cancel before and during a pending read cannot yield prepared files
+  ---
+  duration_ms: 0.576881
+  type: 'test'
+  ...
+# Subtest: requires an intentional project label, supported purpose and resolved files
+ok 47 - requires an intentional project label, supported purpose and resolved files
+  ---
+  duration_ms: 0.307152
+  type: 'test'
+  ...
+# Subtest: never executes text markup and requires content length to match metadata
+ok 48 - never executes text markup and requires content length to match metadata
+  ---
+  duration_ms: 1.79732
+  type: 'test'
+  ...
+# Subtest: missing English is rejected rather than replaced with German customer text
+ok 49 - missing English is rejected rather than replaced with German customer text
+  ---
+  duration_ms: 1.26131
+  type: 'test'
+  ...
+# Subtest: protected fields never cross the public build boundary
+ok 50 - protected fields never cross the public build boundary
+  ---
+  duration_ms: 0.369044
+  type: 'test'
+  ...
+# Subtest: missing explicit authentication false is excluded
+ok 51 - missing explicit authentication false is excluded
+  ---
+  duration_ms: 0.650278
+  type: 'test'
+  ...
+# Subtest: unknown and private action targets fail rather than silently redirect
+ok 52 - unknown and private action targets fail rather than silently redirect
+  ---
+  duration_ms: 0.392438
+  type: 'test'
+  ...
+# Subtest: route redirects and duplicate paths are rejected
+ok 53 - route redirects and duplicate paths are rejected
+  ---
+  duration_ms: 0.276858
+  type: 'test'
+  ...
+# Subtest: contact channels exclude encoded headers and arbitrary schemes
+ok 54 - contact channels exclude encoded headers and arbitrary schemes
+  ---
+  duration_ms: 0.288946
+  type: 'test'
+  ...
+# Subtest: portable route parser accepts normal and file hash navigation without unsafe decoding
+ok 55 - portable route parser accepts normal and file hash navigation without unsafe decoding
+  ---
+  duration_ms: 0.372029
+  type: 'test'
+  ...
+# Subtest: only ordinary same-origin primary clicks are intercepted
+ok 56 - only ordinary same-origin primary clicks are intercepted
+  ---
+  duration_ms: 0.202819
+  type: 'test'
+  ...
+# Subtest: default/standalone/unknown build modes emit no manifest or worker
+ok 57 - default/standalone/unknown build modes emit no manifest or worker
+  ---
+  duration_ms: 1.269371
+  type: 'test'
+  ...
+# Subtest: explicit mode emits network-only installation and unchanged existing brand icon
+ok 58 - explicit mode emits network-only installation and unchanged existing brand icon
+  ---
+  duration_ms: 1.534693
+  type: 'test'
+  ...
+# Subtest: missing capability, insecure, file and standalone fail closed
+ok 59 - missing capability, insecure, file and standalone fail closed
+  ---
+  duration_ms: 0.247214
+  type: 'test'
+  ...
+# Subtest: exact worker registration, errors remain explicit without retry
+ok 60 - exact worker registration, errors remain explicit without retry
+  ---
+  duration_ms: 0.373861
+  type: 'test'
+  ...
+# Subtest: public shop route projection preserves catalogue, checkout and workshop journeys
+ok 61 - public shop route projection preserves catalogue, checkout and workshop journeys
+  ---
+  duration_ms: 105.493573
+  type: 'test'
+  ...
+# Subtest: public renderer uses real catalogue, transactional and workshop components
+ok 62 - public renderer uses real catalogue, transactional and workshop components
+  ---
+  duration_ms: 28.781343
+  type: 'test'
+  ...
+# Subtest: catalogue ignores old responses and aborts requests on query change/unmount
+ok 63 - catalogue ignores old responses and aborts requests on query change/unmount
+  ---
+  duration_ms: 47.376798
+  type: 'test'
+  ...
+# Subtest: 503 is an error, successful empty catalogue makes no progress claim
+ok 64 - 503 is an error, successful empty catalogue makes no progress claim
+  ---
+  duration_ms: 40.552568
+  type: 'test'
+  ...
+# Subtest: category errors are distinct from empty data and unmount aborts stale loads
+ok 65 - category errors are distinct from empty data and unmount aborts stale loads
+  ---
+  duration_ms: 25.118624
+  type: 'test'
+  ...
+# Subtest: shop entry offers discovery without a purchase promise
+ok 66 - shop entry offers discovery without a purchase promise
+  ---
+  duration_ms: 0.448201
+  type: 'test'
+  ...
+# Subtest: actual registry covers 49 routes and projects only 39 empty public entries
+ok 67 - actual registry covers 49 routes and projects only 39 empty public entries
+  ---
+  duration_ms: 6.606921
+  type: 'test'
+  ...
+# Subtest: synthetic byte and scoped-receipt fixture produces exactly the safe PublicVideo shape
+ok 68 - synthetic byte and scoped-receipt fixture produces exactly the safe PublicVideo shape
+  ---
+  duration_ms: 57.613346
+  type: 'test'
+  ...
+# Subtest: published status alone and unresolved source-manifest differences never authorize projection
+ok 69 - published status alone and unresolved source-manifest differences never authorize projection
+  ---
+  duration_ms: 36.76279
+  type: 'test'
+  ...
+# Subtest: source, asset, version, voice, characters and script changes invalidate the receipt
+ok 70 - source, asset, version, voice, characters and script changes invalidate the receipt
+  ---
+  duration_ms: 100.286265
+  type: 'test'
+  ...
+# Subtest: receipt decisions and exact page locale context binding must all agree
+ok 71 - receipt decisions and exact page locale context binding must all agree
+  ---
+  duration_ms: 203.373029
+  type: 'test'
+  ...
+# Subtest: private and internal route references and assets cannot enter a public projection
+ok 72 - private and internal route references and assets cannot enter a public projection
+  ---
+  duration_ms: 20.019275
+  type: 'test'
+  ...
+# Subtest: all media paths and private approval paths reject remote, traversal and public receipts
+ok 73 - all media paths and private approval paths reject remote, traversal and public receipts
+  ---
+  duration_ms: 55.77458
+  type: 'test'
+  ...
+# Subtest: actual files, byte sizes, hashes, VTT, transcript and MIME are checked
+ok 74 - actual files, byte sizes, hashes, VTT, transcript and MIME are checked
+  ---
+  duration_ms: 80.738831
+  type: 'test'
+  ...
+# Subtest: file and parent symlinks and hardlinks fail without reading or altering external files
+ok 75 - file and parent symlinks and hardlinks fail without reading or altering external files
+  ---
+  duration_ms: 45.421506
+  type: 'test'
+  ...
+# Subtest: known rejected hero bytes cannot be reinstated as source character or poster
+ok 76 - known rejected hero bytes cannot be reinstated as source character or poster
+  ---
+  duration_ms: 25.277387
+  type: 'test'
+  ...
+# Subtest: missing or nonpositive budgets and nonstring fields fail closed
+ok 77 - missing or nonpositive budgets and nonstring fields fail closed
+  ---
+  duration_ms: 17.800444
+  type: 'test'
+  ...
+# Subtest: route omissions duplicates wrong context and invented bindings are rejected
+ok 78 - route omissions duplicates wrong context and invented bindings are rejected
+  ---
+  duration_ms: 7.283122
+  type: 'test'
+  ...
+# Subtest: locale mismatch, missing character and receipt duplicate keys are rejected
+ok 79 - locale mismatch, missing character and receipt duplicate keys are rejected
+  ---
+  duration_ms: 31.446157
+  type: 'test'
+  ...
+# Subtest: explicit file total receipt transcript dimension and duration budgets constrain approved fixtures
+ok 80 - explicit file total receipt transcript dimension and duration budgets constrain approved fixtures
+  ---
+  duration_ms: 74.549901
+  type: 'test'
+  ...
+# Subtest: undeclared budgets permit pending route inventory but never approved asset publication
+ok 81 - undeclared budgets permit pending route inventory but never approved asset publication
+  ---
+  duration_ms: 30.204271
+  type: 'test'
+  ...
+# Subtest: relabelling and an all-pass synthetic receipt cannot publish the known review clip
+ok 82 - relabelling and an all-pass synthetic receipt cannot publish the known review clip
+  ---
+  duration_ms: 41.559097
+  type: 'test'
+  ...
+# Subtest: approved module clip projects only to its exact module without route or sibling fallback
+ok 83 - approved module clip projects only to its exact module without route or sibling fallback
+  ---
+  duration_ms: 18.305568
+  type: 'test'
+  ...
+# Subtest: missing foreign private duplicate reassigned and wrong-context module records fail closed
+ok 84 - missing foreign private duplicate reassigned and wrong-context module records fail closed
+  ---
+  duration_ms: 34.784408
+  type: 'test'
+  ...
+# Subtest: actual explainer source inventory is required and cannot hide omit or add private modules
+ok 85 - actual explainer source inventory is required and cannot hide omit or add private modules
+  ---
+  duration_ms: 8.656232
+  type: 'test'
+  ...
+# Subtest: module status or a different module receipt cannot authorize its own slot
+ok 86 - module status or a different module receipt cannot authorize its own slot
+  ---
+  duration_ms: 113.903227
+  type: 'test'
+  ...
+# Subtest: complete route-intro locale coverage does not complete outstanding module slots
+ok 87 - complete route-intro locale coverage does not complete outstanding module slots
+  ---
+  duration_ms: 19.473671
+  type: 'test'
+  ...
+# Subtest: one generic page clip cannot fill an individual module by aliasing identical bytes
+ok 88 - one generic page clip cannot fill an individual module by aliasing identical bytes
+  ---
+  duration_ms: 12.887961
+  type: 'test'
+  ...
+# Subtest: HTTP 200 HTML fallback is rejected, never an empty shop result
+ok 89 - HTTP 200 HTML fallback is rejected, never an empty shop result
+  ---
+  duration_ms: 46.796603
+  type: 'test'
+  ...
+# Subtest: malformed JSON and primitive JSON cannot become product data
+ok 90 - malformed JSON and primitive JSON cannot become product data
+  ---
+  duration_ms: 4.898592
+  type: 'test'
+  ...
+# Subtest: structured runtime failures retain status and reason
+ok 91 - structured runtime failures retain status and reason
+  ---
+  duration_ms: 1.018542
+  type: 'test'
+  ...
+# Subtest: real JSON successes and bodyless successful writes keep their meaning
+ok 92 - real JSON successes and bodyless successful writes keep their meaning
+  ---
+  duration_ms: 2.859606
+  type: 'test'
+  ...
+# Subtest: split standalone input fails before publishing an incomplete preview
+ok 93 - split standalone input fails before publishing an incomplete preview
+  ---
+  duration_ms: 267.877004
+  type: 'test'
+  ...
+# Subtest: companion original is embedded byte-for-byte without an offline path
+ok 94 - companion original is embedded byte-for-byte without an offline path
+  ---
+  duration_ms: 211.096422
+  type: 'test'
+  ...
+# Subtest: missing companion bytes fail before publishing an incomplete preview
+ok 95 - missing companion bytes fail before publishing an incomplete preview
+  ---
+  duration_ms: 264.828712
+  type: 'test'
+  ...
+# Subtest: self contained input retains offline CSP and preview mode
+ok 96 - self contained input retains offline CSP and preview mode
+  ---
+  duration_ms: 218.679689
+  type: 'test'
+  ...
+# Subtest: standalone rejects nested static chunk even with only one top-level JavaScript file
+ok 97 - standalone rejects nested static chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 215.273314
+  type: 'test'
+  ...
+# Subtest: standalone rejects external re-export even with only one top-level JavaScript file
+ok 98 - standalone rejects external re-export even with only one top-level JavaScript file
+  ---
+  duration_ms: 203.302597
+  type: 'test'
+  ...
+# Subtest: standalone rejects dynamic literal chunk even with only one top-level JavaScript file
+ok 99 - standalone rejects dynamic literal chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 259.256594
+  type: 'test'
+  ...
+# Subtest: standalone rejects computed dynamic chunk even with only one top-level JavaScript file
+ok 100 - standalone rejects computed dynamic chunk even with only one top-level JavaScript file
+  ---
+  duration_ms: 194.613677
+  type: 'test'
+  ...
+# Subtest: standalone rejects bare module even with only one top-level JavaScript file
+ok 101 - standalone rejects bare module even with only one top-level JavaScript file
+  ---
+  duration_ms: 178.123759
+  type: 'test'
+  ...
+# Subtest: standalone rejects invalid syntax even with only one top-level JavaScript file
+ok 102 - standalone rejects invalid syntax even with only one top-level JavaScript file
+  ---
+  duration_ms: 172.599853
+  type: 'test'
+  ...
+# Subtest: current presenter WebP is embedded under the offline data-only image policy
+ok 103 - current presenter WebP is embedded under the offline data-only image policy
+  ---
+  duration_ms: 182.525747
+  type: 'test'
+  ...
+# Subtest: referenced current artwork cannot silently disappear from an offline export
+ok 104 - referenced current artwork cannot silently disappear from an offline export
+  ---
+  duration_ms: 211.645864
+  type: 'test'
+  ...
+# Subtest: all four locales give explicit local/no-live-AI guidance and exact supplied page copy
+ok 105 - all four locales give explicit local/no-live-AI guidance and exact supplied page copy
+  ---
+  duration_ms: 7.100532
+  type: 'test'
+  ...
+# Subtest: three pillars select their real, distinct routes
+ok 106 - three pillars select their real, distinct routes
+  ---
+  duration_ms: 0.584319
+  type: 'test'
+  ...
+# Subtest: localized campaign starters select growth in each language
+ok 107 - localized campaign starters select growth in each language
+  ---
+  duration_ms: 6.72523
+  type: 'test'
+  ...
+# Subtest: de: agency intent outranks the customer's workshop industry
+ok 108 - de: agency intent outranks the customer's workshop industry
+  ---
+  duration_ms: 0.320491
+  type: 'test'
+  ...
+# Subtest: en: agency intent outranks the customer's workshop industry
+ok 109 - en: agency intent outranks the customer's workshop industry
+  ---
+  duration_ms: 0.321622
+  type: 'test'
+  ...
+# Subtest: fr: agency intent outranks the customer's workshop industry
+ok 110 - fr: agency intent outranks the customer's workshop industry
+  ---
+  duration_ms: 0.180625
+  type: 'test'
+  ...
+# Subtest: TEILEKLAR context remains separate even when agency keywords are entered
+ok 111 - TEILEKLAR context remains separate even when agency keywords are entered
+  ---
+  duration_ms: 0.361932
+  type: 'test'
+  ...
+# Subtest: an explicit vehicle question can direct an agency visitor to actual TEILEKLAR pages
+ok 112 - an explicit vehicle question can direct an agency visitor to actual TEILEKLAR pages
+  ---
+  duration_ms: 0.345938
+  type: 'test'
+  ...
+# Subtest: product names retain their separate product destinations
+ok 113 - product names retain their separate product destinations
+  ---
+  duration_ms: 0.535117
+  type: 'test'
+  ...
+# Subtest: missing destinations are never invented; foreign/private routes and extra properties stay out
+ok 114 - missing destinations are never invented; foreign/private routes and extra properties stay out
+  ---
+  duration_ms: 1.294702
+  type: 'test'
+  ...
+# Subtest: invalid context, unsupported locale and unbounded questions fail closed
+ok 115 - invalid context, unsupported locale and unbounded questions fail closed
+  ---
+  duration_ms: 0.620622
+  type: 'test'
+  ...
+# Subtest: the local path has no fetch, provider, persistence, hidden config or business effect
+ok 116 - the local path has no fetch, provider, persistence, hidden config or business effect
+  ---
+  duration_ms: 27.989624
+  type: 'test'
+  ...
+# Subtest: missing or malformed server capability descriptions never enable operations
+ok 117 - missing or malformed server capability descriptions never enable operations
+  ---
+  duration_ms: 1.985317
+  type: 'test'
+  ...
+# Subtest: local draft tools stay distinct from live model, delivery and calendar capabilities
+ok 118 - local draft tools stay distinct from live model, delivery and calendar capabilities
+  ---
+  duration_ms: 0.80373
+  type: 'test'
+  ...
+1..118
+# tests 118
+# suites 0
+# pass 118
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4865.79211

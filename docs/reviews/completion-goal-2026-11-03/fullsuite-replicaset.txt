@@ -1,0 +1,911 @@
+node tools/ds-audit-cli.js
+Pruefumfang: HTML-Referenzprototypen; kein React-, Live- oder WCAG-Vollnachweis.
+
+Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)
+bash tools/gesundheit-selbsttest.sh
+TAP version 13
+# Subtest: echte lokale HTTP-Proben, Redirectstatus, Ausfall und Statusdatei
+ok 1 - echte lokale HTTP-Proben, Redirectstatus, Ausfall und Statusdatei
+  ---
+  duration_ms: 39.224491
+  type: 'test'
+  ...
+# Subtest: Check-Untergrenze sperrt auch bei gesunden Diensten
+ok 2 - Check-Untergrenze sperrt auch bei gesunden Diensten
+  ---
+  duration_ms: 0.845718
+  type: 'test'
+  ...
+# Subtest: Hostproben unterscheiden aktive Units und gesunde Container
+ok 3 - Hostproben unterscheiden aktive Units und gesunde Container
+  ---
+  duration_ms: 0.594988
+  type: 'test'
+  ...
+# Subtest: Transportfehler werden begrenzt wiederholt
+ok 4 - Transportfehler werden begrenzt wiederholt
+  ---
+  duration_ms: 0.640505
+  type: 'test'
+  ...
+# Subtest: Statuspersistenzfehler sind sichtbar
+ok 5 - Statuspersistenzfehler sind sichtbar
+  ---
+  duration_ms: 0.330718
+  type: 'test'
+  ...
+# Subtest: Spezialnamen und ungueltige Erwartungswerte koennen Ausfaelle nicht verstecken
+ok 6 - Spezialnamen und ungueltige Erwartungswerte koennen Ausfaelle nicht verstecken
+  ---
+  duration_ms: 0.46809
+  type: 'test'
+  ...
+# Subtest: Ressourcengrenzen sind definiert, konfigurierbar und fail-closed
+ok 7 - Ressourcengrenzen sind definiert, konfigurierbar und fail-closed
+  ---
+  duration_ms: 0.980978
+  type: 'test'
+  ...
+# Subtest: DNS-Diagnose prueft exakten DNS-only-Eintrag und hat keine Schreibschnittstelle
+ok 8 - DNS-Diagnose prueft exakten DNS-only-Eintrag und hat keine Schreibschnittstelle
+  ---
+  duration_ms: 0.740703
+  type: 'test'
+  ...
+# Subtest: Fehlender DNS-Zugriff oder fremde Zone ist unbekannt statt gruen
+ok 9 - Fehlender DNS-Zugriff oder fremde Zone ist unbekannt statt gruen
+  ---
+  duration_ms: 0.32577
+  type: 'test'
+  ...
+# Subtest: Gemischte DNS-Aufloesung und Providerfehler koennen nicht gruen sein
+ok 10 - Gemischte DNS-Aufloesung und Providerfehler koennen nicht gruen sein
+  ---
+  duration_ms: 0.425027
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 209.299881
+node tools/ds-audit-cli.js
+Pruefumfang: HTML-Referenzprototypen; kein React-, Live- oder WCAG-Vollnachweis.
+
+Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)
+python3 -m unittest discover -s tests -q
+/workspace/work/nexify-completion-20261103/venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/apps/shop-api/shop/main.py:32: ResourceWarning: unclosed file <_io.BufferedWriter name='/tmp/agent-gateway.log'>
+  _gateway["proc"] = subprocess.Popen([sys.executable, str(config.ROOT / "apps/agent-gateway/server.py"), "--database", str(config.ROOT / ".local/visitor.sqlite"),
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/work/nexify-completion-20261103/venv/lib/python3.12/site-packages/starlette/testclient.py:518: DeprecationWarning: Setting per-request cookies=<...> is being deprecated, because the expected behaviour on cookie persistence is ambiguous. Set cookies directly on the client instance instead.
+  return super().request(
+======================================================================
+ERROR: test_current_mirrored_fixture_passes_read_only_with_explicit_limited_scope (test_browser_evidence.BrowserEvidenceTests.test_current_mirrored_fixture_passes_read_only_with_explicit_limited_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 34, in test_current_mirrored_fixture_passes_read_only_with_explicit_limited_scope
+    result = checker.check_evidence(self.root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 121, in check_evidence
+    raise EvidenceError("stale_source_sha256: " + relative)
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+======================================================================
+ERROR: test_source_drift_and_effect_promotion_rejected (test_browser_evidence.CatalogBrowserEvidenceTests.test_source_drift_and_effect_promotion_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 163, in test_source_drift_and_effect_promotion_rejected
+    self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 269, in check_catalog_evidence
+    raise EvidenceError('stale_catalog_source_sha256: ' + relative)
+browser_evidence_checker.EvidenceError: stale_catalog_source_sha256: apps/web/components/PublicRequestFallback.tsx
+
+======================================================================
+ERROR: test_current_consent_pass_is_bound_to_UI_source (test_browser_evidence.ConsentUIEvidenceTests.test_current_consent_pass_is_bound_to_UI_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 234, in test_current_consent_pass_is_bound_to_UI_source
+    self.assertEqual(checker.check_consent_ui(self.root)['ui_cases'],18)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 378, in check_consent_ui
+    if hashlib.sha256(_read(root,path)).hexdigest()!=record['source_sha256'][path]:raise EvidenceError('stale_consent_source: '+path)
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+browser_evidence_checker.EvidenceError: stale_consent_source: apps/web/components/DiagnosticConsent.tsx
+
+======================================================================
+ERROR: test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads (test_browser_evidence.ConsentUIEvidenceTests.test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 255, in test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads
+    self.assertEqual(checker.check_workspace_read(self.root)['cases'],4)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 417, in check_workspace_read
+    if report['source_sha256'][path]!=hashlib.sha256(_read(root,path)).hexdigest():raise EvidenceError('workspace_stale_source: '+path)
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+browser_evidence_checker.EvidenceError: workspace_stale_source: apps/web/proxy.ts
+
+======================================================================
+ERROR: test_source_drift_cannot_survive_consent_proof (test_browser_evidence.ExceptionEvidenceTests.test_source_drift_cannot_survive_consent_proof)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 210, in test_source_drift_cannot_survive_consent_proof
+    self.assertEqual(checker.check_exception_evidence(self.root)['surfaces'], 2)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 338, in check_exception_evidence
+    raise EvidenceError('stale_exception_source: ' + relative)
+browser_evidence_checker.EvidenceError: stale_exception_source: apps/site/src/main.tsx
+
+======================================================================
+ERROR: test_current_pass_cannot_survive_a_changed_boundary (test_browser_evidence.PublicFallbackEvidenceTests.test_current_pass_cannot_survive_a_changed_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 184, in test_current_pass_cannot_survive_a_changed_boundary
+    self.assertEqual(checker.check_public_fallbacks(self.root)['checks'], 18)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 301, in check_public_fallbacks
+    raise EvidenceError('stale_fallback_source: ' + relative)
+browser_evidence_checker.EvidenceError: stale_fallback_source: apps/web/components/Workspace.tsx
+
+======================================================================
+ERROR: test_saved_shop_proof_is_bounded_and_current (test_browser_evidence.ShopEvidenceTests.test_saved_shop_proof_is_bounded_and_current)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 124, in test_saved_shop_proof_is_bounded_and_current
+    self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_browser_evidence.py", line 222, in check_shop_evidence
+    raise EvidenceError("stale_shop_source_sha256: " + relative)
+browser_evidence_checker.EvidenceError: stale_shop_source_sha256: apps/web/components/PublicRequestFallback.tsx
+
+======================================================================
+ERROR: test_css_script_new_source_and_uncompleted_report_fail_closed (test_resize_source_binding.ResizeSourceBindingTest.test_css_script_new_source_and_uncompleted_report_fail_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_resize_source_binding.py", line 27, in test_css_script_new_source_and_uncompleted_report_fail_closed
+    self.assertEqual(check_bound_resize(root), 39)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_text_resize_evidence.py", line 50, in check_bound_resize
+    raise ValueError('missing or stale resize source binding')
+ValueError: missing or stale resize source binding
+
+======================================================================
+ERROR: test_current_report_has_exact_source_binding (test_resize_source_binding.ResizeSourceBindingTest.test_current_report_has_exact_source_binding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_resize_source_binding.py", line 14, in test_current_report_has_exact_source_binding
+    self.assertEqual(check_bound_resize(ROOT), 39)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tools/check_text_resize_evidence.py", line 50, in check_bound_resize
+    raise ValueError('missing or stale resize source binding')
+ValueError: missing or stale resize source binding
+
+======================================================================
+FAIL: test_identity_composition_drift_invalidates_the_saved_browser_pass (test_browser_evidence.BrowserEvidenceTests.test_identity_composition_drift_invalidates_the_saved_browser_pass)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 78, in test_identity_composition_drift_invalidates_the_saved_browser_pass
+    with self.assertRaisesRegex(checker.EvidenceError,'stale_auxiliary_source_sha256'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "stale_auxiliary_source_sha256" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_missing_critical_check_and_unpassed_recording_are_rejected (test_browser_evidence.BrowserEvidenceTests.test_missing_critical_check_and_unpassed_recording_are_rejected) (check='keyboard_skip_link_preserves_standalone_product_hash_route')
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 86, in test_missing_critical_check_and_unpassed_recording_are_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, "critical_browser_check_missing"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "critical_browser_check_missing" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_missing_critical_check_and_unpassed_recording_are_rejected (test_browser_evidence.BrowserEvidenceTests.test_missing_critical_check_and_unpassed_recording_are_rejected) (check='account_control_fallback_and_auth_routes_present')
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 86, in test_missing_critical_check_and_unpassed_recording_are_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, "critical_browser_check_missing"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "critical_browser_check_missing" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_missing_critical_check_and_unpassed_recording_are_rejected (test_browser_evidence.BrowserEvidenceTests.test_missing_critical_check_and_unpassed_recording_are_rejected) (check='native_product_menu_and_direct_legal_footer_links')
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 86, in test_missing_critical_check_and_unpassed_recording_are_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, "critical_browser_check_missing"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "critical_browser_check_missing" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_missing_critical_check_and_unpassed_recording_are_rejected (test_browser_evidence.BrowserEvidenceTests.test_missing_critical_check_and_unpassed_recording_are_rejected) (check='uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes')
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 86, in test_missing_critical_check_and_unpassed_recording_are_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, "critical_browser_check_missing"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "critical_browser_check_missing" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_missing_critical_check_and_unpassed_recording_are_rejected (test_browser_evidence.BrowserEvidenceTests.test_missing_critical_check_and_unpassed_recording_are_rejected) (check='nex2fly_product_copy_all_locales_and_section_focus_preserves_route')
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 86, in test_missing_critical_check_and_unpassed_recording_are_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, "critical_browser_check_missing"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "critical_browser_check_missing" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed (test_browser_evidence.BrowserEvidenceTests.test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 65, in test_sdk_source_drift_and_missing_mobile_or_context_proof_fail_closed
+    with self.assertRaisesRegex(checker.EvidenceError, 'stale_sdk_source_sha256'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "stale_sdk_source_sha256" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_stylesheet_drift_cannot_reuse_an_old_browser_pass (test_browser_evidence.BrowserEvidenceTests.test_stylesheet_drift_cannot_reuse_an_old_browser_pass)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_source_sha256: apps/site/src/Auth.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 57, in test_stylesheet_drift_cannot_reuse_an_old_browser_pass
+    with self.assertRaisesRegex(checker.EvidenceError, "stale_auxiliary_source_sha256"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "stale_auxiliary_source_sha256" does not match "stale_source_sha256: apps/site/src/Auth.tsx"
+
+======================================================================
+FAIL: test_mail_fail_closed_proof_cannot_be_omitted (test_browser_evidence.ConsentUIEvidenceTests.test_mail_fail_closed_proof_cannot_be_omitted)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_consent_source: apps/web/components/DiagnosticConsent.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 248, in test_mail_fail_closed_proof_cannot_be_omitted
+    with self.assertRaisesRegex(checker.EvidenceError,'internal_mail_fail_closed'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "internal_mail_fail_closed" does not match "stale_consent_source: apps/web/components/DiagnosticConsent.tsx"
+
+======================================================================
+FAIL: test_missing_mobile_case_or_claimed_external_send_rejected (test_browser_evidence.ConsentUIEvidenceTests.test_missing_mobile_case_or_claimed_external_send_rejected)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_consent_source: apps/web/components/DiagnosticConsent.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 241, in test_missing_mobile_case_or_claimed_external_send_rejected
+    with self.assertRaisesRegex(checker.EvidenceError,'complete_matrix'):checker.check_consent_ui(self.root)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "complete_matrix" does not match "stale_consent_source: apps/web/components/DiagnosticConsent.tsx"
+
+======================================================================
+FAIL: test_missing_retry_proof_or_claimed_external_event_rejected (test_browser_evidence.ExceptionEvidenceTests.test_missing_retry_proof_or_claimed_external_event_rejected)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_exception_source: apps/site/src/main.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 220, in test_missing_retry_proof_or_claimed_external_event_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, 'complete_surface'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "complete_surface" does not match "stale_exception_source: apps/site/src/main.tsx"
+
+======================================================================
+FAIL: test_missing_mobile_case_or_false_no_effect_claim_is_rejected (test_browser_evidence.PublicFallbackEvidenceTests.test_missing_mobile_case_or_false_no_effect_claim_is_rejected)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_fallback_source: apps/web/components/Workspace.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 194, in test_missing_mobile_case_or_false_no_effect_claim_is_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, 'complete_matrix'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "complete_matrix" does not match "stale_fallback_source: apps/web/components/Workspace.tsx"
+
+======================================================================
+FAIL: test_missing_reconciliation_case_and_false_effect_claim_rejected (test_browser_evidence.ShopEvidenceTests.test_missing_reconciliation_case_and_false_effect_claim_rejected)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_shop_source_sha256: apps/web/components/PublicRequestFallback.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 137, in test_missing_reconciliation_case_and_false_effect_claim_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, 'shop_critical_check_missing'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "shop_critical_check_missing" does not match "stale_shop_source_sha256: apps/web/components/PublicRequestFallback.tsx"
+
+======================================================================
+FAIL: test_static_labels_without_real_http_or_single_persistence_are_rejected (test_browser_evidence.ShopEvidenceTests.test_static_labels_without_real_http_or_single_persistence_are_rejected)
+----------------------------------------------------------------------
+browser_evidence_checker.EvidenceError: stale_shop_source_sha256: apps/web/components/PublicRequestFallback.tsx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_browser_evidence.py", line 146, in test_static_labels_without_real_http_or_single_persistence_are_rejected
+    with self.assertRaisesRegex(checker.EvidenceError, 'shop_actual_http_boundary_missing'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "shop_actual_http_boundary_missing" does not match "stale_shop_source_sha256: apps/web/components/PublicRequestFallback.tsx"
+
+======================================================================
+FAIL: test_own_active_styles_do_not_bypass_central_color_tokens (test_public_surface_contract.PublicSurfaceContractTests.test_own_active_styles_do_not_bypass_central_color_tokens) (path='apps/web/components/LuxuryMaterials.css')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_public_surface_contract.py", line 28, in test_own_active_styles_do_not_bypass_central_color_tokens
+    self.assertIsNone(re.search(r'#[0-9a-fA-F]{3,8}(?![\w-])|\b(?:rgb|hsl)a?\(\s*[\d.]',raw))
+AssertionError: <re.Match object; span=(25747, 25753), match='rgba(2'> is not None
+
+======================================================================
+FAIL: test_own_active_styles_do_not_bypass_central_color_tokens (test_public_surface_contract.PublicSurfaceContractTests.test_own_active_styles_do_not_bypass_central_color_tokens) (path='apps/web/components/PublicOrientationChat.css')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_public_surface_contract.py", line 28, in test_own_active_styles_do_not_bypass_central_color_tokens
+    self.assertIsNone(re.search(r'#[0-9a-fA-F]{3,8}(?![\w-])|\b(?:rgb|hsl)a?\(\s*[\d.]',raw))
+AssertionError: <re.Match object; span=(1483, 1489), match='rgba(2'> is not None
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='AGENTS.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'ef7b5269aeb75943b179743f0467e8a7e724727ef96de46f44fb662de7e492d8' != 'a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138'
+- ef7b5269aeb75943b179743f0467e8a7e724727ef96de46f44fb662de7e492d8
++ a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='PROGRESS.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '2411660467e95b65f426a407d0e53708be2c3fd43650b783d42d17398a41aafe' != 'b5ecd23576ba0a186658e2f87ad6b7f776d5222e9ad6a8a54a750c884bcbb844'
+- 2411660467e95b65f426a407d0e53708be2c3fd43650b783d42d17398a41aafe
++ b5ecd23576ba0a186658e2f87ad6b7f776d5222e9ad6a8a54a750c884bcbb844
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/package.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '68eb8cd7d7bda186898413db460e9772905877baa15a06f2f89966e0fd816847' != 'ddfb8a06865bf128ce0a3a25859cadcce84e1f3c8ad81692f7c46d30d8a40dd1'
+- 68eb8cd7d7bda186898413db460e9772905877baa15a06f2f89966e0fd816847
++ ddfb8a06865bf128ce0a3a25859cadcce84e1f3c8ad81692f7c46d30d8a40dd1
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/scripts/build-standalone.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '4cbd29d0f417a859a70366170e9f606994a8170683bc388cf003365dbfea04c3' != 'b51c3ccae071b5b66f66e527aa433a866ca5ee77676fa530da3e68917c3d93b6'
+- 4cbd29d0f417a859a70366170e9f606994a8170683bc388cf003365dbfea04c3
++ b51c3ccae071b5b66f66e527aa433a866ca5ee77676fa530da3e68917c3d93b6
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/src/Auth.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c' != '0799bb63414c8ae1c9765b64f05b47139d924cc5d6ea69dd2c586eb1acc8b9de'
+- 7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c
++ 0799bb63414c8ae1c9765b64f05b47139d924cc5d6ea69dd2c586eb1acc8b9de
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/src/main.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95' != '460190a19f9565ce1563eda77d30cc6ed1926b4bb7203bdb5d197f629fa696ba'
+- 8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95
++ 460190a19f9565ce1563eda77d30cc6ed1926b4bb7203bdb5d197f629fa696ba
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/tests/standalone.test.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '71db343e65de570275ef1ba966eddd65eff99672ba30796255c5df69479280e8' != '23cd0e7ab9ef6b306d34a04c8059fb78622abcd0964c8ebc098f12f4c19d59e4'
+- 71db343e65de570275ef1ba966eddd65eff99672ba30796255c5df69479280e8
++ 23cd0e7ab9ef6b306d34a04c8059fb78622abcd0964c8ebc098f12f4c19d59e4
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/HomeContent.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '9e000fea5f6b5e22514007d3cc8af7829f618cc670bf0e4fcc63cb35d5e91716' != 'fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136'
+- 9e000fea5f6b5e22514007d3cc8af7829f618cc670bf0e4fcc63cb35d5e91716
++ fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/Workspace.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '41cbfd5625ced6698659063151a385c37464effa3b514868e40e9d8c36f7388c' != 'f96d0ee10a927653df6767642053aceedb2cdf6827844011509323911f513169'
+- 41cbfd5625ced6698659063151a385c37464effa3b514868e40e9d8c36f7388c
++ f96d0ee10a927653df6767642053aceedb2cdf6827844011509323911f513169
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/WorkspaceRebuild.css')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35' != '69068ca8a65ee3915df8c6243b38daa6377a72e4e9f3a6def56b63266b5246a8'
+- 063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35
++ 69068ca8a65ee3915df8c6243b38daa6377a72e4e9f3a6def56b63266b5246a8
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/design-tokens.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '84bb18f0f4db89b42b5671b91a69a1b75b7b0e336f9dca70e1ed75c288e3f863' != 'f57aacebc6a82875593d9a9606fc680b9779835977eaf9207d6851170095430c'
+- 84bb18f0f4db89b42b5671b91a69a1b75b7b0e336f9dca70e1ed75c288e3f863
++ f57aacebc6a82875593d9a9606fc680b9779835977eaf9207d6851170095430c
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/fakten.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'bdf975321e905147b89b352955b1efb174bc8da666d246866a92380b53936e89' != 'b24829ff9e964f327826df879709a1e1714e9f4af2c801f4002d1daa75a1c54c'
+- bdf975321e905147b89b352955b1efb174bc8da666d246866a92380b53936e89
++ b24829ff9e964f327826df879709a1e1714e9f4af2c801f4002d1daa75a1c54c
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/page-explainers.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'dac4a03283c61e35c1631db9254925d4485b4b94c7261017e108d19bf562ee75' != '626eb624a6631b0b9047ff92340e0c7a0d60c2dadb82d5e17b5623c8cfc8f67b'
+- dac4a03283c61e35c1631db9254925d4485b4b94c7261017e108d19bf562ee75
++ 626eb624a6631b0b9047ff92340e0c7a0d60c2dadb82d5e17b5623c8cfc8f67b
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/presenter-system.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '450a055992a77e6961df2f15dcd6fb7270d5b4c9b1fa6616cfee9d23a51da3ac' != 'cd7728150d92891760ab3adfc236011c03401391ae490a2038e585cf63c27696'
+- 450a055992a77e6961df2f15dcd6fb7270d5b4c9b1fa6616cfee9d23a51da3ac
++ cd7728150d92891760ab3adfc236011c03401391ae490a2038e585cf63c27696
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/site-map.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'd89132e5d37838f80b0bce8f6df9a5990fd4fed060671df061c7271fbac01519' != '69fbf53a45d48c562a3c37ff9e241c01fb49f7daf4252748490e4ea7c8aa9845'
+- d89132e5d37838f80b0bce8f6df9a5990fd4fed060671df061c7271fbac01519
++ 69fbf53a45d48c562a3c37ff9e241c01fb49f7daf4252748490e4ea7c8aa9845
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='package.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '106a405553528105f006509c3e045c7b8935963eb821c7deef0a2fa527a80e8c' != '45263e61893c7d2ee261df0283796d3e458a5ee26cfc6deb50d466a4ba691933'
+- 106a405553528105f006509c3e045c7b8935963eb821c7deef0a2fa527a80e8c
++ 45263e61893c7d2ee261df0283796d3e458a5ee26cfc6deb50d466a4ba691933
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/page-media-registry.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '43d36f51f86351210223e6fde00fc2f61721c2b7871c709d0c4403ae56f1b154' != '1a975b2c1f1fe153da1cfc0e7c1665fe0eb4ae1da28207f9ed9217e724eb1c77'
+- 43d36f51f86351210223e6fde00fc2f61721c2b7871c709d0c4403ae56f1b154
++ 1a975b2c1f1fe153da1cfc0e7c1665fe0eb4ae1da28207f9ed9217e724eb1c77
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/scripts/public-explainers.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '9206180af31420cc14cdfa088ebc15bdfca8e7ad26f8b4b5739677c2d48b4db6' != '1a4ebf0ef76c5ec28630862d0c461cb76ded17db275682946ee2e5a9d30cd2c5'
+- 9206180af31420cc14cdfa088ebc15bdfca8e7ad26f8b4b5739677c2d48b4db6
++ 1a4ebf0ef76c5ec28630862d0c461cb76ded17db275682946ee2e5a9d30cd2c5
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/scripts/public-video-assets.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'beb7aee6d2994d099e5bda2b13cb52eb847f4ea2db9c6e3b35113d7279f5408a' != '802701213e38f2144990aebe4a9a413f167dace9f26401fb2e684a617b2b766e'
+- beb7aee6d2994d099e5bda2b13cb52eb847f4ea2db9c6e3b35113d7279f5408a
++ 802701213e38f2144990aebe4a9a413f167dace9f26401fb2e684a617b2b766e
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/tests/explainers.test.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '0f2f5755c77dc3b3085269f33f46f53beffd52317840479d5b96635a6bfb550a' != '6e6d1a826e1d0455c4b180e64d2371f957a6a39bed08d687f144461d40b6f7cf'
+- 0f2f5755c77dc3b3085269f33f46f53beffd52317840479d5b96635a6bfb550a
++ 6e6d1a826e1d0455c4b180e64d2371f957a6a39bed08d687f144461d40b6f7cf
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/ExplainerSections.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '87f9a69de6af9cf18110587ac0ec744b14f284e1b74babb129092f459fd6bd45' != '8124204256ebd8562efb53f3e7d70efe2bf03a448219160fc44f60327b817c46'
+- 87f9a69de6af9cf18110587ac0ec744b14f284e1b74babb129092f459fd6bd45
++ 8124204256ebd8562efb53f3e7d70efe2bf03a448219160fc44f60327b817c46
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/scripts/generate-public-data.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'ff3f609799b37a7eaf1ed11ba866d21888e469c288876633fb32072c25befc5d' != '2b506658aa2cf97092625d56afe175367a5df39dcab40ab58577569557efa57a'
+- ff3f609799b37a7eaf1ed11ba866d21888e469c288876633fb32072c25befc5d
++ 2b506658aa2cf97092625d56afe175367a5df39dcab40ab58577569557efa57a
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/vercel.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '8dff808c0b1949cedf392bcdfacdd87d54c52f22fc0d13586ca697b8e7bad48f' != '18c06a47cf1b05a145f11dda2a78a8113710e1eb3dab297ff28bcf218e30aaef'
+- 8dff808c0b1949cedf392bcdfacdd87d54c52f22fc0d13586ca697b8e7bad48f
++ 18c06a47cf1b05a145f11dda2a78a8113710e1eb3dab297ff28bcf218e30aaef
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/PublicExperience.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'f4619eb7baa20000f8040e744e2ba56bfdc3b715177c2d227291cf53fb8e8c2e' != '2f57c61436ba3507ced321606da7156abd7519e71184d0fca9d5fb2b04a9a73d'
+- f4619eb7baa20000f8040e744e2ba56bfdc3b715177c2d227291cf53fb8e8c2e
++ 2f57c61436ba3507ced321606da7156abd7519e71184d0fca9d5fb2b04a9a73d
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/app/layout.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '7497ff5dcc44ceee523231a20f134f7de3cf0d6d0ab287866376bcd7bb152cf5' != '28a7a1907b83db42d1903a4abb74d7d7275bf254485392dfb1346383b938662f'
+- 7497ff5dcc44ceee523231a20f134f7de3cf0d6d0ab287866376bcd7bb152cf5
++ 28a7a1907b83db42d1903a4abb74d7d7275bf254485392dfb1346383b938662f
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/tests/auth.test.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '2390a03695815b7e7112bf93d7e3aae603d6bffb494cadc61b82ba6d55e14d61' != '93ebbbaaf2f8f2fdf3e07107c8239c51255ed976a08814475bfdc5745f4c2d0e'
+- 2390a03695815b7e7112bf93d7e3aae603d6bffb494cadc61b82ba6d55e14d61
++ 93ebbbaaf2f8f2fdf3e07107c8239c51255ed976a08814475bfdc5745f4c2d0e
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/OracleCompanion.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b' != 'eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a'
+- 945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b
++ eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/PublicOrientationChat.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'd03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630' != 'ad9297d0cd319800b6a28c361e148739ed871c1df9c6669609af74637bc10f93'
+- d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630
++ ad9297d0cd319800b6a28c361e148739ed871c1df9c6669609af74637bc10f93
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/lib/i18n.ts')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213' != '2d1567f946b0880a67eb2293bce8178e6611d482c95e55fd73f16caa696ff301'
+- e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213
++ 2d1567f946b0880a67eb2293bce8178e6611d482c95e55fd73f16caa696ff301
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/PublicRequestFallback.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '19c334e0ef95d106b0224f9bce757570558fc82f588fb2b01b71c6dfd35e83c7' != 'dc8ba5eb69dcec426d0419980d3a19ad0992318928428283c92183127ab837de'
+- 19c334e0ef95d106b0224f9bce757570558fc82f588fb2b01b71c6dfd35e83c7
++ dc8ba5eb69dcec426d0419980d3a19ad0992318928428283c92183127ab837de
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/vite.config.ts')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'f413df2187f1a8c7c405f1b8e099bbb72eb1841ecb9a919c9a4c16d59cd2e8bf' != '89ffc11349f5d88645c2d627f3a7fa048be78107ea93953ba8f3501aeda1579a'
+- f413df2187f1a8c7c405f1b8e099bbb72eb1841ecb9a919c9a4c16d59cd2e8bf
++ 89ffc11349f5d88645c2d627f3a7fa048be78107ea93953ba8f3501aeda1579a
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/DiagnosticConsent.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023' != '0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c'
+- ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023
++ 0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/SiteFooter.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462' != '2546230d1e15a5427488f0412306b357847120867389adf814b402b594c38284'
+- f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462
++ 2546230d1e15a5427488f0412306b357847120867389adf814b402b594c38284
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/proxy.ts')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'c837e4ec5fd33fbc65be99d277c58677a8f1746b952ea812af95d52a1ecaf6ba' != 'e8cc1a504d0b94ddb6ad26cc4d0bd81b6b959dabe764fab3a7f647962a955da5'
+- c837e4ec5fd33fbc65be99d277c58677a8f1746b952ea812af95d52a1ecaf6ba
++ e8cc1a504d0b94ddb6ad26cc4d0bd81b6b959dabe764fab3a7f647962a955da5
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/app/intern/workspace/page.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb' != 'f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe'
+- 73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb
++ f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/PresenterScene.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '11a38fab63d62a65b767dee227cb888865335e4d7183c694071f771c39efcd49' != '751a5cb0351d1e3ec25f56d8a87675dfbddd99746ca02293f7c9bc9edc5a3982'
+- 11a38fab63d62a65b767dee227cb888865335e4d7183c694071f771c39efcd49
++ 751a5cb0351d1e3ec25f56d8a87675dfbddd99746ca02293f7c9bc9edc5a3982
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='vercel.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '7ddd43fbb3af17259a60a2c6ea4217a4f14f553cdf0006804ac67580a649a79a' != '27b4e985f7a8b7d37fea3b32a19d8f31dc19b4217ca3efc47bd317cb1c34dea6'
+- 7ddd43fbb3af17259a60a2c6ea4217a4f14f553cdf0006804ac67580a649a79a
++ 27b4e985f7a8b7d37fea3b32a19d8f31dc19b4217ca3efc47bd317cb1c34dea6
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/site/tests/csp-reporting.test.mjs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '41a96ab7e613af9ade427153e51416ac7014a052ec399a53968f788b56082a5b' != 'b5c153edda8cbe047195d96ea01728e8993c510da2211081132f2e357b60127f'
+- 41a96ab7e613af9ade427153e51416ac7014a052ec399a53968f788b56082a5b
++ b5c153edda8cbe047195d96ea01728e8993c510da2211081132f2e357b60127f
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='packages/tokens/tokens.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '229ddd2a1ea340d656943dd79992b7d48dff3be7ec1629473cf725f20cc8e412' != 'e4434ec8047c0057df34a154c22bd05e209a034ef18ea87173a65b633f704686'
+- 229ddd2a1ea340d656943dd79992b7d48dff3be7ec1629473cf725f20cc8e412
++ e4434ec8047c0057df34a154c22bd05e209a034ef18ea87173a65b633f704686
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/web/components/IdentityHero.tsx')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '0406e628c51c2c0d03834b01a3ff8ce5894f84fa7d9ce789f42f1151efea0c6e' != 'd54887ee9c5085f75dea5a3f65385c0275312cb57ad9885ff912d7024814eef8'
+- 0406e628c51c2c0d03834b01a3ff8ce5894f84fa7d9ce789f42f1151efea0c6e
++ d54887ee9c5085f75dea5a3f65385c0275312cb57ad9885ff912d7024814eef8
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='tests/test_identity_hero.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '7b7dba12cc82397610b8dfccc9962eba3438dd3d87447b456ea03d994be3aaaf' != 'c9e514654d0e3d2b2d55c20d64fcf402362a7b7a3e65f444d78163605a0dac07'
+- 7b7dba12cc82397610b8dfccc9962eba3438dd3d87447b456ea03d994be3aaaf
++ c9e514654d0e3d2b2d55c20d64fcf402362a7b7a3e65f444d78163605a0dac07
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='packages/tokens/tokens.ts')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '859ff4de7a5f7363af79669c8b12835bbaae32e3e15ac9364f545164f577f433' != '1c6ff9b905f77cbb56619159f43cc34b9a76ff01d66badc890c4aa6b9cc29124'
+- 859ff4de7a5f7363af79669c8b12835bbaae32e3e15ac9364f545164f577f433
++ 1c6ff9b905f77cbb56619159f43cc34b9a76ff01d66badc890c4aa6b9cc29124
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='docs/09-final/11-designsystem-definition.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'e214973b693bd7e485333a7d2d98f2ef536a98bac9f5a3d17ccd57f53236e3be' != 'ef31601fbd38ff736eb203b76560e34998a654798f01c0d7a633728356fa9de8'
+- e214973b693bd7e485333a7d2d98f2ef536a98bac9f5a3d17ccd57f53236e3be
++ ef31601fbd38ff736eb203b76560e34998a654798f01c0d7a633728356fa9de8
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='config/identity-hero.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'd7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902' != '2a7c121508a2c6c39ddd1c1961f8b44a1e2b216b0dc10fe43cd4defab18ca556'
+- d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902
++ 2a7c121508a2c6c39ddd1c1961f8b44a1e2b216b0dc10fe43cd4defab18ca556
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='packages/tokens/tokens.css')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: 'dd45d0d93f506073aa718b701019d0e163b233a8d881a9245391c1ded94d06ae' != '19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544'
+- dd45d0d93f506073aa718b701019d0e163b233a8d881a9245391c1ded94d06ae
++ 19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544
+
+
+======================================================================
+FAIL: test_recorded_source_hashes_match_actual_bytes (test_requirements_reconciliation.ReconciliationTests.test_recorded_source_hashes_match_actual_bytes) (source='apps/shop-api/vercel_app.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 32, in test_recorded_source_hashes_match_actual_bytes
+    self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+AssertionError: '30d53d54d570d41ac6dc07c252520e93fa86e02c648775aedf18c2c850a60c20' != '3336a252d2dd8182f14716094fda3ba2e43cf23a6dfdd2b121b4bc9cb378c9a4'
+- 30d53d54d570d41ac6dc07c252520e93fa86e02c648775aedf18c2c850a60c20
++ 3336a252d2dd8182f14716094fda3ba2e43cf23a6dfdd2b121b4bc9cb378c9a4
+
+
+======================================================================
+FAIL: test_register_and_human_view_match (test_requirements_reconciliation.ReconciliationTests.test_register_and_human_view_match)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/tests/test_requirements_reconciliation.py", line 22, in test_register_and_human_view_match
+    self.assertEqual(checker.validate(self.document, ROOT), [])
+AssertionError: Lists differ: ['Stale implementation source: apps/site/s[4137 chars].py'] != []
+
+First list contains 67 additional elements.
+First extra element 0:
+'Stale implementation source: apps/site/src/Auth.tsx'
+
+Diff is 4390 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 753 tests in 67.683s
+
+FAILED (failures=63, errors=9)
+make: *** [Makefile:20: test] Error 1

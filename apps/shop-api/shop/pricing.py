@@ -25,8 +25,9 @@ def parse_markup(value):
     return markup
 
 
-async def settings(db):
-    doc = await db.settings.find_one({"_id": "shop"}) or {}
+async def settings(db, session=None):
+    options = {"session": session} if session is not None else {}
+    doc = await db.settings.find_one({"_id": "shop"}, **options) or {}
     markup = Decimal(doc.get("markup_percent", str(config.DEFAULT_MARKUP_PERCENT)))
     release = doc.get("price_release") or {}
     released = bool(release.get("released_at")) and Decimal(release.get("markup_percent", "-1")) == markup

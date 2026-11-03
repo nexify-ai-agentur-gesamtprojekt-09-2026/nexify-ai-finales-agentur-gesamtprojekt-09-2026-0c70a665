@@ -10,11 +10,12 @@ import socket
 import sys
 import time
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 os.environ.update({"DB_NAME": "teileklar_shop_unittest", "REVOLUT_MODE": "sandbox", "REVOLUT_MERCHANT_SECRET_KEY_SANDBOX": "sk_unittest_only",
-                   "RESEND_API_KEY": "re_unittest", "RESEND_FROM_ADDRESS": "test@example.org", "RESEND_FROM": "", "MAIL_INTERNAL_TO": "intern@example.org", "MAIL_DAILY_CAP": "", "BIGBUY_API_KEY_SANDBOX": "unittest-bigbuy",
+                   "RESEND_API_KEY": "re_unittest", "RESEND_FROM_ADDRESS": "test@example.org", "RESEND_FROM": "", "MAIL_INTERNAL_TO": "intern@example.org", "MAIL_DAILY_CAP": "100", "BIGBUY_API_KEY_SANDBOX": "unittest-bigbuy",
                    "MONGO_URL": os.environ.get("MONGO_URL", "mongodb://localhost:27017"), "PREVIEW_PUBLIC_ORIGIN": "https://shop.preview.emergentagent.com",
                    "SHOP_VAT_PERCENT": "19", "GATEWAY_PORT": "3993", "REVOLUT_API_VERSION": "2026-04-20"})
 sys.path[:0] = [str(ROOT / "apps" / "shop-api"), str(ROOT / "apps" / "agent-gateway")]
@@ -79,8 +80,9 @@ class ShopFlow(unittest.TestCase):
                 return httpx.Response(200, json={"id": path.rsplit("/", 1)[1], "state": self.state["order_state"]})
             return httpx.Response(404)
         revolut.transport = httpx.MockTransport(handler)
-        self.mails, self.mail_fail = [], {"on": False}
+        self.mails, self.mail_attempts, self.mail_fail = [], [], {"on": False}
         def mail_handler(request):
+            self.mail_attempts.append(request.headers.get("Idempotency-Key"))
             if self.mail_fail["on"]:
                 return httpx.Response(500, json={"message": "down"})
             self.mails.append(json.loads(request.content))
@@ -192,18 +194,16 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual([o["status"] for o in self.client.get("/api/shop/orders", headers=self.user_a).json()["orders"]], ["bezahlt"])
         self.assertEqual(self.client.get("/api/shop/orders", headers=self.user_b).json()["orders"], [])
 
-    def test_paid_order_mails_once_failure_retry_and_status_mails(self):
+    def test_paid_order_mails_once_and_status_mails(self):
         self.client.post("/api/shop/cart/items", headers=self.user_a, json={"product_id": "bb-1", "quantity": 2})
         order_id = self.checkout(self.user_a).json()["order_id"]
         rev_id = self.call(db.orders.find_one, {"_id": order_id})["revolut_order_id"]
         body = json.dumps({"event": "ORDER_COMPLETED", "order_id": rev_id}).encode()
         self.state["order_state"] = "completed"
         welcome = len(self.mails)
-        self.mail_fail["on"] = True
         self.assertEqual(self.client.post("/api/shop/webhooks/revolut", content=body, headers=signed(body)).status_code, 204)
         self.assertEqual(self.call(db.orders.find_one, {"_id": order_id})["status"], "bezahlt")
-        self.assertEqual(self.call(db.outbox.find_one, {"_id": "order_paid:customer:" + order_id})["status"], "fehlgeschlagen")
-        self.mail_fail["on"] = False
+        self.assertEqual(self.call(db.outbox.find_one, {"_id": "order_paid:customer:" + order_id})["status"], "gesendet")
         for _ in range(2):
             self.client.post("/api/shop/webhooks/revolut", content=body, headers=signed(body))
             self.client.post("/api/admin/outbox/retry", headers=self.admin)
@@ -224,6 +224,37 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual([s["reached"] for s in timeline], [True, True, True, True, False])
         self.assertEqual(len(self.client.get("/api/admin/orders", headers=self.admin).json()["orders"][0]["mails"]), 4)
 
+    def test_paid_order_unknown_mail_outcome_is_not_blindly_retried(self):
+        self.client.post("/api/shop/cart/items", headers=self.user_a, json={"product_id": "bb-1", "quantity": 1})
+        order_id = self.checkout(self.user_a).json()["order_id"]
+        rev_id = self.call(db.orders.find_one, {"_id": order_id})["revolut_order_id"]
+        body = json.dumps({"event": "ORDER_COMPLETED", "order_id": rev_id}).encode()
+        self.state["order_state"], self.mail_fail["on"] = "completed", True
+        before = len(self.mails)
+        self.assertEqual(self.client.post("/api/shop/webhooks/revolut", content=body, headers=signed(body)).status_code, 204)
+        self.assertEqual(self.call(db.outbox.find_one, {"_id": "order_paid:customer:" + order_id})["status"], "abgleich_erforderlich")
+        attempts = len(self.mail_attempts)
+        self.mail_fail["on"] = False
+        for _ in range(2):
+            self.client.post("/api/shop/webhooks/revolut", content=body, headers=signed(body))
+            self.client.post("/api/admin/outbox/retry", headers=self.admin)
+        self.assertEqual(len(self.mails), before)
+        self.assertEqual(len(self.mail_attempts), attempts)
+        self.assertEqual(self.call(db.outbox.find_one, {"_id": "order_paid:internal:" + order_id})["status"], "abgleich_erforderlich")
+        self.assertEqual(self.call(db.orders.find_one, {"_id": order_id})["status"], "bezahlt")
+
+    def test_not_configured_mail_is_safe_to_retry_once(self):
+        attempts, before = len(self.mail_attempts), len(self.mails)
+        with patch.dict(os.environ, {"RESEND_API_KEY": ""}):
+            result = self.call(mailer.enqueue, "safe-retry-fixture", "fixture@example.org", "Fixture", "", "Fixture")
+        self.assertEqual((result["status"], result["last_error"]), ("fehlgeschlagen", "not_configured"))
+        self.assertEqual(len(self.mail_attempts), attempts)
+        for _ in range(2):
+            self.client.post("/api/admin/outbox/retry", headers=self.admin)
+        self.assertEqual(len(self.mail_attempts), attempts + 1)
+        self.assertEqual(len(self.mails), before + 1)
+        self.assertEqual(self.call(db.outbox.find_one, {"_id": "safe-retry-fixture"})["status"], "gesendet")
+
     def test_welcome_reset_once_and_expiry_and_workshop_receipt(self):
         self.assertTrue(any(m["subject"] == "Willkommen bei TEILEKLAR" and m["to"] == ["kunde_a@example.org"] for m in self.mails))
         self.client.post("/api/auth/forgot-password", json={"email": "kunde_a@example.org"})
@@ -242,44 +273,65 @@ class ShopFlow(unittest.TestCase):
         receipt = [m for m in self.mails if m["to"] == ["erika@example.org"]][-1]
         self.assertIn("Anfrage gesendet – noch kein Termin", receipt["text"])
 
-    def test_bigbuy_import_paginates_dedupes_and_keeps_catalog_on_failure(self):
-        calls = {"fail": False}
+    def test_bigbuy_import_complete_snapshot_and_failure_preserves_catalog(self):
+        calls = {"fail": False, "duplicate": False, "unknown_category": False, "missing_stock": False, "http_count": 0}
         def handler(request):
+            calls["http_count"] += 1
             if calls["fail"]:
                 return httpx.Response(429)
             path, page = request.url.path, int(request.url.params.get("page", 0))
             if path.endswith("taxonomies.json"):
-                return httpx.Response(200, json=[{"id": 77, "name": "Auto & Motorrad", "parentTaxonomy": 0}, {"id": 78, "name": "Zubehör", "parentTaxonomy": 77}])
+                return httpx.Response(200, json=[{"id": 77, "name": "Auto & Motorrad", "parentTaxonomy": 0}, {"id": 78, "name": "Zubehör", "parentTaxonomy": 77}, {"id": 555, "name": "Garten", "parentTaxonomy": 0}])
+            ids = range(1000, 2000) if page == 0 else (range(2000, 2003) if page == 1 else [])
             if path.endswith("products.json"):
-                rows = [{"id": 1000 + i + page * 1000, "sku": "BB%d" % i, "ean13": "84%011d" % i, "wholesalePrice": 9.5, "taxonomy": 78} for i in range(1000 if page == 0 else 3)]
-                return httpx.Response(200, json=rows + ([rows[0], {"id": 9999, "sku": "OUT", "wholesalePrice": 1, "taxonomy": 555}] if page == 1 else []))
+                rows = [{"id": i, "sku": "BB%d" % i, "ean13": "84%011d" % i, "wholesalePrice": 9.5, "taxonomy": 78} for i in ids]
+                if page == 1:
+                    rows.append({"id": 9999, "sku": "OUT", "wholesalePrice": 1, "taxonomy": 555})
+                    if calls["duplicate"]:
+                        rows.append(dict(rows[0]))
+                if calls["unknown_category"] and page == 0:
+                    rows[0]["taxonomy"] = 999999
+                return httpx.Response(200, json=rows)
             if path.endswith("productsinformation.json"):
-                return httpx.Response(200, json=[{"id": 1000, "name": "Felgenreiniger"}] if page == 0 else [])
+                return httpx.Response(200, json=[{"id": i, "name": "Testartikel%d" % i} for i in ids])
             if path.endswith("productsimages.json"):
-                return httpx.Response(200, json=[{"id": 1000, "images": [{"url": "https://cdnbigbuy.com/a.jpg", "isCover": True}]}] if page == 0 else [])
-            return httpx.Response(200, json=[{"id": 1000, "stocks": [{"quantity": 4}]}] if page == 0 else [])
+                return httpx.Response(200, json=[{"id": i, "images": [{"url": "https://cdnbigbuy.com/a.jpg", "isCover": True}]} for i in ids])
+            return httpx.Response(200, json=[{"id": i, "stocks": [{"quantity": 4}]} for i in ids if not (calls["missing_stock"] and i == 1000)])
         bigbuy_import.transport, bigbuy_import.pause_seconds = httpx.MockTransport(handler), 0
+        def execute(environment):
+            run_id = self.call(bigbuy_import.start_import, db, environment, "admin_t")
+            self.call(lambda: bigbuy_import._running["task"])
+            return self.call(db.imports.find_one, {"_id": run_id})
         try:
-            for attempt in range(2):
-                run_id = self.call(bigbuy_import.start_import, db, "sandbox", "admin_t")
-                self.call(lambda: bigbuy_import._running["task"])
-                for _ in range(100):
-                    run = self.call(db.imports.find_one, {"_id": run_id})
-                    if run["status"] != "running":
-                        break
-                    time.sleep(0.05)
-                self.assertEqual(run["status"], "done", run.get("error"))
-            self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
-            self.assertEqual(run["counts"]["created"], 0)
-            calls["fail"] = True
-            run_id = self.call(bigbuy_import.start_import, db, "sandbox", "admin_t")
-            for _ in range(100):
-                run = self.call(db.imports.find_one, {"_id": run_id})
-                if run["status"] != "running":
-                    break
-                time.sleep(0.05)
-            self.assertEqual((run["status"], run["error"]), ("failed", "rate_limited"))
-            self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
+            # Production semantics on the isolated DB with an inert key and MockTransport.
+            # Sandbox must never publish into the shared catalog schema.
+            sandbox = execute("sandbox")
+            self.assertEqual((sandbox["status"], sandbox["error"]), ("failed", "sandbox_publication_forbidden"))
+            self.assertEqual(calls["http_count"], 0)
+            with patch.object(bigbuy_import.config, "bigbuy_key", return_value="inert-mocked-provider"):
+                for attempt in range(2):
+                    run = execute("production")
+                    self.assertEqual(run["status"], "done", run.get("error"))
+                self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
+                self.assertEqual(run["counts"]["created"], 0)
+                original_generation = self.call(db.products.find_one, {"_id": "bb-1000"})["import_run_id"]
+                calls["duplicate"] = True
+                rejected = execute("production")
+                self.assertEqual((rejected["status"], rejected["error"]), ("failed", "catalog_duplicate_page_identity"))
+                self.assertEqual(self.call(db.products.find_one, {"_id": "bb-1000"})["import_run_id"], original_generation)
+                self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
+                calls["duplicate"] = False
+                for flag, error in (("unknown_category", "product_category_invalid"), ("missing_stock", "catalog_resource_coverage_incomplete")):
+                    calls[flag] = True
+                    rejected = execute("production")
+                    self.assertEqual((rejected["status"], rejected["error"]), ("failed", error))
+                    self.assertEqual(self.call(db.products.find_one, {"_id": "bb-1000"})["import_run_id"], original_generation)
+                    calls[flag] = False
+                calls["duplicate"], calls["fail"] = False, True
+                rejected = execute("production")
+                self.assertEqual((rejected["status"], rejected["error"]), ("failed", "rate_limited"))
+                self.assertEqual(self.call(db.products.find_one, {"_id": "bb-1000"})["import_run_id"], original_generation)
+                self.assertEqual(self.call(db.products.count_documents, {"source": "bigbuy", "active": True}), 1003)
         finally:
             bigbuy_import.transport, bigbuy_import.pause_seconds = None, 1.0
 
@@ -314,10 +366,10 @@ class ShopFlow(unittest.TestCase):
         self.assertEqual((stored["kind"], stored["status"]), ("contact", "eingegangen"))
 
 
-    def test_bigbuy_ftp_import_manifest_category_filter_and_dedupe(self):
+    def test_bigbuy_ftp_import_manifest_category_filter_and_duplicate_rejection(self):
         from shop import bigbuy_ftp
         files = {"/files/categories/csv/category_de.csv": "ID;NAME;PARENTCATEGORY\n77;Auto & Motorrad;0\n78;Felgen;77\n90;Garten;0\n",
-                 "/files/products/csv/standard/product_2609_de.csv": "ID;CATEGORY;NAME;PRICE;EAN13;STOCK;IMAGE1\n5001;2609,78;Felgenreiniger;10,00;8400000000001;7;https://cdnbigbuy.com/f.jpg\n5002;90;Gartenschere;4,00;;1;\n5001;78;Felgenreiniger;10,00;;7;\n"}
+                 "/files/products/csv/standard/product_2609_de.csv": "ID;CATEGORY;NAME;PRICE;EAN13;STOCK;IMAGE1\n5001;77,78;Felgenreiniger;10,00;8400000000001;7;https://cdnbigbuy.com/f.jpg\n5002;90;Gartenschere;4,00;;1;\n"}
         class FakeFTP:
             def mlsd(self, path, facts=None):
                 names = {p[len(path.rstrip("/")) + 1:].split("/")[0] for p in files if p.startswith(path.rstrip("/") + "/")}
@@ -341,6 +393,20 @@ class ShopFlow(unittest.TestCase):
             product = self.call(db.products.find_one, {"_id": "bb-5001"})
             self.assertEqual((product["purchase_cents"], product["category_id"], product["stock"]), (1000, 78, 7))
             self.assertEqual(pricing.sell_cents(product["purchase_cents"], 30, 19), 1547)
+            original_run = product["import_run_id"]
+            original_csv = files["/files/products/csv/standard/product_2609_de.csv"]
+            files["/files/products/csv/standard/product_2609_de.csv"] += "5001;78;Felgenreiniger;10,00;;7;\n"
+            rejected_id = self.call(bigbuy_import.start_import, db, "ftp", "admin_t")
+            self.call(lambda: bigbuy_import._running["task"])
+            rejected = self.call(db.imports.find_one, {"_id": rejected_id})
+            self.assertEqual((rejected["status"], rejected["error"]), ("failed", "catalog_duplicate_page_identity"))
+            self.assertEqual(self.call(db.products.find_one, {"_id": "bb-5001"})["import_run_id"], original_run)
+            files["/files/products/csv/standard/product_2609_de.csv"] = original_csv.replace("5001;77,78;", "5001;2609,78;")
+            rejected_id = self.call(bigbuy_import.start_import, db, "ftp", "admin_t")
+            self.call(lambda: bigbuy_import._running["task"])
+            rejected = self.call(db.imports.find_one, {"_id": rejected_id})
+            self.assertEqual((rejected["status"], rejected["error"]), ("failed", "product_category_invalid"))
+            self.assertEqual(self.call(db.products.find_one, {"_id": "bb-5001"})["import_run_id"], original_run)
             bigbuy_ftp.connect_factory = lambda: (_ for _ in ()).throw(bigbuy_ftp.BigBuyReadError("ftp_login_incorrect"))
             run_id = self.call(bigbuy_import.start_import, db, "ftp", "admin_t")
             for _ in range(100):

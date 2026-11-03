@@ -3859,7 +3859,10 @@
           "monetary_budget": null,
           "paid_effects_authorized_by_plan": false,
           "deadline": "critical_path_after_prerequisite_readback_not_estimated",
-          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen."
+          "rollback": "Bestehende Runtime und Daten erhalten; isoliertes Delta versioniert zurücknehmen.",
+          "current_user_additions": [
+            "USER-HIGGSFIELD-MEDIA-20261103"
+          ]
         },
         {
           "id": "P05",
@@ -4313,7 +4316,13 @@
           "status": "open",
           "owner_function": "Infrastruktur/Netz",
           "next_step": "Runtime mit Session, Datenbank und konkretem Adapter; echter positiver/negativer E2E-Weg.",
-          "full_requirement_accepted": false
+          "full_requirement_accepted": false,
+          "latest_scoped_observation": {
+            "run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+            "id": "G01",
+            "status": "namespace_and_preview_health_verified_commercial_runtime_not_released",
+            "next_step": "Use preview Health200 and exact schema readback; complete real authenticated membership/provider/restore/release evidence.19percent remains preview-only test assumption after user bestpraxis answer."
+          }
         },
         {
           "id": "G02",
@@ -4325,7 +4334,14 @@
           "status": "open",
           "owner_function": "Shop und Finance",
           "next_step": "Atomarer/claimbasierter Merge mit Crash-/Parallelitäts-/Recoverybeleg; keine Daten verlieren.",
-          "full_requirement_accepted": false
+          "full_requirement_accepted": false,
+          "latest_scoped_observation": {
+            "run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+            "id": "G02",
+            "status": "implemented_real_mongo_verified_not_deployed",
+            "tests": "11 actual Mongo replica-set cases; transfer and source clear in one transaction, concurrent mutations protected",
+            "remaining": "No complete request-id replay contract for old guest item POSTs; no production/HTTP/checkout acceptance."
+          }
         },
         {
           "id": "G03",
@@ -4373,7 +4389,13 @@
           "status": "external_boundary_open",
           "owner_function": "Wissen/Skills",
           "next_step": "Getrennte Workspace-/ACL-/Retrieval-/Restorebelege; keine Kundendaten-Ingestion bis geklärt.",
-          "full_requirement_accepted": false
+          "full_requirement_accepted": false,
+          "latest_scoped_observation": {
+            "run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+            "id": "G06",
+            "status": "brain_connector_readable_tenant_acl_restore_still_open",
+            "evidence": "nex2fly_brain list/search/read works; does not establish LightRAG tenant isolation."
+          }
         },
         {
           "id": "G07",
@@ -4493,7 +4515,13 @@
           "status": "observed_no_cutover",
           "owner_function": "Infrastruktur/Netz",
           "next_step": "Repo/Branch/Commit/Projekt/Services/Domain lesend binden; keine blinde Übernahme oder bidirektionale Spiegelung.",
-          "full_requirement_accepted": false
+          "full_requirement_accepted": false,
+          "latest_scoped_observation": {
+            "run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+            "id": "G16",
+            "status": "current_production_main_binding_read",
+            "evidence": "main68f4658 equals actual Vercel production; historical divergence not current."
+          }
         },
         {
           "id": "G17",
@@ -4505,7 +4533,14 @@
           "status": "open",
           "owner_function": "Backend/Portale/Kommunikation",
           "next_step": "Atomare Kosten-/Volumenreservierung, Lease und Unknown-outcome-Abgleich.",
-          "full_requirement_accepted": false
+          "full_requirement_accepted": false,
+          "latest_scoped_observation": {
+            "run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+            "id": "G17",
+            "status": "implemented_real_mongo_verified_not_deployed",
+            "tests": "11 actual Mongo cases plus14 offline recovery cases",
+            "remaining": "Drain old workers before rollout; reconcile legacy unknowns; no real mail or failover evidence."
+          }
         },
         {
           "id": "G18",
@@ -4613,7 +4648,13 @@
           "status": "open_supported_runtime_retest",
           "owner_function": "Qualität/Recht",
           "next_step": "Abschließende Prüfungen auf unterstützter gepinnter Runtime oder dokumentierte Kompatibilitätsentscheidung.",
-          "full_requirement_accepted": false
+          "full_requirement_accepted": false,
+          "latest_scoped_observation": {
+            "run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+            "id": "G26",
+            "status": "supported_toolchain_checks_executed",
+            "runtime": "Node22.23.4/pnpm12.15.0; full suite still red for recorded evidence/dependency failures."
+          }
         },
         {
           "id": "G27",
@@ -4811,7 +4852,355 @@
           "whole_system_accepted": false,
           "final_performance_video_accepted": false
         }
-      }
+      },
+      "scoped_runs": [
+        {
+          "id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+          "observed_at": "2026-11-03",
+          "base_commit": "68f465873ad37ca0e5727b45701049c72fca5624",
+          "branch": "codex/completion-2026-11-03",
+          "whole_system_accepted": false,
+          "writer": "/root",
+          "reviewers": [
+            "/root/matrix_review",
+            "/root/runtime_evidence",
+            "/root/cart_review",
+            "/root/media_research"
+          ],
+          "user_authority": "Current completion request plus explicit confirmation to apply all needed authorizations; no renewed blanket approval required.",
+          "report": "docs/reviews/completion-goal-2026-11-03.json",
+          "namespace_evidence": "docs/reviews/completion-namespace-2026-11-03.json",
+          "findings": [
+            {
+              "id": "G01",
+              "status": "namespace_and_preview_health_verified_commercial_runtime_not_released",
+              "next_step": "Use preview Health200 and exact schema readback; complete real authenticated membership/provider/restore/release evidence.19percent remains preview-only test assumption after user bestpraxis answer."
+            },
+            {
+              "id": "G02",
+              "status": "implemented_real_mongo_verified_not_deployed",
+              "tests": "11 actual Mongo replica-set cases; transfer and source clear in one transaction, concurrent mutations protected",
+              "remaining": "No complete request-id replay contract for old guest item POSTs; no production/HTTP/checkout acceptance."
+            },
+            {
+              "id": "G17",
+              "status": "implemented_real_mongo_verified_not_deployed",
+              "tests": "11 actual Mongo cases plus14 offline recovery cases",
+              "remaining": "Drain old workers before rollout; reconcile legacy unknowns; no real mail or failover evidence."
+            },
+            {
+              "id": "G26",
+              "status": "supported_toolchain_checks_executed",
+              "runtime": "Node22.23.4/pnpm12.15.0; full suite still red for recorded evidence/dependency failures."
+            },
+            {
+              "id": "G16",
+              "status": "current_production_main_binding_read",
+              "evidence": "main68f4658 equals actual Vercel production; historical divergence not current."
+            },
+            {
+              "id": "G06",
+              "status": "brain_connector_readable_tenant_acl_restore_still_open",
+              "evidence": "nex2fly_brain list/search/read works; does not establish LightRAG tenant isolation."
+            }
+          ],
+          "user_additions": [
+            {
+              "id": "USER-HIGGSFIELD-MEDIA-20261103",
+              "packages": [
+                "P04",
+                "P21"
+              ],
+              "status": "todo_bound_existing_plugin_verified_research_completed",
+              "contract": "config/integrations/higgsfield.json",
+              "next_step": "Inventory each missing asset, bind references/budget and produce with existing Higgsfield tools; download/hash/review before promotion.",
+              "global_autoload_or_background_execution_claimed": false
+            }
+          ],
+          "package_disposition": [
+            {
+              "id": "P01",
+              "owner_function": "Backend/Portale",
+              "status": "not_accepted",
+              "current_disposition": "Existing local request idempotency/outbox candidate retained; live contact/CRM/notification chain depends on runtime identity and mail transport.",
+              "next_evidence": "Anfrage → Briefing → Fassung des Angebots → autorisierte Annahme → Projekt; Dedupe/Änderung/Abbruch. Vorzustand/Version erhalten."
+            },
+            {
+              "id": "P02",
+              "owner_function": "Grafik/Brand und UX/Frontend",
+              "status": "not_accepted",
+              "current_disposition": "Existing design retained. No UI changes in this run; device/a11y acceptance remains open.",
+              "next_evidence": "Gleiches System über alle Seiten, Dark/Light, 320 px/200 % Text, Tastatur, Reduced Motion; Rückkehr zur vorigen Designversion."
+            },
+            {
+              "id": "P03",
+              "owner_function": "UX/Frontend/Redaktion",
+              "status": "not_accepted",
+              "current_disposition": "Current39public routes/four-language sources retained; fresh generated projection and Site unit checks executed. Browser evidence still historical.",
+              "next_evidence": "Alle Aktionen haben erreichbares Ziel und Fehlerweg; eigene Kundentexte entstehen aus realer Funktion. Originale/alte Pfade erhalten."
+            },
+            {
+              "id": "P04",
+              "owner_function": "Grafik/Brand",
+              "status": "not_accepted",
+              "current_disposition": "USER-HIGGSFIELD-MEDIA-20261103 added;52final performance modules pending; existing montage preserved; funding/reference/account training settings not guessed.",
+              "next_evidence": "Sichtbare vollständige Figuren, tatsächliche transparente Einbettung, Untertitel/Transkript/Pause/Ton, Seitenprüfung; Rückweg auf vorherige freigegebene Datei."
+            },
+            {
+              "id": "P05",
+              "owner_function": "Backend/Portale",
+              "status": "not_accepted",
+              "current_disposition": "Reuse existing selfservice domain; actual verified entitlement/funding/trial adapters remain required.",
+              "next_evidence": "Parallelität, Serverzeit, Ablauf, Wiederholung, Upgrade, fremder Tenant; bezahlte Datenansichten bei fehlendem Modellfunding erhalten."
+            },
+            {
+              "id": "P06",
+              "owner_function": "UX/Frontend und Backend/Portale",
+              "status": "not_accepted",
+              "current_disposition": "Existing workplace retained; actual session/tool/artifact/PDF end-to-end acceptance pending.",
+              "next_evidence": "Verlauf erhalten, Datei/Artefakt bearbeiten, Fehler/Cancel/Resume, mobile Tastatur, Resize; keine verdeckten Inhalte."
+            },
+            {
+              "id": "P07",
+              "owner_function": "Backend/Portale und Finance",
+              "status": "not_accepted",
+              "current_disposition": "Actual provider cost/funding/usage/ledger adapter not established by configured model; no paid LLM invocation.",
+              "next_evidence": "Keine Doppelbuchung oder negativer Saldo bei Parallelität; fehlendes Funding stoppt Kostenaktion. Unklarer Providererfolg wird abgeglichen."
+            },
+            {
+              "id": "P08",
+              "owner_function": "Shop",
+              "status": "not_accepted",
+              "current_disposition": "Existing atomically published BigBuy candidate retained; fresh purpose-bound namespace created. Real licensed provider snapshot/import remains pending.",
+              "next_evidence": "Exakte tatsächliche Zeilen/IDs, reproduzierbare Normalisierung, Dedupe/Delta, Quarantäne und Rückkehr zum vorigen Snapshot."
+            },
+            {
+              "id": "P09",
+              "owner_function": "Shop",
+              "status": "not_accepted",
+              "current_disposition": "No licensed actual fitment evidence invented; safety/ambiguity and vehicle context remain required.",
+              "next_evidence": "Kein Name/Bild als Fitmentbeweis; Mehrdeutigkeit klären, Sicherheitsfälle sperren; kein Kauf aufgrund verlorenen Fahrzeugkontexts."
+            },
+            {
+              "id": "P10",
+              "owner_function": "Shop und Finance",
+              "status": "not_accepted",
+              "current_disposition": "G02 transaction fix11real Mongo cases. Cart POST request replay, live order/payment/webhook end-to-end still open.",
+              "next_evidence": "Preis-/Bestandsänderung, Gast/Konto, doppelter Klick, Reload, abgebrochene Zahlung, Webhook/Readback; Bestell-/Zahlungs-/Annahmestatus getrennt."
+            },
+            {
+              "id": "P11",
+              "owner_function": "Shop/Betrieb",
+              "status": "not_accepted",
+              "current_disposition": "Delivery/return/refund provider chain not revalidated; no orders/refunds triggered.",
+              "next_evidence": "Echte Wiederaufnahme, keine doppelte Order/Erstattung; Sicherheitsrückkopplung in Katalog; Belege nicht überschreiben."
+            },
+            {
+              "id": "P12",
+              "owner_function": "Shop/Partner und Redaktion",
+              "status": "not_accepted",
+              "current_disposition": "No real business addresses/coordinates created; city/workshop two-way data journey remains open.",
+              "next_evidence": "Stadt → Betrieb → Anfrage und zurück; Nulltreffer/fehlende Koordinaten/Duplikate; Metadatum ist kein Adressbestand."
+            },
+            {
+              "id": "P13",
+              "owner_function": "Partner/Backend",
+              "status": "not_accepted",
+              "current_disposition": "No partner agreements or role grants invented; actual qualification/approval required.",
+              "next_evidence": "Verzeichnisbetrieb bleibt ohne Vertrag Nichtpartner; suspendiertes Profil, Änderung und Widerruf geprüft."
+            },
+            {
+              "id": "P14",
+              "owner_function": "Partner/Finance",
+              "status": "not_accepted",
+              "current_disposition": "No appointments/coupons/calendar messages sent; actual contract/calendar/counterparty binding remains required.",
+              "next_evidence": "No-show/Widerspruch sperren unberechtigte Abrechnung; Fristlaufkonkurrenz, Doppelcode, Änderung/Storno, Kalendereintrag und Empfängerprüfung."
+            },
+            {
+              "id": "P15",
+              "owner_function": "Backend/Portale",
+              "status": "not_accepted",
+              "current_disposition": "Protected portal access stays closed pending actual session/membership/object integration.",
+              "next_evidence": "Erlaubter und verbotener Fall je Rolle; PDF/Annahme/Änderung/Download, Attribution/Linkkennzeichnung; keine Veröffentlichung privater Props."
+            },
+            {
+              "id": "P16",
+              "owner_function": "Backend/Portale/Sicherheit",
+              "status": "not_accepted",
+              "current_disposition": "Actual identity provider binding remains separate from available Clerk configuration and existing own-account shop adapter.",
+              "next_evidence": "Kein Vertrauen in frei gewählten Client-Tenant; abgelaufen/verbraucht/replayed, fremdes Konto, Revoke und Reload; keine Umstellung aus alten Clerk-Vorlagen."
+            },
+            {
+              "id": "P17",
+              "owner_function": "Backend/Portale/Kommunikation",
+              "status": "not_accepted",
+              "current_disposition": "G17 failclosed atomic mail budget candidate11Mongo+14offline cases; no live sending. Real recoveryjob/transport/recipient binding and controlled rollout remain open.",
+              "next_evidence": "Unklarer Sendestatus wird abgeglichen statt blind wiederholt; neue Termine an richtige Gegenseite mit konsistenter Kalender-UID/Sequenz."
+            },
+            {
+              "id": "P18",
+              "owner_function": "Finance",
+              "status": "not_accepted",
+              "current_disposition": "No accounting/payment rights or tax/operator facts inferred; commercial system/export/restore evidence remains open.",
+              "next_evidence": "Keine Zahlung oder Buchhaltungsfreigabe aus Extraktion; auditierbare Korrektur und Export/Restore."
+            },
+            {
+              "id": "P19",
+              "owner_function": "Wissen/Skills",
+              "status": "not_accepted",
+              "current_disposition": "Brain connector read works; tenant ACL/retrieval/restore isolation still not proved. No knowledge write.",
+              "next_evidence": "WRITE → INDEX → EXACT READ-BACK → CONTENT COMPARE einzeln; Source-/Policyänderung invalidiert Promotion, begrenzter Rollout/Rollback."
+            },
+            {
+              "id": "P20",
+              "owner_function": "Projektsteuerung",
+              "status": "not_accepted",
+              "current_disposition": "Current scoped run appended in existing register;26packages retained; no duplicate queue or scheduler.",
+              "next_evidence": "Ein Übergang erzeugt einen Auftrag, keine Doppelarbeit; Nutzung allein aktiviert keine neue Policy."
+            },
+            {
+              "id": "P21",
+              "owner_function": "Wissen/Skills",
+              "status": "not_accepted",
+              "current_disposition": "Five own skill sources and44Small-Business hashes verified; Higgsfield already installed. No fake agent runtime/global creator installation.",
+              "next_evidence": "Fachzuordnung, Positiv-/Negativfälle je Einsatz, Volumen-/Budgetgrenzen; keine Originaländerung und keine erfundene Ausführung."
+            },
+            {
+              "id": "P22",
+              "owner_function": "Marketing/Vertrieb",
+              "status": "not_accepted",
+              "current_disposition": "Marketing Strategy scoped to existing package; activation remains after system readiness. No market/pricing/revenue assumptions promoted.",
+              "next_evidence": "Konkreter Kalender/Budget/Stop/Evidence, Attribution ohne Doppelzählung; Veröffentlichung/Versand erst im passenden Auftrag."
+            },
+            {
+              "id": "P23",
+              "owner_function": "Infrastruktur/Netz",
+              "status": "not_accepted",
+              "current_disposition": "Existing Vercel/Atlas project/store verified; native preview operator worked despite blocked Git auto deploy;18collections/17indexes exact readback, zero business seeds.",
+              "next_evidence": "Worker läuft tatsächlich und übergibt sicher; keine zweite Wirkung nach Leaseablauf; erfolgreicher Restore und Rückweg je Runtime."
+            },
+            {
+              "id": "P24",
+              "owner_function": "Qualität/Recht",
+              "status": "not_accepted",
+              "current_disposition": "Node22/pnpm12 checks and independent reviews; historical source/browser evidence suite remains red. No legal/commercial/system acceptance.",
+              "next_evidence": "Kein Build/HTTP200 als Gesamtfreigabe. Öffentliche Agentur/Shop/DNS/Altadressen bleiben an spezifische finale Freigabe gebunden."
+            },
+            {
+              "id": "P25",
+              "owner_function": "Backend/Portale",
+              "status": "not_accepted",
+              "current_disposition": "No operator account substituted for visitor identity; actual visitor connector/import transport not connected.",
+              "next_evidence": "Kein Betreiberkonto als Besucherkonto; fremder Tenant/Importziel gesperrt, Reauth/Cancel/Retry/Readback geprüft."
+            },
+            {
+              "id": "P26",
+              "owner_function": "Backend/Portale",
+              "status": "not_accepted",
+              "current_disposition": "Existing local file candidate retained; server storage/project ACL/size/version/readback integration remains open.",
+              "next_evidence": "Größen-/Typprüfung, sichere Vorschau, Duplicate/Versionconflict, Importstatus und nachvollziehbare Bestätigung; kein stilles Überschreiben."
+            }
+          ],
+          "test_scope": "Targeted actual local Mongo, mocked HTTP provider, static/Unit and bounded native Vercel metadata; not whole-system acceptance.",
+          "runtime_binding": {
+            "namespace": "nexify_teileklar_shop_v1",
+            "namespace_schema": "created18collections17indexes_and_readback_matches",
+            "business_documents_seeded": 0,
+            "preview_only_env_keys": [
+              "DB_NAME",
+              "PREVIEW_PUBLIC_ORIGIN",
+              "SHOP_VAT_PERCENT"
+            ],
+            "preview_git_branch": "codex/namespace-preflight-2026-11-03",
+            "latest_reason": "preview_health_200_payment_mode_unbound_for_effectful_routes",
+            "production_env_changed": false,
+            "operator_repeat_forbidden": true,
+            "preview_tax_test_assumption": "19; explicit user bestpraxis choice; no commercial tax approval",
+            "final_deployment": "dpl_4VYDkAf8XikkprZpJ5xBHxpx7hF5"
+          },
+          "connected_capability_observations": {
+            "systemmaster": "0.1.8/srv1243952 active; no bound completion trace for current goal",
+            "honeycomb": "UNAUTHORIZED requires reauthentication",
+            "posthog": "Default project272482 reachable but current NeXify release binding unverified; no event reads",
+            "paperclip": "no matching callable tools exposed during discovery; user authorization retained",
+            "chrome": "skill read; no browser js/tab tools exposed during discovery",
+            "chatgpt_reference_threads": [
+              {
+                "id": "6ae1f7fa-ad04-83ed-b379-2a1c45112a85",
+                "status": "unread_no_chatgpt_read_thread_tool"
+              },
+              {
+                "id": "6ae84315-0214-83ed-b698-c98c923e0d57",
+                "status": "unread_no_chatgpt_read_thread_tool"
+              }
+            ]
+          },
+          "additional_user_capabilities": [
+            "GitHub",
+            "Vercel",
+            "Marketing Strategy",
+            "Plugin Creator",
+            "Writing Style",
+            "Promptmaster",
+            "nex2fly_brain",
+            "Composio",
+            "Paperclip",
+            "NeXify Arbeitsautopilot",
+            "Runway",
+            "Chrome",
+            "Honeycomb",
+            "Workflow Architect",
+            "Hostinger VPS NeXify Agentur",
+            "Hostinger Connector",
+            "Higgsfield",
+            "PostHog",
+            "Brain-Gateway",
+            "Remote Desktop Commander",
+            "Gmail",
+            "Google Drive",
+            "Notion",
+            "Linear",
+            "Slack",
+            "Documents",
+            "Hostinger Mail",
+            "Pets",
+            "SSHOW",
+            "Pages"
+          ],
+          "verification": {
+            "node": "22.23.4",
+            "pnpm": "12.15.0",
+            "cart_real_mongo": 11,
+            "mail_real_mongo": 11,
+            "shop_http_real_mongo": 13,
+            "recovery_offline": 14,
+            "namespace_offline": 24,
+            "site_unit": 118,
+            "fullsuite": {
+              "tests": 753,
+              "failures": 63,
+              "errors": 9,
+              "skips": 0,
+              "status": "failed"
+            },
+            "historical_hashes_silently_refreshed": false
+          },
+          "additional_user_authorization": "User authorized autonomously enabling additional required access; only concrete relevant scope, supported administrative tools and existing accounts. No account owner login or OAuth/admin scope can be fabricated.",
+          "access_discovery": {
+            "query": "Honeycomb Paperclip Chrome",
+            "tool": "plugin_management.search_plugins",
+            "returned_plugins": 0,
+            "interpretation": "directory result not proof of missing private plugins; no OAuth/admin mutation or Chrome/Paperclip tool exposed here",
+            "new_permission_changes": []
+          },
+          "test_contract_corrections": [
+            "BigBuy successful1003snapshot on mockedproduction semantics; sandbox0HTTPcalls, duplicate/unknowncategory/missingstock/429 preserve generation",
+            "FTPvalidknowncategory snapshot; isolated duplicate/category/login failures preserve publication",
+            "Successful mailtemplates/status/rbac separated from unknownHTTP500no-retry and safe notconfigured retry; all provider attempts counted"
+          ]
+        }
+      ],
+      "latest_scoped_run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103"
     }
   },
   "consent_ui_delta_base": "b4ae9bc6be3ef6a0d657db9388f303d29c4a6e18"

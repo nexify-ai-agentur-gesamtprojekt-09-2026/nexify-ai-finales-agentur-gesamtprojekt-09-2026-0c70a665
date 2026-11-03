@@ -15,6 +15,36 @@ Quellen vor jeder Wiederverwendung fachlich zuordnen: `config/source-boundaries.
 
 Der Nutzer hat Implementierung und Erstellung fehlender Hero-Clips beauftragt. Diese allgemeine Freigabe nicht erneut verlangen. Konkrete Zahlungs-/Versand-/Produktiv-/Rechtsvoraussetzungen bleiben an die einzelne Aktion gebunden. Der getypte API/Auth-Zielvertrag ist kein Nachweis bereits laufender SSO-/Provider-/Produktivfunktionen. Aktuelle Umsetzungsstände und Grenzen: `PROGRESS.md`, `docs/contracts/`, `docs/automation/` und die Architekturentscheidungen.
 
+## Fehlende Bilder und Videos · Nutzerauftrag 03.11.2026
+
+Bei relevanter Medienarbeit Higgsfield als bevorzugten Produktionsweg für die
+fehlenden Bilder und Videos einsetzen. Der Connector ist bereits verfügbar;
+aktuelle Skill-/Toolschemata und Primärquellen verwenden. Bestehendes P04 im
+führenden Register und `config/integrations/higgsfield.json` fortführen, keine
+zweite Queue oder neue Dauerautomation anlegen. Originale erhalten, je Slot
+Referenzrechte, Zweck, Kostenrahmen, Job-ID, Download/Hash und echte Bild-/Ton-/
+Lippensynchronitätsabnahme binden. Vorhandene Montage ist kein fehlendes Asset
+und keine Sprechperformance. Ruhige Rechts-/Kaufseiten respektieren; synthetische
+Illustrationen ersetzen keine echten Produkt-/Passungs- oder Betriebsnachweise.
+Relevante zusätzliche Skills/Plugins im Internet quellen-/lizenz-/versionsgebunden
+prüfen und geeignete Fähigkeiten integrieren; vorhandene offizielle Connectoren
+bevorzugen. Keine globale Installation, Autoload- oder Dauerbetriebsbehauptung
+ohne tatsächlichen Installations-/Loader-/Laufzeitnachweis.
+
+## Weitere verbundene Fähigkeiten · Nutzerfreigaben 03.11.2026
+
+Die vom Nutzer zusätzlich bereitgestellten Plugins bei fachlicher Relevanz
+verwenden: GitHub/Vercel für Quelle und Release, Higgsfield/Runway für Medien,
+Brain-Gateway/nex2fly_brain für gebundenes Wissen, Paperclip/Arbeitsautopilot für
+bestehende Fabrikaufträge, Honeycomb/PostHog für reale Betriebsnachweise sowie
+Hostinger, Chrome/Remote Desktop, Gmail/Composio, Workflow Architect,
+Marketing Strategy, Promptmaster, Writing Style und Plugin Creator im passenden
+Scope. Verfügbarkeit, Konto, Tenant, Ziel und tatsächliche Methode frisch prüfen.
+Ein Pluginname ist keine laufende Verbindung, kein neuer Scheduler und kein
+Nachweis einer Produktintegration. Bestehende Freigaben nutzen, keine doppelten
+Aufträge oder Zeitpläne erzeugen. Externe Nachrichten nur bei konkretem
+Versandauftrag; Geheimnisse niemals in Repo, Browser, Logs oder Skills schreiben.
+
 ## Wiederverwendbare Small-Business- und REA-Vorgaben
 
 Bei jeder Aufgabe die Small-Business-Zuordnung prüfen. Für passende Unternehmens-, Vertriebs-, Marketing-, Finanz-, Personal- oder wiederkehrende Automationsarbeit zuerst `python3 tools/automation/small_business.py verify` und anschließend `load smb-router --references` sowie `load <passender-skill> --references` verwenden. Quelle und Nutzungshinweise: `docs/automation/small-business.md`; gepinnte Metadaten: `config/integrations/small-business.json`. Vorhandene Projekt-/Auftragsangaben verwenden; keine unnötige erneute Onboarding- oder allgemeine Freigabefrage. Original-Gates an konkrete folgenreiche Aktionen binden. Installation bedeutet weder Connectoranmeldung noch Scheduler, Brain-Ingestion oder Runtimefreigabe. Keine fremden Beispieldaten als bestätigte B.V.-Fakten übernehmen. Das eigene Designsystem hat Vorrang vor der visuellen Beispielpalette fremder Workflow-Anleitungen.

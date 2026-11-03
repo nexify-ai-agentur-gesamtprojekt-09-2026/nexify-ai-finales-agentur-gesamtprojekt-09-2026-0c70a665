@@ -8,6 +8,7 @@ from pathlib import Path
 import httpx
 from dotenv import dotenv_values
 from pymongo.errors import DuplicateKeyError
+from pymongo.write_concern import WriteConcern
 
 from .db import db, now_iso
 
@@ -44,6 +45,29 @@ async def enqueue(event_key, to, subject, html, text, reply_to=""):
     return await deliver(event_key)
 
 
+async def reserve_daily_slot(today, cap):
+    """Conservative durable reservation; uncertain delivery never refunds a slot.
+
+    The existing settings collection avoids a new namespace/schema dependency.
+    A crash or lost reservation ACK can waste capacity but cannot exceed the cap.
+    On rollout, drain old workers first: mixed old/new senders are not protected.
+    """
+    key = "mail_daily_budget:" + today
+    budgets = db.settings.with_options(write_concern=WriteConcern(w="majority", j=True, wtimeout=5000))
+    # Include all unresolved historical sends conservatively until reconciled.
+    legacy = await db.outbox.count_documents({"$or": [
+        {"status": "gesendet", "sent_at": {"$gte": today}},
+        {"status": {"$in": ["wird_gesendet", "abgleich_erforderlich"]}},
+        {"status": "fehlgeschlagen", "retry_safe": {"$ne": True}}]})
+    try:
+        await budgets.update_one({"_id": key}, {"$setOnInsert": {"reserved": legacy, "created_at": now_iso()}}, upsert=True)
+    except DuplicateKeyError:
+        pass  # Another worker created this day's single shared counter.
+    result = await budgets.update_one({"_id": key, "reserved": {"$lt": cap}},
+                                           {"$inc": {"reserved": 1}})
+    return result.modified_count == 1
+
+
 async def deliver(event_key):
     claim_id = secrets.token_hex(16)
     claim = await db.outbox.find_one_and_update({"_id": event_key, "$or": [{"status": {"$in": ["wartend", "zurückgestellt"]}}, {"status": "fehlgeschlagen", "retry_safe": True}], "attempts": {"$lt": MAX_ATTEMPTS}},
@@ -54,7 +78,9 @@ async def deliver(event_key):
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not key or not origin:
         return await _finish(event_key, claim_id, "fehlgeschlagen", "not_configured", count=True)
-    if cap.isdigit() and await db.outbox.count_documents({"status": "gesendet", "sent_at": {"$gte": today}}) >= int(cap):
+    if not cap or not cap.isascii() or not cap.isdecimal() or len(cap) > 9:
+        return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_not_configured", count=False)
+    if not await reserve_daily_slot(today, int(cap)):
         return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
     payload = {"from": origin, "to": [claim["to"]], "subject": claim["subject"], "html": claim["html"], "text": claim["text"]}
     if claim.get("reply_to"):
@@ -67,6 +93,10 @@ async def deliver(event_key):
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
     try:
         async with httpx.AsyncClient(timeout=20, transport=transport) as client:
+            # A delayed preparation must reserve against the actual start day.
+            # Defer instead of carrying yesterday's slot over midnight.
+            if datetime.now(timezone.utc).strftime("%Y-%m-%d") != today:
+                return await _finish(event_key, claim_id, "zurückgestellt", "daily_budget_day_changed", count=False)
             response = await client.post("https://api.resend.com/emails", json=payload,
                                          headers={"Authorization": "Bearer " + key, "Idempotency-Key": event_key[:256]})
     except httpx.HTTPError:

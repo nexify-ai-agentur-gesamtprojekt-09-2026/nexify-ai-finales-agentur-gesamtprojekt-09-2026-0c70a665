@@ -129,3 +129,82 @@ Verbleibende Kontaktgrenzen: echte Mongo-Atomizität, tatsächlicher Recoveryjob
 Kein Pflichtpaket wird wegen fehlender Umsetzung gestrichen. Gesamtabschluss erst nach echten Nutzerwegen, Daten-/Tenant-/Recovery-/Restore-/Releasebelegen und unabhängiger Abnahme. Offene fremde Zugänge nur als konkrete Abhängigkeit verfolgen.
 
 Ein Goal-Eintrag ist kein Scheduler. Diese Sitzung behauptet weder eine nach Chatende weiterlaufende Ausführung noch einen neuen 08:00-Bericht. Bestehende Laufzeiten und Completionrouten müssen separat zugeordnet werden.
+
+
+## Fortsetzung · 03.11.2026
+
+Der Gesamtauftrag bleibt offen; alle 26 Pflichtpakete sind erhalten. Aktueller
+Lauf ist im selben Register unter `current_execution.scoped_runs` gebunden.
+Basiskommit `68f465873ad37ca0e5727b45701049c72fca5624` entspricht dem frisch
+gelesenen GitHub-main und der vorhandenen Vercel-Produktion. Der frühere
+Vercel-Divergenzbefund ist damit kein aktueller Zustand.
+
+G02/P10: Gastübernahme und Leeren der Quelle werden in derselben Mongo-
+Transaktion bestätigt. Auch Cartmutationen nutzen Transaktionen; neue Gastkäufe
+und vorhandene Gastbestellrechte bleiben erhalten. Elf echte lokale Mongo-
+Fälle einschließlich Parallelität, Rollback und Lost-ACK bestanden. Das ist
+kein vollständiger P10-Abschluss: alte Gast-POST-Replays ohne Request-ID,
+Produktivstore, Checkout-/Zahlungs-/Restoreabnahme bleiben offen.
+
+G17/P17: Fehlendes/ungültiges Tageslimit sperrt; ein atomarer, ausdrücklich
+majority/journal-bestätigter Counter reserviert vor Providerstart. Ungewisse
+Ausgänge und unbekannte Legacyfehler geben keine Kapazität zurück. Tageswechsel
+stellt vor I/O zurück. Elf echte lokale Mongofälle und 14 Offline-Recoveryfälle
+bestanden. Alte Worker müssen beim Rollout kontrolliert auslaufen; kein echter
+Versand und kein Replikat-Failover nachgewiesen.
+
+G01/P23: Der vorhandene Atlasstore ist real dem richtigen Projekt zugeordnet.
+Ein isolierter nativer Vercel-Previewlauf prüfte das geplante Namespace frisch
+leer. Der vorhandene Operator legte einmalig 18 Collections / 17 Indizes ohne
+Geschäftsdokumente an; ein separater Metadaten-Readback bestätigt das exakte
+Schema. Initbranch niemals in main übernehmen oder blind erneut ausführen.
+Die gezielte Previewbindung wurde nach Nutzerantwort „bestpraxis“ mit 19 %
+als ausdrücklich synthetischer DE-Standardteile-Testannahme vervollständigt.
+`/api/health` liefert200 / shop-runtime-v1 / payment_mode_configured=false.
+Das ist keine kommerzielle Steuer-/Merchantfreigabe. Auth 401 blieb am nativen
+Fetchwrapper nicht eindeutig der Anwendung zuordenbar. Kein Produktions-/
+Domainwechsel. Evidence:
+`docs/reviews/completion-namespace-2026-11-03.json`.
+
+G26/P24: Node 22.23.4 / pnpm 12.15.0 tatsächlich verwendet. 118 Site-Tests bestehen
+nach frischer Generierung der öffentlichen Projektion. Globale Test-/Architektur-
+und Sauberkeitsgates bleiben rot; historische Belege werden nicht durch neue
+Expected-Hashes umgeschrieben. Aktuelle genaue Resultate und Prüfgrenzen:
+`docs/reviews/completion-goal-2026-11-03.json`.
+
+### Verbindliches Medien-ToDo · USER-HIGGSFIELD-MEDIA-20261103
+
+Auf aktuelle Nutzerweisung Higgsfield für alle tatsächlich fehlenden Bilder und
+Videos bevorzugt einsetzen. Der offizielle Connector ist bereits installiert
+und aktiviert; aktuelle Katalog-/SDK-/Lifecyclequellen und relevante öffentliche
+Skills wurden recherchiert. Dauerhafte Projektbindung in `AGENTS.md` und
+`config/integrations/higgsfield.json`; keine neue Queue, kein zweiter Zeitplan,
+keine unbewiesene globale Autoload-/Dauerbetriebsbehauptung.
+
+Je fehlendem Slot Quellen/Originale, Rechte, Skript/Sprache, Figur, begrenzte
+Finanzierung, Job/Idempotenz, echten Download/Hash und unabhängige Abnahme binden.
+52 Performance-Module sind noch pending; vorhandene Montagen bleiben vorhanden.
+API-Outputs rechtzeitig vor der dokumentierten 7-Tage-Retention sichern.
+HTTPS-Kostenschätzung kann Referenzen hochladen; Training-Optout des verbundenen
+MCP-Kontos ist unbekannt. Keine synthetischen Produkt-/Fitment-/Betriebsbeweise,
+keine pauschalen Videos auf ruhigen Rechts-/Kaufseiten. Drittanbieterskills nur
+gezielt nach Versions-/Lizenz-/Toolprüfung übernehmen.
+
+
+Zusätzliche aktuelle Quellen: Systemmaster 0.1.8 / srv1243952 ist erreichbar;
+Backupmetadaten sind frisch, aber kein Restore oder Completiontrace für diesen
+Auftrag belegt. Honeycomb verlangt Reauthentifizierung. PostHog-Projekt 272482
+„Default project“ ist erreichbar, jedoch ohne bestätigte NeXify-Releasebindung.
+Die beiden verlinkten ChatGPT-Verläufe bleiben ohne verfügbares ChatGPT-
+read_thread-Werkzeug ungelesen. Weitere Nutzer-Pluginfreigaben werden im selben
+Auftragsregister gehalten; sie sind kein Auftrag für ungefragten Versand,
+Doppelqueues, Pets oder eine zweite Projektverwaltung.
+
+
+Aktuelle abschließende lokale Vollkette am Replikat: **753 Tests, 63 Failures,
+9 Errors, keine Skips**. 13 vollständige HTTP-Shopfälle bestehen; die drei
+veralteten Import-/Mailtestverträge wurden mit isolierten negativen Fällen
+korrigiert, ohne Provider-/Finanzierungs-/Sandboxgates zu verändern. 118 Site-
+Tests, je 11 reale Mongo-Cart-/Budgetfälle und 14 Offline-Recoveryfälle bestehen.
+Die verbleibenden historischen Quell-/Browsernachweise sperren weiter die
+Gesamtabnahme; sie wurden nicht durch passende Expected-Hashes ersetzt.

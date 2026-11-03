@@ -269,8 +269,27 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
                      "CLAIM_LEASE_SECONDS": 300, "MAX_ATTEMPTS": 5, "transport": None,
                      "httpx": types.SimpleNamespace(AsyncClient=Client, HTTPError=HTTPError),
                      "now_iso": lambda: datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                     "setting": lambda name: {"RESEND_API_KEY": "fake", "MAIL_DAILY_CAP": ""}.get(name, ""),
+                     "setting": lambda name: {"RESEND_API_KEY": "fake", "MAIL_DAILY_CAP": "5"}.get(name, ""),
                      "sender": lambda: "fake@example.org"}
+        class Budget:
+            def __init__(self):
+                self.rows = {}
+            def with_options(self, **options):
+                return self
+            async def update_one(self, query, update, upsert=False):
+                key = query['_id']
+                if upsert:
+                    self.rows.setdefault(key, dict(update['$setOnInsert']))
+                    return types.SimpleNamespace(modified_count=0)
+                row = self.rows[key]
+                if row['reserved'] < query['reserved']['$lt']:
+                    row['reserved'] += update['$inc']['reserved']
+                    return types.SimpleNamespace(modified_count=1)
+                return types.SimpleNamespace(modified_count=0)
+        namespace['db'].settings = Budget()
+        namespace['DuplicateKeyError'] = type('DuplicateKeyError', (Exception,), {})
+        namespace['WriteConcern'] = lambda **options: options
+        load_function('apps/shop-api/shop/mailer.py', 'reserve_daily_slot', namespace)
         for name in ("_finish", "deliver", "retry_pending"):
             load_function("apps/shop-api/shop/mailer.py", name, namespace)
         return namespace, outbox, calls
