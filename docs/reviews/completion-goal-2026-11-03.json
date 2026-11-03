@@ -118,7 +118,7 @@
     "tests/test_shop_recovery_contract_20261031.py": "b137c3bfd45441b1a81db8979843a412432d5a1c20aa10c3c6574e5e59578999",
     "tests/test_teileklar_shop_api.py": "81826c0454dea66c9ea81fb276c7cf183bf08afe6b9993f72f244e4fde54422f",
     "config/integrations/higgsfield.json": "d805217547f5b65e48feae50bcf0ca199acfc5ea43122e15cfbe56b4b9ff4423",
-    "config/acceptance-coverage.json": "9c8a7afbea1839e25286504ee2fcd520cc7a8fb4a3f8cc509911a1e5d5475f9b"
+    "config/acceptance-coverage.json": "3a9459199671263da7dc16450a13f3f3147f816eb5f32aeb3eabdb776fef28c0"
   },
   "live_namespace_evidence": "docs/reviews/completion-namespace-2026-11-03.json",
   "baseline_limits": "Initial bare executor baseline697tests/62failures/10errors/11skips lacks pinned Mongo deps. Intermediate counts use different deps/topology and cannot prove no regression. Final751run is explicit full evidence; historical source/browser failures were not rewritten or suppressed. Intermediate751/66/9 retained in fullsuite-replicaset-initial.txt; three obsolete HTTP fixture failures have since been resolved without changing gates. Final753/63/9 is authoritative.",
@@ -230,5 +230,14 @@
     "diff_whitespace": "passed",
     "final_preview_deployment_state": "READY",
     "preview_application_code": "baseline68f4658 plus metadata-only operator command, not new cart/mail candidate"
+  },
+  "handoff": {
+    "draft_pr": "https://github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/65",
+    "pr_number": 65,
+    "code_commit": "ca3d4046f29f198d562d357af9ac0b27d5691af9",
+    "remote_head_exact_readback": true,
+    "merged": false,
+    "whole_system_accepted": false,
+    "local_test_container": "stopped_not_deleted"
   }
 }

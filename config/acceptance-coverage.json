@@ -5197,7 +5197,16 @@
             "BigBuy successful1003snapshot on mockedproduction semantics; sandbox0HTTPcalls, duplicate/unknowncategory/missingstock/429 preserve generation",
             "FTPvalidknowncategory snapshot; isolated duplicate/category/login failures preserve publication",
             "Successful mailtemplates/status/rbac separated from unknownHTTP500no-retry and safe notconfigured retry; all provider attempts counted"
-          ]
+          ],
+          "handoff": {
+            "draft_pr": "https://github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/65",
+            "pr_number": 65,
+            "code_commit": "ca3d4046f29f198d562d357af9ac0b27d5691af9",
+            "remote_head_exact_readback": true,
+            "merged": false,
+            "whole_system_accepted": false,
+            "local_test_container": "stopped_not_deleted"
+          }
         }
       ],
       "latest_scoped_run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103"

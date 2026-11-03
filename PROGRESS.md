@@ -32,8 +32,11 @@ Zusätzliche Pluginfreigaben quellengebunden im selben Register. VPS-Systemmaste
 lesbar; Honeycomb benötigt Reauthentifizierung; PostHog ohne Releasebindung.
 Verlinkte ChatGPT-Berichte ohne read_thread ungelesen.
 
-Nächste Schritte: überprüfbaren Draft-PR dieses lokalen Kandidaten bereitstellen;
-belegte Browser-/Quellenverträge erneuern; echte Identity/Membership/Funding- und
+Übergabe: Draft-PR #65 ist angelegt und remote zurückgelesen, Codecommit
+`ca3d4046f29f198d562d357af9ac0b27d5691af9`. Lokales Testreplikat gestoppt,
+seine synthetischen Daten erhalten. Kein Merge und kein Kandidaten-Liveabschluss.
+
+Nächste Schritte: belegte Browser-/Quellenverträge erneuern; echte Identity/Membership/Funding- und
 Provider-/Tenant-/Restore-/Medienabnahmen entlang der 26 Pakete fortsetzen.
 Kein neuer Zeitplan, keine externe Nachricht und kein behaupteter Hintergrundlauf.
 
