@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "user_request": "Restart work after the chat reply; direct completion trigger preferred, hourly continuation accepted as fallback",
+  "observed_at": "2026-11-03T17:22:08Z",
+  "preferred_mode": {
+    "type": "assistant_reply_completed_in_this_chat",
+    "status": "unavailable_no_supported_completion_trigger_or_same_chat_resume_API",
+    "installed": false
+  },
+  "fallback": {
+    "automation_id": "6ae7f2c73fd08190b9a3661e01929211",
+    "title": "NeXify Fortsetzungsabsicherung",
+    "reused_existing_task": true,
+    "is_enabled_readback": true,
+    "schedule": "BEGIN:VEVENT\nDTSTART:20261103T172305Z\nRRULE:FREQ=HOURLY\nEND:VEVENT",
+    "timezone": "Europe/Amsterdam",
+    "scheduled_first_local": "2026-11-03T18:23:05+01:00",
+    "next_run_time_returned": null,
+    "conversation_id": "6ae7f38f-e7dc-83eb-b32d-85aa586e384a",
+    "same_chat_as_request_verified": false,
+    "execution_verified": false,
+    "environment_selection": "inherited",
+    "environment_details": null,
+    "prompt_refers_to": "current canonical AGENTS,completion contract,26-package register and DraftPR65; current checkpoint647a2f0",
+    "duplicate_execution_policy": "inspect active work/current checkpoint and exclusive writer first; otherwise only disjoint read work or concrete binding finding",
+    "technical_lock_or_lease_installed": false
+  },
+  "immediate_run_attempt": {
+    "tool": "automations.run_now",
+    "result": "NOT_FOUND",
+    "error": "HTTP404 Action not found before action invocation",
+    "run_started_by_this_call": false,
+    "replacement": "existing task scheduled to start in one minute then hourly; no second automation created"
+  },
+  "historical_evidence": "Existing completion report and fingerprints remain historical at their recorded checkpoint; this scheduling delta is not a new code/runtime acceptance."
+}

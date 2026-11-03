@@ -5209,7 +5209,14 @@
           }
         }
       ],
-      "latest_scoped_run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103"
+      "latest_scoped_run_id": "GOAL-NEXIFY-COMPLETION-20261101-RUN-20261103",
+      "continuation_policy": {
+        "source": "docs/automation/continuation-fallback-2026-11-03.json",
+        "automation_id": "6ae7f2c73fd08190b9a3661e01929211",
+        "preferred_completion_trigger": "not_available",
+        "hourly_fallback_enabled": true,
+        "execution_verified": false
+      }
     }
   },
   "consent_ui_delta_base": "b4ae9bc6be3ef6a0d657db9388f303d29c4a6e18"

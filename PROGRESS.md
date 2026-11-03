@@ -1,3 +1,19 @@
+# Fortsetzungsabsicherung · aktuelle Nutzerentscheidung · 03.11.2026
+
+Bevorzugter direkter Neustart nach Chatabschluss ist über die verfügbaren
+Schnittstellen nicht einrichtbar. Nutzer akzeptiert die vorhandene stündliche
+Aufgabe als Fallback. Automation `6ae7f2c73fd08190b9a3661e01929211` wiederverwendet,
+aktiven Zustand und gespeicherten Zeitplan zurückgelesen: erster Sollstart
+03.11.2026 um 18:23:05 Europe/Amsterdam, danach stündlich. Ziel ist der bestehende
+Auftragschat `6ae7f38f-e7dc-83eb-b32d-85aa586e384a`, nicht nachgewiesen dieser Chat.
+Aktueller Repo-/PR65-Checkpoint und 26-Paket-Auftrag im Laufprompt gebunden.
+Writer-/Aktivitätsprüfung ist angewiesen, kein technischer Lease installiert.
+Sofortstart scheiterte vor Ausführung mit Plattform-404; geplanter erster Lauf
+und Arbeitsumgebung sind noch nicht bestätigt. Keine zweite Automation erzeugt.
+Beleg: `docs/automation/continuation-fallback-2026-11-03.json`.
+
+---
+
 # Aktuell · Gesamtauftrag autonom fortgesetzt · 03.11.2026
 
 Basis `68f4658`, Branch `codex/completion-2026-11-03`. Gesamtstatus offen; alle 26 Pakete
