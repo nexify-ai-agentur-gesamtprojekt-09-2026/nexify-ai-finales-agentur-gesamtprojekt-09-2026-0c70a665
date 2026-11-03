@@ -1,0 +1,25 @@
+bash scripts/check-arch.sh
+arch ARCH-010 VERLETZT (erwartet: exit 0)
+  WHAT: Ein kritischer Browserbeleg fehlt, ist widersprüchlich oder passt nicht zu den aktuellen Quellen.
+  WHY:  Ein Prototypen-Audit erkennt weder abgeschnittene Figuren noch Hashrouter-Fokusfehler oder veraltete CSS-Selektoren im tatsächlichen Reactprodukt. Die Quellenbindung ersetzt keinen Browserlauf.
+  FIX:  Betroffene Browsergegenproben real ausführen, Fehler beheben und geprüfte Belege mit exakt passenden Quellhashes aktualisieren; keine Hashes ohne Laufzeitprüfung erneuern.
+arch ARCH-023 VERLETZT (erwartet: exit 0)
+  WHAT: Tokenherkunft oder explizite netzabhängige Installationsgrenze driftet.
+  WHY:  Installation darf keine versteckte Datenhaltung, Authaktivierung oder Schreibwiederholung erzeugen.
+  FIX:  Zentrale Tokenableitung und expliziten Modus erhalten; browser-coverage/accessibility/pwa nach UIänderungen ausführen.
+arch ARCH-024 VERLETZT (erwartet: exit 0)
+  WHAT: Root-Override ersetzt Messung oder alte Geometrie wird nach UI-/CSS-/Teständerung wiederverwendet.
+  WHY:  Nicht wirksame Testmanipulation darf keine Abnahme vortäuschen.
+  FIX:  Browser frisch ausführen; Vorher/Nachher-Quellhashes und tatsächliche Schriftverdopplung prüfen. Keine Hasherneuerung ohne Browserlauf.
+arch ARCH-027 VERLETZT (erwartet: exit 0)
+  WHAT: Quellenregister verliert Owner, Referenzen, abgeleitete Ansicht oder aktuelle Datei-Fingerprints.
+  WHY:  Quellenkonsolidierung und lokale Tests beweisen keine vollständige Originalrekonstruktion oder Produktionsabnahme.
+  FIX:  Bestehendes Register und Ansicht gemeinsam aktualisieren; offene Abnahmen behalten.
+arch ARCH-029 VERLETZT (erwartet: exit 0)
+  WHAT: Shop UI/HTTP/Fixture driftet von gebundenen Browserbelegen oder Reconciliation/Target/CSRF scheitert.
+  WHY:  Ein 404 kann bestätigter Leerzustand sein; unbekannte Schreibausgänge dürfen weder blind wiederholt noch dauerhaft als unbestätigt ausgegeben werden. Erfolgreiche Create-Keys nach Ablauf nicht wiederverwenden; ungewisse Ergebnisse behalten den Key bis zur Reconciliation.
+  FIX:  Quellengebundenen echten Browser/API/SQLite-Nachweis mit Abbruch/Readback/Restart und negativen HTTP-Prüfungen erneuern; keine Produktionsabnahme daraus ableiten.
+make: *** [Makefile:46: check-arch] Error 1
+bash scripts/clean-state-check.sh
+clean-state: FAIL python3 -m unittest
+make: *** [Makefile:87: clean-check] Error 1

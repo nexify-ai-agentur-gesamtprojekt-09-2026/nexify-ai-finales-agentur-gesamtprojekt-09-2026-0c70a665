@@ -1,0 +1,25 @@
+/workspace/work/nexify-completion-20261103/venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+test_price_formula_and_signature (test_teileklar_shop_api.PureFunctions.test_price_formula_and_signature) ... ok
+/workspace/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/apps/shop-api/shop/main.py:32: ResourceWarning: unclosed file <_io.BufferedWriter name='/tmp/agent-gateway.log'>
+  _gateway["proc"] = subprocess.Popen([sys.executable, str(config.ROOT / "apps/agent-gateway/server.py"), "--database", str(config.ROOT / ".local/visitor.sqlite"),
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_accounts_duplicate_short_password_lockout_logout (test_teileklar_shop_api.ShopFlow.test_accounts_duplicate_short_password_lockout_logout) ... /workspace/work/nexify-completion-20261103/venv/lib/python3.12/site-packages/starlette/testclient.py:518: DeprecationWarning: Setting per-request cookies=<...> is being deprecated, because the expected behaviour on cookie persistence is ambiguous. Set cookies directly on the client instance instead.
+  return super().request(
+ok
+test_bigbuy_ftp_import_manifest_category_filter_and_duplicate_rejection (test_teileklar_shop_api.ShopFlow.test_bigbuy_ftp_import_manifest_category_filter_and_duplicate_rejection) ... ok
+test_bigbuy_import_complete_snapshot_and_failure_preserves_catalog (test_teileklar_shop_api.ShopFlow.test_bigbuy_import_complete_snapshot_and_failure_preserves_catalog) ... ok
+test_contact_and_partner_requests (test_teileklar_shop_api.ShopFlow.test_contact_and_partner_requests) ... ok
+test_guest_merge_and_price_change_confirmation (test_teileklar_shop_api.ShopFlow.test_guest_merge_and_price_change_confirmation) ... ok
+test_not_configured_mail_is_safe_to_retry_once (test_teileklar_shop_api.ShopFlow.test_not_configured_mail_is_safe_to_retry_once) ... ok
+test_order_idempotency_webhook_and_isolation (test_teileklar_shop_api.ShopFlow.test_order_idempotency_webhook_and_isolation) ... ok
+test_paid_order_mails_once_and_status_mails (test_teileklar_shop_api.ShopFlow.test_paid_order_mails_once_and_status_mails) ... ok
+test_paid_order_unknown_mail_outcome_is_not_blindly_retried (test_teileklar_shop_api.ShopFlow.test_paid_order_unknown_mail_outcome_is_not_blindly_retried) ... ok
+test_price_release_gate_blocks_price_cart_and_checkout (test_teileklar_shop_api.ShopFlow.test_price_release_gate_blocks_price_cart_and_checkout) ... ok
+test_roles_markup_and_cart_authority (test_teileklar_shop_api.ShopFlow.test_roles_markup_and_cart_authority) ... ok
+test_welcome_reset_once_and_expiry_and_workshop_receipt (test_teileklar_shop_api.ShopFlow.test_welcome_reset_once_and_expiry_and_workshop_receipt) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 17.478s
+
+OK

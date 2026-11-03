@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "goal": "GOAL-NEXIFY-COMPLETION-20261101",
+  "source_base": "68f465873ad37ca0e5727b45701049c72fca5624",
+  "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+  "store_id": "store_jCItPjCAFfPtsE8h",
+  "operator_preflight_commit": "88b23a6db520f4dee85753e3392d88581b2900aa",
+  "operator_init_commit": "c9768eaa17aec9495131630b7034a2ba25a4b3b9",
+  "init_deployment": "dpl_HnnpdgQicGWM7YdHN2vsFLoFKp91",
+  "init_repeated": false,
+  "production_or_domain_switch_performed": false,
+  "operator_branches_must_not_merge_to_main": true,
+  "reports": [
+    {
+      "event_timestamp_ms": 1793723147634,
+      "stage": "preflightEvents",
+      "report": {
+        "business_documents_read": false,
+        "collection_count": 0,
+        "operation": "preflight",
+        "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+        "planned_namespace": "nexify_teileklar_shop_v1",
+        "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+        "runtime_configuration": "database_namespace_unapproved",
+        "runtime_or_provider_accepted": false,
+        "state": "empty_namespace_metadata",
+        "writes": false
+      }
+    },
+    {
+      "event_timestamp_ms": 1793723290929,
+      "stage": "initEvents",
+      "report": {
+        "created_collections": 18,
+        "created_indexes": 17,
+        "initialization_run_id": "75864e30f944c4b60921dd25692ca005",
+        "metadata_writes": true,
+        "operation": "init",
+        "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+        "planned_namespace": "nexify_teileklar_shop_v1",
+        "runtime_or_provider_accepted": false,
+        "seeded_documents": 0,
+        "state": "new_schema_initialized"
+      }
+    },
+    {
+      "event_timestamp_ms": 1793723444246,
+      "stage": "readbackEvents",
+      "report": {
+        "business_documents_read": false,
+        "collection_count": 18,
+        "operation": "preflight",
+        "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+        "planned_namespace": "nexify_teileklar_shop_v1",
+        "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+        "runtime_configuration": "database_namespace_unapproved",
+        "runtime_or_provider_accepted": false,
+        "state": "existing_schema_matches_read_only",
+        "writes": false
+      }
+    },
+    {
+      "event_timestamp_ms": 1793723537446,
+      "stage": "bindingEvents",
+      "report": {
+        "business_documents_read": false,
+        "collection_count": 18,
+        "operation": "preflight",
+        "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+        "planned_namespace": "nexify_teileklar_shop_v1",
+        "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+        "runtime_configuration": "public_origin_unbound",
+        "runtime_or_provider_accepted": false,
+        "state": "existing_schema_matches_read_only",
+        "writes": false
+      }
+    },
+    {
+      "event_timestamp_ms": 1793723608326,
+      "stage": "originBindingEvents",
+      "report": {
+        "business_documents_read": false,
+        "collection_count": 18,
+        "operation": "preflight",
+        "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+        "planned_namespace": "nexify_teileklar_shop_v1",
+        "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+        "runtime_configuration": "tax_configuration_unbound",
+        "runtime_or_provider_accepted": false,
+        "state": "existing_schema_matches_read_only",
+        "writes": false
+      }
+    },
+    {
+      "event_timestamp_ms": 1793723923696,
+      "stage": "taxBindingEvents",
+      "report": {
+        "business_documents_read": false,
+        "collection_count": 18,
+        "operation": "preflight",
+        "plan_sha256": "52e949421d123951b382fefadd2a5e331d01d6a4861e3e1a76c7832b25a96773",
+        "planned_namespace": "nexify_teileklar_shop_v1",
+        "project_id": "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh",
+        "runtime_configuration": "aligned_metadata_still_required",
+        "runtime_or_provider_accepted": false,
+        "state": "existing_schema_matches_read_only",
+        "writes": false
+      }
+    }
+  ],
+  "preview_binding": {
+    "git_branch": "codex/namespace-preflight-2026-11-03",
+    "keys": [
+      "DB_NAME",
+      "PREVIEW_PUBLIC_ORIGIN",
+      "SHOP_VAT_PERCENT"
+    ],
+    "tax_value": "19",
+    "tax_status": "explicit_preview_test_assumption_after_user_bestpraxis_not_commercial_approval",
+    "tax_source": "https://www.gesetze-im-internet.de/ustg_1980/__12.html",
+    "tax_source_sha256": "e8753b36595e445e776716ce43ec8d01633d9c548aec77d776105ae9484d09d0",
+    "payment_mode_configured": false,
+    "production_env_changed": false
+  },
+  "final_preview_deployment": "dpl_4VYDkAf8XikkprZpJ5xBHxpx7hF5",
+  "health": {
+    "status": 200,
+    "body": {
+      "ok": true,
+      "runtime": "vercel-services",
+      "schema": "shop-runtime-v1",
+      "payment_mode_configured": false
+    },
+    "cache_control": "no-store",
+    "observed_at": "2026-11-03T16:39:19Z"
+  },
+  "auth_negative_probe": {
+    "status": 401,
+    "attribution": "native_fetch_wrapper_reported_deployment_authentication_required_so_application_401_not_proved",
+    "retry_unchanged": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "USER-HIGGSFIELD-MEDIA-20261103",
+  "observed_at": "2026-11-03",
+  "authority": "current_explicit_user_request_missing_images_and_videos",
+  "project": "nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665",
+  "owner": "P04 Grafik/Brand; sole writer /root",
+  "status": "existing_connector_verified_and_project_workflow_bound_not_media_acceptance",
+  "provider": "https://higgsfield.ai/",
+  "plugin_id": "app-6a3293e129088191abf0875820e839da@openai-curated-remote",
+  "skill": "skill://plugin_asdk_app_6a3293e129088191abf0875820e839da/higgsfield/SKILL.md",
+  "existing_registry": "config/page-media-registry.json",
+  "direction": "config/scene-direction.json",
+  "observed_registry": {
+    "routes": 49,
+    "public_routes": 39,
+    "pending_modules": 52,
+    "final_performance_assets_bound": 0,
+    "all_existing_media_bytes_missing": false
+  },
+  "preferred_when_relevant": true,
+  "global_autoload_verified": false,
+  "background_generation_enabled": false,
+  "new_plugin_installation_performed": false,
+  "budget": null,
+  "observed_capabilities_not_pinned_runtime": {
+    "seedance_2_5": "reference-supported video 4-30 seconds",
+    "intone": "one or two speakers; total audio 4-30 seconds; trio requires separate shots",
+    "wan2_7": "short clips 2-15 seconds",
+    "soul_2": "single image reference",
+    "gpt_image_2_5": "multiple references; transparent output parameter available"
+  },
+  "workflow": [
+    "inventory actual missing slot against existing assets and quiet/cinematic direction",
+    "bind script language character originals rights and intended audience",
+    "read current model and tool schema; estimate with identical parameters and bounded funding",
+    "HTTPS cost estimates may upload references: apply the upload boundary first",
+    "persist request/job and idempotency identity; reconcile uncertain submission before retry",
+    "read terminal completion; download actual output within seven-day API retention",
+    "hash version preserve originals and record provenance in the existing media registry",
+    "review character transparency framing German audio captions beginning/middle/end lip sync",
+    "test mobile keyboard pause reduced motion and current release binding",
+    "promote only the individually reviewed asset; keep rejected outputs separate"
+  ],
+  "constraints": {
+    "topups_or_subscriptions_ordered": false,
+    "model_training_optout_on_connected_mcp_account": "unknown_verify_before_sensitive_reference_upload",
+    "api_documentation_default_training_optout": false,
+    "synthetic_images_are_not_product_fitment_or_real_business_evidence": true,
+    "original_assets_must_be_preserved": true,
+    "missing_budget_is_not_zero_or_unlimited": true
+  },
+  "sources": [
+    "https://docs.higgsfield.ai/docs/llms.txt",
+    "https://docs.higgsfield.ai/docs/how-to/sdk.md",
+    "https://docs.higgsfield.ai/docs/concepts/requests.md",
+    "https://docs.higgsfield.ai/docs/concepts/billing-and-retention.md",
+    "https://docs.higgsfield.ai/docs/enterprise/model-training.md"
+  ],
+  "third_party_research": [
+    {
+      "repository": "https://github.com/OSideMedia/higgsfield-ai-prompt-skill",
+      "commit": "6a6a5dd105d285782dd6992692be4d8b3825ca13",
+      "license": "MIT",
+      "status": "partially_read_candidate_not_installed",
+      "finding": "Useful shot methodology; obsolete tool names and Claude-specific installer require selective adaptation"
+    }
+  ],
+  "evidence_limits": "Dated catalog and documentation research, not generated media, complete third-party audit or global installation. Homepage/blog returned 403; no bypass."
+}
