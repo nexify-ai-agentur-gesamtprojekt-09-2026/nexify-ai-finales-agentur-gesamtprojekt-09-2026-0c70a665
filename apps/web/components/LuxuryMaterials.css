@@ -324,3 +324,9 @@
  .workspace-shell .content-layout .content-section{min-height:0;padding:var(--space-5);border-radius:var(--radius-leit)}
  .workspace-shell .content-layout .content-next{margin-inline:var(--space-4);padding:var(--space-5);border-radius:var(--radius-leit)}
 }
+
+/* Preserve readable text when the visitor chooses system contrast colors. */
+@media (forced-colors:active) {
+ .workspace-shell :is(h1,h2,h3,h4),.workspace-shell .home-concept .hc-rate>strong { background:none; color:CanvasText; -webkit-text-fill-color:CanvasText; }
+ .workspace-shell .home-concept .hc-finish-primary { background:ButtonFace; color:ButtonText; border:1px solid ButtonText; }
+}

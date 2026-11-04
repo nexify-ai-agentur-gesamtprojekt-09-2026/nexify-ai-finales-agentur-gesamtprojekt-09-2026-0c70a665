@@ -13,13 +13,13 @@ import artwork from '../../../config/presenter-artwork.json';
 import './IdentityHero.css';
 
 // Current company copy and owner-private editorial cinema.
-// The edited portrait montage is not a speaking or lip-synchronised performance.
+// Native performance is edited with its corresponding audio; director acceptance remains separate.
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
  const headings={de:['Gute Websites','beginnen','bei Ihnen.'],nl:['Goede websites','beginnen','bij u.'],fr:['Un bon site','commence','par vous.'],en:['Good websites','start','with you.']};
  const subtitles={de:'Ihr Unternehmen verdient einen Auftritt, der wirkt.',nl:'Uw onderneming verdient een uitstraling die werkt.',fr:'Votre entreprise mérite une présence qui fait la différence.',en:'Your business deserves a presence that makes an impact.'};
- const cinematic=ownerCinemaPreview&&!_video;
+ const cinematic=(ownerCinemaPreview||welcome.production_accepted===true)&&!_video;
  return <section className={"identity-hero"+(cinematic?" identity-hero-cinema":"")} aria-labelledby="home-headline" data-testid="identity-hero" data-media-state={_video?"verified-public-film":cinematic?"owner-private-edited-video":"editorial-still"} data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
    <div className="identity-copy" data-testid="hero-copy">

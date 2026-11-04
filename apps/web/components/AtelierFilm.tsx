@@ -13,7 +13,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
  const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8);
- const t=words[locale],a=audioWords[locale],playLabel=hero&&asset.hasAudio===true&&muted?t.voice:ended?t.replay:t.play;
+ const t=words[locale],a=audioWords[locale],playLabel=ended?t.replay:t.play;
  function captionMode(enabled:boolean){const tracks=ref.current?.textTracks;if(tracks)for(let i=0;i<tracks.length;i++)tracks[i].mode=enabled?'showing':'hidden';}
  useEffect(()=>{
   const video=ref.current,box=root.current;if(!video||!box)return;
@@ -59,7 +59,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
    </video>
    {buffering&&<span className="atelier-film-loading" role="status">{t.loading}</span>}
    <div className="atelier-film-controls">
-    <button type="button" aria-label={playing?t.pause:playLabel} onClick={()=>playing?pause():void play(hero&&asset.hasAudio===true&&muted)}><svg className="atelier-playback-icon" viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">{playing?<><rect x="5" y="4" width="3" height="12" rx=".7"/><rect x="12" y="4" width="3" height="12" rx=".7"/></>:<path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z"/>}</svg><span>{playing?t.pause:playLabel}</span></button>
+    <button type="button" aria-label={playing?t.pause:playLabel} onClick={()=>playing?pause():void play()}><svg className="atelier-playback-icon" viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">{playing?<><rect x="5" y="4" width="3" height="12" rx=".7"/><rect x="12" y="4" width="3" height="12" rx=".7"/></>:<path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z"/>}</svg><span>{playing?t.pause:playLabel}</span></button>
     {hero&&asset.hasAudio!==false&&<button type="button" aria-label={muted?t.voice:t.mute} onClick={()=>{if(muted)void play(true);else{if(ref.current)ref.current.muted=true;setMuted(true);}}}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h4l5-4v14l-5-4H4Z"/>{muted?<path d="m17 9 5 6m0-6-5 6"/>:<path d="M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>}</svg><span>{muted?t.voice:t.mute}</span></button>}
     {asset.captions&&<button type="button" aria-label={a.captions} aria-pressed={captions} onClick={()=>{const next=!captions;setCaptions(next);captionMode(next);}}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9a3 3 0 1 0 0 6m9-6a3 3 0 1 0 0 6"/></svg><span>{a.captions}</span></button>}
     {hero&&asset.hasAudio===true&&<details className="atelier-volume"><summary aria-label={a.volume}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d="M6 4v16M18 4v16M3 9h6m6 6h6"/><circle cx="6" cy="9" r="2"/><circle cx="18" cy="15" r="2"/></svg><span className="visually-hidden">{a.volume}</span></summary><div><label htmlFor={id+'-volume'}>{a.volume}<input id={id+'-volume'} type="range" min="0" max="1" step="0.05" value={volume} onChange={e=>{const next=Number(e.target.value);setVolume(next);if(ref.current){ref.current.volume=next;ref.current.muted=next===0;}setMuted(next===0);}}/></label></div></details>}
@@ -67,6 +67,6 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
    {hero&&<div className="atelier-film-progress" aria-hidden="true"><span style={{transform:`scaleX(${progress})`}}/></div>}
   </div>
   {failed&&<p role="status" className="atelier-film-error">{t.error}</p>}
-  {hero&&asset.transcript&&<p className="visually-hidden" lang="de">{asset.transcript}</p>}
+  {hero&&asset.transcript&&<details className="atelier-film-transcript"><summary>{t.transcript}</summary><p lang="de">{asset.transcript}</p></details>}
  </div>;
 }
