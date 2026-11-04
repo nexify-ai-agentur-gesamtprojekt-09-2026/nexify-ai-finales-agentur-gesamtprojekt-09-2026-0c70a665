@@ -11,7 +11,7 @@
     "build": "node scripts/generate-public-data.mjs && pnpm --dir ../.. lint && tsc --noEmit -p ../../tsconfig.api.json && tsc --noEmit && vite build --mode public-pwa",
     "typecheck": "node scripts/generate-public-data.mjs && tsc --noEmit",
     "preview": "vite preview",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node scripts/generate-public-data.mjs && node --test tests/*.test.mjs",
     "build:standalone": "pnpm build --mode standalone && node scripts/build-standalone.mjs"
   },
   "dependencies": {

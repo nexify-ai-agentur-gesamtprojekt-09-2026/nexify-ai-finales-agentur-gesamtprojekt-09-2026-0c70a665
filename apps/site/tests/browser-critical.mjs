@@ -30,16 +30,20 @@ const backend=httpServer(async(req,res)=>{try{
 }catch{res.writeHead(500);res.end();}});
 await new Promise(resolve=>backend.listen(0,'127.0.0.1',resolve));
 const cache=await mkdtemp(join(tmpdir(),'nexify-critical-cache-'));
-const server=await createServer({root,cacheDir:cache,server:{port:0,strictPort:false,proxy:{'/api/agent-chat':{target:`http://127.0.0.1:${backend.address().port}`,changeOrigin:false}}},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"'}});
+const server=await createServer({root,cacheDir:cache,server:{port:0,strictPort:false,proxy:{'/api/agent-chat':{target:`http://127.0.0.1:${backend.address().port}`,changeOrigin:false}}},define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"','__NEXIFY_STATIC_ORIENTATION__':false}});
 await server.listen();origin=`http://127.0.0.1:${server.httpServer.address().port}`;
 const browser=await chromium.launch({headless:true});const checks=[],sdkChecks=[],gutters=[],presenters=[],external=[];
 async function context(viewport={width:1920,height:1080}){const c=await browser.newContext({viewport,reducedMotion:'reduce'});await c.route('**/*',r=>{const u=new URL(r.request().url());if(![origin,'null'].includes(u.origin)&&u.protocol!=='data:'){external.push(u.origin);return r.abort();}if(u.pathname==='/api/session')return r.fulfill({status:404,json:{error:'synthetic_no_visitor_session'}});if(u.pathname==='/api/agent-runtime-status')return r.fulfill({status:503,json:{error:'synthetic_runtime_not_connected'}});if(u.pathname.startsWith('/api/')&&u.pathname!=='/api/agent-chat')return r.fulfill({status:403,json:{error:'not_authorized_in_test'}});return r.continue();});return c;}
 async function check(name,fn,sdk=false){await fn();(sdk?sdkChecks:checks).push(name);console.log('PASS '+name);}
+// The orientation chat starts collapsed; visitors open it via the reopen control.
+async function openChat(p){const input=p.locator('#orientation-message');if(!await input.isVisible()){await p.locator('.reopen-chat').click();}await input.waitFor();return input;}
 async function navigate(page,path){await page.goto(origin+path);await page.locator('#locale').waitFor();await page.locator('main h1').first().waitFor();}
 try{
  const c=await context(),page=await c.newPage();
  await check('account_control_fallback_and_auth_routes_present',async()=>{
-  await navigate(page,'/');await page.locator('.site-header .account-control').click();
+  // Agency header has no TEILEKLAR account control (NX-Header, 86ed4b2); its login stays in the navigation.
+  await navigate(page,'/');assert.ok(await page.locator('a[href="/anmelden"]').count()>0,'agency login route reachable');
+  await navigate(page,'/teileklar');await page.locator('.site-header .account-control').click();
   await page.waitForURL('**/anmelden');await page.locator('.auth-fallback').waitFor();
   await navigate(page,'/registrieren');await page.locator('.auth-fallback').waitFor();
  });
@@ -54,14 +58,17 @@ try{
   }
  });
  await check('native_product_menu_and_direct_legal_footer_links',async()=>{
-  await navigate(page,'/');await page.locator('.home-product-links').waitFor();
-  const link=page.locator('.home-product-links a[href="/produkte/nex2fly"]');await link.click();assert.equal(new URL(page.url()).pathname,'/produkte/nex2fly');
+  await navigate(page,'/');await page.locator('.hc-products').waitFor();
+  const link=page.locator('.hc-products a[href="/produkte/nex2fly"]');await link.click();assert.equal(new URL(page.url()).pathname,'/produkte/nex2fly');
   for(const path of ['/impressum','/datenschutz','/vertragsgrundlagen']){const legal=page.locator('.site-footer a[href="'+path+'"]').first();await legal.click();assert.equal(new URL(page.url()).pathname,path);await page.locator('main h1').waitFor();}
  });
  await check('uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes',async()=>{
-  for(const width of [1024,1280,1440,1600,1920]){await page.setViewportSize({width,height:1080});await navigate(page,'/');const poster=page.locator('.identity-hero .trio-media .trio-poster');await poster.waitFor();await poster.evaluate(i=>i.decode&&i.decode().catch(()=>{}));
-   const measurement=await poster.evaluate(p=>{const vr=p.getBoundingClientRect(),stage=p.closest('.trio-stage').getBoundingClientRect(),copy=document.querySelector('.identity-copy')?.getBoundingClientRect(),media=document.querySelector('.identity-media')?.getBoundingClientRect();const overlap=!!(copy&&media&&copy.right>media.left&&media.right>copy.left&&copy.bottom>media.top&&media.bottom>copy.top);return {fit:getComputedStyle(p).objectFit,opacity:Number(getComputedStyle(p).opacity),left:vr.left,right:vr.right,top:vr.top,bottom:vr.bottom,stageLeft:stage.left,stageRight:stage.right,stageTop:stage.top,stageBottom:stage.bottom,width:vr.width,height:vr.height,overflow:document.documentElement.scrollWidth>innerWidth,copyRight:copy?.right||0,mediaLeft:media?.left||0,noOverlap:!overlap};});
-   assert.ok(['cover','contain'].includes(measurement.fit),'brand scene keeps aspect (no distortion): '+measurement.fit);assert.ok(measurement.opacity>=0.99,'brand scene fully visible');assert.ok(measurement.width>0&&measurement.height>0);assert.ok(measurement.left>=measurement.stageLeft-1&&measurement.right<=measurement.stageRight+1&&measurement.top>=measurement.stageTop-1&&measurement.bottom<=measurement.stageBottom+1,'whole scene inside stage (no spill)');assert.equal(measurement.overflow,false);assert.ok(measurement.noOverlap,`identity-copy and identity-media must not overlap (width=${width}, copy.right=${measurement.copyRight}, media.left=${measurement.mediaLeft})`);presenters.push({width,...measurement});}
+  // Editorial still stage (identity-cast): each original figure stays complete (contain, never cover) inside the stage.
+  for(const width of [1024,1280,1440,1600,1920]){await page.setViewportSize({width,height:1080});await navigate(page,'/');const cast=page.locator('.identity-hero .identity-cast');await cast.waitFor();await cast.locator('img').evaluateAll(list=>Promise.all(list.map(i=>i.decode?i.decode().catch(()=>{}):null)));
+   const measurement=await cast.evaluate(stageNode=>{const stage=stageNode.getBoundingClientRect(),copy=document.querySelector('.identity-copy')?.getBoundingClientRect(),media=document.querySelector('.identity-media')?.getBoundingClientRect();const overlap=!!(copy&&media&&copy.right>media.left&&media.right>copy.left&&copy.bottom>media.top&&media.bottom>copy.top);const figures=[...stageNode.querySelectorAll('img')].map(p=>{const vr=p.getBoundingClientRect();return {name:p.className,fit:getComputedStyle(p).objectFit,opacity:Number(getComputedStyle(p).opacity),loaded:p.complete&&p.naturalWidth>0,left:vr.left,right:vr.right,top:vr.top,bottom:vr.bottom,width:vr.width,height:vr.height};});return {figures,stageLeft:stage.left,stageRight:stage.right,stageTop:stage.top,stageBottom:stage.bottom,overflow:document.documentElement.scrollWidth>innerWidth,copyRight:copy?.right||0,mediaLeft:media?.left||0,noOverlap:!overlap};});
+   assert.equal(measurement.figures.length,3,'Pascal, NeX and Oracle present');
+   for(const f of measurement.figures){assert.equal(f.fit,'contain',f.name+' keeps the complete figure (no cover crop)');assert.ok(f.loaded,f.name+' decoded');assert.ok(f.opacity>=0.99,f.name+' fully visible');assert.ok(f.width>0&&f.height>0);assert.ok(f.left>=measurement.stageLeft-1&&f.right<=measurement.stageRight+1&&f.top>=measurement.stageTop-1&&f.bottom<=measurement.stageBottom+1,f.name+' inside stage (no spill)');}
+   assert.equal(measurement.overflow,false);assert.ok(measurement.noOverlap,`identity-copy and identity-media must not overlap (width=${width}, copy.right=${measurement.copyRight}, media.left=${measurement.mediaLeft})`);presenters.push({width,...measurement});}
  });
  for(const width of [1920,390]){await page.setViewportSize({width,height:1080});for(const path of ['/produkte/nex2fly','/teileklar/werkstatt','/impressum']){await navigate(page,path);const gutter=await page.locator('.content-supplement .editorial-explainers').evaluate(n=>({left:parseFloat(getComputedStyle(n).paddingLeft),right:parseFloat(getComputedStyle(n).paddingRight)}));assert.ok(gutter.left>=24&&gutter.right>=24);gutters.push({width,path,gutter,passed:true});}}
  await c.close();
@@ -69,12 +76,12 @@ try{
   const c=await context(),p=await c.newPage();await p.goto(new URL('../standalone/nexify-preview.html',import.meta.url).href+'#/produkte/nex2fly');await p.locator('main h1').waitFor();await p.locator('.skip-link').focus();await p.keyboard.press('Enter');assert.equal(new URL(p.url()).hash,'#/produkte/nex2fly');assert.equal(await p.evaluate(()=>document.activeElement?.id),'page-content');await c.close();
  });
  await check('sdk_guided_preview_works_when_visitor_session_is_404',async()=>{
-  const c=await context(),p=await c.newPage();await navigate(p,'/produkte/nex2fly');const input=p.locator('#orientation-message');await input.waitFor();await input.fill('Wie beginne ich mit NeX2fly?');const response=p.waitForResponse(r=>r.url().endsWith('/api/agent-chat'));await p.locator('.orientation-composer button').first().click();const r=await response;assert.equal(r.status(),200);assert.match(r.headers()['content-type'],/text\/event-stream/);await p.locator('.orientation-message.role-assistant').waitFor();assert.match(await p.locator('.orientation-message.role-assistant').innerText(),/ohne Live-KI/);await c.close();
+  const c=await context(),p=await c.newPage();await navigate(p,'/produkte/nex2fly');const input=await openChat(p);await input.fill('Wie beginne ich mit NeX2fly?');const response=p.waitForResponse(r=>r.url().endsWith('/api/agent-chat'));await p.locator('.orientation-composer button').first().click();const r=await response;assert.equal(r.status(),200);assert.match(r.headers()['content-type'],/text\/event-stream/);await p.locator('.orientation-message.role-assistant').waitFor();assert.match(await p.locator('.orientation-message.role-assistant').innerText(),/ohne Live-KI/);await c.close();
  },true);
  await check('sdk_unknown_and_private_page_context_fail_closed_with_draft_retained',async()=>{
   for(const path of ['/unknown-unlisted',map.pages.find(p=>p.access.visibility!=='public').path]){
    const c=await context(),p=await c.newPage();await c.route('**/api/agent-chat',r=>{const body=r.request().postDataJSON();body.page_path=path;return r.continue({postData:JSON.stringify(body)});});
-   await navigate(p,'/produkte/nex2fly');const input=p.locator('#orientation-message');await input.waitFor();await input.fill('Synthetic retained draft');const response=p.waitForResponse(r=>r.url().endsWith('/api/agent-chat'));await p.locator('.orientation-composer button').first().click();assert.equal((await response).status(),422);await p.locator('.public-orientation [role="alert"]').waitFor();assert.equal(await input.inputValue(),'Synthetic retained draft');assert.equal(await p.locator('.orientation-message.role-assistant').count(),0);await c.close();
+   await navigate(p,'/produkte/nex2fly');const input=await openChat(p);await input.fill('Synthetic retained draft');const response=p.waitForResponse(r=>r.url().endsWith('/api/agent-chat'));await p.locator('.orientation-composer button').first().click();assert.equal((await response).status(),422);await p.locator('.public-orientation [role="alert"]').waitFor();assert.equal(await input.inputValue(),'Synthetic retained draft');assert.equal(await p.locator('.orientation-message.role-assistant').count(),0);await c.close();
   }
  },true);
  await check('sdk_mobile_real_chat_no_overflow_escape_and_focus_return',async()=>{

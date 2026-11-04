@@ -3060,9 +3060,9 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/SiteFooter.tsx": "2546230d1e15a5427488f0412306b357847120867389adf814b402b594c38284",
-    "apps/web/components/WorkspaceRebuild.css": "69068ca8a65ee3915df8c6243b38daa6377a72e4e9f3a6def56b63266b5246a8",
-    "config/site-map.json": "69fbf53a45d48c562a3c37ff9e241c01fb49f7daf4252748490e4ea7c8aa9845",
+    "apps/web/components/SiteFooter.tsx": "f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462",
+    "apps/web/components/WorkspaceRebuild.css": "063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35",
+    "config/site-map.json": "3407aea2d144d69002a28db4ec2976079b94ea28d5b2b1446a8947d535bee971",
     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
   "missing_license_route": true,

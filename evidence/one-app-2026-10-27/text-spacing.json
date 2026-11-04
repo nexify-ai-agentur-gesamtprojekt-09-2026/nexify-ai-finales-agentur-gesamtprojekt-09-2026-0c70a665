@@ -2,91 +2,134 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-10-31T23:08:39.123Z",
+  "observed_at": "2026-11-04T13:12:19.462Z",
   "source_sha256": {
-    "apps/site/.generated/public-site.json": "bdd8280579578f0f364e7824bc85e0a4a292dd791205a9d695b73fe9e6645cde",
-    "apps/site/index.html": "910aa595b1392b154c0d1e51d569a1ae4eea3680e53e98595faa04b479b1c4f1",
-    "apps/site/src/Auth.tsx": "ae545d6297c272c47a46e2cdc669c2d9bc2424c94efede613b9dcf34d6da2d45",
+    "apps/site/.generated/public-site.json": "a7dc12b7d46a4862744acd65875f7d3eea8ccb7008c34be75239a6134f18ad82",
+    "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
+    "apps/site/src/Auth.tsx": "7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
     "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
-    "apps/site/src/main.tsx": "923a11979b649159c9fe3c6931219fa1f02f194fde0a61c5b705c5216e9dd523",
+    "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
     "apps/site/src/observability.ts": "b42fcb14289b34a6295fea642438a2b0b12196fdd67317bf1836c0a2db87631d",
     "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
     "apps/site/tests/browser-text-spacing.mjs": "bfa4ae535778d86b3ece517fd7408d7d0bd0f116a8c57c02860a29f107ae7fcc",
-    "apps/site/vite.config.ts": "89ffc11349f5d88645c2d627f3a7fa048be78107ea93953ba8f3501aeda1579a",
+    "apps/site/vite.config.ts": "c6e8b8d847228d2c6c68ef3b073ead3a7749b959971684e26d71b5b003639932",
     "apps/web/app/globals.css": "c4b3f0561a5d9e1786d516c6db04de4b9ed1e1053dfb5e721de6082a1d4c0bfc",
     "apps/web/components/ActionControl.css": "92922b5e2bb64513c3db4fcbc18f388de146d9e581a1a340856e11eab90377ae",
     "apps/web/components/ActionControl.tsx": "6909b910d4a417b6cc917eadabc0eded4a1a26309a9fb1f77c46a23ebdd8b3b0",
+    "apps/web/components/AtelierFilm.css": "b337090b63db4f66b91108097c098450a1d983203066b85d9d4b579045caf75e",
+    "apps/web/components/AtelierFilm.tsx": "156c48e84a55198f4e0d9660f9e237d31470398b480844f49440e849798fc98b",
     "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
+    "apps/web/components/ChatResizeHandle.tsx": "f0adde94a5172682b3c7b608c0038365054725b4435caa7c79395368e8af7573",
+    "apps/web/components/ContactRequestForm.tsx": "c6a54d8e9e786ab56fe9c92791b60e47d39ba53c3670d55aea17e07494f53e34",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
-    "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
-    "apps/web/components/ExplainerSections.tsx": "8124204256ebd8562efb53f3e7d70efe2bf03a448219160fc44f60327b817c46",
-    "apps/web/components/HomeContent.tsx": "fc4481774f97c78f8f873f16f58d429b641ab7f19323958160b2c1f89ee72136",
+    "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
+    "apps/web/components/DomainArtwork.tsx": "40cf9fd52c61bcf20aa140b520f925e7647906266a7cd4c273a4e55d52d85e13",
+    "apps/web/components/ExplainerSections.tsx": "87f9a69de6af9cf18110587ac0ec744b14f284e1b74babb129092f459fd6bd45",
+    "apps/web/components/HomeConcept.css": "5e397a0fa3dd415568ef80969599b7b159099bc3df53f869b20ee9c8074a8d52",
+    "apps/web/components/HomeContent.tsx": "9e000fea5f6b5e22514007d3cc8af7829f618cc670bf0e4fcc63cb35d5e91716",
     "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
-    "apps/web/components/IdentityHero.tsx": "d54887ee9c5085f75dea5a3f65385c0275312cb57ad9885ff912d7024814eef8",
+    "apps/web/components/IdentityHero.tsx": "db7f4905d250796e2bb4f89fd238902b0fc59363ff824aa9baeea098378d50b0",
     "apps/web/components/InstallInvitation.css": "cb5e290f23a79a29767540098a1cd04a48a87112ecfd83baf3fe370b623b6117",
-    "apps/web/components/InstallInvitation.tsx": "27571e28b2a9d3984353c3b971e96f0c5167e0b37ff8b81074047dd78f38d2e8",
-    "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
+    "apps/web/components/InstallInvitation.tsx": "6acc2a91dd39947c185b04ee138b2e99564acb6b1db0d566b59323515c0ad113",
+    "apps/web/components/LocaleAwareClerk.tsx": "f93aececbd2f8bc5d6c9c3f82504b5d42753f819ad92e919f14505deb9284e45",
+    "apps/web/components/LuxuryMaterials.css": "2647600545532c8e8c6a52a1b08361654029f6c0692fcac9f80721728ccf3612",
     "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
     "apps/web/components/MailWorkspacePanel.tsx": "b1c8f20caa4b4a7df25330758c2aad397cfc04a89f4fb1385f133b1560548ee5",
-    "apps/web/components/NextRouterBridge.tsx": "13262725f7487b2616c2a8ac2d7c15f55a4eee5fe4c257db9f69a1460daa7157",
+    "apps/web/components/NextRouterBridge.tsx": "9697b38ccc3f5aebc46875cee305f624e09efe1723c74a65a829ec870ce59f23",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
-    "apps/web/components/OracleCompanion.tsx": "eaa52d6f997fe9645d5f45dc8ed965cfdbba79076ba9a867801bfcd7eeecb49a",
+    "apps/web/components/OracleCompanion.tsx": "945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b",
     "apps/web/components/PageMediaBand.css": "20dee8aaf640983cd1a9cc8fef105c047a99911193459f4b369f4383da7bee42",
-    "apps/web/components/PageMediaBand.tsx": "4f174fac30071d40640f228ed4a3766009dfff571ef95d529921a06a97f5c42d",
+    "apps/web/components/PageMediaBand.tsx": "7c4263489485f024ee2838c34c9c6584642d79dff3580ce06a175015da942263",
     "apps/web/components/PartnerRequestForm.css": "93e0ff6a0456fad4b7327bfa1e1cb62a35f32829f32199be196b6e1f1d9971d9",
     "apps/web/components/PartnerRequestForm.tsx": "59302cc0a3289df41c2ca3f4ffe88518186db67fa3ad8fd029e1e31a99fdc7c9",
     "apps/web/components/PresenterEditorial.css": "c407c763724b152f9f373faaee94be5bc630e40ae51d7a1971d24b449ab6cc1e",
-    "apps/web/components/PresenterGuide.tsx": "2a03a576d63b0312693177d4f266318eab30f9a7d1d1430b30fa11d6e05faba4",
-    "apps/web/components/PresenterScene.tsx": "751a5cb0351d1e3ec25f56d8a87675dfbddd99746ca02293f7c9bc9edc5a3982",
+    "apps/web/components/PresenterGuide.tsx": "e0c54040d36344864400797637f4289f7df7d4a78d8e3d3615c0ecfac757c1cc",
+    "apps/web/components/PresenterScene.tsx": "11a38fab63d62a65b767dee227cb888865335e4d7183c694071f771c39efcd49",
     "apps/web/components/PresenterVideo.css": "2f0c719aa78d6d8ffc0f7d57bf57a3553630f34d8729a47b4fcca2638c91e992",
     "apps/web/components/PresenterVideo.tsx": "c9917dcd7f033dab440967595db1a21fafafc3b5c44cfb8b7818fcf11d3ea94f",
     "apps/web/components/ProblemExplorer.css": "b097aca7f8d135896e136feb05f2eac08a420b905e8be5c7dab79f82cb1e9a33",
-    "apps/web/components/ProblemExplorer.tsx": "1ac68abcc64b3632f336b479b5293a297823444acb19a731106a08e5a804c547",
-    "apps/web/components/PublicContent.tsx": "c73ad055c78de77e113283e2c4cd091a6ec6f5bcaa81bab1126293122dfa419d",
-    "apps/web/components/PublicContentLayout.css": "ee819b96a19b37eb9367a802f3245ce7972f2fe60e5257c683850757cb9b08d8",
-    "apps/web/components/PublicExperience.tsx": "24db69babb871c62e303a19728dc267ab6ed8dbc6bf237df84b314f0008139c4",
+    "apps/web/components/ProblemExplorer.tsx": "61edea11f3f625248e1e0392c82d60825ff8e53d53b74fa94acd867be7d56577",
+    "apps/web/components/ProjectFilesPanel.css": "878e009d14076c6e791d0d130686e7102feee12debf7bc5b916d8acf04a08c55",
+    "apps/web/components/ProjectFilesPanel.tsx": "2fb523dc07763068deb19b1a3e24caff80ed93641ed654ed4372566e7301c5c9",
+    "apps/web/components/PublicContent.tsx": "ffa7781698f3bb29667910ae00776cb06d8f995bdf312fd72c010a2154d57d01",
+    "apps/web/components/PublicContentLayout.css": "84dd3df6485bfda706ac9144a4458e23ea2ae64a51ae46c2545b8f940a830b96",
+    "apps/web/components/PublicExperience.tsx": "f4619eb7baa20000f8040e744e2ba56bfdc3b715177c2d227291cf53fb8e8c2e",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
-    "apps/web/components/PublicOrientationChat.css": "6a012f31e615d4f515fbcf24a730b6ff29a7d416360b94130e7ad8147fc5e759",
-    "apps/web/components/PublicOrientationChat.tsx": "b0e1ede1014d3568cd04d5fe6a7dce766084e2d849118b5eaed998ae37189675",
-    "apps/web/components/PublicRequestFallback.tsx": "dc8ba5eb69dcec426d0419980d3a19ad0992318928428283c92183127ab837de",
-    "apps/web/components/Router.tsx": "f0f443ef656272b59e14ac6ebef104a22d7864ef610a46bfd3a89c04fb76a4b6",
+    "apps/web/components/PublicOrientationChat.css": "88fbb8fbb9629b8f0d173bf5889b27e82109cedd70a16499810b024d702b8c58",
+    "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
+    "apps/web/components/PublicRequestFallback.tsx": "19c334e0ef95d106b0224f9bce757570558fc82f588fb2b01b71c6dfd35e83c7",
+    "apps/web/components/Router.tsx": "be9acd85951357f85266ce6d03f13ec83b6191a08950977f78ae0b505fd026bc",
     "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
-    "apps/web/components/SiteFooter.tsx": "0f33920bb9adac5c2af872f78f6599c54a8b683d74c2965b678dc067a6ca6b46",
-    "apps/web/components/SiteNavigation.tsx": "0223d28c07acec98f20c535c6b973bbb137f0711aceef04dd516785aa4f3c162",
-    "apps/web/components/TrioScene.css": "3d34d0255c6297b079c13191295bf4432987964406010baa3264f6df1b67e6f1",
-    "apps/web/components/TrioScene.tsx": "47b098e371f2962c36c528cfdff90ae3c024f9304495dafdde37790aaef6b29d",
+    "apps/web/components/SiteFooter.css": "0151ff5b9c3be04090787dcd7406e2095fe5750de33bbc270d44c439fec86a0a",
+    "apps/web/components/SiteFooter.tsx": "f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462",
+    "apps/web/components/SiteNavigation.tsx": "4b2a4a1205497bddb42e629262807644be83883cbca52ca8a4534a7b56900cff",
+    "apps/web/components/TrioScene.css": "6e2332a05142d57b5da1c5dc677b4c94d52de0cef51a8cc202430c775062ea1f",
+    "apps/web/components/TrioScene.tsx": "2100aaafa2327c8867d660d7c2a5699217f8d4bb04c6fad1a3abea33b372e06d",
     "apps/web/components/WorkshopDirectory.css": "005e64cb50757f86342946aabdff95eebb6bb284580e2a190e28fe5eafbc3374",
     "apps/web/components/WorkshopDirectory.tsx": "46da756d96570baff9a7dd78c60b2dd2ed91b7c89f2a8b086211d4b30e2a3d56",
-    "apps/web/components/Workspace.tsx": "66635bfc84ab930e130728fcf951c8059f75523eb78dd80624b4fe25e4da3167",
+    "apps/web/components/Workspace.tsx": "41cbfd5625ced6698659063151a385c37464effa3b514868e40e9d8c36f7388c",
     "apps/web/components/WorkspaceCapabilities.ts": "010cc923971b1e6d033ee9f791ca3c0ba5eb28cd5139a1a0c86532eb5ce4189e",
-    "apps/web/components/WorkspaceRebuild.css": "c1933759e96b3420d2e35c56a72ee6d9baa1aa23efc7e91ba72cc9fb823522c1",
+    "apps/web/components/WorkspaceRebuild.css": "063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35",
     "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
+    "apps/web/components/shop/AddressStep.tsx": "c942e1b2da293fc48fafbd7df918a46f375d29caa20d80a8aa2ee2fd3a862c47",
+    "apps/web/components/shop/AdminOrders.tsx": "194062721ac30bc8c7074c2e3ca0c07814f0e14737134f1cd69f46818dbd4b80",
+    "apps/web/components/shop/AdminShop.tsx": "996627d3390e41458cd13aedba60d7b70e29ee79ffb2d520af53b924add845dd",
+    "apps/web/components/shop/AuthForms.tsx": "3ba1c8717ae17929d9ff0507861a1165e806de7bfff6cc6d50ac22599835d746",
+    "apps/web/components/shop/CartView.tsx": "bba311ef5ee182aabbfb05a32a4c8963253011d232ac8a6fe98b5df1bb69bf7f",
+    "apps/web/components/shop/CatalogView.tsx": "10301c00bf91cd0b763fda760761a7d3a98ae83c7553660e537cd0ea03114bbc",
+    "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
+    "apps/web/components/shop/CategoryTitle.tsx": "cd86981ffd2745b5894bce3eab1390cbdb190319453198052088f3f2446d1588",
+    "apps/web/components/shop/Checkout.tsx": "3498985f0905a94791352873af00aadd0ce48fdd58078f894fe660f12abcc33c",
+    "apps/web/components/shop/FitmentChecklist.tsx": "5898dabf37d137e92ac524ba2db967d5f77256584342c53b300a53174fbdbc27",
+    "apps/web/components/shop/OrderConfirmation.tsx": "5220cac964b9af8d1e80b8e080d048ab636ad0624c4a6bc582ef4f78f8a70a0a",
+    "apps/web/components/shop/OrderList.tsx": "aa7a199f2027050d1be559b3c24d5d2f7c0b171938b29eeca7d678314025970c",
+    "apps/web/components/shop/OrderTimeline.tsx": "4668fd941019728bc5ed05046383ec9e61bdd3e15854815baf24b45a14d36364",
+    "apps/web/components/shop/PartnerJourney.tsx": "70b54dfd7a183df39a1c912718c20af1264429bc66900d2ac98ab971544e7427",
+    "apps/web/components/shop/PhaseNotice.tsx": "114b4eb85cf300d9b32a02070813372b66c6a3bb8bea74e460ed51c193c4df10",
+    "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
+    "apps/web/components/shop/ProductDetail.tsx": "3112ef05cc7e844a48bf236c12aa4362ba2caa8f96a4bacce24289eb00dfe48d",
+    "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
+    "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
+    "apps/web/components/shop/ShopEntry.tsx": "8240f3591f264844c4c22fb68c7b80dc2d080a138447eb7a1e582231f5c6ad2a",
+    "apps/web/components/shop/ShopFrame.tsx": "bd0c530dc292d3ea567ef2a555fc6a1f18de6aa5dbe355d2a08d4de3d3f08ad1",
+    "apps/web/components/shop/TeileklarLegal.tsx": "8c934e1c938b951d6b4c7977e8095fad2c5560fc6c402a044b01f7d769c60e6f",
+    "apps/web/components/shop/TyreCalculator.tsx": "108c82f5bdf0f903b0887bbb67b317baead5f6167e6fb3685ea53e2935b6ceaf",
+    "apps/web/components/shop/WorkshopDetail.tsx": "85771ec780758995d7c034150f9768aecff896d6dfaff48f7040cb63c8267c7f",
+    "apps/web/components/shop/WorkshopFinder.tsx": "11f34ef13510ce7cac4cb11884c7120d0584cd2337724f2ec5167f2ca88a4175",
+    "apps/web/components/shop/WorkshopMap.tsx": "5e05dd616d16692c523f0c5dca9829025d8968f81c2cb9365d64cc810282ab73",
+    "apps/web/components/shop/api.ts": "858b505c670227267cd0159bd68fcbbf9bfcb2aa3822ca82251de9d4455f5b3f",
+    "apps/web/components/shop/shop.css": "2f7ceccd2495078325ae2dd23f849e7e0f084bffd5994929f9153233130cdace",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
+    "apps/web/lib/contact-attempt.ts": "2deb708f4c7ceac90b316ee661799d9bd346223e04c1bcc363d7645b9111ee04",
+    "apps/web/lib/contact-copy.ts": "1db2001ac62e96e582ebe4ae43fa6114d7b8913ce936a1c30c082f1300644a91",
+    "apps/web/lib/editorial-autoplay.ts": "2d88df8cbeb17c158a9ccfa7f4c2869c89ae09cb701d0e80e4b588ec8a5413cf",
     "apps/web/lib/home-scenes.ts": "4eb5f25c1c119de3b04c85eacb86432b9f4992b8a055ed349488dab18fd4e8cf",
-    "apps/web/lib/i18n.ts": "d3a05fcb6172214809879c8d27398f69306953cc7b7995529e96d273b2e1e2bd",
+    "apps/web/lib/i18n.ts": "e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213",
     "apps/web/lib/page-types.ts": "db02bf602f1a598efff25e951d7e809737e8604059580529da8ff794af7c60fa",
+    "apps/web/lib/project-files.ts": "458a8bef0abfe106938d8e877885c2677a2b2763bf33a45cab6cfc381de721ba",
+    "apps/web/lib/static-orientation.ts": "5b30bd0cf43898c74204fc479adaaded52908819868abe811c0af43c399df3ab",
     "apps/web/public/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
     "apps/web/public/fonts/geist-mono-latin.woff2": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/web/public/media/presenters/nex-toucan-121a804c.png": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
     "apps/web/public/media/presenters/pascal-original-6dd03834.png": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
     "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
-    "config/design-tokens.json": "f57aacebc6a82875593d9a9606fc680b9779835977eaf9207d6851170095430c",
+    "config/design-tokens.json": "84bb18f0f4db89b42b5671b91a69a1b75b7b0e336f9dca70e1ed75c288e3f863",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
-    "config/site-map.json": "524345f969ebd5129c74f5ed2f39df611008c30dd3108a71e8c3acbd8072d879",
+    "config/site-map.json": "3407aea2d144d69002a28db4ec2976079b94ea28d5b2b1446a8947d535bee971",
     "config/text-resize-sources.json": "8cef37815cd15a9f0c0180b0999bafb0aceba320b4bd0c537af68fb8bd8ae8b8",
     "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
-    "packages/tokens/tokens.css": "19998b8c1a4c1f890b3faa278e7b6f2ac7203fa6a5f6988a42f8b2b70411d544",
-    "packages/tokens/tokens.json": "e4434ec8047c0057df34a154c22bd05e209a034ef18ea87173a65b633f704686",
-    "packages/tokens/tokens.ts": "1c6ff9b905f77cbb56619159f43cc34b9a76ff01d66badc890c4aa6b9cc29124",
-    "pnpm-lock.yaml": "56baa251e0717c15b49c72092c9099e412d74e5a7db2827dc85d51511633c7e2"
+    "packages/tokens/tokens.css": "dd45d0d93f506073aa718b701019d0e163b233a8d881a9245391c1ded94d06ae",
+    "packages/tokens/tokens.json": "229ddd2a1ea340d656943dd79992b7d48dff3be7ec1629473cf725f20cc8e412",
+    "packages/tokens/tokens.ts": "859ff4de7a5f7363af79669c8b12835bbaae32e3e15ac9364f545164f577f433",
+    "pnpm-lock.yaml": "0de51b88300252563fb0ee688d2c57b59c8b302e948ab23e8f8602b45e8fd577"
   },
   "scope": "text-spacing and 200% text resize geometry; not screenreader or full visual conformance",
   "checks": [
@@ -107,7 +150,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 633,
+        "count": 523,
         "all_doubled": true
       },
       "overflow": false,
@@ -130,7 +173,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 443,
+        "count": 494,
         "all_doubled": true
       },
       "overflow": false,
@@ -153,7 +196,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 446,
+        "count": 493,
         "all_doubled": true
       },
       "overflow": false,
@@ -176,7 +219,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 446,
+        "count": 493,
         "all_doubled": true
       },
       "overflow": false,
@@ -199,7 +242,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 453,
+        "count": 493,
         "all_doubled": true
       },
       "overflow": false,
@@ -222,7 +265,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 446,
+        "count": 473,
         "all_doubled": true
       },
       "overflow": false,
@@ -245,7 +288,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 432,
+        "count": 472,
         "all_doubled": true
       },
       "overflow": false,
@@ -268,7 +311,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 430,
+        "count": 460,
         "all_doubled": true
       },
       "overflow": false,
@@ -288,98 +331,6 @@
     },
     {
       "path": "/wissen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 416,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 415,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/unternehmen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/unternehmen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/unternehmen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 416,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/kontakt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/kontakt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/kontakt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 418,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/nex2fly",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -390,6 +341,98 @@
       "content_overflows": []
     },
     {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 469,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/unternehmen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 462,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/kontakt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 471,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 504,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/produkte/one",
       "width": 390,
       "text_spacing": true,
@@ -406,7 +449,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 418,
+        "count": 480,
         "all_doubled": true
       },
       "overflow": false,
@@ -429,7 +472,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 418,
+        "count": 480,
         "all_doubled": true
       },
       "overflow": false,
@@ -452,7 +495,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 407,
+        "count": 441,
         "all_doubled": true
       },
       "overflow": false,
@@ -475,7 +518,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 407,
+        "count": 441,
         "all_doubled": true
       },
       "overflow": false,
@@ -498,7 +541,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 407,
+        "count": 441,
         "all_doubled": true
       },
       "overflow": false,
@@ -521,7 +564,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 407,
+        "count": 441,
         "all_doubled": true
       },
       "overflow": false,
@@ -544,7 +587,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 407,
+        "count": 441,
         "all_doubled": true
       },
       "overflow": false,
@@ -567,7 +610,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 407,
+        "count": 441,
         "all_doubled": true
       },
       "overflow": false,
@@ -590,7 +633,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 406,
+        "count": 444,
         "all_doubled": true
       },
       "overflow": false,
@@ -613,7 +656,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 418,
+        "count": 444,
         "all_doubled": true
       },
       "overflow": false,
@@ -636,7 +679,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 418,
+        "count": 453,
         "all_doubled": true
       },
       "overflow": false,
@@ -659,7 +702,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 410,
+        "count": 449,
         "all_doubled": true
       },
       "overflow": false,
@@ -682,7 +725,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 404,
+        "count": 440,
         "all_doubled": true
       },
       "overflow": false,
@@ -705,7 +748,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 393,
+        "count": 440,
         "all_doubled": true
       },
       "overflow": false,
@@ -728,7 +771,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 417,
+        "count": 453,
         "all_doubled": true
       },
       "overflow": false,
@@ -751,7 +794,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 417,
+        "count": 434,
         "all_doubled": true
       },
       "overflow": false,
@@ -774,7 +817,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 417,
+        "count": 478,
         "all_doubled": true
       },
       "overflow": false,
@@ -797,7 +840,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 401,
+        "count": 568,
         "all_doubled": true
       },
       "overflow": false,
@@ -817,75 +860,6 @@
     },
     {
       "path": "/teileklar/termine",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 385,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/gutscheine",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 401,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/partner-werden",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/partner-werden",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/partner-werden",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 416,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/teileklar/werkstatt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/werkstatt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/teileklar/werkstatt",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -896,6 +870,75 @@
       "content_overflows": []
     },
     {
+      "path": "/teileklar/gutscheine",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 420,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 498,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 449,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/teileklar/rechtliches",
       "width": 390,
       "text_spacing": true,
@@ -912,7 +955,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 386,
+        "count": 455,
         "all_doubled": true
       },
       "overflow": false,
@@ -935,7 +978,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 401,
+        "count": 448,
         "all_doubled": true
       },
       "overflow": false,
@@ -958,7 +1001,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 401,
+        "count": 432,
         "all_doubled": true
       },
       "overflow": false,
@@ -981,7 +1024,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 401,
+        "count": 432,
         "all_doubled": true
       },
       "overflow": false,

@@ -1,3 +1,13 @@
+# Aktuell · Funktionsfähigkeit vor Video · 04.11.2026 (Branch claude/youthful-sagan-bzmkkr)
+
+Nutzerentscheidung: zuerst funktionsfähiges Gesamtzielbild und grüne Prüfkette, Videos danach (AGENTS.md). Home-Hero zeigt bis zur Filmabnahme die redaktionelle Standbild-Bühne mit dezenter Präsentationsbewegung (Reduced Motion statisch). Kanonischer Assistentenname „AIFly ORACLE“; Panelmarke „NeX Agentic AIFly“.
+
+Behoben: next-web-Test auf kanonischen Namen; Site-Tests erzeugen öffentliche Daten selbst (CI-ENOENT); Rohfarben in LuxuryMaterials/PublicOrientationChat auf Tokens. Durch echte Browserläufe neu erhoben: kritischer Pfad (8/8), rechtlicher Footer Vite+Next (234 Ansichten, 12 Interaktionen), öffentliche Fallbacks (18), Einwilligungs-UI (18), Workspace-Lesen (4), Fehlererfassung Vite+Next, Textvergrößerung (39 Routen). Tests nur an das neue Markup angepasst, Prüfabsicht erhalten. Abgleichsregister an aktuellen Quellstand gebunden (Validator fehlerfrei).
+
+Offen (Altverträge, Entscheidung nach Bestpraxis folgt): Shop-/Katalognachweis prüft die nicht mehr eingebundene ShopPanel-/Gateway-Strecke; Live-Shop nutzt shop-api (`/api/shop/products`, MongoDB) – neuer Nachweis braucht eigene Testumgebung. Clerk-Locale-Brücke seit D-007 entfernt; Next-Referenztest `browser-public-experience.mjs` teilweise angepasst. Befunde: Katalog unterscheidet „nicht konfiguriert“ und „Verbindungsfehler“ nicht mehr; Home rendert die in den Daten definierten Chat-Aktionen nicht. Review-Check braucht API-Key-Secret im Repository.
+
+---
+
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026
 
 Führend ist ausdrücklich `appgprj_6ae7ad63df2081918a843f996caf9422` / nexify-ai-factory-20261101. Ausgangscommit 0bbce305fb7e11233a7824d5b509e8f9e49e5ea7; diese Revision bleibt im vorhandenen Auftrag P01–P26. Details: docs/contracts/migration-2026-11-04.md und docs/production/hero-requirements-2026-11-04.md. Keine DNS-, Datenbank- oder produktive Fachruntimeumstellung.

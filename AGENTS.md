@@ -2,6 +2,17 @@
 
 Stand 2026-09-29 · Fassung 1.0 · Freigabe der Entscheidungen E1/E3/E4/E5/E6/E12 steht aus (siehe `docs/09-final/08-recht-und-compliance.md`).
 
+## Priorität Funktionsfähigkeit vor Video · Nutzerentscheidung 04.11.2026 (später)
+
+Ausdrückliche Nutzerweisung: zuerst das funktionsfähige Gesamtzielbild herstellen,
+damit die Seiten online gehen können: Seiten, Nutzerwege, Portale/Zugänge,
+grüne Prüfkette. Optimierung danach. Die Hero-Videoproduktion ist bis dahin
+nachgelagert. Bis zur abgenommenen Videoaufnahme zeigt der Home-Hero die
+redaktionelle Standbild-Bühne mit dezenter Präsentationsbewegung (Reduced
+Motion statisch). Das gilt ausdrücklich als Übergang. Die Videoanforderung im
+folgenden Abschnitt bleibt das Endziel; `production_accepted=false` bleibt.
+Kanonische Schreibweise des Assistenten: „AIFly ORACLE“.
+
 ## Aktuelle Führungsentscheidung · 04.11.2026
 
 Die ausdrückliche Nutzerentscheidung führt diese Website als Arbeits-, Gestaltungs-

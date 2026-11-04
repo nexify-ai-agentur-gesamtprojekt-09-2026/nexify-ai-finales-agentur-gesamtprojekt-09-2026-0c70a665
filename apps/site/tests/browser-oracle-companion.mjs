@@ -33,7 +33,7 @@ try{
    if(width<=820){await page.locator('.reopen-chat').focus();await page.keyboard.press('Enter');}
    await page.locator('.public-orientation').waitFor();
    const avatar=page.locator('.panel-heading .oracle-companion'),img=avatar.locator('img');
-   assert.equal(await page.locator('.panel-heading h2').innerText(),'AI Fly Oracle');
+   assert.equal(await page.locator('.panel-heading h2').innerText(),'NeX Agentic AIFly');
    assert.equal(await avatar.getAttribute('aria-hidden'),'true');assert.equal(await img.getAttribute('alt'),'');
    assert.equal(await img.evaluate(i=>i.complete&&i.naturalWidth===512&&i.naturalHeight===512),true);
    const response=await context.request.get(origin+await img.getAttribute('src'));assert.equal(createHash('sha256').update(await response.body()).digest('hex'),before[sources.at(-1)]);
@@ -46,11 +46,11 @@ try{
     const a=document.querySelector('.panel-heading .oracle-companion').getBoundingClientRect(),heading=document.querySelector('.panel-heading h2').getBoundingClientRect(),close=document.querySelector('.panel-heading .icon-button').getBoundingClientRect();
     return {overflow:document.documentElement.scrollWidth>innerWidth+1,overlapsText:a.right>heading.left,overlapsClose:a.right>close.left,headingVisible:heading.right<=close.left};
    });assert.deepEqual(shape,{overflow:false,overlapsText:false,overlapsClose:false,headingVisible:true});
-   const accessibility=await page.locator('#aifly-panel').ariaSnapshot();assert.ok(accessibility.includes('AI Fly Oracle'));assert.ok(!accessibility.includes('ai-fly-oracle-avatar'));
+   const accessibility=await page.locator('#aifly-panel').ariaSnapshot();assert.ok(accessibility.includes('AIFly ORACLE'));assert.ok(!accessibility.includes('ai-fly-oracle-avatar'));
    await page.screenshot({path:`${directory}/${width}-${reducedMotion}.png`});
    release();await page.locator('.public-orientation .error-note').waitFor();await page.waitForFunction(()=>document.querySelector('.panel-heading .oracle-companion')?.getAttribute('data-state')==='idle');
    assert.equal(await page.locator('#orientation-message').inputValue(),'Synthetic request for UI state');
-   await page.locator('.panel-heading .icon-button').focus();await page.keyboard.press('Enter');await page.locator('.reopen-chat').waitFor();assert.match(await page.locator('.reopen-chat').innerText(),/AI Fly Oracle/);
+   await page.locator('.panel-heading .icon-button').focus();await page.keyboard.press('Enter');await page.locator('.reopen-chat').waitFor();assert.match(await page.locator('.reopen-chat').innerText(),/AIFly ORACLE/);
    report.checks.push({width,reducedMotion,working_state:true,error_returns_idle:true,draft_preserved:true,decorative_image:true,keyboard:true,geometry:shape,working_style:style,accessibility_snapshot_checked:true});
   }finally{release();await context.close();}
  }

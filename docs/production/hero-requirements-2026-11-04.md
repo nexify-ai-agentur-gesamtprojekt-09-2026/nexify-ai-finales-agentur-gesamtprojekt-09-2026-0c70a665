@@ -156,5 +156,6 @@ dezenten Glasschimmer (`apps/web/components/LuxuryMaterials.css`,
 reduzierte Transparenz/erhöhter Kontrast blendet den Schimmer aus.
 Diese Bewegung ist ausdrücklich **kein** Ersatz für die geforderte Videoaufnahme
 und keine Regieabnahme; `production_accepted=false` bleibt unverändert. Sie
-berührt das Kriterium „keine wackelnden Standbilder“, falls sie als Hero-Medium
-gewertet würde – Nutzerentscheidung offen (siehe PR).
+berührt das Kriterium „keine wackelnden Standbilder“ nur als Übergang: Nach
+Nutzerentscheidung vom 04.11.2026 hat ein funktionsfähiger Gesamtstand Vorrang;
+die Videoproduktion folgt danach (siehe `AGENTS.md`).
