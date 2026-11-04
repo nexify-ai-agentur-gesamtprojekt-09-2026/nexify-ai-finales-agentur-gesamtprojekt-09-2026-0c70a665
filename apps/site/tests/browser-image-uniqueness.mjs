@@ -12,11 +12,15 @@ const routes = map.pages.filter((p) => p.access.visibility === "public" && !p.ac
 const KEIN_BILD = /(logo|favicon|icon|sprite|apple-touch|manifest)/i;
 
 const browser = await chromium.launch();
-const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+// Externe Ziele blocken, damit die Seite nicht auf fremde Verbindungen wartet (Chat-Stream, Analytik).
+await context.route("**/*", (route) => { try { return new URL(route.request().url()).origin === origin ? route.continue() : route.fulfill({ status: 204, body: "" }); } catch { return route.abort(); } });
+const page = await context.newPage();
 const fundorte = new Map();
 for (const route of routes) {
-  await page.goto(origin + route, { waitUntil: "networkidle" });
-  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } });
+  await page.goto(origin + route, { waitUntil: "domcontentloaded" });
+  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 80)); } });
+  await page.waitForTimeout(300);
   const bilder = await page.evaluate(() => {
     const out = [];
     const rein = (u, wo) => { if (!u || u.startsWith("data:")) return; try { out.push({ datei: new URL(u, location.href).pathname, wo }); } catch {} };
