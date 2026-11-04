@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "decision": "USER-IMAGE-FINISH-20261102",
+  "decision": "USER-IMAGE-FINISH-20261102; Pascal replaced 2026-11-04 by owner instruction: the full-body blazer cutout is forbidden, use the smiling portrait from prototypen/assets/nexify-ai/pascal-courbois-optimiert.png",
   "status": "preserved_original_stills_not_performance_video",
   "images": {
     "pascal": {
-      "src": "/media/atelier/presenters/pascal-lossless.webp",
-      "width": 1024,
-      "height": 1536,
-      "sha256": "9eeea2337320fa340a45c7c22e2512bcdca92b533654f373eb058cdd20a448cc",
-      "source": "/media/presenters/pascal-original-6dd03834.png",
-      "source_sha256": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
+      "src": "/media/atelier/presenters/pascal-portrait.webp",
+      "width": 760,
+      "height": 1032,
+      "sha256": "c383f22b9f2567310a57007a6b3b90c64160c70d5abe3c82c7aa44ce9f27782e",
+      "source": "/media/presenters/pascal-portrait-4f13861b.png",
+      "source_sha256": "4f13861b4a0927a126972e186430ed45b803d9be66fdc271ed9629d063c51240",
       "visible_RGBA_pixels_unchanged": true
     },
     "nex": {

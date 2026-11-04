@@ -7,6 +7,7 @@ import type {PublicPage} from "../lib/page-types";
 import {StartAction,useUI} from "./Workspace";
 import DomainArtwork,{hasDomainArtwork} from "./DomainArtwork";
 import ProductShowcase,{hasProductShowcase} from "./shop/ProductShowcase";
+import StudioScene,{hasStudioScene} from "./StudioScene";
 import "./PublicContentLayout.css";
 
 
@@ -50,12 +51,14 @@ export default function PublicContent({page,pages,children,sectionContent={}}:{p
   if(action.type==="chat"&&action.chat_intent)return <StartAction key={index} intent={action.chat_intent}>{action.label[locale]}<span aria-hidden="true">→</span></StartAction>;
   const target=get(action.target_id||"");return target?<SiteLink key={index} className="content-action-link" href={target.path}>{action.label[locale]}<span aria-hidden="true">→</span></SiteLink>:<span key={index} className="content-action-unavailable">{action.label[locale]} · {t.unavailable}</span>;
  })}</div>;
- const hasScene=hasDomainArtwork(page.id);
+ const hasStudio=!isQuiet&&hasStudioScene(page.id);
+ const hasScene=hasStudio||hasDomainArtwork(page.id);
+ const visual=hasStudio?<StudioScene page={page} locale={locale}/>:<DomainArtwork pageId={page.id} locale={locale}/>;
  const contextAside=!isQuiet?<aside className="content-context" aria-label={t.overview}><span className="content-kicker">{t.overview}</span><strong>{t[layout]}</strong><nav aria-label={t.overview}>{contextualPages.slice(0,4).map(target=><SiteLink href={target.path} key={target.id}>{target.localizedTitle[locale]}<span aria-hidden="true">→</span></SiteLink>)}</nav>{overview&&overview.id!==page.id&&<SiteLink className="content-overview-link" href={overview.path}>{t.back}<span aria-hidden="true">←</span></SiteLink>}</aside>:null;
  return <section className={"public-page content-layout layout-"+layout+" context-"+page.site_context} aria-labelledby={headingId}>
   <nav className="content-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map(parent=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink><span aria-hidden="true">/</span></li>)}<li><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
   <header className={"content-hero"+(hasScene?" has-domain-art":"")}><div className="content-hero-copy"><span className="content-kicker">{page.site_context==="teileklar"?"TEILEKLAR":"NEXIFY AI"}<span aria-hidden="true"> / </span>{t[layout]}</span><h1 id={headingId}>{page.localizedTitle[locale]}</h1><p className="content-purpose">{page.localizedSummary[locale]}</p>{actions(page.actions.slice(0,2),"primary")}</div>
-   {hasScene?<div className="content-hero-aside">{hasProductShowcase(page.id)?<ProductShowcase pageId={page.id} fallback={<DomainArtwork pageId={page.id} locale={locale}/>}/>:<DomainArtwork pageId={page.id} locale={locale}/>}</div>:contextAside}
+   {hasScene?<div className="content-hero-aside">{hasProductShowcase(page.id)?<ProductShowcase pageId={page.id} fallback={visual}/>:visual}</div>:contextAside}
   </header>
   {children&&supplementFirst&&<div className="content-supplement is-primary-flow">{children}</div>}
   {hasScene&&contextAside&&<div className="content-context-below">{contextAside}</div>}

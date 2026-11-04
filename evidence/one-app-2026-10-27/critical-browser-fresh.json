@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T17:03:10.503Z",
+  "recorded_at": "2026-11-04T18:11:37.405Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -61,7 +61,7 @@
     "apps/web/components/HomeContent.tsx": "fdc261786e503db20bbe15130df60206c498627bafd7d991eda213bb0fdc68e2",
     "apps/web/components/Workspace.tsx": "41cbfd5625ced6698659063151a385c37464effa3b514868e40e9d8c36f7388c",
     "apps/web/components/PublicContentLayout.css": "84dd3df6485bfda706ac9144a4458e23ea2ae64a51ae46c2545b8f940a830b96",
-    "config/site-map.json": "8f00a304ee4b92007a9fc5c1962c5756a0fdd9524800aab1d0ae6992b9477ea1"
+    "config/site-map.json": "5ab18dae5e32fb4be82d86c6b87abd7c6ae87a59e864cce975698b7efbc1e19e"
   },
   "auxiliary_source_sha256": {
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
@@ -81,7 +81,7 @@
     "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
     "apps/site/tests/browser-identity-hero.mjs": "359114f9be686db9e0acddb3ea8be2bfb639b24d397889a247f81a2e2863fba5",
     "packages/tokens/tokens.css": "dd45d0d93f506073aa718b701019d0e163b233a8d881a9245391c1ded94d06ae",
-    "apps/site/tests/browser-critical.mjs": "476d9f1cc4f5fb0e6c655e5456b09e0dd453174349aea5d2627ab25c741885cd"
+    "apps/site/tests/browser-critical.mjs": "9be77c1ab154209f8229b5013c3a093b04302c5ffbb4052e0174e2c6dfb813db"
   },
   "sdk_source_sha256": {
     "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
@@ -147,7 +147,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-04T17:03:10.503Z",
+    "recorded_at": "2026-11-04T18:11:37.405Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
@@ -162,7 +162,8 @@
       "figures": [
         {
           "name": "cast-pascal",
-          "fit": "contain",
+          "fit": "cover",
+          "position": "50% 0px",
           "opacity": 1,
           "loaded": true,
           "left": 598.359375,
@@ -175,6 +176,7 @@
         {
           "name": "cast-nex",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 490.640625,
@@ -187,6 +189,7 @@
         {
           "name": "cast-oracle",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 829.1875,
@@ -211,7 +214,8 @@
       "figures": [
         {
           "name": "cast-pascal",
-          "fit": "contain",
+          "fit": "cover",
+          "position": "50% 0px",
           "opacity": 1,
           "loaded": true,
           "left": 744.578125,
@@ -224,6 +228,7 @@
         {
           "name": "cast-nex",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 608.984375,
@@ -236,6 +241,7 @@
         {
           "name": "cast-oracle",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 1035.15625,
@@ -260,7 +266,8 @@
       "figures": [
         {
           "name": "cast-pascal",
-          "fit": "contain",
+          "fit": "cover",
+          "position": "50% 0px",
           "opacity": 1,
           "loaded": true,
           "left": 736.6640625,
@@ -273,6 +280,7 @@
         {
           "name": "cast-nex",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 546.25,
@@ -285,6 +293,7 @@
         {
           "name": "cast-oracle",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 1177.34375,
@@ -309,7 +318,8 @@
       "figures": [
         {
           "name": "cast-pascal",
-          "fit": "contain",
+          "fit": "cover",
+          "position": "50% 0px",
           "opacity": 1,
           "loaded": true,
           "left": 816.703125,
@@ -322,6 +332,7 @@
         {
           "name": "cast-nex",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 615.96875,
@@ -334,6 +345,7 @@
         {
           "name": "cast-oracle",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 1291.78125,
@@ -358,7 +370,8 @@
       "figures": [
         {
           "name": "cast-pascal",
-          "fit": "contain",
+          "fit": "cover",
+          "position": "50% 0px",
           "opacity": 1,
           "loaded": true,
           "left": 976.78125,
@@ -371,6 +384,7 @@
         {
           "name": "cast-nex",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 754.5,
@@ -383,6 +397,7 @@
         {
           "name": "cast-oracle",
           "fit": "contain",
+          "position": "50% 100%",
           "opacity": 1,
           "loaded": true,
           "left": 1523.671875,

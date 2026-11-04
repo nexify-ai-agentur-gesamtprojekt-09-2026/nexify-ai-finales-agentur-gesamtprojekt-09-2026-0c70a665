@@ -1,0 +1,584 @@
+{
+ "schema_version": 1,
+ "decision": "Owner decision 04.11.2026: one continuous photo series composed from the approved character cutouts in a single glass studio set (same camera, light and floor). No generated faces. Pascal appears only as the approved smiling portrait (owner 04.11.2026: full-body blazer cutout forbidden), standing behind a glass counter.",
+ "assets": {
+  "pascal": {
+   "portrait": "/media/studio/pascal-portrait.webp"
+  },
+  "nex": {
+   "stand": "/media/studio/nex-stand.webp",
+   "walk": "/media/studio/nex-walk.webp"
+  },
+  "oracle": {
+   "avatar": "/media/studio/oracle.webp",
+   "float": "/media/studio/oracle-float.webp"
+  }
+ },
+ "labels": {
+  "de": {
+   "pascal": "Pascal Courbois",
+   "nex": "NeX",
+   "oracle": "AIFly Oracle",
+   "studio": "im NeXify-Studio",
+   "topic": "Thema"
+  },
+  "nl": {
+   "pascal": "Pascal Courbois",
+   "nex": "NeX",
+   "oracle": "AIFly Oracle",
+   "studio": "in de NeXify-studio",
+   "topic": "Onderwerp"
+  },
+  "fr": {
+   "pascal": "Pascal Courbois",
+   "nex": "NeX",
+   "oracle": "AIFly Oracle",
+   "studio": "dans le studio NeXify",
+   "topic": "Thème"
+  },
+  "en": {
+   "pascal": "Pascal Courbois",
+   "nex": "NeX",
+   "oracle": "AIFly Oracle",
+   "studio": "in the NeXify studio",
+   "topic": "Topic"
+  }
+ },
+ "pages": {
+  "services": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 22,
+     "h": 40,
+     "z": 2,
+     "flip": false
+    },
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 50,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 79,
+     "h": 26,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "websites": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 40,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 72,
+     "h": 40,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "automation": {
+   "light": "lime",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 30,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 66,
+     "h": 34,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "apps-portals": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 62,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 28,
+     "h": 19,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "scope": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 58,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 26,
+     "h": 29,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "solutions": {
+   "light": "lime",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 44,
+     "h": 45,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 74,
+     "h": 19,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "pricing": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 52,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  },
+  "knowledge": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 50,
+     "h": 40,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  },
+  "knowledge-start": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 44,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 76,
+     "h": 19,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "company": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 20,
+     "h": 26,
+     "z": 2,
+     "flip": false
+    },
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 48,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 76,
+     "h": 40,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "contact": {
+   "light": "lime",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 56,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 24,
+     "h": 29,
+     "z": 2,
+     "flip": true
+    }
+   ]
+  },
+  "nex2fly": {
+   "light": "lime",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 48,
+     "h": 50,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 78,
+     "h": 19,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "one": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 34,
+     "h": 45,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 70,
+     "h": 33,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "api": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 36,
+     "h": 21,
+     "z": 2,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 64,
+     "h": 31,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  },
+  "tk-home": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 36,
+     "h": 45,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 70,
+     "h": 29,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-shop": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 30,
+     "h": 33,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 72,
+     "h": 19,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-search": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 50,
+     "h": 38,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  },
+  "tk-categories": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 60,
+     "h": 43,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 26,
+     "h": 17,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-category": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 64,
+     "h": 33,
+     "z": 3,
+     "flip": true
+    }
+   ]
+  },
+  "tk-product": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 34,
+     "h": 31,
+     "z": 2,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 66,
+     "h": 43,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  },
+  "tk-fitment": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 44,
+     "h": 41,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 76,
+     "h": 28,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-workshop": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 40,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 72,
+     "h": 38,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-partner": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "pascal",
+     "pose": "portrait",
+     "x": 34,
+     "h": 74,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 66,
+     "h": 40,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-reifenrechner": {
+   "light": "cool",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 62,
+     "h": 43,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "float",
+     "x": 28,
+     "h": 19,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-batterie": {
+   "light": "lime",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "stand",
+     "x": 50,
+     "h": 50,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  },
+  "tk-appointments": {
+   "light": "champagne",
+   "cast": [
+    {
+     "who": "nex",
+     "pose": "walk",
+     "x": 34,
+     "h": 33,
+     "z": 3,
+     "flip": false
+    },
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 68,
+     "h": 29,
+     "z": 2,
+     "flip": false
+    }
+   ]
+  },
+  "tk-vouchers": {
+   "light": "lime",
+   "cast": [
+    {
+     "who": "oracle",
+     "pose": "avatar",
+     "x": 50,
+     "h": 38,
+     "z": 3,
+     "flip": false
+    }
+   ]
+  }
+ }
+}

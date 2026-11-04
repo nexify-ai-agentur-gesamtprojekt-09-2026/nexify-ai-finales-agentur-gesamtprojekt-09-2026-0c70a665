@@ -1759,7 +1759,7 @@
       "page_id": "websites",
       "module_id": "websites-explain-1",
       "context_id": "module-websites-explain-1",
-      "context_title": "Markenstart: die gemeinsame Basis",
+      "context_title": "Markenstart als gemeinsame Basis",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1869,7 +1869,7 @@
       "page_id": "apps-portals",
       "module_id": "apps-portals-explain-2",
       "context_id": "module-apps-portals-explain-2",
-      "context_title": "Verbindungen mit klarem Umfang",
+      "context_title": "Verbindungen mit festem Umfang",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1957,7 +1957,7 @@
       "page_id": "pricing",
       "module_id": "pricing-explain-1",
       "context_id": "module-pricing-explain-1",
-      "context_title": "Drei Kostenarten, klar zugeordnet",
+      "context_title": "Kostenarten, getrennt ausgewiesen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -1979,7 +1979,7 @@
       "page_id": "knowledge",
       "module_id": "knowledge-explain-1",
       "context_id": "module-knowledge-explain-1",
-      "context_title": "Von der Positionierung zum Baustein",
+      "context_title": "Von der Positionierung zum Projektumfang",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2023,7 +2023,7 @@
       "page_id": "company",
       "module_id": "company-explain-1",
       "context_id": "module-company-explain-1",
-      "context_title": "Persönlich geführt, gemeinsam umgesetzt",
+      "context_title": "Persönlich geführt",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2419,7 +2419,7 @@
       "page_id": "tk-product",
       "module_id": "tk-product-explain-2",
       "context_id": "module-tk-product-explain-2",
-      "context_title": "Eignung klar benannt",
+      "context_title": "Wofür der Artikel geeignet ist",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2485,7 +2485,7 @@
       "page_id": "tk-checkout",
       "module_id": "tk-checkout-explain-1",
       "context_id": "module-tk-checkout-explain-1",
-      "context_title": "Vor dem Abschluss vollständig informiert",
+      "context_title": "Schritt 3, vor dem Abschluss vollständig informiert",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2507,7 +2507,7 @@
       "page_id": "tk-checkout",
       "module_id": "tk-checkout-explain-2",
       "context_id": "module-tk-checkout-explain-2",
-      "context_title": "Sicher bezahlen",
+      "context_title": "Schritt 4, sicher bezahlen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2529,7 +2529,7 @@
       "page_id": "tk-fitment",
       "module_id": "tk-fitment-explain-1",
       "context_id": "module-tk-fitment-explain-1",
-      "context_title": "Die vier Prüfpunkte",
+      "context_title": "Die vier Prüfpunkte im Überblick",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2551,7 +2551,7 @@
       "page_id": "tk-appointments",
       "module_id": "tk-appointments-explain-1",
       "context_id": "module-tk-appointments-explain-1",
-      "context_title": "Arbeit, Fahrzeug und Wunschzeitraum",
+      "context_title": "Was in eine gute Anfrage gehört",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2573,7 +2573,7 @@
       "page_id": "tk-vouchers",
       "module_id": "tk-vouchers-explain-1",
       "context_id": "module-tk-vouchers-explain-1",
-      "context_title": "Den zugesagten Umfang prüfen",
+      "context_title": "Der aktuelle Stand",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2595,7 +2595,7 @@
       "page_id": "tk-partner",
       "module_id": "tk-partner-explain-1",
       "context_id": "module-tk-partner-explain-1",
-      "context_title": "Profil mit Substanz",
+      "context_title": "Wie Kunden heute zu Werkstätten finden",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2617,7 +2617,7 @@
       "page_id": "tk-partner",
       "module_id": "tk-partner-explain-2",
       "context_id": "module-tk-partner-explain-2",
-      "context_title": "Zusammenarbeit konkret vereinbaren",
+      "context_title": "Verzeichniseintrag und Partnerschaft",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2639,7 +2639,7 @@
       "page_id": "tk-workshop",
       "module_id": "tk-workshop-explain-1",
       "context_id": "module-tk-workshop-explain-1",
-      "context_title": "Kompetenz für die konkrete Aufgabe",
+      "context_title": "So funktioniert die Werkstattsuche",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2661,7 +2661,7 @@
       "page_id": "tk-workshop",
       "module_id": "tk-workshop-explain-2",
       "context_id": "module-tk-workshop-explain-2",
-      "context_title": "Ein Kontakt ist noch kein Termin",
+      "context_title": "Ein Verzeichniseintrag ist keine Partnerschaft",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2772,7 +2772,7 @@
       "page_id": "tk-reifenrechner",
       "module_id": "tk-reifenrechner-explain-1",
       "context_id": "module-tk-reifenrechner-explain-1",
-      "context_title": "Die Dimensionen gemeinsam betrachten",
+      "context_title": "So lesen Sie 205/55 R16 91V",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2795,7 +2795,7 @@
       "page_id": "tk-batterie",
       "module_id": "tk-batterie-explain-1",
       "context_id": "module-tk-batterie-explain-1",
-      "context_title": "Technik und Einbauraum zusammenbringen",
+      "context_title": "Die Angaben auf dem Etikett",
       "film_id": null,
       "scene_ids": [],
       "assets": {

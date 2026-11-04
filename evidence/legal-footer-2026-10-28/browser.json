@@ -3350,7 +3350,7 @@
   "source_sha256": {
     "apps/web/components/SiteFooter.tsx": "5a89f12f0f4478c22cf5bed2798b4e6b0c23b5af8f3c1d80ad90e045e8d69092",
     "apps/web/components/WorkspaceRebuild.css": "063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35",
-    "config/site-map.json": "8f00a304ee4b92007a9fc5c1962c5756a0fdd9524800aab1d0ae6992b9477ea1",
+    "config/site-map.json": "5ab18dae5e32fb4be82d86c6b87abd7c6ae87a59e864cce975698b7efbc1e19e",
     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
   "missing_license_route": true,
