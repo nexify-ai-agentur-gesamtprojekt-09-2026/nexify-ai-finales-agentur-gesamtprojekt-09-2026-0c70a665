@@ -7,20 +7,35 @@
   "license": "MIT",
   "npm_integrity": "sha512-ora1Qud7HM7Lse0w02WFDTnuu81HK3C3AisMbncoVXjmMxXo84ofjjy1fPeWXcoXGpDNdJeokDVe16NbJ58FqA==",
   "tarball_sha256": "872e4e6fc0f0752aadfc80ae9237ad856765b723f9df85b9db00fa0b418aefc9",
-  "depends_on": {"@claude-flow/cli": "3.71.1"},
+  "depends_on": {
+    "@claude-flow/cli": "3.71.1"
+  },
   "reviewed_at": "2026-11-04",
   "init_command": "ruflo init --minimal --no-global --no-signup --no-skills-sh --no-plugin-install --no-codex-detect --no-mods",
-  "versioned_files": [".mcp.json", ".claude/settings.json#env", ".claude/skills/*", ".claude-flow/config.yaml", ".claude-flow/CAPABILITIES.md"],
-  "ignored_runtime": [".claude-flow/data/", ".claude-flow/logs/", ".claude-flow/sessions/", ".claude-flow/neural/"],
+  "versioned_files": [
+    "config/integrations/ruflo.mcp.json (bewusst nicht als Projekt-.mcp.json)",
+    ".claude/settings.json#env",
+    ".claude/skills/*",
+    ".claude-flow/config.yaml",
+    ".claude-flow/CAPABILITIES.md"
+  ],
+  "ignored_runtime": [
+    ".claude-flow/data/",
+    ".claude-flow/logs/",
+    ".claude-flow/sessions/",
+    ".claude-flow/neural/"
+  ],
   "deviations_from_upstream_init": [
     "MCP-Server auf ruflo@3.71.1 gepinnt statt ruflo@latest",
     "keine pauschalen permissions.allow-Einträge (npx claude-flow*, mcp__claude-flow__*); Aufrufe bleiben bestätigungspflichtig",
-    "kein Eintrag in ~/.claude/CLAUDE.md, keine Cognitum-Anmeldung, keine skills.sh-Registrierung, keine Mod-Plugins, keine Cloud-MCP-Server"
+    "kein Eintrag in ~/.claude/CLAUDE.md, keine Cognitum-Anmeldung, keine skills.sh-Registrierung, keine Mod-Plugins, keine Cloud-MCP-Server",
+    "MCP-Definition nicht im Repo-Root (.mcp.json), damit headless Sitzungen (claude -p, Agent SDK, CI) den Server nicht ohne bewusste Aktivierung starten; Aktivierung per `claude mcp add-json`"
   ],
   "boundaries": {
     "llm_calls": "keine eigenen Providerschlüssel; Agenten laufen über das Hostmodell von Claude Code. NeXify-managed LLM-Aufrufe bleiben an config/llm-policy.json gebunden.",
     "authority": "Ruflo-Skills und -Agenten sind Werkzeuge, keine Freigabe; AGENTS.md, Gates und Secret-/Mandantengrenzen haben Vorrang.",
     "network": "npx lädt das gepinnte Paket aus npm; keine Telemetrie-/Cloudanbindung aktiviert (autoStart=false)."
   },
-  "update_procedure": "Neue Version: npm pack, Integrity/SHA256 prüfen, Probe-init in Wegwerf-Worktree, Diff reviewen, hier und in .mcp.json gleichzeitig anheben."
+  "update_procedure": "Neue Version: npm pack, Integrity/SHA256 prüfen, Probe-init in Wegwerf-Worktree, Diff reviewen, hier und in .mcp.json gleichzeitig anheben.",
+  "activation": "claude mcp add-json claude-flow \"$(python3 -c 'import json;print(json.dumps(json.load(open(\"config/integrations/ruflo.mcp.json\"))[\"mcpServers\"][\"claude-flow\"]))')\" --scope local"
 }

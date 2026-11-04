@@ -429,10 +429,13 @@ Immer **was passiert ist + was der Kunde jetzt tun kann**, nie technische Codes.
 | 3 · Vertrauen+ | weitere Zahlarten, echte Bewertungen nach Bestellungen, ggf. Gütesiegel | höhere Abschlussrate |
 | 4 · Optimierung | A/B-Tests (CTA-Texte, Kartenlayout), SEO-Ratgeber | messbar steigern |
 
-### 4.6 Offene Entscheidungen (Inhaber)
+### 4.6 Festlegungen nach Bestpraxis (Nutzerauftrag „Entscheide nach Bestpraxis“, 04.11.2026)
 
-1. Verkäufer-Entität und Rücksendeadresse im Shop (B.V. in NL → deutschsprachige Kontakt- und Rücksendeanschrift empfohlen).
-2. Versandkosten, Versandkostenfrei-Schwelle, Lieferzeiten-Standard.
-3. Sortimentsgrenze: Elektronik und Batterien nur mit ElektroG-/BattG-Registrierung.
-4. Startseiten-Hero: als Shop-Teaser ergänzen (Empfehlung) oder Agentur-Hero ersetzen.
-5. Zahlarten über Revolut hinaus.
+| # | Thema | Festlegung | Wirkung im Code |
+|---|---|---|---|
+| 1 | Verkäufer und Rücksendeadresse | Es gelten die vorhandenen Impressums- und Rechtsangaben. Eine eigene Rücksendeanschrift erscheint erst, wenn sie in der Konfiguration steht. | Die Seite *Rückgabe* verweist auf die Widerrufsbelehrung und den Kontakt; eine Adresse wird nicht erfunden. |
+| 2 | Versandkosten, Schwelle, Lieferzeit | Alle Werte kommen ausschließlich aus `pricing.settings` bzw. den Produktdaten. Ohne freigegebenen Wert erscheinen kein Versandkostenfrei-Balken und keine Lieferzeit. | Bedingtes Rendering in Produktkarte, Produktseite, Warenkorb und Kasse |
+| 3 | Elektronik und Batterien | Entsorgungshinweise erscheinen produktbezogen über `disposal_class`. Vertriebsvoraussetzung ist die ElektroG-/BattG-Registrierung; ohne sie wird nicht veröffentlicht (Importfreigabe). | Hinweisseite *Batterie & Altgeräte* sowie ein Abschnitt auf der Produktseite |
+| 4 | Startseiten-Hero | Der Agentur-Hero bleibt (Agenturbotschaft, Video-Endziel laut AGENTS.md). Der Shop-Erzählfaden beginnt als **Kapitel-0-Teaser direkt unter dem Hero** und setzt sich auf `/teileklar` mit eigenem Hero fort. | `HomeContent` + `ShopStoryHero` |
+| 5 | Zahlarten | Gezeigt wird nur, was der Revolut-Checkout tatsächlich anbietet. PayPal und Rechnung folgen in Phase 3; keine Platzhalter-Logos. | Trust-Leiste ohne unbelegte Zahlarten |
+| 6 | Rechtstexte | Die neuen Seiten sind als Entwurf gekennzeichnet (AGENTS.md: Entwurf 0.9). Vor dem Livegang ist eine juristische Prüfung Pflicht. | Gleiche Behandlung wie die bestehenden TEILEKLAR-Rechtsseiten |

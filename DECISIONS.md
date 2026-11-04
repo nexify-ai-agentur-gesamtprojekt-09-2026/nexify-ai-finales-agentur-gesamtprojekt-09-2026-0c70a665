@@ -45,6 +45,7 @@ Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Me
 ## D-RUFLO-20261104 — Ruflo als versionierte Agenten-Orchestrierung
 - **Entscheidung (Nutzer 04.11.2026):** Ruflo wird fest im Repository integriert. Version 3.71.1 ist gepinnt; npm-Integrity und Tarball-Hash stehen in `config/integrations/ruflo.json`. Die Integration wurde in einem Wegwerf-Worktree geprüft.
 - **Abweichungen vom Upstream-`init`:** Der MCP-Server ist gepinnt statt `@latest`. Es gibt keine pauschalen Auto-Freigaben. Folgendes ist nicht aktiviert: globale Home-Änderung, Anmeldung, skills.sh, Mod-Plugins und Cloud-MCP.
+- **Nachtrag (Review-Befund):** Die MCP-Definition liegt in `config/integrations/ruflo.mcp.json` statt in der Projekt-`.mcp.json`. Sonst würden headless Sitzungen (`claude -p`, Agent SDK, CI) den Server ohne Einzelfreigabe starten. Aktiviert wird bewusst lokal per `claude mcp add-json`.
 - **Grenzen:** Ruflo hat keine eigenen LLM-Schlüssel, die Modellbindung aus `config/llm-policy.json` bleibt unverändert. Ruflo erteilt keine Freigaben und lockert keine Gates. Details stehen in `docs/automation/ruflo.md`.
 
 ## D-010 — Shop-/Katalognachweis an die Live-Strecke `apps/shop-api` gebunden (04.11.2026)
