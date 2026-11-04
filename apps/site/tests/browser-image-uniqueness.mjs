@@ -1,0 +1,40 @@
+// Bildeinmaligkeit (Owner-Vorgabe 04.11.2026): jedes Bild genau einmal auf der gesamten öffentlichen Seite,
+// passend zum Bereich, in dem es steht. Misst gerenderte <img>, <picture>-Quellen, Video-Poster und
+// CSS-Hintergrundbilder auf allen öffentlichen Routen und meldet jede Datei, die mehr als einmal erscheint.
+// Aufruf: LOCAL_ORIGIN=http://127.0.0.1:3017 node apps/site/tests/browser-image-uniqueness.mjs
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
+const root = new URL("../../../", import.meta.url).pathname;
+const origin = process.env.LOCAL_ORIGIN || "http://127.0.0.1:3017";
+const map = JSON.parse(await readFile(root + "config/site-map.json", "utf8"));
+const routes = map.pages.filter((p) => p.access.visibility === "public" && !p.access.auth_required).map((p) => p.path);
+// Marken- und Bedienzeichen sind keine Bilder im Sinne der Vorgabe (Logo, Favicon, Symbole).
+const KEIN_BILD = /(logo|favicon|icon|sprite|apple-touch|manifest)/i;
+
+const browser = await chromium.launch();
+const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+const fundorte = new Map();
+for (const route of routes) {
+  await page.goto(origin + route, { waitUntil: "networkidle" });
+  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } });
+  const bilder = await page.evaluate(() => {
+    const out = [];
+    const rein = (u, wo) => { if (!u || u.startsWith("data:")) return; try { out.push({ datei: new URL(u, location.href).pathname, wo }); } catch {} };
+    const wo = (el) => { const s = el.closest("section,figure,aside,header,footer,main,article"); return (s?.getAttribute("data-studio-scene") ? "studio" : s?.className?.toString().split(" ")[0]) || s?.tagName.toLowerCase() || "seite"; };
+    for (const img of document.querySelectorAll("img")) { if (img.closest("[aria-hidden='true']") && img.classList.contains("studio-reflection")) continue; rein(img.currentSrc || img.src, wo(img)); }
+    for (const v of document.querySelectorAll("video[poster]")) rein(v.poster, wo(v));
+    for (const el of document.querySelectorAll("body *")) { const bg = getComputedStyle(el).backgroundImage; for (const m of bg.matchAll(/url\("?([^")]+)"?\)/g)) rein(m[1], wo(el)); }
+    return out;
+  });
+  const jeSeite = new Map();
+  for (const b of bilder) { if (KEIN_BILD.test(b.datei)) continue; jeSeite.set(b.datei, [...(jeSeite.get(b.datei) || []), b.wo]); }
+  for (const [datei, orte] of jeSeite) fundorte.set(datei, [...(fundorte.get(datei) || []), { route, anzahl: orte.length, bereiche: [...new Set(orte)] }]);
+}
+await browser.close();
+const mehrfach = [...fundorte].filter(([, f]) => f.length > 1 || f[0].anzahl > 1).map(([datei, f]) => ({ datei, seiten: f.length, vorkommen: f.reduce((s, x) => s + x.anzahl, 0), fundorte: f }));
+const report = { scope: "local build, public routes, 1440 px", routes: routes.length, bilder: fundorte.size, mehrfach: mehrfach.length, details: mehrfach.sort((a, b) => b.vorkommen - a.vorkommen), passed: mehrfach.length === 0 };
+await mkdir(root + ".local/image-uniqueness", { recursive: true });
+await writeFile(root + ".local/image-uniqueness/report.json", JSON.stringify(report, null, 2) + "\n");
+console.log(`Routen ${report.routes} · verschiedene Bilder ${report.bilder} · mehrfach verwendet ${report.mehrfach}`);
+for (const m of report.details) console.log(`${m.vorkommen}× auf ${m.seiten} Seiten  ${m.datei}`);
+process.exit(report.passed ? 0 : 1);
