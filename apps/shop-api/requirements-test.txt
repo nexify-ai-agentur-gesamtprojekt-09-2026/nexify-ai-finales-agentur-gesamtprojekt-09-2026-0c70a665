@@ -1,0 +1,12 @@
+# Test-only dependencies for apps/shop-api/tests (in-memory Mongo double). Never shipped to Vercel.
+# Install after requirements.txt: pip install --only-binary=:all: --no-deps --require-hashes -r apps/shop-api/requirements-test.txt
+mongomock==4.3.0 \
+    --hash=sha256:5ef86bd12fc8806c6e7af32f21266c61b6c4ba96096f85129852d1c4fec1327e
+mongomock-motor==0.0.36 \
+    --hash=sha256:3ecb7949662b8986ff9c267fa0b1402b5b75a6afd57f03850cd6e13a067e3691
+packaging==26.3 \
+    --hash=sha256:d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c
+pytz==2026.6 \
+    --hash=sha256:7fed3fee8fd6bd4a2b7b75a8d56021d0624127bf69bd5691f115db929ac570b3
+sentinels==1.1.1 \
+    --hash=sha256:835d3b28f3b47f5284afa4bf2db6e00f2dc5f80f9923d4b7e7aeeeccf6146a11
