@@ -1,0 +1,563 @@
+"""Offline cart recovery: exact production functions, transactional MVCC fake.
+
+No application bootstrap, Mongo client, credentials, sockets or provider calls.
+The fake enforces session-only snapshot writes and optimistic commit conflicts;
+it tests the application protocol, not actual Mongo topology/durability.
+"""
+import ast
+import asyncio
+import copy
+from http.cookies import SimpleCookie
+from pathlib import Path
+from types import SimpleNamespace
+import unittest
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "apps/shop-api/shop/cart_api.py"
+
+
+class HTTPException(Exception):
+    def __init__(self, status_code, detail):
+        self.status_code, self.detail = status_code, detail
+        super().__init__(str(detail))
+
+
+class PyMongoError(Exception):
+    pass
+
+
+class DuplicateKeyError(PyMongoError):
+    pass
+
+
+class ReadConcern:
+    def __init__(self, level):
+        self.level = level
+
+
+class WriteConcern:
+    def __init__(self, value):
+        self.document = {"w": value}
+
+
+def load_subject(database):
+    names = {"owner_for", "_forget_guest", "merge", "_item_map", "_require_owner_index", "_save_items", "set_item", "confirm_changes"}
+    nodes = [node for node in ast.parse(SOURCE.read_text()).body
+             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in names]
+    for node in nodes:
+        node.decorator_list = []
+        for arg in node.args.args:
+            arg.annotation = None
+        node.returns = None
+    namespace = {"asyncio": asyncio, "db": database, "MAX_QTY": 20,
+                 "HTTPException": HTTPException, "PyMongoError": PyMongoError,
+                 "DuplicateKeyError": DuplicateKeyError, "ReadConcern": ReadConcern,
+                 "WriteConcern": WriteConcern, "now_iso": lambda: "2026-11-04T00:00:00+00:00"}
+    exec(compile(ast.fix_missing_locations(ast.Module(body=nodes, type_ignores=[])), str(SOURCE), "exec"), namespace)
+    return namespace
+
+
+def item(product, quantity, **metadata):
+    return {"product_id": product, "quantity": quantity, **metadata}
+
+
+def identity(user="alice", guest="guest-a"):
+    class Identity:
+        user_id, guest_id = user, guest
+        @property
+        def owner(self):
+            return "user:" + self.user_id if self.user_id else "guest:" + self.guest_id if self.guest_id else None
+    return Identity()
+
+
+class CookieResponse:
+    """Records Response cookie arguments and renders standard Set-Cookie syntax."""
+    def __init__(self):
+        self.headers = []
+        self.deleted = []
+
+    def set_cookie(self, key, value, **options):
+        cookie = SimpleCookie()
+        cookie[key] = value
+        for name, setting in options.items():
+            cookie[key][name.replace("_", "-")] = setting
+        self.headers.append(("set-cookie", cookie.output(header="").strip()))
+
+    def delete_cookie(self, key, **options):
+        self.deleted.append((key, options))
+        self.set_cookie(key, "", max_age=0, expires="Thu, 01 Jan 1970 00:00:00 GMT", **options)
+
+
+def matches(row, query):
+    for key, value in query.items():
+        if isinstance(value, dict) and set(value) == {"$exists"}:
+            if (key in row) != value["$exists"]:
+                return False
+        elif row.get(key) != value:
+            return False
+    return True
+
+
+class Session:
+    def __init__(self, database):
+        self.db = database
+        self.active = False
+        self.writes = set()
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, *args):
+        self.active = False
+
+    async def with_transaction(self, callback, **options):
+        self.db.options = options
+        if self.db.unsupported:
+            raise PyMongoError("unsupported transactions")
+        for _ in range(20):
+            self.snapshot = copy.deepcopy(self.db.rows)
+            self.versions = dict(self.db.versions)
+            self.writes = set()
+            self.active = True
+            self.db.callbacks += 1
+            try:
+                result = await callback(self)
+                await asyncio.sleep(0)
+                if self.db.before_commit:
+                    hook, self.db.before_commit = self.db.before_commit, None
+                    await hook()
+                self.db.inject("before_commit")
+                if self.db.rerun:
+                    self.db.rerun = False
+                    continue  # aborted callback, like a transient transaction error
+                async with self.db.lock:
+                    if any(self.db.versions.get(owner, 0) != self.versions.get(owner, 0) for owner in self.writes):
+                        self.db.conflicts += 1
+                        continue
+                    for owner in self.writes:
+                        self.db.rows[owner] = copy.deepcopy(self.snapshot[owner])
+                        self.db.versions[owner] = self.db.versions.get(owner, 0) + 1
+                    self.db.commits += 1
+                self.db.inject("after_commit")  # intentionally cannot undo a commit
+                return result
+            finally:
+                self.active = False
+        raise PyMongoError("bounded fake conflict exhaustion")
+
+
+class Carts:
+    def __init__(self, database):
+        self.db = database
+
+    async def index_information(self):
+        await asyncio.sleep(0)
+        if self.db.index_error:
+            raise PyMongoError("metadata unavailable")
+        return copy.deepcopy(self.db.indexes)
+
+    def rows(self, session):
+        if session:
+            if not session.active:
+                raise AssertionError("write/read outside active transaction")
+            return session.snapshot
+        return self.db.rows
+
+    async def find_one(self, query, session=None):
+        await asyncio.sleep(0)
+        self.db.inject("readback" if session and session.writes and "_id" in query else "read")
+        rows = self.rows(session)
+        return copy.deepcopy(next((row for row in rows.values() if matches(row, query)), None))
+
+    async def update_one(self, query, update, upsert=False, session=None):
+        await asyncio.sleep(0)
+        phase = "source_receipt" if "merged_to" in update.get("$set", {}) else "target_write" if session else "cas_write"
+        self.db.inject("before_" + phase)
+        rows = self.rows(session)
+        row = next((row for row in rows.values() if matches(row, query)), None)
+        if row is None and upsert:
+            if query["owner"] in rows:
+                raise DuplicateKeyError()
+            row = {"_id": query["owner"], "owner": query["owner"]}
+            rows[row["owner"]] = row
+        elif row is None:
+            return SimpleNamespace(matched_count=0)
+        owner = row["owner"]
+        row.update(copy.deepcopy(update.get("$set", {})))
+        if session:
+            session.writes.add(owner)
+        else:
+            self.db.versions[owner] = self.db.versions.get(owner, 0) + 1
+        self.db.inject("after_" + phase)
+        return SimpleNamespace(matched_count=1)
+
+    async def insert_one(self, row):
+        await asyncio.sleep(0)
+        if row["owner"] in self.db.rows:
+            raise DuplicateKeyError()
+        self.db.rows[row["owner"]] = {"_id": row["owner"], **copy.deepcopy(row)}
+        self.db.versions[row["owner"]] = 1
+
+
+class Database:
+    def __init__(self):
+        self.rows = {}
+        self.versions = {}
+        self.lock = asyncio.Lock()
+        self.indexes = {"owner_1": {"key": [("owner", 1)], "unique": True}}
+        self.index_error = self.unsupported = self.rerun = False
+        self.fail = None
+        self.before_commit = None
+        self.error = PyMongoError
+        self.commits = self.callbacks = self.conflicts = 0
+        self.carts = Carts(self)
+        self.client = SimpleNamespace(start_session=self.start_session)
+
+    async def start_session(self):
+        return Session(self)
+
+    def inject(self, phase):
+        if self.fail == phase:
+            self.fail = None
+            raise self.error("injected " + phase)
+
+    def seed(self, owner, items):
+        self.rows[owner] = {"_id": owner, "owner": owner, "items": copy.deepcopy(items), "original": "retained"}
+        self.versions[owner] = 1
+
+
+class CartMergeRecovery(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.db = Database()
+        self.db.seed("guest:guest-a", [item("part", 3, name="Original", price_seen_cents=500)])
+        self.db.seed("user:alice", [item("part", 2, name="Existing", price_seen_cents=400), item("other", 1)])
+        self.original = copy.deepcopy(self.db.rows)
+        self.ns = load_subject(self.db)
+        self.merge = self.ns["merge"]
+
+    def quantity(self, owner, product="part"):
+        return next(row["quantity"] for row in self.db.rows[owner]["items"] if row["product_id"] == product)
+
+    async def assert_error(self, awaitable, code, status):
+        with self.assertRaises(HTTPException) as caught:
+            await awaitable
+        self.assertEqual(caught.exception.detail["error"], code)
+        self.assertEqual(caught.exception.status_code, status)
+
+    def bind_auth(self):
+        async def resolve(request):
+            return identity(user=request.user, guest=request.guest)
+        self.ns["auth"] = SimpleNamespace(identity=resolve, GUEST_COOKIE="tk_guest", new_guest_id=lambda: "new-guest",
+                                          set_guest_cookie=lambda response, guest: response.set_cookie("tk_guest", guest, path="/", httponly=True, secure=True, samesite="lax"))
+
+    def assert_guest_cookie_deleted(self, response):
+        self.assertEqual(response.deleted, [("tk_guest", {"path": "/", "httponly": True, "secure": True, "samesite": "lax"})])
+        header = response.headers[0][1]
+        cookie = SimpleCookie(header)["tk_guest"]
+        self.assertEqual(cookie["max-age"], "0")
+        self.assertEqual(cookie["path"], "/")
+        self.assertTrue(cookie["secure"])
+        self.assertTrue(cookie["httponly"])
+        self.assertEqual(cookie["samesite"], "lax")
+        self.assertNotIn("tk_session", header)
+
+    async def test_atomic_merge_retains_original_source_and_metadata(self):
+        await self.merge(identity())
+        self.assertEqual(self.quantity("user:alice"), 5)
+        self.assertEqual(self.db.rows["guest:guest-a"]["items"], self.original["guest:guest-a"]["items"])
+        self.assertEqual(self.db.rows["guest:guest-a"]["original"], "retained")
+        self.assertEqual(self.db.rows["guest:guest-a"]["merge_source_items"], self.original["guest:guest-a"]["items"])
+        self.assertEqual(self.db.rows["guest:guest-a"]["merged_to"], "user:alice")
+        self.assertEqual(self.db.options["read_concern"].level, "snapshot")
+        self.assertEqual(self.db.options["write_concern"].document, {"w": "majority"})
+        self.assertEqual(self.db.options["max_commit_time_ms"], 10000)
+
+    async def test_every_precommit_failure_keeps_both_carts_byte_equivalent(self):
+        for phase in ("before_target_write", "after_target_write", "before_source_receipt", "after_source_receipt", "readback", "before_commit"):
+            with self.subTest(phase=phase):
+                self.setUp()
+                self.db.fail = phase
+                await self.assert_error(self.merge(identity()), "cart_merge_unconfirmed", 503)
+                self.assertEqual(self.db.rows, self.original)
+                await self.merge(identity())
+                self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_lost_commit_ack_retry_never_adds_again(self):
+        self.db.fail = "after_commit"
+        await self.assert_error(self.merge(identity()), "cart_merge_unconfirmed", 503)
+        self.assertEqual(self.quantity("user:alice"), 5)
+        # Simulate a separate HTTP retry / restarted request context.
+        await load_subject(self.db)["merge"](identity())
+        self.assertEqual(self.quantity("user:alice"), 5)
+        self.assertEqual(self.db.rows["guest:guest-a"]["items"], self.original["guest:guest-a"]["items"])
+
+    async def test_commit_ack_loss_after_receipt_survives_checkout_target_edits(self):
+        await self.merge(identity())
+        self.db.rows["user:alice"]["items"] = []
+        self.db.versions["user:alice"] += 1
+        await self.merge(identity())
+        self.assertEqual(self.db.rows["user:alice"]["items"], [])
+
+    async def test_source_receipt_preserves_snapshot_after_legacy_checkout_pull(self):
+        await self.merge(identity())
+        # A separate, pre-existing checkout writer is outside this merge protocol.
+        # Its active-items cleanup must not erase the transferred source evidence.
+        self.db.rows["guest:guest-a"]["items"] = []
+        await self.merge(identity())
+        self.assertEqual(self.db.rows["guest:guest-a"]["merge_source_items"], self.original["guest:guest-a"]["items"])
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_driver_callback_reexecution_does_not_double_add(self):
+        self.db.rerun = True
+        await self.merge(identity())
+        self.assertEqual(self.db.callbacks, 2)
+        self.assertEqual(self.db.commits, 1)
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_parallel_same_source_same_target_commits_once(self):
+        await asyncio.gather(*(self.merge(identity()) for _ in range(8)))
+        self.assertEqual(self.quantity("user:alice"), 5)
+        self.assertGreater(self.db.conflicts, 0)
+        self.assertEqual(self.db.rows["guest:guest-a"]["items"], self.original["guest:guest-a"]["items"])
+
+    async def test_parallel_different_sources_preserve_both_additions(self):
+        self.db.seed("guest:guest-b", [item("part", 4)])
+        await asyncio.gather(self.merge(identity()), self.merge(identity(guest="guest-b")))
+        self.assertEqual(self.quantity("user:alice"), 9)
+        self.assertGreater(self.db.conflicts, 0)
+
+    async def test_parallel_same_source_different_users_has_one_winner(self):
+        results = await asyncio.gather(self.merge(identity()), self.merge(identity(user="bob")), return_exceptions=True)
+        failures = [result for result in results if isinstance(result, HTTPException)]
+        self.assertEqual(len(failures), 1)
+        self.assertEqual(failures[0].detail["error"], "guest_cart_already_transferred")
+        winner = self.db.rows["guest:guest-a"]["merged_to"]
+        self.assertEqual(self.quantity(winner), 5 if winner == "user:alice" else 3)
+        if winner != "user:alice":
+            self.assertEqual(self.quantity("user:alice"), 2)
+        else:
+            self.assertNotIn("user:bob", self.db.rows)
+
+    async def test_new_target_created_without_removing_source(self):
+        await self.merge(identity(user="bob"))
+        self.assertEqual(self.quantity("user:bob"), 3)
+        self.assertEqual(self.db.rows["guest:guest-a"]["items"], self.original["guest:guest-a"]["items"])
+
+    async def test_unsupported_transactions_fail_closed(self):
+        self.db.unsupported = True
+        await self.assert_error(self.merge(identity()), "cart_merge_unconfirmed", 503)
+        self.assertEqual(self.db.rows, self.original)
+
+    async def test_missing_session_capability_fails_closed(self):
+        self.db.client = None
+        await self.assert_error(self.merge(identity()), "cart_merge_unconfirmed", 503)
+        self.assertEqual(self.db.rows, self.original)
+
+    async def test_unverified_index_fails_before_writes(self):
+        for index in ({}, {"key": [("owner", 1)]}, {"key": [("owner", 1)], "unique": True, "sparse": True},
+                      {"key": [("owner", 1)], "unique": True, "partialFilterExpression": {}},
+                      {"key": [("owner", 1)], "unique": True, "collation": {"locale": "en"}}):
+            with self.subTest(index=index):
+                self.db.indexes = {"owner_1": index}
+                await self.assert_error(self.merge(identity()), "cart_owner_index_unverified", 503)
+                self.assertEqual(self.db.rows, self.original)
+        self.assertEqual(self.db.callbacks, 0)
+
+    async def test_index_metadata_failure_has_safe_503(self):
+        self.db.index_error = True
+        await self.assert_error(self.merge(identity()), "cart_merge_unconfirmed", 503)
+        self.assertEqual(self.db.rows, self.original)
+
+    async def test_over_limit_does_not_silently_discard_quantity(self):
+        self.db.rows["guest:guest-a"]["items"][0]["quantity"] = 19
+        before = copy.deepcopy(self.db.rows)
+        await self.assert_error(self.merge(identity()), "cart_merge_quantity_limit", 409)
+        self.assertEqual(self.db.rows, before)
+
+    async def test_invalid_or_duplicate_source_items_do_not_mutate(self):
+        for items in ([item("part", True)], [item("part", 0)], [item("part", 21)], [item("part", 1), item("part", 2)], None):
+            with self.subTest(items=items):
+                self.db.rows["guest:guest-a"]["items"] = items
+                before = copy.deepcopy(self.db.rows)
+                await self.assert_error(self.merge(identity()), "cart_items_invalid", 409)
+                self.assertEqual(self.db.rows, before)
+
+    async def test_cancellation_before_commit_keeps_originals(self):
+        self.db.fail = "before_commit"
+        self.db.error = asyncio.CancelledError
+        with self.assertRaises(asyncio.CancelledError):
+            await self.merge(identity())
+        self.assertEqual(self.db.rows, self.original)
+        await self.merge(identity())
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_cancellation_after_commit_retry_reconciles_receipt(self):
+        self.db.fail = "after_commit"
+        self.db.error = asyncio.CancelledError
+        with self.assertRaises(asyncio.CancelledError):
+            await self.merge(identity())
+        self.assertEqual(self.quantity("user:alice"), 5)
+        await self.merge(identity())
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_source_edit_during_transaction_retries_with_current_quantity(self):
+        stale = copy.deepcopy(self.db.rows["guest:guest-a"])
+        async def edit_source():
+            await self.ns["_save_items"]("guest:guest-a", stale, [item("part", 10)])
+        self.db.before_commit = edit_source
+        await self.merge(identity())
+        self.assertEqual(self.db.conflicts, 1)
+        self.assertEqual(self.quantity("user:alice"), 12)
+        self.assertEqual(self.quantity("guest:guest-a"), 10)
+
+    async def test_target_edit_during_transaction_is_preserved_on_retry(self):
+        stale = copy.deepcopy(self.db.rows["user:alice"])
+        async def edit_target():
+            await self.ns["_save_items"]("user:alice", stale, [item("part", 7)])
+        self.db.before_commit = edit_target
+        await self.merge(identity())
+        self.assertEqual(self.db.conflicts, 1)
+        self.assertEqual(self.quantity("user:alice"), 10)
+
+    async def test_transaction_timeout_is_unconfirmed_without_source_loss(self):
+        async def timeout():
+            raise TimeoutError()
+        self.db.client.start_session = timeout
+        await self.assert_error(self.merge(identity()), "cart_merge_unconfirmed", 503)
+        self.assertEqual(self.db.rows, self.original)
+
+    async def test_stale_target_write_cannot_overwrite_merge(self):
+        stale = copy.deepcopy(self.db.rows["user:alice"])
+        await self.merge(identity())
+        await self.assert_error(self.ns["_save_items"]("user:alice", stale, [item("other", 2)]), "cart_changed", 409)
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_stale_guest_write_cannot_change_archived_source(self):
+        stale = copy.deepcopy(self.db.rows["guest:guest-a"])
+        await self.merge(identity())
+        await self.assert_error(self.ns["_save_items"]("guest:guest-a", stale, [item("part", 10)]), "cart_changed", 409)
+        self.assertEqual(self.db.rows["guest:guest-a"]["items"], stale["items"])
+        await self.assert_error(self.ns["_save_items"]("guest:guest-a", self.db.rows["guest:guest-a"], []), "guest_cart_already_transferred", 409)
+
+    async def test_parallel_normal_mutations_cannot_silently_lose_one(self):
+        stale = copy.deepcopy(self.db.rows["user:alice"])
+        results = await asyncio.gather(self.ns["_save_items"]("user:alice", stale, [item("part", 7)]),
+                                       self.ns["_save_items"]("user:alice", stale, [item("part", 9)]), return_exceptions=True)
+        self.assertEqual(sum(isinstance(result, HTTPException) and result.status_code == 409 for result in results), 1)
+        self.assertIn(self.quantity("user:alice"), (7, 9))
+
+    async def test_concurrent_initial_cart_creation_returns_conflict(self):
+        results = await asyncio.gather(*(self.ns["_save_items"]("user:new", None, [item("part", n)]) for n in (1, 2)), return_exceptions=True)
+        self.assertEqual(sum(isinstance(result, HTTPException) and result.status_code == 409 for result in results), 1)
+        self.assertIn(self.quantity("user:new"), (1, 2))
+
+    async def test_logout_hides_archived_source_and_next_write_rotates_guest(self):
+        await self.merge(identity())
+        self.bind_auth()
+        request = SimpleNamespace(user=None, guest="guest-a")
+        read_response, write_response = CookieResponse(), CookieResponse()
+        reader = await self.ns["owner_for"](request, read_response, create=False)
+        self.assertIsNone(reader.owner)
+        self.assert_guest_cookie_deleted(read_response)
+        writer = await self.ns["owner_for"](request, write_response, create=True)
+        self.assertEqual(writer.owner, "guest:new-guest")
+        self.assert_guest_cookie_deleted(write_response)
+        self.assertEqual(len(write_response.headers), 2)
+        self.assertEqual(SimpleCookie(write_response.headers[-1][1])["tk_guest"].value, "new-guest")
+        self.assertEqual(self.db.rows["guest:guest-a"]["items"], self.original["guest:guest-a"]["items"])
+
+    async def test_confirmed_merge_clears_guest_cookie_on_supplied_response(self):
+        self.bind_auth()
+        response = CookieResponse()
+        result = await self.ns["owner_for"](SimpleNamespace(user="alice", guest="guest-a"), response, create=False)
+        self.assertEqual(result.owner, "user:alice")
+        self.assertIsNone(result.guest_id)
+        self.assert_guest_cookie_deleted(response)
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_stale_foreign_receipt_does_not_block_new_accounts_cart(self):
+        await self.merge(identity())
+        self.db.seed("user:bob", [item("part", 7)])
+        before = copy.deepcopy(self.db.rows)
+        callbacks = self.db.callbacks
+        self.bind_auth()
+        response = CookieResponse()
+        result = await self.ns["owner_for"](SimpleNamespace(user="bob", guest="guest-a"), response, create=False)
+        self.assertEqual(result.owner, "user:bob")
+        self.assertIsNone(result.guest_id)
+        self.assert_guest_cookie_deleted(response)
+        self.assertEqual(self.db.rows, before)
+        self.assertEqual(self.db.callbacks, callbacks)
+
+    async def test_alice_merge_logout_bob_login_without_guest_write(self):
+        self.bind_auth()
+        response = CookieResponse()
+        await self.ns["owner_for"](SimpleNamespace(user="alice", guest="guest-a"), response, create=False)
+        self.assert_guest_cookie_deleted(response)
+        before = copy.deepcopy(self.db.rows)
+        # The browser applies Set-Cookie; logout/login changes only tk_session.
+        bob_response = CookieResponse()
+        bob = await self.ns["owner_for"](SimpleNamespace(user="bob", guest=None), bob_response, create=False)
+        self.assertEqual(bob.owner, "user:bob")
+        self.assertEqual(bob_response.headers, [])
+        self.assertEqual(self.db.rows, before)
+
+    async def test_lost_ack_retains_cookie_until_retry_confirms_receipt(self):
+        self.bind_auth()
+        self.db.fail = "after_commit"
+        response = CookieResponse()
+        request = SimpleNamespace(user="alice", guest="guest-a")
+        await self.assert_error(self.ns["owner_for"](request, response, create=False), "cart_merge_unconfirmed", 503)
+        self.assertEqual(response.headers, [])
+        retry_response = CookieResponse()
+        result = await self.ns["owner_for"](request, retry_response, create=False)
+        self.assertEqual(result.owner, "user:alice")
+        self.assert_guest_cookie_deleted(retry_response)
+        self.assertEqual(self.quantity("user:alice"), 5)
+
+    async def test_foreign_receipt_race_does_not_block_either_account(self):
+        self.bind_auth()
+        self.db.seed("user:bob", [item("part", 7)])
+        responses = [CookieResponse(), CookieResponse()]
+        results = await asyncio.gather(*(self.ns["owner_for"](SimpleNamespace(user=user, guest="guest-a"), response, create=False)
+                                         for user, response in zip(("alice", "bob"), responses)))
+        self.assertEqual([result.owner for result in results], ["user:alice", "user:bob"])
+        for result, response in zip(results, responses):
+            self.assertIsNone(result.guest_id)
+            self.assert_guest_cookie_deleted(response)
+        winner = self.db.rows["guest:guest-a"]["merged_to"]
+        self.assertEqual(self.quantity("user:alice"), 5 if winner == "user:alice" else 2)
+        self.assertEqual(self.quantity("user:bob"), 10 if winner == "user:bob" else 7)
+
+    async def test_failed_merge_does_not_clear_untransferred_cookie(self):
+        self.bind_auth()
+        self.db.rows["guest:guest-a"]["items"][0]["quantity"] = 19
+        response = CookieResponse()
+        await self.assert_error(self.ns["owner_for"](SimpleNamespace(user="alice", guest="guest-a"), response, create=False), "cart_merge_quantity_limit", 409)
+        self.assertEqual(response.headers, [])
+
+    async def test_no_source_or_empty_source_no_target_changes(self):
+        for guest in ("missing", "empty"):
+            self.db.seed("guest:empty", [])
+            before = copy.deepcopy(self.db.rows)
+            await self.merge(identity(guest=guest))
+            self.assertEqual(self.db.rows, before)
+
+    async def test_set_and_confirm_routes_use_guarded_persistence(self):
+        calls = []
+        async def owner(*args, **kwargs):
+            return identity()
+        async def save(owner, previous, items):
+            calls.append((owner, previous, items))
+        async def priced(owner):
+            return {"lines": [{"product_id": "part", "name": "Part", "quantity": 4, "stock": 3, "unit_cents": 100}]}
+        self.ns.update(owner_for=owner, _save_items=save, priced=priced)
+        await self.ns["set_item"](SimpleNamespace(product_id="part", quantity=0), None, None)
+        await self.ns["confirm_changes"](None, None)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(calls[0][1], self.original["user:alice"])
+        self.assertEqual(calls[1][1], self.original["user:alice"])
+        self.assertEqual(calls[1][2][0]["quantity"], 3)
+
+
+if __name__ == "__main__":
+    unittest.main()

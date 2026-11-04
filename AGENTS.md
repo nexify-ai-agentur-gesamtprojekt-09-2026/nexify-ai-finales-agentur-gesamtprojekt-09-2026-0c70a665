@@ -2,6 +2,27 @@
 
 Stand 2026-09-29 · Fassung 1.0 · Freigabe der Entscheidungen E1/E3/E4/E5/E6/E12 steht aus (siehe `docs/09-final/08-recht-und-compliance.md`).
 
+## Aktuelle Führungsentscheidung · 04.11.2026
+
+Die ausdrückliche Nutzerentscheidung führt diese Website als Arbeits-, Gestaltungs-
+und Migrationsstand: https://nexify-ai-factory-20261101.workspace-vo-0220.chatgpt.site/,
+Sites-Projekt `appgprj_6ae7ad63df2081918a843f996caf9422`. Ältere Vercel-/Backup-
+Prioritäten unten sind im widersprechenden Umfang historisch; bestehende Domains,
+Daten und Laufzeiten bleiben bis zum jeweils geprüften Übergang erhalten.
+Keinen zweiten Writer, blindes Spiegeln oder ungeprüften Runtimewechsel starten.
+Der bestehende Gesamtauftrag P01–P26 im `requirements_reconciliation`-Register
+von `config/acceptance-coverage.json` bleibt führend. Neue Details und Nachweise
+unter derselben Auftragsbindung nachführen; keine zweite Aufgabenverwaltung.
+
+Der Home-Hero MUSS die vorgegebene Videoaufnahme liefern; Standbilder oder
+CSS-Figuren ersetzen diesen Lieferumfang nicht. Die drei Medien darunter bleiben
+Glasbilder. Neueste konkrete Regie und Produktionsstatus stehen in
+`docs/production/hero-requirements-2026-11-04.md`. Vorhandene Originale erhalten,
+Pascal unverfremdet, NeX als Tukan, Oracle glatt mit Hut/Monokel und ohne Fell.
+Abo-Medien in Higgsfield zuerst wiederverwenden; notwendige Produktion nur im
+vorhandenen Guthaben ohne Aufladung/Neutarif. Keine automatische Gesamtabnahme
+oder Daten-/Rechtefreigabe aus dieser Führungsentscheidung ableiten.
+
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 

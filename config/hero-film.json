@@ -1,27 +1,51 @@
 {
-  "decision": "USER-VIDEO-SHOTPLAN-20261102",
-  "kind": "existing_glass_montage_with_elevenlabs_offscreen_narration",
-  "speaking_performance": false,
+  "decision": "USER-VIDEO-AUDIO-OPTIMIZATION-20261104",
+  "kind": "native_performance_editorial_cut_with_original_oracle_composite",
+  "speaking_performance": true,
   "lip_sync": false,
   "original_portrait": "/media/atelier/presenters/pascal-walking-original-20261102.jpg",
   "original_sha256": "4b46820025ae887c49ec18b7f606fd12082e6c6ef63b094458b1f313efafaea8",
   "cutout": "/media/atelier/presenters/pascal-walking-cutout-20261102.png",
   "cutout_sha256": "b97938ef2540edbe51e5a1398111a39ddb5f6a238c7469f4682a086d96d40e92",
   "film": {
-    "src": "/media/atelier/films/hero-glass-eleven-20261102.mp4",
-    "poster": "/media/atelier/films/hero-glass-portrait-20261102.jpg",
-    "width": 1920,
-    "height": 1080,
-    "title": "Pascal, NeX und AIFly ORACLE im Glasatelier",
-    "duration_seconds": 17,
+    "src": "/media/atelier/films/hero-native-editorial-20261104.webm",
+    "poster": "/media/atelier/films/hero-native-editorial-20261104.png",
+    "width": 1280,
+    "height": 720,
+    "title": "Pascal, NeX und Oracle · Begrüßung",
+    "duration_seconds": 25.17,
     "hasAudio": true,
     "autoplayWithAudio": true,
     "playOnce": true,
-    "sha256": "0cd162971738aa305978ce172eac16e0fdeb28cc76338c45c1d1c71e36841036",
-    "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa",
-    "transcript": "Ein guter Auftritt beginnt mit einer klaren Idee. Wir verbinden Marke, Website und digitale Systeme, damit aus Ihrem Vorhaben etwas entsteht, das Menschen erreicht und Ihr Unternehmen voranbringt. NeXify. Gemeinsam machen wir den nächsten Schritt."
+    "captions": "/media/atelier/films/hero-native-editorial-20261104.de.vtt",
+    "transcript": "Herzlich willkommen bei NeXify. Ich bin Pascal. Mit NeX und Oracle entwickeln wir Websites und KI-Agenten. Wir verbinden Gestaltung und Technik zu Lösungen. Entdecken Sie, was möglich ist. NeXify. Chat it. Automate it.",
+    "sha256": "4090b4d8efc9ffbc11857cb10cc327db69b3cc1a46bc615811ad16ef822815fb",
+    "poster_sha256": "424ae7d9400b36e9fcc1aac3bed8b5c07dc87ed4692116c1907683117a45fb88",
+    "captions_sha256": "093697c87177f57f8a9cc99e6e15e775b8a9821b8ea12e61779ef983d1fa62c8",
+    "alpha": true
   },
   "film_history": [
+    {
+      "src": "/media/atelier/films/hero-glass-eleven-20261102.mp4",
+      "poster": "/media/atelier/films/hero-glass-portrait-20261102.jpg",
+      "width": 1920,
+      "height": 1080,
+      "title": "Pascal, NeX und AIFly ORACLE im Glasatelier",
+      "duration_seconds": 17,
+      "hasAudio": true,
+      "autoplayWithAudio": true,
+      "playOnce": true,
+      "sha256": "0cd162971738aa305978ce172eac16e0fdeb28cc76338c45c1d1c71e36841036",
+      "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa",
+      "transcript": "Ein guter Auftritt beginnt mit einer klaren Idee. Wir verbinden Marke, Website und digitale Systeme, damit aus Ihrem Vorhaben etwas entsteht, das Menschen erreicht und Ihr Unternehmen voranbringt. NeXify. Gemeinsam machen wir den nächsten Schritt.",
+      "kind": "existing_glass_montage_with_elevenlabs_offscreen_narration",
+      "voice_provenance": {
+        "provider": "ElevenLabs via Runway",
+        "model": "eleven_multilingual_v2",
+        "voice": "Lisa",
+        "task_id": "75fea70d-6ca8-49f4-add6-6dfec67c5bb3"
+      }
+    },
     {
       "src": "/media/atelier/films/home-studio-welcome-20261102.mp4",
       "poster": "/media/atelier/films/home-studio-welcome-20261102.jpg",
@@ -52,9 +76,66 @@
     }
   ],
   "voice_provenance": {
-    "provider": "ElevenLabs via Runway",
-    "model": "eleven_multilingual_v2",
-    "voice": "Lisa",
-    "task_id": "75fea70d-6ca8-49f4-add6-6dfec67c5bb3"
+    "provider": "Higgsfield",
+    "model": "seedance_2_5",
+    "source_job_id": "3ff0fa82-1718-466e-abe3-442b217afca2",
+    "voice": "native_generated_male_German_not_verified_Pascal_voice_clone",
+    "editing": "same picture and audio source segments; faulty phrases removed"
+  },
+  "lip_sync_note": "Corresponding native audio and picture edited together in a single file. No independent phoneme or human hearing acceptance. No disconnected TTS over old lip movements.",
+  "editorial_preview": true,
+  "release_scope": "owner_private_review_only",
+  "production_accepted": false,
+  "editorial_edit": {
+    "source_duration_seconds": 30.08,
+    "segments_seconds": [
+      [
+        0,
+        7.6
+      ],
+      [
+        8.64,
+        12
+      ],
+      [
+        13.14,
+        13.58
+      ],
+      [
+        12.2,
+        13.14
+      ],
+      [
+        15.18,
+        18.34
+      ],
+      [
+        20.42,
+        30.04
+      ]
+    ],
+    "generated_duplicate_removed": true,
+    "oracle_original_composited": "/media/atelier/presenters/oracle-lossless.webp",
+    "remaining_directorial_limits": [
+      "editorial_cuts_instead_of_continuous_30_second_take",
+      "NeX_generated_motion_is_hopping_fluttering_not_verified_walk",
+      "Oracle_uses_original_composited_artwork_not_native_3D_performance",
+      "human_hearing_and_exact_phoneme_acceptance_pending",
+      "physical_Safari_and_assistive_technology_acceptance_pending"
+    ]
+  },
+  "audio_mastering": {
+    "measured_integrated_LUFS": -16.14,
+    "measured_true_peak_dBTP": -2.17,
+    "measured_LRA_LU": 19.9,
+    "scope": "whole_final_export_including_intro_and_outro",
+    "native_audio_and_video_same_timeline": true,
+    "independent_human_hearing_verified": false,
+    "spoken_range_seconds": [
+      4.18,
+      21.58
+    ],
+    "spoken_range_LUFS": -15.99,
+    "spoken_range_LRA_LU": 2.3
   }
 }

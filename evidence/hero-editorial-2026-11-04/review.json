@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-04",
+  "scope": "owner_private_editorial_preview_only",
+  "source_baseline": "0bbce305fb7e11233a7824d5b509e8f9e49e5ea7",
+  "source_sha256": {
+    "apps/web/components/IdentityHero.tsx": "d39924ecc681bb3241fc9428cc43fdf2900bc0a5ffb79b45d626ca83934d8f94",
+    "apps/web/components/AtelierFilm.tsx": "156c48e84a55198f4e0d9660f9e237d31470398b480844f49440e849798fc98b",
+    "apps/web/components/HomeConcept.css": "5e397a0fa3dd415568ef80969599b7b159099bc3df53f869b20ee9c8074a8d52",
+    "apps/web/components/LuxuryMaterials.css": "8a9d62aaa2be5864089e45f3c073665f8ce2dfa49ea48a99a16e15596a4ba414",
+    "apps/site/vite.config.ts": "c6e8b8d847228d2c6c68ef3b073ead3a7749b959971684e26d71b5b003639932",
+    "apps/site/plugins/owner-review-media.mjs": "2d12cc0ad0684b963c3d986d11a29bdaad5a61a7b1cae6846279e9bd422880c4",
+    "scripts/sites-output.mjs": "00ace72c184b9b9cc2a783e67106ee7acc85c2a5f212caeb2593e3ad7b98f1d1",
+    "config/hero-film.json": "ac299f1f9fa8dafde2191f07c505423779529ac5e54d112aceca3a40f9e0d31f"
+  },
+  "media_sha256": "4090b4d8efc9ffbc11857cb10cc327db69b3cc1a46bc615811ad16ef822815fb",
+  "actual_decode": "full_libvpx_vp9_decode_passed",
+  "alpha": "decoded_alpha_0_to_255_independently_confirmed",
+  "asr_checks": [
+    "Whisper_small",
+    "Whisper_medium"
+  ],
+  "asr_edited_text_agreement": true,
+  "human_hearing_phoneme_identity_acceptance": false,
+  "audio": {
+    "whole_export_LUFS": -16.14,
+    "true_peak_dBTP": -2.17,
+    "whole_export_LRA_LU": 19.9,
+    "spoken_4_18_to_21_58_LUFS": -15.99,
+    "spoken_LRA_LU": 2.3
+  },
+  "browser": {
+    "environment": "managed_Chrome_same_origin_srcdoc_standalone_preview_not_physical_device",
+    "css_frame_widths": [
+      320,
+      390,
+      820,
+      1024,
+      1440,
+      1920
+    ],
+    "observed_client_widths": [
+      305,
+      375,
+      805,
+      1009,
+      1425,
+      1905
+    ],
+    "observed_scroll_widths": [
+      305,
+      375,
+      805,
+      1009,
+      1425,
+      1905
+    ],
+    "locale_320": [
+      "de",
+      "nl",
+      "fr",
+      "en"
+    ],
+    "all_have_actual_video": true,
+    "toolbar_normal_flow_below_video": true,
+    "toolbar_viewport_contained": true,
+    "perspective_bbox_edge_projection_tolerance_px": 1.2,
+    "voice_click_resets_time_to_zero_and_unmutes": true,
+    "pause_observed": true,
+    "captions_off_observed": true,
+    "volume_home_mutes_observed": true,
+    "voice_after_volume_zero_unmutes_and_plays": true,
+    "visible_transcript_opened": true
+  },
+  "packaging": {
+    "default_build_review_assets_absent_in_vite_root_and_next_public": true,
+    "private_flag_build_all_six_output_hashes_match_source": true,
+    "flag_is_not_authentication": true,
+    "native_private_deployment_required": true
+  },
+  "whole_system_accepted": false,
+  "public_release_accepted": false,
+  "remaining": [
+    "continuous_30_second_directorial_take",
+    "NeX_natural_walk",
+    "Oracle_original_compositing_layer",
+    "key_edges_and_original_halo",
+    "human_hearing_phoneme_and_identity_acceptance",
+    "Safari_physical_devices_and_assistive_technology",
+    "full_system_red_test_and_architecture_gates"
+  ]
+}
