@@ -37,11 +37,11 @@
 
   <div style="position:relative;background:linear-gradient(90deg,#1B1E1D 0%,#1E2220 55%,#1B1E1D 100%);border-bottom:1px solid #2F3432">
     <span aria-hidden="true" style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(215,250,80,.6) 28%,rgba(111,227,207,.5) 62%,transparent)"></span>
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;width:min(1280px,calc(100% - 48px));margin:0 auto;padding:9px 0">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;width:min(1280px,calc(100% - 48px));margin:0 auto;padding:8px 0">
 
-      <nav aria-label="{{ tPlattform }}" style="display:flex;align-items:center;max-width:100%;overflow-x:auto;scrollbar-width:none;padding:3px;border-radius:999px;background:#242826;border:1px solid #363A38">
+      <nav aria-label="{{ tPlattform }}" style="display:flex;align-items:center;max-width:100%;overflow-x:auto;scrollbar-width:none;padding:4px;border-radius:999px;background:#242826;border:1px solid #363A38">
         <sc-for list="{{ marken }}" as="m" hint-placeholder-count="2">
-          <a href="{{ m.href }}" aria-current="{{ m.current }}" style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:999px;background:{{ m.bg }};color:{{ m.fg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:{{ m.weight }};text-decoration:none;transition:color .2s ease" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
+          <a href="{{ m.href }}" aria-current="{{ m.current }}" style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 16px;border-radius:999px;background:{{ m.bg }};color:{{ m.fg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:{{ m.weight }};text-decoration:none;transition:color .2s ease" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">
             <span aria-hidden="true" style="display:block;width:7px;height:7px;flex:0 0 auto;border-radius:{{ m.radius }};background:{{ m.dot }}"></span>{{ m.label }}
           </a>
         </sc-for>
@@ -49,20 +49,20 @@
 
       <span class="nxh-status" style="display:inline-flex;align-items:center;gap:8px;font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;white-space:nowrap"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#D7FA50;box-shadow:0 0 0 3px rgba(215,250,80,.18)"></span>Alle Systeme laufen · Daten in Frankfurt</span>
 
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-left:auto">
-        <sc-if value="{{ abgemeldet }}" hint-placeholder-val="{{ true }}"><nav aria-label="{{ tIntern }}" style="display:flex;align-items:center;gap:10px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-left:auto">
+        <sc-if value="{{ abgemeldet }}" hint-placeholder-val="{{ true }}"><nav aria-label="{{ tIntern }}" style="display:flex;align-items:center;gap:12px">
           <span class="nxh-status" style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;white-space:nowrap">{{ tLoginZu }}</span>
-          <div style="display:flex;align-items:center;gap:4px;padding:3px;border-radius:999px;background:#242826;border:1px solid #363A38">
+          <div style="display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:#242826;border:1px solid #363A38">
             <sc-for list="{{ portale }}" as="p" hint-placeholder-count="3">
-              <a href="{{ p.href }}" aria-current="{{ p.current }}" style="display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:999px;background:{{ p.bg }};color:{{ p.fg }};font-family:Geist,sans-serif;font-size:13px;font-weight:500;white-space:nowrap;text-decoration:none;transition:color .2s ease,background .2s ease" style-hover="color:#FFFFFF;background:rgba(215,250,80,.1)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.label }}</a>
+              <a href="{{ p.href }}" aria-current="{{ p.current }}" style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;background:{{ p.bg }};color:{{ p.fg }};font-family:Geist,sans-serif;font-size:13px;font-weight:500;white-space:nowrap;text-decoration:none;transition:color .2s ease,background .2s ease" style-hover="color:#FFFFFF;background:rgba(215,250,80,.1)" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ p.label }}</a>
             </sc-for>
           </div>
         </nav></sc-if>
-        <div style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
           <span class="nxh-status" style="font-family:'Geist Mono',monospace;font-size:12px;color:#9CA29E;white-space:nowrap">{{ marktLabel }}</span>
-          <div role="group" aria-label="{{ tSprache }}" style="display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:#242826;border:1px solid #363A38">
+          <div role="group" aria-label="{{ tSprache }}" style="display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:#242826;border:1px solid #363A38">
             <sc-for list="{{ sprachen }}" as="l" hint-placeholder-count="3">
-              <button onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="min-width:34px;height:30px;padding:0 9px;border:0;border-radius:999px;background:{{ l.bg }};color:{{ l.fg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;cursor:pointer;transition:color .2s ease" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ l.code }}</button>
+              <button onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="min-width:34px;height:30px;padding:0 8px;border:0;border-radius:999px;background:{{ l.bg }};color:{{ l.fg }};font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;cursor:pointer;transition:color .2s ease" style-hover="color:#FFFFFF" style-focus="outline:2px solid #D7FA50;outline-offset:2px">{{ l.code }}</button>
             </sc-for>
           </div>
         </div>

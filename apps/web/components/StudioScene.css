@@ -17,7 +17,7 @@
 .studio-actor.is-flipped>img.studio-reflection{transform:scale(-1,-1)}
 .studio-actor.who-oracle{bottom:36%}
 .studio-actor.who-oracle>img.studio-reflection{display:none}
-.studio-toggle{justify-self:start;display:inline-flex;align-items:center;gap:var(--space-2);min-height:var(--target-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-pille);border:1px solid var(--color-linie-mittel);background:color-mix(in srgb,var(--color-atelier-surface) 70%,transparent);color:var(--color-text-primaer);font:inherit;font-size:13px;cursor:pointer}
+.studio-toggle{justify-self:start;display:inline-flex;align-items:center;gap:var(--space-2);min-height:var(--target-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-pille);border:1px solid var(--color-linie-mittel);background:color-mix(in srgb,var(--color-atelier-surface) 70%,transparent);color:var(--color-text-primaer);font:inherit;font-size:14px;cursor:pointer}
 .studio-toggle:hover{border-color:var(--studio-light,var(--color-atelier-champagne))}
 .studio-toggle:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:3px}
 .studio-film{display:grid;gap:var(--space-3);min-width:0}

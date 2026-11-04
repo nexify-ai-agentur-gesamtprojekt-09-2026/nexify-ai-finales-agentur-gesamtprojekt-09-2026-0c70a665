@@ -1,0 +1,10 @@
+{
+  "zweck": "Geprüfte Fehlalarme der CI-Schranke tools/regel-pruefung.js. Nur Pfad, Regel, Anzahl und Grund; nie ein Treffertext. Prüfung mit maskierter Ausgabe am 04.11.2026.",
+  "ausnahmen": [
+    {"regel": "R-07", "pfad": "apps/web/components/shop/AuthForms.tsx", "anzahl": 2, "grund": "Feldfehlercodes der Passwortprüfung (Mindestlänge, Pflichtfeld), kein Zugangswert."},
+    {"regel": "R-07", "pfad": "config/integrations/vercel-agent-runtime.json", "anzahl": 1, "grund": "Quelltextauszug in der Integrationsbeschreibung; der Wert ist ein Variablenverweis auf das serverseitige Geheimnis."},
+    {"regel": "R-07", "pfad": "prototypen/lib/langfuse.js", "anzahl": 1, "grund": "Dokumentiertes Platzhalterbeispiel aus dem Regelwerk-Prüffall RW19, kein Schlüssel."},
+    {"regel": "R-07", "pfad": "tools/revolut.mjs", "anzahl": 1, "grund": "Fester Testwert der lokalen Webhook-Signaturprüfung, kein Anbieterschlüssel."},
+    {"regel": "R-16", "pfad": "prototypen/support.js", "anzahl": 2, "grund": "Laufzeit der Prototypen setzt Template-Löcher selbst zusammen; die Regel gilt für Flächen, nicht für diese Laufzeit."}
+  ]
+}

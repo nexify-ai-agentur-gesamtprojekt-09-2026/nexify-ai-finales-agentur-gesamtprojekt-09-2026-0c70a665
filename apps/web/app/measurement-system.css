@@ -184,11 +184,11 @@ input[type="checkbox"], input[type="radio"] {
 
 /* Normen-Badge, überall nutzbar */
 .norm-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 4px 10px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 12px;
   background: color-mix(in srgb, var(--color-marke-lime) 12%, transparent);
   color: var(--color-marke-lime);
-  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em;
   text-transform: uppercase; font-weight: 600;
   border: 1px solid color-mix(in srgb, var(--color-marke-lime) 35%, transparent);
   border-radius: 999px;

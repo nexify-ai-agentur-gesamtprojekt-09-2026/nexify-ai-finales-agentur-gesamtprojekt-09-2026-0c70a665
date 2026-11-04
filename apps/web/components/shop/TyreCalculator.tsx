@@ -34,11 +34,11 @@ export default function TyreCalculator() {
     <SizePicker id="current" label="Aktuelle Größe" value={a} onChange={setA} />
     <SizePicker id="planned" label="Geplante Größe" value={b} onChange={setB} />
     <dl className="tk-tyre-results" aria-live="polite">
-      <div><dt>Durchmesser</dt><dd data-testid="tyre-diameter">{fmt(dA, 1)} mm → {fmt(dB, 1)} mm</dd></div>
-      <div><dt>Abrollumfang</dt><dd data-testid="tyre-circumference">{fmt(Math.PI * dA)} mm → {fmt(Math.PI * dB)} mm</dd></div>
-      <div><dt>Abweichung</dt><dd data-testid="tyre-deviation">{dev >= 0 ? "+" : "−"}{fmt(abs, 2)} %</dd></div>
-      <div><dt>Bodenfreiheit</dt><dd data-testid="tyre-clearance">{dB >= dA ? "+" : "−"}{fmt(Math.abs(dB - dA) / 2, 1)} mm</dd></div>
-      <div><dt>Tacho zeigt 100 km/h, tatsächlich</dt><dd data-testid="tyre-speedo">{fmt(100 * dB / dA, 1)} km/h</dd></div>
+      <div><dt>Durchmesser</dt><dd data-testid="tyre-diameter">{fmt(dA, 1)}&nbsp;mm → {fmt(dB, 1)}&nbsp;mm</dd></div>
+      <div><dt>Abrollumfang</dt><dd data-testid="tyre-circumference">{fmt(Math.PI * dA)}&nbsp;mm → {fmt(Math.PI * dB)}&nbsp;mm</dd></div>
+      <div><dt>Abweichung</dt><dd data-testid="tyre-deviation">{dev >= 0 ? "+" : "−"}{fmt(abs, 2)}&nbsp;%</dd></div>
+      <div><dt>Bodenfreiheit</dt><dd data-testid="tyre-clearance">{dB >= dA ? "+" : "−"}{fmt(Math.abs(dB - dA) / 2, 1)}&nbsp;mm</dd></div>
+      <div><dt>Tacho zeigt 100 km/h, tatsächlich</dt><dd data-testid="tyre-speedo">{fmt(100 * dB / dA, 1)}&nbsp;km/h</dd></div>
     </dl>
     <p className={`tk-tyre-verdict is-${level}`} role="status" data-testid="tyre-verdict">{verdict}</p>
     <h3>Vor der Montage prüfen</h3>

@@ -13,6 +13,9 @@ build:
 
 check:
 	node tools/ds-audit-cli.js
+	node --test tests/css-norm.test.mjs
+	node tools/css-norm.mjs
+	node tools/regel-pruefung.js
 	bash tools/gesundheit-selbsttest.sh
 
 test:

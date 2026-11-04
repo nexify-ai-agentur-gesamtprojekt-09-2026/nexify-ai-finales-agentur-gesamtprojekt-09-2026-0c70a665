@@ -1,6 +1,6 @@
 .structured-footer .diagnostic-consent {grid-column:1 / -1;min-width:0;border-top:1px solid var(--color-linie-mittel);padding-top:16px;}
 .diagnostic-consent summary {min-height:var(--target-min);display:list-item;align-content:center;cursor:pointer;overflow-wrap:anywhere;}
-.diagnostic-consent-content {display:grid;gap:16px;max-width:70ch;padding-block:16px;overflow-wrap:anywhere;}
+.diagnostic-consent-content {display:grid;gap:16px;max-width:68ch;padding-block:16px;overflow-wrap:anywhere;}
 .diagnostic-consent-content p {margin:0;line-height:1.6;font-size:14px;color:var(--color-text-sekundaer);}
 .diagnostic-consent-actions {display:flex;flex-wrap:wrap;gap:12px;}
 .diagnostic-consent-actions button {flex:1 1 150px;}

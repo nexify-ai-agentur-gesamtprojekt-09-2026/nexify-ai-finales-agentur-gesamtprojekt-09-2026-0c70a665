@@ -9,6 +9,7 @@ export const AKTIONEN = ["lesen", "entwurf.anlegen", "mail.senden", "ki.antwort"
   "server.reboot", "dns.live", "firewall.voll", "endabnahme", "lernen.uebernehmen", "server.bereinigen"];
 const HARTSPERREN = { "server.reboot": "REBOOT", "dns.live": "LIVE-DNS", "firewall.voll": "FIREWALL" };
 const GEHEIMNIS = [/\bsk-[A-Za-z0-9_-]{20,}/, /\bAKIA[0-9A-Z]{16}\b/, /-----BEGIN [A-Z ]*PRIVATE KEY-----/, /\bnx_(live|test)_[A-Za-z0-9]{16,}/, /\b(passwor[dt]|secret|api[_-]?key)\s*[:=]\s*["']?[^\s"'${}]{8,}/i, /\bghp_[A-Za-z0-9]{30,}/, /\bglpat-[A-Za-z0-9_-]{20,}/];
+export const GEHEIMNIS_MUSTER = GEHEIMNIS; // für tools/regel-pruefung.js (Ausnahmen ohne Wertspeicherung)
 const TAG = 24 * 3600 * 1000;
 const RASTER = [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64, 72, 80, 96, 112, 128, 144]; // Design-Norm § Raster
 
@@ -122,7 +123,7 @@ export function pruefeDateien(dateien) {
     if (/\.(js|html)$/.test(pfad) && /\{\{\s*[^}]*[+\-!()?][^}]*\}\}/.test(s)) befunde.push({ regel: "R-16", pfad, grund: "Ausdruck in Template-Loch" });
     if (/\.dc\.html$/.test(pfad) && !/^NeXifyAI Cloud( v[3-9])?\.dc\.html$/.test(pfad) && !/Wireframes?\.dc\.html$/i.test(pfad)) { // Skizzen sind kein Produkt
       const tpl = s.split(/<script (?:type="text\/x-dc" )?data-dc-script/)[0]; const ab = new Set();
-      for (const m of tpl.matchAll(/(?:^|[;"\s])(padding|margin|gap|row-gap|column-gap)(?:-[a-z]+)?:([^;"{}]*)/g)) { if (/calc|clamp|min\(|max\(|var\(/.test(m[2])) continue; for (const x of m[2].matchAll(/(\d+(?:\.\d+)?)px/g)) { const w = +x[1]; if (w <= 144 && !RASTER.includes(w)) ab.add(w); } }
+      for (const m of tpl.matchAll(/(?:^|[;"\s])(padding|margin|gap|row-gap|column-gap)(?:-[a-z]+)?:([^;"{}]*)/g)) { if (/calc|clamp|min\(|max\(|var\(/.test(m[2])) continue; if (/\[[\w-]+[*^$~|]?="$/.test(tpl.slice(Math.max(0, m.index - 16), m.index + 1))) continue; /* Attributselektor wie [style*="padding:36px"] ist eine Abfrage, kein gesetzter Abstand */ for (const x of m[2].matchAll(/(\d+(?:\.\d+)?)px/g)) { const w = +x[1]; if (w <= 144 && !RASTER.includes(w)) ab.add(w); } }
       if (ab.size) befunde.push({ regel: "R-17", pfad, grund: "Abstand außerhalb des Rasters: " + [...ab].sort((a, b) => a - b).join(", ") + " px" });
       const umbruch = [...s.matchAll(/\+ ?" (ct|€|EUR|km|kg|mm|cm|min|Std\.|h|%|Tage|MB|KB|GB|px|Token)"/g)].map((m) => m[1]);
       const js = s.split(/data-dc-script[^>]*>/)[1] || "";

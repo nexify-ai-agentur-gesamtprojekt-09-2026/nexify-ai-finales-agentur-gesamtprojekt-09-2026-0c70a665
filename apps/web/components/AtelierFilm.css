@@ -1,17 +1,17 @@
 .atelier-film{position:relative;min-width:0;width:100%;isolation:isolate;overflow:hidden;border-radius:var(--radius-karte);background:var(--color-atelier-film-canvas)}
 .atelier-film video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border-radius:inherit}
 .atelier-film-controls{position:absolute;z-index:3;inset:auto 16px 16px;display:flex;gap:8px;flex-wrap:wrap}
-.atelier-film-controls button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 16px;border:1px solid var(--color-atelier-film-control-edge);border-radius:999px;background:var(--color-atelier-film-control-fill);backdrop-filter:blur(16px);color:var(--color-atelier-ink);font:inherit;font-size:12px;cursor:pointer;box-shadow:inset 0 1px var(--color-linie-fein)}
+.atelier-film-controls button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 16px;border:1px solid var(--color-atelier-film-control-edge);border-radius:999px;background:var(--color-atelier-film-control-fill);backdrop-filter:blur(16px);color:var(--color-atelier-ink);font:inherit;font-size:12px;cursor:pointer;box-shadow:inset 0 1px var(--color-linie-fein)}
 .atelier-film-controls button:hover{background:var(--color-atelier-film-control-hover);border-color:var(--color-atelier-champagne)}
 .atelier-film-controls button:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:3px}
-.atelier-film-transcript{background:var(--color-atelier-film-transcript);padding:14px 20px;color:var(--color-atelier-platinum);font-size:12px;line-height:1.7}
+.atelier-film-transcript{background:var(--color-atelier-film-transcript);padding:16px 20px;color:var(--color-atelier-platinum);font-size:12px;line-height:1.7}
 .atelier-film-transcript summary{min-height:24px;cursor:pointer}
 .atelier-film-error{position:absolute;inset:20px 20px auto;padding:12px;background:var(--color-atelier-film-error);color:var(--color-atelier-ink)}
 .atelier-film-hero{border-radius:0;overflow:visible;background:transparent}
 .atelier-film-hero .atelier-film-controls{inset:auto 28px 24px;justify-content:flex-end}
 .atelier-film-hero video{aspect-ratio:16/9}
 @media(prefers-reduced-transparency:reduce){.atelier-film-controls button{background:var(--color-atelier-surface);backdrop-filter:none}}
-@media(max-width:600px){.atelier-film-controls{inset:auto 8px 8px;gap:6px}.atelier-film-controls button{padding:8px 12px;font-size:11px}.atelier-film-hero .atelier-film-controls{inset:auto 12px 16px}}
+@media(max-width:600px){.atelier-film-controls{inset:auto 8px 8px;gap:8px}.atelier-film-controls button{padding:8px 12px;font-size:12px}.atelier-film-hero .atelier-film-controls{inset:auto 12px 16px}}
 
 .atelier-film-picture{position:relative;isolation:isolate;overflow:hidden;border-radius:inherit}
 .atelier-film-hero .atelier-film-controls{bottom:24px}
