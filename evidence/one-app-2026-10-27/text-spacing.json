@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T16:43:42.162Z",
+  "observed_at": "2026-11-04T16:58:48.313Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "51e6bf1fdd28440445ec04962df53e49ecafb92ba91c6588d07be0064f0f771b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -37,7 +37,7 @@
     "apps/web/components/InstallInvitation.css": "cb5e290f23a79a29767540098a1cd04a48a87112ecfd83baf3fe370b623b6117",
     "apps/web/components/InstallInvitation.tsx": "6acc2a91dd39947c185b04ee138b2e99564acb6b1db0d566b59323515c0ad113",
     "apps/web/components/LocaleAwareClerk.tsx": "f93aececbd2f8bc5d6c9c3f82504b5d42753f819ad92e919f14505deb9284e45",
-    "apps/web/components/LuxuryMaterials.css": "cd86d45d2927da736f52ce90bc1351f93b27368d695e544d11e03da711e66879",
+    "apps/web/components/LuxuryMaterials.css": "e42203693942b9747228fb5c4ac960843fbf6c4b5b5c2e215013f61d02f7b9eb",
     "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
     "apps/web/components/MailWorkspacePanel.tsx": "b1c8f20caa4b4a7df25330758c2aad397cfc04a89f4fb1385f133b1560548ee5",
     "apps/web/components/NextRouterBridge.tsx": "9697b38ccc3f5aebc46875cee305f624e09efe1723c74a65a829ec870ce59f23",
@@ -913,7 +913,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 512,
+        "count": 511,
         "all_doubled": true
       },
       "overflow": false,
@@ -936,7 +936,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 462,
+        "count": 463,
         "all_doubled": true
       },
       "overflow": false,
@@ -1005,7 +1005,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 445,
+        "count": 446,
         "all_doubled": true
       },
       "overflow": false,

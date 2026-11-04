@@ -351,3 +351,14 @@
 .workspace-shell .aifly-panel .orientation-composer{position:sticky;bottom:calc(-1 * var(--space-4));z-index:3;margin-inline:calc(-1 * var(--space-4));margin-bottom:calc(-1 * var(--space-4));padding:var(--space-3) var(--space-4) var(--space-4);background:color-mix(in srgb,var(--color-atelier-surface) 78%,transparent);-webkit-backdrop-filter:blur(var(--material-blur,18px)) saturate(140%);backdrop-filter:blur(var(--material-blur,18px)) saturate(140%);border-top:1px solid var(--color-linie-fein)}
 .workspace-shell .aifly-panel .orientation-composer::before{content:"";position:absolute;inset:calc(-1 * var(--space-6)) 0 100%;pointer-events:none;background:linear-gradient(to top,color-mix(in srgb,var(--color-atelier-surface) 70%,transparent),transparent)}
 @media (prefers-reduced-transparency:reduce){.workspace-shell .aifly-panel .orientation-composer{background:var(--color-atelier-surface);-webkit-backdrop-filter:none;backdrop-filter:none}}
+/* Light & depth refinement (owner request 04.11.2026), tokens only, no layout change:
+   1. Film stages rest on a soft champagne floor reflection.
+   2. The first action of a page reads as the primary one: glass fill, specular top edge, lift.
+   Motion respects reduced-motion. */
+.workspace-shell .domain-artwork{position:relative;isolation:isolate}
+.workspace-shell .domain-artwork::after{content:"";position:absolute;z-index:-1;left:8%;right:8%;bottom:calc(-1 * var(--space-5));height:var(--space-7);pointer-events:none;border-radius:50%;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--color-atelier-champagne) 18%,transparent),transparent 70%);filter:blur(var(--material-blur,18px))}
+.workspace-shell .content-layout .content-actions-primary .content-action-link:first-child{border-color:color-mix(in srgb,var(--color-atelier-champagne) 46%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--color-atelier-champagne) 14%,transparent),color-mix(in srgb,var(--color-atelier-champagne) 4%,transparent));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-text-primaer) 14%,transparent),var(--shadow-atelier)}
+.workspace-shell .content-layout .content-action-link{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,border-color .25s}
+.workspace-shell .content-layout .content-action-link:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-text-primaer) 14%,transparent),var(--shadow-atelier-depth)}
+@media (prefers-reduced-motion:reduce){.workspace-shell .content-layout .content-action-link{transition:none}.workspace-shell .content-layout .content-action-link:hover{transform:none}}
+@media (prefers-reduced-transparency:reduce){.workspace-shell .domain-artwork::after{display:none}}
