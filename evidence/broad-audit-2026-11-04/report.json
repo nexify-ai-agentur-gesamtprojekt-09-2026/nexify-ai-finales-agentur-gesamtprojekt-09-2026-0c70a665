@@ -1,0 +1,16 @@
+{
+  "scope": "local optimized public build; heuristic audit, not a full WCAG or device acceptance",
+  "pages": 43,
+  "runs": [
+    "320:de",
+    "390:de",
+    "820:de",
+    "1280:de",
+    "1920:de",
+    "390:nl",
+    "390:fr",
+    "390:en"
+  ],
+  "findings": [],
+  "passed": true
+}

@@ -16,6 +16,8 @@ Bildquelle Shop (Inhaberentscheidung 04.11.): echte Produktfotos. ProductShowcas
 
 Startseite Kapitel 0: ShopHomeTeaser nach „Produktwelt“ (Text + CTA + echte Packshots, ohne Katalog nur Text/CTA); Produkt-Bühne auch auf /teileklar. Offen beim Inhaber: BigBuy-Schlüssel (Katalog leer, D-008), juristische Prüfung der Rechtsbezug-Seiten/Kasse, Versandkosten/Lieferzeiten, echte Fotografie für szenische Motive.
 
+Breiter Audit (04.11.): `apps/site/tests/browser-broad-audit.mjs` misst alle 43 öffentlichen Seiten × 320/390/820/1280/1920 (de) + nl/fr/en; Überlauf, H1, Namen, Zielgröße, Alt, IDs, interne Links, Meta, lang, Laufzeitfehler. Behoben: toter Link Partnerzugang `/login` → `/anmelden`; Einwilligungs-Checkbox 18→24 px mit 48-px-Label. Ergebnis 0 Befunde (`evidence/broad-audit-2026-11-04/report.json`). Gelernt: innerText ist bei content-visibility:auto/geschlossenen Menüs leer → textContent + checkVisibility; Prozessmuster nie im selben Befehl starten und per pgrep beenden.
+
 ---
 
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026

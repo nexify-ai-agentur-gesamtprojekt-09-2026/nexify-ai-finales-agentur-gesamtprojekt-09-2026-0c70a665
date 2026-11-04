@@ -1224,7 +1224,7 @@
   ],
   "source_sha256": {
     "AGENTS.md": "238f1efaa69815bab4ebca3e2ee77ad584102131279262788102c89559e0b2c0",
-    "PROGRESS.md": "3493697a003b86f785c9dc755eb6f79971a6efbdf937ca2771a468e5dc8faf49",
+    "PROGRESS.md": "e9c7b39df214fcc71497deb56b512d199192316d7823584579717972b39b317b",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
     "apps/selfservice/domain.py": "91bd9a5a90fea6e5f295563492f62eb02bb393c262e4c0b811017f5bde7f6ad6",
@@ -1308,7 +1308,7 @@
     "evidence/one-app-2026-10-27/suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
     "evidence/one-app-2026-10-27/takeover-runtime-read.json": "cf604539a555287d63aca6d77217ab10b578a39a6d54991ac3367444646a6cf0",
     "evidence/one-app-2026-10-27/target-size-before.json": "1abda3087a139559ac17188171fd8e5de03c34f41cd5061c72d3a55a97a218db",
-    "evidence/one-app-2026-10-27/text-spacing.json": "c0ae5e6566464e938c88fcafb15e3921de40b9a0d3b5f1979b6f69369b1d5150",
+    "evidence/one-app-2026-10-27/text-spacing.json": "a0814030dc0b3bcf588b17c519e66f04f7bf4e2fe381ddbee4b45ea69db3b945",
     "evidence/reconciliation-2026-10-27/linked-standards-reference.json": "f20d9e9d8b66d49057c038a17aaea6ce9c8392e92cecbe55ed5594bb0adbaf48",
     "evidence/reconciliation-2026-10-27/review-asset-inspection.json": "11f5c4eee4527585f607fadec7cec4c99cc10b18228a4f6cb7794bcf46056f2e",
     "evidence/reconciliation-2026-10-27/route-feature-inventory.json": "fbea71c96cf69f0db41d5f405a8535629a4cfb1c8fd06c270c7267cb4f8495e4",

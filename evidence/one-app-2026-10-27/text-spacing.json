@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T15:44:33.740Z",
+  "observed_at": "2026-11-04T16:11:47.151Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "51e6bf1fdd28440445ec04962df53e49ecafb92ba91c6588d07be0064f0f771b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -91,7 +91,7 @@
     "apps/web/components/shop/OrderConfirmation.tsx": "66ff1fa0a3e38330d22a30afeb6e698f264eeb6576ecefbd4916539d67c587a0",
     "apps/web/components/shop/OrderList.tsx": "aa7a199f2027050d1be559b3c24d5d2f7c0b171938b29eeca7d678314025970c",
     "apps/web/components/shop/OrderTimeline.tsx": "4668fd941019728bc5ed05046383ec9e61bdd3e15854815baf24b45a14d36364",
-    "apps/web/components/shop/PartnerJourney.tsx": "70b54dfd7a183df39a1c912718c20af1264429bc66900d2ac98ab971544e7427",
+    "apps/web/components/shop/PartnerJourney.tsx": "2593d5a7b72b00e9955fd2aa23564c0cd3c35b1d9c1dd4336a1337baa02b8f25",
     "apps/web/components/shop/PhaseNotice.tsx": "114b4eb85cf300d9b32a02070813372b66c6a3bb8bea74e460ed51c193c4df10",
     "apps/web/components/shop/ProductCard.tsx": "594e6501f4dc4c7ee60a790ef08012b77724123d040ee3464df200840119f2aa",
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
@@ -109,7 +109,7 @@
     "apps/web/components/shop/WorkshopFinder.tsx": "11f34ef13510ce7cac4cb11884c7120d0584cd2337724f2ec5167f2ca88a4175",
     "apps/web/components/shop/WorkshopMap.tsx": "5e05dd616d16692c523f0c5dca9829025d8968f81c2cb9365d64cc810282ab73",
     "apps/web/components/shop/api.ts": "8b1367a3208f0763ab63a23e4519df49425060afe52c13f7bbe8d772991e4048",
-    "apps/web/components/shop/shop.css": "82ef80fe13765659b1ff7c5c61286d5acb69cc3c839e17bd8cbff33ab8e9605d",
+    "apps/web/components/shop/shop.css": "8dde1417a36b3ee6545ef103951c3d44468d7a9116d33ddb7ef8a0a393808869",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
     "apps/web/lib/contact-attempt.ts": "2deb708f4c7ceac90b316ee661799d9bd346223e04c1bcc363d7645b9111ee04",
     "apps/web/lib/contact-copy.ts": "1db2001ac62e96e582ebe4ae43fa6114d7b8913ce936a1c30c082f1300644a91",
@@ -453,7 +453,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 479,
+        "count": 480,
         "all_doubled": true
       },
       "overflow": false,
@@ -936,7 +936,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 462,
+        "count": 463,
         "all_doubled": true
       },
       "overflow": false,
