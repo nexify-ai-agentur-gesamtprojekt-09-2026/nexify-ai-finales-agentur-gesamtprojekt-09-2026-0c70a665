@@ -151,12 +151,12 @@
 .tk-ws-detail>div{container-type:inline-size}
 @container (max-width:480px){.tk-facts{grid-template-columns:1fr;row-gap:var(--space-1)}.tk-facts dd{margin-bottom:var(--space-3)}}
 
-.tk-public-commerce{display:grid;gap:var(--space-6);min-width:0}
+.tk-public-commerce{display:grid;gap:var(--space-6);min-width:0;padding:var(--space-7) var(--content-gutter,var(--layout-page-padding))}
 .tk-storefront{display:grid;gap:var(--space-6);min-width:0}
 .tk-storefront-search{position:sticky;top:calc(var(--header-height,72px) + var(--space-2));z-index:8;padding:var(--space-3);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);background:color-mix(in srgb,var(--color-graphit-900) 90%,transparent);box-shadow:0 18px 46px rgba(0,0,0,.28);backdrop-filter:blur(20px) saturate(130%)}
 .tk-storefront-search .tk-search{max-width:none}
 .tk-mobile-commerce-nav{display:none}
-.tk-partner-journey{display:grid;gap:var(--space-7)}
+.tk-partner-journey{display:grid;gap:var(--space-7);padding:var(--space-7) var(--content-gutter,var(--layout-page-padding))}
 .tk-partner-intro{position:relative;overflow:hidden;display:grid;gap:var(--space-3);padding:clamp(24px,4vw,52px);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-atelier);background:radial-gradient(600px 360px at 90% 0%,rgba(215,250,80,.14),transparent 68%),linear-gradient(145deg,var(--color-graphit-700),var(--color-graphit-900));box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 32px 70px -44px #000}
 .tk-partner-intro h2,.tk-portal-preview h2{max-width:780px;font-size:clamp(30px,4vw,56px);line-height:1.03;letter-spacing:-.045em}
 .tk-partner-intro p,.tk-portal-preview>div>p{max-width:68ch;color:var(--color-text-tertiaer);line-height:1.7}

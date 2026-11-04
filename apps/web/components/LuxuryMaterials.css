@@ -108,7 +108,7 @@
 
 .workspace-shell .content-layout.layout-service .content-hero,.workspace-shell .content-layout.layout-product .content-hero,.workspace-shell .content-layout.layout-commerce .content-hero { background:transparent; border-bottom:1px solid var(--color-linie-fein); }
 .workspace-shell .content-layout .content-context-below { padding:var(--space-5) var(--content-gutter); }
-.workspace-shell .content-layout .content-context-below .content-context { border-left:0; padding-left:0; }
+.workspace-shell .content-layout .content-context-below .content-context { border-left:0; padding:var(--space-5); }
 .workspace-shell .content-layout .content-context-below .content-context nav { display:flex; flex-wrap:wrap; gap:var(--space-5); }
 .workspace-shell .content-layout .content-context-below .content-context nav a { border:0; gap:var(--space-3); }
 
@@ -346,3 +346,8 @@
  .workspace-shell :is(h1,h2,h3,h4),.workspace-shell .home-concept .hc-rate>strong { background:none; color:CanvasText; -webkit-text-fill-color:CanvasText; }
  .workspace-shell .home-concept .hc-finish-primary { background:ButtonFace; color:ButtonText; border:1px solid ButtonText; }
 }
+/* Chat composer stays docked at the panel's bottom edge while the history scrolls
+   (HIG liquid-glass.md › Review checklist 6: scroll edge effect instead of a solid bar). */
+.workspace-shell .aifly-panel .orientation-composer{position:sticky;bottom:calc(-1 * var(--space-4));z-index:3;margin-inline:calc(-1 * var(--space-4));margin-bottom:calc(-1 * var(--space-4));padding:var(--space-3) var(--space-4) var(--space-4);background:color-mix(in srgb,var(--color-atelier-surface) 78%,transparent);-webkit-backdrop-filter:blur(var(--material-blur,18px)) saturate(140%);backdrop-filter:blur(var(--material-blur,18px)) saturate(140%);border-top:1px solid var(--color-linie-fein)}
+.workspace-shell .aifly-panel .orientation-composer::before{content:"";position:absolute;inset:calc(-1 * var(--space-6)) 0 100%;pointer-events:none;background:linear-gradient(to top,color-mix(in srgb,var(--color-atelier-surface) 70%,transparent),transparent)}
+@media (prefers-reduced-transparency:reduce){.workspace-shell .aifly-panel .orientation-composer{background:var(--color-atelier-surface);-webkit-backdrop-filter:none;backdrop-filter:none}}

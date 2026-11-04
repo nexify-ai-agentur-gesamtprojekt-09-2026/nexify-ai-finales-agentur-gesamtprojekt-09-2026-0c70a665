@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T16:25:17.412Z",
+  "observed_at": "2026-11-04T16:43:42.162Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "51e6bf1fdd28440445ec04962df53e49ecafb92ba91c6588d07be0064f0f771b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -28,7 +28,7 @@
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/DomainArtwork.tsx": "40cf9fd52c61bcf20aa140b520f925e7647906266a7cd4c273a4e55d52d85e13",
     "apps/web/components/ExplainerSections.tsx": "87f9a69de6af9cf18110587ac0ec744b14f284e1b74babb129092f459fd6bd45",
-    "apps/web/components/HomeConcept.css": "5e397a0fa3dd415568ef80969599b7b159099bc3df53f869b20ee9c8074a8d52",
+    "apps/web/components/HomeConcept.css": "5f0b5b07e23cf6a1570689eda555296f849e8ca1965db6ffbf80806484d6a2be",
     "apps/web/components/HomeContent.tsx": "fdc261786e503db20bbe15130df60206c498627bafd7d991eda213bb0fdc68e2",
     "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
@@ -37,7 +37,7 @@
     "apps/web/components/InstallInvitation.css": "cb5e290f23a79a29767540098a1cd04a48a87112ecfd83baf3fe370b623b6117",
     "apps/web/components/InstallInvitation.tsx": "6acc2a91dd39947c185b04ee138b2e99564acb6b1db0d566b59323515c0ad113",
     "apps/web/components/LocaleAwareClerk.tsx": "f93aececbd2f8bc5d6c9c3f82504b5d42753f819ad92e919f14505deb9284e45",
-    "apps/web/components/LuxuryMaterials.css": "2647600545532c8e8c6a52a1b08361654029f6c0692fcac9f80721728ccf3612",
+    "apps/web/components/LuxuryMaterials.css": "cd86d45d2927da736f52ce90bc1351f93b27368d695e544d11e03da711e66879",
     "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
     "apps/web/components/MailWorkspacePanel.tsx": "b1c8f20caa4b4a7df25330758c2aad397cfc04a89f4fb1385f133b1560548ee5",
     "apps/web/components/NextRouterBridge.tsx": "9697b38ccc3f5aebc46875cee305f624e09efe1723c74a65a829ec870ce59f23",
@@ -109,7 +109,7 @@
     "apps/web/components/shop/WorkshopFinder.tsx": "11f34ef13510ce7cac4cb11884c7120d0584cd2337724f2ec5167f2ca88a4175",
     "apps/web/components/shop/WorkshopMap.tsx": "5e05dd616d16692c523f0c5dca9829025d8968f81c2cb9365d64cc810282ab73",
     "apps/web/components/shop/api.ts": "8b1367a3208f0763ab63a23e4519df49425060afe52c13f7bbe8d772991e4048",
-    "apps/web/components/shop/shop.css": "8dde1417a36b3ee6545ef103951c3d44468d7a9116d33ddb7ef8a0a393808869",
+    "apps/web/components/shop/shop.css": "795b16664273db257eb5253daa16f4ba72b82f474cf1121b4c7d6017a0a168c7",
     "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
     "apps/web/lib/contact-attempt.ts": "2deb708f4c7ceac90b316ee661799d9bd346223e04c1bcc363d7645b9111ee04",
     "apps/web/lib/contact-copy.ts": "1db2001ac62e96e582ebe4ae43fa6114d7b8913ce936a1c30c082f1300644a91",
@@ -936,7 +936,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 463,
+        "count": 462,
         "all_doubled": true
       },
       "overflow": false,
@@ -1005,7 +1005,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 446,
+        "count": 445,
         "all_doubled": true
       },
       "overflow": false,

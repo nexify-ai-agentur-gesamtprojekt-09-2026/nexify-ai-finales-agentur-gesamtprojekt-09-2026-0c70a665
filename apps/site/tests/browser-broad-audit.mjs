@@ -1,6 +1,8 @@
 // Broad public-site audit: every public page × 320/390/820/1280/1920 (de) + nl/fr/en at 390.
 // Measures overflow, single h1, accessible names, target size (<24px, inline sentence links exempt
 // per WCAG 2.5.8), images without alt, duplicate ids, broken internal links, meta description, lang
+// runtime errors and spacing: rounded painted panels must not touch the viewport edge and their text
+// must keep at least 10px from the panel edge (owner feedback 04.11.2026: missing outer margins).
 // and runtime errors. Learned false-positive rules: innerText is empty for content-visibility:auto
 // and closed menus, so names use textContent and only checkVisibility()-visible elements count.
 // Run after "vite build --mode public-pwa": PLAYWRIGHT_MODULE=... node tests/browser-broad-audit.mjs
@@ -28,11 +30,15 @@ return {overflow:document.documentElement.scrollWidth>innerWidth+1,h1:document.q
  noName:inter.filter(e=>!name(e)&&!(e.labels&&e.labels.length)).map(e=>e.tagName+'.'+String(e.className).slice(0,40)).slice(0,5),
  imgNoAlt:[...document.querySelectorAll('img:not([alt])')].filter(vis).map(i=>i.src.slice(-40)).slice(0,5),
  small:small.slice(0,5),dupIds:Object.entries(ids).filter(([k,v])=>v>1).map(([k])=>k).slice(0,5),
+ edge:(()=>{const res=[];for(const e of document.querySelectorAll('main *, footer *')){if(!vis(e))continue;const s=getComputedStyle(e),bx=e.getBoundingClientRect();if(bx.width<80||bx.height<40)continue;
+  const painted=(s.backgroundColor!=='rgba(0, 0, 0, 0)'&&s.backgroundColor!=='transparent')||s.backgroundImage!=='none'||s.boxShadow!=='none';if(!painted||parseFloat(s.borderTopLeftRadius)<=2)continue;
+  const cls=(e.tagName+'.'+String(e.className).split(' ')[0]).slice(0,50);if(bx.left<8||bx.right>innerWidth-8){res.push('edge:'+cls);continue;}
+  if(['INPUT','SELECT','BUTTON','TEXTAREA'].includes(e.tagName))continue;for(const t of e.querySelectorAll('h1,h2,h3,p,li,span,strong')){if(!t.checkVisibility()||!t.textContent.trim())continue;const rg=document.createRange();rg.selectNodeContents(t);const rb=rg.getBoundingClientRect();if(rb.width&&(rb.left-bx.left<10||bx.right-rb.right<10)){res.push('tight:'+cls);break;}}}return [...new Set(res)].slice(0,5);})(),
  links:[...document.querySelectorAll('a[href^="/"]')].map(a=>a.getAttribute('href').split(/[?#]/)[0]),
  title:document.title,desc:document.querySelector('meta[name=description]')?.content||'',lang:document.documentElement.lang};});
 const broken=[...new Set(r.links)].filter(h=>!routes.has(h)&&!routes.has(h.replace(/\/$/,''))&&!/^\/teileklar\/(produkt|kategorie|werkstatt)\//.test(h)&&!/^\/(media|api)\//.test(h));
 const f={w:run.w,l:run.l,path:pg.path};let bad=false;
-for(const k of ['noName','imgNoAlt','small','dupIds'])if(r[k].length){f[k]=r[k];bad=true;}
+for(const k of ['noName','imgNoAlt','small','dupIds','edge'])if(r[k].length){f[k]=r[k];bad=true;}
 if(r.overflow){f.overflow=true;bad=true;}if(r.h1!==1){f.h1=r.h1;bad=true;}if(broken.length){f.broken=broken.slice(0,5);bad=true;}
 if(!r.desc){f.noDesc=true;bad=true;}if(r.lang!==run.l){f.lang=r.lang;bad=true;}if(errs.length){f.errs=[...new Set(errs)].slice(0,3);bad=true;}
 if(bad)findings.push(f);}

@@ -248,7 +248,7 @@
 .home-concept .hc-rate>span,.home-concept .hc-rate>small{position:relative;display:block;color:var(--color-text-sekundaer);font-size:var(--type-small-size)}
 .home-concept .hc-rate>strong{position:relative;display:block;margin-block:var(--space-2);font:500 clamp(2.5rem,5vw,4.8rem)/1 var(--font-display);letter-spacing:var(--type-display-tracking);background:var(--gradient-atelier-heading);background-clip:text;-webkit-background-clip:text;color:transparent}
 .home-concept .hc-rate>p{position:relative;margin-top:var(--space-4);font-size:var(--type-small-size);max-width:46ch}
-.home-concept .hc-finish{position:relative;margin-block:var(--space-8);padding-block:clamp(4rem,9vw,8rem);text-align:center;overflow:hidden;border-radius:var(--radius-home-media);background:var(--gradient-atelier-stage);box-shadow:var(--shadow-atelier-depth)}
+.home-concept .hc-finish{position:relative;width:calc(100% - 2 * var(--layout-page-padding));margin:var(--space-8) auto;padding-block:clamp(4rem,9vw,8rem);text-align:center;overflow:hidden;border-radius:var(--radius-home-media);background:var(--gradient-atelier-stage);box-shadow:var(--shadow-atelier-depth)}
 .home-concept .hc-finish::before{content:"";position:absolute;inset:-45% 5% 45%;pointer-events:none;background:radial-gradient(ellipse,color-mix(in srgb,var(--color-atelier-champagne) 16%,transparent),transparent 70%);filter:blur(var(--material-blur))}
 .home-concept .hc-finish>*{position:relative;margin-inline:auto}
 .home-concept .hc-finish h2{max-width:20ch}

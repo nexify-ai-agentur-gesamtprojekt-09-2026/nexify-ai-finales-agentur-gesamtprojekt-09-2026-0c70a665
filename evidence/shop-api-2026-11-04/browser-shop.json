@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T16:11:46.226Z",
+  "recorded_at": "2026-11-04T16:48:33.846Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -12,7 +12,7 @@
   "synthetic_data": true,
   "external_requests": [],
   "uncaught_errors": [],
-  "supplier_image_requests_blocked": 28,
+  "supplier_image_requests_blocked": 29,
   "scope": "Local real-browser cart/checkout run against the real shop-api adapter with synthetic in-memory data. No order, payment, mail or provider call; not production or legal acceptance.",
   "checks": [
     "cart_add_update_remove_with_server_amounts_surviving_reload",
@@ -394,7 +394,7 @@
     "apps/web/components/shop/Checkout.tsx": "5f83c6049baedf727e23bd76e7df131c4410417f2a26eb9dc3db26e8a9d128a6",
     "apps/web/components/shop/AddressStep.tsx": "b253ee2b0b6e790a8c4dbb8c02f108f96fd9262393f5888de18c6e1fd33e142a",
     "apps/web/components/shop/api.ts": "8b1367a3208f0763ab63a23e4519df49425060afe52c13f7bbe8d772991e4048",
-    "apps/web/components/shop/shop.css": "8dde1417a36b3ee6545ef103951c3d44468d7a9116d33ddb7ef8a0a393808869",
+    "apps/web/components/shop/shop.css": "795b16664273db257eb5253daa16f4ba72b82f474cf1121b4c7d6017a0a168c7",
     "config/shop-interface-copy.json": "1bdce9ddf6772f3f207a0104f471c4046796f4edd88c6de87e5ea60b97fa2fb9",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
     "apps/site/tests/browser-shop-api.mjs": "2e3e0a9d745f9473a06e1651e50217e0d7b67bd47783dffd4a5c2551d2850766",
