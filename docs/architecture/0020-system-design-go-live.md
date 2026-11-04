@@ -61,8 +61,9 @@ eigener Assistent („TEILEKLAR Hilfe“). Die Trennung liegt heute in `config/s
 
 ### Datenmodell (MongoDB, Sammlungen)
 `users`, `sessions` · `products`, `categories`, `settings` (Versand, Freigaben) · `carts`, `orders`,
-`webhook_events` · `outbox` (Mail, idempotent) · `workshops`, `workshop_requests` · `requests` ·
-`quotes` (neu, Index `id` unique, `owner+created_at`).
+`webhook_events` · `outbox` (Mail, idempotent) · `workshops`, `workshop_requests` · `requests`
+(auch Angebotsentwürfe mit `kind: "quote_draft"`; der Shop-Namensraum hat einen festen, geprüften
+Sammlungssatz, daher keine eigene Sammlung und kein neuer Index).
 
 ### API-Verträge
 REST über FastAPI, Schema unter `/api/openapi.json`. Schreibende Aufrufe: Same-Origin-Pflicht,
