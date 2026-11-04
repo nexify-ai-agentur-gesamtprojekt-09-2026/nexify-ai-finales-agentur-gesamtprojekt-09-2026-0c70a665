@@ -41,3 +41,8 @@
 ## USER-LUXURY-20261101 · Material- und Medienrichtung
 
 Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Metallen und gezieltem Glas. Gemeinsame visuelle Schicht für Vite und Next, mehr Raum, zurückhaltendes Lime, Kontohinweis im Inhaltsraster und optionales Assistenzdock. Drei fachlich zugeordnete Editorial-Stills ersetzen keinen Katalog-/Funktionalitätsbeleg. Home veröffentlicht keine ungeprüften Review-/Ambientperformances mehr; Originaldateien bleiben erhalten. Reale Lippen-/Gestenfilme benötigen echte passende Quellen und separate Abnahme. REA6.8.0 lokal isoliert wiederhergestellt und MCP-discovered, Analyse jedoch an Host-Prozessprüfung blockiert; keine globale Registrierung/HTTP-Exposition oder Rechteänderung. Kein Gesamtfreigabeentscheid.
+
+## D-RUFLO-20261104 — Ruflo als versionierte Agenten-Orchestrierung
+- **Entscheidung (Nutzer 04.11.2026):** Ruflo wird fest im Repository integriert. Version 3.71.1 ist gepinnt; npm-Integrity und Tarball-Hash stehen in `config/integrations/ruflo.json`. Die Integration wurde in einem Wegwerf-Worktree geprüft.
+- **Abweichungen vom Upstream-`init`:** Der MCP-Server ist gepinnt statt `@latest`. Es gibt keine pauschalen Auto-Freigaben. Folgendes ist nicht aktiviert: globale Home-Änderung, Anmeldung, skills.sh, Mod-Plugins und Cloud-MCP.
+- **Grenzen:** Ruflo hat keine eigenen LLM-Schlüssel, die Modellbindung aus `config/llm-policy.json` bleibt unverändert. Ruflo erteilt keine Freigaben und lockert keine Gates. Details stehen in `docs/automation/ruflo.md`.

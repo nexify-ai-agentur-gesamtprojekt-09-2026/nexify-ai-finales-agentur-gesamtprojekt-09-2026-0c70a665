@@ -60,3 +60,9 @@ apps/shop-api/data/
 
 # Sites static publication output
 /dist/
+
+# Ruflo runtime data (config is versioned)
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/
+.claude-flow/neural/

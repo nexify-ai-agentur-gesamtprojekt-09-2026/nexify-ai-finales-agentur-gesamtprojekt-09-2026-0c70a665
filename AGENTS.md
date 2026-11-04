@@ -315,3 +315,11 @@ sind fachliche Quellen, keine Berechtigung zu Skriptstarts oder Dienstaufrufen.
 Upstream-Skripte werden nicht automatisch ausgeführt; Aktualisierungen erfordern
 Versionsvergleich und erneute Integritätsprüfung. HIG-Review bedeutet weder
 Apple-Zertifizierung noch Safari-Geräteabnahme oder rechtliche Freigabe.
+
+
+## Ruflo-Orchestrierung · 04.11.2026
+
+Ruflo ist als gepinnte Orchestrierung integriert (`config/integrations/ruflo.json`,
+`docs/automation/ruflo.md`, DECISIONS D-RUFLO-20261104). Swarms und Skills sind
+Werkzeuge ohne eigene Freigabewirkung; Modellbindung, Gates, Secret- und
+Mandantengrenzen gelten unverändert. Upgrades nur über das dokumentierte Prüfverfahren.

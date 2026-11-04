@@ -18,3 +18,7 @@ Adapter; eine Markdowndatei ist kein serverseitiger Sicherheitsnachweis.
 Aktuelle Quellen und tatsächliche Zustände vor Meldung prüfen; keine vollständige
 Chat-, VPS- oder LightRAG-Erinnerung behaupten. Projektprüfungen und Limits aus
 `AGENTS.md` befolgen. Credentials nicht lesen, ausgeben oder in Prompts übernehmen.
+
+Agenten-Orchestrierung: Ruflo (`ruflo@3.71.1`, MCP `claude-flow`) ist integriert;
+Nutzung und Grenzen in `docs/automation/ruflo.md`. Ruflo ergänzt, ersetzt aber
+nicht diese Anleitung, `AGENTS.md` oder die Gates.
