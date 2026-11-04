@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, type ReactNode } from "react";
-import { SiteLink } from "../Router";
+import { SiteLink, useSitePathname } from "../Router";
 import { api, supplierImageSource, type Product } from "./api";
 import { ProductImage, useShopCopy } from "./ProductCard";
 import "./ProductShowcase.css";
@@ -19,25 +19,29 @@ export function selectShowcaseItems(items: unknown): Product[] {
   return picked.length >= MIN_ITEMS ? picked : [];
 }
 
-function categoryFromPath(): number | undefined {
-  if (typeof window === "undefined") return undefined;
-  const id = /^\/teileklar\/kategorie\/([1-9]\d*)\/?$/.exec(window.location.pathname)?.[1];
+function categoryFromPath(pathname: string | undefined): number | undefined {
+  if (!pathname) return undefined;
+  const id = /^\/teileklar\/kategorie\/([1-9]\d*)\/?$/.exec(pathname)?.[1];
   return id && Number.isSafeInteger(Number(id)) ? Number(id) : undefined;
 }
 
 export default function ProductShowcase({ pageId, fallback }: { pageId: string; fallback: ReactNode }) {
   const { t } = useShopCopy();
   const [items, setItems] = useState<Product[]>([]);
+  // Category comes from the router path so a client-side switch between two
+  // categories (same pageId) reloads the stage instead of keeping stale packshots.
+  const routerPath = useSitePathname();
+  const pathname = routerPath && routerPath !== "/" ? routerPath : (typeof window === "undefined" ? routerPath : window.location.pathname);
+  const category = pageId === "tk-category" ? categoryFromPath(pathname) : undefined;
   useEffect(() => {
     const controller = new AbortController(); let current = true;
     const params = new URLSearchParams({ q: "", page: "1" });
-    const category = pageId === "tk-category" ? categoryFromPath() : undefined;
     if (category !== undefined) params.set("category", String(category));
     api<{ items?: unknown }>("/api/shop/products?" + params, { signal: controller.signal })
       .then(data => { if (current) setItems(selectShowcaseItems(data.items)); })
       .catch(() => { if (current) setItems([]); });
     return () => { current = false; controller.abort(); };
-  }, [pageId]);
+  }, [pageId, category]);
   if (items.length === 0) return <>{fallback}</>;
   return <figure className="tk-showcase" data-testid="product-showcase">
     <ul className="tk-showcase-grid" aria-label={t("showcaseLabel")}>

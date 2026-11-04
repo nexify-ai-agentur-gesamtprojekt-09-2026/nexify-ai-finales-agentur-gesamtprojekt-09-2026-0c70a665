@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T16:11:47.151Z",
+  "observed_at": "2026-11-04T16:25:17.412Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "51e6bf1fdd28440445ec04962df53e49ecafb92ba91c6588d07be0064f0f771b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -96,7 +96,7 @@
     "apps/web/components/shop/ProductCard.tsx": "594e6501f4dc4c7ee60a790ef08012b77724123d040ee3464df200840119f2aa",
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
     "apps/web/components/shop/ProductShowcase.css": "475dcbe8338dcd86976dea47c867d0f6080c44d073e60ebbf2349ce3cc4024d7",
-    "apps/web/components/shop/ProductShowcase.tsx": "598c4a883361b88ca69af07f78408d224cf8e71ea456b3032272cd985fc57fa5",
+    "apps/web/components/shop/ProductShowcase.tsx": "e24d91cc1b86af2bb0fce36e4669efff6a8e58da685767359cdcbe7e1443c01b",
     "apps/web/components/shop/PublicShopContent.tsx": "b0851c552c504122bd248df349b813e67d7fd339d592774580621c6913ead0e3",
     "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
     "apps/web/components/shop/ShopEntry.tsx": "db1ae4a0cd487bc0897a23efe7b1da6ca567cfcccfc046c2f4d7ec4bbbb7920a",
