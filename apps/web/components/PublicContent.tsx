@@ -58,7 +58,7 @@ export default function PublicContent({page,pages,children,sectionContent={}}:{p
  return <section className={"public-page content-layout layout-"+layout+" context-"+page.site_context} aria-labelledby={headingId}>
   <nav className="content-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map(parent=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink><span aria-hidden="true">/</span></li>)}<li><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
   <header className={"content-hero"+(hasScene?" has-domain-art":"")}><div className="content-hero-copy"><span className="content-kicker">{page.site_context==="teileklar"?"TEILEKLAR":"NEXIFY AI"}<span aria-hidden="true"> / </span>{t[layout]}</span><h1 id={headingId}>{page.localizedTitle[locale]}</h1><p className="content-purpose">{page.localizedSummary[locale]}</p>{actions(page.actions.slice(0,2),"primary")}</div>
-   {hasScene?<div className="content-hero-aside">{hasProductShowcase(page.id)?<ProductShowcase pageId={page.id} fallback={visual}/>:visual}</div>:contextAside}
+   {hasProductShowcase(page.id)&&!hasScene?<div className="content-hero-aside"><ProductShowcase pageId={page.id} fallback={contextAside}/></div>:hasScene?<div className="content-hero-aside">{hasProductShowcase(page.id)?<ProductShowcase pageId={page.id} fallback={visual}/>:visual}</div>:contextAside}
   </header>
   {children&&supplementFirst&&<div className="content-supplement is-primary-flow">{children}</div>}
   {hasScene&&contextAside&&<div className="content-context-below">{contextAside}</div>}

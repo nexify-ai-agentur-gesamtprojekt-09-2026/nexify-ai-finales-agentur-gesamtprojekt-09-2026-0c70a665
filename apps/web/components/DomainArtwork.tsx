@@ -8,10 +8,9 @@ export function hasDomainArtwork(pageId:string){return !!scene(pageId);}
 /** Scene families explain their subject; they are editorial examples, not live transactions. */
 export default function DomainArtwork({pageId,locale,compact=false}:{pageId:string;locale:Locale;compact?:boolean;priority?:boolean}){
  const asset=scene(pageId);if(!asset)return null;
- const t=labels[locale],steps=t[asset.id as 'web'|'workspace'|'automotive'];
+ const t=labels[locale];
  return <figure className={'domain-artwork'+(compact?' domain-artwork-small':'')} data-artwork={asset.id}>
   <AtelierFilm key={pageId+":"+locale} asset={{...asset.film,title:asset.alt[locale],playOnce:true}} locale={locale}/>
-  <ol className="scene-storyline" aria-label={t.example}>{steps.map((step,i)=><li key={step}><span aria-hidden="true">0{i+1}</span>{step}</li>)}</ol>
   {!compact&&<figcaption>{t.example}</figcaption>}
  </figure>;
 }

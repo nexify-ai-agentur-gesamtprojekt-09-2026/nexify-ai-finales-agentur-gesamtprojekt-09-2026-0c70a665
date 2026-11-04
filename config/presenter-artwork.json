@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "decision": "USER-IMAGE-FINISH-20261102; Pascal replaced 2026-11-04 by owner instruction: the full-body blazer cutout is forbidden, use the smiling portrait from prototypen/assets/nexify-ai/pascal-courbois-optimiert.png",
+  "decision": "USER-IMAGE-FINISH-20261102; Pascal per approved target image zielbild-v2 (config/identity-hero.json): walking, smiling figure zielbild-pascal-walk. The stiff full-body cutout and the white-shirt photo are not to be used (owner 04.11.2026).",
   "status": "preserved_original_stills_not_performance_video",
   "images": {
     "pascal": {
-      "src": "/media/atelier/presenters/pascal-portrait.webp",
-      "width": 760,
-      "height": 1032,
-      "sha256": "c383f22b9f2567310a57007a6b3b90c64160c70d5abe3c82c7aa44ce9f27782e",
-      "source": "/media/presenters/pascal-portrait-4f13861b.png",
-      "source_sha256": "4f13861b4a0927a126972e186430ed45b803d9be66fdc271ed9629d063c51240",
+      "src": "/media/atelier/presenters/pascal-zielbild.webp",
+      "width": 271,
+      "height": 596,
+      "sha256": "cdfa4914e3e07bab3051091ade5b291ac4096d9b695f521bba8da29751b5ab87",
+      "source": "/media/presenters/zielbild-pascal-walk.png",
+      "source_sha256": "225f35c60b92f7328ca72975342595e95184146c788b7c25a3aefd9c3d6fb41c",
       "visible_RGBA_pixels_unchanged": true
     },
     "nex": {

@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T17:40:12.739Z",
+  "recorded_at": "2026-11-04T18:43:24.090Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -112,92 +112,7 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/categories",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
       "status": 200
     },
     {
@@ -212,57 +127,7 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/categories",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/categories",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -277,12 +142,7 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/categories",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
+      "path": "/api/shop/products",
       "status": 200
     },
     {
@@ -293,11 +153,6 @@
     {
       "method": "GET",
       "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -353,6 +208,151 @@
     {
       "method": "GET",
       "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
       "status": 200
     },
     {

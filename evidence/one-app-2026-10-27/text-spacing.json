@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T18:12:04.223Z",
+  "observed_at": "2026-11-04T18:38:38.171Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "b4932a8289a0b7cbd27a427dd9684b1ccb92353b7c8a7271ef2195aeb1fdc75b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -26,18 +26,18 @@
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
-    "apps/web/components/DomainArtwork.tsx": "40cf9fd52c61bcf20aa140b520f925e7647906266a7cd4c273a4e55d52d85e13",
+    "apps/web/components/DomainArtwork.tsx": "2d333352057eb3f3f1f95e41855bd4b1772ae1b18d2049864e2e3947974af3a6",
     "apps/web/components/ExplainerSections.tsx": "87f9a69de6af9cf18110587ac0ec744b14f284e1b74babb129092f459fd6bd45",
     "apps/web/components/HomeConcept.css": "5f0b5b07e23cf6a1570689eda555296f849e8ca1965db6ffbf80806484d6a2be",
     "apps/web/components/HomeContent.tsx": "fdc261786e503db20bbe15130df60206c498627bafd7d991eda213bb0fdc68e2",
-    "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
+    "apps/web/components/HomeJourney.css": "b54e0ae1811385f00a59019fac04f5119f06c4e41fe3f838ba01bff8bea26d4d",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
     "apps/web/components/IdentityHero.tsx": "db7f4905d250796e2bb4f89fd238902b0fc59363ff824aa9baeea098378d50b0",
     "apps/web/components/InstallInvitation.css": "cb5e290f23a79a29767540098a1cd04a48a87112ecfd83baf3fe370b623b6117",
     "apps/web/components/InstallInvitation.tsx": "6acc2a91dd39947c185b04ee138b2e99564acb6b1db0d566b59323515c0ad113",
     "apps/web/components/LocaleAwareClerk.tsx": "f93aececbd2f8bc5d6c9c3f82504b5d42753f819ad92e919f14505deb9284e45",
-    "apps/web/components/LuxuryMaterials.css": "6508c8632048404c3b9e7053960493af770842b57b6e7020d57b7731eb83a200",
+    "apps/web/components/LuxuryMaterials.css": "b43cad9e63b804c28648dbbc7e52355527b700695dfeb1da1e5b9f460e1a7a96",
     "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
     "apps/web/components/MailWorkspacePanel.tsx": "b1c8f20caa4b4a7df25330758c2aad397cfc04a89f4fb1385f133b1560548ee5",
     "apps/web/components/NextRouterBridge.tsx": "9697b38ccc3f5aebc46875cee305f624e09efe1723c74a65a829ec870ce59f23",
@@ -56,7 +56,7 @@
     "apps/web/components/ProblemExplorer.tsx": "61edea11f3f625248e1e0392c82d60825ff8e53d53b74fa94acd867be7d56577",
     "apps/web/components/ProjectFilesPanel.css": "878e009d14076c6e791d0d130686e7102feee12debf7bc5b916d8acf04a08c55",
     "apps/web/components/ProjectFilesPanel.tsx": "2fb523dc07763068deb19b1a3e24caff80ed93641ed654ed4372566e7301c5c9",
-    "apps/web/components/PublicContent.tsx": "9b93ea217efbc1d210e33b7174b89bedfe1ae565efed77e7d8cf8e6d09056feb",
+    "apps/web/components/PublicContent.tsx": "a879943e6c4aa971da233c7a72ba47a833d7d19cc493008a126618703b21fc56",
     "apps/web/components/PublicContentLayout.css": "84dd3df6485bfda706ac9144a4458e23ea2ae64a51ae46c2545b8f940a830b96",
     "apps/web/components/PublicExperience.tsx": "f4619eb7baa20000f8040e744e2ba56bfdc3b715177c2d227291cf53fb8e8c2e",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
@@ -69,15 +69,15 @@
     "apps/web/components/SiteFooter.css": "0151ff5b9c3be04090787dcd7406e2095fe5750de33bbc270d44c439fec86a0a",
     "apps/web/components/SiteFooter.tsx": "5a89f12f0f4478c22cf5bed2798b4e6b0c23b5af8f3c1d80ad90e045e8d69092",
     "apps/web/components/SiteNavigation.tsx": "055bf70d74526b319bb710d6656f74fcd66355032e8cc21e37c7cb1ce325dc65",
-    "apps/web/components/StudioScene.css": "e1b3a5a75c54e83ac4b99a28ca6eff767efbae22518ebaa5f9732f9bf36972cd",
-    "apps/web/components/StudioScene.tsx": "edd4db9af612d3ac332977a85e0e5af9964a70dc2f9e8fa427eb0504e4e8542a",
+    "apps/web/components/StudioScene.css": "9f1911f4add7ee46a1b095d725b21bc3458e09fb761a3f7299aef1b3b498d9c2",
+    "apps/web/components/StudioScene.tsx": "5117d7a5b8603872c7342a1bab9f3547fd3f8e213c1566f36060ae6e0696a8b7",
     "apps/web/components/TrioScene.css": "6e2332a05142d57b5da1c5dc677b4c94d52de0cef51a8cc202430c775062ea1f",
     "apps/web/components/TrioScene.tsx": "2100aaafa2327c8867d660d7c2a5699217f8d4bb04c6fad1a3abea33b372e06d",
     "apps/web/components/WorkshopDirectory.css": "005e64cb50757f86342946aabdff95eebb6bb284580e2a190e28fe5eafbc3374",
     "apps/web/components/WorkshopDirectory.tsx": "46da756d96570baff9a7dd78c60b2dd2ed91b7c89f2a8b086211d4b30e2a3d56",
     "apps/web/components/Workspace.tsx": "41cbfd5625ced6698659063151a385c37464effa3b514868e40e9d8c36f7388c",
     "apps/web/components/WorkspaceCapabilities.ts": "010cc923971b1e6d033ee9f791ca3c0ba5eb28cd5139a1a0c86532eb5ce4189e",
-    "apps/web/components/WorkspaceRebuild.css": "063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35",
+    "apps/web/components/WorkspaceRebuild.css": "9afe83d040c1d2a7376eec8ecd7e794624ef526da8f3a2c588de2f872ba650fb",
     "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/components/shop/AddressStep.tsx": "b253ee2b0b6e790a8c4dbb8c02f108f96fd9262393f5888de18c6e1fd33e142a",
@@ -179,7 +179,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 533,
+        "count": 523,
         "all_doubled": true
       },
       "overflow": false,
@@ -202,7 +202,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 535,
+        "count": 525,
         "all_doubled": true
       },
       "overflow": false,
@@ -225,7 +225,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 535,
+        "count": 525,
         "all_doubled": true
       },
       "overflow": false,
@@ -248,7 +248,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 535,
+        "count": 525,
         "all_doubled": true
       },
       "overflow": false,
@@ -268,190 +268,6 @@
     },
     {
       "path": "/leistungsumfang",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 531,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/loesungen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/loesungen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/loesungen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 513,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/preise-ablauf",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/preise-ablauf",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/preise-ablauf",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 515,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/wissen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 494,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/wissen/projekt-vorbereiten",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 511,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/unternehmen",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/unternehmen",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/unternehmen",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 507,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/kontakt",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/kontakt",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/kontakt",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 529,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/nex2fly",
-      "width": 1280,
-      "text_resize_200": true,
-      "resized": {
-        "count": 533,
-        "all_doubled": true
-      },
-      "overflow": false,
-      "content_overflows": []
-    },
-    {
-      "path": "/produkte/one",
-      "width": 390,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/one",
-      "width": 1280,
-      "text_spacing": true,
-      "overflow": false
-    },
-    {
-      "path": "/produkte/one",
       "width": 1280,
       "text_resize_200": true,
       "resized": {
@@ -462,6 +278,190 @@
       "content_overflows": []
     },
     {
+      "path": "/loesungen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 504,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 505,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/wissen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 485,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 501,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/unternehmen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 497,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/kontakt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 519,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 524,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/one",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 512,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
       "path": "/produkte/api",
       "width": 390,
       "text_spacing": true,
@@ -478,7 +478,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 521,
+        "count": 512,
         "all_doubled": true
       },
       "overflow": false,
@@ -685,7 +685,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 508,
+        "count": 486,
         "all_doubled": true
       },
       "overflow": false,
@@ -708,7 +708,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 485,
+        "count": 466,
         "all_doubled": true
       },
       "overflow": false,
@@ -731,7 +731,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 489,
+        "count": 467,
         "all_doubled": true
       },
       "overflow": false,
@@ -754,7 +754,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 480,
+        "count": 461,
         "all_doubled": true
       },
       "overflow": false,
@@ -777,7 +777,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 492,
+        "count": 469,
         "all_doubled": true
       },
       "overflow": false,
@@ -846,7 +846,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 625,
+        "count": 602,
         "all_doubled": true
       },
       "overflow": false,
@@ -869,7 +869,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 467,
+        "count": 446,
         "all_doubled": true
       },
       "overflow": false,
@@ -892,7 +892,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 476,
+        "count": 458,
         "all_doubled": true
       },
       "overflow": false,
@@ -915,7 +915,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 548,
+        "count": 524,
         "all_doubled": true
       },
       "overflow": false,
@@ -938,7 +938,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 499,
+        "count": 475,
         "all_doubled": true
       },
       "overflow": false,
@@ -984,7 +984,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 507,
+        "count": 485,
         "all_doubled": true
       },
       "overflow": false,
@@ -1007,7 +1007,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 487,
+        "count": 464,
         "all_doubled": true
       },
       "overflow": false,
@@ -1030,7 +1030,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 486,
+        "count": 466,
         "all_doubled": true
       },
       "overflow": false,

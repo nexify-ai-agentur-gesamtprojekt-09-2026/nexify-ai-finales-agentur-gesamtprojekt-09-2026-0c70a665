@@ -5,10 +5,6 @@
 .studio-stage{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:4/3;max-width:100%;border-radius:var(--radius-home-media,var(--radius-karte));background:var(--gradient-atelier-stage),linear-gradient(180deg,var(--color-atelier-raised),var(--color-atelier-canvas));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-text-primaer) 9%,transparent),var(--shadow-atelier-depth)}
 /* Key light from above, tinted per scene. */
 .studio-beam{position:absolute;inset:-30% 18% 30%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--studio-light) 30%,transparent),transparent 62%);filter:blur(var(--material-blur,18px))}
-/* Two glass panes behind the cast give depth and catch the light on their edges. */
-.studio-pane{position:absolute;z-index:1;top:12%;bottom:30%;width:26%;border-radius:var(--radius-karte);border:1px solid color-mix(in srgb,var(--color-text-primaer) 10%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--color-text-primaer) 9%,transparent),color-mix(in srgb,var(--color-text-primaer) 2%,transparent) 55%,transparent);box-shadow:inset 1px 0 0 color-mix(in srgb,var(--studio-light) 30%,transparent);transform:perspective(900px) rotateY(-18deg)}
-.studio-pane.pane-a{left:8%}
-.studio-pane.pane-b{right:8%;transform:perspective(900px) rotateY(18deg);box-shadow:inset -1px 0 0 color-mix(in srgb,var(--studio-light) 30%,transparent)}
 /* Polished floor with a soft light pool. */
 .studio-floor{position:absolute;z-index:1;left:0;right:0;bottom:0;height:25%;background:linear-gradient(180deg,color-mix(in srgb,var(--color-atelier-canvas) 40%,transparent),var(--color-atelier-canvas));border-top:1px solid color-mix(in srgb,var(--color-text-primaer) 6%,transparent)}
 .studio-floor::after{content:"";position:absolute;left:20%;right:20%;top:-12%;height:60%;border-radius:50%;background:radial-gradient(ellipse,color-mix(in srgb,var(--studio-light) 16%,transparent),transparent 70%)}
@@ -21,17 +17,9 @@
 .studio-actor.is-flipped>img.studio-reflection{transform:scale(-1,-1)}
 .studio-actor.who-oracle{bottom:36%}
 .studio-actor.who-oracle>img.studio-reflection{display:none}
-/* Floating glass cards carry the page's own chapter headings. */
-.studio-cards{position:absolute;z-index:4;left:4%;right:4%;bottom:4%;display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-2);margin:0;padding:0;list-style:none}
-.studio-card{display:flex;max-width:32%;gap:var(--space-2);align-items:baseline;padding:var(--space-2) var(--space-3);border-radius:var(--radius-chip,12px);border:1px solid color-mix(in srgb,var(--color-text-primaer) 12%,transparent);background:color-mix(in srgb,var(--color-atelier-surface) 58%,transparent);-webkit-backdrop-filter:blur(var(--material-blur,18px)) saturate(140%);backdrop-filter:blur(var(--material-blur,18px)) saturate(140%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-text-primaer) 12%,transparent),var(--shadow-atelier);font-size:12px;line-height:1.35;color:var(--color-text-primaer)}
-.studio-card>span{flex-shrink:0;font-size:10px;letter-spacing:.06em;color:var(--studio-light)}
 .studio-toggle{justify-self:start;display:inline-flex;align-items:center;gap:var(--space-2);min-height:var(--target-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-pille);border:1px solid var(--color-linie-mittel);background:color-mix(in srgb,var(--color-atelier-surface) 70%,transparent);color:var(--color-text-primaer);font:inherit;font-size:13px;cursor:pointer}
 .studio-toggle:hover{border-color:var(--studio-light,var(--color-atelier-champagne))}
 .studio-toggle:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:3px}
 .studio-film{display:grid;gap:var(--space-3);min-width:0}
-@media (max-width:600px){.studio-stage{aspect-ratio:1/1}.studio-card{max-width:48%;font-size:11px;padding:6px 10px}.studio-card.card-2{display:none}}
-@media (prefers-reduced-transparency:reduce){.studio-card{background:var(--color-atelier-surface);-webkit-backdrop-filter:none;backdrop-filter:none}.studio-beam{display:none}}
-/* Pascal is a waist-up portrait: he stands behind a glass counter that hides the crop. */
-.studio-actor.who-pascal{bottom:0}
-.studio-actor.who-pascal>img.studio-reflection,.studio-actor.who-pascal::after{display:none}
-.studio-desk{position:absolute;z-index:3;bottom:0;width:min(52%,340px);height:24%;transform:translateX(-50%);border-radius:var(--radius-karte) var(--radius-karte) 0 0;border:1px solid color-mix(in srgb,var(--color-text-primaer) 14%,transparent);border-bottom:0;background:linear-gradient(180deg,color-mix(in srgb,var(--color-text-primaer) 14%,transparent),color-mix(in srgb,var(--color-atelier-surface) 70%,transparent) 22%,color-mix(in srgb,var(--color-atelier-canvas) 92%,transparent));-webkit-backdrop-filter:blur(var(--material-blur,18px));backdrop-filter:blur(var(--material-blur,18px));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--studio-light) 45%,transparent),0 -12px 30px color-mix(in srgb,var(--color-graphit-900) 40%,transparent)}
+@media (max-width:600px){.studio-stage{aspect-ratio:1/1}}
+@media (prefers-reduced-transparency:reduce){.studio-beam{display:none}}

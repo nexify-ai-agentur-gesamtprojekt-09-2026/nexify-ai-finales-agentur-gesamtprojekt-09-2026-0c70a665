@@ -152,7 +152,7 @@
 .footer-legal-details div { max-width: 72ch; }
 
 /* Nutzer-SOLL: kontrollierte Komposita und eine zentrale Material-/Lichtrichtung. */
-.workspace-shell :is(h1,h2,h3,p,label,summary,.chat-bubble,.orientation-message,.welcome-card,.output-card,.chat-entry,.home-product-link) { min-inline-size:0; word-break:normal; overflow-wrap:anywhere; hyphens:auto; hyphenate-limit-chars:6 3 3; }
+.workspace-shell :is(h1,h2,h3,p,label,summary,.chat-bubble,.orientation-message,.welcome-card,.output-card,.chat-entry,.home-product-link) { min-inline-size:0; word-break:normal; overflow-wrap:break-word; hyphens:manual; }
 .workspace-shell :is(button,input,textarea,a) { min-inline-size:0; word-break:normal; overflow-wrap:anywhere; }
 .workspace-shell :is(code,pre,kbd,.mono) { hyphens:none; }
 .workspace-shell :is(.diagnostic-consent-dialog,.output-card,.system-card,.home-product-link) { background-color:var(--material-veil); backdrop-filter:blur(var(--material-blur)); -webkit-backdrop-filter:blur(var(--material-blur)); border:var(--material-border) solid var(--color-linie-mittel); border-top-color:var(--material-highlight); border-left-color:var(--material-highlight); box-shadow:var(--material-shadow); }
@@ -307,7 +307,7 @@
  .workspace-shell :is(.aifly-panel,.composer,.product-navigation-menu,.mobile-navigation-panel,.footer-overview-panel) { background:var(--color-graphit-850); backdrop-filter:none; -webkit-backdrop-filter:none; }
  .workspace-shell :is(.chat-hints>summary,.chat-hints-content p,.connection-note) { color:var(--color-text-primaer); }
 }
-.workspace-shell .aifly-panel :is(p,label,summary,button) { -webkit-hyphens:auto; hyphens:auto; overflow-wrap:anywhere; }
+.workspace-shell .aifly-panel :is(p,label,summary,button) { -webkit-hyphens:manual; hyphens:manual; overflow-wrap:break-word; }
 /* Resizable docked chat column (REQ-125..133) */
 .chat-resize-handle { position: absolute; top: 0; bottom: 0; left: calc(var(--space-2) * -1); width: var(--space-4); cursor: col-resize; z-index: 5; touch-action: none; }
 .chat-resize-handle::after { content: ""; position: absolute; top: 50%; left: 50%; width: var(--space-1); height: var(--space-7); border-radius: var(--radius-pill, 999px); background: var(--color-linie-mittel); transform: translate(-50%, -50%); opacity: 0; transition: opacity .15s ease, background-color .15s ease; }

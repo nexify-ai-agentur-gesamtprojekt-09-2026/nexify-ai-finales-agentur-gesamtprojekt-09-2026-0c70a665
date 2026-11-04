@@ -49,7 +49,7 @@
 .home-process-steps li::before { content:''; position:absolute; left:var(--space-7); right:calc(var(--space-5) * -1); top:var(--space-5); height:1px; background:var(--color-linie-mittel); z-index:-1; }
 .home-process-steps li:last-child::before { display:none; }
 .home-process-node { display:grid; place-items:center; width:var(--layout-control-size); height:var(--layout-control-size); border-radius:var(--radius-pille); border:1px solid var(--color-linie-stark); box-shadow:var(--shadow-well); color:var(--color-marke-lime); background:var(--color-graphit-800); font-size:var(--type-small-size); }
-.home-process-steps h3 { font-family:var(--font-display); font-size:var(--type-card-size); font-weight:500; line-height:1.3; hyphens:auto; }
+.home-process-steps h3 { font-family:var(--font-display); font-size:var(--type-card-size); font-weight:500; line-height:1.3; hyphens:manual; }
 .home-process-steps p { font-size:var(--type-body-size); }
 .home-product-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-5); }
 .home-product-link { display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-5); padding:var(--space-6); min-height:var(--layout-control-size); background:var(--gradient-karte); border:1px solid var(--color-linie-mittel); border-radius:var(--radius-karte); box-shadow:var(--shadow-karte); }

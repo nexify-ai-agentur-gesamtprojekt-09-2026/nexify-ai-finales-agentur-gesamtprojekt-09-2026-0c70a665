@@ -1,16 +1,14 @@
 {
  "schema_version": 1,
- "decision": "Owner decision 04.11.2026: one continuous photo series composed from the approved character cutouts in a single glass studio set (same camera, light and floor). No generated faces. Pascal appears only as the approved smiling portrait (owner 04.11.2026: full-body blazer cutout forbidden), standing behind a glass counter.",
+ "decision": "Owner decision 04.11.2026: page scenes compose only the approved zielbild-v2 figures (Pascal walking and smiling, NeX walking, Oracle floating) in the same studio light as the home hero. No generic decoration, no numbered cards. TEILEKLAR pages use real product photos (or the approved film until the catalogue exists), not mascot scenes.",
  "assets": {
   "pascal": {
-   "portrait": "/media/studio/pascal-portrait.webp"
+   "walk": "/media/studio/pascal-walk.webp"
   },
   "nex": {
-   "stand": "/media/studio/nex-stand.webp",
-   "walk": "/media/studio/nex-walk.webp"
+   "stand": "/media/studio/nex-stand.webp"
   },
   "oracle": {
-   "avatar": "/media/studio/oracle.webp",
    "float": "/media/studio/oracle-float.webp"
   }
  },
@@ -52,13 +50,13 @@
      "who": "nex",
      "pose": "stand",
      "x": 22,
-     "h": 40,
+     "h": 44,
      "z": 2,
      "flip": false
     },
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 50,
      "h": 74,
      "z": 3,
@@ -66,7 +64,7 @@
     },
     {
      "who": "oracle",
-     "pose": "avatar",
+     "pose": "float",
      "x": 79,
      "h": 26,
      "z": 2,
@@ -79,7 +77,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 40,
      "h": 74,
      "z": 3,
@@ -89,7 +87,7 @@
      "who": "nex",
      "pose": "stand",
      "x": 72,
-     "h": 40,
+     "h": 44,
      "z": 2,
      "flip": false
     }
@@ -100,7 +98,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 30,
      "h": 74,
      "z": 3,
@@ -108,9 +106,9 @@
     },
     {
      "who": "oracle",
-     "pose": "avatar",
+     "pose": "float",
      "x": 66,
-     "h": 34,
+     "h": 28,
      "z": 2,
      "flip": false
     }
@@ -121,7 +119,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 62,
      "h": 74,
      "z": 3,
@@ -131,7 +129,7 @@
      "who": "oracle",
      "pose": "float",
      "x": 28,
-     "h": 19,
+     "h": 22,
      "z": 2,
      "flip": false
     }
@@ -142,7 +140,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 58,
      "h": 74,
      "z": 3,
@@ -150,9 +148,9 @@
     },
     {
      "who": "nex",
-     "pose": "walk",
+     "pose": "stand",
      "x": 26,
-     "h": 29,
+     "h": 44,
      "z": 2,
      "flip": false
     }
@@ -165,7 +163,7 @@
      "who": "nex",
      "pose": "stand",
      "x": 44,
-     "h": 45,
+     "h": 44,
      "z": 3,
      "flip": false
     },
@@ -173,7 +171,7 @@
      "who": "oracle",
      "pose": "float",
      "x": 74,
-     "h": 19,
+     "h": 22,
      "z": 2,
      "flip": false
     }
@@ -184,7 +182,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 52,
      "h": 74,
      "z": 3,
@@ -197,9 +195,9 @@
    "cast": [
     {
      "who": "oracle",
-     "pose": "avatar",
+     "pose": "float",
      "x": 50,
-     "h": 40,
+     "h": 28,
      "z": 3,
      "flip": false
     }
@@ -210,7 +208,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 44,
      "h": 74,
      "z": 3,
@@ -220,7 +218,7 @@
      "who": "oracle",
      "pose": "float",
      "x": 76,
-     "h": 19,
+     "h": 22,
      "z": 2,
      "flip": false
     }
@@ -231,7 +229,7 @@
    "cast": [
     {
      "who": "oracle",
-     "pose": "avatar",
+     "pose": "float",
      "x": 20,
      "h": 26,
      "z": 2,
@@ -239,7 +237,7 @@
     },
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 48,
      "h": 74,
      "z": 3,
@@ -249,7 +247,7 @@
      "who": "nex",
      "pose": "stand",
      "x": 76,
-     "h": 40,
+     "h": 44,
      "z": 2,
      "flip": false
     }
@@ -260,7 +258,7 @@
    "cast": [
     {
      "who": "pascal",
-     "pose": "portrait",
+     "pose": "walk",
      "x": 56,
      "h": 74,
      "z": 3,
@@ -268,9 +266,9 @@
     },
     {
      "who": "nex",
-     "pose": "walk",
+     "pose": "stand",
      "x": 24,
-     "h": 29,
+     "h": 44,
      "z": 2,
      "flip": true
     }
@@ -283,7 +281,7 @@
      "who": "nex",
      "pose": "stand",
      "x": 48,
-     "h": 50,
+     "h": 44,
      "z": 3,
      "flip": false
     },
@@ -291,7 +289,7 @@
      "who": "oracle",
      "pose": "float",
      "x": 78,
-     "h": 19,
+     "h": 22,
      "z": 2,
      "flip": false
     }
@@ -304,15 +302,15 @@
      "who": "nex",
      "pose": "stand",
      "x": 34,
-     "h": 45,
+     "h": 44,
      "z": 3,
      "flip": false
     },
     {
      "who": "oracle",
-     "pose": "avatar",
+     "pose": "float",
      "x": 70,
-     "h": 33,
+     "h": 28,
      "z": 2,
      "flip": false
     }
@@ -325,256 +323,15 @@
      "who": "oracle",
      "pose": "float",
      "x": 36,
-     "h": 21,
+     "h": 22,
      "z": 2,
      "flip": false
     },
     {
      "who": "nex",
-     "pose": "walk",
+     "pose": "stand",
      "x": 64,
-     "h": 31,
-     "z": 3,
-     "flip": false
-    }
-   ]
-  },
-  "tk-home": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 36,
-     "h": 45,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "oracle",
-     "pose": "avatar",
-     "x": 70,
-     "h": 29,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-shop": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "walk",
-     "x": 30,
-     "h": 33,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "oracle",
-     "pose": "float",
-     "x": 72,
-     "h": 19,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-search": {
-   "light": "cool",
-   "cast": [
-    {
-     "who": "oracle",
-     "pose": "avatar",
-     "x": 50,
-     "h": 38,
-     "z": 3,
-     "flip": false
-    }
-   ]
-  },
-  "tk-categories": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 60,
-     "h": 43,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "oracle",
-     "pose": "float",
-     "x": 26,
-     "h": 17,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-category": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "walk",
-     "x": 64,
-     "h": 33,
-     "z": 3,
-     "flip": true
-    }
-   ]
-  },
-  "tk-product": {
-   "light": "cool",
-   "cast": [
-    {
-     "who": "oracle",
-     "pose": "avatar",
-     "x": 34,
-     "h": 31,
-     "z": 2,
-     "flip": false
-    },
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 66,
-     "h": 43,
-     "z": 3,
-     "flip": false
-    }
-   ]
-  },
-  "tk-fitment": {
-   "light": "cool",
-   "cast": [
-    {
-     "who": "oracle",
-     "pose": "avatar",
-     "x": 44,
-     "h": 41,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "nex",
-     "pose": "walk",
-     "x": 76,
-     "h": 28,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-workshop": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "pascal",
-     "pose": "portrait",
-     "x": 40,
-     "h": 74,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 72,
-     "h": 38,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-partner": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "pascal",
-     "pose": "portrait",
-     "x": 34,
-     "h": 74,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 66,
-     "h": 40,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-reifenrechner": {
-   "light": "cool",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 62,
-     "h": 43,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "oracle",
-     "pose": "float",
-     "x": 28,
-     "h": 19,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-batterie": {
-   "light": "lime",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "stand",
-     "x": 50,
-     "h": 50,
-     "z": 3,
-     "flip": false
-    }
-   ]
-  },
-  "tk-appointments": {
-   "light": "champagne",
-   "cast": [
-    {
-     "who": "nex",
-     "pose": "walk",
-     "x": 34,
-     "h": 33,
-     "z": 3,
-     "flip": false
-    },
-    {
-     "who": "oracle",
-     "pose": "avatar",
-     "x": 68,
-     "h": 29,
-     "z": 2,
-     "flip": false
-    }
-   ]
-  },
-  "tk-vouchers": {
-   "light": "lime",
-   "cast": [
-    {
-     "who": "oracle",
-     "pose": "avatar",
-     "x": 50,
-     "h": 38,
+     "h": 44,
      "z": 3,
      "flip": false
     }
