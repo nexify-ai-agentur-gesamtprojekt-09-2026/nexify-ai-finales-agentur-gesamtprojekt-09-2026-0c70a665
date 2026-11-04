@@ -12,6 +12,8 @@ Shop-Gesamtkonzept (Nutzerziel 04.11.): `docs/shop/onlineshop-konzept-2026-11-04
 
 Shop-Umsetzung (04.11., Fortsetzung): 15 TEILEKLAR-Seiten als Auto-/Motorradzubehör neu positioniert, 4 neue Infoseiten (Versand & Zahlung, Rückgabe, Hilfe, Batterie & Altgeräte; Rechtsbezug als Entwurf) → 43 öffentliche Seiten. Shop: TrustBar mit nur belegbaren Aussagen (Werkstattsuche statt unbelegtem „Werkstattnetz“), Produktkarte/-seite nach deutschem Standard (Grundpreis, Lieferzeit, GPSR, Entsorgung nur aus Daten), Kasse mit AGB/Widerruf/Lieferzeit im Prüfschritt, getrennte Katalogzustände mit Retry. Gezeichnete SVG-Bildgeschichte vom Inhaber verworfen und vollständig zurückgenommen; Bildgeschichte nur mit echter Fotografie/fotorealistischen Renderings (Konzept §2). Alle Browsernachweise neu erhoben (kritisch 8/8, Footer Vite+Next je 258, Fallbacks 18, Einwilligung 18, Next 86 Route×Sprache, Shop-API 8+10, Textvergrößerung 43 Routen); Next-Routenzahl im Checker aus site-map abgeleitet.
 
+Bildquelle Shop (Inhaberentscheidung 04.11.): echte Produktfotos. ProductShowcase zeigt auf Shop/Kategorien/Kategorie/Suche 3–4 verfügbare Katalog-Packshots auf der Graphit-Bühne (verlinkt), sonst bleibt der freigegebene Film; Auswahlregel unit-getestet, Layout 1440/390 ohne Überlauf geprüft (Katalog lokal simuliert, echte Bilder erst mit Live-Katalog sichtbar). Dachzeile Shop von „Teile, Fahrzeug…“ auf „Zubehör, Service…“ korrigiert.
+
 ---
 
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026

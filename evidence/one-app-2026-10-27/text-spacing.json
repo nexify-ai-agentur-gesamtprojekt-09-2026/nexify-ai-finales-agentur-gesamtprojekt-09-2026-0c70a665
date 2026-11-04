@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T14:57:33.909Z",
+  "observed_at": "2026-11-04T15:33:19.207Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "51e6bf1fdd28440445ec04962df53e49ecafb92ba91c6588d07be0064f0f771b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -56,7 +56,7 @@
     "apps/web/components/ProblemExplorer.tsx": "61edea11f3f625248e1e0392c82d60825ff8e53d53b74fa94acd867be7d56577",
     "apps/web/components/ProjectFilesPanel.css": "878e009d14076c6e791d0d130686e7102feee12debf7bc5b916d8acf04a08c55",
     "apps/web/components/ProjectFilesPanel.tsx": "2fb523dc07763068deb19b1a3e24caff80ed93641ed654ed4372566e7301c5c9",
-    "apps/web/components/PublicContent.tsx": "55b334f27f95616be354744a7bca66e797c5b8ef138e9f96b419a89cbb8376f8",
+    "apps/web/components/PublicContent.tsx": "60956e0c0f3afd9c6a7265be877b90a96a918e70c272881e32cdf61a2bb73923",
     "apps/web/components/PublicContentLayout.css": "84dd3df6485bfda706ac9144a4458e23ea2ae64a51ae46c2545b8f940a830b96",
     "apps/web/components/PublicExperience.tsx": "f4619eb7baa20000f8040e744e2ba56bfdc3b715177c2d227291cf53fb8e8c2e",
     "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
@@ -95,6 +95,8 @@
     "apps/web/components/shop/PhaseNotice.tsx": "114b4eb85cf300d9b32a02070813372b66c6a3bb8bea74e460ed51c193c4df10",
     "apps/web/components/shop/ProductCard.tsx": "594e6501f4dc4c7ee60a790ef08012b77724123d040ee3464df200840119f2aa",
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
+    "apps/web/components/shop/ProductShowcase.css": "5dc5d99f0e55742e474a447de98e3e490040b52a4525c72571622ac798ee5386",
+    "apps/web/components/shop/ProductShowcase.tsx": "975edcd28e97f4ec58f6622779c5d27488bbb8868ced399c587779250ff914f7",
     "apps/web/components/shop/PublicShopContent.tsx": "b0851c552c504122bd248df349b813e67d7fd339d592774580621c6913ead0e3",
     "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
     "apps/web/components/shop/ShopEntry.tsx": "db1ae4a0cd487bc0897a23efe7b1da6ca567cfcccfc046c2f4d7ec4bbbb7920a",
@@ -243,7 +245,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 492,
+        "count": 493,
         "all_doubled": true
       },
       "overflow": false,
@@ -358,7 +360,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 469,
+        "count": 468,
         "all_doubled": true
       },
       "overflow": false,
@@ -933,7 +935,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 463,
+        "count": 462,
         "all_doubled": true
       },
       "overflow": false,

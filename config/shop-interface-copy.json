@@ -176,7 +176,9 @@
     "paidAt": "Bezahlt am",
     "allOrders": "Alle Bestellungen",
     "orderWorkshopTitle": "Montage gewünscht?",
-    "orderWorkshopBody": "Finden Sie eine Werkstatt in Ihrer Nähe für Einbau und Prüfung."
+    "orderWorkshopBody": "Finden Sie eine Werkstatt in Ihrer Nähe für Einbau und Prüfung.",
+    "showcaseLabel": "Aus dem Sortiment",
+    "showcaseCaption": "Echte Produktfotos aus dem aktuellen Sortiment"
   },
   "nl": {
     "imageError": "De leveranciersafbeelding kon niet worden geladen",
@@ -355,7 +357,9 @@
     "paidAt": "Betaald op",
     "allOrders": "Alle bestellingen",
     "orderWorkshopTitle": "Montage gewenst?",
-    "orderWorkshopBody": "Zoek een werkplaats bij u in de buurt voor montage en controle."
+    "orderWorkshopBody": "Zoek een werkplaats bij u in de buurt voor montage en controle.",
+    "showcaseLabel": "Uit het assortiment",
+    "showcaseCaption": "Echte productfoto’s uit het actuele assortiment"
   },
   "fr": {
     "imageError": "Impossible de charger l’image du fournisseur",
@@ -534,7 +538,9 @@
     "paidAt": "Payé le",
     "allOrders": "Toutes les commandes",
     "orderWorkshopTitle": "Besoin d'un montage ?",
-    "orderWorkshopBody": "Trouvez un atelier près de chez vous pour le montage et le contrôle."
+    "orderWorkshopBody": "Trouvez un atelier près de chez vous pour le montage et le contrôle.",
+    "showcaseLabel": "Extrait de l’assortiment",
+    "showcaseCaption": "Photos réelles de produits de l’assortiment actuel"
   },
   "en": {
     "imageError": "The supplier image could not be loaded",
@@ -713,6 +719,8 @@
     "paidAt": "Paid on",
     "allOrders": "All orders",
     "orderWorkshopTitle": "Need it fitted?",
-    "orderWorkshopBody": "Find a workshop near you for fitting and inspection."
+    "orderWorkshopBody": "Find a workshop near you for fitting and inspection.",
+    "showcaseLabel": "From the range",
+    "showcaseCaption": "Real product photos from the current range"
   }
 }
