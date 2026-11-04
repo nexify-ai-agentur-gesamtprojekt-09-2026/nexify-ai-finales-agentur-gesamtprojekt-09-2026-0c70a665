@@ -36,6 +36,7 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
      <img className="cast-pascal" src={artwork.images.pascal.src} alt="" width={artwork.images.pascal.width} height={artwork.images.pascal.height} loading="eager" fetchPriority="high" decoding="async"/>
      <img className="cast-nex" src={artwork.images.nex.src} alt="" width={artwork.images.nex.width} height={artwork.images.nex.height} loading="eager" decoding="async"/>
      <img className="cast-oracle" src={artwork.images.aifly.src} alt="" width={artwork.images.aifly.width} height={artwork.images.aifly.height} loading="eager" decoding="async"/>
+     <span className="cast-sheen" aria-hidden="true"/>
     </figure>}
    </div>
   </div>

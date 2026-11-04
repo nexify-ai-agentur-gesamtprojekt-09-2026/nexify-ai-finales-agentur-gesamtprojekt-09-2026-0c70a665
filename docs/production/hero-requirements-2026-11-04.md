@@ -145,3 +145,16 @@ eigentümerprivate Sites-Audience; keine neue öffentliche Freigabe.
 
 Tatsächlich bestätigtes Restguthaben nach den drei Aufträgen: 145 Credits.
 Verbraucht 645 aus 790; keine Aufladung, kein neuer Tarif, keine weitere Generation.
+
+## Bewegung der Standbild-Ausweichbühne · 04.11.2026
+
+Aus dem Nutzer-Artifact „NeXify Home Hero“ übernommen: Die öffentliche
+Ausweichbühne (`data-media-state="editorial-still"`) erhält einen einmaligen
+Eintritt (Pascal, NeX, Oracle gestaffelt), danach ruhige Atembewegung und einen
+dezenten Glasschimmer (`apps/web/components/LuxuryMaterials.css`,
+`.cast-sheen` in `IdentityHero.tsx`). Reduced Motion schaltet alles ab;
+reduzierte Transparenz/erhöhter Kontrast blendet den Schimmer aus.
+Diese Bewegung ist ausdrücklich **kein** Ersatz für die geforderte Videoaufnahme
+und keine Regieabnahme; `production_accepted=false` bleibt unverändert. Sie
+berührt das Kriterium „keine wackelnden Standbilder“, falls sie als Hero-Medium
+gewertet würde – Nutzerentscheidung offen (siehe PR).
