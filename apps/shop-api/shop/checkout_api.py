@@ -182,7 +182,7 @@ async def sync_payment(order):
                                                       {"$set": {"status": PAID, "paid_at": now_iso(), "paid_mail_recovery_pending": True}, "$inc": {"paid_transitions": 1}})
         if updated:
             paid_ids = [l["product_id"] for l in order["lines"]]
-            await db.carts.update_one({"owner": order["owner"]}, {"$pull": {"items": {"product_id": {"$in": paid_ids}}}})
+            await db.carts.update_one({"owner": order["owner"]}, {"$pull": {"items": {"product_id": {"$in": paid_ids}}}, "$inc": {"rev": 1}})
         current = await db.orders.find_one({"_id": order["_id"]})
         if current and current.get("status") == PAID and current.get("paid_mail_recovery_pending"):
             await send_paid_mails(current)

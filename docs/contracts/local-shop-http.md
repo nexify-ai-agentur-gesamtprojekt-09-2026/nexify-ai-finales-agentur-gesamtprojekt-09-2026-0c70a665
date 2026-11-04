@@ -1,5 +1,15 @@
 # Lokaler Shopweg: Browser → HTTP → vorhandener Store → Read-back
 
+> **Stand 04.11.2026 (DECISIONS.md D-010):** Dieser Vertrag beschreibt die nicht mehr
+> eingebundene `ShopPanel`-/`apps/agent-gateway`-Strecke und ist historisch. Der aktuelle
+> Browser-Nachweis für Katalog, Warenkorb und Kasse läuft gegen `apps/shop-api`
+> (`vercel_app.create_app`): `apps/site/tests/browser-shop-api.mjs`, Fixture
+> `apps/site/tests/fixtures/shop_api_fixture.py` (mongomock-motor, synthetische Artikel),
+> Nachweis `evidence/shop-api-2026-11-04/`. Ausführung: Python-Umgebung mit
+> `apps/shop-api/requirements.txt` plus `mongomock-motor` und `uvicorn`, dann
+> `SHOP_FIXTURE_PYTHON=<python> PLAYWRIGHT_MODULE=<playwright> node apps/site/tests/browser-shop-api.mjs`
+> und `.local/shop-api/*.json` nach `evidence/shop-api-<datum>/` übernehmen.
+
 Folgeblock auf b08a7fc, keine produktive Handelsfreigabe. `apps/site` bleibt
 App-Root mit derselben Shell, Navigation, DE/NL/FR, Tokens und getrenntem
 TEILEKLAR-Kontext. config/one-web-app.json führt den neuen lokalen Shop-Vertrag

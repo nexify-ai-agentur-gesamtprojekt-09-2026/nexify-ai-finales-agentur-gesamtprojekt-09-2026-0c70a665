@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useId, useState } from "react";
 import { SiteLink, useSiteNavigate } from "../Router";
-import { api, type Product } from "./api";
+import { api, catalogFailure, type Product } from "./api";
 import { ProductCard, useShopCopy } from "./ProductCard";
 
 type Result = { items: Product[]; total: number; page: number; pages: number };
@@ -19,18 +19,19 @@ export function SearchBar({ initial = "", base = "/teileklar/suche" }: { initial
 
 export default function CatalogView({ q = "", category, page = 1, base }: { q?: string; category?: number; page?: number; base: string }) {
   const { t, number } = useShopCopy();
-  const [result, setResult] = useState<Result | null>(null), [failed, setFailed] = useState(false);
+  const [result, setResult] = useState<Result | null>(null), [failed, setFailed] = useState<"unconfigured" | "unavailable" | null>(null);
   useEffect(() => {
-    setResult(null); setFailed(false);
+    setResult(null); setFailed(null);
     const params = new URLSearchParams({ q, page: String(page) }); if (category !== undefined) params.set("category", String(category));
     const controller = new AbortController(); let current = true;
     api<Result>("/api/shop/products?" + params, { signal: controller.signal }).then(data => {
       if (!Array.isArray(data.items) || !Number.isSafeInteger(data.total) || data.total < 0 || !Number.isSafeInteger(data.page) || data.page < 1 || !Number.isSafeInteger(data.pages) || data.pages < 0) throw new Error("invalid_catalog_response");
       if (current) setResult(data);
-    }).catch(() => { if (current && !controller.signal.aborted) setFailed(true); });
+    }).catch(error => { if (current && !controller.signal.aborted) setFailed(catalogFailure(error)); });
     return () => { current = false; controller.abort(); };
   }, [q, category, page]);
   const link = (target: number) => base + "?" + new URLSearchParams({ ...(q ? { q } : {}), seite: String(target) });
+  if (failed === "unconfigured") return <p role="status" className="tk-alert" data-testid="catalog-unconfigured">{t("catalogUnconfigured")}</p>;
   if (failed) return <p role="alert" className="tk-alert" data-testid="catalog-error">{t("catalogError")}</p>;
   if (!result) return <p role="status" data-testid="catalog-loading">{t("catalogLoading")}</p>;
   if (!result.total) return <div className="tk-empty" data-testid="catalog-empty"><h2>{q ? t("noResults") : t("noItems")}</h2>

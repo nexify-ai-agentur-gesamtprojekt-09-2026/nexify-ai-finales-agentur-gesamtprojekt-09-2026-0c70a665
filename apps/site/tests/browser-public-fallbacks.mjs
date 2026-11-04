@@ -65,11 +65,14 @@ try{
      await page.locator('.panel-heading .icon-button').focus();await page.keyboard.press('Enter');await page.locator('.reopen-chat').focus();await page.keyboard.press('Enter');if(failure!=='capabilities')assert.equal(await page.locator('.conversation > .request-fallback').isVisible(),true);
     }
     if(width<=820){await page.locator('.panel-heading .icon-button').click();}
-    // ShopPanel.tsx is no longer mounted; /teileklar/suche renders shop/PublicShopContent + CatalogView. Both catalogue failures must fail closed.
+    // ShopPanel.tsx is no longer mounted; /teileklar/suche renders shop/PublicShopContent + CatalogView. Both catalogue failures fail closed
+    // and stay distinct (D-010): explicit 503 setup answer -> catalog-unconfigured, any other failure -> catalog-error.
     const shop=page.locator('[data-testid="public-shop-search"]');
     for(const unconfigured of [false,true]){
      catalogUnconfigured=unconfigured;const reads=catalogReads;if(unconfigured)await page.reload();else await page.goto(origin+'/teileklar/suche');
-     const alert=shop.locator('[data-testid="catalog-error"]');await alert.waitFor();assert.equal(await alert.innerText(),shopCopy[locale].catalogError);assert.ok(catalogReads>reads);
+     const [testid,key]=unconfigured?['catalog-unconfigured','catalogUnconfigured']:['catalog-error','catalogError'];
+     const alert=shop.locator('[data-testid="'+testid+'"]');await alert.waitFor();assert.equal(await alert.innerText(),shopCopy[locale][key]);assert.ok(catalogReads>reads);
+     assert.equal(await shop.locator(unconfigured?'[data-testid="catalog-error"]':'[data-testid="catalog-unconfigured"]').count(),0);
      assert.equal(await shop.locator('[data-testid="catalog-results"], .tk-grid, [data-testid="catalog-empty"]').count(),0);
      assert.deepEqual(await shop.locator('button').evaluateAll(b=>b.map(x=>x.dataset.testid)),['shop-search-submit']);
      assert.doesNotMatch(await shop.innerText(),/Warenkorb|winkelwagen|Beispielartikel|voorbeeldartikel/i);

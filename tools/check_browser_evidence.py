@@ -181,106 +181,121 @@ def check_evidence(root):
 
 
 
-SHOP_EVIDENCE_PATH = "evidence/shop-http-2026-10-27/browser-shop.json"
-SHOP_SOURCE_PATHS = (
-    "apps/agent-gateway/cart.py", "apps/agent-gateway/server.py",
-    "apps/web/components/DeferredChatBoundary.tsx",
-    "apps/web/components/PublicRequestFallback.tsx",
-    "apps/web/components/OracleCompanion.tsx",
-    "apps/web/components/OracleCompanion.css",
-    "apps/web/lib/i18n.ts",
-    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-    "apps/web/components/PublicExperience.tsx",
-    "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
-    "apps/web/components/Workspace.tsx", "apps/site/src/main.tsx",
-    "apps/site/tests/browser-shop.mjs", "apps/site/tests/fixtures/shop-server.py",
-)
-SHOP_CHECKS = frozenset((
-    "real DE NL FR catalog search and categories using isolated fixtures",
-    "aborted create before commit blocks writes until deliberate successful empty readback",
-    "browser creates scoped HttpOnly cart and persists server-authoritative amount across reload",
-    "committed change with lost response requires readback and does not blindly repeat effect",
-    "quantity submit remove and repeated blocked checkout survive direct cart link and reload",
-    "HTTP backend process restart keeps browser session cart and persisted source binding",
-    "foreign visitor cart cookie and client role/tenant claims grant no cart access",
-    "unconfigured catalog and failed catalog connection remain distinct with no sample products",
-    "mobile keyboard layout retains shared tokens and no horizontal overflow",
-    "expired successful creation key cannot trap a cookie-less cart in permanent 410",
-    "lost creation response preserves key until readback and restores one committed cart",
-    "expired unknown creation requires explicit 410 readback before a fresh creation key",
-    "authoritative expired cart read clears stale UI but requires deliberate new creation",
-))
-
-
-def check_shop_evidence(root):
-    evidence = json.loads(_read(root, SHOP_EVIDENCE_PATH))
-    hashes = evidence.get("source_sha256", {})
-    if set(hashes) != set(SHOP_SOURCE_PATHS):
-        raise EvidenceError("shop_exact_source_path_set_required")
-    for relative in SHOP_SOURCE_PATHS:
-        if hashlib.sha256(_read(root, relative)).hexdigest() != hashes[relative]:
-            raise EvidenceError("stale_shop_source_sha256: " + relative)
-    if not SHOP_CHECKS.issubset(evidence.get("checks", [])):
-        raise EvidenceError("shop_critical_check_missing")
-    if (evidence.get("external_requests") != [] or evidence.get("payment_started") is not False
-            or evidence.get("order_submitted") is not False):
-        raise EvidenceError("shop_effect_boundaries_required")
-    observed = {(row.get("method"), row.get("path"), row.get("status")) for row in evidence.get("requests", [])}
-    for method, path, status in (("POST", "/api/shop/cart", 200), ("POST", "/api/shop/cart/items", 200),
-                                ("GET", "/api/shop/cart", 200), ("GET", "/api/shop/cart", 404), ("GET", "/api/shop/cart", 410),
-                                ("POST", "/api/shop/cart/checkout-draft", 200),
-                                ("GET", "/api/shop/cart/checkout-draft", 200)):
-        if (method, path, status) not in observed:
-            raise EvidenceError("shop_actual_http_boundary_missing")
-    if evidence.get("persistent_objects") != {"cart": 7, "checkout_draft": 1}:
-        raise EvidenceError("shop_persistent_duplicate_or_missing")
-    return {"scope": "stored_local_fixture_browser_api_sqlite_evidence_only", "checks": len(SHOP_CHECKS)}
-
-
-
-CATALOG_EVIDENCE_PATH = "evidence/catalog-image-batch-2026-10-27/browser-catalog.json"
+# Live shop contract (DECISIONS.md D-010): the mounted shop/PublicShopContent client against
+# the real apps/shop-api adapter. Replaces the retired ShopPanel/agent-gateway evidence.
+SHOP_API_EVIDENCE_DIR = "evidence/shop-api-2026-11-04"
+CATALOG_EVIDENCE_PATH = SHOP_API_EVIDENCE_DIR + "/browser-catalog.json"
+SHOP_EVIDENCE_PATH = SHOP_API_EVIDENCE_DIR + "/browser-shop.json"
 CATALOG_SOURCE_PATHS = (
-    "apps/agent-gateway/catalog.py", "apps/agent-gateway/server.py",
-    "apps/web/components/DeferredChatBoundary.tsx",
-    "apps/web/components/PublicRequestFallback.tsx",
-    "apps/web/components/OracleCompanion.tsx",
-    "apps/web/components/OracleCompanion.css",
-    "apps/web/lib/i18n.ts",
-    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-    "apps/web/components/PublicExperience.tsx",
-    "apps/web/components/ShopPanel.tsx", "apps/web/components/ShopPanel.css",
-    "apps/site/tests/browser-catalog.mjs", "apps/site/tests/fixtures/catalog-server.py",
+    "apps/shop-api/vercel_app.py", "apps/shop-api/shop/catalog_api.py", "apps/shop-api/shop/pricing.py",
+    "apps/web/components/shop/PublicShopContent.tsx", "apps/web/components/shop/CatalogView.tsx",
+    "apps/web/components/shop/CategoryList.tsx", "apps/web/components/shop/ProductCard.tsx",
+    "apps/web/components/shop/ProductDetail.tsx", "apps/web/components/shop/api.ts",
+    "apps/web/components/shop/shop.css", "config/shop-interface-copy.json", "apps/site/src/main.tsx",
+    "apps/site/tests/browser-shop-api.mjs", "apps/site/tests/fixtures/shop_api_fixture.py",
+)
+SHOP_SOURCE_PATHS = (
+    "apps/shop-api/vercel_app.py", "apps/shop-api/shop/cart_api.py", "apps/shop-api/shop/checkout_api.py",
+    "apps/shop-api/shop/auth.py", "apps/shop-api/shop/pricing.py", "apps/shop-api/shop/catalog_api.py",
+    "apps/web/components/shop/PublicShopContent.tsx", "apps/web/components/shop/ProductDetail.tsx",
+    "apps/web/components/shop/CartView.tsx", "apps/web/components/shop/Checkout.tsx",
+    "apps/web/components/shop/AddressStep.tsx", "apps/web/components/shop/api.ts",
+    "apps/web/components/shop/shop.css", "config/shop-interface-copy.json", "apps/site/src/main.tsx",
+    "apps/site/tests/browser-shop-api.mjs", "apps/site/tests/fixtures/shop_api_fixture.py",
 )
 CATALOG_CHECKS = frozenset((
-    "source-bound partial catalog displayed without commerce or image requests",
-    "DE NL FR labels retain explicit German supplier facts",
-    "local filtering and reload remain scoped to partial snapshot",
-    "valid visitor and csrf cannot create cart or checkout from read-only source",
+    "catalog_search_and_category_browse_de_nl_fr_from_live_shop_api",
+    "product_detail_shows_server_price_stock_and_blocks_out_of_stock",
+    "supplier_images_blocked_before_network_with_local_placeholder",
+    "price_not_released_hides_price_and_server_refuses_add",
+    "mobile_390_catalog_and_detail_without_horizontal_overflow",
+    "catalog_not_configured_503_and_connection_failure_distinct_de_nl_fr",
 ))
+SHOP_CHECKS = frozenset((
+    "cart_add_update_remove_with_server_amounts_surviving_reload",
+    "lost_add_response_retry_replays_same_key_without_double_add",
+    "insufficient_stock_refused_with_localized_message_de_nl_fr",
+    "guest_cart_cookie_httponly_secure_lax_host_only_not_script_readable",
+    "forged_malformed_and_foreign_cart_cookies_grant_no_cart_access",
+    "cross_origin_cart_write_rejected_by_server",
+    "checkout_reachable_with_server_quote_while_order_and_payment_blocked",
+    "mobile_390_cart_and_checkout_without_horizontal_overflow",
+))
+# Observed browser<->server boundaries; "failed" is a request the browser lost/blocked.
+CATALOG_BOUNDARIES = frozenset((
+    ("GET", "/api/shop/products", 200), ("GET", "/api/shop/categories", 200),
+    ("GET", "/api/shop/products/{id}", 200), ("POST", "/api/shop/cart/items", 409),
+    ("GET", "/api/shop/products", 503), ("GET", "/api/shop/products", 502),
+))
+SHOP_BOUNDARIES = frozenset((
+    ("GET", "/api/shop/cart", 200), ("POST", "/api/shop/cart/items", 200),
+    ("POST", "/api/shop/cart/items", 409), ("POST", "/api/shop/cart/items", 403),
+    ("POST", "/api/shop/cart/items", "failed"), ("POST", "/api/shop/checkout/validate-address", 200),
+    ("GET", "/api/shop/checkout/shipping-options", 200), ("POST", "/api/shop/checkout/quote", 200),
+))
+EFFECT_PATHS = ("/api/shop/orders", "/api/shop/webhooks")
+RUNTIME_KEYS = ("backend", "database", "schema_probe", "frontend", "browser", "payment_provider")
+
+
+def _shop_api_report(root, relative, sources, required_checks, boundaries, prefix):
+    """Shared strict binding for both live-shop reports; raises EvidenceError(prefix_...)."""
+    root = Path(root).resolve()
+    report = _json(_read(root, relative))
+    if report.get("passed") is not True or report.get("synthetic_data") is not True:
+        raise EvidenceError(prefix + "_recorded_synthetic_pass_required")
+    hashes = report.get("source_sha256")
+    if not isinstance(hashes, dict) or set(hashes) != set(sources):
+        raise EvidenceError(prefix + "_exact_source_path_set_required")
+    for path in sources:
+        if not isinstance(hashes[path], str) or not re.fullmatch(r"[0-9a-f]{64}", hashes[path]):
+            raise EvidenceError(prefix + "_invalid_source_sha256: " + path)
+        if hashlib.sha256(_read(root, path)).hexdigest() != hashes[path]:
+            raise EvidenceError("stale_" + prefix + "_source_sha256: " + path)
+    checks = report.get("checks")
+    if (not isinstance(checks, list) or any(not isinstance(item, str) for item in checks)
+            or len(set(checks)) != len(checks) or not required_checks.issubset(checks)):
+        raise EvidenceError(prefix + "_critical_check_missing")
+    runtime = report.get("runtime")
+    if (not isinstance(runtime, dict) or any(not isinstance(runtime.get(key), str) or not runtime[key] for key in RUNTIME_KEYS)
+            or "vercel_app.create_app" not in runtime["backend"]):
+        raise EvidenceError(prefix + "_real_adapter_runtime_required")
+    if report.get("external_requests") != [] or report.get("uncaught_errors") != []:
+        raise EvidenceError(prefix + "_no_external_or_uncaught_required")
+    rows = report.get("requests")
+    if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+        raise EvidenceError(prefix + "_actual_http_boundary_missing")
+    observed = set()
+    for row in rows:
+        method, path, status = row.get("method"), row.get("path"), row.get("status")
+        if (not isinstance(method, str) or not isinstance(path, str) or not path.startswith("/api/shop/")
+                or not (status == "failed" or (type(status) is int and 100 <= status <= 599))):
+            raise EvidenceError(prefix + "_invalid_request_row")
+        if path.startswith(EFFECT_PATHS) and status != "failed":
+            raise EvidenceError(prefix + "_order_or_payment_reached_server")
+        observed.add((method, path, status))
+    if not boundaries.issubset(observed):
+        raise EvidenceError(prefix + "_actual_http_boundary_missing")
+    return report
 
 
 def check_catalog_evidence(root):
-    report = json.loads(_read(root, CATALOG_EVIDENCE_PATH))
-    hashes = report.get('source_sha256', {})
-    if set(hashes) != set(CATALOG_SOURCE_PATHS):
-        raise EvidenceError('catalog_exact_source_path_set_required')
-    for relative in CATALOG_SOURCE_PATHS:
-        if hashlib.sha256(_read(root, relative)).hexdigest() != hashes[relative]:
-            raise EvidenceError('stale_catalog_source_sha256: ' + relative)
-    if not CATALOG_CHECKS.issubset(report.get('checks', [])):
-        raise EvidenceError('catalog_critical_browser_check_missing')
-    if (report.get('mode') != 'read_only' or report.get('partial') is not True
-            or report.get('external_requests') != [] or report.get('order_started') is not False
-            or report.get('payment_started') is not False or report.get('image_requests') != 0):
-        raise EvidenceError('catalog_read_only_partial_boundaries_required')
-    if (not isinstance(report.get('catalog_input_sha256'), str)
-            or not re.fullmatch('[a-f0-9]{64}', report['catalog_input_sha256'])):
-        raise EvidenceError('catalog_input_fingerprint_required')
-    observed = {(r.get('method'), r.get('path'), r.get('status')) for r in report.get('requests', [])}
-    if not {('GET','/api/shop/catalog',200),('POST','/api/shop/cart',403),
-            ('POST','/api/shop/cart/checkout-draft',403)}.issubset(observed):
-        raise EvidenceError('catalog_actual_read_and_write_denial_required')
-    return {'scope': 'stored_local_read_only_catalog_browser_evidence_only', 'checks': len(CATALOG_CHECKS)}
+    report = _shop_api_report(root, CATALOG_EVIDENCE_PATH, CATALOG_SOURCE_PATHS, CATALOG_CHECKS, CATALOG_BOUNDARIES, "catalog")
+    blocked = report.get("supplier_image_requests_blocked")
+    if type(blocked) is not int or blocked < 1:
+        raise EvidenceError("catalog_supplier_image_block_not_exercised")
+    return {"scope": "stored_local_real_browser_shop_api_catalog_synthetic_evidence_only", "checks": len(CATALOG_CHECKS)}
+
+
+def check_shop_evidence(root):
+    report = _shop_api_report(root, SHOP_EVIDENCE_PATH, SHOP_SOURCE_PATHS, SHOP_CHECKS, SHOP_BOUNDARIES, "shop")
+    if (report.get("order_submitted") is not False or report.get("payment_started") is not False
+            or report.get("server_effects") != {"orders": 0, "provider_calls": [], "mail_calls": []}):
+        raise EvidenceError("shop_effect_boundaries_required")
+    blocked = report.get("blocked_effect_requests")
+    if (not isinstance(blocked, list) or not blocked
+            or any(not isinstance(row, dict) or row.get("method") != "POST" or row.get("path") != "/api/shop/orders" for row in blocked)):
+        raise EvidenceError("shop_order_block_not_exercised")
+    return {"scope": "stored_local_real_browser_shop_api_cart_checkout_synthetic_evidence_only", "checks": len(SHOP_CHECKS)}
 
 
 PUBLIC_FALLBACK_PATH = 'evidence/frontend-reliability-2026-10-27/public-fallbacks.json'
@@ -352,12 +367,7 @@ CONSENT_UI_SOURCES = (
     'apps/web/observability/exceptions.d.mts','apps/site/tests/browser-consent-ui.mjs',
 )
 CONSENT_UI_PATH = 'evidence/consent-ui-2026-10-28/browser-consent-ui.json'
-LOCALE_BRIDGE_SOURCES = (
-    'apps/web/components/LocaleAwareClerk.tsx','apps/web/app/layout.tsx','apps/web/auth/public-provider.ts',
-    'apps/site/tests/fixtures/clerk-integration.tsx','apps/site/tests/fixtures/next-clerk-locale.tsx',
-    'apps/site/tests/fixtures/next-clerk-locale.html','apps/site/tests/browser-next-clerk-locale.mjs',
-)
-LOCALE_BRIDGE_PATH = 'evidence/consent-ui-2026-10-28/next-clerk-locale.json'
+# Clerk locale bridge retired with D-007 (Clerk removed; own accounts). No locale-bridge proof is required.
 
 NEXT_CONSENT_SOURCES = (
     'apps/web/proxy.ts','apps/web/auth/policy.ts','apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/api/internal/workspace/mail/route.ts','apps/web/app/intern/workspace/page.tsx',
@@ -371,8 +381,7 @@ NEXT_CONSENT_PATH = 'evidence/consent-ui-2026-10-28/next-public.json'
 
 def check_consent_ui(root):
     report=json.loads(_read(root,CONSENT_UI_PATH))
-    locale=json.loads(_read(root,LOCALE_BRIDGE_PATH))
-    for record,paths in ((report,CONSENT_UI_SOURCES),(locale,LOCALE_BRIDGE_SOURCES)):
+    for record,paths in ((report,CONSENT_UI_SOURCES),):
         if set(record.get('source_sha256',{}))!=set(paths):raise EvidenceError('consent_exact_sources_required')
         for path in paths:
             if hashlib.sha256(_read(root,path)).hexdigest()!=record['source_sha256'][path]:raise EvidenceError('stale_consent_source: '+path)
@@ -380,11 +389,9 @@ def check_consent_ui(root):
     checks=report.get('checks',[])
     if len(checks)!=18 or {(c.get('width'),c.get('locale'),c.get('mode')) for c in checks}!=expected or any(c.get('passed') is not True for c in checks):raise EvidenceError('consent_complete_matrix_required')
     if report.get('passed') is not True or report.get('external_events_sent')!=0 or report.get('unexpected_origins')!=[] or report.get('uncaught')!=[]:raise EvidenceError('consent_local_no_errors_required')
-    pairs={(c.get('lang'),c.get('expected')) for c in locale.get('checks',[]) if c.get('passed') is True}
-    if locale.get('passed') is not True or len(locale.get('checks',[]))!=4 or pairs!={('de','de-DE'),('nl','nl-NL'),('fr','fr-FR'),('unknown','de-DE')} or locale.get('external')!=0 or locale.get('errors')!=[]:raise EvidenceError('locale_bridge_complete_fixture_required')
     next_report=json.loads(_read(root,NEXT_CONSENT_PATH))
-    if next_report.get('internal_workspace_api_unbound_503') is not True:raise EvidenceError('internal_workspace_fail_closed_proof_required')
-    if next_report.get('internal_mail_api_unbound_503') is not True:raise EvidenceError('internal_mail_fail_closed_proof_required')
+    if next_report.get('internal_workspace_api_denied_anonymous') is not True:raise EvidenceError('internal_workspace_fail_closed_proof_required')
+    if next_report.get('internal_mail_api_denied_anonymous') is not True:raise EvidenceError('internal_mail_fail_closed_proof_required')
     if set(next_report.get('source_sha256',{}))!=set(NEXT_CONSENT_SOURCES):raise EvidenceError('next_consent_exact_sources_required')
     for path in NEXT_CONSENT_SOURCES:
         if hashlib.sha256(_read(root,path)).hexdigest()!=next_report['source_sha256'][path]:raise EvidenceError('stale_next_consent_source: '+path)
@@ -396,7 +403,7 @@ def check_consent_ui(root):
             or set(next_report.get('private',[]))!=expected_private or len(mobile)!=4
             or {(r.get('path'),r.get('locale'),r.get('width')) for r in mobile if r.get('passed') is True}!={(p,l,320) for p in ('/anmelden','/registrieren') for l in ('de','nl')}
             or next_report.get('passed') is not True or next_report.get('external')!=0 or next_report.get('mutations')!=0 or next_report.get('pageErrors')!=[]):raise EvidenceError('next_consent_complete_local_routes_required')
-    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':4,'next_route_locales':78,'next_auth_mobile':4}
+    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'next_route_locales':78,'next_auth_mobile':4}
 
 
 

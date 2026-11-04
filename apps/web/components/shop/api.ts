@@ -42,6 +42,27 @@ export async function api<T>(path: string, init: RequestInit & { json?: unknown 
   return data as T;
 }
 
+// Fixed configuration codes of apps/shop-api/vercel_app.py (runtime_binding_unavailable.reason).
+// database_metadata_unavailable is deliberately absent: a configured but unreachable
+// database is a connection failure, not a missing setup.
+const UNCONFIGURED_REASONS = new Set(["project_binding_unverified", "database_binding_missing_or_unsuitable", "database_configuration_conflict",
+  "database_namespace_conflict", "database_namespace_unapproved", "public_origin_unbound", "tax_configuration_unbound", "payment_mode_unbound",
+  "namespace_schema_unbound", "required_index_unverified"]);
+
+/** "unconfigured" only for an explicit JSON 503 setup answer; everything else (network, HTML, 5xx) is "unavailable". */
+export function catalogFailure(error: unknown): "unconfigured" | "unavailable" {
+  const failure = error as Partial<ApiError> | null;
+  if (!failure || typeof failure !== "object" || failure.status !== 503) return "unavailable";
+  if (failure.error === "catalog_not_configured") return "unconfigured";
+  const reason = failure.body?.reason;
+  return failure.error === "runtime_binding_unavailable" && typeof reason === "string" && UNCONFIGURED_REASONS.has(reason) ? "unconfigured" : "unavailable";
+}
+
+/** One key per add-to-cart intent; reused only to retry the same intent after an unknown outcome. */
+export function cartIntentKey() {
+  return "add:" + crypto.randomUUID();
+}
+
 const euro = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
 export const money = (cents: number) => euro.format(cents / 100);
 export const dateTime = (iso?: string) => iso ? new Date(iso).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) : "–";

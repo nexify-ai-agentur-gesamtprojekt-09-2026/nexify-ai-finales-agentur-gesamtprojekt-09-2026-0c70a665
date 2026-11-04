@@ -9,10 +9,12 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 const jsx=(type,props)=>({type,props:props||{}});
 const shopCopy=JSON.parse(readFileSync(new URL('../../../config/shop-interface-copy.json',import.meta.url),'utf8'));
 const useShopCopy=()=>({t:(key,values={})=>shopCopy.de[key].replace(/\{(\w+)\}/g,(_,name)=>String(values[name]??'')),number:value=>new Intl.NumberFormat('de').format(value),money:value=>new Intl.NumberFormat('de',{style:'currency',currency:'EUR'}).format(value/100),date:value=>new Intl.DateTimeFormat('de').format(new Date(value))});
+// The real failure classifier from api.ts (no imports), so tests bind to the shipped mapping.
+const apiModule=(()=>{const compiled=ts.transpileModule(readFileSync(new URL('api.ts',componentRoot),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,Intl,Set});return mod.exports;})();
 function harness(filename,api=()=>Promise.reject(new Error('Unexpected API call'))){
  const state=[],effects=[],cleanups=[];let cursor=0,rendered;
  const react={useId:()=>':test-id:',useState(initial){const index=cursor++;if(!(index in state))state[index]=initial;return [state[index],value=>{state[index]=typeof value==='function'?value(state[index]):value;}];},useEffect(effect,deps){const index=cursor++,old=effects[index];if(!old||deps.some((x,i)=>x!==old.deps[i]))effects[index]={effect,deps,pending:true};}};
- const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed'},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./shop.css':{}};
+ const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed',catalogFailure:apiModule.catalogFailure},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./shop.css':{}};
  const source=readFileSync(new URL(filename,componentRoot),'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
  const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,require(name){if(!(name in mocks))throw new Error('Unmocked import '+name);return mocks[name];},AbortController,URLSearchParams,console},{filename});
@@ -58,6 +60,20 @@ test('catalogue ignores old responses and aborts requests on query change/unmoun
 test('503 is an error, successful empty catalogue makes no progress claim',async()=>{
  const h=harness('CatalogView.tsx',()=>Promise.reject({status:503,error:'db_unavailable'}));h.render({base:'/teileklar/shop'});h.flush();await tick();const error=h.render({base:'/teileklar/shop'});assert.equal(error.props.role,'alert');assert.equal(error.props['data-testid'],'catalog-error');assert.doesNotMatch(text(error),/Keine Artikel/);
  const e=harness('CatalogView.tsx',()=>Promise.resolve({items:[],total:0,page:1,pages:0}));e.render({base:'/teileklar/shop'});e.flush();await tick();assert.equal(e.render({base:'/teileklar/shop'}).props['data-testid'],'catalog-empty');assert.doesNotMatch(text(e.render({base:'/teileklar/shop'})),/aufgebaut|bald|bestellen/i);
+});
+test('setup missing and connection failure stay distinct for catalogue and categories',async()=>{
+ const cases=[[{status:503,error:'runtime_binding_unavailable',body:{reason:'database_binding_missing_or_unsuitable'}},'catalog-unconfigured'],
+  [{status:503,error:'catalog_not_configured'},'catalog-unconfigured'],
+  [{status:503,error:'runtime_binding_unavailable',body:{reason:'database_metadata_unavailable'}},'catalog-error'],
+  [{status:503,error:'runtime_binding_unavailable',body:{reason:'unknown_future_reason'}},'catalog-error'],
+  [{status:500,error:'invalid_json_response'},'catalog-error'],[new TypeError('Failed to fetch'),'catalog-error']];
+ for(const [failure,testid] of cases){const h=harness('CatalogView.tsx',()=>Promise.reject(failure));h.render({base:'/teileklar/shop'});h.flush();await tick();const node=h.render({base:'/teileklar/shop'});
+  assert.equal(node.props['data-testid'],testid,JSON.stringify(failure));assert.equal(node.props.role,testid==='catalog-error'?'alert':'status');
+  assert.equal(text(node),shopCopy.de[testid==='catalog-error'?'catalogError':'catalogUnconfigured']);}
+ const setup={status:503,error:'runtime_binding_unavailable',body:{reason:'namespace_schema_unbound'}};
+ const full=harness('CategoryList.tsx',()=>Promise.reject(setup));full.render();full.flush();await tick();assert.equal(full.render().props['data-testid'],'categories-unconfigured');
+ const compact=harness('CategoryList.tsx',()=>Promise.reject(setup));compact.render({compact:true});compact.flush();await tick();assert.equal(compact.render({compact:true}),null);
+ const down=harness('CategoryList.tsx',()=>Promise.reject(new TypeError('Failed to fetch')));down.render({compact:true});down.flush();await tick();assert.equal(down.render({compact:true}).props['data-testid'],'categories-error');
 });
 test('category errors are distinct from empty data and unmount aborts stale loads',async()=>{
  const d=deferred();let signal;const h=harness('CategoryList.tsx',(_url,init)=>{signal=init.signal;return d.promise;});h.render();h.flush();h.unmount();assert.equal(signal.aborted,true);d.resolve({categories:[{id:1,name:'late',count:1}]});await tick();assert.match(text(h.render()),/geladen/);

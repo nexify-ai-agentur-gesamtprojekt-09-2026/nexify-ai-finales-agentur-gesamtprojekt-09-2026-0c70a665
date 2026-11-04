@@ -106,70 +106,118 @@ class BrowserEvidenceTests(unittest.TestCase):
 
 
 
-class ShopEvidenceTests(unittest.TestCase):
+class LiveShopEvidenceBase:
+    """Shared negative cases for the live shop-api browser contract (D-010)."""
+    sources = path = check = prefix = None
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        for relative in (*checker.SHOP_SOURCE_PATHS, checker.SHOP_EVIDENCE_PATH):
+        for relative in (*self.sources, self.path):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((ROOT / relative).read_bytes())
-        self.evidence = json.loads((self.root / checker.SHOP_EVIDENCE_PATH).read_text())
+        self.report = json.loads((self.root / self.path).read_text())
 
-    def write(self):
-        (self.root / checker.SHOP_EVIDENCE_PATH).write_text(json.dumps(self.evidence))
+    def write(self, report=None):
+        (self.root / self.path).write_text(json.dumps(self.report if report is None else report))
 
-    def test_saved_shop_proof_is_bounded_and_current(self):
-        self.assertEqual(checker.check_shop_evidence(self.root)['checks'], 13)
+    def rejected(self, pattern, mutate):
+        report = copy.deepcopy(self.report)
+        mutate(report)
+        self.write(report)
+        with self.assertRaisesRegex(checker.EvidenceError, pattern):
+            self.check(self.root)
+        self.write()
 
-    def test_changed_api_or_fixture_cannot_reuse_saved_success(self):
-        for relative in ('apps/agent-gateway/server.py', 'apps/site/tests/fixtures/shop-server.py', 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/components/DeferredChatBoundary.tsx', 'apps/web/components/PublicRequestFallback.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
+    def test_every_bound_source_change_invalidates_the_saved_pass(self):
+        for relative in self.sources:
             path = self.root / relative
-            original = path.read_bytes(); path.write_bytes(original + b'\n# changed')
-            with self.assertRaisesRegex(checker.EvidenceError, 'stale_shop_source_sha256'):
-                checker.check_shop_evidence(self.root)
+            original = path.read_bytes()
+            path.write_bytes(original + b"\n/* changed */")
+            with self.assertRaisesRegex(checker.EvidenceError, "stale_" + self.prefix + "_source_sha256: " + relative):
+                self.check(self.root)
             path.write_bytes(original)
 
-    def test_missing_reconciliation_case_and_false_effect_claim_rejected(self):
-        self.evidence['checks'].remove('aborted create before commit blocks writes until deliberate successful empty readback')
-        self.write()
-        with self.assertRaisesRegex(checker.EvidenceError, 'shop_critical_check_missing'):
-            checker.check_shop_evidence(self.root)
-        self.evidence['checks'].append('aborted create before commit blocks writes until deliberate successful empty readback')
-        self.evidence['payment_started'] = True; self.write()
-        with self.assertRaisesRegex(checker.EvidenceError, 'shop_effect_boundaries_required'):
-            checker.check_shop_evidence(self.root)
+    def test_source_set_must_be_exact_and_hashes_well_formed(self):
+        first = self.sources[0]
+        self.rejected("exact_source_path_set_required", lambda r: r["source_sha256"].pop(first))
+        self.rejected("exact_source_path_set_required", lambda r: r["source_sha256"].update({"apps/web/components/ShopPanel.tsx": "0" * 64}))
+        self.rejected("invalid_source_sha256", lambda r: r["source_sha256"].update({first: "not-a-hash"}))
+        self.rejected("stale_" + self.prefix, lambda r: r["source_sha256"].update({first: "0" * 64}))
 
-    def test_static_labels_without_real_http_or_single_persistence_are_rejected(self):
-        self.evidence['requests'] = []; self.write()
-        with self.assertRaisesRegex(checker.EvidenceError, 'shop_actual_http_boundary_missing'):
-            checker.check_shop_evidence(self.root)
+    def test_unpassed_unsynthetic_or_duplicate_key_report_is_rejected(self):
+        self.rejected("recorded_synthetic_pass_required", lambda r: r.update(passed=False))
+        self.rejected("recorded_synthetic_pass_required", lambda r: r.pop("synthetic_data"))
+        (self.root / self.path).write_text('{"passed": true, "passed": true}')
+        with self.assertRaisesRegex(checker.EvidenceError, "invalid_evidence"):
+            self.check(self.root)
+
+    def test_each_required_check_is_mandatory(self):
+        for name in sorted(self.required):
+            self.rejected("critical_check_missing", lambda r, name=name: r["checks"].remove(name))
+        self.rejected("critical_check_missing", lambda r: r["checks"].append(r["checks"][0]))
+
+    def test_each_required_http_boundary_is_mandatory(self):
+        for method, path, status in sorted(self.boundaries, key=str):
+            def drop(report, key=(method, path, status)):
+                report["requests"] = [row for row in report["requests"] if (row["method"], row["path"], row["status"]) != key]
+            self.rejected("actual_http_boundary_missing", drop)
+        self.rejected("actual_http_boundary_missing", lambda r: r.update(requests=[]))
+        self.rejected("invalid_request_row", lambda r: r["requests"].append({"method": "GET", "path": "/api/session", "status": 200}))
+
+    def test_order_payment_external_or_uncaught_effects_are_rejected(self):
+        for path in ("/api/shop/orders", "/api/shop/webhooks/revolut"):
+            self.rejected("order_or_payment_reached_server", lambda r, path=path: r["requests"].append({"method": "POST", "path": path, "status": 200}))
+        self.rejected("no_external_or_uncaught", lambda r: r.update(external_requests=["https://cdnbigbuy.com"]))
+        self.rejected("no_external_or_uncaught", lambda r: r.update(uncaught_errors=["TypeError"]))
+
+    def test_report_must_name_the_real_adapter_runtime(self):
+        self.rejected("real_adapter_runtime_required", lambda r: r["runtime"].update(backend="apps/agent-gateway/server.py"))
+        self.rejected("real_adapter_runtime_required", lambda r: r["runtime"].pop("schema_probe"))
 
 
-if __name__ == "__main__":
-    unittest.main()
+class ShopEvidenceTests(LiveShopEvidenceBase, unittest.TestCase):
+    sources, path, prefix = checker.SHOP_SOURCE_PATHS, checker.SHOP_EVIDENCE_PATH, "shop"
+    required, boundaries = checker.SHOP_CHECKS, checker.SHOP_BOUNDARIES
+    check = staticmethod(checker.check_shop_evidence)
+
+    def test_saved_shop_proof_is_bounded_and_current(self):
+        self.assertEqual(checker.check_shop_evidence(self.root)["checks"], 8)
+        self.assertIn("apps/shop-api/shop/cart_api.py", checker.SHOP_SOURCE_PATHS)
+        self.assertNotIn("apps/web/components/ShopPanel.tsx", checker.SHOP_SOURCE_PATHS)
+
+    def test_claimed_order_payment_or_provider_call_is_rejected(self):
+        self.rejected("shop_effect_boundaries_required", lambda r: r.update(order_submitted=True))
+        self.rejected("shop_effect_boundaries_required", lambda r: r.update(payment_started=None))
+        self.rejected("shop_effect_boundaries_required", lambda r: r["server_effects"].update(orders=1))
+        self.rejected("shop_effect_boundaries_required", lambda r: r["server_effects"].update(provider_calls=["create_order"]))
+        self.rejected("shop_effect_boundaries_required", lambda r: r["server_effects"].update(mail_calls=["enqueue"]))
+
+    def test_order_block_must_have_been_exercised(self):
+        self.rejected("shop_order_block_not_exercised", lambda r: r.update(blocked_effect_requests=[]))
+        self.rejected("shop_order_block_not_exercised", lambda r: r.update(blocked_effect_requests=[{"method": "GET", "path": "/api/shop/cart"}]))
 
 
-class CatalogBrowserEvidenceTests(unittest.TestCase):
-    def setUp(self):
-        self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
-        self.root = Path(self.folder.name)
-        for relative in (*checker.CATALOG_SOURCE_PATHS, checker.CATALOG_EVIDENCE_PATH):
-            target = self.root / relative; target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes((ROOT / relative).read_bytes())
+class CatalogBrowserEvidenceTests(LiveShopEvidenceBase, unittest.TestCase):
+    sources, path, prefix = checker.CATALOG_SOURCE_PATHS, checker.CATALOG_EVIDENCE_PATH, "catalog"
+    required, boundaries = checker.CATALOG_CHECKS, checker.CATALOG_BOUNDARIES
+    check = staticmethod(checker.check_catalog_evidence)
 
-    def test_source_drift_and_effect_promotion_rejected(self):
-        self.assertEqual(checker.check_catalog_evidence(self.root)['checks'], 4)
-        for relative in (checker.CATALOG_SOURCE_PATHS[0], 'apps/web/components/PublicExperience.tsx', 'apps/web/components/OracleCompanion.tsx', 'apps/web/components/DeferredChatBoundary.tsx', 'apps/web/components/PublicRequestFallback.tsx', 'apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png'):
-            path = self.root / relative
-            before = path.read_bytes(); path.write_bytes(before+b'\n/* changed source */')
-            with self.assertRaisesRegex(checker.EvidenceError, 'stale_catalog'): checker.check_catalog_evidence(self.root)
-            path.write_bytes(before)
-        evidence_path = self.root / checker.CATALOG_EVIDENCE_PATH
-        report = json.loads(evidence_path.read_text()); report['order_started'] = True
-        evidence_path.write_text(json.dumps(report))
-        with self.assertRaisesRegex(checker.EvidenceError, 'read_only_partial'): checker.check_catalog_evidence(self.root)
+    def test_saved_catalog_proof_is_bounded_and_current(self):
+        self.assertEqual(checker.check_catalog_evidence(self.root)["checks"], 6)
+        self.assertNotIn("apps/agent-gateway/catalog.py", checker.CATALOG_SOURCE_PATHS)
+
+    def test_supplier_image_block_must_have_been_exercised(self):
+        self.rejected("supplier_image_block_not_exercised", lambda r: r.update(supplier_image_requests_blocked=0))
+        self.rejected("supplier_image_block_not_exercised", lambda r: r.update(supplier_image_requests_blocked=True))
+
+    def test_unconfigured_and_failed_connection_both_required(self):
+        for status in (503, 502):
+            def drop(report, status=status):
+                report["requests"] = [row for row in report["requests"] if row["status"] != status]
+            self.rejected("actual_http_boundary_missing", drop)
 
 
 class PublicFallbackEvidenceTests(unittest.TestCase):
@@ -227,7 +275,7 @@ class ExceptionEvidenceTests(unittest.TestCase):
 class ConsentUIEvidenceTests(unittest.TestCase):
     def setUp(self):
         self.folder=tempfile.TemporaryDirectory();self.addCleanup(self.folder.cleanup);self.root=Path(self.folder.name)
-        for relative in (*checker.CONSENT_UI_SOURCES,*checker.LOCALE_BRIDGE_SOURCES,*checker.NEXT_CONSENT_SOURCES,checker.CONSENT_UI_PATH,checker.LOCALE_BRIDGE_PATH,checker.NEXT_CONSENT_PATH,'config/site-map.json'):
+        for relative in (*checker.CONSENT_UI_SOURCES,*checker.NEXT_CONSENT_SOURCES,checker.CONSENT_UI_PATH,checker.NEXT_CONSENT_PATH,'config/site-map.json'):
             path=self.root/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes((ROOT/relative).read_bytes())
 
     def test_current_consent_pass_is_bound_to_UI_source(self):
@@ -244,7 +292,7 @@ class ConsentUIEvidenceTests(unittest.TestCase):
 
     def test_mail_fail_closed_proof_cannot_be_omitted(self):
         path=self.root/checker.NEXT_CONSENT_PATH;report=json.loads(path.read_text())
-        report.pop('internal_mail_api_unbound_503',None);path.write_text(json.dumps(report))
+        report.pop('internal_mail_api_denied_anonymous',None);path.write_text(json.dumps(report))
         with self.assertRaisesRegex(checker.EvidenceError,'internal_mail_fail_closed'):
             checker.check_consent_ui(self.root)
 
@@ -263,3 +311,7 @@ class ConsentUIEvidenceTests(unittest.TestCase):
             else:changed['external']=['synthetic.invalid']
             path.write_text(json.dumps(changed))
             with self.assertRaises(checker.EvidenceError):checker.check_workspace_read(self.root)
+
+
+if __name__ == "__main__":
+    unittest.main()

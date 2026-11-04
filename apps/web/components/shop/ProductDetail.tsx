@@ -1,24 +1,35 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiteLink } from "../Router";
-import { api, notifyCart, type ApiError, type Cart, type ProductDetail as Detail } from "./api";
+import { api, cartIntentKey, notifyCart, type ApiError, type Cart, type ProductDetail as Detail } from "./api";
 import { ProductImage, StockLabel, useShopCopy } from "./ProductCard";
 
 const DETAIL_LABELS = { weight: "weight", height: "height", width: "width", depth: "depth", condition: "condition" } as const;
 
 function AddToCart({ product }: { product: Detail }) {
   const { t } = useShopCopy();
-  const [quantity, setQuantity] = useState(1), [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle"), [message, setMessage] = useState<"cartDone" | "quantityUnavailable" | "cartError">("cartDone");
+  const [quantity, setQuantity] = useState(1), [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle"), [message, setMessage] = useState<"cartDone" | "quantityUnavailable" | "quantityLimit" | "priceNoOrder" | "cartUnknown" | "cartError">("cartDone");
+  // The server adds `quantity` to its own current line ("add" mode). The key stays with
+  // the intent while its outcome is unknown, so a retry after a lost response replays
+  // instead of adding twice; a definite answer (success or 4xx) ends the intent.
+  const pending = useRef<{ key: string; quantity: number } | null>(null);
   const out = product.stock === null || product.stock <= 0 || product.price_cents === null;
   async function add() {
     if (out || state === "busy") return;
     setState("busy");
+    const intent = pending.current?.quantity === quantity ? pending.current : { key: cartIntentKey(), quantity };
+    pending.current = intent;
     try {
-      const current = await api<Cart>("/api/shop/cart");
-      const existing = current.lines.find(line => line.product_id === product.id)?.quantity || 0;
-      const cart = await api<Cart>("/api/shop/cart/items", { method: "POST", json: { product_id: product.id, quantity: Math.min(20, existing + quantity) } });
-      notifyCart(cart.count); setState("done"); setMessage("cartDone");
-    } catch (error) { setState("error"); setMessage((error as ApiError).error === "insufficient_stock" ? "quantityUnavailable" : "cartError"); }
+      const cart = await api<Cart>("/api/shop/cart/items", { method: "POST", headers: { "Idempotency-Key": intent.key }, json: { product_id: product.id, quantity: intent.quantity, mode: "add" } });
+      pending.current = null; notifyCart(cart.count); setState("done"); setMessage("cartDone");
+    } catch (error) {
+      const failure = error as Partial<ApiError>;
+      const refused = typeof failure?.status === "number" && failure.status >= 400 && failure.status < 500;
+      if (refused) pending.current = null;
+      setState("error");
+      setMessage(failure?.error === "insufficient_stock" ? "quantityUnavailable" : failure?.error === "quantity_limit" ? "quantityLimit"
+        : failure?.error === "price_not_released" ? "priceNoOrder" : refused ? "cartError" : "cartUnknown");
+    }
   }
   return <div className="tk-buy">
     <label htmlFor="tk-qty">{t("quantity")}</label>
@@ -26,7 +37,7 @@ function AddToCart({ product }: { product: Detail }) {
     <button className="primary-button" disabled={out || state === "busy"} onClick={() => void add()} data-testid="add-to-cart-button">{t("addCart")}</button>
     {out && <p className="tk-note" data-testid="out-of-stock-note">{product.stock === null ? t("unknownNoOrder") : product.price_cents === null ? t("priceNoOrder") : t("outNoOrder")}</p>}
     {state === "done" && <p role="status" data-testid="add-to-cart-success">{t(message)} <SiteLink href="/teileklar/warenkorb">{t("goCart")}</SiteLink></p>}
-    {state === "error" && <p role="alert" className="tk-alert" data-testid="add-to-cart-error">{t(message)}</p>}
+    {state === "error" && <p role="alert" className="tk-alert" data-testid="add-to-cart-error">{t(message, { max: 20 })}{message === "cartUnknown" && <> <SiteLink href="/teileklar/warenkorb">{t("goCart")}</SiteLink></>}</p>}
   </div>;
 }
 
