@@ -1545,3 +1545,58 @@ Build bestanden. Die Site bleibt privat und absichtlich `noindex,nofollow`;
 nachgewiesen. Eine öffentliche Freigabe braucht eigene Domain-/Rechts-/Inhaltsprüfung.
 Die Home-Einleitung und der Sichtbarkeitseinstieg wurden in DE/NL/FR/EN auf
 konkreten Kundennutzen überarbeitet; Build und 118 Site-Tests erneut bestanden.
+
+## GOAL/LOOP-Fortsetzung · 02.11.2026
+
+Der aktuelle Nutzerauftrag wurde als Revision 2 in das bestehende Completion-Goal
+übernommen und im allein führenden Soll-Ist-Abgleich als
+`REC-GOAL-LOOP-20261102` gebunden. Kein zweites Register angelegt. Gesamtstatus
+bleibt offen; Build/Deployment/Seitenvorhandensein gelten nicht als Abnahme.
+Aktueller Arbeitszweig `codex/sitewide-design-2026-11-02` auf `83b23c3`; private
+Sites-Ausgabe bleibt Ausgangspunkt. Writer-Abstimmung für Licht, Schatten, Hero
+und gemeinsame Designkomponenten ist angefragt; unabhängige Inventar-, Produkt-,
+Daten-, Funktions- und Dokumentationsarbeit darf fortgesetzt werden.
+
+Projekt-Skillquellen wurden verifiziert und der begrenzte Context-Executor hat
+die aktuellen Kernpolicies ohne fehlende Quelle ausgewählt. Small-Business-
+Verifikation bleibt für diesen Slice blockiert, weil die gepinnte Quelle
+`LICENSE` im Checkout fehlt; keine SMB-Automation wurde ausgeführt. `make check`
+ist grün. `make test` bleibt fail-closed bei 697 Tests / 63 Failures / 10 Errors /
+11 Skips: bekannte historische Quellen-/Browserevidenzdrift sowie fehlendes
+`pymongo`. Diese alten Hashbelege wurden nicht auf den neuen Stand umgeschrieben.
+
+### P03 · Seitenbezogene SEO- und Social-Metadaten
+
+Erster unabhängiger GOAL/LOOP-Slice auf Branch
+`codex/sitewide-design-2026-11-02`: Die portable Site aktualisiert Titel,
+Beschreibung, Robots, Canonical, Open Graph, Twitter und `WebPage`-JSON-LD jetzt
+gemeinsam nach Direktaufruf, internem Routenwechsel und Sprachwechsel. Dynamische
+TEILEKLAR-Detailpfade bleiben ohne belegten Datensatz auf ihrer Basisroute;
+unbekannte Pfade werden nicht als eigene Canonical- oder `WebPage`-Seite
+ausgegeben. Standalone-Dateien ohne HTTP-Origin bleiben funktionsfähig. Hero,
+Licht, Schatten und gemeinsame
+Designkomponenten blieben wegen der Writergrenze unverändert.
+
+Nachweis: vier reine Metadaten-Vertragstests, 125 Site-Tests, Typecheck,
+Produktionsbuild, LLM-Policy und `make check` bestanden. Reale lokale
+Chromium-Prüfung für drei direkte Routen, DE/NL, dynamischen Produktpfad und
+Fehlerroute bestand ohne externe Requests. Bericht:
+`docs/reviews/sitewide-seo-metadata-2026-11-02.md`.
+
+P03 und der Gesamtauftrag bleiben offen. Die private Vorschau bleibt bewusst
+`noindex,nofollow`. Die Sitemap führt jetzt exakt alle 39 öffentlichen Routen;
+die drei neueren TEILEKLAR-Wege sind ergänzt und mit drei Vertragstests gegen
+fehlende, doppelte oder private Einträge gesichert. `www.nexifyai.de` bleibt die
+dokumentierte Zieladresse, wurde aber nicht umgeschaltet oder als indexierbar
+freigegeben. Domain, Indexierung und Zielhost-Readback bleiben ein gemeinsames
+Veröffentlichungsgate. Der bestehende Matrixverifier bleibt fail-closed an bereits
+dokumentierter historischer Hashdrift vieler Altbelege; nur die Dateien dieses
+Slices wurden aktuell gebunden, fremde historische Hashes nicht pauschal
+freigezeichnet.
+
+Vollständiger `make test` auf diesem Slice: 697 Tests, 61 Fehler, 10 Errors,
+11 Skips. Hauptursachen bleiben historische Browser-/Resize-/Registerbelege mit
+abweichenden Quellhashes sowie das nicht installierte `pymongo`. Die alte
+Exception-Evidenz verwirft zusätzlich den bewusst geänderten `main.tsx`-Stand;
+der neue SEO-Browserlauf ist separat aktuell gebunden. Keine Altbelege wurden
+auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.

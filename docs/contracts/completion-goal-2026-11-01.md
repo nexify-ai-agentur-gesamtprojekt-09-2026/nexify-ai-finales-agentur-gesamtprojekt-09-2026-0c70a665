@@ -1,8 +1,108 @@
 # NeXify · SOLL-, Abweichungs- und Fertigstellungsbericht
 
-Version 1 · 01.11.2026 · Auftrag GOAL-NEXIFY-COMPLETION-20261101
+Version 2 · 02.11.2026 · Auftrag GOAL-NEXIFY-COMPLETION-20261101
 
 **Gesamtstatus: offen.** Die neue Site ist ein eigener privater Webclient. Ein erfolgreicher Teilbuild ersetzt weder den produktiven Backendbetrieb noch die Gesamtfreigabe. Dieser Bericht ergänzt dasselbe führende Anforderungenregister; er ist keine zweite Taskqueue.
+
+## GOAL / LOOP · verbindliche Fortsetzung vom 02.11.2026
+
+### GOAL
+
+Der bestehende NeXify-Gesamtauftrag wird bis zur **nachgewiesenen** Fertigstellung
+des Agenturauftritts, der Produkt- und Suite-Seiten, des TEILEKLAR-Shops und des
+Werkstattbereichs fortgeführt. Ausgangspunkt ist die tatsächlich neueste
+Veröffentlichung der privaten Site samt Quellrevision, Branch, Commit,
+Arbeitsbereich und zuständigem Writer. V29 bezeichnet nur den zuletzt geprüften
+Stand und ist kein festgeschriebener HEAD.
+
+Fertig bedeutet, dass Besucher die belegten Angebote verstehen und die vorgesehenen
+Geschäftsabläufe tatsächlich erfolgreich ausführen können. Eine vorhandene Seite,
+ein grüner Build, ein HTTP-200, ein Deployment oder ein Textentwurf sind allein kein
+Abschluss. Die von Pascal bestätigte gestalterische Richtung bleibt erhalten und
+wird konsistent verfeinert; sie wird nicht erneut durch ein anderes Designsystem
+ersetzt.
+
+Der vollständige Scope umfasst:
+
+- Agentur: Leistungen, Produkte, Branchen, Städte, Vorgehen, Kontakt,
+  Projektaufnahme, belegte Kalkulationslogik und rechtliche Seiten.
+- Produkte: NeX2fly Suite, NeX Agentic AI, AIFly ORACLE, Skills, MCP, API,
+  Abteilungsmodule, Add-ons und weitere belegte Angebote mit klarer Trennung von
+  Produktfamilie, Funktion und verkaufbarem Paket.
+- Suite und Portale: Registrierung, Anmeldung, Rollen, Tenanttrennung,
+  Arbeitsbereiche, Projekte, Aufträge, Dokumente, Kommunikation und Verwaltung;
+  Demonstration und produktive Funktion bleiben eindeutig getrennt.
+- TEILEKLAR: bestätigte Lieferanten- und Artikeldaten, Suche, Filter, Produktdetail,
+  Preis-/Steuer-/Versand-/Bestandslogik, persistenter Warenkorb, Checkout,
+  Zahlung, Bestellung, Bestätigung, Bearbeitung und Kundenansicht.
+- Werkstatt: belegte Betriebe, Suche, Standort-/Leistungsfilter, Profile,
+  Partneraufnahme, Anfrage-/Terminweg und geschützter Bearbeitungsbereich.
+- Querschnitt: vollständige Routen, Sprachen, Menüs, Footer, Portale,
+  Fehlerzustände, SEO/GEO, Metadaten, interne Verlinkung, Sitemap, strukturierte
+  Daten, Barrierefreiheit, Recht, Sicherheit, Persistenz und Betriebsnachweise.
+
+Alle öffentlichen Aussagen stammen aus belegtem Angebot, Zielgruppe, Problem,
+Leistung, Nutzen, Voraussetzungen und einem funktionierenden nächsten Schritt.
+Prototyp- und Bauanweisungen werden nicht als Marketingtext ausgegeben.
+Unbestätigte Preise, Funktionen, Artikel, Bestände, Partner, Termine, Standorte,
+Referenzen oder Rechtsangaben bleiben als Veröffentlichungsgate gekennzeichnet.
+
+### LOOP
+
+Der folgende Loop gilt für jedes Arbeitspaket und wird bis zur belegten Abnahme
+oder einem konkret zugewiesenen Blocker wiederholt:
+
+1. **Aktuellen Stand binden:** neueste Site-Veröffentlichung, Quellrevision,
+   Repository, Branch, Commit, Arbeitsbereich, offene Änderungen und aktive Writer
+   lesen. Neue Ergebnisse anderer Writer bleiben erhalten; je Dateibereich arbeitet
+   genau ein Writer.
+2. **Quellen und Verantwortung klären:** aktuelle Nutzerkorrekturen, `AGENTS.md`,
+   Produkt-, Seiten-, Komponenten-, Architektur- und Betriebspläne sowie passende
+   Skills mit Datum, Revision, Zuständigkeit und Widersprüchen prüfen. Historische
+   Prototypen sind Verhaltens- und Gestaltungsreferenz, keine automatische Produkt-
+   oder Preisquelle.
+3. **Verständnis nachweisen:** vor Umsetzung für das Paket festhalten, was der
+   Besucher verstehen und erledigen können soll, welche belegten Leistungen und
+   Grenzen gelten, wie ein richtiges Ergebnis aussieht und welches Gegenbeispiel
+   die Abnahme verletzt.
+4. **Register fortführen:** das bestehende
+   `docs/contracts/requirements-reconciliation.md` um Anforderungs-ID,
+   Originalquelle, Nutzerergebnis, Route, Daten-/API-Abhängigkeit, Owner, Status,
+   Abnahmekriterium, konkreten Nachweis und Restumfang ergänzen. Kein zweites
+   Soll-Ist-Register anlegen.
+5. **Kleinstes abhängigkeitserfülltes Paket wählen:** abhängige Änderungen
+   sequenziell, unabhängige Lese-/Produkt-/Daten-/Funktions-/Dokumentationsarbeit
+   parallel. Vor Änderungen an Licht, Schatten, Hero oder gemeinsamen
+   Designkomponenten die Writer-Zuständigkeit mit dem Gestaltungsowner klären.
+6. **Implementieren:** nur belegte Inhalte und freigegebene Funktionen umsetzen;
+   bestehende Zielgruppe, Zugriffskontrolle, Daten- und Mandantengrenzen erhalten.
+   Keine Quelldaten löschen, keine ungeklärte Zahlung oder Bestellung blind
+   wiederholen und keine Demonstration als Produktivfunktion ausgeben.
+7. **Gezielt prüfen:** positive und negative Fälle, Validierung, Lade-/Leer-/Fehler-
+   zustände, Berechtigungsfehler, Wiederholung, Unterbrechung, Persistenz,
+   Rücklesen und Rückwärtskompatibilität auf derselben Revision testen. Tests
+   werden nicht abgeschwächt, um einen grünen Status zu erzeugen.
+8. **Fachlich und visuell gegenprüfen:** vollständige Seiten und Übergänge auf
+   Desktop, Tablet, Mobilgerät, bei Zoom sowie mit geöffneter Navigation prüfen.
+   Licht, Schatten, Materialien, Typografie, Kontrast, Raster, Abstände,
+   Proportionen, Fokus, Hover und Bewegung müssen als ein System funktionieren.
+   Medien müssen wirklich abspielbar, unverzerrt, verständlich, steuerbar und
+   synchron sein; Browsergrenzen des Ton-Autostarts werden ehrlich behandelt.
+9. **Integrieren und zulässige Veröffentlichung prüfen:** nur die exakt geprüfte
+   Revision integrieren. Veröffentlichung, DNS, echte Zahlungen, Versand,
+   Rechtsfreigaben, neue Abos, Sicherheits-/Rechteänderungen oder ungeprüfter
+   Fremdcode bleiben an ihre konkrete Autorisierung gebunden.
+10. **Wirkung rücklesen:** den tatsächlichen Nutzerweg und das gespeicherte Ergebnis
+    erneut lesen. Ungewisse externe Ergebnisse werden abgeglichen statt erneut
+    ausgelöst. Nachweis, Restumfang, Owner und sicherer nächster Schritt werden im
+    bestehenden Auftrag gespeichert; danach beginnt der Loop mit dem nächsten
+    Paket.
+
+Blocker halten nur den betroffenen Schritt an. Unabhängige Arbeit läuft weiter.
+Der Gesamtauftrag wird erst geschlossen, wenn die Soll-Ist-Matrix vollständig ist,
+Branch/Commit/Siteversion gebunden sind, Live-URLs und Nutzerwege geprüft wurden,
+Persistenz- und visuelle Nachweise vorliegen, ein unabhängiger Review erfolgt ist
+und alle Restpunkte ausdrücklich benannt oder erfüllt sind.
 
 ## Quellenrang und ehrlicher SOLL
 

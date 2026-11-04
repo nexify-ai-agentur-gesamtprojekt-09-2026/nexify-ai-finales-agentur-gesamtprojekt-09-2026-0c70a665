@@ -66,6 +66,7 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-IDENTITY-HERO-ACCEPTED-20261028: user_design_decision_reported_by_parent_not_original_transcript_read; Datum 2026-10-28; parent_verified_excerpt; parent-reported explicit user acceptance 2026-10-28;Identity Library libfile_f9eab909ef9c81918fd6eaa5e958a543 version1 SHA87cce3dcfee53bc6573efe1ae81e76bdf80f81542f5e746448a96ed087057e0c. Umfang: accepted original identity composition as interim Hero until actual approved videos;local integration/tests only,no push/release grant
 - SRC-SERVICES-RELEASE-20261031: bounded Services deployment integration and targeted provenance correction; Datum 2026-10-31; parent_verified_excerpt; Parent release-integration mandate; canonical base66185f1; local a3e95d3379ecf8aa61e6de04ee2c0fe10a6867d4. Umfang: New local runtime adapter/configuration only; no UI evidence refresh, no production acceptance
 - SRC-SHOP-NAMESPACE-OPERATOR-20261031: controlled technical runtime preparation and read-only auth isolation; Datum 2026-10-31; parent_verified_excerpt; Parent bounded namespace-operator task following owner releasea4b74dc / Previewdpl_AKHeHVZ7bwCWfuXyhsQ5AoMVPkko. Umfang: Default metadata-only preflight; later explicit empty namespace initialization; no execution in this task, no secrets transfer or provider claims
+- SRC-GOAL-LOOP-20261102: binding continuation and completion loop for the existing NeXify whole-system assignment; Datum 2026-11-02; direct_user_supplied_attachment; Current user-supplied GOAL/LOOP attachment in active ChatGPT task. Umfang: Agency, products and suite, TEILEKLAR shop, workshop area, cross-cutting design, function, SEO, legal, verification and evidence; no new payment, legal approval or production permission
 
 ## Soll / Ist / Abschluss
 
@@ -596,3 +597,14 @@ Auslieferung: local_candidate_not_deployed; keine Gesamtanforderung abgenommen.
 Lücke: Actual operator build metadata, store privileges, empty-namespace confirmation, explicit init and runtime configuration remain separate Root steps. No commercial/product/tax/provider/tenant acceptance.
 Nächster Schritt (release integration writer; Root controls actual runtime/store execution): Root reviews exact candidate and runs only a separately controlled existing-project operator Previewbuild if appropriate; no default deployment bootstrap.
 Abschluss: Explicit operator report on verified project/store proves namespace metadata; any init is separately invoked and read back; real runtime/commerce tests remain required.
+
+### REC-GOAL-LOOP-20261102
+
+Soll (SRC-GOAL-LOOP-20261102, SRC-REPO-POLICY): Continue the existing NeXify assignment as a binding GOAL/LOOP until evidenced completion of agency, products/suite, TEILEKLAR shop and workshop area; a build, deployment or present screen is not whole-system acceptance.
+Einordnung: Revision 2 of the existing completion contract and the one existing reconciliation register; no second queue. Each package binds current revision and writer, proves visitor outcome and boundaries, implements the smallest dependency-ready slice, tests positive/negative/persistence/readback and records evidence and residual scope.
+Dateien/Funktionen: docs/contracts/completion-goal-2026-11-01.md
+Beleg: Project skill sources verified; bounded context selection completed; register schema/derived-view verifier and LLM policy check required for this documentation slice. No product or runtime acceptance inferred.
+Auslieferung: active_goal_loop_documented_in_existing_contract; keine Gesamtanforderung abgenommen.
+Lücke: All package criteria P01-P26 and unresolved deviations remain open until their current route, data/API, user-journey, persistence, visual, independent-review and live-readback evidence passes on one bound revision.
+Nächster Schritt (D01/D05 overall; package owner; D07 independent review; active design owner for shared visual components): Bind the latest route and source inventory, keep one writer per file area, select the smallest independent package, implement and execute the documented loop; design owner retains light, shadow, Hero and shared design components until writer coordination completes.
+Abschluss: One complete reconciliation matrix with original source, desired user result, route, dependency, owner, status, criterion, evidence and remainder; bound branch/commit/site version; verified live URLs, journeys, persistence, visual acceptance and independent review; every remainder resolved or explicitly assigned.
