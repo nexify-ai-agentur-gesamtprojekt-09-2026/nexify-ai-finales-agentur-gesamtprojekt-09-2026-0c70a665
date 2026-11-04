@@ -1082,10 +1082,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Eignung prüfen.",
+              "nl": "Geschiktheid controleren.",
+              "fr": "Vérifier la compatibilité.",
+              "en": "Check suitability."
             }
           },
           "source_refs": [
@@ -1112,10 +1112,10 @@
             "type": "route",
             "target_id": "tk-partner",
             "label": {
-              "de": "Gemeinsam einen klaren Serviceweg schaffen.",
-              "nl": "Samen een duidelijke serviceroute bouwen.",
-              "fr": "Créer ensemble un parcours de service clair.",
-              "en": "Build a clearer service route together."
+              "de": "Werkstattpartner werden.",
+              "nl": "Werkplaatspartner worden.",
+              "fr": "Devenir atelier partenaire.",
+              "en": "Become a workshop partner."
             }
           },
           "source_refs": [
@@ -1149,10 +1149,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Eignung prüfen.",
+              "nl": "Geschiktheid controleren.",
+              "fr": "Vérifier la compatibilité.",
+              "en": "Check suitability."
             }
           },
           "source_refs": [
@@ -1186,10 +1186,10 @@
             "type": "route",
             "target_id": "tk-category",
             "label": {
-              "de": "Ausführungen sauber unterscheiden.",
-              "nl": "Uitvoeringen zorgvuldig onderscheiden.",
-              "fr": "Distinguer précisément les variantes.",
-              "en": "Distinguish variants with care."
+              "de": "Artikel einer Kategorie.",
+              "nl": "Artikelen in een categorie.",
+              "fr": "Les articles d’une catégorie.",
+              "en": "Items in a category."
             }
           },
           "source_refs": [
@@ -1223,10 +1223,10 @@
             "type": "route",
             "target_id": "tk-product",
             "label": {
-              "de": "Produktklarheit bis ins Detail.",
-              "nl": "Productduidelijkheid tot in detail.",
-              "fr": "Un produit défini jusque dans le détail.",
-              "en": "Product clarity down to the detail."
+              "de": "Alle Angaben zum Artikel.",
+              "nl": "Alle gegevens over het artikel.",
+              "fr": "Toutes les informations sur l’article.",
+              "en": "Everything about the item."
             }
           },
           "source_refs": [
@@ -1260,10 +1260,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Eignung prüfen.",
+              "nl": "Geschiktheid controleren.",
+              "fr": "Vérifier la compatibilité.",
+              "en": "Check suitability."
             }
           },
           "source_refs": [
@@ -1290,10 +1290,10 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche mit Präzision.",
-              "nl": "Onderdelen zoeken met precisie.",
-              "fr": "Une recherche de pièces précise.",
-              "en": "Find parts with precision."
+              "de": "Im Sortiment suchen.",
+              "nl": "Zoeken in het assortiment.",
+              "fr": "Rechercher dans l’assortiment.",
+              "en": "Search the range."
             }
           },
           "source_refs": [
@@ -1327,10 +1327,10 @@
             "type": "route",
             "target_id": "tk-checkout",
             "label": {
-              "de": "Ein klarer Weg zum Kauf.",
-              "nl": "Een duidelijke weg naar aankoop.",
-              "fr": "Un parcours d’achat clair.",
-              "en": "A clear route to purchase."
+              "de": "In vier Schritten zur Bestellung.",
+              "nl": "In vier stappen naar uw bestelling.",
+              "fr": "Votre commande en quatre étapes.",
+              "en": "Your order in four steps."
             }
           },
           "source_refs": [
@@ -1357,10 +1357,10 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche mit Präzision.",
-              "nl": "Onderdelen zoeken met precisie.",
-              "fr": "Une recherche de pièces précise.",
-              "en": "Find parts with precision."
+              "de": "Im Sortiment suchen.",
+              "nl": "Zoeken in het assortiment.",
+              "fr": "Rechercher dans l’assortiment.",
+              "en": "Search the range."
             }
           },
           "source_refs": [
@@ -1461,10 +1461,10 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche mit Präzision.",
-              "nl": "Onderdelen zoeken met precisie.",
-              "fr": "Une recherche de pièces précise.",
-              "en": "Find parts with precision."
+              "de": "Im Sortiment suchen.",
+              "nl": "Zoeken in het assortiment.",
+              "fr": "Rechercher dans l’assortiment.",
+              "en": "Search the range."
             }
           },
           "source_refs": [
@@ -1498,10 +1498,10 @@
             "type": "route",
             "target_id": "tk-workshop",
             "label": {
-              "de": "Der richtige Kontakt für Ihr Fahrzeug.",
-              "nl": "Het juiste contact voor uw voertuig.",
-              "fr": "Le bon interlocuteur pour votre véhicule.",
-              "en": "The right contact for your vehicle."
+              "de": "Die richtige Werkstatt für Ihr Fahrzeug.",
+              "nl": "De juiste werkplaats voor uw voertuig.",
+              "fr": "Le bon atelier pour votre véhicule.",
+              "en": "The right workshop for your vehicle."
             }
           },
           "source_refs": [
@@ -1572,10 +1572,10 @@
             "type": "route",
             "target_id": "tk-workshop",
             "label": {
-              "de": "Der richtige Kontakt für Ihr Fahrzeug.",
-              "nl": "Het juiste contact voor uw voertuig.",
-              "fr": "Le bon interlocuteur pour votre véhicule.",
-              "en": "The right contact for your vehicle."
+              "de": "Die richtige Werkstatt für Ihr Fahrzeug.",
+              "nl": "De juiste werkplaats voor uw voertuig.",
+              "fr": "Le bon atelier pour votre véhicule.",
+              "en": "The right workshop for your vehicle."
             }
           },
           "source_refs": [
@@ -1639,10 +1639,10 @@
             "type": "route",
             "target_id": "tk-appointments",
             "label": {
-              "de": "Service beginnt mit guter Abstimmung.",
-              "nl": "Service begint met goede afstemming.",
-              "fr": "Le service commence par une bonne préparation.",
-              "en": "Service starts with clear coordination."
+              "de": "Einen Werkstatttermin anfragen.",
+              "nl": "Een werkplaatsafspraak aanvragen.",
+              "fr": "Demander un rendez-vous en atelier.",
+              "en": "Request a workshop appointment."
             }
           },
           "source_refs": [
@@ -1669,10 +1669,10 @@
             "type": "route",
             "target_id": "tk-appointments",
             "label": {
-              "de": "Service beginnt mit guter Abstimmung.",
-              "nl": "Service begint met goede afstemming.",
-              "fr": "Le service commence par une bonne préparation.",
-              "en": "Service starts with clear coordination."
+              "de": "Einen Werkstatttermin anfragen.",
+              "nl": "Een werkplaatsafspraak aanvragen.",
+              "fr": "Demander un rendez-vous en atelier.",
+              "en": "Request a workshop appointment."
             }
           },
           "source_refs": [
@@ -1812,10 +1812,10 @@
             "type": "route",
             "target_id": "tk-categories",
             "label": {
-              "de": "Teilewelten nach Ihrem Bedarf.",
-              "nl": "Onderdelengebieden naar uw behoefte.",
-              "fr": "Des familles de pièces selon votre besoin.",
-              "en": "Parts families built around your need."
+              "de": "Alle Kategorien.",
+              "nl": "Alle categorieën.",
+              "fr": "Toutes les catégories.",
+              "en": "All categories."
             }
           },
           "source_refs": [
@@ -1849,10 +1849,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Eignung prüfen.",
+              "nl": "Geschiktheid controleren.",
+              "fr": "Vérifier la compatibilité.",
+              "en": "Check suitability."
             }
           },
           "source_refs": [
@@ -1886,10 +1886,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Eignung prüfen.",
+              "nl": "Geschiktheid controleren.",
+              "fr": "Vérifier la compatibilité.",
+              "en": "Check suitability."
             }
           },
           "source_refs": [
@@ -1899,6 +1899,154 @@
           "content_ref": {
             "page_id": "tk-batterie",
             "section_id": "tk-batterie-customer-1"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "tk-shipping-payment",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-shipping-payment-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-cart",
+            "label": {
+              "de": "Ihr Warenkorb.",
+              "nl": "Uw winkelwagen.",
+              "fr": "Votre panier.",
+              "en": "Your cart."
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md"
+          ],
+          "content_ref": {
+            "page_id": "tk-shipping-payment",
+            "section_id": "lieferlaender"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "tk-returns",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-returns-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-legal",
+            "label": {
+              "de": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.",
+              "nl": "TEILEKLAR. Voorwaarden met een duidelijke afzender.",
+              "fr": "TEILEKLAR. Des conditions attribuées clairement.",
+              "en": "TEILEKLAR. Terms with a clear provider."
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md"
+          ],
+          "content_ref": {
+            "page_id": "tk-returns",
+            "section_id": "widerrufsrecht"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "tk-help",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-help-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-shipping-payment",
+            "label": {
+              "de": "Versand und Zahlung.",
+              "nl": "Verzending en betaling.",
+              "fr": "Livraison et paiement.",
+              "en": "Shipping and payment."
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md"
+          ],
+          "content_ref": {
+            "page_id": "tk-help",
+            "section_id": "versand"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "tk-battery-disposal",
+      "communication_mode": "factual_orientation",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "tk-battery-disposal-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "tk-help",
+            "label": {
+              "de": "Hilfe und häufige Fragen.",
+              "nl": "Hulp en veelgestelde vragen.",
+              "fr": "Aide et questions fréquentes.",
+              "en": "Help and common questions."
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/08-recht-und-compliance.md"
+          ],
+          "content_ref": {
+            "page_id": "tk-battery-disposal",
+            "section_id": "hausmuell"
           }
         }
       ]

@@ -494,6 +494,54 @@
       "passed": true
     },
     {
+      "path": "/teileklar/versand-und-zahlung",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "width": 320,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 320,
       "locale": "nl",
@@ -985,6 +1033,54 @@
       "passed": true
     },
     {
+      "path": "/teileklar/versand-und-zahlung",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "width": 320,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 320,
       "locale": "fr",
@@ -1476,6 +1572,54 @@
       "passed": true
     },
     {
+      "path": "/teileklar/versand-und-zahlung",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "width": 320,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 1280,
       "locale": "de",
@@ -1967,6 +2111,54 @@
       "passed": true
     },
     {
+      "path": "/teileklar/versand-und-zahlung",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "width": 1280,
+      "locale": "de",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 1280,
       "locale": "nl",
@@ -2458,6 +2650,54 @@
       "passed": true
     },
     {
+      "path": "/teileklar/versand-und-zahlung",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "width": 1280,
+      "locale": "nl",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
       "path": "/",
       "width": 1280,
       "locale": "fr",
@@ -2938,6 +3178,54 @@
     },
     {
       "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/versand-und-zahlung",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "width": 1280,
+      "locale": "fr",
+      "legal_context": "teileklar",
+      "legal_paths": [
+        "/teileklar/rechtliches"
+      ],
+      "legal_disclosures": 1,
+      "all_pages_disclosures_outside": 1,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
       "width": 1280,
       "locale": "fr",
       "legal_context": "teileklar",
@@ -3060,9 +3348,9 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/SiteFooter.tsx": "f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462",
+    "apps/web/components/SiteFooter.tsx": "5a89f12f0f4478c22cf5bed2798b4e6b0c23b5af8f3c1d80ad90e045e8d69092",
     "apps/web/components/WorkspaceRebuild.css": "063e874a4da21bfe309d0b30ead7137fbe88ae5e530afa433d4229c9e988ea35",
-    "config/site-map.json": "3407aea2d144d69002a28db4ec2976079b94ea28d5b2b1446a8947d535bee971",
+    "config/site-map.json": "8f00a304ee4b92007a9fc5c1962c5756a0fdd9524800aab1d0ae6992b9477ea1",
     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
   "missing_license_route": true,

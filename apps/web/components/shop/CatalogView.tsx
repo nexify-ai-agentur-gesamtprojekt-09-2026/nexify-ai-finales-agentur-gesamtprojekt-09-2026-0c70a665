@@ -19,7 +19,7 @@ export function SearchBar({ initial = "", base = "/teileklar/suche" }: { initial
 
 export default function CatalogView({ q = "", category, page = 1, base }: { q?: string; category?: number; page?: number; base: string }) {
   const { t, number } = useShopCopy();
-  const [result, setResult] = useState<Result | null>(null), [failed, setFailed] = useState<"unconfigured" | "unavailable" | null>(null);
+  const [result, setResult] = useState<Result | null>(null), [failed, setFailed] = useState<"unconfigured" | "unavailable" | null>(null), [attempt, setAttempt] = useState(0);
   useEffect(() => {
     setResult(null); setFailed(null);
     const params = new URLSearchParams({ q, page: String(page) }); if (category !== undefined) params.set("category", String(category));
@@ -29,14 +29,19 @@ export default function CatalogView({ q = "", category, page = 1, base }: { q?: 
       if (current) setResult(data);
     }).catch(error => { if (current && !controller.signal.aborted) setFailed(catalogFailure(error)); });
     return () => { current = false; controller.abort(); };
-  }, [q, category, page]);
+  }, [q, category, page, attempt]);
   const link = (target: number) => base + "?" + new URLSearchParams({ ...(q ? { q } : {}), seite: String(target) });
-  if (failed === "unconfigured") return <p role="status" className="tk-alert" data-testid="catalog-unconfigured">{t("catalogUnconfigured")}</p>;
-  if (failed) return <p role="alert" className="tk-alert" data-testid="catalog-error">{t("catalogError")}</p>;
+  // Setup missing (explicit 503 setup answer) and connection failure stay distinct (D-010):
+  // the first offers the workshop path, the second a retry of the same request.
+  if (failed === "unconfigured") return <div className="tk-state" data-testid="catalog-unconfigured-state"><p role="status" className="tk-alert" data-testid="catalog-unconfigured">{t("catalogUnconfigured")}</p>
+    <SiteLink href="/teileklar/werkstatt" className="content-action-link" data-testid="catalog-unconfigured-workshop">{t("findWorkshop")}</SiteLink></div>;
+  if (failed) return <div className="tk-state" data-testid="catalog-error-state"><p role="alert" className="tk-alert" data-testid="catalog-error">{t("catalogError")}</p>
+    <button type="button" className="outline-button" onClick={() => setAttempt(value => value + 1)} data-testid="catalog-retry">{t("retry")}</button></div>;
   if (!result) return <p role="status" data-testid="catalog-loading">{t("catalogLoading")}</p>;
   if (!result.total) return <div className="tk-empty" data-testid="catalog-empty"><h2>{q ? t("noResults") : t("noItems")}</h2>
     <p>{q ? t("noResultsBody", { query: q }) : t("noItemsBody")}</p>
-    {q && <SiteLink href={base} className="content-action-link" data-testid="search-reset">{t("resetSearch")}</SiteLink>}</div>;
+    <div className="tk-actions">{q && <SiteLink href={base} className="content-action-link" data-testid="search-reset">{t("resetSearch")}</SiteLink>}
+      <SiteLink href="/teileklar/werkstatt" className="content-action-link" data-testid="catalog-empty-workshop">{t("askWorkshop")}</SiteLink></div></div>;
   return <div data-testid="catalog-results">
     <p className="tk-count" role="status" data-testid="catalog-count">{t("resultCount", { count: number(result.total) })}{q ? t("querySuffix", { query: q }) : null} · {t("pageOf", { page: number(result.page), pages: number(result.pages) })}</p>
     <ul className="tk-grid">{result.items.map(product => <ProductCard key={product.id} product={product} />)}</ul>

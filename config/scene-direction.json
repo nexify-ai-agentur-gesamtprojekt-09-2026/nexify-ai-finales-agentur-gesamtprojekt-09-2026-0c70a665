@@ -277,6 +277,34 @@
       "family": "automotive",
       "mode": "cinematic",
       "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "tk-shipping-payment",
+      "path": "/teileklar/versand-und-zahlung",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-returns",
+      "path": "/teileklar/rueckgabe",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-help",
+      "path": "/teileklar/hilfe",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
+    },
+    {
+      "page_id": "tk-battery-disposal",
+      "path": "/teileklar/batterie-und-altgeraete",
+      "family": "automotive",
+      "mode": "quiet",
+      "reason": "Lesen, Formular oder sensible Transaktion: ruhige Gestaltung ohne ablenkenden Film."
     }
   ]
 }

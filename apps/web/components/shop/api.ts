@@ -1,8 +1,11 @@
 "use client";
 export type ApiError = { status: number; error: string; fields?: Record<string, string>; body?: Record<string, unknown> };
-export type Product = { id: string; name: string; sku: string; ean: string; image: string | null; image_status?: "supplier_original" | "unavailable"; stock: number | null; in_stock: boolean | null; stock_status?: "reported" | "unknown"; price_cents: number | null; price_status?: "released" | "not_released"; currency: string; category_id?: number };
-export type ProductDetail = Product & { images: string[]; description: string; details: Record<string, string | number>; fitment_status: string; source: string; imported_at: string; category_name?: string; bigbuy_id: number; vat_percent: string };
-export type Line = { product_id: string; name: string; sku: string; ean: string; image: string | null; quantity: number; unit_cents: number; line_cents: number; stock: number };
+export type Product = { id: string; name: string; sku: string; ean: string; image: string | null; image_status?: "supplier_original" | "unavailable"; stock: number | null; in_stock: boolean | null; stock_status?: "reported" | "unknown"; price_cents: number | null; price_status?: "released" | "not_released"; currency: string; category_id?: number;
+  // Optional facts: null/[]/absent means "not in the data" and is never rendered as a guess.
+  manufacturer?: string | null; delivery_days_min?: number | null; delivery_days_max?: number | null; net_content?: number | null; unit?: BaseUnitInput | null; suitability?: string[] };
+export type ProductDetail = Product & { images: string[]; description: string; details: Record<string, string | number>; fitment_status: string; source: string; imported_at: string; category_name?: string; bigbuy_id: number; vat_percent: string; safety_notes?: string[]; disposal_class?: "battery" | "weee" | "none" | null; scope_of_delivery?: string[] };
+type BaseUnitInput = "g" | "kg" | "ml" | "l" | "m";
+export type Line = { product_id: string; name: string; sku: string; ean: string; image: string | null; quantity: number; unit_cents: number; line_cents: number; stock: number; delivery_days_min?: number; delivery_days_max?: number };
 export type Change = { product_id: string; kind: "price" | "stock" | "unavailable"; name?: string; old?: number; new?: number };
 export type Cart = { lines: Line[]; changes: Change[]; subtotal_cents: number; shipping_cents: number; total_cents: number; vat_included_cents: number; vat_percent?: string; currency: string; count: number; quote_hash?: string };
 export type TimelineStep = { id: string; label: string; reached: boolean; at?: string | null };
@@ -61,6 +64,21 @@ export function catalogFailure(error: unknown): "unconfigured" | "unavailable" {
 /** One key per add-to-cart intent; reused only to retry the same intent after an unknown outcome. */
 export function cartIntentKey() {
   return "add:" + crypto.randomUUID();
+}
+
+/** Grundpreis (§ 4 PAngV) per 1 kg / 1 l / 1 m, only from a stored net content; otherwise null. */
+export function basePrice(priceCents: number | null | undefined, content: number | null | undefined, unit: string | null | undefined): { cents: number; unit: "kg" | "l" | "m" } | null {
+  if (typeof priceCents !== "number" || !Number.isSafeInteger(priceCents) || priceCents < 0) return null;
+  if (typeof content !== "number" || !Number.isFinite(content) || content <= 0) return null;
+  const scale: Record<string, [number, "kg" | "l" | "m"]> = { g: [1000, "kg"], kg: [1, "kg"], ml: [1000, "l"], l: [1, "l"], m: [1, "m"] };
+  const entry = unit ? scale[unit] : undefined;
+  if (!entry) return null;
+  return { cents: Math.round(priceCents / (content / entry[0])), unit: entry[1] };
+}
+
+/** A delivery window only when both stored bounds are well-formed. */
+export function deliveryWindow(min: number | null | undefined, max: number | null | undefined): { min: number; max: number } | null {
+  return Number.isSafeInteger(min) && Number.isSafeInteger(max) && (min as number) >= 1 && (min as number) <= (max as number) ? { min: min as number, max: max as number } : null;
 }
 
 const euro = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });

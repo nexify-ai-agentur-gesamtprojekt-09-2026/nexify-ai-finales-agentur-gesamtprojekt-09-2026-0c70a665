@@ -7,7 +7,8 @@ from . import pricing
 from .db import db
 
 router = APIRouter(prefix="/api/shop")
-PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1}
+PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1,
+                 "manufacturer": 1, "delivery_days_min": 1, "delivery_days_max": 1, "net_content": 1, "unit": 1, "suitability": 1}
 
 # Exact supplier host observed in the read-only catalogue; no wildcard or proxy.
 # Deployment CSP must separately permit this host before images can load.
@@ -46,7 +47,29 @@ def present(product, settings, full=False):
             "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
             "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
             "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id")}
+    # Optional product facts are passed through only when the stored value is well-formed.
+    # Absent or malformed values stay None/[] so the frontend renders nothing instead of a guess.
+    # details.manufacturer from BigBuy is a numeric supplier id, never a manufacturer name.
+    def text(value, limit):
+        value = value.strip() if isinstance(value, str) else ""
+        return value if value and len(value) <= limit else None
+
+    def texts(value, limit, count):
+        return [v.strip() for v in value if isinstance(v, str) and v.strip() and len(v.strip()) <= limit][:count] if isinstance(value, list) else []
+
+    days = (product.get("delivery_days_min"), product.get("delivery_days_max"))
+    delivery = all(type(day) is int for day in days) and 1 <= days[0] <= days[1] <= 60
+    content, unit = product.get("net_content"), product.get("unit")
+    measured = type(content) in (int, float) and 0 < content <= 100000 and unit in ("g", "kg", "ml", "l", "m")
+    item.update({"manufacturer": text(product.get("manufacturer"), 160),
+                 "delivery_days_min": days[0] if delivery else None, "delivery_days_max": days[1] if delivery else None,
+                 "net_content": content if measured else None, "unit": unit if measured else None,
+                 "suitability": texts(product.get("suitability"), 60, 8)})
     if full:
+        disposal = product.get("disposal_class")
+        item.update({"safety_notes": texts(product.get("safety_notes"), 600, 12),
+                     "disposal_class": disposal if disposal in ("battery", "weee", "none") else None,
+                     "scope_of_delivery": texts(product.get("scope_of_delivery"), 160, 20)})
         item.update({"images": images, "description": product.get("description") or "",
                      "details": product.get("details") or {}, "fitment_status": "not_checked",
                      "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id")})

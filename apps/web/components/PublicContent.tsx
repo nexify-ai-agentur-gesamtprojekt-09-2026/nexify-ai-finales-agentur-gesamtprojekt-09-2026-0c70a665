@@ -15,7 +15,7 @@ const groups:Record<Layout,string[]>={
  product:["solutions","nex2fly","one","api","pricing"],
  workshop:["tk-partner","tk-workshop","tk-appointments"],
  commerce:["tk-home","tk-search","tk-fitment","tk-categories","tk-category","tk-product","tk-cart","tk-checkout","tk-vouchers"],
- document:["imprint","privacy","terms","ai-notice","accessibility","cookies","tk-legal"],
+ document:["imprint","privacy","terms","ai-notice","accessibility","cookies","tk-legal","tk-shipping-payment","tk-returns","tk-battery-disposal","tk-help"],
  account:["login","signup"],article:["knowledge","knowledge-start"],company:["company","contact"]
 };
 function layoutFor(page:PublicPage):Layout{

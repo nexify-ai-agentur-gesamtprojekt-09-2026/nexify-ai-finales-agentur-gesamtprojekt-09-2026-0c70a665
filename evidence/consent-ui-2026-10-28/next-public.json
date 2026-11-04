@@ -205,6 +205,26 @@
       "passed": true
     },
     {
+      "path": "/teileklar/versand-und-zahlung",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "locale": "de",
+      "passed": true
+    },
+    {
       "path": "/",
       "locale": "nl",
       "passed": true
@@ -406,6 +426,26 @@
       "path": "/teileklar/batterie-berater",
       "locale": "nl",
       "passed": true
+    },
+    {
+      "path": "/teileklar/versand-und-zahlung",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rueckgabe",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/hilfe",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-und-altgeraete",
+      "locale": "nl",
+      "passed": true
     }
   ],
   "private": [
@@ -442,7 +482,7 @@
     "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "d1647612cdc49dd071e89f1916092d83e2c7e60366917e6e5d29d5e73dbb245c",
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
-    "apps/web/components/SiteFooter.tsx": "f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462",
+    "apps/web/components/SiteFooter.tsx": "5a89f12f0f4478c22cf5bed2798b4e6b0c23b5af8f3c1d80ad90e045e8d69092",
     "apps/web/auth/tests/browser-public-experience.mjs": "193749095c611c401da1b4d6eab98fc0afbb72effe8967b368d90362a49923ff"
   },
   "auth_mobile": [

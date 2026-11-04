@@ -61,6 +61,14 @@ async def merge(ident):
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": list(items.values()), "updated_at": now_iso()}, "$inc": {"rev": 1}}, upsert=True)
 
 
+def delivery_days(product):
+    """Configured per-product delivery window, only when well-formed; otherwise no claim at all."""
+    days = (product.get("delivery_days_min"), product.get("delivery_days_max"))
+    if all(type(day) is int for day in days) and 1 <= days[0] <= days[1] <= 60:
+        return {"delivery_days_min": days[0], "delivery_days_max": days[1]}
+    return {}
+
+
 async def priced(owner, shipping_cents=None):
     cart = await db.carts.find_one({"owner": owner}) or {"items": []}
     settings = await pricing.settings(db)
@@ -80,7 +88,7 @@ async def priced(owner, shipping_cents=None):
             changes.append({"product_id": product["_id"], "kind": "stock", "name": product["name"], "old": item["quantity"], "new": stock})
         lines.append({"product_id": product["_id"], "name": product["name"], "sku": product.get("sku"), "ean": product.get("ean"),
                       "image": (product.get("images") or [None])[0], "quantity": item["quantity"], "unit_cents": unit,
-                      "line_cents": unit * item["quantity"], "stock": stock})
+                      "line_cents": unit * item["quantity"], "stock": stock, **delivery_days(product)})
     subtotal = sum(l["line_cents"] for l in lines)
     shipping = settings["shipping_cents"] if shipping_cents is None else shipping_cents
     total = subtotal + (shipping if lines else 0)

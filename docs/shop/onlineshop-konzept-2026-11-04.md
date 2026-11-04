@@ -32,13 +32,13 @@ Vertrauensbruch und erhöht die Retourenquote.
 
 > **TEILEKLAR – Auto- & Motorradzubehör, geprüft und klar beschrieben.**
 > Alles, was Ihr Fahrzeug sicherer, sauberer und alltagstauglicher macht: mit ehrlichen Angaben,
-> deutschem Ansprechpartner und Werkstattnetz, wenn es mehr als Zubehör braucht.
+> deutschem Ansprechpartner und Werkstattsuche, wenn es mehr als Zubehör braucht.
 
 Das Leistungsversprechen ruht auf drei Säulen, die auf jeder Seite wiederkehren:
 
 1. **Klarheit**: vollständige Produktangaben, Endpreis inkl. MwSt., Versand vorab sichtbar, keine Überraschungen.
 2. **Eignung statt Pseudo-Passung**: „Universell“, „Für 12-V-Bordnetz“, „Für Helmgröße M–L“ und Ähnliches, sauber gekennzeichnet. Echte Fahrzeugpassung nur dort, wo der Datensatz sie belegt.
-3. **Weg zur Werkstatt**: Das Werkstattnetz (`/teileklar/werkstatt`) ist das Alleinstellungsmerkmal gegenüber reinen Dropshipping-Shops. Es lädt jedes Produkt mit Service auf.
+3. **Weg zur Werkstatt**: Die Werkstattsuche (`/teileklar/werkstatt`; ein bestätigtes Partnernetz besteht noch nicht) ist das Alleinstellungsmerkmal gegenüber reinen Dropshipping-Shops. Es lädt jedes Produkt mit Service auf.
 
 ---
 
@@ -139,13 +139,15 @@ Unterteilt in **Pflicht** (rechtlich erforderlich, vor Livegang juristisch prüf
 
 **Trust-Leiste (einheitlich, unter Hero und im Warenkorb), nur belegbare Aussagen:**
 `Endpreise inkl. MwSt.` · `14 Tage Widerrufsrecht` · `Sichere Zahlung über Revolut` ·
-`Deutscher Ansprechpartner` · `Werkstattnetz für den Einbau`.
+`Deutscher Ansprechpartner` · `Werkstattsuche für den Einbau`.
 Freigabepflichtige Aussagen wie „Kostenloser Versand ab X €“ oder „Kostenlose Rückgabe“ erscheinen
 erst, wenn der Wert in der Konfiguration steht und freigegeben ist.
 
 ---
 
 ## 2 · Visueller Storytelling-Faden
+
+> **Stand 04.11.2026:** Eine erste Umsetzung als gezeichnete SVG-Szenen hat der Inhaber verworfen; sie ist vollständig zurückgenommen. Die Bildgeschichte wird nur mit hochwertigem Bildmaterial umgesetzt, also echter Fotografie oder fotorealistischen Renderings, kombiniert mit echten Packshots. Bis dahin bleiben die freigegebenen Atelier-Filme bzw. ruhige Flächen.
 
 ### 2.1 Leitidee: „Eine Saison mit Ihrem Fahrzeug“
 
@@ -270,7 +272,7 @@ nach UWG und Omnibus-Richtlinie riskant und schadet dem Vertrauen.
 ### 3.1 Shop-Startseite `/teileklar`
 
 - **H1:** Zubehör für Auto & Motorrad. Klar beschrieben, fair berechnet.
-- **Sub:** Pflege, Elektronik, Sicherheit und Werkzeug – mit vollständigen Angaben, Endpreisen inkl. MwSt. und einem Werkstattnetz, wenn es mehr braucht.
+- **Sub:** Pflege, Elektronik, Sicherheit und Werkzeug – mit vollständigen Angaben, Endpreisen inkl. MwSt. und einer Werkstattsuche, wenn es mehr braucht.
 - **CTA primär:** Sortiment entdecken · **sekundär:** Werkstatt in Ihrer Nähe finden
 - Trust-Leiste (siehe 1.3)
 - **Sektion „Beliebte Kategorien“**: 6 Bildkarten (Kapitel 3), je Karte: Name + eine Nutzenzeile, z. B. *Autopflege – Glanz, der hält.* · *Sicherheit – Für den Ernstfall vorbereitet.*

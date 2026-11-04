@@ -57,7 +57,7 @@ const control=async(path,body)=>assert.equal((await fetch(backend+path,{method:'
 const cache=await mkdtemp(join(tmpdir(),'nexify-shop-api-cache-'));let origin;
 // Same-origin deployment: the site and /api/shop share one public origin. The proxy maps
 // only this site's own Origin to it; any other Origin reaches the server unchanged.
-const server=await createServer({root,cacheDir:cache,logLevel:'error',server:{port:0,strictPort:false,proxy:{'/api':{target:backend,changeOrigin:false,
+const server=await createServer({root,cacheDir:cache,logLevel:'error',server:{port:0,strictPort:false,hmr:false,proxy:{'/api':{target:backend,changeOrigin:false,
  configure(proxy){proxy.on('proxyReq',(request,incoming)=>{if(incoming.headers.origin===origin)request.setHeader('origin',PUBLIC_ORIGIN);});}}}},
  define:{'import.meta.env.VITE_CLERK_ENABLED':'"false"','__NEXIFY_STATIC_ORIENTATION__':false}});
 await server.listen();origin=`http://127.0.0.1:${server.httpServer.address().port}`;
@@ -135,6 +135,60 @@ try{
   assert.equal(await text(page.locator('[data-testid="out-of-stock-note"]')),norm(t('de','outNoOrder')));
   assert.equal(await page.locator('[data-testid="add-to-cart-button"]').isDisabled(),true);
  });
+ await check(catalogChecks,'trust_bar_and_card_facts_rendered_only_from_data_de_nl_fr',async()=>{
+  const TRUST=['trustPrices','trustWithdrawal','trustPayment','trustContact','trustWorkshop'];
+  for(const l of LOCALES){
+   await open(page,'/teileklar/shop');await locale(page,l);await page.locator('[data-testid="catalog-results"]').waitFor();
+   assert.deepEqual((await page.locator('[data-testid="shop-trust"] li').allInnerTexts()).map(norm),TRUST.map(k=>norm(t(l,k))),l);
+   assert.doesNotMatch(await text(page.locator('[data-testid="shop-trust"]')),/kostenlos|versandkostenfrei|gratis|gratuit/i);
+   const cleaner=page.locator('[data-testid="product-card-'+CLEANER+'"]');
+   // 500 ml synthetic net content -> Grundpreis per 1 l = gross price × 2.
+   assert.equal(await text(cleaner.locator('[data-testid="product-base-price-'+CLEANER+'"]')),norm(t(l,'basePrice',{price:euro(l,UNIT[CLEANER]*2),unit:'l'})));
+   assert.equal(await text(cleaner.locator('[data-testid="product-delivery-'+CLEANER+'"]')),norm(t(l,'deliveryRange',{min:new Intl.NumberFormat(l).format(3),max:new Intl.NumberFormat(l).format(6)})));
+   assert.equal(await text(cleaner.locator('[data-testid="product-eligibility-'+CLEANER+'"]')),norm(t(l,'eligibilityUniversal')));
+   assert.match(await text(cleaner.locator('[data-testid="product-manufacturer-'+CLEANER+'"]')),/SYNTHETISCHER TESTHERSTELLER/);
+   const brake=page.locator('[data-testid="product-card-'+BRAKE+'"]');
+   assert.equal(await text(brake.locator('[data-testid="product-delivery-'+BRAKE+'"]')),norm(t(l,'deliveryRange',{min:new Intl.NumberFormat(l).format(2),max:new Intl.NumberFormat(l).format(4)})));
+   assert.equal(await brake.locator('[data-testid^="product-base-price-"], [data-testid^="product-manufacturer-"]').count(),0,'no base price or manufacturer without data');
+   assert.doesNotMatch(await text(brake),new RegExp(t(l,'eligibilityUniversal')));
+  }
+  await open(page,'/teileklar/kategorie/990001');await locale(page,'de');await page.locator('[data-testid="product-card-'+WIPER+'"]').waitFor();
+  assert.equal(await page.locator('[data-testid="product-card-'+WIPER+'"] [data-testid^="product-delivery-"], [data-testid="product-card-'+WIPER+'"] [data-testid^="product-eligibility-"]').count(),0,'out of stock and no data: no delivery or eligibility claim');
+  await open(page,'/teileklar');await locale(page,'de');
+  const entryTrust=page.locator('[data-testid="entry-trust"]');await entryTrust.waitFor();
+  assert.deepEqual((await entryTrust.locator('li').allInnerTexts()).map(norm),TRUST.map(k=>norm(t('de',k))));
+ });
+ await check(catalogChecks,'product_detail_mandatory_information_gpsr_disposal_and_fallbacks',async()=>{
+  for(const l of LOCALES){
+   await open(page,'/teileklar/produkt/'+CLEANER);await locale(page,l);await page.locator('[data-testid="product-detail"]').waitFor();
+   assert.match(await text(page.locator('[data-testid="product-identifiers"]')),/SYNTHETISCHER TESTHERSTELLER.*TEST-CLN-002.*0000000990102/);
+   assert.equal(await page.locator('[data-testid="product-shipping-info-link"]').getAttribute('href'),'/teileklar/versand-und-zahlung');
+   assert.equal(await text(page.locator('[data-testid="product-base-price"]')),norm(t(l,'basePrice',{price:euro(l,UNIT[CLEANER]*2),unit:'l'})));
+   assert.equal(await text(page.locator('[data-testid="product-delivery"]')),norm(t(l,'deliveryRange',{min:new Intl.NumberFormat(l).format(3),max:new Intl.NumberFormat(l).format(6)})));
+   assert.deepEqual((await page.locator('[data-testid="product-trust"] li').allInnerTexts()).map(norm),['trustWithdrawal','trustPayment','trustContact'].map(k=>norm(t(l,k))));
+   assert.equal(await page.locator('[data-testid="fitment-status"]').getAttribute('data-fitment'),'universal');
+   assert.match(await text(page.locator('[data-testid="fitment-status"]')),new RegExp(norm(t(l,'fitmentUniversal')).slice(0,20)));
+   assert.equal(await page.locator('[data-testid="fitment-workshop-link"]').getAttribute('href'),'/teileklar/werkstatt');
+   assert.match(await text(page.locator('[data-testid="product-safety-manufacturer"]')),/SYNTHETISCHER TESTHERSTELLER/);
+   assert.match(await text(page.locator('[data-testid="product-safety-notes"]')),/Synthetischer Testhinweis/);
+   assert.match(await text(page.locator('[data-testid="product-scope-of-delivery"]')),/synthetische Testflasche/);
+   assert.equal(await page.locator('[data-testid="product-disposal"]').getAttribute('data-disposal'),'battery');
+   assert.equal(await page.locator('[data-testid="product-withdrawal-link"]').getAttribute('href'),'/teileklar/rechtliches#widerruf');
+   // Concept 3.4 order: price block before availability, CTA, trust line and eligibility box.
+   const order=await page.evaluate(ids=>ids.map(id=>document.querySelector('[data-testid="'+id+'"]')).map((n,i,a)=>i===0||Boolean(a[i-1].compareDocumentPosition(n)&Node.DOCUMENT_POSITION_FOLLOWING)),
+    ['product-name','product-identifiers','product-price','product-base-price','stock-label','product-delivery','add-to-cart-button','product-trust','fitment-status','product-facts','product-safety','product-disposal','product-shipping-returns']);
+   assert.ok(order.every(Boolean),JSON.stringify(order));
+  }
+  await open(page,'/teileklar/produkt/'+BRAKE);await locale(page,'de');await page.locator('[data-testid="product-detail"]').waitFor();
+  assert.equal(await text(page.locator('[data-testid="product-safety-manufacturer-missing"]')),norm(t('de','pdpManufacturerMissing')));
+  assert.equal(await text(page.locator('[data-testid="product-safety-notes-missing"]')),norm(t('de','pdpSafetyMissing')));
+  assert.equal(await page.locator('[data-testid="product-disposal"], [data-testid="product-base-price"], [data-testid="product-manufacturer"]').count(),0);
+  assert.equal(await page.locator('[data-testid="fitment-status"]').getAttribute('data-fitment'),'data');
+  await open(page,'/teileklar/produkt/'+WIPER);await page.locator('[data-testid="product-detail"]').waitFor();
+  assert.equal(await page.locator('[data-testid="fitment-status"]').getAttribute('data-fitment'),'none');
+  assert.equal(await text(page.locator('[data-testid="fitment-status"] p')),norm(t('de','fitmentBody')));
+  assert.equal(await page.locator('[data-testid="product-delivery"], [data-testid="product-eligibility"]').count(),0);
+ });
  await check(catalogChecks,'supplier_images_blocked_before_network_with_local_placeholder',async()=>{
   await open(page,'/teileklar/produkt/'+BRAKE);await locale(page,'de');
   await page.locator('.tk-image-missing',{hasText:t('de','imageError')}).first().waitFor();
@@ -210,6 +264,19 @@ try{
   await pa.locator('[data-testid="cart-remove-'+CLEANER+'"]').click();await pa.locator('[data-testid="cart-line-'+CLEANER+'"]').waitFor({state:'detached'});
   await verify({[BRAKE]:3});
  });
+ await check(shopChecks,'cart_summary_vat_trust_box_and_localized_chrome_de_nl_fr',async()=>{
+  for(const l of LOCALES){
+   await open(pa,'/teileklar/warenkorb');await locale(pa,l);await pa.locator('[data-testid="cart-view"]').waitFor();
+   const cart=await apiCall(pa,'GET','/api/shop/cart');
+   assert.equal(await text(pa.locator('[data-testid="cart-vat"]')),norm(euro(l,cart.json.vat_included_cents)));
+   assert.match(await text(pa.locator('[data-testid="cart-totals"]')),new RegExp(t(l,'totalInclVat').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+   assert.equal(await text(pa.locator('[data-testid="cart-checkout-link"]')),norm(t(l,'goCheckout')));
+   assert.equal(await pa.locator('[data-testid="cart-continue-shopping"]').getAttribute('href'),'/teileklar/shop');
+   assert.equal(await pa.locator('[data-testid="cart-trust-items"] li').count(),5);
+   assert.equal(await pa.locator('[data-testid="cart-trust-contact"]').getAttribute('href'),'/kontakt');
+  }
+  await locale(pa,'de');
+ });
  await check(shopChecks,'lost_add_response_retry_replays_same_key_without_double_add',async()=>{
   await open(pa,'/teileklar/produkt/'+BRAKE);const keys=[];
   await pa.route('**/api/shop/cart/items',async route=>{keys.push(route.request().headers()['idempotency-key']);
@@ -232,7 +299,7 @@ try{
    await open(pa,'/teileklar/produkt/'+CLEANER);await locale(pa,l);await pa.locator('[data-testid="product-quantity"]').fill('3');
    const response=pa.waitForResponse(r=>r.url().endsWith('/api/shop/cart/items'));await pa.locator('[data-testid="add-to-cart-button"]').click();
    assert.equal((await response).status(),409);
-   assert.equal(await text(pa.locator('[data-testid="add-to-cart-error"]')),norm(t(l,'quantityUnavailable')));
+   assert.equal(await text(pa.locator('[data-testid="add-to-cart-error"]')),norm(t(l,'quantityAvailable',{count:new Intl.NumberFormat(l).format(2)})));
   }
   assert.deepEqual(lines(await serverCart(guest)),{[BRAKE]:5});await locale(pa,'de');
  });
@@ -259,6 +326,33 @@ try{
  await check(shopChecks,'cross_origin_cart_write_rejected_by_server',async()=>{
   const denied=await foreignOriginCall(pa,'/api/shop/cart/items',{product_id:BRAKE,quantity:1},guest);
   assert.equal(denied.status,403);assert.equal(denied.json.detail.error,'origin_rejected');assert.deepEqual(lines(await serverCart(guest)),{[BRAKE]:5});
+ });
+ await check(shopChecks,'checkout_review_shows_delivery_legal_links_withdrawal_and_trust_before_payment',async()=>{
+  await open(pa,'/teileklar/kasse');await locale(pa,'de');await pa.locator('[data-testid="checkout-address-form"]').waitFor();
+  assert.equal(await text(pa.locator('[data-testid="checkout-heading"]')),norm(t('de','checkoutHeadAddress')));
+  for(const [field,value] of Object.entries({first_name:'Synthetisch',last_name:'Testlauf',street:'Teststraße 1',zip:'10115',city:'Berlin',email:'synthetic@example.invalid'}))
+   await pa.locator('[data-testid="checkout-address-'+field+'"]').fill(value);
+  await pa.locator('[data-testid="checkout-address-continue"]').click();await pa.locator('[data-testid="shipping-option-standard"]').waitFor();
+  assert.equal(await text(pa.locator('[data-testid="checkout-heading"]')),norm(t('de','checkoutHeadShipping')));
+  const window=norm(t('de','deliveryRange',{min:'2',max:'4'}));
+  assert.equal(await text(pa.locator('[data-testid="shipping-option-delivery-standard"]')),window);
+  await pa.locator('[data-testid="checkout-shipping-continue"]').click();await pa.locator('[data-testid="checkout-review"]').waitFor();
+  assert.equal(await text(pa.locator('[data-testid="checkout-heading"]')),norm(t('de','checkoutHeadReview')));
+  assert.equal(await text(pa.locator('[data-testid="review-delivery-value"]')),window);
+  const hrefs={'checkout-withdrawal-link':'/teileklar/rechtliches#widerruf','checkout-withdrawal-form-link':'/teileklar/rechtliches#widerrufsformular',
+   'checkout-terms-agb-link':'/teileklar/rechtliches#agb','checkout-terms-withdrawal-link':'/teileklar/rechtliches#widerruf'};
+  for(const [id,href] of Object.entries(hrefs)){const link=pa.locator('[data-testid="'+id+'"]');assert.equal(await link.getAttribute('href'),href,id);assert.equal(await link.getAttribute('target'),'_blank');}
+  assert.match(await text(pa.locator('[data-testid="checkout-withdrawal-hint"]')),/innerhalb von 14 Tagen/);
+  assert.equal(await text(pa.locator('[data-testid="checkout-place-order"]')),'Zahlungspflichtig bestellen');
+  assert.equal(await pa.locator('[data-testid="checkout-place-order"]').isDisabled(),true,'terms first');
+  assert.equal(await text(pa.locator('[data-testid="checkout-payment-note"]')),norm(t('de','paymentRedirectNote')));
+  assert.deepEqual((await pa.locator('[data-testid="checkout-trust"] li').allInnerTexts()).map(norm),['trustWithdrawal','trustPayment','trustContact'].map(k=>norm(t('de',k))));
+  const below=await pa.evaluate(()=>{const cta=document.querySelector('[data-testid="checkout-place-order"]');return ['checkout-payment-note','checkout-trust'].every(id=>Boolean(cta.compareDocumentPosition(document.querySelector('[data-testid="'+id+'"]'))&Node.DOCUMENT_POSITION_FOLLOWING));});
+  assert.equal(below,true);
+  // The Muster-Widerrufsformular target exists on the legal page.
+  const legal=await pa.context().newPage();await open(legal,'/teileklar/rechtliches');await legal.locator('#widerrufsformular').waitFor();
+  for(const id of ['agb','widerruf'])assert.equal(await legal.locator('#'+id).count(),1);await legal.close();
+  assert.deepEqual(blockedEffects,[]);assert.equal((await state()).orders,0);
  });
  await check(shopChecks,'checkout_reachable_with_server_quote_while_order_and_payment_blocked',async()=>{
   await open(pa,'/teileklar/kasse');await pa.locator('[data-testid="checkout-address-form"]').waitFor();

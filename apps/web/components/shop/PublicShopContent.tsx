@@ -9,6 +9,7 @@ import CartView from "./CartView";
 import Checkout from "./Checkout";
 import WorkshopFinder from "./WorkshopFinder";
 import WorkshopDetail from "./WorkshopDetail";
+import TrustBar from "./TrustBar";
 import { api, CART_EVENT, type Cart } from "./api";
 import type { Locale } from "../../lib/i18n";
 import "./shop.css";
@@ -70,7 +71,7 @@ export default function PublicShopContent({ pageId, pathname, search }: { pageId
   const route = publicShopRoute(pageId, pathname, search);
   let content = null;
   switch (route.kind) {
-    case "shop": content = <section className="tk-storefront" data-testid="public-shop-catalog"><div className="tk-storefront-search"><SearchBar /></div><CategoryList compact /><CatalogView base="/teileklar/shop" page={route.page} /></section>; break;
+    case "shop": content = <section className="tk-storefront" data-testid="public-shop-catalog"><div className="tk-storefront-search"><SearchBar /></div><TrustBar testId="shop-trust" /><CategoryList compact /><CatalogView base="/teileklar/shop" page={route.page} /></section>; break;
     case "search": content = <section className="tk-storefront" data-testid="public-shop-search"><div className="tk-storefront-search"><SearchBar initial={route.q} /></div><CatalogView q={route.q} page={route.page} base="/teileklar/suche" /></section>; break;
     case "categories": content = <CategoryList />; break;
     case "category": content = <CatalogView category={route.category} page={route.page} base={route.base} />; break;

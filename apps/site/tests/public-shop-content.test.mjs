@@ -14,7 +14,7 @@ const apiModule=(()=>{const compiled=ts.transpileModule(readFileSync(new URL('ap
 function harness(filename,api=()=>Promise.reject(new Error('Unexpected API call'))){
  const state=[],effects=[],cleanups=[];let cursor=0,rendered;
  const react={useId:()=>':test-id:',useState(initial){const index=cursor++;if(!(index in state))state[index]=initial;return [state[index],value=>{state[index]=typeof value==='function'?value(state[index]):value;}];},useEffect(effect,deps){const index=cursor++,old=effects[index];if(!old||deps.some((x,i)=>x!==old.deps[i]))effects[index]={effect,deps,pending:true};}};
- const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed',catalogFailure:apiModule.catalogFailure},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./shop.css':{}};
+ const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed',catalogFailure:apiModule.catalogFailure},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./TrustBar':{__esModule:true,default:'trust-bar',TRUST_LINE:['trustWithdrawal','trustPayment','trustContact']},'./shop.css':{}};
  const source=readFileSync(new URL(filename,componentRoot),'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
  const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,require(name){if(!(name in mocks))throw new Error('Unmocked import '+name);return mocks[name];},AbortController,URLSearchParams,console},{filename});
@@ -23,6 +23,7 @@ function harness(filename,api=()=>Promise.reject(new Error('Unexpected API call'
 function deferred(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return {promise,resolve,reject};}
 function text(node){if(node==null||typeof node==='boolean')return '';if(typeof node==='string'||typeof node==='number')return String(node);if(Array.isArray(node))return node.map(text).join(' ');return text(node.props?.children);}
 function children(node){return [node,...(Array.isArray(node?.props?.children)?node.props.children:[node?.props?.children]).filter(x=>x&&typeof x==='object').flatMap(children)];}
+const byTestId=(tree,id)=>children(tree).find(n=>n.props?.['data-testid']===id);
 const catalog=(name)=>({items:[{id:name}],total:1,page:1,pages:1});
 
 test('public shop route projection preserves catalogue, checkout and workshop journeys',()=>{
@@ -58,7 +59,7 @@ test('catalogue ignores old responses and aborts requests on query change/unmoun
  h.unmount();assert.equal(calls[1].init.signal.aborted,true);
 });
 test('503 is an error, successful empty catalogue makes no progress claim',async()=>{
- const h=harness('CatalogView.tsx',()=>Promise.reject({status:503,error:'db_unavailable'}));h.render({base:'/teileklar/shop'});h.flush();await tick();const error=h.render({base:'/teileklar/shop'});assert.equal(error.props.role,'alert');assert.equal(error.props['data-testid'],'catalog-error');assert.doesNotMatch(text(error),/Keine Artikel/);
+ const h=harness('CatalogView.tsx',()=>Promise.reject({status:503,error:'db_unavailable'}));h.render({base:'/teileklar/shop'});h.flush();await tick();const error=byTestId(h.render({base:'/teileklar/shop'}),'catalog-error');assert.equal(error.props.role,'alert');assert.doesNotMatch(text(error),/Keine Artikel/);
  const e=harness('CatalogView.tsx',()=>Promise.resolve({items:[],total:0,page:1,pages:0}));e.render({base:'/teileklar/shop'});e.flush();await tick();assert.equal(e.render({base:'/teileklar/shop'}).props['data-testid'],'catalog-empty');assert.doesNotMatch(text(e.render({base:'/teileklar/shop'})),/aufgebaut|bald|bestellen/i);
 });
 test('setup missing and connection failure stay distinct for catalogue and categories',async()=>{
@@ -67,9 +68,13 @@ test('setup missing and connection failure stay distinct for catalogue and categ
   [{status:503,error:'runtime_binding_unavailable',body:{reason:'database_metadata_unavailable'}},'catalog-error'],
   [{status:503,error:'runtime_binding_unavailable',body:{reason:'unknown_future_reason'}},'catalog-error'],
   [{status:500,error:'invalid_json_response'},'catalog-error'],[new TypeError('Failed to fetch'),'catalog-error']];
- for(const [failure,testid] of cases){const h=harness('CatalogView.tsx',()=>Promise.reject(failure));h.render({base:'/teileklar/shop'});h.flush();await tick();const node=h.render({base:'/teileklar/shop'});
-  assert.equal(node.props['data-testid'],testid,JSON.stringify(failure));assert.equal(node.props.role,testid==='catalog-error'?'alert':'status');
-  assert.equal(text(node),shopCopy.de[testid==='catalog-error'?'catalogError':'catalogUnconfigured']);}
+ for(const [failure,testid] of cases){const h=harness('CatalogView.tsx',()=>Promise.reject(failure));h.render({base:'/teileklar/shop'});h.flush();await tick();const tree=h.render({base:'/teileklar/shop'}),node=byTestId(tree,testid);
+  assert.ok(node,JSON.stringify(failure));assert.equal(node.props.role,testid==='catalog-error'?'alert':'status');
+  assert.equal(byTestId(tree,testid==='catalog-error'?'catalog-unconfigured':'catalog-error'),undefined,'states never mix');
+  assert.equal(text(node),shopCopy.de[testid==='catalog-error'?'catalogError':'catalogUnconfigured']);
+  // Connection failure offers a retry; setup missing offers the workshop path instead (no retry promise).
+  if(testid==='catalog-error'){assert.ok(byTestId(tree,'catalog-retry'));assert.equal(byTestId(tree,'catalog-unconfigured-workshop'),undefined);}
+  else{assert.equal(byTestId(tree,'catalog-retry'),undefined);assert.equal(byTestId(tree,'catalog-unconfigured-workshop').props.href,'/teileklar/werkstatt');}}
  const setup={status:503,error:'runtime_binding_unavailable',body:{reason:'namespace_schema_unbound'}};
  const full=harness('CategoryList.tsx',()=>Promise.reject(setup));full.render();full.flush();await tick();assert.equal(full.render().props['data-testid'],'categories-unconfigured');
  const compact=harness('CategoryList.tsx',()=>Promise.reject(setup));compact.render({compact:true});compact.flush();await tick();assert.equal(compact.render({compact:true}),null);
@@ -82,4 +87,11 @@ test('category errors are distinct from empty data and unmount aborts stale load
 });
 test('shop entry offers discovery without a purchase promise',()=>{
  const source=readFileSync(new URL('ShopEntry.tsx',componentRoot),'utf8');assert.match(source,/t\("entryTitle"\)/);assert.match(shopCopy.de.entryTitle,/Teile und Zubehör finden/);assert.doesNotMatch(shopCopy.de.entryTitle,/finden und bestellen/);
+});
+test('catalogue connection failure retry repeats the request and can recover',async()=>{
+ let calls=0;const h=harness('CatalogView.tsx',()=>{calls++;return calls===1?Promise.reject(new TypeError('Failed to fetch')):Promise.resolve(catalog('back'));});
+ h.render({base:'/teileklar/shop'});h.flush();await tick();
+ byTestId(h.render({base:'/teileklar/shop'}),'catalog-retry').props.onClick();
+ h.render({base:'/teileklar/shop'});h.flush();await tick();
+ assert.equal(calls,2);assert.equal(children(h.render({base:'/teileklar/shop'})).find(n=>n.type==='product-card').props.product.id,'back');
 });

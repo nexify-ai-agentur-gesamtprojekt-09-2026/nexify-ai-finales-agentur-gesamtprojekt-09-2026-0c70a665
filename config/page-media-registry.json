@@ -822,7 +822,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-home",
-      "context_title": "TEILEKLAR: Teile, Fahrzeug und nächste Schritte",
+      "context_title": "TEILEKLAR: Zubehör für Auto und Motorrad",
       "film_id": "NXV-DE-04",
       "scene_ids": [
         "NXV-DE-04-S01",
@@ -854,7 +854,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-search",
-      "context_title": "Teilesuche: in Vorbereitung",
+      "context_title": "Suche im Zubehörsortiment",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -910,7 +910,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-category",
-      "context_title": "Kategorieansicht: in Vorbereitung",
+      "context_title": "Kategorieansicht mit Artikeln",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -938,7 +938,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-product",
-      "context_title": "Produktdetails: in Vorbereitung",
+      "context_title": "Produktdetails und Eignung",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -967,7 +967,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-cart",
-      "context_title": "Warenkorb: noch ohne Bestellung",
+      "context_title": "Warenkorb mit Versand und Gesamtsumme",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -996,7 +996,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-checkout",
-      "context_title": "Kasse: nicht zum Kauf freigegeben",
+      "context_title": "Kasse in vier Schritten",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -1025,7 +1025,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-fitment",
-      "context_title": "Fahrzeug und belegte Passung",
+      "context_title": "Eignung von Zubehör prüfen",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -1195,7 +1195,7 @@
       "site_context": "teileklar",
       "visibility": "public",
       "context_id": "context-tk-shop",
-      "context_title": "TEILEKLAR Shop: Teile und Service im Überblick",
+      "context_title": "TEILEKLAR Shop: Sortiment im Überblick",
       "film_id": null,
       "scene_ids": [],
       "script_module_ids": [
@@ -1256,6 +1256,118 @@
       "scene_ids": [],
       "script_module_ids": [
         "tk-batterie-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-shipping-payment",
+      "path": "/teileklar/versand-und-zahlung",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-shipping-payment",
+      "context_title": "TEILEKLAR: Versand und Zahlung",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-shipping-payment-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-returns",
+      "path": "/teileklar/rueckgabe",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-returns",
+      "context_title": "TEILEKLAR: Rückgabe und Widerruf",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-returns-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-help",
+      "path": "/teileklar/hilfe",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-help",
+      "context_title": "TEILEKLAR: Hilfe und häufige Fragen",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-help-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-battery-disposal",
+      "path": "/teileklar/batterie-und-altgeraete",
+      "site_context": "teileklar",
+      "visibility": "public",
+      "context_id": "context-tk-battery-disposal",
+      "context_title": "TEILEKLAR: Batterien und Altgeräte",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "tk-battery-disposal-explain-1"
       ],
       "assets": {
         "de": null,
@@ -2175,7 +2287,7 @@
       "page_id": "tk-home",
       "module_id": "tk-home-explain-1",
       "context_id": "module-tk-home-explain-1",
-      "context_title": "Fahrzeugbezug statt Zufallstreffer",
+      "context_title": "Universelles Zubehör, ehrlich gekennzeichnet",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2197,7 +2309,7 @@
       "page_id": "tk-home",
       "module_id": "tk-home-explain-2",
       "context_id": "module-tk-home-explain-2",
-      "context_title": "Ein Serviceweg mit klaren Zuständigkeiten",
+      "context_title": "Wenn es mehr als Zubehör braucht",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2219,7 +2331,7 @@
       "page_id": "tk-search",
       "module_id": "tk-search-explain-1",
       "context_id": "module-tk-search-explain-1",
-      "context_title": "Die Referenz führt näher ans Ziel",
+      "context_title": "Mit einfachen Begriffen beginnen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2241,7 +2353,7 @@
       "page_id": "tk-categories",
       "module_id": "tk-categories-explain-1",
       "context_id": "module-tk-categories-explain-1",
-      "context_title": "Mit der Aufgabe beginnt die Zuordnung",
+      "context_title": "Vom Vorhaben zur Kategorie",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2285,7 +2397,7 @@
       "page_id": "tk-product",
       "module_id": "tk-product-explain-1",
       "context_id": "module-tk-product-explain-1",
-      "context_title": "Wissen, welches Teil gemeint ist",
+      "context_title": "Wissen, was geliefert wird",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2307,7 +2419,7 @@
       "page_id": "tk-product",
       "module_id": "tk-product-explain-2",
       "context_id": "module-tk-product-explain-2",
-      "context_title": "Ein Angebot bündelt die bestätigten Angaben",
+      "context_title": "Eignung klar benannt",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2329,7 +2441,7 @@
       "page_id": "tk-cart",
       "module_id": "tk-cart-explain-1",
       "context_id": "module-tk-cart-explain-1",
-      "context_title": "Vollständig statt nur ähnlich",
+      "context_title": "Alles auf einen Blick",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2351,7 +2463,7 @@
       "page_id": "tk-cart",
       "module_id": "tk-cart-explain-2",
       "context_id": "module-tk-cart-explain-2",
-      "context_title": "Die aktuelle Zusammenfassung zählt",
+      "context_title": "Aktuelle Preise zählen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2395,7 +2507,7 @@
       "page_id": "tk-checkout",
       "module_id": "tk-checkout-explain-2",
       "context_id": "module-tk-checkout-explain-2",
-      "context_title": "Jeder Schritt braucht seinen eigenen Status",
+      "context_title": "Sicher bezahlen",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2417,7 +2529,7 @@
       "page_id": "tk-fitment",
       "module_id": "tk-fitment-explain-1",
       "context_id": "module-tk-fitment-explain-1",
-      "context_title": "Die Ausführung präzisieren",
+      "context_title": "Die vier Prüfpunkte",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2637,7 +2749,7 @@
       "page_id": "tk-shop",
       "module_id": "tk-shop-explain-1",
       "context_id": "module-tk-shop-explain-1",
-      "context_title": "Vom Bedarf zum konkreten Artikel",
+      "context_title": "Nach Einsatz sortiert",
       "film_id": null,
       "scene_ids": [],
       "assets": {
@@ -2699,6 +2811,94 @@
         "voice_and_character_approval_missing",
         "locale_audio_captions_transcript_review_missing",
         "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-shipping-payment",
+      "module_id": "tk-shipping-payment-explain-1",
+      "context_id": "module-tk-shipping-payment-explain-1",
+      "context_title": "Lieferländer",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-returns",
+      "module_id": "tk-returns-explain-1",
+      "context_id": "module-tk-returns-explain-1",
+      "context_title": "Ihr Widerrufsrecht",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-help",
+      "module_id": "tk-help-explain-1",
+      "context_id": "module-tk-help-explain-1",
+      "context_title": "Was kostet der Versand?",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "tk-battery-disposal",
+      "module_id": "tk-battery-disposal-explain-1",
+      "context_id": "module-tk-battery-disposal-explain-1",
+      "context_title": "Nicht in den Hausmüll",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
       ],
       "owner": "Root / authorized media owner"
     }

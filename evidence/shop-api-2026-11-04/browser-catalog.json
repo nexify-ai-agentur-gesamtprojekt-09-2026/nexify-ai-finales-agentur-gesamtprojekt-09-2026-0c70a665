@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T13:52:43.903Z",
+  "recorded_at": "2026-11-04T14:57:27.622Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -12,11 +12,13 @@
   "synthetic_data": true,
   "external_requests": [],
   "uncaught_errors": [],
-  "supplier_image_requests_blocked": 21,
+  "supplier_image_requests_blocked": 29,
   "scope": "Local real-browser catalogue run against the real shop-api adapter with synthetic in-memory data. Not production, supplier data, price approval or accessibility acceptance.",
   "checks": [
     "catalog_search_and_category_browse_de_nl_fr_from_live_shop_api",
     "product_detail_shows_server_price_stock_and_blocks_out_of_stock",
+    "trust_bar_and_card_facts_rendered_only_from_data_de_nl_fr",
+    "product_detail_mandatory_information_gpsr_disposal_and_fallbacks",
     "supplier_images_blocked_before_network_with_local_placeholder",
     "price_not_released_hides_price_and_server_refuses_add",
     "mobile_390_catalog_and_detail_without_horizontal_overflow",
@@ -111,6 +113,116 @@
     {
       "method": "GET",
       "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -321,18 +433,18 @@
   ],
   "source_sha256": {
     "apps/shop-api/vercel_app.py": "30d53d54d570d41ac6dc07c252520e93fa86e02c648775aedf18c2c850a60c20",
-    "apps/shop-api/shop/catalog_api.py": "4e3b7d7311e20e038beb2634938db8bfe574688033e6427416149428a7e27c7a",
+    "apps/shop-api/shop/catalog_api.py": "03c66d358103f9b9dec035750f8c4ea7d7692c0a68dc58beba899ac5833e6b98",
     "apps/shop-api/shop/pricing.py": "f627b7c37b5248f012e745f33a819f37dfe3d73c55479245cef3b39aa8c12da0",
-    "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
-    "apps/web/components/shop/CatalogView.tsx": "bf344205db3ebd32afb39a75662a615c942cff8ef63296d9cb1a61a3768ba290",
+    "apps/web/components/shop/PublicShopContent.tsx": "b0851c552c504122bd248df349b813e67d7fd339d592774580621c6913ead0e3",
+    "apps/web/components/shop/CatalogView.tsx": "7d7c7aaf88a2668ad8d47f81da2ed7379ca40b3222d8e620ee677721eb7f9bc0",
     "apps/web/components/shop/CategoryList.tsx": "8dff7dc31108e883b6ba6256d35d805c92723ccccddb50ec9927a1738654bf4a",
-    "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
-    "apps/web/components/shop/ProductDetail.tsx": "f79aea8ec82308f2f669e6ae4a773e2797744e9d8ca1907f85b218bd1d139393",
-    "apps/web/components/shop/api.ts": "7cee92ca1b9069ff47b63bcfc63da8b90e2aa56e18a7413744eb8eb0b1e9ee41",
-    "apps/web/components/shop/shop.css": "2f7ceccd2495078325ae2dd23f849e7e0f084bffd5994929f9153233130cdace",
-    "config/shop-interface-copy.json": "291d42d3c064526ee8c7929d5edb77c6420685739c9973d924ffc04d83247ccb",
+    "apps/web/components/shop/ProductCard.tsx": "594e6501f4dc4c7ee60a790ef08012b77724123d040ee3464df200840119f2aa",
+    "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
+    "apps/web/components/shop/api.ts": "8b1367a3208f0763ab63a23e4519df49425060afe52c13f7bbe8d772991e4048",
+    "apps/web/components/shop/shop.css": "82ef80fe13765659b1ff7c5c61286d5acb69cc3c839e17bd8cbff33ab8e9605d",
+    "config/shop-interface-copy.json": "07696b0b741d8651e0ec71f521bc4745da4b312813e20f5a5c5e7dec0c1d63ec",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
-    "apps/site/tests/browser-shop-api.mjs": "a0bdd5dd5d14686597ea98957e825567415f4e139e93cd64c185db662fedbf09",
-    "apps/site/tests/fixtures/shop_api_fixture.py": "a8b892eaf9c779a6291cc8c989591e85a728ce72749c5b7c46b112b2859f35b5"
+    "apps/site/tests/browser-shop-api.mjs": "2e3e0a9d745f9473a06e1651e50217e0d7b67bd47783dffd4a5c2551d2850766",
+    "apps/site/tests/fixtures/shop_api_fixture.py": "ee763f6d79165d3ea65ec1ebbd988a0b472a18826eb8262fb39df31684b71d40"
   }
 }

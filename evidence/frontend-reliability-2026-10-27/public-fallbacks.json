@@ -133,7 +133,7 @@
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
     "apps/web/components/PublicRequestFallback.tsx": "19c334e0ef95d106b0224f9bce757570558fc82f588fb2b01b71c6dfd35e83c7",
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
-    "apps/site/tests/browser-public-fallbacks.mjs": "07d024ce7efd308c92fc3136fdf85fec884dbdee80ed0c30d10beda040dcbb5c"
+    "apps/site/tests/browser-public-fallbacks.mjs": "efa766b4dee524435cb5294d906dcd0da6bae080bf14d9bd537bbfd0ef1dcbd9"
   },
   "external": [],
   "uncaught": [],
@@ -164,7 +164,11 @@
     "/teileklar/rechtliches",
     "/teileklar/shop",
     "/teileklar/reifenrechner",
-    "/teileklar/batterie-berater"
+    "/teileklar/batterie-berater",
+    "/teileklar/versand-und-zahlung",
+    "/teileklar/rueckgabe",
+    "/teileklar/hilfe",
+    "/teileklar/batterie-und-altgeraete"
   ],
   "passed": true
 }

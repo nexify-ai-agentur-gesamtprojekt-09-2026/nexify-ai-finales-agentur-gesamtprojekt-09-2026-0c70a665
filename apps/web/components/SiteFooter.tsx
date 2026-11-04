@@ -26,7 +26,7 @@ const legalCopy={
  en:{links:"Legal documents",shopLegal:"TEILEKLAR: provider information and privacy",shopNotice:"The legal information for TEILEKLAR is directly accessible. Complete provider details, privacy and consumer rights in the shop are still under review and approval.",imprint:"Legal notice",privacy:"Privacy",licenses:"Licenses",summary:"About the legal documents",notice:"The pages on provider information and privacy are directly accessible. Complete mandatory details and legal texts are still under review and approval.",licenseNotice:"Information on third-party components and their licenses is available under Licenses.",missingLicenses:"A public overview of third-party components and their licenses is not yet available."}
 };
 
-const LEGAL_IDS=new Set(["imprint","privacy","terms","ai-notice","accessibility","cookies","tk-legal","licenses"]);
+const LEGAL_IDS=new Set(["imprint","privacy","terms","ai-notice","accessibility","cookies","tk-legal","tk-shipping-payment","tk-returns","tk-battery-disposal","licenses"]);
 const isPlacePage=(page:PublicPage)=>page.id.startsWith("tk-city")||page.id.startsWith("tk-stadt")||page.path.startsWith("/teileklar/staedte")||page.path.startsWith("/teileklar/stadt/");
 
 export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:string;locale:Locale}){
@@ -41,9 +41,9 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
  const placePages=pages.filter(page=>page.site_context==="teileklar"&&isPlacePage(page));
  const groups=[
   {title:text.products,ids:site==="teileklar"?["tk-home","tk-search","tk-fitment","tk-appointments","tk-partner","tk-workshop"]:["nex2fly","one","api","tk-home","tk-partner"]},
-  {title:text.orientation,ids:site==="teileklar"?["tk-categories","tk-vouchers","tk-cart"]:["websites","automation","apps-portals","solutions","pricing"]},
+  {title:text.orientation,ids:site==="teileklar"?["tk-categories","tk-vouchers","tk-cart","tk-help","tk-returns"]:["websites","automation","apps-portals","solutions","pricing"]},
   {title:text.company,ids:["company","contact","login","signup"]},
-  {title:text.legal,ids:site==="teileklar"?["tk-legal","ai-notice","accessibility","cookies"]:["imprint","privacy","terms","ai-notice","accessibility","cookies"]}
+  {title:text.legal,ids:site==="teileklar"?["tk-legal","tk-shipping-payment","tk-battery-disposal","ai-notice","accessibility","cookies"]:["imprint","privacy","terms","ai-notice","accessibility","cookies"]}
  ];
  // Seitenübersicht: alle Seiten des Bereichs, thematisch gebündelt (kompakte Spalten statt Endlosliste)
  const sitePages=pages.filter(page=>page.site_context===site);

@@ -74,7 +74,9 @@ try{
      const alert=shop.locator('[data-testid="'+testid+'"]');await alert.waitFor();assert.equal(await alert.innerText(),shopCopy[locale][key]);assert.ok(catalogReads>reads);
      assert.equal(await shop.locator(unconfigured?'[data-testid="catalog-error"]':'[data-testid="catalog-unconfigured"]').count(),0);
      assert.equal(await shop.locator('[data-testid="catalog-results"], .tk-grid, [data-testid="catalog-empty"]').count(),0);
-     assert.deepEqual(await shop.locator('button').evaluateAll(b=>b.map(x=>x.dataset.testid)),['shop-search-submit']);
+     // Connection failure offers exactly one retry action; a missing setup offers none (workshop link instead).
+     assert.deepEqual(await shop.locator('button').evaluateAll(b=>b.map(x=>x.dataset.testid)),unconfigured?['shop-search-submit']:['shop-search-submit','catalog-retry']);
+     if(unconfigured)assert.equal(await shop.locator('[data-testid="catalog-unconfigured-workshop"]').getAttribute('href'),'/teileklar/werkstatt');
      assert.doesNotMatch(await shop.innerText(),/Warenkorb|winkelwagen|Beispielartikel|voorbeeldartikel/i);
     }
    }

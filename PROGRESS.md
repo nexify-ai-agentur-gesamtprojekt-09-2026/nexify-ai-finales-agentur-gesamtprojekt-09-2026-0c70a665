@@ -10,6 +10,8 @@ Abgeschlossen (Stand Abschluss dieser Sitzung): Clerk-Locale-Brücke gemäß D-0
 
 Shop-Gesamtkonzept (Nutzerziel 04.11.): `docs/shop/onlineshop-konzept-2026-11-04.md` – Positionierung als Auto-/Motorradzubehör (BigBuy-Teilbaum „Auto & Motorrad“, keine OE-Passung), Seitenarchitektur, Vertrauensarchitektur DE (PAngV-Grundpreis, GPSR, BattG/ElektroG, BFSG, Lieferzeit), visueller Erzählfaden „Eine Saison mit Ihrem Fahrzeug“ je Seite, Copy je Seite und Integration in bestehende Bausteine/Tokens. Konzept, keine Rechts-/Preisfreigabe; Inhaberentscheidungen in Abschnitt 4.6.
 
+Shop-Umsetzung (04.11., Fortsetzung): 15 TEILEKLAR-Seiten als Auto-/Motorradzubehör neu positioniert, 4 neue Infoseiten (Versand & Zahlung, Rückgabe, Hilfe, Batterie & Altgeräte; Rechtsbezug als Entwurf) → 43 öffentliche Seiten. Shop: TrustBar mit nur belegbaren Aussagen (Werkstattsuche statt unbelegtem „Werkstattnetz“), Produktkarte/-seite nach deutschem Standard (Grundpreis, Lieferzeit, GPSR, Entsorgung nur aus Daten), Kasse mit AGB/Widerruf/Lieferzeit im Prüfschritt, getrennte Katalogzustände mit Retry. Gezeichnete SVG-Bildgeschichte vom Inhaber verworfen und vollständig zurückgenommen; Bildgeschichte nur mit echter Fotografie/fotorealistischen Renderings (Konzept §2). Alle Browsernachweise neu erhoben (kritisch 8/8, Footer Vite+Next je 258, Fallbacks 18, Einwilligung 18, Next 86 Route×Sprache, Shop-API 8+10, Textvergrößerung 43 Routen); Next-Routenzahl im Checker aus site-map abgeleitet.
+
 ---
 
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026

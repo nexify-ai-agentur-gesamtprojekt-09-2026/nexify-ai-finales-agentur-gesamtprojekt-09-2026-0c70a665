@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class ResizeSourceBindingTest(unittest.TestCase):
     def test_current_report_has_exact_source_binding(self):
-        self.assertEqual(check_bound_resize(ROOT), 39)
+        self.assertEqual(check_bound_resize(ROOT), 43)
 
     def test_css_script_new_source_and_uncompleted_report_fail_closed(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -24,7 +24,7 @@ class ResizeSourceBindingTest(unittest.TestCase):
             report.parent.mkdir(parents=True)
             original = (ROOT / report.relative_to(root)).read_bytes()
             report.write_bytes(original)
-            self.assertEqual(check_bound_resize(root), 39)
+            self.assertEqual(check_bound_resize(root), 43)
             for relative in ('apps/web/components/WorkspaceRebuild.css', 'apps/web/app/globals.css', 'apps/web/public/fonts/geist-latin.woff2', 'apps/site/tests/browser-text-spacing.mjs'):
                 path = root / relative
                 before = path.read_bytes()
