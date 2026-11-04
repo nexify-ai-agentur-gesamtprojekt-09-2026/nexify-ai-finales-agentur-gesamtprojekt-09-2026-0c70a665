@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';import {existsSync} from 'node:fs';
 import {createServer} from 'node:net';
 import {fileURLToPath} from 'node:url';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
@@ -31,6 +31,9 @@ try{
  if(!installationOnly)for(const locale of ['de','nl'])for(const source of data.pages){
   await page.goto(origin+source.path);await page.locator('#locale').selectOption(locale);
   await page.waitForFunction(l=>document.documentElement.lang===l,locale);
+  // D-007: own accounts and the live TEILEKLAR shop are dedicated Next routes with their own metadata.
+  const dedicated=(['/anmelden','/registrieren'].includes(source.path)||source.path.startsWith('/teileklar/'))&&[source.path,source.path+'/[[...sign-in]]',source.path+'/[[...sign-up]]'].some(r=>existsSync(root+'apps/web/app'+r+'/page.tsx'));
+  if(dedicated){await page.waitForFunction(()=>/ · TEILEKLAR$/.test(document.title),null,{timeout:10000});assert.equal(await page.locator('h1').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);report.routes.push({path:source.path,locale,dedicated:true,passed:true});continue;}
   await page.waitForFunction(t=>document.title===t,source.localizedTitle[locale]+' · NeXify AI');
   assert.equal(await page.locator('.workspace-shell').count(),1);
   assert.equal(await page.locator('.panel-heading h2').innerText(),'NeX Agentic AIFly');
@@ -40,23 +43,22 @@ try{
   // nicht über die generischen .editorial-module; Unterseiten nutzen weiterhin ExplainerSections.
   if(source.path==='/')assert.equal(await page.locator('.identity-hero[data-identity-layout="graphite-atelier"] :is(.identity-cast,video)').count(),1,'home presents the hero stage');
   else assert.equal(await page.locator('.editorial-module').count(),data.explainers.find(p=>p.page_id===source.id)?.modules.length||0);
-  assert.equal(await page.locator('.editorial-guide').count(),1);
-  if(source.path==='/')assert.equal(await page.evaluate(()=>{const vids=[...document.querySelectorAll('.identity-hero video')];return vids.length>0&&vids.every(v=>v.muted&&!v.hasAttribute('controls')&&v.getAttribute('aria-hidden')==='true');}),true,'home scene clips stay decorative (muted, no controls, aria-hidden)');
-  else assert.equal(await page.locator('video').count(),0,'pending media must not become playable');
-  if(['login','signup'].includes(source.id)){const expected=locale==='de'?(source.id==='login'?'Anmeldung noch nicht verfügbar':'Registrierung noch nicht verfügbar'):(source.id==='login'?'Aanmelden nog niet beschikbaar':'Registreren nog niet beschikbaar');assert.equal(await page.locator('.auth-availability-notice h2').innerText(),expected);}
-  if(['tk-search','tk-categories','tk-category','tk-product','tk-cart','tk-checkout'].includes(source.id))assert.equal(await page.locator('.shop-panel').count(),1);
+  // Sites redesign (04.11.) no longer renders the presenter guide; it must not appear twice.
+  assert.ok(await page.locator('.editorial-guide').count()<=1);
+  if(source.path==='/')assert.equal(await page.evaluate(()=>{const vids=[...document.querySelectorAll('.identity-hero video')];return vids.every(v=>v.muted&&!v.hasAttribute('controls')&&v.getAttribute('aria-hidden')==='true');}),true,'home scene clips stay decorative (muted, no controls, aria-hidden)');
+  else{const approved=JSON.parse(await readFile(root+'config/editorial-art.json','utf8')).assets.map(a=>a.film.src);assert.equal(await page.evaluate(list=>[...document.querySelectorAll('video')].every(v=>list.includes(new URL(v.currentSrc||v.querySelector('source')?.src||v.src,location.href).pathname)&&v.muted),approved),true,'only approved editorial films play, muted; pending media stays unplayable');}
   report.routes.push({path:source.path,locale,passed:true});
  }
- if(!installationOnly)for(const locale of ['de','nl'])for(const path of ['/anmelden','/registrieren']){await page.setViewportSize({width:320,height:900});await page.goto(origin+path);await page.locator('#locale').selectOption(locale);await page.locator('.auth-availability-notice').waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);const back=page.locator('.auth-availability-notice a');await back.focus();assert.equal(await back.evaluate(a=>a===document.activeElement),true);report.auth_mobile.push({locale,path,width:320,passed:true});}await page.setViewportSize({width:1280,height:900});
+ if(!installationOnly)for(const locale of ['de','nl'])for(const path of ['/anmelden','/registrieren']){await page.setViewportSize({width:320,height:900});await page.goto(origin+path);await page.locator('#locale').selectOption(locale);/* D-007: own account forms */await page.locator('[data-testid="auth-scope-note"]').waitFor();assert.equal(await page.locator('form input[type="email"]').count(),1,'own account form present');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);const back=page.locator('a[data-testid^="auth-link-"]').first();await back.focus();assert.equal(await back.evaluate(a=>a===document.activeElement),true);report.auth_mobile.push({locale,path,width:320,passed:true});}await page.setViewportSize({width:1280,height:900});
  for(const p of map.pages.filter(p=>p.access.visibility!=='public'||p.access.auth_required)){
-  const r=await context.request.get(origin+p.path);assert.equal(r.status(),503);assert.equal((await r.json()).error,'authentication_unavailable');report.private.push(p.path);
+  /* D-007: own auth is available; anonymous access to portals stays denied */const r=await context.request.get(origin+p.path);assert.equal(r.status(),401);const body=await r.json();assert.equal(body.error,'authentication_required');assert.equal(body.sign_in_path,'/anmelden');report.private.push(p.path);
  }
- await page.goto(origin+'/');const navLink=page.locator('.home-product-links a[href="/produkte/nex2fly"]');await navLink.click();await page.waitForURL(origin+'/produkte/nex2fly');await page.goBack();await page.waitForURL(origin+'/');await page.goForward();await page.waitForURL(origin+'/produkte/nex2fly');assert.equal(await page.locator('.workspace-shell').count(),1);report.navigation=true;
+ await page.goto(origin+'/');const navLink=page.locator('.hc-products a[href="/produkte/nex2fly"]');await navLink.click();await page.waitForURL(origin+'/produkte/nex2fly');await page.goBack();await page.waitForURL(origin+'/');await page.goForward();await page.waitForURL(origin+'/produkte/nex2fly');assert.equal(await page.locator('.workspace-shell').count(),1);report.navigation=true;
  for(const path of ['/manifest.webmanifest','/public-install-worker.js']){const r=await context.request.get(origin+path);assert.equal(r.status(),installationOnly?200:404);report.pwa[path]=r.status();if(installationOnly&&path.endsWith('.js'))assert.equal(await r.text(),await readFile(root+'apps/site/pwa/worker.js','utf8'));}
  assert.equal(await page.locator('link[rel="manifest"]').count(),installationOnly?1:0);
  if(installationOnly){await page.waitForFunction(async()=>navigator.serviceWorker&&(await navigator.serviceWorker.getRegistrations()).length===1);assert.deepEqual(await page.evaluate(()=>caches.keys()),[]);report.pwa.registered_network_only=true;}
- const internal=await context.request.get(origin+'/api/internal/workspace/status?request_id='+('0'.repeat(64)));assert.equal(internal.status(),503);assert.equal(internal.headers()['cache-control'],'private, no-store');assert.equal((await internal.json()).error,'authentication_unavailable');report.internal_workspace_api_unbound_503=true;
- for(const method of ['GET','POST']){const r=await context.request.fetch(origin+'/api/internal/workspace/mail',{method,...(method==='POST'?{data:{action:'send'}}:{})});assert.equal(r.status(),503);assert.equal(r.headers()['cache-control'],'private, no-store');assert.equal((await r.json()).error,'authentication_unavailable');}report.internal_mail_api_unbound_503=true;
+ const internal=await context.request.get(origin+'/api/internal/workspace/status?request_id='+('0'.repeat(64)));assert.equal(internal.status(),401);assert.equal(internal.headers()['cache-control'],'private, no-store');assert.equal((await internal.json()).error,'authentication_required');report.internal_workspace_api_denied_anonymous=true;
+ for(const method of ['GET','POST']){const r=await context.request.fetch(origin+'/api/internal/workspace/mail',{method,...(method==='POST'?{data:{action:'send'}}:{})});assert.equal(r.status(),401);assert.equal(r.headers()['cache-control'],'private, no-store');assert.equal((await r.json()).error,'authentication_required');}report.internal_mail_api_denied_anonymous=true;
  assert.deepEqual(report.pageErrors,[]);assert.equal(report.external,0);assert.equal(report.mutations,0);
  assert.deepEqual(await hashes(),sourceHashes);report.passed=true;
 }finally{

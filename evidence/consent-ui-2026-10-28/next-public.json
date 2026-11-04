@@ -109,11 +109,13 @@
     {
       "path": "/anmelden",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
       "path": "/registrieren",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -124,11 +126,13 @@
     {
       "path": "/teileklar/suche",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
       "path": "/teileklar/kategorien",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -144,11 +148,13 @@
     {
       "path": "/teileklar/warenkorb",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
       "path": "/teileklar/kasse",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -174,6 +180,7 @@
     {
       "path": "/teileklar/werkstatt",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -184,6 +191,7 @@
     {
       "path": "/teileklar/shop",
       "locale": "de",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -304,11 +312,13 @@
     {
       "path": "/anmelden",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
       "path": "/registrieren",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -319,11 +329,13 @@
     {
       "path": "/teileklar/suche",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
       "path": "/teileklar/kategorien",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -339,11 +351,13 @@
     {
       "path": "/teileklar/warenkorb",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
       "path": "/teileklar/kasse",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -369,6 +383,7 @@
     {
       "path": "/teileklar/werkstatt",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -379,6 +394,7 @@
     {
       "path": "/teileklar/shop",
       "locale": "nl",
+      "dedicated": true,
       "passed": true
     },
     {
@@ -413,21 +429,21 @@
   },
   "navigation": true,
   "source_sha256": {
-    "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
+    "apps/web/proxy.ts": "c837e4ec5fd33fbc65be99d277c58677a8f1746b952ea812af95d52a1ecaf6ba",
     "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/api/internal/workspace/mail/route.ts": "e8a5b7abf16d44d628cf730bcd0b70d471116584659ac0545f5416d2a44a3df2",
-    "apps/web/app/intern/workspace/page.tsx": "f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe",
+    "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
     "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
-    "apps/web/components/LocaleAwareClerk.tsx": "fbeac57131d8673aeb6bb6d52217badea628fa41de9eec0670121c93b86df074",
-    "apps/web/auth/public-provider.ts": "53baf718ddbe346f9d7401b17d6a204c791fc8050e026e529b499a430a8da551",
-    "apps/web/app/layout.tsx": "96f1f1ac331a805497c4729ee1717d23cb97d36ffc8039b8cfe1ebc44ad8d5a5",
-    "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "0ff3c2115db8c53003090683a8389e715cbd61225003b0d7d79c95d39523b772",
-    "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "15fbf55b0ae3a154a8036a8d777ec420c92e7fe4fb246f4892b270256ba57e8a",
-    "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
+    "apps/web/components/LocaleAwareClerk.tsx": "f93aececbd2f8bc5d6c9c3f82504b5d42753f819ad92e919f14505deb9284e45",
+    "apps/web/auth/public-provider.ts": "4cef8d6d2669dafd616475a0e786bdd84bdf253154afa79a18d6a82250a4ca04",
+    "apps/web/app/layout.tsx": "7497ff5dcc44ceee523231a20f134f7de3cf0d6d0ab287866376bcd7bb152cf5",
+    "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "0536dcc25c6a03085cb344162127115f6d9d2a40aacecd6592a235819f11c5fc",
+    "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "d1647612cdc49dd071e89f1916092d83e2c7e60366917e6e5d29d5e73dbb245c",
+    "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
-    "apps/web/components/SiteFooter.tsx": "0f33920bb9adac5c2af872f78f6599c54a8b683d74c2965b678dc067a6ca6b46",
-    "apps/web/auth/tests/browser-public-experience.mjs": "2f05bb0e19114812d72237c7a92a836bd27fdab84dcaa7b7ede6d4be984a932f"
+    "apps/web/components/SiteFooter.tsx": "f6814e05a912dbed5515c5fc95d5a2f1612ccc8c7bd35d5f309e3aab8095f462",
+    "apps/web/auth/tests/browser-public-experience.mjs": "193749095c611c401da1b4d6eab98fc0afbb72effe8967b368d90362a49923ff"
   },
   "auth_mobile": [
     {
@@ -457,11 +473,11 @@
   ],
   "companion_avatar": {
     "aria_hidden": true,
-    "natural_width": 512,
+    "natural_width": 194,
     "location": "reopen-chat launcher",
     "passed": true
   },
-  "internal_workspace_api_unbound_503": true,
-  "internal_mail_api_unbound_503": true,
+  "internal_workspace_api_denied_anonymous": true,
+  "internal_mail_api_denied_anonymous": true,
   "passed": true
 }
