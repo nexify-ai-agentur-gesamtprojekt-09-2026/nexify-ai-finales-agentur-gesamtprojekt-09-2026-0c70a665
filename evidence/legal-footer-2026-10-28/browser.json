@@ -3349,7 +3349,7 @@
   ],
   "source_sha256": {
     "apps/web/components/SiteFooter.tsx": "5a89f12f0f4478c22cf5bed2798b4e6b0c23b5af8f3c1d80ad90e045e8d69092",
-    "apps/web/components/WorkspaceRebuild.css": "9afe83d040c1d2a7376eec8ecd7e794624ef526da8f3a2c588de2f872ba650fb",
+    "apps/web/components/WorkspaceRebuild.css": "75ab4c6f56c1d9ae815da35f536adcd75d001a21d567e981acc83389b24e6b2f",
     "config/site-map.json": "5ab18dae5e32fb4be82d86c6b87abd7c6ae87a59e864cce975698b7efbc1e19e",
     "apps/site/tests/browser-legal-footer.mjs": "446f68e43a7ff5700cdbd778ce39b7f1854be3eeb1aa514abc2c8b3d5f762363"
   },
