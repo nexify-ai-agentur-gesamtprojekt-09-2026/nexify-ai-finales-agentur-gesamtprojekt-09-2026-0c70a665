@@ -97,6 +97,12 @@
       }
     },
     {
+      "source": "/api/quotes/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
       "source": "/api/health",
       "destination": {
         "service": "shop"

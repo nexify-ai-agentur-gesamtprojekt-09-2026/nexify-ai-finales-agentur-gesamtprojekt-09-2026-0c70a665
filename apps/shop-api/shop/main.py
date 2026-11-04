@@ -12,7 +12,7 @@ from fastapi.responses import JSONResponse
 from . import auth, config
 from .db import db, ensure_indexes
 from . import mailer
-from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, requests_api, workshops_api
+from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, quotes_api, requests_api, workshops_api
 
 NEXT_API = ("/api/agent-chat", "/api/agent-runtime-status", "/api/internal")
 HOP = {"host", "content-length", "connection", "transfer-encoding", "keep-alive"}
@@ -54,16 +54,16 @@ app = FastAPI(title="TEILEKLAR Shop API", version="1.0", lifespan=lifespan, open
 @app.middleware("http")
 async def same_origin_writes(request: Request, call_next):
     origin = request.headers.get("origin")
-    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests"))
+    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests", "/api/quotes"))
     if writes and origin and origin.rstrip("/") != config.PUBLIC_ORIGIN and not request.url.path.startswith("/api/shop/webhooks/"):
         return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403)
     response = await call_next(request)
-    if request.url.path.startswith(("/api/shop", "/api/admin", "/api/auth", "/api/workshops", "/api/requests")):
+    if request.url.path.startswith(("/api/shop", "/api/admin", "/api/auth", "/api/workshops", "/api/requests", "/api/quotes")):
         response.headers.setdefault("Cache-Control", "no-store")
     return response
 
 
-for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api):
+for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api, quotes_api):
     app.include_router(module.router)
 
 

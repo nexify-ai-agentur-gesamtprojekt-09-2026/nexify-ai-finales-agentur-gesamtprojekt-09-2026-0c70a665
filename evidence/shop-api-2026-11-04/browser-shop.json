@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T16:48:33.846Z",
+  "recorded_at": "2026-11-04T17:17:27.704Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -382,7 +382,7 @@
     "mail_calls": []
   },
   "source_sha256": {
-    "apps/shop-api/vercel_app.py": "30d53d54d570d41ac6dc07c252520e93fa86e02c648775aedf18c2c850a60c20",
+    "apps/shop-api/vercel_app.py": "7a87981a5822f65a50b99927183c0535d9301452e31265a331d95af44553acce",
     "apps/shop-api/shop/cart_api.py": "0fd6c14ba0ce716c2101d9135ebe59f4aaed3ca081f2478674e927950027e42f",
     "apps/shop-api/shop/checkout_api.py": "abe8fc33b824eb6841b87bc2cad9f7a295fd7146bf31af7c1a6f2d5fdf8494b1",
     "apps/shop-api/shop/auth.py": "d1266f6a424861437301d86b92465decc50d3bfc684d6a4ec3cae5b18233cf3a",

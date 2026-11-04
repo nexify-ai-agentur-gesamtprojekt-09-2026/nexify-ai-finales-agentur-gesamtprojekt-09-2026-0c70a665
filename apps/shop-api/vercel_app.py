@@ -43,8 +43,8 @@ INDEXES = {
     "login_failures": [(("at",), False, 900)],
     "password_resets": [(("expires_at",), False, 0)],
 }
-PREFIXES = ("/api/shop", "/api/auth", "/api/admin", "/api/workshops", "/api/requests")
-MODULES = ("accounts_api", "catalog_api", "cart_api", "checkout_api", "workshops_api", "admin_api", "requests_api")
+PREFIXES = ("/api/shop", "/api/auth", "/api/admin", "/api/workshops", "/api/requests", "/api/quotes")
+MODULES = ("accounts_api", "catalog_api", "cart_api", "checkout_api", "workshops_api", "admin_api", "requests_api", "quotes_api")
 
 
 class BindingError(ValueError):
@@ -242,7 +242,7 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
         if error:
             return unavailable(error)
         # Preserve the existing same_origin_writes contract, including webhook exception.
-        writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests"))
+        writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests", "/api/quotes"))
         origin = request.headers.get("origin")
         if writes and origin and origin.rstrip("/") != binding.origin and not path.startswith("/api/shop/webhooks/"):
             return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403, headers={"Cache-Control": "no-store"})

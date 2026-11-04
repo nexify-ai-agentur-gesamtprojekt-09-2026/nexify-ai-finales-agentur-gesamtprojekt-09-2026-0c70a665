@@ -110,3 +110,19 @@ def internal_request(doc):
     rows = [("Vorgang", doc["number"]), ("Art", doc.get("kind", "contact")), ("Name", doc["name"]), ("E-Mail", doc["email"]), ("Firma", doc.get("company") or "–")]
     html = layout("Intern", "Neue Anfrage %s" % doc["number"], table(rows) + para(escape(doc["message"]).replace("\n", "<br>")), "Neue Anfrage", brand="NeXify AI")
     return ("Partneranfrage " if doc.get("kind") == "partner" else "Anfrage ") + doc["number"], html, "\n".join("%s: %s" % r for r in rows) + "\n\n" + doc["message"]
+
+
+QUOTE_NOTE = "Dies ist ein unverbindlicher Entwurf. Preise, Steuern, finaler Umfang und Zeitrahmen geben wir nach Prüfung frei; es entsteht keine Zahlungspflicht."
+
+
+def quote_draft(doc):
+    rows = [("Referenz", doc["id"]), ("Vorhaben", doc["title"]), ("Status", "Entwurf – Preis zur Freigabe")]
+    html = layout("Angebotsentwurf", doc["title"], para("Vielen Dank. Wir haben Ihren Angebotsentwurf erhalten und melden uns mit dem abgestimmten Angebot.")
+                  + table(rows) + para(escape(doc["details"]).replace("\n", "<br>")) + para(QUOTE_NOTE), "Ihr Angebotsentwurf", brand="NeXify AI")
+    return "Ihr Angebotsentwurf: %s" % doc["title"], html, "\n".join("%s: %s" % r for r in rows) + "\n\n" + doc["details"] + "\n\n" + QUOTE_NOTE + text_footer()
+
+
+def internal_quote(doc, recipient):
+    rows = [("Referenz", doc["id"]), ("Vorhaben", doc["title"]), ("Konto", recipient), ("Sprache", doc["locale"])]
+    html = layout("Intern", "Angebotsentwurf zur Preisfreigabe", table(rows) + para(escape(doc["details"]).replace("\n", "<br>")), "Neuer Angebotsentwurf", brand="NeXify AI")
+    return "Angebotsentwurf zur Freigabe: %s" % doc["title"], html, "\n".join("%s: %s" % r for r in rows) + "\n\n" + doc["details"]
