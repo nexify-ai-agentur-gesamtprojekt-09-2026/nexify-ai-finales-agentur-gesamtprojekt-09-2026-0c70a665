@@ -10,6 +10,25 @@ function liveEnv(): Record<string, string | undefined> {
 }
 
 const MAX_BYTES = 16 * 1024;
+/** Per-instance spend guard for the live path: daily budget from the gate plus a short per-client
+ * window. A platform rate-limit rule (Vercel Firewall) must back this before enabling the gate,
+ * because function instances do not share memory. */
+const CLIENT_WINDOW_MS = 10 * 60 * 1000;
+const CLIENT_WINDOW_MAX = 6;
+const usage = { day: '', count: 0, clients: new Map<string, number[]>() };
+function liveBudgetAllows(request: Request, dailyCap: number): boolean {
+  const now = Date.now();
+  const day = new Date(now).toISOString().slice(0, 10);
+  if (usage.day !== day) { usage.day = day; usage.count = 0; usage.clients.clear(); }
+  if (usage.count >= dailyCap) return false;
+  const client = (request.headers.get('x-forwarded-for') ?? '').split(',')[0].trim().slice(0, 64) || 'unknown';
+  const recent = (usage.clients.get(client) ?? []).filter(t => now - t < CLIENT_WINDOW_MS);
+  if (recent.length >= CLIENT_WINDOW_MAX) { usage.clients.set(client, recent); return false; }
+  recent.push(now); usage.clients.set(client, recent);
+  if (usage.clients.size > 5000) usage.clients.delete(usage.clients.keys().next().value as string);
+  usage.count += 1;
+  return true;
+}
 const BODY_DEADLINE_MS = 5000;
 const HEADERS = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
   'x-nexify-agent-mode': 'public_guided_preview', 'x-nexify-session': 'false', 'x-nexify-persistence': 'false' };
@@ -69,7 +88,7 @@ async function fetchHandler(request: Request): Promise<Response> {
     // pinned one. Setting those variables is the explicit funding release. The model stays
     // the policy pin (config/llm-policy.json); no secret is read into any response.
     const gate = managedLiveChatGate(liveEnv());
-    if (gate.enabled) {
+    if (gate.enabled && liveBudgetAllows(request, gate.dailyCap)) {
       let agent: ReturnType<typeof assembleManagedLiveChat>;
       try { agent = assembleManagedLiveChat({ routerUrl: gate.routerUrl, routerKey: gate.routerKey, fetch: globalThis.fetch }); }
       catch { throw new InputError('managed_live_chat_unavailable', 503); }

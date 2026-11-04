@@ -23,6 +23,9 @@ HOURLY_LIMIT = 10
 LOCALES = ("de", "nl", "fr", "en")
 DRAFT_STATE = "draft_price_review_required"
 QUOTE_ID = re.compile(r"[a-f0-9]{32}")
+# Stored in the provisioned `requests` collection (kind quote_draft): the shop namespace has a
+# fixed, validated collection set, so no new collection or index is introduced.
+KIND = "quote_draft"
 
 
 class QuoteIn(BaseModel):
@@ -82,7 +85,7 @@ def make_pdf(quote):
 async def own_quote(user, quote_id):
     if not QUOTE_ID.fullmatch(quote_id):
         raise HTTPException(404, {"error": "quote_not_found"})
-    doc = await db.quotes.find_one({"id": quote_id, "owner": user["user_id"]})
+    doc = await db.requests.find_one({"kind": KIND, "id": quote_id, "owner": user["user_id"]})
     if not doc:
         raise HTTPException(404, {"error": "quote_not_found"})
     return doc
@@ -103,24 +106,24 @@ async def create_quote(body: QuoteIn, request: Request, idempotency_key: str | N
     if not isinstance(idempotency_key, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", idempotency_key):
         raise HTTPException(400, {"error": "idempotency_key_required"})
     key = "quote:" + hashlib.sha256((user["user_id"] + ":" + idempotency_key).encode()).hexdigest()
-    existing = await db.quotes.find_one({"_id": key})
+    existing = await db.requests.find_one({"_id": key})
     if existing:
         if (existing["title"], existing["details"], existing["locale"]) != (title, details, body.locale):
             raise HTTPException(409, {"error": "idempotency_key_reused"})
         return public_quote(existing)
     since = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
-    if await db.quotes.count_documents({"owner": user["user_id"], "created_at": {"$gte": since}}) >= HOURLY_LIMIT:
+    if await db.requests.count_documents({"kind": KIND, "owner": user["user_id"], "created_at": {"$gte": since}}) >= HOURLY_LIMIT:
         raise HTTPException(429, {"error": "quote_rate_limited"})
-    doc = {"_id": key, "id": secrets.token_hex(16), "owner": user["user_id"], "title": title, "details": details,
+    doc = {"_id": key, "kind": KIND, "id": secrets.token_hex(16), "owner": user["user_id"], "title": title, "details": details,
            "locale": body.locale, "state": DRAFT_STATE, "created_at": now_iso()}
-    await db.quotes.insert_one(doc)
+    await db.requests.insert_one(doc)
     return public_quote(doc)
 
 
 @router.get("")
 async def list_quotes(request: Request):
     user = await require_user(request)
-    docs = await db.quotes.find({"owner": user["user_id"]}).sort("created_at", -1).to_list(20)
+    docs = await db.requests.find({"kind": KIND, "owner": user["user_id"]}).sort("created_at", -1).to_list(20)
     return {"items": [public_quote(doc) for doc in docs]}
 
 
@@ -141,7 +144,10 @@ async def send_quote(quote_id: str, request: Request):
     customer = await mailer.enqueue("quote-customer:" + doc["id"], user["email"], subject, html, text)
     subject, html, text = mail_templates.internal_quote(doc, user["email"])
     await mailer.enqueue("quote-internal:" + doc["id"], mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=user["email"])
-    if not doc.get("sent_at"):
-        doc["sent_at"] = now_iso()
-        await db.quotes.update_one({"_id": doc["_id"]}, {"$set": {"sent_at": doc["sent_at"]}})
-    return {"quote": public_quote(doc), "delivery": (customer or {}).get("status", "not_configured")}
+    delivery = (customer or {}).get("status", "not_configured")
+    # Only a confirmed provider hand-off counts as sent; queued, deferred or failed mail does not.
+    update = {"delivery_status": delivery}
+    if delivery == "gesendet" and not doc.get("sent_at"):
+        update["sent_at"] = doc["sent_at"] = now_iso()
+    await db.requests.update_one({"_id": doc["_id"]}, {"$set": update})
+    return {"quote": public_quote(doc), "delivery": delivery}

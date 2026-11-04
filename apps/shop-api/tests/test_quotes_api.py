@@ -63,7 +63,7 @@ class QuoteDraftTests(unittest.TestCase):
         mailer.enqueue = fake_enqueue
         self.addCleanup(setattr, mailer, "enqueue", original)
         async def seed():
-            for name in ("quotes", "users", "sessions"):
+            for name in ("requests", "users", "sessions"):
                 await database[name].delete_many({})
             await shop_db.ensure_indexes(database)
             for uid, mail, token in (("u-1", "kunde@example.invalid", "token-one"), ("u-2", "andere@example.invalid", "token-two")):
@@ -115,6 +115,15 @@ class QuoteDraftTests(unittest.TestCase):
         self.create(key="unittest-quote-key-0002", token="token-two")
         mine = self.client.get("/api/quotes", headers=self.auth()).json()["items"]
         self.assertEqual(len(mine), 1)
+
+    def test_failed_delivery_is_not_marked_as_sent(self):
+        async def failing(event_key, to, subject, html, text, reply_to=""):
+            return {"status": "fehlgeschlagen"}
+        mailer.enqueue = failing
+        quote = self.create().json()
+        response = self.client.post("/api/quotes/%s/send" % quote["id"], headers=self.auth())
+        self.assertEqual(response.json()["delivery"], "fehlgeschlagen")
+        self.assertIsNone(response.json()["quote"]["sent_at"])
 
     def test_send_goes_to_account_address_and_internal_inbox_once(self):
         quote = self.create().json()

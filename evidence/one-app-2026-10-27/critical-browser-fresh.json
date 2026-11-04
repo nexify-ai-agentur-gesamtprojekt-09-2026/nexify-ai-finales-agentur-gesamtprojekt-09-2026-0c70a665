@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T18:42:01.365Z",
+  "recorded_at": "2026-11-04T19:08:06.944Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -86,7 +86,7 @@
   "sdk_source_sha256": {
     "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
     "apps/web/components/PublicOrientationChat.css": "88fbb8fbb9629b8f0d173bf5889b27e82109cedd70a16499810b024d702b8c58",
-    "api/agent-chat.ts": "c592c2f2cb4f44f952377cf2c809b7fa5680ded6845d5b1a2bed4171f2d1bf5b",
+    "api/agent-chat.ts": "5698818acea3fb2d8df9eb6d926ef21e64de638587565a04cac0b072a3d3af2d",
     "packages/agent-runtime/public-orientation.ts": "1116d2a38435f0caf43f76b9a30bb07b732b7484cbcb110cfcee9fb31d507388",
     "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
   },
@@ -147,7 +147,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-04T18:42:01.365Z",
+    "recorded_at": "2026-11-04T19:08:06.944Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

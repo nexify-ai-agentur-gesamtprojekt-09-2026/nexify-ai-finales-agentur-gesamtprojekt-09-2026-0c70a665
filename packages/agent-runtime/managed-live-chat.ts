@@ -23,6 +23,9 @@ export const LIVE_CHAT_FLAG = 'NEXIFY_LIVE_CHAT';
 export const ROUTER_URL_VAR = 'NINEROUTER_URL';
 /** Managed 9router server key (server-only secret store; never NEXT_PUBLIC_, never logged). */
 export const ROUTER_KEY_VAR = 'ROUTER_KEY';
+/** Owner-set spend boundary: maximum live model requests per UTC day and per function instance.
+ * Without a positive integer the live path stays closed (no budget, no paid calls). */
+export const DAILY_CAP_VAR = 'NEXIFY_LIVE_CHAT_DAILY_CAP';
 /** The approved adapter is pinned to this inference endpoint; the managed 9router binding is a
  * separately authorised change. Until then the live path stays closed even if a URL is present. */
 export const PINNED_PROVIDER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
@@ -31,7 +34,7 @@ type Env = Record<string, string | undefined>;
 
 export type LiveChatGate =
   | { enabled: false; reason: string; missing: string[] }
-  | { enabled: true; routerUrl: string; routerKey: string };
+  | { enabled: true; routerUrl: string; routerKey: string; dailyCap: number };
 
 /** Pure, secret-safe gate. Returns which activation requirements are missing by NAME only;
  * it never echoes a value. Closed whenever the flag or any managed router variable is absent. */
@@ -42,8 +45,11 @@ export function managedLiveChatGate(env: Env): LiveChatGate {
   const routerKey = (env[ROUTER_KEY_VAR] ?? '').trim();
   if (!routerUrl) missing.push(ROUTER_URL_VAR);
   if (!routerKey) missing.push(ROUTER_KEY_VAR);
+  const capText = (env[DAILY_CAP_VAR] ?? '').trim();
+  const dailyCap = /^[1-9]\d{0,5}$/.test(capText) ? Number(capText) : 0;
+  if (!dailyCap) missing.push(DAILY_CAP_VAR);
   if (missing.length > 0) return { enabled: false, reason: 'managed_live_chat_fail_closed', missing };
-  return { enabled: true, routerUrl, routerKey };
+  return { enabled: true, routerUrl, routerKey, dailyCap };
 }
 
 /** Assemble the managed public-page agent by reusing the pinned adapter. Explicit server

@@ -4,12 +4,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { managedLiveChatGate, assembleManagedLiveChat, LIVE_CHAT_FLAG, ROUTER_URL_VAR,
-  ROUTER_KEY_VAR, PINNED_PROVIDER_ENDPOINT } from '../managed-live-chat.ts';
+  ROUTER_KEY_VAR, DAILY_CAP_VAR, PINNED_PROVIDER_ENDPOINT } from '../managed-live-chat.ts';
 
 test('gate is closed with empty environment and names every missing requirement', () => {
   const gate = managedLiveChatGate({});
   assert.equal(gate.enabled, false);
-  assert.deepEqual(gate.missing, [LIVE_CHAT_FLAG + '=enabled', ROUTER_URL_VAR, ROUTER_KEY_VAR]);
+  assert.deepEqual(gate.missing, [LIVE_CHAT_FLAG + '=enabled', ROUTER_URL_VAR, ROUTER_KEY_VAR, DAILY_CAP_VAR]);
 });
 
 test('gate stays closed when the flag is set but managed router config is missing', () => {
@@ -23,10 +23,13 @@ test('gate never treats OPENAI/EMERGENT keys as a managed fallback route', () =>
   assert.ok(!JSON.stringify(gate).includes('x') && !JSON.stringify(gate).includes('y'));
 });
 
-test('gate opens only when flag and both managed router variables are present', () => {
-  const gate = managedLiveChatGate({ [LIVE_CHAT_FLAG]: 'enabled',
-    [ROUTER_URL_VAR]: PINNED_PROVIDER_ENDPOINT, [ROUTER_KEY_VAR]: 'offline-dummy' });
+test('gate opens only with flag, both managed router variables and a positive daily budget', () => {
+  const base = { [LIVE_CHAT_FLAG]: 'enabled', [ROUTER_URL_VAR]: PINNED_PROVIDER_ENDPOINT, [ROUTER_KEY_VAR]: 'offline-dummy' };
+  assert.equal(managedLiveChatGate(base).enabled, false);
+  for (const bad of ['0', '-5', 'abc', '1.5', '9999999']) assert.equal(managedLiveChatGate({ ...base, [DAILY_CAP_VAR]: bad }).enabled, false);
+  const gate = managedLiveChatGate({ ...base, [DAILY_CAP_VAR]: '200' });
   assert.equal(gate.enabled, true);
+  assert.equal(gate.dailyCap, 200);
 });
 
 test('assembly fails closed for a 9router URL that is not the authorised pinned binding', () => {
