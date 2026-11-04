@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T19:08:06.944Z",
+  "recorded_at": "2026-11-04T19:33:03.963Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -57,10 +57,10 @@
   "source_sha256": {
     "apps/site/src/Auth.tsx": "7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
-    "apps/web/app/globals.css": "c4b3f0561a5d9e1786d516c6db04de4b9ed1e1053dfb5e721de6082a1d4c0bfc",
-    "apps/web/components/HomeContent.tsx": "fdc261786e503db20bbe15130df60206c498627bafd7d991eda213bb0fdc68e2",
+    "apps/web/app/globals.css": "9302fb69427e1f6121285b117586ee2c2633f676923d2e3b61556acbe8dc224d",
+    "apps/web/components/HomeContent.tsx": "623446f51b7f00f2f090f951992bc8138970e7aae77dde96173f21dfce704dfb",
     "apps/web/components/Workspace.tsx": "41cbfd5625ced6698659063151a385c37464effa3b514868e40e9d8c36f7388c",
-    "apps/web/components/PublicContentLayout.css": "84dd3df6485bfda706ac9144a4458e23ea2ae64a51ae46c2545b8f940a830b96",
+    "apps/web/components/PublicContentLayout.css": "2f5b7b1d44f924c96f0f9a4ee72f39678c0290f376e9649fd702602b65f31782",
     "config/site-map.json": "5ab18dae5e32fb4be82d86c6b87abd7c6ae87a59e864cce975698b7efbc1e19e"
   },
   "auxiliary_source_sha256": {
@@ -74,8 +74,8 @@
     "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
     "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
-    "apps/web/components/WorkspaceRebuild.css": "9afe83d040c1d2a7376eec8ecd7e794624ef526da8f3a2c588de2f872ba650fb",
-    "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
+    "apps/web/components/WorkspaceRebuild.css": "75ab4c6f56c1d9ae815da35f536adcd75d001a21d567e981acc83389b24e6b2f",
+    "apps/web/components/HomeRebuild.css": "80462133f3dd010a884872f2166a55cc36a836409d3b342b2642f2927044d2f5",
     "apps/web/components/IdentityHero.tsx": "db7f4905d250796e2bb4f89fd238902b0fc59363ff824aa9baeea098378d50b0",
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
     "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
@@ -85,7 +85,7 @@
   },
   "sdk_source_sha256": {
     "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
-    "apps/web/components/PublicOrientationChat.css": "88fbb8fbb9629b8f0d173bf5889b27e82109cedd70a16499810b024d702b8c58",
+    "apps/web/components/PublicOrientationChat.css": "f8aa5a1ee5f867652ef3abcc27fe9b29ebe6107c39109ebf92de8d26ab1b9db5",
     "api/agent-chat.ts": "5698818acea3fb2d8df9eb6d926ef21e64de638587565a04cac0b072a3d3af2d",
     "packages/agent-runtime/public-orientation.ts": "1116d2a38435f0caf43f76b9a30bb07b732b7484cbcb110cfcee9fb31d507388",
     "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
@@ -147,7 +147,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-04T19:08:06.944Z",
+    "recorded_at": "2026-11-04T19:33:03.963Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
