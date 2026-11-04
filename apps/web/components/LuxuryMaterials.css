@@ -159,6 +159,22 @@
 @container (max-width:900px) { .workspace-shell .content-layout .content-hero.has-domain-art { grid-template-columns:minmax(0,1fr); } }
 @container home (max-width:750px) { .workspace-shell .home-choice-links { grid-template-columns:minmax(0,1fr); gap:0; } }
 @container identity-hero (max-width:600px) { .workspace-shell .identity-cast { aspect-ratio:5/6; } .workspace-shell .identity-cast .cast-pascal { width:66%; height:100%; left:47%; } .workspace-shell .identity-cast .cast-nex { width:46%; height:46%; } .workspace-shell .identity-cast .cast-oracle { width:29%; height:30%; top:25%; } }
+/* Editorial still · presenter motion (Artifact „NeXify Home Hero“, 04.11.2026).
+   One entrance glide, then a calm idle loop and a soft glass sheen.
+   Applies only to the still fallback; it is not the required hero film. */
+@keyframes cast-enter-pascal{from{opacity:0;transform:translateX(-50%) translate(28px,10px) scale(.962)}to{opacity:1;transform:translateX(-50%) translate(0,0) scale(1)}}
+@keyframes cast-idle-pascal{0%,100%{transform:translateX(-50%) translateY(0) scale(1)}50%{transform:translateX(-50%) translateY(-.7%) scale(1.012)}}
+@keyframes cast-enter-side{from{opacity:0;transform:translate(34px,12px) scale(.94)}to{opacity:1;transform:translate(0,0) scale(1)}}
+@keyframes cast-idle-nex{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2.4%) rotate(-1.1deg)}}
+@keyframes cast-idle-oracle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7%) rotate(1.3deg)}}
+@keyframes cast-sheen{0%{transform:translateX(-120%)}60%,100%{transform:translateX(220%)}}
+.workspace-shell .identity-cast .cast-pascal{animation:cast-enter-pascal 3.6s cubic-bezier(.16,.84,.26,1) both,cast-idle-pascal 7s 3.6s ease-in-out infinite;will-change:transform,opacity}
+.workspace-shell .identity-cast .cast-nex{animation:cast-enter-side 3.2s .22s cubic-bezier(.16,.84,.26,1) both,cast-idle-nex 5.4s 3.6s ease-in-out infinite;will-change:transform,opacity;transform-origin:50% 100%}
+.workspace-shell .identity-cast .cast-oracle{animation:cast-enter-side 3.4s .46s cubic-bezier(.16,.84,.26,1) both,cast-idle-oracle 5.8s 4s ease-in-out infinite;will-change:transform,opacity;transform-origin:50% 50%}
+.workspace-shell .identity-cast .cast-sheen{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;overflow:hidden}
+.workspace-shell .identity-cast .cast-sheen::before{content:"";position:absolute;top:-20%;bottom:-20%;width:40%;background:linear-gradient(105deg,transparent,color-mix(in srgb,var(--color-atelier-platinum) 10%,transparent) 50%,transparent);filter:blur(6px);transform:translateX(-120%);animation:cast-sheen 9s 4.2s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.workspace-shell .identity-cast :is(.cast-pascal,.cast-nex,.cast-oracle){animation:none;will-change:auto}.workspace-shell .identity-cast .cast-sheen::before{animation:none}.workspace-shell .identity-cast .cast-sheen{display:none}}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.workspace-shell .identity-cast .cast-sheen{display:none}}
 @media(max-width:640px) { .workspace-shell .editorial-module.has-image,.workspace-shell .editorial-module.has-image.media-on-right { grid-template-columns:minmax(0,1fr); } .workspace-shell .editorial-module.has-image .editorial-module-media { order:2; } .workspace-shell .presenter-scene img { height:220px; } .workspace-shell .presenter-scene.scene-aifly img { height:auto; width:150px; } }
 
 /* Motion campaign: generous film frames with a shared light temperature. */
