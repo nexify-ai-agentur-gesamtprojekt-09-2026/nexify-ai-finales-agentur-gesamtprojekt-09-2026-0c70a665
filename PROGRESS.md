@@ -14,6 +14,8 @@ Shop-Umsetzung (04.11., Fortsetzung): 15 TEILEKLAR-Seiten als Auto-/Motorradzube
 
 Bildquelle Shop (Inhaberentscheidung 04.11.): echte Produktfotos. ProductShowcase zeigt auf Shop/Kategorien/Kategorie/Suche 3–4 verfügbare Katalog-Packshots auf der Graphit-Bühne (verlinkt), sonst bleibt der freigegebene Film; Auswahlregel unit-getestet, Layout 1440/390 ohne Überlauf geprüft (Katalog lokal simuliert, echte Bilder erst mit Live-Katalog sichtbar). Dachzeile Shop von „Teile, Fahrzeug…“ auf „Zubehör, Service…“ korrigiert.
 
+Startseite Kapitel 0: ShopHomeTeaser nach „Produktwelt“ (Text + CTA + echte Packshots, ohne Katalog nur Text/CTA); Produkt-Bühne auch auf /teileklar. Offen beim Inhaber: BigBuy-Schlüssel (Katalog leer, D-008), juristische Prüfung der Rechtsbezug-Seiten/Kasse, Versandkosten/Lieferzeiten, echte Fotografie für szenische Motive.
+
 ---
 
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026

@@ -178,7 +178,12 @@
     "orderWorkshopTitle": "Montage gewünscht?",
     "orderWorkshopBody": "Finden Sie eine Werkstatt in Ihrer Nähe für Einbau und Prüfung.",
     "showcaseLabel": "Aus dem Sortiment",
-    "showcaseCaption": "Echte Produktfotos aus dem aktuellen Sortiment"
+    "showcaseCaption": "Echte Produktfotos aus dem aktuellen Sortiment",
+    "teaserKicker": "TEILEKLAR · Zubehör für Auto & Motorrad",
+    "teaserTitle": "Zubehör, das im Alltag überzeugt.",
+    "teaserBody": "Pflege, Elektronik, Sicherheit und Werkzeug: mit vollständigen Angaben, Endpreisen inklusive Mehrwertsteuer und einer Werkstattsuche, wenn es mehr als Zubehör braucht.",
+    "teaserCta": "Sortiment entdecken",
+    "teaserWorkshop": "Werkstatt in Ihrer Nähe finden"
   },
   "nl": {
     "imageError": "De leveranciersafbeelding kon niet worden geladen",
@@ -359,7 +364,12 @@
     "orderWorkshopTitle": "Montage gewenst?",
     "orderWorkshopBody": "Zoek een werkplaats bij u in de buurt voor montage en controle.",
     "showcaseLabel": "Uit het assortiment",
-    "showcaseCaption": "Echte productfoto’s uit het actuele assortiment"
+    "showcaseCaption": "Echte productfoto’s uit het actuele assortiment",
+    "teaserKicker": "TEILEKLAR · Accessoires voor auto & motor",
+    "teaserTitle": "Accessoires die zich in de praktijk bewijzen.",
+    "teaserBody": "Onderhoud, elektronica, veiligheid en gereedschap: met volledige gegevens, eindprijzen inclusief btw en een werkplaatszoeker als het om meer dan accessoires gaat.",
+    "teaserCta": "Assortiment ontdekken",
+    "teaserWorkshop": "Werkplaats in de buurt vinden"
   },
   "fr": {
     "imageError": "Impossible de charger l’image du fournisseur",
@@ -540,7 +550,12 @@
     "orderWorkshopTitle": "Besoin d'un montage ?",
     "orderWorkshopBody": "Trouvez un atelier près de chez vous pour le montage et le contrôle.",
     "showcaseLabel": "Extrait de l’assortiment",
-    "showcaseCaption": "Photos réelles de produits de l’assortiment actuel"
+    "showcaseCaption": "Photos réelles de produits de l’assortiment actuel",
+    "teaserKicker": "TEILEKLAR · Accessoires auto & moto",
+    "teaserTitle": "Des accessoires qui font leurs preuves au quotidien.",
+    "teaserBody": "Entretien, électronique, sécurité et outillage : informations complètes, prix TTC et recherche d’atelier lorsque l’accessoire ne suffit pas.",
+    "teaserCta": "Découvrir l’assortiment",
+    "teaserWorkshop": "Trouver un atelier à proximité"
   },
   "en": {
     "imageError": "The supplier image could not be loaded",
@@ -721,6 +736,11 @@
     "orderWorkshopTitle": "Need it fitted?",
     "orderWorkshopBody": "Find a workshop near you for fitting and inspection.",
     "showcaseLabel": "From the range",
-    "showcaseCaption": "Real product photos from the current range"
+    "showcaseCaption": "Real product photos from the current range",
+    "teaserKicker": "TEILEKLAR · Accessories for car & motorcycle",
+    "teaserTitle": "Accessories that prove themselves every day.",
+    "teaserBody": "Care, electronics, safety and tools: with complete details, final prices including VAT and a workshop finder when you need more than an accessory.",
+    "teaserCta": "Explore the range",
+    "teaserWorkshop": "Find a workshop near you"
   }
 }

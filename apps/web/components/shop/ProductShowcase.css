@@ -9,3 +9,11 @@
 @media(prefers-reduced-motion:reduce){.tk-showcase-item{transition:none}.tk-showcase-item:hover{transform:none}}
 .tk-showcase .tk-image{aspect-ratio:4/3;padding:var(--space-2)}
 @container (max-width:820px){.tk-showcase .tk-image{aspect-ratio:1/1}}
+/* Home Kapitel 0: text left, real packshots right; stacks on narrow containers. */
+.tk-home-teaser{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-7);align-items:center}
+.tk-home-teaser-copy h2{margin:0 0 var(--space-4)}
+.tk-home-teaser-copy p{margin:0;max-width:52ch;color:var(--color-text-sekundaer)}
+.tk-home-teaser-actions{display:flex;flex-wrap:wrap;gap:var(--space-5);margin-top:var(--space-5)}
+.tk-home-teaser-actions .hc-text-link{min-height:var(--target-min);display:inline-flex;align-items:center}
+.tk-home-teaser:not(:has(.tk-showcase)){grid-template-columns:minmax(0,1fr)}
+@container home (max-width:820px){.tk-home-teaser{grid-template-columns:minmax(0,1fr);gap:var(--space-5)}}

@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T15:33:19.207Z",
+  "observed_at": "2026-11-04T15:44:33.740Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "51e6bf1fdd28440445ec04962df53e49ecafb92ba91c6588d07be0064f0f771b",
     "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
@@ -29,7 +29,7 @@
     "apps/web/components/DomainArtwork.tsx": "40cf9fd52c61bcf20aa140b520f925e7647906266a7cd4c273a4e55d52d85e13",
     "apps/web/components/ExplainerSections.tsx": "87f9a69de6af9cf18110587ac0ec744b14f284e1b74babb129092f459fd6bd45",
     "apps/web/components/HomeConcept.css": "5e397a0fa3dd415568ef80969599b7b159099bc3df53f869b20ee9c8074a8d52",
-    "apps/web/components/HomeContent.tsx": "9e000fea5f6b5e22514007d3cc8af7829f618cc670bf0e4fcc63cb35d5e91716",
+    "apps/web/components/HomeContent.tsx": "fdc261786e503db20bbe15130df60206c498627bafd7d991eda213bb0fdc68e2",
     "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
@@ -95,12 +95,13 @@
     "apps/web/components/shop/PhaseNotice.tsx": "114b4eb85cf300d9b32a02070813372b66c6a3bb8bea74e460ed51c193c4df10",
     "apps/web/components/shop/ProductCard.tsx": "594e6501f4dc4c7ee60a790ef08012b77724123d040ee3464df200840119f2aa",
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
-    "apps/web/components/shop/ProductShowcase.css": "5dc5d99f0e55742e474a447de98e3e490040b52a4525c72571622ac798ee5386",
-    "apps/web/components/shop/ProductShowcase.tsx": "975edcd28e97f4ec58f6622779c5d27488bbb8868ced399c587779250ff914f7",
+    "apps/web/components/shop/ProductShowcase.css": "475dcbe8338dcd86976dea47c867d0f6080c44d073e60ebbf2349ce3cc4024d7",
+    "apps/web/components/shop/ProductShowcase.tsx": "598c4a883361b88ca69af07f78408d224cf8e71ea456b3032272cd985fc57fa5",
     "apps/web/components/shop/PublicShopContent.tsx": "b0851c552c504122bd248df349b813e67d7fd339d592774580621c6913ead0e3",
     "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
     "apps/web/components/shop/ShopEntry.tsx": "db1ae4a0cd487bc0897a23efe7b1da6ca567cfcccfc046c2f4d7ec4bbbb7920a",
     "apps/web/components/shop/ShopFrame.tsx": "bd0c530dc292d3ea567ef2a555fc6a1f18de6aa5dbe355d2a08d4de3d3f08ad1",
+    "apps/web/components/shop/ShopHomeTeaser.tsx": "699c430813f8fd628ef32e6ca5809083204d62ae9b91621a9dba2e506417a84b",
     "apps/web/components/shop/TeileklarLegal.tsx": "8c934e1c938b951d6b4c7977e8095fad2c5560fc6c402a044b01f7d769c60e6f",
     "apps/web/components/shop/TrustBar.tsx": "cb62cb49c6df71906e5a771fefcd7ec39c88a01cb18ad6ac9b2f04fdcd1bbac6",
     "apps/web/components/shop/TyreCalculator.tsx": "108c82f5bdf0f903b0887bbb67b317baead5f6167e6fb3685ea53e2935b6ceaf",
@@ -153,7 +154,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 523,
+        "count": 532,
         "all_doubled": true
       },
       "overflow": false,
@@ -360,7 +361,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 468,
+        "count": 469,
         "all_doubled": true
       },
       "overflow": false,
@@ -452,7 +453,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 480,
+        "count": 479,
         "all_doubled": true
       },
       "overflow": false,

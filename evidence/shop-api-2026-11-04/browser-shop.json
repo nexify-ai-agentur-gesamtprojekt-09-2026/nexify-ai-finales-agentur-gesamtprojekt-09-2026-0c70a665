@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T15:33:17.260Z",
+  "recorded_at": "2026-11-04T15:44:31.449Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -395,7 +395,7 @@
     "apps/web/components/shop/AddressStep.tsx": "b253ee2b0b6e790a8c4dbb8c02f108f96fd9262393f5888de18c6e1fd33e142a",
     "apps/web/components/shop/api.ts": "8b1367a3208f0763ab63a23e4519df49425060afe52c13f7bbe8d772991e4048",
     "apps/web/components/shop/shop.css": "82ef80fe13765659b1ff7c5c61286d5acb69cc3c839e17bd8cbff33ab8e9605d",
-    "config/shop-interface-copy.json": "49f35c0bc293c6a0c6121ec61f305420f8dd74c886dfa6667bdbfd2bd0b781ae",
+    "config/shop-interface-copy.json": "1bdce9ddf6772f3f207a0104f471c4046796f4edd88c6de87e5ea60b97fa2fb9",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
     "apps/site/tests/browser-shop-api.mjs": "2e3e0a9d745f9473a06e1651e50217e0d7b67bd47783dffd4a5c2551d2850766",
     "apps/site/tests/fixtures/shop_api_fixture.py": "ee763f6d79165d3ea65ec1ebbd988a0b472a18826eb8262fb39df31684b71d40"

@@ -16,8 +16,8 @@ const img=n=>'https://cdnbigbuy.com/images/'+n+'.jpg';
 const item=(id,extra={})=>({id,name:'Artikel '+id,image:img(id),in_stock:true,...extra});
 
 test('showcase is limited to the TEILEKLAR catalogue pages',()=>{
- for(const id of ['tk-shop','tk-categories','tk-category','tk-search'])assert.equal(showcase.hasProductShowcase(id),true,id);
- for(const id of ['tk-home','tk-cart','tk-checkout','home','tk-workshop'])assert.equal(showcase.hasProductShowcase(id),false,id);
+ for(const id of ['tk-home','tk-shop','tk-categories','tk-category','tk-search'])assert.equal(showcase.hasProductShowcase(id),true,id);
+ for(const id of ['tk-cart','tk-checkout','home','tk-workshop'])assert.equal(showcase.hasProductShowcase(id),false,id);
 });
 
 test('only available products with a safe supplier image are shown, three to four of them',()=>{

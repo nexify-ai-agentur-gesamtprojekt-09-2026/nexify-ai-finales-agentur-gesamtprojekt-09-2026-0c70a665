@@ -8,7 +8,7 @@ import "./ProductShowcase.css";
 // Hero stage built only from real catalogue packshots (owner decision 04.11.2026).
 // Without at least MIN_ITEMS available products with a safe supplier image the
 // approved fallback (editorial film) stays; nothing is drawn or invented.
-const SHOWCASE_PAGES = new Set(["tk-shop", "tk-categories", "tk-category", "tk-search"]);
+const SHOWCASE_PAGES = new Set(["tk-home", "tk-shop", "tk-categories", "tk-category", "tk-search"]);
 const MIN_ITEMS = 3, MAX_ITEMS = 4;
 export const hasProductShowcase = (pageId: string) => SHOWCASE_PAGES.has(pageId);
 
