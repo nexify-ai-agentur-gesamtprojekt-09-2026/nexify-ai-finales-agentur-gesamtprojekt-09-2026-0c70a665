@@ -60,5 +60,17 @@
     "source": "config/integrations/vercel-agent-setup.json",
     "current_settings_evidence": "evidence/one-app-2026-10-27/deployment-parent-report.json",
     "current_root_build_output_production_branch_verified": false
+  },
+  "working_authority": {
+    "decision_date": "2026-11-04",
+    "source": "explicit_current_user_instruction",
+    "provider": "sites",
+    "project_id": "appgprj_6ae7ad63df2081918a843f996caf9422",
+    "url": "https://nexify-ai-factory-20261101.workspace-vo-0220.chatgpt.site/",
+    "baseline_commit": "0bbce305fb7e11233a7824d5b509e8f9e49e5ea7",
+    "scope": "leading_website_source_design_and_migration_target",
+    "runtime_cutover_performed": false,
+    "existing_external_runtime_preserved": true,
+    "reference": "docs/contracts/migration-2026-11-04.md"
   }
 }

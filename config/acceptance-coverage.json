@@ -1223,7 +1223,7 @@
     }
   ],
   "source_sha256": {
-    "AGENTS.md": "a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138",
+    "AGENTS.md": "c149f6d9fa2048bd5b3d889cfa34b9810f35e9038c1707d996855f6e8ea4f870",
     "PROGRESS.md": "b5ecd23576ba0a186658e2f87ad6b7f776d5222e9ad6a8a54a750c884bcbb844",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
@@ -1255,13 +1255,13 @@
     "config/brain/agents.json": "062336475b7436f2f68307df66efc8008e26bde949d5f0508fbfa9746249d5c5",
     "config/capacity-policy.json": "b2624c739f7d3f52200d080eca6572fe54612244b3af7ce08270fb6a4ca5a836",
     "config/clerk-production.json": "828ba5cc15da5535b850757e72500d1a53a28e320d66f544afe688b79341685e",
-    "config/deployment-topology.json": "2c3eea0647623e74330a64be9475d3cfe26e0e2cd4c49c4188a58a6586936d9a",
+    "config/deployment-topology.json": "5a1d30a37c0badffa8a7ee72ecd9c4b5312c0ada8dc5efd80a941f665b9a62c4",
     "config/design-rules.json": "8afcdc885e2953aaab273421b071e83d4a175095a215b629e23968453d0f4a02",
     "config/design-tokens.json": "f57aacebc6a82875593d9a9606fc680b9779835977eaf9207d6851170095430c",
     "config/fakten.json": "b24829ff9e964f327826df879709a1e1714e9f4af2c801f4002d1daa75a1c54c",
     "config/integrations/rea-mcp.json": "17a8fe0336945a9f3f632849db9c6f86565ddd5e44f5d1f74c339f8e3c8105d9",
     "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
-    "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
+    "config/one-web-app.json": "65b4d8f8e73da1dd32c977696d1c14124eb6192d4aa67a8a3be519191c637252",
     "config/operating-model.json": "cf06ea67d0ad29812541528b64724f6da456b1da59532003f5d410d0b7662845",
     "config/page-explainers.json": "626eb624a6631b0b9047ff92340e0c7a0d60c2dadb82d5e17b5623c8cfc8f67b",
     "config/presenter-system.json": "cd7728150d92891760ab3adfc236011c03401391ae490a2038e585cf63c27696",
@@ -4810,6 +4810,186 @@
           },
           "whole_system_accepted": false,
           "final_performance_video_accepted": false
+        }
+      },
+      "revision_20261104": {
+        "id": "GOAL-NEXIFY-COMPLETION-20261101-R20261104",
+        "source": "explicit_user_followups_2026-11-04",
+        "writer": "/root",
+        "reviewers": [
+          "/root/home_review",
+          "/root/migration_architecture",
+          "/root/requirements_audit",
+          "/root/migration_governance"
+        ],
+        "leading_site": {
+          "project_id": "appgprj_6ae7ad63df2081918a843f996caf9422",
+          "url": "https://nexify-ai-factory-20261101.workspace-vo-0220.chatgpt.site/",
+          "baseline_commit": "0bbce305fb7e11233a7824d5b509e8f9e49e5ea7"
+        },
+        "master_read": {
+          "library_file_id": "libfile_90f7e11290f88191b9ad96c7cd8e62b1",
+          "current_version_id": "12",
+          "total_lines": 18534,
+          "sections_read": [
+            [
+              1,
+              180
+            ],
+            [
+              933,
+              1097
+            ],
+            [
+              1199,
+              1378
+            ]
+          ],
+          "full_semantic_recovery_claimed": false,
+          "historical_master_v4_preserved": true
+        },
+        "current_user_decisions": [
+          "selected_Sites_website_leads",
+          "full_migration_under_existing_P01_P26",
+          "hero_requires_actual_video_not_still_substitute",
+          "three_glass_stills_below_hero",
+          "reuse_Higgsfield_assets_then_create_with_existing_subscription_balance",
+          "independent_audio_lipsync_and_visual_optimization"
+        ],
+        "work_packages": {
+          "P02": {
+            "state": "local_visual_delta_browser_subset_checked_not_whole_design_accepted"
+          },
+          "P03": {
+            "state": "two_misleading_copy_phrases_corrected_not_whole_content_accepted"
+          },
+          "P04": {
+            "state": "private_editorial_preview_prepared_original_directorial_acceptance_open",
+            "source_job": "7988b336-fa51-40c5-b77d-461eb406e1cb",
+            "edit_job": "2a06ccd2-7632-436d-b083-5721a50b1c81",
+            "new_performance_job": "c1cf2465-f1d0-4523-9255-0107bbb7a328",
+            "quoted_credits": 645,
+            "credits_before": 790,
+            "new_purchase": false,
+            "last_performance_job": "3ff0fa82-1718-466e-abe3-442b217afca2",
+            "credits_after_first_two_readback": 355,
+            "expected_remaining_credits": 145,
+            "credits_after_all_jobs_readback": 145,
+            "editorial_duration_seconds": 25.17,
+            "final_media_sha256": "4090b4d8efc9ffbc11857cb10cc327db69b3cc1a46bc615811ad16ef822815fb",
+            "source_30_second_film_accepted": false,
+            "public_release_accepted": false,
+            "human_audio_lipsync_identity_accepted": false
+          },
+          "P06_P15_P16": {
+            "state": "existing_code_mapped_no_verified_private_Sites_runtime"
+          },
+          "P23_P24": {
+            "state": "working_authority_recorded_no_runtime_cutover"
+          },
+          "P08_P09_P10": {
+            "state": "cart_recovery_candidate_preserved_not_active_runtime",
+            "candidate": "docs/migration-candidates/cart-merge-recovery-20261104.patch",
+            "candidate_tests_passed": 34,
+            "independent_review": "account_cookie_fix_applied; over_limit_resolution_and_legacy_checkout_quantity_conflicts_remain",
+            "live_mongo_http_acceptance": false
+          }
+        },
+        "verification": {
+          "site_tests": {
+            "passed": 118,
+            "failed": 0
+          },
+          "site_build": "default_excludes_review_media_and_flagged_private_build_matches_final_media_hashes",
+          "python_full": {
+            "tests": 697,
+            "failures": 79,
+            "errors": 52,
+            "skips": 14
+          },
+          "baseline_python": {
+            "tests": 697,
+            "failures": 80,
+            "errors": 52,
+            "skips": 14
+          },
+          "full_gate": "not_passed",
+          "independent_code_review": "completed_including_final_media_alpha_captions_hashes_audio_and_default_packaging_boundary",
+          "browser_css_widths": [
+            320,
+            390,
+            820,
+            1024,
+            1440,
+            1920
+          ],
+          "physical_device_or_full_A11y": "not_verified",
+          "browser_video_widths": [
+            320,
+            390,
+            820,
+            1024,
+            1440,
+            1920
+          ],
+          "browser_video_controls": [
+            "muted_autoplay_observed",
+            "explicit_voice_starts_at_zero_unmuted",
+            "pause",
+            "captions_hidden",
+            "volume_zero_mutes",
+            "voice_restart",
+            "visible_transcript"
+          ],
+          "browser_video_overflow": false
+        },
+        "runtime_probe": {
+          "systemmaster_host": "srv1243952",
+          "version": "0.1.8",
+          "checked_at": "2026-11-04T02:36:56.881Z",
+          "backup_metadata_generated_at": "2026-11-04T02:00:14Z",
+          "restore_test": "not_performed",
+          "two_plugins_same_host": true
+        },
+        "connector_boundary": {
+          "eligibility_fully_paginated": true,
+          "slack": "allowed",
+          "github_gmail_calendar_drive_linear_notion_brain_hostinger_higgsfield_posthog": "unknown",
+          "declarations_added": false,
+          "hosted_visitor_runtime": "not_verified"
+        },
+        "unchanged_boundaries": [
+          "no_DNS_cutover",
+          "no_database_migration",
+          "no_customer_data_ingestion",
+          "no_credentials_or_access_change",
+          "no_new_automation",
+          "no_external_messages",
+          "no_whole_system_acceptance"
+        ],
+        "details": "docs/contracts/migration-2026-11-04.md",
+        "media_requirements": "docs/production/hero-requirements-2026-11-04.md",
+        "whole_system_accepted": false,
+        "source_binding_updates": {
+          "date": "2026-11-04",
+          "reason": "Explicit leading Site decision, four existing locales and current shop source reconciled; independent governance readback completed. Historical runtime receipts preserved.",
+          "previous_source_commit": "0bbce305fb7e11233a7824d5b509e8f9e49e5ea7",
+          "scope": "documentation_and_declarative_contract_only",
+          "runtime_acceptance_granted": false,
+          "files": {
+            "AGENTS.md": {
+              "previous_sha256": "a02dfafdf88cf472905673f40c34d4771943e4813f651d691cb68be4cee57138",
+              "current_sha256": "c149f6d9fa2048bd5b3d889cfa34b9810f35e9038c1707d996855f6e8ea4f870"
+            },
+            "config/deployment-topology.json": {
+              "previous_sha256": "2c3eea0647623e74330a64be9475d3cfe26e0e2cd4c49c4188a58a6586936d9a",
+              "current_sha256": "5a1d30a37c0badffa8a7ee72ecd9c4b5312c0ada8dc5efd80a941f665b9a62c4"
+            },
+            "config/one-web-app.json": {
+              "previous_sha256": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
+              "current_sha256": "65b4d8f8e73da1dd32c977696d1c14124eb6192d4aa67a8a3be519191c637252"
+            }
+          }
         }
       }
     }

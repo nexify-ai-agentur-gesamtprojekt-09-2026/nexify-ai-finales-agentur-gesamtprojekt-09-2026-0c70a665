@@ -10,7 +10,8 @@
   "locales": [
     "de",
     "nl",
-    "fr"
+    "fr",
+    "en"
   ],
   "modules": {
     "agency": {
@@ -37,7 +38,9 @@
       "production_catalog_connected": false,
       "order_submission_enabled": false,
       "payment_enabled": false,
-      "authorization": "existing_guest_session_plus_object_capability; server_resolved_tenant; no_customer_role_grant"
+      "authorization": "existing_guest_session_plus_object_capability; server_resolved_tenant; no_customer_role_grant",
+      "current_backend_source": "apps/shop-api/shop",
+      "backend_source_note": "FastAPI/Mongo implementation exists; historical local fixture contract below is retained, not a production binding."
     }
   },
   "session_contract": {
@@ -62,5 +65,6 @@
     }
   },
   "canonical_production_domain": null,
-  "production_runtime_verified": false
+  "production_runtime_verified": false,
+  "leading_working_surface": "config/deployment-topology.json#working_authority"
 }

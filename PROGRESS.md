@@ -1,3 +1,21 @@
+# Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026
+
+Führend ist ausdrücklich `appgprj_6ae7ad63df2081918a843f996caf9422` / nexify-ai-factory-20261101. Ausgangscommit 0bbce305fb7e11233a7824d5b509e8f9e49e5ea7; diese Revision bleibt im vorhandenen Auftrag P01–P26. Details: docs/contracts/migration-2026-11-04.md und docs/production/hero-requirements-2026-11-04.md. Keine DNS-, Datenbank- oder produktive Fachruntimeumstellung.
+
+Auslieferungsumfang: echter nativer Hero als 25,17 s redaktioneller Schnitt mit gemeinsamem Ton/Bild, echtem Alpha, Original-Oracle-Compositing, acht Untertitelabschnitten und sichtbarem Transkript. Bedienelemente liegen unter dem Film; Tonstart, Pause, Lautstärke 0/Neustart und Untertitel im Browser geprüft. Endmaster −16,14 LUFS / −2,17 dBTP; Sprachbereich LRA 2,30 LU. Drei Glasbilder darunter bleiben. CTA-Kontrast und Forced-Colors-Fallbacks verbessert; zwei unzutreffende Textformulierungen korrigiert.
+
+Die Vorschau ist keine vollständige Regieabnahme: kontinuierliche 30 s, natürlicher NeX-Gang, Oracle-Performance statt Originalebene, Keykanten sowie menschliches Hören/Identitäts-/Phonem- und Geräteabnahme offen. production_accepted/lip_sync bleiben false. Reviewdateien liegen außerhalb von Next-Public, werden nur mit NEXIFY_OWNER_CINEMA_PREVIEW=1 paketiert und nur für die bestätigte eigentümerprivate Sites-Audience ausgeliefert; das Flag ist keine Authentifizierung. Native Sites-Veröffentlichungsbelege sind für den Auslieferungsstatus maßgeblich.
+
+Verifikation: offizieller Build, Default-Ausschluss und sechs identische Assethashes im privaten Paket; 118 Site-Tests und make check bestanden. Sechs CSS-Breiten 320–1920 plus DE/NL/FR/EN bei 320 ohne horizontalen Überlauf, Video und Toolbar enthalten. Unabhängiger Quell-/Medien-/Governance-Review. Gesamtgate weiterhin rot: 697 Tests, 79 Failures / 52 Errors / 14 Skips; historische Nachweise, fehlendes httpx/Pillow-/Toolchainabgleich offen. Node 24.22.1 / pnpm 11.25.0 weicht von deklarierter 22.23.4 / 12.15.0 ab. Keine Gesamtmigration-/Commerce-/Rechts-/Live-KI-Abnahme.
+
+Cart-Recovery als versionierter Kandidatenpatch mit 34 neuen Offlinefällen und 14 bestehenden Recoveryfällen erhalten; aus aktiver Runtime genommen. Unabhängiger Review fand ungelöste Mengenlimit-/Checkout-/Clientrevisiongrenzen; kein stiller Commerce-Livegang. Higgsfield: drei begrenzte Aufträge, 645 Credits; bestätigter Rest 145. Originale und frühere Fassungen erhalten.
+
+Nächste Schritte: ursprüngliche Regie- und menschliche Ton-/Identitätsabnahme schließen; echte Tenant-/Session-/API-/Store-, Worker-, Restore- und Releaseketten gemäß bestehendem Register herstellen. Keine Änderung von Gates oder nachträgliche Umdeutung alter QA-Belege.
+
+---
+
+## Erhaltene Vorstände
+
 # Aktuell · FACTORY-Markenausgabe · 02.11.2026
 
 Eigentümerprivate Sites-Fassung: vollständige neue Unternehmenssprache auf 39 öffentlichen Seiten, 81 Sektionen und DE/NL/FR/EN; Metadaten und 52 Textmodule folgen denselben Quellen. Drei Agenturfelder, klar gefasste Projektpakete und getrennte Produktwelten. NeX2fly-Zugang verweist zur FACTORY, kein behaupteter TEILEKLAR-Kontoverbund. AIFly ORACLE einheitlich benannt. Statische Website-Beratung nutzt nur die übergebene öffentliche Seitenprojektion; kein Modell, keine Serveranfrage, keine Geschäftsausführung.
