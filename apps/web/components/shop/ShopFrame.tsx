@@ -2,6 +2,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { SiteLink } from "../Router";
 import { api, CART_EVENT, type Cart } from "./api";
+import VehicleBar from "./VehicleBar";
 import "./shop.css";
 
 const NAV: [string, string][] = [["/teileklar/shop", "Shop"], ["/teileklar/kategorien", "Kategorien"], ["/teileklar/werkstatt", "Werkstattsuche"], ["/teileklar/bestellungen", "Bestellungen"]];
@@ -33,6 +34,7 @@ export default function ShopFrame({ title, kicker = "Shop", intro, crumbs = [], 
       <li><span aria-current="page">{title}</span></li>
     </ol></nav>
     <nav className="tk-shop-nav" aria-label="Shopbereiche" data-testid="shop-nav">{NAV.map(([href, label]) => <SiteLink key={href} href={href}>{label}</SiteLink>)}<CartLink /><AccountLink /></nav>
+    <VehicleBar />
     <header className="tk-shop-head"><span className="eyebrow">TEILEKLAR / {kicker}</span><h1 id={testId + "-title"}>{title}</h1>{intro && <p className="tk-intro">{intro}</p>}</header>
     {children}
   </section>;

@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T19:40:00.561Z",
+  "recorded_at": "2026-11-04T20:07:57.451Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -32,6 +32,36 @@
     },
     {
       "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
       "path": "/api/shop/products",
       "status": 200
     },
@@ -63,166 +93,6 @@
     {
       "method": "GET",
       "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/categories",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/categories",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/categories",
       "status": 200
     },
     {
@@ -267,6 +137,61 @@
     },
     {
       "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
       "path": "/api/shop/cart",
       "status": 200
     },
@@ -282,6 +207,111 @@
     },
     {
       "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
       "path": "/api/shop/products/{id}",
       "status": 200
     },
@@ -308,36 +338,6 @@
     {
       "method": "GET",
       "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -566,8 +566,8 @@
     "apps/web/components/shop/ProductCard.tsx": "594e6501f4dc4c7ee60a790ef08012b77724123d040ee3464df200840119f2aa",
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
     "apps/web/components/shop/api.ts": "8b1367a3208f0763ab63a23e4519df49425060afe52c13f7bbe8d772991e4048",
-    "apps/web/components/shop/shop.css": "ee6efe0e9c9cfbd429da668f8103aaac59034220e62e2c2d702a69175d616eb0",
-    "config/shop-interface-copy.json": "59958d45f9ff6909b4b890077ecee4856175d9536bc26160af9f3d899225c1f8",
+    "apps/web/components/shop/shop.css": "5b066ace33d9e4bada1145117d9cf955f63c787968e366ade32a2c5836031e17",
+    "config/shop-interface-copy.json": "5bfaf5b1243fb600fdfd78ef21ec1bc20409354f4b26347b051c4f51bed159a6",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
     "apps/site/tests/browser-shop-api.mjs": "2e3e0a9d745f9473a06e1651e50217e0d7b67bd47783dffd4a5c2551d2850766",
     "apps/site/tests/fixtures/shop_api_fixture.py": "ee763f6d79165d3ea65ec1ebbd988a0b472a18826eb8262fb39df31684b71d40"

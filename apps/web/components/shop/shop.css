@@ -243,3 +243,9 @@
 }
 .tk-review-lines li span:last-child{white-space:nowrap}
 .tk-review-delivery{margin:0;font-weight:600;color:var(--color-text-primaer)}
+
+/* Dauerhafte Fahrzeugauswahl am Kopf der TEILEKLAR-Fläche (Fahrzeug zuerst, deutscher Shop-Standard). Nur Tokens. */
+.tk-vehicle-bar{margin:var(--space-5) 0;padding:var(--space-5);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);background:color-mix(in srgb,var(--color-graphit-800) 70%,transparent)}
+.tk-vehicle-head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3) var(--space-4)}
+.tk-vehicle-current{flex:1 1 12ch;min-width:0;margin:0;font-weight:650;color:var(--color-text-primaer);overflow-wrap:break-word}
+.tk-vehicle-form{margin-top:var(--space-4);display:grid;gap:var(--space-4)}
