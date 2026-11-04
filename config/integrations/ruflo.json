@@ -34,8 +34,8 @@
   "boundaries": {
     "llm_calls": "keine eigenen Providerschlüssel; Agenten laufen über das Hostmodell von Claude Code. NeXify-managed LLM-Aufrufe bleiben an config/llm-policy.json gebunden.",
     "authority": "Ruflo-Skills und -Agenten sind Werkzeuge, keine Freigabe; AGENTS.md, Gates und Secret-/Mandantengrenzen haben Vorrang.",
-    "network": "npx lädt das gepinnte Paket aus npm; keine Telemetrie-/Cloudanbindung aktiviert (autoStart=false)."
+    "network": "npx lädt das gepinnte Paket aus npm, nur nach bewusster lokaler MCP-Aktivierung oder manuellem CLI-Aufruf; keine Telemetrie-/Cloudanbindung aktiviert."
   },
-  "update_procedure": "Neue Version: npm pack, Integrity/SHA256 prüfen, Probe-init in Wegwerf-Worktree, Diff reviewen, hier und in .mcp.json gleichzeitig anheben.",
+  "update_procedure": "Neue Version: npm pack, Integrity/SHA256 prüfen, Probe-init in Wegwerf-Worktree, Diff reviewen; Version hier (version, npm_integrity, tarball_sha256, depends_on), in config/integrations/ruflo.mcp.json und in docs/automation/ruflo.md gleichzeitig anheben.",
   "activation": "claude mcp add-json claude-flow \"$(python3 -c 'import json;print(json.dumps(json.load(open(\"config/integrations/ruflo.mcp.json\"))[\"mcpServers\"][\"claude-flow\"]))')\" --scope local"
 }
