@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-05T06:46:15.369Z",
+  "observed_at": "2026-11-05T09:59:42.320Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "b4932a8289a0b7cbd27a427dd9684b1ccb92353b7c8a7271ef2195aeb1fdc75b",
     "apps/site/index.html": "2a50356ec2744817e38095629eef8c931a108fbb6ce96f74d93822b1f8f98f52",
@@ -99,7 +99,7 @@
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
     "apps/web/components/shop/ProductShowcase.css": "475dcbe8338dcd86976dea47c867d0f6080c44d073e60ebbf2349ce3cc4024d7",
     "apps/web/components/shop/ProductShowcase.tsx": "e24d91cc1b86af2bb0fce36e4669efff6a8e58da685767359cdcbe7e1443c01b",
-    "apps/web/components/shop/PublicShopContent.tsx": "b0851c552c504122bd248df349b813e67d7fd339d592774580621c6913ead0e3",
+    "apps/web/components/shop/PublicShopContent.tsx": "52881f2190ff847d440e9a71217cbe19426e8480f7097fcd5768f97343b46d07",
     "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
     "apps/web/components/shop/ShopEntry.tsx": "db1ae4a0cd487bc0897a23efe7b1da6ca567cfcccfc046c2f4d7ec4bbbb7920a",
     "apps/web/components/shop/ShopFrame.tsx": "cbb7b67bdbe8e567298a4fbb52993e9bf548b6e4a64a7d23e0bbf07c1d556dbe",
@@ -709,7 +709,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 466,
+        "count": 482,
         "all_doubled": true
       },
       "overflow": false,
@@ -732,7 +732,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 467,
+        "count": 483,
         "all_doubled": true
       },
       "overflow": false,
@@ -755,7 +755,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 461,
+        "count": 477,
         "all_doubled": true
       },
       "overflow": false,
@@ -778,7 +778,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 469,
+        "count": 485,
         "all_doubled": true
       },
       "overflow": false,
@@ -801,7 +801,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 474,
+        "count": 490,
         "all_doubled": true
       },
       "overflow": false,
@@ -824,7 +824,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 517,
+        "count": 533,
         "all_doubled": true
       },
       "overflow": false,
@@ -939,7 +939,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 475,
+        "count": 491,
         "all_doubled": true
       },
       "overflow": false,
@@ -985,7 +985,7 @@
       "width": 1280,
       "text_resize_200": true,
       "resized": {
-        "count": 485,
+        "count": 501,
         "all_doubled": true
       },
       "overflow": false,

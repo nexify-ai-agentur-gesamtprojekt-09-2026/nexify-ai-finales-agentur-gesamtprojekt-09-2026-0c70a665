@@ -10,6 +10,7 @@ import Checkout from "./Checkout";
 import WorkshopFinder from "./WorkshopFinder";
 import WorkshopDetail from "./WorkshopDetail";
 import TrustBar from "./TrustBar";
+import VehicleBar from "./VehicleBar";
 import { api, CART_EVENT, type Cart } from "./api";
 import type { Locale } from "../../lib/i18n";
 import "./shop.css";
@@ -83,5 +84,5 @@ export default function PublicShopContent({ pageId, pathname, search }: { pageId
     case "workshop-detail": content = <WorkshopDetail id={route.id} />; break;
     default: return null;
   }
-  return <div className="tk-public-commerce">{content}<MobileCommerceNav pathname={pathname} /></div>;
+  return <div className="tk-public-commerce"><VehicleBar />{content}<MobileCommerceNav pathname={pathname} /></div>;
 }

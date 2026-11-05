@@ -115,6 +115,10 @@ try{
   await page.waitForURL(u=>new URL(u).searchParams.get('q')==='TEST-BRK');
   await page.locator('[data-testid="product-card-'+BRAKE+'"]').waitFor();assert.equal(await page.locator('.tk-grid > li').count(),1);
   await open(page,'/teileklar/suche?q=nicht-vorhanden-synthetic');await page.locator('[data-testid="catalog-empty"]').waitFor();
+  // Fahrzeug zuerst: the persistent vehicle bar leads every public TEILEKLAR commerce surface (shop + search), mirroring next-web ShopFrame.
+  await open(page,'/teileklar/shop');await page.locator('[data-testid="vehicle-bar"]').waitFor();
+  assert.equal(await page.locator('.tk-public-commerce > :first-child').getAttribute('data-testid'),'vehicle-bar','vehicle bar leads the public shop');
+  await open(page,'/teileklar/suche?q=TEST-BRK');await page.locator('[data-testid="vehicle-bar"]').waitFor();
   await open(page,'/teileklar/shop');await page.locator('[data-testid="category-link-990002"]').click();
   await page.waitForURL('**/teileklar/kategorie/990002');await page.locator('[data-testid="product-card-'+CLEANER+'"]').waitFor();
   assert.equal(await page.locator('.tk-grid > li').count(),1);

@@ -14,7 +14,7 @@ const apiModule=(()=>{const compiled=ts.transpileModule(readFileSync(new URL('ap
 function harness(filename,api=()=>Promise.reject(new Error('Unexpected API call'))){
  const state=[],effects=[],cleanups=[];let cursor=0,rendered;
  const react={useId:()=>':test-id:',useState(initial){const index=cursor++;if(!(index in state))state[index]=initial;return [state[index],value=>{state[index]=typeof value==='function'?value(state[index]):value;}];},useEffect(effect,deps){const index=cursor++,old=effects[index];if(!old||deps.some((x,i)=>x!==old.deps[i]))effects[index]={effect,deps,pending:true};}};
- const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed',catalogFailure:apiModule.catalogFailure},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./TrustBar':{__esModule:true,default:'trust-bar',TRUST_LINE:['trustWithdrawal','trustPayment','trustContact']},'./shop.css':{}};
+ const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed',catalogFailure:apiModule.catalogFailure},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./TrustBar':{__esModule:true,default:'trust-bar',TRUST_LINE:['trustWithdrawal','trustPayment','trustContact']},'./VehicleBar':{__esModule:true,default:'vehicle-bar'},'./shop.css':{}};
  const source=readFileSync(new URL(filename,componentRoot),'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
  const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,require(name){if(!(name in mocks))throw new Error('Unmocked import '+name);return mocks[name];},AbortController,URLSearchParams,console},{filename});
@@ -49,6 +49,20 @@ test('public renderer uses real catalogue, transactional and workshop components
  assert.ok(children(h.render({pageId:'tk-checkout',pathname:'/teileklar/kasse',search:''})).some(n=>n.type==='checkout'));
  assert.ok(children(h.render({pageId:'tk-workshop',pathname:'/teileklar/werkstatt',search:'?q=Köln'})).some(n=>n.type==='workshop-finder'));
  assert.match(text(h.render({pageId:'tk-product',pathname:'/teileklar/produkt',search:''})),/Artikelsuche/);
+});
+test('the persistent vehicle bar leads every public TEILEKLAR commerce surface (Fahrzeug zuerst)',()=>{
+ const h=harness('PublicShopContent.tsx');
+ const surfaces=[['tk-shop','/teileklar/shop',''],['tk-search','/teileklar/suche','?q=Bremsen'],['tk-categories','/teileklar/kategorien',''],['tk-category','/teileklar/kategorie/42',''],['tk-product','/teileklar/produkt/abc',''],['tk-cart','/teileklar/warenkorb',''],['tk-checkout','/teileklar/kasse',''],['tk-workshop','/teileklar/werkstatt','?q=Köln'],['tk-workshop','/teileklar/werkstatt/ws_42','']];
+ for(const [pageId,pathname,search] of surfaces){
+  const tree=h.render({pageId,pathname,search});
+  assert.ok(children(tree).some(n=>n.type==='vehicle-bar'),'vehicle bar present on '+pageId+' '+pathname);
+  // Fahrzeug zuerst: the vehicle bar is the first child of the commerce wrapper, ahead of the catalogue/detail content.
+  assert.equal(tree.props['data-testid']===undefined&&tree.props.className,'tk-public-commerce');
+  const kids=Array.isArray(tree.props.children)?tree.props.children:[tree.props.children];
+  assert.equal(kids[0]?.type,'vehicle-bar','vehicle bar is the leading element on '+pageId);
+ }
+ // Non-commerce pages render no commerce wrapper and therefore no vehicle bar.
+ assert.equal(h.render({pageId:'tk-partner',pathname:'/teileklar/partner',search:''}),null);
 });
 test('catalogue ignores old responses and aborts requests on query change/unmount',async()=>{
  const calls=[];const h=harness('CatalogView.tsx',(url,init)=>{const d=deferred();calls.push({url,init,...d});return d.promise;});

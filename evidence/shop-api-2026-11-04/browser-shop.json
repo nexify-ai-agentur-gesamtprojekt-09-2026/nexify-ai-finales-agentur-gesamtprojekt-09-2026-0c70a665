@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-05T07:49:23.298Z",
+  "recorded_at": "2026-11-05T09:57:14.077Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -12,7 +12,7 @@
   "synthetic_data": true,
   "external_requests": [],
   "uncaught_errors": [],
-  "supplier_image_requests_blocked": 29,
+  "supplier_image_requests_blocked": 31,
   "scope": "Local real-browser cart/checkout run against the real shop-api adapter with synthetic in-memory data. No order, payment, mail or provider call; not production or legal acceptance.",
   "checks": [
     "cart_add_update_remove_with_server_amounts_surviving_reload",
@@ -194,12 +194,12 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
+      "path": "/api/shop/products/{id}",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/api/shop/products/{id}",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -388,7 +388,7 @@
     "apps/shop-api/shop/auth.py": "d1266f6a424861437301d86b92465decc50d3bfc684d6a4ec3cae5b18233cf3a",
     "apps/shop-api/shop/pricing.py": "f627b7c37b5248f012e745f33a819f37dfe3d73c55479245cef3b39aa8c12da0",
     "apps/shop-api/shop/catalog_api.py": "03c66d358103f9b9dec035750f8c4ea7d7692c0a68dc58beba899ac5833e6b98",
-    "apps/web/components/shop/PublicShopContent.tsx": "b0851c552c504122bd248df349b813e67d7fd339d592774580621c6913ead0e3",
+    "apps/web/components/shop/PublicShopContent.tsx": "52881f2190ff847d440e9a71217cbe19426e8480f7097fcd5768f97343b46d07",
     "apps/web/components/shop/ProductDetail.tsx": "b5c56b34badd215510d43281f1117301341450a4977e6cb6017a450ff906c898",
     "apps/web/components/shop/CartView.tsx": "af127b66f56d9d3f1376f0b8cc3e87331feb273920a0678b3716e12a0bfa5c82",
     "apps/web/components/shop/Checkout.tsx": "5f83c6049baedf727e23bd76e7df131c4410417f2a26eb9dc3db26e8a9d128a6",
@@ -397,7 +397,7 @@
     "apps/web/components/shop/shop.css": "5b066ace33d9e4bada1145117d9cf955f63c787968e366ade32a2c5836031e17",
     "config/shop-interface-copy.json": "5bfaf5b1243fb600fdfd78ef21ec1bc20409354f4b26347b051c4f51bed159a6",
     "apps/site/src/main.tsx": "8ab3da195b03766ab70bc2cd3b6303bea708d0fe764541d5a275a03840c15a95",
-    "apps/site/tests/browser-shop-api.mjs": "2e3e0a9d745f9473a06e1651e50217e0d7b67bd47783dffd4a5c2551d2850766",
+    "apps/site/tests/browser-shop-api.mjs": "231e8fddb0bbbe1f633a3d4cb7c84b7081482e1df6df3acbbaafd5c456879f1a",
     "apps/site/tests/fixtures/shop_api_fixture.py": "ee763f6d79165d3ea65ec1ebbd988a0b472a18826eb8262fb39df31684b71d40"
   }
 }
