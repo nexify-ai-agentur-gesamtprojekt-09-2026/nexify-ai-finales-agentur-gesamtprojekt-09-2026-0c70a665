@@ -48,17 +48,27 @@ async def owner_for(request: Request, response: Response, create=True):
 
 
 async def merge(ident):
-    guest = await db.carts.find_one_and_delete({"owner": "guest:" + ident.guest_id})
+    # Commit the merged items into the user cart BEFORE removing the guest cart, so a failure or
+    # crash mid-merge never loses the guest items (the old order deleted the guest cart first).
+    # Re-applying the same guest cart is idempotent via a merge token, so a retry after a committed
+    # merge whose guest delete was lost does not add the quantities twice.
+    guest_owner = "guest:" + ident.guest_id
+    guest = await db.carts.find_one({"owner": guest_owner})
     if not guest or not guest.get("items"):
+        await db.carts.delete_one({"owner": guest_owner})
         return
-    cart = await db.carts.find_one({"owner": ident.owner}) or {"items": []}
-    items = {i["product_id"]: i for i in cart["items"]}
-    for item in guest["items"]:
-        if item["product_id"] in items:
-            items[item["product_id"]]["quantity"] = min(MAX_QTY, items[item["product_id"]]["quantity"] + item["quantity"])
-        else:
-            items[item["product_id"]] = item
-    await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": list(items.values()), "updated_at": now_iso()}, "$inc": {"rev": 1}}, upsert=True)
+    token = "%s#%d" % (guest_owner, guest.get("rev", 0))
+    cart = await db.carts.find_one({"owner": ident.owner}) or {"items": [], "merged_guests": []}
+    if token not in (cart.get("merged_guests") or []):
+        items = {i["product_id"]: i for i in cart["items"]}
+        for item in guest["items"]:
+            if item["product_id"] in items:
+                items[item["product_id"]]["quantity"] = min(MAX_QTY, items[item["product_id"]]["quantity"] + item["quantity"])
+            else:
+                items[item["product_id"]] = item
+        merged = (cart.get("merged_guests") or [])[-9:] + [token]
+        await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": list(items.values()), "updated_at": now_iso(), "merged_guests": merged}, "$inc": {"rev": 1}}, upsert=True)
+    await db.carts.delete_one({"owner": guest_owner})
 
 
 def delivery_days(product):
