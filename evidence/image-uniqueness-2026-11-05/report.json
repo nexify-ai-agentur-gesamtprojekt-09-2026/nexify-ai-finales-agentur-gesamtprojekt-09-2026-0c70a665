@@ -1,0 +1,844 @@
+{
+  "scope": "local build, public routes, 1440 px",
+  "routes": 43,
+  "bilder": 7,
+  "mehrfach": 7,
+  "baseline": 7,
+  "neu": 0,
+  "details": [
+    {
+      "datei": "/media/atelier/presenters/oracle-lossless.webp",
+      "seiten": 43,
+      "vorkommen": 114,
+      "fundorte": [
+        {
+          "route": "/",
+          "anzahl": 3,
+          "bereiche": [
+            "identity-cast",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/leistungen",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/leistungen/websites",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/leistungen/agenten-automatisierung",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/leistungen/apps-portale",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/leistungsumfang",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/loesungen",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/preise-ablauf",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/wissen",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/wissen/projekt-vorbereiten",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/unternehmen",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/kontakt",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/produkte/nex2fly",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/produkte/one",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/produkte/api",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/impressum",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/datenschutz",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/vertragsgrundlagen",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/ki-hinweise",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/barrierefreiheit",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/cookies",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/anmelden",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/registrieren",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/suche",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/kategorien",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/kategorie",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/produkt",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/warenkorb",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/kasse",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/fahrzeug-und-passung",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/termine",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/gutscheine",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/partner-werden",
+          "anzahl": 2,
+          "bereiche": [
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/werkstatt",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/rechtliches",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/shop",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/reifenrechner",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/batterie-berater",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/versand-und-zahlung",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/rueckgabe",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/hilfe",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        },
+        {
+          "route": "/teileklar/batterie-und-altgeraete",
+          "anzahl": 3,
+          "bereiche": [
+            "presenter-scene",
+            "seite",
+            "aifly-panel"
+          ]
+        }
+      ]
+    },
+    {
+      "datei": "/media/atelier/presenters/nex-lossless.webp",
+      "seiten": 17,
+      "vorkommen": 17,
+      "fundorte": [
+        {
+          "route": "/",
+          "anzahl": 1,
+          "bereiche": [
+            "identity-cast"
+          ]
+        },
+        {
+          "route": "/leistungen",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungen/websites",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungen/agenten-automatisierung",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungen/apps-portale",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungsumfang",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/produkte/nex2fly",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/produkte/one",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/produkte/api",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/anmelden",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/registrieren",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/kategorie",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/produkt",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/warenkorb",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/kasse",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/partner-werden",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/werkstatt",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        }
+      ]
+    },
+    {
+      "datei": "/media/atelier/presenters/pascal-zielbild.webp",
+      "seiten": 12,
+      "vorkommen": 12,
+      "fundorte": [
+        {
+          "route": "/",
+          "anzahl": 1,
+          "bereiche": [
+            "identity-cast"
+          ]
+        },
+        {
+          "route": "/leistungen",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungen/websites",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungen/apps-portale",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/leistungsumfang",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/preise-ablauf",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/unternehmen",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/kontakt",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/kasse",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/termine",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        },
+        {
+          "route": "/teileklar/partner-werden",
+          "anzahl": 1,
+          "bereiche": [
+            "presenter-scene"
+          ]
+        }
+      ]
+    },
+    {
+      "datei": "/media/studio/oracle-float.webp",
+      "seiten": 10,
+      "vorkommen": 10,
+      "fundorte": [
+        {
+          "route": "/leistungen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungen/agenten-automatisierung",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungen/apps-portale",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/loesungen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/wissen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/wissen/projekt-vorbereiten",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/unternehmen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/produkte/nex2fly",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/produkte/one",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/produkte/api",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        }
+      ]
+    },
+    {
+      "datei": "/media/studio/nex-stand.webp",
+      "seiten": 9,
+      "vorkommen": 9,
+      "fundorte": [
+        {
+          "route": "/leistungen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungen/websites",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungsumfang",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/loesungen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/unternehmen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/kontakt",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/produkte/nex2fly",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/produkte/one",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/produkte/api",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        }
+      ]
+    },
+    {
+      "datei": "/media/studio/pascal-walk.webp",
+      "seiten": 9,
+      "vorkommen": 9,
+      "fundorte": [
+        {
+          "route": "/leistungen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungen/websites",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungen/agenten-automatisierung",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungen/apps-portale",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/leistungsumfang",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/preise-ablauf",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/wissen/projekt-vorbereiten",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/unternehmen",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        },
+        {
+          "route": "/kontakt",
+          "anzahl": 1,
+          "bereiche": [
+            "studio"
+          ]
+        }
+      ]
+    },
+    {
+      "datei": "/media/atelier/home-glass-triptych-20261102.png",
+      "seiten": 1,
+      "vorkommen": 3,
+      "fundorte": [
+        {
+          "route": "/",
+          "anzahl": 3,
+          "bereiche": [
+            "hc-art"
+          ]
+        }
+      ]
+    }
+  ],
+  "neue_mehrfachbilder": [],
+  "source_sha256": {
+    "apps/site/tests/browser-image-uniqueness.mjs": "57e3344b318553ca14a12a1c48c6f54c816d94fd716a92bf9f0a015fb9528f92",
+    "config/image-uniqueness-baseline.json": "8cc81796295c7f03bd2444f307903c30daa2609a63b8044bfb7950d680164123",
+    "config/site-map.json": "5ab18dae5e32fb4be82d86c6b87abd7c6ae87a59e864cce975698b7efbc1e19e"
+  },
+  "passed": true
+}

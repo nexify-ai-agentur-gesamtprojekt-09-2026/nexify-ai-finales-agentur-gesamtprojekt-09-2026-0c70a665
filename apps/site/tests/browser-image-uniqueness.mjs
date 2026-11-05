@@ -3,8 +3,12 @@
 // CSS-Hintergrundbilder auf allen öffentlichen Routen und meldet jede Datei, die mehr als einmal erscheint.
 // Aufruf: LOCAL_ORIGIN=http://127.0.0.1:3017 node apps/site/tests/browser-image-uniqueness.mjs
 import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
 const root = new URL("../../../", import.meta.url).pathname;
+// Quellenbindung: das Gate-Skript, die Baseline und die Routenquelle, damit der Checker Veraltung erkennt.
+const BINDUNG = ["apps/site/tests/browser-image-uniqueness.mjs", "config/image-uniqueness-baseline.json", "config/site-map.json"];
+const quellHashes = Object.fromEntries(await Promise.all(BINDUNG.map(async (p) => [p, createHash("sha256").update(await readFile(root + p)).digest("hex")])));
 const origin = process.env.LOCAL_ORIGIN || "http://127.0.0.1:3017";
 const map = JSON.parse(await readFile(root + "config/site-map.json", "utf8"));
 const routes = map.pages.filter((p) => p.access.visibility === "public" && !p.access.auth_required).map((p) => p.path);
@@ -45,7 +49,7 @@ const neu = mehrfach.filter((m) => !baseline.includes(m.datei));
 const report = { scope: "local build, public routes, 1440 px", routes: routes.length, bilder: fundorte.size,
   mehrfach: mehrfach.length, baseline: baseline.length, neu: neu.length,
   details: mehrfach.sort((a, b) => b.vorkommen - a.vorkommen), neue_mehrfachbilder: neu.map((m) => m.datei),
-  passed: neu.length === 0 };
+  source_sha256: quellHashes, passed: neu.length === 0 };
 await mkdir(root + ".local/image-uniqueness", { recursive: true });
 await writeFile(root + ".local/image-uniqueness/report.json", JSON.stringify(report, null, 2) + "\n");
 console.log(`Routen ${report.routes} · verschiedene Bilder ${report.bilder} · mehrfach ${report.mehrfach} · Baseline ${report.baseline} · NEU ${report.neu}`);
