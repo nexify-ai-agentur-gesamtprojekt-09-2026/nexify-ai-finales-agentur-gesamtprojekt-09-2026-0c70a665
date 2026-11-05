@@ -26,10 +26,15 @@ PLANNED_NAMESPACE = "nexify_teileklar_shop_v1"
 SCHEMA_MARKER = f"nexify/teileklar/shop-v1/{PROJECT_ID}/{PLANNED_NAMESPACE}"
 CLAIM_COLLECTION = "source_manifests"
 CLAIM_DESCRIPTION = re.compile(re.escape(SCHEMA_MARKER) + r"/claim/[0-9a-f]{32}\Z")
+# Every collection the runtime touches MUST be declared here: check_metadata below
+# requires the live namespace to equal this set EXACTLY, so an undeclared collection
+# (e.g. the mailer's daily-cap store) created lazily at runtime would flip the probe
+# to namespace_schema_unbound and 503 every business route. mail_quota is the mailer's
+# per-day send counter (sibling of outbox) and is provisioned like any other.
 COLLECTIONS = (
     "products", "categories", "imports", "source_manifests", "carts", "orders",
     "webhook_events", "workshops", "workshop_requests", "users", "sessions",
-    "login_failures", "password_resets", "settings", "revolut_webhooks", "outbox", "requests", "price_releases",
+    "login_failures", "password_resets", "settings", "revolut_webhooks", "outbox", "mail_quota", "requests", "price_releases",
 )
 # Existing db.ensure_indexes + accounts_api.ensure_auth_indexes, not executed here.
 INDEXES = {

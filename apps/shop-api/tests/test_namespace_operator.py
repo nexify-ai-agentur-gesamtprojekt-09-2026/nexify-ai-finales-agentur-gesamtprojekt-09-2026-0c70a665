@@ -70,7 +70,7 @@ class OperatorTests(unittest.IsolatedAsyncioTestCase):
         db = EmptyDatabase()
         result = await OP.initialize(db, confirmed_plan_sha256=OP.plan_digest())
         self.assertEqual(result['state'],'new_schema_initialized')
-        self.assertEqual(result['created_collections'],18)
+        self.assertEqual(result['created_collections'],19)
         self.assertEqual(result['created_indexes'],17)
         self.assertEqual(db.ddl[0],('collection','source_manifests'))
         self.assertEqual(db.document_reads,0)

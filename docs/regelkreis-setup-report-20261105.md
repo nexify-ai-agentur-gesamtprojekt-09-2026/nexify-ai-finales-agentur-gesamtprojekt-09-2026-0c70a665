@@ -72,6 +72,19 @@ kein passives Warten** — der Loop setzt je eintreffender Owner-Zulieferung am 
   erzeugt, Reconciliation-Register nachgezogen. Self-Healing: drei durch die Quelländerung ausgelöste Evidence-Binding-
   Gates im Regelkreis automatisch nachgezogen (nicht blind rehash, sondern Nachweise real regeneriert). Gates grün:
   python unittest 748 OK, css-norm 0, regel-pruefung 38/38, image-uniqueness PASS. Teil von Task #12 (Pure-Frontend-Anteil).
+- **05.11. — `mail_quota` als deklarierte Namespace-Collection (Verfügbarkeits-Fix, PR #67):** Verifizierter
+  VADE-Befund (`mailer.py:78`, RECOMMENDATION FIX): die erste Tages-Kontingentreservierung legt per `upsert=True`
+  die Collection `mail_quota` an; `vercel_app.check_metadata` verlangt die Live-Collections jedoch EXAKT gleich
+  `COLLECTIONS` (Z. 112). `mail_quota` war — anders als ihr Mailer-Geschwister `outbox` — dort nicht deklariert,
+  sodass die erste versandte Mail den Readiness-Probe auf `namespace_schema_unbound` kippt und ALLE Shop-API-
+  Geschäftsrouten mit 503 sperrt. Gegen den echten Code bestätigt (nicht blind übernommen). Vertragskonform behoben:
+  `mail_quota` in `COLLECTIONS` (vercel_app.py) und im Provisioning-Plan (`services-namespace-plan-2026-10-31.json`)
+  aufgenommen → der `namespace_operator` legt sie mit SCHEMA_MARKER-Validator an, der Mailer-`upsert` schreibt in die
+  bereits validierte Collection ohne Optionsänderung, der Probe bleibt grün. Keine INDEXES nötig (`_id` = Tagesdatum).
+  Nachweis: test_namespace_operator (19 statt 18 Collections), test_vercel_adapter (zieht `mail_quota` dynamisch mit),
+  test_mailer_cap — alle grün im Venv; Self-Healing der stale gewordenen Bindings (acceptance-coverage source_sha256,
+  reale Shop-Browser-Evidence neu erzeugt: 8 Katalog- + 10 Shop-Checks PASS, reconciliation nachgezogen). `make check`
+  EXIT=0, python 748 OK, regel-pruefung 38/38, image-uniqueness PASS. Teil von Task #12 (Backend-Härtung).
 - **Grenze des session-exekutierbaren In-Repo-Scopes:** Binäre Prüfkette = 100 % grün. Offene Tasks #10 (Copy-Tiefe/
   KI-Muster — editorial, kein binäres Gate; jede Copy-Änderung kaskadiert den Evidence-Loop), #11/#15 (echte Bildserie —
   E2 owner-gated), #12-Rest (Katalog/Preise — E1/E3 owner-gated). AI-Coverage-Audit `blocked` ist advisory (exit 0) und

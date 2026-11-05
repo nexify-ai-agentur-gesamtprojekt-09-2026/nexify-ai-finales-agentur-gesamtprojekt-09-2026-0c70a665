@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-05T09:57:14.077Z",
+  "recorded_at": "2026-11-05T10:48:19.769Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -12,7 +12,7 @@
   "synthetic_data": true,
   "external_requests": [],
   "uncaught_errors": [],
-  "supplier_image_requests_blocked": 31,
+  "supplier_image_requests_blocked": 30,
   "scope": "Local real-browser catalogue run against the real shop-api adapter with synthetic in-memory data. Not production, supplier data, price approval or accessibility acceptance.",
   "checks": [
     "catalog_search_and_category_browse_de_nl_fr_from_live_shop_api",
@@ -177,12 +177,12 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
+      "path": "/api/shop/products",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/api/shop/products",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -592,7 +592,7 @@
     }
   ],
   "source_sha256": {
-    "apps/shop-api/vercel_app.py": "7a87981a5822f65a50b99927183c0535d9301452e31265a331d95af44553acce",
+    "apps/shop-api/vercel_app.py": "c2f00925f8feadf48ee4f8ccc0737c5988eb22b0619ff3e98ced5931a06c6313",
     "apps/shop-api/shop/catalog_api.py": "03c66d358103f9b9dec035750f8c4ea7d7692c0a68dc58beba899ac5833e6b98",
     "apps/shop-api/shop/pricing.py": "f627b7c37b5248f012e745f33a819f37dfe3d73c55479245cef3b39aa8c12da0",
     "apps/web/components/shop/PublicShopContent.tsx": "52881f2190ff847d440e9a71217cbe19426e8480f7097fcd5768f97343b46d07",

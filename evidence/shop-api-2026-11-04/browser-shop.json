@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-05T09:57:14.077Z",
+  "recorded_at": "2026-11-05T10:48:19.769Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -12,7 +12,7 @@
   "synthetic_data": true,
   "external_requests": [],
   "uncaught_errors": [],
-  "supplier_image_requests_blocked": 31,
+  "supplier_image_requests_blocked": 30,
   "scope": "Local real-browser cart/checkout run against the real shop-api adapter with synthetic in-memory data. No order, payment, mail or provider call; not production or legal acceptance.",
   "checks": [
     "cart_add_update_remove_with_server_amounts_surviving_reload",
@@ -382,7 +382,7 @@
     "mail_calls": []
   },
   "source_sha256": {
-    "apps/shop-api/vercel_app.py": "7a87981a5822f65a50b99927183c0535d9301452e31265a331d95af44553acce",
+    "apps/shop-api/vercel_app.py": "c2f00925f8feadf48ee4f8ccc0737c5988eb22b0619ff3e98ced5931a06c6313",
     "apps/shop-api/shop/cart_api.py": "38eb3d0a5ebdef3bd90e86efe637cf55382777b467f615a2e244ec5984463905",
     "apps/shop-api/shop/checkout_api.py": "abe8fc33b824eb6841b87bc2cad9f7a295fd7146bf31af7c1a6f2d5fdf8494b1",
     "apps/shop-api/shop/auth.py": "d1266f6a424861437301d86b92465decc50d3bfc684d6a4ec3cae5b18233cf3a",
