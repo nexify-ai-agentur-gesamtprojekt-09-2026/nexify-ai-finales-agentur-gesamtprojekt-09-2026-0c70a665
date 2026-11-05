@@ -1577,7 +1577,9 @@
     "apps/shop-api/tests/verify_vercel_bundle.cjs": "a249aa004128794c2592b1cdd6e1bfaef41b53b0f375e96444fa9c13c0bd8a14",
     "apps/shop-api/namespace_operator.py": "d2bcea09db8981f1c0cf4bac311c501cc044fb1857cdb540671028511c86fb59",
     "apps/shop-api/tests/test_namespace_operator.py": "6b0122f185f75bab7c8073c4af2326372001db03c1170330896b71cab1036790",
-    "docs/deployment/shop-namespace-operator-2026-10-31.md": "96024fcf10bf0b93fc59b34e4cdae3f00571cd35bd4da535716f3fcdb34e9c0e"
+    "docs/deployment/shop-namespace-operator-2026-10-31.md": "96024fcf10bf0b93fc59b34e4cdae3f00571cd35bd4da535716f3fcdb34e9c0e",
+    "apps/web/app/masterplan-tokens.css": "3b1192dc6482a062206b42f2b17a386e46c5329a2e7c33986cf1c038efaf7989",
+    "docs/design/design-system-authoritative-20261105.md": "a32c5464a3e6a58774a2b1965eabe733ac660f42fab9688a594bff340fc5c0b9"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -2185,6 +2187,14 @@
         "acquisition": "parent_verified_excerpt",
         "original_seen_here": false,
         "scope": "Default metadata-only preflight; later explicit empty namespace initialization; no execution in this task, no secrets transfer or provider claims"
+      },
+      {
+        "id": "SRC-AUTHORITATIVE-DESIGN-20261105",
+        "locator": "Chat-Upload 05.11.2026: NeXify_Startseite.html + NeXify_Komponenten.html; versioniert unter docs/design/authoritative-startseite-20261105/",
+        "role": "user_supplied_authoritative_design_system",
+        "acquisition": "user_supplied_original_read_and_measured_here",
+        "scope": "Maßgebliche Palette, Typografie, Radien und Komponenten-Grammatik; Entwurf, keine Rechts-/Preis-/Abnahmewirkung",
+        "original_seen_here": true
       }
     ],
     "requirements": [
@@ -3550,6 +3560,29 @@
         "next_step": "Root reviews exact candidate and runs only a separately controlled existing-project operator Previewbuild if appropriate; no default deployment bootstrap.",
         "completion_criterion": "Explicit operator report on verified project/store proves namespace metadata; any init is separately invoked and read back; real runtime/commerce tests remain required.",
         "owner_area": "release integration writer; Root controls actual runtime/store execution"
+      },
+      {
+        "requirement_id": "REC-DESIGN-AUTHORITATIVE-20261105",
+        "acceptance_case_id": "P02",
+        "source_ids": [
+          "SRC-AUTHORITATIVE-DESIGN-20261105",
+          "SRC-TOKENS-STRICT"
+        ],
+        "applicable_requirement": "Gemeinsame semantische Tokens und Komponenten-Grammatik systemweit aus dem maßgeblichen Designsystem (P02 Design).",
+        "interpretation": "authoritative design system uploaded by user 05.11.2026; draft, not claimed acceptance",
+        "implementation_files": [
+          "config/design-tokens.json",
+          "packages/tokens/tokens.css",
+          "apps/web/app/masterplan-tokens.css",
+          "docs/design/design-system-authoritative-20261105.md"
+        ],
+        "test_evidence": "Warme maßgebliche Palette systemweit (Laufzeit-Override + kanonische Basis-Tokens, GAP-TOKENBASE geschlossen); Champagner-Signatur-Token ergänzt; Alias-Vererbung verifiziert; Kontrast AAA; grün: css-norm, regel-pruefung 38/38, browser-evidence (kritischer Pfad), text-resize (129 Checks, 0 Overflow), observability vite+next, reconciliation --render; Python-Suite 714 Tests, 0 echte Fehler.",
+        "actual_delivery": "implemented_tokens_and_grammar_browser_and_suite_verified",
+        "full_requirement_accepted": false,
+        "gap": "Komponenten-Volladoption (Champagner Hero-/Link-/Tabellen-Akzente) und P02-Abnahme offen; Bildserie und Assetrechte Owner-gebunden.",
+        "next_step": "Restliche editoriale Champagner-Akzente faithful adoptieren; Owner-Review des warmen Stands; P02-Abnahme je Phase mit Nachweis.",
+        "completion_criterion": "exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review",
+        "owner_area": "Grafik/Brand und UX/Frontend"
       }
     ],
     "scope_note": "Initial sourced register awaiting further parent-read originals. Page policy and local files are not substitutes for missing original chat transcripts.",
