@@ -48,6 +48,8 @@ P01–P26 ABNAHME ◄── [E7 Owner-Gate: reconciliation-Validator untersagt a
 | E7 | Abnahme = Owner-Gate (Validator) | P01–P26 bleiben not_accepted | je Phase mit Nachweis abnehmen |
 | E8 | Claude-Design-`/p/`-Links (NeX2Fly Suite, Impressum/Datenschutz) liefern HTTP 403 — aus der Cloud-Session keine authentifizierte Route (verifiziert) | diese Design-Dateien nicht ingestierbar/steuerbar; Design-Governance läuft stattdessen über den Repo (Tokens/Gates/Komponenten/Einmaligkeit) | die `.dc.html` in den Chat hochladen (bewährte Route wie Startseite+Komponenten) ODER eine erreichbare Design-MCP/Export bereitstellen |
 
+| E9 | AI-Coverage-Audit meldet `audit_partial`: 9 registrierte AI-Quellen gedriftet (`requires_review`) + 4 unregistrierte Kandidaten. Vorbestehend (0 von dieser Sitzung geändert), advisory (nicht in `make check`/CI), Tool bewusst `automatic_hash_refresh:false` | AI-Governance-Register nicht aktuell; **kein** Blocker der grünen Prüfkette | Deliberate Per-Quelle-Review (AI-Verhalten/Policy-Konformität) + bewusste Re-Registrierung durch Owner/Review — **kein** Bulk-Auto-Refresh (wäre unreviewte Governance-Regression, CLAUDE.md-widrig) |
+
 **Design-Steuerung (Verantwortung übernommen):** Das maßgebliche Designsystem wird im Repo gesteuert und durchgesetzt —
 `docs/design/design-system-authoritative-20261105.md` (+ versionierte Startseite/Komponenten-Quellen), die Token-Ebene
 (`masterplan-tokens.css` + kanonische `design-tokens.json`), die Gates (css-norm, regel-pruefung) und das
