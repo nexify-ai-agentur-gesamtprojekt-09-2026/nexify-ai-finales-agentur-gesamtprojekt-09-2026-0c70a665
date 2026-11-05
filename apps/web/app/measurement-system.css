@@ -54,11 +54,12 @@
   --lh-body:    1.55;
   --lh-loose:   1.72;
 
-  /* ------------ Kontrast-Hinweise (verifiziert gegen Hintergrund #0d100f) ------------ */
-  --contrast-primary:   19.5;   /* #FFFFFF  → AAA */
-  --contrast-secondary: 11.2;   /* #C8CCC9  → AAA */
-  --contrast-tertiary:  6.3;    /* #9CA29E  → AA+ */
-  --contrast-accent:    14.8;   /* #D7FA50  → AAA */
+  /* ------------ Kontrast-Hinweise (maßgebliche warme Palette, verifiziert gegen Seitengrund #111312;
+     konservativ auf Fläche #191B1C bleiben alle Werte ≥ 7:1 / AAA) ------------ */
+  --contrast-primary:   16.3;   /* #F3F0EA  → AAA (Fläche 15.2) */
+  --contrast-secondary: 13.9;   /* #E2DFD8  → AAA (Fläche 13.0) */
+  --contrast-tertiary:  10.6;   /* #BDC5C9  → AAA (Fläche 9.9); gedämpft #B9BBBA 9.6/8.9 → AAA */
+  --contrast-accent:    13.7;   /* #C0EE38  → AAA (Fläche 12.8) */
 
   /* ------------ Elevation (Material 3 angelehnt, 0–5) ------------ */
   --el-0: none;
