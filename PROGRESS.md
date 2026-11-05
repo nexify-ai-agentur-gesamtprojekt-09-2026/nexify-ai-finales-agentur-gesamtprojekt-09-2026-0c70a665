@@ -29,6 +29,16 @@ Kette abgearbeitet; Owner/Remote-Punkte werden geführt, nicht als Stopp behande
   idempotenter Event-Insert), `verify_signature` (HMAC-SHA256, Replay-Fenster, konstant-zeitiger Vergleich).
   shop-api-Suite gewachsen auf 57 Tests, alle grün.
 
+**Gelernte Prüfdisziplin (Regelkreis, dauerhaft):**
+- Nach JEDER Änderung an `apps/shop-api/shop/*` die VOLLE Root-Suite (`python3 -m unittest discover -s tests`)
+  **und** `tools/check_browser_evidence.py` fahren — nicht nur die shop-api-Teil-Suite. Grund: shop-api-Browser-
+  Evidenz bindet Quelldateien (z. B. `cart_api.py`) per sha; eine Teil-Suite übersieht die Veraltung (so entstand
+  eine temporäre CI-Rotphase, behoben in abbd744).
+- Optionale Dependencies (`pymongo`/`mongomock-motor`, `numpy`/`Pillow`) sauber per `skipIf` abfangen, nie hart
+  erroren (afbc0d5). Bild-Tests sind an die **gepinnte Pillow 12.3.0 / NumPy 2.3.5** gebunden; ein ad-hoc-venv mit
+  ungepinntem Pillow 13 erzeugt FALSCHE Assertion-Fehler (Pixel-/Zeit-Limit-Codes) — kein Repo-Defekt. Kanonische
+  Prüfung bleibt `make test` (default python3, kompatible Versionen); CI installiert die gepinnten Dep-Sets.
+
 **Eingesammelt (nicht autonom hackbar — Design/Owner/Remote, geführt als Abhängigkeit):**
 - **G04** (P0, `accounts_api.py`): E-Mail-/Workspace-Verifizierung + Rollen-/Tenant-Bindung + einmaliger Trial mit
   Negativfällen = sicherheitssensible Feature-Leg; Trial-Finanzierung/Tenant-Modell owner-entscheidungsabhängig
