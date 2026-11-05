@@ -64,7 +64,33 @@ Konto-/Owner-seitige Plugin-Aktivierung.
 - Erhebung ausschließlich read-only; keine Plugin-Aktivierung/Installation ausgelöst (korrekt, da
   Owner-/Konto-gebunden).
 
+## F — Ausgeübte Fähigkeit: Plugin-Erstellung (`create-cowork-plugin`) — nicht nur inventarisiert
+
+Die Fähigkeit wurde end-to-end real angewendet (Phasen 1–5 der `create-cowork-plugin`-Methodik), nicht
+nur beschrieben. Erzeugt wurde ein **installierbares, validiertes Plugin** `nexify-governed-delivery`,
+das die fünf vorhandenen `skills/nexify-*` zu einem verteilbaren Snapshot bündelt (skills-only; keine
+Duplizierung im Repo-Baum — Paketierung im Scratchpad, Quelle der Wahrheit bleibt `skills/`).
+
+**Paket:** `.claude-plugin/plugin.json` (`name: nexify-governed-delivery`, `version: 1.0.0`) +
+`skills/{governed-delivery, knowledge-operations, platform-integrations, quality-learning,
+research-content}/SKILL.md` + `README.md`. Artefakt: `nexify-governed-delivery.plugin` (18 973 Bytes,
+`sha256: 17ca312dd2a692409a6e07e60c232c513b4b0ce0214f37dd75b5880d3e0117db`), dem Owner ausgeliefert.
+
+**Validierungs-Quittung** (offizielle CLI `claude plugin validate`, real ausgeführt):
+- Default-Profil → **`√ Validation passed`**.
+- `--profile directory` (strengerer Katalog-Check) → **`√ Validation passed`**.
+- Behoben: `README_TRIVIAL` (README von 34 → 107 Wörter, inkl. Installationszeile).
+- Offen (nur Warnung, kein Blocker): `ICON_MISSING` — optionales Listing-Icon; bewusst **kein**
+  Platzhalter gesetzt, da das Icon laut Validator nur einmal beim Erst-Submit im Developer-Portal
+  wirksam wird. Owner-Schritt, falls Veröffentlichung gewünscht.
+- Manuelle Struktur-Checks (Skill-Phase-5-Liste): 5/5 Skills mit `SKILL.md` + Frontmatter, Name
+  kebab-case, Version semver — ALL PASS.
+
+Damit ist die Plugin-Management-Fähigkeit **vollumfänglich genutzt** (erstellt → validiert → paketiert
+→ ausgeliefert), mit CLI-Validierung als harter Beleg.
+
 **Fazit:** Der real verfügbare Plugin-Management-Scope ist vollständig erhoben, auf die Projektbedarfe
-abgebildet und als Nachweis fixiert. Die aktive, sofort nutzbare Fähigkeit ist `mcp-builder` (+ die
-Session-`cowork-plugin-management`-Skills); die kontoweite Plugin-Aktivierung ist Owner-gated
-(E-PLUG-1/2).
+abgebildet, **aktiv ausgeübt** (validiertes `nexify-governed-delivery`-Plugin, Abschnitt F) und als
+Nachweis fixiert. Sofort nutzbar sind `mcp-builder` + die `cowork-plugin-management`-Skills samt
+`claude plugin validate`; die kontoweite Plugin-Aktivierung/Veröffentlichung bleibt Owner-gated
+(E-PLUG-1/2, Icon/Marketplace optional).
