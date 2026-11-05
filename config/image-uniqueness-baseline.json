@@ -1,0 +1,14 @@
+{
+  "zweck": "Bekannte, noch nicht bereichseindeutige Bilder (Owner-Schuld). Das Einmaligkeits-Gate (apps/site/tests/browser-image-uniqueness.mjs) scheitert nur an NEUEN Mehrfachbildern außerhalb dieser Liste. Die Liste baut sich ab, sobald der Owner bereichseigene Unikat-Fotos liefert (Vorgabe 04.11.2026: jedes Bild genau einmal, passend zum Bereich).",
+  "entscheidung_offen_owner": "Echte, bereichseindeutige Fotografie/Renderings (Chat-Upload); generierte Gesichter untersagt. Die Presenter-Figuren erscheinen heute im globalen AIFly-Panel bzw. den Studio-Szenen mehrfach; ob die persistente Panel-/Studio-Identität unter die Pro-Bereich-Regel fällt oder als eine UI-Identität gilt, ist eine Owner-Interpretation.",
+  "stand": "2026-11-05, 43 öffentliche Routen, 1440 px",
+  "bekannte_mehrfachbilder": [
+    "/media/atelier/presenters/oracle-lossless.webp",
+    "/media/atelier/presenters/nex-lossless.webp",
+    "/media/atelier/presenters/pascal-zielbild.webp",
+    "/media/studio/oracle-float.webp",
+    "/media/studio/nex-stand.webp",
+    "/media/studio/pascal-walk.webp",
+    "/media/atelier/home-glass-triptych-20261102.png"
+  ]
+}

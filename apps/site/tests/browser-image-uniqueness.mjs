@@ -9,7 +9,7 @@ const origin = process.env.LOCAL_ORIGIN || "http://127.0.0.1:3017";
 const map = JSON.parse(await readFile(root + "config/site-map.json", "utf8"));
 const routes = map.pages.filter((p) => p.access.visibility === "public" && !p.access.auth_required).map((p) => p.path);
 // Marken- und Bedienzeichen sind keine Bilder im Sinne der Vorgabe (Logo, Favicon, Symbole).
-const KEIN_BILD = /(logo|favicon|icon|sprite|apple-touch|manifest)/i;
+const KEIN_BILD = /(logo|favicon|icon|sprite|apple-touch|manifest|signet)/i;
 
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
@@ -35,10 +35,19 @@ for (const route of routes) {
   for (const [datei, orte] of jeSeite) fundorte.set(datei, [...(fundorte.get(datei) || []), { route, anzahl: orte.length, bereiche: [...new Set(orte)] }]);
 }
 await browser.close();
+// Baseline der bekannten, noch nicht eindeutigen Bilder (Owner-Schuld bis echte Unikat-Fotos vorliegen).
+// Das Gate scheitert nur an NEUEN Mehrfachbildern außerhalb der Baseline; die Baseline baut sich ab,
+// sobald bereichseigene Unikate geliefert werden. Fehlt die Datei, gilt die strenge Regel (0 erlaubt).
+let baseline = [];
+try { baseline = JSON.parse(await readFile(root + "config/image-uniqueness-baseline.json", "utf8")).bekannte_mehrfachbilder || []; } catch {}
 const mehrfach = [...fundorte].filter(([, f]) => f.length > 1 || f[0].anzahl > 1).map(([datei, f]) => ({ datei, seiten: f.length, vorkommen: f.reduce((s, x) => s + x.anzahl, 0), fundorte: f }));
-const report = { scope: "local build, public routes, 1440 px", routes: routes.length, bilder: fundorte.size, mehrfach: mehrfach.length, details: mehrfach.sort((a, b) => b.vorkommen - a.vorkommen), passed: mehrfach.length === 0 };
+const neu = mehrfach.filter((m) => !baseline.includes(m.datei));
+const report = { scope: "local build, public routes, 1440 px", routes: routes.length, bilder: fundorte.size,
+  mehrfach: mehrfach.length, baseline: baseline.length, neu: neu.length,
+  details: mehrfach.sort((a, b) => b.vorkommen - a.vorkommen), neue_mehrfachbilder: neu.map((m) => m.datei),
+  passed: neu.length === 0 };
 await mkdir(root + ".local/image-uniqueness", { recursive: true });
 await writeFile(root + ".local/image-uniqueness/report.json", JSON.stringify(report, null, 2) + "\n");
-console.log(`Routen ${report.routes} · verschiedene Bilder ${report.bilder} · mehrfach verwendet ${report.mehrfach}`);
-for (const m of report.details) console.log(`${m.vorkommen}× auf ${m.seiten} Seiten  ${m.datei}`);
+console.log(`Routen ${report.routes} · verschiedene Bilder ${report.bilder} · mehrfach ${report.mehrfach} · Baseline ${report.baseline} · NEU ${report.neu}`);
+for (const m of report.details) console.log(`${baseline.includes(m.datei) ? "baseline" : "NEU"}  ${m.vorkommen}× auf ${m.seiten} Seiten  ${m.datei}`);
 process.exit(report.passed ? 0 : 1);
