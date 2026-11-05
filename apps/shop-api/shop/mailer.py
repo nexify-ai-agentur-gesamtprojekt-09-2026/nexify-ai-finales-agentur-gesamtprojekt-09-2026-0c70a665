@@ -69,6 +69,11 @@ async def deliver(event_key):
     # below on a definite non-send (never on an unknown transport outcome).
     reserved = False
     if cap.isdigit():
+        # A cap of 0 is a full send-block, so reserve nothing and defer. The conditional upsert below
+        # would otherwise leak the day's first mail: with cap 0 the filter sent < 0 matches no document,
+        # and upsert=True then inserts {_id: today, sent: 1}, letting exactly one mail past the block.
+        if int(cap) == 0:
+            return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
         try:
             await db.mail_quota.find_one_and_update({"_id": today, "sent": {"$lt": int(cap)}}, {"$inc": {"sent": 1}}, upsert=True)
             reserved = True

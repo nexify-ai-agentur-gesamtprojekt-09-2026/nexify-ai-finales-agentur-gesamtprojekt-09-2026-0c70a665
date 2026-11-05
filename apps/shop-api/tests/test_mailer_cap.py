@@ -96,6 +96,30 @@ class MailerDailyCapTests(unittest.TestCase):
         self.assertIsNotNone(quota)
         self.assertEqual(quota["sent"], 2, "reserved slot count must equal the cap, no over-reservation")
 
+    def test_cap_zero_is_a_full_send_block(self):
+        """MAIL_DAILY_CAP=0 blocks every mail: none sent, all deferred, and no slot is reserved.
+
+        Regression for the upsert leak: with cap 0 the filter sent < 0 matches no document, so an
+        unconditional upsert would still insert {sent: 1} and let the day's first mail through."""
+        async def run():
+            await self._seed(2)
+            mailer.transport = self._ok_transport()
+            os.environ["MAIL_DAILY_CAP"] = "0"
+            try:
+                await asyncio.gather(*[mailer.deliver("evt-%d" % i) for i in range(2)])
+            finally:
+                os.environ["MAIL_DAILY_CAP"] = ENV["MAIL_DAILY_CAP"]
+        asyncio.run(run())
+        async def check():
+            sent = await self.db.outbox.count_documents({"status": "gesendet"})
+            deferred = await self.db.outbox.count_documents({"status": "zurückgestellt", "last_error": "daily_cap_reached"})
+            quota = await self.db.mail_quota.find_one({"_id": _today()})
+            return sent, deferred, quota
+        sent, deferred, quota = asyncio.run(check())
+        self.assertEqual(sent, 0, "a cap of 0 must block every mail, including the day's first")
+        self.assertEqual(deferred, 2, "all deliveries must defer under a full send-block")
+        self.assertTrue(quota is None or quota.get("sent", 0) == 0, "cap 0 must reserve no daily slot")
+
     def test_provider_error_releases_reserved_slot(self):
         """A provider rejection releases the slot so a later success still fits under the cap."""
         async def run():
