@@ -66,6 +66,7 @@ Geprüfte Ausgangsbasis: 079057f518bd6e75b65b21b3dc0c85ebec395cf3. Vollständige
 - SRC-IDENTITY-HERO-ACCEPTED-20261028: user_design_decision_reported_by_parent_not_original_transcript_read; Datum 2026-10-28; parent_verified_excerpt; parent-reported explicit user acceptance 2026-10-28;Identity Library libfile_f9eab909ef9c81918fd6eaa5e958a543 version1 SHA87cce3dcfee53bc6573efe1ae81e76bdf80f81542f5e746448a96ed087057e0c. Umfang: accepted original identity composition as interim Hero until actual approved videos;local integration/tests only,no push/release grant
 - SRC-SERVICES-RELEASE-20261031: bounded Services deployment integration and targeted provenance correction; Datum 2026-10-31; parent_verified_excerpt; Parent release-integration mandate; canonical base66185f1; local a3e95d3379ecf8aa61e6de04ee2c0fe10a6867d4. Umfang: New local runtime adapter/configuration only; no UI evidence refresh, no production acceptance
 - SRC-SHOP-NAMESPACE-OPERATOR-20261031: controlled technical runtime preparation and read-only auth isolation; Datum 2026-10-31; parent_verified_excerpt; Parent bounded namespace-operator task following owner releasea4b74dc / Previewdpl_AKHeHVZ7bwCWfuXyhsQ5AoMVPkko. Umfang: Default metadata-only preflight; later explicit empty namespace initialization; no execution in this task, no secrets transfer or provider claims
+- SRC-AUTHORITATIVE-DESIGN-20261105: user_supplied_authoritative_design_system; Datum unbekannt; user_supplied_original_read_and_measured_here; Chat-Upload 05.11.2026: NeXify_Startseite.html + NeXify_Komponenten.html; versioniert unter docs/design/authoritative-startseite-20261105/. Umfang: Maßgebliche Palette, Typografie, Radien und Komponenten-Grammatik; Entwurf, keine Rechts-/Preis-/Abnahmewirkung
 
 ## Soll / Ist / Abschluss
 
@@ -596,3 +597,14 @@ Auslieferung: local_candidate_not_deployed; keine Gesamtanforderung abgenommen.
 Lücke: Actual operator build metadata, store privileges, empty-namespace confirmation, explicit init and runtime configuration remain separate Root steps. No commercial/product/tax/provider/tenant acceptance.
 Nächster Schritt (release integration writer; Root controls actual runtime/store execution): Root reviews exact candidate and runs only a separately controlled existing-project operator Previewbuild if appropriate; no default deployment bootstrap.
 Abschluss: Explicit operator report on verified project/store proves namespace metadata; any init is separately invoked and read back; real runtime/commerce tests remain required.
+
+### REC-DESIGN-AUTHORITATIVE-20261105
+
+Soll (SRC-AUTHORITATIVE-DESIGN-20261105, SRC-TOKENS-STRICT): Gemeinsame semantische Tokens und Komponenten-Grammatik systemweit aus dem maßgeblichen Designsystem (P02 Design).
+Einordnung: authoritative design system uploaded by user 05.11.2026; draft, not claimed acceptance
+Dateien/Funktionen: config/design-tokens.json, packages/tokens/tokens.css, apps/web/app/masterplan-tokens.css, docs/design/design-system-authoritative-20261105.md
+Beleg: Warme maßgebliche Palette systemweit (Laufzeit-Override + kanonische Basis-Tokens, GAP-TOKENBASE geschlossen); Champagner-Signatur-Token ergänzt; Alias-Vererbung verifiziert; Kontrast AAA; grün: css-norm, regel-pruefung 38/38, browser-evidence (kritischer Pfad), text-resize (129 Checks, 0 Overflow), observability vite+next, reconciliation --render; Python-Suite 714 Tests, 0 echte Fehler.
+Auslieferung: implemented_tokens_and_grammar_browser_and_suite_verified; keine Gesamtanforderung abgenommen.
+Lücke: Komponenten-Volladoption (Champagner Hero-/Link-/Tabellen-Akzente) und P02-Abnahme offen; Bildserie und Assetrechte Owner-gebunden.
+Nächster Schritt (Grafik/Brand und UX/Frontend): Restliche editoriale Champagner-Akzente faithful adoptieren; Owner-Review des warmen Stands; P02-Abnahme je Phase mit Nachweis.
+Abschluss: exact source/runtime version and complete scoped positive/negative acceptance with qualified independent review
