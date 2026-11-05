@@ -10,9 +10,12 @@ import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(fileURLToPath(new URL(".", import.meta.url)), "..");
-const RASTER = [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64, 72, 80, 96, 112, 128, 144]; // Design-Norm § Raster
-const SCHRIFT = [12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 96]; // Design-Norm § Typografie, Mindestgröße 12 px
-const RADIUS = [0, 1, 2, 4, 8, 16, 17, 999, 9999]; // Design-Norm § Radien
+// Maßgebliches Designsystem (D-DESIGN-20261105, docs/design/design-system-authoritative-20261105.md):
+// Raster um 6/10/14 erweitert, Typoskala um 13/15/19 (gemessene Werte der Startseite). 12-px-Boden bleibt:
+// 11/12.5-px-Kicker werden weiter gemeldet (offener Barrierefreiheits-Konflikt, Entscheid Pascal).
+const RASTER = [0, 4, 6, 8, 10, 12, 14, 16, 20, 24, 32, 40, 48, 56, 64, 72, 80, 96, 112, 128, 144]; // Design-Norm § Raster
+const SCHRIFT = [12, 13, 14, 15, 16, 18, 19, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 96]; // Design-Norm § Typografie, Mindestgröße 12 px
+const RADIUS = [0, 1, 2, 8, 10, 14, 16, 20, 28, 36, 999, 9999]; // Design-Norm § Radien (weiche Skala)
 const ZEILE = 68;
 const BEREICHE = ["apps/web/app", "apps/web/components"];
 const AUSLASSEN = /(node_modules|\.next)(\/|$)|(^|\/)(masterplan-tokens|tokens)\.css$/;

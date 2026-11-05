@@ -9,7 +9,7 @@ Durchgesetzt über `tools/design-norm.js`. Kein Wert außerhalb dieser Skalen.
 - **DIN 5008:** nur für Schriftverkehr (E-Mails, Rechnungen, Angebote), nicht für die Website.
 
 ## Raster
-8-pt-Raster mit Halbschritt 4. Zulässig: 0 · 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 56 · 64 · 72 · 80 · 96 · 112 · 128 · 144 px.
+8-pt-Raster mit Halb-/Feinschritten. Zulässig (maßgebliches Designsystem, D-DESIGN-20261105): 0 · 4 · 6 · 8 · 10 · 12 · 14 · 16 · 20 · 24 · 32 · 40 · 48 · 56 · 64 · 72 · 80 · 96 · 112 · 128 · 144 px. Feinschritte 6/10/14 stammen aus der Startseite.
 Inhaltsbreite 1240 px, Seitenrand 24 px. Abschnittsabstand `clamp(88px,10vw,144px)`.
 
 ## Typografie (Geist / Geist Mono)
@@ -23,7 +23,7 @@ Inhaltsbreite 1240 px, Seitenrand 24 px. Abschnittsabstand `clamp(88px,10vw,144p
 | Klein | 14 px | 1,5 | 0 |
 | Kicker, Metadaten (Mono) | 12–14 px | 1,4 | 0, keine Versalien |
 
-Zulässige Größen: 12 · 14 · 16 · 18 · 20 · 24 · 28 · 32 · 40 · 48 · 56 · 64 px.
+Zulässige Größen (maßgebliches Designsystem): 12 · 13 · 14 · 15 · 16 · 18 · 19 · 20 · 24 · 28 · 32 · 40 · 48 · 56 · 64 · 72 · 80 · 96 px. Fließtext 15/1.65 ist der Startseiten-Standard. Mindestgröße bleibt 12 px: Kicker 11/12.5 px aus der Startseite sind ein offener Barrierefreiheits-Konflikt (Entscheid Pascal), kein zulässiger Wert.
 
 ## Radien
 4 px Etikett · 8 px Bedienelement · 16 px Karte · 999 px Pille · 50 % Kreis. (17 px nur als Außenkante eines 1-px-Verlaufsrahmens um eine 16-px-Karte.)
