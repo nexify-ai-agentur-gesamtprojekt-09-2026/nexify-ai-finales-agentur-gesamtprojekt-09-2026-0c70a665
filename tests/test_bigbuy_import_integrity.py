@@ -42,10 +42,20 @@ def load_modules():
     return gateway, ftp, importer
 
 
-GET, FTP, IMPORT = load_modules()
-ERROR = GET.BigBuyReadError
+# pymongo is an optional runtime dependency (the bigbuy importer needs it). Where it is absent this
+# test skips cleanly, consistent with the mongomock-gated shop-api tests, instead of erroring the load.
+try:
+    GET, FTP, IMPORT = load_modules()
+    ERROR = GET.BigBuyReadError
+    OPTIONAL_DEP_MISSING = None
+except ImportError as exc:
+    GET = FTP = IMPORT = ERROR = None
+    OPTIONAL_DEP_MISSING = str(exc)
+
+SKIP_REASON = "bigbuy integrity modules require the optional pymongo dependency: %s" % OPTIONAL_DEP_MISSING
 
 
+@unittest.skipIf(IMPORT is None, SKIP_REASON)
 class Pagination(unittest.IsolatedAsyncioTestCase):
     async def acquire(self, batches):
         client = IMPORT.BigBuyClient('production')
@@ -106,6 +116,7 @@ class Pagination(unittest.IsolatedAsyncioTestCase):
                 await IMPORT.fetch_catalog('production')
 
 
+@unittest.skipIf(IMPORT is None, SKIP_REASON)
 class InputIntegrity(unittest.TestCase):
     def test_price_exact_rounding_and_zero(self):
         for module in (FTP, IMPORT):
@@ -302,6 +313,7 @@ class FakeDB:
             setattr(self, key, FakeCollection(self, key))
 
 
+@unittest.skipIf(IMPORT is None, SKIP_REASON)
 class Publication(unittest.IsolatedAsyncioTestCase):
     def catalog(self):
         row = {'id': 12, 'taxonomy': 5, 'sku': 'S12', 'wholesalePrice': '1.005'}
