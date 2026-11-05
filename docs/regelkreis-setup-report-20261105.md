@@ -49,6 +49,7 @@ P01–P26 ABNAHME ◄── [E7 Owner-Gate: reconciliation-Validator untersagt a
 | E8 | Claude-Design-`/p/`-Links (NeX2Fly Suite, Impressum/Datenschutz) liefern HTTP 403 — aus der Cloud-Session keine authentifizierte Route (verifiziert) | diese Design-Dateien nicht ingestierbar/steuerbar; Design-Governance läuft stattdessen über den Repo (Tokens/Gates/Komponenten/Einmaligkeit) | die `.dc.html` in den Chat hochladen (bewährte Route wie Startseite+Komponenten) ODER eine erreichbare Design-MCP/Export bereitstellen |
 
 | E9 | AI-Coverage-Audit meldet `audit_partial`: 9 registrierte AI-Quellen gedriftet (`requires_review`) + 4 unregistrierte Kandidaten. Vorbestehend (0 von dieser Sitzung geändert), advisory (nicht in `make check`/CI), Tool bewusst `automatic_hash_refresh:false` | AI-Governance-Register nicht aktuell; **kein** Blocker der grünen Prüfkette | Deliberate Per-Quelle-Review (AI-Verhalten/Policy-Konformität) + bewusste Re-Registrierung durch Owner/Review — **kein** Bulk-Auto-Refresh (wäre unreviewte Governance-Regression, CLAUDE.md-widrig) |
+| E-RUFLO-1 | `RuFlo_Federation` MCP in der Session Auth-Required; aus dem Cloud-Container nicht anmeldbar (`claude mcp add-json` ist lokale Owner-Aktion) | claude-flow-Orchestrierung inaktiv; **kein** Blocker — Ruflo ergänzt laut CLAUDE.md, ersetzt Gates/Arbeit nicht; Regelkreis lief vollständig mit vorhandenen Werkzeugen | Owner meldet `RuFlo_Federation` in den claude.ai-Connector-Einstellungen an bzw. aktiviert `ruflo@3.71.1` lokal gemäß `docs/automation/ruflo.md` |
 
 **Design-Steuerung (Verantwortung übernommen):** Das maßgebliche Designsystem wird im Repo gesteuert und durchgesetzt —
 `docs/design/design-system-authoritative-20261105.md` (+ versionierte Startseite/Komponenten-Quellen), die Token-Ebene
@@ -61,3 +62,17 @@ Alle autonom + sicher ausführbaren Blätter sind exekutiert und belegt (Design-
 Sicherheits-Sweep inkl. Bugfixes+Invarianten+Audits, Bild-Einmaligkeits-Gate, Test-Robustheit). Verbleibende Knoten
 sind an E1–E7 gebunden. Closed-Loop-Zustand: **ausführbarer Scope erschöpft+belegt, blockierter Scope eskaliert+umgangen,
 kein passives Warten** — der Loop setzt je eintreffender Owner-Zulieferung am betroffenen Knoten sofort fort.
+
+## Zyklus-Log (Dauerbetrieb)
+- **05.11. — Fahrzeugauswahl auf öffentlichen TEILEKLAR-Flächen (Commit `3895bae`, PR #67):** Proaktiv erkannte
+  Spec-Abweichung: der Standard „Fahrzeug zuerst am Kopf JEDER TEILEKLAR-Fläche" (`VehicleBar.tsx`) galt nur in
+  next-web (`ShopFrame`), nicht im öffentlichen Vite-Runtime-Shop (`PublicShopContent`). Behoben (additiv: VehicleBar
+  als führendes Element von `.tk-public-commerce`). Nachweis: Einheitstest (9 Commerce-Flächen), realer Browser-Lauf
+  (`browser-shop-api.mjs`, VehicleBar first-child auf Shop+Suche), Shop-Browser-Evidence + Text-Resize-Evidence neu
+  erzeugt, Reconciliation-Register nachgezogen. Self-Healing: drei durch die Quelländerung ausgelöste Evidence-Binding-
+  Gates im Regelkreis automatisch nachgezogen (nicht blind rehash, sondern Nachweise real regeneriert). Gates grün:
+  python unittest 748 OK, css-norm 0, regel-pruefung 38/38, image-uniqueness PASS. Teil von Task #12 (Pure-Frontend-Anteil).
+- **Grenze des session-exekutierbaren In-Repo-Scopes:** Binäre Prüfkette = 100 % grün. Offene Tasks #10 (Copy-Tiefe/
+  KI-Muster — editorial, kein binäres Gate; jede Copy-Änderung kaskadiert den Evidence-Loop), #11/#15 (echte Bildserie —
+  E2 owner-gated), #12-Rest (Katalog/Preise — E1/E3 owner-gated). AI-Coverage-Audit `blocked` ist advisory (exit 0) und
+  E4/E9-owner-gated; **nicht** per Hash-Umschreiben „grün" zu fälschen (CLAUDE.md: keine Gates abschalten).
