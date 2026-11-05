@@ -2,10 +2,10 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-04T20:03:39.910Z",
+  "observed_at": "2026-11-05T06:26:16.467Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "b4932a8289a0b7cbd27a427dd9684b1ccb92353b7c8a7271ef2195aeb1fdc75b",
-    "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
+    "apps/site/index.html": "2a50356ec2744817e38095629eef8c931a108fbb6ce96f74d93822b1f8f98f52",
     "apps/site/src/Auth.tsx": "7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c",
     "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
     "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",

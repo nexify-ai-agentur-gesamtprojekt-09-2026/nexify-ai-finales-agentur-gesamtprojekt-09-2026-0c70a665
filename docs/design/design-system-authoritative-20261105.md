@@ -78,3 +78,17 @@ oben als Signatur geführt. Ergänzt in `apps/web/app/masterplan-tokens.css`: `-
 Token eingeführt (verfügbar); die Komponenten-Adoption (Champagner in Karten-/Panel-/Akzentflächen) ist Stufe 3b.
 Die `{{ s.name }}/{{ s.hex }}`-Swatch-Liste ist eine JS-Datenschleife in `data-props` der Komponenten-Nodes; die
 exakten Token-Namen folgen bei der Stufe-3b-Adoption aus dieser Datenquelle, nicht aus Schätzung.
+
+## Offene Leg: kanonische Basis-Tokens warm angleichen (GAP-TOKENBASE-20261105)
+Der Cutover 05.11. warmte den **Laufzeit-Override** `apps/web/app/masterplan-tokens.css`; der Render ist dadurch
+systemweit warm. Die **kanonische Quelle** `config/design-tokens.json` hält jedoch weiterhin die historische kühle
+`graphit`-Skala (#080A0F/#0F131A/#141A22 …) neben der bereits warmen `atelier`-Skala, und `packages/tokens/tokens.css`
+spiegelt die kühlen Werte. Konsumenten, die **nicht** über den CSS-Override laufen, lesen daher noch kühl:
+- `apps/site/pwa/plugin.mjs` (public-pwa-Manifest `theme_color`/`background_color` = `color-graphit-900`) — nur im
+  expliziten `public-pwa`-Build, nicht Default-Produktion.
+- statische `theme-color` in `apps/site/index.html` — **behoben 05.11.** auf #111312 (kein Token, Dokument-Chrome).
+
+AGENTS schreibt `config/design-tokens.json` als Quelle der Wahrheit vor; die graphit-Skala dort warm zu schreiben ist
+die saubere Stufe-1-Vollendung, hat aber **großen Evidenz-Blast-Radius** (identity-hero, one-app critical/text-spacing,
+shop-design-reference, observability). Daher **bewusst als eigene gestufte Leg** geführt (change-impact: erst Shadow,
+reversibel), **nicht** als Autopilot-Big-Bang. Owner/Next: deliberat in einem Zyklus mit vollständiger Evidenz-Neuerhebung.

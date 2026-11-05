@@ -3,7 +3,7 @@
   "build_mode": "optimized_production_output",
   "build_input_sha256": {
     "apps/site/.gitignore": "cc6f66b73f166f694fc44931ceeda2ca388c2dcd8a862e10b7402f673cbc6582",
-    "apps/site/index.html": "1a69ac2cc60a0f7fd1030a914bf76fc349db9183f1fab75f7c7743f5d58a13e5",
+    "apps/site/index.html": "2a50356ec2744817e38095629eef8c931a108fbb6ce96f74d93822b1f8f98f52",
     "apps/site/package.json": "307ebbf1c471f80f9eb72c0e3c61b1bfb79d65909f121bdf6e3090085f77875a",
     "apps/site/plugins/owner-review-media.mjs": "2d12cc0ad0684b963c3d986d11a29bdaad5a61a7b1cae6846279e9bd422880c4",
     "apps/site/pwa/plugin.mjs": "185be72f2873af8ce0a6e2840cb0b4ae0b7c76df55c7ad002ad7e7ebe38b97d0",
@@ -513,7 +513,7 @@
     "apps/site/dist/icon-192.png": "f275a07821cbb3e53b9531219246cf242d29c02d0110b5819e348f1e9896a627",
     "apps/site/dist/icon-512.png": "1ffcf5205f71ef3ca4a8104fa80945fc941dc251cd216dfdd78e714479d86a59",
     "apps/site/dist/icon-maskable-512.png": "ce261773ce39f6cb57d4c0b5c8a2ab7aa7a48ce5e5ec5bce5dfc266bc7d55cad",
-    "apps/site/dist/index.html": "ce53d2761266e4d6e4659077172f8c5f8db6e668220828ca00e7118858f53b61",
+    "apps/site/dist/index.html": "bda3086afec3e97aa3cef37f6fd7457d7acf2ec8f66911fca89dedb67f6f1d8e",
     "apps/site/dist/media/atelier/automotive-metal-20261101.webp": "28397339d1fbbd632507f5e6d55185d717c612c1eb9261486dc314434b165d72",
     "apps/site/dist/media/atelier/films/automotive-20261102.jpg": "48862bff93f7c5ea348c9cadefd887762c72053d9674ad89b5bc24f0d095d076",
     "apps/site/dist/media/atelier/films/automotive-20261102.mp4": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
@@ -611,7 +611,7 @@
   "release_kind": "synthetic_test_release_not_delivered",
   "controlled_unhandled_frames": [
     {
-      "filename": "http://127.0.0.1:40833/src/synthetic-error.js",
+      "filename": "http://127.0.0.1:45169/src/synthetic-error.js",
       "lineno": 1,
       "colno": 46
     }
