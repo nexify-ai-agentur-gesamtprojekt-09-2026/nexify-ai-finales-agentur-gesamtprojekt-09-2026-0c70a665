@@ -67,3 +67,32 @@ Quelle und gemessene Spezifikation: `docs/design/design-system-authoritative-202
 `docs/design/authoritative-startseite-20261105/`. Entwurf, noch nicht verifiziert/zertifiziert; Übernahme gestuft
 (change-impact). Löst E-RADIEN (weiche Radien 10/14/16/20/28/36). Offener Barrierefreiheits-Konflikt: Kicker
 11/12.5px gegen die 12-px-Mindestgröße — Entscheid Pascal.
+
+### Umsetzung D-DESIGN · Stufe 1+2 (05.11.2026, Commit ccc223f)
+Die warme maßgebliche Palette ist systemweit in der Override-Ebene `apps/web/app/masterplan-tokens.css`
+übernommen (canvas #111312, Fläche #191B1C, erhöht #242728, Text primär #F3F0EA / sekundär #E2DFD8 /
+gedämpft #B9BBBA, invers/Action-Ink #111312, graphit-650 #1E2122, graphit-600 #242728, text-tertiaer #BDC5C9);
+globals.css und alle Komponenten konsumieren die `--color-*`-Namen und erben damit die warme Palette. Lime und
+Schriften waren bereits maßgeblich. WCAG-Kontrast erhalten (F3F0EA auf #111312 ≈14,9:1; gedämpft ≈8:1).
+Observability-Exception-Nachweise (vite+next) ehrlich neu gebaut (build_input_sha256 bindet die neue CSS),
+Register-SHAs nachgezogen. Gates grün: css-norm, regel-pruefung 38/38, browser-evidence, text-resize,
+requirements-reconciliation --render. Offen: Stufe 3 (TEILEKLAR erbt Grammatik), Stufe 4 (Hero/Bildserie),
+Vollmigration `Nexify UIUX Design Optimization.zip` (Drive blockiert — Upload/Reconnect nötig).
+
+## D-FACTORY-20261105 · Governed-Delivery-Regelkreis als Betriebsmodus (Freigabe Nutzer 05.11.2026)
+- **Entscheidung:** Der Nutzer gibt frei, als governance-gesteuerter Teil der AI FACTORY zu arbeiten. Als
+  Betriebsmodus gilt ab sofort der Regelkreis aus `skills/nexify-governed-delivery/SKILL.md` (1.0.2):
+  Clock-in (Quellen/AGENTS/PROGRESS lesen, Gates grün bestätigen) → Quellenabgleich → atomare Tasks mit
+  Owner/Abnahme → nur autorisierter Scope → reale Evidenz vor Fertigmeldung → Gaps mit Owner/Fälligkeit →
+  ehrliche Übergabe mit Rücklesung. Autoritätsreihenfolge: aktuelle Nutzerentscheidung > ältere Entwürfe
+  (im Scope); System-/Werkzeuggrenzen bleiben vorrangig. Kanonisches Auftragsregister bleibt
+  `config/acceptance-coverage.json` (P01–P26) — keine zweite Aufgabenverwaltung.
+- **Ehrliche Grenze (kein Overclaim):** Der *native* Oracle/Hermes-MCP-Regelkreis-Runtime
+  (`anthropic-skills:nxai-regelkreis-generator`, `scripts/run_cycle.sh`, AgentMemory/LightRAG) ist aus dieser
+  verwalteten Cloud-Session **nicht erreichbar** (GAP-REMOTE-01/02). Ich *emuliere* die Regelkreis-Disziplin
+  manuell; ich betreibe keinen autonomen Live-Loop und ändere kein globales Verhalten über Sessions hinweg.
+  Keine Behauptung vollständiger Chat-/VPS-/LightRAG-Erinnerung — belastbare Historie ist der versionierte
+  Repo-Zustand (PROGRESS.md/DECISIONS.md/AGENTS.md).
+- **Grenzen bleiben:** Gates werden nicht abgeschaltet; Modellbindung `deepseek/deepseek-v4.1-flash-1017`
+  (managed LLM) unverändert und ohne Einfluss auf das Hosting von Claude Code; Secret-/Mandanten-/Zahlungs-/
+  Freigabegrenzen gelten; folgenreiche Außenwirkung nur im konkret freigegebenen Umfang.

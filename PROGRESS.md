@@ -1,4 +1,29 @@
-# Aktuell · Funktionsfähigkeit vor Video · 04.11.2026 (Branch claude/youthful-sagan-bzmkkr)
+# Aktuell · Maßgebliche Palette + Regelkreis-Betriebsmodus · 05.11.2026 (Branch claude/youthful-sagan-bzmkkr)
+
+Freigabe Nutzer 05.11.: Arbeit als governance-gesteuerter Teil der AI FACTORY. Betriebsmodus ist ab sofort der
+Regelkreis aus `skills/nexify-governed-delivery/SKILL.md` (DECISIONS D-FACTORY-20261105). Ehrlich: der native
+Oracle/Hermes-Regelkreis-Runtime ist aus dieser Cloud-Session nicht erreichbar (GAP-REMOTE-01/02) — die Disziplin
+wird manuell emuliert, kein autonomer Live-Loop, keine globale Verhaltensänderung über Sessions, keine behauptete
+Chat-/VPS-/LightRAG-Gesamterinnerung. Belastbare Historie = versionierter Repo-Zustand.
+
+Umgesetzt (Commit ccc223f, D-DESIGN Stufe 1+2): warme maßgebliche Palette der hochgeladenen Startseite systemweit
+in `apps/web/app/masterplan-tokens.css` übernommen; globals.css + alle Komponenten erben über `--color-*`. WCAG
+erhalten (≈14,9:1 / ≈8:1). Observability-Exception-Nachweise (vite+next) ehrlich neu gebaut, Register-SHAs
+nachgezogen. Gates grün: css-norm (Befunde 0), regel-pruefung 38/38, browser-evidence, text-resize,
+reconciliation --render. CI auf ccc223f: fünf Code-Gates grün (next-web, openapi-schema, postgres-isolation,
+react-site; repository lief noch). Rot nur einstellungs-/inhaberseitig: `review` (API-Key-Secret im Repo nötig),
+`Workers Builds` (Cloudflare-Worker-Name ≤54 Zeichen) — nicht aus dieser Änderung.
+
+Nächster Regelkreis-Zyklus / offen beim Inhaber (verfolgt als Abhängigkeit, nicht als Blocker der unabhängigen
+Arbeit): D-DESIGN Stufe 3 (TEILEKLAR erbt System-Grammatik) und Stufe 4 (Hero/Bildserie, Einmaligkeit) — Stufe 4
+wartet auf Bildquelle (echte Fotografie/fotorealistische Renderings; generierte Gesichter untersagt, ~41 Medien
+unzureichend). Vollmigration `Nexify UIUX Design Optimization.zip`: Drive nicht autorisiert → Upload in den Chat
+oder Drive-Reconnect nötig. E-SORTIMENT (TecDoc-Teile vs. BigBuy-Zubehör) und BigBuy-Schlüssel offen (D-008).
+Texte vertiefen/KI-Muster entfernen (#10) ist unabhängig fortführbar.
+
+---
+
+# Funktionsfähigkeit vor Video · 04.11.2026 (Branch claude/youthful-sagan-bzmkkr)
 
 Nutzerentscheidung: zuerst funktionsfähiges Gesamtzielbild und grüne Prüfkette, Videos danach (AGENTS.md). Home-Hero zeigt bis zur Filmabnahme die redaktionelle Standbild-Bühne mit dezenter Präsentationsbewegung (Reduced Motion statisch). Kanonischer Assistentenname „AIFly ORACLE“; Panelmarke „NeX Agentic AIFly“.
 
