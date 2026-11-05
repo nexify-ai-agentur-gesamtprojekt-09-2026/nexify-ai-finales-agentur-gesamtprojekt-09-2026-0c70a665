@@ -20,6 +20,10 @@ Kette abgearbeitet; Owner/Remote-Punkte werden geführt, nicht als Stopp behande
   half-up) und `parse_markup` (0..500, 2 Dezimalstellen) — läuft auch ohne mongomock.
 - **Admin-Authz** (`test/auth`, 3e5f8f3): `test_admin_authz.py` pinnt `require_admin` (401/403/200, kein
   Client-Claim eskaliert) — Schutz gegen Privilege-Escalation-Regression.
+- **Order-Fulfilment-State-Machine** (`test/orders`, 82dbf58): `test_order_status.py` pinnt FLOW-Transitionen
+  (nur aus bezahlter Order), Tracking-Pflicht bei Versand (422), illegaler Sprung/unbezahlt 409, Concurrency-Guard.
+- **Preisfreigabe-Gate** (`test/pricing`, 652b221): `test_price_release.py` pinnt, dass Preise erst nach
+  expliziter, zum Markup passender Freigabe live sind; Markup-Änderung invalidiert die Freigabe.
 - **Audit geprüft solide (kein Eingriff):** Checkout-Erstellung (idempotent, unique owner+key → replay),
   Paid-Transition (genau eine atomare `find_one_and_update status $ne PAID`), Revolut-Webhook (signatur-verifiziert,
   idempotenter Event-Insert), `verify_signature` (HMAC-SHA256, Replay-Fenster, konstant-zeitiger Vergleich).
