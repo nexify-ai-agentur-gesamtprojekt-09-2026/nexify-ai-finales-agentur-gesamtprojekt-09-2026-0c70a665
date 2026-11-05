@@ -1,0 +1,61 @@
+# NeXify Designsystem — maßgeblich (Stand 05.11.2026)
+
+**Führungsentscheidung (Nutzer, 05.11.2026):** Die hochgeladene `NeXify_Startseite.html` ist das
+**alleinige, systemweit gültige Designsystem**. Quelle versioniert unter
+`docs/design/authoritative-startseite-20261105/` (`*.source.html` = Originalupload des Design-Components-Bundles,
+`*.template.html` = extrahierte Vorlage, 94 KB). Dieses System ist **Entwurf, noch nicht verifiziert/zertifiziert**;
+es durchläuft das Abschlussverfahren (Gates), aber keine bestandene Prüfung ist eine Abnahme oder ein
+DIN-/ISO-Zertifikat (`docs/quality/standards-applicability.md`). Zahlen/Preise bleiben weiter nur aus
+`config/fakten.json`; diese Datei ändert nur die Gestaltung.
+
+Werte unten sind aus den Inline-Stilen der Vorlage **gemessen** (279 Stilattribute), nicht geschätzt.
+
+## Palette (warm, dunkel, editorial)
+| Rolle | Wert |
+|---|---|
+| Ink / Seitengrund | `#111312` · `#121314` · Verläufe `#16171A`/`#141518`/`#101113` |
+| Fläche / Panel | `rgba(30,33,34,.91)` und `.6` (≈ `#1E2122`), Glas über `rgba(255,255,255,.10→.03)` |
+| Text primär | `#F3F0EA` |
+| Text sekundär | `#E2DFD8` |
+| Text tertiär / gedämpft | `#B9BBBA` · `#BDC5C9` · `#CBD1D6` |
+| Champagner-Akzent (Signatur) | `#C4B394` |
+| Champagner-Verlauf | `linear-gradient(115deg,#F3F0EA 8%,#C4B394 62%,#BDC5C9 100%)` |
+| Lime-Akzent | `#C0EE38`, Verlauf `linear-gradient(180deg,#DBF68A,#C0EE38 55%,#A6D820)` |
+| Text auf Lime | `#111312` |
+
+## Typografie
+| Rolle | Schrift / Wert |
+|---|---|
+| Display | Plus Jakarta Sans 700, `clamp(32px,3.5cqi,48px)/1.15`, Tracking −.04em |
+| Marke/Logo | Plus Jakarta Sans 700, `22px/1` |
+| Fließtext | Inter, **15px** (dominant), auch 16/14/13px, Zeilenhöhe **1.65** |
+| Einleitung | Inter 18–19px |
+| Kicker/Meta | Geist Mono, 11–12.5px, Tracking `.16em` |
+| Gewichte | 500 / 600 / 700 |
+
+## Raster, Radien, Layout
+- **Abstände:** 4 · 6 · 8 · 10 · 12 · 14 · 16 · 20 · 24 · 32 px, fluide über `clamp(…cqi…)`; Gutter `clamp(20px,4.5cqi,80px)`.
+- **Radien:** 10 · 14 · 16 · 20 · 28 · 36 · 999px · 50 %. **Damit ist die offene Entscheidung E-RADIEN zugunsten der weicheren Skala (Masterplan-Familie) entschieden.**
+- **Container:** `max-width:1680px`, zentriert; Lesebreiten 18–20ch (Labels) bis 46–65ch (Fließtext).
+- **Responsive:** Container-Queries (`cqi`) statt reiner Breakpoints.
+
+## Konflikte mit dem aktuellen DIN/ISO-Gate (zu klären, nicht still übernommen)
+Das am 04.11. geschärfte Gate (`tools/css-norm.mjs`, `docs/01-konzept/Design-Norm.md`) erzwingt eine feste
+Typoskala (12/14/16/18/20…) und Fließtext-Zeilenhöhe 1,6. Das maßgebliche Design weicht ab:
+
+| Punkt | Maßgebliches Design | Aktuelles Gate | Bewertung |
+|---|---|---|---|
+| Fließtextgröße | 15px | 12/14/16/18/20 (15 nicht auf Skala) | Reine Skalenfrage — Gate an 15px anpassen. |
+| Zeilenhöhe Fließtext | 1,65 | 1,6 | Skalenfrage — Gate anpassen. |
+| Zwischengrößen 13px | 13px | 14px nächster Wert | Skalenfrage — zulassen. |
+| **Kicker 11px / 12.5px** | 11 / 12.5px | **≥ 12px Pflicht (WCAG/Lesbarkeit)** | **Echter Barrierefreiheits-Konflikt.** 11px bleibt zu klein; Vorschlag: Kicker-Mindestgröße 12px, Owner-Entscheid Pascal. |
+| Abstände 10/14px | 10 · 14px | 8-pt-Raster (10/14 außerhalb) | Das Design nutzt sie bewusst — Rasterregel um 10/14 erweitern oder als Design-Ausnahme führen. |
+
+## Gestufte Übernahme (Blast-Radius, daher nicht in einem Zug)
+Die Umstellung berührt `config/design-tokens.json`, `packages/tokens/*`, `apps/web/app/*.css`, alle Komponenten
+und macht sämtliche Browser-Nachweise neu nötig (`change-impact-policy.json`: erst Audit/Shadow, bestehende Arbeit
+erhalten, reversibler Schritt vor Cutover). Reihenfolge:
+1. **Tokens angleichen** (Farben, Typo, Radien, Container) an die gemessenen Werte; Gate-Skalen (css-norm, Design-Norm) mit den vier Skalenpunkten oben nachziehen; Kicker-Konflikt offen an Pascal.
+2. **globals.css + Kernkomponenten** auf die warme Palette umstellen, je Zyklus mit Playwright-Nachweisen.
+3. **TEILEKLAR** behält eigene Marke, erbt aber dieselbe System-Grammatik.
+4. Hero/Bildserie und Einmaligkeit darauf aufsetzen.

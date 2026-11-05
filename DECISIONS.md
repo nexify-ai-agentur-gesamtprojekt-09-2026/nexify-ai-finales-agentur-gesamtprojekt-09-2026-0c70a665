@@ -59,3 +59,11 @@ Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Me
 ## D-PORTRAIT-20261104 · Pascal nur als freigegebene Zielbild-Figur
 - **Entscheidung (Nutzeranweisung 04.11.2026):** Pascal erscheint überall (Startseiten-Hero, Erklärkarten, Seitenszenen) nur als freigegebene, lächelnde und gehende Figur aus dem Zielbild `zielbild-v2` (`media/presenters/zielbild-pascal-walk.png`, siehe `config/identity-hero.json`). Die steife Standfigur (`pascal-lossless.webp`) und das Hemd-Foto aus `prototypen/` werden nicht verwendet.
 - **Bildserie:** Seitenszenen der Agenturseiten setzen nur freigegebene Figuren in das Studiolicht des Startseiten-Heros (`config/studio-scenes.json`, `StudioScene.tsx`). Keine generische Dekoration, keine nummerierten Karten, keine generierten Gesichter. TEILEKLAR zeigt echte Produktfotos oder bis zum Katalogimport den freigegebenen Film.
+
+## D-DESIGN-20261105 · Maßgebliches Designsystem = hochgeladene NeXify_Startseite
+Nutzerentscheid 05.11.2026: Die hochgeladene `NeXify_Startseite.html` ist das alleinige, systemweit gültige
+Designsystem (warm/dunkel, Champagner + Lime, Plus Jakarta Sans/Inter/Geist Mono, Container-Queries, weiche Radien).
+Quelle und gemessene Spezifikation: `docs/design/design-system-authoritative-20261105.md` und
+`docs/design/authoritative-startseite-20261105/`. Entwurf, noch nicht verifiziert/zertifiziert; Übernahme gestuft
+(change-impact). Löst E-RADIEN (weiche Radien 10/14/16/20/28/36). Offener Barrierefreiheits-Konflikt: Kicker
+11/12.5px gegen die 12-px-Mindestgröße — Entscheid Pascal.
