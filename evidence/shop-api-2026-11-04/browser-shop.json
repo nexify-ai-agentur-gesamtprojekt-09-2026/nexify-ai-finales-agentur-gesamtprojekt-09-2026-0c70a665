@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T20:07:57.451Z",
+  "recorded_at": "2026-11-05T07:49:23.298Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -194,12 +194,12 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/products/{id}",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
+      "path": "/api/shop/products/{id}",
       "status": 200
     },
     {
@@ -383,7 +383,7 @@
   },
   "source_sha256": {
     "apps/shop-api/vercel_app.py": "7a87981a5822f65a50b99927183c0535d9301452e31265a331d95af44553acce",
-    "apps/shop-api/shop/cart_api.py": "0fd6c14ba0ce716c2101d9135ebe59f4aaed3ca081f2478674e927950027e42f",
+    "apps/shop-api/shop/cart_api.py": "38eb3d0a5ebdef3bd90e86efe637cf55382777b467f615a2e244ec5984463905",
     "apps/shop-api/shop/checkout_api.py": "abe8fc33b824eb6841b87bc2cad9f7a295fd7146bf31af7c1a6f2d5fdf8494b1",
     "apps/shop-api/shop/auth.py": "d1266f6a424861437301d86b92465decc50d3bfc684d6a4ec3cae5b18233cf3a",
     "apps/shop-api/shop/pricing.py": "f627b7c37b5248f012e745f33a819f37dfe3d73c55479245cef3b39aa8c12da0",

@@ -249,6 +249,23 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
         import secrets
         outbox = FakeOutbox(rows)
         calls = []
+        class DuplicateKeyError(Exception):
+            pass
+        class FakeMailQuota:
+            """In-memory per-day counter mirroring the conditional cap upsert the mailer now uses."""
+            def __init__(self):
+                self.sent = {}
+            async def find_one_and_update(self, flt, upd, upsert=False):
+                day, cap = flt["_id"], flt["sent"]["$lt"]
+                current = self.sent.get(day, 0)
+                if current < cap:
+                    self.sent[day] = current + upd["$inc"]["sent"]
+                    return {"_id": day, "sent": self.sent[day]}
+                raise DuplicateKeyError("daily cap reached")
+            async def update_one(self, flt, upd):
+                day = flt["_id"]
+                self.sent[day] = self.sent.get(day, 0) + upd["$inc"]["sent"]
+        mail_quota = FakeMailQuota()
         class HTTPError(Exception):
             pass
         class Client:
@@ -264,7 +281,8 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
                 if outcome == "unknown":
                     raise HTTPError("simulated lost response")
                 return types.SimpleNamespace(status_code=outcome, json=lambda: {"id": "fake-id"})
-        namespace = {"db": types.SimpleNamespace(outbox=outbox), "datetime": datetime.datetime,
+        namespace = {"db": types.SimpleNamespace(outbox=outbox, mail_quota=mail_quota), "DuplicateKeyError": DuplicateKeyError,
+                     "datetime": datetime.datetime,
                      "timedelta": datetime.timedelta, "timezone": datetime.timezone, "secrets": secrets,
                      "CLAIM_LEASE_SECONDS": 300, "MAX_ATTEMPTS": 5, "transport": None,
                      "httpx": types.SimpleNamespace(AsyncClient=Client, HTTPError=HTTPError),
@@ -316,11 +334,14 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
     async def test_reclaimed_preparation_fences_original_worker(self):
         ns, db, calls = self.setup_mailer([self.row("wartend")])
         ns["setting"] = lambda name: {"RESEND_API_KEY": "fake", "MAIL_DAILY_CAP": "1"}.get(name, "")
-        async def expire_during_preparation(query):
-            db.rows["event"]["claimed_at"] = "2000-01-01T00:00:00+00:00"
-            await db.update_many({"status": "wird_vorbereitet", "claimed_at": {"$lt": "2001"}}, {"$set": {"status": "wartend"}})
-            return 0
-        db.count_documents = expire_during_preparation
+        # Another worker reclaims the stale preparation between this worker's claim and its send-fence
+        # (injected through sender(), which deliver calls in exactly that window). The status is reset,
+        # so the fence (find_one_and_update on status=wird_vorbereitet AND this claim_id) must refuse to
+        # start I/O: no send, and this worker leaves the row as the reclaimer set it.
+        def reclaim_before_send():
+            db.rows["event"]["status"] = "wartend"
+            return "fake@example.org"
+        ns["sender"] = reclaim_before_send
         await ns["deliver"]("event")
         self.assertEqual((db.rows["event"]["status"], calls), ("wartend", []))
 

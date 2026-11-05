@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T20:07:57.451Z",
+  "recorded_at": "2026-11-05T07:49:23.298Z",
   "passed": true,
   "runtime": {
     "backend": "apps/shop-api vercel_app.create_app (production adapter, real shop routers) on loopback",
@@ -32,12 +32,12 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
+      "path": "/api/shop/products",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/api/shop/products",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {
@@ -117,12 +117,12 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/products",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
+      "path": "/api/shop/products",
       "status": 200
     },
     {
@@ -282,16 +282,6 @@
     },
     {
       "method": "GET",
-      "path": "/api/shop/cart",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/api/shop/products/{id}",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/api/shop/products/{id}",
       "status": 200
     },
@@ -332,12 +322,22 @@
     },
     {
       "method": "GET",
+      "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
       "path": "/api/shop/cart",
       "status": 200
     },
     {
       "method": "GET",
       "path": "/api/shop/products/{id}",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
       "status": 200
     },
     {

@@ -54,17 +54,6 @@ async def deliver(event_key):
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not key or not origin:
         return await _finish(event_key, claim_id, "fehlgeschlagen", "not_configured", count=True)
-    # Atomic daily-cap reservation: reserve a slot before any send so concurrent deliveries
-    # cannot each pass a count-then-act check and exceed the cap. Upsert on a per-day quota doc
-    # increments only while sent < cap; once at cap the conditional upsert hits the unique _id and
-    # raises DuplicateKeyError. The slot is released below on a definite non-send.
-    reserved = False
-    if cap.isdigit():
-        try:
-            await db.mail_quota.find_one_and_update({"_id": today, "sent": {"$lt": int(cap)}}, {"$inc": {"sent": 1}}, upsert=True)
-            reserved = True
-        except DuplicateKeyError:
-            return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
     payload = {"from": origin, "to": [claim["to"]], "subject": claim["subject"], "html": claim["html"], "text": claim["text"]}
     if claim.get("reply_to"):
         payload["reply_to"] = claim["reply_to"]
@@ -73,9 +62,18 @@ async def deliver(event_key):
         {"_id": event_key, "status": "wird_vorbereitet", "claim_id": claim_id},
         {"$set": {"status": "wird_gesendet", "claimed_at": now_iso()}})
     if not started:
-        if reserved:
-            await db.mail_quota.update_one({"_id": today}, {"$inc": {"sent": -1}})
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
+    # Only the worker that won the send reserves a daily-cap slot, so a reclaimed/fenced worker never
+    # consumes one and concurrent deliveries cannot exceed the cap (count-then-act race). The conditional
+    # upsert increments while sent < cap and raises DuplicateKeyError at the cap; the slot is released
+    # below on a definite non-send (never on an unknown transport outcome).
+    reserved = False
+    if cap.isdigit():
+        try:
+            await db.mail_quota.find_one_and_update({"_id": today, "sent": {"$lt": int(cap)}}, {"$inc": {"sent": 1}}, upsert=True)
+            reserved = True
+        except DuplicateKeyError:
+            return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
     try:
         async with httpx.AsyncClient(timeout=20, transport=transport) as client:
             response = await client.post("https://api.resend.com/emails", json=payload,
