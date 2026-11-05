@@ -14,24 +14,24 @@
 
 :root {
   /* ============== Mastervorgabe 5.2 – Primärwerte ============== */
-  --color-canvas:            #080A0F;   /* Graphite Canvas */
+  --color-canvas:            #111312;   /* Maßgebliches Ink (Startseite) */
   --color-brand-lime:        #C0EE38;   /* CI Lime 2026 */
   --color-brand-lime-soft:   #D7FA50;   /* legacy Lime, als Highlight weiter nutzbar */
   --color-brand-cyan:        #38BDF8;   /* Cyan-Akzent */
 
   /* Semantischer Tokenvertrag (Mastervorgabe §5.3) */
   --color-background-canvas:    var(--color-canvas);
-  --color-background-surface:   #0F131A;
-  --color-background-elevated:  #141A22;
-  --color-text-primary:         #FFFFFF;
-  --color-text-secondary:       #CBD1D6;
-  --color-text-muted:           #8B939B;
-  --color-text-inverse:         #0A0C10;
+  --color-background-surface:   #191B1C;
+  --color-background-elevated:  #242728;
+  --color-text-primary:         #F3F0EA;
+  --color-text-secondary:       #E2DFD8;
+  --color-text-muted:           #B9BBBA;
+  --color-text-inverse:         #111312;
   --color-border-subtle:        rgba(255,255,255,.08);
   --color-border-strong:        rgba(255,255,255,.18);
   --color-border-focus:         var(--color-brand-lime);
   --color-action-primary:       var(--color-brand-lime);
-  --color-action-primary-ink:   #0A0C10;
+  --color-action-primary-ink:   #111312;
   --color-action-secondary:     transparent;
   --color-action-disabled:      rgba(255,255,255,.12);
   --color-status-info:          var(--color-brand-cyan);
@@ -46,14 +46,14 @@
   --color-graphit-850:          var(--color-background-surface);
   --color-graphit-800:          var(--color-background-surface);
   --color-graphit-700:          var(--color-background-elevated);
-  --color-graphit-650:          #1A2029;
-  --color-graphit-600:          #202733;
+  --color-graphit-650:          #1E2122;
+  --color-graphit-600:          #242728;
   --color-linie-fein:           var(--color-border-subtle);
   --color-linie-mittel:         rgba(255,255,255,.12);
   --color-linie-stark:          var(--color-border-strong);
   --color-text-primaer:         var(--color-text-primary);
   --color-text-sekundaer:       var(--color-text-secondary);
-  --color-text-tertiaer:        #AEB5BB;
+  --color-text-tertiaer:        #BDC5C9;
   --color-text-gedaempft:       var(--color-text-muted);
   --color-text-auf-lime:        var(--color-action-primary-ink);
   --color-marke-lime:           var(--color-brand-lime);

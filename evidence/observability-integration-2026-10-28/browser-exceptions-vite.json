@@ -93,6 +93,7 @@
     "apps/site/tests/shop-trust-detail.test.mjs": "d8f0b381274bf7c40cd94b1f34abc9495ffa00b2340e16c3fe734676e108cba0",
     "apps/site/tests/standalone.test.mjs": "71db343e65de570275ef1ba966eddd65eff99672ba30796255c5df69479280e8",
     "apps/site/tests/static-orientation.test.mjs": "5d5b648b1f6e3cfb9a8d11b4f55d183c087dd5baeb1704e520abe8ac1d15641b",
+    "apps/site/tests/vehicle-bar.test.mjs": "a56bfbcb4eb5e82d7df37bb8d7522aac048563f186700109d8fb7a12ee9cf694",
     "apps/site/tests/workspace-capabilities.test.mjs": "f27879ed56078394a0691548eb0729b706946632ee1541ca58ac3bd98a34ab81",
     "apps/site/tsconfig.json": "0cd6ab46ac0a06ce3c087163647463faf86bef1d8a5988cbe27e2e29db64d625",
     "apps/site/vite.config.ts": "c6e8b8d847228d2c6c68ef3b073ead3a7749b959971684e26d71b5b003639932",
@@ -108,7 +109,7 @@
     "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
     "apps/web/app/layout.tsx": "7497ff5dcc44ceee523231a20f134f7de3cf0d6d0ab287866376bcd7bb152cf5",
     "apps/web/app/manifest.webmanifest/route.ts": "de3b587b61db59bfa36e9d10283f0b231fba8ad275f18bf0807a96e04aa44eeb",
-    "apps/web/app/masterplan-tokens.css": "7866ed1006db8ccb1fec6a603e7b096d41e25fa36243507a09f7dc34254f5b2c",
+    "apps/web/app/masterplan-tokens.css": "c67f4d0c8917dd2d6a7914bb234fdbb700667422e888fe818304ace9ed6f3cc2",
     "apps/web/app/measurement-system.css": "67d31c9f4b6cba8b1ec2ef2e8eeb4f8af6ceeaaaaf4e8f2064885cef8752f60f",
     "apps/web/app/page.tsx": "e6d38be79fa7bfabd983756a94d0cb88b2595836ec03e5606313f8541bed27a0",
     "apps/web/app/passwort-vergessen/page.tsx": "f8b7ad3200aafb49f3ffd21d33d4d6abd43d0b8c73558767e4416b7b34459c89",
@@ -227,6 +228,7 @@
     "apps/web/components/shop/TeileklarLegal.tsx": "8c934e1c938b951d6b4c7977e8095fad2c5560fc6c402a044b01f7d769c60e6f",
     "apps/web/components/shop/TrustBar.tsx": "cb62cb49c6df71906e5a771fefcd7ec39c88a01cb18ad6ac9b2f04fdcd1bbac6",
     "apps/web/components/shop/TyreCalculator.tsx": "73fcd105d6b2ea31e4c4ca0be6d37de8245cdc7905200da47b497dbdc7bb5fb7",
+    "apps/web/components/shop/VehicleBar.tsx": "25e286820be18a4b751a1f0f6c52d7377a250b4ba3bfc27ef601512f72a527b7",
     "apps/web/components/shop/WorkshopDetail.tsx": "85771ec780758995d7c034150f9768aecff896d6dfaff48f7040cb63c8267c7f",
     "apps/web/components/shop/WorkshopFinder.tsx": "9afaae94b6d53e38c1d496900b98f1b600643a3f447b11fcf4f59a937f9d26ea",
     "apps/web/components/shop/WorkshopMap.tsx": "5e05dd616d16692c523f0c5dca9829025d8968f81c2cb9365d64cc810282ab73",
@@ -609,7 +611,7 @@
   "release_kind": "synthetic_test_release_not_delivered",
   "controlled_unhandled_frames": [
     {
-      "filename": "http://127.0.0.1:39543/src/synthetic-error.js",
+      "filename": "http://127.0.0.1:38183/src/synthetic-error.js",
       "lineno": 1,
       "colno": 46
     }
