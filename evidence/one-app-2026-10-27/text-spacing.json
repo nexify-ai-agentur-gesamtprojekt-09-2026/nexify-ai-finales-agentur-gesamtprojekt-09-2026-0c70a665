@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-05T06:26:16.467Z",
+  "observed_at": "2026-11-05T06:34:05.235Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "b4932a8289a0b7cbd27a427dd9684b1ccb92353b7c8a7271ef2195aeb1fdc75b",
     "apps/site/index.html": "2a50356ec2744817e38095629eef8c931a108fbb6ce96f74d93822b1f8f98f52",
@@ -15,7 +15,7 @@
     "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
     "apps/site/tests/browser-text-spacing.mjs": "bfa4ae535778d86b3ece517fd7408d7d0bd0f116a8c57c02860a29f107ae7fcc",
     "apps/site/vite.config.ts": "c6e8b8d847228d2c6c68ef3b073ead3a7749b959971684e26d71b5b003639932",
-    "apps/web/app/globals.css": "9302fb69427e1f6121285b117586ee2c2633f676923d2e3b61556acbe8dc224d",
+    "apps/web/app/globals.css": "d531096ea7a28aecead1b40077b4c92063526dbaef85f6d94f35e7ebb4a42581",
     "apps/web/components/ActionControl.css": "92922b5e2bb64513c3db4fcbc18f388de146d9e581a1a340856e11eab90377ae",
     "apps/web/components/ActionControl.tsx": "6909b910d4a417b6cc917eadabc0eded4a1a26309a9fb1f77c46a23ebdd8b3b0",
     "apps/web/components/AtelierFilm.css": "09312b440bfc5e5889319c3dc4e01a540e2957f9d055140361174d49af0c7d14",

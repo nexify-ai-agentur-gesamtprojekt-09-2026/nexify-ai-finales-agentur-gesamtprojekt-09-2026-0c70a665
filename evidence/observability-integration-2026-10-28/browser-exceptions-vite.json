@@ -105,7 +105,7 @@
     "apps/web/app/api/agent-runtime-status/route.ts": "4e554ec92702495ac2e5b0340c672aa99e4f2dcf196e8dc8e1412b3f75f5b796",
     "apps/web/app/api/internal/workspace/mail/route.ts": "e8a5b7abf16d44d628cf730bcd0b70d471116584659ac0545f5416d2a44a3df2",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
-    "apps/web/app/globals.css": "9302fb69427e1f6121285b117586ee2c2633f676923d2e3b61556acbe8dc224d",
+    "apps/web/app/globals.css": "d531096ea7a28aecead1b40077b4c92063526dbaef85f6d94f35e7ebb4a42581",
     "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
     "apps/web/app/layout.tsx": "7497ff5dcc44ceee523231a20f134f7de3cf0d6d0ab287866376bcd7bb152cf5",
     "apps/web/app/manifest.webmanifest/route.ts": "de3b587b61db59bfa36e9d10283f0b231fba8ad275f18bf0807a96e04aa44eeb",
@@ -501,10 +501,10 @@
   "served_artifact_sha256": {
     "apps/site/dist/.well-known/security.txt": "320914518331ddf253560d2cccb2588aab692e27a91356d91a9fd60ac547c15c",
     "apps/site/dist/assets/PublicOrientationChat-2Gsb1Jew.css": "033f3e8ad1e808fc18e38762659e427afb1cd450498fdef3e76fab60f751a107",
-    "apps/site/dist/assets/PublicOrientationChat-BaYx8s2D.js": "62db47fab394a94bb0754bec82b45a2cdbcd17b75143d7ed10beaf6dabdeebd2",
+    "apps/site/dist/assets/PublicOrientationChat-gfDRtqYH.js": "1c0e36e29c756ad3605d0613c9f8c69e6dc6ee336f19ee86e2dcb7390a2ebfa8",
     "apps/site/dist/assets/exception-autocapture-BXAvG-kd.js": "f18d5599c630de1dc700e51ac4b8840fd69c9de1973b4d1ebf64d0dce1dd6619",
-    "apps/site/dist/assets/index-BQtdO57I.css": "32deb197801d88803a28f40f79556ee3f85ae7a106199ed120607373fbf7125d",
-    "apps/site/dist/assets/index-D6HoAQBA.js": "5ab70cef224196c1e90fca3edf5d3a2f190c4a98dde92568e17882535ffae9f8",
+    "apps/site/dist/assets/index-BORyaDY1.js": "62427f517261d72fddb61ff1aaf3fbc73ffac2def0a625f5feed934e254bca80",
+    "apps/site/dist/assets/index-Cofqrzwe.css": "054ae39603477b0f6066b5fcb2e5a87b2ff67645f7c60a5cdba978412cdd3301",
     "apps/site/dist/assets/module.no-external-Dc6An4pv.js": "69c328275159c88687c584199b061e7c6148926655a103a734ec3bea2954a51f",
     "apps/site/dist/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
     "apps/site/dist/fonts/geist-mono-latin.woff2": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
@@ -513,7 +513,7 @@
     "apps/site/dist/icon-192.png": "f275a07821cbb3e53b9531219246cf242d29c02d0110b5819e348f1e9896a627",
     "apps/site/dist/icon-512.png": "1ffcf5205f71ef3ca4a8104fa80945fc941dc251cd216dfdd78e714479d86a59",
     "apps/site/dist/icon-maskable-512.png": "ce261773ce39f6cb57d4c0b5c8a2ab7aa7a48ce5e5ec5bce5dfc266bc7d55cad",
-    "apps/site/dist/index.html": "bda3086afec3e97aa3cef37f6fd7457d7acf2ec8f66911fca89dedb67f6f1d8e",
+    "apps/site/dist/index.html": "678f5e7426e0190df7bd141b8d2cf3bceff6e5c0a11a69e97bd6e2fb48636324",
     "apps/site/dist/media/atelier/automotive-metal-20261101.webp": "28397339d1fbbd632507f5e6d55185d717c612c1eb9261486dc314434b165d72",
     "apps/site/dist/media/atelier/films/automotive-20261102.jpg": "48862bff93f7c5ea348c9cadefd887762c72053d9674ad89b5bc24f0d095d076",
     "apps/site/dist/media/atelier/films/automotive-20261102.mp4": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
@@ -611,7 +611,7 @@
   "release_kind": "synthetic_test_release_not_delivered",
   "controlled_unhandled_frames": [
     {
-      "filename": "http://127.0.0.1:45169/src/synthetic-error.js",
+      "filename": "http://127.0.0.1:33599/src/synthetic-error.js",
       "lineno": 1,
       "colno": 46
     }
