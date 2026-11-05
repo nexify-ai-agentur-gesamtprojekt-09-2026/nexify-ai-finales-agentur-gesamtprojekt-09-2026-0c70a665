@@ -12,6 +12,18 @@ Kette abgearbeitet; Owner/Remote-Punkte werden geführt, nicht als Stopp behande
   `apps/shop-api/tests/test_cart_merge_safety.py`.
 - Test-Harness: isoliertes venv mit `mongomock-motor` (requirements-test.txt) im Scratchpad; Tests self-skippen ohne
   die optionale Dependency (kein Bruch des Default-`make test`), laufen in CI.
+- **G04 (Teil)** (`harden/auth`, 0abc4cc): expliziter `email_verified=False` bei Registrierung, Seed-Accounts
+  `True`, in `public_user` sichtbar — nicht-regressiv; Negativfall-Tests `test_accounts_security.py` pinnen:
+  keine Rollen-Eskalation per Body, unverifiziert, kein Entitlement/Trial, Doppel-Mail 409, kurzes Passwort 422,
+  Login-Lockout 429. Offen (owner/design): echter Verifizierungs-Flow, Rollen-/Tenant-Bindung, einmaliger Trial.
+- **Geldmathematik** (`test/pricing`, 9192bb3): `test_pricing.py` pinnt `sell_cents`/`vat_share_cents` (cent-genau,
+  half-up) und `parse_markup` (0..500, 2 Dezimalstellen) — läuft auch ohne mongomock.
+- **Admin-Authz** (`test/auth`, 3e5f8f3): `test_admin_authz.py` pinnt `require_admin` (401/403/200, kein
+  Client-Claim eskaliert) — Schutz gegen Privilege-Escalation-Regression.
+- **Audit geprüft solide (kein Eingriff):** Checkout-Erstellung (idempotent, unique owner+key → replay),
+  Paid-Transition (genau eine atomare `find_one_and_update status $ne PAID`), Revolut-Webhook (signatur-verifiziert,
+  idempotenter Event-Insert), `verify_signature` (HMAC-SHA256, Replay-Fenster, konstant-zeitiger Vergleich).
+  shop-api-Suite gewachsen auf 57 Tests, alle grün.
 
 **Eingesammelt (nicht autonom hackbar — Design/Owner/Remote, geführt als Abhängigkeit):**
 - **G04** (P0, `accounts_api.py`): E-Mail-/Workspace-Verifizierung + Rollen-/Tenant-Bindung + einmaliger Trial mit
