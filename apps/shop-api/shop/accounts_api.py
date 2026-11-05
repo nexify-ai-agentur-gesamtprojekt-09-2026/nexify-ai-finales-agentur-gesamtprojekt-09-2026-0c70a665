@@ -38,7 +38,8 @@ def digest(token):
 
 
 def public_user(user):
-    return {"user_id": user["user_id"], "email": user["email"], "name": user.get("name", ""), "role": user.get("role", "customer")}
+    return {"user_id": user["user_id"], "email": user["email"], "name": user.get("name", ""), "role": user.get("role", "customer"),
+            "email_verified": bool(user.get("email_verified", False))}
 
 
 async def ensure_auth_indexes(database=None):
@@ -56,7 +57,7 @@ async def seed_accounts():
         email, password = os.environ.get(prefix + "_EMAIL", "").lower(), os.environ.get(prefix + "_PASSWORD", "")
         if email and password and not await db.users.find_one({"email": email}, {"_id": 1}):
             await db.users.insert_one({"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": role.title(), "role": role,
-                                       "password_hash": hash_password(password), "created_at": now_iso()})
+                                       "password_hash": hash_password(password), "created_at": now_iso(), "email_verified": True})
 
 
 async def start_session(response, user):
@@ -121,8 +122,10 @@ async def register(body: RegisterIn, response: Response):
         raise HTTPException(422, {"error": "register_invalid", "fields": errors})
     if await db.users.find_one({"email": email}, {"_id": 1}):
         raise HTTPException(409, {"error": "email_taken", "message": "Diese E-Mail-Adresse ist bereits registriert", "fields": {"email": "taken"}})
+    # Registration never grants verification, an elevated role or any entitlement: it creates an
+    # unverified customer. Suite verification/entitlement is a separate, explicitly gated step (G04).
     user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": body.name.strip(), "role": "customer",
-            "password_hash": hash_password(body.password), "created_at": now_iso()}
+            "password_hash": hash_password(body.password), "created_at": now_iso(), "email_verified": False}
     try:
         await db.users.insert_one(user)
     except DuplicateKeyError:
