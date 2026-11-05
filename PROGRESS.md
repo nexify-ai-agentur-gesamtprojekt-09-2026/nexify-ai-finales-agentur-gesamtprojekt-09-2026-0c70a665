@@ -1,4 +1,30 @@
-# Aktuell · Maßgebliche Palette + Regelkreis-Betriebsmodus · 05.11.2026 (Branch claude/youthful-sagan-bzmkkr)
+# Aktuell · Regelkreis-Dauerlauf · Sammelverfahren G-Items · 05.11.2026 (Branch claude/youthful-sagan-bzmkkr)
+
+Betriebsmodus Dauerlauf/Verkettung (Nutzer 05.11.): offene Register-Lücken (G01–G30) werden eingesammelt und als
+Kette abgearbeitet; Owner/Remote-Punkte werden geführt, nicht als Stopp behandelt; keine Sicherheitsregression.
+
+**Behoben + getestet (echte Evidenz, shop-api-Suite 45 Tests grün):**
+- **G17** (`fix/mail`, 4e5ce2e): Tages-Cap war ein check-then-act Race (`count_documents` dann senden). Jetzt atomare
+  Tages-Slot-Reservierung (`mail_quota`, konditionaler `$inc`/Upsert → DuplicateKeyError = Cap), Freigabe nur bei
+  eindeutigem Nicht-Versand. Regressionstest `apps/shop-api/tests/test_mailer_cap.py`.
+- **G02** (`fix/cart`, 892c94e): Gast-Warenkorb wurde vor dem Commit gelöscht (Verlustfenster). Jetzt erst User-Cart
+  committen, dann Gast löschen; Merge-Token macht Re-Merge idempotent (kein Doppelzählen). Test
+  `apps/shop-api/tests/test_cart_merge_safety.py`.
+- Test-Harness: isoliertes venv mit `mongomock-motor` (requirements-test.txt) im Scratchpad; Tests self-skippen ohne
+  die optionale Dependency (kein Bruch des Default-`make test`), laufen in CI.
+
+**Eingesammelt (nicht autonom hackbar — Design/Owner/Remote, geführt als Abhängigkeit):**
+- **G04** (P0, `accounts_api.py`): E-Mail-/Workspace-Verifizierung + Rollen-/Tenant-Bindung + einmaliger Trial mit
+  Negativfällen = sicherheitssensible Feature-Leg; Trial-Finanzierung/Tenant-Modell owner-entscheidungsabhängig
+  (`selfservice-policy.json`). Kein hastiger Auth-Eingriff (keine Sicherheitsregression).
+- **G21** (Stadt/Werkstatt/Partner-Daten-Journey), **G30** (Produkt-/Angebotstext-Konsistenz): Feature-/Fakten-/
+  Owner-gebunden. **G01/G18/G28/G29** (APIs/Outbox/Monitoring/Scheduler), **G22/G25** (Tannet/REA), **G23**
+  (Regelkreis-Runtime), **G08** (Lippensync), **G26** (Node 24 vs 22): Server/Runtime/Provider = GAP-REMOTE.
+- **G13** (historische Nachweise ≠ Quellen): aktive Gates grün; historische Snapshots bleiben Evidenzhygiene.
+
+---
+
+# Maßgebliche Palette + Regelkreis-Betriebsmodus · 05.11.2026 (Branch claude/youthful-sagan-bzmkkr)
 
 Freigabe Nutzer 05.11.: Arbeit als governance-gesteuerter Teil der AI FACTORY. Betriebsmodus ist ab sofort der
 Regelkreis aus `skills/nexify-governed-delivery/SKILL.md` (DECISIONS D-FACTORY-20261105). Ehrlich: der native
