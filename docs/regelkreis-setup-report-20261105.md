@@ -85,6 +85,12 @@ kein passives Warten** — der Loop setzt je eintreffender Owner-Zulieferung am 
   test_mailer_cap — alle grün im Venv; Self-Healing der stale gewordenen Bindings (acceptance-coverage source_sha256,
   reale Shop-Browser-Evidence neu erzeugt: 8 Katalog- + 10 Shop-Checks PASS, reconciliation nachgezogen). `make check`
   EXIT=0, python 748 OK, regel-pruefung 38/38, image-uniqueness PASS. Teil von Task #12 (Backend-Härtung).
+  **Klassen-Nachweis (Regelkreis-Schließung der gesamten Fehlerklasse, nicht nur der Instanz):** systematischer
+  Abgleich ALLER `db.<collection>`-Laufzeitzugriffe der Shop-API (`apps/shop-api/shop/*.py`, Nicht-Test) gegen die
+  19er-`COLLECTIONS`-Allowlist ergibt **0 undeklarierte Collections** (einziger vermeintlicher Treffer
+  `db.ensure_indexes` ist die async-Funktion in `shop/db.py`, keine Collection). Damit ist die 503-Schema-Sperre-
+  Klasse, die VADE in zwei Instanzen (`quotes` → Commit `e0fdb52`, `mail_quota` → `cdaab78`) gemeldet hatte,
+  vollständig geschlossen: keine weitere latente Laufzeit-Autocreate-Collection existiert.
 - **Grenze des session-exekutierbaren In-Repo-Scopes:** Binäre Prüfkette = 100 % grün. Offene Tasks #10 (Copy-Tiefe/
   KI-Muster — editorial, kein binäres Gate; jede Copy-Änderung kaskadiert den Evidence-Loop), #11/#15 (echte Bildserie —
   E2 owner-gated), #12-Rest (Katalog/Preise — E1/E3 owner-gated). AI-Coverage-Audit `blocked` ist advisory (exit 0) und
