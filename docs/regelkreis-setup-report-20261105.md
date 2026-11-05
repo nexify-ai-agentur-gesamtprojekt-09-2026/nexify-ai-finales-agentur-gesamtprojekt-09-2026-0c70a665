@@ -46,6 +46,13 @@ P01–P26 ABNAHME ◄── [E7 Owner-Gate: reconciliation-Validator untersagt a
 | E5 | Regelkreis-Runtime (Oracle/Hermes/AgentMemory) unerreichbar | kein nativer autonomer Loop, nur manuelle Emulation | MCP/VPS-Zugang bereitstellen oder bestätigen |
 | E6 | CI-Settings | `review`+`Workers Builds` rot, Live-Preview offen | review-API-Key-Secret, Cloudflare-Worker-Name ≤54, Vercel-CLI-Session |
 | E7 | Abnahme = Owner-Gate (Validator) | P01–P26 bleiben not_accepted | je Phase mit Nachweis abnehmen |
+| E8 | Claude-Design-`/p/`-Links (NeX2Fly Suite, Impressum/Datenschutz) liefern HTTP 403 — aus der Cloud-Session keine authentifizierte Route (verifiziert) | diese Design-Dateien nicht ingestierbar/steuerbar; Design-Governance läuft stattdessen über den Repo (Tokens/Gates/Komponenten/Einmaligkeit) | die `.dc.html` in den Chat hochladen (bewährte Route wie Startseite+Komponenten) ODER eine erreichbare Design-MCP/Export bereitstellen |
+
+**Design-Steuerung (Verantwortung übernommen):** Das maßgebliche Designsystem wird im Repo gesteuert und durchgesetzt —
+`docs/design/design-system-authoritative-20261105.md` (+ versionierte Startseite/Komponenten-Quellen), die Token-Ebene
+(`masterplan-tokens.css` + kanonische `design-tokens.json`), die Gates (css-norm, regel-pruefung) und das
+Bild-Einmaligkeits-Gate. Claude-Design-App-Dateien sind ein Eingang, der per E8 nur über Chat-Upload/erreichbare
+MCP ins Repo gelangt; bis dahin ist die Repo-Governance der verbindliche Steuerstand.
 
 ## Deep-Dive-Status (tiefste unabhängige Knoten)
 Alle autonom + sicher ausführbaren Blätter sind exekutiert und belegt (Design-System, shop-api-Korrektheits-/
