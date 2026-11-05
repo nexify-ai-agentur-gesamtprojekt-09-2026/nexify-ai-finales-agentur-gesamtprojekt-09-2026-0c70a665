@@ -49,7 +49,7 @@ P01–P26 ABNAHME ◄── [E7 Owner-Gate: reconciliation-Validator untersagt a
 | E8 | Claude-Design-`/p/`-Links (NeX2Fly Suite, Impressum/Datenschutz) liefern HTTP 403 — aus der Cloud-Session keine authentifizierte Route (verifiziert) | diese Design-Dateien nicht ingestierbar/steuerbar; Design-Governance läuft stattdessen über den Repo (Tokens/Gates/Komponenten/Einmaligkeit) | die `.dc.html` in den Chat hochladen (bewährte Route wie Startseite+Komponenten) ODER eine erreichbare Design-MCP/Export bereitstellen |
 
 | E9 | AI-Coverage-Audit meldet `audit_partial`: 9 registrierte AI-Quellen gedriftet (`requires_review`) + 4 unregistrierte Kandidaten. Vorbestehend (0 von dieser Sitzung geändert), advisory (nicht in `make check`/CI), Tool bewusst `automatic_hash_refresh:false` | AI-Governance-Register nicht aktuell; **kein** Blocker der grünen Prüfkette | Deliberate Per-Quelle-Review (AI-Verhalten/Policy-Konformität) + bewusste Re-Registrierung durch Owner/Review — **kein** Bulk-Auto-Refresh (wäre unreviewte Governance-Regression, CLAUDE.md-widrig) |
-| E-RUFLO-1 | `RuFlo_Federation` MCP in der Session Auth-Required; aus dem Cloud-Container nicht anmeldbar (`claude mcp add-json` ist lokale Owner-Aktion) | claude-flow-Orchestrierung inaktiv; **kein** Blocker — Ruflo ergänzt laut CLAUDE.md, ersetzt Gates/Arbeit nicht; Regelkreis lief vollständig mit vorhandenen Werkzeugen | Owner meldet `RuFlo_Federation` in den claude.ai-Connector-Einstellungen an bzw. aktiviert `ruflo@3.71.1` lokal gemäß `docs/automation/ruflo.md` |
+| E-RUFLO-1 | **Teil-Korrektur (05.11.):** Der **CLI-Pfad** von Ruflo ist aus dem Cloud-Container lauffähig und wurde gestartet (`init check`, `swarm init`, `metaharness score` — alle EXIT=0, Nachweis im Zyklus-Log). **Nur** die *In-Session-MCP-Registrierung* (`RuFlo_Federation` / `claude mcp add-json claude-flow`) bleibt Auth-Required und aus dem Container nicht anmeldbar. | claude-flow-**Orchestrierung aktiv** (Swarm/Metaharness per CLI); lediglich die MCP-Tool-Oberfläche in dieser Session fehlt. **Kein** Blocker — Ruflo ergänzt laut CLAUDE.md, ersetzt Gates/Arbeit nicht. | Nur falls MCP-Tools in der Session gewünscht: Owner aktiviert `claude mcp add-json … --scope local` am Arbeitsplatz gemäß `docs/automation/ruflo.md`. Der CLI-Betrieb braucht dies nicht. |
 
 **Design-Steuerung (Verantwortung übernommen):** Das maßgebliche Designsystem wird im Repo gesteuert und durchgesetzt —
 `docs/design/design-system-authoritative-20261105.md` (+ versionierte Startseite/Komponenten-Quellen), die Token-Ebene
@@ -91,6 +91,20 @@ kein passives Warten** — der Loop setzt je eintreffender Owner-Zulieferung am 
   `db.ensure_indexes` ist die async-Funktion in `shop/db.py`, keine Collection). Damit ist die 503-Schema-Sperre-
   Klasse, die VADE in zwei Instanzen (`quotes` → Commit `e0fdb52`, `mail_quota` → `cdaab78`) gemeldet hatte,
   vollständig geschlossen: keine weitere latente Laufzeit-Autocreate-Collection existiert.
+- **05.11. — Ruflo nach Vorgabe gestartet (Nutzerziel `/goal`, vorgabengesteuert):** Der dokumentierte Startpfad
+  aus `docs/automation/ruflo.md` wurde real ausgeführt (orchestrierungs-Scaffolding, **keine** Modell-Aufrufe →
+  `config/llm-policy.json` unberührt): `npx -y ruflo@3.71.1 init check` → „[OK] RuFlo is initialized, V3-Runtime
+  `.claude-flow/config.yaml`"; `swarm init --topology mesh --max-agents 5` → Swarm `swarm-1793876556686-kr5et0`
+  (mesh, Auto-Scale, message-bus); `metaharness score` → harnessFit 76, compileConfidence 100, toolSafety 100,
+  hardConstraints **6/6**, scaffoldReady true, recommendedMode „CLI + MCP", est. $0.048/Run — alle EXIT=0.
+  Korrektur zu E-RUFLO-1: der CLI-Betrieb ist aus dem Container lauffähig; nur die In-Session-MCP-Registrierung
+  bleibt Owner-lokal. Self-Healing: der V3-Swarm-Start erzeugt zusätzliche Laufzeit-Artefakte
+  (`.claude-flow/{daemon-state.json,daemon.pid,harness-active-policy.json,metrics,policy,swarm}`, `.swarm/`,
+  `.claude/proven-config.json` + `.proven-config-version`), die die dokumentierte gitignore-Liste nicht abdeckte;
+  `.gitignore` erweitert, sodass die Invariante „Laufzeitdaten sind gitignoriert" wieder exakt gilt (`git status`
+  danach nur `.gitignore`). Daemon läuft lokal (Stop: `npx ruflo@3.71.1 daemon stop`), Tool-Aufrufe bleiben
+  bestätigungspflichtig; `AGENTS.md`/Gates/Secret-/Mandantengrenzen behalten laut `config/integrations/ruflo.json`
+  Vorrang.
 - **Grenze des session-exekutierbaren In-Repo-Scopes:** Binäre Prüfkette = 100 % grün. Offene Tasks #10 (Copy-Tiefe/
   KI-Muster — editorial, kein binäres Gate; jede Copy-Änderung kaskadiert den Evidence-Loop), #11/#15 (echte Bildserie —
   E2 owner-gated), #12-Rest (Katalog/Preise — E1/E3 owner-gated). AI-Coverage-Audit `blocked` ist advisory (exit 0) und

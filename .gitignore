@@ -66,3 +66,14 @@ apps/shop-api/data/
 .claude-flow/logs/
 .claude-flow/sessions/
 .claude-flow/neural/
+# Ruflo v3 runtime artifacts (swarm/daemon/metaharness start): ephemeral per-workstation
+# state, never versioned. Versioned Ruflo config stays config.yaml + CAPABILITIES.md only.
+.claude-flow/daemon-state.json
+.claude-flow/daemon.pid
+.claude-flow/harness-active-policy.json
+.claude-flow/metrics/
+.claude-flow/policy/
+.claude-flow/swarm/
+.swarm/
+.claude/proven-config.json
+.claude/.proven-config-version
