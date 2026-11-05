@@ -54,8 +54,17 @@ async def deliver(event_key):
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not key or not origin:
         return await _finish(event_key, claim_id, "fehlgeschlagen", "not_configured", count=True)
-    if cap.isdigit() and await db.outbox.count_documents({"status": "gesendet", "sent_at": {"$gte": today}}) >= int(cap):
-        return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
+    # Atomic daily-cap reservation: reserve a slot before any send so concurrent deliveries
+    # cannot each pass a count-then-act check and exceed the cap. Upsert on a per-day quota doc
+    # increments only while sent < cap; once at cap the conditional upsert hits the unique _id and
+    # raises DuplicateKeyError. The slot is released below on a definite non-send.
+    reserved = False
+    if cap.isdigit():
+        try:
+            await db.mail_quota.find_one_and_update({"_id": today, "sent": {"$lt": int(cap)}}, {"$inc": {"sent": 1}}, upsert=True)
+            reserved = True
+        except DuplicateKeyError:
+            return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
     payload = {"from": origin, "to": [claim["to"]], "subject": claim["subject"], "html": claim["html"], "text": claim["text"]}
     if claim.get("reply_to"):
         payload["reply_to"] = claim["reply_to"]
@@ -64,6 +73,8 @@ async def deliver(event_key):
         {"_id": event_key, "status": "wird_vorbereitet", "claim_id": claim_id},
         {"$set": {"status": "wird_gesendet", "claimed_at": now_iso()}})
     if not started:
+        if reserved:
+            await db.mail_quota.update_one({"_id": today}, {"$inc": {"sent": -1}})
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
     try:
         async with httpx.AsyncClient(timeout=20, transport=transport) as client:
@@ -75,6 +86,9 @@ async def deliver(event_key):
         await db.outbox.update_one({"_id": event_key, "status": "wird_gesendet", "claim_id": claim_id}, {"$set": {"status": "gesendet", "sent_at": now_iso(), "provider_id": response.json().get("id")}, "$inc": {"attempts": 1}})
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
     # No provider rejection contract is established here; do not guess it is retry-safe.
+    # The provider rejected the request, so no mail left: release the reserved daily slot.
+    if reserved:
+        await db.mail_quota.update_one({"_id": today}, {"$inc": {"sent": -1}})
     return await _finish(event_key, claim_id, "abgleich_erforderlich", "provider_http_%d" % response.status_code, count=True)
 
 
