@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-05T06:39:37.101Z",
+  "recorded_at": "2026-11-05T06:47:03.239Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -80,7 +80,7 @@
     "apps/web/components/IdentityHero.css": "cf4cae78e3fcde94a8bbcff43422540c328fca45c7d300a6677ec139082d02a0",
     "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
     "apps/site/tests/browser-identity-hero.mjs": "359114f9be686db9e0acddb3ea8be2bfb639b24d397889a247f81a2e2863fba5",
-    "packages/tokens/tokens.css": "dd45d0d93f506073aa718b701019d0e163b233a8d881a9245391c1ded94d06ae",
+    "packages/tokens/tokens.css": "cf452d583a057f4e9e7254f5047bb1b0276b5d02be246ba18e4bb880e6837180",
     "apps/site/tests/browser-critical.mjs": "476d9f1cc4f5fb0e6c655e5456b09e0dd453174349aea5d2627ab25c741885cd"
   },
   "sdk_source_sha256": {
@@ -147,7 +147,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-05T06:39:37.101Z",
+    "recorded_at": "2026-11-05T06:47:03.239Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

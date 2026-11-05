@@ -380,7 +380,7 @@
     "config/deployment-topology.json": "5a1d30a37c0badffa8a7ee72ecd9c4b5312c0ada8dc5efd80a941f665b9a62c4",
     "config/design-reference-audit.json": "42fa32f4adbce69147e3ce6d58d3b069f09dc74f424e392bc11086bd23b74663",
     "config/design-rules.json": "8afcdc885e2953aaab273421b071e83d4a175095a215b629e23968453d0f4a02",
-    "config/design-tokens.json": "84bb18f0f4db89b42b5671b91a69a1b75b7b0e336f9dca70e1ed75c288e3f863",
+    "config/design-tokens.json": "69e9d037928c7a1d48192a8835900157de66a97d6cd268aa18ea0c8e6966c052",
     "config/editorial-art.json": "c13ef0b7e45d24d07387ea5814b50f2b5c441661301e24bb11cbe9e589879fcc",
     "config/environment-contract.json": "c730dc3b0fc8187d9a190b7fe22ae23cab12c0520c7c47f8f0cf7c01d0a71abb",
     "config/extern/README.md": "adc21ad356b5a6e5567a1a1231dd1f872a528cc765b4b4a1bd4c8e82409c854b",
@@ -486,9 +486,9 @@
     "packages/design-system/index.css": "804df67d783710df8a3e44c963a0337edb02b206849e1b8be8ca14ae9fb622ce",
     "packages/observability/sentry-server.ts": "cf8156d3fa26108f7c7c20c3b799d47cd8a625366768878d30933977a2b53757",
     "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
-    "packages/tokens/tokens.css": "dd45d0d93f506073aa718b701019d0e163b233a8d881a9245391c1ded94d06ae",
-    "packages/tokens/tokens.json": "229ddd2a1ea340d656943dd79992b7d48dff3be7ec1629473cf725f20cc8e412",
-    "packages/tokens/tokens.ts": "859ff4de7a5f7363af79669c8b12835bbaae32e3e15ac9364f545164f577f433",
+    "packages/tokens/tokens.css": "cf452d583a057f4e9e7254f5047bb1b0276b5d02be246ba18e4bb880e6837180",
+    "packages/tokens/tokens.json": "8e6b07a83cb31de037c062680fbd0070876e46c5bcf4fe62b1bb4717554a771f",
+    "packages/tokens/tokens.ts": "3dff43d0f44051153a11b10c7352244d8b7a3130ddaa4995301cc93d263f5042",
     "packages/ui/components.css": "f3b6d35ccb9db4af459883704329464c224003b518f007a4a4ba7d03a310a83e",
     "packages/ui/index.html": "4bcb62af84b897f92e5f46e62f2e2f979e42deb040d518a354ad1b93cc610503",
     "pnpm-lock.yaml": "0de51b88300252563fb0ee688d2c57b59c8b302e948ab23e8f8602b45e8fd577",
@@ -501,10 +501,10 @@
   "served_artifact_sha256": {
     "apps/site/dist/.well-known/security.txt": "320914518331ddf253560d2cccb2588aab692e27a91356d91a9fd60ac547c15c",
     "apps/site/dist/assets/PublicOrientationChat-2Gsb1Jew.css": "033f3e8ad1e808fc18e38762659e427afb1cd450498fdef3e76fab60f751a107",
-    "apps/site/dist/assets/PublicOrientationChat-gfDRtqYH.js": "1c0e36e29c756ad3605d0613c9f8c69e6dc6ee336f19ee86e2dcb7390a2ebfa8",
+    "apps/site/dist/assets/PublicOrientationChat-FyXJK-qJ.js": "6c2c36af9577e7f334479cbdd492316d914cf2109d57332590b3b5c4cbf3a42a",
     "apps/site/dist/assets/exception-autocapture-BXAvG-kd.js": "f18d5599c630de1dc700e51ac4b8840fd69c9de1973b4d1ebf64d0dce1dd6619",
-    "apps/site/dist/assets/index-BORyaDY1.js": "62427f517261d72fddb61ff1aaf3fbc73ffac2def0a625f5feed934e254bca80",
-    "apps/site/dist/assets/index-Cofqrzwe.css": "054ae39603477b0f6066b5fcb2e5a87b2ff67645f7c60a5cdba978412cdd3301",
+    "apps/site/dist/assets/index-Bsy8ZmSZ.js": "19baf008bac18a93ec6a0161e1c6789e1a5994d4833b08af12c38b508523cefc",
+    "apps/site/dist/assets/index-C5aXC1cL.css": "cfd31dec93876b0ff6d72b0bceb555f1e5d681c99428ba2d2205a1cee368e759",
     "apps/site/dist/assets/module.no-external-Dc6An4pv.js": "69c328275159c88687c584199b061e7c6148926655a103a734ec3bea2954a51f",
     "apps/site/dist/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
     "apps/site/dist/fonts/geist-mono-latin.woff2": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
@@ -513,7 +513,7 @@
     "apps/site/dist/icon-192.png": "f275a07821cbb3e53b9531219246cf242d29c02d0110b5819e348f1e9896a627",
     "apps/site/dist/icon-512.png": "1ffcf5205f71ef3ca4a8104fa80945fc941dc251cd216dfdd78e714479d86a59",
     "apps/site/dist/icon-maskable-512.png": "ce261773ce39f6cb57d4c0b5c8a2ab7aa7a48ce5e5ec5bce5dfc266bc7d55cad",
-    "apps/site/dist/index.html": "678f5e7426e0190df7bd141b8d2cf3bceff6e5c0a11a69e97bd6e2fb48636324",
+    "apps/site/dist/index.html": "08702503b0136896720d2a5787c59b3b0822671c2bd79e2c992c93ec5ebca000",
     "apps/site/dist/media/atelier/automotive-metal-20261101.webp": "28397339d1fbbd632507f5e6d55185d717c612c1eb9261486dc314434b165d72",
     "apps/site/dist/media/atelier/films/automotive-20261102.jpg": "48862bff93f7c5ea348c9cadefd887762c72053d9674ad89b5bc24f0d095d076",
     "apps/site/dist/media/atelier/films/automotive-20261102.mp4": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
@@ -611,7 +611,7 @@
   "release_kind": "synthetic_test_release_not_delivered",
   "controlled_unhandled_frames": [
     {
-      "filename": "http://127.0.0.1:33599/src/synthetic-error.js",
+      "filename": "http://127.0.0.1:34067/src/synthetic-error.js",
       "lineno": 1,
       "colno": 46
     }

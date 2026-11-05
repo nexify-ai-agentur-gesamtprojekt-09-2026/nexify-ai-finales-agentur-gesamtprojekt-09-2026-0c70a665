@@ -3,30 +3,31 @@
   "color": {
     "graphit": {
       "900": {
-        "$value": "#080A0F",
-        "$type": "color"
+        "$value": "#111312",
+        "$type": "color",
+        "$description": "Maßgebliches Ink/Seitengrund (NeXify_Startseite); warm angeglichen 05.11.2026"
       },
       "850": {
-        "$value": "#0F131A",
+        "$value": "#191B1C",
         "$type": "color",
-        "$description": "Masterplan Oberfläche"
+        "$description": "Maßgebliche Oberfläche/Panel"
       },
       "800": {
-        "$value": "#080A0F",
+        "$value": "#191B1C",
         "$type": "color",
-        "$description": "Zusammenhängende Masterplan-Markenfläche"
+        "$description": "Zusammenhängende Markenfläche (maßgeblich)"
       },
       "700": {
-        "$value": "#141A22",
+        "$value": "#242728",
         "$type": "color"
       },
       "650": {
-        "$value": "#1A2029",
+        "$value": "#1E2122",
         "$type": "color",
         "$description": "Karte unten"
       },
       "600": {
-        "$value": "#202733",
+        "$value": "#242728",
         "$type": "color",
         "$description": "Karte oben"
       }
@@ -37,31 +38,31 @@
         "$type": "color"
       },
       "mittel": {
-        "$value": "#363A38",
+        "$value": "rgba(255,255,255,.12)",
         "$type": "color"
       },
       "stark": {
-        "$value": "#4A4F4C",
+        "$value": "rgba(255,255,255,.18)",
         "$type": "color"
       }
     },
     "text": {
       "primaer": {
-        "$value": "#FFFFFF",
+        "$value": "#F3F0EA",
         "$type": "color"
       },
       "sekundaer": {
-        "$value": "#E3E6E3",
+        "$value": "#E2DFD8",
         "$type": "color"
       },
       "tertiaer": {
-        "$value": "#BCC1BD",
+        "$value": "#BDC5C9",
         "$type": "color"
       },
       "gedaempft": {
-        "$value": "#9CA29E",
+        "$value": "#B9BBBA",
         "$type": "color",
-        "$description": "5,9:1 auf graphit-800"
+        "$description": "≈8,96:1 auf graphit-800 #191B1C (AAA)"
       },
       "aufLime": {
         "$value": "#111312",
@@ -362,12 +363,12 @@
   },
   "gradient": {
     "markenlicht": "radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%)",
-    "karte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
-    "kleineKarte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
+    "karte": "linear-gradient(180deg, #242728 0%, #191B1C 100%)",
+    "kleineKarte": "linear-gradient(180deg, #242728 0%, #191B1C 100%)",
     "buttonPrimaer": "#A8C76A",
     "balken": "linear-gradient(90deg, #789C48, #A8C76A)",
-    "band": "#080A0F",
-    "seitengrund": "#080A0F",
+    "band": "#111312",
+    "seitengrund": "#111312",
     "spotlight": "none",
     "atelierGlass": "linear-gradient(145deg, color-mix(in srgb, var(--color-atelier-platinum) 8%, transparent), transparent 45%), var(--color-atelier-glass)",
     "atelierLight": "radial-gradient(ellipse at 85% 5%, color-mix(in srgb, var(--color-atelier-champagne) 7%, transparent), transparent 58%)",
