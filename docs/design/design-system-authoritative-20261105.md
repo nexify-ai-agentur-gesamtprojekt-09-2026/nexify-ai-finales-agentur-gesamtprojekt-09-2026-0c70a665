@@ -59,3 +59,22 @@ erhalten, reversibler Schritt vor Cutover). Reihenfolge:
 2. **globals.css + Kernkomponenten** auf die warme Palette umstellen, je Zyklus mit Playwright-Nachweisen.
 3. **TEILEKLAR** behält eigene Marke, erbt aber dieselbe System-Grammatik.
 4. Hero/Bildserie und Einmaligkeit darauf aufsetzen.
+
+## Komponenten-Bibliothek (hochgeladen 05.11.2026) — maßgebliches Pendant zur Startseite
+Quelle versioniert: `NeXify_Komponenten.source.html` (Originalupload, 613 KB) und `NeXify_Komponenten.template.html`
+(extrahierte Vorlage, 37 KB) im selben Verzeichnis. Die Bibliothek definiert die systemweite Komponenten-Grammatik
+in zehn Abschnitten: **Farb-Tokens · Typografie · Buttons & Links · Formular · Chips, Badges & Nav · Karten & Panels ·
+Rückmeldungen · Tabs, Schalter & Fortschritt · Tabelle · Glas & Bewegung**. Typografie bestätigt: Display Plus Jakarta
+Sans 500–800 (Tracking −.03/.04em), Fließtext Inter 400/500/600 (line-height 1.6), Mono Geist Mono.
+
+**Gemessene Palette (Häufigkeit):** `#C4B394` Champagner (21× — häufigster Akzent, Signatur) · `#F3F0EA` / `#E2DFD8`
+Text · `#C0EE38`/`#DBF68A`/`#A6D820` Lime · `#BDC5C9` tertiär · `#B9BBBA` gedämpft · `#111212`/`#111312` Ink ·
+`#1E2122` Panel · `#15171A` Verlaufsstopp · `#8C8F8E` (10×, beobachteter gedämpfter Grauton — Rolle noch nicht
+zugeordnet, daher **nicht** als Token erfunden; Entscheid/Benennung offen).
+
+**Umsetzung 05.11. (Stufe 1 Ergänzung):** Der Signatur-Akzent **Champagner `#C4B394`** fehlte im Token-Layer, obwohl
+oben als Signatur geführt. Ergänzt in `apps/web/app/masterplan-tokens.css`: `--color-brand-champagne` + Alias
+`--color-marke-champagner` + `--gradient-champagner` (`linear-gradient(115deg,#F3F0EA 8%,#C4B394 62%,#BDC5C9 100%)`).
+Token eingeführt (verfügbar); die Komponenten-Adoption (Champagner in Karten-/Panel-/Akzentflächen) ist Stufe 3b.
+Die `{{ s.name }}/{{ s.hex }}`-Swatch-Liste ist eine JS-Datenschleife in `data-props` der Komponenten-Nodes; die
+exakten Token-Namen folgen bei der Stufe-3b-Adoption aus dieser Datenquelle, nicht aus Schätzung.
