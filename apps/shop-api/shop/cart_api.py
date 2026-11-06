@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import auth, pricing
+from . import auth, bigbuy_order, config, pricing
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/shop/cart")
@@ -39,7 +39,7 @@ async def merge(ident):
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": list(items.values()), "updated_at": now_iso()}}, upsert=True)
 
 
-async def priced(owner, shipping_cents=None):
+async def priced(owner, shipping_cents=None, address=None):
     cart = await db.carts.find_one({"owner": owner}) or {"items": []}
     settings = await pricing.settings(db)
     ids = [i["product_id"] for i in cart["items"]]
@@ -50,7 +50,7 @@ async def priced(owner, shipping_cents=None):
         if not product or not product.get("active"):
             changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
             continue
-        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"], shipping_cost_cents=product.get("shipping_cost_cents", 0))
+        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
         stock = product.get("stock", 0)
         if item.get("price_seen_cents") is not None and item["price_seen_cents"] != unit:
             changes.append({"product_id": product["_id"], "kind": "price", "name": product["name"], "old": item["price_seen_cents"], "new": unit})
@@ -60,11 +60,24 @@ async def priced(owner, shipping_cents=None):
                       "image": (product.get("images") or [None])[0], "quantity": item["quantity"], "unit_cents": unit,
                       "line_cents": unit * item["quantity"], "stock": stock})
     subtotal = sum(l["line_cents"] for l in lines)
-    shipping = settings["shipping_cents"] if shipping_cents is None else shipping_cents
-    total = subtotal + (shipping if lines else 0)
-    return {"lines": lines, "changes": changes, "subtotal_cents": subtotal, "shipping_cents": shipping if lines else 0,
+    shipping_pending = False
+    if shipping_cents is not None:
+        shipping = shipping_cents if lines else 0
+    elif not lines:
+        shipping = 0
+    elif subtotal >= config.SHIP_FREE_THRESHOLD_CENTS:
+        shipping = 0
+    elif address is not None and address.get("country") and address.get("zip"):
+        quote = await bigbuy_order.cart_shipping_quote("production", [{"reference": l["sku"], "quantity": l["quantity"]} for l in lines], address["country"], address["zip"])
+        shipping = quote["cost_cents"] if quote and quote.get("cost_cents") is not None else config.SHIPPING_FALLBACK_CENTS
+    else:
+        shipping = 0
+        shipping_pending = True
+    total = subtotal + shipping
+    return {"lines": lines, "changes": changes, "subtotal_cents": subtotal, "shipping_cents": shipping,
             "total_cents": total, "vat_included_cents": pricing.vat_share_cents(total), "vat_percent": str(pricing.config.VAT_PERCENT),
-            "currency": "EUR", "count": sum(l["quantity"] for l in lines)}
+            "currency": "EUR", "count": sum(l["quantity"] for l in lines),
+            "shipping_pending": shipping_pending, "free_shipping_threshold_cents": config.SHIP_FREE_THRESHOLD_CENTS}
 
 
 @router.get("")
@@ -89,7 +102,7 @@ async def set_item(body: ItemIn, request: Request, response: Response):
         settings = await pricing.settings(db)
         if not settings["price_released"]:
             raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
-        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"], shipping_cost_cents=product.get("shipping_cost_cents", 0))
+        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
         items.append({"product_id": body.product_id, "name": product["name"], "quantity": body.quantity, "price_seen_cents": unit})
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": items, "updated_at": now_iso()}}, upsert=True)
     return await priced(ident.owner)

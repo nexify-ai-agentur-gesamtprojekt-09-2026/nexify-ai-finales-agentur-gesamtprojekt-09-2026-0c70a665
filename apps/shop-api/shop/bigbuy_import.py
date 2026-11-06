@@ -153,7 +153,7 @@ def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_
             "description": info.get("description") or "", "images": image_urls[:12],
             "category_ids": sorted({category_id, root_id}), "category_id": category_id,
             "purchase_cents": to_cents(first(row, "wholesalePrice", "wholesale_price")),
-            "stock": stock_quantity(stock), "details": details, "active": True,
+            "stock": stock_quantity(stock), "details": details, "active": int(shipping_cost_cents) <= config.SHIP_MAX_CENTS,
             "shipping_cost_cents": int(shipping_cost_cents), "source": "bigbuy", "source_environment": environment, "imported_at": stamp, "import_run_id": run_id}
 
 

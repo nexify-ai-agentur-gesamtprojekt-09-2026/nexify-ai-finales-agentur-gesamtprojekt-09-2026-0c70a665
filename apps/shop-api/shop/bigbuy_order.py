@@ -51,6 +51,26 @@ async def shipping_quote(environment, sku, country, postcode, qty=1):
     return cheapest
 
 
+async def cart_shipping_quote(environment, products, country, postcode):
+    """Cheapest shipping option for a whole cart to a destination. Returns {cost_cents, carrier} or None."""
+    if not products:
+        return None
+    payload = {"order": {"delivery": {"isoCountry": country, "postcode": postcode}, "products": products}}
+    try:
+        data = await _call(environment, "POST", "/rest/shipping/orders.json", payload)
+    except BigBuyOrderError:
+        return None
+    cheapest = None
+    for opt in (data or {}).get("shippingOptions") or []:
+        cost = opt.get("cost")
+        if cost is None:
+            continue
+        cents = int(round(float(cost) * 100))
+        if cheapest is None or cents < cheapest["cost_cents"]:
+            cheapest = {"cost_cents": cents, "carrier": (opt.get("shippingService") or {}).get("name") or ""}
+    return cheapest
+
+
 async def check_order(environment, payload):
     return await _call(environment, "POST", "/rest/order/check.json", payload)
 

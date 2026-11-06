@@ -38,6 +38,10 @@ class CheckoutIn(BaseModel):
     quote_hash: str = ""
 
 
+class QuoteIn(BaseModel):
+    address: Address | None = None
+
+
 def address_errors(a: Address):
     errors = {}
     for field in ("first_name", "last_name", "street", "zip", "city", "email"):
@@ -72,10 +76,11 @@ async def shipping_options(request: Request, response: Response):
 
 
 @router.post("/checkout/quote")
-async def checkout_quote(request: Request, response: Response):
+async def checkout_quote(request: Request, response: Response, body: QuoteIn | None = None):
     ident = await owner_for(request, response, create=False)
     await require_price_release()
-    quote = await priced(ident.owner or "none")
+    address = body.address.model_dump() if body and body.address else None
+    quote = await priced(ident.owner or "none", address=address)
     if not quote["lines"]:
         raise HTTPException(409, {"error": "cart_empty"})
     return {**quote, "quote_hash": quote_hash(quote)}
@@ -134,7 +139,7 @@ async def create_order(body: CheckoutIn, request: Request, response: Response, i
         raise HTTPException(422, {"error": "terms_not_accepted"})
     if body.shipping_method != "standard":
         raise HTTPException(422, {"error": "shipping_method_invalid"})
-    quote = await priced(ident.owner)
+    quote = await priced(ident.owner, address=body.address.model_dump())
     if not quote["lines"]:
         raise HTTPException(409, {"error": "cart_empty"})
     if quote["changes"] or quote_hash(quote) != body.quote_hash:
