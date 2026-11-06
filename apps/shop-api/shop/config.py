@@ -21,6 +21,8 @@ SHIP_SAMPLE_POSTCODE = os.environ.get("SHIP_SAMPLE_POSTCODE", "10115")
 FULFILLMENT_AUTO_SUBMIT = os.environ.get("FULFILLMENT_AUTO_SUBMIT", "1") == "1"
 SHIPPING_FALLBACK_CENTS = int(os.environ.get("SHIPPING_FALLBACK_CENTS", "995"))
 MAIL_INTERNAL_TO = os.environ.get("MAIL_INTERNAL_TO", "").strip()
+SHIP_FREE_THRESHOLD_CENTS = int(os.environ.get("SHIP_FREE_THRESHOLD_CENTS", "7500"))
+SHIP_MAX_CENTS = int(os.environ.get("SHIP_MAX_CENTS", "1500"))
 
 
 def revolut_mode():
