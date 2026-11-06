@@ -54,6 +54,11 @@ apps/site/standalone.html
 credentials.json
 .credentials
 
+# Deployment env templates carry no secrets and stay tracked;
+# real .env / .env.* / *.env files remain ignored by the rules above.
+!.env.example
+!apps/web/.env.example
+
 # local secrets / caches (Phase 1)
 memory/test_credentials.md
 apps/shop-api/data/
