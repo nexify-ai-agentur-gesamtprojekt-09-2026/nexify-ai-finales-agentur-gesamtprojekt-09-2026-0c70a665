@@ -45,7 +45,9 @@ async def ensure_webhook(db):
     stored = await db.revolut_webhooks.find_one({"_id": mode})
     if stored and stored.get("url") == url and stored.get("signing_secret"):
         return stored
-    existing = next((w for w in await call("GET", "/api/webhooks") or [] if w.get("url") == url), None)
+    data = await call("GET", "/api/webhooks")
+    hooks = data.get("webhooks", []) if isinstance(data, dict) else (data or [])
+    existing = next((w for w in hooks if w.get("url") == url), None)
     if existing:
         detail = await call("GET", "/api/webhooks/" + existing["id"])
     else:

@@ -3,11 +3,14 @@ from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from . import config
 
 
-def sell_cents(purchase_cents, markup_percent, vat_percent=None):
-    """Gross selling price: purchase × (1 + markup %) × (1 + VAT %), rounded half-up to the cent."""
+def sell_cents(purchase_cents, markup_percent, vat_percent=None, shipping_cost_cents=0):
+    """Gross selling price. Markup applies to the article only; shipping is passed through at cost
+    (no markup) with VAT and baked into the price so the shop can advertise free shipping. Half-up."""
     vat = config.VAT_PERCENT if vat_percent is None else Decimal(vat_percent)
-    value = Decimal(purchase_cents) * (1 + Decimal(markup_percent) / 100) * (1 + vat / 100)
-    return int(value.quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+    article = Decimal(purchase_cents) * (1 + Decimal(markup_percent) / 100) * (1 + vat / 100)
+    shipping = Decimal(shipping_cost_cents) * (1 + vat / 100)
+    return (int(article.quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+            + int(shipping.quantize(Decimal("1"), rounding=ROUND_HALF_UP)))
 
 
 def vat_share_cents(gross_cents, vat_percent=None):

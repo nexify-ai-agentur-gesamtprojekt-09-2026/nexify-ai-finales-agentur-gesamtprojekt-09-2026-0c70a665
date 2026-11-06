@@ -20,7 +20,7 @@ from pymongo import UpdateOne
 from pymongo.read_concern import ReadConcern
 from pymongo.write_concern import WriteConcern
 
-from . import bigbuy_ftp, config
+from . import bigbuy_ftp, bigbuy_order, config
 from .db import now_iso
 
 PAGE_SIZE = 1000
@@ -141,7 +141,7 @@ def stock_total(row):
     return total
 
 
-def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_id, environment):
+def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_id, environment, shipping_cost_cents=0):
     tax_id = first(row, "taxonomy", "taxonomyId")
     if type(tax_id) is not int or tax_id not in taxonomy_names or root_id not in taxonomy_names:
         raise BigBuyReadError("product_category_invalid")
@@ -154,7 +154,7 @@ def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_
             "category_ids": sorted({category_id, root_id}), "category_id": category_id,
             "purchase_cents": to_cents(first(row, "wholesalePrice", "wholesale_price")),
             "stock": stock_quantity(stock), "details": details, "active": True,
-            "source": "bigbuy", "source_environment": environment, "imported_at": stamp, "import_run_id": run_id}
+            "shipping_cost_cents": int(shipping_cost_cents), "source": "bigbuy", "source_environment": environment, "imported_at": stamp, "import_run_id": run_id}
 
 
 async def fetch_catalog(environment):
@@ -205,6 +205,14 @@ async def fetch_catalog(environment):
     for row in rows:
         if "id" in row:
             collected.setdefault(row["id"], (row, info.get(row["id"], {}), images.get(row["id"], []), stock.get(row["id"]), scope[row["taxonomy"]]))
+    for pid in list(collected):
+        values = collected[pid]
+        sku = str(first(values[0], "sku") or "")
+        cents = config.SHIPPING_FALLBACK_CENTS
+        quote = await bigbuy_order.shipping_quote(environment, sku, config.SHIP_SAMPLE_COUNTRY, config.SHIP_SAMPLE_POSTCODE, 1)
+        if quote and quote.get("cost_cents") is not None:
+            cents = quote["cost_cents"]
+        collected[pid] = values + (cents,)
     manifest = [{"source": "api", "taxonomy_ids": roots, "scope_taxonomies": len(scope), "iso_code": "de", "page_size": PAGE_SIZE,
                  "pages": dict(client.page_counts), "rows": {"products": len(rows), "information": len(info), "images": len(images), "stock": len(stock)}}]
     return roots, names, collected, manifest
@@ -220,7 +228,7 @@ async def run_import(db, environment, run_id):
             collected = products
         else:
             roots, names, collected, manifest = await fetch_catalog(environment)
-            products = [build_product(*values[:4], names, values[4], stamp, run_id, environment) for values in collected.values()]
+            products = [build_product(*values[:4], names, values[4], stamp, run_id, environment, shipping_cost_cents=values[5]) for values in collected.values()]
         if not products:
             raise BigBuyReadError("no_products_returned")
         used = {c for p in products for c in p["category_ids"]}
