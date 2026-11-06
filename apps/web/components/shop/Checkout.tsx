@@ -24,7 +24,7 @@ export default function Checkout() {
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => { api<Cart>("/api/shop/cart").then(cart => setEmpty(!cart.lines.length)).catch(() => setEmpty(false)); }, []);
   useEffect(() => { heading.current?.focus(); }, [step]);
-  const loadQuote = async () => { setError(""); try { setQuote(await api<Cart>("/api/shop/checkout/quote", { method: "POST", json: {} })); } catch { setError("Die Bestellübersicht konnte nicht berechnet werden."); } };
+  const loadQuote = async () => { setError(""); try { setQuote(await api<Cart>("/api/shop/checkout/quote", { method: "POST", json: { address } })); } catch { setError("Die Bestellübersicht konnte nicht berechnet werden."); } };
   async function acceptChanges() { setBusy(true); try { await api("/api/shop/cart/confirm-changes", { method: "POST", json: {} }); await loadQuote(); } finally { setBusy(false); } }
   async function order() {
     if (!quote?.quote_hash || busy) return;
@@ -49,7 +49,7 @@ export default function Checkout() {
     </form>}
     {step >= 2 && quote && <div className="tk-review" data-testid="checkout-review">
       <section><h3>Lieferadresse</h3><p data-testid="review-address">{address.first_name} {address.last_name}<br />{address.street}<br />{address.zip} {address.city} · {address.country}<br />{address.email}</p><button className="text-button" onClick={() => setStep(0)} disabled={busy}>Ändern</button></section>
-      <section><h3>Artikel</h3><ul className="tk-review-lines">{quote.lines.map(line => <li key={line.product_id}><span>{line.quantity} × {line.name}</span><span>{money(line.line_cents)}</span></li>)}</ul><Totals cart={quote} /><p className="tk-meta" data-testid="review-shipping-note">Versand: {money(quote.shipping_cents)} · Gesamtpreis inkl. {quote.vat_percent || "19"} % MwSt.: {money(quote.total_cents)}</p></section>
+      <section><h3>Artikel</h3><ul className="tk-review-lines">{quote.lines.map(line => <li key={line.product_id}><span>{line.quantity} × {line.name}</span><span>{money(line.line_cents)}</span></li>)}</ul><Totals cart={quote} /><p className="tk-meta" data-testid="review-shipping-note">Versand: {quote.shipping_cents === 0 ? "Kostenlos" : money(quote.shipping_cents)} · Gesamtpreis inkl. {quote.vat_percent || "19"} % MwSt.: {money(quote.total_cents)}</p></section>
       <SellerInfo />
       {quote.changes.length > 0 && <div role="alert" className="tk-alert" data-testid="checkout-changes"><strong>Änderungen seit dem Hinzufügen:</strong><ul>{quote.changes.map(c => <li key={c.product_id + c.kind}>{c.name}: {CHANGE_TEXT[c.kind]}{c.kind === "price" ? ` (${money(c.old!)} → ${money(c.new!)})` : c.kind === "stock" ? ` (verfügbar: ${c.new})` : ""}</li>)}</ul>
         <button className="outline-button" disabled={busy} onClick={() => void acceptChanges()} data-testid="checkout-accept-changes">Änderungen übernehmen</button></div>}
