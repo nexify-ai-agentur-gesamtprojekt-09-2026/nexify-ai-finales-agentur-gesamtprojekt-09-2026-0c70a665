@@ -50,7 +50,7 @@ async def priced(owner, shipping_cents=None):
         if not product or not product.get("active"):
             changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
             continue
-        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
+        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"], shipping_cost_cents=product.get("shipping_cost_cents", 0))
         stock = product.get("stock", 0)
         if item.get("price_seen_cents") is not None and item["price_seen_cents"] != unit:
             changes.append({"product_id": product["_id"], "kind": "price", "name": product["name"], "old": item["price_seen_cents"], "new": unit})
@@ -89,7 +89,7 @@ async def set_item(body: ItemIn, request: Request, response: Response):
         settings = await pricing.settings(db)
         if not settings["price_released"]:
             raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
-        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
+        unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"], shipping_cost_cents=product.get("shipping_cost_cents", 0))
         items.append({"product_id": body.product_id, "name": product["name"], "quantity": body.quantity, "price_seen_cents": unit})
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": items, "updated_at": now_iso()}}, upsert=True)
     return await priced(ident.owner)
