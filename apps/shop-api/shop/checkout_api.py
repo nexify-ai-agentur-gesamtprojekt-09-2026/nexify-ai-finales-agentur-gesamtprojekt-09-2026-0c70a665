@@ -9,7 +9,7 @@ from fastapi import APIRouter, Header, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 from pymongo.errors import DuplicateKeyError
 
-from . import auth, mail_templates, mailer, pricing, revolut
+from . import auth, fulfillment, mail_templates, mailer, pricing, revolut
 from .cart_api import owner_for, priced
 from .config import PUBLIC_ORIGIN
 from .db import db, now_iso
@@ -186,6 +186,10 @@ async def sync_payment(order):
         current = await db.orders.find_one({"_id": order["_id"]})
         if current and current.get("status") == PAID and current.get("paid_mail_recovery_pending"):
             await send_paid_mails(current)
+        try:
+            await fulfillment.submit_order(current)
+        except Exception:
+            pass
     elif state in ("cancelled", "failed") and order.get("status") == OPEN:
         await db.orders.update_one({"_id": order["_id"], "status": OPEN}, {"$set": {"status": FAILED}})
     return await db.orders.find_one({"_id": order["_id"]})
