@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "artifact": "NEXIFY-MASTER-MCP-001 Phase 0/1 capability inventory",
+  "status": "proposed_baseline_not_runtime",
+  "observed_at": "2026-11-07",
+  "authority_boundary": "Evidence only; no permission, command execution, policy promotion, remote ingestion, paid provider call or model call.",
+  "leading_task_register": "config/acceptance-coverage.json#requirements_reconciliation (read_only_reconciliation_no_runtime_queue; not modified)",
+  "host_limit": "Claude Code cloud session; session host model not switchable by repository files. Managed-LLM policy applies to repo-controlled managed calls only.",
+  "canonical_mcp_entry": {
+    "already_defined_in": "config/mcp-server.json",
+    "name": "nexify-mcp",
+    "declared_protocol_version": "2026-07-28",
+    "transport": "streamable-http stateless",
+    "auth": "OAuth 2.1 issuer check",
+    "runtime_verified": false,
+    "note": "Spec/config exists; no authorized live discovery or tools/call performed this session."
+  },
+  "runtime_claims": {
+    "new_paid_provider_calls": 0,
+    "new_external_messages": 0,
+    "live_mcp_discovery_executed": false,
+    "any_acceptance_criterion_runtime_verified": false
+  },
+  "sources": [
+    {
+      "path": "config/mcp-server.json",
+      "sha256": "eaa380b4fd2cd604ed838748d22bae6d5ac6b5ec9911c053808e5bce8605aece",
+      "present": true
+    },
+    {
+      "path": "config/brain/agents.json",
+      "sha256": "062336475b7436f2f68307df66efc8008e26bde949d5f0508fbfa9746249d5c5",
+      "present": true
+    },
+    {
+      "path": "config/brain/tools.json",
+      "sha256": "3769c93a893ee30ae26a86c9381e01c22d92a06fccd545a98ea149003d2d9427",
+      "present": true
+    },
+    {
+      "path": "config/skills-register.json",
+      "sha256": "593d63f07dfc0272fbea83b8e03c2ef60150857068841c28bfed2b19aca2d157",
+      "present": true
+    },
+    {
+      "path": "config/project-skills.json",
+      "sha256": "1a08d949ad747bdbaf1f833dea5ca55666f0d7e1c8a0423c5a734f97f90f9d6b",
+      "present": true
+    },
+    {
+      "path": "skills-lock.json",
+      "sha256": "6ee354fd704b4b239171d6c4b5c8325ad5820db0635c07f7ffde476b674ac5f8",
+      "present": true
+    },
+    {
+      "path": "config/acceptance-coverage.json",
+      "sha256": "4a9985781aec7999a1f123da9aed04bd1f8b386c45b0c98bb55677cd424da587",
+      "present": true
+    },
+    {
+      "path": "config/llm-policy.json",
+      "sha256": "096c3e8d2547b2195f888b15da7f415b31ba4d5d75b363a2a91056ffaf3004c7",
+      "present": true
+    },
+    {
+      "path": "config/brain/knowledge.json",
+      "sha256": "810f3a9b8b2bda6b32025687c8af1a58ce1b63f889754b097c2149cb01eff4fd",
+      "present": true
+    },
+    {
+      "path": "config/brain/pipeline.json",
+      "sha256": "22d65f7275c06e96d463130d8261ecc7075f211f99a6806111088dcaa2f4c7dd",
+      "present": true
+    },
+    {
+      "path": "config/integrationen.json",
+      "sha256": "436fea813da4ce5ef8e67ce355eaed5f09a2e6163aeecbd28d2a54debf4ed5f9",
+      "present": true
+    },
+    {
+      "path": "config/operating-model.json",
+      "sha256": "cf06ea67d0ad29812541528b64724f6da456b1da59532003f5d410d0b7662845",
+      "present": true
+    },
+    {
+      "path": "tools/automation/mcp_probe.py",
+      "sha256": "6858c3689018bd315b430f824ed5b8b341dbf2739e17a296f081246bfa36c659",
+      "present": true
+    },
+    {
+      "path": "docs/automation/mcp-discovery.md",
+      "sha256": "24c15598bcbf9387d033a84db7eeb0ae5e89e0689a8c0c7c92879eeb7f3eb942",
+      "present": true
+    },
+    {
+      "path": "skills/nexify-governed-delivery/SKILL.md",
+      "sha256": "a86b53e827e2ecc0e1f6e9efb9a3c9c4a4204a1ac00acc246c2d535ff540cf27",
+      "present": true
+    },
+    {
+      "path": "docs/architecture/nexify-master-mcp-001-current-state-20261107.md",
+      "sha256": "7b325d9c9d494bbd7e5a5decbb21e2bc30723f0a85ba1f290ca6a44180f95c25",
+      "present": true
+    },
+    {
+      "path": "docs/architecture/nexify-master-mcp-001-target-architecture-20261107.md",
+      "sha256": "3da3b5c769a85e9572d8363437ce12a070b70f6b931248d3cc67ac0e0bf5d419",
+      "present": true
+    }
+  ],
+  "gaps": [
+    {
+      "id": "GAP-MCP-01",
+      "gap": "No runtime-verified MCP discovery against mcp.nexifyai.cloud",
+      "owner": "D01",
+      "next_action": "Plan authorized read-only discovery via tools/automation/mcp_probe.py; store result as evidence",
+      "due": "after Level-C approval",
+      "blocks": "acceptance criteria 1-20"
+    },
+    {
+      "id": "GAP-MCP-02",
+      "gap": "No Unified MCP Target Architecture document",
+      "owner": "AI Factory Architecture Lead",
+      "next_action": "review; derive subsequent deliverables (threat model, per-adapter contracts)",
+      "due": "+1 cycle",
+      "status": "delivered_doc_proposed_target_not_runtime",
+      "delivered_artifact": "docs/architecture/nexify-master-mcp-001-target-architecture-20261107.md"
+    },
+    {
+      "id": "GAP-MCP-03",
+      "gap": "No Threat Model (order sec.15/23)",
+      "owner": "Security/Pruefer",
+      "next_action": "Author supply-chain / prompt-injection / tool-poisoning threat model",
+      "due": "+1 cycle"
+    },
+    {
+      "id": "GAP-MCP-04",
+      "gap": "No Production Readiness Report / MCP E2E report",
+      "owner": "Pruefer/Waechter",
+      "next_action": "Depends on GAP-MCP-01 real connection",
+      "due": "deferred"
+    },
+    {
+      "id": "GAP-REMOTE-01/02",
+      "gap": "Four reported servers + LightRAG lack proven real access/target binding",
+      "owner": "D01",
+      "next_action": "Prove target binding + real access or keep gap",
+      "due": "ongoing"
+    },
+    {
+      "id": "GAP-OPS",
+      "gap": "Persistent job/runtime layer not in agency repo (run_cycle.sh external)",
+      "owner": "D01/Betrieb",
+      "next_action": "operating contract + evidence of a really running queue/scheduler",
+      "due": "ongoing"
+    }
+  ],
+  "scope_claim_this_session": "Phase 0/1 baseline + inventory AND Phase 2 target architecture (single-writer). GAP-MCP-03 threat model left open for Hermes; GAP-MCP-01 live discovery remains gated.",
+  "deliverables_coverage": {
+    "present_or_partial": [
+      "Current-State Architecture",
+      "Capability & Skill Registry Spec",
+      "Agent & Oracle Integration Contract",
+      "Task & Workflow Integration Contract",
+      "Brain & Knowledge Contract",
+      "Security Architecture",
+      "Authorization Matrix",
+      "Tool & Adapter Catalogue",
+      "API and MCP Schema Documentation",
+      "Runtime & Deployment Architecture",
+      "Migration Plan",
+      "Cost Model",
+      "Monitoring & Evidence Model",
+      "Automated Test Suite",
+      "Recovery & Rollback Plan",
+      "Operational Runbook",
+      "Versioned Change Log",
+      "Unified MCP Target Architecture"
+    ],
+    "gap": [
+      "Threat Model",
+      "End-to-End Test Report",
+      "Production Readiness Report"
+    ]
+  },
+  "phases_delivered": [
+    "phase_0_1_current_state_inventory",
+    "phase_2_target_architecture"
+  ]
+}

@@ -65,3 +65,6 @@ apps/shop-api/data/
 
 # Sites static publication output
 /dist/
+
+# Auto-generated session state (anchor-memory plugin) — not project content
+.anchor/
