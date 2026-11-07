@@ -233,7 +233,25 @@
       "chatNote": "AIFly ORACLE kann Fehler machen. Verbindliche Angaben erhalten Sie im persönlichen Gespräch.",
       "fTitle": "Lassen Sie uns über Ihr Vorhaben sprechen.",
       "fBody": "Erzählen Sie uns, was Sie verändern möchten. Wir klären gemeinsam den passenden nächsten Schritt.",
-      "fCta": "Projekt besprechen"
+      "fCta": "Projekt besprechen",
+      "lKicker": "Der passende Weg",
+      "lTitle": "Welcher Bereich passt zu Ihrem Vorhaben?",
+      "lLead": "Website, wiederkehrender Ablauf oder App und Portal: Die drei erklären kurz, wann welcher Weg sinnvoll ist.",
+      "lChoices": [
+        [
+          "nex",
+          "Möchten Sie Ihr Angebot im Internet verständlich zeigen? Dann ist der Website-Bereich ein guter Einstieg. Dort geht es um Inhalte, Gestaltung und den Weg zur Anfrage."
+        ],
+        [
+          "pascal",
+          "Wenn sich eine Aufgabe ständig wiederholt, schauen wir auf den Ablauf dahinter. Gemeinsam klären wir, welche Schritte sich verbinden lassen und wo Menschen entscheiden sollen."
+        ],
+        [
+          "oracle",
+          "Geht es um Informationen und Zusammenarbeit, kann eine App oder ein Portal der passende Weg sein. Entscheidend ist, was Ihre Kunden oder Ihr Team dort tatsächlich erledigen sollen."
+        ]
+      ],
+      "lClose": "Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Wenn Sie unsicher sind, helfen wir Ihnen beim Einordnen."
     }
   },
   "nl": {
@@ -470,7 +488,25 @@
       "chatNote": "AIFly ORACLE kan fouten maken. Bindende informatie krijgt u in het persoonlijke gesprek.",
       "fTitle": "Laten we over uw plan praten.",
       "fBody": "Vertel ons wat u wilt veranderen. Samen bepalen we de passende volgende stap.",
-      "fCta": "Project bespreken"
+      "fCta": "Project bespreken",
+      "lKicker": "De juiste weg",
+      "lTitle": "Welk gebied past bij uw project?",
+      "lLead": "Website, terugkerend proces of app en portaal: de drie leggen kort uit wanneer welke weg zinvol is.",
+      "lChoices": [
+        [
+          "nex",
+          "Wilt u uw aanbod begrijpelijk online tonen? Dan is het websitegebied een goede start. Het gaat om inhoud, vormgeving en de weg naar een aanvraag."
+        ],
+        [
+          "pascal",
+          "Als een taak zich steeds herhaalt, kijken we naar het proces erachter. Samen bepalen we welke stappen verbonden kunnen worden en waar mensen beslissen."
+        ],
+        [
+          "oracle",
+          "Gaat het om informatie en samenwerking, dan kan een app of portaal de juiste weg zijn. Bepalend is wat uw klanten of uw team daar daadwerkelijk moeten doen."
+        ]
+      ],
+      "lClose": "Kies het gebied dat bij uw project past. Weet u het niet zeker, dan helpen wij u met het inschatten."
     }
   },
   "fr": {
@@ -707,7 +743,25 @@
       "chatNote": "AIFly ORACLE peut se tromper. Les informations fermes vous sont données lors de l’entretien personnel.",
       "fTitle": "Parlons de votre projet.",
       "fBody": "Dites-nous ce que vous souhaitez changer. Nous définissons ensemble la prochaine étape adaptée.",
-      "fCta": "Discuter du projet"
+      "fCta": "Discuter du projet",
+      "lKicker": "La voie adaptée",
+      "lTitle": "Quel domaine correspond à votre projet ?",
+      "lLead": "Site web, processus récurrent ou application et portail : les trois expliquent brièvement quand chaque voie est pertinente.",
+      "lChoices": [
+        [
+          "nex",
+          "Souhaitez-vous présenter votre offre clairement en ligne ? Le domaine site web est alors un bon point de départ. Il s’agit du contenu, du design et du chemin vers la demande."
+        ],
+        [
+          "pascal",
+          "Lorsqu’une tâche se répète sans cesse, nous examinons le processus sous-jacent. Ensemble, nous déterminons quelles étapes peuvent être reliées et où les personnes doivent décider."
+        ],
+        [
+          "oracle",
+          "S’il s’agit d’information et de collaboration, une application ou un portail peut être la voie adaptée. L’essentiel est ce que vos clients ou votre équipe doivent réellement y accomplir."
+        ]
+      ],
+      "lClose": "Choisissez le domaine qui correspond à votre projet. En cas de doute, nous vous aidons à le situer."
     }
   },
   "en": {
@@ -944,7 +998,25 @@
       "chatNote": "AIFly ORACLE can make mistakes. Binding statements are given in the personal conversation.",
       "fTitle": "Let’s talk about your project.",
       "fBody": "Tell us what you want to change. Together we clarify the right next step.",
-      "fCta": "Discuss the project"
+      "fCta": "Discuss the project",
+      "lKicker": "The right path",
+      "lTitle": "Which area fits your project?",
+      "lLead": "Website, recurring workflow, or app and portal: the three briefly explain when each path makes sense.",
+      "lChoices": [
+        [
+          "nex",
+          "Would you like to present your offering clearly online? Then the website area is a good start. It is about content, design and the path to an enquiry."
+        ],
+        [
+          "pascal",
+          "When a task keeps repeating, we look at the process behind it. Together we clarify which steps can be connected and where people should decide."
+        ],
+        [
+          "oracle",
+          "When it is about information and collaboration, an app or a portal can be the right path. What matters is what your customers or your team should actually get done there."
+        ]
+      ],
+      "lClose": "Choose the area that fits your project. If you are unsure, we will help you place it."
     }
   }
 }

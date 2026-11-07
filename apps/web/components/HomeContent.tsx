@@ -38,6 +38,14 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
     <p>{text}</p>
    </li>)}</ol>
   </section>
+  <section id="leistungen" className="hc-section hc-container hl-choice" aria-labelledby="hl-choice-title" data-testid="home-leistungen">
+   <header className="hc-section-heading"><div><span className="hc-kicker">{v.lKicker}</span><h2 id="hl-choice-title">{v.lTitle}</h2></div><p>{v.lLead}</p></header>
+   <ol className="hl-choices">{v.lChoices.map(([who,text],i)=><li key={i} className={`hl-choice-card hv-cue-${who}`}>
+    <div className="hv-cue-who"><img src={avatars[who as keyof typeof avatars]} alt="" width="56" height="56" loading="lazy" decoding="async"/><strong>{v.speakers[who as keyof typeof v.speakers]}</strong></div>
+    <p>{text}</p>
+   </li>)}</ol>
+   <p className="hl-close">{v.lClose}</p>
+  </section>
   <section id="chat" className="hc-section hc-container hv-einstieg" aria-labelledby="hv-chat-title" data-testid="home-einstieg">
    <header className="hc-section-heading"><div><span className="hc-kicker">{v.cKicker}</span><h2 id="hv-chat-title">{v.cTitle}</h2></div><p>{v.cLead}</p></header>
    <ul className="hv-paths">{v.paths.map(([no,title,body,href])=><li key={no}><SiteLink href={href} className="hv-path"><span className="hv-path-no" aria-hidden="true">{no}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{body}</p></SiteLink></li>)}</ul>
