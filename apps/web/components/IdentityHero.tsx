@@ -17,8 +17,9 @@ import './IdentityHero.css';
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
- const headings={de:['Gute Websites','beginnen','bei Ihnen.'],nl:['Goede websites','beginnen','bij u.'],fr:['Un bon site','commence','par vous.'],en:['Good websites','start','with you.']};
- const subtitles={de:'Ihr Unternehmen verdient einen Auftritt, der wirkt.',nl:'Uw onderneming verdient een uitstraling die werkt.',fr:'Votre entreprise mérite une présence qui fait la différence.',en:'Your business deserves a presence that makes an impact.'};
+ const headings={de:['Ein Anspruch.','Ein zusammen­hängender','Auftritt.'],nl:['Eén aanspraak.','Eén samen­hangende','uitstraling.'],fr:['Une exigence.','Une présence','cohérente.'],en:['One standard.','One coherent','presence.']};
+ const subtitles={de:'Marke und Web, Systeme und KI, Sichtbarkeit und Wachstum – als ein System für Ihr Unternehmen.',nl:'Merk en web, systemen en AI, zichtbaarheid en groei – als één systeem voor uw onderneming.',fr:'Marque et web, systèmes et IA, visibilité et croissance – un seul système pour votre entreprise.',en:'Brand and web, systems and AI, visibility and growth – as one system for your business.'};
+ const actions={de:['Vorhaben beschreiben','So entsteht Ihr Projekt'],nl:['Plan beschrijven','Zo ontstaat uw project'],fr:['Décrire le projet','Comment naît votre projet'],en:['Describe your project','How your project takes shape']};
  const cinematic=(ownerCinemaPreview||welcome.production_accepted===true)&&!_video;
  return <section className={"identity-hero"+(cinematic?" identity-hero-cinema":"")} aria-labelledby="home-headline" data-testid="identity-hero" data-media-state={_video?"verified-public-film":cinematic?"owner-private-edited-video":"editorial-still"} data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
@@ -27,8 +28,8 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
     <p className="identity-subtitle">{subtitles[locale]}</p>
     <p className="identity-body" data-testid="hero-description">{page.localizedSummary[locale]}</p>
     <div className="identity-links">
-     <ActionLink variant="text" className="identity-primary-link" href="/leistungsumfang" data-testid="hero-project-link"><span>{t.cta}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionLink>
-     <ActionLink variant="quiet" className="identity-secondary-link" href="/leistungen" data-testid="hero-services-link">{t.services}</ActionLink>
+     <ActionLink variant="text" className="identity-primary-link" href="/leistungsumfang" data-testid="hero-project-link"><span>{actions[locale][0]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionLink>
+     <ActionLink variant="quiet" className="identity-secondary-link" href="#vorhaben" data-testid="hero-services-link">{actions[locale][1]}</ActionLink>
     </div>
    </div>
    <div className="identity-media" data-testid="hero-media">
