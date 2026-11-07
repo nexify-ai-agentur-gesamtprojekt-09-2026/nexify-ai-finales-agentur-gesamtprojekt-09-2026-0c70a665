@@ -39,7 +39,7 @@ Clients (ChatGPT/Oracle/Agent-Runtimes/Portale)
 | 2 | Oracle Control | AIFly ORACLE als Actor; `oracle.*`-Funktionen | spec (`config/prompts/s1-master-orchestrator-*`) |
 | 3 | Agent Registry | `config/brain/agents.json` erweitert um Lebenszyklus-Status | spec |
 | 4 | Skills & Capability Registry | `config/skills-register.json` + `tools/project_skills.py` als Referenz-Registry | partial (Verify lauffähig) |
-| 5 | Task & Workflow | führendes `requirements_reconciliation` + **neuer Runtime-Job-Layer (gap)** | partial (read-only) |
+| 5 | Task & Workflow | führendes `requirements_reconciliation` + bestehenden lokalen Job-Pfad (`tools/local_control.py`) erweitern | partial (lokaler Job-State vorhanden; verteilt = gap) |
 | 6 | Brain & Knowledge | `config/brain/knowledge.json`/`pipeline.json`, `config/rag.json`; Tenant-Trennung erzwungen | partial |
 | 7 | Tools & Integration Gateway | typisierte Werkzeuge in `config/mcp-server.json`; Adapter je Provider | partial |
 | 8 | Models & Evaluation | `config/llm-policy.json` (deepseek…1017/high), `config/langfuse.json` | partial |
@@ -88,11 +88,11 @@ Risikoklassen aus `config/brain/tools.json` sind die Durchsetzungsbasis:
 
 ## 6. Auftrags-/Job-Modell (§8)
 
-Führend bleibt `requirements_reconciliation` (read-only). SOLL-Ergänzung: ein **persistenter Job-Layer** mit eindeutigen Job-IDs und Zuständen, der nicht an die Lebensdauer einer MCP-Anfrage oder Chat-Sitzung gebunden ist; das Gateway gibt einen Auftragsschlüssel zurück, über den der Client Zustand/Ergebnis autorisiert abruft. **Dieser Runtime-Job-Layer ist Ist=gap** (siehe GAP-OPS). Kein zweites unabhängiges Task-Register.
+Führend bleibt `requirements_reconciliation` (read-only). Ein **lokaler persistenter Job-Pfad existiert bereits**: `tools/local_control.py` + `config/local-control.json` führen über die Remediation-DB (`.local/remediation/queue.sqlite3`) Job-IDs, Zustände (`open_awaiting_verification` → `in_progress_limited` → `review_pending` → `verified_complete`/`blocked_not_reviewed`), Leases (30 s) und Evidenz-TTL — nicht an eine MCP-Anfrage oder Chat-Sitzung gebunden. SOLL: **diesen Pfad erweitern, nicht neu bauen**; das Gateway gibt einen Auftragsschlüssel zurück, über den der Client Zustand/Ergebnis autorisiert abruft. Kein zweites unabhängiges Task-Register. Ehrliche Grenze: `local_control.py` ist lokal-lesend (`context.select`/`source.verify`/`brain.preview`), Einzelhost, `distributed_fencing_verified:false`, kein Netz/keine Produktion — ein verteilter, netz-/produktionsfähiger Job-Layer bleibt offen (GAP-OPS).
 
 ## 7. Runtime & Zuverlässigkeit (§16) — ehrliche Grenze
 
-Dauerbetrieb braucht überwachte Dienste, durable Queues, Checkpoints, Idempotency-Keys, Lease/Fencing, Retry-Grenzen, Dead-Letter, Circuit-Breaker, Backup/Restore/Rollback. Die Regelkreis-Runtime (`scripts/run_cycle.sh`) ist **im Agentur-Repo nicht vorhanden** (läuft extern/VPS) — daher ist ein dauerhafter, automatischer Betrieb aus dem Repo heraus nicht belegbar. MCP-Protokollsitzungen sind nicht das einzige Speichermedium laufender Aufgaben.
+Dauerbetrieb braucht überwachte Dienste, durable Queues, Checkpoints, Idempotency-Keys, Lease/Fencing, Retry-Grenzen, Dead-Letter, Circuit-Breaker, Backup/Restore/Rollback. Ein lokaler persistenter Job-State mit Leases existiert bereits (`tools/local_control.py` über die Remediation-DB), ist aber lokal-lesend, Einzelhost und `distributed_fencing_verified:false`. Die verteilte Regelkreis-Runtime (`scripts/run_cycle.sh`) ist **im Agentur-Repo nicht vorhanden** (läuft extern/VPS) — daher ist ein dauerhafter, automatischer verteilter Betrieb aus dem Repo heraus nicht belegbar. MCP-Protokollsitzungen sind nicht das einzige Speichermedium laufender Aufgaben.
 
 ## 8. Migration (§21) — inkrementell, erweitern statt duplizieren
 
@@ -105,7 +105,7 @@ Phase 0/1 (Baseline/Inventar) ✓ geliefert. Phase 2 (dieses Dokument) ✓. Näc
 | GAP-MCP-01 | Keine laufzeitbelegte MCP-Discovery | D01 (+Oracle) | autorisierte lesende Discovery (`mcp_probe.py`), Evidenz ablegen | nach Ebene-C-Freigabe | **gegated** |
 | GAP-MCP-03 | Threat Model fehlt | Security/Prüfer | Supply-Chain/Prompt-Injection/Tool-Poisoning-Threat-Model | +1 Zyklus | offen für Hermes |
 | GAP-MCP-04 | Prod-Readiness + E2E-Report | Prüfer/Wächter | nach GAP-MCP-01 | nachgelagert | — |
-| GAP-OPS | Persistenter Job-/Runtime-Layer (run_cycle.sh extern) | D01/Betrieb | Betriebsvertrag + Nachweis real laufender Queue/Scheduler | laufend | Betrieb |
+| GAP-OPS | Verteilter/netz-/produktionsfähiger Job-Layer offen; lokaler Pfad `tools/local_control.py` (lokal-lesend, Einzelhost, kein Fencing) ist zu **erweitern statt neu zu bauen**; run_cycle.sh extern | D01/Betrieb | bestehenden lokalen Controller erweitern + Nachweis real laufender Queue/Scheduler/Fencing | laufend | Betrieb |
 | GAP-REMOTE-01/02 | 4 Server + LightRAG ohne belegten Realzugriff | D01 | Zielbindung + Realzugriff belegen | laufend | — |
 
 ## 10. Nicht-Ziele / ausdrücklich gegatet
