@@ -17,7 +17,7 @@ import './IdentityHero.css';
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
- const headings={de:['Ein Anspruch.','Ein zusammen­hängender','Auftritt.'],nl:['Eén aanspraak.','Eén samen­hangende','uitstraling.'],fr:['Une exigence.','Une présence','cohérente.'],en:['One standard.','One coherent','presence.']};
+ const headings={de:['Ein Anspruch.','Ein zusammen\u00ADhängender','Auftritt.'],nl:['Eén aanspraak.','Eén samen\u00ADhangende','uitstraling.'],fr:['Une exigence.','Une présence','cohérente.'],en:['One standard.','One coherent','presence.']};
  const subtitles={de:'Marke und Web, Systeme und KI, Sichtbarkeit und Wachstum – als ein System für Ihr Unternehmen.',nl:'Merk en web, systemen en AI, zichtbaarheid en groei – als één systeem voor uw onderneming.',fr:'Marque et web, systèmes et IA, visibilité et croissance – un seul système pour votre entreprise.',en:'Brand and web, systems and AI, visibility and growth – as one system for your business.'};
  const actions={de:['Vorhaben beschreiben','So entsteht Ihr Projekt'],nl:['Plan beschrijven','Zo ontstaat uw project'],fr:['Décrire le projet','Comment naît votre projet'],en:['Describe your project','How your project takes shape']};
  const cinematic=(ownerCinemaPreview||welcome.production_accepted===true)&&!_video;

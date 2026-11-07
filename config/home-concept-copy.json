@@ -167,6 +167,73 @@
         ]
       ],
       "cta": "Über Ihre Sichtbarkeit sprechen"
+    },
+    "v3": {
+      "nav": [
+        "Ihr Vorhaben",
+        "Der passende Weg",
+        "Arbeitsweise",
+        "Budget",
+        "Produkte"
+      ],
+      "vKicker": "Ihr Vorhaben zuerst",
+      "vTitle": "Bevor wir über Technik sprechen.",
+      "vLead": "Pascal, NeX und Oracle erklären, wie aus Ihrer Beschreibung ein geordnetes Vorhaben wird.",
+      "cues": [
+        [
+          "Ziel",
+          "pascal",
+          "Bevor wir über Technik sprechen, schauen wir auf Ihr Vorhaben. Was soll für Ihre Kunden oder Ihr Team einfacher werden? Eine fertige Lösung brauchen Sie dafür noch nicht."
+        ],
+        [
+          "Arbeitsalltag",
+          "nex",
+          "Ein Beispiel aus Ihrem Alltag hilft: Wo beginnt die Arbeit, welche Informationen werden gebraucht und was soll am Ende vorliegen?"
+        ],
+        [
+          "Systeme und offene Fragen",
+          "oracle",
+          "Wir ordnen Ihr Ziel, Ihre vorhandenen Systeme und die offenen Fragen. So wird sichtbar, welcher nächste Schritt sinnvoll ist. Zugangsdaten brauchen Sie für diese erste Beschreibung nicht."
+        ],
+        [
+          "Umfang",
+          "pascal",
+          "Erzählen Sie uns kurz, was Sie verändern möchten. Den passenden Umfang klären wir gemeinsam."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Ihr Einstieg",
+      "cTitle": "Was haben Sie vor?",
+      "cLead": "Beschreiben Sie kurz Ihr Vorhaben oder wählen Sie einen Bereich. Sie erhalten passende Informationen und den Weg zum persönlichen Gespräch.",
+      "paths": [
+        [
+          "01",
+          "Marke & Web",
+          "Positionierung, Sprache, Design und Website als überzeugender Auftritt.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systeme & KI",
+          "Abläufe, Systeme und KI zu einer kontrollierten Arbeitsweise verbinden.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Ads & Marketing",
+          "Angebot, Zielgruppe, Kampagne und Landingpage gemeinsam auf Wirkung ausrichten.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Vorhaben im Chat beschreiben",
+      "chatNote": "AIFly ORACLE kann Fehler machen. Verbindliche Angaben erhalten Sie im persönlichen Gespräch.",
+      "fTitle": "Lassen Sie uns über Ihr Vorhaben sprechen.",
+      "fBody": "Erzählen Sie uns, was Sie verändern möchten. Wir klären gemeinsam den passenden nächsten Schritt.",
+      "fCta": "Projekt besprechen"
     }
   },
   "nl": {
@@ -337,6 +404,73 @@
         ]
       ],
       "cta": "Uw vindbaarheid bespreken"
+    },
+    "v3": {
+      "nav": [
+        "Uw plan",
+        "De passende weg",
+        "Werkwijze",
+        "Budget",
+        "Producten"
+      ],
+      "vKicker": "Eerst uw plan",
+      "vTitle": "Voordat we over techniek praten.",
+      "vLead": "Pascal, NeX en Oracle leggen uit hoe uit uw beschrijving een geordend project ontstaat.",
+      "cues": [
+        [
+          "Doel",
+          "pascal",
+          "Voordat we over techniek praten, kijken we naar uw plan. Wat moet er voor uw klanten of uw team eenvoudiger worden? Een kant-en-klare oplossing hebt u daarvoor nog niet nodig."
+        ],
+        [
+          "Werkdag",
+          "nex",
+          "Een voorbeeld uit uw dagelijkse praktijk helpt: waar begint het werk, welke informatie is nodig en wat moet er aan het eind liggen?"
+        ],
+        [
+          "Systemen en open vragen",
+          "oracle",
+          "We ordenen uw doel, uw bestaande systemen en de open vragen. Zo wordt zichtbaar welke volgende stap zinvol is. Toegangsgegevens hebt u voor deze eerste beschrijving niet nodig."
+        ],
+        [
+          "Omvang",
+          "pascal",
+          "Vertel ons kort wat u wilt veranderen. De passende omvang bepalen we samen."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Uw start",
+      "cTitle": "Wat bent u van plan?",
+      "cLead": "Beschrijf kort uw plan of kies een onderwerp. U krijgt passende informatie en de weg naar een persoonlijk gesprek.",
+      "paths": [
+        [
+          "01",
+          "Merk & web",
+          "Positionering, taal, ontwerp en website als overtuigende uitstraling.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systemen & AI",
+          "Processen, systemen en AI verbinden tot een beheerste werkwijze.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Ads & marketing",
+          "Aanbod, doelgroep, campagne en landingspagina samen op effect richten.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Plan in de chat beschrijven",
+      "chatNote": "AIFly ORACLE kan fouten maken. Bindende informatie krijgt u in het persoonlijke gesprek.",
+      "fTitle": "Laten we over uw plan praten.",
+      "fBody": "Vertel ons wat u wilt veranderen. Samen bepalen we de passende volgende stap.",
+      "fCta": "Project bespreken"
     }
   },
   "fr": {
@@ -507,6 +641,73 @@
         ]
       ],
       "cta": "Parler de votre visibilité"
+    },
+    "v3": {
+      "nav": [
+        "Votre projet",
+        "La bonne voie",
+        "Méthode",
+        "Budget",
+        "Produits"
+      ],
+      "vKicker": "Votre projet d’abord",
+      "vTitle": "Avant de parler de technique.",
+      "vLead": "Pascal, NeX et Oracle expliquent comment votre description devient un projet structuré.",
+      "cues": [
+        [
+          "Objectif",
+          "pascal",
+          "Avant de parler de technique, regardons votre projet. Qu’est-ce qui doit devenir plus simple pour vos clients ou votre équipe ? Une solution toute faite n’est pas nécessaire à ce stade."
+        ],
+        [
+          "Quotidien",
+          "nex",
+          "Un exemple de votre quotidien aide : où commence le travail, de quelles informations avez-vous besoin et que doit-on obtenir à la fin ?"
+        ],
+        [
+          "Systèmes et questions ouvertes",
+          "oracle",
+          "Nous ordonnons votre objectif, vos systèmes existants et les questions ouvertes. On voit alors quelle étape suivante a du sens. Aucun identifiant n’est nécessaire pour cette première description."
+        ],
+        [
+          "Périmètre",
+          "pascal",
+          "Dites-nous brièvement ce que vous souhaitez changer. Nous définissons ensemble le périmètre adapté."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Votre point de départ",
+      "cTitle": "Quel est votre projet ?",
+      "cLead": "Décrivez brièvement votre projet ou choisissez un sujet. Vous obtenez les informations utiles et le chemin vers un entretien personnel.",
+      "paths": [
+        [
+          "01",
+          "Marque & web",
+          "Positionnement, langage, design et site pour une présence convaincante.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systèmes & IA",
+          "Relier processus, systèmes et IA en une méthode de travail maîtrisée.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Pub & marketing",
+          "Aligner offre, cible, campagne et page d’atterrissage sur l’effet recherché.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Décrire le projet dans le chat",
+      "chatNote": "AIFly ORACLE peut se tromper. Les informations fermes vous sont données lors de l’entretien personnel.",
+      "fTitle": "Parlons de votre projet.",
+      "fBody": "Dites-nous ce que vous souhaitez changer. Nous définissons ensemble la prochaine étape adaptée.",
+      "fCta": "Discuter du projet"
     }
   },
   "en": {
@@ -677,6 +878,73 @@
         ]
       ],
       "cta": "Discuss your visibility"
+    },
+    "v3": {
+      "nav": [
+        "Your project",
+        "The right path",
+        "How we work",
+        "Budget",
+        "Products"
+      ],
+      "vKicker": "Your project first",
+      "vTitle": "Before we talk about technology.",
+      "vLead": "Pascal, NeX and Oracle explain how your description becomes an organised project.",
+      "cues": [
+        [
+          "Goal",
+          "pascal",
+          "Before we talk about technology, we look at your project. What should become easier for your customers or your team? You do not need a finished solution yet."
+        ],
+        [
+          "Daily work",
+          "nex",
+          "An example from your day helps: where does the work begin, which information is needed and what should exist at the end?"
+        ],
+        [
+          "Systems and open questions",
+          "oracle",
+          "We organise your goal, your existing systems and the open questions. That shows which next step makes sense. You do not need access credentials for this first description."
+        ],
+        [
+          "Scope",
+          "pascal",
+          "Tell us briefly what you want to change. We agree the right scope together."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Your starting point",
+      "cTitle": "What are you planning?",
+      "cLead": "Briefly describe your project or choose an area. You get relevant information and the way to a personal conversation.",
+      "paths": [
+        [
+          "01",
+          "Brand & web",
+          "Positioning, language, design and website as a convincing presence.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systems & AI",
+          "Connect workflows, systems and AI into a controlled way of working.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Ads & marketing",
+          "Align offer, audience, campaign and landing page for impact.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Describe your project in chat",
+      "chatNote": "AIFly ORACLE can make mistakes. Binding statements are given in the personal conversation.",
+      "fTitle": "Let’s talk about your project.",
+      "fBody": "Tell us what you want to change. Together we clarify the right next step.",
+      "fCta": "Discuss the project"
     }
   }
 }
