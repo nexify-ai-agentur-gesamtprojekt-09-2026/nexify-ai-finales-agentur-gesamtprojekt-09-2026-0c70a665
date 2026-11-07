@@ -101,6 +101,11 @@
       "path": "docs/architecture/nexify-master-mcp-001-current-state-20261107.md",
       "sha256": "7b325d9c9d494bbd7e5a5decbb21e2bc30723f0a85ba1f290ca6a44180f95c25",
       "present": true
+    },
+    {
+      "path": "docs/architecture/nexify-master-mcp-001-target-architecture-20261107.md",
+      "sha256": "72ab050ccced9cd53aeb9c90c3dce7301eb56219082b0f08b95295bafa715b88",
+      "present": true
     }
   ],
   "gaps": [
@@ -116,8 +121,10 @@
       "id": "GAP-MCP-02",
       "gap": "No Unified MCP Target Architecture document",
       "owner": "AI Factory Architecture Lead",
-      "next_action": "Derive target architecture mapping 15 domains onto existing nexify-mcp",
-      "due": "+1 cycle"
+      "next_action": "review; derive subsequent deliverables (threat model, per-adapter contracts)",
+      "due": "+1 cycle",
+      "status": "delivered_doc_proposed_target_not_runtime",
+      "delivered_artifact": "docs/architecture/nexify-master-mcp-001-target-architecture-20261107.md"
     },
     {
       "id": "GAP-MCP-03",
@@ -139,9 +146,16 @@
       "owner": "D01",
       "next_action": "Prove target binding + real access or keep gap",
       "due": "ongoing"
+    },
+    {
+      "id": "GAP-OPS",
+      "gap": "Persistent job/runtime layer not in agency repo (run_cycle.sh external)",
+      "owner": "D01/Betrieb",
+      "next_action": "operating contract + evidence of a really running queue/scheduler",
+      "due": "ongoing"
     }
   ],
-  "scope_claim_this_session": "Phase 0/1 baseline + inventory (single-writer). Hermes should take a different scope (e.g. GAP-MCP-02 or GAP-MCP-03).",
+  "scope_claim_this_session": "Phase 0/1 baseline + inventory AND Phase 2 target architecture (single-writer). GAP-MCP-03 threat model left open for Hermes; GAP-MCP-01 live discovery remains gated.",
   "deliverables_coverage": {
     "present_or_partial": [
       "Current-State Architecture",
@@ -160,13 +174,17 @@
       "Automated Test Suite",
       "Recovery & Rollback Plan",
       "Operational Runbook",
-      "Versioned Change Log"
+      "Versioned Change Log",
+      "Unified MCP Target Architecture"
     ],
     "gap": [
-      "Unified MCP Target Architecture (standalone)",
       "Threat Model",
       "End-to-End Test Report",
       "Production Readiness Report"
     ]
-  }
+  },
+  "phases_delivered": [
+    "phase_0_1_current_state_inventory",
+    "phase_2_target_architecture"
+  ]
 }
