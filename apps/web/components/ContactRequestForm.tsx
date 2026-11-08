@@ -56,7 +56,7 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
       {field("company",partner?text.workshop:text.company, <input name="company" autoComplete="organization" maxLength={120} aria-invalid={!!errors.company} data-testid="contact-company" />)}
       {field("message",text.message, <textarea name="message" rows={5} maxLength={4000} aria-invalid={!!errors.message} data-testid="contact-message" />)}
     </div>
-    <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} data-testid="contact-consent" /> {text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</label>
+    <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
     {errors.consent && <span className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
     {failure && <p role="alert" className="tk-field-error" data-testid="contact-error">{failure}</p>}
     <div className="tk-actions"><button className="primary-button" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</button></div>

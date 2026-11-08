@@ -31,9 +31,9 @@ test('private areas are never exposed to crawlers',()=>{
   }
 });
 
-test('canonical origin is the documented main domain and is defined in one place',()=>{
-  assert.match(seoSource,/PUBLIC_ORIGIN='https:\/\/nexifyai\.cloud'/);
-  assert.match(robotsSource,/sitemap:'https:\/\/nexifyai\.cloud\/sitemap\.xml'/);
+test('canonical origin is the documented German market origin and is defined in one place',()=>{
+  assert.match(seoSource,/PUBLIC_ORIGIN='https:\/\/www\.nexifyai\.de'/);
+  assert.match(robotsSource,/sitemap:'https:\/\/www\.nexifyai\.de\/sitemap\.xml'/);
 });
 
 test('TEILEKLAR advisory routes stay in the sitemap',()=>{

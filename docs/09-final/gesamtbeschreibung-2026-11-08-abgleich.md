@@ -51,7 +51,7 @@ je genau eine H1, `lang="de"`; `/login`→308→`/anmelden`, `/signup`→308→`
 | Rechtsform / Impressum final | Eenmanszaak vs. B.V. ungeklärt | Inhaber | Registerauszug liefern, dann Impressum freigeben |
 | Landingpages, Explore-, Stadtseiten | zehn Suchbegriffe und Top-10-Wettbewerbsanalyse sind nicht belegt; Inhalte dürfen nicht erfunden werden | Content-/SEO-Owner | Suchbegriffe bestätigen, Wettbewerb real erheben, danach Seiten anlegen |
 | Komponenten-/Baukasten-Showcase | Vorlagen-Bestand (>100) nicht vorhanden | Art Director | Vorlagen aus Prototypen ableiten |
-| Canonical-Domain | Canonicals zeigen auf `nexifyai.cloud`, ausgeliefert wird auf `.de`; `.cloud` zeigt noch den alten Stand | Inhaber/Migrations-Owner | Domainrolle entscheiden, dann Canonical/Sitemap-Origin ändern |
+| Canonical-Domain | durch `main` (db8555d) auf `www.nexifyai.de` entschieden; Gesamtbeschreibung §6 nennt noch `nexifyai.cloud` | Inhaber | Gesamtbeschreibung angleichen |
 | Tarife NeX2fly | Entwurf | Inhaber | Freigabe |
 | Hero-Video, Higgsfield-Credits | Konto-Guthaben fehlt; Autoplay mit Ton nicht belegt | Inhaber | Guthaben abfragen, dann produzieren |
 | Mehrsprachigkeit | nur DE gesichert | Content-Owner | NL/FR/EN je Seite sprachlich prüfen |
