@@ -68,3 +68,8 @@ apps/shop-api/data/
 
 # anchor-memory plugin session state (local tooling artifact, not project source)
 .anchor/
+
+# Playwright e2e artifacts (chat-presence gate output)
+apps/web/e2e/.results/
+apps/web/test-results/
+apps/web/playwright-report/
