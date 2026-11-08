@@ -20,7 +20,7 @@ P1 Right chat
 - REQ-209 [always] The system shall show a compact chat header with an honest connection status.
 - REQ-210 [always] The system shall place the conversation starters directly below the introduction, without a large gap.
 - REQ-211 [always] The system shall anchor the composer at the bottom of the chat where it stays reachable.
-- REQ-212 [always] The system shall use Lime #C0EE38 for the primary action and Cyan #38BDF8 sparingly for focus.
+- REQ-212 [always] The system shall use Lime #A8C76A (canonical `--color-marke-lime`) for the primary action and Cyan #38BDF8 sparingly for focus. (Angepasst 08.11.2026 an Denk-Kanon §12.)
 - REQ-213 [always] The system shall not draw an extra box around each text block.
 - REQ-214 [always] The system shall keep mouse/keyboard resize and conversation scroll working.
 - REQ-215 [state] While on mobile, the system shall show the chat as a centred panel or drawer with safe area, a visible close control and a reachable input when the on-screen keyboard is open.

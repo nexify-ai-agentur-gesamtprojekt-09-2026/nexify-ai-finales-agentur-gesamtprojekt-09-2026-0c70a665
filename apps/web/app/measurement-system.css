@@ -58,7 +58,7 @@
   --contrast-primary:   19.5;   /* #FFFFFF  → AAA */
   --contrast-secondary: 11.2;   /* #C8CCC9  → AAA */
   --contrast-tertiary:  6.3;    /* #9CA29E  → AA+ */
-  --contrast-accent:    14.8;   /* #D7FA50  → AAA */
+  --contrast-accent:    10.06;  /* #A8C76A auf #0d100f → AAA */
 
   /* ------------ Elevation (Material 3 angelehnt, 0–5) ------------ */
   --el-0: none;
