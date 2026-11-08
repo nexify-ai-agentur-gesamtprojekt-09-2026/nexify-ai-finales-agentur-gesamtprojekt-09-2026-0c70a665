@@ -13,19 +13,28 @@
    Geist, Geist Mono) – kein externer Font-Request (Datenschutz-/Offline-Grenze der öffentlichen Seiten). */
 
 :root {
+  /* Interaktionszustände nach Designsystem Graphite (08.11.2026) */
+  --color-markierung-bg:     #C0EE38;
+  --color-markierung-fg:     #0A0C10;
+  --focus-ring-shadow:       0 0 0 2px #111212, 0 0 0 4px #C0EE38;
+  --material-backdrop:       blur(20px) saturate(140%);
+  --material-glass-fill:     rgba(30,33,34,.91);
+  --scrollbar-thumb:         linear-gradient(180deg, rgba(196,179,148,.5), rgba(189,197,201,.38));
+  --scrollbar-track:         transparent;
+
   /* ============== Mastervorgabe 5.2 – Primärwerte ============== */
-  --color-canvas:            #080A0F;   /* Graphite Canvas */
-  --color-brand-lime:        #C0EE38;   /* CI Lime 2026 */
-  --color-brand-lime-soft:   #D7FA50;   /* legacy Lime, als Highlight weiter nutzbar */
+  --color-canvas:            #111212;   /* Graphite Canvas */
+  --color-brand-lime:        #C0EE38;   /* CI-Lime als Signal (Designsystem Graphite 08.11.2026) */
+  --color-brand-lime-soft:   #DBF68A;
   --color-brand-cyan:        #38BDF8;   /* Cyan-Akzent */
 
   /* Semantischer Tokenvertrag (Mastervorgabe §5.3) */
   --color-background-canvas:    var(--color-canvas);
-  --color-background-surface:   #0F131A;
-  --color-background-elevated:  #141A22;
-  --color-text-primary:         #FFFFFF;
-  --color-text-secondary:       #CBD1D6;
-  --color-text-muted:           #8B939B;
+  --color-background-surface:   #151617;
+  --color-background-elevated:  #1B1D1E;
+  --color-text-primary:         #F3F0EA;
+  --color-text-secondary:       #E2DFD8;
+  --color-text-muted:           #9A9D9C;
   --color-text-inverse:         #0A0C10;
   --color-border-subtle:        rgba(255,255,255,.08);
   --color-border-strong:        rgba(255,255,255,.18);
@@ -59,7 +68,7 @@
   --color-marke-lime:           var(--color-brand-lime);
   --color-marke-lime-hell:      #DBF68A;
   --color-marke-lime-dunkel:    #A6D820;
-  --color-marke-lime-gruen:     #78C331;
+  --color-marke-lime-gruen:     #A6D820;
   --color-semantik-licht:       var(--color-brand-cyan);
   --color-semantik-erfolg:      var(--color-status-success);
   --color-semantik-warnung:     var(--color-status-warning);
@@ -96,8 +105,8 @@
   --shadow-karte:        inset 0 1px 0 rgba(255,255,255,.06), 0 32px 56px -32px rgba(0,0,0,.9),  0 2px 6px rgba(0,0,0,.3);
   --shadow-kleine-karte: inset 0 1px 0 rgba(255,255,255,.05), 0 14px 24px -16px rgba(0,0,0,.85);
   --shadow-dialog:       inset 0 1px 0 rgba(255,255,255,.08), 0 60px 120px -30px rgba(0,0,0,.98);
-  --shadow-button-primaer: inset 0 1px 0 rgba(255,255,255,.65), 0 16px 36px -14px rgba(192,238,56,.5), 0 2px 0 rgba(0,0,0,.3);
-  --shadow-leuchten: 0 0 32px rgba(192,238,56,.85);
+  --shadow-button-primaer: inset 0 1px 0 rgba(255,255,255,.65), 0 16px 36px -14px rgba(168,199,106,.5), 0 2px 0 rgba(0,0,0,.3);
+  --shadow-leuchten: 0 0 32px rgba(168,199,106,.85);
 
   /* ===== NEX-UI-DEPTH-20261030-01: dezente, zurueckhaltende Tiefe =====
      Nur weiche kurze Schatten + minimale Lichtkante. Layout-neutral (nur box-shadow),
@@ -112,12 +121,12 @@
   --gradient-button-primaer: linear-gradient(180deg, #DBF68A 0%, #C0EE38 55%, #A6D820 100%);
   --gradient-balken:         linear-gradient(90deg, #A6D820, #C0EE38);
   --gradient-seitengrund:
-    radial-gradient(1300px 640px at 88% -6%, rgba(192,238,56,.08), transparent 60%),
+    radial-gradient(1300px 640px at 88% -6%, rgba(168,199,106,.08), transparent 60%),
     radial-gradient(1000px 560px at 4% 38%, rgba(56,189,248,.06), transparent 62%),
     radial-gradient(900px 500px at 96% 72%, rgba(167,139,250,.05), transparent 62%),
     var(--color-canvas);
   --gradient-band:
-    radial-gradient(900px 320px at 12% 0%, rgba(192,238,56,.07), transparent 70%),
+    radial-gradient(900px 320px at 12% 0%, rgba(168,199,106,.07), transparent 70%),
     radial-gradient(700px 300px at 92% 100%, rgba(56,189,248,.06), transparent 70%),
     linear-gradient(180deg, var(--color-background-surface), var(--color-background-elevated));
   --gradient-karte:          linear-gradient(180deg, var(--color-background-elevated) 0%, var(--color-background-surface) 100%);

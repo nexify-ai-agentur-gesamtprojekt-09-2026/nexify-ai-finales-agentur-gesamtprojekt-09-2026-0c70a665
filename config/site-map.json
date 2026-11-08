@@ -364,16 +364,16 @@
       "id": "home",
       "path": "/",
       "title": {
-        "de": "Gute Websites beginnen bei Ihnen.",
-        "nl": "Goede websites beginnen bij u.",
-        "fr": "Un bon site commence par vous.",
-        "en": "Good websites start with you."
+        "de": "Ein Anspruch. Ein zusammenhängender Auftritt.",
+        "nl": "Eén aanspraak. Eén samenhangende uitstraling.",
+        "fr": "Une exigence. Une présence cohérente.",
+        "en": "One standard. One coherent presence."
       },
       "summary": {
-        "de": "Individuelles Webdesign, passende Inhalte und digitale Abläufe aus einem Konzept. Persönlich begleitet und transparent kalkuliert ab 449 € netto je Projekttag.",
-        "nl": "We ontwerpen uw uitstraling, schrijven passende teksten en verbinden de processen erachter. Pascal Courbois begeleidt u van idee tot overdracht.",
-        "fr": "Nous concevons votre présence, rédigeons les contenus et relions les processus. Pascal Courbois vous accompagne de l’idée à la livraison.",
-        "en": "We design your presence, write the right content and connect the workflows behind it. Pascal Courbois guides you from the first idea through to handover."
+        "de": "NeXify AI verbindet Markenstrategie, Gestaltung und Technik zu einem Vorhaben. Pascal Courbois begleitet es persönlich – kalkuliert ab 449 € netto je Projekttag.",
+        "nl": "NeXify AI verbindt merkstrategie, vormgeving en techniek tot één project. Pascal Courbois begeleidt het persoonlijk – gecalculeerd vanaf € 449 netto per projectdag.",
+        "fr": "NeXify AI relie stratégie de marque, design et technique en un seul projet. Pascal Courbois l’accompagne personnellement – calculé à partir de 449 € HT par journée de projet.",
+        "en": "NeXify AI connects brand strategy, design and technology in one project. Pascal Courbois guides it personally – calculated from €449 net per project day."
       },
       "site_context": "nexify",
       "sections": [

@@ -167,6 +167,184 @@
         ]
       ],
       "cta": "Über Ihre Sichtbarkeit sprechen"
+    },
+    "v3": {
+      "nav": [
+        "Ihr Vorhaben",
+        "Der passende Weg",
+        "Arbeitsweise",
+        "Budget",
+        "Produkte"
+      ],
+      "vKicker": "Ihr Vorhaben zuerst",
+      "vTitle": "Bevor wir über Technik sprechen.",
+      "vLead": "Pascal, NeX und Oracle erklären, wie aus Ihrer Beschreibung ein geordnetes Vorhaben wird.",
+      "cues": [
+        [
+          "Ziel",
+          "pascal",
+          "Bevor wir über Technik sprechen, schauen wir auf Ihr Vorhaben. Was soll für Ihre Kunden oder Ihr Team einfacher werden? Eine fertige Lösung brauchen Sie dafür noch nicht."
+        ],
+        [
+          "Arbeitsalltag",
+          "nex",
+          "Ein Beispiel aus Ihrem Alltag hilft: Wo beginnt die Arbeit, welche Informationen werden gebraucht und was soll am Ende vorliegen?"
+        ],
+        [
+          "Systeme und offene Fragen",
+          "oracle",
+          "Wir ordnen Ihr Ziel, Ihre vorhandenen Systeme und die offenen Fragen. So wird sichtbar, welcher nächste Schritt sinnvoll ist. Zugangsdaten brauchen Sie für diese erste Beschreibung nicht."
+        ],
+        [
+          "Umfang",
+          "pascal",
+          "Erzählen Sie uns kurz, was Sie verändern möchten. Den passenden Umfang klären wir gemeinsam."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Ihr Einstieg",
+      "cTitle": "Was haben Sie vor?",
+      "cLead": "Beschreiben Sie kurz Ihr Vorhaben oder wählen Sie einen Bereich. Sie erhalten passende Informationen und den Weg zum persönlichen Gespräch.",
+      "paths": [
+        [
+          "01",
+          "Marke & Web",
+          "Positionierung, Sprache, Design und Website als überzeugender Auftritt.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systeme & KI",
+          "Abläufe, Systeme und KI zu einer kontrollierten Arbeitsweise verbinden.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Ads & Marketing",
+          "Angebot, Zielgruppe, Kampagne und Landingpage gemeinsam auf Wirkung ausrichten.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Vorhaben im Chat beschreiben",
+      "chatNote": "AIFly ORACLE kann Fehler machen. Verbindliche Angaben erhalten Sie im persönlichen Gespräch.",
+      "fTitle": "Lassen Sie uns über Ihr Vorhaben sprechen.",
+      "fBody": "Erzählen Sie uns, was Sie verändern möchten. Wir klären gemeinsam den passenden nächsten Schritt.",
+      "fCta": "Projekt besprechen",
+      "lKicker": "Der passende Weg",
+      "lTitle": "Welcher Bereich passt zu Ihrem Vorhaben?",
+      "lLead": "Website, wiederkehrender Ablauf oder App und Portal: Die drei erklären kurz, wann welcher Weg sinnvoll ist.",
+      "lChoices": [
+        [
+          "nex",
+          "Möchten Sie Ihr Angebot im Internet verständlich zeigen? Dann ist der Website-Bereich ein guter Einstieg. Dort geht es um Inhalte, Gestaltung und den Weg zur Anfrage."
+        ],
+        [
+          "pascal",
+          "Wenn sich eine Aufgabe ständig wiederholt, schauen wir auf den Ablauf dahinter. Gemeinsam klären wir, welche Schritte sich verbinden lassen und wo Menschen entscheiden sollen."
+        ],
+        [
+          "oracle",
+          "Geht es um Informationen und Zusammenarbeit, kann eine App oder ein Portal der passende Weg sein. Entscheidend ist, was Ihre Kunden oder Ihr Team dort tatsächlich erledigen sollen."
+        ]
+      ],
+      "lClose": "Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Wenn Sie unsicher sind, helfen wir Ihnen beim Einordnen.",
+      "ldKicker": "Im Detail",
+      "ldTitle": "Die drei Wege, konkret erklärt.",
+      "ldLead": "Öffnen Sie den Weg, der zu Ihrem Vorhaben passt. Jeder Weg beschreibt, was enthalten ist, wie wir vorgehen und worauf Sie sich verlassen können.",
+      "ldCta": "Ihr Vorhaben mit uns besprechen",
+      "ldWays": [
+        {
+          "title": "Marke, Text & Website",
+          "summary": "Ein Auftritt, der zu Ihrem Unternehmen passt und sich auch so liest.",
+          "bullets": [
+            "Positionierung, Seitenstruktur und klare Texte für Ihr Angebot",
+            "Eigene Gestaltung, die für Ihr Unternehmen entwickelt wird",
+            "Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe"
+          ],
+          "note": "Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart.",
+          "cta": "Leistung und Umfang ansehen"
+        },
+        {
+          "title": "Systeme & Automatisierung",
+          "summary": "Wiederkehrende Aufgaben laufen geordnet ab, und Ihre gewohnte Arbeitsweise bleibt erhalten."
+        },
+        {
+          "title": "Sichtbarkeit & Kampagne",
+          "summary": "Damit die richtigen Menschen Sie finden und einen guten Grund haben, sich zu melden."
+        }
+      ],
+      "zKicker": "So arbeiten wir zusammen",
+      "zTitle": "Ein Ansprechpartner vom ersten Gespräch bis zur Übergabe.",
+      "zLead": "Pascal betreut Ihr Projekt selbst. Sie sehen früh, in welche Richtung es geht, was im Umfang enthalten ist und wann Ihre Entscheidung gebraucht wird.",
+      "zSteps": [
+        [
+          "Wir verstehen, was Sie erreichen möchten.",
+          "Wir sprechen über Ihr Angebot, Ihre Kunden, die bisherige Lösung und den Maßstab, an dem das Ergebnis bestehen muss."
+        ],
+        [
+          "Sie erhalten einen klaren Leistungsrahmen.",
+          "Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden verständlich voneinander getrennt."
+        ],
+        [
+          "Konzept, Text und Design entstehen gemeinsam.",
+          "An festen Terminen sehen Sie den Stand als Ganzes und entscheiden, wie es weitergeht."
+        ],
+        [
+          "Wir prüfen, übergeben und bleiben erreichbar.",
+          "Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und Weiterentwicklung können Sie passend ergänzen."
+        ]
+      ],
+      "bKicker": "Budget mit nachvollziehbarer Grundlage",
+      "bTitle": "Hochwertige Arbeit zu einem Preis, den Sie vorher kennen.",
+      "bLead": "Bei uns gibt es keine unklaren Agenturpakete. Wir rechnen mit einem festen Tagessatz. Vor dem Start erhalten Sie einen klar beschriebenen Umfang und entscheiden selbst, was jetzt umgesetzt wird und was später kommt.",
+      "bRateLabel": "Klare Kalkulationsbasis",
+      "bRate": "449 €",
+      "bRateUnit": "netto je Projekttag",
+      "bRateNote": "Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.",
+      "bRateCta": "Mehr zu Preisen und Zusammenarbeit",
+      "bBlocks": [
+        [
+          "Alles, was wir entwickeln",
+          "Konzept, Text, Design und technische Umsetzung werden im Angebot einem konkreten Ergebnis zugeordnet."
+        ],
+        [
+          "Alles, was danach bleibt",
+          "Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart."
+        ],
+        [
+          "Alles, was extern anfällt",
+          "Hosting, Software, KI-Nutzung sowie Medien- und Werbebudget stehen als eigene Posten im Angebot."
+        ]
+      ],
+      "pwKicker": "Mehr von NeXify",
+      "pwTitle": "Produkte, die Ihr Projekt ergänzen – wenn sie passen.",
+      "pwLead": "Neben Kundenprojekten entwickelt NeXify eigene Produkte für Wissen, Aufgaben, Integrationen und den Fahrzeugbereich. Wir setzen sie in Ihrem Projekt nur ein, wenn sie Ihnen tatsächlich weiterhelfen.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Ihr persönlicher oder geschäftlicher Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Wissen.",
+          "Privat & Business kennenlernen"
+        ],
+        [
+          "NeX Agentic AI",
+          "Aufgabenbezogene Assistenz und freigegebene Werkzeugarbeit, ergänzt durch AIFly ORACLE zur Koordination.",
+          "Agentenarbeit verstehen"
+        ],
+        [
+          "NeXify API",
+          "Der technische Integrationsweg für eigene Anwendungen. Umfang, Zugang und Betriebsbedingungen werden gesondert geklärt.",
+          "API-Konzept ansehen"
+        ],
+        [
+          "TEILEKLAR",
+          "Die eigenständige Welt für Fahrzeugteile, Werkstätten und passende Anfragen.",
+          "Zum Fahrzeug- und Teilebereich"
+        ]
+      ]
     }
   },
   "nl": {
@@ -337,6 +515,184 @@
         ]
       ],
       "cta": "Uw vindbaarheid bespreken"
+    },
+    "v3": {
+      "nav": [
+        "Uw plan",
+        "De passende weg",
+        "Werkwijze",
+        "Budget",
+        "Producten"
+      ],
+      "vKicker": "Eerst uw plan",
+      "vTitle": "Voordat we over techniek praten.",
+      "vLead": "Pascal, NeX en Oracle leggen uit hoe uit uw beschrijving een geordend project ontstaat.",
+      "cues": [
+        [
+          "Doel",
+          "pascal",
+          "Voordat we over techniek praten, kijken we naar uw plan. Wat moet er voor uw klanten of uw team eenvoudiger worden? Een kant-en-klare oplossing hebt u daarvoor nog niet nodig."
+        ],
+        [
+          "Werkdag",
+          "nex",
+          "Een voorbeeld uit uw dagelijkse praktijk helpt: waar begint het werk, welke informatie is nodig en wat moet er aan het eind liggen?"
+        ],
+        [
+          "Systemen en open vragen",
+          "oracle",
+          "We ordenen uw doel, uw bestaande systemen en de open vragen. Zo wordt zichtbaar welke volgende stap zinvol is. Toegangsgegevens hebt u voor deze eerste beschrijving niet nodig."
+        ],
+        [
+          "Omvang",
+          "pascal",
+          "Vertel ons kort wat u wilt veranderen. De passende omvang bepalen we samen."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Uw start",
+      "cTitle": "Wat bent u van plan?",
+      "cLead": "Beschrijf kort uw plan of kies een onderwerp. U krijgt passende informatie en de weg naar een persoonlijk gesprek.",
+      "paths": [
+        [
+          "01",
+          "Merk & web",
+          "Positionering, taal, ontwerp en website als overtuigende uitstraling.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systemen & AI",
+          "Processen, systemen en AI verbinden tot een beheerste werkwijze.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Ads & marketing",
+          "Aanbod, doelgroep, campagne en landingspagina samen op effect richten.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Plan in de chat beschrijven",
+      "chatNote": "AIFly ORACLE kan fouten maken. Bindende informatie krijgt u in het persoonlijke gesprek.",
+      "fTitle": "Laten we over uw plan praten.",
+      "fBody": "Vertel ons wat u wilt veranderen. Samen bepalen we de passende volgende stap.",
+      "fCta": "Project bespreken",
+      "lKicker": "De juiste weg",
+      "lTitle": "Welk gebied past bij uw project?",
+      "lLead": "Website, terugkerend proces of app en portaal: de drie leggen kort uit wanneer welke weg zinvol is.",
+      "lChoices": [
+        [
+          "nex",
+          "Wilt u uw aanbod begrijpelijk online tonen? Dan is het websitegebied een goede start. Het gaat om inhoud, vormgeving en de weg naar een aanvraag."
+        ],
+        [
+          "pascal",
+          "Als een taak zich steeds herhaalt, kijken we naar het proces erachter. Samen bepalen we welke stappen verbonden kunnen worden en waar mensen beslissen."
+        ],
+        [
+          "oracle",
+          "Gaat het om informatie en samenwerking, dan kan een app of portaal de juiste weg zijn. Bepalend is wat uw klanten of uw team daar daadwerkelijk moeten doen."
+        ]
+      ],
+      "lClose": "Kies het gebied dat bij uw project past. Weet u het niet zeker, dan helpen wij u met het inschatten.",
+      "ldKicker": "In detail",
+      "ldTitle": "De drie wegen, concreet uitgelegd.",
+      "ldLead": "Open de weg die bij uw project past. Elke weg beschrijft wat inbegrepen is, hoe we te werk gaan en waarop u kunt vertrouwen.",
+      "ldCta": "Bespreek uw project met ons",
+      "ldWays": [
+        {
+          "title": "Merk, tekst & website",
+          "summary": "Een presentatie die bij uw bedrijf past — en zo ook leest.",
+          "bullets": [
+            "Positionering, paginastructuur en heldere teksten voor uw aanbod",
+            "Eigen vormgeving, ontwikkeld voor uw bedrijf",
+            "Responsieve uitvoering, een duidelijke aanvraagweg en persoonlijke overdracht"
+          ],
+          "note": "Voor een nieuwe start of relaunch. Omvang, talen en functies worden vóór de start vast afgesproken.",
+          "cta": "Dienst en omvang bekijken"
+        },
+        {
+          "title": "Systemen & automatisering",
+          "summary": "Terugkerende taken verlopen geordend, en uw vertrouwde werkwijze blijft behouden."
+        },
+        {
+          "title": "Zichtbaarheid & campagne",
+          "summary": "Zodat de juiste mensen u vinden en een goede reden hebben om contact op te nemen."
+        }
+      ],
+      "zKicker": "Zo werken we samen",
+      "zTitle": "Eén aanspreekpunt van het eerste gesprek tot de overdracht.",
+      "zLead": "Pascal begeleidt uw project zelf. U ziet vroeg welke richting het opgaat, wat in de omvang zit en wanneer uw beslissing nodig is.",
+      "zSteps": [
+        [
+          "We begrijpen wat u wilt bereiken.",
+          "We spreken over uw aanbod, uw klanten, de vorige oplossing en de maatstaf waaraan het resultaat moet voldoen."
+        ],
+        [
+          "U krijgt een duidelijk dienstenkader.",
+          "Diensten, uw medewerking, data, zinvolle opties en kosten worden begrijpelijk gescheiden."
+        ],
+        [
+          "Concept, tekst en ontwerp ontstaan samen.",
+          "Op vaste momenten ziet u de stand als geheel en beslist u hoe het verdergaat."
+        ],
+        [
+          "We controleren, dragen over en blijven bereikbaar.",
+          "Het afgesproken resultaat wordt gecontroleerd en navolgbaar overgedragen. Onderhoud en doorontwikkeling kunt u passend aanvullen."
+        ]
+      ],
+      "bKicker": "Een begroting met een inzichtelijke basis",
+      "bTitle": "Hoogwaardig werk tegen een prijs die u vooraf kent.",
+      "bLead": "Bij ons zijn er geen onduidelijke bureaupakketten. We rekenen met een vast dagtarief. Vóór de start krijgt u een duidelijk beschreven omvang en beslist u zelf wat nu wordt uitgevoerd en wat later komt.",
+      "bRateLabel": "Duidelijke rekenbasis",
+      "bRate": "449 €",
+      "bRateUnit": "netto per projectdag",
+      "bRateNote": "Concept, tekst, ontwerp en technische uitvoering worden volgens de afgesproken omvang gepland. Externe kosten tonen we apart.",
+      "bRateCta": "Meer over prijzen en samenwerking",
+      "bBlocks": [
+        [
+          "Alles wat we ontwikkelen",
+          "Concept, tekst, ontwerp en technische uitvoering worden in de offerte aan een concreet resultaat toegewezen."
+        ],
+        [
+          "Alles wat daarna blijft",
+          "Onderhoud, doorontwikkeling en persoonlijke ondersteuning worden als eigen, navolgbaar onderdeel afgesproken."
+        ],
+        [
+          "Alles wat extern bijkomt",
+          "Hosting, software, AI-gebruik en media- en advertentiebudget staan als aparte posten in de offerte."
+        ]
+      ],
+      "pwKicker": "Meer van NeXify",
+      "pwTitle": "Producten die uw project aanvullen – als ze passen.",
+      "pwLead": "Naast klantprojecten ontwikkelt NeXify eigen producten voor kennis, taken, integraties en het voertuigdomein. We zetten ze in uw project alleen in als ze u echt verder helpen.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Uw persoonlijke of zakelijke werkruimte voor gesprekken, taken, documenten en kennis.",
+          "Privé & Business ontdekken"
+        ],
+        [
+          "NeX Agentic AI",
+          "Taakgerichte assistentie en vrijgegeven gereedschapswerk, aangevuld met AIFly ORACLE voor coördinatie.",
+          "Agentwerk begrijpen"
+        ],
+        [
+          "NeXify API",
+          "De technische integratieweg voor eigen toepassingen. Omvang, toegang en gebruiksvoorwaarden worden apart geregeld.",
+          "API-concept bekijken"
+        ],
+        [
+          "TEILEKLAR",
+          "De zelfstandige wereld voor voertuigonderdelen, werkplaatsen en passende aanvragen.",
+          "Naar het voertuig- en onderdelengebied"
+        ]
+      ]
     }
   },
   "fr": {
@@ -507,6 +863,184 @@
         ]
       ],
       "cta": "Parler de votre visibilité"
+    },
+    "v3": {
+      "nav": [
+        "Votre projet",
+        "La bonne voie",
+        "Méthode",
+        "Budget",
+        "Produits"
+      ],
+      "vKicker": "Votre projet d’abord",
+      "vTitle": "Avant de parler de technique.",
+      "vLead": "Pascal, NeX et Oracle expliquent comment votre description devient un projet structuré.",
+      "cues": [
+        [
+          "Objectif",
+          "pascal",
+          "Avant de parler de technique, regardons votre projet. Qu’est-ce qui doit devenir plus simple pour vos clients ou votre équipe ? Une solution toute faite n’est pas nécessaire à ce stade."
+        ],
+        [
+          "Quotidien",
+          "nex",
+          "Un exemple de votre quotidien aide : où commence le travail, de quelles informations avez-vous besoin et que doit-on obtenir à la fin ?"
+        ],
+        [
+          "Systèmes et questions ouvertes",
+          "oracle",
+          "Nous ordonnons votre objectif, vos systèmes existants et les questions ouvertes. On voit alors quelle étape suivante a du sens. Aucun identifiant n’est nécessaire pour cette première description."
+        ],
+        [
+          "Périmètre",
+          "pascal",
+          "Dites-nous brièvement ce que vous souhaitez changer. Nous définissons ensemble le périmètre adapté."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Votre point de départ",
+      "cTitle": "Quel est votre projet ?",
+      "cLead": "Décrivez brièvement votre projet ou choisissez un sujet. Vous obtenez les informations utiles et le chemin vers un entretien personnel.",
+      "paths": [
+        [
+          "01",
+          "Marque & web",
+          "Positionnement, langage, design et site pour une présence convaincante.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systèmes & IA",
+          "Relier processus, systèmes et IA en une méthode de travail maîtrisée.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Pub & marketing",
+          "Aligner offre, cible, campagne et page d’atterrissage sur l’effet recherché.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Décrire le projet dans le chat",
+      "chatNote": "AIFly ORACLE peut se tromper. Les informations fermes vous sont données lors de l’entretien personnel.",
+      "fTitle": "Parlons de votre projet.",
+      "fBody": "Dites-nous ce que vous souhaitez changer. Nous définissons ensemble la prochaine étape adaptée.",
+      "fCta": "Discuter du projet",
+      "lKicker": "La voie adaptée",
+      "lTitle": "Quel domaine correspond à votre projet ?",
+      "lLead": "Site web, processus récurrent ou application et portail : les trois expliquent brièvement quand chaque voie est pertinente.",
+      "lChoices": [
+        [
+          "nex",
+          "Souhaitez-vous présenter votre offre clairement en ligne ? Le domaine site web est alors un bon point de départ. Il s’agit du contenu, du design et du chemin vers la demande."
+        ],
+        [
+          "pascal",
+          "Lorsqu’une tâche se répète sans cesse, nous examinons le processus sous-jacent. Ensemble, nous déterminons quelles étapes peuvent être reliées et où les personnes doivent décider."
+        ],
+        [
+          "oracle",
+          "S’il s’agit d’information et de collaboration, une application ou un portail peut être la voie adaptée. L’essentiel est ce que vos clients ou votre équipe doivent réellement y accomplir."
+        ]
+      ],
+      "lClose": "Choisissez le domaine qui correspond à votre projet. En cas de doute, nous vous aidons à le situer.",
+      "ldKicker": "En détail",
+      "ldTitle": "Les trois voies, expliquées concrètement.",
+      "ldLead": "Ouvrez la voie qui correspond à votre projet. Chaque voie décrit ce qui est inclus, comment nous procédons et ce sur quoi vous pouvez compter.",
+      "ldCta": "Discuter de votre projet avec nous",
+      "ldWays": [
+        {
+          "title": "Marque, texte & site web",
+          "summary": "Une présence qui correspond à votre entreprise — et qui se lit ainsi.",
+          "bullets": [
+            "Positionnement, structure des pages et textes clairs pour votre offre",
+            "Un design propre, développé pour votre entreprise",
+            "Réalisation responsive, un chemin de demande clair et une remise personnelle"
+          ],
+          "note": "Pour une création ou une refonte. Le périmètre, les langues et les fonctionnalités sont fermement convenus avant le démarrage.",
+          "cta": "Voir la prestation et le périmètre"
+        },
+        {
+          "title": "Systèmes & automatisation",
+          "summary": "Les tâches récurrentes se déroulent de manière ordonnée, et votre façon de travailler habituelle est préservée."
+        },
+        {
+          "title": "Visibilité & campagne",
+          "summary": "Pour que les bonnes personnes vous trouvent et aient une bonne raison de vous contacter."
+        }
+      ],
+      "zKicker": "Notre collaboration",
+      "zTitle": "Un interlocuteur du premier échange jusqu’à la remise.",
+      "zLead": "Pascal suit lui-même votre projet. Vous voyez tôt la direction prise, ce qui est inclus dans le périmètre et quand votre décision est nécessaire.",
+      "zSteps": [
+        [
+          "Nous comprenons ce que vous souhaitez atteindre.",
+          "Nous parlons de votre offre, de vos clients, de la solution précédente et du niveau d’exigence que le résultat doit atteindre."
+        ],
+        [
+          "Vous recevez un cadre de prestations clair.",
+          "Prestations, votre participation, échéances, options pertinentes et coûts sont clairement distingués."
+        ],
+        [
+          "Concept, texte et design prennent forme ensemble.",
+          "À des dates fixes, vous voyez l’état dans son ensemble et décidez de la suite."
+        ],
+        [
+          "Nous vérifions, remettons et restons joignables.",
+          "Le résultat convenu est vérifié et remis de façon traçable. La maintenance et l’évolution peuvent être ajoutées selon vos besoins."
+        ]
+      ],
+      "bKicker": "Un budget sur une base explicable",
+      "bTitle": "Un travail de qualité à un prix que vous connaissez à l’avance.",
+      "bLead": "Chez nous, pas de forfaits d’agence flous. Nous facturons à un tarif journalier fixe. Avant le démarrage, vous recevez un périmètre clairement décrit et décidez vous-même ce qui est réalisé maintenant et ce qui viendra plus tard.",
+      "bRateLabel": "Base de calcul claire",
+      "bRate": "449 €",
+      "bRateUnit": "net par jour-projet",
+      "bRateNote": "Le concept, le texte, le design et la réalisation technique sont planifiés selon le périmètre convenu. Les coûts externes sont indiqués séparément.",
+      "bRateCta": "En savoir plus sur les prix et la collaboration",
+      "bBlocks": [
+        [
+          "Tout ce que nous réalisons",
+          "Le concept, le texte, le design et la réalisation technique sont rattachés à un résultat concret dans le devis."
+        ],
+        [
+          "Tout ce qui reste ensuite",
+          "La maintenance, l’évolution et l’accompagnement personnel sont convenus comme un module distinct et traçable."
+        ],
+        [
+          "Tout ce qui relève de l’externe",
+          "L’hébergement, les logiciels, l’usage de l’IA ainsi que le budget média et publicitaire figurent comme postes distincts dans le devis."
+        ]
+      ],
+      "pwKicker": "Plus de NeXify",
+      "pwTitle": "Des produits qui complètent votre projet – s’ils conviennent.",
+      "pwLead": "En plus des projets clients, NeXify développe ses propres produits pour la connaissance, les tâches, les intégrations et le domaine automobile. Nous ne les utilisons dans votre projet que s’ils vous aident réellement.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Votre espace de travail personnel ou professionnel pour les échanges, les tâches, les documents et le savoir.",
+          "Découvrir Privé & Business"
+        ],
+        [
+          "NeX Agentic AI",
+          "Une assistance liée aux tâches et un travail outillé autorisé, complétés par AIFly ORACLE pour la coordination.",
+          "Comprendre le travail des agents"
+        ],
+        [
+          "NeXify API",
+          "La voie d’intégration technique pour vos propres applications. Le périmètre, l’accès et les conditions d’exploitation sont clarifiés séparément.",
+          "Voir le concept d’API"
+        ],
+        [
+          "TEILEKLAR",
+          "L’univers indépendant des pièces automobiles, des garages et des demandes adaptées.",
+          "Vers l’espace véhicules et pièces"
+        ]
+      ]
     }
   },
   "en": {
@@ -677,6 +1211,184 @@
         ]
       ],
       "cta": "Discuss your visibility"
+    },
+    "v3": {
+      "nav": [
+        "Your project",
+        "The right path",
+        "How we work",
+        "Budget",
+        "Products"
+      ],
+      "vKicker": "Your project first",
+      "vTitle": "Before we talk about technology.",
+      "vLead": "Pascal, NeX and Oracle explain how your description becomes an organised project.",
+      "cues": [
+        [
+          "Goal",
+          "pascal",
+          "Before we talk about technology, we look at your project. What should become easier for your customers or your team? You do not need a finished solution yet."
+        ],
+        [
+          "Daily work",
+          "nex",
+          "An example from your day helps: where does the work begin, which information is needed and what should exist at the end?"
+        ],
+        [
+          "Systems and open questions",
+          "oracle",
+          "We organise your goal, your existing systems and the open questions. That shows which next step makes sense. You do not need access credentials for this first description."
+        ],
+        [
+          "Scope",
+          "pascal",
+          "Tell us briefly what you want to change. We agree the right scope together."
+        ]
+      ],
+      "speakers": {
+        "pascal": "Pascal",
+        "nex": "NeX",
+        "oracle": "Oracle"
+      },
+      "cKicker": "Your starting point",
+      "cTitle": "What are you planning?",
+      "cLead": "Briefly describe your project or choose an area. You get relevant information and the way to a personal conversation.",
+      "paths": [
+        [
+          "01",
+          "Brand & web",
+          "Positioning, language, design and website as a convincing presence.",
+          "/leistungen/websites"
+        ],
+        [
+          "02",
+          "Systems & AI",
+          "Connect workflows, systems and AI into a controlled way of working.",
+          "/leistungen/agenten-automatisierung"
+        ],
+        [
+          "03",
+          "Ads & marketing",
+          "Align offer, audience, campaign and landing page for impact.",
+          "/leistungen"
+        ]
+      ],
+      "chatCta": "Describe your project in chat",
+      "chatNote": "AIFly ORACLE can make mistakes. Binding statements are given in the personal conversation.",
+      "fTitle": "Let’s talk about your project.",
+      "fBody": "Tell us what you want to change. Together we clarify the right next step.",
+      "fCta": "Discuss the project",
+      "lKicker": "The right path",
+      "lTitle": "Which area fits your project?",
+      "lLead": "Website, recurring workflow, or app and portal: the three briefly explain when each path makes sense.",
+      "lChoices": [
+        [
+          "nex",
+          "Would you like to present your offering clearly online? Then the website area is a good start. It is about content, design and the path to an enquiry."
+        ],
+        [
+          "pascal",
+          "When a task keeps repeating, we look at the process behind it. Together we clarify which steps can be connected and where people should decide."
+        ],
+        [
+          "oracle",
+          "When it is about information and collaboration, an app or a portal can be the right path. What matters is what your customers or your team should actually get done there."
+        ]
+      ],
+      "lClose": "Choose the area that fits your project. If you are unsure, we will help you place it.",
+      "ldKicker": "In detail",
+      "ldTitle": "The three paths, explained concretely.",
+      "ldLead": "Open the path that fits your project. Each path describes what is included, how we proceed and what you can rely on.",
+      "ldCta": "Discuss your project with us",
+      "ldWays": [
+        {
+          "title": "Brand, copy & website",
+          "summary": "A presence that fits your company — and reads that way too.",
+          "bullets": [
+            "Positioning, page structure and clear copy for your offering",
+            "Bespoke design developed for your company",
+            "Responsive build, a clear enquiry path and personal handover"
+          ],
+          "note": "For a new launch or relaunch. Scope, languages and features are firmly agreed before the start.",
+          "cta": "View service and scope"
+        },
+        {
+          "title": "Systems & automation",
+          "summary": "Recurring tasks run in an orderly way, and your familiar way of working stays intact."
+        },
+        {
+          "title": "Visibility & campaign",
+          "summary": "So the right people find you and have a good reason to get in touch."
+        }
+      ],
+      "zKicker": "How we work together",
+      "zTitle": "One contact from the first conversation to handover.",
+      "zLead": "Pascal looks after your project himself. You see early which direction it is taking, what is included in the scope and when your decision is needed.",
+      "zSteps": [
+        [
+          "We understand what you want to achieve.",
+          "We talk about your offering, your customers, the previous solution and the standard the result must meet."
+        ],
+        [
+          "You receive a clear scope of services.",
+          "Services, your involvement, dates, sensible options and costs are clearly separated."
+        ],
+        [
+          "Concept, copy and design take shape together.",
+          "At fixed dates you see the status as a whole and decide how to proceed."
+        ],
+        [
+          "We review, hand over and stay reachable.",
+          "The agreed result is reviewed and handed over transparently. Maintenance and further development can be added to suit."
+        ]
+      ],
+      "bKicker": "A budget with a transparent basis",
+      "bTitle": "High-quality work at a price you know in advance.",
+      "bLead": "With us there are no vague agency packages. We work with a fixed day rate. Before the start you receive a clearly described scope and decide yourself what is done now and what comes later.",
+      "bRateLabel": "Clear calculation basis",
+      "bRate": "449 €",
+      "bRateUnit": "net per project day",
+      "bRateNote": "Concept, copy, design and technical implementation are planned according to the agreed scope. External costs are shown separately.",
+      "bRateCta": "More on pricing and collaboration",
+      "bBlocks": [
+        [
+          "Everything we build",
+          "Concept, copy, design and technical implementation are each assigned to a concrete result in the quote."
+        ],
+        [
+          "Everything that remains afterwards",
+          "Maintenance, further development and personal support are agreed as a separate, transparent building block."
+        ],
+        [
+          "Everything incurred externally",
+          "Hosting, software, AI usage as well as media and advertising budget are listed as separate items in the quote."
+        ]
+      ],
+      "pwKicker": "More from NeXify",
+      "pwTitle": "Products that complement your project – when they fit.",
+      "pwLead": "Alongside client projects, NeXify develops its own products for knowledge, tasks, integrations and the automotive area. We use them in your project only when they genuinely help you.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Your personal or business workspace for conversations, tasks, documents and knowledge.",
+          "Explore Private & Business"
+        ],
+        [
+          "NeX Agentic AI",
+          "Task-related assistance and approved tool work, complemented by AIFly ORACLE for coordination.",
+          "Understand agent work"
+        ],
+        [
+          "NeXify API",
+          "The technical integration path for your own applications. Scope, access and operating conditions are clarified separately.",
+          "View the API concept"
+        ],
+        [
+          "TEILEKLAR",
+          "The independent world for vehicle parts, workshops and matching enquiries.",
+          "To the vehicle and parts area"
+        ]
+      ]
     }
   }
 }

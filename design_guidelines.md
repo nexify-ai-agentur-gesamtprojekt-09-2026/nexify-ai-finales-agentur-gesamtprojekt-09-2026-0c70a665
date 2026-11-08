@@ -32,7 +32,7 @@
 - Auf Lime: `--color-text-auf-lime`
 
 **Marke / Akzent**
-- CI Lime: `--color-marke-lime` (#C0EE38)
+- CI Lime: `--color-marke-lime` (#A8C76A — ruhiges Lime, Kanon 08.11.2026)
 - Lime Varianten: `--color-marke-lime-hell`, `--color-marke-lime-dunkel`, `--color-marke-lime-gruen`
 
 **Semantik (Statusfarben)**

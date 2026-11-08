@@ -42,3 +42,18 @@
 .workspace-shell .site-footer.footer-refined{background:var(--gradient-atelier-light),var(--color-atelier-surface)}
 @container footer (min-width:1700px){.footer-refined .footer-utilities{padding-inline:var(--layout-home-wide-padding)}}
 .footer-refined .footer-utilities .diagnostic-consent{border:0;margin:0;padding-top:var(--space-3)}
+
+/* 08.11.2026 — WCAG-Befund: Uebersichts-Panel schrumpfte auf Zeichenbreite (4,4 px Spalten,
+   weil die Details-Box shrink-to-fit stand und minmax(0,1fr) auf min-content fiel).
+   Geoeffnet nimmt die Uebersicht die volle Breite, die Spalten haben eine Mindestbreite. */
+.footer-overview[open],
+.workspace-shell .footer-refined .footer-overview[open],
+.structured-footer .footer-bottom .footer-overview[open] { width: 100%; flex: 0 0 100%; }
+.footer-overview-panel,
+.footer-refined .footer-overview-panel { width: 100%; min-width: 0; }
+.footer-refined .footer-overview-columns,
+.structured-footer .footer-bottom .footer-overview-columns {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  min-width: 0;
+}
+.footer-overview-group { min-width: 0; }

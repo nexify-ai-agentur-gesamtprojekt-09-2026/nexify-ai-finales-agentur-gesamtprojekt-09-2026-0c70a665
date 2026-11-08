@@ -356,3 +356,8 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .workspace-shell .aifly-panel .composer-area { padding: var(--stack-gap) var(--chat-gutter) calc(var(--chat-gutter) + env(safe-area-inset-bottom)); gap: var(--stack-gap); }
 .workspace-shell .aifly-panel .chat-return { padding: var(--space-3) var(--chat-gutter) calc(var(--space-3) + env(safe-area-inset-bottom)); }
 .workspace-shell .aifly-panel .action-option { margin-inline: 0; width: 100%; padding-inline: var(--space-3); }
+
+/* 08.11.2026 — siehe SiteFooter.css: Panelbreite und Spalten-Mindestbreite (WCAG 2.5.8). */
+.structured-footer .footer-bottom .footer-overview[open] { width: 100%; flex: 0 0 100%; }
+.footer-overview-panel { width: 100%; min-width: 0; }
+.structured-footer .footer-bottom .footer-overview-columns { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }

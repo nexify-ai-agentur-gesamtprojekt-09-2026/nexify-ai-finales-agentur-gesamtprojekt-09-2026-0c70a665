@@ -1,0 +1,21 @@
+/* Startseite nach bestätigtem Aufbau (2026-11-07): Vorhaben, Einstieg. Nutzt kanonische Tokens, keine festen Hex-Werte. */
+.home-concept .hv-vorhaben,.home-concept .hv-einstieg{padding-block:var(--space-7)}
+.home-concept .hv-cues{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:var(--space-4)}
+.home-concept .hv-cue{position:relative;display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-5);border-radius:var(--radius-atelier);background:var(--color-atelier-surface);box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge),0 0 0 1px color-mix(in srgb,var(--color-atelier-champagne) 16%,transparent)}
+.home-concept .hv-cue-index{position:absolute;top:var(--space-4);right:var(--space-5);color:var(--color-atelier-champagne);font:500 var(--type-small-size)/1 var(--font-mono,monospace)}
+.home-concept .hv-cue-who{display:flex;align-items:center;gap:var(--space-3)}
+.home-concept .hv-cue-who img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:50% 18%;background:var(--color-atelier-surface)}
+.home-concept .hv-cue-who span{display:flex;flex-direction:column}
+.home-concept .hv-cue-who strong{font-weight:600}
+.home-concept .hv-cue-who small{color:var(--color-text-sekundaer);font-size:var(--type-small-size)}
+.home-concept .hv-cue p{hyphens:manual;margin:0;color:var(--color-text-sekundaer);line-height:var(--type-body-leading)}
+.home-concept .hv-paths{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--space-4)}
+.home-concept .hv-path{display:flex;flex-direction:column;gap:var(--space-3);height:100%;padding:var(--space-5);border-radius:var(--radius-atelier);text-decoration:none;color:inherit;background:var(--color-atelier-surface);box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge),0 0 0 1px color-mix(in srgb,var(--color-atelier-champagne) 16%,transparent);min-height:var(--target-min)}
+.home-concept .hv-path:hover{box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge),0 0 0 1px var(--color-atelier-champagne)}
+.home-concept .hv-path-no{color:var(--color-atelier-champagne);font:500 var(--type-small-size)/1 var(--font-mono,monospace)}
+.home-concept .hv-path h3{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);margin:0;font-weight:500}
+.home-concept .hv-path p{margin:0;color:var(--color-text-sekundaer);line-height:var(--type-body-leading)}
+.home-concept .hv-chat-cta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-5);margin-top:var(--space-6)}
+.home-concept .hv-chat-cta small{color:var(--color-text-tertiaer);max-width:48ch}
+.home-concept button.hc-finish-primary{cursor:pointer;border:0;font:inherit}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){.home-concept :is(.hv-cue,.hv-path){background:var(--color-atelier-surface)}}

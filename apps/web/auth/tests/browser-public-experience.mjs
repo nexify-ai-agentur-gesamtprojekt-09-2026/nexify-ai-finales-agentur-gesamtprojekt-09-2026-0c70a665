@@ -27,13 +27,13 @@ try{
  const page=await context.newPage();page.on('pageerror',e=>report.pageErrors.push(e.name));page.on('console',m=>{if(/hydration|hydrated but|did not match|An error occurred in one of your React components/i.test(m.text()))report.pageErrors.push('hydration_or_component_error');});
  // Companion-/Avatar-Integrität (zielbild-v2): der AI-Fly-Oracle-Companion sitzt jetzt am reopen-chat-Launcher
  // (Panel desktop-default offen). Dekorativ (aria-hidden) und das Avatar-Asset lädt unbeschädigt mit 512px.
- if(!installationOnly){await page.goto(origin+'/');await page.locator('.workspace-shell').waitFor();await page.locator('[data-testid="chat-panel-close-button"]').click();const companion=page.locator('.reopen-chat .oracle-companion');await companion.waitFor();assert.equal(await companion.getAttribute('aria-hidden'),'true','AI Fly Oracle companion stays decorative');await page.waitForFunction(()=>{const i=document.querySelector('.reopen-chat .oracle-companion img');return i&&i.complete&&i.naturalWidth>0;});assert.equal(await companion.locator('img').evaluate(i=>i.complete&&i.naturalWidth===512),true,'companion avatar loads unbroken at 512');report.companion_avatar={aria_hidden:true,natural_width:512,location:'reopen-chat launcher',passed:true};}
+ if(!installationOnly){await page.goto(origin+'/');await page.locator('.workspace-shell').waitFor();await page.locator('[data-testid="chat-panel-close-button"]').click();const companion=page.locator('.reopen-chat .oracle-companion');await companion.waitFor();assert.equal(await companion.getAttribute('aria-hidden'),'true','AIFly ORACLE companion stays decorative');await page.waitForFunction(()=>{const i=document.querySelector('.reopen-chat .oracle-companion img');return i&&i.complete&&i.naturalWidth>0;});assert.equal(await companion.locator('img').evaluate(i=>i.complete&&i.naturalWidth===512),true,'companion avatar loads unbroken at 512');report.companion_avatar={aria_hidden:true,natural_width:512,location:'reopen-chat launcher',passed:true};}
  if(!installationOnly)for(const locale of ['de','nl'])for(const source of data.pages){
   await page.goto(origin+source.path);await page.locator('#locale').selectOption(locale);
   await page.waitForFunction(l=>document.documentElement.lang===l,locale);
   await page.waitForFunction(t=>document.title===t,source.localizedTitle[locale]+' · NeXify AI');
   assert.equal(await page.locator('.workspace-shell').count(),1);
-  assert.equal(await page.locator('.panel-heading h2').innerText(),'AI Fly Oracle');
+  assert.equal(await page.locator('.panel-heading h2').innerText(),'AIFly ORACLE');
   assert.ok((await page.locator('.panel-heading .panel-brandline').innerText()).includes('NeXify'),'panel keeps NeXify brandline');
   assert.equal(await page.locator('main h1').count(),1);assert.equal(await page.locator('head title').count(),1);
   // zielbild-v2: die Home-Seite präsentiert ihre Szenen über HomeContent (Live-Hero + Home-Journey),
