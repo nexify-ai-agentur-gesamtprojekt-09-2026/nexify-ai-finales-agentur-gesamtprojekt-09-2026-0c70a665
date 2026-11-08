@@ -73,3 +73,6 @@ apps/shop-api/data/
 apps/web/e2e/.results/
 apps/web/test-results/
 apps/web/playwright-report/
+
+# Next.js dev-generated agent rules (written/re-added by `next dev`)
+apps/web/AGENTS.md
