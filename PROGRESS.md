@@ -1632,3 +1632,6 @@ auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
   Offen auf der Unternehmensseite: „NeXify AI FACTORY B.V.“ steht als Auftraggeber-Bezeichnung mit Vorbehalt; Rechtsform bleibt unbestätigt.
 - **Review-Fund (Vercel-Agent) behoben:** Der Tracking-Abruf konnte eine bereits „zugestellt“ markierte Bestellung wieder auf „versendet“ setzen;
   Vorprüfung und Update schließen jetzt beide Endzustände aus (`fulfillment.py`), Test ergänzt.
+- **Buttons einheitlich:** Aktionen sind Pills (999 px, Vorgabe „Pill-Form für Buttons und Chips“) statt 12-px-Rechtecken; die Absenden-/Primärschaltflächen der
+  NeXify-Seiten (Kontaktformular, Portal-Tore) tragen wie die Hero-Aktion das ruhige Lime, TEILEKLAR bleibt Champagne.
+  Offen: Kontakt-Adresse `mail@nexifyai.cloud` bleibt, bis die Hauptdomain (.de/.cloud) vom Inhaber bestätigt ist.
