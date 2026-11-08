@@ -1,5 +1,6 @@
 import AuthForms from "../../../components/shop/AuthForms";
-export const metadata = { title: "Anmelden · TEILEKLAR" };
+import {routeMetadata} from "../../../lib/page-seo";
+export const generateMetadata = () => routeMetadata("login", false);
 export default function SignInPage() {
   return <AuthForms mode="login" />;
 }

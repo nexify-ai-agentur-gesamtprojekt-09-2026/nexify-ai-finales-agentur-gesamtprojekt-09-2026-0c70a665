@@ -1,3 +1,13 @@
+# Aktuell · Abgleich Gesamtbeschreibung 08.11.2026 gegen `.de`-Ausgabe
+
+Abgleich Seitenkatalog §16 gegen die gebaute `apps/web`-Ausgabe: `docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md`. Alle 39 bisherigen öffentlichen Routen liefern 200 (je eine H1, `lang=de`). Behoben: fehlende Canonical/Description/Robots auf `/anmelden`, `/registrieren`, `/teileklar/suche|kategorien|warenkorb|kasse|werkstatt`; Impressum um Registerangaben (Registerstelle Roermond, KvK, BTW) ergänzt, Rechtsform bleibt ausdrücklich unbestätigt; horizontaler Überlauf der Brotkrumen bei 390 px; veralteter Sitemap-Test auf die Next-Routen umgestellt. Neu: `/produkte/nex-agentic-aifly`, `/produkte/aifly-oracle`, `/produkte/skills-mcp`, `/portale` (43 öffentliche / 53 Routen; Registries, Zähltests und Quellinventar konsistent nachgezogen).
+
+Prüfstand: `make check` 0 Fehler/0 Warnungen; `tsc --noEmit` sauber; Site-Tests 124 bestanden, 2 vorbestehende Fehler (`Unmocked import ./Storefront.css`, Komponente existiert nicht mehr); `tests.test_site_map` grün. `make test` bleibt rot (697 Tests, 37 Failures / 24 Errors): die 8 zusätzlichen Subtest-Fehler sind historische Hash-Pins in `config/acceptance-coverage.json` für absichtlich geänderte Dateien; sie werden nicht umgebunden, sondern vom unabhängigen Review neu erhoben.
+
+Offen (Owner siehe Abgleichsdokument): Rechtsform/Impressum final, Landing-/Stadtseiten (Suchbegriffe und Wettbewerbsanalyse nicht belegt), Komponenten-Showcase, Canonical-Domain `.cloud` vs `.de`, NeX2fly-Tarife, Hero-Video/Higgsfield-Guthaben, NL/FR/EN-Prüfung, Kontaktformular→Resend gegen echte Dienste, Gesamtabnahme. Keine Zahlung, kein Guthaben-Aufladen, keine DNS-/Datenänderung.
+
+---
+
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026
 
 Führend ist ausdrücklich `appgprj_6ae7ad63df2081918a843f996caf9422` / nexify-ai-factory-20261101. Ausgangscommit 0bbce305fb7e11233a7824d5b509e8f9e49e5ea7; diese Revision bleibt im vorhandenen Auftrag P01–P26. Details: docs/contracts/migration-2026-11-04.md und docs/production/hero-requirements-2026-11-04.md. Keine DNS-, Datenbank- oder produktive Fachruntimeumstellung.

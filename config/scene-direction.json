@@ -277,6 +277,34 @@
       "family": "automotive",
       "mode": "cinematic",
       "reason": "Filmischer Schwerpunkt der zugehörigen Fachfamilie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "aifly-oracle",
+      "path": "/produkte/aifly-oracle",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Ruhige Fachseite der Arbeitsumgebungs-Familie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "nex-agentic",
+      "path": "/produkte/nex-agentic-aifly",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Ruhige Fachseite der Arbeitsumgebungs-Familie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "skills-mcp",
+      "path": "/produkte/skills-mcp",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Ruhige Fachseite der Arbeitsumgebungs-Familie; keine eigene Sprecherfilm-Abnahme."
+    },
+    {
+      "page_id": "portals",
+      "path": "/portale",
+      "family": "workspace",
+      "mode": "quiet",
+      "reason": "Ruhige Fachseite der Arbeitsumgebungs-Familie; keine eigene Sprecherfilm-Abnahme."
     }
   ]
 }

@@ -1542,6 +1542,118 @@
         "authenticated_media_delivery_not_implemented_keep_private"
       ],
       "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "aifly-oracle",
+      "path": "/produkte/aifly-oracle",
+      "site_context": "nexify",
+      "visibility": "public",
+      "context_id": "context-aifly-oracle",
+      "context_title": "AIFly ORACLE. Einordnen, bevor gehandelt wird.",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "aifly-oracle-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "nex-agentic",
+      "path": "/produkte/nex-agentic-aifly",
+      "site_context": "nexify",
+      "visibility": "public",
+      "context_id": "context-nex-agentic",
+      "context_title": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "nex-agentic-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "skills-mcp",
+      "path": "/produkte/skills-mcp",
+      "site_context": "nexify",
+      "visibility": "public",
+      "context_id": "context-skills-mcp",
+      "context_title": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang.",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "skills-mcp-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "portals",
+      "path": "/portale",
+      "site_context": "nexify",
+      "visibility": "public",
+      "context_id": "context-portals",
+      "context_title": "Portale. Ein Einstieg je Zielgruppe.",
+      "film_id": null,
+      "scene_ids": [],
+      "script_module_ids": [
+        "portals-explain-1"
+      ],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "approved_versioned_video_bytes_missing",
+        "voice_and_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing",
+        "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
     }
   ],
   "assets": [],
@@ -2699,6 +2811,94 @@
         "voice_and_character_approval_missing",
         "locale_audio_captions_transcript_review_missing",
         "route_specific_film_or_scene_binding_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "aifly-oracle",
+      "module_id": "aifly-oracle-explain-1",
+      "context_id": "module-aifly-oracle-explain-1",
+      "context_title": "Koordination mit klaren Grenzen",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "nex-agentic",
+      "module_id": "nex-agentic-explain-1",
+      "context_id": "module-nex-agentic-explain-1",
+      "context_title": "Ausführen statt nur beraten",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "skills-mcp",
+      "module_id": "skills-mcp-explain-1",
+      "context_id": "module-skills-mcp-explain-1",
+      "context_title": "Fähigkeiten als geprüfte Bausteine",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
+      ],
+      "owner": "Root / authorized media owner"
+    },
+    {
+      "page_id": "portals",
+      "module_id": "portals-explain-1",
+      "context_id": "module-portals-explain-1",
+      "context_title": "Wer nutzt was",
+      "film_id": null,
+      "scene_ids": [],
+      "assets": {
+        "de": null,
+        "nl": null,
+        "fr": null
+      },
+      "status": "pending",
+      "voice_status": "not_approved",
+      "approval_status": "not_approved",
+      "gaps": [
+        "module_specific_video_bytes_missing",
+        "module_script_voice_character_approval_missing",
+        "locale_audio_captions_transcript_review_missing"
       ],
       "owner": "Root / authorized media owner"
     }

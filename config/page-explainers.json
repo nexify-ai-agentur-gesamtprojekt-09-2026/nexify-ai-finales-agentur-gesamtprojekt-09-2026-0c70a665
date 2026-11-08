@@ -1902,6 +1902,154 @@
           }
         }
       ]
+    },
+    {
+      "page_id": "aifly-oracle",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "aifly-oracle-explain-1",
+          "speaker": "aifly",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "ai-notice",
+            "label": {
+              "de": "Hinweise zu KI und Verantwortung",
+              "nl": "Informatie over AI en verantwoordelijkheid",
+              "fr": "Informations sur l’IA et la responsabilité",
+              "en": "Notes on AI and accountability"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/mastervorgabe-2026-10-29.md"
+          ],
+          "content_ref": {
+            "page_id": "aifly-oracle",
+            "section_id": "oracle-1"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "nex-agentic",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "nex-agentic-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "skills-mcp",
+            "label": {
+              "de": "Skills und MCP ansehen",
+              "nl": "Skills en MCP bekijken",
+              "fr": "Voir Skills et MCP",
+              "en": "See skills and MCP"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/mastervorgabe-2026-10-29.md"
+          ],
+          "content_ref": {
+            "page_id": "nex-agentic",
+            "section_id": "nex-1"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "skills-mcp",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "skills-mcp-explain-1",
+          "speaker": "nex",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "api",
+            "label": {
+              "de": "Ihre Schnittstelle projektieren",
+              "nl": "Uw koppeling uitwerken",
+              "fr": "Définir votre intégration",
+              "en": "Scope your integration"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/mastervorgabe-2026-10-29.md"
+          ],
+          "content_ref": {
+            "page_id": "skills-mcp",
+            "section_id": "skills-1"
+          }
+        }
+      ]
+    },
+    {
+      "page_id": "portals",
+      "communication_mode": "explanatory",
+      "placement": "after_hero_preserve_existing_sections",
+      "modules": [
+        {
+          "id": "portals-explain-1",
+          "speaker": "pascal",
+          "status": "script_draft",
+          "media_side": "left",
+          "media": {
+            "src": null,
+            "captions": null,
+            "transcript": null,
+            "status": "asset_pending"
+          },
+          "next_action": {
+            "type": "route",
+            "target_id": "login",
+            "label": {
+              "de": "Zur Anmeldung",
+              "nl": "Naar het aanmelden",
+              "fr": "Vers la connexion",
+              "en": "Go to sign-in"
+            }
+          },
+          "source_refs": [
+            "config/site-map.json",
+            "docs/09-final/mastervorgabe-2026-10-29.md"
+          ],
+          "content_ref": {
+            "page_id": "portals",
+            "section_id": "portals-1"
+          }
+        }
+      ]
     }
   ]
 }

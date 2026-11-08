@@ -8,7 +8,7 @@
 .home-concept .pc-hero.is-text-only{grid-template-columns:minmax(0,1fr)}
 .home-concept .pc-hero.is-text-only .pc-hero-copy{max-width:72ch}
 .home-concept .pc-hero-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
-.home-concept .pc-breadcrumb{margin:0 0 var(--space-4)}
+.home-concept .pc-breadcrumb{margin:0 0 var(--space-4);min-width:0;max-width:100%}
 .home-concept .pc-breadcrumb ol{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-3);margin:0;padding:0;list-style:none;font-size:var(--type-small-size);line-height:var(--type-body-leading);color:var(--color-text-sekundaer)}
 .home-concept .pc-breadcrumb li{display:inline-flex;align-items:center;gap:var(--space-3);min-height:var(--target-min)}
 .home-concept .pc-breadcrumb li>span[aria-hidden]{color:var(--color-atelier-champagne)}
