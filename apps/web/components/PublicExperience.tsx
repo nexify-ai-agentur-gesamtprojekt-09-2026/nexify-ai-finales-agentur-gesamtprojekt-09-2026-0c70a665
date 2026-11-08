@@ -2,6 +2,7 @@
 import type {ReactNode} from "react";
 import type {PublicPage} from "../lib/page-types";
 import {useSitePathname} from "./Router";
+import {canonicalUrl,organizationJsonLd} from "../lib/seo";
 import {useUI} from "./Workspace";
 import PresenterGuide,{PresenterGuideProvider,type PresenterJourney} from "./PresenterGuide";
 import ExplainerSections,{type ExplainerModule} from "./ExplainerSections";
@@ -25,7 +26,7 @@ export function PublicExperienceProvider({data,children}:{data:PublicExperienceD
 }
 export default function PublicExperience({page,data,documentTitle=false,shopRuntime=false,pathname="",search=""}:{page:PublicPage;data:PublicExperienceData;documentTitle?:boolean;shopRuntime?:boolean;pathname?:string;search?:string}){
   const{locale}=useUI();const video=data.videos[page.id]?.[locale==="en"?"de":locale];
-  const title=documentTitle?<title>{`${page.localizedTitle[locale]} · NeXify AI`}</title>:null;
+  const title=documentTitle?<><title>{`${page.localizedTitle[locale]} · NeXify AI`}</title><meta name="description" content={page.localizedSummary[locale]}/><link rel="canonical" href={canonicalUrl(page.path)}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organizationJsonLd(page.localizedSummary[locale]))}}/></>:null;
   const modules=data.explainers.find(entry=>entry.page_id===page.id)?.modules||[];
   const sectionContent:Record<string,ReactNode>={};
   for(const module of modules){
