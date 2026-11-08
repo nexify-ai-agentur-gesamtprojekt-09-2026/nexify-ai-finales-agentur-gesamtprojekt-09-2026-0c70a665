@@ -35,7 +35,7 @@
       "hasAudio": true,
       "autoplayWithAudio": true,
       "playOnce": true,
-      "sha256": "0cd162971738aa305978ce172eac16e0fdeb28cc76338c45c1d1c71e36841036",
+      "sha256": "e24b516dbb85d0f6febc9c6ab67d8fa87cb40989324646a9d8889146d5221ddf",
       "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa",
       "transcript": "Ein guter Auftritt beginnt mit einer klaren Idee. Wir verbinden Marke, Website und digitale Systeme, damit aus Ihrem Vorhaben etwas entsteht, das Menschen erreicht und Ihr Unternehmen voranbringt. NeXify. Gemeinsam machen wir den nächsten Schritt.",
       "kind": "existing_glass_montage_with_elevenlabs_offscreen_narration",
@@ -58,7 +58,7 @@
       "playOnce": true,
       "captions": "/media/atelier/films/home-studio-welcome-20261102.de.vtt",
       "transcript": "Ein klarer Auftritt beginnt mit einer klaren Idee. Wir bringen Marke, Website und Inhalte in einen verständlichen Zusammenhang. Von der ersten Struktur bis zur passenden Umsetzung – mit einem nachvollziehbaren nächsten Schritt. Was braucht Ihr Vorhaben? Das klären wir gemeinsam. Projekt besprechen.",
-      "sha256": "ef58704e06e3e3e18f2a3f9cc7eced452fdfb5f888338230bbbe5f42511dcb63",
+      "sha256": "7525b73d3c77f075887b31021a1c65f849809579d11de1347211f5dd195da08e",
       "poster_sha256": "31ee54c31e9588724eb457c108ef3c0d8310d1e79b9a228e539c020c9e046448"
     },
     {
@@ -71,7 +71,7 @@
       "hasAudio": false,
       "autoplayWithAudio": false,
       "playOnce": true,
-      "sha256": "17ca37ecbb128a58c9c2d8ea986e45ef96559fc54069bb8026beb3e22a3f2164",
+      "sha256": "72176d54e455ac4f27bee14a042345173a872865f49a2e033ec10e39e63f1bf2",
       "poster_sha256": "1d16e5b19b9194ab56dc61261588e819a302f979b6ff8e3936727fa567586afa"
     }
   ],
