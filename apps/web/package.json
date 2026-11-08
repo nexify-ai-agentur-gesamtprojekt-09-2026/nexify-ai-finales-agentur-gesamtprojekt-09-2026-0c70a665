@@ -11,7 +11,8 @@
     "build": "node scripts/generate-public-data.mjs && next build",
     "start": "next start --hostname 127.0.0.1 --port 3004",
     "typecheck": "node scripts/generate-public-data.mjs && tsc --noEmit",
-    "test:auth": "node --test auth/tests/*.test.mjs"
+    "test:auth": "node --test auth/tests/*.test.mjs",
+  "test:e2e": "node scripts/generate-public-data.mjs && playwright test -c e2e/playwright.config.ts"
   },
   "dependencies": {
     "@sentry/nextjs": "11.9.0",

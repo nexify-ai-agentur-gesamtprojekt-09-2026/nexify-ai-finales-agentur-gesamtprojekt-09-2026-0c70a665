@@ -1,3 +1,21 @@
+# Aktuell · Leistungen ausgebaut (Canvas + Produktions-Content) · 2026-11-08
+
+Auftrag: Seiten des Canvas „Nexify UI/UX Design Optimization" ausbauen — Design zuerst, dann Produktions-Content (apps/site, Live-.de). Start: Leistungen.
+
+Canvas (Design): `project/NeXify Leistungen.dc.html` um vier Sektionen erweitert — „So arbeiten wir" (4 Schritte), „Investition & Transparenz" (macht den bereits vorhandenen Budget-Rechner sichtbar; Defaults an `config/fakten.json#home.kalkulationsbeispiel` angeglichen und als illustrativ gekennzeichnet), „Produktwelt" (Produktkarten aus vorhandener PRODUCTS-Liste), „FAQ" (Accordion). Artifact-Version 87 publiziert. Eingebettete DC-Logik `node --check` grün.
+
+Produktions-Content (Repo): `config/site-map.json` `/leistungen` um zwei Prosa-Sektionen `services-ablauf` und `services-investition` ergänzt, je de/nl/fr/en (Parität). „ab 449 € netto je Projekttag" aus `config/fakten.json#projekt.tagessatz_eur`; Rechenbeispiele als illustrativ, Preise „unter Freigabe". Provenienz-Hash für `config/site-map.json` in `config/presenter-sources.json` nach reviewter Änderung aktualisiert.
+
+Verifikation: `generate-public-data.mjs` grün (39 Seiten, /leistungen 5 Sektionen, 4-Sprachen-Parität true); `node tools/ds-audit-cli.js` 0 Fehler/0 Warnungen; apps/site Tests 112/118 (6 Fehler baseline-identisch, vorbestehend); Dev-Build-Screenshots Desktop 1440 + Mobil (iPhone 12) zeigen beide Sektionen on-brand.
+
+Grenzen/Gaps: Rechner, Produktkarten und FAQ-Interaktivität bleiben zunächst Canvas-only — der Produktions-Renderer `PublicExperience` kennt nur heading/body-Sektionen; interaktive Widgets erfordern Komponenten-/Schema-Erweiterung (offener Folgeschritt). Kein Merge/Deploy auf main. Preise/Rechtstexte weiter freigabepflichtig (Pascal). Vorbestehende 6 Testfehler und roter Gesamtgate unverändert.
+
+Next Steps: Produkte/NeX2Fly (ORACLE) als nächster Bereich; danach TEILEKLAR/Shop, Werkstattservice, Werkstattpartner (+Portal), Kundenportale, NeXify AI API, Rechtsseiten (Entwurf). Interaktive Leistungs-Widgets als Renderer-Erweiterung einplanen.
+
+---
+
+## Erhaltene Vorstände
+
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026
 
 Führend ist ausdrücklich `appgprj_6ae7ad63df2081918a843f996caf9422` / nexify-ai-factory-20261101. Ausgangscommit 0bbce305fb7e11233a7824d5b509e8f9e49e5ea7; diese Revision bleibt im vorhandenen Auftrag P01–P26. Details: docs/contracts/migration-2026-11-04.md und docs/production/hero-requirements-2026-11-04.md. Keine DNS-, Datenbank- oder produktive Fachruntimeumstellung.

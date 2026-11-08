@@ -6,6 +6,7 @@ import {useUI} from "./Workspace";
 import PresenterGuide,{PresenterGuideProvider,type PresenterJourney} from "./PresenterGuide";
 import ExplainerSections,{type ExplainerModule} from "./ExplainerSections";
 import HomeContent from "./HomeContent";
+import ServicesContent from "./ServicesContent";
 import PublicContent from "./PublicContent";
 import FitmentChecklist from "./shop/FitmentChecklist";
 import TyreCalculator from "./shop/TyreCalculator";
@@ -34,5 +35,6 @@ export default function PublicExperience({page,data,documentTitle=false,shopRunt
   }
   const explanation=<><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/><ExplainerSections modules={modules.filter(module=>!module.content_section_id)} pages={data.pages} video={page.path==='/'?undefined:video} moduleVideos={data.videoModules[page.id]||{}}/></>;
   if(page.path==='/')return <>{title}<HomeContent home={page} pages={data.pages} video={video} moduleVideos={data.videoModules[page.id]||{}}><PresenterGuide pageId={page.id} pages={data.pages} journeys={data.journeys}/></HomeContent></>;
+  if(page.id==='services')return <>{title}<ServicesContent page={page} pages={data.pages}/>{explanation}</>;
   return <>{title}<PublicContent page={page} pages={data.pages} sectionContent={sectionContent}>{shopRuntime&&<PublicShopContent pageId={page.id} pathname={pathname} search={search}/>} {(!shopRuntime||page.id==="tk-home")&&["tk-home","tk-search","tk-categories","tk-category","tk-product","tk-cart","tk-checkout"].includes(page.id)&&<ShopEntry/>} {page.id==="tk-fitment"&&<><FitmentChecklist/><TyreCalculator/><PhaseNotice id="tk-battery"/></>} {["tk-appointments","tk-vouchers"].includes(page.id)&&<PhaseNotice id={page.id}/>} {page.id==="tk-workshop"&&!shopRuntime&&<WorkshopDirectory/>} {page.id==="tk-partner"&&<><PartnerJourney/><ContactRequestForm kind="partner"/></>} {page.id==="contact"&&<ContactRequestForm/>} {page.id==="tk-legal"&&<TeileklarLegal/>} {explanation}</PublicContent></>;
 }

@@ -616,6 +616,60 @@
             "docs/09-final/mastervorgabe-2026-10-29.md §14",
             "docs/09-final/mastervorgabe-2026-10-29.md §15"
           ]
+        },
+        {
+          "id": "services-ablauf",
+          "heading": {
+            "de": "So arbeiten wir",
+            "nl": "Zo werken we",
+            "fr": "Notre manière de travailler",
+            "en": "How we work"
+          },
+          "body": {
+            "de": "In vier Schritten zum Ergebnis: Im Gespräch schildern Sie Ihr Vorhaben in einem Satz – Zugangsdaten oder ein fertiges Konzept brauchen Sie dafür nicht. In der Einordnung ordnen wir Ziel, vorhandene Systeme und offene Fragen; daraus wird der sinnvolle nächste Schritt sichtbar. In der Umsetzung realisieren wir den vereinbarten Umfang, einen Ablauf nach dem anderen, mit klaren Verantwortlichkeiten. Zum Abschluss erhalten Sie eine dokumentierte Übergabe und persönliche Begleitung.",
+            "nl": "In vier stappen naar het resultaat: in het gesprek beschrijft u uw plan in één zin – inloggegevens of een kant-en-klaar concept zijn daarvoor niet nodig. Bij het inordenen ordenen we doel, bestaande systemen en open vragen; daaruit wordt de zinvolle volgende stap zichtbaar. In de uitvoering realiseren we de afgesproken omvang, proces voor proces, met duidelijke verantwoordelijkheden. Tot slot krijgt u een gedocumenteerde oplevering en persoonlijke begeleiding.",
+            "fr": "En quatre étapes vers le résultat : lors de l’entretien, vous décrivez votre projet en une phrase – sans identifiants ni concept finalisé. Lors du cadrage, nous ordonnons l’objectif, les systèmes existants et les questions ouvertes ; l’étape suivante pertinente devient alors visible. Lors de la réalisation, nous mettons en œuvre le périmètre convenu, un processus après l’autre, avec des responsabilités claires. Enfin, vous recevez une remise documentée et un accompagnement personnel.",
+            "en": "Four steps to the result: in the conversation you describe your plan in one sentence – no credentials or finished concept required. In the framing we order the goal, existing systems and open questions, which makes the sensible next step visible. In delivery we implement the agreed scope, one workflow at a time, with clear responsibilities. Finally you receive a documented handover and personal support."
+          },
+          "source_refs": [
+            "docs/09-final/mastervorgabe-2026-10-29.md",
+            "docs/design/factory-brand-revision-2026-11-02.md"
+          ],
+          "requirement": "MASTER_CONTENT_SERVICES",
+          "source_sections": [
+            "docs/09-final/mastervorgabe-2026-10-29.md §2.1",
+            "docs/09-final/mastervorgabe-2026-10-29.md §7.1",
+            "docs/09-final/mastervorgabe-2026-10-29.md §7.2",
+            "docs/09-final/mastervorgabe-2026-10-29.md §14",
+            "docs/09-final/mastervorgabe-2026-10-29.md §15"
+          ]
+        },
+        {
+          "id": "services-investition",
+          "heading": {
+            "de": "Investition & Transparenz",
+            "nl": "Investering & transparantie",
+            "fr": "Investissement et transparence",
+            "en": "Investment & transparency"
+          },
+          "body": {
+            "de": "Transparent ab 449 € netto je Projekttag. Umfang, Sprachen und Funktionen vereinbaren wir vor dem Start fest. Werbebudget, Plattformkosten und laufende Betreuung bleiben getrennt ausgewiesen, damit jederzeit nachvollziehbar ist, wofür Sie zahlen. Der Tagessatz ist ein Richtpreis zur Orientierung; das verbindliche Angebot erstellen wir je Vorhaben. Rechenbeispiele dienen nur der Veranschaulichung und sind keine verbindliche Preisliste; Preise und Konditionen stehen unter Freigabe.",
+            "nl": "Transparant vanaf 449 € netto per projectdag. Omvang, talen en functies spreken we vóór de start vast af. Advertentiebudget, platformkosten en lopende begeleiding worden apart vermeld, zodat altijd duidelijk is waarvoor u betaalt. Het dagtarief is een richtprijs ter oriëntatie; de bindende offerte stellen we per project op. Rekenvoorbeelden dienen alleen ter illustratie en zijn geen bindende prijslijst; prijzen en voorwaarden zijn onder voorbehoud van goedkeuring.",
+            "fr": "Transparent à partir de 449 € net par jour de projet. Le périmètre, les langues et les fonctions sont fixés avant le démarrage. Budget publicitaire, coûts de plateforme et accompagnement courant sont indiqués séparément, afin que vous sachiez toujours ce que vous payez. Le tarif journalier est un prix indicatif ; l’offre ferme est établie par projet. Les exemples de calcul sont purement illustratifs et ne constituent pas une liste de prix ferme ; les prix et conditions restent soumis à validation.",
+            "en": "Transparent from €449 net per project day. Scope, languages and features are fixed before the start. Advertising budget, platform costs and ongoing support are shown separately, so it is always clear what you pay for. The day rate is an indicative price; the binding quote is prepared per project. Calculation examples are illustrative only and are not a binding price list; prices and terms are subject to approval."
+          },
+          "source_refs": [
+            "docs/09-final/mastervorgabe-2026-10-29.md",
+            "docs/design/factory-brand-revision-2026-11-02.md"
+          ],
+          "requirement": "MASTER_CONTENT_SERVICES",
+          "source_sections": [
+            "docs/09-final/mastervorgabe-2026-10-29.md §2.1",
+            "docs/09-final/mastervorgabe-2026-10-29.md §7.1",
+            "docs/09-final/mastervorgabe-2026-10-29.md §7.2",
+            "docs/09-final/mastervorgabe-2026-10-29.md §14",
+            "docs/09-final/mastervorgabe-2026-10-29.md §15"
+          ]
         }
       ],
       "metadata": {

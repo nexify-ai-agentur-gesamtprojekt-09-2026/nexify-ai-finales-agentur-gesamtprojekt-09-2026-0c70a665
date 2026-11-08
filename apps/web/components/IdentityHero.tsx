@@ -17,8 +17,9 @@ import './IdentityHero.css';
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
- const headings={de:['Gute Websites','beginnen','bei Ihnen.'],nl:['Goede websites','beginnen','bij u.'],fr:['Un bon site','commence','par vous.'],en:['Good websites','start','with you.']};
- const subtitles={de:'Ihr Unternehmen verdient einen Auftritt, der wirkt.',nl:'Uw onderneming verdient een uitstraling die werkt.',fr:'Votre entreprise mérite une présence qui fait la différence.',en:'Your business deserves a presence that makes an impact.'};
+ // Canvas-treue Startseite (NeXify Startseite.dc.html): „Ein Anspruch. Ein zusammenhängender Auftritt."
+ const headings={de:['Ein Anspruch.','Ein zusammenhängender','Auftritt.'],nl:['Eén ambitie.','Eén samenhangende','presentatie.'],fr:['Une ambition.','Une présence','cohérente.'],en:['One ambition.','One coherent','presence.']};
+ const subtitles={de:'Marke und Web, Systeme und KI, Sichtbarkeit und Wachstum – als ein System für Ihr Unternehmen.',nl:'Merk & web, systemen & AI, zichtbaarheid & groei – als één systeem voor uw onderneming.',fr:'Marque & web, systèmes & IA, visibilité & croissance – comme un seul système pour votre entreprise.',en:'Brand & web, systems & AI, visibility & growth – as one system for your business.'};
  const cinematic=(ownerCinemaPreview||welcome.production_accepted===true)&&!_video;
  return <section className={"identity-hero"+(cinematic?" identity-hero-cinema":"")} aria-labelledby="home-headline" data-testid="identity-hero" data-media-state={_video?"verified-public-film":cinematic?"owner-private-edited-video":"editorial-still"} data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
