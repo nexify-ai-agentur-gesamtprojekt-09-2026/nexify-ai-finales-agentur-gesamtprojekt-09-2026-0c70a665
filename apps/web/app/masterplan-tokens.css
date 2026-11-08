@@ -13,19 +13,28 @@
    Geist, Geist Mono) – kein externer Font-Request (Datenschutz-/Offline-Grenze der öffentlichen Seiten). */
 
 :root {
+  /* Interaktionszustände nach Designsystem Graphite (08.11.2026) */
+  --color-markierung-bg:     #C0EE38;
+  --color-markierung-fg:     #0A0C10;
+  --focus-ring-shadow:       0 0 0 2px #111212, 0 0 0 4px #C0EE38;
+  --material-backdrop:       blur(20px) saturate(140%);
+  --material-glass-fill:     rgba(30,33,34,.91);
+  --scrollbar-thumb:         linear-gradient(180deg, rgba(196,179,148,.5), rgba(189,197,201,.38));
+  --scrollbar-track:         transparent;
+
   /* ============== Mastervorgabe 5.2 – Primärwerte ============== */
-  --color-canvas:            #080A0F;   /* Graphite Canvas */
-  --color-brand-lime:        #A8C76A;   /* CI Lime 2026 — ruhiges Lime (Kanon 08.11.2026), = packages/tokens/tokens.css */
-  --color-brand-lime-soft:   #C7DA98;   /* heller Lime-Akzent (Highlight) */
+  --color-canvas:            #111212;   /* Graphite Canvas */
+  --color-brand-lime:        #C0EE38;   /* CI-Lime als Signal (Designsystem Graphite 08.11.2026) */
+  --color-brand-lime-soft:   #DBF68A;
   --color-brand-cyan:        #38BDF8;   /* Cyan-Akzent */
 
   /* Semantischer Tokenvertrag (Mastervorgabe §5.3) */
   --color-background-canvas:    var(--color-canvas);
-  --color-background-surface:   #0F131A;
-  --color-background-elevated:  #141A22;
-  --color-text-primary:         #FFFFFF;
-  --color-text-secondary:       #CBD1D6;
-  --color-text-muted:           #8B939B;
+  --color-background-surface:   #151617;
+  --color-background-elevated:  #1B1D1E;
+  --color-text-primary:         #F3F0EA;
+  --color-text-secondary:       #E2DFD8;
+  --color-text-muted:           #9A9D9C;
   --color-text-inverse:         #0A0C10;
   --color-border-subtle:        rgba(255,255,255,.08);
   --color-border-strong:        rgba(255,255,255,.18);
@@ -57,9 +66,9 @@
   --color-text-gedaempft:       var(--color-text-muted);
   --color-text-auf-lime:        var(--color-action-primary-ink);
   --color-marke-lime:           var(--color-brand-lime);
-  --color-marke-lime-hell:      #C7DA98;
-  --color-marke-lime-dunkel:    #8EAD51;
-  --color-marke-lime-gruen:     #638C45;
+  --color-marke-lime-hell:      #DBF68A;
+  --color-marke-lime-dunkel:    #A6D820;
+  --color-marke-lime-gruen:     #A6D820;
   --color-semantik-licht:       var(--color-brand-cyan);
   --color-semantik-erfolg:      var(--color-status-success);
   --color-semantik-warnung:     var(--color-status-warning);
@@ -109,8 +118,8 @@
   --shadow-akzent-weich:   0 1px 2px rgba(0,0,0,.30), 0 10px 22px -16px rgba(0,0,0,.52), var(--highlight-kante); /* zurueckhaltender Seitenakzent */
 
   /* Gradients auf neue Werte angepasst */
-  --gradient-button-primaer: linear-gradient(180deg, #C7DA98 0%, #A8C76A 55%, #8EAD51 100%);
-  --gradient-balken:         linear-gradient(90deg, #8EAD51, #A8C76A);
+  --gradient-button-primaer: linear-gradient(180deg, #DBF68A 0%, #C0EE38 55%, #A6D820 100%);
+  --gradient-balken:         linear-gradient(90deg, #A6D820, #C0EE38);
   --gradient-seitengrund:
     radial-gradient(1300px 640px at 88% -6%, rgba(168,199,106,.08), transparent 60%),
     radial-gradient(1000px 560px at 4% 38%, rgba(56,189,248,.06), transparent 62%),

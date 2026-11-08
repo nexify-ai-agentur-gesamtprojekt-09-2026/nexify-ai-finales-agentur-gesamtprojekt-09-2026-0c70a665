@@ -7,26 +7,26 @@
         "$type": "color"
       },
       "850": {
-        "$value": "#0F131A",
+        "$value": "#0A0C10",
         "$type": "color",
         "$description": "Masterplan Oberfläche"
       },
       "800": {
-        "$value": "#080A0F",
+        "$value": "#111212",
         "$type": "color",
         "$description": "Zusammenhängende Masterplan-Markenfläche"
       },
       "700": {
-        "$value": "#141A22",
+        "$value": "#151617",
         "$type": "color"
       },
       "650": {
-        "$value": "#1A2029",
+        "$value": "#1B1D1E",
         "$type": "color",
         "$description": "Karte unten"
       },
       "600": {
-        "$value": "#202733",
+        "$value": "#242728",
         "$type": "color",
         "$description": "Karte oben"
       }
@@ -47,24 +47,24 @@
     },
     "text": {
       "primaer": {
-        "$value": "#FFFFFF",
+        "$value": "#F3F0EA",
         "$type": "color"
       },
       "sekundaer": {
-        "$value": "#E3E6E3",
+        "$value": "#E2DFD8",
         "$type": "color"
       },
       "tertiaer": {
-        "$value": "#BCC1BD",
+        "$value": "#9A9D9C",
         "$type": "color"
       },
       "gedaempft": {
-        "$value": "#9CA29E",
+        "$value": "#8C8F8E",
         "$type": "color",
         "$description": "5,9:1 auf graphit-800"
       },
       "aufLime": {
-        "$value": "#111312",
+        "$value": "#0A0C10",
         "$type": "color"
       }
     },
@@ -74,19 +74,19 @@
         "$type": "color"
       },
       "lime": {
-        "$value": "#A8C76A",
+        "$value": "#C0EE38",
         "$type": "color"
       },
       "limeHell": {
-        "$value": "#C7DA98",
+        "$value": "#DBF68A",
         "$type": "color"
       },
       "limeDunkel": {
-        "$value": "#8EAD51",
+        "$value": "#A6D820",
         "$type": "color"
       },
       "limeGruen": {
-        "$value": "#638C45",
+        "$value": "#A6D820",
         "$type": "color"
       }
     },
@@ -289,10 +289,10 @@
     "homeWidePadding": "clamp(12px, 2.25vw, 40px)"
   },
   "typeHero": {
-    "size": "clamp(40px, 4.4cqi, 64px)",
+    "size": "clamp(36px, 4.2cqi, 64px)",
     "compact": "clamp(36px, 4.4cqi, 48px)",
     "mobile": "clamp(36px, 8.5cqi, 48px)",
-    "leading": "1.08"
+    "leading": "1.1"
   },
   "typeBody": {
     "size": "18px",
@@ -333,8 +333,8 @@
     "klein": "8px",
     "button": "10px",
     "chip": "12px",
-    "karte": "16px",
-    "leit": "20px",
+    "karte": "20px",
+    "leit": "30px",
     "pille": "999px",
     "atelier": "28px",
     "homeMedia": "36px"
@@ -352,8 +352,8 @@
     "karte": "inset 0 1px 0 rgba(255,255,255,.06), 0 16px 32px -24px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.18)",
     "kleineKarte": "inset 0 1px 0 rgba(255,255,255,.05), 0 8px 16px -14px rgba(0,0,0,.5)",
     "well": "inset 0 2px 10px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05)",
-    "buttonPrimaer": "inset 0 1px 0 rgba(255,255,255,.35), 0 6px 18px -10px rgba(168,199,106,.28), 0 1px 0 rgba(0,0,0,.18)",
-    "leuchten": "0 0 16px rgba(168,199,106,.45)",
+    "buttonPrimaer": "inset 0 1px 0 rgba(255,255,255,.35), 0 6px 18px -10px rgba(192,238,56,.28), 0 1px 0 rgba(0,0,0,.18)",
+    "leuchten": "0 0 16px rgba(192,238,56,.45)",
     "dialog": "inset 0 1px 0 rgba(255,255,255,.08), 0 50px 100px -30px rgba(0,0,0,.95)",
     "atelier": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-platinum) 16%, transparent), 0 24px 64px -32px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
     "atelierPolish": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-platinum) 32%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 12%, transparent), 0 24px 64px -32px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
@@ -388,7 +388,7 @@
     "lightEntrance": "3.6s ease-out"
   },
   "focus": {
-    "ring": "2px solid #A8C76A",
+    "ring": "2px solid #C0EE38",
     "offset": "2px",
     "logo": "Unterstreichung Lime, 6px Abstand"
   },
@@ -399,8 +399,8 @@
     "border": "1px",
     "shadow": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.18), 8px 8px 24px rgba(0,0,0,.22), 16px 16px 48px rgba(0,0,0,.14)",
     "shadowRaised": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.16), 4px 4px 12px rgba(0,0,0,.24), 8px 8px 24px rgba(0,0,0,.16)",
-    "sectionDivider": "linear-gradient(90deg, transparent, rgba(255,255,255,.025) 35%, rgba(168,199,106,.035) 55%, transparent)",
-    "sectionGlow": "radial-gradient(ellipse 45% 100% at 45% 0%, rgba(168,199,106,.012), transparent 100%)",
+    "sectionDivider": "linear-gradient(90deg, transparent, rgba(255,255,255,.025) 35%, rgba(192,238,56,.035) 55%, transparent)",
+    "sectionGlow": "radial-gradient(ellipse 45% 100% at 45% 0%, rgba(192,238,56,.012), transparent 100%)",
     "filmCurvature": "4% / 2%",
     "filmTurn": "-.5deg",
     "filmPerspective": "1800px"

@@ -1,212 +1,213 @@
 {
-  "schema_version": 1,
-  "decision": "USER-LUXURY-20261101",
-  "assets": [
+ "schema_version": 1,
+ "decision": "USER-LUXURY-20261101",
+ "assets": [
+  {
+   "id": "web",
+   "src": "/media/atelier/web-glass-20261101.webp",
+   "sha256": "1d4eb6de3b80a8694edf3e0b3d1c57dde3b660f6d9e47d7c7a9c294aece583b8",
+   "width": 1536,
+   "height": 1024,
+   "page_ids": [
+    "services",
+    "websites"
+   ],
+   "alt": {
+    "de": "Websitegestaltung aus Rauchglas und Metall",
+    "nl": "Websiteontwerp in rookglas en metaal",
+    "fr": "Conception web en verre fumé et métal",
+    "en": "Website design in smoked glass and metal"
+   },
+   "kind": "generated_editorial_concept_still",
+   "review": "visual_review_in_current_task_not_owner_identity_approval",
+   "product_listing_use": false,
+   "person_identity": null,
+   "film": {
+    "src": "/media/atelier/films/web-luxury-forward-20261102.mp4",
+    "poster": "/media/atelier/films/web-luxury-forward-20261102.jpg",
+    "width": 1296,
+    "height": 864,
+    "title": "Websitegestaltung aus Rauchglas und Metall",
+    "sha256": "cd294d81ba8e4db6872599ec9cf9db25236743d883e2207b961d0442e8852d2b",
+    "bytes": 1556105,
+    "kind": "generated_editorial_motion_no_speech",
+    "duration_seconds": 5.041667,
+    "loop_edit": "forward_once_hold",
+    "source_task_id": "b417eb9d-d5a8-47cc-9e35-c233cebca63f",
+    "source_sha256": "399c442d5a372f3bf270bf5e24b80097a87023b38e405591289edf81a862d909",
+    "edit_kind": "local_forward_only_soft_outer_extension",
+    "poster_sha256": "604f2d62bb64220699a3e0b9fc255852ac7d4257f278b291a49f55b772d592e7"
+   },
+   "film_history": [
     {
-      "id": "web",
-      "src": "/media/atelier/web-glass-20261101.webp",
-      "sha256": "1d4eb6de3b80a8694edf3e0b3d1c57dde3b660f6d9e47d7c7a9c294aece583b8",
-      "width": 1536,
-      "height": 1024,
-      "page_ids": [
-        "services",
-        "websites"
-      ],
-      "alt": {
-        "de": "Websitegestaltung aus Rauchglas und Metall",
-        "nl": "Websiteontwerp in rookglas en metaal",
-        "fr": "Conception web en verre fumé et métal",
-        "en": "Website design in smoked glass and metal"
-      },
-      "kind": "generated_editorial_concept_still",
-      "review": "visual_review_in_current_task_not_owner_identity_approval",
-      "product_listing_use": false,
-      "person_identity": null,
-      "film": {
-        "src": "/media/atelier/films/web-luxury-forward-20261102.mp4",
-        "poster": "/media/atelier/films/web-luxury-forward-20261102.jpg",
-        "width": 1296,
-        "height": 864,
-        "title": "Websitegestaltung aus Rauchglas und Metall",
-        "sha256": "cd294d81ba8e4db6872599ec9cf9db25236743d883e2207b961d0442e8852d2b",
-        "bytes": 1556105,
-        "kind": "generated_editorial_motion_no_speech",
-        "duration_seconds": 5.041667,
-        "loop_edit": "forward_once_hold",
-        "source_task_id": "b417eb9d-d5a8-47cc-9e35-c233cebca63f",
-        "source_sha256": "399c442d5a372f3bf270bf5e24b80097a87023b38e405591289edf81a862d909",
-        "edit_kind": "local_forward_only_soft_outer_extension",
-        "poster_sha256": "604f2d62bb64220699a3e0b9fc255852ac7d4257f278b291a49f55b772d592e7"
-      },
-      "film_history": [
-        {
-          "src": "/media/atelier/films/web-20261102.mp4",
-          "poster": "/media/atelier/films/web-20261102.jpg",
-          "width": 1280,
-          "height": 720,
-          "title": "Websitegestaltung aus Rauchglas und Metall",
-          "sha256": "399c442d5a372f3bf270bf5e24b80097a87023b38e405591289edf81a862d909",
-          "bytes": 1650537,
-          "kind": "generated_editorial_motion_no_speech",
-          "duration_seconds": 10.083333,
-          "loop_edit": "forward_then_reverse",
-          "task_id": "b417eb9d-d5a8-47cc-9e35-c233cebca63f",
-          "poster_sha256": "d26357a494663a4bfc2092e949ac54a178de9e0a86a25d920b079446cfcafbb5"
-        },
-        {
-          "src": "/media/atelier/films/web-revision-20261102.mp4",
-          "poster": "/media/atelier/films/web-revision-20261102.jpg",
-          "width": 1280,
-          "height": 720,
-          "title": "Websitegestaltung aus Rauchglas und Metall",
-          "sha256": "6c64ae6a85cad70177f9b1c5bee34a80ebb12e6da0f450317f3ec37013410f9f",
-          "bytes": 822103,
-          "kind": "generated_editorial_motion_no_speech",
-          "duration_seconds": 5.041667,
-          "loop_edit": "forward_once_hold",
-          "task_id": "8bbde147-a8d9-4fb2-aac1-e4ef54e0808a",
-          "poster_sha256": "50706325c4af46aacb2305299106c144505de3b5933a5d79eb060cdbe97e66dc"
-        }
-      ]
+     "src": "/media/atelier/films/web-20261102.mp4",
+     "poster": "/media/atelier/films/web-20261102.jpg",
+     "width": 1280,
+     "height": 720,
+     "title": "Websitegestaltung aus Rauchglas und Metall",
+     "sha256": "399c442d5a372f3bf270bf5e24b80097a87023b38e405591289edf81a862d909",
+     "bytes": 1650537,
+     "kind": "generated_editorial_motion_no_speech",
+     "duration_seconds": 10.083333,
+     "loop_edit": "forward_then_reverse",
+     "task_id": "b417eb9d-d5a8-47cc-9e35-c233cebca63f",
+     "poster_sha256": "d26357a494663a4bfc2092e949ac54a178de9e0a86a25d920b079446cfcafbb5"
     },
     {
-      "id": "workspace",
-      "src": "/media/atelier/workspace-glass-20261101.webp",
-      "sha256": "9c1f844b1bc7359b0faa8add3540f99864f5fa17be7dc32ce1aaf656cbc84f12",
-      "width": 1536,
-      "height": 1024,
-      "page_ids": [
-        "automation",
-        "apps-portals",
-        "nex2fly"
-      ],
-      "alt": {
-        "de": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
-        "nl": "Geordende informatielagen en verbonden werkprocessen",
-        "fr": "Couches d’information organisées et processus connectés",
-        "en": "Organized information layers and connected workflows"
-      },
-      "kind": "generated_editorial_concept_still",
-      "review": "visual_review_in_current_task_not_owner_identity_approval",
-      "product_listing_use": false,
-      "person_identity": null,
-      "film": {
-        "src": "/media/atelier/films/workspace-luxury-forward-20261102.mp4",
-        "poster": "/media/atelier/films/workspace-luxury-forward-20261102.jpg",
-        "width": 1296,
-        "height": 864,
-        "title": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
-        "sha256": "2c60175f34b6e729156871421b3fca7e70f623ce2acdd22e1c6028f5599474d9",
-        "bytes": 2125545,
-        "kind": "generated_editorial_motion_no_speech",
-        "duration_seconds": 5.041667,
-        "loop_edit": "forward_once_hold",
-        "source_task_id": "30c43aeb-6472-4b9b-a244-8bc0a4329c00",
-        "source_sha256": "f520b71d508bb98686719fc7730a88be0db5d3be104bd80944f591a1e7f12524",
-        "edit_kind": "local_forward_only_soft_outer_extension",
-        "poster_sha256": "78b896fdbcd6a8e3148465bcdaeca8703b7b3a9b2bc70af807faeef4a527229f"
-      },
-      "film_history": [
-        {
-          "src": "/media/atelier/films/workspace-20261102.mp4",
-          "poster": "/media/atelier/films/workspace-20261102.jpg",
-          "width": 1280,
-          "height": 720,
-          "title": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
-          "sha256": "f520b71d508bb98686719fc7730a88be0db5d3be104bd80944f591a1e7f12524",
-          "bytes": 2049038,
-          "kind": "generated_editorial_motion_no_speech",
-          "duration_seconds": 10.083333,
-          "loop_edit": "forward_then_reverse",
-          "task_id": "30c43aeb-6472-4b9b-a244-8bc0a4329c00",
-          "poster_sha256": "0bf6ce4a4bfe7e6bc3feafb13207e91f617397bb3305d5137642ad098b6640e9"
-        },
-        {
-          "src": "/media/atelier/films/workspace-revision-20261102.mp4",
-          "poster": "/media/atelier/films/workspace-revision-20261102.jpg",
-          "width": 1280,
-          "height": 720,
-          "title": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
-          "sha256": "71c8f50bfc9afe9660b5ecd865f62544162f7d89b68d7b9eee663d2ade0133b8",
-          "bytes": 1034434,
-          "kind": "generated_editorial_motion_no_speech",
-          "duration_seconds": 5.041667,
-          "loop_edit": "forward_once_hold",
-          "task_id": "19a8403e-959f-4dd9-a0b5-117c44322dd0",
-          "poster_sha256": "c87b18edcbdc3d003296aefbfad7c464e8438e40cf6460f30c1948cb7e722b42"
-        }
-      ]
-    },
-    {
-      "id": "automotive",
-      "src": "/media/atelier/automotive-metal-20261101.webp",
-      "sha256": "28397339d1fbbd632507f5e6d55185d717c612c1eb9261486dc314434b165d72",
-      "width": 1536,
-      "height": 1024,
-      "page_ids": [
-        "tk-home",
-        "tk-workshop",
-        "tk-partner"
-      ],
-      "alt": {
-        "de": "Metallische Fahrzeugteile im Werkstattatelier",
-        "nl": "Metalen voertuigonderdelen in een werkplaatsatelier",
-        "fr": "Pièces automobiles métalliques dans un atelier",
-        "en": "Metal automotive parts in a workshop atelier"
-      },
-      "kind": "generated_editorial_concept_still",
-      "review": "visual_review_in_current_task_not_owner_identity_approval",
-      "product_listing_use": false,
-      "person_identity": null,
-      "film": {
-        "src": "/media/atelier/films/automotive-luxury-forward-20261102.mp4",
-        "poster": "/media/atelier/films/automotive-luxury-forward-20261102.jpg",
-        "width": 1296,
-        "height": 864,
-        "title": "Metallische Fahrzeugteile im Werkstattatelier",
-        "sha256": "15e1103340e9d401434ad076051b6152f6b0d1f44429bb2ea63760185a17f11d",
-        "bytes": 2928129,
-        "kind": "generated_editorial_motion_no_speech",
-        "duration_seconds": 5.041667,
-        "loop_edit": "forward_once_hold",
-        "source_task_id": "b6001bf0-a9d8-4319-874c-750e5600a030",
-        "source_sha256": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
-        "edit_kind": "local_forward_only_soft_outer_extension",
-        "poster_sha256": "217624def0972e754e0a48a0d2fb4ecbc81d2f7bc6e436c0212a058d387268f5"
-      },
-      "film_history": [
-        {
-          "src": "/media/atelier/films/automotive-20261102.mp4",
-          "poster": "/media/atelier/films/automotive-20261102.jpg",
-          "width": 1280,
-          "height": 720,
-          "title": "Metallische Fahrzeugteile im Werkstattatelier",
-          "sha256": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
-          "bytes": 3188415,
-          "kind": "generated_editorial_motion_no_speech",
-          "duration_seconds": 10.083333,
-          "loop_edit": "forward_then_reverse",
-          "task_id": "b6001bf0-a9d8-4319-874c-750e5600a030",
-          "poster_sha256": "48862bff93f7c5ea348c9cadefd887762c72053d9674ad89b5bc24f0d095d076"
-        },
-        {
-          "src": "/media/atelier/films/automotive-revision-20261102.mp4",
-          "poster": "/media/atelier/films/automotive-revision-20261102.jpg",
-          "width": 1280,
-          "height": 720,
-          "title": "Metallische Fahrzeugteile im Werkstattatelier",
-          "sha256": "e60f4a881fd9793d5982f9169313bbbb78f2151014ef4aa83708e0913c5d28dc",
-          "bytes": 778424,
-          "kind": "generated_editorial_motion_no_speech",
-          "duration_seconds": 5.041667,
-          "loop_edit": "forward_once_hold",
-          "task_id": "e4c56dcf-2afb-4a58-824b-ed872f8234f6",
-          "poster_sha256": "ce9632781d3cce24849488d5e4d6fe0e56d1a2385bf25e4fc0bcbf430ae9a456"
-        }
-      ]
+     "src": "/media/atelier/films/web-revision-20261102.mp4",
+     "poster": "/media/atelier/films/web-revision-20261102.jpg",
+     "width": 1280,
+     "height": 720,
+     "title": "Websitegestaltung aus Rauchglas und Metall",
+     "sha256": "6c64ae6a85cad70177f9b1c5bee34a80ebb12e6da0f450317f3ec37013410f9f",
+     "bytes": 822103,
+     "kind": "generated_editorial_motion_no_speech",
+     "duration_seconds": 5.041667,
+     "loop_edit": "forward_once_hold",
+     "task_id": "8bbde147-a8d9-4fb2-aac1-e4ef54e0808a",
+     "poster_sha256": "50706325c4af46aacb2305299106c144505de3b5933a5d79eb060cdbe97e66dc"
     }
-  ],
-  "video_or_lip_sync_claimed": true,
-  "refinement": "USER-FILM-DIRECTION-REVISION-20261102: meaningful objects, neutral studio, one progressive action, no reverse loop.",
-  "video_scope": "Three neutral forward-only silent editorial films. No full spoken module or personal-hero acceptance."
+   ]
+  },
+  {
+   "id": "workspace",
+   "src": "/media/atelier/workspace-glass-20261101.webp",
+   "sha256": "9c1f844b1bc7359b0faa8add3540f99864f5fa17be7dc32ce1aaf656cbc84f12",
+   "width": 1536,
+   "height": 1024,
+   "page_ids": [
+    "automation",
+    "apps-portals",
+    "nex2fly"
+   ],
+   "alt": {
+    "de": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
+    "nl": "Geordende informatielagen en verbonden werkprocessen",
+    "fr": "Couches d’information organisées et processus connectés",
+    "en": "Organized information layers and connected workflows"
+   },
+   "kind": "generated_editorial_concept_still",
+   "review": "visual_review_in_current_task_not_owner_identity_approval",
+   "product_listing_use": false,
+   "person_identity": null,
+   "film": {
+    "src": "/media/atelier/films/workspace-luxury-forward-20261102.mp4",
+    "poster": "/media/atelier/films/workspace-luxury-forward-20261102.jpg",
+    "width": 1296,
+    "height": 864,
+    "title": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
+    "sha256": "55926f5594bed1f68965060efd0d20a4a40c41cd34ae398851ae61930b792c61",
+    "bytes": 362269,
+    "kind": "generated_editorial_motion_no_speech",
+    "duration_seconds": 5.041667,
+    "loop_edit": "forward_once_hold",
+    "source_task_id": "30c43aeb-6472-4b9b-a244-8bc0a4329c00",
+    "source_sha256": "f520b71d508bb98686719fc7730a88be0db5d3be104bd80944f591a1e7f12524",
+    "edit_kind": "local_forward_only_soft_outer_extension",
+    "poster_sha256": "78b896fdbcd6a8e3148465bcdaeca8703b7b3a9b2bc70af807faeef4a527229f",
+    "optimized_20261108": "neu kodiert (H.264 CRF30, bildgleich skaliert 1296x864, ohne Tonspur); Original archiviert unter /opt/backups/bak-archiv/FFM/2026-11/media/"
+   },
+   "film_history": [
+    {
+     "src": "/media/atelier/films/workspace-20261102.mp4",
+     "poster": "/media/atelier/films/workspace-20261102.jpg",
+     "width": 1280,
+     "height": 720,
+     "title": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
+     "sha256": "f520b71d508bb98686719fc7730a88be0db5d3be104bd80944f591a1e7f12524",
+     "bytes": 2049038,
+     "kind": "generated_editorial_motion_no_speech",
+     "duration_seconds": 10.083333,
+     "loop_edit": "forward_then_reverse",
+     "task_id": "30c43aeb-6472-4b9b-a244-8bc0a4329c00",
+     "poster_sha256": "0bf6ce4a4bfe7e6bc3feafb13207e91f617397bb3305d5137642ad098b6640e9"
+    },
+    {
+     "src": "/media/atelier/films/workspace-revision-20261102.mp4",
+     "poster": "/media/atelier/films/workspace-revision-20261102.jpg",
+     "width": 1280,
+     "height": 720,
+     "title": "Geordnete Informationsebenen und verbundene Arbeitsabläufe",
+     "sha256": "71c8f50bfc9afe9660b5ecd865f62544162f7d89b68d7b9eee663d2ade0133b8",
+     "bytes": 1034434,
+     "kind": "generated_editorial_motion_no_speech",
+     "duration_seconds": 5.041667,
+     "loop_edit": "forward_once_hold",
+     "task_id": "19a8403e-959f-4dd9-a0b5-117c44322dd0",
+     "poster_sha256": "c87b18edcbdc3d003296aefbfad7c464e8438e40cf6460f30c1948cb7e722b42"
+    }
+   ]
+  },
+  {
+   "id": "automotive",
+   "src": "/media/atelier/automotive-metal-20261101.webp",
+   "sha256": "28397339d1fbbd632507f5e6d55185d717c612c1eb9261486dc314434b165d72",
+   "width": 1536,
+   "height": 1024,
+   "page_ids": [
+    "tk-home",
+    "tk-workshop",
+    "tk-partner"
+   ],
+   "alt": {
+    "de": "Metallische Fahrzeugteile im Werkstattatelier",
+    "nl": "Metalen voertuigonderdelen in een werkplaatsatelier",
+    "fr": "Pièces automobiles métalliques dans un atelier",
+    "en": "Metal automotive parts in a workshop atelier"
+   },
+   "kind": "generated_editorial_concept_still",
+   "review": "visual_review_in_current_task_not_owner_identity_approval",
+   "product_listing_use": false,
+   "person_identity": null,
+   "film": {
+    "src": "/media/atelier/films/automotive-luxury-forward-20261102.mp4",
+    "poster": "/media/atelier/films/automotive-luxury-forward-20261102.jpg",
+    "width": 1296,
+    "height": 864,
+    "title": "Metallische Fahrzeugteile im Werkstattatelier",
+    "sha256": "15e1103340e9d401434ad076051b6152f6b0d1f44429bb2ea63760185a17f11d",
+    "bytes": 2928129,
+    "kind": "generated_editorial_motion_no_speech",
+    "duration_seconds": 5.041667,
+    "loop_edit": "forward_once_hold",
+    "source_task_id": "b6001bf0-a9d8-4319-874c-750e5600a030",
+    "source_sha256": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
+    "edit_kind": "local_forward_only_soft_outer_extension",
+    "poster_sha256": "217624def0972e754e0a48a0d2fb4ecbc81d2f7bc6e436c0212a058d387268f5"
+   },
+   "film_history": [
+    {
+     "src": "/media/atelier/films/automotive-20261102.mp4",
+     "poster": "/media/atelier/films/automotive-20261102.jpg",
+     "width": 1280,
+     "height": 720,
+     "title": "Metallische Fahrzeugteile im Werkstattatelier",
+     "sha256": "75f34fbacd5917ee7f1270a4e8deeef055bb6bb53f5b81e55963330d1f5bd199",
+     "bytes": 3188415,
+     "kind": "generated_editorial_motion_no_speech",
+     "duration_seconds": 10.083333,
+     "loop_edit": "forward_then_reverse",
+     "task_id": "b6001bf0-a9d8-4319-874c-750e5600a030",
+     "poster_sha256": "48862bff93f7c5ea348c9cadefd887762c72053d9674ad89b5bc24f0d095d076"
+    },
+    {
+     "src": "/media/atelier/films/automotive-revision-20261102.mp4",
+     "poster": "/media/atelier/films/automotive-revision-20261102.jpg",
+     "width": 1280,
+     "height": 720,
+     "title": "Metallische Fahrzeugteile im Werkstattatelier",
+     "sha256": "e60f4a881fd9793d5982f9169313bbbb78f2151014ef4aa83708e0913c5d28dc",
+     "bytes": 778424,
+     "kind": "generated_editorial_motion_no_speech",
+     "duration_seconds": 5.041667,
+     "loop_edit": "forward_once_hold",
+     "task_id": "e4c56dcf-2afb-4a58-824b-ed872f8234f6",
+     "poster_sha256": "ce9632781d3cce24849488d5e4d6fe0e56d1a2385bf25e4fc0bcbf430ae9a456"
+    }
+   ]
+  }
+ ],
+ "video_or_lip_sync_claimed": true,
+ "refinement": "USER-FILM-DIRECTION-REVISION-20261102: meaningful objects, neutral studio, one progressive action, no reverse loop.",
+ "video_scope": "Three neutral forward-only silent editorial films. No full spoken module or personal-hero acceptance."
 }
