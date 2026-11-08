@@ -3,6 +3,7 @@ import hashlib
 import hmac
 import os
 import time
+import uuid
 
 import httpx
 
@@ -21,11 +22,13 @@ class RevolutError(Exception):
         self.code, self.status = code, status
 
 
-async def call(method, path, json=None):
+async def call(method, path, json=None, idempotency_key=None):
     key = config.revolut_key()
     if not key.startswith("sk_"):
         raise RevolutError("revolut_key_missing")
-    headers = {"Authorization": "Bearer " + key, "Revolut-Api-Version": os.environ["REVOLUT_API_VERSION"], "Accept": "application/json"}
+    headers = {"Authorization": "Bearer " + key, "Revolut-Api-Version": os.environ.get("REVOLUT_API_VERSION", "2026-08-17"), "Accept": "application/json"}
+    if idempotency_key:
+        headers["Idempotency-Key"] = idempotency_key
     try:
         async with httpx.AsyncClient(base_url=BASES[config.revolut_mode()], timeout=20, transport=transport) as client:
             response = await client.request(method, path, json=json, headers=headers)
@@ -70,7 +73,8 @@ def verify_signature(raw, timestamp, header, secret, now_ms=None):
 async def create_order(amount_cents, currency, reference, description, email, redirect_url):
     return await call("POST", "/api/orders", {
         "amount": amount_cents, "currency": currency, "description": description,
-        "merchant_order_data": {"reference": reference}, "customer": {"email": email}, "redirect_url": redirect_url})
+        "merchant_order_data": {"reference": reference}, "customer": {"email": email}, "redirect_url": redirect_url},
+        idempotency_key=str(uuid.uuid5(uuid.NAMESPACE_URL, 'teileklar-order:' + reference)))
 
 
 async def retrieve_order(order_id):

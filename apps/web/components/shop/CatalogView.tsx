@@ -1,48 +1,16 @@
-"use client";
-import { useEffect, useId, useState } from "react";
-import { SiteLink, useSiteNavigate } from "../Router";
-import { api, type Product } from "./api";
-import { ProductCard, useShopCopy } from "./ProductCard";
-
-type Result = { items: Product[]; total: number; page: number; pages: number };
-
-export function SearchBar({ initial = "", base = "/teileklar/suche" }: { initial?: string; base?: string }) {
-  const { t } = useShopCopy();
-  const navigate = useSiteNavigate(); const inputId = useId(); const [value, setValue] = useState(initial);
-  useEffect(() => setValue(initial), [initial]);
-  return <form role="search" className="tk-search" onSubmit={event => { event.preventDefault(); navigate(base + (value.trim() ? "?q=" + encodeURIComponent(value.trim()) : "")); }} data-testid="shop-search-form">
-    <label htmlFor={inputId}>{t("searchLabel")}</label>
-    <div className="tk-search-row"><input id={inputId} type="search" value={value} maxLength={120} onChange={event => setValue(event.target.value)} data-testid="shop-search-input" />
-      <button className="primary-button" type="submit" data-testid="shop-search-submit">{t("search")}</button></div>
-  </form>;
-}
-
-export default function CatalogView({ q = "", category, page = 1, base }: { q?: string; category?: number; page?: number; base: string }) {
-  const { t, number } = useShopCopy();
-  const [result, setResult] = useState<Result | null>(null), [failed, setFailed] = useState(false);
-  useEffect(() => {
-    setResult(null); setFailed(false);
-    const params = new URLSearchParams({ q, page: String(page) }); if (category !== undefined) params.set("category", String(category));
-    const controller = new AbortController(); let current = true;
-    api<Result>("/api/shop/products?" + params, { signal: controller.signal }).then(data => {
-      if (!Array.isArray(data.items) || !Number.isSafeInteger(data.total) || data.total < 0 || !Number.isSafeInteger(data.page) || data.page < 1 || !Number.isSafeInteger(data.pages) || data.pages < 0) throw new Error("invalid_catalog_response");
-      if (current) setResult(data);
-    }).catch(() => { if (current && !controller.signal.aborted) setFailed(true); });
-    return () => { current = false; controller.abort(); };
-  }, [q, category, page]);
-  const link = (target: number) => base + "?" + new URLSearchParams({ ...(q ? { q } : {}), seite: String(target) });
-  if (failed) return <p role="alert" className="tk-alert" data-testid="catalog-error">{t("catalogError")}</p>;
-  if (!result) return <p role="status" data-testid="catalog-loading">{t("catalogLoading")}</p>;
-  if (!result.total) return <div className="tk-empty" data-testid="catalog-empty"><h2>{q ? t("noResults") : t("noItems")}</h2>
-    <p>{q ? t("noResultsBody", { query: q }) : t("noItemsBody")}</p>
-    {q && <SiteLink href={base} className="content-action-link" data-testid="search-reset">{t("resetSearch")}</SiteLink>}</div>;
-  return <div data-testid="catalog-results">
-    <p className="tk-count" role="status" data-testid="catalog-count">{t("resultCount", { count: number(result.total) })}{q ? t("querySuffix", { query: q }) : null} · {t("pageOf", { page: number(result.page), pages: number(result.pages) })}</p>
-    <ul className="tk-grid">{result.items.map(product => <ProductCard key={product.id} product={product} />)}</ul>
-    {result.pages > 1 && <nav className="tk-pagination" aria-label={t("pages")} data-testid="pagination">
-      {result.page > 1 ? <SiteLink href={link(result.page - 1)} data-testid="pagination-prev">{t("previous")}</SiteLink> : <span aria-hidden="true" />}
-      <span>{t("pageOf", { page: number(result.page), pages: number(result.pages) })}</span>
-      {result.page < result.pages ? <SiteLink href={link(result.page + 1)} data-testid="pagination-next">{t("next")}</SiteLink> : <span aria-hidden="true" />}
-    </nav>}
-  </div>;
+'use client';
+import {useEffect,useId,useState} from 'react';
+import {SiteLink,useSiteNavigate} from '../Router';
+import {api,type Product} from './api';
+import {ProductCard,useShopCopy} from './ProductCard';
+import './Storefront.css';
+type Result={items:Product[];total:number;page:number;pages:number};
+export function SearchBar({initial='',base='/teileklar/suche'}:{initial?:string;base?:string}){const{t}=useShopCopy();const navigate=useSiteNavigate();const inputId=useId();const[value,setValue]=useState(initial);useEffect(()=>setValue(initial),[initial]);return <form role="search" className="tk-search" onSubmit={e=>{e.preventDefault();navigate(base+(value.trim()?'?q='+encodeURIComponent(value.trim()):''));}} data-testid="shop-search-form"><label htmlFor={inputId}>{t('searchLabel')}</label><div className="tk-search-row"><input id={inputId} type="search" value={value} maxLength={120} onChange={e=>setValue(e.target.value)} data-testid="shop-search-input"/><button className="primary-button" type="submit" data-testid="shop-search-submit">{t('search')}</button></div></form>;}
+export default function CatalogView({q='',category,page=1,base}:{q?:string;category?:number;page?:number;base:string}){
+ const{t,number}=useShopCopy();const[result,setResult]=useState<Result|null>(null),[failed,setFailed]=useState(false),[reload,setReload]=useState(0),[sort,setSort]=useState('availability'),[inStock,setInStock]=useState(false),[selected,setSelected]=useState(category),[currentPage,setPage]=useState(page),[cats,setCats]=useState<{id:number;name:string;count:number;root:boolean}[]>([]);
+ useEffect(()=>{setSelected(category);setPage(page);},[category,page,q]);
+ useEffect(()=>{api<{categories:typeof cats}>('/api/shop/categories').then(d=>setCats(d.categories.filter(c=>!c.root))).catch(()=>{});},[]);
+ useEffect(()=>{setResult(null);setFailed(false);const params=new URLSearchParams({q,page:String(currentPage),sort,in_stock:String(inStock)});if(selected!==undefined)params.set('category',String(selected));const c=new AbortController();api<Result>('/api/shop/products?'+params,{signal:c.signal}).then(data=>{if(!Array.isArray(data.items)||!Number.isSafeInteger(data.total))throw new Error('invalid_catalog_response');setResult(data);}).catch(()=>{if(!c.signal.aborted)setFailed(true);});return()=>c.abort();},[q,selected,currentPage,sort,inStock,reload]);
+ return <div className="tk-catalog-layout"><aside className="tk-filter-panel" data-testid="catalog-filters"><h2>Auswahl eingrenzen</h2><label className="tk-stock-filter"><input type="checkbox" checked={inStock} onChange={e=>{setInStock(e.target.checked);setPage(1);}} data-testid="catalog-stock-filter"/>Nur verfügbare Artikel</label><h3>Kategorien</h3><nav aria-label="Kategorie filtern"><button type="button" onClick={()=>{setSelected(undefined);setPage(1);}} aria-pressed={selected===undefined} data-testid="catalog-category-all">Alle Artikel</button>{cats.map(cat=><button type="button" key={cat.id} onClick={()=>{setSelected(cat.id);setPage(1);}} aria-pressed={selected===cat.id} data-testid={'catalog-category-'+cat.id}><span>{cat.name}</span><small>{cat.count}</small></button>)}</nav><button className="text-button" onClick={()=>{setSelected(category);setInStock(false);setSort('availability');setPage(1);}} data-testid="catalog-filters-reset">Filter zurücksetzen</button></aside><section className="tk-catalog-list" aria-label="Produkte"><div className="tk-results-toolbar"><p role="status" data-testid="catalog-count">{result?`${number(result.total)} Artikel${q?' für „'+q+'“':''}`:'Artikel werden geladen …'}</p><label htmlFor="catalog-sort">Sortieren<select id="catalog-sort" value={sort} onChange={e=>{setSort(e.target.value);setPage(1);}} data-testid="catalog-sort"><option value="availability">Verfügbarkeit</option><option value="price_asc">Preis aufsteigend</option><option value="price_desc">Preis absteigend</option><option value="name">Name A–Z</option></select></label></div>
+ {failed?<div className="tk-empty" role="alert" data-testid="catalog-error"><p>{t('catalogError')}</p><button className="outline-button" onClick={()=>setReload(n=>n+1)} data-testid="catalog-retry">Erneut versuchen</button></div>:!result?<div className="tk-grid" data-testid="catalog-loading" role="status" aria-label="Artikel werden geladen">{[0,1,2,3,4,5].map(i=><div key={i} className="tk-product-skeleton"/>)}</div>:!result.total?<div className="tk-empty" data-testid="catalog-empty"><h2>Keine passenden Artikel</h2><p>Ändern Sie den Suchbegriff oder setzen Sie die Filter zurück.</p><SiteLink href={base} data-testid="search-reset">Suche zurücksetzen</SiteLink></div>:<div data-testid="catalog-results"><ul className="tk-grid">{result.items.map(p=><ProductCard key={p.id} product={p}/>)}</ul>{result.pages>1&&<nav className="tk-pagination" aria-label="Ergebnisseiten" data-testid="pagination"><button disabled={currentPage<=1} onClick={()=>setPage(n=>n-1)} data-testid="pagination-prev">Zurück</button><span>Seite {result.page} von {result.pages}</span><button disabled={currentPage>=result.pages} onClick={()=>setPage(n=>n+1)} data-testid="pagination-next">Weiter</button></nav>}</div>}</section></div>;
 }

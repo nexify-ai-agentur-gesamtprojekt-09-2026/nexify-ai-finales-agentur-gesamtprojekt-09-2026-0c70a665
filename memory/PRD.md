@@ -1,59 +1,69 @@
-# PRD — NeXify AI / TEILEKLAR, Phase 1
+# NeXify AI — verbindlicher Soll-Stand und Frontend-Abnahme
 
-## Original problem statement (summary)
-Phase 1 is built inside the existing monorepo (`apps/web` Next.js, `apps/site` Vite adapter, `apps/agent-gateway`). Scope:
-- Preview on :3000/:8001
-- BigBuy "Auto & Motorrad" import
-- Admin markup
-- Catalog, cart, checkout and orders with Revolut Hosted Checkout (live)
-- Workshop finder
-- Own auth instead of Clerk: bcrypt, httpOnly session, reset via Resend, lockout, Emergent Google Auth, roles, cart merge
-- REQ-40..48 and JRN-26..31
+## Geltung und Priorität
+Stand: 08.11.2026. Neueste Nutzerentscheidungen haben Vorrang vor älteren Übergaben und Designvarianten.
 
-COPY-17 copy is moved to Phase 1b; shop, checkout and auth use only factual function texts.
+1. **Ausschließlich Frontend-Arbeiten.** Keine weiteren Backend-Änderungen, Integrationen, Backend-Tests, Live-Testzahlungen oder Testmails seit dem Scopewechsel.
+2. **Die bestehende Startseite ist die einzige Layoutreferenz.** Auch sie wird sorgfältig nachpoliert. Keine zweite Stilwelt für Unterseiten, kein visueller Rohbau.
+3. **Deutschland ist der Schwerpunkt.** Deutsches formelles Sie, klare Euro-/MwSt.-/Versandangaben. Daraus folgt keine ungeprüfte Erweiterung der Lieferländer.
+4. **Keine Mock-Inhalte:** keine erfundenen Kunden, Projekte, Bestände, Umsätze, Bewertungen, Produktverfügbarkeiten oder Integrationszusagen. Fehlende private Datensätze werden als echte Leerzustände mit Handlung angezeigt.
+5. **Bildregel:** Markenbereiche nur vorhandene 17 Higgsfield-Stills, keine Videos/Stock. Nachträglich explizit freigegeben: Original-Lieferantenfotos tatsächlich angebotener Shopartikel.
+6. **Durchgängigkeit Header bis Footer.** Markenhierarchie, Seitenränder, Typografie, Bildrahmen, Abstände und Aktionen stammen von der Startseite.
+7. **Nachweis statt Perfektionsbehauptung.** Keine pauschale ISO/DIN/WCAG-Zertifizierung. Gemessene Konsolen- und Funktionsfehler werden geschlossen und erneut geprüft.
 
-## Architecture
-- `apps/shop-api` (FastAPI, Motor/MongoDB), started via `backend/server.py`. Next.js runs via the `frontend/` wrapper in production mode.
-- Modules: accounts_api, auth, catalog_api, cart_api, checkout_api, revolut, bigbuy_import (API) + bigbuy_ftp (FTP/CSV), workshops_api, admin_api, pricing.
-- Decisions: DECISIONS.md D-005..D-009.
+## Bestehende Architektur — unverändert
+- Next.js / React: `/app/apps/web` (Port 3000), ursprüngliches Workspace-/Lockfile beibehalten
+- Bestehender FastAPI-Dienst: `/app/apps/shop-api` (Port 8001), seit Scopewechsel nicht weiterbearbeitet
+- Private Daten werden ausschließlich durch bestehende geschützte APIs geladen. Eine sichtbare Portalseite oder Cookie-Anwesenheit erteilt keine Datenberechtigung.
+- Vorschau: https://chat-it-automate--01quzkxh.preview.emergentagent.com
 
-## Implemented (2026-10-31)
-- Shop UI: /teileklar/shop, kategorien, kategorie, produkt, suche, warenkorb, kasse, bestellung(en), werkstatt, admin.
-- Own accounts: /anmelden, /registrieren, /passwort-vergessen, /passwort-zuruecksetzen. Google login is included. Clerk is removed (no @clerk packages).
-- Server-side pricing: purchase price × (1+markup) incl. 19% VAT. Markup is 30% by default and set in Admin.
-- Revolut live checkout and webhook (signature + idempotency tested with mocks).
-- 489 workshops with radius search and map.
-- BigBuy import: API and FTP/CSV source, both switchable. FTP keeps a source manifest (name, size, SHA256, time). The previous catalog is kept when an import fails.
-- GitHub workflow `.github/workflows/vercel-deploy.yml`: gated by `make check && make test`, deploy is opt-in via `VERCEL_CI_DEPLOY`.
-- F-22 prepared: policy use case `product_enrichment` (ds/deepseek-v4-pro, high, no fallback).
+## Eine visuelle Quelle
+- Homepage: `HomeContent.tsx`, `IdentityHero.tsx`, **konsolidiertes `HomeConcept.css`**
+- Davon abgeleitete Seiten: `PublicContent.tsx`, `PageShowcase.tsx`, **`HomeMaster.css`**
+- `HomeMaster.css` überschreibt nicht länger die Homepage. Historische konkurrierende Home-/Video-Regeln wurden entfernt.
+- Seitenfamilien dürfen ihre Informationsanordnung ändern, nicht ihr visuelles Grundsystem.
+- Rechtliche Texte bleiben sachlich und lesbar, ohne erfundene Register-/Rechtsformangaben.
 
-## Implemented (2026-10-31, later the same day)
-- Phase 1 extension: Resend outbox. Mails: order confirmation, internal new-order, welcome, reset, workshop receipt, in-progress/shipped.
-- Order timeline with "Was passiert als Nächstes" and admin order status (tracking number).
-- Checkout shows seller and delivery countries (fakten.json); TEILEKLAR AGB/Widerruf incl. Muster-Widerrufsformular on /teileklar/rechtliches.
-- Phase 1b (WIP, stopped by coordination change):
-  - docs/content/seiten-logik-audit.md
-  - Contact and partner requests via /api/requests
-  - Fitment checklist, tyre calculator, honest placeholders
-  - Removed dead ShopPanel calls
-  - Resizable docked chat
-- HEAD f0279a1 on branch phase1/teileklar-shop-auth-vercel-ci, not pushed.
+## Verbindliche Bildzuordnung
+Quelle: `/app/apps/web/lib/brand-media.ts`. Tatsächliche Bildinhalte wurden über einen beschrifteten Kontaktbogen geprüft; Dateinamen sind irreführend und nicht mehr Zuordnungsgrundlage.
 
-## Blockers
-- BigBuy API: 401 Invalid Token. BigBuy FTP: 530 Login incorrect. The catalog has 0 products.
-- RESEND_API_KEY / RESEND_FROM_ADDRESS are missing, so reset mails are not sent.
-- test_browser_evidence (21) is fail-closed after UI/auth source changes. Browser evidence must be regenerated.
+| Verwendung | Bild | Tatsächlicher Kontext |
+|---|---|---|
+| Bestehender Homepage-Hero | hf-02 | Präsentation am Tisch mit Entwürfen und Modell |
+| Web / Gestaltung | hf-14 | Besprechung gedruckter Entwürfe und Materialmuster |
+| Automatisierung | hf-07 | Besprechung von Unterlagen an einer Fertigungsanlage |
+| Apps/Portale, NeX2fly | hf-11 | Gemeinsamer Blick auf ein Tablet |
+| Leistungsübersicht | hf-03 | Atelier mit Layouttafeln und Modellen |
+| Leistungsumfang | hf-06 | Unterlagen am Besprechungstisch |
+| Kampagnen/Marketing | hf-15 | Gedrucktes Layout im Gespräch |
+| Preise/Ablauf | hf-10 | Dokumentbesprechung im Empfangsbereich |
+| Kontakt | hf-05 | Persönliches Gespräch am Tisch |
+| NeX Agentic AI | hf-13 | Gemeinsame Prozessunterlagen in einer Fertigung |
+| API / Wissensübersicht | hf-16 | Pläne und technisches Modell am Arbeitstisch |
+| TEILEKLAR-Markenverweis | hf-08 | Logistik-/Förderanlagen-Szene, kein Produktfoto |
+| Homepage-Abschluss | hf-17 | Freigestellte Markenfiguren, unten bündig |
 
-## Backlog
-- P0: Valid BigBuy credentials, then run the import.
-- P0: Set the Resend key.
-- P1: Phase 1b: full copy concept for all pages.
-- P1: Regenerate browser evidence.
-- P2: Phase 2 F-22: product enrichment via router; images processed deterministically into object storage.
+Markenbilder sind ausdrücklich Inszenierungen, keine Produkt-Screenshots oder Kundenreferenzen. Alt-Texte beschreiben Sichtbares. Home-Teaser und dazugehörige Detailseite teilen dieselbe Zuordnung. Landschaftsbilder bleiben 16:9 ohne Personenbeschnitt. Tatsächliche Shop-Produktbilder kommen ausschließlich aus dem zugeordneten Artikel.
 
-## 2026-10-31 Phase-1 completion package (HEAD 76c3bad)
-- Truthful status copy (empty catalog, directory workshops not verified partners), chat loading state, TEILEKLAR account scope label.
-- Preview-only frame-ancestors via ALLOW_EMERGENT_PREVIEW_FRAME (pod env); otherwise X-Frame-Options DENY, with tests.
-- Blocked: BigBuy API access_denied, FTP ftp_login_incorrect; catalog 0 products.
-- Open: admin anonymous 403 vs 401 decision; full make test failures pre-existing; test_credentials.md missing.
+## Frontend-Flächen
+- Homepage: bestehende Reihenfolge und Texte beibehalten; Hero, Angebote, Produktwelt, Kalkulation, persönlicher Abschluss, Footer
+- Öffentliche Seiten aus `config/site-map.json` / `apps/site/.generated/public-site.json`: echte Inhaltsabschnitte, kohärenter Bild-/Text-Einstieg, passende Verknüpfung und nächste Handlung
+- Zehn Leistungs-/Produktseiten: je acht konkrete Fragen, lokalisierte SSR-Metadaten, Canonical, tatsächlich verfügbare Sprachvarianten, FAQ/Service-JSON-LD
+- Kontakt: bestehendes echtes Formular früh im Seitenfluss. Termin-/Gutscheinseiten bieten eine **Anfrage**, keine vorgetäuschte bestätigte Buchung oder ausgegebenen Gutscheincode
+- TEILEKLAR: Schaufenster, Originalfotos, Kategorien, Suche, Filter, Sortierung, Produktdetail, Warenkorb, Checkout-Oberfläche, Bestellübersicht und bestehende Hilfswerkzeuge
+- Kunden-/Partner-/Operatorseiten: geschützte Datenansichten mit Anmeldung, Navigation, Lade-/Fehler-/Leerzuständen, Listen und Details statt nackter JSON-Sperrseite
+- Sitemap/Robots: App-Router-Routen statt kollidierender zusätzlicher Dateien in `public/`
 
+## Präzise Fehlerbehandlung
+- Root-Hydration: Nutzer-Diff betraf externe `cz-shortcut-listen`- und `color-scheme`-Attribute. Eng begrenzte Attributtoleranz ausschließlich an `html`/`body`, deterministischer dunkler Grundmodus. Keine Konsolenfilter, keine globale Abschaltung von Hydration-Prüfungen.
+- Eigene Client-Zustände initial deterministisch (Sprache, Resize, Cart-Ladeanzeige).
+- Private Routen liefern nur HTML-Shells/Gates, keine privaten Daten. `Cache-Control: private, no-store`; Backend bleibt Rechteautorität.
+- Echte private Leere ist keine Attrappe. Kein Dummy-Projekt zum Füllen.
+
+## Prüfnachweise und Grenzen
+- Historische Frontend-Berichte: `/app/test_reports/iteration_21.json` bis `iteration_24.json`; alte Fehlbefunde sind nicht automatisch aktueller Zustand.
+- Bericht 24: öffentliche Routen geladen, reale Shopbilder geladen, Warenkorb im selben Kontext nach Reload vorhanden; fand zusätzlich Frontend-Proxy-Sperre und Robots/Sitemap-Konflikt. Beide wurden korrigiert und benötigen den abschließenden Frontend-Nachtest.
+- TypeScript-Compile wiederholt erfolgreich; maßgeblich ist der letzte Nachtest nach Bild-/CSS-Konsolidierung.
+- Frühere Backend-Ergebnisse vor Scopewechsel: echter Katalogimport, freigegebene 30 % Kalkulation, Kontakt/Resend und Revolut-Konfiguration. **Nicht Gegenstand der jetzigen Fertigstellungsbehauptung.**
+- Keine Live-Zahlung, Lieferantenbestellung oder neue Mail im abschließenden Frontendtest.
+- Keine behauptete Gesamtfertigstellung, solange konkrete Frontend-Fehler offen sind. Keine Behauptung einer juristischen oder normativen Zertifizierung.

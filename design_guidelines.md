@@ -416,3 +416,7 @@ NEVER stack multiple gradient layers in the same viewport.
   - Sonner component are located in `/app/src/components/ui/sonner.tsx`
 
 Use 2–4 color gradients, subtle textures/noise overlays, or CSS-based noise to avoid flat visuals.
+
+
+## AKTUELL VERBINDLICH – Frontend / Startseite als Master
+Die vorhandene Startseite ist die EINZIGE visuelle Referenz für alle Folgeseiten. Präzisierungen siehe `/app/design_home_master.md`; ältere Seitenfamilien-Matrix ist KEINE alternative Stilvorlage. Sämtliche Arbeit ab dem Scopewechsel ist FRONTEND ONLY. Keine Backend-Erweiterung. Schwerpunkt Deutschland. Markenbilder ausschließlich vorhandene17 Higgsfield-Stills, keine Videos/Stock. Nutzer hat ausschließlich für echte Artikel zusätzlich zugeordnete Original-Lieferantenfotos freigegeben. Kein pauschaler Normen-/100%-Claim ohne Beleg.

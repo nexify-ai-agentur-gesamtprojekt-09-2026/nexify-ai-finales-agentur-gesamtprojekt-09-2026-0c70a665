@@ -14,7 +14,7 @@ PUBLIC_ORIGIN = os.environ["PREVIEW_PUBLIC_ORIGIN"].rstrip("/")
 VAT_PERCENT = Decimal(os.environ["SHOP_VAT_PERCENT"])
 DEFAULT_MARKUP_PERCENT = Decimal("30")
 WORKSHOPS_FILE = ROOT / "prototypen" / "assets" / "workshops.json"
-GATEWAY_PORT = int(os.environ["GATEWAY_PORT"])
+GATEWAY_PORT = int(os.environ.get("LEGACY_GATEWAY_PORT", "3003"))  # GATEWAY_PORT belongs to the platform proxy; do not bind it.
 NEXT_PORT = 3000
 SHIP_SAMPLE_COUNTRY = os.environ.get("SHIP_SAMPLE_COUNTRY", "DE")
 SHIP_SAMPLE_POSTCODE = os.environ.get("SHIP_SAMPLE_POSTCODE", "10115")
@@ -38,4 +38,6 @@ def revolut_key():
 
 
 def bigbuy_key(environment):
-    return os.environ.get("BIGBUY_API_KEY_PRODUCTION" if environment == "production" else "BIGBUY_API_KEY_SANDBOX", "")
+    if environment == "production":
+        return os.environ.get("BIGBUY_API_KEY_PRODUCTION") or os.environ.get("BIGBUY_API_KEY", "")
+    return os.environ.get("BIGBUY_API_KEY_SANDBOX", "")

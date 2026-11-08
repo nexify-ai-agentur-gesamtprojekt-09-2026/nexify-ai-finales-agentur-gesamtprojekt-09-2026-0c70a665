@@ -1,26 +1,38 @@
 [
   {
-    "content": "Visuelle Komplett-QA der Startseite (Hero, Produktwelt, Abschluss verifiziert)",
+    "content": "PageConcept.css schreiben (Startseiten-Derivat, nur Zusätze)",
     "status": "completed"
   },
   {
-    "content": "Produktwelt-Sektion mit 4 Higgsfield-Bildern + Champagne-Glaskante aufwerten",
+    "content": "PublicContent.tsx komplett neu im hc-Klassensystem",
     "status": "completed"
   },
   {
-    "content": "Galerie-Bildmodul mit Champagne-Glaskante veredeln + Hero ohne Champagne-Kante (Konzept)",
+    "content": "ExplainerSections / PageShowcase / PageQuestions / PresenterGuide auf hc-Klassen (keine Cutouts/Videos)",
     "status": "completed"
   },
   {
-    "content": "Bug: Bild-404 (hf-04) behoben; Bug: /login + /signup -> 308 Redirect auf /anmelden /registrieren",
+    "content": "Alt-CSS entfernen: PublicContentLayout.css, PresenterEditorial.css, PageQuestions.css, .content-layout in LuxuryMaterials, HomeMaster-Public-Teil",
     "status": "completed"
   },
   {
-    "content": "Audit: alle 49 oeffentlichen Routen 200 (keine Broken Links); KI-Hinweise bereits befuellt",
+    "content": "Build-Check (tsc/esbuild) + Screenshots Innenseiten Desktop/Mobil",
     "status": "completed"
   },
   {
-    "content": "Abschluss-Bereich mit freigestelltem Trio + Champagne-Bodenlichtschein hochwertiger gestaltet",
+    "content": "TEILEKLAR ShopFrame/Storefront auf hc-Container + Atelier-Material",
     "status": "completed"
+  },
+  {
+    "content": "Auth-Seiten + Portale im Startseiten-Rahmen prüfen/angleichen",
+    "status": "completed"
+  },
+  {
+    "content": "Verbleibende Seiten prüfen: /produkte/*, /wissen, /unternehmen, /teileklar/partner-werden, /teileklar/fahrzeug-und-passung, Portal eingeloggt",
+    "status": "in_progress"
+  },
+  {
+    "content": "Testing-Agent Frontend + Fixes",
+    "status": "pending"
   }
 ]

@@ -7,7 +7,7 @@ import { ProductImage } from "./ProductCard";
 export function Totals({ cart }: { cart: Cart }) {
   return <dl className="tk-totals" data-testid="cart-totals">
     <dt>Zwischensumme</dt><dd data-testid="cart-subtotal">{money(cart.subtotal_cents)}</dd>
-    <dt>Versand</dt><dd data-testid="cart-shipping">{money(cart.shipping_cents)}</dd>
+    <dt>Versand</dt><dd data-testid="cart-shipping">{cart.shipping_pending?'Berechnung nach Lieferadresse':money(cart.shipping_cents)}</dd>
     <dt className="is-total">Gesamt</dt><dd className="is-total" data-testid="cart-total">{money(cart.total_cents)}</dd>
     <dt>enthaltene MwSt. ({cart.vat_percent || "19"} %)</dt><dd>{money(cart.vat_included_cents)}</dd>
   </dl>;

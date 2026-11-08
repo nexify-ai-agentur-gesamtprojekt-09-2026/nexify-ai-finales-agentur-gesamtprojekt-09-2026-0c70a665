@@ -61,6 +61,7 @@ async def priced(owner, shipping_cents=None, address=None):
                       "line_cents": unit * item["quantity"], "stock": stock})
     subtotal = sum(l["line_cents"] for l in lines)
     shipping_pending = False
+    shipping_source = "free" if not lines or subtotal >= config.SHIP_FREE_THRESHOLD_CENTS else "pending"
     if shipping_cents is not None:
         shipping = shipping_cents if lines else 0
     elif not lines:
@@ -70,6 +71,7 @@ async def priced(owner, shipping_cents=None, address=None):
     elif address is not None and address.get("country") and address.get("zip"):
         quote = await bigbuy_order.cart_shipping_quote("production", [{"reference": l["sku"], "quantity": l["quantity"]} for l in lines], address["country"], address["zip"])
         shipping = quote["cost_cents"] if quote and quote.get("cost_cents") is not None else config.SHIPPING_FALLBACK_CENTS
+        shipping_source = "supplier_quote" if quote and quote.get("cost_cents") is not None else "configured_flat_rate"
     else:
         shipping = 0
         shipping_pending = True
@@ -77,7 +79,7 @@ async def priced(owner, shipping_cents=None, address=None):
     return {"lines": lines, "changes": changes, "subtotal_cents": subtotal, "shipping_cents": shipping,
             "total_cents": total, "vat_included_cents": pricing.vat_share_cents(total), "vat_percent": str(pricing.config.VAT_PERCENT),
             "currency": "EUR", "count": sum(l["quantity"] for l in lines),
-            "shipping_pending": shipping_pending, "free_shipping_threshold_cents": config.SHIP_FREE_THRESHOLD_CENTS}
+            "shipping_pending": shipping_pending, "shipping_source": shipping_source, "free_shipping_threshold_cents": config.SHIP_FREE_THRESHOLD_CENTS}
 
 
 @router.get("")

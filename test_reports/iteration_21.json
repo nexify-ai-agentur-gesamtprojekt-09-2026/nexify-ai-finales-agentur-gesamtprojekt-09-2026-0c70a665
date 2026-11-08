@@ -1,0 +1,99 @@
+{
+  "summary": "Backend API testing completed with 57% success rate. Frontend contact form submission encountered navigation issue preventing verification of ONE authorized real contact test. SSR/SEO testing not completed due to time constraints.",
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "endpoint": "POST /api/requests",
+        "issue": "Response missing 'notification_status' field - Receipt model not being enforced",
+        "expected": "Response should include {number, status, notification_status}",
+        "actual": "Response only includes {number, status}",
+        "impact": "Frontend cannot display notification status to user",
+        "fix_priority": "MEDIUM"
+      },
+      {
+        "endpoint": "GET /api/operator/requests",
+        "issue": "Response returns '_id' instead of 'id' - serialization not working",
+        "expected": "Items should have 'id' field (not '_id'), no 'payload_hash' field",
+        "actual": "Items contain '_id' and other internal fields",
+        "impact": "API contract violation, exposes internal MongoDB structure",
+        "fix_priority": "HIGH"
+      },
+      {
+        "endpoint": "GET /api/admin/outbox/{event_key}/delivery",
+        "issue": "Returns 404 for valid event_key with special characters (colon)",
+        "expected": "200 with delivery status",
+        "actual": "404 Not Found from nginx",
+        "impact": "Cannot verify email delivery status via API",
+        "fix_priority": "MEDIUM",
+        "note": "Possible URL routing issue with special characters in path parameter"
+      }
+    ],
+    "passed_tests": [
+      "Admin login with session cookies works correctly",
+      "POST /api/requests validates required fields (name, email, message, consent)",
+      "POST /api/requests validates idempotency-key header requirement",
+      "POST /api/requests returns 409 conflict when payload changes with same idempotency-key",
+      "GET /api/operator/requests requires authentication (401 without auth)",
+      "PATCH /api/operator/requests requires authentication and updates stage correctly"
+    ]
+  },
+  "frontend_issues": {
+    "critical_bugs": [
+      {
+        "component": "ContactRequestForm",
+        "flow": "Contact form submission",
+        "issue": "Form submission causes unexpected navigation away from /kontakt page",
+        "expected": "Success message should appear on same page with request number and notification status",
+        "actual": "Page navigates to different route, preventing verification of submission success",
+        "impact": "Cannot complete ONE authorized real contact test as specified",
+        "fix_priority": "CRITICAL",
+        "affected_selectors": ["[data-testid='contact-success']", "[data-testid='contact-number']"],
+        "note": "Form fills correctly, submission triggers, but success state not reachable"
+      }
+    ],
+    "not_tested": [
+      "SSR metadata (title, description, canonical, hreflang) for 10 FAQ routes",
+      "JSON-LD structured data with 8 FAQ items per route",
+      "Language switching (?lang=nl,fr,en) with consistent metadata",
+      "Keyboard and mobile accessibility for contact form",
+      "Homepage video regression check"
+    ]
+  },
+  "passed_tests": [
+    "Admin authentication via session cookies",
+    "Backend API validation and idempotency",
+    "Operator endpoints authentication",
+    "Contact form renders correctly with all required fields",
+    "Contact form fields accept input correctly"
+  ],
+  "test_report_links": ["/app/backend_test.py"],
+  "success_percentage": {
+    "backend": "57% (4 of 7 tests passed)",
+    "frontend": "0% (testing incomplete due to navigation bug)"
+  },
+  "updated_files": ["/app/backend_test.py"],
+  "action_item_for_main_agent": "CRITICAL: Fix 3 backend bugs: (1) POST /api/requests must return notification_status field in Receipt response (2) GET /api/operator/requests must serialize _id to id and exclude payload_hash (3) GET /api/admin/outbox/{event_key}/delivery routing issue with special characters. CRITICAL: Fix ContactRequestForm navigation issue preventing success message display. After fixes, re-run ONE authorized real contact test and complete SSR/SEO testing for 10 routes with 8 FAQ items each.",
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  "notes": {
+    "real_contact_test_status": "NOT COMPLETED - Form submission navigation issue prevents verification",
+    "authorized_test_data": {
+      "name": "NeXify Funktionstest",
+      "email": "mail@nexifyai.cloud",
+      "message": "TEST – Kontaktformular/Resend-Verifikation, kein Kundenauftrag"
+    },
+    "ssr_seo_routes_to_test": [
+      "/leistungen",
+      "/leistungen/websites",
+      "/leistungen/agenten-automatisierung",
+      "/leistungen/apps-portale",
+      "/leistungsumfang",
+      "/loesungen",
+      "/preise-ablauf",
+      "/produkte/nex2fly",
+      "/produkte/one",
+      "/produkte/api"
+    ],
+    "expected_per_route": "8 FAQ items with data-testid='page-faq-item-{1-8}', canonical URL, hreflang tags (de, nl, fr, en, x-default), JSON-LD with FAQPage schema"
+  }
+}

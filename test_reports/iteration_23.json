@@ -1,0 +1,112 @@
+{
+  "summary": "Iteration 23 testing completed. Backend 100% success (7/7). FAQ SSR 100% success (14/14) with correct @graph JSON-LD validation. Contact form hydration FIXED and working perfectly (button disabled SSR, enabled after hydration, email sent to mail@nexifyai.cloud). Locale dropdown STILL BROKEN (same issue as iteration 22). Shop: 27 products loaded, PDP works with valid JSON-LD, add-to-cart works BUT cart state does NOT persist across page navigations (CRITICAL BUG). Product links in catalog don't navigate. Unknown product shows 404. Mobile responsive (no overflow).",
+  
+  "backend_issues": {
+    "critical_bugs": [],
+    "resolved_from_iteration22": [
+      {
+        "issue": "Contact form hydration and submission",
+        "status": "FIXED",
+        "verification": "Button disabled on SSR, enabled after useEffect. Form submits via JavaScript POST to /api/requests (201). Email sent to mail@nexifyai.cloud via Resend. Request saved to MongoDB. Success message shown. Stays on /kontakt page."
+      }
+    ],
+    "notes": "All 7 backend tests passing. Contact request API working perfectly with idempotency, validation, and email delivery."
+  },
+  
+  "frontend_issues": {
+    "critical_bugs": [
+      {
+        "component": "Shop Cart",
+        "flow": "Cart persistence",
+        "issue": "Cart state does not persist across page navigations",
+        "reproduction": "Add item to cart on PDP -> navigate to /teileklar/warenkorb directly -> cart is empty. BUT clicking 'Zum Warenkorb' link from success message shows cart with items.",
+        "impact": "Users cannot complete checkout flow. Cart appears empty when navigating to /teileklar/kasse directly.",
+        "root_cause": "Cart state likely stored in client-side state only, not persisting to backend or cookies properly across page loads",
+        "fix_priority": "CRITICAL",
+        "affected_selectors": ["[data-testid='cart-empty']", "[data-testid^='cart-line-']"],
+        "test_evidence": "Cart shows 2 items when accessed via link from PDP success message, but shows empty when accessed via direct URL navigation"
+      },
+      {
+        "component": "Shop Catalog",
+        "flow": "Product navigation",
+        "issue": "Product links in catalog do not navigate to product detail pages",
+        "reproduction": "Go to /teileklar/shop -> click on any product card link -> stays on /teileklar/shop, does not navigate to /teileklar/produkt/[id]",
+        "impact": "Users cannot browse products from catalog. Must use direct URLs.",
+        "root_cause": "Product links have correct href but click event is being prevented or not handled by Router",
+        "fix_priority": "CRITICAL",
+        "affected_selectors": ["a[href*='/teileklar/produkt/']"],
+        "test_evidence": "Found 24 product links with correct hrefs, but clicking does not trigger navigation"
+      },
+      {
+        "component": "Locale dropdown",
+        "flow": "Language switching",
+        "issue": "Locale dropdown changes value but page doesn't reload or update URL",
+        "reproduction": "Go to /leistungen/websites?lang=en -> select 'de' from dropdown -> dropdown value changes to 'de' but URL stays ?lang=en and content remains in English",
+        "impact": "Users cannot switch languages via dropdown",
+        "root_cause": "window.location.assign() in onChange handler not executing or being prevented",
+        "fix_priority": "HIGH",
+        "affected_selectors": ["[data-testid='locale-select']"],
+        "test_evidence": "Dropdown value changed from 'en' to 'de' but URL, title, and html lang attribute unchanged. Same issue as iteration 22.",
+        "status": "UNRESOLVED from iteration 22"
+      }
+    ],
+    "seo_issues": [],
+    "notes": "Product detail pages work perfectly when accessed directly. JSON-LD Product schema present and valid. Add to cart functionality works. Mobile responsive (390px no overflow). Desktop 1920x800 tested."
+  },
+  
+  "passed_tests": [
+    "Backend: Admin authentication (100%)",
+    "Backend: POST /api/requests validation, idempotency, conflict detection (100%)",
+    "Backend: Operator endpoints authentication and serialization (100%)",
+    "Backend: Admin outbox delivery status (100%)",
+    "SSR: All 10 FAQ routes with JSON-LD @graph FAQPage schema (8 questions each)",
+    "SSR: Canonical, hreflang, meta tags on all FAQ routes",
+    "SSR: Locale query parameter works for content delivery",
+    "Contact form: Hydration (button disabled SSR, enabled after useEffect)",
+    "Contact form: JavaScript POST submission to /api/requests (201)",
+    "Contact form: Email sent to mail@nexifyai.cloud via Resend",
+    "Contact form: MongoDB persistence (request NX-20261108-D385482DBC21AD5E79F63B10)",
+    "Contact form: Success message with request number and notification status",
+    "Contact form: Stays on /kontakt page (no query parameters)",
+    "Shop: 27 real products loaded from BigBuy catalog",
+    "Shop: Product detail page loads with correct data",
+    "Shop: Product JSON-LD structured data present and valid (type: Product)",
+    "Shop: Product price shows 30% markup (7,61 € for test product)",
+    "Shop: Stock label shows supplier stock count",
+    "Shop: Add to cart button works",
+    "Shop: Success message shown after adding to cart",
+    "Shop: Cart shows items when accessed via success link",
+    "Shop: Unknown product returns 404 page",
+    "Shop: Mobile 390px no horizontal overflow",
+    "Shop: Desktop 1920x800 layout correct"
+  ],
+  
+  "test_report_links": [
+    "/app/backend_test.py",
+    "/app/test_faq_ssr.py"
+  ],
+  
+  "success_percentage": {
+    "backend": "100% (7 of 7 tests passed)",
+    "frontend_contact_form": "100% (hydration bug from iteration 22 FIXED)",
+    "frontend_locale": "0% (locale dropdown still broken, same as iteration 22)",
+    "frontend_shop": "60% (PDP works, add-to-cart works, BUT cart persistence and catalog navigation broken)",
+    "seo_ssr": "100% (14 of 14 FAQ routes with correct @graph JSON-LD)"
+  },
+  
+  "updated_files": [],
+  
+  "action_item_for_main_agent": "CRITICAL: Fix cart persistence - cart state does not persist across page navigations (works via links but not direct URL navigation). Likely needs backend session/cookie fix or proper cart API integration. CRITICAL: Fix product links in catalog - clicking product cards does not navigate to PDP (links have correct href but navigation blocked). HIGH: Fix locale dropdown - window.location.assign() not executing when locale changed (same issue as iteration 22, still unresolved). NOTE: Contact form hydration bug from iteration 22 is now FIXED and working perfectly. FAQ SSR with @graph JSON-LD validation is working correctly.",
+  
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  
+  "notes": {
+    "contact_form_success": "Contact form hydration bug from iteration 22 is FIXED. Button correctly disabled on SSR, enabled after hydration. Form submits via JavaScript POST (not HTML GET). Email sent to mail@nexifyai.cloud. Request NX-20261108-D385482DBC21AD5E79F63B10 saved to MongoDB with status 'gesendet'.",
+    "faq_ssr_success": "All 10 FAQ routes have correct JSON-LD @graph with FAQPage schema containing 8 questions each. Test correctly checks inside @graph (not just root level).",
+    "shop_partial_success": "Product detail pages work perfectly with valid JSON-LD Product schema. Add to cart works. BUT cart state persistence is broken - cart only shows items when accessed via success link, not via direct URL navigation. This blocks checkout flow.",
+    "locale_still_broken": "Locale dropdown issue from iteration 22 is still present. Dropdown value changes but page doesn't reload. Needs investigation of Router component or window.location.assign() call.",
+    "edge_cases_tested": "Unknown product returns proper 404 page. Mobile 390px has no horizontal overflow. Desktop 1920x800 layout correct.",
+    "one_email_sent": "Only ONE email sent to mail@nexifyai.cloud as requested (request number NX-20261108-D385482DBC21AD5E79F63B10). No repeated live API contact tests."
+  }
+}

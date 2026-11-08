@@ -44,7 +44,18 @@ async def _requester(request):
     return user["user_id"] if user else None
 
 
-@router.post("", status_code=201)
+class RequestReceipt(BaseModel):
+    number: str
+    status: str
+    notification_status: str
+
+
+def receipt(doc):
+    return RequestReceipt(number=doc["number"], status=doc["status"],
+                          notification_status=doc.get("notify_status", "wartend"))
+
+
+@router.post("", status_code=201, response_model=RequestReceipt)
 async def create_request(body: RequestIn, request: Request, idempotency_key: str | None = Header(default=None)):
     email, errors = body.email.strip().lower(), {}
     if len(body.name.strip()) < 2:
@@ -84,13 +95,13 @@ async def create_request(body: RequestIn, request: Request, idempotency_key: str
             raise HTTPException(503, {"error": "request_readback_unavailable"})
         return replay_request(existing, payload_hash)
     await record_notification(doc)
-    return {"number": number, "status": "eingegangen"}
+    return receipt(await db.requests.find_one({"_id": request_id}) or doc)
 
 
 def replay_request(existing, payload_hash):
     if existing.get("payload_hash") != payload_hash:
         raise HTTPException(409, {"error": "idempotency_conflict"})
-    return {"number": existing["number"], "status": existing["status"]}
+    return receipt(existing)
 
 
 async def record_notification(doc):

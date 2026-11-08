@@ -2,12 +2,13 @@ import re
 from urllib.parse import urlsplit
 
 from fastapi import APIRouter, HTTPException, Query
+from typing import Literal
 
 from . import pricing
 from .db import db
 
 router = APIRouter(prefix="/api/shop")
-PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1}
+PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1}
 
 # Exact supplier host observed in the read-only catalogue; no wildcard or proxy.
 # Deployment CSP must separately permit this host before images can load.
@@ -38,14 +39,15 @@ def present(product, settings, full=False):
     stock = raw_stock if type(raw_stock) is int and 0 <= raw_stock <= 2**53 - 1 else None
     raw_images = product.get("images")
     images = list(dict.fromkeys(url for value in raw_images if (url := supplier_image(value)))) if isinstance(raw_images, list) else []
-    item = {"id": product["_id"], "sku": product.get("sku"), "ean": product.get("ean"), "name": product["name"],
+    item = {"id": str(product["_id"]), "sku": product.get("sku"), "ean": product.get("ean"), "name": product["name"],
             "image": images[0] if images else None,
             "image_status": "supplier_original" if images else "unavailable",
             "stock": stock, "in_stock": stock > 0 if stock is not None else None,
             "stock_status": "reported" if stock is not None else "unknown",
             "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
             "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
-            "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id")}
+            "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id"),
+            "imported_at": product.get("imported_at"), "source_partial": product.get("source_partial", False)}
     if full:
         item.update({"images": images, "description": product.get("description") or "",
                      "details": product.get("details") or {}, "fitment_status": "not_checked",
@@ -56,7 +58,7 @@ def present(product, settings, full=False):
 @router.get("/status")
 async def catalog_status():
     last = await db.imports.find_one({"status": "done"}, sort=[("finished_at", -1)])
-    return {"products": await db.products.count_documents({"active": True}), "last_import_at": last and last.get("finished_at"), "source": "BigBuy"}
+    return {"products": await db.products.count_documents({"active": True}), "last_import_at": last and last.get("finished_at"), "source": "BigBuy", "partial": bool(last and last.get("partial"))}
 
 
 @router.get("/categories")
@@ -67,8 +69,10 @@ async def categories():
 
 
 @router.get("/products")
-async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60)):
+async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60), sort: Literal['availability','price_asc','price_desc','name']='availability', in_stock: bool=False):
     query = {"active": True}
+    if in_stock:
+        query['stock'] = {'$gt': 0}
     term = q.strip()
     if term:
         pattern = re.escape(term)
@@ -77,7 +81,8 @@ async def products(q: str = Query("", max_length=120), category: int | None = No
         query["category_ids"] = category
     total = await db.products.count_documents(query)
     settings = await pricing.settings(db)
-    cursor = db.products.find(query, PUBLIC_FIELDS).sort([("stock", -1), ("name", 1)]).skip((page - 1) * page_size).limit(page_size)
+    ordering={'availability':[("stock", -1), ("name", 1)],'price_asc':[("purchase_cents",1),("name",1)],'price_desc':[("purchase_cents",-1),("name",1)],'name':[("name",1)]}[sort]
+    cursor = db.products.find(query, PUBLIC_FIELDS).sort(ordering).skip((page - 1) * page_size).limit(page_size)
     items = [present(p, settings) async for p in cursor]
     return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": term, "category": category}
 

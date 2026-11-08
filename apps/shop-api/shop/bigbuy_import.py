@@ -275,5 +275,9 @@ async def start_import(db, environment, actor):
         return None
     run_id = uuid.uuid4().hex
     await db.imports.insert_one({"_id": run_id, "status": "running", "environment": environment, "started_at": now_iso(), "started_by": actor, "source": "BigBuy Auto & Motorrad (%s)" % ("FTP" if environment == "ftp" else "API")})
-    _running["task"] = asyncio.create_task(run_import(db, environment, run_id))
+    if environment == "selection":
+        from .bigbuy_selection import import_selection
+        _running["task"] = asyncio.create_task(import_selection(actor, run_id=run_id))
+    else:
+        _running["task"] = asyncio.create_task(run_import(db, environment, run_id))
     return run_id

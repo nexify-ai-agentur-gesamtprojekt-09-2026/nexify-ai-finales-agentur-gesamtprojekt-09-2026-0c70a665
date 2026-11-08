@@ -5,6 +5,7 @@ import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
 import type {PublicVideo} from './PresenterVideo';
 import {ActionLink} from './ActionControl';
+import {brandImages,imageAlt} from '../lib/brand-media';
 import './IdentityHero.css';
 
 // Hero uses a single Higgsfield studio photograph (Pascal with NeX and AIFly ORACLE)
@@ -37,7 +38,7 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
  return <section className="identity-hero" aria-labelledby="home-headline" data-testid="identity-hero" data-media-state="editorial-still" data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
    <div className="identity-copy" data-testid="hero-copy">
-    <h1 id="home-headline" data-testid="hero-headline">{headings[locale].map((line,index)=><span key={line} className={index>1?"identity-title-accent":undefined}>{line}</span>)}</h1>
+    <h1 id="home-headline" data-testid="hero-headline">{headings[locale].map((line,index)=><span key={line} className={index>1?"identity-title-accent":index===1?'identity-title-long':undefined}>{line}{index<headings[locale].length-1?' ':''}</span>)}</h1>
     <p className="identity-subtitle">{subtitles[locale]}</p>
     <p className="identity-body" data-testid="hero-description">{bodies[locale]}</p>
     <div className="identity-links">
@@ -47,7 +48,7 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
    </div>
    <div className="identity-media" data-testid="hero-media">
     <figure className="identity-hero-photo" role="img" aria-label={t.scene} data-testid="hero-photo">
-     <img src="/media/higgsfield/hf-02-lobby-walk.webp" alt="Pascal mit NeX und AIFly ORACLE im NeXify Atelier" width={2000} height={1080} loading="eager" fetchPriority="high" decoding="async"/>
+     <img src={brandImages.home.src} alt={imageAlt(brandImages.home,locale)} width={2000} height={1080} loading="eager" fetchPriority="high" decoding="async"/>
     </figure>
    </div>
   </div>

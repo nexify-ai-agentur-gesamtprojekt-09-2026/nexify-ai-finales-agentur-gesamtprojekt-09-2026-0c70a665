@@ -57,7 +57,7 @@ async def import_status(ident=Depends(auth.require_admin)):
 
 @router.post("/import", status_code=202)
 async def start_import(body: ImportIn, ident=Depends(auth.require_admin)):
-    if body.environment not in ("production", "sandbox", "ftp"):
+    if body.environment not in ("production", "sandbox", "ftp", "selection"):
         raise HTTPException(422, {"error": "environment_invalid"})
     run_id = await bigbuy_import.start_import(db, body.environment, ident.user_id)
     if not run_id:
@@ -129,3 +129,20 @@ async def outbox(ident=Depends(auth.require_admin)):
 @router.post("/outbox/retry")
 async def outbox_retry(ident=Depends(auth.require_admin)):
     return {"retried": await mailer.retry_pending()}
+
+
+
+class DeliveryStatus(BaseModel):
+    id: str
+    status: str
+    provider_id: str | None = None
+    provider_event: str | None = None
+    sent_at: str | None = None
+
+
+@router.get("/outbox/{event_key}/delivery", response_model=DeliveryStatus)
+async def outbox_delivery(event_key: str, ident=Depends(auth.require_admin)):
+    result = await mailer.delivery_status(event_key)
+    if not result:
+        raise HTTPException(404, {"error": "mail_not_found"})
+    return DeliveryStatus(**result)

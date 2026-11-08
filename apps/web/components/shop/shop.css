@@ -1,4 +1,3 @@
-.tk-shop{display:grid;gap:var(--space-6);padding-top:var(--space-7)}
 .tk-shop .content-breadcrumb ol{display:flex;flex-wrap:wrap;gap:var(--space-2);list-style:none;padding:0;margin:0;font-size:13px;color:var(--color-text-gedaempft)}
 .tk-shop .content-breadcrumb li{display:flex;gap:var(--space-2);align-items:center}
 .tk-shop-nav{display:flex;flex-wrap:wrap;gap:var(--space-2);border-bottom:1px solid var(--color-linie-mittel);padding-bottom:var(--space-4)}
@@ -145,7 +144,6 @@
 .content-supplement>.tk-form,.content-supplement>.tk-notice,.content-supplement>.tk-legal,.content-supplement>.tk-home-entry,.content-supplement>section:not([class*="editorial"]){margin-inline:var(--content-gutter,var(--space-5));margin-block:var(--space-6)}
 .content-supplement>.tk-legal{padding-block:var(--space-2)}
 .tk-check a{display:inline;padding:0;margin:0;min-height:0;text-decoration:underline}
-.tk-shop{align-content:start;padding-bottom:calc(var(--space-8) + var(--space-7))}
 .tk-shop-nav{align-content:flex-start}
 .tk-tag{justify-self:start;width:fit-content}
 .tk-ws-detail>div{container-type:inline-size}
@@ -154,6 +152,12 @@
 .tk-public-commerce{display:grid;gap:var(--space-6);min-width:0}
 .tk-storefront{display:grid;gap:var(--space-6);min-width:0}
 .tk-storefront-search{position:sticky;top:calc(var(--header-height,72px) + var(--space-2));z-index:8;padding:var(--space-3);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);background:color-mix(in srgb,var(--color-graphit-900) 90%,transparent);box-shadow:0 18px 46px rgba(0,0,0,.28);backdrop-filter:blur(20px) saturate(130%)}
+
+/* TEILEKLAR data transparency follows Graphite surfaces, Champagne edges and Lime CTAs. */
+.tk-catalog-status{display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5);padding:var(--space-5);margin-block:var(--space-5);border:1px solid var(--color-atelier-champagne);border-radius:var(--radius-karte);background:var(--color-graphit-900);color:var(--color-text-primaer)}
+.tk-catalog-status>span:first-child{font-weight:700;color:var(--color-marke-lime)}
+.tk-catalog-status p{flex-basis:100%;color:var(--color-text-sekundaer);margin:0}
+
 .tk-storefront-search .tk-search{max-width:none}
 .tk-mobile-commerce-nav{display:none}
 .tk-partner-journey{display:grid;gap:var(--space-7)}

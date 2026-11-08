@@ -8,6 +8,7 @@ import DeferredChatBoundary from "./DeferredChatBoundary";
 import PublicRequestFallback from "./PublicRequestFallback";
 import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceCapabilities";
 import {lazy,Suspense, createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import {CommerceHeader} from './shop/CommerceHeader';
 import ChatResizeHandle,{chatWidthStyle,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
 import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
@@ -155,8 +156,11 @@ export function StartAction({intent,children,variant='primary'}:{intent:Intent;c
   return <ActionButton variant={variant} onClick={() => window.dispatchEvent(new CustomEvent("nexify-action",{detail:intent}))}>{children}</ActionButton>;
 }
 
-export default function Workspace({children,pages,accountControl}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode}) {
-  const [locale,setLocale] = useState<Locale>("de");
+export default function Workspace({children,pages,accountControl,initialLocale='de'}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode;initialLocale?:Locale}) {
+  const [hydrated,setHydrated]=useState(false);
+  useEffect(()=>setHydrated(true),[]);
+  const [locale,setLocale] = useState<Locale>(initialLocale);
+  useEffect(()=>setLocale(initialLocale),[initialLocale]);
   const [open,setOpen] = useState(false);
   const [chatWidth,setChatWidthState]=useState<number|null>(null);
   const setChatWidth=useCallback((w:number|null)=>{setChatWidthState(w);storeChatWidth(w);},[]);
@@ -249,7 +253,7 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
 
   useEffect(() => {
     try { setChatWidthState(readChatWidth()); setOpen(sessionStorage.getItem("nx-chat-open")==="1"); } catch {}
-    try { const saved = localStorage.getItem("nexify-locale"); if(saved && saved in translations)setLocale(saved as Locale); } catch {}
+    // The URL is authoritative so server-rendered translations and SEO agree.
     const query=window.matchMedia("(max-width: 820px)");
     setMobile(query.matches);if(query.matches)setOpen(false);
     const resized=()=>setMobile(query.matches);query.addEventListener("change",resized);
@@ -339,10 +343,10 @@ export default function Workspace({children,pages,accountControl}:{children:Reac
   return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
-      <header className="site-header" data-testid="site-header"><Link href={site==="teileklar"?"/teileklar":"/"} className="brand" aria-label={`${site==="teileklar"?"TEILEKLAR":"NeXify AI FACTORY B.V."} · ${locale==="de"?"Startseite":locale==="nl"?"Startpagina":locale==="fr"?"Accueil":"Home"}`}>{site==="teileklar"?<span>TEILE<strong>KLAR</strong><small>{locale==="de"?"Ein Bereich von NeXify AI":locale==="nl"?"Een onderdeel van NeXify AI":locale==="fr"?"Une activité de NeXify AI":"A part of NeXify AI"}</small></span>:<><img src="/signet.svg" alt="" width="30" height="30"/><span>Ne<strong>X</strong>ify <strong>AI</strong><small>{t.footer}</small></span></>}</Link>
+      {site==='teileklar'?<CommerceHeader/>:<header className="site-header" data-testid="site-header"><Link href="/" className="brand" aria-label={`NeXify AI · ${locale==='de'?'Startseite':'Home'}`}><img src="/signet.svg" alt="" width="30" height="30"/><span>Ne<strong>X</strong>ify <strong>AI</strong><small>{t.footer}</small></span></Link>
         <SiteNavigation pages={pages} site={site} locale={locale} pathname={pathname}/>
-        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" value={locale} onChange={event=>setLocale(event.target.value as Locale)}><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option><option value="en">EN</option></select>{site==="teileklar"&&(accountControl??<Link className="account-link" data-testid="header-teileklar-account" href="/anmelden">{locale==="de"?"TEILEKLAR-Konto":locale==="nl"?"TEILEKLAR-account":locale==="fr"?"Compte TEILEKLAR":"TEILEKLAR account"}</Link>)}<Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
-      </header>
+        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" disabled={!hydrated} value={locale} onChange={event=>{const url=new URL(window.location.href);if(event.target.value==='de')url.searchParams.delete('lang');else url.searchParams.set('lang',event.target.value);window.location.assign(url.pathname+url.search+url.hash);}}><option value="de" data-testid="locale-option-de">DE</option><option value="nl" data-testid="locale-option-nl">NL</option><option value="fr" data-testid="locale-option-fr">FR</option><option value="en" data-testid="locale-option-en">EN</option></select><Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
+      </header>}
       <main id="page-content" tabIndex={-1}>{children}</main>
       <SiteFooter pages={pages} site={site} locale={locale}/>
     </div>

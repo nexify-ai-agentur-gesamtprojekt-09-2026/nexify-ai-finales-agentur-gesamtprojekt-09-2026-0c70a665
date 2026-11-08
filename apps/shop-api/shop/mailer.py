@@ -121,3 +121,26 @@ async def retry_loop():
             await retry_pending()
         except Exception:
             pass
+
+
+
+async def delivery_status(event_key):
+    """Read Resend's last event; acceptance is not delivery. Internal/admin use only."""
+    doc = await db.outbox.find_one({"_id": event_key})
+    if not doc:
+        return None
+    provider_id = doc.get("provider_id")
+    if provider_id and setting("RESEND_API_KEY"):
+        try:
+            async with httpx.AsyncClient(timeout=10, transport=transport) as client:
+                response = await client.get("https://api.resend.com/emails/" + provider_id,
+                                            headers={"Authorization": "Bearer " + setting("RESEND_API_KEY")})
+            if response.is_success:
+                event = response.json().get("last_event")
+                if event in {"sent", "delivered", "delivery_delayed", "bounced", "complained", "opened", "clicked", "failed"}:
+                    await db.outbox.update_one({"_id": event_key}, {"$set": {"provider_event": event, "checked_at": now_iso()}})
+                    doc["provider_event"] = event
+        except (httpx.HTTPError, ValueError):
+            pass
+    return {"id": str(doc["_id"]), "status": doc["status"], "provider_id": provider_id,
+            "provider_event": doc.get("provider_event"), "sent_at": doc.get("sent_at")}

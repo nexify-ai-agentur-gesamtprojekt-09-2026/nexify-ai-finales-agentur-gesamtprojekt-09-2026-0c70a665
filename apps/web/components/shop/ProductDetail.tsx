@@ -16,7 +16,8 @@ function AddToCart({ product }: { product: Detail }) {
     try {
       const current = await api<Cart>("/api/shop/cart");
       const existing = current.lines.find(line => line.product_id === product.id)?.quantity || 0;
-      const cart = await api<Cart>("/api/shop/cart/items", { method: "POST", json: { product_id: product.id, quantity: Math.min(20, existing + quantity) } });
+      if (existing + quantity > Math.min(20,product.stock??0)) {setState('error');setMessage('quantityUnavailable');return;}
+      const cart = await api<Cart>("/api/shop/cart/items", { method: "POST", json: { product_id: product.id, quantity: existing + quantity } });
       notifyCart(cart.count); setState("done"); setMessage("cartDone");
     } catch (error) { setState("error"); setMessage((error as ApiError).error === "insufficient_stock" ? "quantityUnavailable" : "cartError"); }
   }
@@ -30,17 +31,18 @@ function AddToCart({ product }: { product: Detail }) {
   </div>;
 }
 
-export default function ProductDetail({ id, readOnly = false }: { id: string; readOnly?: boolean }) {
+export default function ProductDetail({ id, readOnly = false, initialProduct }: { id: string; readOnly?: boolean; initialProduct?:Detail }) {
   const { t, number, money, date } = useShopCopy();
-  const [product, setProduct] = useState<Detail | null>(null), [missing, setMissing] = useState(false), [failed, setFailed] = useState(false), [active, setActive] = useState(0);
+  const [product, setProduct] = useState<Detail | null>(initialProduct||null), [missing, setMissing] = useState(false), [failed, setFailed] = useState(false), [active, setActive] = useState(0);
   useEffect(() => {
+    if(initialProduct?.id===id){setProduct(initialProduct);return;}
     const controller = new AbortController(); let current = true;
     setProduct(null); setMissing(false); setFailed(false); setActive(0);
     api<Detail>("/api/shop/products/" + encodeURIComponent(id), { signal: controller.signal })
       .then(value => { if (current) setProduct(value); })
       .catch(error => { if (current && !controller.signal.aborted) { if ((error as ApiError).status === 404) setMissing(true); else setFailed(true); } });
     return () => { current = false; controller.abort(); };
-  }, [id]);
+  }, [id,initialProduct]);
   if (failed) return <p role="alert" className="tk-alert" data-testid="product-error">{t("productError")}</p>;
   if (missing) return <div className="tk-empty" data-testid="product-missing"><h2>{t("productMissing")}</h2><p>{t("productMissingBody")}</p><SiteLink href="/teileklar/shop" className="content-action-link">{t("goShop")}</SiteLink></div>;
   if (!product) return <p role="status">{t("productLoading")}</p>;

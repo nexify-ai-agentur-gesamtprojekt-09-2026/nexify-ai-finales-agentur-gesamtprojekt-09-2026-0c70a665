@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 export const CHAT_MIN = 320, CHAT_STEP = 16;
 const WIDTH_KEY = "nx-chat-width";
@@ -15,15 +15,17 @@ export function storeChatWidth(width: number | null) {
 export const chatWidthStyle = (width: number | null, mobile: boolean) => (width && !mobile ? { "--layout-panel-width": width + "px" } as CSSProperties : undefined);
 
 export default function ChatResizeHandle({ width, onChange, label }: { width: number | null; onChange: (w: number | null) => void; label: string }) {
+  const [maximum,setMaximum]=useState(CHAT_MIN);
   const handle = useRef<HTMLDivElement>(null), drag = useRef(false);
   const current = () => width ?? Math.round(handle.current?.parentElement?.getBoundingClientRect().width || CHAT_MIN);
   useEffect(() => {
-    const refit = () => { if (width && width > chatMax()) onChange(clampChat(width)); };
+    const refit = () => {setMaximum(chatMax()); if (width && width > chatMax()) onChange(clampChat(width)); };
+    refit();
     window.addEventListener("resize", refit);
     return () => window.removeEventListener("resize", refit);
   }, [width, onChange]);
   return <div ref={handle} className="chat-resize-handle" role="separator" aria-orientation="vertical" aria-label={label} tabIndex={0}
-    aria-valuemin={CHAT_MIN} aria-valuemax={typeof window === "undefined" ? undefined : chatMax()} aria-valuenow={width ?? undefined} data-testid="chat-resize-handle"
+    aria-valuemin={CHAT_MIN} aria-valuemax={maximum} aria-valuenow={width ?? CHAT_MIN} data-testid="chat-resize-handle"
     onPointerDown={e => { drag.current = true; e.currentTarget.setPointerCapture(e.pointerId); document.body.classList.add("is-resizing-chat"); }}
     onPointerMove={e => { if (drag.current) onChange(clampChat(window.innerWidth - e.clientX)); }}
     onPointerUp={e => { drag.current = false; e.currentTarget.releasePointerCapture(e.pointerId); document.body.classList.remove("is-resizing-chat"); }}

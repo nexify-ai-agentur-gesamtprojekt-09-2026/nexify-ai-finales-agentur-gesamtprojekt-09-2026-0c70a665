@@ -519,10 +519,31 @@ async def operator_overview(request: Request):
     }
 
 
-@router.get("/api/operator/requests")
+class OperatorRequest(BaseModel):
+    model_config = {"extra": "allow"}
+    id: str
+    number: str
+    stage: str = "lead"
+
+
+class OperatorRequests(BaseModel):
+    items: list[OperatorRequest]
+    stages: list[str]
+
+
+def request_response(doc):
+    if not doc:
+        raise HTTPException(404, {"error": "not_found"})
+    data = clean(doc)
+    data.pop("payload_hash", None)
+    return OperatorRequest(**{**data, "id": str(doc["_id"])})
+
+
+@router.get("/api/operator/requests", response_model=OperatorRequests)
 async def operator_requests(request: Request):
     await need_admin(request)
-    return {"items": await db.requests.find({}, {"payload_hash": 0}).sort("created_at", -1).to_list(300), "stages": STAGES}
+    docs = await db.requests.find({}, {"payload_hash": 0}).sort("created_at", -1).to_list(300)
+    return OperatorRequests(items=[request_response(doc) for doc in docs], stages=STAGES)
 
 
 class StageIn(BaseModel):
@@ -530,7 +551,7 @@ class StageIn(BaseModel):
     note: str = Field("", max_length=1000)
 
 
-@router.patch("/api/operator/requests/{number}")
+@router.patch("/api/operator/requests/{number}", response_model=OperatorRequest)
 async def operator_request_stage(number: str, body: StageIn, request: Request):
     admin = await need_admin(request)
     update = {"$set": {"stage": body.stage, "updated_at": now_iso()}}
@@ -541,7 +562,7 @@ async def operator_request_stage(number: str, body: StageIn, request: Request):
         raise HTTPException(404, {"error": "not_found"})
     await audit(admin, "request_stage", number, body.stage)
     updated = await db.requests.find_one({"number": number}, {"payload_hash": 0})
-    return clean({**updated, "id": str(updated["_id"])})
+    return request_response(updated)
 
 
 @router.get("/api/operator/customers")

@@ -8,10 +8,16 @@ const protectedPaths = siteMap.pages.filter(page => page.access.visibility !== "
 export default function proxy(request: NextRequest) {
   const path = canonicalPath(request.nextUrl.pathname);
   if (!path) return NextResponse.json({ error: "invalid_path" }, { status: 400 });
-  if (privateRoute(path, protectedPaths)) {
-    if (!request.cookies.get("tk_session")) return privateJson({ error: "authentication_required", sign_in_path: "/anmelden" }, { status: 401 });
-    return privateJson({ error: "membership_required", message: "Die Sitzung und die erforderliche Mandanten-, Seiten- und Rollenfreigabe sind hier nicht verifiziert." }, { status: 403 });
+  if (privateRoute(path, protectedPaths) && path.startsWith('/api/')) {
+    return privateJson({error:'authentication_required'}, {status:401});
   }
-  return NextResponse.next();
+  // Private page shells contain no private data. Existing API sessions enforce all
+  // customer/admin permissions; an unverified cookie never grants data access here.
+  const requestHeaders=new Headers(request.headers);
+  const language=request.nextUrl.searchParams.get('lang');
+  requestHeaders.set('x-nexify-locale',language&&['de','nl','fr','en'].includes(language)?language:'de');
+  const response=NextResponse.next({request:{headers:requestHeaders}});
+  if(privateRoute(path,protectedPaths)){response.headers.set('Cache-Control','private, no-store');response.headers.set('Vary','Cookie, Authorization');response.headers.set('X-Robots-Tag','noindex, nofollow');}
+  return response;
 }
 export const config = { matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"] };

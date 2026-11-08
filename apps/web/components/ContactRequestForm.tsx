@@ -1,18 +1,20 @@
 "use client";
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { api, type ApiError } from "./shop/api";
 import {useUI} from './Workspace';
 import {contactCopy} from '../lib/contact-copy';
 import {contactAttempt,persistContactAttempt,readContactAttempt,type ContactAttempt} from '../lib/contact-attempt';
 import "./shop/shop.css";
 
-export default function ContactRequestForm({ kind = "contact" }: { kind?: "contact" | "partner" }) {
+export default function ContactRequestForm({ kind = "contact",topic }: { kind?: "contact" | "partner";topic?:string }) {
+  const [ready,setReady]=useState(false);
+  useEffect(()=>setReady(true),[]);
   const partner = kind === "partner";
   const {locale}=useUI();const text=contactCopy[locale];
   const MSG:Record<string,string>={required:text.required,invalid:text.invalid,too_short:text.too_short};
   const attempt=useRef<ContactAttempt|null>(null),busyRef=useRef(false);
-  const storageKey='nexify-contact-attempt-v1:'+kind;
-  const [errors, setErrors] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [number, setNumber] = useState(""), [failure, setFailure] = useState("");
+  const storageKey='nexify-contact-attempt-v1:'+kind+(topic?':'+encodeURIComponent(topic):'');
+  const [errors, setErrors] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [number, setNumber] = useState(""), [failure, setFailure] = useState(""), [mailStatus, setMailStatus] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busyRef.current) return;
@@ -26,6 +28,7 @@ export default function ContactRequestForm({ kind = "contact" }: { kind?: "conta
     if (partner && body.company.trim().length < 2) local.company = "required";
     setErrors(local); setFailure("");
     if (Object.keys(local).length) return;
+    if(topic){body.message=topic+'\n\n'+body.message;body.page_path=window.location.pathname;}
     setBusy(true);busyRef.current=true;
     try {
       let stored=attempt.current;
@@ -33,17 +36,18 @@ export default function ContactRequestForm({ kind = "contact" }: { kind?: "conta
       attempt.current=await contactAttempt(JSON.stringify(body),stored);
       try{persistContactAttempt(sessionStorage,storageKey,attempt.current);}catch{throw new Error('request_storage_unavailable');}
       const controller=new AbortController();const timeout=window.setTimeout(()=>controller.abort(),15000);
-      let result:{number:string;status:string};
-      try{result=await api<{number:string;status:string}>("/api/requests",{method:"POST",json:body,signal:controller.signal,headers:{'Idempotency-Key':attempt.current.key}});}finally{window.clearTimeout(timeout);}
+      let result:{number:string;status:string;notification_status:string};
+      try{result=await api<{number:string;status:string;notification_status:string}>("/api/requests",{method:"POST",json:body,signal:controller.signal,headers:{'Idempotency-Key':attempt.current.key}});}finally{window.clearTimeout(timeout);}
       if(typeof result.number!=='string'||!/^NX-[A-Z0-9-]{8,}$/.test(result.number)||result.status!=='eingegangen')throw new Error('unconfirmed_request');
-      setNumber(result.number);attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}
+      setNumber(result.number);setMailStatus(result.notification_status);attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}
     }
     catch (e) { const err=e as ApiError;if(err.fields){setErrors(err.fields);if(err.status===422){attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}}}else setFailure(e instanceof Error&&e.message==='request_storage_unavailable'?text.storage:e instanceof Error&&e.message.startsWith('pending_request')?text.pending:err.status===429?text.limit:text.failure); }
     finally { busyRef.current=false;setBusy(false); }
   }
-  if (number) return <section className="tk-notice" role="status" data-testid="contact-success"><strong>{partner?text.partnerSaved:text.saved}</strong><p>{text.number}: <span data-testid="contact-number">{number}</span></p></section>;
+  const notificationCopy={de:{sent:'Die Benachrichtigung wurde von Resend angenommen. Das bestätigt noch nicht die Zustellung im Postfach.',pending:'Ihre Anfrage ist sicher gespeichert. Die E-Mail-Benachrichtigung ist noch nicht bestätigt; bitte senden Sie die Anfrage nicht erneut.'},nl:{sent:'Resend heeft de melding geaccepteerd. Dit bevestigt nog niet de bezorging.',pending:'Uw aanvraag is opgeslagen. De e-mailmelding is nog niet bevestigd; verstuur de aanvraag niet opnieuw.'},fr:{sent:'Resend a accepté la notification. Cela ne confirme pas encore sa livraison.',pending:'Votre demande est enregistrée. La notification n’est pas encore confirmée ; ne renvoyez pas la demande.'},en:{sent:'Resend accepted the notification. Inbox delivery is not yet confirmed.',pending:'Your enquiry is safely stored. The email notification is not yet confirmed; please do not submit it again.'}}[locale];
+  if (number) return <section className="tk-notice" role="status" data-testid="contact-success"><strong>{partner?text.partnerSaved:text.saved}</strong><p>{text.number}: <span data-testid="contact-number">{number}</span></p><p data-testid="contact-notification-status">{mailStatus==='gesendet'?notificationCopy.sent:notificationCopy.pending}</p></section>;
   const field = (name: string, label: string, input: React.ReactNode) => <label className={"tk-field" + (name === "message" ? " is-wide" : "")}>{label}{input}{errors[name] && <span className="tk-field-error" data-testid={`contact-${name}-error`}>{MSG[errors[name]] || MSG.required}</span>}</label>;
-  return <form className="tk-form" onSubmit={submit} noValidate aria-labelledby="contact-form-title" data-testid="contact-form">
+  return <form className="tk-form" method="post" onSubmit={submit} noValidate aria-labelledby="contact-form-title" data-testid="contact-form">
     <h2 id="contact-form-title">{partner?text.partnerTitle:text.title}</h2>
     <p className="tk-meta">{text.requiredNote}</p>
     <div className="tk-form-grid">
@@ -55,6 +59,6 @@ export default function ContactRequestForm({ kind = "contact" }: { kind?: "conta
     <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} data-testid="contact-consent" /> {text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</label>
     {errors.consent && <span className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
     {failure && <p role="alert" className="tk-field-error" data-testid="contact-error">{failure}</p>}
-    <div className="tk-actions"><button className="primary-button" type="submit" disabled={busy} data-testid="contact-submit">{busy?text.sending:text.send}</button></div>
+    <div className="tk-actions"><button className="primary-button" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</button></div>
   </form>;
 }

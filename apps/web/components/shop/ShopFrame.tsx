@@ -1,39 +1,25 @@
-"use client";
-import { useEffect, useState, type ReactNode } from "react";
-import { SiteLink } from "../Router";
-import { api, CART_EVENT, type Cart } from "./api";
-import "./shop.css";
-
-const NAV: [string, string][] = [["/teileklar/shop", "Shop"], ["/teileklar/kategorien", "Kategorien"], ["/teileklar/werkstatt", "Werkstattsuche"], ["/teileklar/bestellungen", "Bestellungen"]];
-
-function AccountLink() {
-  const [user, setUser] = useState<{ email: string; role: string } | null | false>(null);
-  useEffect(() => { api<{ email: string; role: string }>("/api/auth/me").then(setUser).catch(() => setUser(false)); }, []);
-  if (user === null) return null;
-  if (!user) return <SiteLink href="/anmelden" data-testid="shop-nav-login">Anmelden</SiteLink>;
-  return <>{user.role === "admin" && <SiteLink href="/teileklar/admin" data-testid="shop-nav-admin">Verwaltung</SiteLink>}<button type="button" className="outline-button" data-testid="shop-nav-logout" onClick={async () => { await api("/api/auth/logout", { method: "POST", json: {} }); window.location.assign("/anmelden"); }}>Abmelden ({user.email})</button></>;
-}
-
-function CartLink() {
-  const [count, setCount] = useState<number | null>(null);
-  useEffect(() => {
-    api<Cart>("/api/shop/cart").then(cart => setCount(cart.count)).catch(() => setCount(null));
-    const update = (event: Event) => setCount((event as CustomEvent<number>).detail);
-    window.addEventListener(CART_EVENT, update);
-    return () => window.removeEventListener(CART_EVENT, update);
-  }, []);
-  return <SiteLink href="/teileklar/warenkorb" className="tk-nav-cart" data-testid="shop-nav-cart">Warenkorb{count ? <span className="tk-badge" data-testid="shop-nav-cart-count">{count}</span> : null}</SiteLink>;
-}
-
-export default function ShopFrame({ title, kicker = "Shop", intro, crumbs = [], children, testId }: { title: string; kicker?: string; intro?: ReactNode; crumbs?: [string, string][]; children: ReactNode; testId: string }) {
-  return <section className="public-page tk-shop context-teileklar" data-testid={testId} aria-labelledby={testId + "-title"}>
-    <nav className="content-breadcrumb" aria-label="Sie sind hier"><ol>
-      <li><SiteLink href="/teileklar">TEILEKLAR</SiteLink><span aria-hidden="true">/</span></li>
-      {crumbs.map(([href, label]) => <li key={href}><SiteLink href={href}>{label}</SiteLink><span aria-hidden="true">/</span></li>)}
-      <li><span aria-current="page">{title}</span></li>
-    </ol></nav>
-    <nav className="tk-shop-nav" aria-label="Shopbereiche" data-testid="shop-nav">{NAV.map(([href, label]) => <SiteLink key={href} href={href}>{label}</SiteLink>)}<CartLink /><AccountLink /></nav>
-    <header className="tk-shop-head"><span className="eyebrow">TEILEKLAR / {kicker}</span><h1 id={testId + "-title"}>{title}</h1>{intro && <p className="tk-intro">{intro}</p>}</header>
-    {children}
-  </section>;
+'use client';
+import type {ReactNode} from 'react';
+import {SiteLink} from '../Router';
+import './shop.css';
+import './Storefront.css';
+import '../HomeConcept.css';
+import '../PageConcept.css';
+import '../HomeMaster.css';
+/** Shop runtime pages (catalogue, search, cart, checkout, workshops) share the Startseite frame:
+ *  hc-container widths, the page hero vocabulary and the Atelier material for embedded panels. */
+export default function ShopFrame({title,children,testId,crumbs=[],intro,kicker,brand='TEILEKLAR',home=['/teileklar','TEILEKLAR.shop']}:{title:string;children:ReactNode;testId:string;crumbs?:[string,string][];intro?:string;kicker?:string;brand?:string;home?:[string,string]}){
+ return <div className="home-concept page-concept tk-shop" data-testid={testId}>
+  <section className="hc-container" aria-labelledby={testId+'-title'}>
+   <header className="pc-hero is-text-only">
+    <div className="pc-hero-copy">
+     <nav className="pc-breadcrumb" aria-label="Brotkrumennavigation"><ol><li><SiteLink href={home[0]} data-testid={testId+'-home'}>{home[1]}</SiteLink><span aria-hidden="true">/</span></li>{crumbs.map(([href,label],i)=><li key={href}><SiteLink href={href} data-testid={testId+'-crumb-'+i}>{label}</SiteLink><span aria-hidden="true">/</span></li>)}<li><span aria-current="page">{title}</span></li></ol></nav>
+     <span className="hc-kicker">{brand}<span aria-hidden="true"> / </span>{kicker||'Shop'}</span>
+     <h1 id={testId+'-title'} data-testid={testId+'-title'}>{title}</h1>
+     {intro&&<p className="pc-hero-lead">{intro}</p>}
+    </div>
+   </header>
+  </section>
+  <section className="hc-container pc-supplement tk-shop-body">{children}</section>
+ </div>;
 }

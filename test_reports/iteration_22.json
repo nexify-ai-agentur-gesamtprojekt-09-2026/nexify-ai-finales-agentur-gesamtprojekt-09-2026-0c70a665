@@ -1,0 +1,109 @@
+{
+  "summary": "Iteration 22 testing completed. Backend APIs fully working (100% success). Contact form navigation bug from iteration21 confirmed and reproduced. FAQ SSR testing shows all routes working except missing JSON-LD schema. Locale dropdown not functioning.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "resolved_from_iteration21": [
+      {
+        "issue": "POST /api/requests missing notification_status field",
+        "status": "FIXED",
+        "verification": "Backend test shows notification_status returned correctly (value: 'gesendet')"
+      },
+      {
+        "issue": "GET /api/operator/requests returns '_id' instead of 'id'",
+        "status": "FIXED",
+        "verification": "Backend test confirms proper ID serialization, no '_id' or 'payload_hash' exposed"
+      },
+      {
+        "issue": "GET /api/admin/outbox/{event_key}/delivery returns 404",
+        "status": "FIXED",
+        "verification": "Backend test returns 200 with provider_event. Confirmed via MongoDB: provider_event='delivered' for recent emails"
+      }
+    ],
+    "notes": "Backend supervisor restart resolved all iteration21 issues. All 7 backend tests passing."
+  },
+  "frontend_issues": {
+    "critical_bugs": [
+      {
+        "component": "ContactRequestForm",
+        "flow": "Contact form submission",
+        "issue": "Form submission causes navigation with query parameters instead of JavaScript POST",
+        "reproduction": "Confirmed via browser automation. Form data appended to URL as GET request: /kontakt?name=...&email=...&message=...&consent=on",
+        "impact": "No API call made, no request created in database, success message never appears",
+        "root_cause": "Form submitting as HTML form (browser default GET) instead of using JavaScript onSubmit handler with event.preventDefault()",
+        "fix_suggestion": "Add action='' attribute to form element to prevent default HTML submission, or investigate why JavaScript handler not executing",
+        "fix_priority": "CRITICAL",
+        "affected_selectors": ["[data-testid='contact-form']", "[data-testid='contact-submit']"],
+        "test_evidence": "Browser test showed URL changed from /kontakt to /kontakt?name=...&email=... No network logs for /api/ requests captured. No database record created."
+      },
+      {
+        "component": "Locale dropdown",
+        "flow": "Language switching",
+        "issue": "Locale dropdown changes value but page doesn't reload or update URL",
+        "reproduction": "Browser test on /leistungen/websites?lang=en. Selected 'de' from dropdown. Dropdown value changed to 'de' but URL stayed ?lang=en and content remained in English",
+        "impact": "Users cannot switch languages via dropdown",
+        "root_cause": "window.location.assign() in onChange handler not executing or being prevented",
+        "fix_priority": "HIGH",
+        "affected_selectors": ["[data-testid='locale-select']"],
+        "test_evidence": "Browser test showed dropdown value changed from 'en' to 'de' but URL and page title unchanged"
+      }
+    ],
+    "seo_issues": [
+      {
+        "component": "FAQ structured data",
+        "issue": "JSON-LD FAQPage schema missing on all 10 FAQ routes",
+        "routes_affected": [
+          "/leistungen",
+          "/leistungen/websites",
+          "/leistungen/agenten-automatisierung",
+          "/leistungen/apps-portale",
+          "/leistungsumfang",
+          "/loesungen",
+          "/preise-ablauf",
+          "/produkte/nex2fly",
+          "/produkte/one",
+          "/produkte/api"
+        ],
+        "impact": "Search engines cannot parse FAQ structured data for rich snippets",
+        "fix_priority": "MEDIUM",
+        "notes": "HTML FAQ items present (8 items per page with data-testid='page-faq-item-{1-8}'). Only structured data missing."
+      }
+    ]
+  },
+  "passed_tests": [
+    "Backend: Admin authentication via session cookies",
+    "Backend: POST /api/requests validation (name, email, message, consent)",
+    "Backend: POST /api/requests idempotency with notification_status field",
+    "Backend: POST /api/requests conflict detection (409)",
+    "Backend: GET /api/operator/requests authentication and ID serialization",
+    "Backend: PATCH /api/operator/requests authentication and stage update",
+    "Backend: GET /api/admin/outbox/{event_key}/delivery with provider_event",
+    "SSR: All 10 FAQ routes return HTTP 200",
+    "SSR: Canonical links present on all routes",
+    "SSR: Hreflang tags (de, nl, fr, en, x-default) present on all routes",
+    "SSR: 8 FAQ items in HTML on all routes",
+    "SSR: Title and meta description present on all routes",
+    "SSR: Locale query parameter (?lang=nl,fr,en) works for content delivery"
+  ],
+  "test_report_links": [
+    "/app/backend_test.py",
+    "/app/test_faq_ssr.py"
+  ],
+  "success_percentage": {
+    "backend": "100% (7 of 7 tests passed)",
+    "frontend_functionality": "0% (2 critical bugs: contact form navigation, locale dropdown)",
+    "seo_ssr": "86% (6 of 7 checks passed, JSON-LD missing)"
+  },
+  "updated_files": [
+    "/app/test_faq_ssr.py"
+  ],
+  "action_item_for_main_agent": "CRITICAL: Fix ContactRequestForm navigation bug - form submitting as HTML GET instead of JavaScript POST. Add action='' to form element or investigate why onSubmit handler not executing. HIGH: Fix locale dropdown - window.location.assign() not working when locale changed. MEDIUM: Add JSON-LD FAQPage schema to all 10 FAQ routes (HTML FAQ items already present, only structured data missing). NOTE: Backend issues from iteration21 are fully resolved after supervisor restart.",
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  "notes": {
+    "backend_verification": "All iteration21 backend bugs confirmed fixed. Email delivery working with provider_event='delivered' confirmed in MongoDB outbox collection.",
+    "contact_form_test": "Did NOT send real email to mail@nexifyai.cloud as form navigation bug prevented API call. No new database records created during browser test.",
+    "existing_emails": "MongoDB shows 3 existing emails to mail@nexifyai.cloud from backend tests, most recent with provider_event='delivered'",
+    "faq_ssr_details": "Tested all 10 routes + locale variations (14 total tests). All routes have proper meta tags, canonical, hreflang, and 8 HTML FAQ items. Only JSON-LD structured data missing.",
+    "locale_dropdown_details": "Tested /leistungen/websites?lang=en switching to German. Dropdown value changed but page didn't reload. Suggests JavaScript handler issue."
+  }
+}
