@@ -10,7 +10,7 @@
 .home-concept .identity-copy .identity-body{font-size:var(--type-body-size);max-width:52ch;margin:0 0 var(--space-6)}
 .workspace-shell .home-concept .identity-hero .identity-media{width:100%;max-width:none;transform:none;box-shadow:var(--shadow-home-media);border-radius:var(--radius-home-media);isolation:isolate;overflow:hidden}
 .workspace-shell .home-concept .identity-hero .identity-media::before,.workspace-shell .home-concept .identity-hero .identity-media::after{display:none}
-.home-concept .identity-hero-photo{border-radius:inherit}.home-concept .identity-hero-photo img{aspect-ratio:16/9;object-fit:contain;height:auto;width:100%;display:block}
+.home-concept .identity-hero-photo{border-radius:inherit}.home-concept .identity-hero-photo img{aspect-ratio:16/9;object-fit:cover;object-position:center 38%;height:auto;width:100%;display:block}
 .home-concept .hc-anchors{display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-7);padding-block:var(--space-3)}
 .home-concept .hc-anchors a{display:inline-flex;gap:var(--space-4);align-items:center;min-height:var(--target-min);color:var(--color-text-sekundaer);font-size:var(--type-small-size);text-decoration:none}
 .home-concept .hc-kicker{display:block;margin-bottom:var(--space-4);color:var(--color-atelier-champagne);font-size:var(--type-small-size);line-height:var(--type-body-leading)}
@@ -22,7 +22,7 @@
 .home-concept .hc-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5);padding-bottom:var(--space-7)}
 .home-concept .hc-gallery-card{min-width:0;color:inherit;text-decoration:none;display:flex;flex-direction:column;align-items:stretch;border-radius:var(--radius-atelier);padding-bottom:var(--space-5)}
 .home-concept .hc-art,.home-concept .hc-product-art{position:relative;margin:0 0 var(--space-4);aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius-atelier);background:var(--color-atelier-canvas);box-shadow:var(--shadow-home-media);border:1px solid color-mix(in srgb,var(--color-atelier-champagne) 30%,transparent)}
-.home-concept .hc-art img,.home-concept .hc-product-art img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;border-radius:inherit}
+.home-concept .hc-art img,.home-concept .hc-product-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 38%;border-radius:inherit}
 .home-concept .hc-gallery h3{display:flex;justify-content:space-between;gap:var(--space-4);min-height:var(--target-min)}
 .home-concept .hc-gallery p{margin-block:var(--space-3) var(--space-4);font-size:var(--type-home-reading);max-width:42ch}
 .home-concept .hc-text-link{display:inline-flex;align-items:center;gap:var(--space-4);min-height:var(--target-min);color:var(--color-text-primaer);font-size:var(--type-small-size);text-decoration:none;margin-top:auto}
