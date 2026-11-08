@@ -8,7 +8,8 @@ import IdentityHero from './IdentityHero';
 import copy from '../../../config/home-concept-copy.json';
 import './HomeConcept.css';
 
-const artwork='/media/atelier/home-glass-triptych-20261102.png';
+// Distinct Higgsfield studio photographs per gallery card (Marke & Web, Systeme & KI, TEILEKLAR).
+const galleryArt=['/media/higgsfield/hf-04.webp','/media/higgsfield/hf-07.webp','/media/higgsfield/hf-08.webp'];
 const galleries=['/leistungen/websites','/leistungen/agenten-automatisierung','/teileklar'];
 const services=['/leistungen/websites','/leistungen/agenten-automatisierung','/loesungen'];
 const products=['/produkte/nex2fly','/produkte/one','/produkte/api','/teileklar'];
@@ -35,7 +36,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   </section>
   <nav className="hc-gallery hc-container" aria-label={t.introTitle}>
    {t.galleryTitles.map((title,i)=><SiteLink className="hc-gallery-card" href={galleries[i]} key={title} data-testid={`home-still-${i}`}>
-    <figure className={`hc-art hc-art-${i}`}><img src={artwork} width="2172" height="724" alt={t.galleryAlts[i]} loading="lazy" decoding="async"/></figure>
+    <figure className={`hc-art hc-art-${i}`}><img src={galleryArt[i % galleryArt.length]} width="2000" height="1080" alt={t.galleryAlts[i]} loading="lazy" decoding="async"/></figure>
     <h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
    </SiteLink>)}
   </nav>
