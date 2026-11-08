@@ -27,6 +27,7 @@ export function preparePublicData(source){
     const title=localized(page.title),summary=localized(page.summary);
     return {id:page.id,path,title:title.de,purpose:summary.de,sourceId:"native:"+page.id,role:page.id,site_context:page.site_context,
       localizedTitle:title,localizedSummary:summary,
+      ...(page.metadata?.description?{metadata:{description:localized(page.metadata.description)}}:{}),
       sections:(page.sections||[]).map(section=>({id:String(section.id),heading:localized(section.heading),body:localized(section.body)})),
       actions:(page.next_actions||[]).map(action=>{
         if(action.type==="chat"&&['quote','booking','marketing'].includes(action.chat_intent))return {type:"chat",chat_intent:action.chat_intent,label:localized(action.label)};

@@ -36,3 +36,12 @@ export function organizationJsonLd(description: string) {
     description,
   } as const;
 }
+
+/** Next-Metadata fuer dedizierte Routen: Title, Description, Canonical in einem Schritt. */
+export function pageMetadata(path: string, title: string, description: string) {
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl(path) },
+  };
+}
