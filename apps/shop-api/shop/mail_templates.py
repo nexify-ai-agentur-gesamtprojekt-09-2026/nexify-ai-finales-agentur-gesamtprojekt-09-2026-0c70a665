@@ -107,6 +107,6 @@ def workshop_receipt(req):
 
 
 def internal_request(doc):
-    rows = [("Vorgang", doc["number"]), ("Art", doc.get("kind", "contact")), ("Name", doc["name"]), ("E-Mail", doc["email"]), ("Firma", doc.get("company") or "–")]
+    rows = [("Vorgang", doc["number"]), ("Art", doc.get("kind", "contact")), ("Name", doc["name"]), ("E-Mail", doc["email"]), ("Firma", doc.get("company") or "–")] + [(k, doc[f]) for k, f in (("Leistung", "service"), ("Budget", "budget"), ("Zeitrahmen", "timeline"), ("Telefon", "phone")) if doc.get(f)]
     html = layout("Intern", "Neue Anfrage %s" % doc["number"], table(rows) + para(escape(doc["message"]).replace("\n", "<br>")), "Neue Anfrage", brand="NeXify AI")
     return ("Partneranfrage " if doc.get("kind") == "partner" else "Anfrage ") + doc["number"], html, "\n".join("%s: %s" % r for r in rows) + "\n\n" + doc["message"]

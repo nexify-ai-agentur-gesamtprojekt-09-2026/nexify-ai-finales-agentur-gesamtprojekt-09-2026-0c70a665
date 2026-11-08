@@ -52,6 +52,6 @@
   "seed_data_creation": "Several throwaway customer accounts qa+<hex>@example.org were created; some are locked by the lockout test (expire after 15 min). Admin markup was restored to 30.",
   "retest_needed": false,
   "should_main_agent_self_test": true,
-  "context_for_next_testing_agent": "Run: PREVIEW_PUBLIC_ORIGIN=https://fresh-sync--3on01101.preview.emergentagent.com pytest backend/tests/test_teileklar_phase1.py. frontend/.env has no REACT_APP_BACKEND_URL; use PREVIEW_PUBLIC_ORIGIN from backend env. Cart add endpoint is /api/shop/cart/items. Product detail, checkout and cart merge with real products are untested (no catalog because BigBuy credentials fail).",
+  "context_for_next_testing_agent": "Run: PREVIEW_PUBLIC_ORIGIN=https://chat-it-automate--01quzkxh.preview.emergentagent.com pytest backend/tests/test_teileklar_phase1.py. frontend/.env has no REACT_APP_BACKEND_URL; use PREVIEW_PUBLIC_ORIGIN from backend env. Cart add endpoint is /api/shop/cart/items. Product detail, checkout and cart merge with real products are untested (no catalog because BigBuy credentials fail).",
   "rca of the issue": "Anonymous gets 403: auth.require_admin calls identity(), which returns Identity(None, None, guest) for anonymous users; role None != 'admin' -> 403. Fix: check user_id first."
 }

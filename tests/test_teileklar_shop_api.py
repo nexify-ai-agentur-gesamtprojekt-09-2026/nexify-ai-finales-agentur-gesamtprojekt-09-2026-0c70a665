@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 os.environ.update({"DB_NAME": "teileklar_shop_unittest", "REVOLUT_MODE": "sandbox", "REVOLUT_MERCHANT_SECRET_KEY_SANDBOX": "sk_unittest_only",
                    "RESEND_API_KEY": "re_unittest", "RESEND_FROM_ADDRESS": "test@example.org", "RESEND_FROM": "", "MAIL_INTERNAL_TO": "intern@example.org", "MAIL_DAILY_CAP": "", "BIGBUY_API_KEY_SANDBOX": "unittest-bigbuy",
-                   "MONGO_URL": os.environ.get("MONGO_URL", "mongodb://localhost:27017"), "PREVIEW_PUBLIC_ORIGIN": "https://shop.preview.emergentagent.com",
+                   "MONGO_URL": os.environ.get("MONGO_URL", "mongodb://localhost:27017"), "PREVIEW_PUBLIC_ORIGIN": "https://chat-it-automate--01quzkxh.preview.emergentagent.com",
                    "SHOP_VAT_PERCENT": "19", "GATEWAY_PORT": "3993", "REVOLUT_API_VERSION": "2026-04-20"})
 sys.path[:0] = [str(ROOT / "apps" / "shop-api"), str(ROOT / "apps" / "agent-gateway")]
 
@@ -39,7 +39,7 @@ except ImportError:
     DEPS = False
 
 SECRET = "whsec_unittest"
-BASE = "https://shop.preview.emergentagent.com"
+BASE = "https://chat-it-automate--01quzkxh.preview.emergentagent.com"
 
 
 def signed(body, secret=SECRET, ts=None):

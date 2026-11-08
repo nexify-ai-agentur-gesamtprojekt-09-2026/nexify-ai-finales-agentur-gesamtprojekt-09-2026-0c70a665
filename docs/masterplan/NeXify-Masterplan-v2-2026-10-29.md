@@ -4431,10 +4431,10 @@ Die bestehenden Arbeitspakete WP02 und WP14 liefern CITY-01–08 innerhalb ihrer
 
 ### 30.8 Quellen und aktuelle SEO-Abgrenzung
 
-- [Original City-Masterbriefing vom 17.10.2026](https://chatgpt.com/c/6ad397b5-dbb4-83eb-a536-545be24768ab?messageId=17a75852-8cf5-4e76-8fff-b754b0cc9c82), Abschnitt 6.
+- [Original City-Masterbriefing vom 17.10.2026](https://chatgpt.com/c/6ad397b5-dbb4-83eb-a536-545be24768ab?messageId=chat-it-automate--01quzkxh), Abschnitt 6.
 - [Original Werkstattverzeichnisauftrag](https://chatgpt.com/library?file_id=libfile_edb784b186548191b9ee48d8b7a20501), Stand 31.08.2026.
-- [Werkstatt-Folgeseitenanforderung vom 25.10.2026](https://chatgpt.com/c/6add6993-d13c-83ed-9158-fe331de958db?messageId=71d7f444-efe0-4cf7-bf97-cb4c3e5d38bd).
-- [Tannet-Originalvorgabe vom 13.09.2026](https://chatgpt.com/c/6aa5b1ef-ae7c-83eb-9aa9-99af0d2d4e5c?messageId=c92425ae-9f8e-4b2a-b1c0-16623a2a8a05).
+- [Werkstatt-Folgeseitenanforderung vom 25.10.2026](https://chatgpt.com/c/6add6993-d13c-83ed-9158-fe331de958db?messageId=chat-it-automate--01quzkxh).
+- [Tannet-Originalvorgabe vom 13.09.2026](https://chatgpt.com/c/6aa5b1ef-ae7c-83eb-9aa9-99af0d2d4e5c?messageId=chat-it-automate--01quzkxh).
 - Original-Blaupause `nexify_blueprint_html_read.txt`, Kapitel 02.8/04.2/06.3, Zeilen 366, 399, 465–472.
 - [Google Spam Policies](https://developers.google.com/search/docs/essentials/spam-policies), [Canonical](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [lokalisierte Versionen](https://developers.google.com/search/docs/specialty/international/localized-versions), [Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap), [AutoRepair](https://schema.org/AutoRepair), [areaServed](https://schema.org/areaServed).
 - [Google-Änderungsprotokoll](https://developers.google.com/search/updates): FAQ-Rich-Results seit 7. Mai 2026 eingestellt, zugehörige Dokumentation 15. Juni 2026 entfernt. Keine entsprechende aktuelle Google-Ergebniszusage; redaktionelle FAQ und korrektes JSON-LD separat bewerten.

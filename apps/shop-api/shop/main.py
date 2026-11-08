@@ -12,6 +12,7 @@ from fastapi.responses import JSONResponse
 from . import auth, config
 from .db import db, ensure_indexes
 from . import mailer
+from . import nexify_api
 from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, requests_api, workshops_api
 
 NEXT_API = ("/api/agent-chat", "/api/agent-runtime-status", "/api/internal")
@@ -40,6 +41,7 @@ async def lifespan(app):
     await accounts_api.ensure_auth_indexes()
     await accounts_api.seed_accounts()
     await workshops_api.import_workshops()
+    await nexify_api.ensure_nexify_indexes()
     start_gateway()
     retry = asyncio.create_task(mailer.retry_loop())
     yield
@@ -54,7 +56,7 @@ app = FastAPI(title="TEILEKLAR Shop API", version="1.0", lifespan=lifespan, open
 @app.middleware("http")
 async def same_origin_writes(request: Request, call_next):
     origin = request.headers.get("origin")
-    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests"))
+    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests", "/api/portal", "/api/operator", "/api/oracle"))
     if writes and origin and origin.rstrip("/") != config.PUBLIC_ORIGIN and not request.url.path.startswith("/api/shop/webhooks/"):
         return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403)
     response = await call_next(request)
@@ -63,7 +65,7 @@ async def same_origin_writes(request: Request, call_next):
     return response
 
 
-for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api):
+for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api, nexify_api):
     app.include_router(module.router)
 
 

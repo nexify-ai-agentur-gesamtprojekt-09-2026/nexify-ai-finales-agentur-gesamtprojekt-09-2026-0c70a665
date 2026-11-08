@@ -13,7 +13,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 # Test configuration
-PREVIEW_URL = os.environ.get("PREVIEW_URL", "https://fresh-sync--3on01101.preview.emergentagent.com")
+PREVIEW_URL = os.environ.get("PREVIEW_URL", "https://chat-it-automate--01quzkxh.preview.emergentagent.com")
 OUTPUT_FILE = "/app/test_reports/media_byte_range_test.json"
 
 results = {

@@ -1622,7 +1622,7 @@
       },
       {
         "id": "SRC-CHAT-20261025-SERVER",
-        "locator": "https://chatgpt.com/c/6adda61b-5fa4-83ed-9263-f533e7ba63bf?messageId=5778686f-e806-4810-a402-917255d119fb",
+        "locator": "https://chatgpt.com/c/6adda61b-5fa4-83ed-9263-f533e7ba63bf?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25T10:03:00Z",
         "role": "user",
         "acquisition": "parent_verified_excerpt",
@@ -1631,7 +1631,7 @@
       },
       {
         "id": "SRC-CHAT-20261025-ONEAPP",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=6e4a1e2a-ed98-4613-8a90-bfb5b32702fe",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_precision": "date_only; clock unknown",
         "role": "user",
@@ -1671,7 +1671,7 @@
       },
       {
         "id": "SRC-PRODUCT-NO-LEGACY-BRAIN",
-        "locator": "https://chatgpt.com/c/6ad1e938-08f0-83ed-b763-25c0273cc018?messageId=f8fcac92-930f-4743-b7d8-ab575220557e",
+        "locator": "https://chatgpt.com/c/6ad1e938-08f0-83ed-b763-25c0273cc018?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-16",
         "source_time_reported": null,
         "role": "user",
@@ -1681,7 +1681,7 @@
       },
       {
         "id": "SRC-ASSISTANT-ARCH-PLAN",
-        "locator": "https://chatgpt.com/c/6ad1e938-08f0-83ed-b763-25c0273cc018?messageId=3cf49f15-a988-5b37-b1ed-93c481633d56",
+        "locator": "https://chatgpt.com/c/6ad1e938-08f0-83ed-b763-25c0273cc018?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-16",
         "source_time_reported": null,
         "role": "assistant",
@@ -1691,7 +1691,7 @@
       },
       {
         "id": "SRC-VOICE-REJECTION",
-        "locator": "https://chatgpt.com/c/6ade6c38-6ad0-83ed-b578-91d19eaafbc0?messageId=6947b47e-f5d5-4a8f-b276-b6684de6fe1b",
+        "locator": "https://chatgpt.com/c/6ade6c38-6ad0-83ed-b578-91d19eaafbc0?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": null,
         "role": "user",
@@ -1701,7 +1701,7 @@
       },
       {
         "id": "SRC-HERO-MOTION",
-        "locator": "https://chatgpt.com/c/6ade600f-a9a8-83eb-a46d-4da7b31ee0fa?messageId=c1aeb330-f388-4b86-b1ea-cc41e0992813",
+        "locator": "https://chatgpt.com/c/6ade600f-a9a8-83eb-a46d-4da7b31ee0fa?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": null,
         "role": "user",
@@ -1711,7 +1711,7 @@
       },
       {
         "id": "SRC-AIFLY-CHARACTER",
-        "locator": "https://chatgpt.com/c/6ade600f-a9a8-83eb-a46d-4da7b31ee0fa?messageId=7f42d96e-1899-47cd-b336-6d7c7af87737",
+        "locator": "https://chatgpt.com/c/6ade600f-a9a8-83eb-a46d-4da7b31ee0fa?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": null,
         "role": "user",
@@ -1721,7 +1721,7 @@
       },
       {
         "id": "SRC-PORTAL-PLACEMENT",
-        "locator": "https://chatgpt.com/c/6adda61b-5fa4-83ed-9263-f533e7ba63bf?messageId=43dd3e0b-1d70-4794-8d5e-a188301f40c9",
+        "locator": "https://chatgpt.com/c/6adda61b-5fa4-83ed-9263-f533e7ba63bf?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "09:41; timezone not provided",
         "role": "user",
@@ -1731,7 +1731,7 @@
       },
       {
         "id": "SRC-ORIGINAL-WORKSPACE",
-        "locator": "https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=5b5e8e2c-d292-4868-bd38-00f7cba1872f",
+        "locator": "https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-14",
         "source_time_reported": "18:07; timezone not provided",
         "role": "user",
@@ -1741,7 +1741,7 @@
       },
       {
         "id": "SRC-ITSAPLAN-CORE",
-        "locator": "https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=659415d5-4516-4c7b-9711-d729d08d37c0",
+        "locator": "https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-14",
         "source_time_reported": "18:56; timezone not provided",
         "role": "user",
@@ -1751,7 +1751,7 @@
       },
       {
         "id": "SRC-TOKENS-STRICT",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=d4c77268-a44f-48e1-b0af-050d0dc3afec",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "19:40; timezone not provided",
         "role": "user",
@@ -1761,7 +1761,7 @@
       },
       {
         "id": "SRC-CONTENT-FOUR-SERVERS",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=b8abbf8c-0de7-4393-9d6f-fc67b5dbdcd0",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "19:43; timezone not provided",
         "role": "user",
@@ -1771,7 +1771,7 @@
       },
       {
         "id": "SRC-NATIVE-REA-TOOLS",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=36eecef6-5393-4620-9bae-939c0d004807",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "14:18; timezone not provided",
         "role": "user",
@@ -1781,7 +1781,7 @@
       },
       {
         "id": "SRC-HERO-FREE-FIGURES",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=3999f1f3-ef74-4625-b84b-7e9ab9a259a5",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "12:21; timezone not provided",
         "role": "user",
@@ -1791,7 +1791,7 @@
       },
       {
         "id": "SRC-HERO-CLEAN-AUDIO",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=6072661b-6575-479f-865a-59b4016e0bda",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "12:23; timezone not provided",
         "role": "user",
@@ -1801,7 +1801,7 @@
       },
       {
         "id": "SRC-HERO-SPEECH-CRITIQUE",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=c3c0f52a-17b5-4863-a32e-90a7d81c11e3",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "12:25; timezone not provided",
         "role": "user",
@@ -1811,7 +1811,7 @@
       },
       {
         "id": "SRC-HERO-NO-PLAYER-FRAME",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=a8063632-63cf-46ca-a7e3-05d62130422c",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "12:31; timezone not provided",
         "role": "user",
@@ -1821,7 +1821,7 @@
       },
       {
         "id": "SRC-HERO-THREE-FIGURES-STORY",
-        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=657131c3-448a-489a-9edc-97c420c7d36e",
+        "locator": "https://chatgpt.com/c/6adde4fd-ee04-83ed-9564-7fd02aaca60f?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_reported": "12:33; timezone not provided",
         "role": "user",
@@ -1867,7 +1867,7 @@
       },
       {
         "id": "SRC-CHAT-PALETTE-20261025",
-        "locator": "https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=5905791c-7f44-42a8-99e8-cbe6c3e7c86d",
+        "locator": "https://chatgpt.com/c/6acfe3f2-7e00-83eb-a068-595b8f990de3?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-25",
         "source_time_precision": "date_only; exact time unknown",
         "role": "user",
@@ -1877,7 +1877,7 @@
       },
       {
         "id": "SRC-CHAT-AGENCY-20261018",
-        "locator": "https://chatgpt.com/c/6ad4f147-32d4-83eb-b1cd-905b40b3f6cf?messageId=4a09c0b2-716b-4687-942d-81092825ffe4",
+        "locator": "https://chatgpt.com/c/6ad4f147-32d4-83eb-b1cd-905b40b3f6cf?messageId=chat-it-automate--01quzkxh",
         "source_date": "2026-10-18",
         "source_time_precision": "date_only; exact time unknown",
         "role": "user",

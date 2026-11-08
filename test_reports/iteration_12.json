@@ -183,7 +183,7 @@
     "script_location": "/app/tests/chat_viewport_probe.py",
     "output_location": "/app/test_reports/chat_viewport_before.json",
     "execution_command": "python3 /app/tests/chat_viewport_probe.py",
-    "test_url": "https://fresh-sync--3on01101.preview.emergentagent.com",
+    "test_url": "https://chat-it-automate--01quzkxh.preview.emergentagent.com",
     "test_date": "2026-10-29T23:38:41",
     "reproducible": true,
     "notes": "Script can be re-run. WebKit will continue to crash until environment supports it."

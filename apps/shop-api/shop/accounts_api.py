@@ -54,9 +54,14 @@ async def ensure_auth_indexes(database=None):
 async def seed_accounts():
     for prefix, role in (("ADMIN", "admin"), ("TEST_CUSTOMER", "customer")):
         email, password = os.environ.get(prefix + "_EMAIL", "").lower(), os.environ.get(prefix + "_PASSWORD", "")
-        if email and password and not await db.users.find_one({"email": email}, {"_id": 1}):
-            await db.users.insert_one({"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": role.title(), "role": role,
+        if not (email and password):
+            continue
+        existing = await db.users.find_one({"email": email}, {"_id": 0, "password_hash": 1, "role": 1})
+        if not existing:
+            await db.users.insert_one({"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": "Pascal Courbois" if role == "admin" else "Testkunde", "role": role,
                                        "password_hash": hash_password(password), "created_at": now_iso()})
+        elif existing.get("role") != role or not check_password(password, existing.get("password_hash") or ""):
+            await db.users.update_one({"email": email}, {"$set": {"role": role, "password_hash": hash_password(password)}})
 
 
 async def start_session(response, user):

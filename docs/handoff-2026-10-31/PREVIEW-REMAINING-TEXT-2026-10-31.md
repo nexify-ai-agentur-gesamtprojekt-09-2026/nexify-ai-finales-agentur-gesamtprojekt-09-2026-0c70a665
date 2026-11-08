@@ -24,7 +24,7 @@ Lokal, **kein Push/Publish**. BTW und Backend bleiben offen; keine erfundenen Fr
   `make test` prüft diesen Adapter-Build **nicht** → grüner Test war nicht ausreichend (genau der gemeldete Effekt).
 - **Fix:** site-map-Hash in `presenter-sources.json` aktualisiert (nicht test-gebunden, kein Inhalt erfunden) →
   `generate-public-data` baut; Supervisor `frontend` neu gestartet → frischer Preview-Build (`.local/emergent-preview-dist`, 01:45).
-- **Preview-URL:** `https://goal-quest-134--9e2ug52x.preview.emergentagent.com/teileklar`
+- **Preview-URL:** `https://chat-it-automate--01quzkxh.preview.emergentagent.com/teileklar`
 - **Sichtbare Belege (frischer Render 01:46 UTC) – jetzt korrekt:**
   - Footer: „**TEILEKLAR — Na KLAR! · Ersatzteile · Fahrzeugzuordnung · Werkstatt · Partnerschaft**" (kein Agentur-Slogan mehr im Footer)
   - Hero: „… Sie suchen ein Ersatzteil … **Nennen Sie Ihr Fahrzeug und Ihr Anliegen. Online-Bestellungen sind derzeit nicht möglich.**" (Sie-Form)

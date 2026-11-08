@@ -5,3 +5,5 @@ httpx==0.28.1
 python-dotenv==1.2.2
 motor==3.7.1
 bcrypt==5.0.0
+# Higgsfield SDK (Seedance 2.5 text-to-video). Credentials via HF_KEY (server-side only).
+higgsfield-client==0.2.0

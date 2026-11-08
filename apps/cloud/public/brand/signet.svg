@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NeXify">
+  <defs>
+    <linearGradient id="nxg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#DBF68A"/>
+      <stop offset="0.55" stop-color="#C0EE38"/>
+      <stop offset="1" stop-color="#A6D820"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#111212"/>
+  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="15.25" fill="none" stroke="url(#nxg)" stroke-opacity="0.55" stroke-width="1.5"/>
+  <path d="M19 45 V19 h5.4 l15.2 17.6 V19 H45 v26 h-5.4 L24.4 27.4 V45 Z" fill="url(#nxg)"/>
+  <circle cx="45.5" cy="45.5" r="5.2" fill="#111212" stroke="url(#nxg)" stroke-width="2.4"/>
+  <line x1="49.1" y1="49.1" x2="53" y2="53" stroke="url(#nxg)" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
