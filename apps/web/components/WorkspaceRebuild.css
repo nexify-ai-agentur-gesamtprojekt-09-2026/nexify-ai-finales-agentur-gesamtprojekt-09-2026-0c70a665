@@ -356,3 +356,9 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .workspace-shell .aifly-panel .composer-area { padding: var(--stack-gap) var(--chat-gutter) calc(var(--chat-gutter) + env(safe-area-inset-bottom)); gap: var(--stack-gap); }
 .workspace-shell .aifly-panel .chat-return { padding: var(--space-3) var(--chat-gutter) calc(var(--space-3) + env(safe-area-inset-bottom)); }
 .workspace-shell .aifly-panel .action-option { margin-inline: 0; width: 100%; padding-inline: var(--space-3); }
+
+/* Oracle-Panel · Canvas-treue Angleichung (Identität, Composer-Label, Disclaimer) */
+.panel-identity-subtitle{display:inline-flex;align-items:center;gap:7px}
+.panel-identity-subtitle .identity-dot{width:6px;height:6px;border-radius:50%;background:#C0EE38;box-shadow:0 0 8px rgba(192,238,56,.7);flex:none}
+.composer-label{display:block;margin:0 0 8px;font:600 16px/1.3 'Plus Jakarta Sans',sans-serif;letter-spacing:-.02em;color:#F3F0EA}
+.composer-disclaimer{display:block;margin-top:10px;text-align:center;font-size:12.5px;color:#9A9D9C}
