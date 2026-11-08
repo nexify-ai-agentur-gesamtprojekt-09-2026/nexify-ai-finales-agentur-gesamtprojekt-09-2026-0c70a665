@@ -20,6 +20,15 @@ export const brandImages={
  integration:{src:'/media/higgsfield/hf-16-1920.webp',alt:'Markeninszenierung: Pascal und ein Gesprächspartner betrachten Pläne und ein technisches Modell auf einem Arbeitstisch'},
  finish:{src:'/media/higgsfield/hf-17-cutout-1920.webp',alt:'Pascal mit NeX und AIFly ORACLE, freigestellte Markenfiguren'}
 } as const;
+
+// Responsive Fassungen: 800/1280/1920 px liegen neben der Vollfassung.
+// Der Browser laedt nur die Groesse, die das Layout braucht (sizes an der <img>-Stelle).
+export function srcSetFor(src: string): string | undefined {
+  if (src.includes('cutout') || !src.endsWith('-1920.webp')) return undefined;
+  const base = src.slice(0, -'-1920.webp'.length);
+  return [800, 1280, 1920].map(w => `${base}-${w}.webp ${w}w`).join(', ');
+}
+
 export type BrandImage=typeof brandImages[keyof typeof brandImages];
 // Page mapping verified visually against every still (contact sheet, 2026-11-08):
 //  home          hf-02  Pascal presents paper website layouts, a model and a tablet at the Factory table
