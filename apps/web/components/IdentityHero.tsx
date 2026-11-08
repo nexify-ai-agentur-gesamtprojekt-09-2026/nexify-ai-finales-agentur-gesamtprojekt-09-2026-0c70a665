@@ -3,24 +3,18 @@ import interfaceCopy from "../../../config/public-interface-copy.json";
 const copy=interfaceCopy.hero;
 import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
-import PresenterVideo,{type PublicVideo} from './PresenterVideo';
-import AtelierFilm from './AtelierFilm';
-import welcome from '../../../config/hero-film.json';
-declare const __NEXIFY_OWNER_CINEMA_PREVIEW__:boolean;
-const ownerCinemaPreview=typeof __NEXIFY_OWNER_CINEMA_PREVIEW__!=='undefined'&&__NEXIFY_OWNER_CINEMA_PREVIEW__;
+import type {PublicVideo} from './PresenterVideo';
 import {ActionLink} from './ActionControl';
-import artwork from '../../../config/presenter-artwork.json';
 import './IdentityHero.css';
 
-// Current company copy and owner-private editorial cinema.
-// Native performance is edited with its corresponding audio; director acceptance remains separate.
+// Hero uses a single Higgsfield studio photograph (Pascal with NeX and AIFly ORACLE)
+// as the editorial still. No video is used on the hero.
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
  const headings={de:['Gute Websites','beginnen','bei Ihnen.'],nl:['Goede websites','beginnen','bij u.'],fr:['Un bon site','commence','par vous.'],en:['Good websites','start','with you.']};
  const subtitles={de:'Ihr Unternehmen verdient einen Auftritt, der wirkt.',nl:'Uw onderneming verdient een uitstraling die werkt.',fr:'Votre entreprise mérite une présence qui fait la différence.',en:'Your business deserves a presence that makes an impact.'};
- const cinematic=(ownerCinemaPreview||welcome.production_accepted===true)&&!_video;
- return <section className={"identity-hero"+(cinematic?" identity-hero-cinema":"")} aria-labelledby="home-headline" data-testid="identity-hero" data-media-state={_video?"verified-public-film":cinematic?"owner-private-edited-video":"editorial-still"} data-identity-layout="graphite-atelier">
+ return <section className="identity-hero" aria-labelledby="home-headline" data-testid="identity-hero" data-media-state="editorial-still" data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
    <div className="identity-copy" data-testid="hero-copy">
     <h1 id="home-headline" data-testid="hero-headline">{headings[locale].map((line,index)=><span key={line} className={index>0?"identity-title-accent":undefined}>{line}</span>)}</h1>
@@ -32,11 +26,9 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
     </div>
    </div>
    <div className="identity-media" data-testid="hero-media">
-    {_video?<PresenterVideo video={_video} locale={_video.locale} hero/>:cinematic?<AtelierFilm asset={{...welcome.film,title:t.scene}} locale={locale} hero/>:<figure className="identity-cast" role="img" aria-label={t.scene} data-testid="hero-trio-stage">
-     <img className="cast-pascal" src={artwork.images.pascal.src} alt="" width={artwork.images.pascal.width} height={artwork.images.pascal.height} loading="eager" fetchPriority="high" decoding="async"/>
-     <img className="cast-nex" src={artwork.images.nex.src} alt="" width={artwork.images.nex.width} height={artwork.images.nex.height} loading="eager" decoding="async"/>
-     <img className="cast-oracle" src={artwork.images.aifly.src} alt="" width={artwork.images.aifly.width} height={artwork.images.aifly.height} loading="eager" decoding="async"/>
-    </figure>}
+    <figure className="identity-hero-photo" role="img" aria-label={t.scene} data-testid="hero-photo">
+     <img src="/media/higgsfield/hf-02-lobby-walk.webp" alt="Pascal mit NeX und AIFly ORACLE im NeXify Atelier" width={2000} height={1080} loading="eager" fetchPriority="high" decoding="async"/>
+    </figure>
    </div>
   </div>
  </section>;
