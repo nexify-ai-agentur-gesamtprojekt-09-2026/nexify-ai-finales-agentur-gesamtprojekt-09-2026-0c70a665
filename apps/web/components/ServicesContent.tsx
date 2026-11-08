@@ -49,10 +49,17 @@ const HERO: Record<Loc, {eyebrow: string; h1: string; sub: string; lead: string;
   },
 };
 
-export default function ServicesContent({page}: {page: PublicPage}) {
+export default function ServicesContent({page, pages}: {page: PublicPage; pages: PublicPage[]}) {
   const {locale} = useUI() as {locale: Loc};
   const t = HERO[locale] || HERO.de;
   const sections = page.sections;
+  const wege = (page.actions || [])
+    .filter((a) => a.type === 'route' && a.target_id)
+    .map((a) => {
+      const target = pages.find((p) => p.id === a.target_id);
+      return target ? {href: target.path, label: a.label[locale]} : null;
+    })
+    .filter((w): w is {href: string; label: string} => w !== null);
 
   return (
     <div className="svc">
@@ -85,6 +92,13 @@ export default function ServicesContent({page}: {page: PublicPage}) {
       <section className="svc-detail" id="svc-detail" aria-label={t.detailEyebrow}>
         <div className="svc-head">
           <span className="svc-head__eyebrow">{t.detailEyebrow}</span>
+          {wege.length > 0 && (
+            <nav className="svc-wege" aria-label={t.detailEyebrow}>
+              {wege.map((w) => (
+                <SiteLink key={w.href} href={w.href}>{w.label}<span aria-hidden="true">→</span></SiteLink>
+              ))}
+            </nav>
+          )}
         </div>
         {sections.map((s) => (
           <article className="svc-card" key={s.id}>
