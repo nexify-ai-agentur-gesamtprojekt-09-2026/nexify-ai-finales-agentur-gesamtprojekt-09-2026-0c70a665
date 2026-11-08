@@ -59,6 +59,7 @@
 .tk-qty-label{display:grid;gap:var(--space-1);font-size:12px;color:var(--color-text-gedaempft)}
 .tk-line-total{font-weight:650;text-align:right}
 .tk-summary{display:grid;gap:var(--space-4);padding:var(--space-5);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);background:var(--color-graphit-700);position:sticky;top:24px}
+.tk-ship-hint{margin:0 0 8px;color:var(--color-atelier-champagne);font-size:var(--type-small-size)}
 .tk-totals{display:grid;grid-template-columns:1fr auto;gap:var(--space-2) var(--space-4);margin:0;font-size:14px}
 .tk-totals dd{margin:0;text-align:right}.tk-totals .is-total{font-size:18px;font-weight:650;color:var(--color-text-primaer);padding-top:var(--space-2);border-top:1px solid var(--color-linie-mittel)}
 .tk-cta{min-height:52px;border-radius:var(--radius-pille);padding:var(--space-3) var(--space-5);text-align:center}

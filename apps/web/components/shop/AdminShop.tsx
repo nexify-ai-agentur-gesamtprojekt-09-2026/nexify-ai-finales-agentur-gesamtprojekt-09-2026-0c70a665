@@ -4,7 +4,7 @@ import { SiteLink } from "../Router";
 import { api, dateTime, money, type ApiError } from "./api";
 import AdminOrders from "./AdminOrders";
 
-type Settings = { markup_percent: string; shipping_cents: number; vat_percent: string; updated_at?: string; revolut_mode: string; webhook_registered: boolean };
+type Settings = { markup_percent: string; shipping_cents: number; vat_percent: string; updated_at?: string; revolut_mode: string; webhook_registered: boolean; price_released?: boolean; price_release?: { markup_percent: string; released_at: string; released_by?: string } | null };
 type Run = { id: string; status: string; environment: string; started_at: string; finished_at?: string; error?: string; counts?: Record<string, number> };
 
 export default function AdminShop() {
@@ -28,6 +28,13 @@ export default function AdminShop() {
     setError("");
     try { await api("/api/admin/import", { method: "POST", json: { environment } }); await loadRuns(); } catch (e) { setError((e as ApiError).error === "import_running" ? "Ein Import läuft bereits." : "Import konnte nicht gestartet werden."); }
   }
+  async function releasePrices() {
+    // Releasing prices is the owner's commercial decision; the server only records it for an administrator.
+    if (!window.confirm(`Preise mit ${settings!.markup_percent} % Aufschlag für Kunden freigeben? Danach sind Warenkorb und Kasse aktiv.`)) return;
+    setError(""); setMessage("");
+    try { const s = await api<Settings>("/api/admin/price-release", { method: "POST", json: {} }); setSettings(s); setMessage("Preise freigegeben."); }
+    catch { setError("Preisfreigabe fehlgeschlagen."); }
+  }
   async function webhook() { try { await api("/api/admin/revolut/webhook", { method: "POST", json: {} }); setSettings({ ...settings!, webhook_registered: true }); } catch (e) { setError("Webhook-Registrierung fehlgeschlagen: " + (e as ApiError).error); } }
   return <div className="tk-admin" data-testid="admin-shop">
     <form className="tk-form" onSubmit={save} data-testid="admin-settings-form"><h2>Preise</h2>
@@ -36,6 +43,9 @@ export default function AdminShop() {
         <div className="tk-field"><label htmlFor="adm-ship">Versandkosten je Bestellung in €</label><input id="adm-ship" inputMode="decimal" value={shipping} onChange={e => setShipping(e.target.value)} data-testid="admin-shipping-input" /></div></div>
       <button className="primary-button" type="submit" data-testid="admin-settings-save">Speichern</button>
       {settings.updated_at && <p className="tk-meta">Zuletzt geändert: {dateTime(settings.updated_at)}</p>}</form>
+    <section className="tk-form" data-testid="admin-price-release"><h2>Preisfreigabe</h2>
+      <p data-testid="admin-price-state">{settings.price_released && settings.price_release ? `Freigegeben am ${dateTime(settings.price_release.released_at)} mit ${settings.price_release.markup_percent} % Aufschlag.` : "Noch nicht freigegeben: Kunden sehen keine Preise, Warenkorb und Kasse sind gesperrt."}</p>
+      <button className="outline-button" type="button" onClick={() => void releasePrices()} data-testid="admin-price-release-button">{settings.price_released ? "Mit aktuellem Aufschlag erneut freigeben" : "Preise freigeben"}</button></section>
     <AdminOrders />
     <section className="tk-form" data-testid="admin-import"><h2>BigBuy-Import „Auto &amp; Motorrad“</h2><p className="tk-meta" data-testid="admin-active-products">Aktive Produkte im Shop: {active}</p>
       <div className="tk-actions"><button className="primary-button" onClick={() => void start("ftp")} data-testid="admin-import-ftp">Sync über FTP (CSV)</button><button className="outline-button" onClick={() => void start("selection")} data-testid="admin-import-start">Katalogauswahl aktualisieren</button><button className="outline-button" onClick={() => void start("sandbox")} data-testid="admin-import-sandbox">Testimport (BigBuy-Sandbox)</button></div>

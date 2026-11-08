@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 from pymongo import ReturnDocument
 
-from . import auth, bigbuy_import, config, mail_templates, mailer, pricing, revolut
+from . import auth, bigbuy_import, config, fulfillment, mail_templates, mailer, pricing, revolut
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/admin")
@@ -92,7 +92,10 @@ async def list_orders(ident=Depends(auth.require_admin)):
         mails = [m async for m in db.outbox.find({"_id": {"$regex": "^order_(paid|status):[a-z:_]*" + o["_id"]}}, {"status": 1, "subject": 1, "attempts": 1})]
         orders.append({"id": o["_id"], "number": o["number"], "status": o["status"], "fulfilment": o.get("fulfilment") or ("bezahlt" if o["status"] == "bezahlt" else None),
                        "total_cents": o["total_cents"], "email": o["address"].get("email"), "created_at": o["created_at"], "paid_at": o.get("paid_at"),
-                       "tracking_number": o.get("tracking_number"), "carrier": o.get("carrier"), "mails": mails})
+                       "tracking_number": o.get("tracking_number"), "carrier": o.get("carrier"), "mails": mails,
+                       # Supplier hand-over state: an error is visible instead of silently leaving the order "bezahlt".
+                       "bigbuy_order_id": o.get("bigbuy_order_id"), "fulfillment_error": o.get("fulfillment_error"),
+                       "bigbuy_submit_pending": bool(o.get("bigbuy_submit_pending"))})
     return {"orders": orders}
 
 
@@ -116,6 +119,19 @@ async def set_order_status(order_id: str, body: StatusIn, ident=Depends(auth.req
         subject, html, text = mail_templates.order_status(changed, body.status)
         await mailer.enqueue("order_status:%s:%s" % (body.status, order_id), changed["address"].get("email", ""), subject, html, text)
     return {"id": order_id, "fulfilment": body.status}
+
+
+@router.post("/orders/{order_id}/tracking-refresh")
+async def refresh_tracking(order_id: str, ident=Depends(auth.require_admin)):
+    """Read-only supplier query: pulls BigBuy tracking once; the first number marks the order shipped and mails the customer once."""
+    order = await db.orders.find_one({"_id": order_id})
+    if not order:
+        raise HTTPException(404, {"error": "order_not_found"})
+    if not order.get("bigbuy_order_id"):
+        raise HTTPException(409, {"error": "not_submitted_to_supplier"})
+    await fulfillment.poll_and_update_tracking(order)
+    fresh = await db.orders.find_one({"_id": order_id}) or order
+    return {"id": order_id, "fulfilment": fresh.get("fulfilment"), "tracking_number": fresh.get("tracking_number"), "carrier": fresh.get("carrier")}
 
 
 @router.get("/outbox")

@@ -26,7 +26,7 @@ SHIP_MAX_CENTS = int(os.environ.get("SHIP_MAX_CENTS", "1500"))
 
 
 def revolut_mode():
-    mode = os.environ.get("REVOLUT_MODE", "live")
+    mode = os.environ.get("REVOLUT_MODE", "sandbox")
     if mode not in ("live", "sandbox"):
         raise RuntimeError("REVOLUT_MODE must be live or sandbox")
     return mode
