@@ -26,6 +26,9 @@ def load_modules():
     package.__path__ = [str(SHOP)]
     config = ModuleType(package.__name__ + '.config')
     config.bigbuy_key = lambda environment: 'offline-fixture-key'
+    # Inert shipping policy constants (real values come from the environment in production).
+    config.SHIPPING_FALLBACK_CENTS, config.SHIP_MAX_CENTS = 995, 1500
+    config.SHIP_SAMPLE_COUNTRY, config.SHIP_SAMPLE_POSTCODE = 'DE', '10115'
     database = ModuleType(package.__name__ + '.db')
     database.now_iso = lambda: '2026-11-02T00:00:00+00:00'
     def load(name, path):
@@ -305,7 +308,7 @@ class FakeDB:
 class Publication(unittest.IsolatedAsyncioTestCase):
     def catalog(self):
         row = {'id': 12, 'taxonomy': 5, 'sku': 'S12', 'wholesalePrice': '1.005'}
-        return ([5], {5: 'Auto & Motorrad'}, {12: (row, {'name': 'Fixture'}, [], 2, 5)}, [{'source': 'api'}])
+        return ([5], {5: 'Auto & Motorrad'}, {12: (row, {'name': 'Fixture'}, [], 2, 5, 0)}, [{'source': 'api'}])
 
     async def test_success_publishes_catalog_categories_receipt_and_done_together(self):
         db = FakeDB()

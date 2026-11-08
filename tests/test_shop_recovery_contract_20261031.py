@@ -49,8 +49,11 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         async def require_price_release():
             calls.append("price_gate")
             raise ValueError("unreleased")
+        async def payment_response(order):
+            return {"order_id": order["_id"]}
         namespace = {"owner_for": owner_for, "db": types.SimpleNamespace(orders=orders),
-                     "require_price_release": require_price_release, "replay": lambda order: {"order_id": order["_id"]}}
+                     "require_price_release": require_price_release, "payment_response": payment_response,
+                     "replay": lambda order: {"order_id": order["_id"]}}
         exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), "checkout_api.py", "exec"), namespace)
         create = namespace["create_order"]
         self.assertEqual(await create(None, None, None, "test-key"), {"order_id": "existing"})

@@ -13,7 +13,8 @@
  * Optionale, ausdrücklich gesetzte Server-Overrides (Policy: Provider-Routenwechsel
  * nur per expliziter Server-Konfiguration):
  *   CHAT_COMPLETIONS_URL   vollständige Endpunkt-URL, überschreibt ROUTER_URL-Ableitung
- *   CHAT_MODEL_ID          Modell-ID (Default = Policy-Modell unten)
+ *   CHAT_MODEL_ID          nur zulässig, wenn identisch mit dem Policy-Modell; jede Abweichung
+ *                          macht den Chat unverfügbar (kein stiller Ersatz).
  *
  * Keine npm-Abhängigkeit: nur fetch.
  */
@@ -27,9 +28,16 @@ export function chatLlmConfigured(): boolean {
   return Boolean((process.env.CHAT_COMPLETIONS_URL || process.env.ROUTER_URL) && process.env.ROUTER_KEY);
 }
 
+/** Das Policy-Modell ist fest; eine abweichende Server-Einstellung ist ein Fehler, kein Ersatz. */
 export function chatModelId(): string {
-  return process.env.CHAT_MODEL_ID || POLICY_MODEL_ID;
+  const configured = process.env.CHAT_MODEL_ID;
+  if (configured && configured !== POLICY_MODEL_ID) throw new Error('chat_llm_model_policy_violation');
+  return POLICY_MODEL_ID;
 }
+
+// Reasoning-Tokens zählen gegen das Antwortlimit: ein kleines Limit liefert leere oder abgeschnittene Antworten.
+const DEFAULT_MAX_TOKENS = 4096;
+const REQUEST_TIMEOUT_MS = 60_000;
 
 function completionsUrl(): string {
   const explicit = process.env.CHAT_COMPLETIONS_URL;
@@ -55,6 +63,9 @@ export async function* streamChatCompletion(
 ): AsyncGenerator<string, void, unknown> {
   if (!chatLlmConfigured()) throw new Error('chat_llm_not_configured');
   const key = process.env.ROUTER_KEY as string;
+  const model = chatModelId();
+  const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
+  const signal = opts.signal ? AbortSignal.any([opts.signal, timeout]) : timeout;
 
   const res = await fetch(completionsUrl(), {
     method: 'POST',
@@ -64,14 +75,14 @@ export async function* streamChatCompletion(
       Accept: 'text/event-stream',
     },
     body: JSON.stringify({
-      model: chatModelId(),
+      model,
       messages,
       stream: true,
-      max_tokens: opts.maxTokens ?? 1024,
+      max_tokens: opts.maxTokens ?? DEFAULT_MAX_TOKENS,
       reasoning: { effort: POLICY_REASONING_EFFORT },
     }),
     cache: 'no-store',
-    signal: opts.signal,
+    signal,
   });
 
   if (!res.ok || !res.body) {
@@ -82,6 +93,23 @@ export async function* streamChatCompletion(
   const reader = res.body.getReader();
   const decoder = new TextDecoder('utf-8');
   let buffer = '';
+  let produced = false;
+  let truncated = false;
+  let finished = false;
+  // Ein SSE-Datenpaket; liefert den Text oder null bei [DONE].
+  const parse = (raw: string): { done: boolean; text: string } => {
+    const line = raw.trim();
+    if (!line.startsWith('data:')) return { done: false, text: '' };
+    const payload = line.slice(5).trim();
+    if (payload === '[DONE]') return { done: true, text: '' };
+    try {
+      const json: unknown = JSON.parse(payload);
+      if (finishReason(json) === 'length') truncated = true;
+      return { done: false, text: extractDelta(json) };
+    } catch {
+      return { done: false, text: '' }; // Unvollständige/irrelevante Zeile überspringen.
+    }
+  };
   try {
     while (true) {
       const { value, done } = await reader.read();
@@ -89,23 +117,21 @@ export async function* streamChatCompletion(
       buffer += decoder.decode(value, { stream: true });
       let nl: number;
       while ((nl = buffer.indexOf('\n')) !== -1) {
-        const line = buffer.slice(0, nl).trim();
+        const parsed = parse(buffer.slice(0, nl));
         buffer = buffer.slice(nl + 1);
-        if (!line.startsWith('data:')) continue;
-        const payload = line.slice(5).trim();
-        if (payload === '[DONE]') return;
-        try {
-          const json: unknown = JSON.parse(payload);
-          const delta = extractDelta(json);
-          if (delta) yield delta;
-        } catch {
-          // Unvollständige/irrelevante Zeile überspringen.
-        }
+        if (parsed.text) { produced = true; yield parsed.text; }
+        if (parsed.done) { finished = true; break; }
       }
+      if (finished) break;
     }
+    // Rest ohne abschließenden Zeilenumbruch nicht verlieren.
+    const rest = finished ? { done: true, text: '' } : parse(buffer + decoder.decode());
+    if (rest.text) { produced = true; yield rest.text; }
   } finally {
     reader.releaseLock();
   }
+  // Das Limit wurde durch Denk-Tokens aufgebraucht, bevor Text entstand: ehrlich melden statt leer antworten.
+  if (!produced && truncated) throw new Error('chat_llm_token_budget_exhausted');
 }
 
 /** Nicht-gestreamte Variante: gesamten Text einsammeln. */
@@ -136,4 +162,12 @@ function extractDelta(json: unknown): string {
     if (typeof content === 'string') return content;
   }
   return '';
+}
+
+function finishReason(json: unknown): string {
+  if (!json || typeof json !== 'object') return '';
+  const choices = (json as { choices?: unknown }).choices;
+  if (!Array.isArray(choices) || !choices[0] || typeof choices[0] !== 'object') return '';
+  const reason = (choices[0] as { finish_reason?: unknown }).finish_reason;
+  return typeof reason === 'string' ? reason : '';
 }
