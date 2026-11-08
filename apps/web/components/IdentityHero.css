@@ -15,10 +15,12 @@
 .identity-primary-link:hover .identity-primary-arrow { transform: translateX(var(--space-2)); }
 .identity-primary-link:active { opacity: .8; }
 .identity-media { min-width: 0; }
-/* Single Higgsfield studio photograph as the hero still. */
-.identity-hero-photo { position: relative; margin: 0; width: 100%; border-radius: var(--radius-hero, 30px); overflow: hidden; isolation: isolate; box-shadow: var(--shadow-atelier-polish, 0 30px 80px -40px rgba(0,0,0,.75)); }
+/* Single Higgsfield studio photograph as the hero still.
+   Per brand concept the hero mirror does NOT receive the champagne glass edge
+   (that is reserved as a building block for all other images). */
+.identity-hero-photo { position: relative; margin: 0; width: 100%; border-radius: var(--radius-atelier, 30px); overflow: hidden; isolation: isolate; box-shadow: var(--shadow-atelier-polish, 0 30px 80px -40px rgba(0,0,0,.75)); }
 .identity-hero-photo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; }
-.identity-hero-photo::after { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 1px 0 var(--color-atelier-glass-edge, rgba(189,197,201,.16)), inset 0 0 0 1px color-mix(in srgb, var(--color-champagne, #C4B394) 18%, transparent); }
+.identity-hero-photo::after { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 1px 0 var(--color-atelier-glass-edge, rgba(189,197,201,.16)); }
 .identity-finale { --trio-shift: -14%; }
 @container identity-hero (max-width: 1100px) { .identity-scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); } }
 @container identity-hero (max-width: 820px) { .identity-scene { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: var(--space-6) var(--space-5); } .identity-copy h1 { font-size: var(--type-hero-mobile); max-width: 20ch; } .identity-media { max-width: var(--layout-media-max); width: 100%; justify-self: center; } }

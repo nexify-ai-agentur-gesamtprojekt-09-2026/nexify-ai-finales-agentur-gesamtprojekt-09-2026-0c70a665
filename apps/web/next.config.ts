@@ -16,6 +16,13 @@ const config: NextConfig = {
       ? [{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }]
       : [];
   },
+  async redirects() {
+    // Concept requirement (section 16.2): legacy auth links must resolve to the real routes.
+    return [
+      { source: "/login", destination: "/anmelden", permanent: true },
+      { source: "/signup", destination: "/registrieren", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: [
       { key: "X-Content-Type-Options", value: "nosniff" },

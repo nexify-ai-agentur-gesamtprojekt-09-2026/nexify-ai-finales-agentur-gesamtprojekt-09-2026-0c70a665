@@ -9,7 +9,10 @@ import copy from '../../../config/home-concept-copy.json';
 import './HomeConcept.css';
 
 // Distinct Higgsfield studio photographs per gallery card (Marke & Web, Systeme & KI, TEILEKLAR).
-const galleryArt=['/media/higgsfield/hf-04.webp','/media/higgsfield/hf-07.webp','/media/higgsfield/hf-08.webp'];
+const galleryArt=['/media/higgsfield/hf-04-studio-desk.webp','/media/higgsfield/hf-07.webp','/media/higgsfield/hf-08.webp'];
+// Distinct Higgsfield photographs per product (NeX2fly, Agentic AI, API, TEILEKLAR) – no repeats vs. gallery.
+const productArt=['/media/higgsfield/hf-06.webp','/media/higgsfield/hf-09.webp','/media/higgsfield/hf-03-loft-studio.webp','/media/higgsfield/hf-05-atrium-walk.webp'];
+const productAlt=['NeX2fly Suite – Arbeitsbereich mit Pascal, NeX und AIFly ORACLE','NeX Agentic AI – Pascal mit NeX und AIFly ORACLE bei der Umsetzung','NeXify API – technische Integration im Atelier','TEILEKLAR – Pascal mit NeX und AIFly ORACLE im Empfang'];
 const galleries=['/leistungen/websites','/leistungen/agenten-automatisierung','/teileklar'];
 const services=['/leistungen/websites','/leistungen/agenten-automatisierung','/loesungen'];
 const products=['/produkte/nex2fly','/produkte/one','/produkte/api','/teileklar'];
@@ -58,7 +61,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   </section>
   <section id="produktwelt" className="hc-section hc-container hc-product-story" aria-labelledby="hc-products-title">
    <header className="hc-section-heading"><div><span className="hc-kicker">{t.productsKicker}</span><h2 id="hc-products-title">{t.productsTitle}</h2></div><p>{t.productsBody}</p></header>
-   <div className="hc-products">{t.products.map(([title,body,action],i)=><SiteLink className="hc-product" key={title} href={products[i]}><div><h3>{title}</h3><p>{body}</p><span className="hc-text-link">{action}</span></div><span className="hc-product-arrow"><DetailArrow direction="out"/></span></SiteLink>)}</div>
+   <div className="hc-products">{t.products.map(([title,body,action],i)=><SiteLink className="hc-product" key={title} href={products[i]}><figure className="hc-product-art"><img src={productArt[i % productArt.length]} width="2000" height="1080" alt={productAlt[i % productAlt.length]} loading="lazy" decoding="async"/></figure><div><h3>{title}</h3><p>{body}</p><span className="hc-text-link">{action}</span></div><span className="hc-product-arrow"><DetailArrow direction="out"/></span></SiteLink>)}</div>
   </section>
   <section id="budget" className="hc-section hc-budget hc-container" aria-labelledby="hc-budget-title">
    <div className="hc-budget-story"><header className="hc-section-heading"><span className="hc-kicker">{t.budgetKicker}</span><h2 id="hc-budget-title">{t.budgetTitle}</h2><p>{t.budgetBody}</p><div className="hc-rate" aria-label={`${projectRates[locale].value} ${projectRates[locale].unit}`}><span>{projectRates[locale].eyebrow}</span><strong>{projectRates[locale].value}</strong><small>{projectRates[locale].unit}</small><p>{projectRates[locale].note}</p></div><SiteLink href="/preise-ablauf" className="hc-text-link">{t.budgetLink}<DetailArrow/></SiteLink></header>
@@ -67,6 +70,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   <section className="hc-section hc-finish hc-container" aria-labelledby="hc-finish-title">
    <span className="hc-kicker">{t.finishKicker}</span><h2 id="hc-finish-title">{t.finishTitle}</h2><p>{t.finishBody}</p>
    <div className="hc-finish-actions"><SiteLink href="/kontakt" className="hc-finish-primary">{t.finishCta}<DetailArrow/></SiteLink><SiteLink href="/leistungsumfang" className="hc-text-link">{t.finishAlternative}<DetailArrow/></SiteLink></div><small>{t.finishNote}</small>
+   <figure className="hc-finish-cast"><img src="/media/higgsfield/hf-17-cutout.webp" alt="Pascal mit NeX und AIFly ORACLE – bereit für Ihr Vorhaben" width="1588" height="864" loading="lazy" decoding="async"/></figure>
   </section>
  </div>;
 }

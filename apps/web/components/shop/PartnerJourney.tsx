@@ -28,7 +28,7 @@ export default function PartnerJourney() {
     <section className="tk-portal-preview">
       <div><span className="eyebrow">Geschütztes Partnerportal</span><h2>Ein Arbeitsplatz für den Werkstattalltag.</h2><p>Das Portal ist nach Anmeldung und bestätigter Partnerschaft erreichbar. Öffentliche Besucher sehen keine Betriebs-, Kunden- oder Abrechnungsdaten.</p></div>
       <div className="tk-portal-grid">{PORTAL.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}</div>
-      <div className="tk-actions"><SiteLink className="primary-button" href="/login">Partnerzugang</SiteLink><SiteLink className="outline-button" href="/teileklar/werkstatt">Werkstätten finden</SiteLink></div>
+      <div className="tk-actions"><SiteLink className="primary-button" href="/anmelden">Partnerzugang</SiteLink><SiteLink className="outline-button" href="/teileklar/werkstatt">Werkstätten finden</SiteLink></div>
     </section>
   </div>;
 }
