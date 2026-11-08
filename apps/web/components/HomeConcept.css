@@ -331,3 +331,10 @@
 .hl-cost-blocks h3{font:650 16px/1.25 var(--font-text);color:var(--color-text-primaer);margin-bottom:var(--space-2)}
 .hl-cost-blocks p{color:var(--color-text-tertiaer);font-size:14px;line-height:1.55}
 @media(max-width:900px){.hl-budget-grid{grid-template-columns:1fr}}
+/* produktwelt — Produkte (Design-Basis). 07.11.2026 Hermes. Nur Tokens. */
+.hl-products{display:grid;gap:var(--space-5)}
+.hl-product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:var(--space-4);margin:0;padding:0;list-style:none}
+.hl-product{display:grid;gap:var(--space-3);height:100%;padding:var(--space-5);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:var(--gradient-karte,var(--color-atelier-surface));box-shadow:var(--shadow-karte);transition:border-color 180ms ease}
+.hl-product:hover{border-color:var(--color-linie-stark)}
+.hl-product h3{font:650 19px/1.2 var(--font-text);color:var(--color-text-primaer)}
+.hl-product p{color:var(--color-text-tertiaer);font-size:14px;line-height:1.55;flex:1}

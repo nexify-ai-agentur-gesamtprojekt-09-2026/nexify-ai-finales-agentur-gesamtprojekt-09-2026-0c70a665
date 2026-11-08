@@ -15,6 +15,7 @@ function DetailArrow({direction='right'}:{direction?:'right'|'out'|'down'}){
 }
 
 const navTargets=['#vorhaben','/leistungen','/preise-ablauf','/preise-ablauf','/produkte/nex2fly'];
+const pwHrefs=['/produkte/nex2fly','/produkte','/produkte/api','https://teileklar.shop'];
 const avatars={pascal:'/media/atelier/presenters/pascal-lossless.webp',nex:'/media/atelier/presenters/nex-lossless.webp',oracle:'/media/atelier/presenters/oracle-lossless.webp'} as const;
 function openChat(){
  const launcher=document.querySelector<HTMLElement>('[data-testid="chat-launcher"]');
@@ -71,6 +72,10 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
     </article>
     <ul className="hl-cost-blocks">{v.bBlocks.map(([t,b],i)=><li key={i}><h3>{t}</h3><p>{b}</p></li>)}</ul>
    </div>
+  </section>
+  <section id="produktwelt" className="hc-section hc-container hl-products" aria-labelledby="hl-products-title" data-testid="home-produktwelt">
+   <header className="hc-section-heading"><div><span className="hc-kicker">{v.pwKicker}</span><h2 id="hl-products-title">{v.pwTitle}</h2></div><p>{v.pwLead}</p></header>
+   <ul className="hl-product-grid">{v.pwProducts.map(([name,desc,cta],i)=>{const href=pwHrefs[i];const inner=<><h3>{name}</h3><p>{desc}</p><span className="hl-way-cta">{cta}<DetailArrow direction="out"/></span></>;return <li key={name}>{href.startsWith('http')?<a className="hl-product" href={href} target="_blank" rel="noopener noreferrer">{inner}</a>:<SiteLink href={href} className="hl-product">{inner}</SiteLink>}</li>;})}</ul>
   </section>
   <section id="chat" className="hc-section hc-container hv-einstieg" aria-labelledby="hv-chat-title" data-testid="home-einstieg">
    <header className="hc-section-heading"><div><span className="hc-kicker">{v.cKicker}</span><h2 id="hv-chat-title">{v.cTitle}</h2></div><p>{v.cLead}</p></header>

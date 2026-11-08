@@ -319,6 +319,31 @@
           "Alles, was extern anfällt",
           "Hosting, Software, KI-Nutzung sowie Medien- und Werbebudget stehen als eigene Posten im Angebot."
         ]
+      ],
+      "pwKicker": "Mehr von NeXify",
+      "pwTitle": "Produkte, die Ihr Projekt ergänzen – wenn sie passen.",
+      "pwLead": "Neben Kundenprojekten entwickelt NeXify eigene Produkte für Wissen, Aufgaben, Integrationen und den Fahrzeugbereich. Wir setzen sie in Ihrem Projekt nur ein, wenn sie Ihnen tatsächlich weiterhelfen.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Ihr persönlicher oder geschäftlicher Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Wissen.",
+          "Privat & Business kennenlernen"
+        ],
+        [
+          "NeX Agentic AI",
+          "Aufgabenbezogene Assistenz und freigegebene Werkzeugarbeit, ergänzt durch AIFly ORACLE zur Koordination.",
+          "Agentenarbeit verstehen"
+        ],
+        [
+          "NeXify API",
+          "Der technische Integrationsweg für eigene Anwendungen. Umfang, Zugang und Betriebsbedingungen werden gesondert geklärt.",
+          "API-Konzept ansehen"
+        ],
+        [
+          "TEILEKLAR",
+          "Die eigenständige Welt für Fahrzeugteile, Werkstätten und passende Anfragen.",
+          "Zum Fahrzeug- und Teilebereich"
+        ]
       ]
     }
   },
@@ -641,6 +666,31 @@
         [
           "Alles wat extern bijkomt",
           "Hosting, software, AI-gebruik en media- en advertentiebudget staan als aparte posten in de offerte."
+        ]
+      ],
+      "pwKicker": "Meer van NeXify",
+      "pwTitle": "Producten die uw project aanvullen – als ze passen.",
+      "pwLead": "Naast klantprojecten ontwikkelt NeXify eigen producten voor kennis, taken, integraties en het voertuigdomein. We zetten ze in uw project alleen in als ze u echt verder helpen.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Uw persoonlijke of zakelijke werkruimte voor gesprekken, taken, documenten en kennis.",
+          "Privé & Business ontdekken"
+        ],
+        [
+          "NeX Agentic AI",
+          "Taakgerichte assistentie en vrijgegeven gereedschapswerk, aangevuld met AIFly ORACLE voor coördinatie.",
+          "Agentwerk begrijpen"
+        ],
+        [
+          "NeXify API",
+          "De technische integratieweg voor eigen toepassingen. Omvang, toegang en gebruiksvoorwaarden worden apart geregeld.",
+          "API-concept bekijken"
+        ],
+        [
+          "TEILEKLAR",
+          "De zelfstandige wereld voor voertuigonderdelen, werkplaatsen en passende aanvragen.",
+          "Naar het voertuig- en onderdelengebied"
         ]
       ]
     }
@@ -965,6 +1015,31 @@
           "Tout ce qui relève de l’externe",
           "L’hébergement, les logiciels, l’usage de l’IA ainsi que le budget média et publicitaire figurent comme postes distincts dans le devis."
         ]
+      ],
+      "pwKicker": "Plus de NeXify",
+      "pwTitle": "Des produits qui complètent votre projet – s’ils conviennent.",
+      "pwLead": "En plus des projets clients, NeXify développe ses propres produits pour la connaissance, les tâches, les intégrations et le domaine automobile. Nous ne les utilisons dans votre projet que s’ils vous aident réellement.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Votre espace de travail personnel ou professionnel pour les échanges, les tâches, les documents et le savoir.",
+          "Découvrir Privé & Business"
+        ],
+        [
+          "NeX Agentic AI",
+          "Une assistance liée aux tâches et un travail outillé autorisé, complétés par AIFly ORACLE pour la coordination.",
+          "Comprendre le travail des agents"
+        ],
+        [
+          "NeXify API",
+          "La voie d’intégration technique pour vos propres applications. Le périmètre, l’accès et les conditions d’exploitation sont clarifiés séparément.",
+          "Voir le concept d’API"
+        ],
+        [
+          "TEILEKLAR",
+          "L’univers indépendant des pièces automobiles, des garages et des demandes adaptées.",
+          "Vers l’espace véhicules et pièces"
+        ]
       ]
     }
   },
@@ -1287,6 +1362,31 @@
         [
           "Everything incurred externally",
           "Hosting, software, AI usage as well as media and advertising budget are listed as separate items in the quote."
+        ]
+      ],
+      "pwKicker": "More from NeXify",
+      "pwTitle": "Products that complement your project – when they fit.",
+      "pwLead": "Alongside client projects, NeXify develops its own products for knowledge, tasks, integrations and the automotive area. We use them in your project only when they genuinely help you.",
+      "pwProducts": [
+        [
+          "NeX2fly Suite",
+          "Your personal or business workspace for conversations, tasks, documents and knowledge.",
+          "Explore Private & Business"
+        ],
+        [
+          "NeX Agentic AI",
+          "Task-related assistance and approved tool work, complemented by AIFly ORACLE for coordination.",
+          "Understand agent work"
+        ],
+        [
+          "NeXify API",
+          "The technical integration path for your own applications. Scope, access and operating conditions are clarified separately.",
+          "View the API concept"
+        ],
+        [
+          "TEILEKLAR",
+          "The independent world for vehicle parts, workshops and matching enquiries.",
+          "To the vehicle and parts area"
         ]
       ]
     }
