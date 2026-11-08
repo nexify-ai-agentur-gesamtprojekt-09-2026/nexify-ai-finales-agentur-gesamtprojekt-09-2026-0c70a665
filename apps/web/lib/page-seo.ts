@@ -2,14 +2,14 @@ import type {Metadata} from 'next';
 import type {PublicPage} from './page-types';
 import type {Locale} from './i18n';
 import {pageFaq} from './page-faq';
-export const PUBLIC_ORIGIN='https://nexifyai.cloud';
+export const PUBLIC_ORIGIN='https://www.nexifyai.de';
 export const localeOf=(value:unknown):Locale=>typeof value==='string'&&['de','nl','fr','en'].includes(value)?value as Locale:'de';
 export const localizedUrl=(path:string,locale:Locale)=>PUBLIC_ORIGIN+path+(locale==='de'?'':'?lang='+locale);
 export function pageMetadata(page:PublicPage,locale:Locale):Metadata{
  const title=page.localizedTitle[locale]+' · '+(page.site_context==='teileklar'?'TEILEKLAR.shop':'NeXify AI');
  const languages:Record<string,string>={'x-default':localizedUrl(page.path,'de')};
  for(const code of ['de','nl','fr','en'] as Locale[])if(page.localizedTitle[code]&&page.localizedSummary[code]&&page.sections.every(s=>s.body[code]))languages[code]=localizedUrl(page.path,code);
- return {title,description:page.localizedSummary[locale],alternates:{canonical:localizedUrl(page.path,locale),languages},openGraph:{title,description:page.localizedSummary[locale],url:localizedUrl(page.path,locale),type:'website',locale},robots:{index:true,follow:true}};
+ return {title,description:page.localizedSummary[locale],alternates:{canonical:localizedUrl(page.path,locale)},openGraph:{title,description:page.localizedSummary[locale],url:localizedUrl(page.path,locale),type:'website',locale},robots:{index:false,follow:false}};
 }
 export function pageStructuredData(page:PublicPage,locale:Locale){
  const url=localizedUrl(page.path,locale),brand=page.site_context==='teileklar'?'TEILEKLAR.shop':'NeXify AI',faq=pageFaq(page,locale);
