@@ -22,3 +22,27 @@
    23,1 px hoch. Mindestflaeche 24 px, ohne Layoutsprung. */
 input[type=checkbox],input[type=radio]{min-width:24px;min-height:24px}
 [class*=breadcrumb] a,.breadcrumb a{display:inline-flex;align-items:center;min-height:24px}
+/* 08.11.2026 (WCAG 1.4.10 Reflow, gemessen bei 320 px):
+   Breadcrumb lief bei <=640 px auf nowrap und schob das Dokument auf 611 px;
+   die Datenschutz-Schaltflaeche im Fuss war 171 px breit in einem 120-px-Kasten. */
+@media (max-width: 640px) {
+  .home-concept .pc-breadcrumb { min-width: 0; max-width: 100%; }
+  .home-concept .pc-breadcrumb ol { flex-wrap: wrap !important; white-space: normal !important; overflow-x: visible !important; row-gap: var(--space-1); }
+  .home-concept .pc-breadcrumb li { max-width: 100%; min-width: 0; }
+  .home-concept .pc-breadcrumb a, .home-concept .pc-breadcrumb span { overflow-wrap: anywhere; }
+}
+.diagnostic-consent { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+.diagnostic-consent a, .diagnostic-consent button, .diagnostic-consent span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+/* 08.11.2026 (Reflow 320 px): .footer-link-groups stand auf zwei festen 120-px-Spalten;
+   "Datenschutzeinstellungen" braucht 171 px und schob das Dokument auf 347 px. */
+@media (max-width: 640px) {
+  /* Gleiche Spezifitaet wie PageConcept.css:108, das "overflow-wrap:normal" erzwingt. */
+  .workspace-shell .site-footer .footer-link-groups a {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .footer-link-groups nav { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+}
