@@ -56,6 +56,10 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
    </article>)}</div>
    <SiteLink href="#chat" className="hc-finish-primary hl-detail-cta">{v.ldCta}<DetailArrow/></SiteLink>
   </section>
+  <section id="zusammenarbeit" className="hc-section hc-container hl-process" aria-labelledby="hl-process-title" data-testid="home-zusammenarbeit">
+   <header className="hc-section-heading"><div><span className="hc-kicker">{v.zKicker}</span><h2 id="hl-process-title">{v.zTitle}</h2></div><p>{v.zLead}</p></header>
+   <ol className="hl-steps">{v.zSteps.map(([t,b],i)=><li key={i} className="hl-step"><span className="hl-step-no" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><div><h3>{t}</h3><p>{b}</p></div></li>)}</ol>
+  </section>
   <section id="chat" className="hc-section hc-container hv-einstieg" aria-labelledby="hv-chat-title" data-testid="home-einstieg">
    <header className="hc-section-heading"><div><span className="hc-kicker">{v.cKicker}</span><h2 id="hv-chat-title">{v.cTitle}</h2></div><p>{v.cLead}</p></header>
    <ul className="hv-paths">{v.paths.map(([no,title,body,href])=><li key={no}><SiteLink href={href} className="hv-path"><span className="hv-path-no" aria-hidden="true">{no}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{body}</p></SiteLink></li>)}</ul>
