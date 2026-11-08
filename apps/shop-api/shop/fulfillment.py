@@ -9,6 +9,7 @@ from .db import db, now_iso
 # One persisted field for the delivery state: orders.fulfilment (the admin view and the customer timeline read it).
 PAID = "bezahlt"
 SHIPPED = "versendet"
+DELIVERED = "zugestellt"
 
 
 async def submit_order(order):
@@ -62,7 +63,7 @@ async def submit_order(order):
 
 async def poll_and_update_tracking(order):
     """Pull BigBuy tracking; on the first tracking number mark the order shipped and mail the customer. Never raises."""
-    if not order or not order.get("bigbuy_order_id") or order.get("fulfilment") == SHIPPED:
+    if not order or not order.get("bigbuy_order_id") or order.get("fulfilment") in (SHIPPED, DELIVERED):
         return
     environment = order.get("source_environment") or "production"
     try:
@@ -73,7 +74,7 @@ async def poll_and_update_tracking(order):
     if not number:
         return
     changed = await db.orders.find_one_and_update(
-        {"_id": order["_id"], "fulfilment": {"$ne": SHIPPED}},
+        {"_id": order["_id"], "fulfilment": {"$nin": [SHIPPED, DELIVERED]}},
         {"$set": {"fulfilment": SHIPPED, "tracking_number": number,
                   "carrier": carrier or order.get("bigbuy_carrier", ""), "shipped_at": now_iso()}})
     if not changed:

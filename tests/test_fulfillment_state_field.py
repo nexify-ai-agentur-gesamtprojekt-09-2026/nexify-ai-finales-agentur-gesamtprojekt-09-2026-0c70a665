@@ -28,6 +28,12 @@ class FulfilmentStateField(unittest.TestCase):
         self.assertIn('/orders/{order_id}/tracking-refresh', admin)
         self.assertIn('fulfillment.poll_and_update_tracking', admin)
 
+    def test_tracking_refresh_never_moves_a_delivered_order_back_to_shipped(self):
+        source = (SHOP / 'fulfillment.py').read_text(encoding='utf-8')
+        self.assertIn('DELIVERED = "zugestellt"', source)
+        self.assertIn('in (SHIPPED, DELIVERED)', source)
+        self.assertIn('{"$nin": [SHIPPED, DELIVERED]}', source)
+
     def test_payment_mode_defaults_to_the_safe_one(self):
         config = (SHOP / 'config.py').read_text(encoding='utf-8')
         self.assertIn('os.environ.get("REVOLUT_MODE", "sandbox")', config)

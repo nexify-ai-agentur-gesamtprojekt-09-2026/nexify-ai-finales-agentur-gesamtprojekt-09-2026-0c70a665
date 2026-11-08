@@ -1630,3 +1630,5 @@ auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
   Lime nur am X im Logo. `/api/session` liefert im Dev-Betrieb 500 (Rewrite auf nicht laufendes Gateway :3003); der Chat fällt
   dokumentiert in den Orientierungsmodus. In Produktion hat `/api/session` weder Route noch Vercel-Rewrite – offen (Owner: Backend).
   Offen auf der Unternehmensseite: „NeXify AI FACTORY B.V.“ steht als Auftraggeber-Bezeichnung mit Vorbehalt; Rechtsform bleibt unbestätigt.
+- **Review-Fund (Vercel-Agent) behoben:** Der Tracking-Abruf konnte eine bereits „zugestellt“ markierte Bestellung wieder auf „versendet“ setzen;
+  Vorprüfung und Update schließen jetzt beide Endzustände aus (`fulfillment.py`), Test ergänzt.
