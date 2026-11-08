@@ -88,8 +88,8 @@ export default function ServicesContent({page}: {page: PublicPage}) {
         </div>
         {sections.map((s) => (
           <article className="svc-card" key={s.id}>
-            <strong className="svc-card__title">{s.heading[locale]}</strong>
-            <span className="svc-card__body">{s.body[locale]}</span>
+            <h2 className="svc-card__title">{s.heading[locale]}</h2>
+            <p className="svc-card__body">{s.body[locale]}</p>
           </article>
         ))}
       </section>

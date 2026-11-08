@@ -27,8 +27,8 @@
 .svc-head{max-width:720px;margin:16px 0 8px}
 .svc-head__eyebrow{display:block;margin-bottom:12px;color:var(--gold);font-size:15px;font-weight:500}
 .svc-card{border-radius:28px;padding:28px 32px;background:linear-gradient(145deg,rgba(189,197,201,.08),transparent 45%),var(--surface);box-shadow:inset 0 1px 0 rgba(189,197,201,.16),0 0 0 1px rgba(255,255,255,.04),0 24px 64px -32px rgba(0,0,0,.9)}
-.svc-card__title{display:block;font:500 24px/1.35 'Plus Jakarta Sans',sans-serif;letter-spacing:-.03em;color:var(--ink)}
-.svc-card__body{display:block;margin-top:12px;font-size:16px;line-height:1.65;color:var(--sub);max-width:62ch}
+.svc-card__title{display:block;margin:0;font:500 24px/1.35 'Plus Jakarta Sans',sans-serif;letter-spacing:-.03em;color:var(--ink)}
+.svc-card__body{display:block;margin:12px 0 0;font-size:16px;line-height:1.65;color:var(--sub);max-width:62ch}
 @media(prefers-reduced-motion:reduce){.svc *{animation:none!important}}
 @keyframes svcRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes svcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
