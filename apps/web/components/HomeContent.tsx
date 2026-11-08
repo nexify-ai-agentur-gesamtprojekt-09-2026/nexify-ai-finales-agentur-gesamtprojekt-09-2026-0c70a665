@@ -15,7 +15,7 @@ function DetailArrow({direction='right'}:{direction?:'right'|'out'|'down'}){
 }
 
 const navTargets=['#vorhaben','/leistungen','/preise-ablauf','/preise-ablauf','/produkte/nex2fly'];
-const pwHrefs=['/produkte/nex2fly','/produkte','/produkte/api','https://teileklar.shop'];
+const pwHrefs=['/produkte/nex2fly','/produkte/one','/produkte/api','https://teileklar.shop'];
 const avatars={pascal:'/media/atelier/presenters/pascal-lossless.webp',nex:'/media/atelier/presenters/nex-lossless.webp',oracle:'/media/atelier/presenters/oracle-lossless.webp'} as const;
 function openChat(){
  const launcher=document.querySelector<HTMLElement>('[data-testid="chat-launcher"]');
