@@ -25,6 +25,25 @@ LIVE_VERIFIED / BLOCKIERT. Eigene Prüfung ersetzt keinen unabhängigen Review.
   - Abnahme erst nach Deploy per Live-Preview-Screenshot (Desktop+Mobil); Build-grün
     allein zählt nicht.
 
+## Oracle-Chat (Supervisor-Auftrag 3 — Vorrang)
+
+- **Chat ist nicht „fehlend".** Ein globaler **NeX Agentic AIFly / ORACLE**-Chat
+  liegt in `apps/web/components/Workspace.tsx` (Shell um jede öffentliche Seite):
+  Launcher `data-testid=chat-launcher` (unten rechts), Desktop = angedocktes,
+  breiten­verstellbares Panel `aifly-panel`, Mobil (≤820px) = Vollbild-`dialog`
+  mit Backdrop/Fokusfalle/Escape. Backend ehrlich **zero-model**: `/api/session`,
+  `/api/chat` (Intent-Router), Kontakt/Termin-Fallback `PublicRequestFallback`;
+  ChatGPT-Pfad nur kapazitäts-gated auf der Startseite.
+- **Abnahme-Gate gebaut (LOCALLY_TESTED).** `apps/web/e2e/` (Playwright 1.63):
+  prüft jede `shared_chat_required`-Route (39) auf sichtbaren Chat-Einstieg in
+  Desktop 1440 + Mobil 390; Routen aus Config abgeleitet. Lokal gegen `next dev`
+  **80/80 grün**. Script `test:e2e`. Commit `2d750b7`.
+- **OFFEN (Auftrag-3-Lücken):** (1) Datenschutz derzeit passiver Hinweis statt
+  Vor-Eingabe-Consent-Gate mit getrennten Einwilligungen (Verlauf/Kontakt) +
+  Zahlungs-/ID-Filter — Consent-Text ist rechtlich (nur Entwurf, Pascal). (2)
+  Token-Abgleich Panel vs. Graphite/gedämpftes-Lime-Kanon (Konflikt a). (3)
+  Oracle-Figur Hut+Monokel-Prüfung (`OracleCompanion.tsx`).
+
 ## Werkstatt / SEO (Supervisor-Auftrag 1, Teile A–D)
 
 - **C) Werkstattdaten via OSM Overpass** — **BLOCKIERT (Netzwerk)**.
