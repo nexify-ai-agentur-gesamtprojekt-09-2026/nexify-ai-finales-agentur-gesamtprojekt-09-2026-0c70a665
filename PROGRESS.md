@@ -1625,3 +1625,8 @@ auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
 - **Hero:** Primär-/Sekundär-CTA sind echte Pill-Buttons (waren Textlinks); Primär mit ruhigem Lime-Verlauf.
 - **Ehrlich:** Vier weitere Teilprüfungen von `test_recorded_source_hashes_match_actual_bytes` (design-tokens.json, tokens.css/json/ts)
   sind rot, weil die historischen Nachweis-Pins die alten Token-Bytes festhalten – wie die übrigen ~40 Pins nicht umgebunden.
+- **Unterseiten-Hero:** Aktionen (`.pc-hero-actions`) wie die Startseite als Pill-Buttons (Primär ruhiges Lime, Sekundär Linienpill).
+- **Audit 38 öffentliche Seiten × 1440/390 px (Dev-Server):** je genau eine H1, kein horizontaler Überlauf, kein Reinweiß-Text,
+  Lime nur am X im Logo. `/api/session` liefert im Dev-Betrieb 500 (Rewrite auf nicht laufendes Gateway :3003); der Chat fällt
+  dokumentiert in den Orientierungsmodus. In Produktion hat `/api/session` weder Route noch Vercel-Rewrite – offen (Owner: Backend).
+  Offen auf der Unternehmensseite: „NeXify AI FACTORY B.V.“ steht als Auftraggeber-Bezeichnung mit Vorbehalt; Rechtsform bleibt unbestätigt.

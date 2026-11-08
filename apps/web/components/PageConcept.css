@@ -20,12 +20,14 @@
 .home-concept .pc-hero.is-text-only h1{max-width:24ch}
 .home-concept .pc-hero-lead{margin:0 0 var(--space-6);max-width:52ch;font-size:var(--type-body-size);line-height:var(--type-body-leading);color:var(--color-text-sekundaer)}
 .home-concept .pc-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4) var(--space-6)}
-.home-concept .pc-hero-actions .hc-text-link{margin-top:0;font-size:var(--type-body-size);padding-block:var(--space-2);border-bottom:1px solid var(--color-linie-stark)}
-.home-concept .pc-hero-actions .hc-text-link.is-primary{color:var(--color-marke-lime);font-weight:600;border-bottom-color:var(--color-marke-lime)}
+.home-concept .pc-hero-actions{gap:var(--space-4)}
+.home-concept .pc-hero-actions .hc-text-link{margin-top:0;justify-content:center;gap:var(--space-3);padding:var(--space-3) var(--space-5);border:var(--material-border) solid var(--color-linie-stark);border-radius:var(--radius-button);font-size:var(--type-body-size);font-weight:600;line-height:1.4;transition:opacity var(--motion-feedback)}
+.home-concept .pc-hero-actions .hc-text-link:hover{border-color:var(--color-atelier-champagne);color:var(--color-atelier-champagne)}
+.home-concept .pc-hero-actions .hc-text-link.is-primary{border-color:transparent;background:var(--gradient-button-primaer);color:var(--color-text-auf-lime);box-shadow:var(--shadow-button-primaer)}
 .home-concept .pc-hero-actions .hc-text-link.is-primary .hc-arrow{color:inherit}
-.home-concept .pc-hero-actions .hc-text-link.is-primary:hover{color:var(--color-marke-lime-hell)}
-.home-concept .pc-hero-actions button.hc-text-link{border:0;border-bottom:1px solid var(--color-linie-stark);background:none;padding-inline:0;min-height:var(--target-min);border-radius:0;box-shadow:none;font:inherit;font-size:var(--type-body-size);cursor:pointer}
-.home-concept .pc-hero-actions button.hc-text-link.is-primary{border-bottom-color:var(--color-marke-lime);font-weight:600}
+.home-concept .pc-hero-actions .hc-text-link.is-primary:hover{background:var(--color-marke-lime-hell);color:var(--color-text-auf-lime)}
+.home-concept .pc-hero-actions button.hc-text-link{min-height:var(--target-min);font:inherit;font-size:var(--type-body-size);font-weight:600;cursor:pointer}
+.home-concept .pc-hero-actions button.hc-text-link.is-primary{font-weight:600}
 .home-concept .pc-hero-media{position:relative;margin:0;width:100%;min-width:0;border-radius:var(--radius-home-media);box-shadow:var(--shadow-home-media);overflow:hidden;isolation:isolate;background:var(--color-atelier-canvas)}
 .home-concept .pc-hero-media img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 38%;border-radius:inherit}
 
