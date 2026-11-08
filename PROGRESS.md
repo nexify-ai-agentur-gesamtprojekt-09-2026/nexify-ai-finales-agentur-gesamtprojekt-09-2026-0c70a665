@@ -1612,3 +1612,16 @@ abweichenden Quellhashes sowie das nicht installierte `pymongo`. Die alte
 Exception-Evidenz verwirft zusätzlich den bewusst geänderten `main.tsx`-Stand;
 der neue SEO-Browserlauf ist separat aktuell gebunden. Keine Altbelege wurden
 auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
+
+## 2026-11-08 · Startseite: Logo, Grünton, Elfenbein, Überschriften, Hero-Buttons
+- **Ursache Grünton:** `apps/web/app/masterplan-tokens.css` (Mastervorgabe 29.10.) überschrieb die ruhigen Lime-Werte aus
+  `config/design-tokens.json` (Richtungswechsel 05.11.: „#C0EE38 war viel zu grell“) wieder mit dem grellen Lime. Overlay verweist
+  jetzt auf die Tokenquelle; Glows/Verläufe über `color-mix` statt Rohwerte.
+- **Neu in `config/design-tokens.json`:** `color.marke.limeSignal` (#C0EE38, nur das X im Logo) und `color.text.primaer` = Elfenbein
+  #F3F0EA statt Reinweiß; `tokens.css/json/ts` neu erzeugt.
+- **Logo:** Signet als Champagne/Steel-Maske (`/signet.svg` bleibt unverändert, Bytes sind in Inventaren gebunden), Wortmarke im
+  Champagne/Steel-Verlauf, nur das X in CI-Lime; Forced-Colors-Fallback. Kopf und Fuß.
+- **Überschriften:** Wortabstand gleicht die enge Laufweite (-.04em) aus (Wortlücken waren fast geschlossen).
+- **Hero:** Primär-/Sekundär-CTA sind echte Pill-Buttons (waren Textlinks); Primär mit ruhigem Lime-Verlauf.
+- **Ehrlich:** Vier weitere Teilprüfungen von `test_recorded_source_hashes_match_actual_bytes` (design-tokens.json, tokens.css/json/ts)
+  sind rot, weil die historischen Nachweis-Pins die alten Token-Bytes festhalten – wie die übrigen ~40 Pins nicht umgebunden.

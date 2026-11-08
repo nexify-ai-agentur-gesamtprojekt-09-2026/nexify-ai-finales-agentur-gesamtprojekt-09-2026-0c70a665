@@ -47,8 +47,9 @@
     },
     "text": {
       "primaer": {
-        "$value": "#FFFFFF",
-        "$type": "color"
+        "$value": "#F3F0EA",
+        "$type": "color",
+        "$description": "Elfenbein statt Reinweiß (Gesamtbeschreibung 08.11.2026, Farben); 17,1:1 auf graphit-900"
       },
       "sekundaer": {
         "$value": "#E3E6E3",
@@ -76,6 +77,11 @@
       "lime": {
         "$value": "#A8C76A",
         "$type": "color"
+      },
+      "limeSignal": {
+        "$value": "#C0EE38",
+        "$type": "color",
+        "$description": "CI-Lime als kleines Funktionssignal: das X im Logo und der Live-Punkt. Nie als Fläche oder Fließtext (Richtungswechsel 05.11.2026)."
       },
       "limeHell": {
         "$value": "#C7DA98",
@@ -399,8 +405,8 @@
     "border": "1px",
     "shadow": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.18), 8px 8px 24px rgba(0,0,0,.22), 16px 16px 48px rgba(0,0,0,.14)",
     "shadowRaised": "inset 1px 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.16), 4px 4px 12px rgba(0,0,0,.24), 8px 8px 24px rgba(0,0,0,.16)",
-    "sectionDivider": "linear-gradient(90deg, transparent, rgba(255,255,255,.025) 35%, rgba(192,238,56,.035) 55%, transparent)",
-    "sectionGlow": "radial-gradient(ellipse 45% 100% at 45% 0%, rgba(192,238,56,.012), transparent 100%)",
+    "sectionDivider": "linear-gradient(90deg, transparent, rgba(255,255,255,.025) 35%, color-mix(in srgb, var(--color-marke-lime) 4%, transparent) 55%, transparent)",
+    "sectionGlow": "radial-gradient(ellipse 45% 100% at 45% 0%, color-mix(in srgb, var(--color-marke-lime) 2%, transparent), transparent 100%)",
     "filmCurvature": "4% / 2%",
     "filmTurn": "-.5deg",
     "filmPerspective": "1800px"

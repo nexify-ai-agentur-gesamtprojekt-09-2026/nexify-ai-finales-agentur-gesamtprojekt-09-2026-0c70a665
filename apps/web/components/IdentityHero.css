@@ -8,9 +8,8 @@
 .identity-title-accent { color: var(--color-marke-lime); }
 .identity-body { font-size: clamp(17px, 1.2cqi, 28px); line-height: var(--type-body-leading); max-width: 40ch; margin: 0; color: var(--color-text-sekundaer); }
 .identity-links { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(16px, 1.6cqi, 36px); font-size: clamp(15px, 1cqi, 22px); }
-.identity-secondary-link { display: inline-flex; align-items: center; min-height: var(--layout-control-size); color: var(--color-text-sekundaer); text-decoration: underline; text-underline-offset: var(--space-1); }
-.identity-secondary-link:hover { color: var(--color-marke-lime); }
-.identity-primary-link { display: inline-flex; align-items: center; gap: var(--space-4); padding-block: var(--space-2); min-height: var(--layout-control-size); font-weight: 600; border-bottom: 1px solid var(--color-marke-lime); color: var(--color-marke-lime); }
+.identity-secondary-link { text-decoration: none; }
+.identity-primary-link { gap: var(--space-3); font-weight: 600; }
 .identity-primary-arrow { transition: transform var(--motion-feedback); }
 .identity-primary-link:hover .identity-primary-arrow { transform: translateX(var(--space-2)); }
 .identity-primary-link:active { opacity: .8; }
