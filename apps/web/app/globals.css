@@ -46,3 +46,5 @@ input[type=checkbox],input[type=radio]{min-width:24px;min-height:24px}
   }
   .footer-link-groups nav { min-width: 0; max-width: 100%; flex-wrap: wrap; }
 }
+/* 08.11.2026 (2.5.8): Filter-Checkboxen wurden per flex-basis auf 20 px gedrueckt. */
+input[type=checkbox], input[type=radio] { min-width: 24px; min-height: 24px; width: 24px; height: 24px; }
