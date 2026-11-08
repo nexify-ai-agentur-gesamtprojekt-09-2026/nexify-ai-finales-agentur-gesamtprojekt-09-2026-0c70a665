@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://nexifyai.cloud/sitemap.xml
+Sitemap: https://www.nexifyai.de/sitemap.xml

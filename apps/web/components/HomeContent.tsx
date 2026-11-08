@@ -16,7 +16,8 @@ function DetailArrow({direction='right'}:{direction?:'right'|'out'|'down'}){
 
 const navTargets=['#vorhaben','/leistungen','/preise-ablauf','/preise-ablauf','/produkte/nex2fly'];
 const pwHrefs=['/produkte/nex2fly','/produkte/one','/produkte/api','https://teileklar.shop'];
-const avatars={pascal:'/media/atelier/presenters/pascal-lossless.webp',nex:'/media/atelier/presenters/nex-lossless.webp',oracle:'/media/atelier/presenters/oracle-lossless.webp'} as const;
+// 08.11.2026: 56-px-Slot lud die Originale (631/474 KB). Jetzt 112-px-Varianten (2x), ~1-2 KB.
+const avatars={pascal:'/media/atelier/presenters/pascal-112.webp',nex:'/media/atelier/presenters/nex-112.webp',oracle:'/media/atelier/presenters/oracle-112.webp'} as const;
 function openChat(){
  const launcher=document.querySelector<HTMLElement>('[data-testid="chat-launcher"]');
  if(launcher){launcher.click();return;}

@@ -34,8 +34,8 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
    </div>
    <div className="identity-media" data-testid="hero-media">
     {_video?<PresenterVideo video={_video} locale={_video.locale} hero/>:cinematic?<AtelierFilm asset={{...welcome.film,title:t.scene}} locale={locale} hero/>:<figure className="identity-cast" role="img" aria-label={t.scene} data-testid="hero-trio-stage">
-     <img className="cast-pascal" src={artwork.images.pascal.src} srcSet={`${artwork.images.pascal.src.replace("-lossless.webp","-768.webp")} 768w, ${artwork.images.pascal.src} ${artwork.images.pascal.width}w`} sizes="(max-width: 900px) 66vw, 440px" alt="" width={artwork.images.pascal.width} height={artwork.images.pascal.height} loading="eager" fetchPriority="high" decoding="async"/>
-     <img className="cast-nex" src={artwork.images.nex.src} srcSet={`${artwork.images.nex.src.replace("-lossless.webp","-768.webp")} 768w, ${artwork.images.nex.src} ${artwork.images.nex.width}w`} sizes="(max-width: 900px) 46vw, 336px" alt="" width={artwork.images.nex.width} height={artwork.images.nex.height} loading="eager" decoding="async"/>
+     <img className="cast-pascal" src={artwork.images.pascal.variants[1].src} srcSet={artwork.images.pascal.variants.map(v=>`${v.src} ${v.width}w`).join(', ')} sizes="(max-width: 900px) 66vw, 380px" alt="" width={artwork.images.pascal.width} height={artwork.images.pascal.height} loading="eager" fetchPriority="high" decoding="async"/>
+     <img className="cast-nex" src={artwork.images.nex.variants[1].src} srcSet={artwork.images.nex.variants.map(v=>`${v.src} ${v.width}w`).join(', ')} sizes="(max-width: 900px) 46vw, 336px" alt="" width={artwork.images.nex.width} height={artwork.images.nex.height} loading="eager" decoding="async"/>
      <img className="cast-oracle" src={artwork.images.aifly.src} alt="" width={artwork.images.aifly.width} height={artwork.images.aifly.height} loading="eager" decoding="async"/>
     </figure>}
    </div>

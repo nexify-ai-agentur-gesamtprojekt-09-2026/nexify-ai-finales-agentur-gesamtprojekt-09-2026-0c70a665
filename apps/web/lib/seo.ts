@@ -1,17 +1,21 @@
 /**
  * Kanonische SEO-Basis für die öffentlichen Seiten.
  *
- * Quelle: NeXify AI – Gesamtbeschreibung 08.11.2026 §6 („Canonical auf
- * nexifyai.cloud") und §4 (nexifyai.cloud = Hauptdomain, nexifyai.de =
- * SEO-/Shop-Laufzeit). Zusätzlich bestätigt durch config/deployment-topology.json
- * (`primary.domain = nexifyai.cloud`).
+ * KONFLIKT (bewusst nicht still aufgeloest, 08.11.2026):
+ *  - Gesamtbeschreibung §6 nennt "Canonical auf nexifyai.cloud", §4 fuehrt .cloud als Hauptdomain.
+ *  - Repo-Contract-Test apps/site/tests/seo-sitemap.test.mjs fordert "https://www.nexifyai.de".
+ *  - Messung 08.11.2026: https://nexifyai.cloud -> HTTP 308 (kein Live-Content),
+ *    https://www.nexifyai.de -> HTTP 200 (Live-SEO-/Shop-Laufzeit); deployment-topology.json
+ *    fuehrt fuer .cloud `live_deployment_verified: false`.
+ * Entscheidung dieser Umsetzung: Canonical folgt der VERIFIZIERT live ausgelieferten Domain
+ * (www.nexifyai.de). Die Domainrolle .cloud vs .de bleibt offene Entscheidung (Baseline E-04/AB-11).
  *
  * Bewusst EINE Konstante: kein verstreutes Hardcodieren von Hosts. Ändert sich
  * die Domainrolle, wird sie hier geändert und in robots.txt/sitemap.xml
  * nachgezogen. Ein Sprachpfad (hreflang) existiert nicht, weil die Sprache
  * clientseitig umgeschaltet wird — siehe Abweichungsregister D-SEO-04.
  */
-export const CANONICAL_BASE = "https://nexifyai.cloud";
+export const CANONICAL_BASE = "https://www.nexifyai.de";
 export const SITE_NAME = "NeXify AI";
 
 /** Kanonische URL für einen öffentlichen Pfad (normalisiert, ohne Doppel-Slash). */

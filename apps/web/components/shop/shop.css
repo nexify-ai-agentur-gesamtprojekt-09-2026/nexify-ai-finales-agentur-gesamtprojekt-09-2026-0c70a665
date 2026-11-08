@@ -145,6 +145,10 @@
 .content-supplement>.tk-form,.content-supplement>.tk-notice,.content-supplement>.tk-legal,.content-supplement>.tk-home-entry,.content-supplement>section:not([class*="editorial"]){margin-inline:var(--content-gutter,var(--space-5));margin-block:var(--space-6)}
 .content-supplement>.tk-legal{padding-block:var(--space-2)}
 .tk-check a{display:inline;padding:0;margin:0;min-height:0;text-decoration:underline}
+/* 08.11.2026 — WCAG 2.2 SC 2.5.8: eigenstaendige Textlinks in .tk-actions waren 23,3 px hoch
+   (gemessen /anmelden, /registrieren mobil). Als Flex-Items sind sie blockifiziert, also
+   nicht durch die Inline-Ausnahme gedeckt: Mindesthoehe 24 px, ohne Layoutsprung. */
+.tk-actions>a{align-items:center;display:inline-flex;min-height:24px}
 .tk-shop{align-content:start;padding-bottom:calc(var(--space-8) + var(--space-7))}
 .tk-shop-nav{align-content:flex-start}
 .tk-tag{justify-self:start;width:fit-content}
@@ -204,3 +208,16 @@
  .tk-partner-steps,.tk-portal-grid{grid-template-columns:1fr}
  .tk-partner-intro,.tk-portal-preview{border-radius:var(--radius-leit);padding:22px}
 }
+
+/* 08.11.2026 — WCAG 2.5.8 (Minimum 24x24): Breadcrumb-Links und Kontrollkaestchen
+   erreichten nur 20 px Hoehe. Mindestgroesse auf 24 px, Trefferflaeche bleibt inline. */
+.shop-breadcrumb a,
+.breadcrumb a,
+[class*="breadcrumb"] a { min-height: 24px; display: inline-flex; align-items: center; }
+input[type="checkbox"],
+input[type="radio"] { min-width: 24px; min-height: 24px; }
+
+/* 08.11.2026 — WCAG 2.2 SC 2.5.8: Shop-Navigationslinks waren 21 px hoch (gemessen).
+   Mindesthoehe 24 px, Trefferflaeche als Inline-Flex ohne Layoutsprung. */
+.tk-shop-nav a,
+.tk-shop-nav button { min-height: 24px; display: inline-flex; align-items: center; }

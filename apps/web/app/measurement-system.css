@@ -54,11 +54,12 @@
   --lh-body:    1.55;
   --lh-loose:   1.72;
 
-  /* ------------ Kontrast-Hinweise (verifiziert gegen Hintergrund #0d100f) ------------ */
-  --contrast-primary:   19.5;   /* #FFFFFF  → AAA */
-  --contrast-secondary: 11.2;   /* #C8CCC9  → AAA */
-  --contrast-tertiary:  6.3;    /* #9CA29E  → AA+ */
-  --contrast-accent:    10.06;  /* #A8C76A auf #0d100f → AAA */
+  /* ------------ Kontrast-Hinweise (neu berechnet 08.11.2026 gegen Hintergrund #0d100f;
+     Werte sind Kommentar-Konstanten, keine Laufzeitwerte — Quelle bleiben die Tokens) ------------ */
+  --contrast-primary:   16.81;  /* #F3F0EA  → AAA */
+  --contrast-secondary: 14.37;  /* #E2DFD8  → AAA */
+  --contrast-tertiary:   9.22;  /* #AEB5BB  → AAA */
+  --contrast-accent:    14.14;  /* #C0EE38  → AAA (zentraler Lime-Token, Designsystem Graphite 08.11.2026) */
 
   /* ------------ Elevation (Material 3 angelehnt, 0–5) ------------ */
   --el-0: none;
@@ -125,7 +126,7 @@ img, video, picture, svg, canvas {
 img[data-fit="cover"], video[data-fit="cover"] { object-fit: cover; }
 img[data-fit="contain"], video[data-fit="contain"] { object-fit: contain; height: 100%; width: 100%; }
 
-/* Zielgrößen – alle interaktiven Elemente treffen 44 × 44 px */
+/* Zielgrößen – alle interaktiven Elemente treffen mindestens 48 × 48 px (--target-min) */
 button, [role="button"], a.button, a.identity-primary-link,
 input:not([type=hidden]):not([type=checkbox]):not([type=radio]),
 select, textarea, summary {
@@ -133,7 +134,8 @@ select, textarea, summary {
 }
 button, a.button { min-width: var(--target-min); }
 input[type="checkbox"], input[type="radio"] {
-  min-width: 20px; min-height: 20px;
+  /* WCAG 2.2 SC 2.5.8: Mindestflaeche 24x24 CSS-Pixel (08.11.2026, gemessen 20x20) */
+  min-width: 24px; min-height: 24px;
 }
 
 /* Fokus-Ring verlässlich sichtbar (WCAG 2.2 SC 2.4.11) */
