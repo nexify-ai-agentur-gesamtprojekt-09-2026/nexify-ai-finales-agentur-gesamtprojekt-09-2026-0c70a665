@@ -1635,3 +1635,7 @@ auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
 - **Buttons einheitlich:** Aktionen sind Pills (999 px, Vorgabe „Pill-Form für Buttons und Chips“) statt 12-px-Rechtecken; die Absenden-/Primärschaltflächen der
   NeXify-Seiten (Kontaktformular, Portal-Tore) tragen wie die Hero-Aktion das ruhige Lime, TEILEKLAR bleibt Champagne.
   Offen: Kontakt-Adresse `mail@nexifyai.cloud` bleibt, bis die Hauptdomain (.de/.cloud) vom Inhaber bestätigt ist.
+- **Sichtprüfung (1440 px, Dev-Server) Startseite, Leistungen, Kontakt, Preise & Ablauf, Impressum, NeX2fly, TEILEKLAR-Start:** gemeinsame Vorlage
+  stimmig (Logo, Elfenbein, Champagne-Überschriften, Pill-Aktionen, Bilder füllen ihre Rahmen). Inhaltlich offen, nicht erfunden:
+  „Preise & Ablauf“ nennt keinen konkreten Betrag (Tagessatz 449 € netto steht nur auf der Startseite) – Aufnahme braucht die Freigabe des Inhabers;
+  Impressum-Titel nennt „B.V.“ mit Vorbehalt (Rechtsform unbestätigt); Kontaktadresse `.cloud` vs. Hauptdomain `.de`. Mobile (390 px) nur Startseite gesichtet.
