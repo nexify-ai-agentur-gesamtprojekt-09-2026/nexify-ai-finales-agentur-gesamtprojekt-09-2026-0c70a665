@@ -1639,3 +1639,6 @@ auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
   stimmig (Logo, Elfenbein, Champagne-Überschriften, Pill-Aktionen, Bilder füllen ihre Rahmen). Inhaltlich offen, nicht erfunden:
   „Preise & Ablauf“ nennt keinen konkreten Betrag (Tagessatz 449 € netto steht nur auf der Startseite) – Aufnahme braucht die Freigabe des Inhabers;
   Impressum-Titel nennt „B.V.“ mit Vorbehalt (Rechtsform unbestätigt); Kontaktadresse `.cloud` vs. Hauptdomain `.de`. Mobile (390 px) nur Startseite gesichtet.
+- **CI-Log `repository` (99573db) ausgewertet:** Außer den bekannten historischen Hash-Pins (`test_recorded_source_hashes_match_actual_bytes` u. a.) scheiterten
+  drei Tests in `tests/test_contact_http.py`, die lokal ohne FastAPI übersprungen werden, in CI aber laufen: die Prüfumgebung kannte `RequestReceipt`
+  und `_requester` nicht. Behoben (Modellklasse übernommen, anonymer Requester eingesetzt); mit installiertem FastAPI lokal 3/3 grün.
