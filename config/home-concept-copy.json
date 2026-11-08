@@ -251,7 +251,32 @@
           "Geht es um Informationen und Zusammenarbeit, kann eine App oder ein Portal der passende Weg sein. Entscheidend ist, was Ihre Kunden oder Ihr Team dort tatsächlich erledigen sollen."
         ]
       ],
-      "lClose": "Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Wenn Sie unsicher sind, helfen wir Ihnen beim Einordnen."
+      "lClose": "Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Wenn Sie unsicher sind, helfen wir Ihnen beim Einordnen.",
+      "ldKicker": "Im Detail",
+      "ldTitle": "Die drei Wege, konkret erklärt.",
+      "ldLead": "Öffnen Sie den Weg, der zu Ihrem Vorhaben passt. Jeder Weg beschreibt, was enthalten ist, wie wir vorgehen und worauf Sie sich verlassen können.",
+      "ldCta": "Ihr Vorhaben mit uns besprechen",
+      "ldWays": [
+        {
+          "title": "Marke, Text & Website",
+          "summary": "Ein Auftritt, der zu Ihrem Unternehmen passt und sich auch so liest.",
+          "bullets": [
+            "Positionierung, Seitenstruktur und klare Texte für Ihr Angebot",
+            "Eigene Gestaltung, die für Ihr Unternehmen entwickelt wird",
+            "Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe"
+          ],
+          "note": "Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart.",
+          "cta": "Leistung und Umfang ansehen"
+        },
+        {
+          "title": "Systeme & Automatisierung",
+          "summary": "Wiederkehrende Aufgaben laufen geordnet ab, und Ihre gewohnte Arbeitsweise bleibt erhalten."
+        },
+        {
+          "title": "Sichtbarkeit & Kampagne",
+          "summary": "Damit die richtigen Menschen Sie finden und einen guten Grund haben, sich zu melden."
+        }
+      ]
     }
   },
   "nl": {
@@ -506,7 +531,32 @@
           "Gaat het om informatie en samenwerking, dan kan een app of portaal de juiste weg zijn. Bepalend is wat uw klanten of uw team daar daadwerkelijk moeten doen."
         ]
       ],
-      "lClose": "Kies het gebied dat bij uw project past. Weet u het niet zeker, dan helpen wij u met het inschatten."
+      "lClose": "Kies het gebied dat bij uw project past. Weet u het niet zeker, dan helpen wij u met het inschatten.",
+      "ldKicker": "In detail",
+      "ldTitle": "De drie wegen, concreet uitgelegd.",
+      "ldLead": "Open de weg die bij uw project past. Elke weg beschrijft wat inbegrepen is, hoe we te werk gaan en waarop u kunt vertrouwen.",
+      "ldCta": "Bespreek uw project met ons",
+      "ldWays": [
+        {
+          "title": "Merk, tekst & website",
+          "summary": "Een presentatie die bij uw bedrijf past — en zo ook leest.",
+          "bullets": [
+            "Positionering, paginastructuur en heldere teksten voor uw aanbod",
+            "Eigen vormgeving, ontwikkeld voor uw bedrijf",
+            "Responsieve uitvoering, een duidelijke aanvraagweg en persoonlijke overdracht"
+          ],
+          "note": "Voor een nieuwe start of relaunch. Omvang, talen en functies worden vóór de start vast afgesproken.",
+          "cta": "Dienst en omvang bekijken"
+        },
+        {
+          "title": "Systemen & automatisering",
+          "summary": "Terugkerende taken verlopen geordend, en uw vertrouwde werkwijze blijft behouden."
+        },
+        {
+          "title": "Zichtbaarheid & campagne",
+          "summary": "Zodat de juiste mensen u vinden en een goede reden hebben om contact op te nemen."
+        }
+      ]
     }
   },
   "fr": {
@@ -761,7 +811,32 @@
           "S’il s’agit d’information et de collaboration, une application ou un portail peut être la voie adaptée. L’essentiel est ce que vos clients ou votre équipe doivent réellement y accomplir."
         ]
       ],
-      "lClose": "Choisissez le domaine qui correspond à votre projet. En cas de doute, nous vous aidons à le situer."
+      "lClose": "Choisissez le domaine qui correspond à votre projet. En cas de doute, nous vous aidons à le situer.",
+      "ldKicker": "En détail",
+      "ldTitle": "Les trois voies, expliquées concrètement.",
+      "ldLead": "Ouvrez la voie qui correspond à votre projet. Chaque voie décrit ce qui est inclus, comment nous procédons et ce sur quoi vous pouvez compter.",
+      "ldCta": "Discuter de votre projet avec nous",
+      "ldWays": [
+        {
+          "title": "Marque, texte & site web",
+          "summary": "Une présence qui correspond à votre entreprise — et qui se lit ainsi.",
+          "bullets": [
+            "Positionnement, structure des pages et textes clairs pour votre offre",
+            "Un design propre, développé pour votre entreprise",
+            "Réalisation responsive, un chemin de demande clair et une remise personnelle"
+          ],
+          "note": "Pour une création ou une refonte. Le périmètre, les langues et les fonctionnalités sont fermement convenus avant le démarrage.",
+          "cta": "Voir la prestation et le périmètre"
+        },
+        {
+          "title": "Systèmes & automatisation",
+          "summary": "Les tâches récurrentes se déroulent de manière ordonnée, et votre façon de travailler habituelle est préservée."
+        },
+        {
+          "title": "Visibilité & campagne",
+          "summary": "Pour que les bonnes personnes vous trouvent et aient une bonne raison de vous contacter."
+        }
+      ]
     }
   },
   "en": {
@@ -1016,7 +1091,32 @@
           "When it is about information and collaboration, an app or a portal can be the right path. What matters is what your customers or your team should actually get done there."
         ]
       ],
-      "lClose": "Choose the area that fits your project. If you are unsure, we will help you place it."
+      "lClose": "Choose the area that fits your project. If you are unsure, we will help you place it.",
+      "ldKicker": "In detail",
+      "ldTitle": "The three paths, explained concretely.",
+      "ldLead": "Open the path that fits your project. Each path describes what is included, how we proceed and what you can rely on.",
+      "ldCta": "Discuss your project with us",
+      "ldWays": [
+        {
+          "title": "Brand, copy & website",
+          "summary": "A presence that fits your company — and reads that way too.",
+          "bullets": [
+            "Positioning, page structure and clear copy for your offering",
+            "Bespoke design developed for your company",
+            "Responsive build, a clear enquiry path and personal handover"
+          ],
+          "note": "For a new launch or relaunch. Scope, languages and features are firmly agreed before the start.",
+          "cta": "View service and scope"
+        },
+        {
+          "title": "Systems & automation",
+          "summary": "Recurring tasks run in an orderly way, and your familiar way of working stays intact."
+        },
+        {
+          "title": "Visibility & campaign",
+          "summary": "So the right people find you and have a good reason to get in touch."
+        }
+      ]
     }
   }
 }

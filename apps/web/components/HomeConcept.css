@@ -299,3 +299,13 @@
 .hl-choice-card p{color:var(--color-text-tertiaer);font-size:var(--font-size-body,15px);line-height:var(--leading-body,1.6)}
 .hl-close{color:var(--color-text-sekundaer);font-size:var(--font-size-body,15px);max-width:var(--measure-body,60ch)}
 @media(max-width:900px){.hl-choices{grid-template-columns:1fr}}
+/* leistungen-detail — Die drei Wege (Design-Basis). 07.11.2026 Hermes. Nur Tokens. */
+.hl-detail{display:grid;gap:var(--space-5)}
+.hl-ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:var(--space-4);align-items:start}
+.hl-way{display:grid;gap:var(--space-3);padding:var(--space-5);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:var(--gradient-karte,var(--color-atelier-surface));box-shadow:var(--shadow-karte)}
+.hl-way h3{font:650 20px/1.2 var(--font-text);color:var(--color-text-primaer)}
+.hl-way-sum{color:var(--color-text-sekundaer);font-size:var(--font-size-body,15px);line-height:var(--leading-body,1.6)}
+.hl-way-list{margin:0;padding-left:var(--space-4);display:grid;gap:var(--space-2);color:var(--color-text-tertiaer);font-size:14px;line-height:1.55}
+.hl-way-note{color:var(--color-text-gedaempft);font-size:13px;line-height:1.55;border-left:2px solid var(--color-marke-lime);padding-left:var(--space-3)}
+.hl-way-cta{display:inline-flex;align-items:center;gap:8px;color:var(--color-marke-lime);font-size:13px;font-weight:600}
+.hl-detail-cta{justify-self:start}

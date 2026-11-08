@@ -46,6 +46,16 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
    </li>)}</ol>
    <p className="hl-close">{v.lClose}</p>
   </section>
+  <section id="leistungen-detail" className="hc-section hc-container hl-detail" aria-labelledby="hl-detail-title" data-testid="home-leistungen-detail">
+   <header className="hc-section-heading"><div><span className="hc-kicker">{v.ldKicker}</span><h2 id="hl-detail-title">{v.ldTitle}</h2></div><p>{v.ldLead}</p></header>
+   <div className="hl-ways">{(v.ldWays as Array<{title:string;summary:string;bullets?:string[];note?:string;cta?:string}>).map((w,i)=><article key={i} className="hl-way">
+    <h3>{w.title}</h3><p className="hl-way-sum">{w.summary}</p>
+    {w.bullets&&<ul className="hl-way-list">{w.bullets.map((b,bi)=><li key={bi}>{b}</li>)}</ul>}
+    {w.note&&<p className="hl-way-note">{w.note}</p>}
+    {w.cta&&<SiteLink href="/leistungen" className="hl-way-cta">{w.cta}<DetailArrow direction="out"/></SiteLink>}
+   </article>)}</div>
+   <SiteLink href="#chat" className="hc-finish-primary hl-detail-cta">{v.ldCta}<DetailArrow/></SiteLink>
+  </section>
   <section id="chat" className="hc-section hc-container hv-einstieg" aria-labelledby="hv-chat-title" data-testid="home-einstieg">
    <header className="hc-section-heading"><div><span className="hc-kicker">{v.cKicker}</span><h2 id="hv-chat-title">{v.cTitle}</h2></div><p>{v.cLead}</p></header>
    <ul className="hv-paths">{v.paths.map(([no,title,body,href])=><li key={no}><SiteLink href={href} className="hv-path"><span className="hv-path-no" aria-hidden="true">{no}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{body}</p></SiteLink></li>)}</ul>
