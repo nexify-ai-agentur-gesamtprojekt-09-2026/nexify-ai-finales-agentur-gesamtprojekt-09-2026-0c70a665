@@ -65,3 +65,6 @@ apps/shop-api/data/
 
 # Sites static publication output
 /dist/
+
+# anchor-memory plugin session state (local tooling artifact, not project source)
+.anchor/
