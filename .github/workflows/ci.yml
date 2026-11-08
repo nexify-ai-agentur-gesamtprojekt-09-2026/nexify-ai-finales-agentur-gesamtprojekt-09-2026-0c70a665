@@ -106,6 +106,7 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm test:agent
       - run: pnpm typecheck:agent
+      - run: node apps/site/scripts/generate-public-data.mjs
       - run: pnpm --filter @nexify/site test
       - run: pnpm --filter @nexify/site typecheck
       - run: pnpm --filter @nexify/site build

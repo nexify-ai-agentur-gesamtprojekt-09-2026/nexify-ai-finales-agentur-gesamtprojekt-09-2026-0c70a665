@@ -15,7 +15,7 @@ function harness(filename,api=()=>Promise.reject(new Error('Unexpected API call'
  const mocks={react,'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'../Router':{SiteLink:'link',useSiteNavigate:()=>()=>{}},'./api':{api,CART_EVENT:'teileklar-cart-changed'},'./ProductCard':{ProductCard:'product-card',useShopCopy},'./CatalogView':{__esModule:true,default:'catalog',SearchBar:'search'},'./CategoryList':{__esModule:true,default:'categories'},'./ProductDetail':{__esModule:true,default:'product-detail'},'./CartView':{__esModule:true,default:'cart-view'},'./Checkout':{__esModule:true,default:'checkout'},'./WorkshopFinder':{__esModule:true,default:'workshop-finder'},'./WorkshopDetail':{__esModule:true,default:'workshop-detail'},'./shop.css':{}};
  const source=readFileSync(new URL(filename,componentRoot),'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
- const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,require(name){if(!(name in mocks))throw new Error('Unmocked import '+name);return mocks[name];},AbortController,URLSearchParams,console},{filename});
+ const mod={exports:{}};vm.runInNewContext(compiled,{module:mod,exports:mod.exports,require(name){if(/\.css$/.test(name))return {};if(!(name in mocks))throw new Error('Unmocked import '+name);return mocks[name];},AbortController,URLSearchParams,console},{filename});
  return {exports:mod.exports,render(props={}){cursor=0;rendered=mod.exports.default(props);return rendered;},flush(){effects.forEach((e,i)=>{if(e.pending){cleanups[i]?.();e.pending=false;cleanups[i]=e.effect();}});},unmount(){cleanups.forEach(cleanup=>cleanup?.());},source};
 }
 function deferred(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return {promise,resolve,reject};}
@@ -48,7 +48,7 @@ test('public renderer uses real catalogue, transactional and workshop components
  assert.match(text(h.render({pageId:'tk-product',pathname:'/teileklar/produkt',search:''})),/Artikelsuche/);
 });
 test('catalogue ignores old responses and aborts requests on query change/unmount',async()=>{
- const calls=[];const h=harness('CatalogView.tsx',(url,init)=>{const d=deferred();calls.push({url,init,...d});return d.promise;});
+ const calls=[];const h=harness('CatalogView.tsx',(url,init)=>{const d=deferred();if(String(url).includes('/api/shop/categories'))return Promise.resolve({categories:[]});calls.push({url,init,...d});return d.promise;});
  h.render({q:'alt',base:'/teileklar/suche'});h.flush();
  h.render({q:'neu',base:'/teileklar/suche'});h.flush();assert.equal(calls[0].init.signal.aborted,true);
  calls[1].resolve(catalog('new'));await tick();calls[0].resolve(catalog('old'));await tick();
@@ -56,8 +56,8 @@ test('catalogue ignores old responses and aborts requests on query change/unmoun
  h.unmount();assert.equal(calls[1].init.signal.aborted,true);
 });
 test('503 is an error, successful empty catalogue makes no progress claim',async()=>{
- const h=harness('CatalogView.tsx',()=>Promise.reject({status:503,error:'db_unavailable'}));h.render({base:'/teileklar/shop'});h.flush();await tick();const error=h.render({base:'/teileklar/shop'});assert.equal(error.props.role,'alert');assert.equal(error.props['data-testid'],'catalog-error');assert.doesNotMatch(text(error),/Keine Artikel/);
- const e=harness('CatalogView.tsx',()=>Promise.resolve({items:[],total:0,page:1,pages:0}));e.render({base:'/teileklar/shop'});e.flush();await tick();assert.equal(e.render({base:'/teileklar/shop'}).props['data-testid'],'catalog-empty');assert.doesNotMatch(text(e.render({base:'/teileklar/shop'})),/aufgebaut|bald|bestellen/i);
+ const h=harness('CatalogView.tsx',()=>Promise.reject({status:503,error:'db_unavailable'}));h.render({base:'/teileklar/shop'});h.flush();await tick();const error=children(h.render({base:'/teileklar/shop'})).find(n=>n.props?.['data-testid']==='catalog-error');assert.ok(error,'503 must render the error state');assert.equal(error.props.role,'alert');assert.doesNotMatch(text(error),/Keine Artikel/);
+ const e=harness('CatalogView.tsx',()=>Promise.resolve({items:[],total:0,page:1,pages:0}));e.render({base:'/teileklar/shop'});e.flush();await tick();assert.ok(children(e.render({base:'/teileklar/shop'})).some(n=>n.props?.['data-testid']==='catalog-empty'),'empty catalogue must render the empty state');assert.doesNotMatch(text(e.render({base:'/teileklar/shop'})),/aufgebaut|bald|bestellen/i);
 });
 test('category errors are distinct from empty data and unmount aborts stale loads',async()=>{
  const d=deferred();let signal;const h=harness('CategoryList.tsx',(_url,init)=>{signal=init.signal;return d.promise;});h.render();h.flush();h.unmount();assert.equal(signal.aborted,true);d.resolve({categories:[{id:1,name:'late',count:1}]});await tick();assert.match(text(h.render()),/geladen/);
