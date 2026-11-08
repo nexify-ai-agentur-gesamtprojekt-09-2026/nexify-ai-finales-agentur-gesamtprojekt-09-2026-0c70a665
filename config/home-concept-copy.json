@@ -297,6 +297,28 @@
           "Wir prüfen, übergeben und bleiben erreichbar.",
           "Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und Weiterentwicklung können Sie passend ergänzen."
         ]
+      ],
+      "bKicker": "Budget mit nachvollziehbarer Grundlage",
+      "bTitle": "Hochwertige Arbeit zu einem Preis, den Sie vorher kennen.",
+      "bLead": "Bei uns gibt es keine unklaren Agenturpakete. Wir rechnen mit einem festen Tagessatz. Vor dem Start erhalten Sie einen klar beschriebenen Umfang und entscheiden selbst, was jetzt umgesetzt wird und was später kommt.",
+      "bRateLabel": "Klare Kalkulationsbasis",
+      "bRate": "449 €",
+      "bRateUnit": "netto je Projekttag",
+      "bRateNote": "Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.",
+      "bRateCta": "Mehr zu Preisen und Zusammenarbeit",
+      "bBlocks": [
+        [
+          "Alles, was wir entwickeln",
+          "Konzept, Text, Design und technische Umsetzung werden im Angebot einem konkreten Ergebnis zugeordnet."
+        ],
+        [
+          "Alles, was danach bleibt",
+          "Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart."
+        ],
+        [
+          "Alles, was extern anfällt",
+          "Hosting, Software, KI-Nutzung sowie Medien- und Werbebudget stehen als eigene Posten im Angebot."
+        ]
       ]
     }
   },
@@ -597,6 +619,28 @@
         [
           "We controleren, dragen over en blijven bereikbaar.",
           "Het afgesproken resultaat wordt gecontroleerd en navolgbaar overgedragen. Onderhoud en doorontwikkeling kunt u passend aanvullen."
+        ]
+      ],
+      "bKicker": "Een begroting met een inzichtelijke basis",
+      "bTitle": "Hoogwaardig werk tegen een prijs die u vooraf kent.",
+      "bLead": "Bij ons zijn er geen onduidelijke bureaupakketten. We rekenen met een vast dagtarief. Vóór de start krijgt u een duidelijk beschreven omvang en beslist u zelf wat nu wordt uitgevoerd en wat later komt.",
+      "bRateLabel": "Duidelijke rekenbasis",
+      "bRate": "449 €",
+      "bRateUnit": "netto per projectdag",
+      "bRateNote": "Concept, tekst, ontwerp en technische uitvoering worden volgens de afgesproken omvang gepland. Externe kosten tonen we apart.",
+      "bRateCta": "Meer over prijzen en samenwerking",
+      "bBlocks": [
+        [
+          "Alles wat we ontwikkelen",
+          "Concept, tekst, ontwerp en technische uitvoering worden in de offerte aan een concreet resultaat toegewezen."
+        ],
+        [
+          "Alles wat daarna blijft",
+          "Onderhoud, doorontwikkeling en persoonlijke ondersteuning worden als eigen, navolgbaar onderdeel afgesproken."
+        ],
+        [
+          "Alles wat extern bijkomt",
+          "Hosting, software, AI-gebruik en media- en advertentiebudget staan als aparte posten in de offerte."
         ]
       ]
     }
@@ -899,6 +943,28 @@
           "Nous vérifions, remettons et restons joignables.",
           "Le résultat convenu est vérifié et remis de façon traçable. La maintenance et l’évolution peuvent être ajoutées selon vos besoins."
         ]
+      ],
+      "bKicker": "Un budget sur une base explicable",
+      "bTitle": "Un travail de qualité à un prix que vous connaissez à l’avance.",
+      "bLead": "Chez nous, pas de forfaits d’agence flous. Nous facturons à un tarif journalier fixe. Avant le démarrage, vous recevez un périmètre clairement décrit et décidez vous-même ce qui est réalisé maintenant et ce qui viendra plus tard.",
+      "bRateLabel": "Base de calcul claire",
+      "bRate": "449 €",
+      "bRateUnit": "net par jour-projet",
+      "bRateNote": "Le concept, le texte, le design et la réalisation technique sont planifiés selon le périmètre convenu. Les coûts externes sont indiqués séparément.",
+      "bRateCta": "En savoir plus sur les prix et la collaboration",
+      "bBlocks": [
+        [
+          "Tout ce que nous réalisons",
+          "Le concept, le texte, le design et la réalisation technique sont rattachés à un résultat concret dans le devis."
+        ],
+        [
+          "Tout ce qui reste ensuite",
+          "La maintenance, l’évolution et l’accompagnement personnel sont convenus comme un module distinct et traçable."
+        ],
+        [
+          "Tout ce qui relève de l’externe",
+          "L’hébergement, les logiciels, l’usage de l’IA ainsi que le budget média et publicitaire figurent comme postes distincts dans le devis."
+        ]
       ]
     }
   },
@@ -1199,6 +1265,28 @@
         [
           "We review, hand over and stay reachable.",
           "The agreed result is reviewed and handed over transparently. Maintenance and further development can be added to suit."
+        ]
+      ],
+      "bKicker": "A budget with a transparent basis",
+      "bTitle": "High-quality work at a price you know in advance.",
+      "bLead": "With us there are no vague agency packages. We work with a fixed day rate. Before the start you receive a clearly described scope and decide yourself what is done now and what comes later.",
+      "bRateLabel": "Clear calculation basis",
+      "bRate": "449 €",
+      "bRateUnit": "net per project day",
+      "bRateNote": "Concept, copy, design and technical implementation are planned according to the agreed scope. External costs are shown separately.",
+      "bRateCta": "More on pricing and collaboration",
+      "bBlocks": [
+        [
+          "Everything we build",
+          "Concept, copy, design and technical implementation are each assigned to a concrete result in the quote."
+        ],
+        [
+          "Everything that remains afterwards",
+          "Maintenance, further development and personal support are agreed as a separate, transparent building block."
+        ],
+        [
+          "Everything incurred externally",
+          "Hosting, software, AI usage as well as media and advertising budget are listed as separate items in the quote."
         ]
       ]
     }
