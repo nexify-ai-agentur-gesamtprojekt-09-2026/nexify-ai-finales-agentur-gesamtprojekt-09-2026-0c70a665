@@ -171,13 +171,13 @@
     {
       "id": "KS-013",
       "bereich": "design",
-      "symptom": "Home-Hero zeigt ein Standbild statt der verbindlich vorgegebenen Videoaufnahme; der Eindruck \"Erscheinung nicht wie vorgegeben\" entsteht vor allem hier",
+      "symptom": "Home-Hero zeigt ein Standbild; die frühere Vorgabe verlangte ein Hero-Video",
       "ursache": "AGENTS.md verlangt ein echtes Hero-Video. apps/web/components/IdentityHero.tsx ignoriert den video-Parameter bewusst (Kommentar \"No video is used on the hero\"). config/hero-film.json steht auf production_accepted=false und release_scope=owner_private_review_only; die dort genannte Datei /media/atelier/films/hero-native-editorial-20261104.webm (samt .de.vtt) fehlt im Repository. Vorhanden sind nur die älteren Filme hero-glass-eleven-20261102.mp4 und home-studio-welcome-20261102.mp4 (mit .vtt). Öffentliche Videos dürfen nur über das geprüfte Registry (isPublicVideo) ausgespielt werden.",
-      "loesung": "Inhaberentscheidung nötig: entweder die finale Datei (webm, vtt, Poster) ins Repository legen und production_accepted samt release_scope freigeben, oder einen vorhandenen Film ausdrücklich für die öffentliche Auslieferung freigeben. Danach IdentityHero.tsx das Video über PublicVideo einbinden (Untertitel, Pause, Ton, Reduced Motion, Autoplay nur innerhalb der Browserregeln), Beleg identity-hero und browser-video neu erheben. Kein Video ohne Freigabe öffentlich schalten, kein Standbild als erfüllten Lieferumfang melden.",
+      "loesung": "Erledigt durch Inhaberaussage 2026-11-09: \"Das Video ist nicht mehr aktuell.\" Das Standbild im Hero ist damit zulässig, ein Hero-Video wird nicht mehr geliefert. Die ältere Vorgabe in AGENTS.md und docs/production/hero-requirements-2026-11-04.md ist insoweit überholt (aktuelle Nutzerentscheidung vor älterem Entwurf). browser-video.json und config/hero-film.json bleiben als Historie erhalten, nichts löschen. Alle übrigen visuellen Vorgaben gelten weiter.",
       "wache": {
         "art": "dokumentiert"
       },
-      "quelle": "AGENTS.md, docs/production/hero-requirements-2026-11-04.md, config/hero-film.json",
+      "quelle": "Inhaberaussage 2026-11-09, AGENTS.md, config/hero-film.json",
       "gefunden": "2026-11-09"
     }
   ]
