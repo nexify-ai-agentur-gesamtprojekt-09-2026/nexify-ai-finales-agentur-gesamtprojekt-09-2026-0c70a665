@@ -12,7 +12,7 @@ HTML-Prototypen, nicht die React-Umsetzung. Diese Messung ist kein Abnahmebeleg.
 |---|---|---|---|
 | Laufzeit-Audit (`page_quality_audit.py`) | 0 FEHLER | 0 FEHLER auf 43 Seiten in de, nl, fr, en; 148 WARNUNG und 62 HINWEIS sind `/api/session` 404 und Shop-API 503 (Backend nicht deployt) | erfüllt |
 | Kartenfläche | Verlauf `#303634` nach `#262A28`, Rand `rgba(255,255,255,.08)`, Schatten (DS-S-01, Stufe Fehler) | von 21 Karten 1 mit Verlauf, 17 mit Schatten, 0 mit Weichzeichnung; Fläche meist flach `#191B1C` | **Abweichung** |
-| Schrift | Geist und Geist Mono (DS-T-01) | Überschriften Plus Jakarta Sans, Fließtext Inter, Mono Geist Mono | **Abweichung**, falls v2.0 maßgeblich bleibt; neuere Atelier-Dokumente in `docs/design/` nennen andere Schriften, Klärung offen |
+| Schrift | Inter und Plus Jakarta Sans mit zentraler Rollenverteilung, keine dritte Schrift (`docs/09-final/mastervorgabe-2026-10-29.md`, jünger als Designsystem v2.0 vom 2026-09-29, dessen Geist-Vorgabe damit überholt ist) | Überschriften Plus Jakarta Sans, Fließtext Inter, Mono Geist Mono | erfüllt; `design-rules.json` DS-T-01 ist veraltet |
 | Eckenradius | 0, 4, 8, 10, 12, 14, 16, 18, 20 px, Pille, Kreis (DS-R-01, Warnung) | zusätzlich 24, 28 und 36 px | **Abweichung** (Warnung) |
 | Akzent | Lime `#C8F04B`, Primärbutton mit Lime-Verlauf, Text `#111312` | Primärbutton Lime-Verlauf vorhanden; Link- und Akzentfarbe gedämpftes Grün `#A8C76A`, Überschriften mit Champagner-Verlauf | teilweise |
 | Seitengrund | Graphit-Verlauf, hellere Flächen als der Prototyp | sehr dunkel, nahe Schwarz; weniger Tiefenstaffelung als im Prototyp | **Abweichung** (Eindruck) |
@@ -30,7 +30,7 @@ neu erhoben werden (siehe KS-003). Das ist ein eigenes Paket, kein Nebeneffekt.
 
 ## Paket DS-REWORK (nächster Schritt)
 
-1. Schriftfrage klären: Geist (Designsystem v2.0) oder Plus Jakarta Sans und Inter (Atelier-Dokumente). Maßgeblich ist die jüngere ausdrückliche Vorgabe.
+1. Schriftfrage ist entschieden: Inter und Plus Jakarta Sans gelten (Mastervorgabe 2026-10-29). `design-rules.json` DS-T-01 bei Gelegenheit auf diese Vorgabe nachziehen.
 2. Karten-Token zentral: Verlauf, Rand, Schatten und optionale Glas-Weichzeichnung als Variablen, überall verwenden.
 3. Radien auf die Skala zurückführen oder die Skala bewusst erweitern und in `design-rules.json` festhalten.
 4. Seitengrund und Flächenstaffelung an den Prototyp angleichen.
