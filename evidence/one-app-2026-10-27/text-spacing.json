@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-09T07:09:10.411Z",
+  "observed_at": "2026-11-09T07:25:31.039Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "9e6e116330400b375fbc42fa1a5d96288ba54815725dc9a4cf3496370fcdb04e",
     "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
@@ -85,7 +85,7 @@
     "apps/web/components/shop/AdminOrders.tsx": "e6ac83a4abb5eb41d5ef97fc294ff23a71ac0892be106086626c37dcd724b00b",
     "apps/web/components/shop/AdminShop.tsx": "27a9b86328b13ccbf88aad53e52d0fd78824ff0fcebc59a941a923e405d6588b",
     "apps/web/components/shop/AuthForms.tsx": "8abf82edb3250e4c8d3e49dde8e023187c1497f69759f05de844a9e69b240b12",
-    "apps/web/components/shop/CartView.tsx": "834a1b1fb87bc7c05469d32260026040eee671a6a2deef45303bf0c8868a24f7",
+    "apps/web/components/shop/CartView.tsx": "300f302deccbfc9ece5a2372ce573f52be6b6234b53ea1ac896e8a7c89ccc96d",
     "apps/web/components/shop/CatalogStatus.tsx": "73f872aa8a674a332f0152d5d02b3e5f6008a5bbbed0bde8b0b895fe69ca7e80",
     "apps/web/components/shop/CatalogView.tsx": "b86cdeca4b06c0d620f24ff6c1ceb1949275f61bc97ebf546e69060ef7d45706",
     "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",

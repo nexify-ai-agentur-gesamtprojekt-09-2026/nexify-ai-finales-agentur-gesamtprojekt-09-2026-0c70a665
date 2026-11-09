@@ -1,0 +1,186 @@
+{
+  "recorded_at": "2026-11-09T07:18:37.891Z",
+  "passed": true,
+  "mock": true,
+  "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
+  "scope": "Real Chromium against the Vite site (apps/site) rendering the current TEILEKLAR shop components (apps/web/components/shop) with an in-process MOCK of the shop API wire contract. mit gemockter Antwort; no apps/shop-api server code, no MongoDB, no BigBuy, no Revolut, no production data. Frontend contract proof only.",
+  "production_data": false,
+  "server_code_executed": false,
+  "checks": [
+    "catalog_search_sort_stock_filter_category_and_pagination_use_server_parameters",
+    "product_detail_shows_price_stock_fitment_states_and_missing_product",
+    "add_to_cart_creates_httponly_visitor_cart_and_cart_survives_reload",
+    "cart_quantity_change_follows_server_total_rejects_over_stock_and_remove_empties_cart",
+    "stock_limit_blocks_second_add_without_a_write_request",
+    "lost_response_after_committed_cart_write_is_reread_before_the_retry",
+    "catalog_and_category_failures_show_errors_never_an_empty_or_sample_catalogue",
+    "checkout_without_cart_is_explicit_and_address_is_validated_client_and_server_side",
+    "checkout_review_shows_server_totals_seller_info_and_gates_the_order_on_terms",
+    "price_change_blocks_the_order_until_the_customer_confirms_the_changes",
+    "order_hands_over_to_hosted_payment_and_retry_reuses_the_same_idempotency_key",
+    "payment_url_on_a_foreign_host_is_rejected_without_navigation",
+    "commerce_pages_are_german_only_keyboard_operable_and_fit_390px_without_overflow"
+  ],
+  "source_sha256": {
+    "apps/web/components/shop/api.ts": "77430925e22d30a38a1280cd6e17fd67e8bc32b162773016dd629654de9519eb",
+    "apps/web/components/shop/CatalogView.tsx": "b86cdeca4b06c0d620f24ff6c1ceb1949275f61bc97ebf546e69060ef7d45706",
+    "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
+    "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
+    "apps/web/components/shop/ProductDetail.tsx": "1fcf8013bbad504e6755e211d05b275ded93350cdbe6dfbed2ad0cc1b3c86097",
+    "apps/web/components/shop/CartView.tsx": "300f302deccbfc9ece5a2372ce573f52be6b6234b53ea1ac896e8a7c89ccc96d",
+    "apps/web/components/shop/Checkout.tsx": "dd82945988959a21d634b75a722b7d69b0cb76acc3ed17563fdc22a3006c14c3",
+    "apps/web/components/shop/AddressStep.tsx": "c942e1b2da293fc48fafbd7df918a46f375d29caa20d80a8aa2ee2fd3a862c47",
+    "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
+    "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
+    "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
+    "apps/web/components/shop/shipping-hint.ts": "8b1b6ad8499e2da9cff1fc7ae4310c510fccfa56afbfcbd6e6b694373c4c3ba6",
+    "apps/web/components/shop/shop.css": "bf3967f563a749aeed6f3bdee7a3e494a6e1fce2260d9efc15a02c791fee0ae3",
+    "apps/web/components/shop/Storefront.css": "390825d19726eb9f6fed23f312df41e04feaa915353dfc29c5e750e04e6bc4ba",
+    "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
+    "apps/site/src/main.tsx": "e5f61dbf725ebdf7bc45478e11b667d6c49219d837309f4d54255ef2b9c4a07d",
+    "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
+    "apps/site/tests/browser-shop.mjs": "02d0c5c5024f87905c5edad6e7bf90ff52c5db04f03c27082f6c5a7ea3c2bc14",
+    "apps/site/tests/fixtures/shop-api-mock.mjs": "66eff93269139503c34335ac700cf057b4f7cd6509c125871a73dbc6df5e98a5"
+  },
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/api/shop/cart/confirm-changes",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart/items",
+      "status": 200,
+      "count": 13
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart/items",
+      "status": 409,
+      "count": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/cart/items",
+      "status": "connection_dropped",
+      "count": 7
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200,
+      "count": 101
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200,
+      "count": 5
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 503,
+      "count": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/checkout/quote",
+      "status": 200,
+      "count": 6
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/checkout/validate-address",
+      "status": 200,
+      "count": 5
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/checkout/validate-address",
+      "status": 422,
+      "count": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/orders",
+      "status": 200,
+      "count": 2
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/orders",
+      "status": 409,
+      "count": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/shop/orders",
+      "status": 502,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/gibt-es-nicht",
+      "status": 404,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0001",
+      "status": 200,
+      "count": 13
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0002",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0003",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0004",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0005",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0006",
+      "status": 200,
+      "count": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200,
+      "count": 16
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 503,
+      "count": 1
+    }
+  ],
+  "external_requests": [],
+  "supplier_image_requests_answered_locally": 21,
+  "payment_page_navigations_answered_locally": 1,
+  "real_payment_started": false,
+  "real_order_submitted": false,
+  "page_errors": [],
+  "reproduction": "PLAYWRIGHT_MODULE=<shim exposing chromium with executablePath /opt/pw-browsers/chromium> node apps/site/tests/browser-shop.mjs (from the repository root, after node apps/site/scripts/generate-public-data.mjs)"
+}

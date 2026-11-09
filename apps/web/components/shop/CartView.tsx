@@ -19,13 +19,13 @@ export function Totals({ cart }: { cart: Cart }) {
 }
 
 export default function CartView() {
-  const [cart, setCart] = useState<Cart | null>(null), [busy, setBusy] = useState(false), [error, setError] = useState("");
+  const [cart, setCart] = useState<Cart | null>(null), [busy, setBusy] = useState(false), [error, setError] = useState(""), [revision, setRevision] = useState(0);
   const load = () => api<Cart>("/api/shop/cart").then(data => { setCart(data); notifyCart(data.count); }).catch(() => setError("Der Warenkorb konnte nicht geladen werden."));
   useEffect(() => { void load(); }, []);
   async function change(productId: string, quantity: number) {
     setBusy(true); setError("");
     try { const data = await api<Cart>("/api/shop/cart/items", { method: "POST", json: { product_id: productId, quantity } }); setCart(data); notifyCart(data.count); }
-    catch { setError("Die Menge konnte nicht geändert werden. Bitte prüfen Sie den Lagerbestand."); await load(); }
+    catch { setError("Die Menge konnte nicht geändert werden. Bitte prüfen Sie den Lagerbestand."); await load(); setRevision(value => value + 1); }
     finally { setBusy(false); }
   }
   if (!cart) return error ? <p role="alert" className="tk-alert">{error}</p> : <p role="status">Warenkorb wird geladen …</p>;
@@ -34,7 +34,7 @@ export default function CartView() {
     <ul className="tk-lines">{cart.lines.map(line => <li key={line.product_id} data-testid={"cart-line-" + line.product_id}>
       <ProductImage src={line.image} alt={line.name} />
       <div><SiteLink href={"/teileklar/produkt/" + line.product_id}><strong>{line.name}</strong></SiteLink><span className="tk-meta">SKU {line.sku} · {money(line.unit_cents)} je Stück</span></div>
-      <label className="tk-qty-label">Menge<input type="number" min={1} max={Math.min(20, line.stock)} defaultValue={line.quantity} key={line.quantity} disabled={busy}
+      <label className="tk-qty-label">Menge<input type="number" min={1} max={Math.min(20, line.stock)} defaultValue={line.quantity} key={line.quantity + ":" + revision} disabled={busy}
         onBlur={event => { const value = Number(event.target.value); if (value !== line.quantity && value >= 1) void change(line.product_id, value); }} data-testid={"cart-qty-" + line.product_id} /></label>
       <span className="tk-line-total" data-testid={"cart-line-total-" + line.product_id}>{money(line.line_cents)}</span>
       <button className="text-button" disabled={busy} onClick={() => void change(line.product_id, 0)} data-testid={"cart-remove-" + line.product_id}>Entfernen</button>
