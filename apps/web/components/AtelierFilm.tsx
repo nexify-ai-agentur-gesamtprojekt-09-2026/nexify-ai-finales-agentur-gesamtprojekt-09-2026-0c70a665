@@ -12,12 +12,12 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),id=useId();
  const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
- const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8);
+ const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false);
  const t=words[locale],a=audioWords[locale],playLabel=ended?t.replay:t.play;
  function captionMode(enabled:boolean){const tracks=ref.current?.textTracks;if(tracks)for(let i=0;i<tracks.length;i++)tracks[i].mode=enabled?'showing':'hidden';}
  useEffect(()=>{
   const video=ref.current,box=root.current;if(!video||!box)return;
-  alive.current=true;generation.current++;userPaused.current=false;setFailed(false);setEnded(false);setBuffering(false);setProgress(0);
+  alive.current=true;generation.current++;userPaused.current=false;setFailed(false);setEnded(false);setBuffering(false);setProgress(0);setFrameReady(false);
   let visible=false,disposed=false,audioAttempted=false;
   const pref=matchMedia('(prefers-reduced-motion: reduce)');
   const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection;
@@ -51,9 +51,9 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  }
  return <div ref={root} className={'atelier-film'+(hero?' atelier-film-hero':'')} data-film={asset.title} data-playback={failed?'error':ended?'ended':buffering?'buffering':playing?'playing':'paused'}>
   <div className="atelier-film-picture">
-   {failed&&<img className="atelier-film-fallback" src={asset.poster} alt={asset.title} width={asset.width} height={asset.height}/>}
+   {(!frameReady||failed)&&<img className="atelier-film-fallback" src={asset.poster} alt={failed?asset.title:''} aria-hidden={!failed} width={asset.width} height={asset.height}/>}
    <video ref={ref} src={asset.src} poster={asset.poster} width={asset.width} height={asset.height} preload={hero?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
-    onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
+    onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
     onEnded={()=>{setPlaying(false);setBuffering(false);setEnded(true);setProgress(1);}} onError={()=>{setFailed(true);setBuffering(false);setPlaying(false);}}>
     {asset.captions&&<track kind="captions" src={asset.captions} srcLang="de" label="Deutsch" default onLoad={()=>captionMode(captions)}/>}
