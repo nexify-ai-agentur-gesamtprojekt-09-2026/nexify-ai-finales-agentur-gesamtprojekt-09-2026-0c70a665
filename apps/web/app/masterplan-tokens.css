@@ -14,7 +14,7 @@
 
 :root {
   /* ============== Mastervorgabe 5.2 – Primärwerte ============== */
-  --color-canvas:            #080A0F;   /* Graphite Canvas */
+  --color-canvas:            #242826;   /* Graphite Canvas */
   /* Lime kommt aus config/design-tokens.json (ruhig, 05.11.2026); das helle CI-Lime nur als Signal. */
   --color-brand-lime:        var(--color-marke-lime);
   --color-brand-lime-soft:   var(--color-marke-lime-hell);
@@ -22,8 +22,8 @@
 
   /* Semantischer Tokenvertrag (Mastervorgabe §5.3) */
   --color-background-canvas:    var(--color-canvas);
-  --color-background-surface:   #0F131A;
-  --color-background-elevated:  #141A22;
+  --color-background-surface:   #262A28;
+  --color-background-elevated:  #303634;
   --color-text-primary:         var(--color-text-primaer);
   --color-text-secondary:       #CBD1D6;
   --color-text-muted:           #8B939B;
@@ -47,8 +47,8 @@
   --color-graphit-850:          var(--color-background-surface);
   --color-graphit-800:          var(--color-background-surface);
   --color-graphit-700:          var(--color-background-elevated);
-  --color-graphit-650:          #1A2029;
-  --color-graphit-600:          #202733;
+  --color-graphit-650:          #2A2E2C;
+  --color-graphit-600:          #303634;
   --color-linie-fein:           var(--color-border-subtle);
   --color-linie-mittel:         rgba(255,255,255,.12);
   --color-linie-stark:          var(--color-border-strong);

@@ -1,0 +1,2152 @@
+{
+  "renderer": "next",
+  "scope": "home hero graphite-atelier editorial still (one brand photograph, no film); technical checks executed in the local optimized renderer; not video/provider/production acceptance",
+  "layout": "graphite-atelier",
+  "media_state": "editorial-still",
+  "locales": [
+    "de",
+    "nl",
+    "fr"
+  ],
+  "reduced_motion": "still",
+  "views": [
+    {
+      "width": 320,
+      "locale": "de",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 320,
+        "top": 144,
+        "bottom": 1040.3125,
+        "width": 320,
+        "height": 896.3125
+      },
+      "copy": {
+        "left": 24,
+        "right": 296,
+        "top": 192,
+        "bottom": 791.3125,
+        "width": 272,
+        "height": 599.3125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 24,
+            "right": 296,
+            "top": 839.3125,
+            "bottom": 992.3125,
+            "width": 272,
+            "height": 153
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.693121693121693,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "nl",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 320,
+        "top": 144,
+        "bottom": 1040.3125,
+        "width": 320,
+        "height": 896.3125
+      },
+      "copy": {
+        "left": 24,
+        "right": 296,
+        "top": 192,
+        "bottom": 791.3125,
+        "width": 272,
+        "height": 599.3125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 24,
+            "right": 296,
+            "top": 839.3125,
+            "bottom": 992.3125,
+            "width": 272,
+            "height": 153
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Merkillustratie met Pascal, NeX en AIFly ORACLE – geen productfoto of klantreferentie.",
+          "ratio": 1.693121693121693,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "locale": "fr",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 320,
+        "top": 198,
+        "bottom": 1124,
+        "width": 320,
+        "height": 926
+      },
+      "copy": {
+        "left": 24,
+        "right": 296,
+        "top": 246,
+        "bottom": 875,
+        "width": 272,
+        "height": 629
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 24,
+            "right": 296,
+            "top": 923,
+            "bottom": 1076,
+            "width": 272,
+            "height": 153
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Illustration de marque avec Pascal, NeX et AIFly ORACLE – ni photo produit ni référence client.",
+          "ratio": 1.693121693121693,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "de",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 390,
+        "top": 144,
+        "bottom": 1034.65625,
+        "width": 390,
+        "height": 890.65625
+      },
+      "copy": {
+        "left": 24,
+        "right": 366,
+        "top": 192,
+        "bottom": 746.28125,
+        "width": 342,
+        "height": 554.28125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 24,
+            "right": 366,
+            "top": 794.28125,
+            "bottom": 986.65625,
+            "width": 342,
+            "height": 192.375
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.6883116883116882,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "nl",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 390,
+        "top": 144,
+        "bottom": 1034.65625,
+        "width": 390,
+        "height": 890.65625
+      },
+      "copy": {
+        "left": 24,
+        "right": 366,
+        "top": 192,
+        "bottom": 746.28125,
+        "width": 342,
+        "height": 554.28125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 24,
+            "right": 366,
+            "top": 794.28125,
+            "bottom": 986.65625,
+            "width": 342,
+            "height": 192.375
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Merkillustratie met Pascal, NeX en AIFly ORACLE – geen productfoto of klantreferentie.",
+          "ratio": 1.6883116883116882,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "locale": "fr",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 390,
+        "top": 144,
+        "bottom": 1034.65625,
+        "width": 390,
+        "height": 890.65625
+      },
+      "copy": {
+        "left": 24,
+        "right": 366,
+        "top": 192,
+        "bottom": 746.28125,
+        "width": 342,
+        "height": 554.28125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 24,
+            "right": 366,
+            "top": 794.28125,
+            "bottom": 986.65625,
+            "width": 342,
+            "height": 192.375
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Illustration de marque avec Pascal, NeX et AIFly ORACLE – ni photo produit ni référence client.",
+          "ratio": 1.6883116883116882,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "locale": "de",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 1440,
+        "top": 104,
+        "bottom": 613.453125,
+        "width": 1440,
+        "height": 509.453125
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 152,
+        "bottom": 565.453125,
+        "width": 597.234375,
+        "height": 413.453125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 677.625,
+            "right": 1407.609375,
+            "top": 153.421875,
+            "bottom": 564.03125,
+            "width": 729.984375,
+            "height": 410.609375
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 764,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 764,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 764,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 699.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 62,
+          "right": 702,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 820,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 820,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 820,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 787.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 755.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 90,
+          "right": 730,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 821,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 821,
+        "top": 0,
+        "bottom": 925.546875,
+        "width": 821,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 788.609375,
+        "top": 48,
+        "bottom": 469.546875,
+        "width": 756.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 90.5,
+          "right": 730.5,
+          "top": 517.546875,
+          "bottom": 877.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1000,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 0,
+        "bottom": 925.546875,
+        "width": 1000,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 48,
+        "bottom": 469.546875,
+        "width": 935.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 517.546875,
+          "bottom": 877.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1100,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1100,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 1100,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 1067.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 1035.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 230,
+          "right": 870,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1101,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 0,
+        "bottom": 633.953125,
+        "width": 1101,
+        "height": 633.953125
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 48,
+        "bottom": 585.953125,
+        "width": 444.6875,
+        "height": 537.953125
+      },
+      "stacked": false,
+      "figures": [
+        {
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 164.109375,
+          "bottom": 469.84375,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1300,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": -85,
+        "bottom": 440.5625,
+        "width": 1300,
+        "height": 525.5625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": -37,
+        "bottom": 392.5625,
+        "width": 534.234375,
+        "height": 429.5625
+      },
+      "stacked": false,
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": -5.875,
+          "bottom": 361.421875,
+          "width": 652.984375,
+          "height": 367.296875
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "locale": "de",
+      "sidebar": "open",
+      "scene": {
+        "left": 0,
+        "right": 1012.8125,
+        "top": -501,
+        "bottom": 424.546875,
+        "width": 1012.8125,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": -453,
+        "bottom": -31.453125,
+        "width": 883.21875,
+        "height": 421.546875
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 186.40625,
+            "right": 826.40625,
+            "top": 16.546875,
+            "bottom": 376.546875,
+            "width": 640,
+            "height": 360
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "locale": "nl",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 1440,
+        "top": 104,
+        "bottom": 613.453125,
+        "width": 1440,
+        "height": 509.453125
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 152,
+        "bottom": 565.453125,
+        "width": 597.234375,
+        "height": 413.453125
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 677.625,
+            "right": 1407.609375,
+            "top": 153.421875,
+            "bottom": 564.03125,
+            "width": 729.984375,
+            "height": 410.609375
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Merkillustratie met Pascal, NeX en AIFly ORACLE – geen productfoto of klantreferentie.",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 764,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 764,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 764,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 699.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 62,
+          "right": 702,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 820,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 820,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 820,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 787.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 755.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 90,
+          "right": 730,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 821,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 821,
+        "top": 0,
+        "bottom": 925.546875,
+        "width": 821,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 788.609375,
+        "top": 48,
+        "bottom": 469.546875,
+        "width": 756.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 90.5,
+          "right": 730.5,
+          "top": 517.546875,
+          "bottom": 877.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1000,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 0,
+        "bottom": 925.546875,
+        "width": 1000,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 48,
+        "bottom": 469.546875,
+        "width": 935.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 517.546875,
+          "bottom": 877.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1100,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1100,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 1100,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 1067.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 1035.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 230,
+          "right": 870,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1101,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 0,
+        "bottom": 506.265625,
+        "width": 1101,
+        "height": 506.265625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 48,
+        "bottom": 458.265625,
+        "width": 444.6875,
+        "height": 410.265625
+      },
+      "stacked": false,
+      "figures": [
+        {
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 100.265625,
+          "bottom": 406,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1300,
+      "locale": "nl",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": -85,
+        "bottom": 440.5625,
+        "width": 1300,
+        "height": 525.5625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": -37,
+        "bottom": 392.5625,
+        "width": 534.234375,
+        "height": 429.5625
+      },
+      "stacked": false,
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": -5.875,
+          "bottom": 361.421875,
+          "width": 652.984375,
+          "height": 367.296875
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "locale": "nl",
+      "sidebar": "open",
+      "scene": {
+        "left": 0,
+        "right": 1012.8125,
+        "top": -501,
+        "bottom": 424.546875,
+        "width": 1012.8125,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": -453,
+        "bottom": -31.453125,
+        "width": 883.21875,
+        "height": 421.546875
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 186.40625,
+            "right": 826.40625,
+            "top": 16.546875,
+            "bottom": 376.546875,
+            "width": 640,
+            "height": 360
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Merkillustratie met Pascal, NeX en AIFly ORACLE – geen productfoto of klantreferentie.",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "locale": "fr",
+      "sidebar": "closed",
+      "scene": {
+        "left": 0,
+        "right": 1440,
+        "top": 104,
+        "bottom": 643.140625,
+        "width": 1440,
+        "height": 539.140625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 152,
+        "bottom": 595.140625,
+        "width": 597.234375,
+        "height": 443.140625
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 677.625,
+            "right": 1407.609375,
+            "top": 168.265625,
+            "bottom": 578.875,
+            "width": 729.984375,
+            "height": 410.609375
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Illustration de marque avec Pascal, NeX et AIFly ORACLE – ni photo produit ni référence client.",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 764,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 764,
+        "top": -85,
+        "bottom": 870.234375,
+        "width": 764,
+        "height": 955.234375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": -37,
+        "bottom": 414.234375,
+        "width": 699.21875,
+        "height": 451.234375
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 62,
+          "right": 702,
+          "top": 462.234375,
+          "bottom": 822.234375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 820,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 820,
+        "top": -85,
+        "bottom": 870.234375,
+        "width": 820,
+        "height": 955.234375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 787.609375,
+        "top": -37,
+        "bottom": 414.234375,
+        "width": 755.21875,
+        "height": 451.234375
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 90,
+          "right": 730,
+          "top": 462.234375,
+          "bottom": 822.234375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 821,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 821,
+        "top": 0,
+        "bottom": 955.234375,
+        "width": 821,
+        "height": 955.234375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 788.609375,
+        "top": 48,
+        "bottom": 499.234375,
+        "width": 756.21875,
+        "height": 451.234375
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 90.5,
+          "right": 730.5,
+          "top": 547.234375,
+          "bottom": 907.234375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1000,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 0,
+        "bottom": 955.234375,
+        "width": 1000,
+        "height": 955.234375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 48,
+        "bottom": 499.234375,
+        "width": 935.21875,
+        "height": 451.234375
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 547.234375,
+          "bottom": 907.234375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1100,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1100,
+        "top": -85,
+        "bottom": 870.234375,
+        "width": 1100,
+        "height": 955.234375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 1067.609375,
+        "top": -37,
+        "bottom": 414.234375,
+        "width": 1035.21875,
+        "height": 451.234375
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 230,
+          "right": 870,
+          "top": 462.234375,
+          "bottom": 822.234375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1101,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 0,
+        "bottom": 568.34375,
+        "width": 1101,
+        "height": 568.34375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 48,
+        "bottom": 520.34375,
+        "width": 444.6875,
+        "height": 472.34375
+      },
+      "stacked": false,
+      "figures": [
+        {
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 131.296875,
+          "bottom": 437.03125,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1300,
+      "locale": "fr",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": -85,
+        "bottom": 440.5625,
+        "width": 1300,
+        "height": 525.5625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": -37,
+        "bottom": 392.5625,
+        "width": 534.234375,
+        "height": 429.5625
+      },
+      "stacked": false,
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": -5.875,
+          "bottom": 361.421875,
+          "width": 652.984375,
+          "height": 367.296875
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "locale": "fr",
+      "sidebar": "open",
+      "scene": {
+        "left": 0,
+        "right": 1012.8125,
+        "top": -501,
+        "bottom": 454.234375,
+        "width": 1012.8125,
+        "height": 955.234375
+      },
+      "copy": {
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": -453,
+        "bottom": -1.765625,
+        "width": 883.21875,
+        "height": 451.234375
+      },
+      "figures": [
+        {
+          "speaker": "photo",
+          "rect": {
+            "left": 186.40625,
+            "right": 826.40625,
+            "top": 46.234375,
+            "bottom": 406.234375,
+            "width": 640,
+            "height": 360
+          },
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Illustration de marque avec Pascal, NeX et AIFly ORACLE – ni photo produit ni référence client.",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
+          "filter": "none",
+          "opacity": 1
+        }
+      ],
+      "overflow": false,
+      "text_overflow": false,
+      "stacked": true,
+      "passed": true
+    }
+  ],
+  "text_resize": [
+    {
+      "width": 320,
+      "sidebar": "closed",
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 320,
+        "top": 243.6875,
+        "bottom": 2624.59375,
+        "width": 320,
+        "height": 2380.90625
+      },
+      "copy": {
+        "left": 24,
+        "right": 296,
+        "top": 291.6875,
+        "bottom": 2375.59375,
+        "width": 272,
+        "height": 2083.90625
+      },
+      "figures": [
+        {
+          "left": 24,
+          "right": 296,
+          "top": 2423.59375,
+          "bottom": 2576.59375,
+          "width": 272,
+          "height": 153
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "sidebar": "closed",
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 320,
+        "top": 243.6875,
+        "bottom": 2624.59375,
+        "width": 320,
+        "height": 2380.90625
+      },
+      "copy": {
+        "left": 24,
+        "right": 296,
+        "top": 291.6875,
+        "bottom": 2375.59375,
+        "width": 272,
+        "height": 2083.90625
+      },
+      "figures": [
+        {
+          "left": 24,
+          "right": 296,
+          "top": 2423.59375,
+          "bottom": 2576.59375,
+          "width": 272,
+          "height": 153
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 320,
+      "sidebar": "closed",
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 320,
+        "top": 159.6875,
+        "bottom": 2574.125,
+        "width": 320,
+        "height": 2414.4375
+      },
+      "copy": {
+        "left": 24,
+        "right": 296,
+        "top": 207.6875,
+        "bottom": 2325.125,
+        "width": 272,
+        "height": 2117.4375
+      },
+      "figures": [
+        {
+          "left": 24,
+          "right": 296,
+          "top": 2373.125,
+          "bottom": 2526.125,
+          "width": 272,
+          "height": 153
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "sidebar": "closed",
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 390,
+        "top": 176.6875,
+        "bottom": 2420.09375,
+        "width": 390,
+        "height": 2243.40625
+      },
+      "copy": {
+        "left": 24,
+        "right": 366,
+        "top": 224.6875,
+        "bottom": 2131.71875,
+        "width": 342,
+        "height": 1907.03125
+      },
+      "figures": [
+        {
+          "left": 24,
+          "right": 366,
+          "top": 2179.71875,
+          "bottom": 2372.09375,
+          "width": 342,
+          "height": 192.375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "sidebar": "closed",
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 390,
+        "top": 176.6875,
+        "bottom": 2253.90625,
+        "width": 390,
+        "height": 2077.21875
+      },
+      "copy": {
+        "left": 24,
+        "right": 366,
+        "top": 224.6875,
+        "bottom": 1965.53125,
+        "width": 342,
+        "height": 1740.84375
+      },
+      "figures": [
+        {
+          "left": 24,
+          "right": 366,
+          "top": 2013.53125,
+          "bottom": 2205.90625,
+          "width": 342,
+          "height": 192.375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "sidebar": "closed",
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 390,
+        "top": 176.6875,
+        "bottom": 2197.359375,
+        "width": 390,
+        "height": 2020.671875
+      },
+      "copy": {
+        "left": 24,
+        "right": 366,
+        "top": 224.6875,
+        "bottom": 1908.984375,
+        "width": 342,
+        "height": 1684.296875
+      },
+      "figures": [
+        {
+          "left": 24,
+          "right": 366,
+          "top": 1956.984375,
+          "bottom": 2149.359375,
+          "width": 342,
+          "height": 192.375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1440,
+        "top": 189.296875,
+        "bottom": 1636.984375,
+        "width": 1440,
+        "height": 1447.6875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 237.296875,
+        "bottom": 1588.984375,
+        "width": 597.234375,
+        "height": 1351.6875
+      },
+      "figures": [
+        {
+          "left": 677.625,
+          "right": 1407.609375,
+          "top": 707.828125,
+          "bottom": 1118.4375,
+          "width": 729.984375,
+          "height": 410.609375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 764,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 764,
+        "top": 85.296875,
+        "bottom": 1835.703125,
+        "width": 764,
+        "height": 1750.40625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": 133.296875,
+        "bottom": 1379.703125,
+        "width": 699.21875,
+        "height": 1246.40625
+      },
+      "figures": [
+        {
+          "left": 62,
+          "right": 702,
+          "top": 1427.703125,
+          "bottom": 1787.703125,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1000,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 85.296875,
+        "bottom": 1456.703125,
+        "width": 1000,
+        "height": 1371.40625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 133.296875,
+        "bottom": 1000.703125,
+        "width": 935.21875,
+        "height": 867.40625
+      },
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 1048.703125,
+          "bottom": 1408.703125,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1101,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 85.296875,
+        "bottom": 1606.1875,
+        "width": 1101,
+        "height": 1520.890625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 133.296875,
+        "bottom": 1558.1875,
+        "width": 444.6875,
+        "height": 1424.890625
+      },
+      "figures": [
+        {
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 692.875,
+          "bottom": 998.609375,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1300,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": 85.296875,
+        "bottom": 1487.4375,
+        "width": 1300,
+        "height": 1402.140625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": 133.296875,
+        "bottom": 1439.4375,
+        "width": 534.234375,
+        "height": 1306.140625
+      },
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": 602.71875,
+          "bottom": 970.015625,
+          "width": 652.984375,
+          "height": 367.296875
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "open",
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1012.8125,
+        "top": 6.296875,
+        "bottom": 1525.203125,
+        "width": 1012.8125,
+        "height": 1518.90625
+      },
+      "copy": {
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": 54.296875,
+        "bottom": 1069.203125,
+        "width": 883.21875,
+        "height": 1014.90625
+      },
+      "figures": [
+        {
+          "left": 186.40625,
+          "right": 826.40625,
+          "top": 1117.203125,
+          "bottom": 1477.203125,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1440,
+        "top": 189.296875,
+        "bottom": 1527.5,
+        "width": 1440,
+        "height": 1338.203125
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 237.296875,
+        "bottom": 1479.5,
+        "width": 597.234375,
+        "height": 1242.203125
+      },
+      "figures": [
+        {
+          "left": 677.625,
+          "right": 1407.609375,
+          "top": 653.09375,
+          "bottom": 1063.703125,
+          "width": 729.984375,
+          "height": 410.609375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 764,
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 764,
+        "top": 85.296875,
+        "bottom": 1747.59375,
+        "width": 764,
+        "height": 1662.296875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": 133.296875,
+        "bottom": 1291.59375,
+        "width": 699.21875,
+        "height": 1158.296875
+      },
+      "figures": [
+        {
+          "left": 62,
+          "right": 702,
+          "top": 1339.59375,
+          "bottom": 1699.59375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1000,
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 85.296875,
+        "bottom": 1391.90625,
+        "width": 1000,
+        "height": 1306.609375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 133.296875,
+        "bottom": 935.90625,
+        "width": 935.21875,
+        "height": 802.609375
+      },
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 983.90625,
+          "bottom": 1343.90625,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1101,
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 85.296875,
+        "bottom": 1558.046875,
+        "width": 1101,
+        "height": 1472.75
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 133.296875,
+        "bottom": 1510.046875,
+        "width": 444.6875,
+        "height": 1376.75
+      },
+      "figures": [
+        {
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 668.796875,
+          "bottom": 974.53125,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1300,
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": 85.296875,
+        "bottom": 1500.71875,
+        "width": 1300,
+        "height": 1415.421875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": 133.296875,
+        "bottom": 1452.71875,
+        "width": 534.234375,
+        "height": 1319.421875
+      },
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": 609.359375,
+          "bottom": 976.65625,
+          "width": 652.984375,
+          "height": 367.296875
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "open",
+      "locale": "nl",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1012.8125,
+        "top": 6.296875,
+        "bottom": 1312.90625,
+        "width": 1012.8125,
+        "height": 1306.609375
+      },
+      "copy": {
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": 54.296875,
+        "bottom": 856.90625,
+        "width": 883.21875,
+        "height": 802.609375
+      },
+      "figures": [
+        {
+          "left": 186.40625,
+          "right": 826.40625,
+          "top": 904.90625,
+          "bottom": 1264.90625,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1440,
+        "top": 189.296875,
+        "bottom": 1405.65625,
+        "width": 1440,
+        "height": 1216.359375
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 237.296875,
+        "bottom": 1357.65625,
+        "width": 597.234375,
+        "height": 1120.359375
+      },
+      "figures": [
+        {
+          "left": 677.625,
+          "right": 1407.609375,
+          "top": 592.171875,
+          "bottom": 1002.78125,
+          "width": 729.984375,
+          "height": 410.609375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 764,
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 764,
+        "top": 85.296875,
+        "bottom": 1659.484375,
+        "width": 764,
+        "height": 1574.1875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": 133.296875,
+        "bottom": 1203.484375,
+        "width": 699.21875,
+        "height": 1070.1875
+      },
+      "figures": [
+        {
+          "left": 62,
+          "right": 702,
+          "top": 1251.484375,
+          "bottom": 1611.484375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1000,
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 85.296875,
+        "bottom": 1451.296875,
+        "width": 1000,
+        "height": 1366
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 133.296875,
+        "bottom": 995.296875,
+        "width": 935.21875,
+        "height": 862
+      },
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 1043.296875,
+          "bottom": 1403.296875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1101,
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 85.296875,
+        "bottom": 1613.171875,
+        "width": 1101,
+        "height": 1527.875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 133.296875,
+        "bottom": 1565.171875,
+        "width": 444.6875,
+        "height": 1431.875
+      },
+      "figures": [
+        {
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 696.359375,
+          "bottom": 1002.09375,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1300,
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": 85.296875,
+        "bottom": 1396.484375,
+        "width": 1300,
+        "height": 1311.1875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": 133.296875,
+        "bottom": 1348.484375,
+        "width": 534.234375,
+        "height": 1215.1875
+      },
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": 557.234375,
+          "bottom": 924.53125,
+          "width": 652.984375,
+          "height": 367.296875
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "open",
+      "locale": "fr",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1012.8125,
+        "top": 85.296875,
+        "bottom": 1516.09375,
+        "width": 1012.8125,
+        "height": 1430.796875
+      },
+      "copy": {
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": 133.296875,
+        "bottom": 1060.09375,
+        "width": 883.21875,
+        "height": 926.796875
+      },
+      "figures": [
+        {
+          "left": 186.40625,
+          "right": 826.40625,
+          "top": 1108.09375,
+          "bottom": 1468.09375,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    }
+  ],
+  "asset_hashes": {
+    "/media/higgsfield/hf-02-lobby-walk-1920.webp": "7e0485baf0ff97696cecca7d2a7d7dcbbd31601ad491f5ee6d8835cb3ac6ffab",
+    "/media/higgsfield/hf-02-lobby-walk-800.webp": "059b7aa662ef893166ce1348e922ca7036cbbef355ec9bb0d5b7a7b3093e979b",
+    "/media/higgsfield/hf-02-lobby-walk-1280.webp": "c1d338784067e116da0322fc664000c98e161827e154ead44e7e2b87cbf2615a"
+  },
+  "source_sha256": {
+    "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
+    "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
+    "config/design-tokens.json": "6e699c0082f4599f8fcb144317fde8f90c264e0083334c948b1195f770ceda83",
+    "apps/web/components/IdentityHero.tsx": "36a88332e22ea4aa6630ebdac0753815651a85aaa68ab9db47a8a4c263caec98",
+    "apps/web/components/IdentityHero.css": "73037a5ff7d5df5cbab771eb2acd9eff65c39679088bd27843e5aa7da5aa3e52",
+    "apps/web/components/HomeContent.tsx": "adf9b8495833e0ca99a4bdd3190453467564ef35c5433e1d609e4d6c62bc73b8",
+    "apps/web/components/HomeConcept.css": "2cd4926223d3cf3a1c96fc6ed9d1ce2a08d0b5dc620f2e6c533959705a068176",
+    "apps/web/components/LuxuryMaterials.css": "bdee15499d04686d4e76ab27eb9564130e3fb516e794daa6ed811b0b5c999d23",
+    "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
+    "apps/web/components/WorkspaceRebuild.css": "591308b86d912c9a58929bd10a093c7f27ee1d0ee64ab2850fd75d9bef06fea9",
+    "apps/web/lib/brand-media.ts": "fe1c812d3c8b3a6b81ee101fc9208d53bb907dbbdbbc70ddbf3caae966b0e59d",
+    "apps/web/app/globals.css": "c7c19d6faed39c9756273fd2ee04245f3b69e542da51633ff91d4034c140ee44",
+    "packages/tokens/tokens.css": "3ca2f06408bfab8c2b4b5fd79f9f9c5c22b8adb234e0a5f2d826ae3d63b9a2de",
+    "apps/site/tests/browser-identity-hero.mjs": "51ba02a106fe649eec7bc03f0aaf7387308af8fae1b2786344fde1bd48fc7671"
+  },
+  "external_requests": 0,
+  "page_errors": [],
+  "passed": true
+}

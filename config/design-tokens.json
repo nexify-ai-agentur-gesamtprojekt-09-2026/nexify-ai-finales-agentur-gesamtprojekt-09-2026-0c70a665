@@ -3,30 +3,30 @@
   "color": {
     "graphit": {
       "900": {
-        "$value": "#080A0F",
+        "$value": "#1B1E1D",
         "$type": "color"
       },
       "850": {
-        "$value": "#0F131A",
+        "$value": "#1E2220",
         "$type": "color",
         "$description": "Masterplan Oberfläche"
       },
       "800": {
-        "$value": "#080A0F",
+        "$value": "#1B1E1D",
         "$type": "color",
         "$description": "Zusammenhängende Masterplan-Markenfläche"
       },
       "700": {
-        "$value": "#141A22",
+        "$value": "#242826",
         "$type": "color"
       },
       "650": {
-        "$value": "#1A2029",
+        "$value": "#2A2E2C",
         "$type": "color",
         "$description": "Karte unten"
       },
       "600": {
-        "$value": "#202733",
+        "$value": "#303634",
         "$type": "color",
         "$description": "Karte oben"
       }
@@ -178,15 +178,15 @@
     },
     "atelier": {
       "canvas": {
-        "$value": "#111212",
+        "$value": "#1B1E1D",
         "$type": "color"
       },
       "surface": {
-        "$value": "#191B1C",
+        "$value": "#262A28",
         "$type": "color"
       },
       "raised": {
-        "$value": "#242728",
+        "$value": "#303634",
         "$type": "color"
       },
       "platinum": {
@@ -342,8 +342,8 @@
     "karte": "16px",
     "leit": "20px",
     "pille": "999px",
-    "atelier": "28px",
-    "homeMedia": "36px"
+    "atelier": "20px",
+    "homeMedia": "20px"
   },
   "breakpoint": {
     "s": "640px",
@@ -368,12 +368,12 @@
   },
   "gradient": {
     "markenlicht": "radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%)",
-    "karte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
-    "kleineKarte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
+    "karte": "linear-gradient(180deg, #303634 0%, #262A28 100%)",
+    "kleineKarte": "linear-gradient(180deg, #303634 0%, #262A28 100%)",
     "buttonPrimaer": "#A8C76A",
     "balken": "linear-gradient(90deg, #789C48, #A8C76A)",
-    "band": "#080A0F",
-    "seitengrund": "#080A0F",
+    "band": "#1E2220",
+    "seitengrund": "radial-gradient(ellipse 52% 30% at 82% 0%, rgba(196,179,148,.09), transparent 100%), radial-gradient(ellipse 40% 26% at 12% 68%, rgba(111,227,207,.05), transparent 100%), #242826",
     "spotlight": "none",
     "atelierGlass": "linear-gradient(145deg, color-mix(in srgb, var(--color-atelier-platinum) 8%, transparent), transparent 45%), var(--color-atelier-glass)",
     "atelierLight": "radial-gradient(ellipse at 85% 5%, color-mix(in srgb, var(--color-atelier-champagne) 7%, transparent), transparent 58%)",

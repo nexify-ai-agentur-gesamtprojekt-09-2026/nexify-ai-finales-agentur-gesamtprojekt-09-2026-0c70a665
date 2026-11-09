@@ -36,11 +36,11 @@
 .workspace-shell .trio-light { opacity:.12; }
 .workspace-shell .trio-ribbon { animation:none; }
 .workspace-shell .trio-floor { background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--color-atelier-champagne) 4%,transparent)); }
-.workspace-shell .home-journey .home-station { background:var(--color-atelier-surface); backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:none; border-color:var(--color-linie-fein); }
+.workspace-shell .home-journey .home-station { background:var(--gradient-karte); backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:none; border-color:var(--color-linie-fein); }
 .workspace-shell .home-stations::before { display:none; }
 .workspace-shell .home-choice-link { border-color:var(--color-linie-fein); padding-block:var(--space-6); }
 .workspace-shell .home-process-steps li { border-color:var(--color-linie-fein); }
-.workspace-shell .auth-fallback.editorial-note { width:calc(100% - var(--layout-page-padding) * 2); max-width:960px; margin:var(--space-6) auto; padding:var(--space-6); display:flex; gap:var(--space-5); align-items:flex-start; background:var(--color-atelier-surface); border:1px solid var(--color-linie-fein); border-radius:var(--radius-atelier); box-shadow:var(--shadow-atelier); }
+.workspace-shell .auth-fallback.editorial-note { width:calc(100% - var(--layout-page-padding) * 2); max-width:960px; margin:var(--space-6) auto; padding:var(--space-6); display:flex; gap:var(--space-5); align-items:flex-start; background:var(--gradient-karte); border:1px solid var(--color-linie-fein); border-radius:var(--radius-atelier); box-shadow:var(--shadow-atelier); }
 .auth-emblem { flex:0 0 var(--target-min); display:grid; place-items:center; min-height:var(--target-min); border:1px solid var(--color-linie-mittel); border-radius:var(--radius-karte); color:var(--color-atelier-champagne); }
 .auth-emblem svg { width:var(--space-5); height:var(--space-5); }
 .auth-panel-copy { display:grid; gap:var(--space-3); min-width:0; }
@@ -80,7 +80,7 @@
 }
 @media(max-width:420px) { .workspace-shell .auth-fallback.editorial-note { flex-direction:column; } }
 @media(prefers-reduced-transparency:reduce),(prefers-contrast:more) {
- .workspace-shell :is(.aifly-panel,.reopen-chat.nexify-control[data-variant]) { background:var(--color-atelier-surface); backdrop-filter:none; -webkit-backdrop-filter:none; }
+ .workspace-shell :is(.aifly-panel,.reopen-chat.nexify-control[data-variant]) { background:var(--gradient-karte); backdrop-filter:none; -webkit-backdrop-filter:none; }
  .workspace-shell :is(.aifly-panel,.auth-fallback.editorial-note) { border-color:var(--color-atelier-platinum); }
 }
 @media(forced-colors:active) { .workspace-shell :is(.aifly-panel,.reopen-chat,.auth-fallback) { border:1px solid CanvasText; box-shadow:none; } }
@@ -173,7 +173,7 @@
 .workspace-shell .aifly-panel .orientation-starters{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-3);margin:0}
 .workspace-shell .aifly-panel .orientation-starter{display:grid;grid-template-columns:30px minmax(0,1fr) 18px;justify-content:stretch;gap:var(--space-3);text-align:left;min-height:76px;padding:var(--space-3);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:linear-gradient(145deg,color-mix(in srgb,var(--color-atelier-raised) 94%,white),var(--color-atelier-raised));font:500 15px/1.5 var(--font-text);color:var(--color-text-primaer);box-shadow:inset 0 1px 0 color-mix(in srgb, var(--color-text-primaer) 4%, transparent)}
 .workspace-shell .aifly-panel .orientation-starter svg{flex:none;color:var(--color-atelier-champagne)}
-.workspace-shell .aifly-panel .orientation-starter:hover{background:var(--color-atelier-surface)}
+.workspace-shell .aifly-panel .orientation-starter:hover{background:var(--gradient-karte)}
 .workspace-shell .aifly-panel .public-orientation{gap:var(--space-5)}
 .workspace-shell .aifly-panel .orientation-history:empty{display:none}
 .workspace-shell .aifly-panel .connection-note{font:400 12px/1.6 var(--font-text);color:var(--color-text-tertiaer);text-align:center;margin:0}
@@ -229,7 +229,7 @@
 .workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant>strong{color:var(--color-atelier-champagne)}
 .workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant>p{font-size:13px}
 @media(forced-colors:active),(prefers-contrast:more){.workspace-shell .aifly-panel .orientation-history .orientation-message.role-assistant{box-shadow:none;border:1px solid var(--color-linie-stark)}}
-@media(max-width:820px){.workspace-shell .aifly-panel{background:var(--color-atelier-surface);backdrop-filter:none;-webkit-backdrop-filter:none}}
+@media(max-width:820px){.workspace-shell .aifly-panel{background:var(--gradient-karte);backdrop-filter:none;-webkit-backdrop-filter:none}}
 
 /* Editorial page rhythm: space, material and changing proportions replace divider-led stacks. */
 /* Enge Überschriften-Laufweite (-.04em) schließt sonst die Wortlücken; Wortabstand gleicht das aus. */
@@ -242,7 +242,7 @@
 .workspace-shell .brand-word .brand-x{color:var(--color-marke-lime-signal);-webkit-text-fill-color:var(--color-marke-lime-signal)}
 .workspace-shell .brand-word small{color:var(--color-atelier-platinum);-webkit-text-fill-color:var(--color-atelier-platinum)}
 @media(forced-colors:active){.workspace-shell .brand-signet{background:CanvasText}.workspace-shell .brand-word{background:none;color:CanvasText;-webkit-text-fill-color:currentColor}.workspace-shell .brand-word .brand-x{color:Highlight;-webkit-text-fill-color:Highlight}}
-.workspace-shell .home-concept .hc-process li{padding:var(--space-5);border:0;border-radius:var(--radius-karte);background:var(--color-atelier-surface)}
+.workspace-shell .home-concept .hc-process li{padding:var(--space-5);border:0;border-radius:var(--radius-karte);background:var(--gradient-karte)}
 .workspace-shell .home-concept .hc-calculation,.workspace-shell .home-concept .hc-product{border:0}
 .workspace-shell .home-concept .hc-benchmarks{display:grid;gap:var(--space-2)}
 .workspace-shell .home-concept .hc-benchmarks li{padding:var(--space-3);border:0;border-radius:var(--radius-chip);background:color-mix(in srgb,var(--color-atelier-raised) 72%,transparent)}
