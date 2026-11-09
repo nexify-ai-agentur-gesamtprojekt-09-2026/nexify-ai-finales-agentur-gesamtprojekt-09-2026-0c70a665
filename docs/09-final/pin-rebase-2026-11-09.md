@@ -23,14 +23,14 @@ Nur Pins, deren aktuelle Bytes durch einen heute real erhobenen, bestandenen Nac
 | `apps/web/auth/tests/oracle-companion.test.mjs` | `5291c944bdd0…` | `3a948baf55e3…` | node --test apps/web/auth/tests: 19/19 OK (bzw. 12/12 der drei Dateien) |
 | `apps/web/auth/tests/policy.test.mjs` | `831a6aca1661…` | `5374882d5e10…` | node --test apps/web/auth/tests: 19/19 OK (proxy-Vertrag nach D-007) |
 | `apps/web/auth/tests/public-experience.test.mjs` | `5fdd3680f2f1…` | `bae306a95122…` | node --test apps/web/auth/tests: OK |
+| `config/presenter-system.json` | `450a055992a7…` | `971f562fff93…` | Diff seit Pin geprüft: genau 1 Zeile, nur die Quell-URL `confirmed_rejection_source` (Referenz, kein Inhalt der Anforderung) |
+| `docs/contracts/hero-media.json` | `92a55c579cd2…` | `fb8822874f90…` | Diff seit Pin geprüft: genau 1 Zeile, nur die Quell-URL `confirmed_rejection_source` (Referenz, kein Inhalt der Anforderung) |
+| `docs/contracts/hero-production-plan.json` | `f351c138ff8c…` | `55a014852d06…` | Diff seit Pin geprüft: genau 1 Zeile, nur die Quell-URL `confirmed_rejection_source` (Referenz, kein Inhalt der Anforderung) |
 
 ## OFFEN (nicht rebased, Entscheidung/Abgleich nötig)
 
 - `PROGRESS.md`
 - `config/page-explainers.json`
-- `config/presenter-system.json`
-- `docs/contracts/hero-media.json`
-- `docs/contracts/hero-production-plan.json`
 - `docs/contracts/requirements-reconciliation.md`
 - `apps/site/tests/public-video-assets.test.mjs`
 - `config/page-media-registry.json`
