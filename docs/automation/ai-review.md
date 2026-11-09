@@ -12,6 +12,22 @@ In einem Job mit Secrets muss der Engine-/Workflowcode aus einer vertrauenswürd
 
 Diff, Dateinamen, Kommentare und vorgeschlagene Änderungen sind untrusted Daten. Pfade außerhalb der tatsächlich geänderten Dateien, absolute Pfade und Traversal werden abgewiesen. Erkannte sensible Dateien/Schlüsselmuster, Binärdiffs, leere oder übergroße Diffs blockieren statt eine abgeschnittene Prüfung als vollständig auszugeben. Diese Musterprüfung ist kein allgemeiner Beweis, dass ein Repository frei von Geheimnissen oder personenbezogenen Daten ist; die Freigabe des konkreten Codetransfers bleibt Aufgabe des vorgeschalteten Daten-/Projektvertrags.
 
+## Maschinell erzeugte Nachweise: Ausnahme nur vom Modell-Diff
+
+Problem: Browser-Nachweise unter `evidence/**/*.json` (einzelne Dateien 60 bis 375 KB) überschreiten `max_diff_bytes` (64.000) allein; der Review sperrt dann fail-closed, egal wie der PR geschnitten wird. Das Limit wird **nicht** angehoben und der Review nicht abgeschaltet.
+
+Lösung: `ai_review.llm_diff_excluded_globs` in `config/automation.json` (Standard leer, ausgeliefert `["evidence/**"]`). Treffer werden aus dem **an das Modell gesendeten** Diff genommen, sonst nichts:
+
+- Schutz bleibt für alle Pfade: `sensitive_path` (Namen), `SECRET_PATTERN`, `sensitive_assignment` und die Binärdiff-Sperre laufen über den ungekürzten Diff jedes ausgenommenen Pfads lokal. Dieser Diff geht nie an das Modell. Lokale Obergrenze 8 MiB je Prüfung (`EXCLUDED_SCAN_BYTES`), darüber `excluded_diff_scan_limit_exceeded`.
+- Nichts wird stillschweigend ignoriert: Der Kontext enthält `excluded_from_llm_diff` mit je `path`, `added`, `removed`, `sha256` (des Diff-Teils); der Systemprompt weist das Modell an, dazu keine Aussage zu machen. Der Ergebnisbeleg enthält zusätzlich `llm_diff_excluded_globs`. `changed_files` listet nur die dem Modell gezeigten Pfade, Findings auf ausgenommene Pfade sind ungültig.
+- `max_diff_bytes` gilt unverändert für alles, was ans Modell geht (und für die Pfadliste).
+- Ein PR, der nur aus ausgenommenen Pfaden besteht, ist kein Review: `only_excluded_paths_not_a_review`, es bleibt eine menschliche Prüfung nötig.
+- Gültige Globs: höchstens 5, nur `A-Za-z0-9._-/*?`, relativ, ohne `.`/`..`/leere Segmente, `**` nur als ganzes Segment, erstes Segment ohne Wildcard (kein `**`, `*`, `**/x`). Ungültig oder falscher Typ ⇒ `invalid_llm_diff_excluded_globs` (`ReviewBlocked`, exit 2). Groß-/Kleinschreibung zählt; `evidence/**` trifft nicht `evidence2/` oder `docs/evidence/`.
+
+Grenzen: Die beratende Modellprüfung deckt ausgenommene Dateien nicht ab, auch nicht deren Inhalt als Code oder Anweisung; die Mustersuche ist kein Beweis für Geheimnisfreiheit (siehe oben). Ein gemischter PR bekommt ein `no_findings` nur für die gezeigten Pfade. Main-/Jeff-/Operatorgates bleiben unverändert.
+
+Rückweg: `llm_diff_excluded_globs` auf `[]` setzen (oder den Eintrag entfernen); das Verhalten ist dann identisch zum Stand davor.
+
 ## CLI
 
 ```bash
@@ -81,4 +97,4 @@ Offizielle Recherchebelege stehen in `docs/automation/blueprints.sources.json` u
 - `https://openrouter.ai/docs/cookbook/administration/usage-accounting`: `usage.cost` ist der berechnete Kontobetrag; vollständige Usage gehört zur Antwort.
 - `https://openrouter.ai/docs/guides/overview/models`: Preiswerte in USD je Token/Request/Einheit; „0“ ist explizit frei, ein fehlendes Feld bleibt etwas anderes.
 
-Die 21 Offlinevertragsprüfungen nutzen echte lokale Git-Commits, aber einen gemockten Provider. Sie prüfen insbesondere Modell-/High-/Schema-/Budget-/SHA-/Pfadbindung, keine automatische Paid-Wiederholung, kein Redirect und Credentialdateien/literale Secretzuweisungen, vollständige HTTP-Deadline, Override-/Cachegebühren und Ablehnung sämtlicher Patchdaten. Die öffentliche Katalogprobe wurde mit der echten Engine erfolgreich ausgeführt; `OPENROUTER_API_KEY` war dabei nicht gebunden. **Es wurde keine echte kostenpflichtige Inferenz, kein Remote-Reviewkommentar, kein Merge und kein Deployment durchgeführt.**
+Die 34 Offlinevertragsprüfungen nutzen echte lokale Git-Commits, aber einen gemockten Provider. Sie prüfen insbesondere Modell-/High-/Schema-/Budget-/SHA-/Pfadbindung, keine automatische Paid-Wiederholung, kein Redirect und Credentialdateien/literale Secretzuweisungen, vollständige HTTP-Deadline, Override-/Cachegebühren und Ablehnung sämtlicher Patchdaten. Die öffentliche Katalogprobe wurde mit der echten Engine erfolgreich ausgeführt; `OPENROUTER_API_KEY` war dabei nicht gebunden. **Es wurde keine echte kostenpflichtige Inferenz, kein Remote-Reviewkommentar, kein Merge und kein Deployment durchgeführt.**
