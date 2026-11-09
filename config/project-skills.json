@@ -276,10 +276,10 @@
     },
     {
       "name": "nexify-quality-learning",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "owner": "D07",
       "source_path": "skills/nexify-quality-learning/SKILL.md",
-      "sha256": "83a0def89fd68fbc17d7b5a15765dd2c20d24a21d462dcfae99f23b7d068b11d",
+      "sha256": "2df46586b4d354fc9bd49c0380ec61e711c0a862ca4a7ce94cf2294f3fbe69d6",
       "scope": "canonical_agency_project",
       "install_path": ".agents/skills/nexify-quality-learning/SKILL.md",
       "triggers": [
@@ -309,7 +309,9 @@
         "scripts/verify-feature.sh",
         "tests/test_feature_verification.py",
         "tests/test_project_skills.py",
-        "docs/quality/standards-applicability.md"
+        "docs/quality/standards-applicability.md",
+        "config/known-solutions.json",
+        "tests/test_known_solutions.py"
       ],
       "review_triggers": [
         "skill_content_hash_or_version_change",
