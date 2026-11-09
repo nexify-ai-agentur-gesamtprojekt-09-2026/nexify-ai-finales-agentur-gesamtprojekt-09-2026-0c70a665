@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-09T06:30:42.015Z",
+  "observed_at": "2026-11-09T07:09:10.411Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "9e6e116330400b375fbc42fa1a5d96288ba54815725dc9a4cf3496370fcdb04e",
     "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
@@ -29,7 +29,7 @@
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/ExplainerSections.tsx": "f46caac7d768fbaee8a3459e201c3d52e16d0d5ba0ea023eedf365a44fecd632",
     "apps/web/components/HcArrow.tsx": "cb9a9fb68e7768b89c9daae67253716ee952460b565969c9db4c4cde0eddefaa",
-    "apps/web/components/HomeConcept.css": "ded616e57fa6a76bc3afa321e4b78b98e5a0a1bec239feb0e1a3b3664d6c4ca8",
+    "apps/web/components/HomeConcept.css": "2cd4926223d3cf3a1c96fc6ed9d1ce2a08d0b5dc620f2e6c533959705a068176",
     "apps/web/components/HomeContent.tsx": "adf9b8495833e0ca99a4bdd3190453467564ef35c5433e1d609e4d6c62bc73b8",
     "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
     "apps/web/components/HomeMaster.css": "82155bef37bbe439c896abed1c9372827ddb60528249d2f8e597ad65e7bd8bd9",

@@ -1,258 +1,50 @@
 {
   "renderer": "vite",
-  "scope": "local optimized shared hero composition;original PNG bytes;not video/provider/production acceptance",
+  "scope": "home hero graphite-atelier editorial still (one brand photograph, no film); technical checks executed in the local optimized renderer; not video/provider/production acceptance",
+  "layout": "graphite-atelier",
+  "media_state": "editorial-still",
+  "locales": [
+    "de"
+  ],
+  "reduced_motion": "still",
   "views": [
     {
       "width": 320,
       "locale": "de",
       "sidebar": "closed",
       "scene": {
-        "left": 16,
-        "right": 304,
-        "top": 137,
-        "bottom": 766.46875,
-        "width": 288,
-        "height": 629.46875
+        "left": 0,
+        "right": 320,
+        "top": 144,
+        "bottom": 1040.3125,
+        "width": 320,
+        "height": 896.3125
       },
       "copy": {
-        "left": 17,
-        "right": 303,
-        "top": 138,
-        "bottom": 389.96875,
-        "width": 286,
-        "height": 251.96875
-      },
-      "stage": {
-        "left": 17,
-        "right": 303,
-        "top": 407.96875,
-        "bottom": 765.46875,
-        "width": 286,
-        "height": 357.5
+        "left": 24,
+        "right": 296,
+        "top": 192,
+        "bottom": 791.3125,
+        "width": 272,
+        "height": 599.3125
       },
       "figures": [
         {
-          "speaker": "pascal",
+          "speaker": "photo",
           "rect": {
-            "left": 88.5,
-            "right": 282.96875,
-            "top": 444.8125,
-            "bottom": 736.515625,
-            "width": 194.46875,
-            "height": 291.703125
+            "left": 24,
+            "right": 296,
+            "top": 839.3125,
+            "bottom": 992.3125,
+            "width": 272,
+            "height": 153
           },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.693121693121693,
+          "fit": "cover",
           "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 28.4375,
-            "right": 119.953125,
-            "top": 640.359375,
-            "bottom": 731.875,
-            "width": 91.515625,
-            "height": 91.515625
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 222.90625,
-            "right": 288.671875,
-            "top": 606.765625,
-            "bottom": 672.53125,
-            "width": 65.765625,
-            "height": 65.765625
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": true,
-      "passed": true
-    },
-    {
-      "width": 320,
-      "locale": "nl",
-      "sidebar": "closed",
-      "scene": {
-        "left": 16,
-        "right": 304,
-        "top": 137,
-        "bottom": 713.8125,
-        "width": 288,
-        "height": 576.8125
-      },
-      "copy": {
-        "left": 17,
-        "right": 303,
-        "top": 138,
-        "bottom": 337.3125,
-        "width": 286,
-        "height": 199.3125
-      },
-      "stage": {
-        "left": 17,
-        "right": 303,
-        "top": 355.3125,
-        "bottom": 712.8125,
-        "width": 286,
-        "height": 357.5
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 88.5,
-            "right": 282.96875,
-            "top": 392.15625,
-            "bottom": 683.859375,
-            "width": 194.46875,
-            "height": 291.703125
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 28.4375,
-            "right": 119.953125,
-            "top": 587.703125,
-            "bottom": 679.21875,
-            "width": 91.515625,
-            "height": 91.515625
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 222.90625,
-            "right": 288.671875,
-            "top": 554.109375,
-            "bottom": 619.875,
-            "width": 65.765625,
-            "height": 65.765625
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": true,
-      "passed": true
-    },
-    {
-      "width": 320,
-      "locale": "fr",
-      "sidebar": "closed",
-      "scene": {
-        "left": 16,
-        "right": 304,
-        "top": 137,
-        "bottom": 733.3125,
-        "width": 288,
-        "height": 596.3125
-      },
-      "copy": {
-        "left": 17,
-        "right": 303,
-        "top": 138,
-        "bottom": 356.8125,
-        "width": 286,
-        "height": 218.8125
-      },
-      "stage": {
-        "left": 17,
-        "right": 303,
-        "top": 374.8125,
-        "bottom": 732.3125,
-        "width": 286,
-        "height": 357.5
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 88.5,
-            "right": 282.96875,
-            "top": 411.65625,
-            "bottom": 703.359375,
-            "width": 194.46875,
-            "height": 291.703125
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 28.4375,
-            "right": 119.953125,
-            "top": 607.203125,
-            "bottom": 698.71875,
-            "width": 91.515625,
-            "height": 91.515625
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 222.90625,
-            "right": 288.671875,
-            "top": 573.609375,
-            "bottom": 639.375,
-            "width": 65.765625,
-            "height": 65.765625
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
+          "opacity": 1
         }
       ],
       "overflow": false,
@@ -265,252 +57,38 @@
       "locale": "de",
       "sidebar": "closed",
       "scene": {
-        "left": 16,
-        "right": 374,
-        "top": 137,
-        "bottom": 853.96875,
-        "width": 358,
-        "height": 716.96875
+        "left": 0,
+        "right": 390,
+        "top": 144,
+        "bottom": 1034.65625,
+        "width": 390,
+        "height": 890.65625
       },
       "copy": {
-        "left": 17,
-        "right": 373,
-        "top": 138,
-        "bottom": 389.96875,
-        "width": 356,
-        "height": 251.96875
-      },
-      "stage": {
-        "left": 17,
-        "right": 373,
-        "top": 407.96875,
-        "bottom": 852.96875,
-        "width": 356,
-        "height": 445
+        "left": 24,
+        "right": 366,
+        "top": 192,
+        "bottom": 746.28125,
+        "width": 342,
+        "height": 554.28125
       },
       "figures": [
         {
-          "speaker": "pascal",
+          "speaker": "photo",
           "rect": {
-            "left": 106,
-            "right": 348.078125,
-            "top": 453.828125,
-            "bottom": 816.9375,
-            "width": 242.078125,
-            "height": 363.109375
+            "left": 24,
+            "right": 366,
+            "top": 794.28125,
+            "bottom": 986.65625,
+            "width": 342,
+            "height": 192.375
           },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.6883116883116882,
+          "fit": "cover",
           "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 31.234375,
-            "right": 145.140625,
-            "top": 697.234375,
-            "bottom": 811.140625,
-            "width": 113.90625,
-            "height": 113.90625
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 273.3125,
-            "right": 355.1875,
-            "top": 655.40625,
-            "bottom": 737.28125,
-            "width": 81.875,
-            "height": 81.875
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": true,
-      "passed": true
-    },
-    {
-      "width": 390,
-      "locale": "nl",
-      "sidebar": "closed",
-      "scene": {
-        "left": 16,
-        "right": 374,
-        "top": 96,
-        "bottom": 760.3125,
-        "width": 358,
-        "height": 664.3125
-      },
-      "copy": {
-        "left": 17,
-        "right": 373,
-        "top": 97,
-        "bottom": 296.3125,
-        "width": 356,
-        "height": 199.3125
-      },
-      "stage": {
-        "left": 17,
-        "right": 373,
-        "top": 314.3125,
-        "bottom": 759.3125,
-        "width": 356,
-        "height": 445
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 106,
-            "right": 348.078125,
-            "top": 360.171875,
-            "bottom": 723.28125,
-            "width": 242.078125,
-            "height": 363.109375
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 31.234375,
-            "right": 145.140625,
-            "top": 603.578125,
-            "bottom": 717.484375,
-            "width": 113.90625,
-            "height": 113.90625
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 273.3125,
-            "right": 355.1875,
-            "top": 561.75,
-            "bottom": 643.625,
-            "width": 81.875,
-            "height": 81.875
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": true,
-      "passed": true
-    },
-    {
-      "width": 390,
-      "locale": "fr",
-      "sidebar": "closed",
-      "scene": {
-        "left": 16,
-        "right": 374,
-        "top": 96,
-        "bottom": 779.8125,
-        "width": 358,
-        "height": 683.8125
-      },
-      "copy": {
-        "left": 17,
-        "right": 373,
-        "top": 97,
-        "bottom": 315.8125,
-        "width": 356,
-        "height": 218.8125
-      },
-      "stage": {
-        "left": 17,
-        "right": 373,
-        "top": 333.8125,
-        "bottom": 778.8125,
-        "width": 356,
-        "height": 445
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 106,
-            "right": 348.078125,
-            "top": 379.671875,
-            "bottom": 742.78125,
-            "width": 242.078125,
-            "height": 363.109375
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 31.234375,
-            "right": 145.140625,
-            "top": 623.078125,
-            "bottom": 736.984375,
-            "width": 113.90625,
-            "height": 113.90625
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 273.3125,
-            "right": 355.1875,
-            "top": 581.25,
-            "bottom": 663.125,
-            "width": 81.875,
-            "height": 81.875
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
+          "opacity": 1
         }
       ],
       "overflow": false,
@@ -523,80 +101,38 @@
       "locale": "de",
       "sidebar": "closed",
       "scene": {
-        "left": 32,
-        "right": 1408,
-        "top": -4435,
-        "bottom": -3575,
-        "width": 1376,
-        "height": 860
+        "left": 0,
+        "right": 1440,
+        "top": 104,
+        "bottom": 613.453125,
+        "width": 1440,
+        "height": 509.453125
       },
       "copy": {
-        "left": 115.4375,
-        "right": 470.4375,
-        "top": -4330.953125,
-        "bottom": -4060.25,
-        "width": 355,
-        "height": 270.703125
-      },
-      "stage": {
-        "left": 33,
-        "right": 1407,
-        "top": -4434,
-        "bottom": -3576,
-        "width": 1374,
-        "height": 858
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 152,
+        "bottom": 565.453125,
+        "width": 597.234375,
+        "height": 413.453125
       },
       "figures": [
         {
-          "speaker": "pascal",
+          "speaker": "photo",
           "rect": {
-            "left": 623.8125,
-            "right": 1104.703125,
-            "top": -4375.390625,
-            "bottom": -3654.0625,
-            "width": 480.890625,
-            "height": 721.328125
+            "left": 677.625,
+            "right": 1407.609375,
+            "top": 153.421875,
+            "bottom": 564.03125,
+            "width": 729.984375,
+            "height": 410.609375
           },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
           "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 445.1875,
-            "right": 692.5,
-            "top": -3910.828125,
-            "bottom": -3663.515625,
-            "width": 247.3125,
-            "height": 247.3125
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 1063.5,
-            "right": 1247.609375,
-            "top": -4000.34375,
-            "bottom": -3816.234375,
-            "width": 184.109375,
-            "height": 184.109375
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
+          "opacity": 1
         }
       ],
       "overflow": false,
@@ -606,51 +142,35 @@
     },
     {
       "width": 1440,
-      "forced_width": 720,
+      "forced_width": 764,
       "locale": "de",
       "sidebar": "closed",
       "breakpoint_probe": true,
       "scene": {
-        "left": 32,
-        "right": 688,
-        "top": -120,
-        "bottom": 969.46875,
-        "width": 656,
-        "height": 1089.46875
+        "left": 0,
+        "right": 764,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 764,
+        "height": 925.546875
       },
       "copy": {
-        "left": 33,
-        "right": 687,
-        "top": -119,
-        "bottom": 132.96875,
-        "width": 654,
-        "height": 251.96875
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 699.21875,
+        "height": 421.546875
       },
       "stacked": true,
       "figures": [
         {
-          "left": 196.5,
-          "right": 641.21875,
-          "top": 235.1875,
-          "bottom": 902.265625,
-          "width": 444.71875,
-          "height": 667.078125
-        },
-        {
-          "left": 59.15625,
-          "right": 268.421875,
-          "top": 682.359375,
-          "bottom": 891.625,
-          "width": 209.265625,
-          "height": 209.265625
-        },
-        {
-          "left": 503.875,
-          "right": 654.28125,
-          "top": 605.515625,
-          "bottom": 755.921875,
-          "width": 150.40625,
-          "height": 150.40625
+          "left": 62,
+          "right": 702,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
         }
       ],
       "overflow": false,
@@ -658,51 +178,35 @@
     },
     {
       "width": 1440,
-      "forced_width": 763,
+      "forced_width": 820,
       "locale": "de",
       "sidebar": "closed",
       "breakpoint_probe": true,
       "scene": {
-        "left": 32,
-        "right": 731,
-        "top": -120,
-        "bottom": 1023.21875,
-        "width": 699,
-        "height": 1143.21875
+        "left": 0,
+        "right": 820,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 820,
+        "height": 925.546875
       },
       "copy": {
-        "left": 33,
-        "right": 730,
-        "top": -119,
-        "bottom": 132.96875,
-        "width": 697,
-        "height": 251.96875
+        "left": 32.390625,
+        "right": 787.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 755.21875,
+        "height": 421.546875
       },
       "stacked": true,
       "figures": [
         {
-          "left": 207.25,
-          "right": 681.203125,
-          "top": 240.734375,
-          "bottom": 951.65625,
-          "width": 473.953125,
-          "height": 710.921875
-        },
-        {
-          "left": 60.875,
-          "right": 283.90625,
-          "top": 717.296875,
-          "bottom": 940.328125,
-          "width": 223.03125,
-          "height": 223.03125
-        },
-        {
-          "left": 534.828125,
-          "right": 695.125,
-          "top": 635.40625,
-          "bottom": 795.703125,
-          "width": 160.296875,
-          "height": 160.296875
+          "left": 90,
+          "right": 730,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
         }
       ],
       "overflow": false,
@@ -710,51 +214,35 @@
     },
     {
       "width": 1440,
-      "forced_width": 765,
+      "forced_width": 821,
       "locale": "de",
       "sidebar": "closed",
       "breakpoint_probe": true,
       "scene": {
-        "left": 32,
-        "right": 733,
-        "top": -120,
-        "bottom": 424.171875,
-        "width": 701,
-        "height": 544.171875
+        "left": 0,
+        "right": 821,
+        "top": 0,
+        "bottom": 925.546875,
+        "width": 821,
+        "height": 925.546875
       },
       "copy": {
-        "left": 74.9375,
-        "right": 291.625,
-        "top": -66.578125,
-        "bottom": 135.171875,
-        "width": 216.6875,
-        "height": 201.75
+        "left": 32.390625,
+        "right": 788.609375,
+        "top": 48,
+        "bottom": 469.546875,
+        "width": 756.21875,
+        "height": 421.546875
       },
-      "stacked": false,
+      "stacked": true,
       "figures": [
         {
-          "left": 333.5625,
-          "right": 578.203125,
-          "top": 6.890625,
-          "bottom": 373.84375,
-          "width": 244.640625,
-          "height": 366.953125
-        },
-        {
-          "left": 242.6875,
-          "right": 368.5,
-          "top": 242.0625,
-          "bottom": 367.875,
-          "width": 125.8125,
-          "height": 125.8125
-        },
-        {
-          "left": 557.25,
-          "right": 650.90625,
-          "top": 177.71875,
-          "bottom": 271.375,
-          "width": 93.65625,
-          "height": 93.65625
+          "left": 90.5,
+          "right": 730.5,
+          "top": 517.546875,
+          "bottom": 877.546875,
+          "width": 640,
+          "height": 360
         }
       ],
       "overflow": false,
@@ -762,51 +250,143 @@
     },
     {
       "width": 1440,
-      "forced_width": 800,
+      "forced_width": 1000,
       "locale": "de",
       "sidebar": "closed",
       "breakpoint_probe": true,
       "scene": {
-        "left": 32,
-        "right": 768,
-        "top": 21,
-        "bottom": 570.390625,
-        "width": 736,
-        "height": 549.390625
+        "left": 0,
+        "right": 1000,
+        "top": 0,
+        "bottom": 925.546875,
+        "width": 1000,
+        "height": 925.546875
       },
       "copy": {
-        "left": 77.03125,
-        "right": 304.5625,
-        "top": 77.046875,
-        "bottom": 281.390625,
-        "width": 227.53125,
-        "height": 204.34375
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 48,
+        "bottom": 469.546875,
+        "width": 935.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 180,
+          "right": 820,
+          "top": 517.546875,
+          "bottom": 877.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1100,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1100,
+        "top": -85,
+        "bottom": 840.546875,
+        "width": 1100,
+        "height": 925.546875
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 1067.609375,
+        "top": -37,
+        "bottom": 384.546875,
+        "width": 1035.21875,
+        "height": 421.546875
+      },
+      "stacked": true,
+      "figures": [
+        {
+          "left": 230,
+          "right": 870,
+          "top": 432.546875,
+          "bottom": 792.546875,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1101,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 0,
+        "bottom": 633.953125,
+        "width": 1101,
+        "height": 633.953125
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 48,
+        "bottom": 585.953125,
+        "width": 444.6875,
+        "height": 537.953125
       },
       "stacked": false,
       "figures": [
         {
-          "left": 348.609375,
-          "right": 605.5,
-          "top": 134.25,
-          "bottom": 519.578125,
-          "width": 256.890625,
-          "height": 385.328125
-        },
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 164.109375,
+          "bottom": 469.84375,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "forced_width": 1300,
+      "locale": "de",
+      "sidebar": "closed",
+      "breakpoint_probe": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": -85,
+        "bottom": 440.5625,
+        "width": 1300,
+        "height": 525.5625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": -37,
+        "bottom": 392.5625,
+        "width": 534.234375,
+        "height": 429.5625
+      },
+      "stacked": false,
+      "figures": [
         {
-          "left": 253.1875,
-          "right": 385.296875,
-          "top": 381.453125,
-          "bottom": 513.5625,
-          "width": 132.109375,
-          "height": 132.109375
-        },
-        {
-          "left": 583.5,
-          "right": 681.84375,
-          "top": 317.78125,
-          "bottom": 416.125,
-          "width": 98.34375,
-          "height": 98.34375
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": -5.875,
+          "bottom": 361.421875,
+          "width": 652.984375,
+          "height": 367.296875
         }
       ],
       "overflow": false,
@@ -817,845 +397,43 @@
       "locale": "de",
       "sidebar": "open",
       "scene": {
-        "left": 32,
-        "right": 1062.40625,
-        "top": -4208,
-        "bottom": -3564,
-        "width": 1030.40625,
-        "height": 644
+        "left": 0,
+        "right": 1012.8125,
+        "top": -501,
+        "bottom": 424.546875,
+        "width": 1012.8125,
+        "height": 925.546875
       },
       "copy": {
-        "left": 94.703125,
-        "right": 413.5,
-        "top": -4129.875,
-        "bottom": -3913.71875,
-        "width": 318.796875,
-        "height": 216.15625
-      },
-      "stage": {
-        "left": 33,
-        "right": 1061.40625,
-        "top": -4207,
-        "bottom": -3565,
-        "width": 1028.40625,
-        "height": 642
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": -453,
+        "bottom": -31.453125,
+        "width": 883.21875,
+        "height": 421.546875
       },
       "figures": [
         {
-          "speaker": "pascal",
+          "speaker": "photo",
           "rect": {
-            "left": 475.203125,
-            "right": 835.140625,
-            "top": -4163.328125,
-            "bottom": -3623.421875,
-            "width": 359.9375,
-            "height": 539.90625
+            "left": 186.40625,
+            "right": 826.40625,
+            "top": 16.546875,
+            "bottom": 376.546875,
+            "width": 640,
+            "height": 360
           },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
+          "src": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+          "alt": "Markeninszenierung: Pascal zeigt Papierlayouts und ein Modell auf einem Ateliertisch, begleitet von NeX und AIFly ORACLE",
+          "ratio": 1.6881594372801876,
+          "fit": "cover",
           "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 341.515625,
-            "right": 526.625,
-            "top": -3815.578125,
-            "bottom": -3630.46875,
-            "width": 185.109375,
-            "height": 185.109375
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 804.296875,
-            "right": 942.09375,
-            "top": -3882.546875,
-            "bottom": -3744.75,
-            "width": 137.796875,
-            "height": 137.796875
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
+          "opacity": 1
         }
       ],
       "overflow": false,
       "text_overflow": false,
-      "stacked": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "locale": "nl",
-      "sidebar": "closed",
-      "scene": {
-        "left": 32,
-        "right": 1408,
-        "top": -4332,
-        "bottom": -3472,
-        "width": 1376,
-        "height": 860
-      },
-      "copy": {
-        "left": 115.4375,
-        "right": 470.4375,
-        "top": -4227.953125,
-        "bottom": -3982.046875,
-        "width": 355,
-        "height": 245.90625
-      },
-      "stage": {
-        "left": 33,
-        "right": 1407,
-        "top": -4331,
-        "bottom": -3473,
-        "width": 1374,
-        "height": 858
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 623.8125,
-            "right": 1104.703125,
-            "top": -4272.390625,
-            "bottom": -3551.0625,
-            "width": 480.890625,
-            "height": 721.328125
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 445.1875,
-            "right": 692.5,
-            "top": -3807.828125,
-            "bottom": -3560.515625,
-            "width": 247.3125,
-            "height": 247.3125
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 1063.5,
-            "right": 1247.609375,
-            "top": -3897.34375,
-            "bottom": -3713.234375,
-            "width": 184.109375,
-            "height": 184.109375
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 720,
-      "locale": "nl",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 688,
-        "top": -107,
-        "bottom": 929.8125,
-        "width": 656,
-        "height": 1036.8125
-      },
-      "copy": {
-        "left": 33,
-        "right": 687,
-        "top": -106,
-        "bottom": 93.3125,
-        "width": 654,
-        "height": 199.3125
-      },
       "stacked": true,
-      "figures": [
-        {
-          "left": 196.5,
-          "right": 641.21875,
-          "top": 195.53125,
-          "bottom": 862.609375,
-          "width": 444.71875,
-          "height": 667.078125
-        },
-        {
-          "left": 59.15625,
-          "right": 268.421875,
-          "top": 642.703125,
-          "bottom": 851.96875,
-          "width": 209.265625,
-          "height": 209.265625
-        },
-        {
-          "left": 503.875,
-          "right": 654.28125,
-          "top": 565.859375,
-          "bottom": 716.265625,
-          "width": 150.40625,
-          "height": 150.40625
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 763,
-      "locale": "nl",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 731,
-        "top": -107,
-        "bottom": 983.5625,
-        "width": 699,
-        "height": 1090.5625
-      },
-      "copy": {
-        "left": 33,
-        "right": 730,
-        "top": -106,
-        "bottom": 93.3125,
-        "width": 697,
-        "height": 199.3125
-      },
-      "stacked": true,
-      "figures": [
-        {
-          "left": 207.25,
-          "right": 681.203125,
-          "top": 201.078125,
-          "bottom": 912,
-          "width": 473.953125,
-          "height": 710.921875
-        },
-        {
-          "left": 60.875,
-          "right": 283.90625,
-          "top": 677.640625,
-          "bottom": 900.671875,
-          "width": 223.03125,
-          "height": 223.03125
-        },
-        {
-          "left": 534.828125,
-          "right": 695.125,
-          "top": 595.75,
-          "bottom": 756.046875,
-          "width": 160.296875,
-          "height": 160.296875
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 765,
-      "locale": "nl",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 733,
-        "top": -107,
-        "bottom": 418.578125,
-        "width": 701,
-        "height": 525.578125
-      },
-      "copy": {
-        "left": 74.9375,
-        "right": 291.625,
-        "top": -53.578125,
-        "bottom": 129.578125,
-        "width": 216.6875,
-        "height": 183.15625
-      },
-      "stacked": false,
-      "figures": [
-        {
-          "left": 333.5625,
-          "right": 578.203125,
-          "top": 2.984375,
-          "bottom": 369.9375,
-          "width": 244.640625,
-          "height": 366.953125
-        },
-        {
-          "left": 242.6875,
-          "right": 368.5,
-          "top": 238.375,
-          "bottom": 364.1875,
-          "width": 125.8125,
-          "height": 125.8125
-        },
-        {
-          "left": 557.25,
-          "right": 650.90625,
-          "top": 177.328125,
-          "bottom": 270.984375,
-          "width": 93.65625,
-          "height": 93.65625
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 800,
-      "locale": "nl",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 768,
-        "top": 32,
-        "bottom": 562.796875,
-        "width": 736,
-        "height": 530.796875
-      },
-      "copy": {
-        "left": 77.03125,
-        "right": 304.5625,
-        "top": 88.046875,
-        "bottom": 273.796875,
-        "width": 227.53125,
-        "height": 185.75
-      },
-      "stacked": false,
-      "figures": [
-        {
-          "left": 348.609375,
-          "right": 605.5,
-          "top": 128.359375,
-          "bottom": 513.6875,
-          "width": 256.890625,
-          "height": 385.328125
-        },
-        {
-          "left": 253.1875,
-          "right": 385.296875,
-          "top": 375.765625,
-          "bottom": 507.875,
-          "width": 132.109375,
-          "height": 132.109375
-        },
-        {
-          "left": 583.5,
-          "right": 681.84375,
-          "top": 315.390625,
-          "bottom": 413.734375,
-          "width": 98.34375,
-          "height": 98.34375
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "locale": "nl",
-      "sidebar": "open",
-      "scene": {
-        "left": 32,
-        "right": 1062.40625,
-        "top": -4085,
-        "bottom": -3441,
-        "width": 1030.40625,
-        "height": 644
-      },
-      "copy": {
-        "left": 94.703125,
-        "right": 413.5,
-        "top": -4006.875,
-        "bottom": -3790.71875,
-        "width": 318.796875,
-        "height": 216.15625
-      },
-      "stage": {
-        "left": 33,
-        "right": 1061.40625,
-        "top": -4084,
-        "bottom": -3442,
-        "width": 1028.40625,
-        "height": 642
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 475.203125,
-            "right": 835.140625,
-            "top": -4040.328125,
-            "bottom": -3500.421875,
-            "width": 359.9375,
-            "height": 539.90625
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 341.515625,
-            "right": 526.625,
-            "top": -3692.578125,
-            "bottom": -3507.46875,
-            "width": 185.109375,
-            "height": 185.109375
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 804.296875,
-            "right": 942.09375,
-            "top": -3759.546875,
-            "bottom": -3621.75,
-            "width": 137.796875,
-            "height": 137.796875
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "locale": "fr",
-      "sidebar": "closed",
-      "scene": {
-        "left": 32,
-        "right": 1408,
-        "top": -4332,
-        "bottom": -3472,
-        "width": 1376,
-        "height": 860
-      },
-      "copy": {
-        "left": 115.4375,
-        "right": 470.4375,
-        "top": -4227.953125,
-        "bottom": -3957.25,
-        "width": 355,
-        "height": 270.703125
-      },
-      "stage": {
-        "left": 33,
-        "right": 1407,
-        "top": -4331,
-        "bottom": -3473,
-        "width": 1374,
-        "height": 858
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 623.8125,
-            "right": 1104.703125,
-            "top": -4272.390625,
-            "bottom": -3551.0625,
-            "width": 480.890625,
-            "height": 721.328125
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 445.1875,
-            "right": 692.5,
-            "top": -3807.828125,
-            "bottom": -3560.515625,
-            "width": 247.3125,
-            "height": 247.3125
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 1063.5,
-            "right": 1247.609375,
-            "top": -3897.34375,
-            "bottom": -3713.234375,
-            "width": 184.109375,
-            "height": 184.109375
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 720,
-      "locale": "fr",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 688,
-        "top": -107,
-        "bottom": 949.3125,
-        "width": 656,
-        "height": 1056.3125
-      },
-      "copy": {
-        "left": 33,
-        "right": 687,
-        "top": -106,
-        "bottom": 112.8125,
-        "width": 654,
-        "height": 218.8125
-      },
-      "stacked": true,
-      "figures": [
-        {
-          "left": 196.5,
-          "right": 641.21875,
-          "top": 215.03125,
-          "bottom": 882.109375,
-          "width": 444.71875,
-          "height": 667.078125
-        },
-        {
-          "left": 59.15625,
-          "right": 268.421875,
-          "top": 662.203125,
-          "bottom": 871.46875,
-          "width": 209.265625,
-          "height": 209.265625
-        },
-        {
-          "left": 503.875,
-          "right": 654.28125,
-          "top": 585.359375,
-          "bottom": 735.765625,
-          "width": 150.40625,
-          "height": 150.40625
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 763,
-      "locale": "fr",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 731,
-        "top": -107,
-        "bottom": 1003.0625,
-        "width": 699,
-        "height": 1110.0625
-      },
-      "copy": {
-        "left": 33,
-        "right": 730,
-        "top": -106,
-        "bottom": 112.8125,
-        "width": 697,
-        "height": 218.8125
-      },
-      "stacked": true,
-      "figures": [
-        {
-          "left": 207.25,
-          "right": 681.203125,
-          "top": 220.578125,
-          "bottom": 931.5,
-          "width": 473.953125,
-          "height": 710.921875
-        },
-        {
-          "left": 60.875,
-          "right": 283.90625,
-          "top": 697.140625,
-          "bottom": 920.171875,
-          "width": 223.03125,
-          "height": 223.03125
-        },
-        {
-          "left": 534.828125,
-          "right": 695.125,
-          "top": 615.25,
-          "bottom": 775.546875,
-          "width": 160.296875,
-          "height": 160.296875
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 765,
-      "locale": "fr",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 733,
-        "top": -107,
-        "bottom": 437.171875,
-        "width": 701,
-        "height": 544.171875
-      },
-      "copy": {
-        "left": 74.9375,
-        "right": 291.625,
-        "top": -53.578125,
-        "bottom": 148.171875,
-        "width": 216.6875,
-        "height": 201.75
-      },
-      "stacked": false,
-      "figures": [
-        {
-          "left": 333.5625,
-          "right": 578.203125,
-          "top": 19.890625,
-          "bottom": 386.84375,
-          "width": 244.640625,
-          "height": 366.953125
-        },
-        {
-          "left": 242.6875,
-          "right": 368.5,
-          "top": 255.0625,
-          "bottom": 380.875,
-          "width": 125.8125,
-          "height": 125.8125
-        },
-        {
-          "left": 557.25,
-          "right": 650.90625,
-          "top": 190.71875,
-          "bottom": 284.375,
-          "width": 93.65625,
-          "height": 93.65625
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "forced_width": 800,
-      "locale": "fr",
-      "sidebar": "closed",
-      "breakpoint_probe": true,
-      "scene": {
-        "left": 32,
-        "right": 768,
-        "top": 32,
-        "bottom": 581.390625,
-        "width": 736,
-        "height": 549.390625
-      },
-      "copy": {
-        "left": 77.03125,
-        "right": 304.5625,
-        "top": 88.046875,
-        "bottom": 292.390625,
-        "width": 227.53125,
-        "height": 204.34375
-      },
-      "stacked": false,
-      "figures": [
-        {
-          "left": 348.609375,
-          "right": 605.5,
-          "top": 145.25,
-          "bottom": 530.578125,
-          "width": 256.890625,
-          "height": 385.328125
-        },
-        {
-          "left": 253.1875,
-          "right": 385.296875,
-          "top": 392.453125,
-          "bottom": 524.5625,
-          "width": 132.109375,
-          "height": 132.109375
-        },
-        {
-          "left": 583.5,
-          "right": 681.84375,
-          "top": 328.78125,
-          "bottom": 427.125,
-          "width": 98.34375,
-          "height": 98.34375
-        }
-      ],
-      "overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "locale": "fr",
-      "sidebar": "open",
-      "scene": {
-        "left": 32,
-        "right": 1062.40625,
-        "top": -4087,
-        "bottom": -3443,
-        "width": 1030.40625,
-        "height": 644
-      },
-      "copy": {
-        "left": 94.703125,
-        "right": 413.5,
-        "top": -4008.875,
-        "bottom": -3772.484375,
-        "width": 318.796875,
-        "height": 236.390625
-      },
-      "stage": {
-        "left": 33,
-        "right": 1061.40625,
-        "top": -4086,
-        "bottom": -3444,
-        "width": 1028.40625,
-        "height": 642
-      },
-      "figures": [
-        {
-          "speaker": "pascal",
-          "rect": {
-            "left": 475.203125,
-            "right": 835.140625,
-            "top": -4042.328125,
-            "bottom": -3502.421875,
-            "width": 359.9375,
-            "height": 539.90625
-          },
-          "src": "/media/presenters/pascal-original-6dd03834.png",
-          "ratio": 0.6666666666666666,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "nex",
-          "rect": {
-            "left": 341.515625,
-            "right": 526.625,
-            "top": -3694.578125,
-            "bottom": -3509.46875,
-            "width": 185.109375,
-            "height": 185.109375
-          },
-          "src": "/media/presenters/nex-toucan-121a804c.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        },
-        {
-          "speaker": "aifly",
-          "rect": {
-            "left": 804.296875,
-            "right": 942.09375,
-            "top": -3761.546875,
-            "bottom": -3623.75,
-            "width": 137.796875,
-            "height": 137.796875
-          },
-          "src": "/media/presenters/ai-fly-oracle-avatar-9f705e5b.png",
-          "ratio": 1,
-          "fit": "contain",
-          "filter": "none",
-          "opacity": "1",
-          "animation": "none"
-        }
-      ],
-      "overflow": false,
-      "text_overflow": false,
-      "stacked": false,
       "passed": true
     }
   ],
@@ -1666,145 +444,29 @@
       "locale": "de",
       "all_doubled": true,
       "scene": {
-        "left": 16,
-        "right": 304,
-        "top": 15.984375,
-        "bottom": 974.796875,
-        "width": 288,
-        "height": 958.8125
+        "left": 0,
+        "right": 320,
+        "top": 243.6875,
+        "bottom": 2624.59375,
+        "width": 320,
+        "height": 2380.90625
       },
       "copy": {
-        "left": 17,
-        "right": 303,
-        "top": 16.984375,
-        "bottom": 598.296875,
-        "width": 286,
-        "height": 581.3125
+        "left": 24,
+        "right": 296,
+        "top": 291.6875,
+        "bottom": 2375.59375,
+        "width": 272,
+        "height": 2083.90625
       },
       "figures": [
         {
-          "left": 88.5,
-          "right": 282.96875,
-          "top": 653.140625,
-          "bottom": 944.84375,
-          "width": 194.46875,
-          "height": 291.703125
-        },
-        {
-          "left": 28.4375,
-          "right": 119.953125,
-          "top": 848.6875,
-          "bottom": 940.203125,
-          "width": 91.515625,
-          "height": 91.515625
-        },
-        {
-          "left": 222.90625,
-          "right": 288.671875,
-          "top": 815.09375,
-          "bottom": 880.859375,
-          "width": 65.765625,
-          "height": 65.765625
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 320,
-      "sidebar": "closed",
-      "locale": "nl",
-      "all_doubled": true,
-      "scene": {
-        "left": 16,
-        "right": 304,
-        "top": 15.984375,
-        "bottom": 1002.125,
-        "width": 288,
-        "height": 986.140625
-      },
-      "copy": {
-        "left": 17,
-        "right": 303,
-        "top": 16.984375,
-        "bottom": 625.625,
-        "width": 286,
-        "height": 608.640625
-      },
-      "figures": [
-        {
-          "left": 88.5,
-          "right": 282.96875,
-          "top": 680.46875,
-          "bottom": 972.171875,
-          "width": 194.46875,
-          "height": 291.703125
-        },
-        {
-          "left": 28.4375,
-          "right": 119.953125,
-          "top": 876.015625,
-          "bottom": 967.53125,
-          "width": 91.515625,
-          "height": 91.515625
-        },
-        {
-          "left": 222.90625,
-          "right": 288.671875,
-          "top": 842.421875,
-          "bottom": 908.1875,
-          "width": 65.765625,
-          "height": 65.765625
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 320,
-      "sidebar": "closed",
-      "locale": "fr",
-      "all_doubled": true,
-      "scene": {
-        "left": 16,
-        "right": 304,
-        "top": 15.984375,
-        "bottom": 974.796875,
-        "width": 288,
-        "height": 958.8125
-      },
-      "copy": {
-        "left": 17,
-        "right": 303,
-        "top": 16.984375,
-        "bottom": 598.296875,
-        "width": 286,
-        "height": 581.3125
-      },
-      "figures": [
-        {
-          "left": 88.5,
-          "right": 282.96875,
-          "top": 653.140625,
-          "bottom": 944.84375,
-          "width": 194.46875,
-          "height": 291.703125
-        },
-        {
-          "left": 28.4375,
-          "right": 119.953125,
-          "top": 848.6875,
-          "bottom": 940.203125,
-          "width": 91.515625,
-          "height": 91.515625
-        },
-        {
-          "left": 222.90625,
-          "right": 288.671875,
-          "top": 815.09375,
-          "bottom": 880.859375,
-          "width": 65.765625,
-          "height": 65.765625
+          "left": 24,
+          "right": 296,
+          "top": 2423.59375,
+          "bottom": 2576.59375,
+          "width": 272,
+          "height": 153
         }
       ],
       "hero_overflow": false,
@@ -1816,145 +478,29 @@
       "locale": "de",
       "all_doubled": true,
       "scene": {
-        "left": 16,
-        "right": 374,
-        "top": 15.984375,
-        "bottom": 956.96875,
-        "width": 358,
-        "height": 940.984375
+        "left": 0,
+        "right": 390,
+        "top": 176.6875,
+        "bottom": 2420.09375,
+        "width": 390,
+        "height": 2243.40625
       },
       "copy": {
-        "left": 17,
-        "right": 373,
-        "top": 16.984375,
-        "bottom": 492.96875,
-        "width": 356,
-        "height": 475.984375
+        "left": 24,
+        "right": 366,
+        "top": 224.6875,
+        "bottom": 2131.71875,
+        "width": 342,
+        "height": 1907.03125
       },
       "figures": [
         {
-          "left": 106,
-          "right": 348.078125,
-          "top": 556.828125,
-          "bottom": 919.9375,
-          "width": 242.078125,
-          "height": 363.109375
-        },
-        {
-          "left": 31.234375,
-          "right": 145.140625,
-          "top": 800.234375,
-          "bottom": 914.140625,
-          "width": 113.90625,
-          "height": 113.90625
-        },
-        {
-          "left": 273.3125,
-          "right": 355.1875,
-          "top": 758.40625,
-          "bottom": 840.28125,
-          "width": 81.875,
-          "height": 81.875
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 390,
-      "sidebar": "closed",
-      "locale": "nl",
-      "all_doubled": true,
-      "scene": {
-        "left": 16,
-        "right": 374,
-        "top": 15.984375,
-        "bottom": 984.296875,
-        "width": 358,
-        "height": 968.3125
-      },
-      "copy": {
-        "left": 17,
-        "right": 373,
-        "top": 16.984375,
-        "bottom": 520.296875,
-        "width": 356,
-        "height": 503.3125
-      },
-      "figures": [
-        {
-          "left": 106,
-          "right": 348.078125,
-          "top": 584.15625,
-          "bottom": 947.265625,
-          "width": 242.078125,
-          "height": 363.109375
-        },
-        {
-          "left": 31.234375,
-          "right": 145.140625,
-          "top": 827.5625,
-          "bottom": 941.46875,
-          "width": 113.90625,
-          "height": 113.90625
-        },
-        {
-          "left": 273.3125,
-          "right": 355.1875,
-          "top": 785.734375,
-          "bottom": 867.609375,
-          "width": 81.875,
-          "height": 81.875
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 390,
-      "sidebar": "closed",
-      "locale": "fr",
-      "all_doubled": true,
-      "scene": {
-        "left": 16,
-        "right": 374,
-        "top": 15.984375,
-        "bottom": 1023.296875,
-        "width": 358,
-        "height": 1007.3125
-      },
-      "copy": {
-        "left": 17,
-        "right": 373,
-        "top": 16.984375,
-        "bottom": 559.296875,
-        "width": 356,
-        "height": 542.3125
-      },
-      "figures": [
-        {
-          "left": 106,
-          "right": 348.078125,
-          "top": 623.15625,
-          "bottom": 986.265625,
-          "width": 242.078125,
-          "height": 363.109375
-        },
-        {
-          "left": 31.234375,
-          "right": 145.140625,
-          "top": 866.5625,
-          "bottom": 980.46875,
-          "width": 113.90625,
-          "height": 113.90625
-        },
-        {
-          "left": 273.3125,
-          "right": 355.1875,
-          "top": 824.734375,
-          "bottom": 906.609375,
-          "width": 81.875,
-          "height": 81.875
+          "left": 24,
+          "right": 366,
+          "top": 2179.71875,
+          "bottom": 2372.09375,
+          "width": 342,
+          "height": 192.375
         }
       ],
       "hero_overflow": false,
@@ -1966,45 +512,29 @@
       "locale": "de",
       "all_doubled": true,
       "scene": {
-        "left": 32,
-        "right": 1408,
-        "top": -120.40625,
-        "bottom": 1262.734375,
-        "width": 1376,
-        "height": 1383.140625
+        "left": 0,
+        "right": 1440,
+        "top": 189.296875,
+        "bottom": 1636.984375,
+        "width": 1440,
+        "height": 1447.6875
       },
       "copy": {
-        "left": 115.4375,
-        "right": 470.4375,
-        "top": -16.359375,
-        "bottom": 685.734375,
-        "width": 355,
-        "height": 702.09375
+        "left": 32.390625,
+        "right": 629.625,
+        "top": 237.296875,
+        "bottom": 1588.984375,
+        "width": 597.234375,
+        "height": 1351.6875
       },
       "figures": [
         {
-          "left": 623.8125,
-          "right": 1104.703125,
-          "top": 414.734375,
-          "bottom": 1136.0625,
-          "width": 480.890625,
-          "height": 721.328125
-        },
-        {
-          "left": 445.1875,
-          "right": 692.5,
-          "top": 873.546875,
-          "bottom": 1120.859375,
-          "width": 247.3125,
-          "height": 247.3125
-        },
-        {
-          "left": 1063.5,
-          "right": 1247.609375,
-          "top": 690.90625,
-          "bottom": 875.015625,
-          "width": 184.109375,
-          "height": 184.109375
+          "left": 677.625,
+          "right": 1407.609375,
+          "top": 707.828125,
+          "bottom": 1118.4375,
+          "width": 729.984375,
+          "height": 410.609375
         }
       ],
       "hero_overflow": false,
@@ -2013,49 +543,138 @@
     {
       "width": 1440,
       "sidebar": "closed",
-      "forced_width": 720,
+      "forced_width": 764,
       "locale": "de",
       "all_doubled": true,
       "scene": {
-        "left": 32,
-        "right": 688,
-        "top": -120.40625,
-        "bottom": 1154.078125,
-        "width": 656,
-        "height": 1274.484375
+        "left": 0,
+        "right": 764,
+        "top": 85.296875,
+        "bottom": 1835.703125,
+        "width": 764,
+        "height": 1750.40625
       },
       "copy": {
-        "left": 33,
-        "right": 687,
-        "top": -119.40625,
-        "bottom": 317.578125,
-        "width": 654,
-        "height": 436.984375
+        "left": 32.390625,
+        "right": 731.609375,
+        "top": 133.296875,
+        "bottom": 1379.703125,
+        "width": 699.21875,
+        "height": 1246.40625
       },
       "figures": [
         {
-          "left": 196.5,
-          "right": 641.21875,
-          "top": 419.796875,
-          "bottom": 1086.875,
-          "width": 444.71875,
-          "height": 667.078125
-        },
+          "left": 62,
+          "right": 702,
+          "top": 1427.703125,
+          "bottom": 1787.703125,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1000,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1000,
+        "top": 85.296875,
+        "bottom": 1456.703125,
+        "width": 1000,
+        "height": 1371.40625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 967.609375,
+        "top": 133.296875,
+        "bottom": 1000.703125,
+        "width": 935.21875,
+        "height": 867.40625
+      },
+      "figures": [
         {
-          "left": 59.15625,
-          "right": 268.421875,
-          "top": 866.96875,
-          "bottom": 1076.234375,
-          "width": 209.265625,
-          "height": 209.265625
-        },
+          "left": 180,
+          "right": 820,
+          "top": 1048.703125,
+          "bottom": 1408.703125,
+          "width": 640,
+          "height": 360
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1101,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1101,
+        "top": 85.296875,
+        "bottom": 1606.1875,
+        "width": 1101,
+        "height": 1520.890625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 477.078125,
+        "top": 133.296875,
+        "bottom": 1558.1875,
+        "width": 444.6875,
+        "height": 1424.890625
+      },
+      "figures": [
         {
-          "left": 503.875,
-          "right": 654.28125,
-          "top": 790.125,
-          "bottom": 940.53125,
-          "width": 150.40625,
-          "height": 150.40625
+          "left": 525.078125,
+          "right": 1068.609375,
+          "top": 692.875,
+          "bottom": 998.609375,
+          "width": 543.53125,
+          "height": 305.734375
+        }
+      ],
+      "hero_overflow": false,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "sidebar": "closed",
+      "forced_width": 1300,
+      "locale": "de",
+      "all_doubled": true,
+      "scene": {
+        "left": 0,
+        "right": 1300,
+        "top": 85.296875,
+        "bottom": 1487.4375,
+        "width": 1300,
+        "height": 1402.140625
+      },
+      "copy": {
+        "left": 32.390625,
+        "right": 566.625,
+        "top": 133.296875,
+        "bottom": 1439.4375,
+        "width": 534.234375,
+        "height": 1306.140625
+      },
+      "figures": [
+        {
+          "left": 614.625,
+          "right": 1267.609375,
+          "top": 602.71875,
+          "bottom": 970.015625,
+          "width": 652.984375,
+          "height": 367.296875
         }
       ],
       "hero_overflow": false,
@@ -2067,347 +686,29 @@
       "locale": "de",
       "all_doubled": true,
       "scene": {
-        "left": 32,
-        "right": 1062.40625,
-        "top": -12.40625,
-        "bottom": 1164.203125,
-        "width": 1030.40625,
-        "height": 1176.609375
+        "left": 0,
+        "right": 1012.8125,
+        "top": 6.296875,
+        "bottom": 1525.203125,
+        "width": 1012.8125,
+        "height": 1518.90625
       },
       "copy": {
-        "left": 94.703125,
-        "right": 413.5,
-        "top": 65.71875,
-        "bottom": 587.203125,
-        "width": 318.796875,
-        "height": 521.484375
+        "left": 64.796875,
+        "right": 948.015625,
+        "top": 54.296875,
+        "bottom": 1069.203125,
+        "width": 883.21875,
+        "height": 1014.90625
       },
       "figures": [
         {
-          "left": 475.203125,
-          "right": 835.140625,
-          "top": 516.421875,
-          "bottom": 1056.328125,
-          "width": 359.9375,
-          "height": 539.90625
-        },
-        {
-          "left": 341.515625,
-          "right": 526.625,
-          "top": 858.296875,
-          "bottom": 1043.40625,
-          "width": 185.109375,
-          "height": 185.109375
-        },
-        {
-          "left": 804.296875,
-          "right": 942.09375,
-          "top": 696.515625,
-          "bottom": 834.3125,
-          "width": 137.796875,
-          "height": 137.796875
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "sidebar": "closed",
-      "locale": "nl",
-      "all_doubled": true,
-      "scene": {
-        "left": 32,
-        "right": 1408,
-        "top": -107.40625,
-        "bottom": 1364.765625,
-        "width": 1376,
-        "height": 1472.171875
-      },
-      "copy": {
-        "left": 115.4375,
-        "right": 470.4375,
-        "top": -3.359375,
-        "bottom": 787.765625,
-        "width": 355,
-        "height": 791.125
-      },
-      "figures": [
-        {
-          "left": 623.8125,
-          "right": 1104.703125,
-          "top": 508.65625,
-          "bottom": 1229.984375,
-          "width": 480.890625,
-          "height": 721.328125
-        },
-        {
-          "left": 445.1875,
-          "right": 692.5,
-          "top": 966.5,
-          "bottom": 1213.8125,
-          "width": 247.3125,
-          "height": 247.3125
-        },
-        {
-          "left": 1063.5,
-          "right": 1247.609375,
-          "top": 768.015625,
-          "bottom": 952.125,
-          "width": 184.109375,
-          "height": 184.109375
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "sidebar": "closed",
-      "forced_width": 720,
-      "locale": "nl",
-      "all_doubled": true,
-      "scene": {
-        "left": 32,
-        "right": 688,
-        "top": -107.40625,
-        "bottom": 1061.75,
-        "width": 656,
-        "height": 1169.15625
-      },
-      "copy": {
-        "left": 33,
-        "right": 687,
-        "top": -106.40625,
-        "bottom": 225.25,
-        "width": 654,
-        "height": 331.65625
-      },
-      "figures": [
-        {
-          "left": 196.5,
-          "right": 641.21875,
-          "top": 327.46875,
-          "bottom": 994.546875,
-          "width": 444.71875,
-          "height": 667.078125
-        },
-        {
-          "left": 59.15625,
-          "right": 268.421875,
-          "top": 774.640625,
-          "bottom": 983.90625,
-          "width": 209.265625,
-          "height": 209.265625
-        },
-        {
-          "left": 503.875,
-          "right": 654.28125,
-          "top": 697.796875,
-          "bottom": 848.203125,
-          "width": 150.40625,
-          "height": 150.40625
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "sidebar": "open",
-      "locale": "nl",
-      "all_doubled": true,
-      "scene": {
-        "left": 32,
-        "right": 1062.40625,
-        "top": 0.59375,
-        "bottom": 1211.921875,
-        "width": 1030.40625,
-        "height": 1211.328125
-      },
-      "copy": {
-        "left": 94.703125,
-        "right": 413.5,
-        "top": 78.71875,
-        "bottom": 634.921875,
-        "width": 318.796875,
-        "height": 556.203125
-      },
-      "figures": [
-        {
-          "left": 475.203125,
-          "right": 835.140625,
-          "top": 560.96875,
-          "bottom": 1100.875,
-          "width": 359.9375,
-          "height": 539.90625
-        },
-        {
-          "left": 341.515625,
-          "right": 526.625,
-          "top": 902.46875,
-          "bottom": 1087.578125,
-          "width": 185.109375,
-          "height": 185.109375
-        },
-        {
-          "left": 804.296875,
-          "right": 942.09375,
-          "top": 734.515625,
-          "bottom": 872.3125,
-          "width": 137.796875,
-          "height": 137.796875
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "sidebar": "closed",
-      "locale": "fr",
-      "all_doubled": true,
-      "scene": {
-        "left": 32,
-        "right": 1408,
-        "top": -107.40625,
-        "bottom": 1275.734375,
-        "width": 1376,
-        "height": 1383.140625
-      },
-      "copy": {
-        "left": 115.4375,
-        "right": 470.4375,
-        "top": -3.359375,
-        "bottom": 698.734375,
-        "width": 355,
-        "height": 702.09375
-      },
-      "figures": [
-        {
-          "left": 623.8125,
-          "right": 1104.703125,
-          "top": 427.734375,
-          "bottom": 1149.0625,
-          "width": 480.890625,
-          "height": 721.328125
-        },
-        {
-          "left": 445.1875,
-          "right": 692.5,
-          "top": 886.546875,
-          "bottom": 1133.859375,
-          "width": 247.3125,
-          "height": 247.3125
-        },
-        {
-          "left": 1063.5,
-          "right": 1247.609375,
-          "top": 703.90625,
-          "bottom": 888.015625,
-          "width": 184.109375,
-          "height": 184.109375
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "sidebar": "closed",
-      "forced_width": 720,
-      "locale": "fr",
-      "all_doubled": true,
-      "scene": {
-        "left": 32,
-        "right": 688,
-        "top": -107.40625,
-        "bottom": 1100.75,
-        "width": 656,
-        "height": 1208.15625
-      },
-      "copy": {
-        "left": 33,
-        "right": 687,
-        "top": -106.40625,
-        "bottom": 264.25,
-        "width": 654,
-        "height": 370.65625
-      },
-      "figures": [
-        {
-          "left": 196.5,
-          "right": 641.21875,
-          "top": 366.46875,
-          "bottom": 1033.546875,
-          "width": 444.71875,
-          "height": 667.078125
-        },
-        {
-          "left": 59.15625,
-          "right": 268.421875,
-          "top": 813.640625,
-          "bottom": 1022.90625,
-          "width": 209.265625,
-          "height": 209.265625
-        },
-        {
-          "left": 503.875,
-          "right": 654.28125,
-          "top": 736.796875,
-          "bottom": 887.203125,
-          "width": 150.40625,
-          "height": 150.40625
-        }
-      ],
-      "hero_overflow": false,
-      "passed": true
-    },
-    {
-      "width": 1440,
-      "sidebar": "open",
-      "locale": "fr",
-      "all_doubled": true,
-      "scene": {
-        "left": 32,
-        "right": 1062.40625,
-        "top": 0.59375,
-        "bottom": 1252.40625,
-        "width": 1030.40625,
-        "height": 1251.8125
-      },
-      "copy": {
-        "left": 94.703125,
-        "right": 413.5,
-        "top": 78.71875,
-        "bottom": 675.40625,
-        "width": 318.796875,
-        "height": 596.6875
-      },
-      "figures": [
-        {
-          "left": 475.203125,
-          "right": 835.140625,
-          "top": 597.78125,
-          "bottom": 1137.6875,
-          "width": 359.9375,
-          "height": 539.90625
-        },
-        {
-          "left": 341.515625,
-          "right": 526.625,
-          "top": 938.828125,
-          "bottom": 1123.9375,
-          "width": 185.109375,
-          "height": 185.109375
-        },
-        {
-          "left": 804.296875,
-          "right": 942.09375,
-          "top": 763.671875,
-          "bottom": 901.46875,
-          "width": 137.796875,
-          "height": 137.796875
+          "left": 186.40625,
+          "right": 826.40625,
+          "top": 1117.203125,
+          "bottom": 1477.203125,
+          "width": 640,
+          "height": 360
         }
       ],
       "hero_overflow": false,
@@ -2415,24 +716,25 @@
     }
   ],
   "asset_hashes": {
-    "pascal": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
-    "nex": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
-    "aifly": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66"
+    "/media/higgsfield/hf-02-lobby-walk-1920.webp": "7e0485baf0ff97696cecca7d2a7d7dcbbd31601ad491f5ee6d8835cb3ac6ffab",
+    "/media/higgsfield/hf-02-lobby-walk-800.webp": "059b7aa662ef893166ce1348e922ca7036cbbef355ec9bb0d5b7a7b3093e979b",
+    "/media/higgsfield/hf-02-lobby-walk-1280.webp": "c1d338784067e116da0322fc664000c98e161827e154ead44e7e2b87cbf2615a"
   },
   "source_sha256": {
-    "config/identity-hero.json": "81e9f69d63c0d9012c813a042687da4fecfdf54e912121a5230668782926e754",
+    "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
-    "config/design-tokens.json": "c086069f2ff70c1f998fe2686ec10c6cd0376098205737f582f09a5b216e36ea",
-    "apps/web/components/IdentityHero.tsx": "f2138b573b71ed2abebf35ca59e43bd730a05c54025e1ac0197b9720aa685c85",
-    "apps/web/components/IdentityHero.css": "8bab94b57cd0ae864500afbd7449485cc3342510f2cc15e89164e9710a5d8f93",
-    "apps/web/components/HomeContent.tsx": "062ac99ce294b9969b0d62db626ecdca774c08529084d8be10cc0be2e4244329",
+    "config/design-tokens.json": "6e699c0082f4599f8fcb144317fde8f90c264e0083334c948b1195f770ceda83",
+    "apps/web/components/IdentityHero.tsx": "36a88332e22ea4aa6630ebdac0753815651a85aaa68ab9db47a8a4c263caec98",
+    "apps/web/components/IdentityHero.css": "73037a5ff7d5df5cbab771eb2acd9eff65c39679088bd27843e5aa7da5aa3e52",
+    "apps/web/components/HomeContent.tsx": "adf9b8495833e0ca99a4bdd3190453467564ef35c5433e1d609e4d6c62bc73b8",
+    "apps/web/components/HomeConcept.css": "2cd4926223d3cf3a1c96fc6ed9d1ce2a08d0b5dc620f2e6c533959705a068176",
+    "apps/web/components/LuxuryMaterials.css": "bdee15499d04686d4e76ab27eb9564130e3fb516e794daa6ed811b0b5c999d23",
     "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
-    "apps/web/components/PresenterScene.tsx": "f47fb7d6b917912da4b651ed2b2b5832761768ab59f34792244d0f0077764691",
-    "apps/web/components/PresenterEditorial.css": "1568ed80ac71b3ef236280e9d90a7f1c1b7ff14977f88198171d26ea630215da",
-    "apps/web/components/WorkspaceRebuild.css": "db40cc3786e61b880b62e7092d8d40384f9b58ed93e0df59a77b5068a0d603d3",
-    "apps/web/app/globals.css": "e550070a3abc0118cd8909a487fefae2e31f68969979831975bb8772a695245b",
-    "packages/tokens/tokens.css": "96b2365a735f003db0ee18fe5f3464a083472ff5a590212aa0f9770eb823d698",
-    "apps/site/tests/browser-identity-hero.mjs": "868ce2d469b0cd31dc1bcffcc89ad0986d755f3722adf26b8ded1e2154f5b591"
+    "apps/web/components/WorkspaceRebuild.css": "591308b86d912c9a58929bd10a093c7f27ee1d0ee64ab2850fd75d9bef06fea9",
+    "apps/web/lib/brand-media.ts": "fe1c812d3c8b3a6b81ee101fc9208d53bb907dbbdbbc70ddbf3caae966b0e59d",
+    "apps/web/app/globals.css": "c7c19d6faed39c9756273fd2ee04245f3b69e542da51633ff91d4034c140ee44",
+    "packages/tokens/tokens.css": "3ca2f06408bfab8c2b4b5fd79f9f9c5c22b8adb234e0a5f2d826ae3d63b9a2de",
+    "apps/site/tests/browser-identity-hero.mjs": "8bf86e4ba6457976613114388523de8955c9433f04afaeb5231f1512f9c4a8b1"
   },
   "external_requests": 0,
   "page_errors": [],
