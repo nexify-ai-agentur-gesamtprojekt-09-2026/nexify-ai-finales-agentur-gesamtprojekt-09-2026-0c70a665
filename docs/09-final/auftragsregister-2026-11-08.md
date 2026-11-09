@@ -77,3 +77,14 @@ Offen: (1) Die neuen Nachweisdateien sind noch nicht als eigene Zeilen in `confi
 24/7-Betrieb, Scheduler, Worker, Backup/Restore, Monitoring, Kostenkontrolle und der tägliche Bericht um 08:00
 Europe/Amsterdam sind **nicht nachgewiesen**. Ein Bericht darf erst als „zugestellt“ gelten, wenn Kanal und Empfänger
 benannt und die Zustellung verifiziert sind. Bis dahin steht der Stand in `PROGRESS.md` und in diesem Register.
+
+## 4. Inhaberentscheidungen (Pascal, 2026-11-09)
+
+Quelle: Aussagen des Inhabers in der laufenden Sitzung. Aktuelle Nutzerentscheidungen gelten vor älteren Entwürfen, innerhalb der unveränderten Schutzgrenzen des Mandats (nichts löschen, keine Secret-Transfers, keine Zahlungen, keine Sicherheitslockerung, keine Freigabeumgehung durch Dritte).
+
+| ID | Entscheidung | Wirkung | Grenze |
+|---|---|---|---|
+| ED-01 | "Freigabe. Entscheide eigenständig. Merke es dir. Es gilt global." | Der Agent entscheidet Routinen und offene Einzelfragen selbst und setzt sie um; keine Rückfrage für bereits beauftragte, reversible Arbeit. Merges eigener, geprüfter PRs sind damit freigegeben (PR 80, 81 und Agent-PR 1 gemergt). | Gilt nicht für Secrets (Kopieren, Setzen, Ausgeben), Zahlungen, Vertragszusagen, Löschen, Rechteausweitung, das Öffnen geschlossener Zugänge (z. B. eve placeholderAuth) und das Abschalten von Gates. Diese bleiben beim Inhaber. |
+| ED-02 | "Das Video ist nicht mehr aktuell." | Das Hero-Video aus AGENTS.md und docs/production/hero-requirements-2026-11-04.md ist überholt; das Standbild im Hero ist zulässig. `config/hero-film.json` und `browser-video.json` bleiben als Historie erhalten. | Alle übrigen visuellen Vorgaben (prototypen/, Designsystem v2.0) gelten weiter. |
+| ED-03 | "Aendere auch die Domains" | Ziel: nexifyai.de und nexifyai.cloud liefern den aktuellen `main`. | Umsetzung nur ohne Secret-Kopie: Git-Verbindung des alten Vercel-Projekts neu auf das Repository der neuen Organisation (nur Inhaber, KS-008). Domains werden nicht auf ein Projekt ohne Umgebungsvariablen gezogen. |
+| ED-04 | Clerk-Locale-Brücke (Entscheidung durch den Agenten nach ED-01) | Die Prüfung der Locale-Brücke (`LocaleAwareClerk.tsx`, Komponente entfernt) wird mit dem Neuentwurf von `next-public.json` stillgelegt, nicht gelöscht; die Consent-Oberfläche (DiagnosticConsent) und der Fail-closed-Nachweis bleiben bestehen. | Umsetzung gebündelt mit dem Neuentwurf der Route-Matrix (86 statt 78 Routen), weil beide Teile derselben Prüfung angehören. Bis dahin bleiben 3 Consent-Tests und 1 Error rot; kein Hashfälschen. |
