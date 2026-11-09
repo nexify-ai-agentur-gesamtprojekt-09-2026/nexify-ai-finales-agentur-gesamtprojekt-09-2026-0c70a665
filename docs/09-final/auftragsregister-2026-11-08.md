@@ -63,6 +63,13 @@ stilllegen, archivieren, nicht löschen). Stand der Änderung: lokal, nicht comm
 
 Offen: (1) Die neuen Nachweisdateien sind noch nicht als eigene Zeilen in `config/acceptance-coverage.json` geführt; Pascal entscheidet gemeinsam mit der Frage, ob die Alt-Zeilen entfallen (OF-11). (2) `docs/contracts/local-shop-http.md` beschreibt weiterhin den Alt-Shop-Prüfer und ist nicht angepasst (Datei ist hash-gebunden). (3) `python3 tools/check_browser_evidence.py` bricht weiterhin schon im ersten Prüfer (`check_evidence`, veralteter Hash `apps/site/src/Auth.tsx`) ab; das gehört zu den übrigen OF-11-Gruppen.
 
+### 3b. Stand OF-11 am 09.11.2026 (Abend) – OFFEN mit belegter Ursache
+
+- **Laufzeit-Qualitätsprüfung (Playwright für Python):** alle 43 Seiten × de/nl/fr/en × 1440/390 px: 0 FEHLER, 0 WARNUNG (nur Hinweis „Shop-API lokal nicht erreichbar“). Bilder, die im parallelen Lauf als „nicht geladen“ erschienen, laden im Einzellauf (Lastartefakt, Dateien liefern HTTP 200).
+- **Pin-Rebase:** 19 Pins nur mit Beleg neu gesetzt (`docs/09-final/pin-rebase-2026-11-09.md`). 22 Pins und 3 gelöschte Dateien bleiben OFFEN (Medienverträge, Presenter-System, Seiten-Shells `layout.tsx`/`page.tsx`/`[...slug]`, Anmelde-/Registrierseiten, `next.config.ts`, `shop-api/requirements.in`, PROGRESS.md, zwei Sitemap-/Video-Tests).
+- **Consent-Gruppe (3 Tests):** `next-clerk-locale.json` prüft die seit D-007 entfernte Clerk-Locale-Brücke (`LocaleAwareClerk.tsx` ist ein nie gemounteter Stub); `next-public.json` (`apps/web/auth/tests/browser-public-experience.mjs`) braucht eine Neufassung: (1) Chat-Panel startet geschlossen (Klick auf „Schließen“ entfällt), (2) Companion nutzt `/media/atelier/presenters/oracle-lossless.webp` (194×193) statt eines 512-px-Avatars, (3) Panel-Überschrift lautet jetzt „NeX Agentic AIFly“ statt „AI Fly Oracle“ – **Namensentscheidung nötig** (AIFly ORACLE vs. NeX Agentic AIFly), (4) Zeilenzahl im Checker (78) ist auf 43 Seiten × 2 Sprachen = 86 anzuheben bzw. aus `site-map.json` abzuleiten. Entscheidung Pascal Courbois: Clerk-Brücke im Gate stilllegen (wie Alt-Shop) – Vorschlag, nicht umgesetzt.
+- **browser-video.json:** nicht erneuerbar (Produkt verwirft Video-Elemente bewusst, `ExplainerSections.tsx`).
+
 ## 4. Betrieb (nicht belegt)
 
 24/7-Betrieb, Scheduler, Worker, Backup/Restore, Monitoring, Kostenkontrolle und der tägliche Bericht um 08:00
