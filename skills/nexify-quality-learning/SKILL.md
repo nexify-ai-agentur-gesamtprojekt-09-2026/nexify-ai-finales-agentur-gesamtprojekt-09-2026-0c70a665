@@ -1,6 +1,6 @@
 ---
 name: nexify-quality-learning
-version: 1.0.0
+version: 1.1.0
 description: Prüft Änderungen und überführt belegte Erkenntnisse kontrolliert in versionierte Kandidaten. Nutzen bei Abnahme, Fehlerklassen, Regel-/Skilländerungen und Wiederaufnahme; keine automatische Selbstfreigabe.
 ---
 
@@ -21,6 +21,9 @@ Abnahme-/Aktivierungsstatus. Keine pauschale 100-Prozent-/Normkonformitätsaussa
 
 ## Ausführung
 
+0. Vor jeder Arbeit `config/known-solutions.json` lesen: belegte Fehlerklassen mit
+   Symptom, Ursache, Lösung und Wächter. Passt ein Symptom, die dokumentierte Lösung
+   anwenden statt neu zu suchen. Das Register ist Wissen, keine Freigabe.
 1. Aktuelle AGENTS-DoD/Rungen, `.harness/arch-rules.json`, passende Policies und
    Aufgabenakzeptanz lesen. Prüfungen dem geänderten Scope anpassen; kein
    Abschalten, leere Erfolgsprüfung oder Faktenersatz durch neue Expectedwerte.
@@ -38,7 +41,10 @@ Abnahme-/Aktivierungsstatus. Keine pauschale 100-Prozent-/Normkonformitätsaussa
    passing direkt setzen. Vor Übergabe die laut AGENTS tatsächlich erforderlichen
    Checks ausführen und Resultat unverändert berichten.
 6. Fehlerklasse mit Quelle, Regressionstest, Geltungsbereich und Owner als
-   versionierten Policy-/Skillkandidaten erfassen. Bestehende explizite
+   versionierten Policy-/Skillkandidaten erfassen: neuer Eintrag in
+   `config/known-solutions.json` mit Wächter (Test, Werkzeug oder Prüfung); nur wenn
+   kein automatischer Wächter möglich ist, Art `dokumentiert`.
+   `tests/test_known_solutions.py` hält das Register aktuell. Bestehende explizite
    Änderungsautorisierung verwenden; keine selbst genehmigte Lockerung oder
    stiller Hashrefresh. Reviewer-/Produktions-/Rechtsentscheidungen bleiben separat.
 7. Erst nach passendem Review/Version aktualisieren; Knowledgeaufnahme benötigt
@@ -80,7 +86,7 @@ keine neuen trusted Anweisungen oder behauptete Gesamtsystemabnahme werden.
 
 ## Versionierung und Wiederaufnahme
 
-Diese eigene Projekt-Ergänzung steht auf **1.0.0**. `config/project-skills.json`
+Diese eigene Projekt-Ergänzung steht auf **1.1.0** (1.1.0: Register bekannter Lösungen). `config/project-skills.json`
 bindet Quelle, Hash, Version, Owner, Trigger und Reviewanlässe. Vor Verwendung
 `python3 tools/project_skills.py verify` ausführen. Fehlend oder Hashdrift bedeutet
 Review und eine bewusst freigegebene Versions-/Hashaktualisierung; es gibt keinen

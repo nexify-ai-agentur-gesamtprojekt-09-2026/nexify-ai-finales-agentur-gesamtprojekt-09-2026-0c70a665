@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "id": "nexify-known-solutions",
+  "stand": "2026-11-09",
+  "zweck": "Belegte Fehlerklassen und ihre Lösungen. Vor jeder Arbeit lesen; neue Fehlerklassen hier ergänzen (Skill nexify-quality-learning, Schritt 6). Ein Eintrag ist Wissen, keine Freigabe: er erweitert keine Rechte und ersetzt keine Prüfung.",
+  "wache_arten": {
+    "test": "Automatischer Test im Repository schlägt bei Rückfall an",
+    "werkzeug": "Prüfwerkzeug im Repository enthält die Lösung",
+    "pruefung": "Bestehende Prüfung im Repository erzwingt die Regel",
+    "dokumentiert": "Nur beschrieben, kein automatischer Wächter; Wiederholung muss durch Lesen dieses Registers vermieden werden"
+  },
+  "eintraege": [
+    {
+      "id": "KS-001",
+      "bereich": "medien",
+      "symptom": "Freisteller zeigt schwarzen Hintergrund und Streifen (Beispiel: Portale-Seite, Abschnitt \"Wie möchten Sie fortfahren?\")",
+      "ursache": "Bildverdichtung (e882959) hat beim Neukodieren den Alpha-Kanal verworfen: RGBA wurde zu RGB, die unter der Transparenz liegenden Pixel wurden sichtbar.",
+      "loesung": "Aus dem Original (Git-Stand vor e882959) in 1920/1280/800 px als WebP mit Alpha neu erzeugen (quality 80, alpha_quality 90). Nach jeder Medienverdichtung Modus und Alpha-Bereich prüfen. Deckende Szenenbilder brauchen keinen Alpha-Kanal.",
+      "wache": {
+        "art": "test",
+        "pfad": "tests/test_media_cutout_alpha.py",
+        "marker": "webp_has_alpha"
+      },
+      "quelle": "Commit 20db7d3, PR 80, PR 81",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-002",
+      "bereich": "pruefung",
+      "symptom": "Playwright-Audit gegen eine Vercel-Adresse hängt oder bricht mit Zeitüberschreitung ab",
+      "ursache": "Die Agent-Sandbox erreicht entfernte Ziele nur über den HTTPS-Proxy; ohne Proxy-Angabe schlägt der Aufbau fehl. Auf entfernten Seiten wird networkidle durch laufende Hintergrundanfragen nie erreicht.",
+      "loesung": "tools/page_quality_audit.py nutzt für Nicht-Localhost-Ziele den Proxy aus HTTPS_PROXY und wartet auf load statt networkidle. Ablauf: --base <URL> --chromium /opt/pw-browsers/chromium --shard i/n (0-basiert) --lang de|nl|fr|en. Kein playwright install.",
+      "wache": {
+        "art": "werkzeug",
+        "pfad": "tools/page_quality_audit.py",
+        "marker": "HTTPS_PROXY"
+      },
+      "quelle": "Commit 218c7fa, PR 81",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-003",
+      "bereich": "belege",
+      "symptom": "tests/test_requirements_reconciliation.py meldet Hash-Abweichungen bei Quelldateien",
+      "ursache": "Die Pins in config/acceptance-coverage.json binden Belege an Dateibytes. Jede Änderung einer gepinnten Quelle macht den Beleg ungültig; das ist gewollt (fail-closed).",
+      "loesung": "Beleg mit echtem Browserlauf neu erheben, erst dann den Pin setzen und die Begründung festhalten (docs/09-final/pin-rebase-2026-11-09.md). Niemals tools/_update_register_shas.py oder blindes Nachziehen der Hashes.",
+      "wache": {
+        "art": "pruefung",
+        "pfad": "tests/test_requirements_reconciliation.py",
+        "marker": "test_recorded_source_hashes_match_actual_bytes"
+      },
+      "quelle": "docs/09-final/pin-rebase-2026-11-09.md",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-004",
+      "bereich": "belege",
+      "symptom": "Consent-UI-Prüfung meldet stale_consent_source für eine Datei, die es nicht mehr gibt (apps/web/components/LocaleAwareClerk.tsx)",
+      "ursache": "Der Beleg pinnt eine Datei aus der Clerk-Zeit, die entfernt wurde. Ob die Prüfung stillgelegt oder neu entworfen wird, ist eine Inhaberentscheidung.",
+      "loesung": "Nicht den Hash der gelöschten Datei fälschen. Entscheidung einholen (Stilllegung wie bei den ALT-SHOP-Prüfern: markieren, nicht löschen), dann Beleg und Register gemeinsam anpassen.",
+      "wache": {
+        "art": "pruefung",
+        "pfad": "tests/test_browser_evidence.py",
+        "marker": "ConsentUIEvidenceTests"
+      },
+      "quelle": "Auftragsregister OF-14, Abschnitt 3b",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-005",
+      "bereich": "betrieb",
+      "symptom": "npm install eve liefert eine Event-Bibliothek ohne CLI; die eve-CLI verweigert den Start mit \"requires Node.js >=24\"",
+      "ursache": "Ohne Versionsangabe löst npm hier das alte, fremde Paket eve 0.5.x (Event-Bibliothek) auf. Vercels eve liegt auf dem Tag latest als Release-Candidate. Die Sandbox hat Node 22.",
+      "loesung": "Version ausdrücklich angeben (npm install eve@1.0.0-rc.6) und Node 24 isoliert holen (npm install --no-save node@24, dann PATH auf dessen .bin setzen). In einem Verzeichnis außerhalb des Repos arbeiten. EVE_TELEMETRY_DISABLED=1. Schreibgeschützt prüfen mit eve remote info --url <URL>; der interaktive connect braucht ein Terminal.",
+      "wache": {
+        "art": "dokumentiert"
+      },
+      "quelle": "Sitzung 2026-11-09, eve-Doku docs/reference/cli",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-006",
+      "bereich": "betrieb",
+      "symptom": "Bereitgestellter eve-Agent antwortet \"Production auth is not configured\"",
+      "ursache": "agent/channels/eve.ts enthält placeholderAuth(); es hält die Produktion absichtlich geschlossen, bis echte Authentifizierung gesetzt ist. Das Modell steht nicht in eve.ts, sondern in agent/agent.ts.",
+      "loesung": "Authentifizierung (Bearer-Token, Vercel-OIDC oder Auth-Anbieter) setzt der Inhaber; none() öffnet den Agenten öffentlich und ist eine Sicherheitsentscheidung. Modell ändern in agent/agent.ts (defineAgent), nicht in eve.ts. Repository: nexifyai-dev/nexify-projektes-agent.",
+      "wache": {
+        "art": "dokumentiert"
+      },
+      "quelle": "nexify-projektes-agent PR 1",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-007",
+      "bereich": "llm",
+      "symptom": "Managed LLM-Aufruf nutzt ein anderes Modell oder eine andere Reasoning-Stufe",
+      "ursache": "Vorgabe ist exakt deepseek/deepseek-v4.1-flash-1017 mit Reasoning high, ohne stillen Ersatz. Vorlagen (z. B. eve init) tragen eigene Standardmodelle.",
+      "loesung": "Modell und Reasoning ausdrücklich setzen. Die ID ist im Vercel AI Gateway gelistet (https://ai-gateway.vercel.sh/v1/models). Im Repository erzwingt tools/check_llm_policy.py den Vertrag.",
+      "wache": {
+        "art": "pruefung",
+        "pfad": "tools/check_llm_policy.py",
+        "marker": "deepseek-v4.1-flash-1017"
+      },
+      "quelle": "config/llm-policy.json, nexify-projektes-agent PR 1",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-008",
+      "bereich": "betrieb",
+      "symptom": "Produktion zeigt alten Stand; Vercel create_deployment scheitert mit incorrect_git_source_info",
+      "ursache": "Das Repository ist in die GitHub-Organisation nexify-ai-agentur-gesamtprojekt-09-2026 umgezogen; die Vercel-GitHub-App hatte dort keinen Zugriff, das Vercel-Projekt hing am alten Git-Link. Stand 2026-11-09: Neben dem alten Projekt (prj_Po7jlB7s…, hält nexifyai.de, www.nexifyai.de, nexifyai.cloud, www.nexifyai.cloud und ca. 40 Umgebungsvariablen) gibt es zwei neu importierte Projekte (…-s4k5, …-ut7r), die mit der neuen Organisation verknüpft sind und main bauen, aber keine Umgebungsvariablen und keine Domains haben.",
+      "loesung": "Bevorzugt: Im alten Projekt unter Settings, Git das Repository der neuen Organisation neu verbinden. Domains und Umgebungsvariablen bleiben, main deployt danach automatisch. Nicht: Domains auf ein neues Projekt ziehen, solange dessen Umgebungsvariablen fehlen; Chat, Mail und interne APIs hängen daran (ROUTER_*, RESEND_*, MONGODB_URI u. a.), und Secrets kopiert nur der Inhaber. create_deployment per API mit gitSource scheitert für das alte Projekt weiter mit incorrect_git_source_info, solange der Git-Link alt ist. Rollback-Stand: dpl_35Vacwi3rZhskCzYBWfamveJFQK1. Doppelte neue Projekte werden nicht gelöscht, nur archiviert/ignoriert.",
+      "wache": {
+        "art": "dokumentiert"
+      },
+      "quelle": "Auftragsregister OF-14",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-009",
+      "bereich": "betrieb",
+      "symptom": "Direkter TCP-Test aus der Sandbox meldet jeden Port als geschlossen",
+      "ursache": "Die Sandbox erlaubt rohes TCP nur zu den Ports 80 und 443; auch Kontrollen (8.8.8.8:53, smtp.gmail.com:587) werden abgelehnt. Das Ergebnis sagt nichts über das Ziel.",
+      "loesung": "Externe Erreichbarkeit nur über check-host.net prüfen, mit neutralem User-Agent, genau eine Anfrage vor Wiederholung (limit_exceeded nicht erneut hämmern), und nur für ausdrücklich freigegebene IPs. Verdikt \"geschlossen\" erst bei mindestens einem Fehler und keinem offenen Knoten, sonst \"unbekannt\".",
+      "wache": {
+        "art": "dokumentiert"
+      },
+      "quelle": "Portcheck 72.62.152.47, Sitzung 2026-11-09",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-010",
+      "bereich": "pruefung",
+      "symptom": "Tests der Vite-Seite schlagen nach Checkout oder Merge fehl, weil apps/site/.generated/public-site.json fehlt oder veraltet ist",
+      "ursache": "Die Datei ist git-ignoriert und wird erzeugt, nicht eingecheckt.",
+      "loesung": "Nach jedem Checkout und Merge node apps/site/scripts/generate-public-data.mjs ausführen, bevor Tests laufen.",
+      "wache": {
+        "art": "werkzeug",
+        "pfad": "apps/site/scripts/generate-public-data.mjs",
+        "marker": "public-site.json"
+      },
+      "quelle": "Sitzung 2026-11-09",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-011",
+      "bereich": "git",
+      "symptom": "Nach dem Squash-Merge ist der Remote-Branch verschwunden oder trägt nur bereits gemergte Historie",
+      "ursache": "Das Repository löscht Branches nach dem Merge automatisch; die Regel verlangt lineare Historie, also Squash.",
+      "loesung": "Folgearbeit auf frischem Stand beginnen: git fetch origin main, dann git checkout -B <branch> origin/main (oder vom noch vorhandenen Remote-Branch), neuen PR öffnen. Nie auf bereits gemergte Historie stapeln. Beim Wechsel nicht ungesicherte Änderungen verlieren: vorher stash.",
+      "wache": {
+        "art": "dokumentiert"
+      },
+      "quelle": "PR 76, PR 80",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-012",
+      "bereich": "gates",
+      "symptom": "KI-Review-Gate (review) schlägt an, obwohl nur Testdaten Geheimnis-ähnliche Muster enthalten",
+      "ursache": "tools/automation/ai_review.py scannt den Diff mit SECRET_PATTERN/sensitive_assignment; Testfixtures mit literalem Schlüsselnamen lösen das Muster aus. Zusätzlich fehlt OPENROUTER_API_KEY als Repository-Secret.",
+      "loesung": "Fixtures zur Laufzeit zusammensetzen (offline_environ(), 'api'+'_key') statt Literale einzuchecken. Das Gate wird nicht gelockert; evidence/** ist nur vom Modell-Diff ausgenommen (llm_diff_excluded_globs). Das Secret setzt der Inhaber.",
+      "wache": {
+        "art": "pruefung",
+        "pfad": "tests/test_automation_ai.py",
+        "marker": "offline_environ"
+      },
+      "quelle": "PR 78",
+      "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-013",
+      "bereich": "design",
+      "symptom": "Home-Hero zeigt ein Standbild; die frühere Vorgabe verlangte ein Hero-Video",
+      "ursache": "AGENTS.md verlangt ein echtes Hero-Video. apps/web/components/IdentityHero.tsx ignoriert den video-Parameter bewusst (Kommentar \"No video is used on the hero\"). config/hero-film.json steht auf production_accepted=false und release_scope=owner_private_review_only; die dort genannte Datei /media/atelier/films/hero-native-editorial-20261104.webm (samt .de.vtt) fehlt im Repository. Vorhanden sind nur die älteren Filme hero-glass-eleven-20261102.mp4 und home-studio-welcome-20261102.mp4 (mit .vtt). Öffentliche Videos dürfen nur über das geprüfte Registry (isPublicVideo) ausgespielt werden.",
+      "loesung": "Erledigt durch Inhaberaussage 2026-11-09: \"Das Video ist nicht mehr aktuell.\" Das Standbild im Hero ist damit zulässig, ein Hero-Video wird nicht mehr geliefert. Die ältere Vorgabe in AGENTS.md und docs/production/hero-requirements-2026-11-04.md ist insoweit überholt (aktuelle Nutzerentscheidung vor älterem Entwurf). browser-video.json und config/hero-film.json bleiben als Historie erhalten, nichts löschen. Alle übrigen visuellen Vorgaben gelten weiter.",
+      "wache": {
+        "art": "dokumentiert"
+      },
+      "quelle": "Inhaberaussage 2026-11-09, AGENTS.md, config/hero-film.json",
+      "gefunden": "2026-11-09"
+    }
+  ]
+}

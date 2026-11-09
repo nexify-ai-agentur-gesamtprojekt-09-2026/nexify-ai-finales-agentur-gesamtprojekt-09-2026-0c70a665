@@ -384,6 +384,11 @@ def main():
     findings, link_cache, report, contrast_checked = [], {}, [], 0
     with sync_playwright() as pw:
         launch = {"executable_path": args.chromium} if args.chromium else {}
+        # Entfernte Ziele (z. B. Vercel) laufen in der Agent-Sandbox nur über den konfigurierten HTTPS-Proxy.
+        remote = not re.match(r"https?://(127\.0\.0\.1|localhost)", args.base)
+        if remote and os.environ.get("HTTPS_PROXY"):
+            launch["proxy"] = {"server": os.environ["HTTPS_PROXY"]}
+            launch["args"] = ["--ignore-certificate-errors"]
         browser = pw.chromium.launch(**launch)
         for vpname in args.viewports.split(","):
             w, h = VIEWPORTS[vpname]
@@ -395,7 +400,7 @@ def main():
                 page.on("pageerror", lambda x, e=errs: e.append("PE " + str(x)[:140]))
                 page.on("response", lambda r, fl=failed: r.status >= 400 and fl.append(f"{r.status} {r.url[-70:]}"))
                 try:
-                    resp = page.goto(args.base + path + (("?lang=" + args.lang) if args.lang else ""), wait_until="networkidle", timeout=60000)
+                    resp = page.goto(args.base + path + (("?lang=" + args.lang) if args.lang else ""), wait_until="load" if remote else "networkidle", timeout=60000)
                     status = resp.status if resp else 0
                 except Exception as exc:  # noqa: BLE001
                     status = 0
