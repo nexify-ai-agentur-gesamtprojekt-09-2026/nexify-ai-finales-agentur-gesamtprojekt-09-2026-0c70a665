@@ -23,10 +23,10 @@ export function pageMetadata(page:PublicPage,locale:Locale):Metadata{
  return {title,description,alternates:{canonical:localizedUrl(page.path,locale)},openGraph:{title,description,url:localizedUrl(page.path,locale),type:'website',locale},robots:{index:false,follow:false}};
 }
 /** Metadata for dedicated (non-catalog-renderer) routes: same title/description/canonical/hreflang as the catalog page, explicit robots. */
-export function routeMetadata(pageId:string,indexable:boolean):Metadata{
+export function routeMetadata(pageId:string,indexable:boolean,locale:Locale='de'):Metadata{
  const page=publicPages().find(candidate=>candidate.id===pageId);
  if(!page)throw new Error('Unknown public page: '+pageId);
- const base=pageMetadata(page,'de');
+ const base=pageMetadata(page,locale);
  return {...base,robots:indexable?{index:true,follow:true}:{index:false,follow:true}};
 }
 export function pageStructuredData(page:PublicPage,locale:Locale){

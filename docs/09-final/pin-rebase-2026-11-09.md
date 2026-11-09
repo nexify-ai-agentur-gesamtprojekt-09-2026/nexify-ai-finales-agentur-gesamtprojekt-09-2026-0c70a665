@@ -63,3 +63,30 @@ Die Pins betreffen Dateien, die der DS-REWORK bewusst geändert hat (Tokens), od
 | `packages/tokens/tokens.css` | `3ca2f06408bf…` | `218355ed5fdd…` |
 | `packages/tokens/tokens.json` | `44735b27c2ee…` | `5b9a4eb32842…` |
 | `packages/tokens/tokens.ts` | `ffb72538d182…` | `5294aa6ed39b…` |
+
+## Nachtrag Consent-Kette (09.11.2026)
+
+Public-Experience-Harness an das aktuelle UI angepasst und mit echtem Lauf bestanden (Next-Build, 70 Routen: 43 öffentliche Seiten, TEILEKLAR nur de; 10 private Hüllen mit no-store und noindex, interne APIs 401). Clerk-Locale-Brücke stillgelegt (ED-04). Beleg `evidence/consent-ui-2026-10-28/next-public.json` neu erhoben, alte Fassung in `superseded/`.
+
+| Datei | alter Pin | neuer Pin | Beleg |
+|---|---|---|---|
+| `apps/web/auth/tests/browser-public-experience.mjs` | `2f05bb0e1911…` | `01dd50b5bddf…` | Harness, heute mit echtem Lauf ausgeführt (70 Routen, 10 private, passed) |
+| `evidence/consent-ui-2026-10-28/next-public.json` | `f1f9f49988ca…` | `c452eba944bc…` | heute real erhobener Beleg (Next-Build, passed, 70 Routen, 10 private, interne APIs 401) |
+| `tests/test_browser_evidence.py` | `dd428c7c5942…` | `7643cd0834b1…` | unittest tests.test_browser_evidence: 50 Tests OK |
+| `tools/check_browser_evidence.py` | `e0860a8feef7…` | `bb6e835fc30a…` | tools/check_browser_evidence.py: gesamte Belegkette besteht; unittest tests.test_browser_evidence OK |
+| `apps/web/app/layout.tsx` | `7497ff5dcc44…` | `4dacaac6a22c…` | bytegebunden im heutigen Beleg next-public.json (Harness-Lauf passed) |
+| `apps/web/app/anmelden/[[...sign-in]]/page.tsx` | `0536dcc25c6a…` | `ae015545eb91…` | bytegebunden im heutigen Beleg next-public.json; Titelfix (Sprache aus lang), Mobil 320 px geprüft |
+| `apps/web/app/registrieren/[[...sign-up]]/page.tsx` | `d1647612cdc4…` | `ed41b40219ce…` | bytegebunden im heutigen Beleg next-public.json; Titelfix (Sprache aus lang), Mobil 320 px geprüft |
+| `evidence/one-app-2026-10-27/text-spacing.json` | `8f0ef3c7b587…` | `59c687d965c2…` | heute neu erhobener Text-Spacing-Lauf (129 Checks, 0 Befunde, 43 Routen) nach dem Titelfix auf Anmelden und Registrieren |
+
+## Nachtrag gelöschte Quellen und grüne Tests (09.11.2026)
+
+| Datei | Begründung |
+|---|---|
+| `apps/web/components/PresenterEditorial.css` | Datei entfernt; Pin entfällt (kein Nachfolger-Beleg nötig) |
+| `apps/web/public/sitemap.xml` | Datei ersetzt durch den Next-Metadata-Route apps/web/app/sitemap.ts; Pin entfällt |
+| `apps/web/app/sitemap.ts` | neuer Pin als Nachfolger von public/sitemap.xml; Bytes von seo-sitemap.test.mjs gelesen, heute 26 von 26 Tests grün |
+| `apps/site/tests/seo-sitemap.test.mjs` | node --test tests/seo-sitemap.test.mjs tests/public-video-assets.test.mjs: 26 von 26 OK (heute) |
+| `apps/site/tests/public-video-assets.test.mjs` | node --test tests/seo-sitemap.test.mjs tests/public-video-assets.test.mjs: 26 von 26 OK (heute) |
+
+Bewusst offen bleiben `apps/web/components/PresenterScene.tsx` (Zeile REC-MEDIA-01 und der Harness `browser-scene-images.mjs` binden die gelöschte Datei; die Zeile braucht ein neues Urteil über die Zwischenbilder), `PROGRESS.md`, `apps/shop-api/requirements.in`, `apps/web/app/[...slug]/page.tsx`, `apps/web/app/page.tsx`, `apps/web/next.config.ts`, `config/page-explainers.json`, `config/page-media-registry.json` und `apps/site/tests/browser-scene-images.mjs`.
