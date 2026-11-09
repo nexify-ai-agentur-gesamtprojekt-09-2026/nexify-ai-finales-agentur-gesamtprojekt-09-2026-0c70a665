@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "not_before": null,
+  "max_runs_per_day": 2,
+  "minimum_minutes_between_runs": 180,
+  "timeout_minutes": 20,
+  "last_attempt_at": "2026-11-09T21:55:52.406Z",
+  "last_success_at": "2026-11-09T21:59:33.198Z",
+  "active_task_id": null,
+  "session_id": null,
+  "retry_count": 0,
+  "backoff_until": null,
+  "runs_by_day": {
+    "2026-11-09": 2
+  }
+}
