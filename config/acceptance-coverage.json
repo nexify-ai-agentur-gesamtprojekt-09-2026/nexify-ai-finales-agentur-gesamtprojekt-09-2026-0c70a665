@@ -1281,7 +1281,7 @@
     "docs/contracts/local-shop-http.md": "3c074ec313afd44f1710596f0fc0af4d0802b53794ef30e8546303e200591f66",
     "docs/contracts/one-web-app-integration.md": "d683ca05e809d8e86b553398bc4c444640207adde62cfadece3fa10608aa6c71",
     "docs/contracts/public-installation.md": "cfcca9432c1d516b0c215fa7a349c789b47e748c637665fb1a8130d89037a4fc",
-    "docs/contracts/requirements-reconciliation.md": "b60f46e6997cc4214f5cfa9dad9ce5b7d0b2db954af4c5c1d6a056bd5c3aca9a",
+    "docs/contracts/requirements-reconciliation.md": "c0157926579ab508228bf39ce26986a1fd2c503cd3f6818de45eac9b85ea3566",
     "docs/contracts/suite-trial-local.md": "15345d545fb1594c5ad2f137f17fb3906dbe37ffc6bfab5a63216e5eef2c3aea",
     "docs/contracts/trial-policy-clarification.md": "46edb7997c7f80220af16e39244ad9d9c38a3fa3fd461a4ea9d7179017c8bf35",
     "docs/operating-model/NEXIFY-GESAMTSYSTEM.md": "c3901e655d147aec9a944bd7a61b9ffddc01be2eed89140828ad4c91402f5ff2",
@@ -1520,10 +1520,8 @@
     "scripts/sentry_health.py": "f56a3ddf4abd73f3372cef8e6602cfebbfe57c8b458abd691d4e2600b4d1ce72",
     "tests/test_sentry_health.py": "c94cc564f0c16688bdd1b9f0d82b785ae8a4fafc36034837acdf4e6c1309cca6",
     "apps/site/tests/browser-critical.mjs": "0d333f2eb200f55ee7e218e86060972b2a33ed9c643a8c8ae6a73a7d15de80e4",
-    "apps/site/tests/browser-scene-images.mjs": "1cc418fd27daccc47c27cca775531381a8b83bcc1a7b2e01ce88605fcd409c42",
     "apps/site/tests/browser-standalone.mjs": "c1df6ef2d132f43c58c3bf1a84fb079f09be823fa8cf57259923ed804f6c4684",
     "apps/site/tests/build-config.test.mjs": "9825def54ee76ca7fea24ec938e3d25d4e6ec0bcb266af5170007ac73ce1fdf8",
-    "apps/web/components/PresenterScene.tsx": "11a38fab63d62a65b767dee227cb888865335e4d7183c694071f771c39efcd49",
     "apps/web/public/media/presenters/nex-toucan-121a804c.png": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
     "apps/web/public/media/presenters/pascal-original-6dd03834.png": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
     "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
@@ -1565,7 +1563,8 @@
     "docs/contracts/identity-hero-v1.md": "480683dc3b1ba85c2930e29ee0cf029a7ce111298990dc66dcabb2e7557d1ba7",
     "packages/tokens/tokens.css": "218355ed5fdd0c2c9e4d361311b4071de8b9618406c34a0a1c5d592a62efca15",
     "apps/shop-api/vercel_app.py": "30d53d54d570d41ac6dc07c252520e93fa86e02c648775aedf18c2c850a60c20",
-    "apps/shop-api/requirements.in": "d5acb47415054efd8327839cb65b3be04333acba9d3d7ba2fe991d0187fd5963",
+    "apps/shop-api/requirements.in": "f9a7ad4b96548c3c3989c540dd052313a68b9bf9abfa6309b49adad1d21fa71a",
+    "tests/test_media_cutout_alpha.py": "0e971173ea09746193d5784a24a3ce56aeba75ceb0d8ffdad104d1912bf172a2",
     "apps/shop-api/requirements.txt": "15e850c9f224f5c21528d2dc6015cc5c79437e8202adcee5dbcb4508eba8ae29",
     "apps/shop-api/tests/test_vercel_adapter.py": "dd727eab692e5f668e5dddf745d5bd29ba1d33ffc17439f4f3e1227f3780b3a4",
     "docs/deployment/services-namespace-plan-2026-10-31.json": "373f3a804fc30e80743bf691f865aee62577954a1ca12252ac6cdb187eeb9a69",
@@ -2873,10 +2872,23 @@
           "evidence/page-videos-2026-10-27/source-policy-scope.json",
           "evidence/page-videos-2026-10-27/manifest-reconciliation.json",
           "config/interim-scene-images.json",
-          "apps/web/components/PresenterScene.tsx",
-          "apps/site/tests/browser-scene-images.mjs",
+          "tests/test_media_cutout_alpha.py",
           "docs/contracts/interim-scene-images.md",
           "evidence/configuration-2026-10-28/interim-scenes-browser.json"
+        ],
+        "retired_sources": [
+          {
+            "path": "apps/web/components/PresenterScene.tsx",
+            "last_pin": "11a38fab63d62a65b767dee227cb888865335e4d7183c694071f771c39efcd49",
+            "status": "geloescht; Nachfolger sind die Atelier-Bilder aus page-media-registry.json",
+            "restore": "git show 5222298^:apps/web/components/PresenterScene.tsx"
+          },
+          {
+            "path": "apps/site/tests/browser-scene-images.mjs",
+            "last_pin": "1cc418fd27daccc47c27cca775531381a8b83bcc1a7b2e01ce88605fcd409c42",
+            "status": "ALT-SCENE, STILLGELEGT 2026-11-09 (Datei bleibt unveraendert im Repo, wird nicht als bestanden gewertet): erwartet ein Live-Hero und das alte Szenenmodell (49 Slots), ED-02 macht das Hero zum Standbild; bindet gelöschte Dateien",
+            "restore": "Datei liegt unveraendert unter apps/site/tests/browser-scene-images.mjs; Begruendung KS-016 in config/known-solutions.json"
+          }
         ],
         "test_evidence": "Local Library bytes inspected:13.091seconds, VP9+Opus,1664x1248/24fps, actual alpha0..255, audio decoded mean-16.6dB peak-1.3dB. Frames1/7s inspected; auditory judgment unavailable in current model. Original acceptance not established. Source-conflict contract guard and negative regression implemented. Current 20 factory tests include cross-config rejection of presenter approval, generation, voice status, source divergence and audible autoplay. Reference video technical/pixel inspection does not establish auditory quality or user acceptance. New page-video delta:46route inventory,36public/10protected,49module contexts;0approved videos,108route-intro and147module locale slots pending.22asset-helper+5explainer tests,53total Node regressions passed. Browser/controller and final scope evidence are recorded in evidence/page-videos-2026-10-27; controlled media doubles are not genuine film/audio QA. 28.10localinterim:144 real optimized-browser route/locale/width views (36routes,DE/NL,320/1280),49 role-matched image slots,HTTP original-byte hashes,decode/contain/alt/nooverflow andzeroexternalrequests. Three actual originals visually inspected. Exactcommitbinding in separate final delta manifest.",
         "actual_delivery": "reported_partial_implementation_unverified Interim images implemented/tested locally only;not pushed or deployed.",
@@ -3499,7 +3511,6 @@
           "tools/check_browser_evidence.py",
           "apps/site/tests/browser-identity-hero.mjs",
           "apps/site/tests/browser-critical.mjs",
-          "apps/site/tests/browser-scene-images.mjs",
           "evidence/identity-hero-2026-10-28/vite.json",
           "evidence/identity-hero-2026-10-28/next.json"
         ],

@@ -128,3 +128,18 @@ Bewusst weiter offen (kein Test oder Lauf bindet den Inhalt): `PROGRESS.md`, `ap
 | `PROGRESS.md` | `5a7e8ddbb508…` | `ee42461b8e39…` | Diff seit Pinstand e061fc8 geprüft: 49 angefügte Zeilen, 0 geänderte oder gelöschte; ausschließlich Dokumentation (Prüfberichte, Entscheidungen). Keine Änderung früherer Zeilen. |
 
 Weiter offen mit Grund: `apps/shop-api/requirements.in` (seit Pin zwei Zeilen: Kommentar und Drittanbieter-Abhängigkeit `higgsfield-client==0.2.0`; kein Test oder Lauf prüft sie, Pin bindet keine Sicherheitsprüfung), `apps/site/tests/browser-scene-images.mjs` und `apps/web/components/PresenterScene.tsx` (gelöscht, Zeile REC-MEDIA-01).
+
+## Nachtrag REC-MEDIA-01 und requirements.in (09.11.2026, ED-01)
+
+Entscheidung im Rahmen der globalen Freigabe (ED-01), Schutzgrenzen unverändert.
+
+**Szenenbild-Harness stillgelegt (KS-016).** `apps/site/tests/browser-scene-images.mjs` erwartet ein Live-Hero und das alte Szenenmodell (49 Slots); ED-02 macht das Hero zum Standbild, `PresenterScene.tsx` und `PresenterEditorial.css` sind gelöscht. Der Harness bleibt unverändert im Repo (nichts gelöscht), wird aber nicht mehr als bestandene Prüfung gewertet. In der Zeile REC-MEDIA-01 stehen beide Quellen jetzt unter `retired_sources` mit letztem Pin und Rückweg; aus `implementation_files` (REC-MEDIA-01 und REC-RELEASE-01) sind sie entfernt. Als heutiger, grüner Wächter für die Medien der Zeile ist `tests/test_media_cutout_alpha.py` gebunden. `full_requirement_accepted` bleibt false.
+
+| Datei | alter Pin | neuer Pin | Beleg |
+|---|---|---|---|
+| `apps/site/tests/browser-scene-images.mjs` | `1cc418fd27da…` | entfällt | ALT-SCENE, Begründung oben |
+| `apps/web/components/PresenterScene.tsx` | `11a38fab63d6…` | entfällt | Datei gelöscht (5222298), Rückweg `git show 5222298^:…` |
+| `tests/test_media_cutout_alpha.py` | – | `0e971173ea09…` | neu gebunden, Test grün |
+| `apps/shop-api/requirements.in` | `d5acb4741505…` | `f9a7ad4b9654…` | Diff-Review, siehe unten |
+
+**`higgsfield-client==0.2.0` geprüft.** PyPI (Veröffentlichung 17.09.2026, Herausgeber Higgsfield, Repository `higgsfield-ai/higgsfield-client`): einzige Abhängigkeit `httpx<0.29,>=0.21`; im Projekt ist `httpx==0.28.1` bereits gepinnt und passt. Im Code nur von `apps/shop-api/examples/seedance_text_to_video.py` genutzt (Zugangsdaten aus der Serverumgebung, nie ausgegeben). Die Datei steht nicht in `apps/shop-api/requirements.txt` (dem gesperrten Laufzeitstand); sie wird also weder in CI noch im Vercel-Build installiert. Der Pin bindet nur diese zwei Zeilen, keine Sicherheitsprüfung. Wer sie in die Laufzeit aufnimmt, muss sie vorher mit Hashes in die gesperrte Datei übernehmen.
