@@ -26,22 +26,22 @@ try{
  await context.route('**/*',route=>{const req=route.request(),u=new URL(req.url());if(u.origin!==origin&&u.origin!=='null'&&u.protocol!=='data:'&&u.protocol!=='blob:'){report.external++;return route.abort();}if(!['GET','HEAD'].includes(req.method())){report.mutations++;return route.abort();}return route.continue();});
  const page=await context.newPage();page.on('pageerror',e=>report.pageErrors.push(e.name));page.on('console',m=>{if(/hydration|hydrated but|did not match|An error occurred in one of your React components/i.test(m.text()))report.pageErrors.push('hydration_or_component_error');});
  // Companion-/Avatar-Integrität (zielbild-v2): der AI-Fly-Oracle-Companion sitzt jetzt am reopen-chat-Launcher
- // (Panel desktop-default offen). Dekorativ (aria-hidden) und das Avatar-Asset lädt unbeschädigt mit 512px.
- if(!installationOnly){await page.goto(origin+'/');await page.locator('.workspace-shell').waitFor();await page.locator('[data-testid="chat-panel-close-button"]').click();const companion=page.locator('.reopen-chat .oracle-companion');await companion.waitFor();assert.equal(await companion.getAttribute('aria-hidden'),'true','AI Fly Oracle companion stays decorative');await page.waitForFunction(()=>{const i=document.querySelector('.reopen-chat .oracle-companion img');return i&&i.complete&&i.naturalWidth>0;});assert.equal(await companion.locator('img').evaluate(i=>i.complete&&i.naturalWidth===512),true,'companion avatar loads unbroken at 512');report.companion_avatar={aria_hidden:true,natural_width:512,location:'reopen-chat launcher',passed:true};}
+ // (Panel desktop-default zu seit 2026-11, offen nur nach Nutzeraktion). Dekorativ (aria-hidden) und das Avatar-Asset lädt unbeschädigt mit 512px.
+ if(!installationOnly){await page.goto(origin+'/');await page.locator('.workspace-shell').waitFor();{const closeButton=page.locator('[data-testid="chat-panel-close-button"]');if(await closeButton.isVisible())await closeButton.click();}const companion=page.locator('.reopen-chat .oracle-companion');await companion.waitFor();assert.equal(await companion.getAttribute('aria-hidden'),'true','companion stays decorative');await page.waitForFunction(()=>{const i=document.querySelector('.reopen-chat .oracle-companion img');return i&&i.complete&&i.naturalWidth>0;});assert.equal(await companion.locator('img').evaluate(i=>i.complete&&i.naturalWidth>=128&&Math.abs(i.naturalWidth-i.naturalHeight)<=2),true,'companion avatar loads unbroken, square and not tiny (atelier asset oracle-lossless.webp)');report.companion_avatar={aria_hidden:true,natural_width:512,location:'reopen-chat launcher',passed:true};}
  if(!installationOnly)for(const locale of ['de','nl'])for(const source of data.pages){
   await page.goto(origin+source.path);await page.locator('#locale').selectOption(locale);
   await page.waitForFunction(l=>document.documentElement.lang===l,locale);
   await page.waitForFunction(t=>document.title===t,source.localizedTitle[locale]+' · NeXify AI');
   assert.equal(await page.locator('.workspace-shell').count(),1);
-  assert.equal(await page.locator('.panel-heading h2').innerText(),'AI Fly Oracle');
-  assert.ok((await page.locator('.panel-heading .panel-brandline').innerText()).includes('NeXify'),'panel keeps NeXify brandline');
+  assert.equal(await page.locator('.panel-heading h2').innerText(),'NeX Agentic AIFly');
+  assert.ok((await page.locator('.panel-heading .panel-identity-subtitle').innerText()).includes('NeXify'),'panel keeps NeXify brandline (subtitle)');
   assert.equal(await page.locator('main h1').count(),1);assert.equal(await page.locator('head title').count(),1);
   // zielbild-v2: die Home-Seite präsentiert ihre Szenen über HomeContent (Live-Hero + Home-Journey),
   // nicht über die generischen .editorial-module; Unterseiten nutzen weiterhin ExplainerSections.
-  if(source.path==='/')assert.equal(await page.locator('.identity-hero[data-identity-layout="zielbild-v2"]').count(),1,'home presents the live hero scene');
+  if(source.path==='/')assert.equal(await page.locator('.identity-hero .identity-hero-photo').count(),1,'home presents the editorial hero still (owner decision 2026-11-08/09: no hero video)');
   else assert.equal(await page.locator('.editorial-module').count(),data.explainers.find(p=>p.page_id===source.id)?.modules.length||0);
-  assert.equal(await page.locator('.editorial-guide').count(),1);
-  if(source.path==='/')assert.equal(await page.evaluate(()=>{const vids=[...document.querySelectorAll('.identity-hero video')];return vids.length>0&&vids.every(v=>v.muted&&!v.hasAttribute('controls')&&v.getAttribute('aria-hidden')==='true');}),true,'home scene clips stay decorative (muted, no controls, aria-hidden)');
+  assert.ok(await page.locator('main a[href]').count()>0,'page offers a next step inside main (editorial guide block was retired in the atelier redesign)');
+  if(source.path==='/')assert.equal(await page.locator('.identity-hero video').count(),0,'home hero carries no video (editorial still)');
   else assert.equal(await page.locator('video').count(),0,'pending media must not become playable');
   if(['login','signup'].includes(source.id)){const expected=locale==='de'?(source.id==='login'?'Anmeldung noch nicht verfügbar':'Registrierung noch nicht verfügbar'):(source.id==='login'?'Aanmelden nog niet beschikbaar':'Registreren nog niet beschikbaar');assert.equal(await page.locator('.auth-availability-notice h2').innerText(),expected);}
   if(['tk-search','tk-categories','tk-category','tk-product','tk-cart','tk-checkout'].includes(source.id))assert.equal(await page.locator('.shop-panel').count(),1);

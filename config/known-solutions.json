@@ -179,6 +179,20 @@
       },
       "quelle": "Inhaberaussage 2026-11-09, AGENTS.md, config/hero-film.json",
       "gefunden": "2026-11-09"
+    },
+    {
+      "id": "KS-014",
+      "bereich": "belege",
+      "symptom": "apps/web/auth/tests/browser-public-experience.mjs (erzeugt evidence/consent-ui-2026-10-28/next-public.json) bricht gegen das aktuelle UI an mehreren Stellen",
+      "ursache": "Der Harness stammt aus der Clerk- und zielbild-v2-Zeit. Bereits angepasst (2026-11-09): Chat-Panel desktop standardmäßig zu, Companion-Avatar ist das Atelier-Asset oracle-lossless.webp (nicht mehr 512 px), Panel-Überschrift NeX Agentic AIFly mit Untertitel NeXify AI, Hero ist ein Standbild ohne Video (ED-02), .editorial-guide entfällt. Noch veraltet: die Zählung .editorial-module gegen config/page-explainers.json (Inhaltsmodell hat sich geändert), vermutlich weitere Erwartungen zu Login/Signup-Hinweis und Shop-Panels. Der Prüfer erwartet 78 Routen statt 86 (43 öffentliche Seiten mal 2 Sprachen) und pinnt gelöschte Dateien (LocaleAwareClerk.tsx).",
+      "loesung": "Harness an das aktuelle Inhaltsmodell binden (Seitenabschnitte aus der heutigen Quelle statt page-explainers.json), restliche Erwartungen aus dem laufenden UI ableiten, NEXT_CONSENT_SOURCES und die Zeilenzahl in tools/check_browser_evidence.py aus config/site-map.json ableiten, Clerk-Locale-Brücke stilllegen (ED-04, markieren, nicht löschen), danach Beleg mit echtem Lauf erheben (PLAYWRIGHT_MODULE-Shim, lokaler Next-Server) und Pins mit Begründung nachziehen. Footer-Pfeil (DiagnosticConsent.css) erst danach, weil er den Consent-Beleg neu bindet.",
+      "wache": {
+        "art": "pruefung",
+        "pfad": "tools/check_browser_evidence.py",
+        "marker": "next_consent_complete_local_routes_required"
+      },
+      "quelle": "Sitzung 2026-11-09, apps/web/auth/tests/browser-public-experience.mjs",
+      "gefunden": "2026-11-09"
     }
   ]
 }
