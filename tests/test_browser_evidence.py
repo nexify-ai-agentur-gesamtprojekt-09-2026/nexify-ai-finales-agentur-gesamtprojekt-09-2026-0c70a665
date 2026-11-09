@@ -1,5 +1,6 @@
 """Saved source-bound fixtures only; these tests do not run a browser."""
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -106,7 +107,17 @@ class BrowserEvidenceTests(unittest.TestCase):
 
 
 
+ALT_SHOP_RETIRED = (
+    "Alt-Shop, stillgelegt (OF-11, 2026-11-09, Freigabe Pascal Courbois): prueft den SQLite-Warenkorb, "
+    "persistent_objects {cart: 7} und /api/shop/cart-POST des Alt-Shops. Ersetzt durch "
+    "check_shop_ui_mock_evidence / check_catalog_ui_mock_evidence (ShopUiMockEvidenceTests, "
+    "CatalogUiMockEvidenceTests unten). Code und Alt-Nachweis bleiben unveraendert erhalten."
+)
+
+
+@unittest.skip(ALT_SHOP_RETIRED)
 class ShopEvidenceTests(unittest.TestCase):
+    """ALT-SHOP, STILLGELEGT: nicht im laufenden Gate."""
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
@@ -151,7 +162,9 @@ if __name__ == "__main__":
     unittest.main()
 
 
+@unittest.skip(ALT_SHOP_RETIRED)
 class CatalogBrowserEvidenceTests(unittest.TestCase):
+    """ALT-SHOP, STILLGELEGT: nicht im laufenden Gate."""
     def setUp(self):
         self.folder = tempfile.TemporaryDirectory(); self.addCleanup(self.folder.cleanup)
         self.root = Path(self.folder.name)
@@ -170,6 +183,247 @@ class CatalogBrowserEvidenceTests(unittest.TestCase):
         report = json.loads(evidence_path.read_text()); report['order_started'] = True
         evidence_path.write_text(json.dumps(report))
         with self.assertRaisesRegex(checker.EvidenceError, 'read_only_partial'): checker.check_catalog_evidence(self.root)
+
+
+class MockUiEvidenceMixin:
+    """Neuer Shop (OF-11): strenge Pruefung der gemockten Browsernachweise.
+
+    Gespeicherte Belege und Quellen werden in ein Temporaerverzeichnis gespiegelt;
+    es startet kein Browser und der Repository-Stand wird nie veraendert.
+    """
+    check_name = evidence_path = source_paths = checks = overflow_check = script = prefix = None
+    effect_flags = ()
+    read_only = False
+
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory()
+        self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        for relative in (*self.source_paths, self.evidence_path):
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+        self.report = json.loads((self.root / self.evidence_path).read_text())
+
+    def run_check(self):
+        return getattr(checker, self.check_name)(self.root)
+
+    def write(self, report=None):
+        (self.root / self.evidence_path).write_text(json.dumps(self.report if report is None else report))
+
+    def fails(self, pattern):
+        self.write()
+        with self.assertRaisesRegex(checker.EvidenceError, pattern):
+            self.run_check()
+
+    def test_current_evidence_passes_read_only_and_is_labelled_mock(self):
+        before = {str(f.relative_to(self.root)): f.read_bytes() for f in self.root.rglob("*") if f.is_file()}
+        result = self.run_check()
+        self.assertEqual(result["checks"], len(self.checks))
+        self.assertIs(result["mock"], True)
+        self.assertIs(result["production_data"], False)
+        self.assertIn("mock", result["scope"])
+        after = {str(f.relative_to(self.root)): f.read_bytes() for f in self.root.rglob("*") if f.is_file()}
+        self.assertEqual(before, after)
+        self.assertTrue(set(self.checks).issubset(self.report["checks"]))
+
+    def test_missing_or_duplicated_check_and_unpassed_recording_are_rejected(self):
+        for identifier in self.checks:
+            with self.subTest(check=identifier):
+                self.report = json.loads((ROOT / self.evidence_path).read_text())
+                self.report["checks"].remove(identifier)
+                self.fails(self.prefix + "_(390px_overflow_check|critical_check)_missing")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        self.report["checks"].append(self.report["checks"][0])
+        self.fails(self.prefix + "_critical_check_missing")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        self.report["passed"] = False
+        self.fails(self.prefix + "_recorded_pass_required")
+
+    def test_390px_overflow_check_must_be_present_and_measured_by_the_bound_script(self):
+        self.report["checks"].remove(self.overflow_check)
+        self.fails(self.prefix + "_390px_overflow_check_missing")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        script = self.root / self.script
+        raw = script.read_bytes()
+        for probe in checker.SHOP_UI_MOCK_OVERFLOW_PROBES:
+            self.assertIn(probe, raw)
+            script.write_bytes(raw.replace(probe, b"/* removed */"))
+            self.report["source_sha256"][self.script] = hashlib.sha256(script.read_bytes()).hexdigest()
+            self.fails(self.prefix + "_390px_overflow_probe_missing_in_bound_script")
+        script.write_bytes(raw)
+
+    def test_mock_and_production_data_flags_are_mandatory(self):
+        for key, value in (("mock", False), ("mock", None), ("production_data", True),
+                           ("production_data", None), ("server_code_executed", True)):
+            with self.subTest(key=key, value=value):
+                self.report = json.loads((ROOT / self.evidence_path).read_text())
+                if value is None:
+                    self.report.pop(key)
+                else:
+                    self.report[key] = value
+                self.fails(self.prefix + "_(mock_true|production_data_false)_required")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        self.report["mock_label"] = "echte Produktivdaten"
+        self.fails(self.prefix + "_mock_label_required")
+
+    def test_source_drift_in_every_bound_file_is_rejected(self):
+        self.assertEqual(self.report["source_sha256"].keys(), set(self.source_paths))
+        for relative in self.source_paths:
+            with self.subTest(source=relative):
+                path = self.root / relative
+                original = path.read_bytes()
+                path.write_bytes(original + b"\n/* changed source */\n")
+                with self.assertRaisesRegex(checker.EvidenceError, "stale_" + self.prefix + "_source_sha256: " + relative):
+                    self.run_check()
+                path.write_bytes(original)
+
+    def test_source_set_and_hash_format_are_exact_and_not_artifact_controlled(self):
+        self.report["source_sha256"]["../../outside-repository"] = "0" * 64
+        self.fails(self.prefix + "_exact_source_path_set_required")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        self.report["source_sha256"].pop(self.source_paths[0])
+        self.fails(self.prefix + "_exact_source_path_set_required")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        self.report["source_sha256"][self.source_paths[0]] = "XYZ"
+        self.fails("invalid_" + self.prefix + "_source_sha256")
+
+    def test_external_requests_and_page_errors_are_rejected(self):
+        for key, value in (("external_requests", ["https://evil.example"]), ("page_errors", ["boom"]),
+                           ("external_requests", None)):
+            with self.subTest(key=key):
+                self.report = json.loads((ROOT / self.evidence_path).read_text())
+                if value is None:
+                    self.report.pop(key)
+                else:
+                    self.report[key] = value
+                self.fails(self.prefix + "_external_request_or_page_error")
+
+    def test_payment_and_order_claims_must_stay_false(self):
+        for flag in self.effect_flags:
+            for value in (True, None):
+                with self.subTest(flag=flag, value=value):
+                    self.report = json.loads((ROOT / self.evidence_path).read_text())
+                    if value is None:
+                        self.report.pop(flag)
+                    else:
+                        self.report[flag] = value
+                    self.fails(self.prefix + "_effect_boundaries_required")
+
+    def test_requests_must_show_the_real_mock_boundary_and_nothing_outside_it(self):
+        self.report["requests"] = []
+        self.fails(self.prefix + "_actual_http_boundary_missing")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        required = (checker.CATALOG_UI_MOCK_REQUIRED_REQUESTS if self.read_only
+                    else checker.SHOP_UI_MOCK_REQUIRED_REQUESTS)
+        for method, path, status in required:
+            with self.subTest(missing=(method, path, status)):
+                self.report = json.loads((ROOT / self.evidence_path).read_text())
+                self.report["requests"] = [r for r in self.report["requests"]
+                                           if (r["method"], r["path"], r["status"]) != (method, path, status)]
+                self.fails(self.prefix + "_actual_http_boundary_missing")
+        for row in ({"method": "GET", "path": "https://api.example/x", "status": 200, "count": 1},
+                    {"method": "DELETE", "path": "/api/shop/cart", "status": 200, "count": 1},
+                    {"method": "GET", "path": "/api/shop/cart", "status": "200", "count": 1},
+                    {"method": "GET", "path": "/api/shop/cart", "status": 200, "count": 0}):
+            with self.subTest(row=row):
+                self.report = json.loads((ROOT / self.evidence_path).read_text())
+                self.report["requests"].append(row)
+                self.fails(self.prefix + "_invalid_request_row")
+
+    def test_a_mutation_outside_the_mock_contract_is_rejected(self):
+        self.report["requests"].append({"method": "POST", "path": "/api/shop/cart/checkout-draft", "status": 200, "count": 1})
+        self.fails(self.prefix + "_(mutation_outside_mock_contract|write_request_in_read_only_browse)")
+
+    def test_local_answer_counters_must_be_non_negative_integers(self):
+        self.report["supplier_image_requests_answered_locally"] = -1
+        self.fails(self.prefix + "_invalid_local_counter")
+        self.report = json.loads((ROOT / self.evidence_path).read_text())
+        self.report["supplier_image_requests_answered_locally"] = True
+        self.fails(self.prefix + "_invalid_local_counter")
+
+    def test_duplicate_json_keys_are_rejected(self):
+        raw = (self.root / self.evidence_path).read_text()
+        (self.root / self.evidence_path).write_text(raw.replace('"passed": true,', '"passed": true, "passed": true,', 1))
+        with self.assertRaisesRegex(checker.EvidenceError, "invalid_evidence_or_site_map_json"):
+            self.run_check()
+
+
+class ShopUiMockEvidenceTests(MockUiEvidenceMixin, unittest.TestCase):
+    check_name = "check_shop_ui_mock_evidence"
+    evidence_path = checker.SHOP_UI_MOCK_EVIDENCE_PATH
+    source_paths = checker.SHOP_UI_MOCK_SOURCE_PATHS
+    checks = checker.SHOP_UI_MOCK_CHECKS
+    overflow_check = checker.SHOP_UI_MOCK_OVERFLOW_CHECK
+    script = "apps/site/tests/browser-shop.mjs"
+    prefix = "shop_ui_mock"
+    effect_flags = ("real_payment_started", "real_order_submitted")
+
+    def test_exact_check_names_are_the_thirteen_recorded_by_the_script(self):
+        self.assertEqual(len(self.checks), 13)
+        script = (ROOT / self.script).read_text()
+        for identifier in self.checks:
+            self.assertIn("'" + identifier + "'", script)
+
+    def test_payment_hand_over_counter_is_required(self):
+        self.report.pop("payment_page_navigations_answered_locally")
+        self.fails("shop_ui_mock_invalid_local_counter")
+
+
+class CatalogUiMockEvidenceTests(MockUiEvidenceMixin, unittest.TestCase):
+    check_name = "check_catalog_ui_mock_evidence"
+    evidence_path = checker.CATALOG_UI_MOCK_EVIDENCE_PATH
+    source_paths = checker.CATALOG_UI_MOCK_SOURCE_PATHS
+    checks = checker.CATALOG_UI_MOCK_CHECKS
+    overflow_check = checker.CATALOG_UI_MOCK_OVERFLOW_CHECK
+    script = "apps/site/tests/browser-catalog.mjs"
+    prefix = "catalog_ui_mock"
+    effect_flags = ("order_started", "payment_started")
+    read_only = True
+
+    def test_exact_check_names_are_the_seven_recorded_by_the_script(self):
+        self.assertEqual(len(self.checks), 7)
+        script = (ROOT / self.script).read_text()
+        for identifier in self.checks:
+            self.assertIn("'" + identifier + "'", script)
+
+    def test_browsing_may_not_write_at_all(self):
+        self.report["requests"].append({"method": "POST", "path": "/api/shop/cart/items", "status": 200, "count": 1})
+        self.fails("catalog_ui_mock_write_request_in_read_only_browse")
+
+
+class RetiredAltShopGateTests(unittest.TestCase):
+    def test_running_gate_uses_the_new_shop_checkers_and_not_the_retired_ones(self):
+        import contextlib
+        import io
+        from unittest import mock
+        for name in ("check_evidence", "check_public_fallbacks", "check_exception_evidence",
+                     "check_consent_ui", "check_workspace_read"):
+            patcher = mock.patch.object(checker, name, return_value={"status": "passed"})
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        for name in ("check_shop_evidence", "check_catalog_evidence"):
+            patcher = mock.patch.object(checker, name, side_effect=AssertionError("retired Alt-Shop checker called"))
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        new = {name: mock.patch.object(checker, name, wraps=getattr(checker, name)).start()
+               for name in ("check_shop_ui_mock_evidence", "check_catalog_ui_mock_evidence")}
+        self.addCleanup(mock.patch.stopall)
+        out = io.StringIO()
+        with mock.patch("sys.argv", ["check_browser_evidence.py", "--root", str(ROOT)]), contextlib.redirect_stdout(out):
+            self.assertEqual(checker.main(), 0)
+        for patched in new.values():
+            patched.assert_called_once()
+        printed = json.loads(out.getvalue())
+        self.assertEqual(printed["shop"]["checks"], 13)
+        self.assertEqual(printed["catalog"]["checks"], 7)
+
+    def test_retired_checkers_and_alt_evidence_stay_in_the_repository(self):
+        self.assertTrue(callable(checker.check_shop_evidence) and callable(checker.check_catalog_evidence))
+        self.assertIn("STILLGELEGT", checker.check_shop_evidence.__doc__)
+        self.assertIn("STILLGELEGT", checker.check_catalog_evidence.__doc__)
+        for relative in (checker.SHOP_EVIDENCE_PATH, checker.CATALOG_EVIDENCE_PATH):
+            self.assertTrue((ROOT / relative).is_file(), relative)
 
 
 class PublicFallbackEvidenceTests(unittest.TestCase):
