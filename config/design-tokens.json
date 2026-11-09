@@ -74,19 +74,19 @@
         "$type": "color"
       },
       "lime": {
-        "$value": "#A8C76A",
+        "$value": "#C0EE38",
         "$type": "color"
       },
       "limeHell": {
-        "$value": "#C7DA98",
+        "$value": "#DBF68A",
         "$type": "color"
       },
       "limeDunkel": {
-        "$value": "#8EAD51",
+        "$value": "#A6D820",
         "$type": "color"
       },
       "limeGruen": {
-        "$value": "#638C45",
+        "$value": "#78C331",
         "$type": "color"
       }
     },
@@ -161,9 +161,9 @@
         "$type": "color"
       },
       "lime": {
-        "$value": "#A8C76A",
+        "$value": "#C0EE38",
         "$type": "color",
-        "$description": "Lime für Papier und E-Mail (CD-2026); auf Bildschirm immer marke.lime"
+        "$description": "Lime für Papier und E-Mail = Markenwert; abweichender Druckwert nur mit Proof (Ebene D)"
       },
       "grau": {
         "$value": "#646769",
@@ -364,8 +364,8 @@
     "markenlicht": "radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%)",
     "karte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
     "kleineKarte": "linear-gradient(180deg, #141A22 0%, #0F131A 100%)",
-    "buttonPrimaer": "#A8C76A",
-    "balken": "linear-gradient(90deg, #789C48, #A8C76A)",
+    "buttonPrimaer": "linear-gradient(180deg, #DBF68A 0%, #C0EE38 55%, #A6D820 100%)",
+    "balken": "linear-gradient(90deg, #A6D820, #C0EE38)",
     "band": "#080A0F",
     "seitengrund": "#080A0F",
     "spotlight": "none",
@@ -388,7 +388,7 @@
     "lightEntrance": "3.6s ease-out"
   },
   "focus": {
-    "ring": "2px solid #A8C76A",
+    "ring": "2px solid #C0EE38",
     "offset": "2px",
     "logo": "Unterstreichung Lime, 6px Abstand"
   },
