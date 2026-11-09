@@ -267,6 +267,23 @@ function guidedText(text:string,pages:PublicPage[]){
  });
 }
 
+const briefingCopy:Record<Locale,{title:string;intro:string;label:string;copy:string;copied:string;fallback:string;contact:string;hint:string;heading:string}>={
+ de:{title:"Ihr Projektbriefing",intro:"Ihre Angaben als Grundlage für ein persönliches Gespräch. Ergänzen oder ändern Sie den Text vor der Anfrage.",label:"Briefing bearbeiten",copy:"Briefing kopieren",copied:"Kopiert. Fügen Sie das Briefing im Kontaktformular ein.",fallback:"Bitte markieren und kopieren Sie den Text selbst.",contact:"Zum Kontaktformular",hint:"Das Kontaktformular öffnet sich ohne automatische Übertragung. Ihre Anfrage senden Sie dort selbst ab.",heading:"Mein Vorhaben"},
+ nl:{title:"Uw projectbriefing",intro:"Uw informatie als basis voor een persoonlijk gesprek. U kunt de tekst vóór uw aanvraag aanpassen.",label:"Briefing bewerken",copy:"Briefing kopiëren",copied:"Gekopieerd. Plak de briefing in het contactformulier.",fallback:"Selecteer en kopieer de tekst zelf.",contact:"Naar het contactformulier",hint:"Het contactformulier opent zonder automatische overdracht. U verstuurt de aanvraag daar zelf.",heading:"Mijn project"},
+ fr:{title:"Votre briefing projet",intro:"Vos informations pour préparer un échange personnel. Vous pouvez modifier le texte avant votre demande.",label:"Modifier le briefing",copy:"Copier le briefing",copied:"Copié. Collez le briefing dans le formulaire de contact.",fallback:"Sélectionnez et copiez le texte vous-même.",contact:"Vers le formulaire de contact",hint:"Le formulaire s’ouvre sans transfert automatique. Vous envoyez vous-même votre demande.",heading:"Mon projet"},
+ en:{title:"Your project brief",intro:"Your details provide a starting point for a personal conversation. Edit the text before making an enquiry.",label:"Edit brief",copy:"Copy brief",copied:"Copied. Paste the brief into the contact form.",fallback:"Please select and copy the text yourself.",contact:"Go to contact form",hint:"The contact form opens without transferring your text. You send the enquiry yourself.",heading:"My project"}
+};
+
+function ProjectBriefing({locale,questions}:{locale:Locale;questions:string[]}){
+ const t=briefingCopy[locale];
+ const [edited,setEdited]=useState<string|null>(null),[notice,setNotice]=useState("");
+ const prompts:Record<Locale,string>={de:"Ziel / gewünschtes Ergebnis:\n\nBestehende Website oder Systeme:\n\nZeitrahmen und Budget (falls bekannt):",nl:"Doel / gewenst resultaat:\n\nBestaande website of systemen:\n\nPlanning en budget (indien bekend):",fr:"Objectif / résultat souhaité :\n\nSite ou systèmes existants :\n\nCalendrier et budget (si connus) :",en:"Goal / desired outcome:\n\nExisting website or systems:\n\nTimeline and budget (if known):"};
+ const generated=`${t.heading}:\n${questions.map((question,index)=>`${index+1}. ${question}`).join("\n")}\n\n${prompts[locale]}`;
+ const value=edited??generated;
+ async function copyBrief(){try{await navigator.clipboard.writeText(value);setNotice(t.copied);}catch{setNotice(t.fallback);}}
+ return <section className="orientation-brief" aria-label={t.title}><div className="orientation-brief-heading"><span className="orientation-brief-icon" aria-hidden="true">✳</span><div><h4>{t.title}</h4><p>{t.intro}</p></div></div><label htmlFor="orientation-brief-text">{t.label}</label><textarea id="orientation-brief-text" rows={5} value={value} onChange={event=>{setEdited(event.target.value);setNotice("");}}/><div className="orientation-brief-actions"><button type="button" className="outline-button" onClick={()=>void copyBrief()}>{t.copy}</button><SiteLink className="primary-button" href="/kontakt">{t.contact} <span aria-hidden="true">→</span></SiteLink></div><p className="orientation-brief-hint">{t.hint}</p><p className="orientation-brief-notice" role="status">{notice}</p></section>;
+}
+
 type OrientationProps={locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void};
 
 export default function PublicOrientationChat(props:OrientationProps){
@@ -292,6 +309,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
    const ref=part.data as Record<string,unknown>;const page=pages.find(page=>page.id===ref.page_id&&page.path===ref.path);
    return page?<SiteLink className="orientation-page-link" key={index} href={page.path}><span className="orientation-page-index" aria-hidden="true">0{index+1}</span><span className="orientation-page-copy"><strong>{page.localizedTitle[locale]}</strong><small>{page.localizedSummary[locale]}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>:null;
   })}</article>)}</div>
+  {site==="nexify"&&messages.some(message=>message.role==="user")&&<ProjectBriefing locale={locale} questions={messages.filter(message=>message.role==="user").map(message=>message.parts.filter(part=>part.type==="text").map(part=>part.text).join(" "))}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
   </div>
@@ -321,6 +339,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
    <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>
   </div>)}</div>
+  {site==="nexify"&&messages.length>0&&<ProjectBriefing locale={locale} questions={messages.map(message=>message.question)}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
   </div>
