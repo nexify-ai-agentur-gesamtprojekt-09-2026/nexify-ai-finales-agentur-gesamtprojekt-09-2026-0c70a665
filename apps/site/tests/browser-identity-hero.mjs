@@ -21,9 +21,9 @@ const browser=await chromium.launch({headless:true}),views=[],text_resize=[],ext
 const locales=['de','nl','fr'],suffix=l=>l==='de'?'':'?lang='+l;
 // Next baut interne Links serverseitig mit ?lang=; das Vite-SPA haelt die Sprache im Client-Zustand und navigiert ohne ?lang= (Hero-Links, wie die Footer-Links).
 const linkSuffix=l=>renderer==='next'?suffix(l):'';
-// Heutiger Umbruch der Hero-Spalten auf der Startseite: HomeConcept.css stapelt bis einschliesslich 1100 px Containerbreite
+// Heutiger Umbruch der Hero-Spalten auf der Startseite: HomeConcept.css stapelt bis einschliesslich 820 px Containerbreite
 // (IdentityHero.css deklariert 820 px, wird dort uebersteuert). Die Konstante wird gegen die Quelle gebunden und gegen die Renderung gemessen.
-const STACK_MAX=1100;assert.ok((await readFile(root+'apps/web/components/HomeConcept.css','utf8')).includes('@container identity-hero (max-width:'+STACK_MAX+'px){.workspace-shell .home-concept .identity-hero .identity-scene{grid-template-columns:1fr}'),'stack threshold declared in HomeConcept.css');
+const STACK_MAX=820;assert.ok((await readFile(root+'apps/web/components/HomeConcept.css','utf8')).includes('@container identity-hero (max-width:'+STACK_MAX+'px){.workspace-shell .home-concept .identity-hero .identity-scene{grid-template-columns:1fr}'),'stack threshold declared in HomeConcept.css');
 const undistorted=f=>!/blur\(|grayscale\(|invert\(|hue-rotate\(|sepia\(|saturate\(0/.test(f);
 try{
  if(child)for(let n=0;n<100;n++){try{if((await fetch(origin)).ok)break;}catch{}if(n===99)throw Error('Next startup timeout');await new Promise(resolve=>setTimeout(resolve,100));}
@@ -37,9 +37,9 @@ try{
    try{
     assert.equal(await original.evaluate(es=>es.every(e=>Math.abs(parseFloat(getComputedStyle(e.element).fontSize)-e.size*2)<.05)),true);
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-    const measured=await hero.evaluate(h=>{const r=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};return {scene:r(h.querySelector('.identity-scene')),copy:r(h.querySelector('.identity-copy')),figures:[...h.querySelectorAll('.identity-hero-photo video')].map(r),hero_overflow:h.scrollWidth>h.clientWidth+1};});
+    const measured=await hero.evaluate(h=>{const r=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};return {scene:r(h.querySelector('.identity-scene')),copy:r(h.querySelector('.identity-copy')),figures:[...h.querySelectorAll('.identity-hero-photo video')].map(r),stacked:getComputedStyle(h.querySelector('.identity-scene')).gridTemplateColumns.split(' ').filter(Boolean).length===1,hero_overflow:h.scrollWidth>h.clientWidth+1};});
     assert.equal(measured.hero_overflow,false,'200% hero horizontal overflow');assert.ok(measured.copy.top>=measured.scene.top-1&&measured.copy.bottom<=measured.scene.bottom+1,'200% copy clipped');
-    for(const r of measured.figures){const c=measured.copy,s=measured.scene;assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'200% copy/video collision');assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1);}
+    for(const r of measured.figures){const c=measured.copy,s=measured.scene;assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'200% copy/video collision');assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1);if(measured.stacked)assert.ok(r.bottom<=c.top+1,'200% stacked video appears before copy');}
     await page.evaluate(()=>{if(document.activeElement instanceof HTMLElement)document.activeElement.blur();});
     await hero.screenshot({path:out+'/'+metadata.width+'-'+locale+'-'+metadata.sidebar+(metadata.forced_width?'-'+metadata.forced_width:'')+'-zoom200.png'});
     text_resize.push({...metadata,locale,all_doubled:true,...measured,passed:true});
@@ -47,6 +47,8 @@ try{
   }
   try{
    await page.goto(origin+'/'+suffix(locale));await page.waitForFunction(l=>document.documentElement.lang===l,locale);await page.evaluate(()=>document.fonts.ready);
+   await page.locator('.workspace-shell.'+(width===1440?'is-open':'is-closed')).waitFor();
+   if(width===1440)assert.equal(await page.locator('#aifly-panel').isVisible(),true,'desktop chat opens by default');
    await closePanel();
    await page.locator('.workspace-shell.is-closed').waitFor();
    // Deferred Orientierung (React.lazy + Suspense) vollständig auflösen lassen, bevor gemessen wird:
@@ -75,21 +77,23 @@ try{
      return {scene,copy,figures,overflow:document.documentElement.scrollWidth>innerWidth+1,text_overflow:[...h.querySelectorAll('h1,h2,p')].some(e=>e.scrollWidth>e.clientWidth+1),stacked:getComputedStyle(h.querySelector('.identity-scene')).gridTemplateColumns.split(' ').filter(Boolean).length===1};
     });
     assert.equal(geometry.overflow,false,'viewport overflow');assert.equal(geometry.text_overflow,false,'text overflow');
+    if(width===1440&&sidebar==='open')assert.equal(geometry.stacked,false,'desktop hero remains side by side with chat open');
     for(const f of geometry.figures){const r=f.rect,s=geometry.scene,c=geometry.copy;assert.ok(r.width>0&&r.height>0,'video has size');assert.ok(/\/media\/home-review\/pascal-studio-scene-original-20261109\.mp4$/.test(f.src),'original personal video: '+f.src);assert.ok(f.alt.length>10,'video has an accessible name');assert.ok(f.opacity>=0.99,'video fully visible');assert.ok(undistorted(f.filter),'no identity-distorting filter: '+f.filter);assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,'whole video inside hero scene');assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'copy/video collision');}
-    if(width<500){assert.equal(geometry.stacked,true,'narrow stacks video below copy');for(const f of geometry.figures)assert.ok(f.rect.top>=geometry.copy.bottom-1,'stacked video sits below the copy');}
+    if(width<500)assert.equal(geometry.stacked,true,'narrow layout stacks hero');
+    if(geometry.stacked)for(const f of geometry.figures)assert.ok(f.rect.bottom<=geometry.copy.top+1,'stacked video sits above the copy');
     await page.evaluate(()=>{if(document.activeElement instanceof HTMLElement)document.activeElement.blur();});
     await hero.screenshot({path:out+'/'+width+'-'+locale+'-'+sidebar+'.png'});
     views.push({width,locale,sidebar,...geometry,passed:true});
     await checkZoom(hero,{width,sidebar});
-   // Breakpoint-Register straddelt den heutigen Umbruch (STACK_MAX) sowie den frueheren 820px-Umbruch:
+   // Breakpoint-Register straddelt den aktuellen 820-px-Umbruch:
    // echte Spaltenmessung, gestapelt bis STACK_MAX, zweispaltig darueber. 200%-Zoom in BEIDEN Zuständen belegt.
-   if(width===1440&&sidebar==='closed')for(const forcedWidth of [764,820,821,1000,STACK_MAX,STACK_MAX+1,1300]){
+   if(width===1440&&sidebar==='closed')for(const forcedWidth of [764,819,820,821,1000,1100,1300]){
      await hero.evaluate((h,w)=>h.style.width=w+'px',forcedWidth);await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
      const probe=await hero.evaluate(h=>{const r=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};const scene=r(h.querySelector('.identity-scene')),copy=r(h.querySelector('.identity-copy'));return {scene,copy,stacked:getComputedStyle(h.querySelector('.identity-scene')).gridTemplateColumns.split(' ').filter(Boolean).length===1,figures:[...h.querySelectorAll('.identity-hero-photo video')].map(i=>r(i)),overflow:document.documentElement.scrollWidth>innerWidth+1};});
-     for(const r of probe.figures){const c=probe.copy,s=probe.scene;assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'breakpoint copy/video collision');assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1);}
+     for(const r of probe.figures){const c=probe.copy,s=probe.scene;assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'breakpoint copy/video collision');assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1);if(probe.stacked)assert.ok(r.bottom<=c.top+1,'breakpoint stacked video appears first');}
      assert.equal(probe.overflow,false,'breakpoint overflow');assert.equal(probe.stacked,forcedWidth<=STACK_MAX,'stack threshold');
      await hero.screenshot({path:out+'/breakpoint-'+forcedWidth+'-'+locale+'.png'});views.push({width,forced_width:forcedWidth,locale,sidebar,breakpoint_probe:true,...probe,passed:true});
-     if([764,1000,STACK_MAX+1,1300].includes(forcedWidth))await checkZoom(hero,{width,sidebar,forced_width:forcedWidth});
+     if([764,820,821,1300].includes(forcedWidth))await checkZoom(hero,{width,sidebar,forced_width:forcedWidth});
      await hero.evaluate(h=>h.style.removeProperty('width'));
     }
    }
