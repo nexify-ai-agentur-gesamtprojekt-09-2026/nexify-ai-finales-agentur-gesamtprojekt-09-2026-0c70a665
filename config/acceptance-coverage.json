@@ -1387,7 +1387,7 @@
     "tests/test_reviewed_delivery.py": "a5fa79c13c7028db63a0410dbcbba586d313ab60f5df217683a1f712884929ca",
     "docs/contracts/reviewed-delivery.md": "1453ae109ca7b60470bc85b11c58d0a96e5c34cdb5531f510da9d66f50bb0584",
     ".harness/arch-rules.json": "5fb777e79a34840a3dbe8d8ee08647e1db972e267742f877718746942d32e2a0",
-    "apps/site/tests/public-video-assets.test.mjs": "5bb1ce1f307bc7ad17178487f81a2fb7c06e92b9b903eb625f63a1856bf4a70c",
+    "apps/site/tests/public-video-assets.test.mjs": "e127dadd2c6577302add4c94866af2ca404e0aac97fa1a06f261b5428e6a9753",
     "docs/design/detail-browser-evidence.json": "8a26dd144e36c7ca542de943108e5e4d578db1a193f685d107c01f2c6cb2a3b1",
     "config/page-media-registry.json": "43d36f51f86351210223e6fde00fc2f61721c2b7871c709d0c4403ae56f1b154",
     "apps/site/scripts/public-explainers.mjs": "9206180af31420cc14cdfa088ebc15bdfca8e7ad26f8b4b5739677c2d48b4db6",
@@ -1523,7 +1523,6 @@
     "apps/site/tests/browser-scene-images.mjs": "1cc418fd27daccc47c27cca775531381a8b83bcc1a7b2e01ce88605fcd409c42",
     "apps/site/tests/browser-standalone.mjs": "c1df6ef2d132f43c58c3bf1a84fb079f09be823fa8cf57259923ed804f6c4684",
     "apps/site/tests/build-config.test.mjs": "9825def54ee76ca7fea24ec938e3d25d4e6ec0bcb266af5170007ac73ce1fdf8",
-    "apps/web/components/PresenterEditorial.css": "c407c763724b152f9f373faaee94be5bc630e40ae51d7a1971d24b449ab6cc1e",
     "apps/web/components/PresenterScene.tsx": "11a38fab63d62a65b767dee227cb888865335e4d7183c694071f771c39efcd49",
     "apps/web/public/media/presenters/nex-toucan-121a804c.png": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
     "apps/web/public/media/presenters/pascal-original-6dd03834.png": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
@@ -1585,8 +1584,8 @@
     "apps/site/tests/browser-seo-metadata.mjs": "bb166ee7ae8b4c5b92950a47ca917a43caa9b933d3dd46737142b707fb4d0e80",
     "docs/reviews/sitewide-seo-metadata-2026-11-02.md": "87ec132b7009baac34d355110c6f3d8ea7f27028d6744c120ea00b383e363927",
     "evidence/sitewide-seo-2026-11-02/runtime.json": "ad3db8dba5fffb495bd99ac887a3f24da242666d15fe61577d085e3cea742500",
-    "apps/web/public/sitemap.xml": "b81e6965e8c8ba59600e84f261039e2ee319694ea6e0afa58103a92d4bda459f",
-    "apps/site/tests/seo-sitemap.test.mjs": "f83916ca7c6a86d290aaf86eea1bc358f6191c0a15dd8f0b0e0c300606e0f824"
+    "apps/site/tests/seo-sitemap.test.mjs": "6fd35d830d7f5ecdd31ec2ffdd2a05ba2657d8323d53855c3befe21440744e8a",
+    "apps/web/app/sitemap.ts": "1b0316a5fae373222d93976f02e8f2c9aebfc5faa97871a45d0346c306a6e704"
   },
   "whole_system_accepted": false,
   "decision_delta_base": "c8c865fc700cd2f0049e50efda19cb3a638fe853",
@@ -3587,7 +3586,7 @@
           "apps/site/tests/browser-seo-metadata.mjs",
           "docs/reviews/sitewide-seo-metadata-2026-11-02.md",
           "evidence/sitewide-seo-2026-11-02/runtime.json",
-          "apps/web/public/sitemap.xml",
+          "apps/web/app/sitemap.ts",
           "apps/site/tests/seo-sitemap.test.mjs"
         ],
         "test_evidence": "4 pure metadata contract tests; 125 site tests; 16 standalone contract tests and standalone build; site typecheck and production build; Chromium direct-route/language/dynamic-detail/unknown-route runtime check with zero external requests; independent review APPROVE after three findings were corrected and rechecked; 3 sitemap contract tests and independent review APPROVE cover all 39 public routes on the documented German-market target origin; LLM policy and make check passed. Full make test failed closed at 697 tests / 61 failures / 10 errors / 11 skips from recorded historical evidence drift and missing pymongo. Evidence: evidence/sitewide-seo-2026-11-02/runtime.json and docs/reviews/sitewide-seo-metadata-2026-11-02.md.",

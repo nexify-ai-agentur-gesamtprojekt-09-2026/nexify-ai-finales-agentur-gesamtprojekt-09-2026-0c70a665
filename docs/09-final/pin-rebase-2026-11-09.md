@@ -78,3 +78,15 @@ Public-Experience-Harness an das aktuelle UI angepasst und mit echtem Lauf besta
 | `apps/web/app/anmelden/[[...sign-in]]/page.tsx` | `0536dcc25c6a…` | `ae015545eb91…` | bytegebunden im heutigen Beleg next-public.json; Titelfix (Sprache aus lang), Mobil 320 px geprüft |
 | `apps/web/app/registrieren/[[...sign-up]]/page.tsx` | `d1647612cdc4…` | `ed41b40219ce…` | bytegebunden im heutigen Beleg next-public.json; Titelfix (Sprache aus lang), Mobil 320 px geprüft |
 | `evidence/one-app-2026-10-27/text-spacing.json` | `8f0ef3c7b587…` | `59c687d965c2…` | heute neu erhobener Text-Spacing-Lauf (129 Checks, 0 Befunde, 43 Routen) nach dem Titelfix auf Anmelden und Registrieren |
+
+## Nachtrag gelöschte Quellen und grüne Tests (09.11.2026)
+
+| Datei | Begründung |
+|---|---|
+| `apps/web/components/PresenterEditorial.css` | Datei entfernt; Pin entfällt (kein Nachfolger-Beleg nötig) |
+| `apps/web/public/sitemap.xml` | Datei ersetzt durch den Next-Metadata-Route apps/web/app/sitemap.ts; Pin entfällt |
+| `apps/web/app/sitemap.ts` | neuer Pin als Nachfolger von public/sitemap.xml; Bytes von seo-sitemap.test.mjs gelesen, heute 26 von 26 Tests grün |
+| `apps/site/tests/seo-sitemap.test.mjs` | node --test tests/seo-sitemap.test.mjs tests/public-video-assets.test.mjs: 26 von 26 OK (heute) |
+| `apps/site/tests/public-video-assets.test.mjs` | node --test tests/seo-sitemap.test.mjs tests/public-video-assets.test.mjs: 26 von 26 OK (heute) |
+
+Bewusst offen bleiben `apps/web/components/PresenterScene.tsx` (Zeile REC-MEDIA-01 und der Harness `browser-scene-images.mjs` binden die gelöschte Datei; die Zeile braucht ein neues Urteil über die Zwischenbilder), `PROGRESS.md`, `apps/shop-api/requirements.in`, `apps/web/app/[...slug]/page.tsx`, `apps/web/app/page.tsx`, `apps/web/next.config.ts`, `config/page-explainers.json`, `config/page-media-registry.json` und `apps/site/tests/browser-scene-images.mjs`.
