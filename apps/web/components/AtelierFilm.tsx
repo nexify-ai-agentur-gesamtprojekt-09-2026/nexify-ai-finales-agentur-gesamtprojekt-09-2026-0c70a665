@@ -51,6 +51,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  }
  return <div ref={root} className={'atelier-film'+(hero?' atelier-film-hero':'')} data-film={asset.title} data-playback={failed?'error':ended?'ended':buffering?'buffering':playing?'playing':'paused'}>
   <div className="atelier-film-picture">
+   {failed&&<img className="atelier-film-fallback" src={asset.poster} alt={asset.title} width={asset.width} height={asset.height}/>}
    <video ref={ref} src={asset.src} poster={asset.poster} width={asset.width} height={asset.height} preload={hero?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
     onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
