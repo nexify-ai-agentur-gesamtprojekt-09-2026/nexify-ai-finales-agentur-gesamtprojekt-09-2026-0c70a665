@@ -35,9 +35,14 @@ test("verified identity never auto-grants business membership, admin or first-us
 });
 test("public visitor API bypasses Clerk and no frontend secret or role promotion is introduced", () => {
   const proxy=readFileSync(new URL("../../proxy.ts",import.meta.url),"utf8");
-  // D-007: own shop-API session cookie replaces Clerk; private routes stay closed (401 without, 403 with session).
-  assert.match(proxy,/return NextResponse.next\(\)/);assert.doesNotMatch(proxy,/@clerk/);
-  assert.match(proxy,/cookies.get\("tk_session"\)/);assert.match(proxy,/status: 401/);assert.match(proxy,/status: 403/);
+  // D-007: Clerk is gone; the shop API issues and verifies sessions. The proxy is fail-closed for private APIs and
+  // serves private page shells that carry no data. It must never trust a cookie itself, never grant access and never
+  // let a private route be cached or indexed.
+  assert.doesNotMatch(proxy,/@clerk/);
+  assert.match(proxy,/startsWith\('\/api\/'\)[\s\S]{0,80}authentication_required[\s\S]{0,40}status:401/);
+  assert.doesNotMatch(proxy,/cookies\.get|tk_session|status: ?403|membership_granted|isAdmin/);
+  assert.match(proxy,/Cache-Control','private, no-store'/);assert.match(proxy,/Vary','Cookie, Authorization'/);assert.match(proxy,/X-Robots-Tag','noindex, nofollow'/);
+  assert.match(proxy,/NextResponse\.next\(\{request/);assert.match(proxy,/return response;/);
   const layout=readFileSync(new URL("../../app/layout.tsx",import.meta.url),"utf8");
   assert.doesNotMatch(layout,/CLERK_SECRET_KEY|secretKey=/);
   assert.doesNotMatch(proxy,/unsafeMetadata|publicMetadata|emailAddress|role\s*:/);

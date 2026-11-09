@@ -14,7 +14,10 @@
       "max_output_tokens": 2000,
       "timeout_seconds": 45,
       "max_cost_usd": "0.10"
-    }
+    },
+    "llm_diff_excluded_globs": [
+      "evidence/**"
+    ]
   },
   "autonomy": {
     "max_concurrent_runs": 1,

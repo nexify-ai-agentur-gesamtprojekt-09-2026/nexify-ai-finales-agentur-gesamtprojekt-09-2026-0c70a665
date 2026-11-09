@@ -88,7 +88,12 @@ def validate(configs):
              _at(connections, "anwendungsfaelle", "product_enrichment", "bei_nicht_verfuegbar") == "geschlossen_mit_Fehler_ohne_Modellersatz", "product_enrichment_router_binding_mismatch")
 
     review = _at(automation, "ai_review")
-    _exact_keys(review, ("enabled", "provider", "requested_model", "exact_model_id", "reasoning_effort", "api_key_env", "limits"), "unreviewed_ci_model_binding")
+    review_keys = ("enabled", "provider", "requested_model", "exact_model_id", "reasoning_effort", "api_key_env", "limits")
+    # llm_diff_excluded_globs narrows only the diff sent to the model (full rules: tools/automation/ai_review.py).
+    _exact_keys(review, review_keys + (("llm_diff_excluded_globs",) if isinstance(review, dict) and "llm_diff_excluded_globs" in review else ()), "unreviewed_ci_model_binding")
+    if "llm_diff_excluded_globs" in review:
+        globs = review["llm_diff_excluded_globs"]
+        _require(type(globs) is list and len(globs) <= 5 and all(isinstance(item, str) for item in globs), "unreviewed_ci_model_binding")
     _model(_at(review, "exact_model_id"), _at(review, "reasoning_effort"), "ci_model_or_effort_drift")
     _require(_at(review, "provider") == "openrouter", "ci_provider_drift")
     _require(type(_at(automation, "autonomy", "max_attempts_per_explicit_run")) is int and _at(automation, "autonomy", "max_attempts_per_explicit_run") == 1 and
