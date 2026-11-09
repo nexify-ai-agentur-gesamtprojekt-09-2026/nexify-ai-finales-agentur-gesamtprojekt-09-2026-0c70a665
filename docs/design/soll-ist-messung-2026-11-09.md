@@ -21,6 +21,16 @@ HTML-Prototypen, nicht die React-Umsetzung. Diese Messung ist kein Abnahmebeleg.
 
 Das Element in Browser-Standardschrift (Times New Roman) ist nur der unsichtbare `<title>`, kein Fehler.
 
+## Einordnung: zwei Vorgaben stehen gegeneinander
+
+Die flache Kartenfläche `#191B1C` ist kein Zufall. Sie ist das Atelier-Token `color.atelier.surface`
+(`config/design-tokens.json`, erzeugt nach `packages/tokens/`), eingeführt mit der Atelier-Richtung vom November
+(`docs/design/graphite-atelier-media-migration-2026-11-01.md`, `factory-brand-revision-2026-11-02.md`).
+Die Prototypen in `prototypen/` und `design-rules.json` (Stand 2026-09-29 bzw. 2026-10-30) beschreiben dagegen Verlaufskarten
+auf hellerem Graphit. `AGENTS.md` nennt die Prototypen als Design und Verhalten, die Mastervorgabe vom 2026-10-29 und die
+Atelier-Dokumente sind jünger. Die Abweichung der Tabelle ist deshalb eine Richtungsfrage zwischen beiden Ständen, kein
+unabhängiger Umsetzungsfehler. Ein Umbau der Tokens kippt die Atelier-Richtung und alle daran gebundenen Belege.
+
 ## Warum nicht sofort umgesetzt
 
 Die Kartenfläche, Radien und Schriften liegen in `apps/web/app/globals.css` und den Komponenten-CSS-Dateien. Diese Dateien
@@ -30,6 +40,7 @@ neu erhoben werden (siehe KS-003). Das ist ein eigenes Paket, kein Nebeneffekt.
 
 ## Paket DS-REWORK (nächster Schritt)
 
+0. Autoritätsfrage entscheiden: Prototypen (Verlaufskarten auf hellerem Graphit) oder Atelier-Token (flache Fläche `#191B1C`). Erst danach Schritt 2 bis 5.
 1. Schriftfrage ist entschieden: Inter und Plus Jakarta Sans gelten (Mastervorgabe 2026-10-29). `design-rules.json` DS-T-01 bei Gelegenheit auf diese Vorgabe nachziehen.
 2. Karten-Token zentral: Verlauf, Rand, Schatten und optionale Glas-Weichzeichnung als Variablen, überall verwenden.
 3. Radien auf die Skala zurückführen oder die Skala bewusst erweitern und in `design-rules.json` festhalten.
