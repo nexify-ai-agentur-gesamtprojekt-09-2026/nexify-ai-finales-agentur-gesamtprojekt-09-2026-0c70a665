@@ -210,5 +210,8 @@
  .tk-partner-intro,.tk-portal-preview{border-radius:var(--radius-leit);padding:22px}
 }
 /* 08.11.2026 (WCAG 2.2): Ziele < 24 px gemessen — Auth-Links 23,3 px, Checkboxen 18 px. */
-.tk-actions>a{align-items:center;display:inline-flex;min-height:24px}
+.tk-actions>a{align-items:center;display:inline-flex;min-height:var(--target-min)}
+.tk-actions>:is(button,a){flex:0 0 auto;min-width:var(--target-min)}
+.tk-check{align-items:center;min-height:var(--target-min)}
+.tk-buying-guide>div>a:not(.outline-button){display:inline-flex;align-items:center;min-height:var(--target-min)}
 .tk-check input{width:24px;height:24px}

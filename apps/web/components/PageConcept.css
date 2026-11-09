@@ -12,7 +12,7 @@
 .home-concept .pc-breadcrumb ol{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-3);margin:0;padding:0;list-style:none;font-size:var(--type-small-size);line-height:var(--type-body-leading);color:var(--color-text-sekundaer)}
 .home-concept .pc-breadcrumb li{display:inline-flex;align-items:center;gap:var(--space-3);min-height:var(--target-min)}
 .home-concept .pc-breadcrumb li>span[aria-hidden]{color:var(--color-atelier-champagne)}
-.home-concept .pc-breadcrumb a{color:inherit;text-decoration:none}
+.home-concept .pc-breadcrumb a{display:inline-flex;align-items:center;min-height:var(--target-min);min-width:var(--target-min);color:inherit;text-decoration:none}
 .home-concept .pc-breadcrumb a:hover{color:var(--color-atelier-champagne)}
 .home-concept .pc-breadcrumb [aria-current=page]{color:var(--color-text-primaer)}
 .home-concept .pc-hero .hc-kicker{margin-bottom:var(--space-4)}
@@ -63,7 +63,7 @@
 .home-concept .pc-related .hc-process-heading{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-7);align-items:end}
 .home-concept .pc-related .hc-process-heading p{margin:0}
 .home-concept .pc-related li{display:flex;flex-direction:column;min-width:0}
-.home-concept .pc-related li h3 a{color:inherit;text-decoration:none;display:flex;justify-content:space-between;gap:var(--space-4)}
+.home-concept .pc-related li h3 a{color:inherit;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:var(--target-min)}
 .home-concept .pc-related li p{margin-block:var(--space-3) var(--space-4)}
 .home-concept .pc-related li .hc-text-link{margin-top:auto}
 
@@ -123,8 +123,8 @@
 @container home (max-width:640px){
  .home-concept .pc-hero h1{font-size:min(var(--type-hero-mobile),8cqi)}
  .home-concept .pc-hero-actions{gap:var(--space-3) var(--space-5)}
- .home-concept .pc-breadcrumb ol{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
- .home-concept .pc-breadcrumb ol::-webkit-scrollbar{display:none}
+ .home-concept .pc-breadcrumb ol{gap:0 var(--space-2)}
+ .home-concept .pc-breadcrumb li{min-width:0;overflow-wrap:anywhere}
 }
 @media(prefers-contrast:more),(forced-colors:active){
  .home-concept .pc-supplement :is(.tk-form,.tk-home-entry,.tk-notice,.workshop-directory,.partner-form){box-shadow:none;border:1px solid var(--color-text-sekundaer)}

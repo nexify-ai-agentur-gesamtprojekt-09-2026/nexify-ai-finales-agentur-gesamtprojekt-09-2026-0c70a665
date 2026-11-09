@@ -24,7 +24,8 @@ Gesamtbeschreibung 08.11.2026, Dauerauftrag „/GOAL“ (Pascal Courbois), `AGEN
 | AR-05 | Shop: Lieferstatus, Versandhinweis, Tracking-Abruf, Preisfreigabe | Backend | Commits `39a6974`, `b69c38a`; Python-Tests (ohne MongoDB) | Commit zurücknehmen | LOCALLY_TESTED |
 | AR-06 | Startseite: Logo, Grünton, Elfenbein, Überschriften, Buttons | Art Direction | Commits `cf51a41`, `49241e7`, `4a2e76a`, `5b9fdd4`; Browsermessung + Sichtprüfung | Commit zurücknehmen | LOCALLY_TESTED |
 | AR-07 | CI-Gleichstand lokal/CI (`test_contact_http`) | QA | Commit `769dfd6`; CI-Log `repository`: Test nicht mehr rot | Commit zurücknehmen | INTEGRATED (nur dieser Test) |
-| AR-08 | Seite-für-Seite-Qualitätsabgleich | Art Direction / QA | Gesichtet: Start, Leistungen, Kontakt, Preise & Ablauf, Impressum, NeX2fly, TEILEKLAR-Start; automatisch: 38 Seiten × 2 Breiten | – | IN ARBEIT |
+| AR-08 | Seite-für-Seite-Qualitätsabgleich | Art Direction / QA | Gesichtet: Start, Leistungen, Kontakt, Preise & Ablauf, Impressum, NeX2fly, TEILEKLAR-Start; automatisch (`tools/page_quality_audit.py`): 43 Seiten × 1440/390 px × DE/NL/FR/EN, 0 Fehler, 0 Warnungen lokal | Commit zurücknehmen | LOCALLY_TESTED (visuell nicht alle Unterseiten) |
+| AR-09 | Shop-Texte NL/FR/EN | Content | Shop bleibt `lang=de` (proxy.ts), keine Übersetzungen belegt | – | OPEN |
 
 ## 3. Offene Punkte (Owner, nächste Aktion)
 
