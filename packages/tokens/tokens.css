@@ -16,10 +16,10 @@
   --color-text-gedaempft: #9CA29E;
   --color-text-auf-lime: #111312;
   --color-marke-cyan: #38BDF8;
-  --color-marke-lime: #C0EE38;
-  --color-marke-lime-hell: #DBF68A;
-  --color-marke-lime-dunkel: #A6D820;
-  --color-marke-lime-gruen: #78C331;
+  --color-marke-lime: #A8C76A;
+  --color-marke-lime-hell: #C7DA98;
+  --color-marke-lime-dunkel: #8EAD51;
+  --color-marke-lime-gruen: #638C45;
   --color-semantik-erfolg: #6FE3CF;
   --color-semantik-warnung: #FFC24A;
   --color-semantik-fehler: #FF8A7A;
@@ -36,7 +36,7 @@
   --color-identity-scene-rim: #555F55;
   --color-print-tinte: #14191C;
   --color-print-papier: #F2F3EF;
-  --color-print-lime: #C0EE38;
+  --color-print-lime: #A8C76A;
   --color-print-grau: #646769;
   --color-atelier-canvas: #111212;
   --color-atelier-surface: #191B1C;
@@ -119,8 +119,8 @@
   --gradient-markenlicht: radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%);
   --gradient-karte: linear-gradient(180deg, #141A22 0%, #0F131A 100%);
   --gradient-kleine-karte: linear-gradient(180deg, #141A22 0%, #0F131A 100%);
-  --gradient-button-primaer: linear-gradient(180deg, #DBF68A 0%, #C0EE38 55%, #A6D820 100%);
-  --gradient-balken: linear-gradient(90deg, #A6D820, #C0EE38);
+  --gradient-button-primaer: #A8C76A;
+  --gradient-balken: linear-gradient(90deg, #789C48, #A8C76A);
   --gradient-band: #080A0F;
   --gradient-seitengrund: #080A0F;
   --gradient-spotlight: none;
@@ -138,7 +138,7 @@
   --motion-laufband: 46s linear;
   --motion-schimmer: 7s ease-in-out;
   --motion-light-entrance: 3.6s ease-out;
-  --focus-ring: 2px solid #C0EE38;
+  --focus-ring: 2px solid #A8C76A;
   --focus-offset: 2px;
   --focus-logo: Unterstreichung Lime, 6px Abstand;
   --material-blur: 20px;
