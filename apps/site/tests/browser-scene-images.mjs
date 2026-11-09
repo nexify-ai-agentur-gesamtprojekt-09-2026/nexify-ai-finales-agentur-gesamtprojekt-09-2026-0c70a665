@@ -57,5 +57,5 @@ try{
  }
  assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);
  await writeFile(out+'browser.json',JSON.stringify({scope:'local optimized Vite output,interim unchanged reference images;not final videos or live acceptance',views,source_sha256:before,external_requests:0,page_errors:errors,passed:true},null,2)+'\n');
- console.log(JSON.stringify({views:views.length,scene_slots:49,public_routes:data.pages.length,external:0,passed:true}));
+ console.log(JSON.stringify({views:views.length,scene_slots:53,public_routes:data.pages.length,external:0,passed:true}));
 }finally{await browser.close();await new Promise(resolve=>server.httpServer.close(resolve));}

@@ -1,3 +1,22 @@
+## Laufzeit-Qualitätsprüfung mit Playwright für Python · 08./09.11.2026
+`tools/page_quality_audit.py` (Playwright für Python, Chromium) prüft alle 43 öffentlichen Seiten in 1440 und 390 px sowie in NL/FR/EN: Titel/Beschreibung/Canonical/robots/JSON-LD, eine H1, Bilder (alt, Verzerrung), Überlauf, Bedienziele ≥ 44 px, sichtbarer Fokus, Reduced-Motion, Token-Verstöße (Reinweiß, grelles Lime), Schriften, Konsole/Netz, interne Links und den Textkontrast per Pixelmessung (Text ausgeblendet, gerenderter Hintergrund abgetastet). Aufruf siehe Kopf der Datei; `tools/page_quality_report.py` fasst Läufe zusammen.
+Behoben: Shop-Navigation überlagerte sich bei 390 px (Einträge schrumpften); Brotkrume bricht um statt zu scrollen, Ziele ≥ 44 px; Bedienziele in Shop-Aktionsleisten, Einwilligungs-Checkboxen, Related-Links; Beschreibungen auf ≤ 160 Zeichen begrenzt (nur Meta, Seitentext unverändert); JSON-LD für Kategorien und Werkstattsuche; `lang` im Shop bleibt `de`, weil der Shop keine NL/FR/EN-Texte hat (WCAG 3.1.1).
+Nachtrag: Fehlerzustand der Vitrine (`/teileklar`) brach bei 390 px buchstabenweise um (Text in einer Spalte von drei); behoben, Prüfregel „Text bricht buchstabenweise um“ ergänzt. Textkontrast inkl. Verlaufstext (Pixelmessung) und EN-Lauf nach der `proxy.ts`-Änderung ausgewertet: ohne Befund. Zwölf weitere Unterseiten mobil gesichtet.
+Ergebnis lokal: 0 Fehler, 0 Warnungen auf 86 Seitenläufen; Hinweise nur für die lokal nicht gestartete Shop-API. Nicht belegt: Prüfung gegen die produktive `.de`-Auslieferung und mit echten Shop-Daten, Screenreader-Test, Kontrast von Verlaufstext (Logo, Überschriften mit Verlauf).
+
+
+# Aktuell · Abgleich Gesamtbeschreibung 08.11.2026 gegen `.de`-Ausgabe
+
+Abgleich Seitenkatalog §16 gegen die gebaute `apps/web`-Ausgabe: `docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md`. Alle 39 bisherigen öffentlichen Routen liefern 200 (je eine H1, `lang=de`). Behoben: fehlende Canonical/Description/Robots auf `/anmelden`, `/registrieren`, `/teileklar/suche|kategorien|warenkorb|kasse|werkstatt`; Impressum um Registerangaben (Registerstelle Roermond, KvK, BTW) ergänzt, Rechtsform bleibt ausdrücklich unbestätigt; horizontaler Überlauf der Brotkrumen bei 390 px; veralteter Sitemap-Test auf die Next-Routen umgestellt. Neu: `/produkte/nex-agentic-aifly`, `/produkte/aifly-oracle`, `/produkte/skills-mcp`, `/portale` (43 öffentliche / 53 Routen; Registries, Zähltests und Quellinventar konsistent nachgezogen).
+
+Prüfstand: `make check` 0 Fehler/0 Warnungen; `tsc --noEmit` sauber; Site-Tests 124 bestanden, 2 vorbestehende Fehler (`Unmocked import ./Storefront.css`, Komponente existiert nicht mehr); `tests.test_site_map` grün. `make test` bleibt rot (697 Tests, 37 Failures / 24 Errors): die 8 zusätzlichen Subtest-Fehler sind historische Hash-Pins in `config/acceptance-coverage.json` für absichtlich geänderte Dateien; sie werden nicht umgebunden, sondern vom unabhängigen Review neu erhoben.
+
+Entscheidungen nach Bestpraxis (08.11.2026, Auftrag „entscheide nach Bestpraxis“): (1) PR nicht geteilt: die Arbeit ist an die Branch `claude/loving-albattani-4jp12a` gebunden, ein zweiter Branch bräuchte ausdrückliche Erlaubnis; das KI-Review-Gate (`max_diff_bytes` 64000) bleibt unverändert und blockiert diesen 88-KB-Diff weiter. (2) Auth-Tests an den tatsächlichen Vertrag gebunden: `proxy.ts` sperrt private APIs fail-closed (401), liefert private Seiten nur als datenlose Shell mit `no-store`/`noindex` und vertraut keinem Cookie (neu geprüft); der Oracle-Test erwartet die Markenschreibweise „AIFly ORACLE“. (3) CI: `react-site` erzeugt die öffentlichen Daten vor den Tests; der Storefront-Testharness ignoriert Stylesheets und prüft die Katalogabfrage statt des Kategorieaufrufs; `CatalogView` verwirft Antworten abgebrochener Abfragen. (4) Bildmotive folgen bereits der Zielseite (`lib/brand-media.ts`); behoben wurde der Rahmen (`cover` statt `contain`). Prüfstand danach: Site-Tests 126/126, Auth-Tests 19/19, `tsc` sauber; `make test` bleibt wegen der historischen Hash-Pins rot.
+
+Offen (Owner siehe Abgleichsdokument): Rechtsform/Impressum final, Landing-/Stadtseiten (Suchbegriffe und Wettbewerbsanalyse nicht belegt), Komponenten-Showcase, Canonical-Domain `.cloud` vs `.de`, NeX2fly-Tarife, Hero-Video/Higgsfield-Guthaben, NL/FR/EN-Prüfung, Kontaktformular→Resend gegen echte Dienste, Gesamtabnahme. Keine Zahlung, kein Guthaben-Aufladen, keine DNS-/Datenänderung.
+
+---
+
 # Aktuell · führende Sites-Vorschau und nativer Hero · 04.11.2026
 
 Führend ist ausdrücklich `appgprj_6ae7ad63df2081918a843f996caf9422` / nexify-ai-factory-20261101. Ausgangscommit 0bbce305fb7e11233a7824d5b509e8f9e49e5ea7; diese Revision bleibt im vorhandenen Auftrag P01–P26. Details: docs/contracts/migration-2026-11-04.md und docs/production/hero-requirements-2026-11-04.md. Keine DNS-, Datenbank- oder produktive Fachruntimeumstellung.
@@ -1600,3 +1619,33 @@ abweichenden Quellhashes sowie das nicht installierte `pymongo`. Die alte
 Exception-Evidenz verwirft zusätzlich den bewusst geänderten `main.tsx`-Stand;
 der neue SEO-Browserlauf ist separat aktuell gebunden. Keine Altbelege wurden
 auf den neuen Stand umetikettiert und keine Prüfung abgeschwächt.
+
+## 2026-11-08 · Startseite: Logo, Grünton, Elfenbein, Überschriften, Hero-Buttons
+- **Ursache Grünton:** `apps/web/app/masterplan-tokens.css` (Mastervorgabe 29.10.) überschrieb die ruhigen Lime-Werte aus
+  `config/design-tokens.json` (Richtungswechsel 05.11.: „#C0EE38 war viel zu grell“) wieder mit dem grellen Lime. Overlay verweist
+  jetzt auf die Tokenquelle; Glows/Verläufe über `color-mix` statt Rohwerte.
+- **Neu in `config/design-tokens.json`:** `color.marke.limeSignal` (#C0EE38, nur das X im Logo) und `color.text.primaer` = Elfenbein
+  #F3F0EA statt Reinweiß; `tokens.css/json/ts` neu erzeugt.
+- **Logo:** Signet als Champagne/Steel-Maske (`/signet.svg` bleibt unverändert, Bytes sind in Inventaren gebunden), Wortmarke im
+  Champagne/Steel-Verlauf, nur das X in CI-Lime; Forced-Colors-Fallback. Kopf und Fuß.
+- **Überschriften:** Wortabstand gleicht die enge Laufweite (-.04em) aus (Wortlücken waren fast geschlossen).
+- **Hero:** Primär-/Sekundär-CTA sind echte Pill-Buttons (waren Textlinks); Primär mit ruhigem Lime-Verlauf.
+- **Ehrlich:** Vier weitere Teilprüfungen von `test_recorded_source_hashes_match_actual_bytes` (design-tokens.json, tokens.css/json/ts)
+  sind rot, weil die historischen Nachweis-Pins die alten Token-Bytes festhalten – wie die übrigen ~40 Pins nicht umgebunden.
+- **Unterseiten-Hero:** Aktionen (`.pc-hero-actions`) wie die Startseite als Pill-Buttons (Primär ruhiges Lime, Sekundär Linienpill).
+- **Audit 38 öffentliche Seiten × 1440/390 px (Dev-Server):** je genau eine H1, kein horizontaler Überlauf, kein Reinweiß-Text,
+  Lime nur am X im Logo. `/api/session` liefert im Dev-Betrieb 500 (Rewrite auf nicht laufendes Gateway :3003); der Chat fällt
+  dokumentiert in den Orientierungsmodus. In Produktion hat `/api/session` weder Route noch Vercel-Rewrite – offen (Owner: Backend).
+  Offen auf der Unternehmensseite: „NeXify AI FACTORY B.V.“ steht als Auftraggeber-Bezeichnung mit Vorbehalt; Rechtsform bleibt unbestätigt.
+- **Review-Fund (Vercel-Agent) behoben:** Der Tracking-Abruf konnte eine bereits „zugestellt“ markierte Bestellung wieder auf „versendet“ setzen;
+  Vorprüfung und Update schließen jetzt beide Endzustände aus (`fulfillment.py`), Test ergänzt.
+- **Buttons einheitlich:** Aktionen sind Pills (999 px, Vorgabe „Pill-Form für Buttons und Chips“) statt 12-px-Rechtecken; die Absenden-/Primärschaltflächen der
+  NeXify-Seiten (Kontaktformular, Portal-Tore) tragen wie die Hero-Aktion das ruhige Lime, TEILEKLAR bleibt Champagne.
+  Offen: Kontakt-Adresse `mail@nexifyai.cloud` bleibt, bis die Hauptdomain (.de/.cloud) vom Inhaber bestätigt ist.
+- **Sichtprüfung (1440 px, Dev-Server) Startseite, Leistungen, Kontakt, Preise & Ablauf, Impressum, NeX2fly, TEILEKLAR-Start:** gemeinsame Vorlage
+  stimmig (Logo, Elfenbein, Champagne-Überschriften, Pill-Aktionen, Bilder füllen ihre Rahmen). Inhaltlich offen, nicht erfunden:
+  „Preise & Ablauf“ nennt keinen konkreten Betrag (Tagessatz 449 € netto steht nur auf der Startseite) – Aufnahme braucht die Freigabe des Inhabers;
+  Impressum-Titel nennt „B.V.“ mit Vorbehalt (Rechtsform unbestätigt); Kontaktadresse `.cloud` vs. Hauptdomain `.de`. Mobile (390 px) nur Startseite gesichtet.
+- **CI-Log `repository` (99573db) ausgewertet:** Außer den bekannten historischen Hash-Pins (`test_recorded_source_hashes_match_actual_bytes` u. a.) scheiterten
+  drei Tests in `tests/test_contact_http.py`, die lokal ohne FastAPI übersprungen werden, in CI aber laufen: die Prüfumgebung kannte `RequestReceipt`
+  und `_requester` nicht. Behoben (Modellklasse übernommen, anonymer Requester eingesetzt); mit installiertem FastAPI lokal 3/3 grün.

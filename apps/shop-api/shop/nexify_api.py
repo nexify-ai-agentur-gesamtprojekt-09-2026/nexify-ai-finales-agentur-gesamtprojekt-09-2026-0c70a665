@@ -92,14 +92,19 @@ async def ensure_nexify_indexes():
 
 
 # ---------- AIFly ORACLE ----------
+# Binding model contract (config/llm-policy.json): exactly this model with reasoning "high".
+# No other model family, no silent provider or tier fallback.
+POLICY_MODEL = "deepseek/deepseek-v4.1-flash-1017"
+POLICY_REASONING = "high"
+# Reasoning tokens count against the completion limit; a small limit yields empty or cut answers.
+CHAT_MAX_TOKENS = 4096
+
+
 def providers():
-    llm = bool(os.environ.get("EMERGENT_LLM_KEY"))
-    nine = all(os.environ.get(k) for k in ("NINEROUTER_BASE_URL", "NINEROUTER_API_KEY", "NINEROUTER_MODEL"))
-    return [
-        {"id": "anthropic", "label": "Claude", "model": os.environ.get("ORACLE_ANTHROPIC_MODEL", "claude-sonnet-5-5"), "available": llm},
-        {"id": "openai", "label": "GPT", "model": os.environ.get("ORACLE_OPENAI_MODEL", "gpt-5.6-terra"), "available": llm},
-        {"id": "ninerouter", "label": "9router", "model": os.environ.get("NINEROUTER_MODEL", ""), "available": nine},
-    ]
+    configured = all(os.environ.get(k) for k in ("NINEROUTER_BASE_URL", "NINEROUTER_API_KEY"))
+    # An explicit server override that differs from the policy model makes the route unavailable instead of substituting.
+    pinned = os.environ.get("NINEROUTER_MODEL", POLICY_MODEL) == POLICY_MODEL
+    return [{"id": "ninerouter", "label": "Oracle", "model": POLICY_MODEL, "available": configured and pinned}]
 
 
 class ChatIn(BaseModel):
@@ -111,8 +116,7 @@ class ChatIn(BaseModel):
 
 @router.get("/api/oracle/providers")
 async def oracle_providers():
-    default = os.environ.get("ORACLE_DEFAULT_PROVIDER", "anthropic")
-    return {"default": default, "providers": providers()}
+    return {"default": "ninerouter", "providers": providers()}
 
 
 @router.get("/api/oracle/history/{session_id}")
@@ -123,7 +127,7 @@ async def oracle_history(session_id: str):
 
 async def _stream_ninerouter(history, message):
     base = os.environ["NINEROUTER_BASE_URL"].rstrip("/")
-    payload = {"model": os.environ["NINEROUTER_MODEL"], "stream": True,
+    payload = {"model": POLICY_MODEL, "stream": True, "reasoning": {"effort": POLICY_REASONING}, "max_tokens": CHAT_MAX_TOKENS,
                "messages": [{"role": "system", "content": ORACLE_PROMPT}] + history + [{"role": "user", "content": message}]}
     async with httpx.AsyncClient(timeout=90) as client:
         async with client.stream("POST", base + "/chat/completions", json=payload, headers={"Authorization": "Bearer " + os.environ["NINEROUTER_API_KEY"]}) as r:
@@ -143,18 +147,6 @@ async def _stream_ninerouter(history, message):
                     yield delta
 
 
-async def _stream_emergent(provider, model, history, message, session_id):
-    from emergentintegrations.llm.chat import LlmChat, StreamDone, TextDelta, UserMessage
-    context = "\n".join("%s: %s" % ("Nutzer" if m["role"] == "user" else "Oracle", m["content"]) for m in history[-12:])
-    prompt = ORACLE_PROMPT + ("\n\nBisheriger Gesprächsverlauf:\n" + context if context else "")
-    chat = LlmChat(api_key=os.environ["EMERGENT_LLM_KEY"], session_id=session_id + "-" + uuid.uuid4().hex[:6], system_message=prompt).with_model(provider, model)
-    async for event in chat.stream_message(UserMessage(text=message)):
-        if isinstance(event, TextDelta):
-            yield event.content
-        elif isinstance(event, StreamDone):
-            break
-
-
 @router.post("/api/oracle/chat")
 async def oracle_chat(body: ChatIn, request: Request):
     user = await current_user(request)
@@ -162,9 +154,7 @@ async def oracle_chat(body: ChatIn, request: Request):
     since = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
     if await db.oracle_messages.count_documents({"session_id": session_id, "role": "user", "at": {"$gte": since}}) >= CHAT_DAILY_LIMIT:
         raise HTTPException(429, {"error": "rate_limited", "message": "Das Tageslimit für diesen Chat ist erreicht. Schreiben Sie uns gern über das Kontaktformular."})
-    available = {p["id"]: p for p in providers() if p["available"]}
-    wanted = body.provider or os.environ.get("ORACLE_DEFAULT_PROVIDER", "anthropic")
-    chosen = available.get(wanted) or available.get("anthropic") or available.get("openai") or next(iter(available.values()), None)
+    chosen = next((p for p in providers() if p["available"]), None)
     if not chosen:
         raise HTTPException(503, {"error": "oracle_unavailable", "message": "Oracle ist gerade nicht erreichbar."})
     history = [{"role": m["role"], "content": m["content"]} for m in await db.oracle_messages.find({"session_id": session_id}, {"_id": 0}).sort("at", 1).to_list(40)]
@@ -175,7 +165,7 @@ async def oracle_chat(body: ChatIn, request: Request):
         yield "event: meta\ndata: %s\n\n" % json.dumps({"session_id": session_id, "provider": chosen["id"], "model": chosen["model"]})
         text, started = "", time.time()
         try:
-            gen = _stream_ninerouter(history, body.message) if chosen["id"] == "ninerouter" else _stream_emergent(chosen["id"], chosen["model"], history, body.message, session_id)
+            gen = _stream_ninerouter(history, body.message)
             async for chunk in gen:
                 text += chunk
                 yield "data: %s\n\n" % json.dumps({"delta": chunk})

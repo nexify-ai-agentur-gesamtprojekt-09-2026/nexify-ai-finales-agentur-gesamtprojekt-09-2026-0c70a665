@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "stand": "2026-09-27",
+  "stand": "2026-11-09",
   "grundsatz": "Jeder Dienst hängt an genau einem Adapter. Die WebUI spricht nur mit dem NeXify-Gateway (API + Ereignisbus), nie direkt mit Fremddiensten. Geheimnisse nur als OpenBao-Referenz.",
   "gateway": {
     "basis": "https://api.nexifyai.cloud/v1",
@@ -25,7 +25,11 @@
       "status": "unbelegt",
       "hartsperre": "DNS-Änderung nur mit Einzelfreigabe",
       "soll": "vorhanden",
-      "belegt_am": null
+      "belegt_am": null,
+      "lesebeleg": {
+        "am": "2026-11-09T09:15:00Z",
+        "was": "Connector (veraltet, nur Workers/KV/D1/R2): 5 Workers lesbar, darunter einer mit dem Repo-Namen (zuletzt geändert 2026-10-26). Zonen/DNS (Prüfung API /zones) nicht belegt."
+      }
     },
     {
       "id": "supabase",
@@ -101,10 +105,12 @@
       "rolle": "Versand ausgehender Mails, Webhooks für Zustellung",
       "schicht": "Kommunikation",
       "pruefung": "GET /domains",
-      "status": "unbelegt",
+      "status": "vorhanden",
       "regel": "from = reply_to = mail@nexifyai.cloud",
       "soll": "vorhanden",
-      "belegt_am": null
+      "belegt_am": "2026-11-09T09:15:00Z",
+      "beleg": "Connector Resend, nur lesend: Domains-Liste abrufbar (3 Domains). nexifyai.cloud verifiziert (Versand an, eu-west-1).",
+      "befund": "Produktionsdomain nexifyai.de ist in Resend NICHT angelegt (OF-09 offen); studienkollegaachen.de hat Status failed (anderes Projekt). Kein Versand, keine Änderung durchgeführt."
     },
     {
       "id": "revolut",
@@ -208,6 +214,27 @@
       "soll": "vorhanden",
       "belegt_am": null,
       "hinweis": "Owner nexifyai-dev installiert die GitHub-App auf dem Repo"
+    },
+    {
+      "id": "vercel",
+      "rolle": "Hosting und Auslieferung von nexifyai.de/.cloud; Produktion aus Branch main",
+      "schicht": "Netz",
+      "pruefung": "Connector: Projekte, Domains, Deployments lesen",
+      "status": "vorhanden",
+      "soll": "vorhanden",
+      "belegt_am": "2026-11-09T09:15:00Z",
+      "beleg": "Team nexify-projekte, Projekt nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665; Domains nexifyai.de, www.nexifyai.de, nexifyai.cloud, www.nexifyai.cloud; letztes Produktions-Deployment READY (Commit 6c4f9ee); Rückweg: Vercel-Rollback.",
+      "hartsperre": "Deploy, Promote, Rollback und DNS nur mit Einzelfreigabe"
+    },
+    {
+      "id": "sentry",
+      "rolle": "Fehlererfassung und Release-Gesundheit",
+      "schicht": "Betrieb",
+      "pruefung": "Connector: Organisationen lesen",
+      "status": "vorhanden",
+      "soll": "vorhanden",
+      "belegt_am": "2026-11-09T09:15:00Z",
+      "beleg": "Organisationen nex2fly und nexify-chat-it-automate-it erreichbar (Region de.sentry.io). Projekte/Alarmregeln nicht geprüft."
     }
   ],
   "ereignisse": [
@@ -309,5 +336,20 @@
     "schreibende Werkzeuge erzeugen nur Entwürfe",
     "destructiveHint-Werkzeuge gibt es nicht"
   ],
-  "statusregel": "Status 'vorhanden' nur mit datiertem Health-Protokoll (belegt_am, ISO-8601 UTC). Bis dahin 'unbelegt'; der Sollzustand steht in 'soll'. Quelle: Gutachten NX-WS-KERNE-2026-09, WK-18."
+  "statusregel": "Status 'vorhanden' nur mit datiertem Health-Protokoll (belegt_am, ISO-8601 UTC). Bis dahin 'unbelegt'; der Sollzustand steht in 'soll'. Quelle: Gutachten NX-WS-KERNE-2026-09, WK-18.",
+  "connector_hinweis": {
+    "am": "2026-11-09T09:15:00Z",
+    "abgelaufen_oder_getrennt": [
+      "RuFlo Federation / ruflo-ai-team (needs reconnect)",
+      "Microsoft Learn (needs reconnect)",
+      "x.ruv.io (HTTP 503)",
+      "agent-memory (Connection closed)"
+    ],
+    "nicht_verbunden": [
+      "Supabase",
+      "PandaDoc",
+      "Upwork"
+    ],
+    "regel": "Anmeldung (OAuth) kann nur der Inhaber über /mcp auslösen; Zugangsdaten gehören nicht in Chat oder Repo."
+  }
 }

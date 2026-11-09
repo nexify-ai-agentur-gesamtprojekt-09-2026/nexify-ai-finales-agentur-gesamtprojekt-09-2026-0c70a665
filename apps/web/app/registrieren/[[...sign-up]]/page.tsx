@@ -1,5 +1,6 @@
 import AuthForms from "../../../components/shop/AuthForms";
-export const metadata = { title: "Konto erstellen · TEILEKLAR" };
+import {routeMetadata} from "../../../lib/page-seo";
+export const generateMetadata = () => routeMetadata("signup", false);
 export default function SignUpPage() {
   return <AuthForms mode="register" />;
 }

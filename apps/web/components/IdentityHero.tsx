@@ -42,8 +42,8 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
     <p className="identity-subtitle">{subtitles[locale]}</p>
     <p className="identity-body" data-testid="hero-description">{bodies[locale]}</p>
     <div className="identity-links">
-     <ActionLink variant="text" className="identity-primary-link" href="/kontakt" data-testid="hero-project-link"><span>{primaryCta[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionLink>
-     <ActionLink variant="quiet" className="identity-secondary-link" href="/leistungen" data-testid="hero-services-link">{secondaryCta[locale]}</ActionLink>
+     <ActionLink variant="primary" className="identity-primary-link" href="/kontakt" data-testid="hero-project-link"><span>{primaryCta[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionLink>
+     <ActionLink variant="secondary" className="identity-secondary-link" href="/leistungen" data-testid="hero-services-link">{secondaryCta[locale]}</ActionLink>
     </div>
    </div>
    <div className="identity-media" data-testid="hero-media">

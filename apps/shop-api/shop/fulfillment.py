@@ -6,8 +6,10 @@ BigBuy submission is recorded (bigbuy_submit_pending) and an internal alert is e
 from . import bigbuy_order, config, mail_templates, mailer
 from .db import db, now_iso
 
+# One persisted field for the delivery state: orders.fulfilment (the admin view and the customer timeline read it).
 PAID = "bezahlt"
 SHIPPED = "versendet"
+DELIVERED = "zugestellt"
 
 
 async def submit_order(order):
@@ -52,8 +54,8 @@ async def submit_order(order):
     bigbuy_id = str((created or {}).get("id") or (created or {}).get("order_id") or "")
     update = {"bigbuy_order_id": bigbuy_id, "bigbuy_submitted_at": now_iso(), "bigbuy_submit_pending": False,
               "fulfillment_error": None, "bigbuy_carrier": carrier, "bigbuy_submitting": False}
-    if not order.get("fulfillment") or order.get("fulfillment") == PAID:
-        update["fulfillment"] = "in_bearbeitung"
+    if not order.get("fulfilment") or order.get("fulfilment") == PAID:
+        update["fulfilment"] = "in_bearbeitung"
         update["processing_at"] = now_iso()
     await db.orders.update_one({"_id": order["_id"], "bigbuy_order_id": {"$in": [None, "", order.get("bigbuy_order_id")]}},
                                {"$set": update})
@@ -61,7 +63,7 @@ async def submit_order(order):
 
 async def poll_and_update_tracking(order):
     """Pull BigBuy tracking; on the first tracking number mark the order shipped and mail the customer. Never raises."""
-    if not order or not order.get("bigbuy_order_id") or order.get("fulfillment") == SHIPPED:
+    if not order or not order.get("bigbuy_order_id") or order.get("fulfilment") in (SHIPPED, DELIVERED):
         return
     environment = order.get("source_environment") or "production"
     try:
@@ -72,8 +74,8 @@ async def poll_and_update_tracking(order):
     if not number:
         return
     changed = await db.orders.find_one_and_update(
-        {"_id": order["_id"], "fulfillment": {"$ne": SHIPPED}},
-        {"$set": {"fulfillment": SHIPPED, "tracking_number": number,
+        {"_id": order["_id"], "fulfilment": {"$nin": [SHIPPED, DELIVERED]}},
+        {"$set": {"fulfilment": SHIPPED, "tracking_number": number,
                   "carrier": carrier or order.get("bigbuy_carrier", ""), "shipped_at": now_iso()}})
     if not changed:
         return

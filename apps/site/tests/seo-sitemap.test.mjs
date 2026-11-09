@@ -20,7 +20,7 @@ test('sitemap lists every indexable public route; only transactional or search r
   for(const id of excludedIds)assert.ok(publicIds.has(id),'excluded id is not a public page: '+id);
   // Anything excluded from the sitemap must not be a content page: only auth, cart, checkout, search and parametrised detail routes.
   assert.deepEqual([...excludedIds].sort(),['login','signup','tk-cart','tk-category','tk-checkout','tk-product','tk-search']);
-  assert.equal(publicPages.length-excludedIds.length,32);
+  assert.equal(publicPages.length-excludedIds.length,36);
   assert.match(sitemapSource,/localizedUrl\(p\.path,'de'\)/);
 });
 

@@ -44,9 +44,10 @@ class IdentityHeroTests(unittest.TestCase):
         css=(ROOT/'apps/web/components/IdentityHero.css').read_text()
         self.assertNotRegex(css,r'#[0-9a-fA-F]{3,8}\b|rgba?\(')
         # USER-LUXURY-20261101: a still must not publish unapproved performances or fake playback.
-        self.assertIn('owner-private-edited-video',component)
-        self.assertIn('const ownerCinemaPreview=typeof __NEXIFY_OWNER_CINEMA_PREVIEW__',component)
-        self.assertIn('verified-public-film',component)
+        # Owner decision 2026-11-08 (Gesamtbeschreibung 6, 17.2): the hero is a brand photograph; the earlier
+        # private video path was removed. No film may be claimed or played until a reviewed one exists.
+        self.assertNotIn('verified-public-film',component)
+        self.assertIn('brandImages.home',component)
         for unapproved in ('<TrioScene','sceneMedia.welcome','<video','<audio','play-toggle'):
             self.assertNotIn(unapproved,component)
         home=(ROOT/'apps/web/components/HomeContent.tsx').read_text()

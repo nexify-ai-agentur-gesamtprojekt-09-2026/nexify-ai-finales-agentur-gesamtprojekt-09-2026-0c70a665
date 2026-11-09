@@ -59,6 +59,7 @@
 .tk-qty-label{display:grid;gap:var(--space-1);font-size:12px;color:var(--color-text-gedaempft)}
 .tk-line-total{font-weight:650;text-align:right}
 .tk-summary{display:grid;gap:var(--space-4);padding:var(--space-5);border:1px solid var(--color-linie-mittel);border-radius:var(--radius-karte);background:var(--color-graphit-700);position:sticky;top:24px}
+.tk-ship-hint{margin:0 0 8px;color:var(--color-atelier-champagne);font-size:var(--type-small-size)}
 .tk-totals{display:grid;grid-template-columns:1fr auto;gap:var(--space-2) var(--space-4);margin:0;font-size:14px}
 .tk-totals dd{margin:0;text-align:right}.tk-totals .is-total{font-size:18px;font-weight:650;color:var(--color-text-primaer);padding-top:var(--space-2);border-top:1px solid var(--color-linie-mittel)}
 .tk-cta{min-height:52px;border-radius:var(--radius-pille);padding:var(--space-3) var(--space-5);text-align:center}
@@ -209,7 +210,10 @@
  .tk-partner-intro,.tk-portal-preview{border-radius:var(--radius-leit);padding:22px}
 }
 /* 08.11.2026 (WCAG 2.2): Ziele < 24 px gemessen — Auth-Links 23,3 px, Checkboxen 18 px. */
-.tk-actions>a{align-items:center;display:inline-flex;min-height:24px}
+.tk-actions>a{align-items:center;display:inline-flex;min-height:var(--target-min)}
+.tk-actions>:is(button,a){flex:0 0 auto;min-width:var(--target-min)}
+.tk-check{align-items:center;min-height:var(--target-min)}
+.tk-buying-guide>div>a:not(.outline-button){display:inline-flex;align-items:center;min-height:var(--target-min)}
 .tk-check input{width:24px;height:24px}
 /* 08.11.2026 (2.5.8, bei 320 px gemessen): .tk-commerce-nav ist ein Flex-Container mit
    overflow:auto; die Links schrumpften auf 19-22 px Breite, obwohl white-space:nowrap gilt.

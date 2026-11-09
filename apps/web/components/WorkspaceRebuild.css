@@ -328,8 +328,8 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .workspace-shell .aifly-panel .conversation { background: var(--color-graphit-800); margin: 0 var(--space-2); border-radius: var(--radius-karte); }
 .workspace-shell .aifly-panel .composer-area { background: var(--color-graphit-650); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-text-primaer) 6%, transparent); padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom)); }
 .workspace-shell .aifly-panel .composer { background: var(--color-canvas); box-shadow: none; border-color: transparent; }
-.workspace-shell .aifly-panel .composer:focus-within { outline: 2px solid var(--color-brand-cyan); outline-offset: 2px; }
-.workspace-shell .aifly-panel :focus-visible { outline: 2px solid var(--color-brand-cyan); outline-offset: 2px; }
+.workspace-shell .aifly-panel .composer:focus-within { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
+.workspace-shell .aifly-panel :focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
 .workspace-shell .aifly-panel .welcome-card { gap: var(--space-3); }
 .workspace-shell .aifly-panel .welcome-body { margin-bottom: 0; }
 .workspace-shell .aifly-panel .welcome-eyebrow-row { margin-top: 0; }
@@ -343,7 +343,7 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .header-cta { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--target-min); padding: 0 var(--space-4); border-radius: var(--radius-button); background: var(--color-marke-lime); color: var(--color-text-auf-lime); font-size: var(--type-small-size); font-weight: 600; white-space: nowrap; text-decoration: none; }
 .header-cta > span { width: var(--space-2); height: var(--space-2); border-radius: var(--radius-pille); background: var(--color-text-auf-lime); }
 .header-cta:hover { background: var(--color-marke-lime-hell); }
-.header-cta:focus-visible { outline: 2px solid var(--color-brand-cyan); outline-offset: 2px; }
+.header-cta:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
 .header-actions .compact { background: transparent; color: var(--color-text-sekundaer); border-color: var(--color-linie-stark); }
 @media (max-width: 460px) { .header-cta { padding: 0 var(--space-3); } }
 /* Central chat spacing tokens (8px scale): outer gutter, layer inset, vertical rhythm. */

@@ -46,12 +46,16 @@ export type BrandImage=typeof brandImages[keyof typeof brandImages];
 //  nex2fly       hf-11  tablet workspace (own working environment)
 //  one           hf-12  AI in day-to-day operations on a production line
 //  api           hf-16  plans and technical model with a developer: integration
+//  aifly-oracle  hf-01  walk along the wall of framed work: the companion who accompanies and puts things in order
+//  nex-agentic   hf-07  machine hall, process document handed to a worker: the executing side
+//  skills-mcp    hf-16  plans and technical model: connecting tools and systems
+//  portals       hf-09  open hand at the entrance: the right way in per audience
 //  tk-home       hf-08  conveyor with parts boxes: parts logistics
 //  tk-fitment    hf-16  technical plans and model: exact specification before buying
 //  tk-appointments hf-10 appointment at the reception desk
 //  tk-vouchers   hf-06  conditions explained on paper
 //  tk-partner    hf-07  work order handed to a workshop employee
 //  tk-workshop   hf-13  workshop employee with clipboard in the parts hall
-const pageKeys:Record<string,keyof typeof brandImages>={home:'home',services:'atelier',websites:'design',automation:'automation','apps-portals':'workspace',scope:'contact',pricing:'scope',solutions:'marketing',knowledge:'welcome','knowledge-start':'planning',company:'company',contact:'entrance',nex2fly:'workspace',one:'production',api:'integration','tk-home':'logistics','tk-fitment':'integration','tk-appointments':'planning','tk-vouchers':'scope','tk-partner':'automation','tk-workshop':'process'};
+const pageKeys:Record<string,keyof typeof brandImages>={home:'home',services:'atelier',websites:'design',automation:'automation','apps-portals':'workspace',scope:'contact',pricing:'scope',solutions:'marketing',knowledge:'welcome','knowledge-start':'planning',company:'company',contact:'entrance',nex2fly:'workspace',one:'production',api:'integration','aifly-oracle':'welcome','nex-agentic':'automation','skills-mcp':'integration',portals:'entrance','tk-home':'logistics','tk-fitment':'integration','tk-appointments':'planning','tk-vouchers':'scope','tk-partner':'automation','tk-workshop':'process'};
 export function pageImage(pageId:string):BrandImage|undefined{return pageKeys[pageId]?brandImages[pageKeys[pageId]]:undefined;}
 export function imageAlt(image:BrandImage,locale:string){return locale==='de'?image.alt:({nl:'Merkillustratie met Pascal, NeX en AIFly ORACLE – geen productfoto of klantreferentie.',fr:'Illustration de marque avec Pascal, NeX et AIFly ORACLE – ni photo produit ni référence client.',en:'Brand illustration with Pascal, NeX and AIFly ORACLE, not a product photo or client reference.'}[locale]||image.alt);}

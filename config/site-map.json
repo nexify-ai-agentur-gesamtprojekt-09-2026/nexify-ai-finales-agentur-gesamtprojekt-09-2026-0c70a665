@@ -56,6 +56,10 @@
             "solutions",
             "one",
             "api",
+            "nex-agentic",
+            "aifly-oracle",
+            "skills-mcp",
+            "portals",
             "pricing"
           ]
         },
@@ -197,6 +201,10 @@
         "solutions",
         "one",
         "api",
+        "nex-agentic",
+        "aifly-oracle",
+        "skills-mcp",
+        "portals",
         "pricing"
       ]
     },
@@ -271,7 +279,11 @@
     "nex2fly",
     "tk-shop",
     "tk-reifenrechner",
-    "tk-batterie"
+    "tk-batterie",
+    "aifly-oracle",
+    "nex-agentic",
+    "skills-mcp",
+    "portals"
   ],
   "inter_site_links": [
     {
@@ -2983,6 +2995,709 @@
       }
     },
     {
+      "id": "aifly-oracle",
+      "path": "/produkte/aifly-oracle",
+      "title": {
+        "de": "AIFly ORACLE. Einordnen, bevor gehandelt wird.",
+        "nl": "AIFly ORACLE. Eerst inordenen, dan handelen.",
+        "fr": "AIFly ORACLE. Situer avant d’agir.",
+        "en": "AIFly ORACLE. Put it in context before acting."
+      },
+      "summary": {
+        "de": "AIFly ORACLE koordiniert die Arbeit hinter der Factory und begleitet Sie auf dieser Website. Er ordnet Vorhaben ein; verbindliche Schritte bleiben bei den dafür berechtigten Personen.",
+        "nl": "AIFly ORACLE coördineert het werk achter de Factory en begeleidt u op deze website. Hij ordent projecten; bindende stappen blijven bij de daartoe bevoegde personen.",
+        "fr": "AIFly ORACLE coordonne le travail derrière la Factory et vous accompagne sur ce site. Il situe les projets ; les étapes engageantes restent aux personnes habilitées.",
+        "en": "AIFly ORACLE coordinates the work behind the Factory and guides you on this website. It puts projects in context; binding steps stay with the people authorised to take them."
+      },
+      "site_context": "nexify",
+      "sections": [
+        {
+          "id": "oracle-1",
+          "heading": {
+            "de": "Koordination mit klaren Grenzen",
+            "nl": "Coördinatie met duidelijke grenzen",
+            "fr": "Une coordination aux limites claires",
+            "en": "Coordination with clear limits"
+          },
+          "body": {
+            "de": "AIFly ORACLE priorisiert Aufgaben, ordnet sie den zuständigen Fachrollen zu und löst Konflikte zwischen Bereichen. Sicherheitsrichtlinien, Systemgrenzen und menschliche Freigaben überstimmt er nicht und leitet aus seiner Rolle keine zusätzlichen Rechte ab.",
+            "nl": "AIFly ORACLE geeft taken prioriteit, wijst ze toe aan de bevoegde vakrollen en lost conflicten tussen afdelingen op. Veiligheidsregels, systeemgrenzen en menselijke goedkeuringen overrulet hij niet en uit zijn rol volgen geen extra rechten.",
+            "fr": "AIFly ORACLE priorise les tâches, les attribue aux rôles compétents et arbitre les conflits entre domaines. Il ne passe jamais outre aux règles de sécurité, aux limites du système ni aux validations humaines et ne tire aucun droit supplémentaire de son rôle.",
+            "en": "AIFly ORACLE prioritises tasks, assigns them to the responsible specialist roles and resolves conflicts between areas. It never overrides security policies, system limits or human approvals, and it derives no extra rights from its role."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "oracle-2",
+          "heading": {
+            "de": "Vier Entscheidungsebenen",
+            "nl": "Vier beslisniveaus",
+            "fr": "Quatre niveaux de décision",
+            "en": "Four levels of decision"
+          },
+          "body": {
+            "de": "Fachliche Routine entscheidet die zuständige Fachrolle. Bereichsübergreifendes ordnet ORACLE. Technische Freigaben, etwa ein Produktivstart, liegen bei der dafür autorisierten Instanz. Verträge, Zahlungen und verbindliche Zusagen entscheidet Pascal Courbois.",
+            "nl": "Vakinhoudelijke routine beslist de bevoegde vakrol. Domeinoverstijgende zaken ordent ORACLE. Technische vrijgaven, zoals een livegang, liggen bij de daartoe geautoriseerde instantie. Contracten, betalingen en bindende toezeggingen beslist Pascal Courbois.",
+            "fr": "La routine métier relève du rôle compétent. ORACLE ordonne ce qui touche plusieurs domaines. Les validations techniques, comme une mise en production, relèvent de l’instance autorisée. Contrats, paiements et engagements fermes sont décidés par Pascal Courbois.",
+            "en": "Routine specialist work is decided by the responsible role. ORACLE orders what spans several areas. Technical approvals, such as a production launch, sit with the authorised instance. Contracts, payments and binding commitments are decided by Pascal Courbois."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "oracle-3",
+          "heading": {
+            "de": "Was Sie heute auf der Website erleben",
+            "nl": "Wat u vandaag op de website ervaart",
+            "fr": "Ce que vous vivez aujourd’hui sur le site",
+            "en": "What you experience on the website today"
+          },
+          "body": {
+            "de": "Im öffentlichen Chat führt Oracle durch Leistungen und Seiten. Derzeit arbeitet er ohne Live-KI-Modell, schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Oracle kann Fehler machen; verbindlich ist erst, was ausdrücklich bestätigt wurde.",
+            "nl": "In de openbare chat leidt Oracle u door diensten en pagina’s. Momenteel werkt hij zonder live AI-model, sluit geen contracten, boekt geen afspraken en start geen betalingen. Oracle kan fouten maken; bindend is pas wat uitdrukkelijk is bevestigd.",
+            "fr": "Dans le chat public, Oracle vous guide à travers les prestations et les pages. Il fonctionne actuellement sans modèle d’IA en direct, ne conclut aucun contrat, ne réserve aucun rendez-vous et ne déclenche aucun paiement. Oracle peut se tromper ; seul ce qui est expressément confirmé engage.",
+            "en": "In the public chat Oracle guides you through services and pages. It currently runs without a live AI model, concludes no contracts, books no appointments and triggers no payments. Oracle can make mistakes; only what is explicitly confirmed is binding."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "AIFly ORACLE koordiniert die Arbeit hinter der Factory und begleitet Sie auf dieser Website. Er ordnet Vorhaben ein; verbindliche Schritte bleiben bei den dafür berechtigten Personen.",
+          "nl": "AIFly ORACLE coördineert het werk achter de Factory en begeleidt u op deze website. Hij ordent projecten; bindende stappen blijven bij de daartoe bevoegde personen.",
+          "fr": "AIFly ORACLE coordonne le travail derrière la Factory et vous accompagne sur ce site. Il situe les projets ; les étapes engageantes restent aux personnes habilitées.",
+          "en": "AIFly ORACLE coordinates the work behind the Factory and guides you on this website. It puts projects in context; binding steps stay with the people authorised to take them."
+        },
+        "canonical_path": "/produkte/aifly-oracle",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow",
+        "title": {
+          "de": "AIFly ORACLE. Einordnen, bevor gehandelt wird.",
+          "nl": "AIFly ORACLE. Eerst inordenen, dan handelen.",
+          "fr": "AIFly ORACLE. Situer avant d’agir.",
+          "en": "AIFly ORACLE. Put it in context before acting."
+        }
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/NeXify-AI-Companion.dc.html"
+      ],
+      "source_refs": [
+        "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+        "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "ai-notice",
+          "label": {
+            "de": "Hinweise zu KI und Verantwortung",
+            "nl": "Informatie over AI en verantwoordelijkheid",
+            "fr": "Informations sur l’IA et la responsabilité",
+            "en": "Notes on AI and accountability"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "nex-agentic",
+          "label": {
+            "de": "NeX Agentic AIFly kennenlernen",
+            "nl": "NeX Agentic AIFly leren kennen",
+            "fr": "Découvrir NeX Agentic AIFly",
+            "en": "Meet NeX Agentic AIFly"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Ein Gespräch anfragen",
+            "nl": "Een gesprek aanvragen",
+            "fr": "Demander un échange",
+            "en": "Request a conversation"
+          }
+        },
+        {
+          "type": "chat",
+          "chat_intent": "booking",
+          "label": {
+            "de": "Einen Terminwunsch mitteilen",
+            "nl": "Een gespreksvoorkeur doorgeven",
+            "fr": "Proposer un créneau d’échange",
+            "en": "Send a preferred meeting time"
+          },
+          "fallback_target_id": "contact"
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true,
+      "editorial_provenance": {
+        "requirement": "MASTER_CONTENT_AIFLY_ORACLE",
+        "source_refs": [
+          "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+          "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+        ],
+        "review_status": "source_reconciled_editorial_draft_runtime_separate",
+        "revision": "2026-11-08"
+      }
+    },
+    {
+      "id": "nex-agentic",
+      "path": "/produkte/nex-agentic-aifly",
+      "title": {
+        "de": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
+        "nl": "NeX Agentic AIFly. Doet wat is afgesproken.",
+        "fr": "NeX Agentic AIFly. Fait ce qui est convenu.",
+        "en": "NeX Agentic AIFly. Gets done what was agreed."
+      },
+      "summary": {
+        "de": "NeX ist die ausführende Seite des Konzepts: Er recherchiert, bereitet vor und automatisiert Wiederkehrendes, innerhalb des Auftrags und der erteilten Freigaben.",
+        "nl": "NeX is de uitvoerende kant van het concept: hij onderzoekt, bereidt voor en automatiseert terugkerend werk, binnen de opdracht en de verleende goedkeuringen.",
+        "fr": "NeX est le côté exécutant du concept : il recherche, prépare et automatise les tâches récurrentes, dans le cadre de la mission et des validations accordées.",
+        "en": "NeX is the executing side of the concept: it researches, prepares and automates recurring work within the assignment and the approvals granted."
+      },
+      "site_context": "nexify",
+      "sections": [
+        {
+          "id": "nex-1",
+          "heading": {
+            "de": "Ausführen statt nur beraten",
+            "nl": "Uitvoeren in plaats van alleen adviseren",
+            "fr": "Exécuter plutôt que seulement conseiller",
+            "en": "Executing, not just advising"
+          },
+          "body": {
+            "de": "Ein Einsatz beginnt mit einem Auftrag: Ziel, Quellen, erlaubte Werkzeuge, Verantwortliche und Prüfung sind benannt. NeX bearbeitet dann Recherche, Entwurf, Vorbereitung und wiederholbare Abläufe und zeigt, was tatsächlich erledigt wurde.",
+            "nl": "Een inzet begint met een opdracht: doel, bronnen, toegestane hulpmiddelen, verantwoordelijken en controle zijn benoemd. NeX pakt daarna onderzoek, concept, voorbereiding en herhaalbare processen op en toont wat daadwerkelijk is gedaan.",
+            "fr": "Une intervention commence par une mission : objectif, sources, outils autorisés, responsables et contrôle sont nommés. NeX traite ensuite recherche, projet, préparation et processus répétables et montre ce qui a réellement été fait.",
+            "en": "An engagement starts with an assignment: goal, sources, permitted tools, owners and review are named. NeX then handles research, drafting, preparation and repeatable processes, and shows what was actually done."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "nex-2",
+          "heading": {
+            "de": "Grenzen und Freigaben",
+            "nl": "Grenzen en goedkeuringen",
+            "fr": "Limites et validations",
+            "en": "Limits and approvals"
+          },
+          "body": {
+            "de": "Externe Nachrichten, verbindliche Angebote und Zahlungen löst NeX nicht eigenmächtig aus; dafür braucht es die gültige Freigabe. Daten löscht NeX nicht, Kundenprojekte bleiben getrennt, und kritische Ergebnisse prüft eine zweite Instanz.",
+            "nl": "Externe berichten, bindende offertes en betalingen start NeX niet op eigen gezag; daarvoor is een geldige goedkeuring nodig. NeX verwijdert geen gegevens, klantprojecten blijven gescheiden en kritieke resultaten worden door een tweede instantie gecontroleerd.",
+            "fr": "NeX ne déclenche pas de son propre chef des messages externes, des offres fermes ni des paiements ; une validation en cours de validité est nécessaire. NeX ne supprime pas de données, les projets clients restent séparés et une seconde instance contrôle les résultats critiques.",
+            "en": "NeX does not trigger external messages, binding offers or payments on its own; a valid approval is required. NeX does not delete data, customer projects stay separate, and a second instance reviews critical results."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "nex-3",
+          "heading": {
+            "de": "Verfügbarkeit",
+            "nl": "Beschikbaarheid",
+            "fr": "Disponibilité",
+            "en": "Availability"
+          },
+          "body": {
+            "de": "Als eigenständig buchbares Produkt ist NeX Agentic AIFly noch nicht freigegeben. Einsätze planen wir projektbezogen im Rahmen eines Auftrags; was davon wann läuft, nennen wir im Angebot.",
+            "nl": "Als zelfstandig boekbaar product is NeX Agentic AIFly nog niet vrijgegeven. Inzetten plannen we per project binnen een opdracht; wat wanneer draait, noemen we in de offerte.",
+            "fr": "En tant que produit réservable de façon autonome, NeX Agentic AIFly n’est pas encore validé. Nous planifions les interventions par projet dans le cadre d’une mission ; ce qui tourne et quand figure dans l’offre.",
+            "en": "NeX Agentic AIFly is not yet released as a standalone bookable product. We plan engagements per project within an assignment; what runs and when is stated in the offer."
+          },
+          "source_refs": [
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "NeX ist die ausführende Seite des Konzepts: Er recherchiert, bereitet vor und automatisiert Wiederkehrendes, innerhalb des Auftrags und der erteilten Freigaben.",
+          "nl": "NeX is de uitvoerende kant van het concept: hij onderzoekt, bereidt voor en automatiseert terugkerend werk, binnen de opdracht en de verleende goedkeuringen.",
+          "fr": "NeX est le côté exécutant du concept : il recherche, prépare et automatise les tâches récurrentes, dans le cadre de la mission et des validations accordées.",
+          "en": "NeX is the executing side of the concept: it researches, prepares and automates recurring work within the assignment and the approvals granted."
+        },
+        "canonical_path": "/produkte/nex-agentic-aifly",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow",
+        "title": {
+          "de": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
+          "nl": "NeX Agentic AIFly. Doet wat is afgesproken.",
+          "fr": "NeX Agentic AIFly. Fait ce qui est convenu.",
+          "en": "NeX Agentic AIFly. Gets done what was agreed."
+        }
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/NeXify AI one.dc.html"
+      ],
+      "source_refs": [
+        "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+        "docs/09-final/05-technische-spezifikation.md",
+        "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "skills-mcp",
+          "label": {
+            "de": "Skills und MCP ansehen",
+            "nl": "Skills en MCP bekijken",
+            "fr": "Voir Skills et MCP",
+            "en": "See skills and MCP"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "aifly-oracle",
+          "label": {
+            "de": "AIFly ORACLE kennenlernen",
+            "nl": "AIFly ORACLE leren kennen",
+            "fr": "Découvrir AIFly ORACLE",
+            "en": "Meet AIFly ORACLE"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Ein Briefing an die Factory senden",
+            "nl": "Een briefing aan de Factory sturen",
+            "fr": "Adresser un brief à la Factory",
+            "en": "Send a brief to the Factory"
+          }
+        },
+        {
+          "type": "chat",
+          "chat_intent": "quote",
+          "label": {
+            "de": "Ein Projektpaket anfragen",
+            "nl": "Een projectpakket aanvragen",
+            "fr": "Demander un projet défini",
+            "en": "Enquire about a project package"
+          },
+          "fallback_target_id": "contact"
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true,
+      "editorial_provenance": {
+        "requirement": "MASTER_CONTENT_NEX_AGENTIC",
+        "source_refs": [
+          "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+          "docs/09-final/05-technische-spezifikation.md",
+          "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+        ],
+        "review_status": "source_reconciled_editorial_draft_runtime_separate",
+        "revision": "2026-11-08"
+      }
+    },
+    {
+      "id": "skills-mcp",
+      "path": "/produkte/skills-mcp",
+      "title": {
+        "de": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang.",
+        "nl": "Skills en MCP. Vaardigheden met gecontroleerde toegang.",
+        "fr": "Skills et MCP. Des capacités à accès contrôlé.",
+        "en": "Skills and MCP. Capabilities with controlled access."
+      },
+      "summary": {
+        "de": "Skills bündeln bewährte Arbeitsmethoden, MCP erschließt Werkzeuge und Systeme über einen kontrollierten Zugang. Beides wird je Vorhaben geprüft und freigeschaltet.",
+        "nl": "Skills bundelen bewezen werkmethoden, MCP ontsluit hulpmiddelen en systemen via gecontroleerde toegang. Beide worden per project getoetst en vrijgegeven.",
+        "fr": "Les skills regroupent des méthodes de travail éprouvées, MCP ouvre outils et systèmes via un accès contrôlé. Les deux sont vérifiés et activés projet par projet.",
+        "en": "Skills bundle proven working methods, MCP opens tools and systems through controlled access. Both are reviewed and enabled per project."
+      },
+      "site_context": "nexify",
+      "sections": [
+        {
+          "id": "skills-1",
+          "heading": {
+            "de": "Fähigkeiten als geprüfte Bausteine",
+            "nl": "Vaardigheden als geteste bouwstenen",
+            "fr": "Des capacités comme briques vérifiées",
+            "en": "Capabilities as reviewed building blocks"
+          },
+          "body": {
+            "de": "Ein Skill kapselt eine wiederverwendbare Arbeitsmethode. Er wird vor dem Einsatz geprüft, getestet und versioniert. Das Unternehmensgedächtnis ersetzt er nicht; kundenspezifische Daten bleiben in ihrem Bereich.",
+            "nl": "Een skill bundelt een herbruikbare werkmethode. Hij wordt vóór gebruik gecontroleerd, getest en van een versie voorzien. Het bedrijfsgeheugen vervangt hij niet; klantspecifieke gegevens blijven in hun eigen domein.",
+            "fr": "Un skill encapsule une méthode de travail réutilisable. Il est vérifié, testé et versionné avant l’emploi. Il ne remplace pas la mémoire de l’entreprise ; les données propres aux clients restent dans leur périmètre.",
+            "en": "A skill encapsulates a reusable working method. It is reviewed, tested and versioned before use. It does not replace company memory; customer-specific data stays in its own area."
+          },
+          "source_refs": [
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "skills-2",
+          "heading": {
+            "de": "Ein Zugang, klare Regeln",
+            "nl": "Eén toegang, duidelijke regels",
+            "fr": "Un accès, des règles claires",
+            "en": "One access point, clear rules"
+          },
+          "body": {
+            "de": "Der angestrebte MCP-Zugang verbindet Werkzeuge und Fachsysteme über eine Stelle mit Anmeldung, Mandantentrennung, Rechteprüfung, typisierten Operationen und nachvollziehbaren Protokollen. Er ist ein Zugang, kein Ersatz für die fachliche Datenhaltung.",
+            "nl": "De beoogde MCP-toegang verbindt hulpmiddelen en vaksystemen via één punt met aanmelding, tenantscheiding, rechtencontrole, getypeerde bewerkingen en traceerbare logboeken. Hij is een toegang, geen vervanging van de inhoudelijke gegevensopslag.",
+            "fr": "L’accès MCP visé relie outils et systèmes métier par un point unique, avec authentification, séparation des mandants, contrôle des droits, opérations typées et journaux traçables. C’est un accès, pas un substitut au stockage des données métier.",
+            "en": "The planned MCP access connects tools and business systems through one point with sign-in, tenant separation, permission checks, typed operations and traceable logs. It is an access point, not a replacement for business data storage."
+          },
+          "source_refs": [
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "skills-3",
+          "heading": {
+            "de": "Anfrage und Stand",
+            "nl": "Aanvraag en stand",
+            "fr": "Demande et état d’avancement",
+            "en": "Enquiry and status"
+          },
+          "body": {
+            "de": "Der Zugang ist als Zielbild beschrieben und noch nicht produktiv freigegeben. Möchten Sie ein System anbinden, prüfen wir Schnittstelle, Rechte und Aufwand und nennen Ihnen das Ergebnis im Angebot.",
+            "nl": "De toegang is beschreven als streefbeeld en nog niet productief vrijgegeven. Wilt u een systeem koppelen, dan toetsen we koppelvlak, rechten en inspanning en noemen het resultaat in de offerte.",
+            "fr": "L’accès est décrit comme cible et n’est pas encore validé en production. Si vous souhaitez connecter un système, nous vérifions interface, droits et charge et indiquons le résultat dans l’offre.",
+            "en": "The access is described as a target state and is not yet released for production. If you want to connect a system, we review interface, permissions and effort and state the result in the offer."
+          },
+          "source_refs": [
+            "docs/09-final/05-technische-spezifikation.md",
+            "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Skills bündeln bewährte Arbeitsmethoden, MCP erschließt Werkzeuge und Systeme über einen kontrollierten Zugang. Beides wird je Vorhaben geprüft und freigeschaltet.",
+          "nl": "Skills bundelen bewezen werkmethoden, MCP ontsluit hulpmiddelen en systemen via gecontroleerde toegang. Beide worden per project getoetst en vrijgegeven.",
+          "fr": "Les skills regroupent des méthodes de travail éprouvées, MCP ouvre outils et systèmes via un accès contrôlé. Les deux sont vérifiés et activés projet par projet.",
+          "en": "Skills bundle proven working methods, MCP opens tools and systems through controlled access. Both are reviewed and enabled per project."
+        },
+        "canonical_path": "/produkte/skills-mcp",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow",
+        "title": {
+          "de": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang.",
+          "nl": "Skills en MCP. Vaardigheden met gecontroleerde toegang.",
+          "fr": "Skills et MCP. Des capacités à accès contrôlé.",
+          "en": "Skills and MCP. Capabilities with controlled access."
+        }
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/NeXify Systemkarte.dc.html"
+      ],
+      "source_refs": [
+        "docs/09-final/05-technische-spezifikation.md",
+        "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+        "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "api",
+          "label": {
+            "de": "Ihre Schnittstelle projektieren",
+            "nl": "Uw koppeling uitwerken",
+            "fr": "Définir votre intégration",
+            "en": "Scope your integration"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "nex-agentic",
+          "label": {
+            "de": "NeX Agentic AIFly ansehen",
+            "nl": "NeX Agentic AIFly bekijken",
+            "fr": "Voir NeX Agentic AIFly",
+            "en": "See NeX Agentic AIFly"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Eine Integration anfragen",
+            "nl": "Een integratie aanvragen",
+            "fr": "Demander une intégration",
+            "en": "Request an integration"
+          }
+        },
+        {
+          "type": "chat",
+          "chat_intent": "quote",
+          "label": {
+            "de": "Ein Projektpaket anfragen",
+            "nl": "Een projectpakket aanvragen",
+            "fr": "Demander un projet défini",
+            "en": "Enquire about a project package"
+          },
+          "fallback_target_id": "contact"
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true,
+      "editorial_provenance": {
+        "requirement": "MASTER_CONTENT_SKILLS_MCP",
+        "source_refs": [
+          "docs/09-final/05-technische-spezifikation.md",
+          "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
+          "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+        ],
+        "review_status": "source_reconciled_editorial_draft_runtime_separate",
+        "revision": "2026-11-08"
+      }
+    },
+    {
+      "id": "portals",
+      "path": "/portale",
+      "title": {
+        "de": "Portale. Ein Einstieg je Zielgruppe.",
+        "nl": "Portalen. Eén ingang per doelgroep.",
+        "fr": "Portails. Une entrée par public.",
+        "en": "Portals. One entry point per audience."
+      },
+      "summary": {
+        "de": "Kundenportal, Partnerportal und Shop haben unterschiedliche Nutzer und bleiben getrennt. Hier finden Sie den passenden Einstieg.",
+        "nl": "Klantenportaal, partnerportaal en shop hebben verschillende gebruikers en blijven gescheiden. Hier vindt u de juiste ingang.",
+        "fr": "Portail client, portail partenaire et boutique ont des utilisateurs différents et restent séparés. Vous trouvez ici la bonne entrée.",
+        "en": "Customer portal, partner portal and shop serve different users and stay separate. Find the right entry point here."
+      },
+      "site_context": "nexify",
+      "sections": [
+        {
+          "id": "portals-1",
+          "heading": {
+            "de": "Wer nutzt was",
+            "nl": "Wie gebruikt wat",
+            "fr": "Qui utilise quoi",
+            "en": "Who uses what"
+          },
+          "body": {
+            "de": "Das Kundenportal ist der gemeinsame Arbeitsbereich zwischen NeXify und Ihnen: Status, Anfragen, Angebote, Dokumente und Support. Das Partnerportal richtet sich an Werkstätten. TEILEKLAR.shop ist der eigenständige Shop mit eigener Marke.",
+            "nl": "Het klantenportaal is de gedeelde werkruimte tussen NeXify en u: status, aanvragen, offertes, documenten en support. Het partnerportaal is bedoeld voor garages. TEILEKLAR.shop is de zelfstandige shop met een eigen merk.",
+            "fr": "Le portail client est l’espace de travail commun entre NeXify et vous : statut, demandes, offres, documents et support. Le portail partenaire s’adresse aux garages. TEILEKLAR.shop est la boutique autonome, avec sa propre marque.",
+            "en": "The customer portal is the shared workspace between NeXify and you: status, enquiries, offers, documents and support. The partner portal is for workshops. TEILEKLAR.shop is the standalone shop with its own brand."
+          },
+          "source_refs": [
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "portals-2",
+          "heading": {
+            "de": "Getrennt und geschützt",
+            "nl": "Gescheiden en beveiligd",
+            "fr": "Séparés et protégés",
+            "en": "Separate and protected"
+          },
+          "body": {
+            "de": "Jedes Portal hat eigene Rollen und Daten, Mandanten sind strikt getrennt. Eine Anmeldung gilt nicht automatisch für ein anderes Portal. Private Inhalte sehen Sie erst nach der Anmeldung.",
+            "nl": "Elk portaal heeft eigen rollen en gegevens, tenants zijn strikt gescheiden. Een aanmelding geldt niet automatisch voor een ander portaal. Privé-inhoud ziet u pas na het aanmelden.",
+            "fr": "Chaque portail a ses propres rôles et données, les mandants sont strictement séparés. Une connexion ne vaut pas automatiquement pour un autre portail. Vous ne voyez les contenus privés qu’après connexion.",
+            "en": "Each portal has its own roles and data, and tenants are strictly separated. Signing in does not automatically apply to another portal. You see private content only after signing in."
+          },
+          "source_refs": [
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        },
+        {
+          "id": "portals-3",
+          "heading": {
+            "de": "Was für Sie freigeschaltet ist",
+            "nl": "Wat voor u is vrijgegeven",
+            "fr": "Ce qui est activé pour vous",
+            "en": "What is enabled for you"
+          },
+          "body": {
+            "de": "Welche Portalfunktionen verfügbar sind, hängt von Ihrem Zugang ab. Bereiche, die noch nicht angebunden sind, zeigen wir offen als solche und täuschen keine Daten vor.",
+            "nl": "Welke portaalfuncties beschikbaar zijn, hangt af van uw toegang. Onderdelen die nog niet gekoppeld zijn, tonen we openlijk als zodanig en we doen niet alsof er gegevens zijn.",
+            "fr": "Les fonctions disponibles dépendent de votre accès. Les espaces pas encore raccordés sont présentés comme tels, sans simuler de données.",
+            "en": "Which portal functions are available depends on your access. Areas that are not yet connected are shown openly as such, without simulated data."
+          },
+          "source_refs": [
+            "docs/09-final/14-gesamtsystem-und-portale.md",
+            "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+          ]
+        }
+      ],
+      "metadata": {
+        "description": {
+          "de": "Kundenportal, Partnerportal und Shop haben unterschiedliche Nutzer und bleiben getrennt. Hier finden Sie den passenden Einstieg.",
+          "nl": "Klantenportaal, partnerportaal en shop hebben verschillende gebruikers en blijven gescheiden. Hier vindt u de juiste ingang.",
+          "fr": "Portail client, portail partenaire et boutique ont des utilisateurs différents et restent séparés. Vous trouvez ici la bonne entrée.",
+          "en": "Customer portal, partner portal and shop serve different users and stay separate. Find the right entry point here."
+        },
+        "canonical_path": "/portale",
+        "canonical_origin": null,
+        "canonical_status": "development_path_not_production_domain_verification",
+        "indexability": "noindex,nofollow",
+        "title": {
+          "de": "Portale. Ein Einstieg je Zielgruppe.",
+          "nl": "Portalen. Eén ingang per doelgroep.",
+          "fr": "Portails. Une entrée par public.",
+          "en": "Portals. One entry point per audience."
+        }
+      },
+      "access": {
+        "visibility": "public",
+        "auth_required": false,
+        "roles": [],
+        "site_membership_required": false,
+        "tenant_required": false,
+        "mfa_required_for_writes": false
+      },
+      "implementation_status": "planned",
+      "content_kind": "product_preparation",
+      "readiness": {
+        "content": "curated_source_based",
+        "transactions": "not_enabled",
+        "backend": "not_connected",
+        "production_release": "not_claimed"
+      },
+      "prototype_page_ids": [
+        "N1:prototypen/Kundenwege.dc.html"
+      ],
+      "source_refs": [
+        "docs/09-final/14-gesamtsystem-und-portale.md",
+        "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+      ],
+      "next_actions": [
+        {
+          "type": "route",
+          "target_id": "login",
+          "label": {
+            "de": "Zur Anmeldung",
+            "nl": "Naar het aanmelden",
+            "fr": "Vers la connexion",
+            "en": "Go to sign-in"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "tk-partner",
+          "label": {
+            "de": "Als Werkstatt Partner werden",
+            "nl": "Als garage partner worden",
+            "fr": "Devenir garage partenaire",
+            "en": "Become a workshop partner"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "tk-home",
+          "label": {
+            "de": "TEILEKLAR entdecken",
+            "nl": "TEILEKLAR ontdekken",
+            "fr": "Découvrir TEILEKLAR",
+            "en": "Discover TEILEKLAR"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "nex2fly",
+          "label": {
+            "de": "NeX2fly entdecken",
+            "nl": "NeX2fly ontdekken",
+            "fr": "Découvrir NeX2fly",
+            "en": "Discover NeX2fly"
+          }
+        },
+        {
+          "type": "route",
+          "target_id": "contact",
+          "label": {
+            "de": "Zugang anfragen",
+            "nl": "Toegang aanvragen",
+            "fr": "Demander un accès",
+            "en": "Request access"
+          }
+        }
+      ],
+      "shared_chat_required": true,
+      "cookie_preferences_first": true,
+      "editorial_provenance": {
+        "requirement": "MASTER_CONTENT_PORTALS",
+        "source_refs": [
+          "docs/09-final/14-gesamtsystem-und-portale.md",
+          "docs/09-final/gesamtbeschreibung-2026-11-08-abgleich.md"
+        ],
+        "review_status": "source_reconciled_editorial_draft_runtime_separate",
+        "revision": "2026-11-08"
+      }
+    },
+    {
       "id": "imprint",
       "path": "/impressum",
       "title": {
@@ -3036,6 +3751,25 @@
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
             "docs/design/factory-brand-revision-2026-11-02.md"
+          ]
+        },
+        {
+          "id": "registerangaben",
+          "heading": {
+            "de": "Registerangaben und Anschrift",
+            "nl": "Registergegevens en adres",
+            "fr": "Registre et adresse",
+            "en": "Registration and address"
+          },
+          "body": {
+            "de": "Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande. Eingetragen bei der Kamer van Koophandel (Handelsregister), Registerstelle Roermond, KvK-Nummer 90483944; Umsatzsteuer-/BTW-Nummer NL865786276B01. Inhaber und Ansprechpartner ist Pascal Courbois. Die Rechtsform (Einzelunternehmen oder B.V.) wird mit dem Registerauszug abgeglichen; bis zur Bestätigung sind diese Angaben vorläufig und kein abschließend freigegebenes Impressum.",
+            "nl": "Graaf van Loonstraat 1E, 5921 JA Venlo, Nederland. Ingeschreven bij de Kamer van Koophandel, kantoor Roermond, KvK-nummer 90483944; btw-nummer NL865786276B01. Eigenaar en aanspreekpunt is Pascal Courbois. De rechtsvorm (eenmanszaak of B.V.) wordt met het handelsregisteruittreksel afgestemd; tot bevestiging zijn deze gegevens voorlopig en geen definitief goedgekeurd colofon.",
+            "fr": "Graaf van Loonstraat 1E, 5921 JA Venlo, Pays-Bas. Inscrite à la Kamer van Koophandel (registre du commerce), bureau de Roermond, numéro KvK 90483944 ; numéro de TVA NL865786276B01. Pascal Courbois est le titulaire et l’interlocuteur. La forme juridique (entreprise individuelle ou B.V.) est vérifiée avec l’extrait du registre ; ces informations sont provisoires jusqu’à confirmation et ne constituent pas des mentions légales définitivement validées.",
+            "en": "Graaf van Loonstraat 1E, 5921 JA Venlo, the Netherlands. Registered with the Kamer van Koophandel (Dutch Chamber of Commerce), Roermond office, KvK number 90483944; VAT number NL865786276B01. Pascal Courbois is the owner and contact. The legal form (sole proprietorship or B.V.) is being reconciled with the register extract; until confirmed these details are provisional and not a fully approved legal notice."
+          },
+          "source_refs": [
+            "config/fakten.json",
+            "docs/09-final/08-recht-und-compliance.md"
           ]
         }
       ],

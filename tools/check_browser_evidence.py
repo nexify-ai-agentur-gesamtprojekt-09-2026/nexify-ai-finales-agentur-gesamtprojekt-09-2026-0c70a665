@@ -21,7 +21,7 @@ SOURCE_PATHS = (
     "apps/web/app/globals.css",
     "apps/web/components/HomeContent.tsx",
     "apps/web/components/Workspace.tsx",
-    "apps/web/components/PublicContentLayout.css",
+    "apps/web/components/PageConcept.css",
     "config/site-map.json",
 )
 EVIDENCE_PATH = "docs/design/detail-browser-evidence.json"
@@ -181,6 +181,12 @@ def check_evidence(root):
 
 
 
+# ALT-SHOP, STILLGELEGT (OF-11, 2026-11-09, freigegeben von Pascal Courbois):
+# SHOP_* / check_shop_evidence pruefen den Alt-Shop (SQLite-Warenkorb in
+# apps/agent-gateway, ShopPanel, persistent_objects {cart: 7}). Diese Quellen und
+# Semantik existieren im neuen Shop nicht mehr. Der Code bleibt unveraendert
+# erhalten (archiviert, nicht geloescht), wird aber von main() nicht mehr
+# aufgerufen. Ersatz: check_shop_ui_mock_evidence (Abschnitt "Neuer Shop" unten).
 SHOP_EVIDENCE_PATH = "evidence/shop-http-2026-10-27/browser-shop.json"
 SHOP_SOURCE_PATHS = (
     "apps/agent-gateway/cart.py", "apps/agent-gateway/server.py",
@@ -213,6 +219,7 @@ SHOP_CHECKS = frozenset((
 
 
 def check_shop_evidence(root):
+    """ALT-SHOP, STILLGELEGT: nicht Teil des laufenden Gates; siehe check_shop_ui_mock_evidence."""
     evidence = json.loads(_read(root, SHOP_EVIDENCE_PATH))
     hashes = evidence.get("source_sha256", {})
     if set(hashes) != set(SHOP_SOURCE_PATHS):
@@ -238,6 +245,10 @@ def check_shop_evidence(root):
 
 
 
+# ALT-SHOP, STILLGELEGT (OF-11, 2026-11-09): Read-only-Snapshot-Katalog des Alt-Shops
+# (apps/agent-gateway/catalog.py, ShopPanel, POST /api/shop/cart -> 403). Code
+# unveraendert erhalten, von main() nicht mehr aufgerufen. Ersatz:
+# check_catalog_ui_mock_evidence (Abschnitt "Neuer Shop" unten).
 CATALOG_EVIDENCE_PATH = "evidence/catalog-image-batch-2026-10-27/browser-catalog.json"
 CATALOG_SOURCE_PATHS = (
     "apps/agent-gateway/catalog.py", "apps/agent-gateway/server.py",
@@ -260,6 +271,7 @@ CATALOG_CHECKS = frozenset((
 
 
 def check_catalog_evidence(root):
+    """ALT-SHOP, STILLGELEGT: nicht Teil des laufenden Gates; siehe check_catalog_ui_mock_evidence."""
     report = json.loads(_read(root, CATALOG_EVIDENCE_PATH))
     hashes = report.get('source_sha256', {})
     if set(hashes) != set(CATALOG_SOURCE_PATHS):
@@ -281,6 +293,180 @@ def check_catalog_evidence(root):
             ('POST','/api/shop/cart/checkout-draft',403)}.issubset(observed):
         raise EvidenceError('catalog_actual_read_and_write_denial_required')
     return {'scope': 'stored_local_read_only_catalog_browser_evidence_only', 'checks': len(CATALOG_CHECKS)}
+
+
+# ---------------------------------------------------------------------------
+# Neuer Shop (OF-11, 2026-11-09): Browsernachweise gegen die aktuellen Komponenten
+# in apps/web/components/shop mit einem gemockten API-Vertrag
+# (apps/site/tests/fixtures/shop-api-mock.mjs). Der Nachweis belegt nur das
+# Frontend gegen den Mock: kein apps/shop-api-Servercode, keine MongoDB, kein
+# BigBuy/Revolut, keine Produktivdaten. Mock und Produktivdaten werden nie vermischt.
+# ---------------------------------------------------------------------------
+SHOP_UI_MOCK_EVIDENCE_PATH = "evidence/shop-ui-mock-2026-11-09/browser-shop.json"
+CATALOG_UI_MOCK_EVIDENCE_PATH = "evidence/shop-ui-mock-2026-11-09/browser-catalog.json"
+SHOP_UI_MOCK_LABEL_MARKER = "mit gemockter Antwort"
+SHOP_UI_MOCK_SOURCE_PATHS = (
+    "apps/web/components/shop/api.ts", "apps/web/components/shop/CatalogView.tsx",
+    "apps/web/components/shop/CategoryList.tsx", "apps/web/components/shop/ProductCard.tsx",
+    "apps/web/components/shop/ProductDetail.tsx", "apps/web/components/shop/CartView.tsx",
+    "apps/web/components/shop/Checkout.tsx", "apps/web/components/shop/AddressStep.tsx",
+    "apps/web/components/shop/SellerInfo.tsx", "apps/web/components/shop/CommerceHeader.tsx",
+    "apps/web/components/shop/PublicShopContent.tsx", "apps/web/components/shop/shipping-hint.ts",
+    "apps/web/components/shop/shop.css", "apps/web/components/shop/Storefront.css",
+    "apps/web/components/PublicExperience.tsx", "apps/site/src/main.tsx",
+    "config/shop-interface-copy.json", "apps/site/tests/browser-shop.mjs",
+    "apps/site/tests/fixtures/shop-api-mock.mjs",
+)
+CATALOG_UI_MOCK_SOURCE_PATHS = (
+    "apps/web/components/shop/api.ts", "apps/web/components/shop/CatalogView.tsx",
+    "apps/web/components/shop/CategoryList.tsx", "apps/web/components/shop/ProductCard.tsx",
+    "apps/web/components/shop/ProductDetail.tsx", "apps/web/components/shop/PublicShopContent.tsx",
+    "apps/web/components/shop/CommerceHeader.tsx", "apps/web/components/shop/shop.css",
+    "apps/web/components/shop/Storefront.css", "apps/web/components/PublicExperience.tsx",
+    "apps/site/src/main.tsx", "config/shop-interface-copy.json",
+    "apps/site/tests/browser-catalog.mjs", "apps/site/tests/fixtures/shop-api-mock.mjs",
+)
+SHOP_UI_MOCK_CHECKS = (
+    "catalog_search_sort_stock_filter_category_and_pagination_use_server_parameters",
+    "product_detail_shows_price_stock_fitment_states_and_missing_product",
+    "add_to_cart_creates_httponly_visitor_cart_and_cart_survives_reload",
+    "cart_quantity_change_follows_server_total_rejects_over_stock_and_remove_empties_cart",
+    "stock_limit_blocks_second_add_without_a_write_request",
+    "lost_response_after_committed_cart_write_is_reread_before_the_retry",
+    "catalog_and_category_failures_show_errors_never_an_empty_or_sample_catalogue",
+    "checkout_without_cart_is_explicit_and_address_is_validated_client_and_server_side",
+    "checkout_review_shows_server_totals_seller_info_and_gates_the_order_on_terms",
+    "price_change_blocks_the_order_until_the_customer_confirms_the_changes",
+    "order_hands_over_to_hosted_payment_and_retry_reuses_the_same_idempotency_key",
+    "payment_url_on_a_foreign_host_is_rejected_without_navigation",
+    "commerce_pages_are_german_only_keyboard_operable_and_fit_390px_without_overflow",
+)
+CATALOG_UI_MOCK_CHECKS = (
+    "empty_catalogue_shows_honest_empty_states_and_no_sample_products",
+    "rendered_products_equal_the_api_page_with_supplier_facts_and_price_stock_states",
+    "images_load_only_from_the_supplier_allowlist_and_unsafe_hosts_are_never_requested",
+    "browsing_is_read_only_no_write_request_no_visitor_cookie_no_cart",
+    "search_query_and_seite_parameter_are_honoured_on_load_and_reload",
+    "category_routes_resolve_numeric_ids_and_malformed_ids_fall_back_to_the_category_list",
+    "catalogue_filters_and_pagination_fit_390px_and_are_keyboard_reachable",
+)
+# Pflicht: je Nachweis die 390-px-Pruefung als benannter Check, und das hash-gebundene
+# Skript muss die Messung (Viewport 390, scrollWidth gegen innerWidth) tatsaechlich enthalten.
+SHOP_UI_MOCK_OVERFLOW_CHECK = "commerce_pages_are_german_only_keyboard_operable_and_fit_390px_without_overflow"
+CATALOG_UI_MOCK_OVERFLOW_CHECK = "catalogue_filters_and_pagination_fit_390px_and_are_keyboard_reachable"
+SHOP_UI_MOCK_OVERFLOW_PROBES = (b"width:390", b"document.documentElement.scrollWidth<=innerWidth")
+# Erlaubte Anfragen: ausschliesslich der gemockte Vertrag unter /api/shop/. Schreibende
+# Pfade sind eine geschlossene Liste; der Katalognachweis darf gar nicht schreiben.
+SHOP_UI_MOCK_ALLOWED_WRITES = frozenset((
+    ("POST", "/api/shop/cart/items"), ("POST", "/api/shop/cart/confirm-changes"),
+    ("POST", "/api/shop/checkout/quote"), ("POST", "/api/shop/checkout/validate-address"),
+    ("POST", "/api/shop/orders"),
+))
+SHOP_UI_MOCK_REQUIRED_REQUESTS = frozenset((
+    ("GET", "/api/shop/products", 200), ("GET", "/api/shop/products", 503),
+    ("GET", "/api/shop/categories", 200), ("GET", "/api/shop/categories", 503),
+    ("GET", "/api/shop/cart", 200), ("GET", "/api/shop/products/mock-0001", 200),
+    ("GET", "/api/shop/products/gibt-es-nicht", 404),
+    ("POST", "/api/shop/cart/items", 200), ("POST", "/api/shop/cart/items", 409),
+    ("POST", "/api/shop/cart/items", "connection_dropped"),
+    ("POST", "/api/shop/cart/confirm-changes", 200),
+    ("POST", "/api/shop/checkout/quote", 200),
+    ("POST", "/api/shop/checkout/validate-address", 200), ("POST", "/api/shop/checkout/validate-address", 422),
+    ("POST", "/api/shop/orders", 200), ("POST", "/api/shop/orders", 409), ("POST", "/api/shop/orders", 502),
+))
+CATALOG_UI_MOCK_REQUIRED_REQUESTS = frozenset((
+    ("GET", "/api/shop/products", 200), ("GET", "/api/shop/categories", 200),
+    ("GET", "/api/shop/cart", 200), ("GET", "/api/shop/products/mock-0001", 200),
+    ("GET", "/api/shop/products/mock-0001", 404),
+))
+
+
+def _check_shop_ui_mock(root, path, sources, checks, overflow_check, script, label, code, writes_allowed):
+    """Gemeinsamer strenger Kern fuer beide Mock-Nachweise des neuen Shops.
+
+    Alle lesbaren Pfade sind Konstanten dieses Moduls, nie Felder des Nachweises.
+    """
+    report = _json(_read(root, path))
+    if report.get("passed") is not True:
+        raise EvidenceError(code + "_recorded_pass_required")
+    # Mock-Kennzeichnung ist Pflicht; der Nachweis darf nie als Produktivprobe gelten.
+    if report.get("mock") is not True:
+        raise EvidenceError(code + "_mock_true_required")
+    if report.get("production_data") is not False or report.get("server_code_executed") is not False:
+        raise EvidenceError(code + "_production_data_false_required")
+    if not isinstance(report.get("mock_label"), str) or SHOP_UI_MOCK_LABEL_MARKER not in report["mock_label"]:
+        raise EvidenceError(code + "_mock_label_required")
+    hashes = report.get("source_sha256")
+    if not isinstance(hashes, dict) or set(hashes) != set(sources):
+        raise EvidenceError(code + "_exact_source_path_set_required")
+    contents = {}
+    for relative in sources:
+        expected = hashes[relative]
+        if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected):
+            raise EvidenceError("invalid_" + code + "_source_sha256: " + relative)
+        contents[relative] = _read(root, relative)
+        if hashlib.sha256(contents[relative]).hexdigest() != expected:
+            raise EvidenceError("stale_" + code + "_source_sha256: " + relative)
+    recorded = report.get("checks")
+    if (not isinstance(recorded, list) or any(not isinstance(item, str) for item in recorded)
+            or len(set(recorded)) != len(recorded)):
+        raise EvidenceError(code + "_critical_check_missing")
+    if overflow_check not in recorded:
+        raise EvidenceError(code + "_390px_overflow_check_missing")
+    if not set(checks).issubset(recorded):
+        raise EvidenceError(code + "_critical_check_missing")
+    if any(probe not in contents[script] for probe in SHOP_UI_MOCK_OVERFLOW_PROBES):
+        raise EvidenceError(code + "_390px_overflow_probe_missing_in_bound_script")
+    # Keine externe Anfrage, keine Seitenfehler, keine echte Zahlung/Bestellung.
+    if report.get("external_requests") != [] or report.get("page_errors") != []:
+        raise EvidenceError(code + "_external_request_or_page_error")
+    counters = ["supplier_image_requests_answered_locally"]
+    if writes_allowed:
+        counters.append("payment_page_navigations_answered_locally")
+        flags = ("real_payment_started", "real_order_submitted")
+    else:
+        flags = ("order_started", "payment_started")
+    for name in counters:
+        if type(report.get(name)) is not int or report[name] < 0:
+            raise EvidenceError(code + "_invalid_local_counter: " + name)
+    if any(report.get(flag) is not False for flag in flags):
+        raise EvidenceError(code + "_effect_boundaries_required")
+    rows = report.get("requests")
+    if not isinstance(rows, list) or not rows:
+        raise EvidenceError(code + "_actual_http_boundary_missing")
+    observed = set()
+    for row in rows:
+        if (not isinstance(row, dict) or row.get("method") not in ("GET", "POST")
+                or not isinstance(row.get("path"), str) or not row["path"].startswith("/api/shop/")
+                or type(row.get("count")) is not int or row["count"] < 1
+                or (type(row.get("status")) is not int and row.get("status") != "connection_dropped")):
+            raise EvidenceError(code + "_invalid_request_row")
+        if row["method"] != "GET":
+            if not writes_allowed:
+                raise EvidenceError(code + "_write_request_in_read_only_browse")
+            if (row["method"], row["path"]) not in SHOP_UI_MOCK_ALLOWED_WRITES:
+                raise EvidenceError(code + "_mutation_outside_mock_contract")
+        observed.add((row["method"], row["path"], row["status"]))
+    required = SHOP_UI_MOCK_REQUIRED_REQUESTS if writes_allowed else CATALOG_UI_MOCK_REQUIRED_REQUESTS
+    if not required.issubset(observed):
+        raise EvidenceError(code + "_actual_http_boundary_missing")
+    return {"scope": label, "checks": len(checks), "mock": True, "production_data": False}
+
+
+def check_shop_ui_mock_evidence(root):
+    """Neuer Shop: Warenkorb/Checkout-Browsernachweis gegen den gemockten API-Vertrag."""
+    return _check_shop_ui_mock(
+        Path(root).resolve(), SHOP_UI_MOCK_EVIDENCE_PATH, SHOP_UI_MOCK_SOURCE_PATHS, SHOP_UI_MOCK_CHECKS,
+        SHOP_UI_MOCK_OVERFLOW_CHECK, "apps/site/tests/browser-shop.mjs",
+        "stored_mock_shop_ui_browser_evidence_only", "shop_ui_mock", True)
+
+
+def check_catalog_ui_mock_evidence(root):
+    """Neuer Shop: Katalog-Browse-Nachweis (nur lesend) gegen den gemockten API-Vertrag."""
+    return _check_shop_ui_mock(
+        Path(root).resolve(), CATALOG_UI_MOCK_EVIDENCE_PATH, CATALOG_UI_MOCK_SOURCE_PATHS, CATALOG_UI_MOCK_CHECKS,
+        CATALOG_UI_MOCK_OVERFLOW_CHECK, "apps/site/tests/browser-catalog.mjs",
+        "stored_mock_catalog_ui_browser_evidence_only", "catalog_ui_mock", False)
 
 
 PUBLIC_FALLBACK_PATH = 'evidence/frontend-reliability-2026-10-27/public-fallbacks.json'
@@ -429,8 +615,9 @@ def main():
     args = parser.parse_args()
     try:
         result = check_evidence(args.root)
-        result["shop"] = check_shop_evidence(args.root)
-        result["catalog"] = check_catalog_evidence(args.root)
+        # Alt-Shop-Pruefer (check_shop_evidence, check_catalog_evidence) sind stillgelegt.
+        result["shop"] = check_shop_ui_mock_evidence(args.root)
+        result["catalog"] = check_catalog_ui_mock_evidence(args.root)
         result["public_fallbacks"] = check_public_fallbacks(args.root)
         result["exceptions"] = check_exception_evidence(args.root)
         result["consent"] = check_consent_ui(args.root)

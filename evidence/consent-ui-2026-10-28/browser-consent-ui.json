@@ -1,5 +1,6 @@
 {
-  "scope": "local synthetic UI/SDK intercept only;not legal or live acceptance",
+  "scope": "local synthetic UI/SDK intercept only (Next dev server of apps/web);not legal or live acceptance",
+  "surface": "next-dev",
   "checks": [
     {
       "mode": "configured",
@@ -111,12 +112,12 @@
     }
   ],
   "source_sha256": {
-    "apps/web/components/DiagnosticConsent.tsx": "0bf578d1f03c15393cdcf210bc1407ff9d5ccf8bd2b2a7beabe2b7e45cc45d8c",
+    "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
-    "apps/web/components/SiteFooter.tsx": "0f33920bb9adac5c2af872f78f6599c54a8b683d74c2965b678dc067a6ca6b46",
+    "apps/web/components/SiteFooter.tsx": "56a189a3feea6f954ed4a30e6bcace4939480fcea485c73a215ec4a6451e523a",
     "apps/web/observability/exceptions.mjs": "ab85b180a7289b877b318f6b6011cb2ee4c580ff6225c7ecd4d47ddbbb0454b6",
     "apps/web/observability/exceptions.d.mts": "a483344332846b7ebe62801523b27416e7cf621a41ec5cec309b22beedc8da35",
-    "apps/site/tests/browser-consent-ui.mjs": "7f07c81fdfc5a7014f267bc0f0edab827e3d32fe2a9416a0b292eb486fac1ae6"
+    "apps/site/tests/browser-consent-ui.mjs": "ef7a2a9e643dec35430fddcf970f6e97d981ee09bac79b5caf1fafb264921163"
   },
   "external_events_sent": 0,
   "unexpected_origins": [],

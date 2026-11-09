@@ -27,13 +27,15 @@ class ContactHttpContract(unittest.IsolatedAsyncioTestCase):
         self.db = Requests()
         async def notify(_):
             return 'wartend'
+        async def anonymous(_):
+            return None
         source = ast.parse((ROOT/'apps/shop-api/shop/requests_api.py').read_text())
-        nodes = [node for node in source.body if isinstance(node,ast.ClassDef) and node.name=='RequestIn'
-                 or isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name!='notify']
+        nodes = [node for node in source.body if isinstance(node,ast.ClassDef) and node.name in {'RequestIn','RequestReceipt'}
+                 or isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name not in {'notify','_requester'}]
         router = APIRouter(prefix='/api/requests')
         namespace = {'__name__':'contact_http_fixture','router':router,'BaseModel':BaseModel,'Field':Field,
                      'Header':Header,'HTTPException':HTTPException,'Request':Request,
-                     'db':types.SimpleNamespace(requests=self.db),'notify':notify,'DuplicateKeyError':Duplicate,
+                     'db':types.SimpleNamespace(requests=self.db),'notify':notify,'_requester':anonymous,'DuplicateKeyError':Duplicate,
                      'hashlib':hashlib,'json':json,'re':re,'datetime':datetime,'timedelta':timedelta,'timezone':timezone,
                      'EMAIL':re.compile(r'[^@\s]+@[^@\s]+\.[^@\s]+'),'HOURLY_LIMIT':5,
                      'now_iso':lambda:datetime.now(timezone.utc).isoformat()}

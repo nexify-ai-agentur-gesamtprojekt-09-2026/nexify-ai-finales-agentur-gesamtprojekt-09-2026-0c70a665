@@ -76,7 +76,7 @@ export default function InstallInvitation({locale}:{locale:Locale}){
   }
   const body=mode==="prompt"?t.prompt:mode==="ios"?t.ios:t.generic;
   return <section className="install-invitation" aria-labelledby="install-invitation-title" data-testid="install-invitation" data-mode={mode}>
-    <img src="/signet.svg" alt="" width="24" height="24" className="install-invitation-mark"/>
+    <span className="brand-signet install-invitation-mark" aria-hidden="true"/>
     <div className="install-invitation-copy">
       <h2 id="install-invitation-title">{t.title}</h2>
       <p data-testid="install-invitation-text">{body}</p>

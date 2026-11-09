@@ -55,6 +55,7 @@ export default function ProductDetail({ id, readOnly = false, initialProduct }: 
       <p className="tk-price is-large" data-testid="product-price">{product.price_cents === null ? t("priceUnavailable") : <>{money(product.price_cents)} <small>{t("taxRate", { rate: number(Number(product.vat_percent)) })} <a href="/teileklar/rechtliches" data-testid="product-shipping-info-link">{t("shipping")}</a></small></>}</p>
       {product.price_cents === null && <p className="tk-meta" data-testid="price-not-released-note">{t("priceNote")}</p>}
       <StockLabel stock={product.stock} />
+      <p className="tk-meta" data-testid="delivery-time-note">{t("deliveryNote")}</p>
       <p className="tk-fitment" data-testid="fitment-status"><strong>{t("fitmentTitle")}</strong> {t("fitmentBody")}</p>
       {readOnly ? <p className="tk-note" data-testid="product-read-only">{t("readOnly")}</p> : <AddToCart product={product} />}
       <dl className="tk-facts" data-testid="product-facts">

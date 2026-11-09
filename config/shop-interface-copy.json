@@ -64,7 +64,8 @@
     "findWorkshop": "Werkstatt in der Nähe suchen",
     "productSearchBefore": "Wählen Sie einen Artikel aus der",
     "productSearchLink": "Artikelsuche",
-    "productSearchAfter": ", um seine Angaben anzusehen."
+    "productSearchAfter": ", um seine Angaben anzusehen.",
+    "deliveryNote": "Die Lieferzeit wird mit der Versandbestätigung mitgeteilt; sie hängt vom Lager des Lieferanten ab."
   },
   "nl": {
     "imageError": "De leveranciersafbeelding kon niet worden geladen",
@@ -131,7 +132,8 @@
     "findWorkshop": "Een werkplaats in de buurt zoeken",
     "productSearchBefore": "Selecteert u een artikel via de",
     "productSearchLink": "artikelzoekfunctie",
-    "productSearchAfter": " om de gegevens te bekijken."
+    "productSearchAfter": " om de gegevens te bekijken.",
+    "deliveryNote": "De levertijd wordt met de verzendbevestiging meegedeeld; ze hangt af van het magazijn van de leverancier."
   },
   "fr": {
     "imageError": "Impossible de charger l’image du fournisseur",
@@ -198,7 +200,8 @@
     "findWorkshop": "Trouver un atelier à proximité",
     "productSearchBefore": "Veuillez sélectionner un article dans la",
     "productSearchLink": "recherche d’articles",
-    "productSearchAfter": " pour consulter ses détails."
+    "productSearchAfter": " pour consulter ses détails.",
+    "deliveryNote": "Le délai de livraison est communiqué avec la confirmation d’expédition ; il dépend de l’entrepôt du fournisseur."
   },
   "en": {
     "imageError": "The supplier image could not be loaded",
@@ -265,6 +268,7 @@
     "findWorkshop": "Find a nearby workshop",
     "productSearchBefore": "Select an item from the",
     "productSearchLink": "item search",
-    "productSearchAfter": " to view its details."
+    "productSearchAfter": " to view its details.",
+    "deliveryNote": "The delivery time is confirmed with the shipping notice; it depends on the supplier’s warehouse."
   }
 }

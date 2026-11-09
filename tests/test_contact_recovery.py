@@ -63,9 +63,14 @@ class Requests:
         return Cursor()
 
 
+async def _anonymous_requester(request):
+    # The real helper reads the shop-API session; these offline cases are anonymous visitors.
+    return None
+
+
 def actual_functions(database, notification):
     tree = ast.parse((ROOT/'apps/shop-api/shop/requests_api.py').read_text())
-    functions = [node for node in tree.body if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name != 'notify']
+    functions = [node for node in tree.body if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name not in ('notify', '_requester')]
     for node in functions:
         node.decorator_list = []
         node.returns = None
@@ -76,7 +81,7 @@ def actual_functions(database, notification):
                  'HTTPException': ApiFailure, 'DuplicateKeyError': Duplicate, 'hashlib': hashlib,
                  'json': json, 're': re, 'secrets': secrets, 'datetime': datetime, 'timedelta': timedelta,
                  'timezone': timezone, 'EMAIL': re.compile(r'[^@\s]+@[^@\s]+\.[^@\s]+'),
-                 'HOURLY_LIMIT': 5, 'now_iso': lambda: datetime.now(timezone.utc).isoformat()}
+                 'HOURLY_LIMIT': 5, '_requester': _anonymous_requester, 'RequestReceipt': lambda **fields: fields, 'now_iso': lambda: datetime.now(timezone.utc).isoformat()}
     exec(compile(ast.fix_missing_locations(ast.Module(body=functions,type_ignores=[])), 'requests_api.py', 'exec'), namespace)
     return namespace
 
@@ -94,7 +99,8 @@ class ContactRecovery(unittest.IsolatedAsyncioTestCase):
         self.functions = actual_functions(self.db, notify)
         self.body = types.SimpleNamespace(name='Synthetic User', email='user@example.invalid', company='',
                                           message='Synthetic enquiry for offline testing.', consent=True,
-                                          page_path='/kontakt', kind='contact')
+                                          page_path='/kontakt', kind='contact',
+                                          service='', budget='', timeline='', phone='')
 
     async def create(self, key='test-contact-key-0001', body=None):
         return await self.functions['create_request'](body or self.body, None, key)

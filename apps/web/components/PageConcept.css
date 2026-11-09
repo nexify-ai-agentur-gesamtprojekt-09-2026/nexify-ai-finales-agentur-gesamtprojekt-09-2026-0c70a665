@@ -8,26 +8,28 @@
 .home-concept .pc-hero.is-text-only{grid-template-columns:minmax(0,1fr)}
 .home-concept .pc-hero.is-text-only .pc-hero-copy{max-width:72ch}
 .home-concept .pc-hero-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
-.home-concept .pc-breadcrumb{margin:0 0 var(--space-4)}
+.home-concept .pc-breadcrumb{margin:0 0 var(--space-4);min-width:0;max-width:100%}
 .home-concept .pc-breadcrumb ol{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-3);margin:0;padding:0;list-style:none;font-size:var(--type-small-size);line-height:var(--type-body-leading);color:var(--color-text-sekundaer)}
 .home-concept .pc-breadcrumb li{display:inline-flex;align-items:center;gap:var(--space-3);min-height:var(--target-min)}
 .home-concept .pc-breadcrumb li>span[aria-hidden]{color:var(--color-atelier-champagne)}
-.home-concept .pc-breadcrumb a{color:inherit;text-decoration:none}
+.home-concept .pc-breadcrumb a{display:inline-flex;align-items:center;min-height:var(--target-min);min-width:var(--target-min);color:inherit;text-decoration:none}
 .home-concept .pc-breadcrumb a:hover{color:var(--color-atelier-champagne)}
 .home-concept .pc-breadcrumb [aria-current=page]{color:var(--color-text-primaer)}
 .home-concept .pc-hero .hc-kicker{margin-bottom:var(--space-4)}
-.home-concept .pc-hero h1{font:500 min(var(--type-hero-size),3.15cqi)/var(--type-hero-leading) var(--font-display);letter-spacing:var(--type-display-tracking);margin:0 0 var(--space-5);max-width:18ch;hyphens:none;overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.home-concept .pc-hero h1{font:500 min(var(--type-hero-size),3.15cqi)/var(--type-hero-leading) var(--font-display);letter-spacing:var(--type-display-tracking);margin:0 0 var(--space-5);max-width:18ch;hyphens:none;overflow-wrap:anywhere;word-break:normal;text-wrap:balance}
 .home-concept .pc-hero.is-text-only h1{max-width:24ch}
 .home-concept .pc-hero-lead{margin:0 0 var(--space-6);max-width:52ch;font-size:var(--type-body-size);line-height:var(--type-body-leading);color:var(--color-text-sekundaer)}
 .home-concept .pc-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4) var(--space-6)}
-.home-concept .pc-hero-actions .hc-text-link{margin-top:0;font-size:var(--type-body-size);padding-block:var(--space-2);border-bottom:1px solid var(--color-linie-stark)}
-.home-concept .pc-hero-actions .hc-text-link.is-primary{color:var(--color-marke-lime);font-weight:600;border-bottom-color:var(--color-marke-lime)}
+.home-concept .pc-hero-actions{gap:var(--space-4)}
+.home-concept .pc-hero-actions .hc-text-link{margin-top:0;justify-content:center;gap:var(--space-3);padding:var(--space-3) var(--space-5);border:var(--material-border) solid var(--color-linie-stark);border-radius:var(--radius-pille);font-size:var(--type-body-size);font-weight:600;line-height:1.4;transition:opacity var(--motion-feedback)}
+.home-concept .pc-hero-actions .hc-text-link:hover{border-color:var(--color-atelier-champagne);color:var(--color-atelier-champagne)}
+.home-concept .pc-hero-actions .hc-text-link.is-primary{border-color:transparent;background:var(--gradient-button-primaer);color:var(--color-text-auf-lime);box-shadow:var(--shadow-button-primaer)}
 .home-concept .pc-hero-actions .hc-text-link.is-primary .hc-arrow{color:inherit}
-.home-concept .pc-hero-actions .hc-text-link.is-primary:hover{color:var(--color-marke-lime-hell)}
-.home-concept .pc-hero-actions button.hc-text-link{border:0;border-bottom:1px solid var(--color-linie-stark);background:none;padding-inline:0;min-height:var(--target-min);border-radius:0;box-shadow:none;font:inherit;font-size:var(--type-body-size);cursor:pointer}
-.home-concept .pc-hero-actions button.hc-text-link.is-primary{border-bottom-color:var(--color-marke-lime);font-weight:600}
+.home-concept .pc-hero-actions .hc-text-link.is-primary:hover{background:var(--color-marke-lime-hell);color:var(--color-text-auf-lime)}
+.home-concept .pc-hero-actions button.hc-text-link{min-height:var(--target-min);font:inherit;font-size:var(--type-body-size);font-weight:600;cursor:pointer}
+.home-concept .pc-hero-actions button.hc-text-link.is-primary{font-weight:600}
 .home-concept .pc-hero-media{position:relative;margin:0;width:100%;min-width:0;border-radius:var(--radius-home-media);box-shadow:var(--shadow-home-media);overflow:hidden;isolation:isolate;background:var(--color-atelier-canvas)}
-.home-concept .pc-hero-media img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;border-radius:inherit}
+.home-concept .pc-hero-media img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 38%;border-radius:inherit}
 
 /* Sektionen: Kicker + Ueberschrift links, Lesetext rechts (Raster der Startseiten-Einleitung) */
 .home-concept .pc-section{padding-block:var(--space-7);scroll-margin-top:var(--space-5)}
@@ -61,7 +63,7 @@
 .home-concept .pc-related .hc-process-heading{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-7);align-items:end}
 .home-concept .pc-related .hc-process-heading p{margin:0}
 .home-concept .pc-related li{display:flex;flex-direction:column;min-width:0}
-.home-concept .pc-related li h3 a{color:inherit;text-decoration:none;display:flex;justify-content:space-between;gap:var(--space-4)}
+.home-concept .pc-related li h3 a{color:inherit;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:var(--target-min)}
 .home-concept .pc-related li p{margin-block:var(--space-3) var(--space-4)}
 .home-concept .pc-related li .hc-text-link{margin-top:auto}
 
@@ -121,8 +123,8 @@
 @container home (max-width:640px){
  .home-concept .pc-hero h1{font-size:min(var(--type-hero-mobile),8cqi)}
  .home-concept .pc-hero-actions{gap:var(--space-3) var(--space-5)}
- .home-concept .pc-breadcrumb ol{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
- .home-concept .pc-breadcrumb ol::-webkit-scrollbar{display:none}
+ .home-concept .pc-breadcrumb ol{gap:0 var(--space-2)}
+ .home-concept .pc-breadcrumb li{min-width:0;overflow-wrap:anywhere}
 }
 @media(prefers-contrast:more),(forced-colors:active){
  .home-concept .pc-supplement :is(.tk-form,.tk-home-entry,.tk-notice,.workshop-directory,.partner-form){box-shadow:none;border:1px solid var(--color-text-sekundaer)}
@@ -141,3 +143,6 @@
 .home-concept .pc-module>p{margin:0;font-size:var(--type-home-reading);max-width:60ch}
 .home-concept .pc-module .hc-text-link{margin-top:var(--space-2)}
 @container home (max-width:820px){.home-concept .pc-guide{grid-template-columns:1fr}.home-concept .pc-guide>details{grid-column:1}}
+/* Primäraktion der NeXify-Seiten (Formulare, Portal-Tore): ruhiges CI-Lime als Signal wie die Hero-Aktion; TEILEKLAR bleibt Champagne. */
+.workspace-shell:not(.site-teileklar) .home-concept .pc-supplement :is(.primary-button,button.primary-button){background:var(--gradient-button-primaer);color:var(--color-text-auf-lime);box-shadow:var(--shadow-button-primaer)}
+.workspace-shell:not(.site-teileklar) .home-concept .pc-supplement :is(.primary-button,button.primary-button):hover:not(:disabled){background:var(--color-marke-lime-hell)}

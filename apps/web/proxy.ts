@@ -15,7 +15,10 @@ export default function proxy(request: NextRequest) {
   // customer/admin permissions; an unverified cookie never grants data access here.
   const requestHeaders=new Headers(request.headers);
   const language=request.nextUrl.searchParams.get('lang');
-  requestHeaders.set('x-nexify-locale',language&&['de','nl','fr','en'].includes(language)?language:'de');
+  // Der TEILEKLAR-Shop (/teileklar) ist ein deutschsprachiger Markt und hat keine NL/FR/EN-Texte; `lang` des Dokuments muss zum
+  // tatsächlichen Text passen (WCAG 3.1.1), sonst läse ein Screenreader deutschen Text mit niederländischer Aussprache.
+  const germanOnly=path==='/teileklar'||path.startsWith('/teileklar/');
+  requestHeaders.set('x-nexify-locale',!germanOnly&&language&&['de','nl','fr','en'].includes(language)?language:'de');
   const response=NextResponse.next({request:{headers:requestHeaders}});
   if(privateRoute(path,protectedPaths)){response.headers.set('Cache-Control','private, no-store');response.headers.set('Vary','Cookie, Authorization');response.headers.set('X-Robots-Tag','noindex, nofollow');}
   return response;
