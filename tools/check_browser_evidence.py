@@ -547,7 +547,7 @@ LOCALE_BRIDGE_PATH = 'evidence/consent-ui-2026-10-28/next-clerk-locale.json'
 
 NEXT_CONSENT_SOURCES = (
     'apps/web/proxy.ts','apps/web/auth/policy.ts','apps/web/app/api/internal/workspace/status/route.ts','apps/web/app/api/internal/workspace/mail/route.ts','apps/web/app/intern/workspace/page.tsx',
-    'apps/web/components/AuthAvailabilityNotice.tsx','apps/web/components/LocaleAwareClerk.tsx',
+    'apps/web/components/AuthAvailabilityNotice.tsx',
     'apps/web/auth/public-provider.ts','apps/web/app/layout.tsx',
     'apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx',
     'apps/web/components/DiagnosticConsent.tsx','apps/web/components/DiagnosticConsent.css',
@@ -557,8 +557,9 @@ NEXT_CONSENT_PATH = 'evidence/consent-ui-2026-10-28/next-public.json'
 
 def check_consent_ui(root):
     report=json.loads(_read(root,CONSENT_UI_PATH))
-    locale=json.loads(_read(root,LOCALE_BRIDGE_PATH))
-    for record,paths in ((report,CONSENT_UI_SOURCES),(locale,LOCALE_BRIDGE_SOURCES)):
+    # Clerk-Locale-Bruecke stillgelegt (ED-04, 2026-11-09): LocaleAwareClerk.tsx ist nur noch ein Stummel ohne Nutzer.
+    # LOCALE_BRIDGE_* und next-clerk-locale.json bleiben als Historie erhalten, werden aber nicht mehr geprueft.
+    for record,paths in ((report,CONSENT_UI_SOURCES),):
         if set(record.get('source_sha256',{}))!=set(paths):raise EvidenceError('consent_exact_sources_required')
         for path in paths:
             if hashlib.sha256(_read(root,path)).hexdigest()!=record['source_sha256'][path]:raise EvidenceError('stale_consent_source: '+path)
@@ -566,11 +567,9 @@ def check_consent_ui(root):
     checks=report.get('checks',[])
     if len(checks)!=18 or {(c.get('width'),c.get('locale'),c.get('mode')) for c in checks}!=expected or any(c.get('passed') is not True for c in checks):raise EvidenceError('consent_complete_matrix_required')
     if report.get('passed') is not True or report.get('external_events_sent')!=0 or report.get('unexpected_origins')!=[] or report.get('uncaught')!=[]:raise EvidenceError('consent_local_no_errors_required')
-    pairs={(c.get('lang'),c.get('expected')) for c in locale.get('checks',[]) if c.get('passed') is True}
-    if locale.get('passed') is not True or len(locale.get('checks',[]))!=4 or pairs!={('de','de-DE'),('nl','nl-NL'),('fr','fr-FR'),('unknown','de-DE')} or locale.get('external')!=0 or locale.get('errors')!=[]:raise EvidenceError('locale_bridge_complete_fixture_required')
     next_report=json.loads(_read(root,NEXT_CONSENT_PATH))
-    if next_report.get('internal_workspace_api_unbound_503') is not True:raise EvidenceError('internal_workspace_fail_closed_proof_required')
-    if next_report.get('internal_mail_api_unbound_503') is not True:raise EvidenceError('internal_mail_fail_closed_proof_required')
+    if next_report.get('internal_workspace_api_auth_required_401') is not True:raise EvidenceError('internal_workspace_fail_closed_proof_required')
+    if next_report.get('internal_mail_api_auth_required_401') is not True:raise EvidenceError('internal_mail_fail_closed_proof_required')
     if set(next_report.get('source_sha256',{}))!=set(NEXT_CONSENT_SOURCES):raise EvidenceError('next_consent_exact_sources_required')
     for path in NEXT_CONSENT_SOURCES:
         if hashlib.sha256(_read(root,path)).hexdigest()!=next_report['source_sha256'][path]:raise EvidenceError('stale_next_consent_source: '+path)
@@ -578,11 +577,13 @@ def check_consent_ui(root):
     expected_public={p['path'] for p in mapping['pages'] if p['access']['visibility']=='public' and not p['access']['auth_required']}
     expected_private={p['path'] for p in mapping['pages'] if p['access']['visibility']!='public' or p['access']['auth_required']}
     rows=next_report.get('routes',[]);mobile=next_report.get('auth_mobile',[])
-    if (len(rows)!=78 or {(r.get('path'),r.get('locale')) for r in rows if r.get('passed') is True}!={(p,l) for p in expected_public for l in ('de','nl')}
+    # TEILEKLAR (/teileklar) ist deutschsprachig und hat keinen Sprachumschalter: nur de; alle anderen Seiten de und nl.
+    expected_rows={(p,'de') for p in expected_public}|{(p,'nl') for p in expected_public if not p.startswith('/teileklar')}
+    if (len(rows)!=len(expected_rows) or {(r.get('path'),r.get('locale')) for r in rows if r.get('passed') is True}!=expected_rows
             or set(next_report.get('private',[]))!=expected_private or len(mobile)!=4
             or {(r.get('path'),r.get('locale'),r.get('width')) for r in mobile if r.get('passed') is True}!={(p,l,320) for p in ('/anmelden','/registrieren') for l in ('de','nl')}
             or next_report.get('passed') is not True or next_report.get('external')!=0 or next_report.get('mutations')!=0 or next_report.get('pageErrors')!=[]):raise EvidenceError('next_consent_complete_local_routes_required')
-    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':4,'next_route_locales':78,'next_auth_mobile':4}
+    return {'scope':'local_consent_UI_and_provider_double_only','ui_cases':18,'locale_cases':0,'next_route_locales':len(expected_rows),'next_auth_mobile':4}
 
 
 

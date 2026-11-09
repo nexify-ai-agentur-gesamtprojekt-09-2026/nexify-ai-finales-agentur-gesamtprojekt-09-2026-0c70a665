@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-09T10:23:50.725Z",
+  "observed_at": "2026-11-09T11:27:24.496Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "9e6e116330400b375fbc42fa1a5d96288ba54815725dc9a4cf3496370fcdb04e",
     "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
@@ -128,7 +128,7 @@
     "apps/web/lib/invoice.ts": "b142e2b4b41180d32120b1e4b92c9f0becad60e208ffffd5c30f206aa22e72a4",
     "apps/web/lib/mailing.ts": "ba177524598d4e11fee211c02f4c275019e1e59ed8a8951b5c5ba567f4ec6771",
     "apps/web/lib/page-faq.ts": "15691592f75f915c51722759b1d43d373553d5008fd26f566763268f21142b00",
-    "apps/web/lib/page-seo.ts": "ad872a6bdffcc2ce722d3bb42db187f53de673c73547916c4cd8210385eb7e54",
+    "apps/web/lib/page-seo.ts": "ed13000937cb4d9e040ef6819b8a73a9d3acd0f11e1eef17a4d813c660ddd0f1",
     "apps/web/lib/page-types.ts": "db02bf602f1a598efff25e951d7e809737e8604059580529da8ff794af7c60fa",
     "apps/web/lib/project-files.ts": "458a8bef0abfe106938d8e877885c2677a2b2763bf33a45cab6cfc381de721ba",
     "apps/web/lib/shop-server.ts": "bd8e22410c926982df0ecbf341dc62caaed052c6451371719e8d8bc86254a02f",

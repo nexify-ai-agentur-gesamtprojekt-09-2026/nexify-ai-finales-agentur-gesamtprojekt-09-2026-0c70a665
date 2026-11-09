@@ -1,6 +1,6 @@
 import AuthForms from "../../../components/shop/AuthForms";
-import {routeMetadata} from "../../../lib/page-seo";
-export const generateMetadata = () => routeMetadata("signup", false);
+import {routeMetadata,localeOf} from "../../../lib/page-seo";
+export const generateMetadata = async ({searchParams}:{searchParams:Promise<{lang?:string|string[]}>}) => routeMetadata("signup", false, localeOf((await searchParams).lang));
 export default function SignUpPage() {
   return <AuthForms mode="register" />;
 }

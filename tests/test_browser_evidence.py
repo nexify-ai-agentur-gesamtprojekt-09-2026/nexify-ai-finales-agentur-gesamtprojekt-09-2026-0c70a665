@@ -498,7 +498,7 @@ class ConsentUIEvidenceTests(unittest.TestCase):
 
     def test_mail_fail_closed_proof_cannot_be_omitted(self):
         path=self.root/checker.NEXT_CONSENT_PATH;report=json.loads(path.read_text())
-        report.pop('internal_mail_api_unbound_503',None);path.write_text(json.dumps(report))
+        report.pop('internal_mail_api_auth_required_401',None);path.write_text(json.dumps(report))
         with self.assertRaisesRegex(checker.EvidenceError,'internal_mail_fail_closed'):
             checker.check_consent_ui(self.root)
 
