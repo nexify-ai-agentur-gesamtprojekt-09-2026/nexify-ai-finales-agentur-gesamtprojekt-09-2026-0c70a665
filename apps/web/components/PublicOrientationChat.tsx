@@ -11,9 +11,9 @@ declare const __NEXIFY_STATIC_ORIENTATION__:boolean;
 
 const copy={
   "de": {
-    "title": "Was haben Sie vor?",
+    "title": "Was planen Sie?",
     "mode": "Leistungen finden",
-    "intro": "Beschreiben Sie kurz Ihr Vorhaben oder wählen Sie einen Bereich. Hier finden Sie passende Informationen und den Weg zum persönlichen Gespräch.",
+    "intro": "Wählen Sie ein Thema oder beschreiben Sie Ihr Projekt.",
     "label": "Wobei können wir Ihnen helfen?",
     "placeholder": "Zum Beispiel: Ich möchte meine Website erneuern …",
     "send": "Informationen anzeigen",
@@ -29,7 +29,7 @@ const copy={
   "nl": {
     "title": "Wat bent u van plan?",
     "mode": "Diensten vinden",
-    "intro": "Beschrijf kort uw plan of kies een onderwerp. Hier vindt u passende informatie en de weg naar een persoonlijk gesprek.",
+    "intro": "Kies een onderwerp of beschrijf uw project.",
     "label": "Waarmee kunnen we u helpen?",
     "placeholder": "Bijvoorbeeld: Ik wil mijn website vernieuwen …",
     "send": "Informatie tonen",
@@ -45,7 +45,7 @@ const copy={
   "fr": {
     "title": "Quel est votre projet ?",
     "mode": "Trouver une prestation",
-    "intro": "Décrivez brièvement votre projet ou choisissez un sujet. Retrouvez les informations utiles et le contact pour en discuter.",
+    "intro": "Choisissez un sujet ou décrivez votre projet.",
     "label": "Comment pouvons-nous vous aider ?",
     "placeholder": "Par exemple : je souhaite refaire mon site …",
     "send": "Afficher les informations",
@@ -61,7 +61,7 @@ const copy={
   "en": {
     "title": "What are you planning?",
     "mode": "Find a service",
-    "intro": "Briefly describe your project or choose a topic. Find relevant information and the route to a personal conversation.",
+    "intro": "Choose a topic or describe your project.",
     "label": "How can we help?",
     "placeholder": "For example: I would like to update my website …",
     "send": "Show information",
@@ -284,6 +284,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
  useEffect(()=>{if(!busy&&lastSubmitted.current&&document.activeElement===document.body&&composerInput.current?.offsetParent!==null)composerInput.current?.focus();},[busy]);
  async function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy)return;lastSubmitted.current=value;setDraft("");try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{setDraft(previous=>previous||value);}}
  return <section className="public-orientation" aria-label={text.title}>
+  <div className="orientation-content">
   <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map(message=><article className={"orientation-message role-"+message.role} key={message.id}><strong>{message.role==="user"?text.you:text.assistant}</strong>{message.parts.map((part,index)=>{
    if(part.type==="text")return <p key={index}>{message.role==="assistant"?guidedText(part.text,pages):part.text}</p>;
@@ -293,7 +294,8 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
   })}</article>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
+  </div>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
   {busy&&<p className="connection-note" role="status">{text.waiting}</p>}<p className="connection-note">{text.privacy}</p>
  </section>;
 }
@@ -313,6 +315,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
   catch{setError(true);}
  }
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="local-public-pages">
+  <div className="orientation-content">
   <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
@@ -320,7 +323,8 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
   </div>)}</div>
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
+  </div>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
   <p className="connection-note">{text.privacy}</p>
  </section>;
 }
