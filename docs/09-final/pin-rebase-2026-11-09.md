@@ -45,3 +45,21 @@ Nur Pins, deren aktuelle Bytes durch einen heute real erhobenen, bestandenen Nac
 - `apps/site/tests/seo-sitemap.test.mjs`
 
 Gelöscht (Entscheidungsvorschlag Pascal Courbois: Registerzeile entfernen oder ersetzen): `apps/web/components/PresenterEditorial.css`, `apps/web/components/PresenterScene.tsx`, `apps/web/public/sitemap.xml`.
+
+## Nachtrag DS-REWORK (09.11.2026)
+
+Die Pins betreffen Dateien, die der DS-REWORK bewusst geändert hat (Tokens), oder Belege, die danach mit echten Browserläufen neu erhoben wurden (Identity-Hero vite und next, Ausnahmeerfassung vite und next, Critical-Lauf, Text-Spacing; alle Exit 0, Quelle: Harnesses in `apps/site/tests/`). Die alten Fassungen liegen in `superseded/` (`*.pre-ds-rework-2026-11-09.json`). Die Gesamtsuite steht danach unverändert auf 18 Failures und 4 Errors; keine neuen.
+
+| Datei | alter Pin | neuer Pin |
+|---|---|---|
+| `config/design-tokens.json` | `6e699c0082f4…` | `1482e2fa0e40…` |
+| `docs/design/detail-browser-evidence.json` | `7e632cf96a63…` | `8a26dd144e36…` |
+| `evidence/identity-hero-2026-10-28/next.json` | `261ae864584f…` | `0401d8f15ffd…` |
+| `evidence/identity-hero-2026-10-28/vite.json` | `6302a6b1309c…` | `ba0180077b16…` |
+| `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` | `848b47e1df14…` | `e439c85f10a8…` |
+| `evidence/observability-integration-2026-10-28/browser-exceptions-vite.json` | `30c0c184781b…` | `4a7b5703fb4c…` |
+| `evidence/one-app-2026-10-27/critical-browser-fresh.json` | `7e632cf96a63…` | `8a26dd144e36…` |
+| `evidence/one-app-2026-10-27/text-spacing.json` | `49211abd8719…` | `8f0ef3c7b587…` |
+| `packages/tokens/tokens.css` | `3ca2f06408bf…` | `218355ed5fdd…` |
+| `packages/tokens/tokens.json` | `44735b27c2ee…` | `5b9a4eb32842…` |
+| `packages/tokens/tokens.ts` | `ffb72538d182…` | `5294aa6ed39b…` |

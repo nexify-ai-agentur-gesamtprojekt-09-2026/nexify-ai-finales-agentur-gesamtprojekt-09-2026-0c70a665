@@ -46,3 +46,15 @@ neu erhoben werden (siehe KS-003). Das ist ein eigenes Paket, kein Nebeneffekt.
 3. Radien auf die Skala zurückführen oder die Skala bewusst erweitern und in `design-rules.json` festhalten.
 4. Seitengrund und Flächenstaffelung an den Prototyp angleichen.
 5. Browser-Belege neu erheben, Pins mit Begründung nachziehen, `page_quality_audit.py` und Resize-/Textabstands-Prüfung erneut laufen lassen.
+
+## Umsetzung DS-REWORK (Prototypen-Richtung, auf Weisung des Inhabers)
+
+Entscheidung: Hochwertige Vorgabe = Prototypen und Designsystem (Inhaberaussage 2026-11-09). Die Regel zum Lime (Richtungswechsel 05.11.2026: nie als Fläche oder Fließtext) bleibt gewahrt; Lime-Button und Champagner-Akzent sind unverändert.
+
+- `config/design-tokens.json` und `packages/tokens/`: Karten- und Kleinkarten-Verlauf `#303634` nach `#262A28`, Seitengrund auf `#242826` mit Lichtflecken, Band `#1E2220`, Graphit-Skala und Atelier-Flächen auf die Graphit-Werte der Vorgabe, Atelier- und Home-Medien-Radius 28/36 px auf 20 px (Skala).
+- `apps/web/app/masterplan-tokens.css`: zweite Token-Ebene mit festen Marine-Werten (`#080A0F`, `#0F131A`, `#141A22`) auf Graphit gesetzt.
+- 26 flache Atelier-Kartenflächen in acht CSS-Dateien auf `var(--gradient-karte)`.
+- Lokale Prüfung mit Kontrastmessung (`page_quality_audit.py --contrast`, de, 43 Seiten, 2 Viewports): 0 FEHLER, 0 WARNUNG.
+- Belege neu erhoben, Pins nachgezogen (`pin-rebase-2026-11-09.md`, Nachtrag DS-REWORK).
+
+Offen: Radien 24 px an einzelnen Komponenten und Footer-Pfeil (`DiagnosticConsent.css`) sind nicht Teil dieses Schritts.

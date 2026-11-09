@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-09T07:56:16.148Z",
+  "recorded_at": "2026-11-09T10:40:32.356Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -60,7 +60,7 @@
     "apps/web/app/globals.css": "c7c19d6faed39c9756273fd2ee04245f3b69e542da51633ff91d4034c140ee44",
     "apps/web/components/HomeContent.tsx": "adf9b8495833e0ca99a4bdd3190453467564ef35c5433e1d609e4d6c62bc73b8",
     "apps/web/components/Workspace.tsx": "b1160ea73b5834c611016dcf96efb28179a524bc4353753f02c2b53cb12c8c28",
-    "apps/web/components/PageConcept.css": "c1a17934da957b7fc3f39e758f2042fa57b539f2acc1fec2163ce9e525444a34",
+    "apps/web/components/PageConcept.css": "285759e75ce3b15337a9dd36219e193e0fefcb55e8eca9c548b4209cebc548d8",
     "config/site-map.json": "6fbbbf4a536591da57b13d0174839e68e632d3b99e1ba4307060b9cd67cb3145"
   },
   "auxiliary_source_sha256": {
@@ -80,12 +80,12 @@
     "apps/web/components/IdentityHero.css": "73037a5ff7d5df5cbab771eb2acd9eff65c39679088bd27843e5aa7da5aa3e52",
     "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
     "apps/site/tests/browser-identity-hero.mjs": "51ba02a106fe649eec7bc03f0aaf7387308af8fae1b2786344fde1bd48fc7671",
-    "packages/tokens/tokens.css": "3ca2f06408bfab8c2b4b5fd79f9f9c5c22b8adb234e0a5f2d826ae3d63b9a2de",
+    "packages/tokens/tokens.css": "218355ed5fdd0c2c9e4d361311b4071de8b9618406c34a0a1c5d592a62efca15",
     "apps/site/tests/browser-critical.mjs": "0d333f2eb200f55ee7e218e86060972b2a33ed9c643a8c8ae6a73a7d15de80e4"
   },
   "sdk_source_sha256": {
     "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
-    "apps/web/components/PublicOrientationChat.css": "410a8f3e68851b4ede24db96cbf6aae00d8e4a19b661a1247f5ea5ef4878b138",
+    "apps/web/components/PublicOrientationChat.css": "699168c3051f2c5ad01b79a9466896e6996601e7a6b31a8f50c0e65bf09f34e3",
     "api/agent-chat.ts": "096928161c19778276d107d8731a38a73c1d5cb9b22a02575cc70f46d1d218b9",
     "packages/agent-runtime/public-orientation.ts": "1116d2a38435f0caf43f76b9a30bb07b732b7484cbcb110cfcee9fb31d507388",
     "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
@@ -147,7 +147,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-09T07:56:16.148Z",
+    "recorded_at": "2026-11-09T10:40:32.356Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
