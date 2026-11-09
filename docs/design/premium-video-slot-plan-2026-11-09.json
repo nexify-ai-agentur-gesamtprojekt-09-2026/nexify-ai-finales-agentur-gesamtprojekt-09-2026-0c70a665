@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-09",
+  "owner": "Pascal Courbois / Art Director / UX-Frontend",
+  "writer": "/root",
+  "canonical_order_reference": "config/acceptance-coverage.json requirements_reconciliation current_execution",
+  "media_approval_reference": "config/page-media-registry.json",
+  "new_video_limit": "At most two new videos per four hours, as reported by user; no generator quota readback",
+  "daily_intake": "Review delivered files once daily; do not generate or publish without the applicable QA and release approval",
+  "inventory": {
+    "source": "current extracted source tree; compare with deployed build before release",
+    "route_count": 53,
+    "route_hero_images": [
+      {
+        "page_id": "home",
+        "path": "/",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "services",
+        "path": "/leistungen",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-03-loft-studio-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "websites",
+        "path": "/leistungen/websites",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-14-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "automation",
+        "path": "/leistungen/agenten-automatisierung",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-07-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "apps-portals",
+        "path": "/leistungen/apps-portale",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-11-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "scope",
+        "path": "/leistungsumfang",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-05-atrium-walk-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "solutions",
+        "path": "/loesungen",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-15-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "pricing",
+        "path": "/preise-ablauf",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-06-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "knowledge",
+        "path": "/wissen",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-01-meeting-table-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "knowledge-start",
+        "path": "/wissen/projekt-vorbereiten",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-10-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "company",
+        "path": "/unternehmen",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-04-studio-desk-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "contact",
+        "path": "/kontakt",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-09-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "nex2fly",
+        "path": "/produkte/nex2fly",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-11-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "one",
+        "path": "/produkte/one",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-12-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "api",
+        "path": "/produkte/api",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-16-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "imprint",
+        "path": "/impressum",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "privacy",
+        "path": "/datenschutz",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "terms",
+        "path": "/vertragsgrundlagen",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "ai-notice",
+        "path": "/ki-hinweise",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "accessibility",
+        "path": "/barrierefreiheit",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "cookies",
+        "path": "/cookies",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "login",
+        "path": "/anmelden",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "signup",
+        "path": "/registrieren",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-home",
+        "path": "/teileklar",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-08-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "tk-search",
+        "path": "/teileklar/suche",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-categories",
+        "path": "/teileklar/kategorien",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-category",
+        "path": "/teileklar/kategorie",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-product",
+        "path": "/teileklar/produkt",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-cart",
+        "path": "/teileklar/warenkorb",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-checkout",
+        "path": "/teileklar/kasse",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-fitment",
+        "path": "/teileklar/fahrzeug-und-passung",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-16-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "tk-appointments",
+        "path": "/teileklar/termine",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-10-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "tk-vouchers",
+        "path": "/teileklar/gutscheine",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-06-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "tk-partner",
+        "path": "/teileklar/partner-werden",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-07-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "tk-workshop",
+        "path": "/teileklar/werkstatt",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-13-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "tk-legal",
+        "path": "/teileklar/rechtliches",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-shop",
+        "path": "/teileklar/shop",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-reifenrechner",
+        "path": "/teileklar/reifenrechner",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-batterie",
+        "path": "/teileklar/batterie-berater",
+        "visibility": "public",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "customer-portal",
+        "path": "/portal/kunde",
+        "visibility": "private",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "api-console",
+        "path": "/portal/api",
+        "visibility": "private",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "affiliate-portal",
+        "path": "/portal/affiliate",
+        "visibility": "private",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-account",
+        "path": "/teileklar/konto",
+        "visibility": "private",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-partner-portal",
+        "path": "/teileklar/partnerportal",
+        "visibility": "private",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "tk-neighbourhood",
+        "path": "/teileklar/nachbarschaft",
+        "visibility": "private",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "internal-workspace",
+        "path": "/intern/workspace",
+        "visibility": "internal",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "internal-inbox",
+        "path": "/intern/posteingang",
+        "visibility": "internal",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "internal-control",
+        "path": "/intern/leitstand",
+        "visibility": "internal",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "internal-admin",
+        "path": "/intern/verwaltung",
+        "visibility": "internal",
+        "image": null,
+        "image_status": "no_editorial_hero_image"
+      },
+      {
+        "page_id": "aifly-oracle",
+        "path": "/produkte/aifly-oracle",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-01-meeting-table-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "nex-agentic",
+        "path": "/produkte/nex-agentic-aifly",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-07-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "skills-mcp",
+        "path": "/produkte/skills-mcp",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-16-1920.webp",
+        "image_status": "retained"
+      },
+      {
+        "page_id": "portals",
+        "path": "/portale",
+        "visibility": "public",
+        "image": "/media/higgsfield/hf-09-1920.webp",
+        "image_status": "retained"
+      }
+    ],
+    "brand_image_catalog": {
+      "welcome": "/media/higgsfield/hf-01-meeting-table-1920.webp",
+      "home": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+      "atelier": "/media/higgsfield/hf-03-loft-studio-1920.webp",
+      "company": "/media/higgsfield/hf-04-studio-desk-1920.webp",
+      "contact": "/media/higgsfield/hf-05-atrium-walk-1920.webp",
+      "scope": "/media/higgsfield/hf-06-1920.webp",
+      "automation": "/media/higgsfield/hf-07-1920.webp",
+      "logistics": "/media/higgsfield/hf-08-1920.webp",
+      "entrance": "/media/higgsfield/hf-09-1920.webp",
+      "planning": "/media/higgsfield/hf-10-1920.webp",
+      "workspace": "/media/higgsfield/hf-11-1920.webp",
+      "production": "/media/higgsfield/hf-12-1920.webp",
+      "process": "/media/higgsfield/hf-13-1920.webp",
+      "design": "/media/higgsfield/hf-14-1920.webp",
+      "marketing": "/media/higgsfield/hf-15-1920.webp",
+      "integration": "/media/higgsfield/hf-16-1920.webp",
+      "finish": "/media/higgsfield/hf-17-cutout-1920.webp"
+    },
+    "home_gallery": [
+      "design",
+      "automation",
+      "logistics"
+    ],
+    "home_product_cards": [
+      "workspace",
+      "production",
+      "integration",
+      "logistics"
+    ],
+    "shared_finish_image": "/media/higgsfield/hf-17-cutout-1920.webp",
+    "shop_product_images": "dynamic catalog images; preserve each validated product image, never replace with a brand film",
+    "explainer_modules_in_existing_registry": 56,
+    "video_asset_collections": [
+      {
+        "directory": "/media/home-loops",
+        "videos": 8,
+        "posters": 4,
+        "status": "source_inventory_not_all_active"
+      },
+      {
+        "directory": "/media/runway",
+        "videos": 2,
+        "posters": 1,
+        "status": "source_inventory_not_all_active"
+      },
+      {
+        "directory": "/media/atelier/films",
+        "videos": 13,
+        "posters": 12,
+        "status": "source_inventory_not_all_active"
+      },
+      {
+        "directory": "/media/home-review",
+        "videos": 8,
+        "posters": 3,
+        "status": "source_inventory_not_all_active"
+      }
+    ],
+    "component_video_surfaces": [
+      "IdentityHero/AtelierFilm",
+      "TrioScene",
+      "PresenterVideo",
+      "HomeStudioScene (previous version; no longer mounted after hero change)"
+    ]
+  },
+  "slots": [
+    {
+      "id": "home-hero-personal",
+      "priority": 1,
+      "page_id": "home",
+      "image": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+      "video_source": "gemini_generated_video_554998b1.mp4",
+      "video_sha256": "027d8152065ea2cd3fd4c79897ba9dc37b42176a7dbdaeda6945fadca7416ae3",
+      "video_version": "nexify-personal-intro-v1",
+      "target_media": "/media/home-review/pascal-studio-scene-original-20261109.mp4",
+      "visual_match": "Pascal in studio; chosen by user for homepage",
+      "technical_check": "1280x720 H.264/AAC 10.026667 s; mean -20.7 dB, peak -1.1 dB; browser/identity/lip/speech/caption review pending",
+      "approval_status": "user_placement_approved; art_direction_identity_audio_visual_release_pending",
+      "publication_status": "prior_silent_scene_live_in_private_sites_v4; audible_hero_code_prepared_not_released",
+      "fallback": "existing approved image remains video poster and decode fallback",
+      "rollback": "restore private Sites v4 and retain video source"
+    },
+    {
+      "id": "suite-factory-intro",
+      "priority": 2,
+      "page_id": "nex2fly",
+      "image": "/media/higgsfield/hf-11-1920.webp",
+      "video_source": "gemini_generated_video_42e97e90.mp4",
+      "video_sha256": "3f9126c4345e92a9295327ce5ee8e72092e6548afce33377433860e27bfc9b77",
+      "video_version": "nexify-factory-intro-v1",
+      "visual_match": "Pascal with NeX and AIFly ORACLE in factory/product scene; user earmarked for Suite",
+      "technical_check": "1280x720 H.264/AAC 10.026667 s; mean -19.6 dB, peak -0.2 dB; browser/identity/lip/speech/caption review pending",
+      "approval_status": "placement_candidate; art_direction_identity_audio_visual_release_pending",
+      "publication_status": "not_published",
+      "fallback": "retain /media/higgsfield/hf-11-1920.webp",
+      "rollback": "keep current Suite image"
+    }
+  ],
+  "quality_gates": [
+    "identity matches approved Pascal master and NeX/Oracle designs",
+    "composition/image quality and brand accuracy approved by Art Director",
+    "lip motion and speech comprehensibility manually reviewed",
+    "audio intelligibility and peak measured; no clipping",
+    "verified captions/transcript for actual spoken audio",
+    "desktop/mobile decode, loading, poster and playback failure",
+    "audible autoplay attempted; browser policy fallback visible and operable",
+    "reduced motion does not autoplay",
+    "source/release commit, checks, deployment and domain readback"
+  ]
+}
