@@ -83,6 +83,10 @@ PAGE_JS = r"""
     !e.closest('[aria-hidden=true], .visually-hidden') && !inScroller(e)).slice(0, 5).map(label);
   out.lay.clipped = q('main h1, main h2, main h3, main p, main a, main button, main li').filter(e => vis(e) &&
     e.scrollWidth > e.clientWidth + 2 && ['hidden', 'clip'].includes(getComputedStyle(e).overflowX)).slice(0, 5).map(label);
+  // Text, der buchstabenweise umbricht (Spalte zu schmal): Zeilenzahl nahe der Zeichenzahl bei kleiner Breite
+  out.lay.stacked = q('main *').filter(e => { const t = (e.innerText || '').trim(); if (t.length < 6 || !vis(e) || e.children.length > 2) return false;
+    const r = e.getBoundingClientRect(), c = getComputedStyle(e), lh = parseFloat(c.lineHeight) || parseFloat(c.fontSize) * 1.3;
+    return r.width < 80 && r.height / lh >= t.length * 0.6; }).slice(0, 4).map(e => label(e) + ' „' + e.innerText.trim().slice(0, 24) + '“');
   const small = new Map();
   for (const e of q('a[href], button, select, input:not([type=hidden]), textarea, summary, [role=button]')) {
     if (!vis(e) || e.closest('.visually-hidden')) continue;
@@ -203,9 +207,33 @@ def measure_contrast(page):
             png = page.screenshot(type="png")
             page.evaluate("document.getElementById('qa-hide-fixed').media = 'not all'")
             arr = np.asarray(Image.open(io.BytesIO(png)).convert("RGB"))
+            arr_vis = None
+            if any(meta[r[0]]["gradient"] for r in group):
+                # Verlaufstext: Aufnahme mit sichtbarem Text, Glyphenpixel gegen den Hintergrund der Aufnahme ohne Text
+                page.evaluate("m => { document.getElementById('qa-hide-fixed').media = m }", "all" if mode == "flow" else "not all")
+                page.evaluate("document.getElementById('qa-hide-text').media = 'not all'")
+                arr_vis = np.asarray(Image.open(io.BytesIO(page.screenshot(type="png"))).convert("RGB"))
+                page.evaluate("document.getElementById('qa-hide-text').media = 'all'; document.getElementById('qa-hide-fixed').media = 'not all'")
             for i, left, top, w, h, op in group:
                 m = meta[i]
                 done.add(i)
+                if m["gradient"] and arr_vis is not None:
+                    x0, y0 = max(int(left), 0), max(int(top), 0)
+                    x1, y1 = min(int(left + w) + 1, arr.shape[1]), min(int(top + h) + 1, arr.shape[0])
+                    if x1 <= x0 or y1 <= y0:
+                        continue
+                    bgp, vis = arr[y0:y1, x0:x1].astype(float), arr_vis[y0:y1, x0:x1].astype(float)
+                    glyph = np.abs(vis - bgp).sum(axis=2) > 330  # (nahezu) deckende Glyphenpixel; Kantenpixel mischen Hintergrund ein und verfälschen
+                    if glyph.sum() < 12:
+                        continue
+                    checked += 1
+                    gl, bl = _lum(vis[glyph]), _lum(bgp[glyph])
+                    ratio = (np.maximum(gl, bl) + 0.05) / (np.minimum(gl, bl) + 0.05)
+                    worst = float(np.percentile(ratio, 15))
+                    need = 3.0 if m["large"] else 4.5
+                    if worst < need:
+                        bad.append({"el": m["el"] + " (Verlaufstext)", "text": m["text"], "cr": round(worst, 2), "need": need, "size": m["size"]})
+                    continue
                 if m["gradient"] or m["fg"] is None:
                     continue
                 x0, y0 = max(int(left), 0), max(int(top), 0)
@@ -304,7 +332,7 @@ def judge(pid, vp, res, noindex_ids, lang=""):
             f.append(("HINWEIS", "IMG", f"stark beschnitten {i['crop']:.0%}: {i['src']}"))
     if res["lay"]["overflow"] > 1:
         f.append(("FEHLER", "LAY", f"horizontaler Überlauf {res['lay']['overflow']}px"))
-    for k, label in (("beyond", "ragt über den Viewport"), ("clipped", "Text abgeschnitten")):
+    for k, label in (("beyond", "ragt über den Viewport"), ("clipped", "Text abgeschnitten"), ("stacked", "Text bricht buchstabenweise um")):
         if res["lay"][k]:
             f.append(("FEHLER", "LAY", f"{label}: {', '.join(res['lay'][k])}"))
     if res["a11y"]["small"]:
