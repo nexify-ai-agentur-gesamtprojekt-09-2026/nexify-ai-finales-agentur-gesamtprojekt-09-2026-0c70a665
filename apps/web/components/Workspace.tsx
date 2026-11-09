@@ -252,11 +252,12 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const contact=pages.find(page=>page.path==="/kontakt")?.contact_channels?.find(channel=>channel.type==="email"&&channel.address==="mail@nexifyai.cloud");
 
   useEffect(() => {
-    try { setChatWidthState(readChatWidth()); setOpen(sessionStorage.getItem("nx-chat-open")==="1"); } catch {}
     // The URL is authoritative so server-rendered translations and SEO agree.
     const query=window.matchMedia("(max-width: 820px)");
-    setMobile(query.matches);if(query.matches)setOpen(false);
-    const resized=()=>setMobile(query.matches);query.addEventListener("change",resized);
+    const preferredOpen=()=>{try{const saved=sessionStorage.getItem("nx-chat-open");return saved==="1"||(saved===null&&site==="nexify");}catch{return site==="nexify";}};
+    try { setChatWidthState(readChatWidth()); } catch {}
+    setMobile(query.matches);setOpen(!query.matches&&preferredOpen());
+    const resized=()=>{setMobile(query.matches);setOpen(!query.matches&&preferredOpen());};query.addEventListener("change",resized);
     if((window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__){setError("offline");return()=>query.removeEventListener("change",resized);}
     fetch("/api/session",{cache:"no-store"}).then(async response => {
       if(!response.ok)throw new Error("session");
