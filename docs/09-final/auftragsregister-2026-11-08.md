@@ -78,7 +78,7 @@ Offen: (1) Die neuen Nachweisdateien sind noch nicht als eigene Zeilen in `confi
 Europe/Amsterdam sind **nicht nachgewiesen**. Ein Bericht darf erst als „zugestellt“ gelten, wenn Kanal und Empfänger
 benannt und die Zustellung verifiziert sind. Bis dahin steht der Stand in `PROGRESS.md` und in diesem Register.
 
-## 4. Inhaberentscheidungen (Pascal, 2026-11-09)
+## 5. Inhaberentscheidungen (Pascal, 2026-11-09)
 
 Quelle: Aussagen des Inhabers in der laufenden Sitzung. Aktuelle Nutzerentscheidungen gelten vor älteren Entwürfen, innerhalb der unveränderten Schutzgrenzen des Mandats (nichts löschen, keine Secret-Transfers, keine Zahlungen, keine Sicherheitslockerung, keine Freigabeumgehung durch Dritte).
 
