@@ -25,7 +25,7 @@
  background:var(--color-atelier-canvas);
  transition:none;
 }
-.workspace-shell .website { background:var(--gradient-atelier-light),var(--color-atelier-canvas); }
+.workspace-shell .website { background:var(--gradient-atelier-ambient),var(--color-atelier-canvas); }
 .workspace-shell .site-header { margin-inline:var(--space-5); padding-inline:var(--space-5); border-bottom-color:var(--color-linie-fein); background:transparent; min-height:104px; }
 .workspace-shell .header-cta { border-radius:var(--radius-pille); background:transparent; color:var(--color-atelier-ink); border:1px solid var(--color-atelier-glass-edge); box-shadow:var(--shadow-kleine-karte); }
 .workspace-shell .header-cta:hover { background:var(--color-atelier-raised); border-color:var(--color-atelier-champagne); }
