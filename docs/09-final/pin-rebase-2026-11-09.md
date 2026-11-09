@@ -90,3 +90,16 @@ Public-Experience-Harness an das aktuelle UI angepasst und mit echtem Lauf besta
 | `apps/site/tests/public-video-assets.test.mjs` | node --test tests/seo-sitemap.test.mjs tests/public-video-assets.test.mjs: 26 von 26 OK (heute) |
 
 Bewusst offen bleiben `apps/web/components/PresenterScene.tsx` (Zeile REC-MEDIA-01 und der Harness `browser-scene-images.mjs` binden die gelöschte Datei; die Zeile braucht ein neues Urteil über die Zwischenbilder), `PROGRESS.md`, `apps/shop-api/requirements.in`, `apps/web/app/[...slug]/page.tsx`, `apps/web/app/page.tsx`, `apps/web/next.config.ts`, `config/page-explainers.json`, `config/page-media-registry.json` und `apps/site/tests/browser-scene-images.mjs`.
+
+## Nachtrag Footer-Pfeil (09.11.2026)
+
+`DiagnosticConsent.css` bekommt statt des Browser-Standardpfeils einen eigenen Chevron (dreht beim Öffnen, Reduced Motion ohne Übergang, Zielhöhe 48 px bleibt). Fünf gebundene Belege mit echten Läufen neu erhoben, alte Fassungen in `superseded/` (`*.pre-footer-2026-11-09.json`).
+
+| Datei | alter Pin | neuer Pin | Beleg |
+|---|---|---|---|
+| `evidence/consent-ui-2026-10-28/browser-consent-ui.json` | `e01df765ed05…` | `526072b3bf9d…` | heute neu erhobener Consent-UI-Lauf (18 Checks, passed) |
+| `evidence/consent-ui-2026-10-28/next-public.json` | `c452eba944bc…` | `b8888c4abbad…` | heute neu erhobener Next-Lauf (70 Routen, 10 private, passed) nach dem Footer-Pfeil |
+| `evidence/observability-integration-2026-10-28/browser-exceptions-vite.json` | `4a7b5703fb4c…` | `96296be14d86…` | heute neu erhobene Ausnahmeerfassung (vite, Exit 0) |
+| `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` | `e439c85f10a8…` | `2d562005862f…` | heute neu erhobene Ausnahmeerfassung (next, Exit 0) |
+| `evidence/one-app-2026-10-27/text-spacing.json` | `59c687d965c2…` | `b86244f8b4f0…` | heute neu erhobener Text-Spacing-Lauf (129 Checks, 0 Befunde, 43 Routen) |
+| `apps/web/components/DiagnosticConsent.css` | `50931b2af39c…` | `a57940d16dac…` | Footer-Pfeil: Disclosure mit eigenem Chevron; bytegebunden in allen fünf heute neu erhobenen Belegen |

@@ -1,5 +1,11 @@
 .structured-footer .diagnostic-consent {grid-column:1 / -1;min-width:0;border-top:1px solid var(--color-linie-mittel);padding-top:16px;}
-.diagnostic-consent summary {min-height:var(--target-min);display:list-item;align-content:center;cursor:pointer;overflow-wrap:anywhere;}
+.diagnostic-consent summary {min-height:var(--target-min);display:flex;align-items:center;gap:10px;list-style:none;cursor:pointer;overflow-wrap:anywhere;font-size:14px;color:var(--color-text-sekundaer);}
+.diagnostic-consent summary::-webkit-details-marker {display:none;}
+.diagnostic-consent summary:hover {color:var(--color-atelier-ink);}
+/* Eigener Pfeil statt des Browser-Standards: ruhiger Winkel, dreht beim Öffnen. */
+.diagnostic-consent summary::after {content:"";flex:none;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform var(--motion-feedback,150ms) ease;}
+.diagnostic-consent[open] summary::after {transform:translateY(2px) rotate(-135deg);}
+@media (prefers-reduced-motion:reduce) {.diagnostic-consent summary::after {transition:none;}}
 .diagnostic-consent-content {display:grid;gap:16px;max-width:70ch;padding-block:16px;overflow-wrap:anywhere;}
 .diagnostic-consent-content p {margin:0;line-height:1.6;font-size:14px;color:var(--color-text-sekundaer);}
 .diagnostic-consent-actions {display:flex;flex-wrap:wrap;gap:12px;}
