@@ -43,7 +43,7 @@
     }
   ],
   "source_sha256": {
-    "config/one-web-app.json": "ff2161e9fca2f73fe4ad74636aafc115f66eca1e677f3ffad9b3139dea272439",
+    "config/one-web-app.json": "65b4d8f8e73da1dd32c977696d1c14124eb6192d4aa67a8a3be519191c637252",
     "config/local-control.json": "7e85d06186c2cac9028b68d0cbda551f4ea600540c817eeef26082ec4c62b45d",
     "config/remediation-policy.json": "f32f8c29986d8abe01f62e5e3aecc325bc45dd52327d833288891e7b7c5de942",
     "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
@@ -54,12 +54,12 @@
     "tools/remediation_queue.py": "c9fb0dfb4bc634e23774a622a9c38ba869764514bd8b9e64a92e54e9b3f98840",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
-    "apps/web/proxy.ts": "feb9d0911d357eda0716c84ce17251356a511a4a10e0e7cbad19bae318c845bb",
+    "apps/web/proxy.ts": "b3981c470e226eb0415a63dba69ec340f91c283eca944004c52b17ce96f6f201",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
-    "apps/web/app/intern/workspace/page.tsx": "f22cec90ee94e96832c9cf270bb8a5aa1f1e02a7c9d898264966c46e6f289fbe",
-    "apps/site/tests/browser-workspace-read.mjs": "ae26cdcbd615bd6981241dcd718d16b1f198182677d32dc8f63fcb6a4bb8a643",
+    "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
+    "apps/site/tests/browser-workspace-read.mjs": "46b6ec84a6e99375ed3046a6c723632a24bc2c8427cac22be7ac36371036d813",
     "apps/site/tests/fixtures/workspace-server.py": "45d09f69887a0918c0c82c89042878bdf0889d1eebe2f5c211985a4c37cda2f6",
-    "apps/site/tests/fixtures/workspace-status.tsx": "4f1975cd560f5803388b3b608387b34f40c7f47c40a864bbf32e088c75b70bc8",
+    "apps/site/tests/fixtures/workspace-status.tsx": "0c2fbcb9aff846205a4774d7ec42afc9f55460eb30a3b9582e35eb28895ebed2",
     "apps/site/tests/fixtures/workspace-status.html": "9851f225b40e81ab10825dc7c8038ff1bec82653a0374337b9b8795818f6f68d"
   },
   "external": [],
