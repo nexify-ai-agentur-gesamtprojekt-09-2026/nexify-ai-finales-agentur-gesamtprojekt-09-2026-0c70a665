@@ -24,7 +24,7 @@ LOCAL_REGRESSIONS = {
     'seo_atomicity_regression': ('tools/seo_catalog.py', 'tests/test_seo_catalog.py', 'config/seo-workflow.json'),
 }
 BROWSER_SOURCES = ('apps/web/components/HomeContent.tsx', 'apps/web/components/Workspace.tsx',
-    'apps/web/components/PublicContentLayout.css', 'config/site-map.json',
+    'apps/web/components/PageConcept.css', 'config/site-map.json',
     'apps/web/components/PublicOrientationChat.tsx', 'apps/web/components/PublicOrientationChat.css',
     'api/agent-chat.ts', 'packages/agent-runtime/public-orientation.ts', 'tools/agent-preview.mjs',
     'docs/design/detail-browser-evidence.json')

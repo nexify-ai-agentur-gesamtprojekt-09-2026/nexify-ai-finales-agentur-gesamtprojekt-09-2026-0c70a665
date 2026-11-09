@@ -21,7 +21,7 @@ SOURCE_PATHS = (
     "apps/web/app/globals.css",
     "apps/web/components/HomeContent.tsx",
     "apps/web/components/Workspace.tsx",
-    "apps/web/components/PublicContentLayout.css",
+    "apps/web/components/PageConcept.css",
     "config/site-map.json",
 )
 EVIDENCE_PATH = "docs/design/detail-browser-evidence.json"

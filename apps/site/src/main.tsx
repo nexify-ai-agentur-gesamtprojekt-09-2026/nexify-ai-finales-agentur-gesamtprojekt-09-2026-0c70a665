@@ -59,6 +59,7 @@ function App(){
   void locationKey;
   useEffect(()=>{const changed=()=>setLocationKey(location.href);addEventListener('popstate',changed);addEventListener('hashchange',changed);return()=>{removeEventListener('popstate',changed);removeEventListener('hashchange',changed);};},[]);
   const adapter=useMemo(()=>({pathname:path,Link:BrowserLink,navigate:(href:string)=>{history.pushState(null,'',hashMode?'#'+href:href);window.dispatchEvent(new Event('popstate'));}}),[path,search]);
-  return <RouterProvider adapter={adapter}><PublicExperienceProvider data={experienceData}><Workspace pages={pages} accountControl={<AccountControl/>}><RouteContent page={resolveRoute(path)} pathname={path} search={search}/></Workspace></PublicExperienceProvider></RouterProvider>;
+  const initialLocale=(['de','nl','fr','en'] as const).find(l=>new URLSearchParams(search).get('lang')===l)||'de';
+  return <RouterProvider adapter={adapter}><PublicExperienceProvider data={experienceData}><Workspace pages={pages} accountControl={<AccountControl/>} initialLocale={initialLocale}><RouteContent page={resolveRoute(path)} pathname={path} search={search}/></Workspace></PublicExperienceProvider></RouterProvider>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);
