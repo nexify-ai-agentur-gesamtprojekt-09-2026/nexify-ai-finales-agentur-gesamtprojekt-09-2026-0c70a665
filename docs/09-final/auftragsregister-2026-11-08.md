@@ -1,5 +1,132 @@
 # Auftragsregister und Betriebsstand · 08.11.2026
 
+## Fortschreibung 09.11.2026 · Unified Master-GOAL
+
+Dieses Dokument bleibt das führende Aufgabenregister. Der folgende maschinenlesbare Block gehört zum selben Register; `ops/goal/STATE.json` enthält nur Laufzeitdaten des lokalen Fortsetzungsdienstes. Die private Sites-Version 5 (`49f84db097544e96fcf54ca8a8b2d5d58838cd7a`) zeigt den Hero-Film im oberen Bereich und den rechts integrierten Chat. Build, Typecheck, Design-Audit und gezielte Browserprüfungen bestanden lokal. Die öffentliche Freigabe, formale Identitäts-/Audio-/Untertitelprüfung und Gesamtprodukt-Abnahme sind offen. Rückweg ist die private Sites-Version 4.
+
+Die frühere `run.html` wurde als Gestaltungsreferenz, nicht als Laufzeitquelle verwendet. Das lokale Quellverzeichnis `/Users/gast/Documents/nexify-site-source-20261109` ist eine entpackte GitHub-Quelle ohne `.git`; Änderungen werden auf dem Draft-Branch `design/chat-orientation-2026-11-09` (PR 92) abgeglichen. Der Site-Auslieferungscheckout liegt separat unter `site-publish`. Ein lokaler Runner darf den Site-Auslieferungscheckout und fremde Mandanten nicht eigenständig schreiben.
+
+### SUB-GOAL 10 · Growth & Product Factory (09.11.2026)
+
+Verbindliche Quelle: `docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md`, SHA-256 `91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5` (bytegleich zur angelieferten Datei). Die bestehende Aufgabenwahrheit und Skill-Registry bleiben führend. Der öffentliche Chat kann derzeit ein bearbeitbares Briefing erzeugen und zum Kontaktformular führen; eine geprüfte durchgehende Strategie-/Options-/Preview-/Angebots-/CRM-Kette ist noch offen. ORACLE-/NeX-Runtime und Fachrollen sind als Zielbild zu prüfen, nicht als aktiv zu behaupten.
+
+<!-- nexify-goal-tasks-json:start -->
+```json
+{
+  "schema_version": 1,
+  "goal_version": "2026-11-09-unified-master",
+  "source_attachment": "/Users/gast/.codex/attachments/c417bef0-bf02-4f7e-beea-3fcdf44300c8/pasted-text-1.txt",
+  "tasks": [
+    {
+      "id": "NX-UM-001",
+      "sub_goal": "00",
+      "title": "Quellbindung und private Site-Version 5 nachweisen",
+      "priority": 1,
+      "status": "REVIEW",
+      "owner": "Pascal Courbois / Frontend",
+      "writer": "Codex Hauptlauf",
+      "scope": "GitHub Draft PR 92, private Sites-Version 5, Hero und Oracle-Chat",
+      "paths": [
+        "apps/web/components/IdentityHero.tsx",
+        "apps/web/components/AtelierFilm.tsx",
+        "apps/web/components/Workspace.tsx"
+      ],
+      "dependencies": [],
+      "acceptance": "Remote-Commit, Browserbild, mobile Bedienung, Audio-Fallback und unabhängige Prüfung",
+      "evidence": "Sites-Version 5, Commit 49f84db097544e96fcf54ca8a8b2d5d58838cd7a; lokale Browser-Screenshots /tmp/nexify-final-1440-4s.png und /tmp/nexify-final-390.png",
+      "rollback": "Private Sites-Version 4 wiederherstellen; Originale erhalten",
+      "next": "Unabhängige Prüfung und offene Medienfreigaben erfassen"
+    },
+    {
+      "id": "NX-UM-002",
+      "sub_goal": "01",
+      "title": "Lokalen begrenzten Codex-Fortsetzungsdienst prüfen",
+      "priority": 2,
+      "status": "REVIEW",
+      "owner": "Pascal Courbois / Betrieb",
+      "writer": "Codex Hauptlauf",
+      "scope": "Bestehendes Register, lokaler Runner und macOS LaunchAgent",
+      "paths": [
+        "docs/09-final/auftragsregister-2026-11-08.md",
+        "tools/goal-runner.mjs",
+        "ops/goal/STATE.json"
+      ],
+      "dependencies": [
+        "NX-UM-001"
+      ],
+      "acceptance": "Lock, Begrenzung, Fehler- und Wiederaufnahmetest; echter nichtinteraktiver CLI-Start; LaunchAgent-Readback",
+      "evidence": "Codex CLI 0.167.0; read-only exec und resume erfolgreich; Runner-Selbsttest Lock/Selection; echter CLI-Lauf NX-UM-003 mit Host-Build und Browserprüfungen; LaunchAgent com.nexify.codex-unified-goal geladen, kickstart rc=0 und SKIP no_ready_task",
+      "rollback": "LaunchAgent deaktivieren; Runner und Protokolle versioniert behalten",
+      "next": "Unabhängige Prüfung des Runners und dauerhafter Folgeläufe; nach Freigabe DONE"
+    },
+    {
+      "id": "NX-UM-003",
+      "sub_goal": "02-04",
+      "title": "Videobedienung aus Pascals Gesichtsfeld lösen und Glas-Hero responsiv verfeinern",
+      "priority": 3,
+      "status": "REVIEW",
+      "owner": "Pascal Courbois / Art Direction",
+      "writer": "Lokaler Codex-Fortsetzungslauf",
+      "scope": "Konkreter Live-Befund: bei 1265 px liegen Video-Controls über Pascals Gesicht. CSS-Korrektur in bestehendem Hero/Filmrahmen, 320/375/768/1024/1265/1440 px prüfen.",
+      "paths": [
+        "apps/web/components/AtelierFilm.css",
+        "apps/web/components/IdentityHero.css",
+        "apps/web/components/HomeConcept.css",
+        "apps/web/components/WorkspaceRebuild.css"
+      ],
+      "dependencies": [],
+      "acceptance": "Bedienelemente bleiben sichtbar und per Touch erreichbar, verdecken das Gesicht nicht, Build/Typecheck und Browser-Screenshots ohne Überlauf",
+      "evidence": "CLI-Sitzung 01a1c24f-acfb-7d90-9d42-5ab70edda7a2; apps/web/components/AtelierFilm.css geändert; Host build:standalone, goal-capture before/after, browser-identity-hero und browser-video-hero alle rc=0; ops/goal/LOGS/runner-events.jsonl",
+      "rollback": "Geänderte Dateien aus dem GitHub Draft-Branch vor dem Paket wiederherstellen",
+      "next": "Unabhängige Sichtprüfung der Vorher-/Nachher-Bilder; danach CSS verfeinern und erneut testen",
+      "require_source_change": true
+    },
+    {
+      "id": "NX-UM-004",
+      "sub_goal": "05-09",
+      "title": "Seiten, Medien, Chat-Backend und Auslieferung paketweise vervollständigen",
+      "priority": 4,
+      "status": "TODO",
+      "owner": "Fachowner je Paket",
+      "writer": "Je Paket genau ein benannter Writer",
+      "scope": "43 erfasste öffentliche Seiten, Video-Slot-Plan, echte Anfrage- und Backend-Wege",
+      "paths": [
+        "config/site-map.json",
+        "docs/design/premium-video-slot-plan-2026-11-09.json"
+      ],
+      "dependencies": [
+        "NX-UM-003"
+      ],
+      "acceptance": "Je Paket E2E-Test, unabhängiger Review, Quell- und Ziel-Readback",
+      "evidence": "Offen; vorhandene Registerpunkte OF-01 bis OF-14 gelten weiter",
+      "rollback": "Je Paket vorab festhalten",
+      "next": "Nach NX-UM-003 in kleine fachliche Pakete aufteilen"
+    },
+    {
+      "id": "NX-UM-010",
+      "sub_goal": "10",
+      "title": "Factory-Fachrollen auf vorhandene Skills und Werkzeuge abbilden",
+      "priority": 4,
+      "status": "READY",
+      "owner": "Pascal Courbois / ORACLE-Rolle zu verifizieren",
+      "writer": "Lokaler Codex-Fortsetzungslauf",
+      "scope": "17 Fachfähigkeiten des Anhangs A gegen tatsächlich erreichbare Skills, Agenten, Tools und Workflows prüfen; nur geprüfte IST-Zuordnungen im bestehenden Skill-Register ergänzen; keine Installation oder Aktivitätsbehauptung",
+      "paths": [
+        "config/skills-register.json"
+      ],
+      "dependencies": [],
+      "acceptance": "Für jede Rolle IST/FEHLT/UNGEPRÜFT mit exakter Fundstelle, Scope, Owner und Testgrenze; valides JSON; unabhängiges Review",
+      "evidence": "Anhang A SHA-256 91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5; bestehendes config/skills-register.json",
+      "rollback": "Vorhash der Registry sichern; Änderung auf Draft-Branch rücknehmbar",
+      "next": "Quellen lesen, Mapping klein und belegt ergänzen, JSON prüfen, Review vorlegen",
+      "require_source_change": true
+    }
+  ],
+  "sub_goal_10_reference": "docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md"
+}
+```
+<!-- nexify-goal-tasks-json:end -->
+
 Führendes Register der Aufträge aus dieser Arbeitslinie (Zweig `claude/loving-albattani-4jp12a`, PR 76). Quelle für Soll:
 Gesamtbeschreibung 08.11.2026, Dauerauftrag „/GOAL“ (Pascal Courbois), `AGENTS.md`. Belegt ist nur, was in der Spalte
 „Nachweis“ steht. Statuskette: PLANNED → CREATED → LOCALLY_TESTED → INTEGRATED → LIVE_VERIFIED → ACCEPTED.
