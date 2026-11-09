@@ -57,4 +57,4 @@ Entscheidung: Hochwertige Vorgabe = Prototypen und Designsystem (Inhaberaussage 
 - Lokale Prüfung mit Kontrastmessung (`page_quality_audit.py --contrast`, de, 43 Seiten, 2 Viewports): 0 FEHLER, 0 WARNUNG.
 - Belege neu erhoben, Pins nachgezogen (`pin-rebase-2026-11-09.md`, Nachtrag DS-REWORK).
 
-Offen: Radien 24 px an einzelnen Komponenten und Footer-Pfeil (`DiagnosticConsent.css`) sind nicht Teil dieses Schritts.
+Erledigt danach: Footer-Pfeil (`DiagnosticConsent.css`, eigener Chevron). Offen: einzelne 24-px-Radien an Komponenten und die Einrückung der Utilities-Zeile im Footer (Container-Padding, unabhängig vom Pfeil).

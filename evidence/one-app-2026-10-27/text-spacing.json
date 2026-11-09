@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-09T11:27:24.496Z",
+  "observed_at": "2026-11-09T11:39:51.509Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "9e6e116330400b375fbc42fa1a5d96288ba54815725dc9a4cf3496370fcdb04e",
     "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
@@ -25,7 +25,7 @@
     "apps/web/components/ChatResizeHandle.tsx": "c65303c78c4dd486ecfd040125e68a63c8b4e04b1777ef0c6434821ae1525193",
     "apps/web/components/ContactRequestForm.tsx": "33cb886884abe27025432db7fdeaf51ff3e2a3045cda5127ec01726b19c6ad47",
     "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
-    "apps/web/components/DiagnosticConsent.css": "50931b2af39cc51f46f13c55871d34176dfc4f348591d332ae095b05bd5fb55d",
+    "apps/web/components/DiagnosticConsent.css": "a57940d16dac5b4c5c202b561b12b07b4036274505b7711f9d59214d86a74f59",
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/ExplainerSections.tsx": "f46caac7d768fbaee8a3459e201c3d52e16d0d5ba0ea023eedf365a44fecd632",
     "apps/web/components/HcArrow.tsx": "cb9a9fb68e7768b89c9daae67253716ee952460b565969c9db4c4cde0eddefaa",
