@@ -5048,6 +5048,38 @@
             }
           }
         }
+      },
+      "revision_20261109": {
+        "id": "GOAL-NEXIFY-COMPLETION-20261101-R20261109",
+        "source": "explicit_user_goal_and_design_request_2026-11-09",
+        "target_site": "https://nexify-ai-gesamtprojekt-20261109.workspace-vo-0220.chatgpt.site/",
+        "status": "in_progress_design_first",
+        "whole_system_accepted": false,
+        "site_publication": {
+          "project_id": "appgprj_6af2144e2af881918282f28c4b57411a",
+          "access": "owner_private",
+          "version_number": 2,
+          "source_commit": "342abeb8aced91cb41170b9d33efea47951df51d",
+          "deployment_id": "appgdep_6af22554c6f081918c540b39290fcc67",
+          "deployment_status": "succeeded",
+          "full_release_acceptance": false
+        },
+        "work_package": {
+          "id": "P02-CHAT-DESIGN-20261109",
+          "priority": "design_first",
+          "owner_function": "UX/Frontend",
+          "writer": "/root",
+          "scope": "public_orientation_chat_layout_copy_and_mobile_composer",
+          "dependencies": ["P02", "P03", "existing_design_tokens"],
+          "budget": "no_new_paid_provider_calls",
+          "state": "in_review",
+          "source_pr": "https://github.com/nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/92",
+          "local_evidence": ["apps/site/tests/browser-critical.mjs", "apps/site/tests/browser-text-spacing.mjs"],
+          "tests": "critical_browser_passed; text_spacing_129_checks_43_routes_zero_issues; source_bound_register_tests_passed",
+          "rollback": "Restore prior private Sites version 1; retain PR and commits as recoverable history.",
+          "acceptance": "pending_independent_review_and_all_required_CI_checks"
+        },
+        "persistent_runner": "not_activated; existing register remains canonical; runtime authority and nonrecursive scheduler still require verification"
       }
     }
   },
