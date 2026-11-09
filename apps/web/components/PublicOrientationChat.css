@@ -57,3 +57,131 @@
 .orientation-journey li strong{color:var(--color-text-sekundaer);font:500 10px/1.35 var(--font-text)}
 @media(prefers-reduced-motion:reduce){.orientation-starter,.orientation-page-link{transition:none}}
 
+/* The public guide reads like a conversation, with a stable writing surface. */
+.workspace-shell .public-orientation {
+  gap: var(--space-2);
+  padding: 0 0 var(--space-2);
+  overflow: hidden;
+}
+.orientation-content {
+  display: grid;
+  align-content: start;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--chat-gutter);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: var(--space-4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-linie-stark) transparent;
+}
+.orientation-intro {
+  gap: var(--space-2);
+  padding-block: 0 var(--space-3);
+  border-bottom: 1px solid var(--color-linie-fein);
+}
+.orientation-intro .state-label {
+  color: var(--color-atelier-champagne);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.orientation-intro h3 {
+  margin: 0;
+  color: var(--color-text-primaer);
+  font: 500 clamp(1.45rem, 2.5vw, 1.7rem)/1.12 var(--font-display);
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.orientation-intro p {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--color-text-sekundaer);
+  font-size: var(--type-small-size);
+  line-height: 1.55;
+}
+.orientation-starters { gap: var(--space-2); }
+.orientation-starter,
+.orientation-page-link {
+  min-height: var(--target-min);
+  border-color: var(--color-atelier-glass-edge);
+  border-radius: var(--radius-karte);
+  background: var(--gradient-atelier-glass);
+  box-shadow: var(--shadow-kleine-karte);
+  transition: transform var(--motion-feedback), border-color var(--motion-feedback), background-color var(--motion-feedback);
+}
+.orientation-starter { min-height: 68px; }
+.orientation-starter-copy strong,
+.orientation-page-copy strong { font-size: var(--type-body-size); }
+.orientation-starter-copy small,
+.orientation-page-copy small { color: var(--color-text-sekundaer); font-size: var(--type-small-size); hyphens: none; }
+.orientation-starter:active,
+.orientation-page-link:active { transform: scale(.985); }
+.orientation-starter:focus-visible,
+.orientation-page-link:focus-visible,
+.orientation-answer-note summary:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
+.orientation-history { gap: var(--space-4); }
+.orientation-message {
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-linie-fein);
+  border-radius: var(--radius-karte);
+  background: var(--color-graphit-850);
+}
+.workspace-shell .aifly-panel .orientation-message.role-user {
+  margin-inline-start: var(--space-4);
+  border: 1px solid var(--color-linie-mittel);
+  background: var(--color-graphit-650);
+}
+.orientation-message > strong { font-size: var(--type-small-size); font-weight: 600; }
+.orientation-message p { margin: 0; color: var(--color-text-sekundaer); line-height: 1.6; }
+.orientation-answer-heading { color: var(--color-atelier-champagne) !important; }
+.orientation-answer-note summary { min-height: var(--target-min); }
+.orientation-composer {
+  position: relative;
+  flex: 0 0 auto;
+  gap: var(--space-2);
+  margin-inline: var(--chat-gutter);
+  padding: var(--space-3);
+  border: 1px solid var(--color-atelier-glass-edge);
+  border-radius: var(--radius-karte);
+  background: var(--color-graphit-850);
+  box-shadow: var(--shadow-atelier);
+}
+@supports (backdrop-filter: blur(16px)) {
+  .orientation-composer {
+    background: var(--color-atelier-glass);
+    backdrop-filter: blur(var(--material-blur));
+    -webkit-backdrop-filter: blur(var(--material-blur));
+  }
+}
+.orientation-composer label { color: var(--color-text-sekundaer); font-weight: 600; }
+.orientation-composer textarea {
+  width: 100%;
+  min-height: 64px;
+  resize: vertical;
+  border: 1px solid var(--color-linie-mittel);
+  border-radius: var(--radius-klein);
+  padding: var(--space-3);
+  background: var(--color-graphit-800);
+  color: var(--color-text-primaer);
+  line-height: 1.5;
+}
+.orientation-composer textarea:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
+.orientation-composer button { min-height: var(--target-min); font-weight: 600; }
+.orientation-composer button:active { transform: scale(.985); }
+.public-orientation > .connection-note { flex: 0 0 auto; margin: 0 var(--chat-gutter); color: var(--color-text-tertiaer); font-size: var(--type-small-size); }
+@media (max-width: 460px) {
+  .orientation-content { padding-block: var(--space-3); }
+  .orientation-intro h3 { font-size: 1.45rem; }
+  .orientation-starter { min-height: 60px; }
+  .orientation-journey { padding: var(--space-3); }
+}
+@media (max-height: 740px) {
+  .orientation-intro p { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orientation-starter, .orientation-page-link { transition: none; }
+  .orientation-starter:active, .orientation-page-link:active, .orientation-composer button:active { transform: none; }
+}
+
