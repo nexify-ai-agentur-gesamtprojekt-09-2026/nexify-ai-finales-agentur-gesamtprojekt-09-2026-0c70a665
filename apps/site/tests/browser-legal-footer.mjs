@@ -11,11 +11,14 @@ const hashes=async()=>Object.fromEntries(await Promise.all(sources.map(async p=>
 const before=await hashes(),data=JSON.parse(await readFile(root+'.generated/public-site.json','utf8'));
 const externalOrigin=process.env.LOCAL_FOOTER_ORIGIN;
 // Sprachwahl heute: serverseitig per ?lang= (apps/web/proxy.ts, seit 5222298; nexify-locale wird nicht mehr gelesen, OF-12).
-// Der Next-Renderer liefert de/nl/fr; das Vite-SPA (apps/site) kennt nur Deutsch und wird entsprechend nur in de geprueft.
-const locales=externalOrigin?['de','nl','fr']:['de'],suffix=l=>l==='de'?'':'?lang='+l;
+// Beide Renderer liefern de/nl/fr: Next serverseitig (proxy.ts), das Vite-SPA (apps/site) liest ?lang= in main.tsx und reicht es als initialLocale an Workspace (024c6f2).
+const locales=['de','nl','fr'],suffix=l=>l==='de'?'':'?lang='+l;
+// Renderer-Unterschiede heute: Next baut die Footer-Links serverseitig mit ?lang= und erzwingt dort die deutsche TEILEKLAR-Sprache (proxy.ts);
+// das Vite-SPA haelt die gewaehlte Sprache im Client-Zustand (Workspace), rendert die Footer-Links ohne ?lang= und zeigt /teileklar* in der Zielsprache.
+const nextRenderer=Boolean(externalOrigin),hrefSuffix=l=>nextRenderer?suffix(l):'';
 // Der TEILEKLAR-Shop ist deutschsprachiger Markt: proxy.ts erzwingt dort lang=de, auch bei ?lang=nl|fr (WCAG 3.1.1). Geprueft wird
 // daher fuer /teileklar* die tatsaechlich gezeigte Sprache (de), waehrend die Anfrage weiterhin mit der Zielsprache gestellt wird.
-const germanOnly=p=>p==='/teileklar'||p.startsWith('/teileklar/');
+const germanOnly=p=>nextRenderer&&(p==='/teileklar'||p.startsWith('/teileklar/'));
 if(externalOrigin)assert.ok(['127.0.0.1','localhost'].includes(new URL(externalOrigin).hostname),'local servers only');
 const server=externalOrigin?null:await preview({root,preview:{host:'127.0.0.1',port:0,strictPort:false}});
 const origin=externalOrigin||'http://127.0.0.1:'+server.httpServer.address().port;
@@ -27,7 +30,7 @@ try{
   await context.route('**/*',r=>{const u=new URL(r.request().url());if(u.origin!==origin){external.push(u.origin);return r.abort();}if(u.pathname.startsWith('/api/'))return r.fulfill({status:503,json:{error:'local_unconfigured'}});return r.continue();});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
   for(const entry of data.pages){
-   const shown=germanOnly(entry.path)?'de':locale,sfx=suffix(shown);
+   const shown=germanOnly(entry.path)?'de':locale,sfx=hrefSuffix(shown);
    await page.goto(origin+entry.path+suffix(locale));await page.waitForFunction(l=>document.documentElement.lang===l,shown);
    const footer=page.locator('.footer-legal'),direct=footer.locator('.footer-legal-direct'),details=footer.locator('details'),summary=details.locator('summary');
    assert.equal(await details.count(),1);assert.equal(await page.locator('.site-footer .footer-bottom details').count(),1);
@@ -59,6 +62,6 @@ try{
  }
  assert.equal(views.length,data.pages.length*locales.length*2);assert.equal(interaction.length,2*locales.length*2);
  assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);
- const report={scope:'local optimized shared footer;not legal completeness or production acceptance',renderer:externalOrigin?'Next-local':'Vite-local',views,interaction,source_sha256:before,missing_license_route:true,external_requests:0,page_errors:errors,passed:true};
+ const report={scope:'local optimized shared footer;not legal completeness or production acceptance',renderer:externalOrigin?'Next-local':'Vite-local',footer_links_carry_lang:nextRenderer,teileklar_forced_german:nextRenderer,views,interaction,source_sha256:before,missing_license_route:true,external_requests:0,page_errors:errors,passed:true};
  await writeFile(out+(externalOrigin?'next-browser.json':'browser.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({views:views.length,interaction:interaction.length,external:0,passed:true}));
 }finally{await browser.close();if(server)await new Promise(resolve=>server.httpServer.close(resolve));}

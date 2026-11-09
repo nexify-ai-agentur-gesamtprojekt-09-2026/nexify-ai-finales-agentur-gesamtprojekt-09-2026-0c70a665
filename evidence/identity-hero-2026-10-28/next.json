@@ -2144,7 +2144,7 @@
     "apps/web/lib/brand-media.ts": "fe1c812d3c8b3a6b81ee101fc9208d53bb907dbbdbbc70ddbf3caae966b0e59d",
     "apps/web/app/globals.css": "c7c19d6faed39c9756273fd2ee04245f3b69e542da51633ff91d4034c140ee44",
     "packages/tokens/tokens.css": "3ca2f06408bfab8c2b4b5fd79f9f9c5c22b8adb234e0a5f2d826ae3d63b9a2de",
-    "apps/site/tests/browser-identity-hero.mjs": "8bf86e4ba6457976613114388523de8955c9433f04afaeb5231f1512f9c4a8b1"
+    "apps/site/tests/browser-identity-hero.mjs": "51ba02a106fe649eec7bc03f0aaf7387308af8fae1b2786344fde1bd48fc7671"
   },
   "external_requests": 0,
   "page_errors": [],

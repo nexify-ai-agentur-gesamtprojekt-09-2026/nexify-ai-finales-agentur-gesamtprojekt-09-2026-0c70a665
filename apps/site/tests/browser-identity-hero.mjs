@@ -17,8 +17,10 @@ let server,child,origin,log='';
 if(renderer==='vite'){server=await preview({root:root+'apps/site',preview:{host:'127.0.0.1',port:0,strictPort:false}});origin='http://127.0.0.1:'+server.httpServer.address().port;}
 else{const socket=allocator();socket.listen(0,'127.0.0.1');await once(socket,'listening');const port=socket.address().port;await new Promise(resolve=>socket.close(resolve));origin='http://127.0.0.1:'+port;child=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{cwd:root+'apps/web',env:{PATH:process.env.PATH,LANG:'C.UTF-8',NODE_ENV:'production',APP_ENV:'production'},stdio:['ignore','pipe','pipe']});child.stdout.on('data',b=>log+=b);child.stderr.on('data',b=>log+=b);}
 const browser=await chromium.launch({headless:true}),views=[],text_resize=[],external=[],errors=[],asset_hashes={};
-// Sprache heute: serverseitig per ?lang= (apps/web/proxy.ts, seit 5222298; nexify-locale wird nicht mehr gelesen, OF-12). Next liefert de/nl/fr; das Vite-SPA kennt nur Deutsch.
-const locales=renderer==='next'?['de','nl','fr']:['de'],suffix=l=>l==='de'?'':'?lang='+l;
+// Sprache heute: per ?lang= (Next serverseitig in apps/web/proxy.ts seit 5222298; das Vite-SPA liest ?lang= in apps/site/src/main.tsx und reicht es als initialLocale an Workspace, 024c6f2; nexify-locale wird nicht mehr gelesen, OF-12). Beide Renderer liefern de/nl/fr.
+const locales=['de','nl','fr'],suffix=l=>l==='de'?'':'?lang='+l;
+// Next baut interne Links serverseitig mit ?lang=; das Vite-SPA haelt die Sprache im Client-Zustand und navigiert ohne ?lang= (Hero-Links, wie die Footer-Links).
+const linkSuffix=l=>renderer==='next'?suffix(l):'';
 // Heutiger Umbruch der Hero-Spalten auf der Startseite: HomeConcept.css stapelt bis einschliesslich 1100 px Containerbreite
 // (IdentityHero.css deklariert 820 px, wird dort uebersteuert). Die Konstante wird gegen die Quelle gebunden und gegen die Renderung gemessen.
 const STACK_MAX=1100;assert.ok((await readFile(root+'apps/web/components/HomeConcept.css','utf8')).includes('@container identity-hero (max-width:'+STACK_MAX+'px){.workspace-shell .home-concept .identity-hero .identity-scene{grid-template-columns:1fr}'),'stack threshold declared in HomeConcept.css');
@@ -94,7 +96,7 @@ try{
    const links=page.locator('.identity-copy .identity-links a');assert.equal(await links.count(),2,'two hero links');
    for(const link of await links.all()){assert.ok(await link.getAttribute('href'),'hero link has href');const b=await link.boundingBox();assert.ok(b.height>=48&&b.width>=48,'hero link touch target >=48px');await link.focus();assert.equal(await link.evaluate(e=>e===document.activeElement),true,'hero link keyboard-focusable');}
    assert.equal(await page.locator('.identity-hero button,.identity-hero video,.identity-hero audio').count(),0,'still hero has no media controls');
-   for(const [selector,target] of [['.identity-primary-link','/kontakt'],['.identity-secondary-link','/leistungen']]){await page.locator(selector).click();await page.waitForURL(origin+target+suffix(locale));await page.goBack();await page.waitForURL(origin+'/'+suffix(locale));await page.locator('.identity-hero').waitFor();}
+   for(const [selector,target] of [['.identity-primary-link','/kontakt'],['.identity-secondary-link','/leistungen']]){await page.locator(selector).click();await page.waitForURL(origin+target+linkSuffix(locale));await page.goBack();await page.waitForURL(origin+'/'+suffix(locale));await page.locator('.identity-hero').waitFor();}
   }finally{await context.close();}
  }
  assert.equal(views.length,locales.length*11);assert.equal(text_resize.length,locales.length*8);assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);

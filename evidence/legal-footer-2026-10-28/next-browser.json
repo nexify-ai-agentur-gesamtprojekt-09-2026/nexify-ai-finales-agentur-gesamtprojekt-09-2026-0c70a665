@@ -1,6 +1,8 @@
 {
   "scope": "local optimized shared footer;not legal completeness or production acceptance",
   "renderer": "Next-local",
+  "footer_links_carry_lang": true,
+  "teileklar_forced_german": true,
   "views": [
     {
       "path": "/",
@@ -3633,7 +3635,7 @@
     "apps/web/components/SiteFooter.tsx": "56a189a3feea6f954ed4a30e6bcace4939480fcea485c73a215ec4a6451e523a",
     "apps/web/components/WorkspaceRebuild.css": "591308b86d912c9a58929bd10a093c7f27ee1d0ee64ab2850fd75d9bef06fea9",
     "config/site-map.json": "6fbbbf4a536591da57b13d0174839e68e632d3b99e1ba4307060b9cd67cb3145",
-    "apps/site/tests/browser-legal-footer.mjs": "c4cfba1f89315b9455cf03c7ab4f3937bc80b1270da454c14e6a49cf6cac2122"
+    "apps/site/tests/browser-legal-footer.mjs": "78d8e3184674f2e23182c4737af13fa3661224354ed41e89667562a92f3aa710"
   },
   "missing_license_route": true,
   "external_requests": 0,
