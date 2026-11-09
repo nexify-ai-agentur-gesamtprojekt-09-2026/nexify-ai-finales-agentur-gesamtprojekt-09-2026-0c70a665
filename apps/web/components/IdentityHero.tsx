@@ -5,11 +5,11 @@ import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
 import type {PublicVideo} from './PresenterVideo';
 import {ActionLink} from './ActionControl';
-import {brandImages,imageAlt,srcSetFor} from '../lib/brand-media';
+import {brandImages} from '../lib/brand-media';
+import AtelierFilm from './AtelierFilm';
 import './IdentityHero.css';
 
-// Hero uses a single Higgsfield studio photograph (Pascal with NeX and AIFly ORACLE)
-// as the editorial still. No video is used on the hero.
+// The approved brand photograph remains the poster and playback fallback.
 
 const headings:Record<Locale,string[]>={
  de:['Ein Anspruch.','Ein zusammenhängender','Auftritt.'],
@@ -35,7 +35,7 @@ const secondaryCta:Record<Locale,string>={de:'Leistungen ansehen',nl:'Diensten b
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
  void page;
- return <section className="identity-hero" aria-labelledby="home-headline" data-testid="identity-hero" data-media-state="editorial-still" data-identity-layout="graphite-atelier">
+ return <section className="identity-hero" aria-labelledby="home-headline" data-testid="identity-hero" data-media-state="editorial-video" data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
    <div className="identity-copy" data-testid="hero-copy">
     <h1 id="home-headline" data-testid="hero-headline">{headings[locale].map((line,index)=><span key={line} className={index>1?"identity-title-accent":index===1?'identity-title-long':undefined}>{line}{index<headings[locale].length-1?' ':''}</span>)}</h1>
@@ -47,8 +47,9 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
     </div>
    </div>
    <div className="identity-media" data-testid="hero-media">
-    <figure className="identity-hero-photo" role="img" aria-label={t.scene} data-testid="hero-photo">
-     <img src={brandImages.home.src} srcSet={srcSetFor(brandImages.home.src)} sizes="100vw" alt={imageAlt(brandImages.home,locale)} width={2000} height={1080} loading="eager" fetchPriority="high" decoding="async"/>
+    <figure className="identity-hero-photo" aria-label={t.scene} data-testid="hero-photo">
+     <AtelierFilm hero locale={locale} asset={{src:'/media/home-review/pascal-studio-scene-original-20261109.mp4',poster:brandImages.home.src,width:1280,height:720,title:t.scene,hasAudio:true,autoplayWithAudio:true,playOnce:true}}/>
+     <figcaption className="identity-hero-video-note">{locale==='de'?'KI-generierte Markenszene':locale==='nl'?'AI-gegenereerde merkscène':locale==='fr'?'Scène de marque générée par IA':'AI-generated brand scene'}</figcaption>
     </figure>
    </div>
   </div>
