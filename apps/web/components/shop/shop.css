@@ -215,3 +215,13 @@
 .tk-check{align-items:center;min-height:var(--target-min)}
 .tk-buying-guide>div>a:not(.outline-button){display:inline-flex;align-items:center;min-height:var(--target-min)}
 .tk-check input{width:24px;height:24px}
+/* 08.11.2026 (2.5.8, bei 320 px gemessen): .tk-commerce-nav ist ein Flex-Container mit
+   overflow:auto; die Links schrumpften auf 19-22 px Breite, obwohl white-space:nowrap gilt.
+   Text war abgeschnitten, Trefferflaeche unter 24 px. Jetzt: nicht schrumpfen, scrollen. */
+.tk-commerce-nav > a, .tk-commerce-nav > button, .tk-commerce-nav > span {
+  flex: 0 0 auto !important;
+  min-width: max-content;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}

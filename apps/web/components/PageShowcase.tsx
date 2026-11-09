@@ -1,7 +1,7 @@
 'use client';
 import {SiteLink} from './Router';
 import {useUI} from './Workspace';
-import {pageImage,imageAlt} from '../lib/brand-media';
+import {pageImage,imageAlt,srcSetFor} from '../lib/brand-media';
 import type {PublicPage} from '../lib/page-types';
 import {HcArrow} from './HcArrow';
 // Preview gallery of the Startseite (hc-gallery): approved Higgsfield stills only.
@@ -13,6 +13,6 @@ export const PageShowcase=({page,pages}:{page:PublicPage;pages:PublicPage[]})=>{
  if(!items.length)return null;
  return <section className="hc-section hc-container hc-product-story" aria-labelledby="page-showcase-title" data-testid="page-showcase">
   <header className="hc-section-heading"><div><span className="hc-kicker">{text[0]}</span><h2 id="page-showcase-title">{text[1]}</h2></div><p>{text[2]}</p></header>
-  <nav className="hc-gallery" aria-label={text[1]}>{items.map(item=>{const image=pageImage(item.id)!;return <SiteLink className="hc-gallery-card" key={item.id} href={item.path} data-testid={'showcase-link-'+item.id}><figure className="hc-art"><img src={image.src} alt={imageAlt(image,locale)} width={2000} height={1125} loading="lazy" decoding="async"/></figure><h3>{item.localizedTitle[locale]}<HcArrow direction="out"/></h3><p>{item.localizedSummary[locale]}</p><span className="hc-text-link">{text[3]}<HcArrow/></span></SiteLink>;})}</nav>
+  <nav className="hc-gallery" aria-label={text[1]}>{items.map(item=>{const image=pageImage(item.id)!;return <SiteLink className="hc-gallery-card" key={item.id} href={item.path} data-testid={'showcase-link-'+item.id}><figure className="hc-art"><img src={image.src} srcSet={srcSetFor(image.src)} sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="lazy" decoding="async"/></figure><h3>{item.localizedTitle[locale]}<HcArrow direction="out"/></h3><p>{item.localizedSummary[locale]}</p><span className="hc-text-link">{text[3]}<HcArrow/></span></SiteLink>;})}</nav>
  </section>;
 };

@@ -5,7 +5,7 @@ import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
 import type {PublicVideo} from './PresenterVideo';
 import {ActionLink} from './ActionControl';
-import {brandImages,imageAlt} from '../lib/brand-media';
+import {brandImages,imageAlt,srcSetFor} from '../lib/brand-media';
 import './IdentityHero.css';
 
 // Hero uses a single Higgsfield studio photograph (Pascal with NeX and AIFly ORACLE)
@@ -48,7 +48,7 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
    </div>
    <div className="identity-media" data-testid="hero-media">
     <figure className="identity-hero-photo" role="img" aria-label={t.scene} data-testid="hero-photo">
-     <img src={brandImages.home.src} alt={imageAlt(brandImages.home,locale)} width={2000} height={1080} loading="eager" fetchPriority="high" decoding="async"/>
+     <img src={brandImages.home.src} srcSet={srcSetFor(brandImages.home.src)} sizes="100vw" alt={imageAlt(brandImages.home,locale)} width={2000} height={1080} loading="eager" fetchPriority="high" decoding="async"/>
     </figure>
    </div>
   </div>
