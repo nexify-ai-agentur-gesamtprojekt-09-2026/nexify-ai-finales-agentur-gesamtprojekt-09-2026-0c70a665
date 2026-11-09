@@ -23,6 +23,16 @@ class ManagedLLMPolicyTests(unittest.TestCase):
         self.assertEqual(result["scope"], "managed_config_binding_only_not_live_verification")
         self.assertEqual(result["customer_byok"], "separate_explicit_selection_preserved")
 
+    def test_llm_diff_excluded_globs_is_the_only_extra_ci_review_key_and_is_shape_checked(self):
+        review = self.configs[checker.SOURCES[1]]["ai_review"]
+        self.assertEqual(review["llm_diff_excluded_globs"], ["evidence/**"])
+        for mutate in (lambda r: r.update(unknown_key=True), lambda r: r.update(llm_diff_excluded_globs="evidence/**"),
+                       lambda r: r.update(llm_diff_excluded_globs=[1]), lambda r: r.update(llm_diff_excluded_globs=["a/**"] * 6)):
+            configs = copy.deepcopy(self.configs); mutate(configs[checker.SOURCES[1]]["ai_review"])
+            with self.assertRaises(checker.PolicyError): checker.validate(configs)
+        configs = copy.deepcopy(self.configs); del configs[checker.SOURCES[1]]["ai_review"]["llm_diff_excluded_globs"]
+        checker.validate(configs)
+
     def test_model_suffix_reasoning_drift_and_missing_website_scope_are_rejected(self):
         mutations = (
             lambda c: c[checker.SOURCES[1]]["ai_review"].update(exact_model_id="deepseek/deepseek-v4.1-flash-1018"),

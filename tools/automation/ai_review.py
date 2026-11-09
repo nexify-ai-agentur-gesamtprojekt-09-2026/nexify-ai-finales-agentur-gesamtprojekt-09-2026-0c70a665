@@ -26,6 +26,10 @@ MODEL_POLICY_PATH = Path(__file__).resolve().parents[2] / 'config/llm-policy.jso
 MANAGED_MODEL = 'deepseek/deepseek-v4.1-flash-1017'
 CATALOG_BYTES = 8 * 1024 * 1024
 RESPONSE_BYTES = 1024 * 1024
+# Local-only scan ceiling for paths excluded from the model diff (never sent to the model).
+EXCLUDED_SCAN_BYTES = 8 * 1024 * 1024
+MAX_EXCLUDED_GLOBS = 5
+EXCLUDED_GLOB_CHARS = re.compile(r'[A-Za-z0-9._/*?-]+')
 SHA = re.compile(r'^[a-f0-9]{40}$')
 ENV_NAME = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
 SECRET_PATTERN = re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\b(?:sk-[A-Za-z0-9_-]{20,}|AKIA[A-Z0-9]{16}|ghp_[A-Za-z0-9]{36}|glpat-[A-Za-z0-9_-]{20,})')
@@ -35,6 +39,8 @@ SYSTEM = ('You are an advisory code reviewer, not an executor or approval author
           'Return only the required JSON object bound to the exact supplied repository/base/head. '
           'Review security, correctness, tenant boundaries, idempotency and tests. '
           'Use only listed changed paths. proposed_patch must be null; patch generation is disabled. '
+          'Paths in excluded_from_llm_diff were deliberately NOT supplied (only line counts and a diff hash): '
+          'make no claim about their content and never treat your review as covering them. '
           'No findings is an advisory observation, never Jeff go, a merge decision or operator acceptance.')
 REVIEW_SCHEMA = {
     'type': 'object', 'additionalProperties': False,
@@ -157,6 +163,7 @@ def load_settings(path):
         raise ReviewBlocked('limits_exceed_engine_safety_ceiling')
     if decimal_amount(limits.get('max_cost_usd')) <= 0:
         raise ReviewBlocked('invalid_limits')
+    excluded_globs(settings)
     return settings
 
 
@@ -347,6 +354,61 @@ def sensitive_assignment(diff):
     return False
 
 
+def excluded_globs(settings):
+    """Validated fail-closed list of globs removed from the MODEL diff only (default: none).
+
+    Relative, literal first segment (so no catch-all such as `**`, `*` or `**/x`),
+    no `.`/`..`/empty segments, `**` only as a whole segment, at most five entries.
+    """
+    value = settings.get('llm_diff_excluded_globs', [])
+    if type(value) is not list or len(value) > MAX_EXCLUDED_GLOBS:
+        raise ReviewBlocked('invalid_llm_diff_excluded_globs')
+    for glob in value:
+        if (not isinstance(glob, str) or not EXCLUDED_GLOB_CHARS.fullmatch(glob)
+                or glob.startswith(('/', '-'))):
+            raise ReviewBlocked('invalid_llm_diff_excluded_globs')
+        segments = glob.split('/')
+        if (any(s in ('', '.', '..') for s in segments) or any('**' in s and s != '**' for s in segments)
+                or any(c in segments[0] for c in '*?')):
+            raise ReviewBlocked('invalid_llm_diff_excluded_globs')
+    return list(value)
+
+
+def glob_regex(glob):
+    parts = glob.split('/')
+    out = []
+    for index, part in enumerate(parts):
+        last = index == len(parts) - 1
+        if part == '**':
+            out.append('.+' if last else '(?:[^/]+/)*')
+            continue
+        out.append(''.join('[^/]*' if c == '*' else '[^/]' if c == '?' else re.escape(c) for c in part))
+        if not last:
+            out.append('/')
+    return re.compile(''.join(out))
+
+
+def scan_diff_text(diff):
+    """Secret and binary gates; applied to the model diff AND to excluded paths."""
+    if SECRET_PATTERN.search(diff) or sensitive_assignment(diff):
+        raise ReviewBlocked('potential_secret_in_diff')
+    if 'Binary files ' in diff or 'GIT binary patch' in diff:
+        raise ReviewBlocked('binary_diff_requires_manual_review')
+
+
+def count_changed_lines(diff):
+    added = removed = 0
+    in_hunk = False
+    for line in diff.splitlines():
+        if line.startswith('@@ '):
+            in_hunk = True
+        elif in_hunk and line.startswith('+'):
+            added += 1
+        elif in_hunk and line.startswith('-'):
+            removed += 1
+    return added, removed
+
+
 def repository_diff(repository, base, head, settings):
     if not isinstance(base, str) or not isinstance(head, str) or not SHA.fullmatch(base) or not SHA.fullmatch(head):
         raise ReviewBlocked('full_commit_sha_required')
@@ -374,17 +436,37 @@ def repository_diff(repository, base, head, settings):
     paths = [safe_path(p.decode('utf-8', 'strict')) for p in paths_raw.split(b'\0') if p]
     if not paths:
         raise ReviewBlocked('no_changes_not_a_review')
+    # Path safety applies to ALL changed paths, including those excluded from the model diff.
     for path in paths:
         if sensitive_path(path):
             raise ReviewBlocked('sensitive_file_in_diff')
-    raw = git([*prefix, '--unified=3', base, head, '--'], limits['max_diff_bytes'])
+    patterns = [glob_regex(glob) for glob in excluded_globs(settings)]
+    excluded = [p for p in paths if any(r.fullmatch(p) for r in patterns)]
+    included = [p for p in paths if p not in set(excluded)]
+    if excluded and not included:
+        raise ReviewBlocked('only_excluded_paths_not_a_review')
+    literal = lambda items: ['--', *(':(literal)' + p for p in items)]
+    # max_diff_bytes applies unchanged to everything that is sent to the model.
+    raw = git([*prefix, '--unified=3', base, head, *(literal(included) if excluded else ['--'])], limits['max_diff_bytes'])
     diff = raw.decode('utf-8', 'strict')
-    if SECRET_PATTERN.search(diff) or sensitive_assignment(diff):
-        raise ReviewBlocked('potential_secret_in_diff')
-    if 'Binary files ' in diff or 'GIT binary patch' in diff:
-        raise ReviewBlocked('binary_diff_requires_manual_review')
-    return {'repository': repo_id, 'base_sha': base, 'head_sha': head, 'changed_files': paths,
-            'diff_sha256': hashlib.sha256(raw).hexdigest()}, diff
+    scan_diff_text(diff)
+    # Excluded paths never go to the model, but their full diff is scanned locally.
+    report = []
+    budget = EXCLUDED_SCAN_BYTES
+    for path in excluded:
+        try:
+            part = git([*prefix, '--unified=3', base, head, *literal([path])], budget)
+        except ReviewBlocked as exc:
+            if exc.code == 'diff_or_metadata_limit_exceeded':
+                raise ReviewBlocked('excluded_diff_scan_limit_exceeded') from None
+            raise
+        budget -= len(part)
+        text = part.decode('utf-8', 'strict')
+        scan_diff_text(text)
+        added, removed = count_changed_lines(text)
+        report.append({'path': path, 'added': added, 'removed': removed, 'sha256': hashlib.sha256(part).hexdigest()})
+    return {'repository': repo_id, 'base_sha': base, 'head_sha': head, 'changed_files': included,
+            'excluded_from_llm_diff': report, 'diff_sha256': hashlib.sha256(raw).hexdigest()}, diff
 
 
 def request_payload(context, diff, settings, model, rates):
@@ -500,6 +582,7 @@ def review_commits(repository, base, head, settings, *, transport=None, environ=
     return {'schema_version': 1, 'status': 'advisory_review_recorded', **context,
             'recorded_at': datetime.now(timezone.utc).isoformat(),
             'model_id': settings['exact_model_id'], 'reasoning_effort': 'high',
+            'llm_diff_excluded_globs': excluded_globs(settings),
             'catalog_sha256': catalog_hash, 'provider_response_sha256': response_hash,
             'provider_request_id': data['id'], 'preflight_cost_ceiling_usd': str(predicted),
             'usage': {**{k: usage[k] for k in ['prompt_tokens', 'completion_tokens', 'total_tokens']}, 'cost_usd': str(cost)},

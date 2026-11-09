@@ -1,5 +1,6 @@
 """Offline AI-review contracts. Provider boundary mocked; no paid inference."""
 import copy
+import hashlib
 import importlib.util
 import json
 import os
@@ -342,6 +343,180 @@ class AiReviewContracts(unittest.TestCase):
                                   '--- a/outside.py\n+++ b/outside.py\n@@ -1 +1 @@\n-old\n+new\n')
         with self.assertRaisesRegex(ai.ReviewBlocked, 'proposed_patch_disabled'):
             ai.validate_review(body, self.context)
+
+
+class ExcludedFromLlmDiff(unittest.TestCase):
+    """llm_diff_excluded_globs: narrower model diff, never narrower safety scanning."""
+
+    def make_repo(self, head_files, base_files=None):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        repo = Path(temp.name)
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(repo), *args], stderr=subprocess.DEVNULL).decode().strip()
+        git('init', '-b', 'main')
+        git('config', 'user.name', 'Local Contract')
+        git('config', 'user.email', 'contract@example.invalid')
+        git('remote', 'add', 'origin', 'https://github.com/example/local-contract.git')
+        def commit(files, message):
+            for name, content in files.items():
+                target = repo / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(content if isinstance(content, bytes) else content.encode())
+            git('add', '-A'); git('commit', '-m', message)
+            return git('rev-parse', 'HEAD')
+        base = commit({'README.md': 'base\n', **(base_files or {})}, 'base')
+        head = commit(head_files, 'head')
+        self.git = git
+        return repo, base, head
+
+    def config(self, globs=('evidence/**',), **limits):
+        value = settings()
+        value['llm_diff_excluded_globs'] = list(globs)
+        value['limits'].update(limits)
+        return value
+
+    def test_exception_applies_only_to_configured_globs(self):
+        repo, base, head = self.make_repo({
+            'evidence/a.json': '{"n": 1}\n', 'evidence/deep/b.json': '{"n": 2}\n',
+            'evidence2/c.json': '{"n": 3}\n', 'docs/evidence/d.json': '{"n": 4}\n', 'app.py': 'value = 1\n'})
+        context, diff = ai.repository_diff(repo, base, head, self.config())
+        self.assertEqual([e['path'] for e in context['excluded_from_llm_diff']], ['evidence/a.json', 'evidence/deep/b.json'])
+        self.assertEqual(sorted(context['changed_files']), ['app.py', 'docs/evidence/d.json', 'evidence2/c.json'])
+        self.assertNotIn('evidence/a.json', diff)
+        self.assertNotIn('"n": 1', diff)
+        self.assertIn('evidence2/c.json', diff)
+        self.assertIn('docs/evidence/d.json', diff)
+        # Without configuration nothing is excluded and the model sees everything.
+        context, diff = ai.repository_diff(repo, base, head, self.config(globs=()))
+        self.assertEqual(context['excluded_from_llm_diff'], [])
+        self.assertIn('evidence/a.json', diff)
+        self.assertEqual(len(context['changed_files']), 5)
+        context, _ = ai.repository_diff(repo, base, head, settings())
+        self.assertEqual(context['excluded_from_llm_diff'], [])
+
+    def test_glob_matching_is_anchored_and_segment_aware(self):
+        match = lambda glob, path: bool(ai.glob_regex(glob).fullmatch(path))
+        self.assertTrue(match('evidence/**', 'evidence/a.json'))
+        self.assertTrue(match('evidence/**', 'evidence/x/y/z.json'))
+        self.assertFalse(match('evidence/**', 'evidence'))
+        self.assertFalse(match('evidence/**', 'evidence2/a.json'))
+        self.assertFalse(match('evidence/**', 'docs/evidence/a.json'))
+        self.assertFalse(match('evidence/**', 'Evidence/a.json'))
+        self.assertTrue(match('evidence/*.json', 'evidence/a.json'))
+        self.assertFalse(match('evidence/*.json', 'evidence/x/a.json'))
+        self.assertTrue(match('evidence/**/raw.json', 'evidence/raw.json'))
+        self.assertTrue(match('evidence/**/raw.json', 'evidence/a/b/raw.json'))
+        self.assertTrue(match('evidence/?.json', 'evidence/a.json'))
+        self.assertFalse(match('evidence/?.json', 'evidence/ab.json'))
+
+    def test_secret_in_excluded_file_still_blocks(self):
+        for content in ['{"note": "' + 'sk-' + 'x' * 40 + '"}\n', '{\n  "api_key": "LOCAL_LITERAL"\n}\n',
+                        '{"url": "postgres://u:p@host/db"}\n']:
+            with self.subTest(content=content[:20]):
+                repo, base, head = self.make_repo({'evidence/a.json': content, 'app.py': 'value = 1\n'})
+                with self.assertRaisesRegex(ai.ReviewBlocked, 'potential_secret_in_diff'):
+                    ai.repository_diff(repo, base, head, self.config())
+
+    def test_sensitive_path_in_excluded_glob_still_blocks(self):
+        for name in ['evidence/.env', 'evidence/.env.local', 'evidence/server.pem', 'evidence/id.key', 'evidence/.ssh/config']:
+            with self.subTest(name=name):
+                repo, base, head = self.make_repo({name: 'x\n', 'app.py': 'value = 1\n'})
+                with self.assertRaisesRegex(ai.ReviewBlocked, 'sensitive_file_in_diff'):
+                    ai.repository_diff(repo, base, head, self.config())
+
+    def test_binary_diff_in_excluded_path_still_blocks(self):
+        repo, base, head = self.make_repo({'evidence/shot.bin': b'\x00\x01\x02binary\x00', 'app.py': 'value = 1\n'})
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'binary_diff_requires_manual_review'):
+            ai.repository_diff(repo, base, head, self.config())
+
+    def test_oversized_diff_without_exception_stays_blocked_and_limit_is_unchanged(self):
+        big = ''.join('"sample": %d,\n' % i for i in range(6000))
+        self.assertGreater(len(big), 64000)
+        repo, base, head = self.make_repo({'evidence/big.json': big, 'app.py': 'value = 1\n'})
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'limit_exceeded'):
+            ai.repository_diff(repo, base, head, self.config(globs=()))
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'limit_exceeded'):
+            ai.repository_diff(repo, base, head, settings())
+        # With the exception the large evidence file stays out of the model diff ...
+        context, diff = ai.repository_diff(repo, base, head, self.config())
+        self.assertLess(len(diff.encode()), 64000)
+        self.assertEqual(context['excluded_from_llm_diff'][0]['added'], 6000)
+        # ... but the same limit still applies to everything that IS sent to the model.
+        repo, base, head = self.make_repo({'evidence/a.json': '{"n": 1}\n', 'src/big.txt': big})
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'limit_exceeded'):
+            ai.repository_diff(repo, base, head, self.config())
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'limit_exceeded'):
+            ai.repository_diff(repo, base, head, self.config(max_diff_bytes=10))
+
+    def test_local_scan_ceiling_for_excluded_paths_blocks(self):
+        repo, base, head = self.make_repo({'evidence/a.json': '{"n": 1}\n' * 50, 'app.py': 'value = 1\n'})
+        with patch.object(ai, 'EXCLUDED_SCAN_BYTES', 100):
+            with self.assertRaisesRegex(ai.ReviewBlocked, 'excluded_diff_scan_limit_exceeded'):
+                ai.repository_diff(repo, base, head, self.config())
+        self.assertEqual(ai.EXCLUDED_SCAN_BYTES, 8 * 1024 * 1024)
+
+    def test_only_excluded_paths_is_not_a_review_and_never_reaches_the_provider(self):
+        repo, base, head = self.make_repo({'evidence/a.json': '{"n": 1}\n', 'evidence/b/c.json': '{"n": 2}\n'})
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'only_excluded_paths_not_a_review'):
+            ai.repository_diff(repo, base, head, self.config())
+        provider = FakeProvider({})
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'only_excluded_paths_not_a_review'):
+            ai.review_commits(repo, base, head, self.config(), transport=provider, environ={'OPENROUTER_API_KEY': 'offline-contract-only'})
+        self.assertEqual(provider.post_calls, 0)
+
+    def test_invalid_globs_fail_closed(self):
+        invalid = [['/evidence/**'], ['../evidence/**'], ['evidence/../src/**'], ['**'], ['*'], ['**/*'], ['*/x'],
+                   ['**/evidence/x'], ['./evidence/**'], ['evidence//x'], ['evidence/'], [''], ['-evidence/**'],
+                   ['evi[dence]/**'], ['a**b/x'], ['evidence\\\\x'], ['evidence/**', 'a/**', 'b/**', 'c/**', 'd/**', 'e/**'],
+                   [1], [None], 'evidence/**', {'evidence/**': True}, None]
+        repo, base, head = self.make_repo({'evidence/a.json': '{"n": 1}\n', 'app.py': 'value = 1\n'})
+        for globs in invalid:
+            with self.subTest(globs=globs):
+                config = settings(); config['llm_diff_excluded_globs'] = globs
+                with self.assertRaisesRegex(ai.ReviewBlocked, 'invalid_llm_diff_excluded_globs'):
+                    ai.repository_diff(repo, base, head, config)
+                path = repo / 'glob-fixture.json'
+                path.write_text(json.dumps({'ai_review': config}))
+                self.addCleanup(lambda p=path: p.unlink(missing_ok=True))
+                with self.assertRaisesRegex(ai.ReviewBlocked, 'invalid_llm_diff_excluded_globs'):
+                    ai.load_settings(path)
+        # Exactly five valid entries are accepted.
+        config = settings(); config['llm_diff_excluded_globs'] = ['a/**', 'b/**', 'c/**', 'd/**', 'e/**']
+        self.assertEqual(len(ai.excluded_globs(config)), 5)
+
+    def test_shipped_config_excludes_exactly_evidence_and_keeps_limit(self):
+        shipped = ai.load_settings(Path(__file__).resolve().parents[1] / 'config/automation.json')
+        self.assertEqual(shipped['llm_diff_excluded_globs'], ['evidence/**'])
+        self.assertEqual(shipped['limits']['max_diff_bytes'], 64000)
+
+    def test_context_lists_excluded_paths_with_hash_and_model_never_sees_content(self):
+        marker = 'EVIDENCE_CONTENT_MARKER'
+        repo, base, head = self.make_repo(
+            {'evidence/a.json': '{"n": 1, "m": "%s"}\n{"n": 2}\n' % marker, 'app.py': 'value = 1\n'},
+            base_files={'evidence/a.json': '{"n": 0}\n{"gone": 1}\n'})
+        provider = FakeProvider({})
+        context, _ = ai.repository_diff(repo, base, head, self.config())
+        provider.context = context
+        result = ai.review_commits(repo, base, head, self.config(), transport=provider,
+                                   environ={'OPENROUTER_API_KEY': 'offline-contract-only'})
+        raw = subprocess.check_output(['git', '-C', str(repo), 'diff', '--no-ext-diff', '--no-textconv', '--no-renames',
+                                       '--unified=3', base, head, '--', ':(literal)evidence/a.json'])
+        expected = [{'path': 'evidence/a.json', 'added': 2, 'removed': 2, 'sha256': hashlib.sha256(raw).hexdigest()}]
+        self.assertEqual(result['excluded_from_llm_diff'], expected)
+        self.assertEqual(result['llm_diff_excluded_globs'], ['evidence/**'])
+        self.assertEqual(result['changed_files'], ['app.py'])
+        user = json.loads(provider.last_payload['messages'][1]['content'])['untrusted_review_input']
+        self.assertEqual(user['excluded_from_llm_diff'], expected)
+        self.assertNotIn(marker, provider.last_payload['messages'][1]['content'])
+        self.assertIn('excluded_from_llm_diff', provider.last_payload['messages'][0]['content'])
+        self.assertEqual(result['gate_authority'], 'advisory_only_not_jeff_merge_or_operator_acceptance')
+        # Findings on paths the model never saw are out of scope.
+        body = review(context)
+        body['findings'] = [{'severity': 'low', 'path': 'evidence/a.json', 'line': 1, 'message': 'x', 'suggested_fix': ''}]
+        body['recommendation'] = 'changes_requested'
+        with self.assertRaisesRegex(ai.ReviewBlocked, 'review_finding_scope_invalid'):
+            ai.validate_review(body, context)
 
 
 if __name__ == '__main__':
