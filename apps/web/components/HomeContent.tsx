@@ -5,7 +5,6 @@ import {SiteLink} from './Router';
 import type {PublicPage} from '../lib/page-types';
 import type {PublicVideo} from './PresenterVideo';
 import IdentityHero from './IdentityHero';
-import HomeStudioScene from './HomeStudioScene';
 import copy from '../../../config/home-concept-copy.json';
 import {brandImages,pageImage,imageAlt,srcSetFor} from '../lib/brand-media';
 import './HomeConcept.css';
@@ -34,7 +33,6 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
  return <div className="home-concept" data-testid="home-content">
   <IdentityHero locale={locale} page={home} video={video}/>
   <nav className="hc-anchors hc-container" aria-label={t.introKicker}>{t.anchor.map((label,i)=><a key={label} href={['#leistungen','#zusammenarbeit','#budget','#produktwelt'][i]}>{label}<DetailArrow direction="down"/></a>)}</nav>
-  <HomeStudioScene locale={locale}/>
   <section className="hc-intro hc-container" aria-labelledby="hc-intro-title">
    <div><span className="hc-kicker">{t.introKicker}</span><h2 id="hc-intro-title">{t.introTitle}</h2></div><p>{t.introBody}</p>
   </section>
