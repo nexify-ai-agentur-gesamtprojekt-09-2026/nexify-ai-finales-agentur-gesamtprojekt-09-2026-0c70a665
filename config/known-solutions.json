@@ -108,8 +108,8 @@
       "id": "KS-008",
       "bereich": "betrieb",
       "symptom": "Produktion zeigt alten Stand; Vercel create_deployment scheitert mit incorrect_git_source_info",
-      "ursache": "Das Repository ist in die GitHub-Organisation nexify-ai-agentur-gesamtprojekt-09-2026 umgezogen; die Vercel-GitHub-App hatte dort keinen Zugriff, das Vercel-Projekt hing am alten Git-Link.",
-      "loesung": "Inhaber installiert/erteilt die Vercel-GitHub-App für die neue Organisation und verbindet das Projekt (Settings, Git). Danach deployt main automatisch. Domain nexifyai.de muss dem neuen Projekt zugeordnet sein; Rollback-Pfad im Register OF-14 festhalten.",
+      "ursache": "Das Repository ist in die GitHub-Organisation nexify-ai-agentur-gesamtprojekt-09-2026 umgezogen; die Vercel-GitHub-App hatte dort keinen Zugriff, das Vercel-Projekt hing am alten Git-Link. Stand 2026-11-09: Neben dem alten Projekt (prj_Po7jlB7s…, hält nexifyai.de, www.nexifyai.de, nexifyai.cloud, www.nexifyai.cloud und ca. 40 Umgebungsvariablen) gibt es zwei neu importierte Projekte (…-s4k5, …-ut7r), die mit der neuen Organisation verknüpft sind und main bauen, aber keine Umgebungsvariablen und keine Domains haben.",
+      "loesung": "Bevorzugt: Im alten Projekt unter Settings, Git das Repository der neuen Organisation neu verbinden. Domains und Umgebungsvariablen bleiben, main deployt danach automatisch. Nicht: Domains auf ein neues Projekt ziehen, solange dessen Umgebungsvariablen fehlen; Chat, Mail und interne APIs hängen daran (ROUTER_*, RESEND_*, MONGODB_URI u. a.), und Secrets kopiert nur der Inhaber. create_deployment per API mit gitSource scheitert für das alte Projekt weiter mit incorrect_git_source_info, solange der Git-Link alt ist. Rollback-Stand: dpl_35Vacwi3rZhskCzYBWfamveJFQK1. Doppelte neue Projekte werden nicht gelöscht, nur archiviert/ignoriert.",
       "wache": {
         "art": "dokumentiert"
       },
