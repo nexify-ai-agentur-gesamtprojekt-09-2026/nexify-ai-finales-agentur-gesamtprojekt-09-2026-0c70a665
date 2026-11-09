@@ -103,3 +103,28 @@ Bewusst offen bleiben `apps/web/components/PresenterScene.tsx` (Zeile REC-MEDIA-
 | `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` | `e439c85f10a8…` | `2d562005862f…` | heute neu erhobene Ausnahmeerfassung (next, Exit 0) |
 | `evidence/one-app-2026-10-27/text-spacing.json` | `59c687d965c2…` | `b86244f8b4f0…` | heute neu erhobener Text-Spacing-Lauf (129 Checks, 0 Befunde, 43 Routen) |
 | `apps/web/components/DiagnosticConsent.css` | `50931b2af39c…` | `a57940d16dac…` | Footer-Pfeil: Disclosure mit eigenem Chevron; bytegebunden in allen fünf heute neu erhobenen Belegen |
+
+## Nachtrag Next-Quellen und Konfiguration (09.11.2026)
+
+Der Next-Harness bindet jetzt auch `page.tsx`, `[...slug]/page.tsx` und `next.config.ts`, die er real ausführt. Ein Pin belegt nur unveränderte Bytes seit einem bestandenen Lauf, keine Abnahme der Anforderung.
+
+| Datei | alter Pin | neuer Pin | Beleg |
+|---|---|---|---|
+| `apps/web/app/page.tsx` | `e6d38be79fa7…` | `80197fa46cf3…` | im Harness-Lauf (70 Routen, Startseite) real ausgeführt und im Beleg next-public.json bytegebunden |
+| `apps/web/app/[...slug]/page.tsx` | `ff40ee25c730…` | `4b8a636c0410…` | im Harness-Lauf (alle öffentlichen Unterseiten in de und nl) real ausgeführt und bytegebunden |
+| `apps/web/next.config.ts` | `78402edbe626…` | `d8b4e13bdcc6…` | im Harness-Lauf (Next-Build, Header, Routen) real ausgeführt und bytegebunden |
+| `evidence/consent-ui-2026-10-28/next-public.json` | `b8888c4abbad…` | `5cbe162f0071…` | heute neu erhobener Next-Lauf, jetzt mit 18 statt 15 gebundenen Quellen (70 Routen, 10 private, passed) |
+| `apps/web/auth/tests/browser-public-experience.mjs` | `01dd50b5bddf…` | `17cfd1c25cdc…` | Harness um drei Quellen erweitert, heute real ausgeführt (passed) |
+| `tools/check_browser_evidence.py` | `bb6e835fc30a…` | `f6ec11afa854…` | Prüfer um dieselben drei Quellen erweitert; gesamte Belegkette besteht, unittest tests.test_browser_evidence OK |
+| `config/page-explainers.json` | `dac4a03283c6…` | `5155527ac0ce…` | Bytes gebunden: vom heute grünen Test public-video-assets.test.mjs (26 von 26) und generate-public-data gelesen. Inhaltsurteil (REC-CONTENT-01) bleibt offen, full_requirement_accepted bleibt false |
+| `config/page-media-registry.json` | `43d36f51f863…` | `f3fae02c19ba…` | Bytes gebunden: vom heute grünen Test public-video-assets.test.mjs (26 von 26) gelesen. Inhaltsurteil (REC-MEDIA-01) bleibt offen, full_requirement_accepted bleibt false |
+
+Bewusst weiter offen (kein Test oder Lauf bindet den Inhalt): `PROGRESS.md`, `apps/shop-api/requirements.in`, `apps/site/tests/browser-scene-images.mjs` und die gelöschte `apps/web/components/PresenterScene.tsx` (Zeile REC-MEDIA-01).
+
+## Nachtrag PROGRESS.md (09.11.2026)
+
+| Datei | alter Pin | neuer Pin | Beleg |
+|---|---|---|---|
+| `PROGRESS.md` | `5a7e8ddbb508…` | `ee42461b8e39…` | Diff seit Pinstand e061fc8 geprüft: 49 angefügte Zeilen, 0 geänderte oder gelöschte; ausschließlich Dokumentation (Prüfberichte, Entscheidungen). Keine Änderung früherer Zeilen. |
+
+Weiter offen mit Grund: `apps/shop-api/requirements.in` (seit Pin zwei Zeilen: Kommentar und Drittanbieter-Abhängigkeit `higgsfield-client==0.2.0`; kein Test oder Lauf prüft sie, Pin bindet keine Sicherheitsprüfung), `apps/site/tests/browser-scene-images.mjs` und `apps/web/components/PresenterScene.tsx` (gelöscht, Zeile REC-MEDIA-01).

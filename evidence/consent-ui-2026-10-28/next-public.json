@@ -386,7 +386,10 @@
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/DiagnosticConsent.css": "a57940d16dac5b4c5c202b561b12b07b4036274505b7711f9d59214d86a74f59",
     "apps/web/components/SiteFooter.tsx": "56a189a3feea6f954ed4a30e6bcace4939480fcea485c73a215ec4a6451e523a",
-    "apps/web/auth/tests/browser-public-experience.mjs": "01dd50b5bddfa234faa90aa0bfd6d520fa8e9936000d7412377d63ba9673dde1"
+    "apps/web/auth/tests/browser-public-experience.mjs": "17cfd1c25cdc7c137dbc1123e9d958546e8d73c18bdd0be0380e3c1fe83ee386",
+    "apps/web/app/page.tsx": "80197fa46cf354bc398f22b3f14d03b48d6d72cfd74afb73ae091734eef991ae",
+    "apps/web/app/[...slug]/page.tsx": "4b8a636c0410a8155c8aa4c20120d543cdd70a0a818f79bda6aa06a1fde44ba1",
+    "apps/web/next.config.ts": "d8b4e13bdcc65dbdbfefe6a624e76f173da0b1f818d2a17839089c3bea6edd76"
   },
   "auth_mobile": [
     {

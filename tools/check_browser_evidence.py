@@ -552,6 +552,7 @@ NEXT_CONSENT_SOURCES = (
     'apps/web/app/anmelden/[[...sign-in]]/page.tsx','apps/web/app/registrieren/[[...sign-up]]/page.tsx',
     'apps/web/components/DiagnosticConsent.tsx','apps/web/components/DiagnosticConsent.css',
     'apps/web/components/SiteFooter.tsx','apps/web/auth/tests/browser-public-experience.mjs',
+    'apps/web/app/page.tsx','apps/web/app/[...slug]/page.tsx','apps/web/next.config.ts',
 )
 NEXT_CONSENT_PATH = 'evidence/consent-ui-2026-10-28/next-public.json'
 

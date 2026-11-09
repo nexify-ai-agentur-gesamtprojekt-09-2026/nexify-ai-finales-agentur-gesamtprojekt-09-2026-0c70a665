@@ -1,0 +1,426 @@
+{
+  "scope": "local Next build;no provider or tenant acceptance",
+  "routes": [
+    {
+      "path": "/",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/portale",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/shop",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/portale",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "locale": "nl",
+      "passed": true
+    }
+  ],
+  "private": [
+    "/portal/kunde",
+    "/portal/api",
+    "/portal/affiliate",
+    "/teileklar/konto",
+    "/teileklar/partnerportal",
+    "/teileklar/nachbarschaft",
+    "/intern/workspace",
+    "/intern/posteingang",
+    "/intern/leitstand",
+    "/intern/verwaltung"
+  ],
+  "external": 0,
+  "mutations": 0,
+  "pageErrors": [],
+  "pwa": {
+    "/manifest.webmanifest": 404,
+    "/public-install-worker.js": 404
+  },
+  "navigation": true,
+  "source_sha256": {
+    "apps/web/proxy.ts": "b3981c470e226eb0415a63dba69ec340f91c283eca944004c52b17ce96f6f201",
+    "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
+    "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
+    "apps/web/app/api/internal/workspace/mail/route.ts": "e8a5b7abf16d44d628cf730bcd0b70d471116584659ac0545f5416d2a44a3df2",
+    "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
+    "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
+    "apps/web/auth/public-provider.ts": "4cef8d6d2669dafd616475a0e786bdd84bdf253154afa79a18d6a82250a4ca04",
+    "apps/web/app/layout.tsx": "4dacaac6a22caac5159d1ecf0a7b21724dfabe8ab46a4c7a39c3fa732ba87723",
+    "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "ae015545eb91f79fd89a438a97a0c5a6a190f882d0b5619939e0b690bd5770df",
+    "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "ed41b40219ce98bc2ea1888ac7a97bde3549ac65f32e0bb086177b54cab1511c",
+    "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
+    "apps/web/components/DiagnosticConsent.css": "a57940d16dac5b4c5c202b561b12b07b4036274505b7711f9d59214d86a74f59",
+    "apps/web/components/SiteFooter.tsx": "56a189a3feea6f954ed4a30e6bcace4939480fcea485c73a215ec4a6451e523a",
+    "apps/web/auth/tests/browser-public-experience.mjs": "01dd50b5bddfa234faa90aa0bfd6d520fa8e9936000d7412377d63ba9673dde1"
+  },
+  "auth_mobile": [
+    {
+      "locale": "de",
+      "path": "/anmelden",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "locale": "de",
+      "path": "/registrieren",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "locale": "nl",
+      "path": "/anmelden",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "locale": "nl",
+      "path": "/registrieren",
+      "width": 320,
+      "passed": true
+    }
+  ],
+  "companion_avatar": {
+    "aria_hidden": true,
+    "natural_width": 194,
+    "location": "reopen-chat launcher",
+    "passed": true
+  },
+  "internal_workspace_api_auth_required_401": true,
+  "internal_mail_api_auth_required_401": true,
+  "passed": true
+}
