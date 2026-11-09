@@ -110,7 +110,7 @@
       "soll": "vorhanden",
       "belegt_am": "2026-11-09T09:15:00Z",
       "beleg": "Connector Resend, nur lesend: Domains-Liste abrufbar (3 Domains). nexifyai.cloud verifiziert (Versand an, eu-west-1).",
-      "befund": "Produktionsdomain nexifyai.de ist in Resend NICHT angelegt (OF-09 offen); studienkollegaachen.de hat Status failed (anderes Projekt). Kein Versand, keine Änderung durchgeführt."
+      "befund": "Domain nexifyai.de am 2026-11-09 in Resend angelegt (Status not_started, Region eu-west-1, Versand an, Empfang aus; Domain-ID 32816b0c-e9cd-4b14-82bc-55e9925a93a6). Nicht verifiziert: 4 DNS-Einträge (DKIM-TXT resend._domainkey, MX send, SPF-TXT send, CNAME rsend) müssen in der DNS-Zone gesetzt werden. Zone: Namensserver sind ns1/ns2.dns-parking.com (Registrar-Parkserver), Vercel erwartet ns1/ns2.vercel-dns.com (Domain dort als 'external' geführt) ⇒ Einträge beim Registrar setzen oder Namensserver auf Vercel umstellen (Einzelfreigabe, bestehende MX/TXT vorher sichern). studienkollegaachen.de hat Status failed (anderes Projekt). Kein Versand, keine DNS-Änderung durchgeführt."
     },
     {
       "id": "revolut",
