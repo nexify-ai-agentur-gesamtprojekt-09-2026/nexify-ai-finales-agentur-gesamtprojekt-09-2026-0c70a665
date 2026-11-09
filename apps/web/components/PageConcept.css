@@ -16,7 +16,7 @@
 .home-concept .pc-breadcrumb a:hover{color:var(--color-atelier-champagne)}
 .home-concept .pc-breadcrumb [aria-current=page]{color:var(--color-text-primaer)}
 .home-concept .pc-hero .hc-kicker{margin-bottom:var(--space-4)}
-.home-concept .pc-hero h1{font:500 min(var(--type-hero-size),3.15cqi)/var(--type-hero-leading) var(--font-display);letter-spacing:var(--type-display-tracking);margin:0 0 var(--space-5);max-width:18ch;hyphens:none;overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.home-concept .pc-hero h1{font:500 min(var(--type-hero-size),3.15cqi)/var(--type-hero-leading) var(--font-display);letter-spacing:var(--type-display-tracking);margin:0 0 var(--space-5);max-width:18ch;hyphens:none;overflow-wrap:anywhere;word-break:normal;text-wrap:balance}
 .home-concept .pc-hero.is-text-only h1{max-width:24ch}
 .home-concept .pc-hero-lead{margin:0 0 var(--space-6);max-width:52ch;font-size:var(--type-body-size);line-height:var(--type-body-leading);color:var(--color-text-sekundaer)}
 .home-concept .pc-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4) var(--space-6)}
