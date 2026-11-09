@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09",
+  "updated_at": "2026-11-09T21:39:00Z",
   "owner": "Pascal Courbois / Art Director / UX-Frontend",
   "writer": "/root",
   "canonical_order_reference": "config/acceptance-coverage.json requirements_reconciliation current_execution",
@@ -460,11 +460,11 @@
       "video_version": "nexify-personal-intro-v1",
       "target_media": "/media/home-review/pascal-studio-scene-original-20261109.mp4",
       "visual_match": "Pascal in studio; chosen by user for homepage",
-      "technical_check": "1280x720 H.264/AAC 10.026667 s; mean -20.7 dB, peak -1.1 dB; browser/identity/lip/speech/caption review pending",
+      "technical_check": "1280x720 H.264/AAC 10.026667 s; mean -20.7 dB, peak -1.1 dB; local desktop/mobile/reduced-motion playback and image fallback tested; formal identity/lip/speech/caption review pending",
       "approval_status": "user_placement_approved; art_direction_identity_audio_visual_release_pending",
-      "publication_status": "prior_silent_scene_live_in_private_sites_v4; audible_hero_code_prepared_not_released",
+      "publication_status": "owner_private_sites_v5_only; commit_49f84db097544e96fcf54ca8a8b2d5d58838cd7a; public_release_pending",
       "fallback": "existing approved image remains video poster and decode fallback",
-      "rollback": "restore private Sites v4 and retain video source"
+      "rollback": "restore private Sites v4 (appgprj_6af2144e2af881918282f28c4b57411a~appgver_ba04b09839408191b997f6957196a8dc) and retain source"
     },
     {
       "id": "suite-factory-intro",
