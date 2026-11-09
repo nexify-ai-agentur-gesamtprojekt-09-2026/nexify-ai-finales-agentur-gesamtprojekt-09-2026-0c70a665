@@ -35,17 +35,17 @@ input[type=checkbox],input[type=radio]{min-width:24px;min-height:24px}
 .diagnostic-consent a, .diagnostic-consent button, .diagnostic-consent span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
 /* 08.11.2026 (Reflow 320 px): .footer-link-groups stand auf zwei festen 120-px-Spalten;
    "Datenschutzeinstellungen" braucht 171 px und schob das Dokument auf 347 px. */
-@media (max-width: 640px) {
-  /* Gleiche Spezifitaet wie PageConcept.css:108, das "overflow-wrap:normal" erzwingt. */
-  .workspace-shell .site-footer .footer-link-groups a {
-    overflow-wrap: anywhere !important;
-    word-break: break-word !important;
-    hyphens: auto !important;
-    min-width: 0;
-    max-width: 100%;
-  }
-  .footer-link-groups nav { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+/* 09.11.2026 (1.4.4): Gilt ohne Breakpoint. Bei 200 % Textgroesse laufen die Links auch auf
+   1280 px ueber den Viewport (Seitenbreite 1399 statt 1280), nicht nur unter 640 px. */
+/* Gleiche Spezifitaet wie PageConcept.css:110, das "overflow-wrap:normal" erzwingt. */
+.workspace-shell .site-footer .footer-link-groups a {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  min-width: 0;
+  max-width: 100%;
 }
+.footer-link-groups nav { min-width: 0; max-width: 100%; flex-wrap: wrap; }
 /* 08.11.2026 (2.5.8): Filter-Checkboxen wurden per flex-basis auf 20 px gedrueckt. */
 input[type=checkbox], input[type=radio] { min-width: 24px; min-height: 24px; width: 24px; height: 24px; }
 /* 08.11.2026 (WCAG 2.4.7): Einzelne Komponenten setzten "outline:none" ohne Ersatz.
