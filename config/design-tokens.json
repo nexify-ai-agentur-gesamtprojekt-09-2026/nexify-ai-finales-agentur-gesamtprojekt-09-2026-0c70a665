@@ -364,7 +364,8 @@
     "atelier": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-platinum) 16%, transparent), 0 24px 64px -32px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
     "atelierPolish": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-platinum) 32%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 12%, transparent), 0 24px 64px -32px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
     "homeMedia": "inset 0 2px 2px color-mix(in srgb, var(--color-atelier-ink) 26%, transparent), inset 0 -3px 8px color-mix(in srgb, var(--color-atelier-canvas) 80%, transparent), 0 16px 32px -16px color-mix(in srgb, var(--color-atelier-canvas) 70%, transparent)",
-    "atelierDepth": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-ink) 20%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 9%, transparent), 0 6px 12px -6px var(--color-atelier-canvas), 0 32px 64px -28px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)"
+    "atelierDepth": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-ink) 20%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 9%, transparent), 0 6px 12px -6px var(--color-atelier-canvas), 0 32px 64px -28px color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent)",
+    "atelierPanelDepth": "inset 0 1px 0 color-mix(in srgb, var(--color-atelier-ink) 28%, transparent), inset 1px 0 0 color-mix(in srgb, var(--color-atelier-platinum) 15%, transparent), inset -1px 0 0 color-mix(in srgb, var(--color-atelier-champagne) 12%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--color-atelier-canvas) 90%, transparent), 0 8px 18px -10px color-mix(in srgb, var(--color-atelier-canvas) 80%, transparent), 0 38px 76px -34px color-mix(in srgb, var(--color-atelier-canvas) 96%, transparent)"
   },
   "gradient": {
     "markenlicht": "radial-gradient(ellipse 40% 26% at 74% 48%, color-mix(in srgb, var(--color-marke-lime) 9%, transparent), transparent 100%), radial-gradient(ellipse 24% 18% at 20% 72%, color-mix(in srgb, var(--color-marke-cyan) 6%, transparent), transparent 100%)",
@@ -382,7 +383,9 @@
     "homeDivider": "linear-gradient(90deg, color-mix(in srgb, var(--color-atelier-platinum) 18%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 10%, transparent) 55%, transparent)",
     "atelierHeading": "linear-gradient(115deg, var(--color-atelier-ink) 8%, var(--color-atelier-champagne) 62%, var(--color-atelier-platinum) 100%)",
     "atelierAmbient": "radial-gradient(ellipse 60% 24% at 85% 5%, color-mix(in srgb, var(--color-atelier-champagne) 19%, transparent), transparent 78%), radial-gradient(ellipse 40% 20% at 0% 44%, color-mix(in srgb, var(--color-atelier-platinum) 8%, transparent), transparent 85%), radial-gradient(ellipse 50% 18% at 95% 78%, color-mix(in srgb, var(--color-atelier-champagne) 11%, transparent), transparent 85%)",
-    "atelierReflection": "linear-gradient(135deg, color-mix(in srgb, var(--color-atelier-ink) 48%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 22%, transparent) 24%, transparent 48%, transparent 78%, color-mix(in srgb, var(--color-atelier-champagne) 28%, transparent))"
+    "atelierReflection": "linear-gradient(135deg, color-mix(in srgb, var(--color-atelier-ink) 48%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 22%, transparent) 24%, transparent 48%, transparent 78%, color-mix(in srgb, var(--color-atelier-champagne) 28%, transparent))",
+    "atelierPanel": "radial-gradient(ellipse 85% 35% at 5% 0%, color-mix(in srgb, var(--color-atelier-platinum) 10%, transparent), transparent 75%), radial-gradient(ellipse 55% 30% at 100% 12%, color-mix(in srgb, var(--color-atelier-champagne) 8%, transparent), transparent 78%), linear-gradient(155deg, var(--color-atelier-surface), var(--color-atelier-canvas) 68%)",
+    "atelierPanelFacet": "linear-gradient(137deg, color-mix(in srgb, var(--color-atelier-ink) 20%, transparent), transparent 24%, transparent 66%, color-mix(in srgb, var(--color-atelier-platinum) 10%, transparent))"
   },
   "motion": {
     "feedback": "180ms ease",
