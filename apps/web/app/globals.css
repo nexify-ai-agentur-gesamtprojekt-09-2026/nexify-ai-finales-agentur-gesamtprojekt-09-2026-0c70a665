@@ -52,7 +52,7 @@ input[type=checkbox], input[type=radio] { min-width: 24px; min-height: 24px; wid
    Ein sichtbarer Fokusring gilt jetzt fuer jedes bedienbare Element, per !important,
    damit keine Komponentenregel ihn mehr ueberschreiben kann. */
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-accent, #c0ee38) !important;
+  outline: 2px solid var(--color-accent, var(--color-marke-lime)) !important;
   outline-offset: 2px !important;
   border-radius: 4px;
 }
@@ -60,7 +60,7 @@ input[type=checkbox], input[type=radio] { min-width: 24px; min-height: 24px; wid
    noch Komponenten-Resets ihn aushebeln koennen. Gilt fuer jedes bedienbare Element. */
 html body :is(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible,
 html body .workspace-shell :is(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
-  outline: 2px solid var(--color-marke-lime, #c0ee38) !important;
+  outline: 2px solid var(--color-marke-lime) !important;
   outline-offset: 3px !important;
 }
 /* 08.11.2026 (2.5.8): Filter-Checkboxen wurden von Flex-Regeln auf 20 px Breite gedrueckt. */

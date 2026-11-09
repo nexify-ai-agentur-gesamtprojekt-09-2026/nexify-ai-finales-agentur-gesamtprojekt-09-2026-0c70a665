@@ -9,7 +9,7 @@
 .orientation-message.role-user { background: var(--color-graphit-800); border: 1px solid var(--color-linie-mittel); border-radius: var(--radius-chip); padding: 16px; }
 .orientation-message.role-user > strong { color: var(--color-text-gedaempft); }
 .orientation-page-results{display:grid;gap:var(--space-2);margin-top:var(--space-1)}
-.orientation-page-link{display:grid;grid-template-columns:26px minmax(0,1fr) 18px;align-items:start;min-height:76px;gap:var(--space-3);padding:var(--space-3);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:linear-gradient(145deg,var(--color-atelier-canvas),color-mix(in srgb,var(--color-atelier-raised) 88%,transparent));color:var(--color-text-primaer);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);transition:transform 180ms ease,border-color 180ms ease,background-color 180ms ease}
+.orientation-page-link{display:grid;grid-template-columns:26px minmax(0,1fr) 18px;align-items:start;min-height:76px;gap:var(--space-3);padding:var(--space-3);border:1px solid var(--color-linie-fein);border-radius:var(--radius-karte);background:linear-gradient(145deg,var(--color-atelier-canvas),color-mix(in srgb,var(--color-atelier-raised) 88%,transparent));color:var(--color-text-primaer);box-shadow:inset 0 1px 0 color-mix(in srgb,white 4%,transparent);transition:transform 180ms ease,border-color 180ms ease,background-color 180ms ease}
 .orientation-page-link:hover{transform:translateY(-1px);border-color:var(--color-atelier-glass-edge);background:var(--color-atelier-raised)}
 .orientation-page-index{padding-top:2px;color:var(--color-atelier-champagne);font:500 9px/1.4 var(--font-mono)}
 .orientation-page-copy{display:grid;gap:4px;min-width:0}
@@ -47,7 +47,7 @@
 .orientation-starter svg{color:var(--color-atelier-champagne)}
 .orientation-starter:hover{transform:translateY(-1px);border-color:var(--color-atelier-glass-edge);background:var(--color-atelier-surface)}
 .orientation-starter:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:2px}
-.orientation-journey{position:relative;overflow:hidden;display:grid;gap:var(--space-2);padding:var(--space-4);border:1px solid var(--color-atelier-glass-edge);border-radius:var(--radius-leit);background:radial-gradient(260px 150px at 95% 0%,color-mix(in srgb,var(--color-marke-lime) 12%,transparent),transparent 72%),linear-gradient(145deg,var(--color-atelier-raised),var(--color-atelier-canvas));box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 38px -30px #000}
+.orientation-journey{position:relative;overflow:hidden;display:grid;gap:var(--space-2);padding:var(--space-4);border:1px solid var(--color-atelier-glass-edge);border-radius:var(--radius-leit);background:radial-gradient(260px 150px at 95% 0%,color-mix(in srgb,var(--color-marke-lime) 12%,transparent),transparent 72%),linear-gradient(145deg,var(--color-atelier-raised),var(--color-atelier-canvas));box-shadow:inset 0 1px 0 color-mix(in srgb,white 7%,transparent),0 18px 38px -30px color-mix(in srgb,black 100%,transparent)}
 .orientation-journey>span{color:var(--color-atelier-champagne);font:500 10px/1.4 var(--font-text);letter-spacing:.04em}
 .orientation-journey h4{max-width:24ch;margin:0;color:var(--color-text-primaer);font:500 18px/1.25 var(--font-display);letter-spacing:-.025em}
 .orientation-journey>p{margin:0;color:var(--color-text-tertiaer);font:400 12px/1.55 var(--font-text)}
