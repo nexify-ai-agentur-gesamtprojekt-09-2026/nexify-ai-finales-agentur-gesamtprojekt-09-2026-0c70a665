@@ -6,7 +6,7 @@ The transactional full-catalog importer remains unchanged.
 """
 import asyncio
 import uuid
-from .bigbuy_import import BigBuyClient, BigBuyReadError, find_roots, build_product, stock_total
+from .bigbuy_import import BigBuyClient, BigBuyReadError, find_roots, build_product, stock_total, require_publication_contract
 from .db import db, now_iso
 
 
@@ -16,6 +16,7 @@ def row_for(data, product_id):
 
 
 async def import_selection(actor, max_pages=3, run_id=None):
+    require_publication_contract()
     run_id = run_id or str(uuid.uuid4())
     stamp = now_iso()
     await db.imports.update_one({'_id':run_id},{'$set':{'status':'running','mode':'additive_selection','partial':True,'source':'BigBuy','environment':'production','started_at':stamp,'started_by':actor}},upsert=True)
@@ -54,7 +55,6 @@ async def import_selection(actor, max_pages=3, run_id=None):
                     image_data=row_for(await client.get(f'/rest/catalog/productimages/{pid}.json',{}),pid) or {}
                     product=build_product(row,info,image_data.get('images',[]),quantity,names,scope[row['taxonomy']],stamp,run_id,'production')
                     product.update(source_partial=True,source_mode='additive_selection',stock_by_handling=stock['stocks'],shipping_status='calculated_at_checkout')
-                    product['active']=True
                     await db.products.update_one({'_id':product['_id']},{'$set':product,'$setOnInsert':{'first_imported_at':stamp}},upsert=True)
                     for cid in product['category_ids']:
                         await db.categories.update_one({'_id':cid},{'$set':{'name':names[cid],'root':cid in roots}},upsert=True)
@@ -71,6 +71,7 @@ async def import_selection(actor, max_pages=3, run_id=None):
 
 async def enrich_images():
     """Approved supplier-original photos only, never marketing substitutes."""
+    require_publication_contract()
     from .catalog_api import supplier_image
     client=BigBuyClient('production')
     count=0
