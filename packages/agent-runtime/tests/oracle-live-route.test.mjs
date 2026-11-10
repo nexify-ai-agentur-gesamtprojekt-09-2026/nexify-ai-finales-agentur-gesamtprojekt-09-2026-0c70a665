@@ -13,6 +13,15 @@ function providerSse(text) {
   return new Response(`data: ${JSON.stringify(delta)}\n\ndata: ${JSON.stringify(end)}\n\ndata: [DONE]\n\n`,
     { headers: { 'content-type': 'text/event-stream' } });
 }
+function providerToolSse(pageId) {
+  const model = 'deepseek/deepseek-v4.1-flash-1017';
+  const call = { id:'fixture',model,created:1,choices:[{index:0,delta:{role:'assistant',tool_calls:[
+    {index:0,id:'call-1',type:'function',function:{name:'publicPageInfo',arguments:JSON.stringify({pageId,locale:'de'})}}
+  ]},finish_reason:null}]};
+  const end = { id:'fixture',model,created:1,choices:[{index:0,delta:{},finish_reason:'tool_calls'}]};
+  return new Response(`data: ${JSON.stringify(call)}\n\ndata: ${JSON.stringify(end)}\n\ndata: [DONE]\n\n`,
+    {headers:{'content-type':'text/event-stream'}});
+}
 function request(messages, signal) {
   return new Request(origin + '/api/agent-chat', { method: 'POST', signal,
     headers: { Origin: origin, 'Content-Type': 'application/json' },
@@ -37,6 +46,63 @@ test('isolated actual 9router adapter streams through the SDK transport with ret
   assert.match(JSON.stringify(wire), /Werkstatt/);
   assert.ok(JSON.stringify(wire).includes('Seitenkontext: /; Sprache: de'));
   assert.equal(seen[0].model, 'deepseek/deepseek-v4.1-flash-1017');
+});
+
+test('isolated handler derives the tool scope from its validated page for each request', async () => {
+  for (const [path,requested,allowed] of [['/','home',true],['/','tk-home',false],
+    ['/teileklar','tk-home',true],['/teileklar','home',false]]) {
+    const calls=[];
+    const isolated=createIsolatedLiveChatHandler({baseUrl:'http://127.0.0.1:20128/v1',apiKey:'fixture-key',
+      fetch:async(_url,init)=>{calls.push(JSON.parse(init.body));return calls.length===1?providerToolSse(requested):providerSse('Fertig.');}});
+    const response=await isolated.fetch(new Request(origin+'/api/agent-chat',{method:'POST',
+      headers:{Origin:origin,'Content-Type':'application/json'},
+      body:JSON.stringify({locale:'de',page_path:path,messages:[user('u1','Zeige Informationen.')]})}));
+    assert.equal(response.status,200);const text=await response.text();assert.match(text,/Fertig/);
+    assert.equal(calls.length,2);
+    const tool=calls[1].messages.find(message=>message.role==='tool');
+    assert.ok(tool, 'tool result must return to the model');
+    const toolText=typeof tool.content==='string'?tool.content:JSON.stringify(tool.content);
+    if(allowed) assert.match(toolText, new RegExp(`"pageId":"${requested}"`));
+    else {assert.match(toolText,/public_page_not_available/);assert.doesNotMatch(toolText, /"pageId"/);}
+  }
+});
+
+test('a forged site claim or mismatched page path is rejected before provider access', async () => {
+  let calls=0;
+  const isolated=createIsolatedLiveChatHandler({baseUrl:'http://127.0.0.1:20128/v1',apiKey:'fixture-key',
+    fetch:async()=>{calls++;return providerSse('unexpected');}});
+  for (const body of [
+    {locale:'de',page_path:'/',site:'teileklar',messages:[user('u1','Hallo')]},
+    {locale:'de',page_path:'/teileklar?site=nexify',messages:[user('u1','Hallo')]},
+  ]) {
+    const response=await isolated.fetch(new Request(origin+'/api/agent-chat',{method:'POST',
+      headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)}));
+    assert.equal(response.status,422);
+  }
+  assert.equal(calls,0);
+});
+
+test('concurrent requests cannot swap scopes on the same isolated handler', async () => {
+  const calls=[];
+  const isolated=createIsolatedLiveChatHandler({baseUrl:'http://127.0.0.1:20128/v1',apiKey:'fixture-key',
+    fetch:async(_url,init)=>{
+      const payload=JSON.parse(init.body); calls.push(payload);
+      if(payload.messages.some(message=>message.role==='tool')) return providerSse('Fertig.');
+      const userText=payload.messages.filter(message=>message.role==='user').map(message=>JSON.stringify(message.content)).join(' ');
+      return providerToolSse(userText.includes('Seitenkontext: /teileklar;')?'home':'tk-home');
+    }});
+  const make=path=>isolated.fetch(new Request(origin+'/api/agent-chat',{method:'POST',
+    headers:{Origin:origin,'Content-Type':'application/json'},
+    body:JSON.stringify({locale:'de',page_path:path,messages:[user('u1','Hallo')]})}));
+  const responses=await Promise.all([make('/'),make('/teileklar')]);
+  const bodies=await Promise.all(responses.map(response=>response.text()));
+  assert.ok(bodies.every(body=>body.includes('Fertig')));
+  const toolCalls=calls.flatMap(payload=>payload.messages.filter(message=>message.role==='tool'));
+  assert.equal(toolCalls.length,2);
+  for(const tool of toolCalls){
+    const body=typeof tool.content==='string'?tool.content:JSON.stringify(tool.content);
+    assert.match(body,/public_page_not_available/);assert.doesNotMatch(body,/"pageId"/);
+  }
 });
 
 test('isolated errors do not leak provider data and default handler never calls the model', async () => {

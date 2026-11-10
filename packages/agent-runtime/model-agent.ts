@@ -81,11 +81,25 @@ const publicPages = new Map(siteMap.pages.filter(page => allowlist.has(page.id)
   && page.access.visibility === 'public' && page.access.auth_required === false)
   .map(page => [page.id, page]));
 
-/** Projection deliberately excludes private metadata, permissions and raw config. */
-export function readPublicPageInfo(input: unknown) {
+export type PublicSite = 'nexify' | 'teileklar';
+
+/** The site comes from the server's allowlisted page record, not from a client-supplied tenant. */
+export function publicSiteForContext(context: { page_id: string; path: string }): PublicSite {
+  const page = publicPages.get(context.page_id);
+  if (!page || page.path !== context.path || (page.site_context !== 'nexify' && page.site_context !== 'teileklar')) {
+    throw new Error('public_page_not_available');
+  }
+  return page.site_context;
+}
+
+/** Projection deliberately excludes private metadata, permissions and raw config.
+ * The optional scope retains the legacy public-only reader for existing callers;
+ * request-facing composition MUST supply the server-derived scope. */
+export function readPublicPageInfo(input: unknown, site?: PublicSite) {
+  if (site !== undefined && site !== 'nexify' && site !== 'teileklar') throw new Error('invalid_public_site');
   const { pageId, locale } = pageInput.parse(input);
   const page = publicPages.get(pageId);
-  if (!page) throw new Error('public_page_not_available');
+  if (!page || (site !== undefined && page.site_context !== site)) throw new Error('public_page_not_available');
   return { pageId: page.id, path: page.path, locale,
     title: page.title[locale], summary: page.summary[locale],
     sections: page.sections.map(section => ({ heading: section.heading[locale], text: section.body[locale] })) };
@@ -99,9 +113,11 @@ function exactOptions(value: unknown, allowed: readonly string[]): asserts value
   }
 }
 
-export function createPublicPageAgent(options: { model: LanguageModel; maxOutputTokens?: number }) {
+export function createPublicPageAgent(options: { model: LanguageModel; maxOutputTokens?: number; site?: PublicSite }) {
   const policy = activePolicy();
-  exactOptions(options, ['model', 'maxOutputTokens']);
+  exactOptions(options, ['model', 'maxOutputTokens', 'site']);
+  if (options.site !== undefined && options.site !== 'nexify' && options.site !== 'teileklar') throw new Error('invalid_public_site');
+  const site = options.site; // Capture the trusted choice; later caller mutation cannot widen it.
   // Disallow string model shortcuts that could select an implicit gateway.
   if (!options.model || typeof options.model !== 'object') throw new Error('explicit_model_required');
   if (options.model.modelId !== policy.modelId) throw new Error('model_policy_mismatch');
@@ -122,7 +138,7 @@ export function createPublicPageAgent(options: { model: LanguageModel; maxOutput
       publicPageInfo: tool({
         description: 'Read approved public page text in German, Dutch, French or English. No private content or business actions.',
         inputSchema: pageInput,
-        execute: async input => readPublicPageInfo(input),
+        execute: async input => readPublicPageInfo(input, site),
       }),
     },
   });

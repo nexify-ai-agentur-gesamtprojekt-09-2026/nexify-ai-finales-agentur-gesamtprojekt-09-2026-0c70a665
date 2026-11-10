@@ -3,7 +3,7 @@ import { createUIMessageStream, createUIMessageStreamResponse, type ModelMessage
 import { InputError, publicOrientation, validateOrientationInput } from '../packages/agent-runtime/public-orientation.ts';
 import { managedLiveChatGate } from '../packages/agent-runtime/managed-live-chat.ts';
 import { createNineRouterModel } from '../packages/agent-runtime/nine-router-model.ts';
-import { createPublicPageAgent } from '../packages/agent-runtime/model-agent.ts';
+import { createPublicPageAgent, publicSiteForContext } from '../packages/agent-runtime/model-agent.ts';
 import { captureServerError, flush } from '../packages/observability/sentry-server.ts';
 
 /** Server env for the off-by-default managed live path. No secret is read into the response. */
@@ -63,11 +63,10 @@ type IsolatedTransport = { baseUrl: string; apiKey: string; fetch: typeof fetch 
  * The caller must separately establish router identity, tenant and spending controls. */
 export function createIsolatedLiveChatHandler(transport: IsolatedTransport) {
   const model = createNineRouterModel(transport);
-  const agent = createPublicPageAgent({ model });
-  return { fetch: (request: Request) => fetchHandler(request, agent) };
+  return { fetch: (request: Request) => fetchHandler(request, model) };
 }
 
-async function fetchHandler(request: Request, isolatedAgent?: ReturnType<typeof createPublicPageAgent>): Promise<Response> {
+async function fetchHandler(request: Request, isolatedModel?: ReturnType<typeof createNineRouterModel>): Promise<Response> {
   try {
     const url = new URL(request.url);
     if (url.pathname !== '/api/agent-chat' || url.search) throw new InputError('not_found', 404);
@@ -77,7 +76,10 @@ async function fetchHandler(request: Request, isolatedAgent?: ReturnType<typeof 
     const raw = await readBounded(request);
     const input = validateOrientationInput(raw);
     if (request.signal.aborted) throw new InputError('request_cancelled', 499);
-    if (isolatedAgent) {
+    if (isolatedModel) {
+      // Resolve brand from the server-validated page record, not a client site claim.
+      // This is a public-content scope, not visitor authentication or tenant isolation.
+      const isolatedAgent = createPublicPageAgent({ model: isolatedModel, site: publicSiteForContext(input.context) });
       // validateOrientationInput has already rejected system/tool messages, unknown
       // fields, private paths and oversized content. Client assistant turns remain
       // untrusted context: no tools, authority or metadata are accepted from them.
