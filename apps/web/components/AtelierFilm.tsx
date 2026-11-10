@@ -18,12 +18,13 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  function captionMode(enabled:boolean){const tracks=ref.current?.textTracks;if(tracks)for(let i=0;i<tracks.length;i++)tracks[i].mode=enabled?'showing':'hidden';}
  useEffect(()=>{
   const video=ref.current,box=root.current;if(!video||!box)return;
-  alive.current=true;generation.current++;userPaused.current=false;setFailed(false);setEnded(false);setBuffering(false);setProgress(0);setFrameReady(false);
+  // Media events may fire before React attaches its handlers during hydration.
+  alive.current=true;generation.current++;userPaused.current=false;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
   let visible=false,disposed=false,audioAttempted=false;
   const pref=matchMedia('(prefers-reduced-motion: reduce)');
   const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection;
   async function start(){
-   if(disposed||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||userPaused.current)return;
+   if(disposed||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||video!.error||userPaused.current)return;
    const action=manualAction.current;
    const audible=hero&&asset.hasAudio===true&&asset.autoplayWithAudio===true&&!audioAttempted;
    audioAttempted=true;
