@@ -115,7 +115,7 @@ Verbindliche Quelle: `docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09
       "sub_goal": "10",
       "title": "Factory-Fachrollen auf vorhandene Skills und Werkzeuge abbilden",
       "priority": 4,
-      "status": "READY",
+      "status": "BLOCKED",
       "owner": "Pascal Courbois / ORACLE-Rolle zu verifizieren",
       "writer": "Lokaler Codex-Fortsetzungslauf",
       "scope": "17 Fachfähigkeiten des Anhangs A gegen tatsächlich erreichbare Skills, Agenten, Tools und Workflows prüfen; nur geprüfte IST-Zuordnungen im bestehenden Skill-Register ergänzen; keine Installation oder Aktivitätsbehauptung",
@@ -126,7 +126,7 @@ Verbindliche Quelle: `docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09
       "acceptance": "Für jede Rolle IST/FEHLT/UNGEPRÜFT mit exakter Fundstelle, Scope, Owner und Testgrenze; valides JSON; unabhängiges Review",
       "evidence": "Anhang A SHA-256 91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5; bestehendes config/skills-register.json",
       "rollback": "Vorhash der Registry sichern; Änderung auf Draft-Branch rücknehmbar",
-      "next": "Quellen lesen, Mapping klein und belegt ergänzen, JSON prüfen, Review vorlegen",
+      "next": "Keine geforderte Quelländerung; kein Erfolg behaupten",
       "require_source_change": true
     },
     {
@@ -271,3 +271,11 @@ Quelle: Aussagen des Inhabers in der laufenden Sitzung. Aktuelle Nutzerentscheid
 | ED-02 | "Das Video ist nicht mehr aktuell." | Das Hero-Video aus AGENTS.md und docs/production/hero-requirements-2026-11-04.md ist überholt; das Standbild im Hero ist zulässig. `config/hero-film.json` und `browser-video.json` bleiben als Historie erhalten. | Alle übrigen visuellen Vorgaben (prototypen/, Designsystem v2.0) gelten weiter. |
 | ED-03 | "Aendere auch die Domains" | Ziel: nexifyai.de und nexifyai.cloud liefern den aktuellen `main`. | Umsetzung nur ohne Secret-Kopie: Git-Verbindung des alten Vercel-Projekts neu auf das Repository der neuen Organisation (nur Inhaber, KS-008). Domains werden nicht auf ein Projekt ohne Umgebungsvariablen gezogen. |
 | ED-04 | Clerk-Locale-Brücke (Entscheidung durch den Agenten nach ED-01) | Die Prüfung der Locale-Brücke (`LocaleAwareClerk.tsx`, Komponente entfernt) wird mit dem Neuentwurf von `next-public.json` stillgelegt, nicht gelöscht; die Consent-Oberfläche (DiagnosticConsent) und der Fail-closed-Nachweis bleiben bestehen. | Umsetzung gebündelt mit dem Neuentwurf der Route-Matrix (86 statt 78 Routen), weil beide Teile derselben Prüfung angehören. Bis dahin bleiben 3 Consent-Tests und 1 Error rot; kein Hashfälschen. |
+
+### Fortschreibung 10.11.2026 · Hero, Mobil, Oracle, PWA und BigBuy
+
+- **NX-UM-011, lokal in Prüfung:** Gewählter Triofilm `b7f30678` im Startseiten-Hero, vorheriger Studiofilm auf `/unternehmen`, jeweils mit bisherigem Bild als Poster; auf Desktop Text links und Film rechts. Originalhash und Medien-Slotplan liegen im GitHub-Entwurf. Identitäts-, Ton-, Lippen- und Untertitelprüfung sowie Freigabe stehen aus; keine neue Site-Version veröffentlicht.
+- **Mobil, lokal geprüft:** `evidence/mobile-layout-2026-11-10/browser.json`: 43 öffentliche Routen × fünf Breiten, 720 Abschlussaktionen ≥44 × 44 px, Quell- und Screenshot-Hashes. Andere Schaltflächen, Überdeckungen und Bildbeschnitt bleiben gesondert offen. Der Oracle-Auslöser wird im Footer zugunsten eines Footer-Einstiegs ausgeblendet; dessen Erreichbarkeit tief im Footer ist ein offener UX-Punkt.
+- **Oracle, lokal in Arbeit:** Gesprächsoberfläche und ein kontextbezogener Kosten-/Dauer-Folgefall verbessert; Kontextwechsel zwischen NeXify und TEILEKLAR setzt die lokale Instanz zurück. 9router ist serverseitig laufend beobachtet; aktueller Sites-Chat erreicht ihn nicht. Vorbereiteter Adapter ist nur per Fixture getestet; sichere Netzverbindung, Gesprächsbesitz, Tenant-, Kosten- und Laufzeitgrenzen sowie echtes Streaming bleiben offen.
+- **PWA, lokal geprüft:** `evidence/pwa-offline-2026-11-10/browser-context.json`: Offline-Hinweis mit DE/NL/FR/EN bzw. TEILEKLAR, ohne Cache oder Wiederholung von API-Schreibvorgängen; echte Geräteinstallation und Deployment offen.
+- **OF-08/OF-09, GitHub-Draft `f7ee9be08f72789be116a3f6390e90b8307dbe77`:** BigBuy-Import ist vor Anbieter- und Datenbankzugriff gesperrt, bis Tenant- und Veröffentlichungsvertrag belegt sind. 41 Import- und 3 Routentests mit Fakes sowie unabhängige Gegenprüfung bestanden. Produktivzugang, echte Mongo-Transaktionen, Auswahlimportfilter und Verkaufsgates bleiben offen; kein Liveimport ausgelöst.

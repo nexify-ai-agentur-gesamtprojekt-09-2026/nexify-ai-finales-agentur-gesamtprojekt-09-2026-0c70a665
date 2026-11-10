@@ -15,7 +15,41 @@
  * inference endpoint, so routing through the 9router stays fail-closed until that explicit
  * release. No secret value, endpoint or key is ever logged or returned from here.
  */
-import { createPinnedOpenRouterModel, createPublicPageAgent } from './model-agent.ts';
+import { createPinnedOpenRouterModel, createPublicPageAgent, EXACT_MODEL_ID } from './model-agent.ts';
+
+/**
+ * Offline preparation for the managed 9router chat-completions wire contract.
+ * This function neither receives credentials nor accepts an endpoint or fetch.
+ * `system` must be constructed by trusted server code; `turns` are untrusted
+ * text and do not confer authority. No request can be sent by this function.
+ * The public route and the separately authorised budget/tenant/network gate
+ * remain closed until a real integration validates this contract end-to-end.
+ */
+export function prepareNineRouterChatPayload(input: {
+  system: string;
+  turns: readonly { role: 'user' | 'assistant'; content: string }[];
+}) {
+  if (EXACT_MODEL_ID !== 'deepseek/deepseek-v4.1-flash-1017') throw new Error('unsupported_model_policy');
+  if (!input || typeof input.system !== 'string' || !input.system.trim() || input.system.length > 8000
+      || !Array.isArray(input.turns) || input.turns.length < 1 || input.turns.length > 20) {
+    throw new Error('invalid_ninerouter_input');
+  }
+  // Array.from visits holes as undefined; Array.prototype.map would silently
+  // preserve sparse entries and JSON serialization would turn them into null.
+  const turns = Array.from(input.turns, turn => {
+    if (!turn || !['user', 'assistant'].includes(turn.role) || typeof turn.content !== 'string'
+        || !turn.content.trim() || turn.content.length > 4000) throw new Error('invalid_ninerouter_turn');
+    return { role: turn.role, content: turn.content };
+  });
+  if (turns.at(-1)?.role !== 'user') throw new Error('ninerouter_user_turn_required');
+  return {
+    model: EXACT_MODEL_ID,
+    messages: [{ role: 'system' as const, content: input.system }, ...turns],
+    reasoning: { effort: 'high' as const },
+    max_tokens: 1024,
+    stream: true,
+  };
+}
 
 /** Server-only activation flag. Must be exactly 'enabled' to even consider the live path. */
 export const LIVE_CHAT_FLAG = 'NEXIFY_LIVE_CHAT';
