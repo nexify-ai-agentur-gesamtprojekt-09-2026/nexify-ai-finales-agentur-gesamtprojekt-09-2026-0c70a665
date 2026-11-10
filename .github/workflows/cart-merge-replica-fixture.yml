@@ -1,0 +1,66 @@
+name: Cart merge replica fixture
+on:
+  push:
+    branches: [design/chat-orientation-2026-11-09]
+    paths:
+      - '.github/workflows/cart-merge-replica-fixture.yml'
+      - 'apps/shop-api/**'
+permissions:
+  contents: read
+concurrency:
+  group: cart-merge-fixture-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  replica-contract:
+    if: >-
+      github.repository == 'nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665' &&
+      github.ref == 'refs/heads/design/chat-orientation-2026-11-09'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.15'
+      - name: Install pinned shop test dependencies
+        run: |
+          python -m pip install --only-binary=:all: --require-hashes --requirement apps/shop-api/requirements.txt
+      - name: Start disposable loopback-only replica set
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --name nexify-cart-replica-fixture --network host \
+            mongo@sha256:3c64937121b9437095921c4bb2569911084c05f7b88e4a263d62a8959d2b2399 \
+            mongod --replSet nxfixture --bind_ip 127.0.0.1 --port 27031
+          ready=0
+          for attempt in $(seq 1 45); do
+            if docker exec nexify-cart-replica-fixture mongosh --quiet --host 127.0.0.1 --port 27031 --eval 'db.adminCommand({ping:1}).ok' | grep -qx 1; then ready=1; break; fi
+            sleep 1
+          done
+          test "$ready" = 1
+          docker exec nexify-cart-replica-fixture mongosh --quiet --host 127.0.0.1 --port 27031 --eval 'rs.initiate({_id:"nxfixture",members:[{_id:0,host:"127.0.0.1:27031"}]})'
+          primary=0
+          for attempt in $(seq 1 45); do
+            if docker exec nexify-cart-replica-fixture mongosh --quiet --host 127.0.0.1 --port 27031 --eval 'db.hello().isWritablePrimary' | grep -qx true; then primary=1; break; fi
+            sleep 1
+          done
+          test "$primary" = 1
+      - name: Run all replica tests without skips
+        env:
+          NEXIFY_REQUIRE_MONGO_TEST: '1'
+          NEXIFY_MONGO_DISPOSABLE_CONFIRMED: 'yes'
+          NEXIFY_TEST_MONGO_URI: mongodb://127.0.0.1:27031/?replicaSet=nxfixture
+        run: |
+          python - <<'PY'
+          import sys, unittest
+          suite = unittest.defaultTestLoader.discover('apps/shop-api/tests', pattern='test_cart_merge_replica_contract.py')
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          if not result.wasSuccessful() or result.testsRun != 10 or result.skipped:
+              print('Replica fixture failed: ten tests with no skips are required.', file=sys.stderr)
+              sys.exit(1)
+          PY
+      - name: Stop disposable replica
+        if: always()
+        run: docker stop nexify-cart-replica-fixture || true

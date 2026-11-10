@@ -1,12 +1,49 @@
 """Server-side cart; prices always come from the catalog, never from the client."""
+import hashlib
+import inspect
+
+from bson import BSON
+from bson.errors import InvalidDocument
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
+from pymongo.errors import DocumentTooLarge, DuplicateKeyError, PyMongoError
+from pymongo.read_concern import ReadConcern
+from pymongo.write_concern import WriteConcern
 
 from . import auth, bigbuy_order, config, pricing
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/shop/cart")
 MAX_QTY = 20
+MAX_MERGE_HISTORY = 128
+MAX_CART_BSON_BYTES = 16 * 1024 * 1024 - 1024
+
+
+def cart_revision(cart):
+    if cart is None or 'revision' not in cart:
+        return None  # legacy document, distinct from revision zero
+    value = cart['revision']
+    if not isinstance(value, int) or isinstance(value, bool) or not 0 <= value < 2**63 - 1:
+        raise HTTPException(409, {'error': 'cart_revision_invalid'})
+    return int(value)
+
+
+def revision_filter(owner, revision):
+    return {'owner': owner, 'revision': {'$exists': False} if revision is None else revision}
+
+
+async def replace_cart(owner, cart, items, *, session=None, archive_entry=None):
+    """Compare-and-set; a concurrent writer must never be silently overwritten."""
+    update = {'$set': {'items': items, 'updated_at': now_iso()}, '$inc': {'revision': 1}}
+    if archive_entry is not None:
+        update['$push'] = {'merge_history': archive_entry}
+    try:
+        result = await db.carts.update_one(revision_filter(owner, cart_revision(cart)),
+            update, upsert=cart is None, session=session)
+    except DuplicateKeyError:
+        raise HTTPException(409, {'error': 'cart_changed'}) from None
+    if not result.matched_count and result.upserted_id is None:
+        raise HTTPException(409, {'error': 'cart_changed'})
 
 
 class ItemIn(BaseModel):
@@ -43,17 +80,72 @@ async def owner_for(request: Request, response: Response, create=True):
 
 
 async def merge(ident):
-    guest = await db.carts.find_one_and_delete({"owner": "guest:" + ident.guest_id})
-    if not guest or not guest.get("items"):
+    guest_owner = 'guest:' + ident.guest_id
+    guest = await db.carts.find_one({'owner': guest_owner})
+    if guest is None or guest.get('items') == []:
         return
-    cart = await db.carts.find_one({"owner": ident.owner}) or {"items": []}
-    items = {i["product_id"]: i for i in cart["items"]}
-    for item in guest["items"]:
-        if item["product_id"] in items:
-            items[item["product_id"]]["quantity"] = min(MAX_QTY, items[item["product_id"]]["quantity"] + item["quantity"])
-        else:
-            items[item["product_id"]] = item
-    await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": list(items.values()), "updated_at": now_iso()}}, upsert=True)
+    async def transfer(session):
+        guest = await db.carts.find_one({'owner': guest_owner}, session=session)
+        if guest is None or guest.get('items') == []:
+            return
+        if not isinstance(guest.get('items'), list):
+            raise HTTPException(409, {'error': 'cart_invalid'})
+        cart = await db.carts.find_one({'owner': ident.owner}, session=session)
+        source = [] if cart is None else cart.get('items')
+        if not isinstance(source, list):
+            raise HTTPException(409, {'error': 'cart_invalid'})
+        def validate(rows):
+            seen = set()
+            for row in rows:
+                if (not isinstance(row, dict) or not isinstance(row.get('product_id'), str)
+                        or not row['product_id'] or row['product_id'] in seen
+                        or not isinstance(row.get('quantity'), int) or isinstance(row['quantity'], bool)
+                        or not 1 <= row['quantity'] <= MAX_QTY):
+                    raise HTTPException(409, {'error': 'cart_invalid'})
+                seen.add(row['product_id'])
+        validate(source); validate(guest['items'])
+        items = {row['product_id']: dict(row) for row in source}
+        for item in guest['items']:
+            if item['product_id'] in items:
+                total = items[item['product_id']]['quantity'] + item['quantity']
+                if total > MAX_QTY:
+                    raise HTTPException(409, {'error': 'cart_merge_quantity_limit', 'product_id': item['product_id']})
+                items[item['product_id']]['quantity'] = total
+            else:
+                items[item['product_id']] = dict(item)
+        revision = cart_revision(guest)
+        receipt_id = hashlib.sha256((str(guest['_id']) + ':' + str(revision)).encode()).hexdigest()
+        history = guest.get('merge_history', [])
+        if not isinstance(history, list) or len(history) >= MAX_MERGE_HISTORY:
+            raise HTTPException(409, {'error': 'cart_merge_archive_limit'})
+        # Retain the original guest contents in its existing document. No extra
+        # collection may be auto-created outside the approved namespace schema.
+        snapshot = {key: value for key, value in guest.items() if key != 'merge_history'}
+        receipt = {'id': receipt_id, 'user_owner': ident.owner, 'guest_revision': revision,
+                   'guest_snapshot': snapshot, 'created_at': now_iso()}
+        candidate = {**guest, 'items': [], 'merge_history': [*history, receipt],
+                     'revision': (revision or 0) + 1, 'updated_at': now_iso()}
+        try:
+            if len(BSON.encode(candidate)) > MAX_CART_BSON_BYTES:
+                raise HTTPException(409, {'error': 'cart_merge_archive_limit'})
+        except InvalidDocument:
+            raise HTTPException(409, {'error': 'cart_invalid'}) from None
+        await replace_cart(ident.owner, cart, list(items.values()), session=session)
+        await replace_cart(guest_owner, guest, [], session=session, archive_entry=receipt)
+    try:
+        session = db.client.start_session()
+        if inspect.isawaitable(session):
+            session = await session
+        async with session:
+            await session.with_transaction(transfer, read_concern=ReadConcern('snapshot'), write_concern=WriteConcern('majority'))
+    except HTTPException:
+        raise
+    except DuplicateKeyError:
+        raise HTTPException(409, {'error': 'cart_changed'}) from None
+    except DocumentTooLarge:
+        raise HTTPException(409, {'error': 'cart_merge_archive_limit'}) from None
+    except PyMongoError:
+        raise HTTPException(503, {'error': 'cart_merge_unavailable'}) from None
 
 
 async def priced(owner, shipping_cents=None, address=None, items_override=None, allow_unknown_stock=False):
@@ -62,6 +154,7 @@ async def priced(owner, shipping_cents=None, address=None, items_override=None, 
         raise ValueError("unknown_stock_view_cannot_quote")
     cart = ({"items": items_override} if items_override is not None
             else await db.carts.find_one({"owner": owner}) or {"items": []})
+    revision = cart_revision(cart)
     settings = await pricing.settings(db)
     ids = [i["product_id"] for i in cart["items"]]
     products = {p["_id"]: p async for p in db.products.find({"_id": {"$in": ids}})}
@@ -107,7 +200,8 @@ async def priced(owner, shipping_cents=None, address=None, items_override=None, 
     return {"lines": lines, "changes": changes, "subtotal_cents": subtotal, "shipping_cents": shipping,
             "total_cents": total, "vat_included_cents": pricing.vat_share_cents(total), "vat_percent": str(pricing.config.VAT_PERCENT),
             "currency": "EUR", "count": sum(l["quantity"] for l in lines),
-            "shipping_pending": shipping_pending, "shipping_source": shipping_source, "free_shipping_threshold_cents": config.SHIP_FREE_THRESHOLD_CENTS}
+            "shipping_pending": shipping_pending, "shipping_source": shipping_source, "free_shipping_threshold_cents": config.SHIP_FREE_THRESHOLD_CENTS,
+            "cart_revision": revision}
 
 
 @router.get("")
@@ -132,14 +226,15 @@ async def set_item(body: ItemIn, request: Request, response: Response):
             raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
     ident = await owner_for(request, response)
-    cart = await db.carts.find_one({"owner": ident.owner}) or {"items": []}
-    items = [i for i in cart["items"] if i["product_id"] != body.product_id]
+    cart = await db.carts.find_one({"owner": ident.owner})
+    items = [i for i in (cart or {"items": []})["items"] if i["product_id"] != body.product_id]
     if body.quantity > 0:
         items.append({"product_id": body.product_id, "name": product["name"], "quantity": body.quantity, "price_seen_cents": unit})
     # Check the entire candidate cart before persisting; unknown stock in a
     # different line must not leave behind a successful-looking cart update.
     quote = await priced(ident.owner, items_override=items, allow_unknown_stock=body.quantity == 0)
-    await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": items, "updated_at": now_iso()}}, upsert=True)
+    await replace_cart(ident.owner, cart, items)
+    quote['cart_revision'] = (cart_revision(cart) or 0) + 1
     return quote
 
 
@@ -148,12 +243,17 @@ async def confirm_changes(request: Request, response: Response):
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         raise HTTPException(404, {"error": "cart_not_found"})
-    current = await priced(ident.owner)
+    cart = await db.carts.find_one({"owner": ident.owner})
+    if cart is None:
+        raise HTTPException(404, {"error": "cart_not_found"})
+    current = await priced(ident.owner, items_override=cart['items'])
     by_id = {l["product_id"]: l for l in current["lines"]}
     items = []
     for line in by_id.values():
         quantity = min(line["quantity"], line["stock"])
         if quantity > 0:
             items.append({"product_id": line["product_id"], "name": line["name"], "quantity": quantity, "price_seen_cents": line["unit_cents"]})
-    await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": items, "updated_at": now_iso()}})
-    return await priced(ident.owner)
+    quote = await priced(ident.owner, items_override=items)
+    await replace_cart(ident.owner, cart, items)
+    quote['cart_revision'] = (cart_revision(cart) or 0) + 1
+    return quote
