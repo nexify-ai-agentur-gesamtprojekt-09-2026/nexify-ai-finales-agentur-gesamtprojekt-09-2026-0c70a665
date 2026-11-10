@@ -49,11 +49,11 @@ function systemPrompt(locale: ChatLocale, pagePath: string): string {
     'Ein Angebot gibst du zusätzlich zum Fließtext als EINEN Codeblock aus, exakt so:',
     '```offer',
     '{ "title": "...", "summary": "...", "currency": "EUR", "valid_until": "YYYY-MM-DD",',
-    '  "items": [ { "description": "...", "quantity": 1, "unit_cents": 44900 } ] }',
+    '  "items": [ { "description": "...", "quantity": 1, "unit_cents": null } ] }',
     '```',
-    'Preise sind unverbindliche Richtpreise in Cent (netto). Orientiere dich an Pascals Tagessatz',
-    '449 € netto, wenn eine Aufwandsschätzung passt. Erfinde keine Fixpreise, wenn der Umfang unklar ist',
-    '(dann unit_cents = null lassen). Die verbindliche Bestellung erfolgt erst später über den Bestell-Endpunkt.',
+    'Erfinde keine Preise oder verbindlichen Zusagen. Solange keine aktuell freigegebene Preisgrundlage',
+    'vorliegt, setze unit_cents auf null und erkläre, dass ein individuelles Angebot vorbereitet wird.',
+    'Die verbindliche Bestellung erfolgt erst später über den Bestell-Endpunkt.',
   ].join('\n');
 }
 

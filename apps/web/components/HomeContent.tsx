@@ -17,10 +17,10 @@ const galleries=['/leistungen/websites','/leistungen/agenten-automatisierung','/
 const services=['/leistungen/websites','/leistungen/agenten-automatisierung','/loesungen'];
 const products=['/produkte/nex2fly','/produkte/one','/produkte/api','/teileklar'];
 const projectRates={
- de:{eyebrow:'Klare Kalkulationsbasis',value:'449 €',unit:'netto je Projekttag',note:'Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.'},
- nl:{eyebrow:'Duidelijke calculatiebasis',value:'€ 449',unit:'netto per projectdag',note:'Concept, tekst, ontwerp en technische uitvoering worden gepland op basis van de afgesproken omvang. Externe kosten worden apart vermeld.'},
- fr:{eyebrow:'Une base de calcul claire',value:'449 €',unit:'HT par journée de projet',note:'Concept, contenus, design et réalisation technique sont planifiés selon le périmètre convenu. Les frais externes sont indiqués séparément.'},
- en:{eyebrow:'A clear pricing basis',value:'€449',unit:'net per project day',note:'Concept, copy, design and technical delivery are planned around the agreed scope. External costs are shown separately.'}
+ de:{eyebrow:'Klare Kalkulationsbasis',value:'Individuell',unit:'nach vereinbartem Umfang',note:'Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.'},
+ nl:{eyebrow:'Duidelijke calculatiebasis',value:'Op maat',unit:'volgens afgesproken omvang',note:'Concept, tekst, ontwerp en technische uitvoering worden gepland op basis van de afgesproken omvang. Externe kosten worden apart vermeld.'},
+ fr:{eyebrow:'Une base de calcul claire',value:'Sur mesure',unit:'selon le périmètre convenu',note:'Concept, contenus, design et réalisation technique sont planifiés selon le périmètre convenu. Les frais externes sont indiqués séparément.'},
+ en:{eyebrow:'A clear pricing basis',value:'Tailored',unit:'to the agreed scope',note:'Concept, copy, design and technical delivery are planned around the agreed scope. External costs are shown separately.'}
 } as const;
 function DetailArrow({direction='right'}:{direction?:'right'|'out'|'down'}){
  const path=direction==='out'?'M5 19 19 5M5 5h14v14':direction==='down'?'M12 4v16M5 13l7 7 7-7':'M4 12h16M13 5l7 7-7 7';

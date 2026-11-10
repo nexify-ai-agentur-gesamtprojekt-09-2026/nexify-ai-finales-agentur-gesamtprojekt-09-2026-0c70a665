@@ -15,6 +15,18 @@ test('chat JSON and SSE hide provider and transport error details', async () => 
     process.env.ROUTER_KEY = 'fixture-key';
     for (const key of ['CHAT_COMPLETIONS_URL', 'CHAT_MODEL_ID', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY']) delete process.env[key];
     const { POST } = await server.ssrLoadModule('/apps/web/app/api/chat/route.ts');
+    let sent;
+    globalThis.fetch = async (_url, init) => {
+      sent = JSON.parse(init.body);
+      return new Response('data: {"choices":[{"delta":{"content":"Ich bereite eine Anfrage vor."}}]}\n\ndata: [DONE]\n\n',
+        { headers: { 'content-type': 'text/event-stream' } });
+    };
+    const success = await POST(new Request('http://localhost/api/chat', { method: 'POST',
+      headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: 'Was kostet das?', stream: false }) }));
+    assert.equal(success.status, 200);
+    const guidance = sent.messages.find(message => message.role === 'system').content;
+    assert.doesNotMatch(guidance, /44900|449\s*€/);
+    assert.match(guidance, /unit_cents.*null/);
     for (const streaming of [false, true]) {
       for (const fail of [async () => new Response(secret, { status: 429 }), async () => { throw new Error(secret); }]) {
         globalThis.fetch = fail;
