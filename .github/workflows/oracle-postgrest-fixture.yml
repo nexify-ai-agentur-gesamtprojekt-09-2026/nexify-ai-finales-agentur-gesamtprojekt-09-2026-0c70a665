@@ -11,6 +11,7 @@ on:
       - 'apps/web/lib/oracle-owned-conversations.mjs'
       - 'apps/web/lib/oracle-conversation-rpc.mjs'
       - 'apps/web/auth/tests/oracle-postgrest-fixture.mjs'
+      - 'apps/web/auth/tests/oracle-fixture-gateway.mjs'
 permissions:
   contents: read
 concurrency:
@@ -28,7 +29,7 @@ jobs:
           POSTGRES_PASSWORD: isolated-ci-fixture-only
           POSTGRES_DB: nexify_chat_owner_fixture
         options: >-
-          --publish 127.0.0.1:35431:3000
+          --publish 127.0.0.1:35432:3000
           --health-cmd "pg_isready -U postgres -d nexify_chat_owner_fixture"
           --health-interval 5s --health-timeout 5s --health-retries 12
     steps:
@@ -58,7 +59,7 @@ jobs:
             -e PGRST_JWT_SECRET=fixture-only-signing-key-not-production-12345 \
             postgrest/postgrest@sha256:5f4ce744539bbba786b4e24dbbd95bdb2a956dcf568c5374995a0ff4a68f5bd2
           for attempt in $(seq 1 30); do
-            if curl --fail --silent --output /dev/null http://127.0.0.1:35431/; then exit 0; fi
+            if curl --fail --silent --output /dev/null http://127.0.0.1:35432/; then exit 0; fi
             sleep 1
           done
           exit 1
@@ -68,6 +69,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          node apps/web/auth/tests/oracle-fixture-gateway.mjs &
+          fixture_gateway_pid=$!
+          trap 'kill "$fixture_gateway_pid" 2>/dev/null || true' EXIT
+          fixture_gateway_ready=0
+          for attempt in $(seq 1 20); do
+            if ! kill -0 "$fixture_gateway_pid" 2>/dev/null; then
+              printf '%s\n' 'Fixture gateway exited before readiness.'
+              exit 1
+            fi
+            if curl --fail --silent --output /dev/null http://127.0.0.1:35431/_fixture/ready; then
+              fixture_gateway_ready=1
+              break
+            fi
+            sleep 0.5
+          done
+          if [ "$fixture_gateway_ready" != 1 ]; then
+            printf '%s\n' 'Fixture gateway did not become ready.'
+            exit 1
+          fi
           eval "$(python3 - <<'PY'
           import base64,hashlib,hmac,json,time
           def enc(v): return base64.urlsafe_b64encode(v).rstrip(b'=').decode()

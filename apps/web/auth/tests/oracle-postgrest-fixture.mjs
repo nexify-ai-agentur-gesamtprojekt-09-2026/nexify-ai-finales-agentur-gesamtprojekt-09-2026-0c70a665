@@ -17,7 +17,9 @@ test('HTTP to PostgREST: owner, foreign visitor and anonymous privilege boundary
   assert.equal(opts.redirect,'error');
   assert.equal(opts.body.includes(a.cookie.split(';')[0]),false);
   assert.equal(opts.body.includes(b.cookie.split(';')[0]),false);
-  return fetch(url,opts);
+  const response=await fetch(url,opts);
+  if(!response.ok) console.error(`Fixture RPC HTTP status: ${response.status}`);
+  return response;
  };
  const db=createConversationRpcAdapter({baseUrl:base,allowedOrigin:parsed.origin,serviceKey,fetchImpl,allowLoopback:true});
  const handler=createOwnedConversationHandler({db,origin,allowLoopback:true});
