@@ -112,4 +112,7 @@ test('cancelling only the HTTP response reader aborts an active upstream stream'
   await Promise.race([cancelled, new Promise(resolve => setTimeout(resolve, 250))]);
   assert.equal(upstreamSignal.aborted, true);
   assert.equal(upstreamCancelled, true);
+  // Let the SDK's pending stream cleanup settle before this test ends; a late
+  // rejected cleanup promise must fail the test instead of escaping the case.
+  await new Promise(resolve => setTimeout(resolve, 100));
 });

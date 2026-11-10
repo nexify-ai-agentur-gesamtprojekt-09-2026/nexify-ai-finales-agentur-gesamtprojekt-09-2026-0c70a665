@@ -81,7 +81,56 @@ export function createNineRouterModel(options: { baseUrl: string; apiKey: string
     if (!response.ok) return new Response('{"error":{"message":"ninerouter_unavailable"}}', {
       status: 502, headers: { 'content-type': 'application/json' },
     });
-    return response;
+    if (!response.body) return response;
+    // The provider's SSE cleanup calls reader.cancel() without observing rejection.
+    // Keep its input stream well-formed on abort, even when the underlying fetch
+    // body rejects as a consequence of the same abort. This also stops the upstream
+    // reader rather than just hiding the unhandled rejection.
+    const upstream = response.body.getReader();
+    let closed = false;
+    let stop: (() => void) | undefined;
+    const bodyStream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        stop = () => {
+          if (closed) return;
+          closed = true;
+          void upstream.cancel().catch(() => {}).finally(() => upstream.releaseLock());
+          controller.close();
+        };
+        if (signal.aborted) stop();
+        else signal.addEventListener('abort', stop, { once: true });
+      },
+      async pull(controller) {
+        if (closed) return;
+        try {
+          const { done, value } = await upstream.read();
+          if (closed) return;
+          if (done) {
+            closed = true;
+            if (stop) signal.removeEventListener('abort', stop);
+            upstream.releaseLock();
+            controller.close();
+          } else controller.enqueue(value);
+        } catch {
+          if (closed) return;
+          closed = true;
+          if (stop) signal.removeEventListener('abort', stop);
+          upstream.releaseLock();
+          if (request.stream === true) {
+            controller.enqueue(new TextEncoder().encode('data: {"error":{"message":"ninerouter_stream_failed"}}\n\n'));
+            controller.close();
+          } else controller.error(new Error('ninerouter_stream_failed'));
+        }
+      },
+      async cancel() {
+        if (closed) return;
+        closed = true;
+        if (stop) signal.removeEventListener('abort', stop);
+        await upstream.cancel().catch(() => {});
+        upstream.releaseLock();
+      },
+    });
+    return new Response(bodyStream, { status: response.status, statusText: response.statusText, headers: response.headers });
   };
 
   const provider = createOpenRouter({ baseURL: base, apiKey: options.apiKey, fetch: safeFetch, compatibility: 'strict' });

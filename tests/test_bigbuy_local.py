@@ -29,7 +29,9 @@ class Reply(io.BytesIO):
 
 class Tests(unittest.TestCase):
     def setUp(self):
-        self.temp=tempfile.TemporaryDirectory(prefix="nexify-bigbuy-isolated-");self.addCleanup(self.temp.cleanup)
+        # macOS may expose the temporary root through a symlink; construct the
+        # fixture at its real path so the unchanged sandbox path guard can verify it.
+        self.temp=tempfile.TemporaryDirectory(prefix="nexify-bigbuy-isolated-",dir=os.path.realpath(tempfile.gettempdir()));self.addCleanup(self.temp.cleanup)
         self.store=gateway.Store(Path(self.temp.name)/'db.sqlite')
         self.box=local.LocalBigBuyStore(self.store,account='fixture',environment='sandbox',initialize=True,clock=lambda:1800000000)
     def make_staged(self):
