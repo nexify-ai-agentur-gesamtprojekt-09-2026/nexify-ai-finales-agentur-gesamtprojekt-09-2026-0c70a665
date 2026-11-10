@@ -30,4 +30,13 @@ test('HTTP to PostgREST: owner, foreign visitor and anonymous privilege boundary
  assert.equal((await handler(req({action:'read',id},b))).status,404);
  const anon=createConversationRpcAdapter({baseUrl:base,allowedOrigin:parsed.origin,serviceKey:anonKey,fetchImpl,allowLoopback:true});
  await assert.rejects(anon.read(id,a.digest,{signal:new AbortController().signal}),{message:'database_unavailable'});
+ // Require the PostgreSQL insufficient-privilege error, rather than treating
+ // an authentication failure or a missing RPC as an authorization pass.
+ const denial=await fetch(new URL('/rest/v1/rpc/read_owned_conversation',parsed),{
+  method:'POST',redirect:'error',headers:{Authorization:`Bearer ${anonKey}`,'Content-Type':'application/json','Accept-Profile':'chat','Content-Profile':'chat'},
+  body:JSON.stringify({p_conversation_id:id,p_owner_digest:'\\x'+a.digest.toString('hex')}),
+ });
+ const denialBody=await denial.json();
+ assert.ok([401,403].includes(denial.status),'unexpected anonymous HTTP status');
+ assert.equal(denialBody.code,'42501','unexpected anonymous PostgREST error class');
 });
