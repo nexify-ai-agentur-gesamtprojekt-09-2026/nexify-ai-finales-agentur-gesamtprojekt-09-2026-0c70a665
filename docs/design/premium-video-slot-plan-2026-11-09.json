@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T21:39:00Z",
+  "updated_at": "2026-11-10T09:20:00Z",
   "owner": "Pascal Courbois / Art Director / UX-Frontend",
   "writer": "/root",
   "canonical_order_reference": "config/acceptance-coverage.json requirements_reconciliation current_execution",
@@ -464,7 +464,19 @@
       "approval_status": "user_placement_approved; art_direction_identity_audio_visual_release_pending",
       "publication_status": "owner_private_sites_v5_only; commit_49f84db097544e96fcf54ca8a8b2d5d58838cd7a; public_release_pending",
       "fallback": "existing approved image remains video poster and decode fallback",
-      "rollback": "restore private Sites v4 (appgprj_6af2144e2af881918282f28c4b57411a~appgver_ba04b09839408191b997f6957196a8dc) and retain source"
+      "rollback": "restore private Sites v4 (appgprj_6af2144e2af881918282f28c4b57411a~appgver_ba04b09839408191b997f6957196a8dc) and retain source",
+      "candidate_replacement": {
+        "video_source": "gemini_generated_video_b7f30678.mp4",
+        "video_sha256": "c98f356547be0af2f000a9463893054be06f883e6d3f5fb2470c57967c9f4dc9",
+        "version": "trio-lobby-v1",
+        "priority": 1,
+        "visual_match": "Pascal, NeX und ORACLE betreten gemeinsam eine Eingangshalle; vom Nutzer für den Startseiten-Hero ausgewählt",
+        "status": "local_preparation",
+        "technical_check": "H.264 1280x720, AAC, 10.03s; Browserwiedergabe lokal auf 390 und 1440 px geprüft; Reduced Motion pausiert; mittlerer Pegel -20.2 dB, Spitze -1.3 dB",
+        "approval_status": "placement_user_selected; identity_lips_speech_captions_rights_and_release_review_pending",
+        "publication_status": "not_published",
+        "fallback": "/media/higgsfield/hf-02-lobby-walk-1920.webp"
+      }
     },
     {
       "id": "suite-factory-intro",
@@ -480,6 +492,20 @@
       "publication_status": "not_published",
       "fallback": "retain /media/higgsfield/hf-11-1920.webp",
       "rollback": "keep current Suite image"
+    },
+    {
+      "id": "company-studio-intro",
+      "priority": 2,
+      "page_id": "company",
+      "image": "/media/higgsfield/hf-04-studio-desk-1920.webp",
+      "video_source": "gemini_generated_video_554998b1.mp4",
+      "video_sha256": "027d8152065ea2cd3fd4c79897ba9dc37b42176a7dbdaeda6945fadca7416ae3",
+      "video_version": "nexify-personal-intro-v1",
+      "visual_match": "Pascal spricht persönlich im Studio; passend zur Unternehmensseite",
+      "technical_check": "local_preparation; browser, captions and formal media review pending",
+      "approval_status": "user_requested_reuse; identity_audio_captions_rights_release_pending",
+      "publication_status": "not_published_on_company_page",
+      "fallback": "/media/higgsfield/hf-04-studio-desk-1920.webp"
     }
   ],
   "quality_gates": [
