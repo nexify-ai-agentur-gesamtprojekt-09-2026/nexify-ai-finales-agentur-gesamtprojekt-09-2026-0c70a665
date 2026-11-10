@@ -1,0 +1,79 @@
+name: PR source-bound browser evidence
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  browser-evidence:
+    if: >-
+      github.event.pull_request.number == 92 &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'design/chat-orientation-2026-11-09'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Validate requested revision
+        env:
+          REQUESTED_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          [[ "$REQUESTED_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Verify checkout and evidence safeguards
+        env:
+          REQUESTED_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$REQUESTED_SHA"
+          grep -Fq NEXIFY_TEXT_SPACING_EVIDENCE_PATH apps/site/tests/browser-text-spacing.mjs
+          grep -Fq "flag:'wx'" apps/site/tests/browser-text-spacing.mjs
+          grep -Fq NEXIFY_EVIDENCE_DIRECTORY apps/site/tests/browser-critical.mjs
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.4'
+      - name: Install locked project and browser dependencies
+        run: |
+          npm install --global --ignore-scripts pnpm@12.15.0
+          pnpm install --frozen-lockfile --ignore-scripts
+          npm ci --prefix .github/evidence-runner --ignore-scripts --no-audit --no-fund
+          .github/evidence-runner/node_modules/.bin/playwright install --with-deps chromium
+      - name: Prepare isolated report directory
+        run: mkdir "$RUNNER_TEMP/nexify-browser-evidence"
+      - name: Build and measure isolated browser cases
+        id: measurement
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/.github/evidence-runner/node_modules/playwright/index.mjs
+          NEXIFY_EVIDENCE_DIRECTORY: ${{ runner.temp }}/nexify-browser-evidence
+          NEXIFY_TEXT_SPACING_EVIDENCE_PATH: ${{ runner.temp }}/nexify-browser-evidence/text-spacing.json
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: |
+          pnpm build
+          node apps/site/tests/browser-critical.mjs
+          node apps/site/tests/browser-text-spacing.mjs
+          git diff --exit-code HEAD
+          sha256sum apps/site/.generated/public-site.json > "$NEXIFY_EVIDENCE_DIRECTORY/generated-sha256.txt"
+          sha256sum "$NEXIFY_EVIDENCE_DIRECTORY"/critical-browser.json "$NEXIFY_EVIDENCE_DIRECTORY"/text-spacing.json > "$NEXIFY_EVIDENCE_DIRECTORY/report-sha256.txt"
+      - name: Record result without promoting partial evidence
+        if: always()
+        env:
+          REQUESTED_SHA: ${{ github.event.pull_request.head.sha }}
+          MEASUREMENT_OUTCOME: ${{ steps.measurement.outcome }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/nexify-browser-evidence"
+          printf 'requested_sha=%s\nmeasurement_outcome=%s\n' "$REQUESTED_SHA" "$MEASUREMENT_OUTCOME" > "$RUNNER_TEMP/nexify-browser-evidence/run-status.txt"
+          if git rev-parse HEAD >/dev/null 2>&1; then git rev-parse HEAD > "$RUNNER_TEMP/nexify-browser-evidence/source-commit.txt"; fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-evidence-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/nexify-browser-evidence/critical-browser.json
+            ${{ runner.temp }}/nexify-browser-evidence/text-spacing.json
+            ${{ runner.temp }}/nexify-browser-evidence/source-commit.txt
+            ${{ runner.temp }}/nexify-browser-evidence/generated-sha256.txt
+            ${{ runner.temp }}/nexify-browser-evidence/report-sha256.txt
+            ${{ runner.temp }}/nexify-browser-evidence/run-status.txt
+          if-no-files-found: error
+          retention-days: 7
