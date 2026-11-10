@@ -36,10 +36,15 @@ jobs:
             mongod --replSet nxfixture --bind_ip 127.0.0.1 --port 27031
           ready=0
           for attempt in $(seq 1 45); do
+            if [ "$(docker inspect -f '{{.State.Running}}' nexify-cart-replica-fixture)" != true ]; then
+              echo 'Disposable MongoDB exited before readiness; container diagnostics:' >&2
+              docker logs --tail 100 nexify-cart-replica-fixture >&2 || true
+              exit 1
+            fi
             if docker exec nexify-cart-replica-fixture mongosh --quiet --host 127.0.0.1 --port 27031 --eval 'db.adminCommand({ping:1}).ok' | grep -qx 1; then ready=1; break; fi
             sleep 1
           done
-          test "$ready" = 1
+          if [ "$ready" != 1 ]; then docker logs --tail 100 nexify-cart-replica-fixture >&2 || true; exit 1; fi
           docker exec nexify-cart-replica-fixture mongosh --quiet --host 127.0.0.1 --port 27031 --eval 'rs.initiate({_id:"nxfixture",members:[{_id:0,host:"127.0.0.1:27031"}]})'
           primary=0
           for attempt in $(seq 1 45); do
