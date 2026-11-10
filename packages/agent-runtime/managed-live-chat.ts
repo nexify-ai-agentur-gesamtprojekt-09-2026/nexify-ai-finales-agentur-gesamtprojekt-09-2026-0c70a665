@@ -1,7 +1,7 @@
 /** Managed live-chat assembly (OFF by default, fail-closed).
  *
- * This module only *prepares* the real managed live-AI path for /api/agent-chat by reusing the
- * existing, policy-pinned router adapter in ./model-agent.ts. It is deliberately inert:
+ * This module only *prepares* the real managed live-AI path for /api/agent-chat. It is
+ * deliberately inert:
  *
  *  - Importing or constructing anything here performs no model request and reads no secret.
  *  - The gate is closed unless an explicit server flag AND the managed 9router server
@@ -10,12 +10,11 @@
  *  - OPENAI_API_KEY / EMERGENT_LLM_KEY are never considered: they are not a managed fallback.
  *  - DeepSeek must be reached through the NeXify managed 9router, never a direct provider bypass.
  *
- * Activation additionally requires a separately authorised router binding + funding release
- * (see assembleManagedLiveChat): the approved adapter is still pinned to the OpenRouter
- * inference endpoint, so routing through the 9router stays fail-closed until that explicit
- * release. No secret value, endpoint or key is ever logged or returned from here.
+ * Activation additionally requires a verified router binding and operational controls.
+ * The existing OpenRouter adapter is not the managed 9router; assembly remains closed.
+ * No secret value, endpoint or key is ever logged or returned from here.
  */
-import { createPinnedOpenRouterModel, createPublicPageAgent, EXACT_MODEL_ID } from './model-agent.ts';
+import { EXACT_MODEL_ID } from './model-agent.ts';
 
 /**
  * Offline preparation for the managed 9router chat-completions wire contract.
@@ -80,14 +79,9 @@ export function managedLiveChatGate(env: Env): LiveChatGate {
   return { enabled: true, routerUrl, routerKey };
 }
 
-/** Assemble the managed public-page agent by reusing the pinned adapter. Explicit server
- * arguments only; no environment lookup here. Fails closed if the managed route is not the
- * authorised pinned endpoint, so the 9router binding cannot silently become a live provider
- * bypass before it is explicitly released and funded. */
-export function assembleManagedLiveChat(config: { routerUrl: string; routerKey: string; fetch: typeof fetch }) {
-  if (config.routerUrl !== PINNED_PROVIDER_ENDPOINT) {
-    throw new Error('managed_live_chat_router_binding_pending');
-  }
-  const model = createPinnedOpenRouterModel({ apiKey: config.routerKey, fetch: config.fetch });
-  return createPublicPageAgent({ model });
+/** No production 9router binding has been verified yet. In particular, the existing
+ * OpenRouter adapter is not a substitute for the user's managed 9router. Keep every
+ * assembly attempt closed until the actual server-side binding and its controls exist. */
+export function assembleManagedLiveChat(_config: { routerUrl: string; routerKey: string; fetch: typeof fetch }): never {
+  throw new Error('managed_live_chat_router_binding_pending');
 }

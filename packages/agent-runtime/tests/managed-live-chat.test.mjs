@@ -1,5 +1,5 @@
 /** Managed live-chat is wired but fail-closed: gate stays closed without explicit flag + 9router
- * config, assembly reuses the pinned adapter, and the 9router binding cannot become a silent
+ * config, assembly remains unavailable, and the 9router binding cannot become a silent
  * provider bypass. No network and no real key are used (offline dummy fetch only). */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -76,14 +76,10 @@ test('assembly fails closed for a 9router URL that is not the authorised pinned 
     /managed_live_chat_router_binding_pending/);
 });
 
-test('assembly reuses the pinned adapter and never calls the network at construction', async () => {
+test('assembly rejects the direct provider as well and never calls the network', () => {
   let calls = 0;
-  const agent = assembleManagedLiveChat({ routerUrl: PINNED_PROVIDER_ENDPOINT, routerKey: 'offline-dummy-contract-key',
-    fetch: async () => { calls++; throw new Error('offline fixture: no paid call'); } });
-  assert.deepEqual(Object.keys(agent.tools), ['publicPageInfo']);
+  assert.throws(() => assembleManagedLiveChat({ routerUrl: PINNED_PROVIDER_ENDPOINT, routerKey: 'offline-dummy-contract-key',
+    fetch: async () => { calls++; throw new Error('offline fixture: no paid call'); } }),
+    /managed_live_chat_router_binding_pending/);
   assert.equal(calls, 0);
-  // A generation attempt uses the injected offline fetch (one bounded attempt, no retry);
-  // confirms the pinned adapter is wired without ever reaching a real provider.
-  await assert.rejects(agent.generate({ prompt: 'Fixture only' }));
-  assert.equal(calls, 1);
 });
