@@ -190,7 +190,15 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const chatEnd = useRef<HTMLDivElement>(null);
   const messageInput = useRef<HTMLTextAreaElement>(null);
   const closeButton=useRef<HTMLButtonElement>(null);
+  const orientationFocusRequested=useRef(false);
   const workspaceRoot=useRef<HTMLDivElement>(null);
+  useEffect(()=>{
+    const root=workspaceRoot.current,footer=root?.querySelector('footer');
+    if(!root||!footer||typeof IntersectionObserver==='undefined')return;
+    const observer=new IntersectionObserver(([entry])=>{root.dataset.footerVisible=String(entry.isIntersecting);},{rootMargin:'0px 0px -64px 0px'});
+    observer.observe(footer);
+    return()=>{observer.disconnect();delete root.dataset.footerVisible;};
+  },[]);
   useEffect(()=>{
     const root=workspaceRoot.current,viewport=window.visualViewport;
     if(!root)return;
@@ -210,7 +218,9 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     return()=>{cancelAnimationFrame(frame);viewport?.removeEventListener('resize',measure);viewport?.removeEventListener('scroll',measure);window.removeEventListener('resize',measure);};
   },[]);
   const readingAnchor=useRef<{element:HTMLElement;y:number}|null>(null);
+  const panelReturnFocus=useRef<HTMLElement|null>(null);
   function changePanel(next:boolean){
+    if(next&&document.activeElement instanceof HTMLElement&&!document.activeElement.closest('#aifly-panel'))panelReturnFocus.current=document.activeElement;
     // Keep the same semantic text at the same viewport position when the desktop grid reflows.
     // Near the top, stay at the top; mobile overlays do not resize the page.
     if(!window.matchMedia('(max-width: 820px)').matches&&window.scrollY>0){
@@ -279,12 +289,23 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   },[]);
   useEffect(()=>{
     const openOrientation=()=>{
-      changePanel(true);setChatMode('orientation');
-      requestAnimationFrame(()=>document.getElementById('orientation-message')?.focus({preventScroll:true}));
+      orientationFocusRequested.current=true;
+      setOrientationLoaded(true);changePanel(true);setChatMode('orientation');
+      const input=document.querySelector<HTMLTextAreaElement>('#aifly-panel #orientation-message');
+      if(input&&input.offsetParent!==null){input.focus({preventScroll:true});orientationFocusRequested.current=false;}
     };
     window.addEventListener('nexify-open-orientation',openOrientation);
     return()=>window.removeEventListener('nexify-open-orientation',openOrientation);
   },[]);
+  useEffect(()=>{
+    if(!open||chatMode!=='orientation'||!orientationLoaded||!orientationFocusRequested.current)return;
+    const panel=document.getElementById('aifly-panel');if(!panel)return;
+    const focus=()=>{const input=panel.querySelector<HTMLTextAreaElement>('#orientation-message');if(!input)return false;input.focus({preventScroll:true});orientationFocusRequested.current=false;return true;};
+    if(focus())return;
+    const observer=new MutationObserver(()=>{if(focus())observer.disconnect();});observer.observe(panel,{childList:true,subtree:true});
+    const timeout=window.setTimeout(()=>observer.disconnect(),10000);
+    return()=>{observer.disconnect();window.clearTimeout(timeout);};
+  },[open,chatMode,orientationLoaded]);
   useEffect(()=>{
     let frame=0;
     const prefill=(event:Event)=>{
@@ -339,7 +360,14 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const chatState=ready?"connected":error==="offline"?"unavailable":"connecting";
   const chatStateLabel={"de": {"connected": "Projektverbindung bereit", "unavailable": "Persönliche Anfrage per Kontakt", "connecting": "Verbindung wird geprüft …"}, "nl": {"connected": "Projectverbinding gereed", "unavailable": "Persoonlijke aanvraag via contact", "connecting": "Verbinding wordt gecontroleerd …"}, "fr": {"connected": "Connexion projet prête", "unavailable": "Demande personnelle via contact", "connecting": "Vérification de la connexion…"}, "en": {"connected": "Project connection ready", "unavailable": "Personal enquiry via contact", "connecting": "Checking the connection …"}}[locale][chatState];
   const reply=(selected?:Intent)=>selected==="quote"?t.quoteReply:selected==="booking"?t.bookingReply:selected==="marketing"?t.marketingReply:t.choose;
-  function closePanel(){changePanel(false);requestAnimationFrame(()=>{const target=[...document.querySelectorAll<HTMLButtonElement>(".reopen-chat,.header-actions .compact")].find(element=>element.getClientRects().length>0);target?.focus({preventScroll:true});});}
+  function closePanel(){changePanel(false);requestAnimationFrame(()=>{
+    const visible=(element:HTMLElement|null)=>{if(!element||!element.isConnected||getComputedStyle(element).visibility==='hidden')return false;const rect=element.getBoundingClientRect();return rect.width>0&&rect.height>0&&rect.bottom>0&&rect.top<window.innerHeight;};
+    const original=panelReturnFocus.current;
+    const preferred='.reopen-chat';
+    const fallback=document.querySelector<HTMLElement>(preferred);
+    const target=visible(original)?original:visible(fallback)?fallback:document.querySelector<HTMLElement>('.header-actions .compact');
+    target?.focus({preventScroll:true});panelReturnFocus.current=null;
+  });}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form=event.currentTarget; const value=String(new FormData(form).get("message")||"").trim();if(!value)return;setPrefillNotice('');
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
@@ -356,7 +384,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
       <main id="page-content" tabIndex={-1}>{children}</main>
       <SiteFooter pages={pages} site={site} locale={locale}/>
     </div>
-    {!open && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>changePanel(true)} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{launcherLabel}</ActionButton>}
+    {!open && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>{orientationFocusRequested.current=true;setOrientationLoaded(true);setChatMode('orientation');changePanel(true);}} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{launcherLabel}</ActionButton>}
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
     <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>{!mobile&&<ChatResizeHandle width={chatWidth} onChange={setChatWidth} label={locale==="de"?"Chatbreite anpassen":locale==="nl"?"Chatbreedte aanpassen":locale==="fr"?"Ajuster la largeur du chat":"Resize chat"}/>}
       <div className="panel-topstrip" aria-hidden="true"/>

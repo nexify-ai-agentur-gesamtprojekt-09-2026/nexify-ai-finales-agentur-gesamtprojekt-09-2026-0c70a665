@@ -1,6 +1,6 @@
 "use client";
 import {useChat} from "@ai-sdk/react";
-import {DefaultChatTransport} from "ai";
+import {DefaultChatTransport,type UIMessage} from "ai";
 import {useEffect,useMemo,useRef,useState,type FormEvent,type MouseEvent} from "react";
 import type {Locale} from "../lib/i18n";
 import type {PublicPage} from "../lib/page-types";
@@ -14,10 +14,10 @@ const copy={
   "de": {
     "title": "Was planen Sie?",
     "mode": "Leistungen finden",
-    "intro": "Erzählen Sie, was entstehen oder besser werden soll.",
+    "intro": "Erzählen Sie mir von Ihrem Unternehmen und Ihrem Vorhaben. Ich helfe Ihnen, passende Leistungen zu finden und Ihr Gespräch mit Pascal vorzubereiten.",
     "label": "Wobei können wir Ihnen helfen?",
     "placeholder": "Zum Beispiel: Ich möchte meine Website erneuern …",
-    "send": "Vorhaben einordnen",
+    "send": "Nachricht senden",
     "stop": "Antwort anhalten",
     "waiting": "Passende Informationen werden geladen …",
     "error": "Die Website-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten. Für die persönliche Projektklärung nutzen Sie bitte die Kontaktseite.",
@@ -30,10 +30,10 @@ const copy={
   "nl": {
     "title": "Wat bent u van plan?",
     "mode": "Diensten vinden",
-    "intro": "Vertel wat u wilt maken of verbeteren.",
+    "intro": "Vertel me over uw bedrijf en uw plannen. Ik help u passende diensten te vinden en uw gesprek met Pascal voor te bereiden.",
     "label": "Waarmee kunnen we u helpen?",
     "placeholder": "Bijvoorbeeld: Ik wil mijn website vernieuwen …",
-    "send": "Plan verkennen",
+    "send": "Bericht versturen",
     "stop": "Antwoord onderbreken",
     "waiting": "Passende informatie wordt geladen …",
     "error": "Het websiteadvies is nu niet bereikbaar. Uw invoer blijft behouden. Gebruik de contactpagina voor een persoonlijk projectgesprek.",
@@ -46,10 +46,10 @@ const copy={
   "fr": {
     "title": "Quel est votre projet ?",
     "mode": "Trouver une prestation",
-    "intro": "Décrivez ce que vous souhaitez créer ou améliorer.",
+    "intro": "Parlez-moi de votre entreprise et de votre projet. Je vous aide à trouver les services adaptés et à préparer votre échange avec Pascal.",
     "label": "Comment pouvons-nous vous aider ?",
     "placeholder": "Par exemple : je souhaite refaire mon site …",
-    "send": "Situer le projet",
+    "send": "Envoyer le message",
     "stop": "Suspendre la réponse",
     "waiting": "Chargement des informations pertinentes…",
     "error": "Le conseil sur le site est momentanément indisponible. Votre saisie est conservée. Utilisez la page de contact pour un échange personnel sur votre projet.",
@@ -62,10 +62,10 @@ const copy={
   "en": {
     "title": "What are you planning?",
     "mode": "Find a service",
-    "intro": "Tell us what you want to create or improve.",
+    "intro": "Tell me about your business and what you have in mind. I can help you find relevant services and prepare your conversation with Pascal.",
     "label": "How can we help?",
     "placeholder": "For example: I would like to update my website …",
-    "send": "Explore the project",
+    "send": "Send message",
     "stop": "Pause response",
     "waiting": "Loading relevant information …",
     "error": "Website guidance is temporarily unavailable. Your input is retained. Please use the contact page for a personal project discussion.",
@@ -307,21 +307,55 @@ type OrientationProps={locale:Locale;pagePath:string;pages:PublicPage[];onActivi
 
 export default function PublicOrientationChat(props:OrientationProps){
  const local=typeof __NEXIFY_STATIC_ORIENTATION__!=="undefined"&&__NEXIFY_STATIC_ORIENTATION__===true;
- return local?<StaticOrientationChat {...props}/>:<ServerOrientationChat {...props}/>;
+ const site=props.pagePath.startsWith('/teileklar')?'teileklar':'nexify';
+ const conversationKey=`${site}:${props.locale}`;
+ return local?<StaticOrientationChat key={conversationKey} {...props}/>:<ServerOrientationChat key={conversationKey} {...props}/>;
+}
+
+// UI history is visitor-supplied context, never proof of an authenticated conversation.
+// Send a bounded suffix of whole text turns; never truncate the latest user question.
+export function serverTextHistory(messages:UIMessage[]){
+ const validId=/^[A-Za-z0-9_-]{1,100}$/;
+ const invalidText=/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/u;
+ const result:{id:string;role:'user'|'assistant';parts:{type:'text';text:string}[]}[]=[];
+ const ids=new Set<string>();let characters=0;
+ for(let i=messages.length-1;i>=0&&result.length<12;i--){
+  const message=messages[i],latest=i===messages.length-1;
+  if((message.role!=='user'&&message.role!=='assistant')||typeof message.id!=='string'||!validId.test(message.id)||ids.has(message.id)){
+   if(latest)throw new Error('invalid_latest_message');continue;
+  }
+  const textParts=message.parts.filter(part=>part.type==='text');
+  if(textParts.some(part=>typeof part.text!=='string')){if(latest)throw new Error('invalid_latest_message');continue;}
+  const parts=textParts.map(part=>({type:'text' as const,text:part.text}));
+  const count=parts.reduce((total,part)=>total+part.text.length,0);
+  if(!parts.length||parts.length>12||parts.some(part=>invalidText.test(part.text))||!count){
+   if(latest)throw new Error('invalid_latest_message');continue;
+  }
+  if(characters+count>3000){if(latest)throw new Error('latest_message_too_long');break;}
+  ids.add(message.id);characters+=count;result.unshift({id:message.id,role:message.role,parts});
+ }
+ while(result[0]?.role==='assistant')result.shift();
+ if(result.at(-1)?.role!=='user')throw new Error('latest_user_message_required');
+ return result;
 }
 
 function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:OrientationProps){
  const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify";const text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};const[draft,setDraft]=useState("");const lastSubmitted=useRef("");
- const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>({body:{id,trigger,...(messageId?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:messages.filter(message=>message.role==="user").slice(-1).map(message=>({id:message.id,role:message.role,parts:message.parts.filter(part=>part.type==="text")}))}})}),[]);
- const{messages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>setDraft(previous=>previous||lastSubmitted.current)});
+ const retryPending=useRef(false);const previousTurns=useRef<UIMessage[]>([]);
+ const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>{const history=serverTextHistory(messages);return {body:{id,trigger,...(messageId&&history.some(message=>message.id===messageId)?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:history}};}}),[]);
+ const{messages,setMessages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>{retryPending.current=true;setDraft(previous=>previous||lastSubmitted.current);}});
  const busy=status==="submitted"||status==="streaming";
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
  const composerInput=useRef<HTMLTextAreaElement>(null);
  useEffect(()=>{if(!busy&&lastSubmitted.current&&document.activeElement===document.body&&composerInput.current?.offsetParent!==null)composerInput.current?.focus();},[busy]);
- async function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy)return;lastSubmitted.current=value;setDraft("");try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{setDraft(previous=>previous||value);}}
+ async function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy)return;
+  if(retryPending.current)setMessages(previousTurns.current);else previousTurns.current=messages;
+  retryPending.current=false;lastSubmitted.current=value;setDraft("");
+  try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{retryPending.current=true;setDraft(previous=>previous||value);}}
+ function stopAnswer(){retryPending.current=true;setDraft(previous=>previous||lastSubmitted.current);void stop();}
  return <section className="public-orientation" aria-label={text.title}>
   <div className="orientation-content">
-  <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map(message=><article className={"orientation-message role-"+message.role} key={message.id}><strong>{message.role==="user"?text.you:text.assistant}</strong>{message.parts.map((part,index)=>{
    if(part.type==="text")return <p key={index}>{message.role==="assistant"?guidedText(part.text,pages):part.text}</p>;
    if(part.type!=="data-page"||!("data" in part)||!part.data||typeof part.data!=="object")return null;
@@ -333,7 +367,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
   </div>
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={stopAnswer}>{text.stop}</button>}</form>
   {busy&&<p className="connection-note" role="status">{text.waiting}</p>}<p className="connection-note">{text.privacy}</p>
  </section>;
 }
@@ -349,12 +383,12 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
  useEffect(()=>{if(messages.length)latest.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages]);
  function submit(event:FormEvent){
   event.preventDefault();const question=draft.trim();if(!question)return;
-  try{const answer=staticOrientation({locale,pagePath,question,pages});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
+  try{const answer=staticOrientation({locale,pagePath,question,pages,previousQuestions:messages.map(message=>message.question)});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
   catch{setError(true);}
  }
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="local-public-pages">
   <div className="orientation-content">
-  <div className="orientation-intro">{site==='teileklar'&&<span className="state-label">{text.mode}</span>}<h3>{text.title}</h3><p>{text.intro}</p></div>
+  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
    <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>

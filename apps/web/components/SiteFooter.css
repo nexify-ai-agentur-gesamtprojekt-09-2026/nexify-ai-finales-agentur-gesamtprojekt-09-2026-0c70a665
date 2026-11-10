@@ -42,3 +42,6 @@
 .workspace-shell .site-footer.footer-refined{background:var(--gradient-atelier-light),var(--color-atelier-surface)}
 @container footer (min-width:1700px){.footer-refined .footer-utilities{padding-inline:var(--layout-home-wide-padding)}}
 .footer-refined .footer-utilities .diagnostic-consent{border:0;margin:0;padding-top:var(--space-3)}
+.footer-oracle{display:none}
+@media(max-width:820px){.workspace-shell .site-footer.footer-refined{box-sizing:border-box;padding-right:72px}}
+@media(max-width:480px){.workspace-shell .footer-refined .footer-link-groups,.workspace-shell .footer-refined .footer-overview-columns{grid-template-columns:1fr}}
