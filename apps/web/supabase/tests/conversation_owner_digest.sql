@@ -21,6 +21,55 @@ end $$;
 insert into chat.chat_conversations(id,locale,page_path,status)
 values ('00000000-0000-4000-8000-000000000001','de','/','open');
 \ir ../migrations/0002_conversation_owner_digest.sql
+\ir ../migrations/0003_owned_conversation_rpc.sql
+do $$
+begin
+  if has_function_privilege('anon','chat.create_owned_conversation(bytea,text,text)','EXECUTE')
+     or has_function_privilege('anon','chat.read_owned_conversation(uuid,bytea)','EXECUTE')
+     or has_function_privilege('authenticated','chat.create_owned_conversation(bytea,text,text)','EXECUTE')
+     or has_function_privilege('authenticated','chat.read_owned_conversation(uuid,bytea)','EXECUTE') then
+    raise exception 'Public role can invoke owner RPC';
+  end if;
+  if not has_function_privilege('service_role','chat.create_owned_conversation(bytea,text,text)','EXECUTE')
+     or not has_function_privilege('service_role','chat.read_owned_conversation(uuid,bytea)','EXECUTE')
+     or not (select rolbypassrls from pg_roles where rolname='service_role') then
+    raise exception 'Fixture service role is misconfigured';
+  end if;
+end $$;
+-- Missing RPC privilege must deny access even for the correctly named service role.
+revoke execute on function chat.read_owned_conversation(uuid,bytea) from service_role;
+set local role service_role;
+do $$
+begin
+  begin
+    perform chat.read_owned_conversation('00000000-0000-4000-8000-000000000001',decode(repeat('ab',32),'hex'));
+    raise exception 'RPC unexpectedly callable without EXECUTE';
+  exception when insufficient_privilege then null;
+  end;
+end $$;
+reset role;
+grant execute on function chat.read_owned_conversation(uuid,bytea) to service_role;
+set local role service_role;
+do $$
+declare created uuid; owner bytea := decode(repeat('ab',32),'hex');
+begin
+  if current_user <> 'service_role' then raise exception 'Incorrect test principal'; end if;
+  begin
+    perform chat.create_owned_conversation(null,'de','/');
+    raise exception 'Null owner accepted';
+  exception when invalid_parameter_value then null;
+  end;
+  created := chat.create_owned_conversation(owner,'de','/');
+  if (select count(*) from chat.read_owned_conversation(created,owner)) <> 1 then
+    raise exception 'Owner cannot read conversation';
+  end if;
+  if (select count(*) from chat.read_owned_conversation(created,decode(repeat('cd',32),'hex'))) <> 0
+     or (select count(*) from chat.read_owned_conversation(created,null)) <> 0
+     or (select count(*) from chat.read_owned_conversation('00000000-0000-4000-8000-000000000001',owner)) <> 0 then
+    raise exception 'Wrong or missing owner can read conversation';
+  end if;
+end $$;
+reset role;
 -- A separate test invokes the real migration against a deliberately drifted column.
 do $$
 declare legacy chat.chat_conversations%rowtype;

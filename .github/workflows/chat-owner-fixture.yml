@@ -32,7 +32,7 @@ jobs:
           set -euo pipefail
           docker --host=unix:///var/run/docker.sock cp apps/web/supabase "$FIXTURE_CONTAINER":/tmp/nexify-chat-fixture
           docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
-            -c 'create role anon nologin' -c 'create role authenticated nologin' -c 'create role service_role nologin'
+            -c 'create role anon nologin' -c 'create role authenticated nologin' -c 'create role service_role nologin bypassrls'
           docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
             -f /tmp/nexify-chat-fixture/tests/conversation_owner_digest.sql
           if output=$(docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
