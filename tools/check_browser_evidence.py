@@ -24,7 +24,7 @@ SOURCE_PATHS = (
     "apps/web/components/PageConcept.css",
     "config/site-map.json",
 )
-EVIDENCE_PATH = "docs/design/detail-browser-evidence.json"
+EVIDENCE_PATH = "evidence/browser-critical-2026-11-10/critical-browser.json"
 SDK_SOURCE_PATHS = (
     "apps/web/components/PublicOrientationChat.tsx",
     "apps/web/components/PublicOrientationChat.css",
@@ -45,6 +45,8 @@ AUXILIARY_SOURCE_PATHS = (
     "apps/site/src/main.tsx",
     "apps/web/components/WorkspaceRebuild.css",
     "apps/web/components/HomeRebuild.css",
+    "apps/web/components/HomeConcept.css",
+    "apps/web/components/AtelierFilm.css",
     "apps/web/components/IdentityHero.tsx",
     "apps/web/components/IdentityHero.css",
     "config/identity-hero.json",
@@ -61,7 +63,7 @@ CRITICAL_CHECKS = frozenset((
     "account_control_fallback_and_auth_routes_present",
     "keyboard_skip_link_preserves_standalone_product_hash_route",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
-    "uncropped_presenter_contain_and_no_overflow_across_five_desktop_sizes",
+    "hero_scene_and_controls_across_five_desktop_sizes",
     "native_product_menu_and_direct_legal_footer_links",
 ))
 GUTTER_PATHS = ("/produkte/nex2fly", "/teileklar/werkstatt", "/impressum")
@@ -156,6 +158,11 @@ def check_evidence(root):
     recorded = evidence.get("public_routes")
     if not isinstance(recorded, list) or any(not isinstance(path, str) for path in recorded) or len(set(recorded)) != len(recorded) or set(recorded) != routes:
         raise EvidenceError("recorded_public_route_set_mismatch")
+    presenters = evidence.get("presenter_measurements")
+    if not isinstance(presenters, list) or len(presenters) != 5 or {row.get("viewportWidth") for row in presenters if isinstance(row, dict)} != {1024, 1280, 1440, 1600, 1920}:
+        raise EvidenceError("five_hero_measurements_required")
+    if any(row.get("overflow") is not False or row.get("layeredActionClear") is not True or not isinstance(row.get("width"), (int, float)) or row["width"] <= 0 for row in presenters):
+        raise EvidenceError("invalid_hero_measurement")
     expected_rows = {(width, path) for width in (1920, 390) for path in GUTTER_PATHS}
     rows = evidence.get("targeted_supplement_gutter_followup")
     if not isinstance(rows, list) or len(rows) != len(expected_rows):
