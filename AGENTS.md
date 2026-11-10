@@ -110,6 +110,43 @@ Hostinger-Servern beachten: nicht wahllos neue dauerhafte Prozesse installieren.
 Installation und Dokumentation sind erst nach tatsächlicher Funktion und
 Runbook/Watchdog/Recovery-Prüfung als erledigt zu kennzeichnen.
 
+## Dauerhafte GOAL-Bindung für alle Chats und sichere Lauf-Fortsetzung · 10.11.2026
+
+Alle autorisierten NeXify-Arbeitschats und tatsächlich laufenden Work-/Codex-
+Agentenketten mit einem **einzigen führenden GOAL und Taskregister** verbinden.
+Besonders die getrennten Projekte **NeXify Site Erstellung** und
+**Studienkolleg Aachen** nach
+`docs/automation/chat-goal-continuity-2026-11-10.md` führen.
+Ein Chat-Navigationslink ist kein Schreibrecht in den Originalchat;
+jede reale Zustellung und Wiederaufnahme muss mit echter Identität und
+Readback geprüft werden. Keine neuen Doppelregister, keine Agenten-Echos,
+ein Writer und ein klarer Tenant pro Änderung.
+
+Bei **jeder Aktivierung**, aus welchem zulässigen Kanal auch immer, zuerst den
+auslösenden Auftrag und danach **systemweit** die übrigen offenen, verwaisten,
+überfälligen und aus alten GOALs abgeleiteten Aufgaben inkrementell prüfen.
+VOR JEDEM LAUFENDE den `NEXIFY-RUN-FINALIZER-20261110` ausführen:
+aktuellen Checkpoint sicher persistieren, exakten Task-/Worker-/Lease-State
+zurücklesen, nächste zulässige Arbeit und *tatsächlichen* Auslöser festlegen,
+Scheduler-/Eventsubscription-/Watchdog-/Rückkanal-Verfügbarkeit prüfen,
+`next_run`, Owner, Frist und Alternativweg im bestehenden Register sichern.
+Ein geplantes Datum ohne überprüfbaren ausführbaren Mechanismus ist kein
+Wiederanlaufnachweis. Verpasste Trigger oder fehlende ACKs als Incident
+behandeln, datenerhaltend und idempotent reparieren; keine blinden Retry-
+oder Selbsttrigger-Schleifen. Persönliche Dot-/Admin-Pausen nie umgehen.
+Ein echtes mehrmals stündliches Intervall braucht einen verifiziert laufenden
+externen Hostinger-Scheduler, nicht nur eine ChatGPT-Regel.
+
+Alle fehlenden technisch notwendigen und wirtschaftlich sinnvollen
+Abhängigkeiten, Tools, API-/MCP-Adapter, Agenten- und Entscheidungsketten
+selbständig erkennen und – soweit rechtlich sowie technisch autorisiert –
+**installieren, implementieren, testen und betreiben**. Vorhandene Werkzeuge,
+aktuelle OSS-Lizenzen, Ressourcenkapazität und TCO prüfen. Jede Änderung
+muss nötige Cronjobs, Timer, Skills, Runbooks, CI-/Brandregeln und Monitoring
+mit aktualisieren; Livewirkung und Wiederanlauf unabhängig prüfen. Nicht nur
+die wörtliche Teilanforderung erledigen, sondern den gesamten fachlichen
+End-to-End-Geschäftsweg.
+
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 
