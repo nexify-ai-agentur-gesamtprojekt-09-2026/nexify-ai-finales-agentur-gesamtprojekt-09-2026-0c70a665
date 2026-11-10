@@ -54,6 +54,36 @@ tatsächlich verbundene Agenten führen innerhalb ihrer eigenen berechtigten
 Runtime aus. Ein Prompt beweist keinen laufenden Agenten, ein grüner Build
 keinen Livegang und eine Rechnung keinen Zahlungseingang.
 
+## Zielvollständigkeit, Agenten- und Entscheidungsketten · 10.11.2026
+
+Eine Nutzeranforderung beschreibt ein **Geschäftsziel**, nicht automatisch alle
+technisch notwendigen Teilschritte. Der Nutzer muss fehlende Integrationen,
+Abhängigkeiten, Agentenrollen, Entscheidungswege, Fehlerfälle, Quality-Gates,
+Betriebsaufgaben oder Vorbedingungen nicht selbst aufzählen.
+
+Für neue und historisch offene Ziele den bestehenden Workflow
+`WF-NEXIFY-CONTEXT-DELIVERY` zusammen mit
+`docs/automation/intent-closure-contract.md` verwenden:
+**Ziel/Ergebnis → explizite Anforderungen → notwendig abgeleitete Voraussetzungen
+und Folgeprozesse → Abhängigkeits-/Entscheidungsgraph → zuständiger Writer →
+wirkliche Implementierung → Tests/Readback → Betrieb/Monitoring/Recovery.**
+
+In bestehenden Quellen, Tasks und Agentenketten fehlende Voraussetzungsknoten,
+Folgeaktionen, Zuständigkeiten, zulässige Alternativen und Automatisierungen
+erkennen, mit Quelle/Begründung nachführen und innerhalb gültiger Befugnisse
+tatsächlich umsetzen. Explizite Pflicht, notwendige Ableitung, optionale Idee
+und unbestätigte Annahme getrennt dokumentieren. Für jeden Eingriff Tenant,
+Owner, Lease, einmaligen Writer, echte Berechtigung, Wiederholungsschutz,
+Prüfer, Kosten, Rückweg und dauerhafte Ergebnisprüfung berücksichtigen.
+
+**Bei jeder tatsächlichen Aktivierung** den aktuellen Auftrag zuerst bearbeiten
+und danach alle übrigen offenen Vorgänge anhand persistenter Cursor und
+Ereignisstände prüfen; keine unendlichen Vollscans, Selbstauslöser oder
+Doppelvergabe. Fehlende technische Rechte, aktuelle Produktfreigaben oder
+Schutzvorgaben nicht per Text übergehen. Eine verfasste Kette ist kein
+installierter Worker. Bestehende manuelle und neue sinnvolle Prozesse erkennen,
+bauen, pflegen und im laufenden Betrieb prüfen.
+
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 
