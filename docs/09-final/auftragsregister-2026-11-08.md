@@ -149,9 +149,9 @@ Verbindliche Quelle: `docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09
       ],
       "dependencies": [],
       "acceptance": "Build, Lint, Typecheck, Browser-Screenshots 320 bis 1440 px, Chat-Interaktion, Reduced Motion, unabhängiger Review, private Site-Readback",
-      "evidence": "Design-Referenz-Lock und Nutzerfeedback; Soll-Design docs/design/nexify-soll-design-2026-11-10.md; lokale Builds mit Lint/Designaudit und vollständigen Typechecks bestanden; Browserprüfungen 320–1920 px, Oracle-Briefing und Videosteuerung bestanden; unabhängige Gegenprüfung PASS ausschließlich für private Designvorschau; Sites-Version 8, Commit 58c0b7d06b723374eb24adb876780166a590a225, Deployment appgdep_6af26100b0f08191805f515bab16a5bb succeeded, owner-only. Live-Oracle, formale Medienprüfung und öffentliche Abnahme offen.",
+      "evidence": "Design-Referenz-Lock und Nutzerfeedback; Soll-Design docs/design/nexify-soll-design-2026-11-10.md; lokale Builds mit Lint/Designaudit und vollständigen Typechecks bestanden; Browserprüfungen 320–1920 px, Oracle-Briefing und Videosteuerung bestanden; unabhängige Gegenprüfung PASS ausschließlich für private Designvorschau; Sites-Version 8, Commit 58c0b7d06b723374eb24adb876780166a590a225, Deployment appgdep_6af26100b0f08191805f515bab16a5bb succeeded, owner-only. GitHub-Draft-PR 92 am geprüften Head 9fd5bb87d019d0a5bb3b7fee13e9c9860e205fa2; CI: next-web, react-site, postgres-isolation und openapi-schema erfolgreich, repository fehlgeschlagen wegen älterer Quellen- und Browser-Evidenzbindungen. Live-Oracle, formale Medienprüfung und öffentliche Abnahme offen.",
       "rollback": "Private Sites-Version 6 und GitHub Draft-Branch-Commit 6f48d7e00954fd954ee22cd76d4f47dc284b34e9 wiederherstellen; Originalmedien erhalten",
-      "next": "Quelländerungen mit dem GitHub-Draft-PR synchronisieren, Backend-zu-Anfrage-Ende-zu-Ende-Test und formale Medienprüfung abschließen; erst danach öffentliche Freigabe prüfen",
+      "next": "Veraltete Evidenzbindungen anhand neuer Laufzeitbelege gezielt erneuern und Repository-CI erneut prüfen; Backend-zu-Anfrage-Ende-zu-Ende-Test und formale Medienprüfung abschließen; erst danach öffentliche Freigabe prüfen",
       "require_source_change": true
     },
     {
