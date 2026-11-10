@@ -110,8 +110,8 @@ export async function POST(request: Request): Promise<Response> {
     let full = '';
     try {
       for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) full += chunk;
-    } catch (e) {
-      return err(e instanceof Error ? e.message : 'chat_llm_failed', 502);
+    } catch {
+      return err('chat_llm_failed', 502);
     }
     const draft = parseOfferDraft(full);
     const visible = draft ? stripOfferFence(full) : full;
@@ -148,8 +148,8 @@ export async function POST(request: Request): Promise<Response> {
         }
         const msg: ChatMessageDTO = { role: 'assistant', content: visible, created_at: new Date().toISOString() };
         send({ type: 'done', message: msg });
-      } catch (e) {
-        send({ type: 'error', error: e instanceof Error ? e.message : 'chat_llm_failed' });
+      } catch {
+        send({ type: 'error', error: 'chat_llm_failed' });
       } finally {
         controller.close();
       }
