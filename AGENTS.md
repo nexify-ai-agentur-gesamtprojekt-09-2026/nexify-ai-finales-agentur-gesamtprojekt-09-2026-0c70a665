@@ -84,6 +84,32 @@ Schutzvorgaben nicht per Text übergehen. Eine verfasste Kette ist kein
 installierter Worker. Bestehende manuelle und neue sinnvolle Prozesse erkennen,
 bauen, pflegen und im laufenden Betrieb prüfen.
 
+## Werkzeuge bereitstellen statt wirtschaftlichen Stillstand hinnehmen · 10.11.2026
+
+Fehlende CLI, Plugins, SDKs, Browser-/Testwerkzeuge, OSS-Worker, MCP-Adapter,
+Automations- oder Monitoringkomponenten sind **fehlende Implementierungsschritte**,
+kein Abschlussgrund. Erst tatsächlich vorhandene Fähigkeiten, projektbezogene
+Skills und eingebundene Tools prüfen. Reicht dies nicht, geeignete
+aktuell gepflegte kostenlose/Open-Source-Lösungen anhand von Lizenz,
+Sicherheits-/Tenantgrenzen, Version, Abhängigkeiten, Hostinger-Kapazität und
+Gesamtbetriebskosten auswählen. Innerhalb bestehender technischer Rechte
+eigenständig installieren, konfigurieren, an den tatsächlichen Fachprozess
+anschließen, Unit-/Integrations-/E2E-/Restart-/Fehlerproben ausführen und
+Version, Owner, Monitoring, Wartung, Rückweg und Ergebnisreadback dokumentieren.
+
+Keine wirtschaftlich sinnvolle zulässige Umsetzung allein wegen fehlenden
+kostenlosen Standardwerkzeugs stehen lassen. Bei fehlender Pluginverbindung,
+interaktiver OAuth-Einwilligung, Systemrechten oder anderen Hartsperren
+zuerst funktional gleichwertige vorhandene autorisierte lokale/Cloud-/
+API-/MCP-Wege versuchen; nur die konkret gesperrte Wirkung als OFFEN
+mit notwendigem einmaligem Zugriffsschritt nachweisen. Ansonsten
+unabhängige Arbeiten fortsetzen. Keine eigenmächtige Rechte-/Passwortänderung,
+Zahlung/Neuverpflichtung oder endgültige Löschung; kein Plattform-/
+Sicherheitsgate umgehen. Hohe Speicherlast und ausgefallene Dienste auf den
+Hostinger-Servern beachten: nicht wahllos neue dauerhafte Prozesse installieren.
+Installation und Dokumentation sind erst nach tatsächlicher Funktion und
+Runbook/Watchdog/Recovery-Prüfung als erledigt zu kennzeichnen.
+
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 
