@@ -65,6 +65,9 @@ jobs:
           NEXIFY_TEXT_SPACING_EVIDENCE_PATH: ${{ runner.temp }}/nexify-browser-evidence/text-spacing.json
           NEXT_TELEMETRY_DISABLED: '1'
         run: |
+          pnpm --filter @nexify/site build:standalone
+          # Standalone bundling writes apps/site/dist; restore the normal build
+          # afterwards. The standalone HTML is in its own ignored directory.
           pnpm build
           node apps/site/tests/browser-critical.mjs
           node apps/site/tests/browser-text-spacing.mjs
