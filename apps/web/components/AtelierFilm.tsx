@@ -7,7 +7,7 @@ import './AtelierFilm.css';
 const words={de:{play:'Film abspielen',replay:'Erneut abspielen',pause:'Film pausieren',loading:'Video lädt …',voice:'Film mit Ton starten',mute:'Ton ausschalten',error:'Der Film ist gerade nicht verfügbar.',transcript:'Gesprochener Text'},nl:{play:'Film afspelen',replay:'Opnieuw afspelen',pause:'Film pauzeren',loading:'Video laden …',voice:'Film met geluid · DE',mute:'Geluid uit',error:'De film is momenteel niet beschikbaar.',transcript:'Gesproken tekst · DE'},fr:{play:'Lire le film',replay:'Revoir le film',pause:'Mettre en pause',loading:'Chargement de la vidéo …',voice:'Film avec le son · DE',mute:'Couper le son',error:'Le film est indisponible.',transcript:'Texte parlé · DE'},en:{play:'Play film',replay:'Play again',pause:'Pause film',loading:'Loading video …',voice:'Play with sound · DE',mute:'Mute',error:'The film is currently unavailable.',transcript:'Spoken text · DE'}};
 const audioWords={de:{captions:'Untertitel',volume:'Lautstärke'},nl:{captions:'Ondertiteling',volume:'Volume'},fr:{captions:'Sous-titres',volume:'Volume'},en:{captions:'Captions',volume:'Volume'}};
 const compactWords={de:{play:'Abspielen',pause:'Pausieren',voice:'Ton an',mute:'Ton aus'},nl:{play:'Afspelen',pause:'Pauzeren',voice:'Geluid aan',mute:'Geluid uit'},fr:{play:'Lire',pause:'Pause',voice:'Son',mute:'Sans son'},en:{play:'Play',pause:'Pause',voice:'Sound on',mute:'Mute'}};
-export type AtelierAsset={src:string;poster:string;width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean};
+export type AtelierAsset={src:string;poster:string;posterAlt?:string;width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean};
 /** Editorial motion. End, buffering, manual pause and temporary visibility pauses remain distinct. */
 export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsset;locale:Locale;hero?:boolean}){
  const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),id=useId();
@@ -52,7 +52,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  }
  return <div ref={root} className={'atelier-film'+(hero?' atelier-film-hero':'')} data-film={asset.title} data-playback={failed?'error':ended?'ended':buffering?'buffering':playing?'playing':'paused'}>
   <div className="atelier-film-picture">
-   {(!frameReady||failed)&&<img className="atelier-film-fallback" src={asset.poster} alt={failed?asset.title:''} aria-hidden={!failed} width={asset.width} height={asset.height}/>}
+   {(!frameReady||failed)&&<img className="atelier-film-fallback" src={asset.poster} alt={failed?(asset.posterAlt??asset.title):''} aria-hidden={!failed} width={asset.width} height={asset.height}/>}
    <video ref={ref} src={asset.src} poster={asset.poster} width={asset.width} height={asset.height} preload={hero?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
     onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
