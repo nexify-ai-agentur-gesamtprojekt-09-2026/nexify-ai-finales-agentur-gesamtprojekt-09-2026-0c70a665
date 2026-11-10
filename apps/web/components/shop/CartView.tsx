@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { SiteLink } from "../Router";
-import { api, money, notifyCart, type Cart } from "./api";
+import { api, money, notifyCart, type ApiError, type Cart } from "./api";
 import { ProductImage } from "./ProductCard";
 import { freeShippingHint } from "./shipping-hint";
 
@@ -19,8 +19,8 @@ export function Totals({ cart }: { cart: Cart }) {
 }
 
 export default function CartView() {
-  const [cart, setCart] = useState<Cart | null>(null), [busy, setBusy] = useState(false), [error, setError] = useState(""), [revision, setRevision] = useState(0);
-  const load = () => api<Cart>("/api/shop/cart").then(data => { setCart(data); notifyCart(data.count); }).catch(() => setError("Der Warenkorb konnte nicht geladen werden."));
+  const [cart, setCart] = useState<Cart | null>(null), [busy, setBusy] = useState(false), [error, setError] = useState(""), [serviceUnavailable, setServiceUnavailable] = useState(false), [revision, setRevision] = useState(0);
+  const load = () => api<Cart>("/api/shop/cart").then(data => { setCart(data); setServiceUnavailable(false); notifyCart(data.count); }).catch((failure: ApiError) => { if (failure.status === 503 && failure.error === "runtime_binding_unavailable") setServiceUnavailable(true); else setError("Der Warenkorb konnte nicht geladen werden."); });
   useEffect(() => { void load(); }, []);
   async function change(productId: string, quantity: number) {
     setBusy(true); setError("");
@@ -28,6 +28,7 @@ export default function CartView() {
     catch { setError("Die Menge konnte nicht geändert werden. Bitte prüfen Sie den Lagerbestand."); await load(); setRevision(value => value + 1); }
     finally { setBusy(false); }
   }
+  if (serviceUnavailable) return <div className="tk-empty" role="alert" data-testid="cart-service-unavailable"><h2>Warenkorb derzeit nicht verfügbar</h2><p>Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an.</p><SiteLink href="/teileklar/shop" className="content-action-link">Zum Shop</SiteLink>{' · '}<SiteLink href="/kontakt" className="content-action-link">Kontakt aufnehmen</SiteLink></div>;
   if (!cart) return error ? <p role="alert" className="tk-alert">{error}</p> : <p role="status">Warenkorb wird geladen …</p>;
   if (!cart.lines.length) return <div className="tk-empty" data-testid="cart-empty"><h2>Ihr Warenkorb ist leer</h2><p>Suchen Sie im Shop nach dem passenden Artikel.</p><SiteLink href="/teileklar/shop" className="content-action-link">Zum Shop</SiteLink></div>;
   const stockUnknown = cart.lines.some(line => line.stock == null);

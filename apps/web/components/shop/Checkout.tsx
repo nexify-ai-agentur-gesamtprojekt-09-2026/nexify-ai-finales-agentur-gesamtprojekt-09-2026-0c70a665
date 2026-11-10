@@ -16,8 +16,9 @@ async function idempotencyKey(quote:string,address:AddressData){
 export default function Checkout(){
  const[step,setStep]=useState(0),[address,setAddress]=useState<AddressData>(EMPTY_ADDRESS),[quote,setQuote]=useState<Cart|null>(null),[terms,setTerms]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[empty,setEmpty]=useState(false),[stockBlocked,setStockBlocked]=useState(false);
  const[cartState,setCartState]=useState<'loading'|'ready'|'failed'>('loading');
+ const[serviceUnavailable,setServiceUnavailable]=useState(false);
  const heading=useRef<HTMLHeadingElement>(null),ordering=useRef(false);
- useEffect(()=>{api<Cart>('/api/shop/cart').then(c=>{setEmpty(!c.lines.length);setStockBlocked(c.lines.some(line=>line.stock==null));setCartState('ready');}).catch(()=>{setError('Der Warenkorb konnte nicht geladen werden. Bitte laden Sie die Seite erneut.');setCartState('failed');});},[]);
+ useEffect(()=>{api<Cart>('/api/shop/cart').then(c=>{setEmpty(!c.lines.length);setStockBlocked(c.lines.some(line=>line.stock==null));setCartState('ready');}).catch((failure:ApiError)=>{setServiceUnavailable(failure.status===503&&failure.error==='runtime_binding_unavailable');setError('Der Warenkorb konnte nicht geladen werden. Bitte laden Sie die Seite erneut.');setCartState('failed');});},[]);
  useEffect(()=>{heading.current?.focus();},[step,cartState,empty,stockBlocked]);
  const loadQuote=async(a=address)=>{setError('');try{const value=await api<Cart>('/api/shop/checkout/quote',{method:'POST',json:{address:a}});setQuote(value);setEmpty(!value.lines.length);return value;}catch(failure){const e=failure as ApiError;if(e.error==='cart_empty')setEmpty(true);if(e.error==='stock_unavailable')setStockBlocked(true);setError(e.error==='price_not_released'?'Die Preise werden gerade geprüft. Bitte versuchen Sie es später erneut.':'Versand und Bestellübersicht konnten nicht berechnet werden. Bitte versuchen Sie es erneut.');return null;}};
  async function acceptChanges(){setBusy(true);try{await api('/api/shop/cart/confirm-changes',{method:'POST',json:{}});await loadQuote();}catch(failure){if((failure as ApiError).error==='stock_unavailable')setStockBlocked(true);else setError('Änderungen konnten nicht übernommen werden. Bitte erneut versuchen.');}finally{setBusy(false);}}
@@ -30,6 +31,7 @@ export default function Checkout(){
   finally{ordering.current=false;setBusy(false);}
  }
  if(cartState==='loading')return <p role="status" data-testid="checkout-cart-loading">Warenkorb wird geprüft …</p>;
+ if(cartState==='failed'&&serviceUnavailable)return <div className="tk-empty" role="alert" data-testid="checkout-service-unavailable"><h2>Kasse derzeit nicht verfügbar</h2><p>Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an.</p><SiteLink href="/teileklar/shop" className="content-action-link">Zum Shop</SiteLink>{' · '}<SiteLink href="/kontakt" className="content-action-link">Kontakt aufnehmen</SiteLink></div>;
  if(cartState==='failed')return <p role="alert" className="tk-alert" data-testid="checkout-error">{error}</p>;
  if(empty)return <div className="tk-empty" data-testid="checkout-empty"><h2>Ihr Warenkorb ist leer</h2><SiteLink href="/teileklar/shop" className="content-action-link" data-testid="checkout-empty-shop">Zum Shop</SiteLink></div>;
  if(stockBlocked)return <div className="tk-empty" data-testid="checkout-stock-unavailable"><h2>Bestand derzeit nicht bestätigt</h2><p>Für mindestens einen Artikel lässt sich der Bestand momentan nicht bestätigen. Bitte prüfen Sie Ihren Warenkorb oder entfernen Sie den Artikel.</p><SiteLink href="/teileklar/warenkorb" className="content-action-link">Zum Warenkorb</SiteLink></div>;

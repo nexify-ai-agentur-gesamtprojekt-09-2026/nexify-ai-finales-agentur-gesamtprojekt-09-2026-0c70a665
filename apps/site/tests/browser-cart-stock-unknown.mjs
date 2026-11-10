@@ -80,4 +80,26 @@ try {
   assert.match(await page.getByTestId('checkout-error').innerText(),/Warenkorb konnte nicht geladen/);assert.equal(await page.getByTestId('checkout-address-form').count(),0);
   console.log(JSON.stringify({cartReadFailure:true,checkoutFormBlocked:true}));
  } finally {await failedLoad.close();}
+ for(const width of [390,1440]) {
+  const unavailable=await browser.newContext({viewport:{width,height:900}});
+  try {
+   await unavailable.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==origin)return route.abort();if(u.pathname==='/api/shop/cart')return route.fulfill({status:503,json:{detail:{error:'runtime_binding_unavailable',reason:'payment_mode_unbound'}}});if(u.pathname.startsWith('/api/'))return route.fulfill({status:404,json:{error:'not_in_fixture'}});return route.continue();});
+   const page=await unavailable.newPage();
+   for(const [path,id] of [['/teileklar/warenkorb','cart-service-unavailable'],['/teileklar/kasse','checkout-service-unavailable']]) {
+    await page.goto(origin+path);const section=page.getByTestId(id);await section.waitFor();
+    assert.equal(await section.getAttribute('role'),'alert');
+    assert.match(await section.innerText(),/Warenkorb momentan nicht abrufen/);
+    assert.equal(await section.getByRole('link',{name:'Zum Shop'}).isVisible(),true);
+    assert.equal(await section.getByRole('link',{name:'Kontakt aufnehmen'}).isVisible(),true);
+    const shopLink=section.getByRole('link',{name:'Zum Shop'}),contactLink=section.getByRole('link',{name:'Kontakt aufnehmen'});
+    assert.equal(await shopLink.getAttribute('href'),'/teileklar/shop');assert.equal(await contactLink.getAttribute('href'),'/kontakt');
+    await shopLink.focus();assert.equal(await shopLink.evaluate(element=>element===document.activeElement),true);
+    await page.keyboard.press('Tab');assert.equal(await contactLink.evaluate(element=>element===document.activeElement),true,'contact remains keyboard reachable after shop link');
+    assert.equal(await page.getByTestId('checkout-address-form').count(),0);
+    assert.doesNotMatch(await section.innerText(),/runtime_binding_unavailable|payment_mode_unbound/);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+   }
+   console.log(JSON.stringify({width,runtimeUnavailableExplained:true,contactAndReturn:true}));
+  } finally {await unavailable.close();}
+ }
 } finally {await browser.close();await server.close();}
