@@ -7,19 +7,28 @@ import './AtelierFilm.css';
 const words={de:{play:'Film abspielen',replay:'Erneut abspielen',pause:'Film pausieren',loading:'Video lädt …',voice:'Film mit Ton starten',mute:'Ton ausschalten',error:'Der Film ist gerade nicht verfügbar.',transcript:'Gesprochener Text'},nl:{play:'Film afspelen',replay:'Opnieuw afspelen',pause:'Film pauzeren',loading:'Video laden …',voice:'Film met geluid · DE',mute:'Geluid uit',error:'De film is momenteel niet beschikbaar.',transcript:'Gesproken tekst · DE'},fr:{play:'Lire le film',replay:'Revoir le film',pause:'Mettre en pause',loading:'Chargement de la vidéo …',voice:'Film avec le son · DE',mute:'Couper le son',error:'Le film est indisponible.',transcript:'Texte parlé · DE'},en:{play:'Play film',replay:'Play again',pause:'Pause film',loading:'Loading video …',voice:'Play with sound · DE',mute:'Mute',error:'The film is currently unavailable.',transcript:'Spoken text · DE'}};
 const audioWords={de:{captions:'Untertitel',volume:'Lautstärke'},nl:{captions:'Ondertiteling',volume:'Volume'},fr:{captions:'Sous-titres',volume:'Volume'},en:{captions:'Captions',volume:'Volume'}};
 const compactWords={de:{play:'Abspielen',pause:'Pausieren',voice:'Ton an',mute:'Ton aus'},nl:{play:'Afspelen',pause:'Pauzeren',voice:'Geluid aan',mute:'Geluid uit'},fr:{play:'Lire',pause:'Pause',voice:'Son',mute:'Sans son'},en:{play:'Play',pause:'Pause',voice:'Sound on',mute:'Mute'}};
-export type AtelierAsset={src:string;poster:string;posterAlt?:string;width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean};
+export type AtelierAsset={src:string;poster:string;posterAlt?:string;still?:{src:string;alt:string};width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean};
 /** Editorial motion. End, buffering, manual pause and temporary visibility pauses remain distinct. */
 export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsset;locale:Locale;hero?:boolean}){
- const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),id=useId();
+ const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),stillImage=useRef<HTMLImageElement>(null),id=useId();
  const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
- const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false);
+ const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null);
  const t=words[locale],a=audioWords[locale],compact=compactWords[locale],playLabel=ended?t.replay:t.play;
+ // A reviewed still may be bound to this exact asset; until then, retain the existing editorial poster.
+ const still=asset.still??{src:asset.poster,alt:asset.posterAlt??asset.title};
+ const usePoster=failed||failedStillSrc===still.src;
+ useEffect(()=>{
+  const image=stillImage.current;
+  // Image errors may also occur before hydration. Scope the failure to its URL.
+  setFailedStillSrc(still.src!==asset.poster&&image?.getAttribute('src')===still.src&&image.complete&&image.naturalWidth===0?still.src:null);
+ },[still.src,asset.poster]);
  function captionMode(enabled:boolean){const tracks=ref.current?.textTracks;if(tracks)for(let i=0;i<tracks.length;i++)tracks[i].mode=enabled?'showing':'hidden';}
  useEffect(()=>{
   const video=ref.current,box=root.current;if(!video||!box)return;
-  // Media events may fire before React attaches its handlers during hydration.
-  alive.current=true;generation.current++;userPaused.current=false;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
+  // A media request can fail before React attaches onError during hydration.
+  // Read persistent media state when attaching, rather than waiting for events that already fired.
+  alive.current=true;generation.current++;userPaused.current=false;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setStarted(false);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
   let visible=false,disposed=false,audioAttempted=false;
   const pref=matchMedia('(prefers-reduced-motion: reduce)');
   const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection;
@@ -53,11 +62,11 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  }
  return <div ref={root} className={'atelier-film'+(hero?' atelier-film-hero':'')} data-film={asset.title} data-playback={failed?'error':ended?'ended':buffering?'buffering':playing?'playing':'paused'}>
   <div className="atelier-film-picture">
-   {(!frameReady||failed)&&<img className="atelier-film-fallback" src={asset.poster} alt={failed?(asset.posterAlt??asset.title):''} aria-hidden={!failed} width={asset.width} height={asset.height}/>}
-   <video ref={ref} src={asset.src} poster={asset.poster} width={asset.width} height={asset.height} preload={hero?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
-    onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
+   {(!frameReady||!started||ended||failed)&&<img ref={stillImage} className="atelier-film-fallback" src={usePoster?asset.poster:still.src} alt={(failed||!started||ended)?(usePoster?(asset.posterAlt??asset.title):still.alt):''} aria-hidden={!(failed||!started||ended)} onError={()=>{if(!usePoster&&still.src!==asset.poster)setFailedStillSrc(still.src);}} width={asset.width} height={asset.height}/>}
+   <video ref={ref} src={asset.src} poster={still.src} width={asset.width} height={asset.height} preload={hero?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
+    onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setStarted(true);setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
-    onEnded={()=>{setPlaying(false);setBuffering(false);setEnded(true);setProgress(1);}} onError={()=>{setFailed(true);setBuffering(false);setPlaying(false);}}>
+    onEnded={()=>{setStarted(false);setPlaying(false);setBuffering(false);setEnded(true);setProgress(1);}} onError={()=>{setFailed(true);setBuffering(false);setPlaying(false);}}>
     {asset.captions&&<track kind="captions" src={asset.captions} srcLang="de" label="Deutsch" default onLoad={()=>captionMode(captions)}/>}
    </video>
    {buffering&&<span className="atelier-film-loading" role="status">{t.loading}</span>}

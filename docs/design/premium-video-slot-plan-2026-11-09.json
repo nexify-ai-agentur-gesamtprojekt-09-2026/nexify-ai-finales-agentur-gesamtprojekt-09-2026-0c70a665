@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-10T09:14:36Z",
+  "updated_at": "2026-11-10T14:10:58Z",
   "owner": "Pascal Courbois / Art Director / UX-Frontend",
   "writer": "/root",
   "canonical_order_reference": "config/acceptance-coverage.json requirements_reconciliation current_execution",
@@ -475,7 +475,21 @@
         "technical_check": "H.264 1280x720, AAC, 10.03s; Browserwiedergabe lokal auf 390 und 1440 px geprüft; Reduced Motion pausiert; mittlerer Pegel -20.2 dB, Spitze -1.3 dB",
         "approval_status": "placement_user_selected; identity_lips_speech_captions_rights_and_release_review_pending",
         "publication_status": "not_published",
-        "fallback": "/media/higgsfield/hf-02-lobby-walk-1920.webp"
+        "fallback": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+        "still_frame_review": {
+          "candidate_frame_0_based": 0,
+          "time_seconds": 0,
+          "source_sha256": "c98f356547be0af2f000a9463893054be06f883e6d3f5fb2470c57967c9f4dc9",
+          "assessment": "Preliminary visual sample: all three figures visible and expressions calm. Identity-master comparison, crop, rights and release checks pending.",
+          "status": "candidate_not_approved"
+        }
+      },
+      "still_frame_review": {
+        "candidate_frame_0_based": 0,
+        "time_seconds": 0,
+        "source_sha256": "027d8152065ea2cd3fd4c79897ba9dc37b42176a7dbdaeda6945fadca7416ae3",
+        "assessment": "Preliminary sample only; identity-master comparison, mobile and desktop crop and release checks pending.",
+        "status": "candidate_not_approved"
       }
     },
     {
@@ -505,7 +519,14 @@
       "technical_check": "local_preparation; browser, captions and formal media review pending",
       "approval_status": "user_requested_reuse; identity_audio_captions_rights_release_pending",
       "publication_status": "not_published_on_company_page",
-      "fallback": "/media/higgsfield/hf-04-studio-desk-1920.webp"
+      "fallback": "/media/higgsfield/hf-04-studio-desk-1920.webp",
+      "still_frame_review": {
+        "candidate_frame_0_based": 0,
+        "time_seconds": 0,
+        "source_sha256": "027d8152065ea2cd3fd4c79897ba9dc37b42176a7dbdaeda6945fadca7416ae3",
+        "assessment": "Preliminary sample only; identity-master comparison, mobile and desktop crop and release checks pending. Frame 239 has unverified facial identity.",
+        "status": "candidate_not_approved"
+      }
     }
   ],
   "quality_gates": [
