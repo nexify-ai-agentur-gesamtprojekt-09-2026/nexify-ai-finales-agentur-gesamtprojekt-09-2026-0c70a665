@@ -411,20 +411,57 @@ class ChatGPTOption:
     def __init__(self, complete, model, route, per_visitor=10, daily_cap=200, clock=time.time):
         self.complete, self.model, self.route, self.per_visitor, self.daily_cap, self.clock = complete, model, route, per_visitor, daily_cap, clock
 
-    def reply(self, store, owner, message, locale):
+    def reply(self, store, owner, message, locale, key, payload_hash):
+        # The direct-provider legacy option is not the 9router target. This
+        # receipt only prevents duplicate dispatch; it is not a money budget,
+        # a tenant boundary or an authorization to activate this path.
         now = self.clock()
         with store.connect() as db:
             db.execute("BEGIN IMMEDIATE")
+            receipt = db.execute("SELECT payload_hash,response FROM receipts WHERE owner=? AND operation=? AND key=?",
+                                 (owner, "provider_chatgpt", key)).fetchone()
+            if receipt:
+                if receipt["payload_hash"] != payload_hash:
+                    raise ProviderError("idempotency_conflict")
+                if receipt["response"] is None:
+                    raise ProviderError("chatgpt_request_pending_or_unknown", unknown=True)
+                try:
+                    saved = json.loads(receipt["response"])
+                    if (not isinstance(saved, dict) or set(saved) != {"message_id", "message_sha256", "model", "route"}
+                            or type(saved["message_id"]) is not int or not isinstance(saved["model"], str)
+                            or not isinstance(saved["route"], str) or not isinstance(saved["message_sha256"], str)
+                            or not re.fullmatch(r"[a-f0-9]{64}", saved["message_sha256"])):
+                        raise ValueError("invalid receipt")
+                except (ValueError, TypeError, json.JSONDecodeError):
+                    raise ProviderError("chatgpt_request_pending_or_unknown", unknown=True) from None
+                answer = db.execute("SELECT body FROM chatgpt_messages WHERE id=? AND owner=? AND role='assistant'",
+                                    (saved["message_id"], owner)).fetchone()
+                if answer is None or hashlib.sha256(answer["body"].encode()).hexdigest() != saved["message_sha256"]:
+                    raise ProviderError("chatgpt_request_pending_or_unknown", unknown=True)
+                return {"text": answer["body"], "label": CHATGPT_LABEL, "model": saved["model"],
+                        "route": saved["route"], "ai_generated": True}
             if db.execute("SELECT COUNT(*) FROM chatgpt_messages WHERE role='user' AND created>?", (now - DAY,)).fetchone()[0] >= self.daily_cap:
                 raise ProviderError("chatgpt_daily_cap_reached")
             if db.execute("SELECT COUNT(*) FROM chatgpt_messages WHERE role='user' AND owner=? AND created>?", (owner, now - DAY)).fetchone()[0] >= self.per_visitor:
                 raise ProviderError("chatgpt_visitor_limit_reached")
             history = [dict(row) for row in db.execute("SELECT role,body FROM chatgpt_messages WHERE owner=? ORDER BY id DESC LIMIT 6", (owner,))][::-1]
+            # NULL is a durable in-flight/unknown marker: after a crash or
+            # provider exception a retry must never dispatch blindly again.
+            db.execute("INSERT INTO receipts(owner,operation,key,payload_hash,response) VALUES (?,?,?,?,NULL)",
+                       (owner, "provider_chatgpt", key, payload_hash))
             db.execute("INSERT INTO chatgpt_messages(owner,role,body,created) VALUES (?,?,?,?)", (owner, "user", message, now))
         messages = [{"role": "system", "content": chatgpt_system(locale)}]
         messages += [{"role": "user" if item["role"] == "user" else "assistant", "content": item["body"]} for item in history]
         messages.append({"role": "user", "content": message})
         answer = self.complete(messages)[:4000]
+        result = {"text": answer, "label": CHATGPT_LABEL, "model": self.model, "route": self.route, "ai_generated": True}
         with store.connect() as db:
-            db.execute("INSERT INTO chatgpt_messages(owner,role,body,created) VALUES (?,?,?,?)", (owner, "assistant", answer, self.clock()))
-        return {"text": answer, "label": CHATGPT_LABEL, "model": self.model, "route": self.route, "ai_generated": True}
+            db.execute("BEGIN IMMEDIATE")
+            cursor = db.execute("INSERT INTO chatgpt_messages(owner,role,body,created) VALUES (?,?,?,?)", (owner, "assistant", answer, self.clock()))
+            # The receipt references the owner-bound existing message, rather
+            # than retaining a second copy of customer-facing model text.
+            saved = {"message_id": cursor.lastrowid, "message_sha256": hashlib.sha256(answer.encode()).hexdigest(),
+                     "model": self.model, "route": self.route}
+            db.execute("UPDATE receipts SET response=? WHERE owner=? AND operation=? AND key=? AND payload_hash=? AND response IS NULL",
+                       (json.dumps(saved, ensure_ascii=False), owner, "provider_chatgpt", key, payload_hash))
+        return result
