@@ -1,0 +1,81 @@
+name: Oracle PostgREST fixture
+on:
+  push:
+    branches: [design/chat-orientation-2026-11-09]
+    paths:
+      - '.github/workflows/oracle-postgrest-fixture.yml'
+      - 'apps/web/supabase/migrations/0001_chat_offers_orders.sql'
+      - 'apps/web/supabase/migrations/0002_conversation_owner_digest.sql'
+      - 'apps/web/supabase/migrations/0003_owned_conversation_rpc.sql'
+      - 'apps/web/lib/oracle-visitor-session.mjs'
+      - 'apps/web/lib/oracle-owned-conversations.mjs'
+      - 'apps/web/lib/oracle-conversation-rpc.mjs'
+      - 'apps/web/auth/tests/oracle-postgrest-fixture.mjs'
+permissions:
+  contents: read
+concurrency:
+  group: oracle-postgrest-fixture-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  fixture:
+    if: github.repository == 'nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres@sha256:858bb5e98eed02eb8cafbcdc007f9a65d1b613972028944a8ec2133ccaf80d27
+        env:
+          POSTGRES_PASSWORD: isolated-ci-fixture-only
+          POSTGRES_DB: nexify_chat_owner_fixture
+        options: >-
+          --publish 127.0.0.1:35431:3000
+          --health-cmd "pg_isready -U postgres -d nexify_chat_owner_fixture"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - name: Initialize disposable schema and isolated PostgREST
+        env:
+          FIXTURE_CONTAINER: ${{ job.services.postgres.id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker --host=unix:///var/run/docker.sock cp apps/web/supabase "$FIXTURE_CONTAINER":/tmp/oracle-postgrest-fixture
+          docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
+            -c 'create role anon nologin' -c 'create role authenticated nologin' -c 'create role service_role nologin bypassrls' \
+            -c "create role oracle_fixture_auth login noinherit password 'fixture-db-password'" \
+            -c 'grant anon, service_role to oracle_fixture_auth'
+          for file in 0001_chat_offers_orders.sql 0002_conversation_owner_digest.sql 0003_owned_conversation_rpc.sql; do
+            docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture -f "/tmp/oracle-postgrest-fixture/migrations/$file"
+          done
+          docker --host=unix:///var/run/docker.sock run -d --name oracle-fixture-rest --network "container:$FIXTURE_CONTAINER" \
+            -e 'PGRST_DB_URI=postgres://oracle_fixture_auth:fixture-db-password@127.0.0.1:5432/nexify_chat_owner_fixture' \
+            -e PGRST_DB_SCHEMAS=chat -e PGRST_DB_ANON_ROLE=anon \
+            -e PGRST_JWT_SECRET=fixture-only-signing-key-not-production-12345 \
+            postgrest/postgrest@sha256:5f4ce744539bbba786b4e24dbbd95bdb2a956dcf568c5374995a0ff4a68f5bd2
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:35431/; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Run HTTP, roles and owner checks
+        env:
+          ORACLE_FIXTURE_URL: http://127.0.0.1:35431/
+        shell: bash
+        run: |
+          set -euo pipefail
+          eval "$(python3 - <<'PY'
+          import base64,hashlib,hmac,json,time
+          def enc(v): return base64.urlsafe_b64encode(v).rstrip(b'=').decode()
+          def token(role):
+              data=enc(b'{"alg":"HS256","typ":"JWT"}')+'.'+enc(json.dumps({'role':role,'exp':int(time.time())+300},separators=(',',':')).encode())
+              return data+'.'+enc(hmac.new(b'fixture-only-signing-key-not-production-12345',data.encode(),hashlib.sha256).digest())
+          print('export ORACLE_FIXTURE_SERVICE_JWT='+token('service_role'))
+          print('export ORACLE_FIXTURE_ANON_JWT='+token('anon'))
+          PY
+          )"
+          node --test apps/web/auth/tests/oracle-postgrest-fixture.mjs
