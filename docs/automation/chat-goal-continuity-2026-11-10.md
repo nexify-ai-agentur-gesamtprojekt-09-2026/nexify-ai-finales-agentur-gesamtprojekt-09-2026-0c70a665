@@ -114,3 +114,30 @@ Offizielle Primärquellen: https://help.openai.com/en/articles/20001530-getting-
 **REACTIVATION PASS** erst mit tatsächlich wiederkehrenden Taskstarts und wenigstens einem gesichert wiederaufgenommenen echten Task nach Restart oder erkanntem Ausfall, getesteter Überwachungs- und Eskalationsroute, ohne Gateverletzungen.
 
 **BUSINESS PASS** erst mit echten Website-/Lead-/CRM-Livewegen unter Erhalt der Übergangsseite und mit belegter Kunde-zu-Kunde-Abnahmereife des Studienkollegs. Ohne diese Belege gelten nur Dokumentation und Aufgabenbeauftragung als durchgeführt.
+
+## 8. Ausnahmslose Abschlussprüfung aller einzelnen Läufe
+
+Der **Run-Finalizer** `NEXIFY-RUN-FINALIZER-20261110` ist Teil jedes
+autorisierten NeXify-Chats, jeder Work-/Codex-Ausführung, jeder
+Agenten-/Entscheidungskette, jedes Cronjobs und jedes serverseitigen
+Automationslaufs: vor dem eigenen Ende muss die logische Kette zur
+**nächsten tatsächlichen Aktivierung** nachgewiesen sein.
+`next_goal/next_task`, Queue-Cursor, ausführender Worker, gültiges Lock,
+erwarteter Trigger, nächster zulässiger Start, Retry-/Watchdog-/Alarmweg,
+Kosten-/Sicherheitsrahmen und ausstehende Kunden-/Systemabhängigkeiten
+müssen im vorhandenen State-Store aktuell sein. Die nachfolgenden
+Geschäftsabläufe werden systemweit berücksichtigt, nicht nur der
+auslösende Chat.
+
+Wenn diese Kette nicht überprüfbar ist, ist das Ergebnis ein eigener
+hochpriorisierter Betriebsdefekt: sichere Ersatzlösung prüfen und innerhalb
+bestehender Rechte installieren, die Ursache beheben, echten Checkpoint
+sichern und per unabhängigem Monitor weiterverfolgen. Es dürfen keine
+selbstreferenziellen Endlosschleifen, ungeprüften Doppelstarts oder
+unautorisierten Pausen-Umgehungen entstehen. Persönliche Dot-Pausen
+und fehlende Workspace-Rechte bleiben wirksam; laufende autorisierte
+externe Worker dürfen ihre vorhandene Arbeit ausführen.
+
+Reale Abnahme muss einen absichtlich unterbrochenen und anschließend
+korrekt fortgesetzten Testlauf, verpassten Wakeup/ACK, doppeltes
+Eingangsereignis und einen relevanten Systemwechsel überprüfen.
