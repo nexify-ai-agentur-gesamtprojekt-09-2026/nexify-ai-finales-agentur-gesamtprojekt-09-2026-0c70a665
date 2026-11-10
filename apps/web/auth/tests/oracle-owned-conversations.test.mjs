@@ -1,0 +1,46 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {issueOracleSession, ORACLE_SESSION_SECONDS} from '../../lib/oracle-visitor-session.mjs';
+import {createOwnedConversationHandler} from '../../lib/oracle-owned-conversations.mjs';
+
+test('HTTP path binds create and read to full cookie digest and fails closed', async () => {
+ const now=1800000000000, a=issueOracleSession(now), b=issueOracleSession(now), records=new Map(), id='00000000-0000-4000-8000-000000000001';
+ const db={async create(digest,locale,page_path){records.set(id,{digest:Buffer.from(digest),locale,page_path});return id;},async read(key,digest){const row=records.get(key);return row && row.digest.equals(digest)?{id:key,locale:row.locale,page_path:row.page_path,status:'open',secret:'do not expose'}:null;}};
+ const handler=createOwnedConversationHandler({db,origin:'https://example.test',now:()=>now});
+ const request=(body,cookie=a.cookie.split(';')[0],origin='https://example.test')=>new Request('https://example.test/api/owned',{method:'POST',headers:{origin,cookie,'content-type':'application/json'},body:JSON.stringify(body)});
+ assert.equal((await handler(request({action:'create',locale:'de',pagePath:'/'}))).status,201);
+ const own=await handler(request({action:'read',id}));assert.equal(own.status,200);assert.equal((await own.json()).secret,undefined);
+ assert.equal((await handler(request({action:'read',id},b.cookie.split(';')[0]))).status,404);
+ assert.equal((await handler(request({action:'read',id},''))).status,401);
+ const cookie=a.cookie.split(';')[0];assert.equal((await handler(request({action:'read',id},`${cookie}; ${cookie}`))).status,401);
+ assert.equal((await handler(request({action:'read',id},cookie,'https://evil.test'))).status,403);
+ assert.equal((await handler(request({action:'read',id:'not-a-uuid'}))).status,422);
+ assert.equal((await handler(request({action:'read',id,tenant:'forged'}))).status,422);
+ assert.equal((await handler(request({action:'create',locale:'de',pagePath:'/',tenant:'forged'}))).status,422);
+ assert.equal((await handler(request({action:'create',locale:'de',pagePath:'//evil.test'}))).status,422);
+ const expired=createOwnedConversationHandler({db,origin:'https://example.test',now:()=>now+ORACLE_SESSION_SECONDS*1000});
+ assert.equal((await expired(request({action:'read',id}))).status,401);
+ const failed=createOwnedConversationHandler({db:{async read(){throw Error('private provider detail');}},origin:'https://example.test',now:()=>now});
+ const result=await failed(request({action:'read',id}));assert.equal(result.status,503);assert.doesNotMatch(await result.text(),/private provider detail/);
+});
+test('rejects insecure origin, wrong media type, oversized and aborted requests; timeout reports unknown', async () => {
+ assert.throws(()=>createOwnedConversationHandler({db:{},origin:'http://example.test'}));
+ assert.doesNotThrow(()=>createOwnedConversationHandler({db:{},origin:'http://127.0.0.1:3000',allowLoopback:true}));
+ const now=1800000000000,cookie=issueOracleSession(now).cookie.split(';')[0];
+ const handler=createOwnedConversationHandler({db:{create:()=>new Promise(()=>{})},origin:'https://example.test',now:()=>now,timeoutMs:20});
+ const headers={origin:'https://example.test',cookie,'content-type':'application/json'};
+ const make=(body,h=headers,signal)=>new Request('https://example.test/',{method:'POST',headers:h,body,signal});
+ assert.equal((await handler(make('{}',{...headers,'content-type':'text/plain'}))).status,415);
+ assert.equal((await handler(make('x'.repeat(4097)))).status,413);
+ const ctrl=new AbortController();ctrl.abort();assert.equal((await handler(make('{}',headers,ctrl.signal))).status,400);
+ const r=await handler(make(JSON.stringify({action:'create',locale:'de',pagePath:'/'})));assert.equal(r.status,503);assert.equal((await r.json()).outcome,'unknown');
+ assert.equal((await handler(make(new Uint8Array([0x7b,0xff,0x7d])))).status,400);
+ const slow = new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('{'));}});
+ const slowReq = new Request('https://example.test/',{method:'POST',headers,body:slow,duplex:'half'});
+ assert.equal((await handler(slowReq)).status,503);
+ const abortCtrl = new AbortController();
+ const blocked = new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('{'));}});
+ const blockedReq = new Request('https://example.test/',{method:'POST',headers,body:blocked,duplex:'half',signal:abortCtrl.signal});
+ const pending = handler(blockedReq);setTimeout(()=>abortCtrl.abort(),5);
+ assert.equal((await pending).status,503);
+});
