@@ -11,8 +11,8 @@ const mapping = JSON.parse(await readFile(new URL('../../../config/site-map.json
 const usage = { inputTokens: { total: 10, noCache: 10, cacheRead: undefined, cacheWrite: undefined },
   outputTokens: { total: 5, text: 5, reasoning: undefined } };
 const answer = text => ({ content: [{ type: 'text', text }], finishReason: { unified: 'stop', raw: undefined }, usage, warnings: [] });
-const call = pageId => ({ content: [{ type: 'tool-call', toolCallId: 'call-public-1', toolName: 'publicPageInfo',
-  input: JSON.stringify({ pageId, locale: 'de' }) }], finishReason: { unified: 'tool-calls', raw: undefined }, usage, warnings: [] });
+const call = (pageId, locale = 'de') => ({ content: [{ type: 'tool-call', toolCallId: 'call-public-1', toolName: 'publicPageInfo',
+  input: JSON.stringify({ pageId, locale }) }], finishReason: { unified: 'tool-calls', raw: undefined }, usage, warnings: [] });
 
 test('real two-step ToolLoopAgent executes the public tool and receives its actual result', async () => {
   const original = globalThis.fetch;
@@ -33,6 +33,14 @@ test('real two-step ToolLoopAgent executes the public tool and receives its actu
   } finally { globalThis.fetch = original; }
 });
 
+test('the public page tool supports an actual English agent turn', async () => {
+  const model = new MockLanguageModelV4({ modelId: EXACT_MODEL_ID,
+    doGenerate: [call('home', 'en'), answer('Public guidance.')] });
+  const result = await createPublicPageAgent({ model }).generate({ prompt: 'Tell me about the home page.' });
+  assert.equal(result.text, 'Public guidance.');
+  assert.deepEqual(result.steps[0].toolResults[0].output, readPublicPageInfo({ pageId: 'home', locale: 'en' }));
+});
+
 test('strict public projection rejects every private/nonallowlisted page and extra authority claims', () => {
   const excluded = mapping.pages.filter(page => !mapping.public_allowlist.includes(page.id)
     || page.access.visibility !== 'public' || page.access.auth_required !== false);
@@ -40,7 +48,7 @@ test('strict public projection rejects every private/nonallowlisted page and ext
   for (const input of [{ pageId: 'missing-page' }, { pageId: 'home', role: 'admin' }, { pageId: 'home', locale: 'xx' }, { pageId: '../home' }]) {
     assert.throws(() => readPublicPageInfo(input));
   }
-  for (const locale of ['de', 'nl', 'fr']) {
+  for (const locale of ['de', 'nl', 'fr', 'en']) {
     const value = readPublicPageInfo({ pageId: 'home', locale });
     assert.equal(value.title, mapping.pages.find(page => page.id === 'home').title[locale]);
     assert.deepEqual(Object.keys(value).sort(), ['locale', 'pageId', 'path', 'sections', 'summary', 'title']);

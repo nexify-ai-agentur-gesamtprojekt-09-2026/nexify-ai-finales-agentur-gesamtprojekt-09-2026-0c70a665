@@ -74,7 +74,7 @@ function guardedFetch(apiKey: string, trustedFetch: typeof fetch): typeof fetch 
 
 const pageInput = z.strictObject({
   pageId: z.string().regex(/^[a-z0-9][a-z0-9-]{0,95}$/),
-  locale: z.enum(['de', 'nl', 'fr']).default('de'),
+  locale: z.enum(['de', 'nl', 'fr', 'en']).default('de'),
 });
 const allowlist = new Set(siteMap.public_allowlist);
 const publicPages = new Map(siteMap.pages.filter(page => allowlist.has(page.id)
@@ -120,7 +120,7 @@ export function createPublicPageAgent(options: { model: LanguageModel; maxOutput
     telemetry: { isEnabled: false, recordInputs: false, recordOutputs: false },
     tools: {
       publicPageInfo: tool({
-        description: 'Read approved public page text in German, Dutch or French. No private content or business actions.',
+        description: 'Read approved public page text in German, Dutch, French or English. No private content or business actions.',
         inputSchema: pageInput,
         execute: async input => readPublicPageInfo(input),
       }),
