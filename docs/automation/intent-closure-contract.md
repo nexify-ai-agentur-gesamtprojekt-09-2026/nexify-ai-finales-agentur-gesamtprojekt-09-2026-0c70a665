@@ -114,3 +114,44 @@ AgentMemory/LightRAG nur tenantgebunden und nach `WRITE → INDEX → EXACT READ
 10. Ein **optional** abgeleiteter Verbesserungsvorschlag wird nicht ohne wirtschaftliche und fachliche Bewertung zur Kunden-Vertragspflicht oder zu einer Zahlung.
 
 **Done-Definition:** Keine unbegründet isolierte Zielkarte, keine offene notwendige Abhängigkeit ohne Owner/next_action, keine behauptete Agenten-/Runtime-Verbindung ohne tatsächlichen Nachweis, kein fachlicher Abschluss ohne Ziel-E2E/Review/Betriebsübergabe. Incomplete/blocked bleibt ausdrücklich sichtbar. Der vollständige Systembetrieb gilt erst nach realem Laufzeit-/Kundenreadback als nachgewiesen.
+
+## 9. END-OF-RUN-CHECK und sichere nächste Aktivierung · 10.11.2026
+
+**Normative Ergänzung NEXIFY-RUN-FINALIZER-20261110:** Bei jeder echten
+Aktivierung den auslösenden Scope ausführen UND danach die anderen offenen
+Unternehmensziele systemweit über das führende Register prüfen. Vor Beendigung:
+
+1. `task_id`, `goal_id`, `tenant`, Writer/Lease, letzte gespeicherte
+   Revision, erfolgreiches Readback, unklare Side Effects und offene
+   Abhängigkeiten persistieren; den Unterschied zwischen Statusmeldung
+   und fachlichem Fortschritt festhalten.
+2. Nächste höchste zulässige freie Aufgabe und ihre notwendigen Vor- und
+   Folgeschritte bestimmen; `next_action`, `next_run_target`, zulässigen
+   Trigger, echte Executor-Identität, Fallback und Eskalationszuständigkeit
+   speichern. Nur **einen** Worker pro Scope claimen.
+3. Nicht nur `is_enabled`, sondern die real verfügbaren Scheduler- und
+   Event-Trigger, letzte tatsächliche Starts, Zustellung, ACK, Fortschritt,
+   Pause-/Fehler-/Budgetstatus und unabhängigen Watchdog prüfen.
+4. Gegen eine ausbleibende oder verspätete nächste Aktivierung vorbauen:
+   Watchdog mit eigener verifizierter Runtime und Heartbeat,
+   maximal tolerierter Verzögerung und Idempotenz; bei Ausfall
+   begrenztes Recovery, Incident, alternativer autorisierter Weg.
+   Inhibiert ein Plattform-/Admin-Hold die persönliche Dot-Runtime, dieses
+   Faktum nicht durch Polling oder unautorisierte Browsertricks umgehen.
+5. Wenn technische Voraussetzungen fehlen, benötigte gepflegte
+   kostenfreie/OSS-Lösung innerhalb bestehender Rechte installieren,
+   bei wenig Speicher zuerst den kleinsten sicheren Weg wählen, Integration,
+   Reboot-/Negativ-/E2E-Tests und Sicherheits-/Lizenzprüfung ausführen.
+   Falls neue Rechte/Kosten/Löschungen betroffen sind, nur diesen Eingriff
+   übergeben und andere zulässige Arbeit fortsetzen.
+6. Ursächliche Änderungen in den **vorhandenen** Originalchats/GOALs,
+   `AGENTS.md`, Timerdefinitionen, Cronjobs, Worker-/Agentenketten,
+   Monitoring, Wissen und fachlichen Runbooks gezielt versioniert nachführen,
+   ohne fremde und historische Quellen still zu überschreiben.
+
+**End-Gate:** `RUN_CLOSED_WITH_CONTINUATION_VERIFIED` nur bei belegtem
+nächsten Trigger/Worker, persistiertem Resume-Cursor, gültigen Locks,
+getestetem Rückkanal und dokumentiertem Fallback. Andernfalls
+`CONTINUATION_NOT_VERIFIED`, Incident/Owner/kleinster Reparaturschritt
+und kein fiktives 24/7-Versprechen. Ein Scheduler-Eintrag allein beweist keine
+pünktliche Ausführung. Kundensysteme strikt isolieren.
