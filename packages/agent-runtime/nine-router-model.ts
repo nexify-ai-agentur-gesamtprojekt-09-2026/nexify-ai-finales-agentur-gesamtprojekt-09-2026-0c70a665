@@ -123,7 +123,7 @@ export function createNineRouterModel(options: { baseUrl: string; apiKey: string
       try {
         const result = await model.doStream({ ...input, providerOptions: Object.create(null) });
         const reader = result.stream.getReader();
-        const stream = new ReadableStream<Awaited<ReturnType<typeof reader.read>>['value']>({
+        const stream = new ReadableStream<NonNullable<Awaited<ReturnType<typeof reader.read>>['value']>>({
           async pull(controller) {
             try {
               while (true) {
