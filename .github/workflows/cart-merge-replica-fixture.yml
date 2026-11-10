@@ -31,13 +31,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # MongoDB SERVER-125742 lists 7.0 as supported on affected kernels.
+          # 7.0.45 fixture only; it does not establish production-version parity.
           docker run -d --name nexify-cart-replica-fixture --network host \
-            mongo@sha256:3c64937121b9437095921c4bb2569911084c05f7b88e4a263d62a8959d2b2399 \
+            mongo@sha256:8bb4442761a63a8dda452744082cdac9644b429807eb977b42324a63cef59ca4 \
             mongod --replSet nxfixture --bind_ip 127.0.0.1 --port 27031
           ready=0
           for attempt in $(seq 1 45); do
             if [ "$(docker inspect -f '{{.State.Running}}' nexify-cart-replica-fixture)" != true ]; then
               echo 'Disposable MongoDB exited before readiness; container diagnostics:' >&2
+              docker inspect -f 'status={{.State.Status}} exit={{.State.ExitCode}} error={{.State.Error}} oom={{.State.OOMKilled}}' nexify-cart-replica-fixture >&2 || true
+              if grep -qm1 -w avx /proc/cpuinfo; then echo 'runner_avx=present' >&2; else echo 'runner_avx=absent' >&2; fi
               docker logs --tail 100 nexify-cart-replica-fixture >&2 || true
               exit 1
             fi
