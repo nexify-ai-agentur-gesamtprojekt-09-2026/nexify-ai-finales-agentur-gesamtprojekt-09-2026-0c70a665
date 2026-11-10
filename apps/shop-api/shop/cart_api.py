@@ -12,7 +12,24 @@ MAX_QTY = 20
 class ItemIn(BaseModel):
     model_config = ConfigDict(extra="ignore")  # price/total fields sent by a client are dropped
     product_id: str = Field(min_length=1, max_length=64)
-    quantity: int = Field(ge=0, le=MAX_QTY)
+    quantity: int = Field(ge=0, le=MAX_QTY, strict=True)
+
+
+def stock_or_none(product):
+    """Only an explicit nonnegative safe integer is a usable stock report."""
+    value = product.get("stock")
+    # BSON Int64 is an int subclass; bool is also an int subclass but is not stock.
+    # The public JSON contract uses JavaScript safe integers (catalog_api.present).
+    if not isinstance(value, int) or isinstance(value, bool) or not 0 <= value <= 2**53 - 1:
+        return None
+    return int(value)
+
+
+def verified_stock(product):
+    value = stock_or_none(product)
+    if value is None:
+        raise HTTPException(409, {"error": "stock_unavailable", "product_id": str(product["_id"])})
+    return value
 
 
 async def owner_for(request: Request, response: Response, create=True):
@@ -39,8 +56,12 @@ async def merge(ident):
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": list(items.values()), "updated_at": now_iso()}}, upsert=True)
 
 
-async def priced(owner, shipping_cents=None, address=None):
-    cart = await db.carts.find_one({"owner": owner}) or {"items": []}
+async def priced(owner, shipping_cents=None, address=None, items_override=None, allow_unknown_stock=False):
+    # The permissive view is only for reading/removing cart entries, never quote/shipping.
+    if allow_unknown_stock and (address is not None or shipping_cents is not None):
+        raise ValueError("unknown_stock_view_cannot_quote")
+    cart = ({"items": items_override} if items_override is not None
+            else await db.carts.find_one({"owner": owner}) or {"items": []})
     settings = await pricing.settings(db)
     ids = [i["product_id"] for i in cart["items"]]
     products = {p["_id"]: p async for p in db.products.find({"_id": {"$in": ids}})}
@@ -51,14 +72,21 @@ async def priced(owner, shipping_cents=None, address=None):
             changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
             continue
         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
-        stock = product.get("stock", 0)
+        stock = stock_or_none(product)
+        if stock is None and not allow_unknown_stock:
+            raise HTTPException(409, {"error": "stock_unavailable", "product_id": str(product["_id"])})
+        if not isinstance(item.get("quantity"), int) or isinstance(item["quantity"], bool) or not 1 <= item["quantity"] <= MAX_QTY:
+            raise HTTPException(409, {"error": "cart_quantity_invalid", "product_id": str(product["_id"])})
         if item.get("price_seen_cents") is not None and item["price_seen_cents"] != unit:
             changes.append({"product_id": product["_id"], "kind": "price", "name": product["name"], "old": item["price_seen_cents"], "new": unit})
-        if stock < item["quantity"]:
+        if stock is None:
+            changes.append({"product_id": product["_id"], "kind": "stock_unknown", "name": product["name"]})
+        elif stock < item["quantity"]:
             changes.append({"product_id": product["_id"], "kind": "stock", "name": product["name"], "old": item["quantity"], "new": stock})
         lines.append({"product_id": product["_id"], "name": product["name"], "sku": product.get("sku"), "ean": product.get("ean"),
                       "image": (product.get("images") or [None])[0], "quantity": item["quantity"], "unit_cents": unit,
-                      "line_cents": unit * item["quantity"], "stock": stock})
+                      "line_cents": unit * item["quantity"], "stock": stock,
+                      "stock_status": "unknown" if stock is None else "reported"})
     subtotal = sum(l["line_cents"] for l in lines)
     shipping_pending = False
     shipping_source = "free" if not lines or subtotal >= config.SHIP_FREE_THRESHOLD_CENTS else "pending"
@@ -87,27 +115,32 @@ async def read_cart(request: Request, response: Response):
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         return {"lines": [], "changes": [], "subtotal_cents": 0, "shipping_cents": 0, "total_cents": 0, "vat_included_cents": 0, "currency": "EUR", "count": 0}
-    return await priced(ident.owner)
+    return await priced(ident.owner, allow_unknown_stock=True)
 
 
 @router.post("/items")
 async def set_item(body: ItemIn, request: Request, response: Response):
-    ident = await owner_for(request, response)
-    cart = await db.carts.find_one({"owner": ident.owner}) or {"items": []}
-    items = [i for i in cart["items"] if i["product_id"] != body.product_id]
     if body.quantity > 0:
         product = await db.products.find_one({"_id": body.product_id, "active": True})
         if not product:
             raise HTTPException(404, {"error": "product_not_found"})
-        if product.get("stock", 0) < body.quantity:
-            raise HTTPException(409, {"error": "insufficient_stock", "stock": product.get("stock", 0)})
+        stock = verified_stock(product)
+        if stock < body.quantity:
+            raise HTTPException(409, {"error": "insufficient_stock", "stock": stock})
         settings = await pricing.settings(db)
         if not settings["price_released"]:
             raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
+    ident = await owner_for(request, response)
+    cart = await db.carts.find_one({"owner": ident.owner}) or {"items": []}
+    items = [i for i in cart["items"] if i["product_id"] != body.product_id]
+    if body.quantity > 0:
         items.append({"product_id": body.product_id, "name": product["name"], "quantity": body.quantity, "price_seen_cents": unit})
+    # Check the entire candidate cart before persisting; unknown stock in a
+    # different line must not leave behind a successful-looking cart update.
+    quote = await priced(ident.owner, items_override=items, allow_unknown_stock=body.quantity == 0)
     await db.carts.update_one({"owner": ident.owner}, {"$set": {"items": items, "updated_at": now_iso()}}, upsert=True)
-    return await priced(ident.owner)
+    return quote
 
 
 @router.post("/confirm-changes")

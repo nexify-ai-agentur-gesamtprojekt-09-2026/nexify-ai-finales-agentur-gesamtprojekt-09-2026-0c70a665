@@ -30,18 +30,20 @@ export default function CartView() {
   }
   if (!cart) return error ? <p role="alert" className="tk-alert">{error}</p> : <p role="status">Warenkorb wird geladen …</p>;
   if (!cart.lines.length) return <div className="tk-empty" data-testid="cart-empty"><h2>Ihr Warenkorb ist leer</h2><p>Suchen Sie im Shop nach dem passenden Artikel.</p><SiteLink href="/teileklar/shop" className="content-action-link">Zum Shop</SiteLink></div>;
+  const stockUnknown = cart.lines.some(line => line.stock == null);
   return <div className="tk-cart" data-testid="cart-view">
     <ul className="tk-lines">{cart.lines.map(line => <li key={line.product_id} data-testid={"cart-line-" + line.product_id}>
       <ProductImage src={line.image} alt={line.name} />
       <div><SiteLink href={"/teileklar/produkt/" + line.product_id}><strong>{line.name}</strong></SiteLink><span className="tk-meta">SKU {line.sku} · {money(line.unit_cents)} je Stück</span></div>
-      <label className="tk-qty-label">Menge<input type="number" min={1} max={Math.min(20, line.stock)} defaultValue={line.quantity} key={line.quantity + ":" + revision} disabled={busy}
+      <label className="tk-qty-label">Menge<input type="number" min={1} max={line.stock == null ? undefined : Math.min(20, line.stock)} defaultValue={line.quantity} key={line.quantity + ":" + revision} disabled={busy || line.stock == null} aria-describedby={line.stock == null ? "stock-unknown-" + line.product_id : undefined}
         onBlur={event => { const value = Number(event.target.value); if (value !== line.quantity && value >= 1) void change(line.product_id, value); }} data-testid={"cart-qty-" + line.product_id} /></label>
+      {line.stock == null && <span className="tk-meta" id={"stock-unknown-" + line.product_id} data-testid={"cart-stock-unknown-" + line.product_id}>Der Bestand kann derzeit nicht bestätigt werden. Sie können den Artikel entfernen.</span>}
       <span className="tk-line-total" data-testid={"cart-line-total-" + line.product_id}>{money(line.line_cents)}</span>
       <button className="text-button" disabled={busy} onClick={() => void change(line.product_id, 0)} data-testid={"cart-remove-" + line.product_id}>Entfernen</button>
     </li>)}</ul>
-    {cart.changes.length > 0 && <p role="alert" className="tk-alert">Seit dem Hinzufügen haben sich Preis oder Bestand geändert. Sie sehen die Änderungen vor der Zahlung im Checkout.</p>}
+    {cart.changes.some(change => change.kind !== "stock_unknown") && <p role="alert" className="tk-alert">Seit dem Hinzufügen haben sich Preis oder Bestand geändert. Sie sehen die Änderungen vor der Zahlung im Checkout.</p>}
     {error && <p role="alert" className="tk-alert">{error}</p>}
     <aside className="tk-summary"><Totals cart={cart} /><p className="tk-note">Alle Preise werden auf dem Server aus dem aktuellen Katalog berechnet.</p>
-      <SiteLink href="/teileklar/kasse" className="primary-button tk-cta" data-testid="cart-checkout-link">Zur Kasse</SiteLink></aside>
+      {stockUnknown ? <p role="status" className="tk-note" data-testid="cart-checkout-unavailable">Zur Kasse geht es, sobald der Bestand aller Artikel bestätigt ist. Sie können nicht verfügbare Artikel entfernen.</p> : <SiteLink href="/teileklar/kasse" className="primary-button tk-cta" data-testid="cart-checkout-link">Zur Kasse</SiteLink>}</aside>
   </div>;
 }

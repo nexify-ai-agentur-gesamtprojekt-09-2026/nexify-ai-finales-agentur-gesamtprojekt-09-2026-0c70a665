@@ -36,7 +36,7 @@ def supplier_image(value):
 def present(product, settings, full=False):
     released = settings["price_released"]
     raw_stock = product.get("stock")
-    stock = raw_stock if type(raw_stock) is int and 0 <= raw_stock <= 2**53 - 1 else None
+    stock = int(raw_stock) if isinstance(raw_stock, int) and not isinstance(raw_stock, bool) and 0 <= raw_stock <= 2**53 - 1 else None
     raw_images = product.get("images")
     images = list(dict.fromkeys(url for value in raw_images if (url := supplier_image(value)))) if isinstance(raw_images, list) else []
     item = {"id": str(product["_id"]), "sku": product.get("sku"), "ean": product.get("ean"), "name": product["name"],

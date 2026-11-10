@@ -6,7 +6,7 @@ import AddressStep,{EMPTY_ADDRESS,type AddressData} from './AddressStep';
 import {Totals} from './CartView';
 import SellerInfo from './SellerInfo';
 const STEPS=['Adresse','Versand','Prüfen','Zahlung'];
-const CHANGE_TEXT={price:'Preis geändert',stock:'Bestand geändert',unavailable:'Nicht mehr verfügbar'};
+const CHANGE_TEXT={price:'Preis geändert',stock:'Bestand geändert',stock_unknown:'Bestand derzeit nicht bestätigt',unavailable:'Nicht mehr verfügbar'};
 async function idempotencyKey(quote:string,address:AddressData){
  const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify({quote,address})));
  const hash=Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('').slice(0,24);
@@ -14,21 +14,25 @@ async function idempotencyKey(quote:string,address:AddressData){
  const key=hash+':'+crypto.randomUUID();sessionStorage.setItem('tk-order-key',key);return key;
 }
 export default function Checkout(){
- const[step,setStep]=useState(0),[address,setAddress]=useState<AddressData>(EMPTY_ADDRESS),[quote,setQuote]=useState<Cart|null>(null),[terms,setTerms]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[empty,setEmpty]=useState(false);
+ const[step,setStep]=useState(0),[address,setAddress]=useState<AddressData>(EMPTY_ADDRESS),[quote,setQuote]=useState<Cart|null>(null),[terms,setTerms]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[empty,setEmpty]=useState(false),[stockBlocked,setStockBlocked]=useState(false);
+ const[cartState,setCartState]=useState<'loading'|'ready'|'failed'>('loading');
  const heading=useRef<HTMLHeadingElement>(null),ordering=useRef(false);
- useEffect(()=>{api<Cart>('/api/shop/cart').then(c=>setEmpty(!c.lines.length)).catch(()=>setError('Der Warenkorb konnte nicht geladen werden. Bitte laden Sie die Seite erneut.'));},[]);
- useEffect(()=>{heading.current?.focus();},[step]);
- const loadQuote=async(a=address)=>{setError('');try{const value=await api<Cart>('/api/shop/checkout/quote',{method:'POST',json:{address:a}});setQuote(value);setEmpty(!value.lines.length);return value;}catch(failure){const e=failure as ApiError;if(e.error==='cart_empty')setEmpty(true);setError(e.error==='price_not_released'?'Die Preise werden gerade geprüft. Bitte versuchen Sie es später erneut.':'Versand und Bestellübersicht konnten nicht berechnet werden. Bitte versuchen Sie es erneut.');return null;}};
- async function acceptChanges(){setBusy(true);try{await api('/api/shop/cart/confirm-changes',{method:'POST',json:{}});await loadQuote();}catch{setError('Änderungen konnten nicht übernommen werden. Bitte erneut versuchen.');}finally{setBusy(false);}}
+ useEffect(()=>{api<Cart>('/api/shop/cart').then(c=>{setEmpty(!c.lines.length);setStockBlocked(c.lines.some(line=>line.stock==null));setCartState('ready');}).catch(()=>{setError('Der Warenkorb konnte nicht geladen werden. Bitte laden Sie die Seite erneut.');setCartState('failed');});},[]);
+ useEffect(()=>{heading.current?.focus();},[step,cartState,empty,stockBlocked]);
+ const loadQuote=async(a=address)=>{setError('');try{const value=await api<Cart>('/api/shop/checkout/quote',{method:'POST',json:{address:a}});setQuote(value);setEmpty(!value.lines.length);return value;}catch(failure){const e=failure as ApiError;if(e.error==='cart_empty')setEmpty(true);if(e.error==='stock_unavailable')setStockBlocked(true);setError(e.error==='price_not_released'?'Die Preise werden gerade geprüft. Bitte versuchen Sie es später erneut.':'Versand und Bestellübersicht konnten nicht berechnet werden. Bitte versuchen Sie es erneut.');return null;}};
+ async function acceptChanges(){setBusy(true);try{await api('/api/shop/cart/confirm-changes',{method:'POST',json:{}});await loadQuote();}catch(failure){if((failure as ApiError).error==='stock_unavailable')setStockBlocked(true);else setError('Änderungen konnten nicht übernommen werden. Bitte erneut versuchen.');}finally{setBusy(false);}}
  async function order(){
   if(!quote?.quote_hash||!terms||busy||ordering.current||quote.changes.length)return;
   ordering.current=true;setBusy(true);setError('');setStep(3);
   try{const key=await idempotencyKey(quote.quote_hash,address);const result=await api<{checkout_url:string}>('/api/shop/orders',{method:'POST',headers:{'Idempotency-Key':key},json:{address,shipping_method:'standard',accept_terms:terms,quote_hash:quote.quote_hash}});
    const target=new URL(result.checkout_url);if(target.protocol!=='https:'||!/(^|\.)revolut\.com$/.test(target.hostname))throw new Error('invalid_payment_url');window.location.assign(target.href);
-  }catch(failure){const e=failure as ApiError;setStep(2);if(e.error==='changes_pending'){setQuote(e.body?.quote as Cart);setError('Preis oder Bestand haben sich geändert. Bitte prüfen und bestätigen Sie die Änderungen.');}else setError('Die Weiterleitung zur Zahlung ist noch nicht bestätigt. Bitte erneut versuchen; derselbe Bestellversuch wird sicher wiederverwendet.');}
+  }catch(failure){const e=failure as ApiError;setStep(2);if(e.error==='stock_unavailable')setStockBlocked(true);else if(e.error==='changes_pending'){setQuote(e.body?.quote as Cart);setError('Preis oder Bestand haben sich geändert. Bitte prüfen und bestätigen Sie die Änderungen.');}else setError('Die Weiterleitung zur Zahlung ist noch nicht bestätigt. Bitte erneut versuchen; derselbe Bestellversuch wird sicher wiederverwendet.');}
   finally{ordering.current=false;setBusy(false);}
  }
+ if(cartState==='loading')return <p role="status" data-testid="checkout-cart-loading">Warenkorb wird geprüft …</p>;
+ if(cartState==='failed')return <p role="alert" className="tk-alert" data-testid="checkout-error">{error}</p>;
  if(empty)return <div className="tk-empty" data-testid="checkout-empty"><h2>Ihr Warenkorb ist leer</h2><SiteLink href="/teileklar/shop" className="content-action-link" data-testid="checkout-empty-shop">Zum Shop</SiteLink></div>;
+ if(stockBlocked)return <div className="tk-empty" data-testid="checkout-stock-unavailable"><h2>Bestand derzeit nicht bestätigt</h2><p>Für mindestens einen Artikel lässt sich der Bestand momentan nicht bestätigen. Bitte prüfen Sie Ihren Warenkorb oder entfernen Sie den Artikel.</p><SiteLink href="/teileklar/warenkorb" className="content-action-link">Zum Warenkorb</SiteLink></div>;
  return <div className="tk-checkout" data-testid="checkout"><ol className="tk-steps" aria-label="Schritte">{STEPS.map((label,i)=><li key={label} aria-current={i===step?'step':undefined} className={i<step?'is-done':''} data-testid={'checkout-step-'+i}><span>{i+1}</span>{label}</li>)}</ol><h2 ref={heading} tabIndex={-1} data-testid="checkout-step-title">{STEPS[step]}</h2>
  {step===0&&<AddressStep value={address} onNext={async(a,check)=>{const errors=await check(a);if(!Object.keys(errors).length){setAddress(a);setTerms(false);setQuote(null);const next=await loadQuote(a);if(next)setStep(1);}}}/>}
  {step===1&&<form className="tk-form" onSubmit={e=>{e.preventDefault();setStep(2);}} data-testid="checkout-shipping-form"><fieldset><legend>Versandart</legend><label className="tk-radio"><input type="radio" name="shipping" value="standard" checked readOnly data-testid="shipping-option-standard"/>Standardversand · {money(quote?.shipping_cents||0)}</label></fieldset><p className="tk-meta" data-testid="checkout-shipping-source">{quote?.shipping_source==='configured_flat_rate'?'Es gilt die hinterlegte Versandpauschale.':quote?.shipping_cents===0?'Versandkostenfrei gemäß hinterlegter Versandregel.':'Für Ihre Lieferadresse berechnete Versandkosten.'} Lieferzeiten werden erst mit der Versandbestätigung verbindlich.</p><div className="tk-actions"><button type="button" className="outline-button" onClick={()=>setStep(0)} data-testid="checkout-shipping-back">Zurück</button><button className="primary-button" type="submit" disabled={!quote} data-testid="checkout-shipping-continue">Weiter zur Prüfung</button></div></form>}
