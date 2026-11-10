@@ -2,33 +2,33 @@
   "$description": "NeXify Graphite Atelier · Materialfortschreibung 01.11.2026 nach Nutzerentscheidung: ruhiger Luxus, Metall und gezieltes Glas; Lime-Markenidentität erhalten",
   "color": {
     "graphit": {
-      "900": {
-        "$value": "#1B1E1D",
-        "$type": "color"
-      },
-      "850": {
-        "$value": "#1E2220",
+      "600": {
+        "$value": "#303634",
         "$type": "color",
-        "$description": "Masterplan Oberfläche"
-      },
-      "800": {
-        "$value": "#1B1E1D",
-        "$type": "color",
-        "$description": "Zusammenhängende Masterplan-Markenfläche"
-      },
-      "700": {
-        "$value": "#242826",
-        "$type": "color"
+        "$description": "Karte oben"
       },
       "650": {
         "$value": "#2A2E2C",
         "$type": "color",
         "$description": "Karte unten"
       },
-      "600": {
-        "$value": "#303634",
+      "700": {
+        "$value": "#242826",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#1B1E1D",
         "$type": "color",
-        "$description": "Karte oben"
+        "$description": "Zusammenhängende Masterplan-Markenfläche"
+      },
+      "850": {
+        "$value": "#1E2220",
+        "$type": "color",
+        "$description": "Masterplan Oberfläche"
+      },
+      "900": {
+        "$value": "#1B1E1D",
+        "$type": "color"
       }
     },
     "linie": {
@@ -194,8 +194,9 @@
         "$type": "color"
       },
       "champagne": {
-        "$value": "#C4B394",
-        "$type": "color"
+        "$value": "#B4BEC2",
+        "$type": "color",
+        "$description": "Neutraler Silberton statt Gold; Nutzerkorrektur 10.11.2026. Tokenname aus Kompatibilitaetsgruenden beibehalten."
       },
       "ink": {
         "$value": "#F3F0EA",
@@ -210,8 +211,9 @@
         "$type": "color"
       },
       "glassEdge": {
-        "$value": "rgba(220,212,195,.22)",
-        "$type": "color"
+        "$value": "rgba(190,202,205,.22)",
+        "$type": "color",
+        "$description": "Kuehle neutrale Glaskante ohne Goldstich"
       },
       "filmCanvas": {
         "$value": "#131415",
@@ -381,8 +383,8 @@
     "atelierStage": "radial-gradient(ellipse 66% 50% at 55% 78%, color-mix(in srgb, var(--color-atelier-champagne) 12%, transparent), transparent 75%)",
     "homeMediaRim": "linear-gradient(145deg, color-mix(in srgb, var(--color-atelier-platinum) 32%, transparent), transparent 24%, transparent 75%, color-mix(in srgb, var(--color-atelier-champagne) 16%, transparent))",
     "homeDivider": "linear-gradient(90deg, color-mix(in srgb, var(--color-atelier-platinum) 18%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 10%, transparent) 55%, transparent)",
-    "atelierHeading": "linear-gradient(115deg, var(--color-atelier-ink) 8%, var(--color-atelier-champagne) 62%, var(--color-atelier-platinum) 100%)",
-    "atelierAmbient": "radial-gradient(ellipse 60% 24% at 85% 5%, color-mix(in srgb, var(--color-atelier-champagne) 19%, transparent), transparent 78%), radial-gradient(ellipse 40% 20% at 0% 44%, color-mix(in srgb, var(--color-atelier-platinum) 8%, transparent), transparent 85%), radial-gradient(ellipse 50% 18% at 95% 78%, color-mix(in srgb, var(--color-atelier-champagne) 11%, transparent), transparent 85%)",
+    "atelierHeading": "linear-gradient(115deg, var(--color-atelier-ink) 5%, var(--color-atelier-platinum) 76%, var(--color-atelier-ink) 100%)",
+    "atelierAmbient": "radial-gradient(ellipse 35% 20% at 57% 10%, color-mix(in srgb, var(--color-atelier-platinum) 7%, transparent), transparent 82%), radial-gradient(ellipse 28% 18% at 83% 48%, color-mix(in srgb, var(--color-marke-cyan) 3%, transparent), transparent 85%), radial-gradient(ellipse 34% 16% at 9% 82%, color-mix(in srgb, var(--color-atelier-champagne) 3%, transparent), transparent 86%)",
     "atelierReflection": "linear-gradient(135deg, color-mix(in srgb, var(--color-atelier-ink) 48%, transparent), color-mix(in srgb, var(--color-atelier-champagne) 22%, transparent) 24%, transparent 48%, transparent 78%, color-mix(in srgb, var(--color-atelier-champagne) 28%, transparent))",
     "atelierPanel": "radial-gradient(ellipse 85% 35% at 5% 0%, color-mix(in srgb, var(--color-atelier-platinum) 10%, transparent), transparent 75%), radial-gradient(ellipse 55% 30% at 100% 12%, color-mix(in srgb, var(--color-atelier-champagne) 8%, transparent), transparent 78%), linear-gradient(155deg, var(--color-atelier-surface), var(--color-atelier-canvas) 68%)",
     "atelierPanelFacet": "linear-gradient(137deg, color-mix(in srgb, var(--color-atelier-ink) 20%, transparent), transparent 24%, transparent 66%, color-mix(in srgb, var(--color-atelier-platinum) 10%, transparent))"

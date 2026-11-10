@@ -2,13 +2,21 @@
 
 ## Fortschreibung 09.11.2026 · Unified Master-GOAL
 
-Dieses Dokument bleibt das führende Aufgabenregister. Der folgende maschinenlesbare Block gehört zum selben Register; `ops/goal/STATE.json` enthält nur Laufzeitdaten des lokalen Fortsetzungsdienstes. Die private Sites-Version 5 (`49f84db097544e96fcf54ca8a8b2d5d58838cd7a`) zeigt den Hero-Film im oberen Bereich und den rechts integrierten Chat. Build, Typecheck, Design-Audit und gezielte Browserprüfungen bestanden lokal. Die öffentliche Freigabe, formale Identitäts-/Audio-/Untertitelprüfung und Gesamtprodukt-Abnahme sind offen. Rückweg ist die private Sites-Version 4.
+Dieses Dokument bleibt das führende Aufgabenregister. Der folgende maschinenlesbare Block gehört zum selben Register; `ops/goal/STATE.json` enthält nur Laufzeitdaten des lokalen Fortsetzungsdienstes. Die private Sites-Version 6 (`2da8af1eed20bf57e56e0d34ccbdb3d31f9aa706`) zeigt den Hero-Film im oberen Bereich und den rechts integrierten Chat. Die Creative-Factory-Korrektur wird für die nächste private Version umgesetzt. Build, Typecheck, Design-Audit und gezielte Browserprüfungen bestanden lokal. Die öffentliche Freigabe, formale Identitäts-/Audio-/Untertitelprüfung und Gesamtprodukt-Abnahme sind offen. Rückweg ist die private Sites-Version 4.
 
 Die frühere `run.html` wurde als Gestaltungsreferenz, nicht als Laufzeitquelle verwendet. Das lokale Quellverzeichnis `/Users/gast/Documents/nexify-site-source-20261109` ist eine entpackte GitHub-Quelle ohne `.git`; Änderungen werden auf dem Draft-Branch `design/chat-orientation-2026-11-09` (PR 92) abgeglichen. Der Site-Auslieferungscheckout liegt separat unter `site-publish`. Ein lokaler Runner darf den Site-Auslieferungscheckout und fremde Mandanten nicht eigenständig schreiben.
+
+### Designkorrektur · Creative Factory Excellence (09.11.2026)
+
+Verbindliche Quelle: `docs/09-final/creative-factory-excellence-2026-11-09.md`, SHA-256 `7ed0599a46459fc4fd24af8d7a0f8e9c9f0a2530252e0a40982440509fd23c2f` (bytegleich zur angelieferten Datei). Vorrang für eine moderne AI-Factory-Ästhetik vor der konservativen Champagner-Interpretation; funktionale und Medienfreigaben bleiben bestehen. Die erste farbbetonte lokale Studie wurde vom Auftraggeber verworfen und nie veröffentlicht. Das neu abgeleitete Erlebnisziel ist in `docs/design/nexify-creative-experience-2026-11-09.md` festgehalten. Es umfasst die räumliche Startbühne und den realen Weg vom Oracle-Gespräch zur Anfrage.
 
 ### SUB-GOAL 10 · Growth & Product Factory (09.11.2026)
 
 Verbindliche Quelle: `docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md`, SHA-256 `91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5` (bytegleich zur angelieferten Datei). Die bestehende Aufgabenwahrheit und Skill-Registry bleiben führend. Der öffentliche Chat kann derzeit ein bearbeitbares Briefing erzeugen und zum Kontaktformular führen; eine geprüfte durchgehende Strategie-/Options-/Preview-/Angebots-/CRM-Kette ist noch offen. ORACLE-/NeX-Runtime und Fachrollen sind als Zielbild zu prüfen, nicht als aktiv zu behaupten.
+
+### SUB-GOAL 11 · Leadership, PMO und Agent Workforce (09.11.2026)
+
+Verbindliche Quelle: `docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09.md`, SHA-256 `ac483833f1478ec9efa6434d081070e2c8700f8fc4cc2b4471ca334bfe12e432` (bytegleich zur angelieferten Markdown-Datei). Sie erweitert dasselbe Master-GOAL; Site, Chat und Arbeitsplatz behalten Vorrang. Der aktuelle Chat erzeugt nur eine lokale Orientierung und ein Briefing. Eine persistente Kundenfall- und Worker-Orchestrierung sowie ein geprüfter Chat-zu-Lieferung-Pilot sind noch offen.
 
 <!-- nexify-goal-tasks-json:start -->
 ```json
@@ -119,6 +127,54 @@ Verbindliche Quelle: `docs/09-final/master-goal-anhang-growth-product-factory-20
       "evidence": "Anhang A SHA-256 91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5; bestehendes config/skills-register.json",
       "rollback": "Vorhash der Registry sichern; Änderung auf Draft-Branch rücknehmbar",
       "next": "Quellen lesen, Mapping klein und belegt ergänzen, JSON prüfen, Review vorlegen",
+      "require_source_change": true
+    },
+    {
+      "id": "NX-UM-011",
+      "sub_goal": "02-04,06,10",
+      "title": "Creative Experience: gemeinsame Startbühne und Oracle-Kundenweg",
+      "priority": 1,
+      "status": "RUNNING",
+      "owner": "Pascal Courbois / Creative Direction",
+      "writer": "Codex Hauptlauf",
+      "scope": "Von Pascals tatsächlichem Zielbild abgeleitete räumliche Bühne, originale Startszene, integrierter Oracle-Arbeitsbereich und echter Briefing-zu-Anfrage-Weg. Verworfenes Cyan-Konzept nicht deployen.",
+      "paths": [
+        "docs/design/nexify-creative-experience-2026-11-09.md",
+        "apps/web/components/IdentityHero.tsx",
+        "apps/web/components/IdentityHero.css",
+        "apps/web/components/HomeConcept.css",
+        "apps/web/components/PublicOrientationChat.tsx",
+        "apps/web/components/PublicOrientationChat.css",
+        "apps/web/components/ContactRequestForm.tsx"
+      ],
+      "dependencies": [],
+      "acceptance": "Build, Lint, Typecheck, Browser-Screenshots 320 bis 1440 px, Chat-Interaktion, Reduced Motion, unabhängiger Review, private Site-Readback",
+      "evidence": "Design-Referenz-Lock und Nutzerfeedback; Soll-Design docs/design/nexify-soll-design-2026-11-10.md; lokale Builds mit Lint/Designaudit und vollständigen Typechecks bestanden; Browserprüfungen 320–1920 px, Oracle-Briefing und Videosteuerung bestanden; unabhängige Gegenprüfung PASS ausschließlich für private Designvorschau; Sites-Version 8, Commit 58c0b7d06b723374eb24adb876780166a590a225, Deployment appgdep_6af26100b0f08191805f515bab16a5bb succeeded, owner-only. Live-Oracle, formale Medienprüfung und öffentliche Abnahme offen.",
+      "rollback": "Private Sites-Version 6 und GitHub Draft-Branch-Commit 6f48d7e00954fd954ee22cd76d4f47dc284b34e9 wiederherstellen; Originalmedien erhalten",
+      "next": "Quelländerungen mit dem GitHub-Draft-PR synchronisieren, Backend-zu-Anfrage-Ende-zu-Ende-Test und formale Medienprüfung abschließen; erst danach öffentliche Freigabe prüfen",
+      "require_source_change": true
+    },
+    {
+      "id": "NX-UM-110",
+      "sub_goal": "11",
+      "title": "Leadership-/PMO-/Worker-Bestand und erster Fall-Pilot",
+      "priority": 2,
+      "status": "RUNNING",
+      "owner": "Pascal Courbois / ORACLE-Rolle zu verifizieren",
+      "writer": "Codex Hauptlauf",
+      "scope": "Bestehende Agenten-, Skill- und Tool-Instanzen, Rollenrechte, Runner und Gesprächszustände inventarisieren; kleinsten nachweisbaren Pilot auf bestehendem Register und autorisierter Runtime aufbauen; keine Scheinagenten oder externen Callback-Versprechen",
+      "paths": [
+        "docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09.md",
+        "docs/09-final/auftragsregister-2026-11-08.md",
+        "tools/goal-runner.mjs"
+      ],
+      "dependencies": [
+        "NX-UM-010"
+      ],
+      "acceptance": "Exakte Instanz-/Owner-/Tenant-Matrix; Skill-/Tool-Tests; ein realer Fall von Chat zu geplantem, ausgeführtem und unabhängig geprüftem Artefakt; Restart/Duplicate/Recovery nachgewiesen",
+      "evidence": "Anhang SHA-256 ac483833f1478ec9efa6434d081070e2c8700f8fc4cc2b4471ca334bfe12e432; aktuelle Agent-/Runner-Bestandsprüfung läuft; noch kein Pilot-Nachweis",
+      "rollback": "Bestehende Auftrags- und Runner-Dateien vor Änderung sichern; einzelne Pilotdaten versioniert rücknehmbar, nichts löschen",
+      "next": "Verifizierte Bestandsmatrix und sichere Pilot-Schnittstelle festlegen, anschließend implementieren und testen",
       "require_source_change": true
     }
   ],

@@ -18,8 +18,8 @@
 .atelier-film-hero .atelier-film-controls{bottom:24px}
 .atelier-playback-icon{display:block;flex:none}
 .atelier-film-loading{position:absolute;z-index:3;top:var(--space-4);left:var(--space-4);padding:var(--space-3) var(--space-4);border-radius:var(--radius-pille);background:var(--color-atelier-film-control-fill);color:var(--color-atelier-ink);font-size:var(--type-small-size);pointer-events:none}
-.atelier-film-progress{position:absolute;z-index:4;inset:auto 0 0;height:2px;overflow:hidden;pointer-events:none;background:var(--color-atelier-art-rim)}
-.atelier-film-progress>span{display:block;width:100%;height:100%;background:var(--color-atelier-champagne);transform-origin:left}
+.atelier-film-progress{position:absolute;z-index:4;inset:auto 0 0;height:2px;overflow:hidden;pointer-events:none;background:var(--color-linie-fein)}
+.atelier-film-progress>span{display:block;width:100%;height:100%;background:var(--color-marke-lime);transform-origin:left}
 .atelier-film-controls button svg{display:block;flex:none}
 .atelier-film-controls button[aria-pressed=true]{border-color:var(--color-atelier-champagne)}
 .atelier-volume{position:relative;color:var(--color-atelier-ink)}
@@ -32,7 +32,8 @@
 .atelier-film video::cue{color:var(--color-atelier-ink);background:var(--color-atelier-film-control-fill)}
 
 /* A quiet control rail sits below the image and keeps the scene unobstructed. */
-.atelier-film-hero .atelier-film-controls{position:relative;inset:auto;justify-content:flex-start;align-items:center;gap:var(--space-1);padding:var(--space-2) var(--space-3);border-top:1px solid var(--color-atelier-glass-edge);background:var(--color-atelier-film-canvas)}
+.atelier-film-hero .atelier-film-controls{position:relative;inset:auto;justify-content:flex-start;align-items:center;gap:var(--space-1);padding:var(--space-2) var(--space-3);border-top:1px solid var(--color-linie-fein);background:var(--color-atelier-surface)}
+.atelier-film-hero .atelier-film-transcript{background:var(--color-atelier-surface)}
 .atelier-film-hero .atelier-film-controls button{min-height:var(--target-min);padding:var(--space-2);border:0;border-radius:var(--radius-karte);background:transparent;box-shadow:none;font-size:var(--type-small-size)}
 .atelier-film-hero .atelier-film-controls button:hover{background:var(--color-atelier-film-control-hover)}
 .atelier-film-hero .atelier-film-fallback{inset:0 auto auto 0;height:auto;aspect-ratio:16/9}
@@ -40,4 +41,9 @@
 .atelier-film-hero .atelier-volume summary{border:0;background:transparent}
 .atelier-film-hero .atelier-volume[open]{flex:0 0 100%;display:grid;grid-template-columns:var(--target-min) minmax(0,1fr);gap:var(--space-2);align-items:center;margin-left:0}
 .atelier-film-hero .atelier-volume>div{position:static;width:auto;min-width:0;padding:var(--space-2);border-radius:0;background:transparent;box-shadow:none}
+@container identity-hero (min-width:821px){
+ .atelier-film-hero .atelier-volume[open]{flex:0 1 240px;grid-template-columns:var(--target-min) minmax(0,1fr);margin-left:auto}
+ .atelier-film-hero .atelier-volume label{display:flex;align-items:center;gap:var(--space-2);white-space:nowrap}
+ .atelier-film-hero .atelier-volume input{flex:1;min-width:0}
+}
 @media(max-width:600px){.atelier-film-hero .atelier-film-controls{padding:var(--space-2)}.atelier-film-hero .atelier-film-controls button{padding:var(--space-2)}}

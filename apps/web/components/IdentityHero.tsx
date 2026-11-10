@@ -4,7 +4,7 @@ const copy=interfaceCopy.hero;
 import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
 import type {PublicVideo} from './PresenterVideo';
-import {ActionLink} from './ActionControl';
+import {ActionButton} from './ActionControl';
 import {brandImages} from '../lib/brand-media';
 import AtelierFilm from './AtelierFilm';
 import './IdentityHero.css';
@@ -12,25 +12,24 @@ import './IdentityHero.css';
 // The approved brand photograph remains the poster and playback fallback.
 
 const headings:Record<Locale,string[]>={
- de:['Ein Anspruch.','Ein zusammenhängender','Auftritt.'],
- nl:['Eén aanspraak.','Eén samenhangende','uitstraling.'],
- fr:['Une exigence.','Une présence','cohérente.'],
- en:['One standard.','One coherent','presence.'],
+ de:['Ein Gespräch.','Ein Projekt,','das passt.'],
+ nl:['Eén gesprek.','Een project','dat past.'],
+ fr:['Une conversation.','Un projet','qui vous ressemble.'],
+ en:['One conversation.','A project','that fits.'],
 };
 const subtitles:Record<Locale,string>={
- de:'Marke, Website, Systeme und KI – aus einem Konzept, von einem Ansprechpartner.',
- nl:'Merk, website, systemen en AI – vanuit één concept, met één aanspreekpunt.',
- fr:'Marque, site, systèmes et IA – à partir d’un concept, avec un seul interlocuteur.',
- en:'Brand, website, systems and AI – from one concept, with one point of contact.',
+ de:'Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht.',
+ nl:'Websites, apps, shops en AI – vanuit wat uw bedrijf echt nodig heeft.',
+ fr:'Sites, applications, boutiques et IA – selon les besoins réels de votre entreprise.',
+ en:'Websites, apps, shops and AI – shaped around what your business actually needs.',
 };
 const bodies:Record<Locale,string>={
- de:'Pascal Courbois entwickelt mit Ihnen Sprache, Design und digitale Abläufe als ein zusammenhängendes System – persönlich geführt, hochwertig umgesetzt und transparent ab 449 € netto je Projekttag.',
- nl:'Pascal Courbois ontwikkelt met u taal, design en digitale processen als één samenhangend systeem – persoonlijk begeleid, hoogwaardig uitgevoerd en transparant vanaf € 449 netto per projectdag.',
- fr:'Pascal Courbois développe avec vous le langage, le design et les processus numériques comme un système cohérent – suivi personnel, exécution haut de gamme et transparence à partir de 449 € HT par journée de projet.',
- en:'Pascal Courbois develops your language, design and digital workflows as one coherent system – personally led, crafted to a high standard and transparent from €449 net per project day.',
+ de:'Pascal begleitet Ihr Projekt persönlich. Oracle hilft Ihnen, die Idee jetzt zu ordnen und den nächsten Schritt vorzubereiten.',
+ nl:'Pascal begeleidt uw project persoonlijk. Oracle helpt u uw idee te ordenen en de volgende stap voor te bereiden.',
+ fr:'Pascal accompagne personnellement votre projet. Oracle vous aide à structurer votre idée et à préparer la prochaine étape.',
+ en:'Pascal guides your project personally. Oracle helps you shape your idea and prepare the next step.',
 };
-const primaryCta:Record<Locale,string>={de:'Vorhaben beschreiben',nl:'Uw plan beschrijven',fr:'Décrire votre projet',en:'Describe your project'};
-const secondaryCta:Record<Locale,string>={de:'Leistungen ansehen',nl:'Diensten bekijken',fr:'Voir les prestations',en:'View services'};
+const primaryCta:Record<Locale,string>={de:'Mit Oracle beginnen',nl:'Begin met Oracle',fr:'Commencer avec Oracle',en:'Start with Oracle'};
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];
@@ -38,12 +37,11 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
  return <section className="identity-hero" aria-labelledby="home-headline" data-testid="identity-hero" data-media-state="editorial-video" data-identity-layout="graphite-atelier">
   <div className="identity-scene" data-testid="hero-grid">
    <div className="identity-copy" data-testid="hero-copy">
-    <h1 id="home-headline" data-testid="hero-headline">{headings[locale].map((line,index)=><span key={line} className={index>1?"identity-title-accent":index===1?'identity-title-long':undefined}>{line}{index<headings[locale].length-1?' ':''}</span>)}</h1>
+    <h1 id="home-headline" data-testid="hero-headline">{headings[locale].map((line,index)=><span key={line} className={index===headings[locale].length-1?"identity-title-accent":undefined}>{line}{index<headings[locale].length-1?' ':''}</span>)}</h1>
     <p className="identity-subtitle">{subtitles[locale]}</p>
     <p className="identity-body" data-testid="hero-description">{bodies[locale]}</p>
     <div className="identity-links">
-     <ActionLink variant="primary" className="identity-primary-link" href="/kontakt" data-testid="hero-project-link"><span>{primaryCta[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionLink>
-     <ActionLink variant="secondary" className="identity-secondary-link" href="/leistungen" data-testid="hero-services-link">{secondaryCta[locale]}</ActionLink>
+     <ActionButton variant="text" className="identity-primary-link" onClick={()=>window.dispatchEvent(new Event('nexify-open-orientation'))} aria-controls="aifly-panel" data-testid="hero-project-link"><span>{primaryCta[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionButton>
     </div>
    </div>
    <div className="identity-media" data-testid="hero-media">

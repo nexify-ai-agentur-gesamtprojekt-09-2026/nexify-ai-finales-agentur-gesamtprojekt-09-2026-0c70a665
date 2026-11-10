@@ -4,7 +4,7 @@ import {Children,type ReactNode} from "react";
 import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import {useUI} from "./Workspace";
-import {pageImage,imageAlt,brandImages,srcSetFor} from "../lib/brand-media";
+import {pageImage,imageAlt,srcSetFor} from "../lib/brand-media";
 import {HcArrow} from "./HcArrow";
 import {PageShowcase} from "./PageShowcase";
 import {PageQuestions} from "./PageQuestions";
@@ -67,7 +67,7 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
   <section className="hc-container" aria-labelledby={headingId}>
    <header className={"pc-hero"+(image?"":" is-text-only")}>
     <div className="pc-hero-copy">
-     <nav className="pc-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map(parent=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink><span aria-hidden="true">/</span></li>)}<li><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
+     <nav className="pc-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map((parent,index)=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink>{index<parents.length-1&&<span aria-hidden="true">/</span>}</li>)}<li className="visually-hidden"><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
      <span className="hc-kicker">{brand}<span aria-hidden="true"> / </span>{t[layout]}</span>
      <h1 id={headingId}>{page.localizedTitle[locale]}</h1>
      <p className="pc-hero-lead">{page.localizedSummary[locale]}</p>
@@ -98,15 +98,15 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
    <ol>{related.map(target=><li key={target.id}><span className="hc-kicker">{target.site_context==="teileklar"?"TEILEKLAR":"NEXIFY AI"}</span><h3><SiteLink href={target.path}>{target.localizedTitle[locale]}<HcArrow direction="out"/></SiteLink></h3><p>{target.localizedSummary[locale]}</p><SiteLink className="hc-text-link" href={target.path} aria-label={target.localizedTitle[locale]+" – "+t.learn}>{t.learn}<HcArrow/></SiteLink></li>)}</ol>
   </section>}
   {page.actions.length>0&&<section className={"hc-section hc-finish hc-container"+(isQuiet?" is-plain":"")} aria-labelledby={"finish-title-"+page.id} data-testid={"page-finish-"+page.id}>
-   <span className="hc-kicker">{isQuiet?t.related:t.details}</span><h2 id={"finish-title-"+page.id}>{isQuiet?t.related:t.next}</h2>{!isQuiet&&<p>{t.nextIntro}</p>}
+   <div className="hc-finish-heading"><span className="hc-kicker">{isQuiet?t.related:t.details}</span><h2 id={"finish-title-"+page.id}>{isQuiet?t.related:t.next}</h2></div>
+   <div className="hc-finish-next">{!isQuiet&&<p>{t.nextIntro}</p>}
    <div className="hc-finish-actions">{page.actions.map((action,index)=>{
     if(index===0){
      if(action.type==="chat"&&action.chat_intent)return <button key={index} type="button" className="hc-finish-primary" onClick={()=>startIntent(action.chat_intent)}>{action.label[locale]}<HcArrow/></button>;
      const target=get(action.target_id||"");if(target)return <SiteLink key={index} className="hc-finish-primary" href={target.path}>{action.label[locale]}<HcArrow/></SiteLink>;
     }
     return actionLink(action,index,false);
-   })}</div>
-   {!isQuiet&&<figure className="hc-finish-cast"><img src={brandImages.finish.src} alt={imageAlt(brandImages.finish,locale)} width="1588" height="864" loading="lazy" decoding="async"/></figure>}
+   })}</div></div>
   </section>}
  </div>;
 }
