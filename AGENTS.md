@@ -23,6 +23,37 @@ Abo-Medien in Higgsfield zuerst wiederverwenden; notwendige Produktion nur im
 vorhandenen Guthaben ohne Aufladung/Neutarif. Keine automatische Gesamtabnahme
 oder Daten-/Rechtefreigabe aus dieser Führungsentscheidung ableiten.
 
+## Aktuelle Führungsentscheidung · 10.11.2026 — Umsatz zuerst, Umsetzung statt Stillstand
+
+Die neueste ausdrückliche Unternehmerweisung präzisiert die Arbeitsreihenfolge
+für sämtliche bestehenden autorisierten NeXify-Aufträge:
+**kritische Daten-/Betriebsrisiken sichern → eigene NeXify-Seite öffentlich
+verkaufsfähig machen → echte Leads und Umsatzwege herstellen → bestehende
+Kundenprojekte abnahme- und abrechnungsfähig fertigstellen → wirtschaftlichen
+Dauerbetrieb stabilisieren und skalieren.** Aufgaben nach konkreter Wirkung,
+Risiko, Frist, Kosten und Abhängigkeiten priorisieren; unabhängige Teilaufgaben
+parallel ausführen.
+
+Die ältere Aussage weiter unten »Erst das Gesamtsystem fertigstellen;
+Marketing, Mailings und eigene Social-Kanäle danach aktivieren« gilt insoweit
+nicht mehr: rechtmäßige Akquise, passende Inhalte, Mailings und CRM-/Leadwege
+dürfen und sollen innerhalb bestehender Rechte bereits **parallel** zur noch
+offenen technischen Gesamtfertigstellung ausgeführt werden. Für Werbeversand
+gelten die jeweils anwendbaren gesetzlichen Voraussetzungen, Opt-out,
+Suppression und Datenschutz. Die Unternehmerweisung ersetzt keine zwingenden
+Sicherheits-, Preis-, Zahlungs-, Vertrags-, Datenschutz-, Mandanten- oder
+technischen Releasegates. Ungelöste Gate-Konflikte versioniert dokumentieren,
+die betroffene Wirkung nicht ungeprüft freischalten, andere Arbeiten fortsetzen.
+
+**Jede autorisierte Aufgabe ist im Regelfall ein Ausführungsauftrag:**
+bestehenden IST messen → kleinsten sicheren nutzbaren Schritt implementieren →
+prüfen, integrieren, rücklesen und dokumentieren. Ältere P01–P26-Aufträge und
+der führende Aufgaben-/Projektzustand bleiben erhalten, keine Parallelregister
+oder neue Gesamtplattform schaffen. AIfly ORACLE koordiniert; Codex/Work und
+tatsächlich verbundene Agenten führen innerhalb ihrer eigenen berechtigten
+Runtime aus. Ein Prompt beweist keinen laufenden Agenten, ein grüner Build
+keinen Livegang und eine Rechnung keinen Zahlungseingang.
+
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 
