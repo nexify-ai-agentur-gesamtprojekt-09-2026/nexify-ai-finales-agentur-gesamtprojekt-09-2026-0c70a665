@@ -84,7 +84,7 @@
  .workspace-shell .home-concept .identity-hero .identity-scene{display:block;position:relative;min-height:max(620px,calc((100cqi - 2 * var(--layout-page-padding)) * .5625 + 180px));padding-block:var(--space-7) var(--space-5)}
  .workspace-shell .home-concept .identity-hero .identity-media{position:absolute;inset:var(--space-7) var(--layout-page-padding) auto;z-index:0;width:auto;margin:0}
  .workspace-shell .home-concept .identity-hero .identity-media::before{content:'';display:block;position:absolute;inset:0 auto 70px 0;width:51%;z-index:2;pointer-events:none;background:linear-gradient(90deg,var(--color-atelier-canvas) 0%,color-mix(in srgb,var(--color-atelier-canvas) 88%,transparent) 38%,transparent 100%)}
- .workspace-shell .home-concept .identity-hero .identity-copy{position:relative;z-index:3;width:min(38%,350px);padding-top:var(--space-5)}
+ .workspace-shell .home-concept .identity-hero .identity-copy{position:relative;z-index:3;width:min(38%,350px);padding-top:var(--space-5);margin-left:clamp(72px,5cqi,96px)}
  .workspace-shell .home-concept .identity-hero .identity-copy h1{font-size:clamp(37px,3.4cqi,60px);line-height:1.08}
  .home-concept .identity-copy .identity-subtitle{font-size:clamp(18px,1.45cqi,23px)}
  .home-concept .identity-copy .identity-body{font-size:clamp(15px,1.04cqi,17px)}

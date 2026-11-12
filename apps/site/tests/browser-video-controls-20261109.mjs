@@ -18,10 +18,10 @@ try{
    const rect=s=>{const r=document.querySelector(s)?.getBoundingClientRect();return r?{top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width,height:r.height}:null;};
    return {video:rect('.identity-hero video'),controls:rect('.identity-hero .atelier-film-controls'),caption:rect('.identity-hero-video-note'),volume:rect('.identity-hero .atelier-volume summary'),overflow:document.documentElement.scrollWidth>innerWidth+1};
   });
-  assert.ok(geometry.video&&geometry.controls&&geometry.caption&&geometry.volume);
-  assert.ok(geometry.controls.top>=geometry.video.bottom-2,'controls below video at '+width);
-  assert.ok(geometry.caption.top>=geometry.controls.bottom-2,'caption below controls at '+width);
-  assert.ok(geometry.volume.top>=geometry.video.bottom-2&&geometry.volume.bottom<=geometry.controls.bottom+2,'volume button stays in control rail at '+width);
+  assert.ok(geometry.video&&geometry.controls&&geometry.volume);
+  assert.equal(geometry.caption,null,'no caption rail at '+width);
+  assert.ok(geometry.controls.top>=geometry.video.top && geometry.controls.bottom<=geometry.video.bottom+1,'controls inside video at '+width);
+  assert.ok(geometry.volume.top>=geometry.controls.top&&geometry.volume.bottom<=geometry.controls.bottom+1,'volume button stays in controls at '+width);
   assert.equal(geometry.overflow,false);
   await page.locator('.identity-hero .atelier-volume summary').click();
   const panel=page.locator('.identity-hero .atelier-volume>div');await panel.waitFor();
