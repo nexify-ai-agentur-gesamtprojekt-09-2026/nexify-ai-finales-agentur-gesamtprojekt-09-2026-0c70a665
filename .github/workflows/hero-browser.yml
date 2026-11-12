@@ -7,6 +7,8 @@ on:
       - 'apps/web/components/HomeConcept.css'
       - 'apps/web/components/WorkspaceRebuild.css'
       - 'apps/site/tests/browser-hero-release-20261112.mjs'
+      - 'apps/web/components/ContactRequestForm.tsx'
+      - 'apps/site/tests/browser-contact-outcomes-20261112.mjs'
       - '.github/workflows/hero-browser.yml'
 permissions:
   contents: read
@@ -31,3 +33,4 @@ jobs:
           /tmp/nexify-browser/node_modules/.bin/playwright install --with-deps chromium
       - run: node apps/site/tests/browser-hero-release-20261112.mjs
       - run: node apps/site/tests/browser-video-controls-20261109.mjs
+      - run: node apps/site/tests/browser-contact-outcomes-20261112.mjs
