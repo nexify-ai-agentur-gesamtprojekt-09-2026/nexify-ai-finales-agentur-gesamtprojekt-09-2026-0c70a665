@@ -106,7 +106,7 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
     }
     return actionLink(action,index,false);
    })}</div>
-   {!isQuiet&&<figure className="hc-finish-cast"><img src={brandImages.finish.src} alt={imageAlt(brandImages.finish,locale)} width="1588" height="864" loading="lazy" decoding="async"/></figure>}
+   {!isQuiet&&<figure className="hc-finish-cast"><img src={brandImages.finish.src} srcSet={srcSetFor(brandImages.finish.src)} sizes="(max-width: 900px) 88vw, 860px" alt={imageAlt(brandImages.finish,locale)} width="1588" height="864" loading="lazy" decoding="async"/></figure>}
   </section>}
  </div>;
 }

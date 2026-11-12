@@ -1,0 +1,1146 @@
+{
+  "runtime_error_capture": true,
+  "runtime_errors": [],
+  "completed": true,
+  "observed_at": "2026-11-09T11:39:51.509Z",
+  "source_sha256": {
+    "apps/site/.generated/public-site.json": "9e6e116330400b375fbc42fa1a5d96288ba54815725dc9a4cf3496370fcdb04e",
+    "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
+    "apps/site/src/Auth.tsx": "7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c",
+    "apps/site/src/analytics.ts": "29fcdc212cc248beb7e8f925e3b416cb63b1a8c4a16d05512af4b923cefcd3bc",
+    "apps/site/src/auth-policy.mjs": "739d5bdf3a7d41f80e2fc1292b967a3c8501d8559e16780f27910516a6b4bed9",
+    "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
+    "apps/site/src/observability.ts": "b42fcb14289b34a6295fea642438a2b0b12196fdd67317bf1836c0a2db87631d",
+    "apps/site/src/public-installation.mjs": "b2e4c8753a715cfb27c1922ad330f6bbfee41dcedee7ef9e2704358510059274",
+    "apps/site/src/router-state.mjs": "bce88010b04c0026d2985d8fbe378fbb40e02061bb99d6318df470fccedf3891",
+    "apps/site/src/seo-state.mjs": "9c9025204657ac97ed344575e02cb9b2f35b590f0635b53380e277d1bb9d9823",
+    "apps/site/tests/browser-text-spacing.mjs": "bfa4ae535778d86b3ece517fd7408d7d0bd0f116a8c57c02860a29f107ae7fcc",
+    "apps/site/vite.config.ts": "c6e8b8d847228d2c6c68ef3b073ead3a7749b959971684e26d71b5b003639932",
+    "apps/web/app/globals.css": "c7c19d6faed39c9756273fd2ee04245f3b69e542da51633ff91d4034c140ee44",
+    "apps/web/components/ActionControl.css": "7a1c2ccc390dc954ed166834440ca303c0e02f6fa7d2eb9e3c708340f035e72d",
+    "apps/web/components/ActionControl.tsx": "6909b910d4a417b6cc917eadabc0eded4a1a26309a9fb1f77c46a23ebdd8b3b0",
+    "apps/web/components/AtelierFilm.css": "e8f50ca887ccba36b0566c79c6d39d67ff4fdcefcaa9ecb54412993fdccbc19f",
+    "apps/web/components/AtelierFilm.tsx": "156c48e84a55198f4e0d9660f9e237d31470398b480844f49440e849798fc98b",
+    "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
+    "apps/web/components/ChatResizeHandle.tsx": "c65303c78c4dd486ecfd040125e68a63c8b4e04b1777ef0c6434821ae1525193",
+    "apps/web/components/ContactRequestForm.tsx": "33cb886884abe27025432db7fdeaf51ff3e2a3045cda5127ec01726b19c6ad47",
+    "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+    "apps/web/components/DiagnosticConsent.css": "a57940d16dac5b4c5c202b561b12b07b4036274505b7711f9d59214d86a74f59",
+    "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
+    "apps/web/components/ExplainerSections.tsx": "f46caac7d768fbaee8a3459e201c3d52e16d0d5ba0ea023eedf365a44fecd632",
+    "apps/web/components/HcArrow.tsx": "cb9a9fb68e7768b89c9daae67253716ee952460b565969c9db4c4cde0eddefaa",
+    "apps/web/components/HomeConcept.css": "74c0b6ff439a8160391bc3b9c6f09d3d9401c2cf9c51503eceeb72b55a27b066",
+    "apps/web/components/HomeContent.tsx": "adf9b8495833e0ca99a4bdd3190453467564ef35c5433e1d609e4d6c62bc73b8",
+    "apps/web/components/HomeJourney.css": "7bf74fe0c447af1249204a7bbcf8058d3615bd7ca2bac23446994a2d0bb8c89c",
+    "apps/web/components/HomeMaster.css": "b65b82d471780c91a8b34b7224419acd57bccd4c0ab488ee5697b3d4911d6691",
+    "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
+    "apps/web/components/IdentityHero.css": "73037a5ff7d5df5cbab771eb2acd9eff65c39679088bd27843e5aa7da5aa3e52",
+    "apps/web/components/IdentityHero.tsx": "36a88332e22ea4aa6630ebdac0753815651a85aaa68ab9db47a8a4c263caec98",
+    "apps/web/components/InstallInvitation.css": "9e3ec825415bc62ac21fe66bad0de37c1a09f823a67c44aafddb4e0a335d1d18",
+    "apps/web/components/InstallInvitation.tsx": "47f59b2815f641c682a6a850180d678082987df37665de4536f1c5dbbd7f67b6",
+    "apps/web/components/LocaleAwareClerk.tsx": "f93aececbd2f8bc5d6c9c3f82504b5d42753f819ad92e919f14505deb9284e45",
+    "apps/web/components/LuxuryMaterials.css": "616a137b5bdcac480def710737751e8dc7ad426c6962c290b9690b3a3b598254",
+    "apps/web/components/MailWorkspacePanel.css": "c3153035946952130a27de43e33c784a3e92406f43682cbbe909b4e774f9fef7",
+    "apps/web/components/MailWorkspacePanel.tsx": "b1c8f20caa4b4a7df25330758c2aad397cfc04a89f4fb1385f133b1560548ee5",
+    "apps/web/components/NextRouterBridge.tsx": "687e46e40270dc732f01f6b249a617e05f38f9686dc7178bb07a66e131a65bf8",
+    "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
+    "apps/web/components/OracleCompanion.tsx": "945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b",
+    "apps/web/components/PageConcept.css": "285759e75ce3b15337a9dd36219e193e0fefcb55e8eca9c548b4209cebc548d8",
+    "apps/web/components/PageQuestions.tsx": "9dcf8e2043c7e339362db1ea6b16d7ef7f0fd17a790970b30f285cc57b95a1e6",
+    "apps/web/components/PageShowcase.tsx": "3893061f8306bbaff72f6f1c9f7eb5d92c175e34056e032580b99da757e43df9",
+    "apps/web/components/PartnerRequestForm.css": "93e0ff6a0456fad4b7327bfa1e1cb62a35f32829f32199be196b6e1f1d9971d9",
+    "apps/web/components/PartnerRequestForm.tsx": "59302cc0a3289df41c2ca3f4ffe88518186db67fa3ad8fd029e1e31a99fdc7c9",
+    "apps/web/components/PortalWorkspace.css": "96561dc33421611b571b3a78773daa554cc0d89637113c31016186750a6563e7",
+    "apps/web/components/PortalWorkspace.tsx": "12b400fdcd029f4f78584a2b3df75ec0b3cff013582ca3b77c22528ac91248f3",
+    "apps/web/components/PresenterGuide.tsx": "cff9015303f77ec5212c216fc663fa6b2836bfb70b715c4247a92ded9719395e",
+    "apps/web/components/PresenterVideo.css": "2f0c719aa78d6d8ffc0f7d57bf57a3553630f34d8729a47b4fcca2638c91e992",
+    "apps/web/components/PresenterVideo.tsx": "c9917dcd7f033dab440967595db1a21fafafc3b5c44cfb8b7818fcf11d3ea94f",
+    "apps/web/components/ProblemExplorer.css": "b097aca7f8d135896e136feb05f2eac08a420b905e8be5c7dab79f82cb1e9a33",
+    "apps/web/components/ProblemExplorer.tsx": "61edea11f3f625248e1e0392c82d60825ff8e53d53b74fa94acd867be7d56577",
+    "apps/web/components/ProjectFilesPanel.css": "878e009d14076c6e791d0d130686e7102feee12debf7bc5b916d8acf04a08c55",
+    "apps/web/components/ProjectFilesPanel.tsx": "2fb523dc07763068deb19b1a3e24caff80ed93641ed654ed4372566e7301c5c9",
+    "apps/web/components/PublicContent.tsx": "d02c5594a5f490ba2eee0a5682a3fdd8985b2e61b63e2a694dc55378b27156cc",
+    "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
+    "apps/web/components/PublicInstallation.tsx": "45040906aa1f804124e4e02369dd68100c902004c60f666ebbdbe1afbfa934fb",
+    "apps/web/components/PublicOrientationChat.css": "699168c3051f2c5ad01b79a9466896e6996601e7a6b31a8f50c0e65bf09f34e3",
+    "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
+    "apps/web/components/PublicRequestFallback.tsx": "19c334e0ef95d106b0224f9bce757570558fc82f588fb2b01b71c6dfd35e83c7",
+    "apps/web/components/RouteStructuredData.tsx": "4740467777e17acf88400763a7d45e5fecaa829e70efa8cae916d33be809ac8c",
+    "apps/web/components/Router.tsx": "be9acd85951357f85266ce6d03f13ec83b6191a08950977f78ae0b505fd026bc",
+    "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
+    "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
+    "apps/web/components/SiteFooter.css": "d90c2e01e34acb98c9adf37c79d721ba33261c83d74952a26193a6b4d25ad95e",
+    "apps/web/components/SiteFooter.tsx": "56a189a3feea6f954ed4a30e6bcace4939480fcea485c73a215ec4a6451e523a",
+    "apps/web/components/SiteNavigation.tsx": "4b2a4a1205497bddb42e629262807644be83883cbca52ca8a4534a7b56900cff",
+    "apps/web/components/TrioScene.css": "6e2332a05142d57b5da1c5dc677b4c94d52de0cef51a8cc202430c775062ea1f",
+    "apps/web/components/TrioScene.tsx": "2100aaafa2327c8867d660d7c2a5699217f8d4bb04c6fad1a3abea33b372e06d",
+    "apps/web/components/WorkshopDirectory.css": "005e64cb50757f86342946aabdff95eebb6bb284580e2a190e28fe5eafbc3374",
+    "apps/web/components/WorkshopDirectory.tsx": "46da756d96570baff9a7dd78c60b2dd2ed91b7c89f2a8b086211d4b30e2a3d56",
+    "apps/web/components/Workspace.tsx": "b1160ea73b5834c611016dcf96efb28179a524bc4353753f02c2b53cb12c8c28",
+    "apps/web/components/WorkspaceCapabilities.ts": "010cc923971b1e6d033ee9f791ca3c0ba5eb28cd5139a1a0c86532eb5ce4189e",
+    "apps/web/components/WorkspaceRebuild.css": "591308b86d912c9a58929bd10a093c7f27ee1d0ee64ab2850fd75d9bef06fea9",
+    "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
+    "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
+    "apps/web/components/shop/AddressStep.tsx": "c942e1b2da293fc48fafbd7df918a46f375d29caa20d80a8aa2ee2fd3a862c47",
+    "apps/web/components/shop/AdminOrders.tsx": "e6ac83a4abb5eb41d5ef97fc294ff23a71ac0892be106086626c37dcd724b00b",
+    "apps/web/components/shop/AdminShop.tsx": "27a9b86328b13ccbf88aad53e52d0fd78824ff0fcebc59a941a923e405d6588b",
+    "apps/web/components/shop/AuthForms.tsx": "8abf82edb3250e4c8d3e49dde8e023187c1497f69759f05de844a9e69b240b12",
+    "apps/web/components/shop/CartView.tsx": "300f302deccbfc9ece5a2372ce573f52be6b6234b53ea1ac896e8a7c89ccc96d",
+    "apps/web/components/shop/CatalogStatus.tsx": "73f872aa8a674a332f0152d5d02b3e5f6008a5bbbed0bde8b0b895fe69ca7e80",
+    "apps/web/components/shop/CatalogView.tsx": "b86cdeca4b06c0d620f24ff6c1ceb1949275f61bc97ebf546e69060ef7d45706",
+    "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
+    "apps/web/components/shop/CategoryTitle.tsx": "cd86981ffd2745b5894bce3eab1390cbdb190319453198052088f3f2446d1588",
+    "apps/web/components/shop/Checkout.tsx": "dd82945988959a21d634b75a722b7d69b0cb76acc3ed17563fdc22a3006c14c3",
+    "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
+    "apps/web/components/shop/FitmentChecklist.tsx": "5898dabf37d137e92ac524ba2db967d5f77256584342c53b300a53174fbdbc27",
+    "apps/web/components/shop/OrderConfirmation.tsx": "5220cac964b9af8d1e80b8e080d048ab636ad0624c4a6bc582ef4f78f8a70a0a",
+    "apps/web/components/shop/OrderList.tsx": "aa7a199f2027050d1be559b3c24d5d2f7c0b171938b29eeca7d678314025970c",
+    "apps/web/components/shop/OrderTimeline.tsx": "4668fd941019728bc5ed05046383ec9e61bdd3e15854815baf24b45a14d36364",
+    "apps/web/components/shop/PartnerJourney.tsx": "2593d5a7b72b00e9955fd2aa23564c0cd3c35b1d9c1dd4336a1337baa02b8f25",
+    "apps/web/components/shop/PhaseNotice.tsx": "114b4eb85cf300d9b32a02070813372b66c6a3bb8bea74e460ed51c193c4df10",
+    "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
+    "apps/web/components/shop/ProductDetail.tsx": "1fcf8013bbad504e6755e211d05b275ded93350cdbe6dfbed2ad0cc1b3c86097",
+    "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
+    "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
+    "apps/web/components/shop/ShopEntry.tsx": "8240f3591f264844c4c22fb68c7b80dc2d080a138447eb7a1e582231f5c6ad2a",
+    "apps/web/components/shop/ShopFrame.tsx": "1018f2af6796555321a1a764cf7d21ddc7870eacb5a54d74efd523e3193a1093",
+    "apps/web/components/shop/Storefront.css": "390825d19726eb9f6fed23f312df41e04feaa915353dfc29c5e750e04e6bc4ba",
+    "apps/web/components/shop/Storefront.tsx": "1fc684c3e2ef66eb286cbc56306e1967736d33e3011316005960731bf0d99e9a",
+    "apps/web/components/shop/TeileklarLegal.tsx": "8c934e1c938b951d6b4c7977e8095fad2c5560fc6c402a044b01f7d769c60e6f",
+    "apps/web/components/shop/TyreCalculator.tsx": "108c82f5bdf0f903b0887bbb67b317baead5f6167e6fb3685ea53e2935b6ceaf",
+    "apps/web/components/shop/WorkshopDetail.tsx": "85771ec780758995d7c034150f9768aecff896d6dfaff48f7040cb63c8267c7f",
+    "apps/web/components/shop/WorkshopFinder.tsx": "11f34ef13510ce7cac4cb11884c7120d0584cd2337724f2ec5167f2ca88a4175",
+    "apps/web/components/shop/WorkshopMap.tsx": "5e05dd616d16692c523f0c5dca9829025d8968f81c2cb9365d64cc810282ab73",
+    "apps/web/components/shop/api.ts": "77430925e22d30a38a1280cd6e17fd67e8bc32b162773016dd629654de9519eb",
+    "apps/web/components/shop/shipping-hint.ts": "8b1b6ad8499e2da9cff1fc7ae4310c510fccfa56afbfcbd6e6b694373c4c3ba6",
+    "apps/web/components/shop/shop.css": "bf3967f563a749aeed6f3bdee7a3e494a6e1fce2260d9efc15a02c791fee0ae3",
+    "apps/web/lib/brand-media.ts": "fe1c812d3c8b3a6b81ee101fc9208d53bb907dbbdbbc70ddbf3caae966b0e59d",
+    "apps/web/lib/catalog.ts": "6c4a819af1f7184e26e8ef3008546f8d5bf719fd61a6b32fe1dce1500f64d7e2",
+    "apps/web/lib/chat-contract.ts": "328019a423aacb5b27e77580afbb38bfc0cc7625b9f0896aba7bf078425a7309",
+    "apps/web/lib/chat-llm.ts": "edea3545f868486825c0bce3ff1cbf8c427a8dbd7925c8dab7c74880faec50eb",
+    "apps/web/lib/chat-store.ts": "54d612ff2286e439d4f1b2b266afa149dfedb0c8ef6b2d6f8ec8d91e2b6a6621",
+    "apps/web/lib/contact-attempt.ts": "2deb708f4c7ceac90b316ee661799d9bd346223e04c1bcc363d7645b9111ee04",
+    "apps/web/lib/contact-copy.ts": "1db2001ac62e96e582ebe4ae43fa6114d7b8913ce936a1c30c082f1300644a91",
+    "apps/web/lib/editorial-autoplay.ts": "2d88df8cbeb17c158a9ccfa7f4c2869c89ae09cb701d0e80e4b588ec8a5413cf",
+    "apps/web/lib/fulfilment.ts": "dbabd42b28ede93633efa89b20241bbc2ece2c0cf9b4fcd0f47d35ad6fcacf34",
+    "apps/web/lib/home-scenes.ts": "4eb5f25c1c119de3b04c85eacb86432b9f4992b8a055ed349488dab18fd4e8cf",
+    "apps/web/lib/i18n.ts": "e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213",
+    "apps/web/lib/invoice.ts": "b142e2b4b41180d32120b1e4b92c9f0becad60e208ffffd5c30f206aa22e72a4",
+    "apps/web/lib/mailing.ts": "ba177524598d4e11fee211c02f4c275019e1e59ed8a8951b5c5ba567f4ec6771",
+    "apps/web/lib/page-faq.ts": "15691592f75f915c51722759b1d43d373553d5008fd26f566763268f21142b00",
+    "apps/web/lib/page-seo.ts": "ed13000937cb4d9e040ef6819b8a73a9d3acd0f11e1eef17a4d813c660ddd0f1",
+    "apps/web/lib/page-types.ts": "db02bf602f1a598efff25e951d7e809737e8604059580529da8ff794af7c60fa",
+    "apps/web/lib/project-files.ts": "458a8bef0abfe106938d8e877885c2677a2b2763bf33a45cab6cfc381de721ba",
+    "apps/web/lib/shop-server.ts": "bd8e22410c926982df0ecbf341dc62caaed052c6451371719e8d8bc86254a02f",
+    "apps/web/lib/static-orientation.ts": "5b30bd0cf43898c74204fc479adaaded52908819868abe811c0af43c399df3ab",
+    "apps/web/lib/supabase-rest.ts": "5e36397edc8b1e0fea61338f45134f2fa892a2d152145eff8ba2fcc06f82f7eb",
+    "apps/web/public/fonts/geist-latin.woff2": "1b5ebfb3a01a97343ac96873e6d59a8cb285c66012b6a1ac509cb2765e995ba8",
+    "apps/web/public/fonts/geist-mono-latin.woff2": "b7ac144b394cbd81052d6397ec0c33397977b1d7e9bc095e744e652a378c6fb3",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
+    "apps/web/public/media/presenters/nex-toucan-121a804c.png": "121a804ca2647ad162cfc39a45e68d2682fdc57e09532b56b85038893e5d576d",
+    "apps/web/public/media/presenters/pascal-original-6dd03834.png": "6dd038343fe607eecbb50b68474c27d8f600d3343c20b6d6930d0e7f5e6e0b04",
+    "config/companion-avatar.json": "4b013514ba71d88b60172c4c8510e6afe29dfeee5873a4c5b5332e95a0e100d0",
+    "config/design-tokens.json": "1482e2fa0e407b1b9c786f982cbfe74d0b0292be80e5bd3f52fd04b69b8b5960",
+    "config/interim-scene-images.json": "45be9e0b7fd3d207c65cf4423a23480fe90f9cde7679c123a81f3567ec79617c",
+    "config/site-map.json": "6fbbbf4a536591da57b13d0174839e68e632d3b99e1ba4307060b9cd67cb3145",
+    "config/text-resize-sources.json": "8cef37815cd15a9f0c0180b0999bafb0aceba320b4bd0c537af68fb8bd8ae8b8",
+    "packages/tokens/build-tokens.mjs": "0579b47f6be2f6fc314f91382d0494c1faea93be4969fd4e97535e4a00eff92f",
+    "packages/tokens/tokens.css": "218355ed5fdd0c2c9e4d361311b4071de8b9618406c34a0a1c5d592a62efca15",
+    "packages/tokens/tokens.json": "5b9a4eb32842183787c87b22f8849abee67f3c53404858b7519e89a7068fdd90",
+    "packages/tokens/tokens.ts": "5294aa6ed39bb9683f98516286a35747d2d397885a2c4e41570f1424a4eb6216",
+    "pnpm-lock.yaml": "0de51b88300252563fb0ee688d2c57b59c8b302e948ab23e8f8602b45e8fd577"
+  },
+  "scope": "text-spacing and 200% text resize geometry; not screenreader or full visual conformance",
+  "checks": [
+    {
+      "path": "/",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 536,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/leistungen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 534,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen/websites",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 505,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 505,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 505,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/leistungsumfang",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 529,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/loesungen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/loesungen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 521,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/preise-ablauf",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 523,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/wissen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 460,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 439,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/unternehmen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/unternehmen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 460,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/kontakt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/kontakt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 464,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 517,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/one",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/one",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 499,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/api",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/api",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 499,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 449,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 449,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 449,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/portale",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/portale",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/portale",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 450,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/impressum",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/impressum",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 442,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/datenschutz",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/datenschutz",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 435,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 435,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/ki-hinweise",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 435,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/barrierefreiheit",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 435,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/cookies",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/cookies",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 435,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/anmelden",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/anmelden",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 437,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/registrieren",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/registrieren",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 437,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 333,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/suche",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 353,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 325,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 325,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/produkt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 330,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 329,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/kasse",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 373,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 452,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/termine",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 325,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 338,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 381,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 332,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 370,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/shop",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 353,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 317,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 390,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "text_spacing": true,
+      "overflow": false
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "width": 1280,
+      "text_resize_200": true,
+      "resized": {
+        "count": 317,
+        "all_doubled": true
+      },
+      "overflow": false,
+      "content_overflows": []
+    }
+  ],
+  "issues": []
+}

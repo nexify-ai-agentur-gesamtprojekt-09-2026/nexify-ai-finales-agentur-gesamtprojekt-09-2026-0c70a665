@@ -18,13 +18,13 @@ export const brandImages={
  design:{src:'/media/higgsfield/hf-14-1920.webp',alt:'Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch'},
  marketing:{src:'/media/higgsfield/hf-15-1920.webp',alt:'Markeninszenierung: Pascal bespricht ein gedrucktes Layout mit einer Gesprächspartnerin im Atelier'},
  integration:{src:'/media/higgsfield/hf-16-1920.webp',alt:'Markeninszenierung: Pascal und ein Gesprächspartner betrachten Pläne und ein technisches Modell auf einem Arbeitstisch'},
- finish:{src:'/media/higgsfield/hf-17-cutout-1920.webp',alt:'Pascal mit NeX und AIFly ORACLE, freigestellte Markenfiguren'}
+ finish:{src:'/media/higgsfield/hf-17-cutout-1920.webp',alt:'Markeninszenierung: Pascal mit NeX und AIFly ORACLE, freigestellte Markenfiguren'}
 } as const;
 
 // Responsive Fassungen: 800/1280/1920 px liegen neben der Vollfassung.
 // Der Browser laedt nur die Groesse, die das Layout braucht (sizes an der <img>-Stelle).
 export function srcSetFor(src: string): string | undefined {
-  if (src.includes('cutout') || !src.endsWith('-1920.webp')) return undefined;
+  if (!src.endsWith('-1920.webp')) return undefined; // auch der Freisteller hf-17-cutout hat 800/1280/1920 (Alpha, siehe tests/test_media_cutout_alpha.py)
   const base = src.slice(0, -'-1920.webp'.length);
   return [800, 1280, 1920].map(w => `${base}-${w}.webp ${w}w`).join(', ');
 }
