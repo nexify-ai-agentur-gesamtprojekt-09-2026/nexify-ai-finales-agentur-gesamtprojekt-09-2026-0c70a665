@@ -12,6 +12,12 @@ try {
   for(const path of ['/','/leistungen','/produkte/nex2fly','/kontakt']) {
    await page.goto(origin+path); await page.locator('h1').first().waitFor();
    const heading=await page.locator('h1').first().innerText();
+   const heroImages=page.locator('.pc-hero-media img');
+   await heroImages.evaluateAll(images=>Promise.all(images.map(image=>{image.loading='eager';return image.decode();})));
+   if(path==='/' && width===1440){
+    const copy=await page.locator('.identity-copy').boundingBox(),media=await page.locator('.identity-media').boundingBox();
+    assert.ok(copy && media && copy.x+copy.width<=media.x+1,'desktop hero copy must stay outside the film');
+   }
    assert.doesNotMatch(heading,/Seite nicht verfügbar/i,`route ${path}`);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,`overflow ${path} ${width}`);
    if(path==='/kontakt') assert.equal(await page.getByTestId('contact-name').count(),1);

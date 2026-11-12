@@ -120,3 +120,10 @@
  .home-concept .hc-product{padding:var(--space-5)}
 }
 @container home (max-width:420px){.home-concept .hc-product{padding:var(--space-4)}}
+/* Hero-Kopie und Film bleiben auf breiten Ansichten eigenstaendige Spalten. */
+@container identity-hero (min-width:821px){
+ .workspace-shell .home-concept .identity-hero .identity-scene{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.618fr);gap:var(--space-6);align-items:center;min-height:0;padding-block:var(--space-7) var(--space-8)}
+ .workspace-shell .home-concept .identity-hero .identity-media{position:relative;inset:auto;width:100%;margin:0}
+ .workspace-shell .home-concept .identity-hero .identity-media::before{display:none}
+ .workspace-shell .home-concept .identity-hero .identity-copy{position:relative;width:auto;margin:0;padding:0}
+}
