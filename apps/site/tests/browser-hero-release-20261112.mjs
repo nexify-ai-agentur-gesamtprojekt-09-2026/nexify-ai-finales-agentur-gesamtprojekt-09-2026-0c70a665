@@ -4,7 +4,7 @@ import {chromium} from 'playwright';
 
 const server=await preview({root:new URL('../',import.meta.url).pathname,preview:{host:'127.0.0.1',port:0}});
 const origin='http://127.0.0.1:'+server.httpServer.address().port;
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true,channel:'chrome'});
 try {
  for(const width of [320,375,768,1165,1440]) {
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
