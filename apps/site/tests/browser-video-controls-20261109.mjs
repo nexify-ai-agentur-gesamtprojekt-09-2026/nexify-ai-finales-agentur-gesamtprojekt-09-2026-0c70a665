@@ -28,6 +28,7 @@ try{
   const popup=await panel.boundingBox();assert.ok(popup&&popup.x>=0&&popup.x+popup.width<=width+1,'volume panel inside viewport at '+width);
   assert.ok(popup.y>=0&&popup.y+popup.height<=900,'volume panel vertically inside viewport at '+width);
   const visibleAtEdges=await panel.evaluate(element=>{const box=element.getBoundingClientRect(),x=box.left+Math.min(20,box.width/2);return [box.top+12,box.bottom-12].every(y=>element.contains(document.elementFromPoint(x,y)));});
+  if(!visibleAtEdges) console.log('popup hit diagnosis',JSON.stringify(await panel.evaluate(element=>{const b=element.getBoundingClientRect(),x=b.left+Math.min(20,b.width/2);return {box:{x:b.x,y:b.y,width:b.width,height:b.height},hits:[b.top+12,b.bottom-12].map(y=>{const e=document.elementFromPoint(x,y);return {tag:e?.tagName,cls:e?.className,html:e?.outerHTML?.slice(0,250)}})}})));
   assert.equal(visibleAtEdges,true,'volume panel not clipped at '+width);
   const slider=page.locator('.identity-hero .atelier-volume input');
   const sliderHit=await slider.evaluate(element=>{const box=element.getBoundingClientRect();return document.elementFromPoint(box.left+box.width/2,box.top+box.height/2)===element;});
