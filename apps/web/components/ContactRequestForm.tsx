@@ -60,7 +60,7 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
     </div>
     <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
     {errors.consent && <span className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
-    {failure && <p role="alert" className="tk-field-error" data-testid="contact-error">{failure}</p>}
+    {failure && <div role="alert" className="tk-field-error" data-testid="contact-error"><p>{failure}</p><a href="mailto:mail@nexifyai.cloud" data-testid="contact-email-fallback">{({de:'Direkt per E-Mail kontaktieren',nl:'Rechtstreeks per e-mail contact opnemen',fr:'Nous contacter directement par e-mail',en:'Contact us directly by email'} as const)[locale]}</a></div>}
     <div className="tk-actions"><button className="primary-button" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</button></div>
   </form>;
 }
