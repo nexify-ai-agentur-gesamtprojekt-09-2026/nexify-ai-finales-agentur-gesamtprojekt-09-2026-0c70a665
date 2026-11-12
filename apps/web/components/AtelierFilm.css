@@ -6,7 +6,7 @@
 .atelier-film-controls button:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:3px}
 .atelier-film-transcript{background:var(--color-atelier-film-transcript);padding:14px 20px;color:var(--color-atelier-platinum);font-size:12px;line-height:1.7}
 .atelier-film-transcript summary{min-height:24px;cursor:pointer}
-.atelier-film-error{position:absolute;inset:20px 20px auto;padding:12px;background:var(--color-atelier-film-error);color:var(--color-atelier-ink)}
+.atelier-film-error{pointer-events:none;position:absolute;inset:20px 20px auto;padding:12px;background:var(--color-atelier-film-error);color:var(--color-atelier-ink)}
 .atelier-film-hero{border-radius:0;overflow:visible;background:transparent}
 .atelier-film-hero .atelier-film-controls{inset:auto 28px 24px;justify-content:flex-end}
 .atelier-film-hero video{aspect-ratio:16/9}
