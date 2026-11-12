@@ -25,13 +25,13 @@ try {
   }
   const play=controls.locator('button').first();
   await play.focus(); await page.keyboard.press('Enter');
-  await page.waitForFunction(()=>!document.querySelector('.identity-hero video').paused);
-  await page.keyboard.press('Space');
+  await page.waitForFunction(()=>document.querySelector('.identity-hero .atelier-film-controls button')?.getAttribute('aria-label')==='Film pausieren');
+  await play.focus(); await page.keyboard.press('Space');
   assert.equal(await video.evaluate(v=>v.paused),true,'keyboard pause '+width);
   const sound=controls.locator('button').nth(1);
   await sound.focus(); await page.keyboard.press('Enter');
-  await page.waitForFunction(()=>!document.querySelector('.identity-hero video').muted);
-  await page.keyboard.press('Enter');
+  await page.waitForFunction(()=>document.querySelector('.identity-hero .atelier-film-controls button:nth-child(2)')?.getAttribute('aria-label')==='Ton ausschalten');
+  await sound.focus(); await page.keyboard.press('Enter');
   assert.equal(await video.evaluate(v=>v.muted),true,'keyboard mute '+width);
   await controls.locator('.atelier-volume summary').click();
   const popup=controls.locator('.atelier-volume>div'); await popup.waitFor();
