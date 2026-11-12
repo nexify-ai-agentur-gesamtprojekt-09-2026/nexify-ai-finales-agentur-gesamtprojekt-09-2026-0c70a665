@@ -1,0 +1,46 @@
+name: Chat owner schema fixture
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chat-owner-schema:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    # A dedicated disposable service, with no externally published port or
+    # application credentials. Never points at an existing database.
+    services:
+      postgres:
+        image: postgres@sha256:858bb5e98eed02eb8cafbcdc007f9a65d1b613972028944a8ec2133ccaf80d27
+        env:
+          POSTGRES_PASSWORD: isolated-ci-fixture-only
+          POSTGRES_DB: nexify_chat_owner_fixture
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nexify_chat_owner_fixture"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Test inactive schema preparation in the dedicated service
+        env:
+          FIXTURE_CONTAINER: ${{ job.services.postgres.id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker --host=unix:///var/run/docker.sock cp apps/web/supabase "$FIXTURE_CONTAINER":/tmp/nexify-chat-fixture
+          docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
+            -c 'create role anon nologin' -c 'create role authenticated nologin' -c 'create role service_role nologin bypassrls'
+          docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
+            -f /tmp/nexify-chat-fixture/tests/conversation_owner_digest.sql
+          if output=$(docker --host=unix:///var/run/docker.sock exec "$FIXTURE_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d nexify_chat_owner_fixture \
+            -f /tmp/nexify-chat-fixture/tests/conversation_owner_digest_drift.sql 2>&1); then
+            printf '%s\n' 'Expected conflicting migration to fail, but it succeeded.'
+            exit 1
+          fi
+          case "$output" in
+            *42701*owner_session_digest*) printf '%s\n' 'Drift rejected with expected duplicate-column SQLSTATE.' ;;
+            *) printf '%s\n' 'Drift test failed for an unexpected reason.' "$output"; exit 1 ;;
+          esac

@@ -4,7 +4,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
-from tools.check_text_resize_evidence import source_hashes, check_bound_resize
+from tools.check_text_resize_evidence import CURRENT_RESIZE_REPORT, source_hashes, check_bound_resize
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,7 +20,7 @@ class ResizeSourceBindingTest(unittest.TestCase):
                 path = root / relative
                 path.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / relative, path)
-            report = root / 'evidence/one-app-2026-10-27/text-spacing.json'
+            report = root / CURRENT_RESIZE_REPORT
             report.parent.mkdir(parents=True)
             original = (ROOT / report.relative_to(root)).read_bytes()
             report.write_bytes(original)

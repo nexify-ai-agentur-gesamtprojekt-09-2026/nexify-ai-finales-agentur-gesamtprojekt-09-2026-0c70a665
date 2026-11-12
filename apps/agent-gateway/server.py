@@ -564,10 +564,15 @@ def build_server(store, host="127.0.0.1", port=3003, web_origin=None, shop=None,
                     if pages_allowed is not None and body.get("page_path") not in pages_allowed:
                         raise Rejected(403, "provider_option_not_enabled_on_page")
                     message = text(body, "message", 1000)
+                    key = self.headers.get("Idempotency-Key")
+                    if not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key or ""):
+                        raise Rejected(422, "idempotency_key_required")
+                    payload_hash = digest(json.dumps(body, sort_keys=True, ensure_ascii=False, separators=(",", ":")))
                     try:
-                        return self.respond(200, features.chatgpt.reply(store, visitor["id"], message, body.get("locale", "de")))
+                        return self.respond(200, features.chatgpt.reply(store, visitor["id"], message, body.get("locale", "de"), key, payload_hash))
                     except integrations().ProviderError as error:
-                        status = 429 if error.code.endswith(("_limit_reached", "_cap_reached")) else 502
+                        status = (409 if error.code in {"idempotency_conflict", "chatgpt_request_pending_or_unknown"}
+                                  else 429 if error.code.endswith(("_limit_reached", "_cap_reached")) else 502)
                         raise Rejected(status, error.code) from None
                 if path == "/api/partner/requests":
                     try:

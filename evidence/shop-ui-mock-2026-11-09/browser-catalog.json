@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-09T07:43:33.666Z",
+  "recorded_at": "2026-11-09T20:33:00.974Z",
   "passed": true,
   "mock": true,
   "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
@@ -24,7 +24,7 @@
     "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
     "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
     "apps/web/components/shop/shop.css": "bf3967f563a749aeed6f3bdee7a3e494a6e1fce2260d9efc15a02c791fee0ae3",
-    "apps/web/components/shop/Storefront.css": "390825d19726eb9f6fed23f312df41e04feaa915353dfc29c5e750e04e6bc4ba",
+    "apps/web/components/shop/Storefront.css": "ecd5f2d5655c6b20271826c27b491c736f0d1678f59582f78ec13ec6f46a603b",
     "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
     "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
     "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
@@ -64,7 +64,7 @@
     }
   ],
   "external_requests": [],
-  "supplier_image_requests_answered_locally": 9,
+  "supplier_image_requests_answered_locally": 8,
   "order_started": false,
   "payment_started": false,
   "page_errors": [],

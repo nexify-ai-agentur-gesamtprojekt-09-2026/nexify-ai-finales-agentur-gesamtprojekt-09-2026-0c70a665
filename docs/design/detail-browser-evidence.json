@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-09T10:40:32.356Z",
+  "recorded_at": "2026-11-09T20:07:02.671Z",
   "checks": [
     "account_control_fallback_and_auth_routes_present",
     "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
@@ -84,8 +84,8 @@
     "apps/site/tests/browser-critical.mjs": "0d333f2eb200f55ee7e218e86060972b2a33ed9c643a8c8ae6a73a7d15de80e4"
   },
   "sdk_source_sha256": {
-    "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
-    "apps/web/components/PublicOrientationChat.css": "699168c3051f2c5ad01b79a9466896e6996601e7a6b31a8f50c0e65bf09f34e3",
+    "apps/web/components/PublicOrientationChat.tsx": "76610423000e140c94740c54f17026829702c52d43abed35296957f11ff45524",
+    "apps/web/components/PublicOrientationChat.css": "787f444cda7d9f5c0c94289a216f5144a868953351af315a9ca743813505c963",
     "api/agent-chat.ts": "096928161c19778276d107d8731a38a73c1d5cb9b22a02575cc70f46d1d218b9",
     "packages/agent-runtime/public-orientation.ts": "1116d2a38435f0caf43f76b9a30bb07b732b7484cbcb110cfcee9fb31d507388",
     "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
@@ -147,7 +147,7 @@
     }
   ],
   "sdk_browser_observations": {
-    "recorded_at": "2026-11-09T10:40:32.356Z",
+    "recorded_at": "2026-11-09T20:07:02.671Z",
     "checks": [
       "sdk_guided_preview_works_when_visitor_session_is_404",
       "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",

@@ -4,11 +4,13 @@ import { api, type ApiError } from "./shop/api";
 import {useUI} from './Workspace';
 import {contactCopy} from '../lib/contact-copy';
 import {contactAttempt,persistContactAttempt,readContactAttempt,type ContactAttempt} from '../lib/contact-attempt';
+import {takeOracleBrief} from '../lib/project-brief-transfer';
 import "./shop/shop.css";
 
 export default function ContactRequestForm({ kind = "contact",topic }: { kind?: "contact" | "partner";topic?:string }) {
   const [ready,setReady]=useState(false);
-  useEffect(()=>setReady(true),[]);
+  const [message,setMessage]=useState('');
+  useEffect(()=>{if(kind==='contact'&&!topic){try{const brief=takeOracleBrief(sessionStorage);if(brief)setMessage(brief);}catch{/* The form remains editable without session storage. */}}setReady(true);},[kind,topic]);
   const partner = kind === "partner";
   const {locale}=useUI();const text=contactCopy[locale];
   const MSG:Record<string,string>={required:text.required,invalid:text.invalid,too_short:text.too_short};
@@ -54,7 +56,7 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
       {field("name",text.name, <input name="name" autoComplete="name" maxLength={100} aria-invalid={!!errors.name} data-testid="contact-name" />)}
       {field("email",text.email, <input name="email" type="email" autoComplete="email" maxLength={160} aria-invalid={!!errors.email} data-testid="contact-email" />)}
       {field("company",partner?text.workshop:text.company, <input name="company" autoComplete="organization" maxLength={120} aria-invalid={!!errors.company} data-testid="contact-company" />)}
-      {field("message",text.message, <textarea name="message" rows={5} maxLength={4000} aria-invalid={!!errors.message} data-testid="contact-message" />)}
+      {field("message",text.message, <textarea name="message" rows={5} maxLength={4000} value={message} onChange={event=>setMessage(event.target.value)} aria-invalid={!!errors.message} data-testid="contact-message" />)}
     </div>
     <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
     {errors.consent && <span className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}

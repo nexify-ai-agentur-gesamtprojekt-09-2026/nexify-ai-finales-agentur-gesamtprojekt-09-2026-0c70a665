@@ -15,16 +15,20 @@ const publicPath=(path:string)=>/^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*)?$/.test(path
 /** Pure, bounded guidance for an explicitly static build. Only the PublicPage[]
  * projection supplied to the component is consulted; there is no server,
  * provider, persistence, business action or private configuration import. */
-export function staticOrientation({locale,pagePath,question,pages}:{locale:Locale;pagePath:string;question:string;pages:PublicPage[]}):StaticGuidance{
+export function staticOrientation({locale,pagePath,question,pages,previousQuestions=[]}:{locale:Locale;pagePath:string;question:string;pages:PublicPage[];previousQuestions?:string[]}):StaticGuidance{
  if(!Object.hasOwn(localCopy,locale))throw new Error('invalid_static_locale');
  if(typeof question!=='string'||!question.trim()||question.length>1000)throw new Error('invalid_static_question');
  const available=pages.filter(page=>publicPath(page.path)&&['nexify','teileklar'].includes(page.site_context));
  const current=available.find(page=>page.path===pagePath);if(!current)throw new Error('invalid_static_page_context');
  const tokens=terms(question);
+ const scheduleOrCost=includesAny(tokens,['dauer','dauert','lange','zeit','zeitraum','termin','kosten','kostet','preis','budget','tijd','duurt','kosten','prijs','durée','duree','temps','cout','prix','budget','cost','price','timeline','long']);
+ const priorTokens=terms(previousQuestions.slice(-3).filter(value=>typeof value==='string').map(value=>value.slice(0,1000)).join(' '));
  const brandWords=['marke','markenstart','markenauftritt','brand','branding','merk','marque','website','websites','web','design','logo','landingpage','landingpages'];
  const growthWords=['ads','marketing','werbung','advertising','advertentie','advertenties','kampagne','kampagnen','wachstum','growth','campaign','campaigns','groei','campagne','campagnes','publicite','publicitaire','developpement'];
  const systemWords=['ki','ai','ia','automatisierung','automatisieren','automation','automatisering','automatiser','system','systeme','systemen','systems','workflow','ablauf','processus'];
- const agencyIntent=includesAny(tokens,[...brandWords,...growthWords,...systemWords,'nex2fly','suite','api','agentic','oracle']);
+ const topicWords=[...brandWords,...growthWords,...systemWords,'nex2fly','suite','api','agentic','oracle'];
+ const contextTokens=scheduleOrCost&&!includesAny(tokens,topicWords)?priorTokens:tokens;
+ const agencyIntent=includesAny(contextTokens,topicWords);
  const vehicleTopic=includesAny(tokens,['fahrzeug','ersatzteil','teilenummer','werkstatt','reifen','batterie','voertuig','onderdeel','werkplaats','vehicule','piece','atelier','vehicle','parts','workshop']);
  // A workshop can be an agency client. Existing TEILEKLAR context or an
  // explicit brand request wins; general industry words do not override a
@@ -32,16 +36,16 @@ export function staticOrientation({locale,pagePath,question,pages}:{locale:Local
  const site=current.site_context==='teileklar'||tokens.has('teileklar')||(vehicleTopic&&!agencyIntent)?'teileklar':'nexify';
  let topic:'brand'|'systems'|'growth'|'general'|'product'|'tk'='general';let preferred:string[]=[];
  if(site==='teileklar'){topic='tk';preferred=['tk-search','tk-fitment','tk-appointments','tk-workshop','tk-home'];}
- else if(includesAny(tokens,['nex2fly','suite'])){topic='product';preferred=['nex2fly'];}
- else if(includesAny(tokens,['api'])){topic='product';preferred=['api'];}
- else if(includesAny(tokens,['agentic','oracle'])){topic='product';preferred=['one'];}
- else if(includesAny(tokens,growthWords)){topic='growth';preferred=['solutions','pricing','contact'];}
- else if(includesAny(tokens,systemWords)){topic='systems';preferred=['automation','apps-portals','scope'];}
- else if(includesAny(tokens,brandWords)){topic='brand';preferred=['websites','services','scope'];}
+ else if(includesAny(contextTokens,['nex2fly','suite'])){topic='product';preferred=['nex2fly'];}
+ else if(includesAny(contextTokens,['api'])){topic='product';preferred=['api'];}
+ else if(includesAny(contextTokens,['agentic','oracle'])){topic='product';preferred=['one'];}
+ else if(includesAny(contextTokens,growthWords)){topic='growth';preferred=['solutions','pricing','contact'];}
+ else if(includesAny(contextTokens,systemWords)){topic='systems';preferred=['automation','apps-portals','scope'];}
+ else if(includesAny(contextTokens,brandWords)){topic='brand';preferred=['websites','services','scope'];}
  const candidates=available.filter(page=>page.site_context===site);
  const ranked=candidates.map(page=>({page,score:[...terms(page.localizedTitle[locale]+' '+page.localizedSummary[locale])].filter(word=>tokens.has(word)).length})).filter(entry=>entry.score>0).sort((a,b)=>b.score-a.score||a.page.id.localeCompare(b.page.id));
  const defaults=site==='teileklar'?['tk-home','tk-search','tk-fitment','tk-appointments']:['websites','automation','solutions','contact'];
- const selected=[...preferred.map(id=>candidates.find(page=>page.id===id)),...ranked.map(entry=>entry.page),...defaults.map(id=>candidates.find(page=>page.id===id))].filter((page):page is PublicPage=>!!page);
+ const selected=scheduleOrCost&&site==='nexify'?[...['pricing',...preferred,'contact'].map(id=>candidates.find(page=>page.id===id))].filter((page):page is PublicPage=>!!page):[...preferred.map(id=>candidates.find(page=>page.id===id)),...ranked.map(entry=>entry.page),...defaults.map(id=>candidates.find(page=>page.id===id))].filter((page):page is PublicPage=>!!page);
  const unique=[...new Map(selected.map(page=>[page.path,page])).values()].slice(0,3);
- const c=localCopy[locale];return{text:[c.heading,c[topic],c.limits].join('\n\n'),site,cards:unique.map(page=>({id:page.id,path:page.path,title:page.localizedTitle[locale],summary:page.localizedSummary[locale]}))};
+ const c=localCopy[locale];const estimate={de:'Dauer und Gesamtpreis hängen vom vereinbarten Umfang, vorhandenen Inhalten und nötigen Freigaben ab. Wir klären diese Punkte vor dem Start und erstellen darauf aufbauend ein Angebot.',nl:'Doorlooptijd en totaalprijs hangen af van de afgesproken omvang, bestaande inhoud en benodigde goedkeuringen. We bespreken dit vóór de start en maken daarna een voorstel.',fr:'La durée et le prix total dépendent du périmètre convenu, des contenus disponibles et des validations nécessaires. Nous les précisons avant le démarrage et préparons ensuite une offre.',en:'Timing and total cost depend on the agreed scope, existing content and required approvals. We clarify these before starting and prepare a proposal accordingly.'};return{text:[c.heading,c[topic],...(scheduleOrCost&&site==='nexify'?[estimate[locale]]:[]),c.limits].join('\n\n'),site,cards:unique.map(page=>({id:page.id,path:page.path,title:page.localizedTitle[locale],summary:page.localizedSummary[locale]}))};
 }

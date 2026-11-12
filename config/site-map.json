@@ -376,13 +376,13 @@
       "id": "home",
       "path": "/",
       "title": {
-        "de": "Gute Websites beginnen bei Ihnen.",
-        "nl": "Goede websites beginnen bij u.",
-        "fr": "Un bon site commence par vous.",
-        "en": "Good websites start with you."
+        "de": "Ein Gespräch. Ein Projekt, das passt.",
+        "nl": "Eén gesprek. Een project dat past.",
+        "fr": "Une conversation. Un projet qui vous ressemble.",
+        "en": "One conversation. A project that fits."
       },
       "summary": {
-        "de": "Individuelles Webdesign, passende Inhalte und digitale Abläufe aus einem Konzept. Persönlich begleitet und transparent kalkuliert ab 449 € netto je Projekttag.",
+        "de": "Individuelles Webdesign, passende Inhalte und digitale Abläufe aus einem Konzept. Persönlich begleitet und nach dem vereinbarten Umfang kalkuliert.",
         "nl": "We ontwerpen uw uitstraling, schrijven passende teksten en verbinden de processen erachter. Pascal Courbois begeleidt u van idee tot overdracht.",
         "fr": "Nous concevons votre présence, rédigeons les contenus et relions les processus. Pascal Courbois vous accompagne de l’idée à la livraison.",
         "en": "We design your presence, write the right content and connect the workflows behind it. Pascal Courbois guides you from the first idea through to handover."
@@ -455,9 +455,9 @@
         "indexability": "index,follow",
         "title": {
           "de": "Webdesign, Automatisierung & Marketing | NeXify AI",
-          "nl": "Goede websites beginnen bij u.",
-          "fr": "Un bon site commence par vous.",
-          "en": "Good websites start with you."
+          "nl": "Eén gesprek. Een project dat past.",
+          "fr": "Une conversation. Un projet qui vous ressemble.",
+          "en": "One conversation. A project that fits."
         }
       },
       "access": {
@@ -557,10 +557,10 @@
             "en": "Brand & web"
           },
           "body": {
-            "de": "Positionierung, visuelle Identität, Texte und Website werden gemeinsam entwickelt. Das Projektpaket Markenstart bündelt die vereinbarte Markenbasis und den passenden Webauftritt; zusätzliche Seiten, Inhalte oder Sprachen sind wählbare Erweiterungen.",
-            "nl": "Positionering, visuele identiteit, teksten en website ontwikkelen we samen. Het projectpakket Markenstart bundelt de afgesproken merkbasis en webpresentatie; extra pagina’s, inhoud en talen zijn uitbreidingen naar keuze.",
-            "fr": "Positionnement, identité visuelle, textes et site se construisent ensemble. Le projet Markenstart réunit la base de marque convenue et le site adapté ; pages, contenus et langues supplémentaires sont des options.",
-            "en": "Positioning, visual identity, copy and website are developed together. The Markenstart project package combines the agreed brand foundation and web presence; additional pages, content and languages are optional extensions."
+            "de": "Positionierung, visuelle Identität, Texte und Website werden gemeinsam entwickelt. Das Projektpaket Markenstart bündelt die vereinbarte Markenbasis und den passenden Webauftritt; zusätzliche Seiten, Inhalte oder Sprachen sind wählbare Erweiterungen. Gemeinsam klären wir, wen Sie erreichen möchten und welche Handlung die Website erleichtern soll. Vorhandenes Material wird gesichtet; Seitenstruktur, Inhalte und technische Anforderungen gehen in den vereinbarten Umfang ein.",
+            "nl": "Positionering, visuele identiteit, teksten en website ontwikkelen we samen. Het projectpakket Markenstart bundelt de afgesproken merkbasis en webpresentatie; extra pagina’s, inhoud en talen zijn uitbreidingen naar keuze. Samen bepalen we wie u wilt bereiken en welke actie de website eenvoudiger moet maken. We bekijken bestaand materiaal en nemen structuur, inhoud en technische eisen op in de afgesproken scope.",
+            "fr": "Positionnement, identité visuelle, textes et site se construisent ensemble. Le projet Markenstart réunit la base de marque convenue et le site adapté ; pages, contenus et langues supplémentaires sont des options. Ensemble, nous précisons qui vous souhaitez atteindre et quelle action le site doit faciliter. Les supports existants sont examinés ; structure, contenus et besoins techniques entrent dans le périmètre convenu.",
+            "en": "Positioning, visual identity, copy and website are developed together. The Markenstart project package combines the agreed brand foundation and web presence; additional pages, content and languages are optional extensions. Together we clarify whom you want to reach and what the website should help them do. We review existing material and include the page structure, content and technical requirements in the agreed scope."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -584,10 +584,10 @@
             "en": "Systems & AI"
           },
           "body": {
-            "de": "Apps, Portale, Schnittstellen und agentische Abläufe werden auf konkrete Aufgaben ausgerichtet. KI im Betrieb beginnt mit einem abgegrenzten Prozess und umfasst die vereinbarten Quellen, Berechtigungen und Prüfungen.",
-            "nl": "Apps, portalen, koppelingen en agentische processen richten we op concrete taken. KI im Betrieb begint met een afgebakend proces en omvat de afgesproken bronnen, rechten en controles.",
-            "fr": "Applications, portails, intégrations et processus agentiques répondent à des tâches concrètes. KI im Betrieb part d’un processus délimité et couvre les sources, droits et vérifications convenus.",
-            "en": "Apps, portals, integrations and agentic workflows serve specific tasks. KI im Betrieb starts with one bounded process and includes the agreed sources, permissions and checks."
+            "de": "Apps, Portale, Schnittstellen und agentische Abläufe werden auf konkrete Aufgaben ausgerichtet. KI im Betrieb beginnt mit einem abgegrenzten Prozess und umfasst die vereinbarten Quellen, Berechtigungen und Prüfungen. Wir betrachten zuerst, wer welche Informationen braucht und wo heute Übergaben oder wiederkehrende Aufgaben Zeit kosten. Anschließend klären wir die benötigten Zugänge und Verantwortlichkeiten; Umfang und Betrieb werden vor der Umsetzung vereinbart.",
+            "nl": "Apps, portalen, koppelingen en agentische processen richten we op concrete taken. KI im Betrieb begint met een afgebakend proces en omvat de afgesproken bronnen, rechten en controles. We bekijken eerst wie welke informatie nodig heeft en waar overdrachten of herhaalde taken tijd kosten. Daarna bespreken we de benodigde toegang en verantwoordelijkheden; scope en beheer worden vóór de uitvoering afgesproken.",
+            "fr": "Applications, portails, intégrations et processus agentiques répondent à des tâches concrètes. KI im Betrieb part d’un processus délimité et couvre les sources, droits et vérifications convenus. Nous examinons d’abord les informations nécessaires et les transferts ou tâches répétitives qui prennent du temps. Les accès et responsabilités sont ensuite clarifiés ; périmètre et exploitation sont convenus avant réalisation.",
+            "en": "Apps, portals, integrations and agentic workflows serve specific tasks. KI im Betrieb starts with one bounded process and includes the agreed sources, permissions and checks. We first look at who needs which information and where handovers or repetitive work take time. We then clarify the access and responsibilities required, and agree the scope and operation before implementation."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -611,10 +611,10 @@
             "en": "Growth & campaigns"
           },
           "body": {
-            "de": "Das Projektpaket Wachstum verbindet Kampagnenidee, Werbemittel und Zielseite. Ads, Content und Auswertung erhalten einen gemeinsamen Plan. Medienbudget, Kanäle und Veröffentlichung werden gesondert festgelegt.",
-            "nl": "Het projectpakket Wachstum verbindt campagneconcept, advertentiemateriaal en landingspagina. Ads, content en evaluatie krijgen één plan. Mediabudget, kanalen en publicatie spreken we afzonderlijk af.",
-            "fr": "Le projet Wachstum relie concept de campagne, créations et page d’atterrissage. Publicité, contenus et analyse suivent un plan commun. Budget média, canaux et diffusion sont définis séparément.",
-            "en": "The Wachstum project package brings together campaign concept, creative assets and landing page. Ads, content and reporting follow one plan. Media budget, channels and publication are agreed separately."
+            "de": "Das Projektpaket Wachstum verbindet Kampagnenidee, Werbemittel und Zielseite. Ads, Content und Auswertung erhalten einen gemeinsamen Plan. Medienbudget, Kanäle und Veröffentlichung werden gesondert festgelegt. Ein konkretes Ziel – etwa mehr passende Anfragen – hilft bei der Auswahl von Botschaft und Zielseite. Welche Kanäle sinnvoll sind und wie Ergebnisse ausgewertet werden können, wird vor einer Beauftragung gemeinsam geklärt.",
+            "nl": "Het projectpakket Wachstum verbindt campagneconcept, advertentiemateriaal en landingspagina. Ads, content en evaluatie krijgen één plan. Mediabudget, kanalen en publicatie spreken we afzonderlijk af. Een concreet doel, zoals meer passende aanvragen, helpt bij de keuze van boodschap en landingspagina. Geschikte kanalen en de manier van evalueren worden samen besproken vóór een opdracht.",
+            "fr": "Le projet Wachstum relie concept de campagne, créations et page d’atterrissage. Publicité, contenus et analyse suivent un plan commun. Budget média, canaux et diffusion sont définis séparément. Un objectif concret, comme des demandes plus pertinentes, aide à choisir le message et la page de destination. Les canaux et la manière d’évaluer les résultats sont définis ensemble avant commande.",
+            "en": "The Wachstum project package brings together campaign concept, creative assets and landing page. Ads, content and reporting follow one plan. Media budget, channels and publication are agreed separately. A concrete goal, such as more relevant enquiries, helps shape the message and landing page. Suitable channels and how results can be reviewed are agreed before commissioning."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -757,10 +757,10 @@
             "en": "Markenstart: the shared foundation"
           },
           "body": {
-            "de": "Wir entwickeln die vereinbarte Gestaltung und Seitenstruktur aus Ihrer Positionierung. Das Angebot benennt Seitenumfang, Inhalte, mobile Darstellung und Übergabe, damit Gestaltung und Aufwand zusammenpassen.",
-            "nl": "We ontwikkelen de afgesproken vormgeving en paginastructuur vanuit uw positionering. De offerte benoemt pagina’s, inhoud, mobiele weergave en overdracht, zodat ontwerp en inspanning op elkaar aansluiten.",
-            "fr": "Nous déclinons votre positionnement en design et en architecture de pages. Le devis précise pages, contenus, affichage mobile et livraison pour accorder création et charge de travail.",
-            "en": "We translate your positioning into the agreed design and page structure. The proposal defines pages, content, mobile presentation and handover so that design and effort stay aligned."
+            "de": "Zuerst klären wir, wen Ihre Website erreichen soll, welche Leistungen im Vordergrund stehen und welche Fragen Ihre Kunden vor einer Anfrage haben. Daraus entsteht eine Seitenstruktur mit verständlichen Texten, einer passenden visuellen Linie und einem klaren Kontaktweg.\n\nIm Angebot halten wir fest, welche Seiten und Inhalte entstehen, wer Materialien liefert und wie die Darstellung auf Mobilgeräten und am Desktop geprüft und übergeben wird.",
+            "nl": "Eerst bespreken we wie uw website moet bereiken, welke diensten voorop staan en welke vragen klanten vóór een aanvraag hebben. Daaruit ontstaat een paginastructuur met begrijpelijke teksten, een passende visuele lijn en een duidelijke contactroute.\n\nIn de offerte leggen we vast welke pagina’s en inhoud worden gemaakt, wie materiaal aanlevert en hoe de weergave op mobiel en desktop wordt gecontroleerd en overgedragen.",
+            "fr": "Nous précisons d’abord les personnes que votre site doit atteindre, les services à mettre en avant et les questions posées avant une prise de contact. Nous en tirons une structure de pages, des textes compréhensibles, une identité visuelle adaptée et un chemin clair vers le contact.\n\nLe devis précise les pages et contenus prévus, les éléments à fournir et la manière dont les versions mobile et ordinateur seront vérifiées et livrées.",
+            "en": "We start by identifying who your website should reach, which services matter most and what customers need to know before getting in touch. From that, we develop a page structure, clear copy, a fitting visual direction and a direct route to contact.\n\nThe proposal sets out the pages and content to be created, who supplies material, and how the mobile and desktop versions will be checked and handed over."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -783,10 +783,10 @@
             "en": "Options for your next step"
           },
           "body": {
-            "de": "Weitere Sprachen, Foto- und Videoinhalte, Shopfunktionen oder Kampagnen-Landingpages lassen sich ergänzen. Mit NeXify Care kann die technische Betreuung separat vereinbart werden.",
-            "nl": "Extra talen, foto- en videocontent, winkelfuncties of campagnepagina’s kunnen worden toegevoegd. Technische begeleiding kan afzonderlijk met NeXify Care worden afgesproken.",
-            "fr": "Langues, photos, vidéos, fonctions marchandes ou pages de campagne peuvent compléter le projet. Le suivi technique peut faire l’objet d’un accord NeXify Care distinct.",
-            "en": "Additional languages, photo and video content, shop features or campaign landing pages can extend the project. Technical support can be arranged separately through NeXify Care."
+            "de": "Je nach Ziel können weitere Sprachen, Foto- und Videoinhalte, Shopfunktionen oder eigene Landingpages für Kampagnen hinzukommen. Wir klären dafür benötigte Inhalte, Schnittstellen und Verantwortlichkeiten vor der Umsetzung.\n\nNach der Übergabe können technische Betreuung und Weiterentwicklung separat vereinbart werden. So sehen Sie, was zum Projekt gehört und welche Leistungen später zusätzlich beauftragt werden.",
+            "nl": "Afhankelijk van uw doel kunnen extra talen, foto- en videocontent, shopfuncties of campagnepagina’s worden toegevoegd. We bespreken vooraf welke inhoud, koppelingen en verantwoordelijkheden daarvoor nodig zijn.\n\nNa de overdracht kunnen technisch beheer en verdere ontwikkeling afzonderlijk worden afgesproken. Zo ziet u wat bij het project hoort en wat later aanvullend kan worden opgedragen.",
+            "fr": "Selon votre objectif, le projet peut inclure d’autres langues, des photos ou vidéos, des fonctions de boutique ou des pages de campagne. Nous définissons à l’avance les contenus, connexions et responsabilités nécessaires.\n\nAprès la livraison, la maintenance technique et les évolutions peuvent faire l’objet d’un accord distinct. Vous savez ainsi ce qui relève du projet initial et ce qui peut être ajouté ensuite.",
+            "en": "Depending on your goals, the scope can include additional languages, photography and video, shop functions or campaign landing pages. We agree the content, connections and responsibilities needed before implementation.\n\nTechnical support and further development can be arranged separately after handover, so you can see what is included now and what can be commissioned later."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -849,10 +849,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -928,10 +928,10 @@
             "en": "One process as a scoped project"
           },
           "body": {
-            "de": "KI im Betrieb bündelt die Analyse eines ausgewählten Ablaufs, seine vereinbarte Umsetzung und die Prüfung am konkreten Arbeitsfall. Erweiterungen folgen auf dieser Grundlage.",
-            "nl": "KI im Betrieb bundelt de analyse van één gekozen proces, de afgesproken uitvoering en een toets aan een concrete werksituatie. Uitbreidingen bouwen daarop voort.",
-            "fr": "KI im Betrieb réunit l’analyse d’un processus choisi, sa réalisation convenue et sa vérification sur un cas de travail concret. Les extensions partent de cette base.",
-            "en": "KI im Betrieb combines analysis of one selected workflow, its agreed implementation and validation against a real work case. Extensions build on that foundation."
+            "de": "Wir beginnen mit einem konkreten Ablauf, etwa der Zuordnung eingehender Anfragen oder der Vorbereitung von Informationen für ein Angebot. Gemeinsam betrachten wir die vorhandenen Schritte, die beteiligten Systeme und die Stellen, an denen Entscheidungen durch Menschen nötig bleiben.\n\nAnschließend legen wir Eingaben, gewünschtes Ergebnis und Ausnahmen fest, setzen den vereinbarten Umfang um und prüfen ihn an einem geeigneten Arbeitsfall. Weitere Abläufe können darauf aufbauen.",
+            "nl": "We beginnen met één concreet proces, bijvoorbeeld het indelen van binnenkomende aanvragen of het voorbereiden van informatie voor een offerte. Samen bekijken we de huidige stappen, betrokken systemen en momenten waarop mensen beslissen.\n\nDaarna leggen we invoer, gewenst resultaat en uitzonderingen vast, realiseren we de afgesproken omvang en toetsen we die met een passende praktijksituatie. Andere processen kunnen daarop voortbouwen.",
+            "fr": "Nous partons d’un processus précis, par exemple le classement des demandes reçues ou la préparation d’informations pour un devis. Nous examinons ensemble les étapes existantes, les systèmes concernés et les décisions qui restent humaines.\n\nNous définissons ensuite les entrées, le résultat attendu et les exceptions, réalisons le périmètre convenu et le vérifions sur un cas de travail adapté. D’autres processus pourront s’y ajouter.",
+            "en": "We begin with one specific workflow, such as sorting incoming enquiries or preparing information for a proposal. Together, we examine the current steps, the systems involved and the points where a person must decide.\n\nWe then define the inputs, expected outcome and exceptions, implement the agreed scope and check it against a suitable working case. Further workflows can build on that foundation."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -955,10 +955,10 @@
             "en": "Knowledge needs upkeep"
           },
           "body": {
-            "de": "Dokumente, Datenquellen und Skills erhalten einen definierten Stand und eine verantwortliche Person. Aktualisierungen, Quellenprüfungen und laufende Betreuung werden im Betriebsumfang festgelegt.",
-            "nl": "Documenten, gegevensbronnen en skills krijgen een vastgelegde versie en een verantwoordelijke. Updates, broncontroles en begeleiding worden in de beheeromvang vastgelegd.",
-            "fr": "Documents, sources et skills reçoivent une version définie et un responsable. Actualisations, vérifications des sources et suivi sont précisés dans le périmètre d’exploitation.",
-            "en": "Documents, data sources and skills have a defined version and an owner. Updates, source checks and ongoing support are specified in the operating scope."
+            "de": "Eine Automatisierung ist nur so hilfreich wie die Informationen, mit denen sie arbeitet. Deshalb klären wir, welche Dokumente und Datenquellen verwendet werden dürfen, wer sie pflegt und wie Änderungen berücksichtigt werden.\n\nWir legen außerdem fest, wie Fehler sichtbar werden, wer Ausnahmen bearbeitet und welche Betreuung nach der Übergabe vereinbart ist. Der tatsächliche Zugriff auf Systeme und Daten wird für jedes Projekt gesondert geklärt.",
+            "nl": "Een automatisering is afhankelijk van de informatie waarmee zij werkt. Daarom bepalen we welke documenten en gegevensbronnen gebruikt mogen worden, wie ze beheert en hoe wijzigingen worden verwerkt.\n\nOok spreken we af hoe fouten zichtbaar worden, wie uitzonderingen behandelt en welke ondersteuning na de overdracht is inbegrepen. Toegang tot systemen en gegevens wordt per project afzonderlijk geregeld.",
+            "fr": "Une automatisation dépend des informations qu’elle utilise. Nous définissons donc les documents et sources autorisés, leur responsable et la prise en compte des modifications.\n\nNous précisons aussi comment les erreurs sont signalées, qui traite les exceptions et quel suivi est convenu après livraison. Les accès aux systèmes et données sont définis pour chaque projet.",
+            "en": "An automation depends on the information it uses. We therefore agree which documents and data sources may be used, who maintains them and how changes are handled.\n\nWe also define how errors are surfaced, who handles exceptions and what support is agreed after handover. Access to systems and data is agreed separately for each project."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1024,10 +1024,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -1104,10 +1104,10 @@
             "en": "The workflow shapes the interface"
           },
           "body": {
-            "de": "Ein definierter Vorgang verbindet Eingaben, Dokumente, Status und Entscheidungen. Gestaltung und technische Struktur entstehen gemeinsam, damit Ihre Marke auch im Arbeitsbereich erkennbar bleibt.",
-            "nl": "Een omschreven proces verbindt invoer, documenten, statussen en beslissingen. Vormgeving en techniek ontstaan samen, zodat uw merk ook in de werkomgeving herkenbaar blijft.",
-            "fr": "Un processus défini relie saisies, documents, états et décisions. Design et structure technique se construisent ensemble pour prolonger votre marque dans l’espace de travail.",
-            "en": "A defined workflow connects inputs, documents, status and decisions. Design and technical structure are developed together so that the workspace carries your brand."
+            "de": "Ein Portal oder eine Anwendung beginnt bei einer Aufgabe: Wer gibt welche Informationen ein, wer prüft sie und welcher nächste Schritt soll sichtbar werden? Wir ordnen Eingaben, Dokumente, Status und Entscheidungen zu einem verständlichen Ablauf.\n\nDaraus entwickeln wir die vereinbarten Ansichten für die jeweiligen Nutzergruppen. Gestaltung und technische Umsetzung werden zusammen geplant und an den festgelegten Nutzungsszenarien geprüft.",
+            "nl": "Een portaal of applicatie begint bij een taak: wie voert welke informatie in, wie controleert die en welke volgende stap moet zichtbaar zijn? We brengen invoer, documenten, status en beslissingen samen in een begrijpelijk proces.\n\nDaaruit ontwikkelen we de afgesproken schermen voor de verschillende gebruikersgroepen. Ontwerp en techniek worden samen gepland en getoetst aan de vastgelegde gebruikssituaties.",
+            "fr": "Un portail ou une application part d’une tâche : qui saisit les informations, qui les vérifie et quelle étape doit apparaître ensuite ? Nous organisons saisies, documents, états et décisions dans un parcours compréhensible.\n\nNous concevons ensuite les vues convenues pour les différents groupes d’utilisateurs. Design et réalisation technique sont planifiés ensemble puis vérifiés sur les scénarios définis.",
+            "en": "A portal or application starts with a task: who enters information, who reviews it and what should happen next? We organise inputs, documents, status and decisions into a clear workflow.\n\nWe then develop the agreed views for the relevant user groups. Design and implementation are planned together and checked against the defined usage scenarios."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1128,10 +1128,10 @@
             "en": "Connections with a defined scope"
           },
           "body": {
-            "de": "Bestehende Systeme werden nach vereinbarter Aufgabe angebunden. Rollen, Datenübernahme, Schnittstellen und Betreuung sind eigene Projektbausteine und werden vor der Umsetzung zugeordnet.",
-            "nl": "Bestaande systemen worden voor een afgesproken taak gekoppeld. Rollen, gegevensovername, interfaces en beheer zijn eigen projectonderdelen die we vooraf toewijzen.",
-            "fr": "Les systèmes existants sont reliés pour une mission convenue. Rôles, reprise des données, interfaces et suivi constituent des prestations distinctes, définies avant réalisation.",
-            "en": "Existing systems are connected for an agreed purpose. Roles, data transfer, interfaces and support are separate project elements defined before implementation."
+            "de": "Wenn die Anwendung mit vorhandenen Systemen arbeiten soll, klären wir für jede Verbindung Zweck, Daten, verfügbare Schnittstelle und Berechtigungen. Rollen und Zugriffe werden passend zum jeweiligen Vorgang geplant.\n\nDatenübernahme, externe Dienste, Betrieb und spätere Erweiterungen sind eigenständige Bausteine. Wir benennen ihre Voraussetzungen und Kosten im Angebot, bevor sie umgesetzt werden.",
+            "nl": "Als de applicatie met bestaande systemen moet werken, bespreken we per koppeling het doel, de gegevens, de beschikbare interface en de rechten. Rollen en toegang worden afgestemd op het proces.\n\nGegevensovername, externe diensten, beheer en latere uitbreidingen zijn afzonderlijke onderdelen. Hun voorwaarden en kosten worden vóór uitvoering in de offerte benoemd.",
+            "fr": "Si l’application doit communiquer avec des systèmes existants, nous précisons pour chaque connexion son objectif, les données, l’interface disponible et les autorisations. Les rôles et accès sont adaptés au processus.\n\nLa reprise de données, les services externes, l’exploitation et les extensions sont des éléments distincts. Leurs conditions et coûts sont précisés dans le devis avant réalisation.",
+            "en": "When the application needs to work with existing systems, we define each connection’s purpose, data, available interface and permissions. Roles and access are planned around the workflow.\n\nData migration, external services, operation and later extensions are separate components. Their prerequisites and costs are identified in the proposal before implementation."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1196,10 +1196,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -1273,10 +1273,10 @@
             "en": "Three starting points, one standard"
           },
           "body": {
-            "de": "Markenstart legt den Marken- und Webauftritt an. Wachstum verbindet Kampagne und Zielseite. KI im Betrieb entwickelt einen ausgewählten Arbeitsablauf. Der genaue Lieferumfang wird im Angebot beschrieben.",
-            "nl": "Markenstart legt de merk- en webpresentatie vast. Wachstum verbindt campagne en landingspagina. KI im Betrieb ontwikkelt een gekozen werkproces. De exacte oplevering staat in de offerte.",
-            "fr": "Markenstart pose l’identité et le site. Wachstum relie campagne et page d’atterrissage. KI im Betrieb développe un processus choisi. Le devis précise exactement les livrables.",
-            "en": "Markenstart establishes the brand and web presence. Wachstum links campaign and landing page. KI im Betrieb develops a selected workflow. The proposal specifies the exact deliverables."
+            "de": "Markenstart legt den Marken- und Webauftritt an. Wachstum verbindet Kampagne und Zielseite. KI im Betrieb entwickelt einen ausgewählten Arbeitsablauf. Der genaue Lieferumfang wird im Angebot beschrieben. Im Gespräch prüfen wir, welcher Einstieg zu Ihrer Ausgangslage passt und welche Vorarbeiten bereits vorhanden sind. Das Angebot hält Ergebnisse, Mitwirkung, Zeitrahmen und Kosten fest, bevor Sie sich entscheiden.",
+            "nl": "Markenstart legt de merk- en webpresentatie vast. Wachstum verbindt campagne en landingspagina. KI im Betrieb ontwikkelt een gekozen werkproces. De exacte oplevering staat in de offerte. In het gesprek bekijken we welk startpunt past en wat er al aanwezig is. De offerte beschrijft resultaten, uw bijdrage, planning en kosten voordat u beslist.",
+            "fr": "Markenstart pose l’identité et le site. Wachstum relie campagne et page d’atterrissage. KI im Betrieb développe un processus choisi. Le devis précise exactement les livrables. Nous examinons ensemble le point de départ adapté et les éléments déjà disponibles. L’offre décrit les résultats, votre participation, le calendrier et les coûts avant votre décision.",
+            "en": "Markenstart establishes the brand and web presence. Wachstum links campaign and landing page. KI im Betrieb develops a selected workflow. The proposal specifies the exact deliverables. We discuss which starting point fits and what you already have. The proposal sets out deliverables, your contribution, timing and costs before you decide."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1298,10 +1298,10 @@
             "en": "Add the options that matter"
           },
           "body": {
-            "de": "Zusätzliche Inhalte, Sprachen, Integrationen, Ads und NeXify Care werden einzeln zugeordnet. So bleibt erkennbar, was zum Start gehört und welche Erweiterung Sie später beauftragen können.",
-            "nl": "Extra inhoud, talen, integraties, Ads en NeXify Care worden afzonderlijk toegewezen. Zo ziet u wat bij de start hoort en welke uitbreiding later kan volgen.",
-            "fr": "Contenus, langues, intégrations, publicité et NeXify Care sont attribués séparément. Vous distinguez ainsi le lancement des extensions à commander ensuite.",
-            "en": "Additional content, languages, integrations, ads and NeXify Care are scoped individually. You can see what belongs to the initial project and what can be commissioned later."
+            "de": "Zusätzliche Inhalte, Sprachen, Integrationen, Ads und NeXify Care werden einzeln zugeordnet. So bleibt erkennbar, was zum Start gehört und welche Erweiterung Sie später beauftragen können. Beispielsweise können weitere Sprachfassungen oder eine Anbindung sinnvoll sein, wenn Zielgruppe und Datenfluss geklärt sind. Wir besprechen Abhängigkeiten und laufende Kosten, statt Optionen ungeprüft vorauszusetzen.",
+            "nl": "Extra inhoud, talen, integraties, Ads en NeXify Care worden afzonderlijk toegewezen. Zo ziet u wat bij de start hoort en welke uitbreiding later kan volgen. Extra talen of een koppeling kunnen bijvoorbeeld zinvol zijn als doelgroep en gegevensstroom duidelijk zijn. We bespreken afhankelijkheden en terugkerende kosten voordat opties worden gekozen.",
+            "fr": "Contenus, langues, intégrations, publicité et NeXify Care sont attribués séparément. Vous distinguez ainsi le lancement des extensions à commander ensuite. Des langues supplémentaires ou une connexion peuvent être utiles lorsque public et flux de données sont définis. Nous examinons les dépendances et les frais récurrents avant de retenir une option.",
+            "en": "Additional content, languages, integrations, ads and NeXify Care are scoped individually. You can see what belongs to the initial project and what can be commissioned later. Additional languages or an integration may be useful once the audience and data flow are clear. We discuss dependencies and ongoing costs before including an option."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1367,10 +1367,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -1435,10 +1435,10 @@
             "en": "Wachstum as a scoped project"
           },
           "body": {
-            "de": "Kampagnenkonzept, Texte, Bild- oder Videomotive und Zielseite werden aufeinander abgestimmt. Der Auftrag benennt Kanäle, Formate und Lieferumfang; zusätzliche Varianten sind gezielte Optionen.",
-            "nl": "Campagneconcept, teksten, beeld of video en landingspagina worden op elkaar afgestemd. De opdracht benoemt kanalen, formaten en oplevering; extra varianten zijn gerichte opties.",
-            "fr": "Concept, textes, images ou vidéos et page d’atterrissage sont coordonnés. La mission définit canaux, formats et livrables ; les variantes supplémentaires constituent des options ciblées.",
-            "en": "Campaign concept, copy, image or video assets and landing page are coordinated. The assignment defines channels, formats and deliverables; additional variants are targeted options."
+            "de": "Kampagnenkonzept, Texte, Bild- oder Videomotive und Zielseite werden aufeinander abgestimmt. Der Auftrag benennt Kanäle, Formate und Lieferumfang; zusätzliche Varianten sind gezielte Optionen. Am Anfang stehen Angebot, Zielgruppe und die gewünschte Reaktion. Darauf bauen Botschaft und Zielseite auf; vorhandene Markenmaterialien und Freigabewege beziehen wir in die Planung ein.",
+            "nl": "Campagneconcept, teksten, beeld of video en landingspagina worden op elkaar afgestemd. De opdracht benoemt kanalen, formaten en oplevering; extra varianten zijn gerichte opties. We beginnen met uw aanbod, doelgroep en gewenste reactie. Daarop baseren we boodschap en landingspagina; bestaand merkmateriaal en goedkeuringsstappen worden meegenomen.",
+            "fr": "Concept, textes, images ou vidéos et page d’atterrissage sont coordonnés. La mission définit canaux, formats et livrables ; les variantes supplémentaires constituent des options ciblées. Nous partons de votre offre, du public visé et de la réaction souhaitée. Le message et la page en découlent, en tenant compte des supports existants et des validations nécessaires.",
+            "en": "Campaign concept, copy, image or video assets and landing page are coordinated. The assignment defines channels, formats and deliverables; additional variants are targeted options. We start with your offer, audience and desired response. The message and landing page follow from that, with existing brand material and approval steps considered in the plan."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1462,10 +1462,10 @@
             "en": "Ads with an agreed budget"
           },
           "body": {
-            "de": "Medienbudget, Gestaltung und Kampagnenbetreuung werden getrennt vereinbart. Für Veröffentlichung, Messung und Optimierung legen wir Zuständigkeiten und zulässige Datenquellen fest; ein Entwurf ist noch keine aktive Anzeige.",
-            "nl": "Mediabudget, creatie en campagnebeheer worden apart afgesproken. Voor publicatie, meting en optimalisatie leggen we verantwoordelijkheden en toegestane gegevensbronnen vast; een concept is nog geen actieve advertentie.",
-            "fr": "Budget média, création et suivi sont convenus séparément. Diffusion, mesure et optimisation ont des responsables et des sources de données autorisées ; un brouillon n’est pas une publicité active.",
-            "en": "Media spend, creative work and campaign management are agreed separately. Publication, measurement and optimisation have defined owners and permitted data sources; a draft is not an active advertisement."
+            "de": "Medienbudget, Gestaltung und Kampagnenbetreuung werden getrennt vereinbart. Für Veröffentlichung, Messung und Optimierung legen wir Zuständigkeiten und zulässige Datenquellen fest; ein Entwurf ist noch keine aktive Anzeige. Vor einem Start klären wir, wer Konten und Zugänge bereitstellt, welche Inhalte freigegeben sind und welche Messung zulässig ist. Ergebnisse hängen unter anderem von Angebot, Zielgruppe, Wettbewerb und Budget ab; ein bestimmter Erfolg wird nicht zugesagt.",
+            "nl": "Mediabudget, creatie en campagnebeheer worden apart afgesproken. Voor publicatie, meting en optimalisatie leggen we verantwoordelijkheden en toegestane gegevensbronnen vast; een concept is nog geen actieve advertentie. Voor de start bespreken we wie accounts en toegang verzorgt, welke inhoud is goedgekeurd en welke meting is toegestaan. Resultaten hangen onder meer af van aanbod, doelgroep, concurrentie en budget; een resultaat wordt niet gegarandeerd.",
+            "fr": "Budget média, création et suivi sont convenus séparément. Diffusion, mesure et optimisation ont des responsables et des sources de données autorisées ; un brouillon n’est pas une publicité active. Avant le lancement, nous clarifions les comptes, les accès, les contenus validés et les mesures autorisées. Les résultats dépendent notamment de l’offre, du public, de la concurrence et du budget ; aucun résultat précis n’est garanti.",
+            "en": "Media spend, creative work and campaign management are agreed separately. Publication, measurement and optimisation have defined owners and permitted data sources; a draft is not an active advertisement. Before launch we clarify account access, approved content and permitted measurement. Results depend on the offer, audience, competition and budget among other factors; no particular outcome is guaranteed."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1593,10 +1593,10 @@
             "en": "Three cost categories, clearly assigned"
           },
           "body": {
-            "de": "Die Umsetzung umfasst die vereinbarten Projektleistungen. NeXify Care beschreibt eine separat beauftragte Betreuung. Modell- und Infrastrukturverbrauch wird nach dem jeweiligen Vertrag ausgewiesen.",
-            "nl": "De uitvoering omvat de afgesproken projectdiensten. NeXify Care beschrijft afzonderlijk opgedragen begeleiding. Model- en infrastructuurverbruik wordt volgens de betreffende overeenkomst vermeld.",
-            "fr": "La réalisation couvre les prestations convenues. NeXify Care encadre un suivi commandé séparément. Les consommations de modèles et d’infrastructure figurent selon le contrat applicable.",
-            "en": "Implementation covers the agreed project services. NeXify Care defines separately commissioned support. Model and infrastructure usage is itemised under the applicable agreement."
+            "de": "Das Angebot unterscheidet die einmalige Projektarbeit vom späteren Betrieb. Zur Umsetzung gehören die jeweils vereinbarten Leistungen, etwa Konzeption, Texte, Gestaltung und technische Entwicklung. Der Umfang bestimmt den Aufwand.\n\nBetreuung wird separat beauftragt. Kosten für externe Dienste, Hosting, Modellnutzung oder Werbebudget werden entsprechend den geltenden Vereinbarungen getrennt ausgewiesen.",
+            "nl": "De offerte maakt onderscheid tussen eenmalig projectwerk en later beheer. De uitvoering omvat de afgesproken diensten, zoals concept, teksten, ontwerp en technische ontwikkeling. De omvang bepaalt de benodigde inzet.\n\nBeheer wordt afzonderlijk opgedragen. Kosten voor externe diensten, hosting, modelgebruik of advertentiebudget worden volgens de geldende afspraken apart vermeld.",
+            "fr": "Le devis distingue le travail initial du projet et son exploitation ultérieure. La réalisation comprend les prestations convenues, par exemple conception, textes, design et développement technique. Le périmètre détermine le travail nécessaire.\n\nLe suivi fait l’objet d’une commande distincte. Les coûts des services externes, de l’hébergement, des modèles ou de la publicité sont indiqués séparément selon les accords applicables.",
+            "en": "The proposal separates one-time project work from later operation. Implementation covers the agreed services, such as concept, copy, design and technical development. The scope determines the work involved.\n\nSupport is commissioned separately. Costs for external services, hosting, model usage or advertising are shown separately under the applicable agreements."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1621,10 +1621,10 @@
             "en": "Your budget shapes the starting point"
           },
           "body": {
-            "de": "Wir priorisieren den Lieferumfang und beziffern Optionen im Angebot. Bei Kampagnen werden Gestaltung, Betreuung und Medienbudget getrennt vereinbart. Zusätzliche Arbeit wird vor ihrer Beauftragung abgestimmt.",
-            "nl": "We prioriteren de oplevering en begroten opties in de offerte. Voor campagnes worden creatie, beheer en mediabudget apart afgesproken. Extra werk wordt vooraf afgestemd.",
-            "fr": "Nous priorisons les livrables et chiffrons les options au devis. Création, suivi et budget média des campagnes font l’objet d’accords distincts. Les travaux supplémentaires sont convenus avant commande.",
-            "en": "We prioritise deliverables and price options in the proposal. Campaign creative, management and media spend are agreed separately. Additional work is discussed before it is commissioned."
+            "de": "Wenn Budget oder Zeit begrenzt sind, legen wir gemeinsam fest, welches Ergebnis zuerst gebraucht wird. Daraus entsteht ein abgegrenzter Einstieg; weitere Funktionen und Leistungen können als Optionen beschrieben werden.\n\nVor einer Beauftragung erhalten Sie einen nachvollziehbaren Umfang mit den vereinbarten Kosten. Zusätzliche Arbeit sowie ein mögliches Kampagnenbudget werden gesondert abgestimmt.",
+            "nl": "Als budget of tijd beperkt is, bepalen we samen welk resultaat eerst nodig is. Daaruit ontstaat een afgebakende eerste stap; extra functies en diensten kunnen als opties worden beschreven.\n\nVoor de opdracht ontvangt u een duidelijke omvang met de afgesproken kosten. Extra werk en een eventueel campagnebudget worden afzonderlijk afgestemd.",
+            "fr": "Lorsque le budget ou le temps est limité, nous déterminons ensemble le résultat prioritaire. Cela permet de définir une première étape délimitée et de présenter les fonctions supplémentaires en option.\n\nAvant toute commande, vous recevez un périmètre clair et les coûts convenus. Les travaux supplémentaires et un éventuel budget de campagne sont discutés séparément.",
+            "en": "When budget or time is limited, we agree which outcome is needed first. That creates a defined starting scope, with further features and services described as options.\n\nBefore commissioning, you receive a clear scope and agreed costs. Additional work and any campaign budget are discussed separately."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1692,10 +1692,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -1771,10 +1771,10 @@
             "en": "From positioning to a project element"
           },
           "body": {
-            "de": "Zuerst bestimmen wir Zielgruppe, Angebot und gewünschte Wirkung. Daraus folgen Designlinie, Inhalte, Funktionen und der passende Projektumfang. Jede Entscheidung bekommt einen Bezug zum Auftrag.",
-            "nl": "Eerst bepalen we doelgroep, aanbod en gewenste werking. Daaruit volgen ontwerp, inhoud, functies en projectomvang. Elke beslissing krijgt een verband met de opdracht.",
-            "fr": "Nous définissons d’abord public, offre et effet recherché. Ils guident la ligne créative, les contenus, les fonctions et le périmètre. Chaque décision se rattache à la mission.",
-            "en": "We first define audience, offer and intended effect. These guide the design direction, content, features and project scope. Each decision relates to the assignment."
+            "de": "Zuerst bestimmen wir Zielgruppe, Angebot und gewünschte Wirkung. Daraus folgen Designlinie, Inhalte, Funktionen und der passende Projektumfang. Jede Entscheidung bekommt einen Bezug zum Auftrag. Ein Beispiel: Soll eine Website mehr qualifizierte Anfragen ermöglichen, betrachten wir zuerst Angebot und Zielgruppe, dann Seitenführung und Kontaktweg. So lässt sich erklären, warum ein Baustein im Projekt vorgesehen ist.",
+            "nl": "Eerst bepalen we doelgroep, aanbod en gewenste werking. Daaruit volgen ontwerp, inhoud, functies en projectomvang. Elke beslissing krijgt een verband met de opdracht. Een voorbeeld: moet een website meer passende aanvragen opleveren, dan bekijken we eerst aanbod en doelgroep en daarna navigatie en contactroute. Zo wordt duidelijk waarom een onderdeel in het project zit.",
+            "fr": "Nous définissons d’abord public, offre et effet recherché. Ils guident la ligne créative, les contenus, les fonctions et le périmètre. Chaque décision se rattache à la mission. Par exemple, si un site doit faciliter des demandes pertinentes, nous examinons d’abord l’offre et le public, puis le parcours et le contact. Chaque élément peut ainsi être relié à son objectif.",
+            "en": "We first define audience, offer and intended effect. These guide the design direction, content, features and project scope. Each decision relates to the assignment. For example, if a website should support more relevant enquiries, we first examine the offer and audience, then the page journey and contact route. That makes the purpose of each element clear."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1796,10 +1796,10 @@
             "en": "A result you can take over"
           },
           "body": {
-            "de": "Zur vereinbarten Übergabe gehören die zugeordneten Dateien, Dokumentation und Einweisung. Pflege und Quellenaktualisierung werden als eigene Betriebsaufgaben mit Zuständigkeit und Umfang geplant.",
-            "nl": "De afgesproken overdracht omvat de bijbehorende bestanden, documentatie en uitleg. Onderhoud en bronactualisatie worden als beheertaken met verantwoordelijkheid en omvang gepland.",
-            "fr": "La livraison convenue comprend fichiers, documentation et prise en main. Maintenance et actualisation des sources sont prévues comme tâches d’exploitation avec responsable et périmètre.",
-            "en": "The agreed handover includes the assigned files, documentation and onboarding. Maintenance and source updates are planned as operating tasks with an owner and defined scope."
+            "de": "Welche Dateien, Dokumentation und Einweisung zur Übergabe gehören, wird im individuellen Angebot vereinbart. Pflege und Quellenaktualisierung werden als eigene Betriebsaufgaben mit Zuständigkeit und Umfang geplant. Welche Unterlagen und Zugänge übergeben werden, steht im Projektumfang. Offene Punkte, Verantwortliche und vereinbarte nächste Schritte werden bei der Übergabe nachvollziehbar festgehalten.",
+            "nl": "Welke bestanden, documentatie en toelichting worden overgedragen, wordt in de individuele offerte afgesproken. Onderhoud en bronactualisatie worden als beheertaken met verantwoordelijkheid en omvang gepland. Welke bestanden en toegangen worden overgedragen, staat in de projectscope. Openstaande punten, verantwoordelijken en afgesproken vervolgstappen worden bij de overdracht vastgelegd.",
+            "fr": "Les fichiers, la documentation et l’accompagnement à la prise en main inclus dans la remise sont définis dans l’offre individuelle. Maintenance et actualisation des sources sont prévues comme tâches d’exploitation avec responsable et périmètre. Les fichiers et accès remis sont définis dans le périmètre du projet. Les points ouverts, responsables et prochaines étapes convenues sont documentés lors de la remise.",
+            "en": "The individual proposal specifies which files, documentation and onboarding are included in the handover. Maintenance and source updates are planned as operating tasks with an owner and defined scope. The project scope specifies which files and access are handed over. Open items, owners and agreed next steps are documented at handover."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1879,10 +1879,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         }
       ],
@@ -1925,10 +1925,10 @@
             "en": "Start with the brand and business"
           },
           "body": {
-            "de": "Was verkaufen Sie, für wen und mit welchem Anspruch? Vorhandene Markenunterlagen, Inhalte und gute Beispiele helfen bei der Richtung. Budgetrahmen und Wunschtermin gehören ebenfalls ins Briefing.",
-            "nl": "Wat verkoopt u, aan wie en met welke ambitie? Bestaande merkdocumenten, inhoud en goede voorbeelden helpen de richting bepalen. Budget en gewenste planning horen ook in de briefing.",
-            "fr": "Que proposez-vous, à qui et avec quelle ambition ? Documents de marque, contenus et références précisent la direction. Enveloppe budgétaire et calendrier souhaité complètent le brief.",
-            "en": "What do you offer, to whom and with what ambition? Existing brand material, content and references help establish direction. Include a budget range and preferred timeline."
+            "de": "Was verkaufen Sie, für wen und mit welchem Anspruch? Vorhandene Markenunterlagen, Inhalte und gute Beispiele helfen bei der Richtung. Budgetrahmen und Wunschtermin gehören ebenfalls ins Briefing. Beschreiben Sie auch, was heute gut funktioniert und wo Kunden abspringen oder Fragen offenbleiben. Sie müssen noch kein fertiges Konzept haben: Eine ehrliche Ausgangslage hilft, die nächsten Schritte gemeinsam festzulegen.",
+            "nl": "Wat verkoopt u, aan wie en met welke ambitie? Bestaande merkdocumenten, inhoud en goede voorbeelden helpen de richting bepalen. Budget en gewenste planning horen ook in de briefing. Beschrijf ook wat nu goed werkt en waar klanten afhaken of vragen houden. Een uitgewerkt concept is nog niet nodig: een helder vertrekpunt helpt om samen vervolgstappen te bepalen.",
+            "fr": "Que proposez-vous, à qui et avec quelle ambition ? Documents de marque, contenus et références précisent la direction. Enveloppe budgétaire et calendrier souhaité complètent le brief. Précisez aussi ce qui fonctionne déjà et où les clients hésitent ou restent sans réponse. Un concept achevé n’est pas nécessaire : une situation de départ claire aide à définir la suite.",
+            "en": "What do you offer, to whom and with what ambition? Existing brand material, content and references help establish direction. Include a budget range and preferred timeline. Also describe what works today and where customers hesitate or questions remain unanswered. You do not need a finished concept; a clear starting point helps us agree the next steps."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -1950,10 +1950,10 @@
             "en": "Include systems and support"
           },
           "body": {
-            "de": "Benennen Sie vorhandene Systeme und die Personen, die mitentscheiden. Für neue Verbindungen klären wir Daten, Rechte und Abhängigkeiten; Zugangsdaten gehören nicht in eine offene Projektbeschreibung.",
-            "nl": "Noem bestaande systemen en de mensen die meebeslissen. Voor nieuwe koppelingen bespreken we gegevens, rechten en afhankelijkheden; deel geen inloggegevens in een open projectomschrijving.",
-            "fr": "Indiquez les systèmes existants et les décideurs. Nous clarifions données, droits et dépendances des connexions ; les identifiants ne vont pas dans une description de projet ouverte.",
-            "en": "Identify existing systems and the people involved in decisions. New connections require data, permissions and dependencies to be defined; credentials do not belong in an open project description."
+            "de": "Benennen Sie vorhandene Systeme und die Personen, die mitentscheiden. Für neue Verbindungen klären wir Daten, Rechte und Abhängigkeiten; Zugangsdaten gehören nicht in eine offene Projektbeschreibung. Notieren Sie, welche Website, Shopsoftware oder Schnittstellen bereits genutzt werden und welche Aufgaben künftig einfacher sein sollen. Vertrauliche Zugangsdaten werden erst über einen abgestimmten sicheren Weg ausgetauscht.",
+            "nl": "Noem bestaande systemen en de mensen die meebeslissen. Voor nieuwe koppelingen bespreken we gegevens, rechten en afhankelijkheden; deel geen inloggegevens in een open projectomschrijving. Noteer welke website, shopsoftware of koppelingen u al gebruikt en welke taken eenvoudiger moeten worden. Vertrouwelijke toegang wordt pas via een afgesproken veilige weg gedeeld.",
+            "fr": "Indiquez les systèmes existants et les décideurs. Nous clarifions données, droits et dépendances des connexions ; les identifiants ne vont pas dans une description de projet ouverte. Indiquez les sites, logiciels de vente ou interfaces déjà utilisés et les tâches à simplifier. Les accès confidentiels ne sont échangés que par un moyen sécurisé convenu.",
+            "en": "Identify existing systems and the people involved in decisions. New connections require data, permissions and dependencies to be defined; credentials do not belong in an open project description. Note the website, shop software or integrations already in use and which tasks should become easier. Confidential access details are shared only through an agreed secure channel."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2014,10 +2014,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -2092,10 +2092,10 @@
             "en": "Personally guided, jointly delivered"
           },
           "body": {
-            "de": "Pascal Courbois ist Ihr fachlicher Ansprechpartner für die Ausrichtung. Je nach Auftrag werden Gestaltung, Inhalte, Systementwicklung und Betreuung zu einem nachvollziehbaren Leistungsumfang verbunden.",
-            "nl": "Pascal Courbois is uw inhoudelijke aanspreekpunt voor de richting. Afhankelijk van de opdracht verbinden we ontwerp, inhoud, systeemontwikkeling en begeleiding tot een inzichtelijk geheel.",
-            "fr": "Pascal Courbois est votre interlocuteur pour l’orientation du projet. Selon la mission, création, contenus, développement et suivi composent un périmètre de prestations lisible.",
-            "en": "Pascal Courbois is your contact for the project’s direction. Design, content, systems development and support are combined into a transparent scope according to the assignment."
+            "de": "Pascal Courbois ist Ihr fachlicher Ansprechpartner für die Ausrichtung Ihres Vorhabens. Im ersten Gespräch geht es um Ihr Unternehmen, Ihre Kunden und das Ergebnis, das Sie erreichen möchten.\n\nJe nach Auftrag werden Gestaltung, Inhalte, Systementwicklung und Betreuung zu einem nachvollziehbaren Leistungsumfang verbunden. Sie erhalten vor der Beauftragung Klarheit über die vereinbarten Leistungen und nächsten Schritte.",
+            "nl": "Pascal Courbois is uw inhoudelijke aanspreekpunt voor de richting van uw project. In het eerste gesprek bespreken we uw bedrijf, uw klanten en het resultaat dat u wilt bereiken.\n\nAfhankelijk van de opdracht worden ontwerp, inhoud, systeemontwikkeling en ondersteuning in een duidelijke omvang samengebracht. Voor de opdracht krijgt u inzicht in de afgesproken diensten en volgende stappen.",
+            "fr": "Pascal Courbois est votre interlocuteur pour l’orientation de votre projet. Le premier échange porte sur votre entreprise, vos clients et le résultat recherché.\n\nSelon la mission, design, contenus, développement et suivi sont réunis dans un périmètre compréhensible. Avant la commande, les prestations et prochaines étapes sont précisées.",
+            "en": "Pascal Courbois is your contact for the direction of your project. The first conversation covers your business, your customers and the outcome you want to achieve.\n\nDepending on the assignment, design, content, system development and support are brought together in a clear scope. Before commissioning, the agreed services and next steps are made explicit."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2117,10 +2117,10 @@
             "en": "A brand portfolio with distinct offers"
           },
           "body": {
-            "de": "NeXify AI führt den Agenturauftritt. NeX2fly bleibt das eigenständige Selfservice-Produkt; NeX und Oracle gehören zum KI-Konzept. TEILEKLAR erhält einen eigenen Handels- und Werkstattkontext.",
-            "nl": "NeXify AI voert de bureaupresentatie. NeX2fly blijft het zelfstandige selfserviceproduct; NeX en Oracle horen bij het AI-concept. TEILEKLAR heeft een eigen handels- en werkplaatscontext.",
-            "fr": "NeXify AI porte la présence de l’agence. NeX2fly reste un produit autonome en libre-service ; NeX et Oracle relèvent du concept IA. TEILEKLAR conserve son contexte commercial et atelier.",
-            "en": "NeXify AI leads the agency presence. NeX2fly remains an independent self-service product; NeX and Oracle form part of the AI concept. TEILEKLAR keeps its own trading and workshop context."
+            "de": "NeXify AI ist das Dach für den Agenturauftritt und die Projektarbeit. NeX2fly ist als eigenständiger Arbeitsbereich vorgesehen; NeX und Oracle beschreiben Rollen im KI-Konzept.\n\nTEILEKLAR.shop hat eine eigene Marke und einen eigenen Handels- und Werkstattkontext. Welche Angebote und Funktionen jeweils verfügbar sind, wird auf der zugehörigen Seite und für den konkreten Zugang geklärt.",
+            "nl": "NeXify AI is de overkoepelende naam voor de bureauactiviteiten en projectwerkzaamheden. NeX2fly is bedoeld als zelfstandige werkomgeving; NeX en Oracle beschrijven rollen binnen het AI-concept.\n\nTEILEKLAR.shop heeft een eigen merk en een eigen handels- en werkplaatscontext. Welke aanbiedingen en functies beschikbaar zijn, wordt op de betreffende pagina en voor de concrete toegang verduidelijkt.",
+            "fr": "NeXify AI regroupe l’activité de l’agence et les projets. NeX2fly est prévu comme espace de travail distinct ; NeX et Oracle décrivent des rôles dans le concept IA.\n\nTEILEKLAR.shop conserve sa propre marque et son contexte commercial et atelier. Les offres et fonctions disponibles sont précisées sur la page concernée et pour chaque accès.",
+            "en": "NeXify AI is the umbrella for the agency and project work. NeX2fly is intended as a separate workspace; NeX and Oracle describe roles in the AI concept.\n\nTEILEKLAR.shop has its own brand and a distinct commerce and workshop context. Available offers and functions are clarified on the relevant page and for the specific access."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2180,10 +2180,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -2224,16 +2224,16 @@
       "id": "contact",
       "path": "/kontakt",
       "title": {
-        "de": "Ihr Projekt an die Factory",
-        "nl": "Uw project naar de Factory",
-        "fr": "Votre projet à la Factory",
-        "en": "Bring your project to the Factory"
+        "de": "Sprechen wir über Ihr Vorhaben.",
+        "nl": "Laten we uw plannen bespreken.",
+        "fr": "Parlons de votre projet.",
+        "en": "Let’s talk about your project."
       },
       "summary": {
-        "de": "Markenauftritt, digitale Abläufe oder eine neue Kampagne: Beschreiben Sie, was Sie aufbauen möchten. Gemeinsam ordnen wir den passenden Auftrag und seine Optionen zu.",
-        "nl": "Merkpresentatie, digitale processen of een nieuwe campagne: beschrijf wat u wilt opbouwen. Samen bepalen we de passende opdracht en opties.",
-        "fr": "Image de marque, processus numériques ou nouvelle campagne : décrivez ce que vous souhaitez construire. Nous définissons ensemble la mission et ses options.",
-        "en": "Brand presence, digital workflows or a new campaign: tell us what you want to build. Together, we define the appropriate assignment and options."
+        "de": "Eine neue Website, ein digitaler Ablauf oder eine Kampagne: Erzählen Sie uns, was Sie vorhaben. Wir klären gemeinsam, was Sie brauchen und wie ein nächster Schritt aussehen kann.",
+        "nl": "Een nieuwe website, een digitaal proces of een campagne: vertel ons wat u voor ogen heeft. Samen bespreken we wat u nodig heeft en wat een volgende stap kan zijn.",
+        "fr": "Un nouveau site, un processus numérique ou une campagne : racontez-nous votre projet. Ensemble, nous clarifions vos besoins et la prochaine étape.",
+        "en": "A new website, a digital workflow or a campaign: tell us what you have in mind. Together, we’ll clarify what you need and what the next step could be."
       },
       "site_context": "nexify",
       "sections": [
@@ -2246,10 +2246,10 @@
             "en": "A brief is enough to begin"
           },
           "body": {
-            "de": "Nennen Sie Ihr Unternehmen, Ihr Angebot und die gewünschte Veränderung. Ein Budgetrahmen, ein Wunschtermin und vorhandene Unterlagen helfen bei der fachlichen Einordnung.",
-            "nl": "Noem uw bedrijf, uw aanbod en de gewenste verandering. Een budgetindicatie, gewenste planning en bestaande documenten helpen bij de inhoudelijke beoordeling.",
-            "fr": "Présentez votre entreprise, votre offre et le changement recherché. Budget indicatif, calendrier souhaité et documents existants facilitent la préparation.",
-            "en": "Tell us about your business, your offer and the change you want. A budget range, preferred timeline and existing material help us assess the project."
+            "de": "Ein paar Sätze reichen für den Anfang: Was bietet Ihr Unternehmen an, wen möchten Sie erreichen und was soll sich verändern? Sie können auch beschreiben, wo ein bestehender Ablauf oder Auftritt heute Schwierigkeiten macht.\n\nFalls bereits vorhanden, helfen ein ungefährer Zeitrahmen, ein Budgetrahmen und relevante Unterlagen bei der Einordnung. Fehlende Angaben können wir im Gespräch klären.",
+            "nl": "Een paar zinnen zijn genoeg om te beginnen: wat biedt uw bedrijf aan, wie wilt u bereiken en wat moet er veranderen? U kunt ook aangeven waar een bestaand proces of uw huidige presentatie problemen geeft.\n\nEen globale planning, budgetindicatie en relevante documenten helpen bij de beoordeling als u die al heeft. Ontbrekende informatie kunnen we samen bespreken.",
+            "fr": "Quelques phrases suffisent pour commencer : que propose votre entreprise, qui souhaitez-vous atteindre et que voulez-vous changer ? Vous pouvez aussi décrire les difficultés d’un processus ou d’une présence existante.\n\nSi vous les avez déjà, un calendrier indicatif, un budget et des documents utiles facilitent la préparation. Les informations manquantes pourront être clarifiées ensemble.",
+            "en": "A few sentences are enough to start: what does your business offer, who do you want to reach and what should change? You can also describe where an existing workflow or website is causing difficulty.\n\nIf available, an approximate timeline, budget range and relevant materials help us understand the project. Missing details can be clarified in conversation."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2271,10 +2271,10 @@
             "en": "Enquiry, proposal, assignment"
           },
           "body": {
-            "de": "Wir klären die offenen Punkte und beschreiben den Leistungsumfang im Angebot. Termine, Umsetzung, Betreuung und externe Budgets werden ausdrücklich vereinbart; eine erste Anfrage löst keine Beauftragung aus.",
-            "nl": "We bespreken de open punten en beschrijven de diensten in de offerte. Planning, uitvoering, begeleiding en externe budgetten worden expliciet afgesproken; een eerste aanvraag is geen opdracht.",
-            "fr": "Nous clarifions les questions et décrivons les prestations au devis. Calendrier, réalisation, suivi et budgets externes sont convenus explicitement ; une demande initiale ne vaut pas commande.",
-            "en": "We clarify open questions and describe the scope in a proposal. Schedule, implementation, support and external budgets are explicitly agreed; an initial enquiry is not an order."
+            "de": "Nach Ihrer Anfrage klären wir die offenen Punkte und prüfen, welcher Leistungsumfang zu Ihrem Ziel passt. Ein Angebot beschreibt die vereinbarten Leistungen und die vorgesehenen Kosten.\n\nTermine, Umsetzung, Betreuung und externe Budgets werden ausdrücklich vereinbart. Eine erste Anfrage löst noch keine Beauftragung aus; ob sie übermittelt wurde, zeigt die Bestätigung des gewählten Kontaktwegs.",
+            "nl": "Na uw aanvraag bespreken we de open punten en beoordelen we welke omvang bij uw doel past. Een offerte beschrijft de afgesproken diensten en verwachte kosten.\n\nPlanning, uitvoering, ondersteuning en externe budgetten worden expliciet afgesproken. Een eerste aanvraag is nog geen opdracht; de bevestiging van de gekozen contactroute laat zien of zij is verzonden.",
+            "fr": "Après votre demande, nous clarifions les points ouverts et examinons le périmètre adapté à votre objectif. Un devis décrit les prestations convenues et les coûts prévus.\n\nCalendrier, réalisation, suivi et budgets externes sont convenus explicitement. Une première demande ne vaut pas commande ; la confirmation du canal choisi indique si elle a été transmise.",
+            "en": "After your enquiry, we clarify open questions and assess which scope fits your goal. A proposal describes the agreed services and expected costs.\n\nSchedule, implementation, support and external budgets are explicitly agreed. An initial enquiry is not an order; the confirmation on the chosen contact route indicates whether it was sent."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2290,20 +2290,20 @@
       ],
       "metadata": {
         "description": {
-          "de": "Markenauftritt, digitale Abläufe oder eine neue Kampagne: Beschreiben Sie, was Sie aufbauen möchten. Gemeinsam ordnen wir den passenden Auftrag und seine Optionen zu.",
-          "nl": "Merkpresentatie, digitale processen of een nieuwe campagne: beschrijf wat u wilt opbouwen. Samen bepalen we de passende opdracht en opties.",
-          "fr": "Image de marque, processus numériques ou nouvelle campagne : décrivez ce que vous souhaitez construire. Nous définissons ensemble la mission et ses options.",
-          "en": "Brand presence, digital workflows or a new campaign: tell us what you want to build. Together, we define the appropriate assignment and options."
+          "de": "Eine neue Website, ein digitaler Ablauf oder eine Kampagne: Erzählen Sie uns, was Sie vorhaben. Wir klären gemeinsam, was Sie brauchen und wie ein nächster Schritt aussehen kann.",
+          "nl": "Een nieuwe website, een digitaal proces of een campagne: vertel ons wat u voor ogen heeft. Samen bespreken we wat u nodig heeft en wat een volgende stap kan zijn.",
+          "fr": "Un nouveau site, un processus numérique ou une campagne : racontez-nous votre projet. Ensemble, nous clarifions vos besoins et la prochaine étape.",
+          "en": "A new website, a digital workflow or a campaign: tell us what you have in mind. Together, we’ll clarify what you need and what the next step could be."
         },
         "canonical_path": "/kontakt",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "index,follow",
         "title": {
-          "de": "Ihr Projekt an die Factory",
-          "nl": "Uw project naar de Factory",
-          "fr": "Votre projet à la Factory",
-          "en": "Bring your project to the Factory"
+          "de": "Sprechen wir über Ihr Vorhaben.",
+          "nl": "Laten we uw plannen bespreken.",
+          "fr": "Parlons de votre projet.",
+          "en": "Let’s talk about your project."
         }
       },
       "access": {
@@ -2422,10 +2422,10 @@
         "en": "NeX2fly. Your own working environment."
       },
       "summary": {
-        "de": "Die separate Selfservice-Suite im NeXify-Portfolio verbindet Gespräche, Aufgaben und Projektwissen. Zugang und Funktionsumfang werden für Ihren eigenen Arbeitsbereich geklärt.",
-        "nl": "De afzonderlijke selfservicesuite in het NeXify-aanbod verbindt gesprekken, taken en projectkennis. Toegang en functies worden voor uw eigen werkomgeving afgestemd.",
-        "fr": "La suite autonome en libre-service de NeXify relie conversations, tâches et connaissances projet. Accès et fonctionnalités sont définis pour votre propre espace.",
-        "en": "The separate self-service suite within the NeXify portfolio connects conversations, tasks and project knowledge. Access and features are defined for your own workspace."
+        "de": "NeX2fly ist als eigener Arbeitsbereich für Gespräche, Aufgaben und Projektwissen vorgesehen. Welche Funktionen und Verbindungen verfügbar sind, wird bei der Freischaltung geklärt.",
+        "nl": "NeX2fly is bedoeld als eigen werkomgeving voor gesprekken, taken en projectkennis. Welke functies en koppelingen beschikbaar zijn, wordt bij activering afgestemd.",
+        "fr": "NeX2fly est conçu comme un espace de travail pour les conversations, les tâches et les connaissances projet. Les fonctions et connexions disponibles sont précisées à l’activation.",
+        "en": "NeX2fly is intended as a workspace for conversations, tasks and project knowledge. Available features and connections are confirmed when access is enabled."
       },
       "site_context": "nexify",
       "sections": [
@@ -2438,10 +2438,10 @@
             "en": "Your workspace, your project context"
           },
           "body": {
-            "de": "NeX2fly ist für die eigene KI-gestützte Arbeit konzipiert. Gespräche und Unterlagen beziehen sich auf die zugeordneten Projekte und Aufgaben; ein Agenturauftrag bleibt ein separates Angebot.",
-            "nl": "NeX2fly is ontworpen voor uw eigen AI-ondersteunde werk. Gesprekken en documenten horen bij de toegewezen projecten en taken; een bureauopdracht blijft een afzonderlijk aanbod.",
-            "fr": "NeX2fly est conçu pour votre propre travail assisté par IA. Conversations et documents se rattachent aux projets et tâches attribués ; une mission d’agence reste une offre distincte.",
-            "en": "NeX2fly is designed for your own AI-supported work. Conversations and material relate to assigned projects and tasks; agency work remains a separate offer."
+            "de": "NeX2fly ist als eigener Arbeitsbereich für KI-gestützte Arbeit konzipiert. Ziel ist, Gespräche und Unterlagen im Zusammenhang mit den jeweils zugeordneten Projekten und Aufgaben zugänglich zu machen.\n\nEin eigener Arbeitsbereich und ein Agenturauftrag sind unterschiedliche Angebote. Vor einer Nutzung klären wir, welcher Zugang und welche Funktionen tatsächlich bereitstehen.",
+            "nl": "NeX2fly is ontworpen als een eigen werkomgeving voor werk met AI. Het doel is gesprekken en documenten toegankelijk te maken binnen de gekoppelde projecten en taken.\n\nEen eigen werkomgeving en een bureauopdracht zijn verschillende aanbiedingen. Voor gebruik bespreken we welke toegang en functies daadwerkelijk beschikbaar zijn.",
+            "fr": "NeX2fly est conçu comme un espace personnel de travail assisté par IA. L’objectif est de rendre les conversations et documents accessibles dans le contexte des projets et tâches associés.\n\nUn espace de travail et une mission confiée à l’agence sont deux offres distinctes. Avant utilisation, nous précisons les accès et fonctions réellement disponibles.",
+            "en": "NeX2fly is designed as a workspace for AI-assisted work. Its purpose is to make conversations and materials available in the context of their assigned projects and tasks.\n\nA workspace and an agency assignment are separate offers. Before use, we clarify which access and features are actually available."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2464,10 +2464,10 @@
             "en": "Work towards a usable result"
           },
           "body": {
-            "de": "Der vorgesehene Arbeitsbereich verbindet Aufgaben, Dokumente und Ergebnisse. Welche Werkzeuge tatsächlich verfügbar sind, richtet sich nach dem freigeschalteten Umfang und den berechtigten Verbindungen.",
-            "nl": "De beoogde werkomgeving verbindt taken, documenten en resultaten. Welke hulpmiddelen beschikbaar zijn, hangt af van de geactiveerde functies en toegestane koppelingen.",
-            "fr": "L’espace prévu relie tâches, documents et résultats. Les outils effectivement accessibles dépendent du périmètre activé et des connexions autorisées.",
-            "en": "The planned workspace connects tasks, documents and outcomes. Tools actually available depend on the activated scope and authorised connections."
+            "de": "Der vorgesehene Arbeitsbereich soll Aufgaben, Dokumente und Ergebnisse zusammenführen. Welche Schritte damit möglich sind, hängt von der jeweiligen Freischaltung, den zugelassenen Werkzeugen und den verfügbaren Verbindungen ab.\n\nWir klären vorab, welche Quellen verwendet werden dürfen, wer Zugriff erhält und wie Ergebnisse weiterverwendet werden. Eine Produktbeschreibung ersetzt keine bestätigte Freischaltung oder technische Prüfung.",
+            "nl": "De beoogde werkomgeving moet taken, documenten en resultaten samenbrengen. Welke stappen mogelijk zijn, hangt af van de activering, toegestane hulpmiddelen en beschikbare koppelingen.\n\nVooraf bespreken we welke bronnen gebruikt mogen worden, wie toegang krijgt en hoe resultaten verder worden gebruikt. Een productbeschrijving is geen bevestigde activering of technische toets.",
+            "fr": "L’espace prévu doit réunir tâches, documents et résultats. Les actions possibles dépendent de l’activation, des outils autorisés et des connexions disponibles.\n\nNous définissons à l’avance les sources utilisables, les personnes autorisées et l’usage des résultats. Une description du produit ne vaut ni activation confirmée ni validation technique.",
+            "en": "The planned workspace is intended to bring tasks, documents and outcomes together. The steps available depend on the activation, authorised tools and available connections.\n\nWe agree in advance which sources may be used, who receives access and how results will be used. A product description is not a confirmed activation or technical verification."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2490,10 +2490,10 @@
             "en": "Trial access and AI budget are separate"
           },
           "body": {
-            "de": "Die vorgesehene Testphase umfasst 24 Stunden ab bestätigter Aktivierung. Modellverbrauch benötigt eine eigene Finanzierung; Zugang, Verfügbarkeit und geltende Bedingungen werden bei der Freischaltung ausgewiesen.",
-            "nl": "De voorziene testperiode duurt 24 uur vanaf bevestigde activering. Modelverbruik vraagt een eigen financiering; toegang, beschikbaarheid en voorwaarden worden bij activering vermeld.",
-            "fr": "L’essai prévu dure 24 heures après activation confirmée. La consommation de modèles nécessite son propre financement ; accès, disponibilité et conditions sont indiqués à l’activation.",
-            "en": "The planned trial lasts 24 hours from confirmed activation. Model usage requires separate funding; access, availability and applicable terms are stated when access is enabled."
+            "de": "Die vorgesehene Testphase umfasst 24 Stunden ab bestätigter Aktivierung. Sie dient dazu, den tatsächlich freigeschalteten Umfang kennenzulernen; Zugang und geltende Bedingungen werden bei der Aktivierung ausgewiesen.\n\nDie Nutzung von KI-Modellen benötigt eine eigene Finanzierung. Welche Modelle und Kosten für Ihren Zugang gelten, wird vor der Nutzung gesondert geklärt.",
+            "nl": "De voorziene testperiode duurt 24 uur vanaf bevestigde activering. Daarmee kunt u de daadwerkelijk geactiveerde functies leren kennen; toegang en voorwaarden worden bij activering vermeld.\n\nHet gebruik van AI-modellen vraagt afzonderlijke financiering. Welke modellen en kosten voor uw toegang gelden, wordt vóór gebruik apart besproken.",
+            "fr": "L’essai prévu dure 24 heures après activation confirmée. Il permet de découvrir les fonctions effectivement activées ; les accès et conditions sont indiqués à l’activation.\n\nL’utilisation de modèles d’IA nécessite un financement distinct. Les modèles et coûts applicables à votre accès sont précisés avant utilisation.",
+            "en": "The planned trial lasts 24 hours from confirmed activation. It lets you explore the features actually enabled; access and applicable terms are stated when activation takes place.\n\nAI model usage requires separate funding. The models and costs applicable to your access are clarified before use."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2516,10 +2516,10 @@
             "en": "Access assigned to your workspace"
           },
           "body": {
-            "de": "Ein Konto und ein freigeschalteter Arbeitsbereich erfüllen unterschiedliche Aufgaben. Produktzugang verleiht keine internen Agenturrollen und keinen Zugriff auf fremde Projekte oder Geschäftsdaten.",
-            "nl": "Een account en een geactiveerde werkomgeving hebben verschillende functies. Producttoegang geeft geen interne bureaurechten of toegang tot projecten en bedrijfsgegevens van anderen.",
-            "fr": "Un compte et un espace activé remplissent des fonctions différentes. L’accès produit ne confère aucun rôle interne d’agence ni accès aux projets ou données d’autrui.",
-            "en": "An account and an activated workspace serve different purposes. Product access does not grant internal agency roles or access to other people’s projects and business data."
+            "de": "Ein Konto und ein freigeschalteter Arbeitsbereich erfüllen unterschiedliche Aufgaben. Der Produktzugang verleiht keine internen Agenturrollen und keinen Zugriff auf fremde Projekte oder Geschäftsdaten.\n\nVor dem Einsatz klären wir, welche Personen auf welchen Arbeitsbereich zugreifen dürfen und welche Verbindungen hierfür tatsächlich eingerichtet sind.",
+            "nl": "Een account en een geactiveerde werkomgeving hebben verschillende functies. Producttoegang geeft geen interne bureaurollen of toegang tot projecten en bedrijfsgegevens van anderen.\n\nVoor gebruik bespreken we welke personen toegang mogen krijgen tot welke werkomgeving en welke koppelingen daadwerkelijk zijn ingericht.",
+            "fr": "Un compte et un espace de travail activé remplissent des fonctions différentes. L’accès au produit ne donne ni rôle interne à l’agence ni accès aux projets ou données d’autres personnes.\n\nAvant utilisation, nous définissons quelles personnes peuvent accéder à chaque espace et quelles connexions sont effectivement configurées.",
+            "en": "An account and an enabled workspace serve different purposes. Product access does not grant internal agency roles or access to other people’s projects or business data.\n\nBefore use, we clarify who may access each workspace and which connections are actually configured."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2536,10 +2536,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Die separate Selfservice-Suite im NeXify-Portfolio verbindet Gespräche, Aufgaben und Projektwissen. Zugang und Funktionsumfang werden für Ihren eigenen Arbeitsbereich geklärt.",
-          "nl": "De afzonderlijke selfservicesuite in het NeXify-aanbod verbindt gesprekken, taken en projectkennis. Toegang en functies worden voor uw eigen werkomgeving afgestemd.",
-          "fr": "La suite autonome en libre-service de NeXify relie conversations, tâches et connaissances projet. Accès et fonctionnalités sont définis pour votre propre espace.",
-          "en": "The separate self-service suite within the NeXify portfolio connects conversations, tasks and project knowledge. Access and features are defined for your own workspace."
+          "de": "NeX2fly ist als eigener Arbeitsbereich für Gespräche, Aufgaben und Projektwissen vorgesehen. Welche Funktionen und Verbindungen verfügbar sind, wird bei der Freischaltung geklärt.",
+          "nl": "NeX2fly is bedoeld als eigen werkomgeving voor gesprekken, taken en projectkennis. Welke functies en koppelingen beschikbaar zijn, wordt bij activering afgestemd.",
+          "fr": "NeX2fly est conçu comme un espace de travail pour les conversations, les tâches et les connaissances projet. Les fonctions et connexions disponibles sont précisées à l’activation.",
+          "en": "NeX2fly is intended as a workspace for conversations, tasks and project knowledge. Available features and connections are confirmed when access is enabled."
         },
         "canonical_path": "/produkte/nex2fly",
         "canonical_origin": null,
@@ -2581,10 +2581,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -2668,10 +2668,10 @@
             "en": "From a task to a work step"
           },
           "body": {
-            "de": "Ein Anwendungsfall benennt Eingaben, zulässige Werkzeuge und das erwartete Ergebnis. Recherche, Entwurf, Prüfung und Ausführung werden als eigene Schritte geplant und am vereinbarten Zweck bewertet.",
-            "nl": "Een toepassing benoemt invoer, toegestane hulpmiddelen en het verwachte resultaat. Onderzoek, concept, controle en uitvoering worden als afzonderlijke stappen gepland en aan het doel getoetst.",
-            "fr": "Chaque cas précise entrées, outils autorisés et résultat attendu. Recherche, préparation, vérification et exécution sont planifiées séparément et évaluées selon l’objectif convenu.",
-            "en": "A use case defines inputs, permitted tools and the expected result. Research, drafting, checking and execution are planned as separate steps and evaluated against the agreed purpose."
+            "de": "Ein sinnvoller Einsatz beginnt bei einer konkreten Aufgabe, etwa Informationen für ein Projekt zu ordnen oder einen Entwurf vorzubereiten. Dafür werden benötigte Eingaben, erlaubte Werkzeuge und das erwartete Ergebnis beschrieben.\n\nRecherche, Entwurf, Prüfung und gegebenenfalls Ausführung werden getrennt geplant. Welche Schritte für Ihren Auftrag tatsächlich verfügbar sind, klären wir vorab.",
+            "nl": "Een zinvolle inzet begint bij een concrete taak, zoals projectinformatie ordenen of een concept voorbereiden. Daarvoor beschrijven we de benodigde invoer, toegestane hulpmiddelen en het gewenste resultaat.\n\nOnderzoek, concept, controle en eventuele uitvoering worden afzonderlijk gepland. Welke stappen voor uw opdracht daadwerkelijk beschikbaar zijn, bespreken we vooraf.",
+            "fr": "Une utilisation utile part d’une tâche précise, comme organiser des informations de projet ou préparer un brouillon. Nous définissons les entrées nécessaires, les outils autorisés et le résultat attendu.\n\nRecherche, rédaction, contrôle et éventuelle exécution sont planifiés séparément. Nous précisons à l’avance les étapes réellement disponibles pour votre mission.",
+            "en": "A useful application starts with a specific task, such as organising project information or preparing a draft. We define the inputs needed, permitted tools and expected result.\n\nResearch, drafting, review and any execution are planned as separate steps. We clarify in advance which steps are actually available for your assignment."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2692,10 +2692,10 @@
             "en": "Coordination with explicit states"
           },
           "body": {
-            "de": "Oracle ordnet im Produktkonzept Zuständigkeiten, Abhängigkeiten und Arbeitsstände. Ein vorbereiteter Inhalt wird dabei als Entwurf geführt; Veröffentlichung oder Versand braucht den passenden Auftrag und eine bestätigte Ausführung.",
-            "nl": "Oracle ordent in het productconcept verantwoordelijkheden, afhankelijkheden en werkstatussen. Voorbereide inhoud blijft een concept; publicatie of verzending vraagt de juiste opdracht en bevestigde uitvoering.",
-            "fr": "Dans le concept produit, Oracle structure responsabilités, dépendances et avancement. Un contenu préparé reste un brouillon ; sa diffusion ou son envoi exige la mission adaptée et une exécution confirmée.",
-            "en": "Within the product concept, Oracle organises responsibilities, dependencies and progress. Prepared content remains a draft; publishing or sending requires the appropriate assignment and confirmed execution."
+            "de": "Im Produktkonzept soll Oracle Zuständigkeiten und Abhängigkeiten ordnen. Ein Arbeitsstand muss erkennen lassen, ob etwas vorbereitet, geprüft oder tatsächlich ausgeführt wurde.\n\nFür Veröffentlichung oder Versand braucht es den passenden Auftrag, die erforderlichen Rechte und eine bestätigte Ausführung. Ein Entwurf allein ist noch kein versendetes Ergebnis.",
+            "nl": "In het productconcept moet Oracle verantwoordelijkheden en afhankelijkheden ordenen. Een werkstatus moet laten zien of iets is voorbereid, gecontroleerd of werkelijk uitgevoerd.\n\nVoor publicatie of verzending zijn de passende opdracht, benodigde rechten en bevestigde uitvoering nodig. Een concept is op zichzelf nog geen verzonden resultaat.",
+            "fr": "Dans le concept produit, Oracle doit organiser responsabilités et dépendances. L’état du travail doit indiquer si une action a été préparée, vérifiée ou réellement exécutée.\n\nUne publication ou un envoi exige la mission adaptée, les droits nécessaires et une exécution confirmée. Un brouillon seul n’est pas un résultat envoyé.",
+            "en": "In the product concept, Oracle is intended to organise responsibilities and dependencies. A work status should show whether something was prepared, reviewed or actually completed.\n\nPublication or sending requires the appropriate assignment, permissions and confirmed execution. A draft alone is not a delivered result."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2756,10 +2756,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -2843,10 +2843,10 @@
             "en": "A connection with a technical contract"
           },
           "body": {
-            "de": "Der Auftrag beschreibt Schnittstellen, Datenformate und Fehlerwege. Authentifizierung, Berechtigungen und ein nachvollziehbarer Test gehören zur Planung; ein API-Zugang wird separat vereinbart.",
-            "nl": "De opdracht beschrijft interfaces, gegevensformaten en foutafhandeling. Authenticatie, rechten en een controleerbare test horen bij de planning; API-toegang wordt apart afgesproken.",
-            "fr": "La mission définit interfaces, formats et gestion des erreurs. Authentification, droits et test vérifiable font partie de la préparation ; l’accès API est convenu séparément.",
-            "en": "The assignment specifies interfaces, data formats and error handling. Authentication, permissions and verifiable testing are part of the plan; API access is agreed separately."
+            "de": "Am Anfang steht der gewünschte Datenfluss: Welche Anwendung sendet welche Anfrage, welches Ergebnis wird benötigt und wer darf darauf zugreifen? Darauf aufbauend beschreiben wir die vereinbarte Schnittstelle, Datenformate und Fehlerfälle.\n\nZugang, Authentifizierung, Berechtigungen und ein nachvollziehbarer Test werden für die konkrete Verbindung geklärt. Eine Produktseite allein schaltet keinen API-Zugang frei.",
+            "nl": "We beginnen bij de gewenste gegevensstroom: welke applicatie doet welke aanvraag, welk resultaat is nodig en wie mag erbij? Op basis daarvan beschrijven we de afgesproken interface, gegevensformaten en foutgevallen.\n\nToegang, authenticatie, rechten en een controleerbare test worden voor de concrete koppeling afgestemd. Een productpagina activeert op zichzelf geen API-toegang.",
+            "fr": "Nous partons du flux souhaité : quelle application envoie quelle demande, quel résultat est nécessaire et qui peut y accéder ? Nous décrivons ensuite l’interface convenue, les formats et les cas d’erreur.\n\nAccès, authentification, autorisations et test vérifiable sont définis pour la connexion concernée. La page produit n’active pas à elle seule un accès API.",
+            "en": "We begin with the desired data flow: which application sends which request, what result is needed and who may access it? We then define the agreed interface, data formats and failure cases.\n\nAccess, authentication, permissions and a traceable test are agreed for the specific connection. A product page does not by itself enable API access."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2868,10 +2868,10 @@
             "en": "Assign usage and costs"
           },
           "body": {
-            "de": "Zugang, Verbrauch und Abrechnung erhalten einen eigenen vertraglichen Rahmen. Schätzungen dienen der Planung; tatsächliche Nutzung und verfügbare Funktionen müssen im jeweiligen Betriebsstand nachgewiesen sein.",
-            "nl": "Toegang, verbruik en facturatie krijgen eigen contractuele afspraken. Ramingen dienen voor planning; werkelijk gebruik en beschikbare functies moeten in de betreffende bedrijfssituatie worden aangetoond.",
-            "fr": "Accès, consommation et facturation ont leur propre cadre contractuel. Les estimations servent à planifier ; usage réel et fonctionnalités disponibles doivent être établis pour l’exploitation concernée.",
-            "en": "Access, usage and billing have their own contractual framework. Estimates support planning; actual use and available features must be evidenced for the relevant operating setup."
+            "de": "Nutzung, Verbrauch und Abrechnung benötigen einen gesonderten Rahmen. Für die Planung klären wir erwartete Aufrufe, beteiligte Dienste und mögliche laufende Kosten.\n\nWelche Funktionen im konkreten Betriebsstand erreichbar sind und wie Verbrauch abgerechnet wird, wird vor der Nutzung vereinbart und anhand der tatsächlichen Anbindung geprüft.",
+            "nl": "Gebruik, verbruik en facturering hebben een afzonderlijk kader nodig. Voor de planning bespreken we verwachte aanvragen, betrokken diensten en mogelijke doorlopende kosten.\n\nWelke functies in de concrete omgeving beschikbaar zijn en hoe verbruik wordt gefactureerd, wordt vóór gebruik afgesproken en aan de hand van de werkelijke koppeling gecontroleerd.",
+            "fr": "L’utilisation, la consommation et la facturation nécessitent un cadre distinct. Pour préparer le projet, nous examinons les appels prévus, les services concernés et les éventuels coûts récurrents.\n\nLes fonctions accessibles dans l’environnement concerné et les modalités de facturation sont convenues avant utilisation et vérifiées sur la connexion réelle.",
+            "en": "Usage, consumption and billing need a separate agreement. Planning covers expected requests, services involved and possible ongoing costs.\n\nThe functions available in the specific environment and how usage is billed are agreed before use and checked against the actual connection."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2933,10 +2933,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -3004,10 +3004,10 @@
         "en": "AIFly ORACLE. Put it in context before acting."
       },
       "summary": {
-        "de": "AIFly ORACLE koordiniert die Arbeit hinter der Factory und begleitet Sie auf dieser Website. Er ordnet Vorhaben ein; verbindliche Schritte bleiben bei den dafür berechtigten Personen.",
-        "nl": "AIFly ORACLE coördineert het werk achter de Factory en begeleidt u op deze website. Hij ordent projecten; bindende stappen blijven bij de daartoe bevoegde personen.",
-        "fr": "AIFly ORACLE coordonne le travail derrière la Factory et vous accompagne sur ce site. Il situe les projets ; les étapes engageantes restent aux personnes habilitées.",
-        "en": "AIFly ORACLE coordinates the work behind the Factory and guides you on this website. It puts projects in context; binding steps stay with the people authorised to take them."
+        "de": "AIFly ORACLE ist für die Koordination von Aufgaben im NeXify-Konzept vorgesehen. Auf dieser Website hilft der öffentliche Chat bei der Orientierung; welche weiteren Funktionen verfügbar sind, wird je Auftrag geprüft.",
+        "nl": "AIFly ORACLE is binnen het NeXify-concept bedoeld voor het coördineren van taken. Op deze website helpt de openbare chat u op weg; verdere functies worden per opdracht beoordeeld.",
+        "fr": "AIFly ORACLE est prévu pour coordonner les tâches dans le concept NeXify. Sur ce site, le chat public vous aide à vous orienter ; les autres fonctions sont examinées pour chaque mission.",
+        "en": "AIFly ORACLE is intended to coordinate tasks within the NeXify concept. On this website, the public chat helps you find your way; further capabilities are assessed for each assignment."
       },
       "site_context": "nexify",
       "sections": [
@@ -3020,10 +3020,10 @@
             "en": "Coordination with clear limits"
           },
           "body": {
-            "de": "AIFly ORACLE priorisiert Aufgaben, ordnet sie den zuständigen Fachrollen zu und löst Konflikte zwischen Bereichen. Sicherheitsrichtlinien, Systemgrenzen und menschliche Freigaben überstimmt er nicht und leitet aus seiner Rolle keine zusätzlichen Rechte ab.",
-            "nl": "AIFly ORACLE geeft taken prioriteit, wijst ze toe aan de bevoegde vakrollen en lost conflicten tussen afdelingen op. Veiligheidsregels, systeemgrenzen en menselijke goedkeuringen overrulet hij niet en uit zijn rol volgen geen extra rechten.",
-            "fr": "AIFly ORACLE priorise les tâches, les attribue aux rôles compétents et arbitre les conflits entre domaines. Il ne passe jamais outre aux règles de sécurité, aux limites du système ni aux validations humaines et ne tire aucun droit supplémentaire de son rôle.",
-            "en": "AIFly ORACLE prioritises tasks, assigns them to the responsible specialist roles and resolves conflicts between areas. It never overrides security policies, system limits or human approvals, and it derives no extra rights from its role."
+            "de": "Im Zielbild soll Oracle Aufgaben strukturieren, Zuständigkeiten zuordnen und Abhängigkeiten sichtbar machen. Welche Fachrollen, Werkzeuge und Verbindungen für einen Auftrag tatsächlich verfügbar und zugelassen sind, wird vor dem Einsatz geprüft.\n\nAls Einstieg beschreiben Sie Ihr Vorhaben. Daraus können Ziel, offene Fragen und der nächste sinnvolle Schritt gemeinsam eingeordnet werden.",
+            "nl": "In het beoogde model helpt Oracle taken structureren, verantwoordelijkheden toewijzen en afhankelijkheden zichtbaar maken. Voor iedere opdracht wordt vooraf gecontroleerd welke rollen, hulpmiddelen en koppelingen werkelijk beschikbaar en toegestaan zijn.\n\nAls eerste stap beschrijft u uw plan. Samen kunnen we dan het doel, open vragen en een passende volgende stap bepalen.",
+            "fr": "Dans le modèle prévu, Oracle doit structurer les tâches, attribuer les responsabilités et rendre les dépendances visibles. Avant chaque mission, nous vérifions les rôles, outils et connexions réellement disponibles et autorisés.\n\nPour commencer, décrivez votre projet. Nous pourrons ensuite clarifier son objectif, les questions ouvertes et une prochaine étape adaptée.",
+            "en": "In the intended model, Oracle helps structure tasks, assign responsibilities and make dependencies visible. Before each assignment, we check which roles, tools and connections are actually available and authorised.\n\nStart by describing your project. Together we can clarify its goal, open questions and a useful next step."
           },
           "source_refs": [
             "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
@@ -3039,10 +3039,10 @@
             "en": "Four levels of decision"
           },
           "body": {
-            "de": "Fachliche Routine entscheidet die zuständige Fachrolle. Bereichsübergreifendes ordnet ORACLE. Technische Freigaben, etwa ein Produktivstart, liegen bei der dafür autorisierten Instanz. Verträge, Zahlungen und verbindliche Zusagen entscheidet Pascal Courbois.",
-            "nl": "Vakinhoudelijke routine beslist de bevoegde vakrol. Domeinoverstijgende zaken ordent ORACLE. Technische vrijgaven, zoals een livegang, liggen bij de daartoe geautoriseerde instantie. Contracten, betalingen en bindende toezeggingen beslist Pascal Courbois.",
-            "fr": "La routine métier relève du rôle compétent. ORACLE ordonne ce qui touche plusieurs domaines. Les validations techniques, comme une mise en production, relèvent de l’instance autorisée. Contrats, paiements et engagements fermes sont décidés par Pascal Courbois.",
-            "en": "Routine specialist work is decided by the responsible role. ORACLE orders what spans several areas. Technical approvals, such as a production launch, sit with the authorised instance. Contracts, payments and binding commitments are decided by Pascal Courbois."
+            "de": "Für einen konkreten Einsatz werden Verantwortlichkeiten und Freigaben vorab festgelegt. Fachliche Entscheidungen, technische Änderungen und verbindliche Zusagen können unterschiedliche Zuständige haben.\n\nVerträge, Zahlungen und verbindliche Zusagen werden nur durch berechtigte Personen entschieden. Eine Rolle oder ein Chat allein erteilt keine zusätzlichen Rechte.",
+            "nl": "Voor een concrete inzet worden verantwoordelijkheden en toestemmingen vooraf vastgelegd. Voor inhoudelijke beslissingen, technische wijzigingen en bindende toezeggingen kunnen verschillende personen verantwoordelijk zijn.\n\nContracten, betalingen en bindende toezeggingen worden alleen door bevoegde personen beslist. Een rol of chat verleent op zichzelf geen extra rechten.",
+            "fr": "Pour chaque utilisation, les responsabilités et autorisations sont définies à l’avance. Les décisions métier, les modifications techniques et les engagements peuvent relever de personnes différentes.\n\nLes contrats, paiements et engagements sont décidés uniquement par les personnes habilitées. Un rôle ou un chat ne confère pas de droits supplémentaires.",
+            "en": "Responsibilities and approvals are agreed before a specific use. Different people may be responsible for business decisions, technical changes and binding commitments.\n\nContracts, payments and binding commitments are decided only by authorised people. A role or chat does not itself grant additional rights."
           },
           "source_refs": [
             "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
@@ -3058,10 +3058,10 @@
             "en": "What you experience on the website today"
           },
           "body": {
-            "de": "Im öffentlichen Chat führt Oracle durch Leistungen und Seiten. Derzeit arbeitet er ohne Live-KI-Modell, schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Oracle kann Fehler machen; verbindlich ist erst, was ausdrücklich bestätigt wurde.",
-            "nl": "In de openbare chat leidt Oracle u door diensten en pagina’s. Momenteel werkt hij zonder live AI-model, sluit geen contracten, boekt geen afspraken en start geen betalingen. Oracle kan fouten maken; bindend is pas wat uitdrukkelijk is bevestigd.",
-            "fr": "Dans le chat public, Oracle vous guide à travers les prestations et les pages. Il fonctionne actuellement sans modèle d’IA en direct, ne conclut aucun contrat, ne réserve aucun rendez-vous et ne déclenche aucun paiement. Oracle peut se tromper ; seul ce qui est expressément confirmé engage.",
-            "en": "In the public chat Oracle guides you through services and pages. It currently runs without a live AI model, concludes no contracts, books no appointments and triggers no payments. Oracle can make mistakes; only what is explicitly confirmed is binding."
+            "de": "Der öffentliche Chat hilft Ihnen, Leistungen und passende Seiten einzuordnen. Er arbeitet derzeit ohne Live-KI-Modell und kann Fehler machen. Er schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus.\n\nSie können Ihr Vorhaben beschreiben und eine persönliche Anfrage vorbereiten. Ob eine Anfrage tatsächlich übermittelt wurde, erkennen Sie an der Bestätigung des jeweiligen Kontaktwegs.",
+            "nl": "De openbare chat helpt u diensten en passende pagina’s te vinden. Hij werkt momenteel zonder live AI-model en kan fouten maken. Hij sluit geen contracten, boekt geen afspraken en voert geen betalingen uit.\n\nU kunt uw plan beschrijven en een persoonlijke aanvraag voorbereiden. Of een aanvraag werkelijk is verzonden, ziet u aan de bevestiging van de gekozen contactroute.",
+            "fr": "Le chat public vous aide à repérer les prestations et les pages utiles. Il fonctionne actuellement sans modèle d’IA en direct et peut se tromper. Il ne conclut pas de contrat, ne réserve pas de rendez-vous et ne déclenche pas de paiement.\n\nVous pouvez décrire votre projet et préparer une demande personnelle. La confirmation du canal choisi indique si votre demande a réellement été transmise.",
+            "en": "The public chat helps you navigate services and relevant pages. It currently works without a live AI model and can make mistakes. It does not conclude contracts, book appointments or initiate payments.\n\nYou can describe your project and prepare a personal enquiry. The confirmation on the chosen contact route tells you whether an enquiry was actually sent."
           },
           "source_refs": [
             "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
@@ -3071,10 +3071,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "AIFly ORACLE koordiniert die Arbeit hinter der Factory und begleitet Sie auf dieser Website. Er ordnet Vorhaben ein; verbindliche Schritte bleiben bei den dafür berechtigten Personen.",
-          "nl": "AIFly ORACLE coördineert het werk achter de Factory en begeleidt u op deze website. Hij ordent projecten; bindende stappen blijven bij de daartoe bevoegde personen.",
-          "fr": "AIFly ORACLE coordonne le travail derrière la Factory et vous accompagne sur ce site. Il situe les projets ; les étapes engageantes restent aux personnes habilitées.",
-          "en": "AIFly ORACLE coordinates the work behind the Factory and guides you on this website. It puts projects in context; binding steps stay with the people authorised to take them."
+          "de": "AIFly ORACLE ist für die Koordination von Aufgaben im NeXify-Konzept vorgesehen. Auf dieser Website hilft der öffentliche Chat bei der Orientierung; welche weiteren Funktionen verfügbar sind, wird je Auftrag geprüft.",
+          "nl": "AIFly ORACLE is binnen het NeXify-concept bedoeld voor het coördineren van taken. Op deze website helpt de openbare chat u op weg; verdere functies worden per opdracht beoordeeld.",
+          "fr": "AIFly ORACLE est prévu pour coordonner les tâches dans le concept NeXify. Sur ce site, le chat public vous aide à vous orienter ; les autres fonctions sont examinées pour chaque mission.",
+          "en": "AIFly ORACLE is intended to coordinate tasks within the NeXify concept. On this website, the public chat helps you find your way; further capabilities are assessed for each assignment."
         },
         "canonical_path": "/produkte/aifly-oracle",
         "canonical_origin": null,
@@ -3169,16 +3169,16 @@
       "id": "nex-agentic",
       "path": "/produkte/nex-agentic-aifly",
       "title": {
-        "de": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
-        "nl": "NeX Agentic AIFly. Doet wat is afgesproken.",
-        "fr": "NeX Agentic AIFly. Fait ce qui est convenu.",
-        "en": "NeX Agentic AIFly. Gets done what was agreed."
+        "de": "NeX Agentic AIFly. Aufgaben gezielt vorbereiten.",
+        "nl": "NeX Agentic AIFly. Taken gericht voorbereiden.",
+        "fr": "NeX Agentic AIFly. Préparer les tâches ciblées.",
+        "en": "NeX Agentic AIFly. Preparing focused tasks."
       },
       "summary": {
-        "de": "NeX ist die ausführende Seite des Konzepts: Er recherchiert, bereitet vor und automatisiert Wiederkehrendes, innerhalb des Auftrags und der erteilten Freigaben.",
-        "nl": "NeX is de uitvoerende kant van het concept: hij onderzoekt, bereidt voor en automatiseert terugkerend werk, binnen de opdracht en de verleende goedkeuringen.",
-        "fr": "NeX est le côté exécutant du concept : il recherche, prépare et automatise les tâches récurrentes, dans le cadre de la mission et des validations accordées.",
-        "en": "NeX is the executing side of the concept: it researches, prepares and automates recurring work within the assignment and the approvals granted."
+        "de": "NeX steht im Konzept für aufgabenbezogene Ausführung, etwa Recherche, Vorbereitung und wiederkehrende Abläufe. Ein konkreter Einsatz wird mit Aufgaben, Rechten und Prüfungen vereinbart.",
+        "nl": "NeX staat in het concept voor taakgerichte uitvoering, zoals onderzoek, voorbereiding en terugkerende processen. Een concrete inzet wordt met taken, rechten en controles afgesproken.",
+        "fr": "Dans le concept, NeX représente l’exécution de tâches comme la recherche, la préparation et les processus récurrents. Chaque utilisation est définie avec ses tâches, droits et contrôles.",
+        "en": "In the concept, NeX represents task-focused execution such as research, preparation and recurring workflows. Each use is agreed with defined tasks, permissions and checks."
       },
       "site_context": "nexify",
       "sections": [
@@ -3191,10 +3191,10 @@
             "en": "Executing, not just advising"
           },
           "body": {
-            "de": "Ein Einsatz beginnt mit einem Auftrag: Ziel, Quellen, erlaubte Werkzeuge, Verantwortliche und Prüfung sind benannt. NeX bearbeitet dann Recherche, Entwurf, Vorbereitung und wiederholbare Abläufe und zeigt, was tatsächlich erledigt wurde.",
-            "nl": "Een inzet begint met een opdracht: doel, bronnen, toegestane hulpmiddelen, verantwoordelijken en controle zijn benoemd. NeX pakt daarna onderzoek, concept, voorbereiding en herhaalbare processen op en toont wat daadwerkelijk is gedaan.",
-            "fr": "Une intervention commence par une mission : objectif, sources, outils autorisés, responsables et contrôle sont nommés. NeX traite ensuite recherche, projet, préparation et processus répétables et montre ce qui a réellement été fait.",
-            "en": "An engagement starts with an assignment: goal, sources, permitted tools, owners and review are named. NeX then handles research, drafting, preparation and repeatable processes, and shows what was actually done."
+            "de": "Ein möglicher Einsatz beginnt mit einer klaren Aufgabe: Was soll entstehen, welche Quellen und Werkzeuge dürfen verwendet werden und wer prüft das Ergebnis? Recherche, Entwurf oder wiederkehrende Arbeitsschritte werden dafür passend ausgewählt.\n\nOb ein Schritt tatsächlich ausgeführt wurde, muss am Ergebnis und am verfügbaren System nachvollziehbar sein. Umfang und Verfügbarkeit werden für den jeweiligen Auftrag vereinbart.",
+            "nl": "Een mogelijke inzet begint met een duidelijke taak: wat moet ontstaan, welke bronnen en hulpmiddelen zijn toegestaan en wie controleert het resultaat? Onderzoek, een concept of terugkerende stappen worden daarop afgestemd.\n\nOf een stap werkelijk is uitgevoerd, moet aan het resultaat en het beschikbare systeem te controleren zijn. Omvang en beschikbaarheid worden per opdracht afgesproken.",
+            "fr": "Une utilisation commence par une tâche claire : quel résultat est attendu, quelles sources et quels outils sont autorisés, et qui vérifie le résultat ? Recherche, rédaction ou étapes répétitives sont choisies selon le besoin.\n\nL’exécution effective doit pouvoir être vérifiée dans le résultat et le système disponible. Le périmètre et la disponibilité sont convenus pour chaque mission.",
+            "en": "A potential use begins with a clear task: what should be produced, which sources and tools are permitted, and who checks the result? Research, drafting or recurring steps are selected to suit that task.\n\nWhether a step was actually completed must be traceable in the result and the available system. Scope and availability are agreed for each assignment."
           },
           "source_refs": [
             "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
@@ -3211,10 +3211,10 @@
             "en": "Limits and approvals"
           },
           "body": {
-            "de": "Externe Nachrichten, verbindliche Angebote und Zahlungen löst NeX nicht eigenmächtig aus; dafür braucht es die gültige Freigabe. Daten löscht NeX nicht, Kundenprojekte bleiben getrennt, und kritische Ergebnisse prüft eine zweite Instanz.",
-            "nl": "Externe berichten, bindende offertes en betalingen start NeX niet op eigen gezag; daarvoor is een geldige goedkeuring nodig. NeX verwijdert geen gegevens, klantprojecten blijven gescheiden en kritieke resultaten worden door een tweede instantie gecontroleerd.",
-            "fr": "NeX ne déclenche pas de son propre chef des messages externes, des offres fermes ni des paiements ; une validation en cours de validité est nécessaire. NeX ne supprime pas de données, les projets clients restent séparés et une seconde instance contrôle les résultats critiques.",
-            "en": "NeX does not trigger external messages, binding offers or payments on its own; a valid approval is required. NeX does not delete data, customer projects stay separate, and a second instance reviews critical results."
+            "de": "Für jeden Einsatz werden erlaubte Zugriffe, Datenbereiche und Entscheidungen festgelegt. Externe Nachrichten, verbindliche Angebote und Zahlungen benötigen die jeweils gültige Freigabe; ein Entwurf ist noch kein Versand oder Vertrag.\n\nKundenprojekte sind getrennt zu behandeln. Wie Ergebnisse geprüft und Änderungen nachvollzogen werden, wird vor dem Einsatz für den konkreten Prozess festgelegt.",
+            "nl": "Per inzet worden toegestane toegang, gegevensgebieden en beslissingen vastgelegd. Externe berichten, bindende offertes en betalingen vereisen de geldige toestemming; een concept is nog geen verzending of contract.\n\nKlantprojecten worden gescheiden behandeld. Hoe resultaten worden gecontroleerd en wijzigingen te volgen zijn, wordt vooraf voor het concrete proces afgesproken.",
+            "fr": "Pour chaque utilisation, les accès, périmètres de données et décisions autorisés sont définis. Les messages externes, offres engageantes et paiements exigent l’autorisation applicable ; un brouillon n’est ni un envoi ni un contrat.\n\nLes projets clients sont traités séparément. Le contrôle des résultats et la traçabilité des modifications sont définis avant l’utilisation pour le processus concerné.",
+            "en": "Permitted access, data boundaries and decisions are defined for each use. External messages, binding offers and payments require the applicable approval; a draft is not a sent message or a contract.\n\nCustomer projects are treated separately. How results are checked and changes traced is agreed for the specific process before use."
           },
           "source_refs": [
             "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
@@ -3231,10 +3231,10 @@
             "en": "Availability"
           },
           "body": {
-            "de": "Als eigenständig buchbares Produkt ist NeX Agentic AIFly noch nicht freigegeben. Einsätze planen wir projektbezogen im Rahmen eines Auftrags; was davon wann läuft, nennen wir im Angebot.",
-            "nl": "Als zelfstandig boekbaar product is NeX Agentic AIFly nog niet vrijgegeven. Inzetten plannen we per project binnen een opdracht; wat wanneer draait, noemen we in de offerte.",
-            "fr": "En tant que produit réservable de façon autonome, NeX Agentic AIFly n’est pas encore validé. Nous planifions les interventions par projet dans le cadre d’une mission ; ce qui tourne et quand figure dans l’offre.",
-            "en": "NeX Agentic AIFly is not yet released as a standalone bookable product. We plan engagements per project within an assignment; what runs and when is stated in the offer."
+            "de": "Ein möglicher Einsatz von NeX Agentic AIFly lässt sich anhand Ihrer konkreten Aufgabe und Ihres Projekts besprechen.\n\nSchildern Sie die Aufgabe und die beteiligten Systeme. Wir prüfen daraufhin Voraussetzungen, Rechte und den geeigneten Umfang; was tatsächlich bereitsteht, wird im Angebot benannt.",
+            "nl": "Een mogelijke inzet van NeX Agentic AIFly kan worden besproken op basis van uw concrete taak en project.\n\nBeschrijf de taak en betrokken systemen. Wij beoordelen vervolgens voorwaarden, rechten en de passende omvang; wat daadwerkelijk beschikbaar is, wordt in de offerte genoemd.",
+            "fr": "Une utilisation de NeX Agentic AIFly peut être étudiée selon votre tâche et votre projet.\n\nDécrivez la tâche et les systèmes concernés. Nous examinerons les conditions, droits et le périmètre adapté ; les éléments réellement disponibles seront indiqués au devis.",
+            "en": "A potential use of NeX Agentic AIFly can be discussed in the context of your specific task and project.\n\nDescribe the task and systems involved. We will assess prerequisites, permissions and suitable scope; the proposal will state what is actually available."
           },
           "source_refs": [
             "docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md",
@@ -3245,20 +3245,20 @@
       ],
       "metadata": {
         "description": {
-          "de": "NeX ist die ausführende Seite des Konzepts: Er recherchiert, bereitet vor und automatisiert Wiederkehrendes, innerhalb des Auftrags und der erteilten Freigaben.",
-          "nl": "NeX is de uitvoerende kant van het concept: hij onderzoekt, bereidt voor en automatiseert terugkerend werk, binnen de opdracht en de verleende goedkeuringen.",
-          "fr": "NeX est le côté exécutant du concept : il recherche, prépare et automatise les tâches récurrentes, dans le cadre de la mission et des validations accordées.",
-          "en": "NeX is the executing side of the concept: it researches, prepares and automates recurring work within the assignment and the approvals granted."
+          "de": "NeX steht im Konzept für aufgabenbezogene Ausführung, etwa Recherche, Vorbereitung und wiederkehrende Abläufe. Ein konkreter Einsatz wird mit Aufgaben, Rechten und Prüfungen vereinbart.",
+          "nl": "NeX staat in het concept voor taakgerichte uitvoering, zoals onderzoek, voorbereiding en terugkerende processen. Een concrete inzet wordt met taken, rechten en controles afgesproken.",
+          "fr": "Dans le concept, NeX représente l’exécution de tâches comme la recherche, la préparation et les processus récurrents. Chaque utilisation est définie avec ses tâches, droits et contrôles.",
+          "en": "In the concept, NeX represents task-focused execution such as research, preparation and recurring workflows. Each use is agreed with defined tasks, permissions and checks."
         },
         "canonical_path": "/produkte/nex-agentic-aifly",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "noindex,nofollow",
         "title": {
-          "de": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
-          "nl": "NeX Agentic AIFly. Doet wat is afgesproken.",
-          "fr": "NeX Agentic AIFly. Fait ce qui est convenu.",
-          "en": "NeX Agentic AIFly. Gets done what was agreed."
+          "de": "NeX Agentic AIFly. Aufgaben gezielt vorbereiten.",
+          "nl": "NeX Agentic AIFly. Taken gericht voorbereiden.",
+          "fr": "NeX Agentic AIFly. Préparer les tâches ciblées.",
+          "en": "NeX Agentic AIFly. Preparing focused tasks."
         }
       },
       "access": {
@@ -3310,10 +3310,10 @@
           "type": "route",
           "target_id": "contact",
           "label": {
-            "de": "Ein Briefing an die Factory senden",
-            "nl": "Een briefing aan de Factory sturen",
-            "fr": "Adresser un brief à la Factory",
-            "en": "Send a brief to the Factory"
+            "de": "Vorhaben schildern",
+            "nl": "Vertel over uw plan",
+            "fr": "Parler de votre projet",
+            "en": "Tell us about your project"
           }
         },
         {
@@ -3351,10 +3351,10 @@
         "en": "Skills and MCP. Capabilities with controlled access."
       },
       "summary": {
-        "de": "Skills bündeln bewährte Arbeitsmethoden, MCP erschließt Werkzeuge und Systeme über einen kontrollierten Zugang. Beides wird je Vorhaben geprüft und freigeschaltet.",
-        "nl": "Skills bundelen bewezen werkmethoden, MCP ontsluit hulpmiddelen en systemen via gecontroleerde toegang. Beide worden per project getoetst en vrijgegeven.",
-        "fr": "Les skills regroupent des méthodes de travail éprouvées, MCP ouvre outils et systèmes via un accès contrôlé. Les deux sont vérifiés et activés projet par projet.",
-        "en": "Skills bundle proven working methods, MCP opens tools and systems through controlled access. Both are reviewed and enabled per project."
+        "de": "Skills beschreiben wiederverwendbare Arbeitsmethoden; MCP kann Werkzeuge und Systeme anbinden. Eignung, Rechte und Verfügbarkeit werden für jedes Vorhaben geprüft.",
+        "nl": "Skills beschrijven herbruikbare werkwijzen; MCP kan hulpmiddelen en systemen verbinden. Geschiktheid, rechten en beschikbaarheid worden per project gecontroleerd.",
+        "fr": "Les skills décrivent des méthodes réutilisables ; MCP peut connecter outils et systèmes. Adéquation, droits et disponibilité sont vérifiés pour chaque projet.",
+        "en": "Skills describe reusable working methods; MCP can connect tools and systems. Suitability, permissions and availability are assessed for each project."
       },
       "site_context": "nexify",
       "sections": [
@@ -3367,10 +3367,10 @@
             "en": "Capabilities as reviewed building blocks"
           },
           "body": {
-            "de": "Ein Skill kapselt eine wiederverwendbare Arbeitsmethode. Er wird vor dem Einsatz geprüft, getestet und versioniert. Das Unternehmensgedächtnis ersetzt er nicht; kundenspezifische Daten bleiben in ihrem Bereich.",
-            "nl": "Een skill bundelt een herbruikbare werkmethode. Hij wordt vóór gebruik gecontroleerd, getest en van een versie voorzien. Het bedrijfsgeheugen vervangt hij niet; klantspecifieke gegevens blijven in hun eigen domein.",
-            "fr": "Un skill encapsule une méthode de travail réutilisable. Il est vérifié, testé et versionné avant l’emploi. Il ne remplace pas la mémoire de l’entreprise ; les données propres aux clients restent dans leur périmètre.",
-            "en": "A skill encapsulates a reusable working method. It is reviewed, tested and versioned before use. It does not replace company memory; customer-specific data stays in its own area."
+            "de": "Ein Skill beschreibt eine wiederverwendbare Arbeitsmethode, zum Beispiel wie Informationen strukturiert oder ein Ergebnis geprüft werden. Vor einem konkreten Einsatz klären wir Quelle, Eignung, Version und erlaubten Anwendungsbereich.\n\nEin Skill ersetzt weder die fachliche Verantwortung noch die Datenhaltung. Kundenspezifische Informationen bleiben dem jeweiligen Projekt und seinen Berechtigungen zugeordnet.",
+            "nl": "Een skill beschrijft een herbruikbare werkwijze, bijvoorbeeld voor het structureren van informatie of controleren van een resultaat. Voor een concrete inzet beoordelen we bron, geschiktheid, versie en toegestaan toepassingsgebied.\n\nEen skill vervangt geen inhoudelijke verantwoordelijkheid of gegevensopslag. Klantspecifieke informatie blijft gekoppeld aan het betreffende project en de bijbehorende rechten.",
+            "fr": "Un skill décrit une méthode réutilisable, par exemple pour structurer des informations ou vérifier un résultat. Avant utilisation, nous examinons sa source, son adéquation, sa version et son périmètre autorisé.\n\nUn skill ne remplace ni la responsabilité métier ni le stockage des données. Les informations propres au client restent liées à son projet et à ses autorisations.",
+            "en": "A skill describes a reusable working method, such as structuring information or checking an outcome. Before a specific use, we assess its source, suitability, version and permitted scope.\n\nA skill does not replace business responsibility or data storage. Customer-specific information remains associated with its project and permissions."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -3387,10 +3387,10 @@
             "en": "One access point, clear rules"
           },
           "body": {
-            "de": "Der angestrebte MCP-Zugang verbindet Werkzeuge und Fachsysteme über eine Stelle mit Anmeldung, Mandantentrennung, Rechteprüfung, typisierten Operationen und nachvollziehbaren Protokollen. Er ist ein Zugang, kein Ersatz für die fachliche Datenhaltung.",
-            "nl": "De beoogde MCP-toegang verbindt hulpmiddelen en vaksystemen via één punt met aanmelding, tenantscheiding, rechtencontrole, getypeerde bewerkingen en traceerbare logboeken. Hij is een toegang, geen vervanging van de inhoudelijke gegevensopslag.",
-            "fr": "L’accès MCP visé relie outils et systèmes métier par un point unique, avec authentification, séparation des mandants, contrôle des droits, opérations typées et journaux traçables. C’est un accès, pas un substitut au stockage des données métier.",
-            "en": "The planned MCP access connects tools and business systems through one point with sign-in, tenant separation, permission checks, typed operations and traceable logs. It is an access point, not a replacement for business data storage."
+            "de": "MCP kann als standardisierter Weg dienen, um zugelassene Werkzeuge und Fachsysteme anzubinden. Für jede Verbindung sind Betreiber, Zweck, Anmeldung, Rechte und die tatsächlich erlaubten Funktionen zu klären.\n\nDas beschriebene zentrale Zugangsmodell ist ein Zielbild. Welche Verbindung in einem Projekt verfügbar und sicher nutzbar ist, muss für die jeweilige Umgebung geprüft werden.",
+            "nl": "MCP kan een gestandaardiseerde manier bieden om toegestane hulpmiddelen en systemen te koppelen. Per verbinding moeten beheerder, doel, aanmelding, rechten en werkelijk toegestane functies worden vastgesteld.\n\nHet beschreven centrale toegangsmodel is een doelbeeld. Welke verbinding in een project beschikbaar en veilig bruikbaar is, moet voor de betreffende omgeving worden gecontroleerd.",
+            "fr": "MCP peut servir de voie standardisée pour connecter des outils et systèmes autorisés. Pour chaque connexion, il faut préciser l’opérateur, l’objectif, l’authentification, les droits et les fonctions réellement autorisées.\n\nLe modèle d’accès central décrit est un objectif. La disponibilité et l’utilisation sûre d’une connexion doivent être vérifiées dans l’environnement concerné.",
+            "en": "MCP can provide a standardised way to connect authorised tools and business systems. Each connection needs a defined operator, purpose, authentication, permissions and actually permitted functions.\n\nThe central access model described here is a target. Whether a connection is available and safe to use must be checked in the relevant environment."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -3407,10 +3407,10 @@
             "en": "Enquiry and status"
           },
           "body": {
-            "de": "Der Zugang ist als Zielbild beschrieben und noch nicht produktiv freigegeben. Möchten Sie ein System anbinden, prüfen wir Schnittstelle, Rechte und Aufwand und nennen Ihnen das Ergebnis im Angebot.",
-            "nl": "De toegang is beschreven als streefbeeld en nog niet productief vrijgegeven. Wilt u een systeem koppelen, dan toetsen we koppelvlak, rechten en inspanning en noemen het resultaat in de offerte.",
-            "fr": "L’accès est décrit comme cible et n’est pas encore validé en production. Si vous souhaitez connecter un système, nous vérifions interface, droits et charge et indiquons le résultat dans l’offre.",
-            "en": "The access is described as a target state and is not yet released for production. If you want to connect a system, we review interface, permissions and effort and state the result in the offer."
+            "de": "Für eine konkrete Anbindung betrachten wir die vorhandene Schnittstelle, die benötigten Rechte und den fachlichen Nutzen. Welche Zugänge und Funktionen für Ihr Projekt geeignet und verfügbar sind, wird für die jeweilige Umgebung geprüft.\n\nBeschreiben Sie das System und die Aufgabe. Wir prüfen Voraussetzungen und Aufwand und legen einen passenden nächsten Schritt im Angebot fest.",
+            "nl": "Voor een concrete koppeling bekijken we de bestaande interface, benodigde rechten en zakelijke waarde. Welke toegang en functies geschikt en beschikbaar zijn voor uw project, wordt voor de betreffende omgeving gecontroleerd.\n\nBeschrijf het systeem en de taak. Wij beoordelen de voorwaarden en inzet en leggen een passende volgende stap in de offerte vast.",
+            "fr": "Pour une connexion concrète, nous examinons l’interface existante, les droits nécessaires et l’intérêt métier. Les accès et fonctions adaptés et disponibles pour votre projet sont vérifiés dans l’environnement concerné.\n\nDécrivez le système et la tâche. Nous évaluons les conditions et le travail nécessaire, puis proposons une prochaine étape adaptée.",
+            "en": "For a specific integration, we examine the existing interface, required permissions and business purpose. Access and functions suitable and available for your project are checked in the relevant environment.\n\nDescribe the system and task. We will assess prerequisites and effort and set out a suitable next step in the proposal."
           },
           "source_refs": [
             "docs/09-final/05-technische-spezifikation.md",
@@ -3421,10 +3421,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Skills bündeln bewährte Arbeitsmethoden, MCP erschließt Werkzeuge und Systeme über einen kontrollierten Zugang. Beides wird je Vorhaben geprüft und freigeschaltet.",
-          "nl": "Skills bundelen bewezen werkmethoden, MCP ontsluit hulpmiddelen en systemen via gecontroleerde toegang. Beide worden per project getoetst en vrijgegeven.",
-          "fr": "Les skills regroupent des méthodes de travail éprouvées, MCP ouvre outils et systèmes via un accès contrôlé. Les deux sont vérifiés et activés projet par projet.",
-          "en": "Skills bundle proven working methods, MCP opens tools and systems through controlled access. Both are reviewed and enabled per project."
+          "de": "Skills beschreiben wiederverwendbare Arbeitsmethoden; MCP kann Werkzeuge und Systeme anbinden. Eignung, Rechte und Verfügbarkeit werden für jedes Vorhaben geprüft.",
+          "nl": "Skills beschrijven herbruikbare werkwijzen; MCP kan hulpmiddelen en systemen verbinden. Geschiktheid, rechten en beschikbaarheid worden per project gecontroleerd.",
+          "fr": "Les skills décrivent des méthodes réutilisables ; MCP peut connecter outils et systèmes. Adéquation, droits et disponibilité sont vérifiés pour chaque projet.",
+          "en": "Skills describe reusable working methods; MCP can connect tools and systems. Suitability, permissions and availability are assessed for each project."
         },
         "canonical_path": "/produkte/skills-mcp",
         "canonical_origin": null,
@@ -3527,10 +3527,10 @@
         "en": "Portals. One entry point per audience."
       },
       "summary": {
-        "de": "Kundenportal, Partnerportal und Shop haben unterschiedliche Nutzer und bleiben getrennt. Hier finden Sie den passenden Einstieg.",
-        "nl": "Klantenportaal, partnerportaal en shop hebben verschillende gebruikers en blijven gescheiden. Hier vindt u de juiste ingang.",
-        "fr": "Portail client, portail partenaire et boutique ont des utilisateurs différents et restent séparés. Vous trouvez ici la bonne entrée.",
-        "en": "Customer portal, partner portal and shop serve different users and stay separate. Find the right entry point here."
+        "de": "Kunden-, Partner- und Shopbereiche richten sich an unterschiedliche Nutzer. Finden Sie den passenden Einstieg und erfahren Sie, was für Ihren Zugang verfügbar ist.",
+        "nl": "Klant-, partner- en shopomgevingen zijn bedoeld voor verschillende gebruikers. Vind de juiste ingang en ontdek wat voor uw toegang beschikbaar is.",
+        "fr": "Les espaces client, partenaire et boutique répondent à des besoins différents. Trouvez votre entrée et découvrez les fonctions disponibles pour votre accès.",
+        "en": "Customer, partner and shop areas serve different users. Find the right entry point and learn what is available for your access."
       },
       "site_context": "nexify",
       "sections": [
@@ -3543,10 +3543,10 @@
             "en": "Who uses what"
           },
           "body": {
-            "de": "Das Kundenportal ist der gemeinsame Arbeitsbereich zwischen NeXify und Ihnen: Status, Anfragen, Angebote, Dokumente und Support. Das Partnerportal richtet sich an Werkstätten. TEILEKLAR.shop ist der eigenständige Shop mit eigener Marke.",
-            "nl": "Het klantenportaal is de gedeelde werkruimte tussen NeXify en u: status, aanvragen, offertes, documenten en support. Het partnerportaal is bedoeld voor garages. TEILEKLAR.shop is de zelfstandige shop met een eigen merk.",
-            "fr": "Le portail client est l’espace de travail commun entre NeXify et vous : statut, demandes, offres, documents et support. Le portail partenaire s’adresse aux garages. TEILEKLAR.shop est la boutique autonome, avec sa propre marque.",
-            "en": "The customer portal is the shared workspace between NeXify and you: status, enquiries, offers, documents and support. The partner portal is for workshops. TEILEKLAR.shop is the standalone shop with its own brand."
+            "de": "Kunden-, Partner- und Shopbereiche richten sich an unterschiedliche Aufgaben. Ein Kundenportal kann beispielsweise Projektstatus, Dokumente und Anfragen bündeln; Partnerbereiche richten sich an die jeweils vorgesehenen Partnergruppen. TEILEKLAR.shop bleibt die eigenständige Shop-Marke.\n\nWelche dieser Funktionen für Sie tatsächlich freigeschaltet sind, hängt vom jeweiligen Zugang und Betriebsstand ab.",
+            "nl": "Klant-, partner- en shopomgevingen zijn bedoeld voor verschillende taken. Een klantenportaal kan bijvoorbeeld projectstatus, documenten en aanvragen bundelen; partneromgevingen zijn gericht op de betreffende partnergroepen. TEILEKLAR.shop blijft een zelfstandig shopmerk.\n\nWelke functies daadwerkelijk voor u zijn geactiveerd, hangt af van de toegang en de operationele status.",
+            "fr": "Les espaces client, partenaire et boutique répondent à des besoins différents. Un portail client peut par exemple réunir état du projet, documents et demandes ; les espaces partenaires s’adressent aux groupes concernés. TEILEKLAR.shop conserve sa propre marque.\n\nLes fonctions effectivement activées dépendent de votre accès et de l’état du service.",
+            "en": "Customer, partner and shop areas serve different purposes. A customer portal can, for example, bring together project status, documents and enquiries; partner areas serve their intended partner groups. TEILEKLAR.shop remains a separate shop brand.\n\nWhich functions are actually enabled depends on your access and the service’s operating status."
           },
           "source_refs": [
             "docs/09-final/14-gesamtsystem-und-portale.md",
@@ -3562,10 +3562,10 @@
             "en": "Separate and protected"
           },
           "body": {
-            "de": "Jedes Portal hat eigene Rollen und Daten, Mandanten sind strikt getrennt. Eine Anmeldung gilt nicht automatisch für ein anderes Portal. Private Inhalte sehen Sie erst nach der Anmeldung.",
-            "nl": "Elk portaal heeft eigen rollen en gegevens, tenants zijn strikt gescheiden. Een aanmelding geldt niet automatisch voor een ander portaal. Privé-inhoud ziet u pas na het aanmelden.",
-            "fr": "Chaque portail a ses propres rôles et données, les mandants sont strictement séparés. Une connexion ne vaut pas automatiquement pour un autre portail. Vous ne voyez les contenus privés qu’après connexion.",
-            "en": "Each portal has its own roles and data, and tenants are strictly separated. Signing in does not automatically apply to another portal. You see private content only after signing in."
+            "de": "Für jeden Bereich müssen Rollen, Daten und Zugriffsrechte passend zum jeweiligen Kontext geprüft werden. Eine Anmeldung gilt nicht automatisch für ein anderes Portal.\n\nPrivate Inhalte dürfen nur nach erfolgreicher Anmeldung und Berechtigungsprüfung zugänglich sein. Ob ein konkreter Zugang bereits verfügbar ist, wird vor der Nutzung geklärt.",
+            "nl": "Voor iedere omgeving moeten rollen, gegevens en toegangsrechten in de betreffende context worden gecontroleerd. Een aanmelding geldt niet automatisch voor een ander portaal.\n\nPrivé-inhoud mag pas na een geslaagde aanmelding en rechtencontrole toegankelijk zijn. Of een concrete toegang al beschikbaar is, wordt vóór gebruik vastgesteld.",
+            "fr": "Pour chaque espace, les rôles, données et droits d’accès doivent être vérifiés dans leur contexte. Une connexion ne donne pas automatiquement accès à un autre portail.\n\nLes contenus privés ne doivent être accessibles qu’après authentification et contrôle des autorisations. La disponibilité d’un accès précis est vérifiée avant utilisation.",
+            "en": "Roles, data and access rights need to be checked for each area and its context. Signing in does not automatically grant access to another portal.\n\nPrivate content must only be accessible after successful authentication and authorisation. Availability of a specific access route is confirmed before use."
           },
           "source_refs": [
             "docs/09-final/14-gesamtsystem-und-portale.md",
@@ -3581,10 +3581,10 @@
             "en": "What is enabled for you"
           },
           "body": {
-            "de": "Welche Portalfunktionen verfügbar sind, hängt von Ihrem Zugang ab. Bereiche, die noch nicht angebunden sind, zeigen wir offen als solche und täuschen keine Daten vor.",
-            "nl": "Welke portaalfuncties beschikbaar zijn, hangt af van uw toegang. Onderdelen die nog niet gekoppeld zijn, tonen we openlijk als zodanig en we doen niet alsof er gegevens zijn.",
-            "fr": "Les fonctions disponibles dépendent de votre accès. Les espaces pas encore raccordés sont présentés comme tels, sans simuler de données.",
-            "en": "Which portal functions are available depends on your access. Areas that are not yet connected are shown openly as such, without simulated data."
+            "de": "Nicht jeder Bereich ist automatisch für jedes Konto verfügbar. Welche Funktionen Sie nutzen können, hängt von der tatsächlichen Freischaltung und den eingerichteten Verbindungen ab.\n\nWenn Sie einen Kunden- oder Partnerzugang benötigen, beschreiben Sie Ihren Anwendungsfall. Wir klären den passenden Bereich und die nächsten Schritte.",
+            "nl": "Niet iedere omgeving is automatisch voor elk account beschikbaar. Welke functies u kunt gebruiken, hangt af van de daadwerkelijke activering en ingerichte koppelingen.\n\nHeeft u klant- of partnertoegang nodig, beschrijf dan uw situatie. Wij bespreken de juiste omgeving en de volgende stappen.",
+            "fr": "Tous les espaces ne sont pas automatiquement disponibles pour chaque compte. Les fonctions utilisables dépendent de l’activation réelle et des connexions configurées.\n\nSi vous avez besoin d’un accès client ou partenaire, décrivez votre situation. Nous préciserons l’espace adapté et les prochaines étapes.",
+            "en": "Not every area is automatically available to every account. Available functions depend on actual activation and configured connections.\n\nIf you need customer or partner access, describe your use case. We will clarify the appropriate area and next steps."
           },
           "source_refs": [
             "docs/09-final/14-gesamtsystem-und-portale.md",
@@ -3594,10 +3594,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Kundenportal, Partnerportal und Shop haben unterschiedliche Nutzer und bleiben getrennt. Hier finden Sie den passenden Einstieg.",
-          "nl": "Klantenportaal, partnerportaal en shop hebben verschillende gebruikers en blijven gescheiden. Hier vindt u de juiste ingang.",
-          "fr": "Portail client, portail partenaire et boutique ont des utilisateurs différents et restent séparés. Vous trouvez ici la bonne entrée.",
-          "en": "Customer portal, partner portal and shop serve different users and stay separate. Find the right entry point here."
+          "de": "Kunden-, Partner- und Shopbereiche richten sich an unterschiedliche Nutzer. Finden Sie den passenden Einstieg und erfahren Sie, was für Ihren Zugang verfügbar ist.",
+          "nl": "Klant-, partner- en shopomgevingen zijn bedoeld voor verschillende gebruikers. Vind de juiste ingang en ontdek wat voor uw toegang beschikbaar is.",
+          "fr": "Les espaces client, partenaire et boutique répondent à des besoins différents. Trouvez votre entrée et découvrez les fonctions disponibles pour votre accès.",
+          "en": "Customer, partner and shop areas serve different users. Find the right entry point and learn what is available for your access."
         },
         "canonical_path": "/portale",
         "canonical_origin": null,

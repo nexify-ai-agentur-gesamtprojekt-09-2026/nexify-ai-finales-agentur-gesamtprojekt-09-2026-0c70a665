@@ -1,0 +1,138 @@
+{
+  "scope": "explicit public-pwa local build; bounded source and artifact hashes; neutral offline notice only; no OS install or production acceptance",
+  "observed_at": "2026-11-10T09:48:53.383Z",
+  "node_version": "v26.9.0",
+  "browser_version": "158.0.8127.18",
+  "source_sha256": {
+    "apps/site/pwa/worker.js": "e9c41e62481bf1e4cf353638640e54ef1c8ac5de06683239378748c947cf4068",
+    "apps/site/pwa/plugin.mjs": "185be72f2873af8ce0a6e2840cb0b4ae0b7c76df55c7ad002ad7e7ebe38b97d0",
+    "apps/site/src/public-installation.mjs": "b9356fa2927be45012d769024ba8925de28fd405832f3713d5cd23295a7df259",
+    "apps/site/tests/browser-pwa.mjs": "4b8cf39e9711e0f4f1142049e15924448f637f06636f5fdf56b17395fed8913e",
+    "apps/site/tests/pwa-offline-worker.test.mjs": "6748a7ee0a83ce76889251d4aa5e44a76d11ae0b45d6581f2e4d466e09f15f20",
+    "apps/site/tests/public-installation.test.mjs": "58d24504a122210c86682f35d103450d370c0a8bd9a196117a61c02acebd1c9c",
+    "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
+    "apps/site/vite.config.ts": "c6e8b8d847228d2c6c68ef3b073ead3a7749b959971684e26d71b5b003639932",
+    "packages/tokens/tokens.json": "55200cde57f9886f18051c41d4b729f976d236e67286eceb14ec882e13b70d09",
+    "apps/web/public/icon-192.png": "f275a07821cbb3e53b9531219246cf242d29c02d0110b5819e348f1e9896a627",
+    "apps/web/public/icon-512.png": "1ffcf5205f71ef3ca4a8104fa80945fc941dc251cd216dfdd78e714479d86a59",
+    "apps/web/public/icon-maskable-512.png": "ce261773ce39f6cb57d4c0b5c8a2ab7aa7a48ce5e5ec5bce5dfc266bc7d55cad"
+  },
+  "artifact_sha256": {
+    "index.html": "7dc212d7e0a250a459a44e5d7e51acd6102736589179a364d7b11a0636ce4c0b",
+    "manifest.webmanifest": "565092b7034a0b8fb711d3f50f5e15a56426fba45f462db5b3a10b0261aabd3e",
+    "public-install-worker.js": "e9c41e62481bf1e4cf353638640e54ef1c8ac5de06683239378748c947cf4068",
+    "icon-192.png": "f275a07821cbb3e53b9531219246cf242d29c02d0110b5819e348f1e9896a627",
+    "icon-512.png": "1ffcf5205f71ef3ca4a8104fa80945fc941dc251cd216dfdd78e714479d86a59",
+    "icon-maskable-512.png": "ce261773ce39f6cb57d4c0b5c8a2ab7aa7a48ce5e5ec5bce5dfc266bc7d55cad",
+    "assets/PublicOrientationChat-CXUYBd0J.js": "eb5de56f51d70e165b41656328b15d35748f790bac5c0f4fba7deca6a95f653e",
+    "assets/PublicOrientationChat-DbGj0IdD.css": "3f5a7ef667f9fc666c2a56f2c774d094a698ffdcc6dae0491e79f00b39dd3905",
+    "assets/exception-autocapture-BXAvG-kd.js": "f18d5599c630de1dc700e51ac4b8840fd69c9de1973b4d1ebf64d0dce1dd6619",
+    "assets/index-Chhkn0nu.css": "53f2f7e62d03cb300f41f8602fd742bf247185ffd8102be001227809b357c016",
+    "assets/index-pDjIQdUL.js": "24f0f18bb3035ac50099a538b4aeb0874e9c241d131dba2c977b1e6e0bc3dfc4",
+    "assets/module.no-external-Dc6An4pv.js": "69c328275159c88687c584199b061e7c6148926655a103a734ec3bea2954a51f"
+  },
+  "offline_cases": [
+    {
+      "path": "/kontakt?message=synthetic-sensitive",
+      "language": "de",
+      "brand": "NeXify AI",
+      "status": 503,
+      "passed": true
+    },
+    {
+      "path": "/?lang=nl",
+      "language": "nl",
+      "brand": "NeXify AI",
+      "status": 503,
+      "passed": true
+    },
+    {
+      "path": "/?lang=fr",
+      "language": "fr",
+      "brand": "NeXify AI",
+      "status": 503,
+      "passed": true
+    },
+    {
+      "path": "/?lang=en",
+      "language": "en",
+      "brand": "NeXify AI",
+      "status": 503,
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt?lang=nl&message=synthetic-sensitive",
+      "language": "de",
+      "brand": "TEILEKLAR",
+      "status": 503,
+      "passed": true
+    },
+    {
+      "path": "/teileklarish?lang=en",
+      "language": "en",
+      "brand": "NeXify AI",
+      "status": 503,
+      "passed": true
+    },
+    {
+      "path": "/?lang=__proto__&message=synthetic-sensitive",
+      "language": "de",
+      "brand": "NeXify AI",
+      "status": 503,
+      "passed": true
+    }
+  ],
+  "checks": [
+    "Chromium reports no installability errors for localhost build",
+    "real registration and controller",
+    "manifest parsed without browser errors",
+    "synthetic API rejection not cached",
+    "one online POST only",
+    "online server errors pass through without replacing their response",
+    "offline private GET and POST fail without retry",
+    "offline navigation selects fixed language and brand without echoing request data",
+    "reconnect restores shell without POST replay",
+    "CacheStorage remains empty",
+    "updated worker waits without taking over active client",
+    "updated worker activates after clients close",
+    "owned registration rollback after client closure"
+  ],
+  "manifest": {
+    "id": "/",
+    "name": "NeXify AI",
+    "short_name": "NeXify AI",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "lang": "de",
+    "background_color": "#1B1E1D",
+    "theme_color": "#1B1E1D",
+    "icons": [
+      {
+        "src": "/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/icon-maskable-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/signet.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      }
+    ]
+  },
+  "passed": true
+}

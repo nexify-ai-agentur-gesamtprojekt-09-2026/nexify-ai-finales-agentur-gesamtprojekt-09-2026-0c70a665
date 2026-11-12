@@ -59,7 +59,12 @@ async def import_status(ident=Depends(auth.require_admin)):
 async def start_import(body: ImportIn, ident=Depends(auth.require_admin)):
     if body.environment not in ("production", "sandbox", "ftp", "selection"):
         raise HTTPException(422, {"error": "environment_invalid"})
-    run_id = await bigbuy_import.start_import(db, body.environment, ident.user_id)
+    try:
+        run_id = await bigbuy_import.start_import(db, body.environment, ident.user_id)
+    except bigbuy_import.BigBuyReadError as error:
+        if str(error) == "tenant_publication_contract_unverified":
+            raise HTTPException(503, {"error": "tenant_publication_contract_unverified"}) from None
+        raise
     if not run_id:
         raise HTTPException(409, {"error": "import_running"})
     return {"run_id": run_id, "status": "running"}

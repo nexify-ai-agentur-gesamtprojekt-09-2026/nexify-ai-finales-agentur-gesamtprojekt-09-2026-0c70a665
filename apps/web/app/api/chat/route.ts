@@ -49,11 +49,11 @@ function systemPrompt(locale: ChatLocale, pagePath: string): string {
     'Ein Angebot gibst du zusätzlich zum Fließtext als EINEN Codeblock aus, exakt so:',
     '```offer',
     '{ "title": "...", "summary": "...", "currency": "EUR", "valid_until": "YYYY-MM-DD",',
-    '  "items": [ { "description": "...", "quantity": 1, "unit_cents": 44900 } ] }',
+    '  "items": [ { "description": "...", "quantity": 1, "unit_cents": null } ] }',
     '```',
-    'Preise sind unverbindliche Richtpreise in Cent (netto). Orientiere dich an Pascals Tagessatz',
-    '449 € netto, wenn eine Aufwandsschätzung passt. Erfinde keine Fixpreise, wenn der Umfang unklar ist',
-    '(dann unit_cents = null lassen). Die verbindliche Bestellung erfolgt erst später über den Bestell-Endpunkt.',
+    'Erfinde keine Preise oder verbindlichen Zusagen. Solange keine aktuell freigegebene Preisgrundlage',
+    'vorliegt, setze unit_cents auf null und erkläre, dass ein individuelles Angebot vorbereitet wird.',
+    'Die verbindliche Bestellung erfolgt erst später über den Bestell-Endpunkt.',
   ].join('\n');
 }
 
@@ -110,8 +110,8 @@ export async function POST(request: Request): Promise<Response> {
     let full = '';
     try {
       for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) full += chunk;
-    } catch (e) {
-      return err(e instanceof Error ? e.message : 'chat_llm_failed', 502);
+    } catch {
+      return err('chat_llm_failed', 502);
     }
     const draft = parseOfferDraft(full);
     const visible = draft ? stripOfferFence(full) : full;
@@ -148,8 +148,8 @@ export async function POST(request: Request): Promise<Response> {
         }
         const msg: ChatMessageDTO = { role: 'assistant', content: visible, created_at: new Date().toISOString() };
         send({ type: 'done', message: msg });
-      } catch (e) {
-        send({ type: 'error', error: e instanceof Error ? e.message : 'chat_llm_failed' });
+      } catch {
+        send({ type: 'error', error: 'chat_llm_failed' });
       } finally {
         controller.close();
       }

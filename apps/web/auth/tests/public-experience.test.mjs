@@ -4,14 +4,17 @@ import {readFile} from 'node:fs/promises';
 import {prepareInstallation} from '../../scripts/generate-public-data.mjs';
 import {preparePublicData} from '../../../site/scripts/generate-public-data.mjs';
 import {publicInstallationManifest} from '../../../site/pwa/plugin.mjs';
+// Run the shared worker's behavioral cases in the Next test suite too: offline
+// language/brand, online errors, and exclusion of API, writes and cross-origin.
+import '../../../site/tests/pwa-offline-worker.test.mjs';
 
-test('Next installation stays opt-in and reuses the network-only worker and central tokens',async()=>{
+test('Next installation stays opt-in and reuses the bounded offline-notice worker and central tokens',async()=>{
  const tokens=JSON.parse(await readFile(new URL('../../../../packages/tokens/tokens.json',import.meta.url),'utf8'));
  const worker=await readFile(new URL('../../../site/pwa/worker.js',import.meta.url),'utf8');
  for(const mode of [undefined,'true','production','PUBLIC-PWA'])assert.deepEqual(prepareInstallation(mode,tokens,worker),{enabled:false,manifest:null,worker:null});
  const enabled=prepareInstallation('public-pwa',tokens,worker);
  assert.deepEqual(enabled.manifest,publicInstallationManifest(tokens));assert.equal(enabled.worker,worker);
- assert.doesNotMatch(worker,/caches\.|fetch\(|skipWaiting\(|clients\.claim\(|['"](?:fetch|sync|push)['"]/);
+ assert.doesNotMatch(worker,/\bcaches\s*(?:\.|\[)|\bskipWaiting\s*\(|\bclients\s*\.\s*claim\s*\(|addEventListener\s*\(\s*['"](?:sync|push)['"]/);
 });
 
 test('the shared public projection excludes a private page even when accidentally allowlisted',async()=>{

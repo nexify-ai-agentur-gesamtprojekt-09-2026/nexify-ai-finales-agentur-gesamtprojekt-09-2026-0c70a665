@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from pymongo.errors import DuplicateKeyError
 
 from . import auth, fulfillment, mail_templates, mailer, pricing, revolut
-from .cart_api import owner_for, priced
+from .cart_api import owner_for, priced, revision_filter
 from .config import PUBLIC_ORIGIN
 from .db import db, now_iso
 
@@ -58,7 +58,7 @@ def address_errors(a: Address):
 
 
 def quote_hash(quote):
-    material = [(l["product_id"], l["quantity"], l["unit_cents"]) for l in quote["lines"]] + [quote["shipping_cents"], quote["total_cents"]]
+    material = [(l["product_id"], l["quantity"], l["unit_cents"]) for l in quote["lines"]] + [quote["shipping_cents"], quote["total_cents"], quote.get("cart_revision")]
     return hashlib.sha256(json.dumps(material).encode()).hexdigest()
 
 
@@ -126,15 +126,32 @@ def public_order(order):
                                          "fulfilment", "tracking_number", "carrier")}, "timeline": timeline(order)}
 
 
+def validate_order_replay(existing, owner, body, *, require_hash=False):
+    if not existing or existing.get('owner') != owner:
+        raise HTTPException(503, {'error': 'order_replay_unavailable'})
+    recorded = existing.get('request_hash')
+    if require_hash and not recorded:
+        raise HTTPException(409, {'error': 'idempotency_unverifiable'})
+    if recorded and recorded != hashlib.sha256(body.model_dump_json().encode()).hexdigest():
+        raise HTTPException(409, {'error': 'idempotency_conflict'})
+
+
 @router.post("/orders")
 async def create_order(body: CheckoutIn, request: Request, response: Response, idempotency_key: str = Header(..., alias="Idempotency-Key", min_length=16, max_length=80)):
+    # A retry of an already owned order must remain available even if a later
+    # guest-cart merge cannot run; no cart changes are needed for this replay.
+    initial = await auth.identity(request)
+    if initial.owner:
+        existing = await db.orders.find_one({"owner": initial.owner, "idempotency_key": idempotency_key})
+        if existing:
+            validate_order_replay(existing, initial.owner, body)
+            return await payment_response(existing)
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         raise HTTPException(409, {"error": "cart_empty"})
     existing = await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key})
     if existing:
-        if existing.get('request_hash') and existing['request_hash'] != hashlib.sha256(body.model_dump_json().encode()).hexdigest():
-            raise HTTPException(409, {"error": "idempotency_conflict"})
+        validate_order_replay(existing, ident.owner, body)
         return await payment_response(existing)
     await require_price_release()
     errors = address_errors(body.address)
@@ -155,11 +172,14 @@ async def create_order(body: CheckoutIn, request: Request, response: Response, i
              "status": OPEN, "lines": quote["lines"], "subtotal_cents": quote["subtotal_cents"], "shipping_cents": quote["shipping_cents"],
              "total_cents": quote["total_cents"], "vat_included_cents": quote["vat_included_cents"], "vat_percent": quote["vat_percent"],
              "currency": "EUR", "address": body.address.model_dump(), "shipping_method": "standard", "terms_accepted_at": now_iso(),
-             "created_at": now_iso(), "revolut_mode": revolut.config.revolut_mode(), "paid_transitions": 0, "request_hash": hashlib.sha256(body.model_dump_json().encode()).hexdigest()}
+             "created_at": now_iso(), "revolut_mode": revolut.config.revolut_mode(), "paid_transitions": 0, "request_hash": hashlib.sha256(body.model_dump_json().encode()).hexdigest(),
+             "cart_revision": quote["cart_revision"]}
     try:
         await db.orders.insert_one(order)
     except DuplicateKeyError:
-        return await payment_response(await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key}))
+        existing = await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key})
+        validate_order_replay(existing, ident.owner, body, require_hash=True)
+        return await payment_response(existing)
     return await payment_response(order)
 
 
@@ -203,7 +223,11 @@ async def sync_payment(order):
                                                       {"$set": {"status": PAID, "paid_at": now_iso(), "paid_mail_recovery_pending": True}, "$inc": {"paid_transitions": 1}})
         if updated:
             paid_ids = [l["product_id"] for l in order["lines"]]
-            await db.carts.update_one({"owner": order["owner"]}, {"$pull": {"items": {"product_id": {"$in": paid_ids}}}})
+            # Never clear a cart changed since this order's quote. Legacy orders
+            # without a recorded revision keep their cart for manual recovery.
+            if 'cart_revision' in order:
+                await db.carts.update_one(revision_filter(order['owner'], order['cart_revision']),
+                    {"$pull": {"items": {"product_id": {"$in": paid_ids}}}, "$inc": {"revision": 1}})
         current = await db.orders.find_one({"_id": order["_id"]})
         if current and current.get("status") == PAID and current.get("paid_mail_recovery_pending"):
             await send_paid_mails(current)

@@ -272,6 +272,7 @@ class ChatGPT(GatewayCase):
             self.prompts.append(messages)
             return "Antwort"
         option = tools.ChatGPTOption(complete, "gpt-5.4", "fake", per_visitor=2, daily_cap=5)
+        self.option = option
         session = self.make(SimpleNamespace(mail=None, speech=None, chatgpt=option))
         self.assertIs(session["capabilities"]["chatgpt_option"], True)
 
@@ -287,6 +288,114 @@ class ChatGPT(GatewayCase):
         self.assertEqual(self.action("/api/assistant/chatgpt", {"message": "x", "model": "other"}, key="chat-key-0005")[0], 422)
         history = self.request("GET", "/api/session", cookie=self.cookie)[1]["history"]
         self.assertEqual(history, [])  # ChatGPT turns stay separate from the NeXify structured history
+
+    def test_replay_is_cached_and_different_payload_conflicts_before_provider(self):
+        body = {"message": "Was macht NeXify?", "locale": "de"}
+        first = self.action("/api/assistant/chatgpt", body, key="chat-replay-0001")
+        replay = self.action("/api/assistant/chatgpt", body, key="chat-replay-0001")
+        self.assertEqual(first[:2], replay[:2])
+        self.assertEqual(first[0], 200)
+        self.assertEqual(len(self.prompts), 1)
+        with self.store.connect() as db:
+            receipt = db.execute("SELECT owner,payload_hash,response FROM receipts WHERE operation=? AND key=?",
+                                 ("provider_chatgpt", "chat-replay-0001")).fetchone()
+        self.assertNotIn(first[1]["text"], receipt["response"])
+        self.assertEqual(set(json.loads(receipt["response"])), {"message_id", "message_sha256", "model", "route"})
+        reopened = gateway.Store(self.store.path)
+        after_restart = self.option.reply(reopened, receipt["owner"], body["message"], "de", "chat-replay-0001", receipt["payload_hash"])
+        self.assertEqual(after_restart, first[1])
+        self.assertEqual(len(self.prompts), 1)
+        conflict = self.action("/api/assistant/chatgpt", {"message": "Andere Frage", "locale": "de"}, key="chat-replay-0001")
+        self.assertEqual((conflict[0], conflict[1]["error"]), (409, "idempotency_conflict"))
+        self.assertEqual(len(self.prompts), 1)
+        self.assertEqual(self.action("/api/assistant/chatgpt", body, key="short")[0], 422)
+
+    def test_concurrent_duplicate_is_not_dispatched_twice(self):
+        started, release = threading.Event(), threading.Event()
+        def slow(messages):
+            self.prompts.append(messages)
+            started.set()
+            if not release.wait(3): raise RuntimeError("fixture timeout")
+            return "Antwort"
+        self.option.complete = slow
+        body = {"message": "Gleichzeitige Anfrage"}
+        first = []
+        thread = threading.Thread(target=lambda: first.append(self.action("/api/assistant/chatgpt", body, key="chat-concurrent-01")))
+        thread.start()
+        try:
+            self.assertTrue(started.wait(3))
+            duplicate = self.action("/api/assistant/chatgpt", body, key="chat-concurrent-01")
+            self.assertEqual((duplicate[0], duplicate[1]["error"]), (409, "chatgpt_request_pending_or_unknown"))
+            conflict = self.action("/api/assistant/chatgpt", {"message": "Andere Anfrage"}, key="chat-concurrent-01")
+            self.assertEqual((conflict[0], conflict[1]["error"]), (409, "idempotency_conflict"))
+        finally:
+            release.set(); thread.join(4)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(first[0][0], 200)
+        self.assertEqual(len(self.prompts), 1)
+
+    def test_provider_failure_keeps_unknown_receipt_and_does_not_retry(self):
+        calls = []
+        def fail(messages):
+            calls.append(messages)
+            raise tools.ProviderError("fixture_failed", unknown=True)
+        self.option.complete = fail
+        body = {"message": "Fehlerfall"}
+        self.assertEqual(self.action("/api/assistant/chatgpt", body, key="chat-unknown-0001")[0], 502)
+        replay = self.action("/api/assistant/chatgpt", body, key="chat-unknown-0001")
+        self.assertEqual((replay[0], replay[1]["error"]), (409, "chatgpt_request_pending_or_unknown"))
+        with self.store.connect() as db:
+            receipt = db.execute("SELECT owner,payload_hash FROM receipts WHERE operation=? AND key=?",
+                                 ("provider_chatgpt", "chat-unknown-0001")).fetchone()
+        reopened = gateway.Store(self.store.path)
+        with self.assertRaisesRegex(tools.ProviderError, "chatgpt_request_pending_or_unknown"):
+            self.option.reply(reopened, receipt["owner"], body["message"], "de", "chat-unknown-0001", receipt["payload_hash"])
+        self.assertEqual(len(calls), 1)
+
+    def test_same_key_in_separate_sessions_does_not_replay_another_visitor(self):
+        body = {"message": "Projekt"}
+        self.assertEqual(self.action("/api/assistant/chatgpt", body, key="chat-per-owner-01")[0], 200)
+        _, session, headers = self.request("GET", "/api/session")
+        cookie = headers["Set-Cookie"].split(";", 1)[0]
+        second = self.request("POST", "/api/assistant/chatgpt", body, cookie=cookie, csrf=session["csrf"], key="chat-per-owner-01")
+        self.assertEqual(second[0], 200)
+        self.assertEqual(len(self.prompts), 2)
+        self.assertEqual([m["role"] for m in self.prompts[1]], ["system", "user"])
+        # Even a corrupted reference to another owner's message is rejected.
+        with self.store.connect() as db:
+            rows = db.execute("SELECT owner,response FROM receipts WHERE operation=? AND key=? ORDER BY rowid",
+                              ("provider_chatgpt", "chat-per-owner-01")).fetchall()
+            first_receipt, second_receipt = json.loads(rows[0]["response"]), json.loads(rows[1]["response"])
+            first_receipt["message_id"] = second_receipt["message_id"]
+            db.execute("UPDATE receipts SET response=? WHERE owner=? AND operation=? AND key=?",
+                       (json.dumps(first_receipt), rows[0]["owner"], "provider_chatgpt", "chat-per-owner-01"))
+        replay = self.action("/api/assistant/chatgpt", body, key="chat-per-owner-01")
+        self.assertEqual((replay[0], replay[1]["error"]), (409, "chatgpt_request_pending_or_unknown"))
+        self.assertEqual(len(self.prompts), 2)
+
+    def test_missing_assistant_message_fails_closed_without_provider_retry(self):
+        body = {"message": "Meine Frage"}
+        self.assertEqual(self.action("/api/assistant/chatgpt", body, key="chat-missing-0001")[0], 200)
+        with self.store.connect() as db:
+            receipt = db.execute("SELECT owner,response FROM receipts WHERE operation=? AND key=?",
+                                 ("provider_chatgpt", "chat-missing-0001")).fetchone()
+            message_id = json.loads(receipt["response"])["message_id"]
+            db.execute("DELETE FROM chatgpt_messages WHERE id=? AND owner=?", (message_id, receipt["owner"]))
+        replay = self.action("/api/assistant/chatgpt", body, key="chat-missing-0001")
+        self.assertEqual((replay[0], replay[1]["error"]), (409, "chatgpt_request_pending_or_unknown"))
+        self.assertEqual(len(self.prompts), 1)
+
+    def test_replaced_same_owner_message_fails_closed_without_provider_retry(self):
+        body = {"message": "Meine Frage"}
+        self.assertEqual(self.action("/api/assistant/chatgpt", body, key="chat-replaced-0001")[0], 200)
+        with self.store.connect() as db:
+            receipt = db.execute("SELECT owner,response FROM receipts WHERE operation=? AND key=?",
+                                 ("provider_chatgpt", "chat-replaced-0001")).fetchone()
+            message_id = json.loads(receipt["response"])["message_id"]
+            db.execute("UPDATE chatgpt_messages SET body=? WHERE id=? AND owner=?", ("Anderer Inhalt", message_id, receipt["owner"]))
+        replay = self.action("/api/assistant/chatgpt", body, key="chat-replaced-0001")
+        self.assertEqual((replay[0], replay[1]["error"]), (409, "chatgpt_request_pending_or_unknown"))
+        self.assertEqual(len(self.prompts), 1)
 
 
 class ProviderPages(GatewayCase):

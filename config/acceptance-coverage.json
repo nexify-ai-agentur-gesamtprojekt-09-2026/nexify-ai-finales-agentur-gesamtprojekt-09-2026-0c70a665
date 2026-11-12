@@ -1223,7 +1223,7 @@
     }
   ],
   "source_sha256": {
-    "AGENTS.md": "c149f6d9fa2048bd5b3d889cfa34b9810f35e9038c1707d996855f6e8ea4f870",
+    "AGENTS.md": "9e47cdb53b8a5db3b8dbd4669d5f7f995f9596eea171b15e320a13eaecc5313e",
     "PROGRESS.md": "ee42461b8e39de9f778795b78d43b2ff84df17e31a386cdc0df6ce6b7a19c2bd",
     "apps/agent-gateway/cart.py": "10c758d99fd5c65c7e0c6a180cb0e5ded8b63a427bf044699bb26d63f681d0b7",
     "apps/agent-gateway/server.py": "3fa30a1d01d914a39b3f222ce486e85cb3d3842cdf56ca46604665ebc329b4ab",
@@ -1308,7 +1308,7 @@
     "evidence/one-app-2026-10-27/suite-trial-method-binding.json": "a8b0f0d8dad6f7d295f8898a69749adc5cd28aac72f99cbed1c2001f48f37af3",
     "evidence/one-app-2026-10-27/takeover-runtime-read.json": "cf604539a555287d63aca6d77217ab10b578a39a6d54991ac3367444646a6cf0",
     "evidence/one-app-2026-10-27/target-size-before.json": "1abda3087a139559ac17188171fd8e5de03c34f41cd5061c72d3a55a97a218db",
-    "evidence/one-app-2026-10-27/text-spacing.json": "3c876e84f5cf73d591cd61381fb3e54dce0b65a52127648a363c3bec0b7a0f4e",
+    "evidence/one-app-2026-10-27/text-spacing.json": "2d35d1bfe99149cfce7125000fde5813af5d333bebf12347a27d334ee2b13c51",
     "evidence/reconciliation-2026-10-27/linked-standards-reference.json": "f20d9e9d8b66d49057c038a17aaea6ce9c8392e92cecbe55ed5594bb0adbaf48",
     "evidence/reconciliation-2026-10-27/review-asset-inspection.json": "11f5c4eee4527585f607fadec7cec4c99cc10b18228a4f6cb7794bcf46056f2e",
     "evidence/reconciliation-2026-10-27/route-feature-inventory.json": "fbea71c96cf69f0db41d5f405a8535629a4cfb1c8fd06c270c7267cb4f8495e4",
@@ -1388,11 +1388,11 @@
     "docs/contracts/reviewed-delivery.md": "1453ae109ca7b60470bc85b11c58d0a96e5c34cdb5531f510da9d66f50bb0584",
     ".harness/arch-rules.json": "5fb777e79a34840a3dbe8d8ee08647e1db972e267742f877718746942d32e2a0",
     "apps/site/tests/public-video-assets.test.mjs": "e127dadd2c6577302add4c94866af2ca404e0aac97fa1a06f261b5428e6a9753",
-    "docs/design/detail-browser-evidence.json": "8a26dd144e36c7ca542de943108e5e4d578db1a193f685d107c01f2c6cb2a3b1",
+    "docs/design/detail-browser-evidence.json": "51ab1ea30abe100e31c0ad06b800937df8b3848374bab639a710cc5362a68b15",
     "config/page-media-registry.json": "f3fae02c19ba65c94af5103adabea178e676d430a32858119d6535678dd3e304",
     "apps/site/scripts/public-explainers.mjs": "9206180af31420cc14cdfa088ebc15bdfca8e7ad26f8b4b5739677c2d48b4db6",
     "apps/site/scripts/public-video-assets.mjs": "beb7aee6d2994d099e5bda2b13cb52eb847f4ea2db9c6e3b35113d7279f5408a",
-    "evidence/one-app-2026-10-27/critical-browser-fresh.json": "8a26dd144e36c7ca542de943108e5e4d578db1a193f685d107c01f2c6cb2a3b1",
+    "evidence/one-app-2026-10-27/critical-browser-fresh.json": "51ab1ea30abe100e31c0ad06b800937df8b3848374bab639a710cc5362a68b15",
     "docs/contracts/page-video-integration.md": "d9ee702e324a6633b0bdc6919502869a7312894f105caadc59e2ac5630685886",
     "apps/web/components/PresenterVideo.tsx": "c9917dcd7f033dab440967595db1a21fafafc3b5c44cfb8b7818fcf11d3ea94f",
     "evidence/page-videos-2026-10-27/browser-video.json": "6e0b572ded11d9c91e6bdefb066d3e705dbeb32c445c9a20a1740ecae232be24",
@@ -1450,7 +1450,7 @@
     "apps/site/tests/auth.test.mjs": "2390a03695815b7e7112bf93d7e3aae603d6bffb494cadc61b82ba6d55e14d61",
     "apps/web/components/OracleCompanion.tsx": "945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
-    "apps/web/components/PublicOrientationChat.tsx": "d03a7c5faf9ec814d0339828b6b7585775a44913cb5b06f2335582652b7ee630",
+    "apps/web/components/PublicOrientationChat.tsx": "76610423000e140c94740c54f17026829702c52d43abed35296957f11ff45524",
     "apps/web/lib/i18n.ts": "e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213",
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/site/tests/browser-oracle-companion.mjs": "1fd681d90180385450f8ac117f4bc1b1d3d101bdbeefc597c8336ec70ce82c98",
@@ -5048,6 +5048,38 @@
             }
           }
         }
+      },
+      "revision_20261109": {
+        "id": "GOAL-NEXIFY-COMPLETION-20261101-R20261109",
+        "source": "explicit_user_goal_and_design_request_2026-11-09",
+        "target_site": "https://nexify-ai-gesamtprojekt-20261109.workspace-vo-0220.chatgpt.site/",
+        "status": "in_progress_design_first",
+        "whole_system_accepted": false,
+        "site_publication": {
+          "project_id": "appgprj_6af2144e2af881918282f28c4b57411a",
+          "access": "owner_private",
+          "version_number": 2,
+          "source_commit": "342abeb8aced91cb41170b9d33efea47951df51d",
+          "deployment_id": "appgdep_6af22554c6f081918c540b39290fcc67",
+          "deployment_status": "succeeded",
+          "full_release_acceptance": false
+        },
+        "work_package": {
+          "id": "P02-CHAT-DESIGN-20261109",
+          "priority": "design_first",
+          "owner_function": "UX/Frontend",
+          "writer": "/root",
+          "scope": "public_orientation_chat_layout_copy_and_mobile_composer",
+          "dependencies": ["P02", "P03", "existing_design_tokens"],
+          "budget": "no_new_paid_provider_calls",
+          "state": "in_review",
+          "source_pr": "https://github.com/nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/pull/92",
+          "local_evidence": ["apps/site/tests/browser-critical.mjs", "apps/site/tests/browser-text-spacing.mjs"],
+          "tests": "critical_browser_passed; text_spacing_129_checks_43_routes_zero_issues; source_bound_register_tests_passed",
+          "rollback": "Restore prior private Sites version 1; retain PR and commits as recoverable history.",
+          "acceptance": "pending_independent_review_and_all_required_CI_checks"
+        },
+        "persistent_runner": "not_activated; existing register remains canonical; runtime authority and nonrecursive scheduler still require verification"
       }
     }
   },

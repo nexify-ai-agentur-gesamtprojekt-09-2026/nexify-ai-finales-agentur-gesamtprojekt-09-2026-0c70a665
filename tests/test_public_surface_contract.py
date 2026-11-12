@@ -27,12 +27,16 @@ class PublicSurfaceContractTests(unittest.TestCase):
             with self.subTest(path=str(path.relative_to(ROOT))):
                 self.assertIsNone(re.search(r'#[0-9a-fA-F]{3,8}(?![\w-])|\b(?:rgb|hsl)a?\(\s*[\d.]',raw))
                 self.assertIsNone(re.search(r'(?:color|background(?:-color)?|border-color|fill|stroke)\s*[:=]\s*[\'\"]?(?:black|white|red|blue|green|yellow|gray|grey)\b',raw,re.I))
-    def test_public_installation_is_explicit_and_network_only(self):
+    def test_public_installation_uses_bounded_navigation_fallback(self):
         plugin=(ROOT/'apps/site/pwa/plugin.mjs').read_text()
         self.assertIn("mode==='public-pwa'",plugin)
         worker=(ROOT/'apps/site/pwa/worker.js').read_text()
-        self.assertEqual(re.findall(r"addEventListener\('([^']+)'",worker),['install'])
-        self.assertNotRegex(worker,r'caches\.|fetch\(|skipWaiting\(|clients\.claim\(')
+        self.assertEqual(re.findall(r"addEventListener\('([^']+)'",worker),['install','fetch'])
+        self.assertNotRegex(worker,r'caches\.|skipWaiting\(|clients\.claim\(')
+        # Verify API, cross-origin and write requests remain untouched and that
+        # an actual network error produces only fixed, non-reflective content.
+        subprocess.run(['node','--test',str(ROOT/'apps/site/tests/pwa-offline-worker.test.mjs')],
+                       cwd=ROOT,check=True,capture_output=True,text=True)
         self.assertTrue((ROOT/'prototypen/sw.js').exists())
     def test_root_font_claim_is_not_accepted_as_rendered_text_doubling(self):
         from tools.check_text_resize_evidence import check_resize

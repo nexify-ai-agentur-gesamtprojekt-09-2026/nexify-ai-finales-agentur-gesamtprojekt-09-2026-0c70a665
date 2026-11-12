@@ -1,22 +1,23 @@
 "use client";
 import {useChat} from "@ai-sdk/react";
-import {DefaultChatTransport} from "ai";
-import {useEffect,useMemo,useRef,useState,type FormEvent} from "react";
+import {DefaultChatTransport,type UIMessage} from "ai";
+import {useEffect,useMemo,useRef,useState,type FormEvent,type MouseEvent} from "react";
 import type {Locale} from "../lib/i18n";
 import type {PublicPage} from "../lib/page-types";
 import {SiteLink} from "./Router";
 import "./PublicOrientationChat.css";
 import {staticOrientation,type StaticGuidance} from "../lib/static-orientation";
+import {saveOracleBrief} from "../lib/project-brief-transfer";
 declare const __NEXIFY_STATIC_ORIENTATION__:boolean;
 
 const copy={
   "de": {
-    "title": "Was haben Sie vor?",
+    "title": "Was planen Sie?",
     "mode": "Leistungen finden",
-    "intro": "Beschreiben Sie kurz Ihr Vorhaben oder wählen Sie einen Bereich. Hier finden Sie passende Informationen und den Weg zum persönlichen Gespräch.",
+    "intro": "Erzählen Sie mir von Ihrem Unternehmen und Ihrem Vorhaben. Ich helfe Ihnen, passende Leistungen zu finden und Ihr Gespräch mit Pascal vorzubereiten.",
     "label": "Wobei können wir Ihnen helfen?",
     "placeholder": "Zum Beispiel: Ich möchte meine Website erneuern …",
-    "send": "Informationen anzeigen",
+    "send": "Nachricht senden",
     "stop": "Antwort anhalten",
     "waiting": "Passende Informationen werden geladen …",
     "error": "Die Website-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten. Für die persönliche Projektklärung nutzen Sie bitte die Kontaktseite.",
@@ -29,10 +30,10 @@ const copy={
   "nl": {
     "title": "Wat bent u van plan?",
     "mode": "Diensten vinden",
-    "intro": "Beschrijf kort uw plan of kies een onderwerp. Hier vindt u passende informatie en de weg naar een persoonlijk gesprek.",
+    "intro": "Vertel me over uw bedrijf en uw plannen. Ik help u passende diensten te vinden en uw gesprek met Pascal voor te bereiden.",
     "label": "Waarmee kunnen we u helpen?",
     "placeholder": "Bijvoorbeeld: Ik wil mijn website vernieuwen …",
-    "send": "Informatie tonen",
+    "send": "Bericht versturen",
     "stop": "Antwoord onderbreken",
     "waiting": "Passende informatie wordt geladen …",
     "error": "Het websiteadvies is nu niet bereikbaar. Uw invoer blijft behouden. Gebruik de contactpagina voor een persoonlijk projectgesprek.",
@@ -45,10 +46,10 @@ const copy={
   "fr": {
     "title": "Quel est votre projet ?",
     "mode": "Trouver une prestation",
-    "intro": "Décrivez brièvement votre projet ou choisissez un sujet. Retrouvez les informations utiles et le contact pour en discuter.",
+    "intro": "Parlez-moi de votre entreprise et de votre projet. Je vous aide à trouver les services adaptés et à préparer votre échange avec Pascal.",
     "label": "Comment pouvons-nous vous aider ?",
     "placeholder": "Par exemple : je souhaite refaire mon site …",
-    "send": "Afficher les informations",
+    "send": "Envoyer le message",
     "stop": "Suspendre la réponse",
     "waiting": "Chargement des informations pertinentes…",
     "error": "Le conseil sur le site est momentanément indisponible. Votre saisie est conservée. Utilisez la page de contact pour un échange personnel sur votre projet.",
@@ -61,10 +62,10 @@ const copy={
   "en": {
     "title": "What are you planning?",
     "mode": "Find a service",
-    "intro": "Briefly describe your project or choose a topic. Find relevant information and the route to a personal conversation.",
+    "intro": "Tell me about your business and what you have in mind. I can help you find relevant services and prepare your conversation with Pascal.",
     "label": "How can we help?",
     "placeholder": "For example: I would like to update my website …",
-    "send": "Show information",
+    "send": "Send message",
     "stop": "Pause response",
     "waiting": "Loading relevant information …",
     "error": "Website guidance is temporarily unavailable. Your input is retained. Please use the contact page for a personal project discussion.",
@@ -83,6 +84,7 @@ const tkCopy={
  fr:{title:"Bienvenue chez TEILEKLAR",intro:"Bienvenue chez TEILEKLAR. Que recherchez-vous : une pièce, une visite en atelier ou une collaboration ? Pour une demande de pièce ou d’atelier, indiquez votre véhicule et décrivez votre demande. Un numéro de pièce existant facilite l’affectation. La commande en ligne n’est pas possible actuellement.",label:"Votre demande véhicule/pièce",placeholder:"Indiquez le véhicule et la pièce recherchée …"},
  en:{"title": "Welcome to TEILEKLAR", "intro": "Welcome to TEILEKLAR. What is it about for you: a spare part, a workshop visit or a partnership? For a parts or workshop question, please name your vehicle and describe your request. An existing part number helps with the assignment. Online ordering is currently not possible.", "label": "Your vehicle/part request", "placeholder": "Enter the vehicle and the part you need …"}
 };
+const staticModeLabel:Record<Locale,string>={de:'Orientierung anhand der Website · ohne Live-KI',nl:'Oriëntatie op basis van de website · zonder live AI',fr:'Orientation selon le site · sans IA en direct',en:'Website-based guidance · no live AI'};
 const starters={
   "de": {
     "nexify": [
@@ -208,19 +210,19 @@ const starters={
 
 const starterDetails:Record<Locale,Record<"nexify"|"teileklar",readonly string[]>>={
  de:{
-  nexify:["Positionierung, Sprache, Design und Website als überzeugender Auftritt.","Abläufe, Systeme und KI zu einer kontrollierten Arbeitsweise verbinden.","Angebot, Zielgruppe, Kampagne und Landingpage gemeinsam auf Wirkung ausrichten."],
+  nexify:["Auftritt, Website oder Shop gestalten.","Abläufe verbinden und Arbeit erleichtern.","Menschen erreichen und Nachfrage gewinnen."],
   teileklar:["Mit Fahrzeugdaten und vorhandenem Hinweis zum passenden Teil starten.","Leistung, Fahrzeug und Standort für die Werkstattsuche einordnen.","Werkstattprofil, Zusammenarbeit und gemeinsamen Serviceweg besprechen."]
  },
  nl:{
-  nexify:["Positionering, taal, design en website als overtuigend geheel.","Processen, systemen en AI verbinden tot een controleerbare werkwijze.","Aanbod, doelgroep, campagne en landingspagina samen op resultaat richten."],
+  nexify:["Een uitstraling, website of shop ontwikkelen.","Processen verbinden en werk eenvoudiger maken.","Mensen bereiken en vraag creëren."],
   teileklar:["Start met voertuiggegevens en bekende informatie over het onderdeel.","Werkplaatsdienst, voertuig en locatie samen afbakenen.","Werkplaatsprofiel, samenwerking en gezamenlijke service bespreken."]
  },
  fr:{
-  nexify:["Positionnement, langage, design et site réunis dans une présence convaincante.","Relier processus, systèmes et IA dans un fonctionnement maîtrisé.","Aligner offre, cible, campagne et page d’arrivée sur un même résultat."],
+  nexify:["Créer une identité, un site ou une boutique.","Relier les processus et simplifier le travail.","Atteindre des clients et susciter la demande."],
   teileklar:["Commencer avec le véhicule et les informations connues sur la pièce.","Préciser la prestation, le véhicule et la zone de recherche.","Échanger sur le profil atelier, la collaboration et le parcours de service."]
  },
  en:{
-  nexify:["Positioning, language, design and website shaped as one convincing presence.","Connect workflows, systems and AI in a controlled way of working.","Align offer, audience, campaign and landing page around one result."],
+  nexify:["Create a presence, website or shop.","Connect workflows and make work easier.","Reach people and generate demand."],
   teileklar:["Start with vehicle details and any known information about the part.","Frame the service, vehicle and location for the workshop search.","Discuss the workshop profile, partnership and shared service journey."]
  }
 };
@@ -250,7 +252,7 @@ function OrientationStarters({locale,site,label,onChoose}:{locale:Locale;site:"n
 
 function OrientationJourney({locale,site}:{locale:Locale;site:"nexify"|"teileklar"}){
  const content=journeyCopy[locale][site];
- return <aside className="orientation-journey" aria-label={content.title}><span>{content.eyebrow}</span><h4>{content.title}</h4><p>{content.body}</p><ol>{content.steps.map(([number,label])=><li key={number}><small>{number}</small><strong>{label}</strong></li>)}</ol></aside>;
+ return <div className="orientation-path" aria-label={content.title}>{content.steps.map(([number,label])=><span key={number}><small>{number}</small>{label}</span>)}</div>;
 }
 
 function OrientationAnswer({text,locale}:{text:string;locale:Locale}){
@@ -267,33 +269,105 @@ function guidedText(text:string,pages:PublicPage[]){
  });
 }
 
+const briefingCopy:Record<Locale,{title:string;intro:string;label:string;copy:string;copied:string;fallback:string;tooLong:string;contact:string;hint:string;heading:string}>={
+ de:{title:"Ihr Projektbriefing",intro:"Aus Ihren Angaben entsteht ein Entwurf für das persönliche Gespräch. Sie können ihn ändern.",label:"Briefing bearbeiten",copy:"Briefing kopieren",copied:"Kopiert.",fallback:"Die Übernahme ist hier nicht möglich. Kopieren Sie den Text und fügen Sie ihn im Kontaktformular ein.",tooLong:"Bitte kürzen Sie das Briefing auf höchstens 4.000 Zeichen.",contact:"Mit diesem Briefing anfragen",hint:"Der Text wird auf diesem Gerät ins Kontaktformular übernommen. Erst dort entscheiden Sie, ob Sie die Anfrage absenden.",heading:"Mein Vorhaben"},
+ nl:{title:"Uw projectbriefing",intro:"Uw informatie vormt een concept voor een persoonlijk gesprek. U kunt het aanpassen.",label:"Briefing bewerken",copy:"Briefing kopiëren",copied:"Gekopieerd.",fallback:"Overnemen is hier niet mogelijk. Kopieer de tekst en plak deze in het contactformulier.",tooLong:"Kort het briefing in tot maximaal 4.000 tekens.",contact:"Aanvragen met dit briefing",hint:"De tekst wordt op dit apparaat in het contactformulier gezet. U beslist daar zelf over verzenden.",heading:"Mijn project"},
+ fr:{title:"Votre briefing projet",intro:"Vos informations forment une base pour un échange personnel. Vous pouvez la modifier.",label:"Modifier le briefing",copy:"Copier le briefing",copied:"Copié.",fallback:"Le transfert est indisponible ici. Copiez le texte puis collez-le dans le formulaire de contact.",tooLong:"Raccourcissez le briefing à 4 000 caractères maximum.",contact:"Faire une demande avec ce briefing",hint:"Le texte est repris dans le formulaire sur cet appareil. Vous décidez ensuite de l’envoyer.",heading:"Mon projet"},
+ en:{title:"Your project brief",intro:"Your details become a draft for a personal conversation. You can edit it.",label:"Edit brief",copy:"Copy brief",copied:"Copied.",fallback:"Transfer is unavailable here. Copy the text and paste it into the contact form.",tooLong:"Please shorten the brief to 4,000 characters or fewer.",contact:"Enquire with this brief",hint:"The text is added to the contact form on this device. You decide whether to send it there.",heading:"My project"}
+};
+
+function ProjectBriefing({locale,questions}:{locale:Locale;questions:string[]}){
+ const t=briefingCopy[locale];
+ const [edited,setEdited]=useState<string|null>(null),[notice,setNotice]=useState("");
+ const priorQuestions=useRef<string[]>([]);
+ const questionSignature=questions.join('\u0001');
+ useEffect(()=>{
+  const previous=priorQuestions.current;
+  const incoming=questions.length>previous.length?questions.slice(previous.length):previous.at(-1)!==questions.at(-1)?questions.slice(-1):[];
+  priorQuestions.current=questions;
+  if(incoming.length)setEdited(current=>current===null?null:`${current}\n${incoming.join('\n')}`);
+ },[questionSignature]);
+ const prompts:Record<Locale,string>={de:"Ziel / gewünschtes Ergebnis:\n\nBestehende Website oder Systeme:\n\nZeitrahmen und Budget (falls bekannt):",nl:"Doel / gewenst resultaat:\n\nBestaande website of systemen:\n\nPlanning en budget (indien bekend):",fr:"Objectif / résultat souhaité :\n\nSite ou systèmes existants :\n\nCalendrier et budget (si connus) :",en:"Goal / desired outcome:\n\nExisting website or systems:\n\nTimeline and budget (if known):"};
+ const generated=`${t.heading}:\n${questions.map((question,index)=>`${index+1}. ${question}`).join("\n")}\n\n${prompts[locale]}`;
+ const value=edited??generated;
+ async function copyBrief(){try{await navigator.clipboard.writeText(value);setNotice(t.copied);}catch{setNotice(t.fallback);}}
+ function transferBrief(event:MouseEvent<HTMLAnchorElement>){
+  try{
+   if(value.length>4000){event.preventDefault();setNotice(t.tooLong);return;}
+   if(!saveOracleBrief(sessionStorage,value))throw new Error('invalid_brief');
+  }catch{
+   event.preventDefault();
+   setNotice(t.fallback);
+  }
+ }
+ return <section className="orientation-brief" aria-label={t.title}><div className="orientation-brief-heading"><span className="orientation-brief-icon" aria-hidden="true">✳</span><div><h4>{t.title}</h4><p>{t.intro}</p></div></div><label htmlFor="orientation-brief-text">{t.label}</label><textarea id="orientation-brief-text" rows={5} maxLength={4000} value={value} onChange={event=>{setEdited(event.target.value);setNotice("");}}/><div className="orientation-brief-actions"><button type="button" className="outline-button" onClick={()=>void copyBrief()}>{t.copy}</button><SiteLink className="primary-button" href="/kontakt" onClick={transferBrief}>{t.contact} <span aria-hidden="true">→</span></SiteLink></div><p className="orientation-brief-hint">{t.hint}</p><p className="orientation-brief-notice" role="status">{notice}</p></section>;
+}
+
 type OrientationProps={locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void};
 
 export default function PublicOrientationChat(props:OrientationProps){
  const local=typeof __NEXIFY_STATIC_ORIENTATION__!=="undefined"&&__NEXIFY_STATIC_ORIENTATION__===true;
- return local?<StaticOrientationChat {...props}/>:<ServerOrientationChat {...props}/>;
+ const site=props.pagePath.startsWith('/teileklar')?'teileklar':'nexify';
+ const conversationKey=`${site}:${props.locale}`;
+ return local?<StaticOrientationChat key={conversationKey} {...props}/>:<ServerOrientationChat key={conversationKey} {...props}/>;
+}
+
+// UI history is visitor-supplied context, never proof of an authenticated conversation.
+// Send a bounded suffix of whole text turns; never truncate the latest user question.
+export function serverTextHistory(messages:UIMessage[]){
+ const validId=/^[A-Za-z0-9_-]{1,100}$/;
+ const invalidText=/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/u;
+ const result:{id:string;role:'user'|'assistant';parts:{type:'text';text:string}[]}[]=[];
+ const ids=new Set<string>();let characters=0;
+ for(let i=messages.length-1;i>=0&&result.length<12;i--){
+  const message=messages[i],latest=i===messages.length-1;
+  if((message.role!=='user'&&message.role!=='assistant')||typeof message.id!=='string'||!validId.test(message.id)||ids.has(message.id)){
+   if(latest)throw new Error('invalid_latest_message');continue;
+  }
+  const textParts=message.parts.filter(part=>part.type==='text');
+  if(textParts.some(part=>typeof part.text!=='string')){if(latest)throw new Error('invalid_latest_message');continue;}
+  const parts=textParts.map(part=>({type:'text' as const,text:part.text}));
+  const count=parts.reduce((total,part)=>total+part.text.length,0);
+  if(!parts.length||parts.length>12||parts.some(part=>invalidText.test(part.text))||!count){
+   if(latest)throw new Error('invalid_latest_message');continue;
+  }
+  if(characters+count>3000){if(latest)throw new Error('latest_message_too_long');break;}
+  ids.add(message.id);characters+=count;result.unshift({id:message.id,role:message.role,parts});
+ }
+ while(result[0]?.role==='assistant')result.shift();
+ if(result.at(-1)?.role!=='user')throw new Error('latest_user_message_required');
+ return result;
 }
 
 function ServerOrientationChat({locale,pagePath,pages,onActivityChange}:OrientationProps){
  const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify";const text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};const[draft,setDraft]=useState("");const lastSubmitted=useRef("");
- const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>({body:{id,trigger,...(messageId?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:messages.filter(message=>message.role==="user").slice(-1).map(message=>({id:message.id,role:message.role,parts:message.parts.filter(part=>part.type==="text")}))}})}),[]);
- const{messages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>setDraft(previous=>previous||lastSubmitted.current)});
+ const retryPending=useRef(false);const previousTurns=useRef<UIMessage[]>([]);
+ const transport=useMemo(()=>new DefaultChatTransport({api:"/api/agent-chat",prepareSendMessagesRequest:({id,messages,trigger,messageId,body})=>{const history=serverTextHistory(messages);return {body:{id,trigger,...(messageId&&history.some(message=>message.id===messageId)?{messageId}:{}),page_path:body?.page_path,locale:body?.locale,messages:history}};}}),[]);
+ const{messages,setMessages,sendMessage,status,error,stop}=useChat({id:"nexify-public-orientation",transport,onError:()=>{retryPending.current=true;setDraft(previous=>previous||lastSubmitted.current);}});
  const busy=status==="submitted"||status==="streaming";
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
  const composerInput=useRef<HTMLTextAreaElement>(null);
  useEffect(()=>{if(!busy&&lastSubmitted.current&&document.activeElement===document.body&&composerInput.current?.offsetParent!==null)composerInput.current?.focus();},[busy]);
- async function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy)return;lastSubmitted.current=value;setDraft("");try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{setDraft(previous=>previous||value);}}
+ async function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy)return;
+  if(retryPending.current)setMessages(previousTurns.current);else previousTurns.current=messages;
+  retryPending.current=false;lastSubmitted.current=value;setDraft("");
+  try{await sendMessage({text:value},{body:{page_path:pagePath,locale}});}catch{retryPending.current=true;setDraft(previous=>previous||value);}}
+ function stopAnswer(){retryPending.current=true;setDraft(previous=>previous||lastSubmitted.current);void stop();}
  return <section className="public-orientation" aria-label={text.title}>
-  <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <div className="orientation-content">
+  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map(message=><article className={"orientation-message role-"+message.role} key={message.id}><strong>{message.role==="user"?text.you:text.assistant}</strong>{message.parts.map((part,index)=>{
    if(part.type==="text")return <p key={index}>{message.role==="assistant"?guidedText(part.text,pages):part.text}</p>;
    if(part.type!=="data-page"||!("data" in part)||!part.data||typeof part.data!=="object")return null;
    const ref=part.data as Record<string,unknown>;const page=pages.find(page=>page.id===ref.page_id&&page.path===ref.path);
    return page?<SiteLink className="orientation-page-link" key={index} href={page.path}><span className="orientation-page-index" aria-hidden="true">0{index+1}</span><span className="orientation-page-copy"><strong>{page.localizedTitle[locale]}</strong><small>{page.localizedSummary[locale]}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>:null;
   })}</article>)}</div>
+  {messages.some(message=>message.role==="user")&&<OrientationJourney locale={locale} site={site}/>}
+  {site==="nexify"&&messages.some(message=>message.role==="user")&&<ProjectBriefing locale={locale} questions={messages.filter(message=>message.role==="user").map(message=>message.parts.filter(part=>part.type==="text").map(part=>part.text).join(" "))}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={()=>void stop()}>{text.stop}</button>}</form>
+  {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
+  </div>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} disabled={busy} required/><button className="primary-button" disabled={busy||!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>{busy&&<button type="button" className="outline-button" onClick={stopAnswer}>{text.stop}</button>}</form>
   {busy&&<p className="connection-note" role="status">{text.waiting}</p>}<p className="connection-note">{text.privacy}</p>
  </section>;
 }
@@ -309,18 +383,22 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange}:Orientat
  useEffect(()=>{if(messages.length)latest.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages]);
  function submit(event:FormEvent){
   event.preventDefault();const question=draft.trim();if(!question)return;
-  try{const answer=staticOrientation({locale,pagePath,question,pages});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
+  try{const answer=staticOrientation({locale,pagePath,question,pages,previousQuestions:messages.map(message=>message.question)});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
   catch{setError(true);}
  }
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="local-public-pages">
-  <div className="orientation-intro"><span className="state-label">{text.mode}</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <div className="orientation-content">
+  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
    <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>
   </div>)}</div>
+  {messages.length>0&&<OrientationJourney locale={locale} site={site}/>}
+  {site==="nexify"&&messages.length>0&&<ProjectBriefing locale={locale} questions={messages.map(message=>message.question)}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<><OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/><OrientationJourney locale={locale} site={site}/></>}
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={3} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
-  <p className="connection-note">{text.privacy}</p>
+  {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
+  </div>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
+  <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}{text.privacy}</p>
  </section>;
 }
