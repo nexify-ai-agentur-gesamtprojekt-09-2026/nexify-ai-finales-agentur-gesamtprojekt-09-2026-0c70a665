@@ -57,3 +57,13 @@
 .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume[open] { display:block; flex:none; }
 .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { position:absolute; bottom:calc(100% + var(--space-3)); right:0; width:180px; min-width:0; padding:var(--space-3); border-radius:var(--radius-karte); background:var(--gradient-karte); box-shadow:var(--shadow-atelier-polish); }
 @media(max-width:600px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls { bottom:var(--space-3); } .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button { font-size:var(--type-small-size); padding:var(--space-2); } }
+
+/* Keep controls on one line and the slider inside the small mobile video. */
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button { white-space:nowrap; }
+@media(max-width:600px) {
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls { gap:0; }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button { gap:var(--space-1); font-size:11px; padding-inline:var(--space-2); }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { width:160px; padding:var(--space-2); }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume label { display:block; font-size:0; }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume input { display:block; min-height:24px; }
+}
