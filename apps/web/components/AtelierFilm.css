@@ -67,3 +67,6 @@
  .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume label { display:block; font-size:0; }
  .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume input { display:block; min-height:24px; }
 }
+
+/* Keep the volume panel clear of the hero copy at desktop widths. */
+@container identity-hero (min-width:821px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { left:0; right:auto; } }
