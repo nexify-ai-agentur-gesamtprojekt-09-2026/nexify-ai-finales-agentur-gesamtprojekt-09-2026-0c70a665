@@ -97,3 +97,12 @@
 @container home (max-width:420px){.home-concept .hc-process ol{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.home-concept *, .home-concept *::before,.home-concept *::after{animation:none!important;transition:none!important;transform:none!important}}
 @media(prefers-contrast:more),(forced-colors:active){.home-concept :is(.hc-art,.hc-product,.hc-service-detail,.hc-finish){box-shadow:none;border:1px solid var(--color-text-sekundaer);background:var(--gradient-karte)}}
+
+
+/* Consistent hierarchy, material depth and keyboard navigation across the home page. */
+.home-concept .hc-anchors { gap:var(--space-2) var(--space-6); }
+.home-concept .hc-anchors a { min-height:var(--target-min); line-height:1.4; text-wrap:balance; }
+.home-concept :is(.hc-gallery-card,.hc-product,.hc-anchors a,.hc-service-detail summary):focus-visible { outline:2px solid var(--color-marke-lime); outline-offset:var(--space-1); }
+.home-concept :is(.hc-service-detail,.hc-product) { border:1px solid var(--color-linie-fein); border-top-color:var(--color-atelier-glass-edge); box-shadow:var(--shadow-atelier-polish); }
+.home-concept :is(.hc-gallery-card p,.hc-product p,.hc-section-heading p,.hc-service-detail p) { text-wrap:pretty; overflow-wrap:break-word; }
+@container home (max-width:640px) { .home-concept .hc-anchors { gap:var(--space-1) var(--space-4); } .home-concept .hc-section-heading { margin-bottom:var(--space-5); } .home-concept .hc-product { gap:var(--space-4); } }
