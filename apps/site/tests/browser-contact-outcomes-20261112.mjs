@@ -5,6 +5,25 @@ const server=await preview({root:new URL('../',import.meta.url).pathname,preview
 const origin='http://127.0.0.1:'+server.httpServer.address().port;
 const browser=await chromium.launch({headless:true,channel:'chrome'});
 try {
+ for(const path of ['/kontakt','/teileklar/partner-werden']) {
+  const context=await browser.newContext({viewport:{width:390,height:900}});
+  const page=await context.newPage(); let requests=0;
+  await page.route('**/api/**',route=>{if(new URL(route.request().url()).pathname==='/api/requests'&&route.request().method()==='POST')requests++;return route.fulfill({status:503,json:{error:'offline_fixture'}});});
+  await page.goto(origin+path);
+  await page.getByTestId('contact-submit').click();
+  await page.getByTestId('contact-name-error').waitFor();
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('name')),'name','empty form focuses first invalid field '+path);
+  for(const field of ['name','email','message','consent']) {
+   const input=page.getByTestId('contact-'+field), error=page.getByTestId('contact-'+field+'-error');
+   assert.equal(await input.getAttribute('aria-describedby'),await error.getAttribute('id'),'error is described by field '+field);
+  }
+  await page.getByTestId('contact-name').fill('Synthetic Tester');
+  await page.getByTestId('contact-submit').click();
+  await page.waitForFunction(()=>document.activeElement?.getAttribute('name')==='email');
+  assert.equal(requests,0,'invalid form never sends '+path);
+  await context.close();
+  console.log('PASS focus '+path);
+ }
  for(const scenario of ['invalid-html','accepted']) {
   const context=await browser.newContext({viewport:{width:390,height:900}});
   const page=await context.newPage(); const keys=[];

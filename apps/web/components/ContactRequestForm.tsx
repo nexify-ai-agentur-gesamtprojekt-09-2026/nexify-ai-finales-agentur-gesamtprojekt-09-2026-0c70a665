@@ -1,14 +1,16 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { api, type ApiError } from "./shop/api";
 import {useUI} from './Workspace';
 import {contactCopy} from '../lib/contact-copy';
 import {contactAttempt,persistContactAttempt,readContactAttempt,type ContactAttempt} from '../lib/contact-attempt';
 import {takeOracleBrief} from '../lib/project-brief-transfer';
+import {focusFirstInvalid} from '../lib/contact-focus.mjs';
 import "./shop/shop.css";
 
 export default function ContactRequestForm({ kind = "contact",topic }: { kind?: "contact" | "partner";topic?:string }) {
   const [ready,setReady]=useState(false);
+  const formRef=useRef<HTMLFormElement>(null), errorPrefix=useId();
   const [message,setMessage]=useState('');
   useEffect(()=>{if(kind==='contact'&&!topic){try{const brief=takeOracleBrief(sessionStorage);if(brief)setMessage(brief);}catch{/* The form remains editable without session storage. */}}setReady(true);},[kind,topic]);
   const partner = kind === "partner";
@@ -17,6 +19,8 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
   const attempt=useRef<ContactAttempt|null>(null),busyRef=useRef(false);
   const storageKey='nexify-contact-attempt-v1:'+kind+(topic?':'+encodeURIComponent(topic):'');
   const [errors, setErrors] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [number, setNumber] = useState(""), [failure, setFailure] = useState(""), [mailStatus, setMailStatus] = useState("");
+  useEffect(()=>{if(Object.keys(errors).length) focusFirstInvalid(formRef.current);},[errors]);
+  const errorId=(name:string)=>`${errorPrefix}-${name}-error`;
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busyRef.current) return;
@@ -48,18 +52,18 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
   }
   const notificationCopy={de:{sent:'Die Benachrichtigung wurde von Resend angenommen. Das bestätigt noch nicht die Zustellung im Postfach.',pending:'Ihre Anfrage ist sicher gespeichert. Die E-Mail-Benachrichtigung ist noch nicht bestätigt; bitte senden Sie die Anfrage nicht erneut.'},nl:{sent:'Resend heeft de melding geaccepteerd. Dit bevestigt nog niet de bezorging.',pending:'Uw aanvraag is opgeslagen. De e-mailmelding is nog niet bevestigd; verstuur de aanvraag niet opnieuw.'},fr:{sent:'Resend a accepté la notification. Cela ne confirme pas encore sa livraison.',pending:'Votre demande est enregistrée. La notification n’est pas encore confirmée ; ne renvoyez pas la demande.'},en:{sent:'Resend accepted the notification. Inbox delivery is not yet confirmed.',pending:'Your enquiry is safely stored. The email notification is not yet confirmed; please do not submit it again.'}}[locale];
   if (number) return <section className="tk-notice" role="status" data-testid="contact-success"><strong>{partner?text.partnerSaved:text.saved}</strong><p>{text.number}: <span data-testid="contact-number">{number}</span></p><p data-testid="contact-notification-status">{mailStatus==='gesendet'?notificationCopy.sent:notificationCopy.pending}</p></section>;
-  const field = (name: string, label: string, input: React.ReactNode) => <label className={"tk-field" + (name === "message" ? " is-wide" : "")}>{label}{input}{errors[name] && <span className="tk-field-error" data-testid={`contact-${name}-error`}>{MSG[errors[name]] || MSG.required}</span>}</label>;
-  return <form className="tk-form" method="post" onSubmit={submit} noValidate aria-labelledby="contact-form-title" data-testid="contact-form">
+  const field = (name: string, label: string, input: React.ReactNode) => <label className={"tk-field" + (name === "message" ? " is-wide" : "")}>{label}{input}{errors[name] && <span id={errorId(name)} className="tk-field-error" data-testid={`contact-${name}-error`}>{MSG[errors[name]] || MSG.required}</span>}</label>;
+  return <form ref={formRef} className="tk-form" method="post" onSubmit={submit} noValidate aria-labelledby="contact-form-title" data-testid="contact-form">
     <h2 id="contact-form-title">{partner?text.partnerTitle:text.title}</h2>
     <p className="tk-meta">{text.requiredNote}</p>
     <div className="tk-form-grid">
-      {field("name",text.name, <input name="name" autoComplete="name" maxLength={100} aria-invalid={!!errors.name} data-testid="contact-name" />)}
-      {field("email",text.email, <input name="email" type="email" autoComplete="email" maxLength={160} aria-invalid={!!errors.email} data-testid="contact-email" />)}
-      {field("company",partner?text.workshop:text.company, <input name="company" autoComplete="organization" maxLength={120} aria-invalid={!!errors.company} data-testid="contact-company" />)}
-      {field("message",text.message, <textarea name="message" rows={5} maxLength={4000} value={message} onChange={event=>setMessage(event.target.value)} aria-invalid={!!errors.message} data-testid="contact-message" />)}
+      {field("name",text.name, <input name="name" autoComplete="name" maxLength={100} aria-invalid={!!errors.name} aria-describedby={errors.name?errorId("name"):undefined} data-testid="contact-name" />)}
+      {field("email",text.email, <input name="email" type="email" autoComplete="email" maxLength={160} aria-invalid={!!errors.email} aria-describedby={errors.email?errorId("email"):undefined} data-testid="contact-email" />)}
+      {field("company",partner?text.workshop:text.company, <input name="company" autoComplete="organization" maxLength={120} aria-invalid={!!errors.company} aria-describedby={errors.company?errorId("company"):undefined} data-testid="contact-company" />)}
+      {field("message",text.message, <textarea name="message" rows={5} maxLength={4000} value={message} onChange={event=>setMessage(event.target.value)} aria-invalid={!!errors.message} aria-describedby={errors.message?errorId("message"):undefined} data-testid="contact-message" />)}
     </div>
-    <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
-    {errors.consent && <span className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
+    <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} aria-describedby={errors.consent?errorId("consent"):undefined} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
+    {errors.consent && <span id={errorId("consent")} className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
     {failure && <div role="alert" className="tk-field-error" data-testid="contact-error"><p>{failure}</p><a href="mailto:mail@nexifyai.cloud" data-testid="contact-email-fallback">{({de:'Direkt per E-Mail kontaktieren',nl:'Rechtstreeks per e-mail contact opnemen',fr:'Nous contacter directement par e-mail',en:'Contact us directly by email'} as const)[locale]}</a></div>}
     <div className="tk-actions"><button className="primary-button" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</button></div>
   </form>;
