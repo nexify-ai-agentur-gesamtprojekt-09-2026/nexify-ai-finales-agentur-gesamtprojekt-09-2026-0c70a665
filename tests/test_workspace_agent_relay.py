@@ -1,4 +1,5 @@
 import datetime as dt
+import http.client
 import io
 import json
 import tempfile
@@ -110,6 +111,16 @@ class RelayTests(unittest.TestCase):
         with self.assertRaises(relay.StateConflict): relay.send(self.journal, EVENT, allowed_tenant=TENANT,
             writer=self.spec.writer, writer_lease=self.spec.writer_lease, env={relay.TOKEN_ENV:TOKEN}, opener=FakeOpener([]))
 
+    def test_incomplete_or_reset_response_is_unclear(self):
+        for error in (http.client.IncompleteRead(b"partial"), ConnectionResetError("reset")):
+            path = Path(self.tmp.name) / f"transport-{type(error).__name__}.json"
+            journal = relay.Journal(path)
+            relay.prepare(journal, self.spec, allowed_tenant=TENANT)
+            with self.subTest(error=type(error).__name__), self.assertRaises(relay.TransportError):
+                relay.send(journal, EVENT, allowed_tenant=TENANT, writer=self.spec.writer,
+                    writer_lease=self.spec.writer_lease, env={relay.TOKEN_ENV:TOKEN}, opener=FakeOpener([error]))
+            self.assertEqual(relay.event_view(journal, EVENT)["state"], "unclear")
+
     def test_expected_http_failures_are_failed(self):
         for status in (401, 403, 404, 409):
             path = Path(self.tmp.name) / f"j{status}.json"; journal = relay.Journal(path)
@@ -151,6 +162,16 @@ class RelayTests(unittest.TestCase):
         self.assertEqual(event["state"], "result_verified")
         self.assertTrue(event["result"]["matched"])
         self.assertNotIn("ACK", self.path.read_text())
+
+    def test_poll_completed_preserves_verified_result(self):
+        self.accepted()
+        self.journal.mutate(EVENT, lambda event: relay._transition(event, "completed", remote_status="completed"))
+        relay.verify_result(self.journal, EVENT, f"ACK {EVENT}".encode(), expected_test_id=EVENT)
+        payload={"id":"apirun_test","agent_id":relay.EXPECTED_AGENT_ID,
+            "api_trigger_id":relay.EXPECTED_TRIGGER_ID,"status":"completed","error":None}
+        event=relay.poll(self.journal, EVENT, env={relay.TOKEN_ENV:TOKEN}, opener=FakeOpener([FakeResponse(200,payload)]))
+        self.assertEqual(event["state"], "result_verified")
+        self.assertTrue(event["result"]["matched"])
 
     def test_result_before_completed_is_rejected(self):
         self.prepare()
