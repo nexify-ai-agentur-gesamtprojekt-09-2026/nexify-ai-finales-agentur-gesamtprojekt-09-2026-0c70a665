@@ -23,6 +23,10 @@ try {
    assert.ok(media&&copy&&panel&&panel.width<=325,'panel width '+width);
    assert.ok(copy.y<media.y+media.height,'hero copy remains beside video '+width);
   }
+  console.log('initial media',JSON.stringify(await video.evaluate(v=>({src:v.currentSrc,error:v.error&&{code:v.error.code,message:v.error.message},readyState:v.readyState,networkState:v.networkState}))));
+  const response=await context.request.get(origin+await video.getAttribute('src')); console.log('media HTTP',response.status(),response.headers()['content-type']); assert.equal(response.status(),200,'video HTTP '+width);
+  await page.waitForFunction(()=>{const v=document.querySelector('.identity-hero video');return v.readyState>=2||!!v.error},{timeout:15000});
+  console.log('loaded media',JSON.stringify(await video.evaluate(v=>({error:v.error&&{code:v.error.code,message:v.error.message},readyState:v.readyState}))));
   const play=controls.locator('button').first();
   await play.focus(); await page.keyboard.press('Enter');
   await page.waitForFunction(()=>document.querySelector('.identity-hero .atelier-film-controls button')?.getAttribute('aria-label')==='Film pausieren');
