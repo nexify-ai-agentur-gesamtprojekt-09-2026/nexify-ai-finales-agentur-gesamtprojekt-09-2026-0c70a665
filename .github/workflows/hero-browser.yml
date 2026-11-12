@@ -6,6 +6,7 @@ on:
       - 'apps/web/components/IdentityHero*'
       - 'apps/web/components/HomeConcept.css'
       - 'apps/web/components/PageConcept.css'
+      - 'apps/web/components/SiteNavigation.tsx'
       - 'apps/site/tests/browser-design-20261112.mjs'
       - 'apps/web/components/WorkspaceRebuild.css'
       - 'apps/site/tests/browser-hero-release-20261112.mjs'
