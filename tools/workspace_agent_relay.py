@@ -9,6 +9,7 @@ import dataclasses
 import datetime as dt
 import fcntl
 import hashlib
+import http.client
 import json
 import os
 import re
@@ -255,6 +256,8 @@ def _http_json(request: urllib.request.Request, *, timeout: float, opener=None) 
         raise TransportError("workspace agent API request failed", http_status=status) from None
     except (TimeoutError, urllib.error.URLError) as exc:
         raise TransportError(f"transport outcome unclear: {type(exc).__name__}") from None
+    except (http.client.IncompleteRead, ConnectionError, OSError) as exc:
+        raise TransportError(f"transport outcome unclear: {type(exc).__name__}") from None
 
 
 def send(journal: Journal, event_id: str, *, allowed_tenant: str, writer: str, writer_lease: str,
@@ -322,7 +325,15 @@ def poll(journal: Journal, event_id: str, *, env=None, timeout: float = 15.0, op
         if remote not in {"queued", "in_progress", "suspended", "completed", "failed"}:
             raise TransportError("unknown run status")
         local = {"queued": "accepted", "in_progress": "running", "suspended": "running", "completed": "completed", "failed": "failed"}[remote]
-        return journal.mutate(event_id, lambda value: _transition(value, local, remote_status=remote, error=payload.get("error") if remote == "failed" else None))
+
+        def apply_status(value):
+            if remote == "completed" and value["state"] in {"result_received", "result_verified"}:
+                value["remote_status"] = remote
+                value["error"] = None
+                return
+            _transition(value, local, remote_status=remote, error=payload.get("error") if remote == "failed" else None)
+
+        return journal.mutate(event_id, apply_status)
     except TransportError as exc:
         if exc.http_status in {401, 403, 404, 409}:
             journal.mutate(event_id, lambda value: _transition(value, "failed", error={"kind": "http", "status": exc.http_status}))
