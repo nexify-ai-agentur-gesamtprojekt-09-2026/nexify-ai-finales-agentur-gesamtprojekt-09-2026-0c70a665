@@ -9,10 +9,12 @@ try {
  for(const width of [320,375,768,1165,1440]) {
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
   const page=await context.newPage();
+  await page.route('**/api/**',route=>route.fulfill({status:503,json:{error:'local_test'}}));
   await page.goto(origin);
   const video=page.locator('.identity-hero video'), controls=page.locator('.identity-hero .atelier-film-controls');
   await video.waitFor();
   const v=await video.boundingBox(), c=await controls.boundingBox();
+  console.log('geometry', JSON.stringify({width,v,c,viewport:await page.evaluate(()=>({width:innerWidth,height:innerHeight}))}));
   assert.ok(v&&c&&c.x>=v.x-1&&c.x+c.width<=v.x+v.width+1&&c.y>=v.y&&c.y+c.height<=v.y+v.height+1,'controls inside video '+width);
   assert.equal(await page.locator('.identity-hero-video-note').count(),0);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'no horizontal overflow '+width);
