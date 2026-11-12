@@ -70,3 +70,6 @@
 
 /* Keep the volume panel clear of the hero copy at desktop widths. */
 @container identity-hero (min-width:821px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { left:0; right:auto; } }
+
+/* In the two-column hero, open the volume control toward the center of the film. */
+@container identity-hero (min-width:821px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { left:auto; right:0; } }
