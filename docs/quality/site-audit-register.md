@@ -94,6 +94,19 @@ Leere `alt`-Texte (dekorativ, siehe Bildprüfung): oracle-lossless.webp, signet.
 | `/teileklar/reifenrechner` | ok | ok | /api/session 404 (OF-07, bekannt: Orientierungsmodus); /api/shop/cart 503 (OF-08, bekannt: Shop-API nicht deployt, Offline-Fallback) | hreflang fehlt; noindex (gewollt bis Freigabe); Beschreibung 180 Z. | D 1028/0/144 KB · M 600/0/144 KB | Higgsfield ohne Kennzeichnung: hf-17-cutout-1920.webp; ohne srcset: hf-17-cutout-1920.webp | ok |
 | `/teileklar/batterie-berater` | ok | ok | /api/session 404 (OF-07, bekannt: Orientierungsmodus); /api/shop/cart 503 (OF-08, bekannt: Shop-API nicht deployt, Offline-Fallback) | hreflang fehlt; noindex (gewollt bis Freigabe); Beschreibung 182 Z. | D 1056/0/144 KB · M 748/0/144 KB | Higgsfield ohne Kennzeichnung: hf-17-cutout-1920.webp; ohne srcset: hf-17-cutout-1920.webp | ok |
 
+## axe-core (WCAG 2.2 AA)
+
+axe-core 4.10.2, Regeln wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa, 36 Seiten × Desktop/Mobil auf `https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app`, gemessen 2026-11-12T16:02:32+00:00. **Verstöße: 0**, Messfehler: 0.
+
+Von axe als „unvollständig“ gemeldet (kein Verstoß, braucht Prüfung durch Menschen):
+
+| Regel | Seiten | Hinweis |
+|---|---|---|
+| aria-prohibited-attr | `/`, `/teileklar` | `aria-label` an Element ohne zulässige Rolle prüfen |
+| color-contrast | `/`, `/barrierefreiheit`, `/cookies`, `/datenschutz` und 32 weitere | axe kann Kontrast über Verläufen und Bildern nicht entscheiden; die eigene Messung `tools/page_quality_audit.py` (Text-Kontrast ≥ 4,5, 0 FEHLER) bleibt die Quelle |
+| link-in-text-block | `/teileklar` | Link im Fließtext nur durch Farbe unterscheidbar? Unterstreichung prüfen |
+| video-caption | `/` | Video ohne Untertitel-Spur erkannt; nach ED-02 ist das Hero kein Video mehr, Fundstelle prüfen |
+
 ## Behoben in diesem PR (lokal gemessen, noch nicht auf Produktion)
 
 | Befund | Behebung | Beleg |
@@ -119,6 +132,6 @@ Leere `alt`-Texte (dekorativ, siehe Bildprüfung): oracle-lossless.webp, signet.
 | Marke (Signet, Präsentatoren, Glas-/Champagner-Rand, Lichtreflex) | nur Bilddateien und Kennzeichnung gemessen, keine Sichtprüfung der Gestaltung | Sichtprüfung mit Screenshots Desktop/Mobil in separatem Schritt | Design |
 | Inhalt (Kundenfragen, Leerformeln) | nur Sprachvergleich Titel/H1 gemessen | redaktionelle Prüfung je Seite | Redaktion |
 | UX | nicht gemessen | Aufgabentests | UX |
-| A11y (axe-core), Lighthouse, INP | Werkzeuge hier nicht installiert, INP braucht Interaktion | in CI mit axe-core/Lighthouse ergänzen | QA |
+| Lighthouse, INP | Lighthouse hier nicht installiert, INP braucht echte Interaktion (axe-core ist gemessen, siehe oben, nur auf `main`, nicht auf Produktion) | Lighthouse und INP-Messung in CI oder lokal ergänzen | QA |
 | Sprache, TEILEKLAR | Shop ist nur Deutsch; `?lang=nl/en/fr` liefert deutschen Inhalt mit `lang=de` (ehrlich markiert). Ein sichtbarer Hinweis „nur auf Deutsch verfügbar“ für NL/EN/FR-Besucher ist nicht belegt | Redaktion/Design entscheiden, ob und wie der Hinweis erscheint | Redaktion |
 | Datenschutz (externe Anfragen, Cookies) | nicht in dieser Messung erfasst; lokale Browser-Nachweise (0 externe Anfragen) liegen unter `evidence/` | externe Hosts je Seite in Messung aufnehmen | Datenschutz |

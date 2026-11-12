@@ -113,11 +113,38 @@ def table(report: dict) -> tuple[list[str], Counter, set]:
     return lines, count, alts
 
 
+def axe_section(axe: dict) -> list[str]:
+    viol, err, review = Counter(), 0, {}
+    for s in axe["seiten"]:
+        for v in s["viewports"].values():
+            if "messfehler" in v:
+                err += 1
+                continue
+            for x in v["verstoesse"]:
+                viol[x["regel"]] += x["elemente"]
+            for x in v["unvollstaendig"]:
+                review.setdefault(x["regel"], set()).add(s["pfad"])
+    lines = ["## axe-core (WCAG 2.2 AA)", "",
+             f"axe-core {axe['axe']}, Regeln {', '.join(axe['tags'])}, {len(axe['seiten'])} Seiten × Desktop/Mobil auf `{axe['base']}`, gemessen {axe['gemessen_am']}. "
+             f"**Verstöße: {sum(viol.values())}**" + (" (" + ", ".join(f"{k} {v}" for k, v in viol.items()) + ")" if viol else "") + f", Messfehler: {err}.", "",
+             "Von axe als „unvollständig“ gemeldet (kein Verstoß, braucht Prüfung durch Menschen):", "",
+             "| Regel | Seiten | Hinweis |", "|---|---|---|"]
+    note = {"color-contrast": "axe kann Kontrast über Verläufen und Bildern nicht entscheiden; die eigene Messung `tools/page_quality_audit.py` (Text-Kontrast ≥ 4,5, 0 FEHLER) bleibt die Quelle",
+            "aria-prohibited-attr": "`aria-label` an Element ohne zulässige Rolle prüfen",
+            "video-caption": "Video ohne Untertitel-Spur erkannt; nach ED-02 ist das Hero kein Video mehr, Fundstelle prüfen",
+            "link-in-text-block": "Link im Fließtext nur durch Farbe unterscheidbar? Unterstreichung prüfen"}
+    for rule, pages in sorted(review.items()):
+        shown = ", ".join(f"`{x}`" for x in sorted(pages)[:4]) + (f" und {len(pages) - 4} weitere" if len(pages) > 4 else "")
+        lines.append(f"| {rule} | {shown} | {note.get(rule, '')} |")
+    return lines + [""]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--produktion", required=True)
     ap.add_argument("--main", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--axe", help="Ergebnis von tools/site_axe_audit.py (optional)")
     a = ap.parse_args()
     prod, main_ = (json.loads(Path(p).read_text(encoding="utf-8")) for p in (a.produktion, a.main))
     out = ["# Site-Audit-Register (09.11.2026)", "",
@@ -130,6 +157,8 @@ def main() -> int:
         out += [f"## {title}", f"Gemessen {rep['gemessen_am']}, {len(rep['seiten'])} Seiten.", "",
                 "Seiten mit Abweichung je Bereich: " + (", ".join(f"{k} {v}" for k, v in sorted(count.items())) or "keine"), "",
                 "Leere `alt`-Texte (dekorativ, siehe Bildprüfung): " + (", ".join(sorted(alts)) or "keine"), ""] + lines + [""]
+    if a.axe:
+        out += axe_section(json.loads(Path(a.axe).read_text(encoding="utf-8")))
     out += ["## Behoben in diesem PR (lokal gemessen, noch nicht auf Produktion)", "",
             "| Befund | Behebung | Beleg |", "|---|---|---|",
             "| hreflang fehlte im `<head>` aller Seiten | `alternates.languages` aus `pageMetadata` ausgegeben, inklusive `x-default`, nur vollständig übersetzte Sprachen | lokaler Lauf: `x-default, de, nl, fr, en` auf `/`, `/leistungen`, `/leistungen/websites`; `tests/test_seo_metadata.py` |",
@@ -147,7 +176,7 @@ def main() -> int:
             "| Marke (Signet, Präsentatoren, Glas-/Champagner-Rand, Lichtreflex) | nur Bilddateien und Kennzeichnung gemessen, keine Sichtprüfung der Gestaltung | Sichtprüfung mit Screenshots Desktop/Mobil in separatem Schritt | Design |",
             "| Inhalt (Kundenfragen, Leerformeln) | nur Sprachvergleich Titel/H1 gemessen | redaktionelle Prüfung je Seite | Redaktion |",
             "| UX | nicht gemessen | Aufgabentests | UX |",
-            "| A11y (axe-core), Lighthouse, INP | Werkzeuge hier nicht installiert, INP braucht Interaktion | in CI mit axe-core/Lighthouse ergänzen | QA |",
+            "| Lighthouse, INP | Lighthouse hier nicht installiert, INP braucht echte Interaktion (axe-core ist gemessen, siehe oben, nur auf `main`, nicht auf Produktion) | Lighthouse und INP-Messung in CI oder lokal ergänzen | QA |",
             "| Sprache, TEILEKLAR | Shop ist nur Deutsch; `?lang=nl/en/fr` liefert deutschen Inhalt mit `lang=de` (ehrlich markiert). Ein sichtbarer Hinweis „nur auf Deutsch verfügbar“ für NL/EN/FR-Besucher ist nicht belegt | Redaktion/Design entscheiden, ob und wie der Hinweis erscheint | Redaktion |",
             "| Datenschutz (externe Anfragen, Cookies) | nicht in dieser Messung erfasst; lokale Browser-Nachweise (0 externe Anfragen) liegen unter `evidence/` | externe Hosts je Seite in Messung aufnehmen | Datenschutz |", ""]
     Path(a.out).write_text("\n".join(out), encoding="utf-8")
