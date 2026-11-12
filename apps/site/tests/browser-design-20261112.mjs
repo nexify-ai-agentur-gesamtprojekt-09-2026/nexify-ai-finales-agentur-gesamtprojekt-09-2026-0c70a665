@@ -26,6 +26,16 @@ try {
    const shot=await page.screenshot({type:'jpeg',quality:25,animations:'disabled',fullPage:true});
    console.log(`DESIGN_SCREENSHOT ${width} ${path} ${shot.toString('base64')}`);
    console.log(`PASS design ${width} ${path}: ${heading.replace(/\s+/g,' ')}`);
+   if(path==='/kontakt'){
+    await page.getByTestId('contact-name').fill('Synthetic Tester');
+    await page.getByTestId('contact-email').fill('synthetic@example.invalid');
+    await page.getByTestId('contact-message').fill('Synthetic offline test only.');
+    await page.getByTestId('contact-consent').check();
+    await page.getByTestId('contact-submit').click();
+    await page.getByTestId('contact-error').waitFor();
+    await page.getByTestId('contact-error').scrollIntoViewIfNeeded();
+    console.log(`STATE_SCREENSHOT ${width} contact-error ${(await page.screenshot({type:'jpeg',quality:25})).toString('base64')}`);
+   }
    const disclosure=page.locator('.hc-service-detail summary').first();
    if(await disclosure.count()){
     await disclosure.click();
