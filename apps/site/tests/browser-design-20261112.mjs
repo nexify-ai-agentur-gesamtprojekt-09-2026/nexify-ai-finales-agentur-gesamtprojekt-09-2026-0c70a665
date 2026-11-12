@@ -9,7 +9,7 @@ try {
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
   const page=await context.newPage();
   await page.route('**/api/**',route=>route.fulfill({status:503,json:{error:'offline_fixture'}}));
-  for(const path of ['/','/leistungen','/produkte/nex2fly','/kontakt']) {
+  for(const path of ['/','/leistungen','/leistungen/websites','/produkte/nex2fly','/produkte/aifly-oracle','/kontakt']) {
    await page.goto(origin+path); await page.locator('h1').first().waitFor();
    const heading=await page.locator('h1').first().innerText();
    const heroImages=page.locator('.pc-hero-media img');
@@ -21,15 +21,25 @@ try {
    assert.doesNotMatch(heading,/Seite nicht verfügbar/i,`route ${path}`);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,`overflow ${path} ${width}`);
    if(path==='/kontakt') assert.equal(await page.getByTestId('contact-name').count(),1);
-   const shot=await page.screenshot({type:'jpeg',quality:35,animations:'disabled'});
+   await page.locator('img').evaluateAll(images=>Promise.all(images.map(image=>{image.loading='eager';return image.decode().catch(()=>{});})));
+   await page.evaluate(()=>document.fonts.ready);
+   const shot=await page.screenshot({type:'jpeg',quality:25,animations:'disabled',fullPage:true});
    console.log(`DESIGN_SCREENSHOT ${width} ${path} ${shot.toString('base64')}`);
    console.log(`PASS design ${width} ${path}: ${heading.replace(/\s+/g,' ')}`);
+   const disclosure=page.locator('.hc-service-detail summary').first();
+   if(await disclosure.count()){
+    await disclosure.click();
+    assert.equal(await disclosure.evaluate(e=>e.parentElement.open),true,`disclosure ${path} ${width}`);
+    const openShot=await page.screenshot({type:'jpeg',quality:25,animations:'disabled'});
+    console.log(`STATE_SCREENSHOT ${width} disclosure-${path} ${openShot.toString('base64')}`);
+   }
   }
   await page.goto(origin);
   const mobile=page.getByTestId('mobile-navigation-toggle');
   if(await mobile.isVisible()){
    await mobile.focus(); await page.keyboard.press('Enter');
    assert.equal(await page.getByTestId('mobile-navigation').evaluate(e=>e.open),true,'mobile menu opens');
+   console.log(`STATE_SCREENSHOT ${width} mobile-menu ${ (await page.screenshot({type:'jpeg',quality:25})).toString('base64') }`);
    await page.keyboard.press('Escape');
    assert.equal(await page.getByTestId('mobile-navigation').evaluate(e=>e.open),false,'mobile menu closes');
   } else {
@@ -39,6 +49,12 @@ try {
    await page.keyboard.press('Escape');
    assert.equal(await page.getByTestId('desktop-products-megamenu-panel').isVisible(),false,'desktop menu closes');
   }
+  const launcher=page.getByTestId('chat-launcher');
+  if(await launcher.isVisible()) await launcher.click();
+  await page.getByTestId('chat-panel').waitFor({state:'visible'});
+  console.log(`STATE_SCREENSHOT ${width} oracle-open ${(await page.screenshot({type:'jpeg',quality:25})).toString('base64')}`);
+  await page.getByTestId('chat-panel-close-button').click();
+  assert.equal(await page.getByTestId('chat-panel').isVisible(),false,'oracle closes');
   await context.close();
  }
 } finally {await browser.close();await new Promise(done=>server.httpServer.close(done));}
