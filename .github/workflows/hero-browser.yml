@@ -1,0 +1,33 @@
+name: Hero browser verification
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/AtelierFilm*'
+      - 'apps/web/components/IdentityHero*'
+      - 'apps/web/components/HomeConcept.css'
+      - 'apps/web/components/WorkspaceRebuild.css'
+      - 'apps/site/tests/browser-hero-release-20261112.mjs'
+      - '.github/workflows/hero-browser.yml'
+permissions:
+  contents: read
+jobs:
+  hero:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - run: npm install --global --ignore-scripts pnpm@12.15.0
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm --filter @nexify/site build
+      - name: Install isolated browser test runtime
+        run: |
+          npm install --prefix /tmp/nexify-browser --ignore-scripts --no-save playwright@1.55.0
+          ln -s /tmp/nexify-browser/node_modules/playwright apps/site/node_modules/playwright
+          /tmp/nexify-browser/node_modules/.bin/playwright install --with-deps chromium
+      - run: node apps/site/tests/browser-hero-release-20261112.mjs
+      - run: node apps/site/tests/browser-video-controls-20261109.mjs
