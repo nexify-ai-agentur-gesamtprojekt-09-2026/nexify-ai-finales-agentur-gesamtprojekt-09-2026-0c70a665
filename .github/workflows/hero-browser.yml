@@ -5,6 +5,8 @@ on:
       - 'apps/web/components/AtelierFilm*'
       - 'apps/web/components/IdentityHero*'
       - 'apps/web/components/HomeConcept.css'
+      - 'apps/web/components/PageConcept.css'
+      - 'apps/site/tests/browser-design-20261112.mjs'
       - 'apps/web/components/WorkspaceRebuild.css'
       - 'apps/site/tests/browser-hero-release-20261112.mjs'
       - 'apps/web/components/ContactRequestForm.tsx'
@@ -34,3 +36,4 @@ jobs:
       - run: node apps/site/tests/browser-hero-release-20261112.mjs
       - run: node apps/site/tests/browser-video-controls-20261109.mjs
       - run: node apps/site/tests/browser-contact-outcomes-20261112.mjs
+      - run: node apps/site/tests/browser-design-20261112.mjs

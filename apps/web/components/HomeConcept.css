@@ -106,3 +106,17 @@
 .home-concept :is(.hc-service-detail,.hc-product) { border:1px solid var(--color-linie-fein); border-top-color:var(--color-atelier-glass-edge); box-shadow:var(--shadow-atelier-polish); }
 .home-concept :is(.hc-gallery-card p,.hc-product p,.hc-section-heading p,.hc-service-detail p) { text-wrap:pretty; overflow-wrap:break-word; }
 @container home (max-width:640px) { .home-concept .hc-anchors { gap:var(--space-1) var(--space-4); } .home-concept .hc-section-heading { margin-bottom:var(--space-5); } .home-concept .hc-product { gap:var(--space-4); } }
+
+/* Gemeinsamer Rhythmus und zurueckhaltendes Glasmaterial fuer die Markenflaeche. */
+.home-concept :is(.hc-intro,.hc-service-layout,.hc-budget-story,.hc-product-story .hc-section-heading){column-gap:var(--space-8)}
+.home-concept :is(.hc-section-heading>p,.hc-intro p,.hc-service-body>p){max-width:60ch}
+.home-concept :is(.hc-service-detail,.hc-product,.hc-costs,.hc-rate){background:var(--gradient-karte);border:var(--material-border) solid var(--color-linie-fein);border-top-color:var(--material-highlight);box-shadow:var(--shadow-atelier-polish)}
+.home-concept .hc-product{padding:var(--space-6);gap:var(--space-5)}
+.home-concept .hc-service-list{gap:var(--space-5)}
+.home-concept .hc-process li{border-top:var(--material-border) solid var(--color-linie-fein);padding-top:var(--space-5)}
+.home-concept :is(.hc-art,.hc-product-art){border-color:var(--color-linie-fein);border-top-color:var(--material-highlight)}
+@container home (max-width:820px){
+ .home-concept :is(.hc-intro,.hc-service-layout,.hc-budget-story,.hc-product-story .hc-section-heading){gap:var(--space-6)}
+ .home-concept .hc-product{padding:var(--space-5)}
+}
+@container home (max-width:420px){.home-concept .hc-product{padding:var(--space-4)}}
