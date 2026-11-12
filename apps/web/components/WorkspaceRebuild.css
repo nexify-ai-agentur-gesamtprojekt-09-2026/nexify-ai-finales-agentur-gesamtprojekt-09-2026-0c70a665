@@ -237,7 +237,7 @@
 
 /* Chat-Panel: feste Breite (Rasterwert), feste Höhe (100dvh, sticky). Nur der Verlauf scrollt –
    Kopf, Eingabe und Fußzeile bleiben an Ort und Stelle. Dadurch wächst die Seite nicht mit dem Gesprächsverlauf. */
-@media (max-width: 1279px) { :root { --layout-panel-width: 384px; } }
+@media (max-width: 1279px) { :root { --layout-panel-width: 320px; } }
 @media (min-width: 1700px) { .workspace-shell { grid-template-columns: minmax(0, 1fr) var(--layout-panel-width); } }
 .aifly-panel { height: 100dvh; max-height: 100dvh; overflow: hidden; }
 .aifly-panel .conversation { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--color-linie-stark) transparent; padding-bottom: var(--space-4); }
