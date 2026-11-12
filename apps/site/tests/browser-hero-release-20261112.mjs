@@ -33,6 +33,7 @@ try {
   await page.waitForFunction(()=>document.querySelector('.identity-hero .atelier-film-controls button:nth-child(2)')?.getAttribute('aria-label')==='Ton ausschalten');
   await sound.focus(); await page.keyboard.press('Enter');
   assert.equal(await video.evaluate(v=>v.muted),true,'keyboard mute '+width);
+  console.log('media', JSON.stringify(await video.evaluate(v=>({src:v.currentSrc, error:v.error&&{code:v.error.code,message:v.error.message},readyState:v.readyState,networkState:v.networkState,paused:v.paused,muted:v.muted}))));
   await controls.locator('.atelier-volume summary').click();
   const popup=controls.locator('.atelier-volume>div'); await popup.waitFor();
   const p=await popup.boundingBox(); assert.ok(p&&p.x>=v.x&&p.x+p.width<=v.x+v.width&&p.y>=v.y&&p.y+p.height<=v.y+v.height,'volume popup inside image '+width);
