@@ -47,8 +47,9 @@ class CutoutSrcsetTests(unittest.TestCase):
         self.assertNotIn("src.includes('cutout')", text, "Freisteller darf nicht vom srcset ausgenommen sein")
         for width in (800, 1280, 1920):
             self.assertTrue((root / "apps" / "web" / "public" / "media" / "higgsfield" / f"hf-17-cutout-{width}.webp").is_file())
-        # HomeContent.tsx bleibt bewusst unverändert: Die Datei ist per Hash an fünf Browser-Nachweisketten gebunden;
-        # eine Änderung braucht eine vollständige Neuerhebung (siehe docs/quality/site-audit-register.md, offene Punkte).
+        # Wo der Freisteller gerendert wird, muss er srcSet tragen (HomeContent.tsx ist per Hash an Nachweisketten gebunden und
+        # wird im Frontend-Paket angepasst; PublicContent.tsx zeigt den Freisteller seit PR 92 nicht mehr).
         for component in ("PublicContent.tsx",):
             source = (root / "apps" / "web" / "components" / component).read_text(encoding="utf-8")
-            self.assertRegex(source, r"brandImages\.finish\.src\}\s+srcSet=\{srcSetFor\(brandImages\.finish\.src\)\}\s+sizes=")
+            if "brandImages.finish.src" in source:
+                self.assertRegex(source, r"brandImages\.finish\.src\}\s+srcSet=\{srcSetFor\(brandImages\.finish\.src\)\}\s+sizes=")
