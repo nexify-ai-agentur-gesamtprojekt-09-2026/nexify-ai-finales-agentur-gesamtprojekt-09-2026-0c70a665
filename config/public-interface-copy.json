@@ -421,7 +421,7 @@
     "de": {
       "cta": "Projekt beschreiben",
       "services": "Leistungen entdecken",
-      "scene": "Pascal, NeX und AIFly ORACLE im NeXify Glasatelier",
+      "scene": "Pascal im Studio",
       "start": "NeXify Film starten",
       "finaleTitle": "Eine klare Handschrift für Ihr Unternehmen.",
       "paths": [
@@ -442,7 +442,7 @@
     "nl": {
       "cta": "Project beschrijven",
       "services": "Diensten ontdekken",
-      "scene": "Pascal, NeX en AIFly ORACLE in het NeXify glasatelier",
+      "scene": "Pascal in de studio",
       "start": "NeXify-film starten",
       "finaleTitle": "Een herkenbaar handschrift voor uw bedrijf.",
       "paths": [
@@ -463,7 +463,7 @@
     "fr": {
       "cta": "Décrire un projet",
       "services": "Découvrir les prestations",
-      "scene": "Pascal, NeX et AIFly ORACLE dans l’atelier de verre NeXify",
+      "scene": "Pascal dans le studio",
       "start": "Lancer le film NeXify",
       "finaleTitle": "Une signature claire pour votre entreprise.",
       "paths": [
@@ -484,7 +484,7 @@
     "en": {
       "cta": "Describe your project",
       "services": "Explore services",
-      "scene": "Pascal, NeX and AIFly ORACLE in the NeXify glass atelier",
+      "scene": "Pascal in the studio",
       "start": "Play the NeXify film",
       "finaleTitle": "A clear signature for your business.",
       "paths": [

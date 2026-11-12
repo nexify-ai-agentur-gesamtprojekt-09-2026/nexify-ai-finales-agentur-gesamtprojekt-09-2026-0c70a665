@@ -181,7 +181,6 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const [booking,setBooking] = useState<Booking|null>(null);
   const [mailPending,setMailPending] = useState(false);
   const [delivery,setDelivery] = useState<Delivery|null>(null);
-  const [useChatGPT,setUseChatGPT] = useState(false);
   const [speaking,setSpeaking] = useState<string|null>(null);
   const audio = useRef<HTMLAudioElement|null>(null);
   const [marketing,setMarketing] = useState<string[]>([]);
@@ -191,7 +190,15 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const chatEnd = useRef<HTMLDivElement>(null);
   const messageInput = useRef<HTMLTextAreaElement>(null);
   const closeButton=useRef<HTMLButtonElement>(null);
+  const orientationFocusRequested=useRef(false);
   const workspaceRoot=useRef<HTMLDivElement>(null);
+  useEffect(()=>{
+    const root=workspaceRoot.current,footer=root?.querySelector('footer');
+    if(!root||!footer||typeof IntersectionObserver==='undefined')return;
+    const observer=new IntersectionObserver(([entry])=>{root.dataset.footerVisible=String(entry.isIntersecting);},{rootMargin:'0px 0px -64px 0px'});
+    observer.observe(footer);
+    return()=>{observer.disconnect();delete root.dataset.footerVisible;};
+  },[]);
   useEffect(()=>{
     const root=workspaceRoot.current,viewport=window.visualViewport;
     if(!root)return;
@@ -211,7 +218,9 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     return()=>{cancelAnimationFrame(frame);viewport?.removeEventListener('resize',measure);viewport?.removeEventListener('scroll',measure);window.removeEventListener('resize',measure);};
   },[]);
   const readingAnchor=useRef<{element:HTMLElement;y:number}|null>(null);
+  const panelReturnFocus=useRef<HTMLElement|null>(null);
   function changePanel(next:boolean){
+    if(next&&document.activeElement instanceof HTMLElement&&!document.activeElement.closest('#aifly-panel'))panelReturnFocus.current=document.activeElement;
     // Keep the same semantic text at the same viewport position when the desktop grid reflows.
     // Near the top, stay at the top; mobile overlays do not resize the page.
     if(!window.matchMedia('(max-width: 820px)').matches&&window.scrollY>0){
@@ -244,19 +253,19 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const canBook=ready&&capabilities?.booking_request===true;
   const canMarket=ready&&capabilities?.marketing_template===true;
   const canMail=ready&&capabilities?.email_delivery===true;
-  // Cost-bounded rollout (Pascal, 29.10.2026): paid read-aloud and ChatGPT option first only on the home page.
+  // Read-aloud remains limited to the home page and requires server capability.
   const providerPage=pathname==="/";
   const canSpeak=ready&&providerPage&&capabilities?.speech_readout===true;
-  const canChatGPT=ready&&providerPage&&capabilities?.chatgpt_option===true;
   const canUseIntent=intent==="quote"?canQuote:intent==="booking"?canBook:intent==="marketing"?canMarket:false;
   const contact=pages.find(page=>page.path==="/kontakt")?.contact_channels?.find(channel=>channel.type==="email"&&channel.address==="mail@nexifyai.cloud");
 
   useEffect(() => {
-    try { setChatWidthState(readChatWidth()); setOpen(sessionStorage.getItem("nx-chat-open")==="1"); } catch {}
     // The URL is authoritative so server-rendered translations and SEO agree.
     const query=window.matchMedia("(max-width: 820px)");
-    setMobile(query.matches);if(query.matches)setOpen(false);
-    const resized=()=>setMobile(query.matches);query.addEventListener("change",resized);
+    const preferredOpen=()=>{try{const saved=sessionStorage.getItem("nx-chat-open");return saved==="1"||(saved===null&&site==="nexify");}catch{return site==="nexify";}};
+    try { setChatWidthState(readChatWidth()); } catch {}
+    setMobile(query.matches);setOpen(!query.matches&&preferredOpen());
+    const resized=()=>{setMobile(query.matches);setOpen(!query.matches&&preferredOpen());};query.addEventListener("change",resized);
     if((window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__){setError("offline");return()=>query.removeEventListener("change",resized);}
     fetch("/api/session",{cache:"no-store"}).then(async response => {
       if(!response.ok)throw new Error("session");
@@ -278,6 +287,25 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(intents.includes(selected)){changePanel(true);setIntent(selected);setChatMode("workspace");}};
     window.addEventListener("nexify-action",handler);return()=>window.removeEventListener("nexify-action",handler);
   },[]);
+  useEffect(()=>{
+    const openOrientation=()=>{
+      orientationFocusRequested.current=true;
+      setOrientationLoaded(true);changePanel(true);setChatMode('orientation');
+      const input=document.querySelector<HTMLTextAreaElement>('#aifly-panel #orientation-message');
+      if(input&&input.offsetParent!==null){input.focus({preventScroll:true});orientationFocusRequested.current=false;}
+    };
+    window.addEventListener('nexify-open-orientation',openOrientation);
+    return()=>window.removeEventListener('nexify-open-orientation',openOrientation);
+  },[]);
+  useEffect(()=>{
+    if(!open||chatMode!=='orientation'||!orientationLoaded||!orientationFocusRequested.current)return;
+    const panel=document.getElementById('aifly-panel');if(!panel)return;
+    const focus=()=>{const input=panel.querySelector<HTMLTextAreaElement>('#orientation-message');if(!input)return false;input.focus({preventScroll:true});orientationFocusRequested.current=false;return true;};
+    if(focus())return;
+    const observer=new MutationObserver(()=>{if(focus())observer.disconnect();});observer.observe(panel,{childList:true,subtree:true});
+    const timeout=window.setTimeout(()=>observer.disconnect(),10000);
+    return()=>{observer.disconnect();window.clearTimeout(timeout);};
+  },[open,chatMode,orientationLoaded]);
   useEffect(()=>{
     let frame=0;
     const prefill=(event:Event)=>{
@@ -327,15 +355,21 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   async function act(action:()=>Promise<void>) {
     if(active.current || !ready)return;
     active.current=true;setBusy(true);setError("");
-    try {await action();}catch(failure){setError(failure instanceof Error&&failure.message.startsWith("chatgpt_")&&failure.message.endsWith("_reached")?"chatgpt_limit":"error");}finally{active.current=false;setBusy(false);}
+    try {await action();}catch{setError("error");}finally{active.current=false;setBusy(false);}
   }
   const chatState=ready?"connected":error==="offline"?"unavailable":"connecting";
   const chatStateLabel={"de": {"connected": "Projektverbindung bereit", "unavailable": "Persönliche Anfrage per Kontakt", "connecting": "Verbindung wird geprüft …"}, "nl": {"connected": "Projectverbinding gereed", "unavailable": "Persoonlijke aanvraag via contact", "connecting": "Verbinding wordt gecontroleerd …"}, "fr": {"connected": "Connexion projet prête", "unavailable": "Demande personnelle via contact", "connecting": "Vérification de la connexion…"}, "en": {"connected": "Project connection ready", "unavailable": "Personal enquiry via contact", "connecting": "Checking the connection …"}}[locale][chatState];
   const reply=(selected?:Intent)=>selected==="quote"?t.quoteReply:selected==="booking"?t.bookingReply:selected==="marketing"?t.marketingReply:t.choose;
-  function closePanel(){changePanel(false);requestAnimationFrame(()=>{const target=[...document.querySelectorAll<HTMLButtonElement>(".reopen-chat,.header-actions .compact")].find(element=>element.getClientRects().length>0);target?.focus({preventScroll:true});});}
+  function closePanel(){changePanel(false);requestAnimationFrame(()=>{
+    const visible=(element:HTMLElement|null)=>{if(!element||!element.isConnected||getComputedStyle(element).visibility==='hidden')return false;const rect=element.getBoundingClientRect();return rect.width>0&&rect.height>0&&rect.bottom>0&&rect.top<window.innerHeight;};
+    const original=panelReturnFocus.current;
+    const preferred='.reopen-chat';
+    const fallback=document.querySelector<HTMLElement>(preferred);
+    const target=visible(original)?original:visible(fallback)?fallback:document.querySelector<HTMLElement>('.header-actions .compact');
+    target?.focus({preventScroll:true});panelReturnFocus.current=null;
+  });}
   async function submitMessage(event:FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form=event.currentTarget; const value=String(new FormData(form).get("message")||"").trim();if(!value)return;setPrefillNotice('');
-    if(useChatGPT&&canChatGPT){await act(async()=>{const result=await post("/api/assistant/chatgpt",{message:value.slice(0,1000),locale,page_path:pathname});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",text:result.text,label:result.label}]);form.reset();});return;}
     await act(async()=>{const result=await post("/api/chat",{message:value,locale,...(currentPage?{page_path:currentPage.path}:{})});setMessages(previous=>[...previous,{role:"user",text:value},{role:"assistant",intent:result.intent}]);setIntent(result.intent);form.reset();});
   }
 
@@ -350,11 +384,11 @@ export default function Workspace({children,pages,accountControl,initialLocale='
       <main id="page-content" tabIndex={-1}>{children}</main>
       <SiteFooter pages={pages} site={site} locale={locale}/>
     </div>
-    {!open && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>changePanel(true)} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{launcherLabel}</ActionButton>}
+    {!open && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>{orientationFocusRequested.current=true;setOrientationLoaded(true);setChatMode('orientation');changePanel(true);}} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{launcherLabel}</ActionButton>}
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
     <aside id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>{!mobile&&<ChatResizeHandle width={chatWidth} onChange={setChatWidth} label={locale==="de"?"Chatbreite anpassen":locale==="nl"?"Chatbreedte aanpassen":locale==="fr"?"Ajuster la largeur du chat":"Resize chat"}/>}
       <div className="panel-topstrip" aria-hidden="true"/>
-      <div className="panel-heading"><div className="panel-heading-copy"><div className="panel-identity"><OracleCompanion/><div><h2 className="panel-brandline">NeX Agentic AIFly</h2><p className="panel-identity-subtitle">NeXify AI</p></div></div><p className="panel-status visually-hidden" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p></div><ActionButton variant="icon" ref={closeButton} className="panel-minimize" data-testid="chat-panel-close-button" aria-label={t.close} title={t.close} onClick={closePanel}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg></ActionButton></div>
+      <div className="panel-heading"><div className="panel-heading-copy"><div className="panel-identity"><OracleCompanion/><div><h2 className="panel-brandline">Oracle</h2><p className="panel-identity-subtitle">NeXify AI</p></div></div><p className="panel-status visually-hidden" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p></div><ActionButton variant="icon" ref={closeButton} className="panel-minimize" data-testid="chat-panel-close-button" aria-label={t.close} title={t.close} onClick={closePanel}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg></ActionButton></div>
       <div className="panel-connection visually-hidden" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Website-Beratung ohne Live-KI":locale==="nl"?"Websiteadvies zonder live-AI":locale==="fr"?"Conseil sur le site sans IA en direct":"Website guidance without live AI"):ready?(locale==="de"?"Projektassistent verbunden":locale==="nl"?"Concepttools verbonden":locale==="fr"?"Outils de projet connectés":"Project assistant connected"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":locale==="fr"?"Aperçu · connexion en attente":"Preview · connection pending")}</div>
       {orientationLoaded&&!standalone&&currentPage&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"NeXify-Beratung wird geladen …":locale==="nl"?"NeXify-advies wordt geladen …":locale==="fr"?"Chargement du conseil NeXify…":"Loading NeXify guidance …"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage.path} pages={pages} onActivityChange={setOrientationWorking}/></Suspense></DeferredChatBoundary></div>}
       <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&Boolean(currentPage)}>
@@ -369,17 +403,16 @@ export default function Workspace({children,pages,accountControl,initialLocale='
           {intent==="booking" && canBook && <><p className="status-note">{t.planning}</p>{slots.length?<form onSubmit={event=>{event.preventDefault();if(!canBook)return;const data=new FormData(event.currentTarget);void act(async()=>{const saved=await post("/api/bookings",{slot_id:data.get("slot_id"),name:data.get("name"),email:data.get("email"),locale});setBooking(saved);if(saved.delivery==="queued"){setDelivery("queued");watchDelivery("customer_booking",saved.id);}else if(saved.delivery==="blocked_limit")setDelivery("blocked_limit");});}}><fieldset><legend>{t.times} · Europe/Amsterdam</legend><div className="slot-list">{slots.map(slot=><label className="slot" key={slot.id}><input type="radio" name="slot_id" value={slot.id} required/>{new Intl.DateTimeFormat(locale,{weekday:"short",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Amsterdam"}).format(new Date(slot.starts))}</label>)}</div></fieldset><label>{t.name}<input name="name" autoComplete="name" maxLength={100} required/></label><label>{t.email}<input name="email" type="email" autoComplete="email" maxLength={254} required/></label><button className="primary-button" disabled={busy||!canBook}>{t.requestBooking}</button></form>:<p>{t.noSlots}</p>}{booking&&<div className="result-card" role="status"><p>{t.bookingSaved}</p>{canMail&&<p>{t.bookingMail}</p>}<strong>{new Intl.DateTimeFormat(locale,{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Amsterdam"}).format(new Date(booking.starts))}</strong></div>}</>}
           {intent==="marketing" && canMarket && <><form onSubmit={event=>{event.preventDefault();if(!canMarket)return;const data=new FormData(event.currentTarget);void act(async()=>setMarketing((await post("/api/marketing",{goal:data.get("goal"),audience:data.get("audience"),locale})).draft));}}><label>{t.goal}<textarea name="goal" maxLength={800} required rows={3}/></label><label>{t.audience}<input name="audience" maxLength={500} required/></label><button className="primary-button" disabled={busy||!canMarket}>{t.createMarketing}</button></form>{marketing.length>0&&<div className="result-card"><p className="state-label">{t.marketingDraft}</p><ul>{marketing.map((line,index)=><li key={index}>{line}</li>)}</ul></div>}</>}
         </section>}
-        {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="speech"?t.readAloudError:error==="chatgpt_limit"?t.chatgptLimit:t.error}</p>}
+        {error&&error!=="offline"&&<p className="error-note" role="alert">{error==="speech"?t.readAloudError:t.error}</p>}
         <ProjectFilesPanel locale={locale}/>
         <div ref={chatEnd}/>
       </div>
       <div className="composer-area" data-testid="chat-composer" hidden={!ready||(chatMode!=="workspace"&&Boolean(currentPage))}>
        <form className="composer-form" onSubmit={submitMessage}>
-        <div className="composer"><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" data-testid="chat-composer-textarea" ref={messageInput} name="message" placeholder={site==="teileklar"?tkWelcome.placeholder:t.placeholder} maxLength={useChatGPT&&canChatGPT?1000:3000} rows={2} required disabled={!ready}/>{prefillNotice&&<p className="composer-hint" role="status" data-testid="chat-prefill-notice">{prefillNotice}</p>}</div>
+        <div className="composer"><label className="visually-hidden" htmlFor="chat-message">{t.message}</label><textarea id="chat-message" data-testid="chat-composer-textarea" ref={messageInput} name="message" placeholder={site==="teileklar"?tkWelcome.placeholder:t.placeholder} maxLength={3000} rows={2} required disabled={!ready}/>{prefillNotice&&<p className="composer-hint" role="status" data-testid="chat-prefill-notice">{prefillNotice}</p>}</div>
         <details className="chat-hints" data-testid="chat-hints-disclosure">
-         <summary data-testid="chat-hints-toggle"><span>{locale==="de"?"Modus & Datenschutz":locale==="nl"?"Modus & privacy":locale==="fr"?"Mode et confidentialité":"Mode & privacy"}</span><span className="chat-mode-label" data-testid="chat-mode-label">{useChatGPT&&canChatGPT?"ChatGPT":site==="teileklar"?tkWelcome.mode:locale==="de"?"Projektplanung":locale==="nl"?"Projectplan":locale==="fr"?"Plan du projet":"Project planning"}</span></summary>
+         <summary data-testid="chat-hints-toggle"><span>{locale==="de"?"Modus & Datenschutz":locale==="nl"?"Modus & privacy":locale==="fr"?"Mode et confidentialité":"Mode & privacy"}</span><span className="chat-mode-label" data-testid="chat-mode-label">{site==="teileklar"?tkWelcome.mode:locale==="de"?"Projektplanung":locale==="nl"?"Projectplan":locale==="fr"?"Plan du projet":"Project planning"}</span></summary>
          <div className="chat-hints-content" data-testid="chat-hints-content">
-          {canChatGPT&&<div className="chatgpt-option"><label className="checkbox-label"><input data-testid="chat-live-ai-toggle" type="checkbox" checked={useChatGPT} onChange={event=>setUseChatGPT(event.target.checked)}/>{t.chatgptToggle}</label><p className="status-note" data-testid="chat-provider-notice">{t.chatgptNote}</p></div>}
           <p className="connection-note">{locale==="de"?"Bitte keine Passwörter oder vertraulichen Daten eingeben.":locale==="nl"?"Voer geen wachtwoorden of vertrouwelijke gegevens in.":locale==="fr"?"Merci de ne pas saisir de mots de passe ou de données confidentielles.":"Please do not enter passwords or confidential data."}</p>
           <div className="panel-footer-row">{!standalone&&currentPage&&<div className="workspace-chat-modes" role="group" aria-label={locale==="de"?"Arbeitsbereich wählen":locale==="nl"?"Werkruimte kiezen":locale==="fr"?"Choisir un espace":"Choose a workspace"}><ActionButton variant="quiet" data-testid="chat-mode-orientation" aria-pressed={chatMode==="orientation"} onClick={()=>{setOrientationLoaded(true);setChatMode("orientation");}}>{locale==="de"?"Leistungen entdecken":locale==="nl"?"Diensten ontdekken":locale==="fr"?"Découvrir les prestations":"Explore services"}</ActionButton><ActionButton variant="quiet" data-testid="chat-mode-workspace" aria-pressed={chatMode==="workspace"} onClick={()=>setChatMode("workspace")}>{locale==="de"?"Projekt vorbereiten":locale==="nl"?"Project voorbereiden":locale==="fr"?"Préparer le projet":"Prepare your project"}</ActionButton></div>}</div>
           <Link className="panel-pascal-link" data-testid="chat-contact-link" href="/kontakt" onClick={()=>{if(mobile)closePanel();}}>{locale==="de"?"Mit Pascal weiterklären":locale==="nl"?"Verder met Pascal":locale==="fr"?"Continuer avec Pascal":"Continue with Pascal"}<span aria-hidden="true">↗</span></Link>

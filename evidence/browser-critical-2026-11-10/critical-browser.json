@@ -1,0 +1,284 @@
+{
+  "recorded_at": "2026-11-10T00:35:21.834Z",
+  "checks": [
+    "account_control_fallback_and_auth_routes_present",
+    "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
+    "native_product_menu_and_direct_legal_footer_links",
+    "hero_scene_and_controls_across_five_desktop_sizes",
+    "keyboard_skip_link_preserves_standalone_product_hash_route"
+  ],
+  "public_routes": [
+    "/",
+    "/leistungen",
+    "/leistungen/websites",
+    "/leistungen/agenten-automatisierung",
+    "/leistungen/apps-portale",
+    "/leistungsumfang",
+    "/loesungen",
+    "/preise-ablauf",
+    "/wissen",
+    "/wissen/projekt-vorbereiten",
+    "/unternehmen",
+    "/kontakt",
+    "/produkte/nex2fly",
+    "/produkte/one",
+    "/produkte/api",
+    "/produkte/aifly-oracle",
+    "/produkte/nex-agentic-aifly",
+    "/produkte/skills-mcp",
+    "/portale",
+    "/impressum",
+    "/datenschutz",
+    "/vertragsgrundlagen",
+    "/ki-hinweise",
+    "/barrierefreiheit",
+    "/cookies",
+    "/anmelden",
+    "/registrieren",
+    "/teileklar",
+    "/teileklar/suche",
+    "/teileklar/kategorien",
+    "/teileklar/kategorie",
+    "/teileklar/produkt",
+    "/teileklar/warenkorb",
+    "/teileklar/kasse",
+    "/teileklar/fahrzeug-und-passung",
+    "/teileklar/termine",
+    "/teileklar/gutscheine",
+    "/teileklar/partner-werden",
+    "/teileklar/werkstatt",
+    "/teileklar/rechtliches",
+    "/teileklar/shop",
+    "/teileklar/reifenrechner",
+    "/teileklar/batterie-berater"
+  ],
+  "passed": true,
+  "scope": "Fresh local critical subset only; actual browser and deterministic Web handler SSE with simulated session404; no provider, production or full accessibility acceptance. Public route list is inventory, not an assertion every route was revisited here.",
+  "source_sha256": {
+    "apps/site/src/Auth.tsx": "7c95609969fff0a3d24816c1ae18ec770d7b4292d94750aa9c3e45700866b78c",
+    "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
+    "apps/web/app/globals.css": "c7c19d6faed39c9756273fd2ee04245f3b69e542da51633ff91d4034c140ee44",
+    "apps/web/components/HomeContent.tsx": "bad0c606d92e71387e5d35bfb1bc426bbe22424c2c8e5bc546a73306bbb72e2d",
+    "apps/web/components/Workspace.tsx": "6289b1a395faf8d611247c8dce7c04ce92bd4580ffec2c05f414f5755e889c5a",
+    "apps/web/components/PageConcept.css": "bdeb2006126aa38277289bb323a0dc2eb7373241034aa9acbcd4da8c12e8eb37",
+    "config/site-map.json": "08b8a5e9a79f869b77de2a033163b915f22c42fca56724b0449033d4c1ff197c"
+  },
+  "auxiliary_source_sha256": {
+    "apps/web/components/DeferredChatBoundary.tsx": "1dee3ebfffa4f0ac547487086feef5ea22cc468682d3c79c30494d73ba4dea12",
+    "apps/web/components/PublicRequestFallback.tsx": "19c334e0ef95d106b0224f9bce757570558fc82f588fb2b01b71c6dfd35e83c7",
+    "apps/web/components/OracleCompanion.tsx": "945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b",
+    "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
+    "apps/web/lib/i18n.ts": "e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213",
+    "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
+    "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
+    "apps/web/components/ShopPanel.tsx": "991e961a822199c811349d2180245bbfdcc38654f0b8d0cc0f38154b333b1881",
+    "apps/web/components/ShopPanel.css": "8c6a06a1d4a307c38dff6e679ae45b09231d01c4c33f5347d9b557b4fce1a992",
+    "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
+    "apps/web/components/WorkspaceRebuild.css": "27063037f9479b989dd0c0c24e7c740680024e6e09fb0644d0482e35254f6374",
+    "apps/web/components/HomeRebuild.css": "de71cfacfda6d3daec4d08109abc94ebbcba148e32d58f9e769421ad66f10a8c",
+    "apps/web/components/HomeConcept.css": "992c17f0a3ef1006f1c24226f53600f911591ba759478608fd8c18c0d3aff324",
+    "apps/web/components/AtelierFilm.css": "8873764eee263c1d55195aa9b10b71a7700f3114a5430ebc8a5e25b39fb0ec5a",
+    "apps/web/components/IdentityHero.tsx": "a363440ceb55b1c59e5bab1da44d6ffa376f1803d0d95f0627e9d5ce3ffbe5a1",
+    "apps/web/components/IdentityHero.css": "3e99cd9c9232bcbdf245d7ea071cbf1d4e48dd3130885ebb0d8720de6f6b3104",
+    "config/identity-hero.json": "d7eeda8e5f984f29d4132085394d4e48c38a7f7bd09567c57d3ea1c0957be902",
+    "apps/site/tests/browser-identity-hero.mjs": "fcea9505d7c8136b78dfe4aafc6606bd212eb8dd9b6f8e2157302a2821056426",
+    "packages/tokens/tokens.css": "2c59b1399b7b8ef2caa38a8f42fbc76ac39af1a73d9d7d891ac423880e37edad",
+    "apps/site/tests/browser-critical.mjs": "cbe087376702cb6b2efa6e353c8fd0367eaae6e1ae85cc44b9c67c838a67e8c3"
+  },
+  "sdk_source_sha256": {
+    "apps/web/components/PublicOrientationChat.tsx": "8a38cd90e9ec013876c7d7cd8e6c5afb69cf1552907f49cbc505aded990bfe15",
+    "apps/web/components/PublicOrientationChat.css": "ca448a54cd0f6c074733829f1cda311276f806147c8f0992b3cd3bc9fe3a961e",
+    "api/agent-chat.ts": "096928161c19778276d107d8731a38a73c1d5cb9b22a02575cc70f46d1d218b9",
+    "packages/agent-runtime/public-orientation.ts": "1116d2a38435f0caf43f76b9a30bb07b732b7484cbcb110cfcee9fb31d507388",
+    "tools/agent-preview.mjs": "14ed19643eed9fa15e5dd3a47e1eef38ed7916ea2f29e90759483a27668e011b"
+  },
+  "targeted_supplement_gutter_followup": [
+    {
+      "width": 1920,
+      "path": "/produkte/nex2fly",
+      "gutter": {
+        "left": 40,
+        "right": 40
+      },
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "path": "/teileklar/werkstatt",
+      "gutter": {
+        "left": 40,
+        "right": 40
+      },
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "path": "/impressum",
+      "gutter": {
+        "left": 40,
+        "right": 40
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/produkte/nex2fly",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/teileklar/werkstatt",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "path": "/impressum",
+      "gutter": {
+        "left": 24,
+        "right": 24
+      },
+      "passed": true
+    }
+  ],
+  "sdk_browser_observations": {
+    "recorded_at": "2026-11-10T00:35:21.834Z",
+    "checks": [
+      "sdk_guided_preview_works_when_visitor_session_is_404",
+      "sdk_unknown_and_private_page_context_fail_closed_with_draft_retained",
+      "sdk_mobile_real_chat_no_overflow_escape_and_focus_return"
+    ],
+    "passed": true,
+    "scope": "Real AI SDK streaming over isolated loopback bridge to exact api/agent-chat.ts; tools/agent-preview.mjs source-bound but not launched; no external provider"
+  },
+  "presenter_measurements": [
+    {
+      "fit": "cover",
+      "opacity": 1,
+      "left": 26,
+      "right": 614,
+      "top": 154,
+      "bottom": 484.75,
+      "stageLeft": 24,
+      "stageRight": 616,
+      "stageTop": 152,
+      "stageBottom": 580.546875,
+      "width": 588,
+      "height": 330.75,
+      "overflow": false,
+      "copyRight": 616,
+      "mediaLeft": 24,
+      "noOverlap": true,
+      "viewportWidth": 1024,
+      "layeredActionClear": true
+    },
+    {
+      "fit": "cover",
+      "opacity": 1,
+      "left": 59.59375,
+      "right": 860.40625,
+      "top": 154,
+      "bottom": 604.453125,
+      "stageLeft": 57.59375,
+      "stageRight": 862.40625,
+      "stageTop": 152,
+      "stageBottom": 700.25,
+      "width": 800.8125,
+      "height": 450.453125,
+      "overflow": false,
+      "copyRight": 363.421875,
+      "mediaLeft": 57.59375,
+      "noOverlap": false,
+      "viewportWidth": 1280,
+      "layeredActionClear": true
+    },
+    {
+      "fit": "cover",
+      "opacity": 1,
+      "left": 66.796875,
+      "right": 970.015625,
+      "top": 154,
+      "bottom": 662.046875,
+      "stageLeft": 64.796875,
+      "stageRight": 972.015625,
+      "stageTop": 152,
+      "stageBottom": 757.84375,
+      "width": 903.21875,
+      "height": 508.046875,
+      "overflow": false,
+      "copyRight": 409.53125,
+      "mediaLeft": 64.796875,
+      "noOverlap": false,
+      "viewportWidth": 1440,
+      "layeredActionClear": true
+    },
+    {
+      "fit": "cover",
+      "opacity": 1,
+      "left": 74,
+      "right": 1086,
+      "top": 154,
+      "bottom": 723.25,
+      "stageLeft": 72,
+      "stageRight": 1088,
+      "stageTop": 152,
+      "stageBottom": 819.046875,
+      "width": 1012,
+      "height": 569.25,
+      "overflow": false,
+      "copyRight": 422,
+      "mediaLeft": 72,
+      "noOverlap": false,
+      "viewportWidth": 1600,
+      "layeredActionClear": true
+    },
+    {
+      "fit": "cover",
+      "opacity": 1,
+      "left": 92,
+      "right": 1388,
+      "top": 154,
+      "bottom": 883,
+      "stageLeft": 90,
+      "stageRight": 1390,
+      "stageTop": 152,
+      "stageBottom": 978.796875,
+      "width": 1296,
+      "height": 729,
+      "overflow": false,
+      "copyRight": 400,
+      "mediaLeft": 90,
+      "noOverlap": false,
+      "viewportWidth": 1920,
+      "layeredActionClear": true
+    }
+  ],
+  "observed_handler_requests": [
+    {
+      "path": "/api/agent-chat",
+      "status": 200
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 422
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 422
+    },
+    {
+      "path": "/api/agent-chat",
+      "status": 200
+    }
+  ],
+  "external_requests": [],
+  "acceptance": "local_behavior_verified_final_user_and_production_acceptance_open",
+  "reproduction": "Node22 apps/site/tests/browser-critical.mjs with existing Playwright module/browser paths; requires fresh standalone build"
+}

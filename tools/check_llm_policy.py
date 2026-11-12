@@ -24,6 +24,26 @@ SOURCES = (
     "config/llm-verbindungen.json",
 )
 PRODUCT_ENRICHMENT = {"id": "ds/deepseek-v4-pro", "reasoning_effort": "high", "provider": "own_router_9router", "base_url_env": "ROUTER_URL", "api_key_env": "ROUTER_KEY"}
+ROUTING_TARGET = {
+    "authority": "explicit_user_decision_2026-11-10",
+    "status": "target_not_activated_existing_routes_require_migration",
+    "scope": "applicable_managed_work_customer_byok_and_specialized_use_cases_remain_separate",
+    "internal_base": "chatgpt", "claude_ai_target": False, "gateway": "9router_only",
+    "provider_order": ["OpenRouter", "DeepSeek_API"],
+    "primary_model": MODEL, "fallback_model_version_required": "DeepSeek-V4.1-Flash-1017",
+    "fallback_api_alias_documented_not_runtime_binding": "deepseek-flash",
+    "documented_alias_observed_at": "2026-11-10",
+    "alias_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "router_combo_runtime_id": None, "router_provider_ids": None,
+    "automatic_activation": False, "direct_provider_bypass_allowed": False,
+    "blind_retry_after_unknown_outcome_allowed": False,
+    "pre_activation_checks": ["router_instance_and_provider_binding", "fallback_alias_current_version_and_capabilities",
+                              "tenant_and_owner_binding", "budget_rate_and_funding_controls",
+                              "routing_order_failover_and_failure_tests", "privacy_and_retention",
+                              "independent_review_and_release"],
+    "unverified_or_unknown_outcome": "fail_closed_reconcile_before_retry",
+    "existing_nonconforming_paths": "audit_and_migrate_not_proof_of_target_runtime",
+}
 REQUIRED_SCOPES = frozenset(("website_live_chat", "managed_customer_suite", "internal_agent_orchestration",
                             "research_and_summaries", "tool_loops", "ci_ai_review", "managed_text_generation"))
 
@@ -66,6 +86,12 @@ def validate(configs):
     _require(_at(policy, "status") == "mandatory_for_repository_controlled_managed_llm_calls", "managed_policy_must_be_mandatory")
     _model(_at(policy, "model", "id"), _at(policy, "model", "reasoning_effort"), "literal_user_model_or_effort_mismatch")
     _require(_at(policy, "model", "required_suffix") == "1017" and _at(policy, "model", "primary_provider") == "OpenRouter", "literal_user_provider_or_suffix_mismatch")
+    route_target = _at(policy, "provider_route_target_2026_11_10")
+    _require(type(route_target) is dict and route_target == ROUTING_TARGET and
+             all(type(route_target.get(key)) is bool for key in
+                 ("claude_ai_target", "automatic_activation", "direct_provider_bypass_allowed",
+                  "blind_retry_after_unknown_outcome_allowed")),
+             "managed_router_target_or_migration_guard_mismatch")
     scopes = _at(policy, "applies_to")
     _require(isinstance(scopes, list) and all(isinstance(item, str) for item in scopes) and REQUIRED_SCOPES.issubset(scopes), "mandatory_managed_scope_missing")
     for key in ("silent_model_fallback", "silent_reasoning_downgrade", "automatic_tier_escalation_or_substitution"):

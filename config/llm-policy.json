@@ -26,6 +26,36 @@
     "final_serialized_provider_request_must_match_policy": true,
     "provider_route_changes_require_explicit_server_configuration": true
   },
+  "provider_route_target_2026_11_10": {
+    "authority": "explicit_user_decision_2026-11-10",
+    "status": "target_not_activated_existing_routes_require_migration",
+    "scope": "applicable_managed_work_customer_byok_and_specialized_use_cases_remain_separate",
+    "internal_base": "chatgpt",
+    "claude_ai_target": false,
+    "gateway": "9router_only",
+    "provider_order": ["OpenRouter", "DeepSeek_API"],
+    "primary_model": "deepseek/deepseek-v4.1-flash-1017",
+    "fallback_model_version_required": "DeepSeek-V4.1-Flash-1017",
+    "fallback_api_alias_documented_not_runtime_binding": "deepseek-flash",
+    "documented_alias_observed_at": "2026-11-10",
+    "alias_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "router_combo_runtime_id": null,
+    "router_provider_ids": null,
+    "automatic_activation": false,
+    "direct_provider_bypass_allowed": false,
+    "blind_retry_after_unknown_outcome_allowed": false,
+    "pre_activation_checks": [
+      "router_instance_and_provider_binding",
+      "fallback_alias_current_version_and_capabilities",
+      "tenant_and_owner_binding",
+      "budget_rate_and_funding_controls",
+      "routing_order_failover_and_failure_tests",
+      "privacy_and_retention",
+      "independent_review_and_release"
+    ],
+    "unverified_or_unknown_outcome": "fail_closed_reconcile_before_retry",
+    "existing_nonconforming_paths": "audit_and_migrate_not_proof_of_target_runtime"
+  },
   "website_chat": {
     "live_model_is_required_final_behavior": true,
     "deterministic_orientation_is_only_an_explicitly_labelled_interim_mode": true,

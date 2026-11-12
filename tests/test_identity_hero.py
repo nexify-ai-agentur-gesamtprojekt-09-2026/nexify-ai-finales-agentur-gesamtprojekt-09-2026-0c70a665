@@ -43,12 +43,15 @@ class IdentityHeroTests(unittest.TestCase):
         component=(ROOT/'apps/web/components/IdentityHero.tsx').read_text()
         css=(ROOT/'apps/web/components/IdentityHero.css').read_text()
         self.assertNotRegex(css,r'#[0-9a-fA-F]{3,8}\b|rgba?\(')
-        # USER-LUXURY-20261101: a still must not publish unapproved performances or fake playback.
-        # Owner decision 2026-11-08 (Gesamtbeschreibung 6, 17.2): the hero is a brand photograph; the earlier
-        # private video path was removed. No film may be claimed or played until a reviewed one exists.
+        # The original personal video is mounted in the hero; the approved photograph remains its poster.
         self.assertNotIn('verified-public-film',component)
         self.assertIn('brandImages.home',component)
-        for unapproved in ('<TrioScene','sceneMedia.welcome','<video','<audio','play-toggle'):
+        self.assertIn('AtelierFilm hero',component)
+        self.assertIn('pascal-studio-scene-original-20261109.mp4',component)
+        self.assertIn('autoplayWithAudio:true',component)
+        original=ROOT/'apps/web/public/media/home-review/pascal-studio-scene-original-20261109.mp4'
+        self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(),'027d8152065ea2cd3fd4c79897ba9dc37b42176a7dbdaeda6945fadca7416ae3')
+        for unapproved in ('<TrioScene','sceneMedia.welcome','<audio','play-toggle'):
             self.assertNotIn(unapproved,component)
         home=(ROOT/'apps/web/components/HomeContent.tsx').read_text()
         self.assertNotRegex(home,r'<TrioScene|sceneMedia\.|/media/home-review/')

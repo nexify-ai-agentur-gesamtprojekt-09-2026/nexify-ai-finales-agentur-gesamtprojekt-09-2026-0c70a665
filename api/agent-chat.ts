@@ -1,7 +1,9 @@
 /** Vercel Node 22 Web handler. Public guided preview: no model, session, persistence or write tools. */
-import { createUIMessageStream, createUIMessageStreamResponse } from 'ai';
+import { createUIMessageStream, createUIMessageStreamResponse, type ModelMessage } from 'ai';
 import { InputError, publicOrientation, validateOrientationInput } from '../packages/agent-runtime/public-orientation.ts';
 import { managedLiveChatGate } from '../packages/agent-runtime/managed-live-chat.ts';
+import { createNineRouterModel } from '../packages/agent-runtime/nine-router-model.ts';
+import { createPublicPageAgent, publicSiteForContext } from '../packages/agent-runtime/model-agent.ts';
 import { captureServerError, flush } from '../packages/observability/sentry-server.ts';
 
 /** Server env for the off-by-default managed live path. No secret is read into the response. */
@@ -54,15 +56,80 @@ async function readBounded(request: Request): Promise<unknown> {
   }
 }
 
-async function fetchHandler(request: Request): Promise<Response> {
+type IsolatedTransport = { baseUrl: string; apiKey: string; fetch: typeof fetch };
+
+/** Explicit server-side composition for isolated verification and a future authorised
+ * runtime. It is never constructed from HTTP input or used by the deployed handler.
+ * The caller must separately establish router identity, tenant and spending controls. */
+export function createIsolatedLiveChatHandler(transport: IsolatedTransport) {
+  const model = createNineRouterModel(transport);
+  return { fetch: (request: Request) => fetchHandler(request, model) };
+}
+
+async function fetchHandler(request: Request, isolatedModel?: ReturnType<typeof createNineRouterModel>): Promise<Response> {
   try {
     const url = new URL(request.url);
     if (url.pathname !== '/api/agent-chat' || url.search) throw new InputError('not_found', 404);
     if (request.method !== 'POST') return Response.json({ error: 'post_required' }, { status: 405, headers: { ...HEADERS, Allow: 'POST' } });
     if (request.headers.get('origin') !== url.origin) throw new InputError('same_origin_required', 403);
     if (request.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') throw new InputError('application_json_required', 415);
-    const input = validateOrientationInput(await readBounded(request));
+    const raw = await readBounded(request);
+    const input = validateOrientationInput(raw);
     if (request.signal.aborted) throw new InputError('request_cancelled', 499);
+    if (isolatedModel) {
+      // Resolve brand from the server-validated page record, not a client site claim.
+      // This is a public-content scope, not visitor authentication or tenant isolation.
+      const isolatedAgent = createPublicPageAgent({ model: isolatedModel, site: publicSiteForContext(input.context) });
+      // validateOrientationInput has already rejected system/tool messages, unknown
+      // fields, private paths and oversized content. Client assistant turns remain
+      // untrusted context: no tools, authority or metadata are accepted from them.
+      const body = raw as { messages: { role: 'user' | 'assistant'; parts: { text: string }[] }[] };
+      if (body.messages.at(-1)?.role !== 'user') throw new InputError('user_turn_required');
+      const history: ModelMessage[] = body.messages.map(message => ({ role: message.role,
+        content: message.parts.map(part => part.text).join(' ') }));
+      const last = history[history.length - 1];
+      if (last.role !== 'user' || typeof last.content !== 'string') throw new InputError('user_turn_required');
+      last.content = `[Aktueller öffentlicher Seitenkontext: ${input.context.path}; Sprache: ${input.locale}]\n\n${last.content}`;
+      const responseCancelled = new AbortController();
+      const signal = AbortSignal.any([request.signal, responseCancelled.signal]);
+      const result = await isolatedAgent.stream({ messages: history, abortSignal: signal });
+      const stream = createUIMessageStream({ async execute({ writer }) {
+        writer.write({ type: 'start' });
+        writer.write({ type: 'data-page', data: input.context });
+        writer.write({ type: 'text-start', id: 'oracle-live' });
+        let hasText = false;
+        for await (const part of result.fullStream) {
+          if (part.type === 'error') throw new Error('oracle_live_unavailable');
+          if (part.type === 'text-delta') {
+            hasText = true;
+            writer.write({ type: 'text-delta', id: 'oracle-live', delta: part.text });
+          }
+        }
+        if (!hasText) throw new Error('oracle_live_unavailable');
+        writer.write({ type: 'text-end', id: 'oracle-live' });
+        writer.write({ type: 'finish', finishReason: 'stop' });
+      }, onError: () => 'oracle_live_unavailable' });
+      const response = createUIMessageStreamResponse({ stream, headers: { ...HEADERS, 'x-nexify-agent-mode': 'isolated_live_test' } });
+      if (!response.body) throw new Error('oracle_live_unavailable');
+      // The platform may cancel the response body without aborting request.signal.
+      // Propagate that separate lifecycle signal back through the SDK to 9router.
+      const reader = response.body.getReader();
+      const bodyStream = new ReadableStream<Uint8Array>({
+        async pull(controller) {
+          try {
+            const next = await reader.read();
+            if (next.done) { reader.releaseLock(); controller.close(); }
+            else controller.enqueue(next.value);
+          } catch { reader.releaseLock(); controller.error(new Error('oracle_live_unavailable')); }
+        },
+        async cancel() {
+          responseCancelled.abort();
+          await reader.cancel().catch(() => {});
+          reader.releaseLock();
+        },
+      });
+      return new Response(bodyStream, { status: response.status, headers: response.headers });
+    }
     // Managed live DeepSeek path is wired (packages/agent-runtime/managed-live-chat.ts) but
     // OFF by default and fail-closed: it only engages with an explicit server flag plus the
     // managed 9router configuration, and even then requires a separately authorised router
@@ -88,4 +155,4 @@ async function fetchHandler(request: Request): Promise<Response> {
   }
 }
 
-export default { fetch: fetchHandler };
+export default { fetch: (request: Request) => fetchHandler(request) };

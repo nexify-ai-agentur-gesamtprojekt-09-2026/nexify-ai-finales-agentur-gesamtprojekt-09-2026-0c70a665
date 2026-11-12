@@ -4,14 +4,16 @@ import siteMap from '../../config/site-map.json' with { type: 'json' };
 export type Locale = 'de' | 'nl' | 'fr' | 'en';
 export type PageContext = { page_id: string; path: string };
 type Localized = Record<Locale, string>;
-type SourcePage = { id: string; path: string; title: Localized; summary: Localized;
+type PublicSite = 'nexify' | 'teileklar';
+type SourcePage = { id: string; path: string; title: Localized; summary: Localized; site_context: string;
   access: { visibility: string; auth_required: boolean }; next_actions?: { type: string; target_id?: string }[] };
-type PublicPage = { id: string; path: string; title: Localized; summary: Localized; nextIds: string[] };
+type PublicPage = { id: string; path: string; title: Localized; summary: Localized; site: PublicSite; nextIds: string[] };
 
 const allowed = new Set(siteMap.public_allowlist);
 const publicPages: PublicPage[] = (siteMap.pages as SourcePage[])
-  .filter(page => allowed.has(page.id) && page.access.visibility === 'public' && page.access.auth_required === false)
-  .map(page => ({ id: page.id, path: page.path, title: page.title, summary: page.summary,
+  .filter(page => allowed.has(page.id) && page.access.visibility === 'public' && page.access.auth_required === false
+    && (page.site_context === 'nexify' || page.site_context === 'teileklar'))
+  .map(page => ({ id: page.id, path: page.path, title: page.title, summary: page.summary, site: page.site_context as PublicSite,
     nextIds: (page.next_actions ?? []).filter(action => action.type === 'route' && typeof action.target_id === 'string')
       .map(action => action.target_id!) }));
 const byPath = new Map(publicPages.map(page => [page.path, page]));
@@ -107,6 +109,24 @@ const copy = {
     "ending": "The relevant page takes you to the service scope or a personal discussion with NeXify. No action has been performed."
   }
 };
+const teileklarCopy: typeof copy = {
+  de: { heading: 'TEILEKLAR · Textgeführte Orientierung ohne Live-KI.',
+    limits: 'Ich ordne Ihre Frage anhand der öffentlichen TEILEKLAR-Seiten ein. Hier entstehen keine Bestellungen, Buchungen, Nachrichten oder Änderungen an Ihrem Konto.',
+    current: 'Ihr Ausgangspunkt', next: 'Passende Seiten für Ihr Anliegen',
+    ending: 'Die passende Seite hilft bei der weiteren Einordnung Ihres Anliegens. Es wurde keine Aktion ausgeführt.' },
+  nl: { heading: 'TEILEKLAR · Tekstgestuurde oriëntatie zonder live-AI.',
+    limits: 'Ik plaats uw vraag in de context van de openbare TEILEKLAR-pagina’s. Hier ontstaan geen bestellingen, boekingen, berichten of wijzigingen in uw account.',
+    current: 'Uw vertrekpunt', next: 'Passende pagina’s voor uw vraag',
+    ending: 'De passende pagina helpt u uw vraag verder te verduidelijken. Er is geen actie uitgevoerd.' },
+  fr: { heading: 'TEILEKLAR · Orientation textuelle sans IA en direct.',
+    limits: 'Je situe votre demande à partir des pages publiques de TEILEKLAR. Aucune commande, réservation, aucun message ni changement de compte n’est effectué ici.',
+    current: 'Votre point de départ', next: 'Pages adaptées à votre demande',
+    ending: 'La page adaptée vous aide à préciser votre demande. Aucune action n’a été effectuée.' },
+  en: { heading: 'TEILEKLAR · Text-guided information without live AI.',
+    limits: 'I match your question to TEILEKLAR’s public pages. No order, booking, message or account change is made here.',
+    current: 'Your starting point', next: 'Relevant pages for your enquiry',
+    ending: 'The relevant page helps you clarify your enquiry. No action has been performed.' }
+};
 const stopWords = new Set(['eine', 'einen', 'einem', 'einer', 'für', 'und', 'mit', 'ich', 'sie', 'das', 'die', 'der', 'wie', 'was', 'ist', 'the', 'and', 'een', 'van', 'met', 'voor', 'les', 'des', 'une', 'pour', 'avec']);
 function words(text: string): Set<string> {
   return new Set((text.toLocaleLowerCase().match(/[\p{L}\p{N}]{3,}/gu) ?? []).filter(word => !stopWords.has(word)));
@@ -116,13 +136,13 @@ export function publicOrientation(input: ReturnType<typeof validateOrientationIn
   const page = byPath.get(input.context.path);
   if (!page || page.id !== input.context.page_id) throw new InputError('invalid_public_page_context');
   const terms = words(input.question);
-  const candidates = publicPages.filter(candidate => candidate.id !== page.id).map(candidate => {
+  const candidates = publicPages.filter(candidate => candidate.site === page.site && candidate.id !== page.id).map(candidate => {
     const vocabulary = words(candidate.title[input.locale] + ' ' + candidate.summary[input.locale]);
     return { page: candidate, score: [...terms].filter(word => vocabulary.has(word)).length };
   }).filter(candidate => candidate.score > 0).sort((a, b) => b.score - a.score || a.page.id.localeCompare(b.page.id)).slice(0, 2).map(candidate => candidate.page);
   const next = [...new Map([...candidates, ...page.nextIds.map(id => byId.get(id)).filter((value): value is PublicPage => value !== undefined)]
-    .filter(candidate => candidate.id !== page.id).map(candidate => [candidate.id, candidate])).values()].slice(0, 4);
-  const c = copy[input.locale];
+    .filter(candidate => candidate.site === page.site && candidate.id !== page.id).map(candidate => [candidate.id, candidate])).values()].slice(0, 4);
+  const c = (page.site === 'teileklar' ? teileklarCopy : copy)[input.locale];
   const links = next.map(candidate => `- [${candidate.title[input.locale]}](${candidate.path}): ${candidate.summary[input.locale]}`).join('\n');
   return `${c.heading}\n\n${c.limits}\n\n${c.current}: ${page.title[input.locale]}\n${page.summary[input.locale]}\n\n${c.next}:\n${links || `[${page.title[input.locale]}](${page.path})`}\n\n${c.ending}`;
 }

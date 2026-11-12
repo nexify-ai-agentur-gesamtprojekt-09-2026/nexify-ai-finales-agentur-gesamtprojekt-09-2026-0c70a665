@@ -42,7 +42,10 @@ test('reasoning-only output is never shown and an exhausted budget is reported, 
 }));
 
 test('upstream errors surface honestly and without a replacement answer',()=>withEnv({...configured},async()=>{
-  globalThis.fetch=async()=>new Response('quota',{status:429});
-  await assert.rejects(generateChatCompletion([{role:'user',content:'x'}]),/chat_llm_upstream_429/);
+  const privateDetail='fixture-private-provider-detail';
+  globalThis.fetch=async()=>new Response(privateDetail,{status:429});
+  await assert.rejects(generateChatCompletion([{role:'user',content:'x'}]),err=>{
+    assert.equal(err.message,'chat_llm_upstream_429');assert.doesNotMatch(err.message,new RegExp(privateDetail));return true;
+  });
   await withEnv({ROUTER_URL:undefined,ROUTER_KEY:undefined,CHAT_COMPLETIONS_URL:undefined},()=>assert.rejects(generateChatCompletion([{role:'user',content:'x'}]),/chat_llm_not_configured/));
 }));

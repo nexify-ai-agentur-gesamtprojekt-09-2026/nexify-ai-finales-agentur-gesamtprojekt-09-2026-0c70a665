@@ -1,0 +1,51 @@
+{
+  "renderer": "standalone local",
+  "results": [
+    {
+      "width": 1440,
+      "reducedMotion": "no-preference",
+      "poster": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+      "src": "/media/home-review/pascal-studio-scene-original-20261109.mp4",
+      "controls": 2,
+      "state": {
+        "paused": false,
+        "muted": false,
+        "time": 0.013837,
+        "ready": 4,
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "width": 390,
+      "reducedMotion": "no-preference",
+      "poster": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+      "src": "/media/home-review/pascal-studio-scene-original-20261109.mp4",
+      "controls": 2,
+      "state": {
+        "paused": true,
+        "muted": false,
+        "time": 0.119974,
+        "ready": 4,
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "width": 390,
+      "reducedMotion": "reduce",
+      "poster": "/media/higgsfield/hf-02-lobby-walk-1920.webp",
+      "src": "/media/home-review/pascal-studio-scene-original-20261109.mp4",
+      "controls": 2,
+      "state": {
+        "paused": true,
+        "muted": true,
+        "time": 0,
+        "ready": 4,
+        "width": 1280,
+        "height": 720
+      }
+    }
+  ],
+  "passed": true
+}

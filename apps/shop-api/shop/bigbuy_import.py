@@ -153,7 +153,7 @@ def build_product(row, info, images, stock, taxonomy_names, root_id, stamp, run_
             "description": info.get("description") or "", "images": image_urls[:12],
             "category_ids": sorted({category_id, root_id}), "category_id": category_id,
             "purchase_cents": to_cents(first(row, "wholesalePrice", "wholesale_price")),
-            "stock": stock_quantity(stock), "details": details, "active": int(shipping_cost_cents) <= config.SHIP_MAX_CENTS,
+            "stock": stock_quantity(stock), "details": details, "buyable": False, "publishable": False,
             "shipping_cost_cents": int(shipping_cost_cents), "source": "bigbuy", "source_environment": environment, "imported_at": stamp, "import_run_id": run_id}
 
 
@@ -218,7 +218,29 @@ async def fetch_catalog(environment):
     return roots, names, collected, manifest
 
 
+async def publish_categories(db, used, names, roots, session):
+    """Update owned categories only; ambiguous IDs abort the entire transaction."""
+    for category_id in sorted(used):
+        existing = await db.categories.find_one({"_id": category_id}, session=session)
+        if existing is not None and existing.get("source") != "bigbuy":
+            raise BigBuyReadError("category_ownership_unverified")
+    for category_id in sorted(used):
+        await db.categories.update_one(
+            {"_id": category_id, "source": "bigbuy"},
+            {"$set": {"name": names[category_id], "root": category_id in roots, "source": "bigbuy"}},
+            upsert=True, session=session,
+        )
+
+
+def require_publication_contract():
+    """No verified tenant-bound publication contract exists for this legacy importer."""
+    raise BigBuyReadError("tenant_publication_contract_unverified")
+
+
 async def run_import(db, environment, run_id):
+    # This legacy adapter writes the public collection directly. A complete
+    # acquisition and a provider key do not authorize tenant-bound publication.
+    require_publication_contract()
     stamp = now_iso()
     try:
         if environment not in ("production", "ftp"):
@@ -229,6 +251,8 @@ async def run_import(db, environment, run_id):
         else:
             roots, names, collected, manifest = await fetch_catalog(environment)
             products = [build_product(*values[:4], names, values[4], stamp, run_id, environment, shipping_cost_cents=values[5]) for values in collected.values()]
+        products = [{**{key: value for key, value in product.items() if key != "active"},
+                     "buyable": False, "publishable": False} for product in products]
         if not products:
             raise BigBuyReadError("no_products_returned")
         used = {c for p in products for c in p["category_ids"]}
@@ -247,14 +271,20 @@ async def run_import(db, environment, run_id):
             if claimed.matched_count != 1:
                 raise BigBuyReadError("import_run_not_running")
             before = await db.products.count_documents({"source": "bigbuy"}, session=session)
-            result = await db.products.bulk_write([UpdateOne({"_id": p["_id"]}, {"$set": p, "$setOnInsert": {"first_imported_at": stamp}}, upsert=True) for p in products], ordered=False, session=session)
-            gone = await db.products.update_many({"source": "bigbuy", "import_run_id": {"$ne": run_id}}, {"$set": {"active": False}}, session=session)
-            await db.categories.delete_many({}, session=session)
-            await db.categories.insert_many([{"_id": c, "name": names[c], "root": c in roots} for c in used], session=session)
+            result = await db.products.bulk_write([UpdateOne({"_id": p["_id"], "source": "bigbuy"}, {"$set": p, "$setOnInsert": {"first_imported_at": stamp}}, upsert=True) for p in products], ordered=False, session=session)
+            # Pagination ending does not prove a consistent supplier snapshot.
+            # Never retire unseen products on that basis: abort the publication
+            # so previously available products cannot silently keep stale stock.
+            missing = await db.products.count_documents(
+                {"source": "bigbuy", "active": True, "import_run_id": {"$ne": run_id}}, session=session
+            )
+            if missing:
+                raise BigBuyReadError("catalog_missing_existing_products_unverified")
+            await publish_categories(db, used, names, roots, session)
             if manifest:
                 await db.source_manifests.insert_many([{**m, "run_id": run_id, "created_at": stamp} for m in manifest], session=session)
             counts = {"fetched": len(collected), "stored": len(products), "created": result.upserted_count,
-                      "updated": len(products) - result.upserted_count, "deactivated": gone.modified_count, "before": before,
+                      "updated": len(products) - result.upserted_count, "deactivated": 0, "before": before,
                       "skipped": 0, "with_images": sum(1 for p in products if p["images"]), "in_stock": sum(1 for p in products if p["stock"] > 0)}
             await db.imports.update_one({"_id": run_id}, {"$set": {"status": "done", "finished_at": now_iso(), "counts": counts, "taxonomy_ids": roots, "manifest": manifest}}, session=session)
 
@@ -270,6 +300,8 @@ async def run_import(db, environment, run_id):
 
 
 async def start_import(db, environment, actor):
+    # Includes the legacy selection path, which otherwise writes active products.
+    require_publication_contract()
     task = _running["task"]
     if task and not task.done():
         return None

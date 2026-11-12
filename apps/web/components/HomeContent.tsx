@@ -2,6 +2,7 @@
 import {type ReactNode} from 'react';
 import {useUI} from './Workspace';
 import {SiteLink} from './Router';
+import {ActionButton} from './ActionControl';
 import type {PublicPage} from '../lib/page-types';
 import type {PublicVideo} from './PresenterVideo';
 import IdentityHero from './IdentityHero';
@@ -16,17 +17,17 @@ const galleries=['/leistungen/websites','/leistungen/agenten-automatisierung','/
 const services=['/leistungen/websites','/leistungen/agenten-automatisierung','/loesungen'];
 const products=['/produkte/nex2fly','/produkte/one','/produkte/api','/teileklar'];
 const projectRates={
- de:{eyebrow:'Klare Kalkulationsbasis',value:'449 €',unit:'netto je Projekttag',note:'Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.'},
- nl:{eyebrow:'Duidelijke calculatiebasis',value:'€ 449',unit:'netto per projectdag',note:'Concept, tekst, ontwerp en technische uitvoering worden gepland op basis van de afgesproken omvang. Externe kosten worden apart vermeld.'},
- fr:{eyebrow:'Une base de calcul claire',value:'449 €',unit:'HT par journée de projet',note:'Concept, contenus, design et réalisation technique sont planifiés selon le périmètre convenu. Les frais externes sont indiqués séparément.'},
- en:{eyebrow:'A clear pricing basis',value:'€449',unit:'net per project day',note:'Concept, copy, design and technical delivery are planned around the agreed scope. External costs are shown separately.'}
+ de:{eyebrow:'Klare Kalkulationsbasis',value:'Individuell',unit:'nach vereinbartem Umfang',note:'Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.'},
+ nl:{eyebrow:'Duidelijke calculatiebasis',value:'Op maat',unit:'volgens afgesproken omvang',note:'Concept, tekst, ontwerp en technische uitvoering worden gepland op basis van de afgesproken omvang. Externe kosten worden apart vermeld.'},
+ fr:{eyebrow:'Une base de calcul claire',value:'Sur mesure',unit:'selon le périmètre convenu',note:'Concept, contenus, design et réalisation technique sont planifiés selon le périmètre convenu. Les frais externes sont indiqués séparément.'},
+ en:{eyebrow:'A clear pricing basis',value:'Tailored',unit:'to the agreed scope',note:'Concept, copy, design and technical delivery are planned around the agreed scope. External costs are shown separately.'}
 } as const;
 function DetailArrow({direction='right'}:{direction?:'right'|'out'|'down'}){
  const path=direction==='out'?'M5 19 19 5M5 5h14v14':direction==='down'?'M12 4v16M5 13l7 7 7-7':'M4 12h16M13 5l7 7-7 7';
  return <svg className="hc-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d={path}/></svg>;
 }
 
-/** Owner review Home. Editorial stills and commercial examples do not claim live services. */
+/** The approved brand scenes illustrate possible starting points, not completed client work. */
 export default function HomeContent({home,video,moduleVideos,children,pages}:{home:PublicPage;pages?:PublicPage[];children?:ReactNode;video?:PublicVideo;moduleVideos?:Record<string,Partial<Record<PublicVideo['locale'],PublicVideo>>>}){
  const {locale}=useUI(),t=copy[locale];
  void moduleVideos;void children;void pages;
@@ -39,7 +40,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   <nav className="hc-gallery hc-container" aria-label={t.introTitle}>
    {t.galleryTitles.map((title,i)=><SiteLink className="hc-gallery-card" href={galleries[i]} key={title} data-testid={`home-still-${i}`}>
     <figure className={`hc-art hc-art-${i}`}><img src={galleryArt[i].src} srcSet={srcSetFor(galleryArt[i].src)} sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw" width="2000" height="1125" alt={imageAlt(galleryArt[i],locale)} loading="lazy" decoding="async"/></figure>
-    <h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
+    <span className="hc-scene-context">{t.galleryContexts[i]}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><small className="hc-scene-value">{t.galleryValues[i]}</small><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
    </SiteLink>)}
   </nav>
   <section id="leistungen" className="hc-section hc-container hc-service-story" aria-labelledby="hc-services-title">
@@ -67,9 +68,10 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
    <div className="hc-costs">{t.costs.map(([title,body])=><div key={title}><h3>{title}</h3><p>{body}</p></div>)}</div></div>
   </section>
   <section className="hc-section hc-finish hc-container" aria-labelledby="hc-finish-title">
-   <span className="hc-kicker">{t.finishKicker}</span><h2 id="hc-finish-title">{t.finishTitle}</h2><p>{t.finishBody}</p>
-   <div className="hc-finish-actions"><SiteLink href="/kontakt" className="hc-finish-primary">{t.finishCta}<DetailArrow/></SiteLink><SiteLink href="/leistungsumfang" className="hc-text-link">{t.finishAlternative}<DetailArrow/></SiteLink></div><small>{t.finishNote}</small>
-   <figure className="hc-finish-cast"><img src={brandImages.finish.src} alt={imageAlt(brandImages.finish,locale)} width="1588" height="864" loading="lazy" decoding="async"/></figure>
+   <div className="hc-finish-heading"><span className="hc-kicker">{t.finishKicker}</span><h2 id="hc-finish-title">{t.finishTitle}</h2></div>
+   <div className="hc-finish-next"><p>{t.finishBody}</p>
+    <div className="hc-finish-actions"><ActionButton variant="primary" className="hc-finish-primary" onClick={()=>window.dispatchEvent(new Event('nexify-open-orientation'))} aria-controls="aifly-panel" data-testid="finish-project-action">{t.finishCta}<DetailArrow/></ActionButton></div><small>{t.finishNote}</small>
+   </div>
   </section>
  </div>;
 }

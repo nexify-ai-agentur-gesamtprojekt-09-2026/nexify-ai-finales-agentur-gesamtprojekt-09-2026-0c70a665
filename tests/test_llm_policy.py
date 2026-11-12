@@ -47,6 +47,35 @@ class ManagedLLMPolicyTests(unittest.TestCase):
                 configs = copy.deepcopy(self.configs); mutate(configs)
                 with self.assertRaises(checker.PolicyError): checker.validate(configs)
 
+    def test_provider_route_target_is_ordered_gated_and_not_a_runtime_binding(self):
+        target = self.configs[checker.SOURCES[0]]["provider_route_target_2026_11_10"]
+        self.assertEqual(target["provider_order"], ["OpenRouter", "DeepSeek_API"])
+        self.assertEqual(target["gateway"], "9router_only")
+        self.assertIsNone(target["router_combo_runtime_id"])
+        self.assertIsNone(target["router_provider_ids"])
+        self.assertFalse(target["automatic_activation"])
+        mutations = (
+            lambda x: x.update(provider_order=["DeepSeek_API", "OpenRouter"]),
+            lambda x: x.update(gateway="direct_provider"),
+            lambda x: x.update(direct_provider_bypass_allowed=True),
+            lambda x: x.update(router_combo_runtime_id="unverified-combo"),
+            lambda x: x.update(router_provider_ids=["unverified"]),
+            lambda x: x.update(fallback_model_version_required="DeepSeek-V4-Pro"),
+            lambda x: x.update(automatic_activation=True),
+            lambda x: x.update(automatic_activation=0),
+            lambda x: x.update(blind_retry_after_unknown_outcome_allowed=True),
+            lambda x: x["pre_activation_checks"].remove("budget_rate_and_funding_controls"),
+            lambda x: x["pre_activation_checks"].remove("tenant_and_owner_binding"),
+            lambda x: x["pre_activation_checks"].remove("fallback_alias_current_version_and_capabilities"),
+            lambda x: x.update(claude_ai_target=True),
+        )
+        for index, mutate in enumerate(mutations):
+            with self.subTest(mutation=index):
+                configs = copy.deepcopy(self.configs)
+                mutate(configs[checker.SOURCES[0]]["provider_route_target_2026_11_10"])
+                with self.assertRaisesRegex(checker.PolicyError, "managed_router_target_or_migration_guard_mismatch"):
+                    checker.validate(configs)
+
     def test_reenabled_fallback_replacement_free_tier_and_blind_retry_are_rejected(self):
         mutations = (
             lambda c: c[checker.SOURCES[0]]["routing"].update(silent_model_fallback=True),

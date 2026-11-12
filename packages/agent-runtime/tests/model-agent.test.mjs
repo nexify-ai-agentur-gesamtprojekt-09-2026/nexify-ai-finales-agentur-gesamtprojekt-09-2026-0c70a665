@@ -4,15 +4,15 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { APICallError, generateText, streamText } from 'ai';
 import { MockLanguageModelV4 } from 'ai/test';
-import { createPublicPageAgent, createPinnedOpenRouterModel, readPublicPageInfo,
+import { createPublicPageAgent, createPinnedOpenRouterModel, readPublicPageInfo, publicSiteForContext,
   EXACT_MODEL_ID, MAX_OUTPUT_TOKENS } from '../model-agent.ts';
 
 const mapping = JSON.parse(await readFile(new URL('../../../config/site-map.json', import.meta.url)));
 const usage = { inputTokens: { total: 10, noCache: 10, cacheRead: undefined, cacheWrite: undefined },
   outputTokens: { total: 5, text: 5, reasoning: undefined } };
 const answer = text => ({ content: [{ type: 'text', text }], finishReason: { unified: 'stop', raw: undefined }, usage, warnings: [] });
-const call = pageId => ({ content: [{ type: 'tool-call', toolCallId: 'call-public-1', toolName: 'publicPageInfo',
-  input: JSON.stringify({ pageId, locale: 'de' }) }], finishReason: { unified: 'tool-calls', raw: undefined }, usage, warnings: [] });
+const call = (pageId, locale = 'de') => ({ content: [{ type: 'tool-call', toolCallId: 'call-public-1', toolName: 'publicPageInfo',
+  input: JSON.stringify({ pageId, locale }) }], finishReason: { unified: 'tool-calls', raw: undefined }, usage, warnings: [] });
 
 test('real two-step ToolLoopAgent executes the public tool and receives its actual result', async () => {
   const original = globalThis.fetch;
@@ -33,6 +33,14 @@ test('real two-step ToolLoopAgent executes the public tool and receives its actu
   } finally { globalThis.fetch = original; }
 });
 
+test('the public page tool supports an actual English agent turn', async () => {
+  const model = new MockLanguageModelV4({ modelId: EXACT_MODEL_ID,
+    doGenerate: [call('home', 'en'), answer('Public guidance.')] });
+  const result = await createPublicPageAgent({ model }).generate({ prompt: 'Tell me about the home page.' });
+  assert.equal(result.text, 'Public guidance.');
+  assert.deepEqual(result.steps[0].toolResults[0].output, readPublicPageInfo({ pageId: 'home', locale: 'en' }));
+});
+
 test('strict public projection rejects every private/nonallowlisted page and extra authority claims', () => {
   const excluded = mapping.pages.filter(page => !mapping.public_allowlist.includes(page.id)
     || page.access.visibility !== 'public' || page.access.auth_required !== false);
@@ -40,11 +48,55 @@ test('strict public projection rejects every private/nonallowlisted page and ext
   for (const input of [{ pageId: 'missing-page' }, { pageId: 'home', role: 'admin' }, { pageId: 'home', locale: 'xx' }, { pageId: '../home' }]) {
     assert.throws(() => readPublicPageInfo(input));
   }
-  for (const locale of ['de', 'nl', 'fr']) {
+  for (const locale of ['de', 'nl', 'fr', 'en']) {
     const value = readPublicPageInfo({ pageId: 'home', locale });
     assert.equal(value.title, mapping.pages.find(page => page.id === 'home').title[locale]);
     assert.deepEqual(Object.keys(value).sort(), ['locale', 'pageId', 'path', 'sections', 'summary', 'title']);
   }
+});
+
+test('validated context selects a public-site scope; direct forged context fails closed', () => {
+  assert.equal(publicSiteForContext({page_id:'home',path:'/'}), 'nexify');
+  assert.equal(publicSiteForContext({page_id:'tk-home',path:'/teileklar'}), 'teileklar');
+  for (const context of [{page_id:'home',path:'/teileklar'}, {page_id:'tk-home',path:'/'},
+    {page_id:'missing',path:'/'}, {page_id:'home',path:'/?site=teileklar'}]) {
+    assert.throws(()=>publicSiteForContext(context), /public_page_not_available/);
+  }
+  assert.throws(()=>readPublicPageInfo({pageId:'home'}, 'invalid'), /invalid_public_site/);
+  assert.throws(()=>createPublicPageAgent({model:new MockLanguageModelV4({modelId:EXACT_MODEL_ID}),site:'invalid'}), /invalid_public_site/);
+  // Explicit legacy access remains public-only and is not used by the isolated request handler.
+  assert.equal(readPublicPageInfo({pageId:'home'}).pageId, 'home');
+  assert.equal(readPublicPageInfo({pageId:'tk-home'}).pageId, 'tk-home');
+  const allowed=new Set(mapping.public_allowlist);
+  for(const page of mapping.pages){
+    const published=allowed.has(page.id)&&page.access.visibility==='public'&&!page.access.auth_required;
+    for(const site of ['nexify','teileklar']){
+      if(published&&page.site_context===site) assert.equal(readPublicPageInfo({pageId:page.id},site).pageId,page.id);
+      else assert.throws(()=>readPublicPageInfo({pageId:page.id},site),/public_page_not_available/);
+    }
+  }
+});
+
+test('real SDK tool executions enforce the server-selected site in both directions', async () => {
+  for (const [site,allowed,foreign] of [['nexify','home','tk-home'],['teileklar','tk-home','home']]) {
+    const model = new MockLanguageModelV4({modelId:EXACT_MODEL_ID,
+      doGenerate:[call(allowed), call(foreign)]});
+    const result = await createPublicPageAgent({model,site}).generate({prompt:'Public pages only.'});
+    assert.equal(result.steps.length, 2);
+    assert.equal(result.steps[0].toolResults[0].output.pageId, allowed);
+    assert.ok(result.steps[1].content.some(part=>part.type==='tool-error'));
+    assert.throws(()=>readPublicPageInfo({pageId:foreign},site),/public_page_not_available/);
+  }
+});
+
+test('mutating the caller options after agent construction cannot alter its scope', async () => {
+  const model = new MockLanguageModelV4({modelId:EXACT_MODEL_ID,
+    doGenerate:[call('tk-home'), answer('Fertig.')]});
+  const options={model,site:'nexify'};
+  const agent=createPublicPageAgent(options);
+  options.site='teileklar';
+  const result=await agent.generate({prompt:'Public pages only.'});
+  assert.ok(result.steps[0].content.some(part=>part.type==='tool-error'));
 });
 
 test('actual agent rejects private tool access and stops after two tool steps', async () => {

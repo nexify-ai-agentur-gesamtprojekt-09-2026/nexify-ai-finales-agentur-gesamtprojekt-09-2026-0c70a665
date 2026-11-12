@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
+CURRENT_RESIZE_REPORT = Path('evidence/resize-2026-11-10/text-spacing.json')
 
 def check_resize(report, expected_paths):
     rows = [row for row in report['checks'] if row.get('text_resize_200') is True]
@@ -45,7 +46,7 @@ def source_hashes(root):
 def check_bound_resize(root):
     mapping = json.loads((root / 'config/site-map.json').read_text())
     paths = {p['path'] for p in mapping['pages'] if p['id'] in mapping['public_allowlist'] and p['access']['visibility'] == 'public' and p['access']['auth_required'] is False}
-    report = json.loads((root / 'evidence/one-app-2026-10-27/text-spacing.json').read_text())
+    report = json.loads((root / CURRENT_RESIZE_REPORT).read_text())
     if report.get('completed') is not True or report.get('source_sha256') != source_hashes(root):
         raise ValueError('missing or stale resize source binding')
     if report.get('runtime_error_capture') is not True or report.get('runtime_errors') != []:

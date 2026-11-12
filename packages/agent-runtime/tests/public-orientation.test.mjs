@@ -80,6 +80,32 @@ test('English guidance uses English page copy and preserves the no-action bounda
   assert.doesNotMatch(text, /Termin (ist |wurde )?bestätigt|E-Mail (ist |wurde )?versendet/);
 });
 
+test('every public page keeps recommendations in its server-derived brand for all locales', async () => {
+  const locales=['de','nl','fr','en'];
+  const byPath=new Map(publicPages.map(page=>[page.path,page]));
+  for(const page of publicPages) for(const locale of locales) {
+    const foreign=publicPages.find(candidate=>candidate.site_context!==page.site_context);
+    assert.ok(foreign);
+    // A request explicitly naming a foreign page is not authority to cross scope.
+    for(const question of [foreign.title[locale], 'Website Shop Werkstatt Projekt Agentur']){
+      const response=await handler.fetch(request(input({locale,page_path:page.path,
+        messages:[{id:'brand-check',role:'user',parts:[{type:'text',text:question}]}]})));
+      assert.equal(response.status,200,`${page.path} ${locale}`);
+      const decoded=await decode(response);
+      const text=decoded.parts.filter(part=>part.type==='text').map(part=>part.text).join('');
+      if(page.site_context==='teileklar') assert.match(text,/^TEILEKLAR ·/);
+      else assert.match(text,/^NeXify AI FACTORY B\.V\./);
+      assert.match(text, /keine Aktion ausgeführt|geen actie uitgevoerd|Aucune action n’a été effectuée|No action has been performed/);
+      const links=[...text.matchAll(/\]\(([^)]+)\)/g)].map(match=>match[1]);
+      assert.ok(links.length>0,`${page.path} ${locale}`);
+      for(const path of links){
+        assert.ok(byPath.has(path),`${page.path}: unknown ${path}`);
+        assert.equal(byPath.get(path).site_context,page.site_context,`${page.path} -> ${path}`);
+      }
+    }
+  }
+});
+
 test('private, unknown, URL and missing contexts never disclose page content', async () => {
   const privatePages = mapping.pages.filter(page => !mapping.public_allowlist.includes(page.id) || page.access.visibility !== 'public' || page.access.auth_required);
   for (const page_path of [...privatePages.map(page => page.path), '/unknown', '//evil.invalid/', ORIGIN + '/', '/?role=admin', '/%2e%2e/', '/#private', undefined]) {

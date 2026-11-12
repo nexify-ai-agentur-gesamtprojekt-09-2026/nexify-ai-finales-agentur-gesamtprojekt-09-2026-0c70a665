@@ -1,5 +1,188 @@
 # Auftragsregister und Betriebsstand · 08.11.2026
 
+## Fortschreibung 09.11.2026 · Unified Master-GOAL
+
+Dieses Dokument bleibt das führende Aufgabenregister. Der folgende maschinenlesbare Block gehört zum selben Register; `ops/goal/STATE.json` enthält nur Laufzeitdaten des lokalen Fortsetzungsdienstes. Die private Sites-Version 6 (`2da8af1eed20bf57e56e0d34ccbdb3d31f9aa706`) zeigt den Hero-Film im oberen Bereich und den rechts integrierten Chat. Die Creative-Factory-Korrektur wird für die nächste private Version umgesetzt. Build, Typecheck, Design-Audit und gezielte Browserprüfungen bestanden lokal. Die öffentliche Freigabe, formale Identitäts-/Audio-/Untertitelprüfung und Gesamtprodukt-Abnahme sind offen. Rückweg ist die private Sites-Version 4.
+
+Die frühere `run.html` wurde als Gestaltungsreferenz, nicht als Laufzeitquelle verwendet. Das lokale Quellverzeichnis `/Users/gast/Documents/nexify-site-source-20261109` ist eine entpackte GitHub-Quelle ohne `.git`; Änderungen werden auf dem Draft-Branch `design/chat-orientation-2026-11-09` (PR 92) abgeglichen. Der Site-Auslieferungscheckout liegt separat unter `site-publish`. Ein lokaler Runner darf den Site-Auslieferungscheckout und fremde Mandanten nicht eigenständig schreiben.
+
+### Designkorrektur · Creative Factory Excellence (09.11.2026)
+
+Verbindliche Quelle: `docs/09-final/creative-factory-excellence-2026-11-09.md`, SHA-256 `7ed0599a46459fc4fd24af8d7a0f8e9c9f0a2530252e0a40982440509fd23c2f` (bytegleich zur angelieferten Datei). Vorrang für eine moderne AI-Factory-Ästhetik vor der konservativen Champagner-Interpretation; funktionale und Medienfreigaben bleiben bestehen. Die erste farbbetonte lokale Studie wurde vom Auftraggeber verworfen und nie veröffentlicht. Das neu abgeleitete Erlebnisziel ist in `docs/design/nexify-creative-experience-2026-11-09.md` festgehalten. Es umfasst die räumliche Startbühne und den realen Weg vom Oracle-Gespräch zur Anfrage.
+
+### SUB-GOAL 10 · Growth & Product Factory (09.11.2026)
+
+Verbindliche Quelle: `docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md`, SHA-256 `91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5` (bytegleich zur angelieferten Datei). Die bestehende Aufgabenwahrheit und Skill-Registry bleiben führend. Der öffentliche Chat kann derzeit ein bearbeitbares Briefing erzeugen und zum Kontaktformular führen; eine geprüfte durchgehende Strategie-/Options-/Preview-/Angebots-/CRM-Kette ist noch offen. ORACLE-/NeX-Runtime und Fachrollen sind als Zielbild zu prüfen, nicht als aktiv zu behaupten.
+
+### SUB-GOAL 11 · Leadership, PMO und Agent Workforce (09.11.2026)
+
+Verbindliche Quelle: `docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09.md`, SHA-256 `ac483833f1478ec9efa6434d081070e2c8700f8fc4cc2b4471ca334bfe12e432` (bytegleich zur angelieferten Markdown-Datei). Sie erweitert dasselbe Master-GOAL; Site, Chat und Arbeitsplatz behalten Vorrang. Der aktuelle Chat erzeugt nur eine lokale Orientierung und ein Briefing. Eine persistente Kundenfall- und Worker-Orchestrierung sowie ein geprüfter Chat-zu-Lieferung-Pilot sind noch offen.
+
+<!-- nexify-goal-tasks-json:start -->
+```json
+{
+  "schema_version": 1,
+  "goal_version": "2026-11-09-unified-master",
+  "source_attachment": "/Users/gast/.codex/attachments/c417bef0-bf02-4f7e-beea-3fcdf44300c8/pasted-text-1.txt",
+  "tasks": [
+    {
+      "id": "NX-UM-001",
+      "sub_goal": "00",
+      "title": "Quellbindung und private Site-Version 5 nachweisen",
+      "priority": 1,
+      "status": "REVIEW",
+      "owner": "Pascal Courbois / Frontend",
+      "writer": "Codex Hauptlauf",
+      "scope": "GitHub Draft PR 92, private Sites-Version 5, Hero und Oracle-Chat",
+      "paths": [
+        "apps/web/components/IdentityHero.tsx",
+        "apps/web/components/AtelierFilm.tsx",
+        "apps/web/components/Workspace.tsx"
+      ],
+      "dependencies": [],
+      "acceptance": "Remote-Commit, Browserbild, mobile Bedienung, Audio-Fallback und unabhängige Prüfung",
+      "evidence": "Sites-Version 5, Commit 49f84db097544e96fcf54ca8a8b2d5d58838cd7a; lokale Browser-Screenshots /tmp/nexify-final-1440-4s.png und /tmp/nexify-final-390.png",
+      "rollback": "Private Sites-Version 4 wiederherstellen; Originale erhalten",
+      "next": "Unabhängige Prüfung und offene Medienfreigaben erfassen"
+    },
+    {
+      "id": "NX-UM-002",
+      "sub_goal": "01",
+      "title": "Lokalen begrenzten Codex-Fortsetzungsdienst prüfen",
+      "priority": 2,
+      "status": "REVIEW",
+      "owner": "Pascal Courbois / Betrieb",
+      "writer": "Codex Hauptlauf",
+      "scope": "Bestehendes Register, lokaler Runner und macOS LaunchAgent",
+      "paths": [
+        "docs/09-final/auftragsregister-2026-11-08.md",
+        "tools/goal-runner.mjs",
+        "ops/goal/STATE.json"
+      ],
+      "dependencies": [
+        "NX-UM-001"
+      ],
+      "acceptance": "Lock, Begrenzung, Fehler- und Wiederaufnahmetest; echter nichtinteraktiver CLI-Start; LaunchAgent-Readback",
+      "evidence": "Codex CLI 0.167.0; read-only exec und resume erfolgreich; Runner-Selbsttest Lock/Selection; echter CLI-Lauf NX-UM-003 mit Host-Build und Browserprüfungen; LaunchAgent com.nexify.codex-unified-goal geladen, kickstart rc=0 und SKIP no_ready_task",
+      "rollback": "LaunchAgent deaktivieren; Runner und Protokolle versioniert behalten",
+      "next": "Unabhängige Prüfung des Runners und dauerhafter Folgeläufe; nach Freigabe DONE"
+    },
+    {
+      "id": "NX-UM-003",
+      "sub_goal": "02-04",
+      "title": "Videobedienung aus Pascals Gesichtsfeld lösen und Glas-Hero responsiv verfeinern",
+      "priority": 3,
+      "status": "REVIEW",
+      "owner": "Pascal Courbois / Art Direction",
+      "writer": "Lokaler Codex-Fortsetzungslauf",
+      "scope": "Konkreter Live-Befund: bei 1265 px liegen Video-Controls über Pascals Gesicht. CSS-Korrektur in bestehendem Hero/Filmrahmen, 320/375/768/1024/1265/1440 px prüfen.",
+      "paths": [
+        "apps/web/components/AtelierFilm.css",
+        "apps/web/components/IdentityHero.css",
+        "apps/web/components/HomeConcept.css",
+        "apps/web/components/WorkspaceRebuild.css"
+      ],
+      "dependencies": [],
+      "acceptance": "Bedienelemente bleiben sichtbar und per Touch erreichbar, verdecken das Gesicht nicht, Build/Typecheck und Browser-Screenshots ohne Überlauf",
+      "evidence": "CLI-Sitzung 01a1c24f-acfb-7d90-9d42-5ab70edda7a2; apps/web/components/AtelierFilm.css geändert; Host build:standalone, goal-capture before/after, browser-identity-hero und browser-video-hero alle rc=0; ops/goal/LOGS/runner-events.jsonl",
+      "rollback": "Geänderte Dateien aus dem GitHub Draft-Branch vor dem Paket wiederherstellen",
+      "next": "Unabhängige Sichtprüfung der Vorher-/Nachher-Bilder; danach CSS verfeinern und erneut testen",
+      "require_source_change": true
+    },
+    {
+      "id": "NX-UM-004",
+      "sub_goal": "05-09",
+      "title": "Seiten, Medien, Chat-Backend und Auslieferung paketweise vervollständigen",
+      "priority": 4,
+      "status": "TODO",
+      "owner": "Fachowner je Paket",
+      "writer": "Je Paket genau ein benannter Writer",
+      "scope": "43 erfasste öffentliche Seiten, Video-Slot-Plan, echte Anfrage- und Backend-Wege",
+      "paths": [
+        "config/site-map.json",
+        "docs/design/premium-video-slot-plan-2026-11-09.json"
+      ],
+      "dependencies": [
+        "NX-UM-003"
+      ],
+      "acceptance": "Je Paket E2E-Test, unabhängiger Review, Quell- und Ziel-Readback",
+      "evidence": "Offen; vorhandene Registerpunkte OF-01 bis OF-14 gelten weiter",
+      "rollback": "Je Paket vorab festhalten",
+      "next": "Nach NX-UM-003 in kleine fachliche Pakete aufteilen"
+    },
+    {
+      "id": "NX-UM-010",
+      "sub_goal": "10",
+      "title": "Factory-Fachrollen auf vorhandene Skills und Werkzeuge abbilden",
+      "priority": 4,
+      "status": "BLOCKED",
+      "owner": "Pascal Courbois / ORACLE-Rolle zu verifizieren",
+      "writer": "Lokaler Codex-Fortsetzungslauf",
+      "scope": "17 Fachfähigkeiten des Anhangs A gegen tatsächlich erreichbare Skills, Agenten, Tools und Workflows prüfen; nur geprüfte IST-Zuordnungen im bestehenden Skill-Register ergänzen; keine Installation oder Aktivitätsbehauptung",
+      "paths": [
+        "config/skills-register.json"
+      ],
+      "dependencies": [],
+      "acceptance": "Für jede Rolle IST/FEHLT/UNGEPRÜFT mit exakter Fundstelle, Scope, Owner und Testgrenze; valides JSON; unabhängiges Review",
+      "evidence": "Anhang A SHA-256 91253ed01fd24648ec96edbf74c6777ec232707fbd0a6db354b005339f14a2c5; bestehendes config/skills-register.json",
+      "rollback": "Vorhash der Registry sichern; Änderung auf Draft-Branch rücknehmbar",
+      "next": "Keine geforderte Quelländerung; kein Erfolg behaupten",
+      "require_source_change": true
+    },
+    {
+      "id": "NX-UM-011",
+      "sub_goal": "02-04,06,10",
+      "title": "Creative Experience: gemeinsame Startbühne und Oracle-Kundenweg",
+      "priority": 1,
+      "status": "RUNNING",
+      "owner": "Pascal Courbois / Creative Direction",
+      "writer": "Codex Hauptlauf",
+      "scope": "Von Pascals tatsächlichem Zielbild abgeleitete räumliche Bühne, originale Startszene, integrierter Oracle-Arbeitsbereich und echter Briefing-zu-Anfrage-Weg. Verworfenes Cyan-Konzept nicht deployen.",
+      "paths": [
+        "docs/design/nexify-creative-experience-2026-11-09.md",
+        "apps/web/components/IdentityHero.tsx",
+        "apps/web/components/IdentityHero.css",
+        "apps/web/components/HomeConcept.css",
+        "apps/web/components/PublicOrientationChat.tsx",
+        "apps/web/components/PublicOrientationChat.css",
+        "apps/web/components/ContactRequestForm.tsx"
+      ],
+      "dependencies": [],
+      "acceptance": "Build, Lint, Typecheck, Browser-Screenshots 320 bis 1440 px, Chat-Interaktion, Reduced Motion, unabhängiger Review, private Site-Readback",
+      "evidence": "Design-Referenz-Lock und Nutzerfeedback; Soll-Design docs/design/nexify-soll-design-2026-11-10.md; lokale Builds mit Lint/Designaudit und vollständigen Typechecks bestanden; Browserprüfungen 320–1920 px, Oracle-Briefing und Videosteuerung bestanden; unabhängige Gegenprüfung PASS ausschließlich für private Designvorschau; Sites-Version 8, Commit 58c0b7d06b723374eb24adb876780166a590a225, Deployment appgdep_6af26100b0f08191805f515bab16a5bb succeeded, owner-only. GitHub-Draft-PR 92 am geprüften Head 9fd5bb87d019d0a5bb3b7fee13e9c9860e205fa2; CI: next-web, react-site, postgres-isolation und openapi-schema erfolgreich, repository fehlgeschlagen wegen älterer Quellen- und Browser-Evidenzbindungen. Live-Oracle, formale Medienprüfung und öffentliche Abnahme offen.",
+      "rollback": "Private Sites-Version 6 und GitHub Draft-Branch-Commit 6f48d7e00954fd954ee22cd76d4f47dc284b34e9 wiederherstellen; Originalmedien erhalten",
+      "next": "Textvergrößerungsmessung evidence/resize-2026-11-10/text-spacing.json: 43 öffentliche Routen, 129 Prüfungen, keine Überläufe oder erfassten Laufzeitfehler. Neuer lokaler Browsernachweis evidence/browser-critical-2026-11-10/critical-browser.json: fünf Ansichtsbreiten, Navigation und SDK-Orientierung mit isoliertem Testhandler bestanden; sieben Bindungstests bestanden. Historische Berichte erhalten. Weitere Quellenbindungen und Consent-/Fallback-Nachweise erneuern; Backend-zu-Anfrage-Ende-zu-Ende-Test und formale Medienprüfung abschließen; erst danach öffentliche Freigabe prüfen",
+      "require_source_change": true
+    },
+    {
+      "id": "NX-UM-110",
+      "sub_goal": "11",
+      "title": "Leadership-/PMO-/Worker-Bestand und erster Fall-Pilot",
+      "priority": 2,
+      "status": "RUNNING",
+      "owner": "Pascal Courbois / ORACLE-Rolle zu verifizieren",
+      "writer": "Codex Hauptlauf",
+      "scope": "Bestehende Agenten-, Skill- und Tool-Instanzen, Rollenrechte, Runner und Gesprächszustände inventarisieren; kleinsten nachweisbaren Pilot auf bestehendem Register und autorisierter Runtime aufbauen; keine Scheinagenten oder externen Callback-Versprechen",
+      "paths": [
+        "docs/09-final/master-goal-anhang-leadership-pmo-2026-11-09.md",
+        "docs/09-final/auftragsregister-2026-11-08.md",
+        "tools/goal-runner.mjs"
+      ],
+      "dependencies": [
+        "NX-UM-010"
+      ],
+      "acceptance": "Exakte Instanz-/Owner-/Tenant-Matrix; Skill-/Tool-Tests; ein realer Fall von Chat zu geplantem, ausgeführtem und unabhängig geprüftem Artefakt; Restart/Duplicate/Recovery nachgewiesen",
+      "evidence": "Anhang SHA-256 ac483833f1478ec9efa6434d081070e2c8700f8fc4cc2b4471ca334bfe12e432; aktuelle Agent-/Runner-Bestandsprüfung läuft; noch kein Pilot-Nachweis",
+      "rollback": "Bestehende Auftrags- und Runner-Dateien vor Änderung sichern; einzelne Pilotdaten versioniert rücknehmbar, nichts löschen",
+      "next": "Verifizierte Bestandsmatrix und sichere Pilot-Schnittstelle festlegen, anschließend implementieren und testen",
+      "require_source_change": true
+    }
+  ],
+  "sub_goal_10_reference": "docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md"
+}
+```
+<!-- nexify-goal-tasks-json:end -->
+
 Führendes Register der Aufträge aus dieser Arbeitslinie (Zweig `claude/loving-albattani-4jp12a`, PR 76). Quelle für Soll:
 Gesamtbeschreibung 08.11.2026, Dauerauftrag „/GOAL“ (Pascal Courbois), `AGENTS.md`. Belegt ist nur, was in der Spalte
 „Nachweis“ steht. Statuskette: PLANNED → CREATED → LOCALLY_TESTED → INTEGRATED → LIVE_VERIFIED → ACCEPTED.
@@ -88,3 +271,11 @@ Quelle: Aussagen des Inhabers in der laufenden Sitzung. Aktuelle Nutzerentscheid
 | ED-02 | "Das Video ist nicht mehr aktuell." | Das Hero-Video aus AGENTS.md und docs/production/hero-requirements-2026-11-04.md ist überholt; das Standbild im Hero ist zulässig. `config/hero-film.json` und `browser-video.json` bleiben als Historie erhalten. | Alle übrigen visuellen Vorgaben (prototypen/, Designsystem v2.0) gelten weiter. |
 | ED-03 | "Aendere auch die Domains" | Ziel: nexifyai.de und nexifyai.cloud liefern den aktuellen `main`. | Umsetzung nur ohne Secret-Kopie: Git-Verbindung des alten Vercel-Projekts neu auf das Repository der neuen Organisation (nur Inhaber, KS-008). Domains werden nicht auf ein Projekt ohne Umgebungsvariablen gezogen. |
 | ED-04 | Clerk-Locale-Brücke (Entscheidung durch den Agenten nach ED-01) | Die Prüfung der Locale-Brücke (`LocaleAwareClerk.tsx`, Komponente entfernt) wird mit dem Neuentwurf von `next-public.json` stillgelegt, nicht gelöscht; die Consent-Oberfläche (DiagnosticConsent) und der Fail-closed-Nachweis bleiben bestehen. | Umsetzung gebündelt mit dem Neuentwurf der Route-Matrix (86 statt 78 Routen), weil beide Teile derselben Prüfung angehören. Bis dahin bleiben 3 Consent-Tests und 1 Error rot; kein Hashfälschen. |
+
+### Fortschreibung 10.11.2026 · Hero, Mobil, Oracle, PWA und BigBuy
+
+- **NX-UM-011, lokal in Prüfung:** Gewählter Triofilm `b7f30678` im Startseiten-Hero, vorheriger Studiofilm auf `/unternehmen`, jeweils mit bisherigem Bild als Poster; auf Desktop Text links und Film rechts. Originalhash und Medien-Slotplan liegen im GitHub-Entwurf. Identitäts-, Ton-, Lippen- und Untertitelprüfung sowie Freigabe stehen aus; keine neue Site-Version veröffentlicht.
+- **Mobil, lokal geprüft:** `evidence/mobile-layout-2026-11-10/browser.json`: 43 öffentliche Routen × fünf Breiten, 720 Abschlussaktionen ≥44 × 44 px, Quell- und Screenshot-Hashes. Andere Schaltflächen, Überdeckungen und Bildbeschnitt bleiben gesondert offen. Der Oracle-Auslöser wird im Footer zugunsten eines Footer-Einstiegs ausgeblendet; dessen Erreichbarkeit tief im Footer ist ein offener UX-Punkt.
+- **Oracle, lokal in Arbeit:** Gesprächsoberfläche und ein kontextbezogener Kosten-/Dauer-Folgefall verbessert; Kontextwechsel zwischen NeXify und TEILEKLAR setzt die lokale Instanz zurück. 9router ist serverseitig laufend beobachtet; aktueller Sites-Chat erreicht ihn nicht. Vorbereiteter Adapter ist nur per Fixture getestet; sichere Netzverbindung, Gesprächsbesitz, Tenant-, Kosten- und Laufzeitgrenzen sowie echtes Streaming bleiben offen.
+- **PWA, lokal geprüft:** `evidence/pwa-offline-2026-11-10/browser-context.json`: Offline-Hinweis mit DE/NL/FR/EN bzw. TEILEKLAR, ohne Cache oder Wiederholung von API-Schreibvorgängen; echte Geräteinstallation und Deployment offen.
+- **OF-08/OF-09, GitHub-Draft `f7ee9be08f72789be116a3f6390e90b8307dbe77`:** BigBuy-Import ist vor Anbieter- und Datenbankzugriff gesperrt, bis Tenant- und Veröffentlichungsvertrag belegt sind. 41 Import- und 3 Routentests mit Fakes sowie unabhängige Gegenprüfung bestanden. Produktivzugang, echte Mongo-Transaktionen, Auswahlimportfilter und Verkaufsgates bleiben offen; kein Liveimport ausgelöst.

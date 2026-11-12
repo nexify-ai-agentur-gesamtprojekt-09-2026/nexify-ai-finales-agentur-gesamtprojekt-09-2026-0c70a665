@@ -11,6 +11,11 @@ function page(id,path,site_context='nexify'){
 const pages=[page('home','/'),page('websites','/leistungen/websites'),page('automation','/leistungen/agenten-automatisierung'),page('solutions','/loesungen'),page('pricing','/preise-ablauf'),page('scope','/leistungsumfang'),page('contact','/kontakt'),page('nex2fly','/produkte/nex2fly'),page('api','/produkte/api'),page('one','/produkte/one'),page('tk-home','/teileklar','teileklar'),page('tk-search','/teileklar/suche','teileklar'),page('tk-fitment','/teileklar/fahrzeug-und-passung','teileklar'),page('tk-appointments','/teileklar/termine','teileklar')];
 const guide=(question,locale='de',pagePath='/',source=pages)=>staticOrientation({question,locale,pagePath,pages:source});
 
+test('a cost and timing follow-up keeps the website context and points to pricing',()=>{
+ const result=staticOrientation({locale:'de',pagePath:'/',pages,question:'Wie lange dauert das und was kostet es?',previousQuestions:['Ich brauche eine Website für meinen Handwerksbetrieb.']});
+ assert.match(result.text,/Marke & Web/);assert.match(result.text,/Dauer und Gesamtpreis/);assert.equal(result.cards[0].id,'pricing');assert.ok(!result.cards.some(card=>card.path.includes('cookie')));
+});
+
 test('all four locales give explicit local/no-live-AI guidance and exact supplied page copy',()=>{
  const phrases={de:'ohne Live-KI',nl:'zonder live-AI',fr:'sans IA en direct',en:'without live AI'};
  for(const locale of locales){

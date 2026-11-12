@@ -4,7 +4,7 @@
    Abschnittskoerper sowie das Atelier-Material fuer eingebettete Formulare und Shop-Bausteine. */
 
 /* Hero: identisches Raster wie identity-scene und hc-intro der Startseite */
-.home-concept .pc-hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-7);align-items:center;padding-block:var(--space-6) var(--space-7)}
+.home-concept .pc-hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-7);align-items:center;padding-block:var(--space-5)}
 .home-concept .pc-hero.is-text-only{grid-template-columns:minmax(0,1fr)}
 .home-concept .pc-hero.is-text-only .pc-hero-copy{max-width:72ch}
 .home-concept .pc-hero-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
@@ -32,7 +32,7 @@
 .home-concept .pc-hero-media img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 38%;border-radius:inherit}
 
 /* Sektionen: Kicker + Ueberschrift links, Lesetext rechts (Raster der Startseiten-Einleitung) */
-.home-concept .pc-section{padding-block:var(--space-7);scroll-margin-top:var(--space-5)}
+.home-concept .pc-section{padding-block:var(--space-5) var(--space-7);scroll-margin-top:var(--space-5)}
 .home-concept .pc-section:focus{outline:none}
 .home-concept .pc-section+.pc-section{padding-top:0}
 .home-concept .pc-section-body{display:grid;gap:var(--space-5);min-width:0}
@@ -40,7 +40,7 @@
 .home-concept .pc-section-body .hc-service-detail{margin-top:var(--space-2)}
 .home-concept .pc-section-links{display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-6)}
 .home-concept .pc-section-links .hc-text-link{margin-top:0}
-.home-concept .pc-sections{padding-block:var(--space-5) 0}
+.home-concept .pc-sections{padding-block:0}
 
 /* Erklaer-Module und Fragen: Akkordeon der Startseite (hc-service-detail) */
 .home-concept .hc-service-body>p{margin:0 0 var(--space-4);font-size:var(--type-home-reading);max-width:60ch}
@@ -110,14 +110,13 @@
 .workspace-shell .site-footer .footer-link-groups a{overflow-wrap:normal;word-break:normal;hyphens:none}
 
 @container home (max-width:1100px){
- .home-concept .pc-hero{grid-template-columns:minmax(0,1fr);gap:var(--space-6)}
- .home-concept .pc-hero h1{font-size:var(--type-hero-mobile);max-width:22ch}
- .home-concept .pc-hero-media{max-width:var(--layout-media-max);justify-self:center}
  .home-concept .pc-related .hc-process-heading{grid-template-columns:minmax(0,1fr);gap:var(--space-5)}
 }
-@container home (max-width:820px){
+@container home (max-width:680px){
+ .home-concept .pc-hero{grid-template-columns:minmax(0,1fr);gap:var(--space-6)}
+ .home-concept .pc-hero h1{font-size:var(--type-hero-mobile);max-width:22ch}
+ .home-concept .pc-hero-media{max-width:none;justify-self:center}
  .home-concept .pc-section{padding-block:var(--space-6)}
- .home-concept .pc-hero-media{max-width:none}
  .home-concept .pc-supplement :is(.tk-form,.tk-home-entry,.workshop-directory,.partner-form,.tk-partner-intro,.tk-portal-preview,.tk-legal-doc){padding:var(--space-5);border-radius:var(--radius-atelier)}
 }
 @container home (max-width:640px){

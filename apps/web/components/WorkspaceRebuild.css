@@ -184,7 +184,7 @@
 .aifly-symbol { width: calc(34em / 18); height: calc(34em / 18); flex-basis: calc(34em / 18); }
 
 /* Ein Lichtfeld für die ganze Markenfläche, keine Kacheln pro Sektion. */
-.workspace-shell .website { position: relative; isolation: isolate; background: var(--color-graphit-800); }
+.workspace-shell .website { position: relative; isolation: isolate; background: var(--gradient-atelier-ambient), var(--color-graphit-800); }
 .workspace-shell .website::before { content: ''; position: absolute; inset: 0 0 auto; height: var(--layout-light-height); pointer-events: none; z-index: -1; background: var(--gradient-markenlicht); background-repeat: no-repeat; }
 .website .site-header { background: transparent; border-bottom: 0; min-height: 96px; padding-inline: var(--layout-page-padding); }
 .site-header nav a { color: var(--color-text-sekundaer); font-size: 15px; }
@@ -319,9 +319,10 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 @media (max-width: 820px) { .chat-resize-handle { display: none; } }
 @media (prefers-reduced-motion: reduce) { .chat-resize-handle::after { transition: none; } }
 /* 1c-a A (REQ-207..216): graphite layers, lateral contact shadow with light edge, compact honest header. */
-.workspace-shell .aifly-panel { background: var(--color-canvas); border-left: 0; box-shadow: inset 1px 0 0 color-mix(in srgb, var(--color-text-primaer) 8%, transparent), -24px 0 48px -24px color-mix(in srgb, var(--color-canvas) 90%, transparent); }
+.workspace-shell .aifly-panel { background: var(--gradient-atelier-panel); border:1px solid var(--color-atelier-glass-edge); box-shadow:var(--shadow-atelier-panel-depth); isolation:isolate; }
+.workspace-shell .aifly-panel::before{content:'';position:absolute;inset:1px 1px auto;height:32%;border-radius:inherit;pointer-events:none;background:var(--gradient-atelier-panel-facet);opacity:.34;mask-image:linear-gradient(black,transparent)}
 .workspace-shell .aifly-panel .panel-topstrip { display: none; }
-.workspace-shell .aifly-panel .panel-heading { min-height: var(--space-8); padding: var(--space-2) var(--space-5); }
+.workspace-shell .aifly-panel .panel-heading { min-height: var(--space-8); padding: var(--space-2) var(--space-5); border-bottom:1px solid var(--color-linie-fein);box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge); }
 .panel-status { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-size: var(--type-small-size); line-height: 1.5; color: var(--color-text-tertiaer); }
 .panel-status[data-state="connected"] .connection-indicator { background: var(--color-semantik-erfolg); }
 .panel-status[data-state="connecting"] .connection-indicator { background: var(--color-brand-cyan); }
@@ -329,7 +330,9 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .workspace-shell .aifly-panel .composer-area { background: var(--color-graphit-650); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-text-primaer) 6%, transparent); padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom)); }
 .workspace-shell .aifly-panel .composer { background: var(--color-canvas); box-shadow: none; border-color: transparent; }
 .workspace-shell .aifly-panel .composer:focus-within { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
+.workspace-shell .website .site-header{background:var(--gradient-atelier-panel);border:1px solid var(--color-atelier-glass-edge);border-top:0;border-radius:0 0 var(--radius-atelier) var(--radius-atelier);box-shadow:var(--shadow-atelier-panel-depth)}
 .workspace-shell .aifly-panel :focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
+@media(prefers-reduced-transparency:reduce),(forced-colors:active){.workspace-shell .aifly-panel{background:var(--color-canvas);backdrop-filter:none;-webkit-backdrop-filter:none}.workspace-shell .aifly-panel::before{display:none}}
 .workspace-shell .aifly-panel .welcome-card { gap: var(--space-3); }
 .workspace-shell .aifly-panel .welcome-body { margin-bottom: 0; }
 .workspace-shell .aifly-panel .welcome-eyebrow-row { margin-top: 0; }
@@ -346,6 +349,7 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
 .header-cta:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 2px; }
 .header-actions .compact { background: transparent; color: var(--color-text-sekundaer); border-color: var(--color-linie-stark); }
 @media (max-width: 460px) { .header-cta { padding: 0 var(--space-3); } }
+@media (max-width: 820px) { .workspace-shell .site-header .header-cta { min-width:0; max-width:100%; white-space:normal; overflow-wrap:anywhere; line-height:1.35; padding-block:var(--space-2); } .workspace-shell .site-header .header-cta>span { flex:none; } }
 /* Central chat spacing tokens (8px scale): outer gutter, layer inset, vertical rhythm. */
 .workspace-shell { --chat-gutter: var(--space-5); --panel-inset: var(--space-3); --stack-gap: var(--space-4); }
 @media (max-width: 460px) { .workspace-shell { --chat-gutter: var(--space-4); --panel-inset: var(--space-2); } }
@@ -369,3 +373,4 @@ body.is-resizing-chat { cursor: col-resize; user-select: none; }
   min-width: 0;
 }
 .footer-overview-group { min-width: 0; }
+@media(max-width:820px){.workspace-shell[data-footer-visible='true'] .reopen-chat{visibility:visible;pointer-events:auto}}

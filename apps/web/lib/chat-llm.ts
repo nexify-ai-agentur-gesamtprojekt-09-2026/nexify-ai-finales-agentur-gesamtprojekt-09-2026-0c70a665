@@ -86,8 +86,9 @@ export async function* streamChatCompletion(
   });
 
   if (!res.ok || !res.body) {
-    const detail = await res.text().catch(() => '');
-    throw new Error(`chat_llm_upstream_${res.status}:${detail.slice(0, 200)}`);
+    // Provider responses may contain request details or credentials. Keep the
+    // useful status code, but never propagate the upstream response body.
+    throw new Error(`chat_llm_upstream_${res.status}`);
   }
 
   const reader = res.body.getReader();

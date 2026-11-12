@@ -2,6 +2,7 @@
 import ast
 import asyncio
 import copy
+import hashlib
 import re
 from decimal import Decimal
 from pathlib import Path
@@ -40,7 +41,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         node.returns = None
         calls = []
         class Orders:
-            existing = {"_id": "existing", "checkout_url": "https://example.invalid"}
+            existing = {"_id": "existing", "owner": "user:test", "checkout_url": "https://example.invalid"}
             async def find_one(self, query):
                 return self.existing
         orders = Orders()
@@ -51,12 +52,26 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
             raise ValueError("unreleased")
         async def payment_response(order):
             return {"order_id": order["_id"]}
-        namespace = {"owner_for": owner_for, "db": types.SimpleNamespace(orders=orders),
+        async def identity(request):
+            return types.SimpleNamespace(owner="user:test")
+        class HTTPException(Exception):
+            def __init__(self, status_code, detail):
+                self.status_code, self.detail = status_code, detail
+        validation = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "validate_order_replay")
+        validator_ns = {"HTTPException": HTTPException, "hashlib": hashlib}
+        exec(compile(ast.fix_missing_locations(ast.Module(body=[validation], type_ignores=[])), "checkout_api.py", "exec"), validator_ns)
+        namespace = {"auth": types.SimpleNamespace(identity=identity), "validate_order_replay": validator_ns["validate_order_replay"],
+                     "owner_for": owner_for, "db": types.SimpleNamespace(orders=orders),
                      "require_price_release": require_price_release, "payment_response": payment_response,
                      "replay": lambda order: {"order_id": order["_id"]}}
         exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), "checkout_api.py", "exec"), namespace)
         create = namespace["create_order"]
         self.assertEqual(await create(None, None, None, "test-key"), {"order_id": "existing"})
+        self.assertEqual(calls, [])
+        orders.existing = {"_id": "foreign", "owner": "user:other"}
+        with self.assertRaises(HTTPException) as mismatch:
+            await create(None, None, None, "test-key")
+        self.assertEqual(mismatch.exception.status_code, 503)
         self.assertEqual(calls, [])
         orders.existing = None
         with self.assertRaisesRegex(ValueError, "unreleased"):
@@ -65,8 +80,10 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
 
     async def test_paid_transition_recovers_mail_after_interrupted_cart_update(self):
         order = {"_id": "order-test", "status": "zahlung_offen", "revolut_order_id": "fake-provider-id",
-                 "owner": "user:test", "lines": [{"product_id": "test-product"}]}
-        emails = []
+                 "owner": "user:test", "cart_revision": 3, "address": {"email": "customer@example.invalid"},
+                 "lines": [{"product_id": "test-product"}]}
+        intents = set()
+        enqueue_calls = []
 
         class Orders:
             async def update_one(self, query, update):
@@ -95,19 +112,32 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
             async def retrieve_order(self, order_id):
                 return {"state": "completed"}
 
-        async def enqueue_paid_mails(paid_order):
-            emails.append(paid_order["_id"])
-
+        class FakeMailer:
+            @staticmethod
+            def setting(name):
+                return "internal@example.invalid"
+            async def enqueue(self, key, *args, **kwargs):
+                enqueue_calls.append(key)
+                intents.add(key)
+                return {"_id": key}
+        templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
+                                          internal_new_order=lambda _: ("subject", "html", "text"))
+        fake_db = types.SimpleNamespace(orders=Orders(), carts=Carts())
+        send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails",
+                             {"PAID": "bezahlt", "db": fake_db, "mailer": FakeMailer(), "mail_templates": templates})
         namespace = {"PAID": "bezahlt", "OPEN": "zahlung_offen", "FAILED": "zahlung_nicht_abgeschlossen",
-                     "db": types.SimpleNamespace(orders=Orders(), carts=Carts()), "revolut": FakeRevolut(),
-                     "now_iso": lambda: "2026-10-31T00:00:00Z", "send_paid_mails": enqueue_paid_mails}
+                     "db": fake_db, "revolut": FakeRevolut(), "revision_filter": lambda owner, revision: {"owner": owner, "revision": revision},
+                     "now_iso": lambda: "2026-10-31T00:00:00Z", "send_paid_mails": send}
         sync_payment = load_function("apps/shop-api/shop/checkout_api.py", "sync_payment", namespace)
-        try:
+        with self.assertRaisesRegex(RuntimeError, "injected interruption after paid transition"):
             await sync_payment(copy.deepcopy(order))
-        except RuntimeError as error:
-            self.assertEqual(str(error), "injected interruption after paid transition")
+        self.assertTrue(order["paid_mail_recovery_pending"])
+        self.assertEqual(intents, set())
         await sync_payment(copy.deepcopy(order))
-        self.assertEqual(emails, ["order-test"], "Retry must recover paid-order mail intent exactly once")
+        await sync_payment(copy.deepcopy(order))
+        self.assertEqual(intents, {"order_paid:customer:order-test", "order_paid:internal:order-test"})
+        self.assertCountEqual(enqueue_calls, ["order_paid:customer:order-test", "order_paid:internal:order-test"])
+        self.assertFalse(order["paid_mail_recovery_pending"])
 
     async def test_outbox_intents_reconcile_after_partial_insert_and_concurrent_callbacks(self):
         order = {"_id": "order-test", "status": "bezahlt", "paid_mail_recovery_pending": True,
@@ -396,3 +426,4 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

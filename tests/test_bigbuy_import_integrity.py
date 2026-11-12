@@ -226,14 +226,26 @@ class FakeCollection:
 
     async def count_documents(self, query, session=None):
         self.operation('count_documents', session)
-        return len(self.db.data[self.name])
+        rows = self.db.data[self.name].values()
+        return sum(1 for row in rows if all(
+            row.get(key) != value['$ne'] if isinstance(value, dict) and '$ne' in value else row.get(key) == value
+            for key, value in query.items()
+        ))
+
+    async def find_one(self, query, session=None):
+        self.operation('find_one', session)
+        return copy.deepcopy(self.db.data[self.name].get(query['_id']))
 
     async def bulk_write(self, operations, ordered, session=None):
+        for op in operations:
+            current = self.db.data['products'].get(op._filter['_id'])
+            if current is not None and current.get('source') != op._filter.get('source'):
+                raise RuntimeError('duplicate product identity')
         # Mutate one operation before injected failure, exercising rollback of partial bulk.
-        self.db.data['products'][operations[0]._filter['_id']] = copy.deepcopy(operations[0]._doc['$set'])
+        self.db.data['products'].setdefault(operations[0]._filter['_id'], {}).update(copy.deepcopy(operations[0]._doc['$set']))
         self.operation('bulk_write', session)
         for op in operations:
-            self.db.data['products'][op._filter['_id']] = copy.deepcopy(op._doc['$set'])
+            self.db.data['products'].setdefault(op._filter['_id'], {}).update(copy.deepcopy(op._doc['$set']))
         return SimpleNamespace(upserted_count=len(operations))
 
     async def update_many(self, query, update, session=None):
@@ -254,6 +266,8 @@ class FakeCollection:
 
     async def update_one(self, query, update, upsert=False, session=None):
         self.operation('done' if update.get('$set', {}).get('status') == 'done' else 'update_one', session)
+        if self.name == 'categories' and query['_id'] in self.db.data[self.name] and self.db.data[self.name][query['_id']].get('source') != query.get('source'):
+            raise RuntimeError('duplicate category identity')
         current = self.db.data[self.name].setdefault(query['_id'], {})
         if 'status' in query:
             expected = query['status']
@@ -296,8 +310,8 @@ class FakeSession:
 
 class FakeDB:
     def __init__(self, fail=None, unsupported=False):
-        self.data = {'products': {'bb-old': {'_id': 'bb-old', 'source': 'bigbuy', 'active': True, 'import_run_id': 'old'}},
-                     'categories': {5: {'_id': 5, 'name': 'Old category'}}, 'imports': {'run': {'status': 'running'}}, 'source_manifests': {}, 'settings': {}}
+        self.data = {'products': {'bb-12': {'_id': 'bb-12', 'source': 'bigbuy', 'active': True, 'import_run_id': 'old'}, 'other-1': {'_id': 'other-1', 'source': 'other', 'active': True}},
+                     'categories': {5: {'_id': 5, 'name': 'Old category', 'source': 'bigbuy'}, 7: {'_id': 7, 'name': 'Other supplier', 'source': 'other'}, 8: {'_id': 8, 'name': 'Unclassified'}}, 'imports': {'run': {'status': 'running'}}, 'source_manifests': {}, 'settings': {}}
         self.calls, self.fail, self.unsupported, self.commit_error = [], fail, unsupported, None
         self.session = FakeSession(self)
         self.client = SimpleNamespace(start_session=AsyncMock(return_value=self.session))
@@ -306,6 +320,12 @@ class FakeDB:
 
 
 class Publication(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        # Only these isolated transaction simulations bypass the unavailable
+        # production contract. The public entrypoint tests below do not.
+        guard = patch.object(IMPORT, 'require_publication_contract')
+        guard.start(); self.addCleanup(guard.stop)
+
     def catalog(self):
         row = {'id': 12, 'taxonomy': 5, 'sku': 'S12', 'wholesalePrice': '1.005'}
         return ([5], {5: 'Auto & Motorrad'}, {12: (row, {'name': 'Fixture'}, [], 2, 5, 0)}, [{'source': 'api'}])
@@ -315,16 +335,23 @@ class Publication(unittest.IsolatedAsyncioTestCase):
         with patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
             await IMPORT.run_import(db, 'production', 'run')
         self.assertEqual(db.data['products']['bb-12']['purchase_cents'], 101)
-        self.assertFalse(db.data['products']['bb-old']['active'])
+        self.assertTrue(db.data['products']['bb-12']['active'])
+        self.assertFalse(db.data['products']['bb-12']['buyable'])
+        self.assertFalse(db.data['products']['bb-12']['publishable'])
+        self.assertTrue(db.data['products']['other-1']['active'])
+        self.assertEqual(db.data['imports']['run']['counts']['deactivated'], 0)
         self.assertEqual(db.data['categories'][5]['name'], 'Auto & Motorrad')
+        self.assertEqual(db.data['categories'][7], {'_id': 7, 'name': 'Other supplier', 'source': 'other'})
+        self.assertEqual(db.data['categories'][8], {'_id': 8, 'name': 'Unclassified'})
+        self.assertNotIn('categories.delete_many', db.calls)
         self.assertEqual(db.data['imports']['run']['status'], 'done')
         self.assertTrue(db.data['source_manifests'])
         self.assertEqual(db.options['read_concern'].level, 'snapshot')
         self.assertEqual(db.options['write_concern'].document, {'w': 'majority'})
 
     async def test_every_publication_failure_keeps_old_catalog_and_no_partial_new_rows(self):
-        for point in ('settings.update_one', 'products.count_documents', 'products.bulk_write', 'products.update_many',
-                      'categories.delete_many', 'categories.insert_many', 'source_manifests.insert_many', 'imports.update_one', 'imports.done'):
+        for point in ('settings.update_one', 'products.count_documents', 'products.bulk_write',
+                      'categories.find_one', 'categories.update_one', 'source_manifests.insert_many', 'imports.update_one', 'imports.done'):
             db = FakeDB(fail=point)
             before = copy.deepcopy(db.data)
             with self.subTest(point=point), patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
@@ -332,6 +359,57 @@ class Publication(unittest.IsolatedAsyncioTestCase):
                 for name in ('products', 'categories', 'source_manifests', 'settings'):
                     self.assertEqual(db.data[name], before[name])
                 self.assertEqual(db.data['imports']['run']['status'], 'failed')
+
+    async def test_unseen_active_supplier_product_aborts_without_deactivation(self):
+        db = FakeDB()
+        db.data['products']['bb-missing'] = {'_id': 'bb-missing', 'source': 'bigbuy', 'active': True, 'import_run_id': 'old'}
+        before = copy.deepcopy(db.data)
+        with patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
+            await IMPORT.run_import(db, 'production', 'run')
+        for name in ('products', 'categories', 'source_manifests', 'settings'):
+            self.assertEqual(db.data[name], before[name])
+        self.assertEqual(db.data['imports']['run']['error'], 'catalog_missing_existing_products_unverified')
+        self.assertNotIn('products.update_many', db.calls)
+
+    async def test_foreign_product_id_collision_never_overwrites_it(self):
+        db = FakeDB()
+        db.data['products']['bb-12'] = {'_id': 'bb-12', 'source': 'other', 'active': True}
+        before = copy.deepcopy(db.data)
+        with patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
+            await IMPORT.run_import(db, 'production', 'run')
+        for name in ('products', 'categories', 'source_manifests', 'settings'):
+            self.assertEqual(db.data[name], before[name])
+        self.assertEqual(db.data['imports']['run']['status'], 'failed')
+
+    async def test_new_raw_product_has_no_active_flag(self):
+        db = FakeDB(); db.data['products'].pop('bb-12')
+        with patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
+            await IMPORT.run_import(db, 'production', 'run')
+        self.assertEqual(db.data['imports']['run']['status'], 'done')
+        self.assertNotIn('active', db.data['products']['bb-12'])
+        self.assertIs(db.data['products']['bb-12']['buyable'], False)
+        self.assertIs(db.data['products']['bb-12']['publishable'], False)
+
+    async def test_foreign_and_unmarked_category_collisions_abort_without_catalog_mutation(self):
+        for existing in ({'_id': 5, 'name': 'Other', 'source': 'other'}, {'_id': 5, 'name': 'Legacy'}):
+            db = FakeDB(); db.data['categories'][5] = existing
+            before = copy.deepcopy(db.data)
+            with self.subTest(existing=existing), patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
+                await IMPORT.run_import(db, 'production', 'run')
+                for name in ('products', 'categories', 'source_manifests', 'settings'):
+                    self.assertEqual(db.data[name], before[name])
+                self.assertEqual(db.data['imports']['run']['error'], 'category_ownership_unverified')
+
+    async def test_repeated_publication_keeps_owned_and_foreign_categories(self):
+        db = FakeDB()
+        with patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
+            await IMPORT.run_import(db, 'production', 'run')
+            db.data['imports']['run2'] = {'status': 'running'}
+            await IMPORT.run_import(db, 'production', 'run2')
+        self.assertEqual(db.data['imports']['run2']['status'], 'done')
+        self.assertEqual(db.data['categories'][5]['source'], 'bigbuy')
+        self.assertEqual(db.data['categories'][7]['name'], 'Other supplier')
+        self.assertNotIn('categories.delete_many', db.calls)
 
     async def test_unsupported_transaction_has_no_nontransactional_fallback(self):
         db = FakeDB(unsupported=True)
@@ -460,6 +538,45 @@ class Publication(unittest.IsolatedAsyncioTestCase):
             await IMPORT.run_import(db, 'production', 'run')
         self.assertEqual(db.data['products'], before)
         self.assertEqual(db.data['imports']['run']['status'], 'publication_unknown')
+
+
+class ProductionGuardTests(unittest.IsolatedAsyncioTestCase):
+    async def test_all_entrypoints_fail_before_provider_or_database_access(self):
+        for environment in ('production', 'ftp', 'sandbox', 'selection'):
+            db = FakeDB(); before = copy.deepcopy(db.data)
+            with self.subTest(environment=environment), patch.object(IMPORT, 'fetch_catalog', AsyncMock()) as fetch:
+                with self.assertRaisesRegex(ERROR, 'tenant_publication_contract_unverified'):
+                    await IMPORT.start_import(db, environment, 'fixture-actor')
+                with self.assertRaisesRegex(ERROR, 'tenant_publication_contract_unverified'):
+                    await IMPORT.run_import(db, environment, 'run')
+                self.assertEqual(db.data, before)
+                self.assertEqual(db.calls, [])
+                fetch.assert_not_called()
+                db.client.start_session.assert_not_called()
+
+    def test_raw_product_has_no_sellable_state(self):
+        row = {'id': 12, 'taxonomy': 5, 'sku': 'S12', 'wholesalePrice': '1.00'}
+        product = IMPORT.build_product(row, {}, [], 2, {5: 'Auto'}, 5, 'stamp', 'run', 'production')
+        self.assertNotIn('active', product)
+        self.assertIs(product['buyable'], False)
+        self.assertIs(product['publishable'], False)
+
+    async def test_direct_selection_and_image_enrichment_are_blocked_before_access(self):
+        name = '_bigbuy_selection_guard_subject'
+        package = ModuleType(name); package.__path__ = [str(SHOP)]
+        database = ModuleType(name + '.db'); database.db = FakeDB(); database.now_iso = lambda: 'fixture'
+        modules = {name: package, name + '.db': database, name + '.bigbuy_import': IMPORT}
+        spec = importlib.util.spec_from_file_location(name + '.bigbuy_selection', SHOP / 'bigbuy_selection.py')
+        selection = importlib.util.module_from_spec(spec)
+        with patch.dict(sys.modules, modules):
+            spec.loader.exec_module(selection)
+            with patch.object(selection, 'BigBuyClient') as client:
+                with self.assertRaisesRegex(ERROR, 'tenant_publication_contract_unverified'):
+                    await selection.import_selection('fixture-actor')
+                with self.assertRaisesRegex(ERROR, 'tenant_publication_contract_unverified'):
+                    await selection.enrich_images()
+                client.assert_not_called()
+                self.assertEqual(database.db.calls, [])
 
 
 if __name__ == '__main__':
