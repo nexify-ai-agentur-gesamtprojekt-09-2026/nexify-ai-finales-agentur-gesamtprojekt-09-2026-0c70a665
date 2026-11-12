@@ -20,12 +20,12 @@ Der Nutzer hat einen ChatGPT-Workspace-Agent-Entwurf mit der ID `agt_6af33958f23
 
 - Die ID ist eine Endpointkennung, **kein Bearer-Token** und kein Nachweis eines ausgeführten Runs.
 - Für den Liveaufruf muss der Eigentümer im ChatGPT Workspace über `Admin > Access tokens` ein Token mit **Workspace Agents**-Scope bereitstellen; normaler OpenAI-Platform-Key ist falsch. Geheimnis ausschließlich in vorhandenem Hostinger-Secret-Store, nie im Repository/Slack/Chat.
-- `POST` mit `Authorization: Bearer ...`, JSON `input`, optional stabiler `conversation_key` und `Idempotency-Key`. `202 Accepted` ist nur Queue-ACK und enthält **weder Ergebnis noch öffentlichen Run-ID**; Ziel-Readback anhand eigener Request-ID separat nachweisen.
+- `POST` mit `Authorization: Bearer ...`, JSON `input`, optional stabiler `conversation_key` und `Idempotency-Key`. `202 Accepted` ist nur Queue-ACK und enthält kein Ergebnis. Mit `OpenAI-Beta: workspace_agent_runs=v1` liefert die aktuelle API eine `agent_trigger_run_id`; ihr terminaler Status ersetzt den separaten Ergebnis-Readback nicht.
 - Der native **15-Minuten-Zeitplan** wurde nach Nutzerbericht im Agent Studio bereits eingerichtet. **Keinen zweiten Hostinger-Timer** aktivieren; vorhandene native Runs prüfen. Hostinger-Trigger dient vorerst ausschließlich als manuell getestete, optionale Integrationsmöglichkeit und braucht bei späterem Einsatz gesonderte Lease-/Watchdog-/Kostenprüfung.
-- **Status 10.11.:** Kanal-ID gebunden und Integrationscode offline geprüft. Token im ausführenden System und der vollständige live getestete API→Agent→Ergebnisweg sind noch **nicht bestätigt**.
+- **Status 12.11.:** Kanal-ID gebunden; begrenzter Standardbibliothek-Client und 20 Offline-Negativtests liegen auf diesem Branch. Die sichere Laufzeitbindung des vorhandenen Tokenobjekts und der vollständige live getestete API→Agent→Ergebnisweg sind noch **nicht bestätigt**.
 - Fehlerfälle: 401 Token fehlt/falsch, 403 Tokenbesitzer ohne Zugriff, 404 falscher Kanal, 409 Agent nicht lauffähig; 202 ohne Ergebnis bedeutet Ziel-/Approval-/App-Rechte prüfen.
 
-Primärquellen: https://developers.openai.com/workspace-agents/authentication und https://developers.openai.com/cookbook/examples/chatgpt/workspace_agents/workspace-agents-api-trigger
+Primärquellen: https://developers.openai.com/workspace-agents/trigger-runs und https://developers.openai.com/workspace-agents/authentication
 
 ## Zielidentitäten
 
@@ -58,4 +58,4 @@ Kein `DONE` ohne tatsächlich eingetretenen Geschäftsausgang, getestete notwend
 - `docs/automation/intent-closure-contract.md`
 - `docs/automation/chat-goal-continuity-2026-11-10.md`
 
-**Implementierungsstand:** bestehende AIFly-Betriebsautomation wurde um Native-Studio-Prüfpflicht ergänzt; eigentlicher Studio-Agent, API-Zugang, 15-Minuten-Hostinger-Timer und operative Subagenten-Veröffentlichung sind noch nicht live belegt.
+**Implementierungsstand:** Offline-Client `tools/workspace_agent_relay.py`, Tests und Runbook sind gebaut und lokal geprüft. Studio-Entwurf, vorhandenes Tokenobjekt und API-Kanal wurden nicht verändert; sichere Tokeninjektion, einmaliger Live-Trigger, tatsächlicher Ergebnis-Readback und 24/7-Betrieb sind noch nicht belegt. Kein zweiter Scheduler wurde angelegt.
