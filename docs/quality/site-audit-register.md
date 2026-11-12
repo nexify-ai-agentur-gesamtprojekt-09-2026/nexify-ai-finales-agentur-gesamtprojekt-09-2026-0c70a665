@@ -94,6 +94,27 @@ Leere `alt`-Texte (dekorativ, siehe Bildprüfung): oracle-lossless.webp, signet.
 | `/teileklar/reifenrechner` | ok | ok | /api/session 404 (OF-07, bekannt: Orientierungsmodus); /api/shop/cart 503 (OF-08, bekannt: Shop-API nicht deployt, Offline-Fallback) | hreflang fehlt; noindex (gewollt bis Freigabe); Beschreibung 180 Z. | D 1028/0/144 KB · M 600/0/144 KB | Higgsfield ohne Kennzeichnung: hf-17-cutout-1920.webp; ohne srcset: hf-17-cutout-1920.webp | ok |
 | `/teileklar/batterie-berater` | ok | ok | /api/session 404 (OF-07, bekannt: Orientierungsmodus); /api/shop/cart 503 (OF-08, bekannt: Shop-API nicht deployt, Offline-Fallback) | hreflang fehlt; noindex (gewollt bis Freigabe); Beschreibung 182 Z. | D 1056/0/144 KB · M 748/0/144 KB | Higgsfield ohne Kennzeichnung: hf-17-cutout-1920.webp; ohne srcset: hf-17-cutout-1920.webp | ok |
 
+## Lighthouse (Labor, mobil)
+
+lighthouse 12.6.1, mobile-Preset (Standard), simulierte Drosselung, Chromium ueber den Agent-Proxy auf `https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app`. Laborwerte, kein Feldwert; INP ist im Labor nicht messbar (TBT als Ersatzgroesse).
+
+| Seite | Leistung | Barrierefreiheit | Best Practices | SEO | LCP ms | CLS | TBT ms |
+|---|---|---|---|---|---|---|---|
+| `/` | 59 | 100 | 93 | 69 | 3839 | 0 | 1525 |
+| `/kontakt` | 63 | 100 | 93 | 69 | 3480 | 0 | 1630 |
+| `/leistungen` | 64 | 100 | 93 | 69 | 3105 | 0 | 3120 |
+
+Befunde aus dem Lauf:
+
+- **Leistung (SOLL LCP ≤ 2500 ms, TBT niedrig):** LCP 3,1 bis 3,8 s und TBT 1,5 bis 3,1 s unter Lighthouse-Drosselung (4-fach CPU, langsames 4G). Haupttreiber ist ein einzelner Script-Chunk (`_next/static/chunks/2wy5gkoj5qu0_.js`: rund 0,9 s Gesamt, 0,8 s Scripting) plus rund 100 KiB ungenutztes JavaScript. Ungedrosselt liegt LCP bei 0,5 bis 1,5 s (eigene Messung oben). Ein INP-Wert ist im Labor nicht messbar; TBT zeigt das Risiko.
+- **SEO 69:** ausschließlich „Seite für Indexierung gesperrt“ (`noindex`, gewollt bis zur Freigabe, OF-18).
+- **Best Practices 93:** Konsolenfehler ist `/api/session` 404 (OF-07, bekannt).
+- **Label in Name (WCAG 2.5.3, Lighthouse `label-content-name-mismatch`, von axe nicht geprüft):** drei Elemente, belegt am DOM von `/`:
+  1. Kopf-Marke `a.brand` mit `aria-label="NeXify AI · Startseite"`, sichtbarer Text „NeXify AI Chat it. Automate it.“ (Quelle `Workspace.tsx`).
+  2. Fuß-Marke `a.brand` mit `aria-label="Zur Startseite"`, derselbe sichtbare Text (Quelle `SiteFooter.tsx`).
+  3. Schaltfläche mit `aria-label="Film mit Ton starten"`, sichtbarer Text „Ton an“ (Beschriftung aus `lib/home-scenes.ts`).
+  Vorschlag: zugänglichen Namen so setzen, dass der sichtbare Text darin vorkommt (z. B. „NeXify AI · Chat it. Automate it. · Startseite“, „Ton an: Film mit Ton starten“). Die Dateien sind per Hash an Nachweisketten gebunden; Änderung gemeinsam mit dem Startseiten-Freisteller in einem Frontend-Paket mit Neuerhebung der Nachweise.
+
 ## axe-core (WCAG 2.2 AA)
 
 axe-core 4.10.2, Regeln wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa, 36 Seiten × Desktop/Mobil auf `https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app`, gemessen 2026-11-12T16:02:32+00:00. **Verstöße: 0**, Messfehler: 0.
@@ -121,6 +142,8 @@ Von axe als „unvollständig“ gemeldet (kein Verstoß, braucht Prüfung durch
 | Punkt | Grund | Nächste Aktion |
 |---|---|---|
 | Freisteller auf der Startseite ohne `srcset` und Titelkennzeichnung wie oben | `HomeContent.tsx` ist per Hash an fünf Browser-Nachweisketten gebunden; Änderung braucht vollständige Neuerhebung | gemeinsam mit dem nächsten Frontend-Paket ändern und Nachweise neu erheben |
+| Label in Name an Kopf-Marke, Fuß-Marke und Ton-Schaltfläche (WCAG 2.5.3), siehe Lighthouse-Abschnitt | `Workspace.tsx`, `SiteFooter.tsx` und die Szenenbeschriftung sind per Hash an Nachweisketten gebunden | ein Frontend-Paket zusammen mit dem Startseiten-Freisteller, danach Nachweise neu erheben |
+| Hohe Hauptthread-Blockierung (TBT 1,5 bis 3,1 s unter Drosselung), ein Script-Chunk dominiert | Ursache im Bundle noch nicht aufgeschlüsselt | Bundle-Analyse (Chunk `2wy5gkoj5qu0_.js`), Aufteilung/Verzögerung prüfen, danach Lighthouse wiederholen | Frontend |
 | Oracle als alleiniges Symbol (`OracleCompanion`, 34 px, dekorativ, `aria-hidden`) neben dem Chat-Steuerelement | Vorgabe „Signet/Oracle-Präsentator nur als Paar NeX + Oracle“ ist im Repo nicht als Regel belegt | Design entscheidet: Paar zeigen oder Einzelsymbol erlauben |
 | Produktion (`www.nexifyai.de`) zeigt den alten Stand `6c4f9ee` | Vercel-Neuverbindung, OF-14 | Pascal |
 | Apex ohne Redirect, `.cloud` mit eigener indexierbarer Seite, Indexierung | Domain- und Veröffentlichungsfreigabe, OF-18 | Pascal |
@@ -132,6 +155,6 @@ Von axe als „unvollständig“ gemeldet (kein Verstoß, braucht Prüfung durch
 | Marke (Signet, Präsentatoren, Glas-/Champagner-Rand, Lichtreflex) | nur Bilddateien und Kennzeichnung gemessen, keine Sichtprüfung der Gestaltung | Sichtprüfung mit Screenshots Desktop/Mobil in separatem Schritt | Design |
 | Inhalt (Kundenfragen, Leerformeln) | nur Sprachvergleich Titel/H1 gemessen | redaktionelle Prüfung je Seite | Redaktion |
 | UX | nicht gemessen | Aufgabentests | UX |
-| Lighthouse, INP | Lighthouse hier nicht installiert, INP braucht echte Interaktion (axe-core ist gemessen, siehe oben, nur auf `main`, nicht auf Produktion) | Lighthouse und INP-Messung in CI oder lokal ergänzen | QA |
+| INP, Lighthouse auf Produktion | INP braucht echte Interaktion und ist im Labor nicht messbar; Lighthouse und axe-core nur auf `main` und nur für drei bzw. alle Seiten gemessen, nicht auf der alten Produktion | Feldmessung (CrUX/Analytics) nach Veröffentlichung; Lighthouse in CI | QA |
 | Sprache, TEILEKLAR | Shop ist nur Deutsch; `?lang=nl/en/fr` liefert deutschen Inhalt mit `lang=de` (ehrlich markiert). Ein sichtbarer Hinweis „nur auf Deutsch verfügbar“ für NL/EN/FR-Besucher ist nicht belegt | Redaktion/Design entscheiden, ob und wie der Hinweis erscheint | Redaktion |
 | Datenschutz (externe Anfragen, Cookies) | nicht in dieser Messung erfasst; lokale Browser-Nachweise (0 externe Anfragen) liegen unter `evidence/` | externe Hosts je Seite in Messung aufnehmen | Datenschutz |

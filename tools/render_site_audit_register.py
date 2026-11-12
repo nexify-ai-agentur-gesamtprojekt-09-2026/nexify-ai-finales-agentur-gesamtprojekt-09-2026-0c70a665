@@ -139,12 +139,32 @@ def axe_section(axe: dict) -> list[str]:
     return lines + [""]
 
 
+def lighthouse_section(lh: dict) -> list[str]:
+    lines = ["## Lighthouse (Labor, mobil)", "",
+             f"{lh['werkzeug']} auf `{lh['ziel']}`. {lh['hinweis']}.", "",
+             "| Seite | Leistung | Barrierefreiheit | Best Practices | SEO | LCP ms | CLS | TBT ms |", "|---|---|---|---|---|---|---|---|"]
+    for path, v in lh["seiten"].items():
+        s = v["punkte"]
+        lines.append(f"| `{path}` | {s['performance']} | {s['accessibility']} | {s['best-practices']} | {s['seo']} | {v['lcp_ms']} | {v['cls']} | {v['tbt_ms']} |")
+    lines += ["", "Befunde aus dem Lauf:", "",
+              "- **Leistung (SOLL LCP ≤ 2500 ms, TBT niedrig):** LCP 3,1 bis 3,8 s und TBT 1,5 bis 3,1 s unter Lighthouse-Drosselung (4-fach CPU, langsames 4G). Haupttreiber ist ein einzelner Script-Chunk (`_next/static/chunks/2wy5gkoj5qu0_.js`: rund 0,9 s Gesamt, 0,8 s Scripting) plus rund 100 KiB ungenutztes JavaScript. Ungedrosselt liegt LCP bei 0,5 bis 1,5 s (eigene Messung oben). Ein INP-Wert ist im Labor nicht messbar; TBT zeigt das Risiko.",
+              "- **SEO 69:** ausschließlich „Seite für Indexierung gesperrt“ (`noindex`, gewollt bis zur Freigabe, OF-18).",
+              "- **Best Practices 93:** Konsolenfehler ist `/api/session` 404 (OF-07, bekannt).",
+              "- **Label in Name (WCAG 2.5.3, Lighthouse `label-content-name-mismatch`, von axe nicht geprüft):** drei Elemente, belegt am DOM von `/`:",
+              "  1. Kopf-Marke `a.brand` mit `aria-label=\"NeXify AI · Startseite\"`, sichtbarer Text „NeXify AI Chat it. Automate it.“ (Quelle `Workspace.tsx`).",
+              "  2. Fuß-Marke `a.brand` mit `aria-label=\"Zur Startseite\"`, derselbe sichtbare Text (Quelle `SiteFooter.tsx`).",
+              "  3. Schaltfläche mit `aria-label=\"Film mit Ton starten\"`, sichtbarer Text „Ton an“ (Beschriftung aus `lib/home-scenes.ts`).",
+              "  Vorschlag: zugänglichen Namen so setzen, dass der sichtbare Text darin vorkommt (z. B. „NeXify AI · Chat it. Automate it. · Startseite“, „Ton an: Film mit Ton starten“). Die Dateien sind per Hash an Nachweisketten gebunden; Änderung gemeinsam mit dem Startseiten-Freisteller in einem Frontend-Paket mit Neuerhebung der Nachweise.", ""]
+    return lines
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--produktion", required=True)
     ap.add_argument("--main", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--axe", help="Ergebnis von tools/site_axe_audit.py (optional)")
+    ap.add_argument("--lighthouse", help="zusammengefasstes Lighthouse-Ergebnis (optional)")
     a = ap.parse_args()
     prod, main_ = (json.loads(Path(p).read_text(encoding="utf-8")) for p in (a.produktion, a.main))
     out = ["# Site-Audit-Register (09.11.2026)", "",
@@ -157,6 +177,8 @@ def main() -> int:
         out += [f"## {title}", f"Gemessen {rep['gemessen_am']}, {len(rep['seiten'])} Seiten.", "",
                 "Seiten mit Abweichung je Bereich: " + (", ".join(f"{k} {v}" for k, v in sorted(count.items())) or "keine"), "",
                 "Leere `alt`-Texte (dekorativ, siehe Bildprüfung): " + (", ".join(sorted(alts)) or "keine"), ""] + lines + [""]
+    if a.lighthouse:
+        out += lighthouse_section(json.loads(Path(a.lighthouse).read_text(encoding="utf-8")))
     if a.axe:
         out += axe_section(json.loads(Path(a.axe).read_text(encoding="utf-8")))
     out += ["## Behoben in diesem PR (lokal gemessen, noch nicht auf Produktion)", "",
@@ -168,6 +190,8 @@ def main() -> int:
             "## Offen, mit Grund", "",
             "| Punkt | Grund | Nächste Aktion |", "|---|---|---|",
             "| Freisteller auf der Startseite ohne `srcset` und Titelkennzeichnung wie oben | `HomeContent.tsx` ist per Hash an fünf Browser-Nachweisketten gebunden; Änderung braucht vollständige Neuerhebung | gemeinsam mit dem nächsten Frontend-Paket ändern und Nachweise neu erheben |",
+            "| Label in Name an Kopf-Marke, Fuß-Marke und Ton-Schaltfläche (WCAG 2.5.3), siehe Lighthouse-Abschnitt | `Workspace.tsx`, `SiteFooter.tsx` und die Szenenbeschriftung sind per Hash an Nachweisketten gebunden | ein Frontend-Paket zusammen mit dem Startseiten-Freisteller, danach Nachweise neu erheben |",
+            "| Hohe Hauptthread-Blockierung (TBT 1,5 bis 3,1 s unter Drosselung), ein Script-Chunk dominiert | Ursache im Bundle noch nicht aufgeschlüsselt | Bundle-Analyse (Chunk `2wy5gkoj5qu0_.js`), Aufteilung/Verzögerung prüfen, danach Lighthouse wiederholen | Frontend |",
             "| Oracle als alleiniges Symbol (`OracleCompanion`, 34 px, dekorativ, `aria-hidden`) neben dem Chat-Steuerelement | Vorgabe „Signet/Oracle-Präsentator nur als Paar NeX + Oracle“ ist im Repo nicht als Regel belegt | Design entscheidet: Paar zeigen oder Einzelsymbol erlauben |",
             "| Produktion (`www.nexifyai.de`) zeigt den alten Stand `6c4f9ee` | Vercel-Neuverbindung, OF-14 | Pascal |",
             "| Apex ohne Redirect, `.cloud` mit eigener indexierbarer Seite, Indexierung | Domain- und Veröffentlichungsfreigabe, OF-18 | Pascal |", ""]
@@ -176,7 +200,7 @@ def main() -> int:
             "| Marke (Signet, Präsentatoren, Glas-/Champagner-Rand, Lichtreflex) | nur Bilddateien und Kennzeichnung gemessen, keine Sichtprüfung der Gestaltung | Sichtprüfung mit Screenshots Desktop/Mobil in separatem Schritt | Design |",
             "| Inhalt (Kundenfragen, Leerformeln) | nur Sprachvergleich Titel/H1 gemessen | redaktionelle Prüfung je Seite | Redaktion |",
             "| UX | nicht gemessen | Aufgabentests | UX |",
-            "| Lighthouse, INP | Lighthouse hier nicht installiert, INP braucht echte Interaktion (axe-core ist gemessen, siehe oben, nur auf `main`, nicht auf Produktion) | Lighthouse und INP-Messung in CI oder lokal ergänzen | QA |",
+            "| INP, Lighthouse auf Produktion | INP braucht echte Interaktion und ist im Labor nicht messbar; Lighthouse und axe-core nur auf `main` und nur für drei bzw. alle Seiten gemessen, nicht auf der alten Produktion | Feldmessung (CrUX/Analytics) nach Veröffentlichung; Lighthouse in CI | QA |",
             "| Sprache, TEILEKLAR | Shop ist nur Deutsch; `?lang=nl/en/fr` liefert deutschen Inhalt mit `lang=de` (ehrlich markiert). Ein sichtbarer Hinweis „nur auf Deutsch verfügbar“ für NL/EN/FR-Besucher ist nicht belegt | Redaktion/Design entscheiden, ob und wie der Hinweis erscheint | Redaktion |",
             "| Datenschutz (externe Anfragen, Cookies) | nicht in dieser Messung erfasst; lokale Browser-Nachweise (0 externe Anfragen) liegen unter `evidence/` | externe Hosts je Seite in Messung aufnehmen | Datenschutz |", ""]
     Path(a.out).write_text("\n".join(out), encoding="utf-8")
