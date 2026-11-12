@@ -23,6 +23,130 @@ Abo-Medien in Higgsfield zuerst wiederverwenden; notwendige Produktion nur im
 vorhandenen Guthaben ohne Aufladung/Neutarif. Keine automatische Gesamtabnahme
 oder Daten-/Rechtefreigabe aus dieser Führungsentscheidung ableiten.
 
+## Aktuelle Führungsentscheidung · 10.11.2026 — Umsatz zuerst, Umsetzung statt Stillstand
+
+Die neueste ausdrückliche Unternehmerweisung präzisiert die Arbeitsreihenfolge
+für sämtliche bestehenden autorisierten NeXify-Aufträge:
+**kritische Daten-/Betriebsrisiken sichern → eigene NeXify-Seite öffentlich
+verkaufsfähig machen → echte Leads und Umsatzwege herstellen → bestehende
+Kundenprojekte abnahme- und abrechnungsfähig fertigstellen → wirtschaftlichen
+Dauerbetrieb stabilisieren und skalieren.** Aufgaben nach konkreter Wirkung,
+Risiko, Frist, Kosten und Abhängigkeiten priorisieren; unabhängige Teilaufgaben
+parallel ausführen.
+
+Die ältere Aussage weiter unten »Erst das Gesamtsystem fertigstellen;
+Marketing, Mailings und eigene Social-Kanäle danach aktivieren« gilt insoweit
+nicht mehr: rechtmäßige Akquise, passende Inhalte, Mailings und CRM-/Leadwege
+dürfen und sollen innerhalb bestehender Rechte bereits **parallel** zur noch
+offenen technischen Gesamtfertigstellung ausgeführt werden. Für Werbeversand
+gelten die jeweils anwendbaren gesetzlichen Voraussetzungen, Opt-out,
+Suppression und Datenschutz. Die Unternehmerweisung ersetzt keine zwingenden
+Sicherheits-, Preis-, Zahlungs-, Vertrags-, Datenschutz-, Mandanten- oder
+technischen Releasegates. Ungelöste Gate-Konflikte versioniert dokumentieren,
+die betroffene Wirkung nicht ungeprüft freischalten, andere Arbeiten fortsetzen.
+
+**Jede autorisierte Aufgabe ist im Regelfall ein Ausführungsauftrag:**
+bestehenden IST messen → kleinsten sicheren nutzbaren Schritt implementieren →
+prüfen, integrieren, rücklesen und dokumentieren. Ältere P01–P26-Aufträge und
+der führende Aufgaben-/Projektzustand bleiben erhalten, keine Parallelregister
+oder neue Gesamtplattform schaffen. AIfly ORACLE koordiniert; Codex/Work und
+tatsächlich verbundene Agenten führen innerhalb ihrer eigenen berechtigten
+Runtime aus. Ein Prompt beweist keinen laufenden Agenten, ein grüner Build
+keinen Livegang und eine Rechnung keinen Zahlungseingang.
+
+## Zielvollständigkeit, Agenten- und Entscheidungsketten · 10.11.2026
+
+Eine Nutzeranforderung beschreibt ein **Geschäftsziel**, nicht automatisch alle
+technisch notwendigen Teilschritte. Der Nutzer muss fehlende Integrationen,
+Abhängigkeiten, Agentenrollen, Entscheidungswege, Fehlerfälle, Quality-Gates,
+Betriebsaufgaben oder Vorbedingungen nicht selbst aufzählen.
+
+Für neue und historisch offene Ziele den bestehenden Workflow
+`WF-NEXIFY-CONTEXT-DELIVERY` zusammen mit
+`docs/automation/intent-closure-contract.md` verwenden:
+**Ziel/Ergebnis → explizite Anforderungen → notwendig abgeleitete Voraussetzungen
+und Folgeprozesse → Abhängigkeits-/Entscheidungsgraph → zuständiger Writer →
+wirkliche Implementierung → Tests/Readback → Betrieb/Monitoring/Recovery.**
+
+In bestehenden Quellen, Tasks und Agentenketten fehlende Voraussetzungsknoten,
+Folgeaktionen, Zuständigkeiten, zulässige Alternativen und Automatisierungen
+erkennen, mit Quelle/Begründung nachführen und innerhalb gültiger Befugnisse
+tatsächlich umsetzen. Explizite Pflicht, notwendige Ableitung, optionale Idee
+und unbestätigte Annahme getrennt dokumentieren. Für jeden Eingriff Tenant,
+Owner, Lease, einmaligen Writer, echte Berechtigung, Wiederholungsschutz,
+Prüfer, Kosten, Rückweg und dauerhafte Ergebnisprüfung berücksichtigen.
+
+**Bei jeder tatsächlichen Aktivierung** den aktuellen Auftrag zuerst bearbeiten
+und danach alle übrigen offenen Vorgänge anhand persistenter Cursor und
+Ereignisstände prüfen; keine unendlichen Vollscans, Selbstauslöser oder
+Doppelvergabe. Fehlende technische Rechte, aktuelle Produktfreigaben oder
+Schutzvorgaben nicht per Text übergehen. Eine verfasste Kette ist kein
+installierter Worker. Bestehende manuelle und neue sinnvolle Prozesse erkennen,
+bauen, pflegen und im laufenden Betrieb prüfen.
+
+## Werkzeuge bereitstellen statt wirtschaftlichen Stillstand hinnehmen · 10.11.2026
+
+Fehlende CLI, Plugins, SDKs, Browser-/Testwerkzeuge, OSS-Worker, MCP-Adapter,
+Automations- oder Monitoringkomponenten sind **fehlende Implementierungsschritte**,
+kein Abschlussgrund. Erst tatsächlich vorhandene Fähigkeiten, projektbezogene
+Skills und eingebundene Tools prüfen. Reicht dies nicht, geeignete
+aktuell gepflegte kostenlose/Open-Source-Lösungen anhand von Lizenz,
+Sicherheits-/Tenantgrenzen, Version, Abhängigkeiten, Hostinger-Kapazität und
+Gesamtbetriebskosten auswählen. Innerhalb bestehender technischer Rechte
+eigenständig installieren, konfigurieren, an den tatsächlichen Fachprozess
+anschließen, Unit-/Integrations-/E2E-/Restart-/Fehlerproben ausführen und
+Version, Owner, Monitoring, Wartung, Rückweg und Ergebnisreadback dokumentieren.
+
+Keine wirtschaftlich sinnvolle zulässige Umsetzung allein wegen fehlenden
+kostenlosen Standardwerkzeugs stehen lassen. Bei fehlender Pluginverbindung,
+interaktiver OAuth-Einwilligung, Systemrechten oder anderen Hartsperren
+zuerst funktional gleichwertige vorhandene autorisierte lokale/Cloud-/
+API-/MCP-Wege versuchen; nur die konkret gesperrte Wirkung als OFFEN
+mit notwendigem einmaligem Zugriffsschritt nachweisen. Ansonsten
+unabhängige Arbeiten fortsetzen. Keine eigenmächtige Rechte-/Passwortänderung,
+Zahlung/Neuverpflichtung oder endgültige Löschung; kein Plattform-/
+Sicherheitsgate umgehen. Hohe Speicherlast und ausgefallene Dienste auf den
+Hostinger-Servern beachten: nicht wahllos neue dauerhafte Prozesse installieren.
+Installation und Dokumentation sind erst nach tatsächlicher Funktion und
+Runbook/Watchdog/Recovery-Prüfung als erledigt zu kennzeichnen.
+
+## Dauerhafte GOAL-Bindung für alle Chats und sichere Lauf-Fortsetzung · 10.11.2026
+
+Alle autorisierten NeXify-Arbeitschats und tatsächlich laufenden Work-/Codex-
+Agentenketten mit einem **einzigen führenden GOAL und Taskregister** verbinden.
+Besonders die getrennten Projekte **NeXify Site Erstellung** und
+**Studienkolleg Aachen** nach
+`docs/automation/chat-goal-continuity-2026-11-10.md` führen.
+Ein Chat-Navigationslink ist kein Schreibrecht in den Originalchat;
+jede reale Zustellung und Wiederaufnahme muss mit echter Identität und
+Readback geprüft werden. Keine neuen Doppelregister, keine Agenten-Echos,
+ein Writer und ein klarer Tenant pro Änderung.
+
+Bei **jeder Aktivierung**, aus welchem zulässigen Kanal auch immer, zuerst den
+auslösenden Auftrag und danach **systemweit** die übrigen offenen, verwaisten,
+überfälligen und aus alten GOALs abgeleiteten Aufgaben inkrementell prüfen.
+VOR JEDEM LAUFENDE den `NEXIFY-RUN-FINALIZER-20261110` ausführen:
+aktuellen Checkpoint sicher persistieren, exakten Task-/Worker-/Lease-State
+zurücklesen, nächste zulässige Arbeit und *tatsächlichen* Auslöser festlegen,
+Scheduler-/Eventsubscription-/Watchdog-/Rückkanal-Verfügbarkeit prüfen,
+`next_run`, Owner, Frist und Alternativweg im bestehenden Register sichern.
+Ein geplantes Datum ohne überprüfbaren ausführbaren Mechanismus ist kein
+Wiederanlaufnachweis. Verpasste Trigger oder fehlende ACKs als Incident
+behandeln, datenerhaltend und idempotent reparieren; keine blinden Retry-
+oder Selbsttrigger-Schleifen. Persönliche Dot-/Admin-Pausen nie umgehen.
+Ein echtes mehrmals stündliches Intervall braucht einen verifiziert laufenden
+externen Hostinger-Scheduler, nicht nur eine ChatGPT-Regel.
+
+Alle fehlenden technisch notwendigen und wirtschaftlich sinnvollen
+Abhängigkeiten, Tools, API-/MCP-Adapter, Agenten- und Entscheidungsketten
+selbständig erkennen und – soweit rechtlich sowie technisch autorisiert –
+**installieren, implementieren, testen und betreiben**. Vorhandene Werkzeuge,
+aktuelle OSS-Lizenzen, Ressourcenkapazität und TCO prüfen. Jede Änderung
+muss nötige Cronjobs, Timer, Skills, Runbooks, CI-/Brandregeln und Monitoring
+mit aktualisieren; Livewirkung und Wiederanlauf unabhängig prüfen. Nicht nur
+die wörtliche Teilanforderung erledigen, sondern den gesamten fachlichen
+End-to-End-Geschäftsweg.
+
 ## Auftrag
 Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die Referenzen sind Design und Verhalten, kein Produktionscode.** Nicht kopieren, nachbauen. Sprache der Oberfläche: Deutsch (Quelle), Niederländisch und Französisch für Kopf/Fuß und Markt-Seiten.
 
