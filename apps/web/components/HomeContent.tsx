@@ -9,6 +9,7 @@ import IdentityHero from './IdentityHero';
 import copy from '../../../config/home-concept-copy.json';
 import {brandImages,pageImage,imageAlt,srcSetFor} from '../lib/brand-media';
 import './HomeConcept.css';
+import './HomeReference.css';
 
 // Home previews and their detail pages share one verified image assignment.
 const galleryArt=[brandImages.design,brandImages.automation,brandImages.logistics];
