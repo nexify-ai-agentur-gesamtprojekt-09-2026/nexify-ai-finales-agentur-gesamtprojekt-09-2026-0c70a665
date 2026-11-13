@@ -106,10 +106,12 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
 }
 
 /** Speicherfehler dürfen die Antwort nicht verhindern und nicht als Modellfehler erscheinen. */
-async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number }): Promise<T> {
+async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean }): Promise<T> {
   try {
     return await run();
   } catch (error) {
+    // Merken, damit die Antwort nicht behauptet, das Gespräch sei gespeichert.
+    context.storeFailed = true;
     logChatFailure('persistence', error, { ...context, step });
     return fallback;
   }
@@ -157,12 +159,13 @@ export async function POST(request: Request): Promise<Response> {
   if (!limit.allowed) return err('chat_rate_limited', 429, { 'Retry-After': String(limit.retryAfterSeconds) });
 
   const startedAt = Date.now();
-  const logContext = { stream: wantsStream, startedAt };
+  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean } = { stream: wantsStream, startedAt };
   const requestedId = typeof req.conversationId === 'string' ? req.conversationId.slice(0, 80) : undefined;
   const localId = requestedId?.startsWith('local-') ? requestedId : `local-${crypto.randomUUID()}`;
   const conversationId =
     (await persistenceStep('conversation', () => ensureConversation(requestedId, { locale, pagePath }), localId, logContext)) || localId;
-  const persisted = supabaseConfigured() && !conversationId.startsWith('local-');
+  // Gespeichert gilt nur, solange kein Schreibschritt fehlgeschlagen ist.
+  const isPersisted = () => supabaseConfigured() && !conversationId.startsWith('local-') && !logContext.storeFailed;
 
   // Gespeicherter Verlauf hat Vorrang. Ohne Speicherung zählt der begrenzte Verlauf aus dem
   // Browser: Kontext des Besuchers, kein Nachweis und nie eine Systemvorgabe.
@@ -218,7 +221,7 @@ export async function POST(request: Request): Promise<Response> {
       message: { role: 'assistant', content: visible, created_at: new Date().toISOString() },
       offer: offer ?? undefined,
       briefing: briefing ?? undefined,
-      persisted,
+      persisted: isPersisted(),
       model,
       guidance: CHAT_GUIDANCE_VERSION,
     };
@@ -231,7 +234,7 @@ export async function POST(request: Request): Promise<Response> {
     async start(controller) {
       const send = (ev: ChatStreamEvent) => controller.enqueue(encoder.encode(encodeSseEvent(ev)));
       try {
-        send({ type: 'start', conversationId, model, persisted, guidance: CHAT_GUIDANCE_VERSION });
+        send({ type: 'start', conversationId, model, persisted: isPersisted(), guidance: CHAT_GUIDANCE_VERSION });
         try {
           for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
             const safe = guard.push(chunk);
