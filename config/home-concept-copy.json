@@ -1,722 +1,722 @@
 {
-  "de": {
-    "anchor": [
-      "Leistungen",
-      "Zusammenarbeit",
-      "Budget",
-      "Produktwelt"
+ "de": {
+  "anchor": [
+   "Leistungen",
+   "Zusammenarbeit",
+   "Budget",
+   "Produktwelt"
+  ],
+  "introKicker": "Hier fängt die Arbeit an",
+  "introTitle": "Wo hakt es gerade?",
+  "introBody": "Eine Website, die Ihr Angebot nicht erklärt. Ein Vorgang, der jeden Tag Zeit kostet. Eine Idee ohne nächsten Schritt. Zeigen Sie uns die Stelle, an der es hakt.",
+  "galleryTitles": [
+   "Ihr Angebot, auf den Punkt.",
+   "Mehr Zeit für die Arbeit, die zählt.",
+   "Das richtige Teil. Der richtige Weg."
+  ],
+  "galleryBodies": [
+   "Wir ordnen Leistungen, Sprache und Design so, dass eine Website Ihr Unternehmen verständlich zeigt und den Weg zur Anfrage öffnet.",
+   "Wir betrachten einen wiederkehrenden Vorgang vor Ort und prüfen, wo Daten, Freigaben und KI Ihrem Team konkret Arbeit abnehmen können.",
+   "TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in einem verständlichen Anfrageweg zusammenkommen."
+  ],
+  "galleryLinks": [
+   "Websites & Markenauftritt",
+   "KI im Arbeitsablauf",
+   "TEILEKLAR entdecken"
+  ],
+  "galleryAlts": [
+   "Pascal im Atelier mit NeX und AIFly ORACLE bei Marken- und Webarbeit",
+   "Pascal mit NeX und AIFly ORACLE in der Produktion – digitale Abläufe und Automatisierung",
+   "Pascal mit NeX und AIFly ORACLE in der Logistik – TEILEKLAR Produktwelt"
+  ],
+  "serviceKicker": "Was wir für Sie tun",
+  "serviceTitle": "Was können wir für Sie bauen?",
+  "serviceBody": "Marken und Websites, vernetzte Abläufe oder Kampagnen: Wir beginnen bei einer konkreten Aufgabe in Ihrem Unternehmen.",
+  "offers": [
+   [
+    "Marke, Text & Website",
+    "Ein Auftritt, der nach Ihrem Unternehmen aussieht – und sich auch so anfühlt.",
+    "Positionierung, Seitenstruktur und klare Texte für Ihr Angebot",
+    "Individuelle Art Direction und Webdesign, eigens für Ihr Unternehmen entworfen",
+    "Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe",
+    "Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart."
+   ],
+   [
+    "Systeme & Automatisierung",
+    "Weniger Routine, mehr Überblick – ohne Ihre Arbeitsweise in ein fremdes System zu pressen.",
+    "Einen konkreten, wiederkehrenden Ablauf vollständig verstehen",
+    "Vorhandene Systeme, Daten und Freigaben gezielt verbinden",
+    "Fehlerfälle prüfen, Verantwortlichkeiten klären und Bedienung dokumentieren",
+    "Wir beginnen bewusst mit einem Ablauf. Erst wenn er zuverlässig funktioniert, planen wir den nächsten."
+   ],
+   [
+    "Sichtbarkeit & Kampagne",
+    "Gefunden werden, verstanden werden und den richtigen Anlass für eine Anfrage schaffen.",
+    "Angebot, Zielgruppe und Suchintention präzise herausarbeiten",
+    "Landingpage, Inhalte und Werbemittel aus einem visuellen Konzept entwickeln",
+    "SEO, GEO, lokale Signale und Auswertung aufeinander abstimmen",
+    "Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt."
+   ]
+  ],
+  "offerCta": "Ihr Vorhaben mit uns besprechen",
+  "processKicker": "Zusammenarbeit",
+  "processTitle": "Mit Pascal am Tisch.",
+  "processBody": "Pascal begleitet Ihr Projekt vom ersten Gespräch bis zur Übergabe. Sie sehen früh, welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes gebraucht wird.",
+  "steps": [
+   [
+    "Wir verstehen, was Sie erreichen möchten.",
+    "Wir sprechen über Ihr Angebot, Ihre Kunden, die bisherige Lösung und den Maßstab, an dem das Ergebnis bestehen muss."
+   ],
+   [
+    "Sie erhalten einen klaren Leistungsrahmen.",
+    "Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden verständlich voneinander getrennt."
+   ],
+   [
+    "Konzept, Text und Design entstehen gemeinsam.",
+    "Sie sehen an vereinbarten Punkten ein schlüssiges Gesamtbild und entscheiden, wie es weitergeht."
+   ],
+   [
+    "Wir prüfen, übergeben und bleiben erreichbar.",
+    "Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und Weiterentwicklung können Sie passend ergänzen."
+   ]
+  ],
+  "budgetKicker": "Kosten und Umfang",
+  "budgetTitle": "Sie wissen vor dem Start, was enthalten ist.",
+  "budgetBody": "Höchste Qualität zu einem fairen Preis: Unsere Projektarbeit hat eine feste Kalkulationsbasis. Vor dem Start erhalten Sie einen klar abgegrenzten Umfang und entscheiden, was jetzt entsteht und was später folgt.",
+  "costs": [
+   [
+    "Entwicklung",
+    "Konzept, Text, Design und technische Umsetzung werden im Angebot einem konkreten Ergebnis zugeordnet."
+   ],
+   [
+    "Betreuung danach",
+    "Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart."
+   ],
+   [
+    "Externe Kosten",
+    "Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden offen ausgewiesen statt im Projektpreis versteckt."
+   ]
+  ],
+  "exampleTitle": "Wie eine Kalkulation entsteht",
+  "exampleNote": "Reines Rechenbeispiel mit angenommenen Kosten. Kein NeXify-Tarif und kein verbindliches Angebot. Alle Beträge netto; Steuern werden im konkreten Angebot bestimmt.",
+  "exampleLabels": [
+   "Arbeitsaufwand · Stunden",
+   "Interner Kostensatz · EUR / Stunde",
+   "Fremdleistungen · EUR",
+   "Gemeinkosten · EUR",
+   "Risikoreserve · EUR",
+   "Zielmarge · %"
+  ],
+  "exampleResult": "Beispiel-Projektpreis netto",
+  "exampleFormula": "Vollkosten ÷ (1 − Umsatzmarge). Ein Kostenaufschlag wird anders gerechnet.",
+  "benchmarkTitle": "Marktvergleich und Berechnungsgrundlage",
+  "benchmarkBody": "Veröffentlichte Einstiegspreise dienen nur zur Einordnung. Leistungsumfang, Aktionen und Folgekosten unterscheiden sich; daraus folgt kein eigener NeXify-Preis.",
+  "benchmarkDate": "Quellen geprüft am 2. November 2026. Keine repräsentative Marktstatistik.",
+  "productsKicker": "Produkte von NeXify",
+  "productsTitle": "Eigene Werkzeuge für konkrete Arbeit.",
+  "productsBody": "NeX2fly, Oracle, API und TEILEKLAR haben unterschiedliche Aufgaben. Wir zeigen Ihnen, welcher Bereich für Ihr Vorhaben nützlich ist und was bereits verfügbar ist.",
+  "products": [
+   [
+    "NeX2fly Suite",
+    "Ihr persönlicher oder geschäftlicher Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Wissen.",
+    "Privat & Business kennenlernen"
+   ],
+   [
+    "NeX Agentic AI",
+    "Assistenz für klar umrissene Aufgaben, mit freigegebenen Werkzeugen.",
+    "Agentenarbeit verstehen"
+   ],
+   [
+    "NeXify API",
+    "Der technische Integrationsweg für eigene Anwendungen. Umfang, Zugang und Betriebsbedingungen werden gesondert geklärt.",
+    "API-Konzept ansehen"
+   ],
+   [
+    "TEILEKLAR",
+    "Die eigenständige Welt für Fahrzeugteile, Werkstätten und passende Anfragen.",
+    "Zum Fahrzeug- und Teilebereich"
+   ]
+  ],
+  "finishKicker": "Kommen Sie rein.",
+  "finishTitle": "Woran arbeiten Sie gerade?",
+  "finishBody": "Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.",
+  "finishCta": "Vorhaben schildern",
+  "finishAlternative": "Leistungsumfang ansehen",
+  "finishNote": "",
+  "serviceLink": "Leistung und Umfang ansehen",
+  "budgetLink": "Mehr zu Preisen und Zusammenarbeit",
+  "visibility": {
+   "title": "Wer Sie sucht, soll Sie auch finden.",
+   "lead": "Gefunden werden. Vertrauen gewinnen. Anfragen bekommen.",
+   "body": "Ihre künftigen Kunden suchen auf unterschiedlichen Wegen. Wir verbinden Ihre Website mit den Inhalten und lokalen Signalen, die Ihr Angebot verständlich und auffindbar machen.",
+   "items": [
+    [
+     "SEO",
+     "Bei Google die richtigen Fragen beantworten.",
+     "Suchbegriffe Ihrer Kunden, verständliche Leistungsseiten und eine saubere technische Grundlage. Damit Ihr Angebot dort auftauchen kann, wo Menschen danach suchen."
     ],
-    "introKicker": "Hier fängt die Arbeit an",
-    "introTitle": "Wo hakt es gerade?",
-    "introBody": "Eine Website, die Ihr Angebot nicht erklärt. Ein Vorgang, der jeden Tag Zeit kostet. Eine Idee ohne nächsten Schritt. Zeigen Sie uns die Stelle, an der es hakt.",
-    "galleryTitles": [
-      "Ihr Angebot, auf den Punkt.",
-      "Mehr Zeit für die Arbeit, die zählt.",
-      "Das richtige Teil. Der richtige Weg."
+    [
+     "GEO",
+     "Auch in KI-Antworten verständlich sein.",
+     "Klare Aussagen zu Unternehmen und Leistungen, nachvollziehbare Quellen und strukturierte Inhalte. Eine Grundlage, auf der KI-Suchsysteme Ihr Angebot besser einordnen können."
     ],
-    "galleryBodies": [
-      "Wir ordnen Leistungen, Sprache und Design so, dass eine Website Ihr Unternehmen verständlich zeigt und den Weg zur Anfrage öffnet.",
-      "Wir betrachten einen wiederkehrenden Vorgang vor Ort und prüfen, wo Daten, Freigaben und KI Ihrem Team konkret Arbeit abnehmen können.",
-      "TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in einem verständlichen Anfrageweg zusammenkommen."
-    ],
-    "galleryLinks": [
-      "Websites & Markenauftritt",
-      "KI im Arbeitsablauf",
-      "TEILEKLAR entdecken"
-    ],
-    "galleryAlts": [
-      "Pascal im Atelier mit NeX und AIFly ORACLE bei Marken- und Webarbeit",
-      "Pascal mit NeX und AIFly ORACLE in der Produktion – digitale Abläufe und Automatisierung",
-      "Pascal mit NeX und AIFly ORACLE in der Logistik – TEILEKLAR Produktwelt"
-    ],
-    "serviceKicker": "Was wir für Sie tun",
-    "serviceTitle": "Was können wir für Sie bauen?",
-    "serviceBody": "Marken und Websites, vernetzte Abläufe oder Kampagnen: Wir beginnen bei einer konkreten Aufgabe in Ihrem Unternehmen.",
-    "offers": [
-      [
-        "Marke, Text & Website",
-        "Ein Auftritt, der nach Ihrem Unternehmen aussieht – und sich auch so anfühlt.",
-        "Positionierung, Seitenstruktur und klare Texte für Ihr Angebot",
-        "Individuelle Art Direction und Webdesign statt Theme oder KI-Baukasten",
-        "Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe",
-        "Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart."
-      ],
-      [
-        "Systeme & Automatisierung",
-        "Weniger Routine, mehr Überblick – ohne Ihre Arbeitsweise in ein fremdes System zu pressen.",
-        "Einen konkreten, wiederkehrenden Ablauf vollständig verstehen",
-        "Vorhandene Systeme, Daten und Freigaben gezielt verbinden",
-        "Fehlerfälle prüfen, Verantwortlichkeiten klären und Bedienung dokumentieren",
-        "Wir beginnen bewusst mit einem Ablauf. Erst wenn er zuverlässig funktioniert, planen wir den nächsten."
-      ],
-      [
-        "Sichtbarkeit & Kampagne",
-        "Gefunden werden, verstanden werden und den richtigen Anlass für eine Anfrage schaffen.",
-        "Angebot, Zielgruppe und Suchintention präzise herausarbeiten",
-        "Landingpage, Inhalte und Werbemittel aus einem visuellen Konzept entwickeln",
-        "SEO, GEO, lokale Signale und Auswertung aufeinander abstimmen",
-        "Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt."
-      ]
-    ],
-    "offerCta": "Ihr Vorhaben mit uns besprechen",
-    "processKicker": "Zusammenarbeit",
-    "processTitle": "Mit Pascal am Tisch.",
-    "processBody": "Pascal begleitet Ihr Projekt vom ersten Gespräch bis zur Übergabe. Sie sehen früh, welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes gebraucht wird.",
-    "steps": [
-      [
-        "Wir verstehen, was Sie erreichen möchten.",
-        "Wir sprechen über Ihr Angebot, Ihre Kunden, die bisherige Lösung und den Maßstab, an dem das Ergebnis bestehen muss."
-      ],
-      [
-        "Sie erhalten einen klaren Leistungsrahmen.",
-        "Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden verständlich voneinander getrennt."
-      ],
-      [
-        "Konzept, Text und Design entstehen gemeinsam.",
-        "Sie beurteilen kein loses Sammelsurium, sondern ein schlüssiges Gesamtbild an vereinbarten Entscheidungspunkten."
-      ],
-      [
-        "Wir prüfen, übergeben und bleiben erreichbar.",
-        "Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und Weiterentwicklung können Sie passend ergänzen."
-      ]
-    ],
-    "budgetKicker": "Kosten und Umfang",
-    "budgetTitle": "Sie wissen vor dem Start, was enthalten ist.",
-    "budgetBody": "Hochwertiges Design muss nicht mit undurchsichtigen Agenturpaketen beginnen. Unsere Projektarbeit hat eine feste Kalkulationsbasis. Sie erhalten vor dem Start einen abgegrenzten Umfang und entscheiden bewusst, was jetzt entsteht und was später folgen kann.",
-    "costs": [
-      [
-        "Alles, was wir entwickeln",
-        "Konzept, Text, Design und technische Umsetzung werden im Angebot einem konkreten Ergebnis zugeordnet."
-      ],
-      [
-        "Alles, was danach bleibt",
-        "Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart."
-      ],
-      [
-        "Alles, was extern anfällt",
-        "Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden offen ausgewiesen statt im Projektpreis versteckt."
-      ]
-    ],
-    "exampleTitle": "Wie eine Kalkulation entsteht",
-    "exampleNote": "Reines Rechenbeispiel mit angenommenen Kosten. Kein NeXify-Tarif und kein verbindliches Angebot. Alle Beträge netto; Steuern werden im konkreten Angebot bestimmt.",
-    "exampleLabels": [
-      "Arbeitsaufwand · Stunden",
-      "Interner Kostensatz · EUR / Stunde",
-      "Fremdleistungen · EUR",
-      "Gemeinkosten · EUR",
-      "Risikoreserve · EUR",
-      "Zielmarge · %"
-    ],
-    "exampleResult": "Beispiel-Projektpreis netto",
-    "exampleFormula": "Vollkosten ÷ (1 − Umsatzmarge). Ein Kostenaufschlag wird anders gerechnet.",
-    "benchmarkTitle": "Marktvergleich und Berechnungsgrundlage",
-    "benchmarkBody": "Veröffentlichte Einstiegspreise dienen nur zur Einordnung. Leistungsumfang, Aktionen und Folgekosten unterscheiden sich; daraus folgt kein eigener NeXify-Preis.",
-    "benchmarkDate": "Quellen geprüft am 2. November 2026. Keine repräsentative Marktstatistik.",
-    "productsKicker": "Produkte von NeXify",
-    "productsTitle": "Eigene Werkzeuge für konkrete Arbeit.",
-    "productsBody": "NeX2fly, Oracle, API und TEILEKLAR haben unterschiedliche Aufgaben. Wir zeigen Ihnen, welcher Bereich für Ihr Vorhaben nützlich ist und was bereits verfügbar ist.",
-    "products": [
-      [
-        "NeX2fly Suite",
-        "Ihr persönlicher oder geschäftlicher Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Wissen.",
-        "Privat & Business kennenlernen"
-      ],
-      [
-        "NeX Agentic AI",
-        "Aufgabenbezogene Assistenz und freigegebene Werkzeugarbeit, ergänzt durch AIFly ORACLE zur Koordination.",
-        "Agentenarbeit verstehen"
-      ],
-      [
-        "NeXify API",
-        "Der technische Integrationsweg für eigene Anwendungen. Umfang, Zugang und Betriebsbedingungen werden gesondert geklärt.",
-        "API-Konzept ansehen"
-      ],
-      [
-        "TEILEKLAR",
-        "Die eigenständige Welt für Fahrzeugteile, Werkstätten und passende Anfragen.",
-        "Zum Fahrzeug- und Teilebereich"
-      ]
-    ],
-    "finishKicker": "Kommen Sie rein.",
-    "finishTitle": "Woran arbeiten Sie gerade?",
-    "finishBody": "Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen für den Anfang. Oracle hilft beim Sortieren. Sie entscheiden, ob daraus eine persönliche Anfrage wird.",
-    "finishCta": "Vorhaben schildern",
-    "finishAlternative": "Leistungsumfang ansehen",
-    "finishNote": "",
-    "serviceLink": "Leistung und Umfang ansehen",
-    "budgetLink": "Mehr zu Preisen und Zusammenarbeit",
-    "visibility": {
-      "title": "Wer Sie sucht, soll Sie auch finden.",
-      "lead": "Gefunden werden. Vertrauen gewinnen. Anfragen bekommen.",
-      "body": "Ihre künftigen Kunden suchen auf unterschiedlichen Wegen. Wir verbinden Ihre Website mit den Inhalten und lokalen Signalen, die Ihr Angebot verständlich und auffindbar machen.",
-      "items": [
-        [
-          "SEO",
-          "Bei Google die richtigen Fragen beantworten.",
-          "Suchbegriffe Ihrer Kunden, verständliche Leistungsseiten und eine saubere technische Grundlage. Damit Ihr Angebot dort auftauchen kann, wo Menschen danach suchen."
-        ],
-        [
-          "GEO",
-          "Auch in KI-Antworten verständlich sein.",
-          "Klare Aussagen zu Unternehmen und Leistungen, nachvollziehbare Quellen und strukturierte Inhalte. Eine Grundlage, auf der KI-Suchsysteme Ihr Angebot besser einordnen können."
-        ],
-        [
-          "Lokales Marketing",
-          "In Ihrer Umgebung ins Gespräch kommen.",
-          "Ein gepflegtes Google-Unternehmensprofil, passende Standortinhalte und stimmige Kontaktdaten. Für Unternehmen, deren nächste Kunden oft ganz in der Nähe sind."
-        ]
-      ],
-      "cta": "Über Ihre Sichtbarkeit sprechen"
-    },
-    "galleryContexts": [
-      "BEISPIEL · MARKE & DIENSTLEISTUNG",
-      "BEISPIEL · FERTIGUNG & HANDWERK",
-      "BEISPIEL · AUTOMOTIVE & LOGISTIK"
-    ],
-    "galleryValues": [
-      "Ziel: passende Gespräche mit den richtigen Kunden.",
-      "Ziel: weniger Doppelarbeit und ein verlässlicherer Ablauf.",
-      "Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage."
+    [
+     "Lokales Marketing",
+     "In Ihrer Umgebung ins Gespräch kommen.",
+     "Ein gepflegtes Google-Unternehmensprofil, passende Standortinhalte und stimmige Kontaktdaten. Für Unternehmen, deren nächste Kunden oft ganz in der Nähe sind."
     ]
+   ],
+   "cta": "Über Ihre Sichtbarkeit sprechen"
   },
-  "nl": {
-    "anchor": [
-      "Diensten",
-      "Samenwerking",
-      "Budget",
-      "Producten"
+  "galleryContexts": [
+   "Marke & Dienstleistung",
+   "Fertigung & Handwerk",
+   "Automotive & Logistik"
+  ],
+  "galleryValues": [
+   "Ziel: passende Gespräche mit den richtigen Kunden.",
+   "Ziel: weniger Doppelarbeit und ein verlässlicherer Ablauf.",
+   "Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage."
+  ]
+ },
+ "nl": {
+  "anchor": [
+   "Diensten",
+   "Samenwerking",
+   "Budget",
+   "Producten"
+  ],
+  "introKicker": "Hier begint het werk",
+  "introTitle": "Waar loopt het nu vast?",
+  "introBody": "Een website die uw aanbod niet uitlegt. Een taak die elke dag tijd kost. Een idee zonder volgende stap. Laat zien waar het wringt.",
+  "galleryTitles": [
+   "Uw aanbod, helder verwoord.",
+   "Meer tijd voor het werk dat telt.",
+   "Het juiste onderdeel. De juiste route."
+  ],
+  "galleryBodies": [
+   "We brengen diensten, taal en ontwerp samen, zodat een website uw bedrijf begrijpelijk laat zien en de weg naar contact opent.",
+   "We bekijken een terugkerende taak op locatie en onderzoeken waar data, goedkeuringen en AI uw team concreet kunnen helpen.",
+   "TEILEKLAR laat als eigen productwereld zien hoe voertuig, onderdeel, geschiktheid en werkplaats in een duidelijk aanvraagpad samenkomen."
+  ],
+  "galleryLinks": [
+   "Websites en merkpresentatie",
+   "AI in werkprocessen",
+   "TEILEKLAR ontdekken"
+  ],
+  "galleryAlts": [
+   "NeX naast een glazen website- en mobielontwerp – illustratie",
+   "AIFly ORACLE naast verbonden glazen procesmodules – illustratie",
+   "NeX naast een auto, onderdeel en lens – TEILEKLAR-illustratie, geen productaanbod"
+  ],
+  "serviceKicker": "Wat wij voor u doen",
+  "serviceTitle": "Wat kunnen we voor u bouwen?",
+  "serviceBody": "Merken en websites, gekoppelde processen of campagnes: we beginnen met een concrete taak in uw bedrijf.",
+  "offers": [
+   [
+    "Website & merkpresentatie",
+    "Laat bezoekers begrijpen waarom ze bij u goed zitten.",
+    "Structuur en begrijpelijke teksten voor uw aanbod",
+    "Individuele art direction en webdesign, speciaal voor uw bedrijf ontworpen",
+    "Een passende contactroute en persoonlijke overdracht",
+    "Voor uw start of vernieuwing. Pagina’s, talen en functies spreken we af voor uw project."
+   ],
+   [
+    "Automatisering voor uw team",
+    "Minder gegevens overtypen. Meer tijd voor het werk zelf.",
+    "Samen één terugkerend proces bekijken",
+    "Uw bestaande systemen gericht verbinden",
+    "Fouten testen en de bediening duidelijk uitleggen",
+    "We beginnen met één proces. Toegang, gegevens en goedkeuring spreken we vooraf af."
+   ],
+   [
+    "Landingspagina & campagne",
+    "Laat uw advertentie en de pagina erachter bij elkaar passen.",
+    "Uw aanbod en doelgroep bepalen",
+    "Landingspagina, teksten en afgesproken advertenties ontwerpen",
+    "Aanvraagroute en meting op elkaar afstemmen",
+    "Advertentiebudget en doorlopend beheer worden apart afgesproken."
+   ]
+  ],
+  "offerCta": "Uw plan met ons bespreken",
+  "processKicker": "Samenwerking",
+  "processTitle": "Met Pascal aan tafel.",
+  "processBody": "Pascal begeleidt uw project persoonlijk. Omvang, budget en keuzes bespreken we voordat extra werk ontstaat.",
+  "steps": [
+   [
+    "Begrijpen",
+    "U beschrijft uw doel. We bekijken uw uitgangssituatie, inhoud en systemen."
+   ],
+   [
+    "Vastleggen",
+    "U krijgt een afgebakende opdracht met opties, budget en acceptatiecriteria."
+   ],
+   [
+    "Uitvoeren & toetsen",
+    "Op afgesproken momenten ziet u een samenhangend geheel en beslist u hoe het verdergaat."
+   ],
+   [
+    "Overdragen & begeleiden",
+    "U ontvangt het afgesproken resultaat en documentatie. NeXify Care kan daarna de begeleiding verzorgen."
+   ]
+  ],
+  "budgetKicker": "Kosten en omvang",
+  "budgetTitle": "U weet vooraf wat inbegrepen is.",
+  "budgetBody": "Topkwaliteit voor een eerlijke prijs: ons projectwerk heeft een vaste calculatiebasis. Vóór de start krijgt u een duidelijk afgebakende omvang en beslist u wat nu ontstaat en wat later volgt.",
+  "costs": [
+   [
+    "Ontwikkeling",
+    "Concept, inhoud, ontwerp en technische uitvoering binnen de afgesproken omvang."
+   ],
+   [
+    "Begeleiding daarna",
+    "Optionele begeleiding en eventueel afzonderlijke softwaretoegang."
+   ],
+   [
+    "Externe kosten",
+    "Modelgebruik, infrastructuur, licenties en advertentiebudget volgens de offerte."
+   ]
+  ],
+  "exampleTitle": "Hoe een begroting ontstaat",
+  "exampleNote": "Rekenvoorbeeld met aangenomen kosten. Geen NeXify-tarief of bindende offerte. Alle bedragen netto; belasting wordt per offerte bepaald.",
+  "exampleLabels": [
+   "Werk · uren",
+   "Interne kostprijs · EUR / uur",
+   "Externe diensten · EUR",
+   "Overhead · EUR",
+   "Risicoreserve · EUR",
+   "Doelmarge · %"
+  ],
+  "exampleResult": "Voorbeeldprojectprijs netto",
+  "exampleFormula": "Totale kosten ÷ (1 − omzetmarge). Een kostenopslag is een andere berekening.",
+  "benchmarkTitle": "Marktvergelijking en rekenbasis",
+  "benchmarkBody": "Gepubliceerde instapprijzen geven alleen context. Omvang, acties en vervolgkosten verschillen; dit bepaalt geen eigen NeXify-prijs.",
+  "benchmarkDate": "Bronnen gecontroleerd op 2 november 2026. Geen representatieve marktstatistiek.",
+  "productsKicker": "Producten van NeXify",
+  "productsTitle": "Eigen tools voor concreet werk.",
+  "productsBody": "NeX2fly, Oracle, API en TEILEKLAR hebben elk een andere taak. We laten zien wat voor uw plan nuttig is en wat al beschikbaar is.",
+  "products": [
+   [
+    "NeX2fly Suite",
+    "Uw persoonlijke of zakelijke werkruimte voor gesprekken, taken, documenten en kennis.",
+    "Privé & Business ontdekken"
+   ],
+   [
+    "NeX Agentic AI",
+    "Assistentie voor duidelijk omschreven taken, met vrijgegeven tools.",
+    "Agentwerk begrijpen"
+   ],
+   [
+    "NeXify API",
+    "De integratieroute voor eigen toepassingen. Omvang, toegang en beheer worden apart bepaald.",
+    "API-concept bekijken"
+   ],
+   [
+    "TEILEKLAR",
+    "De eigen wereld voor onderdelen, werkplaatsen en passende aanvragen.",
+    "Naar voertuigen en onderdelen"
+   ]
+  ],
+  "finishKicker": "Kom binnen.",
+  "finishTitle": "Waar werkt u nu aan?",
+  "finishBody": "Website, shop of een proces dat elke dag tijd kost: een paar zinnen zijn genoeg om te beginnen. U beslist of het een persoonlijke aanvraag wordt.",
+  "finishCta": "Vertel over uw plan",
+  "finishAlternative": "Omvang bekijken",
+  "finishNote": "",
+  "serviceLink": "Dienst en omvang bekijken",
+  "budgetLink": "Meer over prijzen en samenwerking",
+  "visibility": {
+   "title": "Wie u zoekt, moet u kunnen vinden.",
+   "lead": "Gevonden worden. Vertrouwen winnen. Aanvragen krijgen.",
+   "body": "Uw toekomstige klanten zoeken op verschillende manieren. We verbinden uw website met inhoud en lokale signalen die uw aanbod begrijpelijk en vindbaar maken.",
+   "items": [
+    [
+     "SEO",
+     "De juiste vragen beantwoorden in Google.",
+     "Zoekwoorden van uw klanten, duidelijke dienstenpagina’s en een goede technische basis. Zodat uw aanbod vindbaar kan worden waar mensen ernaar zoeken."
     ],
-    "introKicker": "Hier begint het werk",
-    "introTitle": "Waar loopt het nu vast?",
-    "introBody": "Een website die uw aanbod niet uitlegt. Een taak die elke dag tijd kost. Een idee zonder volgende stap. Laat zien waar het wringt.",
-    "galleryTitles": [
-      "Uw aanbod, helder verwoord.",
-      "Meer tijd voor het werk dat telt.",
-      "Het juiste onderdeel. De juiste route."
+    [
+     "GEO",
+     "Ook begrijpelijk zijn voor AI-zoekdiensten.",
+     "Duidelijke bedrijfs- en diensteninformatie, controleerbare bronnen en gestructureerde inhoud helpen AI-zoekdiensten uw aanbod te begrijpen."
     ],
-    "galleryBodies": [
-      "We brengen diensten, taal en ontwerp samen, zodat een website uw bedrijf begrijpelijk laat zien en de weg naar contact opent.",
-      "We bekijken een terugkerende taak op locatie en onderzoeken waar data, goedkeuringen en AI uw team concreet kunnen helpen.",
-      "TEILEKLAR laat als eigen productwereld zien hoe voertuig, onderdeel, geschiktheid en werkplaats in een duidelijk aanvraagpad samenkomen."
-    ],
-    "galleryLinks": [
-      "Websites en merkpresentatie",
-      "AI in werkprocessen",
-      "TEILEKLAR ontdekken"
-    ],
-    "galleryAlts": [
-      "NeX naast een glazen website- en mobielontwerp – illustratie",
-      "AIFly ORACLE naast verbonden glazen procesmodules – illustratie",
-      "NeX naast een auto, onderdeel en lens – TEILEKLAR-illustratie, geen productaanbod"
-    ],
-    "serviceKicker": "Wat wij voor u doen",
-    "serviceTitle": "Wat kunnen we voor u bouwen?",
-    "serviceBody": "Merken en websites, gekoppelde processen of campagnes: we beginnen met een concrete taak in uw bedrijf.",
-    "offers": [
-      [
-        "Website & merkpresentatie",
-        "Laat bezoekers begrijpen waarom ze bij u goed zitten.",
-        "Structuur en begrijpelijke teksten voor uw aanbod",
-        "Een eigen ontwerp dat ook op de smartphone werkt",
-        "Een passende contactroute en persoonlijke overdracht",
-        "Voor uw start of vernieuwing. Pagina’s, talen en functies spreken we af voor uw project."
-      ],
-      [
-        "Automatisering voor uw team",
-        "Minder gegevens overtypen. Meer tijd voor het werk zelf.",
-        "Samen één terugkerend proces bekijken",
-        "Uw bestaande systemen gericht verbinden",
-        "Fouten testen en de bediening duidelijk uitleggen",
-        "We beginnen met één proces. Toegang, gegevens en goedkeuring spreken we vooraf af."
-      ],
-      [
-        "Landingspagina & campagne",
-        "Laat uw advertentie en de pagina erachter bij elkaar passen.",
-        "Uw aanbod en doelgroep bepalen",
-        "Landingspagina, teksten en afgesproken advertenties ontwerpen",
-        "Aanvraagroute en meting op elkaar afstemmen",
-        "Advertentiebudget en doorlopend beheer worden apart afgesproken."
-      ]
-    ],
-    "offerCta": "Uw plan met ons bespreken",
-    "processKicker": "Samenwerking",
-    "processTitle": "Met Pascal aan tafel.",
-    "processBody": "Pascal begeleidt uw project persoonlijk. Omvang, budget en keuzes bespreken we voordat extra werk ontstaat.",
-    "steps": [
-      [
-        "Begrijpen",
-        "U beschrijft uw doel. We bekijken uw uitgangssituatie, inhoud en systemen."
-      ],
-      [
-        "Vastleggen",
-        "U krijgt een afgebakende opdracht met opties, budget en acceptatiecriteria."
-      ],
-      [
-        "Uitvoeren & toetsen",
-        "Ontwerp, inhoud en techniek ontstaan samen. U beoordeelt de afgesproken tussenstappen."
-      ],
-      [
-        "Overdragen & begeleiden",
-        "U ontvangt het afgesproken resultaat en documentatie. NeXify Care kan daarna de begeleiding verzorgen."
-      ]
-    ],
-    "budgetKicker": "Kosten en omvang",
-    "budgetTitle": "U weet vooraf wat inbegrepen is.",
-    "budgetBody": "De offerte beschrijft wat we maken. Begeleiding en gebruik spreken we apart af. U kiest wat u bij de start nodig heeft en wat later volgt.",
-    "costs": [
-      [
-        "Project",
-        "Concept, inhoud, ontwerp en technische uitvoering binnen de afgesproken omvang."
-      ],
-      [
-        "Care & toegang",
-        "Optionele begeleiding en eventueel afzonderlijke softwaretoegang."
-      ],
-      [
-        "Gebruik & derden",
-        "Modelgebruik, infrastructuur, licenties en advertentiebudget volgens de offerte."
-      ]
-    ],
-    "exampleTitle": "Hoe een begroting ontstaat",
-    "exampleNote": "Rekenvoorbeeld met aangenomen kosten. Geen NeXify-tarief of bindende offerte. Alle bedragen netto; belasting wordt per offerte bepaald.",
-    "exampleLabels": [
-      "Werk · uren",
-      "Interne kostprijs · EUR / uur",
-      "Externe diensten · EUR",
-      "Overhead · EUR",
-      "Risicoreserve · EUR",
-      "Doelmarge · %"
-    ],
-    "exampleResult": "Voorbeeldprojectprijs netto",
-    "exampleFormula": "Totale kosten ÷ (1 − omzetmarge). Een kostenopslag is een andere berekening.",
-    "benchmarkTitle": "Marktvergelijking en rekenbasis",
-    "benchmarkBody": "Gepubliceerde instapprijzen geven alleen context. Omvang, acties en vervolgkosten verschillen; dit bepaalt geen eigen NeXify-prijs.",
-    "benchmarkDate": "Bronnen gecontroleerd op 2 november 2026. Geen representatieve marktstatistiek.",
-    "productsKicker": "Producten van NeXify",
-    "productsTitle": "Eigen tools voor concreet werk.",
-    "productsBody": "NeX2fly, Oracle, API en TEILEKLAR hebben elk een andere taak. We laten zien wat voor uw plan nuttig is en wat al beschikbaar is.",
-    "products": [
-      [
-        "NeX2fly Suite",
-        "Uw persoonlijke of zakelijke werkruimte voor gesprekken, taken, documenten en kennis.",
-        "Privé & Business ontdekken"
-      ],
-      [
-        "NeX Agentic AI",
-        "Taakgerichte assistentie en toegestane acties, met AIFly ORACLE voor coördinatie.",
-        "Agentwerk begrijpen"
-      ],
-      [
-        "NeXify API",
-        "De integratieroute voor eigen toepassingen. Omvang, toegang en beheer worden apart bepaald.",
-        "API-concept bekijken"
-      ],
-      [
-        "TEILEKLAR",
-        "De eigen wereld voor onderdelen, werkplaatsen en passende aanvragen.",
-        "Naar voertuigen en onderdelen"
-      ]
-    ],
-    "finishKicker": "Kom binnen.",
-    "finishTitle": "Waar werkt u nu aan?",
-    "finishBody": "Een website, shop of een taak die elke dag tijd kost: een paar zinnen zijn genoeg om te beginnen. Oracle helpt uw idee te ordenen. U beslist of u er een persoonlijke aanvraag van maakt.",
-    "finishCta": "Vertel over uw plan",
-    "finishAlternative": "Omvang bekijken",
-    "finishNote": "",
-    "serviceLink": "Dienst en omvang bekijken",
-    "budgetLink": "Meer over prijzen en samenwerking",
-    "visibility": {
-      "title": "Wie u zoekt, moet u kunnen vinden.",
-      "lead": "Gevonden worden. Vertrouwen winnen. Aanvragen krijgen.",
-      "body": "Uw toekomstige klanten zoeken op verschillende manieren. We verbinden uw website met inhoud en lokale signalen die uw aanbod begrijpelijk en vindbaar maken.",
-      "items": [
-        [
-          "SEO",
-          "De juiste vragen beantwoorden in Google.",
-          "Zoekwoorden van uw klanten, duidelijke dienstenpagina’s en een goede technische basis. Zodat uw aanbod vindbaar kan worden waar mensen ernaar zoeken."
-        ],
-        [
-          "GEO",
-          "Ook begrijpelijk zijn voor AI-zoekdiensten.",
-          "Duidelijke bedrijfs- en diensteninformatie, controleerbare bronnen en gestructureerde inhoud helpen AI-zoekdiensten uw aanbod te begrijpen."
-        ],
-        [
-          "Lokale marketing",
-          "Klanten in uw omgeving bereiken.",
-          "Een verzorgd Google-bedrijfsprofiel, relevante locatie-inhoud en consistente contactgegevens. Voor bedrijven met klanten in de buurt."
-        ]
-      ],
-      "cta": "Uw vindbaarheid bespreken"
-    },
-    "galleryContexts": [
-      "VOORBEELD · MERK & DIENSTVERLENING",
-      "VOORBEELD · PRODUCTIE & VAKWERK",
-      "VOORBEELD · AUTOMOTIVE & LOGISTIEK"
-    ],
-    "galleryValues": [
-      "Doel: gesprekken met passende klanten.",
-      "Doel: minder dubbel werk en een betrouwbaarder proces.",
-      "Doel: meer duidelijkheid vóór een onderdelen- of werkplaatsvraag."
+    [
+     "Lokale marketing",
+     "Klanten in uw omgeving bereiken.",
+     "Een verzorgd Google-bedrijfsprofiel, relevante locatie-inhoud en consistente contactgegevens. Voor bedrijven met klanten in de buurt."
     ]
+   ],
+   "cta": "Uw vindbaarheid bespreken"
   },
-  "fr": {
-    "anchor": [
-      "Prestations",
-      "Collaboration",
-      "Budget",
-      "Produits"
+  "galleryContexts": [
+   "Merk & dienstverlening",
+   "Productie & ambacht",
+   "Automotive & logistiek"
+  ],
+  "galleryValues": [
+   "Doel: gesprekken met passende klanten.",
+   "Doel: minder dubbel werk en een betrouwbaarder proces.",
+   "Doel: meer duidelijkheid vóór een onderdelen- of werkplaatsvraag."
+  ]
+ },
+ "fr": {
+  "anchor": [
+   "Prestations",
+   "Collaboration",
+   "Budget",
+   "Produits"
+  ],
+  "introKicker": "Le travail commence ici",
+  "introTitle": "Qu’est-ce qui coince aujourd’hui ?",
+  "introBody": "Un site qui n’explique pas votre offre. Une tâche qui prend du temps chaque jour. Une idée sans prochaine étape. Montrez-nous où cela bloque.",
+  "galleryTitles": [
+   "Votre offre, sans détour.",
+   "Plus de temps pour l’essentiel.",
+   "La bonne pièce. Le bon parcours."
+  ],
+  "galleryBodies": [
+   "Nous organisons prestations, langage et design pour qu’un site présente votre entreprise avec clarté et ouvre la voie à une demande.",
+   "Nous examinons une tâche récurrente sur le terrain et cherchons où données, validations et IA peuvent aider concrètement votre équipe.",
+   "TEILEKLAR illustre, comme univers distinct, un parcours compréhensible entre véhicule, pièce, compatibilité et atelier."
+  ],
+  "galleryLinks": [
+   "Sites et identité de marque",
+   "IA dans les processus",
+   "Découvrir TEILEKLAR"
+  ],
+  "galleryAlts": [
+   "NeX près d’une structure web et mobile en verre – illustration",
+   "AIFly ORACLE près de modules de processus reliés – illustration",
+   "NeX près d’un véhicule, d’une pièce et d’une loupe – illustration TEILEKLAR, sans offre produit"
+  ],
+  "serviceKicker": "Ce que nous faisons",
+  "serviceTitle": "Que pouvons-nous construire pour vous ?",
+  "serviceBody": "Marque et site web, processus connectés ou campagnes : nous partons d’une tâche concrète dans votre entreprise.",
+  "offers": [
+   [
+    "Site & identité de marque",
+    "Montrez à vos visiteurs pourquoi ils sont au bon endroit.",
+    "Structure et textes clairs pour votre offre",
+    "Direction artistique et webdesign sur mesure, conçus pour votre entreprise",
+    "Un parcours de contact et une livraison accompagnée",
+    "Pour un lancement ou une refonte. Pages, langues et fonctions sont définies pour votre projet."
+   ],
+   [
+    "Automatisation pour votre équipe",
+    "Moins de ressaisie. Plus de temps pour votre activité.",
+    "Examiner ensemble un processus récurrent",
+    "Relier vos systèmes existants de façon ciblée",
+    "Tester les erreurs et expliquer l’utilisation",
+    "Nous commençons par un processus précis. Accès, données et validations sont convenus en amont."
+   ],
+   [
+    "Page cible & campagne",
+    "Faites correspondre votre publicité et la page qui la suit.",
+    "Définir votre offre et son public",
+    "Créer la page, les textes et les annonces convenues",
+    "Relier demande et mesure des résultats",
+    "Budget publicitaire et suivi sont convenus séparément."
+   ]
+  ],
+  "offerCta": "Parler de votre projet",
+  "processKicker": "Collaboration",
+  "processTitle": "À la table avec Pascal.",
+  "processBody": "Pascal accompagne personnellement votre projet. Périmètre, budget et décisions sont discutés avant tout travail supplémentaire.",
+  "steps": [
+   [
+    "Comprendre",
+    "Vous décrivez votre objectif. Nous examinons l’existant, les contenus et les systèmes."
+   ],
+   [
+    "Définir",
+    "Vous recevez un périmètre précis, des options, un budget et des critères de réception."
+   ],
+   [
+    "Réaliser & vérifier",
+    "À des étapes convenues, vous voyez un ensemble cohérent et décidez de la suite."
+   ],
+   [
+    "Livrer & accompagner",
+    "Vous recevez le résultat et sa documentation. NeXify Care peut assurer le suivi convenu."
+   ]
+  ],
+  "budgetKicker": "Coûts et périmètre",
+  "budgetTitle": "Vous savez ce qui est inclus avant de commencer.",
+  "budgetBody": "La plus haute qualité à un prix juste : notre travail de projet repose sur une base de calcul fixe. Avant le départ, vous recevez un périmètre clairement défini et décidez de ce qui se fait maintenant et de ce qui suivra.",
+  "costs": [
+   [
+    "Développement",
+    "Concept, contenus, design et réalisation dans le périmètre convenu."
+   ],
+   [
+    "Accompagnement ensuite",
+    "Suivi optionnel et, le cas échéant, accès logiciel distinct."
+   ],
+   [
+    "Frais externes",
+    "Modèles, infrastructure, licences et budget média selon le devis."
+   ]
+  ],
+  "exampleTitle": "Comment établir un budget",
+  "exampleNote": "Exemple de calcul reposant sur des coûts supposés. Aucun tarif NeXify ni devis ferme. Montants nets ; fiscalité à déterminer pour le devis concret.",
+  "exampleLabels": [
+   "Travail · heures",
+   "Coût interne · EUR / heure",
+   "Prestations externes · EUR",
+   "Frais généraux · EUR",
+   "Réserve de risque · EUR",
+   "Marge cible · %"
+  ],
+  "exampleResult": "Prix net du projet exemple",
+  "exampleFormula": "Coûts complets ÷ (1 − marge sur chiffre d’affaires). Une majoration est différente.",
+  "benchmarkTitle": "Comparaison et base de calcul",
+  "benchmarkBody": "Les prix d’entrée publiés donnent un contexte. Périmètres, promotions et coûts ultérieurs diffèrent ; ils ne fixent aucun prix NeXify.",
+  "benchmarkDate": "Sources vérifiées le 2 novembre 2026. Aucune statistique représentative du marché.",
+  "productsKicker": "Produits NeXify",
+  "productsTitle": "Des outils pour un travail concret.",
+  "productsBody": "NeX2fly, Oracle, API et TEILEKLAR ont chacun leur rôle. Nous montrons ce qui peut servir votre projet et ce qui est déjà disponible.",
+  "products": [
+   [
+    "NeX2fly Suite",
+    "Votre espace personnel ou professionnel pour conversations, tâches, documents et connaissances.",
+    "Découvrir Privé & Business"
+   ],
+   [
+    "NeX Agentic AI",
+    "Une assistance pour des tâches clairement définies, avec des outils validés.",
+    "Comprendre le travail des agents"
+   ],
+   [
+    "NeXify API",
+    "La voie d’intégration pour vos applications. Périmètre, accès et exploitation sont définis séparément.",
+    "Voir le concept API"
+   ],
+   [
+    "TEILEKLAR",
+    "L’univers distinct des pièces, ateliers et demandes automobiles.",
+    "Vers véhicules et pièces"
+   ]
+  ],
+  "finishKicker": "Entrez.",
+  "finishTitle": "Sur quoi travaillez-vous ?",
+  "finishBody": "Site, boutique ou processus qui prend du temps chaque jour : quelques phrases suffisent pour commencer. Vous décidez si cela devient une demande personnelle.",
+  "finishCta": "Parler de votre projet",
+  "finishAlternative": "Voir le périmètre",
+  "finishNote": "",
+  "serviceLink": "Voir la prestation et son périmètre",
+  "budgetLink": "Prix et collaboration",
+  "visibility": {
+   "title": "Les bonnes personnes doivent pouvoir vous trouver.",
+   "lead": "Être trouvé. Inspirer confiance. Recevoir des demandes.",
+   "body": "Vos futurs clients cherchent de différentes façons. Nous relions votre site aux contenus et aux informations locales qui rendent votre offre claire et accessible.",
+   "items": [
+    [
+     "SEO",
+     "Répondre aux bonnes questions sur Google.",
+     "Les mots de vos clients, des pages de services claires et une base technique solide pour faciliter la découverte de votre offre."
     ],
-    "introKicker": "Le travail commence ici",
-    "introTitle": "Qu’est-ce qui coince aujourd’hui ?",
-    "introBody": "Un site qui n’explique pas votre offre. Une tâche qui prend du temps chaque jour. Une idée sans prochaine étape. Montrez-nous où cela bloque.",
-    "galleryTitles": [
-      "Votre offre, sans détour.",
-      "Plus de temps pour l’essentiel.",
-      "La bonne pièce. Le bon parcours."
+    [
+     "GEO",
+     "Être compris par les moteurs de recherche IA.",
+     "Des informations précises sur votre entreprise, des sources vérifiables et des contenus structurés pour aider ces moteurs à comprendre votre offre."
     ],
-    "galleryBodies": [
-      "Nous organisons prestations, langage et design pour qu’un site présente votre entreprise avec clarté et ouvre la voie à une demande.",
-      "Nous examinons une tâche récurrente sur le terrain et cherchons où données, validations et IA peuvent aider concrètement votre équipe.",
-      "TEILEKLAR illustre, comme univers distinct, un parcours compréhensible entre véhicule, pièce, compatibilité et atelier."
-    ],
-    "galleryLinks": [
-      "Sites et identité de marque",
-      "IA dans les processus",
-      "Découvrir TEILEKLAR"
-    ],
-    "galleryAlts": [
-      "NeX près d’une structure web et mobile en verre – illustration",
-      "AIFly ORACLE près de modules de processus reliés – illustration",
-      "NeX près d’un véhicule, d’une pièce et d’une loupe – illustration TEILEKLAR, sans offre produit"
-    ],
-    "serviceKicker": "Ce que nous faisons",
-    "serviceTitle": "Que pouvons-nous construire pour vous ?",
-    "serviceBody": "Marque et site web, processus connectés ou campagnes : nous partons d’une tâche concrète dans votre entreprise.",
-    "offers": [
-      [
-        "Site & identité de marque",
-        "Montrez à vos visiteurs pourquoi ils sont au bon endroit.",
-        "Structure et textes clairs pour votre offre",
-        "Un design personnel, adapté au smartphone",
-        "Un parcours de contact et une livraison accompagnée",
-        "Pour un lancement ou une refonte. Pages, langues et fonctions sont définies pour votre projet."
-      ],
-      [
-        "Automatisation pour votre équipe",
-        "Moins de ressaisie. Plus de temps pour votre activité.",
-        "Examiner ensemble un processus récurrent",
-        "Relier vos systèmes existants de façon ciblée",
-        "Tester les erreurs et expliquer l’utilisation",
-        "Nous commençons par un processus précis. Accès, données et validations sont convenus en amont."
-      ],
-      [
-        "Page cible & campagne",
-        "Faites correspondre votre publicité et la page qui la suit.",
-        "Définir votre offre et son public",
-        "Créer la page, les textes et les annonces convenues",
-        "Relier demande et mesure des résultats",
-        "Budget publicitaire et suivi sont convenus séparément."
-      ]
-    ],
-    "offerCta": "Parler de votre projet",
-    "processKicker": "Collaboration",
-    "processTitle": "À la table avec Pascal.",
-    "processBody": "Pascal accompagne personnellement votre projet. Périmètre, budget et décisions sont discutés avant tout travail supplémentaire.",
-    "steps": [
-      [
-        "Comprendre",
-        "Vous décrivez votre objectif. Nous examinons l’existant, les contenus et les systèmes."
-      ],
-      [
-        "Définir",
-        "Vous recevez un périmètre précis, des options, un budget et des critères de réception."
-      ],
-      [
-        "Réaliser & vérifier",
-        "Design, contenus et technique progressent ensemble. Vous examinez les étapes convenues."
-      ],
-      [
-        "Livrer & accompagner",
-        "Vous recevez le résultat et sa documentation. NeXify Care peut assurer le suivi convenu."
-      ]
-    ],
-    "budgetKicker": "Coûts et périmètre",
-    "budgetTitle": "Vous savez ce qui est inclus avant de commencer.",
-    "budgetBody": "Le devis décrit notre réalisation. Suivi et usage sont convenus séparément. Vous choisissez ce qui est nécessaire au départ et ce qui peut suivre.",
-    "costs": [
-      [
-        "Projet",
-        "Concept, contenus, design et réalisation dans le périmètre convenu."
-      ],
-      [
-        "Care & accès",
-        "Suivi optionnel et, le cas échéant, accès logiciel distinct."
-      ],
-      [
-        "Usage & tiers",
-        "Modèles, infrastructure, licences et budget média selon le devis."
-      ]
-    ],
-    "exampleTitle": "Comment établir un budget",
-    "exampleNote": "Exemple de calcul reposant sur des coûts supposés. Aucun tarif NeXify ni devis ferme. Montants nets ; fiscalité à déterminer pour le devis concret.",
-    "exampleLabels": [
-      "Travail · heures",
-      "Coût interne · EUR / heure",
-      "Prestations externes · EUR",
-      "Frais généraux · EUR",
-      "Réserve de risque · EUR",
-      "Marge cible · %"
-    ],
-    "exampleResult": "Prix net du projet exemple",
-    "exampleFormula": "Coûts complets ÷ (1 − marge sur chiffre d’affaires). Une majoration est différente.",
-    "benchmarkTitle": "Comparaison et base de calcul",
-    "benchmarkBody": "Les prix d’entrée publiés donnent un contexte. Périmètres, promotions et coûts ultérieurs diffèrent ; ils ne fixent aucun prix NeXify.",
-    "benchmarkDate": "Sources vérifiées le 2 novembre 2026. Aucune statistique représentative du marché.",
-    "productsKicker": "Produits NeXify",
-    "productsTitle": "Des outils pour un travail concret.",
-    "productsBody": "NeX2fly, Oracle, API et TEILEKLAR ont chacun leur rôle. Nous montrons ce qui peut servir votre projet et ce qui est déjà disponible.",
-    "products": [
-      [
-        "NeX2fly Suite",
-        "Votre espace personnel ou professionnel pour conversations, tâches, documents et connaissances.",
-        "Découvrir Privé & Business"
-      ],
-      [
-        "NeX Agentic AI",
-        "Assistance par tâche et actions autorisées, avec AIFly ORACLE pour la coordination.",
-        "Comprendre le travail des agents"
-      ],
-      [
-        "NeXify API",
-        "La voie d’intégration pour vos applications. Périmètre, accès et exploitation sont définis séparément.",
-        "Voir le concept API"
-      ],
-      [
-        "TEILEKLAR",
-        "L’univers distinct des pièces, ateliers et demandes automobiles.",
-        "Vers véhicules et pièces"
-      ]
-    ],
-    "finishKicker": "Entrez.",
-    "finishTitle": "Sur quoi travaillez-vous ?",
-    "finishBody": "Un site, une boutique ou une tâche qui vous prend du temps chaque jour : quelques phrases suffisent pour commencer. Oracle aide à organiser vos idées. Vous décidez si elles deviennent une demande personnelle.",
-    "finishCta": "Parler de votre projet",
-    "finishAlternative": "Voir le périmètre",
-    "finishNote": "",
-    "serviceLink": "Voir la prestation et son périmètre",
-    "budgetLink": "Prix et collaboration",
-    "visibility": {
-      "title": "Les bonnes personnes doivent pouvoir vous trouver.",
-      "lead": "Être trouvé. Inspirer confiance. Recevoir des demandes.",
-      "body": "Vos futurs clients cherchent de différentes façons. Nous relions votre site aux contenus et aux informations locales qui rendent votre offre claire et accessible.",
-      "items": [
-        [
-          "SEO",
-          "Répondre aux bonnes questions sur Google.",
-          "Les mots de vos clients, des pages de services claires et une base technique solide pour faciliter la découverte de votre offre."
-        ],
-        [
-          "GEO",
-          "Être compris par les moteurs de recherche IA.",
-          "Des informations précises sur votre entreprise, des sources vérifiables et des contenus structurés pour aider ces moteurs à comprendre votre offre."
-        ],
-        [
-          "Marketing local",
-          "Toucher les clients près de chez vous.",
-          "Une fiche Google Business soignée, des contenus locaux et des coordonnées cohérentes pour les entreprises ancrées dans leur région."
-        ]
-      ],
-      "cta": "Parler de votre visibilité"
-    },
-    "galleryContexts": [
-      "EXEMPLE · MARQUE & SERVICES",
-      "EXEMPLE · PRODUCTION & MÉTIERS",
-      "EXEMPLE · AUTOMOBILE & LOGISTIQUE"
-    ],
-    "galleryValues": [
-      "Objectif : échanger avec les clients adaptés.",
-      "Objectif : moins de doubles saisies et un processus plus fiable.",
-      "Objectif : clarifier la prochaine demande de pièce ou d’atelier."
+    [
+     "Marketing local",
+     "Toucher les clients près de chez vous.",
+     "Une fiche Google Business soignée, des contenus locaux et des coordonnées cohérentes pour les entreprises ancrées dans leur région."
     ]
+   ],
+   "cta": "Parler de votre visibilité"
   },
-  "en": {
-    "anchor": [
-      "Services",
-      "Working together",
-      "Budget",
-      "Products"
+  "galleryContexts": [
+   "Marque & services",
+   "Production & artisanat",
+   "Automobile & logistique"
+  ],
+  "galleryValues": [
+   "Objectif : échanger avec les clients adaptés.",
+   "Objectif : moins de doubles saisies et un processus plus fiable.",
+   "Objectif : clarifier la prochaine demande de pièce ou d’atelier."
+  ]
+ },
+ "en": {
+  "anchor": [
+   "Services",
+   "Working together",
+   "Budget",
+   "Products"
+  ],
+  "introKicker": "The work starts here",
+  "introTitle": "Where does it get stuck?",
+  "introBody": "A website that does not explain your offer. A task that takes time every day. An idea without a next step. Show us where it gets stuck.",
+  "galleryTitles": [
+   "Your offer, clearly told.",
+   "More time for the work that matters.",
+   "The right part. The right route."
+  ],
+  "galleryBodies": [
+   "We bring services, language and design together so a website explains your business clearly and opens a path to an enquiry.",
+   "We examine one recurring task on site and explore where data, approvals and AI could support your team in a practical way.",
+   "As a separate product world, TEILEKLAR shows how vehicle, part, fitment and workshop can connect through a clear enquiry journey."
+  ],
+  "galleryLinks": [
+   "Websites and brand presence",
+   "AI in daily work",
+   "Discover TEILEKLAR"
+  ],
+  "galleryAlts": [
+   "NeX beside a glass website and mobile structure – illustration",
+   "AIFly ORACLE beside connected glass workflow modules – illustration",
+   "NeX beside a vehicle, part and lens – TEILEKLAR illustration, not a product offer"
+  ],
+  "serviceKicker": "What we do",
+  "serviceTitle": "What can we build for you?",
+  "serviceBody": "Brands and websites, connected workflows or campaigns: we start with a concrete task in your business.",
+  "offers": [
+   [
+    "Website & brand presence",
+    "Help visitors understand why you are the right choice.",
+    "Structure and clear copy for your offer",
+    "Individual art direction and web design, created for your business",
+    "A suitable contact journey and personal handover",
+    "For your launch or redesign. Pages, languages and features are agreed for your project."
+   ],
+   [
+    "Automation for your team",
+    "Less copying data. More time for the work itself.",
+    "Review one recurring process together",
+    "Connect your existing systems where it helps",
+    "Test error cases and explain how to use it",
+    "We start with one process. Access, data and approvals are agreed in advance."
+   ],
+   [
+    "Landing page & campaign",
+    "Make your advertising and the page behind it work together.",
+    "Define your offer and audience",
+    "Design the landing page, copy and agreed advertising",
+    "Connect the enquiry journey to measurement",
+    "Media spend and ongoing management are agreed separately."
+   ]
+  ],
+  "offerCta": "Talk to us about your project",
+  "processKicker": "Working together",
+  "processTitle": "At the table with Pascal.",
+  "processBody": "Pascal guides your project personally. We discuss scope, budget and decisions before they become additional work.",
+  "steps": [
+   [
+    "Understand",
+    "Describe your goal. We review your starting point, content and systems."
+   ],
+   [
+    "Define",
+    "Receive a defined scope with options, budget and acceptance criteria."
+   ],
+   [
+    "Build & review",
+    "At agreed points you see a coherent whole and decide how to continue."
+   ],
+   [
+    "Hand over & support",
+    "Receive the agreed result and documentation. NeXify Care can provide separately agreed support."
+   ]
+  ],
+  "budgetKicker": "Cost and scope",
+  "budgetTitle": "Know what is included before work begins.",
+  "budgetBody": "The highest quality at a fair price: our project work has a fixed pricing basis. Before we start, you receive a clearly defined scope and decide what is built now and what follows later.",
+  "costs": [
+   [
+    "Development",
+    "Concept, content, design and implementation within the agreed scope."
+   ],
+   [
+    "Ongoing support",
+    "Optional support and, where applicable, separate software access."
+   ],
+   [
+    "External costs",
+    "Models, infrastructure, licences and media spend under the relevant proposal."
+   ]
+  ],
+  "exampleTitle": "How a budget is calculated",
+  "exampleNote": "Illustrative calculation using assumed costs. Not a NeXify tariff or binding proposal. All amounts net; tax is determined for the actual proposal.",
+  "exampleLabels": [
+   "Work · hours",
+   "Internal cost · EUR / hour",
+   "External services · EUR",
+   "Overheads · EUR",
+   "Risk reserve · EUR",
+   "Target margin · %"
+  ],
+  "exampleResult": "Illustrative net project price",
+  "exampleFormula": "Full costs ÷ (1 − revenue margin). A cost markup uses a different calculation.",
+  "benchmarkTitle": "Market comparison and calculation basis",
+  "benchmarkBody": "Published entry prices provide context only. Scope, promotions and ongoing costs differ; they do not establish a NeXify price.",
+  "benchmarkDate": "Sources checked on 2 November 2026. Not a representative market survey.",
+  "productsKicker": "NeXify products",
+  "productsTitle": "Our tools for real work.",
+  "productsBody": "NeX2fly, Oracle, API and TEILEKLAR each serve a different purpose. We show what is useful for your project and what is already available.",
+  "products": [
+   [
+    "NeX2fly Suite",
+    "Your personal or business workspace for conversations, tasks, documents and knowledge.",
+    "Explore Personal & Business"
+   ],
+   [
+    "NeX Agentic AI",
+    "Assistance for clearly defined tasks, with approved tools.",
+    "Understand agent work"
+   ],
+   [
+    "NeXify API",
+    "The integration route for your own applications. Scope, access and operating terms are defined separately.",
+    "Explore the API concept"
+   ],
+   [
+    "TEILEKLAR",
+    "The separate world for vehicle parts, workshops and relevant enquiries.",
+    "Explore vehicles and parts"
+   ]
+  ],
+  "finishKicker": "Come on in.",
+  "finishTitle": "What are you working on?",
+  "finishBody": "A website, a shop or a process that costs time every day: a few sentences are enough to begin. You decide whether it becomes a personal request.",
+  "finishCta": "Tell us about your project",
+  "finishAlternative": "Explore the scope",
+  "finishNote": "",
+  "serviceLink": "Explore the service and scope",
+  "budgetLink": "Pricing and working together",
+  "visibility": {
+   "title": "Help the right people find you.",
+   "lead": "Get found. Build trust. Start conversations.",
+   "body": "Your future customers search in different ways. We connect your website with the content and local information that make your offer clear and discoverable.",
+   "items": [
+    [
+     "SEO",
+     "Answer the right questions on Google.",
+     "Your customers’ search terms, clear service pages and a sound technical foundation help your offer become discoverable where people are looking."
     ],
-    "introKicker": "The work starts here",
-    "introTitle": "Where does it get stuck?",
-    "introBody": "A website that does not explain your offer. A task that takes time every day. An idea without a next step. Show us where it gets stuck.",
-    "galleryTitles": [
-      "Your offer, clearly told.",
-      "More time for the work that matters.",
-      "The right part. The right route."
+    [
+     "GEO",
+     "Make sense to AI search engines, too.",
+     "Clear company and service information, verifiable sources and structured content help AI search systems understand what you offer."
     ],
-    "galleryBodies": [
-      "We bring services, language and design together so a website explains your business clearly and opens a path to an enquiry.",
-      "We examine one recurring task on site and explore where data, approvals and AI could support your team in a practical way.",
-      "As a separate product world, TEILEKLAR shows how vehicle, part, fitment and workshop can connect through a clear enquiry journey."
-    ],
-    "galleryLinks": [
-      "Websites and brand presence",
-      "AI in daily work",
-      "Discover TEILEKLAR"
-    ],
-    "galleryAlts": [
-      "NeX beside a glass website and mobile structure – illustration",
-      "AIFly ORACLE beside connected glass workflow modules – illustration",
-      "NeX beside a vehicle, part and lens – TEILEKLAR illustration, not a product offer"
-    ],
-    "serviceKicker": "What we do",
-    "serviceTitle": "What can we build for you?",
-    "serviceBody": "Brands and websites, connected workflows or campaigns: we start with a concrete task in your business.",
-    "offers": [
-      [
-        "Website & brand presence",
-        "Help visitors understand why you are the right choice.",
-        "Structure and clear copy for your offer",
-        "An individual design that works on a smartphone",
-        "A suitable contact journey and personal handover",
-        "For your launch or redesign. Pages, languages and features are agreed for your project."
-      ],
-      [
-        "Automation for your team",
-        "Less copying data. More time for the work itself.",
-        "Review one recurring process together",
-        "Connect your existing systems where it helps",
-        "Test error cases and explain how to use it",
-        "We start with one process. Access, data and approvals are agreed in advance."
-      ],
-      [
-        "Landing page & campaign",
-        "Make your advertising and the page behind it work together.",
-        "Define your offer and audience",
-        "Design the landing page, copy and agreed advertising",
-        "Connect the enquiry journey to measurement",
-        "Media spend and ongoing management are agreed separately."
-      ]
-    ],
-    "offerCta": "Talk to us about your project",
-    "processKicker": "Working together",
-    "processTitle": "At the table with Pascal.",
-    "processBody": "Pascal guides your project personally. We discuss scope, budget and decisions before they become additional work.",
-    "steps": [
-      [
-        "Understand",
-        "Describe your goal. We review your starting point, content and systems."
-      ],
-      [
-        "Define",
-        "Receive a defined scope with options, budget and acceptance criteria."
-      ],
-      [
-        "Build & review",
-        "Design, content and technology develop together. You review the agreed milestones."
-      ],
-      [
-        "Hand over & support",
-        "Receive the agreed result and documentation. NeXify Care can provide separately agreed support."
-      ]
-    ],
-    "budgetKicker": "Cost and scope",
-    "budgetTitle": "Know what is included before work begins.",
-    "budgetBody": "Your proposal describes what we will deliver. Support and ongoing usage are agreed separately. Choose what you need now and what can follow.",
-    "costs": [
-      [
-        "Project",
-        "Concept, content, design and implementation within the agreed scope."
-      ],
-      [
-        "Care & access",
-        "Optional support and, where applicable, separate software access."
-      ],
-      [
-        "Usage & third parties",
-        "Models, infrastructure, licences and media spend under the relevant proposal."
-      ]
-    ],
-    "exampleTitle": "How a budget is calculated",
-    "exampleNote": "Illustrative calculation using assumed costs. Not a NeXify tariff or binding proposal. All amounts net; tax is determined for the actual proposal.",
-    "exampleLabels": [
-      "Work · hours",
-      "Internal cost · EUR / hour",
-      "External services · EUR",
-      "Overheads · EUR",
-      "Risk reserve · EUR",
-      "Target margin · %"
-    ],
-    "exampleResult": "Illustrative net project price",
-    "exampleFormula": "Full costs ÷ (1 − revenue margin). A cost markup uses a different calculation.",
-    "benchmarkTitle": "Market comparison and calculation basis",
-    "benchmarkBody": "Published entry prices provide context only. Scope, promotions and ongoing costs differ; they do not establish a NeXify price.",
-    "benchmarkDate": "Sources checked on 2 November 2026. Not a representative market survey.",
-    "productsKicker": "NeXify products",
-    "productsTitle": "Our tools for real work.",
-    "productsBody": "NeX2fly, Oracle, API and TEILEKLAR each serve a different purpose. We show what is useful for your project and what is already available.",
-    "products": [
-      [
-        "NeX2fly Suite",
-        "Your personal or business workspace for conversations, tasks, documents and knowledge.",
-        "Explore Personal & Business"
-      ],
-      [
-        "NeX Agentic AI",
-        "Task-based assistance and approved tool actions, with AIFly ORACLE for coordination.",
-        "Understand agent work"
-      ],
-      [
-        "NeXify API",
-        "The integration route for your own applications. Scope, access and operating terms are defined separately.",
-        "Explore the API concept"
-      ],
-      [
-        "TEILEKLAR",
-        "The separate world for vehicle parts, workshops and relevant enquiries.",
-        "Explore vehicles and parts"
-      ]
-    ],
-    "finishKicker": "Come on in.",
-    "finishTitle": "What are you working on?",
-    "finishBody": "A website, a shop or a task that takes time every day: a few sentences are enough to start. Oracle helps organise your thoughts. You decide whether to turn them into a personal enquiry.",
-    "finishCta": "Tell us about your project",
-    "finishAlternative": "Explore the scope",
-    "finishNote": "",
-    "serviceLink": "Explore the service and scope",
-    "budgetLink": "Pricing and working together",
-    "visibility": {
-      "title": "Help the right people find you.",
-      "lead": "Get found. Build trust. Start conversations.",
-      "body": "Your future customers search in different ways. We connect your website with the content and local information that make your offer clear and discoverable.",
-      "items": [
-        [
-          "SEO",
-          "Answer the right questions on Google.",
-          "Your customers’ search terms, clear service pages and a sound technical foundation help your offer become discoverable where people are looking."
-        ],
-        [
-          "GEO",
-          "Make sense to AI search engines, too.",
-          "Clear company and service information, verifiable sources and structured content help AI search systems understand what you offer."
-        ],
-        [
-          "Local marketing",
-          "Reach customers close to home.",
-          "A well-maintained Google Business Profile, relevant location content and consistent contact details for businesses serving their local area."
-        ]
-      ],
-      "cta": "Discuss your visibility"
-    },
-    "galleryContexts": [
-      "EXAMPLE · BRAND & SERVICES",
-      "EXAMPLE · PRODUCTION & TRADES",
-      "EXAMPLE · AUTOMOTIVE & LOGISTICS"
-    ],
-    "galleryValues": [
-      "Aim: conversations with the right customers.",
-      "Aim: less duplicate work and a more reliable process.",
-      "Aim: clearer next steps for parts or workshop questions."
+    [
+     "Local marketing",
+     "Reach customers close to home.",
+     "A well-maintained Google Business Profile, relevant location content and consistent contact details for businesses serving their local area."
     ]
-  }
+   ],
+   "cta": "Discuss your visibility"
+  },
+  "galleryContexts": [
+   "Brand & services",
+   "Manufacturing & trades",
+   "Automotive & logistics"
+  ],
+  "galleryValues": [
+   "Aim: conversations with the right customers.",
+   "Aim: less duplicate work and a more reliable process.",
+   "Aim: clearer next steps for parts or workshop questions."
+  ]
+ }
 }
