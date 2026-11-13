@@ -1,4 +1,5 @@
 /* Startseite, Materialstufe "Atelier Glas", 13.11.2026.
+   Anspruch des Inhabers: Luxus und hoechste Qualitaet – ruhige Flaechen ohne Raster, Licht in Silber und Champagner, Lime nur fuer Marke und Handlung.
    Laedt nach HomeReference.css und hebt Licht, Tiefe und Glas auf die vom Inhaber verlangte Sichtbarkeit.
    Farben ausschliesslich aus den Marken- und Atelier-Variablen (color-mix), keine freien Farbwerte.
    Bewegung nur ueber transform/opacity/background-position; alles steht still unter prefers-reduced-motion. */
@@ -7,42 +8,36 @@
  --at-lime:var(--color-marke-lime);
  --at-silver:var(--color-atelier-platinum);
  --at-cool:var(--color-marke-cyan);
- --at-glass:linear-gradient(155deg,color-mix(in srgb,var(--at-silver) 17%,transparent),color-mix(in srgb,var(--at-silver) 4%,transparent) 42%,color-mix(in srgb,var(--at-lime) 5%,transparent) 100%),color-mix(in srgb,var(--color-atelier-raised) 62%,transparent);
+ --at-glass:linear-gradient(155deg,color-mix(in srgb,var(--at-silver) 17%,transparent),color-mix(in srgb,var(--at-silver) 4%,transparent) 42%,color-mix(in srgb,var(--at-warm) 6%,transparent) 100%),color-mix(in srgb,var(--color-atelier-raised) 62%,transparent);
  --at-edge:color-mix(in srgb,var(--at-silver) 26%,transparent);
  --at-edge-top:color-mix(in srgb,var(--color-atelier-ink) 46%,transparent);
  --at-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 30%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 1px 2px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 18px 40px -18px color-mix(in srgb,var(--color-atelier-canvas) 92%,transparent),0 48px 96px -48px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent);
- --at-shadow-lit:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 44%,transparent),0 24px 56px -20px color-mix(in srgb,var(--color-atelier-canvas) 94%,transparent),0 0 0 1px color-mix(in srgb,var(--at-lime) 30%,transparent),0 30px 90px -30px color-mix(in srgb,var(--at-lime) 36%,transparent);
+ --at-shadow-lit:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 44%,transparent),0 24px 56px -20px color-mix(in srgb,var(--color-atelier-canvas) 94%,transparent),0 0 0 1px color-mix(in srgb,var(--at-warm) 34%,transparent),0 30px 90px -30px color-mix(in srgb,var(--at-warm) 26%,transparent);
  --at-spring:cubic-bezier(.2,.9,.25,1.15);
- background-image:linear-gradient(color-mix(in srgb,var(--at-silver) 3.5%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--at-silver) 3.5%,transparent) 1px,transparent 1px);
- background-size:72px 72px;background-position:center top;
+ --at-warm:var(--color-atelier-champagne);
 }
 
 /* A · Kulisse: drei Lichtfelder, die langsam gegeneinander ziehen. Sie geben dem Glas etwas zu brechen. */
-.workspace-shell .home-concept::before{height:min(100%,1500px);background:radial-gradient(ellipse 44% 38% at 74% 20%,color-mix(in srgb,var(--at-lime) 30%,transparent),transparent 100%),radial-gradient(ellipse 30% 28% at 6% 52%,color-mix(in srgb,var(--at-cool) 16%,transparent),transparent 100%);filter:blur(8px)}
-.workspace-shell .home-concept::after{height:min(100%,1500px);background:radial-gradient(ellipse 38% 26% at 26% 4%,color-mix(in srgb,var(--at-silver) 24%,transparent),transparent 100%),radial-gradient(ellipse 34% 30% at 92% 68%,color-mix(in srgb,var(--at-lime) 16%,transparent),transparent 100%);filter:blur(6px)}
+.workspace-shell .home-concept::before{height:min(100%,1500px);background:radial-gradient(ellipse 40% 34% at 76% 22%,color-mix(in srgb,var(--at-lime) 15%,transparent),transparent 100%),radial-gradient(ellipse 34% 30% at 4% 50%,color-mix(in srgb,var(--at-warm) 14%,transparent),transparent 100%);filter:blur(8px)}
+.workspace-shell .home-concept::after{height:min(100%,1500px);background:radial-gradient(ellipse 40% 28% at 24% 2%,color-mix(in srgb,var(--at-silver) 22%,transparent),transparent 100%),radial-gradient(ellipse 34% 30% at 94% 70%,color-mix(in srgb,var(--at-warm) 12%,transparent),transparent 100%);filter:blur(6px)}
 
 /* B · Kopf */
 .workspace-shell .home-concept .identity-hero{overflow:visible;background:transparent}
-.workspace-shell .home-concept .identity-hero::before{background:conic-gradient(from 205deg at 78% -8%,transparent 0deg,color-mix(in srgb,var(--at-lime) 15%,transparent) 14deg,transparent 30deg,color-mix(in srgb,var(--at-silver) 11%,transparent) 44deg,transparent 62deg);mix-blend-mode:screen;transform-origin:78% 0;animation:at-beam 14s ease-in-out infinite alternate}
+.workspace-shell .home-concept .identity-hero::before{background:conic-gradient(from 205deg at 78% -8%,transparent 0deg,color-mix(in srgb,var(--at-warm) 13%,transparent) 14deg,transparent 30deg,color-mix(in srgb,var(--at-silver) 12%,transparent) 44deg,transparent 62deg);mix-blend-mode:screen;transform-origin:78% 0;animation:at-beam 14s ease-in-out infinite alternate}
 @keyframes at-beam{from{transform:rotate(-3deg)}to{transform:rotate(4deg)}}
 
 .workspace-shell .home-concept .identity-hero .identity-copy h1{background:linear-gradient(176deg,var(--color-atelier-ink) 18%,color-mix(in srgb,var(--at-silver) 82%,var(--color-atelier-canvas)) 96%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.035em;filter:drop-shadow(0 18px 30px color-mix(in srgb,var(--color-atelier-canvas) 80%,transparent))}
 .workspace-shell .home-concept .identity-hero .identity-copy h1 .identity-title-accent{background:linear-gradient(100deg,var(--color-marke-lime-hell),var(--at-lime) 55%,var(--color-marke-lime-gruen));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px color-mix(in srgb,var(--at-lime) 45%,transparent))}
 .workspace-shell .home-concept .identity-hero .identity-subtitle{color:var(--color-atelier-ink)}
 
-.workspace-shell .home-concept .identity-hero .identity-hero-photo{padding:6px;background:linear-gradient(140deg,color-mix(in srgb,var(--color-atelier-ink) 60%,transparent),color-mix(in srgb,var(--at-silver) 16%,transparent) 22%,color-mix(in srgb,var(--color-atelier-canvas) 70%,transparent) 62%,color-mix(in srgb,var(--at-lime) 46%,transparent) 100%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 70%,transparent),0 0 0 1px color-mix(in srgb,var(--at-silver) 24%,transparent),0 30px 70px -24px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 70px 150px -50px color-mix(in srgb,var(--at-lime) 46%,transparent)}
-.workspace-shell .home-concept .identity-hero .identity-media::after{inset:auto 4% -86px;height:150px;background:radial-gradient(ellipse 58% 60% at 50% 0%,color-mix(in srgb,var(--at-lime) 46%,transparent),transparent 72%);filter:blur(18px)}
+.workspace-shell .home-concept .identity-hero .identity-hero-photo{padding:6px;background:linear-gradient(140deg,color-mix(in srgb,var(--color-atelier-ink) 60%,transparent),color-mix(in srgb,var(--at-silver) 16%,transparent) 22%,color-mix(in srgb,var(--color-atelier-canvas) 70%,transparent) 58%,color-mix(in srgb,var(--at-warm) 44%,transparent) 88%,color-mix(in srgb,var(--at-lime) 30%,transparent) 100%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 70%,transparent),0 0 0 1px color-mix(in srgb,var(--at-silver) 24%,transparent),0 30px 70px -24px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 70px 150px -50px color-mix(in srgb,var(--at-warm) 30%,transparent),0 90px 170px -70px color-mix(in srgb,var(--at-lime) 26%,transparent)}
+.workspace-shell .home-concept .identity-hero .identity-media::after{inset:auto 4% -86px;height:150px;background:radial-gradient(ellipse 58% 60% at 50% 0%,color-mix(in srgb,var(--at-warm) 26%,transparent),color-mix(in srgb,var(--at-lime) 12%,transparent) 40%,transparent 72%);filter:blur(22px)}
 
 @container identity-hero (min-width:821px){
  .workspace-shell .home-concept .identity-hero .identity-scene{perspective:1400px;position:relative}
  .workspace-shell .home-concept .identity-hero .identity-media{transform:rotateY(calc(-9deg + var(--tilt-x,0) * 6deg)) rotateX(calc(4deg - var(--tilt-y,0) * 5deg)) scale(.94) translateZ(0);transform-origin:20% 50%;transition:transform .5s var(--at-spring)}
  .workspace-shell .home-concept .identity-hero .identity-media:focus-within{transform:none}
- /* Zwei Glaskoerper schweben vor und hinter dem Film und machen den Raum lesbar. */
- .workspace-shell .home-concept .identity-hero .identity-scene::before,.workspace-shell .home-concept .identity-hero .identity-scene::after{content:'';position:absolute;pointer-events:none;border-radius:50%;border:1px solid color-mix(in srgb,var(--at-silver) 30%,transparent);background:radial-gradient(circle at 30% 26%,color-mix(in srgb,var(--color-atelier-ink) 55%,transparent),color-mix(in srgb,var(--at-silver) 9%,transparent) 34%,color-mix(in srgb,var(--at-lime) 22%,transparent) 100%);box-shadow:inset 0 -14px 26px color-mix(in srgb,var(--at-lime) 26%,transparent),inset 0 2px 2px color-mix(in srgb,var(--color-atelier-ink) 55%,transparent),0 24px 50px -16px color-mix(in srgb,var(--color-atelier-canvas) 90%,transparent);-webkit-backdrop-filter:blur(10px) saturate(170%);backdrop-filter:blur(10px) saturate(170%);animation:at-float 9s ease-in-out infinite alternate}
- .workspace-shell .home-concept .identity-hero .identity-scene::before{width:92px;height:92px;right:calc(var(--layout-page-padding) - 22px);top:7%;z-index:2}
- .workspace-shell .home-concept .identity-hero .identity-scene::after{width:46px;height:46px;left:39%;bottom:10%;z-index:2;animation-duration:7s;animation-delay:-3s}
 }
-@keyframes at-float{from{transform:translate3d(0,-10px,0)}to{transform:translate3d(6px,14px,0)}}
 
 /* C · Schalter: plastisch, mit Lichtkante und fuenf klaren Zustaenden. */
 .workspace-shell .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){min-height:56px;padding-inline:var(--space-6);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--at-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 1px 1px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 14px 30px -10px color-mix(in srgb,var(--at-lime) 60%,transparent),0 30px 70px -20px color-mix(in srgb,var(--at-lime) 42%,transparent);transition:transform .28s var(--at-spring),box-shadow .2s ease-out}
@@ -56,21 +51,21 @@
 .workspace-shell .home-concept .hc-anchors a:active{transform:scale(.97)}
 
 /* D · Abschnitte: jedes Kapitel bekommt ein eigenes Lichtfeld; die Glasflaechen liegen darueber. */
-.workspace-shell .home-concept .hc-section:not(.hc-finish)::after{height:560px;background:radial-gradient(ellipse 46% 62% at 16% 0%,color-mix(in srgb,var(--at-lime) 22%,transparent),transparent 100%),radial-gradient(ellipse 30% 50% at 88% 30%,color-mix(in srgb,var(--at-silver) 13%,transparent),transparent 100%)}
-.workspace-shell .home-concept .hc-section:nth-of-type(even):not(.hc-finish)::after{background:radial-gradient(ellipse 46% 62% at 84% 0%,color-mix(in srgb,var(--at-silver) 22%,transparent),transparent 100%),radial-gradient(ellipse 32% 52% at 10% 36%,color-mix(in srgb,var(--at-lime) 16%,transparent),transparent 100%)}
+.workspace-shell .home-concept .hc-section:not(.hc-finish)::after{height:560px;background:radial-gradient(ellipse 46% 62% at 16% 0%,color-mix(in srgb,var(--at-warm) 15%,transparent),transparent 100%),radial-gradient(ellipse 30% 50% at 88% 30%,color-mix(in srgb,var(--at-silver) 14%,transparent),transparent 100%)}
+.workspace-shell .home-concept .hc-section:nth-of-type(even):not(.hc-finish)::after{background:radial-gradient(ellipse 46% 62% at 84% 0%,color-mix(in srgb,var(--at-silver) 22%,transparent),transparent 100%),radial-gradient(ellipse 32% 52% at 10% 36%,color-mix(in srgb,var(--at-lime) 9%,transparent),transparent 100%)}
 .workspace-shell .home-concept :is(.hc-section-heading h2,.hc-intro h2,.hc-finish-heading h2){background:linear-gradient(174deg,var(--color-atelier-ink) 22%,color-mix(in srgb,var(--at-silver) 84%,var(--color-atelier-canvas)));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.025em;padding-bottom:.08em}
 
 /* E · Glasflaechen in Schichten */
 .workspace-shell .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate){background:var(--at-glass);border:1px solid var(--at-edge);border-top-color:var(--at-edge-top);box-shadow:var(--at-shadow);-webkit-backdrop-filter:blur(26px) saturate(175%);backdrop-filter:blur(26px) saturate(175%);transition:transform .45s var(--at-spring),box-shadow .25s ease-out,border-color .25s ease-out}
-.workspace-shell .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate):is(:hover,:focus-within){box-shadow:var(--at-shadow-lit);border-color:color-mix(in srgb,var(--at-lime) 34%,transparent)}
+.workspace-shell .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate):is(:hover,:focus-within){box-shadow:var(--at-shadow-lit);border-color:color-mix(in srgb,var(--at-warm) 40%,transparent)}
 .workspace-shell .home-concept .hc-service-detail[open]{box-shadow:var(--at-shadow-lit)}
 .workspace-shell .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-product):hover{transform:perspective(900px) rotateY(calc(var(--tilt-x,0) * 5deg)) rotateX(calc(var(--tilt-y,0) * -5deg)) translateY(-6px)}
 .workspace-shell .home-concept .hc-process li::before{width:52px;height:52px;background:radial-gradient(circle at 32% 26%,color-mix(in srgb,var(--at-lime) 46%,transparent),color-mix(in srgb,var(--at-lime) 10%,transparent) 70%);border-color:color-mix(in srgb,var(--at-lime) 62%,transparent);color:var(--color-marke-lime-hell);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 50%,transparent),0 0 26px color-mix(in srgb,var(--at-lime) 44%,transparent)}
 
 /* F · Bildscheiben: Glasrahmen, Licht von unten, deutliche Neigung zum Zeiger. */
-.workspace-shell .home-concept :is(.hc-art,.hc-product-art){border:1px solid var(--at-edge);border-top-color:var(--at-edge-top);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 50%,transparent),0 30px 60px -26px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 50px 110px -50px color-mix(in srgb,var(--at-lime) 34%,transparent)}
+.workspace-shell .home-concept :is(.hc-art,.hc-product-art){border:1px solid var(--at-edge);border-top-color:var(--at-edge-top);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 50%,transparent),0 30px 60px -26px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 50px 110px -50px color-mix(in srgb,var(--at-warm) 22%,transparent)}
 .workspace-shell .home-concept .hc-gallery-card{perspective:1100px}
-.workspace-shell .home-concept .hc-gallery-card:is(:hover,:focus-visible) .hc-art{transform:rotateY(calc(var(--tilt-x,0) * 7deg)) rotateX(calc(var(--tilt-y,0) * -7deg)) translateY(-8px) scale(1.015);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 60%,transparent),0 0 0 1px color-mix(in srgb,var(--at-lime) 40%,transparent),0 40px 80px -28px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 60px 130px -40px color-mix(in srgb,var(--at-lime) 52%,transparent)}
+.workspace-shell .home-concept .hc-gallery-card:is(:hover,:focus-visible) .hc-art{transform:rotateY(calc(var(--tilt-x,0) * 7deg)) rotateX(calc(var(--tilt-y,0) * -7deg)) translateY(-8px) scale(1.015);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 60%,transparent),0 0 0 1px color-mix(in srgb,var(--at-warm) 44%,transparent),0 40px 80px -28px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 60px 130px -40px color-mix(in srgb,var(--at-warm) 34%,transparent)}
 .workspace-shell .home-concept :is(.hc-art,.hc-product-art) img{transition:transform .7s var(--at-spring)}
 .workspace-shell .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) :is(.hc-art,.hc-product-art) img{transform:scale(1.06)}
 
@@ -79,16 +74,15 @@
 @keyframes at-pulse{50%{transform:scale(1.35);opacity:.72}}
 
 /* H · Abschluss als Lichtbuehne. */
-.workspace-shell .home-concept .hc-finish{position:relative;isolation:isolate;margin-block:var(--space-8);padding:var(--space-8) var(--space-7);border-radius:calc(var(--radius-atelier) * 1.4);border:1px solid var(--at-edge);border-top-color:var(--at-edge-top);background:radial-gradient(ellipse 60% 90% at 82% 110%,color-mix(in srgb,var(--at-lime) 34%,transparent),transparent 100%),radial-gradient(ellipse 50% 70% at 8% -10%,color-mix(in srgb,var(--at-silver) 20%,transparent),transparent 100%),var(--at-glass);box-shadow:var(--at-shadow);-webkit-backdrop-filter:blur(26px) saturate(175%);backdrop-filter:blur(26px) saturate(175%);overflow:hidden}
+.workspace-shell .home-concept .hc-finish{position:relative;isolation:isolate;margin-block:var(--space-8);padding:var(--space-8) var(--space-7);border-radius:calc(var(--radius-atelier) * 1.4);border:1px solid var(--at-edge);border-top-color:var(--at-edge-top);background:radial-gradient(ellipse 60% 90% at 82% 110%,color-mix(in srgb,var(--at-warm) 22%,transparent),color-mix(in srgb,var(--at-lime) 10%,transparent) 50%,transparent 100%),radial-gradient(ellipse 50% 70% at 8% -10%,color-mix(in srgb,var(--at-silver) 20%,transparent),transparent 100%),var(--at-glass);box-shadow:var(--at-shadow);-webkit-backdrop-filter:blur(26px) saturate(175%);backdrop-filter:blur(26px) saturate(175%);overflow:hidden}
 @container home (max-width:640px){.workspace-shell .home-concept .hc-finish{padding:var(--space-6) var(--space-5);margin-inline:var(--layout-page-padding)}}
 
 @media(prefers-reduced-transparency:reduce){.workspace-shell .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate,.hc-finish,.hc-text-link,.hc-anchors){-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--color-atelier-surface)}}
 @media(prefers-contrast:more),(forced-colors:active){
  .workspace-shell .home-concept :is(.identity-copy h1,.identity-copy h1 .identity-title-accent,.hc-section-heading h2,.hc-intro h2,.hc-finish-heading h2){background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--color-text-primaer);filter:none}
- .workspace-shell .home-concept .identity-hero .identity-scene::before,.workspace-shell .home-concept .identity-hero .identity-scene::after,.workspace-shell .home-concept .identity-hero::before{display:none}
- .workspace-shell .home-concept{background-image:none}
+ .workspace-shell .home-concept .identity-hero::before{display:none}
 }
 @media(prefers-reduced-motion:reduce){
- .workspace-shell .home-concept .identity-hero::before,.workspace-shell .home-concept .identity-hero .identity-scene::before,.workspace-shell .home-concept .identity-hero .identity-scene::after,.workspace-shell .home-concept .hc-kicker::before{animation:none}
+ .workspace-shell .home-concept .identity-hero::before,.workspace-shell .home-concept .hc-kicker::before{animation:none}
  .workspace-shell .home-concept :is(.identity-media,.hc-text-link,.hc-art,.hc-product-art,.hc-product-art img,.hc-art img,.hc-visibility-grid article,.hc-process li,.hc-product,.identity-primary-link,.hc-finish-primary){transform:none!important;transition:none!important}
 }
