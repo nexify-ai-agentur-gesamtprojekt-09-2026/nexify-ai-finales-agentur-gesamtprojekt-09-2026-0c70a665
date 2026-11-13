@@ -4,7 +4,8 @@ import {Children,type ReactNode} from "react";
 import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import {useUI} from "./Workspace";
-import {pageImage,imageAlt,srcSetFor} from "../lib/brand-media";
+import {pageImage,pageVideo,imageAlt,srcSetFor} from "../lib/brand-media";
+import {SceneVideo} from "./SceneVideo";
 import {HcArrow} from "./HcArrow";
 import {PageShowcase} from "./PageShowcase";
 import {PageQuestions} from "./PageQuestions";
@@ -73,7 +74,7 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
      <p className="pc-hero-lead">{page.localizedSummary[locale]}</p>
      {page.actions.length>0&&<div className="pc-hero-actions">{page.actions.slice(0,2).map((action,index)=>actionLink(action,index,index===0))}</div>}
     </div>
-    {image&&<figure className="pc-hero-media" data-testid={"domain-artwork-"+page.id}><img src={image.src} srcSet={srcSetFor(image.src)} sizes="100vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="eager" fetchPriority="high" decoding="async"/></figure>}
+    {image&&<figure className="pc-hero-media" data-testid={"domain-artwork-"+page.id}><img src={image.src} srcSet={srcSetFor(image.src)} sizes="100vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="eager" fetchPriority="high" decoding="async"/>{pageVideo(page.id)&&<SceneVideo key={page.id} src={pageVideo(page.id)!} locale={locale}/>}</figure>}
    </header>
   </section>
   {sections.length>1&&<nav className="hc-anchors hc-container" aria-label={t.onPage}>{sections.map((section,index)=><a key={section.id} href={"#"+anchorId(page.id,section.id,index)}>{section.heading[locale]}<HcArrow direction="down"/></a>)}</nav>}
