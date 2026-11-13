@@ -53,3 +53,18 @@ Untertitel nachgeliefert werden. Was gesprochen wird, wurde nicht abgehört.
 | `gemini_generated_video_a72d7c53.mp4` (`5a01aba8…`) | Lagerhalle am Förderband | Passt zu `tk-home`; diese Seite nutzt eine andere Komponente ohne Kopfbild-Einbindung |
 | `gemini_generated_video_0b5fc50e.mp4` (`c98f3565…`) | Eingangshalle | Bytegleich mit dem Kandidaten `trio-lobby-v1` für den Startseiten-Hero; der Hero gehört zum Scope von PR 95 |
 | `gemini_generated_video_649ec2e0.mp4` (`027d8152…`) | Studio | Bytegleich mit der Quelle von `nexify-personal-intro-v1`; liegt bereits unter `/media/home-review/` |
+
+## Nachtrag 13.11.2026: zwei weitere Szenen im Repository gesichert
+
+Noch **nicht eingebunden**, nur als Datei abgelegt, damit die angelieferten Videos nicht
+verloren gehen (die Originale lagen nur im Upload-Ordner einer Session):
+
+| Datei in `apps/web/public/media/scenes/` | SHA-256 | Quelle | Vorgesehen für |
+|---|---|---|---|
+| `eingangshalle-20261113.mp4` | `511f5a20dc39ed4cb766346c1431914080d9b918f1234184508a78c25771c654` | `gemini_generated_video_0b5fc50e.mp4` | Startseiten-Hero (Zusage des Inhabers vom 13.11.2026) |
+| `logistik-20261113.mp4` | `4d6ec87b953c6903aac6e7e5439bb3691ab02bee7108aed9722efff5e7a9d5ae` | `gemini_generated_video_a72d7c53.mp4` | TEILEKLAR-Startseite (`tk-home`) |
+
+Vorgabe des Inhabers vom 13.11.2026: Auf jeder Seite ein passendes Video im Kopfbereich;
+wo kein passendes Video vorliegt, bleibt das Bild. Die Zuordnung der vorhandenen Szenen
+zu den übrigen Seiten und der Einbau in Startseite und TEILEKLAR stehen aus.
+
