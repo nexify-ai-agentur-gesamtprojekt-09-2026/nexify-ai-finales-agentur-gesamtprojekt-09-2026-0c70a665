@@ -31,20 +31,109 @@ export function chatLlmConfigured(): boolean {
 /** Das Policy-Modell ist fest; eine abweichende Server-Einstellung ist ein Fehler, kein Ersatz. */
 export function chatModelId(): string {
   const configured = process.env.CHAT_MODEL_ID;
-  if (configured && configured !== POLICY_MODEL_ID) throw new Error('chat_llm_model_policy_violation');
+  if (configured && configured !== POLICY_MODEL_ID) throw new ChatLlmError('chat_llm_model_policy_violation', 'model_policy');
   return POLICY_MODEL_ID;
+}
+
+/**
+ * Unterscheidbare, geheimnisfreie Fehlerursachen des Modellaufrufs.
+ * Die Ursache dient ausschließlich dem Serverprotokoll. Sie enthält niemals
+ * Adresse, Schlüssel, Antworttext des Routers oder Nutzertext.
+ */
+export type ChatLlmCause =
+  | 'not_configured' // ROUTER_URL/ROUTER_KEY fehlen
+  | 'model_policy' // CHAT_MODEL_ID weicht vom Policy-Modell ab
+  | 'invalid_endpoint' // Adresse ist keine gültige http(s)-URL
+  | 'network' // Verbindung kam nicht zustande (DNS, TLS, abgelehnt)
+  | 'timeout' // eigene Frist überschritten
+  | 'client_abort' // Besucher hat abgebrochen
+  | 'upstream_http' // Router antwortet mit Fehlerstatus
+  | 'upstream_stream_error' // Router meldet einen Fehler innerhalb der Antwort
+  | 'invalid_response' // Antwort ist kein auswertbares Chat-Format
+  | 'empty_response' // gültiges Format, aber kein Antworttext
+  | 'token_budget' // Limit durch Denk-Tokens aufgebraucht
+  | 'stream_interrupted'; // Verbindung riss während der Antwort ab
+
+export class ChatLlmError extends Error {
+  readonly kind: ChatLlmCause;
+  readonly status: number | undefined;
+  readonly networkCode: string | undefined;
+  readonly contentType: string | undefined;
+  constructor(
+    message: string,
+    kind: ChatLlmCause,
+    detail: { status?: number; networkCode?: string; contentType?: string } = {},
+  ) {
+    super(message);
+    this.name = 'ChatLlmError';
+    this.kind = kind;
+    this.status = detail.status;
+    this.networkCode = detail.networkCode;
+    this.contentType = detail.contentType;
+  }
+}
+
+export interface ChatFailureDescription {
+  cause: ChatLlmCause | 'unexpected';
+  status?: number;
+  network_code?: string;
+  upstream_content_type?: string;
+}
+
+/** Protokollierbare Kurzbeschreibung: nur feste Kennwörter, Statuszahl und Systemfehlercode. */
+export function describeChatFailure(error: unknown): ChatFailureDescription {
+  if (!(error instanceof ChatLlmError)) return { cause: 'unexpected' };
+  const out: ChatFailureDescription = { cause: error.kind };
+  if (typeof error.status === 'number') out.status = error.status;
+  if (error.networkCode) out.network_code = error.networkCode;
+  if (error.contentType) out.upstream_content_type = error.contentType;
+  return out;
+}
+
+/** Systemfehlercode (z. B. ENOTFOUND, ECONNREFUSED) aus der Ursachenkette; nie die Meldung selbst. */
+function networkCode(error: unknown): string | undefined {
+  let current: unknown = error;
+  for (let depth = 0; depth < 4 && current && typeof current === 'object'; depth++) {
+    const code = (current as { code?: unknown }).code;
+    if (typeof code === 'string' && /^[A-Z][A-Z0-9_]{2,40}$/.test(code)) return code;
+    current = (current as { cause?: unknown }).cause;
+  }
+  return undefined;
+}
+
+/** Grobe Klasse des Antworttyps; der rohe Header wird nicht protokolliert. */
+function contentTypeClass(header: string | null): string {
+  const value = (header || '').toLowerCase();
+  if (!value) return 'missing';
+  if (value.includes('text/event-stream')) return 'event-stream';
+  if (value.includes('json')) return 'json';
+  if (value.includes('html')) return 'html';
+  if (value.startsWith('text/')) return 'text';
+  return 'other';
 }
 
 // Reasoning-Tokens zählen gegen das Antwortlimit: ein kleines Limit liefert leere oder abgeschnittene Antworten.
 const DEFAULT_MAX_TOKENS = 4096;
-const REQUEST_TIMEOUT_MS = 60_000;
+// Unter der Funktionsgrenze der Route (maxDuration 60 s), damit eine Zeitüberschreitung
+// noch als eigene Ursache protokolliert wird, bevor die Plattform die Funktion beendet.
+const REQUEST_TIMEOUT_MS = 50_000;
+const MAX_JSON_BODY_CHARS = 1_000_000;
 
 function completionsUrl(): string {
   const explicit = process.env.CHAT_COMPLETIONS_URL;
-  if (explicit) return explicit;
-  const router = (process.env.ROUTER_URL || '').replace(/\/+$/, '');
-  if (!router) throw new Error('chat_llm_not_configured');
-  return /\/chat\/completions$/.test(router) ? router : `${router}/chat/completions`;
+  const router = (process.env.ROUTER_URL || '').trim().replace(/\/+$/, '');
+  if (!explicit && !router) throw new ChatLlmError('chat_llm_not_configured', 'not_configured');
+  const target = explicit ? explicit.trim() : /\/chat\/completions$/.test(router) ? router : `${router}/chat/completions`;
+  let parsed: URL;
+  try {
+    parsed = new URL(target);
+  } catch {
+    throw new ChatLlmError('chat_llm_invalid_endpoint', 'invalid_endpoint');
+  }
+  if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
+    throw new ChatLlmError('chat_llm_invalid_endpoint', 'invalid_endpoint');
+  }
+  return target;
 }
 
 export interface LlmMessage {
@@ -55,40 +144,84 @@ export interface LlmMessage {
 /**
  * Streamt Text-Deltas vom OpenAI-kompatiblen Endpunkt.
  * Liefert einen AsyncGenerator von Teilstücken (reiner Text).
- * Wirft bei fehlender Konfiguration oder HTTP-Fehler (kein stiller Ersatz).
+ * Wirft bei jeder Störung einen ChatLlmError mit benannter Ursache (kein stiller Ersatz,
+ * keine leere Antwort).
  */
 export async function* streamChatCompletion(
   messages: readonly LlmMessage[],
   opts: { signal?: AbortSignal; maxTokens?: number } = {},
 ): AsyncGenerator<string, void, unknown> {
-  if (!chatLlmConfigured()) throw new Error('chat_llm_not_configured');
+  if (!chatLlmConfigured()) throw new ChatLlmError('chat_llm_not_configured', 'not_configured');
   const key = process.env.ROUTER_KEY as string;
   const model = chatModelId();
+  const url = completionsUrl();
   const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   const signal = opts.signal ? AbortSignal.any([opts.signal, timeout]) : timeout;
+  // Abbruch durch Besucher, eigene Frist und Verbindungsfehler getrennt benennen.
+  const transportError = (error: unknown, duringStream: boolean): ChatLlmError => {
+    if (error instanceof ChatLlmError) return error;
+    if (opts.signal?.aborted) return new ChatLlmError('chat_llm_client_abort', 'client_abort');
+    if (timeout.aborted) return new ChatLlmError('chat_llm_timeout', 'timeout');
+    return duringStream
+      ? new ChatLlmError('chat_llm_stream_interrupted', 'stream_interrupted', { networkCode: networkCode(error) })
+      : new ChatLlmError('chat_llm_network', 'network', { networkCode: networkCode(error) });
+  };
 
-  const res = await fetch(completionsUrl(), {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${key}`,
-      'Content-Type': 'application/json',
-      Accept: 'text/event-stream',
-    },
-    body: JSON.stringify({
-      model,
-      messages,
-      stream: true,
-      max_tokens: opts.maxTokens ?? DEFAULT_MAX_TOKENS,
-      reasoning: { effort: POLICY_REASONING_EFFORT },
-    }),
-    cache: 'no-store',
-    signal,
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        Accept: 'text/event-stream',
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        stream: true,
+        max_tokens: opts.maxTokens ?? DEFAULT_MAX_TOKENS,
+        reasoning: { effort: POLICY_REASONING_EFFORT },
+      }),
+      cache: 'no-store',
+      signal,
+    });
+  } catch (error) {
+    throw transportError(error, false);
+  }
 
+  const contentType = contentTypeClass(res.headers.get('content-type'));
   if (!res.ok || !res.body) {
     // Provider responses may contain request details or credentials. Keep the
     // useful status code, but never propagate the upstream response body.
-    throw new Error(`chat_llm_upstream_${res.status}`);
+    void res.body?.cancel().catch(() => {});
+    throw new ChatLlmError(`chat_llm_upstream_${res.status}`, 'upstream_http', { status: res.status, contentType });
+  }
+
+  // Manche Router ignorieren stream:true und liefern eine einzelne JSON-Antwort.
+  if (contentType === 'json') {
+    let raw: string;
+    try {
+      raw = await res.text();
+    } catch (error) {
+      throw transportError(error, true);
+    }
+    let json: unknown;
+    try {
+      json = JSON.parse(raw.slice(0, MAX_JSON_BODY_CHARS));
+    } catch {
+      throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
+    }
+    if (hasUpstreamError(json)) {
+      throw new ChatLlmError('chat_llm_upstream_stream_error', 'upstream_stream_error', { status: res.status, contentType });
+    }
+    const text = extractDelta(json);
+    if (!text) {
+      if (finishReason(json) === 'length') throw new ChatLlmError('chat_llm_token_budget_exhausted', 'token_budget', { contentType });
+      throw new ChatLlmError('chat_llm_empty_response', hasChoices(json) ? 'empty_response' : 'invalid_response', { status: res.status, contentType });
+    }
+    yield text;
+    return;
   }
 
   const reader = res.body.getReader();
@@ -97,6 +230,8 @@ export async function* streamChatCompletion(
   let produced = false;
   let truncated = false;
   let finished = false;
+  let events = 0;
+  let upstreamError = false;
   // Ein SSE-Datenpaket; liefert den Text oder null bei [DONE].
   const parse = (raw: string): { done: boolean; text: string } => {
     const line = raw.trim();
@@ -105,6 +240,8 @@ export async function* streamChatCompletion(
     if (payload === '[DONE]') return { done: true, text: '' };
     try {
       const json: unknown = JSON.parse(payload);
+      events += 1;
+      if (hasUpstreamError(json)) upstreamError = true;
       if (finishReason(json) === 'length') truncated = true;
       return { done: false, text: extractDelta(json) };
     } catch {
@@ -113,7 +250,13 @@ export async function* streamChatCompletion(
   };
   try {
     while (true) {
-      const { value, done } = await reader.read();
+      let chunk: ReadableStreamReadResult<Uint8Array>;
+      try {
+        chunk = await reader.read();
+      } catch (error) {
+        throw transportError(error, true);
+      }
+      const { value, done } = chunk;
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
       let nl: number;
@@ -131,8 +274,13 @@ export async function* streamChatCompletion(
   } finally {
     reader.releaseLock();
   }
-  // Das Limit wurde durch Denk-Tokens aufgebraucht, bevor Text entstand: ehrlich melden statt leer antworten.
-  if (!produced && truncated) throw new Error('chat_llm_token_budget_exhausted');
+  if (produced) return;
+  // Ohne Antworttext wird nie leer geantwortet: die Ursache wird benannt.
+  // Das Limit wurde durch Denk-Tokens aufgebraucht, bevor Text entstand.
+  if (truncated) throw new ChatLlmError('chat_llm_token_budget_exhausted', 'token_budget', { contentType });
+  if (upstreamError) throw new ChatLlmError('chat_llm_upstream_stream_error', 'upstream_stream_error', { status: res.status, contentType });
+  if (events === 0) throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
+  throw new ChatLlmError('chat_llm_empty_response', 'empty_response', { status: res.status, contentType });
 }
 
 /** Nicht-gestreamte Variante: gesamten Text einsammeln. */
@@ -171,4 +319,15 @@ function finishReason(json: unknown): string {
   if (!Array.isArray(choices) || !choices[0] || typeof choices[0] !== 'object') return '';
   const reason = (choices[0] as { finish_reason?: unknown }).finish_reason;
   return typeof reason === 'string' ? reason : '';
+}
+
+function hasChoices(json: unknown): boolean {
+  return Boolean(json && typeof json === 'object' && Array.isArray((json as { choices?: unknown }).choices));
+}
+
+/** Fehlerobjekt des Routers innerhalb einer formal erfolgreichen Antwort. Der Inhalt wird nicht gelesen. */
+function hasUpstreamError(json: unknown): boolean {
+  if (!json || typeof json !== 'object') return false;
+  const error = (json as { error?: unknown }).error;
+  return error !== undefined && error !== null && error !== false;
 }

@@ -81,6 +81,34 @@ PGRST_DB_SCHEMAS="public,chat"
 - Ohne Resend: Bestellung bleibt gültig, Mail wird sauber übersprungen (`mailSkipped:true`), Audit-Ereignis `mail_skipped`.
 - Rechnung nur, wenn `total_cents` feststeht (sonst „folgt nach Umfangsklärung").
 
+### Störungsdiagnose `/api/chat` (Stand 13.11.2026)
+
+Der Besucher sieht bei jeder Störung nur den festen Code `chat_llm_failed`. Die Ursache steht als
+eine JSON-Zeile im Laufzeitprotokoll der Funktion (Vercel → Projekt → Logs, Suche `chat_failure`):
+
+```json
+{"event":"chat_failure","route":"/api/chat","stage":"llm","stream":true,"elapsed_ms":7,"cause":"upstream_http","status":401,"upstream_content_type":"json"}
+```
+
+| `cause` | Bedeutung | Nächster Schritt |
+| --- | --- | --- |
+| `not_configured` | `ROUTER_URL`/`ROUTER_KEY` fehlen | Variablen im Vercel-Projekt setzen, neu ausliefern |
+| `model_policy` | `CHAT_MODEL_ID` weicht vom Policy-Modell ab | Variable entfernen oder exakt auf das Policy-Modell setzen |
+| `invalid_endpoint` | Adresse ist keine gültige http(s)-URL | `ROUTER_URL` prüfen (vollständig, mit `https://`) |
+| `network` + `network_code` | Verbindung kommt nicht zustande (`ENOTFOUND` = Name unbekannt, `ECONNREFUSED` = Port zu, `UND_ERR_CONNECT_TIMEOUT` = nicht erreichbar, Zertifikatscodes = TLS) | Router muss aus dem Internet erreichbar sein, nicht nur im eigenen Netz |
+| `timeout` | keine vollständige Antwort innerhalb von 50 s | Router-Last und Modellverfügbarkeit prüfen |
+| `upstream_http` + `status` | Router antwortet mit Fehler (`401`/`403` Schlüssel, `404` Pfad – meist fehlt `/v1`, `429` Limit/Guthaben, `5xx` Router/Modell) | je nach Status |
+| `invalid_response` | Status 200, aber kein Chat-Format (z. B. HTML-Seite des Routers) | `ROUTER_URL` zeigt nicht auf die OpenAI-kompatible Schnittstelle |
+| `upstream_stream_error` | Router meldet einen Fehler innerhalb der Antwort | Modellname/Guthaben im Router prüfen |
+| `empty_response` / `token_budget` | kein Antworttext / Limit durch Denk-Tokens aufgebraucht | Modell- und Limit-Einstellung im Router prüfen |
+| `stream_interrupted` | Verbindung riss während der Antwort ab | Router-Stabilität, Proxy-Zeitlimits |
+| `client_abort` | Besucher hat abgebrochen | keine Störung |
+
+`stage: "persistence"` bedeutet: Die Antwort kam, aber das Speichern in Supabase schlug fehl
+(`step` nennt den Schritt). Die Zeile enthält nie Adresse, Schlüssel, Antworttext des Routers,
+Nutzertext oder Konversations-ID. Geprüft mit `apps/web/auth/tests/chat-llm.test.mjs` und
+`chat-route-errors.test.mjs`; der echte Router wurde dabei nicht aufgerufen.
+
 ## 7) Offene Punkte vor dem Live-Gang (Entscheidungen durch Pascal)
 
 - **XRechnung-Umfang:** `tools/rechnung.mjs` erzeugt ein minimales UBL-2.1-Gerüst **ohne** `cac:TaxTotal`
