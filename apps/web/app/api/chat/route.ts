@@ -6,6 +6,8 @@
  * Antwort: Server-Sent-Events (Default) oder eine JSON-Antwort (stream:false).
  *
  * Fail-closed: ohne LLM-ENV (ROUTER_URL/ROUTER_KEY) => 503, kein Modellersatz.
+ * Störungen: Der Besucher erhält nur den festen Code chat_llm_failed. Die Ursache steht als
+ * eine geheimnisfreie JSON-Zeile im Serverprotokoll (siehe logChatFailure).
  * Keine Secrets im Code, keine erfundenen Werte.
  */
 import type {
@@ -16,7 +18,13 @@ import type {
   ChatStreamEvent,
 } from '../../../lib/chat-contract';
 import { CHAT_SSE_CONTENT_TYPE, encodeSseEvent } from '../../../lib/chat-contract';
-import { chatLlmConfigured, chatModelId, streamChatCompletion, type LlmMessage } from '../../../lib/chat-llm';
+import {
+  chatLlmConfigured,
+  chatModelId,
+  describeChatFailure,
+  streamChatCompletion,
+  type LlmMessage,
+} from '../../../lib/chat-llm';
 import {
   appendMessage,
   ensureConversation,
@@ -36,6 +44,48 @@ const HISTORY_LIMIT = 20;
 
 function err(error: string, status: number): Response {
   return Response.json({ error }, { status, headers: { 'Cache-Control': 'no-store' } });
+}
+
+type FailureStage = 'llm' | 'persistence';
+
+/**
+ * Eine JSON-Zeile je Störung für das Serverprotokoll (Vercel-Laufzeitprotokoll).
+ * Enthält ausschließlich feste Kennwörter, Statuszahl, Systemfehlercode und Dauer.
+ * Niemals: Adresse oder Parameter des Routers, Schlüssel, Antworttext, Nutzertext, Konversations-ID.
+ */
+function logChatFailure(stage: FailureStage, error: unknown, context: { stream: boolean; startedAt: number; step?: string }): void {
+  const entry: Record<string, string | number | boolean> = {
+    event: 'chat_failure',
+    route: '/api/chat',
+    stage,
+    stream: context.stream,
+    elapsed_ms: Date.now() - context.startedAt,
+  };
+  if (context.step) entry.step = context.step;
+  if (stage === 'llm') {
+    Object.assign(entry, describeChatFailure(error));
+  } else {
+    // Meldungen des Speichers enthalten Pfad und Antworttext: nur die Statuszahl übernehmen.
+    const status = error instanceof Error ? /-> (\d{3})\b/.exec(error.message)?.[1] : undefined;
+    entry.cause = error instanceof Error && error.message === 'supabase_not_configured' ? 'not_configured' : status ? 'upstream_http' : 'unexpected';
+    if (status) entry.status = Number(status);
+  }
+  const line = JSON.stringify(entry);
+  // Ein Abbruch durch den Besucher ist keine Störung des Dienstes.
+  if (entry.cause === 'client_abort') console.info(line);
+  else console.error(line);
+}
+
+/** Speicherfehler dürfen die Antwort nicht verhindern und nicht als Modellfehler erscheinen. */
+async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean }): Promise<T> {
+  try {
+    return await run();
+  } catch (error) {
+    // Merken, damit die Antwort nicht behauptet, das Gespräch sei gespeichert.
+    context.storeFailed = true;
+    logChatFailure('persistence', error, { ...context, step });
+    return fallback;
+  }
 }
 
 function systemPrompt(locale: ChatLocale, pagePath: string): string {
@@ -89,39 +139,49 @@ export async function POST(request: Request): Promise<Response> {
   const pagePath = typeof req.pagePath === 'string' && req.pagePath.length <= 240 ? req.pagePath : '/';
   const wantsStream = req.stream !== false;
 
-  const conversationId = await ensureConversation(
-    typeof req.conversationId === 'string' ? req.conversationId.slice(0, 80) : undefined,
-    { locale, pagePath },
-  );
-  const persisted = supabaseConfigured() && !conversationId.startsWith('local-');
+  const startedAt = Date.now();
+  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean } = { stream: wantsStream, startedAt };
+  const requestedId = typeof req.conversationId === 'string' ? req.conversationId.slice(0, 80) : undefined;
+  const localId = requestedId?.startsWith('local-') ? requestedId : `local-${crypto.randomUUID()}`;
+  const conversationId =
+    (await persistenceStep('conversation', () => ensureConversation(requestedId, { locale, pagePath }), localId, logContext)) || localId;
+  // Gespeichert gilt nur, solange kein Schreibschritt fehlgeschlagen ist.
+  const isPersisted = () => supabaseConfigured() && !conversationId.startsWith('local-') && !logContext.storeFailed;
 
   const history = await loadHistory(conversationId);
-  await appendMessage(conversationId, 'user', message, null);
+  await persistenceStep('user_message', () => appendMessage(conversationId, 'user', message, null), undefined, logContext);
 
   const llmMessages: LlmMessage[] = [
     { role: 'system', content: systemPrompt(locale, pagePath) },
     ...history,
     { role: 'user', content: message },
   ];
-  const model = chatModelId();
+  let model: string;
+  try {
+    model = chatModelId();
+  } catch (error) {
+    logChatFailure('llm', error, logContext);
+    return err('chat_llm_failed', 502);
+  }
 
   // ---- Nicht-gestreamte JSON-Antwort ----
   if (!wantsStream) {
     let full = '';
     try {
       for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) full += chunk;
-    } catch {
+    } catch (error) {
+      logChatFailure('llm', error, logContext);
       return err('chat_llm_failed', 502);
     }
     const draft = parseOfferDraft(full);
     const visible = draft ? stripOfferFence(full) : full;
-    await appendMessage(conversationId, 'assistant', full, model);
-    const offer = draft ? await persistOffer(conversationId, draft) : null;
+    await persistenceStep('assistant_message', () => appendMessage(conversationId, 'assistant', full, model), undefined, logContext);
+    const offer = draft ? await persistenceStep('offer', () => persistOffer(conversationId, draft), null, logContext) : null;
     const dto: ChatResponse = {
       conversationId,
       message: { role: 'assistant', content: visible, created_at: new Date().toISOString() },
       offer: offer ?? undefined,
-      persisted,
+      persisted: isPersisted(),
       model,
     };
     return Response.json(dto, { headers: { 'Cache-Control': 'no-store' } });
@@ -134,24 +194,30 @@ export async function POST(request: Request): Promise<Response> {
       const send = (ev: ChatStreamEvent) => controller.enqueue(encoder.encode(encodeSseEvent(ev)));
       let full = '';
       try {
-        send({ type: 'start', conversationId, model, persisted });
-        for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
-          full += chunk;
-          send({ type: 'delta', text: chunk });
+        send({ type: 'start', conversationId, model, persisted: isPersisted() });
+        try {
+          for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
+            full += chunk;
+            send({ type: 'delta', text: chunk });
+          }
+        } catch (error) {
+          logChatFailure('llm', error, logContext);
+          send({ type: 'error', error: 'chat_llm_failed' });
+          return;
         }
         const draft = parseOfferDraft(full);
         const visible = draft ? stripOfferFence(full) : full;
-        await appendMessage(conversationId, 'assistant', full, model);
+        await persistenceStep('assistant_message', () => appendMessage(conversationId, 'assistant', full, model), undefined, logContext);
         if (draft) {
-          const offer = await persistOffer(conversationId, draft);
+          const offer = await persistenceStep('offer', () => persistOffer(conversationId, draft), null, logContext);
           if (offer) send({ type: 'offer', offer });
         }
         const msg: ChatMessageDTO = { role: 'assistant', content: visible, created_at: new Date().toISOString() };
         send({ type: 'done', message: msg });
       } catch {
-        send({ type: 'error', error: 'chat_llm_failed' });
+        // Der Besucher hat die Verbindung geschlossen: nichts mehr zu senden.
       } finally {
-        controller.close();
+        try { controller.close(); } catch { /* bereits geschlossen */ }
       }
     },
   });
