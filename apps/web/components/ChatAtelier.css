@@ -110,3 +110,49 @@
 .workspace-shell #aifly-panel .orientation-composer-actions .primary-button span{display:inline;line-height:48px;vertical-align:middle}
 .workspace-shell #aifly-panel .connection-note a{text-decoration:none}
 .workspace-shell .reopen-chat{border-color:transparent}
+
+/* ───── Feinschliff 13.11.2026 (Rueckmeldung des Inhabers mit Bildschirmfoto) ─────
+   Eine gemeinsame Fluchtlinie, saubere Zeilen ohne Silbentrennung, klare Absender, ruhige Schrittleiste. */
+.workspace-shell #aifly-panel{--ca-pad:24px;background:radial-gradient(ellipse 100% 38% at 82% 0%,color-mix(in srgb,var(--ca-warm) 20%,transparent),transparent 100%),radial-gradient(ellipse 90% 34% at 8% 100%,color-mix(in srgb,var(--ca-lime) 8%,transparent),transparent 100%),linear-gradient(172deg,color-mix(in srgb,var(--ca-silver) 16%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent) 44%),color-mix(in srgb,var(--color-atelier-raised) 74%,transparent)}
+.workspace-shell #aifly-panel,.workspace-shell #aifly-panel *{hyphens:manual!important;-webkit-hyphens:manual!important;overflow-wrap:break-word;word-break:normal}
+.workspace-shell #aifly-panel :is(p,li,h2,h3,span,strong,a,button){text-wrap:pretty}
+/* Fluchtlinie: Kopf, Gespraech, Eingabe und Hinweise beginnen an derselben Kante. */
+.workspace-shell #aifly-panel .panel-heading{padding:22px var(--ca-pad) 14px}
+.workspace-shell #aifly-panel .orientation-content{padding:10px var(--ca-pad) 18px;gap:18px}
+.workspace-shell #aifly-panel .orientation-content>*{margin-inline:0;max-width:100%}
+.workspace-shell #aifly-panel :is(.orientation-intro,.orientation-history,.orientation-starters,.orientation-path){margin:0;padding-inline:0;width:100%;box-sizing:border-box}
+.workspace-shell #aifly-panel .orientation-composer{margin:0 calc(var(--ca-pad) - 6px) 10px}
+.workspace-shell #aifly-panel .connection-note{padding:0 var(--ca-pad) 14px}
+.workspace-shell #aifly-panel .orientation-brief{margin:0 calc(var(--ca-pad) - 6px) 16px}
+/* Einstieg */
+.workspace-shell #aifly-panel .orientation-intro h3{font-size:1.9rem;margin:6px 0 10px}
+.workspace-shell #aifly-panel .orientation-intro p{font-size:.98rem;line-height:1.6}
+/* Nachrichten: Absender als kleine Zeile, Text ruhig und gut lesbar. */
+.workspace-shell #aifly-panel .orientation-message{gap:6px;font-size:.98rem;line-height:1.6}
+.workspace-shell #aifly-panel .orientation-message>strong{display:flex;align-items:center;gap:.5em;margin:0 0 6px;font-family:var(--font-mono);font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ca-warm)}
+.workspace-shell #aifly-panel .orientation-message.role-assistant>strong::before{content:'';flex:none;width:7px;height:7px;border-radius:50%;background:var(--ca-lime);box-shadow:0 0 12px color-mix(in srgb,var(--ca-lime) 80%,transparent)}
+.workspace-shell #aifly-panel .orientation-message.role-user>strong{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.workspace-shell #aifly-panel .orientation-message.role-user{max-width:84%;padding:12px 16px}
+.workspace-shell #aifly-panel .orientation-message p{margin:0;font-size:inherit;line-height:inherit;color:var(--color-text-primaer)}
+.workspace-shell #aifly-panel .orientation-message.role-assistant p+p,.workspace-shell #aifly-panel .orientation-answer-copy>*+*{margin-top:.7em}
+.workspace-shell #aifly-panel .orientation-answer-heading{font-weight:400;font-size:inherit}
+.workspace-shell #aifly-panel .orientation-message :is(ul,ol){margin:.5em 0 0;padding-left:1.2em}
+.workspace-shell #aifly-panel .orientation-message li+li{margin-top:.3em}
+/* Schrittleiste: drei gleich breite, einzeilige Marken ohne Nummern und Pfeile. */
+.workspace-shell #aifly-panel .orientation-path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;list-style:none}
+.workspace-shell #aifly-panel .orientation-path>li{display:block;padding:8px 6px;font-size:.68rem;line-height:1.2;letter-spacing:0;text-align:center;white-space:normal;text-wrap:balance;display:grid;place-items:center;min-height:44px;border-radius:18px;background:color-mix(in srgb,var(--ca-silver) 7%,transparent);color:var(--color-text-sekundaer)}
+.workspace-shell #aifly-panel .orientation-path>li>small,.workspace-shell #aifly-panel .orientation-path>li::after,.workspace-shell #aifly-panel .orientation-path>li::before{display:none;content:none}
+.workspace-shell #aifly-panel .orientation-path>li[data-state='current']{background:color-mix(in srgb,var(--ca-lime) 20%,transparent);color:var(--color-text-primaer);font-weight:600}
+.workspace-shell #aifly-panel .orientation-path>li[data-state='done']{background:color-mix(in srgb,var(--ca-warm) 16%,transparent);color:var(--color-text-primaer)}
+.workspace-shell #aifly-panel .orientation-path>li:first-child:not([data-state='current']):not([data-state='done']){background:color-mix(in srgb,var(--ca-silver) 7%,transparent)}
+/* Hinweiszeile: ein Satz, Link ohne Umbruch im Wort. */
+.workspace-shell #aifly-panel .connection-note{font-size:.72rem;line-height:1.5}
+.workspace-shell #aifly-panel .connection-note a{white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
+
+/* Leiste "Naechster Schritt" und Rueckkehr: dieselbe Glasflaeche wie alle Flaechen, keine dunkle Bande. */
+.workspace-shell #aifly-panel :is(.orientation-followup,.chat-return,.orientation-next){margin:0 calc(var(--ca-pad) - 6px) 16px;padding:12px 12px 12px 18px;border-radius:28px;background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 16%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 26%,transparent),0 18px 40px -22px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent)}
+.workspace-shell #aifly-panel .orientation-problem-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+/* Aktionen unter der Antwort: zwei Schalter in einer Reihe, kein Kasten darum. */
+.workspace-shell #aifly-panel :is(.orientation-brief,.orientation-brief-actions,.orientation-problem-actions){background:none;box-shadow:none;padding:0;margin:0;border-radius:0}
+.workspace-shell #aifly-panel :is(.orientation-brief,.orientation-brief-actions,.orientation-problem-actions){display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px}
+.workspace-shell #aifly-panel .orientation-content{scroll-padding-top:16px;-webkit-mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 18px);mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 18px)}
