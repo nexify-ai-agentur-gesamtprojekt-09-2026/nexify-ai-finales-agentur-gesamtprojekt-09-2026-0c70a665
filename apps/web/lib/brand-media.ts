@@ -59,3 +59,14 @@ export type BrandImage=typeof brandImages[keyof typeof brandImages];
 const pageKeys:Record<string,keyof typeof brandImages>={home:'home',services:'atelier',websites:'design',automation:'automation','apps-portals':'workspace',scope:'contact',pricing:'scope',solutions:'marketing',knowledge:'welcome','knowledge-start':'planning',company:'company',contact:'entrance',nex2fly:'workspace',one:'production',api:'integration','aifly-oracle':'welcome','nex-agentic':'automation','skills-mcp':'integration',portals:'entrance','tk-home':'logistics','tk-fitment':'integration','tk-appointments':'planning','tk-vouchers':'scope','tk-partner':'automation','tk-workshop':'process'};
 export function pageImage(pageId:string):BrandImage|undefined{return pageKeys[pageId]?brandImages[pageKeys[pageId]]:undefined;}
 export function imageAlt(image:BrandImage,locale:string){return locale==='de'?image.alt:({nl:'Merkillustratie met Pascal, NeX en AIFly ORACLE – geen productfoto of klantreferentie.',fr:'Illustration de marque avec Pascal, NeX et AIFly ORACLE – ni photo produit ni référence client.',en:'Brand illustration with Pascal, NeX and AIFly ORACLE, not a product photo or client reference.'}[locale]||image.alt);}
+
+// 10 s brand scenes with their original sound (H.264/AAC), delivered by the owner on 2026-11-13.
+// Each one shows the same setting as the still of its page; the still remains poster and fallback.
+// Sources and SHA-256 of the delivered files: docs/design/scene-videos-2026-11-13.md
+const pageVideos:Record<string,string>={
+ automation:'/media/scenes/fertigung-20261113.mp4',
+ 'nex-agentic':'/media/scenes/fertigung-20261113.mp4',
+ 'apps-portals':'/media/scenes/tablet-foyer-20261113.mp4',
+ websites:'/media/scenes/bemusterung-20261113.mp4'
+};
+export function pageVideo(pageId:string):string|undefined{return pageVideos[pageId];}
