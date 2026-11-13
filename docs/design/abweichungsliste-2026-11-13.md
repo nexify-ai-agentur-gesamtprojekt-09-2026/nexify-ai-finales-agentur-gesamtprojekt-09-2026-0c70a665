@@ -57,7 +57,7 @@ Widersprüche in den Quellen (OFFEN, nicht eigenmächtig aufgelöst):
 | G7 | Mobil überdeckt der schwebende Oracle-Knopf das rechte Ende der Haupt-Schaltflächen | Übersichtsbogen 390 px, u. a. `/teileklar/termine`, `/wissen` | mittel |
 | G8 | Themen im Oracle-Bereich („Marke & Web“ …) sind unterstrichene Textlinks mit unruhigem Umbruch, kein Chip | erste Ansicht 1440 px, alle NeXify-Seiten | mittel |
 | G9 | Brotkrumen zeigen oft nur „Startseite“ ohne aktuelle Seite; bei TEILEKLAR mobil „Startseite /“ und der Titel in eigener Zeile | Übersichtsbögen | niedrig |
-| G10 | Unter dem Kopf folgen auf Inhaltsseiten nur Textblöcke und gleichförmige Karten, keine weitere Medienkomposition | ganze Seite `/leistungen/agenten-automatisierung` | mittel |
+| G10 | Unter dem Kopf folgen auf `/leistungen/agenten-automatisierung` nur Textblöcke und gleichförmige Karten, keine weitere Medienkomposition. Für die übrigen Inhaltsseiten nicht belegt: ganze Seitenlänge dort nicht gesichtet | ganze Seite `/leistungen/agenten-automatisierung` | mittel |
 | G11 | Ankreuzfelder 24 × 24 px (unter 44 px) | `/kontakt`, `/teileklar/gutscheine`, `/teileklar/termine`, `/teileklar/partner-werden` | mittel |
 
 Kein horizontaler Überlauf auf 72/72 Ansichten. Schriften: nur Inter, Plus Jakarta Sans, Geist Mono.
@@ -68,15 +68,15 @@ Kein horizontaler Überlauf auf 72/72 Ansichten. Schriften: nur Inter, Plus Jaka
 |---|---|---|
 | `/` | Video Eingangshalle, 537 × 302 | Film klein im Verhältnis zur Bühne; im Text nur ein Textlink, keine Haupt-Schaltfläche |
 | `/leistungen` | Bild hf-03 | G1–G3, kein Video vorhanden |
-| `/leistungen/agenten-automatisierung`, `/apps-portale`, `/websites` | Bild + Video | G1–G3, G6; Kennzeichnung und Abspielknopf liegen als zwei dunkle Pillen auf dem Bild |
+| `/leistungen/agenten-automatisierung`, `/leistungen/apps-portale`, `/leistungen/websites` | Bild + Video | G1–G3, G6; Kennzeichnung und Abspielknopf liegen als zwei dunkle Pillen auf dem Bild |
 | `/produkte/nex-agentic-aifly` | Bild + Video | wie oben |
-| `/produkte/nex2fly`, `/one`, `/api`, `/skills-mcp`, `/aifly-oracle` | Bild | G1–G3; keine echten Oberflächen (Vorgabe Produktfamilie) – es liegen keine vor, nichts erfinden |
+| `/produkte/nex2fly`, `/produkte/one`, `/produkte/api`, `/produkte/skills-mcp`, `/produkte/aifly-oracle` | Bild | G1–G3; keine echten Oberflächen (Vorgabe Produktfamilie) – es liegen keine vor, nichts erfinden |
 | `/portale`, `/kontakt` | Bild hf-09 | G1–G3 |
 | `/loesungen`, `/preise-ablauf`, `/leistungsumfang`, `/unternehmen`, `/wissen`, `/wissen/projekt-vorbereiten` | Bild | G1–G3 |
 | `/teileklar` | **kein Bild, kein Video** | rechte Hälfte leer („Sortiment momentan nicht erreichbar“, lokal ohne Shop-Daten); Haupt-Schaltfläche silbern statt Lime |
-| `/teileklar/fahrzeug-und-passung`, `/gutscheine`, `/termine`, `/partner-werden` | Bild 719 × 405 | G1; größeres Bild als bei NeXify, wirkt stimmiger |
-| `/teileklar/batterie-berater`, `/reifenrechner`, `/werkstatt`, `/kategorien`, `/shop`, `/rechtliches` | ohne Bild | G1; Werkzeug- und Listenseiten, Bild nicht zwingend |
-| `/impressum`, `/datenschutz`, `/cookies`, `/ki-hinweise`, `/barrierefreiheit`, `/vertragsgrundlagen` | ohne Bild | G1, G2; ruhig und lesbar, kein Video vorgesehen |
+| `/teileklar/fahrzeug-und-passung`, `/teileklar/gutscheine`, `/teileklar/termine`, `/teileklar/partner-werden` | Bild 719 × 405 | G1; größeres Bild als bei NeXify, wirkt stimmiger |
+| `/teileklar/batterie-berater`, `/teileklar/reifenrechner`, `/teileklar/werkstatt`, `/teileklar/kategorien`, `/teileklar/shop`, `/teileklar/rechtliches` | ohne Bild | G1; Werkzeug- und Listenseiten, Bild nicht zwingend |
+| `/impressum`, `/datenschutz`, `/cookies`, `/ki-hinweise`, `/barrierefreiheit`, `/vertragsgrundlagen` | ohne Bild | G1, G2; ruhig und lesbar. Kein Kopfbild und kein passendes Video vorhanden; ob Rechtsseiten von der Vorgabe „Video auf jeder Seite“ ausgenommen sind, ist OFFEN (Entscheidung Inhaber) |
 
 ## C. Vorschlag Videozuordnung (noch nicht eingebaut, Szenen noch nicht gegen die Bilder abgespielt)
 
@@ -91,14 +91,14 @@ Regel aus `brand-media.ts`: Ein Video kommt nur dorthin, wo es dieselbe Szene ze
 | `logistik` | – | `/teileklar` (braucht dort erst einen Bildplatz) | hf-08 Förderanlage |
 
 Ohne passendes Video, Bild bleibt: `/leistungen`, `/loesungen`, `/preise-ablauf`, `/leistungsumfang`,
-`/unternehmen`, `/wissen`, `/wissen/projekt-vorbereiten`, `/produkte/one`, `/api`, `/skills-mcp`,
-`/aifly-oracle`, übrige TEILEKLAR-Seiten, Rechtsseiten.
+`/unternehmen`, `/wissen`, `/wissen/projekt-vorbereiten`, `/produkte/one`, `/produkte/api`,
+`/produkte/skills-mcp`, `/produkte/aifly-oracle`, übrige TEILEKLAR-Seiten. Rechtsseiten: siehe Tabelle B (offen).
 
 ## D. Vorgeschlagene Pakete
 
 1. **Startseite und Leistungen:** G1, G2, G3, G6, Kennzeichnung und Abspielknopf als eine Glasleiste, G4 am Film (Token `material.film*`).
-2. **Produkte und Portale:** dieselbe Kopfbühne, Videos laut C, G8.
-3. **TEILEKLAR:** Bildplatz mit Lagerhallen-Video auf der Startseite, G7, G9.
-4. **Rechtsseiten:** nur G1, G2, G11; Texte unverändert.
+2. **Produkte und Portale:** dieselbe Kopfbühne, Videos laut C; G11 auf `/kontakt`. G7 und G8 betreffen den Chat und gehören der Chat-Session.
+3. **TEILEKLAR:** Bildplatz mit Lagerhallen-Video auf der Startseite, G9; G11 auf `/teileklar/gutscheine`, `/teileklar/termine`, `/teileklar/partner-werden`.
+4. **Rechtsseiten:** nur G1, G2; Texte unverändert.
 
 Nachweise der Sitzung (Bilder, Messwerte) lagen im Arbeitsordner der Sitzung und sind nicht im Repository.
