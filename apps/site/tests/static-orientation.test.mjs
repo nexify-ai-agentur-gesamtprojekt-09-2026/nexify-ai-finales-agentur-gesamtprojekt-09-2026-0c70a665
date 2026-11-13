@@ -97,5 +97,8 @@ test('the local path has no fetch, provider, persistence, hidden config or busin
  const ui=await readFile(new URL('../../web/components/PublicOrientationChat.tsx',import.meta.url),'utf8');
  assert.match(ui,/__NEXIFY_STATIC_ORIENTATION__===true/);
  assert.match(ui,/local\?<StaticOrientationChat/);
- assert.match(ui,/new DefaultChatTransport/);
+ // Der Serverpfad führt das Gespräch über die eigene Route; ohne Anbindung fällt er auf den lokalen Pfad zurück.
+ assert.match(ui,/<ServerOrientationChat key=\{conversationKey\}/);
+ assert.match(ui,/await streamChat\(/);
+ assert.match(ui,/<StaticOrientationChat key=\{conversationKey\+":fallback"\}/);
 });
