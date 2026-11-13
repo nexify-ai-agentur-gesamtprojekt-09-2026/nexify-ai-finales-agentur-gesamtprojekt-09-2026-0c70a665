@@ -16,6 +16,11 @@
  *   CHAT_MODEL_ID          nur zulässig, wenn identisch mit dem Policy-Modell; jede Abweichung
  *                          macht den Chat unverfügbar (kein stiller Ersatz).
  *
+ * Router-Name: Der 9router führt das Policy-Modell unter `ds/deepseek-v4.1-flash` und
+ * lehnt die Policy-Kennung mit HTTP 400 ab (gemessen 13.11.2026). Gesendet wird deshalb
+ * der Router-Name; Protokoll und Ablage führen weiter die Policy-Kennung. Vom Inhaber am
+ * 13.11.2026 geprüft und freigegeben. Der Router bietet keinen datierten Stand (-1017) an.
+ *
  * Keine npm-Abhängigkeit: nur fetch.
  */
 
@@ -23,6 +28,8 @@
 // damit kein fragiler Cross-Root-JSON-Import in das Next-Bundle gezogen wird.
 const POLICY_MODEL_ID = 'deepseek/deepseek-v4.1-flash-1017';
 const POLICY_REASONING_EFFORT = 'high';
+// Name, unter dem der 9router das Policy-Modell führt. Fest, nicht per ENV änderbar.
+const ROUTER_MODEL_NAME = 'ds/deepseek-v4.1-flash';
 
 export function chatLlmConfigured(): boolean {
   return Boolean((process.env.CHAT_COMPLETIONS_URL || process.env.ROUTER_URL) && process.env.ROUTER_KEY);
@@ -33,6 +40,12 @@ export function chatModelId(): string {
   const configured = process.env.CHAT_MODEL_ID;
   if (configured && configured !== POLICY_MODEL_ID) throw new Error('chat_llm_model_policy_violation');
   return POLICY_MODEL_ID;
+}
+
+/** Name des Policy-Modells auf der Leitung zum 9router. Prüft zuerst die Policy. */
+export function routerModelName(): string {
+  chatModelId();
+  return ROUTER_MODEL_NAME;
 }
 
 // Reasoning-Tokens zählen gegen das Antwortlimit: ein kleines Limit liefert leere oder abgeschnittene Antworten.
@@ -63,7 +76,7 @@ export async function* streamChatCompletion(
 ): AsyncGenerator<string, void, unknown> {
   if (!chatLlmConfigured()) throw new Error('chat_llm_not_configured');
   const key = process.env.ROUTER_KEY as string;
-  const model = chatModelId();
+  const model = routerModelName();
   const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   const signal = opts.signal ? AbortSignal.any([opts.signal, timeout]) : timeout;
 
