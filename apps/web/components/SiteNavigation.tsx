@@ -33,13 +33,12 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  const close=(focus=false)=>{[desktop,mobile].forEach(ref=>{if(ref.current?.open){ref.current.open=false;if(focus)ref.current.querySelector('summary')?.focus();}});};
  useEffect(()=>{close();},[pathname,locale]);
  useEffect(()=>{
-  if(!opened.desktop&&!opened.mobile)return;
   const outside=(event:PointerEvent)=>{[desktop,mobile].forEach(ref=>{if(ref.current?.open&&!ref.current.contains(event.target as Node))ref.current.open=false;});};
-  const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'){event.preventDefault();close(true);}};
+  const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'&&(desktop.current?.open||mobile.current?.open)){event.preventDefault();close(true);}};
   const resize=()=>close();
   document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape);window.addEventListener('resize',resize);
   return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);window.removeEventListener('resize',resize);};
- },[opened.desktop,opened.mobile]);
+ },[]);
  const links=(ids:string[],prefix:string)=>ids.flatMap(id=>{const p=page(id);return p?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}><span>{label(p)}</span><span aria-hidden="true">→</span></SiteLink>]:[];});
  const primary=(prefix:string)=>['services','knowledge','contact'].flatMap(id=>{const p=page(id);return p&&p.navigationContexts.includes(site)?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}>{t[id as 'services'|'knowledge'|'contact']}</SiteLink>]:[];});
  const main=primary('desktop-navigation-link');

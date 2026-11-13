@@ -6,7 +6,7 @@
 .atelier-film-controls button:focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:3px}
 .atelier-film-transcript{background:var(--color-atelier-film-transcript);padding:14px 20px;color:var(--color-atelier-platinum);font-size:12px;line-height:1.7}
 .atelier-film-transcript summary{min-height:24px;cursor:pointer}
-.atelier-film-error{position:absolute;inset:20px 20px auto;padding:12px;background:var(--color-atelier-film-error);color:var(--color-atelier-ink)}
+.atelier-film-error{pointer-events:none;position:absolute;inset:20px 20px auto;padding:12px;background:var(--color-atelier-film-error);color:var(--color-atelier-ink)}
 .atelier-film-hero{border-radius:0;overflow:visible;background:transparent}
 .atelier-film-hero .atelier-film-controls{inset:auto 28px 24px;justify-content:flex-end}
 .atelier-film-hero video{aspect-ratio:16/9}
@@ -47,3 +47,29 @@
  .atelier-film-hero .atelier-volume input{flex:1;min-width:0}
 }
 @media(max-width:600px){.atelier-film-hero .atelier-film-controls{padding:var(--space-2)}.atelier-film-hero .atelier-film-controls button{padding:var(--space-2)}}
+
+/* The home hero controls remain inside the film, with no separate rail. */
+.workspace-shell .home-concept .identity-hero .atelier-film-progress { display:none; }
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls { position:absolute; inset:auto 0 var(--space-5); margin-inline:auto; width:max-content; max-width:calc(100% - 24px); display:flex; flex-wrap:nowrap; justify-content:center; align-items:center; gap:var(--space-1); padding:var(--space-1); border:1px solid var(--color-atelier-film-control-edge); border-radius:var(--radius-pille); background:var(--color-atelier-film-control-fill); box-shadow:var(--shadow-atelier-polish); backdrop-filter:blur(16px); }
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button, .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume summary { min-height:var(--target-min); padding:var(--space-2) var(--space-3); border:0; border-radius:var(--radius-pille); background:transparent; color:var(--color-atelier-ink); }
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button:hover, .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume summary:hover { background:var(--color-atelier-film-control-hover); }
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume { margin:0; position:relative; }
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume[open] { display:block; flex:none; }
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { position:absolute; bottom:calc(100% + var(--space-3)); right:0; width:180px; min-width:0; padding:var(--space-3); border-radius:var(--radius-karte); background:var(--gradient-karte); box-shadow:var(--shadow-atelier-polish); }
+@media(max-width:600px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls { bottom:var(--space-3); } .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button { font-size:var(--type-small-size); padding:var(--space-2); } }
+
+/* Keep controls on one line and the slider inside the small mobile video. */
+.workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button { white-space:nowrap; }
+@media(max-width:600px) {
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls { gap:0; }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button { gap:var(--space-1); font-size:11px; padding-inline:var(--space-2); }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { width:160px; padding:var(--space-2); }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume label { display:block; font-size:0; }
+ .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume input { display:block; min-height:24px; }
+}
+
+/* Keep the volume panel clear of the hero copy at desktop widths. */
+@container identity-hero (min-width:821px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { left:0; right:auto; } }
+
+/* In the two-column hero, open the volume control toward the center of the film. */
+@container identity-hero (min-width:821px) { .workspace-shell .home-concept .identity-hero .atelier-film-hero .atelier-volume > div { left:auto; right:0; } }

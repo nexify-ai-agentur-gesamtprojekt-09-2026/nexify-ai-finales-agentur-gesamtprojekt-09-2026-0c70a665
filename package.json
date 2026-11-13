@@ -18,7 +18,8 @@
     "test:agent": "node --test packages/agent-runtime/tests/*.test.mjs",
     "typecheck:agent": "tsc -p tsconfig.api.json",
     "dev:original": "node tools/dev.mjs",
-    "dev:source": "node apps/site/scripts/generate-public-data.mjs && node apps/site/node_modules/vite/bin/vite.js apps/site --config apps/site/vite.config.ts"
+    "dev:source": "node apps/site/scripts/generate-public-data.mjs && node apps/site/node_modules/vite/bin/vite.js apps/site --config apps/site/vite.config.ts",
+    "export:gesamtprojekt": "node scripts/export-gesamtprojekt.mjs"
   },
   "packageManager": "pnpm@12.15.0",
   "engines": {

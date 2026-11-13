@@ -145,3 +145,19 @@
 /* Primäraktion der NeXify-Seiten (Formulare, Portal-Tore): ruhiges CI-Lime als Signal wie die Hero-Aktion; TEILEKLAR bleibt Champagne. */
 .workspace-shell:not(.site-teileklar) .home-concept .pc-supplement :is(.primary-button,button.primary-button){background:var(--gradient-button-primaer);color:var(--color-text-auf-lime);box-shadow:var(--shadow-button-primaer)}
 .workspace-shell:not(.site-teileklar) .home-concept .pc-supplement :is(.primary-button,button.primary-button):hover:not(:disabled){background:var(--color-marke-lime-hell)}
+
+/* Innenseiten fuehren Typografie und Material der Startseite fort. */
+.home-concept .pc-hero{column-gap:var(--space-8);padding-block:var(--space-7)}
+.home-concept .pc-hero h1{max-width:18ch}
+.home-concept .pc-hero-lead{max-width:52ch}
+.home-concept .pc-hero-media{border:var(--material-border) solid var(--color-linie-fein);border-top-color:var(--material-highlight)}
+.home-concept .pc-section{padding-block:var(--space-7)}
+.home-concept .pc-section+.pc-section{padding-top:var(--space-6);border-top:var(--material-border) solid var(--color-linie-fein)}
+.home-concept .pc-section-body{gap:var(--space-6)}
+.home-concept .pc-supplement :is(.tk-form,.tk-home-entry,.tk-notice,.workshop-directory,.partner-form,.tk-partner-intro,.tk-portal-preview,.tk-legal-doc){border:var(--material-border) solid var(--color-linie-fein);border-top-color:var(--material-highlight);box-shadow:var(--shadow-atelier-polish)}
+.home-concept .pc-supplement :is(input,textarea,select){max-width:100%;min-width:0}
+@container home (max-width:680px){
+ .home-concept .pc-hero{gap:var(--space-6);padding-block:var(--space-5) var(--space-7)}
+ .home-concept .pc-section{padding-block:var(--space-6)}
+ .home-concept .pc-section+.pc-section{padding-top:var(--space-6)}
+}
