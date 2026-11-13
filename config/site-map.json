@@ -16,7 +16,7 @@
     "source": "explicit_user_direction_2026-10-26"
   },
   "operator_context": {
-    "display_name": "NeXify AI FACTORY B.V.",
+    "display_name": "NeXify AI FACTORY",
     "legal_country_context": "NL",
     "verification_policy": "Use separately verified operator evidence; market preference does not change register/tax/provider identity",
     "historical_sole_trader_data_reused": false,
@@ -2070,10 +2070,10 @@
       "id": "company",
       "path": "/unternehmen",
       "title": {
-        "de": "NeXify AI FACTORY B.V.",
-        "nl": "NeXify AI FACTORY B.V.",
-        "fr": "NeXify AI FACTORY B.V.",
-        "en": "NeXify AI FACTORY B.V."
+        "de": "NeXify AI FACTORY",
+        "nl": "NeXify AI FACTORY",
+        "fr": "NeXify AI FACTORY",
+        "en": "NeXify AI FACTORY"
       },
       "summary": {
         "de": "Die Factory steht für einen gemeinsamen Anspruch an Marke, digitale Arbeit und Service. Wir bringen Gestaltung, Technologie und Vermarktung in einen abgestimmten Projektauftrag.",
@@ -2146,10 +2146,10 @@
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "index,follow",
         "title": {
-          "de": "NeXify AI FACTORY B.V.",
-          "nl": "NeXify AI FACTORY B.V.",
-          "fr": "NeXify AI FACTORY B.V.",
-          "en": "NeXify AI FACTORY B.V."
+          "de": "NeXify AI FACTORY",
+          "nl": "NeXify AI FACTORY",
+          "fr": "NeXify AI FACTORY",
+          "en": "NeXify AI FACTORY"
         }
       },
       "access": {
@@ -3701,32 +3701,32 @@
       "id": "imprint",
       "path": "/impressum",
       "title": {
-        "de": "NeXify AI FACTORY B.V. – Unternehmensangaben",
-        "nl": "NeXify AI FACTORY B.V. – bedrijfsgegevens",
-        "fr": "NeXify AI FACTORY B.V. – informations sur l’entreprise",
-        "en": "NeXify AI FACTORY B.V. – company information"
+        "de": "Impressum · NeXify AI by NeXify",
+        "nl": "Colofon · NeXify AI by NeXify",
+        "fr": "Mentions légales · NeXify AI by NeXify",
+        "en": "Legal notice · NeXify AI by NeXify"
       },
       "summary": {
-        "de": "Ein klarer Markenauftritt braucht eine eindeutige Unternehmenszuordnung. Die vollständigen Anbieterangaben zur NeXify AI FACTORY B.V. werden noch abgeglichen; diese Seite ist kein abschließend freigegebenes Impressum.",
-        "nl": "Een helder merk vraagt om een eenduidige bedrijfsidentiteit. De volledige aanbiedersgegevens van NeXify AI FACTORY B.V. worden nog gecontroleerd; deze pagina is geen definitief goedgekeurd colofon.",
-        "fr": "Une marque claire exige une identité d’entreprise précise. Les coordonnées complètes de NeXify AI FACTORY B.V. sont encore en vérification ; cette page ne constitue pas des mentions légales définitivement validées.",
-        "en": "A clear brand needs an unambiguous company identity. The complete provider details for NeXify AI FACTORY B.V. remain under review; this is not a fully approved legal notice."
+        "de": "Anbieter dieser Website ist NeXify AI by NeXify, Inhaber Pascal Courbois, eine Eenmanszaak nach niederländischem Recht mit Anschrift in Venlo.",
+        "nl": "Aanbieder van deze website is NeXify AI by NeXify, eigenaar Pascal Courbois, een eenmanszaak naar Nederlands recht met adres in Venlo.",
+        "fr": "Ce site est édité par NeXify AI by NeXify, propriétaire Pascal Courbois, une entreprise individuelle (eenmanszaak) de droit néerlandais établie à Venlo.",
+        "en": "This website is provided by NeXify AI by NeXify, owner Pascal Courbois, a sole proprietorship (eenmanszaak) under Dutch law with its address in Venlo."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "ueberblick",
           "heading": {
-            "de": "Das Unternehmen hinter der Marke",
-            "nl": "Het bedrijf achter het merk",
-            "fr": "L’entreprise derrière la marque",
-            "en": "The company behind the brand"
+            "de": "Diensteanbieter",
+            "nl": "Aanbieder",
+            "fr": "Éditeur du site",
+            "en": "Service provider"
           },
           "body": {
-            "de": "NeXify AI FACTORY B.V. ist die vom Auftraggeber benannte Unternehmensbezeichnung dieses Auftritts. Ansprechpartner für das Vorhaben ist Pascal Courbois, erreichbar unter mail@nexifyai.cloud.",
-            "nl": "NeXify AI FACTORY B.V. is de door de opdrachtgever opgegeven bedrijfsnaam voor deze presentatie. Pascal Courbois is het aanspreekpunt voor dit project, bereikbaar via mail@nexifyai.cloud.",
-            "fr": "NeXify AI FACTORY B.V. est la dénomination indiquée par le commanditaire pour cette présentation. Pascal Courbois est l’interlocuteur du projet, joignable à mail@nexifyai.cloud.",
-            "en": "NeXify AI FACTORY B.V. is the company name supplied by the project owner for this presentation. Pascal Courbois is the project contact at mail@nexifyai.cloud."
+            "de": "NeXify AI by NeXify, Inhaber Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande. Rechtsform: Eenmanszaak nach niederländischem Recht.",
+            "nl": "NeXify AI by NeXify, eigenaar Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Nederland. Rechtsvorm: eenmanszaak naar Nederlands recht.",
+            "fr": "NeXify AI by NeXify, propriétaire Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Pays-Bas. Forme juridique : eenmanszaak (entreprise individuelle) de droit néerlandais.",
+            "en": "NeXify AI by NeXify, owner Pascal Courbois, Graaf van Loonstraat 1E, 5921 JA Venlo, Netherlands. Legal form: eenmanszaak (sole proprietorship) under Dutch law."
           },
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
@@ -3737,16 +3737,16 @@
         {
           "id": "betreiber",
           "heading": {
-            "de": "Anbieterangaben im Abgleich",
-            "nl": "Aanbiedersgegevens in controle",
-            "fr": "Coordonnées du prestataire en vérification",
-            "en": "Provider details under review"
+            "de": "Kontakt",
+            "nl": "Contact",
+            "fr": "Contact",
+            "en": "Contact"
           },
           "body": {
-            "de": "Registereintrag, ladungsfähige Anschrift, Vertretung und Steuerangaben der B.V. sind noch zu bestätigen. Historische Angaben des früheren Einzelunternehmens werden nicht als Nachweis für die B.V. übernommen.",
-            "nl": "Registergegevens, officieel adres, vertegenwoordiging en fiscale gegevens van de B.V. moeten nog worden bevestigd. Historische gegevens van de eerdere eenmanszaak gelden niet als bewijs voor de B.V.",
-            "fr": "Registre, adresse officielle, représentation et données fiscales de la B.V. restent à confirmer. Les anciennes données de l’entreprise individuelle ne sont pas reprises comme preuves pour la B.V.",
-            "en": "The B.V.’s registration, official address, representation and tax details still need confirmation. Historical sole-trader details are not used as evidence for the B.V."
+            "de": "E-Mail: hello@nexifyai.cloud. Telefon: +31 6 133 188 56. Web: www.nexifyai.cloud.",
+            "nl": "E-mail: hello@nexifyai.cloud. Telefoon: +31 6 133 188 56. Web: www.nexifyai.cloud.",
+            "fr": "E-mail : hello@nexifyai.cloud. Téléphone : +31 6 133 188 56. Web : www.nexifyai.cloud.",
+            "en": "Email: hello@nexifyai.cloud. Phone: +31 6 133 188 56. Web: www.nexifyai.cloud."
           },
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
@@ -3756,16 +3756,16 @@
         {
           "id": "registerangaben",
           "heading": {
-            "de": "Registerangaben und Anschrift",
-            "nl": "Registergegevens en adres",
-            "fr": "Registre et adresse",
-            "en": "Registration and address"
+            "de": "Registerangaben",
+            "nl": "Registergegevens",
+            "fr": "Immatriculation",
+            "en": "Registration"
           },
           "body": {
-            "de": "Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande. Eingetragen bei der Kamer van Koophandel (Handelsregister), Registerstelle Roermond, KvK-Nummer 90483944; Umsatzsteuer-/BTW-Nummer NL865786276B01. Inhaber und Ansprechpartner ist Pascal Courbois. Die Rechtsform (Einzelunternehmen oder B.V.) wird mit dem Registerauszug abgeglichen; bis zur Bestätigung sind diese Angaben vorläufig und kein abschließend freigegebenes Impressum.",
-            "nl": "Graaf van Loonstraat 1E, 5921 JA Venlo, Nederland. Ingeschreven bij de Kamer van Koophandel, kantoor Roermond, KvK-nummer 90483944; btw-nummer NL865786276B01. Eigenaar en aanspreekpunt is Pascal Courbois. De rechtsvorm (eenmanszaak of B.V.) wordt met het handelsregisteruittreksel afgestemd; tot bevestiging zijn deze gegevens voorlopig en geen definitief goedgekeurd colofon.",
-            "fr": "Graaf van Loonstraat 1E, 5921 JA Venlo, Pays-Bas. Inscrite à la Kamer van Koophandel (registre du commerce), bureau de Roermond, numéro KvK 90483944 ; numéro de TVA NL865786276B01. Pascal Courbois est le titulaire et l’interlocuteur. La forme juridique (entreprise individuelle ou B.V.) est vérifiée avec l’extrait du registre ; ces informations sont provisoires jusqu’à confirmation et ne constituent pas des mentions légales définitivement validées.",
-            "en": "Graaf van Loonstraat 1E, 5921 JA Venlo, the Netherlands. Registered with the Kamer van Koophandel (Dutch Chamber of Commerce), Roermond office, KvK number 90483944; VAT number NL865786276B01. Pascal Courbois is the owner and contact. The legal form (sole proprietorship or B.V.) is being reconciled with the register extract; until confirmed these details are provisional and not a fully approved legal notice."
+            "de": "Handelsregister: Kamer van Koophandel, KvK-Nummer 90483944. Umsatzsteuer-Identifikationsnummer: NL865786276B01. Inhaber und verantwortlich: Pascal Courbois.",
+            "nl": "Handelsregister: Kamer van Koophandel, KvK-nummer 90483944. Btw-identificatienummer: NL865786276B01. Eigenaar en verantwoordelijk: Pascal Courbois.",
+            "fr": "Registre du commerce : Kamer van Koophandel, numéro KvK 90483944. Numéro de TVA intracommunautaire : NL865786276B01. Propriétaire et responsable : Pascal Courbois.",
+            "en": "Commercial register: Kamer van Koophandel, KvK number 90483944. VAT identification number: NL865786276B01. Owner and responsible: Pascal Courbois."
           },
           "source_refs": [
             "config/fakten.json",
@@ -3775,20 +3775,20 @@
       ],
       "metadata": {
         "description": {
-          "de": "Ein klarer Markenauftritt braucht eine eindeutige Unternehmenszuordnung. Die vollständigen Anbieterangaben zur NeXify AI FACTORY B.V. werden noch abgeglichen; diese Seite ist kein abschließend freigegebenes Impressum.",
-          "nl": "Een helder merk vraagt om een eenduidige bedrijfsidentiteit. De volledige aanbiedersgegevens van NeXify AI FACTORY B.V. worden nog gecontroleerd; deze pagina is geen definitief goedgekeurd colofon.",
-          "fr": "Une marque claire exige une identité d’entreprise précise. Les coordonnées complètes de NeXify AI FACTORY B.V. sont encore en vérification ; cette page ne constitue pas des mentions légales définitivement validées.",
-          "en": "A clear brand needs an unambiguous company identity. The complete provider details for NeXify AI FACTORY B.V. remain under review; this is not a fully approved legal notice."
+          "de": "Anbieter dieser Website ist NeXify AI by NeXify, Inhaber Pascal Courbois, eine Eenmanszaak nach niederländischem Recht mit Anschrift in Venlo.",
+          "nl": "Aanbieder van deze website is NeXify AI by NeXify, eigenaar Pascal Courbois, een eenmanszaak naar Nederlands recht met adres in Venlo.",
+          "fr": "Ce site est édité par NeXify AI by NeXify, propriétaire Pascal Courbois, une entreprise individuelle (eenmanszaak) de droit néerlandais établie à Venlo.",
+          "en": "This website is provided by NeXify AI by NeXify, owner Pascal Courbois, a sole proprietorship (eenmanszaak) under Dutch law with its address in Venlo."
         },
         "canonical_path": "/impressum",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "noindex,nofollow",
         "title": {
-          "de": "NeXify AI FACTORY B.V. – Unternehmensangaben",
-          "nl": "NeXify AI FACTORY B.V. – bedrijfsgegevens",
-          "fr": "NeXify AI FACTORY B.V. – informations sur l’entreprise",
-          "en": "NeXify AI FACTORY B.V. – company information"
+          "de": "NeXify AI FACTORY – Unternehmensangaben",
+          "nl": "NeXify AI FACTORY – bedrijfsgegevens",
+          "fr": "NeXify AI FACTORY – informations sur l’entreprise",
+          "en": "NeXify AI FACTORY – company information"
         }
       },
       "access": {
@@ -4095,10 +4095,10 @@
         "en": "AI with clear responsibility."
       },
       "summary": {
-        "de": "NeXify AI FACTORY B.V. verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz. Eine KI-Ausgabe ist keine automatische Entscheidung oder Zusage.",
-        "nl": "NeXify AI FACTORY B.V. combineert menselijke vormgeving met AI-ondersteund werk. Aanduiding, broncontrole en goedkeuring horen bij de toepassing. AI-uitvoer is geen automatische beslissing of toezegging.",
-        "fr": "NeXify AI FACTORY B.V. associe création humaine et travail assisté par IA. Identification, contrôle des sources et validations dépendent de l’usage concerné. Une sortie d’IA ne constitue pas un engagement automatique.",
-        "en": "NeXify AI FACTORY B.V. combines human design with AI-assisted work. Disclosure, source checks and approval belong to each use. AI output is not an automatic decision or commitment."
+        "de": "NeXify AI FACTORY verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz. Eine KI-Ausgabe ist keine automatische Entscheidung oder Zusage.",
+        "nl": "NeXify AI FACTORY combineert menselijke vormgeving met AI-ondersteund werk. Aanduiding, broncontrole en goedkeuring horen bij de toepassing. AI-uitvoer is geen automatische beslissing of toezegging.",
+        "fr": "NeXify AI FACTORY associe création humaine et travail assisté par IA. Identification, contrôle des sources et validations dépendent de l’usage concerné. Une sortie d’IA ne constitue pas un engagement automatique.",
+        "en": "NeXify AI FACTORY combines human design with AI-assisted work. Disclosure, source checks and approval belong to each use. AI output is not an automatic decision or commitment."
       },
       "site_context": "nexify",
       "sections": [
@@ -4144,10 +4144,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "NeXify AI FACTORY B.V. verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz. Eine KI-Ausgabe ist keine automatische Entscheidung oder Zusage.",
-          "nl": "NeXify AI FACTORY B.V. combineert menselijke vormgeving met AI-ondersteund werk. Aanduiding, broncontrole en goedkeuring horen bij de toepassing. AI-uitvoer is geen automatische beslissing of toezegging.",
-          "fr": "NeXify AI FACTORY B.V. associe création humaine et travail assisté par IA. Identification, contrôle des sources et validations dépendent de l’usage concerné. Une sortie d’IA ne constitue pas un engagement automatique.",
-          "en": "NeXify AI FACTORY B.V. combines human design with AI-assisted work. Disclosure, source checks and approval belong to each use. AI output is not an automatic decision or commitment."
+          "de": "NeXify AI FACTORY verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz. Eine KI-Ausgabe ist keine automatische Entscheidung oder Zusage.",
+          "nl": "NeXify AI FACTORY combineert menselijke vormgeving met AI-ondersteund werk. Aanduiding, broncontrole en goedkeuring horen bij de toepassing. AI-uitvoer is geen automatische beslissing of toezegging.",
+          "fr": "NeXify AI FACTORY associe création humaine et travail assisté par IA. Identification, contrôle des sources et validations dépendent de l’usage concerné. Une sortie d’IA ne constitue pas un engagement automatique.",
+          "en": "NeXify AI FACTORY combines human design with AI-assisted work. Disclosure, source checks and approval belong to each use. AI output is not an automatic decision or commitment."
         },
         "canonical_path": "/ki-hinweise",
         "canonical_origin": null,
@@ -6677,10 +6677,10 @@
         "en": "TEILEKLAR. Terms with a clear provider."
       },
       "summary": {
-        "de": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Deren vollständige Freigabe steht aus; diese Übersicht bestätigt keine bereits geltenden B.V.-Kaufbedingungen.",
-        "nl": "Handel en garageservice hebben eigen aanbieders-, privacy- en koopdocumenten nodig. De volledige goedkeuring staat nog open; dit overzicht bevestigt geen reeds geldende B.V.-koopvoorwaarden.",
-        "fr": "Commerce et services d’atelier nécessitent leurs propres informations de prestataire, de confidentialité et de vente. Leur validation complète reste ouverte ; cet aperçu ne confirme aucune condition de vente de la B.V. déjà en vigueur.",
-        "en": "Commerce and workshop services require their own provider, privacy and purchase documents. Full approval is pending; this overview does not confirm B.V. purchase terms already in force."
+        "de": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Deren vollständige Freigabe steht aus; diese Übersicht bestätigt keine bereits geltenden Kaufbedingungen.",
+        "nl": "Handel en garageservice hebben eigen aanbieders-, privacy- en koopdocumenten nodig. De volledige goedkeuring staat nog open; dit overzicht bevestigt geen reeds geldende koopvoorwaarden.",
+        "fr": "Commerce et services d’atelier nécessitent leurs propres informations de prestataire, de confidentialité et de vente. Leur validation complète reste ouverte ; cet aperçu ne confirme aucune condition de vente déjà en vigueur.",
+        "en": "Commerce and workshop services require their own provider, privacy and purchase documents. Full approval is pending; this overview does not confirm purchase terms already in force."
       },
       "site_context": "teileklar",
       "sections": [
@@ -6714,10 +6714,10 @@
             "en": "Keep the company identity review explicit"
           },
           "body": {
-            "de": "TEILEKLAR bleibt ein eigenständiger Handels- und Werkstattbereich im NeXify-Markenauftritt. Historische Einzelunternehmensdaten werden nicht auf NeXify AI FACTORY B.V. übertragen. Die konkrete Anbieterzuordnung muss vor einem Kauf bestätigt sein.",
-            "nl": "TEILEKLAR blijft een afzonderlijk handels- en garageonderdeel binnen het NeXify-merk. Historische eenmanszaakgegevens worden niet overgezet naar NeXify AI FACTORY B.V. Vóór aankoop moet de concrete aanbieder bevestigd zijn.",
-            "fr": "TEILEKLAR reste un espace distinct de commerce et d’atelier dans la présentation NeXify. Les anciennes données d’entreprise individuelle ne sont pas transférées à NeXify AI FACTORY B.V. Le prestataire précis doit être confirmé avant tout achat.",
-            "en": "TEILEKLAR remains a distinct commerce and workshop area within the NeXify brand. Historical sole-trader details are not transferred to NeXify AI FACTORY B.V. The specific provider must be confirmed before purchase."
+            "de": "TEILEKLAR bleibt ein eigenständiger Handels- und Werkstattbereich im NeXify-Markenauftritt. Historische Einzelunternehmensdaten werden nicht auf NeXify AI FACTORY übertragen. Die konkrete Anbieterzuordnung muss vor einem Kauf bestätigt sein.",
+            "nl": "TEILEKLAR blijft een afzonderlijk handels- en garageonderdeel binnen het NeXify-merk. Historische eenmanszaakgegevens worden niet overgezet naar NeXify AI FACTORY Vóór aankoop moet de concrete aanbieder bevestigd zijn.",
+            "fr": "TEILEKLAR reste un espace distinct de commerce et d’atelier dans la présentation NeXify. Les anciennes données d’entreprise individuelle ne sont pas transférées à NeXify AI FACTORY Le prestataire précis doit être confirmé avant tout achat.",
+            "en": "TEILEKLAR remains a distinct commerce and workshop area within the NeXify brand. Historical sole-trader details are not transferred to NeXify AI FACTORY The specific provider must be confirmed before purchase."
           },
           "source_refs": [
             "docs/09-final/08-recht-und-compliance.md",
@@ -6728,10 +6728,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Deren vollständige Freigabe steht aus; diese Übersicht bestätigt keine bereits geltenden B.V.-Kaufbedingungen.",
-          "nl": "Handel en garageservice hebben eigen aanbieders-, privacy- en koopdocumenten nodig. De volledige goedkeuring staat nog open; dit overzicht bevestigt geen reeds geldende B.V.-koopvoorwaarden.",
-          "fr": "Commerce et services d’atelier nécessitent leurs propres informations de prestataire, de confidentialité et de vente. Leur validation complète reste ouverte ; cet aperçu ne confirme aucune condition de vente de la B.V. déjà en vigueur.",
-          "en": "Commerce and workshop services require their own provider, privacy and purchase documents. Full approval is pending; this overview does not confirm B.V. purchase terms already in force."
+          "de": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Deren vollständige Freigabe steht aus; diese Übersicht bestätigt keine bereits geltenden Kaufbedingungen.",
+          "nl": "Handel en garageservice hebben eigen aanbieders-, privacy- en koopdocumenten nodig. De volledige goedkeuring staat nog open; dit overzicht bevestigt geen reeds geldende koopvoorwaarden.",
+          "fr": "Commerce et services d’atelier nécessitent leurs propres informations de prestataire, de confidentialité et de vente. Leur validation complète reste ouverte ; cet aperçu ne confirme aucune condition de vente déjà en vigueur.",
+          "en": "Commerce and workshop services require their own provider, privacy and purchase documents. Full approval is pending; this overview does not confirm purchase terms already in force."
         },
         "canonical_path": "/teileklar/rechtliches",
         "canonical_origin": null,
