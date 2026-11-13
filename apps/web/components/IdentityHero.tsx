@@ -46,7 +46,7 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
    </div>
    <div className="identity-media" data-testid="hero-media">
     <figure className="identity-hero-photo" data-testid="hero-photo">
-     <AtelierFilm hero locale={locale} asset={{src:'/media/home-review/pascal-studio-scene-original-20261109.mp4',poster:brandImages.home.src,posterAlt:imageAlt(brandImages.home,locale),width:1280,height:720,title:t.scene,hasAudio:true,autoplayWithAudio:true,playOnce:true}}/>
+     <AtelierFilm hero locale={locale} asset={{src:'/media/scenes/eingangshalle-20261113.mp4',poster:brandImages.entrance.src,posterAlt:imageAlt(brandImages.entrance,locale),width:1280,height:720,title:t.scene,hasAudio:true,autoplayWithAudio:true,playOnce:true}}/>
     </figure>
    </div>
   </div>
