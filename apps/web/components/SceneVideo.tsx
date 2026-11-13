@@ -27,6 +27,7 @@ export function SceneVideo({src, locale}: {src: string; locale: string}) {
     if (!node) return;
     setStarted(true);
     node.muted = false;
+    node.focus();
     node.play().catch(() => setStarted(false));
   };
   return <>
