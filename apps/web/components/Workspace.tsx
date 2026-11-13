@@ -15,6 +15,7 @@ import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
 import {ActionButton,type ActionVariant} from './ActionControl';
 import ProjectFilesPanel from './ProjectFilesPanel';
+import './ShellAtelier.css';
 
 type Intent = "choose" | "quote" | "booking" | "marketing";
 type Message = {role:"user"|"assistant"; text?:string; intent?:Intent; label?:string};

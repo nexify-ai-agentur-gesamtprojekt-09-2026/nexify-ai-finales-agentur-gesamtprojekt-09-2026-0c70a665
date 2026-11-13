@@ -24,12 +24,12 @@ const subtitles:Record<Locale,string>={
  en:'Websites, apps, shops and AI – shaped around what your business actually needs.',
 };
 const bodies:Record<Locale,string>={
- de:'Pascal begleitet Ihr Projekt persönlich. Oracle hilft Ihnen, die Idee jetzt zu ordnen und den nächsten Schritt vorzubereiten.',
- nl:'Pascal begeleidt uw project persoonlijk. Oracle helpt u uw idee te ordenen en de volgende stap voor te bereiden.',
- fr:'Pascal accompagne personnellement votre projet. Oracle vous aide à structurer votre idée et à préparer la prochaine étape.',
- en:'Pascal guides your project personally. Oracle helps you shape your idea and prepare the next step.',
+ de:'Höchste Qualität zu einem fairen Preis. Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe.',
+ nl:'Topkwaliteit voor een eerlijke prijs. Pascal begeleidt uw project persoonlijk, van het eerste gesprek tot de oplevering.',
+ fr:'La plus haute qualité à un prix juste. Pascal accompagne personnellement votre projet, du premier échange à la remise.',
+ en:'The highest quality at a fair price. Pascal guides your project personally, from the first conversation to handover.',
 };
-const primaryCta:Record<Locale,string>={de:'Mit Oracle beginnen',nl:'Begin met Oracle',fr:'Commencer avec Oracle',en:'Start with Oracle'};
+const primaryCta:Record<Locale,string>={de:'Vorhaben schildern',nl:'Uw plan beschrijven',fr:'Décrire votre projet',en:'Describe your project'};
 
 export default function IdentityHero({locale,page,video:_video}:{locale:Locale;page:PublicPage;video?:PublicVideo}){
  const t=copy[locale];

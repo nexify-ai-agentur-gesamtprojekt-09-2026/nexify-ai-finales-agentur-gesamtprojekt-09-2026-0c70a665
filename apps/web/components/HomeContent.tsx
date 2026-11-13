@@ -48,19 +48,15 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
    </SiteLink>)}
   </nav>
   <section id="leistungen" className="hc-section hc-container hc-service-story" aria-labelledby="hc-services-title">
-   <div className="hc-service-layout"><header className="hc-section-heading"><span className="hc-kicker">{t.serviceKicker}</span><h2 id="hc-services-title">{t.serviceTitle}</h2><p>{t.serviceBody}</p><SiteLink href="/kontakt" className="hc-text-link">{t.offerCta}<DetailArrow/></SiteLink></header>
+   <div className="hc-service-layout"><header className="hc-section-heading"><span className="hc-kicker">{t.serviceKicker}</span><h2 id="hc-services-title">{t.serviceTitle}</h2><p>{t.serviceBody}</p><SiteLink href="/kontakt" className="hc-text-link">{t.offerCta}<DetailArrow/></SiteLink><figure className="hc-plate hc-plate-services"><img src={brandImages.atelier.src} srcSet={srcSetFor(brandImages.atelier.src)} sizes="(max-width: 820px) 100vw, 40vw" width="2000" height="1125" alt={imageAlt(brandImages.atelier,locale)} loading="lazy" decoding="async"/></figure></header>
    <div className="hc-service-list">{t.offers.map(([title,lead,...rest],i)=><details className="hc-service-detail" key={title} open={i===0}>
     <summary><span><strong className="hc-service-name">{title}</strong><span className="hc-service-lead">{lead}</span></span><svg className="hc-disclosure-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary>
     <div className="hc-service-body"><ul>{rest.slice(0,3).map(item=><li key={item}>{item}</li>)}</ul><p className="hc-caption">{rest[3]}</p><SiteLink href={services[i]} className="hc-text-link">{t.serviceLink}<DetailArrow/></SiteLink></div>
    </details>)}</div></div>
   </section>
-  <section id="sichtbarkeit" className="hc-section hc-container hc-visibility" aria-labelledby="hc-visibility-title">
-   <header className="hc-section-heading"><span className="hc-kicker">SEO · GEO · {t.visibility.items[2][0]}</span><h2 id="hc-visibility-title">{t.visibility.title}</h2><p className="hc-section-lead">{t.visibility.lead}</p><p>{t.visibility.body}</p></header>
-   <div className="hc-visibility-grid">{t.visibility.items.map(([name,title,body])=><article key={name}><span className="hc-kicker">{name}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
-   <SiteLink href="/kontakt" className="hc-text-link">{t.visibility.cta}<DetailArrow/></SiteLink>
-  </section>
   <section id="zusammenarbeit" className="hc-section hc-process hc-container" aria-labelledby="hc-process-title">
    <header className="hc-section-heading"><div><span className="hc-kicker">{t.processKicker}</span><h2 id="hc-process-title">{t.processTitle}</h2></div><p>{t.processBody}</p></header>
+   <figure className="hc-plate hc-plate-process"><img src={brandImages.welcome.src} srcSet={srcSetFor(brandImages.welcome.src)} sizes="(max-width: 820px) 100vw, 80vw" width="2000" height="1125" alt={imageAlt(brandImages.welcome,locale)} loading="lazy" decoding="async"/></figure>
    <ol>{t.steps.map(([title,body])=><li key={title}><h3>{title}</h3><p>{body}</p></li>)}</ol>
   </section>
   <section id="produktwelt" className="hc-section hc-container hc-product-story" aria-labelledby="hc-products-title">
