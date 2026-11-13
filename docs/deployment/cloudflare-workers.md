@@ -58,8 +58,12 @@ Shop-Daten, Verhalten auf echter Cloudflare-Infrastruktur, Lastverhalten.
 2. Build: `pnpm install --frozen-lockfile --ignore-scripts && pnpm cf:build`;
    Deploy: `npx wrangler deploy`.
 3. Auf der `workers.dev`-Adresse die Tabelle oben wiederholen und Rechenzeit messen.
-4. Erst danach Domain zuweisen. Rückweg: Domain wieder vom Worker lösen; bestehende
-   Auslieferungen bleiben unberührt.
+4. Domain erst nach technischer und fachlicher Abnahme zuweisen. Zwingend vorher:
+   Shop-API-Ziel und Worker-Variablen angebunden; Browser-Sichtprüfung, Formularversand
+   und Chat auf der `workers.dev`-Adresse bestanden; Rechenzeit unter Last auf Cloudflare
+   gemessen; Umschaltung zuerst mit einem kleinen Anteil oder einer Testadresse; Rückweg
+   auf die Vercel-Auslieferung einmal praktisch durchgeführt.
+5. Rückweg: Domain wieder vom Worker lösen; bestehende Auslieferungen bleiben unberührt.
 
 ## Speicher (R2, Drive)
 
