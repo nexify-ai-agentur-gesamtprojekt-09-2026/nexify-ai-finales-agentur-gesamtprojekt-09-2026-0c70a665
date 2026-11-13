@@ -55,7 +55,8 @@
  .workspace-shell .home-concept .hc-anchors{width:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:var(--radius-atelier);margin-inline:var(--layout-page-padding)}
  .workspace-shell .home-concept .hc-anchors a{justify-content:space-between;padding-inline:var(--space-3);gap:var(--space-2);border-radius:var(--radius-karte);text-wrap:nowrap}
 }
-@container home (max-width:360px){.workspace-shell .home-concept .hc-anchors{grid-template-columns:minmax(0,1fr)}}
+@container home (max-width:376px){.workspace-shell .home-concept .hc-anchors{grid-template-columns:minmax(0,1fr)}}
+.workspace-shell .home-concept .atelier-film-controls input[type='range']{min-height:var(--target-min)}
 
 /* R5 Abschnittsrhythmus: Lichtlinie mit Lime-Kern und Lichtfeld, je Abschnitt auf wechselnder Seite. */
 .workspace-shell .home-concept .hc-section{position:relative;isolation:isolate}
