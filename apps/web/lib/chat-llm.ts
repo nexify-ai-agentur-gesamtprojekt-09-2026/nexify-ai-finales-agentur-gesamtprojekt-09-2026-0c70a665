@@ -16,7 +16,7 @@
  *   CHAT_MODEL_ID          nur zulässig, wenn identisch mit dem Policy-Modell; jede Abweichung
  *                          macht den Chat unverfügbar (kein stiller Ersatz).
  *
- * Router-Name: Der 9router führt das Policy-Modell unter `ds/deepseek-v4.1-flash` und
+ * Router-Name: Der 9router führt das Policy-Modell unter `openrouter/deepseek-v4.1-flash` und
  * lehnt die Policy-Kennung mit HTTP 400 ab (gemessen 13.11.2026). Gesendet wird deshalb
  * der Router-Name; Protokoll und Ablage führen weiter die Policy-Kennung. Vom Inhaber am
  * 13.11.2026 geprüft und freigegeben. Der Router bietet keinen datierten Stand (-1017) an.
@@ -29,7 +29,7 @@
 const POLICY_MODEL_ID = 'deepseek/deepseek-v4.1-flash-1017';
 const POLICY_REASONING_EFFORT = 'high';
 // Name, unter dem der 9router das Policy-Modell führt. Fest, nicht per ENV änderbar.
-const ROUTER_MODEL_NAME = 'ds/deepseek-v4.1-flash';
+const ROUTER_MODEL_NAME = 'openrouter/deepseek-v4.1-flash';
 
 export function chatLlmConfigured(): boolean {
   return Boolean((process.env.CHAT_COMPLETIONS_URL || process.env.ROUTER_URL) && process.env.ROUTER_KEY);

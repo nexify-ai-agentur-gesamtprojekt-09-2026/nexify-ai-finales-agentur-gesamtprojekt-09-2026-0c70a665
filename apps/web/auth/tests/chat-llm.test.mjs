@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {chatModelId,routerModelName,streamChatCompletion,generateChatCompletion} from '../../lib/chat-llm.ts';
 
 const POLICY='deepseek/deepseek-v4.1-flash-1017';
-const ROUTER_NAME='ds/deepseek-v4.1-flash';
+const ROUTER_NAME='openrouter/deepseek-v4.1-flash';
 const sse=(...events)=>new Response(new ReadableStream({start(c){const e=new TextEncoder();for(const x of events)c.enqueue(e.encode(x));c.close();}}),{status:200});
 const delta=text=>'data: '+JSON.stringify({choices:[{delta:{content:text}}]})+'\n';
 function withEnv(env,run){
