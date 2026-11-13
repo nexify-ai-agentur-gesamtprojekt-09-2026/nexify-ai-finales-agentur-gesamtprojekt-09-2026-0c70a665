@@ -117,7 +117,7 @@ eine JSON-Zeile im Laufzeitprotokoll der Funktion (Vercel → Projekt → Logs, 
 | `invalid_endpoint` | Adresse ist keine gültige http(s)-URL | `ROUTER_URL` prüfen (vollständig, mit `https://`) |
 | `network` + `network_code` | Verbindung kommt nicht zustande (`ENOTFOUND` = Name unbekannt, `ECONNREFUSED` = Port zu, `UND_ERR_CONNECT_TIMEOUT` = nicht erreichbar, Zertifikatscodes = TLS) | Router muss aus dem Internet erreichbar sein, nicht nur im eigenen Netz |
 | `timeout` | keine vollständige Antwort innerhalb von 50 s | Router-Last und Modellverfügbarkeit prüfen |
-| `upstream_http` + `status` | Router antwortet mit Fehler (`401`/`403` Schlüssel, `404` Pfad – meist fehlt `/v1`, `429` Limit/Guthaben, `5xx` Router/Modell) | je nach Status |
+| `upstream_http` + `status` | Router antwortet mit Fehler (`400` Anfrage abgelehnt – z. B. Modellname dem Router unbekannt, so gemessen am 13.11.2026 und mit #106 behoben; `401`/`403` Schlüssel; `404` Pfad – meist fehlt `/v1`; `429` Limit/Guthaben; `5xx` Router/Modell) | je nach Status |
 | `invalid_response` | Status 200, aber kein Chat-Format (z. B. HTML-Seite des Routers) | `ROUTER_URL` zeigt nicht auf die OpenAI-kompatible Schnittstelle |
 | `upstream_stream_error` | Router meldet einen Fehler innerhalb der Antwort | Modellname/Guthaben im Router prüfen |
 | `empty_response` / `token_budget` | kein Antworttext / Limit durch Denk-Tokens aufgebraucht | Modell- und Limit-Einstellung im Router prüfen |
