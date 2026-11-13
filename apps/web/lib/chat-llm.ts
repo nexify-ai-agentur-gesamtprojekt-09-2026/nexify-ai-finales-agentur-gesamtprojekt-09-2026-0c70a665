@@ -213,15 +213,29 @@ export async function* streamChatCompletion(
 
   // Manche Router ignorieren stream:true und liefern eine einzelne JSON-Antwort.
   if (contentType === 'json') {
-    let raw: string;
+    // Schrittweise lesen und bei Überschreitung abbrechen, damit die Grenze auch den Speicher begrenzt.
+    let raw = '';
+    const jsonReader = res.body.getReader();
+    const jsonDecoder = new TextDecoder('utf-8');
     try {
-      raw = await res.text();
+      while (true) {
+        const { value, done } = await jsonReader.read();
+        if (done) break;
+        raw += jsonDecoder.decode(value, { stream: true });
+        if (raw.length > MAX_JSON_BODY_CHARS) {
+          void jsonReader.cancel().catch(() => {});
+          throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
+        }
+      }
+      raw += jsonDecoder.decode();
     } catch (error) {
       throw transportError(error, true);
+    } finally {
+      jsonReader.releaseLock();
     }
     let json: unknown;
     try {
-      json = JSON.parse(raw.slice(0, MAX_JSON_BODY_CHARS));
+      json = JSON.parse(raw);
     } catch {
       throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
     }
@@ -287,11 +301,13 @@ export async function* streamChatCompletion(
   } finally {
     reader.releaseLock();
   }
+  // Ein Fehler des Routers mitten in der Antwort ist eine Störung, auch wenn schon Text kam:
+  // eine abgebrochene Antwort wird nicht als vollständig ausgegeben.
+  if (upstreamError) throw new ChatLlmError('chat_llm_upstream_stream_error', 'upstream_stream_error', { status: res.status, contentType });
   if (produced) return;
   // Ohne Antworttext wird nie leer geantwortet: die Ursache wird benannt.
   // Das Limit wurde durch Denk-Tokens aufgebraucht, bevor Text entstand.
   if (truncated) throw new ChatLlmError('chat_llm_token_budget_exhausted', 'token_budget', { contentType });
-  if (upstreamError) throw new ChatLlmError('chat_llm_upstream_stream_error', 'upstream_stream_error', { status: res.status, contentType });
   if (events === 0) throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
   throw new ChatLlmError('chat_llm_empty_response', 'empty_response', { status: res.status, contentType });
 }

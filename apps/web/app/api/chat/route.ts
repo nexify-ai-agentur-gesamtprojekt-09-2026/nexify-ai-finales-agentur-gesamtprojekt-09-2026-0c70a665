@@ -77,10 +77,12 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
 }
 
 /** Speicherfehler dürfen die Antwort nicht verhindern und nicht als Modellfehler erscheinen. */
-async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number }): Promise<T> {
+async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean }): Promise<T> {
   try {
     return await run();
   } catch (error) {
+    // Merken, damit die Antwort nicht behauptet, das Gespräch sei gespeichert.
+    context.storeFailed = true;
     logChatFailure('persistence', error, { ...context, step });
     return fallback;
   }
@@ -138,12 +140,13 @@ export async function POST(request: Request): Promise<Response> {
   const wantsStream = req.stream !== false;
 
   const startedAt = Date.now();
-  const logContext = { stream: wantsStream, startedAt };
+  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean } = { stream: wantsStream, startedAt };
   const requestedId = typeof req.conversationId === 'string' ? req.conversationId.slice(0, 80) : undefined;
   const localId = requestedId?.startsWith('local-') ? requestedId : `local-${crypto.randomUUID()}`;
   const conversationId =
     (await persistenceStep('conversation', () => ensureConversation(requestedId, { locale, pagePath }), localId, logContext)) || localId;
-  const persisted = supabaseConfigured() && !conversationId.startsWith('local-');
+  // Gespeichert gilt nur, solange kein Schreibschritt fehlgeschlagen ist.
+  const isPersisted = () => supabaseConfigured() && !conversationId.startsWith('local-') && !logContext.storeFailed;
 
   const history = await loadHistory(conversationId);
   await persistenceStep('user_message', () => appendMessage(conversationId, 'user', message, null), undefined, logContext);
@@ -178,7 +181,7 @@ export async function POST(request: Request): Promise<Response> {
       conversationId,
       message: { role: 'assistant', content: visible, created_at: new Date().toISOString() },
       offer: offer ?? undefined,
-      persisted,
+      persisted: isPersisted(),
       model,
     };
     return Response.json(dto, { headers: { 'Cache-Control': 'no-store' } });
@@ -191,7 +194,7 @@ export async function POST(request: Request): Promise<Response> {
       const send = (ev: ChatStreamEvent) => controller.enqueue(encoder.encode(encodeSseEvent(ev)));
       let full = '';
       try {
-        send({ type: 'start', conversationId, model, persisted });
+        send({ type: 'start', conversationId, model, persisted: isPersisted() });
         try {
           for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
             full += chunk;
