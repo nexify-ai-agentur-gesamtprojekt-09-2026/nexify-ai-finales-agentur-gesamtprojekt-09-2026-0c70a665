@@ -62,7 +62,8 @@ PGRST_DB_SCHEMAS="public,chat"
 1. **DB vorbereiten:** Migration `0001_chat_offers_orders.sql` einspielen, `PGRST_DB_SCHEMAS="public,chat"`
    setzen, PostgREST neu laden.
 2. **Env setzen** (Vercel-Projekt `frontend` / lokal `apps/web/.env.local`), siehe `apps/web/.env.example`:
-   - Pflicht Chat: `ROUTER_URL`, `ROUTER_KEY` (optional `CHAT_MODEL_ID`).
+   - Pflicht Chat: `ROUTER_URL`, `ROUTER_KEY` (optional `CHAT_MODEL_ID`). `ROUTER_URL` muss aus dem Internet
+     erreichbar sein und auf die OpenAI-kompatible Basis zeigen (in der Regel mit `/v1`).
    - Pflicht Angebot/Bestellung/Persistenz: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
    - Mail: `RESEND_API_KEY`, `RESEND_FROM` (bzw. `RESEND_FROM_ADDRESS`).
    - Optional: `ORDER_DISPATCH_URL`/`_TOKEN`, Clerk, Sentry/PostHog.
@@ -80,6 +81,25 @@ PGRST_DB_SCHEMAS="public,chat"
 - Ohne Supabase: Chat läuft mit `persisted:false`; Offer/Order-Endpunkte = 503.
 - Ohne Resend: Bestellung bleibt gültig, Mail wird sauber übersprungen (`mailSkipped:true`), Audit-Ereignis `mail_skipped`.
 - Rechnung nur, wenn `total_cents` feststeht (sonst „folgt nach Umfangsklärung").
+
+### Gesprächsführung und Leitplanken (Stand 13.11.2026)
+
+Quelle: `apps/web/lib/chat-guidance.ts`, Version `oracle-public-guide/1.0.0` (steht im `start`-Ereignis
+und in der JSON-Antwort als `guidance`). Tests: `apps/web/auth/tests/chat-guidance.test.mjs`,
+`chat-route-guidance.test.mjs`, `chat-client.test.mjs`.
+
+| Leitplanke | Wie durchgesetzt |
+| --- | --- |
+| Keine Preise ohne Freigabe | Serverseitig: Ein Satz mit einem Geldbetrag, der weder in `APPROVED_PRICE_FACTS` steht noch vom Besucher genannt wurde, wird vor der Auslieferung durch einen festen Hinweis ersetzt. Die Liste ist leer, weil es keinen freigegebenen Preiskatalog gibt. Einträge dürfen nur aus `config/fakten.json`/`config/api-prepaid.json` stammen (Test). |
+| Gibt sich nicht als Mensch aus | Serverseitig: Eine solche Aussage wird durch die wahre Angabe ersetzt. Zusätzlich Vorgabe an das Modell, auf Nachfrage wahrheitsgemäß zu antworten. |
+| Briefing statt Rohdaten | Serverseitig: Datenblöcke werden aus dem Text gelöst, das Briefing begrenzt, auf bekannte Leistungen gefiltert und als eigenes Ereignis `briefing` gesendet. |
+| Angebotsentwurf ohne Preis | Serverseitig: `unit_cents` wird immer auf `null` gesetzt. |
+| Verlauf nur als Kontext | Serverseitig: höchstens 16 Beiträge / 12.000 Zeichen, nur `user`/`assistant`, keine Steuerzeichen. |
+| Keine Referenzen, Zusagen, Rechtsberatung; eine Frage je Antwort | Nur Vorgabe an das Modell. Wirkt, soweit das Modell ihr folgt; nicht technisch erzwungen. |
+
+Ausgelöste Leitplanken stehen als `{"event":"chat_guardrail",...}` im Protokoll (nur Kennwörter und Anzahl).
+Fehlen `ROUTER_URL`/`ROUTER_KEY`, antwortet die Route mit 503 und die Oberfläche wechselt sichtbar auf die
+Orientierung anhand der Website mit direktem Kontaktweg.
 
 ### Störungsdiagnose `/api/chat` (Stand 13.11.2026)
 
@@ -114,8 +134,17 @@ Nutzertext oder Konversations-ID. Geprüft mit `apps/web/auth/tests/chat-llm.tes
 - **XRechnung-Umfang:** `tools/rechnung.mjs` erzeugt ein minimales UBL-2.1-Gerüst **ohne** `cac:TaxTotal`
   (0 % USt, keine Verkäufer-USt-IdNr./Zahlungsbedingungen). Für eine EN16931-/fiskalisch vollständige
   Rechnung muss der XML-Umfang erweitert und steuerlich/rechtlich freigegeben werden.
-- **UI-Anbindung:** Die Endpunkte sind per API vollständig nutzbar, aber die öffentliche Chat-Oberfläche
-  nutzt derzeit `/api/agent-chat` (Agent-Runtime); ein UI-Button „verbindlich bestellen" auf diesen Fluss
-  ist noch nicht verdrahtet (Frontend-Aufgabe, kein Backend-Blocker).
+- **UI-Anbindung (Stand 13.11.2026):** Die öffentliche Chat-Oberfläche (`PublicOrientationChat`) führt das
+  Gespräch jetzt über `/api/chat` und endet in einem bearbeitbaren Briefing, das der Besucher selbst über das
+  Kontaktformular absendet. Ein UI-Button „verbindlich bestellen" ist weiterhin **nicht** verdrahtet; der
+  Angebots-/Bestellweg bleibt reine API. `/api/agent-chat` bleibt unverändert bestehen, wird von der
+  Oberfläche aber nicht mehr aufgerufen.
+- **Kostendeckel:** Jede Besuchernachricht löst einen bezahlten Modellaufruf aus. Die Route begrenzt je
+  Absender (8 je Minute, 60 je Stunde, **je Funktionsinstanz**) und nimmt Browser-Aufrufe nur von der eigenen
+  Seite an. Das ist ein Missbrauchsschutz, kein Budget. Ein verbindliches Ausgabenlimit muss am Router-Schlüssel
+  gesetzt werden (`config/llm-policy.json` → `request_limits_and_authorized_funding_required`).
+- **Echter Router ungeprüft:** Gesprächsführung, Leitplanken und Oberfläche sind gegen einen lokalen
+  Stellvertreter-Endpunkt geprüft. Ob das Policy-Modell der Vorgabe folgt (eine Frage je Antwort, Briefing-Block
+  im verlangten Format), ist erst mit dem echten Router prüfbar.
 - **Revolut-Zahlung:** nur im separaten Prepaid-/API-Billing geplant (`config/api-prepaid.json`),
   nicht Teil dieses Flusses; Zahlungs-Worker noch nicht gebaut.

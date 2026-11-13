@@ -1450,7 +1450,7 @@
     "apps/site/tests/auth.test.mjs": "2390a03695815b7e7112bf93d7e3aae603d6bffb494cadc61b82ba6d55e14d61",
     "apps/web/components/OracleCompanion.tsx": "945f8b24097fd7174998c6b9eb38c9de18a01679b022b3d5ef381d9848f6c26b",
     "apps/web/components/OracleCompanion.css": "4f14104fb2ecf5a48deaf590ef90c281a14f29b82c102fac26b59d36938a53a2",
-    "apps/web/components/PublicOrientationChat.tsx": "76610423000e140c94740c54f17026829702c52d43abed35296957f11ff45524",
+    "apps/web/components/PublicOrientationChat.tsx": "11471874e8111a54c750348c797319bbdceddde4dc9f4d8b4a32ada7f64c0cba",
     "apps/web/lib/i18n.ts": "e57b9470332d94b252177cceb2784b2c7f30b0393d193bd5e50b0d372d870213",
     "apps/web/public/media/presenters/ai-fly-oracle-avatar-9f705e5b.png": "9f705e5b1d1ef8b1024175617c5a18a63fd907eeef6049f9a328a073330f2f66",
     "apps/site/tests/browser-oracle-companion.mjs": "1fd681d90180385450f8ac117f4bc1b1d3d101bdbeefc597c8336ec70ce82c98",

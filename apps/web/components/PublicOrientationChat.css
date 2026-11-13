@@ -218,9 +218,11 @@
 .workspace-shell .aifly-panel .orientation-starter-copy small { font-size:12px; line-height:1.4; }
 .workspace-shell .aifly-panel .orientation-starter-index { align-self:center; color:var(--color-atelier-champagne); }
 .workspace-shell .aifly-panel .orientation-starter svg { color:var(--color-marke-lime); }
-.orientation-path { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-3); color:var(--color-text-tertiaer); font-size:11px; line-height:1.4; }
-.orientation-path span { display:inline-flex; align-items:center; gap:5px; }
-.orientation-path span:not(:last-child)::after { content:'→'; margin-inline-start:var(--space-2); color:var(--color-atelier-champagne); }
+.orientation-path { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-3); margin:0; padding:0; list-style:none; color:var(--color-text-tertiaer); font-size:11px; line-height:1.4; }
+.orientation-path li { display:inline-flex; align-items:center; gap:5px; }
+.orientation-path li:not(:last-child)::after { content:'→'; margin-inline-start:var(--space-2); color:var(--color-atelier-champagne); }
+.orientation-path li[data-state=current] { color:var(--color-text-primaer); font-weight:600; }
+.orientation-path li[data-state=current] small, .orientation-path li[data-state=done] small { color:var(--color-marke-lime); }
 .orientation-path small { color:var(--color-atelier-champagne); font:500 10px/1.4 var(--font-mono); }
 .workspace-shell .aifly-panel .orientation-composer { border-color:var(--color-linie-mittel); box-shadow:inset 0 1px 0 var(--color-atelier-glass-edge); }
 .workspace-shell .aifly-panel .orientation-composer:focus-within { border-color:var(--color-marke-lime); }
@@ -288,3 +290,39 @@
 .workspace-shell .aifly-panel .orientation-composer button.primary-button:not(:disabled),
 .workspace-shell .aifly-panel .orientation-composer button.primary-button:disabled{grid-column:2;min-height:var(--target-min);padding:var(--space-2) var(--space-4);border:0;border-radius:var(--radius-pille);background:var(--color-marke-lime);color:var(--color-text-auf-lime);font-weight:600;}
 .workspace-shell .aifly-panel .orientation-composer button.primary-button:disabled{background:var(--color-atelier-raised);color:var(--color-text-tertiaer);}
+
+/* Geführtes Gespräch: Zustände lädt, antwortet, angehalten, Störung, Wiederholung. */
+.orientation-message > p + p { margin-top:var(--space-2); }
+.orientation-message[data-state=streaming] > p:last-of-type::after { content:''; display:inline-block; width:2px; height:1em; margin-inline-start:3px; vertical-align:-2px; background:var(--color-marke-lime); animation:orientation-caret 1s steps(2,start) infinite; }
+.orientation-message-state { color:var(--color-text-tertiaer); font-size:var(--type-small-size); }
+.orientation-thinking p { display:flex; align-items:center; min-height:24px; }
+.orientation-dots { display:inline-flex; gap:5px; }
+.orientation-dots i { width:6px; height:6px; border-radius:50%; background:var(--color-marke-lime); opacity:.35; animation:orientation-dot 1.2s ease-in-out infinite; }
+.orientation-dots i:nth-child(2) { animation-delay:.15s; }
+.orientation-dots i:nth-child(3) { animation-delay:.3s; }
+@keyframes orientation-dot { 0%,80%,100% { opacity:.3; transform:translateY(0); } 40% { opacity:1; transform:translateY(-3px); } }
+@keyframes orientation-caret { to { visibility:hidden; } }
+.orientation-problem { display:grid; gap:var(--space-3); padding:var(--space-4); border:1px solid color-mix(in srgb,var(--color-status-warning) 55%,var(--color-linie-mittel)); border-radius:var(--radius-karte); background:color-mix(in srgb,var(--color-status-warning) 7%,var(--color-graphit-850)); }
+.orientation-problem p { margin:0; color:var(--color-text-primaer); font-size:var(--type-small-size); line-height:1.55; }
+.orientation-unavailable { border-color:var(--color-linie-mittel); background:var(--color-graphit-850); }
+.orientation-problem-actions, .orientation-followup { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-2); }
+.orientation-problem-actions > *, .orientation-followup > * { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); min-height:var(--target-min); min-width:var(--target-min); padding-inline:var(--space-4); font-size:var(--type-small-size); font-weight:600; text-decoration:none; }
+.orientation-followup { justify-content:space-between; }
+.orientation-followup .orientation-restart { margin-inline-start:auto; padding-inline:var(--space-2); border:0; background:transparent; color:var(--color-text-tertiaer); font-weight:500; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.orientation-followup .orientation-restart:hover { color:var(--color-text-primaer); }
+.orientation-problem-actions > *:focus-visible, .orientation-followup > *:focus-visible, .orientation-composer button:focus-visible, .orientation-message a:focus-visible { outline:2px solid var(--color-marke-lime); outline-offset:2px; }
+.orientation-composer-actions { display:flex; align-items:center; justify-content:flex-end; gap:var(--space-3); }
+.orientation-composer-actions button { min-width:var(--target-min); }
+.orientation-counter { margin-inline-end:auto; color:var(--color-text-tertiaer); font:500 11px/1.4 var(--font-mono); }
+.public-orientation > .orientation-status:empty { display:none; }
+.public-orientation > .orientation-status { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.orientation-content, .orientation-message, .orientation-problem, .orientation-brief { min-width:0; }
+.orientation-message p, .orientation-problem p { overflow-wrap:anywhere; }
+@media (max-width: 460px) {
+  .orientation-problem { padding:var(--space-3); }
+  .orientation-problem-actions > * { flex:1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orientation-dots i { animation:none; opacity:.8; }
+  .orientation-message[data-state=streaming] > p:last-of-type::after { animation:none; }
+}
