@@ -2,7 +2,24 @@
 
 Stand 2026-09-29 · Fassung 1.0 · Freigabe der Entscheidungen E1/E3/E4/E5/E6/E12 steht aus (siehe `docs/09-final/08-recht-und-compliance.md`).
 
-## Aktuelle Führungsentscheidung · 04.11.2026
+## Aktuelle Führungsentscheidung · 13.11.2026
+
+Entscheidung des Inhabers Pascal Courbois vom 13.11.2026: Führender Stand ist `main`
+dieses Repositorys; ausgeliefert wird **ausschließlich über Vercel**. Produktion ist das
+Vercel-Projekt `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665-ut7r`
+(Team `nexify-projekte`), das `apps/web` und `apps/shop-api` aus `main` baut; Adresse
+`https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app`. Cloudflare wird als Hosting
+nicht verfolgt; `apps/web/wrangler.jsonc` und `docs/deployment/cloudflare-workers.md`
+sind eine ungenutzte Vorbereitung und kein Auftrag. Die Führungsentscheidung vom
+04.11.2026 (ChatGPT-Sites-Stand) ist im widersprechenden Umfang historisch.
+
+Offen und nicht als erledigt zu behandeln (Stand 13.11.2026): Die Domains
+`nexifyai.de` und `nexifyai.cloud` zeigen per DNS nicht auf dieses Vercel-Projekt; die
+Shop-API antwortet dort mit 503 (Laufzeit-Zugänge fehlen); Indexierung ist aus und das
+Impressum hat keine bestätigten Anbieterangaben. Nachweis:
+`docs/04-betrieb/befund-2026-11-13.md`.
+
+## Frühere Führungsentscheidung · 04.11.2026
 
 Die ausdrückliche Nutzerentscheidung führt diese Website als Arbeits-, Gestaltungs-
 und Migrationsstand: https://nexify-ai-factory-20261101.workspace-vo-0220.chatgpt.site/,
