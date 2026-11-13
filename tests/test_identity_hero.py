@@ -45,9 +45,9 @@ class IdentityHeroTests(unittest.TestCase):
         self.assertNotRegex(css,r'#[0-9a-fA-F]{3,8}\b|rgba?\(')
         # The original personal video is mounted in the hero; the approved photograph remains its poster.
         self.assertNotIn('verified-public-film',component)
-        self.assertIn('brandImages.home',component)
+        self.assertIn('brandImages.entrance',component)
         self.assertIn('AtelierFilm hero',component)
-        self.assertIn('pascal-studio-scene-original-20261109.mp4',component)
+        self.assertIn('eingangshalle-20261113.mp4',component)
         self.assertIn('autoplayWithAudio:true',component)
         original=ROOT/'apps/web/public/media/home-review/pascal-studio-scene-original-20261109.mp4'
         self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(),'027d8152065ea2cd3fd4c79897ba9dc37b42176a7dbdaeda6945fadca7416ae3')
