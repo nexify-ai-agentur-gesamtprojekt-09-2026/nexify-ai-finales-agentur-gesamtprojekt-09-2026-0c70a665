@@ -16,6 +16,8 @@ test('chat JSON and SSE hide provider and transport error details while the serv
     process.env.ROUTER_KEY = 'fixture-key';
     for (const key of ['CHAT_COMPLETIONS_URL', 'CHAT_MODEL_ID', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY']) delete process.env[key];
     const { POST } = await server.ssrLoadModule('/apps/web/app/api/chat/route.ts');
+    const { resetChatRateLimit } = await server.ssrLoadModule('/apps/web/lib/chat-rate-limit.ts');
+    resetChatRateLimit();
     let sent;
     globalThis.fetch = async (_url, init) => {
       sent = JSON.parse(init.body);
@@ -39,6 +41,7 @@ test('chat JSON and SSE hide provider and transport error details while the serv
     ];
     for (const streaming of [false, true]) {
       for (const [fail, expected] of failures) {
+        resetChatRateLimit();
         globalThis.fetch = fail;
         const logged = [];
         console.error = line => { logged.push(line); };
@@ -62,6 +65,7 @@ test('chat JSON and SSE hide provider and transport error details while the serv
         assert.doesNotMatch(logged[0], new RegExp(`${secret}|fixture-key|router\\.invalid|${visitorText}|local-`));
       }
     }
+    resetChatRateLimit();
     // Eine abweichende Modellvorgabe ist eine benannte Ursache und kein unbehandelter Serverfehler.
     process.env.CHAT_MODEL_ID = 'other/model';
     globalThis.fetch = async () => { throw new Error('must not call the provider'); };
