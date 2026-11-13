@@ -11,6 +11,8 @@
  * Störungen: Der Besucher erhält nur den festen Code chat_llm_failed. Die Ursache steht als
  * eine geheimnisfreie JSON-Zeile im Serverprotokoll (siehe logChatFailure).
  * Keine Secrets im Code, keine erfundenen Werte.
+ * Die Modellkennung geht nicht an den Browser (Inhaberentscheidung 13.11.2026, DECISIONS.md D-010);
+ * sie bleibt in der Ablage der Nachricht.
  */
 import type {
   ChatLocale,
@@ -222,7 +224,6 @@ export async function POST(request: Request): Promise<Response> {
       offer: offer ?? undefined,
       briefing: briefing ?? undefined,
       persisted: isPersisted(),
-      model,
       guidance: CHAT_GUIDANCE_VERSION,
     };
     return Response.json(dto, { headers: { 'Cache-Control': 'no-store' } });
@@ -234,7 +235,7 @@ export async function POST(request: Request): Promise<Response> {
     async start(controller) {
       const send = (ev: ChatStreamEvent) => controller.enqueue(encoder.encode(encodeSseEvent(ev)));
       try {
-        send({ type: 'start', conversationId, model, persisted: isPersisted(), guidance: CHAT_GUIDANCE_VERSION });
+        send({ type: 'start', conversationId, persisted: isPersisted(), guidance: CHAT_GUIDANCE_VERSION });
         try {
           for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
             const safe = guard.push(chunk);

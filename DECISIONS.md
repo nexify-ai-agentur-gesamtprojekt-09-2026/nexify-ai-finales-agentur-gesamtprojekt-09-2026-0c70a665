@@ -58,7 +58,9 @@ Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Me
   getroffen und trägt es.
 - **Umfang der Entfernung:** In `apps/web/components/PublicOrientationChat.tsx` entfällt die Zeile
   „NeX Agentic AIFly kann Fehler machen.“ (de/nl/fr/en). An ihrer Stelle steht ein sachlicher Eingabehinweis
-  mit Verweis auf die Datenschutzseite. Sonst wurde nichts entfernt.
+  mit Verweis auf die Datenschutzseite. Außerdem sendet `/api/chat` die Modellkennung nicht mehr an den
+  Browser (bisher im `start`-Ereignis und in der JSON-Antwort); in der Ablage der Nachricht bleibt sie.
+  Sonst wurde nichts entfernt.
 - **Was bewusst bleibt:** (1) Der Assistent gibt sich nicht als Mensch aus: Die Vorgabe verlangt auf Nachfrage
   eine wahrheitsgemäße Antwort, und eine Aussage, ein Mensch zu sein, wird serverseitig durch die wahre Angabe
   ersetzt (`apps/web/lib/chat-guidance.ts`, Tests in `apps/web/auth/tests/chat-guidance.test.mjs`).

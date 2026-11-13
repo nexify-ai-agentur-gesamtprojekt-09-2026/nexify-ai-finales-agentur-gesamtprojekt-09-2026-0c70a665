@@ -97,7 +97,8 @@ export interface ChatResponse {
   briefing?: BriefingDTO;
   /** Wurde in Supabase persistiert? false = DB (noch) nicht konfiguriert. */
   persisted: boolean;
-  model: string;
+  /** Wird seit 13.11.2026 nicht mehr an den Browser gesendet (DECISIONS.md D-010). */
+  model?: string;
   /** Version der Gesprächsführung (lib/chat-guidance.ts). */
   guidance?: string;
 }
@@ -108,7 +109,7 @@ export interface ChatResponse {
  * delta enthält nur bereits geprüften Text; done.message.content ist der vollständige sichtbare Text.
  */
 export type ChatStreamEvent =
-  | { type: 'start'; conversationId: string; model: string; persisted: boolean; guidance?: string }
+  | { type: 'start'; conversationId: string; model?: string; persisted: boolean; guidance?: string }
   | { type: 'delta'; text: string }
   | { type: 'briefing'; briefing: BriefingDTO }
   | { type: 'offer'; offer: OfferDTO }
