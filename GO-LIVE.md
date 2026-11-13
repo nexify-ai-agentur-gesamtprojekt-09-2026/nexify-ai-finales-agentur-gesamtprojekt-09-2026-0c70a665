@@ -112,7 +112,7 @@ eine JSON-Zeile im Laufzeitprotokoll der Funktion (Vercel → Projekt → Logs, 
 
 | `cause` | Bedeutung | Nächster Schritt |
 | --- | --- | --- |
-| `not_configured` | `ROUTER_URL`/`ROUTER_KEY` fehlen | Variablen im Vercel-Projekt setzen, neu ausliefern |
+| `not_configured` | `ROUTER_URL`/`ROUTER_KEY` fehlen | Variablen im Vercel-Projekt setzen, neu ausliefern. Hinweis: Fehlen beide schon beim Eingang, antwortet die Route sofort mit HTTP 503 `chat_llm_not_configured` und schreibt **keine** `chat_failure`-Zeile |
 | `model_policy` | `CHAT_MODEL_ID` weicht vom Policy-Modell ab | Variable entfernen oder exakt auf das Policy-Modell setzen |
 | `invalid_endpoint` | Adresse ist keine gültige http(s)-URL | `ROUTER_URL` prüfen (vollständig, mit `https://`) |
 | `network` + `network_code` | Verbindung kommt nicht zustande (`ENOTFOUND` = Name unbekannt, `ECONNREFUSED` = Port zu, `UND_ERR_CONNECT_TIMEOUT` = nicht erreichbar, Zertifikatscodes = TLS) | Router muss aus dem Internet erreichbar sein, nicht nur im eigenen Netz |

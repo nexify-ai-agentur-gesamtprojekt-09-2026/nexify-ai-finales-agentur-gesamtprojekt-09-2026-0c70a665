@@ -75,6 +75,14 @@ test('every failure gets a distinct, secret-free cause for the server log',()=>w
   assert.deepEqual(await failure(ask),{cause:'upstream_stream_error',status:200,upstream_content_type:'missing'});
   globalThis.fetch=async()=>new Response(JSON.stringify({error:{message:privateDetail}}),{status:200,headers:{'content-type':'application/json'}});
   assert.deepEqual(await failure(ask),{cause:'upstream_stream_error',status:200,upstream_content_type:'json'});
+  // Fehler des Routers, nachdem schon Text kam: Störung statt scheinbar vollständiger Antwort.
+  globalThis.fetch=async()=>sse(delta('Teilantwort'),'data: '+JSON.stringify({error:{message:privateDetail}})+'\n','data: [DONE]\n');
+  assert.deepEqual(await failure(ask),{cause:'upstream_stream_error',status:200,upstream_content_type:'missing'});
+  // Eine übergroße JSON-Antwort wird abgebrochen, nicht vollständig eingelesen.
+  let pulled=0;
+  globalThis.fetch=async()=>new Response(new ReadableStream({pull(c){pulled+=1;c.enqueue(new TextEncoder().encode('x'.repeat(200000)));}}),{status:200,headers:{'content-type':'application/json'}});
+  assert.deepEqual(await failure(ask),{cause:'invalid_response',status:200,upstream_content_type:'json'});
+  assert.ok(pulled<=8,'nach der Grenze wird nicht weitergelesen');
   // Verbindung reisst während der Antwort ab.
   globalThis.fetch=async()=>new Response(new ReadableStream({pull(c){c.error(Object.assign(new Error(privateDetail),{code:'ECONNRESET'}));}}),{status:200});
   assert.deepEqual(await failure(ask),{cause:'stream_interrupted',network_code:'ECONNRESET'});
