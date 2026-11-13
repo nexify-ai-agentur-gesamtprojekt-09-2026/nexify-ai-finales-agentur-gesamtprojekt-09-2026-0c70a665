@@ -65,3 +65,7 @@ apps/shop-api/data/
 
 # Sites static publication output
 /dist/
+
+# Cloudflare Workers (OpenNext) Build-Ausgaben
+apps/web/.open-next/
+apps/web/.wrangler/

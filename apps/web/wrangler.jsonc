@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers hosting for apps/web (OpenNext). Name stays under the
+  // 54-character limit of Workers Builds (register OF-06).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nexify-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
+  "observability": { "enabled": true }
+}
