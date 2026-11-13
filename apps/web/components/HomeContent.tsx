@@ -10,6 +10,7 @@ import copy from '../../../config/home-concept-copy.json';
 import {brandImages,pageImage,imageAlt,srcSetFor} from '../lib/brand-media';
 import './HomeConcept.css';
 import './HomeReference.css';
+import './HomeAtelier.css';
 import HomeEffects from './HomeEffects';
 
 // Home previews and their detail pages share one verified image assignment.
