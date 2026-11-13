@@ -24,7 +24,7 @@ const copy={
     "error": "Die Website-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten. Für die persönliche Projektklärung nutzen Sie bitte die Kontaktseite.",
     "privacy": "Bitte keine Passwörter oder Zahlungsdaten eingeben.",
     "you": "Sie",
-    "assistant": "AIFly ORACLE",
+    "assistant": "Oracle",
     "next": "Zum passenden Angebot",
     "prompt": "Welcher Einstieg von NeXify passt zu meinem Unternehmen?"
   },
@@ -40,7 +40,7 @@ const copy={
     "error": "Het websiteadvies is nu niet bereikbaar. Uw invoer blijft behouden. Gebruik de contactpagina voor een persoonlijk projectgesprek.",
     "privacy": "Voer hier geen wachtwoorden of betaalgegevens in.",
     "you": "U",
-    "assistant": "AIFly ORACLE",
+    "assistant": "Oracle",
     "next": "Naar het passende aanbod",
     "prompt": "Welke eerste stap van NeXify past bij mijn bedrijf?"
   },
@@ -56,7 +56,7 @@ const copy={
     "error": "Le conseil sur le site est momentanément indisponible. Votre saisie est conservée. Utilisez la page de contact pour un échange personnel sur votre projet.",
     "privacy": "Merci de ne saisir ni mot de passe ni données de paiement.",
     "you": "Vous",
-    "assistant": "AIFly ORACLE",
+    "assistant": "Oracle",
     "next": "Vers l’offre adaptée",
     "prompt": "Quelle première étape de NeXify convient à mon entreprise ?"
   },
@@ -72,7 +72,7 @@ const copy={
     "error": "Website guidance is temporarily unavailable. Your input is retained. Please use the contact page for a personal project discussion.",
     "privacy": "Please do not enter passwords or payment details.",
     "you": "You",
-    "assistant": "AIFly ORACLE",
+    "assistant": "Oracle",
     "next": "View the relevant offer",
     "prompt": "Which NeXify starting point suits my business?"
   }
@@ -81,10 +81,10 @@ const copy={
 // Zustände des geführten Gesprächs. Gleicher Schlüsselsatz in allen vier Sprachen.
 type StateCopy={reply:string;thinking:string;failed:string;limited:string;stopped:string;retry:string;contact:string;restart:string;brief:string;briefRequest:string;unavailable:string;counter:string;keys:string};
 const stateCopy:Record<Locale,StateCopy>={
- de:{reply:"Ihre Antwort …",thinking:"AIFly ORACLE antwortet …",failed:"Die Antwort konnte gerade nicht geladen werden. Ihre Nachricht bleibt stehen. Versuchen Sie es erneut oder schreiben Sie Pascal direkt.",limited:"Gerade gehen sehr viele Nachrichten ein. Bitte versuchen Sie es in einer Minute erneut.",stopped:"Antwort angehalten.",retry:"Erneut versuchen",contact:"Kontakt aufnehmen",restart:"Neues Gespräch",brief:"Briefing jetzt erstellen",briefRequest:"Bitte fassen Sie mein Vorhaben jetzt als Briefing zusammen.",unavailable:"Das Gespräch im Chat ist gerade nicht erreichbar. Sie erhalten hier eine Orientierung anhand der Website. Ihr Vorhaben können Sie direkt an Pascal senden.",counter:"Zeichen",keys:"Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile."},
- nl:{reply:"Uw antwoord …",thinking:"AIFly ORACLE antwoordt …",failed:"Het antwoord kon nu niet worden geladen. Uw bericht blijft staan. Probeer het opnieuw of schrijf Pascal rechtstreeks.",limited:"Er komen nu erg veel berichten binnen. Probeer het over een minuut opnieuw.",stopped:"Antwoord onderbroken.",retry:"Opnieuw proberen",contact:"Contact opnemen",restart:"Nieuw gesprek",brief:"Nu briefing maken",briefRequest:"Vat mijn plan nu samen als briefing.",unavailable:"Het gesprek in de chat is nu niet bereikbaar. U krijgt hier een oriëntatie op basis van de website. Uw plan kunt u rechtstreeks naar Pascal sturen.",counter:"tekens",keys:"Enter verstuurt, Shift en Enter begint een nieuwe regel."},
- fr:{reply:"Votre réponse …",thinking:"AIFly ORACLE répond …",failed:"La réponse n’a pas pu être chargée. Votre message est conservé. Réessayez ou écrivez directement à Pascal.",limited:"De très nombreux messages arrivent en ce moment. Veuillez réessayer dans une minute.",stopped:"Réponse suspendue.",retry:"Réessayer",contact:"Prendre contact",restart:"Nouvelle conversation",brief:"Créer le briefing",briefRequest:"Merci de résumer maintenant mon projet sous forme de briefing.",unavailable:"La conversation dans le chat est momentanément indisponible. Vous obtenez ici une orientation à partir du site. Vous pouvez envoyer votre projet directement à Pascal.",counter:"caractères",keys:"Entrée envoie, Maj et Entrée commence une nouvelle ligne."},
- en:{reply:"Your reply …",thinking:"AIFly ORACLE is replying …",failed:"The reply could not be loaded just now. Your message is kept. Please try again or write to Pascal directly.",limited:"A lot of messages are coming in right now. Please try again in a minute.",stopped:"Reply paused.",retry:"Try again",contact:"Get in touch",restart:"New conversation",brief:"Create the brief now",briefRequest:"Please summarise my project as a brief now.",unavailable:"The conversation in the chat is currently unavailable. You get guidance based on the website here. You can send your project to Pascal directly.",counter:"characters",keys:"Enter sends, Shift and Enter starts a new line."}
+ de:{reply:"Ihre Antwort …",thinking:"Oracle antwortet …",failed:"Die Antwort konnte gerade nicht geladen werden. Ihre Nachricht bleibt stehen. Versuchen Sie es erneut oder schreiben Sie Pascal direkt.",limited:"Gerade gehen sehr viele Nachrichten ein. Bitte versuchen Sie es in einer Minute erneut.",stopped:"Antwort angehalten.",retry:"Erneut versuchen",contact:"Kontakt aufnehmen",restart:"Neues Gespräch",brief:"Briefing jetzt erstellen",briefRequest:"Bitte fassen Sie mein Vorhaben jetzt als Briefing zusammen.",unavailable:"Das Gespräch im Chat ist gerade nicht erreichbar. Sie erhalten hier eine Orientierung anhand der Website. Ihr Vorhaben können Sie direkt an Pascal senden.",counter:"Zeichen",keys:"Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile."},
+ nl:{reply:"Uw antwoord …",thinking:"Oracle antwoordt …",failed:"Het antwoord kon nu niet worden geladen. Uw bericht blijft staan. Probeer het opnieuw of schrijf Pascal rechtstreeks.",limited:"Er komen nu erg veel berichten binnen. Probeer het over een minuut opnieuw.",stopped:"Antwoord onderbroken.",retry:"Opnieuw proberen",contact:"Contact opnemen",restart:"Nieuw gesprek",brief:"Nu briefing maken",briefRequest:"Vat mijn plan nu samen als briefing.",unavailable:"Het gesprek in de chat is nu niet bereikbaar. U krijgt hier een oriëntatie op basis van de website. Uw plan kunt u rechtstreeks naar Pascal sturen.",counter:"tekens",keys:"Enter verstuurt, Shift en Enter begint een nieuwe regel."},
+ fr:{reply:"Votre réponse …",thinking:"Oracle répond …",failed:"La réponse n’a pas pu être chargée. Votre message est conservé. Réessayez ou écrivez directement à Pascal.",limited:"De très nombreux messages arrivent en ce moment. Veuillez réessayer dans une minute.",stopped:"Réponse suspendue.",retry:"Réessayer",contact:"Prendre contact",restart:"Nouvelle conversation",brief:"Créer le briefing",briefRequest:"Merci de résumer maintenant mon projet sous forme de briefing.",unavailable:"La conversation dans le chat est momentanément indisponible. Vous obtenez ici une orientation à partir du site. Vous pouvez envoyer votre projet directement à Pascal.",counter:"caractères",keys:"Entrée envoie, Maj et Entrée commence une nouvelle ligne."},
+ en:{reply:"Your reply …",thinking:"Oracle is replying …",failed:"The reply could not be loaded just now. Your message is kept. Please try again or write to Pascal directly.",limited:"A lot of messages are coming in right now. Please try again in a minute.",stopped:"Reply paused.",retry:"Try again",contact:"Get in touch",restart:"New conversation",brief:"Create the brief now",briefRequest:"Please summarise my project as a brief now.",unavailable:"The conversation in the chat is currently unavailable. You get guidance based on the website here. You can send your project to Pascal directly.",counter:"characters",keys:"Enter sends, Shift and Enter starts a new line."}
 };
 
 // Hinweis unter dem Eingabefeld: sachlicher Eingabehinweis mit Verweis auf die Datenschutzseite der jeweiligen Marke.
