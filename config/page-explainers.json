@@ -632,10 +632,10 @@
             "type": "route",
             "target_id": "imprint",
             "label": {
-              "de": "NeXify AI FACTORY B.V. – Unternehmensangaben",
-              "nl": "NeXify AI FACTORY B.V. – bedrijfsgegevens",
-              "fr": "NeXify AI FACTORY B.V. – informations sur l’entreprise",
-              "en": "NeXify AI FACTORY B.V. – company information"
+              "de": "NeXify AI FACTORY – Unternehmensangaben",
+              "nl": "NeXify AI FACTORY – bedrijfsgegevens",
+              "fr": "NeXify AI FACTORY – informations sur l’entreprise",
+              "en": "NeXify AI FACTORY – company information"
             }
           },
           "source_refs": [
@@ -1706,10 +1706,10 @@
             "type": "route",
             "target_id": "imprint",
             "label": {
-              "de": "NeXify AI FACTORY B.V. – Unternehmensangaben",
-              "nl": "NeXify AI FACTORY B.V. – bedrijfsgegevens",
-              "fr": "NeXify AI FACTORY B.V. – informations sur l’entreprise",
-              "en": "NeXify AI FACTORY B.V. – company information"
+              "de": "NeXify AI FACTORY – Unternehmensangaben",
+              "nl": "NeXify AI FACTORY – bedrijfsgegevens",
+              "fr": "NeXify AI FACTORY – informations sur l’entreprise",
+              "en": "NeXify AI FACTORY – company information"
             }
           },
           "source_refs": [
