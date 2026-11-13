@@ -56,12 +56,18 @@ begrenzt und greifen nicht in die Chat-Spalte.
 | Elemente mit Glas (`backdrop-filter`) in der Startseite | 11 (vorher 5 auf der ganzen Seite samt Chat) |
 | Tastatur: Tab durch die ersten 12 Ziele | jedes mit sichtbarem Rahmen, 2 px |
 | Reduced Motion | keine Drehung, Übergänge 0 s |
+| NL, FR, EN je 1440 und 390 px; DE zusätzlich 320, 768, 1024 px | kein Überlauf, keine Bedienziele unter 44 px, keine abgeschnittenen Beschriftungen (320 px: Sprungmarken einspaltig) |
+| Kontrast, gerechnet aus Token-Farben gegen die hellste Kartenfläche `#363A38` | Text primär 10,1 : 1, sekundär 9,2 : 1, tertiär 6,3 : 1, Silber (Zähler, Dachzeilen) 6,1 : 1, Schrift auf Lime 9,8 : 1 |
 
 Bilder: `docs/design/belege/startseite-2026-11-13/`. Im Vorher-Bild der ganzen Seite fehlen
 vier Produktbilder nur, weil die Aufnahme sie nicht nachgeladen hatte; das ist kein Unterschied.
 
-**Nicht geprüft:** Safari, Firefox, echte Geräte, NL/FR/EN, Breiten zwischen 390 und 1440 px,
-Kontrastmessung, Screenreader, `make check`, vollständige Testsuite. GitHub Actions laufen nicht.
+Bekannte Grenze: Bei 1024 × 768 px (Chat-Spalte offen, Hero einspaltig) liegt die Schaltfläche
+unter der ersten Ansicht; bei 390 × 844 und 768 × 1024 px ist sie sichtbar.
+
+**Nicht geprüft:** Safari, Firefox, echte Geräte, Kontrast über dem Film und über Glas mit
+durchscheinendem Hintergrund (nur gerechnet, nicht gemessen), Screenreader, `make check`,
+vollständige Testsuite. GitHub Actions laufen nicht.
 
 ## Offen
 
