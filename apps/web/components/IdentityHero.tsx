@@ -41,7 +41,7 @@ export default function IdentityHero({locale,page,video:_video}:{locale:Locale;p
     <p className="identity-subtitle">{subtitles[locale]}</p>
     <p className="identity-body" data-testid="hero-description">{bodies[locale]}</p>
     <div className="identity-links">
-     <ActionButton variant="text" className="identity-primary-link" onClick={()=>window.dispatchEvent(new Event('nexify-open-orientation'))} aria-controls="aifly-panel" data-testid="hero-project-link"><span>{primaryCta[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionButton>
+     <ActionButton variant="primary" className="identity-primary-link" onClick={()=>window.dispatchEvent(new Event('nexify-open-orientation'))} aria-controls="aifly-panel" data-testid="hero-project-link"><span>{primaryCta[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></ActionButton>
     </div>
    </div>
    <div className="identity-media" data-testid="hero-media">
