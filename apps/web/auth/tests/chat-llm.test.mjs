@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chatModelId,streamChatCompletion,generateChatCompletion,describeChatFailure,ChatLlmError} from '../../lib/chat-llm.ts';
+import {chatModelId,routerModelName,streamChatCompletion,generateChatCompletion,describeChatFailure,ChatLlmError} from '../../lib/chat-llm.ts';
 
 const POLICY='deepseek/deepseek-v4.1-flash-1017';
+const ROUTER_NAME='openrouter/deepseek-v4.1-flash';
 const sse=(...events)=>new Response(new ReadableStream({start(c){const e=new TextEncoder();for(const x of events)c.enqueue(e.encode(x));c.close();}}),{status:200});
 const delta=text=>'data: '+JSON.stringify({choices:[{delta:{content:text}}]})+'\n';
 function withEnv(env,run){
@@ -21,10 +22,10 @@ test('the policy model is fixed; a different server override fails closed instea
   process.env.CHAT_MODEL_ID=POLICY;assert.equal(chatModelId(),POLICY);
 }));
 
-test('request carries exact model, reasoning high and a limit that leaves room after reasoning',()=>withEnv({...configured},async()=>{
+test('request carries the router name of the policy model, reasoning high and a limit that leaves room after reasoning',()=>withEnv({...configured},async()=>{
   let body;globalThis.fetch=async(_url,init)=>{body=JSON.parse(init.body);assert.ok(init.signal);return sse(delta('Guten Tag'),'data: [DONE]\n');};
   assert.equal(await generateChatCompletion([{role:'user',content:'Hallo'}]),'Guten Tag');
-  assert.equal(body.model,POLICY);assert.deepEqual(body.reasoning,{effort:'high'});assert.equal(body.stream,true);assert.ok(body.max_tokens>=4096);
+  assert.equal(body.model,ROUTER_NAME);assert.equal(routerModelName(),ROUTER_NAME);assert.equal(chatModelId(),POLICY);assert.deepEqual(body.reasoning,{effort:'high'});assert.equal(body.stream,true);assert.ok(body.max_tokens>=4096);
 }));
 
 test('the last event is kept even without a trailing newline',()=>withEnv({...configured},async()=>{
