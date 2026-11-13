@@ -32,6 +32,30 @@ export interface ChatRequest {
   pagePath?: string;
   /** true = Server-Sent-Events (Default), false = eine JSON-Antwort. */
   stream?: boolean;
+  /**
+   * Bisheriger Verlauf aus dem Browser. Wird nur verwendet, wenn serverseitig kein Verlauf
+   * gespeichert ist, und dort begrenzt und bereinigt (lib/chat-guidance.ts).
+   */
+  history?: ChatMessageDTO[];
+}
+
+/** Strukturiertes Projektbriefing aus dem Gespräch (Schlüssel deutsch, Werte in Besuchersprache). */
+export interface BriefingDataDTO {
+  vorhaben: string;
+  ziel: string;
+  ausgangslage: string;
+  zielgruppe: string;
+  umfang: string[];
+  zeitrahmen: string;
+  budget: string;
+  leistungen: string[];
+  offene_punkte: string[];
+}
+
+export interface BriefingDTO {
+  data: BriefingDataDTO;
+  /** Bearbeitbarer Klartext für das Kontaktformular (höchstens 4.000 Zeichen). */
+  text: string;
 }
 
 /** Positionen eines individuellen Angebots. */
@@ -69,18 +93,25 @@ export interface ChatResponse {
   message: ChatMessageDTO;
   /** Gesetzt, sobald das Modell ein Angebot vorschlägt. */
   offer?: OfferDTO;
+  /** Gesetzt, sobald aus dem Gespräch ein Briefing entstanden ist. */
+  briefing?: BriefingDTO;
   /** Wurde in Supabase persistiert? false = DB (noch) nicht konfiguriert. */
   persisted: boolean;
-  model: string;
+  /** Wird seit 13.11.2026 nicht mehr an den Browser gesendet (DECISIONS.md D-010). */
+  model?: string;
+  /** Version der Gesprächsführung (lib/chat-guidance.ts). */
+  guidance?: string;
 }
 
 /**
  * Streaming-Protokoll (text/event-stream). Jede SSE-"data:"-Zeile ist eine
- * JSON-serialisierte ChatStreamEvent. Reihenfolge: start → delta* → [offer] → done.
+ * JSON-serialisierte ChatStreamEvent. Reihenfolge: start → delta* → [briefing] → [offer] → done.
+ * delta enthält nur bereits geprüften Text; done.message.content ist der vollständige sichtbare Text.
  */
 export type ChatStreamEvent =
-  | { type: 'start'; conversationId: string; model: string; persisted: boolean }
+  | { type: 'start'; conversationId: string; model?: string; persisted: boolean; guidance?: string }
   | { type: 'delta'; text: string }
+  | { type: 'briefing'; briefing: BriefingDTO }
   | { type: 'offer'; offer: OfferDTO }
   | { type: 'done'; message: ChatMessageDTO }
   | { type: 'error'; error: string };

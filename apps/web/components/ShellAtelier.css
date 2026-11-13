@@ -16,3 +16,9 @@
 .workspace-shell .site-footer .footer-bottom{border-top:1px solid color-mix(in srgb,var(--color-atelier-platinum) 12%,transparent)}
 @media(prefers-reduced-transparency:reduce){.workspace-shell .site-header{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--color-atelier-surface)}}
 @media(prefers-reduced-motion:reduce){.workspace-shell :is(.site-header,.site-footer) *{transition:none!important;transform:none!important}}
+
+/* Ohne Linien: Kopf- und Fusszeile tragen keine Striche und keine Rahmen mehr. */
+.workspace-shell .site-header{border:0;outline:0;box-shadow:none;background:linear-gradient(180deg,color-mix(in srgb,var(--color-atelier-canvas) 78%,transparent),color-mix(in srgb,var(--color-atelier-canvas) 30%,transparent) 70%,transparent)}
+.workspace-shell .site-header::after,.workspace-shell .site-footer::before{display:none}
+.workspace-shell .site-header :is(.header-cta,.outline-button,select,.nexify-control,summary,details),.workspace-shell .site-header .main-navigation{border-color:transparent}
+.workspace-shell .site-footer .footer-bottom,.workspace-shell .site-footer :is(.footer-main,.footer-inner,.footer-utilities,.footer-legal,details,summary){border-color:transparent}
