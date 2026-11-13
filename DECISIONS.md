@@ -41,3 +41,38 @@
 ## USER-LUXURY-20261101 · Material- und Medienrichtung
 
 Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Metallen und gezieltem Glas. Gemeinsame visuelle Schicht für Vite und Next, mehr Raum, zurückhaltendes Lime, Kontohinweis im Inhaltsraster und optionales Assistenzdock. Drei fachlich zugeordnete Editorial-Stills ersetzen keinen Katalog-/Funktionalitätsbeleg. Home veröffentlicht keine ungeprüften Review-/Ambientperformances mehr; Originaldateien bleiben erhalten. Reale Lippen-/Gestenfilme benötigen echte passende Quellen und separate Abnahme. REA6.8.0 lokal isoliert wiederhergestellt und MCP-discovered, Analyse jedoch an Host-Prozessprüfung blockiert; keine globale Registrierung/HTTP-Exposition oder Rechteänderung. Kein Gesamtfreigabeentscheid.
+
+## D-010 — Öffentlicher Chat: KI-geführt, sichtbare KI-Kennzeichnung im Chat entfernt (13.11.2026)
+
+- **Entscheidung (Inhaber Pascal Courbois, 13.11.2026):** Der öffentliche Chat wird KI-geführt statt
+  modellfrei betrieben. Sichtbare KI-Kennzeichnungen werden aus der Chat-Oberfläche entfernt
+  (Entscheidung „A und B“). Die Namen „AIFly ORACLE“ und „NeX Agentic AI“ bleiben.
+- **Herkunft des Belegs:** Die Entscheidung wurde dieser Arbeitssitzung über die koordinierende Sitzung
+  übermittelt. In diesem Repository liegt kein weiterer Beleg vor. Der Merge des zugehörigen Pull Requests
+  durch den Inhaber gilt als Bestätigung; bis dahin ist die Entfernung nicht wirksam.
+- **Benanntes Risiko (keine Rechtsberatung):** Art. 50 Abs. 1 der EU-KI-Verordnung (VO (EU) 2024/1689,
+  anwendbar seit 02.08.2026) verlangt, dass Personen, die direkt mit einem KI-System interagieren, darüber
+  informiert werden, sofern das nicht aus den Umständen offensichtlich ist. Ohne sichtbare Kennzeichnung im
+  Chat stützt sich die Erkennbarkeit auf den Produktnamen und die Seite `/ki-hinweise`. Ob das genügt, ist
+  rechtlich nicht geprüft. Der Inhaber hat die Entscheidung nach ausdrücklichem Hinweis auf dieses Risiko
+  getroffen und trägt es.
+- **Umfang der Entfernung:** In `apps/web/components/PublicOrientationChat.tsx` entfällt die Zeile
+  „NeX Agentic AIFly kann Fehler machen.“ (de/nl/fr/en). An ihrer Stelle steht ein sachlicher Eingabehinweis
+  mit Verweis auf die Datenschutzseite. Sonst wurde nichts entfernt.
+- **Was bewusst bleibt:** (1) Der Assistent gibt sich nicht als Mensch aus: Die Vorgabe verlangt auf Nachfrage
+  eine wahrheitsgemäße Antwort, und eine Aussage, ein Mensch zu sein, wird serverseitig durch die wahre Angabe
+  ersetzt (`apps/web/lib/chat-guidance.ts`, Tests in `apps/web/auth/tests/chat-guidance.test.mjs`).
+  (2) Datenschutz- und Rechtsseiten einschließlich `/ki-hinweise` sind unverändert. (3) Der Hinweis
+  „ohne Live-KI“ erscheint weiter, wenn der Chat ohne Modellanbindung auf die Orientierung anhand der Website
+  zurückfällt; er beschreibt dann den tatsächlichen Zustand.
+- **Offener Abgleich:** `AGENTS.md` (Abschnitt „Verbindliche Regeln“) und `config/llm-verbindungen.json`
+  (`kennzeichnung`) nennen die KI-Kennzeichnung nach Art. 50 weiterhin als Vorgabe. Diese Entscheidung ändert
+  sie nicht; der Inhaber entscheidet, ob sie angepasst werden. Außerhalb des Chats (z. B. „KI-Assistent“ in
+  `ExplainerSections.tsx`, verborgener Statustext in `Workspace.tsx`) wurde nichts geändert.
+- **Folgen für andere Texte:** Mit dem KI-geführten Chat werden Besuchernachrichten an den Router und das
+  Modell übermittelt und, falls Supabase eingerichtet ist, gespeichert. Die Aussage „arbeitet derzeit ohne Live-KI-Modell“
+  auf `/ki-hinweise` und `/produkte/aifly-oracle` (`config/site-map.json`) trifft dann nicht mehr zu, und
+  `/datenschutz` muss die Verarbeitung der Chatnachrichten abdecken. Beides ist vor dem Livegang vom Inhaber
+  zu prüfen und anzupassen; diese Seiten wurden hier nicht verändert.
+- **Rückweg:** Revert des Commits „chat: sichtbare KI-Kennzeichnung im Chat entfernen“ stellt die Zeile
+  wieder her; die übrigen Chat-Pakete sind davon unabhängig.

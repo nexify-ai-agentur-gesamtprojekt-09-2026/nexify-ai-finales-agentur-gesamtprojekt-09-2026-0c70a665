@@ -22,7 +22,7 @@ const copy={
     "stop": "Antwort anhalten",
     "waiting": "Passende Informationen werden geladen …",
     "error": "Die Website-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten. Für die persönliche Projektklärung nutzen Sie bitte die Kontaktseite.",
-    "privacy": "NeX Agentic AIFly kann Fehler machen.",
+    "privacy": "Bitte keine Passwörter oder Zahlungsdaten eingeben.",
     "you": "Sie",
     "assistant": "AIFly ORACLE",
     "next": "Zum passenden Angebot",
@@ -38,7 +38,7 @@ const copy={
     "stop": "Antwoord onderbreken",
     "waiting": "Passende informatie wordt geladen …",
     "error": "Het websiteadvies is nu niet bereikbaar. Uw invoer blijft behouden. Gebruik de contactpagina voor een persoonlijk projectgesprek.",
-    "privacy": "NeX Agentic AIFly kan fouten maken.",
+    "privacy": "Voer hier geen wachtwoorden of betaalgegevens in.",
     "you": "U",
     "assistant": "AIFly ORACLE",
     "next": "Naar het passende aanbod",
@@ -54,7 +54,7 @@ const copy={
     "stop": "Suspendre la réponse",
     "waiting": "Chargement des informations pertinentes…",
     "error": "Le conseil sur le site est momentanément indisponible. Votre saisie est conservée. Utilisez la page de contact pour un échange personnel sur votre projet.",
-    "privacy": "NeX Agentic AIFly peut faire des erreurs.",
+    "privacy": "Merci de ne saisir ni mot de passe ni données de paiement.",
     "you": "Vous",
     "assistant": "AIFly ORACLE",
     "next": "Vers l’offre adaptée",
@@ -70,7 +70,7 @@ const copy={
     "stop": "Pause response",
     "waiting": "Loading relevant information …",
     "error": "Website guidance is temporarily unavailable. Your input is retained. Please use the contact page for a personal project discussion.",
-    "privacy": "NeX Agentic AIFly can make mistakes.",
+    "privacy": "Please do not enter passwords or payment details.",
     "you": "You",
     "assistant": "AIFly ORACLE",
     "next": "View the relevant offer",
@@ -86,6 +86,13 @@ const stateCopy:Record<Locale,StateCopy>={
  fr:{reply:"Votre réponse …",thinking:"AIFly ORACLE répond …",failed:"La réponse n’a pas pu être chargée. Votre message est conservé. Réessayez ou écrivez directement à Pascal.",limited:"De très nombreux messages arrivent en ce moment. Veuillez réessayer dans une minute.",stopped:"Réponse suspendue.",retry:"Réessayer",contact:"Prendre contact",restart:"Nouvelle conversation",brief:"Créer le briefing",briefRequest:"Merci de résumer maintenant mon projet sous forme de briefing.",unavailable:"La conversation dans le chat est momentanément indisponible. Vous obtenez ici une orientation à partir du site. Vous pouvez envoyer votre projet directement à Pascal.",counter:"caractères",keys:"Entrée envoie, Maj et Entrée commence une nouvelle ligne."},
  en:{reply:"Your reply …",thinking:"AIFly ORACLE is replying …",failed:"The reply could not be loaded just now. Your message is kept. Please try again or write to Pascal directly.",limited:"A lot of messages are coming in right now. Please try again in a minute.",stopped:"Reply paused.",retry:"Try again",contact:"Get in touch",restart:"New conversation",brief:"Create the brief now",briefRequest:"Please summarise my project as a brief now.",unavailable:"The conversation in the chat is currently unavailable. You get guidance based on the website here. You can send your project to Pascal directly.",counter:"characters",keys:"Enter sends, Shift and Enter starts a new line."}
 };
+
+// Hinweis unter dem Eingabefeld: sachlicher Eingabehinweis mit Verweis auf die Datenschutzseite der jeweiligen Marke.
+const privacyLink:Record<Locale,string>={de:"Datenschutz",nl:"Privacy",fr:"Confidentialité",en:"Privacy"};
+function ComposerNote({locale,site,pages,children}:{locale:Locale;site:"nexify"|"teileklar";pages:PublicPage[];children:string}){
+ const target=pages.find(page=>page.path===(site==="teileklar"?"/teileklar/rechtliches":"/datenschutz"));
+ return <>{children}{target&&<> <SiteLink href={target.path}>{privacyLink[locale]}</SiteLink></>}</>;
+}
 
 // TEILEKLAR-specific overrides for the default-visible orientation chat (vehicle/part/workshop context).
 const tkCopy={
@@ -426,7 +433,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
   {turns.length>0&&!busy&&<div className="orientation-followup">{site==="nexify"&&!latestBriefing&&users.length>=2&&!problem&&<button type="button" className="outline-button" onClick={()=>void send(state.briefRequest)}>{state.brief}</button>}<button type="button" className="text-button orientation-restart" onClick={restart}>{state.restart}</button></div>}
   </div>
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.placeholder} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button type="button" className="outline-button" onClick={()=>controller.current?.abort()}>{text.stop}</button>:<button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>}</div></form>
-  <p className="connection-note orientation-status" role="status">{busy?state.thinking:""}</p><p className="connection-note">{text.privacy}</p>
+  <p className="connection-note orientation-status" role="status">{busy?state.thinking:""}</p><p className="connection-note"><ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
  </section>;
 }
 
@@ -465,6 +472,6 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
   {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
   </div>
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
-  <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}{text.privacy}</p>
+  <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}<ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
  </section>;
 }

@@ -326,3 +326,6 @@
   .orientation-dots i { animation:none; opacity:.8; }
   .orientation-message[data-state=streaming] > p:last-of-type::after { animation:none; }
 }
+.public-orientation > .connection-note a { display:inline-flex; align-items:center; min-height:var(--target-min); min-width:var(--target-min); justify-content:center; margin-block:-12px; color:var(--color-text-sekundaer); text-decoration:underline; text-underline-offset:3px; }
+.public-orientation > .connection-note a:hover { color:var(--color-text-primaer); }
+.public-orientation > .connection-note a:focus-visible { outline:2px solid var(--color-marke-lime); outline-offset:2px; }
