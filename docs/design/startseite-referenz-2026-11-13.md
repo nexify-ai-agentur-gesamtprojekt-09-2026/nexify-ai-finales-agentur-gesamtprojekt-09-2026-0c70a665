@@ -8,34 +8,60 @@ der die übrigen Seiten nachgezogen werden.
 
 ## Umfang
 
-- Neu: `apps/web/components/HomeReference.css` (nach `HomeConcept.css` geladen).
-- Geändert: `HomeContent.tsx` (eine Importzeile), `IdentityHero.tsx` (Haupthandlung als
+- Neu: `apps/web/components/HomeReference.css` (nach `HomeConcept.css` geladen) und
+  `apps/web/components/HomeEffects.tsx` (setzt nur CSS-Variablen und Klassen, keine Stile).
+- Geändert: `HomeContent.tsx` (zwei Importe, eine Zeile), `IdentityHero.tsx` (Haupthandlung als
   Schaltfläche statt Textlink).
 - **Nicht angefasst:** Chat-Spalte und Chat-Dateien (eigene Session, Zweig
   `claude/chat-ki-gefuehrt`), Kopf- und Fußleiste, Texte, Rechtstexte, Preise, Medien, Tokens.
-- Aufbau, Reihenfolge der Abschnitte und Spaltenverhältnisse sind unverändert.
+- Aufbau und Reihenfolge der Abschnitte sind unverändert.
+
+## Zwei Fassungen
+
+Die erste Fassung (Commits `5d909db`, `8d697ac`) hielt sich an die zurückhaltenden Regeln der
+älteren Dokumente und wurde als zu unauffällig zurückgewiesen (Rückmeldung des Inhabers,
+weitergegeben über die übergeordnete Session: „Wo sind die Lichteffekte“). Die zweite Fassung
+setzt Licht, Tiefe und Schalter sichtbar um.
+
+**Bewusster Widerspruch zu älteren Vorgaben**, zugunsten des Auftrags vom 13.11.2026:
+
+| Ältere Vorgabe | Quelle | Jetzt |
+|---|---|---|
+| „Motion ist Zustand/Feedback, nicht Deko“ | `design_guidelines.md` §5.3 | Lichtfelder ziehen langsam, Glanz läuft über Film und Schaltfläche, Abschnitte blenden ein |
+| „Keine Neon-Glows“, Lime nie als Fläche | `design_guidelines.md` §3.2, Token `marke.limeSignal` | Lime als weiches Licht (höchstens 32 % Deckung in Schatten und Lichtfeldern); keine Lime-Flächen außer der Haupt-Schaltfläche |
+| „Hairlines statt Schatten“, keine gestapelten Schatten | `design_guidelines.md` §11.2 | Glasflächen tragen gerichteten Schatten und Tiefenschatten übereinander |
+| Aufgesetzte Effekte abgelehnt | `nexify-creative-experience-2026-11-09.md` | Zeigerlicht und Neigung auf Karten |
+
+Der Inhaber sollte an der Vorschau entscheiden, ob das Maß stimmt; alles ist in einer Datei
+regelbar (Variablen `--fx-turn`, `--fx-glow`, `--fx-reveal`).
+
+**Tokens:** Es wurden keine neuen Tokens angelegt. Farben und Schatten kommen aus
+`config/design-tokens.json`, teils als Mischung (`color-mix`) daraus. Nicht als Token vorhanden
+und deshalb im Stylesheet gesetzt: Neigungswinkel (aus `material.filmTurn` × 12 = 6°, plus
+2–4° Zeigerneigung), Deckungen der Lichtfelder, Dauer des Einblendens (0,7 s). Wenn die Fassung
+bleibt, gehören diese Werte als Tokens nachgetragen.
 
 ## Muster (gelten für alle Folgeseiten)
 
-Alle Werte kommen aus `config/design-tokens.json`; im Stylesheet steht kein Farbwert.
-
 | Nr. | Muster | Tokens | Wo auf der Startseite |
 |---|---|---|---|
-| R1 | Hauptüberschrift nie unter dem Minimum; Platz für Unterlängen | `typeHero.size`, `typeHero.leading` | Hero (ab 821 px Spaltenbreite): 45,6 px statt 37 px bei 1440 px |
-| R2 | Film als Scheibe im Raum: leichte Drehung mit Perspektive, Bühnenlicht darunter, gerichteter Schatten nach rechts unten; richtet sich beim Zeigen oder Fokussieren gerade aus | `material.filmTurn`, `material.filmPerspective`, `gradient.atelierStage`, `material.shadow`, `shadow.atelierDepth` | Hero-Film |
-| R3 | Genau eine Lime-Schaltfläche je Ansicht für die Haupthandlung, 48 px hoch | `gradient.buttonPrimaer`, `shadow.buttonPrimaer`, `target.min` | „Mit Oracle beginnen“ |
-| R4 | Glasleiste: Milchglas mit 20 px Unschärfe, 1 px Lichtkante oben, Pillenform; mobil als 2-spaltiges Feld | `material.blur`, `material.veil`, `material.highlight`, `gradient.atelierGlass`, `material.shadowRaised` | Sprungmarken unter dem Hero |
-| R5 | Abschnitte trennen sich durch eine feine Lichtlinie und einen Lichtfleck, nicht durch Kästen | `material.sectionDivider`, `material.sectionGlow` | alle Abschnitte außer dem Schluss |
-| R6 | Bilder als gerahmte Scheiben mit Reflex; beim Zeigen hebt sich das Bild um 4 px und der Schatten wird tiefer | `material.shadowRaised`, `material.shadow`, `gradient.atelierReflection`, `motion.feedback` | drei Szenenkarten, vier Produktkarten |
-| R7 | Gleichrangige Aussagen als Glaskarten; Schritte mit Zähler in Geist Mono | wie R4, `font.mono`, `radius.atelier` | „Sichtbarkeit“, „Zusammenarbeit“ |
-| R8 | Inhaltskarten reagieren mit Schatten und Lichtkante, nicht mit Farbe | `material.shadow`, `color.atelier.glassEdge` | Leistungs- und Produktkarten |
+| R1 | Hauptüberschrift nie unter dem Minimum, Silberverlauf mit Platz für Unterlängen | `typeHero.size`, `gradient.atelierHeading` | Hero: 45,6 px statt 37 px bei 1440 px |
+| R2 | Film als Glasscheibe im Raum: Glasrahmen in zwei Schichten, 6° Neigung mit Perspektive, Lime-Schein und Spiegelung am Boden, Lichtreflex zieht alle 7 s über das Glas, Scheibe folgt dem Zeiger | `material.film*`, `gradient.homeMediaRim`, `gradient.atelierGlass`, `shadow.atelierPanelDepth`, `motion.schimmer` | Hero-Film, 585 px breit (vorher 537) |
+| R3 | Haupthandlung als plastischer Lime-Schalter: Verlauf, Lichtkante, Innenschatten, ziehender Glanz; hebt sich beim Zeigen, senkt sich beim Drücken | `marke.lime*`, `material.shadowRaised`, `motion.schimmer` | „Mit Oracle beginnen“, „Vorhaben schildern“ |
+| R4 | Glasleiste mit Zeigerlicht | `material.blur`, `material.veil`, `material.highlight` | Sprungmarken |
+| R5 | Abschnitte: Lichtlinie mit Lime-Kern, Lichtfeld abwechselnd links (Lime) und rechts (Silber) | `marke.lime`, `atelier.platinum` | alle Abschnitte |
+| R6 | Bildscheiben mit Glasrahmen und Reflex; neigen sich zum Zeiger, Bild zoomt 4 % | `material.shadow`, `gradient.atelierReflection` | Szenen- und Produktbilder |
+| R7 | Glaskarten in Schichten mit Facette; Schrittzähler als runde, leuchtende Marke | `gradient.atelierPanelFacet`, `shadow.well`, `font.mono` | Leistungen, Sichtbarkeit, Zusammenarbeit, Produkte, Kosten |
+| R9 | Glas-Schalter mit fünf Zuständen (Ruhe, Zeigen, Drücken, Fokus, deaktiviert), mindestens 48 px | `material.*`, `shadow.well`, `control.*` | Kartenlinks, Sprungmarken, Filmsteuerung |
+| R10 | Kulisse: zwei Lichtfelder (Lime, Silber) ziehen in 46 s hin und her | `motion.laufband`, `marke.lime`, `marke.cyan`, `atelier.platinum` | hinter der ganzen Seite |
+| R11 | Lichtpunkt folgt dem Zeiger über Glasflächen | Variable `--fx-glow` | alle Glaskarten |
+| R12 | Abschnitte und Karten blenden beim Scrollen ein, gestaffelt | Variable `--fx-reveal` | ganze Seite |
 
-Bewegung ist nur Rückmeldung (180 ms). Es gibt bewusst keine Einblend- oder Scroll-Animation:
-`design_guidelines.md` §5.3 („Motion ist Zustand/Feedback, nicht Deko“) und die Entscheidung
-gegen aufgesetzte Effekte in `nexify-creative-experience-2026-11-09.md`.
+Technik: Bewegung nur über `transform`, `opacity` und `background-position`; Zeigerwerte werden
+einmal je Bild gesetzt (`requestAnimationFrame`). Ohne Skript ist die Seite vollständig sichtbar.
 
-Barrierefreiheit: `prefers-reduced-motion` schaltet Drehung und Übergänge ab;
-`prefers-reduced-transparency` und `prefers-contrast` ersetzen Glas durch eine deckende Fläche.
+Barrierefreiheit: Bei `prefers-reduced-motion` startet `HomeEffects` nicht und alle Animationen
+stehen; `prefers-reduced-transparency` und `prefers-contrast` ersetzen Glas durch deckende Flächen.
 
 ### Für die Chat-Session
 
@@ -52,8 +78,8 @@ begrenzt und greifen nicht in die Chat-Spalte.
 | `tests.test_identity_hero`, `tests.test_public_surface_contract`, `tests.test_static_preview` | 17 Tests, alle bestanden |
 | 1440 px und 390 px: horizontaler Überlauf | 0 px |
 | Bedienziele auf der Startseite unter 44 px | keine |
-| Film 1440 px | 542 × 307 px, 3D-Transformation aktiv; mobil ohne Drehung |
-| Elemente mit Glas (`backdrop-filter`) in der Startseite | 11 (vorher 5 auf der ganzen Seite samt Chat) |
+| Film 1440 px | 585 px breit, 3D-Neigung aktiv; mobil ohne Neigung |
+| Einblenden | nach Durchscrollen kein verborgenes Element; ohne Skript alles sichtbar (Regel greift nur mit `data-fx`) |
 | Tastatur: Tab durch die ersten 12 Ziele | jedes mit sichtbarem Rahmen, 2 px |
 | Reduced Motion | keine Drehung, Übergänge 0 s |
 | NL, FR, EN je 1440 und 390 px; DE zusätzlich 320, 768, 1024 px | kein Überlauf, keine Bedienziele unter 44 px, keine abgeschnittenen Beschriftungen (320 px: Sprungmarken einspaltig) |
@@ -65,7 +91,7 @@ vier Produktbilder nur, weil die Aufnahme sie nicht nachgeladen hatte; das ist k
 Bekannte Grenze: Bei 1024 × 768 px (Chat-Spalte offen, Hero einspaltig) liegt die Schaltfläche
 unter der ersten Ansicht; bei 390 × 844 und 768 × 1024 px ist sie sichtbar.
 
-**Nicht geprüft:** Safari, Firefox, echte Geräte, Kontrast über dem Film und über Glas mit
+**Nicht geprüft:** Bildrate der Effekte (keine Messung, nur Bauweise), Ladezeit des Kopfes, Safari, Firefox, echte Geräte, Kontrast über dem Film und über Glas mit
 durchscheinendem Hintergrund (nur gerechnet, nicht gemessen), Screenreader, `make check`,
 vollständige Testsuite. GitHub Actions laufen nicht.
 

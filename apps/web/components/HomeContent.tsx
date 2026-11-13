@@ -10,6 +10,7 @@ import copy from '../../../config/home-concept-copy.json';
 import {brandImages,pageImage,imageAlt,srcSetFor} from '../lib/brand-media';
 import './HomeConcept.css';
 import './HomeReference.css';
+import HomeEffects from './HomeEffects';
 
 // Home previews and their detail pages share one verified image assignment.
 const galleryArt=[brandImages.design,brandImages.automation,brandImages.logistics];
@@ -33,6 +34,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
  const {locale}=useUI(),t=copy[locale];
  void moduleVideos;void children;void pages;
  return <div className="home-concept" data-testid="home-content">
+  <HomeEffects/>
   <IdentityHero locale={locale} page={home} video={video}/>
   <nav className="hc-anchors hc-container" aria-label={t.introKicker}>{t.anchor.map((label,i)=><a key={label} href={['#leistungen','#zusammenarbeit','#budget','#produktwelt'][i]}>{label}<DetailArrow direction="down"/></a>)}</nav>
   <section className="hc-intro hc-container" aria-labelledby="hc-intro-title">
