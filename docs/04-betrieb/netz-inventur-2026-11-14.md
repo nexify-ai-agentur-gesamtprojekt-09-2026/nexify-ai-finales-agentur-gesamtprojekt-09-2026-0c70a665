@@ -478,3 +478,43 @@ Bereits anderswo geführt und hier nur bestätigt: SSH für jede Quelle offen (S
 - Cloudflare: alte Werte bei `update`-Einträgen des Audit-Logs; Inhalt von Regelsätzen, Access-Anwendungen und Worker-Skripten wurde nicht abgerufen.
 - Traefik-Datei `dynamic.yml` auf srv1941843: nicht erneut gelesen (wäre nur mit einem Mess-Container möglich, der in dieser Sitzung nicht erlaubt war).
 - Vercel- und Resend-Konto: nicht abgefragt.
+
+## 10. Nachtrag Shop: wer liefert `teileklar.shop` aus (14.11.2026, 22:39–22:40 UTC)
+
+Anlass: Rückfrage der koordinierenden Sitzung nach einer Frage des Inhabers. Nur gelesen, nichts umgeschaltet. Messwege wie oben (H, C, W, R); je ein `GET` je Pfad.
+
+### 10.1 Messung
+
+| Pfad | `teileklar.shop` (Cloudflare-Proxy → srv1243952) | `nexifyai.de` und die Vercel-Adresse der Produktion | UTC |
+|---|---|---|---|
+| `/api/shop/products?limit=1` | **200**, Schlüssel nur `items`, `total`; `total` = 3720 | **503** `runtime_binding_unavailable`, Grund `database_binding_missing_or_unsuitable` | 22:39 |
+| `/api/shop/categories` | 404 `{"detail":"Not Found"}` | 503, derselbe Grund | 22:39 |
+| `/api/shop/status` | 404 `{"detail":"Not Found"}` | 503, derselbe Grund | 22:39 |
+| `/api/shop/health` | 404 `{"detail":"Not Found"}` | 503, Grund `payment_mode_unbound` | 22:39 |
+| `/` | 200, `last-modified: Wed, 14 Oct 2026 15:56:12 GMT`, statische Seite mit `support.js` und `nx-page.js` | 200 von Vercel | 22:39 |
+
+Auf `main` (R, Commit `9c9c806`, `apps/shop-api/shop/catalog_api.py:58–90`) gibt es `/status`, `/categories`, `/products` und `/products/{product_id}`; die Produktliste liefert dort zusätzlich `page`, `page_size`, `pages`, `q`, `category`. Der Dienst hinter `teileklar.shop` kennt drei dieser vier Routen nicht und liefert die kürzere Antwort. Er läuft also mit einem anderen, älteren Stand; ob es dasselbe Programm in älterer Fassung oder ein Vorgänger ist, ist nicht belegt.
+
+### 10.2 Die drei Fragen
+
+| Frage | Antwort | Beleg |
+|---|---|---|
+| Welcher Container auf srv1243952 liefert aus (Projekt, Abbild, Alter, Ports, Route)? | **Nicht lesbar.** Die Hostinger-API liefert für srv1243952 keine Container (`[VPS:2044]`). Belegt ist nur der Weg bis zum Server: `teileklar.shop` und `www` sind A-Einträge auf 72.62.152.47 mit Proxy. Die Tunnel-Zuordnung von srv1243952 enthält `teileklar.shop` nicht; der Abruf kommt also über Port 80/443 des Servers an, nicht über den Tunnel. | H 22:18, C 22:17 und 22:22 |
+| Wann wurde das DNS von `teileklar.shop` zuletzt geändert, worauf zeigte es vorher? | **Zuletzt am 15.09.2026, 10:35 UTC** (Akteurstyp Benutzer über Schnittstelle): `teileklar.shop` und `www` → A 72.62.152.47. Davor seit 31.08.2026, 22:59 UTC CNAME auf den Tunnel `nexifyai-duesseldorf` (srv1941843, lokales Ziel `localhost:8090`, steht dort bis heute in der Zuordnung). Davor, 31.08. 22:47 UTC, A 2.57.91.91 (Hostinger-Parkseite). **In den letzten 14 Tagen keine Änderung** außer kurzlebigen Zertifikats-Prüfeinträgen am 14.11. 09:38 UTC. Das Muster von `unternehmensbot.eu` (frisches Umhängen) liegt hier nicht vor. | C, Audit-Log 31.08.–14.11. |
+| Gibt es parallel eine Vercel-Bereitstellung des Shops mit aktuellem Stand? | **Es gibt sie, aber sie arbeitet nicht.** Der Shop-Dienst im Vercel-Projekt der Produktion antwortet auf allen geprüften Pfaden mit 503, weil Datenbank- und Zahlungsbindung fehlen. Die Routen des aktuellen Stands sind dort vorhanden (die Antwort kommt aus dem Dienst selbst, nicht als 404), liefern aber keine Daten. | W 22:39; deckt sich mit `AGENTS.md`, Nachtrag 14.11. |
+
+### 10.3 Einordnung: Fall A, nicht Fall B
+
+**Fall A trifft zu:** `teileklar.shop` wird von einem Dienst auf srv1243952 mit älterem Stand ausgeliefert; die Datenbank dahinter antwortet (3720 aktive Produkte). Das DNS wurde nicht kürzlich verstellt.
+
+**Fall B scheidet heute aus:** Ein Umschalten des DNS auf Vercel würde den funktionierenden Katalog (200) durch 503 ersetzen. Vercel ist erst dann ein Ziel, wenn der Shop-Dienst dort gebunden ist (Datenbank, Zahlungsmodus; `docs/04-betrieb/anfrageweg-befund-2026-11-14.md`, Abschnitt zur Bindung).
+
+OFFEN bleibt, was genau auf srv1243952 läuft und woraus es gebaut wurde (Entscheidung E8). Ebenso, ob auf srv1941843 hinter `localhost:8090` noch ein Shop-Dienst steht; die Container-Liste dort zeigt keinen veröffentlichten Port 8090 (H 22:18), Dienste mit `network_mode: host` wären darin aber nicht sichtbar.
+
+### 10.4 Wege und Rückwege (nichts davon ausgeführt)
+
+| Weg | Was nötig wäre | Rückweg |
+|---|---|---|
+| A1: Dienst auf srv1243952 auf den Stand von `main` bringen | Sitzung mit Shell auf srv1243952; vorher feststellen, welcher Dienst ausliefert, laufendes Abbild taggen, Hostinger-Snapshot anlegen (der heutige läuft am 15.11. 11:47 UTC ab) | altes Abbild wieder starten; notfalls Snapshot zurückspielen |
+| A2: Shop-Dienst auf Vercel binden und danach das DNS umstellen | Laufzeit-Zugänge im Vercel-Projekt setzen (Entscheidung des Inhabers, D-017), `/api/shop/products`, `/categories`, `/status` dort mit 200 nachmessen, erst dann DNS | DNS zurück auf A 72.62.152.47 mit Proxy für `teileklar.shop` und `www` (heutiger Wert); der Dienst auf srv1243952 bleibt bis zur Abnahme unverändert stehen |
+| Nicht empfohlen: DNS jetzt auf Vercel | – | derselbe DNS-Rückweg; bis dahin wäre der Katalog nicht erreichbar |
