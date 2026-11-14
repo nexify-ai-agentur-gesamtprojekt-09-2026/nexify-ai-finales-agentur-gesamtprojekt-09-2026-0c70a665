@@ -984,7 +984,8 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
 #atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
 @container website (max-width:640px){
  #atelier .site-header{--kopf-einzug:0px;--kopf-innen:var(--as-s-2)}
- #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--as-s-2));padding-right:calc(var(--layout-page-padding) + var(--as-s-1))}
+ #atelier[data-scrolled='true'] .site-header{padding-left:var(--layout-page-padding);padding-right:var(--layout-page-padding)}
+ #atelier[data-scrolled='true'] .site-header::before{inset:calc(var(--as-s-2) + env(safe-area-inset-top)) calc(var(--layout-page-padding) - var(--as-s-3)) var(--as-s-2)}
 }
 
 /* ===== Raumlicht hinter dem Film ===== */
@@ -1186,3 +1187,5 @@ html[data-theme='light'] #atelier{
  #atelier #aifly-panel .orientation-composer,#atelier #aifly-panel .connection-note{grid-column:1;box-sizing:border-box;width:auto;max-width:720px;margin-left:var(--ca-lese);margin-right:var(--ca-pad)}
  #atelier #aifly-panel .public-orientation::after{grid-column:1;margin-left:var(--ca-lese)}
 }
+/* Raumlicht ragt ueber seine Flaeche hinaus; die Seite schneidet es an ihrer Kante ab, statt waagerecht zu rollen. */
+#atelier .website{overflow-x:clip}
