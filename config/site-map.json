@@ -2448,7 +2448,7 @@
             "config/selfservice-policy.json",
             "docs/design/factory-brand-revision-2026-11-02.md"
           ],
-          "requirement": "MASTER_CONTENT_NEX AIFLY SUITE",
+          "requirement": "MASTER_CONTENT_NEX2FLY",
           "source_sections": [
             "docs/09-final/mastervorgabe-2026-10-29.md §2.2",
             "docs/09-final/mastervorgabe-2026-10-29.md §9",
@@ -2474,7 +2474,7 @@
             "config/selfservice-policy.json",
             "docs/design/factory-brand-revision-2026-11-02.md"
           ],
-          "requirement": "MASTER_CONTENT_NEX AIFLY SUITE",
+          "requirement": "MASTER_CONTENT_NEX2FLY",
           "source_sections": [
             "docs/09-final/mastervorgabe-2026-10-29.md §2.2",
             "docs/09-final/mastervorgabe-2026-10-29.md §9",
@@ -2500,7 +2500,7 @@
             "config/selfservice-policy.json",
             "docs/design/factory-brand-revision-2026-11-02.md"
           ],
-          "requirement": "MASTER_CONTENT_NEX AIFLY SUITE",
+          "requirement": "MASTER_CONTENT_NEX2FLY",
           "source_sections": [
             "docs/09-final/mastervorgabe-2026-10-29.md §2.2",
             "docs/09-final/mastervorgabe-2026-10-29.md §9",
@@ -2526,7 +2526,7 @@
             "config/selfservice-policy.json",
             "docs/design/factory-brand-revision-2026-11-02.md"
           ],
-          "requirement": "MASTER_CONTENT_NEX AIFLY SUITE",
+          "requirement": "MASTER_CONTENT_NEX2FLY",
           "source_sections": [
             "docs/09-final/mastervorgabe-2026-10-29.md §2.2",
             "docs/09-final/mastervorgabe-2026-10-29.md §9",
@@ -2632,7 +2632,7 @@
       "cookie_preferences_first": true,
       "derivation_kind": "current_user_decision_with_related_prototype_references_not_original_nex2fly_html",
       "editorial_provenance": {
-        "requirement": "MASTER_CONTENT_NEX AIFLY SUITE",
+        "requirement": "MASTER_CONTENT_NEX2FLY",
         "source_refs": [
           "docs/09-final/mastervorgabe-2026-10-29.md §2.2",
           "docs/09-final/mastervorgabe-2026-10-29.md §9",
