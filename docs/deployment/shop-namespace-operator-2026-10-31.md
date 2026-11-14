@@ -12,6 +12,10 @@ Keine Produktionsumschaltung, keine tatsächliche Namespaceanlage in diesem Pake
 - Bestehendes Projekt prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh, vorhandener zugeordneter
   Atlasstore store_jCItPjCAFfPtsE8h. Der Code kann die Herkunft eines ENV-Werts
   nicht selbst als Storezuordnung zertifizieren; Root prüft diese Metadaten.
+  Nachtrag 14.11.2026: Ohne Konfiguration bindet weiter nur dieses Projekt. Der
+  Operator verwendet dieselbe optionale Zulassungsliste SHOP_ALLOWED_PROJECT_IDS wie
+  die Laufzeit (`docs/deployment/environment-variables.md`, Abschnitt 6); Plan,
+  Plan-Digest und Namespace-Marker bleiben an dieses Projekt gebunden.
 - Einziger Zielname ist der NEU geplante nexify_teileklar_shop_v1. Der Operator
   liest oder verändert niemals die Defaultdatenbank aus dem URI-Pfad.
 - Vorhandene MONGODB_URI/MONGO_URL werden ausschließlich im bestehenden

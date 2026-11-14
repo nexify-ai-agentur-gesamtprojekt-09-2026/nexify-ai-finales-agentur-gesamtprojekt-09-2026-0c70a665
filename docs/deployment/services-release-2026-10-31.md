@@ -55,7 +55,10 @@ Der maschinenlesbare Plan ist services-namespace-plan-2026-10-31.json.
 Der Marker bezeichnet die eigene TEILEKLAR-Datenbank, keine Rechte für fremde
 Kundenportale. Private Portal-/Membershipsperren bleiben erhalten.
 
-Runtime benötigt VERCEL_PROJECT_ID mit obigem Projekt, den vorhandenen
+Runtime benötigt VERCEL_PROJECT_ID mit obigem Projekt (Nachtrag 14.11.2026: ohne
+Konfiguration gilt weiter genau dieses Projekt; ein weiteres Projekt lässt der Inhaber
+ausdrücklich über SHOP_ALLOWED_PROJECT_IDS zu, siehe environment-variables.md,
+Abschnitt 6), den vorhandenen
 MONGODB_URI (alternativ bisherigen MONGO_URL), expliziten bestätigten DB_NAME,
 PREVIEW_PUBLIC_ORIGIN als exakten HTTPS-Origin und bestätigten SHOP_VAT_PERCENT.
 URI-Pfad ist nur akzeptabel, wenn er exakt diesem neuen Plan entspricht; kein

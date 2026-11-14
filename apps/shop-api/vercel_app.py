@@ -20,7 +20,14 @@ from urllib.parse import unquote, urlsplit
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+# Canonical identity of the shop namespace. It is part of SCHEMA_MARKER and of the
+# operator plan digest, so it must NOT follow the allowlist below: the database
+# namespace belongs to this project whichever project is allowed to bind to it.
 PROJECT_ID = "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh"
+# Optional, non-secret, comma-separated Vercel project IDs allowed to bind. Unset or
+# blank means exactly PROJECT_ID (never "open"). It authorizes the binding check only;
+# database credentials still have to exist in the allowed project's own environment.
+ALLOWED_PROJECT_IDS_ENV = "SHOP_ALLOWED_PROJECT_IDS"
 # This is a NEW planned namespace, not a statement that it exists in Atlas.
 PLANNED_NAMESPACE = "nexify_teileklar_shop_v1"
 SCHEMA_MARKER = f"nexify/teileklar/shop-v1/{PROJECT_ID}/{PLANNED_NAMESPACE}"
@@ -59,8 +66,30 @@ class Binding:
     vat: str
 
 
+def allowed_project_ids(env: Mapping[str, str]) -> frozenset[str]:
+    """Project IDs that may bind to the shop namespace, from env or the default.
+
+    A missing, non-string, blank or separator-only value is "not configured" and
+    falls back to exactly PROJECT_ID, never to an open list. Entries are trimmed and
+    empty entries dropped, so "" can never be an allowed project. A configured list
+    replaces the default; it is the explicit approval, not an addition to it.
+    """
+    raw = env.get(ALLOWED_PROJECT_IDS_ENV)
+    if isinstance(raw, str):
+        configured = frozenset(part.strip() for part in raw.split(",") if part.strip())
+        if configured:
+            return configured
+    return frozenset((PROJECT_ID,))
+
+
+def project_binding_verified(env: Mapping[str, str]) -> bool:
+    """Shared by the runtime adapter and the operator CLI; returns only a boolean."""
+    project = env.get("VERCEL_PROJECT_ID")
+    return isinstance(project, str) and project in allowed_project_ids(env)
+
+
 def resolve_binding(env: Mapping[str, str]) -> Binding:
-    if env.get("VERCEL_PROJECT_ID") != PROJECT_ID:
+    if not project_binding_verified(env):
         raise BindingError("project_binding_unverified")
     old, new = env.get("MONGO_URL", ""), env.get("MONGODB_URI", "")
     if old and new and old != new:

@@ -92,6 +92,117 @@ class BindingTests(unittest.TestCase):
             ADAPTER.resolve_binding({**env, 'MONGODB_URI': 'mongodb://isolated.invalid/random_database'})
 
 
+# Synthetic, clearly fake project IDs: each appears in an env value that must never be echoed.
+ALLOWED_PROJECT = 'prj_AllowedSentinel0000000000000'
+LISTED_PROJECT = 'prj_ListedSentinel00000000000000'
+FOREIGN_PROJECT = 'prj_ForeignSentinel0000000000000'
+SENTINELS = (ALLOWED_PROJECT, LISTED_PROJECT, FOREIGN_PROJECT)
+ALLOWLIST = 'SHOP_ALLOWED_PROJECT_IDS'
+
+
+def env_for(project, allowed=None):
+    """ENV bound to `project`; `allowed=None` leaves the allowlist variable unset."""
+    env = {**ENV, 'VERCEL_PROJECT_ID': project}
+    if allowed is not None:
+        env[ALLOWLIST] = allowed
+    return env
+
+
+class ProjectAllowlistTests(unittest.TestCase):
+    def rejected(self, env):
+        with self.assertRaises(ADAPTER.BindingError) as caught:
+            ADAPTER.resolve_binding(env)
+        self.assertEqual(str(caught.exception), 'project_binding_unverified')
+
+    def test_default_without_variable_is_exactly_the_historic_project(self):
+        # Pinned literal: the default must stay the project that owns the namespace.
+        self.assertEqual(ADAPTER.PROJECT_ID, 'prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh')
+        self.assertEqual(ADAPTER.ALLOWED_PROJECT_IDS_ENV, ALLOWLIST)
+        self.assertEqual(ADAPTER.allowed_project_ids({}), frozenset({ADAPTER.PROJECT_ID}))
+        self.assertTrue(ADAPTER.project_binding_verified({'VERCEL_PROJECT_ID': ADAPTER.PROJECT_ID}))
+        self.assertEqual(ADAPTER.resolve_binding(ENV).namespace, ADAPTER.PLANNED_NAMESPACE)
+        self.rejected(env_for(FOREIGN_PROJECT))
+
+    def test_listed_project_binds_and_unlisted_project_does_not(self):
+        self.assertEqual(ADAPTER.resolve_binding(env_for(ALLOWED_PROJECT, ALLOWED_PROJECT)).namespace, ADAPTER.PLANNED_NAMESPACE)
+        self.rejected(env_for(FOREIGN_PROJECT, ALLOWED_PROJECT))
+
+    def test_several_ids_and_surrounding_whitespace_are_tolerated(self):
+        for raw in (f'{ALLOWED_PROJECT},{LISTED_PROJECT}', f' {ALLOWED_PROJECT} , {LISTED_PROJECT} ',
+                    f'\t{ALLOWED_PROJECT}\n,\t{LISTED_PROJECT}  ', f'{ALLOWED_PROJECT},,{LISTED_PROJECT},'):
+            with self.subTest(raw=raw):
+                self.assertEqual(ADAPTER.allowed_project_ids({ALLOWLIST: raw}), frozenset({ALLOWED_PROJECT, LISTED_PROJECT}))
+                for project in (ALLOWED_PROJECT, LISTED_PROJECT):
+                    self.assertEqual(ADAPTER.resolve_binding(env_for(project, raw)).namespace, ADAPTER.PLANNED_NAMESPACE)
+                self.rejected(env_for(FOREIGN_PROJECT, raw))
+
+    def test_blank_list_means_not_configured_and_falls_back_to_default_never_to_open(self):
+        for raw in ('', '   ', ' , , ', ',', '\t\n', None, 5):
+            with self.subTest(raw=raw):
+                env = {**ENV, ALLOWLIST: raw}
+                self.assertEqual(ADAPTER.allowed_project_ids(env), frozenset({ADAPTER.PROJECT_ID}))
+                self.assertEqual(ADAPTER.resolve_binding(env).namespace, ADAPTER.PLANNED_NAMESPACE)
+                self.rejected({**env, 'VERCEL_PROJECT_ID': FOREIGN_PROJECT})
+
+    def test_configured_list_replaces_the_default_and_never_matches_by_pattern_or_emptiness(self):
+        # The list is the explicit approval: the historic project is not implicitly kept.
+        self.rejected(env_for(ADAPTER.PROJECT_ID, ALLOWED_PROJECT))
+        for pattern in ('*', 'prj_*', '.*', '%'):
+            with self.subTest(pattern=pattern):
+                self.rejected(env_for(FOREIGN_PROJECT, pattern))
+                self.rejected(env_for(ADAPTER.PROJECT_ID, pattern))
+        # Empty list entries are dropped, so a missing or empty project ID matches nothing.
+        self.rejected({k: v for k, v in env_for(ALLOWED_PROJECT, f'{ALLOWED_PROJECT},,').items() if k != 'VERCEL_PROJECT_ID'})
+        self.rejected(env_for('', f'{ALLOWED_PROJECT},,'))
+        # Only the list is trimmed; the runtime project ID is compared exactly and case-sensitively.
+        self.rejected(env_for(' ' + ALLOWED_PROJECT, ALLOWED_PROJECT))
+        self.rejected(env_for(ALLOWED_PROJECT.lower(), ALLOWED_PROJECT))
+        self.rejected(env_for(['not', 'a', 'string'], ALLOWED_PROJECT))
+
+    def test_namespace_identity_does_not_follow_the_allowlist(self):
+        self.assertIn(ADAPTER.PROJECT_ID, ADAPTER.SCHEMA_MARKER)
+        for sentinel in SENTINELS:
+            self.assertNotIn(sentinel, ADAPTER.SCHEMA_MARKER)
+        self.assertEqual(ADAPTER.resolve_binding(env_for(ALLOWED_PROJECT, ALLOWED_PROJECT)).namespace, ADAPTER.PLANNED_NAMESPACE)
+
+    def test_listed_project_passes_the_http_gate_and_unlisted_gets_a_fixed_code_without_values(self):
+        calls = []
+        router = APIRouter()
+        @router.get('/api/shop/cart')
+        async def cart():
+            return {'synthetic': True}
+        def loader(binding):
+            calls.append(binding.namespace)
+            return [router], Database()
+        raw = f'{ALLOWED_PROJECT}, {LISTED_PROJECT}'
+        with TestClient(ADAPTER.create_app(env_for(ALLOWED_PROJECT, raw), loader=loader)) as client:
+            self.assertEqual(client.get('/api/shop/cart').status_code, 200)
+        self.assertEqual(calls, [ADAPTER.PLANNED_NAMESPACE])
+        calls.clear()
+        with TestClient(ADAPTER.create_app(env_for(FOREIGN_PROJECT, raw), loader=loader)) as client:
+            for response in (client.get('/api/shop/cart'), client.post('/api/shop/cart', json={})):
+                self.assertEqual(response.status_code, 503)
+                self.assertEqual(response.json()['detail'], {'error': 'runtime_binding_unavailable', 'reason': 'project_binding_unverified'})
+                self.assertFalse(response.json()['available'])
+                for sentinel in SENTINELS:
+                    self.assertNotIn(sentinel, response.text)
+                    self.assertNotIn(sentinel, repr(dict(response.headers)))
+        self.assertEqual(calls, [])
+
+    def test_diagnostic_is_a_fixed_code_in_exception_and_logs(self):
+        raw = f'{ALLOWED_PROJECT},{LISTED_PROJECT}'
+        with self.assertNoLogs():
+            with self.assertRaises(ADAPTER.BindingError) as caught:
+                ADAPTER.resolve_binding(env_for(FOREIGN_PROJECT, raw))
+        error = caught.exception
+        self.assertEqual(error.args, ('project_binding_unverified',))
+        self.assertIsNone(error.__cause__)
+        self.assertIsNone(error.__context__)
+        for sentinel in SENTINELS:
+            self.assertNotIn(sentinel, str(error))
+            self.assertNotIn(sentinel, repr(error))
+
+
 class MetadataTests(unittest.IsolatedAsyncioTestCase):
     async def test_metadata_only_checks_existing_index_contract_without_writes(self):
         db = Database()
