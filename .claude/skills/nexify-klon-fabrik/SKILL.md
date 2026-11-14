@@ -17,9 +17,11 @@ Nur diese Bausteine verwenden. Fehlt einer, zuerst den Inhaber fragen, statt ein
 |---|---|---|
 | Kopfbereich einer Seite | `HeroStage` | `apps/web/components/IdentityHero.tsx` |
 | Film, Poster, Untertitel, Lautstärke | `AtelierFilm` | `apps/web/components/AtelierFilm.tsx` |
+| Filmrahmen mit Bedienleiste und Film-Schaltern | `AtelierFilm hero` in der Einbettung der Startseite: `identity-media` > `figure.identity-hero-photo` > `AtelierFilm`; außerhalb von Hero und Galerie-Karte die umgebende Klasse in die `:is(.identity-hero,.hc-gallery-card,…)`-Selektoren von `AtelierSystem.css` aufnehmen | `apps/web/components/AtelierFilm.tsx` |
 | Schalter mit Linkziel | `ActionLink` | `apps/web/components/ActionControl` |
 | Schalter mit Aktion | `ActionButton` | `apps/web/components/ActionControl` |
 | Absendeschalter eines Formulars | `ActionButton variant="primary"` mit `className="hc-finish-primary"` und `type="submit"` | `apps/web/components/ActionControl` |
+| Eingabefeld mit Beschriftung | `div.tk-field` oder `label.tk-field` mit `label` und `input`/`textarea` in der Hülle `pc-supplement` (Konto: `nx-konto-blatt`); die Stile stehen einmal in `PageConcept.css` | `apps/web/components/PageConcept.css` |
 | Kopfleiste, Fußzeile | `SiteNavigation`, `SiteFooter` | `apps/web/components/` |
 | Abstände, Farben, Radien | Tokens `--as-s-*` und die Werte aus `config/design-tokens.json` | — |
 
@@ -60,6 +62,8 @@ Danach die Gates aus `AGENTS.md`: `make check`, `node tools/ds-audit-cli.js`, `n
 ## Stand (14.11.2026, gegen nexifyai.de)
 
 44 Seiten, 0 Abweichungen. Geprüft werden elf Bausteine: Hero-Titel, Akzent, Hero-Text, primärer Hero-Schalter, Kopfleiste, Logo, Fußzeile, Fußzeilen-Link, Abschnitts-Titel, Text-Schalter und Abschluss-Schalter.
+
+Seit dem Befund zu `/anmelden` (14.11.2026, abweichender Filmrahmen und andere Schalter) kommen dazu: Filmrahmen, Filmbild, Film-Bedienleiste, Film-Schalter, Eingabefeld und Eingabefeld-Beschriftung, neben dem Absendeschalter. Die Film-Selektoren treffen jeden Film im Seiteninhalt, auch einen nachgebauten. Eingabefelder gibt es auf der Startseite nicht; ihre Norm ist das Kontaktformular (`/kontakt`, zweite Normseite, am Baustein in `tools/gleichmacher.mjs` vermerkt). Vor der Umstellung meldete das erweiterte Werkzeug 188 Abweichungen auf zehn Seiten, danach 0.
 
 Seit dem 14.11.2026 kommt als zwölfter Baustein der Absendeschalter von Formularen dazu (`.home-concept form button[type="submit"]`). Die Startseite hat kein Formular; er wird deshalb gegen den Abschluss-Schalter der Startseite gemessen. Lokal gegen den Stand dieses Commits: 44 Seiten, 0 Abweichungen, einschließlich der Kontakt-, Such- und Konto-Formulare. Auf dem Konto-Blatt (`AuthForms.tsx`) ist der Absendeschalter der Abschluss-Schalter und der Google-Schalter der Text-Schalter der Startseite; die Konto-Regeln legen nur noch Breite und Anordnung fest. Die Startseite hat keinen eigenen sekundären Schalter neben dem primären, ihr zweiter Schalter ist der Text-Schalter.
 

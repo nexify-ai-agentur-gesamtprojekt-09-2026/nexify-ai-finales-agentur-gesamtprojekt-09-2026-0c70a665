@@ -3,6 +3,9 @@
 // Nur lesend, Chat-Scheibe ueberall geschlossen. Vergleicht die berechneten Stile der gemeinsamen Bausteine im echten Browser.
 // Aufruf: node tools/gleichmacher.mjs [basis-url] [--breiten=390,1440]   Ausgabe JSON, Exit 1 bei Abweichung.
 // Er behebt nichts: eine Abweichung heisst, dass eine Seite einen Baustein nachgebaut statt wiederverwendet hat.
+// Norm: die Startseite. Bausteine, die es dort nicht gibt (Eingabefelder), haben genau eine zweite Normseite; sie steht
+// am Baustein (`seite`, derzeit /kontakt) und nirgends sonst. Auch die Startseite selbst wird geprueft, wo ein Baustein
+// mehrfach vorkommt (Galerie-Filme gegen den Hero-Film).
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 const {chromium}=require('playwright');
@@ -26,18 +29,38 @@ const BAUSTEINE={
  'Text-Schalter':'.hc-text-link',
  'Abschluss-Schalter':'.hc-finish-primary',
  'Formular-Schalter-absenden':['.home-concept form button[type="submit"]','Abschluss-Schalter'],
+ // Film (Inhaberbefund 14.11.2026, /anmelden: „ganz andere Video-Rahmen"). Die Selektoren sind bewusst allgemein: sie treffen
+ // jeden Film im Seiteninhalt, auch einen nachgebauten, und messen ihn gegen den Hero-Film der Startseite (AtelierFilm).
+ // Groesse und Innenabstand der Leiste folgen der Filmbreite (Container „film") und zaehlen deshalb nicht; Form, Material und Schrift schon.
+ 'Filmrahmen':{sel:'main figure:has(video)',alle:true,eigenschaften:['border-radius','box-shadow','overflow-x','overflow-y','background-color','padding-top','padding-left','margin-top','margin-left']},
+ 'Filmbild':{sel:'main figure:has(video) video',alle:true,eigenschaften:['border-radius','object-fit','background-color']},
+ 'Film-Bedienleiste':{sel:'main figure:has(video) :has(> button)',alle:true,eigenschaften:['position','display','border-radius','background-color','background-image','box-shadow','backdrop-filter']},
+ 'Film-Schalter':{sel:'main figure:has(video) button',eigenschaften:['font-family','font-weight','letter-spacing','text-transform','color','background-color','border-top-width','box-shadow']},
+ // Eingabefelder: die Startseite hat kein Formular. Norm ist das erste Feld des Kontaktformulars (zweite Normseite, Angabe `seite`).
+ // Passwortfelder zaehlen nicht: sie tragen rechts den Platz fuer den Sichtbarkeits-Schalter.
+ 'Eingabefeld':{sel:'.home-concept form :is(input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=file]):not([type=range]):not([type=password]),textarea)',alle:true,seite:'/kontakt',eigenschaften:['font-family','font-size','font-weight','line-height','letter-spacing','color','background-color','border-radius','border-top-width','box-shadow','padding-left','padding-right','min-height']},
+ 'Eingabefeld-Beschriftung':{sel:'.home-concept form label:not(:has(input[type=checkbox],input[type=radio]))',seite:'/kontakt',eigenschaften:['font-family','font-size','font-weight','line-height','letter-spacing','color','text-transform']},
 };
+// Eintragsformen: 'Selektor' · [Selektor, Norm-Baustein] · {sel, norm?, seite?, alle?, eigenschaften?}
+//  norm          anderer Baustein der Normseite als Massstab
+//  seite         zweite Normseite fuer Bausteine, die es auf der Startseite nicht gibt (je Baustein genau eine)
+//  alle          jedes sichtbare Vorkommen der Seite messen, nicht nur das erste
+//  eigenschaften eigene Liste statt EIGENSCHAFTEN
+const form=e=>typeof e==='string'?{sel:e}:Array.isArray(e)?{sel:e[0],norm:e[1]}:e;
 // Eigenschaften, die ein Baustein ueberall gleich tragen muss. Breite/Hoehe gehoeren nicht dazu (Inhalt bestimmt sie).
 const EIGENSCHAFTEN=['font-family','font-size','font-weight','line-height','letter-spacing','color','background-color','border-radius','text-transform','padding-top','padding-bottom','padding-left','padding-right','min-height'];
 
 // 'min-height' zaehlt nur bei Schaltern (Zielgroesse). Bei Textbausteinen haengt der berechnete Wert ('auto' oder '0px')
 // vom Elternlayout ab, und die Startseite nutzt dieselbe Abschnittsueberschrift selbst in mehreren Layouts.
-const messen=(page)=>page.evaluate(([bausteine,eigenschaften])=>{
+const PLAN=Object.fromEntries(Object.entries(BAUSTEINE).map(([name,e])=>{const f=form(e);return [name,{...f,eigenschaften:f.eigenschaften||EIGENSCHAFTEN.filter(x=>x!=='min-height'||name.includes('Schalter'))}];}));
+// Je Baustein eine Liste von Messungen (ein Eintrag, bei `alle` mehrere). Unsichtbare Vorkommen zaehlen nicht.
+const messen=(page)=>page.evaluate(plan=>{
  const out={};
- for(const [name,eintrag] of Object.entries(bausteine)){const el=document.querySelector(Array.isArray(eintrag)?eintrag[0]:eintrag);if(!el)continue;
-  const r=el.getBoundingClientRect();const s=getComputedStyle(el);if(r.width===0||r.height===0||s.display==='none')continue;
-  out[name]=Object.fromEntries(eigenschaften.map(e=>[e,s.getPropertyValue(e)]));}
- return out;},[BAUSTEINE,EIGENSCHAFTEN]);
+ for(const [name,p] of Object.entries(plan)){const treffer=p.alle?[...document.querySelectorAll(p.sel)]:[document.querySelector(p.sel)].filter(Boolean);const werte=[];
+  for(const el of treffer){const r=el.getBoundingClientRect();const s=getComputedStyle(el);if(r.width===0||r.height===0||s.display==='none'||s.visibility==='hidden')continue;
+   werte.push(Object.fromEntries(p.eigenschaften.map(e=>[e,s.getPropertyValue(e)])));}
+  if(werte.length)out[name]=werte;}
+ return out;},PLAN);
 
 // Gleicher Ausgangszustand auf jeder Seite: Die Chat-Scheibe oeffnet sich ab 1200 px nur auf NeXify-Seiten von selbst
 // (Workspace.tsx). Offen ist der Inhalt schmaler, und die Schrift waechst mit der Behaelterbreite. Ohne festen Zustand
@@ -62,10 +85,16 @@ try{
   await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:45000});await page.waitForTimeout(600);
   const norm=await messen(page);
   if(!Object.keys(norm).length){fehler.push({breite:w,grund:'Norm nicht messbar: Startseite zeigt keinen Baustein'});await page.close();continue;}
-  for(const route of routes){if(route==='/')continue;let ist=null;
+  // Zweite Normseiten: nur fuer Bausteine mit `seite`; alle uebrigen Normen bleiben die der Startseite.
+  for(const [name,p] of Object.entries(PLAN)){if(!p.seite)continue;
+   try{await page.goto(base+p.seite,{waitUntil:'domcontentloaded',timeout:45000});await page.waitForTimeout(600);const dort=await messen(page);if(dort[name])norm[name]=dort[name];else fehler.push({breite:w,baustein:name,grund:'Norm nicht messbar auf '+p.seite});}catch{fehler.push({breite:w,baustein:name,grund:'Normseite nicht ladbar: '+p.seite});}}
+  for(const route of routes){let ist=null;
    try{const r=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});if((r?.status()??0)!==200)continue;await page.waitForTimeout(350);ist=await messen(page);}catch{fehler.push({breite:w,seite:route,grund:'nicht ladbar'});continue;}
-   for(const [name,werte] of Object.entries(ist)){const eintrag=BAUSTEINE[name],soll=norm[Array.isArray(eintrag)?eintrag[1]:name];if(!soll)continue;
-    for(const e of EIGENSCHAFTEN){if(e==='min-height'&&!name.includes('Schalter'))continue;vergleiche++;if(werte[e]!==soll[e])abweichungen.push({seite:route,breite:w,baustein:name,eigenschaft:e,norm:soll[e],ist:werte[e]});}}
+   for(const [name,liste] of Object.entries(ist)){const p=PLAN[name],soll=norm[p.norm||name]?.[0];if(!soll)continue;
+    // Die Startseite ist die Norm; auf ihr selbst zaehlen nur weitere Vorkommen (`alle`) und Bausteine mit fremder Norm.
+    if(route==='/'&&!p.alle&&!p.norm&&!p.seite)continue;
+    const gesehen=new Set();
+    for(const werte of liste){for(const e of p.eigenschaften){if(!(e in soll))continue;vergleiche++;if(werte[e]!==soll[e]){const k=e+'|'+werte[e];if(gesehen.has(k))continue;gesehen.add(k);abweichungen.push({seite:route,breite:w,baustein:name,eigenschaft:e,norm:soll[e],ist:werte[e]});}}}}
   }
   await page.close();
  }
