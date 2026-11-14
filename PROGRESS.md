@@ -1,3 +1,34 @@
+## Stand 14.11.2026, ca. 18:45 UTC · Abend: Kopfleiste, Chat auf dem iPhone, Belege, Befunde, Cloudflare in Prüfung
+
+Führt den Abschnitt von ca. 14:25 UTC direkt darunter fort; jener bleibt als Stand von `e0c7e38`/`9cb98c4` stehen. Kennzeichnung: IST = am Repository oder durch eigenen Abruf dieser Nachführung belegt, mit Quelle und Zeit; Notiz = Quelle genannt, hier nicht nachgeprüft; OFFEN = fehlt oder nicht belegt. Entscheidungen stehen nur in `DECISIONS.md` (neu als Vorschlag: D-021, D-022). Quelle der PR-Angaben: `git log origin/main` bis `2906f58` und die PR-Beschreibungen 168 bis 175 (Abruf 14.11.2026, ca. 18:35 UTC); die dort genannten Messungen sind hier nicht wiederholt.
+
+Gemergt seit `ec6b6e4` (IST, Merge-Zeiten laut GitHub in UTC):
+- PR 168 `1997ddc` (16:44): Das Verfahren, einen Server ohne Shell nur lesend zu vermessen, ist ein Skill (`.claude/skills/nexify-server-messung`), und der Hermes-Test vergleicht die Skills mit dem Index statt mit einer festen Zahl. Nachweis laut PR: `tests.test_hermes_config` 19 Tests bestanden, `make check` 0.
+- PR 169 `aceb6a7` (16:51): D-019 steht jetzt auch in Konfiguration und Prüfer (`config/automation.json`, `config/integrations/nexify-team-runtime-candidate.json`, `tools/check_team_runtime_candidate.py`); Hermes ist gewählt, nicht aktiviert, Paperclip als abgelöst gekennzeichnet. Nachweis laut PR: 48 Tests bestanden, Prüfer meldet `configuration_consistent_not_runtime_ready`. Zwei Browser-Belege unter `evidence/observability-integration-2026-10-28/` binden seither veraltete Bytes.
+- PR 170 `919eb8a` (17:01): Die Chat-Eingabe überdeckt auf dem iPhone den Verlauf nicht mehr (Inhaberbefund); die Fußhöhe wird auch gemessen, solange das Gespräch eingeklappt ist. Nachweis laut PR: lokaler Produktions-Build in Chromium mit iPhone-Profilen, iPhone 14 Fuß 159 px statt 0 px. Nicht in echtem Safari gemessen.
+- PR 171 `b50d0c6` (17:11): Die Glasleiste der Kopfzeile schließt beim Blättern rechts mit 12 px statt 24 px am Projektschalter ab (D-022). Nachweis laut PR: gemessen bei 820 bis 1920 px, Gleichmacher ohne Befund.
+- PR 172 `31ccd6c` (17:14): Der Hinweis unter der Chat-Eingabe steht in der kleinsten Schriftstufe, 12 px statt 13 px (Inhaberbefund). Nachweis laut PR: lokaler Produktions-Build, Desktop 1440 und iPhone 14.
+- PR 173 `a2917d2` (17:44): Im Abschlussbereich stehen ab zwei Schaltern alle Schalter als eine Spalte gleicher Breite (Inhaberbefund). Nachweis laut PR: 5 Seiten in 8 Fällen, 40 Messungen ohne Befund; Gleichmacher 44 Seiten, 14.034 Vergleiche, 0 Abweichungen. Nur Chromium.
+- PR 174 `29f0691` (17:55): Das Prüfskript `browser-public-experience.mjs` prüft die Filme am Baustein `AtelierFilm` (64 statt 47 Prüfungen), zwei Belege sind neu erhoben, elf Pins nachgezogen. Nachweis laut PR: Python-Suite von 49 Failures und 9 Errors auf 39 und 6, kein neuer roter Test; 28 Pins bleiben veraltet (`docs/09-final/pin-rebase-2026-11-14.md` Abschnitt 10).
+- PR 175 `2906f58` (18:31): Die Kopfleisten-Regel der Live-Prüfung folgt PR 171 (`tools/kopfleiste-regel.mjs`), und Live-Prüfung wie Gleichmacher messen erst nach dem Ende laufender Übergänge. Nachweis laut PR: `tools/live-check.mjs` gegen `https://nexifyai.de` 329 Prüfungen, 2 Befunde (beide Shop-Dienst 503); `tools/gleichmacher.mjs` zweimal je 44 Seiten, 14.090 Vergleiche, 0 Abweichungen.
+
+Ohne Pull Request direkt auf `main` (IST, `git log origin/main`): `4f097ef` (14:24 UTC), der Merge `051c113` (15:42 UTC) und `9f8ab46` (15:43 UTC), Autor und Committer `nexifyai-dev`. Sie bringen `/agb`, `/avv` und `/widerruf` als Seiten samt `apps/web/lib/legal/*.json`, die Sitemap-Einträge dazu und im Chat-Hinweis in vier Sprachen den Satz „Sie sprechen hier mit einem KI-Assistenten (NeX Agentic AIFly); Antworten können Fehler enthalten.“ OFFEN: Eine Freigabe des Inhabers für diese Rechtstexte ist im Repository nicht belegt (D-017), und der Chat-Satz weicht vom Umfang der Entfernung in D-010 ab. Diese Nachführung hat daran nichts geändert; die Einordnung liegt beim Inhaber.
+
+Befunde des Abends:
+- Chat-Meldung „Der Chat ist im Moment nicht erreichbar“ (vom Inhaber um 17:28 UTC gemeldet): Notiz, Quelle: koordinierende Sitzung und Register OA-023. Die Meldung kam vom Schwesterprojekt `…-s4k5` bei Vercel, das `main` ohne Umgebungsvariablen baut und dessen Chat mit 503 antwortet. `nexifyai.de` war nicht betroffen. Hier nicht nachgemessen (kein Chat-Aufruf, weil er einen bezahlten Modellaufruf auslöst).
+- Indexierung (IST, `curl`, 14.11.2026, 18:41 UTC): `nexifyai.de`, `www.nexifyai.de` und `nexifyai.cloud` antworten mit 200 von Vercel und tragen `<meta name="robots" content="noindex, nofollow">`. Die Klärung läuft auf dem lokalen Zweig `claude/indexierung`; er lag um 18:40 UTC nicht auf `origin` (IST, `git ls-remote`). Das Einschalten bleibt eine Freigabe des Inhabers.
+- Vercel-Zahlung: Notiz, Quelle: Standortbestimmung der koordinierenden Sitzung. Laut Mail vom 14.11.2026, 01:37 UTC, ist eine Zahlung über 300,05 $ für das Team `nexify-projekte` fehlgeschlagen. Produktion wird heute nur über Vercel ausgeliefert. Nur der Inhaber kann das klären.
+- Hermes-Oberfläche: Sie ist über `unternehmensbot.eu` öffentlich erreichbar, geschützt nur durch die eigene Anmeldung. Das widerspricht D-019 Folge 4; Folge 5 (Docker-Socket entfernen) ist offen. Quelle: `docs/04-betrieb/server-befund-2026-11-14.md`; hier nicht neu gemessen. Die Korrektur braucht eine Shell und die Freigabe nach D-016.
+- Auto-Merge-Vorfall: Notiz laut Register OA-027: Am 14.11. um 16:18 UTC wurden sieben Pull Requests (150, 147, 163, 135, 115, 74, 48) auf „bereit“ und Auto-Merge gestellt; die Frage an den Inhaber, wer das war und ob es bleiben soll, ist unbeantwortet. IST (Abruf `gh api …/pulls?state=open`, 18:42 UTC): 22 Pull Requests offen, keiner mehr als Entwurf geführt, bei 21 ist Auto-Merge eingeschaltet (durch `nexifyai-dev`), nur bei PR 105 nicht. Gemergt ist davon nichts, weil GitHub Actions keine Jobs startet. Läuft Actions wieder an, gehen ungeprüfte Stände von selbst nach `main`.
+- Kundenprojekt Studienkolleg Aachen (nur Verweis, keine Kundendaten in diesem Repository; Notiz, Quelle: koordinierende Sitzung): Paket 2 ist unabhängig geprüft, die Nacharbeit läuft; die Vorbereitung für Cloudflare liegt dort als PR 21 vor. Einzelheiten nur im Kundenrepository.
+- Cloudflare (D-021): Auftrag des Inhabers von 17:42 UTC, den Umzug „wenn möglich“ durchzuführen. Der Zweig `claude/cloudflare-umzug` (`65a6577`, auf `origin`, nicht gemergt) trägt Bericht und Vorbereitung. Notiz aus dem Bericht dort: Rechenzeit lokal 46 bis 56 ms je Seite gegen 10 ms im kostenlosen Tarif; drei Messversuche auf Cloudflare kamen nicht zustande. Nichts ist umgeschaltet.
+
+Prüfstand `main` `2906f58` lokal vor dieser Nachführung (IST, 14.11.2026, ca. 18:38 UTC): `python3 -m unittest discover -s tests` 823 Tests, 40 Failures, 8 Errors, 19 Skips im frischen Arbeitsbaum ohne `node_modules`; mit installierten Node-Paketen und erzeugten Seitendaten 39 Failures, 6 Errors (gemessen ca. 18:50 UTC mit dieser Nachführung, die nur Dokumente ändert; Namensvergleich ohne neuen Eintrag). `python3 tools/verify_requirements_reconciliation.py` 24 Meldungen „Stale implementation source“, vorher und nachher gleich. Nicht neu gemessen: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen die Produktion (letzte Messung laut PR 175).
+
+Widersprüche aus der Standortbestimmung, geprüft und nicht bereinigt: `config/automation.json` führt Composio als `user_selected_not_verified` mit Zweck „Headless Toolverbindungen und ElevenLabs“, `config/integrations/composio.json` führt die Anbindung der Web-App als `gebaut_hinter_schalter_standardmaessig_aus`. Das ist nicht eindeutig ein Dokumentfehler: Die beiden Einträge können zwei verschiedene Composio-Produkte meinen, und die Liste in `automation.json` kennt keinen Statuswert für „gebaut“. Die Datei ist außerdem in Browser-Belegen gebunden. Deshalb nicht geändert; steht unter „Braucht den Inhaber“.
+
+Diese Nachführung (Zweig `claude/paket-a-stand`) ändert nur Dokumente: `DECISIONS.md` D-021 und D-022 als Vorschlag; diesen Abschnitt und „Offene Arbeiten“ in `PROGRESS.md`; in `AGENTS.md` einen Stand-Absatz zur Führungsentscheidung vom 13.11.2026 (Cloudflare); neu `docs/09-final/offene-arbeiten-2026-11-14.md`. Keine Prüfsumme und kein Beleg wurden angefasst; `PROGRESS.md` und `AGENTS.md` wichen schon vorher von ihren Bindungen ab.
+
 ## Stand 14.11.2026, ca. 14:25 UTC · Mobil und PWA, Hermes, Server-Messung, Shop-Bindung, Studienkolleg
 
 Führt den Abschnitt von ca. 11:25 UTC direkt darunter fort. Quelle, wo nicht anders genannt: `git log origin/main` bis `e0c7e38` und Messungen der koordinierenden Sitzung am 14.11.2026.
@@ -59,43 +90,66 @@ Diese Nachführung (Zweig `claude/stand-halten`) ändert nur Dokumente und einen
 
 OFFEN, nicht belegt (aus den Sitzungsnotizen vom 14.11.2026 übernommen, hier nicht nachgeprüft): Zuordnung der Domains zum Projekt `prj_lKQEWQ…` über die Vercel-Schnittstelle (Abruf von hier 403; die Zuordnung steht in `docs/deployment/environment-variables.md` Abschnitt 6); 503 `database_metadata_unavailable` im früheren Projekt `prj_Po7jl…`; signierter Composio-Webhook 200; GitHub Actions startet kontoweit keine Jobs (zuletzt belegt am 13.11.2026 im Befund, Abschnitt 10); Zahl und Zustand der offenen Pull Requests. Live-Wirkung der Shop-Zulassungsliste: unverändert offen, siehe nächster Abschnitt.
 
-## Offene Arbeiten · Stand 14.11.2026, ca. 11:25 UTC
+## Offene Arbeiten · Stand 14.11.2026, ca. 18:45 UTC
 
-Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld; die Zuordnung zu P01–P26 trifft der Register-Owner (wie `docs/04-betrieb/befund-2026-11-13.md` Abschnitt 9). Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben. „Notiz“ heißt: Quelle: koordinierende Sitzung, 14.11.2026, hier nicht nachgeprüft. Stände der Entwürfe und die Sichtung stehen im Abschnitt „Stand 14.11.2026, ca. 11:25 UTC“ und werden hier nicht wiederholt.
+Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld. Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben.
 
-Kann die Fabrik (innerhalb D-017, ohne neue Freigabe):
-- Belege und Prüfsummen neu prüfen (auf `main` 135 Failures, 12 Errors; MASTER-09, Auftragsregister OF-02/OF-11). PR 152, Entwurf. Dazu die vier offenen Seitenbefunde (Zweig `claude/seitenbefunde`, Notiz).
-- Shop-Schema für die eigene Supabase-Instanz mit RLS und Tests, ohne Umschaltung (D-013, `DATA-STORE-001`). PR 147, Entwurf; weiter erst nach der Entscheidung zum Verbindungsweg.
-- Shop-Zugriffsschicht fertigstellen: Kasse, Admin und Import, 80 von 139 Aufrufen offen. PR 150, Entwurf (Zahlen Notiz).
-- Gleichmacher um Karten und Eingabefelder erweitern (D-012). Absende- und Konto-Schalter sind mit PR 149 erledigt (IST).
-- Mobile Optimierung und PWA für `apps/web` (D-015, MASTER-13). Ein Zweig `claude/mobil-pwa` lag um 11:24 UTC nicht auf `origin` (IST); kein Stand belegt.
-- Verbliebene `.tk-window`-Regeln in `apps/web/components/shop/Storefront.css` (4 Treffer) und `HomeMaster.css` (5 Treffer) gegen die 3 Verwendungen in `apps/web` abgleichen. IST Zählung, `grep`, 14.11.2026.
-- Wackligen Test `apps/web/auth/tests/chat-route-errors.test.mjs` Zeile 58 stabil machen, ohne die Aussage des Tests abzuschwächen.
-- Wissensgraph nutzen und aktuell halten (`make graph`, D-018); Lauf und Größe hier noch nicht gemessen.
-- Alter Produktname in Fließtexten der Dokumentation: nach D-011 bewusst Historie; neue Texte verwenden „NeX AIFly Suite“.
-- MASTER-09: Kontrast über Bildern und Inhaltsverlust bei Zoom und Textabstand messbar machen; die Prüfung mit Assistenztechnik braucht einen Menschen.
-- Regelbetrieb: ersten Lauf des Ersatzes (14:47 UTC) belegen. Notiz.
+Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (Einträge OA-001 bis OA-162, je mit Ziel, Blocker, Abhängigkeiten, Abschlusskriterium, Aufwand und Quellen). Sie ist eine Momentaufnahme der koordinierenden Sitzung zum Stand `29f0691` (PR 174), dient der Vergabe und ersetzt kein führendes Register; ihre Angaben sind hier nicht einzeln nachgeprüft. Sie wird nicht fortgeschrieben: Bei der nächsten Nachführung ersetzt dieser Abschnitt den Verweis oder nennt eine neue Fassung. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
 
-Braucht den Inhaber:
-- Offene Pull Requests: überholte schließen (135, 126, 105, 75, 74, 73, 67, 65, 60, 48); über 118, 122, 123, 124, 121, 120, 125, 119, 115 entscheiden; 94 und 107 zur Prüfung freigeben. Der Zweig `claude/marke-texte` (PR 119) zählt D-011 bis D-020 anders als `main` (IST Nummernkollision).
-- Verbindungsweg des Shop-Dienstes zur Supabase-Instanz (PR 147). Supabase-Instanz: Adresse und Schlüssel, Freigabe für Migration und Umschaltung; Freigabe je Schritt für jede Server-Bereinigung (D-013, D-016). Unverändert offen.
-- Shop-Dienst in Produktion: `SHOP_ALLOWED_PROJECT_IDS`, Datenbank- und Zahlungsvariablen im Projekt `…-ut7r` (`docs/deployment/environment-variables.md` Abschnitt 6) oder Entscheidung, den Shop erst mit Supabase wieder einzuschalten (D-013). 503 zuletzt gemessen 14.11.2026, 10:41 UTC.
-- GitHub Actions startet kontoweit keine Jobs: Kontoeinstellung oder Abrechnung prüfen. Unverändert offen, Notiz; zuletzt belegt am 13.11.2026 (`docs/04-betrieb/befund-2026-11-13.md` Abschnitt 10).
-- Codex-Kontingent. Unverändert offen, Notiz.
-- Schlüssel erneuern, die im Gespräch standen (BigBuy, Composio). Unverändert offen, Notiz (D-017).
-- Fünf verwaiste Vercel-Projekte trennen; Vercel Agent und Connect Triggers (Kosten). Unverändert offen, Notiz.
-- Regelbetrieb: Umgebung „Agentur Repo“ so einrichten, dass sie das Repository klonen kann, oder den Ersatz über die koordinierende Sitzung bestätigen. Notiz.
-- Kundenprojekt JS Reinigung Wesel: Quellcode bereitstellen. Notiz; Einzelheiten nicht in diesem Repository.
-- Graphify: Konto beim Cloud-Dienst nur nach eigener Entscheidung (D-018).
-- Paperclip: Instanz und Zugang (D-014). Router-Adresse und Schlüssel für die Agenten. Notiz.
-- Rechtsform und Impressum widerspruchsfrei (PR 102 nennt Eenmanszaak, `apps/site/src/Auth.tsx` nennt „B.V.“; Auftragsregister OF-03); endgültiger Text `/ki-hinweise` de/nl/fr; Abgleich der Regel „KI-Kennzeichnung“ mit D-010.
+Zählung der Arbeitsliste (162 Einträge):
+
+| Zustand | Einträge |
+|---|---|
+| OFFEN | 54 |
+| TEILWEISE | 10 |
+| BLOCKIERT | 37 |
+| ENTSCHEIDUNG NÖTIG | 53 |
+| HISTORIE-überholt | 8 |
+
+| Priorität | Einträge |
+|---|---|
+| 1 Sicherheits-, Daten- und Betriebsrisiko | 27 |
+| 2 Verkaufsfähiger Auftritt und Arbeitsplatz | 36 |
+| 3 Kundenwege, Leads, Umsatz | 45 |
+| 4 Kundenprojekte abnahmefähig | 9 |
+| 5 Betrieb und Skalierung | 45 |
+
+Offene Pull Requests (IST, `gh api …/pulls?state=open`, 14.11.2026, 18:42 UTC): 22 offen. Nummern: 163, 150, 147, 135, 126, 125, 124, 123, 122, 121, 120, 119, 118, 115, 105, 75, 74, 73, 67, 65, 60, 48. Gegenüber 11:24 UTC (24 offen) sind 152, 107 und 94 gemergt (IST, `git log origin/main`), 163 ist neu. Zustand von Entwurf und Auto-Merge: siehe Abschnitt „Stand 14.11.2026, ca. 18:45 UTC“.
+
+Kann die Fabrik (innerhalb D-017, ohne neue Freigabe; Pakete laut Arbeitsliste Abschnitt 5, je Paket ein Schreiber und ein eigener Zweig):
+- A · Führende Dokumente nachführen (OA-060): diese Nachführung.
+- B · Tests stabilisieren (OA-059, OA-057, OA-053, OA-062).
+- C · Belege und Pins, ein Schreiber (OA-056, OA-034); 28 Pins sind veraltet.
+- D · Stilreste und Gleichmacher (OA-037, OA-052).
+- E · Mailing vorbereiten, ohne Versand (OA-104, OA-105, OA-008, OA-106).
+- F · Einwilligungsweg hinter Schalter entwerfen (OA-003, OA-098).
+- G · Lead-Plan und Wettbewerb (OA-095, OA-100).
+- H · Bot-Team: IST-Tabelle und Rollenabbildung (OA-134, OA-141, OA-147).
+- I · Routinen: IST gegen SOLL (OA-150, OA-158, OA-156).
+- J · Werkstattservice und Suite: IST gegen SOLL (OA-083, OA-039, OA-085).
+- K · Shop-Zugriffsschicht fertigstellen, PR 150 (OA-076).
+- L · Entscheidungsvorlagen für den Inhaber (OA-044, OA-051, OA-038).
+- M · Nur lesende Messungen (OA-021, OA-132).
+
+Braucht den Inhaber (vollständige Liste: Arbeitsliste Abschnitt 6; hier das Dringende und die offenen Fragen des Abends):
+- Vercel-Zahlung über 300,05 $ klären (Mail vom 14.11.2026, 01:37 UTC; Notiz). Daran hängt die Auslieferung der Produktion.
+- Auto-Merge an 21 offenen Pull Requests: bestätigen oder abschalten, bevor GitHub Actions wieder Jobs startet (OA-027, OA-022). Überholte Pull Requests schließen, über die übrigen entscheiden (OA-051).
+- Direkt auf `main` gebrachte Rechtsseiten `/agb`, `/avv`, `/widerruf` und der KI-Satz im Chat: Freigabe bestätigen oder zurücknehmen lassen (D-010, D-017).
+- Hermes-Oberfläche aus dem öffentlichen Netz nehmen und Docker-Socket entfernen; Freigabe je Schritt, Shell nötig (D-019 Folgen 4 und 5, D-016; OA-015, OA-016). Vorher frische Snapshots (OA-018).
+- Datenschutzrechtliche Bewertung im Kundenprojekt abschließen (OA-026, fristgebunden; nur Verweis, Einzelheiten im Kundenprojekt).
+- Cloudflare: Kostenweg A, B oder C wählen und ein Token mit Worker-Recht für die Messung bereitstellen (D-021, OA-028).
+- Architektur von Suite und Arbeitsplatz des Inhabers: Die Empfehlung der koordinierenden Sitzung liegt vor (Suite in `apps/web`, Arbeitsplatz auf der Hermes-Oberfläche, jeweils mit eigenem Composio-Produkt); entschieden ist nichts (OA-044, OA-040).
+- AgentMemory und LightRAG durch die vorhandene Cognee-Installation ablösen: Frage des Inhabers von 18:13 UTC, nicht entschieden; Bestand und Mandantentrennung von Cognee sind nicht belegt (OA-144).
+- Indexierung einschalten und die Rolle von Apex, `www` und `.cloud` festlegen (OA-031); hängt an Rechtsform und Impressum (OA-009).
+- Mailing: Vor jedem Werbeversand je Empfängergruppe die Grundlage festlegen (Einwilligung oder Bestandskunden-Ausnahme); bis dahin wird nichts versendet (OA-001, OA-002, OA-005, OA-006).
+- Composio: Welches Produkt ist gebucht, und welcher Status gilt in `config/automation.json` gegenüber `config/integrations/composio.json`; Schlüssel erneuern, die im Gespräch standen (D-017, OA-013).
+- Modellweg und Modellkennung: Die Regel verlangt die Kennung mit Endung `-1017`, der Chat sendet den Router-Namen (OA-048); Ausgabenlimit am Router-Schlüssel des Chats (OA-025).
+- Supabase-Instanz: Adresse, Schlüssel, Freigabe für Migrationen (D-013, OA-029). Shop-Dienst in Produktion an eine Datenbank binden oder erst mit Supabase einschalten (OA-067, OA-069).
+- GitHub Actions startet kontoweit keine Jobs (OA-022). Regelbetrieb ohne offene Sitzung (OA-151).
+- Welches Register führt: `docs/09-final/auftragsregister-2026-11-08.md` nennt sich „das führende Aufgabenregister“, `AGENTS.md` führt P01–P26 in `config/acceptance-coverage.json` (OA-061). IST Widerspruch, nicht aufgelöst.
 - Entscheidungen E1, E3, E4, E5, E6, E12 (`docs/09-final/08-recht-und-compliance.md`); Livegang der Kasse (Freigabe-Gate `docs/09-final/07`).
-- Modellbindung: `AGENTS.md` verlangt die Kennung mit Endung `-1017` im Providerrequest; `apps/web/lib/chat-llm.ts` sendet seit PR 106 den Router-Namen `openrouter/deepseek-v4.1-flash` (dort als vom Inhaber am 13.11.2026 freigegeben vermerkt). Regel oder Code angleichen.
-- Indexierung einschalten (hängt an Impressum und Freigabe).
-- Composio: „Enhanced Controls“ oder gültiger Schlüssel; Live-Wirkung der dauerhaften Ablage (PR 146) hängt an der Supabase-Instanz. Notiz.
-- Welches Register führt: `docs/09-final/auftragsregister-2026-11-08.md` nennt sich „das führende Aufgabenregister“, `AGENTS.md` führt P01–P26 in `config/acceptance-coverage.json`. IST Widerspruch, nicht aufgelöst.
 
-Next Steps: PR 152 abschließen und dabei die abweichenden Bindungen von `PROGRESS.md` und `AGENTS.md` aufnehmen; D-013 erst nach belegtem Zugang zur Supabase-Instanz umsetzen; Shop-Dienst erst nach Inhaberentscheidung einschalten; ersten Lauf des Regelbetriebs belegen.
+Next Steps: D-021 und D-022 durch die koordinierende Sitzung oder den Inhaber bestätigen; Auto-Merge klären, bevor Actions wieder läuft; Pakete B bis M laut Arbeitsliste vergeben; nach jedem Merge diesen Abschnitt ersetzen.
 
 ## Shop-Projektbindung als Zulassungsliste · 14.11.2026
 Die feste Prüfung `VERCEL_PROJECT_ID == prj_Po7jl…` in `apps/shop-api/vercel_app.py` und `namespace_operator.py` ist eine optionale, nicht geheime Liste `SHOP_ALLOWED_PROJECT_IDS` (kommagetrennt, Leerzeichen toleriert) mit einer gemeinsamen Funktion `project_binding_verified`. Nicht gesetzt, leer oder nur Leerzeichen/Kommas gilt als nicht konfiguriert und ergibt exakt das bisherige Projekt, nie „offen“. Eine gesetzte Liste ersetzt den Standard. Diagnosecode weiter `project_binding_unverified`, ohne ID oder Liste in Antwort, Ausnahme oder Log. `PROJECT_ID`, Namespace-Marker und Plan-Digest bleiben an `prj_Po7jl…` gebunden. Doku: `docs/deployment/environment-variables.md` Abschnitt 6 (Nachträge in den beiden Release-Dokumenten vom 31.10.).
