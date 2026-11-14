@@ -21,6 +21,7 @@ Kommt ein Skill dazu, hier genau eine Zeile ergänzen, im selben Commit.
 
 | Skill | Wann verwenden |
 |---|---|
+| [`nexify-markenzeichen`](nexify-markenzeichen/SKILL.md) | Vor jeder Design-nahen Arbeit: das eingefrorene Design als verbindlichen Normstand behandeln, auf Drift prüfen, die Library geplant erweitern; verweist auf Markenzeichen-Dokument, Tokens, Sicherung und Gates. |
 | [`nexify-klon-fabrik`](nexify-klon-fabrik/SKILL.md) | Neue Seiten, Abschnitte, Heros, Schalter in `apps/web`; Messung gegen die Startseite; Live-Nachprüfung nach jedem Merge, der die Website berührt, einschließlich Formularwegen. |
 | [`nexify-seitentexte`](nexify-seitentexte/SKILL.md) | Seitentexte in `config/site-map.json` und `config/home-concept-copy.json` ändern, vier Sprachen. |
 | [`nexify-shop-zugriffsschicht`](nexify-shop-zugriffsschicht/SKILL.md) | Datenzugriff von `apps/shop-api` hinter die Zugriffsschicht legen (D-013). |
