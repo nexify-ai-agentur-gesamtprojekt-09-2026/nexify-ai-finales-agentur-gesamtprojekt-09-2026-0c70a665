@@ -9,6 +9,7 @@ import type {PublicPage} from "../lib/page-types";
 import type {Locale} from "../lib/i18n";
 import './SiteFooter.css';
 import {ActionLink} from './ActionControl';
+import {words as sceneWords} from './SceneVideo';
 
 // Footer = ruhiger Abschluss jeder Seite: Marke + Einstieg links, vier Linkgruppen rechts, darunter eine kompakte
 // Seitenübersicht (gruppiert, mehrspaltig – keine lange Liste) und die Pflichtangaben. Vorbereitet für Master §30:
@@ -38,6 +39,7 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
  const [legalExpanded,setLegalExpanded]=useState(false);
  const [overviewOpen,setOverviewOpen]=useState(false);
  const legalPages=(site==="teileklar"?[{id:"tk-legal",label:legal.shopLegal}]:[{id:"imprint",label:legal.imprint},{id:"privacy",label:legal.privacy},{id:"licenses",label:legal.licenses}]).flatMap(item=>{const page=pages.find(page=>page.id===item.id&&page.site_context===site);return page?[{...item,path:page.path}]:[];});
+ const aiNotice=site==="nexify"?pages.find(page=>page.id==="ai-notice"&&page.site_context===site):undefined;
  const hasLicenses=legalPages.some(page=>page.id==="licenses");
  const placePages=pages.filter(page=>page.site_context==="teileklar"&&isPlacePage(page));
  const groups=[
@@ -82,7 +84,7 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
    </details>
   </div>
  <div className="footer-legal">
-  <nav className="footer-legal-direct" aria-label={legal.links} data-testid="footer-legal-direct">{legalPages.map(page=><SiteLink key={page.id} href={page.path} data-testid={`footer-legal-link-${page.id}`}>{page.label}</SiteLink>)}</nav>
+  <nav className="footer-legal-direct" aria-label={legal.links} data-testid="footer-legal-direct">{legalPages.map(page=><SiteLink key={page.id} href={page.path} data-testid={`footer-legal-link-${page.id}`}>{page.label}</SiteLink>)}</nav>{aiNotice&&<p className="footer-ai-note" data-testid="footer-ai-note"><SiteLink href={aiNotice.path} data-testid="footer-ai-note-link">{sceneWords[(locale in sceneWords?locale:"de") as keyof typeof sceneWords].label}</SiteLink></p>}
   <details className="footer-legal-details" onToggle={event=>setLegalExpanded(event.currentTarget.open)}>
    <summary data-testid="footer-legal-details-toggle" aria-expanded={legalExpanded} aria-controls={noticeId}>{legal.summary}</summary>
    <div id={noticeId}><p>{site==="teileklar"?legal.shopNotice:legal.notice}</p><p>{hasLicenses?legal.licenseNotice:legal.missingLicenses}</p></div>
