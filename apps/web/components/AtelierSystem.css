@@ -1167,15 +1167,21 @@ html[data-theme='light'] #atelier{
  #atelier .home-concept .hc-anchors a:first-child,#atelier .home-concept .hc-anchors a:last-child{border-radius:0}
  #atelier .home-concept .hc-anchors a>svg{flex:none}
 }
-/* ===== Chat breit (ab 820): Spalten und Verlauf ===== */
-/* Gastgeber steht in der linken Spalte ueber dem Namen; Einstiege, Verlauf, Eingabe und Hinweis teilen die rechte Lesespalte auf einer Flucht.
-   Der Verlauf behaelt seine volle Hoehe (sonst schieben sich Weg und Folgeschalter ueber die Nachrichten). */
+/* ===== Chat breit (ab 820): Gastgeber links, Lesespalte rechts ===== */
+/* Eine einfache, feste Ordnung statt verschachtelter Raster: Der Gastgeber steht links (bleibt stehen, waehrend der Verlauf laeuft);
+   Einstiege, Verlauf, Eingabe und Hinweis teilen die rechte Lesespalte auf EINER linken Kante (--ca-lese). */
 @container front (min-width:820px){
- #atelier #aifly-panel .orientation-content,#atelier #aifly-panel:has(.orientation-starters) .orientation-content{justify-content:start}
- #atelier #aifly-panel .orientation-history{min-height:max-content}
- #atelier #aifly-panel:has(.orientation-starters) .orientation-history{min-height:0}
+ #atelier #aifly-panel>*{--ca-pad:48px;--ca-host:clamp(260px,30cqi,360px);--ca-gap:64px;--ca-lese:calc(var(--ca-pad) + var(--ca-host) + var(--ca-gap))}
+ #atelier #aifly-panel .public-orientation{display:grid;grid-template-columns:minmax(0,1fr);column-gap:0;padding-inline:0}
+ #atelier #aifly-panel .orientation-content,#atelier #aifly-panel:has(.orientation-starters) .orientation-content{display:flex;flex-direction:column;gap:var(--as-s-6);align-content:normal;padding-left:var(--ca-lese);padding-right:calc(var(--ca-pad) - var(--atelier-system-rollbalken-breite))}
+ #atelier #aifly-panel:has(.orientation-starters) .orientation-content{gap:0}
+ #atelier #aifly-panel .orientation-content>*{grid-column:auto;margin-block:0;max-width:720px;width:100%}
+ #atelier #aifly-panel .orientation-content>.orientation-intro,#atelier #aifly-panel .orientation-content:has(.orientation-message) .orientation-intro{display:flex;position:absolute;left:var(--ca-pad);top:50%;width:var(--ca-host);margin:0;transform:translateY(-50%);align-self:auto}
+ #atelier #aifly-panel .orientation-content:has(.orientation-message) .orientation-intro{top:calc(var(--as-s-20) + var(--as-s-8));transform:none}
  #atelier #aifly-panel .orientation-host{flex-direction:column;align-items:flex-start;gap:var(--as-s-5);margin:0 0 var(--as-s-8)}
  #atelier #aifly-panel .orientation-host-name{margin:0}
  #atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{white-space:normal}
- #atelier #aifly-panel .orientation-content:has(.orientation-message) .orientation-intro{top:var(--as-s-4)}
+ #atelier #aifly-panel .orientation-starters{margin-top:0}
+ #atelier #aifly-panel .orientation-composer,#atelier #aifly-panel .connection-note{grid-column:1;box-sizing:border-box;width:auto;max-width:720px;margin-left:var(--ca-lese);margin-right:var(--ca-pad)}
+ #atelier #aifly-panel .public-orientation::after{grid-column:1;margin-left:var(--ca-lese)}
 }
