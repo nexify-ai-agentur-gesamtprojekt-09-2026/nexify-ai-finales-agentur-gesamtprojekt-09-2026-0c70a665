@@ -217,3 +217,89 @@ Die Fassung vom 10.11. liegt unverändert unter `evidence/resize-2026-11-10/supe
 ### Nicht erneuert
 
 Die Läufe Identity-Hero und Public-Experience bestehen ebenfalls; ihre Belege und Pins wurden in dieser Runde **nicht** erneuert. Critical, Public-Fallbacks und Ausnahmeerfassung bleiben offen wegen Entscheidungen des Inhabers (Abschnitt 6, Entscheidungen 1 bis 3). Keine weiteren Pins, keine Seiten- oder Quelldateien geändert.
+
+## 10. Nachtrag vierte Runde (14.11.2026, Zweig `claude/pins-nach-159`, nach PR 159, 160 und 169)
+
+Anlass: Nach dem Merge von PR 159 (`e0c7e38`) waren Quell-Pins veraltet, und `apps/web/auth/tests/browser-public-experience.mjs` prüfte die Filme der Inhaltsseiten an der Klasse `.scene-video`, die seit PR 159 nicht mehr gerendert wird. `tools/_update_register_shas.py` wurde nicht benutzt; jeder Pin ist einzeln mit seiner Belegart gesetzt.
+
+### Rahmen
+
+- Fester Commit aller Läufe: `c566216` (Harness-Nachführung `7ebb3d9`, darauf Merge von `main` `aceb6a7`). Node v22.23.4, Playwright **1.65.0** mit Chromium 158.0.8127.18 (die in `.github/evidence-runner/package.json` festgelegte Version, für diese Runde in der Laufumgebung nachinstalliert).
+- Build für Public-Experience: `node apps/site/scripts/generate-public-data.mjs`, `pnpm --filter @nexify/web build` ohne Installationsschalter (der Lauf verlangt in dieser Betriebsart 404 für Manifest und Worker). Build für PWA, Gleichmacher und Live-Prüfung: beide `generate-public-data.mjs` und `next build` mit `NEXIFY_PUBLIC_INSTALLATION=public-pwa`.
+
+### Harness `browser-public-experience.mjs`
+
+Bis PR 159 galt für `SceneVideo`: `preload="none"` und kein geladenes Medium vor dem Klick. Die Bedingung hing an `.scene-video` und traf seit PR 159 auf kein Element mehr zu; der Lauf wäre bestanden, ohne sie zu prüfen. Jetzt, am Baustein `AtelierFilm`, ohne dass eine bestehende Prüfung entfällt:
+
+- Jeder Film außer dem selbst startenden Hero-Film der Startseite muss ein `AtelierFilm` sein (sonst scheitert der Lauf, statt die Prüfung still zu überspringen), trägt `preload="none"`, hat `readyState` 0, und seine Bytes werden vor dem Klick nicht angefordert.
+- Bedienleiste: mindestens ein Schalter, jeder sichtbar, benannt und bedienbar; die Bedienelemente des Browsers bleiben aus.
+- Untertitel: Eine Spur gibt es nur zusammen mit ihrem Schalter, und sie wird als WebVTT ausgeliefert; der Hero-Film der Startseite behält seine Spur.
+- Start nur auf Klick, je Seite mit Film einmal (de): Der Abspielschalter startet den Film, erst dann werden die Bytes angefordert; der Ton ist mit einem Klick auf den Tonschalter erreichbar; kein anderer Film läuft mit an.
+
+Abweichung von der Inhaberentscheidung vom 13.11.2026 (`docs/design/scene-videos-2026-11-13.md`), durch PR 159 entstanden und hier nur festgehalten, nicht bewertet:
+
+| 13.11.2026 mit `SceneVideo` | seit PR 159 mit `AtelierFilm` | im Lauf |
+|---|---|---|
+| Ein Knopf „Video mit Ton abspielen“ startet den Film **mit Ton** | Der Abspielschalter startet **stumm**; Ton über den zweiten Schalter „Film mit Ton starten“ | gemessen auf 7 Seiten: nach dem Abspielschalter stumm, nach dem Tonschalter mit Ton (`films[].click`); verlangt wird nur, dass der Ton mit einem Klick erreichbar ist |
+| nach dem Start die Bedienelemente des Browsers | eigene Bedienleiste, `controls` aus | geprüft |
+| keine Untertitel (bewusste Abweichung von WCAG 1.2.2) | unverändert keine Spur auf Inhalts-, Galerie- und Kontofilmen | festgehalten (`films[].captions`), nicht verlangt |
+
+Der Installationsmodus desselben Skripts (`TEST_PUBLIC_INSTALLATION=enabled`) erwartet weiter den Worker ohne Cache aus `apps/site`; seit PR 159 liefert `apps/web` einen eigenen Worker mit begrenztem Cache. Dieser Modus wurde nicht geändert und nicht ausgeführt; den heutigen Worker prüft `browser-pwa-offline.mjs`. Ob der alte Modus stillgelegt oder umgeschrieben wird, ist offen.
+
+### Läufe am 14.11.2026 auf `c566216`
+
+| Lauf | Ergebnis | Beleg |
+|---|---|---|
+| `browser-public-experience.mjs` | bestanden: 70 Routen, 10 private Hüllen, 20 Filmzeilen, 7 Klickproben, 0 Fremdanfragen, 0 Seitenfehler | übernommen nach `evidence/consent-ui-2026-10-28/next-public.json`; alte Fassung unter `superseded/next-public.pre-pins-nach-159-2026-11-14.json`; `check_consent_ui` besteht |
+| `browser-text-spacing.mjs` | bestanden: `{"checks":129,"issues":[]}`, 43 Routen | übernommen nach `evidence/resize-2026-11-10/text-spacing.json`; alte Fassung unter `superseded/text-spacing.pre-pins-nach-159-2026-11-14.json`; `check_text_resize_evidence.py` besteht |
+| `browser-pwa-offline.mjs` (Build mit `public-pwa`) | bestanden, 10 Schritte | kein Belegpfad im Repository vorgesehen; Ergebnis nur hier |
+| `tools/gleichmacher.mjs` (lokaler Build) | 44 Seiten, 14 034 Vergleiche, 0 Abweichungen | nur hier |
+| `tools/live-check.mjs` (lokaler Build) | 329 Prüfungen, 2 Befunde: `/api/shop/status` und `/api/shop/products` antworten lokal mit 404, weil kein Shop-Dienst läuft; keine PWA-Befunde | nur hier |
+| `browser-exception-capture.mjs`, vite und next | **nicht bestanden**, unverändert in Schritt 4 (`.request-fallback` erscheint nicht; `.workspace-chat-modes` fehlt) | nicht übernommen; offene Entscheidung 3 aus Abschnitt 6 |
+
+### Nachgezogene Pins (16)
+
+| Datei | alter Pin | neuer Pin | Belegart | Beleg |
+|---|---|---|---|---|
+| `apps/web/auth/tests/browser-public-experience.mjs` | `17cfd1c25cdc…` | `a2a87a07ee3f…` | Browserlauf | eigener Lauf bestanden, bindet die Datei |
+| `apps/web/app/layout.tsx` | `4dacaac6a22c…` | `ec2b970e0336…` | Browserlauf | Public-Experience-Lauf bindet die Datei |
+| `apps/web/app/anmelden/[[...sign-in]]/page.tsx` | `ae015545eb91…` | `96462bb0686e…` | Browserlauf | wie oben; der Titel je Sprache wird im Lauf geprüft (Befund 3 ist behoben) |
+| `apps/web/app/registrieren/[[...sign-up]]/page.tsx` | `ed41b40219ce…` | `fe10ab376d72…` | Browserlauf | wie oben |
+| `evidence/consent-ui-2026-10-28/next-public.json` | `5cbe162f0071…` | `98c7f0da8cce…` | Browserlauf | neu erhobener Beleg |
+| `apps/web/components/PublicInstallation.tsx` | `45040906aa1f…` | `d8f6a143d98c…` | Browserlauf | Text-Spacing-Lauf bindet die Datei; zusätzlich ausgeübt: mit Schalter Manifestverweis und Worker-Registrierung (`browser-pwa-offline`), ohne Schalter kein Verweis und 404 (Public-Experience) |
+| `config/design-tokens.json` | `1482e2fa0e40…` | `0a7ab4ed0d4e…` | Browserlauf | Text-Spacing-Lauf bindet die Datei (129 Prüfungen); bisheriger Grund für „offen“ war, dass kein bindender Lauf bestand. Die Läufe Identity-Hero und Critical, die sie ebenfalls binden, sind in dieser Runde nicht gelaufen bzw. offen |
+| `packages/tokens/tokens.css`, `tokens.json`, `tokens.ts` | `218355ed5fdd…`, `5b9a4eb32842…`, `5294aa6ed39b…` | `b15b16adbd33…`, `4635c0bd8cc2…`, `8e10ae37b795…` | Browserlauf | wie die Quelle; vom Text-Spacing-Lauf gebunden |
+| `apps/web/auth/tests/public-experience.test.mjs` | `d057cd534279…` | `7a9168978792…` | grüner Test | `node --test auth/tests/*.test.mjs`: 105 von 105 |
+| `apps/web/scripts/generate-public-data.mjs` | `dca037e16f2c…` | `6b2453410744…` | grüner Test | von `public-experience.test.mjs` (`prepareInstallation`) und `pwa-worker.test.mjs` (`stampWorker`, `workerVersion`) importiert und ausgeführt; beide Builds Exit 0 |
+| `apps/site/pwa/plugin.mjs` | `185be72f2873…` | `9e95bc41449b…` | grüner Test | `public-installation.test.mjs` führt das Plugin aus und prüft genau die geänderte Eigenschaft (Icon `/brand/nexify-figur.png`, Datei vorhanden); `cd apps/site && node --test`: 132 von 132 |
+| `apps/site/tests/public-installation.test.mjs` | `58d24504a122…` | `51497cae7a9c…` | grüner Test | 132 von 132 |
+| `config/page-explainers.json`, `config/page-media-registry.json` | `16c308f422bf…`, `3613fbbb8c46…` | `967cccc90aba…`, `c6f740ca020d…` | grüner Test | wie in Abschnitt 4: `public-video-assets.test.mjs` liest die Dateien (132 von 132); die Inhaltsurteile REC-CONTENT-01 und REC-MEDIA-01 bleiben offen |
+
+### Bewusst nicht nachgezogen (23)
+
+| Datei | Grund |
+|---|---|
+| `docs/09-final/11-designsystem-definition.md` (`e214973b693b…`, heute `e43b1a694c96…`) | Diff seit Pin: ein Satz, der einen Gestaltungswert festlegt (enge Zeilenhöhe 1,12 statt 1,05). Das ist Anforderungsinhalt; kein Harness bindet das Dokument, kein Test liest den Satz. Der Gleichmacher bestätigt nur, dass alle Seiten denselben Wert tragen, nicht den Wert |
+| `apps/web/app/sitemap.ts` (`1b0316a5fae3…`, heute `cdeb7bcabf0a…`) | seit `9f8ab46` drei Rechtsrouten ergänzt; kein Lauf und kein Test dieser Runde liest die Sitemap |
+| `apps/web/components/HomeContent.tsx`, `IdentityHero.tsx`, `IdentityHero.css`, `WorkspaceRebuild.css`, `apps/site/tests/browser-identity-hero.mjs` | vom Text-Spacing-Lauf gebunden, aber der eigentlich zuständige Identity-Hero-Lauf wurde in dieser Runde nicht erhoben; die schwächere Bindung ersetzt ihn nicht |
+| `apps/web/components/Workspace.tsx`, `PublicOrientationChat.tsx`, `OracleCompanion.tsx`, `PublicRequestFallback.tsx`, `apps/site/src/Auth.tsx`, `config/site-map.json`, `apps/site/tests/browser-critical.mjs`, `tools/check_browser_evidence.py` | hängen am Critical-, Fallback- oder Ausnahme-Lauf; offene Entscheidungen 1 bis 3 |
+| `apps/site/tests/browser-pwa.mjs`, `config/presenter-system.json` | kein Lauf in dieser Runde |
+| `PROGRESS.md`, `AGENTS.md` | führende Dokumente; `nexify-stand-halten` und offene Entscheidung 5 |
+| `apps/web/package.json`, `apps/shop-api/requirements.txt`, `requirements-image.txt`, `skills-lock.json` | Abhängigkeitswechsel ohne geprüfte Herkunft, Befunde 4 und 5 |
+
+### Belege der Ausnahmeerfassung nach PR 169
+
+`evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `browser-exceptions-vite.json` binden unter `build_input_sha256` alle versionierten Dateien unter `config/` und damit auch `config/automation.json` (PR 169). Geprüft werden von `check_exception_evidence` nur die neun Quellen unter `source_sha256`; davon weichen `apps/web/package.json` und `pnpm-lock.yaml` schon seit vor dieser Runde ab. Beide Belege waren also bereits veraltet; PR 169 fügt keinen neuen roten Test hinzu (Namensvergleich `aceb6a7` gegen `1997ddc`: kein Unterschied in `test_browser_evidence`). `make check` und `make governance-check` enden mit Exit 0. Der Neulauf beider Oberflächen scheitert wie am Vormittag in Schritt 4; die Belege sind deshalb nicht erneuert, ihr Pin im Register zeigt unverändert auf die gespeicherten Bytes.
+
+### Gates
+
+| Gate | vorher | nachher (`c566216` mit dieser Runde) |
+|---|---|---|
+| `python3 -m unittest discover -s tests` | `1997ddc`: 810 Tests, 50 Failures, 9 Errors (58 Namen); `aceb6a7`: 822 Tests, dieselben Namen | 822 Tests, 34 Failures, 6 Errors (40 Namen); neue Fehlschläge: keine; behoben: 18 |
+| davon | 14 `test_browser_evidence`, 39 `test_requirements_reconciliation`, 2 `test_resize_source_binding`, 3 Ladefehler (der Laufumgebung fehlen `fastapi`, `httpx`, `bson`) | 13, 24, 0, 3 |
+| `make check`, `node tools/ds-audit-cli.js` | – | Exit 0; 0 Fehler, 0 Warnungen |
+| `node tools/lint.mjs` | – | 0 Diagnosen |
+| `cd apps/site && node --test` | – | 132 von 132 |
+| `cd apps/web && node --test auth/tests/*.test.mjs` | – | 105 von 105 |
+
+Veraltete Pins im Register: 38 vorher, 23 nachher.
