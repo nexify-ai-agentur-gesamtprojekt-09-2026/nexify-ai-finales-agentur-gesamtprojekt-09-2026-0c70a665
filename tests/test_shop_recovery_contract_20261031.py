@@ -22,13 +22,14 @@ def load_function(path, name, namespace):
 
 class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
     async def test_missing_price_approval_is_unreleased(self):
-        class Settings:
-            async def find_one(self, query):
-                return None
+        class Catalog:
+            async def shop_settings(self):
+                return {}  # no stored settings; the store contract maps a missing record to {}
 
         config = types.SimpleNamespace(DEFAULT_MARKUP_PERCENT=Decimal("30"))
-        settings = load_function("apps/shop-api/shop/pricing.py", "settings", {"Decimal": Decimal, "config": config})
-        result = await settings(types.SimpleNamespace(settings=Settings()))
+        settings = load_function("apps/shop-api/shop/pricing.py", "settings",
+                                 {"Decimal": Decimal, "config": config, "store": types.SimpleNamespace(catalog=Catalog())})
+        result = await settings()
         self.assertFalse(result["price_released"], "Missing price approval must remain unreleased")
 
     async def test_existing_order_replay_precedes_price_gate_but_new_order_does_not(self):

@@ -1,6 +1,6 @@
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 
-from . import config
+from . import config, store
 
 
 def sell_cents(purchase_cents, markup_percent, vat_percent=None):
@@ -26,8 +26,9 @@ def parse_markup(value):
     return markup
 
 
-async def settings(db):
-    doc = await db.settings.find_one({"_id": "shop"}) or {}
+async def settings(db=None):
+    """db wird nicht mehr gelesen; der Parameter bleibt, bis alle Aufrufer umgestellt sind."""
+    doc = await store.catalog.shop_settings()
     markup = Decimal(doc.get("markup_percent", str(config.DEFAULT_MARKUP_PERCENT)))
     release = doc.get("price_release") or {}
     released = bool(release.get("released_at")) and Decimal(release.get("markup_percent", "-1")) == markup

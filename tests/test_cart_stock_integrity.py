@@ -52,7 +52,7 @@ class CartStockTests(unittest.TestCase):
         def find_products(query):
             products = [p for p in (self.product, self.extra_product) if p and p['_id'] in query['_id']['$in']]
             return AsyncRows(products)
-        async def settings(db): return {'markup_percent': 0, 'price_released': True}
+        async def settings(db=None): return {'markup_percent': 0, 'price_released': True}
         auth = modules[name + '.auth']
         self.auth = auth
         auth.identity = AsyncMock(return_value=SimpleNamespace(owner='guest:fixture', user_id=None, guest_id='fixture'))
