@@ -38,7 +38,7 @@ terminal:
   backend: local
   cwd: ${NEXIFY_REPO}
 
-# Die zwölf Skills bleiben im Repository; Hermes liest sie dort (gleiches SKILL.md-Format).
+# Die Skills bleiben im Repository; Hermes liest sie dort (gleiches SKILL.md-Format).
 skills:
   external_dirs:
     - ${NEXIFY_REPO}/.claude/skills

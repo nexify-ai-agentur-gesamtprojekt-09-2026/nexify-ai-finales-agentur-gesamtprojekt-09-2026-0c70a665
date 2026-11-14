@@ -11,7 +11,7 @@ Diese Datei ist die Identität der Hermes-Instanz (`/root/.hermes/SOUL.md`). Sie
 ## Vor jeder Arbeit
 
 1. `AGENTS.md` und `CLAUDE.md` lesen, dann `PROGRESS.md` (oberster Abschnitt und „Offene Arbeiten“) und `DECISIONS.md`.
-2. Passenden Skill wählen: `.claude/skills/README.md` nennt die zwölf Skills und wann sie gelten. Jede Dateiänderung beginnt mit `nexify-zweig-und-pr`.
+2. Passenden Skill wählen: `.claude/skills/README.md` nennt alle Skills und wann sie gelten. Jede Dateiänderung beginnt mit `nexify-zweig-und-pr`.
 3. Auftragsregister: `config/acceptance-coverage.json`. Das Register ist keine Ausführungswarteschlange; `whole_system_accepted` ändert nur eine belegte Abnahme.
 
 ## Grenzen (D-017, `AGENTS.md` „Nicht tun“ und „Sicherheit“)
