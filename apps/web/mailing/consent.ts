@@ -48,8 +48,11 @@ export type MailingConsentLimits = {
   bestaetigungsmails_je_adresse: number;
   bestaetigungsmails_fenster_stunden: number;
   bestaetigungsmails_je_tag: number;
+  versandversuche_je_adresse: number;
+  versandversuche_je_tag: number;
   anfragen_je_minute: number;
   anfragen_je_stunde: number;
+  anfragen_je_tag: number;
   bestaetigungen_je_minute: number;
   bestaetigungen_je_stunde: number;
   max_body_bytes: number;
@@ -79,8 +82,14 @@ const SOURCE = /^[a-z0-9/_-]{1,64}$/;
 const PAGE = /^\/[a-z0-9/_-]{1,128}$/;
 const VERSION = /^[A-Za-z0-9._-]{1,64}$/;
 const EMAIL = /^[^\s@<>"',;:\\()[\]]+@[^\s@<>"',;:\\()[\]]+\.[^\s@<>"',;:\\()[\]]{2,}$/;
-/** Steuerzeichen (C0, DEL, C1). In einer Adresse haben sie nichts zu suchen; `\s` erfasst nur einen Teil davon. */
-const CONTROL = /[\u0000-\u001f\u007f-\u009f]/;
+/**
+ * Steuerzeichen (C0, DEL, C1) und unsichtbare oder umstellende Zeichen (Formatzeichen wie U+200B und U+202E, private
+ * und halbe Zeichen). In einer Adresse haben sie nichts zu suchen: Zwei Adressen, die gleich aussehen, hätten sonst
+ * verschiedene Prüfsummen und eigene Grenzen. `\s` erfasst nur einen Teil davon.
+ */
+const CONTROL = /[\p{Cc}\p{Cf}\p{Co}\p{Cs}\u2028\u2029]/u;
+/** Ein Absender allein darf höchstens diesen Teil der Tagesgrenze für Bestätigungsmails auslösen können. */
+export const SENDER_SHARE_OF_DAILY_LIMIT = 4;
 const MAX_DEADLINE_HOURS = 14 * 24;
 
 /** Standard AUS: nur der exakte Wert "on" (Muster lib/composio.ts). */
@@ -93,6 +102,7 @@ export type ReadinessGap =
   | 'consent_text_not_approved'
   | 'consent_text_missing'
   | 'consent_text_approval_mismatch'
+  | 'consent_text_placeholder_unresolved'
   | 'confirmation_mail_not_approved'
   | 'confirmation_mail_missing'
   | 'confirmation_mail_approval_mismatch'
@@ -148,9 +158,10 @@ export function availableLanguages(config: MailingConsentConfig): MailingLang[] 
   return LANGS.filter((lang) => filled(config.einwilligung.texte[lang]) && mailText(config.bestaetigungsmail.texte[lang]));
 }
 
-const INTEGER_BOUNDS: Record<'anfragen_je_minute' | 'anfragen_je_stunde' | 'bestaetigungen_je_minute' | 'bestaetigungen_je_stunde' | 'max_body_bytes', readonly [number, number]> = {
+const INTEGER_BOUNDS: Record<'anfragen_je_minute' | 'anfragen_je_stunde' | 'anfragen_je_tag' | 'bestaetigungen_je_minute' | 'bestaetigungen_je_stunde' | 'max_body_bytes', readonly [number, number]> = {
   anfragen_je_minute: [1, 1000],
   anfragen_je_stunde: [1, 100_000],
+  anfragen_je_tag: [1, 1_000_000],
   bestaetigungen_je_minute: [1, 1000],
   bestaetigungen_je_stunde: [1, 100_000],
   max_body_bytes: [256, 65_536],
@@ -162,22 +173,35 @@ export function mailLimits(config: MailingConsentConfig): MailLimits {
     perAddress: config.grenzen?.bestaetigungsmails_je_adresse,
     windowHours: config.grenzen?.bestaetigungsmails_fenster_stunden,
     perDay: config.grenzen?.bestaetigungsmails_je_tag,
+    attemptsPerAddress: config.grenzen?.versandversuche_je_adresse,
+    attemptsPerDay: config.grenzen?.versandversuche_je_tag,
   };
 }
 
 /**
  * Jede Grenze ist eine ganze Zahl in ihrem Bereich. Eine fehlende, gebrochene oder unsinnige Angabe (0, NaN, Text)
  * würde einen Schutz still abschalten; deshalb arbeitet der Weg dann gar nicht.
+ *
+ * Die Grenzen müssen außerdem zueinander passen:
+ *  - Ein Absender darf je Tag höchstens ein Viertel der Tagesgrenze für Bestätigungsmails auslösen können
+ *    (`anfragen_je_tag` × 4 ≤ `bestaetigungsmails_je_tag`). Sonst genügt ein einzelner Absender, um die Anmeldung für
+ *    alle anderen bis zum nächsten Tag stillzulegen.
+ *  - Versuche schließen die gelungenen Mails ein, ihre Grenzen liegen also nicht darunter.
  */
 export function limitsValid(config: MailingConsentConfig): boolean {
   const limits = config.grenzen;
   if (!limits || typeof limits !== 'object') return false;
-  return (
+  const each =
     mailLimitsValid(mailLimits(config)) &&
     (Object.keys(INTEGER_BOUNDS) as (keyof typeof INTEGER_BOUNDS)[]).every((key) => {
       const value = limits[key];
       return typeof value === 'number' && Number.isInteger(value) && value >= INTEGER_BOUNDS[key][0] && value <= INTEGER_BOUNDS[key][1];
-    })
+    });
+  if (!each) return false;
+  return (
+    limits.anfragen_je_tag * SENDER_SHARE_OF_DAILY_LIMIT <= limits.bestaetigungsmails_je_tag &&
+    limits.versandversuche_je_adresse >= limits.bestaetigungsmails_je_adresse &&
+    limits.versandversuche_je_tag >= limits.bestaetigungsmails_je_tag
   );
 }
 
@@ -200,6 +224,9 @@ export function consentReadiness(config: MailingConsentConfig, env: MailingEnv =
   for (const lang of LANGS) {
     const consent = config.einwilligung.texte[lang];
     if (filled(consent) && !approvalCovers(config.einwilligung.freigabe, lang, consentTextDigest(consent))) add('consent_text_approval_mismatch');
+    // Der Einwilligungstext wird wörtlich in die Mail gesetzt und nicht noch einmal ersetzt: Ein Platzhalter darin
+    // (auch einer der drei bekannten) oder ein unausgefülltes Feld bliebe für den Empfänger sichtbar stehen.
+    if (filled(consent) && /\{\{|\}\}|\[[A-ZÄÖÜ_ ]{4,}/.test(consent)) add('consent_text_placeholder_unresolved');
     const mail = config.bestaetigungsmail.texte[lang];
     if (!mailText(mail)) continue;
     if (!approvalCovers(config.bestaetigungsmail.freigabe, lang, confirmationMailDigest(mail))) add('confirmation_mail_approval_mismatch');
@@ -274,12 +301,15 @@ const sharedLimiters = new Map<string, RateLimiter>();
 function limiterFor(route: 'subscribe' | 'confirm', config: MailingConsentConfig): RateLimiter {
   const perMinute = route === 'subscribe' ? config.grenzen.anfragen_je_minute : config.grenzen.bestaetigungen_je_minute;
   const perHour = route === 'subscribe' ? config.grenzen.anfragen_je_stunde : config.grenzen.bestaetigungen_je_stunde;
-  const key = `${route}:${perMinute}/${perHour}`;
+  // Nur die Anmeldung löst Mails aus; nur sie hat deshalb auch eine Grenze je Tag (siehe limitsValid).
+  const perDay = route === 'subscribe' ? config.grenzen.anfragen_je_tag : null;
+  const key = `${route}:${perMinute}/${perHour}/${perDay ?? '-'}`;
   let limiter = sharedLimiters.get(key);
   if (!limiter) {
     limiter = createRateLimiter([
       { ms: 60_000, max: perMinute },
       { ms: 3_600_000, max: perHour },
+      ...(perDay === null ? [] : [{ ms: 86_400_000, max: perDay }]),
     ]);
     sharedLimiters.set(key, limiter);
   }
@@ -343,6 +373,26 @@ async function quietly(step: string, run: () => Promise<void>): Promise<void> {
   }
 }
 
+/**
+ * Aufräumen: verfallene unbestätigte Anmeldungen (samt Adresse) und Einträge der Mailzählung, die für keine Grenze
+ * mehr zählen. Läuft bei jedem Aufruf jeder der drei Routen, auch bei ausgeschaltetem Schalter und fehlenden
+ * Freigaben: Der Rückweg "Schalter löschen" darf verfallene Adressen nicht einfrieren. Je Speicher höchstens einmal
+ * je Minute, damit ein Aufrufer die Datenbank damit nicht belasten kann. Ohne jeden Aufruf läuft es nicht; ein
+ * Zeitplan ist nicht gebaut (Betriebsnotiz, offene Entscheidungen).
+ */
+const MAINTENANCE_INTERVAL_MS = 60_000;
+const lastMaintenance = new WeakMap<MailingConsentStore, number>();
+async function maintain(store: MailingConsentStore, config: MailingConsentConfig, now: number): Promise<void> {
+  const last = lastMaintenance.get(store);
+  if (last !== undefined && now - last >= 0 && now - last < MAINTENANCE_INTERVAL_MS) return;
+  lastMaintenance.set(store, now);
+  const configured = config.grenzen?.bestaetigungsmails_fenster_stunden;
+  // Ohne gültiges Fenster in der Konfiguration das längste: Dann wird eher zu wenig als zu viel gelöscht.
+  const windowHours = typeof configured === 'number' && Number.isInteger(configured) && configured >= 1 && configured <= 8760 ? configured : 8760;
+  await quietly('purge_expired_pending', () => store.purgeExpiredPending(now));
+  await quietly('purge_mail_count', () => store.purgeSettledMails(now, windowHours));
+}
+
 const ACCEPTED = { status: 'confirmation_pending' } as const;
 
 /**
@@ -362,10 +412,12 @@ const ACCEPTED = { status: 'confirmation_pending' } as const;
  */
 export async function handleSubscribe(request: Request, deps: ConsentDeps = {}): Promise<Response> {
   const env = deps.env ?? process.env;
-  if (!mailingConsentEnabled(env)) return reply({ error: 'mailing_consent_not_configured' }, 503);
   const config = deps.config ?? MAILING_CONSENT_CONFIG;
-  const gaps = consentReadiness(config, env);
   const store = deps.store === undefined ? getMailingConsentStore() : deps.store;
+  const now = deps.nowMs?.() ?? Date.now();
+  if (store) await maintain(store, config, now);
+  if (!mailingConsentEnabled(env)) return reply({ error: 'mailing_consent_not_configured' }, 503);
+  const gaps = consentReadiness(config, env);
   if (!store) gaps.push('store_not_configured');
   if (!(deps.mailConfigured ?? mailingConfigured)()) gaps.push('mail_not_configured');
   const base = publicBaseUrl(env);
@@ -375,7 +427,6 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   }
 
   if (crossOrigin(request)) return reply({ error: 'same_origin_required' }, 403);
-  const now = deps.nowMs?.() ?? Date.now();
   const verdict = (deps.limiter ?? limiterFor('subscribe', config)).check(clientKey(request), now);
   if (!verdict.allowed) return reply({ error: 'rate_limited' }, 429, { 'Retry-After': String(verdict.retryAfterSeconds) });
 
@@ -410,17 +461,21 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   let reservation: MailReservation | null = null;
   let tokenAdded = false;
   try {
-    await store.purgeExpiredPending(now);
-    await quietly('purge_mail_count', () => store.purgeSettledMails(now, limits.windowHours));
     // Sperrliste zuerst: Eine gesperrte Adresse bekommt keine Mail, auch keine Bestätigungsmail.
     if (await store.isSuppressed(hash)) return reply(ACCEPTED, 202);
-    const existing = await store.getSubscription(hash);
+    let existing = await store.getSubscription(hash);
     if (existing && existing.status !== 'pending') return reply(ACCEPTED, 202);
+    if (existing && existing.confirmExpiresAt <= now) {
+      // Eine verfallene Zeile, die das Aufräumen noch nicht erreicht hat, gilt als nicht mehr vorhanden: Sie wird
+      // jetzt gelöscht, und die Anmeldung entsteht unten neu.
+      await store.purgeExpiredPending(now + 1);
+      existing = null;
+    }
     if (existing) {
       // Offene Anmeldung: Es gilt, was bei der ersten Anfrage festgehalten wurde. Ist der freigegebene Wortlaut
       // inzwischen ein anderer, gibt es keine weitere Mail; die Anmeldung verfällt zur Frist und kann dann neu entstehen.
       const storedText = config.einwilligung.texte[existing.lang];
-      if (existing.confirmExpiresAt <= now || existing.consentVersion !== consentVersion || !filled(storedText) || consentTextDigest(storedText) !== existing.consentTextSha256 || !availableLanguages(config).includes(existing.lang)) {
+      if (existing.consentVersion !== consentVersion || !filled(storedText) || consentTextDigest(storedText) !== existing.consentTextSha256 || !availableLanguages(config).includes(existing.lang)) {
         return reply(ACCEPTED, 202);
       }
       lang = existing.lang;
@@ -433,15 +488,12 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
       if (await store.dailyLimitReached(now, limits.perDay)) log('warn', { event: 'mailing_consent_daily_limit_reached' });
       return reply(ACCEPTED, 202);
     }
+    let stored: boolean;
     if (existing) {
-      const added = await store.addConfirmToken(hash, tokenHash, now);
-      if (added) {
-        unsubscribeToken = added.unsubscribeToken;
-        tokenAdded = true;
-      }
+      stored = await store.addConfirmToken(hash, tokenHash, now);
+      tokenAdded = stored;
     } else {
-      const fresh = (deps.newToken ?? newToken)();
-      const inserted = await store.insertPending({
+      stored = await store.insertPending({
         emailHash: hash,
         email,
         lang,
@@ -451,10 +503,11 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
         requestedAt: now,
         confirmTokenHash: tokenHash,
         confirmExpiresAt: now + (config.bestaetigungsfrist_stunden as number) * 3_600_000,
-        unsubscribeToken: fresh,
       });
-      if (inserted) unsubscribeToken = fresh;
     }
+    // Das Abmeldekennzeichen hängt an der Prüfsumme der Adresse, nicht an der Anmeldung: Es bleibt dasselbe über
+    // jeden Verfall hinweg, und der Sperrlink einer älteren Mail wirkt weiter.
+    if (stored) unsubscribeToken = await store.issueUnsubscribeToken(hash, (deps.newToken ?? newToken)());
     // Ein gleichzeitiger Aufruf war schneller, oder die Anmeldung ist inzwischen nicht mehr offen: keine Mail, Platz frei.
     // Zweite Prüfung der Sperrliste unmittelbar vor dem Versand: Wer in der Zwischenzeit gesperrt hat, bekommt nichts mehr.
     if (!unsubscribeToken || (await store.isSuppressed(hash))) {
@@ -486,8 +539,9 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   }
   const held = reservation;
   if (!sent.ok) {
-    // Ehrlich melden: Ohne Mail kann niemand bestätigen. Der Fehlschlag gibt seinen Platz in der Zählung zurück,
-    // und das Kennzeichen, das niemand erhalten hat, wird zurückgenommen. Ein neuer Versuch sendet erneut.
+    // Ehrlich melden: Ohne Mail kann niemand bestätigen. Der Fehlschlag zählt nicht als Mail (wohl aber als Versuch),
+    // und das Kennzeichen, das niemand erhalten hat, wird zurückgenommen. Ein neuer Versuch sendet erneut, bis die
+    // Grenze für Versuche erreicht ist; dann antwortet die Anmeldung wie bei jeder erreichten Grenze mit 202.
     log('error', { event: 'mailing_consent_mail_failed', skipped: Boolean(sent.skipped) });
     await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
     if (tokenAdded) await quietly('remove_confirm_token', () => store.removeConfirmToken(hash, tokenHash));
@@ -517,6 +571,7 @@ export async function handleConfirm(request: Request, deps: ConsentDeps = {}): P
   const now = deps.nowMs?.() ?? Date.now();
   const verdict = (deps.confirmLimiter ?? limiterFor('confirm', config)).check(clientKey(request), now);
   if (!verdict.allowed) return reply({ error: 'rate_limited' }, 429, { 'Retry-After': String(verdict.retryAfterSeconds) });
+  await maintain(store, config, now);
   const parsed = await readJson(request, config.grenzen.max_body_bytes);
   if (!parsed.ok) return parsed.response;
   const token = parsed.value.token;
@@ -540,6 +595,8 @@ export async function handleConfirm(request: Request, deps: ConsentDeps = {}): P
 
 /**
  * POST /api/mailing/unsubscribe?t=<Kennzeichen>
+ * Sperrt die Adresse zu diesem Kennzeichen, ob es dazu noch eine Anmeldung gibt oder nicht: Der Sperrlink einer
+ * Bestätigungsmail wirkt auch nach dem Verfall der Anmeldung. Eine nie bestätigte Anmeldung wird dabei gelöscht.
  * Abmeldung mit einem Klick (RFC 8058): Mailprogramme senden den POST ohne Anmeldung, ohne Origin und mit dem
  * Body "List-Unsubscribe=One-Click". Der Body wird nicht gelesen. Keine Mengenbegrenzung je Absender, weil
  * Postfachanbieter von gemeinsamen Adressen aus senden; das Kennzeichen hat 256 Bit.
@@ -556,6 +613,7 @@ export async function handleUnsubscribe(request: Request, deps: ConsentDeps = {}
   }
   if (!token || !TOKEN.test(token)) return reply({ error: 'token_invalid' }, 404);
   const now = deps.nowMs?.() ?? Date.now();
+  await maintain(store, deps.config ?? MAILING_CONSENT_CONFIG, now);
   try {
     const outcome = await store.unsubscribeByToken(token, now);
     if (!outcome) return reply({ error: 'token_invalid' }, 404);

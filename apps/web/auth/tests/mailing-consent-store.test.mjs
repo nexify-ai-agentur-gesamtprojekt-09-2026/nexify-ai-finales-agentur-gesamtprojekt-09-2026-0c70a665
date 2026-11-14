@@ -13,10 +13,10 @@ const CONFIGURED = { SUPABASE_URL: DB_URL + '/', SUPABASE_SERVICE_ROLE_KEY: DB_K
 const HASH = sha256Hex('person@beispiel.invalid');
 const TOKEN_HASH = sha256Hex('kennzeichen-eins');
 const UNSUB = 'U'.repeat(43);
-const LIMITS = { perAddress: 3, windowHours: 168, perDay: 50 };
+const LIMITS = { perAddress: 3, windowHours: 168, perDay: 50, attemptsPerAddress: 9, attemptsPerDay: 150 };
 const PENDING = {
   emailHash: HASH, email: 'person@beispiel.invalid', lang: 'de', source: 'preise/checkliste', consentVersion: 'test.1',
-  consentTextSha256: sha256Hex('wortlaut'), requestedAt: NOW, confirmTokenHash: TOKEN_HASH, confirmExpiresAt: NOW + 48 * HOUR, unsubscribeToken: UNSUB,
+  consentTextSha256: sha256Hex('wortlaut'), requestedAt: NOW, confirmTokenHash: TOKEN_HASH, confirmExpiresAt: NOW + 48 * HOUR,
 };
 
 async function withEnv(env, fetchImpl, run) {
@@ -44,10 +44,10 @@ async function withEnv(env, fetchImpl, run) {
  * Mailzählung mit Grenzen. Das echte Verhalten prüft apps/web/supabase/tests/mailing_consent_postgrest.mjs.
  */
 function fakePostgrest() {
-  const keys = { subscriptions: ['email_hash'], suppressions: ['email_hash'], consent_events: null, confirmation_mails: null };
-  const tables = { subscriptions: [], suppressions: [], consent_events: [], confirmation_mails: [] };
+  const keys = { subscriptions: ['email_hash'], suppressions: ['email_hash'], unsubscribe_tokens: ['email_hash'], consent_events: null, confirmation_mails: null };
+  const tables = { subscriptions: [], suppressions: [], unsubscribe_tokens: [], consent_events: [], confirmation_mails: [] };
   const db = { tables, calls: [], intercept: null, now: NOW };
-  const PROOF = ['email_hash', 'email', 'lang', 'source', 'consent_version', 'consent_text_sha256', 'requested_at', 'confirm_expires_at', 'unsubscribe_token'];
+  const PROOF = ['email_hash', 'email', 'lang', 'source', 'consent_version', 'consent_text_sha256', 'requested_at', 'confirm_expires_at'];
   const stamp = (value) => (typeof value === 'string' ? value.replace(/Z$/, '+00:00') : value);
   const out = (row, select) => Object.fromEntries((select ? select.split(',') : Object.keys(row)).map((column) => [column, column.endsWith('_at') ? stamp(row[column] ?? null) : row[column] ?? null]));
   const list = (literal) => { assert.match(literal, /^\{[0-9a-f,]*\}$/, 'Feldliteral'); return literal.slice(1, -1).split(',').filter(Boolean); };
@@ -67,7 +67,7 @@ function fakePostgrest() {
     const next = { ...row, ...patch };
     if (PROOF.some((column) => next[column] !== row[column])) return 'subscription_proof_immutable';
     if (row.status === 'unsubscribed') return 'subscription_unsubscribe_final';
-    if (next.status === 'pending' && row.status !== 'pending') return 'subscription_status_forward_only';
+    if ((next.status === 'pending' && row.status !== 'pending') || (row.status === 'pending' && next.status === 'unsubscribed')) return 'subscription_status_forward_only';
     if (row.status === 'pending' && next.status === 'confirmed') {
       if (!next.confirmed_at || Date.parse(next.confirmed_at) >= Date.parse(row.confirm_expires_at)) return 'subscription_confirm_outside_deadline';
       if (tables.suppressions.some((entry) => entry.email_hash === row.email_hash)) return 'subscription_confirm_suppressed';
@@ -134,15 +134,18 @@ function fakePostgrest() {
       const row = { ...call.body };
       if (table === 'subscriptions' && (row.status !== 'pending' || row.confirmed_at || row.unsubscribed_at)) return refuse('subscription_insert_only_pending');
       if (table === 'confirmation_mails') {
-        for (const [column, min, max] of [['address_limit', 1, 10], ['address_window_hours', 1, 8760], ['daily_limit', 1, 10000]]) {
+        for (const [column, min, max] of [['address_limit', 1, 10], ['address_window_hours', 1, 8760], ['daily_limit', 1, 10000], ['address_attempt_limit', 1, 100], ['daily_attempt_limit', 1, 100000]]) {
           if (!Number.isInteger(row[column]) || row[column] < min || row[column] > max) return refuse('check ' + column);
         }
         if ('state' in row && row.state !== 'reserved') return refuse('confirmation_mail_insert_only_reserved');
         const at = Date.parse(row.reserved_at);
-        const counted = tables[table].filter((entry) => entry.state !== 'failed');
-        // Wie der Trigger: Über der Grenze entsteht keine Zeile, und das ist kein Fehler.
-        if (counted.filter((entry) => entry.email_hash === row.email_hash && Date.parse(entry.reserved_at) > at - row.address_window_hours * HOUR).length >= row.address_limit) return Response.json([], { status: 201 });
-        if (counted.filter((entry) => Date.parse(entry.reserved_at) > at - 24 * HOUR).length >= row.daily_limit) return Response.json([], { status: 201 });
+        const own = tables[table].filter((entry) => entry.email_hash === row.email_hash && Date.parse(entry.reserved_at) > at - row.address_window_hours * HOUR);
+        const day = tables[table].filter((entry) => Date.parse(entry.reserved_at) > at - 24 * HOUR);
+        const sent = (entries) => entries.filter((entry) => entry.state !== 'failed').length;
+        // Wie der Trigger: Über der Grenze entsteht keine Zeile, und das ist kein Fehler. (Die Uhr der Datenbank und
+        // die Obergrenzen aus mailing.settings bildet dieser Nachbau nicht nach; das prüft der Lauf gegen PostgreSQL.)
+        if (sent(own) >= row.address_limit || own.length >= row.address_attempt_limit) return Response.json([], { status: 201 });
+        if (sent(day) >= row.daily_limit || day.length >= row.daily_attempt_limit) return Response.json([], { status: 201 });
         Object.assign(row, { id: tables[table].length + 1, state: 'reserved' });
       }
       if (keys[table] && tables[table].some((entry) => conflict.every((column) => entry[column] === row[column]))) {
@@ -184,13 +187,14 @@ test('Anlegen, weiteres Kennzeichen, bestätigen: der Nachweis wird nie umgeschr
     };
     let record = await store.getSubscription(HASH);
     assert.deepEqual(record, proof);
-    assert.ok(!JSON.stringify(record).includes(UNSUB) && !JSON.stringify(record).includes(TOKEN_HASH), 'Kennzeichen werden beim Lesen nie herausgegeben');
+    assert.ok(!JSON.stringify(record).includes(TOKEN_HASH), 'Kennzeichen werden beim Lesen nie herausgegeben');
+    assert.ok(!('unsubscribe_token' in insert.body), 'das Abmeldekennzeichen steht nicht in der Anmeldung');
     const read = db.calls.filter((call) => call.method === 'GET').at(-1);
     assert.ok(!read.query.get('select').includes('token'), 'und gar nicht erst abgefragt');
 
     // Weiteres Kennzeichen: Der Filter trägt den gelesenen Stand der Liste; geschrieben wird nur die Liste.
     const second = sha256Hex('kennzeichen-zwei');
-    assert.deepEqual(await store.addConfirmToken(HASH, second, NOW + HOUR), { unsubscribeToken: UNSUB }, 'einzige Stelle, an der das Abmeldekennzeichen herauskommt');
+    assert.equal(await store.addConfirmToken(HASH, second, NOW + HOUR), true);
     const patch = db.calls.filter((call) => call.method === 'PATCH').at(-1);
     assert.equal(patch.query.get('status'), 'eq.pending');
     assert.equal(patch.query.get('confirm_token_hashes'), `eq.{${TOKEN_HASH}}`);
@@ -198,8 +202,8 @@ test('Anlegen, weiteres Kennzeichen, bestätigen: der Nachweis wird nie umgeschr
     assert.deepEqual(Object.keys(patch.body).sort(), ['confirm_token_hashes', 'updated_at']);
     assert.deepEqual(patch.body.confirm_token_hashes, [TOKEN_HASH, second]);
     assert.deepEqual(await store.getSubscription(HASH), proof, 'Nachweis unverändert');
-    assert.equal(await store.addConfirmToken(HASH, sha256Hex('zu-spät'), NOW + 49 * HOUR), null, 'nach der Frist kein weiteres Kennzeichen');
-    assert.equal(await store.addConfirmToken(sha256Hex('unbekannt'), second, NOW), null);
+    assert.equal(await store.addConfirmToken(HASH, sha256Hex('zu-spät'), NOW + 49 * HOUR), false, 'nach der Frist kein weiteres Kennzeichen');
+    assert.equal(await store.addConfirmToken(sha256Hex('unbekannt'), second, NOW), false);
 
     assert.deepEqual(await store.findPendingByTokenHash(TOKEN_HASH, NOW + 2 * HOUR), { emailHash: HASH });
     assert.equal(await store.findPendingByTokenHash(sha256Hex('fremd'), NOW + 2 * HOUR), null);
@@ -217,7 +221,7 @@ test('Anlegen, weiteres Kennzeichen, bestätigen: der Nachweis wird nie umgeschr
     assert.deepEqual(Object.keys(confirm.body).sort(), ['confirm_token_hashes', 'confirmed_at', 'status', 'updated_at'], 'die Bestätigung schreibt keinen Teil des Nachweises');
     assert.deepEqual(confirm.body.confirm_token_hashes, [], 'alle Kennzeichen verbraucht');
     assert.equal(await store.confirmByTokenHash(TOKEN_HASH, NOW + 3 * HOUR), null, 'zweite Verwendung');
-    assert.equal(await store.addConfirmToken(HASH, sha256Hex('nach-bestätigung'), NOW + 3 * HOUR), null, 'eine bestätigte Zeile bekommt kein Kennzeichen mehr');
+    assert.equal(await store.addConfirmToken(HASH, sha256Hex('nach-bestätigung'), NOW + 3 * HOUR), false, 'eine bestätigte Zeile bekommt kein Kennzeichen mehr');
   });
 });
 
@@ -229,11 +233,11 @@ test('Weiteres Kennzeichen bei gleichzeitigen Aufrufen: keiner überschreibt den
     const hashes = Array.from({ length: 3 }, (_, i) => sha256Hex('gleichzeitig-' + i));
     // Alle lesen denselben Stand; nur einer trifft mit seinem Filter, die anderen lesen neu und versuchen es erneut.
     const results = await Promise.all(hashes.map((hash) => store.addConfirmToken(HASH, hash, NOW)));
-    assert.ok(results.every((result) => result && result.unsubscribeToken === UNSUB));
+    assert.ok(results.every((result) => result === true));
     assert.deepEqual([...db.tables.subscriptions[0].confirm_token_hashes].sort(), [TOKEN_HASH, ...hashes].sort());
     for (let i = 0; i < 4; i++) assert.ok(await store.addConfirmToken(HASH, sha256Hex('weiter-' + i), NOW));
     assert.equal(db.tables.subscriptions[0].confirm_token_hashes.length, 8);
-    assert.equal(await store.addConfirmToken(HASH, sha256Hex('neuntes'), NOW), null);
+    assert.equal(await store.addConfirmToken(HASH, sha256Hex('neuntes'), NOW), false);
     // Das letzte Kennzeichen einer offenen Anmeldung bleibt stehen.
     db.tables.subscriptions[0].confirm_token_hashes = [TOKEN_HASH];
     await store.removeConfirmToken(HASH, TOKEN_HASH);
@@ -260,7 +264,7 @@ test('Mailzählung: Grenze je Adresse und je Tag, Fehlschlag gibt den Platz frei
     assert.deepEqual(first, { id: 1 });
     const insert = db.calls.at(-1);
     assert.equal(insert.table, 'confirmation_mails');
-    assert.deepEqual(insert.body, { email_hash: HASH, reserved_at: new Date(NOW).toISOString(), address_limit: 3, address_window_hours: 168, daily_limit: 50 });
+    assert.deepEqual(insert.body, { email_hash: HASH, reserved_at: new Date(NOW).toISOString(), address_limit: 3, address_window_hours: 168, daily_limit: 50, address_attempt_limit: 9, daily_attempt_limit: 150 });
     assert.ok(!JSON.stringify(insert.body).includes('@'), 'keine Adresse in der Zählung');
     const second = await store.reserveConfirmationMail(HASH, NOW + HOUR, LIMITS);
     const third = await store.reserveConfirmationMail(HASH, NOW + 2 * HOUR, LIMITS);
@@ -277,7 +281,7 @@ test('Mailzählung: Grenze je Adresse und je Tag, Fehlschlag gibt den Platz frei
     assert.ok(third);
 
     // Tagesgrenze über alle Adressen.
-    const day = { perAddress: 3, windowHours: 168, perDay: 5 };
+    const day = { ...LIMITS, perDay: 5 };
     assert.equal(await store.dailyLimitReached(NOW + 4 * HOUR, 5), false);
     assert.ok(await store.reserveConfirmationMail(sha256Hex('a'), NOW + 4 * HOUR, day));
     assert.ok(await store.reserveConfirmationMail(sha256Hex('b'), NOW + 4 * HOUR, day));
@@ -312,6 +316,10 @@ test('Mailzählung: ungültige Grenzen (0, NaN, Bruch, zu groß) erreichen die D
       await assert.rejects(store.reserveConfirmationMail(HASH, NOW, { ...LIMITS, perDay: bad }), failed, `perDay=${String(bad)}`);
     }
     await assert.rejects(store.reserveConfirmationMail(HASH, NOW, { ...LIMITS, perAddress: 11 }), failed);
+    await assert.rejects(store.reserveConfirmationMail(HASH, NOW, { ...LIMITS, attemptsPerAddress: 0 }), failed);
+    await assert.rejects(store.reserveConfirmationMail(HASH, NOW, { ...LIMITS, attemptsPerDay: Number.NaN }), failed);
+    const { attemptsPerDay: _missing, ...incomplete } = LIMITS;
+    await assert.rejects(store.reserveConfirmationMail(HASH, NOW, incomplete), failed);
     await assert.rejects(store.dailyLimitReached(NOW, Number.NaN), failed);
     await assert.rejects(store.purgeSettledMails(NOW, 0), failed);
     await assert.rejects(store.settleConfirmationMail({ id: Number.NaN }, 'sent'), failed);
@@ -320,33 +328,71 @@ test('Mailzählung: ungültige Grenzen (0, NaN, Bruch, zu groß) erreichen die D
   });
 });
 
-test('Abmeldung: erst die Sperre, dann der Zustand; wiederholbar', async () => {
+test('Abmeldekennzeichen: eines je Adress-Prüfsumme, nie ersetzt, unabhängig von der Anmeldung', async () => {
   const db = fakePostgrest();
   await withEnv(CONFIGURED, db.fetch, async () => {
     const store = createSupabaseMailingConsentStore();
-    await store.insertPending(PENDING);
-    assert.equal(await store.unsubscribeByToken('X'.repeat(43), NOW), null);
-    db.calls.length = 0;
-    assert.deepEqual(await store.unsubscribeByToken(UNSUB, NOW + HOUR), { emailHash: HASH, alreadyUnsubscribed: false });
-    assert.deepEqual(db.calls.map((call) => call.method + ' ' + call.table), ['GET subscriptions', 'POST suppressions', 'PATCH subscriptions']);
-    assert.deepEqual(db.tables.suppressions, [{ email_hash: HASH, reason: 'unsubscribe', created_at: new Date(NOW + HOUR).toISOString() }]);
-    assert.equal(db.calls[2].query.get('status'), 'neq.unsubscribed');
-    assert.deepEqual(db.calls[2].body.confirm_token_hashes, [], 'kein Bestätigungskennzeichen bleibt gültig');
-    assert.equal(await store.isSuppressed(HASH), true);
-    assert.equal((await store.getSubscription(HASH)).status, 'unsubscribed');
-    assert.equal(await store.confirmByTokenHash(TOKEN_HASH, NOW + 2 * HOUR), null, 'nach der Abmeldung bestätigt kein Link mehr');
-    assert.deepEqual(await store.unsubscribeByToken(UNSUB, NOW + 2 * HOUR), { emailHash: HASH, alreadyUnsubscribed: true });
-    assert.equal(db.tables.suppressions.length, 1);
-    assert.equal(db.tables.suppressions[0].created_at, new Date(NOW + HOUR).toISOString(), 'erster Eintrag bleibt stehen');
+    // Es gibt noch gar keine Anmeldung: Das Kennzeichen hängt nur an der Prüfsumme.
+    assert.equal(await store.issueUnsubscribeToken(HASH, UNSUB), UNSUB);
+    const insert = db.calls.find((call) => call.method === 'POST');
+    assert.equal(insert.table, 'unsubscribe_tokens');
+    assert.equal(insert.search, '?on_conflict=email_hash');
+    assert.match(insert.headers.Prefer, /resolution=ignore-duplicates/);
+    assert.deepEqual(insert.body, { email_hash: HASH, token: UNSUB }, 'nur Prüfsumme und Kennzeichen, keine Adresse');
+    assert.equal(await store.issueUnsubscribeToken(HASH, 'V'.repeat(43)), UNSUB, 'das zuerst eingetragene gilt');
+    const many = await Promise.all(Array.from({ length: 5 }, (_, i) => store.issueUnsubscribeToken(sha256Hex('zugleich'), String(i).repeat(43))));
+    assert.equal(new Set(many).size, 1, 'gleichzeitige Aufrufe bekommen dasselbe Kennzeichen');
+    assert.equal(db.tables.unsubscribe_tokens.length, 2);
   });
 });
 
-test('Abmeldung bricht nach der Sperre ab: die Adresse ist trotzdem gesperrt', async () => {
+test('Sperre über das Kennzeichen: erst die Sperrliste, dann die Anmeldung; nie bestätigt wird gelöscht, bestätigt abgemeldet; wirkt auch ohne Anmeldung', async () => {
   const db = fakePostgrest();
-  db.intercept = (call) => (call.method === 'PATCH' ? new Response('{"message":"kaputt"}', { status: 500 }) : undefined);
   await withEnv(CONFIGURED, db.fetch, async () => {
     const store = createSupabaseMailingConsentStore();
     await store.insertPending(PENDING);
+    await store.issueUnsubscribeToken(HASH, UNSUB);
+    assert.equal(await store.unsubscribeByToken('X'.repeat(43), NOW), null);
+    db.calls.length = 0;
+    assert.deepEqual(await store.unsubscribeByToken(UNSUB, NOW + HOUR), { emailHash: HASH, alreadyUnsubscribed: false });
+    assert.deepEqual(db.calls.map((call) => call.method + ' ' + call.table), ['GET unsubscribe_tokens', 'POST suppressions', 'DELETE subscriptions', 'PATCH subscriptions']);
+    assert.deepEqual(db.tables.suppressions, [{ email_hash: HASH, reason: 'unsubscribe', created_at: new Date(NOW + HOUR).toISOString() }]);
+    assert.equal(db.calls[2].query.get('status'), 'eq.pending');
+    assert.equal(db.calls[3].query.get('status'), 'eq.confirmed');
+    assert.equal(await store.isSuppressed(HASH), true);
+    assert.equal(await store.getSubscription(HASH), null, 'nie bestätigt: Zeile samt Adresse gelöscht');
+    assert.ok(!JSON.stringify(db.tables).includes('person@beispiel.invalid'), 'die Adresse steht nirgends mehr');
+    // Wiederholung, jetzt ohne jede Anmeldung: wirkt weiter und meldet, dass schon gesperrt war.
+    assert.deepEqual(await store.unsubscribeByToken(UNSUB, NOW + 2 * HOUR), { emailHash: HASH, alreadyUnsubscribed: true });
+    assert.equal(db.tables.suppressions.length, 1);
+    assert.equal(db.tables.suppressions[0].created_at, new Date(NOW + HOUR).toISOString(), 'erster Eintrag bleibt stehen');
+
+    // Bestätigte Adresse: abgemeldet, der Nachweis bleibt.
+    const other = sha256Hex('bestaetigt@beispiel.invalid');
+    const otherToken = 'B'.repeat(43);
+    await store.insertPending({ ...PENDING, emailHash: other, email: 'bestaetigt@beispiel.invalid', confirmTokenHash: sha256Hex('k2') });
+    await store.issueUnsubscribeToken(other, otherToken);
+    await store.confirmByTokenHash(sha256Hex('k2'), NOW + HOUR);
+    assert.deepEqual(await store.unsubscribeByToken(otherToken, NOW + 3 * HOUR), { emailHash: other, alreadyUnsubscribed: false });
+    const record = await store.getSubscription(other);
+    assert.deepEqual([record.status, record.email, record.confirmedAt, record.unsubscribedAt], ['unsubscribed', 'bestaetigt@beispiel.invalid', NOW + HOUR, NOW + 3 * HOUR]);
+    assert.equal(await store.confirmByTokenHash(sha256Hex('k2'), NOW + 4 * HOUR), null);
+
+    // Nur das Kennzeichen, keine Anmeldung je vorhanden (verfallen und gelöscht): Die Sperre entsteht trotzdem.
+    const gone = sha256Hex('verfallen@beispiel.invalid');
+    await store.issueUnsubscribeToken(gone, 'G'.repeat(43));
+    assert.deepEqual(await store.unsubscribeByToken('G'.repeat(43), NOW), { emailHash: gone, alreadyUnsubscribed: false });
+    assert.equal(await store.isSuppressed(gone), true);
+  });
+});
+
+test('Sperre bricht nach dem Eintrag auf der Sperrliste ab: die Adresse ist trotzdem gesperrt', async () => {
+  const db = fakePostgrest();
+  db.intercept = (call) => (call.method === 'DELETE' ? new Response('{"message":"kaputt"}', { status: 500 }) : undefined);
+  await withEnv(CONFIGURED, db.fetch, async () => {
+    const store = createSupabaseMailingConsentStore();
+    await store.insertPending(PENDING);
+    await store.issueUnsubscribeToken(HASH, UNSUB);
     await assert.rejects(store.unsubscribeByToken(UNSUB, NOW), (error) => error instanceof MailingConsentStoreError && error.code === 'mailing_store_failed');
     assert.equal(await store.isSuppressed(HASH), true);
   });
@@ -383,7 +429,8 @@ test('Ungültige Eingaben erreichen die Datenbank nicht', async () => {
     const failed = (error) => error instanceof MailingConsentStoreError && error.code === 'mailing_store_failed';
     await assert.rejects(store.isSuppressed('kein-hash'), failed);
     await assert.rejects(store.getSubscription("x' or 1=1"), failed);
-    await assert.rejects(store.insertPending({ ...PENDING, unsubscribeToken: 'kurz' }), failed);
+    await assert.rejects(store.issueUnsubscribeToken(HASH, 'kurz'), failed);
+    await assert.rejects(store.issueUnsubscribeToken('kein-hash', UNSUB), failed);
     await assert.rejects(store.confirmByTokenHash('&status=eq.confirmed', NOW), failed);
     await assert.rejects(store.findPendingByTokenHash('{a},b', NOW), failed);
     await assert.rejects(store.addConfirmToken(HASH, 'a}&status=eq.confirmed', NOW), failed);
@@ -422,10 +469,12 @@ test('Handler mit Supabase-Speicher: Abmeldung über den echten Weg; Fehler ohne
   const db = fakePostgrest();
   await withEnv(CONFIGURED, db.fetch, async (logs) => {
     await createSupabaseMailingConsentStore().insertPending(PENDING);
+    await createSupabaseMailingConsentStore().issueUnsubscribeToken(HASH, UNSUB);
     const request = () => new Request(`https://seite.invalid/api/mailing/unsubscribe?t=${UNSUB}`, { method: 'POST', body: 'List-Unsubscribe=One-Click' });
     const ok = await handleUnsubscribe(request());
     assert.equal(ok.status, 200);
-    assert.equal(db.tables.subscriptions[0].status, 'unsubscribed');
+    assert.deepEqual(db.tables.subscriptions, [], 'nie bestätigt: gelöscht');
+    assert.equal(db.tables.suppressions[0].email_hash, HASH);
     assert.deepEqual(db.tables.consent_events.map((row) => row.type), ['unsubscribed']);
     db.intercept = () => new Response(`{"message":"geheim ${DB_KEY} person@beispiel.invalid"}`, { status: 500 });
     const failed = await handleUnsubscribe(request());
@@ -447,7 +496,7 @@ test('Handler mit Supabase-Speicher: Anmeldung, Sperrlink aus der Mail, Bestäti
     bestaetigungsfrist_stunden: 48,
     seiten: { bestaetigung: '/b', abmeldung: '/a' },
     quellen: ['preise/checkliste'],
-    grenzen: { bestaetigungsmails_je_adresse: 2, bestaetigungsmails_fenster_stunden: 168, bestaetigungsmails_je_tag: 50, anfragen_je_minute: 100, anfragen_je_stunde: 1000, bestaetigungen_je_minute: 100, bestaetigungen_je_stunde: 1000, max_body_bytes: 4096 },
+    grenzen: { bestaetigungsmails_je_adresse: 2, bestaetigungsmails_fenster_stunden: 168, bestaetigungsmails_je_tag: 400, versandversuche_je_adresse: 6, versandversuche_je_tag: 400, anfragen_je_minute: 100, anfragen_je_stunde: 100, anfragen_je_tag: 100, bestaetigungen_je_minute: 100, bestaetigungen_je_stunde: 1000, max_body_bytes: 4096 },
   };
   await withEnv(CONFIGURED, db.fetch, async () => {
     const outbox = [];
@@ -462,7 +511,7 @@ test('Handler mit Supabase-Speicher: Anmeldung, Sperrlink aus der Mail, Bestäti
     assert.equal(db.tables.subscriptions[0].confirm_token_hashes.length, 2);
     const confirmToken = outbox[0].text.match(/\/b#t=([A-Za-z0-9_-]{43})/)[1];
     const blockToken = outbox[1].text.match(/\/a#t=([A-Za-z0-9_-]{43})/)[1];
-    assert.equal(blockToken, db.tables.subscriptions[0].unsubscribe_token, 'der Sperrlink der zweiten Mail trägt das gespeicherte Abmeldekennzeichen');
+    assert.equal(blockToken, db.tables.unsubscribe_tokens[0].token, 'der Sperrlink der zweiten Mail trägt das gespeicherte Abmeldekennzeichen');
     // Eine zweite Adresse wird über ihren Sperrlink gesperrt, ohne je zu bestätigen.
     assert.equal((await subscribe('zweite@person.invalid')).status, 202);
     const otherBlock = outbox[2].text.match(/\/a#t=([A-Za-z0-9_-]{43})/)[1];
@@ -473,16 +522,21 @@ test('Handler mit Supabase-Speicher: Anmeldung, Sperrlink aus der Mail, Bestäti
     // Die erste Adresse bestätigt mit ihrem ersten Link.
     state.now = NOW + HOUR;
     assert.equal((await handleConfirm(post('/api/mailing/confirm', { token: confirmToken }), deps)).status, 200);
-    assert.deepEqual([db.tables.subscriptions[0].status, db.tables.subscriptions[0].confirm_token_hashes], ['confirmed', []]);
+    assert.deepEqual(db.tables.subscriptions.map((row) => [row.status, row.confirm_token_hashes]), [['confirmed', []]], 'die gesperrte zweite Adresse ist gelöscht');
     assert.deepEqual(db.tables.consent_events.map((row) => row.type), ['requested', 'confirmation_resent', 'requested', 'unsubscribed', 'confirmed']);
   });
 });
 
-test('Schalter aus: die Anmeldung fasst die Datenbank nicht an, auch wenn Supabase konfiguriert ist', async () => {
+test('Schalter aus: die Anmeldung liest und schreibt nichts; sie räumt nur Verfallenes ab, auch wenn Supabase konfiguriert ist', async () => {
   const db = fakePostgrest();
   await withEnv(CONFIGURED, db.fetch, async () => {
-    const res = await handleSubscribe(new Request('https://seite.invalid/api/mailing/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }), { env: {} });
+    const store = createSupabaseMailingConsentStore();
+    await store.insertPending(PENDING);
+    db.calls.length = 0;
+    db.now = Date.now();
+    const res = await handleSubscribe(new Request('https://seite.invalid/api/mailing/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }), { env: {}, nowMs: () => NOW + 49 * HOUR });
     assert.equal(res.status, 503);
-    assert.equal(db.calls.length, 0);
+    assert.deepEqual(db.calls.map((call) => call.method + ' ' + call.table), ['DELETE subscriptions', 'DELETE confirmation_mails'], 'nur Aufräumen, kein Lesen, kein Einfügen');
+    assert.deepEqual(db.tables.subscriptions, [], 'die verfallene Adresse ist weg, obwohl der Schalter aus ist');
   });
 });

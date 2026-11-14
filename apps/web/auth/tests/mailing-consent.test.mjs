@@ -34,7 +34,8 @@ const MAIL_FR = { betreff: 'PRÜFBETREFF ZWEI', text: 'Zweite Sprache.\n\n{{BEST
 const FREIGABE = { durch: 'Prüfperson', am: '2026-01-01', beleg: 'Prüfbeleg des Tests' };
 const GRENZEN = {
   bestaetigungsmails_je_adresse: 3, bestaetigungsmails_fenster_stunden: 168, bestaetigungsmails_je_tag: 50,
-  anfragen_je_minute: 3, anfragen_je_stunde: 10, bestaetigungen_je_minute: 10, bestaetigungen_je_stunde: 60, max_body_bytes: 4096,
+  versandversuche_je_adresse: 9, versandversuche_je_tag: 150,
+  anfragen_je_minute: 3, anfragen_je_stunde: 10, anfragen_je_tag: 12, bestaetigungen_je_minute: 10, bestaetigungen_je_stunde: 60, max_body_bytes: 4096,
 };
 const FREIGEGEBEN = {
   einwilligung: { fassung: 'test.1', freigabe: { ...FREIGABE, sha256: { de: consentTextDigest(TEXT_DE) } }, texte: { de: TEXT_DE, nl: null, fr: null, en: null } },
@@ -130,6 +131,9 @@ test('Bereitschaft: jede fehlende Freigabe oder Festlegung wird einzeln benannt'
     [(c) => { c.einwilligung.freigabe = { durch: 'x', am: 'bald', beleg: 'y' }; }, 'consent_text_not_approved'],
     [(c) => { c.einwilligung.freigabe = { durch: 'x', am: '2026-01-01', beleg: ' ' }; }, 'consent_text_not_approved'],
     [(c) => { c.einwilligung.texte.de = '  '; }, 'consent_text_missing'],
+    [(c) => { c.einwilligung.texte.de = TEXT_DE + ' {{SPERRLINK}}'; c.einwilligung.freigabe.sha256.de = consentTextDigest(c.einwilligung.texte.de); }, 'consent_text_placeholder_unresolved'],
+    [(c) => { c.einwilligung.texte.de = TEXT_DE + ' [FIRMENNAME EINSETZEN]'; c.einwilligung.freigabe.sha256.de = consentTextDigest(c.einwilligung.texte.de); }, 'consent_text_placeholder_unresolved'],
+    [(c) => { c.einwilligung.texte.de = TEXT_DE + ' }}'; c.einwilligung.freigabe.sha256.de = consentTextDigest(c.einwilligung.texte.de); }, 'consent_text_placeholder_unresolved'],
     [(c) => { c.bestaetigungsmail.freigabe = null; }, 'confirmation_mail_not_approved'],
     [(c) => { c.bestaetigungsmail.texte.de = null; }, 'confirmation_mail_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.betreff = 'Zeile\nZwei'; }, 'confirmation_mail_missing'],
@@ -291,6 +295,14 @@ test('Anmeldung: ohne ausdrückliche Einwilligung, mit falscher Fassung, Sprache
     [{ ...VALID, email: 'rand@steuer.invalid\u0000' }, 422, 'invalid_email'],
     [{ ...VALID, email: '\u0007rand@steuer.invalid' }, 422, 'invalid_email'],
     [{ ...VALID, email: 'rand@steuer.invalid\n' }, 422, 'invalid_email'],
+    // Unsichtbare und umstellende Zeichen: gleiche Erscheinung, andere Prüfsumme, eigene Grenzen.
+    [{ ...VALID, email: 'a\u200bb@unsichtbar.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u202eb@unsichtbar.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u00adb@unsichtbar.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u2060b@unsichtbar.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: '\ufeffa@unsichtbar.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u2028b@unsichtbar.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\ue000b@unsichtbar.invalid' }, 422, 'invalid_email'],
   ];
   for (const [body, status, error] of cases) {
     const { deps, outbox, store } = setup();
@@ -389,9 +401,8 @@ test('Bestätigung: nach Ablauf der Frist wirkungslos; die verfallene Anmeldung 
   const token = tokenFromMail(outbox[0]);
   state.now = NOW + 48 * HOUR + 1;
   assert.equal((await confirm(deps, token)).status, 404);
-  assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'pending');
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null, 'verfallene Zeile samt Adresse gelöscht, schon durch diesen Aufruf');
   await subscribe(deps, { ...VALID, email: 'andere@person.invalid' });
-  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null, 'verfallene Zeile gelöscht');
   assert.equal((await store.getSubscription(emailHash('andere@person.invalid'))).status, 'pending');
 });
 
@@ -483,7 +494,7 @@ test('Grenze je Adresse überlebt den Verfall der Anmeldung und gilt über das Z
 
 test('Tagesgrenze: insgesamt höchstens so viele Bestätigungsmails in 24 Stunden, mit Meldung im Protokoll', async () => {
   const config = clone(FREIGEGEBEN);
-  config.grenzen.bestaetigungsmails_je_tag = 4;
+  Object.assign(config.grenzen, { bestaetigungsmails_je_tag: 4, anfragen_je_tag: 1 });
   const { deps, outbox, store, state } = setup({ config });
   const { logs } = await quiet(async () => {
     for (let i = 0; i < 7; i++) {
@@ -503,7 +514,7 @@ test('Tagesgrenze: insgesamt höchstens so viele Bestätigungsmails in 24 Stunde
 
 test('Gleichzeitige Anmeldungen: nie mehr Mails als die Grenzen erlauben, genau eine Zeile je Adresse', async () => {
   const config = clone(FREIGEGEBEN);
-  config.grenzen.bestaetigungsmails_je_tag = 5;
+  Object.assign(config.grenzen, { bestaetigungsmails_je_tag: 5, anfragen_je_tag: 1 });
   const { deps, outbox, store } = setup({ config });
   // Der Versand dauert, damit sich die Aufrufe tatsächlich überlappen.
   deps.sendMail = async (mail) => { await new Promise((resolve) => setTimeout(resolve, 5)); outbox.push(mail); return { ok: true }; };
@@ -568,7 +579,8 @@ test('Abmeldung arbeitet ohne Schalter und ohne Freigaben; ohne Speicher 503 sta
   const off = { ...deps, env: {}, config: MAILING_CONSENT_CONFIG };
   const blockToken = blockTokenFromMail(outbox[0]);
   assert.equal((await unsubscribe(off, blockToken)).status, 200);
-  assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'unsubscribed');
+  assert.equal(await store.isSuppressed(emailHash(ADDRESS)), true);
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null, 'nie bestätigt: die Zeile ist gelöscht, die Sperre steht');
   assert.equal(outbox.length, 1);
   assert.equal((await unsubscribe({ ...deps, store: null }, blockToken)).status, 503);
 });
@@ -585,16 +597,152 @@ test('Sperrlink: wer eine von Dritten ausgelöste Bestätigungsmail bekommt, spe
   state.now = NOW + HOUR;
   const res = await unsubscribe(deps, blockToken);
   assert.equal(res.status, 200);
-  const record = await store.getSubscription(emailHash(ADDRESS));
-  assert.deepEqual([record.status, record.confirmedAt, record.unsubscribedAt], ['unsubscribed', null, NOW + HOUR]);
   assert.equal(store.suppressions.get(emailHash(ADDRESS)), 'unsubscribe');
+  // Wer nie eingewilligt hat, bleibt nicht im Klartext gespeichert: Für die Sperre genügt die Prüfsumme.
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null);
+  assert.deepEqual(store.events.map((event) => event.type), ['requested', 'unsubscribed']);
+  assert.equal((await unsubscribe(deps, blockToken)).status, 200, 'Wiederholung');
+  assert.deepEqual(store.events.map((event) => event.type), ['requested', 'unsubscribed'], 'die Wiederholung schreibt keinen zweiten Eintrag');
   // Danach: der Bestätigungslink ist wirkungslos, und kein Dritter löst je wieder eine Mail an diese Adresse aus.
   assert.equal((await confirm(deps, tokenFromMail(mail))).status, 404);
   state.now = NOW + 400 * HOUR;
   for (let i = 0; i < 3; i++) assert.equal((await subscribe(deps)).status, 202);
   assert.equal(outbox.length, 1);
-  // Das Kennzeichen verlässt den Speicher nur über die Mail: nicht über das Lesen der Anmeldung.
-  assert.ok(!JSON.stringify(record).includes(blockToken));
+});
+
+test('Sperrlink überlebt den Verfall der Anmeldung: auch wer die Mail nach der Frist liest, kann seine Adresse sperren', async () => {
+  const { deps, outbox, store, state } = setup();
+  await subscribe(deps);
+  const blockToken = blockTokenFromMail(outbox[0]);
+  // Die Frist (48 Stunden) läuft ab, und die Anmeldung eines anderen räumt die verfallene Zeile ab.
+  state.now = NOW + 49 * HOUR;
+  await subscribe(deps, { ...VALID, email: 'fremd@person.invalid' });
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null, 'die Anmeldung ist verfallen und gelöscht');
+  // Der Sperrlink der alten Mail wirkt trotzdem.
+  const res = await unsubscribe(deps, blockToken);
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { status: 'unsubscribed' });
+  assert.equal(await store.isSuppressed(emailHash(ADDRESS)), true);
+  const before = outbox.length;
+  for (let i = 0; i < 3; i++) assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, before, 'kein Dritter löst wieder eine Mail an diese Adresse aus');
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null);
+  // Ohne Sperre: Eine neue Anmeldung nach dem Verfall trägt denselben Sperrlink wie die erste Mail.
+  const other = setup();
+  await subscribe(other.deps);
+  other.state.now = NOW + 49 * HOUR;
+  await subscribe(other.deps);
+  assert.equal(other.outbox.length, 2);
+  assert.equal(blockTokenFromMail(other.outbox[1]), blockTokenFromMail(other.outbox[0]), 'ein Kennzeichen je Adresse, über jeden Verfall hinweg');
+  assert.notEqual(tokenFromMail(other.outbox[1]), tokenFromMail(other.outbox[0]));
+  assert.equal((await unsubscribe(other.deps, blockTokenFromMail(other.outbox[0]))).status, 200);
+  assert.equal(await other.store.getSubscription(emailHash(ADDRESS)), null);
+});
+
+test('Abmeldung einer bestätigten Adresse: der Nachweis der Einwilligung bleibt, die Zeile wird abgemeldet statt gelöscht', async () => {
+  const { deps, outbox, store, state } = setup();
+  await subscribe(deps);
+  state.now = NOW + HOUR;
+  await confirm(deps, tokenFromMail(outbox[0]));
+  state.now = NOW + 2 * HOUR;
+  assert.equal((await unsubscribe(deps, blockTokenFromMail(outbox[0]))).status, 200);
+  const record = await store.getSubscription(emailHash(ADDRESS));
+  assert.deepEqual([record.status, record.email, record.confirmedAt, record.unsubscribedAt], ['unsubscribed', ADDRESS, NOW + HOUR, NOW + 2 * HOUR]);
+});
+
+test('Aufräumen hängt nicht am Schalter: auch bei ausgeschalteter Anmeldung verschwinden verfallene Adressen', async () => {
+  for (const route of ['subscribe', 'confirm', 'unsubscribe']) {
+    const { deps, store, state } = setup();
+    await subscribe(deps);
+    state.now = NOW + 49 * HOUR;
+    // Rückweg laut Betriebsnotiz: Schalter gelöscht, Freigaben fehlen.
+    const off = { ...deps, env: {}, config: MAILING_CONSENT_CONFIG };
+    const res = route === 'subscribe' ? await subscribe(off) : route === 'confirm' ? await confirm(off, 'A'.repeat(43)) : await unsubscribe(off, 'A'.repeat(43));
+    assert.equal(res.status, route === 'unsubscribe' ? 404 : 503, route);
+    if (route === 'confirm') {
+      // Die Bestätigung räumt erst hinter ihrer Mengenbegrenzung auf; bei ausgeschaltetem Schalter erreicht sie die nicht.
+      assert.notEqual(await store.getSubscription(emailHash(ADDRESS)), null);
+      continue;
+    }
+    assert.equal(await store.getSubscription(emailHash(ADDRESS)), null, `${route}: verfallene Zeile gelöscht, obwohl der Schalter aus ist`);
+  }
+  // Höchstens ein Aufräumlauf je Minute und Speicher, damit ein Aufrufer die Datenbank damit nicht belasten kann.
+  const { deps, store, state } = setup();
+  let purges = 0;
+  const real = store.purgeExpiredPending.bind(store);
+  store.purgeExpiredPending = async (now) => { purges += 1; return real(now); };
+  for (let i = 0; i < 5; i++) await unsubscribe(deps, 'A'.repeat(43));
+  assert.equal(purges, 1);
+  state.now = NOW + 61_000;
+  await unsubscribe(deps, 'A'.repeat(43));
+  assert.equal(purges, 2);
+  // Ein Fehler beim Aufräumen bricht keine Anfrage ab.
+  store.purgeExpiredPending = async () => { throw new MailingConsentStoreError('mailing_store_timeout'); };
+  state.now = NOW + 200_000;
+  const { result, logs } = await quiet(() => subscribe(deps));
+  assert.equal(result.status, 202);
+  assert.match(logs.join('\n'), /"event":"mailing_consent_cleanup_failed","step":"purge_expired_pending"/);
+});
+
+test('Ein einzelner Absender kann die Tagesgrenze nicht ausschöpfen: Grenze je Absender und Tag, an die Tagesgrenze gebunden', async () => {
+  // Die ausgelieferten Werte halten die Regel ein; ein Viertel der Tagesgrenze ist das Höchste für einen Absender.
+  const shipped = MAILING_CONSENT_CONFIG.grenzen;
+  assert.ok(shipped.anfragen_je_tag * 4 <= shipped.bestaetigungsmails_je_tag, 'ausgelieferte Grenzen');
+  const loose = clone(FREIGEGEBEN);
+  loose.grenzen.anfragen_je_tag = 13;
+  assert.deepEqual(consentReadiness(loose, ENV), ['limits_invalid'], '13 × 4 > 50');
+  const missing = clone(FREIGEGEBEN);
+  delete missing.grenzen.anfragen_je_tag;
+  assert.deepEqual(consentReadiness(missing, ENV), ['limits_invalid']);
+  // Ein Absender, je Aufruf eine neue Adresse, über 24 Stunden so schnell die Bremse es zulässt (echter Begrenzer, Werte der Konfiguration).
+  const config = clone(FREIGEGEBEN);
+  Object.assign(config.grenzen, shipped);
+  const { deps, outbox, state } = setup({ config, limiter: undefined });
+  const attacker = { 'x-forwarded-for': '203.0.113.200' };
+  let limited = 0;
+  for (let minute = 0; minute < 24 * 60; minute += 2) {
+    state.now = NOW + minute * 60_000;
+    const res = await subscribe(deps, { ...VALID, email: `ziel${minute}@beispiel.invalid` }, attacker);
+    if (res.status === 429) limited += 1;
+  }
+  assert.equal(outbox.length, shipped.anfragen_je_tag, 'nicht mehr Mails, als ein Absender je Tag anfragen darf');
+  assert.ok(outbox.length * 4 <= shipped.bestaetigungsmails_je_tag);
+  assert.ok(limited > 600);
+  // Eine echte Anmeldung von einem anderen Absender bekommt danach ihre Mail.
+  state.now = NOW + 24 * HOUR - 60_000;
+  const before = outbox.length;
+  assert.equal((await subscribe(deps, VALID, { 'x-forwarded-for': '198.51.100.77' })).status, 202);
+  assert.equal(outbox.length, before + 1);
+  assert.equal(outbox.at(-1).to, ADDRESS);
+});
+
+test('Versandversuche sind begrenzt: ein gestörter Versanddienst wird nicht endlos bestürmt', async () => {
+  const { deps, outbox, store, state } = setup();
+  state.mailResult = { ok: false, error: 'resend_500' };
+  const { result } = await quiet(async () => {
+    const statuses = [];
+    for (let i = 0; i < 14; i++) statuses.push((await subscribe(deps)).status);
+    return statuses;
+  });
+  // Neun Versuche je Adresse im Fenster gehen an den Versand, danach antwortet die Anmeldung wie bei jeder erreichten Grenze.
+  assert.deepEqual(result, [...Array(9).fill(502), ...Array(5).fill(202)]);
+  assert.equal(outbox.length, 9);
+  assert.equal(store.mails.length, 9);
+  // Auch wenn der Versand wieder geht: Die Versuche der Adresse sind für dieses Fenster verbraucht.
+  state.mailResult = { ok: true };
+  assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 9);
+  // Insgesamt je Tag: bei gestörtem Versand über viele Adressen.
+  const config = clone(FREIGEGEBEN);
+  Object.assign(config.grenzen, { versandversuche_je_tag: 50, bestaetigungsmails_je_tag: 50 });
+  const day = setup({ config });
+  day.state.mailResult = { ok: false };
+  await quiet(async () => { for (let i = 0; i < 60; i++) await subscribe(day.deps, { ...VALID, email: `v${i}@beispiel.invalid` }); });
+  assert.equal(day.outbox.length, 50);
+  // Versuche schließen gelungene Mails ein; eine Grenze darunter wäre widersprüchlich.
+  const low = clone(FREIGEGEBEN);
+  low.grenzen.versandversuche_je_adresse = 2;
+  assert.deepEqual(consentReadiness(low, ENV), ['limits_invalid']);
 });
 
 test('Sperrliste: eine gesperrte Adresse (Rückläufer, Beschwerde, Widerspruch) bekommt keine Bestätigungsmail', async () => {

@@ -24,12 +24,15 @@
   },
   "quellen": [],
   "grenzen": {
-    "$kommentar": "Ganze Zahlen in ihrem Bereich; eine fehlende oder unsinnige Angabe (0, Bruch, Text) schaltet keinen Schutz ab, sondern den ganzen Weg (503). Bestätigungsmails: je Adresse höchstens `bestaetigungsmails_je_adresse` (1 bis 10) in `bestaetigungsmails_fenster_stunden` (1 bis 8760), insgesamt höchstens `bestaetigungsmails_je_tag` (1 bis 10000) in 24 Stunden; beides zählt die Datenbank, unabhängig vom Verfall einer Anmeldung, und ein gescheiterter Versand zählt nicht. Die Tagesgrenze schützt das gemeinsam genutzte Versandkonto; ihr Wert ist ein Vorschlag und gehört zum Kontingent des Kontos, das der Inhaber kennt. `anfragen_*` begrenzt die Anmeldung, `bestaetigungen_*` die Bestätigung, jeweils je Absender und Funktionsinstanz.",
+    "$kommentar": "Ganze Zahlen in ihrem Bereich; eine fehlende oder unsinnige Angabe (0, Bruch, Text) schaltet keinen Schutz ab, sondern den ganzen Weg (503). Bestätigungsmails: je Adresse höchstens `bestaetigungsmails_je_adresse` (1 bis 10) in `bestaetigungsmails_fenster_stunden` (1 bis 8760), insgesamt höchstens `bestaetigungsmails_je_tag` (1 bis 10000) in 24 Stunden. `versandversuche_*` begrenzt dieselben beiden Größen einschließlich der gescheiterten Versuche. All das zählt die Datenbank mit ihrer Uhr, unabhängig vom Verfall einer Anmeldung; es gilt je Grenze der strengere Wert aus dieser Datei und aus der Tabelle mailing.settings. Die Tagesgrenze schützt das gemeinsam genutzte Versandkonto; ihr Wert ist ein Vorschlag und gehört zum Kontingent des Kontos, das der Inhaber kennt. `anfragen_*` begrenzt die Anmeldung, `bestaetigungen_*` die Bestätigung, jeweils je Absender und Funktionsinstanz. Pflicht: `anfragen_je_tag` mal 4 höchstens `bestaetigungsmails_je_tag`, damit ein einzelner Absender die Tagesgrenze nicht ausschöpfen kann.",
     "bestaetigungsmails_je_adresse": 3,
     "bestaetigungsmails_fenster_stunden": 168,
     "bestaetigungsmails_je_tag": 50,
+    "versandversuche_je_adresse": 9,
+    "versandversuche_je_tag": 150,
     "anfragen_je_minute": 3,
-    "anfragen_je_stunde": 10,
+    "anfragen_je_stunde": 6,
+    "anfragen_je_tag": 12,
     "bestaetigungen_je_minute": 10,
     "bestaetigungen_je_stunde": 60,
     "max_body_bytes": 4096
