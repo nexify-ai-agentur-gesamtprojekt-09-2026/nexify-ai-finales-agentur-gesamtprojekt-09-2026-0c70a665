@@ -9,8 +9,10 @@ import { parseSseData } from './chat-contract';
 /** Wie ein Aufruf endete. Die Oberfläche übersetzt das in einen verständlichen Zustand. */
 export type ChatOutcome =
   | { kind: 'done'; text: string; briefing: BriefingDTO | null; conversationId: string | null }
-  /** Der Chat ist auf diesem Stand nicht angebunden: Oberfläche wechselt auf den Kontaktweg. */
+  /** Der Server meldet ausdrücklich, dass der Chat auf diesem Stand nicht angebunden ist (503 chat_llm_not_configured). */
   | { kind: 'unavailable' }
+  /** Die Anfrage selbst wurde abgelehnt (400, 403, 413, 422): unverändertes Wiederholen hilft nicht. */
+  | { kind: 'rejected' }
   /** Zu viele Nachrichten in kurzer Zeit. */
   | { kind: 'limited'; retryAfterSeconds: number }
   /** Vorübergehende Störung; text enthält bereits geprüften Teiltext (kann leer sein). */
@@ -33,7 +35,18 @@ export interface ChatTurnInput {
   history: ChatMessageDTO[];
 }
 
-const UNAVAILABLE_STATUS = new Set([404, 405, 501, 503]);
+const REJECTED_STATUS = new Set([400, 403, 413, 422]);
+
+/** Nur die ausdrückliche Meldung des Servers gilt als „nicht angebunden"; jede andere Störung bleibt wiederholbar. */
+async function notConfigured(response: Response): Promise<boolean> {
+  if (response.status !== 503) return false;
+  try {
+    const body: unknown = await response.json();
+    return Boolean(body && typeof body === 'object' && (body as { error?: unknown }).error === 'chat_llm_not_configured');
+  } catch {
+    return false;
+  }
+}
 
 export async function streamChat(
   input: ChatTurnInput,
@@ -69,12 +82,13 @@ export async function streamChat(
   }
 
   if (!response.ok || !response.body) {
+    if (await notConfigured(response)) return { kind: 'unavailable' };
     void response.body?.cancel().catch(() => {});
     if (response.status === 429) {
       const seconds = Number(response.headers.get('retry-after'));
-      return { kind: 'limited', retryAfterSeconds: Number.isFinite(seconds) && seconds > 0 ? Math.min(seconds, 3600) : 60 };
+      return { kind: 'limited', retryAfterSeconds: Number.isFinite(seconds) && seconds > 0 ? Math.min(Math.ceil(seconds), 3600) : 60 };
     }
-    return UNAVAILABLE_STATUS.has(response.status) ? { kind: 'unavailable' } : failed();
+    return REJECTED_STATUS.has(response.status) ? { kind: 'rejected' } : failed();
   }
   // Eine Weiterleitung auf eine HTML-Seite ist keine Chat-Antwort.
   if (!(response.headers.get('content-type') || '').includes('text/event-stream')) return failed();

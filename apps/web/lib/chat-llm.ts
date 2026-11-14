@@ -299,6 +299,9 @@ export async function* streamChatCompletion(
     const rest = finished ? { done: true, text: '' } : parse(buffer + decoder.decode());
     if (rest.text) { produced = true; yield rest.text; }
   } finally {
+    // Bricht der Abnehmer vorzeitig ab (Besucher hält an, Leitplanke beendet), wird die Verbindung
+    // zum Router geschlossen statt offen gehalten. Nach einem vollständig gelesenen Strom ohne Wirkung.
+    void reader.cancel().catch(() => {});
     reader.releaseLock();
   }
   // Ein Fehler des Routers mitten in der Antwort ist eine Störung, auch wenn schon Text kam:

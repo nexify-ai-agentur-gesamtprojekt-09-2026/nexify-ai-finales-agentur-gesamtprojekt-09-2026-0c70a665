@@ -35,7 +35,9 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  useEffect(()=>{
   const outside=(event:PointerEvent)=>{[desktop,mobile].forEach(ref=>{if(ref.current?.open&&!ref.current.contains(event.target as Node))ref.current.open=false;});};
   const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'&&(desktop.current?.open||mobile.current?.open)){event.preventDefault();close(true);}};
-  const resize=()=>close();
+  // Auf Mobilgeräten ändert die ein- und ausfahrende Adressleiste nur die Höhe: das Menü schließt allein bei geänderter Breite.
+  let width=window.innerWidth;
+  const resize=()=>{if(window.innerWidth===width)return;width=window.innerWidth;close();};
   document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape);window.addEventListener('resize',resize);
   return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);window.removeEventListener('resize',resize);};
  },[]);

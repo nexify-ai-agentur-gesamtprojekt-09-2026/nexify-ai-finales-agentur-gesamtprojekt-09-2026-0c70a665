@@ -49,6 +49,16 @@
 .auth-panel-copy a { display:inline-flex; align-items:center; min-height:var(--target-min); color:var(--color-marke-lime); text-decoration:underline; text-underline-offset:var(--space-1); }
 /* A bounded, floating assistant replaces the full-height control-room rail. */
 .workspace-shell.is-open { grid-template-columns:minmax(0,1fr) var(--layout-panel-width); column-gap:0; }
+/* Erster Bildaufbau, bevor das Skript läuft (data-chat-boot, Workspace.tsx): Der Server kennt die Fensterbreite nicht.
+   Ohne gespeicherte Wahl („auto") steht die Scheibe ab 1200 px offen, darunter eingeklappt; eine gespeicherte offene
+   Scheibe bleibt bis 820 px eingeklappt, weil sie dort ein Dialog über der Seite wäre. Danach gilt allein der Zustand. */
+@media(max-width:1199.98px) {
+ #atelier[data-chat-boot="auto"] { grid-template-columns:minmax(0,1fr); }
+ #atelier[data-chat-boot="auto"]>#aifly-panel { display:none; }
+}
+@media(min-width:1200px) { #atelier[data-chat-boot="auto"] :is(.reopen-chat,.header-actions>.compact) { display:none; } }
+@media(max-width:820px) { #atelier[data-chat-boot="open"]>#aifly-panel { display:none; } }
+@media(min-width:820.02px) { #atelier[data-chat-boot="open"] :is(.reopen-chat,.header-actions>.compact) { display:none; } }
 .workspace-shell .aifly-panel { position:sticky; top:0; align-self:start; margin:0; width:auto; height:var(--chat-viewport-height); max-height:var(--chat-viewport-height); padding:var(--space-3) 0; gap:0; background:color-mix(in srgb,var(--color-atelier-canvas) 82%,transparent); border:0; border-left:1px solid var(--color-linie-fein); border-radius:0; box-shadow:none; backdrop-filter:blur(var(--material-blur)); -webkit-backdrop-filter:blur(var(--material-blur)); }
 .workspace-shell .aifly-panel .panel-heading { padding:var(--space-2) var(--space-5) var(--space-4); }
 .workspace-shell .aifly-panel .panel-brandline { font-family:var(--font-display); font-size:16px; color:var(--color-text-primaer); white-space:normal; }

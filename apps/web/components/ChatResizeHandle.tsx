@@ -11,6 +11,14 @@ export function readChatWidth(): number | null {
 }
 export function storeChatWidth(width: number | null) {
   try { if (width === null) sessionStorage.removeItem(WIDTH_KEY); else sessionStorage.setItem(WIDTH_KEY, String(width)); } catch { /* preference only */ }
+  // Zusätzlich als Sitzungs-Cookie: damit rendert der Server die Breite schon im ersten Bildaufbau.
+  try { document.cookie = width === null ? `${WIDTH_KEY}=; path=/; max-age=0; samesite=lax` : `${WIDTH_KEY}=${Math.round(width)}; path=/; samesite=lax`; } catch { /* preference only */ }
+}
+/** Breite aus dem Cookie für den Server: nur ganze Zahlen im zulässigen Bereich. */
+export function chatWidthFromCookie(value: string | undefined): number | null {
+  if (!value || !/^\d{3,4}$/.test(value)) return null;
+  const width = Number(value);
+  return width >= CHAT_MIN && width <= CHAT_MAX ? width : null;
 }
 export const chatWidthStyle = (width: number | null, mobile: boolean) => (width && !mobile ? { "--layout-panel-width": width + "px" } as CSSProperties : undefined);
 
