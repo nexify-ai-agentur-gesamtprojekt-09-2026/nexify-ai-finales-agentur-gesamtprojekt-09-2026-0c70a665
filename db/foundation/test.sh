@@ -8,7 +8,4 @@ if [[ "$container" != onboarding-postgres || "$database" != nx_foundation ]]; th
   exit 2
 fi
 here="$(cd "$(dirname "$0")" && pwd)"
-psql_command=(docker --host=unix:///var/run/docker.sock exec -i "$container" psql -X -U postgres -d "$database" -v ON_ERROR_STOP=1)
-"${psql_command[@]}" < "$here/001_foundation.sql"
-"${psql_command[@]}" < "$here/001_foundation.sql"
-"${psql_command[@]}" < "$here/verify.sql"
+bash "$here/run_checks.sh" docker --host=unix:///var/run/docker.sock exec -i "$container" psql -U postgres -d "$database"
