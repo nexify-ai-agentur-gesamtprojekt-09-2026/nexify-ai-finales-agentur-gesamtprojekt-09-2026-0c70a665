@@ -209,3 +209,14 @@ Was die Variable **nicht** tut:
 Prüfung ohne Netzwerk und ohne echte Werte:
 `python3 -m unittest discover -s apps/shop-api/tests -p 'test_vercel_adapter.py'` und
 `-p 'test_namespace_operator.py'`.
+
+## 7. Indexierung der Website (Nachtrag 14.11.2026)
+
+Regel und Freigabeweg: `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Umsetzung `apps/web/lib/indexing.ts`.
+Beide Variablen sind keine Geheimnisse und in Produktion **nicht gesetzt**; setzen darf sie nur der Inhaber.
+
+| Variable | Wert | Wo | Wirkung |
+|---|---|---|---|
+| `NEXIFY_INDEXING` | `enabled` | Vercel-Projekt `…-ut7r`, nur Umgebung Production, danach Redeploy | Agentur- und Rechtsseiten werden auf den freigegebenen Domains indexierbar; jeder andere Wert sperrt |
+| `NEXIFY_INDEXING_TEILEKLAR` | `enabled` | wie oben, erst wenn der Shop-Dienst antwortet | zusätzlich `/teileklar` in Index und Sitemap; wirkt nur zusammen mit `NEXIFY_INDEXING` |
+
