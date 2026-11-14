@@ -188,7 +188,8 @@ async def reset_password(body: ResetIn):
     reset = await db.password_resets.find_one_and_update({"token_hash": digest(body.token), "used": False, "expires_at": {"$gt": datetime.now(timezone.utc)}}, {"$set": {"used": True}})
     if not reset:
         raise HTTPException(400, {"error": "token_invalid", "message": "Der Link ist ungültig oder abgelaufen."})
-    await db.users.update_one({"user_id": reset["user_id"]}, {"$set": {"password_hash": hash_password(body.password)}})
+    # The reset link reached this mailbox, so the address is now proven for this account.
+    await db.users.update_one({"user_id": reset["user_id"]}, {"$set": {"password_hash": hash_password(body.password), "email_verified": True}})
     await db.sessions.delete_many({"user_id": reset["user_id"]})
     await db.login_failures.delete_many({"email": (await db.users.find_one({"user_id": reset["user_id"]}))["email"]})
     return {"ok": True}
@@ -203,8 +204,14 @@ async def google_session(body: GoogleIn, response: Response):
     profile = data.json()
     email = profile["email"].lower()
     user = await db.users.find_one({"email": email})
+    # Refuse instead of merging: privileged roles never sign in via Google, and a password account whose address
+    # was never proven may belong to whoever registered it first (pre-account takeover). Nothing is changed here.
+    if user and user.get("role", "customer") != "customer":
+        raise HTTPException(403, {"error": "google_login_not_allowed", "message": "Für dieses Konto ist die Anmeldung mit Google nicht freigegeben. Bitte melden Sie sich mit Ihrem Passwort an."})
+    if user and user.get("password_hash") and user.get("email_verified") is not True:
+        raise HTTPException(409, {"error": "account_exists_unverified", "message": "Zu dieser E-Mail-Adresse besteht bereits ein Konto mit Passwort. Bitte melden Sie sich mit Ihrem Passwort an oder nutzen Sie „Passwort vergessen“; danach ist auch die Anmeldung mit Google möglich."})
     if not user:
-        user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": profile.get("name", ""), "role": "customer", "created_at": now_iso()}
+        user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": profile.get("name", ""), "role": "customer", "email_verified": True, "created_at": now_iso()}
         await db.users.insert_one(user)
         await send_welcome(user)
     await db.users.update_one({"user_id": user["user_id"]}, {"$set": {"google_linked": True}})
