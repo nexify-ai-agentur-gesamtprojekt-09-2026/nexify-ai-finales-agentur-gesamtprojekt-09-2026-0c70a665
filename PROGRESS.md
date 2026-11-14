@@ -1,3 +1,21 @@
+## Stand 14.11.2026, ca. 15:00 UTC · Mobil und PWA, Hermes, Server-Messung, Shop-Bindung, Studienkolleg
+
+Führt den Abschnitt von ca. 11:25 UTC direkt darunter fort. Quelle, wo nicht anders genannt: `git log origin/main` bis `e0c7e38` und Messungen der koordinierenden Sitzung am 14.11.2026.
+
+Gemergt seit `5f1160a` (IST): PR 155 Arbeitsweisen-Skills (acht Skills und Index unter `.claude/skills/`), PR 156 und PR 161 Server-Befund mit Messung (`docs/04-betrieb/server-befund-2026-11-14.md`), PR 157 Hermes-Konfiguration (`ops/hermes/`), PR 158 Entscheidungen D-019 und D-020, PR 160 Seitenbefunde, PR 159 Mobil, PWA, Anmelden/Registrieren und erweiterter Gleichmacher. Von anderen Sitzungen: PR 162, 164, 165.
+
+Produktion nexifyai.de nach Auslieferung von `e0c7e38` (IST, gemessen ca. 15:00 UTC): `tools/gleichmacher.mjs` 44 Seiten, 14.048 Vergleiche, 0 Abweichungen. `tools/live-check.mjs` 329 Prüfungen, 7 Befunde: 2 Shop-Dienst, 5 PWA. Die PWA-Befunde bestehen, weil der Build ohne `NEXIFY_PUBLIC_INSTALLATION` lief; die Variable ist seit ca. 15:05 UTC im Vercel-Projekt `…-ut7r` für die Produktion gesetzt und wirkt ab der nächsten Auslieferung. Nicht belegt: Verhalten auf echtem iOS Safari.
+
+Shop (IST): `SHOP_ALLOWED_PROJECT_IDS` ist auf Anweisung des Inhabers im Projekt `…-ut7r` gesetzt. Der Dienst antwortet seither mit 503 `database_binding_missing_or_unsuitable` statt `project_binding_unverified`. OFFEN: `MONGODB_URI` fehlt im Projekt; im alten Projekt ist der Produktionswert als „Sensitive“ gespeichert und nicht auslesbar. Auf srv1941843 wurde keine Umgebungsdatei mit der Adresse und kein MongoDB-Container gefunden; srv1243952 ist ohne Shell nicht einsehbar. PR 150 (Zugriffsschicht) und PR 147 (Zielschema) bleiben Entwürfe.
+
+Server (IST, siehe Server-Befund): srv1941843 zu 97 % belegt, 10,2 GB frei; 77,3 GiB liegen in `.paperclip-runtime/runs`. Hermes läuft dort als Container und ist über `unternehmensbot.eu` öffentlich erreichbar, geschützt nur durch seine eigene Anmeldung. Snapshots beider Server vom 14.11., 11:47 UTC, Ablauf 15.11., 11:47 UTC. Am Server wurde nichts gelöscht oder geändert; es stehen acht beendete Mess-Projekte `nx-messung*-20261114`. OFFEN: Aufräumen und Einspielen der Hermes-Konfiguration brauchen eine Sitzung mit Shell.
+
+Kundenprojekt Studienkolleg Aachen (IST laut Rückmeldungen der Kundensitzungen, hier nicht nachgeprüft; Einzelheiten nur im Kundenrepository): PR 18 Medien, PR 10 Gestaltung und PR 15 Inhalte warten auf Abnahme des Inhabers; eine Sitzung arbeitet an Backend und Flows auf Grundlage der Projektunterlagen vom 30.10.2026.
+
+Gestaltung: Der Inhaber lässt die Feinoptimierung in Lovable laufen. Dafür besteht der Zweig `lovable/feinoptimierung` (Stand `e0c7e38`). Ergebnisse von dort gehen nicht direkt nach `main`, sondern durch Gleichmacher, Live-Prüfung und die Gates (D-012).
+
+Veraltete Pins (OFFEN, nur durch echten Browserlauf zu erneuern): `public-experience.test.mjs`, `PublicInstallation.tsx`, `generate-public-data.mjs`, `docs/09-final/11-designsystem-definition.md`. `browser-public-experience.mjs` fragt noch nach `scene-video`.
+
 ## Stand 14.11.2026, ca. 11:25 UTC · Wissensgraph, offene Entwürfe, Sichtung der Pull Requests, Regelbetrieb
 
 Auftrag des Inhabers Pascal Courbois vom 14.11.2026: Jeder Agent soll den aktuellen Stand kennen. Dieser Abschnitt führt den Abschnitt „Stand 14.11.2026 · Angleichung an die Startseite“ direkt darunter fort; jener bleibt als Stand von `70b923e` (10:18 UTC) stehen. Kennzeichnung: IST = hier am Repository oder durch eigenen Abruf nachgeprüft, mit Quelle und Zeit; Notiz = „Quelle: koordinierende Sitzung, 14.11.2026“, hier nicht nachgeprüft; OFFEN = fehlt oder nicht belegt. Entscheidungen stehen nur in `DECISIONS.md` (neu: D-018).
