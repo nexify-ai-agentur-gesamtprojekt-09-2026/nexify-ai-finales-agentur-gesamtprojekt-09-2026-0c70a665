@@ -3648,6 +3648,19 @@
         "current_safe_behavior": "No real order submission for either verified or conditional; no permissive union",
         "next_step": "Resolve applicable current purchasing policy with source-qualified commercial/fitment owner before sales activation",
         "completion_criterion": "Authoritative current policy plus actual positive/negative fitment/order acceptance"
+      },
+      {
+        "id": "DATA-STORE-001",
+        "source_refs": [
+          "DECISIONS.md:D-006",
+          "DECISIONS.md:D-013",
+          "AGENTS.md:Stack-Empfehlung"
+        ],
+        "status": "decision_recorded_migration_pending",
+        "owner_area": "Shop / Daten / Runtime; Freigaben Inhaber",
+        "current_safe_behavior": "apps/shop-api bleibt unverändert auf MongoDB; keine Datenübernahme, keine Umschaltung der Produktion und kein Eingriff in die bestehende MongoDB ohne Freigabe des Inhabers (D-016)",
+        "next_step": "Shop-Schema mit RLS und Plan für Datenübernahme, Idempotenz, Backup/Restore und Rückweg auf der eigenen Supabase-Instanz vorlegen; Instanz und Zugang belegen",
+        "completion_criterion": "Shop liest und schreibt nachweislich über die eigene Supabase-Instanz mit RLS-Positiv-/Negativtests, geprüfter Datenübernahme und getestetem Rückweg; D-006 danach als Historie geführt"
       }
     ],
     "hash_binding_note": "source_sha256 excludes this register itself; exact register bytes are bound by Git commit and delivery package manifest to avoid a recursive self-hash.",

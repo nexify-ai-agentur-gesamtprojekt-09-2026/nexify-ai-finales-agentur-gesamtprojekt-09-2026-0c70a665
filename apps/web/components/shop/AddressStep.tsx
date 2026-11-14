@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import {ActionButton} from '../ActionControl';
 
 export type AddressData = { first_name: string; last_name: string; street: string; zip: string; city: string; country: string; email: string; phone: string };
 export const EMPTY_ADDRESS: AddressData = { first_name: "", last_name: "", street: "", zip: "", city: "", country: "DE", email: "", phone: "" };
@@ -37,6 +38,6 @@ export default function AddressStep({ value, onNext }: { value: AddressData; onN
       <div className="tk-field"><label htmlFor="addr-country">Land</label><select id="addr-country" value={address.country} onChange={event => set("country", event.target.value)} data-testid="checkout-address-country">{COUNTRIES.map(([code, name]) => <option key={code} value={code}>{name}</option>)}</select>
         {errors.country && <p role="alert" className="tk-field-error">{MESSAGES[errors.country]}</p>}</div>
     </div>
-    <button className="primary-button" type="submit" disabled={busy} data-testid="checkout-address-continue">Weiter zum Versand</button>
+    <ActionButton variant="primary" className="hc-finish-primary" type="submit" disabled={busy} data-testid="checkout-address-continue">Weiter zum Versand</ActionButton>
   </form>;
 }

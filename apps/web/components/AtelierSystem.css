@@ -499,9 +499,10 @@ body:has(#atelier) .skip-link:focus{border-radius:var(--as-switch-radius);backgr
 }
 #atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em;min-width:0;max-width:100%;overflow-wrap:break-word;hyphens:auto}
 #atelier .home-concept .hc-finish h2{font-size:clamp(36px,4.6cqi,48px);line-height:1.05;letter-spacing:-.02em}
-#atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
-#atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
-#atelier .home-concept .hc-costs h3,#atelier #aifly-panel .panel-brandline,#atelier #aifly-panel :is(.orientation-brief h4,.request-fallback :is(h2,h3,h4,strong)){font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2,.tk-partner-intro h2,.tk-portal-preview h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
+/* Shop-Seiten: Flaechen-Ueberschriften (h2) und Unterpunkte (h3) laufen ueber dieselben beiden Regeln wie die Startseite. */
+#atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name,.tk-shop-body h2,.tk-form h2,.tk-legal-doc h2,.tk-home-entry h2),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .home-concept :is(.hc-costs h3,.tk-shop-body h3,.tk-form h3,.tk-legal-section h3,.tk-home-entry h3,.tk-partner-steps h3,.tk-portal-grid h3,.tk-filter-panel h2),#atelier #aifly-panel .panel-brandline,#atelier #aifly-panel :is(.orientation-brief h4,.request-fallback :is(h2,h3,h4,strong)){font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
 #atelier .home-concept .identity-copy .identity-subtitle{font-size:18px;font-weight:500;line-height:1.35;letter-spacing:0}
 #atelier .home-concept :is(.hc-intro>p,.hc-section-heading>p,.hc-section-heading>div+p){font-size:18px;line-height:1.6;letter-spacing:0}
 #atelier .home-concept :is(p,li,.hc-service-lead,.hc-caption,.hc-scene-value),#atelier .home-concept .identity-copy .identity-body,#atelier .home-concept .hc-rate p,#atelier #aifly-panel :is(.orientation-message,.orientation-message p,.orientation-message li,.orientation-intro p,.welcome-body){font-size:16px;line-height:1.6;letter-spacing:0}
@@ -1152,15 +1153,8 @@ html[data-theme='light'] #atelier{
 #atelier .nx-feld-schalter:focus-visible{outline:2px solid var(--as-ink);outline-offset:-2px}
 #atelier .nx-konto .tk-field-error,#atelier .nx-konto .tk-alert{margin:0;font-size:var(--as-t-13);line-height:var(--as-z-text);color:var(--color-semantik-fehler)}
 #atelier .nx-konto .tk-success{margin:0;padding:var(--as-s-3) var(--as-s-4);border-radius:var(--as-r-feld);background:var(--as-glass-faint);box-shadow:var(--as-lens-faint);font-size:var(--as-t-15);line-height:var(--as-z-text);color:var(--as-ink)}
-#atelier .nx-konto .tk-auth .tk-cta{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:var(--as-s-3);width:100%;height:var(--as-h-haupt);min-height:var(--as-h-haupt);margin:0;padding:0 var(--as-s-6);border:0;border-radius:var(--as-switch-radius);font-size:var(--as-t-16);font-weight:var(--as-g-stark);cursor:pointer;transition:transform var(--as-move),box-shadow var(--as-move),background var(--as-move)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta{margin-top:var(--as-s-2);background:var(--as-main-body);box-shadow:var(--as-main-shadow);color:var(--as-main-ink)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta:is(:hover,:focus-visible):not(:disabled){transform:translateY(-1px);background:var(--as-main-body-hover);box-shadow:var(--as-main-shadow-hover)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta:active:not(:disabled){transform:translateY(1px);background:var(--as-main-body-pressed);box-shadow:var(--as-main-shadow-pressed)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta:disabled{background:var(--as-main-off);box-shadow:var(--as-lens-faint);cursor:default}
-#atelier .nx-konto .tk-auth .nx-konto-neben{background:var(--as-switch-body);box-shadow:var(--as-switch-shadow);color:var(--as-ink)}
-#atelier .nx-konto .tk-auth .nx-konto-neben:is(:hover,:focus-visible){transform:translateY(-1px);background:var(--as-switch-body-hover);box-shadow:var(--as-switch-shadow-hover)}
-#atelier .nx-konto .tk-auth .nx-konto-neben:active{transform:translateY(1px);background:var(--as-switch-body-pressed);box-shadow:var(--as-switch-shadow-pressed)}
-#atelier .nx-konto .tk-auth .tk-cta:focus-visible{outline:2px solid var(--as-ink);outline-offset:3px}
+#atelier .nx-konto .tk-auth .tk-cta{width:100%;margin:0;justify-content:center}
+#atelier .nx-konto .tk-auth .primary-button.tk-cta{margin-top:var(--as-s-2)}
 #atelier .nx-konto-oder{justify-self:center;margin-block:calc(var(--as-s-2) * -1);font-size:var(--as-t-13);line-height:var(--as-z-kurz);color:var(--as-ink-3)}
 #atelier .nx-konto .tk-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--as-s-1) var(--as-s-6);margin:var(--as-s-2) 0 0;padding:0;border:0}
 #atelier .nx-konto .tk-actions p{margin:0;font-size:var(--as-t-15);line-height:var(--as-z-text);color:var(--as-ink-3)}

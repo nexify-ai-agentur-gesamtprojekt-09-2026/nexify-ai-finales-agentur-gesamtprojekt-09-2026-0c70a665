@@ -1,5 +1,7 @@
 "use client";
 import { SiteLink } from "../Router";
+import {ActionLink} from '../ActionControl';
+import {HcArrow} from '../HcArrow';
 import "./shop.css";
 
 const STEPS = [
@@ -20,15 +22,15 @@ const PORTAL = [
 export default function PartnerJourney() {
   return <div className="tk-partner-journey" data-testid="partner-journey">
     <section className="tk-partner-intro">
-      <span className="eyebrow">TEILEKLAR Werkstattnetz</span>
+      <span className="hc-kicker">TEILEKLAR Werkstattnetz</span>
       <h2>Der Kunde bringt das geprüfte Teil. Sie bekommen den passenden Auftrag.</h2>
       <p>TEILEKLAR verbindet Teilekauf und Einbau. Werkstätten erhalten verständlich vorbereitete Anfragen, statt Fahrzeugdaten, Teilenummern und Rückfragen selbst zusammensuchen zu müssen.</p>
     </section>
     <ol className="tk-partner-steps">{STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{body}</p></li>)}</ol>
     <section className="tk-portal-preview">
-      <div><span className="eyebrow">Geschütztes Partnerportal</span><h2>Ein Arbeitsplatz für den Werkstattalltag.</h2><p>Das Portal ist nach Anmeldung und bestätigter Partnerschaft erreichbar. Öffentliche Besucher sehen keine Betriebs-, Kunden- oder Abrechnungsdaten.</p></div>
+      <div><span className="hc-kicker">Geschütztes Partnerportal</span><h2>Ein Arbeitsplatz für den Werkstattalltag.</h2><p>Das Portal ist nach Anmeldung und bestätigter Partnerschaft erreichbar. Öffentliche Besucher sehen keine Betriebs-, Kunden- oder Abrechnungsdaten.</p></div>
       <div className="tk-portal-grid">{PORTAL.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}</div>
-      <div className="tk-actions"><SiteLink className="primary-button" href="/anmelden">Partnerzugang</SiteLink><SiteLink className="outline-button" href="/teileklar/werkstatt">Werkstätten finden</SiteLink></div>
+      <div className="tk-actions"><ActionLink variant="primary" className="hc-finish-primary" href="/anmelden">Partnerzugang</ActionLink><SiteLink className="hc-text-link" href="/teileklar/werkstatt">Werkstätten finden<HcArrow/></SiteLink></div>
     </section>
   </div>;
 }

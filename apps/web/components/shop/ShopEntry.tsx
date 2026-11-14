@@ -1,5 +1,6 @@
 "use client";
 import { SiteLink } from "../Router";
+import {HcArrow} from '../HcArrow';
 import { useShopCopy } from "./ProductCard";
 import CategoryList from "./CategoryList";
 import { SearchBar } from "./CatalogView";
@@ -12,6 +13,6 @@ export default function ShopEntry() {
     <h2 id="tk-entry-title">{t("entryTitle")}</h2>
     <SearchBar />
     <CategoryList compact />
-    <div className="tk-actions"><SiteLink href="/teileklar/shop" className="content-action-link" data-testid="entry-shop-link">{t("goShop")}</SiteLink><SiteLink href="/teileklar/werkstatt" className="content-action-link" data-testid="entry-workshop-link">{t("findWorkshop")}</SiteLink></div>
+    <div className="tk-actions"><SiteLink href="/teileklar/shop" className="hc-text-link" data-testid="entry-shop-link">{t("goShop")}<HcArrow/></SiteLink><SiteLink href="/teileklar/werkstatt" className="hc-text-link" data-testid="entry-workshop-link">{t("findWorkshop")}<HcArrow/></SiteLink></div>
   </section>;
 }

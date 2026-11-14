@@ -1,5 +1,6 @@
 "use client";
 import { SiteLink } from "../Router";
+import {HcArrow} from '../HcArrow';
 import {useUI} from '../Workspace';
 import "./shop.css";
 
@@ -16,6 +17,6 @@ export default function PhaseNotice({ id }: { id: string }) {
   const notice = copy[id];
   return <section className="tk-notice" role="note" data-testid={`phase-notice-${id}`}>
     <strong>{notice.title}</strong><p>{notice.text}</p>
-    {id !== "tk-battery" && <SiteLink href="/teileklar/werkstatt" className="content-action-link" data-testid={`phase-notice-${id}-link`}>{copy.link}</SiteLink>}
+    {id !== "tk-battery" && <SiteLink href="/teileklar/werkstatt" className="hc-text-link" data-testid={`phase-notice-${id}-link`}>{copy.link}<HcArrow/></SiteLink>}
   </section>;
 }
