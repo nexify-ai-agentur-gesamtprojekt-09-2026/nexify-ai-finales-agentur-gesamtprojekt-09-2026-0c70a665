@@ -584,5 +584,120 @@
   "typeHome": {
     "detail": "clamp(14px, .7cqi, 16px)",
     "reading": "clamp(15px, .8cqi, 18px)"
+  },
+  "atelierSystem": {
+    "$description": "Atelier-System (Stand 14.11.2026): Form, Raum, Bewegung und Schwellen der oeffentlichen Seite. Farben je Thema stehen unter color.dunkel und color.hell.",
+    "radius": {
+      "schalter": {
+        "$value": "999px",
+        "$type": "dimension"
+      },
+      "flaeche": {
+        "$value": "28px",
+        "$type": "dimension"
+      },
+      "buehne": {
+        "$value": "40px",
+        "$type": "dimension"
+      }
+    },
+    "raum": {
+      "1": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "2": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "3": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "4": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "5": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "6": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "8": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "12": {
+        "$value": "48px",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "64px",
+        "$type": "dimension"
+      },
+      "24": {
+        "$value": "96px",
+        "$type": "dimension"
+      }
+    },
+    "bewegung": {
+      "kurve": {
+        "$value": "cubic-bezier(.2,.8,.2,1)",
+        "$type": "cubicBezier"
+      },
+      "schnell": {
+        "$value": "160ms",
+        "$type": "duration"
+      },
+      "ruhig": {
+        "$value": "320ms",
+        "$type": "duration"
+      }
+    },
+    "schalter": {
+      "hoehe": {
+        "$value": "48px",
+        "$type": "dimension"
+      },
+      "hoeheHaupt": {
+        "$value": "56px",
+        "$type": "dimension"
+      }
+    },
+    "chat": {
+      "breiteMin": {
+        "$value": "360px",
+        "$type": "dimension"
+      },
+      "breiteMax": {
+        "$value": "1220px",
+        "$type": "dimension"
+      },
+      "schwelleMittel": {
+        "$value": "480px",
+        "$type": "dimension"
+      },
+      "schwelleKacheln": {
+        "$value": "640px",
+        "$type": "dimension"
+      },
+      "schwelleBreit": {
+        "$value": "820px",
+        "$type": "dimension"
+      }
+    },
+    "kopf": {
+      "hoehe": {
+        "$value": "96px",
+        "$type": "dimension"
+      },
+      "schwelleNavigation": {
+        "$value": "1000px",
+        "$type": "dimension"
+      }
+    }
   }
 }
