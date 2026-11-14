@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { SiteLink } from "../Router";
 import { ActionButton } from "../ActionControl";
 import { api, type ApiError } from "./api";
+import { googleLoginMessage } from "./google-login-message";
 import "./shop.css";
 import "../HomeConcept.css";
 import "../PageConcept.css";
@@ -40,7 +41,7 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
     const match = window.location.hash.match(/session_id=([^&]+)/);
     if (!match || processed.current) return;
     processed.current = true; window.history.replaceState(null, "", window.location.pathname+window.location.search);
-    api("/api/auth/google/session", { method: "POST", json: { session_id: decodeURIComponent(match[1]) } }).then(() => landing()).catch(() => setMessage("Die Anmeldung mit Google ist fehlgeschlagen."));
+    api("/api/auth/google/session", { method: "POST", json: { session_id: decodeURIComponent(match[1]) } }).then(() => landing()).catch(failure => setMessage(googleLoginMessage(failure)));
   }, [router]);
   async function submit(event: React.FormEvent) {
     event.preventDefault(); setMessage(""); setNotice("");

@@ -131,7 +131,8 @@ ausgeschlossen“ prüfen (erwartet: nur Seiten der Sperrliste).
 ## 9. Bekannte Grenzen dieser Vorbereitung
 
 - Meta-Tags sind unverändert (`page-seo.ts` und `layout.tsx` sind an Belege gebunden). Auf gesperrten Seiten kann
-  das Meta-Tag deshalb `index, follow` zeigen; es gilt die Kopfzeile. `/teileklar` und `/teileklar/shop` tragen fest
+  das Meta-Tag deshalb `index, follow` zeigen; es gilt die Kopfzeile. Für die fünf Seiten mit eigener Route
+  behoben: Abschnitt 11 (OA-164). `/teileklar` und `/teileklar/shop` tragen fest
   `noindex` aus dem Layout und bleiben auch mit dem Shop-Schalter gesperrt, bis ihre Metadaten ergänzt sind.
 - TEILEKLAR-Seiten nennen im `<head>` hreflang für nl, fr und en, liefern aber nur deutschen Text (`lang="de"`);
   sieben davon setzen den Canonical auf `?lang=…`. Vor dem Shop-Schalter zu bereinigen.
@@ -167,3 +168,40 @@ bindet nur die Bytes von `proxy.ts` und führt den Proxy nicht aus. Das neue Ver
 Das Regelmodul liegt bewusst unter `apps/web/auth/` neben `policy.ts`: `apps/web/lib` ist als Verzeichnis an den
 Text-Resize-Beleg gebunden, jede neue Datei dort macht ihn ungültig. `apps/web/app/sitemap.ts` war schon vorher ohne
 gültigen Pin und bleibt es (kein Lauf, der die Sitemap bindet).
+
+## 11. Nachtrag OA-164: Meta-Tag der fünf Seiten folgt der Regel (14.11.2026, Zweig `claude/belege-runde-3`)
+
+Befund: Auf `/agb`, `/avv`, `/widerruf`, `/teileklar/kategorien` und `/teileklar/werkstatt` stand im HTML fest
+`<meta name="robots" content="index, follow">`, während `proxy.ts` dieselben Pfade per `X-Robots-Tag: noindex, nofollow`
+sperrt (Abschnitt 2, letzter Absatz). Lokal nachgestellt an `main` `2396553`: alle fünf Seiten Meta `index, follow`,
+Kopfzeile `noindex, nofollow`.
+
+Änderung: Das Meta-Tag kommt aus derselben Entscheidung wie die Kopfzeile. `apps/web/auth/page-robots.ts` ruft
+`indexingDecision` mit denselben Eingaben wie der Proxy (Pfad, Host und `X-Forwarded-Host` des Aufrufs, `process.env`,
+Pfadliste aus `config/site-map.json`) und übersetzt das Ergebnis mit `robotsDirective` (`auth/indexing.ts`): gesperrt heißt
+`noindex, nofollow`, frei heißt `index, follow`. Die drei Rechtsseiten nutzen `generateMetadata` statt fester `metadata`
+(nur die Metadaten, kein Rechtstext geändert); die beiden TEILEKLAR-Seiten geben die Entscheidung an `routeMetadata`, das
+kein festes `true` mehr annimmt (`false` = nie indexiert wie bisher). Eine Funktion für alle fünf Seiten. Das Modul liegt
+neben `indexing.ts` und nicht unter `apps/web/lib`, weil `lib/` als Verzeichnis an den Text-Resize-Beleg gebunden ist.
+
+Hostprüfung: Die fünf Seiten werden je Aufruf gerendert (`app/layout.tsx` liest Kopfzeilen und Cookies; der Build führt
+sie als `ƒ`, an `main` wie im Zweig). Der Host ist deshalb bekannt und wird auch im Meta-Tag geprüft. Würden sie statisch
+gebaut, kennte das Meta-Tag den Host nicht; die Hostprüfung läge dann allein in der Kopfzeile. Das ist heute nicht der Fall.
+
+Lokale Probe (`next start`, Build des Zweigs, Kopfzeile `Host` gesetzt):
+
+| Umgebung | Host | fünf Seiten: Meta | Kopfzeile |
+|---|---|---|---|
+| ohne Schalter | `127.0.0.1` und `www.nexifyai.de` | `noindex, nofollow` | `noindex, nofollow` |
+| `NEXIFY_INDEXING=enabled`, `VERCEL_ENV=production` | `127.0.0.1` | `noindex, nofollow` | `noindex, nofollow` |
+| dasselbe | `www.nexifyai.de` | Recht `index, follow`; TEILEKLAR `noindex, nofollow` | Recht keine; TEILEKLAR `noindex, nofollow` |
+| zusätzlich `NEXIFY_INDEXING_TEILEKLAR=enabled` | `www.nexifyai.de` | `index, follow` | keine |
+
+Tests: `apps/web/auth/tests/indexing-meta.test.mjs` (8 Tests: Übersetzung der Entscheidung, beide Schalterzustände je Seite,
+falscher Host und Vorschau, 210 Kombinationen aus Seite, Umgebung und Host ohne Widerspruch, Bindung der Seitendateien an
+`pageRobots`, kein festes `index` in Seitendateien und `routeMetadata`). `tests/test_seo_metadata.py` ist unverändert und grün.
+
+Grenze: Die Katalogseiten aus `pageMetadata` folgen im Meta-Tag weiter nur `NEXIFY_INDEXING`. Mit Schalter, aber falschem
+Host oder für `/teileklar` ohne Shop-Schalter zeigen sie `index, follow` bei gesperrender Kopfzeile (lokal gesehen an
+`/impressum` mit Host `127.0.0.1`). Es gilt die strengere Kopfzeile; ohne Schalter tritt der Fall nicht auf.
+`page-seo.ts` Zeile 18 nennt das jetzt ausdrücklich.

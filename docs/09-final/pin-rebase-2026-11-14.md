@@ -353,3 +353,40 @@ Python-Suite je Stand (Python 3.13.18, erzeugte Seitendaten vorhanden, ohne `.ve
 | dieser Zweig (mit `node_modules`) | 45 | 0 |
 
 Bewusst nicht nachgezogen: `apps/web/lib/contact-copy.ts` in `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `browser-exceptions-vite.json`. Der zugehörige Lauf scheitert weiter in Schritt 4 (Abschnitt 10); `tools/check_browser_evidence.py` bleibt rot wie zuvor, erster Befund unverändert `apps/site/src/Auth.tsx`.
+
+## 12. Nachtrag sechste Runde (14.11.2026, Zweig `claude/belege-runde-3`, auf `main` `2396553`)
+
+Der Zweig ändert gebundene Quellen und erhebt die Belege einmal am Endstand neu, nach dem Verfahren aus Abschnitt 11.
+
+| Datei | Bindung vorher (`main` `2396553`) | Änderung |
+|---|---|---|
+| `apps/web/lib/page-seo.ts` | Resize (Verzeichnis `apps/web/lib`) | Kommentar Zeile 18 berichtigt, `routeMetadata` ohne festes `index` (OA-164) |
+| `apps/web/components/shop/CartView.tsx`, `Checkout.tsx` | Resize, `browser-shop.json` | Trennpunkt der Ausfallkarte entfernt |
+| `apps/web/components/shop/Storefront.css` | Resize, `browser-catalog.json`, `browser-shop.json` | Name der Schaufenster-Kachel auf zwei Zeilen begrenzt, ohne Rest in der Polsterung |
+| `apps/web/components/shop/AuthForms.tsx` | Resize | Meldung je Ablehnungscode der Google-Anmeldung |
+| `apps/web/components/shop/google-login-message.ts` | neu im gebundenen Verzeichnis | Zuordnung Code → Meldung |
+| `apps/web/app/teileklar/kategorien/page.tsx`, `werkstatt/page.tsx` | `browser-exceptions-next.json`, `browser-exceptions-vite.json` | Meta-`robots` aus der Indexierungsregel (OA-164) |
+
+`apps/web/auth/page-robots.ts` liegt bewusst unter `auth/` (ungebunden), nicht unter `lib/`.
+
+Läufe am festen Commit `68f84c0` bei sauberem Arbeitsbaum, nach `pnpm install --frozen-lockfile --ignore-scripts`,
+`node apps/site/scripts/generate-public-data.mjs` und `NEXIFY_PUBLIC_INSTALLATION=public-pwa node apps/web/scripts/generate-public-data.mjs`.
+Node v22.23.4, Playwright 1.63.0 (Laufumgebung; `.github/evidence-runner/package.json` legt 1.65.0 fest), Chromium 153.0.8010.12:
+
+| Lauf | Ergebnis | Beleg | vorige Fassung |
+|---|---|---|---|
+| `apps/site/tests/browser-text-spacing.mjs` (21:26 bis 21:28 UTC) | 129 Prüfungen, 43 Routen, 0 Befunde, 0 Laufzeitfehler, 175 Quellen (vorher 174) | `evidence/resize-2026-11-10/text-spacing.json` | `superseded/text-spacing.pre-belege-runde-3-2026-11-14.json` |
+| `apps/site/tests/browser-catalog.mjs` (21:29 UTC) | bestanden, 7 Prüfungen, 0 Fremdanfragen, 0 Seitenfehler | `evidence/shop-ui-mock-2026-11-09/browser-catalog.json` | `superseded/browser-catalog.pre-belege-runde-3-2026-11-14.json` |
+| `apps/site/tests/browser-shop.mjs` (21:29 UTC) | bestanden, 13 Prüfungen, 0 Fremdanfragen, 0 Seitenfehler | `evidence/shop-ui-mock-2026-11-09/browser-shop.json` | `superseded/browser-shop.pre-belege-runde-3-2026-11-14.json` |
+
+Belegart: Browserlauf. `python3 tools/check_text_resize_evidence.py` besteht (43 Routen). Kein Pin in
+`config/acceptance-coverage.json` zeigt auf die drei Belegdateien; dort ist nichts nachzuziehen.
+`consent-ui/next-public` und `workspace-read` binden keine der geänderten Dateien und sind nicht neu erhoben.
+
+Bewusst nicht nachgezogen: `apps/web/app/teileklar/kategorien/page.tsx` und `werkstatt/page.tsx` in
+`evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `-vite.json` (bis hier gültig, jetzt neu
+abweichend), dazu weiter `apps/web/lib/contact-copy.ts` (Abschnitt 11). Neulauf von `apps/site/tests/browser-exception-capture.mjs`
+(Oberfläche vite) am 14.11.2026 kurz vor 21:26 UTC, Stand `68f84c0`: scheitert wie in Abschnitt 10 in Schritt 4, `locator('.request-fallback')` wird nach
+30 s nicht sichtbar (Zeile 60, Klick auf `.workspace-chat-modes button`). Fehlend ist eine Erwartung des Harness, die zum
+heutigen Chat passt (offene Entscheidung 3 aus Abschnitt 6); ohne bestandenen Lauf wird nichts eingetragen.
+`tools/check_browser_evidence.py` bleibt rot wie auf `main`, erster Befund unverändert `apps/site/src/Auth.tsx`.
