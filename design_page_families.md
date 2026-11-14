@@ -1,3 +1,5 @@
+> **HISTORIE – abgelöst durch docs/konzept/FUEHRENDES-KONZEPT.md (14.11.2026)**
+
 # NeXify AI / TEILEKLAR – Design Guidelines (ADDENDUM: Seitenfamilien-Matrix & Kompositionsregeln)
 
 > **Addendum-Ziel:** Verbindliche Seitenfamilien-Matrix für **alle Public-Seiten-IDs** (laut `apps/site/.generated/public-site.json` + `config/site-map.json`) und klare Kompositionsregeln, **ohne** bestehende Tokens/CI zu verändern.

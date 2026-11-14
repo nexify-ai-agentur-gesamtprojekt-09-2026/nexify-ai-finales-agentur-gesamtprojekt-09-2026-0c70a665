@@ -219,3 +219,22 @@ Gemeinsame Angaben für D-011 bis D-018:
   Repositorys; dieser Eintrag schaltet nichts. Wiedereinschalten erst mit begrenztem Auftrag und
   Zugriff auf das Repository.
 - **Rückweg:** Lauf wieder einschalten; Eintrag als überholt kennzeichnen.
+
+## D-019 — Ein führendes Konzept: `docs/konzept/FUEHRENDES-KONZEPT.md` (14.11.2026)
+
+- **Entscheidung:** `docs/konzept/FUEHRENDES-KONZEPT.md` ist das eine führende Konzeptdokument. Es
+  führt den Konzeptstand vom 14.11.2026 (`docs/konzept/2026-11-14/`), den Migrationsabgleich
+  TEILEKLAR, das Shopkonzept aus PR 67 und die Aufzeichnungen der letzten 14 Tage zusammen.
+  Die Arbeitspakete stehen in `docs/konzept/MIGRATIONSPLAN.md`.
+- **Grund:** Auftrag des Inhabers vom 14.11.2026, alle Konzepte „zusammen in eins“ zu führen.
+  Mindestens zwölf Dokumente nannten sich führend oder verbindlich.
+- **Status:** Entscheidung Projektleitung, Bestätigung Inhaber offen.
+- **Grenze:** Das Dokument ist kein Aufgabenregister; führend für Aufgaben bleibt
+  `config/acceptance-coverage.json` (P01–P26). Es gibt keine Preise, Konditionen, Texte oder
+  Rechtsangaben frei und ändert weder `AGENTS.md` noch `config/fakten.json` oder
+  `config/llm-policy.json`. Im Rang steht es unter `AGENTS.md`, `DECISIONS.md` und der Konfiguration.
+- **Umsetzung:** Fünf überholte Dokumente tragen die Kopfzeile „HISTORIE – abgelöst durch …“
+  (Liste im Dokument, Abschnitt 11.3). Hash-gebundene Dateien wurden nicht angefasst und stehen dort
+  als „Kopfzeile ausstehend“ (Abschnitt 11.4). Nichts wurde gelöscht oder umbenannt.
+- **Rückweg:** Eintrag als überholt kennzeichnen und die fünf Kopfzeilen entfernen; der Konzeptstand
+  vom 14.11.2026 ist unverändert.

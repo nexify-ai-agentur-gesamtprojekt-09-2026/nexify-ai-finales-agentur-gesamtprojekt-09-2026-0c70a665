@@ -1,3 +1,5 @@
+> **HISTORIE – abgelöst durch docs/konzept/FUEHRENDES-KONZEPT.md (14.11.2026)**
+
 # NeXify AI — SOLL-Zielbild & Auditregister
 
 Version: 1.0.0 · Stand: 08.11.2026 · Owner: Pascal Courbois · Delegiert an: Projektleitung (Build-Agent)
