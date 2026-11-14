@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { cspFrom, isShopPath, shopTarget, withCsp } from './edge.mjs';
+import { cspFrom, isPreviewHost, isShopPath, shopTarget, withCsp, withNoindex } from './edge.mjs';
 
 const vercel = JSON.parse(readFileSync(new URL('../../../vercel.json', import.meta.url), 'utf8'));
 
@@ -36,4 +36,19 @@ test('Richtlinie stammt aus der vercel.json und wird nur ergänzt, nie überschr
   const kept = withCsp(new Response('b', { headers: { 'Content-Security-Policy': "default-src 'none'" } }), csp);
   assert.equal(kept.headers.get('content-security-policy'), "default-src 'none'");
   assert.equal(cspFrom({}), null);
+});
+
+test('Vorschau-Adressen auf workers.dev senden noindex, eigene Domains nicht', async () => {
+  for (const host of ['nexify-web-vorschau.example.workers.dev', 'abc123-nexify-web.example.workers.dev', 'X.WORKERS.DEV'])
+    assert.equal(isPreviewHost(host), true, host);
+  for (const host of ['nexifyai.de', 'www.nexifyai.cloud', 'workers.dev', 'workers.dev.example.org', 'nexifyworkers.dev', '', undefined])
+    assert.equal(isPreviewHost(host), false, String(host));
+  const marked = withNoindex(new Response('a', { status: 404, headers: { 'x-a': '1' } }), 'nexify-web-vorschau.example.workers.dev');
+  assert.equal(marked.headers.get('x-robots-tag'), 'noindex, nofollow');
+  assert.equal(marked.status, 404);
+  assert.equal(marked.headers.get('x-a'), '1');
+  assert.equal(await marked.text(), 'a');
+  const own = new Response('b');
+  assert.equal(withNoindex(own, 'nexifyai.de'), own);
+  assert.equal(own.headers.has('x-robots-tag'), false);
 });

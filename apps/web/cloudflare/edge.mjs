@@ -41,3 +41,16 @@ export function withCsp(response, csp) {
   next.headers.set('Content-Security-Policy', csp);
   return next;
 }
+
+/** Vorschau-Adresse von Cloudflare (`<name>.<konto>.workers.dev`, auch Versions-Vorschauen), nie eine eigene Domain. */
+export function isPreviewHost(hostname) {
+  return typeof hostname === 'string' && hostname.toLowerCase().endsWith('.workers.dev');
+}
+
+/** Vorschau-Adressen gehören nicht in Suchmaschinen: `X-Robots-Tag: noindex, nofollow` an jede Antwort des Workers. */
+export function withNoindex(response, hostname) {
+  if (!isPreviewHost(hostname) || response.status === 101) return response;
+  const next = new Response(response.body, response);
+  next.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  return next;
+}

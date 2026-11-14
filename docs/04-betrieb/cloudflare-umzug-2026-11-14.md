@@ -7,7 +7,9 @@ andere Dinge."
 **Status: vorbereitet und lokal gemessen. Nicht umgeschaltet.** Kein DNS-Eintrag, keine
 Domain-Zuweisung, kein Cloudflare-Objekt und kein Vercel-Objekt wurde geändert; nichts
 wurde gekauft oder gebucht. Auf Cloudflare wurde nichts ausgeliefert, weil `wrangler`
-in der Arbeitsumgebung nicht angemeldet ist.
+in der Arbeitsumgebung nicht angemeldet ist. Nachtrag vom selben Tag: Das danach
+hinterlegte API-Token wird von Cloudflare als ungültig abgelehnt; die Messung auf
+Cloudflare steht deshalb weiter aus (Abschnitt 13).
 
 Alle Messungen: 14.11.2026, Zweig `claude/cloudflare-umzug` auf `main` `31ccd6c`,
 Node 22.23.4, pnpm 12.15.0, `@opennextjs/cloudflare` 1.20.17, `wrangler` 4.161.0,
@@ -161,10 +163,11 @@ Verkehr wurden nicht erhoben.
 | Datei | Zweck |
 |---|---|
 | `apps/web/cloudflare/worker.mjs` | Einstieg des Workers um den OpenNext-Worker: setzt die Content-Security-Policy und reicht die Wege der Shop-API weiter. Beides leistet auf Vercel die `vercel.json` an der Wurzel und fehlte bisher auf Cloudflare. |
-| `apps/web/cloudflare/edge.mjs`, `edge.test.mjs` | Die Logik dazu als reine Funktionen mit drei Tests (`node --test apps/web/cloudflare/edge.test.mjs`). Die Liste der Shop-Wege wird gegen die `rewrites` der `vercel.json` geprüft. |
+| `apps/web/cloudflare/edge.mjs`, `edge.test.mjs` | Die Logik dazu als reine Funktionen mit vier Tests (`node --test apps/web/cloudflare/edge.test.mjs`). Die Liste der Shop-Wege wird gegen die `rewrites` der `vercel.json` geprüft. |
 | `apps/web/wrangler.jsonc` | `main` auf den neuen Einstieg, `workers_dev` und `preview_urls` an, keine Route, keine eigene Domain, keine Variablenwerte, `keep_vars`. |
 | `apps/web/.dev.vars.example` | Namen der Variablen ohne Werte; Muster für die lokale `.dev.vars`. |
 | `.gitignore` | `apps/web/.dev.vars` wird nie versioniert. |
+| `apps/web/cloudflare/edge.mjs` (`isPreviewHost`, `withNoindex`) | Auf jeder Adresse `*.workers.dev` hängt der Worker `X-Robots-Tag: noindex, nofollow` an seine Antworten; auf einer eigenen Domain nicht. Vierter Test in `edge.test.mjs`. |
 | dieses Dokument | Messwerte, Plan, Rückweg. |
 
 Unverändert: `apps/web/next.config.ts`, `apps/web/package.json`, `vercel.json`,
@@ -336,3 +339,98 @@ Angebot, Bestellung, Mail, Composio-Webhook; Sentry und PostHog in der Workers-L
 Sichtprüfung im Browser und auf Geräten; Lastverhalten; Workers Builds aus Git; ob die
 Zonen im selben Konto liegen; Inhalt des R2-Buckets; Besucherzahlen gegen 100 000
 Anfragen je Tag.
+
+## 13. Messung auf Cloudflare · Versuch vom 14.11.2026, 18:10 bis 18:26 UTC
+
+**Ergebnis: nicht gemessen. Es gibt keine Vorschau-Adresse.** Der Inhaber hat ein
+API-Token als Netzwerk-Geheimnis für `api.cloudflare.com` hinterlegt. Cloudflare lehnt
+es ab, und zwar als ungültig, nicht wegen fehlender Rechte:
+
+| Abruf (nur lesend, ohne eigenen Authorization-Kopf) | Antwort |
+|---|---|
+| `GET /client/v4/accounts` | 403, Code 9109 „Invalid access token" |
+| `GET /client/v4/user/tokens/verify` | 401, Code 1000 „Invalid API Token" |
+| `GET /client/v4/zones` | 403, Code 9109 |
+| `GET /client/v4/user` | 403, Code 9109 |
+| `GET /client/v4/memberships` | 401, Code 10000 „Authentication error" |
+| dritter Versuch nach 15 Minuten | `accounts` weiter 9109; `tokens/verify` 429, Code 10502 „Too many authentication failures" |
+
+Drei Versuche (18:10, 18:12 nach einer Minute Wartezeit, 18:25 UTC), danach abgebrochen,
+damit die Sperre wegen Fehlversuchen nicht verlängert wird. Ein fehlendes Recht sähe
+anders aus (Code 10000 mit Status 403 auf dem einzelnen Endpunkt, während
+`tokens/verify` „active" meldet); ganz ohne Kopfzeile käme Code 9106. Der Proxy setzt
+also einen Wert ein, den Cloudflare nicht als Token erkennt. Mögliche Ursachen, von
+hier aus nicht unterscheidbar, weil der Wert nicht lesbar ist und nicht gelesen wird:
+
+- unvollständig oder mit Leerzeichen/Zeilenumbruch kopiert;
+- „Bearer" doppelt (im Feld mit eingetragen und zusätzlich als Präfix);
+- statt eines API-Tokens der „Global API Key" eingetragen (der braucht
+  `X-Auth-Key` und `X-Auth-Email` und funktioniert nicht als Bearer);
+- ein kontogebundenes Token („Account API Token"): dessen Prüfadresse ist
+  `/client/v4/accounts/<Konto-ID>/tokens/verify`; die Konto-ID war ohne
+  funktionierendes Token nicht zu ermitteln;
+- Token inzwischen widerrufen oder abgelaufen.
+
+Nötig ist ein gültiges Token mit: Konto „Workers Scripts: Edit" (ausliefern),
+„Account Settings: Read" (Konto und Tarif lesen), „Workers Tail: Read"
+(`wrangler tail` für `cpuTime`), „Account Analytics: Read" (Ersatzweg für die
+Rechenzeit); Zone „Zone: Read" (liegen die Zonen im Konto); Benutzer „User Details:
+Read" und „Memberships: Read" (`wrangler whoami`). Keine Rechte für DNS, Routen, KV,
+R2 oder D1.
+
+Nicht umgangen: kein anderer Zugang, keine Auslieferung über den abgekündigten
+MCP-Zugang, kein Abschalten der TLS-Prüfung. Über diesen MCP-Zugang nur gelesen: die
+Liste der Worker ist unverändert (5, wie Abschnitt 8); `nexify-web` und
+`nexify-web-vorschau` gibt es nicht.
+
+### Was offen bleibt (unverändert Abschnitt 12)
+
+Tarif des Kontos (Workers Free oder Paid); ob `nexifyai.de` und `nexifyai.cloud` im
+selben Konto liegen; Rechenzeit je Anfrage auf Cloudflare und die Quote der Fehler
+1102; Antwortzeiten gegen `https://nexifyai.de`; `live-check` und `gleichmacher` auf
+der Vorschau; Auslieferungsprüfung der Vorschau. Das Urteil „kostenfrei tragfähig"
+bleibt deshalb bei der lokalen Schätzung aus Abschnitt 3 und 6 (46 bis 56 ms gegen
+10 ms; Weg A nicht zu erwarten), **ohne Beleg von Cloudflare**.
+
+### Was in diesem Lauf trotzdem erledigt wurde
+
+- `main` eingeholt: Zweig war bereits auf `main` `29f0691`.
+- Bau wie in Abschnitt 3: Exit 0. `wrangler deploy --dry-run --name nexify-web-vorschau
+  --var NEXIFY_PUBLIC_INSTALLATION:public-pwa`: 11 214,20 KiB, gzip 2 529,08 KiB,
+  231 statische Dateien; Bindungen nur `ASSETS` und diese eine Variable.
+- `noindex` für die Vorschau, in der lokalen Workers-Laufzeit mit dem Hostnamen
+  `nexify-web-vorschau.example.workers.dev` geprüft (`wrangler dev --host …`):
+  `X-Robots-Tag: noindex, nofollow` auf `/`, `/leistungen`, `/?lang=nl`,
+  `/api/health` (503), `/api/chat` (405 auf GET), einem erfundenen Pfad (404),
+  `/robots.txt`, `/manifest.webmanifest`. **Nicht** auf `/media/runway/hero.mp4`:
+  Statische Dateien liefert Cloudflare am Worker vorbei aus. Für Bilder und Filme der
+  Vorschau fehlt die Kopfzeile also; die Seiten selbst tragen sie.
+- Befund am Rand: Die Seiten senden unabhängig vom Hostnamen
+  `<meta name="robots" content="noindex, nofollow">` (`app/layout.tsx`), auch
+  `https://nexifyai.de/` in Produktion (Abruf 14.11.2026). Für die Vorschau ist das
+  doppelte Sicherheit; ob es für die Produktion so gewollt ist, entscheidet der Inhaber.
+
+### Fertige Befehlsfolge, sobald das Token gültig ist
+
+```bash
+export CLOUDFLARE_API_TOKEN=proxy-injected            # Platzhalter, der Proxy setzt den Wert ein
+export NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt
+curl -sS https://api.cloudflare.com/client/v4/accounts   # Konto-ID ablesen
+export CLOUDFLARE_ACCOUNT_ID=<Konto-ID>
+node apps/site/scripts/generate-public-data.mjs
+cd apps/web
+NEXIFY_PUBLIC_INSTALLATION=public-pwa node scripts/generate-public-data.mjs
+NEXIFY_PUBLIC_INSTALLATION=public-pwa npx opennextjs-cloudflare build
+npx wrangler deploy --name nexify-web-vorschau --var NEXIFY_PUBLIC_INSTALLATION:public-pwa
+npx wrangler tail nexify-web-vorschau --format json   # Feld cpuTime, outcome "exceededCpu" = 1102
+```
+
+Keine Geheimnisse, keine Route, keine Domain. Verlangt Cloudflare dabei einen bezahlten
+Tarif oder ein Zahlungsmittel: abbrechen.
+
+### Vorschau wieder entfernen
+
+`npx wrangler delete --name nexify-web-vorschau` in `apps/web` (löscht nur diesen
+Worker samt seiner statischen Dateien) oder im Dashboard unter Workers & Pages →
+`nexify-web-vorschau` → Settings → Delete. Die fünf vorhandenen Worker, DNS und
+Zonen sind davon nicht berührt. Derzeit gibt es nichts zu entfernen.
