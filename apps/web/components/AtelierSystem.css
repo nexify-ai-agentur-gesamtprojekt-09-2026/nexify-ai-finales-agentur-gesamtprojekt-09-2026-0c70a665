@@ -1322,3 +1322,16 @@ html:has(#atelier .mobile-navigation[open]){overflow:hidden}
 /* Hinweis unter der Eingabe (Inhaberbefund 14.11.2026: Schrift kleiner): kleinste Schriftstufe des Systems, engere Zeilen.
    Der Selektor nennt die Flaeche mit, weil die Sammelregel der Schriftgroessen ueber :is() zwei Klassen wiegt. */
 #atelier #aifly-panel .public-orientation>.connection-note,#atelier #aifly-panel .public-orientation>.connection-note a{font-size:var(--as-t-12);line-height:1.45}
+/* Abschluss „Wie moechten Sie fortfahren?" (Inhaberbefund 14.11.2026: Schalter sauberer loesen): Der Hauptschalter (56 px)
+   stand mit den Nebenwegen (48 px) in einer Zeile, die Unterkanten liefen nicht buendig, die Abstaende waren ungleich
+   (12 px senkrecht, 24 px waagerecht), und je nach Breite brach ein Nebenweg allein in die naechste Zeile.
+   Jetzt gilt in jeder Breite und fuer zwei bis fuenf Schalter dieselbe Ordnung: eine Liste. Oben der Hauptschalter, darunter
+   die Nebenwege, alle gleich breit (hoechstens 384 px, das Mass des Absatzes darueber), Beschriftung links auf einer Flucht,
+   Pfeil rechts, ein Abstand. Die Nebenwege tragen eine Kante von 1 px, ihr Innenabstand ist darum 1 px kleiner.
+   Der Hauptschalter behaelt seine Innenabstaende von der Startseite (der Gleichmacher misst sie dagegen).
+   Lange Beschriftungen (bis 38 Zeichen in fr) brechen um, statt die Reihe zu sprengen.
+   Steht nur der Hauptschalter da (Startseite), bleibt er unveraendert. */
+#atelier .home-concept .hc-finish-actions:has(>:nth-child(2)){display:grid;grid-template-columns:minmax(0,calc(var(--as-s-24) * 4));gap:var(--as-s-3)}
+#atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>*{align-self:auto;justify-self:stretch;margin:0}
+#atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>:is(.hc-finish-primary,.hc-text-link){justify-content:space-between;height:auto;white-space:normal;text-align:start;overflow-wrap:anywhere}
+#atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>.hc-text-link{padding:var(--as-s-2) calc(var(--as-s-6) + var(--as-s-1) - 1px)}
