@@ -497,7 +497,7 @@ body:has(#atelier) .skip-link:focus{border-radius:var(--as-switch-radius);backgr
 @media(prefers-reduced-motion:reduce){
  #atelier .site-header :is(a,button,summary),#atelier .home-concept :is(a,button,summary),#atelier .site-footer :is(a,button,summary),#atelier #aifly-panel :is(a,button,summary){transition:none}
 }
-#atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
+#atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em;min-width:0;max-width:100%;overflow-wrap:break-word;hyphens:auto}
 #atelier .home-concept .hc-finish h2{font-size:clamp(36px,4.6cqi,48px);line-height:1.05;letter-spacing:-.02em}
 #atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
 #atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
@@ -1216,29 +1216,5 @@ html[data-theme='light'] #atelier{
 #atelier .home-concept .identity-copy .identity-body,#atelier #aifly-panel .orientation-intro p.orientation-intro-body{max-width:var(--atelier-system-zeilenlaenge-lese)}
 #atelier .home-concept .hc-intro p{max-width:var(--atelier-system-zeilenlaenge-breit)}
 
-/* ===== Unterseiten-Hero nach dem Startseiten-Master =====
-   Entscheidung des Inhabers 14.11.2026: Die Startseite ist die einzige fertige Referenz; alle Unterseiten (NeXify, TEILEKLAR,
-   Rechtsseiten) uebernehmen ihre Heldenbuehne: Raster Text links / Bild rechts, Titel, Lesetext, Glasrahmen der Bildflaeche
-   und Primaerschalter. Nur Gestaltung: Markup, Test-IDs, Texte und Medien bleiben unveraendert. Werte wie .identity-hero. */
-#atelier .page-concept>section:first-child{container:page-hero/inline-size}
-#atelier .page-concept .pc-hero h1{font-family:var(--font-display);font-weight:700;line-height:var(--type-hero-leading);letter-spacing:var(--type-display-tracking);color:var(--as-ink);padding-bottom:.08em}
-#atelier .page-concept .pc-hero-lead{font-size:clamp(16px,1.05cqi,18px);max-width:var(--atelier-system-zeilenlaenge-lese)}
-@container page-hero (min-width:821px){
- #atelier .page-concept .pc-hero{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:var(--space-7);align-items:center;padding-block:var(--space-8) var(--space-6);perspective:1500px}
- #atelier .page-concept .pc-hero.is-text-only{grid-template-columns:minmax(0,1fr)}
- #atelier .page-concept .pc-hero h1{font-size:min(var(--type-hero-size),4.1cqi)}
-}
-#atelier .page-concept .pc-hero-media{padding:var(--as-rim);border:0;border-radius:var(--as-stage);overflow:hidden;background:linear-gradient(140deg,color-mix(in srgb,var(--as-light) 52%,transparent),color-mix(in srgb,var(--as-cool) 14%,transparent) 24%,color-mix(in srgb,var(--as-shade-soft) 70%,transparent) 60%,color-mix(in srgb,var(--as-warm) 40%,transparent) 100%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-light) 60%,transparent),0 40px 90px -34px color-mix(in srgb,var(--as-shade-soft) 96%,transparent),0 60px 120px -50px color-mix(in srgb,var(--as-warm) 26%,transparent)}
-#atelier .page-concept .pc-hero-media :is(img,video){border-radius:calc(var(--as-stage) - var(--as-rim))}
-#atelier .page-concept .pc-hero-actions .hc-text-link.is-primary{min-height:56px;padding-inline:var(--space-6);border:0;border-radius:var(--as-switch-radius);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--as-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-light) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 14px 30px -10px color-mix(in srgb,var(--as-lime) 58%,transparent);color:var(--color-text-auf-lime)}
-#atelier .page-concept .pc-hero-actions .hc-text-link.is-primary:hover{background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--color-marke-lime) 46%,var(--color-marke-lime-dunkel));color:var(--color-text-auf-lime)}
-#atelier .page-concept .pc-hero-actions .hc-text-link.is-primary:focus-visible{outline:none;box-shadow:var(--as-focus),0 14px 30px -10px color-mix(in srgb,var(--as-lime) 58%,transparent)}
-#atelier .page-concept .pc-hero-actions .hc-text-link:not(.is-primary){min-height:56px;border-radius:var(--as-switch-radius)}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
- @container page-hero (min-width:821px){
-  #atelier .page-concept .pc-hero-media{transform:rotateY(-8deg) rotateX(3.5deg) scale(.95);transform-origin:50% 50%;transition:transform .6s var(--as-spring);-webkit-backface-visibility:hidden;backface-visibility:hidden}
-  #atelier .page-concept .pc-hero-media:focus-within{transform:none}
- }
- #atelier .page-concept .pc-hero-actions .hc-text-link.is-primary{transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
- #atelier .page-concept .pc-hero-actions .hc-text-link.is-primary:hover{transform:translateY(-2px)}
-}
+/* ===== HeroStage ohne Bildflaeche (Unterseiten ohne Motiv): einspaltig, sonst unveraendert wie .identity-hero ===== */
+#atelier .home-concept .identity-hero.is-text-only .identity-scene{grid-template-columns:minmax(0,1fr)}
