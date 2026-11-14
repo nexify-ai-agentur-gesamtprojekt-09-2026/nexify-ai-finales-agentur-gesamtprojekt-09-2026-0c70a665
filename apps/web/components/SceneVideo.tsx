@@ -4,7 +4,8 @@ import {useRef, useState} from "react";
 import "./SceneVideo.css";
 import {FilmPlaybackIcon,compactWords} from "./AtelierFilm";
 
-const words = {
+// `label` ist die KI-Kennzeichnung der Markenfilme (Art. 50 KI-VO); sie steht seit 14.11.2026 im Footer statt auf dem Bild.
+export const words = {
   de: {play: "Video mit Ton abspielen", label: "Markeninszenierung · KI-generiert", title: "Markenszene mit Pascal, NeX und AIFly ORACLE"},
   nl: {play: "Video met geluid afspelen", label: "Merkscène · AI-gegenereerd", title: "Merkscène met Pascal, NeX en AIFly ORACLE"},
   fr: {play: "Lire la vidéo avec le son", label: "Mise en scène de marque · générée par IA", title: "Scène de marque avec Pascal, NeX et AIFly ORACLE"},
