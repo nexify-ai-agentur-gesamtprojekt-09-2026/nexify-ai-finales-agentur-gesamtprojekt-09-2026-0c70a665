@@ -15,6 +15,9 @@ import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceC
 import {createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {CommerceHeader} from './shop/CommerceHeader';
 import ChatResizeHandle,{chatWidthStyle,clampChat,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
+// Vollflächiges Gespräch: schmale Fenster und Telefone im Querformat (niedrig, Tippgerät). Dieselbe Bedingung steht in AtelierSystem.css
+// (Abschnitt „Chat im Querformat"); beide Stellen gemeinsam ändern.
+const MOBILE_CHAT='(max-width: 820px), (max-height: 500px) and (pointer: coarse)';
 import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
@@ -243,7 +246,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     if(next&&document.activeElement instanceof HTMLElement&&!document.activeElement.closest('#aifly-panel'))panelReturnFocus.current=document.activeElement;
     // Keep the same semantic text at the same viewport position when the desktop grid reflows.
     // Near the top, stay at the top; mobile overlays do not resize the page.
-    if(!window.matchMedia('(max-width: 820px)').matches&&window.scrollY>0){
+    if(!window.matchMedia(MOBILE_CHAT).matches&&window.scrollY>0){
       const candidates=Array.from(document.querySelectorAll<HTMLElement>('.website main :is(h1,h2,h3,p),.website footer h2'));
       const visible=candidates.filter(el=>{const rect=el.getBoundingClientRect();return rect.height>0&&rect.top>=0&&rect.top<window.innerHeight;});
       const element=visible.find(el=>/^H[123]$/.test(el.tagName))||visible[0];
@@ -277,6 +280,32 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     observer.observe(action);
     return()=>observer.disconnect();
   },[pathname]);
+  // Verallgemeinerung derselben Regel: Der schwebende Chat-Schalter tritt zurück, solange ein Bedienelement der Seite
+  // (Schalter, Link-Schalter, Formularfeld; keine ganzen Karten) unter ihm liegt. Sobald es weggerollt ist, steht er wieder da.
+  const [launcherCovers,setLauncherCovers]=useState(false);
+  useEffect(()=>{
+    const root=workspaceRoot.current;if(!root)return;
+    let frame=0;
+    const check=()=>{
+      frame=0;
+      const launcher=root.querySelector<HTMLElement>('.reopen-chat'),box=launcher?.getBoundingClientRect();
+      if(!box||!box.width){setLauncherCovers(false);return;}
+      let covers=false;
+      const steps=[.04,.27,.5,.73,.96];
+      for(const fx of steps){const x=box.left+box.width*fx;for(const fy of steps){const y=box.top+box.height*fy;
+        for(const element of document.elementsFromPoint(x,y)){
+          if(!element.closest('.website'))continue;
+          const control=element.closest<HTMLElement>('a[href],button,input,select,textarea,summary');
+          if(control&&control.getBoundingClientRect().height<=96){covers=true;break;}
+        }
+        if(covers)break;}if(covers)break;}
+      setLauncherCovers(covers);
+    };
+    const queue=()=>{if(!frame)frame=requestAnimationFrame(check);};
+    queue();const late=window.setTimeout(queue,1200);
+    window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',queue);
+    return()=>{cancelAnimationFrame(frame);window.clearTimeout(late);window.removeEventListener('scroll',queue);window.removeEventListener('resize',queue);};
+  },[pathname,open]);
   const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Projektgespräch anfragen",nl:"Projectgesprek aanvragen",fr:"Demander un échange projet",en:"Request a project conversation"}[locale]};
   const standalone=typeof window!=="undefined"&&(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
   const canQuote=ready&&capabilities?.quote_pdf===true;
@@ -292,7 +321,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
 
   useEffect(() => {
     // The URL is authoritative so server-rendered translations and SEO agree.
-    const query=window.matchMedia("(max-width: 820px)");
+    const query=window.matchMedia(MOBILE_CHAT);
     // Unter 1200 px Fensterbreite bleibt der Seite ihre volle Spalte: die Scheibe startet eingeklappt, bis jemand sie öffnet.
     const roomy=()=>window.innerWidth>=1200;
     const preferredOpen=()=>{try{const saved=sessionStorage.getItem("nx-chat-open");return saved==="1"||(saved===null&&site==="nexify"&&roomy());}catch{return site==="nexify"&&roomy();}};
@@ -447,7 +476,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     read();window.addEventListener('scroll',onScroll,{passive:true});
     return()=>{cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);};
   },[]);
-  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} data-chat-boot={boot??undefined} data-hero-action-visible={heroAction?'true':undefined} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} data-chat-boot={boot??undefined} data-hero-action-visible={heroAction||launcherCovers?'true':undefined} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     {/* Kantenbrechung für das Glas: Verschiebungskarte als Bild, nur dort wirksam, wo der Browser Filter in backdrop-filter kennt. */}
     <svg className="glass-lens-filter" width="0" height="0" aria-hidden="true" focusable="false"><filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="36" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="as-linse-leiste" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse-leiste.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="30" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="as-linse-front" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse-front.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="44" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>

@@ -86,9 +86,9 @@
 .home-concept .pc-supplement .tk-partner-intro h2,.home-concept .pc-supplement .tk-portal-preview h2{font:500 var(--type-section-size)/1.15 var(--font-display);max-width:24ch}
 .home-concept .pc-supplement :is(.tk-meta,.workshop-region-meta,.workshop-shop-meta,.workshop-building,.tk-note){font-size:var(--type-small-size);color:var(--color-text-tertiaer)}
 .home-concept .pc-supplement .eyebrow{display:block;margin-bottom:var(--space-3);color:var(--color-atelier-champagne);font:400 var(--type-small-size)/var(--type-body-leading) var(--font-text);letter-spacing:0;text-transform:none}
-.home-concept .pc-supplement label{font-size:var(--type-small-size);color:var(--color-text-sekundaer)}
-.home-concept .pc-supplement :is(input,textarea,select){background:var(--color-atelier-canvas);border:1px solid var(--color-linie-fein);border-radius:var(--radius-leit);padding:var(--space-3) var(--space-4);color:var(--color-text-primaer);font-size:var(--type-home-reading)}
-.home-concept .pc-supplement :is(input,textarea,select):focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:var(--space-1);border-color:var(--color-linie-fein)}
+.home-concept :is(.pc-supplement,.nx-konto-blatt) label{font-size:var(--type-small-size);color:var(--color-text-sekundaer)}
+.home-concept :is(.pc-supplement,.nx-konto-blatt) :is(input,textarea,select){line-height:1.5;background:var(--color-atelier-canvas);border:1px solid var(--color-linie-fein);border-radius:var(--radius-leit);padding:var(--space-3) var(--space-4);color:var(--color-text-primaer);font-size:var(--type-home-reading)}
+.home-concept :is(.pc-supplement,.nx-konto-blatt) :is(input,textarea,select):focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:var(--space-1);border-color:var(--color-linie-fein)}
 .home-concept .pc-supplement input[type=checkbox]{width:20px;min-height:20px;padding:0;border-radius:var(--radius-klein);accent-color:var(--color-atelier-champagne)}
 .home-concept .pc-supplement :is(.primary-button,button.primary-button,.tk-cta.primary-button){display:inline-flex;align-items:center;justify-content:center;gap:var(--space-4);min-height:var(--target-min);padding:var(--space-3) var(--space-5);border:0;border-radius:var(--radius-pille);background:var(--color-atelier-champagne);color:var(--color-text-auf-lime);font-weight:600;box-shadow:var(--shadow-atelier);text-decoration:none}
 .home-concept .pc-supplement :is(.primary-button,button.primary-button):hover:not(:disabled){background:var(--color-atelier-platinum);color:var(--color-text-auf-lime)}
@@ -102,7 +102,7 @@
 .home-concept .pc-supplement :is(.workshop-disclaimer,.tk-fitment,.tk-tyre-verdict){border-color:color-mix(in srgb,var(--color-atelier-champagne) 40%,transparent);border-radius:var(--radius-karte);color:var(--color-text-sekundaer)}
 .home-concept .pc-supplement .workshop-directory a,.home-concept .pc-supplement .tk-check a{color:var(--color-atelier-champagne)}
 .home-concept .pc-supplement .tk-check a{text-decoration:underline;text-underline-offset:var(--space-1)}
-.home-concept .pc-supplement .tk-field-error{color:var(--color-semantik-fehler);font-size:var(--type-small-size)}
+.home-concept :is(.pc-supplement,.nx-konto-blatt) .tk-field-error{color:var(--color-semantik-fehler);font-size:var(--type-small-size)}
 .home-concept .pc-supplement .tk-badge{background:var(--color-atelier-champagne);color:var(--color-text-auf-lime)}
 
 /* Mit dem Startseiten-System endet jede Seite im eigenen Abschluss; die Footer-Einladung entfaellt. */
@@ -155,7 +155,7 @@
 .home-concept .pc-section+.pc-section{padding-top:var(--space-6);border-top:var(--material-border) solid var(--color-linie-fein)}
 .home-concept .pc-section-body{gap:var(--space-6)}
 .home-concept .pc-supplement :is(.tk-form,.tk-home-entry,.tk-notice,.workshop-directory,.partner-form,.tk-partner-intro,.tk-portal-preview,.tk-legal-doc){border:var(--material-border) solid var(--color-linie-fein);border-top-color:var(--material-highlight);box-shadow:var(--shadow-atelier-polish)}
-.home-concept .pc-supplement :is(input,textarea,select){max-width:100%;min-width:0}
+.home-concept :is(.pc-supplement,.nx-konto-blatt) :is(input,textarea,select){max-width:100%;min-width:0}
 @container home (max-width:680px){
  .home-concept .pc-hero{gap:var(--space-6);padding-block:var(--space-5) var(--space-7)}
  .home-concept .pc-section{padding-block:var(--space-6)}

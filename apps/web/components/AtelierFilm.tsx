@@ -11,7 +11,9 @@ export const compactWords={de:{play:'Abspielen',pause:'Pausieren',voice:'Ton an'
 export function FilmPlaybackIcon({playing}:{playing:boolean}){return <svg className="atelier-playback-icon" viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">{playing?<><rect x="5" y="4" width="3" height="12" rx=".7"/><rect x="12" y="4" width="3" height="12" rx=".7"/></>:<path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z"/>}</svg>;}
 export type AtelierAsset={src:string;poster:string;posterAlt?:string;still?:{src:string;alt:string};width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean;
  /** false: startet nur auf Klick (Inhabervorgabe 14.11.2026: nur der Hero-Film startet von selbst). */
- autostart?:boolean};
+ autostart?:boolean;
+ /** true: das Poster ist das größte Bild im ersten Bildschirm einer Seite (Seitenkopf) und wird bevorzugt geladen. */
+ eager?:boolean};
 /** Editorial motion. End, buffering, manual pause and temporary visibility pauses remain distinct. */
 export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsset;locale:Locale;hero?:boolean}){
  const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),stillImage=useRef<HTMLImageElement>(null),id=useId();
@@ -77,7 +79,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  }
  return <div ref={root} className={'atelier-film'+(hero?' atelier-film-hero':'')} data-film={asset.title} data-playback={failed?'error':ended?'ended':buffering?'buffering':playing?'playing':'paused'}>
   <div className="atelier-film-picture">
-   {(!frameReady||!started||ended||failed)&&<img ref={stillImage} className="atelier-film-fallback" src={usePoster?asset.poster:still.src} alt={(failed||!started||ended)?(usePoster?(asset.posterAlt??asset.title):still.alt):''} aria-hidden={!(failed||!started||ended)} onError={()=>{if(!usePoster&&still.src!==asset.poster)setFailedStillSrc(still.src);}} width={asset.width} height={asset.height} fetchPriority={hero&&asset.autostart!==false?'high':undefined}/>}
+   {(!frameReady||!started||ended||failed)&&<img ref={stillImage} className="atelier-film-fallback" src={usePoster?asset.poster:still.src} alt={(failed||!started||ended)?(usePoster?(asset.posterAlt??asset.title):still.alt):''} aria-hidden={!(failed||!started||ended)} onError={()=>{if(!usePoster&&still.src!==asset.poster)setFailedStillSrc(still.src);}} width={asset.width} height={asset.height} fetchPriority={hero&&(asset.autostart!==false||asset.eager)?'high':undefined}/>}
    <video ref={ref} src={asset.src} poster={still.src} width={asset.width} height={asset.height} preload={hero&&asset.autostart!==false&&warm?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
     onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setStarted(true);setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}

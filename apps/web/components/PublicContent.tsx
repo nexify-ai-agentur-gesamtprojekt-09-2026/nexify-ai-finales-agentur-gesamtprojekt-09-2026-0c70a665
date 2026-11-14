@@ -5,7 +5,8 @@ import {SiteLink} from "./Router";
 import type {PublicPage} from "../lib/page-types";
 import {useUI} from "./Workspace";
 import {pageImage,pageVideo,imageAlt,srcSetFor} from "../lib/brand-media";
-import {SceneVideo} from "./SceneVideo";
+import AtelierFilm from "./AtelierFilm";
+import {words as sceneWords} from "./SceneVideo";
 import {HcArrow} from "./HcArrow";
 import {PageShowcase} from "./PageShowcase";
 import {PageQuestions} from "./PageQuestions";
@@ -78,7 +79,10 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
    lead={<><nav className="pc-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map((parent,index)=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink>{index<parents.length-1&&<span aria-hidden="true">/</span>}</li>)}<li className="visually-hidden"><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
     <span className="hc-kicker">{brand}<span aria-hidden="true"> / </span>{t[layout]}</span></>}
    actions={page.actions.length>0?<>{page.actions.slice(0,2).map((action,index)=>heroAction(action,index))}</>:undefined}
-   media={image?<figure className="identity-hero-photo" data-testid={"domain-artwork-"+page.id}><img src={image.src} srcSet={srcSetFor(image.src)} sizes="(max-width: 820px) 100vw, 60vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="eager" fetchPriority="high" decoding="async"/>{pageVideo(page.id)&&<SceneVideo key={page.id} src={pageVideo(page.id)!} locale={locale}/>}</figure>:undefined}/>
+   media={image?<figure className="identity-hero-photo" data-testid={"domain-artwork-"+page.id}>{pageVideo(page.id)
+     // Seiten mit Film: derselbe Baustein und dieselbe Einbettung wie im Hero der Startseite; startet nur auf Klick.
+     ?<AtelierFilm key={page.id} hero locale={locale} asset={{src:pageVideo(page.id)!,poster:image.src,posterAlt:imageAlt(image,locale),width:1280,height:720,title:sceneWords[locale].title,hasAudio:true,autoplayWithAudio:false,autostart:false,eager:true}}/>
+     :<img src={image.src} srcSet={srcSetFor(image.src)} sizes="(max-width: 820px) 100vw, 60vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="eager" fetchPriority="high" decoding="async"/>}</figure>:undefined}/>
   {sections.length>1&&<nav className="hc-anchors hc-container" aria-label={t.onPage}>{sections.map((section,index)=><a key={section.id} href={"#"+anchorId(page.id,section.id,index)}>{section.heading[locale]}<HcArrow direction="down"/></a>)}</nav>}
   {supplementFirst&&supplement}
   {sections.length>0&&<div className="pc-sections">{sections.map((section,index)=>{
