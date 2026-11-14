@@ -9,11 +9,13 @@ const audioWords={de:{captions:'Untertitel',volume:'Lautstärke'},nl:{captions:'
 export const compactWords={de:{play:'Abspielen',pause:'Pausieren',voice:'Ton an',mute:'Ton aus'},nl:{play:'Afspelen',pause:'Pauzeren',voice:'Geluid aan',mute:'Geluid uit'},fr:{play:'Lire',pause:'Pause',voice:'Son',mute:'Sans son'},en:{play:'Play',pause:'Pause',voice:'Sound on',mute:'Mute'}};
 /** Abspiel-/Pause-Symbol der Filmsteuerung (Hero und alle weiteren Filme). */
 export function FilmPlaybackIcon({playing}:{playing:boolean}){return <svg className="atelier-playback-icon" viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">{playing?<><rect x="5" y="4" width="3" height="12" rx=".7"/><rect x="12" y="4" width="3" height="12" rx=".7"/></>:<path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z"/>}</svg>;}
-export type AtelierAsset={src:string;poster:string;posterAlt?:string;still?:{src:string;alt:string};width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean};
+export type AtelierAsset={src:string;poster:string;posterAlt?:string;still?:{src:string;alt:string};width:number;height:number;title:string;captions?:string;transcript?:string;playOnce?:boolean;hasAudio?:boolean;autoplayWithAudio?:boolean;
+ /** false: startet nur auf Klick (Inhabervorgabe 14.11.2026: nur der Hero-Film startet von selbst). */
+ autostart?:boolean};
 /** Editorial motion. End, buffering, manual pause and temporary visibility pauses remain distinct. */
 export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsset;locale:Locale;hero?:boolean}){
  const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),stillImage=useRef<HTMLImageElement>(null),id=useId();
- const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false);
+ const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false),userStarted=useRef(false);
  // Vom Besucher gewählter Ton (null = noch keine Wahl). Er gilt weiter, wenn der Film nach Wegblättern oder Tabwechsel wieder anläuft.
  const userSound=useRef<boolean|null>(null);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
@@ -32,12 +34,12 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
   const video=ref.current,box=root.current;if(!video||!box)return;
   // A media request can fail before React attaches onError during hydration.
   // Read persistent media state when attaching, rather than waiting for events that already fired.
-  alive.current=true;generation.current++;userPaused.current=false;userSound.current=null;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setStarted(false);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
+  alive.current=true;generation.current++;userPaused.current=false;userStarted.current=false;userSound.current=null;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setStarted(false);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
   let visible=false,disposed=false,audioAttempted=false;
   const pref=matchMedia('(prefers-reduced-motion: reduce)');
   const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection;
   async function start(){
-   if(disposed||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||video!.error||userPaused.current)return;
+   if(disposed||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||video!.error||userPaused.current||(asset.autostart===false&&!userStarted.current))return;
    const action=manualAction.current;
    const audible=userSound.current??(hero&&asset.hasAudio===true&&asset.autoplayWithAudio===true&&!audioAttempted);
    audioAttempted=true;
@@ -54,11 +56,11 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
   const other=(e:Event)=>{if((e as CustomEvent<string>).detail!==id){userPaused.current=true;manualAction.current++;video.pause();setBuffering(false);}};
   observer.observe(box);pref.addEventListener('change',preference);document.addEventListener('visibilitychange',hidden);window.addEventListener('nexify:presenter-play',other);
   return()=>{disposed=true;alive.current=false;generation.current++;observer.disconnect();pref.removeEventListener('change',preference);document.removeEventListener('visibilitychange',hidden);window.removeEventListener('nexify:presenter-play',other);video.pause();};
- },[asset.src,asset.hasAudio,asset.autoplayWithAudio,hero,id]);
+ },[asset.src,asset.hasAudio,asset.autoplayWithAudio,asset.autostart,hero,id]);
  function pause(){userPaused.current=true;manualAction.current++;ref.current?.pause();setBuffering(false);}
  async function play(withVoice=false){
   const video=ref.current;if(!video)return;
-  const attempt=generation.current;manualAction.current++;userPaused.current=false;setFailed(false);setBuffering(true);
+  const attempt=generation.current;manualAction.current++;userPaused.current=false;userStarted.current=true;setFailed(false);setBuffering(true);
   if(video.error)video.load();
   if(video.ended||withVoice){video.currentTime=0;setProgress(0);setEnded(false);}
   if(withVoice){if(video.volume===0){video.volume=.8;setVolume(.8);}video.muted=false;setMuted(false);userSound.current=true;}

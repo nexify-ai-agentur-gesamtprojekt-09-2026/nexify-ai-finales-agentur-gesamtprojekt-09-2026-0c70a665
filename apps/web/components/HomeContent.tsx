@@ -44,7 +44,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   <nav className="hc-gallery hc-container" aria-label={t.introTitle}>
    {t.galleryTitles.map((title,i)=><article className="hc-gallery-card" key={title}>
     {/* Exakt die Einbettung des Hero (identity-media > identity-hero-photo > AtelierFilm); nur Film, Poster und Titel je Karte. */}
-    <div className={`identity-media hc-art hc-art-${i}`}><figure className="identity-hero-photo"><AtelierFilm hero locale={locale} asset={{src:galleryFilm[i],poster:galleryArt[i].src,posterAlt:imageAlt(galleryArt[i],locale),width:1280,height:720,title:title,hasAudio:true,autoplayWithAudio:false}}/></figure></div>
+    <div className={`identity-media hc-art hc-art-${i}`}><figure className="identity-hero-photo"><AtelierFilm hero locale={locale} asset={{src:galleryFilm[i],poster:galleryArt[i].src,posterAlt:imageAlt(galleryArt[i],locale),width:1280,height:720,title:title,hasAudio:true,autoplayWithAudio:false,autostart:false}}/></figure></div>
     <SiteLink className="hc-gallery-link" href={galleries[i]} data-testid={`home-still-${i}`}>
      <span className="hc-scene-context">{t.galleryContexts[i]}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><small className="hc-scene-value">{t.galleryValues[i]}</small><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
     </SiteLink>
