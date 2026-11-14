@@ -13,7 +13,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),stillImage=useRef<HTMLImageElement>(null),id=useId();
  const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
- const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null);
+ const [captions,setCaptions]=useState(false),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null);
  const t=words[locale],a=audioWords[locale],compact=compactWords[locale],playLabel=ended?t.replay:t.play;
  // A reviewed still may be bound to this exact asset; until then, retain the existing editorial poster.
  const still=asset.still??{src:asset.poster,alt:asset.posterAlt??asset.title};
@@ -67,7 +67,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
     onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setStarted(true);setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
     onEnded={()=>{setStarted(false);setPlaying(false);setBuffering(false);setEnded(true);setProgress(1);}} onError={()=>{setFailed(true);setBuffering(false);setPlaying(false);}}>
-    {asset.captions&&<track kind="captions" src={asset.captions} srcLang="de" label="Deutsch" default onLoad={()=>captionMode(captions)}/>}
+    {asset.captions&&<track kind="captions" src={asset.captions} srcLang="de" label="Deutsch" onLoad={()=>captionMode(captions)}/>}
    </video>
    {buffering&&<span className="atelier-film-loading" role="status">{t.loading}</span>}
    <div className="atelier-film-controls">
