@@ -105,5 +105,112 @@ class TeamCandidateTests(unittest.TestCase):
         self.c['runtime_candidates'][1]['gateway_trust_domain']='shared_across_untrusted_tenants'
         with self.assertRaisesRegex(ValueError,'openclaw_trust_domain'):self.validate()
 
+    # D-019: Hermes ist gewählte Orchestrierungs-Laufzeit, Kandidat bleibt nicht aktiviert.
+    def test_d019_records_hermes_as_orchestration_runtime_without_activation(self):
+        result=self.validate()
+        block=self.c['orchestration_runtime']
+        self.assertEqual(block['decision'],'DECISIONS.md#D-019')
+        self.assertEqual(block['runtime_candidate_id'],'hermes-candidate')
+        self.assertEqual(block['status'],'owner_selected_not_activated')
+        self.assertEqual(self.c['status'],'candidate_not_runtime_activation')
+        self.assertTrue(all(value is False for value in self.c['activation'].values()))
+        self.assertEqual(result['orchestration_runtime'],'hermes-candidate_owner_selected_D-019_not_activated')
+        self.assertIn('hermes_function_proof_and_per_profile_runtime_decision',result['open_gates'])
+        self.assertFalse(result['can_dispatch_external_worker'])
+
+    def test_missing_or_extended_orchestration_block_is_rejected(self):
+        saved=self.c.pop('orchestration_runtime')
+        with self.assertRaises(KeyError):self.validate()
+        self.c['orchestration_runtime']={**saved,'activated':True}
+        with self.assertRaisesRegex(ValueError,'orchestration_runtime_drift'):self.validate()
+        self.c['orchestration_runtime']={k:v for k,v in saved.items() if k!='open'}
+        with self.assertRaisesRegex(ValueError,'orchestration_runtime_drift'):self.validate()
+
+    def test_orchestration_decision_cannot_claim_activation_authority_or_controller(self):
+        for field,value in [('status','active'),('function_proof',True),('replaces_controller',True),
+                            ('profile_runtime_assignment_changed',True),('grants_execution_authority',True),
+                            ('repository_access','read_write'),('approvals_mode','off'),('third_party_message_channel',True),
+                            ('function_proof',0),('decision','DECISIONS.md#D-014'),('runtime_candidate_id','openclaw-candidate'),
+                            ('kind','role')]:
+            with self.subTest(field=field,value=value):
+                old=self.c['orchestration_runtime'][field];self.c['orchestration_runtime'][field]=value
+                with self.assertRaisesRegex(ValueError,'orchestration_runtime_drift'):self.validate()
+                self.c['orchestration_runtime'][field]=old
+        self.validate()
+
+    def test_open_points_of_d019_cannot_be_dropped_silently(self):
+        self.c['orchestration_runtime']['open'].pop()
+        with self.assertRaisesRegex(ValueError,'orchestration_runtime_drift'):self.validate()
+
+    def test_execution_authority_is_unchanged_for_every_role(self):
+        self.assertEqual({p['execution_authority'] for p in self.c['profiles']},{candidate.EXECUTION_AUTHORITY})
+        for index in range(len(self.c['profiles'])):
+            with self.subTest(role=self.c['profiles'][index]['role_id']):
+                old=self.c['profiles'][index]['execution_authority'];self.c['profiles'][index]['execution_authority']='granted_by_D-019'
+                with self.assertRaisesRegex(ValueError,'execution_authority_changed'):self.validate()
+                self.c['profiles'][index]['execution_authority']=old
+
+    def test_d019_does_not_move_roles_onto_hermes(self):
+        self.assertEqual({p['role_id'] for p in self.c['profiles'] if p['runtime_id']=='hermes-candidate'},{'triage','angebot'})
+        for role in ('orchestrator','pruefer','waechter','baumeister'):
+            profile=next(p for p in self.c['profiles'] if p['role_id']==role)
+            old=profile['runtime_id'];profile['runtime_id']='hermes-candidate'
+            with self.assertRaisesRegex(ValueError,'runtime_assignment'):self.validate()
+            profile['runtime_id']=old
+
+    def test_controller_is_not_replaced_by_d019(self):
+        self.c['controller']='hermes'
+        with self.assertRaisesRegex(ValueError,'controller_replacement'):self.validate()
+
+    def test_hermes_installation_claim_is_bound_to_the_server_finding(self):
+        hermes=self.c['runtime_candidates'][0]
+        self.assertTrue((ROOT/hermes['remote_installation_source']).is_file())
+        for field,value in [('remote_installation','installed_and_verified'),('remote_installation_source','ops/hermes/README.md'),('local_cli_detected',True)]:
+            old=hermes[field];hermes[field]=value
+            with self.assertRaisesRegex(ValueError,'hermes_installation_claim'):self.validate()
+            hermes[field]=old
+        for field in ('connected','installed_by_this_work','sampling_enabled','unrestricted_shell','automatic_skill_mutation'):
+            hermes[field]=True
+            with self.assertRaisesRegex(ValueError,'hermes_unverified_activation_or_scope'):self.validate()
+            hermes[field]=False
+
+
+class AutomationOrchestrationTests(unittest.TestCase):
+    """config/automation.json sagt dasselbe wie D-019 und der Kandidat."""
+    def setUp(self):
+        self.entries={e['id']:e for e in json.loads((ROOT/'config/automation.json').read_text())['integrations']}
+
+    def test_paperclip_is_kept_as_superseded_history(self):
+        paperclip=self.entries['paperclip']
+        self.assertEqual(paperclip['status'],'superseded_by_owner_decision_not_pursued')
+        self.assertEqual(paperclip['previous_status'],'user_selected_not_verified')
+        self.assertEqual((paperclip['superseded_by'],paperclip['decision']),('hermes','DECISIONS.md#D-019'))
+        self.assertIs(paperclip['tool_exposed'],False)
+
+    def test_hermes_is_selected_but_claims_no_operation_or_acceptance(self):
+        hermes=self.entries['hermes']
+        self.assertEqual(hermes['status'],'owner_selected_container_reported_not_verified')
+        self.assertEqual(hermes['decision'],'DECISIONS.md#D-019')
+        self.assertIs(hermes['tool_exposed'],False)
+        self.assertIs(hermes['activated_by_repository'],False)
+        self.assertIs(hermes['production_accepted'],False)
+        observed=hermes['observed']
+        self.assertEqual(observed['container_running_on'],'srv1941843')
+        for field in ('version_verified','model_and_route_verified','server_configuration_verified','real_model_call_verified'):
+            self.assertIs(observed[field],False,field)
+        for ref in (hermes['model_policy_ref'],hermes['candidate_ref'],hermes['preparation_ref'],observed['source']):
+            self.assertTrue((ROOT/ref).is_file(),ref)
+
+    def test_automation_and_candidate_agree_on_d019(self):
+        config=json.loads((ROOT/candidate.CONFIG).read_text())
+        self.assertEqual(self.entries['hermes']['candidate_ref'],candidate.CONFIG)
+        self.assertEqual(config['orchestration_runtime']['decision'],self.entries['hermes']['decision'])
+        self.assertEqual(config['model_policy_ref'],self.entries['hermes']['model_policy_ref'])
+        self.assertEqual(config['runtime_candidates'][0]['remote_installation_source'],self.entries['hermes']['observed']['source'])
+        self.assertIn('D-019',(ROOT/'DECISIONS.md').read_text(encoding='utf-8'))
+
+    def test_no_integration_is_exposed_as_tool(self):
+        self.assertTrue(all(e['tool_exposed'] is False for e in self.entries.values()))
+
 
 if __name__=='__main__':unittest.main()
