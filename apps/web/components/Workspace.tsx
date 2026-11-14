@@ -345,7 +345,8 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   // Sprachwahl: Mit der Tastatur verändert schon das Blättern durch die Liste den Wert. Gewechselt wird deshalb erst
   // mit der Eingabetaste (WCAG 3.2.2); mit Zeiger oder Finger gilt die Auswahl in der geöffneten Liste sofort.
   const [pendingLocale,setPendingLocale]=useState<Locale|null>(null);
-  const localeKey=useRef<string|null>(null);
+  // Letzte Taste am Auswahlfeld mit Zeitpunkt: nur eine Änderung unmittelbar nach einer Taste gilt als Blättern.
+  const localeKey=useRef<{key:string;at:number}|null>(null);
   const goToLocale=(next:string)=>{const url=new URL(window.location.href);if(next==='de')url.searchParams.delete('lang');else url.searchParams.set('lang',next);window.location.assign(url.pathname+url.search+url.hash);};
   useEffect(()=>{
     let frame=0;
@@ -448,11 +449,11 @@ export default function Workspace({children,pages,accountControl,initialLocale='
         <SiteNavigation pages={pages} site={site} locale={locale} pathname={pathname}/>
         <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" disabled={!hydrated} value={pendingLocale??locale} aria-describedby="locale-hint"
           onPointerDown={()=>{localeKey.current=null;}}
-          onKeyDown={event=>{localeKey.current=event.key;if(event.key==='Enter'&&pendingLocale&&pendingLocale!==locale){event.preventDefault();goToLocale(pendingLocale);}else if(event.key==='Escape'&&pendingLocale){setPendingLocale(null);}}}
+          onKeyDown={event=>{localeKey.current={key:event.key,at:performance.now()};if(event.key==='Enter'&&pendingLocale&&pendingLocale!==locale){event.preventDefault();goToLocale(pendingLocale);}else if(event.key==='Escape'&&pendingLocale){setPendingLocale(null);}}}
           onBlur={()=>{localeKey.current=null;setPendingLocale(null);}}
           onChange={event=>{const next=event.target.value as Locale,key=localeKey.current;
             // Blättern mit der Tastatur (Pfeile, Anfangsbuchstabe) wählt nur vor; Eingabetaste oder Zeiger bestätigen.
-            if(key!==null&&key!=='Enter'){setPendingLocale(next===locale?null:next);return;}
+            if(key!==null&&key.key!=='Enter'&&performance.now()-key.at<150){setPendingLocale(next===locale?null:next);return;}
             if(next!==locale)goToLocale(next);}}><option value="de" data-testid="locale-option-de">DE</option><option value="nl" data-testid="locale-option-nl">NL</option><option value="fr" data-testid="locale-option-fr">FR</option><option value="en" data-testid="locale-option-en">EN</option></select><span id="locale-hint" className="visually-hidden">{localeHint[locale]}</span><button type="button" className="theme-switch" role="switch" aria-checked={theme==='light'} aria-label={themeLabel} title={themeLabel} data-testid="theme-switch" onClick={toggleTheme}><svg className="theme-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg><svg className="theme-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button><Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{(!open||boot)&&<button className="outline-button compact" aria-expanded="false" aria-controls="aifly-panel" onClick={openChat}>{t.open}</button>}</div>
       </header>}
       <main id="page-content" tabIndex={-1}>{children}</main>
