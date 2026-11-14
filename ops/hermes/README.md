@@ -20,7 +20,7 @@ Hermes Agent von Nous Research, `NousResearch/hermes-agent`, MIT-Lizenz, Version
 
 ## Stand auf dem Server
 
-NOTIZ, Quelle: koordinierende Sitzung über die Hostinger-API, nur lesend, 14.11.2026 ca. 11:50 UTC, Server `srv1941843` (Ubuntu 24.04). Hier nicht nachgeprüft; aus dieser Umgebung gibt es keinen Serverzugang.
+NOTIZ, Quelle: koordinierende Sitzung über die Hostinger-API, nur lesend, 14.11.2026 ca. 11:50 UTC, Server `srv1941843` (Ubuntu 24.04). Hier nicht nachgeprüft; aus dieser Umgebung gibt es keinen Serverzugang. Der Befund steht ausführlich in `docs/04-betrieb/server-befund-2026-11-14.md` (S3, S4, Arbeitsliste 4 und 5).
 
 - Compose-Projekt `docker-hermes`, Container `hermes`, eigenes Image, `network_mode: host`, läuft seit acht Tagen.
 - Volumes: `/root/.hermes` (im Container `/home/hermes/.hermes` und `/root/.hermes`), `/usr/local/lib/hermes-agent`, `/opt/hermes-webui` (ro), `rea` (ro), Docker-Socket.
