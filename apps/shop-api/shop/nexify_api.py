@@ -169,7 +169,7 @@ async def oracle_history(session_id: str, request: Request):
     if await oracle_session_access(session_id, await current_user(request), request) != "own":
         # Same answer for "does not exist" and "belongs to someone else": no existence oracle.
         raise HTTPException(404, {"error": "not_found"})
-    items = await db.oracle_messages.find({"session_id": session_id}, {"_id": 0}).sort("at", 1).to_list(200)
+    items = await db.oracle_messages.find({"session_id": session_id}, {"_id": 0, "owner_hash": 0}).sort("at", 1).to_list(200)
     return {"session_id": session_id, "messages": items}
 
 
@@ -203,20 +203,25 @@ async def oracle_chat(body: ChatIn, request: Request):
     if access == "foreign":
         raise HTTPException(404, {"error": "not_found"})
     since = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
-    if await db.oracle_messages.count_documents({"session_id": session_id, "role": "user", "at": {"$gte": since}}) >= CHAT_DAILY_LIMIT:
+    # The limit follows the party, not the conversation: a new conversation id does not reset it.
+    # Signed-in: per account. Anonymous: per visitor cookie. (This service has no sender-address
+    # limiter; a client that discards the cookie is a new visitor and is not bounded here.)
+    owner_token = None if user else (_owner_token(request) or secrets.token_urlsafe(32))
+    owner_hash = _owner_hash(owner_token) if owner_token else None
+    party = {"user_id": user["user_id"]} if user else {"owner_hash": owner_hash}
+    if await db.oracle_messages.count_documents({**party, "role": "user", "at": {"$gte": since}}) >= CHAT_DAILY_LIMIT:
         raise HTTPException(429, {"error": "rate_limited", "message": "Das Tageslimit für diesen Chat ist erreicht. Schreiben Sie uns gern über das Kontaktformular."})
     chosen = next((p for p in providers() if p["available"]), None)
     if not chosen:
         raise HTTPException(503, {"error": "oracle_unavailable", "message": "Oracle ist gerade nicht erreichbar."})
     history = [{"role": m["role"], "content": m["content"]} for m in await db.oracle_messages.find({"session_id": session_id}, {"_id": 0}).sort("at", 1).to_list(40)]
-    base = {"session_id": session_id, "user_id": user["user_id"] if user else None, "page": body.page}
+    base = {"session_id": session_id, "user_id": user["user_id"] if user else None, "owner_hash": owner_hash, "page": body.page}
     new_owner_token = None
     if access == "new":
-        owner_token = None if user else (_owner_token(request) or secrets.token_urlsafe(32))
         new_owner_token = owner_token if owner_token and owner_token != _owner_token(request) else None
         try:
             await db.oracle_sessions.insert_one({"session_id": session_id, "user_id": user["user_id"] if user else None,
-                                                 "owner_hash": _owner_hash(owner_token) if owner_token else None, "created_at": now_iso()})
+                                                 "owner_hash": owner_hash, "created_at": now_iso()})
         except DuplicateKeyError:
             # Someone else claimed this id between the check and the insert.
             raise HTTPException(404, {"error": "not_found"}) from None
