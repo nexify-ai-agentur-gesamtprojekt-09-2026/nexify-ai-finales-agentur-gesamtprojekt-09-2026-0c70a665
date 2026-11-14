@@ -14,6 +14,7 @@ from .db import db, ensure_indexes
 from . import mailer
 from . import nexify_api
 from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, requests_api, workshops_api
+from . import verification_api
 
 NEXT_API = ("/api/agent-chat", "/api/agent-runtime-status", "/api/internal")
 HOP = {"host", "content-length", "connection", "transfer-encoding", "keep-alive"}
@@ -42,6 +43,8 @@ async def lifespan(app):
     await accounts_api.seed_accounts()
     await workshops_api.import_workshops()
     await nexify_api.ensure_nexify_indexes()
+    if verification_api.enabled():
+        await verification_api.ensure_verification_indexes()
     start_gateway()
     retry = asyncio.create_task(mailer.retry_loop())
     yield
@@ -65,7 +68,8 @@ async def same_origin_writes(request: Request, call_next):
     return response
 
 
-for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api, nexify_api):
+# verification_api answers 404 on both routes unless its switches are on (default off).
+for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api, nexify_api, verification_api):
     app.include_router(module.router)
 
 

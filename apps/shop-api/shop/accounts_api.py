@@ -133,6 +133,10 @@ async def register(body: RegisterIn, response: Response):
     except DuplicateKeyError:
         raise HTTPException(409, {"error": "email_taken", "message": "Diese E-Mail-Adresse ist bereits registriert", "fields": {"email": "taken"}}) from None
     await send_welcome(user)
+    # Suite switch (default off): confirmation link for the address. Lazy import keeps the default path unchanged.
+    if os.environ.get("NEXIFY_SUITE") == "on" and os.environ.get("NEXIFY_SUITE_EMAIL_VERIFICATION") == "on":
+        from . import verification_api
+        await verification_api.issue(user)
     return await start_session(response, user)
 
 
@@ -204,7 +208,10 @@ async def google_session(body: GoogleIn, response: Response):
     email = profile["email"].lower()
     user = await db.users.find_one({"email": email})
     if not user:
-        user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": profile.get("name", ""), "role": "customer", "created_at": now_iso()}
+        # A new account that exists only through the identity provider's assertion of this address has a
+        # proven address. An existing password account is NOT marked here: its address was never proven.
+        user = {"user_id": "user_" + uuid.uuid4().hex[:12], "email": email, "name": profile.get("name", ""), "role": "customer", "created_at": now_iso(),
+                "email_verified": True, "email_verified_at": now_iso()}
         await db.users.insert_one(user)
         await send_welcome(user)
     await db.users.update_one({"user_id": user["user_id"]}, {"$set": {"google_linked": True}})
