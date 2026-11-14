@@ -1,6 +1,7 @@
 # Umgebungsvariablen nach tatsächlichem Dienst
 
-Stand: 26.10.2026. Maschinenlesbarer Vertrag:
+Stand: 26.10.2026; Nachtrag 14.11.2026: Abschnitt 6 (Projektbindung der
+Shop-API). Maschinenlesbarer Vertrag:
 [`config/environment-contract.json`](../../config/environment-contract.json).
 Geprüft sind aktive Quellreferenzen und inzwischen der authentifizierte,
 vom Root-Agenten sanitisiert bereitgestellte Vercel-Metadaten-Read-back.
@@ -156,3 +157,55 @@ automatisch fehlende Vercel-Pflichtwerte. Noch offen sind die tatsächliche
 Clerk-DNS-/TLS-/Login-Bereitschaft, die gegebenenfalls notwendige Prüfung von
 Servercredential-Zuordnung und die Eigentums-/Zweckprüfung ungenutzter
 Remote-Einstellungen. Vorhandensein eines Namens allein genügt nicht.
+
+## 6. Shop-API: Projektbindung (Nachtrag 14.11.2026)
+
+Die Shop-API (`apps/shop-api/vercel_app.py`) und der Namespace-Operator
+(`apps/shop-api/namespace_operator.py`) arbeiten nur in einem ausdrücklich
+freigegebenen Vercel-Projekt. In jedem anderen Projekt antworten alle
+`/api/shop/*`-Aufrufe mit `503` und `reason: project_binding_unverified`. Das ist
+gewollter Mandantenschutz für die Shop-Datenbank, kein Fehler. Bis zu diesem Nachtrag
+war das freigegebene Projekt eine feste Konstante (`prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`);
+das heute ausliefernde Projekt `…-ut7r` (`prj_lKQEWQKzjqq4Ifvmwy6dh1XCIgVR`) war
+dadurch ausgeschlossen.
+
+| Name | Sensitivität | Standard | Wer setzt sie |
+|---|---|---|---|
+| `SHOP_ALLOWED_PROJECT_IDS` | nicht geheim (Projekt-IDs sind Kennungen, keine Zugangsdaten); wird trotzdem nie in Antworten oder Logs ausgegeben | nicht gesetzt = genau `prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`, das Verhalten ist dann unverändert | Der Inhaber (Pascal Courbois) oder ein von ihm beauftragter Admin des Vercel-Teams, je Projekt im Vercel-Dashboard. Kein Agent, kein Skript: die Variable ist die ausdrückliche Freigabe. |
+
+Regeln, identisch in Laufzeit und Operator (eine gemeinsame Funktion,
+`project_binding_verified` in `vercel_app.py`):
+
+- Format: kommagetrennte Vercel-Projekt-IDs. Leerzeichen, Tabs und Zeilenumbrüche um
+  einen Eintrag werden toleriert, leere Einträge ignoriert.
+- Nicht gesetzt, leer oder nur aus Leerzeichen/Kommas bestehend gilt als **nicht
+  konfiguriert** und fällt auf den Standard zurück, niemals auf „offen".
+- Eine gesetzte Liste **ersetzt** den Standard. Soll das historische Projekt weiter
+  binden dürfen, muss seine ID in der Liste stehen, oder die Variable bleibt in
+  diesem Projekt ungesetzt.
+- Verglichen wird exakt und mit Groß-/Kleinschreibung gegen `VERCEL_PROJECT_ID`
+  (setzt Vercel selbst). Es gibt keine Wildcards und keine Muster; `*` ist nur ein
+  Zeichen und passt auf keine echte ID.
+- Der Diagnosecode bleibt `project_binding_unverified`. Weder die Projekt-ID noch die
+  Liste erscheinen in einer Antwort, einer Ausnahme oder einem Log.
+
+Was die Variable **nicht** tut:
+
+- Sie gibt **keinen Datenbankzugriff**. `MONGODB_URI` (oder `MONGO_URL`), `DB_NAME`
+  (muss `nexify_teileklar_shop_v1` sein), `PREVIEW_PUBLIC_ORIGIN`, `SHOP_VAT_PERCENT`
+  und `REVOLUT_MODE` müssen im jeweiligen Projekt selbst gesetzt sein. Secrets werden
+  nicht zwischen Projekten kopiert oder übertragen. Fehlen sie, antwortet die API
+  weiter mit `503`, dann aber mit dem jeweils eigenen Diagnosecode (zum Beispiel
+  `database_binding_missing_or_unsuitable`).
+- Sie ändert die **Identität des Namespaces** nicht. `PROJECT_ID` bleibt Teil von
+  `SCHEMA_MARKER` und Plan-Digest; der Datenbank-Namespace gehört weiterhin zu
+  `prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`, auch wenn ein zweites Projekt zugelassen wird.
+- Sie entscheidet nicht, welches Projekt kanonisch wird und wo die Produktionsdatenbank
+  der Suite läuft. Das ist eine offene Entscheidung des Inhabers (Abschnitt 5
+  „Entscheidungen des Inhabers, die es braucht", Zeile „Produktionsdatenbank", in
+  `docs/architecture/suite-fundament-2026-11-14.md` auf dem Branch
+  `claude/epic-hopper-7d3duf`; dort, nicht in `main`).
+
+Prüfung ohne Netzwerk und ohne echte Werte:
+`python3 -m unittest discover -s apps/shop-api/tests -p 'test_vercel_adapter.py'` und
+`-p 'test_namespace_operator.py'`.

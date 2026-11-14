@@ -15,7 +15,7 @@ import secrets
 from typing import Mapping
 from urllib.parse import urlsplit
 
-from vercel_app import BindingError, CLAIM_COLLECTION, COLLECTIONS, INDEXES, PLANNED_NAMESPACE, PROJECT_ID, SCHEMA_MARKER, check_metadata, resolve_binding
+from vercel_app import BindingError, CLAIM_COLLECTION, COLLECTIONS, INDEXES, PLANNED_NAMESPACE, PROJECT_ID, SCHEMA_MARKER, check_metadata, project_binding_verified, resolve_binding
 
 MAX_METADATA_COLLECTIONS = 100
 COLLECTION_OPTIONS = {
@@ -46,7 +46,7 @@ def plan_digest():
 
 
 def connection_uri(env: Mapping[str, str]):
-    if env.get("VERCEL_PROJECT_ID") != PROJECT_ID:
+    if not project_binding_verified(env):
         raise OperatorError("project_binding_unverified")
     old, new = env.get("MONGO_URL", ""), env.get("MONGODB_URI", "")
     if old and new and old != new:

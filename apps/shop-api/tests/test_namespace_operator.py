@@ -4,6 +4,8 @@ import contextlib
 import copy
 import io
 import json
+import logging
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -12,7 +14,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT/'apps/shop-api'))
 import namespace_operator as OP
-from test_vercel_adapter import Database, Collection, Cursor, ENV
+from test_vercel_adapter import ADAPTER, ALLOWED_PROJECT, ALLOWLIST, FOREIGN_PROJECT, LISTED_PROJECT, SENTINELS, Database, Collection, Cursor, ENV, env_for
 
 
 class NewCollection(Collection):
@@ -142,6 +144,69 @@ class OperatorTests(unittest.IsolatedAsyncioTestCase):
         seen.clear()
         with self.assertRaises(OP.OperatorError):await OP.operate(ENV,OP.arguments(['init']),client_factory=client)
         self.assertEqual(seen,[])
+
+
+class ProjectAllowlistOperatorTests(unittest.TestCase):
+    """The operator CLI must apply exactly the runtime's project allowlist, not its own copy."""
+    def test_operator_shares_the_runtime_helper_and_agrees_on_every_case(self):
+        self.assertEqual(OP.project_binding_verified.__module__, 'vercel_app')
+        both = f'{ALLOWED_PROJECT},{LISTED_PROJECT}'
+        cases = [(ADAPTER.PROJECT_ID, None), (FOREIGN_PROJECT, None), (ALLOWED_PROJECT, ALLOWED_PROJECT),
+                 (FOREIGN_PROJECT, ALLOWED_PROJECT), (LISTED_PROJECT, f' {ALLOWED_PROJECT} , {LISTED_PROJECT} '),
+                 (ADAPTER.PROJECT_ID, '   '), (FOREIGN_PROJECT, ' , '), (ADAPTER.PROJECT_ID, ALLOWED_PROJECT),
+                 (FOREIGN_PROJECT, '*'), ('', both), (ALLOWED_PROJECT.lower(), ALLOWED_PROJECT)]
+        for project, raw in cases:
+            with self.subTest(project=project, raw=raw):
+                env = env_for(project, raw)
+                try:
+                    ADAPTER.resolve_binding(env)
+                    runtime_allows = True
+                except ADAPTER.BindingError as error:
+                    self.assertEqual(str(error), 'project_binding_unverified')
+                    runtime_allows = False
+                self.assertEqual(runtime_allows, ADAPTER.project_binding_verified(env))
+                self.assertEqual(runtime_allows, OP.project_binding_verified(env))
+                if runtime_allows:
+                    self.assertEqual(OP.connection_uri(env), ENV['MONGODB_URI'])
+                else:
+                    with self.assertRaises(OP.OperatorError) as caught:
+                        OP.connection_uri(env)
+                    self.assertEqual(str(caught.exception), 'project_binding_unverified')
+
+    def test_default_is_unchanged_without_the_variable(self):
+        self.assertEqual(OP.connection_uri(ENV), ENV['MONGODB_URI'])
+        with self.assertRaisesRegex(OP.OperatorError, '^project_binding_unverified$'):
+            OP.connection_uri(env_for(FOREIGN_PROJECT))
+        with self.assertRaisesRegex(OP.OperatorError, '^project_binding_unverified$'):
+            OP.connection_uri({k: v for k, v in ENV.items() if k != 'VERCEL_PROJECT_ID'})
+
+    def test_plan_stays_bound_to_the_canonical_namespace_whatever_the_allowlist(self):
+        self.assertEqual(OP.plan()['project_id'], 'prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh')
+        with patch.dict(os.environ, {ALLOWLIST: ALLOWED_PROJECT}):
+            self.assertEqual(OP.plan()['project_id'], 'prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh')
+
+    def test_cli_blocks_with_a_fixed_code_and_never_prints_project_ids(self):
+        self.addCleanup(logging.disable, logging.NOTSET)  # main() disables logging process-wide.
+        environment = {**env_for(FOREIGN_PROJECT, f'{ALLOWED_PROJECT},{LISTED_PROJECT}')}
+        with patch.dict(os.environ, environment, clear=True), \
+                patch('motor.motor_asyncio.AsyncIOMotorClient', side_effect=AssertionError('must not connect')), \
+                contextlib.redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(OP.main(['preflight']), 1)
+            self.assertEqual(OP.main(['init', '--confirm-plan-sha256', OP.plan_digest()]), 1)
+        lines = output.getvalue().splitlines()
+        self.assertEqual(len(lines), 2)
+        for line in lines:
+            self.assertEqual(json.loads(line), {'operation': 'operator', 'state': 'blocked', 'reason': 'project_binding_unverified'})
+        for sentinel in SENTINELS:
+            self.assertNotIn(sentinel, output.getvalue())
+
+    def test_plan_render_with_a_configured_allowlist_prints_no_environment_values(self):
+        self.addCleanup(logging.disable, logging.NOTSET)
+        with patch.dict(os.environ, {ALLOWLIST: f'{ALLOWED_PROJECT},{LISTED_PROJECT}'}), \
+                contextlib.redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(OP.main(['plan']), 0)
+        for sentinel in SENTINELS:
+            self.assertNotIn(sentinel, output.getvalue())
 
 
 class OutputTests(unittest.TestCase):
