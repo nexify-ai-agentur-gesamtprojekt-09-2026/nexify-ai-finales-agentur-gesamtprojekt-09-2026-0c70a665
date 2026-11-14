@@ -58,7 +58,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   </section>
   <section id="zusammenarbeit" className="hc-section hc-process hc-container" aria-labelledby="hc-process-title">
    <header className="hc-section-heading"><div><span className="hc-kicker">{t.processKicker}</span><h2 id="hc-process-title">{t.processTitle}</h2></div><p>{t.processBody}</p></header>
-   <figure className="hc-plate hc-plate-process"><img src={brandImages.welcome.src} srcSet={srcSetFor(brandImages.welcome.src)} sizes="(max-width: 820px) 100vw, 80vw" width="2000" height="1125" alt={imageAlt(brandImages.welcome,locale)} loading="lazy" decoding="async"/></figure>
+   <figure className="hc-plate hc-plate-process"><img src={brandImages.design.src} srcSet={srcSetFor(brandImages.design.src)} sizes="(max-width: 820px) 100vw, 80vw" width="2000" height="1125" alt={imageAlt(brandImages.design,locale)} loading="lazy" decoding="async"/></figure>
    <ol>{t.steps.map(([title,body])=><li key={title}><h3>{title}</h3><p>{body}</p></li>)}</ol>
   </section>
   <section id="produktwelt" className="hc-section hc-container hc-product-story" aria-labelledby="hc-products-title">

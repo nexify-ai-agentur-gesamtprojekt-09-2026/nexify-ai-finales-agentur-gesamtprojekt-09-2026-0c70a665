@@ -1215,3 +1215,16 @@ html[data-theme='light'] #atelier{
 #atelier .home-concept .identity-copy .identity-subtitle{max-width:var(--atelier-system-zeilenlaenge-kurz)}
 #atelier .home-concept .identity-copy .identity-body,#atelier #aifly-panel .orientation-intro p.orientation-intro-body{max-width:var(--atelier-system-zeilenlaenge-lese)}
 #atelier .home-concept .hc-intro p{max-width:var(--atelier-system-zeilenlaenge-breit)}
+
+/* ===== Galerie-Filme der Startseite: Abspielen bedienbar und gleich der Hero-Filmsteuerung =====
+   Die Linkflaeche der Karte (.hc-gallery-link::after, z-index 1) lag ueber der Bildflaeche; "Video mit Ton abspielen" fuehrte
+   zum Link statt zum Film. Die Bildflaeche liegt jetzt darueber, laesst Klicks aber zur Linkflaeche durch; nur Schalter und
+   gestarteter Film (native Steuerung) nehmen Klicks an. Schalter: Material, 48 px und Abstand wie .atelier-film-controls im Hero. */
+#atelier .home-concept .hc-gallery-card .hc-art{z-index:2;pointer-events:none}
+#atelier .home-concept .hc-gallery-card :is(.scene-video-play,.scene-video[data-started='true']){pointer-events:auto}
+#atelier .home-concept .hc-gallery-card .scene-video-bar{inset:auto auto var(--space-4) var(--space-4)}
+#atelier .home-concept .hc-gallery-card .scene-video-label{display:none}
+#atelier .home-concept .hc-gallery-card .scene-video-play{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px;height:48px;padding:0 var(--space-4);border:0;border-radius:var(--as-switch-radius);background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest);color:var(--as-ink);font-size:.8125rem;font-weight:500;white-space:nowrap;transition:background-color .2s ease-out,transform .28s var(--as-spring)}
+#atelier .home-concept .hc-gallery-card .scene-video-play:hover{background:color-mix(in srgb,var(--as-cool) 18%,transparent),var(--as-glass-dense)}
+#atelier .home-concept .hc-gallery-card .scene-video-play:active{transform:scale(.97)}
+#atelier .home-concept .hc-gallery-card .scene-video-play:focus-visible{outline:none;box-shadow:var(--as-focus)}
