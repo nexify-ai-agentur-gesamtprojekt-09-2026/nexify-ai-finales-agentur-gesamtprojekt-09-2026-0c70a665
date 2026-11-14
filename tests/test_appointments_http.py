@@ -1106,6 +1106,27 @@ class Nacharbeit(Fall):
         antwort = await self.client.post("/api/workshops/P/appointments", content=strom(), headers=kopf)
         self.assertEqual(self.fehler(antwort, 422, "appointment_invalid")["fields"], {"rumpf": "invalid"})
         self.assertEqual(self.speicher.zeilen, {})
+        self.assertLess(len(gelesen), 30, "beim Lesen wird an der Grenze abgebrochen")
+        # Kündigt der Kopf schon zu viel an, wird kein Byte gelesen.
+        from fastapi import FastAPI as _App
+        gesehen = []
+
+        class Zaehlt:
+            def __init__(self, app):
+                self.app = app
+
+            async def __call__(self, scope, receive, send):
+                async def mitzaehlen():
+                    gesehen.append(1)
+                    return await receive()
+                await self.app(scope, mitzaehlen, send)
+        app = _App()
+        app.include_router(API.router_fuer(self.abh))
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=Zaehlt(app)), base_url=HERKUNFT) as zaehler:
+            antwort = await zaehler.post("/api/workshops/P/appointments", content=gross, headers=kopf)
+            self.assertEqual((antwort.status_code, gesehen), (422, []))
+            await zaehler.post("/api/workshops/P/appointments", content=b"{}", headers={**kopf, "Idempotency-Key": self.schluessel()})
+            self.assertTrue(gesehen, "Gegenprobe: ein kleiner Rumpf wird gelesen")
         knapp = __import__("json").dumps({**WUNSCH, "fuellung": "x" * (API.RUMPF_MAX - 600)}).encode()
         self.assertLessEqual(len(knapp), API.RUMPF_MAX)
         self.assertEqual((await self.client.post("/api/workshops/P/appointments", content=knapp, headers=kopf)).status_code, 201)
@@ -1171,6 +1192,7 @@ class Nacharbeit(Fall):
 
     # ---- M17, M24 und der Filter nach dem Fristablauf
     async def test_m17_seiten_der_liste(self):
+        self.assertEqual(API.SEITENGROESSE, 50)
         for n in range(API.SEITENGROESSE + 1):
             self.assertEqual((await self.anlegen(email="k%02d@example.invalid" % n)).status_code, 201)
         erste = (await self.client.get("/api/workshops/P/appointments", headers=self.als("p"))).json()
