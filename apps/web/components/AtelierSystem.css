@@ -497,7 +497,7 @@ body:has(#atelier) .skip-link:focus{border-radius:var(--as-switch-radius);backgr
 @media(prefers-reduced-motion:reduce){
  #atelier .site-header :is(a,button,summary),#atelier .home-concept :is(a,button,summary),#atelier .site-footer :is(a,button,summary),#atelier #aifly-panel :is(a,button,summary){transition:none}
 }
-#atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
+#atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em;min-width:0;max-width:100%;overflow-wrap:break-word;hyphens:auto}
 #atelier .home-concept .hc-finish h2{font-size:clamp(36px,4.6cqi,48px);line-height:1.05;letter-spacing:-.02em}
 #atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
 #atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
