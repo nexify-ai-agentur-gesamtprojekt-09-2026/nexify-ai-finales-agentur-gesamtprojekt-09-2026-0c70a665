@@ -1,4 +1,5 @@
 "use client";
+import {SceneLoop} from './SceneLoop';
 import {type ReactNode} from 'react';
 import {useUI} from './Workspace';
 import {SiteLink} from './Router';
@@ -13,6 +14,8 @@ import HomeEffects from './HomeEffects';
 
 // Home previews and their detail pages share one verified image assignment.
 const galleryArt=[brandImages.design,brandImages.automation,brandImages.logistics];
+// Dieselbe Szene bewegt: Bemusterung, Fertigung, Logistik (docs/design/scene-videos-2026-11-13.md).
+const galleryFilm=['/media/scenes/bemusterung-20261113.mp4','/media/scenes/fertigung-20261113.mp4','/media/scenes/logistik-20261113.mp4'];
 const productArt=['nex2fly','one','api','tk-home'].map(id=>pageImage(id)!);
 const galleries=['/leistungen/websites','/leistungen/agenten-automatisierung','/teileklar'];
 const services=['/leistungen/websites','/leistungen/agenten-automatisierung','/loesungen'];
@@ -39,10 +42,12 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
    <div><span className="hc-kicker">{t.introKicker}</span><h2 id="hc-intro-title">{t.introTitle}</h2></div><p>{t.introBody}</p>
   </section>
   <nav className="hc-gallery hc-container" aria-label={t.introTitle}>
-   {t.galleryTitles.map((title,i)=><SiteLink className="hc-gallery-card" href={galleries[i]} key={title} data-testid={`home-still-${i}`}>
-    <figure className={`hc-art hc-art-${i}`}><img src={galleryArt[i].src} srcSet={srcSetFor(galleryArt[i].src)} sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw" width="2000" height="1125" alt={imageAlt(galleryArt[i],locale)} loading="lazy" decoding="async"/></figure>
-    <span className="hc-scene-context">{t.galleryContexts[i]}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><small className="hc-scene-value">{t.galleryValues[i]}</small><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
-   </SiteLink>)}
+   {t.galleryTitles.map((title,i)=><article className="hc-gallery-card" key={title}>
+    <figure className={`hc-art hc-art-${i}`}><img src={galleryArt[i].src} srcSet={srcSetFor(galleryArt[i].src)} sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw" width="2000" height="1125" alt={imageAlt(galleryArt[i],locale)} loading="lazy" decoding="async"/><SceneLoop src={galleryFilm[i]} locale={locale}/></figure>
+    <SiteLink className="hc-gallery-link" href={galleries[i]} data-testid={`home-still-${i}`}>
+     <span className="hc-scene-context">{t.galleryContexts[i]}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><small className="hc-scene-value">{t.galleryValues[i]}</small><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
+    </SiteLink>
+   </article>)}
   </nav>
   <section id="leistungen" className="hc-section hc-container hc-service-story" aria-labelledby="hc-services-title">
    <div className="hc-service-layout"><header className="hc-section-heading"><span className="hc-kicker">{t.serviceKicker}</span><h2 id="hc-services-title">{t.serviceTitle}</h2><p>{t.serviceBody}</p><SiteLink href="/kontakt" className="hc-text-link">{t.offerCta}<DetailArrow/></SiteLink><figure className="hc-plate hc-plate-services"><img src={brandImages.atelier.src} srcSet={srcSetFor(brandImages.atelier.src)} sizes="(max-width: 820px) 100vw, 40vw" width="2000" height="1125" alt={imageAlt(brandImages.atelier,locale)} loading="lazy" decoding="async"/></figure></header>
