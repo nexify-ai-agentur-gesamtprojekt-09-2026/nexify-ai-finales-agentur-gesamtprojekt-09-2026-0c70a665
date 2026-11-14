@@ -165,15 +165,24 @@ jemand anwendet. `config/suite-plans.json` gibt nichts frei.
 | Rechtstexte | AGB der Suite, AVV, Datenschutz, zulässige Nutzung; anwaltliche Prüfung | Livegang |
 | Produktionsdatenbank | wo läuft PostgreSQL für die Suite; Übernahme der Konten | Anwendung der Migration 002 |
 
-## 6. Weitere Befunde (nicht behoben, nur gemeldet)
+## 6. Weitere Befunde
 
-1. **Kontoübernahme vor Bestätigung:** `POST /api/auth/google/session` verknüpft ein Google-Profil mit einem
-   bestehenden, nie bestätigten Passwortkonto gleicher Adresse. Wer vorher mit fremder Adresse registriert hat,
-   behält sein Passwort und damit Zugang. Vorschlag: bei Verknüpfung eines unbestätigten Passwortkontos Passwort
-   und Sitzungen verwerfen. Nicht geändert, weil es bestehendes Anmeldeverhalten verändert.
-2. `GET /api/operator/overview` greift auf `providers()[2]` zu; die Liste hat einen Eintrag ⇒ Laufzeitfehler.
-3. Tageslimit des Portal-Chats zählt je Gesprächskennung; ein neues Gespräch umgeht es. Kein Limit je Absender.
-4. `DELETE /api/portal/team/{id}` löscht endgültig (Inhabergrenze „nichts unwiderruflich löschen").
+Nachtrag 14.11.2026: Die Punkte 1–4 sind auf Weisung behoben (Sicherheit vor unverändertem Verhalten).
+
+1. **Kontoübernahme vor Bestätigung – behoben.** Verknüpft sich ein Google-Profil mit einem nie bestätigten
+   Passwortkonto, wird das Passwort entfernt, alle Sitzungen enden, offene Reset-/Bestätigungslinks werden
+   entwertet; die Adresse gilt erst durch Google als bestätigt. Bestätigte Passwortkonten bleiben unberührt.
+   Nebenwirkung: Bestandskonten sind bisher alle unbestätigt; wer sich dort erstmals mit Google anmeldet,
+   setzt ein Passwort bei Bedarf über „Passwort vergessen" neu (`tests/test_google_link_takeover.py`).
+2. **Betreiberübersicht – behoben.** Kein Zugriff per Position auf die Anbieterliste mehr.
+3. **Tageslimit des Portal-Chats – behoben im möglichen Umfang.** Gezählt wird je Konto bzw. je
+   Besuchercookie statt je Gespräch. Offen: Der Dienst hat keinen Mechanismus je Absenderadresse; ein anonymer
+   Client, der das Cookie verwirft, wird hier nicht begrenzt (Begrenzung an der Kante nötig).
+4. **Teammitglied entfernen – behoben.** `DELETE /api/portal/team/{id}` archiviert (`archived_at`,
+   `archived_by`), blendet aus Listen aus; `GET /api/portal/team/archive`, `POST /api/portal/team/{id}/restore`.
+   Weitere endgültige Löschungen in Portal-/Konten-API: nur Sitzungen (`logout`, Passwort-Reset,
+   Google-Verknüpfung) und Fehlversuchszähler (`login_failures`) – technische Zustände, keine Kundendaten;
+   unverändert. Die Portal-API enthält keine Löschung mehr (statischer Test in `tests/test_portal_followups.py`).
 5. Portal-Chat sendet die Policy-Kennung des Modells; laut `apps/web/lib/chat-llm.ts` lehnt der Router sie ab
    (aus der Bestandsaufnahme übernommen, nicht gemessen).
 6. `main` hat unabhängig von dieser Arbeit fehlschlagende Prüfungen (`make test`, `make check-arch`):
