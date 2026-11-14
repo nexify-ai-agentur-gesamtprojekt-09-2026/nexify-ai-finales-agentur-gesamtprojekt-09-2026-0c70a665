@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SiteLink } from "../Router";
+import { ActionButton } from "../ActionControl";
 import { api, type ApiError } from "./api";
 import "./shop.css";
 import "../HomeConcept.css";
@@ -22,7 +23,7 @@ const FIELD_MSG: Record<string, string> = { invalid: "Bitte geben Sie eine gült
 function GoogleButton() {
   // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
   const start = () => { const redirectUrl = window.location.origin + "/anmelden"; window.location.href = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`; };
-  return <button type="button" className="outline-button tk-cta nx-konto-neben" onClick={start} data-testid="google-login-button"><svg className="nx-zeichen" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.5 12.2c0 4.9-3.4 8.3-8.4 8.3a8.5 8.5 0 1 1 5.7-14.8M12.3 12.2h8.2"/></svg>Mit Google anmelden</button>;
+  return <ActionButton variant="secondary" className="hc-text-link tk-cta" onClick={start} data-testid="google-login-button"><svg className="nx-zeichen" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.5 12.2c0 4.9-3.4 8.3-8.4 8.3a8.5 8.5 0 1 1 5.7-14.8M12.3 12.2h8.2"/></svg>Mit Google anmelden</ActionButton>;
 }
 
 export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: string }) {
@@ -75,7 +76,7 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
       {mode !== "forgot" && field("password", mode === "login" ? "Passwort" : "Passwort (mindestens 10 Zeichen)", password, setPassword, "password", mode === "login" ? "current-password" : "new-password")}
       {message && <p role="alert" className="tk-alert" data-testid="auth-error">{message}</p>}
       {notice && <p role="status" className="tk-success" data-testid="auth-notice">{notice}</p>}
-      <button className="primary-button tk-cta" type="submit" disabled={busy||!ready} data-testid={"auth-" + mode + "-submit"}>{mode === "login" ? "Anmelden" : mode === "register" ? "Konto erstellen" : mode === "forgot" ? "Link anfordern" : "Passwort speichern"}</button>
+      <ActionButton variant="primary" className="hc-finish-primary tk-cta" type="submit" disabled={busy||!ready} data-testid={"auth-" + mode + "-submit"}>{mode === "login" ? "Anmelden" : mode === "register" ? "Konto erstellen" : mode === "forgot" ? "Link anfordern" : "Passwort speichern"}</ActionButton>
       {(mode === "login" || mode === "register") && <><span className="nx-konto-oder" aria-hidden="true">oder</span><GoogleButton /></>}
       <div className="tk-actions">
         {mode !== "login" && <p><span>Bereits ein Konto?</span> <SiteLink href="/anmelden" data-testid="auth-link-login">Zur Anmeldung</SiteLink></p>}

@@ -1,6 +1,6 @@
 /* TEILEKLAR-Oberflaechen im Startseiten-System. Die oeffentlichen Inhaltsseiten brauchen keine
    Overrides mehr: PublicContent.tsx verwendet das HomeConcept-Klassensystem direkt (PageConcept.css). */
-.workspace-shell.site-teileklar{--tk-gutter:var(--layout-page-padding);--tk-hero-size:var(--type-hero-size);--tk-title-size:var(--type-section-size);--tk-small:var(--type-home-detail);--tk-card-size:var(--type-home-reading)}
+.workspace-shell.site-teileklar{--tk-gutter:var(--layout-page-padding);--tk-title-size:var(--type-section-size);--tk-small:var(--type-home-detail);--tk-card-size:var(--type-home-reading)}
 .workspace-shell.site-teileklar .tk-commerce-header{background:var(--gradient-atelier-stage)}
 .workspace-shell.site-teileklar .tk-commerce-main,.workspace-shell.site-teileklar .tk-service-strip,.workspace-shell.site-teileklar .tk-commerce-nav{max-width:var(--layout-home-wide-max);margin-inline:auto}
 .workspace-shell.site-teileklar .tk-header-search .primary-button{flex-shrink:0;white-space:nowrap;word-break:normal;padding-inline:var(--space-5);background:var(--color-atelier-champagne)}
@@ -47,6 +47,5 @@
 .workspace-shell .tk-shop .tk-auth{max-width:640px}
 .workspace-shell .tk-shop .tk-auth .tk-actions a{min-height:var(--target-min);display:inline-flex;align-items:center;color:var(--color-text-sekundaer)}
 .workspace-shell .tk-shop .tk-auth .tk-actions a:hover{color:var(--color-atelier-champagne)}
-.workspace-shell .tk-shop .tk-auth .outline-button.tk-cta{border:1px solid var(--color-linie-stark);border-radius:var(--radius-pille);padding:var(--space-3) var(--space-5);justify-content:center}
 .workspace-shell .tk-shop .tk-product-info>h2{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(max-width:640px){.workspace-shell .tk-shop .tk-filter-panel nav{grid-template-columns:1fr}}

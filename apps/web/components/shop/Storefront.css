@@ -1,5 +1,5 @@
 /* Germany-first commerce: the existing Graphite, Champagne, Steel and Lime tokens. */
-.site-teileklar{--tk-gutter:clamp(20px,4vw,72px);--tk-header-size:28px;--tk-hero-size:clamp(36px,4.6vw,72px);--tk-title-size:clamp(28px,3vw,40px);--tk-card-size:16px;--tk-small:13px;--tk-grid-min:210px;--tk-border:1px solid var(--color-linie-mittel);--tk-picture-bg:var(--color-text-primaer);--tk-window-height:360px}
+.site-teileklar{--tk-gutter:clamp(20px,4vw,72px);--tk-header-size:28px;--tk-title-size:clamp(28px,3vw,40px);--tk-card-size:16px;--tk-small:13px;--tk-grid-min:210px;--tk-border:1px solid var(--color-linie-mittel);--tk-picture-bg:var(--color-text-primaer)}
 .tk-commerce-header{background:var(--color-graphit-900);border-bottom:var(--tk-border);color:var(--color-text-primaer)}
 .tk-service-strip{display:flex;align-items:center;justify-content:flex-end;gap:var(--space-6);padding:var(--space-2) var(--tk-gutter);border-bottom:var(--tk-border);font-size:var(--tk-small);color:var(--color-text-sekundaer)}
 .tk-service-strip>span{margin-right:auto}.tk-service-strip a{min-height:var(--target-min);display:flex;align-items:center}
