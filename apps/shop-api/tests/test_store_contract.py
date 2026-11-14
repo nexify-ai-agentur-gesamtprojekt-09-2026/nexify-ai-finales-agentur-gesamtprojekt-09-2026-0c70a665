@@ -12,6 +12,7 @@ Bindings here:
   local replica set; skipped unless confirmed like test_cart_merge_replica_contract.
 """
 import copy
+from datetime import datetime, timedelta, timezone
 import importlib
 import os
 from pathlib import Path
@@ -49,7 +50,11 @@ def matches(doc, query):
                 if operator == '$options': continue
                 if operator == '$in' and value not in operand: return False
                 if operator == '$exists' and present is not operand: return False
-                if operator == '$gt' and not (isinstance(value, (int, float)) and not isinstance(value, bool) and value > operand): return False
+                if operator in ('$gt', '$gte'):
+                    try:
+                        if value is None or isinstance(value, bool) or not (value > operand or (operator == '$gte' and value == operand)): return False
+                    except TypeError:
+                        return False
                 if operator == '$regex' and not (isinstance(value, str) and re.search(operand, value, re.I if 'i' in expected.get('$options', '') else 0)): return False
         elif isinstance(value, list) and not isinstance(expected, list):
             if expected not in value: return False
@@ -77,9 +82,26 @@ class Cursor:
 
 
 class Collection:
-    def __init__(self, unique=None): self.docs, self.unique = [], unique
+    def __init__(self, unique=()): self.docs, self.unique = [], list(unique)
     def _project(self, doc, fields):
-        return copy.deepcopy(doc if not fields else {k: v for k, v in doc.items() if k in fields})
+        if not fields: return copy.deepcopy(doc)
+        chosen = {k for k, v in fields.items() if v and k != '_id'}
+        if chosen or fields == {'_id': 1}:
+            return copy.deepcopy({k: v for k, v in doc.items() if k in chosen or (k == '_id' and fields.get('_id', 1))})
+        return copy.deepcopy({k: v for k, v in doc.items() if k not in fields})
+    async def create_index(self, key, unique=False, **options):
+        if unique and key not in self.unique: self.unique.append(key)
+    async def insert_one(self, doc):
+        stored = copy.deepcopy(doc); self._insert(stored); doc['_id'] = stored['_id']
+    async def delete_one(self, query):
+        target = next((d for d in self.docs if matches(d, query)), None)
+        if target is not None: self.docs.remove(target)
+    async def delete_many(self, query): self.docs = [d for d in self.docs if not matches(d, query)]
+    async def find_one_and_update(self, query, update):
+        target = next((d for d in self.docs if matches(d, query)), None)
+        if target is None: return None
+        before = copy.deepcopy(target); target.update(copy.deepcopy(update.get('$set', {})))
+        return before
     def find(self, query, fields=None, session=None):
         return Cursor([self._project(d, fields) for d in self.docs if matches(d, query)])
     async def find_one(self, query, fields=None, sort=None, session=None):
@@ -98,7 +120,7 @@ class Collection:
         for doc in docs: self._insert(copy.deepcopy(doc))
     def _insert(self, doc):
         doc.setdefault('_id', uuid4().hex)
-        if self.unique and any(d.get(self.unique) == doc.get(self.unique) for d in self.docs):
+        if any(key in doc and d.get(key) == doc[key] for key in self.unique for d in self.docs):
             raise DuplicateKeyError('duplicate')
         self.docs.append(doc)
     async def update_one(self, query, update, upsert=False, session=None):
@@ -132,7 +154,8 @@ class Session:
 class Database:
     def __init__(self):
         self.collections = {'products': Collection(), 'categories': Collection(), 'imports': Collection(),
-                            'settings': Collection(), 'carts': Collection(unique='owner')}
+                            'settings': Collection(), 'carts': Collection(unique=['owner']), 'users': Collection(),
+                            'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -141,6 +164,7 @@ class InMemoryBinding(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.database = Database()
         self.store = load_store(self.database)
+        await self.store.accounts.ensure_indexes(900)
 
     async def seed(self, collection, docs): await getattr(self.database, collection).insert_many(docs)
 
@@ -164,6 +188,7 @@ class DisposableMongoBinding(unittest.IsolatedAsyncioTestCase):
         self.database = client['nexify_store_contract_' + uuid4().hex]
         await self.database.carts.create_index('owner', unique=True)
         self.store = load_store(self.database)
+        await self.store.accounts.ensure_indexes(900)
 
     async def seed(self, collection, docs): await self.database[collection].insert_many(copy.deepcopy(docs))
 
@@ -345,6 +370,105 @@ class CartContract:
         self.assertIsNone(self.store.carts.check_archivable({'owner': 'guest:one', 'items': [], 'merge_history': [{'id': 'x', 'guest_snapshot': {'items': [ITEM]}}]}))
 
 
+NOW = datetime(2026, 11, 14, 12, 0, tzinfo=timezone.utc)
+
+
+def instant(value):
+    """Stored instants may come back without a zone; they are UTC."""
+    return value if value.tzinfo else value.replace(tzinfo=timezone.utc)
+
+
+def account(user_id, email, **fields):
+    return {'user_id': user_id, 'email': email, 'name': 'N', 'role': 'customer', 'password_hash': 'hash-of-' + user_id, 'created_at': 'c', **fields}
+
+
+class AccountContract:
+    async def test_user_is_read_in_three_shapes_and_unknown_is_absent(self):
+        await self.store.accounts.create_user(account('user_a', 'a@example.invalid'))
+        full = await self.store.accounts.user_by_email('a@example.invalid')
+        self.assertEqual((full['user_id'], full['password_hash'], full['role']), ('user_a', 'hash-of-user_a', 'customer'))
+        self.assertEqual((await self.store.accounts.user_by_id('user_a'))['email'], 'a@example.invalid')
+        profile = await self.store.accounts.profile_by_id('user_a')
+        self.assertEqual(profile, {'user_id': 'user_a', 'email': 'a@example.invalid', 'name': 'N', 'role': 'customer', 'created_at': 'c'},
+                         'a session profile carries neither the password hash nor an internal key')
+        self.assertEqual(await self.store.accounts.role_and_hash_by_email('a@example.invalid'), {'role': 'customer', 'password_hash': 'hash-of-user_a'})
+        self.assertTrue(await self.store.accounts.email_taken('a@example.invalid'))
+        self.assertFalse(await self.store.accounts.email_taken('A@example.invalid'), 'addresses are compared exactly; the caller lowercases')
+        for missing in (await self.store.accounts.user_by_email('x@example.invalid'), await self.store.accounts.user_by_id('user_x'),
+                        await self.store.accounts.profile_by_id('user_x'), await self.store.accounts.role_and_hash_by_email('x@example.invalid')):
+            self.assertIsNone(missing)
+
+    async def test_email_and_user_id_are_unique_and_the_first_account_is_kept(self):
+        await self.store.accounts.create_user(account('user_a', 'a@example.invalid'))
+        with self.assertRaises(self.store.AlreadyExists):
+            await self.store.accounts.create_user(account('user_b', 'a@example.invalid', password_hash='other'))
+        with self.assertRaises(self.store.AlreadyExists):
+            await self.store.accounts.create_user(account('user_a', 'b@example.invalid'))
+        self.assertEqual((await self.store.accounts.user_by_email('a@example.invalid'))['password_hash'], 'hash-of-user_a')
+        self.assertIsNone(await self.store.accounts.user_by_email('b@example.invalid'))
+        self.assertIsNone(await self.store.accounts.user_by_id('user_b'))
+
+    async def test_account_without_password_hash_is_stored_as_such(self):
+        user = account('user_g', 'g@example.invalid'); del user['password_hash']
+        await self.store.accounts.create_user(user)
+        self.assertNotIn('password_hash', await self.store.accounts.user_by_email('g@example.invalid'))
+        await self.store.accounts.mark_google_linked('user_g')
+        self.assertIs((await self.store.accounts.user_by_id('user_g'))['google_linked'], True)
+
+    async def test_credential_changes_touch_exactly_one_account(self):
+        await self.store.accounts.create_user(account('user_a', 'a@example.invalid'))
+        await self.store.accounts.create_user(account('user_b', 'b@example.invalid'))
+        await self.store.accounts.set_password_hash('user_a', 'new-hash')
+        await self.store.accounts.set_role_and_password_hash('b@example.invalid', 'admin', 'admin-hash')
+        await self.store.accounts.set_password_hash('user_missing', 'ignored')
+        a, b = await self.store.accounts.user_by_id('user_a'), await self.store.accounts.user_by_id('user_b')
+        self.assertEqual((a['password_hash'], a['role'], b['password_hash'], b['role']), ('new-hash', 'customer', 'admin-hash', 'admin'))
+        self.assertIsNone(await self.store.accounts.user_by_id('user_missing'), 'changing a missing account creates nothing')
+
+    async def test_sessions_are_found_by_token_hash_and_deleted_singly_or_per_user(self):
+        expires = NOW + timedelta(days=14)
+        for token_hash, user_id in (('1' * 64, 'user_a'), ('2' * 64, 'user_a'), ('3' * 64, 'user_b')):
+            await self.store.accounts.create_session(token_hash, user_id, 'c', expires)
+        session = await self.store.accounts.session('1' * 64)
+        self.assertEqual((session['user_id'], instant(session['expires_at'])), ('user_a', expires))
+        self.assertIsNone(await self.store.accounts.session('9' * 64))
+        with self.assertRaises(Exception):
+            await self.store.accounts.create_session('1' * 64, 'user_b', 'c', expires)
+        self.assertEqual((await self.store.accounts.session('1' * 64))['user_id'], 'user_a', 'a token hash cannot be taken over')
+        await self.store.accounts.delete_session('1' * 64)
+        await self.store.accounts.delete_session('9' * 64)
+        self.assertIsNone(await self.store.accounts.session('1' * 64))
+        self.assertIsNotNone(await self.store.accounts.session('2' * 64))
+        await self.store.accounts.delete_sessions_of('user_a')
+        self.assertIsNone(await self.store.accounts.session('2' * 64))
+        self.assertEqual((await self.store.accounts.session('3' * 64))['user_id'], 'user_b')
+
+    async def test_login_failures_count_per_address_from_the_window_start_inclusive(self):
+        for minutes in (20, 15, 14, 1):
+            await self.store.accounts.record_login_failure('a@example.invalid', NOW - timedelta(minutes=minutes))
+        await self.store.accounts.record_login_failure('b@example.invalid', NOW)
+        since = NOW - timedelta(minutes=15)
+        self.assertEqual(await self.store.accounts.count_login_failures('a@example.invalid', since), 3)
+        self.assertEqual(await self.store.accounts.count_login_failures('b@example.invalid', since), 1)
+        self.assertEqual(await self.store.accounts.count_login_failures('c@example.invalid', since), 0)
+        await self.store.accounts.clear_login_failures('a@example.invalid')
+        self.assertEqual(await self.store.accounts.count_login_failures('a@example.invalid', NOW - timedelta(days=1)), 0)
+        self.assertEqual(await self.store.accounts.count_login_failures('b@example.invalid', since), 1)
+
+    async def test_password_reset_is_redeemed_exactly_once_and_never_after_expiry(self):
+        await self.store.accounts.create_password_reset('a' * 64, 'user_a', NOW + timedelta(minutes=60))
+        await self.store.accounts.create_password_reset('b' * 64, 'user_b', NOW)
+        await self.store.accounts.create_password_reset('c' * 64, 'user_c', NOW + timedelta(minutes=60))
+        await self.store.accounts.set_password_reset_mail_status('a' * 64, 'gesendet')
+        self.assertIsNone(await self.store.accounts.consume_password_reset('f' * 64, NOW))
+        self.assertIsNone(await self.store.accounts.consume_password_reset('b' * 64, NOW), 'a token is expired at its expiry instant')
+        self.assertIsNone(await self.store.accounts.consume_password_reset('a' * 64, NOW + timedelta(minutes=61)))
+        redeemed = await self.store.accounts.consume_password_reset('a' * 64, NOW)
+        self.assertEqual(redeemed['user_id'], 'user_a')
+        self.assertIsNone(await self.store.accounts.consume_password_reset('a' * 64, NOW), 'a redeemed token is spent')
+        self.assertEqual((await self.store.accounts.consume_password_reset('c' * 64, NOW))['user_id'], 'user_c', 'other tokens stay redeemable')
+
+
 class MongoSpecifics:
     """Limits that exist only because a MongoDB cart is one document; not part of the shared contract."""
     def test_cart_at_the_document_limit_is_too_large_and_unencodable_data_is_invalid(self):
@@ -364,8 +488,10 @@ class MongoSpecifics:
 
 class InMemoryCatalog(CatalogContract, InMemoryBinding): pass
 class InMemoryCarts(CartContract, MongoSpecifics, InMemoryBinding): pass
+class InMemoryAccounts(AccountContract, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
 class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
+class DisposableMongoAccounts(AccountContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()

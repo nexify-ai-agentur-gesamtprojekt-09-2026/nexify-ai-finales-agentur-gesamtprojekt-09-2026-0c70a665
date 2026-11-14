@@ -9,6 +9,10 @@ class RevisionStale(StoreError):
     """Der erwartete Stand ist veraltet oder ein anderer Schreiber war schneller."""
 
 
+class AlreadyExists(StoreError):
+    """Ein eindeutiger Schlüssel ist schon vergeben."""
+
+
 class ArchiveTooLarge(StoreError):
     """Der Beleg passt nicht mehr in die Ablage."""
 
