@@ -142,3 +142,57 @@ Die Python-Zahlen gelten mit Pillow 12.3.0 und numpy 2.3.5. Die gemeinsame Testu
 Was rot bleibt: 14 Fälle in `test_browser_evidence` (Critical-Beleg, Public-Fallbacks, Ausnahmeerfassung, Next-Teil der Consent-Kette), 30 veraltete Pins und die daraus folgende Ansicht in `test_requirements_reconciliation`, 2 Fälle in `test_resize_source_binding`.
 
 `python3 tools/verify_requirements_reconciliation.py --render` meldet weiter 43 Zeilen „Stale implementation source“ und schreibt die Ansicht `docs/contracts/requirements-reconciliation.md` deshalb nicht neu (das Werkzeug rendert nur bei gültigem Register). Die Ansicht ist unverändert.
+
+## 8. Nachtrag zweite Runde (14.11.2026, nach Merge von `main` `2d1eb69`)
+
+`origin/main` wurde per Merge eingeholt (Commit `2647621`, ohne Konflikt). Vergleichsstand ist jetzt `main` `2d1eb69`.
+
+### Belege und Pins auf dem zusammengeführten Stand
+
+| Gegenstand | Feststellung | Maßnahme |
+|---|---|---|
+| `evidence/shop-ui-mock-2026-11-09/browser-shop.json`, `browser-catalog.json` | durch den Umbau der Shop-Komponenten (PR 144, PR 149) wieder veraltet (`CatalogView.tsx` und weitere) | beide Harnesses auf `2647621` neu gelaufen, beide bestanden (13 und 7 Checks); Belege übernommen, die Fassungen vom Vormittag liegen unter `superseded/*.pre-merge-main-2026-11-14.json`; `check_shop_ui_mock_evidence` und `check_catalog_ui_mock_evidence` bestehen |
+| `browser-workspace-read.json`, `browser-consent-ui.json` | gebundene Quellen unverändert, Belege vom Vormittag (`88fa345`) gelten weiter | keine |
+| 17 Pins aus Abschnitt 4 | alle weiterhin gültig | keine |
+| `PROGRESS.md` | neu abweichend durch PR 148 | Pin `0f5dba1b114c…` auf `feb84890fe44…` nachgezogen. Belegart geprüfter Diff: 43 angefügte Zeilen, keine geänderte oder gelöschte; ausschließlich Standbericht und offene Arbeiten |
+
+Die übrigen acht Läufe wurden in dieser Runde nicht wiederholt: An ihren Ursachen hat sich nichts geändert, weil die Seitenkorrekturen nicht eingecheckt werden konnten (siehe unten).
+
+### Berichtigung zu Befund 2
+
+Die Einordnung in Abschnitt 6 war falsch. Neu gemessen (Vite, Startseite, Chat geschlossen):
+
+- Der Hero hat **bei jeder Schriftgröße** eine größere Scrollbreite als Breite (445 zu 390 px, 365 zu 320 px, 1642 zu 1440 px), auch bei 100 % und unabhängig vom Zustand des Lautstärkefelds.
+- Ursache ist das Raumlicht hinter dem Film: `#atelier .home-concept .identity-hero .identity-scene::before` mit `inset:-18% -14% -22%` (`AtelierSystem.css`, seit `32616db`). Blendet man probeweise nur die Bühne aus, verschwindet der Überlauf; das Lautstärkefeld allein ändert nichts.
+- Das geöffnete Lautstärkefeld liegt bei 320 px zwischen 32 und 232 px und damit im Bild, bei 100 % und bei 200 %. Die Angabe „rechte Kante bei 376 px“ gehörte zum geschlossenen, unsichtbaren Feld.
+- Kein Überlauf des Dokuments; der Befund ist für Besucher nicht sichtbar. Er lässt aber den Identity-Hero-Lauf scheitern.
+
+### Seitenkorrekturen: vorbereitet, nicht eingecheckt
+
+Der Auftrag der zweiten Runde verlangt, die Befunde 1, 2, 3 und 6 an der Seite zu beheben. Der ursprüngliche Auftrag schloss Änderungen am Verhalten der Seite aus („Findest du einen echten Fehler der Seite, behebe ihn nicht“). Die Berechtigungsprüfung der Laufumgebung hat die Änderungen an App-Dateien deshalb zweimal abgelehnt. Die begonnenen Änderungen sind zurückgenommen; der Arbeitsstand enthält keine Änderung an `apps/web` oder `apps/site/pwa`. Es braucht die ausdrückliche Freigabe des Inhabers für diese Korrekturen.
+
+Vorbereitet und gemessen, aber nicht eingecheckt:
+
+| Befund | Vorschlag | Stand |
+|---|---|---|
+| 3 Titel `/anmelden`, `/registrieren` | den festen Titel entfernen, wieder nur `routeMetadata(...)` wie in `4b17a64`; Texte kommen dann sprachabhängig aus `config/site-map.json` | zwei Zeilen, nicht eingecheckt |
+| 2 Hero-Scrollbreite | `#atelier .home-concept .identity-hero{overflow-x:clip}` direkt beim Raumlicht: seitlich gekappt, nach oben und unten unverändert; kein neuer Zahlenwert | eine Regel, nicht eingecheckt; Bildvergleich vorher/nachher steht aus |
+| 1 Überlauf bei 200 % Schrift | nicht begonnen | offen |
+| 6 Manifest-Verweis `/signet.svg` | auf `/brand/nexify-figur.png` (512 × 512, heute ausgeliefert) in `apps/site/pwa/plugin.mjs`, Test `public-installation.test.mjs` entsprechend | nicht begonnen |
+
+Befunde 4 (Pillow), 5 (`skills-lock.json`) und 7 (Standalone-Vorschau) bleiben wie beschrieben dokumentiert.
+
+`node tools/gleichmacher.mjs` und `node tools/live-check.mjs` wurden nicht ausgeführt, weil es keine Korrektur zu messen gab.
+
+### Gates der zweiten Runde
+
+| Gate | vorher (`main` `2d1eb69`) | nachher |
+|---|---|---|
+| `python3 -m unittest discover -s tests` | 839 Tests, 134 Failures, 9 Errors (97, 44, 2) | 839 Tests, 41 Failures, 6 Errors (14, 31, 2) |
+| `make check` | nicht erhoben | Exit 0 |
+| `node tools/ds-audit-cli.js` | nicht erhoben | 0 Fehler, 0 Warnungen |
+| `node tools/lint.mjs` | nicht erhoben | 0 Diagnosen |
+| `cd apps/site && node --test` | nicht erhoben | 132 von 132 |
+| `node --test apps/web/auth/tests/*.test.mjs` | nicht erhoben | 89 von 89 |
+
+Veraltete Pins: 43 auf `main`, 30 auf diesem Zweig (unverändert die Liste aus Abschnitt 5).
