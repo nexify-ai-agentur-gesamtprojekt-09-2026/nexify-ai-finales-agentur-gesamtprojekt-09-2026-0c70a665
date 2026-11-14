@@ -6,8 +6,11 @@ import SiteFooter from "./SiteFooter";
 import OracleCompanion from "./OracleCompanion";
 import DeferredChatBoundary from "./DeferredChatBoundary";
 import PublicRequestFallback from "./PublicRequestFallback";
+// Fest eingebunden statt nachgeladen: das Gespräch ist die erste sichtbare Ansicht der Scheibe. Der Server rendert es
+// fertig, und beim Start des Skripts gibt es keinen Ladeplatzhalter, der kurz an seine Stelle treten könnte.
+import PublicOrientationChat from "./PublicOrientationChat";
 import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceCapabilities";
-import {lazy,Suspense, createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import {createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {CommerceHeader} from './shop/CommerceHeader';
 import ChatResizeHandle,{chatWidthStyle,clampChat,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
 import {useSitePathname} from "./Router";
@@ -25,7 +28,6 @@ const speechKey=(intent?:Intent)=>intent==="quote"?"quoteReply":intent==="bookin
 type Quote = {id:string;title:string;details:string;download_url:string};
 type Slot = {id:string;starts:string;source:string};
 type Booking = {id:string;starts:string;confirmed:boolean};
-const PublicOrientationChat=lazy(()=>import("./PublicOrientationChat"));
 const intents: Intent[] = ["quote", "booking", "marketing"];
 // Einstiegszeilen nach Zielbild: füllen das Textfeld vor, senden nichts automatisch.
 const starters:Record<Locale,Record<"nexify"|"teileklar",[string,string][]>>={
@@ -263,12 +265,15 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   }[locale];
   // Solange die Haupthandlung des Kopfbereichs sichtbar ist, öffnet sie selbst das Gespräch:
   // der schwebende Schalter tritt mobil zurück und liegt nicht über dem ersten Bildschirm.
+  // Auf der Startseite steht diese Haupthandlung im ersten Bildschirm: der Zustand gilt deshalb schon im ersten Bildaufbau
+  // (vom Server gerendert) und nicht erst nach dem Start des Skripts – der Schalter blitzt mobil nicht kurz auf.
+  const [heroAction,setHeroAction]=useState(pathname==='/');
   useEffect(()=>{
-    const root=workspaceRoot.current,action=root?.querySelector('[data-testid="hero-project-link"]');
-    if(!root||!action||typeof IntersectionObserver==='undefined')return;
-    const observer=new IntersectionObserver(([entry])=>{root.dataset.heroActionVisible=String(entry.isIntersecting);});
+    const action=workspaceRoot.current?.querySelector('[data-testid="hero-project-link"]');
+    if(!action||typeof IntersectionObserver==='undefined'){setHeroAction(false);return;}
+    const observer=new IntersectionObserver(entries=>{const entry=entries.at(-1);if(entry)setHeroAction(entry.isIntersecting);});
     observer.observe(action);
-    return()=>{observer.disconnect();delete root.dataset.heroActionVisible;};
+    return()=>observer.disconnect();
   },[pathname]);
   const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Projektgespräch anfragen",nl:"Projectgesprek aanvragen",fr:"Demander un échange projet",en:"Request a project conversation"}[locale]};
   const standalone=typeof window!=="undefined"&&(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
@@ -440,7 +445,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     read();window.addEventListener('scroll',onScroll,{passive:true});
     return()=>{cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);};
   },[]);
-  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} data-chat-boot={boot??undefined} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} data-chat-boot={boot??undefined} data-hero-action-visible={heroAction?'true':undefined} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     {/* Kantenbrechung für das Glas: Verschiebungskarte als Bild, nur dort wirksam, wo der Browser Filter in backdrop-filter kennt. */}
     <svg className="glass-lens-filter" width="0" height="0" aria-hidden="true" focusable="false"><filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="36" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
@@ -462,10 +467,11 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     {(!open||boot) && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>{orientationFocusRequested.current=true;setOrientationLoaded(true);setChatMode('orientation');changePanel(true);}} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{launcherLabel}</ActionButton>}
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}
     <aside ref={panel} id="aifly-panel" data-testid="chat-panel" className="aifly-panel" role={mobile?"dialog":undefined} aria-modal={mobile&&open?true:undefined} aria-label={t.assistant} hidden={!open} onKeyDown={event=>{if(event.key==="Escape"){event.preventDefault();closePanel();}if(mobile&&event.key==="Tab"){const controls=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],summary,input:not([disabled]),textarea:not([disabled]),select:not([disabled])')).filter(element=>element.offsetParent!==null);const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}}}>{!mobile&&<ChatResizeHandle width={chatWidth} onChange={setChatWidth} label={locale==="de"?"Chatbreite anpassen":locale==="nl"?"Chatbreedte aanpassen":locale==="fr"?"Ajuster la largeur du chat":"Resize chat"}/>}
-      <div className="panel-topstrip" aria-hidden="true"/>
-      <div className="panel-heading"><div className="panel-heading-copy"><div className="panel-identity"><OracleCompanion/><div><h2 className="panel-brandline">Oracle</h2><p className="panel-identity-subtitle">AIFly by NeXify</p></div></div><p className="panel-status visually-hidden" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p></div><ActionButton variant="icon" ref={closeButton} className="panel-minimize" data-testid="chat-panel-close-button" aria-label={t.close} title={t.close} onClick={closePanel}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg></ActionButton></div>
+      <div className="panel-heading"><div className="panel-heading-copy"><div className="panel-identity"><OracleCompanion/><div><h2 className="panel-brandline">Oracle</h2><p className="panel-identity-subtitle">AIFly by NeXify</p></div></div>{gateway&&<p className="panel-status visually-hidden" data-testid="chat-status" data-state={chatState} aria-hidden="true"><span className="connection-indicator" aria-hidden="true"/>{chatStateLabel}</p>}</div><ActionButton variant="icon" ref={closeButton} className="panel-minimize" data-testid="chat-panel-close-button" aria-label={t.close} title={t.close} onClick={closePanel}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg></ActionButton></div>
       {gateway&&<div className="panel-connection visually-hidden" role="status"><span className={`connection-indicator ${ready?"available":""}`} aria-hidden="true"/>{chatMode==="orientation"?(locale==="de"?"Website-Beratung ohne Live-KI":locale==="nl"?"Websiteadvies zonder live-AI":locale==="fr"?"Conseil sur le site sans IA en direct":"Website guidance without live AI"):ready?(locale==="de"?"Projektassistent verbunden":locale==="nl"?"Concepttools verbonden":locale==="fr"?"Outils de projet connectés":"Project assistant connected"):(locale==="de"?"Vorschau · Verbindung ausstehend":locale==="nl"?"Voorbeeld · verbinding volgt":locale==="fr"?"Aperçu · connexion en attente":"Preview · connection pending")}</div>}
-      {orientationLoaded&&!standalone&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><Suspense fallback={<p className="orientation-loading">{locale==="de"?"NeXify-Beratung wird geladen …":locale==="nl"?"NeXify-advies wordt geladen …":locale==="fr"?"Chargement du conseil NeXify…":"Loading NeXify guidance …"}</p>}><PublicOrientationChat locale={locale} pagePath={currentPage?.path??pathname} pages={pages}/></Suspense></DeferredChatBoundary></div>}
+      {orientationLoaded&&!standalone&&<div className="sdk-orientation-view" hidden={chatMode!=="orientation"}><DeferredChatBoundary fallback={<PublicRequestFallback locale={locale} contact={contact} kind="chat"/>}><PublicOrientationChat locale={locale} pagePath={currentPage?.path??pathname} pages={pages}/></DeferredChatBoundary></div>}
+      {/* Projektvorbereitung (Angebot, Termin, Unterlagen): nur dort im Dokument, wo es die Funktionen hinter /api gibt. */}
+      {gateway&&<>
       <div className="conversation" aria-label={t.history} hidden={chatMode!=="workspace"&&!standalone}>
         {pathname!=="/"&&<div className="panel-page-context">{site==="teileklar"?(locale==="de"?"Sie sind hier":locale==="nl"?"U bent hier":locale==="fr"?"Vous êtes ici":"You are here"):(locale==="de"?"Ihr aktueller Bereich":locale==="nl"?"Uw huidige onderdeel":locale==="fr"?"Votre rubrique actuelle":"You are here")}<strong>{currentPage?.localizedTitle[locale]||(site==="teileklar"?"TEILEKLAR":"NeXify AI")}</strong></div>}
         <div className="welcome-card"><p>{site==="teileklar"?tkWelcome.title:t.welcome}</p><p className="welcome-body">{site==="teileklar"?tkWelcome.body:t.welcomeBody}</p><div className="welcome-eyebrow-row"><span className="eyebrow">{site==="teileklar"?tkWelcome.eyebrow:t.welcomeEyebrow}</span>{canSpeak&&<button type="button" className="text-button" aria-pressed={speaking==="welcome"} onClick={()=>readAloud("welcome")}>{speaking==="welcome"?t.readAloudStop:t.readAloud}</button>}</div><div className="action-options">{starters[locale][site].map(([label,seed])=><button key={label} type="button" className="action-option" disabled={busy} onClick={()=>{setIntent("choose");setChatMode("workspace");const field=messageInput.current;if(field){if(!field.value.trim())field.value=seed;field.focus();field.setSelectionRange(field.value.length,field.value.length);}}}>{label}<span aria-hidden="true">→</span></button>)}</div></div>
@@ -496,8 +502,9 @@ export default function Workspace({children,pages,accountControl,initialLocale='
         <ActionButton type="submit" variant="primary" className="send-button" disabled={!ready} loading={busy} data-testid="chat-send-button">{busy?t.working:(site==="teileklar"?tkWelcome.send:t.send)}</ActionButton>
        </form>
       </div>
+      </>}
       {/* Der Weg in die Projektvorbereitung erscheint nur, wenn sie wirklich verbunden ist; sonst führt das Briefing im Gespräch zum Kontaktformular. */}
-      {chatMode==="orientation"&&ready&&<div className="chat-return"><div><span>{locale==="de"?"Nächster Schritt":locale==="nl"?"Volgende stap":locale==="fr"?"Prochaine étape":"Next step"}</span><strong>{locale==="de"?"Ihr Vorhaben konkretisieren":locale==="nl"?"Uw project concretiseren":locale==="fr"?"Préciser votre projet":"Shape your project"}</strong></div><ActionButton variant="icon" data-testid="chat-return-workspace" aria-label={locale==="de"?"Projektvorbereitung öffnen":locale==="nl"?"Projectvoorbereiding openen":locale==="fr"?"Ouvrir la préparation du projet":"Open project preparation"} onClick={()=>setChatMode("workspace")}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></ActionButton></div>}
+      {gateway&&chatMode==="orientation"&&ready&&<div className="chat-return"><div><span>{locale==="de"?"Nächster Schritt":locale==="nl"?"Volgende stap":locale==="fr"?"Prochaine étape":"Next step"}</span><strong>{locale==="de"?"Ihr Vorhaben konkretisieren":locale==="nl"?"Uw project concretiseren":locale==="fr"?"Préciser votre projet":"Shape your project"}</strong></div><ActionButton variant="icon" data-testid="chat-return-workspace" aria-label={locale==="de"?"Projektvorbereitung öffnen":locale==="nl"?"Projectvoorbereiding openen":locale==="fr"?"Ouvrir la préparation du projet":"Open project preparation"} onClick={()=>setChatMode("workspace")}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></ActionButton></div>}
     </aside>
   </div></UIContext.Provider>;
 }
