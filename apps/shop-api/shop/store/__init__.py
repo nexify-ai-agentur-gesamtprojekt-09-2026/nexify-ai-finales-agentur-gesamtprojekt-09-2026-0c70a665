@@ -12,6 +12,7 @@ from .orders import MongoOrderStore
 from .outbox import MongoOutboxStore
 from .payments import MongoPaymentStore
 from .requests import MongoRequestStore
+from .settings import MongoSettingsStore
 from .workshops import MongoWorkshopStore
 
 catalog = MongoCatalogStore(db)
@@ -22,5 +23,6 @@ requests = MongoRequestStore(db)
 outbox = MongoOutboxStore(db)
 orders = MongoOrderStore(db)
 payments = MongoPaymentStore(db)
+settings = MongoSettingsStore(db)
 
-__all__ = ["AlreadyExists", "ArchiveTooLarge", "RevisionStale", "StoreUnavailable", "StoredDataInvalid", "accounts", "carts", "catalog", "orders", "outbox", "payments", "requests", "workshops"]
+__all__ = ["AlreadyExists", "ArchiveTooLarge", "RevisionStale", "StoreUnavailable", "StoredDataInvalid", "accounts", "carts", "catalog", "orders", "outbox", "payments", "requests", "settings", "workshops"]

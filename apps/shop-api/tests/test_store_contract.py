@@ -65,6 +65,8 @@ def matches(doc, query):
                     except TypeError:
                         return False
                 if operator == '$regex' and not (isinstance(value, str) and re.search(operand, value, re.I if 'i' in expected.get('$options', '') else 0)): return False
+        elif expected is None:
+            if value is not None: return False  # a null condition also matches a missing field
         elif isinstance(value, list) and not isinstance(expected, list):
             if expected not in value: return False
         elif not present or value != expected:
@@ -115,11 +117,11 @@ class Collection:
         target = next((d for d in self.docs if matches(d, query)), None)
         if target is not None: self.docs.remove(target)
     async def delete_many(self, query): self.docs = [d for d in self.docs if not matches(d, query)]
-    async def find_one_and_update(self, query, update):
+    async def find_one_and_update(self, query, update, return_document=False):
         target = next((d for d in self.docs if matches(d, query)), None)
         if target is None: return None
         before = copy.deepcopy(target); apply(target, update)
-        return before
+        return copy.deepcopy(target) if return_document else before
     async def update_many(self, query, update):
         for target in self.docs:
             if matches(target, query): apply(target, update)
@@ -185,7 +187,8 @@ class Database:
                             'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection(),
                             'workshops': Collection(), 'workshop_requests': Collection(), 'requests': Collection(),
                             'outbox': Collection(), 'orders': Collection(unique=[('owner', 'idempotency_key')]),
-                            'webhook_events': Collection(unique=['event_key']), 'revolut_webhooks': Collection()}
+                            'webhook_events': Collection(unique=['event_key']), 'revolut_webhooks': Collection(),
+                            'price_releases': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -198,6 +201,7 @@ class InMemoryBinding(unittest.IsolatedAsyncioTestCase):
 
     async def seed(self, collection, docs): await getattr(self.database, collection).insert_many(docs)
     async def events(self): return [e async for e in self.database.webhook_events.find({})]
+    async def release_log(self): return [e async for e in self.database.price_releases.find({})]
 
 
 def disposable_uri():
@@ -227,6 +231,7 @@ class DisposableMongoBinding(unittest.IsolatedAsyncioTestCase):
 
     async def seed(self, collection, docs): await self.database[collection].insert_many(copy.deepcopy(docs))
     async def events(self): return [e async for e in self.database.webhook_events.find({})]
+    async def release_log(self): return [e async for e in self.database.price_releases.find({})]
 
 
 # --- contracts --------------------------------------------------------------------------
@@ -306,6 +311,14 @@ class CatalogContract:
         self.assertEqual((await self.store.catalog.category(1))['name'], 'Bremse')
         self.assertIsNone(await self.store.catalog.category(99))
         self.assertIsNone(await self.store.catalog.category(None))
+
+    async def test_recent_imports_of_any_state_newest_start_first_and_limited(self):
+        self.assertEqual(await self.store.catalog.recent_imports(10), [])
+        await self.seed('imports', [{'_id': 'r1', 'status': 'done', 'started_at': '2026-01-01T00:00:00+00:00'},
+                                    {'_id': 'r2', 'status': 'failed', 'started_at': '2026-03-01T00:00:00+00:00', 'error': 'x'},
+                                    {'_id': 'r3', 'status': 'running', 'started_at': '2026-02-01T00:00:00+00:00'}])
+        self.assertEqual([r['_id'] for r in await self.store.catalog.recent_imports(10)], ['r2', 'r3', 'r1'])
+        self.assertEqual([(r['_id'], r['status'], r.get('error')) for r in await self.store.catalog.recent_imports(1)], [('r2', 'failed', 'x')])
 
     async def test_settings_and_last_finished_import(self):
         self.assertEqual(await self.store.catalog.shop_settings(), {}, 'no stored settings is an empty record')
@@ -782,6 +795,22 @@ class OutboxContract:
         self.assertEqual(await self.store.outbox.deliverable_keys(4, 50), ['a', 'c', 'e'])
         self.assertEqual(await self.store.outbox.deliverable_keys(5, 50), await self.store.outbox.deliverable_keys(5, 50), 'listing claims nothing')
 
+    async def test_recent_summaries_newest_first_limited_and_without_content(self):
+        await self.seed('outbox', [mail('a', created_at=T0), mail('b', 'gesendet', created_at=T2), mail('c', created_at=T1)])
+        rows = await self.store.outbox.recent_summaries(100)
+        self.assertEqual([m['_id'] for m in rows], ['b', 'c', 'a'])
+        self.assertEqual(set(rows[0]), {'_id', 'to', 'subject', 'reply_to', 'status', 'attempts', 'created_at'})
+        self.assertEqual([m['_id'] for m in await self.store.outbox.recent_summaries(2)], ['b', 'c'])
+
+    async def test_mails_of_an_order_are_its_confirmations_and_status_notices_only(self):
+        await self.seed('outbox', [mail('order_paid:customer:o-1', 'gesendet', attempts=1), mail('order_paid:internal:o-1'), mail('order_status:versendet:o-1'),
+                                   mail('order_status:in_bearbeitung:o-1'), mail('fulfillment_error:o-1'), mail('order_paid:customer:o-2'), mail('request:o-1'),
+                                   mail('x-order_paid:customer:o-1')])
+        mails = await self.store.outbox.order_mails('o-1')
+        self.assertEqual([m['_id'] for m in mails], ['order_paid:customer:o-1', 'order_paid:internal:o-1', 'order_status:versendet:o-1', 'order_status:in_bearbeitung:o-1'])
+        self.assertEqual(mails[0], {'_id': 'order_paid:customer:o-1', 'status': 'gesendet', 'subject': 'S', 'attempts': 1}, 'neither recipient nor content')
+        self.assertEqual(await self.store.outbox.order_mails('o-3'), [])
+
     async def test_provider_event_is_recorded_on_one_entry(self):
         await self.seed('outbox', [mail('a', 'gesendet', provider_id='p-1'), mail('b', 'gesendet', provider_id='p-2')])
         await self.store.outbox.record_provider_event('a', 'delivered', T1)
@@ -797,6 +826,31 @@ def order(oid, owner='user:a', key=None, **fields):
             'status': 'zahlung_offen', 'lines': [{'product_id': 'a', 'quantity': 2, 'unit_cents': 500}], 'subtotal_cents': 1000,
             'shipping_cents': 995, 'total_cents': 1995, 'currency': 'EUR', 'address': {'email': 'a@example.invalid'},
             'created_at': '2026-11-14T12:00:00+00:00', 'paid_transitions': 0, 'request_hash': 'h' * 64, 'cart_revision': 1, **fields}
+
+
+class SettingsContract:
+    async def test_pricing_is_saved_without_losing_a_release_and_a_release_sets_the_markup(self):
+        await self.store.settings.save_pricing('12.50', 495, T0, 'user_admin')
+        self.assertEqual(await self.store.catalog.shop_settings(), {'_id': 'shop', 'markup_percent': '12.50', 'shipping_cents': 495, 'updated_at': T0, 'updated_by': 'user_admin'})
+        release = {'markup_percent': '12.50', 'released_at': T1, 'released_by': 'user_admin'}
+        await self.store.settings.set_price_release(dict(release))
+        await self.store.settings.save_pricing('20.00', 0, T2, 'user_other')
+        self.assertEqual(await self.store.catalog.shop_settings(), {'_id': 'shop', 'markup_percent': '20.00', 'shipping_cents': 0, 'updated_at': T2, 'updated_by': 'user_other',
+                                                                    'price_release': release}, 'the stored release still names the markup it was given for')
+        await self.store.settings.set_price_release({'markup_percent': '25.00', 'released_at': T2, 'released_by': 'user_admin'})
+        stored = await self.store.catalog.shop_settings()
+        self.assertEqual((stored['markup_percent'], stored['price_release']['markup_percent'], stored['shipping_cents'], stored['updated_by']), ('25.00', '25.00', 0, 'user_other'))
+
+    async def test_release_without_earlier_settings_creates_them(self):
+        await self.store.settings.set_price_release({'markup_percent': '30', 'released_at': T0, 'released_by': 'user_admin'})
+        self.assertEqual(await self.store.catalog.shop_settings(), {'_id': 'shop', 'markup_percent': '30', 'price_release': {'markup_percent': '30', 'released_at': T0, 'released_by': 'user_admin'}})
+
+    async def test_release_log_only_grows(self):
+        self.assertEqual(await self.release_log(), [])
+        for at in (T0, T1):
+            await self.store.settings.log_price_release({'markup_percent': '30', 'released_at': at, 'released_by': 'user_admin', 'action': 'release'})
+        self.assertEqual([(e['released_at'], e['action'], e['markup_percent']) for e in await self.release_log()], [(T0, 'release', '30'), (T1, 'release', '30')])
+        self.assertEqual(await self.store.catalog.shop_settings(), {}, 'the log does not change the settings')
 
 
 class OrderContract:
@@ -837,6 +891,29 @@ class OrderContract:
         self.assertEqual([o['_id'] for o in await self.store.orders.recent_of_owner('user:a', 100)], ['o2', 'o3', 'o1'])
         self.assertEqual([o['_id'] for o in await self.store.orders.recent_of_owner('user:a', 2)], ['o2', 'o3'])
         self.assertEqual(await self.store.orders.recent_of_owner('user:c', 100), [])
+
+    async def test_overview_lists_all_owners_newest_first_without_lines(self):
+        for oid, created, owner in (('o1', '2026-11-01T00:00:00+00:00', 'user:a'), ('o2', '2026-11-03T00:00:00+00:00', 'guest:g'), ('o3', '2026-11-02T00:00:00+00:00', 'user:b')):
+            await self.store.orders.add(order(oid, owner=owner, created_at=created))
+        rows = await self.store.orders.recent_without_lines(200)
+        self.assertEqual([o['_id'] for o in rows], ['o2', 'o3', 'o1'])
+        self.assertEqual([o['_id'] for o in await self.store.orders.recent_without_lines(2)], ['o2', 'o3'])
+        expected = order('o2', owner='guest:g', created_at='2026-11-03T00:00:00+00:00'); del expected['lines']
+        self.assertEqual(rows[0], expected, 'everything but the lines')
+
+    async def test_delivery_state_changes_only_from_the_state_the_caller_saw(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2', fulfilment='in_bearbeitung'))
+        self.assertIsNone(await self.store.orders.change_delivery_state('o1', 'in_bearbeitung', {'fulfilment': 'versendet'}))
+        self.assertIsNone(await self.store.orders.change_delivery_state('o2', None, {'fulfilment': 'versendet'}))
+        self.assertIsNone(await self.store.orders.change_delivery_state('missing', None, {'fulfilment': 'versendet'}))
+        self.assertEqual((await self.field('o1', 'fulfilment'), await self.field('o2', 'fulfilment')), ((None,), ('in_bearbeitung',)))
+        changed = await self.store.orders.change_delivery_state('o1', None, {'fulfilment': 'in_bearbeitung', 'processing_at': T0, 'status_changed_by': 'user_admin'})
+        self.assertEqual(changed, {**order('o1'), 'fulfilment': 'in_bearbeitung', 'processing_at': T0, 'status_changed_by': 'user_admin'}, 'the order as it is after the change')
+        self.assertIsNone(await self.store.orders.change_delivery_state('o1', None, {'fulfilment': 'versendet'}), 'the second of two concurrent changes loses')
+        changed = await self.store.orders.change_delivery_state('o1', 'in_bearbeitung', {'fulfilment': 'versendet', 'shipped_at': T1, 'tracking_number': 'TR', 'carrier': ''})
+        self.assertEqual((changed['fulfilment'], changed['tracking_number'], changed['processing_at'], changed['status']), ('versendet', 'TR', T0, 'zahlung_offen'))
+        self.assertEqual(await self.field('o2', 'fulfilment', 'tracking_number'), ('in_bearbeitung', None))
+        self.assertIsNone(await self.store.orders.get('missing'))
 
     async def test_payment_reference_replaces_an_earlier_error_and_leaves_the_order_as_ordered(self):
         await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2'))
@@ -953,10 +1030,13 @@ class OrderContract:
 class PaymentContract:
     async def test_one_webhook_registration_per_mode_is_replaced_whole(self):
         self.assertIsNone(await self.store.payments.webhook_registration('sandbox'))
+        self.assertIs(await self.store.payments.has_webhook_registration('sandbox'), False)
         self.assertEqual(await self.store.payments.webhook_registrations(), [])
         first = {'_id': 'sandbox', 'webhook_id': 'w1', 'url': 'https://example.invalid/hook', 'signing_secret': 'synthetic-one', 'events': ['E'], 'stored_at': T0}
         await self.store.payments.save_webhook_registration('sandbox', dict(first))
         self.assertEqual(await self.store.payments.webhook_registration('sandbox'), first)
+        self.assertIs(await self.store.payments.has_webhook_registration('sandbox'), True)
+        self.assertIs(await self.store.payments.has_webhook_registration('live'), False, 'each mode has its own registration')
         second = {'_id': 'sandbox', 'webhook_id': 'w2', 'url': 'https://example.invalid/other', 'signing_secret': 'synthetic-two', 'stored_at': T1}
         await self.store.payments.save_webhook_registration('sandbox', dict(second))
         self.assertEqual(await self.store.payments.webhook_registration('sandbox'), second, 'no field of the replaced registration survives')
@@ -1001,6 +1081,7 @@ class InMemoryRequests(RequestContract, InMemoryBinding): pass
 class InMemoryOutbox(OutboxContract, InMemoryBinding): pass
 class InMemoryOrders(OrderContract, InMemoryBinding): pass
 class InMemoryPayments(PaymentContract, InMemoryBinding): pass
+class InMemorySettings(SettingsContract, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
 class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
 class DisposableMongoAccounts(AccountContract, DisposableMongoBinding): pass
@@ -1009,6 +1090,7 @@ class DisposableMongoRequests(RequestContract, DisposableMongoBinding): pass
 class DisposableMongoOutbox(OutboxContract, DisposableMongoBinding): pass
 class DisposableMongoOrders(OrderContract, DisposableMongoBinding): pass
 class DisposableMongoPayments(PaymentContract, DisposableMongoBinding): pass
+class DisposableMongoSettings(SettingsContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()

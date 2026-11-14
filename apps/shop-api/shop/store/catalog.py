@@ -17,6 +17,10 @@ class MongoCatalogStore:
     async def last_finished_import(self):
         return await self.db.imports.find_one({"status": "done"}, sort=[("finished_at", -1)])
 
+    async def recent_imports(self, limit):
+        """Importläufe jeden Zustands, zuletzt gestartete zuerst."""
+        return [r async for r in self.db.imports.find({}).sort("started_at", -1).limit(limit)]
+
     async def published_counts_by_category(self):
         return {row["_id"]: row["n"] async for row in self.db.products.aggregate([{"$match": {"active": True}}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}}])}
 

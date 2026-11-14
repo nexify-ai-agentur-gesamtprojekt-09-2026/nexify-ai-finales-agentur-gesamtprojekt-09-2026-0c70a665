@@ -26,8 +26,7 @@ def parse_markup(value):
     return markup
 
 
-async def settings(db=None):
-    """db wird nicht mehr gelesen; der Parameter bleibt, bis alle Aufrufer umgestellt sind."""
+async def settings():
     doc = await store.catalog.shop_settings()
     markup = Decimal(doc.get("markup_percent", str(config.DEFAULT_MARKUP_PERCENT)))
     release = doc.get("price_release") or {}

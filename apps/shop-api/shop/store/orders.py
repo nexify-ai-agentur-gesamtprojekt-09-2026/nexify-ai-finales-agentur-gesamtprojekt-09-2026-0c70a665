@@ -5,6 +5,7 @@ Zustandswechsel sind bedingte Einzelschritte ohne Transaktion: nach „bezahlt�
 (``bigbuy_submitting``), „versendet“ nie aus „versendet“ oder „zugestellt“. Zeitpunkte gibt der
 Aufrufer vor. Beträge, Positionen und Adresse schreibt nur ``add``; nichts hier rechnet oder ändert sie.
 """
+from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
 from .errors import AlreadyExists
@@ -42,6 +43,10 @@ class MongoOrderStore:
     async def recent_of_owner(self, owner, limit):
         """Neueste zuerst nach ``created_at``."""
         return [o async for o in self.db.orders.find({"owner": owner}).sort("created_at", -1).limit(limit)]
+
+    async def recent_without_lines(self, limit):
+        """Alle Eigentümer, neueste zuerst, ohne die Positionen."""
+        return [o async for o in self.db.orders.find({}, {"lines": 0}).sort("created_at", -1).limit(limit)]
 
     # Zahlung ------------------------------------------------------------------------------
     async def record_payment_error(self, order_id, code):
@@ -101,6 +106,13 @@ class MongoOrderStore:
             update["processing_at"] = processing_at
         await self.db.orders.update_one({"_id": order_id, "bigbuy_order_id": {"$in": [None, "", known_supplier_order_id]}},
                                         {"$set": update})
+
+    async def change_delivery_state(self, order_id, expected_state, changes):
+        """Schreibt die Felder des neuen Lieferstands, wenn der gespeicherte noch ``expected_state`` ist (None = noch keiner).
+
+        Gibt die Bestellung nach der Änderung zurück, sonst None; dann hat sich nichts geändert.
+        """
+        return await self.db.orders.find_one_and_update({"_id": order_id, "fulfilment": expected_state}, {"$set": changes}, return_document=ReturnDocument.AFTER)
 
     async def mark_shipped(self, order_id, tracking_number, carrier, shipped_at):
         """Der einmalige Übergang nach versendet; nie zurück aus versendet oder zugestellt. Wahr, wenn er stattfand."""

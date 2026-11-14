@@ -34,6 +34,14 @@ class MongoOutboxStore:
     async def get(self, event_key):
         return await self.db.outbox.find_one({"_id": event_key})
 
+    async def recent_summaries(self, limit):
+        """Neueste zuerst nach ``created_at``, ohne Inhalt."""
+        return [m async for m in self.db.outbox.find({}, WITHOUT_BODY).sort("created_at", -1).limit(limit)]
+
+    async def order_mails(self, order_id):
+        """Stand, Betreff und Versuche der Bestätigungs- und Statusmails einer Bestellung (Schlüssel ``order_paid:…`` und ``order_status:…``)."""
+        return [m async for m in self.db.outbox.find({"_id": {"$regex": "^order_(paid|status):[a-z:_]*" + order_id}}, {"status": 1, "subject": 1, "attempts": 1})]
+
     async def claim(self, event_key, claim_id, at, max_attempts):
         """Nimmt einen zustellbaren Auftrag in Vorbereitung und gibt ihn mit Inhalt zurück; None, wenn er nicht zustellbar ist.
 

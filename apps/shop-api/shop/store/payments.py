@@ -15,6 +15,10 @@ class MongoPaymentStore:
     async def webhook_registration(self, mode):
         return await self.db.revolut_webhooks.find_one({"_id": mode})
 
+    async def has_webhook_registration(self, mode):
+        """Ohne das Signaturgeheimnis zu lesen."""
+        return bool(await self.db.revolut_webhooks.find_one({"_id": mode}, {"_id": 1}))
+
     async def save_webhook_registration(self, mode, registration):
         """Genau eine Anmeldung je Betriebsart; eine vorhandene wird vollständig ersetzt."""
         await self.db.revolut_webhooks.replace_one({"_id": mode}, registration, upsert=True)

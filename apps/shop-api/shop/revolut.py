@@ -43,8 +43,7 @@ def webhook_url():
     return config.PUBLIC_ORIGIN + "/api/shop/webhooks/revolut"
 
 
-async def ensure_webhook(db=None):
-    """db wird nicht mehr gelesen; der Parameter bleibt, bis admin_api umgestellt ist."""
+async def ensure_webhook():
     mode, url = config.revolut_mode(), webhook_url()
     stored = await store.payments.webhook_registration(mode)
     if stored and stored.get("url") == url and stored.get("signing_secret"):
