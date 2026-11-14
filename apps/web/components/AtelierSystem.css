@@ -1242,3 +1242,64 @@ html[data-theme='light'] #atelier{
 @media (pointer:coarse){
  #atelier :is(.site-header .header-actions select,.tk-header-search input){font-size:var(--as-t-16)}
 }
+
+/* ===== Filmsteuerung folgt der Filmbreite (Inhaberbefund 14.11.2026: auf dem Handy zu gross) =====
+   Gemessen bei 320 bis 430 px: Leiste 48 px hoch, das sind 22 bis 31 % der Filmhoehe; in den Galerie-Karten brach „Ton an" um.
+   Die sichtbare Leiste richtet sich jetzt nach der Filmbreite (10 % der Breite, zwischen 32 und 48 px). Die Trefferflaeche
+   jedes Schalters bleibt 48 px hoch und mindestens 44 px breit (unsichtbare Flaeche ::before). */
+#atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-film-picture{container:film/inline-size}
+@container film (max-width:560px){
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-film-controls{--film-leiste:clamp(var(--as-s-8),10cqi,var(--as-s-12));inset:auto auto clamp(var(--as-s-1),2.5cqi,var(--as-s-4)) clamp(var(--as-s-1),2.5cqi,var(--as-s-4))}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-film-controls button,#atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-volume summary{position:relative;width:2.75rem;min-width:2.75rem;height:var(--film-leiste);min-height:var(--film-leiste);padding:0}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-film-controls button::before,#atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-volume summary::before{content:'';position:absolute;inset:calc((var(--film-leiste) - var(--as-s-12)) / 2) 0}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-film-controls :is(button,summary)>svg{width:auto;height:calc(var(--film-leiste) * .42)}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-film-controls button>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-volume label{font-size:0;gap:0}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero .atelier-volume>div{width:min(12.5rem,calc(100cqi - 2 * var(--as-s-4)))}
+ #atelier .home-concept :is(.identity-hero,.hc-gallery-card) .atelier-film-hero video::-webkit-media-text-track-container{transform:translateY(calc(-14cqi - var(--as-s-2)))}
+}
+
+/* ===== Chat auf dem Handy: deckend, ohne seitliches Verziehen (Inhaberbefund 14.11.2026) =====
+   Ursachen, gemessen bei 390 x 844: (1) Die Flaeche hinter dem Gespraech war durchsichtig. Die Regel weiter oben setzt drei
+   Hintergrundlagen, von denen zwei mit einer Farbe enden; das ist ungueltig, der Browser verwirft die ganze Angabe und die
+   Seite schien durch. (2) Der Lichtstreif (::after) bleibt nach seinem Lauf rechts neben der Scheibe stehen und machte sie
+   897 statt 390 px breit rollbar; mit overflow:hidden laesst sich das auf iOS trotzdem ziehen. overflow:clip laesst kein Rollen zu. */
+@media(max-width:820px){
+ #atelier #aifly-panel{background-color:var(--as-ground);overflow:hidden;overflow:clip;overscroll-behavior:none}
+ #atelier #aifly-panel::after{content:none}
+ #atelier #aifly-panel .orientation-content{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ /* Der Verlauf endet sichtbar ueber der Eingabe: bisher lag die Eingabe mitten ueber den Einstiegskacheln (bei 390 px ueber der dritten).
+    Hinter Eingabe und Hinweis liegt jetzt ein deckender Fuss mit weichem Uebergang; der Verlauf rollt darunter weg. */
+ #atelier #aifly-panel .public-orientation::after{content:'';grid-row:2/-1;grid-column:1/-1;z-index:1;pointer-events:none;margin-top:calc(-1 * var(--as-s-8));background:linear-gradient(180deg,transparent,var(--as-ground) var(--as-s-8))}
+}
+/* Der Platzhalter der Eingabe bleibt einzeilig (bei 320 px und im Querformat brach er in eine zweite, abgeschnittene Zeile um). */
+#atelier #aifly-panel .orientation-composer textarea::placeholder{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Schmale Scheibe: der volle Name des Assistenten bleibt lesbar (bei 320 px ragte die zweite Zeile 40 px ueber den Rand). */
+@container front (max-width:420px){
+ #atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{white-space:normal;overflow-wrap:anywhere;line-height:1.25}
+ #atelier #aifly-panel :is(.panel-heading-copy,.panel-identity,.panel-brandline){min-width:0}
+}
+
+/* ===== Mobiles Menue (Inhaberbefund 14.11.2026: „ein Button, der bleibt stehen") =====
+   „Menue schliessen" klebte am unteren Rand der Menueflaeche und lag ueber Eintraegen (bei 320 px ueber „TEILEKLAR entdecken").
+   Er steht jetzt am Ende der Liste. Solange das Menue offen ist, rollt die Seite dahinter nicht mit. */
+#atelier .site-header .mobile-navigation-panel>.nexify-control{position:static}
+html:has(#atelier .mobile-navigation[open]){overflow:hidden}
+/* Kopfleiste bei 320 px: der Themenschalter ragte 10 px ueber den rechten Rand. */
+@container website (max-width:339px){
+ #atelier .site-header{gap:0}
+ #atelier .site-header .header-actions{gap:var(--as-s-1)}
+ #atelier .site-header .header-actions select{padding:0 var(--as-s-5) 0 var(--as-s-2)}
+}
+/* Auch als Seitenscheibe (Tablet, Querformat, Schreibtisch) laesst sich das Gespraech nicht mehr seitlich ziehen:
+   der Lichtstreif machte die Scheibe dort ebenfalls um ihre eigene Breite rollbar (gemessen 348 px Scheibe, 434 px Ueberhang). */
+#atelier #aifly-panel{overflow:hidden;overflow:clip}
+
+/* ===== Schmale Seiten: lange Schalter brechen um statt abgeschnitten zu werden (Messliste 14.11.2026) =====
+   Einzeilige Schalter waren breiter als ihre Spalte. Folgen bei 320 bis 430 px: der Abschluss-Schalter verlor bis zu 57 px
+   seiner Beschriftung („Mit NeXify Kontakt aufnehmen" bei 360 px), und Text-Schalter dehnten ihre Rasterspalte ueber den
+   Seitenrand (Startseite 320 px: Abschnitt „Was koennen wir fuer Sie bauen" 11 px abgeschnitten; TEILEKLAR 320/360 px:
+   „So bestellen Sie" bis 67 px; Fahrzeug und Passung 320 px: 10 px). Einzeilig passende Schalter bleiben unveraendert hoch. */
+@container home (max-width:480px){
+ #atelier .home-concept :is(.hc-text-link,.hc-finish-primary,.hc-finish-actions .nexify-control){white-space:normal;height:auto;padding-block:var(--as-s-3);text-align:start;overflow-wrap:anywhere}
+}
