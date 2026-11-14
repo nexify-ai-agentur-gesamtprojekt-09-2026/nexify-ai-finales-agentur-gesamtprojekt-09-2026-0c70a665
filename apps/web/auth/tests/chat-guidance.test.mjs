@@ -202,3 +202,46 @@ test('model answers use the en dash of the website instead of the em dash', () =
     assert.ok(guard.text.includes('Danke \u2013 gern.'));
   }
 });
+
+test('guardrail: scaled amounts keep their decimals, in the allowance and in the check', () => {
+  // "1,5k" sind 1.500, nicht 1.000.
+  assert.deepEqual([...visitorAmounts([], 'Wir haben etwa 1,5k € eingeplant.')], ['1500']);
+  assert.deepEqual([...visitorAmounts([], 'maximal 2.5 Mio')], ['2500000']);
+  assert.deepEqual([...visitorAmounts([], 'rund 0,5k')], ['500']);
+  const allowed = visitorAmounts([], 'Budget 1,5k €');
+  assert.equal(hasUnapprovedAmount('Mit 1.500 € planen wir den Kern.', allowed), false);
+  assert.equal(hasUnapprovedAmount('Mit 1,5k € planen wir den Kern.', allowed), false);
+  assert.equal(hasUnapprovedAmount('Das kostet 1.000 €.', allowed), true, '1,5k gibt nicht 1.000 frei');
+  assert.equal(hasUnapprovedAmount('Das kostet 1,5k €.', visitorAmounts([], 'Budget 1.000 €')), true);
+  // Tausenderpunkt bleibt Tausenderpunkt.
+  assert.deepEqual([...visitorAmounts([], '1.500k')], ['1500000']);
+});
+
+test('guardrail: a budget the visitor gave with a unit survives in the briefing', () => {
+  const body = { vorhaben: 'Neue Website', ziel: 'Mehr Anfragen' };
+  const brief = (budget, said) => parseBriefing(JSON.stringify({ ...body, budget }), visitorAmounts([], said)).budget;
+  assert.equal(brief('10k €', 'Unser Budget liegt bei 10k €.'), '10k €');
+  assert.equal(brief('10.000 €', 'Unser Budget liegt bei 10k €.'), '10.000 €');
+  assert.equal(brief('10k €', 'Unser Budget liegt bei 10.000 Euro.'), '10k €');
+  assert.equal(brief('1,5k €', 'etwa 1,5k'), '1,5k €');
+  assert.equal(brief('ca. 10 Tsd. Euro', 'ungefähr 10000'), 'ca. 10 Tsd. Euro');
+  assert.equal(brief('5.000 bis 8.000 €', 'zwischen 5.000 und 8.000 €'), '5.000 bis 8.000 €');
+  // Weiterhin: was der Besucher nicht genannt hat, entfällt.
+  assert.equal(brief('12k €', 'Unser Budget liegt bei 10k €.'), '');
+  assert.equal(brief('10 Mio €', 'Unser Budget liegt bei 10k €.'), '');
+  assert.equal(brief('10 €', 'Unser Budget liegt bei 10k €.'), '');
+});
+
+test('guardrail: a forced cut in a long sentence never lets a human claim through in two halves', () => {
+  const claims = ['ich bin ein echter Mensch', 'ich bin kein Chatbot', "I'm not a bot", 'ik ben een mens', 'je suis une personne'];
+  for (const claim of claims) for (let pad = 430; pad <= 500; pad += 1) for (const size of [5, 9, 64]) {
+    const text = 'Gern' + ' und'.repeat(Math.floor(pad / 4)) + ' '.repeat(pad % 4 ? 1 : 0) + 'x'.repeat(Math.max(0, pad % 4 - 1)) + ' ' + claim + ' und helfe Ihnen gern weiter mit allem';
+    const guard = run(text, {}, size);
+    assert.equal(claimsToBeHuman(guard.text), false, `${claim} / ${pad} / ${size}`);
+    assert.ok(!guard.text.includes(claim.split(' ').slice(2).join(' ')), `Rest der Behauptung sichtbar: ${claim} / ${pad} / ${size}`);
+    assert.ok(guard.violations.includes('human_claim'), `nicht erkannt: ${claim} / ${pad} / ${size}`);
+  }
+  // Ein langer, unverfänglicher Satz bleibt unverändert.
+  const plain = 'Wir planen ' + 'sorgfältig und Schritt für Schritt '.repeat(20) + 'bis alles steht';
+  assert.equal(run(plain, {}, 9).text, plain);
+});
