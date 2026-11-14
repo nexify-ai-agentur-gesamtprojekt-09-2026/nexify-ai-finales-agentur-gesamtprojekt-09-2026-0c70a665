@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-09T20:33:00.974Z",
+  "recorded_at": "2026-11-14T10:57:42.440Z",
   "passed": true,
   "mock": true,
   "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
@@ -16,15 +16,15 @@
     "catalogue_filters_and_pagination_fit_390px_and_are_keyboard_reachable"
   ],
   "source_sha256": {
-    "apps/web/components/shop/api.ts": "77430925e22d30a38a1280cd6e17fd67e8bc32b162773016dd629654de9519eb",
-    "apps/web/components/shop/CatalogView.tsx": "b86cdeca4b06c0d620f24ff6c1ceb1949275f61bc97ebf546e69060ef7d45706",
+    "apps/web/components/shop/api.ts": "c94e85237975d714c0cb1625c7f016d0c3f89c4cff3092f571860ee1a5640e28",
+    "apps/web/components/shop/CatalogView.tsx": "cc4ffce1e2cb59229a2f89aa710011dfd69e73e5c313dd6c064b726cef9a1b23",
     "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
     "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
-    "apps/web/components/shop/ProductDetail.tsx": "1fcf8013bbad504e6755e211d05b275ded93350cdbe6dfbed2ad0cc1b3c86097",
+    "apps/web/components/shop/ProductDetail.tsx": "76dafd254c53bde57990d0d67b2d77ba537630a77ba868a7339fe81818a81bad",
     "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
     "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
-    "apps/web/components/shop/shop.css": "bf3967f563a749aeed6f3bdee7a3e494a6e1fce2260d9efc15a02c791fee0ae3",
-    "apps/web/components/shop/Storefront.css": "ecd5f2d5655c6b20271826c27b491c736f0d1678f59582f78ec13ec6f46a603b",
+    "apps/web/components/shop/shop.css": "586c662e08bb229c20a64509c0fa35e33f9e45d6c7dda11bd7f0ce243a4ed70b",
+    "apps/web/components/shop/Storefront.css": "8af6725a8cfcbd3c1b0f8dce12cada58e05d971a7233a9ef8972c381b9a21c91",
     "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
     "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
     "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
@@ -36,13 +36,13 @@
       "method": "GET",
       "path": "/api/shop/cart",
       "status": 200,
-      "count": 50
+      "count": 48
     },
     {
       "method": "GET",
       "path": "/api/shop/categories",
       "status": 200,
-      "count": 24
+      "count": 23
     },
     {
       "method": "GET",
@@ -60,11 +60,11 @@
       "method": "GET",
       "path": "/api/shop/products",
       "status": 200,
-      "count": 23
+      "count": 22
     }
   ],
   "external_requests": [],
-  "supplier_image_requests_answered_locally": 8,
+  "supplier_image_requests_answered_locally": 9,
   "order_started": false,
   "payment_started": false,
   "page_errors": [],

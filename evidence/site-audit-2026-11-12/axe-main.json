@@ -1,0 +1,874 @@
+{
+ "base": "https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app",
+ "axe": "4.10.2",
+ "tags": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "gemessen_am": "2026-11-12T16:02:32+00:00",
+ "seiten": [
+  {
+   "pfad": "/",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "aria-prohibited-attr",
+       "elemente": 1
+      },
+      {
+       "regel": "color-contrast",
+       "elemente": 162
+      },
+      {
+       "regel": "video-caption",
+       "elemente": 1
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "aria-prohibited-attr",
+       "elemente": 1
+      },
+      {
+       "regel": "color-contrast",
+       "elemente": 152
+      },
+      {
+       "regel": "video-caption",
+       "elemente": 1
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 133
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 123
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/websites",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 120
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 110
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/agenten-automatisierung",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 120
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 110
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/apps-portale",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 120
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 110
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/leistungsumfang",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 129
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 119
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/loesungen",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 124
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 114
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/preise-ablauf",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 128
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 118
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/wissen",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 108
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/wissen/projekt-vorbereiten",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/unternehmen",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 110
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 100
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/kontakt",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 117
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 107
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/nex2fly",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 130
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 120
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/one",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 117
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 107
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/api",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 117
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 107
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/aifly-oracle",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 108
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/nex-agentic-aifly",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 108
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/skills-mcp",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 108
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/portale",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 109
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 99
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/impressum",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 102
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 92
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/datenschutz",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/vertragsgrundlagen",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/ki-hinweise",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/barrierefreiheit",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/cookies",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "aria-prohibited-attr",
+       "elemente": 1
+      },
+      {
+       "regel": "color-contrast",
+       "elemente": 88
+      },
+      {
+       "regel": "link-in-text-block",
+       "elemente": 1
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "aria-prohibited-attr",
+       "elemente": 1
+      },
+      {
+       "regel": "color-contrast",
+       "elemente": 85
+      },
+      {
+       "regel": "link-in-text-block",
+       "elemente": 1
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/kategorien",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 58
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 55
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/fahrzeug-und-passung",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 140
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 137
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/termine",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 101
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 98
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/gutscheine",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 110
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 107
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/partner-werden",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 138
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 135
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/werkstatt",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 63
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 60
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/rechtliches",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 133
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 130
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/shop",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 70
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 67
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/reifenrechner",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 96
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 93
+      }
+     ]
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/batterie-berater",
+   "viewports": {
+    "desktop": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 96
+      }
+     ]
+    },
+    "mobil": {
+     "verstoesse": [],
+     "unvollstaendig": [
+      {
+       "regel": "color-contrast",
+       "elemente": 93
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

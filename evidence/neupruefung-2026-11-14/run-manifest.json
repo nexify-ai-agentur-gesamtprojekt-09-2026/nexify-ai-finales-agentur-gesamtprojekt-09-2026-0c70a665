@@ -1,0 +1,238 @@
+{
+  "scope": "Protokoll der Neuprüfung vom 14.11.2026: welche Browser-Harnesses auf welchem Commit liefen und wie sie endeten. Kein Beleg im Sinn von tools/check_browser_evidence.py, keine Abnahme. Belege an den gebundenen Pfaden wurden nur aus bestandenen Läufen übernommen.",
+  "commit": "88fa34518c0d3daf7433d5a6fb63cc91882a8482",
+  "branch": "claude/belege-neupruefung",
+  "started_at": "2026-11-14T10:22:00Z",
+  "finished_at": "2026-11-14T10:35:20Z",
+  "tooling": {
+    "node": "v22.23.4",
+    "playwright_used": "1.63.0 (/opt/node22/lib/node_modules/playwright)",
+    "playwright_pinned_in_repository": "1.65.0 (.github/evidence-runner/package.json)",
+    "chromium": "153.0.8010.12",
+    "note": "Die im Repository festgelegte Playwright-Version war in dieser Umgebung nicht vorhanden; die Läufe sind mit 1.63.0 erhoben."
+  },
+  "builds": [
+    {
+      "name": "pnpm --filter @nexify/site build:standalone",
+      "exit": 0
+    },
+    {
+      "name": "pnpm --filter @nexify/site build",
+      "exit": 0
+    },
+    {
+      "name": "pnpm --filter @nexify/web build",
+      "exit": 0
+    }
+  ],
+  "runs": [
+    {
+      "harness": "apps/site/tests/browser-critical.mjs",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "passed_steps": [
+        "account_control_fallback_and_auth_routes_present",
+        "nex2fly_product_copy_all_locales_and_section_focus_preserves_route",
+        "native_product_menu_and_direct_legal_footer_links",
+        "hero_scene_and_controls_across_five_desktop_sizes",
+        "keyboard_skip_link_preserves_standalone_product_hash_route"
+      ],
+      "failed_at": "sdk_guided_preview_works_when_visitor_session_is_404: keine Antwort von /api/agent-chat innerhalb von 30 s; der Chat sendet seit 812abdd (PR 116) an /api/chat"
+    },
+    {
+      "harness": "apps/site/tests/browser-text-spacing.mjs",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "measured": {
+        "checks": 129,
+        "resize_routes": 43,
+        "routes_all_doubled": 43,
+        "elements_measured": 19367,
+        "excluded_media_resource_elements": 1,
+        "text_spacing_document_overflows": 0,
+        "runtime_errors": 0
+      },
+      "failed_at": "27 Befunde text_resize_overflow bei 200 % Schrift und 1280 px",
+      "issues": {
+        "routes": [
+          "/",
+          "/anmelden",
+          "/barrierefreiheit",
+          "/cookies",
+          "/datenschutz",
+          "/impressum",
+          "/ki-hinweise",
+          "/kontakt",
+          "/leistungen",
+          "/leistungen/agenten-automatisierung",
+          "/leistungen/apps-portale",
+          "/leistungen/websites",
+          "/leistungsumfang",
+          "/loesungen",
+          "/portale",
+          "/preise-ablauf",
+          "/produkte/aifly-oracle",
+          "/produkte/api",
+          "/produkte/nex-agentic-aifly",
+          "/produkte/nex2fly",
+          "/produkte/one",
+          "/produkte/skills-mcp",
+          "/registrieren",
+          "/unternehmen",
+          "/vertragsgrundlagen",
+          "/wissen",
+          "/wissen/projekt-vorbereiten"
+        ],
+        "elements": {
+          "HEADER.site-header": 27,
+          "ASIDE.aifly-panel": 27,
+          "P.nx-oracle-name orientation-host-name": 27,
+          "H3": 3
+        },
+        "examples": [
+          {
+            "path": "/",
+            "width": 1280,
+            "type": "text_resize_overflow",
+            "content_overflows": [
+              {
+                "tag": "HEADER",
+                "class": "site-header",
+                "client": 909,
+                "scroll": 964
+              },
+              {
+                "tag": "ASIDE",
+                "class": "aifly-panel",
+                "client": 359,
+                "scroll": 558
+              },
+              {
+                "tag": "P",
+                "class": "nx-oracle-name orientation-host-name",
+                "client": 199,
+                "scroll": 449
+              }
+            ]
+          },
+          {
+            "path": "/leistungen",
+            "width": 1280,
+            "type": "text_resize_overflow",
+            "content_overflows": [
+              {
+                "tag": "HEADER",
+                "class": "site-header",
+                "client": 909,
+                "scroll": 964
+              },
+              {
+                "tag": "H3",
+                "class": "",
+                "client": 327,
+                "scroll": 420
+              },
+              {
+                "tag": "ASIDE",
+                "class": "aifly-panel",
+                "client": 359,
+                "scroll": 558
+              },
+              {
+                "tag": "P",
+                "class": "nx-oracle-name orientation-host-name",
+                "client": 199,
+                "scroll": 449
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "harness": "apps/site/tests/browser-shop.mjs",
+      "exit": 0,
+      "passed": true,
+      "evidence_adopted": true,
+      "evidence": "evidence/shop-ui-mock-2026-11-09/browser-shop.json"
+    },
+    {
+      "harness": "apps/site/tests/browser-catalog.mjs",
+      "exit": 0,
+      "passed": true,
+      "evidence_adopted": true,
+      "evidence": "evidence/shop-ui-mock-2026-11-09/browser-catalog.json"
+    },
+    {
+      "harness": "apps/site/tests/browser-identity-hero.mjs",
+      "renderer": "vite",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "failed_at": "200% hero horizontal overflow (320 px, de): scrollWidth des Hero größer als clientWidth"
+    },
+    {
+      "harness": "apps/web/auth/tests/browser-public-experience.mjs",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "failed_at": "/anmelden (de): Dokumenttitel ist 'Anmelden · NeXify AI' statt des Seitentitels aus config/site-map.json; 25 Routen davor bestanden"
+    },
+    {
+      "harness": "apps/site/tests/browser-identity-hero.mjs",
+      "renderer": "next",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "failed_at": "200% hero horizontal overflow (320 px, de)"
+    },
+    {
+      "harness": "apps/site/tests/browser-workspace-read.mjs",
+      "exit": 0,
+      "passed": true,
+      "evidence_adopted": true,
+      "evidence": "evidence/workspace-read-2026-10-28/browser-workspace-read.json"
+    },
+    {
+      "harness": "apps/site/tests/browser-consent-ui.mjs",
+      "exit": 0,
+      "passed": true,
+      "evidence_adopted": true,
+      "evidence": "evidence/consent-ui-2026-10-28/browser-consent-ui.json"
+    },
+    {
+      "harness": "apps/site/tests/browser-public-fallbacks.mjs",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "harness_changed": false,
+      "failed_at": "Fall 320/de/unavailable: .action-card .request-fallback erscheint nicht; die Aktion öffnet das Orientierungsgespräch"
+    },
+    {
+      "harness": "apps/site/tests/browser-exception-capture.mjs",
+      "surface": "vite",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "harness_changed": false,
+      "failed_at": "Schritt 4 (Fehlergrenze des Chats): .request-fallback erscheint nicht; es gibt keinen nachgeladenen Chat-Chunk mehr"
+    },
+    {
+      "harness": "apps/site/tests/browser-exception-capture.mjs",
+      "surface": "next",
+      "exit": 1,
+      "passed": false,
+      "evidence_adopted": false,
+      "harness_changed": false,
+      "failed_at": "Schritt 4: .workspace-chat-modes fehlt; im Produktionsstand gibt es die Projektansicht nicht (gateway nur im Entwicklungsmodus)"
+    }
+  ],
+  "summary": {
+    "runs": 12,
+    "passed": 4,
+    "failed": 8
+  },
+  "details": "docs/09-final/pin-rebase-2026-11-14.md"
+}

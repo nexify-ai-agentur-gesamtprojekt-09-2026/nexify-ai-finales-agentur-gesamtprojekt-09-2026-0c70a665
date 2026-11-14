@@ -1,0 +1,3926 @@
+{
+ "base": "https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app",
+ "gemessen_am": "2026-11-09T13:03:00+00:00",
+ "nicht_gemessen": [
+  "Lighthouse",
+  "axe-core",
+  "INP"
+ ],
+ "seiten": [
+  {
+   "pfad": "/",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Gute Websites beginnen bei Ihnen. · NeXify AI",
+     "description": "Individuelles Webdesign, passende Inhalte und digitale Abläufe aus einem Konzept. Persönlich begleitet und transparent kalkuliert ab 449 € netto je Projekttag.",
+     "canonical": "https://www.nexifyai.de/",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ein Anspruch. Ein zusammenhängender Auftritt.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1100,
+     "cls": 0,
+     "uebertragen_kb": 986,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=5CB68i4pnAekjehf",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=tXyZJ52UQVBCVsD3",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=tXyZJ52UQVBCVsD3",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/cookies?_rsc=tXyZJ52UQVBCVsD3"
+     ],
+     "bilder": {
+      "bilder": 10,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Gute Websites beginnen bei Ihnen. · NeXify AI",
+     "description": "Individuelles Webdesign, passende Inhalte und digitale Abläufe aus einem Konzept. Persönlich begleitet und transparent kalkuliert ab 449 € netto je Projekttag.",
+     "canonical": "https://www.nexifyai.de/",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ein Anspruch. Ein zusammenhängender Auftritt.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 796,
+     "cls": 0,
+     "uebertragen_kb": 722,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=5CB68i4pnAekjehf",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session"
+     ],
+     "bilder": {
+      "bilder": 10,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Goede websites beginnen bij u. · NeXify AI",
+     "h1": "Eén aanspraak. Eén samenhangende uitstraling.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Good websites start with you. · NeXify AI",
+     "h1": "One standard. One coherent presence.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Un bon site commence par vous. · NeXify AI",
+     "h1": "Une exigence. Une présence cohérente.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Das Leistungshaus der Factory · NeXify AI",
+     "description": "Eine klare Markenidee verbindet Gestaltung, technische Umsetzung und Vermarktung.",
+     "canonical": "https://www.nexifyai.de/leistungen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Das Leistungshaus der Factory",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1252,
+     "cls": 0,
+     "uebertragen_kb": 591,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=yneGb3o5YPAipX8k",
+      "abgebrochen/fehlgeschlagen inales-agentur-gesamtpro-one.vercel.app/vertragsgrundlagen?_rsc=yneGb3o5YPAipX8k"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Das Leistungshaus der Factory · NeXify AI",
+     "description": "Eine klare Markenidee verbindet Gestaltung, technische Umsetzung und Vermarktung.",
+     "canonical": "https://www.nexifyai.de/leistungen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Das Leistungshaus der Factory",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1504,
+     "cls": 0,
+     "uebertragen_kb": 547,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen i-finales-agentur-gesamtpro-one.vercel.app/leistungsumfang?_rsc=yneGb3o5YPAipX8k",
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=U2dAb180DIq_kHLE",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=yneGb3o5YPAipX8k",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=U2dAb180DIq_kHLE"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Het dienstenhuis van de Factory · NeXify AI",
+     "h1": "Het dienstenhuis van de Factory",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "The Factory’s service portfolio · NeXify AI",
+     "h1": "The Factory’s service portfolio",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Les métiers de la Factory · NeXify AI",
+     "h1": "Les métiers de la Factory",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/websites",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Ihr Markenauftritt, konsequent gestaltet · NeXify AI",
+     "description": "Eine Website ist ein zentraler Teil Ihrer Marke. Mit Markenstart verbinden wir die visuelle Linie, relevante Inhalte und einen klaren Weg zur Anfrage.",
+     "canonical": "https://www.nexifyai.de/leistungen/websites",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ihr Markenauftritt, konsequent gestaltet",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 844,
+     "cls": 0,
+     "uebertragen_kb": 399,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ify-ai-finales-agentur-gesamtpro-one.vercel.app/leistungen?_rsc=RQw7S-QMCM9yO_MU",
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=BFi1JCFZglmTq9iq",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=RQw7S-QMCM9yO_MU"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Ihr Markenauftritt, konsequent gestaltet · NeXify AI",
+     "description": "Eine Website ist ein zentraler Teil Ihrer Marke. Mit Markenstart verbinden wir die visuelle Linie, relevante Inhalte und einen klaren Weg zur Anfrage.",
+     "canonical": "https://www.nexifyai.de/leistungen/websites",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ihr Markenauftritt, konsequent gestaltet",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 520,
+     "cls": 0,
+     "uebertragen_kb": 362,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=BFi1JCFZglmTq9iq"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Uw merkpresentatie, consequent vormgegeven · NeXify AI",
+     "h1": "Uw merkpresentatie, consequent vormgegeven",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Your brand, carried through every detail · NeXify AI",
+     "h1": "Your brand, carried through every detail",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Votre marque, jusque dans les détails · NeXify AI",
+     "h1": "Votre marque, jusque dans les détails",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/agenten-automatisierung",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "KI im Betrieb. Mit einem konkreten Auftrag. · NeXify AI",
+     "description": "Wir konzipieren KI und Automatisierung dort, wo sie Ihre Arbeit unterstützen können: bei Anfragen, Dokumenten, Angeboten und wiederkehrenden Abläufen.",
+     "canonical": "https://www.nexifyai.de/leistungen/agenten-automatisierung",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "KI im Betrieb. Mit einem konkreten Auftrag.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 904,
+     "cls": 0,
+     "uebertragen_kb": 405,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=VvbGPyUBBt1rajII",
+      "abgebrochen/fehlgeschlagen gentur-gesamtpro-one.vercel.app/wissen/projekt-vorbereiten?_rsc=VvbGPyUBBt1rajII",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=J3PTi5vigU7ormIu",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=J3PTi5vigU7ormIu"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "KI im Betrieb. Mit einem konkreten Auftrag. · NeXify AI",
+     "description": "Wir konzipieren KI und Automatisierung dort, wo sie Ihre Arbeit unterstützen können: bei Anfragen, Dokumenten, Angeboten und wiederkehrenden Abläufen.",
+     "canonical": "https://www.nexifyai.de/leistungen/agenten-automatisierung",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "KI im Betrieb. Mit einem konkreten Auftrag.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 848,
+     "cls": 0,
+     "uebertragen_kb": 368,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=VvbGPyUBBt1rajII",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=VvbGPyUBBt1rajII",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=VvbGPyUBBt1rajII"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "AI in uw bedrijf. Met een concrete opdracht. · NeXify AI",
+     "h1": "AI in uw bedrijf. Met een concrete opdracht.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "AI in your business. With a defined assignment. · NeXify AI",
+     "h1": "AI in your business. With a defined assignment.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "L’IA en entreprise, avec une mission précise. · NeXify AI",
+     "h1": "L’IA en entreprise, avec une mission précise.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/apps-portale",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Ein Arbeitsbereich für Ihr Geschäftsmodell · NeXify AI",
+     "description": "Kundenportal, interne Anwendung oder Partnerbereich: Wir gestalten digitale Arbeitsbereiche aus den Aufgaben und Zugriffsrechten Ihres Unternehmens.",
+     "canonical": "https://www.nexifyai.de/leistungen/apps-portale",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ein Arbeitsbereich für Ihr Geschäftsmodell",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 784,
+     "cls": 0,
+     "uebertragen_kb": 417,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=K3FwO6Lx-DhQbW_f",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=8vOHsx7l1bDitENm",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=8vOHsx7l1bDitENm",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=8vOHsx7l1bDitENm"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Ein Arbeitsbereich für Ihr Geschäftsmodell · NeXify AI",
+     "description": "Kundenportal, interne Anwendung oder Partnerbereich: Wir gestalten digitale Arbeitsbereiche aus den Aufgaben und Zugriffsrechten Ihres Unternehmens.",
+     "canonical": "https://www.nexifyai.de/leistungen/apps-portale",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ein Arbeitsbereich für Ihr Geschäftsmodell",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1016,
+     "cls": 0,
+     "uebertragen_kb": 374,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=8vOHsx7l1bDitENm",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=8vOHsx7l1bDitENm",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=8vOHsx7l1bDitENm",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=K3FwO6Lx-DhQbW_f"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Een werkomgeving voor uw bedrijfsmodel · NeXify AI",
+     "h1": "Een werkomgeving voor uw bedrijfsmodel",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "A workspace for your business model · NeXify AI",
+     "h1": "A workspace for your business model",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Un espace adapté à votre activité · NeXify AI",
+     "h1": "Un espace adapté à votre activité",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungsumfang",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Das passende Paket beginnt mit Ihrem Ziel · NeXify AI",
+     "description": "Markenstart, Wachstum oder KI im Betrieb: Aus Ihrem Ziel formen wir einen definierten Auftrag mit Leistungen, Optionen und einem nachvollziehbaren Budget.",
+     "canonical": "https://www.nexifyai.de/leistungsumfang",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Das passende Paket beginnt mit Ihrem Ziel",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1468,
+     "cls": 0,
+     "uebertragen_kb": 543,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/leistungen/websites?_rsc=weE9_Nsq2mKc76ip",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=weE9_Nsq2mKc76ip",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=weE9_Nsq2mKc76ip",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=weE9_Nsq2mKc76ip"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Das passende Paket beginnt mit Ihrem Ziel · NeXify AI",
+     "description": "Markenstart, Wachstum oder KI im Betrieb: Aus Ihrem Ziel formen wir einen definierten Auftrag mit Leistungen, Optionen und einem nachvollziehbaren Budget.",
+     "canonical": "https://www.nexifyai.de/leistungsumfang",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Das passende Paket beginnt mit Ihrem Ziel",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 964,
+     "cls": 0,
+     "uebertragen_kb": 518,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ify-ai-finales-agentur-gesamtpro-one.vercel.app/leistungen?_rsc=weE9_Nsq2mKc76ip",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=o7i3Xw63KRROQzI3",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=weE9_Nsq2mKc76ip",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=weE9_Nsq2mKc76ip"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Het passende pakket begint bij uw doel · NeXify AI",
+     "h1": "Het passende pakket begint bij uw doel",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "The right package starts with your objective · NeXify AI",
+     "h1": "The right package starts with your objective",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Le bon projet commence par votre objectif · NeXify AI",
+     "h1": "Le bon projet commence par votre objectif",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/loesungen",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Wachstum & Kampagnen · NeXify AI",
+     "description": "Die Factory entwickelt Kampagnen aus Ihrer Markenidee: mit einem klaren Ziel, passenden Werbemitteln und einer Zielseite, die das Angebot konsequent…",
+     "canonical": "https://www.nexifyai.de/loesungen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Wachstum & Kampagnen",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1076,
+     "cls": 0,
+     "uebertragen_kb": 592,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=irbcY5GAjC64OACd",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=FfwCTR6B4KOd2T-G",
+      "abgebrochen/fehlgeschlagen /nexify-ai-finales-agentur-gesamtpro-one.vercel.app/wissen?_rsc=FfwCTR6B4KOd2T-G",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=irbcY5GAjC64OACd"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Wachstum & Kampagnen · NeXify AI",
+     "description": "Die Factory entwickelt Kampagnen aus Ihrer Markenidee: mit einem klaren Ziel, passenden Werbemitteln und einer Zielseite, die das Angebot konsequent…",
+     "canonical": "https://www.nexifyai.de/loesungen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Wachstum & Kampagnen",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 940,
+     "cls": 0,
+     "uebertragen_kb": 553,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen i-finales-agentur-gesamtpro-one.vercel.app/leistungsumfang?_rsc=FfwCTR6B4KOd2T-G",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=FfwCTR6B4KOd2T-G",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=FfwCTR6B4KOd2T-G"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Groei & campagnes · NeXify AI",
+     "h1": "Groei & campagnes",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Growth & campaigns · NeXify AI",
+     "h1": "Growth & campaigns",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Croissance et campagnes · NeXify AI",
+     "h1": "Croissance et campagnes",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/preise-ablauf",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Hochwertig geplant. Nachvollziehbar kalkuliert. · NeXify AI",
+     "description": "Ein überzeugender Markenauftritt braucht einen passenden Umfang. Wir legen Umsetzung, laufende Betreuung und verbrauchsabhängige Kosten getrennt offen.",
+     "canonical": "https://www.nexifyai.de/preise-ablauf",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Hochwertig geplant. Nachvollziehbar kalkuliert.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1824,
+     "cls": 0.0251,
+     "uebertragen_kb": 535,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=tn2sPNANG8yMICCL",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=tn2sPNANG8yMICCL",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/leistungen/websites?_rsc=F4CWP4rXgK12uEp4",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=F4CWP4rXgK12uEp4"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Hochwertig geplant. Nachvollziehbar kalkuliert. · NeXify AI",
+     "description": "Ein überzeugender Markenauftritt braucht einen passenden Umfang. Wir legen Umsetzung, laufende Betreuung und verbrauchsabhängige Kosten getrennt offen.",
+     "canonical": "https://www.nexifyai.de/preise-ablauf",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Hochwertig geplant. Nachvollziehbar kalkuliert.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1460,
+     "cls": 0,
+     "uebertragen_kb": 504,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=F4CWP4rXgK12uEp4",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/impressum?_rsc=F4CWP4rXgK12uEp4",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/leistungen/websites?_rsc=F4CWP4rXgK12uEp4",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=F4CWP4rXgK12uEp4"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Hoogwaardig gepland. Inzichtelijk begroot. · NeXify AI",
+     "h1": "Hoogwaardig gepland. Inzichtelijk begroot.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Considered quality. Transparent budgeting. · NeXify AI",
+     "h1": "Considered quality. Transparent budgeting.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Une ambition soignée. Un budget lisible. · NeXify AI",
+     "h1": "Une ambition soignée. Un budget lisible.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/wissen",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Die Arbeitsweise hinter dem Auftritt · NeXify AI",
+     "description": "Gute Gestaltung braucht eine klare Grundlage. Die Factory verbindet Markenentscheidungen, Projektplanung und überprüfbare technische Arbeit zu einem…",
+     "canonical": "https://www.nexifyai.de/wissen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Die Arbeitsweise hinter dem Auftritt",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1784,
+     "cls": 0,
+     "uebertragen_kb": 587,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=9ivTK-ASZyULc08h",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=9ivTK-ASZyULc08h",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=9ivTK-ASZyULc08h",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=9ivTK-ASZyULc08h"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Die Arbeitsweise hinter dem Auftritt · NeXify AI",
+     "description": "Gute Gestaltung braucht eine klare Grundlage. Die Factory verbindet Markenentscheidungen, Projektplanung und überprüfbare technische Arbeit zu einem…",
+     "canonical": "https://www.nexifyai.de/wissen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Die Arbeitsweise hinter dem Auftritt",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 984,
+     "cls": 0,
+     "uebertragen_kb": 547,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=Q4iYESJClSFU9XQH",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=Q4iYESJClSFU9XQH",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=9ivTK-ASZyULc08h"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "De werkwijze achter de uitstraling · NeXify AI",
+     "h1": "De werkwijze achter de uitstraling",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "The method behind the presence · NeXify AI",
+     "h1": "The method behind the presence",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "La méthode derrière votre image · NeXify AI",
+     "h1": "La méthode derrière votre image",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/wissen/projekt-vorbereiten",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Das Briefing für Ihren nächsten Auftritt · NeXify AI",
+     "description": "Ein gutes Briefing macht aus einer Idee einen beauftragbaren Umfang. Nennen Sie Ihr Angebot, Ihre Zielgruppe und das Ergebnis, das Sie erreichen möchten.",
+     "canonical": "https://www.nexifyai.de/wissen/projekt-vorbereiten",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Das Briefing für Ihren nächsten Auftritt",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 744,
+     "cls": 0,
+     "uebertragen_kb": 427,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen /nexify-ai-finales-agentur-gesamtpro-one.vercel.app/wissen?_rsc=y6HaeARMcnnZlU2a",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=y6HaeARMcnnZlU2a",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/leistungen/websites?_rsc=y6HaeARMcnnZlU2a",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=y6HaeARMcnnZlU2a"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Das Briefing für Ihren nächsten Auftritt · NeXify AI",
+     "description": "Ein gutes Briefing macht aus einer Idee einen beauftragbaren Umfang. Nennen Sie Ihr Angebot, Ihre Zielgruppe und das Ergebnis, das Sie erreichen möchten.",
+     "canonical": "https://www.nexifyai.de/wissen/projekt-vorbereiten",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Das Briefing für Ihren nächsten Auftritt",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 760,
+     "cls": 0,
+     "uebertragen_kb": 375,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=Ny-trkG8bwllVj6P",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=y6HaeARMcnnZlU2a",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=y6HaeARMcnnZlU2a",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=y6HaeARMcnnZlU2a"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "De briefing voor uw volgende stap · NeXify AI",
+     "h1": "De briefing voor uw volgende stap",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "The brief for your next project · NeXify AI",
+     "h1": "The brief for your next project",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Le brief de votre prochain projet · NeXify AI",
+     "h1": "Le brief de votre prochain projet",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/unternehmen",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "NeXify AI FACTORY B.V. · NeXify AI",
+     "description": "Die Factory steht für einen gemeinsamen Anspruch an Marke, digitale Arbeit und Service.",
+     "canonical": "https://www.nexifyai.de/unternehmen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeXify AI FACTORY B.V.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 736,
+     "cls": 0,
+     "uebertragen_kb": 562,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/loesungen?_rsc=WLZPjIBx-PFdiL_N",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/datenschutz?_rsc=WLZPjIBx-PFdiL_N",
+      "abgebrochen/fehlgeschlagen -ai-finales-agentur-gesamtpro-one.vercel.app/preise-ablauf?_rsc=WLZPjIBx-PFdiL_N",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/cookies?_rsc=WLZPjIBx-PFdiL_N"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "NeXify AI FACTORY B.V. · NeXify AI",
+     "description": "Die Factory steht für einen gemeinsamen Anspruch an Marke, digitale Arbeit und Service.",
+     "canonical": "https://www.nexifyai.de/unternehmen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeXify AI FACTORY B.V.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 496,
+     "cls": 0,
+     "uebertragen_kb": 529,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=WLZPjIBx-PFdiL_N"
+     ],
+     "bilder": {
+      "bilder": 6,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "NeXify AI FACTORY B.V. · NeXify AI",
+     "h1": "NeXify AI FACTORY B.V.",
+     "lang": "nl",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "NeXify AI FACTORY B.V. · NeXify AI",
+     "h1": "NeXify AI FACTORY B.V.",
+     "lang": "en",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "NeXify AI FACTORY B.V. · NeXify AI",
+     "h1": "NeXify AI FACTORY B.V.",
+     "lang": "fr",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/kontakt",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Ihr Projekt an die Factory · NeXify AI",
+     "description": "Markenauftritt, digitale Abläufe oder eine neue Kampagne: Beschreiben Sie, was Sie aufbauen möchten.",
+     "canonical": "https://www.nexifyai.de/kontakt",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ihr Projekt an die Factory",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 996,
+     "cls": 0,
+     "uebertragen_kb": 405,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=Y3YEkhtBJt4BLSFY",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=bnZcYT4jWtytJhF6",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=bnZcYT4jWtytJhF6",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=bnZcYT4jWtytJhF6"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Ihr Projekt an die Factory · NeXify AI",
+     "description": "Markenauftritt, digitale Abläufe oder eine neue Kampagne: Beschreiben Sie, was Sie aufbauen möchten.",
+     "canonical": "https://www.nexifyai.de/kontakt",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ihr Projekt an die Factory",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 760,
+     "cls": 0,
+     "uebertragen_kb": 365,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=bnZcYT4jWtytJhF6",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=bnZcYT4jWtytJhF6"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Uw project naar de Factory · NeXify AI",
+     "h1": "Uw project naar de Factory",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Bring your project to the Factory · NeXify AI",
+     "h1": "Bring your project to the Factory",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Votre projet à la Factory · NeXify AI",
+     "h1": "Votre projet à la Factory",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/nex2fly",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "NeX2fly. Ihre eigene Arbeitsumgebung. · NeXify AI",
+     "description": "Die separate Selfservice-Suite im NeXify-Portfolio verbindet Gespräche, Aufgaben und Projektwissen.",
+     "canonical": "https://www.nexifyai.de/produkte/nex2fly",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeX2fly. Ihre eigene Arbeitsumgebung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 948,
+     "cls": 0,
+     "uebertragen_kb": 417,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=s6si0I-QSMlArGp8",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=GuvqyJacoGB6tCE4"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "NeX2fly. Ihre eigene Arbeitsumgebung. · NeXify AI",
+     "description": "Die separate Selfservice-Suite im NeXify-Portfolio verbindet Gespräche, Aufgaben und Projektwissen.",
+     "canonical": "https://www.nexifyai.de/produkte/nex2fly",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeX2fly. Ihre eigene Arbeitsumgebung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 896,
+     "cls": 0,
+     "uebertragen_kb": 374,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=GuvqyJacoGB6tCE4",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=GuvqyJacoGB6tCE4",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/impressum?_rsc=GuvqyJacoGB6tCE4",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=GuvqyJacoGB6tCE4"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "NeX2fly. Uw eigen werkomgeving. · NeXify AI",
+     "h1": "NeX2fly. Uw eigen werkomgeving.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "NeX2fly. Your own working environment. · NeXify AI",
+     "h1": "NeX2fly. Your own working environment.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "NeX2fly. Votre propre environnement de travail. · NeXify AI",
+     "h1": "NeX2fly. Votre propre environnement de travail.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/one",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "NeX & Oracle. Agentische KI als Baustein. · NeXify AI",
+     "description": "NeX Agentic AI steht für aufgabenbezogene KI-Arbeit. AIFly ORACLE ergänzt das Konzept um Koordination.",
+     "canonical": "https://www.nexifyai.de/produkte/one",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeX & Oracle. Agentische KI als Baustein.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 536,
+     "cls": 0.0251,
+     "uebertragen_kb": 411,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=RcWA0lxD3I0-XjgM",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=E0xCRw9MVb9_KKYS",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=E0xCRw9MVb9_KKYS",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=E0xCRw9MVb9_KKYS"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "NeX & Oracle. Agentische KI als Baustein. · NeXify AI",
+     "description": "NeX Agentic AI steht für aufgabenbezogene KI-Arbeit. AIFly ORACLE ergänzt das Konzept um Koordination.",
+     "canonical": "https://www.nexifyai.de/produkte/one",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeX & Oracle. Agentische KI als Baustein.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1088,
+     "cls": 0,
+     "uebertragen_kb": 372,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=E0xCRw9MVb9_KKYS",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=E0xCRw9MVb9_KKYS",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/datenschutz?_rsc=E0xCRw9MVb9_KKYS",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=E0xCRw9MVb9_KKYS"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "NeX & Oracle. Agentische AI als bouwsteen. · NeXify AI",
+     "h1": "NeX & Oracle. Agentische AI als bouwsteen.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "NeX & Oracle. Agentic AI as a project element. · NeXify AI",
+     "h1": "NeX & Oracle. Agentic AI as a project element.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "NeX et Oracle. Une brique d’IA agentique. · NeXify AI",
+     "h1": "NeX et Oracle. Une brique d’IA agentique.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/api",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "NeXify API. Integration nach Maß. · NeXify AI",
+     "description": "Für Anwendungen, die NeXify-Funktionen gezielt einbinden sollen. Wir bestimmen den Integrationsumfang aus Ihrem Datenfluss, Ihren Zugriffsrechten und dem…",
+     "canonical": "https://www.nexifyai.de/produkte/api",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeXify API. Integration nach Maß.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 672,
+     "cls": 0,
+     "uebertragen_kb": 424,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=XTZfVs5mxCFtwtFl",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/loesungen?_rsc=XTZfVs5mxCFtwtFl",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=XTZfVs5mxCFtwtFl",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=XTZfVs5mxCFtwtFl"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "NeXify API. Integration nach Maß. · NeXify AI",
+     "description": "Für Anwendungen, die NeXify-Funktionen gezielt einbinden sollen. Wir bestimmen den Integrationsumfang aus Ihrem Datenfluss, Ihren Zugriffsrechten und dem…",
+     "canonical": "https://www.nexifyai.de/produkte/api",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeXify API. Integration nach Maß.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 560,
+     "cls": 0,
+     "uebertragen_kb": 376,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=XTZfVs5mxCFtwtFl",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=XTZfVs5mxCFtwtFl",
+      "abgebrochen/fehlgeschlagen -ai-finales-agentur-gesamtpro-one.vercel.app/preise-ablauf?_rsc=XTZfVs5mxCFtwtFl",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=XTZfVs5mxCFtwtFl"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "NeXify API. Integratie op maat. · NeXify AI",
+     "h1": "NeXify API. Integratie op maat.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "NeXify API. Integration to fit. · NeXify AI",
+     "h1": "NeXify API. Integration to fit.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "NeXify API. L’intégration adaptée. · NeXify AI",
+     "h1": "NeXify API. L’intégration adaptée.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/aifly-oracle",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "AIFly ORACLE. Einordnen, bevor gehandelt wird. · NeXify AI",
+     "description": "AIFly ORACLE koordiniert die Arbeit hinter der Factory und begleitet Sie auf dieser Website.",
+     "canonical": "https://www.nexifyai.de/produkte/aifly-oracle",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "AIFly ORACLE. Einordnen, bevor gehandelt wird.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 804,
+     "cls": 0.0251,
+     "uebertragen_kb": 405,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=GoGUiNAMhLpQeN5N",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/produkte/nex2fly?_rsc=GoGUiNAMhLpQeN5N",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=GoGUiNAMhLpQeN5N",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=GoGUiNAMhLpQeN5N"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "AIFly ORACLE. Einordnen, bevor gehandelt wird. · NeXify AI",
+     "description": "AIFly ORACLE koordiniert die Arbeit hinter der Factory und begleitet Sie auf dieser Website.",
+     "canonical": "https://www.nexifyai.de/produkte/aifly-oracle",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "AIFly ORACLE. Einordnen, bevor gehandelt wird.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 544,
+     "cls": 0,
+     "uebertragen_kb": 364,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=GoGUiNAMhLpQeN5N",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/impressum?_rsc=GoGUiNAMhLpQeN5N",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/datenschutz?_rsc=GoGUiNAMhLpQeN5N",
+      "abgebrochen/fehlgeschlagen inales-agentur-gesamtpro-one.vercel.app/vertragsgrundlagen?_rsc=GoGUiNAMhLpQeN5N"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "AIFly ORACLE. Eerst inordenen, dan handelen. · NeXify AI",
+     "h1": "AIFly ORACLE. Eerst inordenen, dan handelen.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "AIFly ORACLE. Put it in context before acting. · NeXify AI",
+     "h1": "AIFly ORACLE. Put it in context before acting.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "AIFly ORACLE. Situer avant d’agir. · NeXify AI",
+     "h1": "AIFly ORACLE. Situer avant d’agir.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/nex-agentic-aifly",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "NeX Agentic AIFly. Erledigt, was vereinbart ist. · NeXify AI",
+     "description": "NeX ist die ausführende Seite des Konzepts: Er recherchiert, bereitet vor und automatisiert Wiederkehrendes, innerhalb des Auftrags und der erteilten Freigaben.",
+     "canonical": "https://www.nexifyai.de/produkte/nex-agentic-aifly",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 632,
+     "cls": 0.0251,
+     "uebertragen_kb": 405,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ify-ai-finales-agentur-gesamtpro-one.vercel.app/leistungen?_rsc=svz93nHsIzWI1Obt",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=-sChhTFj0wnWpnvF",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=svz93nHsIzWI1Obt",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=svz93nHsIzWI1Obt"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "NeX Agentic AIFly. Erledigt, was vereinbart ist. · NeXify AI",
+     "description": "NeX ist die ausführende Seite des Konzepts: Er recherchiert, bereitet vor und automatisiert Wiederkehrendes, innerhalb des Auftrags und der erteilten Freigaben.",
+     "canonical": "https://www.nexifyai.de/produkte/nex-agentic-aifly",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeX Agentic AIFly. Erledigt, was vereinbart ist.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 612,
+     "cls": 0,
+     "uebertragen_kb": 368,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=svz93nHsIzWI1Obt",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=svz93nHsIzWI1Obt",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=svz93nHsIzWI1Obt"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "NeX Agentic AIFly. Doet wat is afgesproken. · NeXify AI",
+     "h1": "NeX Agentic AIFly. Doet wat is afgesproken.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "NeX Agentic AIFly. Gets done what was agreed. · NeXify AI",
+     "h1": "NeX Agentic AIFly. Gets done what was agreed.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "NeX Agentic AIFly. Fait ce qui est convenu. · NeXify AI",
+     "h1": "NeX Agentic AIFly. Fait ce qui est convenu.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/skills-mcp",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang. · NeXify AI",
+     "description": "Skills bündeln bewährte Arbeitsmethoden, MCP erschließt Werkzeuge und Systeme über einen kontrollierten Zugang.",
+     "canonical": "https://www.nexifyai.de/produkte/skills-mcp",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 588,
+     "cls": 0.0251,
+     "uebertragen_kb": 424,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=BTsGJzGiYit5NqVW",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=BTsGJzGiYit5NqVW",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/loesungen?_rsc=BTsGJzGiYit5NqVW",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=BTsGJzGiYit5NqVW"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang. · NeXify AI",
+     "description": "Skills bündeln bewährte Arbeitsmethoden, MCP erschließt Werkzeuge und Systeme über einen kontrollierten Zugang.",
+     "canonical": "https://www.nexifyai.de/produkte/skills-mcp",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Skills und MCP. Fähigkeiten mit kontrolliertem Zugang.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 592,
+     "cls": 0,
+     "uebertragen_kb": 376,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=reZM3nzJ1IhT5jq0",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=BTsGJzGiYit5NqVW",
+      "abgebrochen/fehlgeschlagen inales-agentur-gesamtpro-one.vercel.app/vertragsgrundlagen?_rsc=BTsGJzGiYit5NqVW"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Skills en MCP. Vaardigheden met gecontroleerde toegang. · NeXify AI",
+     "h1": "Skills en MCP. Vaardigheden met gecontroleerde toegang.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Skills and MCP. Capabilities with controlled access. · NeXify AI",
+     "h1": "Skills and MCP. Capabilities with controlled access.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Skills et MCP. Des capacités à accès contrôlé. · NeXify AI",
+     "h1": "Skills et MCP. Des capacités à accès contrôlé.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/portale",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Portale. Ein Einstieg je Zielgruppe. · NeXify AI",
+     "description": "Kundenportal, Partnerportal und Shop haben unterschiedliche Nutzer und bleiben getrennt. Hier finden Sie den passenden Einstieg.",
+     "canonical": "https://www.nexifyai.de/portale",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Portale. Ein Einstieg je Zielgruppe.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 376,
+     "cls": 0,
+     "uebertragen_kb": 405,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=vbT_CdEo8bN-RlFN",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=vbT_CdEo8bN-RlFN",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=vbT_CdEo8bN-RlFN",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/barrierefreiheit?_rsc=vbT_CdEo8bN-RlFN"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Portale. Ein Einstieg je Zielgruppe. · NeXify AI",
+     "description": "Kundenportal, Partnerportal und Shop haben unterschiedliche Nutzer und bleiben getrennt. Hier finden Sie den passenden Einstieg.",
+     "canonical": "https://www.nexifyai.de/portale",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Portale. Ein Einstieg je Zielgruppe.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 848,
+     "cls": 0,
+     "uebertragen_kb": 365,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=Uj2Z2PeuR5WEKPAI",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/loesungen?_rsc=vbT_CdEo8bN-RlFN"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Portalen. Eén ingang per doelgroep. · NeXify AI",
+     "h1": "Portalen. Eén ingang per doelgroep.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Portals. One entry point per audience. · NeXify AI",
+     "h1": "Portals. One entry point per audience.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Portails. Une entrée par public. · NeXify AI",
+     "h1": "Portails. Une entrée par public.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/impressum",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "NeXify AI FACTORY B.V. – Unternehmensangaben · NeXify AI",
+     "description": "Ein klarer Markenauftritt braucht eine eindeutige Unternehmenszuordnung. Die vollständigen Anbieterangaben zur NeXify AI FACTORY B.V.",
+     "canonical": "https://www.nexifyai.de/impressum",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeXify AI FACTORY B.V. – Unternehmensangaben",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1112,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=BlMmuXwkmNaxcuL2",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/datenschutz?_rsc=BlMmuXwkmNaxcuL2",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=k1RbkaFpF1r5nyc0",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=BlMmuXwkmNaxcuL2"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "NeXify AI FACTORY B.V. – Unternehmensangaben · NeXify AI",
+     "description": "Ein klarer Markenauftritt braucht eine eindeutige Unternehmenszuordnung. Die vollständigen Anbieterangaben zur NeXify AI FACTORY B.V.",
+     "canonical": "https://www.nexifyai.de/impressum",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "NeXify AI FACTORY B.V. – Unternehmensangaben",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 604,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=BlMmuXwkmNaxcuL2",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/cookies?_rsc=BlMmuXwkmNaxcuL2",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=BlMmuXwkmNaxcuL2"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "NeXify AI FACTORY B.V. – bedrijfsgegevens · NeXify AI",
+     "h1": "NeXify AI FACTORY B.V. – bedrijfsgegevens",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "NeXify AI FACTORY B.V. – company information · NeXify AI",
+     "h1": "NeXify AI FACTORY B.V. – company information",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "NeXify AI FACTORY B.V. – informations sur l’entreprise · NeXify AI",
+     "h1": "NeXify AI FACTORY B.V. – informations sur l’entreprise",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/datenschutz",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Ihre Daten. Ein klarer Zweck. · NeXify AI",
+     "description": "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung…",
+     "canonical": "https://www.nexifyai.de/datenschutz",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ihre Daten. Ein klarer Zweck.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 992,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=jquqn9lY6pmaYw9m",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=jquqn9lY6pmaYw9m",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=VZrEcNERvCqY1NA0",
+      "abgebrochen/fehlgeschlagen -ai-finales-agentur-gesamtpro-one.vercel.app/preise-ablauf?_rsc=VZrEcNERvCqY1NA0"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Ihre Daten. Ein klarer Zweck. · NeXify AI",
+     "description": "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung…",
+     "canonical": "https://www.nexifyai.de/datenschutz",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ihre Daten. Ein klarer Zweck.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 704,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=VZrEcNERvCqY1NA0",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=jquqn9lY6pmaYw9m",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/one?_rsc=VZrEcNERvCqY1NA0",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/leistungen/websites?_rsc=VZrEcNERvCqY1NA0"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Uw gegevens. Een helder doel. · NeXify AI",
+     "h1": "Uw gegevens. Een helder doel.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Your data. A clear purpose. · NeXify AI",
+     "h1": "Your data. A clear purpose.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Vos données. Une finalité claire. · NeXify AI",
+     "h1": "Vos données. Une finalité claire.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/vertragsgrundlagen",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI",
+     "description": "Marke, Website, KI und Betreuung gehören zu einem abgestimmten Auftrag. Den verbindlichen Umfang legt die bestätigte Vereinbarung fest.",
+     "canonical": "https://www.nexifyai.de/vertragsgrundlagen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Gute Zusammenarbeit hat klare Grundlagen.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 756,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=0k_xD_Agvi3zuVGD",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/produkte/api?_rsc=0k_xD_Agvi3zuVGD",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=0k_xD_Agvi3zuVGD",
+      "abgebrochen/fehlgeschlagen s-agentur-gesamtpro-one.vercel.app/leistungen/apps-portale?_rsc=0k_xD_Agvi3zuVGD"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI",
+     "description": "Marke, Website, KI und Betreuung gehören zu einem abgestimmten Auftrag. Den verbindlichen Umfang legt die bestätigte Vereinbarung fest.",
+     "canonical": "https://www.nexifyai.de/vertragsgrundlagen",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Gute Zusammenarbeit hat klare Grundlagen.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 588,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Goede samenwerking begint met heldere afspraken. · NeXify AI",
+     "h1": "Goede samenwerking begint met heldere afspraken.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Good work starts with clear agreements. · NeXify AI",
+     "h1": "Good work starts with clear agreements.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Une bonne collaboration repose sur des bases claires. · NeXify AI",
+     "h1": "Une bonne collaboration repose sur des bases claires.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/ki-hinweise",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "KI mit klarer Verantwortung. · NeXify AI",
+     "description": "NeXify AI FACTORY B.V. verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz.",
+     "canonical": "https://www.nexifyai.de/ki-hinweise",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "KI mit klarer Verantwortung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 664,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=oct7N5rgrhzQ0kkD",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=oct7N5rgrhzQ0kkD",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/barrierefreiheit?_rsc=oct7N5rgrhzQ0kkD"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "KI mit klarer Verantwortung. · NeXify AI",
+     "description": "NeXify AI FACTORY B.V. verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz.",
+     "canonical": "https://www.nexifyai.de/ki-hinweise",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "KI mit klarer Verantwortung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 804,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=oct7N5rgrhzQ0kkD",
+      "abgebrochen/fehlgeschlagen esamtpro-one.vercel.app/leistungen/agenten-automatisierung?_rsc=oct7N5rgrhzQ0kkD",
+      "abgebrochen/fehlgeschlagen -ai-finales-agentur-gesamtpro-one.vercel.app/preise-ablauf?_rsc=oct7N5rgrhzQ0kkD",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=oct7N5rgrhzQ0kkD"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "AI met duidelijke verantwoordelijkheid. · NeXify AI",
+     "h1": "AI met duidelijke verantwoordelijkheid.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "AI with clear responsibility. · NeXify AI",
+     "h1": "AI with clear responsibility.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Une IA aux responsabilités définies. · NeXify AI",
+     "h1": "Une IA aux responsabilités définies.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/barrierefreiheit",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Qualität soll zugänglich sein. · NeXify AI",
+     "description": "Gutes Design trägt auch bei Tastaturbedienung, größerem Text und reduzierter Bewegung.",
+     "canonical": "https://www.nexifyai.de/barrierefreiheit",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Qualität soll zugänglich sein.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 468,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=vOmdkdfa07E1uQko",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=vOmdkdfa07E1uQko",
+      "abgebrochen/fehlgeschlagen -ai-finales-agentur-gesamtpro-one.vercel.app/preise-ablauf?_rsc=3FraLkpi-Pez6VC7"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Qualität soll zugänglich sein. · NeXify AI",
+     "description": "Gutes Design trägt auch bei Tastaturbedienung, größerem Text und reduzierter Bewegung.",
+     "canonical": "https://www.nexifyai.de/barrierefreiheit",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Qualität soll zugänglich sein.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1096,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ttps://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/?_rsc=vOmdkdfa07E1uQko",
+      "abgebrochen/fehlgeschlagen inales-agentur-gesamtpro-one.vercel.app/vertragsgrundlagen?_rsc=3FraLkpi-Pez6VC7",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=3FraLkpi-Pez6VC7",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/loesungen?_rsc=3FraLkpi-Pez6VC7"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Kwaliteit moet toegankelijk zijn. · NeXify AI",
+     "h1": "Kwaliteit moet toegankelijk zijn.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "Quality should be accessible. · NeXify AI",
+     "h1": "Quality should be accessible.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "La qualité doit être accessible. · NeXify AI",
+     "h1": "La qualité doit être accessible.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/cookies",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Sie wählen, was zusätzlich aktiv wird. · NeXify AI",
+     "description": "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen.",
+     "canonical": "https://www.nexifyai.de/cookies",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Sie wählen, was zusätzlich aktiv wird.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 680,
+     "cls": 0.0176,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=39K5ufO5zBFxytut"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Sie wählen, was zusätzlich aktiv wird. · NeXify AI",
+     "description": "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen.",
+     "canonical": "https://www.nexifyai.de/cookies",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Sie wählen, was zusätzlich aktiv wird.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 728,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=39K5ufO5zBFxytut",
+      "abgebrochen/fehlgeschlagen inales-agentur-gesamtpro-one.vercel.app/vertragsgrundlagen?_rsc=39K5ufO5zBFxytut"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "U kiest wat aanvullend actief wordt. · NeXify AI",
+     "h1": "U kiest wat aanvullend actief wordt.",
+     "lang": "nl",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "en": {
+     "title": "You choose what else becomes active. · NeXify AI",
+     "h1": "You choose what else becomes active.",
+     "lang": "en",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    },
+    "fr": {
+     "title": "Vous choisissez les fonctions supplémentaires. · NeXify AI",
+     "h1": "Vous choisissez les fonctions supplémentaires.",
+     "lang": "fr",
+     "titel_wie_de": false,
+     "h1_wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "TEILEKLAR.shop – Zubehör für Auto & Motorrad",
+     "description": "Entdecken Sie unser Sortiment für Auto und Motorrad: Originalfotos, klare Produktangaben und Preise inklusive Mehrwertsteuer. Schwerpunkt Deutschland.",
+     "canonical": "https://www.nexifyai.de/teileklar",
+     "robots": "noindex, nofollow",
+     "hreflang": [
+      "de",
+      "x-default"
+     ],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Für Ihr Auto.Klar gefunden.",
+     "jsonld": 0,
+     "ueberlauf_px": 0,
+     "lcp_ms": 640,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 y-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/products?page_size=12&in_stock=true",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/status",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/categories",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "TEILEKLAR.shop – Zubehör für Auto & Motorrad",
+     "description": "Entdecken Sie unser Sortiment für Auto und Motorrad: Originalfotos, klare Produktangaben und Preise inklusive Mehrwertsteuer. Schwerpunkt Deutschland.",
+     "canonical": "https://www.nexifyai.de/teileklar",
+     "robots": "noindex, nofollow",
+     "hreflang": [
+      "de",
+      "x-default"
+     ],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Für Ihr Auto.Klar gefunden.",
+     "jsonld": 0,
+     "ueberlauf_px": 0,
+     "lcp_ms": 624,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/teileklar/warenkorb?_rsc=NvaPnHUqwXc_NfWC",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ai-finales-agentur-gesamtpro-one.vercel.app/teileklar/shop?_rsc=c5hDxOIvOUJSrPpT",
+      "503 y-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/products?page_size=12&in_stock=true"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "TEILEKLAR.shop – Zubehör für Auto & Motorrad",
+     "h1": "Für Ihr Auto.Klar gefunden.",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "TEILEKLAR.shop – Zubehör für Auto & Motorrad",
+     "h1": "Für Ihr Auto.Klar gefunden.",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "TEILEKLAR.shop – Zubehör für Auto & Motorrad",
+     "h1": "Für Ihr Auto.Klar gefunden.",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/kategorien",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Teilewelten nach Ihrem Bedarf. · TEILEKLAR.shop",
+     "description": "Von der Teileart zur passenden Anfrage: Die Kategorie gibt Struktur, das Fahrzeug liefert den entscheidenden Kontext.",
+     "canonical": "https://www.nexifyai.de/teileklar/kategorien",
+     "robots": "index, follow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Kategorien",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 812,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/categories",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen ur-gesamtpro-one.vercel.app/teileklar/fahrzeug-und-passung?_rsc=oCpOrtC6im5ECdT6",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=oCpOrtC6im5ECdT6"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Teilewelten nach Ihrem Bedarf. · TEILEKLAR.shop",
+     "description": "Von der Teileart zur passenden Anfrage: Die Kategorie gibt Struktur, das Fahrzeug liefert den entscheidenden Kontext.",
+     "canonical": "https://www.nexifyai.de/teileklar/kategorien",
+     "robots": "index, follow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Kategorien",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 920,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ai-finales-agentur-gesamtpro-one.vercel.app/teileklar/shop?_rsc=GqoWr8gdveemxM1Y",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/categories",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=oCpOrtC6im5ECdT6",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=oCpOrtC6im5ECdT6"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Teilewelten nach Ihrem Bedarf. · TEILEKLAR.shop",
+     "h1": "Kategorien",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Teilewelten nach Ihrem Bedarf. · TEILEKLAR.shop",
+     "h1": "Kategorien",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Teilewelten nach Ihrem Bedarf. · TEILEKLAR.shop",
+     "h1": "Kategorien",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/fahrzeug-und-passung",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Passung vor Kauf. · TEILEKLAR.shop",
+     "description": "Ein Fahrzeug hat mehr Merkmale als seinen Modellnamen. TEILEKLAR bringt die genaue Ausführung und das konkrete Bauteil zusammen, damit eine Zuordnung fachlich…",
+     "canonical": "https://www.nexifyai.de/teileklar/fahrzeug-und-passung",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Passung vor Kauf.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 980,
+     "cls": 0,
+     "uebertragen_kb": 424,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen es-agentur-gesamtpro-one.vercel.app/teileklar/bestellungen?_rsc=u8rKb4k1uLWDmwmw",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/cookies?_rsc=wwTsT4iDAvLZjRxb",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/barrierefreiheit?_rsc=wwTsT4iDAvLZjRxb"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Passung vor Kauf. · TEILEKLAR.shop",
+     "description": "Ein Fahrzeug hat mehr Merkmale als seinen Modellnamen. TEILEKLAR bringt die genaue Ausführung und das konkrete Bauteil zusammen, damit eine Zuordnung fachlich…",
+     "canonical": "https://www.nexifyai.de/teileklar/fahrzeug-und-passung",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Passung vor Kauf.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 600,
+     "cls": 0,
+     "uebertragen_kb": 376,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen finales-agentur-gesamtpro-one.vercel.app/teileklar/produkt?_rsc=u8rKb4k1uLWDmwmw",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/teileklar/warenkorb?_rsc=wwTsT4iDAvLZjRxb",
+      "abgebrochen/fehlgeschlagen finales-agentur-gesamtpro-one.vercel.app/teileklar/produkt?_rsc=wwTsT4iDAvLZjRxb"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Passing vóór aankoop. · TEILEKLAR.shop",
+     "h1": "Passung vor Kauf.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Compatibility before purchase. · TEILEKLAR.shop",
+     "h1": "Passung vor Kauf.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "La compatibilité avant l’achat. · TEILEKLAR.shop",
+     "h1": "Passung vor Kauf.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/termine",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Service beginnt mit guter Abstimmung. · TEILEKLAR.shop",
+     "description": "Einbau, Wartung oder eine konkrete Fahrzeugfrage: Eine präzise Serviceanfrage schafft die Grundlage für das Gespräch mit dem Betrieb.",
+     "canonical": "https://www.nexifyai.de/teileklar/termine",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Service beginnt mit guter Abstimmung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1372,
+     "cls": 0,
+     "uebertragen_kb": 427,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=E0617miEGdN7MRVN",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/unternehmen?_rsc=E0617miEGdN7MRVN",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=E0617miEGdN7MRVN"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Service beginnt mit guter Abstimmung. · TEILEKLAR.shop",
+     "description": "Einbau, Wartung oder eine konkrete Fahrzeugfrage: Eine präzise Serviceanfrage schafft die Grundlage für das Gespräch mit dem Betrieb.",
+     "canonical": "https://www.nexifyai.de/teileklar/termine",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Service beginnt mit guter Abstimmung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 424,
+     "cls": 0,
+     "uebertragen_kb": 375,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen ur-gesamtpro-one.vercel.app/teileklar/fahrzeug-und-passung?_rsc=Nx-5O_B9DVJ25NFK",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=Nx-5O_B9DVJ25NFK"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Service begint met goede afstemming. · TEILEKLAR.shop",
+     "h1": "Service beginnt mit guter Abstimmung.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Service starts with clear coordination. · TEILEKLAR.shop",
+     "h1": "Service beginnt mit guter Abstimmung.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Le service commence par une bonne préparation. · TEILEKLAR.shop",
+     "h1": "Service beginnt mit guter Abstimmung.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/gutscheine",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Ein Wert. Eindeutige Bedingungen. · TEILEKLAR.shop",
+     "description": "TEILEKLAR trennt Gutscheine, Preisnachlässe und persönliche Guthaben. Entscheidend ist das konkrete Angebot seines Ausstellers; diese Übersicht stellt keinen…",
+     "canonical": "https://www.nexifyai.de/teileklar/gutscheine",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ein Wert. Eindeutige Bedingungen.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 992,
+     "cls": 0,
+     "uebertragen_kb": 381,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/cookies?_rsc=hBAjFUnDXOquCTX7"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Ein Wert. Eindeutige Bedingungen. · TEILEKLAR.shop",
+     "description": "TEILEKLAR trennt Gutscheine, Preisnachlässe und persönliche Guthaben. Entscheidend ist das konkrete Angebot seines Ausstellers; diese Übersicht stellt keinen…",
+     "canonical": "https://www.nexifyai.de/teileklar/gutscheine",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Ein Wert. Eindeutige Bedingungen.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 908,
+     "cls": 0,
+     "uebertragen_kb": 350,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=hBAjFUnDXOquCTX7",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/teileklar/warenkorb?_rsc=hBAjFUnDXOquCTX7",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=oeszNrcN1BkrdU5L"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Een waarde. Duidelijke voorwaarden. · TEILEKLAR.shop",
+     "h1": "Ein Wert. Eindeutige Bedingungen.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "A value. Clear terms. · TEILEKLAR.shop",
+     "h1": "Ein Wert. Eindeutige Bedingungen.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Une valeur. Des conditions précises. · TEILEKLAR.shop",
+     "h1": "Ein Wert. Eindeutige Bedingungen.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/partner-werden",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Gemeinsam einen klaren Serviceweg schaffen. · TEILEKLAR.shop",
+     "description": "Für Werkstätten beginnt Zusammenarbeit mit einem passenden Leistungsprofil. Stellen Sie Ihren Betrieb vor und besprechen Sie, welchen Beitrag eine…",
+     "canonical": "https://www.nexifyai.de/teileklar/partner-werden",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Gemeinsam einen klaren Serviceweg schaffen.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 916,
+     "cls": 0,
+     "uebertragen_kb": 405,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=WOtze0cDiDN6yz-M",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/kontakt?_rsc=WOtze0cDiDN6yz-M",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen les-agentur-gesamtpro-one.vercel.app/teileklar/rechtliches?_rsc=6F9YpjcuM1y9X-P_"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Gemeinsam einen klaren Serviceweg schaffen. · TEILEKLAR.shop",
+     "description": "Für Werkstätten beginnt Zusammenarbeit mit einem passenden Leistungsprofil. Stellen Sie Ihren Betrieb vor und besprechen Sie, welchen Beitrag eine…",
+     "canonical": "https://www.nexifyai.de/teileklar/partner-werden",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Gemeinsam einen klaren Serviceweg schaffen.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 884,
+     "cls": 0,
+     "uebertragen_kb": 368,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen fy-ai-finales-agentur-gesamtpro-one.vercel.app/ki-hinweise?_rsc=6F9YpjcuM1y9X-P_",
+      "abgebrochen/fehlgeschlagen nexify-ai-finales-agentur-gesamtpro-one.vercel.app/cookies?_rsc=6F9YpjcuM1y9X-P_"
+     ],
+     "bilder": {
+      "bilder": 3,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Samen een duidelijke serviceroute bouwen. · TEILEKLAR.shop",
+     "h1": "Gemeinsam einen klaren Serviceweg schaffen.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Build a clearer service route together. · TEILEKLAR.shop",
+     "h1": "Gemeinsam einen klaren Serviceweg schaffen.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Créer ensemble un parcours de service clair. · TEILEKLAR.shop",
+     "h1": "Gemeinsam einen klaren Serviceweg schaffen.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/werkstatt",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Der richtige Kontakt für Ihr Fahrzeug. · TEILEKLAR.shop",
+     "description": "Ein erreichbarer Betrieb und eine klar beschriebene Leistung bilden die Basis jeder Werkstattanfrage.",
+     "canonical": "https://www.nexifyai.de/teileklar/werkstatt",
+     "robots": "index, follow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Werkstatt in Ihrer Nähe",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 616,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen les-agentur-gesamtpro-one.vercel.app/teileklar/rechtliches?_rsc=rLQnjjP-OkPK7yaP",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ales-agentur-gesamtpro-one.vercel.app/teileklar/kategorien?_rsc=rLQnjjP-OkPK7yaP",
+      "abgebrochen/fehlgeschlagen ur-gesamtpro-one.vercel.app/teileklar/fahrzeug-und-passung?_rsc=rLQnjjP-OkPK7yaP"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Der richtige Kontakt für Ihr Fahrzeug. · TEILEKLAR.shop",
+     "description": "Ein erreichbarer Betrieb und eine klar beschriebene Leistung bilden die Basis jeder Werkstattanfrage.",
+     "canonical": "https://www.nexifyai.de/teileklar/werkstatt",
+     "robots": "index, follow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Werkstatt in Ihrer Nähe",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 796,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen i-finales-agentur-gesamtpro-one.vercel.app/teileklar/suche?_rsc=1GLPiJcyo7p2Vbjl",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=rLQnjjP-OkPK7yaP",
+      "abgebrochen/fehlgeschlagen y-ai-finales-agentur-gesamtpro-one.vercel.app/registrieren?_rsc=1GLPiJcyo7p2Vbjl"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Der richtige Kontakt für Ihr Fahrzeug. · TEILEKLAR.shop",
+     "h1": "Werkstatt in Ihrer Nähe",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Der richtige Kontakt für Ihr Fahrzeug. · TEILEKLAR.shop",
+     "h1": "Werkstatt in Ihrer Nähe",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Der richtige Kontakt für Ihr Fahrzeug. · TEILEKLAR.shop",
+     "h1": "Werkstatt in Ihrer Nähe",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/rechtliches",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop",
+     "description": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen.",
+     "canonical": "https://www.nexifyai.de/teileklar/rechtliches",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 592,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen -finales-agentur-gesamtpro-one.vercel.app/barrierefreiheit?_rsc=kXO-xdugTeZ-lSp-"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop",
+     "description": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen.",
+     "canonical": "https://www.nexifyai.de/teileklar/rechtliches",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 496,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=mUwvsoy17C-v8nML",
+      "abgebrochen/fehlgeschlagen ai-finales-agentur-gesamtpro-one.vercel.app/teileklar/shop?_rsc=mUwvsoy17C-v8nML",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "abgebrochen/fehlgeschlagen ai-finales-agentur-gesamtpro-one.vercel.app/teileklar/shop?_rsc=kXO-xdugTeZ-lSp-"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "TEILEKLAR. Voorwaarden met een duidelijke afzender. · TEILEKLAR.shop",
+     "h1": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "TEILEKLAR. Terms with a clear provider. · TEILEKLAR.shop",
+     "h1": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "TEILEKLAR. Des conditions attribuées clairement. · TEILEKLAR.shop",
+     "h1": "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/shop",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Auto & Motorrad · TEILEKLAR.shop",
+     "description": "Echte Lieferantenartikel für Auto und Motorrad. Produktdaten, Preise inklusive Mehrwertsteuer und transparenter Datenstand.",
+     "canonical": "https://www.nexifyai.de/teileklar/shop",
+     "robots": "noindex, nofollow",
+     "hreflang": [
+      "de",
+      "x-default"
+     ],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Auto & Motorrad. Klar ausgewählt.",
+     "jsonld": 0,
+     "ueberlauf_px": 0,
+     "lcp_ms": 892,
+     "cls": 0.017,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen exify-ai-finales-agentur-gesamtpro-one.vercel.app/anmelden?_rsc=GDvA46jc9W1N2hDv",
+      "abgebrochen/fehlgeschlagen les-agentur-gesamtpro-one.vercel.app/teileklar/rechtliches?_rsc=GDvA46jc9W1N2hDv",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/categories",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/status"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Auto & Motorrad · TEILEKLAR.shop",
+     "description": "Echte Lieferantenartikel für Auto und Motorrad. Produktdaten, Preise inklusive Mehrwertsteuer und transparenter Datenstand.",
+     "canonical": "https://www.nexifyai.de/teileklar/shop",
+     "robots": "noindex, nofollow",
+     "hreflang": [
+      "de",
+      "x-default"
+     ],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Auto & Motorrad. Klar ausgewählt.",
+     "jsonld": 0,
+     "ueberlauf_px": 0,
+     "lcp_ms": 792,
+     "cls": 0,
+     "uebertragen_kb": 105,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ales-agentur-gesamtpro-one.vercel.app/teileklar/kategorien?_rsc=GDvA46jc9W1N2hDv",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/categories",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/status"
+     ],
+     "bilder": {
+      "bilder": 1,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [],
+      "higgsfield_ohne_kennzeichnung": [],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Auto & Motorrad · TEILEKLAR.shop",
+     "h1": "Auto & Motorrad. Klar ausgewählt.",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Auto & Motorrad · TEILEKLAR.shop",
+     "h1": "Auto & Motorrad. Klar ausgewählt.",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Auto & Motorrad · TEILEKLAR.shop",
+     "h1": "Auto & Motorrad. Klar ausgewählt.",
+     "lang": "de",
+     "titel_wie_de": true,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/reifenrechner",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Reifenwahl mit klarem Maß. · TEILEKLAR.shop",
+     "description": "Eine Reifenkennzeichnung verbindet Breite, Querschnitt und Felgendurchmesser. Ihr Vergleich hilft bei der Einordnung; die Zulässigkeit für Ihr Fahrzeug braucht…",
+     "canonical": "https://www.nexifyai.de/teileklar/reifenrechner",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Reifenwahl mit klarem Maß.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 620,
+     "cls": 0,
+     "uebertragen_kb": 311,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/teileklar/werkstatt?_rsc=oe4S0opE0hyBPcki",
+      "abgebrochen/fehlgeschlagen i-finales-agentur-gesamtpro-one.vercel.app/teileklar/suche?_rsc=oe4S0opE0hyBPcki",
+      "abgebrochen/fehlgeschlagen es-agentur-gesamtpro-one.vercel.app/teileklar/bestellungen?_rsc=oe4S0opE0hyBPcki"
+     ],
+     "bilder": {
+      "bilder": 2,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Reifenwahl mit klarem Maß. · TEILEKLAR.shop",
+     "description": "Eine Reifenkennzeichnung verbindet Breite, Querschnitt und Felgendurchmesser. Ihr Vergleich hilft bei der Einordnung; die Zulässigkeit für Ihr Fahrzeug braucht…",
+     "canonical": "https://www.nexifyai.de/teileklar/reifenrechner",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Reifenwahl mit klarem Maß.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 416,
+     "cls": 0,
+     "uebertragen_kb": 311,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen ales-agentur-gesamtpro-one.vercel.app/teileklar/kategorien?_rsc=oe4S0opE0hyBPcki",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen i-finales-agentur-gesamtpro-one.vercel.app/teileklar/suche?_rsc=oe4S0opE0hyBPcki",
+      "abgebrochen/fehlgeschlagen ales-agentur-gesamtpro-one.vercel.app/teileklar/kategorien?_rsc=7_7zdFP8m1GEkdi2"
+     ],
+     "bilder": {
+      "bilder": 2,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Bandenkeuze met duidelijke maten. · TEILEKLAR.shop",
+     "h1": "Reifenwahl mit klarem Maß.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Choose tyres with clear measurements. · TEILEKLAR.shop",
+     "h1": "Reifenwahl mit klarem Maß.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "Choisir ses pneus avec les bonnes dimensions. · TEILEKLAR.shop",
+     "h1": "Reifenwahl mit klarem Maß.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/batterie-berater",
+   "viewports": {
+    "desktop": {
+     "status": 200,
+     "title": "Energie passend zum Fahrzeug. · TEILEKLAR.shop",
+     "description": "Eine Starterbatterie muss zur Technik Ihres Fahrzeugs passen. Kapazität, Bauform und Energiemanagement gehören deshalb in dieselbe Auswahl, auf Grundlage…",
+     "canonical": "https://www.nexifyai.de/teileklar/batterie-berater",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Energie passend zum Fahrzeug.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 696,
+     "cls": 0,
+     "uebertragen_kb": 311,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "abgebrochen/fehlgeschlagen les-agentur-gesamtpro-one.vercel.app/teileklar/rechtliches?_rsc=D7bcWTInVWfU9g9P",
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen es-agentur-gesamtpro-one.vercel.app/teileklar/bestellungen?_rsc=D7bcWTInVWfU9g9P",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/teileklar/werkstatt?_rsc=D7bcWTInVWfU9g9P"
+     ],
+     "bilder": {
+      "bilder": 2,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    },
+    "mobil": {
+     "status": 200,
+     "title": "Energie passend zum Fahrzeug. · TEILEKLAR.shop",
+     "description": "Eine Starterbatterie muss zur Technik Ihres Fahrzeugs passen. Kapazität, Bauform und Energiemanagement gehören deshalb in dieselbe Auswahl, auf Grundlage…",
+     "canonical": "https://www.nexifyai.de/teileklar/batterie-berater",
+     "robots": "noindex, nofollow",
+     "hreflang": [],
+     "lang": "de",
+     "h1": 1,
+     "h1text": "Energie passend zum Fahrzeug.",
+     "jsonld": 1,
+     "ueberlauf_px": 0,
+     "lcp_ms": 1080,
+     "cls": 0,
+     "uebertragen_kb": 311,
+     "konsolenfehler": [],
+     "fehlgeschlagene_anfragen": [
+      "404 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/session",
+      "503 https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app/api/shop/cart",
+      "abgebrochen/fehlgeschlagen xify-ai-finales-agentur-gesamtpro-one.vercel.app/teileklar?_rsc=HMfmM4TQyecAokQv",
+      "abgebrochen/fehlgeschlagen nales-agentur-gesamtpro-one.vercel.app/teileklar/warenkorb?_rsc=HMfmM4TQyecAokQv",
+      "abgebrochen/fehlgeschlagen -agentur-gesamtpro-one.vercel.app/teileklar/partner-werden?_rsc=D7bcWTInVWfU9g9P"
+     ],
+     "bilder": {
+      "bilder": 2,
+      "nicht_geladen": [],
+      "alt_leer": [
+       "oracle-lossless.webp"
+      ],
+      "alt_fehlt": [],
+      "unscharf_bei_retina": [],
+      "ohne_srcset": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "higgsfield_ohne_kennzeichnung": [
+       "hf-17-cutout-1920.webp"
+      ],
+      "praesentatoren": [
+       "oracle-lossless.webp"
+      ]
+     }
+    }
+   },
+   "sprachen": {
+    "nl": {
+     "title": "Energie passend bij uw voertuig. · TEILEKLAR.shop",
+     "h1": "Energie passend zum Fahrzeug.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "en": {
+     "title": "Power suited to the vehicle. · TEILEKLAR.shop",
+     "h1": "Energie passend zum Fahrzeug.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    },
+    "fr": {
+     "title": "L’énergie adaptée au véhicule. · TEILEKLAR.shop",
+     "h1": "Energie passend zum Fahrzeug.",
+     "lang": "de",
+     "titel_wie_de": false,
+     "h1_wie_de": true
+    }
+   }
+  }
+ ]
+}
