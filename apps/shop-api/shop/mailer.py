@@ -7,9 +7,8 @@ from pathlib import Path
 
 import httpx
 from dotenv import dotenv_values
-from pymongo.errors import DuplicateKeyError
-
-from .db import db, now_iso
+from . import store
+from .db import now_iso
 
 ROOT_ENV = Path(__file__).resolve().parents[3] / ".env"
 MAX_ATTEMPTS = 5
@@ -37,34 +36,29 @@ async def enqueue(event_key, to, subject, html, text, reply_to=""):
     if not to:
         return None
     try:
-        await db.outbox.insert_one({"_id": event_key, "to": to, "subject": subject, "html": html, "text": text, "reply_to": reply_to,
-                                    "status": "wartend", "attempts": 0, "created_at": now_iso()})
-    except DuplicateKeyError:
-        return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
+        await store.outbox.add(event_key, to, subject, html, text, reply_to, now_iso())
+    except store.AlreadyExists:
+        return await store.outbox.summary(event_key)
     return await deliver(event_key)
 
 
 async def deliver(event_key):
     claim_id = secrets.token_hex(16)
-    claim = await db.outbox.find_one_and_update({"_id": event_key, "$or": [{"status": {"$in": ["wartend", "zurückgestellt"]}}, {"status": "fehlgeschlagen", "retry_safe": True}], "attempts": {"$lt": MAX_ATTEMPTS}},
-                                                {"$set": {"status": "wird_vorbereitet", "claimed_at": now_iso(), "claim_id": claim_id}})
+    claim = await store.outbox.claim(event_key, claim_id, now_iso(), MAX_ATTEMPTS)
     if not claim:
-        return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
+        return await store.outbox.summary(event_key)
     key, origin, cap = setting("RESEND_API_KEY"), sender(), setting("MAIL_DAILY_CAP")
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not key or not origin:
         return await _finish(event_key, claim_id, "fehlgeschlagen", "not_configured", count=True)
-    if cap.isdigit() and await db.outbox.count_documents({"status": "gesendet", "sent_at": {"$gte": today}}) >= int(cap):
+    if cap.isdigit() and await store.outbox.count_sent_since(today) >= int(cap):
         return await _finish(event_key, claim_id, "zurückgestellt", "daily_cap_reached", count=False)
     payload = {"from": origin, "to": [claim["to"]], "subject": claim["subject"], "html": claim["html"], "text": claim["text"]}
     if claim.get("reply_to"):
         payload["reply_to"] = claim["reply_to"]
     # A stale preparation can be reclaimed. Only its current owner may start I/O.
-    started = await db.outbox.find_one_and_update(
-        {"_id": event_key, "status": "wird_vorbereitet", "claim_id": claim_id},
-        {"$set": {"status": "wird_gesendet", "claimed_at": now_iso()}})
-    if not started:
-        return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
+    if not await store.outbox.start_sending(event_key, claim_id, now_iso()):
+        return await store.outbox.summary(event_key)
     try:
         async with httpx.AsyncClient(timeout=20, transport=transport) as client:
             response = await client.post("https://api.resend.com/emails", json=payload,
@@ -72,33 +66,26 @@ async def deliver(event_key):
     except httpx.HTTPError:
         return await _finish(event_key, claim_id, "abgleich_erforderlich", "transport_outcome_unknown", count=True)
     if response.status_code in (200, 201):
-        await db.outbox.update_one({"_id": event_key, "status": "wird_gesendet", "claim_id": claim_id}, {"$set": {"status": "gesendet", "sent_at": now_iso(), "provider_id": response.json().get("id")}, "$inc": {"attempts": 1}})
-        return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
+        await store.outbox.mark_sent(event_key, claim_id, now_iso(), response.json().get("id"))
+        return await store.outbox.summary(event_key)
     # No provider rejection contract is established here; do not guess it is retry-safe.
     return await _finish(event_key, claim_id, "abgleich_erforderlich", "provider_http_%d" % response.status_code, count=True)
 
 
 async def _finish(event_key, claim_id, status, error, count):
-    update = {"$set": {"status": status, "last_error": error, "updated_at": now_iso(), "retry_safe": status == "fehlgeschlagen"}}
-    if count:
-        update["$inc"] = {"attempts": 1}
-    await db.outbox.update_one({"_id": event_key, "claim_id": claim_id, "status": {"$in": ["wird_vorbereitet", "wird_gesendet"]}}, update)
-    return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
+    await store.outbox.finish(event_key, claim_id, status, error, now_iso(), count_attempt=count, retry_safe=status == "fehlgeschlagen")
+    return await store.outbox.summary(event_key)
 
 
 async def retry_pending():
     cutoff = (datetime.now(timezone.utc) - timedelta(seconds=CLAIM_LEASE_SECONDS)).isoformat()
     # now_iso() writes UTC strings. Other representations cannot be ordered safely.
-    utc_iso = r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?\+00:00$"
-    await db.outbox.update_many({"status": {"$in": ["wird_vorbereitet", "wird_gesendet"]}, "claimed_at": {"$not": {"$regex": utc_iso}}},
-                                {"$set": {"status": "abgleich_erforderlich", "last_error": "claim_time_unverifiable"}})
+    await store.outbox.quarantine_unverifiable_claims()
     # Preparation has not reached the provider; a conditional transition fences the old worker.
-    await db.outbox.update_many({"status": "wird_vorbereitet", "claimed_at": {"$lt": cutoff}},
-                                {"$set": {"status": "wartend", "last_error": "preparation_lease_expired"}})
+    await store.outbox.release_stale_preparations(cutoff)
     # Sending may already have succeeded, including legacy claims with no timestamp.
-    await db.outbox.update_many({"status": "wird_gesendet", "$or": [{"claimed_at": {"$lt": cutoff}}, {"claimed_at": {"$exists": False}}]},
-                                {"$set": {"status": "abgleich_erforderlich", "last_error": "delivery_outcome_unknown"}})
-    keys = [d["_id"] async for d in db.outbox.find({"$or": [{"status": {"$in": ["zurückgestellt", "wartend"]}}, {"status": "fehlgeschlagen", "retry_safe": True}], "attempts": {"$lt": MAX_ATTEMPTS}}, {"_id": 1}).limit(50)]
+    await store.outbox.quarantine_stale_sendings(cutoff)
+    keys = await store.outbox.deliverable_keys(MAX_ATTEMPTS, 50)
     for key in keys:
         await deliver(key)
     return len(keys)
@@ -126,7 +113,7 @@ async def retry_loop():
 
 async def delivery_status(event_key):
     """Read Resend's last event; acceptance is not delivery. Internal/admin use only."""
-    doc = await db.outbox.find_one({"_id": event_key})
+    doc = await store.outbox.get(event_key)
     if not doc:
         return None
     provider_id = doc.get("provider_id")
@@ -138,7 +125,7 @@ async def delivery_status(event_key):
             if response.is_success:
                 event = response.json().get("last_event")
                 if event in {"sent", "delivered", "delivery_delayed", "bounced", "complained", "opened", "clicked", "failed"}:
-                    await db.outbox.update_one({"_id": event_key}, {"$set": {"provider_event": event, "checked_at": now_iso()}})
+                    await store.outbox.record_provider_event(event_key, event, now_iso())
                     doc["provider_event"] = event
         except (httpx.HTTPError, ValueError):
             pass

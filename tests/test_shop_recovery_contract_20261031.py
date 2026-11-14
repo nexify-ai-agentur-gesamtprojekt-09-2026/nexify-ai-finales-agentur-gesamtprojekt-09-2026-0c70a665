@@ -20,6 +20,21 @@ def load_function(path, name, namespace):
     return namespace[name]
 
 
+def load_store(path, name, database, **names):
+    """The real data-access class (shop/store), executed from its source over the given stand-in collections.
+
+    The functions under test reach storage only through it, so every statement below still
+    covers the query the service really sends. No package import, no driver.
+    """
+    class Unused(Exception):
+        pass
+    tree = ast.parse((ROOT / path).read_text(encoding="utf-8"))
+    body = [n for n in tree.body if isinstance(n, (ast.Assign, ast.FunctionDef)) or (isinstance(n, ast.ClassDef) and n.name == name)]
+    namespace = {"DuplicateKeyError": Unused, "AlreadyExists": Unused, **names}
+    exec(compile(ast.fix_missing_locations(ast.Module(body=body, type_ignores=[])), str(path), "exec"), namespace)
+    return namespace[name](database)
+
+
 class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
     async def test_missing_price_approval_is_unreleased(self):
         class Catalog:
@@ -298,7 +313,8 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
                 if outcome == "unknown":
                     raise HTTPError("simulated lost response")
                 return types.SimpleNamespace(status_code=outcome, json=lambda: {"id": "fake-id"})
-        namespace = {"db": types.SimpleNamespace(outbox=outbox), "datetime": datetime.datetime,
+        store = types.SimpleNamespace(outbox=load_store("apps/shop-api/shop/store/outbox.py", "MongoOutboxStore", types.SimpleNamespace(outbox=outbox)))
+        namespace = {"store": store, "datetime": datetime.datetime,
                      "timedelta": datetime.timedelta, "timezone": datetime.timezone, "secrets": secrets,
                      "CLAIM_LEASE_SECONDS": 300, "MAX_ATTEMPTS": 5, "transport": None,
                      "httpx": types.SimpleNamespace(AsyncClient=Client, HTTPError=HTTPError),

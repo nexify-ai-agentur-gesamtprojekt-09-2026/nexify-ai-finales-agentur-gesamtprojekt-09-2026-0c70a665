@@ -50,15 +50,18 @@ def matches(doc, query):
             for operator, operand in expected.items():
                 if operator == '$options': continue
                 if operator == '$in' and value not in operand: return False
+                if operator == '$nin' and value in operand: return False
+                if operator == '$ne' and value == operand: return False
+                if operator == '$not' and matches(doc, {key: operand}): return False
                 if operator == '$exists' and present is not operand: return False
                 if operator in ('$gt', '$gte'):
                     try:
                         if value is None or isinstance(value, bool) or not (value > operand or (operator == '$gte' and value == operand)): return False
                     except TypeError:
                         return False
-                if operator == '$lte':
+                if operator in ('$lt', '$lte'):
                     try:
-                        if value is None or isinstance(value, bool) or not value <= operand: return False
+                        if value is None or isinstance(value, bool) or not (value < operand or (operator == '$lte' and value == operand)): return False
                     except TypeError:
                         return False
                 if operator == '$regex' and not (isinstance(value, str) and re.search(operand, value, re.I if 'i' in expected.get('$options', '') else 0)): return False
@@ -87,6 +90,15 @@ class Cursor:
         except StopIteration: raise StopAsyncIteration from None
 
 
+def apply(target, update):
+    target.update(copy.deepcopy(update.get('$set', {})))
+    for key in update.get('$unset', {}): target.pop(key, None)
+    for key, amount in update.get('$inc', {}).items(): target[key] = target.get(key, 0) + amount
+    for key, entry in update.get('$push', {}).items(): target.setdefault(key, []).append(copy.deepcopy(entry))
+    for key, condition in update.get('$pull', {}).items():
+        if key in target: target[key] = [entry for entry in target[key] if not matches(entry, condition)]
+
+
 class Collection:
     def __init__(self, unique=()): self.docs, self.unique = [], list(unique)
     def _project(self, doc, fields):
@@ -106,8 +118,11 @@ class Collection:
     async def find_one_and_update(self, query, update):
         target = next((d for d in self.docs if matches(d, query)), None)
         if target is None: return None
-        before = copy.deepcopy(target); target.update(copy.deepcopy(update.get('$set', {})))
+        before = copy.deepcopy(target); apply(target, update)
         return before
+    async def update_many(self, query, update):
+        for target in self.docs:
+            if matches(target, query): apply(target, update)
     def find(self, query, fields=None, session=None):
         return Cursor([self._project(d, fields) for d in self.docs if matches(d, query)])
     async def find_one(self, query, fields=None, sort=None, session=None):
@@ -137,9 +152,7 @@ class Collection:
             target = {k: v for k, v in query.items() if not isinstance(v, dict)}
         if target is None:
             return SimpleNamespace(matched_count=0, upserted_id=None)
-        target.update(copy.deepcopy(update.get('$set', {})))
-        for key, amount in update.get('$inc', {}).items(): target[key] = target.get(key, 0) + amount
-        for key, entry in update.get('$push', {}).items(): target.setdefault(key, []).append(copy.deepcopy(entry))
+        apply(target, update)
         if created:
             self._insert(target)
         return SimpleNamespace(matched_count=0 if created else 1, upserted_id=target['_id'] if created else None)
@@ -163,7 +176,8 @@ class Database:
         self.collections = {'products': Collection(), 'categories': Collection(), 'imports': Collection(),
                             'settings': Collection(), 'carts': Collection(unique=['owner']), 'users': Collection(),
                             'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection(),
-                            'workshops': Collection(), 'workshop_requests': Collection(), 'requests': Collection()}
+                            'workshops': Collection(), 'workshop_requests': Collection(), 'requests': Collection(),
+                            'outbox': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -589,6 +603,161 @@ class RequestContract:
         self.assertEqual((await self.store.requests.get(contact('a')['_id']))['notify_status'], 'wartend')
 
 
+def mail(key, status='wartend', **fields):
+    return {'_id': key, 'to': 'a@example.invalid', 'subject': 'S', 'html': '<p>H</p>', 'text': 'T', 'reply_to': '', 'status': status,
+            'attempts': 0, 'created_at': '2026-11-14T12:00:00+00:00', **fields}
+
+
+T0, T1, T2 = '2026-11-14T12:00:00+00:00', '2026-11-14T12:05:00+00:00', '2026-11-14T12:10:00+00:00'
+
+
+class OutboxContract:
+    async def state(self, key):
+        entry = await self.store.outbox.get(key)
+        return entry['status'], entry['attempts']
+
+    async def test_entry_is_queued_once_per_key_and_the_summary_carries_no_content(self):
+        await self.store.outbox.add('k1', 'a@example.invalid', 'S', '<p>H</p>', 'T', 'r@example.invalid', T0)
+        self.assertEqual(await self.store.outbox.get('k1'), {'_id': 'k1', 'to': 'a@example.invalid', 'subject': 'S', 'html': '<p>H</p>', 'text': 'T',
+                                                             'reply_to': 'r@example.invalid', 'status': 'wartend', 'attempts': 0, 'created_at': T0})
+        summary = await self.store.outbox.summary('k1')
+        self.assertEqual(set(summary), {'_id', 'to', 'subject', 'reply_to', 'status', 'attempts', 'created_at'})
+        with self.assertRaises(self.store.AlreadyExists):
+            await self.store.outbox.add('k1', 'other@example.invalid', 'S2', 'H2', 'T2', '', T1)
+        self.assertEqual((await self.store.outbox.get('k1'))['to'], 'a@example.invalid', 'the first entry is kept unchanged')
+        self.assertIsNone(await self.store.outbox.summary('missing'))
+        self.assertIsNone(await self.store.outbox.get('missing'))
+
+    async def test_only_deliverable_entries_are_claimed_and_only_once(self):
+        await self.seed('outbox', [mail('waiting'), mail('deferred', 'zurückgestellt'), mail('retry', 'fehlgeschlagen', retry_safe=True),
+                                   mail('failed', 'fehlgeschlagen'), mail('unsafe', 'fehlgeschlagen', retry_safe=False),
+                                   mail('sent', 'gesendet'), mail('unclear', 'abgleich_erforderlich'), mail('preparing', 'wird_vorbereitet'),
+                                   mail('sending', 'wird_gesendet'), mail('spent', attempts=5), mail('last', attempts=4)])
+        for key in ('waiting', 'deferred', 'retry', 'last'):
+            claimed = await self.store.outbox.claim(key, 'c-' + key, T1, 5)
+            self.assertEqual((claimed['_id'], claimed['to'], claimed['html'], claimed['text']), (key, 'a@example.invalid', '<p>H</p>', 'T'))
+            entry = await self.store.outbox.get(key)
+            self.assertEqual((entry['status'], entry['claim_id'], entry['claimed_at']), ('wird_vorbereitet', 'c-' + key, T1))
+            self.assertIsNone(await self.store.outbox.claim(key, 'second', T2, 5), 'a claimed entry cannot be claimed again')
+            self.assertEqual((await self.store.outbox.get(key))['claim_id'], 'c-' + key)
+        for key in ('failed', 'unsafe', 'sent', 'unclear', 'preparing', 'sending', 'spent', 'missing'):
+            self.assertIsNone(await self.store.outbox.claim(key, 'c', T1, 5), key)
+        self.assertEqual(await self.state('spent'), ('wartend', 5))
+        self.assertEqual(await self.state('sent'), ('gesendet', 0))
+        self.assertIsNone(await self.store.outbox.get('missing'), 'claiming creates nothing')
+
+    async def test_only_the_owner_moves_an_entry_through_sending_to_sent(self):
+        await self.seed('outbox', [mail('k1'), mail('k2')])
+        await self.store.outbox.claim('k1', 'mine', T0, 5)
+        self.assertIs(await self.store.outbox.start_sending('k1', 'other', T1), False)
+        self.assertIs(await self.store.outbox.start_sending('k2', 'mine', T1), False, 'an unclaimed entry cannot be sent')
+        self.assertEqual(await self.state('k1'), ('wird_vorbereitet', 0))
+        await self.store.outbox.mark_sent('k1', 'mine', T1, 'p-0')
+        self.assertEqual(await self.state('k1'), ('wird_vorbereitet', 0), 'sent is reached only from sending')
+        self.assertIs(await self.store.outbox.start_sending('k1', 'mine', T1), True)
+        self.assertIs(await self.store.outbox.start_sending('k1', 'mine', T2), False, 'sending starts once')
+        entry = await self.store.outbox.get('k1')
+        self.assertEqual((entry['status'], entry['claimed_at']), ('wird_gesendet', T1))
+        await self.store.outbox.mark_sent('k1', 'other', T2, 'p-x')
+        self.assertEqual(await self.state('k1'), ('wird_gesendet', 0))
+        await self.store.outbox.mark_sent('k1', 'mine', T2, 'p-1')
+        entry = await self.store.outbox.get('k1')
+        self.assertEqual((entry['status'], entry['attempts'], entry['sent_at'], entry['provider_id']), ('gesendet', 1, T2, 'p-1'))
+        await self.store.outbox.mark_sent('k1', 'mine', T2, 'p-2')
+        await self.store.outbox.finish('k1', 'mine', 'fehlgeschlagen', 'late', T2, count_attempt=True, retry_safe=True)
+        entry = await self.store.outbox.get('k1')
+        self.assertEqual((entry['status'], entry['attempts'], entry['provider_id']), ('gesendet', 1, 'p-1'), 'a sent entry is final')
+        self.assertEqual(await self.state('k2'), ('wartend', 0))
+
+    async def test_an_attempt_is_finished_only_by_its_owner_while_it_runs(self):
+        await self.seed('outbox', [mail('k1'), mail('k2'), mail('k3')])
+        for key in ('k1', 'k2', 'k3'):
+            await self.store.outbox.claim(key, 'mine', T0, 5)
+        await self.store.outbox.finish('k1', 'other', 'fehlgeschlagen', 'x', T1, count_attempt=True, retry_safe=True)
+        self.assertEqual(await self.state('k1'), ('wird_vorbereitet', 0))
+        await self.store.outbox.finish('k1', 'mine', 'zurückgestellt', 'daily_cap_reached', T1, count_attempt=False, retry_safe=False)
+        entry = await self.store.outbox.get('k1')
+        self.assertEqual((entry['status'], entry['attempts'], entry['last_error'], entry['updated_at'], entry['retry_safe']),
+                         ('zurückgestellt', 0, 'daily_cap_reached', T1, False))
+        await self.store.outbox.finish('k1', 'mine', 'fehlgeschlagen', 'again', T2, count_attempt=True, retry_safe=True)
+        self.assertEqual(await self.state('k1'), ('zurückgestellt', 0), 'a finished attempt is not finished twice')
+        await self.store.outbox.finish('k2', 'mine', 'fehlgeschlagen', 'not_configured', T1, count_attempt=True, retry_safe=True)
+        entry = await self.store.outbox.get('k2')
+        self.assertEqual((entry['status'], entry['attempts'], entry['retry_safe']), ('fehlgeschlagen', 1, True))
+        self.assertIsNotNone(await self.store.outbox.claim('k2', 'next', T2, 5), 'a retry-safe failure is deliverable again')
+        await self.store.outbox.start_sending('k3', 'mine', T1)
+        await self.store.outbox.finish('k3', 'mine', 'abgleich_erforderlich', 'transport_outcome_unknown', T2, count_attempt=True, retry_safe=False)
+        self.assertEqual(await self.state('k3'), ('abgleich_erforderlich', 1))
+        self.assertIsNone(await self.store.outbox.claim('k3', 'next', T2, 5), 'an unclear outcome is never sent again')
+
+    async def test_daily_count_covers_sent_entries_from_the_boundary_inclusive(self):
+        await self.seed('outbox', [mail('a', 'gesendet', sent_at='2026-11-13T23:59:59+00:00'), mail('b', 'gesendet', sent_at='2026-11-14'),
+                                   mail('c', 'gesendet', sent_at='2026-11-14T08:00:00+00:00'), mail('d', 'wird_gesendet', sent_at='2026-11-14T09:00:00+00:00'),
+                                   mail('e', 'gesendet'), mail('f')])
+        self.assertEqual(await self.store.outbox.count_sent_since('2026-11-14'), 2)
+        self.assertEqual(await self.store.outbox.count_sent_since('2026-11-13'), 3)
+        self.assertEqual(await self.store.outbox.count_sent_since('2026-11-15'), 0)
+
+    async def test_running_entries_with_an_unverifiable_claim_time_need_reconciliation(self):
+        odd = {'naive': '2026-11-14T12:00:00', 'offset': '2026-11-14T12:00:00+01:00', 'date': datetime(2026, 11, 14), 'zulu': '2026-11-14T12:00:00Z', 'prefixed': 'x' + T0}
+        rows = [mail(status + '-' + name, status, claimed_at=value) for status in ('wird_vorbereitet', 'wird_gesendet') for name, value in odd.items()]
+        rows += [mail('p-none', 'wird_vorbereitet'), mail('s-none', 'wird_gesendet'), mail('p-ok', 'wird_vorbereitet', claimed_at=T0),
+                 mail('s-ok', 'wird_gesendet', claimed_at='2026-11-14T12:00:00.123456+00:00'), mail('idle'), mail('done', 'gesendet')]
+        await self.seed('outbox', rows)
+        await self.store.outbox.quarantine_unverifiable_claims()
+        for row in rows:
+            status, _ = await self.state(row['_id'])
+            if row['_id'] in ('p-ok', 's-ok', 'idle', 'done'):
+                self.assertEqual(status, row['status'], row['_id'])
+            else:
+                self.assertEqual(status, 'abgleich_erforderlich', row['_id'])
+                self.assertEqual((await self.store.outbox.get(row['_id']))['last_error'], 'claim_time_unverifiable')
+
+    async def test_stale_preparation_is_released_and_its_old_owner_fenced(self):
+        await self.seed('outbox', [mail('old', 'wird_vorbereitet', claimed_at=T0, claim_id='first'), mail('edge', 'wird_vorbereitet', claimed_at=T1, claim_id='first'),
+                                   mail('fresh', 'wird_vorbereitet', claimed_at=T2, claim_id='first'), mail('sending', 'wird_gesendet', claimed_at=T0, claim_id='first')])
+        await self.store.outbox.release_stale_preparations(T1)
+        entry = await self.store.outbox.get('old')
+        self.assertEqual((entry['status'], entry['last_error'], entry['attempts']), ('wartend', 'preparation_lease_expired', 0))
+        self.assertEqual([(await self.state(key))[0] for key in ('edge', 'fresh', 'sending')], ['wird_vorbereitet', 'wird_vorbereitet', 'wird_gesendet'],
+                         'the lease ends strictly before the cutoff and covers preparation only')
+        self.assertIs(await self.store.outbox.start_sending('old', 'first', T2), False, 'the displaced owner cannot start sending')
+        self.assertIsNotNone(await self.store.outbox.claim('old', 'second', T2, 5))
+        self.assertIs(await self.store.outbox.start_sending('old', 'first', T2), False, 'not even after the entry was claimed again')
+        self.assertIs(await self.store.outbox.start_sending('old', 'second', T2), True)
+
+    async def test_stale_or_undated_sending_needs_reconciliation_and_is_not_sent_again(self):
+        await self.seed('outbox', [mail('old', 'wird_gesendet', claimed_at=T0, claim_id='first'), mail('undated', 'wird_gesendet', claim_id='first'),
+                                   mail('edge', 'wird_gesendet', claimed_at=T1), mail('fresh', 'wird_gesendet', claimed_at=T2),
+                                   mail('preparing', 'wird_vorbereitet', claimed_at=T0)])
+        await self.store.outbox.quarantine_stale_sendings(T1)
+        for key in ('old', 'undated'):
+            entry = await self.store.outbox.get(key)
+            self.assertEqual((entry['status'], entry['last_error'], entry['attempts']), ('abgleich_erforderlich', 'delivery_outcome_unknown', 0), key)
+            self.assertIsNone(await self.store.outbox.claim(key, 'second', T2, 5))
+        self.assertEqual([(await self.state(key))[0] for key in ('edge', 'fresh', 'preparing')], ['wird_gesendet', 'wird_gesendet', 'wird_vorbereitet'])
+        await self.store.outbox.mark_sent('old', 'first', T2, 'late')
+        self.assertEqual(await self.state('old'), ('abgleich_erforderlich', 0), 'a late success of the displaced owner is not recorded as sent')
+
+    async def test_deliverable_keys_are_listed_in_order_up_to_the_limit(self):
+        await self.seed('outbox', [mail('a'), mail('b', 'gesendet'), mail('c', 'zurückgestellt'), mail('d', 'fehlgeschlagen'),
+                                   mail('e', 'fehlgeschlagen', retry_safe=True), mail('f', attempts=5), mail('g', 'abgleich_erforderlich'),
+                                   mail('h', 'wird_vorbereitet'), mail('i', attempts=4)])
+        self.assertEqual(await self.store.outbox.deliverable_keys(5, 50), ['a', 'c', 'e', 'i'])
+        self.assertEqual(await self.store.outbox.deliverable_keys(5, 2), ['a', 'c'])
+        self.assertEqual(await self.store.outbox.deliverable_keys(4, 50), ['a', 'c', 'e'])
+        self.assertEqual(await self.store.outbox.deliverable_keys(5, 50), await self.store.outbox.deliverable_keys(5, 50), 'listing claims nothing')
+
+    async def test_provider_event_is_recorded_on_one_entry(self):
+        await self.seed('outbox', [mail('a', 'gesendet', provider_id='p-1'), mail('b', 'gesendet', provider_id='p-2')])
+        await self.store.outbox.record_provider_event('a', 'delivered', T1)
+        await self.store.outbox.record_provider_event('missing', 'bounced', T1)
+        a, b = await self.store.outbox.get('a'), await self.store.outbox.get('b')
+        self.assertEqual((a['provider_event'], a['checked_at'], a['status']), ('delivered', T1, 'gesendet'))
+        self.assertNotIn('provider_event', b)
+        self.assertIsNone(await self.store.outbox.get('missing'))
+
+
 class MongoSpecifics:
     """Limits that exist only because a MongoDB cart is one document; not part of the shared contract."""
     def test_cart_at_the_document_limit_is_too_large_and_unencodable_data_is_invalid(self):
@@ -611,11 +780,13 @@ class InMemoryCarts(CartContract, MongoSpecifics, InMemoryBinding): pass
 class InMemoryAccounts(AccountContract, InMemoryBinding): pass
 class InMemoryWorkshops(WorkshopContract, InMemoryBinding): pass
 class InMemoryRequests(RequestContract, InMemoryBinding): pass
+class InMemoryOutbox(OutboxContract, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
 class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
 class DisposableMongoAccounts(AccountContract, DisposableMongoBinding): pass
 class DisposableMongoWorkshops(WorkshopContract, DisposableMongoBinding): pass
 class DisposableMongoRequests(RequestContract, DisposableMongoBinding): pass
+class DisposableMongoOutbox(OutboxContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()
