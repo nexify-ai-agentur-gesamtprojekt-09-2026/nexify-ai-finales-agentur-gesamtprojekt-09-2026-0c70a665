@@ -5,11 +5,11 @@ import type {PublicPage} from "../lib/page-types";
 import {SiteLink} from "./Router";
 import "./PublicOrientationChat.css";
 import {staticOrientation,type StaticGuidance} from "../lib/static-orientation";
+import {LOGO_FIGUR,OracleName} from './Logo';
 import {saveOracleBrief} from "../lib/project-brief-transfer";
 import {streamChat} from "../lib/chat-client";
 import {loadChat,saveChat,settleTurn,stopAllowed,type ChatPhase,type ChatTurn} from "../lib/chat-session";
 import type {BriefingDTO,ChatMessageDTO} from "../lib/chat-contract";
-import artwork from "../../../config/presenter-artwork.json";
 declare const __NEXIFY_STATIC_ORIENTATION__:boolean;
 
 const copy={
@@ -275,8 +275,7 @@ function OrientationStarters({locale,site,label,onChoose,chosen}:{locale:Locale;
 
 // Leerzustand: Oracle empfängt als Gastgeber; darunter die Marke des Assistenten.
 function OrientationIntro({title,intro}:{title:string;intro:string}){
- const figure=artwork.images.aifly;
- return <div className="orientation-intro"><div className="orientation-host"><span className="orientation-host-figure" aria-hidden="true"><img src={figure.src} alt="" width={figure.width} height={figure.height} decoding="async"/></span><p className="orientation-host-name"><strong>Oracle</strong><span>AIFly by NeXify</span></p></div><h3>{title}</h3><p className="orientation-intro-body">{intro}</p></div>;
+ return <div className="orientation-intro"><div className="orientation-host"><span className="orientation-host-figure" aria-hidden="true"><img src={LOGO_FIGUR} alt="" width={512} height={512} decoding="async"/></span><OracleName className="orientation-host-name"/></div><h3>{title}</h3><p className="orientation-intro-body">{intro}</p></div>;
 }
 
 function OrientationJourney({locale,site,step=0,quiet=false}:{locale:Locale;site:"nexify"|"teileklar";step?:number;quiet?:boolean}){
@@ -397,6 +396,12 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
  const update=useCallback((next:Turn[])=>{turnsRef.current=next;setTurns(next);},[]);
  const setDraft=useCallback((next:string)=>{draftRef.current=next;setDraftState(next);},[]);
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;run.current++;controller.current?.abort();};},[]);
+ // Hoehe der Fusszone (Eingabe + Hinweis) als --ca-fuss an der Wurzel: der Verlauf laeuft unter der Eingabe hindurch
+ // und haelt unten genau diesen Abstand.
+ useEffect(()=>{const node=scroller.current?.parentElement;if(!node||typeof ResizeObserver==='undefined')return;
+  const parts=()=>[...node.children].filter(c=>c!==scroller.current&&(c as HTMLElement).offsetHeight>1) as HTMLElement[];
+  const measure=()=>{const h=parts().reduce((sum,c)=>sum+c.offsetHeight+parseFloat(getComputedStyle(c).marginTop||'0'),0);node.style.setProperty('--ca-fuss',Math.round(h)+'px');};
+  const observer=new ResizeObserver(measure);parts().forEach(c=>observer.observe(c));measure();return()=>observer.disconnect();},[phase]);
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
  // Während die Antwort wächst, bleibt das Ende im Blick – außer der Besucher hat nach oben geblättert.
  // Dem Gespräch folgen, aber nie über den Anfang der letzten eigenen Nachricht hinaus: sie bleibt ganz sichtbar.

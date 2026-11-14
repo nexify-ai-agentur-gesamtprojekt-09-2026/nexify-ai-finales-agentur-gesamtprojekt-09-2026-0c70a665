@@ -184,8 +184,8 @@
 /* ===== Verbindliche Fassung ===== */
 /* Helle Fassung: die Grundfarben des dunklen Ateliers werden an der Wurzel auf den hellen Satz (color.hell) umgelegt.
    Abgeleitete Schatten und Verlaeufe der aelteren Dateien folgen damit von selbst; der dunkle Satz bleibt in den Tokens erhalten. */
-html[data-theme='light']:has(#atelier){--color-atelier-canvas:var(--color-hell-grund);--color-atelier-surface:var(--color-hell-ebene);--color-atelier-raised:var(--color-hell-flaeche);--color-atelier-ink:var(--color-hell-schrift);--color-atelier-muted:var(--color-hell-schrift-neben);--color-atelier-platinum:var(--color-hell-schrift-neben);--color-atelier-champagne:var(--color-hell-schrift-neben);--color-atelier-glass:color-mix(in srgb,var(--color-hell-licht) 60%,transparent);--color-atelier-glass-edge:transparent;--color-text-primaer:var(--color-hell-schrift);--color-text-sekundaer:var(--color-hell-schrift-neben);--color-text-tertiaer:var(--color-hell-schrift-leise);--color-text-gedaempft:var(--color-hell-schrift-leise);--color-graphit-900:var(--color-hell-grund);--color-graphit-850:var(--color-hell-grund);--color-graphit-800:var(--color-hell-grund);--color-graphit-700:var(--color-hell-ebene);--color-graphit-650:var(--color-hell-flaeche);--color-graphit-600:var(--color-hell-flaeche);color-scheme:light;scrollbar-color:color-mix(in srgb,var(--color-hell-schatten) 26%,transparent) transparent}
-html:has(#atelier){color-scheme:dark;scrollbar-color:color-mix(in srgb,var(--color-dunkel-licht) 22%,transparent) transparent}
+html[data-theme='light']:has(#atelier){--color-atelier-canvas:var(--color-hell-grund);--color-atelier-surface:var(--color-hell-ebene);--color-atelier-raised:var(--color-hell-flaeche);--color-atelier-ink:var(--color-hell-schrift);--color-atelier-muted:var(--color-hell-schrift-neben);--color-atelier-platinum:var(--color-hell-schrift-neben);--color-atelier-champagne:var(--color-hell-schrift-neben);--color-atelier-glass:color-mix(in srgb,var(--color-hell-licht) 60%,transparent);--color-atelier-glass-edge:transparent;--color-text-primaer:var(--color-hell-schrift);--color-text-sekundaer:var(--color-hell-schrift-neben);--color-text-tertiaer:var(--color-hell-schrift-leise);--color-text-gedaempft:var(--color-hell-schrift-leise);--color-graphit-900:var(--color-hell-grund);--color-graphit-850:var(--color-hell-grund);--color-graphit-800:var(--color-hell-grund);--color-graphit-700:var(--color-hell-ebene);--color-graphit-650:var(--color-hell-flaeche);--color-graphit-600:var(--color-hell-flaeche);color-scheme:light}
+html:has(#atelier){color-scheme:dark}
 html:has(#atelier),body:has(#atelier){background:var(--color-dunkel-grund);color:var(--color-dunkel-schrift)}
 html[data-theme='light']:has(#atelier),html[data-theme='light'] body:has(#atelier){background:var(--color-hell-grund);color:var(--color-hell-schrift)}
 /* Themenwechsel: Farben gleiten 320 ms; ohne Bewegungswunsch sofort. */
@@ -509,10 +509,6 @@ body:has(#atelier) .skip-link:focus{border-radius:var(--as-switch-radius);backgr
 #atelier .home-concept :is(.hc-intro>p,.hc-section-heading>p){font-size:18px}
 #atelier .home-concept .hc-rate>:is(span,small){font-size:13px;line-height:1.5}
 #atelier .home-concept :is(.hc-kicker,.hc-scene-context),#atelier #aifly-panel :is(.panel-identity-subtitle,.orientation-message>strong,.welcome-card .eyebrow,.orientation-path>li>small){font-family:var(--font-mono);font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.14em;text-transform:uppercase}
-#atelier .brand .brand-word{font-size:24px;font-weight:600;line-height:1.05;letter-spacing:-.02em}
-#atelier .brand .brand-word :is(strong,.brand-x,.brand-ai,span){font-weight:inherit;font-size:inherit;line-height:inherit;letter-spacing:inherit}
-#atelier .brand .brand-word .brand-x{font-weight:700}
-#atelier .brand .brand-word small{display:block;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:0}
 #atelier .site-header :is(a,summary,button,select,p,h2,span),#atelier .site-footer :is(a,summary,button,p,h2,h3,span,small),#atelier #aifly-panel :is(.connection-note,.connection-note a,.orientation-path>li,.orientation-brief p,.orientation-problem p,.error-note,.orientation-page-copy strong,.orientation-page-copy small,.orientation-answer-note summary,.orientation-answer-note p,.chat-return span,.chat-return strong,.request-fallback p,.request-fallback a,.status-note){line-height:1.5;letter-spacing:0}
 #atelier .site-header .megamenu-group h2,#atelier .site-header .megamenu-bottom,#atelier .site-header .megamenu-bottom span,#atelier .site-footer :is(.footer-claim,.footer-legal-direct a,.footer-legal-details summary,.footer-legal-details p,.footer-overview-hint,.footer-overview-group a,.diagnostic-consent-content a),#atelier #aifly-panel :is(.connection-note,.connection-note a,.orientation-path>li,.orientation-brief p,.orientation-brief .orientation-brief-hint,.orientation-page-copy small,.orientation-answer-note summary,.orientation-answer-note p,.chat-return span,.orientation-mode-note){font-family:var(--font-text);font-size:13px;font-weight:400}
 #atelier .site-header .megamenu-group h2{font-weight:500;color:var(--color-text-sekundaer)}
@@ -770,10 +766,6 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 }
 
 /* ===== Marke und Film-Beiwerk ===== */
-#atelier .brand .brand-word{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--as-ink);-webkit-text-fill-color:currentColor}
-#atelier .brand .brand-word .brand-x{color:var(--color-marke-lime-dunkel);-webkit-text-fill-color:currentColor}
-#atelier .brand .brand-word small{color:var(--as-ink-3);-webkit-text-fill-color:currentColor}
-#atelier .brand .brand-signet{background:var(--as-ink)}
 #atelier .home-concept .identity-hero .atelier-film-transcript{margin:8px 0 0;padding:0;background:none;color:var(--as-ink-2);font-size:13px;line-height:1.5}
 #atelier .home-concept .identity-hero .atelier-film-transcript summary{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;margin-left:0;border-radius:var(--as-switch-radius);color:var(--as-ink-2);font-size:15px;font-weight:600;list-style:none;transition:background var(--as-move),color var(--as-move)}
 #atelier .home-concept .identity-hero .atelier-film-transcript summary:is(:hover,:focus-visible){background:var(--as-glass-faint);box-shadow:var(--as-lens-faint);color:var(--as-ink)}
@@ -825,9 +817,6 @@ html:has(#atelier){scroll-padding-top:104px}
  #atelier #aifly-panel .orientation-path-quiet{display:grid;gap:4px;padding-left:24px}
 }
 /* ===== Abgestimmte Farbrollen: Marke, Akzentzeile, Zeichen ===== */
-#atelier .brand .brand-word .brand-x{color:var(--as-signal);-webkit-text-fill-color:currentColor}
-html[data-theme='light'] #atelier .brand .brand-word .brand-x{color:var(--as-accent)}
-#atelier .brand .brand-word small{margin-top:2px;color:var(--as-ink-2);font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.01em}
 #atelier .home-concept .identity-hero .identity-copy h1 .identity-title-accent{background:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:currentColor;color:var(--as-accent);filter:none}
 #atelier #aifly-panel .orientation-composer-actions .primary-button svg{display:block;width:20px;height:20px;stroke-width:1.75}
 #atelier #aifly-panel .orientation-composer-actions .primary-button:disabled svg{opacity:.7}
@@ -885,3 +874,174 @@ html[data-theme='light'] #atelier .brand .brand-word .brand-x{color:var(--as-acc
 #atelier #aifly-panel .orientation-page-copy small{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:13px;line-height:1.5;color:var(--as-ink-2)}
 #atelier #aifly-panel .orientation-page-arrow{padding-top:1px;color:var(--as-ink-2)}
 #atelier #aifly-panel .panel-heading p.panel-identity-subtitle{font-family:var(--font-text);font-size:13px;font-weight:400;line-height:1.5;letter-spacing:0;text-transform:none}
+
+/* ================================================================================================================
+   ZWEITER DURCHGANG (14.11.2026) – Fundament, Tiefe, Glas, Logo, Rollbalken.
+   Alles Folgende leitet sich aus atelierSystem.* (config/design-tokens.json) ab; Nachweis: scripts/atelier-literale.mjs.
+   ================================================================================================================ */
+
+/* ===== Fundament: Kurznamen der System-Tokens ===== */
+/* --as-s-*  Raum (4/8-Raster) · --as-t-* Schriftgroesse · --as-z-* Zeilenhoehe · --as-r-* Radius · --as-b-* Glas-Unschaerfe
+   · --as-e-* Tiefenordnung. Komponentenregeln nennen nur diese Namen. */
+#atelier{
+ --as-s-1:var(--atelier-system-raum-1);--as-s-2:var(--atelier-system-raum-2);--as-s-3:var(--atelier-system-raum-3);--as-s-4:var(--atelier-system-raum-4);
+ --as-s-5:var(--atelier-system-raum-5);--as-s-6:var(--atelier-system-raum-6);--as-s-8:var(--atelier-system-raum-8);--as-s-10:var(--atelier-system-raum-10);
+ --as-s-12:var(--atelier-system-raum-12);--as-s-16:var(--atelier-system-raum-16);--as-s-20:var(--atelier-system-raum-20);--as-s-24:var(--atelier-system-raum-24);
+ --as-t-12:var(--atelier-system-schrift-12);--as-t-13:var(--atelier-system-schrift-13);--as-t-15:var(--atelier-system-schrift-15);
+ --as-t-16:var(--atelier-system-schrift-16);--as-t-18:var(--atelier-system-schrift-18);--as-t-24:var(--atelier-system-schrift-24);
+ --as-z-eng:var(--atelier-system-schrift-zeile-eng);--as-z-titel:var(--atelier-system-schrift-zeile-titel);--as-z-kurz:var(--atelier-system-schrift-zeile-kurz);
+ --as-z-text:var(--atelier-system-schrift-zeile-text);--as-z-lese:var(--atelier-system-schrift-zeile-lese);
+ --as-g-text:var(--atelier-system-schrift-gewicht-text);--as-g-mittel:var(--atelier-system-schrift-gewicht-mittel);--as-g-stark:var(--atelier-system-schrift-gewicht-stark);
+ --as-r-kachel:var(--atelier-system-radius-kachel);--as-r-feld:var(--atelier-system-radius-feld);--as-r-klein:var(--atelier-system-radius-klein);
+ --as-e-grund:var(--atelier-system-tiefe-grund);--as-e-inhalt:var(--atelier-system-tiefe-inhalt);--as-e-schwebend:var(--atelier-system-tiefe-schwebend);
+ --as-e-glas:var(--atelier-system-tiefe-glas);--as-e-menue:var(--atelier-system-tiefe-menue);
+ --as-h:var(--atelier-system-schalter-hoehe);--as-h-haupt:var(--atelier-system-schalter-hoehe-haupt);
+ --as-sat:saturate(var(--atelier-system-glas-saettigung));
+ /* Glasstaerken: je groesser die Flaeche, desto ruhiger die Streuung; die Kante bricht (Linse), die Mitte bleibt klar. */
+ --as-glass-filter:blur(var(--atelier-system-glas-schalter)) var(--as-sat) brightness(1.08);
+ --as-glass-filter-lens:url(#as-linse) blur(var(--atelier-system-glas-kante)) var(--as-sat) brightness(1.08);
+ --as-glass-filter-dense:blur(var(--atelier-system-glas-dicht)) var(--as-sat) brightness(1.05);
+ --as-glass-filter-wide:blur(var(--atelier-system-glas-leiste)) var(--as-sat) brightness(1.05);
+ --as-glass-filter-bar:blur(var(--atelier-system-glas-leiste)) var(--as-sat) brightness(1.08);
+ --as-glass-filter-bar-lens:url(#as-linse-leiste) blur(var(--atelier-system-glas-dicht)) var(--as-sat) brightness(1.08);
+ --as-glass-filter-front:blur(var(--atelier-system-glas-front)) var(--as-sat) brightness(1.05);
+ --as-plate-filter:blur(var(--atelier-system-glas-flaeche)) var(--as-sat);
+ --as-pane-blur:blur(var(--atelier-system-glas-front)) var(--as-sat)}
+
+/* ===== Tiefe: Volumen der Glaskoerper und Raumlicht (je Thema) ===== */
+/* --as-volume  Dicke des Glases: Licht sammelt sich an der Innenkante, staerker unten rechts (Gegenrand zur Lichtkante oben links).
+   --as-ambient Raumlicht hinter schwebenden Flaechen: Silber, ein Hauch Lime, ohne eigene Form.
+   --as-scroll  Griff der Rollbalken. */
+#atelier{
+ --as-volume:inset 0 0 20px -8px color-mix(in srgb,var(--color-dunkel-licht) 22%,transparent),inset -10px -14px 20px -18px color-mix(in srgb,var(--color-dunkel-licht) 34%,transparent),inset 12px 14px 22px -20px color-mix(in srgb,var(--color-dunkel-licht) 26%,transparent);
+ --as-ambient:radial-gradient(52% 58% at 30% 34%,color-mix(in srgb,var(--color-dunkel-tag-silber) 20%,transparent),transparent 72%),radial-gradient(44% 50% at 76% 78%,color-mix(in srgb,var(--color-dunkel-tag-lime) 11%,transparent),transparent 74%);
+ --as-ambient-front:-64px 24px 120px -72px color-mix(in srgb,var(--color-dunkel-tag-silber) 34%,transparent),-24px 64px 120px -80px color-mix(in srgb,var(--color-dunkel-tag-lime) 26%,transparent);
+ --as-reflex:linear-gradient(180deg,color-mix(in srgb,var(--color-dunkel-licht) 9%,transparent),transparent);
+ --as-scroll:color-mix(in srgb,var(--color-dunkel-licht) 20%,transparent);--as-scroll-hover:color-mix(in srgb,var(--color-dunkel-licht) 38%,transparent)}
+html[data-theme='light'] #atelier{
+ --as-volume:inset 0 0 18px -8px color-mix(in srgb,var(--color-hell-licht) 90%,transparent),inset -10px -14px 20px -18px color-mix(in srgb,var(--color-hell-schatten) 22%,transparent),inset 12px 14px 22px -18px color-mix(in srgb,var(--color-hell-licht) 100%,transparent);
+ --as-ambient:radial-gradient(52% 58% at 30% 34%,color-mix(in srgb,var(--color-hell-licht) 80%,transparent),transparent 72%),radial-gradient(44% 50% at 76% 78%,color-mix(in srgb,var(--color-hell-schatten) 9%,transparent),transparent 74%);
+ --as-ambient-front:-64px 24px 120px -72px color-mix(in srgb,var(--color-hell-schatten) 20%,transparent),-24px 64px 120px -80px color-mix(in srgb,var(--color-hell-schatten) 14%,transparent);
+ --as-reflex:linear-gradient(180deg,color-mix(in srgb,var(--color-hell-schatten) 7%,transparent),transparent);
+ --as-scroll:color-mix(in srgb,var(--color-hell-schatten) 24%,transparent);--as-scroll-hover:color-mix(in srgb,var(--color-hell-schatten) 44%,transparent)}
+
+/* ===== Rollbalken ===== */
+/* Schmal, im Glaston, runde Enden, mit Abstand zur Kante; Griff wird beim Zeigen heller. Blink/WebKit ueber ::-webkit-scrollbar
+   (dort gibt es Abstand und Rundung), Firefox ueber scrollbar-width/-color. */
+html:has(#atelier)::-webkit-scrollbar,#atelier ::-webkit-scrollbar{width:var(--atelier-system-rollbalken-breite);height:var(--atelier-system-rollbalken-breite)}
+html:has(#atelier)::-webkit-scrollbar-track,#atelier ::-webkit-scrollbar-track{background:transparent}
+html:has(#atelier)::-webkit-scrollbar-thumb,#atelier ::-webkit-scrollbar-thumb{min-height:var(--as-s-12);border:var(--atelier-system-rollbalken-abstand) solid transparent;border-radius:var(--as-switch-radius);background:var(--as-scroll,color-mix(in srgb,var(--color-dunkel-licht) 20%,transparent)) content-box}
+html[data-theme='light']:has(#atelier)::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--color-hell-schatten) 24%,transparent) content-box}
+html:has(#atelier)::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--color-dunkel-licht) 38%,transparent) content-box}
+html[data-theme='light']:has(#atelier)::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--color-hell-schatten) 44%,transparent) content-box}
+#atelier ::-webkit-scrollbar-thumb:hover,#atelier ::-webkit-scrollbar-thumb:active{background:var(--as-scroll-hover) content-box}
+html:has(#atelier)::-webkit-scrollbar-corner,#atelier ::-webkit-scrollbar-corner{background:transparent}
+/* Rollbalken in gerundeten Flaechen enden vor dem Eckradius. */
+#atelier #aifly-panel ::-webkit-scrollbar-track{margin-block:var(--as-s-2)}
+#atelier :is(textarea,.megamenu,.mobile-navigation nav,select)::-webkit-scrollbar-track{margin-block:var(--as-s-3)}
+@supports (-moz-appearance:none){
+ html:has(#atelier){scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--color-dunkel-licht) 22%,transparent) transparent}
+ html[data-theme='light']:has(#atelier){scrollbar-color:color-mix(in srgb,var(--color-hell-schatten) 26%,transparent) transparent}
+ #atelier *{scrollbar-width:thin;scrollbar-color:var(--as-scroll) transparent}
+}
+
+/* ===== Logo ===== */
+/* Baustein components/Logo.tsx. Eine Groesse (--logo-h = Hoehe der Figur) bestimmt alles: Wortmarke 46 %, Claim 23 %.
+   Figur links, Wortmarke daneben, Claim darunter auf derselben linken Kante. X im Signal-Lime, Claim im Nebentext-Ton. */
+#atelier .nx-logo{--logo-h:var(--atelier-system-logo-m);display:inline-flex;align-items:center;gap:calc(var(--logo-h) * .2);color:var(--as-ink);-webkit-text-fill-color:currentColor}
+#atelier .nx-logo[data-groesse='s']{--logo-h:var(--atelier-system-logo-s)}
+#atelier .nx-logo[data-groesse='l']{--logo-h:var(--atelier-system-logo-l)}
+#atelier .nx-logo-figur{flex:none;display:block;width:var(--logo-h);aspect-ratio:1;filter:drop-shadow(0 calc(var(--logo-h) * .06) calc(var(--logo-h) * .08) var(--as-figure-shadow))}
+#atelier .nx-logo-figur img{display:block;width:100%;height:100%;object-fit:contain}
+#atelier .nx-logo-wort{display:grid;gap:calc(var(--logo-h) * .04);min-width:0}
+#atelier .nx-logo-name{font-family:var(--font-display);font-size:calc(var(--logo-h) * .46);font-weight:var(--as-g-stark);line-height:var(--as-z-eng);letter-spacing:-.02em;white-space:nowrap;color:var(--as-ink)}
+#atelier .nx-logo-x{color:var(--as-signal);font-weight:700}
+html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
+#atelier .nx-logo-claim{font-family:var(--font-text);font-size:max(var(--as-t-12),calc(var(--logo-h) * .23));font-weight:var(--as-g-mittel);line-height:var(--as-z-kurz);letter-spacing:.01em;white-space:nowrap;color:var(--as-ink-3)}
+#atelier .brand{display:inline-flex;align-items:center;background:none;transition:opacity var(--as-move)}
+#atelier .site-header .brand{margin-left:calc(var(--as-s-2) * -1);padding:0 var(--as-s-2)}
+#atelier .site-header .nx-logo-figur{transition:transform var(--as-slow) var(--as-ease);transform-origin:50% 55%}
+#atelier[data-scrolled='true'] .site-header .nx-logo-figur{transform:scale(.88)}
+@container website (max-width:640px){#atelier .site-header .nx-logo{--logo-h:var(--atelier-system-logo-s)}}
+#atelier .install-invitation .nx-logo.install-invitation-mark{width:auto;height:auto;margin:0;opacity:1;background:none;-webkit-mask:none;mask:none}
+@media(forced-colors:active){#atelier .nx-logo-name,#atelier .nx-logo-x,#atelier .nx-logo-claim{color:CanvasText}}
+
+/* ===== Name des Assistenten ===== */
+/* Immer voll: Zeile 1 Eigenname, Zeile 2 Herkunft. */
+#atelier .nx-oracle-name{display:grid;gap:var(--as-s-1);margin:0;min-width:0;font-family:var(--font-text);letter-spacing:0;text-transform:none}
+#atelier #aifly-panel .nx-oracle-name strong{font-family:var(--font-text);font-size:var(--as-t-16);font-weight:var(--as-g-stark);line-height:var(--as-z-kurz);letter-spacing:0;color:var(--as-ink)}
+#atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{margin:0;text-transform:none;font-family:var(--font-text);font-size:var(--as-t-13);font-weight:var(--as-g-text);line-height:var(--as-z-kurz);letter-spacing:0;color:var(--as-ink-3);text-wrap:balance}
+#atelier #aifly-panel .orientation-host-name{margin:0 0 var(--as-s-3)}
+#atelier #aifly-panel .panel-identity .oracle-companion{width:var(--as-s-12);height:var(--as-s-12);background:none;box-shadow:none;border-radius:0}
+#atelier #aifly-panel .panel-identity .oracle-companion img{width:100%;height:100%;object-fit:contain}
+#atelier #aifly-panel .panel-heading{height:var(--as-s-20);min-height:var(--as-s-20)}
+
+/* ===== Kopfleiste: schwebendes Glas mit Volumen ===== */
+/* Beim Blaettern liegt die Leiste als dicke Scheibe ueber Film und Bildern: Kante bricht (as-linse-leiste), Mitte bleibt klar,
+   Innenkante sammelt Licht. Je Seite um --kopf-einzug kuerzer; Inhalt haelt 32 px Abstand zur eigenen Glaskante. */
+#atelier .site-header{--kopf-einzug:clamp(32px,4.5cqi,72px);--kopf-innen:var(--as-s-8)}
+#atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-6))}
+#atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar-lens);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
+@container website (max-width:640px){
+ #atelier .site-header{--kopf-einzug:0px;--kopf-innen:var(--as-s-2)}
+ #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--as-s-2));padding-right:calc(var(--layout-page-padding) + var(--as-s-1))}
+}
+
+/* ===== Raumlicht hinter dem Film ===== */
+#atelier .home-concept .identity-hero .identity-scene{position:relative;isolation:isolate}
+#atelier .home-concept .identity-hero .identity-scene::before{content:'';position:absolute;inset:-18% -14% -22%;z-index:-1;pointer-events:none;background:var(--as-ambient);filter:blur(24px)}
+
+/* ===== Chat-Front: dicke Scheibe ===== */
+/* Die Front ist jetzt in beiden Achsen ein Container (front): Breite schaltet die drei Zustaende, Hoehe die Raumverteilung. */
+#atelier #aifly-panel{container:front/size;-webkit-backdrop-filter:var(--as-glass-filter-front);backdrop-filter:var(--as-glass-filter-front);box-shadow:var(--as-front-edge),var(--as-volume),var(--as-depth-raised),var(--as-ambient-front)}
+/* Leerzustand als eine Komposition: Gastgeber, Frage, Einstiege und Weg stehen als Block in der optischen Mitte;
+   kein Loch zwischen Einleitung und Kacheln. Mehr Hoehe vergroessert Figur und Abstaende, nicht die Luecke. */
+#atelier #aifly-panel:has(.orientation-starters) .orientation-content{justify-content:safe center;gap:0;padding-top:var(--as-s-20);padding-bottom:calc(var(--ca-fuss,136px) + var(--as-s-4))}
+#atelier #aifly-panel .orientation-starters{margin:var(--as-s-8) 0 0}
+#atelier #aifly-panel .orientation-path-quiet{margin-top:var(--as-s-6)}
+#atelier #aifly-panel .orientation-host{margin:0 0 var(--as-s-6)}
+#atelier #aifly-panel .orientation-host-figure{width:var(--ca-figur,104px);height:var(--ca-figur,104px)}
+#atelier #aifly-panel .orientation-host-figure::after{inset:auto 8% -14%;height:22%;background:radial-gradient(ellipse 50% 50% at 50% 50%,var(--as-figure-shadow),transparent 70%)}
+#atelier #aifly-panel .orientation-host-figure img{filter:drop-shadow(0 8px 10px var(--as-figure-shadow))}
+@container front (min-width:480px){#atelier #aifly-panel>*{--ca-figur:128px}}
+@container front (min-height:960px){
+ #atelier #aifly-panel>*{--ca-figur:136px}
+ #atelier #aifly-panel .orientation-host{margin-bottom:var(--as-s-8)}
+ #atelier #aifly-panel .orientation-starters{margin-top:var(--as-s-10)}
+ #atelier #aifly-panel .orientation-path-quiet{margin-top:var(--as-s-8)}
+}
+@container front (min-height:1200px){
+ #atelier #aifly-panel>*{--ca-figur:168px}
+ #atelier #aifly-panel .orientation-starters{margin-top:var(--as-s-12);gap:var(--as-s-3)}
+ #atelier #aifly-panel .orientation-starter{min-height:var(--as-s-20)}
+}
+@container front (max-height:760px){
+ #atelier #aifly-panel>*{--ca-figur:80px}
+ #atelier #aifly-panel .orientation-host{margin-bottom:var(--as-s-4)}
+ #atelier #aifly-panel .orientation-starters{margin-top:var(--as-s-5)}
+ #atelier #aifly-panel .orientation-starter{min-height:var(--as-s-16)}
+ #atelier #aifly-panel .orientation-path-quiet{margin-top:var(--as-s-4)}
+}
+@container front (min-width:820px){#atelier #aifly-panel>*{--ca-figur:176px}#atelier #aifly-panel .orientation-starters{margin-top:var(--as-s-3)}}
+/* Gespraech: der Verlauf laeuft unter Kopfzone UND Eingabe hindurch. Die Eingabe ist eine eigene Glasschicht ueber dem Verlauf;
+   darunter verdichtet sich das Glas der Front, damit der Hinweis lesbar bleibt. --ca-fuss misst PublicOrientationChat.tsx. */
+#atelier #aifly-panel .public-orientation{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto;position:relative}
+#atelier #aifly-panel .orientation-content{grid-row:1/-1;grid-column:1/-1;padding-bottom:calc(var(--ca-fuss,136px) + var(--as-s-6));scroll-padding-bottom:calc(var(--ca-fuss,136px) + var(--as-s-6));scrollbar-gutter:stable;padding-right:calc(var(--ca-pad) - var(--atelier-system-rollbalken-breite));-webkit-mask-image:none;mask-image:none}
+#atelier #aifly-panel:has(.orientation-starters) .orientation-content{-webkit-mask-image:none;mask-image:none}
+#atelier #aifly-panel .orientation-composer{grid-row:2;grid-column:1;z-index:2;-webkit-backdrop-filter:var(--as-glass-filter-dense);backdrop-filter:var(--as-glass-filter-dense);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth)}
+#atelier #aifly-panel .orientation-composer:hover{box-shadow:var(--as-lens),var(--as-volume),var(--as-depth)}
+#atelier #aifly-panel .orientation-composer:focus-within{box-shadow:var(--as-lens),var(--as-volume),var(--as-depth),0 0 0 2px var(--as-ink)}
+#atelier #aifly-panel .connection-note{grid-row:3;grid-column:1;z-index:2}
+#atelier #aifly-panel .public-orientation::after{content:'';grid-row:2/-1;grid-column:1/-1;z-index:1;align-self:stretch;margin-top:calc(var(--as-s-8) * -1);pointer-events:none;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--as-ground) 62%,transparent) 56%);-webkit-backdrop-filter:blur(var(--atelier-system-glas-schalter));backdrop-filter:blur(var(--atelier-system-glas-schalter));-webkit-mask-image:linear-gradient(180deg,transparent,var(--as-shade) 44%);mask-image:linear-gradient(180deg,transparent,var(--as-shade) 44%);border-radius:0 0 var(--as-stage) var(--as-stage)}
+#atelier #aifly-panel:not(:has(.orientation-starters)) .panel-heading{background:var(--as-glass-clear);-webkit-backdrop-filter:var(--as-glass-filter-dense);backdrop-filter:var(--as-glass-filter-dense);box-shadow:inset 0 -1px 0 var(--as-fill-hover),0 12px 24px -20px var(--as-shade)}
+#atelier #aifly-panel .orientation-content{padding-top:calc(var(--as-s-20) + var(--as-s-4));scroll-padding-top:calc(var(--as-s-20) + var(--as-s-6))}
+@container front (min-width:820px){
+ #atelier #aifly-panel .public-orientation{grid-template-columns:var(--ca-host) minmax(0,720px)}
+ #atelier #aifly-panel .orientation-content{padding-right:0;padding-inline:0}
+ #atelier #aifly-panel .orientation-composer,#atelier #aifly-panel .connection-note{grid-column:2}
+ #atelier #aifly-panel .public-orientation::after{grid-column:2}
+}
+@media(max-width:820px){
+ #atelier #aifly-panel{container:front/inline-size;box-shadow:none}
+ #atelier #aifly-panel .public-orientation::after{border-radius:0}
+}

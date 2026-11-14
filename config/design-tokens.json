@@ -599,6 +599,18 @@
       "buehne": {
         "$value": "40px",
         "$type": "dimension"
+      },
+      "kachel": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "feld": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "klein": {
+        "$value": "12px",
+        "$type": "dimension"
       }
     },
     "raum": {
@@ -640,6 +652,14 @@
       },
       "24": {
         "$value": "96px",
+        "$type": "dimension"
+      },
+      "10": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "20": {
+        "$value": "80px",
         "$type": "dimension"
       }
     },
@@ -696,6 +716,163 @@
       },
       "schwelleNavigation": {
         "$value": "1000px",
+        "$type": "dimension"
+      }
+    },
+    "schrift": {
+      "$description": "Schriftstufen des Atelier-Systems: sechs feste Groessen, fuenf Zeilenhoehen, drei Gewichte.",
+      "12": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "13": {
+        "$value": "13px",
+        "$type": "dimension"
+      },
+      "15": {
+        "$value": "15px",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "18": {
+        "$value": "18px",
+        "$type": "dimension"
+      },
+      "24": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "zeileEng": {
+        "$value": "1.05",
+        "$type": "number"
+      },
+      "zeileTitel": {
+        "$value": "1.2",
+        "$type": "number"
+      },
+      "zeileKurz": {
+        "$value": "1.35",
+        "$type": "number"
+      },
+      "zeileText": {
+        "$value": "1.5",
+        "$type": "number"
+      },
+      "zeileLese": {
+        "$value": "1.6",
+        "$type": "number"
+      },
+      "gewichtText": {
+        "$value": "400",
+        "$type": "number"
+      },
+      "gewichtMittel": {
+        "$value": "500",
+        "$type": "number"
+      },
+      "gewichtStark": {
+        "$value": "600",
+        "$type": "number"
+      }
+    },
+    "glas": {
+      "$description": "Glasstaerken: Unschaerfe des Hintergrunds je Staerke. Je groesser die Flaeche, desto ruhiger (staerker) die Streuung.",
+      "schalter": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "kante": {
+        "$value": "3px",
+        "$type": "dimension"
+      },
+      "flaeche": {
+        "$value": "14px",
+        "$type": "dimension"
+      },
+      "dicht": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "leiste": {
+        "$value": "18px",
+        "$type": "dimension"
+      },
+      "front": {
+        "$value": "22px",
+        "$type": "dimension"
+      },
+      "saettigung": {
+        "$value": "185%",
+        "$type": "number"
+      }
+    },
+    "tiefe": {
+      "$description": "Feste Tiefenordnung (z-index): Grund < Inhalt < schwebende Flaechen < Glas < Schalter/Menues.",
+      "grund": {
+        "$value": "-1",
+        "$type": "number"
+      },
+      "inhalt": {
+        "$value": "1",
+        "$type": "number"
+      },
+      "schwebend": {
+        "$value": "10",
+        "$type": "number"
+      },
+      "glas": {
+        "$value": "40",
+        "$type": "number"
+      },
+      "menue": {
+        "$value": "60",
+        "$type": "number"
+      }
+    },
+    "logo": {
+      "$description": "Hoehe der Logo-Figur je Groesse; Wortmarke und Claim leiten sich daraus ab.",
+      "s": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "m": {
+        "$value": "52px",
+        "$type": "dimension"
+      },
+      "l": {
+        "$value": "72px",
+        "$type": "dimension"
+      }
+    },
+    "rollbalken": {
+      "breite": {
+        "$value": "10px",
+        "$type": "dimension"
+      },
+      "griff": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "abstand": {
+        "$value": "3px",
+        "$type": "dimension"
+      }
+    },
+    "schwelle": {
+      "$description": "Seitenschwellen (nur Nachweis; Media-Queries koennen keine Variablen lesen).",
+      "mobil": {
+        "$value": "820px",
+        "$type": "dimension"
+      },
+      "navigation": {
+        "$value": "1000px",
+        "$type": "dimension"
+      },
+      "breit": {
+        "$value": "1920px",
         "$type": "dimension"
       }
     }
