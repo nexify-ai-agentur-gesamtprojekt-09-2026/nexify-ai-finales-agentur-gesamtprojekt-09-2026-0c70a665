@@ -12,7 +12,8 @@
  */
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { COMPOSIO_CONFIG, composioEnabled, type ComposioEnv } from './composio.ts';
-import { getComposioStore, type ComposioStore } from './composio-store.ts';
+import { getAgentPort, type AgentEreignisPort } from './composio-agent-port.ts';
+import { getComposioStore, type ComposioStore, type StoredEvent } from './composio-store.ts';
 
 export const SIGNATURE_TOLERANCE_SECONDS: number = COMPOSIO_CONFIG.webhook.signatur.toleranz_sekunden;
 export const MAX_BODY_BYTES = 1024 * 1024;
@@ -46,7 +47,7 @@ export function verifyWebhookSignature(input: VerifyInput): VerifyResult {
   return { ok: false, reason: 'bad_signature' };
 }
 
-export type WebhookDeps = { env?: ComposioEnv; store?: ComposioStore; nowMs?: () => number };
+export type WebhookDeps = { env?: ComposioEnv; store?: ComposioStore; nowMs?: () => number; agentPort?: AgentEreignisPort };
 
 function reply(body: Record<string, unknown>, status: number, extra: Record<string, string> = {}): Response {
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store', ...extra } });
@@ -105,7 +106,7 @@ export async function handleComposioWebhook(request: Request, deps: WebhookDeps 
   // Je Ereignis-Kennung höchstens einmal. Scheitert die Verarbeitung, wird die Kennung freigegeben (Wiederzustellung).
   if (!(await store.claimEvent(eventId))) return reply({ status: 'duplicate' }, 200);
   try {
-    const outcome = await processEvent(store, type, eventId, payload, deps.nowMs?.() ?? Date.now());
+    const outcome = await processEvent(store, deps.agentPort ?? getAgentPort(), type, eventId, payload, deps.nowMs?.() ?? Date.now());
     return reply({ status: outcome }, 200);
   } catch {
     await store.releaseEvent(eventId);
@@ -114,7 +115,7 @@ export async function handleComposioWebhook(request: Request, deps: WebhookDeps 
   }
 }
 
-async function processEvent(store: ComposioStore, type: string, eventId: string, payload: Record<string, unknown>, nowMs: number): Promise<'processed' | 'ignored'> {
+async function processEvent(store: ComposioStore, port: AgentEreignisPort, type: string, eventId: string, payload: Record<string, unknown>, nowMs: number): Promise<'processed' | 'ignored'> {
   const data = obj(payload.data);
   const metadata = obj(payload.metadata);
   const accountId = type.startsWith('composio.connected_account.') ? str(data.id) : str(metadata.connected_account_id) ?? str(data.connected_account_id);
@@ -131,15 +132,22 @@ async function processEvent(store: ComposioStore, type: string, eventId: string,
       break;
     case 'composio.trigger.message':
     case 'composio.trigger.disabled':
-      // Gerüst: Ereignis mandantengebunden ablegen. TODO Weiterreichen an die Suite (Agenten/Postfach), sobald das Ziel steht.
-      await store.appendEvent({
+      // Ereignis mandantengebunden ablegen, danach (genau einmal je neuem Ereignis, durch claimEvent) an die Übergabestelle.
+      const stored: StoredEvent = {
         eventId,
         type,
         tenantId: record.tenantId,
         userId: record.userId,
         receivedAt: nowMs,
         summary: { trigger_slug: str(metadata.trigger_slug) ?? '', trigger_id: str(metadata.trigger_id) ?? '' },
-      });
+      };
+      await store.appendEvent(stored);
+      try {
+        await port.ereignisAngelegt(stored);
+      } catch {
+        // Ein Fehler der Übergabestelle darf das bereits abgelegte Ereignis nicht erneut zustellen lassen.
+        console.error(JSON.stringify({ event: 'composio_agent_port_failed', type }));
+      }
       break;
   }
   return 'processed';

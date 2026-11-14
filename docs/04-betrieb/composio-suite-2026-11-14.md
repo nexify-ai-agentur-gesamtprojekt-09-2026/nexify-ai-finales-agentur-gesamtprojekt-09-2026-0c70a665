@@ -20,7 +20,7 @@ und einem Mandanten; Mandant und Nutzer stammen nie aus Anfrage-Parametern oder 
    (gleicher Nutzer, gleicher Mandant), ruft dann `complete_auth` bei Composio auf und antwortet mit dem angemeldeten
    Suite-Nutzer. Fremde oder unbekannte Kennungen: einheitlich 403.
 3. Composio aktiviert die Verbindung und sendet `composio.connected_account.activated` (bzw. `.expired`) an den Webhook.
-   `composio.trigger.message` und `composio.trigger.disabled` werden mandantengebunden abgelegt (Gerüst).
+   `composio.trigger.message` und `composio.trigger.disabled` werden mandantengebunden abgelegt und an die Übergabestelle gereicht (siehe Trigger-Schicht).
 
 ## Webhook
 
@@ -57,6 +57,37 @@ verdrahtet; die Composio-Nutzerkennung ist immer die Suite-Nutzer-ID der Sitzung
 
 SDK: `@composio/core` wird bewusst nicht verwendet (siehe PR-Beschreibung): Der Connect-Fluss braucht nur zwei REST-Aufrufe,
 und der Webhook-Empfänger bleibt ohnehin reine HMAC-Prüfung.
+
+## Trigger-Schicht (Stand 14.11.2026, Entwurf, hinter demselben Schalter)
+
+Fluss:
+
+1. `POST /api/suite/composio/triggers` mit `{"slug": "...", "trigger_config": {...}, "connected_account_id": "..."?}`.
+   Nur angemeldet (sonst 401), Schalter aus = 503, gleiche Herkunftsprüfung wie beim Connect-Link. Der Slug muss in
+   `erlaubte_trigger_slugs` (`config/integrations/composio.json`) stehen; **leer bis Inhaberfreigabe**, also 422
+   `trigger_slug_not_allowed`. Eine angegebene `connected_account_id` muss dem Sitzungs-Nutzer und -Mandanten gehören (sonst 403).
+   Ablauf: `getTriggerType(slug)` (`GET /triggers_types/{slug}`, fail-closed) und `createTrigger(userId, slug, config)`
+   (`POST /trigger_instances/{slug}/upsert`); `userId` ist immer die Suite-Sitzungs-Nutzer-ID. Der angelegte Trigger wird
+   mandantengebunden gemerkt.
+2. `GET /api/suite/composio/triggers` listet die Trigger des angemeldeten Nutzers aus dem eigenen Speicher (Composio-Listen-Endpunkt nicht verwendet, siehe Annahmen).
+3. Composio sendet `composio.trigger.message` / `composio.trigger.disabled` an den Webhook (Signatur und Idempotenz unverändert).
+   Der Webhook legt das Ereignis mandantengebunden ab und ruft danach genau einmal je neuem Ereignis den `AgentEreignisPort` auf.
+4. `GET /api/suite/composio/events?limit=&offset=` liefert die abgelegten Ereignisse des angemeldeten Nutzers (neueste zuerst,
+   `limit` höchstens 100, Standard 50). Mandant und Nutzer stammen nie aus Query oder Headern.
+
+**Reversible Zielentscheidung:** Trigger-Ereignisse landen im mandantengebundenen Ereignisspeicher und sind über die angemeldete
+Lese-Schnittstelle abrufbar. Zusätzlich gibt es die Übergabestelle `apps/web/lib/composio-agent-port.ts` (Interface
+`AgentEreignisPort`, Standard: No-Op ohne Protokollierung). Dort wird später `packages/agent_core` (NeX Agentic) angebunden,
+indem eine Implementierung per `setAgentPort` gesetzt wird. Heute ist **nichts** an einen laufenden Kern verdrahtet; ein
+Fehler der Übergabestelle lässt die Webhook-Antwort bei 200 und das Ereignis abgelegt. Kein hartes Ziel: Konsument austauschbar.
+
+Annahmen zur Composio-REST (Quelle: `docs.composio.dev/docs/setting-up-triggers/creating-triggers`, abgerufen 14.11.2026):
+Pfade `triggers_types/{slug}` (Schema im Feld `config`) und `trigger_instances/{slug}/upsert` (Body `user_id`, `trigger_config`,
+optional `connected_account_id`) stehen dort. **Nicht belegt:** Name des Antwortfelds mit der Trigger-Kennung (angenommen
+`trigger_id`) und ein Listen-Endpunkt; deshalb listet die Suite aus dem eigenen Speicher. Vor dem Einschalten gegen die Referenz prüfen.
+
+Zusätzliche offene Punkte: Trigger- und Ereignisspeicher teilen die Grenze des Arbeitsspeichers (Punkt 1 oben);
+`erlaubte_trigger_slugs` befüllt allein der Inhaber.
 
 ## Offene Punkte (Owner: Inhaber/Betrieb, vor dem Einschalten)
 

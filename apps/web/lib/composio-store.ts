@@ -22,7 +22,11 @@ export type ConnectionRecord = {
 
 export type StoredEvent = { eventId: string; type: string; tenantId: string; userId: string; receivedAt: number; summary: Record<string, string> };
 
+export type TriggerRecord = { triggerId: string; slug: string; tenantId: string; userId: string; createdAt: number };
+
 export interface ComposioStore {
+  putTrigger(record: TriggerRecord): Promise<void>;
+  listTriggers(tenantId: string, userId: string): Promise<TriggerRecord[]>;
   putConnection(record: ConnectionRecord): Promise<void>;
   getConnection(connectedAccountId: string): Promise<ConnectionRecord | null>;
   listConnections(tenantId: string, userId: string): Promise<ConnectionRecord[]>;
@@ -41,7 +45,15 @@ export function createMemoryComposioStore(): ComposioStore {
   const connections = new Map<string, ConnectionRecord>();
   const seen = new Set<string>();
   const events = new Map<string, StoredEvent[]>();
+  const triggers = new Map<string, TriggerRecord>();
   return {
+    async putTrigger(record) {
+      if (!record.tenantId || !record.userId) throw new Error('tenant_required');
+      triggers.set(record.tenantId + '\u0000' + record.userId + '\u0000' + record.triggerId, { ...record });
+    },
+    async listTriggers(tenantId, userId) {
+      return [...triggers.values()].filter((t) => t.tenantId === tenantId && t.userId === userId).map((t) => ({ ...t }));
+    },
     async putConnection(record) {
       if (!record.tenantId || !record.userId) throw new Error('tenant_required');
       connections.set(record.connectedAccountId, { ...record });

@@ -12,7 +12,7 @@ const PRIVATE = { 'Cache-Control': 'private, no-store', Vary: 'Cookie, Authoriza
 const reply = (body: Record<string, unknown>, status: number): Response => Response.json(body, { status, headers: PRIVATE });
 
 /** Schreibende Browser-Aufrufe nur von der eigenen Seite (wie /api/chat). */
-function crossOrigin(request: Request): boolean {
+export function crossOrigin(request: Request): boolean {
   const origin = request.headers.get('origin');
   if (!origin) return request.headers.get('sec-fetch-site') === 'cross-site';
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || new URL(request.url).host;
@@ -23,7 +23,7 @@ function crossOrigin(request: Request): boolean {
   }
 }
 
-function makeClient(deps: RouteDeps, env: ComposioEnv): ComposioClient | null {
+export function makeClient(deps: RouteDeps, env: ComposioEnv): ComposioClient | null {
   if (deps.client) return deps.client;
   try {
     return createComposioClient({ env });

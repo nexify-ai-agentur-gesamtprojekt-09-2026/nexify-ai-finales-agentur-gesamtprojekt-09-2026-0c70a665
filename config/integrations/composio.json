@@ -25,6 +25,8 @@
   },
   "erlaubte_auth_config_ids": [],
   "erlaubte_auth_config_ids_hinweis": "Leer = Connect-Link wird verweigert (fail-closed). Nicht geheime Auth-Config-Kennungen (ac_...) hier eintragen, sobald der Inhaber sie freigibt.",
+  "erlaubte_trigger_slugs": [],
+  "erlaubte_trigger_slugs_hinweis": "leer bis Inhaberfreigabe. Leer = Trigger-Anlage wird verweigert (422 trigger_slug_not_allowed, fail-closed). Trigger-Slugs in Grossbuchstaben (z. B. GITHUB_COMMIT_EVENT) erst nach Freigabe eintragen.",
   "env": {
     "geheim": ["COMPOSIO_API_KEY", "COMPOSIO_AUTH_TOKEN", "COMPOSIO_WEBHOOK_SECRET"],
     "nicht_geheim": ["COMPOSIO_PROJECT_ID", "COMPOSIO_ORG_ID"],
