@@ -347,9 +347,9 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
 #atelier #aifly-panel .orientation-composer textarea{min-height:52px;max-height:160px;border-radius:calc(var(--as-area) - var(--as-rim));overflow-y:auto}
 #atelier #aifly-panel .connection-note a{padding-block:15px}
 #atelier #aifly-panel .orientation-message a{color:var(--as-warm);text-decoration-color:color-mix(in srgb,var(--as-warm) 50%,transparent)}
-#atelier .reopen-chat,#atelier .reopen-chat.nexify-control[data-variant]{min-height:48px;height:48px;padding:0 var(--space-5) 0 var(--space-2);gap:var(--space-3);border:0;font-size:.875rem;font-weight:500;line-height:1;right:calc(var(--space-4) + env(safe-area-inset-right));bottom:calc(var(--space-4) + env(safe-area-inset-bottom))}
+#atelier .reopen-chat,#atelier .reopen-chat.nexify-control[data-variant]{width:auto;min-width:0;min-height:48px;height:48px;padding:0 var(--space-5) 0 var(--space-2);gap:var(--space-3);border:0;font-size:.875rem;font-weight:500;line-height:1;right:calc(var(--space-4) + env(safe-area-inset-right));bottom:calc(var(--space-4) + env(safe-area-inset-bottom))}
 #atelier .reopen-chat .oracle-companion{width:36px;height:36px;flex:none}
-@media(max-width:820px){
+@media(max-width:599px){
  #atelier .reopen-chat,#atelier .reopen-chat.nexify-control[data-variant]{width:56px;min-width:56px;height:56px;min-height:56px;padding:0;justify-content:center;font-size:0}
  #atelier .reopen-chat .oracle-companion{width:40px;height:40px}
 }
@@ -375,7 +375,7 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
 }
 #atelier .site-footer .footer-contact{color:var(--as-ink)}
 #atelier .site-footer .footer-overview-marker{color:var(--color-text-sekundaer)}
-#atelier .site-footer .footer-overview-panel{box-sizing:border-box;padding:var(--space-6);border:0;border-radius:var(--as-area);background:var(--as-plate);box-shadow:var(--as-rest)}
+#atelier .site-footer .footer-overview-panel{box-sizing:border-box;max-height:none;overflow:visible;padding:var(--space-6);border:0;border-radius:var(--as-area);background:var(--as-plate);box-shadow:var(--as-rest)}
 #atelier .site-footer .footer-legal{align-items:flex-start}
 #atelier .site-footer .diagnostic-consent{border:0}
 #atelier .site-footer .diagnostic-consent summary::after{box-sizing:border-box;width:12px;height:12px;border:0;background:currentColor;clip-path:polygon(0 30%,12% 18%,50% 56%,88% 18%,100% 30%,50% 80%);transform:none}
@@ -478,4 +478,14 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel .request-fallback p{margin:8px 0 0;font-size:.875rem;line-height:1.55;color:var(--color-text-sekundaer)}
 #atelier #aifly-panel .request-fallback a{font-size:.875rem}
 #atelier .home-concept .hc-rate>strong{background:var(--as-heading);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-#atelier .site-header .mobile-navigation-panel>.nexify-control{position:sticky;bottom:0;z-index:1;background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur)}
+#atelier .site-header .mobile-navigation-panel>.nexify-control{grid-column:1/-1;justify-self:start;position:sticky;bottom:0;z-index:1;background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur)}
+@container home (max-width:820px){
+ #atelier .home-concept .hc-budget-story{display:flex;flex-direction:column;gap:0}
+ #atelier .home-concept .hc-budget .hc-section-heading{display:contents}
+ #atelier .home-concept .hc-budget .hc-costs{margin-top:var(--space-5)}
+ #atelier .home-concept .hc-budget .hc-text-link{order:3;margin-top:var(--space-6)}
+}
+#atelier .site-footer .footer-overview-columns{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
+#atelier .site-header .header-actions select{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:auto;min-width:76px;height:48px;min-height:48px;padding:0 40px 0 18px;border:0;border-radius:var(--as-pill);color:var(--as-ink);font-size:.8125rem;font-weight:500;line-height:48px;cursor:pointer;background:linear-gradient(45deg,transparent 50%,var(--color-text-sekundaer) 50%) calc(100% - 23px) 50%/5px 5px no-repeat,linear-gradient(135deg,var(--color-text-sekundaer) 50%,transparent 50%) calc(100% - 18px) 50%/5px 5px no-repeat,var(--as-glass)}
+#atelier .home-concept{--type-home-reading:clamp(16px,1.2cqi,18px)}
+#atelier .home-concept .identity-copy .identity-body{font-size:clamp(16px,1.05cqi,18px)}
