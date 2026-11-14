@@ -37,8 +37,26 @@ OFFEN: Hermes-Version auf dem Server, dortige `config.yaml`, eingestelltes Model
 | `home/.env.example` | Nur Variablennamen |
 | `einspielen.sh` | Sichert `config.yaml` und `SOUL.md`, spielt die neuen ein, kann zurück. Trockenlauf ist Standard |
 | `docker/libatomic1.Dockerfile-zeile` | Paketzeile für das Image |
-| `docker/docker-compose.nexify.yml` | Bindet das Monorepo nur lesend ein |
+| `docker/docker-compose.nexify.yml` | Bindet das Monorepo und den Erweiterungsordner der Oberfläche nur lesend ein |
+| `docker/docker-socket-entfernen.md` | D-019 Folge 5: genaue Änderung, Prüfung, Rückweg |
+| `gateway/` | Entwurf Modell-Wächter: Zwischenstation, die Modell und Reasoning der Vorgabe an der Leitung erzwingt; nicht eingespielt |
+| `webui/` | Graphite-Skin für die Oberfläche (`nesquena/hermes-webui`), Bereitstell-Skript, Prüfer, Variablennamen; siehe „Oberfläche“ |
 | `../../tools/check_hermes_config.py` | Prüft die Fassung gegen `config/llm-policy.json`; läuft in `make governance-check` und in den Python-Tests (`tests/test_hermes_config.py`) |
+
+## Oberfläche (Arbeitsbereich des Inhabers)
+
+Die Web-Oberfläche ist ein eigenes Projekt, `nesquena/hermes-webui` (MIT). `unternehmensbot.eu` lieferte am 14.11.2026 um 20:28 UTC die Version v0.52.492 aus (IST, `static/login.js?v=v0.52.492`). Die Adresse zeigt per DNS auf srv1243952, nicht auf srv1941843; welche Instanz antwortet, ist OFFEN. Messung, Entscheidungsvorlage zur Absicherung, Einspielschritte und Abnahmeliste: `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`.
+
+`webui/` enthält den Skin „NeXify Graphite“ für die offizielle Erweiterungsschnittstelle der Oberfläche (`docs/EXTENSIONS.md` dort): kein Fork, keine Änderung am Quellbaum, abwählbar in den Einstellungen.
+
+```bash
+python3 ops/hermes/webui/pruefe-gestaltung.py          # Werte nur aus config/design-tokens.json
+bash ops/hermes/webui/bereitstellen.sh                 # Trockenlauf
+bash ops/hermes/webui/bereitstellen.sh --anwenden      # schreibt /opt/nexify/hermes-webui-ext, startet nichts
+bash ops/hermes/webui/bereitstellen.sh --zurueck <Sicherungsordner> --anwenden   # Rückweg
+```
+
+Wirksam wird der Skin erst, wenn die Oberfläche mit den Variablen aus `webui/webui.env.example` startet. Die Anmeldeseite lässt sich über diesen Weg nicht gestalten (feste Vorlage, Erweiterungen sind ohne Anmeldung nicht abrufbar). Lokal geprüft an v0.52.492 bei 390 und 1440 px ohne Hermes Agent und ohne Modell; Belege unter `evidence/hermes-arbeitsbereich-2026-11-14/`. Auf dem Server ist nichts davon eingespielt.
 
 ## Voraussetzungen
 
@@ -48,6 +66,8 @@ OFFEN: Hermes-Version auf dem Server, dortige `config.yaml`, eingestelltes Model
 4. `python3`, `git`, `sha256sum` auf dem Host.
 
 ## Inbetriebnahme
+
+**Reihenfolge (Nachtrag 14.11.2026):** Maßgeblich ist die Schrittfolge in `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`, Abschnitt 6. Sie weicht in einem Punkt von der Nummerierung hier ab: Der Container wird erst ohne Docker-Socket neu erstellt (hier Schritte 4 und 5), **danach** trägt der Inhaber den Modellschlüssel ein (hier Schritt 3). Mit eingetragenem Schlüssel und eingehängtem Socket hätte ein handlungsfähiger Agent Root auf dem Host.
 
 Jeder Schritt steht für sich. Nach jedem Schritt prüfen, erst dann weiter.
 
@@ -169,4 +189,6 @@ Nicht belegt: Die Attrappe ist keine OpenRouter-Adresse, deshalb sendet Hermes d
 9. **`_config_version`.** Die Fassung trägt keinen Versionsstempel, weil Hermes ihn selbst verwaltet. `hermes doctor` meldet deshalb „v0 → v51“. `hermes config migrate` oder `hermes update` können die Datei umschreiben; danach zeigt der Trockenlauf von `einspielen.sh` die Abweichung.
 10. **Grenzen der Limits.** `agent.max_turns` und `run_budget_seconds` sind Schritt- und Zeitgrenzen von Hermes, kein Geldbudget. Ein Ausgabenlimit gehört an den OpenRouter-Schlüssel.
 11. **Kandidatendatei.** `remote_installation` lautet jetzt `container_reported_on_srv1941843_2026-11-14_version_model_config_unverified` mit Quelle `docs/04-betrieb/server-befund-2026-11-14.md`; der Prüfer bindet beide Werte. Das hält fest, dass ein Container gemeldet ist, und belegt weder Version noch Modell, Konfiguration oder einen echten Modellaufruf. `connected`, `installed_by_this_work` und `local_cli_detected` bleiben `false`. Ältere Dokumente mit der Aussage „nicht installiert“ (`docs/architecture/team-runtime-adaptation-20261101.md`, `docs/reviews/agent-team-20261101/report.json`) sind Stand 01.11.2026 und bleiben als Historie unverändert; die dort gebundenen Prüfsummen von Kandidat, Prüfer und Test gelten für jenen Stand.
-12. **Web-Oberfläche öffentlich.** Laut Server-Befund leitet Traefik `unternehmensbot.eu` auf die Hermes-Oberfläche; geschützt ist sie nur durch die Anmeldung von Hermes. Das widerspricht D-019 Folge 4 und ist im Kandidaten als offener Punkt geführt. Korrektur nur mit Freigabe (D-016).
+12. **Web-Oberfläche öffentlich.** Laut Server-Befund leitet Traefik auf srv1941843 `unternehmensbot.eu` auf die Hermes-Oberfläche; geschützt ist sie nur durch die Anmeldung von Hermes. Das widerspricht D-019 Folge 4 und ist im Kandidaten als offener Punkt geführt. Korrektur nur mit Freigabe (D-016). Nachtrag 14.11.2026, 20:28 UTC (IST): Der A-Eintrag von `unternehmensbot.eu` zeigt auf srv1243952; welche Instanz öffentlich antwortet, ist OFFEN. Wege der Absicherung: `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`, Abschnitt 4.
+13. **Modell je Zeitplan und je Gespräch.** Ein Zeitplan kann ein eigenes Modell und eine eigene Reasoning-Stufe tragen (`features/cron.md`: Einzelbindung vor `cron.model` vor Hauptmodell), und die Oberfläche bietet eine Modellauswahl je Gespräch. Beides läuft an dieser Konfiguration vorbei. Am Schlüssel lässt sich nur das Modell begrenzen, nicht die Reasoning-Stufe. Die ganze Vorgabe hält nur eine Zwischenstation, die Anfragen prüft und ablehnt: Entwurf `gateway/modell_waechter.py` (mit Tests, nicht eingespielt, Entscheidung des Inhabers offen). Bis dahin ist die Kontrolle von `cron/jobs.json` und des OpenRouter-Protokolls eine Sichtprüfung, kein Zwang. Bewertung von 9router dazu: Betriebsnotiz, Abschnitt 3a.
+14. **Rollen als Profile.** Ein Profil ist ein eigenes Hermes-Home mit eigener `config.yaml` (`user-guide/profiles.md`). `einspielen.sh` schreibt nur das Standard-Home; vor dem Anlegen von Profilen für NeX und AIFly ORACLE muss es je Profil einspielen können.

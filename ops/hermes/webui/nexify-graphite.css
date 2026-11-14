@@ -1,0 +1,168 @@
+/* NeXify · Graphite-Skin für Hermes WebUI (nesquena/hermes-webui, geprüft an v0.52.492).
+   Eingebunden über die offizielle Erweiterungsschnittstelle der Oberfläche
+   (docs/EXTENSIONS.md: HERMES_WEBUI_EXTENSION_DIR + Manifest), kein Fork, keine
+   Änderung am Quellbaum. Alles gilt nur, solange der Skin gewählt ist
+   (data-skin="nexify-graphite"); Abwahl unter Einstellungen → Darstellung ist der Rückweg.
+   Jeder Farb-, Maß- und Schriftwert stammt aus config/design-tokens.json;
+   ops/hermes/webui/pruefe-gestaltung.py prüft das. Tokenpfad jeweils im Kommentar. */
+
+@font-face{font-family:"Inter";src:url("/extensions/fonts/inter-latin.woff2") format("woff2");font-weight:100 900;font-display:swap;}
+@font-face{font-family:"Plus Jakarta Sans";src:url("/extensions/fonts/jakarta-latin.woff2") format("woff2");font-weight:200 800;font-display:swap;}
+@font-face{font-family:"Geist Mono";src:url("/extensions/fonts/geist-mono-latin.woff2") format("woff2");font-weight:100 900;font-display:swap;}
+
+:root[data-skin="nexify-graphite"],
+:root.dark[data-skin="nexify-graphite"]{
+  color-scheme:dark;
+  --bg:#1B1E1D;                 /* color.dunkel.grund */
+  --sidebar:#222625;            /* color.dunkel.ebene */
+  --surface:#2A2E2C;            /* color.dunkel.flaeche */
+  --surface2:#303634;           /* color.graphit.600 */
+  --code-bg:#1E2220;            /* color.graphit.850 */
+  --border:#363A38;             /* color.linie.mittel */
+  --border2:#4A4F4C;            /* color.linie.stark */
+  --border-subtle:rgba(255,255,255,.08); /* color.linie.fein */
+  --border-muted:#363A38;       /* color.linie.mittel */
+  --text:#ECEFEC;               /* color.dunkel.schrift */
+  --text2:#CDD3CF;              /* color.dunkel.schriftNeben */
+  --muted:#B4BAB6;              /* color.dunkel.schriftLeise */
+  --strong:#F3F0EA;             /* color.dunkel.licht */
+  --em:#CDD3CF;                 /* color.dunkel.schriftNeben */
+  --pre-text:#E3E6E3;           /* color.text.sekundaer */
+  --code-text:#C7DA98;          /* color.marke.limeHell */
+  --code-inline-bg:#1E2220;     /* color.graphit.850 */
+  --accent:#A8C76A;             /* color.marke.lime */
+  --accent-hover:#B4CF7C;       /* color.dunkel.limeHandlungHell */
+  --accent-text:#C7DA98;        /* color.marke.limeHell */
+  --accent-contrast:#162010;    /* color.dunkel.aufLime */
+  --accent-bg:color-mix(in srgb,#A8C76A 12%,transparent);        /* color.marke.lime */
+  --accent-bg-strong:color-mix(in srgb,#A8C76A 22%,transparent); /* color.marke.lime */
+  --link:#A8C76A;               /* color.marke.lime */
+  --gold:#B4BEC2;               /* color.atelier.champagne (Silber statt Gold) */
+  --blue:#BDC5C9;               /* color.atelier.platinum */
+  --error:#FF8A7A;--danger:#FF8A7A; /* color.semantik.fehler */
+  --success:#6FE3CF;            /* color.semantik.erfolg */
+  --warning:#FFC24A;            /* color.semantik.warnung */
+  --info:#38BDF8;               /* color.marke.cyan */
+  --topbar-bg:rgba(30,33,34,.91);        /* color.atelier.glass */
+  --main-bg:transparent;
+  --input-bg:rgba(255,255,255,.08);      /* color.linie.fein */
+  --hover-bg:rgba(255,255,255,.08);      /* color.linie.fein */
+  --surface-subtle:rgba(255,255,255,.08);/* color.linie.fein */
+  --surface-subtle-hover:rgba(255,255,255,.10); /* material.veil */
+  --focus-ring:#A8C76A;         /* focus.ring */
+  --focus-glow:color-mix(in srgb,#A8C76A 22%,transparent);
+  --user-bubble:#303634;        /* color.graphit.600 */
+  --assistant-bubble:transparent;
+  --sidebar-text:#ECEFEC;       /* color.dunkel.schrift */
+  --radius-md:8px;              /* radius.klein */
+  --radius-lg:12px;             /* radius.chip */
+  --radius-card:16px;           /* radius.karte */
+  --font-ui:Inter,Helvetica,Arial,sans-serif;              /* font.text */
+  --font-mono:'Geist Mono',ui-monospace,monospace;         /* font.mono */
+  --logo-glow:none;             /* gradient.spotlight */
+  --nx-signal:#C0EE38;          /* color.marke.limeSignal: nur das X und der Live-Punkt */
+  --nx-display:'Plus Jakarta Sans',Inter,Arial,sans-serif; /* font.display */
+}
+
+/* Kopfleiste als ruhiges Glas (atelierSystem.glas.leiste, .saettigung) */
+:root[data-skin="nexify-graphite"] .app-titlebar,
+:root[data-skin="nexify-graphite"] .topbar{
+  background:var(--topbar-bg);
+  -webkit-backdrop-filter:blur(18px) saturate(185%);
+  backdrop-filter:blur(18px) saturate(185%);
+  border-bottom:1px solid rgba(190,202,205,.22); /* color.atelier.glassEdge */
+}
+
+/* Marke: das Hermes-Zeichen weicht der Wortmarke „NeXify AI“ (echter Text, X im Signal-Lime) */
+:root[data-skin="nexify-graphite"] .app-titlebar-icon>svg,
+:root[data-skin="nexify-graphite"] .empty-logo>svg{display:none;}
+.nx-wortmarke{display:none;}
+:root[data-skin="nexify-graphite"] .nx-wortmarke{
+  display:inline-block;font-family:var(--nx-display);font-weight:600; /* atelierSystem.schrift.gewichtStark */
+  letter-spacing:-.04em;  /* typeDisplay.tracking */
+  color:#F3F0EA;          /* color.dunkel.licht */
+  white-space:nowrap;line-height:1.2; /* atelierSystem.schrift.zeileTitel */
+}
+:root[data-skin="nexify-graphite"] .nx-wortmarke .nx-x{color:var(--nx-signal);}
+:root[data-skin="nexify-graphite"] .app-titlebar-icon .nx-wortmarke{font-size:15px;} /* atelierSystem.schrift.15 */
+:root[data-skin="nexify-graphite"] .empty-logo .nx-wortmarke{display:block;text-align:center;font-size:48px;} /* typeHero.compact, Obergrenze */
+:root[data-skin="nexify-graphite"] .empty-logo .nx-claim{
+  display:block;font-family:var(--font-ui);font-size:13px; /* typeSmall.size */
+  letter-spacing:0;font-weight:400;color:#B4BAB6;margin-top:8px; /* color.dunkel.schriftLeise, space.2 */
+}
+
+/* Haupthandlung: Lime-Körper mit dunkler Schrift (color.dunkel.limeHandlung / aufLime) */
+:root[data-skin="nexify-graphite"] .send-btn,
+:root[data-skin="nexify-graphite"] #btnSend,
+:root[data-skin="nexify-graphite"] .btn-primary{
+  background:#9AB864;color:#162010;border-color:#9AB864;
+}
+:root[data-skin="nexify-graphite"] .send-btn:hover,
+:root[data-skin="nexify-graphite"] #btnSend:hover,
+:root[data-skin="nexify-graphite"] .btn-primary:hover{background:#B4CF7C;border-color:#B4CF7C;}
+
+/* Sichtbarer Fokus überall (focus.ring 2px solid #A8C76A, focus.offset 2px) */
+:root[data-skin="nexify-graphite"] :focus-visible{
+  outline:2px solid #A8C76A !important;outline-offset:2px !important;
+}
+:root[data-skin="nexify-graphite"] ::selection{background:#A8C76A;color:#162010;}
+
+/* Eingabefelder: Rand mit mindestens 3:1 zum Grund (WCAG 1.4.11); Silber aus color.atelier.platinum */
+:root[data-skin="nexify-graphite"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+:root[data-skin="nexify-graphite"] textarea,
+:root[data-skin="nexify-graphite"] select{border-color:color-mix(in srgb,#BDC5C9 50%,transparent);}
+
+/* Rollbalken (atelierSystem.rollbalken) */
+:root[data-skin="nexify-graphite"] *{scrollbar-color:#4A4F4C transparent;}
+:root[data-skin="nexify-graphite"] ::-webkit-scrollbar{width:10px;height:10px;}
+:root[data-skin="nexify-graphite"] ::-webkit-scrollbar-thumb{background:#4A4F4C;border-radius:999px;border:3px solid transparent;background-clip:content-box;}
+
+/* Zielgröße 48px (target.min; Auftrag verlangt ≥44px).
+   Mit Maus oder Trackpad nur für die benannten Bedienelemente von Navigation, Sitzungsliste und
+   Eingabezeile: Sie sind an v0.52.492 gemessen. Dichte Ansichten (Werkzeugkarten, Kanban, Terminal)
+   bleiben dort unberührt, damit kein ungeprüftes Layout bricht. */
+:root[data-skin="nexify-graphite"] .rail-btn,
+:root[data-skin="nexify-graphite"] .nav-tab,
+:root[data-skin="nexify-graphite"] .panel-head-btn,
+:root[data-skin="nexify-graphite"] .session-source-tab,
+:root[data-skin="nexify-graphite"] .session-item,
+:root[data-skin="nexify-graphite"] .suggestion,
+:root[data-skin="nexify-graphite"] .icon-btn,
+:root[data-skin="nexify-graphite"] .send-btn,
+:root[data-skin="nexify-graphite"] .composer-profile-chip,
+:root[data-skin="nexify-graphite"] .composer-workspace-files-btn,
+:root[data-skin="nexify-graphite"] .composer-workspace-chip,
+:root[data-skin="nexify-graphite"] .composer-model-chip,
+:root[data-skin="nexify-graphite"] .composer-reasoning-chip,
+:root[data-skin="nexify-graphite"] .workspace-panel-edge-toggle,
+:root[data-skin="nexify-graphite"] .update-btn,
+:root[data-skin="nexify-graphite"] .app-titlebar button{min-height:48px;min-width:48px;}
+:root[data-skin="nexify-graphite"] .session-search-field input,
+:root[data-skin="nexify-graphite"] .settings-search input{min-height:48px;}
+/* Der Fokusrahmen der Leiste am linken Rand liegt innen, sonst schneidet ihn der Fensterrand ab. */
+:root[data-skin="nexify-graphite"] .rail-btn:focus-visible{outline-offset:-2px !important;}
+/* Mit dem Finger gilt die Zielgröße für jedes Bedienelement. */
+@media (pointer:coarse){
+  :root[data-skin="nexify-graphite"] button,
+  :root[data-skin="nexify-graphite"] [role="button"],
+  :root[data-skin="nexify-graphite"] select,
+  :root[data-skin="nexify-graphite"] input[type="text"],
+  :root[data-skin="nexify-graphite"] input[type="search"],
+  :root[data-skin="nexify-graphite"] input[type="password"],
+  :root[data-skin="nexify-graphite"] textarea{min-height:48px;}
+  :root[data-skin="nexify-graphite"] button,
+  :root[data-skin="nexify-graphite"] [role="button"]{min-width:48px;}
+  :root[data-skin="nexify-graphite"] input,
+  :root[data-skin="nexify-graphite"] textarea,
+  :root[data-skin="nexify-graphite"] select{font-size:16px;} /* atelierSystem.schrift.16: kein Zoom beim Tippen auf iOS */
+}
+
+/* Bewegung = Zustand; wer weniger Bewegung wünscht, bekommt keine (motion.regel) */
+@media (prefers-reduced-motion:reduce){
+  :root[data-skin="nexify-graphite"] *,
+  :root[data-skin="nexify-graphite"] *::before,
+  :root[data-skin="nexify-graphite"] *::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+}

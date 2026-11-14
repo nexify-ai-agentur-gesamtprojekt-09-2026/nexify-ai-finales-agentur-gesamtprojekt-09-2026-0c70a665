@@ -1,0 +1,10 @@
+{
+  "extensions": [
+    {
+      "id": "nexify-graphite",
+      "name": "NeXify Graphite",
+      "stylesheets": ["nexify-graphite.css"],
+      "scripts": ["nexify-graphite.js"]
+    }
+  ]
+}

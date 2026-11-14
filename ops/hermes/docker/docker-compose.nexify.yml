@@ -1,14 +1,18 @@
 # NeXify · Zusatz zum Compose-Projekt `docker-hermes` (nicht eigenständig lauffähig).
 # Macht das Monorepo im Container unter einem festen, absoluten Pfad sichtbar,
-# damit terminal.cwd und skills.external_dirs (über NEXIFY_REPO) auflösbar sind.
-# Nur lesend: Hermes kann so weder Repository noch Skills verändern. Schreibzugriff
-# ist eine eigene Inhaberentscheidung.
+# damit terminal.cwd und skills.external_dirs (über NEXIFY_REPO) auflösbar sind,
+# und hängt den Erweiterungsordner der Oberfläche (Graphite-Skin) ein.
+# Beides nur lesend: Hermes kann so weder Repository noch Skills noch das Skript
+# verändern, das in der Oberfläche mit den Rechten der angemeldeten Sitzung läuft.
+# Schreibzugriff ist eine eigene Inhaberentscheidung.
 #
 # Verwendung auf dem Server, im Verzeichnis des Projekts (zeigt nur an, startet nichts):
 #   NEXIFY_REPO_HOST=/pfad/zum/checkout docker compose \
 #     -f docker-compose.yml -f docker-compose.nexify.yml config
 # In /root/.hermes/.env steht dazu: NEXIFY_REPO=/opt/nexify/monorepo
+# Der Erweiterungsordner entsteht vorher mit ops/hermes/webui/bereitstellen.sh --anwenden.
 services:
   hermes:
     volumes:
       - ${NEXIFY_REPO_HOST:?Pfad des Monorepo-Checkouts auf dem Host setzen}:/opt/nexify/monorepo:ro
+      - ${NEXIFY_WEBUI_EXT_HOST:-/opt/nexify/hermes-webui-ext}:/opt/nexify/hermes-webui-ext:ro
