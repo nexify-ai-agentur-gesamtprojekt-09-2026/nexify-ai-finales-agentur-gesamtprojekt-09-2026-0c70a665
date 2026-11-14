@@ -5,6 +5,11 @@ Knappe Betriebsanleitung für das Backend des Flusses
 inklusive Supabase-Persistenz. Kein echter Deploy enthalten — nur die Reihenfolge und die
 Entscheidungen/Keys, die zum Live-Gang nötig sind.
 
+Stand 14.11.2026: Zielbild aller Datenhaltung ist nach D-013 (`DECISIONS.md`) die eigene, selbst gehostete
+Supabase-Instanz, auch für den Shop. Abschnitt 4 nennt eine Migration; auf `main` liegen inzwischen `0001` bis
+`0003` unter `apps/web/supabase/migrations/`. Produktion ist das Vercel-Projekt `…-ut7r` (`AGENTS.md`); „Clerk“
+in Abschnitt 5 ist seit D-007 Historie.
+
 Stand der Verifikation (lokal, `@nexify/factory`):
 `pnpm --filter @nexify/web typecheck` ✓ · `pnpm typecheck:agent` ✓ ·
 `pnpm test:agent` ✓ (36/36) · `pnpm --filter @nexify/web build` ✓ · `node tools/rechnung.mjs …` ✓.
