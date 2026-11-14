@@ -1,0 +1,2199 @@
+{
+  "schema_version": 1,
+  "stand": "2026-11-14",
+  "hinweis": "Lösungs- und Zugangsregister der NeXify AI Agentur: für jede Lösung, die wir nutzen, steht hier, was sie ist, wofür wir sie nutzen, wo sie läuft, welche Zugänge es gibt und mit welchen Tags man sie findet. Agenten lesen dieses Register, bevor sie einen neuen Dienst vorschlagen. Zustände sind mit Datum belegt oder als unbelegt gekennzeichnet; das Register ersetzt keine Messung und keine Entscheidung in DECISIONS.md.",
+  "geheimnisspeicher": [
+    "Netzwerk-Geheimnisse der Claude-Umgebung (je Host; vom Inhaber über das sichere Formular hinterlegt, für die Sitzung nicht lesbar)",
+    "Vercel-Projektvariablen (Laufzeit von `apps/web` und `apps/shop-api`)",
+    "Cloudflare-Dashboard (Token-Werte sind dort nur bei der Erstellung sichtbar)",
+    "GitHub-Actions-Secrets (nur innerhalb der Workflows)",
+    "Umgebungsdateien auf den Servern (zum Beispiel `/root/.hermes/.env`), nie im Repository",
+    "Passwortmanager des Inhabers"
+  ],
+  "loesungen": [
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "tags": [
+        "hosting",
+        "auslieferung",
+        "web",
+        "vorschau",
+        "produktion"
+      ],
+      "kategorie": "Hosting",
+      "zweck": "Liefert `apps/web` und `apps/shop-api` aus `main` aus; einziger Auslieferungsweg der Produktion.",
+      "ort": "Vercel, Team `nexify-projekte`, Projekt `…-ut7r` (`prj_lKQEWQKzjqq4Ifvmwy6dh1XCIgVR`); Domains nexifyai.de und nexifyai.cloud",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`AGENTS.md:8` (Führungsentscheidung 13.11.2026) und `AGENTS.md:23` (Messung 14.11.2026, 10:37–10:43 UTC: vier Domains antworten mit 200 von Vercel). Laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) ist eine Zahlung über 300,05 USD am 14.11.2026 fehlgeschlagen; nicht nachgeprüft.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (Führungsentscheidung des Inhabers vom 13.11.2026 in AGENTS.md)",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Der Inhaber wünscht seit 14.11.2026 den Umzug zu Cloudflare; bis zu einer neuen Entscheidung in DECISIONS.md bleibt Vercel führend. Fünf verwaiste Projekte und ein Schwesterprojekt sind Stilllege-Kandidaten."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Vercel-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "Team nexify-projekte; genauer Umfang nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "Laufzeitvariablen des Projekts …-ut7r",
+          "art": "Sammlung von Geheimnissen (Namen in docs/deployment/environment-variables.md)",
+          "ablageort": "Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte)",
+          "rechteumfang": "je Variable verschieden",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Bei jeder Auslieferung, Vorschau, Domain-Zuordnung oder Laufzeitvariable von `apps/web` und `apps/shop-api`.",
+      "nicht_nutzen_fuer": "Dauerhafte Datenhaltung, Hintergrunddienste und alles, was auf den eigenen Servern läuft.",
+      "abhaengigkeiten": [
+        "github"
+      ]
+    },
+    {
+      "id": "cloudflare-konto",
+      "name": "Cloudflare-Konto „NeXify AI Agentur“",
+      "tags": [
+        "cloudflare",
+        "konto",
+        "plattform",
+        "zugang",
+        "dns"
+      ],
+      "kategorie": "Plattform-Konto",
+      "zweck": "Gemeinsames Konto für R2, Workers, AI Gateway, MCP-Portal, Access und die Zonen; hier hängen die Konto-Tokens.",
+      "ort": "Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Messung 14.11.2026: der Cloudflare-Konnektor der Claude-Umgebung listet in diesem Konto den R2-Bucket (nur lesend). Konto-Name und Konto-ID: Angabe des Inhabers vom 14.11.2026.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Träger für R2 und die Zonen; ob Cloudflare auch Hosting wird, ist eine eigene offene Entscheidung (siehe cloudflare-workers)."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "tiny-shadow-c5a6",
+          "art": "Konto-API-Token mit R2-S3-Zugangsdaten",
+          "ablageort": "Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers",
+          "rechteumfang": "Konto-Token; genauer Rechteumfang nicht belegt",
+          "erstellt": "2026-11-14",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor"
+        },
+        {
+          "bezeichnung": "jolly-wildflower-3e52",
+          "art": "Konto-API-Token mit R2-S3-Zugangsdaten",
+          "ablageort": "Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers",
+          "rechteumfang": "Konto-Token; genauer Rechteumfang nicht belegt",
+          "erstellt": "2026-11-14",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor"
+        },
+        {
+          "bezeichnung": "NeXify AI CF Auth. Token",
+          "art": "Benutzer-API-Token",
+          "ablageort": "Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers",
+          "rechteumfang": "Benutzer-Token; Rechteumfang nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor"
+        },
+        {
+          "bezeichnung": "Cloudflare-Token der Claude-Umgebung für api.cloudflare.com",
+          "art": "API-Token als Netzwerk-Geheimnis",
+          "ablageort": "Netzwerk-Geheimnisse der Claude-Umgebung (Host api.cloudflare.com)",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "2026-11-14",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Genau ein Token ist hinterlegt; welches der oben genannten es ist, ist nicht feststellbar. Der Cloudflare-Umzugsbericht vom 14.11.2026 vermerkt, dass das damals hinterlegte Token als ungültig abgelehnt wurde. Nach der Erneuerung den neuen Wert über das sichere Formular hinterlegen."
+        },
+        {
+          "bezeichnung": "Cloudflare-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP, vom Anbieter als veraltet markiert)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "liest mindestens die R2-Bucket-Liste; weiterer Umfang nicht geprüft",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Bevor ein Cloudflare-Dienst eingerichtet oder ein Cloudflare-Zugang gebraucht wird: erst hier nachsehen, welcher Token wofür existiert.",
+      "nicht_nutzen_fuer": "Als Ablage für Token-Werte; die Werte stehen nie hier.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "cloudflare-r2",
+      "name": "Cloudflare R2 (unser S3-kompatibler Objektspeicher)",
+      "tags": [
+        "speicher",
+        "s3",
+        "objektspeicher",
+        "archiv",
+        "backup",
+        "r2",
+        "cloudflare",
+        "dateien"
+      ],
+      "kategorie": "Objektspeicher",
+      "zweck": "S3-kompatibler Objektspeicher der Agentur für Archive, Sicherungen und große Dateien außerhalb der Server.",
+      "ort": "Endpunkt `https://a112f895c19e0d65f6f64b3e89f747f8.r2.cloudflarestorage.com`, Bucket `nexify-agentur-pucket`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Messung 14.11.2026 über den Cloudflare-Konnektor (nur lesend): Bucket `nexify-agentur-pucket` vorhanden, angelegt am 15.10.2026. Schreibzugriff, Inhalt und Lebenszyklus-Regel sind nicht geprüft. Einordnung als Archivziel: `docs/04-betrieb/aufraeumplan-2026-11-14.md:313`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (Vorgabe des Inhabers vom 14.11.2026: R2 stets als eigene Lösung im Gesamtsystem führen)",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Empfohlenes Archivziel für Paperclip-Läufe, Sicherungen und die Cognee-Volumes; die Freigabe als Archivziel (Kosten rund 1–2 USD je Monat) ist Entscheidung 2 im Aufräumplan und noch offen."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "R2-S3-Zugangsdaten zu tiny-shadow-c5a6",
+          "art": "S3-Zugangskennung und S3-Geheimschlüssel",
+          "ablageort": "Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers",
+          "rechteumfang": "R2 des Kontos; Begrenzung auf einen Bucket nicht belegt",
+          "erstellt": "2026-11-14",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor"
+        },
+        {
+          "bezeichnung": "R2-S3-Zugangsdaten zu jolly-wildflower-3e52",
+          "art": "S3-Zugangskennung und S3-Geheimschlüssel",
+          "ablageort": "Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers",
+          "rechteumfang": "R2 des Kontos; Begrenzung auf einen Bucket nicht belegt",
+          "erstellt": "2026-11-14",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor"
+        },
+        {
+          "bezeichnung": "Eigener Schlüssel nur für den Archiv-Bucket",
+          "art": "S3-Zugangsdaten (noch anzulegen)",
+          "ablageort": "noch nicht angelegt; Ziel: Geheimnisspeicher des ausführenden Servers",
+          "rechteumfang": "nur Bucket nexify-agentur-pucket, Lesen und Schreiben von Objekten",
+          "erstellt": "noch nicht erstellt",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Empfehlung aus dem Aufräumplan, Abschnitt 7.1: ein auf diesen Bucket begrenzter Schlüssel statt eines Konto-Tokens."
+        }
+      ],
+      "wann_nutzen": "Immer, wenn Dateien, Archive, Sicherungen, Exporte oder Medien dauerhaft und außerhalb der vollen Server abgelegt werden sollen („wo speichern wir das“).",
+      "nicht_nutzen_fuer": "Kundendaten ohne geklärte Rechtsgrundlage und ohne Verschlüsselung vor dem Hochladen; Datenbank-Ersatz; Geheimnisse.",
+      "abhaengigkeiten": [
+        "cloudflare-konto"
+      ]
+    },
+    {
+      "id": "cloudflare-workers",
+      "name": "Cloudflare Workers (möglicher Ersatz für Vercel)",
+      "tags": [
+        "hosting",
+        "auslieferung",
+        "cloudflare",
+        "workers",
+        "umzug"
+      ],
+      "kategorie": "Hosting",
+      "zweck": "Möglicher künftiger Auslieferungsweg für `apps/web`; vorbereitet und lokal gemessen, nicht umgeschaltet.",
+      "ort": "Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`; Vorbereitung in `apps/web/wrangler.jsonc` und auf dem Zweig `claude/cloudflare-umzug`",
+      "zustand": {
+        "status": "geplant",
+        "beleg": "`AGENTS.md:11` (Stand 13.11.2026: als Hosting nicht verfolgt). Der Umzugsbericht vom 14.11.2026 (Datei cloudflare-umzug-2026-11-14 unter docs/04-betrieb) liegt nur auf dem Zweig `claude/cloudflare-umzug`, nicht auf `main`: lokal gemessen, auf Cloudflare nichts ausgeliefert, kein DNS-Eintrag geändert.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (AGENTS.md vom 13.11.2026 sagt „nicht verfolgt“; der Wunsch des Inhabers vom 14.11.2026 ist noch nicht als Entscheidung festgehalten)",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll der Umzug von Vercel zu Cloudflare als neue Entscheidung in DECISIONS.md festgehalten werden, obwohl er im heutigen Zuschnitt voraussichtlich den bezahlten Workers-Tarif braucht?",
+        "hinweis": "Laut Umzugsbericht lagen die Seiten lokal bei 46–56 ms Rechenzeit gegen 10 ms im kostenlosen Tarif; die Shop-API zieht nicht mit um."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn über den Auslieferungsweg, Hosting-Kosten oder den Umzug von Vercel gesprochen wird.",
+      "nicht_nutzen_fuer": "Produktive Auslieferung, solange keine Entscheidung vorliegt; DNS- oder Domain-Änderungen ohne Freigabe.",
+      "abhaengigkeiten": [
+        "cloudflare-konto",
+        "vercel"
+      ]
+    },
+    {
+      "id": "cloudflare-ai-gateway",
+      "name": "Cloudflare AI Gateway `default`",
+      "tags": [
+        "llm-gateway",
+        "llm-router",
+        "cloudflare",
+        "modellweg",
+        "protokollierung"
+      ],
+      "kategorie": "LLM-Zugang",
+      "zweck": "OpenAI-kompatibles Gateway vor Modellanbietern mit Protokollierung und Begrenzung an einer Stelle.",
+      "ort": "Gateway `default`, Adresse `https://gateway.nexifyai.cloud/compat/chat/completions`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Angabe des Inhabers im Gespräch am 14.11.2026, nicht nachgemessen. Kein Aufruf ausgeführt; ob dort `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` ohne Ersatzmodell ankommt, ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll das Cloudflare AI Gateway der Modellweg werden (statt 9router oder direktem OpenRouter-Zugang), und wer weist nach, dass die Modellregel aus `config/llm-policy.json` dort eingehalten wird?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn ein Modellaufruf zentral protokolliert, begrenzt oder zwischengespeichert werden soll und die Frage nach dem Modellweg gestellt wird.",
+      "nicht_nutzen_fuer": "Verwaltete LLM-Aufrufe, solange Modellkennung, Reasoning und fehlender Ersatz dort nicht nachgewiesen sind (`config/llm-policy.json`).",
+      "abhaengigkeiten": [
+        "cloudflare-konto",
+        "openrouter-deepseek"
+      ]
+    },
+    {
+      "id": "cloudflare-mcp-portal",
+      "name": "Cloudflare MCP-Portal",
+      "tags": [
+        "mcp",
+        "werkzeuge",
+        "cloudflare",
+        "portal",
+        "agenten"
+      ],
+      "kategorie": "Agenten-Werkzeuge",
+      "zweck": "Ein gemeinsamer MCP-Eingang, über den Agenten freigegebene MCP-Server erreichen.",
+      "ort": "`https://mcp-cf-portal.nexifyai.cloud/mcp`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Angabe des Inhabers im Gespräch am 14.11.2026, nicht nachgemessen. Erreichbarkeit, Anmeldung und angebundene Server sind nicht gemessen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Welche MCP-Server sollen über das Portal erreichbar sein, und wer darf sich daran anmelden?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn ein Agent ein Werkzeug über MCP braucht und gefragt wird, wo unsere MCP-Server gebündelt sind.",
+      "nicht_nutzen_fuer": "Kundendaten oder Werkzeuge mit Schreibwirkung, solange Anmeldung und Freigabeliste nicht belegt sind.",
+      "abhaengigkeiten": [
+        "cloudflare-konto",
+        "cloudflare-access"
+      ]
+    },
+    {
+      "id": "cloudflare-mcp-server",
+      "name": "MCP-Server-Eintrag `nexify-ai-mcp-server-cf`",
+      "tags": [
+        "mcp",
+        "cloudflare",
+        "werkzeuge",
+        "eigener-server"
+      ],
+      "kategorie": "Agenten-Werkzeuge",
+      "zweck": "Eigener MCP-Server der Agentur, der über das Portal angeboten werden soll.",
+      "ort": "Eintrag `nexify-ai-mcp-server-cf` im Cloudflare-Konto; eingetragener Endpunkt `mcp.nexifai.cloud`",
+      "zustand": {
+        "status": "defekt",
+        "beleg": "Angabe des Inhabers vom 14.11.2026: Der eingetragene Endpunkt enthält einen Tippfehler (`nexifai` statt `nexifyai`), und die Domain ist noch nicht angelegt. Nicht nachgemessen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Unter welcher Adresse soll der eigene MCP-Server laufen (Vorschlag: `mcp.nexifyai.cloud`), und welcher Code steht dahinter (der Entwurf aus PR 124)?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn der eigene MCP-Server der Agentur eingerichtet, korrigiert oder angebunden werden soll.",
+      "nicht_nutzen_fuer": "Jede produktive Nutzung, bis Adresse, Domain und Anmeldung stimmen.",
+      "abhaengigkeiten": [
+        "cloudflare-mcp-portal"
+      ]
+    },
+    {
+      "id": "cloudflare-access",
+      "name": "Cloudflare Access und Tunnel",
+      "tags": [
+        "zugangsschutz",
+        "tunnel",
+        "cloudflare",
+        "access",
+        "netz"
+      ],
+      "kategorie": "Netz und Zugangsschutz",
+      "zweck": "Schützt interne Oberflächen mit Anmeldung vor dem Dienst und kann Dienste ohne offenen Port erreichbar machen.",
+      "ort": "Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Angabe des Inhabers im Gespräch am 14.11.2026, nicht nachgemessen: ein Access-Dienst-Token wurde angelegt. Welche Anwendung es schützt und ob ein Tunnel besteht, ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Sollen die Hermes-Oberfläche und andere interne Oberflächen hinter Cloudflare Access oder einen Tunnel gelegt werden, um D-019 Folge 4 (nicht öffentlich) zu erfüllen?",
+        "hinweis": "D-019 nennt bisher SSH-Tunnel oder WireGuard als Weg."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Access-Dienst-Token",
+          "art": "Dienst-Token (Kennung und Geheimnis)",
+          "ablageort": "Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers",
+          "rechteumfang": "nicht belegt (welche Access-Anwendung)",
+          "erstellt": "nicht belegt",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor"
+        }
+      ],
+      "wann_nutzen": "Wenn eine interne Oberfläche vom öffentlichen Netz genommen oder ein Dienst ohne offenen Port erreichbar gemacht werden soll.",
+      "nicht_nutzen_fuer": "Als Ersatz für die Mandantentrennung einer Anwendung; Access schützt den Eingang, nicht die Daten.",
+      "abhaengigkeiten": [
+        "cloudflare-konto"
+      ]
+    },
+    {
+      "id": "cloudflare-dns",
+      "name": "Cloudflare DNS und Zonen",
+      "tags": [
+        "dns",
+        "domains",
+        "zonen",
+        "cloudflare",
+        "netz"
+      ],
+      "kategorie": "Netz und Zugangsschutz",
+      "zweck": "Verwaltet die Domains und DNS-Einträge der Agentur.",
+      "ort": "Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`; Zonen laut Inhaber dort geführt (genannt: nexifyai.cloud mit den Namen gateway und mcp-cf-portal)",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Angabe des Inhabers vom 14.11.2026 („wir haben dort die Domains“), zitiert im Umzugsbericht auf dem Zweig `claude/cloudflare-umzug`. Die Zonenliste wurde nicht abgerufen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Jede DNS-Änderung ist eine Hartsperre für Agenten (`config/brain/agents.json`) und braucht die Freigabe des Inhabers."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn eine Domain, Subdomain oder ein DNS-Eintrag gebraucht oder geprüft wird.",
+      "nicht_nutzen_fuer": "Änderungen durch Agenten ohne Freigabe; DNS-Änderungen sind gesperrt.",
+      "abhaengigkeiten": [
+        "cloudflare-konto"
+      ]
+    },
+    {
+      "id": "hostinger-srv1941843",
+      "name": "Hostinger-Server srv1941843",
+      "tags": [
+        "server",
+        "vps",
+        "hosting",
+        "hostinger",
+        "docker",
+        "infrastruktur"
+      ],
+      "kategorie": "Server",
+      "zweck": "Hauptserver für die selbst betriebenen Dienste (Traefik, Hermes, Gedächtnis-Systeme, GitLab, Überwachung).",
+      "ort": "Hostinger KVM 8, Ubuntu 24.04, Adresse 179.198.195.91; 20 Compose-Projekte",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/server-befund-2026-11-14.md:12` (Hostinger-API, 14.11.2026): 97 % belegt, 10,2 GB frei. Dienste je Projekt: `docs/04-betrieb/aufraeumplan-2026-11-14.md:161`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-016",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Platte fast voll; Aufräumen nur je Schritt mit Freigabe und Rückweg (D-016)."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Hostinger-API-Schlüssel der Claude-Umgebung",
+          "art": "API-Schlüssel als Netzwerk-Geheimnis",
+          "ablageort": "Netzwerk-Geheimnisse der Claude-Umgebung (Host developers.hostinger.com)",
+          "rechteumfang": "Hostinger-Konto; genutzt lesend, Snapshot und einmalige Mess-Container",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "15 SSH-Schlüssel im Hostinger-Konto",
+          "art": "SSH-Schlüssel (öffentliche Teile im Konto)",
+          "ablageort": "Hostinger-Konto; private Teile auf den Geräten ihrer Besitzer",
+          "rechteumfang": "Root-Zugang, soweit in authorized_keys eingetragen (nicht belegt)",
+          "erstellt": "verschieden",
+          "offengelegt": false,
+          "erneuerung_faellig": true,
+          "hinweis": "Sichtung durch den Inhaber fällig: darunter `ignore-this`, `temp-check` und mehrere als vorübergehend bezeichnete Schlüssel (`docs/04-betrieb/server-befund-2026-11-14.md:31`). Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014, steht in Mem eine Notiz „SSH Keys“ vom März 2026."
+        }
+      ],
+      "wann_nutzen": "Wenn ein selbst betriebener Dienst gebraucht wird oder die Frage lautet, was auf dem Server läuft und wie voll er ist.",
+      "nicht_nutzen_fuer": "Neue dauerhafte Dienste, solange die Platte zu 97 % belegt ist; Sicherungen auf derselben Platte.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "hostinger-srv1243952",
+      "name": "Hostinger-Server srv1243952",
+      "tags": [
+        "server",
+        "vps",
+        "hostinger",
+        "infrastruktur",
+        "unbekannter-bestand"
+      ],
+      "kategorie": "Server",
+      "zweck": "Zweiter Server; welche Dienste dort laufen, ist nicht erhoben (vermutet wird die Shop-Datenbank).",
+      "ort": "Hostinger KVM 8, Ubuntu 26.04, Adresse 72.62.152.47",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`docs/04-betrieb/server-befund-2026-11-14.md:16`: nur Metriken (Platte rund 86 %, Arbeitsspeicher 20,7–22,8 GB), Dienste über die API nicht lesbar. `docs/04-betrieb/aufraeumplan-2026-11-14.md:336`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-016",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Was läuft auf srv1243952, liegt dort die Shop-Datenbank, und wird der Server weiter gebraucht?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Hostinger-API-Schlüssel der Claude-Umgebung",
+          "art": "API-Schlüssel als Netzwerk-Geheimnis",
+          "ablageort": "Netzwerk-Geheimnisse der Claude-Umgebung (Host developers.hostinger.com)",
+          "rechteumfang": "wie bei srv1941843; Docker Manager hier nicht verfügbar",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn eine Datenbank oder ein Dienst auf srv1941843 nicht zu finden ist und geklärt werden muss, wo er läuft.",
+      "nicht_nutzen_fuer": "Als Archivziel (selbst zu voll) und für Eingriffe ohne Shell-Sitzung und Freigabe.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "traefik",
+      "name": "Traefik (Reverse-Proxy)",
+      "tags": [
+        "reverse-proxy",
+        "tls",
+        "routen",
+        "netz",
+        "server"
+      ],
+      "kategorie": "Netz und Zugangsschutz",
+      "zweck": "Nimmt Anfragen für die Dienste auf srv1941843 an, terminiert TLS und leitet nach Domain weiter.",
+      "ort": "srv1941843, Compose-Projekt `traefik-juib`; Routen in `/docker/traefik-juib/dynamic.yml`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:167` (Hostinger-API und Mess-Container, 14.11.2026).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-016",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Nie destruktiv anfassen (D-016); das Image steht auf `latest` und soll auf einen festen Digest."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn ein Dienst auf dem Server unter einer Domain erreichbar sein oder vom Netz genommen werden soll.",
+      "nicht_nutzen_fuer": "Änderungen ohne Sicherung der Datei und Freigabe des Inhabers.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "hermes",
+      "name": "Hermes (Orchestrierungs-Laufzeit)",
+      "tags": [
+        "orchestrierung",
+        "agenten",
+        "laufzeit",
+        "hermes"
+      ],
+      "kategorie": "Orchestrierung",
+      "zweck": "Laufzeit, in der die Rollen NeX (führt aus) und AIFly ORACLE (koordiniert) arbeiten.",
+      "ort": "srv1941843, Compose-Projekt `docker-hermes`, Container `hermes`; Konfiguration im Repository unter `ops/hermes/`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`DECISIONS.md:146`. Der Container läuft; die Konfiguration aus `ops/hermes/` ist auf dem Server nicht eingespielt, ein echter Modellaufruf ist nicht belegt (`docs/04-betrieb/server-befund-2026-11-14.md:28`).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-019",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Funktionsnachweis steht aus; der Docker-Socket im Container ist als Risiko zu führen (D-019 Folge 5)."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "OPENROUTER_API_KEY für Hermes (mit Ausgabenlimit)",
+          "art": "API-Schlüssel",
+          "ablageort": "`/root/.hermes/.env` auf srv1941843 (Vorlage `ops/hermes/home/.env.example`)",
+          "rechteumfang": "nur Modellaufrufe, mit Ausgabenlimit",
+          "erstellt": "noch nicht eingetragen",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Trägt der Inhaber ein; ohne ihn gibt es keinen bezahlten Funktionsnachweis (D-019)."
+        }
+      ],
+      "wann_nutzen": "Wenn eine Aufgabe von Agenten dauerhaft, wiederkehrend oder koordiniert ausgeführt werden soll.",
+      "nicht_nutzen_fuer": "Kundenkonten und Mandantentrennung; Nachrichten an Dritte ohne eigene Freigabe (D-019 Folge 6).",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843",
+        "openrouter-deepseek",
+        "traefik"
+      ]
+    },
+    {
+      "id": "hermes-webui",
+      "name": "Hermes WebUI",
+      "tags": [
+        "arbeitsplatz",
+        "oberflaeche",
+        "hermes",
+        "chat"
+      ],
+      "kategorie": "Arbeitsplatz-Oberfläche",
+      "zweck": "Web-Oberfläche zu Hermes; vorgeschlagen als Arbeitsplatz des Inhabers.",
+      "ort": "srv1941843, Port 8788, über Traefik unter `unternehmensbot.eu` öffentlich erreichbar",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/server-befund-2026-11-14.md:75` (Messung 14.11.2026): öffentlich erreichbar, nur durch die Hermes-eigene Anmeldung geschützt; das widerspricht D-019 Folge 4.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-019",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll Hermes WebUI der Arbeitsplatz des Inhabers werden (Vorschlag: als neue Entscheidung festhalten), und wird die Oberfläche vorher vom öffentlichen Netz genommen?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Anmeldung der Hermes-Oberfläche",
+          "art": "Passwort",
+          "ablageort": "Passwortmanager des Inhabers",
+          "rechteumfang": "voller Zugriff auf Hermes samt Terminal und Docker-Socket",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Kein Wert im Chat belegt. Solange die Oberfläche öffentlich erreichbar ist, ist dieses Passwort der einzige Schutz."
+        }
+      ],
+      "wann_nutzen": "Wenn der Inhaber selbst mit den Agenten arbeiten will und nach seiner Arbeitsoberfläche gefragt wird.",
+      "nicht_nutzen_fuer": "Die Suite für Kunden: keine Kundenkonten, keine Mandantentrennung.",
+      "abhaengigkeiten": [
+        "hermes",
+        "traefik"
+      ]
+    },
+    {
+      "id": "paperclip",
+      "name": "Paperclip",
+      "tags": [
+        "orchestrierung",
+        "agenten",
+        "historie",
+        "speicherfresser"
+      ],
+      "kategorie": "Orchestrierung",
+      "zweck": "Frühere Orchestrierung der Agenten; durch Hermes ersetzt.",
+      "ort": "srv1941843, `/home/mypad/workspace/.paperclip-runtime` (kein laufender Prozess)",
+      "zustand": {
+        "status": "nicht verfolgt",
+        "beleg": "`DECISIONS.md:112`; `docs/04-betrieb/aufraeumplan-2026-11-14.md:42`: 77,3 GiB Lauf-Verzeichnisse, kein Prozess.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-019",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "Hermes (D-019)",
+        "hinweis": "Die Läufe (77,3 GiB) erst archivieren und probeweise zurückholen, dann nach Freigabe löschen."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur, wenn alte Läufe oder Agentenanweisungen aus der Zeit vor dem 14.11.2026 gesucht werden.",
+      "nicht_nutzen_fuer": "Neue Aufgaben; Paperclip wird nicht weiterverfolgt.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "openrouter-deepseek",
+      "name": "OpenRouter mit DeepSeek v4.1 flash 1017",
+      "tags": [
+        "llm",
+        "modell",
+        "deepseek",
+        "openrouter",
+        "llm-anbieter"
+      ],
+      "kategorie": "LLM-Zugang",
+      "zweck": "Einziger zulässiger Modellanbieter und einziges Modell für alle verwalteten LLM-Aufrufe.",
+      "ort": "OpenRouter, Modell `deepseek/deepseek-v4.1-flash-1017`, Reasoning `high`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`AGENTS.md:408`. Die Regel ist belegt; ein echter Aufruf mit dieser Kennung im Providerrequest ist für Hermes und für den öffentlichen Chat nicht belegt (`PROGRESS.md:93`).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-019 (Modellregel selbst: `config/llm-policy.json`, Nutzerweisung)",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Kein stilles Ersatzmodell, kein anderes Reasoning."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "OPENROUTER_API_KEY (CI-Review)",
+          "art": "API-Schlüssel",
+          "ablageort": "GitHub-Actions-Secrets des Repositorys",
+          "rechteumfang": "Modellaufrufe; Kostenobergrenze je Lauf in `config/automation.json`",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "OPENROUTER_API_KEY für Hermes",
+          "art": "API-Schlüssel",
+          "ablageort": "`/root/.hermes/.env` auf srv1941843",
+          "rechteumfang": "nur Modellaufrufe, mit Ausgabenlimit",
+          "erstellt": "noch nicht eingetragen",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "siehe hermes"
+        }
+      ],
+      "wann_nutzen": "Bei jedem verwalteten LLM-Aufruf: Chat, Agenten, Recherche, Zusammenfassung, CI-Review.",
+      "nicht_nutzen_fuer": "Andere Modelle oder Anbieter als Ausweichweg; Kundenschlüssel (BYOK) laufen getrennt.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "9router",
+      "name": "9router (eigener LLM-Router)",
+      "tags": [
+        "llm-router",
+        "llm-gateway",
+        "modellweg",
+        "router",
+        "server"
+      ],
+      "kategorie": "LLM-Zugang",
+      "zweck": "Eigener OpenAI-kompatibler Router vor den Modellanbietern; Ziel laut Modellregel, aber nicht aktiviert.",
+      "ort": "srv1941843, Compose-Projekt `stack`; lokale Adresse der Gedächtnis-Dienste `172.27.0.1:20129` (was dahinter antwortet, ist nicht belegt)",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:169`: Container läuft, laut Compose-Kommentar „abgelöst 03.10.“. `config/llm-policy.json` führt „nur über 9router“ als Ziel mit Status nicht aktiviert.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-009 (dort für die Produktaufbereitung genannt; kein eigener Entscheid zum Modellweg)",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll 9router die einzige Tür zu den Modellen sein, oder gehen die Aufrufe direkt an OpenRouter (oder über das Cloudflare AI Gateway)? Der Compose-Kommentar nennt 9router als abgelöst, die Modellregel als Ziel."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "ROUTER_URL und ROUTER_KEY",
+          "art": "Adresse und API-Schlüssel des Routers",
+          "ablageort": "Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte)",
+          "rechteumfang": "Modellaufrufe über den Router",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Für die Agenten nicht übergeben (Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-145)."
+        }
+      ],
+      "wann_nutzen": "Wenn nach dem Modellweg, nach `ROUTER_URL`/`ROUTER_KEY` oder nach einem gemeinsamen Zugang für mehrere Dienste gefragt wird.",
+      "nicht_nutzen_fuer": "Als Nachweis der Modellregel: die Kennung mit Endung 1017 im Providerrequest ist dort nicht belegt.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843",
+        "openrouter-deepseek"
+      ]
+    },
+    {
+      "id": "cognee-server",
+      "name": "Cognee, Server-Instanz `cognee-x532`",
+      "tags": [
+        "gedaechtnis",
+        "wissen",
+        "graph-rag",
+        "episodisch",
+        "cognee",
+        "brain"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Gedächtnis „Brain“ der Agentur: Graph und Vektoren über Dokumente und Sitzungen, mit Mandanten und Rechten je Datensatz.",
+      "ort": "srv1941843, Compose-Projekt `/docker/cognee-x532`, Adresse `brain.nexifyai.cloud`",
+      "zustand": {
+        "status": "defekt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:55`: Der Dienst `cognee` hat keinen Container und kein Image; `/docs` und `/health` antworten mit 404. Die Daten liegen in zwei Volumes, die Docker als ungenutzt führt (`docs/04-betrieb/aufraeumplan-2026-11-14.md:63`).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (in `config/gedaechtnis.json` als episodischer Speicher festgelegt)",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Erst wiederherstellen und sichern, dann stufenweise die anderen Systeme ablösen; Entscheidung 1 im Aufräumplan ist offen. KEIN Volume-Prune auf dem Server."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Basic-Auth vor `brain.nexifyai.cloud/mcp`",
+          "art": "Benutzername und Passwort",
+          "ablageort": "nicht belegt (vermutlich Traefik-Konfiguration auf srv1941843)",
+          "rechteumfang": "Zugang zum Cognee-MCP",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn Wissen über Sitzungen hinweg gespeichert oder abgefragt werden soll – aber erst, nachdem die Instanz wiederhergestellt ist.",
+      "nicht_nutzen_fuer": "Verlässliche Abfragen heute (Dienst läuft nicht); Kundendaten ohne eigenen Datensatz und Rechte-Test.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843",
+        "traefik",
+        "9router"
+      ]
+    },
+    {
+      "id": "cognee-plugin-lokal",
+      "name": "Cognee-Plugin in Claude Code (lokale Instanz)",
+      "tags": [
+        "gedaechtnis",
+        "plugin",
+        "claude-code",
+        "cognee",
+        "fluechtig"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Sitzungsgedächtnis für Claude Code; läuft als eigene lokale Cognee-Instanz im Sitzungs-Container.",
+      "ort": "Claude-Code-Sitzung, `http://localhost:8011`, Daten unter `~/.cognee` im flüchtigen Container",
+      "zustand": {
+        "status": "defekt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:71`: keine Verbindung zu `cognee-x532`; der Graph wird nie gebaut (fehlendes Modul), und der Speicher überlebt die Sitzung nicht.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll das Plugin nach der Wiederherstellung auf die dauerhafte Server-Instanz zeigen oder abgeschaltet werden (Entscheidung 8 im Aufräumplan)?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nicht nutzen, bis es auf eine dauerhafte Instanz zeigt; bis dahin gelten Repository und Register als Gedächtnis.",
+      "nicht_nutzen_fuer": "Alles, was eine Sitzung überdauern soll: der Speicher ist flüchtig und liefert keine Treffer.",
+      "abhaengigkeiten": [
+        "cognee-server"
+      ]
+    },
+    {
+      "id": "lightrag",
+      "name": "LightRAG",
+      "tags": [
+        "gedaechtnis",
+        "wissen",
+        "graph-rag",
+        "semantisch",
+        "dokumente"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Graph-RAG über die Dokumente der Agentur (semantischer Speicher).",
+      "ort": "srv1941843, Compose-Projekt `stack` (`/opt/ai-stack/stack`), Container `lightrag-local` und `lightrag-db`, Port 9621",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:82`: läuft; die Datenbank lief wegen der vollen Platte in einer Absturzschleife (4 Neustarts). Der Port ist an alle Adressen gebunden.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (in `config/gedaechtnis.json` als semantischer Speicher festgelegt)",
+      "rolle_im_plan": {
+        "art": "abzulösen",
+        "hinweis": "Ablösung durch Cognee erst nach bestandenem Probelauf (100 Dokumente, 20 feste Fragen) und Freigabe; bis dahin nur lesend weiterbetreiben. Entscheidung 1 im Aufräumplan ist offen."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Zugang zur LightRAG-API",
+          "art": "kein Zugangsschutz belegt",
+          "ablageort": "kein Geheimnis belegt",
+          "rechteumfang": "offen, falls von außen erreichbar",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-021, lief LightRAG nach einem Befund vom 09.10.2026 ohne Anmeldung; von außen nicht nachgemessen."
+        }
+      ],
+      "wann_nutzen": "Wenn heute in den vorhandenen Dokumenten der Agentur gesucht werden muss und Cognee noch nicht wiederhergestellt ist.",
+      "nicht_nutzen_fuer": "Neue Anbindungen oder neue Datenbestände; Kundendaten (Mandantentrennung nur über Workspaces).",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843",
+        "9router"
+      ]
+    },
+    {
+      "id": "agentmemory",
+      "name": "agentmemory",
+      "tags": [
+        "gedaechtnis",
+        "prozedural",
+        "agenten",
+        "systemd"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Lokaler Speicherdienst für Agenten (prozeduraler Speicher).",
+      "ort": "srv1941843, systemd-Dienst `agentmemory.service`, Daten unter `/root/.agentmemory`, Port 3111",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:99`: Prozess lief bei der Messung seit 6 Minuten; ob er regelmäßig neu startet, ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (in `config/gedaechtnis.json` als prozeduraler Speicher festgelegt)",
+      "rolle_im_plan": {
+        "art": "abzulösen",
+        "hinweis": "Als Erstes ablösen (33 MB Daten, Export vorhanden), nachdem Cognee wiederhergestellt ist; Entscheidung 1 im Aufräumplan ist offen."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur für bestehende Aufrufer, bis sie umgestellt sind.",
+      "nicht_nutzen_fuer": "Neue Anbindungen.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "kb-gateway",
+      "name": "kb-gateway",
+      "tags": [
+        "gedaechtnis",
+        "gateway",
+        "wissen",
+        "server"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Gateway vor LightRAG, agentmemory und Cognee: ein Eingang für Wissensabfragen.",
+      "ort": "srv1941843, `/opt/ai-stack/kb-gateway/gateway.py` mit `gateway.env`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:116`: als Datei gefunden; ob ein Prozess läuft und wer es aufruft, ist nicht gemessen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wird das kb-gateway noch aufgerufen, und soll es nach der Ablösung als einziger Eingang vor Cognee bleiben oder entfallen?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "`gateway.env`",
+          "art": "Umgebungsdatei mit Zugangsdaten (Inhalt nicht gelesen)",
+          "ablageort": "`/opt/ai-stack/kb-gateway/gateway.env` auf srv1941843",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn geklärt werden muss, über welchen Eingang Dienste auf das Wissen zugreifen.",
+      "nicht_nutzen_fuer": "Neue Anbindungen, bis die Rolle geklärt ist.",
+      "abhaengigkeiten": [
+        "lightrag",
+        "agentmemory",
+        "cognee-server"
+      ]
+    },
+    {
+      "id": "graphify",
+      "name": "Graphify (Wissensgraph des Codes)",
+      "tags": [
+        "wissensgraph",
+        "code",
+        "graph",
+        "einarbeitung",
+        "wissen"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Wissensgraph je Repository: zeigt, wo etwas verwendet wird und was wovon abhängt.",
+      "ort": "lokal im Repository: `tools/graph.sh`, `make graph`, Ausgabe `graphify-out/` (unversioniert)",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`DECISIONS.md:137`: in diesem Repository eingerichtet, lokaler Lauf ohne Modell und ohne Konto.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-018",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Je Projekt ein eigener Graph; ein Cloud-Konto ist eine eigene Inhaberentscheidung."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Vor dem Einzellesen vieler Dateien und vor jeder Änderung an einem gemeinsam genutzten Baustein.",
+      "nicht_nutzen_fuer": "Als Prüfung oder Gate; Graphen verschiedener Projekte werden nicht zusammengeführt.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "mem",
+      "name": "Mem (Notizen des Inhabers)",
+      "tags": [
+        "notizen",
+        "gedaechtnis",
+        "wissen",
+        "zweite-fundstelle",
+        "inhaber"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Notizablage des Inhabers; dient als zweite, vom Repository unabhängige Fundstelle für Zeiger.",
+      "ort": "Mem-Konto des Inhabers, über den Mem-Konnektor der Claude-Umgebung erreichbar",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Abruf am 14.11.2026 durch die Sitzung, die das Register der offenen Arbeiten erstellt hat (60 von 105 Notizen nach Titel gesichtet). Befund OA-014 dort: Notizen vom März 2026 zeigen Schlüssel und Token im Klartext.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "das Repository (DECISIONS.md, PROGRESS.md, dieses Register) als führende Quelle; Mem nur als Zeiger ohne Geheimnisse",
+        "hinweis": "Befund OA-014 ist ein offenes Sicherheitsrisiko: Klartext-Zugangsdaten in alten Notizen entfernen und die Schlüssel widerrufen (nur Inhaber)."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Mem-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "Lesen und Schreiben von Notizen",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn eine Aussage des Inhabers oder ein Zeiger auch außerhalb des Repositorys auffindbar sein soll.",
+      "nicht_nutzen_fuer": "Geheimniswerte, Zugangsdaten und Kundendaten; als führende Quelle für Entscheidungen.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "tags": [
+        "notizen",
+        "wissen",
+        "dokumente",
+        "wiki"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Dokumente und Bestandsaufnahmen der Agentur außerhalb des Repositorys.",
+      "ort": "Notion-Arbeitsbereich des Inhabers, über den Notion-Konnektor erreichbar",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository): Seite „Agentur-Wissensmanagement — Bestandsaufnahme und Betriebsstruktur“ (Abgleich 09.11.2026). Laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) blieben Suchen zu Suite und Composio ohne Treffer.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Welche Rolle hat Notion neben dem Repository und Mem: weiter pflegen, nur lesen oder auslaufen lassen?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Notion-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn ein älterer Befund oder eine Bestandsaufnahme gesucht wird, die nicht im Repository steht.",
+      "nicht_nutzen_fuer": "Führende Entscheidungen, Stände und Zugänge; Geheimniswerte.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "librechat",
+      "name": "LibreChat",
+      "tags": [
+        "arbeitsplatz",
+        "oberflaeche",
+        "chat",
+        "server"
+      ],
+      "kategorie": "Arbeitsplatz-Oberfläche",
+      "zweck": "Chat-Oberfläche mit Anbindung an die Gedächtnis-Systeme.",
+      "ort": "srv1941843, Compose-Projekt `librechat`, Konfiguration `/opt/nexifyai/librechat/librechat.yaml`",
+      "zustand": {
+        "status": "defekt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:171`: vier Nebendienste laufen, kein Hauptcontainer in der Liste; laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) antwortet die Oberfläche mit 530.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "Hermes WebUI für den Inhaber und `apps/web` für Kunden (Vorschlag der Standortbestimmung; Abschalten nur nach Freigabe des Inhabers)"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur, wenn alte Unterhaltungen oder die dortige Anbindung der Gedächtnis-Systeme nachgesehen werden müssen.",
+      "nicht_nutzen_fuer": "Neue Arbeit; die Oberfläche antwortet nicht.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843",
+        "lightrag",
+        "agentmemory",
+        "cognee-server"
+      ]
+    },
+    {
+      "id": "aionui",
+      "name": "AionUi",
+      "tags": [
+        "arbeitsplatz",
+        "oberflaeche",
+        "chat",
+        "server",
+        "speicherfresser"
+      ],
+      "kategorie": "Arbeitsplatz-Oberfläche",
+      "zweck": "Arbeitsoberfläche für Agenten; ursprünglicher Wunsch vom 14.10.2026.",
+      "ort": "srv1941843, Container `aionui` außerhalb der Compose-Projekte, Daten unter `/opt/aionui-data`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:46`: Container läuft, rund 25 GiB; Zweck unklar.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "Hermes WebUI für den Inhaber und `apps/web` für Kunden (Vorschlag der Standortbestimmung; Abschalten nur nach Freigabe des Inhabers)",
+        "hinweis": "Mit rund 25 GiB einer der größten Stilllege-Kandidaten."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur zur Sichtung vorhandener Daten vor einer Stilllegung.",
+      "nicht_nutzen_fuer": "Neue Arbeit.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "dify",
+      "name": "Dify",
+      "tags": [
+        "arbeitsplatz",
+        "oberflaeche",
+        "agenten-baukasten",
+        "server"
+      ],
+      "kategorie": "Arbeitsplatz-Oberfläche",
+      "zweck": "Baukasten für Agenten und Abläufe, gedacht für agenten.nexifyai.cloud.",
+      "ort": "srv1941843, Compose-Projekt `dify-dqiq` ohne Container",
+      "zustand": {
+        "status": "stillgelegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:184`: nur die Compose-Datei und 0,4 GiB Sicherung, kein Container.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "Hermes WebUI für den Inhaber und `apps/web` für Kunden (Vorschlag der Standortbestimmung; Abschalten nur nach Freigabe des Inhabers)",
+        "hinweis": "Compose-Datei archivieren, dann Projekt-Eintrag entfernen (nur Inhaber)."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nicht nutzen; nur als Fundstelle der dokumentierten Korrekturen in der Compose-Datei.",
+      "nicht_nutzen_fuer": "Neue Arbeit.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "lobehub",
+      "name": "LobeHub",
+      "tags": [
+        "arbeitsplatz",
+        "oberflaeche",
+        "chat",
+        "abo"
+      ],
+      "kategorie": "Arbeitsplatz-Oberfläche",
+      "zweck": "Gehostete Chat-Oberfläche im Abonnement.",
+      "ort": "LobeHub-Konto des Inhabers (Abo „Ultimate“)",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): das Abo verlängert sich am 19.11.2026. Nutzung nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "Hermes WebUI für den Inhaber und `apps/web` für Kunden (Vorschlag der Standortbestimmung; Abschalten nur nach Freigabe des Inhabers)",
+        "hinweis": "Vor dem 19.11.2026 entscheiden, ob das Abo verlängert wird (Kosten; nur Inhaber)."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur, wenn der Inhaber ausdrücklich dort arbeiten will.",
+      "nicht_nutzen_fuer": "Agentenarbeit mit Repository-Zugriff und Kundendaten.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase (eigene, selbst gehostete Instanz)",
+      "tags": [
+        "datenbank",
+        "postgres",
+        "rls",
+        "datenhaltung",
+        "mandanten"
+      ],
+      "kategorie": "Datenhaltung",
+      "zweck": "Zielbild für sämtliche Datenhaltung: PostgreSQL mit Row-Level-Security, auch für den Shop.",
+      "ort": "eigene, selbst gehostete Instanz; Adresse im Repository nicht belegt. Migrationen unter `apps/web/supabase/migrations/`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`DECISIONS.md:105`; `PROGRESS.md:81`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-013",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Adresse, Zugang und Freigabe für Migration und Umschaltung liegen beim Inhaber."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "SUPABASE_URL",
+          "art": "Adresse (nicht geheim)",
+          "ablageort": "Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte)",
+          "rechteumfang": "kein Zugriffsrecht, nur die Adresse",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "SUPABASE_SERVICE_ROLE_KEY",
+          "art": "Dienstschlüssel mit vollen Rechten",
+          "ablageort": "Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte)",
+          "rechteumfang": "umgeht RLS; nur serverseitig",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Bei jeder neuen Tabelle, jedem neuen Datenbestand und jeder Frage „wo speichern wir strukturierte Daten“.",
+      "nicht_nutzen_fuer": "Große Dateien und Archive (dafür R2); Geheimnisse.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "mongodb",
+      "name": "MongoDB (Shop-Speicher, IST)",
+      "tags": [
+        "datenbank",
+        "shop",
+        "mongodb",
+        "datenhaltung",
+        "teileklar"
+      ],
+      "kategorie": "Datenhaltung",
+      "zweck": "Heutiger Speicher von `apps/shop-api` (Produkte, Warenkörbe, Bestellungen, Konten).",
+      "ort": "Ort der Produktionsdatenbank nicht belegt (vermutet auf srv1243952)",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`PROGRESS.md:9`: Der Shop-Dienst antwortet mit 503, `MONGODB_URI` fehlt im Projekt; auf srv1941843 wurde kein MongoDB-Container gefunden.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-006, D-013",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "Supabase (D-013)",
+        "hinweis": "MongoDB bleibt IST, bis der Shop migriert ist; `vsk-mongodb` wird nie destruktiv angefasst (D-016)."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "MONGODB_URI",
+          "art": "Verbindungsadresse mit Zugangsdaten",
+          "ablageort": "Vercel-Projektvariablen des alten Projekts (als „Sensitive“ gespeichert, nicht auslesbar); im Projekt …-ut7r fehlt sie",
+          "rechteumfang": "Lesen und Schreiben der Shop-Datenbank",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Nur für den bestehenden Shop-Dienst, bis die Zugriffsschicht auf PostgreSQL umgestellt ist.",
+      "nicht_nutzen_fuer": "Neue Datenbestände.",
+      "abhaengigkeiten": [
+        "supabase"
+      ]
+    },
+    {
+      "id": "upstash",
+      "name": "Upstash",
+      "tags": [
+        "datenbank",
+        "redis",
+        "zwischenspeicher",
+        "abo"
+      ],
+      "kategorie": "Datenhaltung",
+      "zweck": "Gehosteter Redis und verwandte Dienste; Nutzung im Plan nicht genannt.",
+      "ort": "Upstash-Konto des Inhabers",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): Zahlung über 82,05 USD scheitert seit dem 07.11.2026 wiederholt; kein Beleg für eine Nutzung.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wird Upstash noch gebraucht, und wofür? Falls nein: Abo kündigen (nur Inhaber)."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur nach geklärter Rolle; bis dahin nichts Neues darauf bauen.",
+      "nicht_nutzen_fuer": "Neue Abhängigkeiten.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "convex",
+      "name": "Convex (selbst gehostet)",
+      "tags": [
+        "datenbank",
+        "backend",
+        "server"
+      ],
+      "kategorie": "Datenhaltung",
+      "zweck": "Selbst gehostetes Convex-Backend mit Dashboard; Zweck nicht belegt.",
+      "ort": "srv1941843, Compose-Projekt `convex-selfhosted`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:178`: läuft, Image `latest`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wofür läuft Convex, und kann es stillgelegt werden?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur nach geklärter Rolle.",
+      "nicht_nutzen_fuer": "Neue Datenbestände (Zielbild ist Supabase, D-013).",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "openbao",
+      "name": "OpenBao",
+      "tags": [
+        "geheimnisspeicher",
+        "geheimnisse",
+        "tresor",
+        "server"
+      ],
+      "kategorie": "Geheimnisspeicher",
+      "zweck": "Selbst gehosteter Tresor für Geheimnisse; könnte der zentrale Geheimnisspeicher der Server werden.",
+      "ort": "srv1941843, Container `nexify-openbao` außerhalb der Compose-Projekte",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:189`: Container läuft; Inhalt, Entsiegelung und Nutzer nicht geprüft.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll OpenBao der Geheimnisspeicher für die Dienste auf den Servern werden, und was liegt heute darin?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn gefragt wird, wo Geheimnisse der Server-Dienste künftig zentral liegen sollen.",
+      "nicht_nutzen_fuer": "Als belegter Ablageort, solange Inhalt und Zugriff nicht geprüft sind.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "composio-for-you",
+      "name": "Composio For You",
+      "tags": [
+        "integrationen",
+        "apps",
+        "mcp",
+        "werkzeuge",
+        "inhaber"
+      ],
+      "kategorie": "Integrationen",
+      "zweck": "Verbindet die eigenen Konten des Inhabers (Mail, Kalender, GitHub und weitere) mit seinem Agenten.",
+      "ort": "Composio-Konto des Inhabers; in den Claude-Sitzungen per MCP in Betrieb",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): 41 verbundene Apps laut Werkzeugbeschreibung, GitHub-Verbindung am 14.11.2026 lesend geprüft. In dieser Sitzung sind die Composio-Werkzeuge vorhanden.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Für den Inhaber selbst; nicht für Kundenkonten. Die Liste der Verbindungen auf das Nötige kürzen."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Composio-For-You-Schlüssel",
+          "art": "API-Schlüssel",
+          "ablageort": "Passwortmanager des Inhabers und Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "alle verbundenen Apps des Inhabers",
+          "erstellt": "nicht belegt",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Stand laut `PROGRESS.md:85`: Schlüssel standen im Gespräch; Erneuerung nicht belegt (D-017)."
+        }
+      ],
+      "wann_nutzen": "Wenn der Agent im Namen des Inhabers in einer seiner Apps lesen oder handeln soll.",
+      "nicht_nutzen_fuer": "Kundenkonten und Mandanten; der Helfer `invoke_llm` der Sandbox (widerspricht der Modellregel).",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "composio-platform",
+      "name": "Composio Platform",
+      "tags": [
+        "integrationen",
+        "apps",
+        "suite",
+        "webhook",
+        "kunde-verbindet"
+      ],
+      "kategorie": "Integrationen",
+      "zweck": "Lässt Kunden der Suite ihre eigenen Konten verbinden; Ereignisse kommen per Webhook in die Web-App.",
+      "ort": "Composio-Projekt (Kennungen in `config/integrations/composio.json`); Webhook in `apps/web`",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`config/integrations/composio.json:4`: gebaut hinter Schalter; Freigabelisten leer, Migration `0004` nicht eingespielt. Ob der Webhook in Produktion je ein signiertes Ereignis quittiert hat, ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Für die Suite vorgesehen; hängt an Supabase und an den Entwürfen PR 118 und 123."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "COMPOSIO_API_KEY, COMPOSIO_AUTH_TOKEN, COMPOSIO_WEBHOOK_SECRET",
+          "art": "API-Schlüssel, Zugangstoken, Signaturschlüssel",
+          "ablageort": "Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte)",
+          "rechteumfang": "Composio-Projekt der Suite",
+          "erstellt": "nicht belegt",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Composio-Schlüssel standen laut PROGRESS.md im Gespräch; welcher der Schlüssel betroffen ist, ist nicht belegt – deshalb alle erneuern."
+        }
+      ],
+      "wann_nutzen": "Wenn Kunden der Suite fremde Apps verbinden sollen.",
+      "nicht_nutzen_fuer": "Die eigenen Konten des Inhabers (dafür For You); Werkzeugaufrufe, solange die Freigabeliste leer ist.",
+      "abhaengigkeiten": [
+        "supabase",
+        "vercel"
+      ]
+    },
+    {
+      "id": "resend",
+      "name": "Resend",
+      "tags": [
+        "mail",
+        "versand",
+        "transaktionsmail",
+        "passwort-reset"
+      ],
+      "kategorie": "Mail",
+      "zweck": "Versendet Transaktionsmails: Anfragebestätigungen, interne Benachrichtigungen, Passwort-Reset.",
+      "ort": "Resend-Konto; Absender `angebot@nexifyai.cloud`, Domain nexifyai.cloud verifiziert (eu-west-1)",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`config/integrations/resend.json:19` (Versand mit Zustellbeleg am 29.10.2026). Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) am 14.11.2026: 50.000 Mails Kontingent, 0 verbraucht; nexifyai.de als Absenderdomain „failed“.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-007",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Im selben Konto liegen Domains eines Kundenprojekts; der Absender ist auf nexifyai.cloud begrenzt."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "RESEND_API_KEY",
+          "art": "API-Schlüssel",
+          "ablageort": "Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte)",
+          "rechteumfang": "Versand; Begrenzung auf eine Domain nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "Resend-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "Kontoverwaltung einschließlich Schlüsselerstellung",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn die Anwendung eine Mail an Kunden oder an die interne Adresse senden soll.",
+      "nicht_nutzen_fuer": "Kaltansprache und gekaufte Listen (rechtlich und laut Anbieter unzulässig); Absender fremder Domains.",
+      "abhaengigkeiten": [
+        "vercel"
+      ]
+    },
+    {
+      "id": "revolut",
+      "name": "Revolut Merchant API",
+      "tags": [
+        "zahlung",
+        "kasse",
+        "shop",
+        "webhook"
+      ],
+      "kategorie": "Zahlung",
+      "zweck": "Zahlungsabwicklung für Shop und Prepaid-Guthaben.",
+      "ort": "Revolut-Händlerkonto; `REVOLUT_MODE=live` in der Vorschau",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`DECISIONS.md:33`: live in der Vorschau ohne Fake-Zahlung; der Shop-Dienst antwortet in Produktion mit 503, eine echte Zahlung ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-008",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Livegang der Kasse nur über das Freigabe-Gate; keine Zahlung durch Agenten (D-017)."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "REVOLUT_MERCHANT_SECRET_KEY und Webhook-Signaturschlüssel",
+          "art": "Händlerschlüssel und Signaturschlüssel",
+          "ablageort": "Vercel-Projektvariablen (im Projekt …-ut7r nicht belegt)",
+          "rechteumfang": "Zahlungen des Händlerkontos",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn eine Zahlung, ein Zahlungs-Webhook oder der Status einer Buchung umgesetzt oder geprüft wird.",
+      "nicht_nutzen_fuer": "Zahlungen auslösen oder Preise ändern ohne Freigabe; Tests mit echten Zahlungen.",
+      "abhaengigkeiten": [
+        "vercel"
+      ]
+    },
+    {
+      "id": "bigbuy",
+      "name": "BigBuy",
+      "tags": [
+        "sortiment",
+        "grosshandel",
+        "shop",
+        "teileklar",
+        "import"
+      ],
+      "kategorie": "Sortiment",
+      "zweck": "Großhandelsquelle für das Sortiment von TEILEKLAR.",
+      "ort": "BigBuy-API",
+      "zustand": {
+        "status": "defekt",
+        "beleg": "`DECISIONS.md:33`: Import blockiert (laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) Antwort 401).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-008",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Nötig für TEILEKLAR, aber blockiert, bis ein gültiger Schlüssel vorliegt."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "BigBuy-API-Schlüssel",
+          "art": "API-Schlüssel",
+          "ablageort": "Passwortmanager des Inhabers; Zielablage Vercel-Projektvariablen",
+          "rechteumfang": "Katalog und Bestellungen",
+          "erstellt": "nicht belegt",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Stand im Gespräch (`PROGRESS.md:85`); Erneuerung nicht belegt."
+        }
+      ],
+      "wann_nutzen": "Wenn Produkte, Bestände oder Preise für TEILEKLAR importiert werden sollen.",
+      "nicht_nutzen_fuer": "Preisangaben ohne `config/fakten.json`; Import ohne gültigen Zugang.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot",
+      "tags": [
+        "crm",
+        "vertrieb",
+        "kontakte",
+        "leads"
+      ],
+      "kategorie": "CRM",
+      "zweck": "CRM für Kontakte, Firmen und Geschäfte.",
+      "ort": "HubSpot-Konto, über Composio und den HubSpot-Konnektor verbunden",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) (nur Zählung): 2 Beispielkontakte, 1 Beispielfirma, 0 Geschäfte. In keinem führenden Dokument genannt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll HubSpot das CRM der Agentur werden, oder liegen Leads künftig in der eigenen Supabase-Instanz?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "HubSpot-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn gefragt wird, wo Leads und Kundenkontakte geführt werden.",
+      "nicht_nutzen_fuer": "Kontaktdaten ohne Rechtsgrundlage; Werbeversand ohne Einwilligung.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry",
+      "tags": [
+        "fehler",
+        "ueberwachung",
+        "monitoring",
+        "web"
+      ],
+      "kategorie": "Überwachung",
+      "zweck": "Sammelt Fehler aus Browser und Server der Web-Anwendungen.",
+      "ort": "Sentry-Konto, über den Sentry-Konnektor erreichbar",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): Wochenbericht vom 14.11.2026 mit 3.900 Fehlerereignissen. In `GO-LIVE.md` als optional geführt; von dieser Sitzung nicht abgerufen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Die 3.900 Ereignisse sind nicht ausgewertet."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Sentry-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn ein Fehler in Produktion untersucht oder eine Auslieferung nachbeobachtet wird.",
+      "nicht_nutzen_fuer": "Als Abnahme: keine Fehlermeldung ist kein Funktionsnachweis.",
+      "abhaengigkeiten": [
+        "vercel"
+      ]
+    },
+    {
+      "id": "posthog",
+      "name": "PostHog",
+      "tags": [
+        "analyse",
+        "nutzung",
+        "web",
+        "monitoring"
+      ],
+      "kategorie": "Überwachung",
+      "zweck": "Produktanalyse der Web-Anwendungen.",
+      "ort": "PostHog-Projekt; Paket `posthog-js` in beiden Apps",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`GO-LIVE.md:77`: als optional geführt; ob Ereignisse ankommen, ist nicht geprüft.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wird PostHog genutzt und ausgewertet, und ist die Einwilligung der Besucher dafür geregelt?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn Nutzungszahlen der Website gebraucht werden.",
+      "nicht_nutzen_fuer": "Zahlen ohne geprüfte Einwilligung und ohne Messung als Beleg ausgeben.",
+      "abhaengigkeiten": [
+        "vercel"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "Prometheus, Grafana, Alertmanager (`monitoring-dus`)",
+      "tags": [
+        "ueberwachung",
+        "monitoring",
+        "metriken",
+        "alarm",
+        "server"
+      ],
+      "kategorie": "Überwachung",
+      "zweck": "Überwacht die Dienste auf dem Server und alarmiert.",
+      "ort": "srv1941843, Compose-Projekt `monitoring-dus`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:176`. Der Ausfall von Cognee blieb rund zwei Wochen unbemerkt; die Überwachung prüft dort nur den MCP.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Überwachung um eine Prüfung der Cognee-API ergänzen (Aufräumplan Schritt 3.4)."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn ein Dienst auf dem Server überwacht oder ein Ausfall nachvollzogen werden soll.",
+      "nicht_nutzen_fuer": "Als Abrechnungsgrundlage; Monitoring ist kein Ledger (`AGENTS.md`).",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "tags": [
+        "code",
+        "repository",
+        "quellverwaltung",
+        "pull-requests"
+      ],
+      "kategorie": "Code",
+      "zweck": "Kanonische Quelle des Codes; `main` ist führend.",
+      "ort": "`github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`AGENTS.md:213`; Abruf und Push dieser Sitzung am 14.11.2026.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (Nutzerbestimmung vom 26.10.2026 in AGENTS.md)",
+      "rolle_im_plan": {
+        "art": "tragend"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "GitHub-Verbindung der Claude-Umgebung",
+          "art": "App-Verbindung",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "Lesen und Pushen in freigegebene Repositories",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "Zwei ältere GitHub-Tokens",
+          "art": "persönliche Zugangstoken",
+          "ablageort": "stehen laut Befund im Klartext in Mem-Notizen vom März 2026",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "März 2026 oder früher",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: beim Anbieter widerrufen und die Notizen bereinigen (nur Inhaber). Die Werte wurden für dieses Register nicht gelesen."
+        }
+      ],
+      "wann_nutzen": "Bei jeder Änderung an Code, Konfiguration oder Dokumenten: eigener Zweig, Entwurfs-PR.",
+      "nicht_nutzen_fuer": "Kundendaten und Geheimnisse; direkte Pushes auf `main`.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "github-actions",
+      "name": "GitHub Actions",
+      "tags": [
+        "ci",
+        "automatisierung",
+        "pruefung",
+        "code"
+      ],
+      "kategorie": "Code",
+      "zweck": "Führt Prüfungen und das KI-Review bei Push und Pull Request aus.",
+      "ort": "GitHub-Konto `nexifyai-dev`, Workflows unter `.github/workflows/`",
+      "zustand": {
+        "status": "defekt",
+        "beleg": "`PROGRESS.md:83` (zuletzt belegt am 13.11.2026).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Solange Actions nicht startet, sind die lokal ausgeführten Gates der einzige Nachweis."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Actions-Secrets des Repositorys",
+          "art": "Sammlung von Geheimnissen (darunter OPENROUTER_API_KEY)",
+          "ablageort": "GitHub-Actions-Secrets",
+          "rechteumfang": "nur innerhalb der Workflows",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn eine Prüfung automatisch bei jedem Push laufen soll.",
+      "nicht_nutzen_fuer": "Als Nachweis, solange keine Jobs starten.",
+      "abhaengigkeiten": [
+        "github"
+      ]
+    },
+    {
+      "id": "gitlab",
+      "name": "GitLab (selbst gehostet, mit Runner)",
+      "tags": [
+        "code",
+        "ci",
+        "spiegel",
+        "server",
+        "speicherfresser"
+      ],
+      "kategorie": "Code",
+      "zweck": "Nachgelagerte CI und Spiegelung des GitHub-Repositorys.",
+      "ort": "srv1941843, Compose-Projekt `gitlab`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:175`: läuft, 34 GiB (davon 20,6 GiB Prometheus-Messdaten).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine (AGENTS.md: nachgelagerte Spiegelung, keine zweite Schreibquelle)",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wird die GitLab-Spiegelung noch gebraucht? Falls ja: Prometheus-Aufbewahrung begrenzen; falls nein: archivieren und stilllegen."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur, wenn eine CI-Ausführung auf eigener Hardware gebraucht wird.",
+      "nicht_nutzen_fuer": "Als zweite Schreibquelle für Code.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843",
+        "github"
+      ]
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "tags": [
+        "automatisierung",
+        "workflows",
+        "integrationen"
+      ],
+      "kategorie": "Automatisierung",
+      "zweck": "Workflow-Automatisierung; in keinem führenden Dokument genannt.",
+      "ort": "nicht belegt (weder Adresse noch Server)",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): kommt in keinem führenden Dokument vor. Einziger Hinweis ist ein n8n-Schlüssel in einer Mem-Notiz vom März 2026 (Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014). Eine laufende Instanz ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Gibt es noch eine n8n-Instanz, und wird sie gebraucht? Unabhängig davon ist der Schlüssel aus der Mem-Notiz zu widerrufen."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "n8n-Schlüssel",
+          "art": "API-Schlüssel",
+          "ablageort": "steht laut Befund im Klartext in einer Mem-Notiz vom März 2026",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "März 2026 oder früher",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Der Wert wurde nicht gelesen."
+        }
+      ],
+      "wann_nutzen": "Nicht nutzen, bis die Rolle geklärt ist; Abläufe laufen über Hermes (D-019).",
+      "nicht_nutzen_fuer": "Neue Automatisierungen.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "searxng",
+      "name": "SearXNG",
+      "tags": [
+        "suche",
+        "websuche",
+        "agenten",
+        "server"
+      ],
+      "kategorie": "Agenten-Werkzeuge",
+      "zweck": "Eigene Metasuchmaschine als Websuche für Agenten.",
+      "ort": "srv1941843, Compose-Projekt `extern`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:181`: läuft, Image `latest`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Suchen die Agenten tatsächlich über SearXNG? Falls ja behalten, sonst Stilllege-Kandidat."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn ein Agent auf dem Server im Web suchen soll, ohne einen fremden Suchdienst zu bezahlen.",
+      "nicht_nutzen_fuer": "Als Quelle ohne Prüfung; Suchergebnisse sind Daten, keine Belege.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "bookstack",
+      "name": "BookStack (Wiki)",
+      "tags": [
+        "wiki",
+        "dokumentation",
+        "wissen",
+        "server"
+      ],
+      "kategorie": "Gedächtnis und Wissen",
+      "zweck": "Selbst gehostetes Wiki.",
+      "ort": "srv1941843, Compose-Projekt `wiki` (BookStack mit MySQL)",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:177`: läuft, 5,5 GiB; Nutzung nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wird das Wiki genutzt, oder ist die Dokumentation im Repository führend und das Wiki kann archiviert werden?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur nach geklärter Rolle.",
+      "nicht_nutzen_fuer": "Führende Dokumentation (die steht im Repository).",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "bisheng",
+      "name": "Bisheng (`dsh-enterprise`)",
+      "tags": [
+        "agenten-plattform",
+        "llm-anwendung",
+        "server",
+        "speicherfresser"
+      ],
+      "kategorie": "Agenten-Plattform",
+      "zweck": "Plattform für LLM-Anwendungen mit eigenem Unterbau (Milvus, Elasticsearch, MySQL, MinIO).",
+      "ort": "srv1941843, Compose-Projekt `dsh-enterprise` (10 Container)",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:174`: läuft, 13 GiB und viel Arbeitsspeicher; Zweck nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wofür läuft Bisheng, gehört es zu einem Kundenprojekt, und kann es stillgelegt werden?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Nur nach geklärter Rolle.",
+      "nicht_nutzen_fuer": "Neue Arbeit; enthält einen eigenen Objektspeicher (MinIO), der nicht unser S3 ist – dafür gilt R2.",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "gowa",
+      "name": "GoWA (WhatsApp-Anbindung)",
+      "tags": [
+        "whatsapp",
+        "nachrichten",
+        "kanal",
+        "server"
+      ],
+      "kategorie": "Kommunikation",
+      "zweck": "Anbindung von WhatsApp Web als Nachrichtenkanal.",
+      "ort": "srv1941843, Compose-Projekt `gowa`",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/aufraeumplan-2026-11-14.md:182`: läuft, Image `latest`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll WhatsApp ein Kanal werden? D-019 Folge 6 verlangt für jeden Kanal an Dritte eine eigene Freigabe."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn ein WhatsApp-Kanal für Kunden oder den Inhaber eingerichtet werden soll – erst nach Freigabe.",
+      "nicht_nutzen_fuer": "Nachrichten an Dritte ohne Freigabe (Hartsperre).",
+      "abhaengigkeiten": [
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "clerk",
+      "name": "Clerk",
+      "tags": [
+        "anmeldung",
+        "konten",
+        "historie",
+        "auth"
+      ],
+      "kategorie": "Anmeldung",
+      "zweck": "Früherer Anmeldedienst; durch eigene Konten ersetzt.",
+      "ort": "Clerk-Konto; Reste in `apps/web` als Referenz und in `config/integrations/clerk-mcp.json`",
+      "zustand": {
+        "status": "nicht verfolgt",
+        "beleg": "`DECISIONS.md:28`.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-007",
+      "rolle_im_plan": {
+        "art": "doppelt",
+        "bleibt": "eigene Konten (D-007)"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Clerk-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "Verwaltung der Clerk-Anwendungen",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Verbindung kann getrennt werden, da Clerk nicht verfolgt wird."
+        }
+      ],
+      "wann_nutzen": "Nicht nutzen; nur zum Verständnis der älteren Referenz in `apps/web`.",
+      "nicht_nutzen_fuer": "Neue Anmeldewege.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "emergent",
+      "name": "Emergent (Google-Anmeldung)",
+      "tags": [
+        "anmeldung",
+        "google",
+        "auth",
+        "konten"
+      ],
+      "kategorie": "Anmeldung",
+      "zweck": "Stellt „Mit Google anmelden“ für die eigenen Konten bereit.",
+      "ort": "Emergent-verwaltete Google-Anmeldung",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "`DECISIONS.md:28`; ein Funktionsnachweis in Produktion liegt nicht vor.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "D-007",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Bleibt die Google-Anmeldung über Emergent, oder wird sie mit dem Umzug der Konten auf Supabase (D-013) ersetzt?"
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn die Google-Anmeldung der eigenen Konten betroffen ist.",
+      "nicht_nutzen_fuer": "Als Ablage von Kontodaten.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "tags": [
+        "aufgaben",
+        "tickets",
+        "planung"
+      ],
+      "kategorie": "Aufgabenverwaltung",
+      "zweck": "Ticketsystem, Team „Nexifyai“.",
+      "ort": "Linear-Arbeitsbereich, über den Linear-Konnektor erreichbar",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) (erste 50 Tickets). Dort führt NEX-71 einen alten Anthropic-Schlüssel als weiterhin aktiv.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll Linear weiter gepflegt werden? Führend sind `PROGRESS.md` und das Register in `config/acceptance-coverage.json`; `AGENTS.md` verbietet eine zweite Aufgabenverwaltung."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Linear-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "Alter Anthropic-API-Schlüssel (Ticket NEX-71)",
+          "art": "API-Schlüssel",
+          "ablageort": "Ort des Werts nicht belegt; das Ticket führt ihn als weiterhin aktiv",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "vor dem 05.09.2026",
+          "offengelegt": false,
+          "erneuerung_faellig": true,
+          "hinweis": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: beim Anbieter widerrufen und Ticket mit Beleg schließen (nur Inhaber)."
+        }
+      ],
+      "wann_nutzen": "Wenn ein älteres Ticket nachgesehen werden muss.",
+      "nicht_nutzen_fuer": "Als führendes Aufgabenregister.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "tags": [
+        "nachrichten",
+        "kanal",
+        "team",
+        "benachrichtigung"
+      ],
+      "kategorie": "Kommunikation",
+      "zweck": "Nachrichtenkanal; der Regelkreis mit ORACLE darüber ist pausiert.",
+      "ort": "Slack-Arbeitsbereich, über den Slack-Konnektor erreichbar",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository): der Slack-Regelkreis mit ORACLE ist pausiert; Slack wurde dort nicht ausgewertet. In dieser Sitzung nicht abgerufen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Soll Slack der Kanal für Meldungen der Agenten an den Inhaber werden? Hermes hat derzeit keinen aktiven Kanal."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Slack-Konnektor der Claude-Umgebung",
+          "art": "OAuth-Verbindung (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        },
+        {
+          "bezeichnung": "Slack-Webhook-Adresse",
+          "art": "eingehender Webhook",
+          "ablageort": "steht laut Befund offen im Steuerungswiki in Mem",
+          "rechteumfang": "Schreiben in einen Kanal",
+          "erstellt": "nicht belegt",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: Webhook widerrufen und neu anlegen (nur Inhaber). Die Adresse wurde nicht gelesen."
+        }
+      ],
+      "wann_nutzen": "Wenn Agenten den Inhaber benachrichtigen sollen und ein Kanal gesucht wird.",
+      "nicht_nutzen_fuer": "Nachrichten an Dritte ohne Freigabe; Geheimnisse in Nachrichten.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "google-workspace",
+      "name": "Google Workspace (Gmail, Kalender, Drive)",
+      "tags": [
+        "mail",
+        "kalender",
+        "dateien",
+        "postfach",
+        "inhaber"
+      ],
+      "kategorie": "Mail",
+      "zweck": "Postfach, Kalender und Dateien des Inhabers.",
+      "ort": "Google-Konto des Inhabers, über die Gmail-, Kalender- und Drive-Konnektoren erreichbar",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Gmail-Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) (Betreffzeilen und Vorschau). Ob die Adresse `mail@nexifyai.cloud` bei Google oder bei Hostinger liegt, ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Welches Postfach ist führend für Kundenkorrespondenz: Google Workspace oder das Hostinger-Postfach?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Gmail-, Kalender- und Drive-Konnektoren der Claude-Umgebung",
+          "art": "OAuth-Verbindungen (MCP)",
+          "ablageort": "Verbindungsverwaltung von claude.ai",
+          "rechteumfang": "Lesen; Senden und Ändern je nach Konnektor",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Der Drive-Konnektor verlangt in dieser Sitzung eine erneute Anmeldung."
+        }
+      ],
+      "wann_nutzen": "Wenn eine Mail des Inhabers gesucht, ein Termin geprüft oder eine Datei aus Drive gebraucht wird.",
+      "nicht_nutzen_fuer": "Versand im Namen des Inhabers ohne seine Bestätigung; Werbeversand.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "postiz",
+      "name": "Postiz",
+      "tags": [
+        "social-media",
+        "planung",
+        "marketing"
+      ],
+      "kategorie": "Marketing",
+      "zweck": "Planung und Veröffentlichung von Beiträgen in sozialen Netzen; Nutzung nicht belegt.",
+      "ort": "nicht belegt",
+      "zustand": {
+        "status": "läuft unbelegt",
+        "beleg": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: in Mem steht eine Notiz „Postiz API & MCP Credentials“ vom März 2026 mit Zugangsdaten im Klartext. Eine laufende Nutzung ist nicht belegt.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Wird Postiz genutzt? Unabhängig davon sind die Zugangsdaten aus der Mem-Notiz zu widerrufen."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Postiz-API- und MCP-Zugangsdaten",
+          "art": "API-Schlüssel",
+          "ablageort": "stehen laut Befund im Klartext in einer Mem-Notiz vom März 2026",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "März 2026 oder früher",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Die Werte wurden nicht gelesen."
+        }
+      ],
+      "wann_nutzen": "Nur nach geklärter Rolle.",
+      "nicht_nutzen_fuer": "Veröffentlichungen ohne Freigabe.",
+      "abhaengigkeiten": []
+    },
+    {
+      "id": "claude-umgebung",
+      "name": "Claude-Code-Umgebung (Cloud-Sitzungen)",
+      "tags": [
+        "agenten",
+        "arbeitsumgebung",
+        "geheimnisspeicher",
+        "netzwerk-geheimnisse",
+        "plugins"
+      ],
+      "kategorie": "Arbeitsumgebung",
+      "zweck": "Arbeitsumgebung der Cloud-Sitzungen mit Netzwerk-Geheimnissen je Host und den verbundenen Konnektoren.",
+      "ort": "claude.ai, Umgebung der Sitzungen; Geheimnisse werden vom Netz-Proxy je Host eingesetzt und sind für die Sitzung nicht lesbar",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "Diese Sitzung am 14.11.2026. Bestand der Plugins: `docs/04-betrieb/aufraeumplan-2026-11-14.md:197` (393 Plugins, zwölf Gedächtnis-Plugins, Hooks kürzen Werkzeug-Ausgaben).",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Plugins auf rund 45 kürzen (nur Inhaber); Hooks, die Ausgaben kürzen, sind ein Risiko für Belege."
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Netzwerk-Geheimnis für api.cloudflare.com",
+          "art": "API-Token",
+          "ablageort": "Netzwerk-Geheimnisse der Claude-Umgebung",
+          "rechteumfang": "nicht belegt",
+          "erstellt": "2026-11-14",
+          "offengelegt": true,
+          "erneuerung_faellig": true,
+          "hinweis": "siehe cloudflare-konto"
+        },
+        {
+          "bezeichnung": "Netzwerk-Geheimnis für developers.hostinger.com",
+          "art": "API-Schlüssel",
+          "ablageort": "Netzwerk-Geheimnisse der Claude-Umgebung",
+          "rechteumfang": "Hostinger-Konto",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn ein Agent einen Schlüssel für einen Dienst braucht: der Inhaber hinterlegt ihn hier über das sichere Formular, nie im Chat.",
+      "nicht_nutzen_fuer": "Geheimnisse, die im Container selbst gebraucht werden (Datenbank-Passwörter, SSH-Schlüssel): die deckt der Proxy nicht ab.",
+      "abhaengigkeiten": [
+        "cloudflare-konto",
+        "hostinger-srv1941843"
+      ]
+    }
+  ]
+}
