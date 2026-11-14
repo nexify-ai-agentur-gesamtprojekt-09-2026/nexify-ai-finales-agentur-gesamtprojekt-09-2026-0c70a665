@@ -1,3 +1,32 @@
+## Stand 14.11.2026, ca. 11:25 UTC · Wissensgraph, offene Entwürfe, Sichtung der Pull Requests, Regelbetrieb
+
+Auftrag des Inhabers Pascal Courbois vom 14.11.2026: Jeder Agent soll den aktuellen Stand kennen. Dieser Abschnitt führt den Abschnitt „Stand 14.11.2026 · Angleichung an die Startseite“ direkt darunter fort; jener bleibt als Stand von `70b923e` (10:18 UTC) stehen. Kennzeichnung: IST = hier am Repository oder durch eigenen Abruf nachgeprüft, mit Quelle und Zeit; Notiz = „Quelle: koordinierende Sitzung, 14.11.2026“, hier nicht nachgeprüft; OFFEN = fehlt oder nicht belegt. Entscheidungen stehen nur in `DECISIONS.md` (neu: D-018).
+
+Gemergt seit `70b923e` (IST, `git log origin/main`, Stand `5d4a187`, abgerufen 14.11.2026, 11:20 UTC): PR 146 `57972f8` (10:41 UTC) Composio-Ereignisse dauerhaft im Schema `composio`, Migration `apps/web/supabase/migrations/0004_composio.sql`, Betriebsschritte in `GO-LIVE.md` Abschnitt 6a; PR 148 `8998719` (10:49 UTC) Nachführung der führenden Dokumente und Skill `.claude/skills/nexify-stand-halten`; PR 149 `2d1eb69` (10:50 UTC) Absende- und Konto-Schalter der Formulare aus dem Baustein der Startseite, Gleichmacher erweitert; PR 151 `fb053a9` (11:02 UTC) Wissensgraph mit Graphify: `tools/graph.sh`, `make graph`, `.graphifyignore`, `.graphifyrc`, Skill `.claude/skills/nexify-graph`, Ausgabe `graphify-out/` unversioniert (`.gitignore`), laut Skill nur lokaler Code-Lauf ohne Konto beim Cloud-Dienst; PR 100 `5d4a187` (11:09 UTC) Lockfile `pnpm-lock.yaml`, Paket `glob`.
+
+Offene Pull Requests (IST, `gh api repos/…/pulls?state=open`, 14.11.2026, 11:24 UTC): 24 offen, alle als Entwurf geführt außer PR 126. Nummern: 152, 150, 147, 135, 126, 125, 124, 123, 122, 121, 120, 119, 118, 115, 107, 105, 94, 75, 74, 73, 67, 65, 60, 48.
+
+Offene Entwürfe mit Stand (Zustand „Entwurf“ und Zweig IST aus demselben Abruf; Inhaltsangaben Notiz, Quelle: koordinierende Sitzung, 14.11.2026):
+- PR 147, Zweig `claude/shop-supabase`: Shop-Schema für die eigene Supabase-Instanz (D-013). Zwei Review-Befunde behoben: Ein fehlendes Lieferland wird abgelehnt; der Dienst darf die Schemaversion lesen. 105 Prüfungen lokal bestanden. Wartet auf die Entscheidung zum Verbindungsweg.
+- PR 150, Zweig `claude/shop-zugriffsschicht`: Zugriffsschicht des Shop-Dienstes. Umgestellt sind Katalog, Warenkorb, Konten, Werkstätten und Anfragen, 59 von 139 Aufrufen. Speicher bleibt MongoDB (D-006 als IST). Kasse, Admin und Import sind offen.
+- PR 152, Zweig `claude/belege-neupruefung`: Browser-Belege neu geprüft. Python-Suite laut Agentenbericht von 143 auf 47 rote Tests. Vier Seitenbefunde sind offen; dafür ist ein Zweig `claude/seitenbefunde` in Arbeit, der um 11:24 UTC nicht auf `origin` lag (IST, `git branch -r`).
+
+Sichtung der offenen Pull Requests (Notiz, Quelle: koordinierende Sitzung, 14.11.2026; die Einordnung ist hier nicht nachgeprüft, geschlossen wurde nichts):
+- Mergebar: 94 (noch Entwurf) und 107 (laut Abruf 11:24 UTC ebenfalls noch Entwurf).
+- Überholt: 135, 126, 105, 75, 74, 73, 67, 65, 60, 48. Nicht geschlossen; das Schließen entscheidet der Inhaber.
+- Entscheidung nötig: 118, 122, 123, 124, 121, 120, 125, 119, 115.
+- Kernaussagen: PR 122 behebt den 503 des Shop-Dienstes nicht und verwendet `SHOP_API_ALLOWED_PROJECT_IDS`; `main` verwendet `SHOP_ALLOWED_PROJECT_IDS` (Variablennamen IST, `git grep` auf `origin/claude/teileklar-backend` und `main`, `apps/shop-api`). PR 118 ändert die Google-Anmeldung ohne Schalter.
+
+Regelbetrieb (Notiz, Quelle: koordinierende Sitzung, 14.11.2026): Die geplante Aufgabe in der Umgebung „Agentur Repo“ konnte das Repository nicht klonen; ihr Lauf um 10:47 UTC blieb ohne Live-Prüfung. Sie ist deaktiviert. Der Ersatz feuert in die koordinierende Sitzung; erster Lauf 14:47 UTC, noch nicht belegt. Endet diese Sitzung, endet der Regelbetrieb. OFFEN: ein Regelbetrieb, der ohne offene Sitzung läuft.
+
+Nebenbefund (IST Fundstelle, Verhalten Notiz): `apps/web/auth/tests/chat-route-errors.test.mjs` Zeile 58 prüft, dass die Ausgabe kein „429“ enthält; die Ausgabe trägt eine zufällige Kennung, die diese Ziffernfolge enthalten kann. Der Test ist damit wacklig. Nicht behoben.
+
+Kundenprojekte (nur Verweis, keine Kundendaten in diesem Repository; Notiz, Quelle: koordinierende Sitzung, 14.11.2026): Studienkolleg Aachen wird in eigener Sitzung und eigenem Repository bearbeitet. JS Reinigung Wesel: Quellcode nicht auffindbar, offen beim Inhaber.
+
+Prüfstand `main` `5d4a187` lokal vor dieser Nachführung (IST, 14.11.2026, 11:22 UTC): `python3 -m unittest discover -s tests` 780 Tests, 135 Failures, 12 Errors, 19 Skips; `python3 tools/verify_requirements_reconciliation.py` Exit 1 mit 55 Meldungen „Stale implementation source“. Nicht neu gemessen: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen die Produktion (letzte Messung 10:37 bis 10:43 UTC, Abschnitt darunter); `make graph`.
+
+Diese Nachführung (Zweig `claude/stand-1125`) ändert nur Dokumente: `DECISIONS.md` D-018; diesen Abschnitt und „Offene Arbeiten“ in `PROGRESS.md`; in `AGENTS.md` Verweis auf D-018, den Wissensgraphen, Kundenprojekte und diesen Stand; in `GO-LIVE.md` die Standzeile (Migration `0004`). Keine Prüfsumme und kein Beleg wurden angefasst. `PROGRESS.md` und `AGENTS.md` wichen schon vorher von ihren Bindungen ab (`source_sha256` im Register, Meldung „Stale implementation source: PROGRESS.md“); die Bindungen bleiben Sache der Neuprüfung (PR 152).
+
 ## Stand 14.11.2026 · Angleichung an die Startseite, Live-Prüfung, Inhaberentscheidungen D-012 bis D-017
 
 Kennzeichnung in diesem Abschnitt: IST = durch Lauf, Commit oder Messung belegt; OFFEN = fehlt oder nicht belegt. Die Entscheidungen selbst stehen nur in `DECISIONS.md` (D-011 bis D-017), Betriebsschritte nur in `GO-LIVE.md`.
@@ -12,34 +41,43 @@ Diese Nachführung (Zweig `claude/stand-halten`) ändert nur Dokumente und einen
 
 OFFEN, nicht belegt (aus den Sitzungsnotizen vom 14.11.2026 übernommen, hier nicht nachgeprüft): Zuordnung der Domains zum Projekt `prj_lKQEWQ…` über die Vercel-Schnittstelle (Abruf von hier 403; die Zuordnung steht in `docs/deployment/environment-variables.md` Abschnitt 6); 503 `database_metadata_unavailable` im früheren Projekt `prj_Po7jl…`; signierter Composio-Webhook 200; GitHub Actions startet kontoweit keine Jobs (zuletzt belegt am 13.11.2026 im Befund, Abschnitt 10); Zahl und Zustand der offenen Pull Requests. Live-Wirkung der Shop-Zulassungsliste: unverändert offen, siehe nächster Abschnitt.
 
-## Offene Arbeiten · Stand 14.11.2026
+## Offene Arbeiten · Stand 14.11.2026, ca. 11:25 UTC
 
-Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`; 5 lokal erledigt, 12 extern blockiert, 1 lokal offen). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld; die Zuordnung zu P01–P26 trifft der Register-Owner (wie `docs/04-betrieb/befund-2026-11-13.md` Abschnitt 9). Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben. „Notiz“ heißt: aus der Sitzungsnotiz vom 14.11.2026, hier nicht nachgeprüft.
+Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld; die Zuordnung zu P01–P26 trifft der Register-Owner (wie `docs/04-betrieb/befund-2026-11-13.md` Abschnitt 9). Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben. „Notiz“ heißt: Quelle: koordinierende Sitzung, 14.11.2026, hier nicht nachgeprüft. Stände der Entwürfe und die Sichtung stehen im Abschnitt „Stand 14.11.2026, ca. 11:25 UTC“ und werden hier nicht wiederholt.
 
 Kann die Fabrik (innerhalb D-017, ohne neue Freigabe):
-- Belege und Prüfsummen neu prüfen (134 Failures, 14 Errors; MASTER-09, Auftragsregister OF-02/OF-11). Läuft auf `claude/belege-neupruefung`. IST.
-- Formular-Absendeschalter (Termine, Gutscheine, Partner, Kontakt) aus dem Baustein der Startseite; Gleichmacher um Formulare, Karten und Eingabefelder erweitern (D-012). Läuft auf `claude/formulare-angleichen`. IST Zweig, Befund Notiz.
-- Shop-Schema für die eigene Supabase-Instanz mit RLS und Tests vorbereiten, ohne Umschaltung (D-013, `DATA-STORE-001`). Läuft auf `claude/shop-supabase`. IST Zweig.
-- Composio-Ereignisse dauerhaft ablegen statt im Arbeitsspeicher (D-013). Läuft auf `claude/composio-supabase`. IST Zweig.
-- Mobile Optimierung und PWA für `apps/web` (D-015, MASTER-13). Zweig `claude/mobil-pwa` angelegt, noch ohne Commit. IST.
-- Tote `.tk-window`-Regeln in `apps/web/components/shop/Storefront.css` (7 Treffer) und `HomeMaster.css` (8 Treffer) gegen die 3 Verwendungen in `apps/web` abgleichen. IST Zählung.
-- Offene Pull Requests sichten (überholt, mergebar, Konflikt, Entscheidung nötig); darunter der Zweig `claude/marke-texte` mit eigener Zählung D-011 bis D-020. Notiz; Nummernkollision IST.
+- Belege und Prüfsummen neu prüfen (auf `main` 135 Failures, 12 Errors; MASTER-09, Auftragsregister OF-02/OF-11). PR 152, Entwurf. Dazu die vier offenen Seitenbefunde (Zweig `claude/seitenbefunde`, Notiz).
+- Shop-Schema für die eigene Supabase-Instanz mit RLS und Tests, ohne Umschaltung (D-013, `DATA-STORE-001`). PR 147, Entwurf; weiter erst nach der Entscheidung zum Verbindungsweg.
+- Shop-Zugriffsschicht fertigstellen: Kasse, Admin und Import, 80 von 139 Aufrufen offen. PR 150, Entwurf (Zahlen Notiz).
+- Gleichmacher um Karten und Eingabefelder erweitern (D-012). Absende- und Konto-Schalter sind mit PR 149 erledigt (IST).
+- Mobile Optimierung und PWA für `apps/web` (D-015, MASTER-13). Ein Zweig `claude/mobil-pwa` lag um 11:24 UTC nicht auf `origin` (IST); kein Stand belegt.
+- Verbliebene `.tk-window`-Regeln in `apps/web/components/shop/Storefront.css` (4 Treffer) und `HomeMaster.css` (5 Treffer) gegen die 3 Verwendungen in `apps/web` abgleichen. IST Zählung, `grep`, 14.11.2026.
+- Wackligen Test `apps/web/auth/tests/chat-route-errors.test.mjs` Zeile 58 stabil machen, ohne die Aussage des Tests abzuschwächen.
+- Wissensgraph nutzen und aktuell halten (`make graph`, D-018); Lauf und Größe hier noch nicht gemessen.
 - Alter Produktname in Fließtexten der Dokumentation: nach D-011 bewusst Historie; neue Texte verwenden „NeX AIFly Suite“.
 - MASTER-09: Kontrast über Bildern und Inhaltsverlust bei Zoom und Textabstand messbar machen; die Prüfung mit Assistenztechnik braucht einen Menschen.
-- Geplanter Regelbetrieb (Tagesbericht, Nachtlauf): prüfen, ob er mit Repository läuft. Notiz; zuletzt belegt als leer im Befund vom 13.11.2026.
+- Regelbetrieb: ersten Lauf des Ersatzes (14:47 UTC) belegen. Notiz.
 
 Braucht den Inhaber:
-- Shop-Dienst in Produktion: `SHOP_ALLOWED_PROJECT_IDS`, Datenbank- und Zahlungsvariablen im Projekt `…-ut7r` (`docs/deployment/environment-variables.md` Abschnitt 6) oder Entscheidung, den Shop erst mit Supabase wieder einzuschalten (D-013). IST 503.
-- Supabase-Instanz: Adresse, Zugang, Freigabe für Migration und Umschaltung; Freigabe je Schritt für jede Server-Bereinigung (D-013, D-016).
+- Offene Pull Requests: überholte schließen (135, 126, 105, 75, 74, 73, 67, 65, 60, 48); über 118, 122, 123, 124, 121, 120, 125, 119, 115 entscheiden; 94 und 107 zur Prüfung freigeben. Der Zweig `claude/marke-texte` (PR 119) zählt D-011 bis D-020 anders als `main` (IST Nummernkollision).
+- Verbindungsweg des Shop-Dienstes zur Supabase-Instanz (PR 147). Supabase-Instanz: Adresse und Schlüssel, Freigabe für Migration und Umschaltung; Freigabe je Schritt für jede Server-Bereinigung (D-013, D-016). Unverändert offen.
+- Shop-Dienst in Produktion: `SHOP_ALLOWED_PROJECT_IDS`, Datenbank- und Zahlungsvariablen im Projekt `…-ut7r` (`docs/deployment/environment-variables.md` Abschnitt 6) oder Entscheidung, den Shop erst mit Supabase wieder einzuschalten (D-013). 503 zuletzt gemessen 14.11.2026, 10:41 UTC.
+- GitHub Actions startet kontoweit keine Jobs: Kontoeinstellung oder Abrechnung prüfen. Unverändert offen, Notiz; zuletzt belegt am 13.11.2026 (`docs/04-betrieb/befund-2026-11-13.md` Abschnitt 10).
+- Codex-Kontingent. Unverändert offen, Notiz.
+- Schlüssel erneuern, die im Gespräch standen (BigBuy, Composio). Unverändert offen, Notiz (D-017).
+- Fünf verwaiste Vercel-Projekte trennen; Vercel Agent und Connect Triggers (Kosten). Unverändert offen, Notiz.
+- Regelbetrieb: Umgebung „Agentur Repo“ so einrichten, dass sie das Repository klonen kann, oder den Ersatz über die koordinierende Sitzung bestätigen. Notiz.
+- Kundenprojekt JS Reinigung Wesel: Quellcode bereitstellen. Notiz; Einzelheiten nicht in diesem Repository.
+- Graphify: Konto beim Cloud-Dienst nur nach eigener Entscheidung (D-018).
 - Paperclip: Instanz und Zugang (D-014). Router-Adresse und Schlüssel für die Agenten. Notiz.
 - Rechtsform und Impressum widerspruchsfrei (PR 102 nennt Eenmanszaak, `apps/site/src/Auth.tsx` nennt „B.V.“; Auftragsregister OF-03); endgültiger Text `/ki-hinweise` de/nl/fr; Abgleich der Regel „KI-Kennzeichnung“ mit D-010.
 - Entscheidungen E1, E3, E4, E5, E6, E12 (`docs/09-final/08-recht-und-compliance.md`); Livegang der Kasse (Freigabe-Gate `docs/09-final/07`).
 - Modellbindung: `AGENTS.md` verlangt die Kennung mit Endung `-1017` im Providerrequest; `apps/web/lib/chat-llm.ts` sendet seit PR 106 den Router-Namen `openrouter/deepseek-v4.1-flash` (dort als vom Inhaber am 13.11.2026 freigegeben vermerkt). Regel oder Code angleichen.
 - Indexierung einschalten (hängt an Impressum und Freigabe).
-- GitHub Actions: Kontoeinstellung oder Abrechnung prüfen. Composio: „Enhanced Controls“ oder gültiger Schlüssel. Zugangsdaten erneuern, die im Gespräch standen (BigBuy, Composio). Verwaiste Vercel-Projekte trennen; Vercel Agent und Connect Triggers (Kosten). Alle Notiz.
+- Composio: „Enhanced Controls“ oder gültiger Schlüssel; Live-Wirkung der dauerhaften Ablage (PR 146) hängt an der Supabase-Instanz. Notiz.
 - Welches Register führt: `docs/09-final/auftragsregister-2026-11-08.md` nennt sich „das führende Aufgabenregister“, `AGENTS.md` führt P01–P26 in `config/acceptance-coverage.json`. IST Widerspruch, nicht aufgelöst.
 
-Next Steps: Neuprüfung der Belege abschließen und die zusätzlich abweichende Prüfsumme von `PROGRESS.md` dort mit aufnehmen; D-013 erst nach belegtem Zugang zur Supabase-Instanz umsetzen; Shop-Dienst erst nach Inhaberentscheidung einschalten.
+Next Steps: PR 152 abschließen und dabei die abweichenden Bindungen von `PROGRESS.md` und `AGENTS.md` aufnehmen; D-013 erst nach belegtem Zugang zur Supabase-Instanz umsetzen; Shop-Dienst erst nach Inhaberentscheidung einschalten; ersten Lauf des Regelbetriebs belegen.
 
 ## Shop-Projektbindung als Zulassungsliste · 14.11.2026
 Die feste Prüfung `VERCEL_PROJECT_ID == prj_Po7jl…` in `apps/shop-api/vercel_app.py` und `namespace_operator.py` ist eine optionale, nicht geheime Liste `SHOP_ALLOWED_PROJECT_IDS` (kommagetrennt, Leerzeichen toleriert) mit einer gemeinsamen Funktion `project_binding_verified`. Nicht gesetzt, leer oder nur Leerzeichen/Kommas gilt als nicht konfiguriert und ergibt exakt das bisherige Projekt, nie „offen“. Eine gesetzte Liste ersetzt den Standard. Diagnosecode weiter `project_binding_unverified`, ohne ID oder Liste in Antwort, Ausnahme oder Log. `PROJECT_ID`, Namespace-Marker und Plan-Digest bleiben an `prj_Po7jl…` gebunden. Doku: `docs/deployment/environment-variables.md` Abschnitt 6 (Nachträge in den beiden Release-Dokumenten vom 31.10.).
@@ -1495,6 +1533,12 @@ und docs/reviews/agent-team-20261101/report.json.
 Browser-Plugin tatsächlich versucht: originating browser context fehlt; native
 Codex-Code-Review-Einstellung daher weiter ungeprüft. Hermes v0.22.5 an Commit
 bf0203a794a07aac3ff764972ab9087baa4e4f4e gebunden, nicht installiert. Lokaler
+[Berichtigung 14.11.2026: „nicht installiert“ galt nur für den damaligen Executor
+und ist als Aussage über die Server überholt. Notiz, Quelle: koordinierende Sitzung
+über die Hostinger-API, nur lesend, 14.11.2026 ca. 11:50 UTC, hier nicht
+nachgeprüft: Auf `srv1941843` läuft seit acht Tagen der Container `hermes`
+(Compose-Projekt `docker-hermes`, Home `/root/.hermes`). Version, Konfiguration
+und Modell dort sind offen. Vorbereitung und offene Punkte: `ops/hermes/README.md`.]
 Python3.12-Executor belegt keine unterstützte Hermes-Python3.14-Hostumgebung.
 Aktueller Chat-Handler und 9router-Anschluss sind noch unverbunden.
 make check scheitert im partiellen kanonischen Checkout am fehlenden ds-audit-cli;

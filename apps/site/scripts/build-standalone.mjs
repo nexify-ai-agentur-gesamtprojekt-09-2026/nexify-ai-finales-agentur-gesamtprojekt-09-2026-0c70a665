@@ -20,7 +20,10 @@ if(parsed.errors.length||parsed.module.staticImports.length||parsed.module.dynam
 const stylesheet=/<link\b(?=[^>]*rel="stylesheet")(?=[^>]*href="([^"]+)")[^>]*>/;
 const style=stylesheet.exec(html);if(!style)throw new Error('Missing stylesheet');
 let css=await readFile(ownedPath(style[1]),'utf8');
-for(const [file,mime]of[['portrait.png','image/png'],['media/presenters/hero-trio.png','image/png'],['media/presenters/ai-fly-oracle-avatar-9f705e5b.png','image/png'],['media/presenters/nex-toucan-121a804c.png','image/png'],['media/presenters/pascal-original-6dd03834.png','image/png'],['signet.svg','image/svg+xml'],['fonts/geist-latin.woff2','font/woff2'],['fonts/geist-mono-latin.woff2','font/woff2']]){
+// Logo-Figur und Schriften folgen dem Stand seit 32616db (PR 127): Die Figur liegt unter /brand/nexify-figur.png (Logo.tsx, LOGO_FIGUR),
+// das fruehere /signet.svg ist nach archiv/logo-bis-2026-11-13/ verschoben und wird von der Oberflaeche nicht mehr geladen;
+// globals.css laedt zusaetzlich Inter und Jakarta. Fehlt eine dieser Dateien im Build, bricht das Skript wie bisher ab.
+for(const [file,mime]of[['portrait.png','image/png'],['media/presenters/hero-trio.png','image/png'],['media/presenters/ai-fly-oracle-avatar-9f705e5b.png','image/png'],['media/presenters/nex-toucan-121a804c.png','image/png'],['media/presenters/pascal-original-6dd03834.png','image/png'],['brand/nexify-figur.png','image/png'],['fonts/geist-latin.woff2','font/woff2'],['fonts/geist-mono-latin.woff2','font/woff2'],['fonts/inter-latin.woff2','font/woff2'],['fonts/jakarta-latin.woff2','font/woff2']]){
  const data=`data:${mime};base64,${(await readFile(resolve(dist,file))).toString('base64')}`;
  js=js.replaceAll('/'+file,data);css=css.replaceAll('/'+file,data);
 }

@@ -82,7 +82,7 @@
   ],
   "budgetKicker": "Kosten und Umfang",
   "budgetTitle": "Sie wissen vor dem Start, was enthalten ist.",
-  "budgetBody": "Höchste Qualität zu einem fairen Preis: Unsere Projektarbeit hat eine feste Kalkulationsbasis. Vor dem Start erhalten Sie einen klar abgegrenzten Umfang und entscheiden, was jetzt entsteht und was später folgt.",
+  "budgetBody": "Vor dem Start erhalten Sie ein Angebot mit klar abgegrenztem Umfang. Sie entscheiden, was jetzt entsteht und was später folgt.",
   "costs": [
    [
     "Entwicklung",
@@ -114,27 +114,27 @@
   "benchmarkDate": "Quellen geprüft am 2. November 2026. Keine repräsentative Marktstatistik.",
   "productsKicker": "Produkte von NeXify",
   "productsTitle": "Eigene Werkzeuge für konkrete Arbeit.",
-  "productsBody": "NeX AIFly Suite, Oracle, API und TEILEKLAR haben unterschiedliche Aufgaben. Wir zeigen Ihnen, welcher Bereich für Ihr Vorhaben nützlich ist und was bereits verfügbar ist.",
+  "productsBody": "Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE, die NeXify API und TEILEKLAR haben je eine eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.",
   "products": [
    [
     "NeX AIFly Suite",
-    "Ihr persönlicher oder geschäftlicher Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Wissen.",
-    "Privat & Business kennenlernen"
+    "Ihr eigener Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.",
+    "Suite kennenlernen"
    ],
    [
     "NeX Agentic AI",
-    "Assistenz für klar umrissene Aufgaben, mit freigegebenen Werkzeugen.",
-    "Agentenarbeit verstehen"
+    "Der Agent für klar umrissene Aufgaben – mit den Werkzeugen, die Sie zulassen.",
+    "Agenten kennenlernen"
    ],
    [
     "NeXify API",
-    "Der technische Integrationsweg für eigene Anwendungen. Umfang, Zugang und Betriebsbedingungen werden gesondert geklärt.",
-    "API-Konzept ansehen"
+    "KI-Funktionen von NeXify in Ihrer eigenen Anwendung, genutzt über ein Guthaben.",
+    "API ansehen"
    ],
    [
     "TEILEKLAR",
-    "Die eigenständige Welt für Fahrzeugteile, Werkstätten und passende Anfragen.",
-    "Zum Fahrzeug- und Teilebereich"
+    "Unsere eigene Marke: Zubehör und Teile für Auto und Motorrad, mit klaren Angaben.",
+    "Zu TEILEKLAR"
    ]
   ],
   "finishKicker": "Kommen Sie rein.",
@@ -144,7 +144,7 @@
   "finishAlternative": "Leistungsumfang ansehen",
   "finishNote": "",
   "serviceLink": "Leistung und Umfang ansehen",
-  "budgetLink": "Mehr zu Preisen und Zusammenarbeit",
+  "budgetLink": "Mehr zu Kosten und Ablauf",
   "visibility": {
    "title": "Wer Sie sucht, soll Sie auch finden.",
    "lead": "Gefunden werden. Vertrauen gewinnen. Anfragen bekommen.",
@@ -262,7 +262,7 @@
   ],
   "budgetKicker": "Kosten en omvang",
   "budgetTitle": "U weet vooraf wat inbegrepen is.",
-  "budgetBody": "Topkwaliteit voor een eerlijke prijs: ons projectwerk heeft een vaste calculatiebasis. Vóór de start krijgt u een duidelijk afgebakende omvang en beslist u wat nu ontstaat en wat later volgt.",
+  "budgetBody": "Vóór de start ontvangt u een offerte met een duidelijk afgebakende omvang. U beslist wat nu ontstaat en wat later volgt.",
   "costs": [
    [
     "Ontwikkeling",
@@ -294,27 +294,27 @@
   "benchmarkDate": "Bronnen gecontroleerd op 2 november 2026. Geen representatieve marktstatistiek.",
   "productsKicker": "Producten van NeXify",
   "productsTitle": "Eigen tools voor concreet werk.",
-  "productsBody": "NeX AIFly Suite, Oracle, API en TEILEKLAR hebben elk een andere taak. We laten zien wat voor uw plan nuttig is en wat al beschikbaar is.",
+  "productsBody": "De NeX AIFly Suite, de agenten NeX en AIFly ORACLE, de NeXify API en TEILEKLAR hebben elk een eigen taak. We zeggen u eerlijk wat bij uw plan past.",
   "products": [
    [
     "NeX AIFly Suite",
-    "Uw persoonlijke of zakelijke werkruimte voor gesprekken, taken, documenten en kennis.",
-    "Privé & Business ontdekken"
+    "Uw eigen werkruimte voor gesprekken, taken, documenten en projectkennis.",
+    "Suite leren kennen"
    ],
    [
     "NeX Agentic AI",
-    "Assistentie voor duidelijk omschreven taken, met vrijgegeven tools.",
-    "Agentwerk begrijpen"
+    "De agent voor duidelijk omschreven taken – met de tools die u toestaat.",
+    "Agenten leren kennen"
    ],
    [
     "NeXify API",
-    "De integratieroute voor eigen toepassingen. Omvang, toegang en beheer worden apart bepaald.",
-    "API-concept bekijken"
+    "AI-functies van NeXify in uw eigen applicatie, gebruikt via een tegoed.",
+    "API bekijken"
    ],
    [
     "TEILEKLAR",
-    "De eigen wereld voor onderdelen, werkplaatsen en passende aanvragen.",
-    "Naar voertuigen en onderdelen"
+    "Ons eigen merk: accessoires en onderdelen voor auto en motor, met duidelijke gegevens.",
+    "Naar TEILEKLAR"
    ]
   ],
   "finishKicker": "Kom binnen.",
@@ -324,7 +324,7 @@
   "finishAlternative": "Omvang bekijken",
   "finishNote": "",
   "serviceLink": "Dienst en omvang bekijken",
-  "budgetLink": "Meer over prijzen en samenwerking",
+  "budgetLink": "Meer over kosten en werkwijze",
   "visibility": {
    "title": "Wie u zoekt, moet u kunnen vinden.",
    "lead": "Gevonden worden. Vertrouwen winnen. Aanvragen krijgen.",
@@ -442,7 +442,7 @@
   ],
   "budgetKicker": "Coûts et périmètre",
   "budgetTitle": "Vous savez ce qui est inclus avant de commencer.",
-  "budgetBody": "La plus haute qualité à un prix juste : notre travail de projet repose sur une base de calcul fixe. Avant le départ, vous recevez un périmètre clairement défini et décidez de ce qui se fait maintenant et de ce qui suivra.",
+  "budgetBody": "Avant le départ, vous recevez une offre au périmètre clairement défini. Vous décidez de ce qui se fait maintenant et de ce qui suivra.",
   "costs": [
    [
     "Développement",
@@ -474,27 +474,27 @@
   "benchmarkDate": "Sources vérifiées le 2 novembre 2026. Aucune statistique représentative du marché.",
   "productsKicker": "Produits NeXify",
   "productsTitle": "Des outils pour un travail concret.",
-  "productsBody": "NeX AIFly Suite, Oracle, API et TEILEKLAR ont chacun leur rôle. Nous montrons ce qui peut servir votre projet et ce qui est déjà disponible.",
+  "productsBody": "NeX AIFly Suite, les agents NeX et AIFly ORACLE, l’API NeXify et TEILEKLAR ont chacun leur rôle. Nous vous disons clairement ce qui convient à votre projet.",
   "products": [
    [
     "NeX AIFly Suite",
-    "Votre espace personnel ou professionnel pour conversations, tâches, documents et connaissances.",
-    "Découvrir Privé & Business"
+    "Votre propre espace pour conversations, tâches, documents et connaissances de projet.",
+    "Découvrir la Suite"
    ],
    [
     "NeX Agentic AI",
-    "Une assistance pour des tâches clairement définies, avec des outils validés.",
-    "Comprendre le travail des agents"
+    "L’agent pour des tâches clairement définies – avec les outils que vous autorisez.",
+    "Découvrir les agents"
    ],
    [
     "NeXify API",
-    "La voie d’intégration pour vos applications. Périmètre, accès et exploitation sont définis séparément.",
-    "Voir le concept API"
+    "Les fonctions IA de NeXify dans votre application, utilisées via un crédit.",
+    "Voir l’API"
    ],
    [
     "TEILEKLAR",
-    "L’univers distinct des pièces, ateliers et demandes automobiles.",
-    "Vers véhicules et pièces"
+    "Notre propre marque : accessoires et pièces pour l’auto et la moto, aux informations claires.",
+    "Vers TEILEKLAR"
    ]
   ],
   "finishKicker": "Entrez.",
@@ -504,7 +504,7 @@
   "finishAlternative": "Voir le périmètre",
   "finishNote": "",
   "serviceLink": "Voir la prestation et son périmètre",
-  "budgetLink": "Prix et collaboration",
+  "budgetLink": "Coûts et déroulement",
   "visibility": {
    "title": "Les bonnes personnes doivent pouvoir vous trouver.",
    "lead": "Être trouvé. Inspirer confiance. Recevoir des demandes.",
@@ -622,7 +622,7 @@
   ],
   "budgetKicker": "Cost and scope",
   "budgetTitle": "Know what is included before work begins.",
-  "budgetBody": "The highest quality at a fair price: our project work has a fixed pricing basis. Before we start, you receive a clearly defined scope and decide what is built now and what follows later.",
+  "budgetBody": "Before we start, you receive a proposal with a clearly defined scope. You decide what is built now and what follows later.",
   "costs": [
    [
     "Development",
@@ -654,27 +654,27 @@
   "benchmarkDate": "Sources checked on 2 November 2026. Not a representative market survey.",
   "productsKicker": "NeXify products",
   "productsTitle": "Our tools for real work.",
-  "productsBody": "NeX AIFly Suite, Oracle, API and TEILEKLAR each serve a different purpose. We show what is useful for your project and what is already available.",
+  "productsBody": "NeX AIFly Suite, the agents NeX and AIFly ORACLE, the NeXify API and TEILEKLAR each have their own job. We tell you openly what fits your project.",
   "products": [
    [
     "NeX AIFly Suite",
-    "Your personal or business workspace for conversations, tasks, documents and knowledge.",
-    "Explore Personal & Business"
+    "Your own workspace for conversations, tasks, documents and project knowledge.",
+    "Get to know the Suite"
    ],
    [
     "NeX Agentic AI",
-    "Assistance for clearly defined tasks, with approved tools.",
-    "Understand agent work"
+    "The agent for clearly defined tasks – with the tools you allow.",
+    "Meet the agents"
    ],
    [
     "NeXify API",
-    "The integration route for your own applications. Scope, access and operating terms are defined separately.",
-    "Explore the API concept"
+    "NeXify’s AI functions in your own application, used from a prepaid balance.",
+    "View the API"
    ],
    [
     "TEILEKLAR",
-    "The separate world for vehicle parts, workshops and relevant enquiries.",
-    "Explore vehicles and parts"
+    "Our own brand: accessories and parts for cars and motorcycles, with clear details.",
+    "Go to TEILEKLAR"
    ]
   ],
   "finishKicker": "Come on in.",
@@ -684,7 +684,7 @@
   "finishAlternative": "Explore the scope",
   "finishNote": "",
   "serviceLink": "Explore the service and scope",
-  "budgetLink": "Pricing and working together",
+  "budgetLink": "More on costs and process",
   "visibility": {
    "title": "Help the right people find you.",
    "lead": "Get found. Build trust. Start conversations.",

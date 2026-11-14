@@ -34,7 +34,7 @@ nicht widerspruchsfrei belegt. Messwerte und Quellen: `PROGRESS.md`, Abschnitt
 
 ## Inhaberentscheidungen · 14.11.2026
 
-Maßgeblich sind die Einträge D-011 bis D-017 in `DECISIONS.md`; sie werden hier nicht
+Maßgeblich sind die Einträge D-011 bis D-018 in `DECISIONS.md`; sie werden hier nicht
 wiederholt. Für die Arbeit in diesem Repository folgt daraus:
 
 - Die Startseite ist die einzige fertige Referenz. Neue Seiten und Abschnitte in
@@ -49,6 +49,16 @@ wiederholt. Für die Arbeit in diesem Repository folgt daraus:
   bleiben.
 - Führende Dokumente nach jedem Merge und jeder Inhaberentscheidung nachführen:
   `.claude/skills/nexify-stand-halten/SKILL.md`.
+- Der Wissensgraph (Graphify) wird in jedem Projekt eingesetzt, je Projekt getrennt
+  (D-018). Vor dem Einzellesen vieler Dateien und vor jeder Änderung an einem gemeinsam
+  genutzten Baustein den Graphen befragen: `.claude/skills/nexify-graph/SKILL.md`
+  (`make graph`, `tools/graph.sh`). Der Graph ersetzt keine Prüfung und kein Gate.
+- Kundenprojekte werden in eigenen Repositories und eigenen Sitzungen bearbeitet.
+  Kundendaten und Einzelheiten zu Vorfällen gehören nicht in dieses Repository; hier
+  steht höchstens ein Verweis (`PROGRESS.md`, „Offene Arbeiten“).
+- Aktueller Stand, offene Entwürfe und was beim Inhaber liegt: `PROGRESS.md`, oberster
+  Abschnitt und „Offene Arbeiten“. Dort nachlesen, bevor eine Arbeit begonnen wird, die
+  ein anderer Zweig schon trägt.
 
 ## Frühere Führungsentscheidung · 04.11.2026
 

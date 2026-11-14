@@ -1,0 +1,122 @@
+# NeXify · Hermes-Konfiguration für /root/.hermes/config.yaml (Container `hermes`).
+# Format belegt an NousResearch/hermes-agent bf0203a794a07aac3ff764972ab9087baa4e4f4e
+# (website/docs/user-guide/configuration.md und dort verlinkte Seiten).
+# Modell, Reasoning und Fallback-Verbot stammen aus config/llm-policy.json;
+# tools/check_hermes_config.py prüft die Übereinstimmung. Keine Geheimnisse hier:
+# Schlüssel stehen nur in /root/.hermes/.env (Namen siehe .env.example).
+# `_config_version` fehlt absichtlich: Hermes verwaltet den Wert selbst.
+
+model:
+  provider: openrouter
+  default: deepseek/deepseek-v4.1-flash-1017
+  api_mode: chat_completions
+
+# Kein Ersatzmodell, kein Ersatzanbieter (llm-policy: silent_model_fallback false).
+fallback_providers: []
+
+agent:
+  reasoning_effort: high
+  # Orchestrator-Limits aus config/brain/agents.json (maxSchritte 30, maxMinuten 20).
+  max_turns: 30
+  run_budget_seconds: 1200
+
+# OpenRouter soll nur an Anbieter leiten, die alle gesendeten Parameter annehmen;
+# sonst Fehler statt stillem Wegfall von `reasoning` (silent_reasoning_downgrade false).
+provider_routing:
+  require_parameters: true
+
+# Grenzen aus config/integrations/nexify-team-runtime-candidate.json (delegation_bounds).
+delegation:
+  fallback_providers: []
+  max_concurrent_children: 4
+  max_spawn_depth: 1
+  max_iterations: 20
+
+# Arbeitsverzeichnis: absoluter, im Container vorhandener Pfad des Monorepos.
+# Behebt „session.create refused ... field=cwd“. Hermes lädt dort AGENTS.md selbst.
+terminal:
+  backend: local
+  cwd: ${NEXIFY_REPO}
+
+# Die zwölf Skills bleiben im Repository; Hermes liest sie dort (gleiches SKILL.md-Format).
+skills:
+  external_dirs:
+    - ${NEXIFY_REPO}/.claude/skills
+  write_approval: true
+  guard_agent_created: true
+  creation_nudge_interval: 0
+
+memory:
+  write_approval: true
+
+# Keine selbsttätige Änderung von Skills (Kandidat: automatic_skill_mutation false).
+curator:
+  enabled: false
+
+# Nebenaufgaben laufen auf demselben Modell (provider auto = Hauptmodell), ohne
+# eigene Ausweichkette und mit demselben Reasoning. Sitzungstitel werden ohne
+# Modellaufruf abgeleitet: Hermes sendet dafür sonst `reasoning: {enabled: false}`
+# (lokal gemessen, siehe README „Belege“).
+auxiliary:
+  background_review:
+    enabled: false
+  title_generation:
+    model_upgrade_enabled: false
+    reasoning_effort: high
+  vision:
+    reasoning_effort: high
+  compression:
+    reasoning_effort: high
+  skills_hub:
+    reasoning_effort: high
+  approval:
+    reasoning_effort: high
+  mcp:
+    reasoning_effort: high
+  tts_audio_tags:
+    reasoning_effort: high
+  triage_specifier:
+    reasoning_effort: high
+  kanban_decomposer:
+    reasoning_effort: high
+  profile_describer:
+    reasoning_effort: high
+  goal_judge:
+    reasoning_effort: high
+  curator:
+    reasoning_effort: high
+  monitor:
+    reasoning_effort: high
+
+# Gefährliche Befehle nur mit Rückfrage; ohne anwesenden Menschen abgelehnt.
+approvals:
+  mode: manual
+  cron_mode: deny
+  single_query_mode: deny
+  unattended_mode: deny
+  # Zusätzliches Netz zu den Hartsperren (reboot, firewall_aendern) aus
+  # config/brain/agents.json. Kein Ersatz für die Sperren im Gateway.
+  deny:
+    - 'reboot*'
+    - 'shutdown*'
+    - 'systemctl reboot*'
+    - 'systemctl poweroff*'
+    - 'iptables *'
+    - 'nft *'
+    - 'ufw *'
+
+# Der Server meldet Speicherdruck: höchstens ein Kanban-Worker gleichzeitig.
+kanban:
+  max_in_progress: 1
+
+# Keine geliehenen Anmeldungen anderer Werkzeuge, keine stillen Update-Prüfungen.
+auth:
+  adopt_external_logins: false
+
+updates:
+  check: false
+
+telemetry:
+  shared_metrics:
+    enabled: false
+    send: false

@@ -15,12 +15,14 @@ export function seoDescription(text:string,max=160):string{
  const word=cut.lastIndexOf(' ');
  return cut.slice(0,word>=80?word:max-1).replace(/[,;:–-]\s*$/,'')+'…';
 }
+/** Indexierung ist standardmäßig AUS (noindex), bis der Inhaber die Veröffentlichung freigibt. Freigabe = Umgebungsvariable NEXIFY_INDEXING=enabled im Vercel-Projekt, danach neu deployen (Rückweg: Variable entfernen, neu deployen). Keine Codeänderung nötig. */
+export const indexingEnabled=():boolean=>process.env.NEXIFY_INDEXING==='enabled';
 export function pageMetadata(page:PublicPage,locale:Locale):Metadata{
  const title=page.localizedTitle[locale]+' · '+(page.site_context==='teileklar'?'TEILEKLAR.shop':'NeXify AI');
  const languages:Record<string,string>={'x-default':localizedUrl(page.path,'de')};
  for(const code of ['de','nl','fr','en'] as Locale[])if(page.localizedTitle[code]&&page.localizedSummary[code]&&page.sections.every(s=>s.body[code]))languages[code]=localizedUrl(page.path,code);
  const description=seoDescription(page.localizedSummary[locale]);
- return {title,description,alternates:{canonical:localizedUrl(page.path,locale)},openGraph:{title,description,url:localizedUrl(page.path,locale),type:'website',locale},robots:{index:false,follow:false}};
+ return {title,description,alternates:{canonical:localizedUrl(page.path,locale),languages},openGraph:{title,description,url:localizedUrl(page.path,locale),type:'website',locale},robots:indexingEnabled()?{index:true,follow:true}:{index:false,follow:false}};
 }
 /** Metadata for dedicated (non-catalog-renderer) routes: same title/description/canonical/hreflang as the catalog page, explicit robots. */
 export function routeMetadata(pageId:string,indexable:boolean,locale:Locale='de'):Metadata{
