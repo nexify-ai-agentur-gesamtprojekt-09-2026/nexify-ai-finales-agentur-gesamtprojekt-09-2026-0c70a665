@@ -1,0 +1,72 @@
+{
+  "recorded_at": "2026-11-14T10:28:21.238Z",
+  "passed": true,
+  "mock": true,
+  "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
+  "scope": "Real Chromium against the Vite site (apps/site) rendering the current TEILEKLAR catalogue components (apps/web/components/shop) with an in-process MOCK of the shop API wire contract. mit gemockter Antwort; no apps/shop-api server code, no MongoDB, no BigBuy, no production data. Browse-only frontend proof; it does not cover the read-only snapshot mode of the removed ShopPanel catalogue.",
+  "production_data": false,
+  "server_code_executed": false,
+  "checks": [
+    "empty_catalogue_shows_honest_empty_states_and_no_sample_products",
+    "rendered_products_equal_the_api_page_with_supplier_facts_and_price_stock_states",
+    "images_load_only_from_the_supplier_allowlist_and_unsafe_hosts_are_never_requested",
+    "browsing_is_read_only_no_write_request_no_visitor_cookie_no_cart",
+    "search_query_and_seite_parameter_are_honoured_on_load_and_reload",
+    "category_routes_resolve_numeric_ids_and_malformed_ids_fall_back_to_the_category_list",
+    "catalogue_filters_and_pagination_fit_390px_and_are_keyboard_reachable"
+  ],
+  "source_sha256": {
+    "apps/web/components/shop/api.ts": "c94e85237975d714c0cb1625c7f016d0c3f89c4cff3092f571860ee1a5640e28",
+    "apps/web/components/shop/CatalogView.tsx": "b86cdeca4b06c0d620f24ff6c1ceb1949275f61bc97ebf546e69060ef7d45706",
+    "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
+    "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
+    "apps/web/components/shop/ProductDetail.tsx": "1fcf8013bbad504e6755e211d05b275ded93350cdbe6dfbed2ad0cc1b3c86097",
+    "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
+    "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
+    "apps/web/components/shop/shop.css": "bf3967f563a749aeed6f3bdee7a3e494a6e1fce2260d9efc15a02c791fee0ae3",
+    "apps/web/components/shop/Storefront.css": "ecd5f2d5655c6b20271826c27b491c736f0d1678f59582f78ec13ec6f46a603b",
+    "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
+    "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
+    "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
+    "apps/site/tests/browser-catalog.mjs": "ccd72e3b0f8176242c95b5f73fab1538d8c107b18e885366e88020c01032f9d7",
+    "apps/site/tests/fixtures/shop-api-mock.mjs": "66eff93269139503c34335ac700cf057b4f7cd6509c125871a73dbc6df5e98a5"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/shop/cart",
+      "status": 200,
+      "count": 50
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/categories",
+      "status": 200,
+      "count": 24
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0001",
+      "status": 200,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products/mock-0001",
+      "status": 404,
+      "count": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/shop/products",
+      "status": 200,
+      "count": 23
+    }
+  ],
+  "external_requests": [],
+  "supplier_image_requests_answered_locally": 9,
+  "order_started": false,
+  "payment_started": false,
+  "page_errors": [],
+  "reproduction": "PLAYWRIGHT_MODULE=<shim exposing chromium with executablePath /opt/pw-browsers/chromium> node apps/site/tests/browser-catalog.mjs (from the repository root, after node apps/site/scripts/generate-public-data.mjs)"
+}
