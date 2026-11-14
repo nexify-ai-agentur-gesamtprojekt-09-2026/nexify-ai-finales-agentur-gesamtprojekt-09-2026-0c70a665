@@ -1533,6 +1533,12 @@ und docs/reviews/agent-team-20261101/report.json.
 Browser-Plugin tatsächlich versucht: originating browser context fehlt; native
 Codex-Code-Review-Einstellung daher weiter ungeprüft. Hermes v0.22.5 an Commit
 bf0203a794a07aac3ff764972ab9087baa4e4f4e gebunden, nicht installiert. Lokaler
+[Berichtigung 14.11.2026: „nicht installiert“ galt nur für den damaligen Executor
+und ist als Aussage über die Server überholt. Notiz, Quelle: koordinierende Sitzung
+über die Hostinger-API, nur lesend, 14.11.2026 ca. 11:50 UTC, hier nicht
+nachgeprüft: Auf `srv1941843` läuft seit acht Tagen der Container `hermes`
+(Compose-Projekt `docker-hermes`, Home `/root/.hermes`). Version, Konfiguration
+und Modell dort sind offen. Vorbereitung und offene Punkte: `ops/hermes/README.md`.]
 Python3.12-Executor belegt keine unterstützte Hermes-Python3.14-Hostumgebung.
 Aktueller Chat-Handler und 9router-Anschluss sind noch unverbunden.
 make check scheitert im partiellen kanonischen Checkout am fehlenden ds-audit-cli;
