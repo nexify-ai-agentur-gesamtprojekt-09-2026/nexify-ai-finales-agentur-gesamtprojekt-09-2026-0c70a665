@@ -67,6 +67,22 @@ Seit dem Befund zu `/anmelden` (14.11.2026, abweichender Filmrahmen und andere S
 
 Seit dem 14.11.2026 kommt als zwölfter Baustein der Absendeschalter von Formularen dazu (`.home-concept form button[type="submit"]`). Die Startseite hat kein Formular; er wird deshalb gegen den Abschluss-Schalter der Startseite gemessen. Lokal gegen den Stand dieses Commits: 44 Seiten, 0 Abweichungen, einschließlich der Kontakt-, Such- und Konto-Formulare. Auf dem Konto-Blatt (`AuthForms.tsx`) ist der Absendeschalter der Abschluss-Schalter und der Google-Schalter der Text-Schalter der Startseite; die Konto-Regeln legen nur noch Breite und Anordnung fest. Die Startseite hat keinen eigenen sekundären Schalter neben dem primären, ihr zweiter Schalter ist der Text-Schalter.
 
+Seit dem 14.11.2026 (Register OA-052, D-012) stehen auch die Karten in der Prüfliste: Detailkarte geschlossen und aufgeklappt (`.hc-service-detail`), Ablaufkarte (`.hc-process>ol>li`), Galerie-Karte, Angebots-, Kosten- und Satzkarte sowie die Abschluss-Fläche (`.hc-finish`). Verglichen wird das Material der Fläche (Form, Grund, Kante, Tiefe, Innenabstand), nicht Inhalt und Größe. Die Satzkarte (`.hc-rate`) kommt heute nur einmal auf der Startseite vor; sie hat noch kein zweites Vorkommen zum Vergleich. Die Ausgabe nennt je Baustein die Zahl der Vergleiche (`jeBaustein`); 0 heißt: gelistet, aber ohne Vergleichspartner.
+
+Dazu kommen der Abschlussbereich und der Chat-Hinweis. `Abschluss-Schalterliste` (`.hc-finish-actions` ab zwei Schaltern, PR 173) hat `/kontakt` als Normseite, `Chat-Hinweis` (Hinweis unter der Chat-Eingabe, PR 172) die Startseite; er wird auch bei geschlossener Scheibe gemessen.
+
+**Feste Regeln.** Ein Vergleich gegen eine Normseite bleibt still, wenn ein Rückfall alle Seiten zugleich trifft. Deshalb prüft der Gleichmacher drei Regeln auf jeder Seite, auch auf der Normseite:
+
+| Regel | Bedingung |
+|---|---|
+| Abschluss-Schalterliste | Ab zwei Schaltern: alle gleich breit, eine linke Kante, zwischen ihnen genau der Abstandswert der Liste, genau ein Hauptschalter (`.hc-finish-primary`), und er steht nach seiner Lage an erster Stelle. |
+| Chat-Hinweis | Die Schriftgröße ist die kleinste Schriftstufe (`--as-t-12`); der Sollwert wird im Browser aus dem Token gelesen. |
+| Kopfleiste der Marke | Jede Seite trägt genau eine sichtbare Kopfleiste: unter `/teileklar` die Shop-Kopfleiste, sonst `.site-header`. |
+
+**TEILEKLAR.** Die Shop-Marke hat bewusst eine eigene Kopfleiste (`CommerceHeader`, in `Workspace.tsx` statt `.site-header` gesetzt; `docs/01-konzept/cd-2026-bildschirm.md`: TEILEKLAR behält die eigene Marke). Sie wird nicht gegen die NeXify-Kopfleiste gemessen, sondern innerhalb der Marke: Normseite ist `/teileklar`, verglichen werden zehn Bausteine der Shop-Kopfleiste (Leiste, Dienstzeile, Hauptzeile, Wortmarke, Suchfeld, Suchschalter, Konto-Links, Navigation, Navigations-Link, aktiver Navigations-Link) auf jeder Seite unter `/teileklar`. `tools/live-check.mjs` misst die Geometrie beim Blättern weiterhin nur an `.site-header`.
+
+Stand dieser Erweiterung: lokal 44 Seiten, 31.497 Vergleiche, 0 Abweichungen (zwei Läufe); gegen nexifyai.de am 14.11.2026, 20:04 UTC: 44 Seiten, 31.553 Vergleiche, 0 Abweichungen. Gegenprobe: Jeder neue Messpunkt und jede Regel schlägt an, wenn der Wert im Testbrowser verstellt wird; die Satzkarte ausgenommen (kein zweites Vorkommen).
+
 Gemessen wird überall mit geschlossener Chat-Scheibe. Die Scheibe öffnet sich ab 1200 px nur auf NeXify-Seiten von selbst und macht den Inhalt schmaler; weil die Schriftgröße mit der Behälterbreite wächst, sähe ein Vergleich mit gemischtem Zustand wie eine Abweichung aus. Der erste Lauf des Werkzeugs meldete deshalb 70 Abweichungen im Shop, die keine waren.
 
 ## Neuen Baustein in die Prüfung aufnehmen
@@ -74,7 +90,8 @@ Gemessen wird überall mit geschlossener Chat-Scheibe. Die Scheibe öffnet sich 
 Entsteht mit Freigabe des Inhabers ein neuer gemeinsamer Baustein, im selben Commit:
 
 1. Zeile in der Inventar-Tabelle oben ergänzen.
-2. Eintrag in `BAUSTEINE` in `tools/gleichmacher.mjs` ergänzen (Name und Selektor). Kommt der Baustein auf der Startseite nicht vor, als `[Selektor, Norm-Baustein]` eintragen: verglichen wird dann mit dem genannten Baustein der Startseite.
+2. Eintrag in `BAUSTEINE` in `tools/gleichmacher.mjs` ergänzen (Name und Selektor). Kommt der Baustein auf der Startseite nicht vor, als `[Selektor, Norm-Baustein]` eintragen: verglichen wird dann mit dem genannten Baustein der Startseite. Hat er auch dort kein Gegenstück, eine zweite Normseite angeben (`seite`); Bausteine der Marke TEILEKLAR bekommen `/teileklar`. Ein Schalter trägt „Schalter“ im Namen, sonst zählt seine Mindesthöhe nicht.
+3. Gegenprobe: den Wert auf einer Seite im Testbrowser verstellen und prüfen, dass der Gleichmacher den Baustein meldet. Ein Baustein, der nie anschlägt, prüft nichts.
 
 ## Mobil und PWA
 
