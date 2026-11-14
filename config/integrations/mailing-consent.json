@@ -1,0 +1,36 @@
+{
+  "$kommentar": "Einwilligungsweg für Werbemails (Anmeldung mit Bestätigungsmail, Nachweis, Sperrliste, Abmeldung). Gebaut hinter Schalter, Standard AUS. Jeder Wert `null` ist eine offene Freigabe des Inhabers: Solange einer fehlt, antwortet die Anmeldung mit 503 und versendet nichts. Wortlaute trägt nur der Inhaber ein (DECISIONS.md D-017); Agenten formulieren hier keine Rechtstexte vor. Betrieb und Reihenfolge: docs/04-betrieb/einwilligungsweg-2026-11-14.md.",
+  "schema_version": 1,
+  "stand": "2026-11-14",
+  "zustand": "gebaut_hinter_schalter_standardmaessig_aus",
+  "schalter": "NEXIFY_MAILING_CONSENT",
+  "register": ["OA-003", "OA-098"],
+  "einwilligung": {
+    "$kommentar": "`fassung` ist die Kennung des freigegebenen Wortlauts (zum Beispiel \"2026-11-20.1\"). Je Anmeldung werden Fassung und SHA-256 des Wortlauts gespeichert. Ein geänderter Wortlaut braucht eine neue Fassung.",
+    "fassung": null,
+    "freigabe": null,
+    "texte": { "de": null, "nl": null, "fr": null, "en": null }
+  },
+  "bestaetigungsmail": {
+    "$kommentar": "Je Sprache { \"betreff\": \"…\", \"text\": \"…\" }. Der Text muss {{BESTAETIGUNGSLINK}} enthalten und darf {{EINWILLIGUNGSTEXT}} enthalten. Die Mail enthält keine Werbung (Entwurf: docs/05-marketing/mailing/vorlagen/a-double-opt-in-bestaetigung.md).",
+    "freigabe": null,
+    "texte": { "de": null, "nl": null, "fr": null, "en": null }
+  },
+  "bestaetigungsfrist_stunden": null,
+  "seiten": {
+    "$kommentar": "Pfade der Seiten, auf die die Mail verweist. Die Bestätigungsseite sendet das Kennzeichen per POST an /api/mailing/confirm; ein bloßer Abruf des Links bestätigt nichts (Schutz vor Vorab-Abrufen durch Mailprüfer). Beide Seiten sind noch nicht gebaut.",
+    "bestaetigung": null,
+    "abmeldung": null
+  },
+  "quellen": [],
+  "grenzen": {
+    "bestaetigungsmails_je_anmeldung": 3,
+    "anfragen_je_minute": 3,
+    "anfragen_je_stunde": 10,
+    "max_body_bytes": 4096
+  },
+  "freigabe_format": {
+    "$kommentar": "So sieht eine eingetragene Freigabe aus. Kein Wert hier ist eine Freigabe.",
+    "felder": ["durch", "am", "beleg"]
+  }
+}
