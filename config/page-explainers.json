@@ -82,10 +82,10 @@
             "type": "route",
             "target_id": "services",
             "label": {
-              "de": "Das Leistungshaus der Factory",
-              "nl": "Het dienstenhuis van de Factory",
-              "fr": "Les métiers de la Factory",
-              "en": "The Factory’s service portfolio"
+              "de": "Website, System, Kampagne. Aus einer Hand.",
+              "nl": "Website, systeem, campagne. Uit één hand.",
+              "fr": "Site, système, campagne. Un seul interlocuteur.",
+              "en": "Website, system, campaign. One partner."
             }
           },
           "source_refs": [
@@ -112,10 +112,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -149,10 +149,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -179,10 +179,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -216,10 +216,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -246,10 +246,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -283,10 +283,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -313,10 +313,10 @@
             "type": "route",
             "target_id": "knowledge-start",
             "label": {
-              "de": "Das Briefing für Ihren nächsten Auftritt",
-              "nl": "De briefing voor uw volgende stap",
-              "fr": "Le brief de votre prochain projet",
-              "en": "The brief for your next project"
+              "de": "Ihr Briefing in fünf Fragen.",
+              "nl": "Uw briefing in vijf vragen.",
+              "fr": "Votre brief en cinq questions.",
+              "en": "Your brief in five questions."
             }
           },
           "source_refs": [
@@ -350,10 +350,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -380,10 +380,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -417,10 +417,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -447,10 +447,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -484,10 +484,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -521,10 +521,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -558,10 +558,10 @@
             "type": "route",
             "target_id": "knowledge-start",
             "label": {
-              "de": "Das Briefing für Ihren nächsten Auftritt",
-              "nl": "De briefing voor uw volgende stap",
-              "fr": "Le brief de votre prochain projet",
-              "en": "The brief for your next project"
+              "de": "Ihr Briefing in fünf Fragen.",
+              "nl": "Uw briefing in vijf vragen.",
+              "fr": "Votre brief en cinq questions.",
+              "en": "Your brief in five questions."
             }
           },
           "source_refs": [
@@ -595,10 +595,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -632,10 +632,10 @@
             "type": "route",
             "target_id": "imprint",
             "label": {
-              "de": "NeXify AI FACTORY – Unternehmensangaben",
-              "nl": "NeXify AI FACTORY – bedrijfsgegevens",
-              "fr": "NeXify AI FACTORY – informations sur l’entreprise",
-              "en": "NeXify AI FACTORY – company information"
+              "de": "Impressum lesen",
+              "nl": "Colofon lezen",
+              "fr": "Lire les mentions légales",
+              "en": "Read the legal notice"
             }
           },
           "source_refs": [
@@ -669,10 +669,10 @@
             "type": "route",
             "target_id": "scope",
             "label": {
-              "de": "Das passende Paket beginnt mit Ihrem Ziel",
-              "nl": "Het passende pakket begint bij uw doel",
-              "fr": "Le bon projet commence par votre objectif",
-              "en": "The right package starts with your objective"
+              "de": "Drei Pakete. Ein klarer Umfang.",
+              "nl": "Drie pakketten. Een duidelijke omvang.",
+              "fr": "Trois forfaits. Un périmètre clair.",
+              "en": "Three packages. One clear scope."
             }
           },
           "source_refs": [
@@ -706,10 +706,10 @@
             "type": "route",
             "target_id": "api",
             "label": {
-              "de": "NeXify API. Integration nach Maß.",
-              "nl": "NeXify API. Integratie op maat.",
-              "fr": "NeXify API. L’intégration adaptée.",
-              "en": "NeXify API. Integration to fit."
+              "de": "NeXify API. KI in Ihrer Anwendung.",
+              "nl": "NeXify API. AI in uw applicatie.",
+              "fr": "API NeXify. L’IA dans votre application.",
+              "en": "NeXify API. AI in your application."
             }
           },
           "source_refs": [
@@ -743,10 +743,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -1008,10 +1008,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -1045,10 +1045,10 @@
             "type": "route",
             "target_id": "login",
             "label": {
-              "de": "Ihr Zugang zur Zusammenarbeit.",
-              "nl": "Uw toegang tot samenwerking.",
-              "fr": "Votre accès à la collaboration.",
-              "en": "Your access to working together."
+              "de": "Anmelden und weiterarbeiten.",
+              "nl": "Inloggen en verder werken.",
+              "fr": "Se connecter et continuer.",
+              "en": "Sign in and carry on."
             }
           },
           "source_refs": [
@@ -1082,10 +1082,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Passt das Teil? So prüfen Sie es.",
+              "nl": "Past het onderdeel? Zo controleert u het.",
+              "fr": "La pièce convient-elle ? Voici comment vérifier.",
+              "en": "Does the part fit? Here is how to check."
             }
           },
           "source_refs": [
@@ -1112,10 +1112,10 @@
             "type": "route",
             "target_id": "tk-partner",
             "label": {
-              "de": "Gemeinsam einen klaren Serviceweg schaffen.",
-              "nl": "Samen een duidelijke serviceroute bouwen.",
-              "fr": "Créer ensemble un parcours de service clair.",
-              "en": "Build a clearer service route together."
+              "de": "Werkstatt? Werden Sie Partner.",
+              "nl": "Werkplaats? Word partner.",
+              "fr": "Un atelier ? Devenez partenaire.",
+              "en": "A workshop? Become a partner."
             }
           },
           "source_refs": [
@@ -1149,10 +1149,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Passt das Teil? So prüfen Sie es.",
+              "nl": "Past het onderdeel? Zo controleert u het.",
+              "fr": "La pièce convient-elle ? Voici comment vérifier.",
+              "en": "Does the part fit? Here is how to check."
             }
           },
           "source_refs": [
@@ -1186,10 +1186,10 @@
             "type": "route",
             "target_id": "tk-category",
             "label": {
-              "de": "Ausführungen sauber unterscheiden.",
-              "nl": "Uitvoeringen zorgvuldig onderscheiden.",
-              "fr": "Distinguer précisément les variantes.",
-              "en": "Distinguish variants with care."
+              "de": "Ähnliche Teile sicher unterscheiden.",
+              "nl": "Vergelijkbare onderdelen goed onderscheiden.",
+              "fr": "Bien distinguer des pièces similaires.",
+              "en": "Telling similar parts apart."
             }
           },
           "source_refs": [
@@ -1223,10 +1223,10 @@
             "type": "route",
             "target_id": "tk-product",
             "label": {
-              "de": "Produktklarheit bis ins Detail.",
-              "nl": "Productduidelijkheid tot in detail.",
-              "fr": "Un produit défini jusque dans le détail.",
-              "en": "Product clarity down to the detail."
+              "de": "Alles zum Artikel. Vor dem Kauf.",
+              "nl": "Alles over het artikel. Vóór de aankoop.",
+              "fr": "Tout sur l’article. Avant l’achat.",
+              "en": "Everything about the item. Before you buy."
             }
           },
           "source_refs": [
@@ -1260,10 +1260,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Passt das Teil? So prüfen Sie es.",
+              "nl": "Past het onderdeel? Zo controleert u het.",
+              "fr": "La pièce convient-elle ? Voici comment vérifier.",
+              "en": "Does the part fit? Here is how to check."
             }
           },
           "source_refs": [
@@ -1290,10 +1290,10 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche mit Präzision.",
-              "nl": "Onderdelen zoeken met precisie.",
-              "fr": "Une recherche de pièces précise.",
-              "en": "Find parts with precision."
+              "de": "Teil, Marke oder Nummer suchen.",
+              "nl": "Zoek op onderdeel, merk of nummer.",
+              "fr": "Cherchez par pièce, marque ou référence.",
+              "en": "Search by part, brand or number."
             }
           },
           "source_refs": [
@@ -1327,10 +1327,10 @@
             "type": "route",
             "target_id": "tk-checkout",
             "label": {
-              "de": "Ein klarer Weg zum Kauf.",
-              "nl": "Een duidelijke weg naar aankoop.",
-              "fr": "Un parcours d’achat clair.",
-              "en": "A clear route to purchase."
+              "de": "Zur Kasse. Schritt für Schritt.",
+              "nl": "Afrekenen. Stap voor stap.",
+              "fr": "Paiement. Étape par étape.",
+              "en": "Checkout. Step by step."
             }
           },
           "source_refs": [
@@ -1357,10 +1357,10 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche mit Präzision.",
-              "nl": "Onderdelen zoeken met precisie.",
-              "fr": "Une recherche de pièces précise.",
-              "en": "Find parts with precision."
+              "de": "Teil, Marke oder Nummer suchen.",
+              "nl": "Zoek op onderdeel, merk of nummer.",
+              "fr": "Cherchez par pièce, marque ou référence.",
+              "en": "Search by part, brand or number."
             }
           },
           "source_refs": [
@@ -1424,10 +1424,10 @@
             "type": "route",
             "target_id": "contact",
             "label": {
-              "de": "Ihr Projekt an die Factory",
-              "nl": "Uw project naar de Factory",
-              "fr": "Votre projet à la Factory",
-              "en": "Bring your project to the Factory"
+              "de": "Vorhaben schildern",
+              "nl": "Uw plan beschrijven",
+              "fr": "Décrire votre projet",
+              "en": "Describe your project"
             }
           },
           "source_refs": [
@@ -1461,10 +1461,10 @@
             "type": "route",
             "target_id": "tk-search",
             "label": {
-              "de": "Teilesuche mit Präzision.",
-              "nl": "Onderdelen zoeken met precisie.",
-              "fr": "Une recherche de pièces précise.",
-              "en": "Find parts with precision."
+              "de": "Teil, Marke oder Nummer suchen.",
+              "nl": "Zoek op onderdeel, merk of nummer.",
+              "fr": "Cherchez par pièce, marque ou référence.",
+              "en": "Search by part, brand or number."
             }
           },
           "source_refs": [
@@ -1498,10 +1498,10 @@
             "type": "route",
             "target_id": "tk-workshop",
             "label": {
-              "de": "Der richtige Kontakt für Ihr Fahrzeug.",
-              "nl": "Het juiste contact voor uw voertuig.",
-              "fr": "Le bon interlocuteur pour votre véhicule.",
-              "en": "The right contact for your vehicle."
+              "de": "Eine Werkstatt in Ihrer Nähe.",
+              "nl": "Een werkplaats bij u in de buurt.",
+              "fr": "Un atelier près de chez vous.",
+              "en": "A workshop near you."
             }
           },
           "source_refs": [
@@ -1572,10 +1572,10 @@
             "type": "route",
             "target_id": "tk-workshop",
             "label": {
-              "de": "Der richtige Kontakt für Ihr Fahrzeug.",
-              "nl": "Het juiste contact voor uw voertuig.",
-              "fr": "Le bon interlocuteur pour votre véhicule.",
-              "en": "The right contact for your vehicle."
+              "de": "Eine Werkstatt in Ihrer Nähe.",
+              "nl": "Een werkplaats bij u in de buurt.",
+              "fr": "Un atelier près de chez vous.",
+              "en": "A workshop near you."
             }
           },
           "source_refs": [
@@ -1602,10 +1602,10 @@
             "type": "route",
             "target_id": "login",
             "label": {
-              "de": "Ihr Zugang zur Zusammenarbeit.",
-              "nl": "Uw toegang tot samenwerking.",
-              "fr": "Votre accès à la collaboration.",
-              "en": "Your access to working together."
+              "de": "Anmelden und weiterarbeiten.",
+              "nl": "Inloggen en verder werken.",
+              "fr": "Se connecter et continuer.",
+              "en": "Sign in and carry on."
             }
           },
           "source_refs": [
@@ -1639,10 +1639,10 @@
             "type": "route",
             "target_id": "tk-appointments",
             "label": {
-              "de": "Service beginnt mit guter Abstimmung.",
-              "nl": "Service begint met goede afstemming.",
-              "fr": "Le service commence par une bonne préparation.",
-              "en": "Service starts with clear coordination."
+              "de": "Termin? Direkt bei der Werkstatt.",
+              "nl": "Afspraak? Direct bij de werkplaats.",
+              "fr": "Un rendez-vous ? Directement à l’atelier.",
+              "en": "An appointment? Direct with the workshop."
             }
           },
           "source_refs": [
@@ -1669,10 +1669,10 @@
             "type": "route",
             "target_id": "tk-appointments",
             "label": {
-              "de": "Service beginnt mit guter Abstimmung.",
-              "nl": "Service begint met goede afstemming.",
-              "fr": "Le service commence par une bonne préparation.",
-              "en": "Service starts with clear coordination."
+              "de": "Termin? Direkt bei der Werkstatt.",
+              "nl": "Afspraak? Direct bij de werkplaats.",
+              "fr": "Un rendez-vous ? Directement à l’atelier.",
+              "en": "An appointment? Direct with the workshop."
             }
           },
           "source_refs": [
@@ -1745,10 +1745,10 @@
             "type": "route",
             "target_id": "signup",
             "label": {
-              "de": "NeX AIFly Suite. Ihr eigener Einstieg.",
-              "nl": "NeX AIFly Suite. Uw eigen start.",
-              "fr": "NeX AIFly Suite. Votre propre accès.",
-              "en": "NeX AIFly Suite. Your own starting point."
+              "de": "NeX AIFly Suite. In Ruhe testen.",
+              "nl": "NeX AIFly Suite. Rustig testen.",
+              "fr": "NeX AIFly Suite. Tester sereinement.",
+              "en": "NeX AIFly Suite. Try it calmly."
             }
           },
           "source_refs": [
@@ -1775,10 +1775,10 @@
             "type": "route",
             "target_id": "one",
             "label": {
-              "de": "NeX & Oracle. Agentische KI als Baustein.",
-              "nl": "NeX & Oracle. Agentische AI als bouwsteen.",
-              "fr": "NeX et Oracle. Une brique d’IA agentique.",
-              "en": "NeX & Oracle. Agentic AI as a project element."
+              "de": "Zwei Agenten. Eine klare Aufgabe.",
+              "nl": "Twee agenten. Eén duidelijke taak.",
+              "fr": "Deux agents. Une mission claire.",
+              "en": "Two agents. One clear task."
             }
           },
           "source_refs": [
@@ -1812,10 +1812,10 @@
             "type": "route",
             "target_id": "tk-categories",
             "label": {
-              "de": "Teilewelten nach Ihrem Bedarf.",
-              "nl": "Onderdelengebieden naar uw behoefte.",
-              "fr": "Des familles de pièces selon votre besoin.",
-              "en": "Parts families built around your need."
+              "de": "Alle Kategorien auf einen Blick.",
+              "nl": "Alle categorieën in één oogopslag.",
+              "fr": "Toutes les catégories en un coup d’œil.",
+              "en": "All categories at a glance."
             }
           },
           "source_refs": [
@@ -1849,10 +1849,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Passt das Teil? So prüfen Sie es.",
+              "nl": "Past het onderdeel? Zo controleert u het.",
+              "fr": "La pièce convient-elle ? Voici comment vérifier.",
+              "en": "Does the part fit? Here is how to check."
             }
           },
           "source_refs": [
@@ -1886,10 +1886,10 @@
             "type": "route",
             "target_id": "tk-fitment",
             "label": {
-              "de": "Passung vor Kauf.",
-              "nl": "Passing vóór aankoop.",
-              "fr": "La compatibilité avant l’achat.",
-              "en": "Compatibility before purchase."
+              "de": "Passt das Teil? So prüfen Sie es.",
+              "nl": "Past het onderdeel? Zo controleert u het.",
+              "fr": "La pièce convient-elle ? Voici comment vérifier.",
+              "en": "Does the part fit? Here is how to check."
             }
           },
           "source_refs": [
@@ -1923,10 +1923,10 @@
             "type": "route",
             "target_id": "ai-notice",
             "label": {
-              "de": "Hinweise zu KI und Verantwortung",
-              "nl": "Informatie over AI en verantwoordelijkheid",
-              "fr": "Informations sur l’IA et la responsabilité",
-              "en": "Notes on AI and accountability"
+              "de": "KI-Hinweise lesen",
+              "nl": "AI-informatie lezen",
+              "fr": "Lire les informations sur l’IA",
+              "en": "Read the AI notice"
             }
           },
           "source_refs": [
@@ -1963,7 +1963,7 @@
               "de": "Skills und MCP ansehen",
               "nl": "Skills en MCP bekijken",
               "fr": "Voir Skills et MCP",
-              "en": "See skills and MCP"
+              "en": "View Skills and MCP"
             }
           },
           "source_refs": [
@@ -1997,10 +1997,10 @@
             "type": "route",
             "target_id": "api",
             "label": {
-              "de": "Ihre Schnittstelle projektieren",
-              "nl": "Uw koppeling uitwerken",
-              "fr": "Définir votre intégration",
-              "en": "Scope your integration"
+              "de": "NeXify API ansehen",
+              "nl": "NeXify API bekijken",
+              "fr": "Voir l’API NeXify",
+              "en": "View the NeXify API"
             }
           },
           "source_refs": [
@@ -2034,10 +2034,10 @@
             "type": "route",
             "target_id": "login",
             "label": {
-              "de": "Zur Anmeldung",
-              "nl": "Naar het aanmelden",
-              "fr": "Vers la connexion",
-              "en": "Go to sign-in"
+              "de": "Anmelden",
+              "nl": "Inloggen",
+              "fr": "Se connecter",
+              "en": "Sign in"
             }
           },
           "source_refs": [
