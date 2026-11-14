@@ -7,7 +7,7 @@ import "./shop.css";
 import "../HomeConcept.css";
 import "../PageConcept.css";
 import "../HomeMaster.css";
-import { SceneLoop } from "../SceneLoop";
+import { SceneVideo } from "../SceneVideo";
 import { Zeichen } from "../Zeichen";
 import { brandImages, srcSetFor } from "../../lib/brand-media";
 
@@ -86,7 +86,7 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
     </form>
     </div>
     <aside className="nx-konto-szene" aria-labelledby={testId + "-szene"}>
-     <figure className="hc-art"><img src={brandImages.workspace.src} srcSet={srcSetFor(brandImages.workspace.src)} sizes="(max-width: 1000px) 100vw, 50vw" width={2000} height={1125} alt={brandImages.workspace.alt} loading="eager" decoding="async"/><SceneLoop src="/media/scenes/tablet-foyer-20261113.mp4" locale="de"/></figure>
+     <figure className="hc-art"><img src={brandImages.workspace.src} srcSet={srcSetFor(brandImages.workspace.src)} sizes="(max-width: 1000px) 100vw, 50vw" width={2000} height={1125} alt={brandImages.workspace.alt} loading="eager" decoding="async"/><SceneVideo src="/media/scenes/tablet-foyer-20261113.mp4" locale="de"/></figure>
      <div className="nx-konto-nutzen">
       <span className="hc-kicker" id={testId + "-szene"}>NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto</span>
       <ul>{ZUGANG.map((label, i) => <li key={label}><Zeichen name={ZUGANG_ZEICHEN[i]} />{label}</li>)}</ul>
