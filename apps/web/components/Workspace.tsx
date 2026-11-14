@@ -193,6 +193,8 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   const closeButton=useRef<HTMLButtonElement>(null);
   const orientationFocusRequested=useRef(false);
   const workspaceRoot=useRef<HTMLDivElement>(null);
+  const readyRef=useRef(false);
+  readyRef.current=ready;
   useEffect(()=>{
     const root=workspaceRoot.current,footer=root?.querySelector('footer');
     if(!root||!footer||typeof IntersectionObserver==='undefined')return;
@@ -296,7 +298,8 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   useEffect(() => {document.documentElement.lang=locale;try{localStorage.setItem("nexify-locale",locale);}catch{}},[locale]);
   useEffect(() => {if(messages.length||intent!=="choose"||quote||booking||marketing.length)chatEnd.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,intent,quote,booking,marketing]);
   useEffect(() => {
-    const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(intents.includes(selected)){changePanel(true);setIntent(selected);setChatMode("workspace");}};
+    // Ohne verbundene Projektfunktion führt jede Aktion ins Gespräch, nie in eine Ansicht ohne Funktion.
+    const handler=(event:Event)=>{const selected=(event as CustomEvent).detail;if(!intents.includes(selected))return;if(!readyRef.current){window.dispatchEvent(new Event('nexify-open-orientation'));return;}changePanel(true);setIntent(selected);setChatMode("workspace");};
     window.addEventListener("nexify-action",handler);return()=>window.removeEventListener("nexify-action",handler);
   },[]);
   useEffect(()=>{
@@ -433,7 +436,8 @@ export default function Workspace({children,pages,accountControl,initialLocale='
         <ActionButton type="submit" variant="primary" className="send-button" disabled={!ready} loading={busy} data-testid="chat-send-button">{busy?t.working:(site==="teileklar"?tkWelcome.send:t.send)}</ActionButton>
        </form>
       </div>
-      {chatMode==="orientation"&&<div className="chat-return"><div><span>{locale==="de"?"Nächster Schritt":locale==="nl"?"Volgende stap":locale==="fr"?"Prochaine étape":"Next step"}</span><strong>{locale==="de"?"Ihr Vorhaben konkretisieren":locale==="nl"?"Uw project concretiseren":locale==="fr"?"Préciser votre projet":"Shape your project"}</strong></div><ActionButton variant="icon" data-testid="chat-return-workspace" aria-label={locale==="de"?"Projektvorbereitung öffnen":locale==="nl"?"Projectvoorbereiding openen":locale==="fr"?"Ouvrir la préparation du projet":"Open project preparation"} onClick={()=>setChatMode("workspace")}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></ActionButton></div>}
+      {/* Der Weg in die Projektvorbereitung erscheint nur, wenn sie wirklich verbunden ist; sonst führt das Briefing im Gespräch zum Kontaktformular. */}
+      {chatMode==="orientation"&&ready&&<div className="chat-return"><div><span>{locale==="de"?"Nächster Schritt":locale==="nl"?"Volgende stap":locale==="fr"?"Prochaine étape":"Next step"}</span><strong>{locale==="de"?"Ihr Vorhaben konkretisieren":locale==="nl"?"Uw project concretiseren":locale==="fr"?"Préciser votre projet":"Shape your project"}</strong></div><ActionButton variant="icon" data-testid="chat-return-workspace" aria-label={locale==="de"?"Projektvorbereitung öffnen":locale==="nl"?"Projectvoorbereiding openen":locale==="fr"?"Ouvrir la préparation du projet":"Open project preparation"} onClick={()=>setChatMode("workspace")}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></ActionButton></div>}
     </aside>
   </div></UIContext.Provider>;
 }
