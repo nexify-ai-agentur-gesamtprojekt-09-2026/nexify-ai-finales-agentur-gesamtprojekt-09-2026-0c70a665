@@ -7,6 +7,7 @@ import {contactCopy} from '../lib/contact-copy';
 import {contactAttempt,persistContactAttempt,readContactAttempt,type ContactAttempt} from '../lib/contact-attempt';
 import {takeOracleBrief} from '../lib/project-brief-transfer';
 import {focusFirstInvalid} from '../lib/contact-focus.mjs';
+import {CONTACT_ADDRESS,contactMailHref,requestNotStored} from '../lib/contact-outcome.mjs';
 import "./shop/shop.css";
 
 export default function ContactRequestForm({ kind = "contact",topic }: { kind?: "contact" | "partner";topic?:string }) {
@@ -19,7 +20,7 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
   const MSG:Record<string,string>={required:text.required,invalid:text.invalid,too_short:text.too_short};
   const attempt=useRef<ContactAttempt|null>(null),busyRef=useRef(false);
   const storageKey='nexify-contact-attempt-v1:'+kind+(topic?':'+encodeURIComponent(topic):'');
-  const [errors, setErrors] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [number, setNumber] = useState(""), [failure, setFailure] = useState(""), [mailStatus, setMailStatus] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({}), [busy, setBusy] = useState(false), [number, setNumber] = useState(""), [failure, setFailure] = useState(""), [mailHref, setMailHref] = useState(""), [mailStatus, setMailStatus] = useState("");
   useEffect(()=>{if(Object.keys(errors).length) focusFirstInvalid(formRef.current);},[errors]);
   const errorId=(name:string)=>`${errorPrefix}-${name}-error`;
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -33,7 +34,7 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
     if (body.message.trim().length < 10) local.message = "too_short";
     if (!body.consent) local.consent = "required";
     if (partner && body.company.trim().length < 2) local.company = "required";
-    setErrors(local); setFailure("");
+    setErrors(local); setFailure(""); setMailHref("");
     if (Object.keys(local).length) return;
     if(topic){body.message=topic+'\n\n'+body.message;body.page_path=window.location.pathname;}
     setBusy(true);busyRef.current=true;
@@ -48,7 +49,10 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
       if(typeof result.number!=='string'||!/^NX-[A-Z0-9-]{8,}$/.test(result.number)||result.status!=='eingegangen')throw new Error('unconfirmed_request');
       setNumber(result.number);setMailStatus(result.notification_status);attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}
     }
-    catch (e) { const err=e as ApiError;if(err.fields){setErrors(err.fields);if(err.status===422){attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}}}else setFailure(e instanceof Error&&e.message==='request_storage_unavailable'?text.storage:e instanceof Error&&e.message.startsWith('pending_request')?text.pending:err.status===429?text.limit:text.failure); }
+    catch (e) { const err=e as ApiError;
+      // Vom Dienst vor jeder Verarbeitung abgewiesen: nichts ist gespeichert. Der Versuch wird verworfen, die Angaben gehen in den E-Mail-Verweis.
+      if(requestNotStored(err)){attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}setMailHref(contactMailHref(text.mailSubject,[[text.name.replace(/\s*\*$/,''),body.name],[text.email.replace(/\s*\*$/,''),body.email],[(partner?text.workshop:text.company).replace(/\s*\*$/,''),body.company],['',body.message]]));setFailure(text.unavailable);}
+      else if(err.fields){setErrors(err.fields);if(err.status===422){attempt.current=null;try{sessionStorage.removeItem(storageKey);}catch{/* optional storage */}}}else setFailure(e instanceof Error&&e.message==='request_storage_unavailable'?text.storage:e instanceof Error&&e.message.startsWith('pending_request')?text.pending:err.status===429?text.limit:text.failure); }
     finally { busyRef.current=false;setBusy(false); }
   }
   const notificationCopy={de:{sent:'Die Benachrichtigung wurde von Resend angenommen. Das bestätigt noch nicht die Zustellung im Postfach.',pending:'Ihre Anfrage ist sicher gespeichert. Die E-Mail-Benachrichtigung ist noch nicht bestätigt; bitte senden Sie die Anfrage nicht erneut.'},nl:{sent:'Resend heeft de melding geaccepteerd. Dit bevestigt nog niet de bezorging.',pending:'Uw aanvraag is opgeslagen. De e-mailmelding is nog niet bevestigd; verstuur de aanvraag niet opnieuw.'},fr:{sent:'Resend a accepté la notification. Cela ne confirme pas encore sa livraison.',pending:'Votre demande est enregistrée. La notification n’est pas encore confirmée ; ne renvoyez pas la demande.'},en:{sent:'Resend accepted the notification. Inbox delivery is not yet confirmed.',pending:'Your enquiry is safely stored. The email notification is not yet confirmed; please do not submit it again.'}}[locale];
@@ -65,7 +69,7 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
     </div>
     <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} aria-describedby={errors.consent?errorId("consent"):undefined} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
     {errors.consent && <span id={errorId("consent")} className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
-    {failure && <div role="alert" className="tk-field-error" data-testid="contact-error"><p>{failure}</p><a href="mailto:mail@nexifyai.cloud" data-testid="contact-email-fallback">{({de:'Direkt per E-Mail kontaktieren',nl:'Rechtstreeks per e-mail contact opnemen',fr:'Nous contacter directement par e-mail',en:'Contact us directly by email'} as const)[locale]}</a></div>}
+    {failure && <div role="alert" className="tk-field-error" data-testid="contact-error" data-reason={mailHref?'unavailable':'unconfirmed'}><p>{failure}</p><a href={mailHref||'mailto:'+CONTACT_ADDRESS} data-testid="contact-email-fallback">{({de:'Direkt per E-Mail kontaktieren',nl:'Rechtstreeks per e-mail contact opnemen',fr:'Nous contacter directement par e-mail',en:'Contact us directly by email'} as const)[locale]} · {CONTACT_ADDRESS}</a></div>}
     <div className="tk-actions"><ActionButton variant="primary" className="hc-finish-primary" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</ActionButton></div>
   </form>;
 }
