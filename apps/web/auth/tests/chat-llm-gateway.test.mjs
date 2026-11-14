@@ -234,3 +234,25 @@ test('as long as the policy names the 9router as the only gateway the Cloudflare
       deployment: 'production', llm_route: 'cloudflare-ai-gateway' });
   }, { unlocked: false });
 });
+
+test('text held back before the model is confirmed is capped; the visitor gets no text', async () => {
+  await withRoute({ ...GATEWAY }, async (ask, lines) => {
+    const part = 'x'.repeat(300_000);
+    // Viele Blöcke ohne Modellangabe: der zurückgehaltene Text darf nicht unbegrenzt wachsen.
+    globalThis.fetch = async () => sse([block(part), block(part), block(part), block(part), block('Ende', policy.model.id), '[DONE]']);
+    let events = await frames(await ask());
+    assert.deepEqual(events.filter(event => event.type === 'delta'), []);
+    assert.equal(events.at(-1).type, 'error');
+    assert.equal(JSON.parse(lines.at(-1)).cause, 'invalid_response');
+    // Eine einzige Zeile ohne Zeilenumbruch.
+    globalThis.fetch = async () => new Response('data: ' + 'y'.repeat(1_200_000), { headers: { 'content-type': 'text/event-stream' } });
+    events = await frames(await ask());
+    assert.deepEqual(events.filter(event => event.type === 'delta'), []);
+    assert.equal(events.at(-1).type, 'error');
+    assert.equal(JSON.parse(lines.at(-1)).cause, 'invalid_response');
+    // Knapp unter der Grenze bleibt alles beim Alten.
+    globalThis.fetch = async () => sse([block(part), block(part), block('Ende', policy.model.id), '[DONE]']);
+    events = await frames(await ask());
+    assert.equal(events.filter(event => event.type === 'delta').map(event => event.text).join('').length, 600_004);
+  }, { stream: true });
+});

@@ -37,6 +37,9 @@ const POLICY_REASONING_EFFORT = 'high';
 const DEFAULT_MAX_TOKENS = 4096;
 const REQUEST_TIMEOUT_MS = 50_000;
 const MAX_JSON_BODY_CHARS = 1_000_000;
+// Obergrenze für zurückgehaltenen Text vor der Modellbestätigung und für eine einzelne Zeile ohne
+// Zeilenumbruch. Ein Anbieter, der das Modell nie nennt, darf den Speicher nicht füllen.
+const MAX_PENDING_CHARS = 1_000_000;
 const GATEWAY_ORIGIN = 'https://gateway.ai.cloudflare.com';
 const ENDPOINT_PATH = /^\/v1\/[0-9a-f]{32}\/[A-Za-z0-9_-]+\/openrouter(\/v1)?\/chat\/completions$/;
 // Gespiegelt aus config/llm-policy.json: provider_route_target_2026_11_10.gateway ist
@@ -236,7 +239,11 @@ export async function* streamGatewayCompletion(
       held = '';
       return text;
     }
-    if (!verified) { held += parsed.text; return ''; }
+    if (!verified) {
+      held += parsed.text;
+      if (held.length > MAX_PENDING_CHARS) throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
+      return '';
+    }
     return parsed.text;
   };
   try {
@@ -255,6 +262,8 @@ export async function* streamGatewayCompletion(
         buffer = buffer.slice(nl + 1);
         if (text) { produced = true; yield text; }
       }
+      // Rest ohne Zeilenumbruch: eine einzelne Zeile dieser Länge ist kein gültiger Datenblock.
+      if (buffer.length > MAX_PENDING_CHARS) throw new ChatLlmError('chat_llm_invalid_response', 'invalid_response', { status: res.status, contentType });
     }
     buffer += decoder.decode();
     if (contentType === 'json') {

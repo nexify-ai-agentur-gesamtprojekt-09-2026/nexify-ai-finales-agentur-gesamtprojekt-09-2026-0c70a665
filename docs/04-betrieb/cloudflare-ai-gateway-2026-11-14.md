@@ -121,6 +121,11 @@ bietet den datierten Stand `-1017` nicht an und führt das Modell unter
 
 ## 5. Umschaltung im Code (vorbereitet, aus und gesperrt)
 
+> **Warnung:** Wer heute in Vercel `CHAT_LLM_ROUTE=cloudflare-ai-gateway` setzt, schaltet den
+> Chat für alle Besucher ab (503), weil der Weg im Code gesperrt ist. Dasselbe bewirkt jeder
+> Tippfehler im Wert. Rückweg: Variable `CHAT_LLM_ROUTE` löschen und neu ausliefern; der
+> Chat läuft dann wieder über den 9router.
+
 **Zuerst die Policy, dann der Schalter.** `config/llm-policy.json` nennt im Zielbild vom
 10.11.2026 `gateway: 9router_only` und `direct_provider_bypass_allowed: false`. Ein Aufruf
 über das Cloudflare-Gateway an OpenRouter widerspricht dem. `CHAT_LLM_ROUTE` darf deshalb
@@ -170,9 +175,20 @@ Verhalten des Gateway-Wegs:
   Weiterleitungen werden nicht verfolgt.
 - Antwortprüfung: Nennt die Antwort ein anderes Modell als die Policy-Kennung oder meldet
   das Gateway einen Ausweichschritt (`cf-aig-step` ungleich `0`), endet der Aufruf mit
-  `model_policy`; der Besucher sieht `chat_llm_failed`, keinen Text. Text wird
-  zurückgehalten, bis ein Datenblock die Policy-Kennung genannt hat. Eine Antwort ganz
-  ohne Modellangabe wird abgelehnt.
+  `model_policy`. Genau gilt:
+  - Vor der ersten Modellbestätigung erreicht kein Text den Besucher; er wird
+    zurückgehalten, bis ein Datenblock die Policy-Kennung nennt. Eine Antwort ganz ohne
+    Modellangabe wird abgelehnt. Zurückgehalten wird höchstens rund 1 MB, danach Abbruch
+    mit `invalid_response`.
+  - Wechselt das Modell **nach** einer Bestätigung mitten im Strom, endet der Aufruf mit
+    `model_policy`. Der bis dahin freigegebene Text ist im Streaming-Modus aber schon beim
+    Besucher; er wird nicht gespeichert, und die Oberfläche zeigt eine Störung.
+  - Blöcke ohne Modellangabe nach der ersten Bestätigung werden durchgereicht.
+  - Härtere Fassung, nicht gebaut: nur Blöcke freigeben, die selbst die Policy-Kennung
+    nennen, und modell-lose Blöcke bis zum nächsten bestätigten Block zurückhalten. Das
+    erhält das Streaming, verzögert aber Text, falls der Anbieter das Modell nicht in jedem
+    Block nennt (ungemessen). Vollständig schließt den Fall nur, die ganze Antwort vor der
+    Ausgabe zu puffern, also ohne Streaming.
 - Protokollzeilen des Gateway-Wegs tragen `llm_route`; Verbindungsfehler melden den
   Systemcode wie auf dem Router-Weg.
 - Fehlen `CF_AIG_CHAT_URL` oder `CF_AIG_TOKEN`: 503, auch wenn die Router-Variablen gesetzt
