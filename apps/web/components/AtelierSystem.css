@@ -220,7 +220,7 @@ html[data-theme='light'] #atelier{--color-text-primaer:var(--color-hell-schrift)
 #atelier .home-concept .hc-container{box-sizing:border-box;width:100%;max-width:var(--layout-content-max);margin-inline:auto;padding-inline:var(--layout-page-padding)}
 #atelier .home-concept .identity-hero .identity-scene{box-sizing:border-box;width:100%;max-width:var(--layout-content-max);margin-inline:auto;padding-inline:var(--layout-page-padding)}
 @container identity-hero (min-width:821px){
- #atelier .home-concept .identity-hero .identity-scene{grid-template-columns:minmax(0,.82fr) minmax(0,1.5fr);gap:var(--space-7);align-items:center;padding-block:var(--space-8) var(--space-8)}
+ #atelier .home-concept .identity-hero .identity-scene{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:var(--space-7);align-items:center;padding-block:var(--space-8) var(--space-6)}
 }
 #atelier .home-concept .identity-hero .identity-media{position:relative;width:100%;max-width:none;margin-inline:0;overflow:visible;transform:none;box-shadow:none;border-radius:var(--as-stage)}
 #atelier .home-concept .identity-hero .identity-media::before{content:none}
@@ -1125,10 +1125,14 @@ html[data-theme='light'] #atelier{
 #atelier .nx-konto .tk-field{display:grid;gap:var(--as-s-2);margin:0}
 #atelier .nx-konto .tk-field label{font-size:var(--as-t-13);font-weight:var(--as-g-mittel);line-height:var(--as-z-kurz);color:var(--as-ink-2)}
 #atelier .nx-feld{position:relative;display:block}
-#atelier .nx-konto .tk-field input{box-sizing:border-box;width:100%;height:var(--as-h-haupt);padding:0 var(--as-s-5);border:0;border-radius:var(--as-r-feld);outline:0;background:var(--as-glass-dense),color-mix(in srgb,var(--as-shade) 18%,transparent);box-shadow:var(--as-lens-faint),inset 0 2px 6px -3px var(--as-shade);color:var(--as-ink);font-size:var(--as-t-16);line-height:var(--as-z-text);transition:box-shadow var(--as-move),background var(--as-move)}
-#atelier .nx-konto .tk-field input:hover{background:var(--as-glass-dense-hover),color-mix(in srgb,var(--as-shade) 18%,transparent)}
-#atelier .nx-konto .tk-field input:focus-visible{box-shadow:var(--as-lens-faint),0 0 0 2px var(--as-ink)}
-#atelier .nx-konto .tk-field input[aria-invalid='true']{box-shadow:var(--as-lens-faint),0 0 0 1.5px var(--color-semantik-fehler)}
+#atelier .nx-konto .tk-field input{box-sizing:border-box;width:100%;height:var(--as-h-haupt);padding:0 var(--as-s-5);border:0;border-radius:var(--as-r-feld);outline:0;background:var(--as-glass-mid);box-shadow:var(--as-lens);color:var(--as-ink);caret-color:var(--as-ink);font-size:var(--as-t-16);line-height:var(--as-z-text);transition:box-shadow var(--as-move),background var(--as-move)}
+#atelier .nx-konto .tk-field input::placeholder{color:var(--as-ink-3);opacity:1}
+#atelier .nx-konto .tk-field input:hover{background:var(--as-glass-mid),var(--as-fill-hover)}
+/* Fokus: ein klarer Ring im Schriftton statt des lime-farbenen Standardrings (der im Glas als gruener Schein wirkt). */
+#atelier .nx-konto .tk-field input:is(:focus,:focus-visible){outline:2px solid var(--as-ink)!important;outline-offset:2px!important;border-radius:var(--as-r-feld);background:var(--as-glass-mid),var(--as-fill-hover);box-shadow:var(--as-lens)}
+#atelier .nx-konto .tk-field input[aria-invalid='true']{box-shadow:var(--as-lens),0 0 0 2px var(--color-semantik-fehler)}
+/* Selbstausfuellen des Browsers: kein gelb-gruener Grund, Schrift bleibt im Hauptton. */
+#atelier .nx-konto .tk-field input:is(:-webkit-autofill,:autofill){-webkit-text-fill-color:var(--as-ink);caret-color:var(--as-ink);transition:background-color 9999s ease-out,box-shadow var(--as-move)}
 #atelier .nx-konto .tk-field input[type='password'],#atelier .nx-feld:has(.nx-feld-schalter) input{padding-right:var(--as-s-16)}
 #atelier .nx-feld-schalter{position:absolute;top:var(--as-s-1);right:var(--as-s-1);display:grid;place-items:center;width:var(--as-h);height:var(--as-h);padding:0;border:0;border-radius:var(--as-r-klein);background:none;color:var(--as-ink-3);cursor:pointer;transition:background var(--as-move),color var(--as-move)}
 #atelier .nx-feld-schalter:is(:hover,:focus-visible){background:var(--as-fill-hover);color:var(--as-ink)}
@@ -1200,3 +1204,14 @@ html[data-theme='light'] #atelier{
 #atelier :is(.scene-loop-controls button,.nx-feld-schalter)>.nx-zeichen{margin:0;vertical-align:0}
 /* Lesbarkeit im Licht der Front: die Herkunftszeile des Namens steht im Nebentext-Ton (>= 4,5:1 auch im hellsten Feld). */
 #atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{color:var(--as-ink-2)}
+
+/* ================================================================================================================
+   DRITTER DURCHGANG (14.11.2026, nachts)
+   ================================================================================================================ */
+
+/* ===== Schriftwechsel ohne Versatz ===== */
+/* Zeilenlaengen in em statt ch: ch misst die Ziffer der gerade geladenen Schrift; mit der Rueckfallschrift waren die Bloecke
+   schmaler und brachen eine Zeile frueher um (Versatz von 13 bis 26 px in Hero und Chat). Rueckfallschriften: app/globals.css. */
+#atelier .home-concept .identity-copy .identity-subtitle{max-width:var(--atelier-system-zeilenlaenge-kurz)}
+#atelier .home-concept .identity-copy .identity-body,#atelier #aifly-panel .orientation-intro p.orientation-intro-body{max-width:var(--atelier-system-zeilenlaenge-lese)}
+#atelier .home-concept .hc-intro p{max-width:var(--atelier-system-zeilenlaenge-breit)}

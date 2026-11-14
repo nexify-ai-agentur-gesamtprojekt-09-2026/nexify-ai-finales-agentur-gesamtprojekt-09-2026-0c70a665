@@ -15,8 +15,9 @@ export function OracleName({as:Tag='p',className}:{as?:'p'|'h2'|'span';className
 }
 
 type LogoProps={
-  /** voll = Figur + Wortmarke + Claim · ohne-claim = Figur + Wortmarke · figur = nur die Figur */
-  variante?:'voll'|'ohne-claim'|'figur';
+  /** voll = Figur + Wortmarke + Claim · ohne-claim = Figur + Wortmarke · figur = nur die Figur ·
+      wort = Wortmarke + Claim ohne Figur (fuer Bereiche mit eigener Marke, z. B. TEILEKLAR: die NeXify-Figur gehoert dort nicht hin) */
+  variante?:'voll'|'ohne-claim'|'figur'|'wort';
   /** s = Fuss/kompakt · m = Kopfleiste · l = Buehne (Hinweise, Blaetter) */
   groesse?:'s'|'m'|'l';
   /** Wortmarke eines Bereichs (z. B. TEILEKLAR); ohne Angabe „NeXify AI" mit X im Signal-Lime */
@@ -27,13 +28,13 @@ type LogoProps={
 
 export function Logo({variante='voll',groesse='m',wort,claim=LOGO_CLAIM,className}:LogoProps){
   return <span className={['nx-logo',className].filter(Boolean).join(' ')} data-variante={variante} data-groesse={groesse}>
-    <span className="nx-logo-figur" aria-hidden="true">
+    {variante!=='wort'&&<span className="nx-logo-figur" aria-hidden="true">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={LOGO_FIGUR} alt="" width={512} height={512} decoding="async" draggable={false}/>
-    </span>
+    </span>}
     {variante!=='figur'&&<span className="nx-logo-wort">
       <span className="nx-logo-name">{wort??<>Ne<span className="nx-logo-x">X</span>ify AI</>}</span>
-      {variante==='voll'&&<span className="nx-logo-claim">{claim}</span>}
+      {(variante==='voll'||variante==='wort')&&<span className="nx-logo-claim">{claim}</span>}
     </span>}
   </span>;
 }

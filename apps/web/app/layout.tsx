@@ -8,6 +8,7 @@ import tokens from "../../../packages/tokens/tokens.json";
 import {cookies,headers} from 'next/headers';
 import {localeOf} from '../lib/page-seo';
 import type { ReactNode } from "react";
+import {preload} from 'react-dom';
 import Workspace from "../components/Workspace";
 import {chatWidthFromCookie,initialChatFromCookie} from "../lib/chat-panel";
 import NextRouterBridge from "../components/NextRouterBridge";
@@ -30,6 +31,8 @@ export async function generateViewport(): Promise<Viewport> {
 export default async function RootLayout({children}:{children:ReactNode}) {
   const locale=localeOf((await headers()).get('x-nexify-locale'));
   const theme=themeOf((await cookies()).get('nx-theme')?.value);
+  // Text- und Titelschrift stehen im ersten Bildaufbau: früh laden, damit der Schriftwechsel selten sichtbar wird (Rückfall siehe globals.css).
+  for(const font of ['/fonts/inter-latin.woff2','/fonts/jakarta-latin.woff2'])preload(font,{as:'font',type:'font/woff2',crossOrigin:'anonymous'});
   // Gesprächsscheibe: die Wahl des Besuchers steht als Sitzungs-Cookie; ohne Wahl entscheidet das Stylesheet nach Fensterbreite.
   // So erscheint die Scheibe im ersten Bildaufbau im richtigen Zustand und der Inhalt springt nicht (wie beim Thema).
   const jar=await cookies(),initialChat=initialChatFromCookie(jar.get('nx-chat-open')?.value);

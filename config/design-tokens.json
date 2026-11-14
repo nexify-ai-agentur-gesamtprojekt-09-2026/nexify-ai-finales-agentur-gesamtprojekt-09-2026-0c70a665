@@ -719,6 +719,7 @@
         "$type": "dimension"
       }
     },
+    "zeilenlaenge": {"$description": "Hoechste Zeilenlaenge von Textbloecken in em statt ch: ch haengt von der Ziffernbreite der gerade geladenen Schrift ab und laesst Zeilen beim Schriftwechsel anders umbrechen. Werte entsprechen 34ch / 46ch / 60ch der Hausschrift.", "kurz": {"$value": "21.95em", "$type": "dimension"}, "lese": {"$value": "29.02em", "$type": "dimension"}, "breit": {"$value": "37.85em", "$type": "dimension"}},
     "schrift": {
       "$description": "Schriftstufen des Atelier-Systems: sechs feste Groessen, fuenf Zeilenhoehen, drei Gewichte.",
       "12": {

@@ -223,6 +223,9 @@
   --atelier-system-chat-schwelle-breit: 820px;
   --atelier-system-kopf-hoehe: 96px;
   --atelier-system-kopf-schwelle-navigation: 1000px;
+  --atelier-system-zeilenlaenge-kurz: 21.95em;
+  --atelier-system-zeilenlaenge-lese: 29.02em;
+  --atelier-system-zeilenlaenge-breit: 37.85em;
   --atelier-system-schrift-12: 12px;
   --atelier-system-schrift-13: 13px;
   --atelier-system-schrift-15: 15px;
