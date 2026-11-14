@@ -23,8 +23,10 @@ Vor jeder Merge-Runde der koordinierenden Sitzung, nach größeren Merges auf `m
 2. **Offene PRs lesen** (REST; GraphQL und damit `gh pr list` sind in dieser Umgebung gesperrt):
 
    ```bash
-   gh api "repos/{owner}/{repo}/pulls?state=open&per_page=100" --jq '.[] | [.number,.draft,.head.ref,.base.ref,.title] | @tsv'
+   gh api "repos/{owner}/{repo}/pulls?state=open&per_page=100" --jq '.[] | [.number,.draft,(.auto_merge != null),.head.ref,.base.ref,.title] | @tsv'
    ```
+
+   Die dritte Spalte zeigt, ob Auto-Merge eingeschaltet ist. Sie gehört in die Tabelle: Ein PR mit Auto-Merge geht von selbst nach `main`, sobald seine Prüfungen bestehen, gleich wie er hier eingeordnet wird (Lage am 14.11.2026: `nexify-zweig-und-pr`, „Bekannte Lage“). Rote Prüfungen ohne gestarteten Job sind dabei kein Urteil über den PR; das Urteil kommt aus Probe-Merge und lokalen Gates.
 
    Zeigt die Basis eines PR nicht auf `main`, hängt er an einem anderen PR. Das ist eine Abhängigkeit und kommt in die Tabelle.
 
@@ -73,15 +75,15 @@ Im Zweifel „braucht Entscheidung“. Ein PR, dessen Gates nicht gelaufen sind,
 ```markdown
 Stand: main <commit>, <TT.MM.JJJJ HH:MM> UTC
 
-| PR | Zweig → Basis | Urteil | Probe-Merge | Gates | Hängt an | Begründung, nächste Handlung, wer |
-|---|---|---|---|---|---|---|
+| PR | Zweig → Basis | Entwurf / Auto-Merge | Urteil | Probe-Merge | Gates | Hängt an | Begründung, nächste Handlung, wer |
+|---|---|---|---|---|---|---|---|
 ```
 
 Darunter die empfohlene Reihenfolge der mergebaren PRs und die Liste der Fragen an den Inhaber. Die Tabelle geht an die koordinierende Sitzung; in `PROGRESS.md` kommt sie nur über `nexify-stand-halten`.
 
 ## Grenzen
 
-- Nichts mergen, nichts schließen, nichts kommentieren, keine Labels, kein Umhängen der Basis, kein Push in fremde Zweige.
+- Nichts mergen, nichts schließen, nichts kommentieren, keine Labels, kein Umhängen der Basis, kein Push in fremde Zweige. Auto-Merge und Entwurfsstatus fremder PRs werden gemeldet, nicht umgestellt; das entscheidet der Inhaber.
 - Konflikte nicht „schnell auflösen“; ein aufgelöster Konflikt ist eine Änderung und gehört dem Verantwortlichen des Zweigs.
 - Der Wegwerfzweig bleibt lokal.
 
