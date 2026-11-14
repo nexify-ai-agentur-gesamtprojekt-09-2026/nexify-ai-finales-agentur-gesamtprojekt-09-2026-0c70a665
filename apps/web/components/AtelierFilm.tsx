@@ -12,8 +12,10 @@ export type AtelierAsset={src:string;poster:string;posterAlt?:string;still?:{src
 export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsset;locale:Locale;hero?:boolean}){
  const ref=useRef<HTMLVideoElement>(null),root=useRef<HTMLDivElement>(null),stillImage=useRef<HTMLImageElement>(null),id=useId();
  const alive=useRef(true),generation=useRef(0),manualAction=useRef(0),userPaused=useRef(false);
+ // Vom Besucher gewählter Ton (null = noch keine Wahl). Er gilt weiter, wenn der Film nach Wegblättern oder Tabwechsel wieder anläuft.
+ const userSound=useRef<boolean|null>(null);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
- const [captions,setCaptions]=useState(true),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null);
+ const [captions,setCaptions]=useState(false),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null);
  const t=words[locale],a=audioWords[locale],compact=compactWords[locale],playLabel=ended?t.replay:t.play;
  // A reviewed still may be bound to this exact asset; until then, retain the existing editorial poster.
  const still=asset.still??{src:asset.poster,alt:asset.posterAlt??asset.title};
@@ -28,14 +30,14 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
   const video=ref.current,box=root.current;if(!video||!box)return;
   // A media request can fail before React attaches onError during hydration.
   // Read persistent media state when attaching, rather than waiting for events that already fired.
-  alive.current=true;generation.current++;userPaused.current=false;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setStarted(false);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
+  alive.current=true;generation.current++;userPaused.current=false;userSound.current=null;setFailed(video.error!==null);setEnded(false);setBuffering(false);setProgress(0);setStarted(false);setFrameReady(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA);
   let visible=false,disposed=false,audioAttempted=false;
   const pref=matchMedia('(prefers-reduced-motion: reduce)');
   const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection;
   async function start(){
    if(disposed||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||video!.error||userPaused.current)return;
    const action=manualAction.current;
-   const audible=hero&&asset.hasAudio===true&&asset.autoplayWithAudio===true&&!audioAttempted;
+   const audible=userSound.current??(hero&&asset.hasAudio===true&&asset.autoplayWithAudio===true&&!audioAttempted);
    audioAttempted=true;
    const result=await autoStartEditorialVideo(video!,audible);
    if(disposed)return;
@@ -43,7 +45,8 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
    if(!visible||pref.matches||document.hidden){video!.pause();return;}
    setMuted(result.muted);
   }
-  const observer=new IntersectionObserver(entries=>{visible=entries[0].intersectionRatio>=.35;if(!visible){video.pause();setBuffering(false);}else void start();},{threshold:[0,.35]});
+  // Mehrere Einträge in einem Aufruf sind zeitlich geordnet: der letzte beschreibt den aktuellen Stand.
+  const observer=new IntersectionObserver(entries=>{visible=(entries.at(-1)?.intersectionRatio??0)>=.35;if(!visible){video.pause();setBuffering(false);}else void start();},{threshold:[0,.35]});
   const preference=()=>{if(pref.matches){video.pause();setBuffering(false);}else void start();};
   const hidden=()=>{if(document.hidden){video.pause();setBuffering(false);}else void start();};
   const other=(e:Event)=>{if((e as CustomEvent<string>).detail!==id){userPaused.current=true;manualAction.current++;video.pause();setBuffering(false);}};
@@ -56,7 +59,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
   const attempt=generation.current;manualAction.current++;userPaused.current=false;setFailed(false);setBuffering(true);
   if(video.error)video.load();
   if(video.ended||withVoice){video.currentTime=0;setProgress(0);setEnded(false);}
-  if(withVoice){if(video.volume===0){video.volume=.8;setVolume(.8);}video.muted=false;setMuted(false);}
+  if(withVoice){if(video.volume===0){video.volume=.8;setVolume(.8);}video.muted=false;setMuted(false);userSound.current=true;}
   window.dispatchEvent(new CustomEvent('nexify:presenter-play',{detail:id}));
   try{await video.play();}catch(error){if(alive.current&&attempt===generation.current&&!(error instanceof DOMException&&error.name==='AbortError')){setFailed(true);setBuffering(false);}}
  }
@@ -67,14 +70,14 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
     onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setStarted(true);setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
     onEnded={()=>{setStarted(false);setPlaying(false);setBuffering(false);setEnded(true);setProgress(1);}} onError={()=>{setFailed(true);setBuffering(false);setPlaying(false);}}>
-    {asset.captions&&<track kind="captions" src={asset.captions} srcLang="de" label="Deutsch" default onLoad={()=>captionMode(captions)}/>}
+    {asset.captions&&<track kind="captions" src={asset.captions} srcLang="de" label="Deutsch"/>}
    </video>
    {buffering&&<span className="atelier-film-loading" role="status">{t.loading}</span>}
    <div className="atelier-film-controls">
     <button type="button" aria-label={playing?t.pause:playLabel} onClick={()=>playing?pause():void play()}><svg className="atelier-playback-icon" viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">{playing?<><rect x="5" y="4" width="3" height="12" rx=".7"/><rect x="12" y="4" width="3" height="12" rx=".7"/></>:<path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z"/>}</svg><span>{hero?(playing?compact.pause:compact.play):(playing?t.pause:playLabel)}</span></button>
-    {hero&&asset.hasAudio!==false&&<button type="button" aria-label={muted?t.voice:t.mute} onClick={()=>{if(muted)void play(true);else{if(ref.current)ref.current.muted=true;setMuted(true);}}}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h4l5-4v14l-5-4H4Z"/>{muted?<path d="m17 9 5 6m0-6-5 6"/>:<path d="M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>}</svg><span>{muted?compact.voice:compact.mute}</span></button>}
+    {hero&&asset.hasAudio!==false&&<button type="button" aria-label={muted?t.voice:t.mute} onClick={()=>{if(muted)void play(true);else{if(ref.current)ref.current.muted=true;setMuted(true);userSound.current=false;}}}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h4l5-4v14l-5-4H4Z"/>{muted?<path d="m17 9 5 6m0-6-5 6"/>:<path d="M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>}</svg><span>{muted?compact.voice:compact.mute}</span></button>}
     {asset.captions&&<button type="button" aria-label={a.captions} aria-pressed={captions} onClick={()=>{const next=!captions;setCaptions(next);captionMode(next);}}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9a3 3 0 1 0 0 6m9-6a3 3 0 1 0 0 6"/></svg><span>{a.captions}</span></button>}
-    {hero&&asset.hasAudio===true&&<details className="atelier-volume"><summary aria-label={a.volume}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d="M6 4v16M18 4v16M3 9h6m6 6h6"/><circle cx="6" cy="9" r="2"/><circle cx="18" cy="15" r="2"/></svg><span className="visually-hidden">{a.volume}</span></summary><div><label htmlFor={id+'-volume'}>{a.volume}<input id={id+'-volume'} type="range" min="0" max="1" step="0.05" value={volume} onChange={e=>{const next=Number(e.target.value);setVolume(next);if(ref.current){ref.current.volume=next;ref.current.muted=next===0;}setMuted(next===0);}}/></label></div></details>}
+    {hero&&asset.hasAudio===true&&<details className="atelier-volume"><summary aria-label={a.volume}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d="M3 12h8m6 0h4" strokeLinecap="round"/><circle cx="14" cy="12" r="3"/></svg><span className="visually-hidden">{a.volume}</span></summary><div><label htmlFor={id+'-volume'}>{a.volume}<input id={id+'-volume'} type="range" min="0" max="1" step="0.05" value={volume} onChange={e=>{const next=Number(e.target.value);setVolume(next);if(ref.current){ref.current.volume=next;ref.current.muted=next===0;}setMuted(next===0);userSound.current=next>0;}}/></label></div></details>}
    </div>
    {hero&&<div className="atelier-film-progress" aria-hidden="true"><span style={{transform:`scaleX(${progress})`}}/></div>}
   </div>

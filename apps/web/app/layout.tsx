@@ -3,11 +3,14 @@ import "./masterplan-tokens.css";
 import "./globals.css";
 import "./measurement-system.css";
 import '../components/HomeMaster.css';
-import type { Metadata } from "next";
-import {headers} from 'next/headers';
+import type { Metadata, Viewport } from "next";
+import tokens from "../../../packages/tokens/tokens.json";
+import {cookies,headers} from 'next/headers';
 import {localeOf} from '../lib/page-seo';
 import type { ReactNode } from "react";
+import {preload} from 'react-dom';
 import Workspace from "../components/Workspace";
+import {chatWidthFromCookie,initialChatFromCookie} from "../lib/chat-panel";
 import NextRouterBridge from "../components/NextRouterBridge";
 import { publicPages,publicExperienceData } from "../lib/catalog";
 import {PublicExperienceProvider} from "../components/PublicExperience";
@@ -16,10 +19,27 @@ import installation from '../.generated/installation.json';
 import "../components/LuxuryMaterials.css";
 
 export const metadata: Metadata = { description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false},...(installation.enabled?{manifest:'/manifest.webmanifest'}:{})};
+// Ganzer Bildschirm inklusive Randbereichen (Kerbe, Home-Balken); die Flächen halten selbst Abstand über env(safe-area-inset-*).
+// Die Browserleiste nimmt die Farbe des Seitengrunds an.
+// Thema: dunkel ist Standard; hell nur nach Wahl über den Schalter (Cookie nx-theme). Das Attribut kommt vom Server,
+// damit beim Laden nichts aufblitzt und kein Inline-Skript nötig ist.
+const themeOf=(value?:string)=>value==='light'?'light' as const:'dark' as const;
+export async function generateViewport(): Promise<Viewport> {
+  const theme=themeOf((await cookies()).get('nx-theme')?.value);
+  return { width:"device-width", initialScale:1, viewportFit:"cover", themeColor:tokens[theme==='light'?"color-hell-grund":"color-dunkel-grund"], colorScheme:theme };
+}
 export default async function RootLayout({children}:{children:ReactNode}) {
   const locale=localeOf((await headers()).get('x-nexify-locale'));
-  const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
+  const theme=themeOf((await cookies()).get('nx-theme')?.value);
+  // Text- und Titelschrift stehen im ersten Bildaufbau: früh laden, damit der Schriftwechsel selten sichtbar wird (Rückfall siehe globals.css).
+  for(const font of ['/fonts/inter-latin.woff2','/fonts/jakarta-latin.woff2'])preload(font,{as:'font',type:'font/woff2',crossOrigin:'anonymous'});
+  // Gesprächsscheibe: die Wahl des Besuchers steht als Sitzungs-Cookie; ohne Wahl entscheidet das Stylesheet nach Fensterbreite.
+  // So erscheint die Scheibe im ersten Bildaufbau im richtigen Zustand und der Inhalt springt nicht (wie beim Thema).
+  const jar=await cookies(),initialChat=initialChatFromCookie(jar.get('nx-chat-open')?.value);
+  // Die Projektfunktionen hinter /api (Sitzung, Angebot, Termin) gibt es nur am lokalen Entwicklungs-Gateway (next.config.ts, rewrites).
+  const gateway=process.env.NODE_ENV==='development';
+  const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()} gateway={gateway} initialChat={initialChat} initialChatWidth={chatWidthFromCookie(jar.get('nx-chat-width')?.value)}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
   // Some browser extensions add attributes to html/body before React runs.
   // Tolerance is deliberately limited to these two roots; page components still hydrate strictly.
-  return <html lang={locale} style={{colorScheme:'dark'}} suppressHydrationWarning><body suppressHydrationWarning><PublicInstallation enabled={installation.enabled}/>{content}</body></html>;
+  return <html lang={locale} data-theme={theme} style={{colorScheme:theme}} suppressHydrationWarning><body suppressHydrationWarning><PublicInstallation enabled={installation.enabled}/>{content}</body></html>;
 }

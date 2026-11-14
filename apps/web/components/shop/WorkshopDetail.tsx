@@ -7,6 +7,11 @@ type Form = { name: string; email: string; phone: string; vehicle: string; messa
 const EMPTY: Form = { name: "", email: "", phone: "", vehicle: "", message: "", consent: false };
 const MSG: Record<string, string> = { required: "Bitte füllen Sie dieses Feld aus.", invalid: "Bitte geben Sie eine gültige E-Mail-Adresse ein.", too_short: "Bitte beschreiben Sie Ihr Anliegen etwas genauer (mindestens 10 Zeichen)." };
 
+// Antwort von POST /api/workshops/{id}/requests (201). Ältere Backends liefern nur id und status.
+type RequestReceipt = { id: string; status: string; workshop_id?: string; state?: string; workshop_notified?: boolean; workshop_partner?: boolean; appointment?: boolean; message?: string };
+const RECEIPT_FALLBACK = "Ihre Anfrage ist bei TEILEKLAR eingegangen. Die Werkstatt wurde noch nicht benachrichtigt.";
+const NOT_PARTNER_FALLBACK = "Diese Werkstatt nimmt über TEILEKLAR derzeit keine Anfragen an.";
+
 function validate(f: Form) {
   const e: Record<string, string> = {};
   if (f.name.trim().length < 2) e.name = "required";
@@ -17,7 +22,7 @@ function validate(f: Form) {
 }
 
 function RequestForm({ workshop }: { workshop: Workshop }) {
-  const [form, setForm] = useState(EMPTY), [errors, setErrors] = useState<Record<string, string>>({}), [sent, setSent] = useState<{ id: string; status: string } | null>(null), [busy, setBusy] = useState(false), [failed, setFailed] = useState(false);
+  const [form, setForm] = useState(EMPTY), [errors, setErrors] = useState<Record<string, string>>({}), [sent, setSent] = useState<RequestReceipt | null>(null), [busy, setBusy] = useState(false), [failed, setFailed] = useState(false), [refused, setRefused] = useState<string | null>(null);
   const field = (key: keyof Form, label: string, multiline = false) => <div className="tk-field is-wide"><label htmlFor={"wr-" + key}>{label}</label>
     {multiline ? <textarea id={"wr-" + key} rows={4} value={form[key] as string} onChange={e => setForm({ ...form, [key]: e.target.value })} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "wr-" + key + "-error" : undefined} data-testid={"workshop-request-" + key} />
       : <input id={"wr-" + key} type={key === "email" ? "email" : "text"} value={form[key] as string} onChange={e => setForm({ ...form, [key]: e.target.value })} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "wr-" + key + "-error" : undefined} data-testid={"workshop-request-" + key} />}
@@ -28,10 +33,19 @@ function RequestForm({ workshop }: { workshop: Workshop }) {
     if (Object.keys(local).length) return;
     setBusy(true);
     try { setSent(await api("/api/workshops/" + workshop.id + "/requests", { method: "POST", json: form })); }
-    catch (e) { const err = e as ApiError; if (err.fields) setErrors(err.fields); else setFailed(true); }
+    catch (e) {
+      const err = e as ApiError;
+      // 409 workshop_not_partner: Diese Werkstatt nimmt über TEILEKLAR keine Anfragen an. Der Grund kommt vom Server;
+      // das Formular wird danach nicht erneut angeboten, weil ein zweiter Versuch dasselbe Ergebnis hätte.
+      if (err.status === 409 && err.error === "workshop_not_partner") setRefused(typeof err.body?.message === "string" && err.body.message.trim() ? err.body.message : NOT_PARTNER_FALLBACK);
+      else if (err.fields) setErrors(err.fields); else setFailed(true);
+    }
     finally { setBusy(false); }
   }
-  if (sent) return <div className="tk-success" role="status" data-testid="workshop-request-success"><h3>{sent.status}</h3><p>Ihre Anfrage an {workshop.name} wurde gespeichert (Vorgang {sent.id}). Ein Termin entsteht erst, wenn die Werkstatt ihn bestätigt.</p></div>;
+  // Die Aussage über den Stand der Anfrage kommt vom Server (message). Fehlt sie (älteres Backend), steht ein neutraler Satz,
+  // der weder eine Benachrichtigung der Werkstatt noch einen Termin behauptet.
+  if (sent) return <div className="tk-success" role="status" data-testid="workshop-request-success"><h3>{sent.status}</h3><p data-testid="workshop-request-message">{typeof sent.message === "string" && sent.message.trim() ? sent.message : RECEIPT_FALLBACK}</p>{sent.id && <p className="tk-note" data-testid="workshop-request-id">Vorgang {sent.id}</p>}</div>;
+  if (refused) return <div className="tk-alert" role="alert" data-testid="workshop-request-refused"><p>{refused}</p></div>;
   return <form className="tk-form" noValidate onSubmit={submit} data-testid="workshop-request-form"><h3>Anfrage an diese Werkstatt</h3>
     <div className="tk-form-grid">{field("name", "Ihr Name")}{field("email", "E-Mail-Adresse")}{field("phone", "Telefon (optional)")}{field("vehicle", "Fahrzeug (optional, z. B. Marke, Modell, Baujahr)")}{field("message", "Ihr Anliegen", true)}</div>
     <label className="tk-terms"><input type="checkbox" checked={form.consent} onChange={e => setForm({ ...form, consent: e.target.checked })} aria-describedby={errors.consent ? "wr-consent-error" : undefined} data-testid="workshop-request-consent" /><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage gespeichert werden.</span></label>

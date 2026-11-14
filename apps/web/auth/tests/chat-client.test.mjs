@@ -17,7 +17,7 @@ const input = { message: 'Ich brauche eine Website.', locale: 'de', pagePath: '/
 const briefing = { data: { vorhaben: 'Website', ziel: 'Anfragen', ausgangslage: '', zielgruppe: '', umfang: [], zeitrahmen: '', budget: '', leistungen: ['websites'], offene_punkte: [] }, text: 'Projektbriefing\n\nVorhaben: Website' };
 
 test('the browser transport turns every server outcome into one clear state for the interface', async () => {
-  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
   try {
     const { streamChat } = await server.ssrLoadModule('/apps/web/lib/chat-client.ts');
     const call = (fetchImpl, handlers = {}, options = {}) => streamChat(input, handlers, { fetch: fetchImpl, ...options });
@@ -40,8 +40,16 @@ test('the browser transport turns every server outcome into one clear state for 
     await streamChat({ ...input, conversationId: 'local-1' }, {}, { fetch: async (url, init) => { request.body = JSON.parse(init.body); return sse(frame({ type: 'done', message: { content: 'x' } })); } });
     assert.equal(request.body.conversationId, 'local-1');
 
-    // Nicht angebunden: Oberfläche wechselt auf den Kontaktweg.
-    for (const status of [503, 404, 405]) assert.deepEqual(await call(async () => Response.json({ error: 'chat_llm_not_configured' }, { status })), { kind: 'unavailable' });
+    // Nicht angebunden gilt nur bei der ausdrücklichen Meldung des Servers (503 chat_llm_not_configured).
+    assert.deepEqual(await call(async () => Response.json({ error: 'chat_llm_not_configured' }, { status: 503 })), { kind: 'unavailable' });
+    // Jede andere Störung bleibt wiederholbar: 503 ohne diese Meldung, 404, 405, 501, 500, auch mit HTML-Körper.
+    const retryable = { kind: 'failed', text: '', conversationId: null };
+    assert.deepEqual(await call(async () => Response.json({ error: 'overloaded' }, { status: 503 })), retryable);
+    assert.deepEqual(await call(async () => new Response('<html>Service Unavailable</html>', { status: 503, headers: { 'content-type': 'text/html' } })), retryable);
+    for (const status of [404, 405, 501, 500]) assert.deepEqual(await call(async () => Response.json({ error: 'chat_llm_not_configured' }, { status })), retryable);
+    // Abgelehnte Anfragen sind nicht wiederholbar.
+    for (const status of [400, 403, 413, 422]) assert.deepEqual(await call(async () => Response.json({ error: 'invalid_message' }, { status })), { kind: 'rejected' });
+    assert.deepEqual(await call(async () => Response.json({ error: 'chat_rate_limited' }, { status: 429, headers: { 'retry-after': '7' } })), { kind: 'limited', retryAfterSeconds: 7 });
     // Mengenbegrenzung mit Wartezeit.
     assert.deepEqual(await call(async () => Response.json({ error: 'chat_rate_limited' }, { status: 429, headers: { 'retry-after': '42' } })), { kind: 'limited', retryAfterSeconds: 42 });
     assert.deepEqual(await call(async () => new Response('', { status: 429 })), { kind: 'limited', retryAfterSeconds: 60 });

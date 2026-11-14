@@ -267,6 +267,162 @@
         "$value": "rgba(189,197,201,.055)",
         "$type": "color"
       }
+    },
+    "hell": {
+      "$description": "Helles Thema der oeffentlichen Seite (Inhaberentscheidung 14.11.2026): kuehles helles Silbergrau, nie Reinweiss; nur ueber den Hell/Dunkel-Schalter. Standard bleibt das dunkle Thema (color.dunkel).",
+      "grund": {
+        "$value": "#E4E7EA",
+        "$type": "color",
+        "$description": "Seitengrund, kuehles helles Silbergrau"
+      },
+      "ebene": {
+        "$value": "#D9DDE1",
+        "$type": "color",
+        "$description": "Zweite Ebene, eine Spur dunkler"
+      },
+      "flaeche": {
+        "$value": "#ECEEF1",
+        "$type": "color",
+        "$description": "Gehobene ruhige Flaeche"
+      },
+      "licht": {
+        "$value": "#F6F7F9",
+        "$type": "color",
+        "$description": "Lichtkante und Glanz auf Glas; bewusst kein Reinweiss"
+      },
+      "schrift": {
+        "$value": "#1B1E1D",
+        "$type": "color",
+        "$description": "Haupttext Graphit"
+      },
+      "schriftNeben": {
+        "$value": "#454B49",
+        "$type": "color",
+        "$description": "Nebentext"
+      },
+      "schriftLeise": {
+        "$value": "#555B59",
+        "$type": "color",
+        "$description": "Hinweise"
+      },
+      "schatten": {
+        "$value": "#1B1E1D",
+        "$type": "color",
+        "$description": "Schattenfarbe, nur in geringer Deckkraft gemischt"
+      },
+      "tagWarm": {
+        "$value": "#EDEEF0",
+        "$type": "color",
+        "$description": "Neutrales Licht im Grund"
+      },
+      "tagSilber": {
+        "$value": "#C9D1D8",
+        "$type": "color",
+        "$description": "Kuehles Silberlicht im Grund und als Eigentoenung des Glases"
+      },
+      "tagLime": {
+        "$value": "#DCE8BE",
+        "$type": "color",
+        "$description": "Hauch Lime im Licht"
+      },
+      "limeHandlung": {
+        "$value": "#688A3A",
+        "$type": "color",
+        "$description": "Handlungs-Lime fuer Schalterkoerper im hellen Thema; mindestens 3:1 zum Grund"
+      },
+      "limeHandlungHell": {
+        "$value": "#74963F",
+        "$type": "color",
+        "$description": "Obere Stufe des Handlungs-Lime"
+      },
+      "limeSchein": {
+        "$value": "#B9CF8E",
+        "$type": "color",
+        "$description": "Lime-Schein fuer Licht unter dem Hauptschalter"
+      },
+      "aufLime": {
+        "$value": "#10180B",
+        "$type": "color",
+        "$description": "Schrift und Zeichen auf Handlungs-Lime"
+      }
+    },
+    "dunkel": {
+      "$description": "Dunkles Thema (Standard): Marken-Graphit in feinen Tonwertstufen, Silbergrau als Licht, Lime als einzige Haupthandlung.",
+      "grund": {
+        "$value": "#1B1E1D",
+        "$type": "color",
+        "$description": "Seitengrund, Marken-Graphit (graphit.800)"
+      },
+      "ebene": {
+        "$value": "#222625",
+        "$type": "color",
+        "$description": "Zweite Ebene"
+      },
+      "flaeche": {
+        "$value": "#2A2E2C",
+        "$type": "color",
+        "$description": "Gehobene ruhige Flaeche"
+      },
+      "licht": {
+        "$value": "#F3F0EA",
+        "$type": "color",
+        "$description": "Lichtkante und Glanz auf Glas (Elfenbein)"
+      },
+      "schrift": {
+        "$value": "#ECEFEC",
+        "$type": "color",
+        "$description": "Haupttext, gebrochenes leicht kuehles Hell"
+      },
+      "schriftNeben": {
+        "$value": "#CDD3CF",
+        "$type": "color",
+        "$description": "Nebentext"
+      },
+      "schriftLeise": {
+        "$value": "#B4BAB6",
+        "$type": "color",
+        "$description": "Hinweise"
+      },
+      "schatten": {
+        "$value": "#0B0D0C",
+        "$type": "color",
+        "$description": "Schattenfarbe"
+      },
+      "tagWarm": {
+        "$value": "#3A403E",
+        "$type": "color",
+        "$description": "Neutrales Licht im Grund"
+      },
+      "tagSilber": {
+        "$value": "#BDC5C9",
+        "$type": "color",
+        "$description": "Silbergrau als Licht (atelier.platinum)"
+      },
+      "tagLime": {
+        "$value": "#A8C76A",
+        "$type": "color",
+        "$description": "Hauch Lime im Licht (marke.lime)"
+      },
+      "limeHandlung": {
+        "$value": "#9AB864",
+        "$type": "color",
+        "$description": "Handlungs-Lime fuer Schalterkoerper: gedaempfter als das Signal-Lime, kein Oliv"
+      },
+      "limeHandlungHell": {
+        "$value": "#B4CF7C",
+        "$type": "color",
+        "$description": "Obere Stufe des Handlungs-Lime"
+      },
+      "limeSchein": {
+        "$value": "#8FAE5A",
+        "$type": "color",
+        "$description": "Lime-Schein fuer Licht unter dem Hauptschalter"
+      },
+      "aufLime": {
+        "$value": "#162010",
+        "$type": "color",
+        "$description": "Schrift und Zeichen auf Handlungs-Lime, tiefes Graphitgruen"
+      }
     }
   },
   "font": {
@@ -428,5 +584,298 @@
   "typeHome": {
     "detail": "clamp(14px, .7cqi, 16px)",
     "reading": "clamp(15px, .8cqi, 18px)"
+  },
+  "atelierSystem": {
+    "$description": "Atelier-System (Stand 14.11.2026): Form, Raum, Bewegung und Schwellen der oeffentlichen Seite. Farben je Thema stehen unter color.dunkel und color.hell.",
+    "radius": {
+      "schalter": {
+        "$value": "999px",
+        "$type": "dimension"
+      },
+      "flaeche": {
+        "$value": "28px",
+        "$type": "dimension"
+      },
+      "buehne": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "kachel": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "feld": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "klein": {
+        "$value": "12px",
+        "$type": "dimension"
+      }
+    },
+    "raum": {
+      "1": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "2": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "3": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "4": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "5": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "6": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "8": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "12": {
+        "$value": "48px",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "64px",
+        "$type": "dimension"
+      },
+      "24": {
+        "$value": "96px",
+        "$type": "dimension"
+      },
+      "10": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "20": {
+        "$value": "80px",
+        "$type": "dimension"
+      }
+    },
+    "bewegung": {
+      "kurve": {
+        "$value": "cubic-bezier(.2,.8,.2,1)",
+        "$type": "cubicBezier"
+      },
+      "schnell": {
+        "$value": "160ms",
+        "$type": "duration"
+      },
+      "ruhig": {
+        "$value": "320ms",
+        "$type": "duration"
+      }
+    },
+    "schalter": {
+      "hoehe": {
+        "$value": "48px",
+        "$type": "dimension"
+      },
+      "hoeheHaupt": {
+        "$value": "56px",
+        "$type": "dimension"
+      }
+    },
+    "chat": {
+      "breiteMin": {
+        "$value": "360px",
+        "$type": "dimension"
+      },
+      "breiteMax": {
+        "$value": "1220px",
+        "$type": "dimension"
+      },
+      "schwelleMittel": {
+        "$value": "480px",
+        "$type": "dimension"
+      },
+      "schwelleKacheln": {
+        "$value": "640px",
+        "$type": "dimension"
+      },
+      "schwelleBreit": {
+        "$value": "820px",
+        "$type": "dimension"
+      }
+    },
+    "kopf": {
+      "hoehe": {
+        "$value": "96px",
+        "$type": "dimension"
+      },
+      "schwelleNavigation": {
+        "$value": "1000px",
+        "$type": "dimension"
+      }
+    },
+    "zeilenlaenge": {"$description": "Hoechste Zeilenlaenge von Textbloecken in em statt ch: ch haengt von der Ziffernbreite der gerade geladenen Schrift ab und laesst Zeilen beim Schriftwechsel anders umbrechen. Werte entsprechen 34ch / 46ch / 60ch der Hausschrift.", "kurz": {"$value": "21.95em", "$type": "dimension"}, "lese": {"$value": "29.02em", "$type": "dimension"}, "breit": {"$value": "37.85em", "$type": "dimension"}},
+    "schrift": {
+      "$description": "Schriftstufen des Atelier-Systems: sechs feste Groessen, fuenf Zeilenhoehen, drei Gewichte.",
+      "12": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "13": {
+        "$value": "13px",
+        "$type": "dimension"
+      },
+      "15": {
+        "$value": "15px",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "18": {
+        "$value": "18px",
+        "$type": "dimension"
+      },
+      "24": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "zeileEng": {
+        "$value": "1.05",
+        "$type": "number"
+      },
+      "zeileTitel": {
+        "$value": "1.2",
+        "$type": "number"
+      },
+      "zeileKurz": {
+        "$value": "1.35",
+        "$type": "number"
+      },
+      "zeileText": {
+        "$value": "1.5",
+        "$type": "number"
+      },
+      "zeileLese": {
+        "$value": "1.6",
+        "$type": "number"
+      },
+      "gewichtText": {
+        "$value": "400",
+        "$type": "number"
+      },
+      "gewichtMittel": {
+        "$value": "500",
+        "$type": "number"
+      },
+      "gewichtStark": {
+        "$value": "600",
+        "$type": "number"
+      }
+    },
+    "glas": {
+      "$description": "Glasstaerken: Unschaerfe des Hintergrunds je Staerke. Je groesser die Flaeche, desto ruhiger (staerker) die Streuung.",
+      "schalter": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "kante": {
+        "$value": "3px",
+        "$type": "dimension"
+      },
+      "flaeche": {
+        "$value": "14px",
+        "$type": "dimension"
+      },
+      "dicht": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "leiste": {
+        "$value": "18px",
+        "$type": "dimension"
+      },
+      "front": {
+        "$value": "22px",
+        "$type": "dimension"
+      },
+      "saettigung": {
+        "$value": "185%",
+        "$type": "number"
+      }
+    },
+    "tiefe": {
+      "$description": "Feste Tiefenordnung (z-index): Grund < Inhalt < schwebende Flaechen < Glas < Schalter/Menues.",
+      "grund": {
+        "$value": "-1",
+        "$type": "number"
+      },
+      "inhalt": {
+        "$value": "1",
+        "$type": "number"
+      },
+      "schwebend": {
+        "$value": "10",
+        "$type": "number"
+      },
+      "glas": {
+        "$value": "40",
+        "$type": "number"
+      },
+      "menue": {
+        "$value": "60",
+        "$type": "number"
+      }
+    },
+    "logo": {
+      "$description": "Hoehe der Logo-Figur je Groesse; Wortmarke und Claim leiten sich daraus ab.",
+      "s": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "m": {
+        "$value": "52px",
+        "$type": "dimension"
+      },
+      "l": {
+        "$value": "72px",
+        "$type": "dimension"
+      }
+    },
+    "rollbalken": {
+      "breite": {
+        "$value": "10px",
+        "$type": "dimension"
+      },
+      "griff": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "abstand": {
+        "$value": "3px",
+        "$type": "dimension"
+      }
+    },
+    "schwelle": {
+      "$description": "Seitenschwellen (nur Nachweis; Media-Queries koennen keine Variablen lesen).",
+      "mobil": {
+        "$value": "820px",
+        "$type": "dimension"
+      },
+      "navigation": {
+        "$value": "1000px",
+        "$type": "dimension"
+      },
+      "breit": {
+        "$value": "1920px",
+        "$type": "dimension"
+      }
+    }
   }
 }

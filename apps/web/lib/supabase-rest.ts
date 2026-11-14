@@ -7,6 +7,10 @@
  *   SUPABASE_URL                  z. B. https://db.nexifyai.cloud
  *   SUPABASE_SERVICE_ROLE_KEY     Service-Role-JWT (nur Server)
  * PostgREST muss das Schema "chat" ausliefern: PGRST_DB_SCHEMAS="public,chat".
+ *   SUPABASE_TIMEOUT_MS           optional: Zeitlimit je Zugriff in Millisekunden (Standard 4000, 100–15000)
+ *
+ * Jeder Zugriff hat ein Zeitlimit: ein hängender Speicher darf weder die Antwort des Chats
+ * aufhalten noch die Funktion bis zur Zeitgrenze der Plattform offen halten.
  */
 
 const SCHEMA = 'chat';
@@ -23,6 +27,21 @@ function base(): { url: string; key: string } {
 }
 
 type Row = Record<string, unknown>;
+
+const DEFAULT_TIMEOUT_MS = 4000;
+
+/** Ein Zugriff auf den Speicher hat das Zeitlimit überschritten. Die Meldung enthält weder Pfad noch Inhalt. */
+export class SupabaseTimeoutError extends Error {
+  constructor() {
+    super('supabase_timeout');
+    this.name = 'SupabaseTimeoutError';
+  }
+}
+
+function timeoutMs(): number {
+  const configured = Number(process.env.SUPABASE_TIMEOUT_MS);
+  return Number.isFinite(configured) && configured >= 100 && configured <= 15_000 ? Math.floor(configured) : DEFAULT_TIMEOUT_MS;
+}
 
 async function rest<T>(
   method: 'GET' | 'POST' | 'PATCH',
@@ -43,13 +62,23 @@ async function rest<T>(
   if (opts.representation) headers['Prefer'] = 'return=representation';
   Object.assign(headers, opts.headers ?? {});
 
-  const res = await fetch(`${url}/rest/v1/${path}`, {
-    method,
-    headers,
-    body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
-    cache: 'no-store',
-  });
-  const text = await res.text();
+  // Das Limit gilt für Verbindung und Lesen der Antwort zusammen.
+  const limit = AbortSignal.timeout(timeoutMs());
+  let res: Response;
+  let text: string;
+  try {
+    res = await fetch(`${url}/rest/v1/${path}`, {
+      method,
+      headers,
+      body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
+      cache: 'no-store',
+      signal: limit,
+    });
+    text = await res.text();
+  } catch (error) {
+    if (limit.aborted) throw new SupabaseTimeoutError();
+    throw error;
+  }
   if (!res.ok) {
     throw new Error(`supabase ${method} ${path} -> ${res.status}: ${text.slice(0, 300)}`);
   }

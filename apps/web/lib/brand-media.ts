@@ -67,6 +67,8 @@ const pageVideos:Record<string,string>={
  automation:'/media/scenes/fertigung-20261113.mp4',
  'nex-agentic':'/media/scenes/fertigung-20261113.mp4',
  'apps-portals':'/media/scenes/tablet-foyer-20261113.mp4',
- websites:'/media/scenes/bemusterung-20261113.mp4'
+ websites:'/media/scenes/bemusterung-20261113.mp4',
+ // Foerderanlage mit Kartons: dieselbe Szene wie das Standbild der TEILEKLAR-Startseite (hf-08).
+ 'tk-home':'/media/scenes/logistik-20261113.mp4'
 };
 export function pageVideo(pageId:string):string|undefined{return pageVideos[pageId];}

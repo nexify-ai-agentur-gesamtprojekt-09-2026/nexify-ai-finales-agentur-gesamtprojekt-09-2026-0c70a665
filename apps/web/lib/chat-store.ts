@@ -72,11 +72,6 @@ export function parseOfferDraft(text: string): OfferDraft | null {
   };
 }
 
-/** Strip des Angebots-Blocks aus dem sichtbaren Text (Block wird strukturiert ausgeliefert). */
-export function stripOfferFence(text: string): string {
-  return text.replace(/```offer(?:-json)?\s*[\s\S]*?```/i, '').trim();
-}
-
 export async function ensureConversation(
   conversationId: string | undefined,
   meta: { locale?: ChatLocale; pagePath?: string },

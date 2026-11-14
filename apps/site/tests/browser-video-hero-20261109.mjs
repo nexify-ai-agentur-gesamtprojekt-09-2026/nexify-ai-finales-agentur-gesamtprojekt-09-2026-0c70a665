@@ -18,7 +18,7 @@ try{
   const poster=await video.getAttribute('poster');
   const src=await video.getAttribute('src');
   assert.equal(poster,'/media/higgsfield/hf-02-lobby-walk-1920.webp');
-  assert.equal(src,'/media/scenes/eingangshalle-20261113.mp4');
+  assert.equal(src,'/media/scenes/eingangshalle-20261114.mp4');
   assert.equal((await context.request.get(origin+poster)).status(),200);
   assert.equal((await context.request.get(origin+src)).status(),200);
   await page.waitForTimeout(500);

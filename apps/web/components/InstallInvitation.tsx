@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
+import {Logo} from './Logo';
 import type {Locale} from "../lib/i18n";
 import "./InstallInvitation.css";
 
@@ -76,7 +77,7 @@ export default function InstallInvitation({locale}:{locale:Locale}){
   }
   const body=mode==="prompt"?t.prompt:mode==="ios"?t.ios:t.generic;
   return <section className="install-invitation" aria-labelledby="install-invitation-title" data-testid="install-invitation" data-mode={mode}>
-    <span className="brand-signet install-invitation-mark" aria-hidden="true"/>
+    <Logo variante="figur" groesse="s" className="install-invitation-mark"/>
     <div className="install-invitation-copy">
       <h2 id="install-invitation-title">{t.title}</h2>
       <p data-testid="install-invitation-text">{body}</p>

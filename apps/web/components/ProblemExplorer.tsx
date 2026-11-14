@@ -1,4 +1,5 @@
 import interfaceCopy from "../../../config/public-interface-copy.json";
+import {Zeichen} from "./Zeichen";
 import {useState,type KeyboardEvent} from 'react';
 import {ActionButton,ActionLink} from './ActionControl';
 import {useUI} from './Workspace';
@@ -11,6 +12,6 @@ export const ProblemExplorer=()=>{
  return <div className="problem-explorer" data-testid="problem-explorer" aria-labelledby="problem-explorer-title"><div className="problem-heading"><h3 id="problem-explorer-title" data-testid="problem-explorer-title">{t.title}</h3><p data-testid="problem-explorer-intro">{t.intro}</p></div>
   <div className="problem-tabs" role="tablist" aria-label={t.title}>{t.items.map((entry,i)=><ActionButton key={entry.id} id={`problem-tab-${entry.id}`} variant="secondary" role="tab" aria-selected={selected===i} aria-controls="problem-detail" tabIndex={selected===i?0:-1} data-testid={`problem-tab-${entry.id}`} onClick={()=>setSelected(i)} onKeyDown={event=>key(event,i)}>{entry.title}</ActionButton>)}</div>
   <div id="problem-detail" className="problem-detail" role="tabpanel" aria-labelledby={`problem-tab-${item.id}`} tabIndex={0} data-testid="problem-detail"><div className="problem-before"><span className="problem-label">{t.before}</span><p data-testid="problem-before">{item.before}</p></div><div className="problem-flow"><span className="problem-label">{t.flow}</span><ol data-testid="problem-flow">{item.steps.map((step,i)=><li key={step}><span className="problem-step-number" aria-hidden="true">0{i+1}</span><span>{step}</span></li>)}</ol></div><div className="problem-after"><span className="problem-label">{t.after}</span><p data-testid="problem-result">{item.result}</p></div></div>
-  <div className="problem-action"><ActionLink variant="primary" href="/leistungsumfang" data-testid="problem-use-button" onClick={event=>{if(chatReady){event.preventDefault();window.dispatchEvent(new CustomEvent('nexify-project-prefill',{detail:item.prefill}));}}}>{t.cta}<span aria-hidden="true">→</span></ActionLink><p data-testid="problem-scope">{t.note}</p></div>
+  <div className="problem-action"><ActionLink variant="primary" href="/leistungsumfang" data-testid="problem-use-button" onClick={event=>{if(chatReady){event.preventDefault();window.dispatchEvent(new CustomEvent('nexify-project-prefill',{detail:item.prefill}));}}}>{t.cta}<Zeichen name="pfeil" groesse={18}/></ActionLink><p data-testid="problem-scope">{t.note}</p></div>
  </div>;
 };

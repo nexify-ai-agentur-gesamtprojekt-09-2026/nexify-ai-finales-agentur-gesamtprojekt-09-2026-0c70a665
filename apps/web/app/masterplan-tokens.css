@@ -62,8 +62,8 @@
   --color-semantik-fehler:      var(--color-status-error);
 
   /* ============== Typografie: Inter + Plus Jakarta Sans ============== */
-  --font-display: 'Plus Jakarta Sans', Inter, 'Segoe UI', system-ui, sans-serif;
-  --font-text:    Inter, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Jakarta Rueckfall', Inter, 'Segoe UI', system-ui, sans-serif;
+  --font-text:    Inter, 'Inter Rueckfall', 'Segoe UI', system-ui, sans-serif;
   --font-mono:    'Geist Mono', ui-monospace, 'Courier New', monospace;
 
   /* ============== 8-pt Grid + semantische Spacing-Namen ============== */

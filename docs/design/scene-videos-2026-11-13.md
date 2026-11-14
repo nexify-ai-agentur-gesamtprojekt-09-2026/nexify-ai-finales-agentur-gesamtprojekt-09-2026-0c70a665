@@ -62,6 +62,7 @@ verloren gehen (die Originale lagen nur im Upload-Ordner einer Session):
 | Datei in `apps/web/public/media/scenes/` | SHA-256 | Quelle | Vorgesehen für |
 |---|---|---|---|
 | `eingangshalle-20261113.mp4` | `511f5a20dc39ed4cb766346c1431914080d9b918f1234184508a78c25771c654` | `gemini_generated_video_0b5fc50e.mp4` | Startseiten-Hero (Zusage des Inhabers vom 13.11.2026) |
+| `eingangshalle-20261114.mp4` | `cf4a1b45b438cfd8ee2b1fce16be64254cba6551233309f6ea7efcca95d1e29a` | `gemini_generated_video_5720258b.mp4` | Startseiten-Hero ab 14.11.2026, neue Fassung mit neuem Sprechtext (vom Inhaber geliefert); die Fassung vom 13.11. bleibt als Datei erhalten |
 | `logistik-20261113.mp4` | `4d6ec87b953c6903aac6e7e5439bb3691ab02bee7108aed9722efff5e7a9d5ae` | `gemini_generated_video_a72d7c53.mp4` | TEILEKLAR-Startseite (`tk-home`) |
 
 Vorgabe des Inhabers vom 13.11.2026: Auf jeder Seite ein passendes Video im Kopfbereich;

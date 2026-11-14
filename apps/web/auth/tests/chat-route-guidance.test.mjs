@@ -19,7 +19,7 @@ const events = text => text.split('\n\n').filter(Boolean).map(frame => JSON.pars
 test('the public chat route leads with the versioned guidance and enforces the guardrails on the model output', async () => {
   const saved = Object.fromEntries(keys.map(key => [key, process.env[key]]));
   const oldFetch = globalThis.fetch, oldWarn = console.warn, oldError = console.error;
-  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
   try {
     process.env.ROUTER_URL = 'https://router.invalid/v1';
     process.env.ROUTER_KEY = 'fixture-key';

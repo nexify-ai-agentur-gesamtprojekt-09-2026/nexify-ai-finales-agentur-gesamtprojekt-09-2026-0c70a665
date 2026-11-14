@@ -1,13 +1,15 @@
 "use client";
-import type {UIMessage} from "ai";
-import {useCallback,useEffect,useRef,useState,type FormEvent,type KeyboardEvent,type MouseEvent} from "react";
+import {useCallback,useEffect,useLayoutEffect,useRef,useState,type FormEvent,type KeyboardEvent,type MouseEvent} from "react";
+import {Zeichen} from "./Zeichen";
 import type {Locale} from "../lib/i18n";
 import type {PublicPage} from "../lib/page-types";
 import {SiteLink} from "./Router";
 import "./PublicOrientationChat.css";
 import {staticOrientation,type StaticGuidance} from "../lib/static-orientation";
+import {LOGO_FIGUR,OracleName} from './Logo';
 import {saveOracleBrief} from "../lib/project-brief-transfer";
 import {streamChat} from "../lib/chat-client";
+import {loadChat,saveChat,settleTurn,stopAllowed,type ChatPhase,type ChatTurn} from "../lib/chat-session";
 import type {BriefingDTO,ChatMessageDTO} from "../lib/chat-contract";
 declare const __NEXIFY_STATIC_ORIENTATION__:boolean;
 
@@ -79,12 +81,12 @@ const copy={
 };
 
 // Zustände des geführten Gesprächs. Gleicher Schlüsselsatz in allen vier Sprachen.
-type StateCopy={reply:string;thinking:string;failed:string;limited:string;stopped:string;retry:string;contact:string;restart:string;brief:string;briefRequest:string;unavailable:string;counter:string;keys:string};
+type StateCopy={reply:string;thinking:string;failed:string;limitedSeconds:string;limitedMinutes:string;rejected:string;stopped:string;retry:string;resend:string;contact:string;contactWithMessage:string;restart:string;brief:string;briefRequest:string;unavailable:string;pages:string;openPage:string;counter:string;keys:string};
 const stateCopy:Record<Locale,StateCopy>={
- de:{reply:"Ihre Antwort …",thinking:"Oracle antwortet …",failed:"Die Antwort konnte gerade nicht geladen werden. Ihre Nachricht bleibt stehen. Versuchen Sie es erneut oder schreiben Sie Pascal direkt.",limited:"Gerade gehen sehr viele Nachrichten ein. Bitte versuchen Sie es in einer Minute erneut.",stopped:"Antwort angehalten.",retry:"Erneut versuchen",contact:"Kontakt aufnehmen",restart:"Neues Gespräch",brief:"Briefing jetzt erstellen",briefRequest:"Bitte fassen Sie mein Vorhaben jetzt als Briefing zusammen.",unavailable:"Das Gespräch im Chat ist gerade nicht erreichbar. Sie erhalten hier eine Orientierung anhand der Website. Ihr Vorhaben können Sie direkt an Pascal senden.",counter:"Zeichen",keys:"Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile."},
- nl:{reply:"Uw antwoord …",thinking:"Oracle antwoordt …",failed:"Het antwoord kon nu niet worden geladen. Uw bericht blijft staan. Probeer het opnieuw of schrijf Pascal rechtstreeks.",limited:"Er komen nu erg veel berichten binnen. Probeer het over een minuut opnieuw.",stopped:"Antwoord onderbroken.",retry:"Opnieuw proberen",contact:"Contact opnemen",restart:"Nieuw gesprek",brief:"Nu briefing maken",briefRequest:"Vat mijn plan nu samen als briefing.",unavailable:"Het gesprek in de chat is nu niet bereikbaar. U krijgt hier een oriëntatie op basis van de website. Uw plan kunt u rechtstreeks naar Pascal sturen.",counter:"tekens",keys:"Enter verstuurt, Shift en Enter begint een nieuwe regel."},
- fr:{reply:"Votre réponse …",thinking:"Oracle répond …",failed:"La réponse n’a pas pu être chargée. Votre message est conservé. Réessayez ou écrivez directement à Pascal.",limited:"De très nombreux messages arrivent en ce moment. Veuillez réessayer dans une minute.",stopped:"Réponse suspendue.",retry:"Réessayer",contact:"Prendre contact",restart:"Nouvelle conversation",brief:"Créer le briefing",briefRequest:"Merci de résumer maintenant mon projet sous forme de briefing.",unavailable:"La conversation dans le chat est momentanément indisponible. Vous obtenez ici une orientation à partir du site. Vous pouvez envoyer votre projet directement à Pascal.",counter:"caractères",keys:"Entrée envoie, Maj et Entrée commence une nouvelle ligne."},
- en:{reply:"Your reply …",thinking:"Oracle is replying …",failed:"The reply could not be loaded just now. Your message is kept. Please try again or write to Pascal directly.",limited:"A lot of messages are coming in right now. Please try again in a minute.",stopped:"Reply paused.",retry:"Try again",contact:"Get in touch",restart:"New conversation",brief:"Create the brief now",briefRequest:"Please summarise my project as a brief now.",unavailable:"The conversation in the chat is currently unavailable. You get guidance based on the website here. You can send your project to Pascal directly.",counter:"characters",keys:"Enter sends, Shift and Enter starts a new line."}
+ de:{reply:"Ihre Antwort …",thinking:"Oracle antwortet …",failed:"Die Antwort konnte gerade nicht geladen werden. Ihre Nachricht bleibt stehen. Versuchen Sie es erneut oder schreiben Sie Pascal direkt.",limitedSeconds:"Gerade gehen sehr viele Nachrichten ein. Bitte versuchen Sie es in {n} Sekunden erneut.",limitedMinutes:"Gerade gehen sehr viele Nachrichten ein. Bitte versuchen Sie es in etwa {n} Minuten erneut.",rejected:"Diese Nachricht konnte so nicht verarbeitet werden. Bitte formulieren Sie sie neu oder schreiben Sie Pascal direkt.",stopped:"Antwort angehalten.",retry:"Erneut versuchen",resend:"Erneut senden",contact:"Kontakt aufnehmen",contactWithMessage:"Mit dieser Nachricht anfragen",restart:"Neues Gespräch",brief:"Briefing jetzt erstellen",briefRequest:"Bitte fassen Sie mein Vorhaben jetzt als Briefing zusammen.",unavailable:"Der Chat ist im Moment nicht erreichbar. Ihre Nachricht bleibt erhalten. Sie können damit direkt bei Pascal anfragen oder es erneut versuchen.",pages:"Passende Seiten",openPage:"Seite öffnen",counter:"Zeichen",keys:"Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile."},
+ nl:{reply:"Uw antwoord …",thinking:"Oracle antwoordt …",failed:"Het antwoord kon nu niet worden geladen. Uw bericht blijft staan. Probeer het opnieuw of schrijf Pascal rechtstreeks.",limitedSeconds:"Er komen nu erg veel berichten binnen. Probeer het over {n} seconden opnieuw.",limitedMinutes:"Er komen nu erg veel berichten binnen. Probeer het over ongeveer {n} minuten opnieuw.",rejected:"Dit bericht kon zo niet worden verwerkt. Formuleer het opnieuw of schrijf Pascal rechtstreeks.",stopped:"Antwoord onderbroken.",retry:"Opnieuw proberen",resend:"Opnieuw versturen",contact:"Contact opnemen",contactWithMessage:"Aanvragen met dit bericht",restart:"Nieuw gesprek",brief:"Nu briefing maken",briefRequest:"Vat mijn plan nu samen als briefing.",unavailable:"De chat is op dit moment niet bereikbaar. Uw bericht blijft bewaard. U kunt hiermee rechtstreeks bij Pascal aanvragen of het opnieuw proberen.",pages:"Passende pagina’s",openPage:"Pagina openen",counter:"tekens",keys:"Enter verstuurt, Shift en Enter begint een nieuwe regel."},
+ fr:{reply:"Votre réponse …",thinking:"Oracle répond …",failed:"La réponse n’a pas pu être chargée. Votre message est conservé. Réessayez ou écrivez directement à Pascal.",limitedSeconds:"De très nombreux messages arrivent en ce moment. Veuillez réessayer dans {n} secondes.",limitedMinutes:"De très nombreux messages arrivent en ce moment. Veuillez réessayer dans environ {n} minutes.",rejected:"Ce message n’a pas pu être traité tel quel. Reformulez-le ou écrivez directement à Pascal.",stopped:"Réponse suspendue.",retry:"Réessayer",resend:"Renvoyer",contact:"Prendre contact",contactWithMessage:"Faire une demande avec ce message",restart:"Nouvelle conversation",brief:"Créer le briefing",briefRequest:"Merci de résumer maintenant mon projet sous forme de briefing.",unavailable:"Le chat est momentanément indisponible. Votre message est conservé. Vous pouvez l’utiliser pour une demande directe à Pascal ou réessayer.",pages:"Pages utiles",openPage:"Ouvrir la page",counter:"caractères",keys:"Entrée envoie, Maj et Entrée commence une nouvelle ligne."},
+ en:{reply:"Your reply …",thinking:"Oracle is replying …",failed:"The reply could not be loaded just now. Your message is kept. Please try again or write to Pascal directly.",limitedSeconds:"A lot of messages are coming in right now. Please try again in {n} seconds.",limitedMinutes:"A lot of messages are coming in right now. Please try again in about {n} minutes.",rejected:"This message could not be processed as written. Please rephrase it or write to Pascal directly.",stopped:"Reply paused.",retry:"Try again",resend:"Send again",contact:"Get in touch",contactWithMessage:"Enquire with this message",restart:"New conversation",brief:"Create the brief now",briefRequest:"Please summarise my project as a brief now.",unavailable:"The chat is unavailable at the moment. Your message is kept. You can use it to enquire with Pascal directly or try again.",pages:"Relevant pages",openPage:"Open page",counter:"characters",keys:"Enter sends, Shift and Enter starts a new line."}
 };
 
 // Hinweis unter dem Eingabefeld: sachlicher Eingabehinweis mit Verweis auf die Datenschutzseite der jeweiligen Marke.
@@ -263,18 +265,28 @@ const journeyCopy:Record<Locale,Record<"nexify"|"teileklar",{eyebrow:string;titl
  }
 };
 
-function OrientationStarters({locale,site,label,onChoose}:{locale:Locale;site:"nexify"|"teileklar";label:string;onChoose:(seed:string)=>void}){
- return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
+/** Das Eingabefeld wächst mit dem Text (bis zur Grenze aus dem Stylesheet) und schrumpft nach dem Senden zurück. */
+function useAutoGrow(field:{current:HTMLTextAreaElement|null},value:string){
+ useEffect(()=>{const node=field.current;if(!node)return;node.style.height="auto";node.style.height=node.scrollHeight+"px";},[field,value]);
 }
 
-function OrientationJourney({locale,site,step=0}:{locale:Locale;site:"nexify"|"teileklar";step?:number}){
+function OrientationStarters({locale,site,label,onChoose,chosen}:{locale:Locale;site:"nexify"|"teileklar";label:string;onChoose:(seed:string)=>void;chosen?:string}){
+ return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" aria-pressed={chosen===seed} onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
+}
+
+// Leerzustand: Oracle empfängt als Gastgeber; darunter die Marke des Assistenten.
+function OrientationIntro({title,intro}:{title:string;intro:string}){
+ return <div className="orientation-intro"><div className="orientation-host"><span className="orientation-host-figure" aria-hidden="true"><img src={LOGO_FIGUR} alt="" width={512} height={512} decoding="async"/></span><OracleName className="orientation-host-name"/></div><h3>{title}</h3><p className="orientation-intro-body">{intro}</p></div>;
+}
+
+function OrientationJourney({locale,site,step=0,quiet=false}:{locale:Locale;site:"nexify"|"teileklar";step?:number;quiet?:boolean}){
  const content=journeyCopy[locale][site];
- return <ol className="orientation-path" aria-label={content.title}>{content.steps.map(([number,label],index)=><li key={number} data-state={index<step?"done":index===step?"current":"open"} aria-current={index===step?"step":undefined}><small>{number}</small>{label}</li>)}</ol>;
+ return <ol className={"orientation-path"+(quiet?" orientation-path-quiet":"")} aria-label={content.title}>{content.steps.map(([number,label],index)=><li key={number} data-state={index<step?"done":index===step?"current":"open"} aria-current={index===step?"step":undefined}><small>{number}</small>{label}</li>)}</ol>;
 }
 
 function OrientationAnswer({text,locale}:{text:string;locale:Locale}){
  const paragraphs=text.split(/\n\n+/).filter(Boolean),last=paragraphs.length-1;
- const noteLabel=({de:"Hinweis zur Einordnung",nl:"Toelichting",fr:"Note d’orientation",en:"Guidance note"} as const)[locale];
+ const noteLabel=({de:"Wie diese Antwort entsteht",nl:"Hoe dit antwoord ontstaat",fr:"Origine de cette réponse",en:"How this answer is produced"} as const)[locale];
  return <div className="orientation-answer-copy">{paragraphs.map((paragraph,index)=>index===0?<p className="orientation-answer-heading" key={paragraph}>{paragraph}</p>:index===last&&paragraphs.length>2?<details className="orientation-answer-note" key={paragraph}><summary>{noteLabel}<span aria-hidden="true">+</span></summary><p>{paragraph}</p></details>:<p key={paragraph}>{paragraph}</p>)}</div>;
 }
 
@@ -319,58 +331,45 @@ function ProjectBriefing({locale,questions,prepared}:{locale:Locale;questions:st
    setNotice(t.fallback);
   }
  }
- return <section className="orientation-brief" aria-label={t.title}><div className="orientation-brief-heading"><span className="orientation-brief-icon" aria-hidden="true">✳</span><div><h4>{t.title}</h4><p>{t.intro}</p></div></div><label htmlFor="orientation-brief-text">{t.label}</label><textarea id="orientation-brief-text" rows={prepared?10:5} maxLength={4000} value={value} onChange={event=>{setEdited(event.target.value);setNotice("");}}/><div className="orientation-brief-actions"><button type="button" className="outline-button" onClick={()=>void copyBrief()}>{t.copy}</button><SiteLink className="primary-button" href="/kontakt" onClick={transferBrief}>{t.contact} <span aria-hidden="true">→</span></SiteLink></div><p className="orientation-brief-hint">{t.hint}</p><p className="orientation-brief-notice" role="status">{notice}</p></section>;
+ return <section className="orientation-brief" aria-label={t.title}><div className="orientation-brief-heading"><span className="orientation-brief-icon" aria-hidden="true">✳</span><div><h4>{t.title}</h4><p>{t.intro}</p></div></div><label htmlFor="orientation-brief-text">{t.label}</label><textarea id="orientation-brief-text" rows={prepared?10:5} maxLength={4000} value={value} onChange={event=>{setEdited(event.target.value);setNotice("");}}/><div className="orientation-brief-actions"><button type="button" className="outline-button" onClick={()=>void copyBrief()}>{t.copy}</button><SiteLink className="primary-button" href="/kontakt" onClick={transferBrief}>{t.contact} <Zeichen name="pfeil" groesse={18}/></SiteLink></div><p className="orientation-brief-hint">{t.hint}</p><p className="orientation-brief-notice" role="status">{notice}</p></section>;
 }
 
 type OrientationProps={locale:Locale;pagePath:string;pages:PublicPage[];onActivityChange?:(working:boolean)=>void};
-type FallbackProps=OrientationProps&{unavailable?:boolean;initialQuestion?:string};
+type FallbackProps=OrientationProps&{unavailable?:boolean;initialQuestion?:string;onRetry?:()=>void};
 
 export default function PublicOrientationChat(props:OrientationProps){
  const local=typeof __NEXIFY_STATIC_ORIENTATION__!=="undefined"&&__NEXIFY_STATIC_ORIENTATION__===true;
  const site=props.pagePath.startsWith('/teileklar')?'teileklar':'nexify';
  const conversationKey=`${site}:${props.locale}`;
- // Ohne angebundenen Chat fällt die Oberfläche verständlich auf Orientierung und Kontaktweg zurück.
+ // Meldet der Server ausdrücklich, dass der Chat nicht angebunden ist, und gab es noch keine Antwort,
+ // führt die Oberfläche auf den Kontaktweg. „Erneut versuchen" sendet dieselbe Nachricht noch einmal.
  const [fallback,setFallback]=useState<{key:string;question:string}|null>(null);
+ const [resend,setResend]=useState<{key:string;question:string}|null>(null);
  return local?<StaticOrientationChat key={conversationKey} {...props}/>
-  :fallback?.key===conversationKey?<StaticOrientationChat key={conversationKey+":fallback"} {...props} unavailable initialQuestion={fallback.question}/>
-  :<ServerOrientationChat key={conversationKey} {...props} onUnavailable={question=>setFallback({key:conversationKey,question})}/>;
+  :fallback?.key===conversationKey?<StaticOrientationChat key={conversationKey+":fallback"} {...props} unavailable initialQuestion={fallback.question} onRetry={()=>{setResend(fallback);setFallback(null);}}/>
+  :<ServerOrientationChat key={conversationKey} {...props} resend={resend?.key===conversationKey?resend.question:undefined} onUnavailable={question=>setFallback({key:conversationKey,question})}/>;
 }
 
-// UI history is visitor-supplied context, never proof of an authenticated conversation.
-// Send a bounded suffix of whole text turns; never truncate the latest user question.
-export function serverTextHistory(messages:UIMessage[]){
- const validId=/^[A-Za-z0-9_-]{1,100}$/;
- const invalidText=/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/u;
- const result:{id:string;role:'user'|'assistant';parts:{type:'text';text:string}[]}[]=[];
- const ids=new Set<string>();let characters=0;
- for(let i=messages.length-1;i>=0&&result.length<12;i--){
-  const message=messages[i],latest=i===messages.length-1;
-  if((message.role!=='user'&&message.role!=='assistant')||typeof message.id!=='string'||!validId.test(message.id)||ids.has(message.id)){
-   if(latest)throw new Error('invalid_latest_message');continue;
-  }
-  const textParts=message.parts.filter(part=>part.type==='text');
-  if(textParts.some(part=>typeof part.text!=='string')){if(latest)throw new Error('invalid_latest_message');continue;}
-  const parts=textParts.map(part=>({type:'text' as const,text:part.text}));
-  const count=parts.reduce((total,part)=>total+part.text.length,0);
-  if(!parts.length||parts.length>12||parts.some(part=>invalidText.test(part.text))||!count){
-   if(latest)throw new Error('invalid_latest_message');continue;
-  }
-  if(characters+count>3000){if(latest)throw new Error('latest_message_too_long');break;}
-  ids.add(message.id);characters+=count;result.unshift({id:message.id,role:message.role,parts});
- }
- while(result[0]?.role==='assistant')result.shift();
- if(result.at(-1)?.role!=='user')throw new Error('latest_user_message_required');
- return result;
-}
-
-type Turn={id:string;role:"user"|"assistant";text:string;state:"done"|"streaming"|"stopped";briefing?:BriefingDTO};
-type Phase="idle"|"sending"|"streaming"|"failed"|"limited";
+type Turn=ChatTurn;
 const MESSAGE_LIMIT=1000;
+const sessionStore=()=>{try{return window.sessionStorage;}catch{return null;}};
 
 // Sichtbarer Text der Antwort: Absätze, Links nur auf bekannte Seiten, keine Auszeichnungszeichen.
+// Aufzählungen und nummerierte Schritte werden als Listen gesetzt; alles andere bleibt Absatz.
 function AssistantText({text,pages}:{text:string;pages:PublicPage[]}){
- const paragraphs=text.replace(/\*\*|__/g,"").split(/\n{2,}/).map(paragraph=>paragraph.trim()).filter(Boolean);
- return <>{paragraphs.map((paragraph,index)=><p key={index}>{guidedText(paragraph,pages)}</p>)}</>;
+ const blocks=text.replace(/\*\*|__/g,"").split(/\n{2,}/).map(block=>block.trim()).filter(Boolean);
+ const bullet=/^\s*[-•*]\s+/,numbered=/^\s*\d{1,2}[.)]\s+/;
+ return <>{blocks.flatMap((block,index)=>{
+  const parts:{kind:"p"|"ul"|"ol";lines:string[]}[]=[];
+  for(const line of block.split("\n")){
+   const kind=bullet.test(line)?"ul":numbered.test(line)?"ol":"p",last=parts.at(-1);
+   const value=line.replace(kind==="ul"?bullet:kind==="ol"?numbered:/^$/,"").trim();if(!value)continue;
+   if(last&&last.kind===kind)last.lines.push(value);else parts.push({kind,lines:[value]});
+  }
+  return parts.map((part,order)=>part.kind==="p"?<p key={index+"-"+order}>{guidedText(part.lines.join(" "),pages)}</p>
+   :part.kind==="ul"?<ul key={index+"-"+order}>{part.lines.map((line,item)=><li key={item}>{guidedText(line,pages)}</li>)}</ul>
+   :<ol key={index+"-"+order}>{part.lines.map((line,item)=><li key={item}>{guidedText(line,pages)}</li>)}</ol>);
+ })}</>;
 }
 
 // Verlauf für den Server: abgeschlossene Beiträge, jüngste zuerst begrenzt. Ein Briefing reist als Block mit,
@@ -379,99 +378,170 @@ export function clientHistory(turns:{role:"user"|"assistant";text:string;briefin
  return turns.filter(turn=>turn.text.trim()||turn.briefing).slice(-16).map(turn=>({role:turn.role,content:turn.briefing?`${turn.text}\n\n\`\`\`briefing\n${JSON.stringify(turn.briefing.data)}\n\`\`\``:turn.text}));
 }
 
-function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavailable}:OrientationProps&{onUnavailable:(question:string)=>void}){
+/** Wartezeit in Worten: unter anderthalb Minuten in Sekunden, darüber in Minuten. */
+function waitText(state:StateCopy,seconds:number){
+ return seconds<=90?state.limitedSeconds.replace("{n}",String(Math.max(1,seconds))):state.limitedMinutes.replace("{n}",String(Math.ceil(seconds/60)));
+}
+
+function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavailable,resend}:OrientationProps&{onUnavailable:(question:string)=>void;resend?:string}){
  const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify";const text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};const state=stateCopy[locale];
- const [draft,setDraft]=useState("");const [turns,setTurns]=useState<Turn[]>([]);const [phase,setPhase]=useState<Phase>("idle");
- const turnsRef=useRef<Turn[]>([]);const conversation=useRef<string|null>(null);const controller=useRef<AbortController|null>(null);
- const pending=useRef("");const sequence=useRef(0);const mounted=useRef(true);
+ const [draft,setDraftState]=useState("");const [turns,setTurns]=useState<Turn[]>([]);const [phase,setPhase]=useState<ChatPhase>("idle");
+ // Wartezeit nach einer Mengenbegrenzung: angezeigte Sekunden und ob schon wieder gesendet werden darf.
+ const [wait,setWait]=useState<{seconds:number;until:number}|null>(null);const [waiting,setWaiting]=useState(false);
+ const turnsRef=useRef<Turn[]>([]);const draftRef=useRef("");const conversation=useRef<string|null>(null);const controller=useRef<AbortController|null>(null);
+ const pending=useRef("");const sequence=useRef(0);const mounted=useRef(true);const exchanged=useRef(false);
+ // Laufnummer: ein neues Gespräch macht den Ausgang einer noch laufenden Anfrage gegenstandslos.
+ const run=useRef(0);const sentAt=useRef(0);const restored=useRef(false);
  const composerInput=useRef<HTMLTextAreaElement>(null);const scroller=useRef<HTMLDivElement>(null);const pinned=useRef(true);
  const busy=phase==="sending"||phase==="streaming";
  const update=useCallback((next:Turn[])=>{turnsRef.current=next;setTurns(next);},[]);
- useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;controller.current?.abort();};},[]);
+ const setDraft=useCallback((next:string)=>{draftRef.current=next;setDraftState(next);},[]);
+ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;run.current++;controller.current?.abort();};},[]);
+ // Hoehe der Fusszone (Eingabe + Hinweis) als --ca-fuss an der Wurzel: der Verlauf laeuft unter der Eingabe hindurch
+ // und haelt unten genau diesen Abstand.
+ useEffect(()=>{const node=scroller.current?.parentElement;if(!node||typeof ResizeObserver==='undefined')return;
+  const parts=()=>[...node.children].filter(c=>c!==scroller.current&&(c as HTMLElement).offsetHeight>1) as HTMLElement[];
+  const measure=()=>{const h=parts().reduce((sum,c)=>sum+c.offsetHeight+parseFloat(getComputedStyle(c).marginTop||'0'),0);node.style.setProperty('--ca-fuss',Math.round(h)+'px');};
+  const observer=new ResizeObserver(measure);parts().forEach(c=>observer.observe(c));measure();return()=>observer.disconnect();},[phase]);
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
  // Während die Antwort wächst, bleibt das Ende im Blick – außer der Besucher hat nach oben geblättert.
- useEffect(()=>{const node=scroller.current;if(node&&pinned.current)node.scrollTop=node.scrollHeight;},[turns,phase]);
+ // Dem Gespräch folgen, aber nie über den Anfang der letzten eigenen Nachricht hinaus: sie bleibt ganz sichtbar.
+ useEffect(()=>{
+  const node=scroller.current;if(!node||!pinned.current)return;
+  const own=node.querySelectorAll<HTMLElement>(".orientation-message.role-user"),last=own[own.length-1];
+  const bottom=node.scrollHeight-node.clientHeight;
+  const top=last?node.scrollTop+last.getBoundingClientRect().top-node.getBoundingClientRect().top-24:bottom;
+  node.scrollTop=Math.max(0,Math.min(bottom,top));
+ },[turns,phase]);
+ useAutoGrow(composerInput,draft);
  const nextId=(role:string)=>`${role}-${++sequence.current}`;
 
  async function send(value:string,options:{retry?:boolean}={}){
-  const message=value.trim();if(!message||busy)return;
+  const message=value.trim();if(!message||controller.current)return;
   const base=options.retry?turnsRef.current:[...turnsRef.current,{id:nextId("user"),role:"user" as const,text:message,state:"done" as const}];
-  const answerId=nextId("assistant");
-  pending.current=message;pinned.current=true;update(base);setPhase("sending");
+  const answerId=nextId("assistant"),current=++run.current;
+  pending.current=message;pinned.current=true;sentAt.current=Date.now();update(base);setPhase("sending");setWait(null);
   const abort=new AbortController();controller.current=abort;
+  const live=()=>mounted.current&&run.current===current;
   const outcome=await streamChat({message,locale,pagePath,conversationId:conversation.current,history:clientHistory(base.slice(0,-1))},{
-   onStart:id=>{conversation.current=id;},
-   onText:full=>{if(!mounted.current)return;setPhase("streaming");update([...base,{id:answerId,role:"assistant",text:full,state:"streaming"}]);}
+   onStart:id=>{if(!live())return;conversation.current=id;exchanged.current=true;},
+   onText:full=>{if(!live())return;setPhase("streaming");update([...base,{id:answerId,role:"assistant",text:full,state:"streaming"}]);}
   },{signal:abort.signal});
-  if(!mounted.current)return;
+  if(!live())return;
   controller.current=null;
   if("conversationId" in outcome&&outcome.conversationId)conversation.current=outcome.conversationId;
-  if(outcome.kind==="unavailable"){onUnavailable(message);return;}
-  if(outcome.kind==="done"){pending.current="";update([...base,{id:answerId,role:"assistant",text:outcome.text,state:"done",...(outcome.briefing?{briefing:outcome.briefing}:{})}]);setPhase("idle");}
-  else if(outcome.kind==="stopped"){pending.current="";update(outcome.text.trim()?[...base,{id:answerId,role:"assistant",text:outcome.text,state:"stopped"}]:base);setPhase("idle");}
-  else{update(base);setPhase(outcome.kind==="limited"?"limited":"failed");}
+  const now=Date.now(),settled=settleTurn({base,message,answerId,draft:draftRef.current,exchanged:exchanged.current},outcome,now);
+  exchanged.current=settled.exchanged;pending.current=settled.pending;
+  update(settled.turns);if(settled.draft!==draftRef.current)setDraft(settled.draft);setPhase(settled.phase);
+  if(settled.retryAt){setWait({seconds:Math.ceil((settled.retryAt-now)/1000),until:settled.retryAt});setWaiting(true);}
+  if(settled.unavailable){onUnavailable(message);return;}
   if(document.activeElement===document.body&&composerInput.current?.offsetParent!==null)composerInput.current?.focus();
  }
- function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy||value.length>MESSAGE_LIMIT)return;setDraft("");void send(value);}
+ // Gespräch, Entwurf und Konversation liegen im Sitzungsspeicher: Sprachwechsel, Seitenwechsel und Neuladen löschen sie nicht.
+ useLayoutEffect(()=>{
+  const stored=loadChat(sessionStore(),site,Date.now());
+  if(stored){
+   conversation.current=stored.conversationId;exchanged.current=stored.exchanged;pending.current=stored.pending;
+   update(stored.turns);setDraft(stored.draft);setPhase(stored.phase);
+  }
+  restored.current=true;
+  if(resend){const last=turnsRef.current.at(-1);void send(resend,{retry:last?.role==="user"&&last.text===resend.trim()});}
+  // Nur beim Einhängen: der Schlüssel der Komponente wechselt mit Marke und Sprache.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+ },[]);
+ useEffect(()=>{
+  if(!restored.current)return;
+  saveChat(sessionStore(),site,{turns,draft,conversationId:conversation.current,exchanged:exchanged.current,pending:pending.current,phase},Date.now());
+ },[turns,draft,phase,site]);
+ // Nach Ablauf der Wartezeit ist „Erneut versuchen" wieder frei.
+ useEffect(()=>{
+  if(!wait)return;const left=wait.until-Date.now();
+  if(left<=0){setWaiting(false);return;}
+  const timer=window.setTimeout(()=>setWaiting(false),left);return()=>window.clearTimeout(timer);
+ },[wait]);
+ function submit(event:FormEvent){event.preventDefault();const value=draft.trim();if(!value||busy||value.length>MESSAGE_LIMIT||(phase==="limited"&&waiting))return;setDraft("");void send(value);}
  function onKeyDown(event:KeyboardEvent<HTMLTextAreaElement>){if(event.key==="Enter"&&!event.shiftKey&&!event.nativeEvent.isComposing){event.preventDefault();event.currentTarget.form?.requestSubmit();}}
- function restart(){controller.current?.abort();conversation.current=null;pending.current="";update([]);setPhase("idle");setDraft("");composerInput.current?.focus();}
+ // Der zweite Klick eines Doppelklicks auf „Senden" trifft diesen Schalter: kurz nach dem Absenden zählt er nicht.
+ function stop(){if(stopAllowed(sentAt.current,Date.now()))controller.current?.abort();}
+ function restart(){run.current++;controller.current?.abort();controller.current=null;conversation.current=null;pending.current="";exchanged.current=false;update([]);setPhase("idle");setWait(null);setDraft("");composerInput.current?.focus();}
  const users=turns.filter(turn=>turn.role==="user");
  const latestBriefing=[...turns].reverse().find(turn=>turn.briefing)?.briefing;
  const namedService=turns.some(turn=>turn.role==="assistant"&&/\]\(\//.test(turn.text));
  const step=latestBriefing?2:namedService?1:0;
- const problem=phase==="failed"||phase==="limited";
+ const problem=phase==="failed"||phase==="limited"||phase==="rejected"||phase==="halted";
+ const problemText=phase==="limited"?waitText(state,wait?.seconds??60):phase==="rejected"?state.rejected:phase==="halted"?state.stopped:state.failed;
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="guided" data-phase={phase}>
   <div className="orientation-content" ref={scroller} onScroll={event=>{const node=event.currentTarget;pinned.current=node.scrollHeight-node.scrollTop-node.clientHeight<48;}}>
-  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <OrientationIntro title={text.title} intro={text.intro}/>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text" aria-busy={busy}>{turns.map(turn=><article className={"orientation-message role-"+turn.role} data-state={turn.state} key={turn.id}><strong>{turn.role==="user"?text.you:text.assistant}</strong>{turn.role==="assistant"?<AssistantText text={turn.text} pages={pages}/>:<p>{turn.text}</p>}{turn.state==="stopped"&&<small className="orientation-message-state">{state.stopped}</small>}</article>)}
    {phase==="sending"&&<article className="orientation-message role-assistant orientation-thinking"><strong>{text.assistant}</strong><p><span className="orientation-dots" aria-hidden="true"><i/><i/><i/></span><span className="visually-hidden">{state.thinking}</span></p></article>}
   </div>
-  {problem&&<div className="orientation-problem" role="alert"><p>{phase==="limited"?state.limited:state.failed}</p><div className="orientation-problem-actions"><button type="button" className="outline-button" onClick={()=>void send(pending.current,{retry:true})}>{state.retry}</button><SiteLink className="outline-button" href="/kontakt">{state.contact} <span aria-hidden="true">→</span></SiteLink></div></div>}
-  {users.length>0&&<OrientationJourney locale={locale} site={site} step={step}/>}
+  {problem&&<div className="orientation-problem" role={phase==="halted"?"status":"alert"} data-problem={phase}><p>{problemText}</p><div className="orientation-problem-actions">{phase!=="rejected"&&<button type="button" className="outline-button" disabled={phase==="limited"&&waiting} onClick={()=>void send(pending.current,{retry:true})}>{phase==="halted"?state.resend:state.retry}</button>}{phase!=="halted"&&<SiteLink className="outline-button" href="/kontakt">{state.contact} <Zeichen name="pfeil" groesse={18}/></SiteLink>}</div></div>}
+  {users.length>0&&!busy&&<OrientationJourney locale={locale} site={site} step={step}/>}
   {site==="nexify"&&latestBriefing&&<ProjectBriefing locale={locale} questions={users.map(turn=>turn.text)} prepared={latestBriefing.text}/>}
-  {turns.length===0&&!busy&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
+  {turns.length===0&&!busy&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
+  {turns.length===0&&!busy&&<OrientationJourney locale={locale} site={site} step={-1} quiet/>}
   {turns.length>0&&!busy&&<div className="orientation-followup">{site==="nexify"&&!latestBriefing&&users.length>=2&&!problem&&<button type="button" className="outline-button" onClick={()=>void send(state.briefRequest)}>{state.brief}</button>}<button type="button" className="text-button orientation-restart" onClick={restart}>{state.restart}</button></div>}
   </div>
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.placeholder} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button type="button" className="outline-button" onClick={()=>controller.current?.abort()}>{text.stop}</button>:<button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>}</div></form>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.label} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button key="stop" type="button" className="outline-button" data-testid="chat-stop" onClick={stop}>{text.stop}</button>:<button key="send" className="primary-button" data-testid="chat-send" disabled={!draft.trim()||(phase==="limited"&&waiting)} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>}</div></form>
   <p className="connection-note orientation-status" role="status">{busy?state.thinking:""}</p><p className="connection-note"><ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
  </section>;
 }
 
-
-function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailable,initialQuestion}:FallbackProps){
- const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify",text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})};
- const [draft,setDraft]=useState(""),[error,setError]=useState(false);
- // Beim Rückfall wird die bereits gestellte Frage sofort anhand der Website beantwortet.
- const [messages,setMessages]=useState<{question:string;answer:StaticGuidance}[]>(()=>{
+// Zwei Aufgaben: die Orientierung des eigenständigen Standes (ohne Server) und der Rückfall, wenn der
+// Server den Chat ausdrücklich als nicht angebunden meldet. Im Rückfall bleibt die Nachricht des Besuchers
+// stehen; es gibt eine Aussage, den Weg zum Kontaktformular mit übernommenem Text und den Rückweg.
+function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailable,initialQuestion,onRetry}:FallbackProps){
+ const site=pagePath.startsWith("/teileklar")?"teileklar":"nexify",text={...copy[locale],...(site==="teileklar"?tkCopy[locale]:{})},state=stateCopy[locale];
+ const [draft,setDraft]=useState(""),[error,setError]=useState(false),[notice,setNotice]=useState("");
+ // Beim Rückfall werden zur bereits gestellten Frage passende Seiten der Website gezeigt.
+ const [messages,setMessages]=useState<{question:string;answer:StaticGuidance|null}[]>(()=>{
   const question=initialQuestion?.trim();if(!question)return [];
-  try{return [{question,answer:staticOrientation({locale,pagePath,question,pages,previousQuestions:[]})}];}catch{return [];}
+  try{return [{question,answer:staticOrientation({locale,pagePath,question,pages,previousQuestions:[]})}];}catch{return [{question,answer:null}];}
  });
  const input=useRef<HTMLTextAreaElement>(null),latest=useRef<HTMLElement|null>(null);
  useEffect(()=>{onActivityChange?.(false);},[onActivityChange]);
  const firstLocale=useRef(locale);
  useEffect(()=>{if(firstLocale.current===locale)return;firstLocale.current=locale;setMessages([]);setError(false);},[locale]);
- const notice=useRef<HTMLDivElement>(null),answered=useRef(0);
- // Beim Rückfall zuerst den Hinweis mit dem Kontaktweg zeigen, danach wie gewohnt die jeweils neueste Antwort.
- useEffect(()=>{if(!messages.length)return;const first=answered.current===0;answered.current=messages.length;if(first&&unavailable&&notice.current){notice.current.scrollIntoView({block:"end",behavior:"instant"});return;}latest.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,unavailable]);
+ useAutoGrow(input,draft);
+ useEffect(()=>{if(!messages.length||unavailable)return;latest.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,unavailable]);
+ // Im Rückfall verschwindet das Eingabefeld: der Fokus geht auf die Aussage mit den beiden Wegen, nicht ins Leere.
+ const statement=useRef<HTMLDivElement>(null);
+ useEffect(()=>{if(unavailable&&(document.activeElement===document.body||document.activeElement===null))statement.current?.focus({preventScroll:true});},[unavailable]);
  function submit(event:FormEvent){
   event.preventDefault();const question=draft.trim();if(!question)return;
   try{const answer=staticOrientation({locale,pagePath,question,pages,previousQuestions:messages.map(message=>message.question)});setMessages(previous=>[...previous.slice(-5),{question,answer}]);setDraft("");setError(false);input.current?.focus();}
   catch{setError(true);}
  }
- return <section className="public-orientation" aria-label={text.title} data-orientation-mode={unavailable?"fallback":"local-public-pages"}>
+ // Der Text der eigenen Nachricht geht auf diesem Gerät ins Kontaktformular; gesendet wird erst dort.
+ function transfer(event:MouseEvent<HTMLAnchorElement>){
+  const value=messages.map(message=>message.question).join("\n\n");
+  try{if(!saveOracleBrief(sessionStorage,value))throw new Error("invalid_brief");}
+  catch{event.preventDefault();setNotice(briefingCopy[locale].fallback);}
+ }
+ if(unavailable)return <section className="public-orientation" aria-label={text.title} data-orientation-mode="fallback">
   <div className="orientation-content">
-  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <OrientationIntro title={text.title} intro={text.intro}/>
+  <div className="orientation-problem orientation-unavailable" role="status" tabIndex={-1} ref={statement}><p>{state.unavailable}</p><div className="orientation-problem-actions"><SiteLink className="primary-button" href="/kontakt" data-testid="chat-fallback-contact" onClick={transfer}>{state.contactWithMessage} <Zeichen name="pfeil" groesse={18}/></SiteLink>{onRetry&&<button type="button" className="outline-button" data-testid="chat-fallback-retry" onClick={onRetry}>{state.retry}</button>}</div>{notice&&<p className="orientation-brief-notice" role="status">{notice}</p>}</div>
+  <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><article className="orientation-message role-user" key={index}><strong>{text.you}</strong><p>{message.question}</p></article>)}</div>
+  {messages.some(message=>message.answer?.cards.length)&&<nav className="orientation-page-results" aria-label={state.pages}><p className="orientation-message-state">{state.pages}</p>{(messages.at(-1)?.answer?.cards??[]).map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{state.openPage}</small></span><span className="orientation-page-arrow" aria-hidden="true"><Zeichen name="pfeil" groesse={18}/></span></SiteLink>)}</nav>}
+  </div>
+  <p className="connection-note"><ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
+ </section>;
+ return <section className="public-orientation" aria-label={text.title} data-orientation-mode="local-public-pages">
+  <div className="orientation-content">
+  <OrientationIntro title={text.title} intro={text.intro}/>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
-   <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>
+   {message.answer&&<article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true"><Zeichen name="pfeil" groesse={18}/></span><span className="visually-hidden"> · {state.openPage}</span></SiteLink>)}</div></article>}
   </div>)}</div>
-  {unavailable&&<div className="orientation-problem orientation-unavailable" role="status" ref={notice}><p>{stateCopy[locale].unavailable}</p><div className="orientation-problem-actions"><SiteLink className="primary-button" href="/kontakt">{stateCopy[locale].contact} <span aria-hidden="true">→</span></SiteLink></div></div>}
   {messages.length>0&&<OrientationJourney locale={locale} site={site}/>}
   {site==="nexify"&&messages.length>0&&<ProjectBriefing locale={locale} questions={messages.map(message=>message.question)}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
+  {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
+  {messages.length===0&&<OrientationJourney locale={locale} site={site} step={-1} quiet/>}
   </div>
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.label} required/><div className="orientation-composer-actions"><button className="primary-button" disabled={!draft.trim()} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button></div></form>
   <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}<ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
  </section>;
 }

@@ -1,12 +1,13 @@
 "use client";
 import {useEffect,useId,useRef,useState} from 'react';
+import {Zeichen} from "./Zeichen";
 import {SiteLink} from './Router';
 import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
 import {ActionButton} from './ActionControl';
 
 const copy={
- de:{nav:'Hauptnavigation',menu:'Menü',close:'Menü schließen',services:'Leistungen',products:'Produkte',knowledge:'Arbeitsweise',contact:'Kontakt',intro:'Marke, Systeme und Wachstum — verbunden durch die FACTORY.',ai:'NeXify AI',shop:'TEILEKLAR',start:'Projekt & Wachstum',hint:'Ihr Projekt verdient einen klaren Rahmen.',talk:'Projektumfang festlegen',overview:'Leistungen der FACTORY',account:'Ihr Konto'},
+ de:{nav:'Hauptnavigation',menu:'Menü',close:'Menü schließen',services:'Leistungen',products:'Produkte',knowledge:'Arbeitsweise',contact:'Kontakt',intro:'Marke, Systeme und Wachstum – verbunden durch die FACTORY.',ai:'NeXify AI',shop:'TEILEKLAR',start:'Projekt & Wachstum',hint:'Ihr Projekt verdient einen klaren Rahmen.',talk:'Projektumfang festlegen',overview:'Leistungen der FACTORY',account:'Ihr Konto'},
  nl:{nav:'Hoofdnavigatie',menu:'Menu',close:'Menu sluiten',services:'Diensten',products:'Producten',knowledge:'Werkwijze',contact:'Contact',intro:'De passende ingang voor uw project.',ai:'NeXify AI',shop:'TEILEKLAR',start:'Uw vertrekpunt',hint:'Wilt u uw behoefte verder bepalen?',talk:'Uw project bespreken',overview:'Diensten van de FACTORY',account:'Uw account'},
  fr:{nav:'Navigation principale',menu:'Menu',close:'Fermer le menu',services:'Services',products:'Produits',knowledge:'Méthode',contact:'Contact',intro:'Le bon point de départ pour votre projet.',ai:'NeXify AI',shop:'TEILEKLAR',start:'Votre point de départ',hint:'Souhaitez-vous préciser votre besoin ?',talk:'Parler du projet',overview:'Les services de la FACTORY',account:'Votre compte'},
  en:{"nav": "Main navigation", "menu": "Menu", "close": "Close menu", "services": "Services", "products": "Products", "knowledge": "Approach", "contact": "Contact", "intro": "The right entry point for your project.", "ai": "NeXify AI", "shop": "TEILEKLAR", "start": "Your starting point", "hint": "Would you like to narrow down your needs?", "talk": "Discuss your project", "overview": "FACTORY services", "account": "Your account"}
@@ -35,11 +36,13 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  useEffect(()=>{
   const outside=(event:PointerEvent)=>{[desktop,mobile].forEach(ref=>{if(ref.current?.open&&!ref.current.contains(event.target as Node))ref.current.open=false;});};
   const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'&&(desktop.current?.open||mobile.current?.open)){event.preventDefault();close(true);}};
-  const resize=()=>close();
+  // Auf Mobilgeräten ändert die ein- und ausfahrende Adressleiste nur die Höhe: das Menü schließt allein bei geänderter Breite.
+  let width=window.innerWidth;
+  const resize=()=>{if(window.innerWidth===width)return;width=window.innerWidth;close();};
   document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape);window.addEventListener('resize',resize);
   return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);window.removeEventListener('resize',resize);};
  },[]);
- const links=(ids:string[],prefix:string)=>ids.flatMap(id=>{const p=page(id);return p?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}><span>{label(p)}</span><span aria-hidden="true">→</span></SiteLink>]:[];});
+ const links=(ids:string[],prefix:string)=>ids.flatMap(id=>{const p=page(id);return p?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}><span>{label(p)}</span><Zeichen name="pfeil" groesse={18}/></SiteLink>]:[];});
  const primary=(prefix:string)=>['services','knowledge','contact'].flatMap(id=>{const p=page(id);return p&&p.navigationContexts.includes(site)?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}>{t[id as 'services'|'knowledge'|'contact']}</SiteLink>]:[];});
  const main=primary('desktop-navigation-link');
  const shop=shopCopy[locale];
@@ -49,9 +52,9 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  if(site==='teileklar')return <>
   <nav className="main-navigation shop-main-navigation" aria-label={t.nav} data-testid="desktop-navigation">
    {shopMain.map(([id,name])=>shopLink(id,name,'desktop-navigation-link'))}
-   <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}}><summary aria-expanded={opened.desktop} aria-controls={`${uid}-shop-more`}>{shop.more}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary><div className="product-navigation-menu shop-navigation-menu" id={`${uid}-shop-more`}><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-partner','tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'desktop-shop-more-link')}</div><SiteLink href="/" onClick={()=>close()}>{shop.back}<span aria-hidden="true">→</span></SiteLink></div></details>
+   <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}}><summary aria-expanded={opened.desktop} aria-controls={`${uid}-shop-more`}>{shop.more}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary><div className="product-navigation-menu shop-navigation-menu" id={`${uid}-shop-more`}><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-partner','tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'desktop-shop-more-link')}</div><SiteLink href="/" onClick={()=>close()}>{shop.back}<Zeichen name="pfeil" groesse={18}/></SiteLink></div></details>
   </nav>
-  <details className="mobile-navigation" ref={mobile} data-testid="mobile-navigation" onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,mobile:open}));}}><summary aria-label={t.menu} aria-expanded={opened.mobile} aria-controls={`${uid}-mobile`} data-testid="mobile-navigation-toggle"><span className="mobile-menu-mark" aria-hidden="true"><i/><i/></span></summary><nav className="mobile-navigation-panel" id={`${uid}-mobile`} aria-label={t.nav} data-testid="mobile-navigation-panel"><div className="megamenu-group"><h2>TEILEKLAR</h2>{shopMobileMain.map(([id,name])=>shopLink(id,name,'mobile-navigation-link'))}</div><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'mobile-shop-link')}</div><div className="megamenu-group"><h2>{t.account}</h2>{links(['login','signup'],'mobile-account-link')}<SiteLink href="/" onClick={()=>close()}>{shop.back}<span aria-hidden="true">→</span></SiteLink></div><ActionButton variant="quiet" data-testid="mobile-navigation-close" onClick={()=>close(true)}>{t.close}</ActionButton></nav></details>
+  <details className="mobile-navigation" ref={mobile} data-testid="mobile-navigation" onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,mobile:open}));}}><summary aria-label={t.menu} aria-expanded={opened.mobile} aria-controls={`${uid}-mobile`} data-testid="mobile-navigation-toggle"><span className="mobile-menu-mark" aria-hidden="true"><i/><i/></span></summary><nav className="mobile-navigation-panel" id={`${uid}-mobile`} aria-label={t.nav} data-testid="mobile-navigation-panel"><div className="megamenu-group"><h2>TEILEKLAR</h2>{shopMobileMain.map(([id,name])=>shopLink(id,name,'mobile-navigation-link'))}</div><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'mobile-shop-link')}</div><div className="megamenu-group"><h2>{t.account}</h2>{links(['login','signup'],'mobile-account-link')}<SiteLink href="/" onClick={()=>close()}>{shop.back}<Zeichen name="pfeil" groesse={18}/></SiteLink></div><ActionButton variant="quiet" data-testid="mobile-navigation-close" onClick={()=>close(true)}>{t.close}</ActionButton></nav></details>
  </>;
  return <>
   <nav className="main-navigation" aria-label={t.nav} data-testid="desktop-navigation">
@@ -59,9 +62,9 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
    <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}} onBlur={e=>{if(e.relatedTarget&&!e.currentTarget.contains(e.relatedTarget as Node))e.currentTarget.open=false;}}>
     <summary aria-expanded={opened.desktop} aria-controls={`${uid}-products`} data-testid="desktop-products-megamenu-toggle">{t.products}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary>
     <div className="product-navigation-menu" id={`${uid}-products`} data-testid="desktop-products-megamenu-panel">
-     <div className="megamenu-heading"><p data-testid="megamenu-intro">{t.intro}</p>{page('services')&&<SiteLink href={page('services')!.path} data-testid="megamenu-overview" onClick={()=>close()}>{t.overview}<span aria-hidden="true">→</span></SiteLink>}</div>
+     <div className="megamenu-heading"><p data-testid="megamenu-intro">{t.intro}</p>{page('services')&&<SiteLink href={page('services')!.path} data-testid="megamenu-overview" onClick={()=>close()}>{t.overview}<Zeichen name="pfeil" groesse={18}/></SiteLink>}</div>
      <div className="megamenu-columns">{groups.map(group=><div key={group.id} className="megamenu-group" data-testid={`megamenu-group-${group.id}`}><h2>{group.title}</h2>{links(group.ids,'desktop-products-megamenu-link')}</div>)}</div>
-     <div className="megamenu-bottom"><span data-testid="megamenu-help">{t.hint}</span><SiteLink href="/leistungsumfang" data-testid="megamenu-project-link" onClick={()=>close()}>{t.talk}<span aria-hidden="true">→</span></SiteLink></div>
+     <div className="megamenu-bottom"><span data-testid="megamenu-help">{t.hint}</span><SiteLink href="/leistungsumfang" data-testid="megamenu-project-link" onClick={()=>close()}>{t.talk}<Zeichen name="pfeil" groesse={18}/></SiteLink></div>
     </div>
    </details>
    {main.slice(1)}
