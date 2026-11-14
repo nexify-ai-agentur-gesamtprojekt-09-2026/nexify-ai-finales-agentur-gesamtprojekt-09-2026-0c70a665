@@ -862,3 +862,9 @@ html[data-theme='light'] #atelier .brand .brand-word .brand-x{color:var(--as-acc
  #atelier #aifly-panel .orientation-content{padding-top:80px}
  #atelier #aifly-panel:has(.orientation-starters) .orientation-content{padding-top:32px}
 }
+/* ===== Keine Unterstreichung ===== */
+/* Text wird nirgends unterstrichen, weder in Ruhe noch beim Zeigen. Links im Fliesstext sind am Hauptton und am Gewicht 600 erkennbar. */
+#atelier :is(a,button,summary,span,strong,small,p,li,h1,h2,h3,h4),#atelier :is(a,button,summary):is(:hover,:focus-visible,:active),#atelier :is(a,button,summary):is(:hover,:focus-visible) *{text-decoration:none!important}
+#atelier #aifly-panel :is(.orientation-message,.connection-note,.orientation-answer-copy,.request-fallback) a:not(.primary-button):not(.outline-button),#atelier .site-footer :is(.footer-legal-details p,.diagnostic-consent-content p) a{color:var(--as-ink);font-weight:600;transition:color var(--as-move)}
+#atelier #aifly-panel .connection-note a{color:var(--as-ink-2);font-weight:600}
+#atelier #aifly-panel .connection-note a:is(:hover,:focus-visible){color:var(--as-ink)}
