@@ -11,6 +11,31 @@ def sell_cents(purchase_cents, markup_percent, vat_percent=None):
     return int(value.quantize(Decimal("1"), rounding=ROUND_HALF_UP))
 
 
+def purchase_range_for_sell(low, high, markup_percent, vat_percent=None):
+    """Inclusive purchase-price range whose selling price lies in [low, high]; None leaves that end open.
+
+    `sell_cents` rises with the purchase price, so the edges are found by starting at the exact quotient and
+    stepping until `sell_cents` itself agrees. The range therefore matches `sell_cents` at every rounding edge.
+    """
+    vat = config.VAT_PERCENT if vat_percent is None else Decimal(vat_percent)
+    factor = (1 + Decimal(markup_percent) / 100) * (1 + vat / 100)
+    sell = lambda p: sell_cents(p, markup_percent, vat)
+    lo = hi = None
+    if low is not None:
+        lo = max(0, int(Decimal(low) / factor) - 1)
+        while lo > 0 and sell(lo - 1) >= low:
+            lo -= 1
+        while sell(lo) < low:
+            lo += 1
+    if high is not None:
+        hi = int(Decimal(high) / factor) + 1
+        while hi >= 0 and sell(hi) > high:
+            hi -= 1
+        while sell(hi + 1) <= high:
+            hi += 1
+    return lo, hi
+
+
 def vat_share_cents(gross_cents, vat_percent=None):
     vat = config.VAT_PERCENT if vat_percent is None else Decimal(vat_percent)
     return int((Decimal(gross_cents) * vat / (100 + vat)).quantize(Decimal("1"), rounding=ROUND_HALF_UP))

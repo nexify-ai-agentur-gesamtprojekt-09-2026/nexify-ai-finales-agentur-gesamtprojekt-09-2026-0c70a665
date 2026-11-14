@@ -62,8 +62,11 @@ def _match_value(actual, expected):
             elif op == "$nin":
                 if actual in arg:
                     return False
+            elif op == "$options":
+                continue
             elif op == "$regex":
-                if not isinstance(actual, str) or not re.search(arg, actual):
+                flags = re.I if "i" in expected.get("$options", "") else 0
+                if not isinstance(actual, str) or not re.search(arg, actual, flags):
                     return False
             elif op == "$not":
                 if _match_value(actual, arg):
@@ -200,6 +203,8 @@ class Collection:
                         row[name] = len(members) if fn == "$sum" else (min(values) if fn == "$min" else max(values))
                     out.append(row)
                 rows = out
+            elif op == "$limit":
+                rows = rows[:arg]
             elif op == "$sort":
                 for name, way in reversed(list(arg.items())):
                     rows.sort(key=lambda d: (d.get(name) is None, d.get(name) if d.get(name) is not None else ""), reverse=way < 0)

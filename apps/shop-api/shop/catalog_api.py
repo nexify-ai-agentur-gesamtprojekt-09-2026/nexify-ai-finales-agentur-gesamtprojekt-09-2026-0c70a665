@@ -93,23 +93,109 @@ async def categories():
     return {"categories": sorted([{"id": c["_id"], "name": c["name"], "root": c.get("root", False), "count": counts.get(c["_id"], 0)} for c in rows if counts.get(c["_id"])], key=lambda c: (not c["root"], c["name"]))}
 
 
-@router.get("/products")
-async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60), sort: Literal['availability','price_asc','price_desc','name']='availability', in_stock: bool=False):
-    query = dict(PUBLIC_BASE)
+MAX_WINDOW_ITEMS = 10000        # page * page_size may not exceed this: deep offsets are refused, not slowly served
+MAX_PAGE_SIZE = 60
+MAX_FACET_VALUES = 50
+MAX_BRANDS = 10
+MAX_BRAND_CHARS = 80
+MAX_PRICE_CENTS = 10_000_000
+# Every order ends in the identifier, so equal keys never reorder between pages.
+STOCK_FIRST = [("stock", -1), ("name", 1), ("_id", 1)]
+SORTS = {"relevance": STOCK_FIRST, "availability": STOCK_FIRST,
+         "price_asc": [("purchase_cents", 1), ("name", 1), ("_id", 1)], "price_desc": [("purchase_cents", -1), ("name", 1), ("_id", 1)],
+         "name": [("name", 1), ("_id", 1)], "newest": [("first_imported_at", -1), ("imported_at", -1), ("_id", 1)]}
+
+
+def invalid(**fields):
+    return HTTPException(422, {"error": "filter_invalid", "fields": fields})
+
+
+def read_filters(q, category, brand, price_min_cents, price_max_cents, availability, in_stock):
+    brands = list(dict.fromkeys(b for b in brand))
+    if len(brands) > MAX_BRANDS:
+        raise invalid(brand="too_many")
+    if any(not b.strip() or len(b) > MAX_BRAND_CHARS or re.search(r"[\x00-\x1f\x7f]", b) for b in brands):
+        raise invalid(brand="invalid")
+    if price_min_cents is not None and price_max_cents is not None and price_min_cents > price_max_cents:
+        raise invalid(price_max_cents="less_than_price_min_cents")
     if in_stock:
-        query['stock'] = {'$gt': 0}
-    term = q.strip()
-    if term:
-        pattern = re.escape(term)
-        query["$or"] = [{"name": {"$regex": pattern, "$options": "i"}}, {"sku": {"$regex": "^" + pattern, "$options": "i"}}, {"ean": term}]
-    if category is not None:
-        query["category_ids"] = category
-    total = await db.products.count_documents(query)
+        if availability == "out_of_stock":
+            raise invalid(availability="conflicts_with_in_stock")
+        availability = "in_stock"
+    return {"q": q.strip(), "category": category, "brands": brands, "price_min_cents": price_min_cents,
+            "price_max_cents": price_max_cents, "availability": availability}
+
+
+def filter_query(f, markup, skip=()):
+    """Mongo query for the filters, without the dimension named in `skip` (facets count a dimension without its own filter)."""
+    query = dict(PUBLIC_BASE)
+    if f["q"] and "q" not in skip:
+        pattern = re.escape(f["q"])
+        query["$or"] = [{"name": {"$regex": pattern, "$options": "i"}}, {"sku": {"$regex": "^" + pattern, "$options": "i"}}, {"ean": f["q"]}]
+    if f["category"] is not None and "category" not in skip:
+        query["category_ids"] = f["category"]
+    if f["brands"] and "brand" not in skip:
+        query["release.brand"] = {"$in": f["brands"]}
+    if f["availability"] and "availability" not in skip:
+        query["stock"] = {"$gt": 0} if f["availability"] == "in_stock" else 0
+    if (f["price_min_cents"] is not None or f["price_max_cents"] is not None) and "price" not in skip:
+        lo, hi = pricing.purchase_range_for_sell(f["price_min_cents"], f["price_max_cents"], markup)
+        query["purchase_cents"] = {**({"$gte": lo} if lo is not None else {}), **({"$lte": hi} if hi is not None else {})}
+    return query
+
+
+async def facets(f, settings):
+    markup = settings["markup_percent"]
+    categories = {row["_id"]: row["n"] async for row in db.products.aggregate([
+        {"$match": filter_query(f, markup, ("category",))}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}},
+        {"$sort": {"n": -1, "_id": 1}}, {"$limit": MAX_FACET_VALUES}])}
+    names = {c["_id"]: c async for c in db.categories.find({"_id": {"$in": list(categories)}})}
+    brands = [{"value": row["_id"], "count": row["n"]} async for row in db.products.aggregate([
+        {"$match": filter_query(f, markup, ("brand",))}, {"$group": {"_id": "$release.brand", "n": {"$sum": 1}}},
+        {"$sort": {"n": -1, "_id": 1}}, {"$limit": MAX_FACET_VALUES}]) if row["_id"]]
+    base = filter_query(f, markup, ("availability",))
+    price = None
+    if settings["price_released"]:
+        rows = [row async for row in db.products.aggregate([{"$match": filter_query(f, markup, ("price",))},
+                                                            {"$group": {"_id": None, "lo": {"$min": "$purchase_cents"}, "hi": {"$max": "$purchase_cents"}}}])]
+        if rows:
+            price = {"min_cents": pricing.sell_cents(rows[0]["lo"], markup), "max_cents": pricing.sell_cents(rows[0]["hi"], markup), "currency": "EUR"}
+    return {"categories": [{"id": cid, "name": names[cid]["name"], "root": names[cid].get("root", False), "count": n}
+                           for cid, n in categories.items() if cid in names],
+            "brands": brands,
+            "availability": {"in_stock": await db.products.count_documents({**base, "stock": {"$gt": 0}}),
+                             "out_of_stock": await db.products.count_documents({**base, "stock": 0})},
+            "price": price}
+
+
+@router.get("/products")
+async def products(q: str = Query("", max_length=120), category: int | None = Query(None, ge=1), brand: list[str] = Query([]),
+                   price_min_cents: int | None = Query(None, ge=0, le=MAX_PRICE_CENTS), price_max_cents: int | None = Query(None, ge=0, le=MAX_PRICE_CENTS),
+                   availability: Literal["in_stock", "out_of_stock"] | None = None, in_stock: bool = False,
+                   sort: Literal["relevance", "availability", "price_asc", "price_desc", "name", "newest"] = "relevance",
+                   page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=MAX_PAGE_SIZE)):
+    """Public catalogue: released products only. Filters combine with AND; several brands combine with OR.
+
+    Facets count each dimension with every other filter applied but not its own. Counts come from the stored
+    release state; a row whose mandatory fields have since gone is left out of the page (fail closed).
+    """
+    f = read_filters(q, category, brand, price_min_cents, price_max_cents, availability, in_stock)
+    if page * page_size > MAX_WINDOW_ITEMS:
+        raise HTTPException(422, {"error": "page_out_of_range", "max_window_items": MAX_WINDOW_ITEMS})
     settings = await pricing.settings(db)
-    ordering={'availability':[("stock", -1), ("name", 1)],'price_asc':[("purchase_cents",1),("name",1)],'price_desc':[("purchase_cents",-1),("name",1)],'name':[("name",1)]}[sort]
-    cursor = db.products.find(query, PUBLIC_FIELDS).sort(ordering).skip((page - 1) * page_size).limit(page_size)
+    priced = f["price_min_cents"] is not None or f["price_max_cents"] is not None or sort in ("price_asc", "price_desc")
+    if priced and not settings["price_released"]:
+        raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
+    query = filter_query(f, settings["markup_percent"])
+    total = await db.products.count_documents(query)
+    cursor = db.products.find(query, PUBLIC_FIELDS).sort(SORTS[sort]).skip((page - 1) * page_size).limit(page_size)
     items = [present(p, settings) async for p in cursor if is_public(p)]
-    return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": term, "category": category}
+    return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": f["q"],
+            "category": category, "sort": sort,
+            "applied": {"q": f["q"], "category": category, "brands": f["brands"], "price_min_cents": price_min_cents,
+                        "price_max_cents": price_max_cents, "availability": f["availability"]},
+            "facets": await facets(f, settings),
+            "limits": {"max_page_size": MAX_PAGE_SIZE, "max_window_items": MAX_WINDOW_ITEMS, "window_limited": total > MAX_WINDOW_ITEMS}}
 
 
 @router.get("/products/{product_id}")
