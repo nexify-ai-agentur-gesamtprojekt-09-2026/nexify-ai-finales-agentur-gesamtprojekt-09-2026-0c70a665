@@ -18,7 +18,8 @@ import PublicInstallation from "../components/PublicInstallation";
 import installation from '../.generated/installation.json';
 import "../components/LuxuryMaterials.css";
 
-export const metadata: Metadata = { description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false},...(installation.enabled?{manifest:'/manifest.webmanifest'}:{})};
+// Der Verweis auf das Manifest steht nicht hier, sondern in components/PublicInstallation.tsx: er gilt nur für NeXify-Seiten.
+export const metadata: Metadata = { description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false} };
 // Ganzer Bildschirm inklusive Randbereichen (Kerbe, Home-Balken); die Flächen halten selbst Abstand über env(safe-area-inset-*).
 // Die Browserleiste nimmt die Farbe des Seitengrunds an.
 // Thema: dunkel ist Standard; hell nur nach Wahl über den Schalter (Cookie nx-theme). Das Attribut kommt vom Server,
