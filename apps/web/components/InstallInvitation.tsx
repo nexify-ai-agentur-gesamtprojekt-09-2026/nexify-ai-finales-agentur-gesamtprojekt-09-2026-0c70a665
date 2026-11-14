@@ -2,6 +2,7 @@
 import {useEffect,useState} from "react";
 import {Logo} from './Logo';
 import type {Locale} from "../lib/i18n";
+import {useSitePathname} from "./Router";
 import "./InstallInvitation.css";
 
 // Discreet, honest installation area. It never fabricates an OS install or download guarantee and
@@ -52,8 +53,10 @@ export default function InstallInvitation({locale}:{locale:Locale}){
   const [resolved,setResolved]=useState(false);
   const [standalone,setStandalone]=useState(false);
   const [manifestAvailable,setManifestAvailable]=useState(false);
+  // Der Verweis auf das Manifest gilt je Seite (TEILEKLAR hat keinen): bei jedem Seitenwechsel neu lesen, sonst bleibt der Hinweis stehen.
+  const pathname=useSitePathname();
+  useEffect(()=>{setManifestAvailable(Boolean(document.querySelector('link[rel="manifest"][href]')));},[pathname]);
   useEffect(()=>{
-    setManifestAvailable(Boolean(document.querySelector('link[rel="manifest"][href]')));
     setStandalone(runningStandalone());
     try{setDismissed(localStorage.getItem(DISMISS_KEY)==="1");}catch{/* storage optional */}
     const update=()=>setTick(value=>value+1);
