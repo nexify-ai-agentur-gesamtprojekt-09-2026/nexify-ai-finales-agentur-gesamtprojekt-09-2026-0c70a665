@@ -21,8 +21,8 @@
 #atelier .home-concept .identity-hero .identity-copy h1 span:not(.identity-title-accent){background:var(--gradient-atelier-heading);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding-bottom:.12em;margin-bottom:-.12em}
 @keyframes hr-sweep{0%,55%{background-position:120% 0}100%{background-position:-60% 0}}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){position:relative;overflow:hidden;isolation:isolate;padding:var(--space-3) var(--space-6);border-radius:var(--radius-pille);border:var(--material-border) solid color-mix(in srgb,var(--color-marke-lime-hell) 70%,transparent);border-bottom-color:var(--color-marke-lime-gruen);color:var(--color-text-auf-lime);font-size:var(--type-home-reading)}
-#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary)::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--color-atelier-ink) 60%,transparent) 50%,transparent 65%);background-size:280% 100%;animation:hr-sweep var(--motion-schimmer) infinite}
-#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover{filter:brightness(1.06);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--color-marke-lime) 46%,var(--color-marke-lime-dunkel));color:var(--color-text-auf-lime)}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary)::after{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--color-atelier-ink) 60%,transparent) 50%,transparent 65%);background-size:280% 100%;animation:hr-sweep var(--motion-schimmer) infinite}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover{background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--color-marke-lime) 46%,var(--color-marke-lime-dunkel));color:var(--color-text-auf-lime)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):active{filter:brightness(.96);opacity:1}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):focus-visible{outline-offset:var(--space-1)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):disabled{opacity:var(--control-disabled-opacity);filter:none;transform:none;box-shadow:none}
@@ -61,8 +61,7 @@
 #atelier .home-concept .identity-hero .identity-copy h1{background:linear-gradient(176deg,var(--color-atelier-ink) 18%,color-mix(in srgb,var(--at-silver) 82%,var(--color-atelier-canvas)) 96%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.035em;filter:drop-shadow(0 18px 30px color-mix(in srgb,var(--color-atelier-canvas) 80%,transparent))}
 #atelier .home-concept .identity-hero .identity-copy h1 .identity-title-accent{background:linear-gradient(100deg,var(--color-marke-lime-hell),var(--at-lime) 55%,var(--color-marke-lime-gruen));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px color-mix(in srgb,var(--at-lime) 45%,transparent))}
 #atelier .home-concept .identity-hero .identity-subtitle{color:var(--color-atelier-ink)}
-#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){min-height:56px;padding-inline:var(--space-6);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--at-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 1px 1px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 14px 30px -10px color-mix(in srgb,var(--at-lime) 60%,transparent),0 30px 70px -20px color-mix(in srgb,var(--at-lime) 42%,transparent);transition:transform .28s var(--at-spring),box-shadow .2s ease-out}
-#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover{transform:translateY(-2px) scale(1.02)}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){min-height:56px;padding-inline:var(--space-6);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--at-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 1px 1px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 14px 30px -10px color-mix(in srgb,var(--at-lime) 60%,transparent),0 30px 70px -20px color-mix(in srgb,var(--at-lime) 42%,transparent)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):active{transform:translateY(1px) scale(.97);box-shadow:inset 0 3px 8px color-mix(in srgb,var(--color-marke-lime-gruen) 70%,transparent),0 6px 16px -8px color-mix(in srgb,var(--at-lime) 50%,transparent)}
 #atelier .home-concept :is(.hc-text-link,.hc-anchors){background:var(--at-glass);border-color:var(--at-edge);border-top-color:var(--at-edge-top);box-shadow:var(--at-shadow);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
 #atelier .home-concept .hc-text-link{transition:transform .28s var(--at-spring),box-shadow .2s ease-out,border-color .2s ease-out}
@@ -74,7 +73,6 @@
 #atelier .home-concept .hc-service-detail[open]{box-shadow:var(--at-shadow-lit)}
 #atelier .home-concept :is(.hc-art,.hc-product-art){border-top-color:var(--at-edge-top)}
 #atelier .home-concept :is(.hc-art,.hc-product-art) img{transition:transform .7s var(--at-spring)}
-#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) :is(.hc-art,.hc-product-art) img{transform:scale(1.06)}
 @keyframes at-pulse{50%{transform:scale(1.35);opacity:.72}}
 #atelier .home-concept .hc-finish{margin-block:var(--space-8);border-top-color:var(--at-edge-top)}
 @media(prefers-reduced-transparency:reduce){
@@ -104,7 +102,6 @@
 #atelier .site-footer{border-top:0}
 #atelier .site-footer .footer-main{padding-block:var(--space-8) var(--space-7)}
 #atelier .site-footer .footer-main a{transition:color .2s ease-out,transform .28s cubic-bezier(.2,.9,.25,1.15)}
-#atelier .site-footer .footer-main a:is(:hover,:focus-visible){color:var(--color-atelier-ink);transform:translateX(3px)}
 #atelier .site-footer .footer-bottom{border-top:1px solid color-mix(in srgb,var(--color-atelier-platinum) 12%,transparent)}
 @media(prefers-reduced-transparency:reduce){
  #atelier .site-header{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--color-atelier-surface)}
@@ -151,8 +148,6 @@
 #atelier #aifly-panel .orientation-composer-actions{position:absolute;right:8px;bottom:8px;margin:0;padding:0;display:flex;gap:var(--space-2);align-items:center}
 #atelier #aifly-panel .orientation-composer-actions .primary-button{width:48px;height:48px;min-width:48px;padding:0;border-radius:50%;font-size:0;place-items:center;border:0;background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--ca-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 10px 24px -8px color-mix(in srgb,var(--ca-lime) 60%,transparent);transition:transform .28s var(--ca-spring),box-shadow .2s ease-out,opacity .2s}
 #atelier #aifly-panel .orientation-composer-actions .primary-button span{font-size:1.25rem;color:var(--color-text-auf-lime)}
-#atelier #aifly-panel .orientation-composer-actions .primary-button:is(:hover,:focus-visible){transform:translateY(-2px) scale(1.05)}
-#atelier #aifly-panel .orientation-composer-actions .primary-button:active{transform:scale(.92)}
 #atelier #aifly-panel .orientation-composer-actions .primary-button:disabled{transform:none}
 #atelier #aifly-panel .orientation-composer-actions .outline-button{border-top-color:var(--ca-edge-top);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 #atelier #aifly-panel .orientation-counter{position:absolute;right:70px;bottom:14px;font-size:.7rem;color:var(--color-text-sekundaer)}
@@ -312,7 +307,8 @@ html:has(#atelier),body:has(#atelier){background:var(--color-atelier-canvas)}
 #atelier .home-concept .hc-plate{position:relative;margin:var(--space-7) 0 0;padding:var(--as-rim);border:0;border-radius:var(--as-stage);overflow:hidden;background:linear-gradient(140deg,color-mix(in srgb,var(--as-ink) 46%,transparent),color-mix(in srgb,var(--as-cool) 14%,transparent) 24%,color-mix(in srgb,var(--as-deep) 70%,transparent) 60%,color-mix(in srgb,var(--as-warm) 38%,transparent) 100%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 55%,transparent),0 34px 70px -30px color-mix(in srgb,var(--as-deep) 96%,transparent)}
 #atelier .home-concept .hc-plate img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:calc(var(--as-stage) - var(--as-rim))}
 #atelier .home-concept .hc-plate-process{margin:0 0 var(--space-7)}
-#atelier .home-concept .hc-plate-process img{aspect-ratio:21/9}
+#atelier .home-concept :is(.hc-plate,.hc-art,.hc-product-art) img{aspect-ratio:16/9;width:100%;height:auto;object-fit:cover;object-position:center}
+#atelier .home-concept :is(.hc-art,.hc-product-art){aspect-ratio:16/9;height:auto}
 #atelier .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate){position:relative;isolation:isolate;overflow:hidden;border:0;border-radius:var(--as-area);background:var(--as-plate);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:var(--as-rest);padding:var(--space-6);transform:none;transition:box-shadow .25s ease-out}
 #atelier .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate):is(:hover,:focus-within),#atelier .home-concept .hc-service-detail[open]{border:0;box-shadow:var(--as-raised)}
 #atelier .home-concept :is(.hc-art,.hc-product-art){position:relative;border:0;border-radius:var(--as-area);overflow:hidden;transform:none;box-shadow:var(--as-edge),0 30px 64px -28px color-mix(in srgb,var(--as-deep) 96%,transparent)}
@@ -412,3 +408,25 @@ html:has(#atelier),body:has(#atelier){background:var(--color-atelier-canvas)}
 #atelier .site-footer .diagnostic-consent-actions .outline-button:active{transform:translateY(1px) scale(.97)}
 #atelier .site-footer .diagnostic-consent-actions .outline-button:disabled{opacity:.5;transform:none}
 body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-atelier-raised);color:var(--color-atelier-ink);outline:2px solid var(--color-marke-lime);outline-offset:2px}
+#atelier #aifly-panel .orientation-thinking{display:flex;align-items:center;gap:12px;min-height:24px;padding:0;background:none;box-shadow:none}
+#atelier #aifly-panel .orientation-thinking>strong{margin:0}
+#atelier #aifly-panel .orientation-thinking>p{display:flex;align-items:center;min-height:0;margin:0}
+#atelier #aifly-panel .orientation-dots i{background:var(--as-lime)}
+#atelier #aifly-panel .orientation-message.role-assistant{background:none;box-shadow:none;border:0}
+#atelier :is(.site-header,.home-concept,.site-footer,#aifly-panel) :is(a,button,summary,select),#atelier .reopen-chat{border-color:transparent}
+#atelier #aifly-panel :is(.panel-minimize,.icon-button,.orientation-starter,.orientation-restart,.outline-button),#atelier .site-header :is(.header-cta,.outline-button,select){border:0}
+#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible){color:var(--color-text-primaer)}
+#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) :is(.hc-art,.hc-product-art) img{transform:none}
+#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) .hc-text-link,#atelier .home-concept .hc-text-link:is(:hover,:focus-visible){transform:translateY(-2px);box-shadow:var(--as-raised);color:var(--color-text-primaer)}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover{transform:translateY(-2px);filter:none}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary)::after{content:none}
+#atelier .home-concept .identity-primary-link:hover .identity-primary-arrow{transform:translateX(2px)}
+#atelier #aifly-panel .orientation-composer-actions .primary-button:is(:hover,:focus-visible){transform:translateY(-2px)}
+#atelier #aifly-panel .orientation-composer-actions .primary-button:active{transform:translateY(1px) scale(.97)}
+#atelier #aifly-panel .chat-resize-handle:is(:hover,:focus-visible)::after,body.is-resizing-chat #atelier #aifly-panel .chat-resize-handle::after{background:var(--as-cool)}
+#atelier .site-footer :is(a:not(.brand),summary):is(:hover,:focus-visible){color:var(--as-ink);transform:none}
+#atelier .site-footer .footer-contact:hover{transform:none}
+#atelier .site-footer summary:hover .footer-overview-marker{color:inherit}
+#atelier .site-header .main-navigation>a:is(:hover,:focus-visible),#atelier .site-header .main-navigation summary:is(:hover,:focus-visible){transform:none}
+#atelier .home-concept .hc-service-detail summary:hover .hc-disclosure-icon{box-shadow:var(--as-raised)}

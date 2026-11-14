@@ -440,7 +440,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
    {phase==="sending"&&<article className="orientation-message role-assistant orientation-thinking"><strong>{text.assistant}</strong><p><span className="orientation-dots" aria-hidden="true"><i/><i/><i/></span><span className="visually-hidden">{state.thinking}</span></p></article>}
   </div>
   {problem&&<div className="orientation-problem" role="alert"><p>{phase==="limited"?state.limited:state.failed}</p><div className="orientation-problem-actions"><button type="button" className="outline-button" onClick={()=>void send(pending.current,{retry:true})}>{state.retry}</button><SiteLink className="outline-button" href="/kontakt">{state.contact} <span aria-hidden="true">→</span></SiteLink></div></div>}
-  {users.length>0&&<OrientationJourney locale={locale} site={site} step={step}/>}
+  {users.length>0&&!busy&&<OrientationJourney locale={locale} site={site} step={step}/>}
   {site==="nexify"&&latestBriefing&&<ProjectBriefing locale={locale} questions={users.map(turn=>turn.text)} prepared={latestBriefing.text}/>}
   {turns.length===0&&!busy&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
   {turns.length>0&&!busy&&<div className="orientation-followup">{site==="nexify"&&!latestBriefing&&users.length>=2&&!problem&&<button type="button" className="outline-button" onClick={()=>void send(state.briefRequest)}>{state.brief}</button>}<button type="button" className="text-button orientation-restart" onClick={restart}>{state.restart}</button></div>}
