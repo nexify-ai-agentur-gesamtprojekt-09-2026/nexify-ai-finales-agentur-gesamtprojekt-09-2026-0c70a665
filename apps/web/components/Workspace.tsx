@@ -303,8 +303,11 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     };
     const queue=()=>{if(!frame)frame=requestAnimationFrame(check);};
     queue();const late=window.setTimeout(queue,1200);
+    // Schrift und nachgeladene Inhalte verschieben die Seite: bei jeder Größenänderung des Inhalts neu prüfen.
+    const content=root.querySelector('.website'),resized=typeof ResizeObserver==='undefined'||!content?null:new ResizeObserver(queue);
+    if(content)resized?.observe(content);
     window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',queue);
-    return()=>{cancelAnimationFrame(frame);window.clearTimeout(late);window.removeEventListener('scroll',queue);window.removeEventListener('resize',queue);};
+    return()=>{cancelAnimationFrame(frame);window.clearTimeout(late);resized?.disconnect();window.removeEventListener('scroll',queue);window.removeEventListener('resize',queue);};
   },[pathname,open]);
   const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Projektgespräch anfragen",nl:"Projectgesprek aanvragen",fr:"Demander un échange projet",en:"Request a project conversation"}[locale]};
   const standalone=typeof window!=="undefined"&&(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;

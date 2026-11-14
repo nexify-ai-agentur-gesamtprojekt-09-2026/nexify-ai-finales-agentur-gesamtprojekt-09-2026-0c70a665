@@ -13,11 +13,16 @@ const args=process.argv.slice(2);
 const base=(args.find(a=>!a.startsWith('--'))||'https://nexifyai.de').replace(/\/$/,'');
 const widths=(args.find(a=>a.startsWith('--breiten='))?.slice(10)||'390,1440').split(',').map(Number).filter(Boolean);
 
+// Eigenschaften, die ein Baustein ueberall gleich tragen muss. Breite/Hoehe gehoeren nicht dazu (Inhalt bestimmt sie).
+const EIGENSCHAFTEN=['font-family','font-size','font-weight','line-height','letter-spacing','color','background-color','border-radius','text-transform','padding-top','padding-bottom','padding-left','padding-right','min-height'];
+const EIGENSCHAFTEN_TEXT=EIGENSCHAFTEN.filter(e=>e!=='min-height');
 // Baustein -> Selektor. Die Norm ist das erste Vorkommen auf der Startseite.
 // Hat die Startseite einen Baustein nicht selbst (sie hat kein Formular), steht statt des Selektors [Selektor, Norm-Baustein]:
 // gemessen wird dann gegen den genannten Baustein der Startseite. Der Absendeschalter eines Formulars ist der primaere Schalter.
 const BAUSTEINE={
- 'Hero-Titel':'.identity-hero .identity-copy h1',
+ // Ueberschriften tragen zusaetzlich ihre Aussenabstaende: die Abstaende zu Dachzeile und Text kommen aus dem Baustein (gap der Huelle,
+ // margin der Ueberschrift), nicht aus der Seite. Verglichen wird der berechnete margin in px; er haengt nicht vom Elternlayout ab.
+ 'Hero-Titel':{sel:'.identity-hero .identity-copy h1',eigenschaften:[...EIGENSCHAFTEN_TEXT,'margin-top','margin-bottom']},
  'Hero-Titel-Akzent':'.identity-hero .identity-title-accent',
  'Hero-Text':'.identity-hero .identity-body',
  'Hero-Schalter-primaer':'.identity-hero .identity-primary-link',
@@ -25,7 +30,9 @@ const BAUSTEINE={
  'Kopfleiste-Logo':'.site-header .nx-logo',
  'Fusszeile':'footer',
  'Fusszeile-Link':'footer .footer-legal-direct a',
- 'Abschnitts-Titel':'.hc-section-heading h2',
+ 'Abschnitts-Titel':{sel:'.hc-section-heading h2',alle:true,eigenschaften:[...EIGENSCHAFTEN_TEXT,'margin-top','margin-bottom']},
+ 'Abschluss-Titel':{sel:'.hc-finish h2',eigenschaften:[...EIGENSCHAFTEN_TEXT,'margin-top','margin-bottom']},
+ 'Dachzeile':{sel:'.home-concept .hc-kicker',eigenschaften:[...EIGENSCHAFTEN_TEXT,'margin-top','margin-bottom']},
  'Text-Schalter':'.hc-text-link',
  'Abschluss-Schalter':'.hc-finish-primary',
  'Formular-Schalter-absenden':['.home-concept form button[type="submit"]','Abschluss-Schalter'],
@@ -47,8 +54,6 @@ const BAUSTEINE={
 //  alle          jedes sichtbare Vorkommen der Seite messen, nicht nur das erste
 //  eigenschaften eigene Liste statt EIGENSCHAFTEN
 const form=e=>typeof e==='string'?{sel:e}:Array.isArray(e)?{sel:e[0],norm:e[1]}:e;
-// Eigenschaften, die ein Baustein ueberall gleich tragen muss. Breite/Hoehe gehoeren nicht dazu (Inhalt bestimmt sie).
-const EIGENSCHAFTEN=['font-family','font-size','font-weight','line-height','letter-spacing','color','background-color','border-radius','text-transform','padding-top','padding-bottom','padding-left','padding-right','min-height'];
 
 // 'min-height' zaehlt nur bei Schaltern (Zielgroesse). Bei Textbausteinen haengt der berechnete Wert ('auto' oder '0px')
 // vom Elternlayout ab, und die Startseite nutzt dieselbe Abschnittsueberschrift selbst in mehreren Layouts.
