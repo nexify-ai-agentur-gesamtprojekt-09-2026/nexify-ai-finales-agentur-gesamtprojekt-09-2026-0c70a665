@@ -6,7 +6,7 @@ import os
 from typing import Mapping
 
 MASTER = "NEXIFY_SUITE"
-FEATURES = ("EMAIL_VERIFICATION", "BILLING", "BYO_LLM")
+FEATURES = ("EMAIL_VERIFICATION", "BILLING", "BYO_LLM", "COMPOSIO")
 
 
 def suite_enabled(env: Mapping[str, str] | None = None) -> bool:
