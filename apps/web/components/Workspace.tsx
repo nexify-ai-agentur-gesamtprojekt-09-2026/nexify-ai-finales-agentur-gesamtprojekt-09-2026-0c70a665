@@ -389,7 +389,18 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   }
 
   const launcherLabel=site==="teileklar"?({de:"TEILEKLAR Hilfe",nl:"TEILEKLAR hulp",fr:"Aide TEILEKLAR",en:"TEILEKLAR help"} as const)[locale]:t.open;
+  // Kopfleiste: ab 24 px Blättern verdichtet sich das Glas. Der Zustand steht an der Wurzel, damit das Stylesheet ihn lesen kann.
+  useEffect(()=>{
+    const root=workspaceRoot.current;if(!root)return;
+    let frame=0;
+    const read=()=>{frame=0;root.dataset.scrolled=window.scrollY>24?'true':'false';};
+    const onScroll=()=>{if(!frame)frame=requestAnimationFrame(read);};
+    read();window.addEventListener('scroll',onScroll,{passive:true});
+    return()=>{cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);};
+  },[]);
   return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
+    {/* Kantenbrechung für das Glas: Verschiebungskarte als Bild, nur dort wirksam, wo der Browser Filter in backdrop-filter kennt. */}
+    <svg className="glass-lens-filter" width="0" height="0" aria-hidden="true" focusable="false"><filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="36" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
       {site==='teileklar'?<CommerceHeader/>:<header className="site-header" data-testid="site-header"><Link href="/" className="brand" aria-label={`NeXify AI · ${locale==='de'?'Startseite':'Home'}`}><span className="brand-signet" aria-hidden="true"/><span className="brand-word">Ne<strong className="brand-x">X</strong>ify <span className="brand-ai">AI</span><small>{t.footer}</small></span></Link>

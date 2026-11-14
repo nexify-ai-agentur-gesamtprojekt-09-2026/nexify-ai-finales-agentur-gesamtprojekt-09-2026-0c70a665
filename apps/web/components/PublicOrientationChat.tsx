@@ -9,6 +9,7 @@ import {staticOrientation,type StaticGuidance} from "../lib/static-orientation";
 import {saveOracleBrief} from "../lib/project-brief-transfer";
 import {streamChat} from "../lib/chat-client";
 import type {BriefingDTO,ChatMessageDTO} from "../lib/chat-contract";
+import artwork from "../../../config/presenter-artwork.json";
 declare const __NEXIFY_STATIC_ORIENTATION__:boolean;
 
 const copy={
@@ -272,9 +273,15 @@ function OrientationStarters({locale,site,label,onChoose,chosen}:{locale:Locale;
  return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" aria-pressed={chosen===seed} onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
 }
 
-function OrientationJourney({locale,site,step=0}:{locale:Locale;site:"nexify"|"teileklar";step?:number}){
+// Leerzustand: Oracle empfängt als Gastgeber. Name und Vorspann stammen aus den vorhandenen Texten des geführten Wegs.
+function OrientationIntro({locale,site,title,intro}:{locale:Locale;site:"nexify"|"teileklar";title:string;intro:string}){
+ const figure=artwork.images.aifly;
+ return <div className="orientation-intro"><div className="orientation-host"><span className="orientation-host-figure" aria-hidden="true"><img src={figure.src} alt="" width={figure.width} height={figure.height} decoding="async"/></span><p className="orientation-host-name"><strong>Oracle</strong><span>{journeyCopy[locale][site].eyebrow}</span></p></div><h3>{title}</h3><p className="orientation-intro-body">{intro}</p></div>;
+}
+
+function OrientationJourney({locale,site,step=0,quiet=false}:{locale:Locale;site:"nexify"|"teileklar";step?:number;quiet?:boolean}){
  const content=journeyCopy[locale][site];
- return <ol className="orientation-path" aria-label={content.title}>{content.steps.map(([number,label],index)=><li key={number} data-state={index<step?"done":index===step?"current":"open"} aria-current={index===step?"step":undefined}><small>{number}</small>{label}</li>)}</ol>;
+ return <ol className={"orientation-path"+(quiet?" orientation-path-quiet":"")} aria-label={content.title}>{content.steps.map(([number,label],index)=><li key={number} data-state={index<step?"done":index===step?"current":"open"} aria-current={index===step?"step":undefined}><small>{number}</small>{label}</li>)}</ol>;
 }
 
 function OrientationAnswer({text,locale}:{text:string;locale:Locale}){
@@ -373,9 +380,21 @@ type Phase="idle"|"sending"|"streaming"|"failed"|"limited";
 const MESSAGE_LIMIT=1000;
 
 // Sichtbarer Text der Antwort: Absätze, Links nur auf bekannte Seiten, keine Auszeichnungszeichen.
+// Aufzählungen und nummerierte Schritte werden als Listen gesetzt; alles andere bleibt Absatz.
 function AssistantText({text,pages}:{text:string;pages:PublicPage[]}){
- const paragraphs=text.replace(/\*\*|__/g,"").split(/\n{2,}/).map(paragraph=>paragraph.trim()).filter(Boolean);
- return <>{paragraphs.map((paragraph,index)=><p key={index}>{guidedText(paragraph,pages)}</p>)}</>;
+ const blocks=text.replace(/\*\*|__/g,"").split(/\n{2,}/).map(block=>block.trim()).filter(Boolean);
+ const bullet=/^\s*[-•*]\s+/,numbered=/^\s*\d{1,2}[.)]\s+/;
+ return <>{blocks.flatMap((block,index)=>{
+  const parts:{kind:"p"|"ul"|"ol";lines:string[]}[]=[];
+  for(const line of block.split("\n")){
+   const kind=bullet.test(line)?"ul":numbered.test(line)?"ol":"p",last=parts.at(-1);
+   const value=line.replace(kind==="ul"?bullet:kind==="ol"?numbered:/^$/,"").trim();if(!value)continue;
+   if(last&&last.kind===kind)last.lines.push(value);else parts.push({kind,lines:[value]});
+  }
+  return parts.map((part,order)=>part.kind==="p"?<p key={index+"-"+order}>{guidedText(part.lines.join(" "),pages)}</p>
+   :part.kind==="ul"?<ul key={index+"-"+order}>{part.lines.map((line,item)=><li key={item}>{guidedText(line,pages)}</li>)}</ul>
+   :<ol key={index+"-"+order}>{part.lines.map((line,item)=><li key={item}>{guidedText(line,pages)}</li>)}</ol>);
+ })}</>;
 }
 
 // Verlauf für den Server: abgeschlossene Beiträge, jüngste zuerst begrenzt. Ein Briefing reist als Block mit,
@@ -435,7 +454,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
  const problem=phase==="failed"||phase==="limited";
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="guided" data-phase={phase}>
   <div className="orientation-content" ref={scroller} onScroll={event=>{const node=event.currentTarget;pinned.current=node.scrollHeight-node.scrollTop-node.clientHeight<48;}}>
-  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <OrientationIntro locale={locale} site={site} title={text.title} intro={text.intro}/>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text" aria-busy={busy}>{turns.map(turn=><article className={"orientation-message role-"+turn.role} data-state={turn.state} key={turn.id}><strong>{turn.role==="user"?text.you:text.assistant}</strong>{turn.role==="assistant"?<AssistantText text={turn.text} pages={pages}/>:<p>{turn.text}</p>}{turn.state==="stopped"&&<small className="orientation-message-state">{state.stopped}</small>}</article>)}
    {phase==="sending"&&<article className="orientation-message role-assistant orientation-thinking"><strong>{text.assistant}</strong><p><span className="orientation-dots" aria-hidden="true"><i/><i/><i/></span><span className="visually-hidden">{state.thinking}</span></p></article>}
   </div>
@@ -443,6 +462,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
   {users.length>0&&!busy&&<OrientationJourney locale={locale} site={site} step={step}/>}
   {site==="nexify"&&latestBriefing&&<ProjectBriefing locale={locale} questions={users.map(turn=>turn.text)} prepared={latestBriefing.text}/>}
   {turns.length===0&&!busy&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
+  {turns.length===0&&!busy&&<OrientationJourney locale={locale} site={site} step={-1} quiet/>}
   {turns.length>0&&!busy&&<div className="orientation-followup">{site==="nexify"&&!latestBriefing&&users.length>=2&&!problem&&<button type="button" className="outline-button" onClick={()=>void send(state.briefRequest)}>{state.brief}</button>}<button type="button" className="text-button orientation-restart" onClick={restart}>{state.restart}</button></div>}
   </div>
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.placeholder} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button type="button" className="outline-button" onClick={()=>controller.current?.abort()}>{text.stop}</button>:<button className="primary-button" disabled={!draft.trim()} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>}</div></form>
@@ -474,7 +494,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
  }
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode={unavailable?"fallback":"local-public-pages"}>
   <div className="orientation-content">
-  <div className="orientation-intro"><span className="orientation-speaker">Oracle</span><h3>{text.title}</h3><p>{text.intro}</p></div>
+  <OrientationIntro locale={locale} site={site} title={text.title} intro={text.intro}/>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
    <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>
@@ -484,6 +504,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
   {site==="nexify"&&messages.length>0&&<ProjectBriefing locale={locale} questions={messages.map(message=>message.question)}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
   {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
+  {messages.length===0&&<OrientationJourney locale={locale} site={site} step={-1} quiet/>}
   </div>
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><div className="orientation-composer-actions"><button className="primary-button" disabled={!draft.trim()} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button></div></form>
   <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}<ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>

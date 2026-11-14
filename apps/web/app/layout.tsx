@@ -19,11 +19,11 @@ import "../components/LuxuryMaterials.css";
 export const metadata: Metadata = { description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false},...(installation.enabled?{manifest:'/manifest.webmanifest'}:{})};
 // Ganzer Bildschirm inklusive Randbereichen (Kerbe, Home-Balken); die Flächen halten selbst Abstand über env(safe-area-inset-*).
 // Die Browserleiste nimmt die Farbe des Seitengrunds an.
-export const viewport: Viewport = { width:"device-width", initialScale:1, viewportFit:"cover", themeColor:tokens["color-atelier-canvas"], colorScheme:"dark" };
+export const viewport: Viewport = { width:"device-width", initialScale:1, viewportFit:"cover", themeColor:tokens["color-hell-grund"], colorScheme:"light" };
 export default async function RootLayout({children}:{children:ReactNode}) {
   const locale=localeOf((await headers()).get('x-nexify-locale'));
   const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
   // Some browser extensions add attributes to html/body before React runs.
   // Tolerance is deliberately limited to these two roots; page components still hydrate strictly.
-  return <html lang={locale} style={{colorScheme:'dark'}} suppressHydrationWarning><body suppressHydrationWarning><PublicInstallation enabled={installation.enabled}/>{content}</body></html>;
+  return <html lang={locale} style={{colorScheme:'light'}} suppressHydrationWarning><body suppressHydrationWarning><PublicInstallation enabled={installation.enabled}/>{content}</body></html>;
 }

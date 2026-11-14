@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
-export const CHAT_MIN = 320, CHAT_STEP = 16;
+export const CHAT_MIN = 360, CHAT_MAX = 1220, CHAT_STEP = 16;
 const WIDTH_KEY = "nx-chat-width";
-export const chatMax = () => Math.max(CHAT_MIN, Math.floor(window.innerWidth / 2));
+export const chatMax = () => Math.max(CHAT_MIN, Math.min(CHAT_MAX, Math.floor(window.innerWidth * .62)));
 export const clampChat = (w: number) => Math.min(chatMax(), Math.max(CHAT_MIN, Math.round(w)));
 
 export function readChatWidth(): number | null {
