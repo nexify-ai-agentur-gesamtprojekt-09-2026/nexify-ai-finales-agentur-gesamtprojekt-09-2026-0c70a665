@@ -140,17 +140,30 @@ ausgeschlossen“ prüfen (erwartet: nur Seiten der Sperrliste).
 - Geprüft ist lokal (`next start` mit gesetztem Host), nicht auf Vercel. Ob Vercel den Host so übergibt wie lokal,
   zeigt erst Abschnitt 8 nach der Auslieferung; im Zweifel bleibt die Seite gesperrt, nicht offen.
 
-## 10. Pin-Folgen (nach `.claude/skills/nexify-belege-und-pins`)
+## 10. Pins und Belege (nach `.claude/skills/nexify-belege-und-pins`)
 
-Bewusst nicht nachgezogen, weil kein gedeckter Browserlauf stattgefunden hat:
+`apps/web/proxy.ts` ist in zwei Browser-Belegen und im Register gebunden. Beide Harnesse sind am 14.11.2026 am festen
+Commit `ddcb01f434f49fb2c547988c9ae4691d421ef8b6` (Zweig mit `main` `a8a5d66`) gelaufen: Node v22.23.4, Playwright 1.65.0,
+Chromium 158.0.8127.18, davor `pnpm install --frozen-lockfile --ignore-scripts`,
+`node apps/site/scripts/generate-public-data.mjs` und `pnpm --filter @nexify/web build` (ohne Installationsschalter), Exit 0.
 
-| Datei | alter Pin | heutige Bytes | gebunden in | Grund |
+| Lauf | Ergebnis | Beleg |
+|---|---|---|
+| `apps/web/auth/tests/browser-public-experience.mjs` (19:12 bis 19:14 UTC) | bestanden: 70 Routen, 10 private Hüllen, 20 Filmzeilen, 0 Fremdanfragen, 0 Seitenfehler | `evidence/consent-ui-2026-10-28/next-public.json`; alte Fassung unter `superseded/next-public.pre-indexierung-2026-11-14.json`; `check_consent_ui` besteht |
+| `apps/site/tests/browser-workspace-read.mjs` (19:14 UTC) | bestanden: 4 Checks, 20 Negativsitzungen, dauerhafter Zustand unverändert | `evidence/workspace-read-2026-10-28/browser-workspace-read.json`; alte Fassung unter `superseded/browser-workspace-read.pre-indexierung-2026-11-14.json`; `check_workspace_read` besteht |
+
+Nachgezogen in `config/acceptance-coverage.json` (`tools/_update_register_shas.py` nicht benutzt):
+
+| Datei | alter Pin | neuer Pin | Belegart | Beleg |
 |---|---|---|---|---|
-| `apps/web/proxy.ts` | `c5acf79c879503f2…` | `59dda9075bb09c36…` | `config/acceptance-coverage.json`, `evidence/consent-ui-2026-10-28/next-public.json`, `evidence/workspace-read-2026-10-28/browser-workspace-read.json` | Die Kopfzeile ist neues Verhalten; den Pin trägt nur ein neuer Lauf der beiden Browser-Harnesse |
+| `apps/web/proxy.ts` | `c5acf79c8795…` | `aaf1245796ba…` | Browserlauf | beide Läufe oben binden die heutigen Bytes; der Public-Experience-Lauf fährt den gebauten Proxy für alle 70 Routen und prüft an den 10 privaten Hüllen `Cache-Control` und `X-Robots-Tag` |
+| `evidence/consent-ui-2026-10-28/next-public.json` | `98c7f0da8cce…` | `42785bc15152…` | Browserlauf | neu erhobener Beleg |
+| `evidence/workspace-read-2026-10-28/browser-workspace-read.json` | `8f6e1bdc142d…` | `aa94c75b5877…` | Browserlauf | neu erhobener Beleg |
 
-Dadurch neu rot in der Python-Suite (reine Bindung, kein Verhaltensfehler):
-`test_requirements_reconciliation…test_recorded_source_hashes_match_actual_bytes (source='apps/web/proxy.ts')` (der Test war
-für andere Quellen schon rot) sowie `test_browser_evidence.ConsentUIEvidenceTests.test_current_consent_pass_is_bound_to_UI_source`
-und `…test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads`. Der erste Commit des Zweigs
-(Regelmodul, Tests, Sitemap) macht nichts neu rot. Das Modul liegt bewusst unter `apps/web/auth/` neben `policy.ts`:
-`apps/web/lib` ist als Verzeichnis an den Text-Resize-Beleg gebunden, jede neue Datei dort macht ihn ungültig; `apps/web/app/sitemap.ts` war schon vorher ohne gültigen Pin.
+Grenze der Belege: Keiner der beiden Harnesse prüft die neue Kopfzeile auf öffentlichen Seiten. Der Workspace-Lauf
+bindet nur die Bytes von `proxy.ts` und führt den Proxy nicht aus. Das neue Verhalten selbst belegen
+`apps/web/auth/tests/indexing.test.mjs`, `indexing-proxy.test.mjs` und die lokale Probe aus Abschnitt 9.
+
+Das Regelmodul liegt bewusst unter `apps/web/auth/` neben `policy.ts`: `apps/web/lib` ist als Verzeichnis an den
+Text-Resize-Beleg gebunden, jede neue Datei dort macht ihn ungültig. `apps/web/app/sitemap.ts` war schon vorher ohne
+gültigen Pin und bleibt es (kein Lauf, der die Sitemap bindet).

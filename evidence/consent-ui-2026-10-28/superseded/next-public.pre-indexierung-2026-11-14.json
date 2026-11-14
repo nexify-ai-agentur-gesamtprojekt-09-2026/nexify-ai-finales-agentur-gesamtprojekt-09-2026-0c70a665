@@ -1,0 +1,1389 @@
+{
+  "scope": "local Next build;no provider or tenant acceptance",
+  "routes": [
+    {
+      "path": "/",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/portale",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/shop",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "locale": "de",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/loesungen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/kontakt",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/portale",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/impressum",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/cookies",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/anmelden",
+      "locale": "nl",
+      "passed": true
+    },
+    {
+      "path": "/registrieren",
+      "locale": "nl",
+      "passed": true
+    }
+  ],
+  "private": [
+    "/portal/kunde",
+    "/portal/api",
+    "/portal/affiliate",
+    "/teileklar/konto",
+    "/teileklar/partnerportal",
+    "/teileklar/nachbarschaft",
+    "/intern/workspace",
+    "/intern/posteingang",
+    "/intern/leitstand",
+    "/intern/verwaltung"
+  ],
+  "external": 0,
+  "mutations": 0,
+  "pageErrors": [],
+  "pwa": {
+    "/manifest.webmanifest": 404,
+    "/public-install-worker.js": 404
+  },
+  "navigation": true,
+  "source_sha256": {
+    "apps/web/proxy.ts": "c5acf79c879503f281d82517adbaa98af35a34e8c6e6901cae026e5f9841104b",
+    "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
+    "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
+    "apps/web/app/api/internal/workspace/mail/route.ts": "e8a5b7abf16d44d628cf730bcd0b70d471116584659ac0545f5416d2a44a3df2",
+    "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
+    "apps/web/components/AuthAvailabilityNotice.tsx": "1522ad17773273eeeb3a02ed24cb2664af0aba65bf96d8ce1158bd3abb848601",
+    "apps/web/auth/public-provider.ts": "4cef8d6d2669dafd616475a0e786bdd84bdf253154afa79a18d6a82250a4ca04",
+    "apps/web/app/layout.tsx": "ec2b970e033615137c35f8f3370eeaa20113e9d5b9f7061d398b2a39f2c91b0b",
+    "apps/web/app/anmelden/[[...sign-in]]/page.tsx": "96462bb0686e57fb6096faccdf89bd26a5e325653986b47e252bf8eb2a057378",
+    "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "fe10ab376d7296983cd6b8ba8f3c29844a9826e7cb8e189ef3b89ef85bec60ec",
+    "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
+    "apps/web/components/DiagnosticConsent.css": "a57940d16dac5b4c5c202b561b12b07b4036274505b7711f9d59214d86a74f59",
+    "apps/web/components/SiteFooter.tsx": "841a2c0dacd2d77e5738950452ae3c442330ba2894fd325b8ffa2a8087de0b47",
+    "apps/web/auth/tests/browser-public-experience.mjs": "a2a87a07ee3f2b9d30b2ea6c265bb3d9a970a410ec6523eac2061b5e56a63fbf",
+    "apps/web/app/page.tsx": "80197fa46cf354bc398f22b3f14d03b48d6d72cfd74afb73ae091734eef991ae",
+    "apps/web/app/[...slug]/page.tsx": "4b8a636c0410a8155c8aa4c20120d543cdd70a0a818f79bda6aa06a1fde44ba1",
+    "apps/web/next.config.ts": "d8b4e13bdcc65dbdbfefe6a624e76f173da0b1f818d2a17839089c3bea6edd76"
+  },
+  "auth_mobile": [
+    {
+      "locale": "de",
+      "path": "/anmelden",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "locale": "de",
+      "path": "/registrieren",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "locale": "nl",
+      "path": "/anmelden",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "locale": "nl",
+      "path": "/registrieren",
+      "width": 320,
+      "passed": true
+    }
+  ],
+  "videos": [
+    {
+      "path": "/",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/eingangshalle-20261114.mp4",
+        "/media/scenes/bemusterung-20261113.mp4",
+        "/media/scenes/fertigung-20261113.mp4",
+        "/media/scenes/logistik-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungen",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/bemusterung-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/fertigung-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/tablet-foyer-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/loesungen",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/wissen",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/kontakt",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/fertigung-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/portale",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/impressum",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/cookies",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/anmelden",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/tablet-foyer-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/registrieren",
+      "locale": "de",
+      "videos": [
+        "/media/scenes/tablet-foyer-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/teileklar",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/suche",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/kategorien",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/kategorie",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/produkt",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/warenkorb",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/kasse",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/fahrzeug-und-passung",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/termine",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/gutscheine",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/partner-werden",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/werkstatt",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/rechtliches",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/shop",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/reifenrechner",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/teileklar/batterie-berater",
+      "locale": "de",
+      "videos": []
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/eingangshalle-20261114.mp4",
+        "/media/scenes/bemusterung-20261113.mp4",
+        "/media/scenes/fertigung-20261113.mp4",
+        "/media/scenes/logistik-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungen",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/bemusterung-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/fertigung-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/tablet-foyer-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/leistungsumfang",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/loesungen",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/preise-ablauf",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/wissen",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/wissen/projekt-vorbereiten",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/unternehmen",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/kontakt",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/produkte/nex2fly",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/produkte/one",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/produkte/api",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/produkte/aifly-oracle",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/fertigung-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/produkte/skills-mcp",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/portale",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/impressum",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/datenschutz",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/vertragsgrundlagen",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/ki-hinweise",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/barrierefreiheit",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/cookies",
+      "locale": "nl",
+      "videos": []
+    },
+    {
+      "path": "/anmelden",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/tablet-foyer-20261113.mp4"
+      ]
+    },
+    {
+      "path": "/registrieren",
+      "locale": "nl",
+      "videos": [
+        "/media/scenes/tablet-foyer-20261113.mp4"
+      ]
+    }
+  ],
+  "films": [
+    {
+      "path": "/",
+      "locale": "de",
+      "src": "/media/scenes/eingangshalle-20261114.mp4",
+      "self_starting": true,
+      "preload": "metadata",
+      "controls": [
+        {
+          "label": "Film pausieren",
+          "width": 127,
+          "height": 46
+        },
+        {
+          "label": "Ton ausschalten",
+          "width": 109,
+          "height": 47
+        },
+        {
+          "label": "Untertitel",
+          "width": 123,
+          "height": 47
+        },
+        {
+          "label": "Lautstärke",
+          "width": 55,
+          "height": 47
+        }
+      ],
+      "captions": true,
+      "loop": false
+    },
+    {
+      "path": "/",
+      "locale": "de",
+      "src": "/media/scenes/bemusterung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 44,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/",
+      "locale": "de",
+      "src": "/media/scenes/fertigung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 44,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/",
+      "locale": "de",
+      "src": "/media/scenes/logistik-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 136,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 107,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 56,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "de",
+      "src": "/media/scenes/bemusterung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 127,
+          "height": 46
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 102,
+          "height": 46
+        },
+        {
+          "label": "Lautstärke",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "de",
+      "src": "/media/scenes/fertigung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 127,
+          "height": 46
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 102,
+          "height": 46
+        },
+        {
+          "label": "Lautstärke",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "de",
+      "src": "/media/scenes/tablet-foyer-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 127,
+          "height": 46
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 102,
+          "height": 47
+        },
+        {
+          "label": "Lautstärke",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "de",
+      "src": "/media/scenes/fertigung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 127,
+          "height": 46
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 102,
+          "height": 46
+        },
+        {
+          "label": "Lautstärke",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/anmelden",
+      "locale": "de",
+      "src": "/media/scenes/tablet-foyer-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 136,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 107,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 56,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/registrieren",
+      "locale": "de",
+      "src": "/media/scenes/tablet-foyer-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 136,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 107,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 56,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false,
+      "click": {
+        "started": true,
+        "muted_after_play_switch": true,
+        "sound_after_sound_switch": true
+      }
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "src": "/media/scenes/eingangshalle-20261114.mp4",
+      "self_starting": true,
+      "preload": "metadata",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 120,
+          "height": 46
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 128,
+          "height": 47
+        },
+        {
+          "label": "Ondertiteling",
+          "width": 150,
+          "height": 48
+        },
+        {
+          "label": "Volume",
+          "width": 56,
+          "height": 47
+        }
+      ],
+      "captions": true,
+      "loop": false
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "src": "/media/scenes/bemusterung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Volume",
+          "width": 44,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "src": "/media/scenes/fertigung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 44,
+          "height": 48
+        },
+        {
+          "label": "Volume",
+          "width": 44,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/",
+      "locale": "nl",
+      "src": "/media/scenes/logistik-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 129,
+          "height": 48
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 135,
+          "height": 48
+        },
+        {
+          "label": "Volume",
+          "width": 56,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/leistungen/websites",
+      "locale": "nl",
+      "src": "/media/scenes/bemusterung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 120,
+          "height": 46
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 128,
+          "height": 47
+        },
+        {
+          "label": "Volume",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/leistungen/agenten-automatisierung",
+      "locale": "nl",
+      "src": "/media/scenes/fertigung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 120,
+          "height": 46
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 128,
+          "height": 47
+        },
+        {
+          "label": "Volume",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/leistungen/apps-portale",
+      "locale": "nl",
+      "src": "/media/scenes/tablet-foyer-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 120,
+          "height": 46
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 128,
+          "height": 47
+        },
+        {
+          "label": "Volume",
+          "width": 54,
+          "height": 47
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/produkte/nex-agentic-aifly",
+      "locale": "nl",
+      "src": "/media/scenes/fertigung-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film afspelen",
+          "width": 120,
+          "height": 46
+        },
+        {
+          "label": "Film met geluid · DE",
+          "width": 128,
+          "height": 47
+        },
+        {
+          "label": "Volume",
+          "width": 54,
+          "height": 46
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/anmelden",
+      "locale": "nl",
+      "src": "/media/scenes/tablet-foyer-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 136,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 107,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 56,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    },
+    {
+      "path": "/registrieren",
+      "locale": "nl",
+      "src": "/media/scenes/tablet-foyer-20261113.mp4",
+      "self_starting": false,
+      "preload": "none",
+      "controls": [
+        {
+          "label": "Film abspielen",
+          "width": 136,
+          "height": 48
+        },
+        {
+          "label": "Film mit Ton starten",
+          "width": 107,
+          "height": 48
+        },
+        {
+          "label": "Lautstärke",
+          "width": 56,
+          "height": 48
+        }
+      ],
+      "captions": false,
+      "loop": false
+    }
+  ],
+  "scene_sha256": {
+    "bemusterung-20261113.mp4": "a637ba5b23f69c257f0a9ba7d341c945445b5856f7376946fe73844d4f24b5f7",
+    "eingangshalle-20261114.mp4": "cf4a1b45b438cfd8ee2b1fce16be64254cba6551233309f6ea7efcca95d1e29a",
+    "fertigung-20261113.mp4": "b31476632a7bf1ee287bdd99b79824344d9bb93315ff7c1ff39d741218a879ad",
+    "logistik-20261113.mp4": "4d6ec87b953c6903aac6e7e5439bb3691ab02bee7108aed9722efff5e7a9d5ae",
+    "tablet-foyer-20261113.mp4": "ba877c8fc5f7e76cf38cdb5f50ad78c4c8b6821f673076e68a6af75e7f27a7b3"
+  },
+  "companion_avatar": {
+    "aria_hidden": true,
+    "natural_width": 512,
+    "location": "reopen-chat launcher",
+    "passed": true
+  },
+  "internal_workspace_api_auth_required_401": true,
+  "internal_mail_api_auth_required_401": true,
+  "passed": true
+}
