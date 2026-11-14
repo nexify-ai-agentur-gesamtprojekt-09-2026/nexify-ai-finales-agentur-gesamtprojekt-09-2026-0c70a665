@@ -1,6 +1,6 @@
 /* TEILEKLAR-Oberflaechen im Startseiten-System. Die oeffentlichen Inhaltsseiten brauchen keine
    Overrides mehr: PublicContent.tsx verwendet das HomeConcept-Klassensystem direkt (PageConcept.css). */
-.workspace-shell.site-teileklar{--tk-gutter:var(--layout-page-padding);--tk-title-size:var(--type-section-size);--tk-small:var(--type-home-detail);--tk-card-size:var(--type-home-reading)}
+.workspace-shell.site-teileklar{--tk-gutter:max(var(--layout-page-padding),env(safe-area-inset-left),env(safe-area-inset-right));--tk-title-size:var(--type-section-size);--tk-small:var(--type-home-detail);--tk-card-size:var(--type-home-reading)}
 .workspace-shell.site-teileklar .tk-commerce-header{background:var(--gradient-atelier-stage)}
 .workspace-shell.site-teileklar .tk-commerce-main,.workspace-shell.site-teileklar .tk-service-strip,.workspace-shell.site-teileklar .tk-commerce-nav{max-width:var(--layout-home-wide-max);margin-inline:auto}
 .workspace-shell.site-teileklar .tk-header-search .primary-button{flex-shrink:0;white-space:nowrap;word-break:normal;padding-inline:var(--space-5);background:var(--color-atelier-champagne)}
@@ -12,7 +12,7 @@
 .workspace-shell.site-teileklar .tk-shopping-points{border:0}.workspace-shell.site-teileklar .tk-shopping-points>div>span{display:none}.workspace-shell.site-teileklar .tk-shopping-points>div{grid-template-columns:1fr}
 .workspace-shell.site-teileklar .tk-category-tiles a{background:var(--gradient-karte);border:0;border-radius:var(--radius-atelier);box-shadow:var(--shadow-atelier)}
 .workspace-shell :is(a,button,input,select,textarea,summary):focus-visible{outline:2px solid var(--color-marke-lime);outline-offset:var(--space-1)}
-@media(min-width:1400px){.workspace-shell.site-teileklar{--tk-gutter:var(--layout-home-wide-padding)}}
+@media(min-width:1400px){.workspace-shell.site-teileklar{--tk-gutter:max(var(--layout-home-wide-padding),env(safe-area-inset-left),env(safe-area-inset-right))}}
 @media(max-width:640px){.workspace-shell.site-teileklar .tk-window-products{max-height:none;aspect-ratio:auto;grid-template-rows:auto}.workspace-shell.site-teileklar .tk-window-product .tk-image,.workspace-shell.site-teileklar .tk-window-product.item-0 .tk-image{max-height:none}}
 
 /* Shop-Laufzeitseiten (Katalog, Suche, Warenkorb, Kasse, Werkstatt, Konto) im Atelier-Material */

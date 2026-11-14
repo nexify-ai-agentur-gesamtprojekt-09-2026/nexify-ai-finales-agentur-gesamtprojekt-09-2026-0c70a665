@@ -1234,3 +1234,11 @@ html[data-theme='light'] #atelier{
 
 /* ===== HeroStage ohne Bildflaeche (Unterseiten ohne Motiv): einspaltig, sonst unveraendert wie .identity-hero ===== */
 #atelier .home-concept .identity-hero.is-text-only .identity-scene{grid-template-columns:minmax(0,1fr)}
+
+/* ===== Mobil: Zielgroesse und Eingaben (gemessen 14.11.2026, iPhone 13 und Pixel 7 emuliert) ===== */
+/* „Gesprochener Text" unter dem Hero-Film war 40 px hoch; Ziele sind mindestens 44 px. */
+#atelier .home-concept .identity-hero .atelier-film-transcript summary{min-height:var(--as-s-12)}
+/* Eingaben unter 16 px vergroessert iOS beim Antippen samt der ganzen Seite. Gilt nur auf Tippgeraeten; mit Maus bleibt alles wie es ist. */
+@media (pointer:coarse){
+ #atelier :is(.site-header .header-actions select,.tk-header-search input){font-size:var(--as-t-16)}
+}

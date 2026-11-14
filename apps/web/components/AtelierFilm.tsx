@@ -19,7 +19,9 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  // Vom Besucher gewählter Ton (null = noch keine Wahl). Er gilt weiter, wenn der Film nach Wegblättern oder Tabwechsel wieder anläuft.
  const userSound=useRef<boolean|null>(null);
  const [playing,setPlaying]=useState(false),[muted,setMuted]=useState(true),[failed,setFailed]=useState(false),[ended,setEnded]=useState(false),[buffering,setBuffering]=useState(false),[progress,setProgress]=useState(0);
- const [captions,setCaptions]=useState(false),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null);
+ const [captions,setCaptions]=useState(false),[volume,setVolume]=useState(.8),[frameReady,setFrameReady]=useState(false),[started,setStarted]=useState(false),[failedStillSrc,setFailedStillSrc]=useState<string|null>(null)
+ // Vorabladen der Filmdaten (nur selbst startender Hero-Film) erst nach dem ersten Seitenaufbau, siehe Effekt unten.
+ const [warm,setWarm]=useState(false);
  const t=words[locale],a=audioWords[locale],compact=compactWords[locale],playLabel=ended?t.replay:t.play;
  // A reviewed still may be bound to this exact asset; until then, retain the existing editorial poster.
  const still=asset.still??{src:asset.poster,alt:asset.posterAlt??asset.title};
@@ -38,8 +40,14 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
   let visible=false,disposed=false,audioAttempted=false;
   const pref=matchMedia('(prefers-reduced-motion: reduce)');
   const connection=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection;
+  // Erst das Bild, dann der Film: Vorabladen und Selbststart warten auf das Ende des ersten Seitenaufbaus (load),
+  // damit der Film auf Mobil nicht mit Poster, Schrift und Stil um die Leitung konkurriert. Ein Klick startet sofort.
+  // Bei reduzierter Bewegung und im Datensparmodus wird bis zum Klick gar nichts vom Film geladen.
+  let pageLoaded=document.readyState==='complete';
+  const loaded=()=>{pageLoaded=true;if(!pref.matches&&!connection?.saveData)setWarm(true);void start();};
+  if(pageLoaded)loaded();else window.addEventListener('load',loaded,{once:true});
   async function start(){
-   if(disposed||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||video!.error||userPaused.current||(asset.autostart===false&&!userStarted.current))return;
+   if(disposed||!pageLoaded||!visible||pref.matches||connection?.saveData||document.hidden||video!.ended||video!.error||userPaused.current||(asset.autostart===false&&!userStarted.current))return;
    const action=manualAction.current;
    const audible=userSound.current??(hero&&asset.hasAudio===true&&asset.autoplayWithAudio===true&&!audioAttempted);
    audioAttempted=true;
@@ -55,7 +63,7 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
   const hidden=()=>{if(document.hidden){video.pause();setBuffering(false);}else void start();};
   const other=(e:Event)=>{if((e as CustomEvent<string>).detail!==id){userPaused.current=true;manualAction.current++;video.pause();setBuffering(false);}};
   observer.observe(box);pref.addEventListener('change',preference);document.addEventListener('visibilitychange',hidden);window.addEventListener('nexify:presenter-play',other);
-  return()=>{disposed=true;alive.current=false;generation.current++;observer.disconnect();pref.removeEventListener('change',preference);document.removeEventListener('visibilitychange',hidden);window.removeEventListener('nexify:presenter-play',other);video.pause();};
+  return()=>{disposed=true;alive.current=false;generation.current++;window.removeEventListener('load',loaded);observer.disconnect();pref.removeEventListener('change',preference);document.removeEventListener('visibilitychange',hidden);window.removeEventListener('nexify:presenter-play',other);video.pause();};
  },[asset.src,asset.hasAudio,asset.autoplayWithAudio,asset.autostart,hero,id]);
  function pause(){userPaused.current=true;manualAction.current++;ref.current?.pause();setBuffering(false);}
  async function play(withVoice=false){
@@ -69,8 +77,8 @@ export default function AtelierFilm({asset,locale,hero=false}:{asset:AtelierAsse
  }
  return <div ref={root} className={'atelier-film'+(hero?' atelier-film-hero':'')} data-film={asset.title} data-playback={failed?'error':ended?'ended':buffering?'buffering':playing?'playing':'paused'}>
   <div className="atelier-film-picture">
-   {(!frameReady||!started||ended||failed)&&<img ref={stillImage} className="atelier-film-fallback" src={usePoster?asset.poster:still.src} alt={(failed||!started||ended)?(usePoster?(asset.posterAlt??asset.title):still.alt):''} aria-hidden={!(failed||!started||ended)} onError={()=>{if(!usePoster&&still.src!==asset.poster)setFailedStillSrc(still.src);}} width={asset.width} height={asset.height}/>}
-   <video ref={ref} src={asset.src} poster={still.src} width={asset.width} height={asset.height} preload={hero?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
+   {(!frameReady||!started||ended||failed)&&<img ref={stillImage} className="atelier-film-fallback" src={usePoster?asset.poster:still.src} alt={(failed||!started||ended)?(usePoster?(asset.posterAlt??asset.title):still.alt):''} aria-hidden={!(failed||!started||ended)} onError={()=>{if(!usePoster&&still.src!==asset.poster)setFailedStillSrc(still.src);}} width={asset.width} height={asset.height} fetchPriority={hero&&asset.autostart!==false?'high':undefined}/>}
+   <video ref={ref} src={asset.src} poster={still.src} width={asset.width} height={asset.height} preload={hero&&asset.autostart!==false&&warm?'metadata':'none'} playsInline muted={muted} loop={!hero&&!asset.playOnce} aria-label={asset.title}
     onLoadedMetadata={()=>{if(ref.current)ref.current.volume=volume;captionMode(captions);}} onLoadedData={()=>setFrameReady(true)} onPlay={()=>{setPlaying(true);setEnded(false);}} onPlaying={()=>{setStarted(true);setPlaying(true);setBuffering(false);setFailed(false);}} onPause={()=>{setPlaying(false);setBuffering(false);}}
     onWaiting={()=>{if(ref.current&&!ref.current.paused)setBuffering(true);}} onTimeUpdate={()=>{const v=ref.current;if(v&&Number.isFinite(v.duration)&&v.duration>0)setProgress(v.currentTime/v.duration);}}
     onEnded={()=>{setStarted(false);setPlaying(false);setBuffering(false);setEnded(true);setProgress(1);}} onError={()=>{setFailed(true);setBuffering(false);setPlaying(false);}}>
