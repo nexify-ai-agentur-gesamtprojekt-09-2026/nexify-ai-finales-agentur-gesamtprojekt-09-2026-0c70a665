@@ -209,3 +209,9 @@ Was die Variable **nicht** tut:
 Prüfung ohne Netzwerk und ohne echte Werte:
 `python3 -m unittest discover -s apps/shop-api/tests -p 'test_vercel_adapter.py'` und
 `-p 'test_namespace_operator.py'`.
+
+Nachtrag 14.11.2026: Der Shop wird auf PostgreSQL (eigene Supabase-Instanz) umgestellt
+(D-012). Bis die Umstellung abgenommen ist, gilt dieser Abschnitt unverändert. Welche
+Variablen danach entfallen und welche neu sind, steht in
+`docs/deployment/shop-auf-supabase-2026-11-14.md`, Abschnitt 6; heute ist dafür nichts zu
+setzen.
