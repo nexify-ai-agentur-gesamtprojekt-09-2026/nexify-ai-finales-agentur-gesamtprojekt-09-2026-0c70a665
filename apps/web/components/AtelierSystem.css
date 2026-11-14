@@ -40,7 +40,7 @@
 #atelier .home-concept :is(.hc-visibility-grid article,.hc-process li){padding:var(--space-6) var(--space-5)}
 #atelier .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate):is(:hover,:focus-within){border-top-color:color-mix(in srgb,var(--color-marke-lime-hell) 60%,transparent)}
 #atelier .home-concept .hc-process li{counter-increment:hc-step}
-#atelier .home-concept .hc-rate>strong{background:linear-gradient(120deg,var(--color-atelier-ink),var(--color-marke-lime-hell));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding-bottom:.1em}
+#atelier .home-concept .hc-rate>strong{padding-bottom:.1em}
 #atelier .home-concept .hc-kicker{display:flex;align-items:center;gap:var(--space-3)}
 #atelier .home-concept[data-fx='on'] :is(.hc-intro,.hc-gallery-card,.hc-section-heading,.hc-service-detail,.hc-visibility-grid article,.hc-process li,.hc-product,.hc-costs,.hc-rate,.hc-finish-heading,.hc-finish-next):not(.is-in){opacity:0;transform:translateY(var(--space-6))}
 #atelier .home-concept[data-fx='on'] :is(.hc-intro,.hc-gallery-card,.hc-section-heading,.hc-service-detail,.hc-visibility-grid article,.hc-process li,.hc-product,.hc-costs,.hc-rate,.hc-finish-heading,.hc-finish-next){transition:opacity var(--fx-reveal) ease-out,transform var(--fx-reveal) ease-out,box-shadow var(--motion-feedback),border-color var(--motion-feedback)}
@@ -235,7 +235,7 @@ html:has(#atelier),body:has(#atelier){background:var(--color-atelier-canvas)}
 html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised) var(--color-atelier-canvas)}
 #atelier{--as-pill:999px;--as-area:28px;--as-stage:40px;--as-rim:6px;--as-warm:color-mix(in srgb,color-mix(in srgb,var(--color-atelier-ink) 84%,var(--color-semantik-warnung)) 80%,var(--color-atelier-canvas));--as-cool:var(--color-atelier-platinum);--as-ink:var(--color-atelier-ink);--as-deep:var(--color-atelier-canvas);--as-lime:var(--color-marke-lime);--as-glass:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 20%,transparent),color-mix(in srgb,var(--as-cool) 6%,transparent) 62%),color-mix(in srgb,var(--as-deep) 46%,transparent);--as-glass-dense:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 16%,transparent),color-mix(in srgb,var(--as-cool) 5%,transparent) 62%),color-mix(in srgb,var(--color-atelier-surface) 88%,transparent);--as-plate:linear-gradient(165deg,color-mix(in srgb,var(--as-cool) 11%,transparent),color-mix(in srgb,var(--as-cool) 3%,transparent) 50%),color-mix(in srgb,var(--color-atelier-raised) 78%,transparent);--as-edge:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 30%,transparent);--as-rest:var(--as-edge),0 18px 40px -22px color-mix(in srgb,var(--as-deep) 96%,transparent);--as-raised:var(--as-edge),0 28px 60px -24px color-mix(in srgb,var(--as-deep) 96%,transparent),0 36px 90px -44px color-mix(in srgb,var(--as-warm) 34%,transparent);--as-focus:0 0 0 2px var(--as-deep),0 0 0 4px var(--as-lime);--as-blur:blur(26px) saturate(175%);--as-spring:cubic-bezier(.2,.9,.25,1.15);--as-heading:linear-gradient(174deg,var(--as-ink) 18%,color-mix(in srgb,var(--as-cool) 82%,var(--as-deep)));position:relative;isolation:isolate;min-height:100vh;background:var(--color-atelier-canvas)}
 #atelier::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 70% 55% at 10% -6%,color-mix(in srgb,var(--as-warm) 10%,transparent),transparent 72%),radial-gradient(ellipse 55% 60% at 104% 34%,color-mix(in srgb,var(--as-cool) 11%,transparent),transparent 72%),radial-gradient(ellipse 60% 45% at 36% 108%,color-mix(in srgb,var(--as-lime) 5%,transparent),transparent 72%)}
-#atelier .website{background:transparent}
+#atelier .website{background:transparent;padding-top:env(safe-area-inset-top)}
 #atelier .home-concept{background:transparent;overflow:visible}
 #atelier .home-concept::before,#atelier .home-concept::after{content:none}
 #atelier .home-concept .identity-hero{background:transparent;overflow:visible}
@@ -249,13 +249,13 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
  #atelier .site-footer{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 }
 #atelier .site-footer::before{content:none}
-#atelier .website>*{--layout-page-padding:max(clamp(24px,5cqi,96px),calc((100cqi - 1920px) / 2));--layout-home-wide-padding:var(--layout-page-padding);--layout-content-max:none;--layout-home-wide-max:none}
+#atelier .website>*{--layout-page-padding:max(clamp(24px,5cqi,96px),calc((100cqi - 1920px) / 2),env(safe-area-inset-left),env(safe-area-inset-right));--layout-home-wide-padding:var(--layout-page-padding);--layout-content-max:none;--layout-home-wide-max:none}
 #atelier .home-concept .hc-container{box-sizing:border-box;width:100%;max-width:var(--layout-content-max);margin-inline:auto;padding-inline:var(--layout-page-padding)}
 #atelier .home-concept .identity-hero .identity-scene{box-sizing:border-box;width:100%;max-width:var(--layout-content-max);margin-inline:auto;padding-inline:var(--layout-page-padding)}
 @container identity-hero (min-width:821px){
  #atelier .home-concept .identity-hero .identity-scene{grid-template-columns:minmax(0,.82fr) minmax(0,1.5fr);gap:var(--space-7);align-items:center;padding-block:var(--space-8) var(--space-8)}
 }
-#atelier .home-concept .identity-hero .identity-media{overflow:visible;transform:none;box-shadow:none;border-radius:var(--as-stage)}
+#atelier .home-concept .identity-hero .identity-media{width:100%;max-width:none;margin-inline:0;overflow:visible;transform:none;box-shadow:none;border-radius:var(--as-stage)}
 #atelier .home-concept .identity-hero .identity-media::before,#atelier .home-concept .identity-hero .identity-media::after{content:none}
 #atelier .home-concept .identity-hero .identity-hero-photo{padding:var(--as-rim);border:0;border-radius:var(--as-stage);overflow:hidden;background:linear-gradient(140deg,color-mix(in srgb,var(--as-ink) 52%,transparent),color-mix(in srgb,var(--as-cool) 14%,transparent) 24%,color-mix(in srgb,var(--as-deep) 70%,transparent) 60%,color-mix(in srgb,var(--as-warm) 40%,transparent) 100%);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 60%,transparent),0 40px 90px -34px color-mix(in srgb,var(--as-deep) 96%,transparent),0 60px 120px -50px color-mix(in srgb,var(--as-warm) 26%,transparent)}
 #atelier .home-concept .identity-hero .identity-hero-photo::before,#atelier .home-concept .identity-hero .identity-hero-photo::after{content:none}
@@ -277,7 +277,7 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
  #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume>div{width:200px}
  #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume label{font-size:0;gap:0}
 }
-#atelier .home-concept .hc-anchors{position:relative;box-sizing:border-box;display:flex;flex-wrap:nowrap;width:fit-content;max-width:calc(100% - 2 * var(--layout-page-padding));margin-inline:max(var(--layout-page-padding),calc((100% - var(--layout-content-max)) / 2 + var(--layout-page-padding))) auto;padding:var(--space-1);gap:var(--space-1);border:0;border-radius:var(--as-pill);background:var(--as-glass);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest);overflow:hidden}
+#atelier .home-concept .hc-anchors{position:relative;box-sizing:border-box;display:flex;flex-wrap:nowrap;width:fit-content;max-width:calc(100% - 2 * var(--layout-page-padding));margin-inline:var(--layout-page-padding) auto;padding:var(--space-1);gap:var(--space-1);border:0;border-radius:var(--as-pill);background:var(--as-glass);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest);overflow:hidden}
 #atelier .home-concept .hc-anchors a{display:inline-flex;align-items:center;justify-content:space-between;min-height:48px;padding-inline:var(--space-5);gap:var(--space-3);border:0;border-radius:var(--as-pill);color:var(--color-text-sekundaer);font-size:.9375rem;white-space:nowrap;text-decoration:none;transition:background-color .2s ease-out,color .2s ease-out,transform .28s var(--as-spring)}
 #atelier .home-concept .hc-anchors a:is(:hover,:focus-visible){background:color-mix(in srgb,var(--as-cool) 16%,transparent);color:var(--as-ink)}
 #atelier .home-concept .hc-anchors a:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--as-lime)}
@@ -453,14 +453,14 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel .orientation-path>li[data-state='done']{background:none;color:var(--color-text-sekundaer)}
 #atelier #aifly-panel .orientation-composer{margin:0 var(--ca-pad) 10px}
 #atelier #aifly-panel .chat-return{margin:0 var(--ca-pad) 16px}
-#atelier #aifly-panel .connection-note{padding:0 12px 12px;font-size:.72rem;line-height:1.5;color:var(--color-text-tertiaer);text-wrap:balance}
+#atelier #aifly-panel .connection-note{padding:0 18px 12px;font-size:.72rem;line-height:1.5;color:var(--color-text-tertiaer);text-wrap:balance}
 #atelier #aifly-panel .orientation-mode-note{display:inline;margin:0;font-size:inherit;color:inherit}
 #atelier #aifly-panel .orientation-mode-note::after{content:' · '}
 #atelier #aifly-panel .connection-note a{color:var(--color-text-sekundaer);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 50%,transparent);text-underline-offset:3px}
 #atelier #aifly-panel .orientation-composer-actions .primary-button:disabled{opacity:.6;filter:none}
 #atelier #aifly-panel .public-orientation{padding:0;gap:0;background:transparent}
 #atelier #aifly-panel .conversation{padding:20px var(--ca-pad) 18px;background:transparent}
-#atelier #aifly-panel .welcome-card>p:not(.welcome-body){font:500 1.75rem/1.1 var(--font-display);letter-spacing:-.035em;background:var(--as-heading);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+#atelier #aifly-panel .welcome-card>p:not(.welcome-body){font:500 1.75rem/1.1 var(--font-display);background:var(--as-heading);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
 #atelier #aifly-panel .welcome-card .eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--as-warm)}
 #atelier #aifly-panel .action-options{display:flex;flex-wrap:wrap;gap:8px;margin:0}
 #atelier #aifly-panel .action-option{width:auto;min-height:48px;margin:0;padding:0 18px;gap:10px;border:0;border-radius:var(--as-pill);background:var(--as-glass);box-shadow:var(--as-rest);color:var(--as-ink);font-size:.875rem;font-weight:500;transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
@@ -472,3 +472,9 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel :is(.request-fallback,.conversation) a:not(.nexify-control):not(.outline-button):not(.primary-button){display:inline-flex;align-items:center;min-height:44px;border-radius:0;color:var(--as-ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 50%,transparent);text-underline-offset:3px}
 #atelier #aifly-panel .conversation :is(input,select,textarea){border:0;border-radius:calc(var(--as-area) - var(--as-rim));background:color-mix(in srgb,var(--as-cool) 9%,transparent);box-shadow:var(--as-edge);color:var(--as-ink)}
 #atelier #aifly-panel .conversation :is(.primary-button,.outline-button,.download-link){min-height:48px;padding:0 20px;border:0;border-radius:var(--as-pill)}
+#atelier #aifly-panel .welcome-card>p:not(.welcome-body){letter-spacing:-.02em;word-spacing:.06em}
+#atelier #aifly-panel .welcome-card>.welcome-body{font-size:.98rem;font-weight:400;line-height:1.6;letter-spacing:0;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .request-fallback :is(h2,h3,h4,strong){font:500 1.0625rem/1.3 var(--font-display);letter-spacing:-.01em;color:var(--as-ink);background:none;-webkit-text-fill-color:currentColor}
+#atelier #aifly-panel .request-fallback p{margin:8px 0 0;font-size:.875rem;line-height:1.55;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .request-fallback a{font-size:.875rem}
+#atelier .home-concept .hc-rate>strong{background:var(--as-heading);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}

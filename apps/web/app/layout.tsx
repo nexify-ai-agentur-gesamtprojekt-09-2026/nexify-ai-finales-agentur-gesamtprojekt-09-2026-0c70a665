@@ -3,7 +3,8 @@ import "./masterplan-tokens.css";
 import "./globals.css";
 import "./measurement-system.css";
 import '../components/HomeMaster.css';
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import tokens from "../../../packages/tokens/tokens.json";
 import {headers} from 'next/headers';
 import {localeOf} from '../lib/page-seo';
 import type { ReactNode } from "react";
@@ -16,6 +17,9 @@ import installation from '../.generated/installation.json';
 import "../components/LuxuryMaterials.css";
 
 export const metadata: Metadata = { description:"Websites, Apps und vernetzte Abläufe. Besprechen Sie Ihr Vorhaben direkt mit NeX Agentic AIFly.",robots:{index:false,follow:false},...(installation.enabled?{manifest:'/manifest.webmanifest'}:{})};
+// Ganzer Bildschirm inklusive Randbereichen (Kerbe, Home-Balken); die Flächen halten selbst Abstand über env(safe-area-inset-*).
+// Die Browserleiste nimmt die Farbe des Seitengrunds an.
+export const viewport: Viewport = { width:"device-width", initialScale:1, viewportFit:"cover", themeColor:tokens["color-atelier-canvas"], colorScheme:"dark" };
 export default async function RootLayout({children}:{children:ReactNode}) {
   const locale=localeOf((await headers()).get('x-nexify-locale'));
   const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
