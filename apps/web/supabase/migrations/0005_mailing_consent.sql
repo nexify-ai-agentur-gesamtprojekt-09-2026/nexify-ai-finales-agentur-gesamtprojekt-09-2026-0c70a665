@@ -316,8 +316,9 @@ begin
   end if;
   -- Der Trigger läuft vor den Formprüfungen der Tabelle. Ein Grenzwert außerhalb seines Bereichs ist ein Fehler des
   -- Aufrufers und wird als solcher gemeldet, nicht still als "Grenze erreicht" behandelt.
-  if new.address_limit not between 1 and 10 or new.address_window_hours not between 1 and 8760 or new.daily_limit not between 1 and 10000
-     or new.address_attempt_limit not between 1 and 100 or new.daily_attempt_limit not between 1 and 100000 then
+  -- Ein fehlender Wert ist ebenfalls ein Fehler und wird nicht still durch die Obergrenze ersetzt.
+  if not coalesce(new.address_limit between 1 and 10 and new.address_window_hours between 1 and 8760 and new.daily_limit between 1 and 10000
+                  and new.address_attempt_limit between 1 and 100 and new.daily_attempt_limit between 1 and 100000, false) then
     raise exception 'confirmation_mail_limit_out_of_range' using errcode = '23514';
   end if;
   select * into cap from mailing.settings where id;
