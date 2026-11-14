@@ -1,7 +1,7 @@
 // Explicit local build mode only. No default production activation.
 import {readFileSync} from 'node:fs';
 export function publicInstallationManifest(tokens){
- return {id:'/',name:'NeXify AI',short_name:'NeXify AI',start_url:'/',scope:'/',display:'standalone',lang:'de',background_color:tokens['color-graphit-900'],theme_color:tokens['color-graphit-900'],icons:[{src:'/icon-192.png',sizes:'192x192',type:'image/png',purpose:'any'},{src:'/icon-512.png',sizes:'512x512',type:'image/png',purpose:'any'},{src:'/icon-maskable-512.png',sizes:'512x512',type:'image/png',purpose:'maskable'},{src:'/signet.svg',sizes:'any',type:'image/svg+xml',purpose:'any'}]};
+ return {id:'/',name:'NeXify AI',short_name:'NeXify AI',start_url:'/',scope:'/',display:'standalone',lang:'de',background_color:tokens['color-graphit-900'],theme_color:tokens['color-graphit-900'],icons:[{src:'/icon-192.png',sizes:'192x192',type:'image/png',purpose:'any'},{src:'/icon-512.png',sizes:'512x512',type:'image/png',purpose:'any'},{src:'/icon-maskable-512.png',sizes:'512x512',type:'image/png',purpose:'maskable'},{src:'/brand/nexify-figur.png',sizes:'512x512',type:'image/png',purpose:'any'}]};
 }
 export function publicPwaPlugin(mode){
  const enabled=mode==='public-pwa';
