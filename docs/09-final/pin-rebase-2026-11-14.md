@@ -196,3 +196,24 @@ Befunde 4 (Pillow), 5 (`skills-lock.json`) und 7 (Standalone-Vorschau) bleiben w
 | `node --test apps/web/auth/tests/*.test.mjs` | nicht erhoben | 89 von 89 |
 
 Veraltete Pins: 43 auf `main`, 30 auf diesem Zweig (unverändert die Liste aus Abschnitt 5).
+
+## 9. Nachtrag dritte Runde (14.11.2026, auf `main` `ba6606b`)
+
+Anlass: PR 160 hat die Seitenbefunde 1 und 2 (Überlauf bei 200 % Schrift, Hero-Scrollbreite) behoben. Der Text-Spacing-Beleg wurde deshalb auf aktuellem `main` neu erhoben.
+
+### Lauf
+
+`node tests/browser-text-spacing.mjs` (Chromium, Vite-Entwicklungsserver, Berichtspfad außerhalb des Repositorys) endete mit Exit 0: `{"checks":129,"issues":[]}`. Der Bericht hat `completed: true`, `runtime_errors: []` und 43 Routen; seine Quellbindung stimmt mit `tools/check_text_resize_evidence.source_hashes(root)` überein (in Python gegengeprüft). Belegart: gemessener, quellgebundener Browserlauf.
+
+Die Fassung vom 10.11. liegt unverändert unter `evidence/resize-2026-11-10/superseded/text-spacing.pre-neupruefung-2026-11-14b.json`; der neue Bericht steht unter `evidence/resize-2026-11-10/text-spacing.json`.
+
+### Nachgezogene Pins (2)
+
+| Datei | Pin alt | Pin neu | Belegart |
+|---|---|---|---|
+| `apps/site/tests/browser-text-spacing.mjs` | `bfa4ae535778…` | `2410bd6af797…` | bestandener Browserlauf, der die Datei bindet |
+| `tests/test_resize_source_binding.py` | `20bbdf26a7ca…` | `4c9f3d648cc8…` | grüner Test heute (`tests.test_resize_source_binding`: OK; der Beleg liegt wieder vor) |
+
+### Nicht erneuert
+
+Die Läufe Identity-Hero und Public-Experience bestehen ebenfalls; ihre Belege und Pins wurden in dieser Runde **nicht** erneuert. Critical, Public-Fallbacks und Ausnahmeerfassung bleiben offen wegen Entscheidungen des Inhabers (Abschnitt 6, Entscheidungen 1 bis 3). Keine weiteren Pins, keine Seiten- oder Quelldateien geändert.
