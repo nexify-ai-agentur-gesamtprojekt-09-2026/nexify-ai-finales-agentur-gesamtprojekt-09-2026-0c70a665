@@ -60,6 +60,12 @@ try{
    const vis=[...h.querySelectorAll('a,button,summary')].filter(e=>{const r=e.getBoundingClientRect();const s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'});
    return {links:Math.round(Math.min(...vis.map(e=>e.getBoundingClientRect().left))-pl),rechts:Math.round(pr-Math.max(...vis.map(e=>e.getBoundingClientRect().right)))}});
   const min=w<=640?8:20;record(`Kopfleiste Abstand @${w}`,g.links>=min&&g.rechts>=min,'Logo klebt nicht am Rand',g);await page.close();}
+ // 6. Shop-Dienst: ohne ihn zeigt TEILEKLAR kein Sortiment, keinen Warenkorb und keine Kasse (Befund 14.11.2026: 503 auf allen /api/shop/*).
+ {const page=await browser.newPage();
+  for(const path of ['/api/shop/status','/api/shop/products?page_size=1']){let status=0,grund=null;
+   try{const r=await page.request.get(base+path,{timeout:30000});status=r.status();if(status!==200){try{grund=(await r.json())?.detail?.reason??null;}catch{}}}catch{status=-1;}
+   record(`Shop-Dienst ${path.split('?')[0]}`,status===200,'Echte Kundenwege: Sortiment lädt',{status,grund});}
+  await page.close();}
 }finally{await browser.close();}
 
 const failed=results.filter(r=>!r.ok);
