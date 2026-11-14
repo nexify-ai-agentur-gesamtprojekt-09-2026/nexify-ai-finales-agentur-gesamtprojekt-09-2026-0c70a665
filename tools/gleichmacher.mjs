@@ -9,6 +9,7 @@
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 const {chromium}=require('playwright');
+import {ruhigMessen} from './kopfleiste-regel.mjs';
 const args=process.argv.slice(2);
 const base=(args.find(a=>!a.startsWith('--'))||'https://nexifyai.de').replace(/\/$/,'');
 const widths=(args.find(a=>a.startsWith('--breiten='))?.slice(10)||'390,1440').split(',').map(Number).filter(Boolean);
@@ -59,13 +60,23 @@ const form=e=>typeof e==='string'?{sel:e}:Array.isArray(e)?{sel:e[0],norm:e[1]}:
 // vom Elternlayout ab, und die Startseite nutzt dieselbe Abschnittsueberschrift selbst in mehreren Layouts.
 const PLAN=Object.fromEntries(Object.entries(BAUSTEINE).map(([name,e])=>{const f=form(e);return [name,{...f,eigenschaften:f.eigenschaften||EIGENSCHAFTEN.filter(x=>x!=='min-height'||name.includes('Schalter'))}];}));
 // Je Baustein eine Liste von Messungen (ein Eintrag, bei `alle` mehrere). Unsichtbare Vorkommen zaehlen nicht.
-const messen=(page)=>page.evaluate(plan=>{
- const out={};
+// `laufend` zaehlt laufende Uebergaenge auf einer gemessenen Eigenschaft eines gemessenen Elements.
+const messenRoh=plan=>{
+ const out={},gemessen=new Map();
  for(const [name,p] of Object.entries(plan)){const treffer=p.alle?[...document.querySelectorAll(p.sel)]:[document.querySelector(p.sel)].filter(Boolean);const werte=[];
   for(const el of treffer){const r=el.getBoundingClientRect();const s=getComputedStyle(el);if(r.width===0||r.height===0||s.display==='none'||s.visibility==='hidden')continue;
+   for(const e of p.eigenschaften)(gemessen.get(el)||gemessen.set(el,new Set()).get(el)).add(e);
    werte.push(Object.fromEntries(p.eigenschaften.map(e=>[e,s.getPropertyValue(e)])));}
   if(werte.length)out[name]=werte;}
- return out;},PLAN);
+ const laufend=document.getAnimations().filter(a=>a instanceof CSSTransition&&a.playState==='running'&&!a.effect?.pseudoElement&&gemessen.get(a.effect?.target)?.has(a.transitionProperty)).length;
+ return {out,laufend};};
+// Gemessen wird erst, wenn kein solcher Uebergang mehr laeuft und zwei Messungen in Folge gleich sind. Befund 14.11.2026:
+// gegen eine langsam antwortende lokale Laufzeit standen Innenabstaende der Kopfleiste als Zwischenwerte im Ergebnis
+// (11,43 bis 11,92 statt 12 px bei 1440 px); die Leiste wechselt sie mit `transition:padding`. Die Toleranz bleibt null:
+// kommt eine Seite in der Frist nicht zur Ruhe, ist das ein Fehler des Laufs (Exit 1) und kein gemessener Wert.
+const messen=async(page,ort)=>{const {wert,ruhig}=await ruhigMessen(page,messenRoh,{arg:PLAN,bereit:m=>m.laufend===0});
+ if(!ruhig)fehler.push({...ort,grund:'Seite kommt nicht zur Ruhe: Uebergang laeuft noch oder Messungen schwanken'});
+ return wert?.out||{};};
 
 // Gleicher Ausgangszustand auf jeder Seite: Die Chat-Scheibe oeffnet sich ab 1200 px nur auf NeXify-Seiten von selbst
 // (Workspace.tsx). Offen ist der Inhalt schmaler, und die Schrift waechst mit der Behaelterbreite. Ohne festen Zustand
@@ -88,13 +99,13 @@ try{
  for(const w of widths){
   const page=await neueSeite({width:w,height:900});
   await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:45000});await page.waitForTimeout(600);
-  const norm=await messen(page);
+  const norm=await messen(page,{breite:w,seite:'/'});
   if(!Object.keys(norm).length){fehler.push({breite:w,grund:'Norm nicht messbar: Startseite zeigt keinen Baustein'});await page.close();continue;}
   // Zweite Normseiten: nur fuer Bausteine mit `seite`; alle uebrigen Normen bleiben die der Startseite.
   for(const [name,p] of Object.entries(PLAN)){if(!p.seite)continue;
-   try{await page.goto(base+p.seite,{waitUntil:'domcontentloaded',timeout:45000});await page.waitForTimeout(600);const dort=await messen(page);if(dort[name])norm[name]=dort[name];else fehler.push({breite:w,baustein:name,grund:'Norm nicht messbar auf '+p.seite});}catch{fehler.push({breite:w,baustein:name,grund:'Normseite nicht ladbar: '+p.seite});}}
+   try{await page.goto(base+p.seite,{waitUntil:'domcontentloaded',timeout:45000});await page.waitForTimeout(600);const dort=await messen(page,{breite:w,seite:p.seite});if(dort[name])norm[name]=dort[name];else fehler.push({breite:w,baustein:name,grund:'Norm nicht messbar auf '+p.seite});}catch{fehler.push({breite:w,baustein:name,grund:'Normseite nicht ladbar: '+p.seite});}}
   for(const route of routes){let ist=null;
-   try{const r=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});if((r?.status()??0)!==200)continue;await page.waitForTimeout(350);ist=await messen(page);}catch{fehler.push({breite:w,seite:route,grund:'nicht ladbar'});continue;}
+   try{const r=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});if((r?.status()??0)!==200)continue;await page.waitForTimeout(350);ist=await messen(page,{breite:w,seite:route});}catch{fehler.push({breite:w,seite:route,grund:'nicht ladbar'});continue;}
    for(const [name,liste] of Object.entries(ist)){const p=PLAN[name],soll=norm[p.norm||name]?.[0];if(!soll)continue;
     // Die Startseite ist die Norm; auf ihr selbst zaehlen nur weitere Vorkommen (`alle`) und Bausteine mit fremder Norm.
     if(route==='/'&&!p.alle&&!p.norm&&!p.seite)continue;

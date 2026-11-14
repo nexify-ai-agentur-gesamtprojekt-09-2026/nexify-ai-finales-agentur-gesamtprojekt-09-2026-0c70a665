@@ -5,6 +5,7 @@
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 const {chromium}=require('playwright');
+import {kopfleisteUrteil,kopfleisteMessen,ruhigMessen} from './kopfleiste-regel.mjs';
 const base=(process.argv[2]||'https://nexifyai.de').replace(/\/$/,'');
 // Alle Seiten: Start- und Shop-Startseite plus jede dort verlinkte interne Seite (Kopf, Fuß, Seitenübersicht).
 let routes=['/','/teileklar'];
@@ -54,12 +55,13 @@ try{
   const played=[];for(let i=0;i<3;i++){const card=page.locator('.hc-gallery-card').nth(i);await card.scrollIntoViewIfNeeded();const btn=card.locator('.atelier-film-controls button').first();
    try{await btn.click({timeout:5000});await page.waitForTimeout(1500);played.push(await card.locator('video').evaluate(x=>!x.paused));}catch{played.push(false);}}
   record('Galerie-Filme starten auf Klick',played.every(Boolean),'Galerie = Hero-Einbettung, bedienbar',{played});await page.close();}
- // 5. Kopfleiste beim Blättern: Inhalt hält Abstand zur Glaskante
- for(const w of [360,390,768,1120,1440,1835]){const page=await browser.newPage({viewport:{width:w,height:900}});await page.goto(base+'/',{waitUntil:'domcontentloaded'});await page.waitForTimeout(800);await page.evaluate(()=>scrollTo(0,600));await page.waitForTimeout(1000);
-  const g=await page.evaluate(()=>{const h=document.querySelector('.site-header');const bf=getComputedStyle(h,'::before');const hb=h.getBoundingClientRect();const pl=hb.left+(parseFloat(bf.left)||0),pr=hb.right-(parseFloat(bf.right)||0);
-   const vis=[...h.querySelectorAll('a,button,summary')].filter(e=>{const r=e.getBoundingClientRect();const s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'});
-   return {links:Math.round(Math.min(...vis.map(e=>e.getBoundingClientRect().left))-pl),rechts:Math.round(pr-Math.max(...vis.map(e=>e.getBoundingClientRect().right)))}});
-  const min=w<=640?8:20;record(`Kopfleiste Abstand @${w}`,g.links>=min&&g.rechts>=min,'Logo klebt nicht am Rand',g);await page.close();}
+ // 5. Kopfleiste beim Blättern: rechts liegt das Glas am letzten Knopf an (Soll 12 px ±1), links hält das Logo Abstand,
+ //    nichts ragt aus dem Glas. Inhaberbefund 14.11.2026, PR 171 (b50d0c6); vorher galt rechts die Untergrenze 20 px.
+ //    Regel und Messung: tools/kopfleiste-regel.mjs. Gemessen wird erst nach dem Ende des Übergangs (padding/inset, 0,32 s).
+ for(const w of [360,390,768,1120,1440,1835]){const page=await browser.newPage({viewport:{width:w,height:900}});await page.goto(base+'/',{waitUntil:'domcontentloaded'});await page.waitForTimeout(800);await page.evaluate(()=>scrollTo(0,600));await page.waitForTimeout(400);
+  const {wert:g,ruhig,messungen}=await ruhigMessen(page,kopfleisteMessen,{bereit:m=>m.geblaettert&&m.laufend===0});
+  const u=ruhig?kopfleisteUrteil(w,g):{ok:false,gruende:['Kopfleiste kommt nicht zur Ruhe oder ist nicht messbar']};
+  record(`Kopfleiste Abstand @${w}`,u.ok,'Glas liegt rechts am Knopf an (12 px), Logo klebt nicht am Rand',{...g,messungen,gruende:u.gruende});await page.close();}
  // 6. Shop-Dienst: ohne ihn zeigt TEILEKLAR kein Sortiment, keinen Warenkorb und keine Kasse (Befund 14.11.2026: 503 auf allen /api/shop/*).
  {const page=await browser.newPage();
   for(const path of ['/api/shop/status','/api/shop/products?page_size=1']){let status=0,grund=null;
