@@ -12,6 +12,8 @@
  * Störungen: Der Besucher erhält nur den festen Code chat_llm_failed. Die Ursache steht als
  * eine geheimnisfreie JSON-Zeile im Serverprotokoll (siehe logChatFailure).
  * Keine Secrets im Code, keine erfundenen Werte.
+ * Leitungsweg: Standard ist der 9router. Nur mit CHAT_LLM_ROUTE=cloudflare-ai-gateway läuft der
+ * Aufruf über das Cloudflare AI Gateway (./llm-gateway.ts); ein unbekannter Wert ergibt 503.
  * Die Modellkennung geht nicht an den Browser (Inhaberentscheidung 13.11.2026, DECISIONS.md D-010);
  * sie bleibt in der Ablage der Nachricht.
  */
@@ -45,6 +47,7 @@ import {
   type OutputGuard,
 } from '../../../lib/chat-guidance';
 import { chatRateLimit, clientKey } from '../../../lib/chat-rate-limit';
+import { chatLlmRoute, gatewayConfigured, missingGatewayEnv, streamGatewayCompletion, type ChatLlmRoute } from './llm-gateway';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -176,10 +179,22 @@ export async function POST(request: Request): Promise<Response> {
     });
     return err('same_origin_required', 403);
   }
-  if (!chatLlmConfigured()) {
-    logChatRejected({ status: 503, cause: 'not_configured', missing: missingLlmEnv(), deployment: deploymentKind() });
+  let llmRoute: ChatLlmRoute;
+  try {
+    llmRoute = chatLlmRoute();
+  } catch {
+    // Unbekannter Wert in CHAT_LLM_ROUTE: nicht raten, nicht auf den Standard zurückfallen.
+    logChatRejected({ status: 503, cause: 'route_invalid', deployment: deploymentKind() });
     return err('chat_llm_not_configured', 503);
   }
+  const viaGateway = llmRoute === 'cloudflare-ai-gateway';
+  if (viaGateway ? !gatewayConfigured() : !chatLlmConfigured()) {
+    logChatRejected(viaGateway
+      ? { status: 503, cause: 'not_configured', missing: missingGatewayEnv(), deployment: deploymentKind(), llm_route: llmRoute }
+      : { status: 503, cause: 'not_configured', missing: missingLlmEnv(), deployment: deploymentKind() });
+    return err('chat_llm_not_configured', 503);
+  }
+  const complete = viaGateway ? streamGatewayCompletion : streamChatCompletion;
 
   const declared = Number(request.headers.get('content-length') || '0');
   if (declared > MAX_BODY_BYTES) return err('body_too_large', 413);
@@ -258,7 +273,7 @@ export async function POST(request: Request): Promise<Response> {
   // ---- Nicht-gestreamte JSON-Antwort ----
   if (!wantsStream) {
     try {
-      for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) guard.push(chunk);
+      for await (const chunk of complete(llmMessages, { signal: request.signal })) guard.push(chunk);
       guard.finish();
     } catch (error) {
       logChatFailure('llm', error, logContext);
@@ -287,7 +302,7 @@ export async function POST(request: Request): Promise<Response> {
       try {
         send({ type: 'start', conversationId, persisted: isPersisted(), guidance: CHAT_GUIDANCE_VERSION });
         try {
-          for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
+          for await (const chunk of complete(llmMessages, { signal: request.signal })) {
             const safe = guard.push(chunk);
             if (safe) send({ type: 'delta', text: safe });
           }
