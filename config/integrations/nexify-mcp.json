@@ -1,0 +1,43 @@
+{
+  "$kommentar": "Entwurf (Stand 14.11.2026). Eigener MCP-Server der NeXify AI FACTORY fuer Composio. Nichts live, Schalter standardmaessig AUS. Nur nicht-geheime Angaben; Werte der Umgebungsvariablen stehen nie im Repo.",
+  "composio": {
+    "toolkit": "CUSTOM_NEXIFY_AI_FACTORY_MCP",
+    "geplanteAdresse": "https://mcp.nexifyai.cloud",
+    "endpunkt": "https://mcp.nexifyai.cloud/mcp",
+    "status": "entwurf-nicht-registriert"
+  },
+  "server": {
+    "name": "nexify-mcp",
+    "implementierung": "apps/web/app/mcp/route.ts, apps/web/lib/mcp-server.ts",
+    "transport": "streamable-http, zustandslos (POST, kein GET-Strom, keine Mcp-Session-Id)",
+    "protokollVersionen": ["2026-07-28", "2025-11-25", "2025-06-18", "2025-03-26"],
+    "hinweisVersionen": "Neue Fassung 2026-07-28 mit Kopf-/Body-Pruefung und server/discover; initialize-basierte Clients werden zustandslos mitbedient."
+  },
+  "auth": {
+    "verfahren": "schalter-und-kopf-schluessel",
+    "oauth": false,
+    "schalter": "NEXIFY_MCP",
+    "schluessel": "MCP_ACCESS_TOKEN",
+    "kopf": ["Authorization: Bearer <Schluessel>", "X-Nexify-MCP-Key: <Schluessel>"],
+    "antworten": { "schalterAus": 503, "schluesselNichtGesetzt": 503, "schluesselFalschOderFehlt": 401, "falscheMethode": 405, "origin": 403 },
+    "oauthHinweis": "Kein selbstgebauter Autorisierungsserver. Ein OAuth-Weg ist eine getrennte Sicherheitsentscheidung (eigener IdP)."
+  },
+  "discovery": {
+    "/.well-known/oauth-protected-resource": "RFC 9728, nur bei NEXIFY_MCP an; ohne authorization_servers",
+    "/.well-known/oauth-authorization-server": "bewusst 404 (no_authorization_server, auth=flag+header)"
+  },
+  "umgebungsvariablen": {
+    "NEXIFY_MCP": "Schalter, nur '1' oder 'true' schaltet an (Standard aus)",
+    "MCP_ACCESS_TOKEN": "geheim, mindestens 24 Zeichen, nur aus der Umgebung",
+    "SHOP_API_BASE_URL": "Basis-URL der oeffentlichen Shop-/Werkstatt-API (https oder Loopback-http)",
+    "MCP_ALLOWED_ORIGINS": "optional, kommagetrennte erlaubte Browser-Origins (Standard keine)",
+    "MCP_PUBLIC_ORIGIN": "optional, https-Origin fuer das Discovery-Dokument (Standard https://mcp.nexifyai.cloud)"
+  },
+  "werkzeuge": [
+    { "name": "nexify_katalog_suche", "upstream": "GET /api/shop/products", "eingabe": ["q<=120", "kategorie:int", "nur_verfuegbar:bool", "nur_mit_freigegebenem_preis:bool", "seite 1..50", "seitengroesse 1..20"] },
+    { "name": "nexify_werkstatt_suche", "upstream": "GET /api/workshops/search", "eingabe": ["q 2..80 (PLZ/Ort)", "umkreis_km enum 10|25|50|100"] },
+    { "name": "nexify_status", "upstream": "GET /api/shop/status", "eingabe": [] }
+  ],
+  "grenzen": { "anfrageBytes": 32768, "upstreamBytes": 524288, "antwortZeichen": 24000, "treffer": 20, "ratenbegrenzungProMinute": 60, "upstreamTimeoutMs": 8000 },
+  "regeln": ["nur lesend (GET), alle Werkzeuge readOnlyHint=true, destructiveHint=false", "kein Schreibweg, keine Admin-Funktion, keine Zahlung, keine Kundendaten", "unbekannte Argumente werden abgewiesen", "keine internen Fehlertexte in Antworten"]
+}
