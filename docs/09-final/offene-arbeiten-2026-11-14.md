@@ -278,6 +278,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); Linear, Team „Nexifyai“, Abruf 14.11.2026
 - **Stand 14.11.2026, 20:40 UTC:** Ursache belegt (IST, `gh api …/check-runs/<id>/annotations`, 20:34 UTC): GitHub meldet am Lauf „The job was not started because an Actions budget is preventing further use.“ Alle Läufe auf `main` (`500c52d`) und auf den Zweigen enden nach 3 bis 5 Sekunden ohne Schritt mit „failure“. Zu tun (nur Inhaber): Actions-Budget und Abrechnungseinstellungen prüfen. Bleibt BLOCKIERT.
+- **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, `gh api …/commits/48f5072/check-runs` und Anmerkungen, 21:47 UTC): Die Läufe auf `48f5072` (CI, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“, Anmerkung wie oben. Bleibt BLOCKIERT.
 
 #### OA-023 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
 
@@ -325,6 +326,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
 - **Stand 14.11.2026, 20:40 UTC:** IST (`gh api …/pulls?state=open`, 20:35 UTC): 26 Pull Requests offen, bei 22 ist Auto-Merge eingeschaltet, neu auch bei PR 184 (Cloudflare-Umzug). Wirksam wird das, sobald das Actions-Budget (OA-022) wieder Jobs zulässt. Frage an den Inhaber unverändert offen.
+- **Stand 14.11.2026, ca. 22:00 UTC:** IST (`gh api …/pulls?state=open`, 21:47 UTC): 31 Pull Requests offen, bei 21 ist Auto-Merge eingeschaltet. Nicht mehr bei PR 184 (Cloudflare-Umzug; wer es abgeschaltet hat, ist hier nicht belegt); weiter nicht bei 105 und bei den acht Entwürfen 186, 187, 189, 190, 192, 193, 195, 197. Frage an den Inhaber unverändert offen.
 
 ### Priorität 2 Verkaufsfähiger Auftritt und Arbeitsplatz
 
@@ -1426,6 +1428,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); config/integrations/nexify-team-runtime-candidate.json (14.11.2026)
 - **Stand 14.11.2026, 20:40 UTC:** Belegt (IST, Kommentare von `chatgpt-codex-connector[bot]` an PR 185, 186 und 188, 19:52 bis 20:32 UTC): „You have reached your Codex usage limits for code reviews“; die Sicherheitsprüfung startet nicht, weil das zahlende Konto kein Guthaben hat. Bleibt BLOCKIERT, nur Inhaber.
+- **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, Kommentare von `chatgpt-codex-connector[bot]` an PR 198, Abruf 21:47 UTC): dieselbe Meldung zum Review-Kontingent und zur Sicherheitsprüfung. Bleibt BLOCKIERT.
 
 #### OA-147 · Bot-Team & Hermes · OFFEN
 
@@ -1729,7 +1732,7 @@ Herleitung: OFFEN 54 − 7 (037, 057, 059, 060, 062, 083, 150 nach ERLEDIGT) −
 - **Aufwand:** S für die Entscheidung, M für den Bau · **Ausführung:** Entscheidung nur Inhaber, Bau Fabrik
 - **Quellen:** docs/04-betrieb/anfrageweg-befund-2026-11-14.md; PR 181 (`81b0ae9`)
 
-#### OA-164 · Website · OFFEN
+#### OA-164 · Website · ERLEDIGT (OFFEN)
 
 - **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
 - **Ziel:** robots-Meta-Tag auf `/agb`, `/avv`, `/widerruf`, `/teileklar/kategorien` und `/teileklar/werkstatt` an die Indexierungsregel angleichen.
@@ -1738,6 +1741,7 @@ Herleitung: OFFEN 54 − 7 (037, 057, 059, 060, 062, 083, 150 nach ERLEDIGT) −
 - **Fertig, wenn:** Meta-Tag und Kopfzeile stimmen auf allen Seiten überein; betroffene Belege durch Lauf erneuert.
 - **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/04-betrieb/indexierung-freigabe-2026-11-14.md, Abschnitte 1 und 9; PR 182 (`08b0456`). Dazu aus Abschnitt 9 derselben Vorlage: TEILEKLAR-Seiten nennen hreflang für nl, fr und en, liefern aber nur deutschen Text; vor dem Shop-Schalter zu bereinigen.
+- **Stand 14.11.2026, ca. 22:00 UTC:** ERLEDIGT mit PR 198 (`48f5072`, gemergt 21:45 UTC). Das Meta-Tag der fünf Seiten kommt aus derselben Entscheidung wie die Kopfzeile (`apps/web/auth/page-robots.ts`); Text-Resize-, Katalog- und Shop-Beleg durch Browserlauf neu erhoben (`docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Abschnitt 11; `docs/09-final/pin-rebase-2026-11-14.md`, Abschnitt 12). Laut PR, hier nicht live nachgemessen. Reste als neue Einträge: Katalogseiten-Meta (OA-175), Observability-Belege (OA-176), Playwright-Fassung (OA-177), Commit-Feld der Belege (OA-178). Der hreflang-Satz oben bleibt offen und ist nicht Teil dieser Erledigung.
 
 #### OA-165 · Kundenberatung & Chat · ENTSCHEIDUNG NÖTIG
 
@@ -1789,7 +1793,7 @@ Herleitung: OFFEN 54 − 7 (037, 057, 059, 060, 062, 083, 150 nach ERLEDIGT) −
 - **Aufwand:** M · **Ausführung:** nur Inhaber, Nachführung Fabrik
 - **Quellen:** config/loesungsregister.json; docs/04-betrieb/loesungsregister.md; PR 180 (`0333c16`)
 
-#### OA-170 · Qualität & Belege · OFFEN
+#### OA-170 · Qualität & Belege · ERLEDIGT (OFFEN)
 
 - **Priorität:** 5 Betrieb und Skalierung
 - **Ziel:** Zwei Lehren zum Namensvergleich der Python-Suite in den Skill `nexify-zweig-und-pr` aufnehmen.
@@ -1798,3 +1802,112 @@ Herleitung: OFFEN 54 − 7 (037, 057, 059, 060, 062, 083, 150 nach ERLEDIGT) −
 - **Fertig, wenn:** Skill nennt beide Schritte; „Bekannte Lage“ berichtigt.
 - **Aufwand:** S · **Ausführung:** Fabrik
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 11; PR 185 (`2b8da63`); .claude/skills/nexify-zweig-und-pr/SKILL.md
+- **Stand 14.11.2026, ca. 22:00 UTC:** ERLEDIGT mit PR 194 (`2396553`, gemergt 20:59 UTC). IST am Repository: `.claude/skills/nexify-zweig-und-pr/SKILL.md` nennt in Schritt 3 die Vorher-Messung an `origin/main` im Wegwerf-Worktree nach beiden `generate-public-data`-Aufrufen, in Schritt 2 „Kein `git stash`“ und in „Bekannte Lage“ das Actions-Budget als Ursache.
+
+## 9. Nachführung 14.11.2026, ca. 22:00 UTC (Stand `origin/main` `48f5072`, PR 198)
+
+Auftrag der koordinierenden Sitzung wie in Abschnitt 8: erledigte Einträge kennzeichnen, neue Befunde anhängen, nichts löschen. Quelle: `git log origin/main` von `500c52d` bis `48f5072` (PR 194, 196, 198; alle gemergt durch `nexifyai-dev`), die dort genannten Dokumente, `gh api` (Pull Requests, Check-Läufe, Anmerkungen, Commit-Status, Kommentare; 21:47 UTC). Nicht neu gemessen: Website und Shop-Dienst in Produktion; die Live-Nachmessung zu PR 198 läuft laut Auftrag getrennt, ihr Ergebnis liegt dieser Nachführung nicht vor. Abschnitte 1 bis 8 sind bis auf zwei Zustände in Überschriften (alter Zustand in Klammern) und fünf Zeilen „Stand 14.11.2026, ca. 22:00 UTC“ unverändert.
+
+### 9.1 Geänderte Zustände
+
+| Eintrag | vorher | jetzt | Beleg |
+|---|---|---|---|
+| OA-164 | OFFEN | ERLEDIGT (Reste in OA-175 bis OA-178) | PR 198 `48f5072` |
+| OA-170 | OFFEN | ERLEDIGT | PR 194 `2396553` |
+
+Nur mit Stand-Zeile versehen: OA-022 (Actions-Budget, unverändert), OA-027 (Auto-Merge jetzt an 21 von 31 offenen PRs, nicht mehr an PR 184), OA-146 (Codex-Kontingent, unverändert). PR 196 (`d4f2032`) schließt eine Lücke, für die es keinen eigenen Eintrag gab (Google-Anmeldung wurde mit einem unbestätigten Passwortkonto zusammengeführt; `docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md`); seine Reste stehen in OA-171 bis OA-174. Die dort in Abschnitt 3 als offen geführte Anzeige der Ablehnung im Frontend ist mit PR 198 gebaut (`apps/web/components/shop/google-login-message.ts`, `AuthForms.tsx`); laut PR, nicht gegen ein gebundenes Backend gemessen.
+
+### 9.2 Zählung nach der Nachführung (178 Einträge)
+
+| Zustand | Stand `500c52d` | Stand `48f5072` |
+|---|---|---|
+| OFFEN | 46 | 49 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 37 | 38 |
+| ENTSCHEIDUNG NÖTIG | 58 | 60 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 8 | 10 |
+
+Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177, 178) = 49. BLOCKIERT 37 + 1 neu (173) = 38. ENTSCHEIDUNG NÖTIG 58 + 2 neue (172, 176) = 60. ERLEDIGT 8 + 2 = 10.
+
+### 9.3 Neue Einträge
+
+#### OA-171 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (vor dem Binden des Shop-Dienstes)
+- **Ziel:** Registrierung im Shop-Dienst erst nach Bestätigung der E-Mail-Adresse wirksam machen.
+- **Blocker:** `register` legt weiter ein Konto mit beliebiger, unbestätigter Adresse an und startet sofort eine Sitzung. Seit PR 196 ist ein solches Konto nicht mehr über Google erreichbar, die Registrierung mit fremder Adresse bleibt aber möglich. Gehört zu G04 im Register (`config/acceptance-coverage.json`, „E-Mail-/Workspaceverifizierung“). Heute hinter dem 503-Gate.
+- **Abhängigkeiten:** OA-173 (Mailversand), OA-067
+- **Fertig, wenn:** Ein neues Konto ist ohne bestätigte Adresse nicht anmeldbar; Tests belegen es.
+- **Aufwand:** M · **Ausführung:** Fabrik, eigener Zweig
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitt 3; PR 196 (`d4f2032`)
+
+#### OA-172 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (vor dem Binden des Shop-Dienstes)
+- **Ziel:** Google-Anmeldung über eine eigene OAuth-Anwendung mit Prüfung von `aud` und `email_verified` statt über einen fremden Vermittler; dazu entscheiden, ob Admin-Konten je über Google anmelden dürfen, und wie mit Bestandskonten mit `google_linked` und Passwort umzugehen ist.
+- **Blocker:** `GOOGLE_SESSION_URL` liefert nur `email` und `name`, kein Merkmal, ob Google die Adresse bestätigt hat, und keine Bindung an eine eigene Anwendungskennung; die Behebung aus PR 196 vertraut dem Vermittler bei neuen Konten weiter. Inhaberentscheidungen 1 bis 3 im Befund.
+- **Abhängigkeiten:** OA-171, OA-067
+- **Fertig, wenn:** Inhaber hat entschieden; eigene Anbindung gebaut und getestet oder Vermittler ausdrücklich bestätigt; Bestandskonten geprüft.
+- **Aufwand:** S für die Entscheidung, M für den Bau · **Ausführung:** Entscheidung nur Inhaber, Bau Fabrik
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitte 3 und 4; PR 196 (`d4f2032`)
+
+#### OA-173 · Shop TEILEKLAR · BLOCKIERT
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (vor dem Binden des Shop-Dienstes)
+- **Ziel:** Belegen, dass die Mail zum Zurücksetzen des Passworts zugestellt wird.
+- **Blocker:** Seit PR 196 führt für Passwortkonten der einzige Weg zur Google-Anmeldung über „Passwort vergessen“. Ohne funktionierenden Versand (`mailer`, Resend; Zustand: `docs/04-betrieb/mailversand-zustand-2026-11-14.md`) bleibt der Inhaber des Kontos bei 409 stehen. Versandzugang in Production fehlt (siehe OA-163).
+- **Abhängigkeiten:** OA-163, OA-067
+- **Fertig, wenn:** Eine gekennzeichnete Testmail zum Zurücksetzen kommt an; Beleg abgelegt.
+- **Aufwand:** S · **Ausführung:** Zugang nur Inhaber, Messung Fabrik
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitte 3 und 4 (Punkt 4)
+
+#### OA-174 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 4 Kundenprojekte abnahmefähig (vor Inbetriebnahme des Portals)
+- **Ziel:** Beim Zurücksetzen des Passworts auch die Teammitglieder-Einträge behandeln, die ein Angreifer im Konto angelegt haben kann.
+- **Blocker:** Einträge in `team_members` (`apps/shop-api/shop/nexify_api.py`) überleben das Zurücksetzen. Heutige Wirkung laut Befund gering: Einladungen ohne eigene Anmeldung, `nexify_api` gehört nicht zur Vercel-Auslieferung (`MODULES` in `vercel_app.py`).
+- **Abhängigkeiten:** keine
+- **Fertig, wenn:** Verhalten entschieden und umgesetzt (widerrufen oder zur Bestätigung vorlegen), mit Test.
+- **Aufwand:** S · **Ausführung:** Fabrik
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitt 3
+
+#### OA-175 · Website · OFFEN
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** Meta-`robots` der Katalogseiten aus `pageMetadata` an die volle Indexierungsregel binden (Host, Umgebung, Shop-Schalter), nicht nur an `NEXIFY_INDEXING`.
+- **Blocker:** Mit eingeschaltetem Hauptschalter, aber falschem Host oder für `/teileklar` ohne Shop-Schalter zeigen diese Seiten `index, follow` bei sperrender Kopfzeile (lokal gesehen an `/impressum` mit Host `127.0.0.1`). Ohne Schalter tritt der Fall nicht auf; es gilt die strengere Kopfzeile. `apps/web/lib/page-seo.ts` ist als Verzeichnis an den Text-Resize-Beleg gebunden.
+- **Abhängigkeiten:** OA-031, OA-056
+- **Fertig, wenn:** Meta-Tag und Kopfzeile stimmen für alle Seiten in allen Schalterzuständen überein; betroffene Belege durch Lauf erneuert.
+- **Aufwand:** S · **Ausführung:** Fabrik (Paket C, ein Schreiber)
+- **Quellen:** docs/04-betrieb/indexierung-freigabe-2026-11-14.md, Abschnitt 11 („Grenze“); PR 198 (`48f5072`)
+
+#### OA-176 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Observability-Belege `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `-vite.json` wieder gültig machen.
+- **Blocker:** PR 198 hat `apps/web/app/teileklar/kategorien/page.tsx` und `werkstatt/page.tsx` geändert; beide Belege weichen dadurch neu ab (dazu weiter `apps/web/lib/contact-copy.ts`). Der Neulauf von `apps/site/tests/browser-exception-capture.mjs` scheitert in Schritt 4 (`.request-fallback` wird nach 30 s nicht sichtbar): Dem Harness fehlt eine Erwartung, die zum heutigen Chat passt (offene Entscheidung 3 aus Abschnitt 6 von `pin-rebase-2026-11-14.md`). `tools/check_browser_evidence.py` bleibt rot wie auf `main`.
+- **Abhängigkeiten:** OA-056
+- **Fertig, wenn:** Entscheidung zur Erwartung des Harness; bestandener Lauf; beide Belege neu erhoben; `tools/check_browser_evidence.py` ohne diesen Befund.
+- **Aufwand:** M · **Ausführung:** Entscheidung Inhaber, Lauf Fabrik
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitte 10 und 12; PR 198 (`48f5072`)
+
+#### OA-177 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Beleg-Läufe mit der festgelegten Playwright-Fassung ausführen.
+- **Blocker:** Die Läufe zu PR 198 liefen mit Playwright 1.63.0 aus der Laufumgebung; `.github/evidence-runner/package.json` legt 1.65.0 fest. Ob die Ergebnisse mit 1.65.0 gleich ausfallen, ist nicht gemessen.
+- **Abhängigkeiten:** OA-022 (der festgelegte Runner läuft in Actions)
+- **Fertig, wenn:** Die drei Belege aus PR 198 mit 1.65.0 bestätigt oder die Abweichung begründet festgehalten.
+- **Aufwand:** S · **Ausführung:** Fabrik
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12
+
+#### OA-178 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Belege tragen den Commit, an dem sie erhoben wurden, als eigenes Feld.
+- **Blocker:** `evidence/resize-2026-11-10/text-spacing.json`, `evidence/shop-ui-mock-2026-11-09/browser-catalog.json` und `browser-shop.json` enthalten kein Commit-Feld und den Erhebungs-Commit `68f84c0` nicht (eigene Prüfung 21:47 UTC); er steht nur in Commit-Text und `pin-rebase-2026-11-14.md`. Eine Änderung des Formats berührt die Prüfskripte und alle Belege dieser Art.
+- **Abhängigkeiten:** OA-056
+- **Fertig, wenn:** Format um ein Commit-Feld ergänzt, Prüfskript prüft es, künftige Läufe tragen es.
+- **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12; Commit-Text von PR 198
