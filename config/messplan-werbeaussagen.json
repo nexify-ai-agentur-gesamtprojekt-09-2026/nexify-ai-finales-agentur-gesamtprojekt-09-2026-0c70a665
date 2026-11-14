@@ -1,0 +1,147 @@
+{
+  "$kommentar": "Messplan für Werbeaussagen zur eigenen KI-Kette (»kosteneffizient«, »überragende Ergebnisse«). Stand 14.11.2026: Es gibt KEINE Messung und KEINEN Beleg. Dieser Plan legt fest, wie gemessen wird und was danach gesagt werden darf. Er enthält keine Preise und keine Messergebnisse. Auswertung: tools/messauswertung.py. Keine Rechtsberatung; jede Werbeaussage braucht die Freigabe des Inhabers und die rechtliche Prüfung (E12).",
+  "schema_version": 1,
+  "id": "nexify-messplan-werbeaussagen",
+  "version": "0.1.0",
+  "stand": "2026-11-14",
+  "status": "entwurf_keine_messung_durchgefuehrt",
+  "grundlagen": [
+    "docs/09-final/08-recht-und-compliance.md: L1 (Preisvorteil nur mit datiertem Preisvergleich), L2 (»trainiert« erst nach Live-Gang der Feinabstimmung), § 5 UWG Irreführung",
+    "AGENTS.md: Messwerte werden nicht erfunden; Beispiele sind gekennzeichnet",
+    "config/llm-policy.json: Modellregel der eigenen Kette",
+    "config/fragensatz.json: goldener Fragensatz für den Posteingang (andere Aufgabenklassen als hier, siehe offene_punkte)"
+  ],
+  "eigene_konfiguration": "eigene-kette",
+  "methodenfestlegung": {
+    "$kommentar": "Festlegungen der Methode, keine Messwerte. Vom Inhaber vor Messbeginn zu bestätigen und danach für diese Messung nicht mehr zu ändern. Strenger machen ist jederzeit erlaubt.",
+    "mindest_faelle_je_klasse": 100,
+    "begruendung_mindest_faelle": "Bei 100 Fällen liegt die Unsicherheit einer Erfüllungsquote im ungünstigsten Fall bei rund ±10 Prozentpunkten (95 %). Weniger Fälle tragen keine öffentliche Aussage.",
+    "konfidenzniveau": 0.95,
+    "gleichwertigkeit_toleranz_prozentpunkte": 5,
+    "begruendung_gleichwertigkeit": "»Gleichwertig« heißt: Die eigene Kette erfüllt höchstens 5 Prozentpunkte weniger Fälle als der Vergleich, gemessen an der unteren Grenze des Vertrauensbereichs.",
+    "max_abstand_preisliste_tage": 30,
+    "begruendung_preisliste": "Die Preisliste muss höchstens 30 Tage vor oder nach den Läufen abgerufen sein, sonst ist der Kostenvergleich nicht datiert im Sinne von L1.",
+    "bootstrap_ziehungen": 2000,
+    "bootstrap_startwert": 20261114
+  },
+  "aufgabenklassen": [
+    {
+      "id": "orientierungschat",
+      "name": "Orientierungschat",
+      "anwendungsfall": "Besucher fragt im Chat der Website, was NeXify für ihn tun kann und wohin er als Nächstes geht.",
+      "kriterien": [
+        {"id": "K1", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Die Antwort nennt mindestens eine in der Referenz des Falls genannte Seite oder Leistung und keine, die es laut config/site-map.json nicht gibt."},
+        {"id": "K2", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Die Antwort enthält keine Preis-, Termin- oder Leistungszusage, die nicht wörtlich aus config/fakten.json belegbar ist."},
+        {"id": "K3", "pflicht": true, "pruefart": "automatisch", "text": "Die Antwort ist in der Sprache der Anfrage verfasst."},
+        {"id": "K4", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Die Antwort nennt einen nächsten Schritt aus der Referenz (Seite, Formular oder Kontakt)."},
+        {"id": "K5", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Die Antwort gibt sich nicht als Mensch aus und nennt keine Kunden, Referenzen oder Zahlen, die in den Projektquellen nicht stehen."}
+      ]
+    },
+    {
+      "id": "briefing_erstellung",
+      "name": "Briefing-Erstellung",
+      "anwendungsfall": "Aus einem Gespräch entsteht ein bearbeitbares Briefing für die Anfrage.",
+      "kriterien": [
+        {"id": "K1", "pflicht": true, "pruefart": "automatisch", "text": "Alle Pflichtfelder des Briefings laut Referenz sind vorhanden und nicht leer."},
+        {"id": "K2", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Jeder Feldinhalt ist aus dem Gespräch belegbar; nichts ist hinzuerfunden."},
+        {"id": "K3", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Angaben, die im Gespräch fehlen, sind als offen markiert und nicht ergänzt."},
+        {"id": "K4", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Das Briefing enthält keine Preis- oder Terminzusage."}
+      ]
+    },
+    {
+      "id": "zuordnung_leistungen",
+      "name": "Zuordnung zu Leistungen",
+      "anwendungsfall": "Eine Anfrage wird den passenden Leistungen aus dem Leistungskatalog zugeordnet.",
+      "kriterien": [
+        {"id": "K1", "pflicht": true, "pruefart": "automatisch", "text": "Die zugeordneten Leistungen stimmen genau mit der Referenz überein; sieht die Referenz »keine Zuordnung, weiterleiten« vor, wird genau das ausgegeben."},
+        {"id": "K2", "pflicht": true, "pruefart": "automatisch", "text": "Es werden nur Kennungen verwendet, die im Leistungskatalog existieren."}
+      ]
+    },
+    {
+      "id": "zusammenfassung",
+      "name": "Zusammenfassung",
+      "anwendungsfall": "Ein längerer Text oder Gesprächsverlauf wird für die Weiterbearbeitung zusammengefasst.",
+      "kriterien": [
+        {"id": "K1", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Alle in der Referenz aufgeführten Kernaussagen sind enthalten."},
+        {"id": "K2", "pflicht": true, "pruefart": "abgleich_mit_referenz", "text": "Die Zusammenfassung enthält keine Aussage, die im Ausgangstext nicht steht."},
+        {"id": "K3", "pflicht": true, "pruefart": "automatisch", "text": "Zahlen, Namen und Daten sind unverändert aus dem Ausgangstext übernommen."},
+        {"id": "K4", "pflicht": true, "pruefart": "automatisch", "text": "Die im Fall vorgegebene Längenobergrenze ist eingehalten."}
+      ]
+    }
+  ],
+  "bewertung": {
+    "auftrag_erfuellt": "Ein Lauf gilt als erfüllt, wenn alle Pflichtkriterien seiner Aufgabenklasse mit Ja beantwortet sind und kein technischer Fehler vorliegt. Ein technischer Fehler oder Abbruch zählt als nicht erfüllt und bleibt in der Auswertung.",
+    "keine_geschmacksurteile": "Jedes Kriterium ist eine Ja/Nein-Frage gegen eine vorab geschriebene Referenz oder eine maschinelle Prüfung. Stil, Ton und »gefällt mir« werden nicht bewertet.",
+    "verblindung": "Menschliche Prüfer sehen nicht, welche Konfiguration die Antwort erzeugt hat. Läufe mit unverblindeter menschlicher Bewertung tragen keine öffentliche Aussage.",
+    "gleiche_faelle": "Alle Konfigurationen bearbeiten dieselben Fälle mit derselben Eingabe. Fälle und Referenzen werden vor dem ersten Lauf festgelegt und danach nicht mehr geändert.",
+    "kein_aussortieren": "Kein Lauf wird nachträglich entfernt. Wiederholungen werden vorab festgelegt und für alle Konfigurationen gleich oft ausgeführt."
+  },
+  "vergleichsgroessen": {
+    "kosten_je_auftrag": "Summe über alle Modellaufrufe eines Laufs: Eingabe-Token × Eingabepreis + Ausgabe-Token × Ausgabepreis. Die Token-Zahlen stammen aus dem Lauf-Protokoll, die Preise aus einer Preisliste, die als EINGABE mit Quelle und Abrufdatum übergeben wird. In diesem Plan und im Auswerteskript steht kein Preis.",
+    "kosten_je_erfuelltem_auftrag": "Gesamtkosten einer Konfiguration in einer Aufgabenklasse geteilt durch die Zahl der erfüllten Aufträge. Das ist die Größe für »kosteneffizient«.",
+    "latenz": "Zeit von der Anfrage bis zur vollständigen Antwort in Millisekunden, je Lauf; berichtet als Median und 95. Perzentil. Nur vergleichbar, wenn alle Konfigurationen vom selben Ort und im selben Zeitraum gemessen wurden.",
+    "erfuellungsgrad": "Anteil der erfüllten Aufträge je Aufgabenklasse, mit Vertrauensbereich. Zusätzlich der mittlere Anteil erfüllter Einzelkriterien.",
+    "nicht_enthalten": "Betriebskosten außerhalb der Modellaufrufe (Server, Personal, Einrichtung) sind nicht Teil dieser Messung. Eine Aussage über Gesamtkosten trägt sie nicht."
+  },
+  "protokollformat": {
+    "laeufe": "JSON Lines, eine Zeile je Lauf.",
+    "felder_lauf": {
+      "lauf_id": "eindeutige Kennung des Laufs",
+      "datum": "JJJJ-MM-TT des Laufs",
+      "aufgabenklasse": "eine id aus aufgabenklassen",
+      "fall_id": "Kennung des Prüffalls",
+      "konfiguration": "»eigene-kette« oder der Name der Vergleichskonfiguration",
+      "wiederholung": "ganze Zahl ab 1",
+      "aufrufe": "Liste der Modellaufrufe: preis_schluessel, eingabe_tokens, ausgabe_tokens",
+      "latenz_ms": "Zahl",
+      "fehler": "true, wenn der Lauf technisch scheiterte",
+      "kriterien": "Objekt mit genau den Kriterien der Aufgabenklasse, je true oder false",
+      "bewertung": "Objekt: art (»automatisch« oder »mensch«), verblindet (true/false)",
+      "synthetisch": "true für erfundene Beispieldaten, sonst false"
+    },
+    "preisliste": {
+      "quelle": "Fundstelle der Preise (Adresse oder Dokument)",
+      "abgerufen_am": "JJJJ-MM-TT",
+      "waehrung": "z. B. EUR oder USD",
+      "synthetisch": "true für erfundene Beispielpreise, sonst false",
+      "preise": "Objekt je preis_schluessel: eingabe_je_mio_tokens, ausgabe_je_mio_tokens"
+    }
+  },
+  "belegt_wenn": {
+    "voraussetzungen": [
+      "Keine synthetischen Daten in Läufen oder Preisliste.",
+      "Je Aufgabenklasse und Konfiguration mindestens mindest_faelle_je_klasse Fälle.",
+      "Eigene Kette und Vergleich haben dieselben Fälle bearbeitet.",
+      "Jede menschliche Bewertung war verblindet.",
+      "Preisliste mit Quelle und Abrufdatum, höchstens max_abstand_preisliste_tage von den Läufen entfernt."
+    ],
+    "kosteneffizient": "Je Aufgabenklasse: Die eigene Kette ist gleichwertig im Erfüllungsgrad (untere Grenze des Unterschieds nicht unter der Toleranz) UND die Kosten je erfülltem Auftrag liegen unter denen des Vergleichs (obere Grenze des Kostenverhältnisses unter 1). Die Aussage gilt nur für die Aufgabenklassen, in denen beides erfüllt ist.",
+    "bessere_ergebnisse": "Je Aufgabenklasse: Die untere Grenze des Unterschieds im Erfüllungsgrad (eigene Kette minus Vergleich) liegt über 0.",
+    "sonst": "Nicht belegt. Die Aussage wird nicht verwendet."
+  },
+  "erlaubte_aussagen_nach_beleg": {
+    "$kommentar": "Vorlagen. Erst verwenden, wenn die Auswertung »belegt« ausweist UND Inhaber und Rechtsprüfung den konkreten Satz freigegeben haben. Die Platzhalter füllt die Auswertung.",
+    "kosteneffizient": "In unserem Vergleichstest vom {messdatum} mit {faelle} Prüffällen ({aufgabenklasse}) kostete ein erfüllter Auftrag mit unserer KI-Kette {ersparnis_prozent} % weniger als mit {vergleich}, bei gleichwertigem Erfüllungsgrad. Preise laut {preisquelle}, Stand {preisdatum}.",
+    "bessere_ergebnisse": "In unserem Vergleichstest vom {messdatum} erfüllte unsere KI-Kette {quote_eigene} % von {faelle} Prüffällen ({aufgabenklasse}); {vergleich} erfüllte {quote_vergleich} %.",
+    "pflichtangaben": "Immer mit Messdatum, Zahl der Prüffälle, Aufgabenklasse, Namen des Vergleichs und – bei Kosten – Preisquelle mit Stand. Messplan und Ergebnisbericht müssen auf Nachfrage vorgelegt werden können."
+  },
+  "nicht_behaupten": [
+    "»überragend«, »beste«, »führend«, »unschlagbar«, »Nr. 1« oder andere Spitzenstellungen: Ein Vergleich mit einzelnen Konfigurationen belegt keine Spitzenstellung.",
+    "»kosteneffizient«, »günstiger« oder »um ein Vielfaches günstiger« ohne Vergleich, Datum und Preisquelle (L1).",
+    "Aussagen für Aufgaben, die nicht gemessen wurden, oder pauschal für »die KI« von NeXify.",
+    "Aussagen über Gesamtkosten, Einsparungen beim Kunden oder Zeitgewinn: Das misst dieser Plan nicht.",
+    "»trainiert« vor dem Live-Gang einer Feinabstimmung (L2).",
+    "Jede Zahl aus synthetischen Beispieldaten oder aus einem Lauf, der die Voraussetzungen nicht erfüllt.",
+    "Eine belegte Aussage weiterverwenden, nachdem sich Modell, Kette, Preisliste oder Vergleich geändert haben: dann neu messen."
+  ],
+  "offene_punkte": [
+    {"id": "M1", "punkt": "Vergleichsbasis festlegen: Gegen welche Konfigurationen wird gemessen?", "wer": "Inhaber"},
+    {"id": "M2", "punkt": "Die Modellregel (config/llm-policy.json) erlaubt für NeXify-gesteuerte Aufrufe nur das festgelegte Modell. Vergleichsläufe mit anderen Modellen brauchen eine ausdrückliche, befristete Ausnahme für die Messung und ein freigegebenes Budget.", "wer": "Inhaber"},
+    {"id": "M3", "punkt": "Prüffälle und Referenzen für die vier Aufgabenklassen gibt es noch nicht. config/fragensatz.json deckt den Posteingang ab, nicht diese Klassen.", "wer": "Fachlich"},
+    {"id": "M4", "punkt": "Methodenfestlegung (Fallzahl, Toleranz, Abstand der Preisliste) bestätigen.", "wer": "Inhaber"},
+    {"id": "M5", "punkt": "Ein Werkzeug, das Läufe ausführt und im Protokollformat schreibt, existiert nicht. Dieses Paket wertet nur vorhandene Protokolle aus.", "wer": "Technik"},
+    {"id": "M6", "punkt": "Wer prüft verblindet, und wie wird die Verblindung nachgewiesen?", "wer": "Inhaber"},
+    {"id": "M7", "punkt": "Wiedervorlage: Wann wird eine belegte Aussage spätestens neu gemessen?", "wer": "Inhaber"},
+    {"id": "M8", "punkt": "Rechtliche Prüfung jedes konkreten Werbesatzes vor Veröffentlichung (E12).", "wer": "Recht"}
+  ]
+}
