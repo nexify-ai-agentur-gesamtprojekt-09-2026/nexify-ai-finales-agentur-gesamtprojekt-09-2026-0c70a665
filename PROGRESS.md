@@ -14,7 +14,7 @@ Kundenprojekt Studienkolleg Aachen (IST laut Rückmeldungen der Kundensitzungen,
 
 Gestaltung: Der Inhaber lässt die Feinoptimierung in Lovable laufen. Dafür besteht der Zweig `lovable/feinoptimierung` (Stand `e0c7e38`). Ergebnisse von dort gehen nicht direkt nach `main`, sondern durch Gleichmacher, Live-Prüfung und die Gates (D-012).
 
-Veraltete Pins (OFFEN, nur durch echten Browserlauf zu erneuern): `public-experience.test.mjs`, `PublicInstallation.tsx`, `generate-public-data.mjs`, `docs/09-final/11-designsystem-definition.md`. `browser-public-experience.mjs` fragt noch nach `scene-video`.
+Veraltete Pins (Stand 14.11.2026, Zweig `claude/pins-nach-159` auf `078bc31`, Quelle und Einzelheiten: `docs/09-final/pin-rebase-2026-11-14.md` Abschnitt 10): Nach PR 159 sind elf Pins mit Browserlauf oder grünem Test nachgezogen, darunter `public-experience.test.mjs`, `PublicInstallation.tsx` und `generate-public-data.mjs`; `browser-public-experience.mjs` prüft die Filme jetzt am Baustein `AtelierFilm` statt an `scene-video`. OFFEN: 28 Pins im Register sind veraltet, darunter `docs/09-final/11-designsystem-definition.md`, `config/design-tokens.json`, `packages/tokens/tokens.*` und `config/page-explainers.json`; sie werden nur mit Browserlauf, passendem grünem Test oder Freigabe des Inhabers erneuert.
 
 ## Stand 14.11.2026, ca. 11:25 UTC · Wissensgraph, offene Entwürfe, Sichtung der Pull Requests, Regelbetrieb
 

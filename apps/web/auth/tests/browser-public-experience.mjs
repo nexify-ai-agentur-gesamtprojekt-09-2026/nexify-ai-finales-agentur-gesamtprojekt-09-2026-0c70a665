@@ -23,19 +23,19 @@ const env={...process.env,NODE_ENV:'production',APP_ENV:'production'};delete env
 const child=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{cwd:root+'apps/web',env,stdio:['ignore','pipe','pipe']});
 let log='';child.stdout.on('data',b=>{log+=b;});child.stderr.on('data',b=>{log+=b;});
 const installationOnly=process.env.TEST_PUBLIC_INSTALLATION==='enabled';
-const origin=`http://127.0.0.1:${port}`,report={scope:'local Next build;no provider or tenant acceptance',routes:[],private:[],external:0,mutations:0,pageErrors:[],pwa:{},navigation:false,source_sha256:sourceHashes,auth_mobile:[],videos:[],scene_sha256:{}};
+const origin=`http://127.0.0.1:${port}`,report={scope:'local Next build;no provider or tenant acceptance',routes:[],private:[],external:0,mutations:0,pageErrors:[],pwa:{},navigation:false,source_sha256:sourceHashes,auth_mobile:[],videos:[],films:[],scene_sha256:{}};
 let browser;
 try{
  for(let n=0;n<100;n++){try{if((await fetch(origin)).ok)break;}catch{}if(n===99)throw Error('Next startup timeout');await new Promise(resolve=>setTimeout(resolve,100));}
  browser=await chromium.launch({headless:true});
  const context=await browser.newContext({viewport:{width:1280,height:900}});
  await context.route('**/*',route=>{const req=route.request(),u=new URL(req.url());if(u.origin!==origin&&u.origin!=='null'&&u.protocol!=='data:'&&u.protocol!=='blob:'){report.external++;return route.abort();}if(!['GET','HEAD'].includes(req.method())){report.mutations++;return route.abort();}return route.continue();});
- const page=await context.newPage();page.on('pageerror',e=>report.pageErrors.push(e.name));page.on('console',m=>{if(/hydration|hydrated but|did not match|An error occurred in one of your React components/i.test(m.text()))report.pageErrors.push('hydration_or_component_error');});
+ const page=await context.newPage();const mediaRequests=[];page.on('request',request=>{const u=new URL(request.url());if(u.origin===origin&&/\.(?:mp4|webm|m4v|mov)$/.test(u.pathname))mediaRequests.push(u.pathname);});page.on('pageerror',e=>report.pageErrors.push(e.name));page.on('console',m=>{if(/hydration|hydrated but|did not match|An error occurred in one of your React components/i.test(m.text()))report.pageErrors.push('hydration_or_component_error');});
  // Companion-/Avatar-Integrität (zielbild-v2): der AI-Fly-Oracle-Companion sitzt jetzt am reopen-chat-Launcher
  // (Panel desktop-default zu seit 2026-11, offen nur nach Nutzeraktion). Dekorativ (aria-hidden) und das Avatar-Asset lädt unbeschädigt mit 512px.
  if(!installationOnly){await page.goto(origin+'/');await page.locator('.workspace-shell').waitFor();{const closeButton=page.locator('[data-testid="chat-panel-close-button"]');if(await closeButton.isVisible())await closeButton.click();}const companion=page.locator('.reopen-chat .oracle-companion');await companion.waitFor();assert.equal(await companion.getAttribute('aria-hidden'),'true','companion stays decorative');await page.waitForFunction(()=>{const i=document.querySelector('.reopen-chat .oracle-companion img');return i&&i.complete&&i.naturalWidth>0;});assert.equal(await companion.locator('img').evaluate(i=>i.complete&&i.naturalWidth>=128&&Math.abs(i.naturalWidth-i.naturalHeight)<=2),true,'companion avatar loads unbroken, square and not tiny (atelier asset oracle-lossless.webp)');report.companion_avatar={aria_hidden:true,natural_width:await companion.locator('img').evaluate(i=>i.naturalWidth),location:'reopen-chat launcher',passed:true};}
  if(!installationOnly)for(const locale of ['de','nl'])for(const source of data.pages){if(locale==='nl'&&source.path.startsWith('/teileklar'))continue;
-  const shop=source.path.startsWith('/teileklar');await page.goto(origin+source.path);if(!shop)await page.locator('#locale').selectOption(locale);
+  const shop=source.path.startsWith('/teileklar');mediaRequests.length=0;await page.goto(origin+source.path);if(!shop)await page.locator('#locale').selectOption(locale);
   await page.waitForFunction(l=>document.documentElement.lang===l,shop?'de':locale);
   if(shop)await page.waitForFunction(()=>/TEILEKLAR/.test(document.title));else await page.waitForFunction(t=>document.title===t,source.localizedTitle[locale]+' · NeXify AI');
   assert.equal(await page.locator('.workspace-shell').count(),1);
@@ -54,7 +54,11 @@ try{
   // die vom Inhaber gelieferten Markenszenen (docs/design/scene-videos-2026-11-13.md). Schutzziel unveraendert: Es darf kein Medium
   // abspielbar werden, das nicht freigegeben ist. Statt "kein Video" gilt deshalb: jedes <video> zeigt auf eine dort gefuehrte Datei,
   // die ausgelieferten Bytes tragen die dort festgehaltene Pruefsumme, und ausserhalb des Hero der Startseite laedt und spielt nichts ohne Klick.
-  const videos=await page.locator('video').evaluateAll(nodes=>nodes.map(v=>({src:v.getAttribute('src'),sources:v.querySelectorAll('source').length,hero:!!v.closest('.identity-hero'),scene:v.classList.contains('scene-video'),autoplay:v.autoplay,paused:v.paused,preload:v.getAttribute('preload'),network:v.networkState,ready:v.readyState})));
+  // Baustein der Filme seit e0c7e38 (PR 159): AtelierFilm (.atelier-film) auf Start-, Inhalts- und Kontoseiten; SceneVideo (.scene-video) wird nicht mehr gerendert.
+  // Bedienleiste = die Schalter in .atelier-film-controls (button, und summary der Lautstaerke); Untertitel = <track> plus Schalter mit aria-pressed.
+  const videos=await page.locator('video').evaluateAll(nodes=>nodes.map(v=>{const film=v.closest('.atelier-film');const shown=node=>{const style=getComputedStyle(node),box=node.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&box.width>0&&box.height>0;};
+   const controls=film?[...film.querySelectorAll('.atelier-film-controls > button, .atelier-film-controls > details > summary')].map(node=>{const box=node.getBoundingClientRect();return {label:node.getAttribute('aria-label')||'',toggle:node.hasAttribute('aria-pressed'),shown:shown(node),disabled:node.disabled===true,width:Math.round(box.width),height:Math.round(box.height)};}):[];
+   return {src:v.getAttribute('src'),sources:v.querySelectorAll('source').length,hero:!!v.closest('.identity-hero'),film:!!film,nativeControls:v.controls,loop:v.loop,tracks:[...v.querySelectorAll('track')].map(track=>({kind:track.getAttribute('kind'),src:track.getAttribute('src'),lang:track.getAttribute('srclang')})),controls,autoplay:v.autoplay,paused:v.paused,preload:v.getAttribute('preload'),network:v.networkState,ready:v.readyState};}));
   for(const video of videos){
    assert.equal(video.sources,0,'video has one source only, the bound src attribute');
    const file=/^\/media\/scenes\/([a-z0-9-]+\.mp4)$/.exec(video.src||'')?.[1];
@@ -62,9 +66,47 @@ try{
    if(!servedScenes.has(file)){const response=await context.request.get(origin+video.src);assert.equal(response.status(),200,'scene is served: '+video.src);servedScenes.set(file,createHash('sha256').update(await response.body()).digest('hex'));}
    assert.equal(servedScenes.get(file),approvedScenes.get(file),'served scene bytes equal the recorded delivery: '+file);
    if(!(source.path==='/'&&video.hero)){assert.equal(video.autoplay,false,'only the home hero film may start by itself');assert.equal(video.paused,true,'film does not play without a click');}
-   // Markenszenen im Kopfbild der Unterseiten (SceneVideo): laut Lieferprotokoll wird vor dem Klick nichts geladen.
-   if(video.scene){assert.equal(video.preload,'none','scene loads nothing before a click');assert.equal(video.ready,0,'scene has loaded no media data before a click');}
+   // Bis e0c7e38 hing diese Pruefung an SceneVideo (.scene-video) und lief seither ins Leere. Dasselbe Schutzziel am heutigen Baustein:
+   // Jeder Film ausser dem selbst startenden Hero-Film der Startseite ist ein AtelierFilm, laedt vor dem Klick nichts und hat eine Bedienleiste.
+   const selfStarting=source.path==='/'&&video.hero;
+   if(!selfStarting){
+    assert.equal(video.film,true,'film outside the home hero uses the AtelierFilm building block: '+video.src+' on '+source.path);
+    assert.equal(video.preload,'none','film loads nothing before a click');assert.equal(video.ready,0,'film has loaded no media data before a click');
+    assert.equal(mediaRequests.filter(url=>url===video.src).length,0,'film bytes are not requested before a click: '+video.src+' on '+source.path);
+   }
+   if(video.film){
+    // Bedienleiste: mindestens der Abspielschalter, jeder Schalter sichtbar, benannt und bedienbar; die Bedienelemente des Browsers bleiben aus.
+    assert.ok(video.controls.length>=1,'film has a control bar: '+video.src+' on '+source.path);
+    for(const control of video.controls){assert.equal(control.shown,true,'film control is visible: '+control.label);assert.ok(control.label.trim().length>0,'film control has an accessible name');assert.equal(control.disabled,false,'film control is operable: '+control.label);}
+    assert.equal(video.nativeControls,false,'film is operated by its own control bar only');
+    // Untertitel: Eine Spur gibt es nur zusammen mit ihrem Schalter in der Bedienleiste, und die Spur wird als WebVTT ausgeliefert.
+    // Der Hero-Film der Startseite traegt eine Spur (32616db). Die uebrigen Szenen haben nach der Inhaberentscheidung vom 13.11.2026
+    // (docs/design/scene-videos-2026-11-13.md, "Bewusste Abweichung") keine; das wird hier nicht verlangt, nur festgehalten (report.films[].captions).
+    assert.equal(video.controls.filter(control=>control.toggle).length,video.tracks.length>0?1:0,'captions switch exists exactly when a captions track exists: '+video.src+' on '+source.path);
+    for(const track of video.tracks){assert.equal(track.kind,'captions');const response=await context.request.get(origin+track.src);assert.equal(response.status(),200,'captions track is served: '+track.src);assert.match(await response.text(),/^WEBVTT/,'captions track is WebVTT: '+track.src);}
+    if(selfStarting)assert.equal(video.tracks.length,1,'home hero film keeps its captions track');
+   }
   }
+  // Start nur auf Klick, einmal je Seite mit Film (de): Der Abspielschalter des ersten nicht selbst startenden Films startet ihn,
+  // erst dann werden seine Bytes angefordert; danach ist der Ton mit einem Klick auf den Tonschalter erreichbar (Auftrag vom 13.11.2026: "Sie sollen den Ton haben").
+  // Ob der erste Klick stumm oder mit Ton startet, wird nur festgehalten: Mit AtelierFilm startet er stumm, mit SceneVideo startete er mit Ton.
+  const filmRows=videos.filter(video=>video.film).map(video=>({path:source.path,locale,src:video.src,self_starting:source.path==='/'&&video.hero,preload:video.preload,controls:video.controls.map(control=>({label:control.label,width:control.width,height:control.height})),captions:video.tracks.length>0,loop:video.loop}));
+  const clickIndex=videos.findIndex(video=>video.film&&!(source.path==='/'&&video.hero));
+  if(locale==='de'&&clickIndex>=0){
+   const target=page.locator('video').nth(clickIndex),bar=target.locator('xpath=ancestor::div[contains(concat(" ",normalize-space(@class)," ")," atelier-film ")][1]').locator('.atelier-film-controls'),src=videos[clickIndex].src;
+   await bar.locator('button').first().scrollIntoViewIfNeeded();
+   assert.equal(await target.evaluate(v=>v.paused&&v.currentTime===0&&v.readyState===0),true,'film is still untouched right before the click');
+   await bar.locator('button').first().click();
+   await page.waitForFunction(v=>!v.paused&&v.currentTime>0&&v.readyState>=2,await target.elementHandle(),{timeout:15000});
+   assert.ok(mediaRequests.includes(src),'film bytes are requested after the click: '+src);
+   const afterPlay=await target.evaluate(v=>({muted:v.muted,error:v.error?.code??null}));assert.equal(afterPlay.error,null,'film plays without a media error');
+   const row=filmRows[videos.filter((video,index)=>video.film&&index<=clickIndex).length-1];row.click={started:true,muted_after_play_switch:afterPlay.muted};
+   if(await bar.locator('button').count()>=2&&afterPlay.muted){
+    await bar.locator('button').nth(1).click();await page.waitForFunction(v=>!v.muted&&!v.paused&&v.volume>0,await target.elementHandle(),{timeout:15000});row.click.sound_after_sound_switch=true;
+   }else assert.equal(afterPlay.muted,false,'a film without a separate sound switch starts with sound');
+   assert.equal(await page.locator('video').evaluateAll((nodes,index)=>nodes.filter((v,i)=>i!==index&&!v.paused&&!v.closest('.identity-hero')).length,clickIndex),0,'no other film starts with it');
+  }
+  report.films.push(...filmRows);
   if(source.path==='/'){const hero=videos.filter(video=>video.hero);assert.equal(hero.length,1,'home hero carries exactly one film');assert.equal(hero[0].src,'/media/scenes/eingangshalle-20261114.mp4','home hero film is the delivered entrance scene');}
   report.videos.push({path:source.path,locale,videos:videos.map(video=>video.src)});
   if(['login','signup'].includes(source.id)){const mode=source.id==='login'?'login':'register';assert.equal(await page.locator('[data-testid="auth-'+mode+'-form"]').count(),1,'auth page renders its real form (Clerk-era availability notice retired)');assert.equal(await page.locator('[data-testid="auth-'+mode+'-submit"]').count(),1);assert.equal(await page.locator('.auth-availability-notice').count(),0);}
