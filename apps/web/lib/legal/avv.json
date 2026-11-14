@@ -1,0 +1,85 @@
+{
+  "slug": "avv",
+  "title": "Auftragsverarbeitungsvertrag (AVV / DPA)",
+  "intro": "Vereinbarung über die Verarbeitung personenbezogener Daten gemäß Art. 28 DSGVO. Dieser AVV ist Bestandteil aller Verträge, bei denen der Auftragnehmer personenbezogene Daten im Auftrag des Auftraggebers verarbeitet.",
+  "updated": "4. August 2026",
+  "related": [
+    {
+      "label": "Datenschutz",
+      "href": "/datenschutz"
+    },
+    {
+      "label": "AGB",
+      "href": "/agb"
+    },
+    {
+      "label": "Impressum",
+      "href": "/impressum"
+    }
+  ],
+  "sections": [
+    {
+      "id": "gegenstand",
+      "heading": "§ 1 Gegenstand und Dauer",
+      "paragraphs": [
+        "Der Auftragnehmer verarbeitet personenbezogene Daten des Auftraggebers ausschließlich weisungsgebunden im Rahmen des Hauptvertrags.",
+        "Gegenstand der Verarbeitung: Kunden-, Interessenten- und Nutzerdaten, die im Rahmen der vertraglichen Leistungen verarbeitet werden.",
+        "Dauer der Verarbeitung: Laufzeit des Hauptvertrags zuzüglich gesetzlicher Aufbewahrungsfristen."
+      ]
+    },
+    {
+      "id": "pflichten",
+      "heading": "§ 2 Pflichten des Auftragnehmers",
+      "bullets": [
+        "Weisungsgebundene Verarbeitung (Art. 28 Abs. 3 lit. a DSGVO)",
+        "Verpflichtung des Personals auf Vertraulichkeit (Art. 28 Abs. 3 lit. b DSGVO)",
+        "Umsetzung technischer und organisatorischer Maßnahmen gemäß Art. 32 DSGVO",
+        "Unterstützung bei der Erfüllung von Betroffenenrechten (Art. 15–22 DSGVO)",
+        "Unterstützung bei Datenschutz-Folgenabschätzungen (Art. 35, 36 DSGVO)",
+        "Löschung oder Rückgabe aller Daten nach Vertragsende (Art. 28 Abs. 3 lit. g DSGVO)",
+        "Nachweis der Einhaltung auf Anforderung (Art. 28 Abs. 3 lit. h DSGVO)"
+      ]
+    },
+    {
+      "id": "uav",
+      "heading": "§ 3 Unterauftragsverarbeiter",
+      "paragraphs": [
+        "Folgende Unterauftragsverarbeiter (Sub-Processor) sind aktuell eingesetzt: Cloudflare Inc., Supabase Inc., Resend Inc., DeepSeek (über OpenRouter/9Router), Nscale (Embeddings), Hostinger (VPS Frankfurt/DE).",
+        "Änderungen der Unterauftragsverarbeiter werden dem Auftraggeber mit einer Frist von 14 Tagen in Textform angekündigt. Erfolgt kein Widerspruch, gilt die Änderung als genehmigt.",
+        "Mit allen Unterauftragsverarbeitern bestehen vertragliche Verpflichtungen auf dem Niveau dieses AVV."
+      ]
+    },
+    {
+      "id": "rechte",
+      "heading": "§ 4 Rechte der betroffenen Personen",
+      "paragraphs": [
+        "Der Auftragnehmer unterstützt den Auftraggeber nach Maßgabe des Art. 28 Abs. 3 lit. e DSGVO bei der Beantwortung von Anfragen betroffener Personen.",
+        "Gehen Betroffenenanfragen unmittelbar beim Auftragnehmer ein, werden sie unverzüglich – spätestens innerhalb von 3 Werktagen – an den Auftraggeber weitergeleitet."
+      ]
+    },
+    {
+      "id": "verletzung",
+      "heading": "§ 5 Verletzung des Schutzes personenbezogener Daten (Data Breach)",
+      "paragraphs": [
+        "Der Auftragnehmer meldet Verletzungen des Schutzes personenbezogener Daten (Art. 33 DSGVO) unverzüglich – spätestens innerhalb von 48 Stunden nach Kenntnis – an den Auftraggeber.",
+        "Die Meldung enthält die nach Art. 33 Abs. 3 DSGVO erforderlichen Angaben, soweit sie dem Auftragnehmer vorliegen."
+      ]
+    },
+    {
+      "id": "audit",
+      "heading": "§ 6 Audit- und Nachweispflichten",
+      "paragraphs": [
+        "Der Auftraggeber ist berechtigt, die Einhaltung der datenschutzrechtlichen Pflichten im erforderlichen Umfang zu prüfen (Art. 28 Abs. 3 lit. h DSGVO).",
+        "Auf Anforderung übergibt der Auftragnehmer geeignete Nachweise (z. B. Sicherheitskonzept, Zertifizierungen, TOM-Dokumentation)."
+      ]
+    },
+    {
+      "id": "schluss",
+      "heading": "§ 7 Vertragsende und Löschung",
+      "paragraphs": [
+        "Nach Vertragsende werden alle personenbezogenen Daten gelöscht oder an den Auftraggeber zurückgegeben; eine Kopie verbleibt nur, soweit gesetzliche Aufbewahrungspflichten bestehen.",
+        "Auf Wunsch des Auftraggebers wird die Löschung schriftlich bestätigt."
+      ]
+    }
+  ]
+}
