@@ -499,9 +499,10 @@ body:has(#atelier) .skip-link:focus{border-radius:var(--as-switch-radius);backgr
 }
 #atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em;min-width:0;max-width:100%;overflow-wrap:break-word;hyphens:auto}
 #atelier .home-concept .hc-finish h2{font-size:clamp(36px,4.6cqi,48px);line-height:1.05;letter-spacing:-.02em}
-#atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
-#atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
-#atelier .home-concept .hc-costs h3,#atelier #aifly-panel .panel-brandline,#atelier #aifly-panel :is(.orientation-brief h4,.request-fallback :is(h2,h3,h4,strong)){font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2,.tk-partner-intro h2,.tk-portal-preview h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
+/* Shop-Seiten: Flaechen-Ueberschriften (h2) und Unterpunkte (h3) laufen ueber dieselben beiden Regeln wie die Startseite. */
+#atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name,.tk-shop-body h2,.tk-form h2,.tk-legal-doc h2,.tk-home-entry h2),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .home-concept :is(.hc-costs h3,.tk-shop-body h3,.tk-form h3,.tk-legal-section h3,.tk-home-entry h3,.tk-partner-steps h3,.tk-portal-grid h3,.tk-filter-panel h2),#atelier #aifly-panel .panel-brandline,#atelier #aifly-panel :is(.orientation-brief h4,.request-fallback :is(h2,h3,h4,strong)){font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
 #atelier .home-concept .identity-copy .identity-subtitle{font-size:18px;font-weight:500;line-height:1.35;letter-spacing:0}
 #atelier .home-concept :is(.hc-intro>p,.hc-section-heading>p,.hc-section-heading>div+p){font-size:18px;line-height:1.6;letter-spacing:0}
 #atelier .home-concept :is(p,li,.hc-service-lead,.hc-caption,.hc-scene-value),#atelier .home-concept .identity-copy .identity-body,#atelier .home-concept .hc-rate p,#atelier #aifly-panel :is(.orientation-message,.orientation-message p,.orientation-message li,.orientation-intro p,.welcome-body){font-size:16px;line-height:1.6;letter-spacing:0}

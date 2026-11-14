@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import {ActionButton} from '../ActionControl';
 import { SiteLink, useSiteNavigate } from "../Router";
 import { api, type Workshop } from "./api";
 import WorkshopMap from "./WorkshopMap";
@@ -25,7 +26,7 @@ export default function WorkshopFinder({ q = "", radius = 25 }: { q?: string; ra
     <form role="search" className="tk-search tk-finder-form" onSubmit={submit} noValidate data-testid="workshop-search-form">
       <div className="tk-field"><label htmlFor="ws-q">PLZ oder Ort</label><input id="ws-q" value={term} maxLength={80} onChange={event => setTerm(event.target.value)} aria-invalid={Boolean(error) && !result} aria-describedby={error ? "ws-error" : undefined} data-testid="workshop-search-input" /></div>
       <div className="tk-field"><label htmlFor="ws-r">Umkreis</label><select id="ws-r" value={r} onChange={event => setR(Number(event.target.value))} data-testid="workshop-radius-select">{RADII.map(v => <option key={v} value={v}>{v} km</option>)}</select></div>
-      <button className="primary-button" type="submit" data-testid="workshop-search-submit">Werkstätten suchen</button>
+      <ActionButton variant="primary" className="hc-finish-primary" type="submit" data-testid="workshop-search-submit">Werkstätten suchen</ActionButton>
     </form>
     {error && <p id="ws-error" role="alert" className="tk-alert" data-testid="workshop-search-error">{error}</p>}
     <p className="tk-note">Alle Einträge stammen aus einem Werkstattverzeichnis. Es handelt sich um Verzeichnisbetriebe, nicht um TEILEKLAR-Partner. Entfernungen sind Luftlinie.</p>
