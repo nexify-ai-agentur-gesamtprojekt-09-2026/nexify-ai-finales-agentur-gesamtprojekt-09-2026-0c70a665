@@ -8,9 +8,10 @@ import "./shop.css";
 import "../HomeConcept.css";
 import "../PageConcept.css";
 import "../HomeMaster.css";
-import { SceneVideo } from "../SceneVideo";
+import AtelierFilm from "../AtelierFilm";
+import { words as sceneWords } from "../SceneVideo";
 import { Zeichen } from "../Zeichen";
-import { brandImages, srcSetFor } from "../../lib/brand-media";
+import { brandImages } from "../../lib/brand-media";
 
 // Was der Zugang bringt: woertlich aus dem bisherigen Einleitungssatz der Seite, nur gegliedert.
 const ZUGANG = ["Persönliche Vorgänge", "Unterlagen", "Shop-Bestellungen"] as const;
@@ -60,9 +61,13 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
       setMessage(e.fields ? "" : String(e.body?.message || "Die Aktion ist fehlgeschlagen. Bitte versuchen Sie es erneut."));
     } finally { setBusy(false); }
   }
-  const field = (key: string, label: string, value: string, set: (v: string) => void, type: string, auto: string) => <div className="tk-field is-wide"><label htmlFor={"auth-" + key}>{label}</label>
-    <span className="nx-feld"><input id={"auth-" + key} type={type === "password" && show ? "text" : type} autoComplete={auto} value={value} onChange={e => set(e.target.value)} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "auth-" + key + "-error" : undefined} data-testid={"auth-" + key + "-input"} />{type === "password" && <button type="button" className="nx-feld-schalter" onClick={() => setShow(v => !v)} aria-pressed={show} aria-label={show ? "Passwort verbergen" : "Passwort anzeigen"} title={show ? "Passwort verbergen" : "Passwort anzeigen"}><Zeichen name={show ? "auge-aus" : "auge"} /></button>}</span>
+  const field = (key: string, label: string, value: string, set: (v: string) => void, type: string, auto: string) => {
+    const input = <input id={"auth-" + key} type={type === "password" && show ? "text" : type} autoComplete={auto} value={value} onChange={e => set(e.target.value)} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "auth-" + key + "-error" : undefined} data-testid={"auth-" + key + "-input"} />;
+    // Felder wie im Kontaktformular (tk-field). Nur das Passwortfeld bekommt eine Hülle für den Sichtbarkeits-Schalter.
+    return <div className="tk-field is-wide" key={key}><label htmlFor={"auth-" + key}>{label}</label>
+    {type === "password" ? <span className="nx-feld">{input}<button type="button" className="nx-feld-schalter" onClick={() => setShow(v => !v)} aria-pressed={show} aria-label={show ? "Passwort verbergen" : "Passwort anzeigen"} title={show ? "Passwort verbergen" : "Passwort anzeigen"}><Zeichen name={show ? "auge-aus" : "auge"} /></button></span> : input}
     {errors[key] && <p id={"auth-" + key + "-error"} role="alert" className="tk-field-error" data-testid={"auth-" + key + "-error"}>{FIELD_MSG[errors[key]] || FIELD_MSG.invalid}</p>}</div>;
+  };
   const testId = "auth-" + mode;
   return <div className="home-concept page-concept tk-shop nx-konto" data-testid={testId}>
    <section className="hc-container nx-konto-buehne" aria-labelledby={testId + "-title"}>
@@ -87,7 +92,8 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
     </form>
     </div>
     <aside className="nx-konto-szene" aria-labelledby={testId + "-szene"}>
-     <figure className="hc-art"><img src={brandImages.workspace.src} srcSet={srcSetFor(brandImages.workspace.src)} sizes="(max-width: 1000px) 100vw, 50vw" width={2000} height={1125} alt={brandImages.workspace.alt} loading="eager" decoding="async"/><SceneVideo src="/media/scenes/tablet-foyer-20261113.mp4" locale="de"/></figure>
+     {/* Exakt die Einbettung der Startseite (identity-media > identity-hero-photo > AtelierFilm); startet nur auf Klick. */}
+     <div className="identity-media"><figure className="identity-hero-photo"><AtelierFilm hero locale="de" asset={{src:"/media/scenes/tablet-foyer-20261113.mp4",poster:brandImages.workspace.src,posterAlt:brandImages.workspace.alt,width:1280,height:720,title:sceneWords.de.title,hasAudio:true,autoplayWithAudio:false,autostart:false}}/></figure></div>
      <div className="nx-konto-nutzen">
       <span className="hc-kicker" id={testId + "-szene"}>NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto</span>
       <ul>{ZUGANG.map((label, i) => <li key={label}><Zeichen name={ZUGANG_ZEICHEN[i]} />{label}</li>)}</ul>

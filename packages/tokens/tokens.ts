@@ -238,7 +238,7 @@ export const tokens = {
   "atelierSystem-schrift-16": "16px",
   "atelierSystem-schrift-18": "18px",
   "atelierSystem-schrift-24": "24px",
-  "atelierSystem-schrift-zeileEng": "1.05",
+  "atelierSystem-schrift-zeileEng": "1.12",
   "atelierSystem-schrift-zeileTitel": "1.2",
   "atelierSystem-schrift-zeileKurz": "1.35",
   "atelierSystem-schrift-zeileText": "1.5",
