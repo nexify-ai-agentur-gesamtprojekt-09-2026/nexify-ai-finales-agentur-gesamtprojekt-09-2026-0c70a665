@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "NeXify AI Arbeitsbereich",
+  "short_name": "NeXify AI",
+  "description": "Arbeitsbereich des Inhabers: Aufträge an NeX und AIFly ORACLE geben, Stand sehen, Ergebnisse prüfen.",
+  "lang": "de",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1B1E1D",
+  "theme_color": "#1B1E1D",
+  "icons": [
+    { "src": "/extensions/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/extensions/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/extensions/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
