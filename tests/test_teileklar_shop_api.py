@@ -240,7 +240,7 @@ class ShopFlow(unittest.TestCase):
         r = self.client.post("/api/workshops/%s/requests" % workshop["_id"], json={"name": "Erika Muster", "email": "erika@example.org", "phone": "", "message": "Bremsen prüfen bitte.", "consent": True})
         self.assertEqual(r.status_code, 201, r.text)
         receipt = [m for m in self.mails if m["to"] == ["erika@example.org"]][-1]
-        self.assertIn("Anfrage gesendet – noch kein Termin", receipt["text"])
+        self.assertIn("Betrieb nicht benachrichtigt, kein Termin", receipt["text"])
 
     def test_bigbuy_import_paginates_dedupes_and_keeps_catalog_on_failure(self):
         calls = {"fail": False}

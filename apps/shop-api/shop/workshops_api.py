@@ -1,6 +1,11 @@
-"""Werkstattsuche over the TKW directory (Verzeichnisbetriebe, never partners) and persisted requests."""
+"""Werkstattsuche over the TKW directory (Verzeichnisbetriebe, never partners) and persisted requests.
+
+A request to a directory entry is stored at TEILEKLAR and, if an internal recipient is configured, announced
+to the operator. The workshop itself is NOT notified by any code path; answer and receipt say exactly that.
+"""
 import json
 import math
+import os
 import re
 import secrets
 
@@ -8,11 +13,18 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from . import config
-from . import mail_templates, mailer
+from . import mail_templates_teileklar, mailer
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/workshops")
-REQUEST_STATUS = "Anfrage gesendet – noch kein Termin"
+# What happens to a request addressed to a workshop without confirmed partnership. Default (unset or any
+# other value): accept and store it as before, with the truthful text. "abweisen": no request is taken and
+# nothing is stored; the visitor is pointed to the workshop. "an_teileklar": stored as a wish to TEILEKLAR.
+NONPARTNER_SWITCH = "TEILEKLAR_NONPARTNER_REQUESTS"
+NONPARTNER_STATES = {"an_teileklar": "einbauwunsch_eingegangen"}
+DEFAULT_STATE = "eingegangen_bei_teileklar"
+PARTNER_STATE = "eingegangen_partner_nicht_zugestellt"
+REQUEST_STATUS = mail_templates_teileklar.WORKSHOP_REQUEST_STATUS[DEFAULT_STATE]
 FIELDS = ("id", "name", "street", "zip", "city", "region", "tel", "web", "hours", "lat", "lon", "market")
 EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 
@@ -91,6 +103,26 @@ async def detail(workshop_id: str):
     return public(doc)
 
 
+def nonpartner_mode(env=None):
+    value = (os.environ if env is None else env).get(NONPARTNER_SWITCH, "")
+    return value if value in ("abweisen", "an_teileklar") else "speichern"
+
+
+def confirmed_partner(doc):
+    """Only a released partner application writes `partner_kind` (partners_api); the import never does."""
+    return doc.get("partner_kind") not in (None, "", "verzeichnisbetrieb")
+
+
+async def notify_operator(stored):
+    """Internal notice through the existing outbox, if a recipient is configured. Never fails the request."""
+    try:
+        subject, html, text = mail_templates_teileklar.internal_workshop_request(stored)
+        outbox = await mailer.enqueue("workshop_request:internal:" + stored["_id"], mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=stored["email"])
+        return (outbox or {}).get("status", "not_configured")
+    except Exception:
+        return "unbekannt"
+
+
 class RequestIn(BaseModel):
     name: str = Field("", max_length=100)
     email: str = Field("", max_length=160)
@@ -114,12 +146,26 @@ async def create_request(workshop_id: str, body: RequestIn):
         errors["message"] = "too_short" if body.message.strip() else "required"
     if not body.consent:
         errors["consent"] = "required"
+    partner = confirmed_partner(doc)
+    mode = nonpartner_mode()
+    if not partner and mode == "abweisen":
+        # Nothing is stored: no personal data is kept for a request nobody will handle.
+        raise HTTPException(409, {"error": "workshop_not_partner", "state": "nicht_angenommen", "workshop_notified": False,
+                                  "message": mail_templates_teileklar.NOT_PARTNER_TEXT})
     if errors:
         raise HTTPException(422, {"error": "request_invalid", "fields": errors})
+    state = PARTNER_STATE if partner else NONPARTNER_STATES.get(mode, DEFAULT_STATE)
+    status = mail_templates_teileklar.WORKSHOP_REQUEST_STATUS[state]
     request_id = "WA-" + secrets.token_hex(5).upper()
-    await db.workshop_requests.insert_one({"_id": request_id, "workshop_id": workshop_id, "workshop_name": doc.get("name"), **body.model_dump(),
-                                           "status": REQUEST_STATUS, "created_at": now_iso()})
+    await db.workshop_requests.insert_one({"_id": request_id, "brand": "teileklar", "workshop_id": workshop_id, "workshop_name": doc.get("name"), **body.model_dump(),
+                                           "status": status, "state": state, "workshop_notified": False, "workshop_partner": partner,
+                                           "addressed_to": "teileklar" if state == "einbauwunsch_eingegangen" else "workshop", "created_at": now_iso()})
     stored = await db.workshop_requests.find_one({"_id": request_id})
-    subject, html, text = mail_templates.workshop_receipt(stored)
+    subject, html, text = mail_templates_teileklar.workshop_receipt(stored)
     await mailer.enqueue("workshop_request:" + request_id, body.email.strip(), subject, html, text)
-    return {"id": request_id, "status": REQUEST_STATUS, "workshop_id": workshop_id}
+    operator = await notify_operator(stored)
+    await db.workshop_requests.update_one({"_id": request_id}, {"$set": {"operator_notification": operator}})
+    # `state`, `workshop_notified` and `appointment` are the machine-readable truth for the interface;
+    # `message` is the matching sentence. Nothing here promises an action the code does not perform.
+    return {"id": request_id, "status": status, "workshop_id": workshop_id, "state": state, "workshop_notified": False,
+            "workshop_partner": partner, "appointment": False, "message": mail_templates_teileklar.WORKSHOP_REQUEST_TEXT[state]}

@@ -6,6 +6,7 @@ on an operator the fake silently ignores.
 """
 import copy
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -42,6 +43,15 @@ def _match_value(actual, expected):
             elif op == "$in":
                 if actual not in arg:
                     return False
+            elif op == "$nin":
+                if actual in arg:
+                    return False
+            elif op == "$regex":
+                if not isinstance(actual, str) or not re.search(arg, actual):
+                    return False
+            elif op == "$not":
+                if _match_value(actual, arg):
+                    return False
             elif op == "$gte":
                 if actual is None or actual < arg:
                     return False
@@ -63,6 +73,9 @@ def matches(doc, query):
     for key, expected in (query or {}).items():
         if key == "$or":
             if not any(matches(doc, branch) for branch in expected):
+                return False
+        elif key == "$and":
+            if not all(matches(doc, branch) for branch in expected):
                 return False
         elif isinstance(expected, dict) and "$exists" in expected:
             if (key in doc) is not bool(expected["$exists"]):
