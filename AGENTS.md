@@ -2,6 +2,16 @@
 
 Stand 2026-09-29 · Fassung 1.0 · Freigabe der Entscheidungen E1/E3/E4/E5/E6/E12 steht aus (siehe `docs/09-final/08-recht-und-compliance.md`).
 
+## Produktname · 14.11.2026 (D-011)
+
+Entscheidung des Inhabers Pascal Courbois vom 14.11.2026: Der Produktname
+„NeX2fly“ / „NeX2fly Suite“ ist veraltet; sichtbar heißt das Produkt in allen
+Sprachen (de/nl/fr/en) **„NeX AIFly Suite“**. Öffentliche Produktseite:
+`/produkte/aifly-suite`; `/produkte/nex2fly` leitet dauerhaft (308) dorthin um.
+Interne Kennungen (`nex2fly`, Test-IDs, `MASTER_CONTENT_NEX2FLY`, Konto-/Org-Namen
+externer Dienste) bleiben unverändert. Ältere Dokumente mit „NeX2fly“ sind
+historisch und werden nicht umgeschrieben. Details: `DECISIONS.md` D-011.
+
 ## Aktuelle Führungsentscheidung · 13.11.2026
 
 Entscheidung des Inhabers Pascal Courbois vom 13.11.2026: Führender Stand ist `main`
@@ -326,7 +336,7 @@ Die Oberfläche vom 26.10.2026 ist vom Nutzer nur als grober Anfang akzeptiert,
 nicht als final abgenommen. Folgeauftrag: alle Seiten, Inhalte, Nutzerwege und
 Backendabhängigkeiten entsprechend den Quellen ausarbeiten. Figuren in jeder
 Breite vollständig darstellen; `object-fit: cover` ist für die transparente
-Dreier-Bühne unzulässig. NeX2fly, Leistungen und TEILEKLAR bleiben eigene
+Dreier-Bühne unzulässig. NeX2fly (historischer Name, seit 14.11.2026 „NeX AIFly Suite“, D-011), Leistungen und TEILEKLAR bleiben eigene
 sachliche Wege mit öffentlichen Informationsseiten und getrennten Rechten.
 Erst das Gesamtsystem fertigstellen; Marketing, Mailings und eigene Social-Kanäle
 danach aktivieren. SEO bleibt offen und ist GEO-Grundlage. GEO jetzt nicht

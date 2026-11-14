@@ -9,7 +9,7 @@ try {
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
   const page=await context.newPage();
   await page.route('**/api/**',route=>route.fulfill({status:503,json:{error:'offline_fixture'}}));
-  for(const path of ['/','/leistungen','/leistungen/websites','/produkte/nex2fly','/produkte/aifly-oracle','/kontakt']) {
+  for(const path of ['/','/leistungen','/leistungen/websites','/produkte/aifly-suite','/produkte/aifly-oracle','/kontakt']) {
    await page.goto(origin+path); await page.locator('h1').first().waitFor();
    const heading=await page.locator('h1').first().innerText();
    const heroImages=page.locator('.pc-hero-media img');

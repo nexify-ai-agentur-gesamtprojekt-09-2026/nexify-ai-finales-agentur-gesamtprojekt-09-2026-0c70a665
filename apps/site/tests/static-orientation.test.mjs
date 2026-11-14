@@ -8,7 +8,7 @@ const tr=value=>Object.fromEntries(locales.map(locale=>[locale,`${locale}: ${val
 function page(id,path,site_context='nexify'){
  return{id,path,site_context,localizedTitle:tr(`title ${id}`),localizedSummary:tr(`summary ${id}`),sections:[],actions:[],privateTestSentinel:'NEVER_DISCLOSE_EXTRA_FIELDS'};
 }
-const pages=[page('home','/'),page('websites','/leistungen/websites'),page('automation','/leistungen/agenten-automatisierung'),page('solutions','/loesungen'),page('pricing','/preise-ablauf'),page('scope','/leistungsumfang'),page('contact','/kontakt'),page('nex2fly','/produkte/nex2fly'),page('api','/produkte/api'),page('one','/produkte/one'),page('tk-home','/teileklar','teileklar'),page('tk-search','/teileklar/suche','teileklar'),page('tk-fitment','/teileklar/fahrzeug-und-passung','teileklar'),page('tk-appointments','/teileklar/termine','teileklar')];
+const pages=[page('home','/'),page('websites','/leistungen/websites'),page('automation','/leistungen/agenten-automatisierung'),page('solutions','/loesungen'),page('pricing','/preise-ablauf'),page('scope','/leistungsumfang'),page('contact','/kontakt'),page('nex2fly','/produkte/aifly-suite'),page('api','/produkte/api'),page('one','/produkte/one'),page('tk-home','/teileklar','teileklar'),page('tk-search','/teileklar/suche','teileklar'),page('tk-fitment','/teileklar/fahrzeug-und-passung','teileklar'),page('tk-appointments','/teileklar/termine','teileklar')];
 const guide=(question,locale='de',pagePath='/',source=pages)=>staticOrientation({question,locale,pagePath,pages:source});
 
 test('a cost and timing follow-up keeps the website context and points to pricing',()=>{
@@ -66,7 +66,7 @@ test('an explicit vehicle question can direct an agency visitor to actual TEILEK
 });
 
 test('product names retain their separate product destinations',()=>{
- assert.equal(guide('NeX2fly Suite').cards[0].id,'nex2fly');
+ assert.equal(guide('NeX AIFly Suite').cards[0].id,'nex2fly');
  assert.equal(guide('NeXify API').cards[0].id,'api');
  assert.equal(guide('NeX Agentic AI AIFly ORACLE').cards[0].id,'one');
 });

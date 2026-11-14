@@ -22,6 +22,8 @@ const experienceData=publicData as unknown as PublicExperienceData;
 const hashMode=location.protocol==='file:'||(window as Window&{__NEXIFY_STANDALONE_PREVIEW__?:boolean}).__NEXIFY_STANDALONE_PREVIEW__===true;
 const routeIndex=new Map(pages.map(page=>[page.path,page]));
 const dynamicDetailBases:ReadonlyArray<readonly[string,string]>=[['/teileklar/kategorie/','/teileklar/kategorie'],['/teileklar/produkt/','/teileklar/produkt'],['/teileklar/werkstatt/','/teileklar/werkstatt']];
+// D-011 (14.11.2026): alte Produkt-URLs werden auf den neuen Pfad aufgelöst und in der Adresszeile ersetzt.
+const legacyRoutes:ReadonlyMap<string,string>=new Map([['/produkte/nex2fly','/produkte/aifly-suite']]);
 function resolveRoute(path:string):PublicPage|undefined{
   const exact=routeIndex.get(path);
   if(exact)return exact;
@@ -54,7 +56,9 @@ function RouteContent({page,pathname,search}:{page?:PublicPage;pathname:string;s
 }
 function App(){
   const[locationKey,setLocationKey]=useState(()=>location.href);
-  const path=routePath(location,hashMode)||'__invalid__';
+  const requested=routePath(location,hashMode)||'__invalid__';
+  const path=legacyRoutes.get(requested)??requested;
+  useEffect(()=>{if(path!==requested)history.replaceState(null,'',hashMode?'#'+path+(location.hash.includes('?')?'?'+location.hash.split('?')[1]:''):path+location.search+location.hash);},[path,requested]);
   const search=hashMode?(location.hash.split('?')[1]||''):location.search;
   void locationKey;
   useEffect(()=>{const changed=()=>setLocationKey(location.href);addEventListener('popstate',changed);addEventListener('hashchange',changed);return()=>{removeEventListener('popstate',changed);removeEventListener('hashchange',changed);};},[]);

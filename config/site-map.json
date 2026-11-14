@@ -2117,10 +2117,10 @@
             "en": "A brand portfolio with distinct offers"
           },
           "body": {
-            "de": "NeXify AI ist das Dach für den Agenturauftritt und die Projektarbeit. NeX2fly ist als eigenständiger Arbeitsbereich vorgesehen; NeX und Oracle beschreiben Rollen im KI-Konzept.\n\nTEILEKLAR.shop hat eine eigene Marke und einen eigenen Handels- und Werkstattkontext. Welche Angebote und Funktionen jeweils verfügbar sind, wird auf der zugehörigen Seite und für den konkreten Zugang geklärt.",
-            "nl": "NeXify AI is de overkoepelende naam voor de bureauactiviteiten en projectwerkzaamheden. NeX2fly is bedoeld als zelfstandige werkomgeving; NeX en Oracle beschrijven rollen binnen het AI-concept.\n\nTEILEKLAR.shop heeft een eigen merk en een eigen handels- en werkplaatscontext. Welke aanbiedingen en functies beschikbaar zijn, wordt op de betreffende pagina en voor de concrete toegang verduidelijkt.",
-            "fr": "NeXify AI regroupe l’activité de l’agence et les projets. NeX2fly est prévu comme espace de travail distinct ; NeX et Oracle décrivent des rôles dans le concept IA.\n\nTEILEKLAR.shop conserve sa propre marque et son contexte commercial et atelier. Les offres et fonctions disponibles sont précisées sur la page concernée et pour chaque accès.",
-            "en": "NeXify AI is the umbrella for the agency and project work. NeX2fly is intended as a separate workspace; NeX and Oracle describe roles in the AI concept.\n\nTEILEKLAR.shop has its own brand and a distinct commerce and workshop context. Available offers and functions are clarified on the relevant page and for the specific access."
+            "de": "NeXify AI ist das Dach für den Agenturauftritt und die Projektarbeit. Die NeX AIFly Suite ist als eigenständiger Arbeitsbereich vorgesehen; NeX und Oracle beschreiben Rollen im KI-Konzept.\n\nTEILEKLAR.shop hat eine eigene Marke und einen eigenen Handels- und Werkstattkontext. Welche Angebote und Funktionen jeweils verfügbar sind, wird auf der zugehörigen Seite und für den konkreten Zugang geklärt.",
+            "nl": "NeXify AI is de overkoepelende naam voor de bureauactiviteiten en projectwerkzaamheden. De NeX AIFly Suite is bedoeld als zelfstandige werkomgeving; NeX en Oracle beschrijven rollen binnen het AI-concept.\n\nTEILEKLAR.shop heeft een eigen merk en een eigen handels- en werkplaatscontext. Welke aanbiedingen en functies beschikbaar zijn, wordt op de betreffende pagina en voor de concrete toegang verduidelijkt.",
+            "fr": "NeXify AI regroupe l’activité de l’agence et les projets. La NeX AIFly Suite est prévue comme espace de travail distinct ; NeX et Oracle décrivent des rôles dans le concept IA.\n\nTEILEKLAR.shop conserve sa propre marque et son contexte commercial et atelier. Les offres et fonctions disponibles sont précisées sur la page concernée et pour chaque accès.",
+            "en": "NeXify AI is the umbrella for the agency and project work. The NeX AIFly Suite is intended as a separate workspace; NeX and Oracle describe roles in the AI concept.\n\nTEILEKLAR.shop has its own brand and a distinct commerce and workshop context. Available offers and functions are clarified on the relevant page and for the specific access."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2414,18 +2414,18 @@
     },
     {
       "id": "nex2fly",
-      "path": "/produkte/nex2fly",
+      "path": "/produkte/aifly-suite",
       "title": {
-        "de": "NeX2fly. Ihre eigene Arbeitsumgebung.",
-        "nl": "NeX2fly. Uw eigen werkomgeving.",
-        "fr": "NeX2fly. Votre propre environnement de travail.",
-        "en": "NeX2fly. Your own working environment."
+        "de": "NeX AIFly Suite. Ihre eigene Arbeitsumgebung.",
+        "nl": "NeX AIFly Suite. Uw eigen werkomgeving.",
+        "fr": "NeX AIFly Suite. Votre propre environnement de travail.",
+        "en": "NeX AIFly Suite. Your own working environment."
       },
       "summary": {
-        "de": "NeX2fly ist als eigener Arbeitsbereich für Gespräche, Aufgaben und Projektwissen vorgesehen. Welche Funktionen und Verbindungen verfügbar sind, wird bei der Freischaltung geklärt.",
-        "nl": "NeX2fly is bedoeld als eigen werkomgeving voor gesprekken, taken en projectkennis. Welke functies en koppelingen beschikbaar zijn, wordt bij activering afgestemd.",
-        "fr": "NeX2fly est conçu comme un espace de travail pour les conversations, les tâches et les connaissances projet. Les fonctions et connexions disponibles sont précisées à l’activation.",
-        "en": "NeX2fly is intended as a workspace for conversations, tasks and project knowledge. Available features and connections are confirmed when access is enabled."
+        "de": "Die NeX AIFly Suite ist als eigener Arbeitsbereich für Gespräche, Aufgaben und Projektwissen vorgesehen. Welche Funktionen und Verbindungen verfügbar sind, wird bei der Freischaltung geklärt.",
+        "nl": "De NeX AIFly Suite is bedoeld als eigen werkomgeving voor gesprekken, taken en projectkennis. Welke functies en koppelingen beschikbaar zijn, wordt bij activering afgestemd.",
+        "fr": "La NeX AIFly Suite est conçue comme un espace de travail pour les conversations, les tâches et les connaissances projet. Les fonctions et connexions disponibles sont précisées à l’activation.",
+        "en": "The NeX AIFly Suite is intended as a workspace for conversations, tasks and project knowledge. Available features and connections are confirmed when access is enabled."
       },
       "site_context": "nexify",
       "sections": [
@@ -2438,10 +2438,10 @@
             "en": "Your workspace, your project context"
           },
           "body": {
-            "de": "NeX2fly ist als eigener Arbeitsbereich für KI-gestützte Arbeit konzipiert. Ziel ist, Gespräche und Unterlagen im Zusammenhang mit den jeweils zugeordneten Projekten und Aufgaben zugänglich zu machen.\n\nEin eigener Arbeitsbereich und ein Agenturauftrag sind unterschiedliche Angebote. Vor einer Nutzung klären wir, welcher Zugang und welche Funktionen tatsächlich bereitstehen.",
-            "nl": "NeX2fly is ontworpen als een eigen werkomgeving voor werk met AI. Het doel is gesprekken en documenten toegankelijk te maken binnen de gekoppelde projecten en taken.\n\nEen eigen werkomgeving en een bureauopdracht zijn verschillende aanbiedingen. Voor gebruik bespreken we welke toegang en functies daadwerkelijk beschikbaar zijn.",
-            "fr": "NeX2fly est conçu comme un espace personnel de travail assisté par IA. L’objectif est de rendre les conversations et documents accessibles dans le contexte des projets et tâches associés.\n\nUn espace de travail et une mission confiée à l’agence sont deux offres distinctes. Avant utilisation, nous précisons les accès et fonctions réellement disponibles.",
-            "en": "NeX2fly is designed as a workspace for AI-assisted work. Its purpose is to make conversations and materials available in the context of their assigned projects and tasks.\n\nA workspace and an agency assignment are separate offers. Before use, we clarify which access and features are actually available."
+            "de": "Die NeX AIFly Suite ist als eigener Arbeitsbereich für KI-gestützte Arbeit konzipiert. Ziel ist, Gespräche und Unterlagen im Zusammenhang mit den jeweils zugeordneten Projekten und Aufgaben zugänglich zu machen.\n\nEin eigener Arbeitsbereich und ein Agenturauftrag sind unterschiedliche Angebote. Vor einer Nutzung klären wir, welcher Zugang und welche Funktionen tatsächlich bereitstehen.",
+            "nl": "De NeX AIFly Suite is ontworpen als een eigen werkomgeving voor werk met AI. Het doel is gesprekken en documenten toegankelijk te maken binnen de gekoppelde projecten en taken.\n\nEen eigen werkomgeving en een bureauopdracht zijn verschillende aanbiedingen. Voor gebruik bespreken we welke toegang en functies daadwerkelijk beschikbaar zijn.",
+            "fr": "La NeX AIFly Suite est conçue comme un espace personnel de travail assisté par IA. L’objectif est de rendre les conversations et documents accessibles dans le contexte des projets et tâches associés.\n\nUn espace de travail et une mission confiée à l’agence sont deux offres distinctes. Avant utilisation, nous précisons les accès et fonctions réellement disponibles.",
+            "en": "The NeX AIFly Suite is designed as a workspace for AI-assisted work. Its purpose is to make conversations and materials available in the context of their assigned projects and tasks.\n\nA workspace and an agency assignment are separate offers. Before use, we clarify which access and features are actually available."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2536,20 +2536,20 @@
       ],
       "metadata": {
         "description": {
-          "de": "NeX2fly ist als eigener Arbeitsbereich für Gespräche, Aufgaben und Projektwissen vorgesehen. Welche Funktionen und Verbindungen verfügbar sind, wird bei der Freischaltung geklärt.",
-          "nl": "NeX2fly is bedoeld als eigen werkomgeving voor gesprekken, taken en projectkennis. Welke functies en koppelingen beschikbaar zijn, wordt bij activering afgestemd.",
-          "fr": "NeX2fly est conçu comme un espace de travail pour les conversations, les tâches et les connaissances projet. Les fonctions et connexions disponibles sont précisées à l’activation.",
-          "en": "NeX2fly is intended as a workspace for conversations, tasks and project knowledge. Available features and connections are confirmed when access is enabled."
+          "de": "Die NeX AIFly Suite ist als eigener Arbeitsbereich für Gespräche, Aufgaben und Projektwissen vorgesehen. Welche Funktionen und Verbindungen verfügbar sind, wird bei der Freischaltung geklärt.",
+          "nl": "De NeX AIFly Suite is bedoeld als eigen werkomgeving voor gesprekken, taken en projectkennis. Welke functies en koppelingen beschikbaar zijn, wordt bij activering afgestemd.",
+          "fr": "La NeX AIFly Suite est conçue comme un espace de travail pour les conversations, les tâches et les connaissances projet. Les fonctions et connexions disponibles sont précisées à l’activation.",
+          "en": "The NeX AIFly Suite is intended as a workspace for conversations, tasks and project knowledge. Available features and connections are confirmed when access is enabled."
         },
-        "canonical_path": "/produkte/nex2fly",
+        "canonical_path": "/produkte/aifly-suite",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "noindex,nofollow",
         "title": {
-          "de": "NeX2fly. Ihre eigene Arbeitsumgebung.",
-          "nl": "NeX2fly. Uw eigen werkomgeving.",
-          "fr": "NeX2fly. Votre propre environnement de travail.",
-          "en": "NeX2fly. Your own working environment."
+          "de": "NeX AIFly Suite. Ihre eigene Arbeitsumgebung.",
+          "nl": "NeX AIFly Suite. Uw eigen werkomgeving.",
+          "fr": "NeX AIFly Suite. Votre propre environnement de travail.",
+          "en": "NeX AIFly Suite. Your own working environment."
         }
       },
       "access": {
@@ -3668,10 +3668,10 @@
           "type": "route",
           "target_id": "nex2fly",
           "label": {
-            "de": "NeX2fly entdecken",
-            "nl": "NeX2fly ontdekken",
-            "fr": "Découvrir NeX2fly",
-            "en": "Discover NeX2fly"
+            "de": "NeX AIFly Suite entdecken",
+            "nl": "De NeX AIFly Suite ontdekken",
+            "fr": "Découvrir la NeX AIFly Suite",
+            "en": "Discover the NeX AIFly Suite"
           }
         },
         {
@@ -4616,16 +4616,16 @@
       "id": "signup",
       "path": "/registrieren",
       "title": {
-        "de": "NeX2fly Suite. Ihr eigener Einstieg.",
-        "nl": "NeX2fly Suite. Uw eigen start.",
-        "fr": "NeX2fly Suite. Votre propre accès.",
-        "en": "NeX2fly Suite. Your own starting point."
+        "de": "NeX AIFly Suite. Ihr eigener Einstieg.",
+        "nl": "NeX AIFly Suite. Uw eigen start.",
+        "fr": "NeX AIFly Suite. Votre propre accès.",
+        "en": "NeX AIFly Suite. Your own starting point."
       },
       "summary": {
-        "de": "NeX2fly ist das eigenständige Selfservice-Produkt im NeXify-Markenbild. Fragen Sie Ihren persönlichen Arbeitsbereich an; Agenturauftrag und Suite-Nutzung sind getrennte Entscheidungen.",
-        "nl": "NeX2fly is het zelfstandige selfserviceproduct binnen het NeXify-merk. Vraag uw persoonlijke werkruimte aan; een bureauopdracht en suitegebruik zijn afzonderlijke keuzes.",
-        "fr": "NeX2fly est le produit libre-service distinct de l’univers NeXify. Demandez votre espace personnel ; mission d’agence et utilisation de la suite sont deux décisions séparées.",
-        "en": "NeX2fly is the separate self-service product within the NeXify brand. Request your personal workspace; an agency assignment and suite use are separate decisions."
+        "de": "Die NeX AIFly Suite ist das eigenständige Selfservice-Produkt im NeXify-Markenbild. Fragen Sie Ihren persönlichen Arbeitsbereich an; Agenturauftrag und Suite-Nutzung sind getrennte Entscheidungen.",
+        "nl": "De NeX AIFly Suite is het zelfstandige selfserviceproduct binnen het NeXify-merk. Vraag uw persoonlijke werkruimte aan; een bureauopdracht en suitegebruik zijn afzonderlijke keuzes.",
+        "fr": "La NeX AIFly Suite est le produit libre-service distinct de l’univers NeXify. Demandez votre espace personnel ; mission d’agence et utilisation de la suite sont deux décisions séparées.",
+        "en": "The NeX AIFly Suite is the separate self-service product within the NeXify brand. Request your personal workspace; an agency assignment and suite use are separate decisions."
       },
       "site_context": "nexify",
       "sections": [
@@ -4684,20 +4684,20 @@
       ],
       "metadata": {
         "description": {
-          "de": "NeX2fly ist das eigenständige Selfservice-Produkt im NeXify-Markenbild. Fragen Sie Ihren persönlichen Arbeitsbereich an; Agenturauftrag und Suite-Nutzung sind getrennte Entscheidungen.",
-          "nl": "NeX2fly is het zelfstandige selfserviceproduct binnen het NeXify-merk. Vraag uw persoonlijke werkruimte aan; een bureauopdracht en suitegebruik zijn afzonderlijke keuzes.",
-          "fr": "NeX2fly est le produit libre-service distinct de l’univers NeXify. Demandez votre espace personnel ; mission d’agence et utilisation de la suite sont deux décisions séparées.",
-          "en": "NeX2fly is the separate self-service product within the NeXify brand. Request your personal workspace; an agency assignment and suite use are separate decisions."
+          "de": "Die NeX AIFly Suite ist das eigenständige Selfservice-Produkt im NeXify-Markenbild. Fragen Sie Ihren persönlichen Arbeitsbereich an; Agenturauftrag und Suite-Nutzung sind getrennte Entscheidungen.",
+          "nl": "De NeX AIFly Suite is het zelfstandige selfserviceproduct binnen het NeXify-merk. Vraag uw persoonlijke werkruimte aan; een bureauopdracht en suitegebruik zijn afzonderlijke keuzes.",
+          "fr": "La NeX AIFly Suite est le produit libre-service distinct de l’univers NeXify. Demandez votre espace personnel ; mission d’agence et utilisation de la suite sont deux décisions séparées.",
+          "en": "The NeX AIFly Suite is the separate self-service product within the NeXify brand. Request your personal workspace; an agency assignment and suite use are separate decisions."
         },
         "canonical_path": "/registrieren",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "noindex,nofollow",
         "title": {
-          "de": "NeX2fly Suite. Ihr eigener Einstieg.",
-          "nl": "NeX2fly Suite. Uw eigen start.",
-          "fr": "NeX2fly Suite. Votre propre accès.",
-          "en": "NeX2fly Suite. Your own starting point."
+          "de": "NeX AIFly Suite. Ihr eigener Einstieg.",
+          "nl": "NeX AIFly Suite. Uw eigen start.",
+          "fr": "NeX AIFly Suite. Votre propre accès.",
+          "en": "NeX AIFly Suite. Your own starting point."
         }
       },
       "access": {

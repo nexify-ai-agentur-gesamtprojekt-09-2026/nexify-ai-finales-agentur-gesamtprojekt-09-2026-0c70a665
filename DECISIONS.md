@@ -78,3 +78,25 @@ Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Me
   zu prüfen und anzupassen; diese Seiten wurden hier nicht verändert.
 - **Rückweg:** Revert des Commits „chat: sichtbare KI-Kennzeichnung im Chat entfernen“ stellt die Zeile
   wieder her; die übrigen Chat-Pakete sind davon unabhängig.
+
+## D-011 — Produktname „NeX AIFly Suite“ statt „NeX2fly“ (14.11.2026)
+
+- **Entscheidung (Inhaber Pascal Courbois, 14.11.2026):** Alt „NeX2fly“ / „NeX2fly Suite“ → neu **„NeX AIFly Suite“**.
+  Gilt für jede sichtbare Kopie in de/nl/fr/en (Titel, Navigation, Fußzeile, Seitentexte, Metadaten, Medientitel,
+  Chat-Orientierung, Anmeldehinweise).
+- **Route:** Neue öffentliche Adresse `/produkte/aifly-suite`. `/produkte/nex2fly` leitet dauerhaft um
+  (`apps/web/next.config.ts`, `permanent: true` → HTTP 308; Sprachparameter `?lang=` bleibt erhalten). Die
+  Vite-Referenzausgabe `apps/site` löst den alten Pfad ebenfalls auf und ersetzt ihn in der Adresszeile.
+- **Bewusst unverändert:** Seiten-ID `nex2fly`, Abschnitts-/Modul-IDs (`nex2fly-customer-*`, `nex2fly-explain-*`),
+  Test-IDs (`desktop-products-megamenu-link-nex2fly`), Anforderungskennung `MASTER_CONTENT_NEX2FLY`, Journey
+  `nex2fly-trial`, Automations-ID `nex2fly_brain`, externe Konto-/Organisationsnamen (Sentry-Org, Vercel-Agent-
+  Nutzer) und der Schlüsselwortfilter `nex2fly` in der Chat-Orientierung (alte Suchbegriffe führen weiter zur Seite).
+  Eine Umbenennung dieser Kennungen hätte keinen sichtbaren Nutzen und würde Nachweise/Hash-Inventare brechen.
+- **Historisch, nicht umgeschrieben:** `docs/**` (Masterplan, Handoff-Patches, Architektur-Quellen wie
+  `docs/architecture/nex2fly-page-source.md`, deren SHA-256 in `config/presenter-sources.json` gebunden ist),
+  `config/content-reconciliation-2026-11-02.json`, `config/policy-source-inventory.json`,
+  `config/acceptance-coverage.json`, `config/research/*`, `config/integrations/*`, `prototypen/`. Dort bedeutet
+  „NeX2fly“ den früheren Namen desselben Produkts.
+- **Rechtstexte:** Keine maschinelle Übersetzung; Rechtstexte enthielten den Namen nicht und wurden nicht verändert.
+- **Rückweg:** Revert des Umbenennungs-Commits; die Umleitung entfällt dann mit.
+
