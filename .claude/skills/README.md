@@ -15,6 +15,7 @@ Kommt ein Skill dazu, hier genau eine Zeile ergänzen, im selben Commit.
 | [`nexify-stand-halten`](nexify-stand-halten/SKILL.md) | Nach jedem Merge und jeder Inhaberentscheidung die führenden Dokumente nachführen. |
 | [`nexify-belege-und-pins`](nexify-belege-und-pins/SKILL.md) | Vor Änderungen an gebundenen Dateien; wenn Prüfsummen abweichen oder Browser-Belege zu erneuern sind. |
 | [`nexify-graph`](nexify-graph/SKILL.md) | Vor dem Einzellesen vieler Dateien und vor Änderungen an gemeinsam genutzten Bausteinen. |
+| [`nexify-loesungsregister`](nexify-loesungsregister/SKILL.md) | Bevor eine neue Lösung oder ein Dienst vorgeschlagen wird; „wo speichern wir X“, „welchen Zugang gibt es“; wenn ein Schlüssel im Klartext auftaucht. |
 
 ## Fachliche Arbeiten
 

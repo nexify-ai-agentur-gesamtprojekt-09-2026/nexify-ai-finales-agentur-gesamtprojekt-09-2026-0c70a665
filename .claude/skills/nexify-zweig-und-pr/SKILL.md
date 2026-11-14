@@ -56,6 +56,8 @@ Vor der ersten Änderung an einer Datei. Wer nur liest oder misst, braucht keine
    pnpm install --frozen-lockfile --ignore-scripts
    ```
 
+   Installationsskripte von Paketen laufen in diesem Repository nicht: `pnpm-workspace.yaml` lehnt sie unter `allowBuilds` je Paket ab. Meldet pnpm `ERR_PNPM_IGNORED_BUILDS`, ist ein Paket mit Installationsskript neu hinzugekommen; es wird dort eingetragen (`false`, solange kein Bedarf am Skript belegt ist), nicht mit `pnpm approve-builds` pauschal freigegeben.
+
    Vor einem direkten `next build` im frischen Worktree die erzeugten Seitendaten anlegen (das Paketskript `build` tut das selbst, `npx next build` nicht):
 
    ```bash
@@ -94,7 +96,7 @@ Vor der ersten Änderung an einer Datei. Wer nur liest oder misst, braucht keine
 
 ## Bekannte Lage (14.11.2026)
 
-- **Python-Suite rot auf `main`.** Ursache sind veraltete Prüfsummen und Belege (`docs/09-final/pin-rebase-2026-11-14.md`). Gezählt werden nur neue Fehlschläge per Namensvergleich wie in Schritt 3 und 5. „Rot wie vorher“ ohne Vergleich ist kein Beleg. `make test` endet deshalb mit Fehler; das wird im PR genannt, nicht verschwiegen. Zeilen der Form `ERROR: … (unittest.loader._FailedTest…)` sind Ladefehler: Der Laufumgebung fehlen dann Python-Pakete (zum Beispiel `pymongo` aus `apps/shop-api/requirements.txt`). Auch sie werden gezählt und benannt, und die Zahlen gelten nur für die Umgebung, in der vorher und nachher gemessen wurde.
+- **Python-Suite rot auf `main`.** Ursache sind veraltete Prüfsummen und Belege (`docs/09-final/pin-rebase-2026-11-14.md`). Gezählt werden nur neue Fehlschläge per Namensvergleich wie in Schritt 3 und 5. „Rot wie vorher“ ohne Vergleich ist kein Beleg. `make test` endet deshalb mit Fehler; das wird im PR genannt, nicht verschwiegen. Zeilen der Form `ERROR: … (unittest.loader._FailedTest…)` sind Ladefehler: Der Laufumgebung fehlen dann Python-Pakete (zum Beispiel `pymongo` aus `apps/shop-api/requirements.txt`). `make test-env` baut dafür die Umgebung des CI-Jobs unter `.venv` (Python 3.12, nur Pakete mit Prüfsumme), `make test-py` lässt die Suite darin laufen; dann laden alle Module (882 statt 823 Tests am 14.11.2026). Solange `requirements-image.txt` Pillow 13.0.0 verlangt und die Bildwerkzeuge nur 12.3.0 annehmen, sind in dieser Umgebung zusätzlich 59 Namen aus `test_product_image_batch` und `test_birefnet_onnx` rot (`docs/09-final/testumgebung-und-abhaengigkeiten-2026-11-14.md`). Ladefehler werden gezählt und benannt, und die Zahlen gelten nur für die Umgebung, in der vorher und nachher gemessen wurde.
 - **GitHub Actions startet kontoweit keine Jobs** (`PROGRESS.md`, „Offene Arbeiten“; zuletzt belegt in `docs/04-betrieb/befund-2026-11-13.md`). Es zählt die lokale Prüfung, und genau das steht im Abschnitt „Prüfung“ des PR: lokal gelaufen, kein CI-Lauf. Ein fehlender CI-Lauf wird nicht als grün ausgegeben.
 
 Ändert sich eine der beiden Lagen, diesen Abschnitt im selben Commit berichtigen.

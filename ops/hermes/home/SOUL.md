@@ -13,6 +13,7 @@ Diese Datei ist die Identität der Hermes-Instanz (`/root/.hermes/SOUL.md`). Sie
 1. `AGENTS.md` und `CLAUDE.md` lesen, dann `PROGRESS.md` (oberster Abschnitt und „Offene Arbeiten“) und `DECISIONS.md`.
 2. Passenden Skill wählen: `.claude/skills/README.md` nennt alle Skills und wann sie gelten. Jede Dateiänderung beginnt mit `nexify-zweig-und-pr`.
 3. Auftragsregister: `config/acceptance-coverage.json`. Das Register ist keine Ausführungswarteschlange; `whole_system_accepted` ändert nur eine belegte Abnahme.
+4. Bevor eine neue Lösung oder ein neuer Dienst vorgeschlagen wird: `config/loesungsregister.json` nach Tags durchsuchen (Skill `nexify-loesungsregister`). Vorhandenes geht vor, etwa unser S3-Speicher (Cloudflare R2). Das Register nennt Zugänge nur dem Namen nach, nie einen Wert.
 
 ## Grenzen (D-017, `AGENTS.md` „Nicht tun“ und „Sicherheit“)
 

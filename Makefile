@@ -1,8 +1,27 @@
 # NeXify AI Gesamtloesung — ein Befehl pro Repo-Operation (Harness-Standard).
-.PHONY: setup dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build source-boundaries governance-check governance-status
+.PHONY: setup test-env test-py dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build source-boundaries governance-check governance-status
 
 setup:
 	@node --version >/dev/null && python3 --version >/dev/null && echo "setup: node + python3 vorhanden (keine Paketabhaengigkeiten)"
+
+# Python-Testumgebung wie im CI-Job "repository" (.github/workflows/ci.yml): Python 3.12, nur Wheels,
+# nur die mit Pruefsummen gebundenen Pakete aus requirements-image.txt und apps/shop-api/requirements.txt.
+# Ohne sie laden drei Testmodule nicht (fastapi, httpx, bson). Aufruf: make test-env && make test-py
+# Die Systemumgebung bleibt unberuehrt; .venv/ ist in .gitignore. Kein Paket ohne --require-hashes.
+PYTHON_ENV ?= python3.12
+VENV ?= .venv
+
+test-env:
+	$(PYTHON_ENV) -m venv $(VENV)
+	$(VENV)/bin/python -m pip install --only-binary=:all: --no-deps --require-hashes --requirement requirements-image.txt
+	$(VENV)/bin/python -m pip install --only-binary=:all: --require-hashes --requirement apps/shop-api/requirements.txt
+	@$(VENV)/bin/python -c "import sys, fastapi, httpx, bson, PIL, numpy; print('test-env: Python', sys.version.split()[0], '| fastapi', fastapi.__version__, '| httpx', httpx.__version__, '| pymongo', __import__('pymongo').version, '| Pillow', PIL.__version__, '| numpy', numpy.__version__)"
+
+# Python-Suite in der Testumgebung. Endet mit Fehler, solange Tests rot sind; gezaehlt wird per Namensvergleich
+# (.claude/skills/nexify-zweig-und-pr/SKILL.md, Schritt 3 und 5).
+test-py:
+	@test -x $(VENV)/bin/python || { echo "test-py: $(VENV) fehlt; zuerst make test-env"; exit 2; }
+	$(VENV)/bin/python -m unittest discover -s tests
 
 dev:
 	pnpm dev
@@ -49,6 +68,7 @@ check-arch:
 governance-check:
 	python3 tools/check_llm_policy.py
 	python3 tools/check_hermes_config.py
+	python3 tools/check_loesungsregister.py
 	python3 tools/project_skills.py verify
 	python3 tools/check_ai_coverage.py --audit
 

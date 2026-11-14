@@ -373,7 +373,7 @@
   },
   "navigation": true,
   "source_sha256": {
-    "apps/web/proxy.ts": "c5acf79c879503f281d82517adbaa98af35a34e8c6e6901cae026e5f9841104b",
+    "apps/web/proxy.ts": "aaf1245796ba3e19fe1a94b36a8e8dc61e1e67e34106ffca4dabc72ae2b8e240",
     "apps/web/auth/policy.ts": "5adc2fbcfc1689d5f4b03334ee92fcda4282eb72d2260adda1d90134b6d83964",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/api/internal/workspace/mail/route.ts": "e8a5b7abf16d44d628cf730bcd0b70d471116584659ac0545f5416d2a44a3df2",
@@ -1112,13 +1112,13 @@
       "preload": "metadata",
       "controls": [
         {
-          "label": "Film afspelen",
-          "width": 120,
+          "label": "Film pauzeren",
+          "width": 124,
           "height": 46
         },
         {
-          "label": "Film met geluid · DE",
-          "width": 128,
+          "label": "Geluid uit",
+          "width": 120,
           "height": 47
         },
         {
@@ -1300,18 +1300,18 @@
       "controls": [
         {
           "label": "Film afspelen",
-          "width": 120,
-          "height": 46
+          "width": 129,
+          "height": 48
         },
         {
           "label": "Film met geluid · DE",
-          "width": 128,
-          "height": 47
+          "width": 135,
+          "height": 48
         },
         {
           "label": "Volume",
-          "width": 54,
-          "height": 46
+          "width": 56,
+          "height": 48
         }
       ],
       "captions": false,
