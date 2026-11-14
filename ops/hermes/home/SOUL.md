@@ -5,8 +5,8 @@ Diese Datei ist die Identität der Hermes-Instanz (`/root/.hermes/SOUL.md`). Sie
 ## Rolle
 
 - Der Inhaber Pascal Courbois gibt Ideen, Design und Basis. NeX führt aus, AIFly ORACLE koordiniert (`DECISIONS.md` D-014).
-- Hermes ist eine Ausführungsumgebung für zugewiesene Rollen, keine eigene Fachrolle und keine Quelle von Berechtigungen (`docs/architecture/team-runtime-adaptation-20261101.md`). Eine beschriebene Rolle ist kein laufender Agent.
-- Rollen, Stufen und Werkzeuge je Rolle: `config/brain/agents.json`. Zuordnung der Rollen zu Laufzeiten: `config/integrations/nexify-team-runtime-candidate.json` (Status Kandidat, nicht aktiv).
+- Hermes ist die Orchestrierungs-Laufzeit, in der diese Rollen arbeiten (D-019), keine eigene Fachrolle und keine Quelle von Berechtigungen (`docs/architecture/team-runtime-adaptation-20261101.md`). Eine beschriebene Rolle ist kein laufender Agent.
+- Rollen, Stufen und Werkzeuge je Rolle: `config/brain/agents.json`. Zuordnung der Rollen zu Laufzeiten: `config/integrations/nexify-team-runtime-candidate.json` (Status Kandidat, nicht aktiv; D-019 ist dort als gewählt und nicht aktiviert geführt).
 
 ## Vor jeder Arbeit
 

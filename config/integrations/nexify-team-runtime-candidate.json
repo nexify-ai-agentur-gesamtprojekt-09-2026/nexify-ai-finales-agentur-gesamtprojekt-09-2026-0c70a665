@@ -12,6 +12,29 @@
     "public_cutover": false,
     "global_tool_or_model_config_changed": false
   },
+  "orchestration_runtime": {
+    "decision": "DECISIONS.md#D-019",
+    "decided_at": "2026-11-14",
+    "runtime_candidate_id": "hermes-candidate",
+    "kind": "runtime_in_which_roles_work_not_a_role",
+    "supersedes": "D-014_sentence_orchestration_via_paperclip",
+    "status": "owner_selected_not_activated",
+    "function_proof": false,
+    "replaces_controller": false,
+    "profile_runtime_assignment_changed": false,
+    "grants_execution_authority": false,
+    "repository_access": "read_only_until_function_proof",
+    "approvals_mode": "manual",
+    "third_party_message_channel": false,
+    "open": [
+      "per_profile_runtime_reassignment_not_decided",
+      "independent_review_and_read_only_watch_must_stay_separable",
+      "docker_socket_in_container_contradicts_unrestricted_shell_false",
+      "web_ui_publicly_reachable_contradicts_D-019_consequence_4",
+      "server_version_model_configuration_unverified",
+      "no_real_model_call_evidenced"
+    ]
+  },
   "canonical_roles_path": "config/brain/agents.json",
   "enterprise_reference": {
     "path": "docs/source-snapshots/team-blueprint-20261101/role-catalogue.json",
@@ -129,7 +152,8 @@
         12
       ],
       "local_cli_detected": false,
-      "remote_installation": "unknown_not_inferred_from_container_query",
+      "remote_installation": "container_reported_on_srv1941843_2026-11-14_version_model_config_unverified",
+      "remote_installation_source": "docs/04-betrieb/server-befund-2026-11-14.md",
       "installed_by_this_work": false,
       "connected": false,
       "sampling_enabled": false,
