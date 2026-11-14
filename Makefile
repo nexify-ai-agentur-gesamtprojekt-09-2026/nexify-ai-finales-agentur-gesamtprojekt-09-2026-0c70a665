@@ -68,6 +68,7 @@ check-arch:
 governance-check:
 	python3 tools/check_llm_policy.py
 	python3 tools/check_hermes_config.py
+	python3 tools/check_loesungsregister.py
 	python3 tools/project_skills.py verify
 	python3 tools/check_ai_coverage.py --audit
 

@@ -128,7 +128,7 @@ docker exec hermes cat /root/.hermes/cache/scratch/nachweis.json
 docker exec hermes hermes skills list
 ```
 
-Abnahme: Exit 0, eine Antwort, im Bericht `"model": "deepseek/deepseek-v4.1-flash-1017"`, `"provider": "openrouter"`, `"completed": true`, und `auxiliary.api_calls` ist 0. Die Skill-Liste nennt die zwölf Skills als `external`. Zusätzlich im OpenRouter-Aktivitätsprotokoll prüfen, dass genau dieses Modell mit Reasoning `high` abgerechnet wurde: Der Bericht von Hermes nennt die Reasoning-Stufe nicht. Das ist ein bezahlter Aufruf.
+Abnahme: Exit 0, eine Antwort, im Bericht `"model": "deepseek/deepseek-v4.1-flash-1017"`, `"provider": "openrouter"`, `"completed": true`, und `auxiliary.api_calls` ist 0. Die Skill-Liste nennt jeden Skill aus dem Index `.claude/skills/README.md` als `external`. Zusätzlich im OpenRouter-Aktivitätsprotokoll prüfen, dass genau dieses Modell mit Reasoning `high` abgerechnet wurde: Der Bericht von Hermes nennt die Reasoning-Stufe nicht. Das ist ein bezahlter Aufruf.
 
 ## Die vier Befunde aus dem Protokoll
 
@@ -147,7 +147,7 @@ Umgebung: eigener Bereich im Scratchpad dieser Sitzung, eigenes `HOME` und `HERM
 
 - Installation mit dem Installer des gebundenen Commits (`scripts/install.sh --commit bf0203a… --non-interactive --skip-browser --skip-computer-use`): Exit 0. `hermes --version`: „Hermes Agent v0.22.5“, „Python: 3.14.9“, `git rev-parse HEAD` gleich dem gebundenen Commit. Python 3.14 kam über die im Hermes-Lock gebundene `uv`-Version.
 - `hermes config get` liefert aus `home/config.yaml`: `model.provider` `openrouter`, `model.default` `deepseek/deepseek-v4.1-flash-1017`, `agent.reasoning_effort` `high`, `fallback_providers` `[]`, `delegation.fallback_providers` `[]`; `terminal.cwd` und `skills.external_dirs` werden aus `NEXIFY_REPO` aufgelöst.
-- `hermes skills list`: alle zwölf Skills aus `.claude/skills` als `external`, `enabled`.
+- `hermes skills list`: alle Skills aus `.claude/skills` als `external`, `enabled` (am Tag der Messung zwölf; maßgeblich ist der Index `.claude/skills/README.md`, die Zahl wächst mit jedem neuen Skill).
 - `einspielen.sh --anwenden` gegen dieses Home: Versionsprüfung trifft den gebundenen Commit, Sicherung angelegt, `hermes doctor` läuft danach durch.
 - Ohne Schlüssel endet `hermes -z` mit Exit 2 und `ProviderNotConfiguredError`. Es wird kein anderer Anbieter versucht.
 - Gegen eine lokale Attrappe (`OPENROUTER_BASE_URL` auf `127.0.0.1`, Platzhalter statt Schlüssel) sendet `hermes -z` genau eine Anfrage: `model` `deepseek/deepseek-v4.1-flash-1017`, `provider: {require_parameters: true}`, kein zweites Modell. Der Systemtext enthält `SOUL.md`, die vollständige `AGENTS.md` ohne Sperr- oder Kürzungsvermerk und die Skill-Liste. Der Nutzungsbericht nennt Modell und Anbieter wie oben.
@@ -164,7 +164,7 @@ Nicht belegt: Die Attrappe ist keine OpenRouter-Adresse, deshalb sendet Hermes d
 4. **Rechte des Containers.** Docker-Socket, `network_mode: host` und Root im Container geben dem Agenten faktisch Root auf dem Host. Das steht gegen `unrestricted_shell: false` im Kandidaten und gegen die Hartsperren, die laut `AGENTS.md` im Gateway liegen sollen. `approvals.mode: manual` und die `deny`-Muster sind eine Rückfrage, keine Sandbox (`user-guide/security.md`). Entscheidung des Inhabers: Socket entfernen, eigener Dienstnutzer, Terminal-Backend mit Isolierung.
 5. **Web-Oberfläche auf `0.0.0.0:8788`.** Siehe Punkt 12: laut Server-Befund von außen erreichbar.
 6. **Werkzeugumfang.** Lokal bot Hermes 20 Werkzeuge an, darunter `terminal`, `write_file`, `browser_exec`, `delegate_task`. Welche davon je Rolle zulässig sind (`agent.disabled_toolsets`), ist nicht festgelegt.
-7. **Mitgelieferte Skills.** Lokal lagen neben den zwölf 53 Skills von Hermes im Home. Ob sie auf dem Server bleiben sollen, ist offen (`hermes skills opt-out`).
+7. **Mitgelieferte Skills.** Lokal lagen neben den Projekt-Skills aus dem Index 53 Skills von Hermes im Home. Ob sie auf dem Server bleiben sollen, ist offen (`hermes skills opt-out`).
 8. **Schreibzugriff auf das Repository.** Die Einbindung ist nur lesend. Soll Hermes Zweige und Entwurfs-PRs liefern, braucht es einen eigenen beschreibbaren Checkout und einen eng berechtigten Git-Zugang.
 9. **`_config_version`.** Die Fassung trägt keinen Versionsstempel, weil Hermes ihn selbst verwaltet. `hermes doctor` meldet deshalb „v0 → v51“. `hermes config migrate` oder `hermes update` können die Datei umschreiben; danach zeigt der Trockenlauf von `einspielen.sh` die Abweichung.
 10. **Grenzen der Limits.** `agent.max_turns` und `run_budget_seconds` sind Schritt- und Zeitgrenzen von Hermes, kein Geldbudget. Ein Ausgabenlimit gehört an den OpenRouter-Schlüssel.
