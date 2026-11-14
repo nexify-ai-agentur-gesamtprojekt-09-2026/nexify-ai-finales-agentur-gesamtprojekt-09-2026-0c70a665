@@ -6,31 +6,36 @@
   "schalter": "NEXIFY_MAILING_CONSENT",
   "register": ["OA-003", "OA-098"],
   "einwilligung": {
-    "$kommentar": "`fassung` ist die Kennung des freigegebenen Wortlauts (zum Beispiel \"2026-11-20.1\"). Je Anmeldung werden Fassung und SHA-256 des Wortlauts gespeichert. Ein geänderter Wortlaut braucht eine neue Fassung.",
+    "$kommentar": "`fassung` ist die Kennung des freigegebenen Wortlauts (zum Beispiel \"2026-11-20.1\"). Je Anmeldung werden Fassung und SHA-256 des Wortlauts gespeichert. Ein geänderter Wortlaut braucht eine neue Fassung und eine neue Freigabe: Die Freigabe nennt unter `sha256` je Sprache die SHA-256 des freigegebenen Texts (UTF-8, Zeichen für Zeichen); weicht ein Text davon ab, arbeitet der Weg nicht.",
     "fassung": null,
     "freigabe": null,
     "texte": { "de": null, "nl": null, "fr": null, "en": null }
   },
   "bestaetigungsmail": {
-    "$kommentar": "Je Sprache { \"betreff\": \"…\", \"text\": \"…\" }. Der Text muss {{BESTAETIGUNGSLINK}} enthalten und darf {{EINWILLIGUNGSTEXT}} enthalten. Die Mail enthält keine Werbung (Entwurf: docs/05-marketing/mailing/vorlagen/a-double-opt-in-bestaetigung.md).",
+    "$kommentar": "Je Sprache { \"betreff\": \"…\", \"text\": \"…\" }. Der Text muss {{BESTAETIGUNGSLINK}} und {{SPERRLINK}} enthalten und darf {{EINWILLIGUNGSTEXT}} enthalten. {{SPERRLINK}} führt auf die Abmeldeseite: Wer die Mail bekommt, ohne sich angemeldet zu haben, sperrt damit seine Adresse. Die Freigabe nennt unter `sha256` je Sprache die SHA-256 von Betreff, Zeilenumbruch, Text. Die Mail enthält keine Werbung (Entwurf: docs/05-marketing/mailing/vorlagen/a-double-opt-in-bestaetigung.md).",
     "freigabe": null,
     "texte": { "de": null, "nl": null, "fr": null, "en": null }
   },
   "bestaetigungsfrist_stunden": null,
   "seiten": {
-    "$kommentar": "Pfade der Seiten, auf die die Mail verweist. Die Bestätigungsseite sendet das Kennzeichen per POST an /api/mailing/confirm; ein bloßer Abruf des Links bestätigt nichts (Schutz vor Vorab-Abrufen durch Mailprüfer). Beide Seiten sind noch nicht gebaut.",
+    "$kommentar": "Pfade der Seiten, auf die die Mail verweist; beide sind Pflicht. Die Kennzeichen stehen hinter dem #. Die Bestätigungsseite sendet ihres per POST an /api/mailing/confirm; ein bloßer Abruf des Links bestätigt nichts (Schutz vor Vorab-Abrufen durch Mailprüfer). Die Abmeldeseite sendet ihres per POST an /api/mailing/unsubscribe?t=…. Beide Seiten sind noch nicht gebaut.",
     "bestaetigung": null,
     "abmeldung": null
   },
   "quellen": [],
   "grenzen": {
-    "bestaetigungsmails_je_anmeldung": 3,
+    "$kommentar": "Ganze Zahlen in ihrem Bereich; eine fehlende oder unsinnige Angabe (0, Bruch, Text) schaltet keinen Schutz ab, sondern den ganzen Weg (503). Bestätigungsmails: je Adresse höchstens `bestaetigungsmails_je_adresse` (1 bis 10) in `bestaetigungsmails_fenster_stunden` (1 bis 8760), insgesamt höchstens `bestaetigungsmails_je_tag` (1 bis 10000) in 24 Stunden; beides zählt die Datenbank, unabhängig vom Verfall einer Anmeldung, und ein gescheiterter Versand zählt nicht. Die Tagesgrenze schützt das gemeinsam genutzte Versandkonto; ihr Wert ist ein Vorschlag und gehört zum Kontingent des Kontos, das der Inhaber kennt. `anfragen_*` begrenzt die Anmeldung, `bestaetigungen_*` die Bestätigung, jeweils je Absender und Funktionsinstanz.",
+    "bestaetigungsmails_je_adresse": 3,
+    "bestaetigungsmails_fenster_stunden": 168,
+    "bestaetigungsmails_je_tag": 50,
     "anfragen_je_minute": 3,
     "anfragen_je_stunde": 10,
+    "bestaetigungen_je_minute": 10,
+    "bestaetigungen_je_stunde": 60,
     "max_body_bytes": 4096
   },
   "freigabe_format": {
-    "$kommentar": "So sieht eine eingetragene Freigabe aus. Kein Wert hier ist eine Freigabe.",
-    "felder": ["durch", "am", "beleg"]
+    "$kommentar": "So sieht eine eingetragene Freigabe aus. Kein Wert hier ist eine Freigabe. `sha256` ist ein Objekt je Sprache, zum Beispiel { \"de\": \"<64 Hex-Zeichen>\" }; die Werte berechnet `consentTextDigest` beziehungsweise `confirmationMailDigest` in apps/web/mailing/consent.ts.",
+    "felder": ["durch", "am", "beleg", "sha256"]
   }
 }

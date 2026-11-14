@@ -14,6 +14,14 @@
  * Jeder Zustandswechsel ist eine einzelne Anweisung mit Filter auf den erwarteten Ausgangszustand. Von zwei
  * gleichzeitigen Aufrufen gewinnt genau einer; die Datenbank sichert zusätzlich über Trigger, dass ein Zustand
  * nur vorwärts läuft und ein Nachweis nicht umgeschrieben wird.
+ *
+ * Was beim Anlegen einer Anmeldung feststeht (Adresse, Sprache, Quelle, Fassung, Prüfsumme des Wortlauts, Zeitpunkt,
+ * Frist), ändert kein späterer Aufruf mehr. Eine weitere Anfrage zur selben Adresse fügt nur ein weiteres
+ * Bestätigungskennzeichen an; die früheren bleiben bis zum Ablauf der Frist gültig. So kann ein Dritter die offene
+ * Anmeldung eines anderen weder umschreiben noch dessen Link entwerten.
+ *
+ * Die Zählung der Bestätigungsmails (`confirmation_mails`) hängt nicht an der Anmeldung und überlebt deren Verfall.
+ * Ob eine Mail noch erlaubt ist, entscheidet die Datenbank unter einer Sperre beim Eintragen.
  */
 import { sbDelete, sbInsert, sbSelect, sbUpdate, supabaseConfigured, SupabaseTimeoutError, type SbOptions } from '../lib/supabase-rest.ts';
 
@@ -22,7 +30,7 @@ export type SubscriptionStatus = 'pending' | 'confirmed' | 'unsubscribed';
 export type SuppressionReason = 'unsubscribe' | 'objection' | 'hard_bounce' | 'complaint' | 'manual';
 export type ConsentEventType = 'requested' | 'confirmation_resent' | 'confirmed' | 'unsubscribed';
 
-/** Was von einer Anmeldung gelesen wird. Kennzeichen (Token) werden nie herausgegeben, nur geprüft. */
+/** Was von einer Anmeldung gelesen wird. Kennzeichen (Token) und ihre Prüfsummen gehören nicht dazu. */
 export type Subscription = {
   emailHash: string;
   email: string;
@@ -32,9 +40,9 @@ export type Subscription = {
   consentVersion: string;
   consentTextSha256: string;
   requestedAt: number;
+  confirmExpiresAt: number;
   confirmedAt: number | null;
   unsubscribedAt: number | null;
-  confirmMailsSent: number;
 };
 
 export type PendingInput = {
@@ -50,9 +58,23 @@ export type PendingInput = {
   unsubscribeToken: string;
 };
 
-export type RenewInput = Omit<PendingInput, 'emailHash' | 'email' | 'unsubscribeToken'>;
-
 export type ConsentEvent = { emailHash: string; type: ConsentEventType; consentVersion: string; source: string; occurredAt: number };
+
+/** Grenzen für Bestätigungsmails: je Adress-Prüfsumme im Fenster und insgesamt in 24 Stunden. */
+export type MailLimits = { perAddress: number; windowHours: number; perDay: number };
+export type MailReservation = { id: number };
+
+/** Höchstzahl gleichzeitig gültiger Bestätigungskennzeichen je unbestätigter Anmeldung (wie in der Migration). */
+export const MAX_CONFIRM_TOKENS = 8;
+/** Schranken der Grenzwerte, wie die Datenbank sie prüft. Außerhalb davon wird nichts eingetragen und nichts gesendet. */
+export const MAIL_LIMIT_BOUNDS = { perAddress: [1, 10], windowHours: [1, 8760], perDay: [1, 10000] } as const;
+
+export function mailLimitsValid(limits: MailLimits): boolean {
+  return (Object.keys(MAIL_LIMIT_BOUNDS) as (keyof MailLimits)[]).every((key) => {
+    const value = limits?.[key];
+    return typeof value === 'number' && Number.isInteger(value) && value >= MAIL_LIMIT_BOUNDS[key][0] && value <= MAIL_LIMIT_BOUNDS[key][1];
+  });
+}
 
 export interface MailingConsentStore {
   isSuppressed(emailHash: string): Promise<boolean>;
@@ -60,10 +82,18 @@ export interface MailingConsentStore {
   /** Legt eine unbestätigte Anmeldung an. `false`, wenn es zu dieser Adresse schon eine Zeile gibt. */
   insertPending(input: PendingInput): Promise<boolean>;
   /**
-   * Erneuert Kennzeichen, Frist und Wortlaut-Fassung einer unbestätigten Anmeldung und zählt die Mail.
-   * `false`, wenn die Zeile inzwischen nicht mehr unbestätigt ist oder ein anderer Aufruf schneller war.
+   * Fügt einer unbestätigten, nicht verfallenen Anmeldung ein weiteres Bestätigungskennzeichen an. Nichts sonst
+   * ändert sich; frühere Kennzeichen bleiben gültig. `null`, wenn es keine solche Anmeldung (mehr) gibt oder die
+   * Höchstzahl an Kennzeichen erreicht ist.
+   *
+   * Einzige Stelle, an der der Speicher das Abmeldekennzeichen herausgibt: Es gehört als Sperrlink in genau die
+   * Bestätigungsmail, für die das neue Kennzeichen angefügt wurde, und nirgendwohin sonst (kein Protokoll, keine Antwort).
    */
-  renewPending(emailHash: string, expectedMailsSent: number, input: RenewInput): Promise<boolean>;
+  addConfirmToken(emailHash: string, tokenHash: string, nowMs: number): Promise<{ unsubscribeToken: string } | null>;
+  /** Nimmt ein Kennzeichen zurück, dessen Mail nicht hinausging. Das letzte Kennzeichen einer Anmeldung bleibt stehen. */
+  removeConfirmToken(emailHash: string, tokenHash: string): Promise<void>;
+  /** Zu welcher unbestätigten, nicht verfallenen Anmeldung das Kennzeichen gehört. Ändert nichts. */
+  findPendingByTokenHash(tokenHash: string, nowMs: number): Promise<{ emailHash: string } | null>;
   /** Bestätigt genau die unbestätigte, nicht verfallene Anmeldung zu diesem Kennzeichen. Sonst `null`. */
   confirmByTokenHash(tokenHash: string, nowMs: number): Promise<Subscription | null>;
   /**
@@ -73,27 +103,46 @@ export interface MailingConsentStore {
   unsubscribeByToken(token: string, nowMs: number): Promise<{ emailHash: string; alreadyUnsubscribed: boolean } | null>;
   addSuppression(emailHash: string, reason: SuppressionReason, nowMs: number): Promise<void>;
   appendEvent(event: ConsentEvent): Promise<void>;
+  /**
+   * Trägt eine Bestätigungsmail VOR dem Versand ein. `null`, wenn die Grenze je Adresse oder die Tagesgrenze erreicht
+   * ist; dann wird nicht gesendet. Von gleichzeitigen Aufrufen kommen nie mehr durch, als die Grenzen erlauben.
+   */
+  reserveConfirmationMail(emailHash: string, nowMs: number, limits: MailLimits): Promise<MailReservation | null>;
+  /** Schließt einen Eintrag ab: `sent` zählt weiter, `failed` gibt den Platz frei (ein Fehlschlag verbraucht keine Mail). */
+  settleConfirmationMail(reservation: MailReservation, outcome: 'sent' | 'failed'): Promise<void>;
+  /** Nur für die Meldung im Protokoll: Ist die Tagesgrenze erreicht? */
+  dailyLimitReached(nowMs: number, perDay: number): Promise<boolean>;
   /** Löscht unbestätigte Anmeldungen, deren Frist abgelaufen ist. Bestätigte und abgemeldete bleiben. */
   purgeExpiredPending(nowMs: number): Promise<void>;
+  /** Löscht Einträge der Mailzählung, die für keine Grenze mehr zählen. */
+  purgeSettledMails(nowMs: number, windowHours: number): Promise<void>;
 }
 
 const HEX64 = /^[0-9a-f]{64}$/;
 const TOKEN = /^[A-Za-z0-9_-]{43}$/;
+const HOUR_MS = 3_600_000;
 
-type MemoryRow = Subscription & { confirmTokenHash: string | null; confirmExpiresAt: number | null; unsubscribeToken: string };
+type MemoryRow = Subscription & { confirmTokenHashes: string[]; unsubscribeToken: string };
+type MemoryMail = { id: number; emailHash: string; state: 'reserved' | 'sent' | 'failed'; reservedAt: number; limits: MailLimits };
 
-/** Nur für Tests. Verhält sich wie die Datenbank samt ihrer Sperren (Zustand nur vorwärts, Sperrliste nur Anfügen). */
-export function createMemoryMailingConsentStore(): MailingConsentStore & { events: ConsentEvent[]; suppressions: Map<string, SuppressionReason> } {
+/**
+ * Nur für Tests. Verhält sich wie die Datenbank samt ihrer Sperren: Zustand nur vorwärts, Nachweis unveränderlich,
+ * keine Bestätigung einer gesperrten Adresse, Sperrliste nur Anfügen, Mailzählung mit Grenzen.
+ */
+export function createMemoryMailingConsentStore(): MailingConsentStore & { events: ConsentEvent[]; suppressions: Map<string, SuppressionReason>; mails: MemoryMail[] } {
   const subscriptions = new Map<string, MemoryRow>();
   const suppressions = new Map<string, SuppressionReason>();
   const events: ConsentEvent[] = [];
+  const mails: MemoryMail[] = [];
   const view = (row: MemoryRow): Subscription => {
-    const { confirmTokenHash: _hash, confirmExpiresAt: _expires, unsubscribeToken: _token, ...rest } = row;
+    const { confirmTokenHashes: _hashes, unsubscribeToken: _token, ...rest } = row;
     return { ...rest };
   };
+  const open = (row: MemoryRow, nowMs: number): boolean => row.status === 'pending' && row.confirmExpiresAt > nowMs;
   return {
     events,
     suppressions,
+    mails,
     async isSuppressed(emailHash) {
       return suppressions.has(emailHash);
     },
@@ -112,36 +161,38 @@ export function createMemoryMailingConsentStore(): MailingConsentStore & { event
         consentVersion: input.consentVersion,
         consentTextSha256: input.consentTextSha256,
         requestedAt: input.requestedAt,
+        confirmExpiresAt: input.confirmExpiresAt,
         confirmedAt: null,
         unsubscribedAt: null,
-        confirmMailsSent: 1,
-        confirmTokenHash: input.confirmTokenHash,
-        confirmExpiresAt: input.confirmExpiresAt,
+        confirmTokenHashes: [input.confirmTokenHash],
         unsubscribeToken: input.unsubscribeToken,
       });
       return true;
     },
-    async renewPending(emailHash, expectedMailsSent, input) {
+    async addConfirmToken(emailHash, tokenHash, nowMs) {
       const row = subscriptions.get(emailHash);
-      if (!row || row.status !== 'pending' || row.confirmMailsSent !== expectedMailsSent) return false;
-      Object.assign(row, {
-        lang: input.lang,
-        source: input.source,
-        consentVersion: input.consentVersion,
-        consentTextSha256: input.consentTextSha256,
-        requestedAt: input.requestedAt,
-        confirmTokenHash: input.confirmTokenHash,
-        confirmExpiresAt: input.confirmExpiresAt,
-        confirmMailsSent: expectedMailsSent + 1,
-      });
-      return true;
+      if (!row || !open(row, nowMs) || row.confirmTokenHashes.length >= MAX_CONFIRM_TOKENS) return null;
+      row.confirmTokenHashes.push(tokenHash);
+      return { unsubscribeToken: row.unsubscribeToken };
+    },
+    async removeConfirmToken(emailHash, tokenHash) {
+      const row = subscriptions.get(emailHash);
+      if (!row || row.status !== 'pending' || row.confirmTokenHashes.length < 2) return;
+      row.confirmTokenHashes = row.confirmTokenHashes.filter((hash) => hash !== tokenHash);
+    },
+    async findPendingByTokenHash(tokenHash, nowMs) {
+      for (const row of subscriptions.values()) {
+        if (open(row, nowMs) && row.confirmTokenHashes.includes(tokenHash)) return { emailHash: row.emailHash };
+      }
+      return null;
     },
     async confirmByTokenHash(tokenHash, nowMs) {
       for (const row of subscriptions.values()) {
-        if (row.status === 'pending' && row.confirmTokenHash === tokenHash && row.confirmExpiresAt !== null && row.confirmExpiresAt > nowMs) {
-          Object.assign(row, { status: 'confirmed', confirmedAt: nowMs, confirmTokenHash: null, confirmExpiresAt: null });
-          return view(row);
-        }
+        if (!open(row, nowMs) || !row.confirmTokenHashes.includes(tokenHash)) continue;
+        // Wie der Trigger der Datenbank: Eine gesperrte Adresse wird nicht bestätigt, auch wenn der Aufrufer nicht geprüft hat.
+        if (suppressions.has(row.emailHash)) throw new MailingConsentStoreError('mailing_store_failed');
+        Object.assign(row, { status: 'confirmed', confirmedAt: nowMs, confirmTokenHashes: [] });
+        return view(row);
       }
       return null;
     },
@@ -150,7 +201,7 @@ export function createMemoryMailingConsentStore(): MailingConsentStore & { event
         if (row.unsubscribeToken !== token) continue;
         if (!suppressions.has(row.emailHash)) suppressions.set(row.emailHash, 'unsubscribe');
         if (row.status === 'unsubscribed') return { emailHash: row.emailHash, alreadyUnsubscribed: true };
-        Object.assign(row, { status: 'unsubscribed', unsubscribedAt: nowMs, confirmTokenHash: null, confirmExpiresAt: null });
+        Object.assign(row, { status: 'unsubscribed', unsubscribedAt: nowMs, confirmTokenHashes: [] });
         return { emailHash: row.emailHash, alreadyUnsubscribed: false };
       }
       return null;
@@ -161,10 +212,31 @@ export function createMemoryMailingConsentStore(): MailingConsentStore & { event
     async appendEvent(event) {
       events.push({ ...event });
     },
+    async reserveConfirmationMail(emailHash, nowMs, limits) {
+      if (!mailLimitsValid(limits)) throw new MailingConsentStoreError('mailing_store_failed');
+      const counted = mails.filter((mail) => mail.state !== 'failed');
+      if (counted.filter((mail) => mail.emailHash === emailHash && mail.reservedAt > nowMs - limits.windowHours * HOUR_MS).length >= limits.perAddress) return null;
+      if (counted.filter((mail) => mail.reservedAt > nowMs - 24 * HOUR_MS).length >= limits.perDay) return null;
+      const id = mails.length + 1;
+      mails.push({ id, emailHash, state: 'reserved', reservedAt: nowMs, limits: { ...limits } });
+      return { id };
+    },
+    async settleConfirmationMail(reservation, outcome) {
+      const mail = mails.find((entry) => entry.id === reservation.id);
+      if (mail && mail.state === 'reserved') mail.state = outcome;
+    },
+    async dailyLimitReached(nowMs, perDay) {
+      return mails.filter((mail) => mail.state !== 'failed' && mail.reservedAt > nowMs - 24 * HOUR_MS).length >= perDay;
+    },
     async purgeExpiredPending(nowMs) {
       for (const [key, row] of subscriptions) {
-        if (row.status === 'pending' && row.confirmExpiresAt !== null && row.confirmExpiresAt < nowMs) subscriptions.delete(key);
+        if (row.status === 'pending' && row.confirmExpiresAt < nowMs) subscriptions.delete(key);
       }
+    },
+    async purgeSettledMails(nowMs, windowHours) {
+      const keep = mails.filter((mail) => mail.reservedAt >= nowMs - Math.max(windowHours, mail.limits.windowHours, 24) * HOUR_MS);
+      mails.length = 0;
+      mails.push(...keep);
     },
   };
 }
@@ -191,7 +263,7 @@ export class MailingConsentStoreError extends Error {
 const DB: SbOptions = { schema: 'mailing' };
 const STATUSES: readonly SubscriptionStatus[] = ['pending', 'confirmed', 'unsubscribed'];
 const LANGS: readonly MailingLang[] = ['de', 'nl', 'fr', 'en'];
-const COLUMNS = 'email_hash,email,lang,status,source,consent_version,consent_text_sha256,requested_at,confirmed_at,unsubscribed_at,confirm_mails_sent';
+const COLUMNS = 'email_hash,email,lang,status,source,consent_version,consent_text_sha256,requested_at,confirm_expires_at,confirmed_at,unsubscribed_at';
 
 type DbRow = Record<string, unknown>;
 
@@ -228,8 +300,7 @@ function optionalTime(row: DbRow, column: string): number | null {
 function toSubscription(row: DbRow): Subscription {
   const status = text(row, 'status') as SubscriptionStatus;
   const lang = text(row, 'lang') as MailingLang;
-  const sent = row.confirm_mails_sent;
-  if (!STATUSES.includes(status) || !LANGS.includes(lang) || typeof sent !== 'number' || !Number.isInteger(sent)) fail();
+  if (!STATUSES.includes(status) || !LANGS.includes(lang)) fail();
   const emailHash = text(row, 'email_hash');
   if (!HEX64.test(emailHash)) fail();
   return {
@@ -241,11 +312,19 @@ function toSubscription(row: DbRow): Subscription {
     consentVersion: text(row, 'consent_version'),
     consentTextSha256: text(row, 'consent_text_sha256'),
     requestedAt: time(row, 'requested_at'),
+    confirmExpiresAt: time(row, 'confirm_expires_at'),
     confirmedAt: optionalTime(row, 'confirmed_at'),
     unsubscribedAt: optionalTime(row, 'unsubscribed_at'),
-    confirmMailsSent: sent as number,
   };
 }
+function tokenHashes(row: DbRow): string[] {
+  const value = row.confirm_token_hashes;
+  if (!Array.isArray(value) || !value.every((entry) => typeof entry === 'string' && HEX64.test(entry))) fail();
+  return value as string[];
+}
+/** PostgreSQL-Feldliteral für Filter (`cs.{…}`, `eq.{…}`). Die Einträge sind geprüfte Hex-Prüfsummen. */
+const arrayLiteral = (hashes: readonly string[]): string => encodeURIComponent('{' + hashes.join(',') + '}');
+const CAS_ATTEMPTS = 3;
 
 /**
  * Dauerhafter Speicher auf der selbst gehosteten Supabase-Instanz (PostgREST, Schema "mailing").
@@ -287,9 +366,8 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
               consent_version: input.consentVersion,
               consent_text_sha256: input.consentTextSha256,
               requested_at: iso(input.requestedAt),
-              confirm_token_hash: input.confirmTokenHash,
               confirm_expires_at: iso(input.confirmExpiresAt),
-              confirm_mails_sent: 1,
+              confirm_token_hashes: [input.confirmTokenHash],
               unsubscribe_token: input.unsubscribeToken,
             },
             { ...DB, prefer: 'resolution=ignore-duplicates' },
@@ -298,29 +376,61 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
         return inserted.length === 1 && inserted[0].email_hash === input.emailHash;
       });
     },
-    async renewPending(emailHash, expectedMailsSent, input) {
-      if (!HEX64.test(emailHash) || !HEX64.test(input.confirmTokenHash) || !Number.isInteger(expectedMailsSent) || expectedMailsSent < 0) fail();
-      // Der Filter trägt den erwarteten Zustand und den erwarteten Zählerstand: Von zwei gleichzeitigen
-      // Erneuerungen ändert genau eine die Zeile, die andere bekommt keine Zeile zurück und sendet nicht.
+    async addConfirmToken(emailHash, tokenHash, nowMs) {
+      if (!HEX64.test(emailHash) || !HEX64.test(tokenHash)) fail();
+      // Lesen, dann schreiben mit dem gelesenen Stand im Filter: Von zwei gleichzeitigen Aufrufen ändert genau einer
+      // die Zeile, der andere liest neu. Geschrieben wird nur die Liste der Kennzeichen, nie der Nachweis.
       return guarded(async () => {
-        const updated = rows(
-          await sbUpdate(
-            `subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_mails_sent=eq.${expectedMailsSent}`,
-            {
-              lang: input.lang,
-              source: input.source,
-              consent_version: input.consentVersion,
-              consent_text_sha256: input.consentTextSha256,
-              requested_at: iso(input.requestedAt),
-              confirm_token_hash: input.confirmTokenHash,
-              confirm_expires_at: iso(input.confirmExpiresAt),
-              confirm_mails_sent: expectedMailsSent + 1,
-              updated_at: iso(input.requestedAt),
-            },
-            DB,
-          ),
+        const now = encodeURIComponent(iso(nowMs));
+        for (let attempt = 0; attempt < CAS_ATTEMPTS; attempt++) {
+          const found = rows(await sbSelect(`subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_expires_at=gt.${now}&select=email_hash,confirm_token_hashes,unsubscribe_token&limit=1`, DB));
+          if (found.length === 0) return null;
+          if (found[0].email_hash !== emailHash) fail();
+          const current = tokenHashes(found[0]);
+          const unsubscribeToken = text(found[0], 'unsubscribe_token');
+          if (!TOKEN.test(unsubscribeToken)) fail();
+          if (current.includes(tokenHash)) return { unsubscribeToken };
+          if (current.length >= MAX_CONFIRM_TOKENS) return null;
+          const updated = rows(
+            await sbUpdate(
+              `subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_expires_at=gt.${now}&confirm_token_hashes=eq.${arrayLiteral(current)}`,
+              { confirm_token_hashes: [...current, tokenHash], updated_at: iso(nowMs) },
+              DB,
+            ),
+          );
+          if (updated.length === 1 && updated[0].email_hash === emailHash) return { unsubscribeToken };
+        }
+        return null;
+      });
+    },
+    async removeConfirmToken(emailHash, tokenHash) {
+      if (!HEX64.test(emailHash) || !HEX64.test(tokenHash)) fail();
+      await guarded(async () => {
+        for (let attempt = 0; attempt < CAS_ATTEMPTS; attempt++) {
+          const found = rows(await sbSelect(`subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&select=email_hash,confirm_token_hashes&limit=1`, DB));
+          if (found.length === 0) return;
+          const current = tokenHashes(found[0]);
+          if (!current.includes(tokenHash) || current.length < 2) return;
+          const updated = rows(
+            await sbUpdate(
+              `subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_token_hashes=eq.${arrayLiteral(current)}`,
+              { confirm_token_hashes: current.filter((hash) => hash !== tokenHash) },
+              DB,
+            ),
+          );
+          if (updated.length === 1) return;
+        }
+      });
+    },
+    async findPendingByTokenHash(tokenHash, nowMs) {
+      if (!HEX64.test(tokenHash)) fail();
+      return guarded(async () => {
+        const found = rows(
+          await sbSelect(`subscriptions?confirm_token_hashes=cs.${arrayLiteral([tokenHash])}&status=eq.pending&confirm_expires_at=gt.${encodeURIComponent(iso(nowMs))}&select=email_hash&limit=2`, DB),
         );
-        return updated.length === 1 && updated[0].email_hash === emailHash;
+        if (found.length === 0) return null;
+        const emailHash = text(found[0], 'email_hash');
+        return found.length === 1 && HEX64.test(emailHash) ? { emailHash } : fail();
       });
     },
     async confirmByTokenHash(tokenHash, nowMs) {
@@ -329,8 +439,8 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
         const now = iso(nowMs);
         const updated = rows(
           await sbUpdate(
-            `subscriptions?confirm_token_hash=${eq(tokenHash)}&status=eq.pending&confirm_expires_at=gt.${encodeURIComponent(now)}`,
-            { status: 'confirmed', confirmed_at: now, confirm_token_hash: null, confirm_expires_at: null, updated_at: now },
+            `subscriptions?confirm_token_hashes=cs.${arrayLiteral([tokenHash])}&status=eq.pending&confirm_expires_at=gt.${encodeURIComponent(now)}`,
+            { status: 'confirmed', confirmed_at: now, confirm_token_hashes: [], updated_at: now },
             DB,
           ),
         );
@@ -354,7 +464,7 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
         const updated = rows(
           await sbUpdate(
             `subscriptions?email_hash=${eq(emailHash)}&status=neq.unsubscribed`,
-            { status: 'unsubscribed', unsubscribed_at: now, confirm_token_hash: null, confirm_expires_at: null, updated_at: now },
+            { status: 'unsubscribed', unsubscribed_at: now, confirm_token_hashes: [], updated_at: now },
             DB,
           ),
         );
@@ -375,9 +485,45 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
         ),
       );
     },
+    async reserveConfirmationMail(emailHash, nowMs, limits) {
+      // Ungültige Grenzen (0, NaN, Bruch) erreichen die Datenbank nicht: Sie würden den Schutz abschalten oder verfälschen.
+      if (!HEX64.test(emailHash) || !mailLimitsValid(limits)) fail();
+      // Die Datenbank zählt und trägt unter einer Sperre ein; ist eine Grenze erreicht, entsteht keine Zeile.
+      return guarded(async () => {
+        const inserted = rows(
+          await sbInsert(
+            'confirmation_mails',
+            { email_hash: emailHash, reserved_at: iso(nowMs), address_limit: limits.perAddress, address_window_hours: limits.windowHours, daily_limit: limits.perDay },
+            DB,
+          ),
+        );
+        if (inserted.length === 0) return null;
+        const id = inserted[0].id;
+        return inserted.length === 1 && inserted[0].email_hash === emailHash && typeof id === 'number' && Number.isSafeInteger(id) && id > 0 ? { id } : fail();
+      });
+    },
+    async settleConfirmationMail(reservation, outcome) {
+      if (!Number.isSafeInteger(reservation.id) || reservation.id < 1 || (outcome !== 'sent' && outcome !== 'failed')) fail();
+      await guarded(async () => {
+        const updated = rows(await sbUpdate(`confirmation_mails?id=eq.${reservation.id}&state=eq.reserved`, { state: outcome }, DB));
+        if (updated.length !== 1) fail();
+      });
+    },
+    async dailyLimitReached(nowMs, perDay) {
+      if (!Number.isInteger(perDay) || perDay < 1 || perDay > MAIL_LIMIT_BOUNDS.perDay[1]) fail();
+      return guarded(async () => {
+        const since = encodeURIComponent(iso(nowMs - 24 * HOUR_MS));
+        return rows(await sbSelect(`confirmation_mails?state=neq.failed&reserved_at=gt.${since}&select=id&limit=${perDay}`, DB)).length >= perDay;
+      });
+    },
     async purgeExpiredPending(nowMs) {
       // Der Filter nennt den Zustand ausdrücklich; die Datenbank lässt zusätzlich nur das Löschen unbestätigter Zeilen zu.
       await guarded(() => sbDelete(`subscriptions?status=eq.pending&confirm_expires_at=lt.${encodeURIComponent(iso(nowMs))}`, DB));
+    },
+    async purgeSettledMails(nowMs, windowHours) {
+      if (!Number.isInteger(windowHours) || windowHours < 1 || windowHours > MAIL_LIMIT_BOUNDS.windowHours[1]) fail();
+      // Die Datenbank lässt dabei jeden Eintrag stehen, der nach ihrer eigenen Uhr noch für eine Grenze zählt.
+      await guarded(() => sbDelete(`confirmation_mails?reserved_at=lt.${encodeURIComponent(iso(nowMs - Math.max(windowHours, 24) * HOUR_MS))}`, DB));
     },
   };
   return store;

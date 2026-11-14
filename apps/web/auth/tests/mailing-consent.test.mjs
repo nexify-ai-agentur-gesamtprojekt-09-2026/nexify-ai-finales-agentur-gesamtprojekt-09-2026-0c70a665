@@ -6,11 +6,14 @@ import {
   MAILING_CONSENT_CONFIG,
   availableLanguages,
   buildConfirmationMail,
+  confirmationMailDigest,
   consentReadiness,
+  consentTextDigest,
   emailHash,
   handleConfirm,
   handleSubscribe,
   handleUnsubscribe,
+  limitsValid,
   listUnsubscribeHeaders,
   mailingConsentEnabled,
   mailingMethodNotAllowed,
@@ -24,19 +27,32 @@ const NOW = 1_800_000_000_000;
 const HOUR = 3_600_000;
 const BASE = 'https://seite.invalid';
 const ENV = { NEXIFY_MAILING_CONSENT: 'on', MAILING_PUBLIC_BASE_URL: BASE };
-const FREIGABE = { durch: 'Prüfperson', am: '2026-01-01', beleg: 'Prüfbeleg des Tests' };
 const TEXT_DE = 'PRÜFTEXT Einwilligung, nur für diesen Test.';
+const TEXT_FR = 'PRÜFTEXT zweite Sprache, nur für diesen Test.';
+const MAIL_DE = { betreff: 'PRÜFBETREFF', text: 'Prüfabsatz eins.\n\nLink: {{BESTAETIGUNGSLINK}}\n\nSperren: {{SPERRLINK}}\n\nWortlaut: {{EINWILLIGUNGSTEXT}}' };
+const MAIL_FR = { betreff: 'PRÜFBETREFF ZWEI', text: 'Zweite Sprache.\n\n{{BESTAETIGUNGSLINK}}\n\n{{SPERRLINK}}' };
+const FREIGABE = { durch: 'Prüfperson', am: '2026-01-01', beleg: 'Prüfbeleg des Tests' };
+const GRENZEN = {
+  bestaetigungsmails_je_adresse: 3, bestaetigungsmails_fenster_stunden: 168, bestaetigungsmails_je_tag: 50,
+  anfragen_je_minute: 3, anfragen_je_stunde: 10, bestaetigungen_je_minute: 10, bestaetigungen_je_stunde: 60, max_body_bytes: 4096,
+};
 const FREIGEGEBEN = {
-  einwilligung: { fassung: 'test.1', freigabe: FREIGABE, texte: { de: TEXT_DE, nl: null, fr: null, en: null } },
-  bestaetigungsmail: {
-    freigabe: FREIGABE,
-    texte: { de: { betreff: 'PRÜFBETREFF', text: 'Prüfabsatz eins.\n\nLink: {{BESTAETIGUNGSLINK}}\n\nWortlaut: {{EINWILLIGUNGSTEXT}}' }, nl: null, fr: null, en: null },
-  },
+  einwilligung: { fassung: 'test.1', freigabe: { ...FREIGABE, sha256: { de: consentTextDigest(TEXT_DE) } }, texte: { de: TEXT_DE, nl: null, fr: null, en: null } },
+  bestaetigungsmail: { freigabe: { ...FREIGABE, sha256: { de: confirmationMailDigest(MAIL_DE) } }, texte: { de: MAIL_DE, nl: null, fr: null, en: null } },
   bestaetigungsfrist_stunden: 48,
   seiten: { bestaetigung: '/anmeldung/bestaetigen', abmeldung: '/anmeldung/abmelden' },
-  quellen: ['preise/checkliste'],
-  grenzen: { bestaetigungsmails_je_anmeldung: 3, anfragen_je_minute: 3, anfragen_je_stunde: 10, max_body_bytes: 4096 },
+  quellen: ['preise/checkliste', 'kontakt/formular'],
+  grenzen: GRENZEN,
 };
+/** Dieselbe Konfiguration mit einer zweiten freigegebenen Sprache. */
+function zweisprachig() {
+  const config = clone(FREIGEGEBEN);
+  config.einwilligung.texte.fr = TEXT_FR;
+  config.einwilligung.freigabe.sha256.fr = consentTextDigest(TEXT_FR);
+  config.bestaetigungsmail.texte.fr = MAIL_FR;
+  config.bestaetigungsmail.freigabe.sha256.fr = confirmationMailDigest(MAIL_FR);
+  return config;
+}
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const VALID = { email: ' Person@Beispiel.Invalid ', lang: 'de', consent: true, consent_version: 'test.1', source: 'preise/checkliste' };
 const ADDRESS = 'person@beispiel.invalid';
@@ -55,6 +71,7 @@ function setup(overrides = {}) {
     nowMs: () => state.now,
     newToken: () => String(++state.serial).padStart(43, 'A'),
     limiter: createRateLimiter([{ ms: 60_000, max: 1000 }]),
+    confirmLimiter: createRateLimiter([{ ms: 60_000, max: 1000 }]),
     ...overrides,
   };
   return { store, outbox, state, deps };
@@ -65,7 +82,9 @@ function post(path, body, headers = {}) {
 const subscribe = (deps, body = VALID, headers) => handleSubscribe(post('/api/mailing/subscribe', body, headers), deps);
 const confirm = (deps, token, headers) => handleConfirm(post('/api/mailing/confirm', { token }, headers), deps);
 const unsubscribe = (deps, token) => handleUnsubscribe(new Request(`${BASE}/api/mailing/unsubscribe?t=${token}`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'List-Unsubscribe=One-Click' }), deps);
-const tokenFromMail = (mail) => mail.text.match(/#t=([A-Za-z0-9_-]{43})/)[1];
+const tokenFromMail = (mail) => mail.text.match(/\/anmeldung\/bestaetigen#t=([A-Za-z0-9_-]{43})/)[1];
+/** Das Abmeldekennzeichen, wie es der Empfänger bekommt: aus dem Sperrlink der Mail, nicht aus dem Speicher geraten. */
+const blockTokenFromMail = (mail) => mail.text.match(/\/anmeldung\/abmelden#t=([A-Za-z0-9_-]{43})/)[1];
 async function quiet(run) {
   const oldError = console.error, oldWarn = console.warn;
   const logs = [];
@@ -115,6 +134,9 @@ test('Bereitschaft: jede fehlende Freigabe oder Festlegung wird einzeln benannt'
     [(c) => { c.bestaetigungsmail.texte.de = null; }, 'confirmation_mail_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.betreff = 'Zeile\nZwei'; }, 'confirmation_mail_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.text = 'ohne Link'; }, 'confirmation_mail_link_missing'],
+    [(c) => { c.bestaetigungsmail.texte.de.text = 'nur {{BESTAETIGUNGSLINK}}'; }, 'confirmation_mail_block_link_missing'],
+    [(c) => { c.seiten.abmeldung = null; }, 'unsubscribe_page_missing'],
+    [(c) => { c.seiten.abmeldung = 'https://fremd.invalid/x'; }, 'unsubscribe_page_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.text += ' {{IMPRESSUM_NAME}}'; }, 'confirmation_mail_placeholder_unresolved'],
     [(c) => { c.bestaetigungsmail.texte.de.text += ' [EINWILLIGUNGSTEXT – folgt]'; }, 'confirmation_mail_placeholder_unresolved'],
     [(c) => { c.bestaetigungsfrist_stunden = null; }, 'confirmation_deadline_missing'],
@@ -132,6 +154,63 @@ test('Bereitschaft: jede fehlende Freigabe oder Festlegung wird einzeln benannt'
   }
   assert.ok(consentReadiness(clone(FREIGEGEBEN), { NEXIFY_MAILING_CONSENT: 'on' }).includes('base_url_missing'));
   assert.deepEqual(availableLanguages(clone(FREIGEGEBEN)), ['de']);
+  assert.deepEqual(consentReadiness(zweisprachig(), ENV), []);
+  assert.deepEqual(availableLanguages(zweisprachig()), ['de', 'fr']);
+});
+
+test('Freigabe ist an den Wortlaut gebunden: ein nach der Freigabe geänderter Text zählt als Lücke', async () => {
+  const cases = [
+    [(c) => { c.einwilligung.texte.de += ' Nachträglich ergänzt.'; }, 'consent_text_approval_mismatch'],
+    [(c) => { c.einwilligung.texte.de = TEXT_DE + ' '; }, 'consent_text_approval_mismatch'],
+    [(c) => { delete c.einwilligung.freigabe.sha256; }, 'consent_text_approval_mismatch'],
+    [(c) => { c.einwilligung.freigabe.sha256 = { de: 'kein-hash' }; }, 'consent_text_approval_mismatch'],
+    [(c) => { c.einwilligung.texte.fr = TEXT_FR; }, 'consent_text_approval_mismatch'],
+    [(c) => { c.bestaetigungsmail.texte.de.text += '\n\nZusatz.'; }, 'confirmation_mail_approval_mismatch'],
+    [(c) => { c.bestaetigungsmail.texte.de.betreff = 'ANDERER BETREFF'; }, 'confirmation_mail_approval_mismatch'],
+    [(c) => { c.bestaetigungsmail.freigabe.sha256 = null; }, 'confirmation_mail_approval_mismatch'],
+    [(c) => { c.bestaetigungsmail.freigabe.sha256.de = consentTextDigest(TEXT_DE); }, 'confirmation_mail_approval_mismatch'],
+  ];
+  for (const [change, gap] of cases) {
+    const config = clone(FREIGEGEBEN);
+    change(config);
+    assert.deepEqual(consentReadiness(config, ENV), [gap], gap);
+    const { deps, outbox, store } = setup({ config });
+    const { result } = await quiet(() => subscribe(deps));
+    assert.equal(result.status, 503, gap);
+    assert.equal(outbox.length, 0);
+    assert.equal(await store.getSubscription(emailHash(ADDRESS)), null);
+  }
+  assert.equal(confirmationMailDigest({ betreff: 'a', text: 'b' }), sha256Hex('a\nb'));
+  assert.notEqual(confirmationMailDigest({ betreff: 'a', text: 'b' }), confirmationMailDigest({ betreff: 'ab', text: '' }));
+});
+
+test('Grenzen: fehlende, gebrochene oder unsinnige Werte schalten keinen Schutz ab, sondern den ganzen Weg', async () => {
+  assert.equal(limitsValid(clone(FREIGEGEBEN)), true);
+  assert.equal(limitsValid(MAILING_CONSENT_CONFIG), true, 'ausgelieferte Grenzen sind gültig');
+  const keys = Object.keys(GRENZEN);
+  for (const key of keys) {
+    for (const bad of [0, -1, 1.5, Number.NaN, '3', null, undefined, 1e9]) {
+      const config = clone(FREIGEGEBEN);
+      config.grenzen[key] = bad;
+      if (bad === undefined) delete config.grenzen[key];
+      assert.ok(consentReadiness(config, ENV).includes('limits_invalid'), `${key}=${String(bad)}`);
+    }
+  }
+  // JSON kennt kein NaN; ein von Hand gebautes Objekt schon. Beides darf nicht bis zur Anmeldung durchkommen.
+  const config = clone(FREIGEGEBEN);
+  config.grenzen.bestaetigungsmails_je_adresse = Number.NaN;
+  config.grenzen.anfragen_je_minute = Number.NaN;
+  const { deps, outbox, store } = setup({ config, limiter: undefined });
+  const { result, logs } = await quiet(() => subscribe(deps));
+  assert.equal(result.status, 503);
+  assert.match(logs.join('\n'), /limits_invalid/);
+  assert.equal(outbox.length, 0);
+  assert.equal(store.mails.length, 0);
+  assert.equal((await quiet(() => confirm({ ...deps, confirmLimiter: undefined }, 'A'.repeat(43)))).result.status, 503);
+  assert.throws(() => createRateLimiter([{ ms: 60_000, max: Number.NaN }]), /invalid_rate_window/);
+  assert.throws(() => createRateLimiter([{ ms: 60_000, max: 0 }]), /invalid_rate_window/);
+  assert.throws(() => createRateLimiter([]), /invalid_rate_window/);
+  await assert.rejects(store.reserveConfirmationMail(emailHash(ADDRESS), NOW, { perAddress: 0, windowHours: 168, perDay: 50 }), MailingConsentStoreError);
 });
 
 test('Basisadresse: nur https und nur der Ursprung', () => {
@@ -168,7 +247,8 @@ test('Anmeldung: legt eine unbestätigte Zeile mit Nachweis an und sendet genau 
   assert.equal(record.consentTextSha256, sha256Hex(TEXT_DE), 'Prüfsumme des gezeigten Wortlauts');
   assert.equal(record.requestedAt, NOW);
   assert.equal(record.confirmedAt, null);
-  assert.equal(record.confirmMailsSent, 1);
+  assert.equal(record.confirmExpiresAt, NOW + 48 * HOUR);
+  assert.deepEqual(store.mails.map((entry) => [entry.emailHash, entry.state]), [[emailHash(ADDRESS), 'sent']]);
   assert.equal(outbox.length, 1);
   const mail = outbox[0];
   assert.equal(mail.to, ADDRESS);
@@ -177,6 +257,8 @@ test('Anmeldung: legt eine unbestätigte Zeile mit Nachweis an und sendet genau 
   assert.ok(mail.text.includes(TEXT_DE), 'Wortlaut der Einwilligung steht in der Mail');
   assert.ok(!mail.text.includes('{{') && !mail.html.includes('{{'));
   assert.match(mail.html, /<a href="https:\/\/seite\.invalid\/anmeldung\/bestaetigen#t=/);
+  assert.match(mail.html, /<a href="https:\/\/seite\.invalid\/anmeldung\/abmelden#t=/);
+  assert.notEqual(tokenFromMail(mail), blockTokenFromMail(mail), 'zwei verschiedene Kennzeichen');
   assert.equal(mail.headers, undefined, 'die Bestätigungsmail ist keine Kampagne');
   assert.deepEqual(store.events.map((event) => event.type), ['requested']);
   assert.equal(store.events[0].emailHash, emailHash(ADDRESS));
@@ -199,6 +281,16 @@ test('Anmeldung: ohne ausdrückliche Einwilligung, mit falscher Fassung, Sprache
     [{ ...VALID, email: 'kopf@zeile.invalid\nBcc: fremd@adresse.invalid' }, 422, 'invalid_email'],
     [{ ...VALID, email: 'x'.repeat(250) + '@lang.invalid' }, 422, 'invalid_email'],
     [{ ...VALID, email: 42 }, 422, 'invalid_email'],
+    // Steuerzeichen (C0, DEL, C1), auch am Rand, wo sie sonst still abgeschnitten würden.
+    [{ ...VALID, email: 'a\u0000b@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u0007b@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u001fb@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u007fb@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u0085b@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'a\u009fb@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'rand@steuer.invalid\u0000' }, 422, 'invalid_email'],
+    [{ ...VALID, email: '\u0007rand@steuer.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'rand@steuer.invalid\n' }, 422, 'invalid_email'],
   ];
   for (const [body, status, error] of cases) {
     const { deps, outbox, store } = setup();
@@ -207,6 +299,7 @@ test('Anmeldung: ohne ausdrückliche Einwilligung, mit falscher Fassung, Sprache
     assert.deepEqual(await res.json(), { error });
     assert.equal(outbox.length, 0);
     assert.equal(store.events.length, 0);
+    assert.equal(store.mails.length, 0);
   }
 });
 
@@ -225,6 +318,19 @@ test('Anmeldung: Form der Anfrage wird geprüft (JSON, Größe, Herkunft)', asyn
   assert.equal(outbox.length, 1);
 });
 
+test('Herkunft hinter einem Vorschaltdienst: maßgeblich ist x-forwarded-host, nicht der interne Host', async () => {
+  const { deps, outbox } = setup();
+  const intern = { host: 'intern.invalid:3000', 'x-forwarded-host': 'seite.invalid' };
+  // Eigene Seite, interner Host weicht ab: erlaubt, weil der weitergereichte Host zur Herkunft passt.
+  assert.equal((await subscribe(deps, VALID, { ...intern, origin: BASE })).status, 202);
+  assert.equal(outbox.length, 1);
+  // Fremde Seite, die den internen Host als Herkunft nennt: abgelehnt.
+  assert.equal((await subscribe(deps, { ...VALID, email: 'zweite@person.invalid' }, { ...intern, origin: 'https://intern.invalid:3000' })).status, 403);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[0]), { ...intern, origin: 'https://intern.invalid:3000' })).status, 403);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[0]), { ...intern, origin: BASE })).status, 200);
+  assert.equal(outbox.length, 1);
+});
+
 test('Anmeldung: Mengenbegrenzung je Absender mit Retry-After', async () => {
   const { deps } = setup({ limiter: createRateLimiter([{ ms: 60_000, max: 2 }]) });
   const headers = { 'x-forwarded-for': '203.0.113.7' };
@@ -234,6 +340,26 @@ test('Anmeldung: Mengenbegrenzung je Absender mit Retry-After', async () => {
   assert.equal(limited.status, 429);
   assert.ok(Number(limited.headers.get('retry-after')) >= 1);
   assert.equal((await subscribe(deps, { ...VALID, email: 'd@vier.invalid' }, { 'x-forwarded-for': '203.0.113.8' })).status, 202);
+});
+
+test('Bestätigung: eigene Mengenbegrenzung je Absender, getrennt von der Anmeldung', async () => {
+  // Ohne eigene Zähler: Es gelten die gemeinsamen nach `grenzen`, je Route einer.
+  const config = clone(FREIGEGEBEN);
+  Object.assign(config.grenzen, { anfragen_je_minute: 2, anfragen_je_stunde: 7, bestaetigungen_je_minute: 3, bestaetigungen_je_stunde: 9 });
+  const { deps, outbox } = setup({ config, limiter: undefined, confirmLimiter: undefined });
+  const headers = { 'x-forwarded-for': '198.51.100.23' };
+  assert.equal((await subscribe(deps, VALID, headers)).status, 202);
+  assert.equal((await subscribe(deps, { ...VALID, email: 'b@zwei.invalid' }, headers)).status, 202);
+  assert.equal((await subscribe(deps, { ...VALID, email: 'c@drei.invalid' }, headers)).status, 429, 'Anmeldung ausgeschöpft');
+  // Die ausgeschöpfte Anmeldung bremst die Bestätigung nicht.
+  assert.equal((await confirm(deps, tokenFromMail(outbox[0]), headers)).status, 200);
+  assert.equal((await confirm(deps, 'B'.repeat(43), headers)).status, 404);
+  assert.equal((await confirm(deps, 'B'.repeat(43), headers)).status, 404);
+  const limited = await confirm(deps, tokenFromMail(outbox[1]), headers);
+  assert.equal(limited.status, 429, 'vierte Bestätigung in einer Minute');
+  assert.deepEqual(await limited.json(), { error: 'rate_limited' });
+  assert.ok(Number(limited.headers.get('retry-after')) >= 1);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[1]), { 'x-forwarded-for': '198.51.100.24' })).status, 200, 'anderer Absender');
 });
 
 test('Bestätigung: nur per POST mit gültigem Kennzeichen; danach ist die Einwilligung belegt und das Kennzeichen verbraucht', async () => {
@@ -269,7 +395,7 @@ test('Bestätigung: nach Ablauf der Frist wirkungslos; die verfallene Anmeldung 
   assert.equal((await store.getSubscription(emailHash('andere@person.invalid'))).status, 'pending');
 });
 
-test('Wiederholte Anmeldung: höchstens drei Bestätigungsmails je unbestätigter Adresse, immer dieselbe Antwort', async () => {
+test('Wiederholte Anmeldung: höchstens drei Bestätigungsmails je Adresse, immer dieselbe Antwort, jeder Link bleibt gültig', async () => {
   const { deps, outbox, store } = setup();
   for (let i = 0; i < 6; i++) {
     const res = await subscribe(deps);
@@ -277,11 +403,126 @@ test('Wiederholte Anmeldung: höchstens drei Bestätigungsmails je unbestätigte
     assert.deepEqual(await res.json(), { status: 'confirmation_pending' });
   }
   assert.equal(outbox.length, 3);
-  assert.equal((await store.getSubscription(emailHash(ADDRESS))).confirmMailsSent, 3);
+  assert.equal(store.mails.filter((entry) => entry.state === 'sent').length, 3);
   assert.deepEqual(store.events.map((event) => event.type), ['requested', 'confirmation_resent', 'confirmation_resent']);
-  // Nur das jüngste Kennzeichen gilt.
-  assert.equal((await confirm(deps, tokenFromMail(outbox[0]))).status, 404);
-  assert.equal((await confirm(deps, tokenFromMail(outbox[2]))).status, 200);
+  assert.equal(new Set(outbox.map(tokenFromMail)).size, 3, 'jede Mail trägt ein eigenes Kennzeichen');
+  assert.equal(new Set(outbox.map(blockTokenFromMail)).size, 1, 'der Sperrlink ist in jeder Mail derselbe');
+  // Auch der erste Link gilt noch; nach der Bestätigung sind alle verbraucht.
+  assert.equal((await confirm(deps, tokenFromMail(outbox[0]))).status, 200);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[2]))).status, 404);
+});
+
+test('Weitere Anfrage, auch durch Dritte: die offene Anmeldung bleibt unverändert und der erste Link gültig', async () => {
+  const { deps, outbox, store, state } = setup({ config: zweisprachig() });
+  await subscribe(deps);
+  const before = await store.getSubscription(emailHash(ADDRESS));
+  const first = tokenFromMail(outbox[0]);
+  state.now = NOW + 5 * HOUR;
+  // Ein Dritter fragt dieselbe Adresse mit anderer Sprache und anderer Quelle an.
+  const res = await subscribe(deps, { ...VALID, lang: 'fr', source: 'kontakt/formular' });
+  assert.equal(res.status, 202);
+  assert.deepEqual(await store.getSubscription(emailHash(ADDRESS)), before, 'Sprache, Quelle, Zeitpunkt, Fassung und Frist bleiben die der ersten Anfrage');
+  assert.equal(outbox.length, 2);
+  assert.equal(outbox[1].subject, 'PRÜFBETREFF', 'die weitere Mail kommt in der Sprache der ersten Anfrage');
+  assert.ok(outbox[1].text.includes(TEXT_DE));
+  assert.equal(store.events[1].type, 'confirmation_resent');
+  assert.equal(store.events[1].source, 'preise/checkliste');
+  // Der Berechtigte bestätigt mit seinem ursprünglichen Link.
+  state.now = NOW + 6 * HOUR;
+  assert.equal((await confirm(deps, first)).status, 200);
+  const record = await store.getSubscription(emailHash(ADDRESS));
+  assert.deepEqual([record.status, record.lang, record.source, record.requestedAt, record.confirmedAt], ['confirmed', 'de', 'preise/checkliste', NOW, NOW + 6 * HOUR]);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 404, 'der zweite Link ist mit der Bestätigung verbraucht');
+});
+
+test('Offene Anmeldung zu einem inzwischen geänderten Wortlaut: keine weitere Mail, nichts wird umgeschrieben', async () => {
+  const { deps, outbox, store, state } = setup();
+  await subscribe(deps);
+  const before = await store.getSubscription(emailHash(ADDRESS));
+  const config = clone(FREIGEGEBEN);
+  config.einwilligung.fassung = 'test.2';
+  config.einwilligung.texte.de = TEXT_DE + ' Neue Fassung.';
+  config.einwilligung.freigabe.sha256.de = consentTextDigest(config.einwilligung.texte.de);
+  assert.deepEqual(consentReadiness(config, ENV), []);
+  const res = await subscribe({ ...deps, config }, { ...VALID, consent_version: 'test.2' });
+  assert.equal(res.status, 202);
+  assert.equal(outbox.length, 1);
+  assert.deepEqual(await store.getSubscription(emailHash(ADDRESS)), before);
+  assert.equal(store.mails.length, 1, 'kein Platz der Zählung verbraucht');
+  // Auch eine neue Fassung bei gleichem Wortlaut gilt als anderer Stand: Die offene Anmeldung nennt die alte Fassung.
+  const renamed = clone(FREIGEGEBEN);
+  renamed.einwilligung.fassung = 'test.3';
+  assert.equal((await subscribe({ ...deps, config: renamed }, { ...VALID, consent_version: 'test.3' })).status, 202);
+  assert.equal(outbox.length, 1);
+  assert.equal(store.mails.length, 1);
+  // Nach dem Verfall entsteht die Anmeldung neu, mit der neuen Fassung.
+  state.now = NOW + 49 * HOUR;
+  assert.equal((await subscribe({ ...deps, config: renamed }, { ...VALID, consent_version: 'test.3' })).status, 202);
+  assert.equal(outbox.length, 2);
+  assert.equal((await store.getSubscription(emailHash(ADDRESS))).consentVersion, 'test.3');
+});
+
+test('Grenze je Adresse überlebt den Verfall der Anmeldung und gilt über das Zeitfenster', async () => {
+  const { deps, outbox, store, state } = setup();
+  // Vier Runden: anfragen, verfallen lassen, erneut anfragen. Früher begann die Zählung nach jedem Verfall neu.
+  for (let round = 0; round < 4; round++) {
+    for (let i = 0; i < 5; i++) assert.equal((await subscribe(deps)).status, 202);
+    state.now += 49 * HOUR;
+  }
+  assert.equal(outbox.length, 3, 'drei Mails in 168 Stunden, nicht drei je Anmeldung');
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null, 'die Anmeldung ist verfallen; die Zählung nicht');
+  // Eine andere Adresse ist davon nicht betroffen.
+  assert.equal((await subscribe(deps, { ...VALID, email: 'andere@person.invalid' })).status, 202);
+  assert.equal(outbox.length, 4);
+  // Nach Ablauf des Fensters ist wieder Platz, und die alten Einträge der Zählung werden gelöscht.
+  state.now = NOW + 169 * HOUR + 3 * 49 * HOUR;
+  assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 5);
+  assert.ok(store.mails.every((entry) => entry.reservedAt >= state.now - 168 * HOUR), 'abgelaufene Einträge aufgeräumt');
+});
+
+test('Tagesgrenze: insgesamt höchstens so viele Bestätigungsmails in 24 Stunden, mit Meldung im Protokoll', async () => {
+  const config = clone(FREIGEGEBEN);
+  config.grenzen.bestaetigungsmails_je_tag = 4;
+  const { deps, outbox, store, state } = setup({ config });
+  const { logs } = await quiet(async () => {
+    for (let i = 0; i < 7; i++) {
+      const res = await subscribe(deps, { ...VALID, email: `person${i}@tagesgrenze.invalid` });
+      assert.equal(res.status, 202);
+      assert.deepEqual(await res.json(), { status: 'confirmation_pending' });
+    }
+  });
+  assert.equal(outbox.length, 4);
+  assert.equal(await store.getSubscription(emailHash('person5@tagesgrenze.invalid')), null, 'über der Grenze entsteht auch keine Zeile');
+  assert.match(logs.join('\n'), /"event":"mailing_consent_daily_limit_reached"/);
+  assert.ok(!logs.join('\n').includes('tagesgrenze.invalid'));
+  state.now = NOW + 24 * HOUR + 1;
+  assert.equal((await subscribe(deps, { ...VALID, email: 'person6@tagesgrenze.invalid' })).status, 202);
+  assert.equal(outbox.length, 5);
+});
+
+test('Gleichzeitige Anmeldungen: nie mehr Mails als die Grenzen erlauben, genau eine Zeile je Adresse', async () => {
+  const config = clone(FREIGEGEBEN);
+  config.grenzen.bestaetigungsmails_je_tag = 5;
+  const { deps, outbox, store } = setup({ config });
+  // Der Versand dauert, damit sich die Aufrufe tatsächlich überlappen.
+  deps.sendMail = async (mail) => { await new Promise((resolve) => setTimeout(resolve, 5)); outbox.push(mail); return { ok: true }; };
+  const same = await Promise.all(Array.from({ length: 12 }, () => subscribe(deps)));
+  assert.ok(same.every((res) => res.status === 202));
+  const own = () => outbox.filter((mail) => mail.to === ADDRESS);
+  assert.ok(own().length >= 1 && own().length <= 3, `gleichzeitig: ${own().length} Mails`);
+  for (let i = 0; i < 4; i++) await subscribe(deps);
+  assert.equal(own().length, 3, 'auch mit Nachzüglern genau die Grenze je Adresse');
+  assert.equal(new Set(own().map(blockTokenFromMail)).size, 1, 'eine Zeile, ein Sperrlink');
+  // Viele verschiedene Adressen zugleich: die Tagesgrenze hält.
+  await quiet(() => Promise.all(Array.from({ length: 10 }, (_, i) => subscribe(deps, { ...VALID, email: `p${i}@zugleich.invalid` }))));
+  assert.equal(outbox.length, 5);
+  assert.equal(store.mails.filter((entry) => entry.state !== 'failed').length, 5);
+  // Gleichzeitige Bestätigungen mit demselben Kennzeichen: genau eine gewinnt.
+  const token = tokenFromMail(own()[0]);
+  const confirms = await Promise.all(Array.from({ length: 5 }, () => confirm(deps, token)));
+  assert.deepEqual(confirms.map((res) => res.status).sort(), [200, 404, 404, 404, 404]);
+  assert.deepEqual(store.events.filter((event) => event.type === 'confirmed').length, 1);
 });
 
 test('Bestätigte Adresse meldet sich erneut an: gleiche Antwort, keine Mail, Nachweis unverändert', async () => {
@@ -301,8 +542,7 @@ test('Abmeldung mit einem Klick: wirkt sofort, sperrt die Adresse dauerhaft und 
   const { deps, outbox, store } = setup();
   await subscribe(deps);
   await confirm(deps, tokenFromMail(outbox[0]));
-  // Kennzeichen 1 = Bestätigung, Kennzeichen 2 = Abmeldung (fortlaufend aus newToken).
-  const unsubscribeToken = '2'.padStart(43, 'A');
+  const unsubscribeToken = blockTokenFromMail(outbox[0]);
   assert.equal((await unsubscribe(deps, 'Z'.repeat(43))).status, 404);
   assert.equal((await unsubscribe(deps, 'kurz')).status, 404);
   const res = await unsubscribe(deps, unsubscribeToken);
@@ -326,10 +566,35 @@ test('Abmeldung arbeitet ohne Schalter und ohne Freigaben; ohne Speicher 503 sta
   const { deps, outbox, store } = setup();
   await subscribe(deps);
   const off = { ...deps, env: {}, config: MAILING_CONSENT_CONFIG };
-  assert.equal((await unsubscribe(off, '2'.padStart(43, 'A'))).status, 200);
+  const blockToken = blockTokenFromMail(outbox[0]);
+  assert.equal((await unsubscribe(off, blockToken)).status, 200);
   assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'unsubscribed');
   assert.equal(outbox.length, 1);
-  assert.equal((await unsubscribe({ ...deps, store: null }, '2'.padStart(43, 'A'))).status, 503);
+  assert.equal((await unsubscribe({ ...deps, store: null }, blockToken)).status, 503);
+});
+
+test('Sperrlink: wer eine von Dritten ausgelöste Bestätigungsmail bekommt, sperrt seine Adresse aus der Mail heraus', async () => {
+  const { deps, outbox, store, state } = setup();
+  // Ein Dritter trägt die Adresse ein. Der Empfänger hat nur die Mail.
+  await subscribe(deps);
+  const mail = outbox[0];
+  assert.match(mail.text, /Sperren: https:\/\/seite\.invalid\/anmeldung\/abmelden#t=[A-Za-z0-9_-]{43}\n/);
+  const blockToken = blockTokenFromMail(mail);
+  assert.ok(mail.html.includes(`<a href="https://seite.invalid/anmeldung/abmelden#t=${blockToken}">`));
+  // Die Abmeldeseite sendet das Kennzeichen an die Abmelderoute.
+  state.now = NOW + HOUR;
+  const res = await unsubscribe(deps, blockToken);
+  assert.equal(res.status, 200);
+  const record = await store.getSubscription(emailHash(ADDRESS));
+  assert.deepEqual([record.status, record.confirmedAt, record.unsubscribedAt], ['unsubscribed', null, NOW + HOUR]);
+  assert.equal(store.suppressions.get(emailHash(ADDRESS)), 'unsubscribe');
+  // Danach: der Bestätigungslink ist wirkungslos, und kein Dritter löst je wieder eine Mail an diese Adresse aus.
+  assert.equal((await confirm(deps, tokenFromMail(mail))).status, 404);
+  state.now = NOW + 400 * HOUR;
+  for (let i = 0; i < 3; i++) assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 1);
+  // Das Kennzeichen verlässt den Speicher nur über die Mail: nicht über das Lesen der Anmeldung.
+  assert.ok(!JSON.stringify(record).includes(blockToken));
 });
 
 test('Sperrliste: eine gesperrte Adresse (Rückläufer, Beschwerde, Widerspruch) bekommt keine Bestätigungsmail', async () => {
@@ -341,27 +606,110 @@ test('Sperrliste: eine gesperrte Adresse (Rückläufer, Beschwerde, Widerspruch)
     assert.deepEqual(await res.json(), { status: 'confirmation_pending' });
     assert.equal(outbox.length, 0, reason);
     assert.equal(await store.getSubscription(emailHash(ADDRESS)), null);
+    assert.equal(store.mails.length, 0);
   }
 });
 
-test('Mailversand scheitert: ehrliche 502, die Zeile bleibt unbestätigt und ein neuer Versuch sendet erneut', async () => {
+test('Bestätigung: eine inzwischen gesperrte Adresse wird nicht zur Einwilligung, auch mit gültigem Kennzeichen', async () => {
+  for (const reason of ['hard_bounce', 'complaint', 'objection', 'manual']) {
+    const { deps, outbox, store } = setup();
+    await subscribe(deps);
+    await store.addSuppression(emailHash(ADDRESS), reason, NOW);
+    const res = await confirm(deps, tokenFromMail(outbox[0]));
+    assert.equal(res.status, 404, reason);
+    assert.deepEqual(await res.json(), { error: 'token_invalid_or_expired' });
+    const record = await store.getSubscription(emailHash(ADDRESS));
+    assert.deepEqual([record.status, record.confirmedAt], ['pending', null]);
+    assert.deepEqual(store.events.map((event) => event.type), ['requested']);
+  }
+  // Prüft der Aufrufer nicht (Lücke zwischen Prüfung und Wechsel), verweigert der Speicher wie die Datenbank selbst.
+  const { deps, outbox, store } = setup();
+  await subscribe(deps);
+  const seen = [];
+  const real = store.isSuppressed.bind(store);
+  store.isSuppressed = async (hash) => { seen.push(hash); const answer = await real(hash); await store.addSuppression(hash, 'complaint', NOW); return answer; };
+  const { result } = await quiet(() => confirm(deps, tokenFromMail(outbox[0])));
+  assert.equal(result.status, 503);
+  assert.equal(seen.length, 1);
+  assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'pending');
+});
+
+test('Anmeldung: wird die Adresse zwischen Sperrprüfung und Versand gesperrt, geht keine Mail hinaus', async () => {
+  const { deps, outbox, store } = setup();
+  let calls = 0;
+  const real = store.isSuppressed.bind(store);
+  // Die erste Prüfung sieht "frei"; unmittelbar danach trägt sich die Sperre ein (zum Beispiel durch den Sperrlink).
+  store.isSuppressed = async (hash) => { calls += 1; const answer = await real(hash); if (calls === 1) await store.addSuppression(hash, 'objection', NOW); return answer; };
+  const res = await subscribe(deps);
+  assert.equal(res.status, 202);
+  assert.equal(calls, 2, 'zweite Prüfung unmittelbar vor dem Versand');
+  assert.equal(outbox.length, 0);
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['failed'], 'der Platz in der Zählung ist wieder frei');
+});
+
+test('Bestätigung prüft dieselben Freigaben wie die Anmeldung: ohne sie 503, nichts wird bestätigt', async () => {
+  const { deps, outbox, store } = setup();
+  await subscribe(deps);
+  const token = tokenFromMail(outbox[0]);
+  const withdrawn = clone(FREIGEGEBEN);
+  withdrawn.einwilligung.freigabe = null;
+  const changed = clone(FREIGEGEBEN);
+  changed.einwilligung.texte.de += ' geändert';
+  for (const config of [MAILING_CONSENT_CONFIG, withdrawn, changed]) {
+    if (consentReadiness(config, ENV).length === 0) continue; // Liegen die Freigaben des Inhabers später vor, prüft dieser Fall nichts Falsches.
+    const { result, logs } = await quiet(() => confirm({ ...deps, config }, token));
+    assert.equal(result.status, 503);
+    assert.deepEqual(await result.json(), { error: 'mailing_consent_not_ready' });
+    assert.match(logs.join('\n'), /mailing_consent_not_ready/);
+    assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'pending');
+  }
+  assert.equal((await quiet(() => confirm({ ...deps, store: null }, token))).result.status, 503);
+  assert.equal((await confirm(deps, token)).status, 200, 'mit Freigaben wirkt dasselbe Kennzeichen');
+});
+
+test('Mailversand scheitert: ehrliche 502, verbraucht keine Mail der Grenze, ein neuer Versuch sendet erneut', async () => {
   const { deps, outbox, store, state } = setup();
   state.mailResult = { ok: false, error: 'resend_500' };
-  const { result, logs } = await quiet(() => subscribe(deps));
-  assert.equal(result.status, 502);
-  assert.deepEqual(await result.json(), { error: 'confirmation_mail_failed' });
+  const { result, logs } = await quiet(async () => {
+    const responses = [];
+    for (let i = 0; i < 5; i++) responses.push(await subscribe(deps));
+    return responses;
+  });
+  for (const res of result) {
+    assert.equal(res.status, 502);
+    assert.deepEqual(await res.json(), { error: 'confirmation_mail_failed' });
+  }
+  assert.equal(outbox.length, 5, 'jeder Versuch wurde dem Versand übergeben; früher endete das nach drei Fehlschlägen still mit 202');
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['failed', 'failed', 'failed', 'failed', 'failed']);
   assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'pending');
   assert.ok(!logs.join('\n').includes(ADDRESS) && !logs.join('\n').includes(emailHash(ADDRESS)));
+  // Der Versand geht wieder: Die Grenze je Adresse steht noch vollständig zur Verfügung.
   state.mailResult = { ok: true, id: 'mail_2' };
-  assert.equal((await subscribe(deps)).status, 202);
-  assert.equal(outbox.length, 2);
-  assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 200);
+  for (let i = 0; i < 5; i++) assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 8, 'drei zugestellte Mails nach fünf Fehlschlägen');
+  assert.equal(store.mails.filter((entry) => entry.state === 'sent').length, 3);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[5]))).status, 200);
+  // Ein Kennzeichen aus einer gescheiterten Mail (niemand hat es erhalten) wurde zurückgenommen.
+  const other = setup();
+  await subscribe(other.deps);
+  other.state.mailResult = { ok: false };
+  await quiet(() => subscribe(other.deps));
+  other.state.mailResult = { ok: true };
+  assert.equal((await confirm(other.deps, tokenFromMail(other.outbox[1]))).status, 404);
+  assert.equal((await confirm(other.deps, tokenFromMail(other.outbox[0]))).status, 200);
+});
+
+test('Mailversand wirft: wie ein Fehlschlag behandelt, kein hängender Platz in der Zählung', async () => {
+  const { deps, store } = setup({ sendMail: async () => { throw new Error('Netz weg'); } });
+  const { result } = await quiet(() => subscribe(deps));
+  assert.equal(result.status, 502);
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['failed']);
 });
 
 test('Speicherfehler: 503 mit festem Code; Protokoll ohne Adresse, Prüfsumme oder Kennzeichen', async () => {
   const broken = createMemoryMailingConsentStore();
   broken.isSuppressed = async () => { throw new MailingConsentStoreError('mailing_store_timeout'); };
-  broken.confirmByTokenHash = async () => { throw new Error('geheimer Datenbanktext ' + ADDRESS); };
+  broken.findPendingByTokenHash = async () => { throw new Error('geheimer Datenbanktext ' + ADDRESS); };
   broken.unsubscribeByToken = async () => { throw new MailingConsentStoreError('mailing_store_failed'); };
   const { deps, outbox } = setup({ store: broken });
   const token = 'C'.repeat(43);
@@ -386,11 +734,30 @@ test('Verlauf scheitert: der Zustandswechsel bleibt gültig und die Antwort ehrl
   assert.match(logs.join('\n'), /mailing_consent_event_failed/);
 });
 
-test('Bestätigungsmail: Wortlaut nur aus der Konfiguration, HTML maskiert', () => {
-  const mail = buildConfirmationMail({ betreff: 'Betreff <b>', text: 'A & B <x>\n\n{{BESTAETIGUNGSLINK}}\nZeile\n\n{{EINWILLIGUNGSTEXT}}' }, 'Wortlaut "eins" <i>', 'https://seite.invalid/p#t=abc');
+test('Bestätigungsmail: Wortlaut nur aus der Konfiguration, HTML maskiert, auch in den Links', () => {
+  const mail = buildConfirmationMail(
+    { betreff: 'Betreff <b>', text: 'A & B <x>\n\n{{BESTAETIGUNGSLINK}}\nZeile\n\n{{SPERRLINK}}\n\n{{EINWILLIGUNGSTEXT}}' },
+    'Wortlaut "eins" <i>',
+    'https://seite.invalid/p#t=abc',
+    'https://seite.invalid/s#t=xyz',
+  );
   assert.equal(mail.subject, 'Betreff <b>');
-  assert.equal(mail.text, 'A & B <x>\n\nhttps://seite.invalid/p#t=abc\nZeile\n\nWortlaut "eins" <i>');
-  assert.equal(mail.html, '<p>A &amp; B &lt;x&gt;</p>\n<p><a href="https://seite.invalid/p#t=abc">https://seite.invalid/p#t=abc</a><br>Zeile</p>\n<p>Wortlaut &quot;eins&quot; &lt;i&gt;</p>');
+  assert.equal(mail.text, 'A & B <x>\n\nhttps://seite.invalid/p#t=abc\nZeile\n\nhttps://seite.invalid/s#t=xyz\n\nWortlaut "eins" <i>');
+  assert.equal(
+    mail.html,
+    '<p>A &amp; B &lt;x&gt;</p>\n<p><a href="https://seite.invalid/p#t=abc">https://seite.invalid/p#t=abc</a><br>Zeile</p>\n<p><a href="https://seite.invalid/s#t=xyz">https://seite.invalid/s#t=xyz</a></p>\n<p>Wortlaut &quot;eins&quot; &lt;i&gt;</p>',
+  );
+  // Ein Link mit Zeichen, die im HTML eine Bedeutung haben, darf weder das Attribut noch das Element verlassen.
+  const hostile = buildConfirmationMail({ betreff: 'B', text: '{{BESTAETIGUNGSLINK}}\n\n{{SPERRLINK}}' }, '', 'https://seite.invalid/p?a=1&b="><script>x</script>', 'https://seite.invalid/s?c=<i>&d="');
+  assert.ok(!hostile.html.includes('<script>') && !hostile.html.includes('<i>') && !hostile.html.includes('"><'), hostile.html);
+  assert.equal(
+    hostile.html,
+    '<p><a href="https://seite.invalid/p?a=1&amp;b=&quot;&gt;&lt;script&gt;x&lt;/script&gt;">https://seite.invalid/p?a=1&amp;b=&quot;&gt;&lt;script&gt;x&lt;/script&gt;</a></p>\n<p><a href="https://seite.invalid/s?c=&lt;i&gt;&amp;d=&quot;">https://seite.invalid/s?c=&lt;i&gt;&amp;d=&quot;</a></p>',
+  );
+  // Ein eingesetzter Wert wird nicht noch einmal nach Platzhaltern durchsucht.
+  const nested = buildConfirmationMail({ betreff: 'B {{SPERRLINK}}', text: '{{EINWILLIGUNGSTEXT}} / {{BESTAETIGUNGSLINK}}' }, 'Text mit {{SPERRLINK}}', 'https://seite.invalid/p', 'https://seite.invalid/s');
+  assert.equal(nested.text, 'Text mit {{SPERRLINK}} / https://seite.invalid/p');
+  assert.equal(nested.subject, 'B', 'im Betreff steht kein Link');
 });
 
 test('Abmelde-Kopfzeilen für den späteren Kampagnenweg (RFC 8058)', () => {

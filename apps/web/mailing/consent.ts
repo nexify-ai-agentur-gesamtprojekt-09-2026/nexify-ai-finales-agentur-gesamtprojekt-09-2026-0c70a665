@@ -4,10 +4,12 @@
  *
  * Standard AUS. Die Anmeldung arbeitet nur, wenn ALLES zugleich vorliegt:
  *  - Schalter NEXIFY_MAILING_CONSENT=on
- *  - vom Inhaber freigegebener Einwilligungstext und freigegebene Bestätigungsmail samt Fassung, Frist, Seite
- *    und Quellen in config/integrations/mailing-consent.json (heute alles `null`)
+ *  - vom Inhaber freigegebener Einwilligungstext und freigegebene Bestätigungsmail samt Fassung, Frist, Seiten
+ *    und Quellen in config/integrations/mailing-consent.json (heute alles `null`); jede Freigabe nennt die
+ *    SHA-256 des freigegebenen Wortlauts je Sprache, ein später geänderter Text gilt als nicht freigegeben
  *  - dauerhafter Speicher (Supabase, Schema "mailing"), Mailversand (Resend) und MAILING_PUBLIC_BASE_URL
- * Fehlt etwas, antwortet sie mit 503 und versendet nichts. Dieser Code enthält keinen Rechtstext.
+ * Fehlt etwas, antwortet sie mit 503 und versendet nichts. Dieselben Freigaben prüft die Bestätigung.
+ * Dieser Code enthält keinen Rechtstext.
  *
  * Die Abmeldung hängt bewusst NICHT am Schalter: Wer einmal eine Mail bekommen hat, muss sich auch dann
  * abmelden können, wenn die Anmeldung später wieder abgeschaltet wird. Sie braucht nur den Speicher.
@@ -24,11 +26,34 @@ import rawConfig from '../../../config/integrations/mailing-consent.json' with {
 import { clientKey } from '../lib/chat-rate-limit.ts';
 import { createRateLimiter, type RateLimiter } from './rate-limit.ts';
 import { mailingConfigured, sendMail, type MailInput, type MailResult } from '../lib/mailing.ts';
-import { getMailingConsentStore, MailingConsentStoreError, type ConsentEventType, type MailingConsentStore, type MailingLang } from './consent-store.ts';
+import {
+  getMailingConsentStore,
+  MailingConsentStoreError,
+  mailLimitsValid,
+  type ConsentEventType,
+  type MailLimits,
+  type MailReservation,
+  type MailingConsentStore,
+  type MailingLang,
+} from './consent-store.ts';
 
 export type MailingEnv = Record<string, string | undefined>;
-export type Approval = { durch: string; am: string; beleg: string };
+/**
+ * Freigabe des Inhabers. `sha256` bindet sie an den Wortlaut: je Sprache die SHA-256 des freigegebenen Texts
+ * (`consentTextDigest`, `confirmationMailDigest`). Weicht der Text in der Konfiguration davon ab, zählt er als nicht freigegeben.
+ */
+export type Approval = { durch: string; am: string; beleg: string; sha256?: Partial<Record<MailingLang, string | null>> | null };
 export type ConfirmationMailText = { betreff: string; text: string };
+export type MailingConsentLimits = {
+  bestaetigungsmails_je_adresse: number;
+  bestaetigungsmails_fenster_stunden: number;
+  bestaetigungsmails_je_tag: number;
+  anfragen_je_minute: number;
+  anfragen_je_stunde: number;
+  bestaetigungen_je_minute: number;
+  bestaetigungen_je_stunde: number;
+  max_body_bytes: number;
+};
 
 export type MailingConsentConfig = {
   einwilligung: { fassung: string | null; freigabe: Approval | null; texte: Record<MailingLang, string | null> };
@@ -36,20 +61,26 @@ export type MailingConsentConfig = {
   bestaetigungsfrist_stunden: number | null;
   seiten: { bestaetigung: string | null; abmeldung: string | null };
   quellen: string[];
-  grenzen: { bestaetigungsmails_je_anmeldung: number; anfragen_je_minute: number; anfragen_je_stunde: number; max_body_bytes: number };
+  grenzen: MailingConsentLimits;
 };
 
 export const MAILING_CONSENT_CONFIG = rawConfig as unknown as MailingConsentConfig;
 
 export const LINK_PLACEHOLDER = '{{BESTAETIGUNGSLINK}}';
+/** Link, mit dem der Empfänger seine Adresse sperrt, ohne zu bestätigen (für Mails, die ein Dritter ausgelöst hat). */
+export const BLOCK_LINK_PLACEHOLDER = '{{SPERRLINK}}';
 export const CONSENT_PLACEHOLDER = '{{EINWILLIGUNGSTEXT}}';
+const PLACEHOLDERS = /\{\{(BESTAETIGUNGSLINK|SPERRLINK|EINWILLIGUNGSTEXT)\}\}/g;
 
 const LANGS: readonly MailingLang[] = ['de', 'nl', 'fr', 'en'];
 const TOKEN = /^[A-Za-z0-9_-]{43}$/;
+const HEX64 = /^[0-9a-f]{64}$/;
 const SOURCE = /^[a-z0-9/_-]{1,64}$/;
 const PAGE = /^\/[a-z0-9/_-]{1,128}$/;
 const VERSION = /^[A-Za-z0-9._-]{1,64}$/;
 const EMAIL = /^[^\s@<>"',;:\\()[\]]+@[^\s@<>"',;:\\()[\]]+\.[^\s@<>"',;:\\()[\]]{2,}$/;
+/** Steuerzeichen (C0, DEL, C1). In einer Adresse haben sie nichts zu suchen; `\s` erfasst nur einen Teil davon. */
+const CONTROL = /[\u0000-\u001f\u007f-\u009f]/;
 const MAX_DEADLINE_HOURS = 14 * 24;
 
 /** Standard AUS: nur der exakte Wert "on" (Muster lib/composio.ts). */
@@ -61,18 +92,23 @@ export type ReadinessGap =
   | 'consent_version_missing'
   | 'consent_text_not_approved'
   | 'consent_text_missing'
+  | 'consent_text_approval_mismatch'
   | 'confirmation_mail_not_approved'
   | 'confirmation_mail_missing'
+  | 'confirmation_mail_approval_mismatch'
   | 'confirmation_mail_link_missing'
+  | 'confirmation_mail_block_link_missing'
   | 'confirmation_mail_placeholder_unresolved'
   | 'confirmation_deadline_missing'
   | 'confirmation_page_missing'
+  | 'unsubscribe_page_missing'
   | 'sources_missing'
+  | 'limits_invalid'
   | 'base_url_missing'
   | 'store_not_configured'
   | 'mail_not_configured';
 
-function approved(value: Approval | null): boolean {
+function approved(value: Approval | null): value is Approval {
   return Boolean(value && typeof value.durch === 'string' && value.durch.trim() && /^\d{4}-\d{2}-\d{2}$/.test(String(value.am)) && typeof value.beleg === 'string' && value.beleg.trim());
 }
 function filled(value: unknown): value is string {
@@ -95,40 +131,95 @@ export function publicBaseUrl(env: MailingEnv = process.env): string | null {
   }
 }
 
+export const sha256Hex = (value: string): string => createHash('sha256').update(value, 'utf8').digest('hex');
+/** Prüfsumme, an die eine Freigabe des Einwilligungstexts gebunden wird: SHA-256 des Texts, UTF-8, Zeichen für Zeichen. */
+export const consentTextDigest = (text: string): string => sha256Hex(text);
+/** Prüfsumme, an die eine Freigabe der Bestätigungsmail gebunden wird: SHA-256 von Betreff, Zeilenumbruch, Text. */
+export const confirmationMailDigest = (mail: ConfirmationMailText): string => sha256Hex(mail.betreff + '\n' + mail.text);
+
+/** Gilt die Freigabe für genau diesen Wortlaut? Ohne eingetragene, passende Prüfsumme nicht. */
+function approvalCovers(approval: Approval | null, lang: MailingLang, digest: string): boolean {
+  const pinned = approval?.sha256?.[lang];
+  return typeof pinned === 'string' && HEX64.test(pinned) && pinned === digest;
+}
+
 /** Sprachen, für die Einwilligungstext UND Bestätigungsmail vorliegen. */
 export function availableLanguages(config: MailingConsentConfig): MailingLang[] {
   return LANGS.filter((lang) => filled(config.einwilligung.texte[lang]) && mailText(config.bestaetigungsmail.texte[lang]));
 }
 
+const INTEGER_BOUNDS: Record<'anfragen_je_minute' | 'anfragen_je_stunde' | 'bestaetigungen_je_minute' | 'bestaetigungen_je_stunde' | 'max_body_bytes', readonly [number, number]> = {
+  anfragen_je_minute: [1, 1000],
+  anfragen_je_stunde: [1, 100_000],
+  bestaetigungen_je_minute: [1, 1000],
+  bestaetigungen_je_stunde: [1, 100_000],
+  max_body_bytes: [256, 65_536],
+};
+
+/** Grenzen für Bestätigungsmails in der Form, die der Speicher erwartet. */
+export function mailLimits(config: MailingConsentConfig): MailLimits {
+  return {
+    perAddress: config.grenzen?.bestaetigungsmails_je_adresse,
+    windowHours: config.grenzen?.bestaetigungsmails_fenster_stunden,
+    perDay: config.grenzen?.bestaetigungsmails_je_tag,
+  };
+}
+
 /**
- * Was der Anmeldung zur Arbeitsfähigkeit fehlt (ohne Speicher und Mailversand, die zur Laufzeit geprüft werden).
- * Leere Liste = alle Freigaben und Festlegungen liegen vor. Eine Freigabe ist ein Eintrag mit Name, Datum und Beleg;
- * ein vorhandener Text ohne Freigabe zählt nicht.
+ * Jede Grenze ist eine ganze Zahl in ihrem Bereich. Eine fehlende, gebrochene oder unsinnige Angabe (0, NaN, Text)
+ * würde einen Schutz still abschalten; deshalb arbeitet der Weg dann gar nicht.
+ */
+export function limitsValid(config: MailingConsentConfig): boolean {
+  const limits = config.grenzen;
+  if (!limits || typeof limits !== 'object') return false;
+  return (
+    mailLimitsValid(mailLimits(config)) &&
+    (Object.keys(INTEGER_BOUNDS) as (keyof typeof INTEGER_BOUNDS)[]).every((key) => {
+      const value = limits[key];
+      return typeof value === 'number' && Number.isInteger(value) && value >= INTEGER_BOUNDS[key][0] && value <= INTEGER_BOUNDS[key][1];
+    })
+  );
+}
+
+/**
+ * Was dem Einwilligungsweg zur Arbeitsfähigkeit fehlt (ohne Speicher und Mailversand, die zur Laufzeit geprüft werden).
+ * Leere Liste = alle Freigaben und Festlegungen liegen vor. Eine Freigabe ist ein Eintrag mit Name, Datum, Beleg und
+ * der Prüfsumme des freigegebenen Wortlauts je Sprache; ein vorhandener Text ohne Freigabe zählt nicht, und ein Text,
+ * der nach der Freigabe geändert wurde, auch nicht. Anmeldung und Bestätigung prüfen beide diese Liste.
  */
 export function consentReadiness(config: MailingConsentConfig, env: MailingEnv = process.env): ReadinessGap[] {
   const gaps: ReadinessGap[] = [];
-  if (!filled(config.einwilligung.fassung) || !VERSION.test(config.einwilligung.fassung)) gaps.push('consent_version_missing');
-  if (!approved(config.einwilligung.freigabe)) gaps.push('consent_text_not_approved');
-  if (!filled(config.einwilligung.texte.de)) gaps.push('consent_text_missing');
-  if (!approved(config.bestaetigungsmail.freigabe)) gaps.push('confirmation_mail_not_approved');
-  if (!mailText(config.bestaetigungsmail.texte.de)) gaps.push('confirmation_mail_missing');
+  const add = (gap: ReadinessGap) => {
+    if (!gaps.includes(gap)) gaps.push(gap);
+  };
+  if (!filled(config.einwilligung.fassung) || !VERSION.test(config.einwilligung.fassung)) add('consent_version_missing');
+  if (!approved(config.einwilligung.freigabe)) add('consent_text_not_approved');
+  if (!filled(config.einwilligung.texte.de)) add('consent_text_missing');
+  if (!approved(config.bestaetigungsmail.freigabe)) add('confirmation_mail_not_approved');
+  if (!mailText(config.bestaetigungsmail.texte.de)) add('confirmation_mail_missing');
   for (const lang of LANGS) {
+    const consent = config.einwilligung.texte[lang];
+    if (filled(consent) && !approvalCovers(config.einwilligung.freigabe, lang, consentTextDigest(consent))) add('consent_text_approval_mismatch');
     const mail = config.bestaetigungsmail.texte[lang];
     if (!mailText(mail)) continue;
-    if (!mail.text.includes(LINK_PLACEHOLDER) && !gaps.includes('confirmation_mail_link_missing')) gaps.push('confirmation_mail_link_missing');
-    const rest = (mail.betreff + mail.text).split(LINK_PLACEHOLDER).join('').split(CONSENT_PLACEHOLDER).join('');
+    if (!approvalCovers(config.bestaetigungsmail.freigabe, lang, confirmationMailDigest(mail))) add('confirmation_mail_approval_mismatch');
+    if (!mail.text.includes(LINK_PLACEHOLDER)) add('confirmation_mail_link_missing');
+    // Wer die Mail bekommt, ohne sich angemeldet zu haben, muss seine Adresse aus der Mail heraus sperren können.
+    if (!mail.text.includes(BLOCK_LINK_PLACEHOLDER)) add('confirmation_mail_block_link_missing');
+    const rest = (mail.betreff + mail.text).replace(PLACEHOLDERS, '');
     // Ein übrig gebliebener Platzhalter (zum Beispiel für Anbieterangaben) darf nie in einer Mail landen.
-    if (/\{\{|\}\}|\[[A-ZÄÖÜ_ ]{4,}/.test(rest) && !gaps.includes('confirmation_mail_placeholder_unresolved')) gaps.push('confirmation_mail_placeholder_unresolved');
+    if (/\{\{|\}\}|\[[A-ZÄÖÜ_ ]{4,}/.test(rest)) add('confirmation_mail_placeholder_unresolved');
   }
   const hours = config.bestaetigungsfrist_stunden;
-  if (typeof hours !== 'number' || !Number.isInteger(hours) || hours < 1 || hours > MAX_DEADLINE_HOURS) gaps.push('confirmation_deadline_missing');
-  if (!filled(config.seiten.bestaetigung) || !PAGE.test(config.seiten.bestaetigung)) gaps.push('confirmation_page_missing');
-  if (!Array.isArray(config.quellen) || config.quellen.length === 0 || !config.quellen.every((source) => typeof source === 'string' && SOURCE.test(source))) gaps.push('sources_missing');
-  if (!publicBaseUrl(env)) gaps.push('base_url_missing');
+  if (typeof hours !== 'number' || !Number.isInteger(hours) || hours < 1 || hours > MAX_DEADLINE_HOURS) add('confirmation_deadline_missing');
+  if (!filled(config.seiten.bestaetigung) || !PAGE.test(config.seiten.bestaetigung)) add('confirmation_page_missing');
+  if (!filled(config.seiten.abmeldung) || !PAGE.test(config.seiten.abmeldung)) add('unsubscribe_page_missing');
+  if (!Array.isArray(config.quellen) || config.quellen.length === 0 || !config.quellen.every((source) => typeof source === 'string' && SOURCE.test(source))) add('sources_missing');
+  if (!limitsValid(config)) add('limits_invalid');
+  if (!publicBaseUrl(env)) add('base_url_missing');
   return gaps;
 }
 
-export const sha256Hex = (value: string): string => createHash('sha256').update(value, 'utf8').digest('hex');
 /** Schreibweise, unter der eine Adresse geführt und gesperrt wird: ohne Rand, klein. */
 export const normalizeEmail = (value: string): string => value.trim().toLowerCase();
 export const emailHash = (email: string): string => sha256Hex(normalizeEmail(email));
@@ -147,16 +238,20 @@ export function listUnsubscribeHeaders(baseUrl: string, unsubscribeToken: string
 
 const escapeHtml = (value: string): string => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** Setzt die freigegebene Bestätigungsmail zusammen. Der Wortlaut kommt vollständig aus der Konfiguration. */
-export function buildConfirmationMail(mail: ConfirmationMailText, consentText: string, link: string): { subject: string; text: string; html: string } {
-  const fill = (template: string, linkValue: string, consentValue: string) => template.split(LINK_PLACEHOLDER).join(linkValue).split(CONSENT_PLACEHOLDER).join(consentValue);
-  const text = fill(mail.text, link, consentText);
-  const anchor = `<a href="${escapeHtml(link)}">${escapeHtml(link)}</a>`;
-  const html = fill(escapeHtml(mail.text), anchor, escapeHtml(consentText))
+/**
+ * Setzt die freigegebene Bestätigungsmail zusammen. Der Wortlaut kommt vollständig aus der Konfiguration.
+ * `link` bestätigt, `blockLink` sperrt die Adresse. Jeder Platzhalter wird in einem Durchgang ersetzt; ein
+ * eingesetzter Wert wird nicht noch einmal nach Platzhaltern durchsucht.
+ */
+export function buildConfirmationMail(mail: ConfirmationMailText, consentText: string, link: string, blockLink: string): { subject: string; text: string; html: string } {
+  const fill = (template: string, values: Record<string, string>) => template.replace(PLACEHOLDERS, (_match, name: string) => values[name] ?? '');
+  const anchor = (href: string) => `<a href="${escapeHtml(href)}">${escapeHtml(href)}</a>`;
+  const text = fill(mail.text, { BESTAETIGUNGSLINK: link, SPERRLINK: blockLink, EINWILLIGUNGSTEXT: consentText });
+  const html = fill(escapeHtml(mail.text), { BESTAETIGUNGSLINK: anchor(link), SPERRLINK: anchor(blockLink), EINWILLIGUNGSTEXT: escapeHtml(consentText) })
     .split(/\n{2,}/)
     .map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
     .join('\n');
-  return { subject: fill(mail.betreff, '', '').trim(), text, html };
+  return { subject: fill(mail.betreff, {}).trim(), text, html };
 }
 
 export type ConsentDeps = {
@@ -168,22 +263,27 @@ export type ConsentDeps = {
   mailConfigured?: () => boolean;
   nowMs?: () => number;
   newToken?: () => string;
+  /** Mengenbegrenzung der Anmeldung. Ohne Angabe: gemeinsamer Zähler nach `grenzen.anfragen_*`. */
   limiter?: RateLimiter;
+  /** Mengenbegrenzung der Bestätigung, getrennt von der Anmeldung. Ohne Angabe: nach `grenzen.bestaetigungen_*`. */
+  confirmLimiter?: RateLimiter;
 };
 
-let sharedLimiter: { limiter: RateLimiter; key: string } | null = null;
-function limiterFor(config: MailingConsentConfig): RateLimiter {
-  const key = `${config.grenzen.anfragen_je_minute}/${config.grenzen.anfragen_je_stunde}`;
-  if (!sharedLimiter || sharedLimiter.key !== key) {
-    sharedLimiter = {
-      key,
-      limiter: createRateLimiter([
-        { ms: 60_000, max: config.grenzen.anfragen_je_minute },
-        { ms: 3_600_000, max: config.grenzen.anfragen_je_stunde },
-      ]),
-    };
+// Anmeldung und Bestätigung zählen getrennt: Wer bestätigt, soll nicht am Kontingent der Anmeldung scheitern, und umgekehrt.
+const sharedLimiters = new Map<string, RateLimiter>();
+function limiterFor(route: 'subscribe' | 'confirm', config: MailingConsentConfig): RateLimiter {
+  const perMinute = route === 'subscribe' ? config.grenzen.anfragen_je_minute : config.grenzen.bestaetigungen_je_minute;
+  const perHour = route === 'subscribe' ? config.grenzen.anfragen_je_stunde : config.grenzen.bestaetigungen_je_stunde;
+  const key = `${route}:${perMinute}/${perHour}`;
+  let limiter = sharedLimiters.get(key);
+  if (!limiter) {
+    limiter = createRateLimiter([
+      { ms: 60_000, max: perMinute },
+      { ms: 3_600_000, max: perHour },
+    ]);
+    sharedLimiters.set(key, limiter);
   }
-  return sharedLimiter.limiter;
+  return limiter;
 }
 
 function reply(body: Record<string, unknown>, status: number, extra: Record<string, string> = {}): Response {
@@ -234,13 +334,31 @@ async function recordEvent(store: MailingConsentStore, hash: string, type: Conse
   }
 }
 
+/** Aufräumen und Rücknahmen sind Nebenarbeit: Ein Fehler dort wird gemeldet, bricht die Anfrage aber nicht ab. */
+async function quietly(step: string, run: () => Promise<void>): Promise<void> {
+  try {
+    await run();
+  } catch (error) {
+    log('error', { event: 'mailing_consent_cleanup_failed', step, code: storeErrorCode(error) });
+  }
+}
+
 const ACCEPTED = { status: 'confirmation_pending' } as const;
 
 /**
  * POST /api/mailing/subscribe  { email, lang, consent: true, consent_version, source }
  *
- * Antwortet für jede angenommene Adresse gleich (202), ob neu, schon bestätigt, abgemeldet oder gesperrt:
- * Die Antwort verrät nicht, ob eine Adresse bekannt ist. Eine Mail geht nur an neue und an unbestätigte Adressen.
+ * Antwortet für jede angenommene Adresse gleich (202), ob neu, schon bestätigt, abgemeldet, gesperrt oder über der
+ * Grenze: Die Antwort verrät nicht, ob eine Adresse bekannt ist. Eine Mail geht nur an neue und an unbestätigte Adressen.
+ *
+ * Eine offene (unbestätigte) Anmeldung wird durch eine weitere Anfrage nicht verändert, gleich von wem sie kommt:
+ * Sprache, Quelle, Zeitpunkt, Fassung und Frist bleiben die der ersten Anfrage, und deren Link bleibt gültig. Die
+ * weitere Anfrage löst nur eine weitere Mail mit einem zusätzlichen Link aus, in der Sprache der ersten Anfrage,
+ * solange die Grenzen es zulassen und der freigegebene Wortlaut noch derselbe ist.
+ *
+ * Grenzen für Bestätigungsmails (dauerhaft in der Datenbank, unabhängig vom Verfall der Anmeldung):
+ * `bestaetigungsmails_je_adresse` in `bestaetigungsmails_fenster_stunden` und `bestaetigungsmails_je_tag` insgesamt.
+ * Ein gescheiterter Versand verbraucht keine davon.
  */
 export async function handleSubscribe(request: Request, deps: ConsentDeps = {}): Promise<Response> {
   const env = deps.env ?? process.env;
@@ -258,7 +376,7 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
 
   if (crossOrigin(request)) return reply({ error: 'same_origin_required' }, 403);
   const now = deps.nowMs?.() ?? Date.now();
-  const verdict = (deps.limiter ?? limiterFor(config)).check(clientKey(request), now);
+  const verdict = (deps.limiter ?? limiterFor('subscribe', config)).check(clientKey(request), now);
   if (!verdict.allowed) return reply({ error: 'rate_limited' }, 429, { 'Retry-After': String(verdict.retryAfterSeconds) });
 
   const parsed = await readJson(request, config.grenzen.max_body_bytes);
@@ -270,84 +388,147 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   // Der Besucher willigt in genau den Wortlaut ein, den er gesehen hat. Zeigt das Formular eine andere Fassung
   // als die freigegebene, wird nichts gespeichert.
   if (body.consent_version !== config.einwilligung.fassung) return reply({ error: 'consent_version_mismatch' }, 409);
-  const lang = typeof body.lang === 'string' && (LANGS as readonly string[]).includes(body.lang) ? (body.lang as MailingLang) : null;
-  if (!lang || !availableLanguages(config).includes(lang)) return reply({ error: 'language_not_available' }, 422);
-  const source = typeof body.source === 'string' ? body.source : '';
-  if (!config.quellen.includes(source)) return reply({ error: 'invalid_source' }, 422);
-  const email = typeof body.email === 'string' ? normalizeEmail(body.email) : '';
+  const requestedLang = typeof body.lang === 'string' && (LANGS as readonly string[]).includes(body.lang) ? (body.lang as MailingLang) : null;
+  if (!requestedLang || !availableLanguages(config).includes(requestedLang)) return reply({ error: 'language_not_available' }, 422);
+  const requestedSource = typeof body.source === 'string' ? body.source : '';
+  if (!config.quellen.includes(requestedSource)) return reply({ error: 'invalid_source' }, 422);
+  // Steuerzeichen werden vor dem Beschneiden geprüft, damit keines am Rand still verschwindet.
+  if (typeof body.email !== 'string' || CONTROL.test(body.email)) return reply({ error: 'invalid_email' }, 422);
+  const email = normalizeEmail(body.email);
   if (email.length < 6 || email.length > 254 || !EMAIL.test(email)) return reply({ error: 'invalid_email' }, 422);
 
-  const consentText = config.einwilligung.texte[lang] as string;
-  const mailTemplate = config.bestaetigungsmail.texte[lang] as ConfirmationMailText;
   const consentVersion = config.einwilligung.fassung as string;
   const hash = sha256Hex(email);
   const token = (deps.newToken ?? newToken)();
-  const pending = {
-    lang,
-    source,
-    consentVersion,
-    consentTextSha256: sha256Hex(consentText),
-    requestedAt: now,
-    confirmTokenHash: sha256Hex(token),
-    confirmExpiresAt: now + (config.bestaetigungsfrist_stunden as number) * 3_600_000,
-  };
+  const tokenHash = sha256Hex(token);
+  const limits = mailLimits(config);
 
-  let eventType: ConsentEventType;
+  let lang = requestedLang;
+  let source = requestedSource;
+  let eventType: ConsentEventType = 'requested';
+  let unsubscribeToken = '';
+  let reservation: MailReservation | null = null;
+  let tokenAdded = false;
   try {
     await store.purgeExpiredPending(now);
+    await quietly('purge_mail_count', () => store.purgeSettledMails(now, limits.windowHours));
     // Sperrliste zuerst: Eine gesperrte Adresse bekommt keine Mail, auch keine Bestätigungsmail.
     if (await store.isSuppressed(hash)) return reply(ACCEPTED, 202);
     const existing = await store.getSubscription(hash);
     if (existing && existing.status !== 'pending') return reply(ACCEPTED, 202);
     if (existing) {
-      // Höchstens so viele Bestätigungsmails je unbestätigter Anmeldung; schützt fremde Postfächer vor Wiederholung.
-      if (existing.confirmMailsSent >= config.grenzen.bestaetigungsmails_je_anmeldung) return reply(ACCEPTED, 202);
-      if (!(await store.renewPending(hash, existing.confirmMailsSent, pending))) return reply(ACCEPTED, 202);
+      // Offene Anmeldung: Es gilt, was bei der ersten Anfrage festgehalten wurde. Ist der freigegebene Wortlaut
+      // inzwischen ein anderer, gibt es keine weitere Mail; die Anmeldung verfällt zur Frist und kann dann neu entstehen.
+      const storedText = config.einwilligung.texte[existing.lang];
+      if (existing.confirmExpiresAt <= now || existing.consentVersion !== consentVersion || !filled(storedText) || consentTextDigest(storedText) !== existing.consentTextSha256 || !availableLanguages(config).includes(existing.lang)) {
+        return reply(ACCEPTED, 202);
+      }
+      lang = existing.lang;
+      source = existing.source;
       eventType = 'confirmation_resent';
+    }
+    // Erst zählen, dann schreiben, dann senden: Ohne freien Platz in der Zählung entsteht weder Zeile noch Mail.
+    reservation = await store.reserveConfirmationMail(hash, now, limits);
+    if (!reservation) {
+      if (await store.dailyLimitReached(now, limits.perDay)) log('warn', { event: 'mailing_consent_daily_limit_reached' });
+      return reply(ACCEPTED, 202);
+    }
+    if (existing) {
+      const added = await store.addConfirmToken(hash, tokenHash, now);
+      if (added) {
+        unsubscribeToken = added.unsubscribeToken;
+        tokenAdded = true;
+      }
     } else {
-      if (!(await store.insertPending({ ...pending, emailHash: hash, email, unsubscribeToken: (deps.newToken ?? newToken)() }))) return reply(ACCEPTED, 202);
-      eventType = 'requested';
+      const fresh = (deps.newToken ?? newToken)();
+      const inserted = await store.insertPending({
+        emailHash: hash,
+        email,
+        lang,
+        source,
+        consentVersion,
+        consentTextSha256: consentTextDigest(config.einwilligung.texte[lang] as string),
+        requestedAt: now,
+        confirmTokenHash: tokenHash,
+        confirmExpiresAt: now + (config.bestaetigungsfrist_stunden as number) * 3_600_000,
+        unsubscribeToken: fresh,
+      });
+      if (inserted) unsubscribeToken = fresh;
+    }
+    // Ein gleichzeitiger Aufruf war schneller, oder die Anmeldung ist inzwischen nicht mehr offen: keine Mail, Platz frei.
+    // Zweite Prüfung der Sperrliste unmittelbar vor dem Versand: Wer in der Zwischenzeit gesperrt hat, bekommt nichts mehr.
+    if (!unsubscribeToken || (await store.isSuppressed(hash))) {
+      const held = reservation;
+      await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
+      if (tokenAdded) await quietly('remove_confirm_token', () => store.removeConfirmToken(hash, tokenHash));
+      return reply(ACCEPTED, 202);
     }
   } catch (error) {
     log('error', { event: 'mailing_consent_store_failed', step: 'subscribe', code: storeErrorCode(error) });
+    if (reservation) {
+      const held = reservation;
+      await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
+    }
     return reply({ error: 'storage_unavailable' }, 503);
   }
   await recordEvent(store, hash, eventType, consentVersion, source, now);
 
-  // Das Kennzeichen steht hinter dem #: Es wird beim Öffnen der Seite nicht an den Server übertragen und
-  // erscheint in keinem Zugriffsprotokoll. Die Seite sendet es per POST an /api/mailing/confirm.
+  // Die Kennzeichen stehen hinter dem #: Sie werden beim Öffnen der Seite nicht an den Server übertragen. Die
+  // Bestätigungsseite sendet ihres per POST an /api/mailing/confirm, die Abmeldeseite ihres an /api/mailing/unsubscribe.
   const link = `${base}${config.seiten.bestaetigung}#t=${token}`;
-  const mail = buildConfirmationMail(mailTemplate, consentText, link);
-  const sent = await (deps.sendMail ?? sendMail)({ to: email, subject: mail.subject, text: mail.text, html: mail.html });
+  const blockLink = `${base}${config.seiten.abmeldung}#t=${unsubscribeToken}`;
+  const mail = buildConfirmationMail(config.bestaetigungsmail.texte[lang] as ConfirmationMailText, config.einwilligung.texte[lang] as string, link, blockLink);
+  let sent: MailResult;
+  try {
+    sent = await (deps.sendMail ?? sendMail)({ to: email, subject: mail.subject, text: mail.text, html: mail.html });
+  } catch {
+    sent = { ok: false };
+  }
+  const held = reservation;
   if (!sent.ok) {
-    // Ehrlich melden: Ohne Mail kann niemand bestätigen. Die unbestätigte Zeile bleibt bis zum Verfall stehen;
-    // ein neuer Versuch erneuert sie (bis zur Grenze je Anmeldung).
+    // Ehrlich melden: Ohne Mail kann niemand bestätigen. Der Fehlschlag gibt seinen Platz in der Zählung zurück,
+    // und das Kennzeichen, das niemand erhalten hat, wird zurückgenommen. Ein neuer Versuch sendet erneut.
     log('error', { event: 'mailing_consent_mail_failed', skipped: Boolean(sent.skipped) });
+    await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
+    if (tokenAdded) await quietly('remove_confirm_token', () => store.removeConfirmToken(hash, tokenHash));
     return reply({ error: 'confirmation_mail_failed' }, 502);
   }
+  await quietly('settle_mail_count', () => store.settleConfirmationMail(held, 'sent'));
   return reply(ACCEPTED, 202);
 }
 
 /**
  * POST /api/mailing/confirm  { token }
  * Aufgerufen von der Bestätigungsseite. Ein bloßer Abruf des Links aus der Mail bestätigt nichts.
+ * Bestätigt wird nur, solange alle Freigaben vorliegen (wie bei der Anmeldung) und die Adresse nicht gesperrt ist.
  */
 export async function handleConfirm(request: Request, deps: ConsentDeps = {}): Promise<Response> {
   const env = deps.env ?? process.env;
   if (!mailingConsentEnabled(env)) return reply({ error: 'mailing_consent_not_configured' }, 503);
   const config = deps.config ?? MAILING_CONSENT_CONFIG;
+  const gaps = consentReadiness(config, env);
   const store = deps.store === undefined ? getMailingConsentStore() : deps.store;
-  if (!store) return reply({ error: 'mailing_consent_not_ready' }, 503);
+  if (!store) gaps.push('store_not_configured');
+  if (gaps.length > 0 || !store) {
+    log('warn', { event: 'mailing_consent_not_ready', gaps });
+    return reply({ error: 'mailing_consent_not_ready' }, 503);
+  }
   if (crossOrigin(request)) return reply({ error: 'same_origin_required' }, 403);
   const now = deps.nowMs?.() ?? Date.now();
-  const verdict = (deps.limiter ?? limiterFor(config)).check(clientKey(request), now);
+  const verdict = (deps.confirmLimiter ?? limiterFor('confirm', config)).check(clientKey(request), now);
   if (!verdict.allowed) return reply({ error: 'rate_limited' }, 429, { 'Retry-After': String(verdict.retryAfterSeconds) });
   const parsed = await readJson(request, config.grenzen.max_body_bytes);
   if (!parsed.ok) return parsed.response;
   const token = parsed.value.token;
   if (typeof token !== 'string' || !TOKEN.test(token)) return reply({ error: 'token_invalid_or_expired' }, 404);
   try {
-    const confirmed = await store.confirmByTokenHash(sha256Hex(token), now);
+    const tokenHash = sha256Hex(token);
+    const pending = await store.findPendingByTokenHash(tokenHash, now);
+    if (!pending) return reply({ error: 'token_invalid_or_expired' }, 404);
+    // Eine gesperrte Adresse (Widerspruch, Rückläufer, Beschwerde, von Hand) wird nicht zur Einwilligung, auch nicht
+    // mit gültigem Kennzeichen. Die Datenbank verweigert denselben Wechsel zusätzlich selbst.
+    if (await store.isSuppressed(pending.emailHash)) return reply({ error: 'token_invalid_or_expired' }, 404);
+    const confirmed = await store.confirmByTokenHash(tokenHash, now);
     if (!confirmed) return reply({ error: 'token_invalid_or_expired' }, 404);
     await recordEvent(store, confirmed.emailHash, 'confirmed', confirmed.consentVersion, confirmed.source, now);
     return reply({ status: 'confirmed' }, 200);
