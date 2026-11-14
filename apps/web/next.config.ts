@@ -12,9 +12,15 @@ const config: NextConfig = {
   allowedDevOrigins: ["*.preview.emergentagent.com", "*.cluster-1.preview.emergentcf.cloud"],
   images: { unoptimized: true },
   async rewrites() {
+    // 2026-11-14 10:15 (Europe/Berlin): /agb lieferte oeffentlich 404 (Live-Abnahme
+    // nexifyai-live-acceptance, seit 08:00). Die Rechtsseite (id "terms") liegt kanonisch
+    // unter /vertragsgrundlagen. Rewrite statt Redirect: /agb antwortet mit 200 und
+    // demselben geprueften Inhalt, kanonische URL bleibt /vertragsgrundlagen.
+    // Rueckweg: Eintrag entfernen.
+    const agbRewrite = [{ source: "/agb", destination: "/vertragsgrundlagen" }];
     return process.env.NODE_ENV === "development"
-      ? [{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }]
-      : [];
+      ? [{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }, ...agbRewrite]
+      : agbRewrite;
   },
   async redirects() {
     // Concept requirement (section 16.2): legacy auth links must resolve to the real routes.
