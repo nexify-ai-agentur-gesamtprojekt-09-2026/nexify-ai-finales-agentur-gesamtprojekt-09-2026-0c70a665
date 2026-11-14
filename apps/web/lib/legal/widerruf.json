@@ -1,0 +1,48 @@
+{
+  "slug": "widerruf",
+  "title": "Widerrufsrecht",
+  "intro": "Hinweis zum Widerrufsrecht: NeXify AI schließt Verträge ausschließlich im B2B-Bereich (Unternehmer nach § 14 BGB). Verbrauchern (§ 13 BGB) wird kein Vertrag angeboten.",
+  "updated": "4. August 2026",
+  "related": [
+    {
+      "label": "AGB",
+      "href": "/agb"
+    },
+    {
+      "label": "Impressum",
+      "href": "/impressum"
+    },
+    {
+      "label": "Datenschutz",
+      "href": "/datenschutz"
+    }
+  ],
+  "sections": [
+    {
+      "id": "kein-verbraucher",
+      "heading": "§ 1 Kein gesetzliches Verbraucherwiderrufsrecht",
+      "paragraphs": [
+        "Das gesetzliche Widerrufsrecht für Verbraucher (§§ 312g, 355 BGB) findet ausschließlich auf Verbraucherverträge Anwendung.",
+        "Da NeXify AI ausschließlich Verträge mit Unternehmern schließt, besteht ein gesetzliches Widerrufsrecht nicht."
+      ]
+    },
+    {
+      "id": "ausnahme",
+      "heading": "§ 2 Ausnahmefall: irrtümlich geschlossener Verbrauchervertrag",
+      "paragraphs": [
+        "Sollte ausnahmsweise ein Vertrag mit einem Verbraucher zustande kommen (z. B. durch Bestellungen über automatisierte Kanäle), steht dem Verbraucher das gesetzliche Widerrufsrecht nach §§ 312g, 355 BGB zu.",
+        "In diesem Fall gilt: Widerrufsfrist 14 Tage ab Vertragsschluss; Widerruf in Textform an mail@nexifyai.cloud; Erstattung innerhalb von 14 Tagen nach Zugang des Widerrufs.",
+        "Für bereits erbrachte digitale Leistungen kann eine Wertersatzpflicht bestehen (§ 357 Abs. 8 BGB)."
+      ]
+    },
+    {
+      "id": "storno",
+      "heading": "§ 3 Freiwilliges Stornorecht (Kulanzregelung)",
+      "paragraphs": [
+        "Vor Beginn der Leistungserbringung kann der Auftraggeber den Auftrag jederzeit kostenfrei stornieren.",
+        "Nach Leistungsbeginn werden bereits erbrachte Leistungen anteilig nach § 4 AGB abgerechnet.",
+        "Diese Kulanzregelung stellt kein gesetzliches Widerrufsrecht dar und kann jederzeit geändert werden."
+      ]
+    }
+  ]
+}
