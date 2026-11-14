@@ -389,6 +389,20 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   }
 
   const launcherLabel=site==="teileklar"?({de:"TEILEKLAR Hilfe",nl:"TEILEKLAR hulp",fr:"Aide TEILEKLAR",en:"TEILEKLAR help"} as const)[locale]:t.open;
+  // Thema: dunkel ist Standard, hell nur nach Wahl. Die Wahl steht als Cookie (der Server setzt damit das Attribut ohne Aufblitzen)
+  // und zusätzlich im lokalen Speicher. Der Wechsel lässt die Farben kurz gleiten.
+  const [theme,setTheme]=useState<'dark'|'light'>('dark');
+  useEffect(()=>{setTheme(document.documentElement.dataset.theme==='light'?'light':'dark');},[]);
+  const themeLabel=({de:'Helle Ansicht',nl:'Lichte weergave',fr:'Affichage clair',en:'Light appearance'} as const)[locale];
+  const toggleTheme=()=>{
+    const next=theme==='light'?'dark':'light',root=document.documentElement;
+    root.classList.add('theme-wechsel');window.setTimeout(()=>root.classList.remove('theme-wechsel'),400);
+    root.dataset.theme=next;root.style.colorScheme=next;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',getComputedStyle(root).getPropertyValue(next==='light'?'--color-hell-grund':'--color-dunkel-grund').trim());
+    try{localStorage.setItem('nx-theme',next);}catch{/* nur Vorliebe */}
+    document.cookie=`nx-theme=${next}; path=/; max-age=31536000; samesite=lax`;
+    setTheme(next);
+  };
   // Kopfleiste: ab 24 px Blättern verdichtet sich das Glas. Der Zustand steht an der Wurzel, damit das Stylesheet ihn lesen kann.
   useEffect(()=>{
     const root=workspaceRoot.current;if(!root)return;
@@ -405,7 +419,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
       {site==='teileklar'?<CommerceHeader/>:<header className="site-header" data-testid="site-header"><Link href="/" className="brand" aria-label={`NeXify AI · ${locale==='de'?'Startseite':'Home'}`}><span className="brand-signet" aria-hidden="true"/><span className="brand-word">Ne<strong className="brand-x">X</strong>ify <span className="brand-ai">AI</span><small>{t.footer}</small></span></Link>
         <SiteNavigation pages={pages} site={site} locale={locale} pathname={pathname}/>
-        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" disabled={!hydrated} value={locale} onChange={event=>{const url=new URL(window.location.href);if(event.target.value==='de')url.searchParams.delete('lang');else url.searchParams.set('lang',event.target.value);window.location.assign(url.pathname+url.search+url.hash);}}><option value="de" data-testid="locale-option-de">DE</option><option value="nl" data-testid="locale-option-nl">NL</option><option value="fr" data-testid="locale-option-fr">FR</option><option value="en" data-testid="locale-option-en">EN</option></select><Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
+        <div className="header-actions"><label className="visually-hidden" htmlFor="locale">{t.locale}</label><select id="locale" data-testid="locale-select" disabled={!hydrated} value={locale} onChange={event=>{const url=new URL(window.location.href);if(event.target.value==='de')url.searchParams.delete('lang');else url.searchParams.set('lang',event.target.value);window.location.assign(url.pathname+url.search+url.hash);}}><option value="de" data-testid="locale-option-de">DE</option><option value="nl" data-testid="locale-option-nl">NL</option><option value="fr" data-testid="locale-option-fr">FR</option><option value="en" data-testid="locale-option-en">EN</option></select><button type="button" className="theme-switch" role="switch" aria-checked={theme==='light'} aria-label={themeLabel} title={themeLabel} data-testid="theme-switch" onClick={toggleTheme}><svg className="theme-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg><svg className="theme-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button><Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{!open&&<button className="outline-button compact" aria-expanded={open} aria-controls="aifly-panel" onClick={()=>{changePanel(true);messageInput.current?.focus();}}>{t.open}</button>}</div>
       </header>}
       <main id="page-content" tabIndex={-1}>{children}</main>
       <SiteFooter pages={pages} site={site} locale={locale}/>

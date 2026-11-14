@@ -269,41 +269,41 @@
       }
     },
     "hell": {
-      "$description": "Helle Fassung der oeffentlichen Seite (Inhaberentscheidung 14.11.2026): warmer heller Grund, Graphit-Schrift, klares Glas. Der dunkle Atelier-Satz bleibt unveraendert als Rueckweg.",
+      "$description": "Helles Thema der oeffentlichen Seite (Inhaberentscheidung 14.11.2026): kuehles helles Silbergrau, nie Reinweiss; nur ueber den Hell/Dunkel-Schalter. Standard bleibt das dunkle Thema (color.dunkel).",
       "grund": {
-        "$value": "#F4F2EE",
+        "$value": "#E4E7EA",
         "$type": "color",
-        "$description": "Seitengrund, warmes sehr helles Weiss-Grau"
+        "$description": "Seitengrund, kuehles helles Silbergrau"
       },
       "ebene": {
-        "$value": "#EAE7E1",
+        "$value": "#D9DDE1",
         "$type": "color",
         "$description": "Zweite Ebene, eine Spur dunkler"
       },
       "flaeche": {
-        "$value": "#FBFAF8",
+        "$value": "#ECEEF1",
         "$type": "color",
         "$description": "Gehobene ruhige Flaeche"
       },
       "licht": {
-        "$value": "#FFFFFF",
+        "$value": "#F6F7F9",
         "$type": "color",
-        "$description": "Lichtkante und Glanz auf Glas"
+        "$description": "Lichtkante und Glanz auf Glas; bewusst kein Reinweiss"
       },
       "schrift": {
-        "$value": "#1D2120",
+        "$value": "#1B1E1D",
         "$type": "color",
-        "$description": "Haupttext Graphit; 15,0:1 auf grund"
+        "$description": "Haupttext Graphit"
       },
       "schriftNeben": {
-        "$value": "#4F5553",
+        "$value": "#454B49",
         "$type": "color",
-        "$description": "Nebentext; 6,9:1 auf grund"
+        "$description": "Nebentext"
       },
       "schriftLeise": {
-        "$value": "#636967",
+        "$value": "#555B59",
         "$type": "color",
-        "$description": "Hinweise; 5,0:1 auf grund"
+        "$description": "Hinweise"
       },
       "schatten": {
         "$value": "#1B1E1D",
@@ -311,19 +311,77 @@
         "$description": "Schattenfarbe, nur in geringer Deckkraft gemischt"
       },
       "tagWarm": {
-        "$value": "#F6DDBB",
+        "$value": "#EDEEF0",
         "$type": "color",
-        "$description": "Warmes Tageslicht hinter Glas"
+        "$description": "Neutrales Licht im Grund"
       },
       "tagSilber": {
-        "$value": "#CFDAE4",
+        "$value": "#C9D1D8",
         "$type": "color",
-        "$description": "Kuehles Silberlicht hinter Glas"
+        "$description": "Kuehles Silberlicht im Grund und als Eigentoenung des Glases"
       },
       "tagLime": {
-        "$value": "#DDEFA8",
+        "$value": "#DCE8BE",
         "$type": "color",
-        "$description": "Hauch Lime im Tageslicht"
+        "$description": "Hauch Lime im Licht"
+      }
+    },
+    "dunkel": {
+      "$description": "Dunkles Thema (Standard): Marken-Graphit in feinen Tonwertstufen, Silbergrau als Licht, Lime als einzige Haupthandlung.",
+      "grund": {
+        "$value": "#1B1E1D",
+        "$type": "color",
+        "$description": "Seitengrund, Marken-Graphit (graphit.800)"
+      },
+      "ebene": {
+        "$value": "#222625",
+        "$type": "color",
+        "$description": "Zweite Ebene"
+      },
+      "flaeche": {
+        "$value": "#2A2E2C",
+        "$type": "color",
+        "$description": "Gehobene ruhige Flaeche"
+      },
+      "licht": {
+        "$value": "#F3F0EA",
+        "$type": "color",
+        "$description": "Lichtkante und Glanz auf Glas (Elfenbein)"
+      },
+      "schrift": {
+        "$value": "#F3F0EA",
+        "$type": "color",
+        "$description": "Haupttext"
+      },
+      "schriftNeben": {
+        "$value": "#D3D8D5",
+        "$type": "color",
+        "$description": "Nebentext"
+      },
+      "schriftLeise": {
+        "$value": "#B4BAB6",
+        "$type": "color",
+        "$description": "Hinweise"
+      },
+      "schatten": {
+        "$value": "#0B0D0C",
+        "$type": "color",
+        "$description": "Schattenfarbe"
+      },
+      "tagWarm": {
+        "$value": "#3A403E",
+        "$type": "color",
+        "$description": "Neutrales Licht im Grund"
+      },
+      "tagSilber": {
+        "$value": "#BDC5C9",
+        "$type": "color",
+        "$description": "Silbergrau als Licht (atelier.platinum)"
+      },
+      "tagLime": {
+        "$value": "#A8C76A",
+        "$type": "color",
+        "$description": "Hauch Lime im Licht (marke.lime)"
       }
     }
   },
