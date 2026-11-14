@@ -9,6 +9,8 @@ import {SceneVideo} from "./SceneVideo";
 import {HcArrow} from "./HcArrow";
 import {PageShowcase} from "./PageShowcase";
 import {PageQuestions} from "./PageQuestions";
+import {HeroStage} from "./IdentityHero";
+import {ActionButton,ActionLink} from "./ActionControl";
 import "./HomeConcept.css";
 import "./PageConcept.css";
 
@@ -61,22 +63,22 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
   const target=get(action.target_id||"");
   return target?<SiteLink key={index} className={className} href={target.path} data-testid={"page-action-"+index}>{action.label[locale]}<HcArrow/></SiteLink>:<span key={index} className="hc-caption">{action.label[locale]} · {t.unavailable}</span>;
  };
+ const heroAction=(action:PublicPage["actions"][number],index:number)=>{
+  const primary=index===0;const variant=primary?"primary":"secondary";const className=primary?"identity-primary-link":"identity-secondary-link";
+  const inner=primary?<><span>{action.label[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></>:action.label[locale];
+  if(action.type==="chat"&&action.chat_intent)return <ActionButton key={index} variant={variant} className={className} onClick={()=>startIntent(action.chat_intent)} data-testid={"page-action-"+index}>{inner}</ActionButton>;
+  const target=get(action.target_id||"");
+  return target?<ActionLink key={index} variant={variant} className={className} href={target.path} data-testid={"page-action-"+index}>{inner}</ActionLink>:<span key={index} className="hc-caption">{action.label[locale]} · {t.unavailable}</span>;
+ };
  const hasSupplement=Children.toArray(children).length>0;
  const supplement=hasSupplement?<section className="hc-container pc-supplement" data-testid={"page-supplement-"+page.id}>{children}</section>:null;
 
  return <div data-testid={"public-page-"+page.id} className={"home-concept page-concept page-"+page.id+" layout-"+layout+" context-"+page.site_context}>
-  <section className="hc-container" aria-labelledby={headingId}>
-   <header className={"pc-hero"+(image?"":" is-text-only")}>
-    <div className="pc-hero-copy">
-     <nav className="pc-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map((parent,index)=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink>{index<parents.length-1&&<span aria-hidden="true">/</span>}</li>)}<li className="visually-hidden"><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
-     <span className="hc-kicker">{brand}<span aria-hidden="true"> / </span>{t[layout]}</span>
-     <h1 id={headingId}>{page.localizedTitle[locale]}</h1>
-     <p className="pc-hero-lead">{page.localizedSummary[locale]}</p>
-     {page.actions.length>0&&<div className="pc-hero-actions">{page.actions.slice(0,2).map((action,index)=>actionLink(action,index,index===0))}</div>}
-    </div>
-    {image&&<figure className="pc-hero-media" data-testid={"domain-artwork-"+page.id}><img src={image.src} srcSet={srcSetFor(image.src)} sizes="100vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="eager" fetchPriority="high" decoding="async"/>{pageVideo(page.id)&&<SceneVideo key={page.id} src={pageVideo(page.id)!} locale={locale}/>}</figure>}
-   </header>
-  </section>
+  <HeroStage headingId={headingId} title={page.localizedTitle[locale]} body={page.localizedSummary[locale]}
+   lead={<><nav className="pc-breadcrumb" aria-label={t.breadcrumb}><ol>{parents.map((parent,index)=><li key={parent.id}><SiteLink href={parent.path}>{parent.id==="home"?t.home:parent.localizedTitle[locale]}</SiteLink>{index<parents.length-1&&<span aria-hidden="true">/</span>}</li>)}<li className="visually-hidden"><span aria-current="page">{page.localizedTitle[locale]}</span></li></ol></nav>
+    <span className="hc-kicker">{brand}<span aria-hidden="true"> / </span>{t[layout]}</span></>}
+   actions={page.actions.length>0?<>{page.actions.slice(0,2).map((action,index)=>heroAction(action,index))}</>:undefined}
+   media={image?<figure className="identity-hero-photo" data-testid={"domain-artwork-"+page.id}><img src={image.src} srcSet={srcSetFor(image.src)} sizes="(max-width: 820px) 100vw, 60vw" alt={imageAlt(image,locale)} width={2000} height={1125} loading="eager" fetchPriority="high" decoding="async"/>{pageVideo(page.id)&&<SceneVideo key={page.id} src={pageVideo(page.id)!} locale={locale}/>}</figure>:undefined}/>
   {sections.length>1&&<nav className="hc-anchors hc-container" aria-label={t.onPage}>{sections.map((section,index)=><a key={section.id} href={"#"+anchorId(page.id,section.id,index)}>{section.heading[locale]}<HcArrow direction="down"/></a>)}</nav>}
   {supplementFirst&&supplement}
   {sections.length>0&&<div className="pc-sections">{sections.map((section,index)=>{
