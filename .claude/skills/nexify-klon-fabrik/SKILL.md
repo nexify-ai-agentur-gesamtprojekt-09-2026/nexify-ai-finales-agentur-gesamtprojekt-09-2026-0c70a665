@@ -19,6 +19,7 @@ Nur diese Bausteine verwenden. Fehlt einer, zuerst den Inhaber fragen, statt ein
 | Film, Poster, Untertitel, Lautstärke | `AtelierFilm` | `apps/web/components/AtelierFilm.tsx` |
 | Schalter mit Linkziel | `ActionLink` | `apps/web/components/ActionControl` |
 | Schalter mit Aktion | `ActionButton` | `apps/web/components/ActionControl` |
+| Absendeschalter eines Formulars | `ActionButton variant="primary"` mit `className="hc-finish-primary"` und `type="submit"` | `apps/web/components/ActionControl` |
 | Kopfleiste, Fußzeile | `SiteNavigation`, `SiteFooter` | `apps/web/components/` |
 | Abstände, Farben, Radien | Tokens `--as-s-*` und die Werte aus `config/design-tokens.json` | — |
 
@@ -60,6 +61,8 @@ Danach die Gates aus `AGENTS.md`: `make check`, `node tools/ds-audit-cli.js`, `n
 
 44 Seiten, 0 Abweichungen. Geprüft werden elf Bausteine: Hero-Titel, Akzent, Hero-Text, primärer Hero-Schalter, Kopfleiste, Logo, Fußzeile, Fußzeilen-Link, Abschnitts-Titel, Text-Schalter und Abschluss-Schalter.
 
+Seit dem 14.11.2026 kommt als zwölfter Baustein der Absendeschalter von Formularen dazu (`.home-concept form button[type="submit"]`). Die Startseite hat kein Formular; er wird deshalb gegen den Abschluss-Schalter der Startseite gemessen. Lokal gegen den Stand dieses Commits: 44 Seiten, 0 Abweichungen, einschließlich der Kontakt-, Such- und Konto-Formulare. Auf dem Konto-Blatt (`AuthForms.tsx`) ist der Absendeschalter der Abschluss-Schalter und der Google-Schalter der Text-Schalter der Startseite; die Konto-Regeln legen nur noch Breite und Anordnung fest. Die Startseite hat keinen eigenen sekundären Schalter neben dem primären, ihr zweiter Schalter ist der Text-Schalter.
+
 Gemessen wird überall mit geschlossener Chat-Scheibe. Die Scheibe öffnet sich ab 1200 px nur auf NeXify-Seiten von selbst und macht den Inhalt schmaler; weil die Schriftgröße mit der Behälterbreite wächst, sähe ein Vergleich mit gemischtem Zustand wie eine Abweichung aus. Der erste Lauf des Werkzeugs meldete deshalb 70 Abweichungen im Shop, die keine waren.
 
 ## Neuen Baustein in die Prüfung aufnehmen
@@ -67,4 +70,4 @@ Gemessen wird überall mit geschlossener Chat-Scheibe. Die Scheibe öffnet sich 
 Entsteht mit Freigabe des Inhabers ein neuer gemeinsamer Baustein, im selben Commit:
 
 1. Zeile in der Inventar-Tabelle oben ergänzen.
-2. Eintrag in `BAUSTEINE` in `tools/gleichmacher.mjs` ergänzen (Name und Selektor).
+2. Eintrag in `BAUSTEINE` in `tools/gleichmacher.mjs` ergänzen (Name und Selektor). Kommt der Baustein auf der Startseite nicht vor, als `[Selektor, Norm-Baustein]` eintragen: verglichen wird dann mit dem genannten Baustein der Startseite.

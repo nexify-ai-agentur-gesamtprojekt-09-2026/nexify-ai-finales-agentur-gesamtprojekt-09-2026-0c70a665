@@ -2,6 +2,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { api, type ApiError } from "./shop/api";
 import {useUI} from './Workspace';
+import {ActionButton} from './ActionControl';
 import {contactCopy} from '../lib/contact-copy';
 import {contactAttempt,persistContactAttempt,readContactAttempt,type ContactAttempt} from '../lib/contact-attempt';
 import {takeOracleBrief} from '../lib/project-brief-transfer';
@@ -65,6 +66,6 @@ export default function ContactRequestForm({ kind = "contact",topic }: { kind?: 
     <label className="tk-check"><input type="checkbox" name="consent" aria-invalid={!!errors.consent} aria-describedby={errors.consent?errorId("consent"):undefined} data-testid="contact-consent" /><span>{text.consent} <a href={partner?'/teileklar/rechtliches':'/datenschutz'}>{text.privacy}</a>. *</span></label>
     {errors.consent && <span id={errorId("consent")} className="tk-field-error" data-testid="contact-consent-error">{MSG.required}</span>}
     {failure && <div role="alert" className="tk-field-error" data-testid="contact-error"><p>{failure}</p><a href="mailto:mail@nexifyai.cloud" data-testid="contact-email-fallback">{({de:'Direkt per E-Mail kontaktieren',nl:'Rechtstreeks per e-mail contact opnemen',fr:'Nous contacter directement par e-mail',en:'Contact us directly by email'} as const)[locale]}</a></div>}
-    <div className="tk-actions"><button className="primary-button" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</button></div>
+    <div className="tk-actions"><ActionButton variant="primary" className="hc-finish-primary" type="submit" disabled={busy||!ready} data-testid="contact-submit">{busy?text.sending:text.send}</ActionButton></div>
   </form>;
 }
