@@ -38,7 +38,22 @@ CHAT_PATHS = {"/v1/chat/completions", "/api/v1/chat/completions", "/chat/complet
 MODEL_PATHS = {"/v1/models", "/api/v1/models", "/models"}
 ERLAUBTE_UPSTREAM_HOSTS = {"openrouter.ai"}
 # Felder, mit denen ein Aufrufer ein anderes Modell oder einen Ausweichweg verlangen könnte.
-AUSWEICH_FELDER = ("models", "route", "fallbacks", "fallback_models")
+AUSWEICH_FELDER = ("models", "route", "fallbacks", "fallback_models", "preset", "plugins", "transforms")
+# Nur diese Felder gehen an den Anbieter. Alles andere wird abgelehnt statt durchgereicht:
+# Ein unbekanntes Feld könnte beim Anbieter Modell, Ausweichweg oder Reasoning verändern
+# (Beispiel: ein hinterlegtes Preset mit eigener Ausweichliste). Die Liste wird nur nach
+# Prüfung der Anbieter-Dokumentation erweitert.
+ERLAUBTE_FELDER = frozenset({
+    "model", "messages", "stream", "stream_options", "temperature", "top_p", "max_tokens",
+    "max_completion_tokens", "tools", "tool_choice", "parallel_tool_calls", "response_format",
+    "stop", "seed", "frequency_penalty", "presence_penalty", "reasoning", "reasoning_effort",
+    "provider", "user", "usage",
+})
+# Anbieter-Angaben, die nur einschränken. `order`, `only` und `ignore` wählen unter Anbietern
+# desselben Modells; sie ändern das Modell nicht.
+ERLAUBTE_ANBIETER_FELDER = frozenset({
+    "require_parameters", "allow_fallbacks", "order", "only", "ignore", "data_collection", "zdr",
+})
 
 
 class Ablehnung(Exception):
@@ -62,9 +77,14 @@ def pruefe_anfrage(koerper: dict, modell: str, stufe: str) -> dict:
         raise Ablehnung("bad_request", "Anfrage ist kein JSON-Objekt.", 400)
     if koerper.get("model") != modell:
         raise Ablehnung("model_policy", f"Nur das Modell {modell} ist zulässig; verlangt wurde {koerper.get('model')!r}.")
+    if not modell.startswith("@") and str(koerper.get("model", "")).startswith("@"):
+        raise Ablehnung("model_policy", "Presets als Modellangabe sind nicht zulässig.")
     for feld in AUSWEICH_FELDER:
-        if koerper.get(feld):
-            raise Ablehnung("model_policy", f"Das Feld {feld!r} verlangt einen Ausweichweg; das ist nicht zulässig.")
+        if feld in koerper:
+            raise Ablehnung("model_policy", f"Das Feld {feld!r} kann Modell oder Ausweichweg beim Anbieter verändern; es ist nicht zulässig.")
+    fremd = sorted(set(koerper) - ERLAUBTE_FELDER)
+    if fremd:
+        raise Ablehnung("field_policy", f"Nicht freigegebene Felder: {', '.join(fremd)}. Der Wächter leitet nur geprüfte Felder weiter.")
     reasoning = koerper.get("reasoning")
     kurz = koerper.get("reasoning_effort")
     if kurz is not None and kurz != stufe:
@@ -79,6 +99,9 @@ def pruefe_anfrage(koerper: dict, modell: str, stufe: str) -> dict:
         anbieter = {}
     if not isinstance(anbieter, dict) or anbieter.get("allow_fallbacks") is True or anbieter.get("require_parameters") is False:
         raise Ablehnung("model_policy", "Die Anbieter-Angaben lockern die Vorgabe (Ausweichanbieter oder fehlende Parameterpflicht).")
+    fremd = sorted(set(anbieter) - ERLAUBTE_ANBIETER_FELDER)
+    if fremd:
+        raise Ablehnung("field_policy", f"Nicht freigegebene Anbieter-Angaben: {', '.join(fremd)}.")
     weiter = dict(koerper)
     weiter.pop("reasoning_effort", None)
     weiter["reasoning"] = reasoning

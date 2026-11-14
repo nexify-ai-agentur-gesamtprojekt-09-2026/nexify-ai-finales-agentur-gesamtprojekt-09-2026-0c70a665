@@ -202,6 +202,24 @@ class ModellWaechter(unittest.TestCase):
             self.assertEqual(status, 422, zusatz)
         self.assertEqual(_Anbieter.gesehen, [])
 
+    def test_presets_und_unbekannte_felder_werden_abgelehnt(self):
+        # Ein beim Anbieter hinterlegtes Preset kann eine eigene Ausweichliste tragen.
+        for zusatz, code in (({"preset": "irgendeins"}, "model_policy"), ({"plugins": [{"id": "web"}]}, "model_policy"),
+                             ({"transforms": ["middle-out"]}, "model_policy"), ({"models": []}, "model_policy"),
+                             ({"unbekanntes_feld": 1}, "field_policy"), ({"provider": {"sort": "price"}}, "field_policy")):
+            status, roh = self._sende({"model": MODELL, "messages": [], **zusatz})
+            self.assertEqual(status, 422, zusatz)
+            self.assertEqual(json.loads(roh)["error"]["code"], code, zusatz)
+        status, roh = self._sende({"model": "@preset/irgendeins", "messages": []})
+        self.assertEqual(status, 422)
+        self.assertEqual(_Anbieter.gesehen, [])
+
+    def test_uebliche_felder_gehen_durch(self):
+        status, _ = self._sende({"model": MODELL, "messages": [], "temperature": 0.2, "max_tokens": 50, "tools": [],
+                                 "tool_choice": "auto", "stream_options": {"include_usage": True}, "provider": {"order": ["x"]}})
+        self.assertEqual(status, 200)
+        self.assertNotIn("preset", _Anbieter.gesehen[0][1])
+
     def test_antwort_mit_anderem_modell_wird_nicht_ausgeliefert(self):
         _Anbieter.antwortmodell = "openai/gpt-5.4-mini"
         for strom in (False, True):

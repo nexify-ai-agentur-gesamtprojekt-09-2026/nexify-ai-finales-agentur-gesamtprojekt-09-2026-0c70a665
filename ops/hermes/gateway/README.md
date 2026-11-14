@@ -14,7 +14,8 @@ Stand 14.11.2026. **Nicht eingespielt, nicht freigegeben, kein laufender Dienst.
 | Modell der Vorgabe, keine Reasoning-Angabe | weitergeleitet mit der vorgeschriebenen Stufe |
 | anderes Modell, auch mit Anhang oder ohne `-1017` | 422 `model_policy`, kein Aufruf beim Anbieter |
 | andere Stufe, Reasoning abgeschaltet, eigenes Token-Budget | 422 `reasoning_policy`, kein Aufruf beim Anbieter |
-| Ausweichliste (`models`, `route`), Ausweichanbieter | 422 `model_policy` |
+| Ausweichliste (`models`, `route`), Ausweichanbieter, Preset (`preset` oder `@preset/…` als Modell), `plugins`, `transforms` | 422 `model_policy` |
+| jedes Feld, das nicht ausdrücklich freigegeben ist | 422 `field_policy` (Positivliste im Quelltext; ein unbekanntes Feld könnte beim Anbieter Modell oder Ausweichweg ändern) |
 | Antwort oder Strom nennt ein anderes oder kein Modell | 502 `model_policy`, nichts wird ausgeliefert |
 | ohne gültigen Zugangswert | 401 |
 
@@ -37,7 +38,7 @@ Die Tests laufen gegen eine Attrappe auf `127.0.0.1`, ohne Schlüssel und ohne M
 
 ## Nicht belegt
 
-- Hermes mit dem Wächter als Gegenstelle (ob jede Art von Aufruf dort ankommt, auch Nebenaufgaben und Zeitpläne).
+- Hermes mit dem Wächter als Gegenstelle (ob jede Art von Aufruf dort ankommt, auch Nebenaufgaben und Zeitpläne, und ob Hermes Felder sendet, die nicht auf der Positivliste stehen; solche Aufrufe würden abgelehnt).
 - Ein echter Aufruf bei OpenRouter und die dort abgerechnete Reasoning-Stufe.
 - Betrieb als Dienst: Start, Neustart, Protokollablage, Überwachung, Last.
 - Unabhängige Prüfung des Quelltexts. Vor einem Einsatz nötig, ebenso die Entscheidung des Inhabers; `config/llm-policy.json` nennt als Zielroute 9router.
