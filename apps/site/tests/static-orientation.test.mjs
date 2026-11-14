@@ -66,7 +66,7 @@ test('an explicit vehicle question can direct an agency visitor to actual TEILEK
 });
 
 test('product names retain their separate product destinations',()=>{
- assert.equal(guide('NeX2fly Suite').cards[0].id,'nex2fly');
+ assert.equal(guide('NeX AIFly Suite').cards[0].id,'nex2fly');
  assert.equal(guide('NeXify API').cards[0].id,'api');
  assert.equal(guide('NeX Agentic AI AIFly ORACLE').cards[0].id,'one');
 });
