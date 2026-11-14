@@ -4,6 +4,12 @@ Auftrag (Pascal Courbois, 13.11.2026): Zielstand ist die Vercel-Vorschau
 `…-lf8nj5vzv.vercel.app` (Zweig `fix/hero-video-controls-source-20261112`, Commit
 `a2e65e2`, PR 95); Hosting bei Cloudflare.
 
+> Nachtrag 14.11.2026: Neuere Messwerte, aktuelle Grenzwerte und der Umzugsplan stehen in
+> `docs/04-betrieb/cloudflare-umzug-2026-11-14.md`. Überholt ist hier die Größengrenze
+> „3 MiB": Cloudflare zählt inzwischen nur die unkomprimierte Größe (64 MiB). Die
+> Rechenzeit ist dort gemessen (46 bis 56 ms je Seite lokal gegen 10 ms im kostenlosen
+> Tarif). Der Einstieg des Workers ist jetzt `apps/web/cloudflare/worker.mjs`.
+
 **Status: vorbereitet und lokal geprüft. Nicht ausgeliefert.** Keine Domain, kein
 DNS-Eintrag und kein Cloudflare-Objekt wurde geändert.
 

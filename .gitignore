@@ -72,3 +72,6 @@ apps/web/.wrangler/
 
 # Graphify-Wissensgraph: wird lokal mit tools/graph.sh erzeugt, nicht versioniert (rund 14 MB je Stand)
 graphify-out/
+
+# Lokale Worker-Variablen (wrangler dev); Muster: apps/web/.dev.vars.example
+apps/web/.dev.vars

@@ -1,0 +1,34 @@
+# Muster für apps/web/.dev.vars (lokal, `pnpm cf:preview`) und Liste der Namen, die der Worker
+# `nexify-web` auf Cloudflare braucht. KEINE Werte eintragen und diese Datei nicht mit Werten
+# versionieren. Auf Cloudflare je Name:  npx wrangler secret put <NAME>
+# Bedeutung der Namen: apps/web/.env.example · Umzugsplan: docs/04-betrieb/cloudflare-umzug-2026-11-14.md
+
+# Chat (POST /api/chat). Ohne beide antwortet die Route mit 503, es gibt keinen Ersatz.
+ROUTER_URL=
+ROUTER_KEY=
+
+# Angebote, Bestellungen, Composio-Ablage (eigene Supabase-Instanz)
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+
+# Bestell-Mail
+RESEND_API_KEY=
+RESEND_FROM=
+RESEND_FROM_ADDRESS=
+
+# Composio-Webhook (/webhook/v1). Namen wie im Vercel-Projekt; genaue Liste: apps/web/.env.example
+NEXIFY_COMPOSIO_WEBHOOK=
+COMPOSIO_WEBHOOK_SECRET=
+
+# Shop-API (apps/shop-api) läuft nicht auf dem Worker.
+# SHOP_API_ORIGIN: https-Herkunft ohne Pfad, an die der Worker /api/shop, /api/auth, /api/admin,
+#   /api/workshops, /api/requests, /api/health, /api/openapi.json und /api/docs weiterreicht.
+# SHOP_API_BASE_URL: dieselbe Herkunft für die serverseitigen Abrufe der Shop-Seiten (lib/shop-server.ts).
+SHOP_API_ORIGIN=
+SHOP_API_BASE_URL=
+
+# Nicht geheim (als Klartext-Variable im Dashboard oder ebenfalls als Secret):
+# NEXIFY_APP_ENV wird beim BAU gelesen (next.config.ts), nicht zur Laufzeit: in der Bauumgebung setzen.
+# Es ersetzt dort die auf Vercel gesetzte Kennung VERCEL_ENV.
+# Suchmaschinen-Schalter; unverändert wie in Produktion setzen.
+NEXIFY_INDEXING=
