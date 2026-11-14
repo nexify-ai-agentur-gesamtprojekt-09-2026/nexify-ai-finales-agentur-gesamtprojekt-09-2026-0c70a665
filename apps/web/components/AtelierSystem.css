@@ -266,9 +266,9 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
 #atelier .home-concept .identity-hero .identity-hero-photo{padding:var(--as-rim);border:0;border-radius:var(--as-stage);overflow:hidden;background:linear-gradient(140deg,color-mix(in srgb,var(--as-ink) 52%,transparent),color-mix(in srgb,var(--as-cool) 14%,transparent) 24%,color-mix(in srgb,var(--as-deep) 70%,transparent) 60%,color-mix(in srgb,var(--as-warm) 40%,transparent) 100%);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 60%,transparent),0 40px 90px -34px color-mix(in srgb,var(--as-deep) 96%,transparent),0 60px 120px -50px color-mix(in srgb,var(--as-warm) 26%,transparent)}
 #atelier .home-concept .identity-hero .identity-hero-photo::after{content:none}
 #atelier .home-concept .identity-hero .identity-hero-photo :is(.atelier-film,.atelier-film-hero,.atelier-film-picture,video,img){border-radius:calc(var(--as-stage) - var(--as-rim))}
-#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls{position:absolute;inset:auto auto var(--space-4) var(--space-4);margin:0;width:max-content;max-width:calc(100% - 2 * var(--space-4));display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:var(--space-1);padding:var(--space-1);border:0;border-radius:var(--as-pill);background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest)}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls{position:absolute;inset:auto auto var(--space-4) var(--space-4);margin:0;width:max-content;max-width:calc(100% - 2 * var(--space-4));display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;border:0;border-radius:var(--as-pill);background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest)}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);width:auto;min-width:48px;min-height:48px;height:48px;padding:0 var(--space-4);border:0;border-radius:var(--as-pill);background:transparent;box-shadow:none;color:var(--as-ink);font-size:.8125rem;font-weight:500;white-space:nowrap;transform:none;transition:background-color .2s ease-out,transform .28s var(--as-spring)}
-#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary{width:48px;padding:0}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary{padding:0}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button:hover,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary:hover{background:color-mix(in srgb,var(--as-cool) 18%,transparent);box-shadow:none;transform:none}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button:active,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary:active{transform:scale(.97)}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button:focus-visible,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary:focus-visible{outline:none;box-shadow:var(--as-focus)}
@@ -283,8 +283,8 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
  #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume>div{width:200px}
  #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume label{font-size:0;gap:0}
 }
-#atelier .home-concept .hc-anchors{position:relative;box-sizing:border-box;display:flex;flex-wrap:nowrap;width:fit-content;max-width:calc(100% - 2 * var(--layout-page-padding));margin-inline:var(--layout-page-padding) auto;padding:var(--space-1);gap:var(--space-1);border:0;border-radius:var(--as-pill);background:var(--as-glass);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest);overflow:hidden}
-#atelier .home-concept .hc-anchors a{display:inline-flex;align-items:center;justify-content:space-between;min-height:48px;padding-inline:var(--space-5);gap:var(--space-3);border:0;border-radius:var(--as-pill);color:var(--color-text-sekundaer);font-size:.9375rem;white-space:nowrap;text-decoration:none;transition:background-color .2s ease-out,color .2s ease-out,transform .28s var(--as-spring)}
+#atelier .home-concept .hc-anchors{position:relative;box-sizing:border-box;display:flex;flex-wrap:nowrap;width:fit-content;max-width:calc(100% - 2 * var(--layout-page-padding));margin-inline:var(--layout-page-padding) auto;border:0;border-radius:var(--as-pill);background:var(--as-glass);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest)}
+#atelier .home-concept .hc-anchors a{display:inline-flex;align-items:center;justify-content:space-between;min-height:48px;padding-inline:var(--space-5);gap:var(--space-3);border:0;color:var(--color-text-sekundaer);font-size:.9375rem;white-space:nowrap;text-decoration:none;transition:background-color .2s ease-out,color .2s ease-out,transform .28s var(--as-spring)}
 #atelier .home-concept .hc-anchors a:is(:hover,:focus-visible){background:color-mix(in srgb,var(--as-cool) 16%,transparent);color:var(--as-ink)}
 #atelier .home-concept .hc-anchors a:focus-visible{outline-offset:-3px}
 #atelier .home-concept .hc-anchors a:active{transform:scale(.97)}
@@ -534,3 +534,21 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel .orientation-composer textarea::placeholder{color:var(--color-text-sekundaer);opacity:1}
 #atelier #aifly-panel .orientation-message,#atelier #aifly-panel .orientation-intro p{font-size:1rem}
 #atelier .home-concept .hc-rate p{font-size:1rem}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls{padding:0;gap:0}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls>button,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary{border-radius:0}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls>:first-child{border-radius:var(--as-pill) 0 0 var(--as-pill)}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls>button:last-child,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls>.atelier-volume:last-child summary{border-radius:0 var(--as-pill) var(--as-pill) 0}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls>:only-child{border-radius:var(--as-pill)}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls>:first-child{padding-left:var(--space-5)}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary{width:56px;padding-right:var(--space-2)}
+#atelier .home-concept .hc-anchors{padding:0;gap:0;overflow:hidden}
+#atelier .home-concept .hc-anchors a{border-radius:0}
+#atelier .home-concept .hc-anchors a:first-child{padding-left:var(--space-6)}
+#atelier .home-concept .hc-anchors a:last-child{padding-right:var(--space-6)}
+@container home (max-width:640px){
+ #atelier .home-concept .hc-anchors a:first-child,#atelier .home-concept .hc-anchors a:last-child{padding-inline:var(--space-4)}
+}
+#atelier .site-header .main-navigation{padding:0;gap:0;overflow:visible}
+#atelier .site-header .main-navigation>a,#atelier .site-header .main-navigation>details>summary{box-sizing:border-box;display:inline-flex;align-items:center;height:48px;min-height:48px;padding:0 var(--space-4);border-radius:0}
+#atelier .site-header .main-navigation>a:first-child{padding-left:var(--space-5);border-radius:var(--as-pill) 0 0 var(--as-pill)}
+#atelier .site-header .main-navigation>a:last-child{padding-right:var(--space-5);border-radius:0 var(--as-pill) var(--as-pill) 0}
