@@ -74,7 +74,7 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
     <div className="nx-konto-blatt">
      <nav className="pc-breadcrumb" aria-label="Brotkrumennavigation"><ol><li><SiteLink href="/" data-testid={testId + "-home"}>Startseite</SiteLink><span aria-hidden="true">/</span></li><li><span aria-current="page">{TITLES[mode]}</span></li></ol></nav>
      <h1 id={testId + "-title"} data-testid={testId + "-title"}>{TITLES[mode]}</h1>
-     <p className="nx-konto-lead">Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen.</p>
+     <p className="nx-konto-lead">Das Konto ist für persönliche Vorgänge, Unterlagen und Shop-Bestellungen vorgesehen. Diese Bereiche sind noch im Aufbau; Registrierung und Anmeldung sind zurzeit nicht in Betrieb.</p>
     <form className="tk-form tk-auth" method="post" noValidate onSubmit={submit} data-testid={"auth-" + mode + "-form"}>
       {mode === "register" && field("name", "Name (optional)", name, setName, "text", "name")}
       {mode !== "reset" && field("email", "E-Mail-Adresse", email, setEmail, "email", "email")}

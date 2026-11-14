@@ -1745,10 +1745,10 @@
             "type": "route",
             "target_id": "signup",
             "label": {
-              "de": "NeX AIFly Suite. In Ruhe testen.",
-              "nl": "NeX AIFly Suite. Rustig testen.",
-              "fr": "NeX AIFly Suite. Tester sereinement.",
-              "en": "NeX AIFly Suite. Try it calmly."
+              "de": "NeX AIFly Suite. Zugang in Vorbereitung.",
+              "nl": "NeX AIFly Suite. Toegang in voorbereiding.",
+              "fr": "NeX AIFly Suite. Accès en préparation.",
+              "en": "NeX AIFly Suite. Access in preparation."
             }
           },
           "source_refs": [

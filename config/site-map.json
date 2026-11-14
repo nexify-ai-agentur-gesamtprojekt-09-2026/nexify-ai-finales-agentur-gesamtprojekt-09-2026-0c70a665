@@ -2422,10 +2422,10 @@
         "en": "NeX AIFly Suite. Your AI workspace."
       },
       "summary": {
-        "de": "Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.",
-        "nl": "Gesprekken, taken, documenten en projectkennis op één plek – in uw eigen omgeving. Leer de Suite kennen in een test van 24 uur.",
-        "fr": "Conversations, tâches, documents et connaissances de projet en un seul endroit – dans votre propre espace. Découvrez la Suite lors d’un essai de 24 heures.",
-        "en": "Conversations, tasks, documents and project knowledge in one place – in your own area. Get to know the Suite in a 24-hour trial."
+        "de": "Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – das ist das Ziel der NeX AIFly Suite. Sie ist in Vorbereitung und noch nicht nutzbar. Schreiben Sie uns, wenn Sie sie kennenlernen möchten.",
+        "nl": "Gesprekken, taken, documenten en projectkennis op één plek – dat is het doel van de NeX AIFly Suite. Ze is in voorbereiding en nog niet te gebruiken. Schrijf ons als u haar wilt leren kennen.",
+        "fr": "Conversations, tâches, documents et connaissances de projet en un seul endroit – c’est l’objectif de NeX AIFly Suite. Elle est en préparation et n’est pas encore utilisable. Écrivez-nous si vous souhaitez la découvrir.",
+        "en": "Conversations, tasks, documents and project knowledge in one place – that is the aim of NeX AIFly Suite. It is in preparation and cannot be used yet. Write to us if you would like to get to know it."
       },
       "site_context": "nexify",
       "sections": [
@@ -2438,10 +2438,10 @@
             "en": "Your workspace, your context"
           },
           "body": {
-            "de": "In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI, die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen nicht bei jeder Frage von vorn an.\n\nDie Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.",
-            "nl": "In de NeX AIFly Suite blijft bij elkaar wat bij elkaar hoort: het gesprek met de AI, de taak die eruit volgt, het document erbij en de kennis van uw project. U begint niet bij elke vraag opnieuw.\n\nDe Suite is een eigen product. Een bureauopdracht heeft u er niet voor nodig.",
-            "fr": "Dans NeX AIFly Suite, ce qui va ensemble reste ensemble : l’échange avec l’IA, la tâche qui en découle, le document associé et les connaissances de votre projet. Vous ne repartez pas de zéro à chaque question.\n\nLa Suite est un produit à part entière. Aucune commande d’agence n’est nécessaire.",
-            "en": "In NeX AIFly Suite, what belongs together stays together: the conversation with the AI, the task that comes from it, the related document and your project’s knowledge. You do not start from scratch with every question.\n\nThe Suite is a product in its own right. You do not need an agency project to use it."
+            "de": "In der NeX AIFly Suite soll zusammenbleiben, was zusammengehört: das Gespräch mit der KI, die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Damit Sie nicht bei jeder Frage von vorn anfangen. Einen Arbeitsbereich, in dem Sie das heute nutzen können, gibt es noch nicht.\n\nDie Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.",
+            "nl": "In de NeX AIFly Suite moet bij elkaar blijven wat bij elkaar hoort: het gesprek met de AI, de taak die eruit volgt, het document erbij en de kennis van uw project. Zodat u niet bij elke vraag opnieuw begint. Een werkruimte waarin u dat vandaag kunt gebruiken, is er nog niet.\n\nDe Suite is een eigen product. Een bureauopdracht heeft u er niet voor nodig.",
+            "fr": "Dans NeX AIFly Suite, ce qui va ensemble doit rester ensemble : l’échange avec l’IA, la tâche qui en découle, le document associé et les connaissances de votre projet. Pour que vous ne repartiez pas de zéro à chaque question. Un espace de travail où l’utiliser aujourd’hui n’existe pas encore.\n\nLa Suite est un produit à part entière. Aucune commande d’agence n’est nécessaire.",
+            "en": "In NeX AIFly Suite, what belongs together is meant to stay together: the conversation with the AI, the task that comes from it, the related document and your project’s knowledge. So that you do not start from scratch with every question. A workspace where you can use this today does not exist yet.\n\nThe Suite is a product in its own right. You do not need an agency project to use it."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2464,10 +2464,10 @@
             "en": "Work that leads to a result"
           },
           "body": {
-            "de": "Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie legen fest, welche Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet.\n\nEinige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders – werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.",
-            "nl": "Uit een gesprek komt een taak, uit de taak een resultaat dat u verder kunt gebruiken. U bepaalt welke bronnen de AI gebruikt en wie in uw omgeving meewerkt.\n\nSommige tools – zoals verzending per e-mail of de koppeling met een agenda – worden per toegang ingeschakeld. Wat voor u beschikbaar is, toont uw werkruimte.",
-            "fr": "D’un échange naît une tâche, de la tâche un résultat que vous pouvez réutiliser. Vous définissez quelles sources l’IA utilise et qui collabore dans votre espace.\n\nCertains outils – comme l’envoi par e-mail ou la connexion d’un agenda – sont activés selon l’accès. Votre espace de travail indique ce qui est disponible pour vous.",
-            "en": "A conversation becomes a task, and the task becomes a result you can use further. You decide which sources the AI uses and who works with you in your area.\n\nSome tools – such as sending by email or connecting a calendar – are switched on per access. Your workspace shows what is available to you."
+            "de": "Das Ziel: Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie sollen festlegen können, welche Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet.\n\nWerkzeuge wie der Versand per E-Mail oder die Anbindung eines Kalenders sind vorgesehen und sollen je Zugang eingeschaltet werden. Heute ist davon noch nichts nutzbar.",
+            "nl": "Het doel: uit een gesprek komt een taak, uit de taak een resultaat dat u verder kunt gebruiken. U moet kunnen bepalen welke bronnen de AI gebruikt en wie in uw omgeving meewerkt.\n\nTools zoals verzending per e-mail of de koppeling met een agenda zijn voorzien en worden per toegang ingeschakeld. Vandaag is daarvan nog niets te gebruiken.",
+            "fr": "L’objectif : d’un échange naît une tâche, de la tâche un résultat que vous pouvez réutiliser. Vous devez pouvoir définir quelles sources l’IA utilise et qui collabore dans votre espace.\n\nDes outils comme l’envoi par e-mail ou la connexion d’un agenda sont prévus et seront activés selon l’accès. Aujourd’hui, rien de cela n’est encore utilisable.",
+            "en": "The aim: a conversation becomes a task, and the task becomes a result you can use further. You are meant to decide which sources the AI uses and who works with you in your area.\n\nTools such as sending by email or connecting a calendar are planned and are to be switched on per access. None of this can be used today."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2484,16 +2484,16 @@
         {
           "id": "nex2fly-customer-3",
           "heading": {
-            "de": "24 Stunden testen",
-            "nl": "24 uur testen",
-            "fr": "24 heures d’essai",
-            "en": "Try it for 24 hours"
+            "de": "Testen: noch nicht möglich",
+            "nl": "Testen: nog niet mogelijk",
+            "fr": "Essai : pas encore possible",
+            "en": "Trial: not yet possible"
           },
           "body": {
-            "de": "Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.\n\nDie Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für Ihren Zugang gelten, sehen Sie, bevor Sie sie nutzen.",
-            "nl": "De test duurt 24 uur en begint pas wanneer u hem na de activering zelf start. Zo leert u uw werkruimte rustig kennen.\n\nHet gebruik van AI-modellen heeft een eigen budget. Welke modellen en kosten voor uw toegang gelden, ziet u voordat u ze gebruikt.",
-            "fr": "L’essai dure 24 heures et ne commence que lorsque vous le lancez vous-même après l’activation. Vous découvrez ainsi votre espace sereinement.\n\nL’utilisation des modèles d’IA dispose d’un budget distinct. Vous voyez quels modèles et quels coûts s’appliquent à votre accès avant de les utiliser.",
-            "en": "The trial lasts 24 hours and only begins when you start it yourself after activation. That lets you get to know your workspace without pressure.\n\nUsing AI models has its own budget. You see which models and costs apply to your access before you use them."
+            "de": "Ein Test der Suite ist vorgesehen. Starten können Sie ihn heute noch nicht.\n\nVorgesehen ist auch ein eigenes Budget für die Nutzung von KI-Modellen: Welche Modelle und Kosten für Ihren Zugang gelten, sollen Sie sehen, bevor Sie sie nutzen.",
+            "nl": "Een test van de Suite is voorzien. Starten kunt u hem vandaag nog niet.\n\nOok voorzien is een eigen budget voor het gebruik van AI-modellen: welke modellen en kosten voor uw toegang gelden, moet u kunnen zien voordat u ze gebruikt.",
+            "fr": "Un essai de la Suite est prévu. Vous ne pouvez pas encore le lancer aujourd’hui.\n\nUn budget distinct pour l’utilisation des modèles d’IA est également prévu : vous devez pouvoir voir quels modèles et quels coûts s’appliquent à votre accès avant de les utiliser.",
+            "en": "A trial of the Suite is planned. You cannot start it yet.\n\nA separate budget for using AI models is also planned: you are meant to see which models and costs apply to your access before you use them."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2516,10 +2516,10 @@
             "en": "Your access, your area"
           },
           "body": {
-            "de": "Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf Projekte anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei Ihnen mitarbeiten.\n\nEin Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach Ihrer Bestätigung aktiviert.",
-            "nl": "Uw toegang geldt voor uw werkruimte. Hij geeft geen toegang tot projecten van andere klanten of tot het bureau. U bepaalt welke personen bij u meewerken.\n\nEen account alleen opent nog geen werkruimte: die wordt na uw bevestiging geactiveerd.",
-            "fr": "Votre accès vaut pour votre espace de travail. Il ne donne accès ni aux projets d’autres clients ni à l’agence. Vous décidez qui collabore chez vous.\n\nUn compte seul n’ouvre pas encore d’espace de travail : celui-ci est activé après votre confirmation.",
-            "en": "Your access applies to your workspace. It gives no access to other customers’ projects or to the agency. You decide who works with you.\n\nAn account alone does not yet open a workspace: it is activated after your confirmation."
+            "de": "Ihr Zugang soll nur für Ihren Arbeitsbereich gelten – ohne Zugriff auf Projekte anderer Kunden oder auf die Agentur. Sie sollen bestimmen, welche Personen bei Ihnen mitarbeiten.\n\nVorgesehen ist, dass ein Konto allein noch keinen Arbeitsbereich öffnet, sondern erst Ihre Bestätigung. Diese Schritte sind noch nicht gebaut.",
+            "nl": "Uw toegang moet alleen voor uw werkruimte gelden – zonder toegang tot projecten van andere klanten of tot het bureau. U moet kunnen bepalen welke personen bij u meewerken.\n\nVoorzien is dat een account alleen nog geen werkruimte opent, maar pas uw bevestiging. Deze stappen zijn nog niet gebouwd.",
+            "fr": "Votre accès doit valoir uniquement pour votre espace de travail – sans accès aux projets d’autres clients ni à l’agence. Vous devez pouvoir décider qui collabore chez vous.\n\nIl est prévu qu’un compte seul n’ouvre pas encore d’espace de travail, mais seulement votre confirmation. Ces étapes ne sont pas encore construites.",
+            "en": "Your access is meant to apply to your workspace only – with no access to other customers’ projects or to the agency. You are meant to decide who works with you.\n\nThe plan is that an account alone does not yet open a workspace; your confirmation does. These steps have not been built yet."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -2536,10 +2536,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.",
-          "nl": "Gesprekken, taken, documenten en projectkennis op één plek – in uw eigen omgeving. Leer de Suite kennen in een test van 24 uur.",
-          "fr": "Conversations, tâches, documents et connaissances de projet en un seul endroit – dans votre propre espace. Découvrez la Suite lors d’un essai de 24 heures.",
-          "en": "Conversations, tasks, documents and project knowledge in one place – in your own area. Get to know the Suite in a 24-hour trial."
+          "de": "Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – das ist das Ziel der NeX AIFly Suite. Sie ist in Vorbereitung und noch nicht nutzbar. Schreiben Sie uns, wenn Sie sie kennenlernen möchten.",
+          "nl": "Gesprekken, taken, documenten en projectkennis op één plek – dat is het doel van de NeX AIFly Suite. Ze is in voorbereiding en nog niet te gebruiken. Schrijf ons als u haar wilt leren kennen.",
+          "fr": "Conversations, tâches, documents et connaissances de projet en un seul endroit – c’est l’objectif de NeX AIFly Suite. Elle est en préparation et n’est pas encore utilisable. Écrivez-nous si vous souhaitez la découvrir.",
+          "en": "Conversations, tasks, documents and project knowledge in one place – that is the aim of NeX AIFly Suite. It is in preparation and cannot be used yet. Write to us if you would like to get to know it."
         },
         "canonical_path": "/produkte/nex2fly",
         "canonical_origin": null,
@@ -4464,10 +4464,10 @@
         "en": "Sign in and carry on."
       },
       "summary": {
-        "de": "Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder Partnerbereich.",
-        "nl": "Log in om naar uw omgeving te gaan: project, NeX AIFly Suite of partneromgeving.",
-        "fr": "Connectez-vous pour accéder à votre espace : projet, NeX AIFly Suite ou espace partenaire.",
-        "en": "Sign in to reach your area: project, NeX AIFly Suite or partner area."
+        "de": "Die Anmeldung ist zurzeit nicht in Betrieb. Die Bereiche für Projekt, NeX AIFly Suite und Partner sind in Vorbereitung. Schreiben Sie uns, wenn Sie einen Zugang brauchen.",
+        "nl": "Inloggen is op dit moment niet in gebruik. De omgevingen voor project, NeX AIFly Suite en partners zijn in voorbereiding. Schrijf ons als u toegang nodig heeft.",
+        "fr": "La connexion n’est pas en service pour le moment. Les espaces projet, NeX AIFly Suite et partenaire sont en préparation. Écrivez-nous si vous avez besoin d’un accès.",
+        "en": "Sign-in is not in operation at present. The areas for projects, NeX AIFly Suite and partners are in preparation. Write to us if you need access."
       },
       "site_context": "nexify",
       "sections": [
@@ -4480,10 +4480,10 @@
             "en": "Your area stays yours"
           },
           "body": {
-            "de": "Nach der Anmeldung sehen Sie, was zu Ihrem Zugang gehört. Bereiche anderer Kunden und Partner bleiben für Sie geschlossen – und Ihrer für andere.",
-            "nl": "Na het inloggen ziet u wat bij uw toegang hoort. Omgevingen van andere klanten en partners blijven voor u gesloten – en die van u voor anderen.",
-            "fr": "Après connexion, vous voyez ce qui relève de votre accès. Les espaces des autres clients et partenaires vous restent fermés – et le vôtre leur reste fermé.",
-            "en": "After signing in you see what belongs to your access. Areas of other customers and partners stay closed to you – and yours to them."
+            "de": "Vorgesehen ist: Nach der Anmeldung sehen Sie, was zu Ihrem Zugang gehört. Bereiche anderer Kunden und Partner bleiben für Sie geschlossen – und Ihrer für andere. Diese Bereiche gibt es noch nicht.",
+            "nl": "Voorzien is: na het inloggen ziet u wat bij uw toegang hoort. Omgevingen van andere klanten en partners blijven voor u gesloten – en die van u voor anderen. Deze omgevingen zijn er nog niet.",
+            "fr": "Il est prévu qu’après connexion, vous voyiez ce qui relève de votre accès. Les espaces des autres clients et partenaires vous restent fermés – et le vôtre leur reste fermé. Ces espaces n’existent pas encore.",
+            "en": "The plan: after signing in you see what belongs to your access. Areas of other customers and partners stay closed to you – and yours to them. These areas do not exist yet."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -4506,10 +4506,10 @@
             "en": "If signing in does not work"
           },
           "body": {
-            "de": "Schreiben Sie uns, in welchen Bereich Sie wollten und welche Meldung Sie gesehen haben. Ihr Passwort brauchen wir dafür nicht. Eine neue Anmeldung startet oder verlängert keinen laufenden Suite-Test.",
-            "nl": "Schrijf ons naar welke omgeving u wilde en welke melding u zag. Uw wachtwoord hebben we daarvoor niet nodig. Opnieuw inloggen start of verlengt geen lopende Suite-test.",
-            "fr": "Écrivez-nous en indiquant l’espace visé et le message affiché. Nous n’avons pas besoin de votre mot de passe. Une nouvelle connexion ne démarre ni ne prolonge un essai Suite en cours.",
-            "en": "Write to us with the area you wanted and the message you saw. We do not need your password for that. Signing in again does not start or extend a running Suite trial."
+            "de": "Schreiben Sie uns, in welchen Bereich Sie wollten und welche Meldung Sie gesehen haben. Ihr Passwort brauchen wir dafür nicht.",
+            "nl": "Schrijf ons naar welke omgeving u wilde en welke melding u zag. Uw wachtwoord hebben we daarvoor niet nodig.",
+            "fr": "Écrivez-nous en indiquant l’espace visé et le message affiché. Nous n’avons pas besoin de votre mot de passe.",
+            "en": "Write to us with the area you wanted and the message you saw. We do not need your password for that."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -4526,10 +4526,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder Partnerbereich.",
-          "nl": "Log in om naar uw omgeving te gaan: project, NeX AIFly Suite of partneromgeving.",
-          "fr": "Connectez-vous pour accéder à votre espace : projet, NeX AIFly Suite ou espace partenaire.",
-          "en": "Sign in to reach your area: project, NeX AIFly Suite or partner area."
+          "de": "Die Anmeldung ist zurzeit nicht in Betrieb. Die Bereiche für Projekt, NeX AIFly Suite und Partner sind in Vorbereitung. Schreiben Sie uns, wenn Sie einen Zugang brauchen.",
+          "nl": "Inloggen is op dit moment niet in gebruik. De omgevingen voor project, NeX AIFly Suite en partners zijn in voorbereiding. Schrijf ons als u toegang nodig heeft.",
+          "fr": "La connexion n’est pas en service pour le moment. Les espaces projet, NeX AIFly Suite et partenaire sont en préparation. Écrivez-nous si vous avez besoin d’un accès.",
+          "en": "Sign-in is not in operation at present. The areas for projects, NeX AIFly Suite and partners are in preparation. Write to us if you need access."
         },
         "canonical_path": "/anmelden",
         "canonical_origin": null,
@@ -4616,32 +4616,32 @@
       "id": "signup",
       "path": "/registrieren",
       "title": {
-        "de": "NeX AIFly Suite. In Ruhe testen.",
-        "nl": "NeX AIFly Suite. Rustig testen.",
-        "fr": "NeX AIFly Suite. Tester sereinement.",
-        "en": "NeX AIFly Suite. Try it calmly."
+        "de": "NeX AIFly Suite. Zugang in Vorbereitung.",
+        "nl": "NeX AIFly Suite. Toegang in voorbereiding.",
+        "fr": "NeX AIFly Suite. Accès en préparation.",
+        "en": "NeX AIFly Suite. Access in preparation."
       },
       "summary": {
-        "de": "Erstellen Sie Ihr Konto und lernen Sie Ihren eigenen KI-Arbeitsbereich kennen. Der Test über 24 Stunden beginnt erst, wenn Sie ihn starten.",
-        "nl": "Maak uw account aan en leer uw eigen AI-werkruimte kennen. De test van 24 uur begint pas wanneer u hem start.",
-        "fr": "Créez votre compte et découvrez votre propre espace de travail IA. L’essai de 24 heures ne commence que lorsque vous le lancez.",
-        "en": "Create your account and get to know your own AI workspace. The 24-hour trial only begins when you start it."
+        "de": "Die NeX AIFly Suite ist in Vorbereitung. Registrierung und Test sind zurzeit nicht in Betrieb. Schreiben Sie uns, wenn Sie die Suite kennenlernen möchten.",
+        "nl": "De NeX AIFly Suite is in voorbereiding. Registratie en test zijn op dit moment niet in gebruik. Schrijf ons als u de Suite wilt leren kennen.",
+        "fr": "NeX AIFly Suite est en préparation. L’inscription et l’essai ne sont pas en service pour le moment. Écrivez-nous si vous souhaitez découvrir la Suite.",
+        "en": "NeX AIFly Suite is in preparation. Registration and the trial are not in operation at present. Write to us if you would like to get to know the Suite."
       },
       "site_context": "nexify",
       "sections": [
         {
           "id": "signup-customer-1",
           "heading": {
-            "de": "Ein Test, den Sie selbst starten",
-            "nl": "Een test die u zelf start",
-            "fr": "Un essai que vous lancez vous-même",
-            "en": "A trial you start yourself"
+            "de": "Der Test ist vorgesehen",
+            "nl": "De test is voorzien",
+            "fr": "L’essai est prévu",
+            "en": "The trial is planned"
           },
           "body": {
-            "de": "Der einmalige Test beginnt nach bestätigter E-Mail und aktiviertem Arbeitsbereich – und erst auf Ihre ausdrückliche Wahl. Er läuft 24 Stunden. Weitere Anmeldungen setzen die Frist nicht zurück.",
-            "nl": "De eenmalige test begint na een bevestigd e-mailadres en een geactiveerde werkruimte – en pas op uw uitdrukkelijke keuze. Hij loopt 24 uur. Opnieuw inloggen zet de termijn niet terug.",
-            "fr": "L’essai unique commence après confirmation de l’e-mail et activation de l’espace de travail – et seulement sur votre choix exprès. Il dure 24 heures. De nouvelles connexions ne réinitialisent pas le délai.",
-            "en": "The one-off trial begins after your email is confirmed and your workspace is activated – and only when you expressly choose to start. It runs for 24 hours. Signing in again does not reset the period."
+            "de": "Vorgesehen ist ein einmaliger Test, der erst nach bestätigter E-Mail und aktiviertem Arbeitsbereich beginnt – und erst auf Ihre ausdrückliche Wahl. Bestätigung, Aktivierung und Test sind noch nicht gebaut; heute können Sie keinen Test starten.",
+            "nl": "Voorzien is een eenmalige test die pas begint na een bevestigd e-mailadres en een geactiveerde werkruimte – en pas op uw uitdrukkelijke keuze. Bevestiging, activering en test zijn nog niet gebouwd; vandaag kunt u geen test starten.",
+            "fr": "Il est prévu un essai unique qui ne commence qu’après confirmation de l’e-mail et activation de l’espace de travail – et seulement sur votre choix exprès. Confirmation, activation et essai ne sont pas encore construits ; aujourd’hui, vous ne pouvez lancer aucun essai.",
+            "en": "The plan is a one-off trial that begins only after your email is confirmed and your workspace is activated – and only when you expressly choose to start. Confirmation, activation and the trial have not been built yet; you cannot start a trial today."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -4684,20 +4684,20 @@
       ],
       "metadata": {
         "description": {
-          "de": "Erstellen Sie Ihr Konto und lernen Sie Ihren eigenen KI-Arbeitsbereich kennen. Der Test über 24 Stunden beginnt erst, wenn Sie ihn starten.",
-          "nl": "Maak uw account aan en leer uw eigen AI-werkruimte kennen. De test van 24 uur begint pas wanneer u hem start.",
-          "fr": "Créez votre compte et découvrez votre propre espace de travail IA. L’essai de 24 heures ne commence que lorsque vous le lancez.",
-          "en": "Create your account and get to know your own AI workspace. The 24-hour trial only begins when you start it."
+          "de": "Die NeX AIFly Suite ist in Vorbereitung. Registrierung und Test sind zurzeit nicht in Betrieb. Schreiben Sie uns, wenn Sie die Suite kennenlernen möchten.",
+          "nl": "De NeX AIFly Suite is in voorbereiding. Registratie en test zijn op dit moment niet in gebruik. Schrijf ons als u de Suite wilt leren kennen.",
+          "fr": "NeX AIFly Suite est en préparation. L’inscription et l’essai ne sont pas en service pour le moment. Écrivez-nous si vous souhaitez découvrir la Suite.",
+          "en": "NeX AIFly Suite is in preparation. Registration and the trial are not in operation at present. Write to us if you would like to get to know the Suite."
         },
         "canonical_path": "/registrieren",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "noindex,nofollow",
         "title": {
-          "de": "NeX AIFly Suite. In Ruhe testen.",
-          "nl": "NeX AIFly Suite. Rustig testen.",
-          "fr": "NeX AIFly Suite. Tester sereinement.",
-          "en": "NeX AIFly Suite. Try it calmly."
+          "de": "NeX AIFly Suite. Zugang in Vorbereitung.",
+          "nl": "NeX AIFly Suite. Toegang in voorbereiding.",
+          "fr": "NeX AIFly Suite. Accès en préparation.",
+          "en": "NeX AIFly Suite. Access in preparation."
         }
       },
       "access": {
@@ -6042,10 +6042,10 @@
         "en": "An appointment? Direct with the workshop."
       },
       "summary": {
-        "de": "Online-Terminbuchung gibt es bei TEILEKLAR noch nicht. Sie finden eine Werkstatt in Ihrer Nähe und vereinbaren den Termin direkt – oder nennen uns Ihren Wunsch.",
-        "nl": "Online afspraken maken kan bij TEILEKLAR nog niet. U vindt een werkplaats in uw buurt en maakt rechtstreeks een afspraak – of u geeft ons uw wens door.",
-        "fr": "La réservation en ligne n’existe pas encore chez TEILEKLAR. Trouvez un atelier près de chez vous et convenez directement du rendez-vous – ou indiquez-nous votre souhait.",
-        "en": "Online booking is not yet available at TEILEKLAR. You find a workshop near you and arrange the appointment directly – or tell us what you would like."
+        "de": "Online-Terminbuchung gibt es bei TEILEKLAR noch nicht. Den Termin vereinbaren Sie direkt mit einer Werkstatt – oder Sie nennen uns Ihren Wunsch.",
+        "nl": "Online afspraken maken kan bij TEILEKLAR nog niet. De afspraak maakt u rechtstreeks met een werkplaats – of u geeft ons uw wens door.",
+        "fr": "La réservation en ligne n’existe pas encore chez TEILEKLAR. Vous convenez du rendez-vous directement avec un atelier – ou vous nous indiquez votre souhait.",
+        "en": "Online booking is not yet available at TEILEKLAR. You arrange the appointment directly with a workshop – or tell us what you would like."
       },
       "site_context": "teileklar",
       "sections": [
@@ -6100,10 +6100,10 @@
       ],
       "metadata": {
         "description": {
-          "de": "Online-Terminbuchung gibt es bei TEILEKLAR noch nicht. Sie finden eine Werkstatt in Ihrer Nähe und vereinbaren den Termin direkt – oder nennen uns Ihren Wunsch.",
-          "nl": "Online afspraken maken kan bij TEILEKLAR nog niet. U vindt een werkplaats in uw buurt en maakt rechtstreeks een afspraak – of u geeft ons uw wens door.",
-          "fr": "La réservation en ligne n’existe pas encore chez TEILEKLAR. Trouvez un atelier près de chez vous et convenez directement du rendez-vous – ou indiquez-nous votre souhait.",
-          "en": "Online booking is not yet available at TEILEKLAR. You find a workshop near you and arrange the appointment directly – or tell us what you would like."
+          "de": "Online-Terminbuchung gibt es bei TEILEKLAR noch nicht. Den Termin vereinbaren Sie direkt mit einer Werkstatt – oder Sie nennen uns Ihren Wunsch.",
+          "nl": "Online afspraken maken kan bij TEILEKLAR nog niet. De afspraak maakt u rechtstreeks met een werkplaats – of u geeft ons uw wens door.",
+          "fr": "La réservation en ligne n’existe pas encore chez TEILEKLAR. Vous convenez du rendez-vous directement avec un atelier – ou vous nous indiquez votre souhait.",
+          "en": "Online booking is not yet available at TEILEKLAR. You arrange the appointment directly with a workshop – or tell us what you would like."
         },
         "canonical_path": "/teileklar/termine",
         "canonical_origin": null,
