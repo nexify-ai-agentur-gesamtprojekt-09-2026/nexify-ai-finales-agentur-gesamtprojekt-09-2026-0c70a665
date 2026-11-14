@@ -9,7 +9,7 @@ Es gilt D-016 (`DECISIONS.md`): Eingriffe mit Rückweg, `vsk-mongodb`, Traefik u
 |---|---|---|
 | Adresse | 72.62.152.47 | 179.198.195.91 |
 | System | Ubuntu 26.04, KVM 8 (8 Kerne, 32 GB, 400 GiB) | Ubuntu 24.04, KVM 8 |
-| Platte belegt (24 h) | 360–368 GB, rund 86 % | 386–404 GB, rund 94 % |
+| Platte belegt | 360–368 GB laut Hostinger-Metrik, rund 86 % | gemessen 372,2 von 386,4 GB, 97 %, 10,2 GB frei |
 | Arbeitsspeicher belegt | 20,7–22,8 GB | 12,3–23,0 GB |
 | Backups (Hostinger) | 4, neuestes 13.11. 16:45 UTC | 4, neuestes 13.11. 16:49 UTC |
 | Snapshot | 14.11. 11:47 UTC, **läuft am 15.11. 11:47 UTC ab** | ebenso |
@@ -46,11 +46,42 @@ Vor jedem Schritt Ausgabe sichern, nach jedem Schritt Zustand zurücklesen. Nich
 
 ## OFFEN
 
-- Was die Platte füllt (S1, S2): nur mit Shell messbar.
+- Was die Platte auf srv1243952 füllt (S2). Für srv1941843 siehe „Messung“.
 - Bestand und Zustand der Dienste auf srv1243952.
 - Welches Modell und welche Route Hermes derzeit nutzt.
 - Ob die Schlüssel aus S6 in `authorized_keys` der Server stehen; die Hostinger-Liste sagt das nicht.
 
 ## Messung
 
-_(von der Sitzung mit Shell nachzutragen)_
+Erhoben am 14.11.2026, 12:00–12:50 UTC, auf srv1941843 mit einmaligen, nur lesenden Mess-Containern (Hostinger-API, Wurzel als `ro` eingehängt). srv1243952 ist so nicht messbar (Docker Manager dort nicht verfügbar).
+
+**Platte:** 386,4 GB gesamt, 372,2 GB belegt, **10,2 GB frei (97 %)**.
+
+| Ort | Größe | Einordnung |
+|---|---|---|
+| `/home/mypad/workspace/.paperclip-runtime/runs` | 77,3 GiB | Lauf-Verzeichnisse der Paperclip-Laufzeit; Paperclip ist mit D-019 abgelöst. Größter Einzelposten. |
+| `/var/lib/containerd` | 63,7 GiB | Images und Schichten der laufenden Container (Docker meldet 54,8 GB Images, davon 2,6 GB ungenutzt) |
+| `/opt/gitlab/data/prometheus` | 20,6 GiB | Messdaten des in GitLab eingebauten Prometheus; über Aufbewahrungsdauer begrenzbar |
+| `/opt/ai-stack/stack/lightrag-pg-data` + `lightrag-data` | 19,8 GiB | Nutzdaten LightRAG |
+| `/opt/backups` | 14,6 GiB | davon `lightrag-db` 7,1 und `lightrag` 3,8 GiB |
+| `/usr` | 14,4 GiB | System |
+| `/opt/nexifyai` | 14,5 GiB | davon `backup` 7,1 GiB |
+| `/var/lib/docker/volumes` | 9,8 GiB | 33 Volumes, 11 ungenutzt (4,0 GB) |
+| `/opt/aionui-data`, `/opt/nex2fly/ops`, `/home/mypad/.local` | je rund 8,7 GiB | |
+| `/opt/gitlab/data/backups` | 4,2 GiB | |
+| `/tmp` | 4,0 GiB | |
+| Container-Protokolle | < 0,1 GiB | kein Problem |
+
+**Port 8788 (Hermes-Oberfläche):** `/docker/traefik-juib/dynamic.yml` leitet `unternehmensbot.eu` auf `127.0.0.1:8788` (Router `hermes-webui`) und `/api`, `/session` auf `127.0.0.1:44727` (Router `hermes-api`), ohne Traefik-Zugangsschutz in diesen Routen. Von außen geprüft: `/` und `/session` antworten mit 302 auf `login`, `/api/sessions` und `/api/status` mit 401. Die Oberfläche ist also öffentlich erreichbar und nur durch die Anmeldung von Hermes selbst geschützt. Das widerspricht D-019 Folge 4 (nicht öffentlich).
+
+### Folgen für die Arbeitsliste
+
+- **Schritt 2a (neu, größte Wirkung):** `.paperclip-runtime/runs` sichten und nach Freigabe des Inhabers entfernen oder auf die jüngsten Läufe kürzen. Vorher prüfen, dass kein Paperclip-Prozess mehr läuft. Erwartete Entlastung bis rund 77 GiB.
+- **Schritt 2b (neu):** GitLab-Prometheus begrenzen (`prometheus['flags']` mit `storage.tsdb.retention.time` in `gitlab.rb`, dann `gitlab-ctl reconfigure`) oder abschalten, da `monitoring-dus` bereits ein eigenes Prometheus betreibt. Erwartete Entlastung rund 15–20 GiB.
+- **Schritt 2c:** ungenutzte Images und die 11 ungenutzten Volumes erst nach Sichtung der Volume-Namen (rund 6,6 GB).
+- **Schritt 2d:** alte Sicherungen unter `/opt/backups` und `/opt/nexifyai/backup` auslagern statt löschen.
+- **Hermes-Route:** in `dynamic.yml` eine `ipAllowList`- oder `basicAuth`-Middleware vor `hermes-webui` und `hermes-api` setzen oder die Router entfernen und über SSH-Tunnel zugreifen. Vorher Datei sichern; Traefik liest sie ohne Neustart neu.
+
+### Hinterlassen von der Messung
+
+Fünf beendete Compose-Projekte ohne laufende Container auf srv1941843: `nx-messung-20261114`, `nx-messung2-20261114`, `nx-messung3-20261114`, `nx-messung4-20261114`, `nx-messung5-20261114` (Image `docker:27-cli`). Sie können entfernt werden; das Entfernen über die API wurde in der Cloud-Sitzung nicht ausgeführt.
