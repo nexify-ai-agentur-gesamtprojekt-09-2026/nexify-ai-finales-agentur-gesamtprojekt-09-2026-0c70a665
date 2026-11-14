@@ -46,7 +46,7 @@ festen Angaben in `apps/web/app/agb/page.tsx:22`, `avv/page.tsx:23`, `widerruf/p
 
 ## 3. Was der Zweig `claude/indexierung` vorbereitet (nicht eingeschaltet)
 
-Der vorhandene Schalter bleibt. Neu ist `apps/web/lib/indexing.ts`; `apps/web/proxy.ts` setzt die Regel als Kopfzeile
+Der vorhandene Schalter bleibt. Neu ist `apps/web/auth/indexing.ts`; `apps/web/proxy.ts` setzt die Regel als Kopfzeile
 `X-Robots-Tag: noindex, nofollow` durch. Suchmaschinen wenden die strengste Angabe an, ein `index` im Meta-Tag hebt die
 Kopfzeile nicht auf. Eine Seite ist nur indexierbar, wenn alles zugleich gilt:
 
@@ -152,4 +152,5 @@ Dadurch neu rot in der Python-Suite (reine Bindung, kein Verhaltensfehler):
 `test_requirements_reconciliation…test_recorded_source_hashes_match_actual_bytes (source='apps/web/proxy.ts')` (der Test war
 für andere Quellen schon rot) sowie `test_browser_evidence.ConsentUIEvidenceTests.test_current_consent_pass_is_bound_to_UI_source`
 und `…test_workspace_proof_rejects_drift_missing_negatives_and_mutating_reads`. Der erste Commit des Zweigs
-(Regelmodul, Tests, Sitemap) macht nichts neu rot; `apps/web/app/sitemap.ts` war schon vorher ohne gültigen Pin.
+(Regelmodul, Tests, Sitemap) macht nichts neu rot. Das Modul liegt bewusst unter `apps/web/auth/` neben `policy.ts`:
+`apps/web/lib` ist als Verzeichnis an den Text-Resize-Beleg gebunden, jede neue Datei dort macht ihn ungültig; `apps/web/app/sitemap.ts` war schon vorher ohne gültigen Pin.

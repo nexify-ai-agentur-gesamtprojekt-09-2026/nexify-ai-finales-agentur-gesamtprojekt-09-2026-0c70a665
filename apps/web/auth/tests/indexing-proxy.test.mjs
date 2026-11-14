@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { NOINDEX_HEADER_VALUE, indexablePaths } from '../../lib/indexing.ts';
+import { NOINDEX_HEADER_VALUE, indexablePaths } from '../indexing.ts';
 
-// Bindet die Indexierungsregel (lib/indexing.ts, geprüft in indexing.test.mjs) an die Stelle, die sie durchsetzt: proxy.ts.
+// Bindet die Indexierungsregel (auth/indexing.ts, geprüft in indexing.test.mjs) an die Stelle, die sie durchsetzt: proxy.ts.
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 const proxySource = read('../../proxy.ts');
 const paths = indexablePaths(JSON.parse(read('../../../../config/site-map.json')));

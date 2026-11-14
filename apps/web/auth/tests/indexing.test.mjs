@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import {
   APPROVED_INDEX_HOSTS, LEGAL_ROUTE_PATHS, NEVER_INDEXED_PAGE_IDS,
   indexablePaths, indexingDecision, normalizeHost, requestHosts, teileklarIndexingOn,
-} from '../../lib/indexing.ts';
+} from '../indexing.ts';
 
 // Regel und Freigabeweg: docs/04-betrieb/indexierung-freigabe-2026-11-14.md. Die Tests prüfen beide Zustände des Schalters,
 // die Hostbindung und die Ausnahmeliste gegen den echten Seitenkatalog, ohne laufenden Server.

@@ -1,12 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import siteMap from "../../config/site-map.json";
 import { canonicalPath, privateRoute } from "./auth/policy";
-import { indexablePaths, indexingDecision, requestHosts, NOINDEX_HEADER_VALUE } from "./lib/indexing";
+import { indexablePaths, indexingDecision, requestHosts, NOINDEX_HEADER_VALUE } from "./auth/indexing";
 
 // Clerk removed (DECISIONS D-007): sessions are issued by the shop API (/api/auth). Private portal pages stay closed here.
 const privateJson=(body:object,options:{status:number})=>NextResponse.json(body,{...options,headers:{'Cache-Control':'private, no-store','Vary':'Cookie, Authorization'}});
 const protectedPaths = siteMap.pages.filter(page => page.access.visibility !== "public" || page.access.auth_required).map(page => page.path).concat(['/api/internal/workspace']);
-// Indexierung ist standardmäßig gesperrt; Regel und Freigabe: lib/indexing.ts, docs/04-betrieb/indexierung-freigabe-2026-11-14.md.
+// Indexierung ist standardmäßig gesperrt; Regel und Freigabe: auth/indexing.ts, docs/04-betrieb/indexierung-freigabe-2026-11-14.md.
 const indexable = indexablePaths(siteMap);
 export default function proxy(request: NextRequest) {
   const path = canonicalPath(request.nextUrl.pathname);

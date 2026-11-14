@@ -212,7 +212,7 @@ Prüfung ohne Netzwerk und ohne echte Werte:
 
 ## 7. Indexierung der Website (Nachtrag 14.11.2026)
 
-Regel und Freigabeweg: `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Umsetzung `apps/web/lib/indexing.ts`.
+Regel und Freigabeweg: `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Umsetzung `apps/web/auth/indexing.ts`.
 Beide Variablen sind keine Geheimnisse und in Produktion **nicht gesetzt**; setzen darf sie nur der Inhaber.
 
 | Variable | Wert | Wo | Wirkung |
