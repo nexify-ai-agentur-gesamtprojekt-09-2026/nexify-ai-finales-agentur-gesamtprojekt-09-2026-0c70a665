@@ -14,6 +14,34 @@ CONFIG = 'config/integrations/nexify-team-runtime-candidate.json'
 STAGES = ['WRITE', 'INDEX', 'EXACT_READ_BACK', 'CONTENT_COMPARE']
 ROLE_IDS = {'companion','baumeister','pruefer','recherche','triage','angebot','wissen','orchestrator','waechter'}
 ROLE_RUNTIMES = {'companion':'managed-gateway','baumeister':'codex-existing','pruefer':'codex-code-review','recherche':'session-native','triage':'hermes-candidate','angebot':'hermes-candidate','wissen':'local-control','orchestrator':'existing-coordinator','waechter':'systemmaster-read-only'}
+EXECUTION_AUTHORITY = 'requires_actual_task_scope_and_verified_adapter'
+# D-019: Hermes ist die gewählte Orchestrierungs-Laufzeit, nicht aktiviert. Der Block ist exakt
+# gebunden; jede Abweichung (Status, Befugnis, Controller, offener Punkt) ist ein Fehler.
+ORCHESTRATION_RUNTIME = {
+    'decision': 'DECISIONS.md#D-019',
+    'decided_at': '2026-11-14',
+    'runtime_candidate_id': 'hermes-candidate',
+    'kind': 'runtime_in_which_roles_work_not_a_role',
+    'supersedes': 'D-014_sentence_orchestration_via_paperclip',
+    'status': 'owner_selected_not_activated',
+    'function_proof': False,
+    'replaces_controller': False,
+    'profile_runtime_assignment_changed': False,
+    'grants_execution_authority': False,
+    'repository_access': 'read_only_until_function_proof',
+    'approvals_mode': 'manual',
+    'third_party_message_channel': False,
+    'open': [
+        'per_profile_runtime_reassignment_not_decided',
+        'independent_review_and_read_only_watch_must_stay_separable',
+        'docker_socket_in_container_contradicts_unrestricted_shell_false',
+        'web_ui_publicly_reachable_contradicts_D-019_consequence_4',
+        'server_version_model_configuration_unverified',
+        'no_real_model_call_evidenced',
+    ],
+}
+HERMES_REMOTE = 'container_reported_on_srv1941843_2026-11-14_version_model_config_unverified'
+HERMES_REMOTE_SOURCE = 'docs/04-betrieb/server-befund-2026-11-14.md'
 ACTIVATION_KEYS = {'new_daemon','new_scheduler','automatic_external_messages','public_cutover','global_tool_or_model_config_changed'}
 SOURCE_FILES_DIGEST = '1bc88e95a55c44cf3c0a14a7a8cc081cdbe5c539f0ee1b549f8e2161c8c3b7b9'
 ORIGINAL_INVENTORY = '4f6eda6f2d56a3080bb39506eb897c494c8ba4be7c267034e14e89e49d17105e'
@@ -35,6 +63,10 @@ def validate_candidate(config, roles, catalogue, skill_library, llm_policy):
     need(isinstance(profiles,list) and len(profiles)==9 and {p['role_id'] for p in profiles} == ROLE_IDS == set(roles['agenten']), 'role_identity_or_duplicate')
     need(all(p['runtime_id']==ROLE_RUNTIMES[p['role_id']] for p in profiles), 'runtime_assignment')
     need(all(p['delegation'] is False and p['connected_worker_id'] is None and p['tool_bindings']==[] for p in profiles), 'unverified_worker_or_tool_binding')
+    need(all(p['execution_authority']==EXECUTION_AUTHORITY for p in profiles), 'execution_authority_changed')
+    orchestration=config['orchestration_runtime']
+    need(type(orchestration) is dict and set(orchestration)==set(ORCHESTRATION_RUNTIME) and all(type(orchestration[key]) is type(value) and orchestration[key]==value for key,value in ORCHESTRATION_RUNTIME.items()), 'orchestration_runtime_drift')
+    need(orchestration['runtime_candidate_id'] in {r['id'] for r in config['runtime_candidates']}, 'orchestration_runtime_unregistered')
     bounds=config['delegation_bounds']
     need(all(type(bounds[key]) is int and 1 <= bounds[key] <= maximum for key,maximum in [('max_concurrency',4),('max_depth',1),('max_steps',20),('max_wall_seconds',900)]), 'unbounded_delegation')
     need(bounds['writer_per_physical_resource']==1 and bounds['paid_calls_enabled'] is False and bounds['shared_monetary_budget'] is None, 'unfunded_or_duplicate_writer')
@@ -58,6 +90,7 @@ def validate_candidate(config, roles, catalogue, skill_library, llm_policy):
     hermes=engines['hermes-candidate']; claw=engines['openclaw-candidate']
     need(hermes['commit']=='bf0203a794a07aac3ff764972ab9087baa4e4f4e' and hermes['release']=='v0.22.5' and hermes['supported_python_major_minor']==[3,14], 'hermes_source_drift')
     need(hermes['connected'] is False and hermes['installed_by_this_work'] is False and hermes['profile_is_sandbox'] is False and hermes['sampling_enabled'] is False and hermes['unrestricted_shell'] is False and hermes['automatic_skill_mutation'] is False, 'hermes_unverified_activation_or_scope')
+    need(hermes['remote_installation']==HERMES_REMOTE and hermes['remote_installation_source']==HERMES_REMOTE_SOURCE and hermes['local_cli_detected'] is False, 'hermes_installation_claim')
     need(claw['commit']=='8b18b5578f66eab1501cba4cef2310d88bfb9a41' and claw['release']=='v2026.10.9' and claw['selected_for_install'] is False and claw['connected'] is False, 'openclaw_source_or_activation')
     need(claw['gateway_trust_domain']=='one_mutual_trust_domain_not_shared_across_untrusted_tenants', 'openclaw_trust_domain')
     need(llm_policy['model']['id']=='deepseek/deepseek-v4.1-flash-1017' and llm_policy['model']['reasoning_effort']=='high', 'managed_model_drift')
@@ -66,7 +99,8 @@ def validate_candidate(config, roles, catalogue, skill_library, llm_policy):
     need(config['adaptation']['weight_fine_tuning_performed'] is False and config['adaptation']['training_dataset_approved'] is False, 'unverified_weight_training')
     return {'status':'configuration_consistent_not_runtime_ready','operational_profiles':9,'enterprise_roles':44,'original_skills':44,
             'can_dispatch_external_worker':False,'production_accepted':False,'provider_calls':0,
-            'open_gates':['actual_runtime_inventory','role_scoped_authenticated_adapters','durable_task_and_lease_binding','funding_and_capacity','tenant_memory_receipts','native_codex_review','runtime_restart_cancel_recovery_tests']}
+            'orchestration_runtime':'hermes-candidate_owner_selected_D-019_not_activated',
+            'open_gates':['actual_runtime_inventory','hermes_function_proof_and_per_profile_runtime_decision','role_scoped_authenticated_adapters','durable_task_and_lease_binding','funding_and_capacity','tenant_memory_receipts','native_codex_review','runtime_restart_cancel_recovery_tests']}
 
 
 def check(root=ROOT):
