@@ -383,6 +383,28 @@ MCP-Zugang, kein Abschalten der TLS-Prüfung. Über diesen MCP-Zugang nur gelese
 Liste der Worker ist unverändert (5, wie Abschnitt 8); `nexify-web` und
 `nexify-web-vorschau` gibt es nicht.
 
+### Zweiter Versuch mit neuem Token · 14.11.2026, 18:31 UTC
+
+Das neu hinterlegte Token ist gültig (`GET /user/tokens/verify`: 200, „This API Token
+is valid and active"). Es reicht aber nicht, um das Konto zu finden:
+
+| Abruf (nur lesend) | Antwort | fehlendes Recht |
+|---|---|---|
+| `GET /client/v4/accounts` | 200, leere Liste (`total_count` 0) | Konto „Account Settings: Read" |
+| `GET /client/v4/zones` | 200, leere Liste | Zone „Zone: Read" |
+| `GET /client/v4/memberships` | 403, Code 10000 „Authentication error" | Benutzer „Memberships: Read" |
+| `GET /client/v4/user` | 403, Code 9109 „Unauthorized to access requested resource" | Benutzer „User Details: Read" |
+| `npx wrangler whoami` | „Failed to automatically retrieve account IDs for the logged in user" | wie oben |
+
+Ohne Konto-ID kann `wrangler` nicht ausliefern; sie steht weder im Repository noch in
+der Umgebung, und der alte MCP-Zugang gibt sie nicht aus. Nicht geraten, nicht
+umgangen. Ob das Token „Workers Scripts: Edit" hat, ist deshalb ungeprüft. Es genügt
+eines von beiden: dem Token „Account Settings: Read" geben, oder die Konto-ID nennen
+(32 Zeichen, kein Geheimnis; im Dashboard unter Workers & Pages rechts „Account ID"
+oder in der Adresszeile `dash.cloudflare.com/<Konto-ID>/`). Für Tarif und Zonen bleiben
+„Account Settings: Read" und „Zone: Read" nötig, für die Messung „Workers Tail: Read"
+oder „Account Analytics: Read".
+
 ### Was offen bleibt (unverändert Abschnitt 12)
 
 Tarif des Kontos (Workers Free oder Paid); ob `nexifyai.de` und `nexifyai.cloud` im
@@ -394,7 +416,8 @@ bleibt deshalb bei der lokalen Schätzung aus Abschnitt 3 und 6 (46 bis 56 ms ge
 
 ### Was in diesem Lauf trotzdem erledigt wurde
 
-- `main` eingeholt: Zweig war bereits auf `main` `29f0691`.
+- `main` eingeholt: zuerst `29f0691`, im zweiten Versuch `2906f58` (angepasste
+  Kopfleisten-Prüfung).
 - Bau wie in Abschnitt 3: Exit 0. `wrangler deploy --dry-run --name nexify-web-vorschau
   --var NEXIFY_PUBLIC_INSTALLATION:public-pwa`: 11 214,20 KiB, gzip 2 529,08 KiB,
   231 statische Dateien; Bindungen nur `ASSETS` und diese eine Variable.
