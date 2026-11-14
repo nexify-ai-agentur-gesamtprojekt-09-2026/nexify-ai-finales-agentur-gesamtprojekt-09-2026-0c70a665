@@ -143,3 +143,11 @@ Entscheidung im Rahmen der globalen Freigabe (ED-01), Schutzgrenzen unverändert
 | `apps/shop-api/requirements.in` | `d5acb4741505…` | `f9a7ad4b9654…` | Diff-Review, siehe unten |
 
 **`higgsfield-client==0.2.0` geprüft.** PyPI (Veröffentlichung 17.09.2026, Herausgeber Higgsfield, Repository `higgsfield-ai/higgsfield-client`): einzige Abhängigkeit `httpx<0.29,>=0.21`; im Projekt ist `httpx==0.28.1` bereits gepinnt und passt. Im Code nur von `apps/shop-api/examples/seedance_text_to_video.py` genutzt (Zugangsdaten aus der Serverumgebung, nie ausgegeben). Die Datei steht nicht in `apps/shop-api/requirements.txt` (dem gesperrten Laufzeitstand); sie wird also weder in CI noch im Vercel-Build installiert. Der Pin bindet nur diese zwei Zeilen, keine Sicherheitsprüfung. Wer sie in die Laufzeit aufnimmt, muss sie vorher mit Hashes in die gesperrte Datei übernehmen.
+
+## Nachtrag SEO-Metadaten und Freisteller-srcset (12.11.2026)
+
+`page-seo.ts` (hreflang im `<head>`, Indexierungs-Schalter `NEXIFY_INDEXING`), `brand-media.ts` (Kennzeichnung und srcset des Freistellers) und `PublicContent.tsx` liegen im Quellenverzeichnis der Text-Resize-Bindung. Der Text-Spacing-Beleg wurde deshalb neu erhoben; die alte Fassung liegt in `evidence/one-app-2026-10-27/superseded/text-spacing.pre-seo-2026-11-12.json`. `HomeContent.tsx` blieb bewusst unverändert, weil die Datei an fünf Browser-Nachweisketten hängt.
+
+| Datei | alter Pin | neuer Pin | Beleg |
+|---|---|---|---|
+| `evidence/one-app-2026-10-27/text-spacing.json` | `b86244f8b4f0…` | `3c876e84f5cf…` | heute neu erhobener Text-Spacing-Lauf (129 Checks, 0 Befunde, 43 Routen), `tests.test_resize_source_binding` OK |
