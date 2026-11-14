@@ -273,10 +273,10 @@ function OrientationStarters({locale,site,label,onChoose,chosen}:{locale:Locale;
  return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" aria-pressed={chosen===seed} onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
 }
 
-// Leerzustand: Oracle empfängt als Gastgeber. Name und Vorspann stammen aus den vorhandenen Texten des geführten Wegs.
-function OrientationIntro({locale,site,title,intro}:{locale:Locale;site:"nexify"|"teileklar";title:string;intro:string}){
+// Leerzustand: Oracle empfängt als Gastgeber; darunter die Marke des Assistenten.
+function OrientationIntro({title,intro}:{title:string;intro:string}){
  const figure=artwork.images.aifly;
- return <div className="orientation-intro"><div className="orientation-host"><span className="orientation-host-figure" aria-hidden="true"><img src={figure.src} alt="" width={figure.width} height={figure.height} decoding="async"/></span><p className="orientation-host-name"><strong>Oracle</strong><span>{journeyCopy[locale][site].eyebrow}</span></p></div><h3>{title}</h3><p className="orientation-intro-body">{intro}</p></div>;
+ return <div className="orientation-intro"><div className="orientation-host"><span className="orientation-host-figure" aria-hidden="true"><img src={figure.src} alt="" width={figure.width} height={figure.height} decoding="async"/></span><p className="orientation-host-name"><strong>Oracle</strong><span>AIFly by NeXify</span></p></div><h3>{title}</h3><p className="orientation-intro-body">{intro}</p></div>;
 }
 
 function OrientationJourney({locale,site,step=0,quiet=false}:{locale:Locale;site:"nexify"|"teileklar";step?:number;quiet?:boolean}){
@@ -454,7 +454,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
  const problem=phase==="failed"||phase==="limited";
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode="guided" data-phase={phase}>
   <div className="orientation-content" ref={scroller} onScroll={event=>{const node=event.currentTarget;pinned.current=node.scrollHeight-node.scrollTop-node.clientHeight<48;}}>
-  <OrientationIntro locale={locale} site={site} title={text.title} intro={text.intro}/>
+  <OrientationIntro title={text.title} intro={text.intro}/>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text" aria-busy={busy}>{turns.map(turn=><article className={"orientation-message role-"+turn.role} data-state={turn.state} key={turn.id}><strong>{turn.role==="user"?text.you:text.assistant}</strong>{turn.role==="assistant"?<AssistantText text={turn.text} pages={pages}/>:<p>{turn.text}</p>}{turn.state==="stopped"&&<small className="orientation-message-state">{state.stopped}</small>}</article>)}
    {phase==="sending"&&<article className="orientation-message role-assistant orientation-thinking"><strong>{text.assistant}</strong><p><span className="orientation-dots" aria-hidden="true"><i/><i/><i/></span><span className="visually-hidden">{state.thinking}</span></p></article>}
   </div>
@@ -494,7 +494,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
  }
  return <section className="public-orientation" aria-label={text.title} data-orientation-mode={unavailable?"fallback":"local-public-pages"}>
   <div className="orientation-content">
-  <OrientationIntro locale={locale} site={site} title={text.title} intro={text.intro}/>
+  <OrientationIntro title={text.title} intro={text.intro}/>
   <div className="orientation-history" role="log" aria-live="polite" aria-relevant="additions text">{messages.map((message,index)=><div key={index}>
    <article className="orientation-message role-user"><strong>{text.you}</strong><p>{message.question}</p></article>
    <article className="orientation-message role-assistant" ref={index===messages.length-1?latest:undefined}><strong>{text.assistant}</strong><OrientationAnswer text={message.answer.text} locale={locale}/><div className="orientation-page-results">{message.answer.cards.map((card,cardIndex)=><SiteLink className="orientation-page-link" key={card.path} href={card.path}><span className="orientation-page-index" aria-hidden="true">0{cardIndex+1}</span><span className="orientation-page-copy"><strong>{card.title}</strong><small>{card.summary}</small></span><span className="orientation-page-arrow" aria-hidden="true">→</span><span className="visually-hidden"> · {text.next}</span></SiteLink>)}</div></article>
