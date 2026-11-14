@@ -128,3 +128,11 @@ Hinweis zur Nummerierung: Der nicht gemergte Zweig `origin/claude/marke-texte` (
 - **Quelle:** Inhaber im Gespräch 14.11.2026.
 - **Folgen:** Bestätigt bestehende Regeln, ersetzt keine: `AGENTS.md` „Nicht tun“, „Constraints“ und „Verbindliche Regeln › Sicherheit“. D-012 bis D-016 sind innerhalb dieser Grenzen auszuführen.
 - **Offen:** Laut Sitzungsnotiz vom 14.11.2026 standen Zugangsdaten (BigBuy, Composio) im Gespräch; ob sie erneuert wurden, ist nicht belegt (siehe `PROGRESS.md`, „Offene Arbeiten“).
+
+## D-018 — Graphify-Wissensgraph in allen Projekten, auch in Kundenprojekten, je Projekt getrennt (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Der Wissensgraph mit Graphify wird in allen Projekten eingesetzt, auch in Kundenprojekten. Jedes Projekt bekommt seinen eigenen Graphen; Graphen verschiedener Projekte werden nicht zusammengeführt.
+- **Quelle:** Inhaber im Gespräch mit der koordinierenden Sitzung am 14.11.2026, dieser Arbeitssitzung als Auftrag übermittelt; für dieses Repository zusätzlich Merge von PR 151 (`fb053a9`). Ein weiterer Beleg liegt im Repository nicht vor.
+- **Folgen:** Vor dem Einzellesen vieler Dateien wird der Graph befragt (`.claude/skills/nexify-graph/SKILL.md`; Einstieg, Befehle und Grenzen stehen nur dort). Der Graph ersetzt keine Prüfung und kein Gate. Die Grenzen aus D-017 gelten: keine Projektinhalte an fremde Dienste, keine Kundendaten in dieses Repository.
+- **IST (14.11.2026, `git show --stat fb053a9`):** In diesem Repository eingerichtet sind `tools/graph.sh`, `make graph`, `.graphifyignore`, `.graphifyrc` und der Skill `nexify-graph`; die Ausgabe `graphify-out/` ist über `.gitignore` unversioniert. Laut Skill läuft nur der lokale Code-Lauf, ohne Modell und ohne Konto.
+- **Offen:** Ein Konto beim Cloud-Dienst von Graphify ist nicht eingerichtet und bleibt eine eigene Inhaberentscheidung. Die Einrichtung in den anderen Projekten und in Kundenprojekten ist hier nicht belegt; sie geschieht in den jeweiligen Repositories. Ein eigener Lauf von `make graph` wurde in dieser Nachführung nicht gemessen.
+- **Hinweis zur Nummerierung:** Der nicht gemergte Zweig `origin/claude/marke-texte` vergibt D-018 für eine andere Entscheidung (Nachtlauf „Regelkreis“); führend ist `main`, siehe Hinweis vor D-012.

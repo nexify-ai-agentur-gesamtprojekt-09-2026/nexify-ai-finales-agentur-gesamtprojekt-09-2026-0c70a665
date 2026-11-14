@@ -7,7 +7,7 @@ Entscheidungen/Keys, die zum Live-Gang nötig sind.
 
 Stand 14.11.2026: Zielbild aller Datenhaltung ist nach D-013 (`DECISIONS.md`) die eigene, selbst gehostete
 Supabase-Instanz, auch für den Shop. Abschnitt 4 nennt eine Migration; auf `main` liegen inzwischen `0001` bis
-`0003` unter `apps/web/supabase/migrations/`. Produktion ist das Vercel-Projekt `…-ut7r` (`AGENTS.md`); „Clerk“
+`0004` unter `apps/web/supabase/migrations/` (`0004_composio.sql` seit PR 146, Abschnitt 6a). Produktion ist das Vercel-Projekt `…-ut7r` (`AGENTS.md`); „Clerk“
 in Abschnitt 5 ist seit D-007 Historie.
 
 Stand der Verifikation (lokal, `@nexify/factory`):
