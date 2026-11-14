@@ -989,9 +989,10 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
    Ab 1500 px Containerbreite waechst der Einzug um 10 % der Mehrbreite (bis 96 px), damit die Leiste auf sehr breiten Schirmen
    nicht die ganze Breite fuellt; darunter unveraendert (gemessen 1000 bis 1835 px: Rahmen und Abstaende identisch). */
 #atelier .site-header{--kopf-einzug:clamp(32px,calc(4.5cqi + max(0px,(100cqi - 1500px) * .1)),96px);--kopf-innen:var(--as-s-8)}
-#atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-6))}
+#atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-3))}
 #atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
-/* Abstaende der Glasleiste: Inhalt haelt auf jeder Breite Abstand zur Glaskante (Desktop 24 px, Telefon 12 px je Seite).
+/* Abstaende der Glasleiste: Inhalt haelt auf jeder Breite Abstand zur Glaskante (links Desktop 32 px, Telefon 8 px).
+   Rechts liegt die Glaskante am Projektknopf an: 12 px, derselbe Abstand wie ueber und unter dem Knopf (Inhaberbefund 14.11.2026).
    Unter 1000 px ist der Einzug klein, sonst ragt der Projektknopf aus dem Glas (768 px: 7 px). Bis 480 px entfaellt der Claim
    unter der Wortmarke und das Sprachfeld wird kompakt, sonst ragen die Knoepfe bei 360 px 30 px aus dem Glas. */
 @container website (max-width:999px){#atelier .site-header{--kopf-einzug:var(--as-s-3)}}
